@@ -1,7 +1,7 @@
 {
   "common": {
     "labelYes": "Да",
-    "labelNo": "No",
+    "labelNo": "Нет",
     "never": "Никогда",
     "apply": "Применить",
     "done": "Готово",
@@ -80,7 +80,7 @@
     "year_plural": "Years",
     "minute": "Минута",
     "minute_plural": "Минут",
-    "second": "Second",
+    "second": "Секунды",
     "second_plural": "Seconds",
     "hour": "Час",
     "hour_plural": "Hours",
@@ -142,7 +142,7 @@
   },
   "accounts": {
     "title": "Счета",
-    "noResultFound": "No accounts found.",
+    "noResultFound": "Счета не найдены.",
     "order": {
       "name|asc": "Имя А-Я",
       "name|desc": "Имя Я-А",
@@ -286,7 +286,7 @@
       }
     },
     "cta": {
-      "startUpdate": "Start update",
+      "startUpdate": "Начать обновление",
       "nextCurrency": "Continue with {{currency}} update"
     }
   },
