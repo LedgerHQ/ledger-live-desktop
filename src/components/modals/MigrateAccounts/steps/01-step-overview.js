@@ -10,6 +10,7 @@ import Button from 'components/base/Button'
 import Text from 'components/base/Text'
 import reduce from 'lodash/reduce'
 import SuccessAnimatedIcon from 'components/base/SuccessAnimatedIcon'
+import upperFirst from 'lodash/upperFirst'
 
 import IconExclamationCircle from 'icons/ExclamationCircle'
 import IconExternalLink from 'icons/ExternalLink'
@@ -48,7 +49,6 @@ const MobileIllu = styled.img`
 const Desc = styled(Box).attrs({
   ff: 'Open Sans',
   fontSize: 4,
-  mt: 2,
   color: 'graphite',
 })`
   text-align: center;
@@ -276,7 +276,7 @@ const StepOverview = ({
                   migratedAccountNames.length > 1 ? 'successDescPlu' : 'successDesc'
                 }`}
                 values={{
-                  assets: migratedAccountNames.join(' & '),
+                  assets: migratedAccountNames.map(assetName => upperFirst(assetName)).join(' & '),
                 }}
               />
             </Text>
