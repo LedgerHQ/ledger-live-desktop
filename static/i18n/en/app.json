@@ -365,6 +365,8 @@
   },
   "manager": {
     "yourDeviceIsGenuine": "Your device is genuine",
+    "goToAccounts": "Go to accounts",
+    "intallEthApp": "Install Ethereum app",
     "apps": {
       "install": "Install",
       "all": "App catalog",
@@ -379,7 +381,10 @@
       "help": "Check on your device to see which apps are already installed",
       "installed": "App installed",
       "uninstalled": "App uninstalled",
-      "addAccount": "Add {{name}} account"
+      "addAccount": "Add {{name}} account",
+      "noAppNeededForToken": "No specific app needed for {{tokenName}}",
+      "lookingForToken": "It seems that you’re looking for an app for {{tokenName}}",
+      "tokenAppDisclaimer": "{{tokenName}} is an <1>ERC20 and doesn’t need an app</1>. To receive ERC20s, simply send them to an <3>Ethereum address</3>"
     },
     "firmware": {
       "installed": "Firmware version {{version}}",

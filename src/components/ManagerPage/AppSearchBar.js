@@ -25,7 +25,7 @@ const CrossContainer = styled(Box).attrs({
 type Props = {
   searchKeys: string[],
   list: Array<ApplicationVersion>,
-  children: (list: Array<ApplicationVersion>) => React$Node,
+  children: (list: Array<ApplicationVersion>, query: string) => React$Node,
 }
 
 type State = {
@@ -91,7 +91,7 @@ class AppSearchBar extends PureComponent<Props, State> {
           }}
           value={query}
           items={list}
-          render={items => children(items)}
+          render={items => children(items, query)}
         />
       </Fragment>
     )

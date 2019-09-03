@@ -44,6 +44,7 @@ import Trash from 'icons/Trash'
 import { FreezeDeviceChangeEvents } from './HookDeviceChange'
 import ManagerApp, { Container as FakeManagerAppContainer } from './ManagerApp'
 import AppSearchBar from './AppSearchBar'
+import NoItemPlaceholder from './NoItemPlaceholder'
 
 const List = styled(Box).attrs({
   horizontal: true,
@@ -117,6 +118,7 @@ type State = {
   filteredAppVersionsList: Array<ApplicationVersion>,
   appsLoaded: boolean,
   app: ?ApplicationVersion,
+  eth: ?ApplicationVersion,
   mode: Mode,
   progress: number,
 }
@@ -163,6 +165,7 @@ class AppsList extends PureComponent<Props, State> {
     filteredAppVersionsList: [],
     appsLoaded: false,
     app: null,
+    eth: null,
     mode: 'home',
     progress: 0,
   }
@@ -191,11 +194,14 @@ class AppsList extends PureComponent<Props, State> {
         () => currenciesByMarketcap(listCryptoCurrencies()),
       )
 
+      const eth = filteredAppVersionsList.find(c => c.name === 'Ethereum')
+
       if (!this._unmounted) {
         this.setState({
           status: 'idle',
           filteredAppVersionsList,
           appsLoaded: true,
+          eth,
         })
       }
     } catch (err) {
@@ -464,24 +470,28 @@ class AppsList extends PureComponent<Props, State> {
   }
 
   renderList() {
-    const { filteredAppVersionsList, appsLoaded } = this.state
+    const { filteredAppVersionsList, appsLoaded, status, eth } = this.state
     return (
       <Box>
         <AppSearchBar searchKeys={['currency.ticker']} list={filteredAppVersionsList}>
-          {items => (
-            <List>
-              {items.map(c => (
-                <ManagerApp
-                  key={`${c.name}_${c.version}`}
-                  name={c.name}
-                  version={`Version ${c.version}`}
-                  icon={ICONS_FALLBACK[c.icon] || c.icon}
-                  onInstall={canHandleInstall(c) ? this.handleInstallApp(c) : null}
-                  onUninstall={this.handleUninstallApp(c)}
-                />
-              ))}
-            </List>
-          )}
+          {(items, query) =>
+            items.length === 0 && status !== 'loading' ? (
+              <NoItemPlaceholder query={query} installApp={this.handleInstallApp} app={eth} />
+            ) : (
+              <List>
+                {items.map(c => (
+                  <ManagerApp
+                    key={`${c.name}_${c.version}`}
+                    name={c.name}
+                    version={`Version ${c.version}`}
+                    icon={ICONS_FALLBACK[c.icon] || c.icon}
+                    onInstall={canHandleInstall(c) ? this.handleInstallApp(c) : null}
+                    onUninstall={this.handleUninstallApp(c)}
+                  />
+                ))}
+              </List>
+            )
+          }
         </AppSearchBar>
         {this.renderModal()}
         {!appsLoaded && FAKE_LIST}
