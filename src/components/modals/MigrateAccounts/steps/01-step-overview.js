@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import styled from 'styled-components'
 
 import { Trans } from 'react-i18next'
@@ -8,6 +8,9 @@ import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Text from 'components/base/Text'
+import reduce from 'lodash/reduce'
+import SuccessAnimatedIcon from 'components/base/SuccessAnimatedIcon'
+
 import IconExclamationCircle from 'icons/ExclamationCircle'
 import IconExternalLink from 'icons/ExternalLink'
 import type { StepProps } from '../index'
@@ -17,17 +20,72 @@ import AccountRow from '../../../base/AccountsList/AccountRow'
 import { openURL } from '../../../../helpers/linking'
 import { urls } from '../../../../config/urls'
 import { rgba } from '../../../../styles/helpers'
+import ExportAccountsModal from '../../../SettingsPage/ExportAccountsModal'
+
+const getAllImportedAccounts = accountsByAsset =>
+  reduce(
+    accountsByAsset,
+    (acc, accounts) => [...acc, ...accounts],
+    [],
+  )
 
 const Wrapper = styled.div`
   width: 100%;
   margin-top: 40px;
 `
+
+const MobileCTA = styled(Button)`
+  width: 100%;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  margin-top: 18px;
+`
+
+const MobileIllu = styled.img`
+  margin-left: 16px;
+`
+
+const Desc = styled(Box).attrs({
+  ff: 'Open Sans',
+  fontSize: 4,
+  mt: 2,
+  color: 'graphite',
+})`
+  text-align: center;
+`
+
 const AccountsWrapper = styled.div`
   margin-top: 15px;
   & > * {
     margin-bottom: 10px;
   }
 `
+
+const MobileTextWrapper = styled.div`
+  margin-left: 16px;
+  flex: 1;
+`
+
+const MobileWrapper = styled(Box).attrs({
+  ff: 'Open Sans',
+  fontSize: 4,
+  mt: 2,
+  color: 'graphite',
+})`
+  border-radius: 4px;
+  margin-top: 20px;
+  margin-left: 16px;
+  margin-right: 16px;
+  border: solid 1px ${props => props.theme.colors.lightFog};
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
+`
+
+const MobileContent = styled.div`
+  margin-top: 18px;
+  display: flex;
+  flex-direction: row;
+`
+
 const Currency = styled.div``
 const Logo = styled.div`
   margin-bottom: 15px;
@@ -35,6 +93,11 @@ const Logo = styled.div`
 const Title = styled.div`
   margin-bottom: 10px;
 `
+
+const MobileDesc = styled.div`
+  margin-top: 6px;
+`
+
 const Footer = styled.div`
   display: flex;
   flex: 1;
@@ -105,26 +168,42 @@ const TextWrap = styled(Box)`
   display: inline;
 `
 
-const StepOverview = ({ migratableAccounts, currency, totalMigratableAccounts }: StepProps) => {
+const StepOverview = ({
+  migratableAccounts,
+  currency,
+  totalMigratableAccounts,
+  migratedAccounts,
+}: StepProps) => {
   const migratableCurrencyIds = Object.keys(migratableAccounts)
+  const migratedAccountNames = Object.keys(migratedAccounts)
+  const [isExporting, setExporting] = useState(false)
 
   return (
     <Box align="center">
+      <ExportAccountsModal
+        onClose={() => setExporting(false)}
+        isOpen={isExporting}
+        accounts={getAllImportedAccounts(migratedAccounts)}
+      />
       <TrackPage category="MigrateAccounts" name="Step1" />
 
       <Logo>
-        <LedgerLiveLogo
-          width="58px"
-          height="58px"
-          icon={<img src={i('ledgerlive-logo.svg')} alt="" width={35} height={35} />}
-        />
+        {totalMigratableAccounts ? (
+          <LedgerLiveLogo
+            width="58px"
+            height="58px"
+            icon={<img src={i('ledgerlive-logo.svg')} alt="" width={35} height={35} />}
+          />
+        ) : (
+          <SuccessAnimatedIcon width={70} height={70} />
+        )}
       </Logo>
       <Title>
         <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
           <Trans
             i18nKey={
               !totalMigratableAccounts
-                ? 'migrateAccounts.overview.done'
+                ? 'migrateAccounts.overview.successTitle'
                 : 'migrateAccounts.overview.title'
             }
           />
@@ -188,7 +267,40 @@ const StepOverview = ({ migratableAccounts, currency, totalMigratableAccounts }:
             </Wrapper>
           )}
         </>
-      ) : null}
+      ) : (
+        <>
+          <Desc>
+            <Text color="graphite" ff="Open Sans|Regular" fontSize={4}>
+              <Trans
+                i18nKey={`migrateAccounts.overview.${
+                  migratedAccountNames.length > 1 ? 'successDescPlu' : 'successDesc'
+                }`}
+                values={{
+                  assets: migratedAccountNames.join(' & '),
+                }}
+              />
+            </Text>
+          </Desc>
+          <MobileWrapper>
+            <MobileContent>
+              <MobileIllu alt="" src={i('mobile-export.svg')} />
+              <MobileTextWrapper>
+                <Text ff="Museo Sans|Regular" fontSize={5} color="dark">
+                  <Trans i18nKey="migrateAccounts.overview.mobileTitle" />
+                </Text>
+                <MobileDesc>
+                  <Text color="graphite" ff="Open Sans|Regular" fontSize={4}>
+                    <Trans i18nKey="migrateAccounts.overview.mobileDesc" />
+                  </Text>
+                </MobileDesc>
+              </MobileTextWrapper>
+            </MobileContent>
+            <MobileCTA primary onClick={() => setExporting(true)}>
+              <Trans i18nKey="migrateAccounts.overview.mobileCTA" />
+            </MobileCTA>
+          </MobileWrapper>
+        </>
+      )}
     </Box>
   )
 }
