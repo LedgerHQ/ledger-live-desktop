@@ -1184,6 +1184,10 @@
     "UnknownMCU": {
       "title": "Versión de MCU desconocida",
       "description": "Por favor, ponte en contacto con el Soporte de Ledger"
+    },
+    "MCUNotGenuineToDashboard": {
+      "title": "Access dashboard to update",
+      "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
     }
   }
 }
