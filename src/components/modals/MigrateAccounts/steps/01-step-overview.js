@@ -9,6 +9,7 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Text from 'components/base/Text'
 import reduce from 'lodash/reduce'
+import SuccessAnimatedIcon from 'components/base/SuccessAnimatedIcon'
 
 import IconExclamationCircle from 'icons/ExclamationCircle'
 import IconExternalLink from 'icons/ExternalLink'
@@ -19,14 +20,12 @@ import AccountRow from '../../../base/AccountsList/AccountRow'
 import { openURL } from '../../../../helpers/linking'
 import { urls } from '../../../../config/urls'
 import { rgba } from '../../../../styles/helpers'
-import ExportAccountsModal from "../../../SettingsPage/ExportAccountsModal";
+import ExportAccountsModal from '../../../SettingsPage/ExportAccountsModal'
 
 const getAllImportedAccounts = accountsByAsset =>
   reduce(
     accountsByAsset,
-    (acc, accounts) => {
-      return [...acc, ...accounts]
-    },
+    (acc, accounts) => [...acc, ...accounts],
     [],
   )
 
@@ -73,9 +72,10 @@ const MobileWrapper = styled(Box).attrs({
   mt: 2,
   color: 'graphite',
 })`
-  width: 100%;
   border-radius: 4px;
   margin-top: 20px;
+  margin-left: 16px;
+  margin-right: 16px;
   border: solid 1px ${props => props.theme.colors.lightFog};
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
 `
@@ -180,15 +180,23 @@ const StepOverview = ({
 
   return (
     <Box align="center">
-      <ExportAccountsModal onClose={() => setExporting(false)} isOpen={isExporting} accounts={getAllImportedAccounts(migratedAccounts)} />
+      <ExportAccountsModal
+        onClose={() => setExporting(false)}
+        isOpen={isExporting}
+        accounts={getAllImportedAccounts(migratedAccounts)}
+      />
       <TrackPage category="MigrateAccounts" name="Step1" />
 
       <Logo>
-        <LedgerLiveLogo
-          width="58px"
-          height="58px"
-          icon={<img src={i('ledgerlive-logo.svg')} alt="" width={35} height={35} />}
-        />
+        {totalMigratableAccounts ? (
+          <LedgerLiveLogo
+            width="58px"
+            height="58px"
+            icon={<img src={i('ledgerlive-logo.svg')} alt="" width={35} height={35} />}
+          />
+        ) : (
+          <SuccessAnimatedIcon width={70} height={70} />
+        )}
       </Logo>
       <Title>
         <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
@@ -277,7 +285,7 @@ const StepOverview = ({
             <MobileContent>
               <MobileIllu alt="" src={i('mobile-export.svg')} />
               <MobileTextWrapper>
-                <Text ff="Open Sans|Regular" fontSize={5} color="dark">
+                <Text ff="Museo Sans|Regular" fontSize={5} color="dark">
                   <Trans i18nKey="migrateAccounts.overview.mobileTitle" />
                 </Text>
                 <MobileDesc>

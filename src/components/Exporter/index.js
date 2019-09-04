@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
-import { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 import { createStructuredSelector } from 'reselect'
 
 import { activeAccountsSelector } from 'reducers/accounts'

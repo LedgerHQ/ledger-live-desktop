@@ -81,7 +81,7 @@ type State = {
   currency: ?CryptoCurrency,
   scanStatus: ScanStatus,
   err: ?Error,
-  migratedAccounts: Account[],
+  migratedAccounts: { [key: string]: Account[] },
 }
 
 const INITIAL_STATE = {
@@ -90,7 +90,7 @@ const INITIAL_STATE = {
   isAppOpened: false,
   scanStatus: 'idle',
   err: null,
-  migratedAccounts: [],
+  migratedAccounts: {},
 }
 
 class MigrateAccounts extends PureComponent<*, State> {
@@ -125,7 +125,7 @@ class MigrateAccounts extends PureComponent<*, State> {
     })
   }
   handleCloseModal = () => this.props.closeModal(MODAL_MIGRATE_ACCOUNTS)
-  addMigratedAccount = (currency: Currency, account: Account) =>
+  addMigratedAccount = (currency: CryptoCurrency, account: Account) =>
     this.setState(state => {
       const alreadyMigrated = state.migratedAccounts[currency.id] || []
       return {
