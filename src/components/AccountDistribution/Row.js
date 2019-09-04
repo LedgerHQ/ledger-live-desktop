@@ -115,7 +115,7 @@ class Row extends PureComponent<Props, State> {
     const displayName = account.type === 'TokenAccount' ? currency.name : account.name
 
     return (
-      <AccountContextMenu account={account}>
+      <AccountContextMenu account={account} parentAccount={parentAccount}>
         <Wrapper onClick={() => this.onAccountClick(account)}>
           <AccountWrapper>
             {icon}

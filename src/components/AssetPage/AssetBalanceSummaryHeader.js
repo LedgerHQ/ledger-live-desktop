@@ -27,6 +27,7 @@ import Swap from '../../icons/Swap'
 
 type Props = {
   isAvailable: boolean,
+  cryptoChange: ValueChange,
   countervalueChange: ValueChange,
   last: {
     value: BigNumber,
@@ -92,6 +93,7 @@ class AssetBalanceSummaryHeader extends PureComponent<Props> {
       selectedTimeRange,
       isAvailable,
       last,
+      cryptoChange,
       countervalueChange,
       countervalueFirst,
       setCountervalueFirst,
@@ -101,8 +103,8 @@ class AssetBalanceSummaryHeader extends PureComponent<Props> {
 
     const cvUnit = counterValue.units[0]
     const data = [
-      { valueChange: countervalueChange, balance: last.value, unit },
-      { valueChange: countervalueChange, balance: last.value, unit: cvUnit },
+      { valueChange: cryptoChange, balance: last.value, unit },
+      { valueChange: countervalueChange, balance: last.countervalue, unit: cvUnit },
     ]
     if (countervalueFirst) {
       data.reverse()

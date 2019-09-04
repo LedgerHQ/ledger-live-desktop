@@ -57,7 +57,9 @@ const mapStateToProps = (state, props) => ({
   counterValue: counterValueCurrencySelector(state),
   allAccounts: accountsSelector(state),
   countervalueFirst: countervalueFirstSelector(state),
-  accounts: flattenAccounts(accountsSelector(state)).filter(
+  accounts: flattenAccounts(accountsSelector(state), {
+    enforceHideEmptyTokenAccounts: true,
+  }).filter(
     a =>
       (a.type === 'Account' ? a.currency : a.token) ===
       findCurrencyByTicker(props.match.params.assetTicker),

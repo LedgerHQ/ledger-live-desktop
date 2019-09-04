@@ -35,28 +35,34 @@ const mapStateToProps = createStructuredSelector({
   portfolio: currencyPortfolioSelector,
 })
 
-const Tooltip = ({ counterValue, d }: *) => (
-  <Fragment>
-    <FormattedVal
-      alwaysShowSign={false}
-      fontSize={5}
-      color="dark"
-      showCode
-      unit={counterValue.units[0]}
-      val={d.value}
-    />
-    <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
-      {moment(d.date).format('LL')}
-    </Box>
-  </Fragment>
-)
-
 class BalanceSummary extends PureComponent<Props> {
   // $FlowFixMe
   mapValueCounterValue = d => d.countervalue.toNumber()
   mapValueCryptoValue = d => d.value.toNumber()
-  renderTickY = val => formatShort(this.props.counterValue.units[0], BigNumber(val))
-  renderTooltip = d => <Tooltip d={d} counterValue={this.props.counterValue} />
+
+  renderTooltip = d => {
+    const {
+      unit,
+      counterValue,
+      portfolio: { history },
+      countervalueFirst,
+    } = this.props
+    const displayCountervalue = countervalueFirst && history.countervalueAvailable
+    const data = [{ val: d.value, unit }, { val: d.countervalue, unit: counterValue.units[0] }]
+    if (displayCountervalue) data.reverse()
+    return (
+      <Fragment>
+        <FormattedVal fontSize={5} color="dark" showCode {...data[0]} />
+        <FormattedVal fontSize={4} color="warmGrey" showCode {...data[1]} />
+        <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
+          {moment(d.date).format('LL')}
+        </Box>
+      </Fragment>
+    )
+  }
+
+  renderTickYCryptoValue = val => formatShort(this.props.unit, BigNumber(val))
+  renderTickYCounterValue = val => formatShort(this.props.counterValue.units[0], BigNumber(val))
 
   render() {
     const {
@@ -94,7 +100,9 @@ class BalanceSummary extends PureComponent<Props> {
             height={200}
             tickXScale={range}
             mapValue={displayCountervalue ? this.mapValueCounterValue : this.mapValueCryptoValue}
-            renderTickY={this.renderTickY}
+            renderTickY={
+              displayCountervalue ? this.renderTickYCounterValue : this.renderTickYCryptoValue
+            }
             isInteractive
             renderTooltip={this.renderTooltip}
           />

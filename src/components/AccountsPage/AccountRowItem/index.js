@@ -208,15 +208,16 @@ class AccountRowItem extends PureComponent<Props, State> {
               <TokenContent>
                 {tokens &&
                   tokens.map((token, index) => (
-                    <TokenRow
-                      nested
-                      index={index}
-                      key={token.id}
-                      range={range}
-                      account={token}
-                      parentAccount={mainAccount}
-                      onClick={onClick}
-                    />
+                    <AccountContextMenu key={token.id} account={token} parentAccount={mainAccount}>
+                      <TokenRow
+                        nested
+                        index={index}
+                        range={range}
+                        account={token}
+                        parentAccount={mainAccount}
+                        onClick={onClick}
+                      />
+                    </AccountContextMenu>
                   ))}
               </TokenContent>
             </TokenContentWrapper>
