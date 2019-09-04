@@ -358,7 +358,8 @@
     "tokenTooltip": "This operation is related to the following token operations",
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
-    "details": "{{ currency }} details"
+    "details": "{{ currency }} details",
+    "multipleAddresses": "Why multiple addresses?"
   },
   "operationList": {
     "noMoreOperations": "모두 끝났습니다."
@@ -1183,6 +1184,10 @@
     "UnknownMCU": {
       "title": "알 수 없는 MCU 버전",
       "description": "Ledger 지원 센터에 문의하십시오."
+    },
+    "MCUNotGenuineToDashboard": {
+      "title": "Access dashboard to update",
+      "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
     }
   }
 }
