@@ -4,6 +4,7 @@ import React from 'react'
 
 import type { T } from 'types/common'
 import { translate } from 'react-i18next'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import Exporter from 'components/Exporter'
 import Modal from 'components/base/Modal'
@@ -14,11 +15,11 @@ import Button from 'components/base/Button'
 type OwnProps = {|
   isOpen: boolean,
   onClose: () => void,
+  accounts?: Account[],
 |}
 
 type Props = {|
   t: T,
-  accounts?: Accounts[],
   ...OwnProps,
 |}
 
