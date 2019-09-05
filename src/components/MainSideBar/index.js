@@ -32,6 +32,7 @@ import TopGradient from './TopGradient'
 import useExperimental from '../../hooks/useExperimental'
 import { darken, rgba } from '../../styles/helpers'
 import Stars from '../Stars'
+import { i } from '../../helpers/staticPath'
 
 const mapStateToProps = state => ({
   noAccounts: accountsSelector(state).length === 0,
@@ -57,7 +58,11 @@ type Props = {
   setCollapsed: boolean => void,
 }
 
-const TagContainer = () => {
+const TagText = styled.div`
+  margin-left: 8px;
+`
+
+const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
   const isExperimental = useExperimental()
 
   return isExperimental ? (
@@ -73,7 +78,12 @@ const TagContainer = () => {
       }}
     >
       <Tag to="/settings/experimental">
-        <Trans i18nKey="common.experimentalFeature" />
+        <img src={i('experimental.svg')} alt="" draggable="false" width={16} height={16} />
+        {collapsed ? null : (
+          <TagText>
+            <Trans i18nKey="common.experimentalFeature" />
+          </TagText>
+        )}
       </Tag>
     </Box>
   ) : null
@@ -81,20 +91,22 @@ const TagContainer = () => {
 
 const Tag = styled(Link)`
   display: flex;
+  justify-self: flex-end;
   justify-content: center;
   align-items: center;
   font-family: 'Open Sans';
   font-weight: bold;
   font-size: 10px;
   padding: 2px 8px;
-  min-height: 22px;
+  min-height: 32px;
   border-radius: 4px;
-  color: ${p => p.theme.colors.smoke};
-  background-color: ${p => p.theme.colors.lightFog};
+  color: ${p => p.theme.colors.dark};
+  background-color: ${p => p.theme.colors.lightGrey};
   text-decoration: none;
 
   &:hover {
-    background-color: ${p => darken(p.theme.colors.lightFog, 0.05)};
+    background-color: ${p => darken(p.theme.colors.lightGrey, 0.05)};
+    border: solid 1px ${p => p.theme.colors.wallet};
   }
 `
 
@@ -277,10 +289,7 @@ class MainSideBar extends PureComponent<Props> {
 
         <SideBarList scroll title={t('sidebar.stars')} collapsed={collapsed}>
           <Stars pathname={pathname} collapsed={collapsed} />
-
-          <Hide visible={!collapsed}>
-            <TagContainer />
-          </Hide>
+          <TagContainer collapsed={collapsed} />
         </SideBarList>
       </SideBar>
     )
