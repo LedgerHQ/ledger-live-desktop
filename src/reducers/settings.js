@@ -143,9 +143,12 @@ const handlers: Object = {
       ? state.starredAccountIds.filter(e => e !== accountId)
       : [...state.starredAccountIds, accountId],
   }),
-  SETTINGS_DRAG_DROP_STAR: (state: SettingsState, { payload: { from, to, starredAccounts } }) => {
-    const ids = starredAccounts.map(a => a.id)
-    ids.splice(to, 0, ids.splice(from, 1)[0])
+  SETTINGS_DRAG_DROP_STAR: (state: SettingsState, { payload: { from, to } }) => {
+    const ids = [...state.starredAccountIds]
+    const fromIndex = ids.indexOf(from)
+    const toIndex = ids.indexOf(to)
+
+    ids.splice(toIndex, 0, ids.splice(fromIndex, 1)[0])
 
     return {
       ...state,

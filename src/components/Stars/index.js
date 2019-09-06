@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { push } from 'react-router-redux'
 import { dragDropStarAction } from '../../actions/settings'
-import { starredAccountsSelector } from '../../reducers/accounts'
+import { starredAccountsEnforceHideEmptyTokenSelector } from '../../reducers/accounts'
 import { i } from '../../helpers/staticPath'
 import Item from './Item'
 
@@ -31,7 +31,7 @@ const Placeholder = styled.div`
 `
 
 const mapStateToProps = createStructuredSelector({
-  starredAccounts: starredAccountsSelector,
+  starredAccounts: starredAccountsEnforceHideEmptyTokenSelector,
 })
 
 const mapDispatchToProps = {
@@ -47,7 +47,10 @@ class Stars extends PureComponent<{
   onDragEnd = ({ source, destination }) => {
     const { dragDropStarAction, starredAccounts } = this.props
     if (destination) {
-      dragDropStarAction({ from: source.index, to: destination.index, starredAccounts })
+      const from = source.index
+      const to = destination.index
+
+      dragDropStarAction({ from: starredAccounts[from].id, to: starredAccounts[to].id })
     }
   }
 

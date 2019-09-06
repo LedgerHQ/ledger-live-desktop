@@ -6,6 +6,7 @@ import accountModel from 'helpers/accountModel'
 import logger from 'logger'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import { flattenAccounts, clearAccount, canBeMigrated } from '@ledgerhq/live-common/lib/account'
+import { getEnv } from '@ledgerhq/live-common/lib/env'
 import { OUTDATED_CONSIDERED_DELAY, DEBUG_SYNC } from 'config/constants'
 import { currenciesStatusSelector, currencyDownStatusLocal } from './currenciesStatus'
 import { starredAccountIdsSelector } from './settings'
@@ -113,19 +114,28 @@ export const accountSelector = createSelector(
   (accounts, accountId) => accounts.find(a => a.id === accountId),
 )
 
+const flattenFilterAndSort = (accounts, ids, flattenOptions) =>
+  flattenAccounts(accounts, flattenOptions)
+    .filter(e => ids.includes(e.id))
+    .sort((a, b) => {
+      const posA = ids.indexOf(a.id)
+      const posB = ids.indexOf(b.id)
+      return posA > posB ? 1 : posA === posB ? 0 : -1
+    })
+
 export const migratableAccountsSelector = (s: *): Account[] => s.accounts.filter(canBeMigrated)
 
 export const starredAccountsSelector = createSelector(
   accountsSelector,
   starredAccountIdsSelector,
-  (accounts, ids) =>
-    flattenAccounts(accounts)
-      .filter(e => ids.includes(e.id))
-      .sort((a, b) => {
-        const posA = ids.indexOf(a.id)
-        const posB = ids.indexOf(b.id)
-        return posA > posB ? 1 : posA === posB ? 0 : -1
-      }),
+  flattenFilterAndSort,
+)
+
+export const starredAccountsEnforceHideEmptyTokenSelector = createSelector(
+  accountsSelector,
+  starredAccountIdsSelector,
+  () => getEnv('HIDE_EMPTY_TOKEN_ACCOUNTS'), // The result of this func is not used but it allows the input params to be different so that reselect recompute the output
+  (accounts, ids) => flattenFilterAndSort(accounts, ids, { enforceHideEmptyTokenAccounts: true }),
 )
 
 export const isStarredAccountSelector = createSelector(
