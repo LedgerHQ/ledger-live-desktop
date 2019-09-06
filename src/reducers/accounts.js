@@ -123,6 +123,8 @@ const flattenFilterAndSort = (accounts, ids, flattenOptions) =>
       return posA > posB ? 1 : posA === posB ? 0 : -1
     })
 
+export const migratableAccountsSelector = (s: *): Account[] => s.accounts.filter(canBeMigrated)
+
 export const starredAccountsSelector = createSelector(
   accountsSelector,
   starredAccountIdsSelector,

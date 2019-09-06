@@ -189,11 +189,11 @@ class StepCurrency extends PureComponent<Props> {
 export const StepCurrencyFooter = ({
   transitionTo,
   scanStatus,
-  migratableAccounts,
+  currencyIds,
   moveToNextCurrency,
   getNextCurrency,
   currency,
-  totalMigratableAccounts,
+  migratableAccounts,
 }: StepProps) => {
   if (scanStatus === 'error') {
     return (
@@ -204,14 +204,14 @@ export const StepCurrencyFooter = ({
     )
   }
   if (!['finished', 'finished-empty'].includes(scanStatus) || !currency) return null
-  const lastCurrency = last(Object.keys(migratableAccounts))
+  const lastCurrency = last(currencyIds)
   const next = lastCurrency !== currency.id && currency.id < lastCurrency ? 'device' : 'overview'
   const nextCurrency = getNextCurrency()
   return (
     <Button
       primary
       onClick={() => {
-        if (!totalMigratableAccounts) {
+        if (!migratableAccounts.length) {
           transitionTo('overview')
         } else {
           moveToNextCurrency(next === 'overview')

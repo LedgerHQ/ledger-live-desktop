@@ -358,7 +358,8 @@
     "tokenTooltip": "This operation is related to the following token operations",
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
-    "details": "Détails sur {{ currency }}"
+    "details": "Détails sur {{ currency }}",
+    "multipleAddresses": "Why multiple addresses?"
   },
   "operationList": {
     "noMoreOperations": "C'est tout."
@@ -1183,6 +1184,10 @@
     "UnknownMCU": {
       "title": "Version MCU inconnue",
       "description": "Veuillez contacter l’assistance Ledger"
+    },
+    "MCUNotGenuineToDashboard": {
+      "title": "Access dashboard to update",
+      "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
     }
   }
 }
