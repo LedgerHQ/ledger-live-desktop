@@ -525,7 +525,8 @@
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Asset distribution ({{count}})"
+    "header": "Asset distribution ({{count}})",
+    "notice": "You can now click on assets for more details!"
   },
   "accountDistribution": {
     "account": "Account",
@@ -536,10 +537,10 @@
     "showAll": "Show all",
     "showLess": "Show less",
     "header": "Account distribution ({{count}})",
-    "notice": "You can now click on assets for more details!"
+    "notice": "You can now right click on an account to see options!"
   },
   "asset": {
-    "notice": "This page gathers all your {{currency}} accounts"
+    "notice": "Summary of all {{currency}} accounts"
   },
   "settings": {
     "title": "Settings",

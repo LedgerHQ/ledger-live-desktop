@@ -6,9 +6,11 @@ import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/acco
 import { connect } from 'react-redux'
 import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
+import IconStar from 'icons/Star'
 import IconAccountSettings from 'icons/AccountSettings'
 import ContextMenuItem from './ContextMenuItem'
 import { MODAL_RECEIVE, MODAL_SEND, MODAL_SETTINGS_ACCOUNT } from '../../config/constants'
+import { toggleStarAction } from '../../actions/settings'
 
 type Props = {
   account: TokenAccount | Account,
@@ -16,15 +18,18 @@ type Props = {
   leftClick?: boolean,
   children: any,
   openModal: Function,
+  toggleStarAction: Function,
+  withStar?: boolean,
 }
 
 const mapDispatchToProps = {
   openModal,
+  toggleStarAction,
 }
 
 class AccountContextMenu extends PureComponent<Props> {
   getContextMenuItems = () => {
-    const { openModal, account, parentAccount } = this.props
+    const { openModal, account, parentAccount, withStar, toggleStarAction } = this.props
     const items = [
       {
         label: 'accounts.contextMenu.send',
@@ -37,6 +42,14 @@ class AccountContextMenu extends PureComponent<Props> {
         callback: () => openModal(MODAL_RECEIVE, { account, parentAccount }),
       },
     ]
+
+    if (withStar) {
+      items.push({
+        label: 'accounts.contextMenu.star',
+        Icon: IconStar,
+        callback: () => toggleStarAction(account.id),
+      })
+    }
 
     if (account.type === 'Account') {
       items.push({

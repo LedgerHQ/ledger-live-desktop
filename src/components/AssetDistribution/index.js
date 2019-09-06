@@ -101,7 +101,7 @@ class AssetDistribution extends PureComponent<Props, State> {
             </Tag>
           </TagWrapper>
           <Text ff="Open Sans|SemiBold" fontSize={12} color="wallet">
-            <Trans i18nKey="accountDistribution.notice" />
+            <Trans i18nKey="distribution.notice" />
           </Text>
         </Box>
         <Card p={0} mt={24}>

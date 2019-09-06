@@ -40,6 +40,12 @@ const Wrapper = styled.div`
     flex-direction: row;
     box-sizing: border-box;
   }
+
+  cursor: pointer;
+
+  &:hover {
+    background: ${p => p.theme.colors.lightGrey};
+  }
 `
 
 const Asset = styled.div`

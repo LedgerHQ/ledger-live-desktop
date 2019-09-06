@@ -7,8 +7,11 @@ import { BigNumber } from 'bignumber.js'
 import Text from 'components/base/Text'
 import Card from 'components/base/Box/Card'
 import { counterValueCurrencySelector } from 'reducers/settings'
-import Row from './Row'
+import styled from 'styled-components'
+import Box from 'components/base/Box'
+import Tag from 'components/Tag'
 import Header from './Header'
+import Row from './Row'
 import type { AccountDistributionItem } from './Row'
 import { calculateCountervalueSelector } from '../../actions/general'
 
@@ -37,18 +40,34 @@ const mapStateToProps = (state, props) => {
   }
 }
 
+const TagWrapper = styled.div`
+  margin-left: 16px;
+  margin-right: 8px;
+`
+
 class AccountDistribution extends PureComponent<Props, State> {
   render() {
     const { accountDistribution } = this.props
     return (
       <>
-        <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
-          <Trans
-            i18nKey="accountDistribution.header"
-            values={{ count: accountDistribution.length }}
-            count={accountDistribution.length}
-          />
-        </Text>
+        <Box horizontal alignItems="center">
+          <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
+            <Trans
+              i18nKey="accountDistribution.header"
+              values={{ count: accountDistribution.length }}
+              count={accountDistribution.length}
+            />
+          </Text>
+          <TagWrapper>
+            <Tag>
+              <Trans i18nKey="common.new" />
+            </Tag>
+          </TagWrapper>
+          <Text ff="Open Sans|SemiBold" fontSize={12} color="wallet">
+            <Trans i18nKey="accountDistribution.notice" />
+          </Text>
+        </Box>
+
         <Card p={0} mt={20}>
           <Header />
           {accountDistribution.map(item => (

@@ -41,11 +41,17 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding: 16px 20px;
+  cursor: pointer;
+
   > * {
     display: flex;
     align-items: center;
     flex-direction: row;
     box-sizing: border-box;
+  }
+
+  &:hover {
+    background: ${p => p.theme.colors.lightGrey};
   }
 `
 
@@ -115,7 +121,7 @@ class Row extends PureComponent<Props, State> {
     const displayName = account.type === 'TokenAccount' ? currency.name : account.name
 
     return (
-      <AccountContextMenu account={account} parentAccount={parentAccount}>
+      <AccountContextMenu account={account} parentAccount={parentAccount} withStar>
         <Wrapper onClick={() => this.onAccountClick(account)}>
           <AccountWrapper>
             {icon}
@@ -171,7 +177,7 @@ class Row extends PureComponent<Props, State> {
             </Ellipsis>
           </Value>
           <Dots>
-            <AccountContextMenu leftClick account={account}>
+            <AccountContextMenu leftClick account={account} withStar>
               <IconDots size={16} />
             </AccountContextMenu>
           </Dots>
