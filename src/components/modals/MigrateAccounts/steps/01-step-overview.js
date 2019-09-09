@@ -105,108 +105,104 @@ const TextWrap = styled(Box)`
   display: inline;
 `
 
-const StepOverview = ({ migratableAccounts, currency, totalMigratableAccounts }: StepProps) => {
-  const migratableCurrencyIds = Object.keys(migratableAccounts)
+const StepOverview = ({ migratableAccounts, currency, currencyIds }: StepProps) => (
+  <Box align="center">
+    <TrackPage category="MigrateAccounts" name="Step1" />
 
-  return (
-    <Box align="center">
-      <TrackPage category="MigrateAccounts" name="Step1" />
-
-      <Logo>
-        <LedgerLiveLogo
-          width="58px"
-          height="58px"
-          icon={<img src={i('ledgerlive-logo.svg')} alt="" width={35} height={35} />}
+    <Logo>
+      <LedgerLiveLogo
+        width="58px"
+        height="58px"
+        icon={<img src={i('ledgerlive-logo.svg')} alt="" width={35} height={35} />}
+      />
+    </Logo>
+    <Title>
+      <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
+        <Trans
+          i18nKey={
+            !migratableAccounts.length
+              ? 'migrateAccounts.overview.done'
+              : 'migrateAccounts.overview.title'
+          }
         />
-      </Logo>
-      <Title>
-        <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
-          <Trans
-            i18nKey={
-              !totalMigratableAccounts
-                ? 'migrateAccounts.overview.done'
-                : 'migrateAccounts.overview.title'
-            }
-          />
+      </Text>
+    </Title>
+    {migratableAccounts.length ? (
+      <>
+        <Text color="graphite" ff="Open Sans|Regular" fontSize={4}>
+          <Trans i18nKey="migrateAccounts.overview.description" />
         </Text>
-      </Title>
-      {totalMigratableAccounts ? (
-        <>
-          <Text color="graphite" ff="Open Sans|Regular" fontSize={4}>
-            <Trans i18nKey="migrateAccounts.overview.description" />
-          </Text>
 
-          {migratableAccounts && (
-            <Wrapper>
-              {!currency ? (
-                <NextDeviceWarning>
-                  <IconExclamationCircle size={16} />
-                  <TextWrap ff="Open Sans|Bold" fontSize={4}>
+        {migratableAccounts && (
+          <Wrapper>
+            {!currency ? (
+              <NextDeviceWarning>
+                <IconExclamationCircle size={16} />
+                <TextWrap ff="Open Sans|Bold" fontSize={4}>
+                  <Text>
+                    <Trans
+                      i18nKey="migrateAccounts.overview.pendingDevices"
+                      count={migratableAccounts.length}
+                      values={{ totalMigratableAccounts: migratableAccounts.length }}
+                    />
+                  </Text>
+                  <HelpLink onClick={() => openURL(urls.migrateAccounts)}>
                     <Text>
-                      <Trans
-                        i18nKey="migrateAccounts.overview.pendingDevices"
-                        count={totalMigratableAccounts}
-                        values={{ totalMigratableAccounts }}
-                      />
+                      <Trans i18nKey="common.needHelp" />
                     </Text>
-                    <HelpLink onClick={() => openURL(urls.migrateAccounts)}>
-                      <Text>
-                        <Trans i18nKey="common.needHelp" />
-                      </Text>
-                      <IconExternalLink size={14} />
-                    </HelpLink>
-                  </TextWrap>
-                </NextDeviceWarning>
-              ) : null}
-              {migratableCurrencyIds.map(currencyId => {
-                const accounts = migratableAccounts[currencyId]
-                return (
-                  <Currency key={currencyId}>
-                    <Text color="dark" ff="Open Sans|SemiBold" fontSize={4}>
-                      <Trans
-                        i18nKey="migrateAccounts.overview.currency"
-                        count={accounts.length}
-                        values={{
-                          currency: accounts[0].currency.name,
-                          accounts: accounts.length,
-                        }}
+                    <IconExternalLink size={14} />
+                  </HelpLink>
+                </TextWrap>
+              </NextDeviceWarning>
+            ) : null}
+            {currencyIds.map(currencyId => {
+              const accounts = migratableAccounts.filter(a => a.currency.id === currencyId)
+              return (
+                <Currency key={currencyId}>
+                  <Text color="dark" ff="Open Sans|SemiBold" fontSize={4}>
+                    <Trans
+                      i18nKey="migrateAccounts.overview.currency"
+                      count={accounts.length}
+                      values={{
+                        currency: accounts[0].currency.name,
+                        accounts: accounts.length,
+                      }}
+                    />
+                  </Text>
+                  <AccountsWrapper>
+                    {accounts.map(account => (
+                      <AccountRow
+                        isReadonly
+                        key={account.id}
+                        account={account}
+                        accountName={account.name}
                       />
-                    </Text>
-                    <AccountsWrapper>
-                      {accounts.map(account => (
-                        <AccountRow
-                          isReadonly
-                          key={account.id}
-                          account={account}
-                          accountName={account.name}
-                        />
-                      ))}
-                    </AccountsWrapper>
-                  </Currency>
-                )
-              })}
-            </Wrapper>
-          )}
-        </>
-      ) : null}
-    </Box>
-  )
-}
+                    ))}
+                  </AccountsWrapper>
+                </Currency>
+              )
+            })}
+          </Wrapper>
+        )}
+      </>
+    ) : null}
+  </Box>
+)
 
 export default StepOverview
 
 export const StepOverviewFooter = ({
   transitionTo,
   t,
+  currencyIds,
   migratableAccounts,
-  totalMigratableAccounts,
   currency,
   moveToNextCurrency,
   hideLoopNotice,
   onCloseModal,
 }: StepProps) => (
   <Fragment>
-    {!totalMigratableAccounts ? (
+    {!migratableAccounts.length ? (
       <FooterContent>
         <Button primary onClick={onCloseModal}>
           {t('common.done')}
@@ -237,7 +233,7 @@ export const StepOverviewFooter = ({
         </Box>
         <Box horizontal align="center" justify="flex-end" flow={2}>
           <Button
-            disabled={!Object.keys(migratableAccounts).length}
+            disabled={!currencyIds.length}
             primary
             onClick={async () => {
               transitionTo('device')

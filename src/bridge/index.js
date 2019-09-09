@@ -22,7 +22,7 @@ export const getCurrencyBridge = (currency: CryptoCurrency): CurrencyBridge => {
     case 'ripple':
       return RippleJSBridge.currencyBridge
     case 'ethereum':
-      if (!getEnv('EXPERIMENTAL_LIBCORE') || libcoreNoGo.includes(currency.id)) {
+      if (libcoreNoGo.includes(currency.id)) {
         return EthereumJSBridge.currencyBridge
       }
       return LibcoreBridge.currencyBridge

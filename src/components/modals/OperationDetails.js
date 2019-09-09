@@ -25,6 +25,7 @@ import { colors } from 'styles/theme'
 
 import type { T } from 'types/common'
 import { MODAL_OPERATION_DETAILS } from 'config/constants'
+import { urls } from 'config/urls'
 
 import { getMarketColor } from 'styles/helpers'
 import Box from 'components/base/Box'
@@ -36,15 +37,17 @@ import Text from 'components/base/Text'
 import LabelInfoTooltip from 'components/base/LabelInfoTooltip'
 import OperationComponent from 'components/OperationsList/Operation'
 
+import ConfirmationCheck from 'components/OperationsList/ConfirmationCheck'
 import CopyWithFeedback from 'components/base/CopyWithFeedback'
+import FakeLink from 'components/base/FakeLink'
+import Ellipsis from 'components/base/Ellipsis'
 import { accountSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 
 import { confirmationsNbForCurrencySelector, marketIndicatorSelector } from 'reducers/settings'
 import IconChevronRight from 'icons/ChevronRight'
+import IconExternalLink from 'icons/ExternalLink'
 import CounterValue from 'components/CounterValue'
-import ConfirmationCheck from 'components/OperationsList/ConfirmationCheck'
-import Ellipsis from '../base/Ellipsis'
 import Link from '../base/Link'
 
 const OpDetailsSection = styled(Box).attrs({
@@ -62,6 +65,8 @@ const OpDetailsTitle = styled(Box).attrs({
   textTransform: 'uppercase',
   mb: 1,
 })`
+  justify-content: center;
+  height: 18px;
   letter-spacing: 2px;
 `
 export const Address = styled(Text).attrs({})`
@@ -108,7 +113,7 @@ const OpDetailsData = styled(Box).attrs({
     font-weight: 400;
   }
 
-  &:hover ${Link} {
+  & ${Link}:hover {
     text-decoration: underline;
   }
 `
@@ -237,12 +242,21 @@ const OperationDetails = connect(
     [openModal, account],
   )
 
-  const goToAccount = useCallback(() => {
-    if (currentLocation !== `/account/${accountId}`) {
-      push(`/account${parentId ? `/${parentId}` : `/${accountId}`}`)
+  const goToMainAccount = useCallback(() => {
+    const url = `/account/${mainAccount.id}`
+    if (currentLocation !== url) {
+      push(url)
     }
     onClose()
-  }, [parentId, accountId, push, onClose, currentLocation])
+  }, [mainAccount, push, onClose, currentLocation])
+
+  const goToSubAccount = useCallback(() => {
+    const url = `/account/${mainAccount.id}/${account.id}`
+    if (currentLocation !== url) {
+      push(url)
+    }
+    onClose()
+  }, [mainAccount, account, push, onClose, currentLocation])
 
   return (
     <ModalBody
@@ -355,15 +369,21 @@ const OperationDetails = connect(
 
           {internalOperations.length || subOperations.length ? (
             <OpDetailsSection mb={2}>
-              {t('operationDetails.details', { currency: getAccountCurrency(account).name })}
+              {t('operationDetails.details', { currency: currency.name })}
             </OpDetailsSection>
           ) : null}
 
           <Box horizontal flow={2}>
             <Box flex={1}>
               <OpDetailsTitle>{t('operationDetails.account')}</OpDetailsTitle>
-              <OpDetailsData>
-                <Link onClick={goToAccount}>{name}</Link>
+              <OpDetailsData horizontal>
+                <Link onClick={goToMainAccount}>{name}</Link>
+                {parentAccount ? (
+                  <>
+                    {' / '}
+                    <Link onClick={goToSubAccount}>{currency.name}</Link>
+                  </>
+                ) : null}
               </OpDetailsData>
             </Box>
             <Box flex={1}>
@@ -438,7 +458,26 @@ const OperationDetails = connect(
           </Box>
           <B />
           <Box>
-            <OpDetailsTitle>{t('operationDetails.to')}</OpDetailsTitle>
+            <Box horizontal>
+              <OpDetailsTitle>{t('operationDetails.to')}</OpDetailsTitle>
+              {recipients.length > 1 ? (
+                <Link>
+                  <FakeLink
+                    underline
+                    fontSize={3}
+                    ml={2}
+                    color="smoke"
+                    onClick={() => openURL(urls.multipleDestinationAddresses)}
+                    iconFirst
+                  >
+                    <Box mr={1}>
+                      <IconExternalLink size={12} />
+                    </Box>
+                    {t('operationDetails.multipleAddresses')}
+                  </FakeLink>
+                </Link>
+              ) : null}
+            </Box>
             <DataList lines={recipients} t={t} />
           </Box>
           {Object.entries(extra).map(([key, value]) => (

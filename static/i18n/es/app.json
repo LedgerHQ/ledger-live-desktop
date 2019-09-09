@@ -71,12 +71,19 @@
   },
   "time": {
     "day": "Día",
+    "day_plural": "Days",
     "week": "Semana",
+    "week_plural": "Weeks",
     "month": "Mes",
+    "month_plural": "Months",
     "year": "Año",
+    "year_plural": "Years",
     "minute": "Minuto",
+    "minute_plural": "Minutes",
     "second": "Segundo",
+    "second_plural": "Seconds",
     "hour": "Hora",
+    "hour_plural": "Hours",
     "since": {
       "day": "día pasado",
       "week": "semana pasada",
@@ -111,6 +118,7 @@
     "emptyState": {
       "title": "¿Aún no tienes criptoactivos?",
       "desc": "Asegúrate de que la aplicación <1><0>{{managerAppName}}</0></1> está instalada y empieza a recibir.",
+      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
         "receiveFunds": "Recibir"
       }
@@ -243,7 +251,9 @@
     "link": "Learn more",
     "seeTokens": "See tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
-    "tooltip": "Token from"
+    "tooltip": "Token from",
+    "countTooltip": "1 Token",
+    "countTooltip_plural": "{{count}} Tokens"
   },
   "migrateAccounts": {
     "overview": {
@@ -348,7 +358,8 @@
     "tokenTooltip": "This operation is related to the following token operations",
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
-    "details": "{{ currency }} details"
+    "details": "{{ currency }} details",
+    "multipleAddresses": "Why multiple addresses?"
   },
   "operationList": {
     "noMoreOperations": "Eso es todo"
@@ -566,6 +577,7 @@
     "rates": {
       "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} to {{to}}",
+      "noCounterValue": "We have no data for this trading pair.",
       "cryptoToFiat": "Crypto to fiat",
       "cryptoToCrypto": "Crypto to Crypto",
       "rate": "Rate",
@@ -1172,6 +1184,10 @@
     "UnknownMCU": {
       "title": "Versión de MCU desconocida",
       "description": "Por favor, ponte en contacto con el Soporte de Ledger"
+    },
+    "MCUNotGenuineToDashboard": {
+      "title": "Access dashboard to update",
+      "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
     }
   }
 }

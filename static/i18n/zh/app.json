@@ -71,12 +71,19 @@
   },
   "time": {
     "day": "日度",
+    "day_plural": "Days",
     "week": "周度",
+    "week_plural": "Weeks",
     "month": "月度",
+    "month_plural": "Months",
     "year": "年度",
+    "year_plural": "Years",
     "minute": "分",
+    "minute_plural": "Minutes",
     "second": "秒",
+    "second_plural": "Seconds",
     "hour": "时",
+    "hour_plural": "Hours",
     "since": {
       "day": "昨天",
       "week": "上周",
@@ -111,6 +118,7 @@
     "emptyState": {
       "title": "还没有加密资产？",
       "desc": "请确认已安装 <1> <0>{{managerAppName}}</0> </1> 应用程序后开始接收",
+      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
         "receiveFunds": "接收"
       }
@@ -243,7 +251,9 @@
     "link": "了解更多",
     "seeTokens": "查看代币 ({{tokenCount}})",
     "hideTokens": "隐藏代币 ({{tokenCount}})",
-    "tooltip": "代币来自"
+    "tooltip": "代币来自",
+    "countTooltip": "1 Token",
+    "countTooltip_plural": "{{count}} Tokens"
   },
   "migrateAccounts": {
     "overview": {
@@ -348,7 +358,8 @@
     "tokenTooltip": "此操作与下列代币操作相关",
     "internalOperations": "内部操作",
     "internalOpTooltip": "此操作存在内部操作",
-    "details": "{{ currency }} 详细信息"
+    "details": "{{ currency }} 详细信息",
+    "multipleAddresses": "Why multiple addresses?"
   },
   "operationList": {
     "noMoreOperations": "以上"
@@ -566,6 +577,7 @@
     "rates": {
       "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} 至 {{to}}",
+      "noCounterValue": "We have no data for this trading pair.",
       "cryptoToFiat": "加密货币换作法定货币",
       "cryptoToCrypto": "加密货币换作加密货币",
       "rate": "汇率",
@@ -1172,6 +1184,10 @@
     "UnknownMCU": {
       "title": "MCU 版本未知",
       "description": "请联系 Ledger 客服"
+    },
+    "MCUNotGenuineToDashboard": {
+      "title": "Access dashboard to update",
+      "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
     }
   }
 }

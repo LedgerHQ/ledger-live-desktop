@@ -33,7 +33,7 @@
     "back": "Назад",
     "reset": "Сбросить",
     "retry": "Повторить попытку",
-    "range": "Range",
+    "range": "Период",
     "stop": "Остановить",
     "updateNow": "Обновить сейчас",
     "close": "Закрыть",
@@ -45,7 +45,7 @@
     "copyAddress": "Копировать",
     "copied": "Скопировано",
     "addressCopied": "Адрес скопирован",
-    "experimentalFeature": "EXPERIMENTAL FEATURE ACTIVE",
+    "experimentalFeature": "ЭКСПЕРЕМЕНТАЛЬНЫЕ ФУНКЦИИ АКТИВИРОВАНЫ",
     "lockScreen": {
       "title": "С возвращением",
       "subTitle": null,
@@ -71,12 +71,19 @@
   },
   "time": {
     "day": "День",
+    "day_plural": "Days",
     "week": "Неделя",
+    "week_plural": "Weeks",
     "month": "Месяц",
+    "month_plural": "Months",
     "year": "Год",
-    "minute": "Minute",
-    "second": "Second",
-    "hour": "Hour",
+    "year_plural": "Years",
+    "minute": "Минута",
+    "minute_plural": "Минут",
+    "second": "Секунды",
+    "second_plural": "Seconds",
+    "hour": "Час",
+    "hour_plural": "Hours",
     "since": {
       "day": "прошедший день",
       "week": "прошедшая неделя",
@@ -91,13 +98,13 @@
   "sidebar": {
     "menu": "Меню",
     "stars": "Starred accounts",
-    "accounts": "Accounts",
+    "accounts": "Счета",
     "manager": "Диспетчер",
     "exchange": "Купить крипто",
     "developer": "Инструменты разработчика",
     "newUpdate": {
-      "title": "New Update",
-      "description": "Your accounts have been moved to a new dedicated page!"
+      "title": "Новое обновление",
+      "description": "Ваши аккаунты были перемещены на новую отдельную страницу!"
     }
   },
   "stars": {
@@ -111,6 +118,7 @@
     "emptyState": {
       "title": "Еще не получили криптоактивы?",
       "desc": "Убедитесь в том, что на устройстве установлено приложение <1><0>{{managerAppName}}</0></1>, и начните получать.",
+      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
         "receiveFunds": "Получить"
       }
@@ -133,18 +141,18 @@
     }
   },
   "accounts": {
-    "title": "Accounts",
-    "noResultFound": "No accounts found.",
+    "title": "Счета",
+    "noResultFound": "Счета не найдены.",
     "order": {
-      "name|asc": "Name A-Z",
-      "name|desc": "Name Z-A",
-      "balance|asc": "Lowest Balance",
-      "balance|desc": "Highest Balance"
+      "name|asc": "Имя А-Я",
+      "name|desc": "Имя Я-А",
+      "balance|asc": "Наименьший баланс",
+      "balance|desc": "Наибольший баланс"
     },
     "range": {
-      "week": "Week",
-      "month": "Month",
-      "year": "Year"
+      "week": "Неделя",
+      "month": "Месяц",
+      "year": "Год"
     },
     "optionsMenu": {
       "title": "Options",
@@ -153,8 +161,8 @@
     },
     "contextMenu": {
       "star": "Star",
-      "receive": "Receive",
-      "send": "Send",
+      "receive": "Получить",
+      "send": "Отправить",
       "edit": "Edit Account"
     }
   },
@@ -240,10 +248,12 @@
     "title": "Tokens",
     "cta": "Add token",
     "placeholder": "To add tokens, simply send them to your Ethereum address.",
-    "link": "Learn more",
+    "link": "Подробнее",
     "seeTokens": "See tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
-    "tooltip": "Token from"
+    "tooltip": "Token from",
+    "countTooltip": "1 Token",
+    "countTooltip_plural": "{{count}} Tokens"
   },
   "migrateAccounts": {
     "overview": {
@@ -276,7 +286,7 @@
       }
     },
     "cta": {
-      "startUpdate": "Start update",
+      "startUpdate": "Начать обновление",
       "nextCurrency": "Continue with {{currency}} update"
     }
   },
@@ -334,7 +344,7 @@
     "date": "Дата",
     "status": "Статус",
     "confirmed": "Подтверждено",
-    "failed": "Failed",
+    "failed": "Ошибка",
     "notConfirmed": "Не подтверждено",
     "fees": "Комиссия",
     "noFees": "Без комиссии",
@@ -348,7 +358,8 @@
     "tokenTooltip": "This operation is related to the following token operations",
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
-    "details": "{{ currency }} details"
+    "details": "{{ currency }} details",
+    "multipleAddresses": "Why multiple addresses?"
   },
   "operationList": {
     "noMoreOperations": "Вот и все"
@@ -566,6 +577,7 @@
     "rates": {
       "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} to {{to}}",
+      "noCounterValue": "We have no data for this trading pair.",
       "cryptoToFiat": "Crypto to fiat",
       "cryptoToCrypto": "Crypto to Crypto",
       "rate": "Rate",
@@ -704,13 +716,13 @@
     "cta": "Понятно"
   },
   "exportOperationsModal": {
-    "title": "Operation history",
+    "title": "История операций",
     "desc": "Select the accounts for which to save the operation history",
-    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
-    "titleSuccess": "Operation history successfully saved",
-    "cta": "Save",
-    "ctaSuccess": "Done",
-    "noAccounts": "No accounts to export",
+    "descSuccess": "CSV-файл истории операций успешно сохранен в выбранной папке",
+    "titleSuccess": "История операций успешно сохранена",
+    "cta": "Сохранить",
+    "ctaSuccess": "Готово",
+    "noAccounts": "Нет аккаунтов для экспорта",
     "selectedAccounts": "Accounts to include",
     "selectedAccounts_plural": "Accounts to include ({{count}})"
   },
@@ -755,7 +767,7 @@
     },
     "selectDevice": {
       "title": "Выберите свое устройство",
-      "usbOnly": "usb only",
+      "usbOnly": "только usb",
       "usbOnlyTooltip": "Ledger Live desktop currently does not support Bluetooth"
     },
     "selectPIN": {
@@ -1172,6 +1184,10 @@
     "UnknownMCU": {
       "title": "Неизвестная версия микроконтроллера",
       "description": "Обратитесь в службу поддержки компании Ledger."
+    },
+    "MCUNotGenuineToDashboard": {
+      "title": "Access dashboard to update",
+      "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
     }
   }
 }

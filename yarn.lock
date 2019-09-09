@@ -1745,10 +1745,10 @@
     "@ledgerhq/hw-transport" "^4.68.4"
     create-hash "^1.1.3"
 
-"@ledgerhq/hw-app-eth@4.68.4", "@ledgerhq/hw-app-eth@^4.68.4":
-  version "4.68.4"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-4.68.4.tgz#90e606ffc85872063313ac6c19b4b64f7d00c9bf"
-  integrity sha512-fLy04GNAZOdtut0j5bf6BvByLtxqefckqpABmXM84wo6Ae579EjIbMrOdJ+ojigVlHIu1nXFzZbxzSwci+I9cA==
+"@ledgerhq/hw-app-eth@4.69.2", "@ledgerhq/hw-app-eth@^4.69.2":
+  version "4.69.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-4.69.2.tgz#abc72b359a79fe1e6945db76a67583c9b9d15e89"
+  integrity sha512-NLBqP9wuILRopjQpZOcxu0zXi4ezwyXE45byaqiAWcDuvRDFYiBFItDfSfQnWXsqUHyh2QKqggvLPBc2uofakA==
   dependencies:
     "@ledgerhq/errors" "^4.68.4"
     "@ledgerhq/hw-transport" "^4.68.4"
@@ -1836,15 +1836,15 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@^7.11.0-alpha.3":
-  version "7.11.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-7.11.0-alpha.3.tgz#4cf1e6a9b73131899a6076365ca80eeed2d0528f"
-  integrity sha512-96zrC/lE1Udr79K8VGCYbzxXmxoK3QMmPbek6zcnmuGiUtvnyynKb+XA56T0MyQ0gwu66sBgCVvuGv/IFv9cdQ==
+"@ledgerhq/live-common@^7.14.0":
+  version "7.14.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-7.14.0.tgz#e9d651b53a5b613e7ce1237527b6f980822ccde6"
+  integrity sha512-RQ4obSeCOzfkkb0BNTXtFjkRZJcUcBfcf+/cye5WBGEdS7zrjHdHG5CbxaCLwdbBKXdnPC4FA4BAmJfS2MNANQ==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/errors" "4.68.4"
     "@ledgerhq/hw-app-btc" "4.68.4"
-    "@ledgerhq/hw-app-eth" "4.68.4"
+    "@ledgerhq/hw-app-eth" "4.69.2"
     "@ledgerhq/hw-app-xrp" "4.68.4"
     "@ledgerhq/hw-transport" "4.68.4"
     "@ledgerhq/hw-transport-mocker" "4.68.4"
@@ -1865,8 +1865,8 @@
     ripple-bs58check "^2.0.2"
     ripple-hashes "^0.3.1"
     ripple-lib "1.1.2"
-    rxjs "^6.5.2"
-    rxjs-compat "^6.5.2"
+    rxjs "^6.5.3"
+    rxjs-compat "^6.5.3"
 
 "@ledgerhq/logs@4.68.2", "@ledgerhq/logs@^4.68.2":
   version "4.68.2"
@@ -14859,10 +14859,10 @@ rx@2.3.24:
   resolved "https://registry.yarnpkg.com/rx/-/rx-2.3.24.tgz#14f950a4217d7e35daa71bbcbe58eff68ea4b2b7"
   integrity sha1-FPlQpCF9fjXapxu8vljv9o6ksrc=
 
-rxjs-compat@^6.5.2:
-  version "6.5.2"
-  resolved "https://registry.yarnpkg.com/rxjs-compat/-/rxjs-compat-6.5.2.tgz#e469070adf6260bdad195e9d4a39f444ae28b458"
-  integrity sha512-TRMkTp4FgSxE2HtGvxmgRukh3JqdFM7ejAj1Ti/VdodbPGfWvZR5+KdLKRV9jVDFyu2SknM8RD+PR54KGnoLjg==
+rxjs-compat@^6.5.3:
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/rxjs-compat/-/rxjs-compat-6.5.3.tgz#18440949b2678bf87a78a754009676b2c49183dc"
+  integrity sha512-BIJX2yovz3TBpjJoAZyls2QYuU6ZiCaZ+U96SmxQpuSP/qDUfiXPKOVLbThBB2WZijNHkdTTJXKRwvv5Y48H7g==
 
 rxjs@^5.1.1, rxjs@^5.5.2:
   version "5.5.11"
@@ -14875,6 +14875,13 @@ rxjs@^6.1.0, rxjs@^6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.2.tgz#2e35ce815cd46d84d02a209fb4e5921e051dbec7"
   integrity sha512-HUb7j3kvb7p7eCUHE3FqjoDsC1xfZQ4AHFWfTKSpZ+sAhhz5X1WX0ZuUqWbzB2QhSLp3DoLUG+hMdEDKqWo2Zg==
+  dependencies:
+    tslib "^1.9.0"
+
+rxjs@^6.5.3:
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.3.tgz#510e26317f4db91a7eb1de77d9dd9ba0a4899a3a"
+  integrity sha512-wuYsAYYFdWTAnAaPoKGNhfpWwKZbJW+HgAJ+mImp+Epl7BG8oNWBCTyRM8gba9k4lk8BgWdoYm21Mo/RYhhbgA==
   dependencies:
     tslib "^1.9.0"
 

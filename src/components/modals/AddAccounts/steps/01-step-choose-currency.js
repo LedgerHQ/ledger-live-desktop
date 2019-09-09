@@ -6,7 +6,6 @@ import { Trans } from 'react-i18next'
 import { listSupportedCurrencies, listTokens } from '@ledgerhq/live-common/lib/currencies'
 
 import { colors } from 'styles/theme'
-import { useWithTokens } from 'helpers/experimental'
 import TrackPage from 'analytics/TrackPage'
 import { urls } from 'config/urls'
 import SelectCurrency from 'components/SelectCurrency'
@@ -45,11 +44,7 @@ const TokenTips = React.memo(({ currency }: *) => (
 ))
 
 function StepChooseCurrency({ currency, setCurrency }: StepProps) {
-  const withTokens = useWithTokens()
-  const currencies = useMemo(
-    () => listSupportedCurrencies().concat(withTokens ? listTokens() : []),
-    [withTokens],
-  )
+  const currencies = useMemo(() => listSupportedCurrencies().concat(listTokens()), [])
   return (
     <Fragment>
       {currency ? <CurrencyDownStatusAlert currency={currency} /> : null}

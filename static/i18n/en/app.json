@@ -118,6 +118,7 @@
     "emptyState": {
       "title": "No crypto assets yet?",
       "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
+      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
         "receiveFunds": "Receive"
       }
@@ -250,7 +251,9 @@
     "link": "Learn more",
     "seeTokens": "See tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
-    "tooltip": "Token from"
+    "tooltip": "Token from",
+    "countTooltip": "1 Token",
+    "countTooltip_plural": "{{count}} Tokens"
   },
   "migrateAccounts": {
     "overview": {
@@ -355,7 +358,8 @@
     "tokenTooltip": "This operation is related to the following token operations",
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
-    "details": "{{ currency }} details"
+    "details": "{{ currency }} details",
+    "multipleAddresses": "Why multiple addresses?"
   },
   "operationList": {
     "noMoreOperations": "That's all"
@@ -1180,6 +1184,10 @@
     "UnknownMCU": {
       "title": "Unknown MCU version",
       "description": "Please contact Ledger Support"
+    },
+    "MCUNotGenuineToDashboard": {
+      "title": "Access dashboard to update",
+      "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
     }
   }
 }
