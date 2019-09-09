@@ -49,15 +49,15 @@ const NoItemPlaceholder = ({ query, installApp, app, push }: Props) => {
     installApp(app)()
   }, [app, installApp])
 
-  return found ? (
+  return found && app ? (
     <Wrapper>
       <Title>
-        <Trans i18nKey="manager.apps.noAppNeededForToken" values={{ tokenName: found.name }} />
+        <Trans
+          i18nKey="manager.apps.noAppNeededForToken"
+          values={{ appName: app.name, tokenName: `${found.name} (${found.ticker})` }}
+        />
       </Title>
       <Box pt={2} style={{ maxWidth: 500 }} alignItems="center">
-        <Text ff="Open Sans|Regular" color="graphite" fontSize={4} style={{ lineHeight: 1.6 }}>
-          <Trans i18nKey="manager.apps.lookingForToken" values={{ tokenName: found.name }} />
-        </Text>
         <Text
           ff="Open Sans|Regular"
           color="graphite"
@@ -65,7 +65,14 @@ const NoItemPlaceholder = ({ query, installApp, app, push }: Props) => {
           textAlign="center"
           style={{ lineHeight: 1.6 }}
         >
-          <Trans i18nKey="manager.apps.tokenAppDisclaimer" values={{ tokenName: found.name }}>
+          <Trans
+            i18nKey="manager.apps.tokenAppDisclaimer"
+            values={{
+              appName: app.name,
+              tokenName: found.name,
+              tokenType: found.tokenType.toUpperCase(),
+            }}
+          >
             {'placeholder'}
             <Text ff="Open Sans|SemiBold" color="dark">
               {'placeholder'}
