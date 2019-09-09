@@ -537,7 +537,7 @@
     "showAll": "Show all",
     "showLess": "Show less",
     "header": "Account distribution ({{count}})",
-    "notice": "You can now right click on an account to see options!"
+    "notice": "You can right-click on an account to see its options!"
   },
   "asset": {
     "notice": "Summary of all {{currency}} accounts"
