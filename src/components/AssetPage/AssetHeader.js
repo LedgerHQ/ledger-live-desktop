@@ -118,7 +118,7 @@ const AssetHeader: React$ComponentType<Props> = React.memo(({ account, parentAcc
         </AccountName>
       </Box>
       <IconInfoCircle size={14} />
-      <Text ff="Open Sans|SemiBold" fontSize={12}>
+      <Text ff="Open Sans|SemiBold" fontSize={12} style={{ marginLeft: 8 }}>
         <Trans i18nKey="asset.notice" values={{ currency: currency.name }} />
       </Text>
     </Box>

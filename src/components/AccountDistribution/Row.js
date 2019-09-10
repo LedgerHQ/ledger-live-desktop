@@ -127,8 +127,8 @@ class Row extends PureComponent<Props, State> {
             {icon}
             <Box grow>
               {parentAccount ? (
-                <Box style={{ textTransform: 'uppercase' }} fontSize={10} color="graphite">
-                  {parentAccount.name}
+                <Box fontSize={10} color="graphite">
+                  <Text ff="Open Sans|SemiBold">{parentAccount.name}</Text>
                 </Box>
               ) : null}
               <Ellipsis ff="Open Sans|SemiBold" color="dark" fontSize={3}>
@@ -177,7 +177,7 @@ class Row extends PureComponent<Props, State> {
             </Ellipsis>
           </Value>
           <Dots>
-            <AccountContextMenu leftClick account={account} withStar>
+            <AccountContextMenu leftClick account={account} parentAccount={parentAccount} withStar>
               <IconDots size={16} />
             </AccountContextMenu>
           </Dots>
