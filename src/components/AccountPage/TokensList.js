@@ -21,6 +21,7 @@ import { urls } from '../../config/urls'
 import LabelWithExternalIcon from '../base/LabelWithExternalIcon'
 import { openURL } from '../../helpers/linking'
 import { track } from '../../analytics/segment'
+import AccountContextMenu from '../ContextMenu/AccountContextMenu'
 
 type Props = {
   account: Account,
@@ -115,15 +116,16 @@ class TokensList extends PureComponent<Props> {
           </EmptyState>
         )}
         {tokenAccounts.map((token, index) => (
-          <TokenRow
-            index={index}
-            key={token.id}
-            range={range}
-            account={token}
-            parentAccount={account}
-            onClick={this.onAccountClick}
-            disableRounding
-          />
+          <AccountContextMenu key={token.id} account={token} parentAccount={account}>
+            <TokenRow
+              index={index}
+              range={range}
+              account={token}
+              parentAccount={account}
+              onClick={this.onAccountClick}
+              disableRounding
+            />
+          </AccountContextMenu>
         ))}
       </Box>
     )

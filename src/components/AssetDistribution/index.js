@@ -8,11 +8,13 @@ import { getAssetsDistribution } from '@ledgerhq/live-common/lib/portfolio'
 import type { AssetsDistribution } from '@ledgerhq/live-common/lib/types/portfolio'
 import styled from 'styled-components'
 import Text from 'components/base/Text'
+import Tag from 'components/Tag'
+import Box from 'components/base/Box'
+import Card from 'components/base/Box/Card'
 import IconAngleDown from 'icons/AngleDown'
 import { calculateCountervalueSelector } from 'actions/general'
-import Card from '../base/Box/Card'
-import { accountsSelector } from '../../reducers/accounts'
-import { counterValueCurrencySelector } from '../../reducers/settings'
+import { accountsSelector } from 'reducers/accounts'
+import { counterValueCurrencySelector } from 'reducers/settings'
 import Row from './Row'
 import Header from './Header'
 
@@ -24,6 +26,10 @@ type State = {
   showAll: boolean,
 }
 
+const TagWrapper = styled.div`
+  margin-left: 16px;
+  margin-right: 8px;
+`
 const SeeAllButton = styled.div`
   margin-top: 15px;
   display: flex;
@@ -81,14 +87,24 @@ class AssetDistribution extends PureComponent<Props, State> {
 
     return (
       <>
-        <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
-          <Trans
-            i18nKey="distribution.header"
-            values={{ count: 0 }}
-            count={distribution.list.length}
-          />
-        </Text>
-        <Card p={0} mt={20}>
+        <Box horizontal alignItems="center">
+          <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
+            <Trans
+              i18nKey="distribution.header"
+              values={{ count: 0 }}
+              count={distribution.list.length}
+            />
+          </Text>
+          <TagWrapper>
+            <Tag>
+              <Trans i18nKey="common.new" />
+            </Tag>
+          </TagWrapper>
+          <Text ff="Open Sans|SemiBold" fontSize={12} color="wallet">
+            <Trans i18nKey="distribution.notice" />
+          </Text>
+        </Box>
+        <Card p={0} mt={24}>
           <Header />
           {subList.map(item => (
             <Row key={item.currency.id} item={item} />
