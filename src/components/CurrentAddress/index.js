@@ -185,7 +185,6 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
             size={120}
             data={encodeURIScheme({
               address,
-              currency,
             })}
           />
         </Box>
