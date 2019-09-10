@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { openURL } from 'helpers/linking'
 import { Trans, translate } from 'react-i18next'
 import styled from 'styled-components'
+import { push } from 'react-router-redux'
 import moment from 'moment'
 import {
   getOperationAmountNumber,
@@ -24,6 +25,7 @@ import { colors } from 'styles/theme'
 
 import type { T } from 'types/common'
 import { MODAL_OPERATION_DETAILS } from 'config/constants'
+import { urls } from 'config/urls'
 
 import { getMarketColor } from 'styles/helpers'
 import Box from 'components/base/Box'
@@ -46,7 +48,7 @@ import { confirmationsNbForCurrencySelector, marketIndicatorSelector } from 'red
 import IconChevronRight from 'icons/ChevronRight'
 import IconExternalLink from 'icons/ExternalLink'
 import CounterValue from 'components/CounterValue'
-import { urls } from 'config/urls'
+import Link from '../base/Link'
 
 const OpDetailsSection = styled(Box).attrs({
   horizontal: true,
@@ -110,6 +112,10 @@ const OpDetailsData = styled(Box).attrs({
     color: ${colors.wallet};
     font-weight: 400;
   }
+
+  & ${Link}:hover {
+    text-decoration: underline;
+  }
 `
 
 const NoMarginWrapper = styled.div`
@@ -122,16 +128,9 @@ const B = styled(Bar).attrs({
   size: 1,
 })``
 
-const Link = styled(Box).attrs({
-  mb: 1,
-})`
-  ${FakeLink}:hover {
-    color: ${p => p.theme.colors.wallet};
-  }
-`
-
 const mapDispatchToProps = {
   openModal,
+  push,
 }
 
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
@@ -155,19 +154,30 @@ const mapStateToProps = (state, { operationId, accountId, parentId }) => {
     ? confirmationsNbForCurrencySelector(state, { currency: mainCurrency })
     : 0
   const operation = account ? findOperationInAccount(account, operationId) : null
-  return { marketIndicator, account, parentAccount, operation, confirmationsNb }
+  return {
+    marketIndicator,
+    account,
+    parentAccount,
+    operation,
+    confirmationsNb,
+    currentLocation: state.router.location.pathname,
+  }
 }
 
 type Props = {
   t: T,
   operation: ?Operation,
   account: ?(Account | TokenAccount),
+  accountId: string,
   parentAccount: ?Account,
+  parentId: ?string,
   confirmationsNb: number,
   onClose: () => void,
   marketIndicator: *,
   openModal: typeof openModal,
   parentOperation?: Operation,
+  push: string => void,
+  currentLocation: string,
 }
 type openOperationType = 'goBack' | 'subOperation' | 'internalOperation'
 
@@ -185,7 +195,10 @@ const OperationDetails = connect(
     marketIndicator,
     openModal,
     parentOperation,
+    push,
+    currentLocation,
   } = props
+
   if (!operation || !account) return null
   const mainAccount = getMainAccount(account, parentAccount)
   const { extra, hash, date, senders, type, fee, recipients } = operation
@@ -226,6 +239,22 @@ const OperationDetails = connect(
     },
     [openModal, account],
   )
+
+  const goToMainAccount = useCallback(() => {
+    const url = `/account/${mainAccount.id}`
+    if (currentLocation !== url) {
+      push(url)
+    }
+    onClose()
+  }, [mainAccount, push, onClose, currentLocation])
+
+  const goToSubAccount = useCallback(() => {
+    const url = `/account/${mainAccount.id}/${account.id}`
+    if (currentLocation !== url) {
+      push(url)
+    }
+    onClose()
+  }, [mainAccount, account, push, onClose, currentLocation])
 
   return (
     <ModalBody
@@ -338,14 +367,22 @@ const OperationDetails = connect(
 
           {internalOperations.length || subOperations.length ? (
             <OpDetailsSection mb={2}>
-              {t('operationDetails.details', { currency: getAccountCurrency(account).name })}
+              {t('operationDetails.details', { currency: currency.name })}
             </OpDetailsSection>
           ) : null}
 
           <Box horizontal flow={2}>
             <Box flex={1}>
               <OpDetailsTitle>{t('operationDetails.account')}</OpDetailsTitle>
-              <OpDetailsData>{name}</OpDetailsData>
+              <OpDetailsData horizontal>
+                <Link onClick={goToMainAccount}>{name}</Link>
+                {parentAccount ? (
+                  <>
+                    {' / '}
+                    <Link onClick={goToSubAccount}>{currency.name}</Link>
+                  </>
+                ) : null}
+              </OpDetailsData>
             </Box>
             <Box flex={1}>
               <OpDetailsTitle>{t('operationDetails.date')}</OpDetailsTitle>
