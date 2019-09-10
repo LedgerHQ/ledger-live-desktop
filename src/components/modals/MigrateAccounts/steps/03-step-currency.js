@@ -101,6 +101,7 @@ class StepCurrency extends PureComponent<Props> {
       replaceAccounts,
       starredAccountIds,
       replaceStarAccountId,
+      addMigratedAccount,
     } = this.props
 
     if (!currency || !device) return
@@ -121,7 +122,11 @@ class StepCurrency extends PureComponent<Props> {
             }
           })
 
-          replaceAccounts(migrateAccounts({ scannedAccounts, existingAccounts: accounts }))
+          const migratedAccounts = migrateAccounts({ scannedAccounts, existingAccounts: accounts })
+          replaceAccounts(migratedAccounts)
+          migratedAccounts.forEach((account: Account) => {
+            addMigratedAccount(currency, account)
+          })
           setScanStatus(totalMigratedAccounts ? 'finished' : 'finished-empty')
         },
         error: err => {

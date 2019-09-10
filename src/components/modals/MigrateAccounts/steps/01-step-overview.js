@@ -1,10 +1,12 @@
 // @flow
 
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import styled from 'styled-components'
 
 import { Trans } from 'react-i18next'
+import reduce from 'lodash/reduce'
 import TrackPage from 'analytics/TrackPage'
+import SuccessAnimatedIcon from 'components/base/SuccessAnimatedIcon'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Text from 'components/base/Text'
@@ -17,16 +19,66 @@ import AccountRow from '../../../base/AccountsList/AccountRow'
 import { openURL } from '../../../../helpers/linking'
 import { urls } from '../../../../config/urls'
 import { rgba } from '../../../../styles/helpers'
+import ExportAccountsModal from '../../../SettingsPage/ExportAccountsModal'
+
+const getAllImportedAccounts = accountsByAsset =>
+  reduce(accountsByAsset, (acc, accounts) => [...acc, ...accounts], [])
 
 const Wrapper = styled.div`
   width: 100%;
   margin-top: 40px;
 `
+
+const MobileCTA = styled(Button)`
+  width: 100%;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  margin-top: 18px;
+`
+
+const MobileIllu = styled.img`
+  margin-left: 16px;
+`
+
+const Desc = styled(Box).attrs({
+  ff: 'Open Sans',
+  fontSize: 4,
+  mt: 2,
+  color: 'graphite',
+})`
+  text-align: center;
+`
+
 const AccountsWrapper = styled.div`
   margin-top: 15px;
   & > * {
     margin-bottom: 10px;
   }
+`
+
+const MobileTextWrapper = styled.div`
+  margin-left: 16px;
+  flex: 1;
+`
+
+const MobileWrapper = styled(Box).attrs({
+  ff: 'Open Sans',
+  fontSize: 4,
+  mt: 2,
+  color: 'graphite',
+})`
+  border-radius: 4px;
+  margin-top: 20px;
+  margin-left: 16px;
+  margin-right: 16px;
+  border: solid 1px ${props => props.theme.colors.lightFog};
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
+`
+
+const MobileContent = styled.div`
+  margin-top: 18px;
+  display: flex;
+  flex-direction: row;
 `
 const Currency = styled.div``
 const Logo = styled.div`
@@ -34,6 +86,10 @@ const Logo = styled.div`
 `
 const Title = styled.div`
   margin-bottom: 10px;
+`
+
+const MobileDesc = styled.div`
+  margin-top: 6px;
 `
 const Footer = styled.div`
   display: flex;
@@ -105,89 +161,142 @@ const TextWrap = styled(Box)`
   display: inline;
 `
 
-const StepOverview = ({ migratableAccounts, currency, currencyIds }: StepProps) => (
-  <Box align="center">
-    <TrackPage category="MigrateAccounts" name="Step1" />
+const StepOverview = ({
+  migratableAccounts,
+  currency,
+  currencyIds,
+  migratedAccounts,
+}: StepProps) => {
+  const migratedAccountNames = Object.keys(migratedAccounts)
+  const [isExporting, setExporting] = useState(false)
 
-    <Logo>
-      <LedgerLiveLogo
-        width="58px"
-        height="58px"
-        icon={<img src={i('ledgerlive-logo.svg')} alt="" width={35} height={35} />}
+  return (
+    <Box align="center">
+      <ExportAccountsModal
+        onClose={() => setExporting(false)}
+        isOpen={isExporting}
+        accounts={getAllImportedAccounts(migratedAccounts)}
       />
-    </Logo>
-    <Title>
-      <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
-        <Trans
-          i18nKey={
-            !migratableAccounts.length
-              ? 'migrateAccounts.overview.done'
-              : 'migrateAccounts.overview.title'
-          }
-        />
-      </Text>
-    </Title>
-    {migratableAccounts.length ? (
-      <>
-        <Text color="graphite" ff="Open Sans|Regular" fontSize={4}>
-          <Trans i18nKey="migrateAccounts.overview.description" />
-        </Text>
 
-        {migratableAccounts && (
-          <Wrapper>
-            {!currency ? (
-              <NextDeviceWarning>
-                <IconExclamationCircle size={16} />
-                <TextWrap ff="Open Sans|Bold" fontSize={4}>
-                  <Text>
-                    <Trans
-                      i18nKey="migrateAccounts.overview.pendingDevices"
-                      count={migratableAccounts.length}
-                      values={{ totalMigratableAccounts: migratableAccounts.length }}
-                    />
-                  </Text>
-                  <HelpLink onClick={() => openURL(urls.migrateAccounts)}>
-                    <Text>
-                      <Trans i18nKey="common.needHelp" />
-                    </Text>
-                    <IconExternalLink size={14} />
-                  </HelpLink>
-                </TextWrap>
-              </NextDeviceWarning>
-            ) : null}
-            {currencyIds.map(currencyId => {
-              const accounts = migratableAccounts.filter(a => a.currency.id === currencyId)
-              return (
-                <Currency key={currencyId}>
-                  <Text color="dark" ff="Open Sans|SemiBold" fontSize={4}>
-                    <Trans
-                      i18nKey="migrateAccounts.overview.currency"
-                      count={accounts.length}
-                      values={{
-                        currency: accounts[0].currency.name,
-                        accounts: accounts.length,
-                      }}
-                    />
-                  </Text>
-                  <AccountsWrapper>
-                    {accounts.map(account => (
-                      <AccountRow
-                        isReadonly
-                        key={account.id}
-                        account={account}
-                        accountName={account.name}
-                      />
-                    ))}
-                  </AccountsWrapper>
-                </Currency>
-              )
-            })}
-          </Wrapper>
+      <TrackPage category="MigrateAccounts" name="Step1" />
+
+      <Logo>
+        {migratableAccounts.length ? (
+          <LedgerLiveLogo
+            width="58px"
+            height="58px"
+            icon={<img src={i('ledgerlive-logo.svg')} alt="" width={35} height={35} />}
+          />
+        ) : (
+          <SuccessAnimatedIcon width={70} height={70} />
         )}
-      </>
-    ) : null}
-  </Box>
-)
+      </Logo>
+      <Title>
+        <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
+          <Trans
+            i18nKey={
+              !migratableAccounts.length
+                ? 'migrateAccounts.overview.successTitle'
+                : 'migrateAccounts.overview.title'
+            }
+          />
+        </Text>
+      </Title>
+      {migratableAccounts.length ? (
+        <>
+          <Text color="graphite" ff="Open Sans|Regular" fontSize={4}>
+            <Trans i18nKey="migrateAccounts.overview.description" />
+          </Text>
+
+          {migratableAccounts && (
+            <Wrapper>
+              {!currency ? (
+                <NextDeviceWarning>
+                  <IconExclamationCircle size={16} />
+                  <TextWrap ff="Open Sans|Bold" fontSize={4}>
+                    <Text>
+                      <Trans
+                        i18nKey="migrateAccounts.overview.pendingDevices"
+                        count={migratableAccounts.length}
+                        values={{ totalMigratableAccounts: migratableAccounts.length }}
+                      />
+                    </Text>
+                    <HelpLink onClick={() => openURL(urls.migrateAccounts)}>
+                      <Text>
+                        <Trans i18nKey="common.needHelp" />
+                      </Text>
+                      <IconExternalLink size={14} />
+                    </HelpLink>
+                  </TextWrap>
+                </NextDeviceWarning>
+              ) : null}
+              {currencyIds.map(currencyId => {
+                const accounts = migratableAccounts.filter(a => a.currency.id === currencyId)
+                return (
+                  <Currency key={currencyId}>
+                    <Text color="dark" ff="Open Sans|SemiBold" fontSize={4}>
+                      <Trans
+                        i18nKey="migrateAccounts.overview.currency"
+                        count={accounts.length}
+                        values={{
+                          currency: accounts[0].currency.name,
+                          accounts: accounts.length,
+                        }}
+                      />
+                    </Text>
+                    <AccountsWrapper>
+                      {accounts.map(account => (
+                        <AccountRow
+                          isReadonly
+                          key={account.id}
+                          account={account}
+                          accountName={account.name}
+                        />
+                      ))}
+                    </AccountsWrapper>
+                  </Currency>
+                )
+              })}
+            </Wrapper>
+          )}
+        </>
+      ) : (
+        <>
+          <Desc>
+            <Text color="graphite" ff="Open Sans|Regular" fontSize={4}>
+              <Trans
+                i18nKey={`migrateAccounts.overview.${
+                  migratedAccountNames.length > 1 ? 'successDescPlu' : 'successDesc'
+                }`}
+                values={{
+                  assets: migratedAccountNames.join(' & '),
+                }}
+              />
+            </Text>
+          </Desc>
+          <MobileWrapper>
+            <MobileContent>
+              <MobileIllu alt="" src={i('mobile-export.svg')} />
+              <MobileTextWrapper>
+                <Text ff="Museo Sans|Regular" fontSize={5} color="dark">
+                  <Trans i18nKey="migrateAccounts.overview.mobileTitle" />
+                </Text>
+                <MobileDesc>
+                  <Text color="graphite" ff="Open Sans|Regular" fontSize={4}>
+                    <Trans i18nKey="migrateAccounts.overview.mobileDesc" />
+                  </Text>
+                </MobileDesc>
+              </MobileTextWrapper>
+            </MobileContent>
+            <MobileCTA primary onClick={() => setExporting(true)}>
+              <Trans i18nKey="migrateAccounts.overview.mobileCTA" />
+            </MobileCTA>
+          </MobileWrapper>
+        </>
+      )}
+    </Box>
+  )
+}
 
 export default StepOverview
 
