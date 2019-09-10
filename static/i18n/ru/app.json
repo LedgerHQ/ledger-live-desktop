@@ -30,6 +30,7 @@
     "lock": "Заблокировать экран",
     "showMore": "Показать больше",
     "max": "Макс.",
+    "new": "New",
     "back": "Назад",
     "reset": "Сбросить",
     "retry": "Повторить попытку",
@@ -84,6 +85,11 @@
     "second_plural": "Seconds",
     "hour": "Час",
     "hour_plural": "Hours",
+    "range": {
+      "week": "1W",
+      "month": "1M",
+      "year": "1Y"
+    },
     "since": {
       "day": "прошедший день",
       "week": "прошедшая неделя",
@@ -519,7 +525,22 @@
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Asset distribution ({{count}})"
+    "header": "Asset distribution ({{count}})",
+    "notice": "You can now click on assets for more details!"
+  },
+  "accountDistribution": {
+    "account": "Account",
+    "price": "Price",
+    "distribution": "Distribution",
+    "amount": "Amount",
+    "value": "Value",
+    "showAll": "Show all",
+    "showLess": "Show less",
+    "header": "Account distribution ({{count}})",
+    "notice": "You can right-click on an account to see its options!"
+  },
+  "asset": {
+    "notice": "Summary of all {{currency}} accounts"
   },
   "settings": {
     "title": "Настройки",
