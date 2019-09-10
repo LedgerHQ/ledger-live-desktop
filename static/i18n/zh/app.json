@@ -30,6 +30,7 @@
     "lock": "锁定",
     "showMore": "显示更多",
     "max": "最大值",
+    "new": "New",
     "back": "返回",
     "reset": "重置",
     "retry": "重试",
@@ -84,6 +85,11 @@
     "second_plural": "Seconds",
     "hour": "时",
     "hour_plural": "Hours",
+    "range": {
+      "week": "1W",
+      "month": "1M",
+      "year": "1Y"
+    },
     "since": {
       "day": "昨天",
       "week": "上周",
@@ -519,7 +525,22 @@
     "value": "价值",
     "showAll": "显示全部",
     "showLess": "隐藏显示",
-    "header": "资产分布 ({{count}})"
+    "header": "资产分布 ({{count}})",
+    "notice": "You can now click on assets for more details!"
+  },
+  "accountDistribution": {
+    "account": "Account",
+    "price": "Price",
+    "distribution": "Distribution",
+    "amount": "Amount",
+    "value": "Value",
+    "showAll": "Show all",
+    "showLess": "Show less",
+    "header": "Account distribution ({{count}})",
+    "notice": "You can right-click on an account to see its options!"
+  },
+  "asset": {
+    "notice": "Summary of all {{currency}} accounts"
   },
   "settings": {
     "title": "设置",
