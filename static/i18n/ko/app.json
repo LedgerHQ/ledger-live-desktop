@@ -30,6 +30,7 @@
     "lock": "잠금",
     "showMore": "자세히 표시",
     "max": "최대",
+    "new": "New",
     "back": "뒤로",
     "reset": "재설정",
     "retry": "다시 시도",
@@ -84,6 +85,11 @@
     "second_plural": "Seconds",
     "hour": "시",
     "hour_plural": "Hours",
+    "range": {
+      "week": "1W",
+      "month": "1M",
+      "year": "1Y"
+    },
     "since": {
       "day": "전날",
       "week": "지난 주",
@@ -519,7 +525,22 @@
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Asset distribution ({{count}})"
+    "header": "Asset distribution ({{count}})",
+    "notice": "You can now click on assets for more details!"
+  },
+  "accountDistribution": {
+    "account": "Account",
+    "price": "Price",
+    "distribution": "Distribution",
+    "amount": "Amount",
+    "value": "Value",
+    "showAll": "Show all",
+    "showLess": "Show less",
+    "header": "Account distribution ({{count}})",
+    "notice": "You can right-click on an account to see its options!"
+  },
+  "asset": {
+    "notice": "Summary of all {{currency}} accounts"
   },
   "settings": {
     "title": "설정",
