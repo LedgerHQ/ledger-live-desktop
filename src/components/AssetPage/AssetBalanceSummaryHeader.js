@@ -5,11 +5,16 @@ import { BigNumber } from 'bignumber.js'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
-import type { Currency, ValueChange, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
-
+import type {
+  Currency,
+  ValueChange,
+  CryptoCurrency,
+  TokenCurrency,
+  Unit,
+} from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
-import { setSelectedTimeRange } from 'actions/settings'
+import { setSelectedTimeRange, setCountervalueFirst } from 'actions/settings'
 import type { TimeRange } from 'reducers/settings'
 
 import { BalanceTotal, BalanceDiff } from 'components/BalanceInfos'
@@ -30,11 +35,12 @@ type Props = {
   },
   counterValue: Currency,
   t: T,
-  account: Account | TokenAccount,
   setSelectedTimeRange: TimeRange => *,
   selectedTimeRange: TimeRange,
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,
+  currency: CryptoCurrency | TokenCurrency,
+  unit: Unit,
 }
 
 const Wrapper = styled(Box)`
@@ -72,29 +78,29 @@ const SwapButton = styled(Tabbable).attrs({
 
 const mapDispatchToProps = {
   setSelectedTimeRange,
+  setCountervalueFirst,
 }
 
-class AccountBalanceSummaryHeader extends PureComponent<Props> {
+class AssetBalanceSummaryHeader extends PureComponent<Props> {
   handleChangeSelectedTime = item => {
     this.props.setSelectedTimeRange(item.key)
   }
 
   render() {
     const {
-      account,
       t,
       counterValue,
       selectedTimeRange,
       isAvailable,
-      cryptoChange,
       last,
+      cryptoChange,
       countervalueChange,
       countervalueFirst,
       setCountervalueFirst,
+      currency,
+      unit,
     } = this.props
 
-    const currency = account.type === 'Account' ? account.currency : account.token
-    const unit = account.type === 'Account' ? account.unit : currency.units[0]
     const cvUnit = counterValue.units[0]
     const data = [
       { valueChange: cryptoChange, balance: last.value, unit },
@@ -182,4 +188,4 @@ export default compose(
     mapDispatchToProps,
   ),
   translate(), // FIXME t() is not even needed directly here. should be underlying component responsability to inject it
-)(AccountBalanceSummaryHeader)
+)(AssetBalanceSummaryHeader)

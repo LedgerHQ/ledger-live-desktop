@@ -2,42 +2,52 @@
 
 import React, { Fragment, PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { balanceHistoryWithCountervalueSelector } from 'actions/portfolio'
 import { BigNumber } from 'bignumber.js'
-import moment from 'moment'
 import { formatShort } from '@ledgerhq/live-common/lib/currencies'
 import type {
+  CryptoCurrency,
   Currency,
-  Account,
-  TokenAccount,
   PortfolioRange,
-  AccountPortfolio,
+  TokenCurrency,
+  Unit,
 } from '@ledgerhq/live-common/lib/types'
 
 import Chart from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
+import moment from 'moment'
 import FormattedVal from 'components/base/FormattedVal'
-import AccountBalanceSummaryHeader from './AccountBalanceSummaryHeader'
+import { createStructuredSelector } from 'reselect'
+import { currencyPortfolioSelector } from 'actions/portfolio'
+import AssetBalanceSummaryHeader from './AssetBalanceSummaryHeader'
 
 type Props = {
   counterValue: Currency,
   chartColor: string,
   chartId: string,
-  account: Account | TokenAccount,
-  parentAccount: ?Account,
-  balanceHistoryWithCountervalue: AccountPortfolio,
+  currency: CryptoCurrency | TokenCurrency,
+  unit: Unit,
   range: PortfolioRange,
   countervalueFirst: boolean,
-  setCountervalueFirst: boolean => void,
+  portfolio: *,
 }
 
-class AccountBalanceSummary extends PureComponent<Props> {
+const mapStateToProps = createStructuredSelector({
+  portfolio: currencyPortfolioSelector,
+})
+
+class BalanceSummary extends PureComponent<Props> {
+  // $FlowFixMe
+  mapValueCounterValue = d => d.countervalue.toNumber()
+  mapValueCryptoValue = d => d.value.toNumber()
+
   renderTooltip = d => {
-    const { account, counterValue, balanceHistoryWithCountervalue, countervalueFirst } = this.props
-    const displayCountervalue =
-      countervalueFirst && balanceHistoryWithCountervalue.countervalueAvailable
-    const unit = account.type === 'Account' ? account.unit : account.token.units[0]
+    const {
+      unit,
+      counterValue,
+      portfolio: { history },
+      countervalueFirst,
+    } = this.props
+    const displayCountervalue = countervalueFirst && history.countervalueAvailable
     const data = [{ val: d.value, unit }, { val: d.countervalue, unit: counterValue.units[0] }]
     if (displayCountervalue) data.reverse()
     return (
@@ -51,57 +61,42 @@ class AccountBalanceSummary extends PureComponent<Props> {
     )
   }
 
-  renderTickYCryptoValue = val => {
-    const { account } = this.props
-    const unit = account.type === 'Account' ? account.unit : account.token.units[0]
-    return formatShort(unit, BigNumber(val))
-  }
-
+  renderTickYCryptoValue = val => formatShort(this.props.unit, BigNumber(val))
   renderTickYCounterValue = val => formatShort(this.props.counterValue.units[0], BigNumber(val))
-
-  // $FlowFixMe
-  mapValueCounterValue = d => d.countervalue.toNumber()
-
-  mapValueCryptoValue = d => d.value.toNumber()
 
   render() {
     const {
-      account,
-      balanceHistoryWithCountervalue: {
-        history,
-        countervalueAvailable,
-        countervalueChange,
-        cryptoChange,
-      },
       range,
       chartColor,
       chartId,
-      counterValue,
       countervalueFirst,
-      setCountervalueFirst,
+      portfolio,
+      counterValue,
+      currency,
+      unit,
     } = this.props
-    const displayCountervalue = countervalueFirst && countervalueAvailable
+    const displayCountervalue = countervalueFirst
     return (
       <Card p={0} py={5}>
         <Box px={6}>
-          <AccountBalanceSummaryHeader
-            account={account}
+          <AssetBalanceSummaryHeader
+            currency={currency}
+            unit={unit}
             counterValue={counterValue}
             selectedTimeRange={range}
-            countervalueChange={countervalueChange}
-            cryptoChange={cryptoChange}
-            last={history[history.length - 1]}
-            isAvailable={countervalueAvailable}
+            countervalueChange={portfolio.countervalueChange}
+            cryptoChange={portfolio.cryptoChange}
+            last={portfolio.history[portfolio.history.length - 1]}
+            isAvailable={portfolio.countervalueAvailable}
             countervalueFirst={displayCountervalue}
-            setCountervalueFirst={setCountervalueFirst}
           />
         </Box>
 
-        <Box ff="Open Sans" fontSize={4} color="graphite" pt={5}>
+        <Box ff="Open Sans" fontSize={4} color="graphite" pt={6}>
           <Chart
             id={chartId}
             color={chartColor}
-            data={history}
+            data={portfolio.history}
             height={200}
             tickXScale={range}
             mapValue={displayCountervalue ? this.mapValueCounterValue : this.mapValueCryptoValue}
@@ -117,8 +112,4 @@ class AccountBalanceSummary extends PureComponent<Props> {
   }
 }
 
-export default connect(
-  createStructuredSelector({
-    balanceHistoryWithCountervalue: balanceHistoryWithCountervalueSelector,
-  }),
-)(AccountBalanceSummary)
+export default connect(mapStateToProps)(BalanceSummary)

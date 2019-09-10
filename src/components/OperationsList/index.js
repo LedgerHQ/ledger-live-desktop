@@ -27,6 +27,8 @@ import Box, { Card } from 'components/base/Box'
 import Text from 'components/base/Text'
 import Track from 'analytics/Track'
 import { track } from 'analytics/segment'
+import { createStructuredSelector } from 'reselect'
+import { accountsSelector } from 'reducers/accounts'
 
 import SectionTitle from './SectionTitle'
 import OperationC from './Operation'
@@ -53,7 +55,8 @@ const mapDispatchToProps = {
 type Props = {
   account: Account | TokenAccount,
   parentAccount?: ?Account,
-  accounts: Account[],
+  accounts: (Account | TokenAccount)[],
+  allAccounts: (Account | TokenAccount)[],
   openModal: (string, Object) => *,
   t: T,
   withAccount?: boolean,
@@ -98,6 +101,7 @@ export class OperationsList extends PureComponent<Props, State> {
       account,
       parentAccount,
       accounts,
+      allAccounts,
       t,
       title,
       withAccount,
@@ -135,7 +139,9 @@ export class OperationsList extends PureComponent<Props, State> {
                 }
                 let parentAccount
                 if (account.type === 'TokenAccount') {
-                  const pa = accountsMap[account.parentId]
+                  const pa =
+                    accountsMap[account.parentId] ||
+                    allAccounts.find(a => a.id === account.parentId)
                   if (pa && pa.type === 'Account') {
                     parentAccount = pa
                   }
@@ -187,7 +193,9 @@ export class OperationsList extends PureComponent<Props, State> {
 export default compose(
   translate(),
   connect(
-    null,
+    createStructuredSelector({
+      allAccounts: accountsSelector,
+    }),
     mapDispatchToProps,
   ),
 )(OperationsList)

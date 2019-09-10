@@ -8,11 +8,9 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { compose } from 'redux'
 import { createStructuredSelector } from 'reselect'
-import { accountsSelector } from 'reducers/accounts'
-import groupBy from 'lodash/groupBy'
+import { migratableAccountsSelector, accountsSelector } from 'reducers/accounts'
 import logger from 'logger'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
-import { canBeMigrated } from '@ledgerhq/live-common/lib/account'
 import type { Account } from '@ledgerhq/live-common/lib/types/account'
 import type { CryptoCurrency } from '@ledgerhq/live-common/src/types'
 import type { Device } from 'types/common'
@@ -56,7 +54,8 @@ type ScanStatus = 'idle' | 'scanning' | 'error' | 'finished' | 'finished-empty'
 export type StepProps = DefaultStepProps & {
   starredAccountIds: string[],
   replaceStarAccountId: ({ oldId: string, newId: string }) => void,
-  migratableAccounts: { [key: string]: Account[] },
+  currencyIds: string[],
+  migratableAccounts: Account[],
   migratedAccounts: { [key: string]: Account[] },
   err: ?Error,
   accounts: Account[],
@@ -111,11 +110,10 @@ class MigrateAccounts extends PureComponent<*, State> {
     this.setState({ scanStatus, err })
   }
   getNextCurrency = () => {
-    const { migratableAccounts } = this.props
+    const { currencyIds } = this.props
     this.hideLoopNotice = false
     const { currency } = this.state
-    const ids = Object.keys(migratableAccounts)
-    const nextCurrencyId = ids[ids.indexOf(currency && currency.id) + 1]
+    const nextCurrencyId = currencyIds[currencyIds.indexOf(currency && currency.id) + 1]
     return (nextCurrencyId && getCryptoCurrencyById(nextCurrencyId)) || null
   }
   handleMoveToNextCurrency = (forceNull: boolean = false) => {
@@ -139,7 +137,7 @@ class MigrateAccounts extends PureComponent<*, State> {
     const {
       device,
       migratableAccounts,
-      totalMigratableAccounts,
+      currencyIds,
       accounts,
       starredAccountIds,
       replaceAccounts,
@@ -152,7 +150,7 @@ class MigrateAccounts extends PureComponent<*, State> {
       replaceAccounts,
       replaceStarAccountId,
       migratableAccounts,
-      totalMigratableAccounts,
+      currencyIds,
       accounts,
       device,
       currency,
@@ -198,9 +196,11 @@ const mapStateToProps = createStructuredSelector({
   device: getCurrentDevice,
   accounts: accountsSelector,
   starredAccountIds: starredAccountIdsSelector,
-  totalMigratableAccounts: state => accountsSelector(state).filter(canBeMigrated).length,
-  migratableAccounts: state =>
-    groupBy(accountsSelector(state).filter(canBeMigrated), 'currency.id'),
+  migratableAccounts: migratableAccountsSelector,
+  currencyIds: state =>
+    migratableAccountsSelector(state)
+      .reduce((c, a) => (c.includes(a.currency.id) ? c : [...c, a.currency.id]), [])
+      .sort(),
 })
 
 const mapDispatchToProps = {

@@ -9,6 +9,7 @@ import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
+import PillsDaysCount from 'components/PillsDaysCount'
 import { PlaceholderLine } from './Placeholder'
 
 const Sub = styled(Box).attrs({
@@ -38,42 +39,39 @@ type Props = {
   unit: Unit,
 } & BalanceSinceProps
 
-export function BalanceSincePercent(props: BalanceSinceProps) {
-  const { t, totalBalance, valueChange, since, isAvailable, ...otherProps } = props
-  if (!valueChange.percentage) return null
-  return (
-    <Box {...otherProps}>
-      <FormattedVal
-        isPercent
-        val={valueChange.percentage.times(100).integerValue()}
-        color="dark"
-        animateTicker
-        fontSize={7}
-        withIcon
-      />
-      {!isAvailable ? <PlaceholderLine dark width={60} /> : <Sub>{t(`time.since.${since}`)}</Sub>}
-    </Box>
-  )
+type BalanceInfoProps = Props & {
+  handleChangeSelectedTime: any => void,
 }
 
-export function BalanceSinceDiff(props: Props) {
+export function BalanceDiff(props: Props) {
   const { t, totalBalance, valueChange, since, unit, isAvailable, ...otherProps } = props
+
+  if (!isAvailable) return null
+
   return (
-    <Box {...otherProps}>
-      {!isAvailable ? (
-        <PlaceholderLine width={100} />
-      ) : (
+    <Box horizontal {...otherProps}>
+      <Box horizontal alignItems="center" style={{ lineHeight: 1.2, fontSize: 20 }}>
+        {valueChange.percentage && (
+          <FormattedVal
+            isPercent
+            animateTicker
+            val={valueChange.percentage.times(100).integerValue()}
+            inline
+            withIcon
+          />
+        )}
         <FormattedVal
-          color="dark"
-          animateTicker
           unit={unit}
-          fontSize={7}
-          showCode
           val={valueChange.value}
-          withIcon
+          prefix={valueChange.percentage && ' ('}
+          suffix={valueChange.percentage && ')'}
+          withIcon={!valueChange.percentage}
+          alwaysShowSign={!!valueChange.percentage}
+          showCode
+          animateTicker
+          inline
         />
-      )}
-      {!isAvailable ? <PlaceholderLine dark width={60} /> : <Sub>{t(`time.since.${since}`)}</Sub>}
+      </Box>
     </Box>
   )
 }
@@ -95,7 +93,7 @@ export function BalanceTotal(props: BalanceTotalProps) {
           val={totalBalance}
         />
       )}
-      {!isAvailable ? <PlaceholderLine dark width={50} /> : children}
+      {isAvailable && children}
     </Box>
   )
 }
@@ -105,31 +103,27 @@ BalanceTotal.defaultProps = {
   unit: undefined,
 }
 
-function BalanceInfos(props: Props) {
-  const { t, totalBalance, since, valueChange, isAvailable, unit } = props
+function BalanceInfos(props: BalanceInfoProps) {
+  const { t, totalBalance, since, handleChangeSelectedTime, valueChange, isAvailable, unit } = props
 
   return (
-    <Box horizontal alignItems="center" flow={7}>
-      <BalanceTotal unit={unit} isAvailable={isAvailable} totalBalance={totalBalance}>
-        <Sub>{t('dashboard.totalBalance')}</Sub>
-      </BalanceTotal>
-      <BalanceSincePercent
-        alignItems="flex-end"
-        totalBalance={totalBalance}
-        isAvailable={isAvailable}
-        valueChange={valueChange}
-        since={since}
-        t={t}
-      />
-      <BalanceSinceDiff
-        unit={unit}
-        alignItems="flex-end"
-        isAvailable={isAvailable}
-        totalBalance={totalBalance}
-        valueChange={valueChange}
-        since={since}
-        t={t}
-      />
+    <Box flow={5}>
+      <Box horizontal>
+        <BalanceTotal unit={unit} isAvailable={isAvailable} totalBalance={totalBalance}>
+          <Sub>{t('dashboard.totalBalance')}</Sub>
+        </BalanceTotal>
+      </Box>
+      <Box horizontal alignItems="center" justifyContent="space-between">
+        <BalanceDiff
+          t={t}
+          totalBalance={totalBalance}
+          valueChange={valueChange}
+          since={since}
+          unit={unit}
+          isAvailable={isAvailable}
+        />
+        <PillsDaysCount selected={since} onChange={handleChangeSelectedTime} />
+      </Box>
     </Box>
   )
 }

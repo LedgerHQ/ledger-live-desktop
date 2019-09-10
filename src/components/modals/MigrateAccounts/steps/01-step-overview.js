@@ -4,13 +4,12 @@ import React, { Fragment, useState } from 'react'
 import styled from 'styled-components'
 
 import { Trans } from 'react-i18next'
+import reduce from 'lodash/reduce'
 import TrackPage from 'analytics/TrackPage'
+import SuccessAnimatedIcon from 'components/base/SuccessAnimatedIcon'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Text from 'components/base/Text'
-import reduce from 'lodash/reduce'
-import SuccessAnimatedIcon from 'components/base/SuccessAnimatedIcon'
-
 import IconExclamationCircle from 'icons/ExclamationCircle'
 import IconExternalLink from 'icons/ExternalLink'
 import type { StepProps } from '../index'
@@ -23,11 +22,7 @@ import { rgba } from '../../../../styles/helpers'
 import ExportAccountsModal from '../../../SettingsPage/ExportAccountsModal'
 
 const getAllImportedAccounts = accountsByAsset =>
-  reduce(
-    accountsByAsset,
-    (acc, accounts) => [...acc, ...accounts],
-    [],
-  )
+  reduce(accountsByAsset, (acc, accounts) => [...acc, ...accounts], [])
 
 const Wrapper = styled.div`
   width: 100%;
@@ -85,7 +80,6 @@ const MobileContent = styled.div`
   display: flex;
   flex-direction: row;
 `
-
 const Currency = styled.div``
 const Logo = styled.div`
   margin-bottom: 15px;
@@ -97,7 +91,6 @@ const Title = styled.div`
 const MobileDesc = styled.div`
   margin-top: 6px;
 `
-
 const Footer = styled.div`
   display: flex;
   flex: 1;
@@ -171,10 +164,9 @@ const TextWrap = styled(Box)`
 const StepOverview = ({
   migratableAccounts,
   currency,
-  totalMigratableAccounts,
+  currencyIds,
   migratedAccounts,
 }: StepProps) => {
-  const migratableCurrencyIds = Object.keys(migratableAccounts)
   const migratedAccountNames = Object.keys(migratedAccounts)
   const [isExporting, setExporting] = useState(false)
 
@@ -185,10 +177,11 @@ const StepOverview = ({
         isOpen={isExporting}
         accounts={getAllImportedAccounts(migratedAccounts)}
       />
+
       <TrackPage category="MigrateAccounts" name="Step1" />
 
       <Logo>
-        {totalMigratableAccounts ? (
+        {migratableAccounts.length ? (
           <LedgerLiveLogo
             width="58px"
             height="58px"
@@ -202,14 +195,14 @@ const StepOverview = ({
         <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
           <Trans
             i18nKey={
-              !totalMigratableAccounts
+              !migratableAccounts.length
                 ? 'migrateAccounts.overview.successTitle'
                 : 'migrateAccounts.overview.title'
             }
           />
         </Text>
       </Title>
-      {totalMigratableAccounts ? (
+      {migratableAccounts.length ? (
         <>
           <Text color="graphite" ff="Open Sans|Regular" fontSize={4}>
             <Trans i18nKey="migrateAccounts.overview.description" />
@@ -224,8 +217,8 @@ const StepOverview = ({
                     <Text>
                       <Trans
                         i18nKey="migrateAccounts.overview.pendingDevices"
-                        count={totalMigratableAccounts}
-                        values={{ totalMigratableAccounts }}
+                        count={migratableAccounts.length}
+                        values={{ totalMigratableAccounts: migratableAccounts.length }}
                       />
                     </Text>
                     <HelpLink onClick={() => openURL(urls.migrateAccounts)}>
@@ -237,8 +230,8 @@ const StepOverview = ({
                   </TextWrap>
                 </NextDeviceWarning>
               ) : null}
-              {migratableCurrencyIds.map(currencyId => {
-                const accounts = migratableAccounts[currencyId]
+              {currencyIds.map(currencyId => {
+                const accounts = migratableAccounts.filter(a => a.currency.id === currencyId)
                 return (
                   <Currency key={currencyId}>
                     <Text color="dark" ff="Open Sans|SemiBold" fontSize={4}>
@@ -310,15 +303,15 @@ export default StepOverview
 export const StepOverviewFooter = ({
   transitionTo,
   t,
+  currencyIds,
   migratableAccounts,
-  totalMigratableAccounts,
   currency,
   moveToNextCurrency,
   hideLoopNotice,
   onCloseModal,
 }: StepProps) => (
   <Fragment>
-    {!totalMigratableAccounts ? (
+    {!migratableAccounts.length ? (
       <FooterContent>
         <Button primary onClick={onCloseModal}>
           {t('common.done')}
@@ -349,7 +342,7 @@ export const StepOverviewFooter = ({
         </Box>
         <Box horizontal align="center" justify="flex-end" flow={2}>
           <Button
-            disabled={!Object.keys(migratableAccounts).length}
+            disabled={!currencyIds.length}
             primary
             onClick={async () => {
               transitionTo('device')
