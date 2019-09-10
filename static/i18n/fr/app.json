@@ -30,6 +30,7 @@
     "lock": "Verrouiller",
     "showMore": "Afficher plus",
     "max": "Maximum",
+    "new": "New",
     "back": "Retour",
     "reset": "Réinitialiser",
     "retry": "Réessayer",
@@ -84,6 +85,11 @@
     "second_plural": "Secondes",
     "hour": "Heure",
     "hour_plural": "Heures",
+    "range": {
+      "week": "1W",
+      "month": "1M",
+      "year": "1Y"
+    },
     "since": {
       "day": "hier",
       "week": "la semaine dernière",
@@ -519,7 +525,22 @@
     "value": "Valeur",
     "showAll": "Afficher tout",
     "showLess": "Afficher moins",
-    "header": "Distribution d'actifs ({{count}})"
+    "header": "Distribution d'actifs ({{count}})",
+    "notice": "You can now click on assets for more details!"
+  },
+  "accountDistribution": {
+    "account": "Account",
+    "price": "Price",
+    "distribution": "Distribution",
+    "amount": "Amount",
+    "value": "Value",
+    "showAll": "Show all",
+    "showLess": "Show less",
+    "header": "Account distribution ({{count}})",
+    "notice": "You can right-click on an account to see its options!"
+  },
+  "asset": {
+    "notice": "Summary of all {{currency}} accounts"
   },
   "settings": {
     "title": "Paramètres",
