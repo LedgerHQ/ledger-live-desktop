@@ -30,7 +30,7 @@
     "lock": "Verrouiller",
     "showMore": "Afficher plus",
     "max": "Maximum",
-    "new": "New",
+    "new": "Nouveau",
     "back": "Retour",
     "reset": "Réinitialiser",
     "retry": "Réessayer",
@@ -46,7 +46,7 @@
     "copyAddress": "Copier",
     "copied": "Copié",
     "addressCopied": "Adresse copiée",
-    "experimentalFeature": "Experimental",
+    "experimentalFeature": "Expérimental",
     "lockScreen": {
       "title": "Bienvenue",
       "subTitle": null,
@@ -86,9 +86,9 @@
     "hour": "Heure",
     "hour_plural": "Heures",
     "range": {
-      "week": "1W",
+      "week": "1S",
       "month": "1M",
-      "year": "1Y"
+      "year": "1A"
     },
     "since": {
       "day": "hier",
@@ -119,12 +119,12 @@
   },
   "account": {
     "lastOperations": "Dernières opérations",
-    "contractAddress": "Contract:",
-    "openInExplorer": "Open in explorer",
+    "contractAddress": "Contrat :",
+    "openInExplorer": "Ouvrir dans l'explorateur de fichiers",
     "emptyState": {
       "title": "Vous n’avez pas encore de crypto-actifs ?",
       "desc": "Assurez-vous que l’application <1><0>{{managerAppName}}</0></1> est installée et commencez à recevoir.",
-      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
+      "descToken": "Assurez-vous que l'application <1><0>{{managerAppName}}</0></1> soit installée pour recevoir des <3><0>{{ticker}}</0></3> et des tokens<5><0>{{tokenList}}</0></5>",
       "buttons": {
         "receiveFunds": "Recevoir"
       }
@@ -162,8 +162,8 @@
     },
     "optionsMenu": {
       "title": "Options",
-      "exportOperations": "Export operation history",
-      "exportToMobile": "Export to mobile"
+      "exportOperations": "Exporter l'historique des transactions",
+      "exportToMobile": "Exporter vers l'app mobile"
     },
     "contextMenu": {
       "star": "Favori",
@@ -174,7 +174,7 @@
   },
   "banners": {
     "promoteMobile": "Profitez de l’expérience Ledger Live, maintenant disponible sur mobile avec {{productName}}",
-    "migrate": "Ledger Live accounts update available",
+    "migrate": "Mise à jour des comptes Ledger Live disponible",
     "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge"
   },
   "dashboard": {
@@ -242,7 +242,7 @@
     "thorswap": "ThorSwap est un marché de crypto-actifs instantané, sécurisé et équitable qui s'appuie sur les technologies décentralisées d’Atomic Swap. Il s’agit du moyen le plus pratique pour se lancer dans le trading, aucune inscription, aucun formulaire à remplir pour les transactions de faible montant.",
     "bitpanda": "Bitpanda est le service de courtage leader en Europe pour acheter et revendre Bitcoins, Ethereum, IOTA et bien d’autres. Déposez de l’argent avec votre carte bancaire, SOFORT-Transfer, NETELLER et d’autres options.",
     "exmo": "Créé en 2013 et basé à Londres, Kiev, Barcelone et Moscou, EXMO est la plateforme d'échange numéro 1 en Europe de l’Est et l’une des plus grandes plateformes d'échange mondiales en termes de volume et de liquidités.",
-    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure and intuitive platform to buy and sell Bitcoin, Litecoin, Ethereum, XRP and other digital assets. Other key features include advanced trading, free deposits, and an institutional-grade custody solution via Ledger Vault."
+    "ndax": "NDAX est une plateforme Canadienne d'échange de cryptomonnaies, qui offre une plateforme réglementée, sécurisée et intuitive, qui permet d’acheter et de vendre des biens numériques, Bitcoin, Litecoin, Ethereum, XRP et autres."
   },
   "genuinecheck": {
     "modal": {
@@ -252,7 +252,7 @@
   },
   "tokensList": {
     "title": "Tokens",
-    "cta": "Add token",
+    "cta": "Ajouter un token",
     "placeholder": "Pour ajouter des tokens, envoyez-les simplement sur votre adresse Ethereum.",
     "link": "En savoir plus",
     "seeTokens": "Voir les ({{tokenCount}}) tokens",
@@ -263,24 +263,24 @@
   },
   "migrateAccounts": {
     "overview": {
-      "title": "Ledger Live accounts update",
-      "done": "Ledger Live accounts update completed",
-      "successTitle": "Accounts updated successfully",
-      "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
-      "successDesc": "Your {{assets}} account is now updated and ready to use",
-      "mobileTitle": "Export accounts to mobile",
-      "mobileDesc": "Click the button below to export your updated accounts to the Ledger Live mobile app.",
-      "mobileCTA": "Export to mobile",
+      "title": "Mise à jour des comptes Ledger Live",
+      "done": "Mise à jour des comptes Ledger Live terminée",
+      "successTitle": "Comptes mis à jour avec succès",
+      "successDescPlu": "Vos comptes {{assets}} sont maintenant mis à jour et prêts à être utilisés",
+      "successDesc": "Votre compte {{assets}} est maintenant mis à jour et prêt à utiliser",
+      "mobileTitle": "Exporter les comptes vers le mobile",
+      "mobileDesc": "Cliquez sur le bouton ci-dessous pour exporter vos comptes mis à jour vers Ledger Live Mobile.",
+      "mobileCTA": "Exporter vers l'app mobile",
       "description": "Les nouvelles fonctionnalités de Ledger Live nécessitent une mise à jour de vos comptes.",
-      "currency": "1 {{currency}} account needs to be updated:",
-      "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
-      "footer": "You need your Ledger Device to complete the update",
-      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
-      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
+      "currency": "1 compte {{currency}} doit être mis à jour :",
+      "currency_plural": "{{count}} comptes {{currency}} doivent être mis à jour :",
+      "footer": "Vous avez besoin de votre appareil Ledger pour terminer la mise à jour",
+      "pendingDevices": "1 compte n'a pas pu être mis à jour. Veuillez connecter l'appareil associé au compte ci-dessous",
+      "pendingDevices_plural": "{{totalMigratableAccounts}} comptes n'ont pas pu être mis à jour. Veuillez connecter l'appareil associé au compte ci-dessous",
       "doItLaterBtn": "Plus tard"
     },
     "connectDevice": {
-      "title": "{{currencyName}} update",
+      "title": "Mise à jour de {{currencyName}}",
       "description": ""
     },
     "progress": {
@@ -298,8 +298,8 @@
       }
     },
     "cta": {
-      "startUpdate": "Start update",
-      "nextCurrency": "Continue with {{currency}} update"
+      "startUpdate": "Lancer la m. à j.",
+      "nextCurrency": "Continuer la mise à jour de {{currency}}"
     }
   },
   "addAccounts": {
@@ -366,20 +366,20 @@
     "viewOperation": "Afficher dans l'explorer",
     "showMore": "Afficher plus de {{recipients}}",
     "showLess": "Afficher moins",
-    "tokenOperations": "Token operations",
-    "tokenTooltip": "This operation is related to the following token operations",
-    "internalOperations": "Internal operations",
-    "internalOpTooltip": "This operation has internal operations",
+    "tokenOperations": "Opérations de tokens",
+    "tokenTooltip": "Cette opération est liée aux opérations sur tokens suivants",
+    "internalOperations": "Opérations internes",
+    "internalOpTooltip": "Cette opération a des opérations internes",
     "details": "Détails sur {{ currency }}",
-    "multipleAddresses": "Why multiple addresses?"
+    "multipleAddresses": "Pourquoi plusieurs adresses ?"
   },
   "operationList": {
     "noMoreOperations": "C'est tout."
   },
   "manager": {
     "yourDeviceIsGenuine": "Votre appareil est authentique.",
-    "goToAccounts": "Go to accounts",
-    "intallEthApp": "Install Ethereum app",
+    "goToAccounts": "Accéder aux comptes",
+    "intallEthApp": "Installer l'application Ethereum",
     "apps": {
       "install": "Installer",
       "all": "Catalogue d'applications",
@@ -395,8 +395,8 @@
       "installed": "Application installée",
       "uninstalled": "Application désinstallée",
       "addAccount": "Ajouter un compte {{name}}",
-      "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
-      "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>"
+      "noAppNeededForToken": "Installer l'app {{appName}} pour {{tokenName}}",
+      "tokenAppDisclaimer": "{{tokenName}} est un token {{tokenType}} utilisant l'application {{appName}} . Pour gérer {{tokenName}}, <1>installer l'application </1> {{appName}} et envoyer les jetons <3> sur votre compte {{appName}} </3>"
     },
     "firmware": {
       "installed": "Version {{version}} du firmware",
@@ -443,7 +443,7 @@
         "third": "3. Désinstaller toutes les applications",
         "openLive": "Ouvrez le Manager dans Ledger Live.",
         "uninstall": "Cliquez sur l'icône de corbeille grise pour toutes les applications actuellement installées sur le {{deviceName}}. Cela permet de faire de la place pour l'installateur du firmware.",
-        "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secured on your Recovery sheet."
+        "disclaimer": "Remarque : Vos fonds ne sont pas affectés par cette opération, les clés privées pour accéder à vos actifs de crypto dans la blockchain restent sécurisées sur votre feuille de récupération."
       }
     },
     "title": "Manager",
@@ -536,21 +536,21 @@
     "showAll": "Afficher tout",
     "showLess": "Afficher moins",
     "header": "Répartition des actifs ({{count}})",
-    "notice": "You can now click on assets for more details!"
+    "notice": "Vous pouvez maintenant cliquer sur les actifs pour plus de détails !"
   },
   "accountDistribution": {
-    "account": "Account",
-    "price": "Price",
-    "distribution": "Distribution",
-    "amount": "Amount",
-    "value": "Value",
-    "showAll": "Show all",
-    "showLess": "Show less",
-    "header": "Account distribution ({{count}})",
-    "notice": "You can right-click on an account to see its options!"
+    "account": "Compte",
+    "price": "Prix",
+    "distribution": "Répartition",
+    "amount": "Montant",
+    "value": "Valeur",
+    "showAll": "Tout afficher",
+    "showLess": "Afficher moins",
+    "header": "Répartition des comptes ({{count}})",
+    "notice": "Vous pouvez faire un click droit sur un compte pour voir ses options !"
   },
   "asset": {
-    "notice": "Summary of all {{currency}} accounts"
+    "notice": "Résumé de tous les comptes {{currency}}"
   },
   "settings": {
     "title": "Paramètres",
@@ -1217,8 +1217,8 @@
       "description": "Veuillez contacter l’assistance Ledger"
     },
     "MCUNotGenuineToDashboard": {
-      "title": "Access dashboard to update",
-      "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
+      "title": "Accéder au tableau de bord pour effectuer la mise à jour",
+      "description": "Veuillez redémarrer l'appareil sans appuyer sur un bouton. Appuyez ensuite trois fois sur les deux boutons de l'appareil pour accéder au tableau de bord. Enfin, ouvrez le Gestionnaire pour mettre à jour le firmware."
     }
   }
 }
