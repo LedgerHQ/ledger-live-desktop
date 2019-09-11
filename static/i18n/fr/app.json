@@ -535,7 +535,7 @@
     "value": "Valeur",
     "showAll": "Afficher tout",
     "showLess": "Afficher moins",
-    "header": "Distribution d'actifs ({{count}})",
+    "header": "Répartition des actifs ({{count}})",
     "notice": "You can now click on assets for more details!"
   },
   "accountDistribution": {
