@@ -144,7 +144,7 @@ async function init() {
       timer = setTimeout(() => {
         classes.remove('stop-all-transition')
         timer = null
-      }, 100)
+      }, 500)
     })
   }
 
