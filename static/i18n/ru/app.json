@@ -78,11 +78,11 @@
     "month": "Месяц",
     "month_plural": "Months",
     "year": "Год",
-    "year_plural": "Years",
+    "year_plural": "Лет",
     "minute": "Минута",
     "minute_plural": "Минут",
     "second": "Секунды",
-    "second_plural": "Seconds",
+    "second_plural": "Сек",
     "hour": "Час",
     "hour_plural": "Hours",
     "range": {
