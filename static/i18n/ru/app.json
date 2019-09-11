@@ -78,17 +78,17 @@
     "month": "Месяц",
     "month_plural": "Months",
     "year": "Год",
-    "year_plural": "Years",
+    "year_plural": "Лет",
     "minute": "Минута",
     "minute_plural": "Минут",
     "second": "Секунды",
-    "second_plural": "Seconds",
+    "second_plural": "Сек",
     "hour": "Час",
     "hour_plural": "Hours",
     "range": {
-      "week": "1W",
-      "month": "1M",
-      "year": "1Y"
+      "week": "1Н",
+      "month": "1М",
+      "year": "1Г"
     },
     "since": {
       "day": "прошедший день",
@@ -103,7 +103,7 @@
   },
   "sidebar": {
     "menu": "Меню",
-    "stars": "Starred accounts",
+    "stars": "Избранные счета",
     "accounts": "Счета",
     "manager": "Диспетчер",
     "exchange": "Купить крипто",
@@ -162,11 +162,11 @@
     },
     "optionsMenu": {
       "title": "Options",
-      "exportOperations": "Export operation history",
-      "exportToMobile": "Export to mobile"
+      "exportOperations": "История операций экспорта",
+      "exportToMobile": "Экспорт на мобильный"
     },
     "contextMenu": {
-      "star": "Star",
+      "star": "Добавить в избранное",
       "receive": "Получить",
       "send": "Отправить",
       "edit": "Edit Account"
@@ -252,14 +252,14 @@
   },
   "tokensList": {
     "title": "Tokens",
-    "cta": "Add token",
+    "cta": "Добавить Токен",
     "placeholder": "To add tokens, simply send them to your Ethereum address.",
     "link": "Подробнее",
     "seeTokens": "See tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "tooltip": "Token from",
-    "countTooltip": "1 Token",
-    "countTooltip_plural": "{{count}} Tokens"
+    "countTooltip": "1 токен",
+    "countTooltip_plural": "{{count}} токенов"
   },
   "migrateAccounts": {
     "overview": {
