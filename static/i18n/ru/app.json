@@ -98,8 +98,8 @@
     }
   },
   "fees": {
-    "slow": "Slow",
-    "fast": "Fast"
+    "slow": "Медленно",
+    "fast": "Быстро"
   },
   "sidebar": {
     "menu": "Меню",
