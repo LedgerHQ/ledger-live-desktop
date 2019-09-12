@@ -69,6 +69,7 @@ class Stars extends PureComponent<{
                 <SideBarTooltip
                   text={account.type === 'Account' ? account.name : account.token.name}
                   enabled={collapsed}
+                  key={account.id}
                 >
                   <Item
                     index={i}
