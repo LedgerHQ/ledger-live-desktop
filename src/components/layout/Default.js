@@ -120,7 +120,15 @@ class Default extends Component<Props> {
             <Box grow horizontal bg="white">
               <SideBar />
 
-              <Box shrink grow bg="lightGrey" color="grey" overflow="visible" relative>
+              <Box
+                className={'main-container'}
+                shrink
+                grow
+                bg="lightGrey"
+                color="grey"
+                overflow="visible"
+                relative
+              >
                 <HSMStatusBanner />
                 <TopBar />
                 <Main innerRef={n => (this._scrollContainer = n)} tabIndex={-1}>

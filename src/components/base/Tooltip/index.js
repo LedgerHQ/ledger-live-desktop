@@ -115,8 +115,8 @@ class Tooltip extends PureComponent<Props> {
 
     // handle dynamically updating enabled state
     if (prevProps.enabled && !this.props.enabled) {
-      _tippy.disable()
       _tippy.hide()
+      _tippy.disable()
     } else if (!prevProps.enabled && this.props.enabled) {
       _tippy.enable()
     }

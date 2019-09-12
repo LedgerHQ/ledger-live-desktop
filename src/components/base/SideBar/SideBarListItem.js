@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
+import { Hide } from 'components/MainSideBar'
 import Box, { Tabbable } from 'components/base/Box'
 import SideBarTooltip from './SideBarTooltip'
 
@@ -16,7 +17,7 @@ export type Props = {
   isActive?: boolean,
   onClick?: void => void,
   isActive?: boolean,
-  showTooltip?: boolean,
+  collapsed?: boolean,
 }
 
 class SideBarListItem extends PureComponent<Props> {
@@ -30,7 +31,7 @@ class SideBarListItem extends PureComponent<Props> {
       onClick,
       isActive,
       disabled,
-      showTooltip,
+      collapsed,
     } = this.props
 
     const renderedLabel =
@@ -43,7 +44,7 @@ class SideBarListItem extends PureComponent<Props> {
       )
 
     return (
-      <SideBarTooltip text={renderedLabel} enabled={!!showTooltip}>
+      <SideBarTooltip text={renderedLabel} enabled={!!collapsed}>
         <Container
           isActive={!disabled && isActive}
           iconActiveColor={iconActiveColor}
@@ -52,8 +53,10 @@ class SideBarListItem extends PureComponent<Props> {
         >
           {!!Icon && <Icon size={16} />}
           <Box grow shrink>
-            {renderedLabel}
-            {!!desc && desc(this.props)}
+            <Hide visible={!collapsed}>
+              {renderedLabel}
+              {!!desc && desc(this.props)}
+            </Hide>
           </Box>
           {NotifComponent && <NotifComponent />}
         </Container>
