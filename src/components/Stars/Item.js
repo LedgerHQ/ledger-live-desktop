@@ -10,6 +10,7 @@ import type { Account, TokenAccount } from '@ledgerhq/live-common/src/types'
 import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
 import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
+import { Hide } from 'components/MainSideBar'
 import Box from '../base/Box/Box'
 
 const AccountName = styled(Text)`
@@ -19,16 +20,13 @@ const AccountName = styled(Text)`
 `
 const ParentCryptoCurrencyIconWrapper = styled.div`
   width: 20px;
-  margin-left: ${p => (p.collapsed && p.isToken ? '-6px' : '')};
-  transition: margin 0.5s;
 `
 
 const ItemWrapper = styled.div`
-  height: 60px;
   flex: 1;
   align-items: center;
   display: flex;
-  padding: 0px 15px;
+  padding: 10px 15px;
   border-radius: 4px;
   border: 1px solid transparent;
   background: ${p => (p.active ? p.theme.colors.lightGrey : 'white')};
@@ -92,20 +90,22 @@ const Item = ({
             >
               <ParentCryptoCurrencyIcon inactive={!active} currency={getAccountCurrency(account)} />
             </ParentCryptoCurrencyIconWrapper>
-            <Box vertical flex={1}>
-              <AccountName color="smoke">
-                {account.type === 'Account' ? account.name : account.token.name}
-              </AccountName>
-              <FormattedVal
-                alwaysShowSign={false}
-                animateTicker={false}
-                ellipsis
-                color="grey"
-                unit={account.unit || account.token.units[0]}
-                showCode
-                val={account.balance}
-              />
-            </Box>
+              <Box vertical flex={1}>
+                <Hide visible={snapshot.isDragging || !collapsed}>
+                  <AccountName color="smoke">
+                    {account.type === 'Account' ? account.name : account.token.name}
+                  </AccountName>
+                  <FormattedVal
+                    alwaysShowSign={false}
+                    animateTicker={false}
+                    ellipsis
+                    color="grey"
+                    unit={account.unit || account.token.units[0]}
+                    showCode
+                    val={account.balance}
+                  />
+                </Hide>
+              </Box>
           </Box>
         </ItemWrapper>
       )}

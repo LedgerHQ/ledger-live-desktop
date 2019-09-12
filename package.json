@@ -3,7 +3,7 @@
   "productName": "Ledger Live",
   "description": "Ledger Live - Desktop",
   "repository": "https://github.com/LedgerHQ/ledger-live-desktop",
-  "version": "1.14.0-nightly.20190910",
+  "version": "1.14.0-nightly.20190911",
   "author": "Ledger",
   "license": "MIT",
   "scripts": {
@@ -98,6 +98,7 @@
     "react-router-redux": "5.0.0-alpha.9",
     "react-select": "2.4.2",
     "react-spring": "^5.3.15",
+    "react-transition-group": "^4.3.0",
     "react-window": "^1.8.2",
     "redux": "^4.0.4",
     "redux-actions": "^2.4.0",
