@@ -12,3 +12,6 @@ xliffs/
 /build/linux/arch/*.tar.xz
 
 /test-e2e/sync/data/actual_app.json
+
+.yalc
+yalc.lock

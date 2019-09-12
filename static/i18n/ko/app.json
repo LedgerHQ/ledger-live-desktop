@@ -30,6 +30,7 @@
     "lock": "잠금",
     "showMore": "자세히 표시",
     "max": "최대",
+    "new": "New",
     "back": "뒤로",
     "reset": "재설정",
     "retry": "다시 시도",
@@ -45,7 +46,7 @@
     "copyAddress": "복사",
     "copied": "복사됨",
     "addressCopied": "주소 복사됨",
-    "experimentalFeature": "EXPERIMENTAL FEATURE ACTIVE",
+    "experimentalFeature": "Experimental",
     "lockScreen": {
       "title": "다시 돌아오신 것을 환영합니다.",
       "subTitle": null,
@@ -84,6 +85,11 @@
     "second_plural": "Seconds",
     "hour": "시",
     "hour_plural": "Hours",
+    "range": {
+      "week": "1W",
+      "month": "1M",
+      "year": "1Y"
+    },
     "since": {
       "day": "전날",
       "week": "지난 주",
@@ -118,6 +124,7 @@
     "emptyState": {
       "title": "아직 암호화 자산이 없습니까?",
       "desc": "<1><0>{{managerAppName}}</0></1> 앱이 설치되어 있는지 확인하고 수신을 시작하십시오.",
+      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
         "receiveFunds": "수신"
       }
@@ -258,6 +265,12 @@
     "overview": {
       "title": "Ledger Live accounts update",
       "done": "Ledger Live accounts update completed",
+      "successTitle": "Accounts updated successfully",
+      "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
+      "successDesc": "Your {{assets}} account is now updated and ready to use",
+      "mobileTitle": "Export accounts to mobile",
+      "mobileDesc": "Click the button below to export your updated accounts to the Ledger Live mobile app.",
+      "mobileCTA": "Export to mobile",
       "description": "New features in Ledger Live require an update of your accounts.",
       "currency": "1 {{currency}} account needs to be updated:",
       "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
@@ -357,13 +370,16 @@
     "tokenTooltip": "This operation is related to the following token operations",
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
-    "details": "{{ currency }} details"
+    "details": "{{ currency }} details",
+    "multipleAddresses": "Why multiple addresses?"
   },
   "operationList": {
     "noMoreOperations": "모두 끝났습니다."
   },
   "manager": {
     "yourDeviceIsGenuine": "귀하의 장치는 정품입니다.",
+    "goToAccounts": "Go to accounts",
+    "intallEthApp": "Install Ethereum app",
     "apps": {
       "install": "설치",
       "all": "앱 카탈로그",
@@ -378,7 +394,9 @@
       "help": "어떤 앱이 이미 설치되어 있는지 장치를 확인하십시오.",
       "installed": "App installed",
       "uninstalled": "App uninstalled",
-      "addAccount": "Add {{name}} account"
+      "addAccount": "Add {{name}} account",
+      "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
+      "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>"
     },
     "firmware": {
       "installed": "펌웨어 버전 {{version}}",
@@ -517,7 +535,22 @@
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Asset distribution ({{count}})"
+    "header": "Asset distribution ({{count}})",
+    "notice": "You can now click on assets for more details!"
+  },
+  "accountDistribution": {
+    "account": "Account",
+    "price": "Price",
+    "distribution": "Distribution",
+    "amount": "Amount",
+    "value": "Value",
+    "showAll": "Show all",
+    "showLess": "Show less",
+    "header": "Account distribution ({{count}})",
+    "notice": "You can right-click on an account to see its options!"
+  },
+  "asset": {
+    "notice": "Summary of all {{currency}} accounts"
   },
   "settings": {
     "title": "설정",
@@ -1182,6 +1215,10 @@
     "UnknownMCU": {
       "title": "알 수 없는 MCU 버전",
       "description": "Ledger 지원 센터에 문의하십시오."
+    },
+    "MCUNotGenuineToDashboard": {
+      "title": "Access dashboard to update",
+      "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
     }
   }
 }

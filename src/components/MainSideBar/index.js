@@ -10,11 +10,13 @@ import type { Location } from 'react-router'
 import type { T } from 'types/common'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { Transition } from 'react-transition-group'
 
 import { MODAL_RECEIVE, MODAL_SEND, MAIN_SIDEBAR_WIDTH } from 'config/constants'
-import { accountsSelector } from 'reducers/accounts'
+import { accountsSelector, starredAccountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
-import { developerModeSelector } from 'reducers/settings'
+import { developerModeSelector, sidebarCollapsedSelector } from 'reducers/settings'
+import { setSidebarCollapsed } from 'actions/settings'
 
 import { SideBarList, SideBarListItem } from 'components/base/SideBar'
 import Box from 'components/base/Box'
@@ -26,30 +28,72 @@ import IconPortfolio from 'icons/Portfolio'
 import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
 import IconExchange from 'icons/Exchange'
+import IconChevron from 'icons/ChevronRight'
 import TopGradient from './TopGradient'
 import useExperimental from '../../hooks/useExperimental'
-import { darken } from '../../styles/helpers'
+import { darken, rgba } from '../../styles/helpers'
 import Stars from '../Stars'
+import ExperimentalIcon from '../../icons/Experimental'
 
 const mapStateToProps = state => ({
   noAccounts: accountsSelector(state).length === 0,
+  hasStarredAccounts: starredAccountsSelector(state).length > 0,
   developerMode: developerModeSelector(state),
+  collapsed: sidebarCollapsedSelector(state),
 })
 
 const mapDispatchToProps = {
   push,
   openModal,
+  setCollapsed: setSidebarCollapsed,
 }
 
 type Props = {
   t: T,
   noAccounts: boolean,
+  hasStarredAccounts: boolean,
   location: Location,
   push: string => void,
   openModal: string => void,
+  collapsed: boolean,
+  setCollapsed: boolean => void,
 }
 
-const TagContainer = () => {
+const TagText = styled.div`
+  margin-left: 8px;
+`
+
+const hideTransitionDuration = 200
+
+const hideTransitionStyles = {
+  entering: {
+    opacity: 1,
+    transition: `opacity ${hideTransitionDuration}ms`,
+  },
+  entered: {
+    opacity: 1,
+  },
+  exiting: {
+    opacity: 0,
+    transition: `opacity ${hideTransitionDuration}ms`,
+  },
+  exited: {
+    opacity: 0,
+    width: 0,
+  },
+}
+
+const HideContainer = styled.div`
+  overflow: hidden;
+`
+
+export const Hide = ({ visible, children }: { visible: boolean, children: any }) => (
+  <Transition in={visible} timeout={hideTransitionDuration}>
+    {state => <HideContainer style={hideTransitionStyles[state]}>{children}</HideContainer>}
+  </Transition>
+)
+
+const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
   const isExperimental = useExperimental()
 
   return isExperimental ? (
@@ -61,10 +105,16 @@ const TagContainer = () => {
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: 'flex-end',
+        textAlign: 'center',
       }}
     >
       <Tag to="/settings/experimental">
-        <Trans i18nKey="common.experimentalFeature" />
+        <ExperimentalIcon width={16} height={16} />
+        <Hide visible={collapsed}>
+          <TagText>
+            <Trans i18nKey="common.experimentalFeature" />
+          </TagText>
+        </Hide>
       </Tag>
     </Box>
   ) : null
@@ -72,24 +122,114 @@ const TagContainer = () => {
 
 const Tag = styled(Link)`
   display: flex;
+  justify-self: flex-end;
   justify-content: center;
   align-items: center;
   font-family: 'Open Sans';
   font-weight: bold;
   font-size: 10px;
   padding: 2px 8px;
-  min-height: 22px;
+  min-height: 32px;
   border-radius: 4px;
-  color: ${p => p.theme.colors.smoke};
-  background-color: ${p => p.theme.colors.lightFog};
+  color: ${p => p.theme.colors.dark};
+  background-color: ${p => p.theme.colors.lightGrey};
   text-decoration: none;
 
   &:hover {
-    background-color: ${p => darken(p.theme.colors.lightFog, 0.05)};
+    background-color: ${p => darken(p.theme.colors.lightGrey, 0.05)};
+    border: solid 1px ${p => p.theme.colors.wallet};
+  }
+`
+
+const collapserSize = 24
+const collapsedWidth = 15 * 4 + 16 // 15 * 4 margins + 16 icon size
+
+const Collapser = styled(Box).attrs({
+  alignItems: 'center',
+  justifyContent: 'center',
+})`
+  position: absolute;
+  top: ${58 - collapserSize / 2}px;
+  left: ${p => (p.collapsed ? collapsedWidth : MAIN_SIDEBAR_WIDTH) - collapserSize / 2}px;
+
+  width: ${collapserSize}px;
+  height: ${collapserSize}px;
+
+  cursor: pointer;
+  border-radius: 50%;
+  background: ${p => p.theme.colors.white};
+  color: ${p => p.theme.colors.grey};
+  border-color: ${p => p.theme.colors.fog};
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid;
+  transition: all 0.5s;
+  z-index: 100;
+
+  &:hover {
+    border-color: ${p => p.theme.colors.wallet};
+    color: ${p => p.theme.colors.wallet};
+    background: ${p => rgba(p.theme.colors.wallet, 0.1)};
+  }
+
+  & > * {
+    transform: ${p => (p.collapsed ? '' : 'rotate(180deg)')};
+    margin-left: ${p => (p.collapsed ? '' : '-2px')};
+
+    transition: transform 0.5s;
+  }
+`
+
+const Separator = styled(Box).attrs({
+  mx: 4,
+})`
+  height: 1px;
+  background: ${p => p.theme.colors.fog};
+`
+
+const sideBarTransitionStyles = {
+  entering: { width: MAIN_SIDEBAR_WIDTH },
+  entered: { width: MAIN_SIDEBAR_WIDTH },
+  exiting: { width: collapsedWidth },
+  exited: { width: collapsedWidth },
+}
+
+const enableTransitions = () =>
+  document.body &&
+  setTimeout(
+    () => document.body && document.body.classList.remove('stop-container-transition'),
+    500,
+  )
+const disableTransitions = () =>
+  document.body && document.body.classList.add('stop-container-transition')
+
+const sideBarTransitionSpeed = 500
+
+const SideBar = styled(Box).attrs({
+  relative: true,
+})`
+  background-color: ${p => p.theme.colors.white};
+  transition: width ${sideBarTransitionSpeed}ms;
+  will-change: width;
+  transform: translate3d(0, 0, 10);
+
+  & > ${Collapser} {
+    opacity: 0;
+  }
+
+  &:hover {
+    > ${Collapser} {
+      opacity: 1;
+    }
   }
 `
 
 class MainSideBar extends PureComponent<Props> {
+  handleCollapse = () => {
+    const { setCollapsed, collapsed } = this.props
+
+    setCollapsed(!collapsed)
+  }
+
   push = (to: string) => {
     const { push } = this.props
     const {
@@ -119,67 +259,94 @@ class MainSideBar extends PureComponent<Props> {
   }
 
   render() {
-    const { t, noAccounts, location } = this.props
+    const { t, noAccounts, hasStarredAccounts, location, collapsed } = this.props
     const { pathname } = location
 
     return (
-      <Box relative bg="white" style={{ width: MAIN_SIDEBAR_WIDTH }}>
-        <TopGradient />
-        <Space of={70} />
-        <SideBarList title={t('sidebar.menu')}>
-          <SideBarListItem
-            label={t('dashboard.title')}
-            icon={IconPortfolio}
-            iconActiveColor="wallet"
-            onClick={this.handleClickDashboard}
-            isActive={pathname === '/'}
-            NotifComponent={noAccounts ? undefined : UpdateDot}
-            disabled={noAccounts}
-          />
-          <SideBarListItem
-            label={t('sidebar.accounts')}
-            icon={IconWallet}
-            iconActiveColor="wallet"
-            isActive={pathname === '/accounts'}
-            onClick={this.handleClickAccounts}
-            NotifComponent={noAccounts ? UpdateDot : undefined}
-          />
-          <SideBarListItem
-            label={t('send.title')}
-            icon={IconSend}
-            iconActiveColor="wallet"
-            onClick={this.handleOpenSendModal}
-            disabled={noAccounts}
-          />
-          <SideBarListItem
-            label={t('receive.title')}
-            icon={IconReceive}
-            iconActiveColor="wallet"
-            onClick={this.handleOpenReceiveModal}
-            disabled={noAccounts}
-          />
-          <SideBarListItem
-            label={t('sidebar.manager')}
-            icon={IconManager}
-            iconActiveColor="wallet"
-            onClick={this.handleClickManager}
-            isActive={pathname === '/manager'}
-          />
-          <SideBarListItem
-            label={t('sidebar.exchange')}
-            icon={IconExchange}
-            iconActiveColor="wallet"
-            onClick={this.handleClickExchange}
-            isActive={pathname === '/partners'}
-          />
-          <Space of={30} />
-        </SideBarList>
+      <Transition
+        in={!collapsed}
+        timeout={sideBarTransitionSpeed}
+        onEnter={disableTransitions}
+        onExit={disableTransitions}
+        onEntered={enableTransitions}
+        onExited={enableTransitions}
+      >
+        {state => {
+          const secondAnim = !(state === 'entered' && !collapsed)
+          return (
+            <SideBar className="unstoppableAnimation" style={sideBarTransitionStyles[state]}>
+              <Collapser collapsed={collapsed} onClick={this.handleCollapse}>
+                <IconChevron size={16} />
+              </Collapser>
+              <TopGradient />
+              <Space of={70} />
+              <SideBarList title={t('sidebar.menu')} collapsed={secondAnim}>
+                <SideBarListItem
+                  label={t('dashboard.title')}
+                  icon={IconPortfolio}
+                  iconActiveColor="wallet"
+                  onClick={this.handleClickDashboard}
+                  isActive={pathname === '/'}
+                  NotifComponent={noAccounts ? undefined : UpdateDot}
+                  disabled={noAccounts}
+                  collapsed={secondAnim}
+                />
+                <SideBarListItem
+                  label={t('sidebar.accounts')}
+                  icon={IconWallet}
+                  iconActiveColor="wallet"
+                  isActive={pathname === '/accounts'}
+                  onClick={this.handleClickAccounts}
+                  NotifComponent={noAccounts ? UpdateDot : undefined}
+                  collapsed={secondAnim}
+                />
+                <SideBarListItem
+                  label={t('send.title')}
+                  icon={IconSend}
+                  iconActiveColor="wallet"
+                  onClick={this.handleOpenSendModal}
+                  disabled={noAccounts}
+                  collapsed={secondAnim}
+                />
+                <SideBarListItem
+                  label={t('receive.title')}
+                  icon={IconReceive}
+                  iconActiveColor="wallet"
+                  onClick={this.handleOpenReceiveModal}
+                  disabled={noAccounts}
+                  collapsed={secondAnim}
+                />
+                <SideBarListItem
+                  label={t('sidebar.manager')}
+                  icon={IconManager}
+                  iconActiveColor="wallet"
+                  onClick={this.handleClickManager}
+                  isActive={pathname === '/manager'}
+                  collapsed={secondAnim}
+                />
+                <SideBarListItem
+                  label={t('sidebar.exchange')}
+                  icon={IconExchange}
+                  iconActiveColor="wallet"
+                  onClick={this.handleClickExchange}
+                  isActive={pathname === '/partners'}
+                  collapsed={secondAnim}
+                />
+                <Space of={30} />
+              </SideBarList>
 
-        <SideBarList scroll title={t('sidebar.stars')}>
-          <Stars pathname={pathname} />
-          <TagContainer />
-        </SideBarList>
-      </Box>
+              <Hide visible={secondAnim && hasStarredAccounts} style={{ marginBottom: -8 }}>
+                <Separator />
+              </Hide>
+
+              <SideBarList scroll title={t('sidebar.stars')} collapsed={secondAnim}>
+                <Stars pathname={pathname} collapsed={secondAnim} />
+                <TagContainer collapsed={!secondAnim} />
+              </SideBarList>
+            </SideBar>
+          )
+        }}
+      </Transition>
     )
   }
 }

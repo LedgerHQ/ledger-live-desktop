@@ -3,7 +3,9 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
+import { Hide } from 'components/MainSideBar'
 import Box, { Tabbable } from 'components/base/Box'
+import SideBarTooltip from './SideBarTooltip'
 
 export type Props = {
   label: string | (Props => React$Node),
@@ -15,6 +17,7 @@ export type Props = {
   isActive?: boolean,
   onClick?: void => void,
   isActive?: boolean,
+  collapsed?: boolean,
 }
 
 class SideBarListItem extends PureComponent<Props> {
@@ -28,27 +31,36 @@ class SideBarListItem extends PureComponent<Props> {
       onClick,
       isActive,
       disabled,
+      collapsed,
     } = this.props
+
+    const renderedLabel =
+      typeof label === 'function' ? (
+        label(this.props)
+      ) : (
+        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          {label}
+        </span>
+      )
+
     return (
-      <Container
-        isActive={!disabled && isActive}
-        iconActiveColor={iconActiveColor}
-        onClick={disabled ? undefined : onClick}
-        disabled={disabled}
-      >
-        {!!Icon && <Icon size={16} />}
-        <Box grow shrink>
-          {typeof label === 'function' ? (
-            label(this.props)
-          ) : (
-            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-              {label}
-            </span>
-          )}
-          {!!desc && desc(this.props)}
-        </Box>
-        {NotifComponent && <NotifComponent />}
-      </Container>
+      <SideBarTooltip text={renderedLabel} enabled={!!collapsed}>
+        <Container
+          isActive={!disabled && isActive}
+          iconActiveColor={iconActiveColor}
+          onClick={disabled ? undefined : onClick}
+          disabled={disabled}
+        >
+          {!!Icon && <Icon size={16} />}
+          <Box grow shrink>
+            <Hide visible={!collapsed}>
+              {renderedLabel}
+              {!!desc && desc(this.props)}
+            </Hide>
+          </Box>
+          {NotifComponent && <NotifComponent />}
+        </Container>
+      </SideBarTooltip>
     )
   }
 }

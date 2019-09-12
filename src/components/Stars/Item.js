@@ -10,19 +10,23 @@ import type { Account, TokenAccount } from '@ledgerhq/live-common/src/types'
 import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
 import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
+import { Hide } from 'components/MainSideBar'
 import Box from '../base/Box/Box'
 
-const AccountName = styled(Text)``
+const AccountName = styled(Text)`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+`
 const ParentCryptoCurrencyIconWrapper = styled.div`
   width: 20px;
 `
 
 const ItemWrapper = styled.div`
-  height: 60px;
   flex: 1;
   align-items: center;
   display: flex;
-  padding: 0px 15px;
+  padding: 10px 15px;
   border-radius: 4px;
   border: 1px solid transparent;
   background: ${p => (p.active ? p.theme.colors.lightGrey : 'white')};
@@ -36,7 +40,8 @@ const ItemWrapper = styled.div`
     z-index: 1;
     border-color: ${p.active ? p.theme.colors.lightFog : p.theme.colors.sliderGrey};
     box-shadow: 0 12px 17px 0 rgba(0, 0, 0, 0.1);
-  `
+    width: ${p.collapsed ? '200px' : ''} !important;
+        `
       : ''}
 `
 
@@ -49,11 +54,13 @@ const Item = ({
   index,
   push,
   pathname,
+  collapsed,
 }: {
   account: Account | TokenAccount,
   index: number,
   push: Function,
   pathname: string,
+  collapsed?: boolean,
 }) => {
   const active = pathname.endsWith(account.id)
 
@@ -71,28 +78,34 @@ const Item = ({
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           isDragging={snapshot.isDragging}
+          collapsed={collapsed}
           innerRef={provided.innerRef}
           active={active}
           onClick={onAccountClick}
         >
           <Box horizontal ff="Open Sans|SemiBold" flex={1} flow={3} alignItems="center">
-            <ParentCryptoCurrencyIconWrapper>
+            <ParentCryptoCurrencyIconWrapper
+              collapsed={collapsed}
+              isToken={account.type === 'TokenAccount'}
+            >
               <ParentCryptoCurrencyIcon inactive={!active} currency={getAccountCurrency(account)} />
             </ParentCryptoCurrencyIconWrapper>
-            <Box vertical flex={1}>
-              <AccountName color="smoke">
-                {account.type === 'Account' ? account.name : account.token.name}
-              </AccountName>
-              <FormattedVal
-                alwaysShowSign={false}
-                animateTicker={false}
-                ellipsis
-                color="grey"
-                unit={account.unit || account.token.units[0]}
-                showCode
-                val={account.balance}
-              />
-            </Box>
+              <Box vertical flex={1}>
+                <Hide visible={snapshot.isDragging || !collapsed}>
+                  <AccountName color="smoke">
+                    {account.type === 'Account' ? account.name : account.token.name}
+                  </AccountName>
+                  <FormattedVal
+                    alwaysShowSign={false}
+                    animateTicker={false}
+                    ellipsis
+                    color="grey"
+                    unit={account.unit || account.token.units[0]}
+                    showCode
+                    val={account.balance}
+                  />
+                </Hide>
+              </Box>
           </Box>
         </ItemWrapper>
       )}

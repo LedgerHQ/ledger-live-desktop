@@ -23,6 +23,7 @@ import ManagerPage from 'components/ManagerPage'
 import AccountsPage from 'components/AccountsPage'
 import PartnersPage from 'components/PartnersPage'
 import SettingsPage from 'components/SettingsPage'
+import AssetPage from 'components/AssetPage'
 import KeyboardContent from 'components/KeyboardContent'
 import PerfIndicator from 'components/PerfIndicator'
 import LibcoreBusyIndicator from 'components/LibcoreBusyIndicator'
@@ -119,7 +120,15 @@ class Default extends Component<Props> {
             <Box grow horizontal bg="white">
               <SideBar />
 
-              <Box shrink grow bg="lightGrey" color="grey" overflow="visible" relative>
+              <Box
+                className={'main-container'}
+                shrink
+                grow
+                bg="lightGrey"
+                color="grey"
+                overflow="visible"
+                relative
+              >
                 <HSMStatusBanner />
                 <TopBar />
                 <Main innerRef={n => (this._scrollContainer = n)} tabIndex={-1}>
@@ -131,6 +140,7 @@ class Default extends Component<Props> {
                     <Route path="/partners" component={PartnersPage} />
                     <Route path="/account/:parentId/:id" component={AccountPage} />
                     <Route path="/account/:id" component={AccountPage} />
+                    <Route path="/asset/:assetTicker" component={AssetPage} />
                   </Switch>
                 </Main>
               </Box>

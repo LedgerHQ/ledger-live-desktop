@@ -13,17 +13,18 @@ type Props = {
   scroll?: boolean,
   titleRight?: any,
   emptyState?: any,
+  collapsed?: boolean,
 }
 
 class SideBarList extends Component<Props> {
   render() {
-    const { children, title, scroll, titleRight, emptyState, ...props } = this.props
+    const { children, title, scroll, titleRight, emptyState, collapsed, ...props } = this.props
     const ListWrapper = scroll ? GrowScroll : Box
     return (
       <Fragment>
         {!!title && (
           <Fragment>
-            <SideBarListTitle>
+            <SideBarListTitle collapsed={collapsed}>
               {title}
               {!!titleRight && <Box ml="auto">{titleRight}</Box>}
             </SideBarListTitle>
@@ -55,6 +56,12 @@ const SideBarListTitle = styled(Box).attrs({
   cursor: default;
   letter-spacing: 2px;
   text-transform: uppercase;
+
+  // allow collapsing
+  opacity: ${p => (p.collapsed ? 0 : 1)};
+  transition: opacity 0.15s;
+  overflow: hidden;
+  white-space: nowrap;
 `
 
 export default SideBarList

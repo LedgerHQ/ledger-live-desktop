@@ -22,7 +22,7 @@ export const TooltipContainer = ({
   style,
   tooltipBg,
 }: {
-  children: any,
+  children: React$Node,
   innerRef?: Function,
   style?: Object,
   tooltipBg?: string,
@@ -51,40 +51,83 @@ TooltipContainer.defaultProps = {
 
 type Props = {
   offset?: Array<number>,
-  children: any,
+  children: React$Node,
+  enabled?: boolean,
   render: Function,
   tooltipBg?: string,
+  options?: { [string]: any },
+}
+
+export const replaceTippyArrow = (_tippy: any, tooltipBg?: string) => {
+  _tippy.popper.querySelector('.tippy-roundarrow').innerHTML = `
+    <svg viewBox="0 0 24 8">
+      <path${
+        tooltipBg ? ` fill="${colors[tooltipBg]}"` : ''
+      } d="M5 8l5.5-5.6c.8-.8 2-.8 2.8 0L19 8" />
+    </svg>`
+}
+
+export const defaultTippyOptions = {
+  arrowType: 'round',
+  animateFill: false,
+  animation: 'shift-toward',
+  arrow: true,
+  offset: 0,
+  performance: true,
 }
 
 class Tooltip extends PureComponent<Props> {
   static defaultProps = {
     offset: [0, 0],
+    enabled: true,
   }
 
   componentDidMount() {
-    const { offset, tooltipBg } = this.props
+    const { offset, tooltipBg, enabled, options } = this.props
 
     if (this._node && this._template) {
       tippy(this._node, {
-        arrowType: 'round',
-        animateFill: false,
-        animation: 'shift-toward',
-        arrow: true,
+        ...defaultTippyOptions,
         html: this._template,
         offset: offset ? offset.map(v => space[v]).join(',') : 0,
-        performance: true,
+        ...options,
       })
 
+      const _tippy = this._node && this._node._tippy
+
+      // make flow happy
+      if (!_tippy) return
+
       // Override default arrow ¯\_(ツ)_/¯
-      if (this._node && this._node._tippy) {
-        this._node._tippy.popper.querySelector('.tippy-roundarrow').innerHTML = `
-          <svg viewBox="0 0 24 8">
-            <path${
-              tooltipBg ? ` fill="${colors[tooltipBg]}"` : ''
-            } d="M5 8l5.5-5.6c.8-.8 2-.8 2.8 0L19 8" />
-          </svg>`
+      replaceTippyArrow(_tippy, tooltipBg)
+
+      // disable tooltip if needed
+      if (!enabled) {
+        _tippy.disable()
       }
     }
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    const _tippy = this._node && this._node._tippy
+
+    if (!_tippy) return
+
+    // handle dynamically updating enabled state
+    if (prevProps.enabled && !this.props.enabled) {
+      _tippy.hide()
+      _tippy.disable()
+    } else if (!prevProps.enabled && this.props.enabled) {
+      _tippy.enable()
+    }
+  }
+
+  componentWillUnmount() {
+    const _tippy = this._node && this._node._tippy
+
+    if (!_tippy) return
+
+    _tippy.destroy()
   }
 
   _node = undefined

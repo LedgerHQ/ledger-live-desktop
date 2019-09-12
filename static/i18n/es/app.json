@@ -30,6 +30,7 @@
     "lock": "Bloquear",
     "showMore": "Ver más",
     "max": "Máx",
+    "new": "New",
     "back": "Atrás",
     "reset": "Restablecer",
     "retry": "Intentar de nuevo",
@@ -45,7 +46,7 @@
     "copyAddress": "Copiar",
     "copied": "Copiado",
     "addressCopied": "Dirección copiada",
-    "experimentalFeature": "FUNCIONALIDAD EXPERIMENTAL ACTIVA",
+    "experimentalFeature": "Experimental",
     "lockScreen": {
       "title": "Bienvenido de nuevo",
       "subTitle": null,
@@ -84,6 +85,11 @@
     "second_plural": "Seconds",
     "hour": "Hora",
     "hour_plural": "Hours",
+    "range": {
+      "week": "1W",
+      "month": "1M",
+      "year": "1Y"
+    },
     "since": {
       "day": "día pasado",
       "week": "semana pasada",
@@ -118,6 +124,7 @@
     "emptyState": {
       "title": "¿Aún no tienes criptoactivos?",
       "desc": "Asegúrate de que la aplicación <1><0>{{managerAppName}}</0></1> está instalada y empieza a recibir.",
+      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
         "receiveFunds": "Recibir"
       }
@@ -258,6 +265,12 @@
     "overview": {
       "title": "Ledger Live accounts update",
       "done": "Ledger Live accounts update completed",
+      "successTitle": "Accounts updated successfully",
+      "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
+      "successDesc": "Your {{assets}} account is now updated and ready to use",
+      "mobileTitle": "Export accounts to mobile",
+      "mobileDesc": "Click the button below to export your updated accounts to the Ledger Live mobile app.",
+      "mobileCTA": "Export to mobile",
       "description": "New features in Ledger Live require an update of your accounts.",
       "currency": "1 {{currency}} account needs to be updated:",
       "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
@@ -357,13 +370,16 @@
     "tokenTooltip": "This operation is related to the following token operations",
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
-    "details": "{{ currency }} details"
+    "details": "{{ currency }} details",
+    "multipleAddresses": "Why multiple addresses?"
   },
   "operationList": {
     "noMoreOperations": "Eso es todo"
   },
   "manager": {
     "yourDeviceIsGenuine": "Tu dispositivo es auténtico",
+    "goToAccounts": "Go to accounts",
+    "intallEthApp": "Install Ethereum app",
     "apps": {
       "install": "Instalar",
       "all": "Catálogo de aplicaciones",
@@ -378,7 +394,9 @@
       "help": "Comprueba tu dispositivo para ver qué aplicaciones ya están instaladas.",
       "installed": "App installed",
       "uninstalled": "App uninstalled",
-      "addAccount": "Add {{name}} account"
+      "addAccount": "Add {{name}} account",
+      "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
+      "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>"
     },
     "firmware": {
       "installed": "Versión {{version}} del firmware",
@@ -517,7 +535,22 @@
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Asset distribution ({{count}})"
+    "header": "Asset distribution ({{count}})",
+    "notice": "You can now click on assets for more details!"
+  },
+  "accountDistribution": {
+    "account": "Account",
+    "price": "Price",
+    "distribution": "Distribution",
+    "amount": "Amount",
+    "value": "Value",
+    "showAll": "Show all",
+    "showLess": "Show less",
+    "header": "Account distribution ({{count}})",
+    "notice": "You can right-click on an account to see its options!"
+  },
+  "asset": {
+    "notice": "Summary of all {{currency}} accounts"
   },
   "settings": {
     "title": "Ajustes",
@@ -1182,6 +1215,10 @@
     "UnknownMCU": {
       "title": "Versión de MCU desconocida",
       "description": "Por favor, ponte en contacto con el Soporte de Ledger"
+    },
+    "MCUNotGenuineToDashboard": {
+      "title": "Access dashboard to update",
+      "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
     }
   }
 }

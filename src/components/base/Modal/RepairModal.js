@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import { repairChoices } from '@ledgerhq/live-common/lib/hw/firmwareUpdate-repair'
+import { MCUNotGenuineToDashboard } from '@ledgerhq/errors'
 import type { T } from 'types/common'
 import TrackPage from 'analytics/TrackPage'
 import IconCheck from 'icons/Check'
@@ -108,8 +109,8 @@ const ErrorStep = ({ error }: { error: Error }) => (
       </Box>
       <Box
         color="graphite"
-        mt={4}
-        fontSize={6}
+        mt={3}
+        fontSize={4}
         ff="Open Sans"
         textAlign="center"
         style={{ maxWidth: 350 }}
@@ -170,6 +171,8 @@ class RepairModal extends PureComponent<Props, *> {
     } = this.props
     const { selectedOption } = this.state
     const onClose = !cancellable && isLoading ? undefined : onReject
+    const disableRepair =
+      isLoading || !selectedOption || (error && error instanceof MCUNotGenuineToDashboard)
 
     return (
       <Modal
@@ -219,7 +222,7 @@ class RepairModal extends PureComponent<Props, *> {
                   primary={!isDanger}
                   danger={isDanger}
                   isLoading={isLoading}
-                  disabled={isLoading || !selectedOption}
+                  disabled={disableRepair}
                 >
                   {t('settings.repairDevice.button')}
                 </Button>

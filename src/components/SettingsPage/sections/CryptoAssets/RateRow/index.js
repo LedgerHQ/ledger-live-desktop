@@ -65,7 +65,7 @@ const NoDataContainer = styled(Box)`
 
 const NoData = () => (
   <NoDataContainer ff="Open Sans|SemiBold" color="gray" fontSize={4}>
-    <Trans style={{whiteSpace: 'nowrap'}} i18nKey="settings.rates.noCounterValue" />
+    <Trans style={{ whiteSpace: 'nowrap' }} i18nKey="settings.rates.noCounterValue" />
   </NoDataContainer>
 )
 

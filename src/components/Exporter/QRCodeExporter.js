@@ -9,12 +9,21 @@ import { activeAccountsSelector } from 'reducers/accounts'
 import { exportSettingsSelector } from 'reducers/settings'
 import { encode } from '@ledgerhq/live-common/lib/cross'
 import { dataToFrames } from 'qrloop/exporter'
-import QRCode from './base/QRCode'
+import styled from 'styled-components'
+import QRCode from '../base/QRCode'
 
 const mapStateToProps = createStructuredSelector({
-  accounts: activeAccountsSelector,
+  accounts: (state, props) => props.accounts || activeAccountsSelector(state, props),
   settings: exportSettingsSelector,
 })
+
+const QRCodeContainer = styled.div`
+  position: relative;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
+  border: solid 1px ${props => props.theme.colors.lightFog};
+`
 
 class QRCodeExporter extends PureComponent<
   {
@@ -86,13 +95,13 @@ class QRCodeExporter extends PureComponent<
     const { size } = this.props
     const { chunks } = this
     return (
-      <div style={{ position: 'relative', width: size, height: size }}>
+      <QRCodeContainer style={{ width: size, height: size }}>
         {chunks.slice(0, framesRendered).map((chunk, i) => (
           <div key={String(i)} style={{ position: 'absolute', opacity: i === frame ? 1 : 0 }}>
-            <QRCode data={chunk} size={size} errorCorrectionLevel="M" />
+            <QRCode data={chunk} size={Math.max(size - 24, 0)} errorCorrectionLevel="M" />
           </div>
         ))}
-      </div>
+      </QRCodeContainer>
     )
   }
 }

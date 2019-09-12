@@ -12,16 +12,16 @@ import type { Currency, PortfolioRange, Portfolio } from '@ledgerhq/live-common/
 import Chart from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
-import PlaceholderChart from '../PlaceholderChart'
+import PlaceholderChart from 'components/PlaceholderChart'
 
-type Props = {
+type Props = {|
   counterValue: Currency,
   chartColor: string,
   chartId: string,
   portfolio: Portfolio,
   range: PortfolioRange,
   Header?: React$ComponentType<{ portfolio: Portfolio }>,
-}
+|}
 
 const Tooltip = ({ counterValue, d }: *) => (
   <Fragment>
@@ -47,14 +47,14 @@ class PortfolioBalanceSummary extends PureComponent<Props> {
   render() {
     const { portfolio, range, chartColor, chartId, Header } = this.props
     return (
-      <Card p={0} py={5} style={{ marginTop: 32 }}>
+      <Card p={0} py={5}>
         {Header ? (
           <Box px={6}>
             <Header portfolio={portfolio} />
           </Box>
         ) : null}
 
-        <Box ff="Open Sans" fontSize={4} color="graphite" pt={6}>
+        <Box ff="Open Sans" fontSize={4} color="graphite" pt={5}>
           {portfolio.balanceAvailable ? (
             <Chart
               onlyUpdateIfLastPointChanges

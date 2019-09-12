@@ -6,6 +6,7 @@ import { Route } from 'react-router'
 
 import { translate } from 'react-i18next'
 import AccountCrumb from './AccountCrumb'
+import AssetCrumb from './AssetCrumb'
 
 const Wrapper = styled.div`
   display: flex;
@@ -46,6 +47,8 @@ const Breadcrumb = () => (
     <Route path="/account/" component={AccountCrumb} />
     <Route path="/account/:id/" component={AccountCrumb} />
     <Route path="/account/:parentId/:id/" component={AccountCrumb} />
+
+    <Route path="/asset/:assetTicker/" component={AssetCrumb} />
   </Wrapper>
 )
 

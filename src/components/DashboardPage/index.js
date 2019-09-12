@@ -4,12 +4,10 @@ import React, { PureComponent, Fragment } from 'react'
 import uniq from 'lodash/uniq'
 import { Redirect } from 'react-router'
 import { compose } from 'redux'
-import IconNanoX from 'icons/device/NanoXBanner'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { createStructuredSelector } from 'reselect'
-import { getDeviceModel } from '@ledgerhq/devices'
 import type { Account, Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
@@ -26,16 +24,10 @@ import RefreshAccountsOrdering from 'components/RefreshAccountsOrdering'
 import UpdateBanner from 'components/Updater/Banner'
 import BalanceInfos from 'components/BalanceInfos'
 import Box from 'components/base/Box'
-import PillsDaysCount from 'components/PillsDaysCount'
 import OperationsList from 'components/OperationsList'
 import StickyBackToTop from 'components/StickyBackToTop'
 import styled from 'styled-components'
-import { openURL } from 'helpers/linking'
 import BalanceSummary from './BalanceSummary'
-import CurrentGreetings from './CurrentGreetings'
-import SummaryDesc from './SummaryDesc'
-import TopBanner, { FakeLink } from '../TopBanner'
-import { urls } from '../../config/urls'
 import AssetDistribution from '../AssetDistribution'
 import MigrationBanner from '../modals/MigrateAccounts/Banner'
 
@@ -74,6 +66,7 @@ class DashboardPage extends PureComponent<Props> {
       since={this.props.selectedTimeRange}
       valueChange={portfolio.countervalueChange}
       totalBalance={portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value}
+      handleChangeSelectedTime={this.handleChangeSelectedTime}
     />
   )
 
@@ -88,20 +81,6 @@ class DashboardPage extends PureComponent<Props> {
         <TopBannerContainer>
           <UpdateBanner />
           <MigrationBanner />
-          <TopBanner
-            content={{
-              message: t('banners.promoteMobile', getDeviceModel('nanoX')),
-              Icon: IconNanoX,
-              right: (
-                <FakeLink onClick={() => openURL(urls.promoNanoX)}>
-                  {t('common.learnMore')}
-                </FakeLink>
-              ),
-            }}
-            status={'dark'}
-            bannerId={'promoNanoX3'}
-            dismissable
-          />
         </TopBannerContainer>
         <RefreshAccountsOrdering onMount />
         <TrackPage
@@ -113,18 +92,6 @@ class DashboardPage extends PureComponent<Props> {
         <Box flow={7}>
           {totalAccounts > 0 ? (
             <Fragment>
-              <Box horizontal alignItems="flex-end">
-                <Box grow>
-                  <CurrentGreetings />
-                  <SummaryDesc totalAccounts={totalAccounts} />
-                </Box>
-                <Box>
-                  <PillsDaysCount
-                    selected={selectedTimeRange}
-                    onChange={this.handleChangeSelectedTime}
-                  />
-                </Box>
-              </Box>
               <BalanceSummary
                 counterValue={counterValue}
                 chartId="dashboard-chart"
@@ -132,6 +99,8 @@ class DashboardPage extends PureComponent<Props> {
                 accounts={accounts}
                 range={selectedTimeRange}
                 Header={this.Header}
+                handleChangeSelectedTime={this.handleChangeSelectedTime}
+                selectedTimeRange={selectedTimeRange}
               />
               <AssetDistribution />
               {totalOperations > 0 && (
