@@ -1,5 +1,3 @@
-import { Application } from 'spectron'
-
 import { waitForDisappear, waitForExpectedText } from './helpers'
 
 import { applicationProxy } from './applicationProxy'
@@ -17,12 +15,12 @@ describe('Application launch', () => {
     await app.start()
   }, TIMEOUT)
 
-/*  afterEach(async () => {
+  afterEach(async () => {
     if (app && app.isRunning()) {
       await app.stop()
     }
   }, TIMEOUT)
-*/
+
   test(
     'Start app, check General Settings and verify Developer mode',
     async () => {

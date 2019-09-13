@@ -12,12 +12,12 @@ describe('Application launch', () => {
     await app.start()
   }, TIMEOUT)
 
-/*  afterEach(async () => {
+  afterEach(async () => {
     if (app && app.isRunning()) {
       await app.stop()
     }
   }, TIMEOUT)
-*/
+
   test(
     'Start app',
     async () => {
