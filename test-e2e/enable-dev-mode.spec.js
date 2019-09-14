@@ -1,9 +1,7 @@
 import { waitForDisappear, waitForExpectedText } from './helpers'
-
 import { applicationProxy } from './applicationProxy'
 
-// const os = require('os')
-// const appVersion = require('../package.json')
+import * as css from './css_Path'
 
 let app
 
@@ -11,7 +9,7 @@ const TIMEOUT = 50 * 1000
 
 describe('Application launch', () => {
   beforeEach(async () => {
-    app = applicationProxy('app.json', {SKIP_ONBOARDING: '1'})
+    app = applicationProxy('btcFamily.json', {SKIP_ONBOARDING: '1'})
     await app.start()
   }, TIMEOUT)
 
@@ -22,25 +20,28 @@ describe('Application launch', () => {
   }, TIMEOUT)
 
   test(
-    'Start app, check General Settings and verify Developer mode',
+    'Enabling developer mode should add testnets to Add account flow',
     async () => {
       const title = await app.client.getTitle()
       expect(title).toEqual('Ledger Live')
       await app.client.waitUntilWindowLoaded()
       await waitForDisappear(app, '#preload')
 
-      // Open Settings
-      await app.client.click('[data-e2e=settingButton]')
-      await waitForExpectedText(app, '[data-e2e=settings_title]', 'Settings')
-      // Verify settings General section
-      const settingsGeneral_title = await app.client.getText('[data-e2e=settingsSection_title]')
-      expect(settingsGeneral_title).toEqual('General')
+      // Check Release note
+      await waitForExpectedText(app, css.modal_title, 'Release notes')
+      await app.client.click(css.button_closeReleaseNote)
 
-      // Report bugs = OFF
-      await app.client.click('[data-e2e=reportBugs_button]')
+      // Go to settings
+      await app.client.click(css.button_settings)
+      await waitForExpectedText(app, css.settings_title, 'Settings')
+      await waitForExpectedText(app, css.settingsSection_title, 'General')
+      await app.client.click('[data-e2e=sections_title]')[4]
 
-      // Analytics = OFF
-      await app.client.click('[data-e2e=shareAnalytics_button]')
+      //await sections.selectByVisibleText('Experimental features');
+
+      // Check Experimentals section
+      const section_title = await app.client.getText(css.settingsSection_title)
+      expect(section_title).toEqual('Experimental features')
 
       // DevMode = ON
       await app.client.click('[data-e2e=devMode_button]')

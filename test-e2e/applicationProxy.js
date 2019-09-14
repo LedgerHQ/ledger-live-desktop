@@ -10,7 +10,7 @@ export function getConfigPath() {
   const platform = os.platform()
   let userDataPath
   if (platform === 'darwin') {
-    userDataPath = `${os.homedir()}/Library/Application Support/Ledger Live/`
+    userDataPath = `${os.homedir()}/Library/Application Support/Ledger Live`
   } else if (platform === 'win32') {
     userDataPath = '%AppData\\Roaming\\Ledger Live'
   } else {
@@ -23,9 +23,9 @@ function getAppPath() {
   const platform = os.platform()
   let appPath
   if (platform === 'darwin') {
-    appPath = `./dist/mac/Ledger Live.app/Contents/MacOS/Ledger Live`
+    appPath = './dist/mac/Ledger Live.app/Contents/MacOS/Ledger Live'
   } else if (platform === 'win32') {
-    appPath = `.\\dist\\win-unpacked\\Ledger Live.exe`
+    appPath = '.\\dist\\win-unpacked\\Ledger Live.exe'
   } else {
     appPath = `./dist/ledger-live-desktop-${appVersion.version}-linux-x86_64.AppImage`
   }
@@ -34,13 +34,13 @@ function getAppPath() {
 
 export function applicationProxy(userData = null, envVar = {}) {
   const configPath = getConfigPath()
-  if (fs.existsSync(configPath)){
+  if(fs.existsSync(configPath)) {
     rimraf.sync(configPath)
     fs.mkdirSync(configPath)
   }
   if(userData != null) {
     const jsonFile = path.resolve('test-e2e/data/', userData)
-    fs.copyFileSync(jsonFile, `${configPath}app.json`)
+    fs.copyFileSync(jsonFile, `${configPath}/app.json`)
   }
   const app = new Application({
     path: getAppPath(),

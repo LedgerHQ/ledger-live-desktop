@@ -49,8 +49,8 @@ class SectionExperimental extends PureComponent<Props> {
     const { t } = this.props
 
     return (
-      <Section>
-        <TrackPage category="Settings" name="Experimental" />
+      <Section data-e2e='experimental_section_title'>
+        <TrackPage category="Settings" name="Experimental" data-e2e='Experimental' />
 
         <Header
           icon={<IconAtom size={16} />}

@@ -1,5 +1,6 @@
 import { waitForDisappear, waitForExpectedText } from './helpers'
 import { applicationProxy, getConfigPath } from './applicationProxy'
+import * as css from './css_Path'
 
 const path = require('path')
 const fs = require('fs')
@@ -8,67 +9,86 @@ let app
 
 const TIMEOUT = 50 * 1000
 
-describe('Application launch', () => {
-  beforeEach(async () => {
-    app = applicationProxy('app.json', {SKIP_ONBOARDING: '1'})
+const tmpAppJSONPath = path.resolve(getConfigPath(), 'app.json')
+const accountsOperations = '"operations":[{'
+
+describe('Start LL after verion update, Release Note, Check password lock', () => {
+  beforeAll(async () => {
+    app = applicationProxy('btcFamily.json', {SKIP_ONBOARDING: '1'})
     await app.start()
   }, TIMEOUT)
 
-  afterEach(async () => {
+  afterAll(async () => {
     if (app && app.isRunning()) {
       await app.stop()
     }
   }, TIMEOUT)
 
   test(
-    'Start app, activate password lock, check app.json, deactivate password lock',
+    'App start',
     async () => {
       const title = await app.client.getTitle()
       expect(title).toEqual('Ledger Live')
       await app.client.waitUntilWindowLoaded()
       await waitForDisappear(app, '#preload')
-      // Verify Account summary text
-/*       
-      // Count user's accounts
-      const userAccountsList = await app.client.elements('[data-e2e=dashboard_AccountCardWrapper]')
-      const userAccountsCount = Object.keys(userAccountsList.value).length
-      // Check account number
-      const accountSummary = await app.client.getText('[data-e2e=dashboard_accountsSummaryDesc]')
-      const accountSummaryMessage = `Here's the summary of your ${userAccountsCount} accounts`
-      expect(accountSummary).toEqual(accountSummaryMessage)
-*/
-      // Go to settings
-      await app.client.click('[data-e2e=setting_button]')
-      await waitForExpectedText(app, '[data-e2e=settings_title]', 'Settings')
+      }, TIMEOUT)
 
-      // Enable lock password
-      await app.client.click('[data-e2e=passwordLock_button]')
-      await waitForExpectedText(app, '[data-e2e=modalTitle]', 'Password lock')
-      await waitForExpectedText(app, '[data-e2e=setPassword_modalTitle]', 'Set a password')
-      await app.client.setValue('[data-e2e=setPassword_NewPassword]', 5)
-      await app.client.setValue('[data-e2e=setPassword_ConfirmPassword]', 5)
+  test(
+    'Release Note should be displayed',
+    async () => {
+      await waitForExpectedText(app, css.modal_title, 'Release notes')
+      await app.client.click(css.button_closeReleaseNote)
+    }, TIMEOUT)
+  
+  test(
+    'Dashboard: Portfolio should show Graph, Assets, Operations',
+    async () => {
+      await waitForExpectedText(app, css.portfolio_assetDistribution_tile, 'Asset distribution (')
+      const assetDistribution = await app.client.getText(css.portfolio_operationList_title)
+      expect(assetDistribution).toEqual('Last operations')
+    }, TIMEOUT
+  )
+
+  test(
+    'Click setting icon -> Check General settings',
+    async () => {
+      await app.client.click(css.button_settings)
+      await waitForExpectedText(app, css.settings_title, 'Settings')
+      await app.client.click(css.button_reportBug)
+      await app.client.click(css.button_shareAnalytics)
+    }, TIMEOUT
+  )
+
+  test(
+    'Enable password lock should Encrypt user data',
+    async () => {
+      await app.client.click(css.button_passwordLock)
+      await waitForExpectedText(app, css.modal_title, 'Password lock')
+      await waitForExpectedText(app, css.setPassword_title, 'Set a password')
+      await app.client.setValue(css.input_newPassword, 5)
+      await app.client.setValue(css.input_confirmPassword, 5)
       await app.client.keys('Enter')
-      await waitForExpectedText(app, '[data-e2e=settings_title]', 'Settings')
+      await waitForExpectedText(app, css.settings_title, 'Settings')
       await app.client.pause(2000)
-      // Verify in app.json that accounts data are encrypted
-      const tmpAppJSONPath = path.resolve(getConfigPath(), 'app.json')
       const LockedfileContent = fs.readFileSync(tmpAppJSONPath, 'utf-8')
-      const accountsOperations = '"operations":[{'
       await expect(LockedfileContent).not.toContain(accountsOperations)
+    }, TIMEOUT
+  )
 
-      // Disable password lock
-      await app.client.click('[data-e2e=passwordLock_button]')
-      await waitForExpectedText(app, '[data-e2e=modalTitle]', 'Disable password lock')
+  test(
+    'Disable password lock should Decrypt user data',
+    async () => {
+      await app.client.click(css.button_passwordLock)
+      await waitForExpectedText(app, css.modal_title, 'Disable password lock')
       await app.client.setValue('#password', 5)
       await app.client.pause(500)
       await app.client.keys('Enter')
-      await waitForExpectedText(app, '[data-e2e=settings_title]', 'Settings')
+      await waitForExpectedText(app, css.settings_title, 'Settings')
       await app.client.pause(3000)
       const UnlockedfileContent = fs.readFileSync(tmpAppJSONPath, 'utf-8')
-      // Verify in app.json that accounts data are not encrypted
       await expect(UnlockedfileContent).toContain(accountsOperations)
       await app.client.pause(1000)
-    },
-    TIMEOUT,
+    }, TIMEOUT
   )
-})
+},
+TIMEOUT)

@@ -1,74 +1,84 @@
 import { waitForDisappear, waitForExpectedText } from './helpers'
-
 import { applicationProxy } from './applicationProxy'
+import * as css from './css_Path'
 
 let app
 
 const TIMEOUT = 50 * 1000
 
-describe('Application launch', () => {
-  beforeEach(async () => {
+describe('Launch LL with empty user data, Skip onboarding, Welcome steps, check Empty state', () => {
+  beforeAll(async () => {
     app = applicationProxy(null, {SKIP_ONBOARDING: '1'})
     await app.start()
   }, TIMEOUT)
 
-  afterEach(async () => {
+  afterAll(async () => {
     if (app && app.isRunning()) {
       await app.stop()
     }
   }, TIMEOUT)
 
   test(
-    'Start app',
+    'Launch app, Analytics infos should be displayed',
     async () => {
-    const title = await app.client.getTitle()
+      const title = await app.client.getTitle()
       expect(title).toEqual('Ledger Live')
       await app.client.waitUntilWindowLoaded()
       await waitForDisappear(app, '#preload')
-
-      // Post Onboarding (Analytics)
-      await waitForExpectedText(app, '[data-e2e=onboarding_title]', 'Bugs and analytics')
-
-      // Verify "Technical Data" + Link "Learn more"
-      const analytics_techData_title = await app.client.getText('[data-e2e=analytics_techData]')
+      await waitForExpectedText(app, css.onboarding_title, 'Bugs and analytics')
+      }, TIMEOUT)
+  
+  test(
+    'Technical data infos should be displayed',
+    async () => {
+      const analytics_techData_title = await app.client.getText(css.analytics_techData)
       expect(analytics_techData_title).toEqual('Technical data*')
-      await app.client.click('[data-e2e=analytics_techData_Link]')
-      await waitForExpectedText(app, '[data-e2e=modalTitle]', 'Technical data')
-      await app.client.click('[data-e2e=modal_buttonClose_techData]')
+      await app.client.click(css.techData_link)
+      await waitForExpectedText(app, css.modal_title, 'Technical data')
+      await app.client.click(css.button_closeTechdata)
+    }, TIMEOUT)
 
-      // Verify "Analytics" + Link "Learn more"
+  test(
+    'Share Analytics infos should be displayed',
+    async () => {
       const analytics_shareAnalytics_title = await app.client.getText(
-        '[data-e2e=analytics_shareAnalytics]',
+        css.analytics_shareAnalytics
       )
       expect(analytics_shareAnalytics_title).toEqual('Analytics')
-      await app.client.click('[data-e2e=analytics_shareAnalytics_Link]')
-      await waitForExpectedText(app, '[data-e2e=modalTitle]', 'Analytics')
-      await app.client.click('[data-e2e=modal_buttonClose_shareAnalytics]')
-
-      // Verify "Report bugs"
-      const analytics_reportBugs_title = await app.client.getText('[data-e2e=analytics_reportBugs]')
+      await app.client.click(css.shareAnalytics_link)
+      await waitForExpectedText(app, css.modal_title, 'Analytics')
+      await app.client.click(css.button_closeShareAnalytics)
+    }, TIMEOUT)
+  
+  test(
+    'Report bugs infos should be displayed',
+    async () => {
+      const analytics_reportBugs_title = await app.client.getText(css.analytics_reportBugs)
       expect(analytics_reportBugs_title).toEqual('Bug reports')
+    }, TIMEOUT)
+      
+  test(
+    'Your device is ready then tradesafely modals should be displayed',
+    async () => {
+      await app.client.click(css.button_continue)
+      await waitForExpectedText(app, css.onboarding_finish_title, 'Your device is ready!')
+      await app.client.click(css.button_continue)
+      await waitForExpectedText(app, css.modal_title, 'Trade safely')
+      await app.client.click(css.button_continue)
+    }, TIMEOUT)
 
-      await app.client.click('[data-e2e=continue_button]')
-
-      // Finish Onboarding
-      await waitForExpectedText(app, '[data-e2e=finish_title]', 'Your device is ready!')
-      await app.client.click('[data-e2e=continue_button]')
-
-      await waitForExpectedText(app, '[data-e2e=modalTitle]', 'Trade safely')
-      await app.client.click('[data-e2e=continue_button]')
-
-      // Dashboard EmptyState
+  test(
+    'Dashboard empty state should show Add account and Manager buttons',
+    async () => {
       await waitForExpectedText(
         app,
         '[data-e2e=dashboard_empty_title]',
         'Install apps or add accounts',
       )
-      const openManager_button = await app.client.getText('[data-e2e=dashboard_empty_OpenManager]')
+      const openManager_button = await app.client.getText(css.button_openManager)
       expect(openManager_button).toEqual('Open Manager')
-      const addAccount_button = await app.client.getText('[data-e2e=dashboard_empty_AddAccounts]')
+      const addAccount_button = await app.client.getText(css.button_addAccount)
       expect(addAccount_button).toEqual('Add accounts')
     },
-    TIMEOUT,
-  )
+    TIMEOUT)
 })
