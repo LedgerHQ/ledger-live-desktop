@@ -52,7 +52,7 @@ class SideBarListItem extends PureComponent<Props> {
           disabled={disabled}
         >
           {!!Icon && <Icon size={16} />}
-          <Box grow shrink>
+          <Box grow shrink data-e2e={`sidebarItem_${label}`}>
             <Hide visible={!collapsed}>
               {renderedLabel}
               {!!desc && desc(this.props)}

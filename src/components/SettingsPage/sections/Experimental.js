@@ -50,7 +50,7 @@ class SectionExperimental extends PureComponent<Props> {
 
     return (
       <Section data-e2e='experimental_section_title'>
-        <TrackPage category="Settings" name="Experimental" data-e2e='Experimental' />
+        <TrackPage category="Settings" name="Experimental" />
 
         <Header
           icon={<IconAtom size={16} />}

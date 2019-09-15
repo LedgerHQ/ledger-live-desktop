@@ -49,7 +49,7 @@ const Pill = styled(Tabbable).attrs({
 function Pills(props: Props) {
   const { items, activeKey, onChange, bordered, ...p } = props
   return (
-    <Container flow={1} {...p} data-e2e='sections'>
+    <Container flow={1} {...p}>
       {items.map(item => {
         const isActive = item.key === activeKey
         return (
@@ -58,7 +58,7 @@ function Pills(props: Props) {
             onClick={() => onChange(item)}
             key={item.key}
             bordered={bordered}
-            data-e2e='sections_title'
+            data-e2e={`tabs_${item.key}`}
           >
             {item.label}
           </Pill>

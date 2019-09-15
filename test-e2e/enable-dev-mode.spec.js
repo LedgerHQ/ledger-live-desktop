@@ -1,62 +1,66 @@
 import { waitForDisappear, waitForExpectedText } from './helpers'
 import { applicationProxy } from './applicationProxy'
 
-import * as css from './css_Path'
+import * as selector from './selectors'
 
 let app
 
 const TIMEOUT = 50 * 1000
 
-describe('Application launch', () => {
-  beforeEach(async () => {
+describe('Enabling developer mode should add testnets to Add account flow', () => {
+  beforeAll(async () => {
     app = applicationProxy('btcFamily.json', {SKIP_ONBOARDING: '1'})
     await app.start()
   }, TIMEOUT)
 
-  afterEach(async () => {
+  afterAll(async () => {
     if (app && app.isRunning()) {
       await app.stop()
     }
   }, TIMEOUT)
 
   test(
-    'Enabling developer mode should add testnets to Add account flow',
+    'Launch app check release note',
     async () => {
       const title = await app.client.getTitle()
       expect(title).toEqual('Ledger Live')
       await app.client.waitUntilWindowLoaded()
       await waitForDisappear(app, '#preload')
-
       // Check Release note
-      await waitForExpectedText(app, css.modal_title, 'Release notes')
-      await app.client.click(css.button_closeReleaseNote)
+      await waitForExpectedText(app, selector.modal_title, 'Release notes')
+      await app.client.click(selector.button_closeReleaseNote)
+      }, TIMEOUT)
 
-      // Go to settings
-      await app.client.click(css.button_settings)
-      await waitForExpectedText(app, css.settings_title, 'Settings')
-      await waitForExpectedText(app, css.settingsSection_title, 'General')
-      await app.client.click('[data-e2e=sections_title]')[4]
-
-      //await sections.selectByVisibleText('Experimental features');
-
-      // Check Experimentals section
-      const section_title = await app.client.getText(css.settingsSection_title)
+  test(
+    'Go to Experimental Settings and enable developer mode', 
+    async () => {
+      await app.client.click(selector.button_settings)
+      await waitForExpectedText(app, selector.settings_title, 'Settings')
+      await waitForExpectedText(app, selector.settingsSection_title, 'General')
+      // Go to Experimental
+      await app.client.click('[data-e2e=tabs_experimental]')
+      const section_title = await app.client.getText(selector.settingsSection_title)
       expect(section_title).toEqual('Experimental features')
-
-      // DevMode = ON
-      await app.client.click('[data-e2e=devMode_button]')
-
-      // Verify Dev mode
-      // Add New Account
-      await app.client.click('[data-e2e=menuAddAccount_button]')
-      await waitForExpectedText(app, '[data-e2e=modal_title]', 'Add accounts')
-
-      // Select Bitcoin Testnet from dropdown list
-      await app.client.setValue('[data-e2e=modalBody] input', 'Bitcoin testnet')
-      await app.client.keys('Enter')
-      const currencyBadge = await app.client.getText('[data-e2e=currencyBadge]')
-      expect(currencyBadge).toEqual('Bitcoin Testnet')
+      await app.client.click('[data-e2e=MANAGER_DEV_MODE_button]')
+    }, TIMEOUT)
+    
+    test(
+      'Go to account page and open add Account flow',
+      async () => {
+      await app.client.click(selector.sidebar_accounts)
+      await waitForExpectedText(app, selector.accounts_title, 'Accounts')
+      await app.client.click(selector.button_addAccount)
+      await waitForExpectedText(app, selector.modal_title, 'Add accounts')
+      }, TIMEOUT)
+      
+    test(
+      'Testnet currencies should be available', 
+      async () => {
+        await app.client.setValue('.select__input input', 'Bitcoin testnet')
+        await app.client.keys('Enter')
+        const currency=await app.client.getText(selector.currencybadge)
+        expect(currency).toEqual('Bitcoin Testnet')
+    }, TIMEOUT)
     },
-    TIMEOUT,
+    TIMEOUT
   )
-})

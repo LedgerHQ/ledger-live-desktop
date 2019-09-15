@@ -1,6 +1,6 @@
 import { waitForDisappear, waitForExpectedText } from './helpers'
 import { applicationProxy } from './applicationProxy'
-import * as css from './css_Path'
+import * as selector from './selectors'
 
 let app
 
@@ -25,46 +25,46 @@ describe('Launch LL with empty user data, Skip onboarding, Welcome steps, check 
       expect(title).toEqual('Ledger Live')
       await app.client.waitUntilWindowLoaded()
       await waitForDisappear(app, '#preload')
-      await waitForExpectedText(app, css.onboarding_title, 'Bugs and analytics')
+      await waitForExpectedText(app, selector.onboarding_title, 'Bugs and analytics')
       }, TIMEOUT)
   
   test(
     'Technical data infos should be displayed',
     async () => {
-      const analytics_techData_title = await app.client.getText(css.analytics_techData)
+      const analytics_techData_title = await app.client.getText(selector.analytics_techData)
       expect(analytics_techData_title).toEqual('Technical data*')
-      await app.client.click(css.techData_link)
-      await waitForExpectedText(app, css.modal_title, 'Technical data')
-      await app.client.click(css.button_closeTechdata)
+      await app.client.click(selector.techData_link)
+      await waitForExpectedText(app, selector.modal_title, 'Technical data')
+      await app.client.click(selector.button_closeTechdata)
     }, TIMEOUT)
 
   test(
     'Share Analytics infos should be displayed',
     async () => {
       const analytics_shareAnalytics_title = await app.client.getText(
-        css.analytics_shareAnalytics
+        selector.analytics_shareAnalytics
       )
       expect(analytics_shareAnalytics_title).toEqual('Analytics')
-      await app.client.click(css.shareAnalytics_link)
-      await waitForExpectedText(app, css.modal_title, 'Analytics')
-      await app.client.click(css.button_closeShareAnalytics)
+      await app.client.click(selector.shareAnalytics_link)
+      await waitForExpectedText(app, selector.modal_title, 'Analytics')
+      await app.client.click(selector.button_closeShareAnalytics)
     }, TIMEOUT)
   
   test(
     'Report bugs infos should be displayed',
     async () => {
-      const analytics_reportBugs_title = await app.client.getText(css.analytics_reportBugs)
+      const analytics_reportBugs_title = await app.client.getText(selector.analytics_reportBugs)
       expect(analytics_reportBugs_title).toEqual('Bug reports')
     }, TIMEOUT)
       
   test(
     'Your device is ready then tradesafely modals should be displayed',
     async () => {
-      await app.client.click(css.button_continue)
-      await waitForExpectedText(app, css.onboarding_finish_title, 'Your device is ready!')
-      await app.client.click(css.button_continue)
-      await waitForExpectedText(app, css.modal_title, 'Trade safely')
-      await app.client.click(css.button_continue)
+      await app.client.click(selector.button_continue)
+      await waitForExpectedText(app, selector.onboarding_finish_title, 'Your device is ready!')
+      await app.client.click(selector.button_continue)
+      await waitForExpectedText(app, selector.modal_title, 'Trade safely')
+      await app.client.click(selector.button_continue)
     }, TIMEOUT)
 
   test(
@@ -75,9 +75,9 @@ describe('Launch LL with empty user data, Skip onboarding, Welcome steps, check 
         '[data-e2e=dashboard_empty_title]',
         'Install apps or add accounts',
       )
-      const openManager_button = await app.client.getText(css.button_openManager)
+      const openManager_button = await app.client.getText(selector.button_openManager)
       expect(openManager_button).toEqual('Open Manager')
-      const addAccount_button = await app.client.getText(css.button_addAccount)
+      const addAccount_button = await app.client.getText(selector.button_addAccount)
       expect(addAccount_button).toEqual('Add accounts')
     },
     TIMEOUT)
