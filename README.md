@@ -20,7 +20,7 @@ Ledger Live is an hybrid desktop application built with Electron, React, Redux, 
 
 ### Coins
 
-- supported by [ledger-core](https://github.com/LedgerHQ/lib-ledger-core) (C++) implementation: BTC BCH LTC DASH QTUM ZEC BTG STRAT DOGE DGB HSR KMD PIVX ZEN VTC PPC VIA XST POSW CLUB
+- supported by [ledger-core](https://github.com/LedgerHQ/lib-ledger-core) (C++) implementation: BTC BCH LTC DASH QTUM ZEC BTG STRAT DOGE DGB HSR KMD PIVX ZEN VTC PPC VIA XST POSW CLUB HATCH
 - supported by JavaScript implementation: ETH, ETC, XRP
 
 ## Setup

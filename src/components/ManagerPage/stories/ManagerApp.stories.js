@@ -40,6 +40,7 @@ const icons = {
   stellar: 'stellar',
   monero: 'monero',
   gnupg: 'gnupg',
+  hatch: 'hatch',
 }
 
 stories.add('ManagerApp', () => (

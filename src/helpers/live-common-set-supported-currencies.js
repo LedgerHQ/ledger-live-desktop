@@ -27,6 +27,7 @@ setSupportedCurrencies([
   'poswallet',
   'clubcoin',
   'decred',
+  'hatch',
   'bitcoin_testnet',
   'ethereum_ropsten',
 ])
