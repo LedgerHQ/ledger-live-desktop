@@ -63,7 +63,7 @@ export function SettingsSectionHeader({
     <SettingsSectionHeaderContainer tabIndex={-1} onClick={onClick} style={style}>
       <RoundIconContainer mr={3}>{icon}</RoundIconContainer>
       <Box grow flex={1} mr={3}>
-        <Box ff="Museo Sans|Regular" color="dark" data-e2e="settingsGeneral_title">
+        <Box ff="Museo Sans|Regular" color="dark" data-e2e="settingsSection_title">
           {title}
         </Box>
         <Box ff="Open Sans" fontSize={3} mt={1}>

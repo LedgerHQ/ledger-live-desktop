@@ -49,7 +49,7 @@ class SectionExperimental extends PureComponent<Props> {
     const { t } = this.props
 
     return (
-      <Section>
+      <Section data-e2e='experimental_section_title'>
         <TrackPage category="Settings" name="Experimental" />
 
         <Header
