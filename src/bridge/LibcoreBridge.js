@@ -87,7 +87,7 @@ const createTransaction = () => ({
 const feesLoaded = (a, t) => {
   switch (a.currency.family) {
     case 'bitcoin':
-      return !!t.feePerByte
+      return !!t.feePerByte && BigNumber(t.feePerByte).gt(0)
     case 'ethereum':
       return !!t.gasPrice
     case 'ripple':
