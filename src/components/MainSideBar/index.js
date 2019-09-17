@@ -101,7 +101,6 @@ const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
       justifyContent="center"
       m={2}
       style={{
-        flexGrow: 1,
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: 'flex-end',
@@ -341,8 +340,8 @@ class MainSideBar extends PureComponent<Props> {
 
               <SideBarList scroll title={t('sidebar.stars')} collapsed={secondAnim}>
                 <Stars pathname={pathname} collapsed={secondAnim} />
-                <TagContainer collapsed={!secondAnim} />
               </SideBarList>
+              <TagContainer collapsed={!secondAnim} />
             </SideBar>
           )
         }}
