@@ -11,7 +11,6 @@ import { remote, webFrame } from 'electron'
 import { render } from 'react-dom'
 import createHistory from 'history/createHashHistory'
 import moment from 'moment'
-import { runMigrations } from 'migrations'
 
 import createStore from 'renderer/createStore'
 import events from 'renderer/events'
@@ -54,7 +53,6 @@ const TAB_KEY = 9
 db.init(userDataDirectory)
 
 async function init() {
-  await runMigrations()
   db.init(userDataDirectory)
   db.registerTransform('app', 'accounts', { get: decodeAccountsModel, set: encodeAccountsModel })
 
