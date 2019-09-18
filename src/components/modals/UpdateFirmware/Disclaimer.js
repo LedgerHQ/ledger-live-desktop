@@ -2,8 +2,8 @@
 /* eslint react/jsx-no-literals: 0 */
 
 import React, { PureComponent } from 'react'
-import { translate, Trans } from 'react-i18next'
-import type { OsuFirmware, FinalFirmware } from '@ledgerhq/live-common/lib/types/manager'
+import { Trans, translate } from 'react-i18next'
+import type { FinalFirmware, OsuFirmware } from '@ledgerhq/live-common/lib/types/manager'
 import type { T } from 'types/common'
 
 import Modal from 'components/base/Modal'
@@ -13,6 +13,7 @@ import Button from 'components/base/Button'
 import GrowScroll from 'components/base/GrowScroll'
 import GradientBox from 'components/GradientBox'
 import Markdown, { Notes } from 'components/base/Markdown'
+import styled from 'styled-components'
 import TrackPage from 'analytics/TrackPage'
 
 import type { ModalStatus } from 'components/ManagerPage/FirmwareUpdate'
@@ -32,6 +33,13 @@ type Props = {
 }
 
 type State = *
+
+const NotesWrapper = styled(Box)`
+  border-top: 1px solid ${p => p.theme.colors.lightGrey};
+  height: 250px;
+  margin-top: 8px;
+  position: relative;
+`
 
 class DisclaimerModal extends PureComponent<Props, State> {
   render(): React$Node {
@@ -59,17 +67,18 @@ class DisclaimerModal extends PureComponent<Props, State> {
               </Text>
               <Text ff="Open Sans|Regular" fontSize={4} color="graphite" align="center">
                 {t('manager.firmware.disclaimerAppDelete')}
+                {' '}
                 {t('manager.firmware.disclaimerAppReinstall')}
               </Text>
               {firmware && firmware.osu ? (
-                <Box relative pb={0} style={{ height: 250, width: '100%' }}>
+                <NotesWrapper>
                   <GrowScroll pb={5}>
                     <Notes>
                       <Markdown>{firmware.osu.notes}</Markdown>
                     </Notes>
                   </GrowScroll>
                   <GradientBox />
-                </Box>
+                </NotesWrapper>
               ) : null}
             </Box>
           )}
