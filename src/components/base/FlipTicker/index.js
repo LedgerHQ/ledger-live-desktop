@@ -9,10 +9,10 @@ import { Spring, animated } from 'react-spring'
 
 import Box from 'components/base/Box'
 
-const Container = styled(Box).attrs({
+const Container = styled(Box).attrs(() => ({
   horizontal: true,
   relative: true,
-})`
+}))`
   overflow: hidden;
   white-space: pre;
 `
@@ -50,7 +50,7 @@ class FlipTicker extends PureComponent<Props, State> {
     const { value, ...p } = this.props
     const { height } = this.state
     return (
-      <Container innerRef={n => (this._node = n)} {...p}>
+      <Container ref={n => (this._node = n)} {...p}>
         {[...value].map((l, i) => (
           <Box key={i}>
             {!/[0-9]/.test(l) ? (

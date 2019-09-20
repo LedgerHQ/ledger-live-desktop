@@ -200,13 +200,13 @@ const IconWrapper = styled(Box)`
   margin-bottom: 15px;
 `
 
-const Title = styled(Box).attrs({
+const Title = styled(Box).attrs(() => ({
   ff: 'Museo Sans',
   fontSize: 5,
   mt: 2,
   mb: 15,
-  color: 'dark',
-})`
+  color: 'palette.text.shade100',
+}))`
   text-align: center;
 `
 

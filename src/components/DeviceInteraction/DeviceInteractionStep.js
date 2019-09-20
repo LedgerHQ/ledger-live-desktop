@@ -180,7 +180,10 @@ class DeviceInteractionStep extends PureComponent<
         <IconContainer isTransparent={!isActive && !isSuccess}>{step.icon}</IconContainer>
         <Box py={4} justify="center" grow shrink>
           {title && (
-            <Box color={isActive || isSuccess ? 'dark' : ''} ff="Open Sans|Regular">
+            <Box
+              color={isActive || isSuccess ? 'palette.text.shade100' : ''}
+              ff="Open Sans|Regular"
+            >
               {title}
             </Box>
           )}

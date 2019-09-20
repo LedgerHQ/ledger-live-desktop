@@ -25,10 +25,10 @@ const icons = req
   .filter(i => i.Component)
   .sort((a, b) => a.iconName > b.iconName)
 
-const IconWrapper = styled(Box).attrs({
+const IconWrapper = styled(Box).attrs(() => ({
   align: 'center',
   justify: 'center',
-})`
+}))`
   width: 150px;
   height: 150px;
   &:hover {

@@ -6,17 +6,18 @@ import styled from 'styled-components'
 import Check from 'icons/Check'
 import { Tabbable } from 'components/base/Box'
 
-const Base = styled(Tabbable).attrs({
+const Base = styled(Tabbable).attrs(() => ({
   relative: true,
   align: 'center',
   justifyContent: 'center',
-})`
+}))`
   outline: none;
   border-radius: 4px;
-  background-color: ${p => (p.isChecked ? p.theme.colors.wallet : p.theme.colors.white)};
+  background-color: ${p =>
+    p.isChecked ? p.theme.colors.wallet : p.theme.colors.palette.background.paper};
   border: 1px solid;
-  border-color: ${p => (p.isChecked ? p.theme.colors.wallet : p.theme.colors.fog)};
-  color: ${p => p.theme.colors.white};
+  border-color: ${p => (p.isChecked ? p.theme.colors.wallet : p.theme.colors.palette.divider)};
+  color: ${p => p.theme.colors.palette.background.paper};
   height: 18px;
   width: 18px;
   transition: all ease-in-out 0.1s;

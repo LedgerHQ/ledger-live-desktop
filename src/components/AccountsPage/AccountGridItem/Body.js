@@ -42,7 +42,7 @@ class Body extends PureComponent<{
               showCode
               fontSize={3}
               placeholder={<Placeholder />}
-              color="graphite"
+              color="palette.text.shade80"
             />
           </Box>
           <Box grow justifyContent="center">

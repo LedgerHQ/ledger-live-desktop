@@ -17,6 +17,7 @@ import TrackPage from 'analytics/TrackPage'
 import MarketIndicatorRadio from '../MarketIndicatorRadio'
 import LanguageSelect from '../LanguageSelect'
 import CounterValueSelect from '../CounterValueSelect'
+import ThemeSelect from '../ThemeSelect'
 import RegionSelect from '../RegionSelect'
 import PasswordButton from '../PasswordButton'
 import PasswordAutoLockSelect from '../PasswordAutoLockSelect'
@@ -64,6 +65,12 @@ class SectionGeneral extends PureComponent<Props> {
               <RegionSelect />
             </Row>
           )}
+
+          {__DEV__ || process.env.WITH_THEME ? (
+            <Row title={t('settings.display.theme')} desc={t('settings.display.themeDesc')}>
+              <ThemeSelect />
+            </Row>
+          ) : null}
 
           {EXPERIMENTAL_MARKET_INDICATOR_SETTINGS ? (
             <Row title={t('settings.display.stock')} desc={t('settings.display.stockDesc')}>

@@ -5,13 +5,13 @@ import styled from 'styled-components'
 import Box from 'components/base/Box'
 import type { Item } from './types'
 
-const Container = styled(Box).attrs({
+const Container = styled(Box).attrs(() => ({
   px: 4,
   py: 3,
   align: 'center',
-})`
-  background: white;
-  border: 1px solid #d8d8d8;
+}))`
+  background: ${p => p.theme.colors.palette.background.paper};
+  border: 1px solid ${p => p.theme.colors.palette.divider};
   border-radius: 4px;
   width: 150px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);

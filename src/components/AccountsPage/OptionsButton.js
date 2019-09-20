@@ -26,7 +26,7 @@ import IconDownloadCloud from 'icons/DownloadCloud'
 import IconSend from 'icons/Send'
 
 const Separator = styled.div`
-  background-color: ${p => p.theme.colors.lightFog};
+  background-color: ${p => p.theme.colors.palette.text.shade40};
   height: 1px;
   margin-top: 8px;
   margin-bottom: 8px;
@@ -36,7 +36,10 @@ const Item = styled(DropDownItem)`
   width: 230px;
   cursor: pointer;
   white-space: pre-wrap;
-  background-color: ${p => !p.disableHover && p.isHighlighted && p.theme.colors.lightGrey};
+  justify-content: flex-start;
+  align-items: center;
+  background-color: ${p =>
+    !p.disableHover && p.isHighlighted && p.theme.colors.palette.background.default};
 `
 
 type StateProps = {|
@@ -112,8 +115,6 @@ class OptionsButton extends PureComponent<Props, State> {
     return (
       <Item
         horizontal
-        alignItems="center"
-        justifyContent="flex-start"
         isHighlighted={isHighlighted}
         flow={2}
         onClick={item.onClick}

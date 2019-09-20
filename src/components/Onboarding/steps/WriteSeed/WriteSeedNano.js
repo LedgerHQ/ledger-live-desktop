@@ -1,11 +1,11 @@
 // @flow
 import React, { PureComponent, Fragment } from 'react'
 import { translate, Trans } from 'react-i18next'
-import { colors } from 'styles/theme'
 import { i } from 'helpers/staticPath'
 
 import type { T } from 'types/common'
 
+import InvertableImg from 'components/InvertableImg'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import IconChevronRight from 'icons/ChevronRight'
@@ -36,7 +36,7 @@ class WriteSeedNano extends PureComponent<Props, *> {
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="onboarding.writeSeed.initialize.nano.step1">
               {'Copy the word displayed below'}
-              <Text ff="Open Sans|SemiBold" color="dark">
+              <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
                 {{ seedWord1 }}
               </Text>
               {'in position 1 on a blank Recovery sheet.'}
@@ -64,22 +64,22 @@ class WriteSeedNano extends PureComponent<Props, *> {
     const disclaimerNotes = [
       {
         key: 'note1',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.writeSeed.disclaimer.note1'),
       },
       {
         key: 'note2',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.writeSeed.disclaimer.note2'),
       },
       {
         key: 'note3',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.writeSeed.disclaimer.note3'),
       },
       {
         key: 'note4',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.writeSeed.disclaimer.note4'),
       },
     ]
@@ -93,7 +93,7 @@ class WriteSeedNano extends PureComponent<Props, *> {
         <Box align="center" mt={3}>
           <Inner style={{ width: 700 }}>
             <Box style={{ width: 300 }} justifyContent="center" alignItems="center">
-              <img alt="" src={i('write-seed-onb.svg')} />
+              <InvertableImg alt="" src={i('write-seed-onb.svg')} />
             </Box>
 
             <Box shrink grow flow={4}>
@@ -102,7 +102,7 @@ class WriteSeedNano extends PureComponent<Props, *> {
               ))}
             </Box>
           </Inner>
-          <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} />
+          <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} color="palette.text.shade80" />
         </Box>
       </Fragment>
     )

@@ -31,7 +31,7 @@ function StepConnectDevice({ t, currency, device, setAppOpened }: StepProps) {
           mt={3}
           ff="Open Sans"
           fontSize={4}
-          color="dark"
+          color="palette.text.shade100"
           textAlign="center"
           style={{ width: 370 }}
         >

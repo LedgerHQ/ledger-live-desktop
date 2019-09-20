@@ -46,14 +46,21 @@ class HighFeeConfirmation extends PureComponent<Props, *> {
         )}
       >
         <Box>
-          <Box ff="Open Sans" color="smoke" fontSize={4} pr={20} pl={20} textAlign="center">
+          <Box
+            ff="Open Sans"
+            color="palette.text.shade80"
+            fontSize={4}
+            pr={20}
+            pl={20}
+            textAlign="center"
+          >
             <Trans i18nKey="send.steps.amount.highFeeModal.desc" parent="div">
               {'Be careful, the transaction fees  ('}
-              <Text ff="Open Sans|SemiBold" color="dark">
+              <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
                 {formatCurrencyUnit(unit, fees, { locale, showCode: true })}
               </Text>
               {'). represent more than 10% of the amount ('}
-              <Text ff="Open Sans|SemiBold" color="dark">
+              <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
                 {formatCurrencyUnit(unit, amount, { locale, showCode: true })}
               </Text>
               {'). Do you want to continue?'}

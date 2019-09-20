@@ -1,7 +1,6 @@
 // @flow
 
 import React, { PureComponent, Fragment } from 'react'
-import Animated from 'animated/lib/targets/react-dom'
 import { findDOMNode } from 'react-dom'
 
 import ModalContent from './ModalContent'
@@ -21,15 +20,7 @@ type Props = {
   refocusWhenChange?: any,
 }
 
-type State = {
-  animGradient: Animated.Value,
-}
-
-class ModalBody extends PureComponent<Props, State> {
-  state = {
-    animGradient: new Animated.Value(0),
-  }
-
+class ModalBody extends PureComponent<Props> {
   componentDidUpdate(prevProps: Props) {
     const shouldFocus = prevProps.refocusWhenChange !== this.props.refocusWhenChange
     if (shouldFocus) {
@@ -45,22 +36,8 @@ class ModalBody extends PureComponent<Props, State> {
 
   _content = null
 
-  animateGradient = (isScrollable: boolean) => {
-    const anim = {
-      duration: 150,
-      toValue: isScrollable ? 1 : 0,
-    }
-    Animated.timing(this.state.animGradient, anim).start()
-  }
-
   render() {
     const { onBack, onClose, title, render, renderFooter, renderProps, noScroll } = this.props
-    const { animGradient } = this.state
-
-    const gradientStyle = {
-      ...GRADIENT_STYLE,
-      opacity: animGradient,
-    }
 
     // For `renderFooter` returning falsy values, we need to resolve first.
     const renderedFooter = renderFooter && renderFooter(renderProps)
@@ -70,36 +47,13 @@ class ModalBody extends PureComponent<Props, State> {
         <ModalHeader onBack={onBack} onClose={onClose}>
           {title}
         </ModalHeader>
-        <ModalContent
-          tabIndex={0}
-          ref={n => (this._content = n)}
-          onIsScrollableChange={this.animateGradient}
-          noScroll={noScroll}
-        >
+        <ModalContent tabIndex={0} ref={n => (this._content = n)} noScroll={noScroll}>
           {render && render(renderProps)}
-          <div style={GRADIENT_WRAPPER_STYLE}>
-            <Animated.div style={gradientStyle} />
-          </div>
         </ModalContent>
         {renderedFooter && <ModalFooter>{renderedFooter}</ModalFooter>}
       </Fragment>
     )
   }
-}
-
-const GRADIENT_STYLE = {
-  background: 'linear-gradient(rgba(255, 255, 255, 0), #ffffff)',
-  height: 40,
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  right: 20,
-}
-
-const GRADIENT_WRAPPER_STYLE = {
-  height: 0,
-  position: 'relative',
-  pointerEvents: 'none',
 }
 
 export default ModalBody

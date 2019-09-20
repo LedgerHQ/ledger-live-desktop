@@ -10,7 +10,7 @@ import PlugYourDevice from '../PlugYourDevice'
 const stories = storiesOf('Components', module)
 
 stories.add('PlugYourDevice', () => (
-  <Box bg="lightGrey" p={6}>
+  <Box bg="palette.background.default" p={6}>
     <PlugYourDevice />
   </Box>
 ))

@@ -12,12 +12,12 @@ import { bootloader } from 'config/nontranslatables'
 
 const Bullet = styled.span`
   font-weight: 600;
-  color: #142533;
+  color: ${p => p.theme.colors.palette.text.shade100};
 `
 
-const Separator = styled(Box).attrs({
-  color: 'fog',
-})`
+const Separator = styled(Box).attrs(() => ({
+  color: 'palette.divider',
+}))`
   height: 1px;
   width: 100%;
   background-color: currentColor;
@@ -30,7 +30,7 @@ type Props = {
 const FlashMCUNanos = React.memo(({ deviceModelId }: Props) => (
   <>
     <Box mx={7}>
-      <Text ff="Open Sans|Regular" align="center" color="smoke">
+      <Text ff="Open Sans|Regular" align="center" color="palette.text.shade80">
         <Bullet>{'1. '}</Bullet>
         <Trans i18nKey="manager.modal.mcuFirst" />
       </Text>
@@ -40,11 +40,11 @@ const FlashMCUNanos = React.memo(({ deviceModelId }: Props) => (
     </Box>
     <Separator my={6} />
     <Box mx={7}>
-      <Text ff="Open Sans|Regular" align="center" color="smoke">
+      <Text ff="Open Sans|Regular" align="center" color="palette.text.shade80">
         <Bullet>{'2. '}</Bullet>
         <Trans i18nKey="manager.modal.mcuSecond">
           {'Press the left button and hold it while you reconnect the USB cable until the '}
-          <Text ff="Open Sans|SemiBold" color="dark">
+          <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
             {bootloader}
           </Text>
           {' screen appears'}
@@ -63,7 +63,7 @@ const FlashMCUNanos = React.memo(({ deviceModelId }: Props) => (
   </>
 ))
 
-const Container = styled(Box).attrs({})`
+const Container = styled(Box)`
   max-width: 50%;
   display: flex;
   flex: 1;
@@ -75,7 +75,7 @@ const FlashMCUBlue = React.memo(({ deviceModelId }: Props) => (
   <>
     <Box mx={7} horizontal>
       <Container px={1}>
-        <Text ff="Open Sans|Regular" align="center" color="smoke">
+        <Text ff="Open Sans|Regular" align="center" color="palette.text.shade80">
           <Bullet>{'1. '}</Bullet>
           <Trans i18nKey="manager.modal.mcuBlueFirst" />
         </Text>
@@ -84,7 +84,7 @@ const FlashMCUBlue = React.memo(({ deviceModelId }: Props) => (
         </Box>
       </Container>
       <Container>
-        <Text ff="Open Sans|Regular" align="center" color="smoke">
+        <Text ff="Open Sans|Regular" align="center" color="palette.text.shade80">
           <Bullet>{'2. '}</Bullet>
           <Trans i18nKey="manager.modal.mcuBlueSecond" />
         </Text>

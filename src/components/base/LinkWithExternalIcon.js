@@ -9,12 +9,12 @@ import IconExternalLink from 'icons/ExternalLink'
 import Label from './Label'
 import { rgba } from '../../styles/helpers'
 
-const Wrapper = styled(Label).attrs({
+const Wrapper = styled(Label).attrs(() => ({
   ff: 'Open Sans|SemiBold',
   color: 'wallet',
   fontSize: 4,
   align: 'center',
-})`
+}))`
   display: flex;
   cursor: pointer;
 

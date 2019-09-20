@@ -43,7 +43,7 @@ const icons = {
 }
 
 stories.add('ManagerApp', () => (
-  <Box bg="lightGrey" p={6} m={-4}>
+  <Box bg="palette.background.default" p={6} m={-4}>
     <ManagerApp
       name={text('name', 'Bitcoin')}
       icon={select('icon', icons, 'bitcoin')}

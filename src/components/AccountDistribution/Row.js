@@ -51,7 +51,7 @@ const Wrapper = styled.div`
   }
 
   &:hover {
-    background: ${p => p.theme.colors.lightGrey};
+    background: ${p => p.theme.colors.palette.background.default};
   }
 `
 
@@ -87,9 +87,9 @@ const Dots = styled.div`
   width: 5%;
   justify-content: flex-end;
   cursor: pointer;
-  color: ${p => p.theme.colors.fog};
+  color: ${p => p.theme.colors.palette.divider};
   &:hover {
-    color: ${p => p.theme.colors.grey};
+    color: ${p => p.theme.colors.palette.text.shade60};
   }
 `
 
@@ -127,11 +127,11 @@ class Row extends PureComponent<Props, State> {
             {icon}
             <Box grow>
               {parentAccount ? (
-                <Box fontSize={10} color="graphite">
+                <Box fontSize={10} color="palette.text.shade80">
                   <Text ff="Open Sans|SemiBold">{parentAccount.name}</Text>
                 </Box>
               ) : null}
-              <Ellipsis ff="Open Sans|SemiBold" color="dark" fontSize={3}>
+              <Ellipsis ff="Open Sans|SemiBold" color="palette.text.shade100" fontSize={3}>
                 {displayName}
               </Ellipsis>
             </Box>
@@ -139,7 +139,7 @@ class Row extends PureComponent<Props, State> {
           <Distribution>
             {!!distribution && (
               <Fragment>
-                <Text ff="Rubik" color="dark" fontSize={3}>
+                <Text ff="Rubik" color="palette.text.shade100" fontSize={3}>
                   {`${percentage}%`}
                 </Text>
                 <Bar progress={percentage} progressColor={color} />
@@ -149,7 +149,7 @@ class Row extends PureComponent<Props, State> {
           <Amount>
             <Ellipsis>
               <FormattedVal
-                color={'graphite'}
+                color={'palette.text.shade80'}
                 unit={currency.units[0]}
                 val={amount}
                 fontSize={3}
@@ -164,13 +164,13 @@ class Row extends PureComponent<Props, State> {
                   currency={currency}
                   value={amount}
                   disableRounding
-                  color="dark"
+                  color="palette.text.shade100"
                   fontSize={3}
                   showCode
                   alwaysShowSign={false}
                 />
               ) : (
-                <Text ff="Rubik" color="dark" fontSize={3}>
+                <Text ff="Rubik" color="palette.text.shade100" fontSize={3}>
                   {'-'}
                 </Text>
               )}

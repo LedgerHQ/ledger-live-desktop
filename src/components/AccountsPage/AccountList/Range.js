@@ -74,7 +74,7 @@ class Range extends Component<Props> {
         value={rangeItems.find(item => item.key === range)}
       >
         <Track onUpdate event="ChangeRange" range={rangeItems} />
-        <Text color="grey" ff="Open Sans|SemiBold" fontSize={4}>
+        <Text color="palette.text.shade60" ff="Open Sans|SemiBold" fontSize={4}>
           {t('common.range')}
         </Text>
         <Box

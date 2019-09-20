@@ -29,13 +29,13 @@ type FeeItem = {
   feePerByte: BigNumber,
 }
 
-const InputRight = styled(Box).attrs({
+const InputRight = styled(Box).attrs(() => ({
   ff: 'Rubik',
-  color: 'graphite',
+  color: 'palette.text.shade80',
   fontSize: 4,
   justifyContent: 'center',
   pr: 3,
-})``
+}))``
 
 const blockCountNameConvention = {
   '1': 'High', // (fast confirmation)',

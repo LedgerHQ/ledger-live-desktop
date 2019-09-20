@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 
 import Box from 'components/base/Box'
 import IconLoader from 'icons/Loader'
@@ -18,7 +18,12 @@ const rotate = keyframes`
 export const Rotating = styled(Box)`
   width: ${p => p.size}px;
   height: ${p => p.size}px;
-  animation: ${p => (p.isRotating === false ? 'none' : `${rotate} 1s linear infinite`)};
+  animation: ${p =>
+    p.isRotating === false
+      ? 'none'
+      : css`
+          ${rotate} 1s linear infinite
+        `};
   transition: 100ms linear transform;
 `
 

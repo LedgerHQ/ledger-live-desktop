@@ -5,13 +5,13 @@ import { BulletRow } from '../Onboarding/helperComponents'
 import Box from '../base/Box'
 import Text from '../base/Text'
 
-const BulletRowIcon = styled(Box).attrs({
+const BulletRowIcon = styled(Box).attrs(() => ({
   ff: 'Rubik|Regular',
   fontSize: 10,
   textAlign: 'center',
   color: 'wallet',
   pl: 2,
-})`
+}))`
   background-color: rgba(100, 144, 241, 0.2);
   border-radius: 12px;
   display: inline-flex;
@@ -21,13 +21,13 @@ const BulletRowIcon = styled(Box).attrs({
   padding-top: 2px;
 `
 
-const Plus = styled(Box).attrs({
+const Plus = styled(Box).attrs(() => ({
   ff: 'Open Sans|SemiBold',
   fontSize: 13,
   textAlign: 'center',
   color: 'wallet',
   pl: 2,
-})`
+}))`
   display: inline-flex;
   background-color: rgba(100, 144, 241, 0.2);
   border-radius: 4px;
@@ -45,11 +45,11 @@ const stepsImportMobile = [
       <Box style={{ display: 'block' }}>
         <Trans i18nKey="settings.export.modal.step1">
           {'Tap the'}
-          <Text ff="Open Sans|SemiBold" color="dark">
+          <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
             <Plus>{'+'}</Plus>
           </Text>
           {'button in'}
-          <Text ff="Open Sans|SemiBold" color="dark">
+          <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
             {'Accounts'}
           </Text>
         </Trans>
@@ -63,7 +63,7 @@ const stepsImportMobile = [
       <Box style={{ display: 'block' }}>
         <Trans i18nKey="settings.export.modal.step2">
           {'Tap'}
-          <Text ff="Open Sans|SemiBold" color="dark">
+          <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
             {'Import desktop accounts'}
           </Text>
         </Trans>
@@ -77,7 +77,7 @@ const stepsImportMobile = [
       <Box style={{ display: 'block' }}>
         <Trans i18nKey="settings.export.modal.step3">
           {'Scan the'}
-          <Text ff="Open Sans|SemiBold" color="dark">
+          <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
             {'LiveQR Code'}
           </Text>
           {'until the loader hits 100%'}
@@ -90,7 +90,7 @@ const stepsImportMobile = [
 const ExportInstructions = () => (
   <>
     <Box shrink style={{ width: 330, fontSize: 13, marginTop: 20 }}>
-      <Text ff="Open Sans|SemiBold" color="dark">
+      <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
         <Trans i18nKey="settings.export.modal.listTitle" />
       </Text>
     </Box>

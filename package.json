@@ -116,7 +116,7 @@
     "smoothscroll-polyfill": "^0.4.3",
     "source-map": "0.7.3",
     "source-map-support": "^0.5.4",
-    "styled-components": "^3.3.2",
+    "styled-components": "^4.3.2",
     "styled-system": "^2.2.9",
     "tippy.js": "^2.5.2",
     "uncontrollable": "^6.0.0",

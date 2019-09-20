@@ -6,7 +6,7 @@ import ping from 'commands/ping'
 const Indicator = styled.div`
   opacity: 0.8;
   border-radius: 3px;
-  background-color: white;
+  background-color: ${p => p.theme.colors.palette.background.paper};
   position: fixed;
   font-size: 10px;
   padding: 3px 6px;

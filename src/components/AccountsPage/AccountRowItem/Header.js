@@ -2,9 +2,8 @@
 
 import React, { PureComponent } from 'react'
 import Box from 'components/base/Box'
-import { colors } from 'styles/theme'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/account'
-import styled from 'styled-components'
+import styled, { withTheme } from 'styled-components'
 import CryptoCurrencyIcon from '../../CryptoCurrencyIcon'
 import Ellipsis from '../../base/Ellipsis'
 
@@ -12,6 +11,7 @@ type Props = {
   account: Account | TokenAccount,
   name: string,
   nested?: boolean,
+  theme: any,
 }
 
 // NB Inside Head to not break alignment with parent row;
@@ -24,7 +24,7 @@ const NestedIndicator = styled.div`
 
 class Header extends PureComponent<Props> {
   render() {
-    const { account, name, nested } = this.props
+    const { account, name, nested, theme } = this.props
     let currency
     let color
     let title
@@ -35,7 +35,7 @@ class Header extends PureComponent<Props> {
       title = currency.name
     } else {
       currency = account.token
-      color = colors.grey
+      color = theme.colors.palette.text.shade60
       title = 'token'
     }
     return (
@@ -53,11 +53,11 @@ class Header extends PureComponent<Props> {
         </Box>
         <Box grow>
           {!nested && account.type === 'Account' && (
-            <Box style={{ textTransform: 'uppercase' }} fontSize={9} color="grey">
+            <Box style={{ textTransform: 'uppercase' }} fontSize={9} color="palette.text.shade60">
               {title}
             </Box>
           )}
-          <Ellipsis fontSize={12} color="dark">
+          <Ellipsis fontSize={12} color="palette.text.shade100">
             {name}
           </Ellipsis>
         </Box>
@@ -66,4 +66,4 @@ class Header extends PureComponent<Props> {
   }
 }
 
-export default Header
+export default withTheme(Header)

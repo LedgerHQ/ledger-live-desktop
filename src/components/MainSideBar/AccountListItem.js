@@ -21,7 +21,7 @@ export default class AccountListItem extends PureComponent<{
       desc: () => (
         <FormattedVal
           alwaysShowSign={false}
-          color="graphite"
+          color="palette.text.shade80"
           unit={account.unit}
           showCode
           val={account.balance || 0}

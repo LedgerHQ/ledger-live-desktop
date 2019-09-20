@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import Box from 'components/base/Box'
 import IconCross from 'icons/Cross'
 import { createStructuredSelector } from 'reselect'
-import { colors, radii } from 'styles/theme'
+import { radii } from 'styles/theme'
 
 import { dismissBanner } from '../actions/settings'
 import { dismissedBannersSelector } from '../reducers/settings'
@@ -85,18 +85,18 @@ const IconContainer = styled.div`
   align-items: center;
 `
 
-const Container = styled(Box).attrs({
+const Container = styled(Box).attrs(p => ({
   horizontal: true,
   align: 'center',
   py: '8px',
   px: 3,
-  bg: p => colors[p.status] || 'wallet',
-  color: 'white',
+  bg: p.theme.colors[p.status] || 'palette.primary.main',
+  color: 'palette.primary.contrastText',
   mt: -32,
   mb: 20,
   fontSize: 4,
   ff: 'Open Sans|SemiBold',
-})`
+}))`
   border-radius: ${radii[1]}px;
 `
 
@@ -105,14 +105,14 @@ const RightContainer = styled.div`
 `
 
 export const FakeLink = styled.span`
-  color: white;
+  color: ${p => p.theme.colors.palette.primary.contrastText};
   text-decoration: underline;
   cursor: pointer;
 `
 
-const CloseContainer = styled(Box).attrs({
-  color: 'white',
-})`
+const CloseContainer = styled(Box).attrs(() => ({
+  color: 'palette.primary.contrastText',
+}))`
   z-index: 1;
   margin-left: 10px;
   cursor: pointer;

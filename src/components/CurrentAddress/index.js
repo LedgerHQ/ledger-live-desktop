@@ -23,79 +23,88 @@ import IconRecheck from 'icons/Recover'
 import IconCopy from 'icons/Copy'
 import IconShield from 'icons/Shield'
 
-const Container = styled(Box).attrs({
+const Container = styled(Box).attrs(p => ({
   borderRadius: 1,
   alignItems: 'center',
-  bg: p => (p.isAddressVerified === false ? rgba(p.theme.colors.alertRed, 0.02) : 'lightGrey'),
+  bg:
+    p.isAddressVerified === false
+      ? rgba(p.theme.colors.alertRed, 0.02)
+      : 'palette.background.default',
   p: 6,
   pb: 4,
-})`
+}))`
   border: ${p =>
     p.isAddressVerified === false ? `1px dashed ${rgba(p.theme.colors.alertRed, 0.5)}` : 'none'};
 `
 
-const Address = styled(Box).attrs({
-  bg: 'white',
+const Address = styled(Box).attrs(() => ({
+  bg: 'palette.background.paper',
   borderRadius: 1,
-  color: 'dark',
+  color: 'palette.text.shade100',
   ff: 'Open Sans|SemiBold',
   fontSize: 4,
   mt: 2,
   px: 4,
   py: 3,
   relative: true,
-})`
-  border: ${p => `1px dashed ${p.theme.colors.fog}`};
+}))`
+  border: ${p => `1px dashed ${p.theme.colors.palette.divider}`};
   cursor: text;
   user-select: text;
   text-align: center;
   min-width: 320px;
 `
 
-const CopyFeedback = styled(Box).attrs({
+const CopyFeedback = styled(Box).attrs(() => ({
   sticky: true,
-  bg: 'white',
+  bg: 'palette.background.paper',
   align: 'center',
   justify: 'center',
-})``
+}))``
 
-const Label = styled(Box).attrs({
+const Label = styled(Box).attrs(() => ({
   alignItems: 'center',
-  color: 'graphite',
+  color: 'palette.text.shade80',
   ff: 'Open Sans|SemiBold',
   fontSize: 4,
   flow: 1,
   horizontal: true,
-})`
+}))`
   strong {
-    color: ${p => p.theme.colors.dark};
+    color: ${p => p.theme.colors.palette.text.shade100};
     font-weight: 600;
   }
 `
 
-const Footer = styled(Box).attrs({
+const QRCodeContainer = styled(Box)`
+  background-color: ${p => p.theme.colors.white};
+  padding: 6px;
+  border-radius: 4px;
+`
+
+const Footer = styled(Box).attrs(() => ({
   justify: 'center',
   flow: 4,
   horizontal: true,
   mt: 4,
-})`
+}))`
   text-transform: uppercase;
   width: 100%;
 `
 
-const FooterButtonWrapper = styled(Box).attrs({
-  color: 'grey',
+const FooterButtonWrapper = styled(Box).attrs(() => ({
+  color: 'palette.text.shade60',
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: 1,
   px: 2,
-})`
+}))`
   line-height: 1;
   height: 55px;
 
   &:hover {
     background-color: ${p => rgba(p.theme.colors.wallet, 0.1)};
-    color: ${p => p.theme.colors.dark};
+    color: ${p => p.theme.colors.palette.text.shade100};
 
     svg {
       color: ${p => p.theme.colors.wallet};
@@ -180,14 +189,14 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
 
     return (
       <Container isAddressVerified={isAddressVerified} {...props}>
-        <Box mb={4}>
+        <QRCodeContainer mb={4}>
           <QRCode
             size={120}
             data={encodeURIScheme({
               address,
             })}
           />
-        </Box>
+        </QRCodeContainer>
         <Label>
           <Box>
             {name ? (
@@ -211,7 +220,7 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
           <Box
             shrink
             fontSize={12}
-            color={isAddressVerified === false ? 'alertRed' : 'dark'}
+            color={isAddressVerified === false ? 'alertRed' : 'palette.text.shade100'}
             ff="Open Sans"
           >
             {isAddressVerified === null

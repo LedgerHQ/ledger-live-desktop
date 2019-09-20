@@ -9,9 +9,9 @@ import { connect } from 'react-redux'
 import noop from 'lodash/noop'
 import Animated from 'animated/lib/targets/react-dom'
 import Easing from 'animated/lib/Easing'
+import { withTheme } from 'styled-components'
 
 import { closeModal, isModalOpened, getModalData } from 'reducers/modals'
-import { colors } from 'styles/theme'
 
 export { default as ModalBody } from './ModalBody'
 
@@ -60,7 +60,7 @@ type Props = {
   data?: any,
   preventBackdropClick?: boolean,
   width?: number,
-
+  theme: any,
   name?: string, // eslint-disable-line
   onBeforeOpen?: ({ data: * }) => *, // eslint-disable-line
 }
@@ -147,7 +147,7 @@ class Modal extends PureComponent<Props, State> {
 
   render() {
     const { animShowHide, isInDOM } = this.state
-    const { children, render, centered, onClose, data, isOpened, width } = this.props
+    const { children, render, centered, onClose, data, isOpened, width, theme } = this.props
 
     if (!isInDOM) {
       return null
@@ -172,6 +172,8 @@ class Modal extends PureComponent<Props, State> {
 
     const bodyWrapperStyle = {
       ...BODY_WRAPPER_STYLE,
+      background: theme.colors.palette.background.paper,
+      color: theme.colors.palette.text.shade80,
       opacity: animShowHide,
       transform: [{ scale }],
       width: width || BODY_WRAPPER_STYLE.width,
@@ -219,17 +221,17 @@ const CONTAINER_STYLE = {
 }
 
 const BODY_WRAPPER_STYLE = {
-  background: 'white',
   width: 500,
   borderRadius: 3,
   boxShadow: 'box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2)',
-  color: colors.smoke,
   flexShrink: 1,
   display: 'flex',
   flexDirection: 'column',
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Modal)
+export default withTheme(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(Modal),
+)

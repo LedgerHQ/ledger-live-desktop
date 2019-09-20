@@ -14,10 +14,10 @@ stories.add('GrowScroll', () => {
 
   return (
     <Box
-      bg={reverseColor ? 'dark' : 'white'}
-      color={reverseColor ? 'white' : 'dark'}
+      bg={reverseColor ? 'palette.text.shade100' : 'palette.background.paper'}
+      color={reverseColor ? 'palette.background.paper' : 'palette.text.shade100'}
       style={{
-        border: '1px solid black',
+        border: '1px solid palette.text.shade100',
       }}
     >
       <GrowScroll maxHeight={400}>

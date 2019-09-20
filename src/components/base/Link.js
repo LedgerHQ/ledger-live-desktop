@@ -2,9 +2,9 @@
 
 import styled from 'styled-components'
 
-export const FakeLink = styled.span.attrs({
+export const FakeLink = styled.span.attrs(() => ({
   color: 'wallet',
-})`
+}))`
   text-decoration: underline;
   cursor: pointer;
 `

@@ -16,15 +16,18 @@ const TagWrapper = styled.div`
   min-height: 20px;
   align-self: center;
   border-radius: 4px;
-  color: ${p => p.color || p.theme.colors.white};
-  background-color: ${p => p.backgroundColor || p.theme.colors.wallet};
+  color: ${p => p.color || p.theme.colors.palette.primary.contrastText};
+  background-color: ${p => p.backgroundColor || p.theme.colors.palette.primary.main};
   text-decoration: none;
   text-transform: uppercase;
 
   ${p =>
     p.onClick
       ? `&:hover {
-          background-color: ${darken(p.backgroundColor || p.theme.colors.wallet, 0.05)};
+          background-color: ${darken(
+            p.backgroundColor || p.theme.colors.palette.primary.main,
+            0.05,
+          )};
         }`
       : ''}
 `

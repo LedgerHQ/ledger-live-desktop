@@ -12,13 +12,13 @@ const Trigger = styled(Box)`
   cursor: pointer;
 `
 
-const Drop = styled(Box).attrs({
-  bg: 'white',
+const Drop = styled(Box).attrs(() => ({
+  bg: 'palette.background.paper',
   boxShadow: 0,
   borderRadius: 1,
   p: 2,
-})`
-  ${p => p.border && `border:1px solid ${p.theme.colors.lightFog}`};
+}))`
+  ${p => p.border && `border:1px solid ${p.theme.colors.palette.text.divider}`};
   max-height: 400px;
   position: absolute;
   right: 0;
@@ -27,15 +27,15 @@ const Drop = styled(Box).attrs({
   overflow: scroll;
 `
 
-export const DropDownItem = styled(Box).attrs({
+export const DropDownItem = styled(Box).attrs(p => ({
   borderRadius: 1,
   justifyContent: 'center',
-  ff: p => (p.isActive ? 'Open Sans|SemiBold' : 'Open Sans'),
+  ff: p.isActive ? 'Open Sans|SemiBold' : 'Open Sans',
   fontSize: 4,
   px: 3,
-  color: p => (p.isHighlighted || p.isActive ? 'dark' : 'smoke'),
-  bg: p => (p.isActive ? 'lightGrey' : ''),
-})`
+  color: p.isHighlighted || p.isActive ? 'palette.text.shade100' : 'palette.text.shade80',
+  bg: p.isActive ? 'palette.background.default' : '',
+}))`
   height: 40px;
   white-space: nowrap;
 `
@@ -161,7 +161,12 @@ class DropDown extends PureComponent<Props> {
           selectedItem,
           ...downshiftProps
         }) => (
-          <Wrapper shrink={shrink} {...getRootProps({ refKey: 'innerRef' })} horizontal relative>
+          <Wrapper
+            shrink={shrink}
+            {...getRootProps({ refKey: 'ref' }, { suppressRefError: true })}
+            horizontal
+            relative
+          >
             <Trigger {...getToggleButtonProps()} tabIndex={0} {...props}>
               {children}
             </Trigger>

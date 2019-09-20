@@ -19,17 +19,17 @@ import IconCross from 'icons/Cross'
 import IconExclamationCircle from 'icons/ExclamationCircle'
 import IconSmoothBorders from 'icons/SmoothBorders'
 
-export const DeviceInteractionStepContainer = styled(Box).attrs({
+export const DeviceInteractionStepContainer = styled(Box).attrs(() => ({
   horizontal: true,
   ff: 'Open Sans',
   fontSize: 3,
-  color: 'graphite',
-})`
+  color: 'palette.text.shade80',
+}))`
   position: relative;
   z-index: ${p => (p.isActive ? 1 : '')};
   max-width: 500px;
   min-height: 80px;
-  border: 1px solid ${p => p.theme.colors.fog};
+  border: 1px solid ${p => p.theme.colors.palette.divider};
   border-color: ${p =>
     p.isError ? p.theme.colors.alertRed : p.isActive && !p.isFinished ? p.theme.colors.wallet : ''};
   border-top-color: ${p => (p.isFirst || p.isActive ? '' : 'transparent')};
@@ -62,7 +62,7 @@ export const IconContainer = ({
 }) => (
   <Box
     relative
-    color="dark"
+    color="palette.text.shade100"
     style={{
       width: 70,
       opacity: isTransparent ? 0.5 : 1,
@@ -74,7 +74,7 @@ export const IconContainer = ({
 )
 
 const SpinnerContainerWrapper = styled.div`
-  color: ${p => p.theme.colors.grey};
+  color: ${p => p.theme.colors.palette.text.shade60};
   position: absolute;
   top: 0;
   left: 0;

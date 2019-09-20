@@ -13,11 +13,11 @@ import AccountCell from './AccountCell'
 import AddressCell from './AddressCell'
 import AmountCell from './AmountCell'
 
-const OperationRow = styled(Box).attrs({
+const OperationRow = styled(Box).attrs(() => ({
   horizontal: true,
   alignItems: 'center',
-})`
-  border-bottom: 1px solid ${p => p.theme.colors.lightGrey};
+}))`
+  border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
   height: 68px;
   opacity: ${p => (p.isOptimistic ? 0.5 : 1)};
 

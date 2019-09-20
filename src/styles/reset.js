@@ -70,6 +70,6 @@ em {
 }
 
 .currentTicker {
-  background: white;
+  background: palette.background.paper;
   z-index: 11 !important;
 }`

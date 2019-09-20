@@ -28,12 +28,12 @@ const Tooltip = ({ counterValue, d }: *) => (
     <FormattedVal
       alwaysShowSign={false}
       fontSize={5}
-      color="dark"
+      color="palette.text.shade100"
       showCode
       unit={counterValue.units[0]}
       val={d.value}
     />
-    <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
+    <Box ff="Open Sans|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
       {moment(d.date).format('LL')}
     </Box>
   </Fragment>
@@ -49,12 +49,12 @@ class PortfolioBalanceSummary extends PureComponent<Props> {
     return (
       <Card p={0} py={5}>
         {Header ? (
-          <Box px={6} data-e2e='dashboard_graph'>
+          <Box px={6} data-e2e="dashboard_graph">
             <Header portfolio={portfolio} />
           </Box>
         ) : null}
 
-        <Box ff="Open Sans" fontSize={4} color="graphite" pt={5}>
+        <Box ff="Open Sans" fontSize={4} color="palette.text.shade80" pt={5}>
           {portfolio.balanceAvailable ? (
             <Chart
               onlyUpdateIfLastPointChanges

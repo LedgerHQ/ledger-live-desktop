@@ -22,7 +22,7 @@ const Wrapper = styled.div`
     font-family: 'Open Sans';
     font-weight: 600;
     font-size: 12px;
-    color: ${p => p.theme.colors.grey};
+    color: ${p => p.theme.colors.palette.text.shade60};
   }
 
   > :first-child {
@@ -38,7 +38,7 @@ export const Separator = styled.div`
   &::after {
     content: '/';
     font-size: 13px;
-    color: ${p => p.theme.colors.fog};
+    color: ${p => p.theme.colors.palette.divider};
     padding: 0 15px;
   }
 `

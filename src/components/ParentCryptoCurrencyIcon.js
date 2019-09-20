@@ -1,11 +1,10 @@
 // @flow
 import React, { PureComponent } from 'react'
-import styled from 'styled-components'
+import styled, { withTheme } from 'styled-components'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import Tooltip from 'components/base/Tooltip'
 import Text from 'components/base/Text'
 import { Trans } from 'react-i18next'
-import { colors } from 'styles/theme'
 import CryptoCurrencyIcon from './CryptoCurrencyIcon'
 import { rgba } from '../styles/helpers'
 
@@ -41,14 +40,14 @@ const TooltipWrapper = styled.div`
   flex-direction: column;
 `
 
-const CryptoCurrencyIconTooltip = ({ name }: { name: string }) => (
+const CryptoCurrencyIconTooltip = withTheme(({ name, theme }: { theme: any, name: string }) => (
   <TooltipWrapper>
-    <Text color={rgba(colors.white, 0.5)}>
+    <Text color={rgba(theme.colors.palette.background.paper, 0.5)}>
       <Trans i18nKey={'tokensList.tooltip'} />
     </Text>
     <Text>{name}</Text>
   </TooltipWrapper>
-)
+))
 
 class ParentCryptoCurrencyIcon extends PureComponent<Props> {
   render() {

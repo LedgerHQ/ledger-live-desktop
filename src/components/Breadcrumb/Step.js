@@ -3,8 +3,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { colors } from 'styles/theme'
-
 import Box from 'components/base/Box'
 
 import IconCheck from 'icons/Check'
@@ -12,36 +10,44 @@ import IconCross from 'icons/Cross'
 
 const RADIUS = 18
 
-const Wrapper = styled(Box).attrs({
+const Wrapper = styled(Box).attrs(p => ({
   alignItems: 'center',
-  color: p =>
-    ['active', 'valid'].includes(p.status) ? 'wallet' : p.status === 'error' ? 'alertRed' : 'grey',
+  color: ['active', 'valid'].includes(p.status)
+    ? 'wallet'
+    : p.status === 'error'
+    ? 'alertRed'
+    : 'palette.text.shade20',
   grow: true,
   justifyContent: 'center',
   relative: true,
-})`
+}))`
   width: ${RADIUS}px;
   flex-shrink: 0;
   text-align: center;
   font-size: 9px;
 `
 
-const StepNumber = styled(Box).attrs({
+const StepNumber = styled(Box).attrs(p => ({
   alignItems: 'center',
   justifyContent: 'center',
-  color: p => (['active', 'valid', 'error'].includes(p.status) ? 'white' : 'fog'),
-  bg: p =>
-    ['active', 'valid'].includes(p.status) ? 'wallet' : p.status === 'error' ? 'alertRed' : 'white',
+  color: ['active', 'valid', 'error'].includes(p.status)
+    ? 'palette.background.paper'
+    : 'palette.divider',
+  bg: ['active', 'valid'].includes(p.status)
+    ? 'wallet'
+    : p.status === 'error'
+    ? 'alertRed'
+    : 'palette.background.paper',
   ff: 'Rubik|Regular',
-})`
+}))`
   border-radius: 50%;
   border: 1px solid
     ${p =>
       ['active', 'valid'].includes(p.status)
-        ? colors.wallet
+        ? p.theme.colors.wallet
         : p.status === 'error'
-        ? colors.alertRed
-        : colors.fog};
+        ? p.theme.colors.alertRed
+        : p.theme.colors.palette.divider};
   font-size: 10px;
   height: ${RADIUS}px;
   line-height: 10px;
@@ -49,11 +55,11 @@ const StepNumber = styled(Box).attrs({
   width: ${RADIUS}px;
 `
 
-const Label = styled(Box).attrs({
+const Label = styled(Box).attrs(() => ({
   fontSize: 3,
   ff: 'Museo Sans|Bold',
   px: 2,
-})`
+}))`
   line-height: 1.2;
   position: absolute;
   top: 25px;
