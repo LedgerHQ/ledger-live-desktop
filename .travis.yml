@@ -5,10 +5,10 @@ os: windows
 cache:
   directories:
     - node_modules
+before_cache:
+  - rm -rf node_modules/.cache
 before_install:
   - choco install yarn
-before_script:
-  - git clone https://github.com/Arnaud97234/ledger-live-desktop.git
 script:
   - yarn install
   - yarn ci

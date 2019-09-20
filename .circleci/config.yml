@@ -1,0 +1,58 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/ledger-live-desktop
+  BASH_ENV: "~/.bashrc"
+
+jobs:
+  build_linux:
+    <<: *defaults
+    docker:
+      - image: circleci/node:8.11.3-stretch-browsers
+    steps:
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y libudev-dev libusb-1.0-0-dev
+      - run:
+          name: Install latest yarn
+          command: |
+            curl -sS http://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - ;
+            echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list ;
+            sudo apt-get update && sudo apt-get install yarn
+            sudo rm /usr/local/bin/yarn # remove docker yarn
+      - checkout
+      - restore_cache:
+          keys:
+            - v12-yarn-packages-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: v12-yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run: yarn ci
+      - run: yarn add electron@1.8.8
+
+  build_macos:
+    <<: *defaults
+    macos:
+      xcode: "10.2.1"
+    steps:
+      - run: brew unlink node && brew install node@8 && brew link --overwrite node@8 --force
+      - checkout
+      - run: node -v
+      - restore_cache:
+          keys:
+            - v13-yarn-package-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: v13-yarn-package-{{ checksum "yarn.lock" }}
+          paths:
+          - node_modules
+      - run: yarn ci
+      - run: yarn dist
+      
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build_macos
+      - build_linux
