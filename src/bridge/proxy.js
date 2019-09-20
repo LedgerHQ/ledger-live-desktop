@@ -29,6 +29,7 @@ import { inferDeprecatedMethods } from '@ledgerhq/live-common/lib/bridge/depreca
 import { fromAccountRaw, toAccountRaw } from '@ledgerhq/live-common/lib/account'
 import { patchAccount } from '@ledgerhq/live-common/lib/reconciliation'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
+import { toScanAccountEventRaw, fromScanAccountEventRaw } from '@ledgerhq/live-common/lib/bridge'
 import * as bridgeImpl from '@ledgerhq/live-common/lib/bridge/impl'
 import { createCommand, Command } from 'helpers/ipc'
 
@@ -38,9 +39,7 @@ const cmdCurrencyScanAccountsOnDevice: Command<
 > = createCommand('CurrencyScanAccountsOnDevice', o => {
   const currency = getCryptoCurrencyById(o.currencyId)
   const bridge = bridgeImpl.getCurrencyBridge(currency)
-  return bridge
-    .scanAccountsOnDevice(currency, o.deviceId)
-    .pipe(map(bridgeImpl.toScanAccountEventRaw))
+  return bridge.scanAccountsOnDevice(currency, o.deviceId).pipe(map(toScanAccountEventRaw))
 })
 
 export const getCurrencyBridge = (_currency: CryptoCurrency): CurrencyBridge => ({
@@ -50,7 +49,7 @@ export const getCurrencyBridge = (_currency: CryptoCurrency): CurrencyBridge => 
         currencyId: currency.id,
         deviceId,
       })
-      .pipe(map(bridgeImpl.fromScanAccountEventRaw)),
+      .pipe(map(fromScanAccountEventRaw)),
 })
 
 const cmdAccountStartSync: Command<
