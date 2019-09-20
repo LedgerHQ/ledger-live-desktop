@@ -1,116 +1,64 @@
 // @flow
-import React, { Component } from 'react'
-import type { Account, Transaction } from '@ledgerhq/live-common/lib/types'
+import React, { useCallback } from 'react'
+import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
-import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import { openURL } from 'helpers/linking'
 import { urls } from 'config/urls'
 import Box from 'components/base/Box'
 import LabelWithExternalIcon from 'components/base/LabelWithExternalIcon'
 import RecipientAddress from 'components/RecipientAddress'
 import { track } from 'analytics/segment'
-import { CantScanQRCode } from '@ledgerhq/errors'
 
 type Props = {
-  t: T,
   account: Account,
   transaction: Transaction,
-  onChangeTransaction: Transaction => void,
   autoFocus?: boolean,
+  status: TransactionStatus,
+  onChangeTransaction: Transaction => void,
+  t: T,
 }
 
-class RecipientField extends Component<Props, { error: ?Error, warning: ?Error }> {
-  state = {
-    error: null,
-    warning: null,
-  }
-  componentDidMount() {
-    this.resync()
-  }
-  componentDidUpdate(nextProps: Props) {
-    if (
-      nextProps.account !== this.props.account ||
-      nextProps.transaction !== this.props.transaction
-    ) {
-      this.resync()
-    }
-  }
-  componentWillUnmount() {
-    this.syncId++
-    this.isUnmounted = true
-  }
-  isUnmounted = false
-  syncId = 0
-  async resync() {
-    const { account, transaction } = this.props
-    const bridge = getAccountBridge(account)
-    const syncId = ++this.syncId
-    const recipient = bridge.getTransactionRecipient(account, transaction)
-    try {
-      const warning = !recipient ? null : await bridge.checkValidRecipient(account, recipient)
-      if (syncId !== this.syncId) return
-      if (this.isUnmounted) return
-      this.setState({ error: null, warning })
-    } catch (error) {
-      if (syncId !== this.syncId) return
-      if (this.isUnmounted) return
-      this.setState({ error, warning: null })
-    }
-  }
+const RecipientField = ({
+  t,
+  account,
+  transaction,
+  onChangeTransaction,
+  autoFocus,
+  status,
+}: Props) => {
+  const onChange = useCallback(
+    async (recipient: string, maybeExtra: ?Object) => {
+      const { currency } = maybeExtra || {} // FIXME fromQRCode ?
+      const invalidRecipient = currency && currency.scheme !== account.currency.scheme
+      onChangeTransaction({ ...transaction, recipient: invalidRecipient ? undefined : recipient })
+    },
+    [account, transaction, onChangeTransaction],
+  )
 
-  onChange = async (recipient: string, maybeExtra: ?Object) => {
-    const { account, transaction, onChangeTransaction } = this.props
-    const bridge = getAccountBridge(account)
-    const { amount, currency, fromQRCode } = maybeExtra || {}
-    if (currency && currency.scheme !== account.currency.scheme) {
-      onChangeTransaction(bridge.editTransactionRecipient(account, transaction, ''))
-      return false
-    }
-    let t = transaction
-    if (amount) {
-      t = bridge.editTransactionAmount(account, t, amount)
-    }
-    t = bridge.editTransactionRecipient(account, t, recipient)
-    onChangeTransaction(t)
-
-    try {
-      const warning = fromQRCode ? await bridge.checkValidRecipient(account, recipient) : null
-      if (this.isUnmounted) return false
-      this.setState({ error: null, warning })
-      return true
-    } catch (error) {
-      if (this.isUnmounted) return false
-      this.setState({ error: new CantScanQRCode(), warning: null })
-      return false
-    }
-  }
-
-  handleRecipientAddressHelp = () => {
+  const handleRecipientAddressHelp = useCallback(() => {
     openURL(urls.recipientAddressInfo)
     track('Send Flow Recipient Address Help Requested')
-  }
-  render() {
-    const { account, transaction, t, autoFocus } = this.props
-    const { error, warning } = this.state
-    const bridge = getAccountBridge(account)
-    const value = bridge.getTransactionRecipient(account, transaction)
-    return (
-      <Box flow={1}>
-        <LabelWithExternalIcon
-          onClick={this.handleRecipientAddressHelp}
-          label={t('send.steps.amount.recipientAddress')}
-        />
-        <RecipientAddress
-          autoFocus={autoFocus}
-          withQrCode
-          error={error}
-          warning={warning}
-          value={value}
-          onChange={this.onChange}
-        />
-      </Box>
-    )
-  }
+  }, [])
+
+  if (!status) return null
+  const { recipientError, recipientWarning } = status
+
+  return (
+    <Box flow={1}>
+      <LabelWithExternalIcon
+        onClick={handleRecipientAddressHelp}
+        label={t('send.steps.amount.recipientAddress')}
+      />
+      <RecipientAddress
+        autoFocus={autoFocus}
+        withQrCode
+        error={transaction.recipient && recipientError}
+        warning={recipientWarning}
+        value={transaction.recipient}
+        onChange={onChange}
+      />
+    </Box>
+  )
 }
 
 export default RecipientField

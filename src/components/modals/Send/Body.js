@@ -285,6 +285,8 @@ const Body = ({
     onStepChange: handleStepChange,
   }
 
+  if (!status) return null
+
   return (
     <Stepper {...stepperProps}>
       <SyncSkipUnderPriority priority={100} />
