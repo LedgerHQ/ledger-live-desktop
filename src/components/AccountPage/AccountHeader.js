@@ -13,8 +13,8 @@ import {
   getAccountCurrency,
   getMainAccount,
   shortAddressPreview,
-} from '@ledgerhq/live-common/lib/account/helpers'
-
+  getAccountName,
+} from '@ledgerhq/live-common/lib/account'
 import Box from 'components/base/Box'
 import Ellipsis from 'components/base/Ellipsis'
 import Text from 'components/base/Text'
@@ -124,7 +124,7 @@ const AccountHeader: React$ComponentType<Props> = React.memo(
             <CurName>{currency.name}</CurName>
           )}
           <AccountName>
-            <Ellipsis>{account.type === 'Account' ? account.name : currency.name}</Ellipsis>
+            <Ellipsis>{getAccountName(account)}</Ellipsis>
           </AccountName>
         </Box>
       </Box>

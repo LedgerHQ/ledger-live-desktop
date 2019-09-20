@@ -4,6 +4,7 @@ import {
   flattenAccounts,
   getAccountCurrency,
   getAccountUnit,
+  getAccountName,
   listSubAccounts,
 } from '@ledgerhq/live-common/lib/account'
 import Box from 'components/base/Box'
@@ -50,10 +51,11 @@ type Option = {
 const getOptionValue = option => option.account.id
 
 const defaultFilter = createFilter({
-  stringify: ({ data: account }) =>
-    account.type === 'Account'
-      ? `${account.currency.ticker}|${account.currency.name}|${account.name}`
-      : `${account.token.ticker}|${account.token.name}`,
+  stringify: ({ data: account }) => {
+    const currency = getAccountCurrency(account)
+    const name = getAccountName(account)
+    return `${currency.ticker}|${currency.name}|${name}`
+  },
 })
 const filterOption = o => (candidate, input) => {
   const selfMatches = defaultFilter(candidate, input)
@@ -87,7 +89,7 @@ const AccountOption = React.memo(
   }) => {
     const currency = getAccountCurrency(account)
     const unit = getAccountUnit(account)
-    const name = account.type === 'Account' ? account.name : currency.name
+    const name = getAccountName(account)
 
     return (
       <Box grow horizontal alignItems="center" flow={2} style={{ opacity: disabled ? 0.2 : 1 }}>

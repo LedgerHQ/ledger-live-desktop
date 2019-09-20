@@ -2,7 +2,7 @@
 
 import invariant from 'invariant'
 import React, { PureComponent } from 'react'
-import { getMainAccount } from '@ledgerhq/live-common/lib/account'
+import { getMainAccount, getAccountName } from '@ledgerhq/live-common/lib/account'
 import TrackPage from 'analytics/TrackPage'
 import getAddress from 'commands/getAddress'
 import Box from 'components/base/Box'
@@ -60,7 +60,7 @@ export default class StepReceiveFunds extends PureComponent<StepProps> {
     const { account, parentAccount, isAddressVerified, token } = this.props
     const mainAccount = account ? getMainAccount(account, parentAccount) : null
     invariant(account && mainAccount, 'No account given')
-    const name = token ? token.name : account.type === 'Account' ? account.name : account.token.name
+    const name = token ? token.name : getAccountName(account)
     return (
       <Box flow={5}>
         <TrackPage category="Receive Flow" name="Step 4" />

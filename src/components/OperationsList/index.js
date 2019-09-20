@@ -134,7 +134,7 @@ export class OperationsList extends PureComponent<Props, State> {
                   return null
                 }
                 let parentAccount
-                if (account.type === 'TokenAccount') {
+                if (account.type !== 'Account') {
                   const pa =
                     accountsMap[account.parentId] ||
                     allAccounts.find(a => a.id === account.parentId)

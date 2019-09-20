@@ -5,7 +5,11 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { Draggable } from 'react-beautiful-dnd'
 import styled from 'styled-components'
-import { getAccountCurrency, getAccountUnit } from '@ledgerhq/live-common/lib/account/helpers'
+import {
+  getAccountCurrency,
+  getAccountUnit,
+  getAccountName,
+} from '@ledgerhq/live-common/lib/account/helpers'
 import type { AccountLike } from '@ledgerhq/live-common/src/types'
 import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
@@ -94,9 +98,7 @@ const Item = ({
             </ParentCryptoCurrencyIconWrapper>
             <Box vertical flex={1}>
               <Hide visible={snapshot.isDragging || !collapsed}>
-                <AccountName color="smoke">
-                  {account.type === 'Account' ? account.name : getAccountCurrency(account).name}
-                </AccountName>
+                <AccountName color="smoke">{getAccountName(account)}</AccountName>
                 <FormattedVal
                   alwaysShowSign={false}
                   animateTicker={false}

@@ -69,7 +69,7 @@ class AssetPage extends PureComponent<Props, State> {
   render() {
     const { t, accounts, counterValue, range, countervalueFirst } = this.props
     const parentAccount =
-      accounts[0].type === 'TokenAccount' ? this.lookupParentAccount(accounts[0].parentId) : null
+      accounts[0].type !== 'Account' ? this.lookupParentAccount(accounts[0].parentId) : null
     const currency = getAccountCurrency(accounts[0])
     const unit = getAccountUnit(accounts[0])
     const color = getCurrencyColor(currency)

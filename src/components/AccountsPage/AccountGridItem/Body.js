@@ -7,6 +7,7 @@ import { createStructuredSelector } from 'reselect'
 import { balanceHistoryWithCountervalueSelector } from 'actions/portfolio'
 import type { Account, TokenAccount, AccountPortfolio } from '@ledgerhq/live-common/lib/types'
 import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
+import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import Box from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
 import CounterValue from 'components/CounterValue'
@@ -29,7 +30,7 @@ class Body extends PureComponent<{
       histo: { history, countervalueAvailable, countervalueChange },
       account,
     } = this.props
-    const currency = account.type === 'Account' ? account.currency : account.token
+    const currency = getAccountCurrency(account)
     return (
       <Box flow={4}>
         <Box flow={2} horizontal>

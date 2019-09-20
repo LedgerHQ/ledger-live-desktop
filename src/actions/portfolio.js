@@ -31,7 +31,7 @@ export const balanceHistoryWithCountervalueSelector = (
   },
 ) => {
   const counterValueCurrency = counterValueCurrencySelector(state)
-  const currency = account.type === 'Account' ? account.currency : account.token
+  const currency = getAccountCurrency(account)
   const intermediary = intermediaryCurrency(currency, counterValueCurrency)
   const exchange = exchangeSettingsForPairSelector(state, { from: currency, to: intermediary })
   const toExchange = exchangeSettingsForPairSelector(state, {

@@ -13,6 +13,7 @@ import {
   listSubAccounts,
   getAccountCurrency,
   findSubAccountById,
+  getAccountName,
 } from '@ledgerhq/live-common/lib/account'
 import { push } from 'react-router-redux'
 
@@ -113,13 +114,12 @@ const mapDispatchToProps = {
 
 class AccountCrumb extends PureComponent<Props> {
   renderItem = ({ item, isActive }) => {
-    const { parentId } = this.props.match.params
     const currency = getAccountCurrency(item.account)
     return (
       <Item key={item.account.id} isActive={isActive}>
         <CryptoCurrencyIcon size={16} currency={currency} />
         <Text ff={`Open Sans|${isActive ? 'SemiBold' : 'Regular'}`} fontSize={4}>
-          {parentId ? currency.name : item.account.name}
+          {getAccountName(item.account)}
         </Text>
         {isActive && (
           <Check>
