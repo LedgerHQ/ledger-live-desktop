@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "8.15"
+os: windows
+cache:
+  directories:
+    - node_modules
+before_install:
+  - choco install yarn
+before_script:
+  - git clone https://github.com/Arnaud97234/ledger-live-desktop.git
+script:
+  - yarn install
+  - yarn ci
