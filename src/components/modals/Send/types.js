@@ -16,7 +16,7 @@ export type StepProps = DefaultStepProps & {
   account: ?AccountLike,
   parentAccount: ?Account,
   transaction: ?Transaction,
-  status: ?TransactionStatus,
+  status: TransactionStatus,
   bridgeError: ?Error,
   bridgePending: boolean,
   error: ?Error,

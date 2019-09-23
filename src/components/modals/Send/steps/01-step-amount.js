@@ -1,7 +1,12 @@
 // @flow
 
 import React, { PureComponent, Fragment } from 'react'
-import type {Account, AccountLike, Transaction, TransactionStatus} from '@ledgerhq/live-common/lib/types'
+import type {
+  Account,
+  AccountLike,
+  Transaction,
+  TransactionStatus,
+} from '@ledgerhq/live-common/lib/types'
 import {
   getMainAccount,
   getAccountCurrency,
@@ -13,7 +18,6 @@ import Button from 'components/base/Button'
 import Label from 'components/base/Label'
 import SelectAccount from 'components/SelectAccount'
 import FormattedVal from 'components/base/FormattedVal'
-import Text from 'components/base/Text'
 import CounterValue from 'components/CounterValue'
 import Spinner from 'components/base/Spinner'
 import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
@@ -40,7 +44,7 @@ const AccountFields = ({
   onChangeTransaction: Transaction => void,
   openedFromAccount: boolean,
   t: *,
-  status: TransactionStatus
+  status: TransactionStatus,
 }) => {
   const mainAccount = getMainAccount(account, parentAccount)
   return (
@@ -154,22 +158,14 @@ export class StepAmountFooter extends PureComponent<
   render() {
     const { t, account, parentAccount, status, bridgePending } = this.props
     const { highFeesOpen } = this.state
-    if (!status) return null
+    const { amount, recipientError, transactionError, totalSpent } = status
 
     const mainAccount = account ? getMainAccount(account, parentAccount) : null
     const currency = account ? getAccountCurrency(account) : null
+    const accountUnit = account ? getAccountUnit(account) : null
 
-    const { amount, recipientError, transactionError, totalSpent } = status
-    const isTerminated = (mainAccount && mainAccount.currency.terminated) || false
-    const accountUnit = !account ? null : getAccountUnit(account)
-
-    const canNext =
-      !bridgePending &&
-      status.amount &&
-      !status.amount.isZero() &&
-      !recipientError &&
-      !transactionError &&
-      totalSpent.gt(0)
+    const isTerminated = mainAccount && mainAccount.currency.terminated
+    const canNext = !bridgePending && !recipientError && !transactionError && !isTerminated
 
     return (
       <Fragment>
@@ -187,11 +183,10 @@ export class StepAmountFooter extends PureComponent<
               />
             )}
             <Box horizontal align="center">
-              <Text ff="Rubik" fontSize={3}>
-                {'(' /* eslint-disable-line react/jsx-no-literals */}
-              </Text>
               {account && (
                 <CounterValue
+                  prefix="("
+                  suffix=")"
                   currency={currency}
                   value={totalSpent}
                   disableRounding
@@ -201,14 +196,11 @@ export class StepAmountFooter extends PureComponent<
                   alwaysShowSign={false}
                 />
               )}
-              <Text ff="Rubik" fontSize={3}>
-                {')' /* eslint-disable-line react/jsx-no-literals */}
-              </Text>
             </Box>
             {bridgePending && <Spinner size={10} />}
           </Box>
         </Box>
-        <Button primary disabled={!canNext || !!isTerminated} onClick={this.onNext}>
+        <Button primary disabled={!canNext} onClick={this.onNext}>
           {t('common.continue')}
         </Button>
         {amount && accountUnit && (

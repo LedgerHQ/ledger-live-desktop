@@ -7,7 +7,8 @@ import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import Tooltip from 'components/base/Tooltip'
-import { isAccountEmpty } from '@ledgerhq/live-common/lib/account'
+import { isAccountEmpty, getMainAccount } from '@ledgerhq/live-common/lib/account'
+import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
@@ -63,16 +64,25 @@ type Props = OwnProps & {
 class AccountHeaderActions extends PureComponent<Props> {
   render() {
     const { account, parentAccount, openModal, t } = this.props
+    const mainAccount = getMainAccount(account, parentAccount)
+    const bridge = getAccountBridge(account, parentAccount)
+    const cap = bridge.getCapabilities(mainAccount)
     return (
       <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
         {!isAccountEmpty(account) ? (
           <Fragment>
-            <Button small primary onClick={() => openModal(MODAL_SEND, { parentAccount, account })}>
-              <Box horizontal flow={1} alignItems="center">
-                <IconSend size={12} />
-                <Box>{t('send.title')}</Box>
-              </Box>
-            </Button>
+            {cap.canSend ? (
+              <Button
+                small
+                primary
+                onClick={() => openModal(MODAL_SEND, { parentAccount, account })}
+              >
+                <Box horizontal flow={1} alignItems="center">
+                  <IconSend size={12} />
+                  <Box>{t('send.title')}</Box>
+                </Box>
+              </Button>
+            ) : null}
 
             <Button
               small
