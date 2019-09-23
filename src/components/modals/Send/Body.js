@@ -247,15 +247,17 @@ const Body = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const errorSteps = transactionError
-    ? [
-        transactionError instanceof AccountNotSupported
-          ? 0
-          : transactionError instanceof UserRefusedOnDevice
-          ? 2
-          : 3,
-      ]
-    : []
+  const errorSteps = []
+
+  if (transactionError) {
+    if (transactionError instanceof UserRefusedOnDevice) {
+      errorSteps.push(2)
+    } else {
+      errorSteps.push(3)
+    }
+  } else if (bridgeError) {
+    errorSteps.push(0)
+  }
 
   const stepperProps = {
     title: t('send.title'),
@@ -268,9 +270,8 @@ const Body = ({
     parentAccount,
     transaction,
     isAppOpened,
-    error: transactionError,
+    error: transactionError || bridgeError,
     status,
-    bridgeError,
     bridgePending,
     signed,
     optimisticOperation,

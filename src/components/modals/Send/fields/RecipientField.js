@@ -51,7 +51,8 @@ const RecipientField = ({
       />
       <RecipientAddress
         autoFocus={autoFocus}
-        withQrCode
+        withQrCode={!status.recipientIsReadOnly}
+        readOnly={status.recipientIsReadOnly}
         error={transaction.recipient && recipientError}
         warning={recipientWarning}
         value={transaction.recipient}
