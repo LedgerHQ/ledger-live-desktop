@@ -46,8 +46,7 @@ const DeviceContextProvider = ({ children }) => {
               devices[device.path] = true
               clearTimeout(removeTimeout)
 
-              const app = await await getAppAndVersion.send({ devicePath: device.path }).toPromise()
-
+              const app = await getAppAndVersion.send({ devicePath: device.path }).toPromise()
               dispatch({ type: 'ADD_DEVICE', payload: { device: { ...stateDevice }, app } })
             } else if (type === 'remove') {
               delete devices[device.path]
@@ -104,22 +103,7 @@ function reducer(state, action) {
     case 'MAYBE_CONNECTED':
       return { ...state, maybeConnected: true }
     case 'ADD_DEVICE': {
-      let Icon
-      if (action.payload.device) {
-        // FIXME remove from here?
-        switch (action.payload.device.modelId) {
-          case 'nanoS':
-            Icon = NanoS
-            break
-          case 'nanoX':
-            Icon = NanoX
-            break
-          case 'blue':
-            Icon = Blue
-            break
-        }
-      }
-      return { ...state, maybeConnected: false, device: { ...action.payload.device, Icon } }
+      return { ...state, maybeConnected: false, ...action.payload }
     }
     case 'REMOVE_DEVICE':
       return { ...state, maybeConnected: false, device: null }
