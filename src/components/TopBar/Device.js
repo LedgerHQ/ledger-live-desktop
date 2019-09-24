@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Fragment } from 'react'
+import React from 'react'
 import { getDeviceModel } from '@ledgerhq/devices'
 import { colors } from 'styles/theme'
 import Tooltip from '../base/Tooltip'
@@ -15,8 +15,14 @@ const Device = () => {
   const { device, maybeConnected, app } = state
 
   const deviceModel = device ? getDeviceModel(device.modelId) : null
-  const renderTooltip = () => device?
-    deviceModel ? `${deviceModel.productName} - ${app.name} - ${app.version}` : '' : 'No device connected'
+  const renderTooltip = () =>
+    maybeConnected
+      ? 'working...'
+      : device
+      ? deviceModel
+        ? `${deviceModel.productName} - ${app.name} - ${app.version}`
+        : ''
+      : 'No device connected'
   const iconColor = device
     ? maybeConnected
       ? colors.orange
