@@ -1,5 +1,6 @@
 // @flow
 import React, { useEffect, useContext, useReducer, useCallback } from 'react'
+import invariant from 'invariant'
 import { connect } from 'react-redux'
 import listenDevices from 'commands/listenDevices'
 import getAppAndVersion from 'commands/getAppAndVersion'
@@ -92,6 +93,9 @@ const DeviceContextProvider = ({ children }: Props) => {
 }
 
 function reducer(state, action) {
+  const actions = ['LOCK', 'UNLOCK', 'MAYBE_CONNECTED', 'ADD_DEVICE', 'REMOVE_DEVICE', 'GET_DEVICE']
+  invariant(actions.includes(action.type), `Unknown DeviceContext action received : ${action.type}`)
+
   switch (action.type) {
     case 'LOCK':
       return { ...state, locked: true }
@@ -111,7 +115,7 @@ function reducer(state, action) {
         return state.device
       }
     default:
-      throw new Error('wadus')
+      return state
   }
 }
 export default connect(null)(DeviceContextProvider)

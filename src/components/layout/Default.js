@@ -96,6 +96,7 @@ class Default extends Component<Props> {
     return (
       <Fragment>
         <TriggerAppReady />
+        <ListenDevices />
         {process.platform === 'darwin' && <AppRegionDrag />}
         <ExportLogsBtn hookToShortcut />
         <Track mandatory onMount event="App Starts" />
