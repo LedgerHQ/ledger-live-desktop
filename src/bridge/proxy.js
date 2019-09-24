@@ -125,6 +125,9 @@ export const getAccountBridge = (
   const createTransaction = a =>
     bridgeImpl.getAccountBridge(account, parentAccount).createTransaction(a)
 
+  const updateTransaction = (a, patch) =>
+    bridgeImpl.getAccountBridge(account, parentAccount).updateTransaction(a, patch)
+
   const getCapabilities = a =>
     bridgeImpl.getAccountBridge(account, parentAccount).getCapabilities(a)
 
@@ -162,6 +165,7 @@ export const getAccountBridge = (
 
   return {
     createTransaction,
+    updateTransaction,
     getTransactionStatus,
     prepareTransaction,
     startSync,

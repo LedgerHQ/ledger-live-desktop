@@ -20,7 +20,7 @@ import { track } from 'analytics/segment'
 import { getCurrentDevice } from 'reducers/devices'
 import { accountsSelector } from 'reducers/accounts'
 import { closeModal, openModal } from 'reducers/modals'
-import { DisconnectedDevice, UserRefusedOnDevice, AccountNotSupported } from '@ledgerhq/errors'
+import { DisconnectedDevice, UserRefusedOnDevice } from '@ledgerhq/errors'
 
 import Stepper from 'components/base/Stepper'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'

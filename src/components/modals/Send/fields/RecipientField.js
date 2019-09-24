@@ -1,6 +1,7 @@
 // @flow
 import React, { useCallback } from 'react'
 import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
+import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import type { T } from 'types/common'
 import { openURL } from 'helpers/linking'
 import { urls } from 'config/urls'
@@ -26,13 +27,17 @@ const RecipientField = ({
   autoFocus,
   status,
 }: Props) => {
+  const bridge = getAccountBridge(account, null)
+
   const onChange = useCallback(
     async (recipient: string, maybeExtra: ?Object) => {
       const { currency } = maybeExtra || {} // FIXME fromQRCode ?
       const invalidRecipient = currency && currency.scheme !== account.currency.scheme
-      onChangeTransaction({ ...transaction, recipient: invalidRecipient ? undefined : recipient })
+      onChangeTransaction(
+        bridge.updateTransaction(transaction, { recipient: invalidRecipient ? '' : recipient }),
+      )
     },
-    [account, transaction, onChangeTransaction],
+    [bridge, account, transaction, onChangeTransaction],
   )
 
   const handleRecipientAddressHelp = useCallback(() => {

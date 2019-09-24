@@ -2,7 +2,13 @@
 import React, { useCallback } from 'react'
 import { Trans } from 'react-i18next'
 import { BigNumber } from 'bignumber.js'
-import type { AccountLike, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
+import type {
+  Account,
+  AccountLike,
+  Transaction,
+  TransactionStatus,
+} from '@ledgerhq/live-common/lib/types'
+import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import Box from 'components/base/Box'
 import Label from 'components/base/Label'
 import RequestAmount from 'components/RequestAmount'
@@ -10,6 +16,7 @@ import Switch from 'components/base/Switch'
 import styled from 'styled-components'
 
 type Props = {
+  parentAccount: ?Account,
   account: AccountLike,
   transaction: Transaction,
   onChangeTransaction: (*) => void,
@@ -27,15 +34,28 @@ const SendMaxSeparator = styled.div`
   background: ${p => p.theme.colors.fog};
 `
 
-const AmountField = ({ account, transaction, onChangeTransaction, status, t }: Props) => {
+const AmountField = ({
+  account,
+  parentAccount,
+  transaction,
+  onChangeTransaction,
+  status,
+  t,
+}: Props) => {
+  const bridge = getAccountBridge(account, parentAccount)
+
   const onChange = useCallback(
-    (amount: BigNumber) => onChangeTransaction({ ...transaction, amount }),
-    [transaction, onChangeTransaction],
+    (amount: BigNumber) => {
+      onChangeTransaction(bridge.updateTransaction(transaction, { amount }))
+    },
+    [bridge, transaction, onChangeTransaction],
   )
 
   const onChangeSendMax = useCallback(
-    (useAllAmount: boolean) => onChangeTransaction({ ...transaction, useAllAmount }),
-    [transaction, onChangeTransaction],
+    (useAllAmount: boolean) => {
+      onChangeTransaction(bridge.updateTransaction(transaction, { useAllAmount }))
+    },
+    [bridge, transaction, onChangeTransaction],
   )
 
   if (!status) return null
