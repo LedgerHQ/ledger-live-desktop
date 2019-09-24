@@ -5,25 +5,29 @@ import { getDeviceModel } from '@ledgerhq/devices'
 import { colors } from 'styles/theme'
 import Tooltip from '../base/Tooltip'
 import { useDevice } from '../DeviceContextProvider'
-import NanoS from "../../icons/device/NanoS";
+import NanoS from '../../icons/device/NanoS'
 
+/**
+ * Defaulting to the NanoS icon for simplicity FIXME ?
+ */
 const Device = () => {
   const [state] = useDevice()
   const { device, maybeConnected, app } = state
 
-  if (!device) return null
-  const deviceModel = getDeviceModel(device.modelId)
-  const MaybeTooltip = deviceModel ? Tooltip : Fragment
+  const deviceModel = device ? getDeviceModel(device.modelId) : null
+  const renderTooltip = () => device?
+    deviceModel ? `${deviceModel.productName} - ${app.name} - ${app.version}` : '' : 'No device connected'
+  const iconColor = device
+    ? maybeConnected
+      ? colors.orange
+      : colors.positiveGreen
+    : colors.alertRed
 
   return (
     <div>
-      <MaybeTooltip
-        render={() =>
-          deviceModel ? `${deviceModel.productName} - ${app.name} - ${app.version}` : ''
-        }
-      >
-        <NanoS size={20} color={maybeConnected ? colors.orange : colors.positiveGreen} />
-      </MaybeTooltip>
+      <Tooltip render={renderTooltip}>
+        <NanoS size={20} color={iconColor} />
+      </Tooltip>
     </div>
   )
 }

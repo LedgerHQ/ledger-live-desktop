@@ -1,27 +1,20 @@
 // @flow
-
 import React, { useEffect, useContext, useReducer, useCallback } from 'react'
 import { connect } from 'react-redux'
 import listenDevices from 'commands/listenDevices'
 import getAppAndVersion from 'commands/getAppAndVersion'
-import NanoS from '../icons/device/NanoS'
-import NanoX from '../icons/device/NanoX'
-import Blue from '../icons/device/Blue'
-
-type DeviceContextType = {
-  locked: boolean,
-  device: {},
-}
 
 const DeviceContext = React.createContext({})
 
 export const useDevice = () => useContext(DeviceContext)
+type Props = { children: any }
 
-const DeviceContextProvider = ({ children }) => {
+const DeviceContextProvider = ({ children }: Props) => {
   useEffect(() => {
     let sub
     let timeout
     let removeTimeout
+
     function syncDevices() {
       const devices = {}
       sub = listenDevices.send().subscribe(
@@ -78,6 +71,7 @@ const DeviceContextProvider = ({ children }) => {
   }, [])
 
   const [state, dispatch] = useReducer(reducer, { device: null, locked: true })
+
   const lockDevice = useCallback(() => {
     if (state.locked) {
       return false
@@ -87,8 +81,11 @@ const DeviceContextProvider = ({ children }) => {
   }, [state])
 
   const unlockDevice = useCallback(() => dispatch({ type: 'UNLOCK' }), [])
+
+  const getDevice = useCallback(() => dispatch({ type: 'GET_DEVICE' }), [])
+
   return (
-    <DeviceContext.Provider value={[state, { lockDevice, unlockDevice }]}>
+    <DeviceContext.Provider value={[state, { lockDevice, unlockDevice, getDevice }]}>
       {children}
     </DeviceContext.Provider>
   )

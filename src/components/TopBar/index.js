@@ -104,7 +104,7 @@ class TopBar extends PureComponent<Props> {
             <Breadcrumb />
             <Box horizontal>
               <CurrenciesStatusBanner />
-              <ItemContainer isInteractive onClick={() => undefined}>
+              <ItemContainer onClick={() => undefined}>
                 <Device />
               </ItemContainer>
               {hasAccounts && (
