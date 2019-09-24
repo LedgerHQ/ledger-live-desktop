@@ -17,6 +17,7 @@ import CounterValues from 'helpers/countervalues'
 import { BridgeSyncProvider } from 'bridge/BridgeSyncContext'
 import { UpdaterProvider } from 'components/Updater/UpdaterContext'
 import ContextMenuWrapper from './ContextMenu/ContextMenuWrapper'
+import DeviceContextProvider from './DeviceContextProvider'
 
 const App = ({
   store,
@@ -32,17 +33,19 @@ const App = ({
       <CounterValues.PollingProvider>
         <I18nextProvider i18n={i18n} initialLanguage={language}>
           <ThemeProvider theme={theme}>
-            <ThrowBlock>
-              <UpdaterProvider>
-                <ConnectedRouter history={history}>
-                  <Switch>
-                    <ContextMenuWrapper>
-                      <Route component={Default} />
-                    </ContextMenuWrapper>
-                  </Switch>
-                </ConnectedRouter>
-              </UpdaterProvider>
-            </ThrowBlock>
+            <DeviceContextProvider>
+              <ThrowBlock>
+                <UpdaterProvider>
+                  <ConnectedRouter history={history}>
+                    <Switch>
+                      <ContextMenuWrapper>
+                        <Route component={Default} />
+                      </ContextMenuWrapper>
+                    </Switch>
+                  </ConnectedRouter>
+                </UpdaterProvider>
+              </ThrowBlock>
+            </DeviceContextProvider>
           </ThemeProvider>
         </I18nextProvider>
       </CounterValues.PollingProvider>

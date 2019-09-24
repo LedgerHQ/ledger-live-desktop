@@ -90,22 +90,22 @@ const Item = ({
             >
               <ParentCryptoCurrencyIcon inactive={!active} currency={getAccountCurrency(account)} />
             </ParentCryptoCurrencyIconWrapper>
-              <Box vertical flex={1}>
-                <Hide visible={snapshot.isDragging || !collapsed}>
-                  <AccountName color="smoke">
-                    {account.type === 'Account' ? account.name : account.token.name}
-                  </AccountName>
-                  <FormattedVal
-                    alwaysShowSign={false}
-                    animateTicker={false}
-                    ellipsis
-                    color="grey"
-                    unit={account.unit || account.token.units[0]}
-                    showCode
-                    val={account.balance}
-                  />
-                </Hide>
-              </Box>
+            <Box vertical flex={1}>
+              <Hide visible={snapshot.isDragging || !collapsed}>
+                <AccountName color="smoke">
+                  {account.type === 'Account' ? account.name : account.token.name}
+                </AccountName>
+                <FormattedVal
+                  alwaysShowSign={false}
+                  animateTicker={false}
+                  ellipsis
+                  color="grey"
+                  unit={account.unit || account.token.units[0]}
+                  showCode
+                  val={account.balance}
+                />
+              </Hide>
+            </Box>
           </Box>
         </ItemWrapper>
       )}

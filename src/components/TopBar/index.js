@@ -25,6 +25,7 @@ import CurrenciesStatusBanner from 'components/CurrenciesStatusBanner'
 import ActivityIndicator from './ActivityIndicator'
 import ItemContainer from './ItemContainer'
 import Breadcrumb from './Breadcrumb'
+import Device from './Device'
 
 const Container = styled(Box).attrs({
   px: 6,
@@ -103,6 +104,9 @@ class TopBar extends PureComponent<Props> {
             <Breadcrumb />
             <Box horizontal>
               <CurrenciesStatusBanner />
+              <ItemContainer isInteractive onClick={() => undefined}>
+                <Device />
+              </ItemContainer>
               {hasAccounts && (
                 <Fragment>
                   <ActivityIndicator />

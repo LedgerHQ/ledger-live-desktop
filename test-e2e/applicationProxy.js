@@ -34,17 +34,17 @@ function getAppPath() {
 
 export function applicationProxy(userData = null, envVar = {}) {
   const configPath = getConfigPath()
-  if(fs.existsSync(configPath)) {
+  if (fs.existsSync(configPath)) {
     rimraf.sync(configPath)
     fs.mkdirSync(configPath)
   }
-  if(userData != null) {
+  if (userData != null) {
     const jsonFile = path.resolve('test-e2e/data/', userData)
     fs.copyFileSync(jsonFile, `${configPath}/app.json`)
   }
   const app = new Application({
     path: getAppPath(),
-    env: envVar
+    env: envVar,
   })
   return app
 }
