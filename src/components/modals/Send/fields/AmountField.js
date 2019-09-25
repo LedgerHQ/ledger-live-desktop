@@ -25,7 +25,7 @@ type Props = {
 }
 
 // list of errors that are handled somewhere else on UI, otherwise the field will catch every other errors.
-const blacklistErrorName = ['FeeNotLoaded', 'InvalidAddress', 'NotEnoughGas']
+const blacklistErrorName = ['FeeRequired', 'FeeNotLoaded', 'InvalidAddress', 'NotEnoughGas']
 
 const SendMaxSeparator = styled.div`
   margin: 0 10px;
