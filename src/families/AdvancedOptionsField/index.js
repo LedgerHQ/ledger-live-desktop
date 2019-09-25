@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
 import EthereumKind from './EthereumKind'
 import RippleKind from './RippleKind'
 
@@ -11,8 +11,9 @@ const byFamily = {
 
 type Props = {
   account: Account,
-  transaction: *,
-  onChange: (*) => void,
+  transaction: Transaction,
+  status: TransactionStatus,
+  onChange: Transaction => void,
 }
 
 const FeeField = (props: Props) => {

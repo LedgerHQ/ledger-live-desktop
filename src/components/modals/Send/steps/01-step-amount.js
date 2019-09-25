@@ -67,10 +67,16 @@ const AccountFields = ({
         t={t}
       />
 
-      <FeeField account={mainAccount} transaction={transaction} onChange={onChangeTransaction} />
+      <FeeField
+        account={mainAccount}
+        status={status}
+        transaction={transaction}
+        onChange={onChangeTransaction}
+      />
 
       <AdvancedOptionsField
         account={mainAccount}
+        status={status}
         transaction={transaction}
         onChange={onChangeTransaction}
       />
@@ -108,7 +114,7 @@ export default ({
         />
       </Box>
 
-      {account && transaction && !error && (
+      {account && transaction && (
         <AccountFields
           status={status}
           error={error}

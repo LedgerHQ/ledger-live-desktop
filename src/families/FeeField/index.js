@@ -13,8 +13,9 @@ const byFamily = {
 
 type Props = {
   account: Account,
-  transaction: *,
-  onChange: (*) => void,
+  transaction: Transaction,
+  status: TransactionStatus,
+  onChange: Transaction => void,
 }
 
 const FeeField = (props: Props) => {

@@ -110,32 +110,32 @@ const Body = ({
 }: Props) => {
   const openedFromAccount = !!params.account
   const [steps] = useState(createSteps)
-  const [{ account, parentAccount }, setSelectedAccount] = useState({
-    account: null,
-    parentAccount: null,
-  })
+  const {
+    transaction,
+    setTransaction,
+    account,
+    parentAccount,
+    setAccount,
+    status,
+    bridgeError,
+    bridgePending,
+  } = useBridgeTransaction()
+
   const [isAppOpened, setAppOpened] = useState(false)
   const [optimisticOperation, setOptimisticOperation] = useState(null)
   const [transactionError, setTransactionError] = useState(null)
   const [signed, setSigned] = useState(false)
   const signTransactionSubRef = useRef(null)
-  const [transaction, setTransaction, status, bridgeError, bridgePending] = useBridgeTransaction({
-    account,
-    parentAccount,
-  })
 
   const handleCloseModal = useCallback(() => closeModal(MODAL_SEND), [closeModal])
 
   const handleChangeAccount = useCallback(
     (nextAccount: AccountLike, nextParentAccount: ?Account) => {
       if (account !== nextAccount) {
-        setSelectedAccount({
-          account: nextAccount,
-          parentAccount: nextParentAccount,
-        })
+        setAccount(nextAccount, nextParentAccount)
       }
     },
-    [account],
+    [account, setAccount],
   )
 
   const handleRetry = useCallback(() => {
@@ -238,7 +238,7 @@ const Body = ({
   useEffect(() => {
     const parentAccount = params && params.parentAccount
     const account = (params && params.account) || accounts[0]
-    setSelectedAccount({ account, parentAccount })
+    setAccount(account, parentAccount)
     return () => {
       if (signTransactionSubRef.current) {
         signTransactionSubRef.current.unsubscribe()
@@ -258,6 +258,8 @@ const Body = ({
   } else if (bridgeError) {
     errorSteps.push(0)
   }
+
+  console.log(account, transaction, status, bridgePending, bridgeError)
 
   const stepperProps = {
     title: t('send.title'),
