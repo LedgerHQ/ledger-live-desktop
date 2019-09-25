@@ -20,6 +20,8 @@
     "ResizeObserver": false,
     "jest": false,
     "describe": false,
+    "beforeAll": false,
+    "afterAll": false,
     "beforeEach": false,
     "afterEach": false,
     "test": false,

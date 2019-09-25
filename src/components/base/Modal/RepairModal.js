@@ -18,6 +18,7 @@ import FlashMCU from 'components/FlashMCU'
 import ExclamationCircleThin from 'icons/ExclamationCircleThin'
 import Modal from './index'
 import ModalBody from './ModalBody'
+import { track } from '../../../analytics/segment'
 
 const Container = styled(Box).attrs({
   alignItems: 'center',
@@ -148,6 +149,7 @@ class RepairModal extends PureComponent<Props, *> {
 
   onSelectOption = selectedOption => {
     this.setState({ selectedOption })
+    track(`${this.props.analyticsName}SelectOption`, { selectedOption })
   }
 
   render() {

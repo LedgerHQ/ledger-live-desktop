@@ -27,7 +27,7 @@ class DevModeButton extends PureComponent<Props> {
     return (
       <Fragment>
         <Track onUpdate event={developerMode ? 'DevModeEnabled' : 'DevModeDisabled'} />
-        <Switch isChecked={developerMode} onChange={setDeveloperMode} data-e2e="devMode_button" />
+        <Switch isChecked={developerMode} onChange={setDeveloperMode} />
       </Fragment>
     )
   }

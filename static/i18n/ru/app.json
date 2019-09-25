@@ -98,8 +98,8 @@
     }
   },
   "fees": {
-    "slow": "Slow",
-    "fast": "Fast"
+    "slow": "Медленно",
+    "fast": "Быстро"
   },
   "sidebar": {
     "menu": "Меню",
@@ -562,7 +562,7 @@
       "help": "Справка",
       "about": "О программе",
       "experimental": "Experimental features",
-      "accounts": "Accounts"
+      "accounts": "Счета"
     },
     "export": {
       "accounts": {

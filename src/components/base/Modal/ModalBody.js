@@ -77,10 +77,10 @@ class ModalBody extends PureComponent<Props, State> {
           noScroll={noScroll}
         >
           {render && render(renderProps)}
+          <div style={GRADIENT_WRAPPER_STYLE}>
+            <Animated.div style={gradientStyle} />
+          </div>
         </ModalContent>
-        <div style={GRADIENT_WRAPPER_STYLE}>
-          <Animated.div style={gradientStyle} />
-        </div>
         {renderedFooter && <ModalFooter>{renderedFooter}</ModalFooter>}
       </Fragment>
     )

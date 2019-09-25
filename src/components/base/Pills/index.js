@@ -58,6 +58,7 @@ function Pills(props: Props) {
             onClick={() => onChange(item)}
             key={item.key}
             bordered={bordered}
+            data-e2e={`tabs_${item.key}`}
           >
             {item.label}
           </Pill>

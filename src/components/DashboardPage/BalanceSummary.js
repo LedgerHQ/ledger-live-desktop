@@ -49,7 +49,7 @@ class PortfolioBalanceSummary extends PureComponent<Props> {
     return (
       <Card p={0} py={5}>
         {Header ? (
-          <Box px={6}>
+          <Box px={6} data-e2e='dashboard_graph'>
             <Header portfolio={portfolio} />
           </Box>
         ) : null}

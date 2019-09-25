@@ -20,6 +20,7 @@ class SideBarList extends Component<Props> {
   render() {
     const { children, title, scroll, titleRight, emptyState, collapsed, ...props } = this.props
     const ListWrapper = scroll ? GrowScroll : Box
+
     return (
       <Fragment>
         {!!title && (
@@ -31,7 +32,7 @@ class SideBarList extends Component<Props> {
             <Space of={20} />
           </Fragment>
         )}
-        {children && children.length ? (
+        {children ? (
           <ListWrapper flow={2} px={3} fontSize={3} {...props}>
             {children}
           </ListWrapper>

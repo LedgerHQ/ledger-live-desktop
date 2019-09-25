@@ -81,7 +81,7 @@ const ModalHeader = ({
         <span>{t('common.back')}</span>
       </ModalHeaderAction>
     )}
-    <ModalTitle>{children}</ModalTitle>
+    <ModalTitle data-e2e="modalTitle">{children}</ModalTitle>
     {onClose && (
       <ModalHeaderAction right color="fog" onClick={onClose}>
         {iconCross}
