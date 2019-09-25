@@ -588,6 +588,8 @@
       "desc": "Configurez les paramètres généraux de Ledger Live.",
       "language": "Langue d'affichage",
       "languageDesc": "Sélectionner la langue affichée dans Ledger Live.",
+      "theme": "Theme",
+      "themeDesc": "Select the theme.",
       "counterValue": "Contre-valeur",
       "counterValueDesc": "Choisissez la devise affichée à côté de votre solde et de vos opérations.",
       "exchange": "Prestataire de change",
@@ -759,6 +761,12 @@
   },
   "language": {
     "system": "Utiliser la langue du système"
+  },
+  "theme": {
+    "system": "Use system theme",
+    "light": "Light",
+    "dusk": "Dusk",
+    "dark": "Dark"
   },
   "onboarding": {
     "breadcrumb": {
