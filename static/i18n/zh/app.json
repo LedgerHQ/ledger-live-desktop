@@ -588,6 +588,8 @@
       "desc": "配置 Ledger Live 常规设置。",
       "language": "显示语言",
       "languageDesc": "设置 Ledger Live 中显示的语言。",
+      "theme": "Theme",
+      "themeDesc": "Select the theme.",
       "counterValue": "对价",
       "counterValueDesc": "选择在余额和操作旁显示的货币币种。",
       "exchange": "汇率提供商",
@@ -759,6 +761,12 @@
   },
   "language": {
     "system": "使用系统语言"
+  },
+  "theme": {
+    "system": "Use system theme",
+    "light": "Light",
+    "dusk": "Dusk",
+    "dark": "Dark"
   },
   "onboarding": {
     "breadcrumb": {
