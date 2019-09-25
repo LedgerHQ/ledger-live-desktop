@@ -588,6 +588,8 @@
       "desc": "Настройте общие параметры Ledger Live.",
       "language": "Язык интерфейса",
       "languageDesc": "Настройте язык интерфейса Ledger Live.",
+      "theme": "Theme",
+      "themeDesc": "Select the theme.",
       "counterValue": "Эквивалент",
       "counterValueDesc": "Выберите валюту для отображения состояния счета и операций.",
       "exchange": "Обменник",
@@ -759,6 +761,12 @@
   },
   "language": {
     "system": "Использовать язык системы"
+  },
+  "theme": {
+    "system": "Use system theme",
+    "light": "Light",
+    "dusk": "Dusk",
+    "dark": "Dark"
   },
   "onboarding": {
     "breadcrumb": {
