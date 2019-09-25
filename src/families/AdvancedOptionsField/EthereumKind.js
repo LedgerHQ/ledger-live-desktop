@@ -5,6 +5,7 @@ import { BigNumber } from 'bignumber.js'
 import { Trans, translate } from 'react-i18next'
 import type { Account, TransactionStatus } from '@ledgerhq/live-common/lib/types'
 import type { Transaction } from '@ledgerhq/live-common/lib/families/ethereum/types'
+import { getGasLimit } from '@ledgerhq/live-common/lib/families/ethereum/transaction'
 import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import Box from 'components/base/Box'
 import Input from 'components/base/Input'
@@ -23,16 +24,16 @@ const AdvancedOptions = ({ onChange, account, transaction, status }: Props) => {
   const onGasLimitChange = useCallback(
     (str: string) => {
       const bridge = getAccountBridge(account)
-      let gasLimit = BigNumber(str || 0)
-      if (gasLimit.isNaN() || !gasLimit.isFinite()) {
-        gasLimit = BigNumber(0x5208)
+      let userGasLimit = BigNumber(str || 0)
+      if (userGasLimit.isNaN() || !userGasLimit.isFinite()) {
+        userGasLimit = BigNumber(0x5208)
       }
-      onChange(bridge.updateTransaction(transaction, { gasLimit }))
+      onChange(bridge.updateTransaction(transaction, { userGasLimit }))
     },
     [account, transaction, onChange],
   )
 
-  const gasLimit = transaction.gasLimit
+  const gasLimit = getGasLimit(transaction)
   const isValid = !!status.recipientError
 
   return (
@@ -47,7 +48,7 @@ const AdvancedOptions = ({ onChange, account, transaction, status }: Props) => {
       <Box grow>
         <Input
           ff="Rubik"
-          value={gasLimit ? gasLimit.toString() : ''}
+          value={gasLimit.toString()}
           onChange={onGasLimitChange}
           loading={isValid && !gasLimit}
         />

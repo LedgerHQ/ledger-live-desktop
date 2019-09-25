@@ -52,6 +52,8 @@ const FeesField = ({ onChange, account, transaction, status }: Props) => {
   const defaultGasPrice = transaction.networkInfo
     ? transaction.networkInfo.gasPrice
     : fallbackGasPrice
+  // TODO^^^^^ something to do somewhere to avoid the visible blink. idk if we need a spinner state?
+
   const gasPrice = transaction.gasPrice || defaultGasPrice
   const { units } = account.currency
   const unit = units.length > 1 ? units[1] : units[0]

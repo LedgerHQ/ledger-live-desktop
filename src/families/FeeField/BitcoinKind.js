@@ -49,6 +49,8 @@ const FeesField = ({ transaction, account, onChange }: Props) => {
       feePerByte: fee.feePerByte,
     }))
   }
+  // FIXME^^^ we need to memoize this (useMemo)
+  // also you need to provide a value for the select to correctly select to the item. use .find() to match by value
 
   const { units } = account.currency
   const satoshi = units[units.length - 1]
@@ -61,7 +63,9 @@ const FeesField = ({ transaction, account, onChange }: Props) => {
   )
 
   const onInputChange = feePerByte => onSelectChange({ feePerByte })
+
   const error = !feePerByte ? new FeeNotLoaded() : feePerByte.isZero() ? new FeeRequired() : null
+  // FIXME^^^ we shouldn't create error here. we need to intro error of this field in status.
 
   return (
     <GenericContainer>
