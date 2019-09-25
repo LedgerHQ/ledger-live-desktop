@@ -37,6 +37,7 @@ const AccountFields = ({
   openedFromAccount,
   t,
   status,
+  bridgePending,
 }: {
   account: AccountLike,
   parentAccount: ?Account,
@@ -45,6 +46,7 @@ const AccountFields = ({
   openedFromAccount: boolean,
   t: *,
   status: TransactionStatus,
+  bridgePending: boolean,
 }) => {
   const mainAccount = getMainAccount(account, parentAccount)
   return (
@@ -55,6 +57,7 @@ const AccountFields = ({
         account={mainAccount}
         transaction={transaction}
         onChangeTransaction={onChangeTransaction}
+        bridgePending={bridgePending}
         t={t}
       />
 
@@ -94,6 +97,7 @@ export default ({
   onChangeTransaction,
   error,
   status,
+  bridgePending,
 }: StepProps) => {
   if (!status) return null
   const mainAccount = account ? getMainAccount(account, parentAccount) : null
@@ -124,6 +128,7 @@ export default ({
           transaction={transaction}
           onChangeTransaction={onChangeTransaction}
           openedFromAccount={openedFromAccount}
+          bridgePending={bridgePending}
           t={t}
         />
       )}
