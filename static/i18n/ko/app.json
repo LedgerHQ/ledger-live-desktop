@@ -588,6 +588,8 @@
       "desc": "Ledger Live의 일반 설정을 구성합니다.",
       "language": "표시 언어",
       "languageDesc": "Ledger Live에 표시되는 언어를 설정합니다.",
+      "theme": "Theme",
+      "themeDesc": "Select the theme.",
       "counterValue": "반대 가치(Countervalue)",
       "counterValueDesc": "잔액 및 작업 옆에 표시할 통화를 선택합니다.",
       "exchange": "환율 공급자",
@@ -759,6 +761,12 @@
   },
   "language": {
     "system": "시스템 언어 사용"
+  },
+  "theme": {
+    "system": "Use system theme",
+    "light": "Light",
+    "dusk": "Dusk",
+    "dark": "Dark"
   },
   "onboarding": {
     "breadcrumb": {
