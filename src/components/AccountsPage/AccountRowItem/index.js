@@ -20,7 +20,7 @@ import Star from '../../Stars/Star'
 import AccountContextMenu from '../../ContextMenu/AccountContextMenu'
 
 const Row = styled(Box)`
-  background: #ffffff;
+  background: ${p => p.theme.colors.palette.background.paper};
   border-radius: 4px;
   border: 1px solid transparent;
   box-shadow: 0 4px 8px 0 #00000007;
@@ -35,7 +35,7 @@ const Row = styled(Box)`
   padding: 16px 20px;
   position: relative;
   :hover {
-    border-color: ${p => p.theme.colors.lightFog};
+    border-color: ${p => p.theme.colors.palette.text.shade40};
   }
 `
 
@@ -46,8 +46,8 @@ const RowContent = styled.div`
   flex-grow: 1;
   opacity: ${p => (p.disabled ? 0.3 : 1)};
   & * {
-    color: ${p => (p.disabled ? p.theme.colors.dark : 'auto')};
-    fill: ${p => (p.disabled ? p.theme.colors.dark : 'auto')};
+    color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : 'auto')};
+    fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : 'auto')};
   }
 `
 
@@ -64,7 +64,7 @@ const TokenContentWrapper = styled.div`
 
 const TokenBarIndicator = styled.div`
   width: 15px;
-  border-left: 1px solid ${p => p.theme.colors.lightFog};
+  border-left: 1px solid ${p => p.theme.colors.palette.divider};
   z-index: 2;
   margin-left: 9px;
   padding-left: 5px;
@@ -72,7 +72,7 @@ const TokenBarIndicator = styled.div`
   left: 0;
   height: 100%;
   &:hover {
-    border-color: ${p => p.theme.colors.grey};
+    border-color: ${p => p.theme.colors.palette.text.shade60};
   }
 `
 
@@ -82,8 +82,8 @@ const TokenShowMoreIndicator = styled.div`
   color: ${p => p.theme.colors.wallet};
   align-items: center;
   justify-content: center;
-  border-top: 1px solid ${p => p.theme.colors.lightFog};
-  background: white;
+  border-top: 1px solid ${p => p.theme.colors.palette.divider};
+  background: ${p => p.theme.colors.palette.background.paper};
   border-radius: 0px 0px 4px 4px;
   height: 32px;
   text-align: center;

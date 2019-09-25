@@ -1,29 +1,30 @@
 // @flow
 import React, { useState, useRef, useCallback, useEffect } from 'react'
+import { withTheme } from 'styled-components'
 
-import { colors as themeColors } from 'styles/theme'
 import { lighten } from 'styles/helpers'
 
-const palette = {
+const getPalette = theme => ({
   default: {
-    primary: themeColors.wallet,
-    primaryHover: lighten(themeColors.wallet, 0.1),
-    secondary: themeColors.sliderGrey,
-    buttonInner: themeColors.white,
+    primary: theme.colors.palette.primary.main,
+    primaryHover: lighten(theme.colors.palette.primary.main, 0.1),
+    secondary: theme.colors.palette.divider,
+    buttonInner: theme.colors.palette.primary.contrastText,
   },
   error: {
-    primary: themeColors.alertRed,
-    primaryHover: lighten(themeColors.alertRed, 0.1),
-    secondary: themeColors.sliderGrey,
-    buttonInner: themeColors.white,
+    primary: theme.colors.alertRed,
+    primaryHover: lighten(theme.colors.alertRed, 0.1),
+    secondary: theme.colors.palette.divider,
+    buttonInner: theme.colors.palette.primary.contrastText,
   },
-}
+})
 
 type Props = {
   steps: number,
   value: number,
   error: ?Error,
   onChange: number => void,
+  theme: any,
 }
 
 function xForEvent(node, e) {
@@ -84,7 +85,7 @@ const Track = React.memo(({ x, colors }: { x: number, colors: * }) => (
   />
 ))
 
-const Slider = ({ steps, value, onChange, error }: Props) => {
+const Slider = ({ steps, value, onChange, error, theme }: Props) => {
   const [down, setDown] = useState(false)
   const root = useRef(null)
   const internalPadding = 12
@@ -189,6 +190,7 @@ const Slider = ({ steps, value, onChange, error }: Props) => {
 
   const x = value / (steps - 1)
 
+  const palette = getPalette(theme)
   const colors = palette[error ? 'error' : 'default']
   return (
     <div
@@ -228,4 +230,4 @@ const Slider = ({ steps, value, onChange, error }: Props) => {
   )
 }
 
-export default Slider
+export default withTheme(Slider)

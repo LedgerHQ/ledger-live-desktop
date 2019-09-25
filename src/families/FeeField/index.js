@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
 import BitcoinKind from './BitcoinKind'
 import EthereumKind from './EthereumKind'
 import RippleKind from './RippleKind'

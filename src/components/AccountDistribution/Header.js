@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   padding: 16px 20px;
-  border-bottom: 1px solid ${p => p.theme.colors.lightGrey};
+  border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
   > * {
     width: 25%;
     display: flex;
@@ -32,16 +32,26 @@ const Wrapper = styled.div`
 
 export default () => (
   <Wrapper>
-    <Text ff="Open Sans|SemiBold" color="grey" fontSize={3}>
+    <Text ff="Open Sans|SemiBold" color="palette.text.shade60" fontSize={3}>
       <Trans i18nKey={'accountDistribution.account'} />
     </Text>
-    <Text ff="Open Sans|SemiBold" color="grey" fontSize={3}>
+    <Text ff="Open Sans|SemiBold" color="palette.text.shade60" fontSize={3}>
       <Trans i18nKey={'accountDistribution.distribution'} />
     </Text>
-    <Text ff="Open Sans|SemiBold" color="grey" style={{ justifyContent: 'flex-end' }} fontSize={3}>
+    <Text
+      ff="Open Sans|SemiBold"
+      color="palette.text.shade60"
+      style={{ justifyContent: 'flex-end' }}
+      fontSize={3}
+    >
       <Trans i18nKey={'accountDistribution.amount'} />
     </Text>
-    <Text ff="Open Sans|SemiBold" color="grey" style={{ justifyContent: 'flex-end' }} fontSize={3}>
+    <Text
+      ff="Open Sans|SemiBold"
+      color="palette.text.shade60"
+      style={{ justifyContent: 'flex-end' }}
+      fontSize={3}
+    >
       <Trans i18nKey={'accountDistribution.value'} />
     </Text>
     <Text />

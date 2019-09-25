@@ -23,10 +23,10 @@ class HeadText extends PureComponent<{
     const { title, name } = this.props
     return (
       <Box grow>
-        <Box style={{ textTransform: 'uppercase' }} fontSize={10} color="graphite">
+        <Box style={{ textTransform: 'uppercase' }} fontSize={10} color="palette.text.shade80">
           {title}
         </Box>
-        <Ellipsis fontSize={13} color="dark">
+        <Ellipsis fontSize={13} color="palette.text.shade100">
           {name}
         </Ellipsis>
       </Box>
@@ -43,8 +43,8 @@ class Header extends PureComponent<{
     const currency = getAccountCurrency(account)
     const unit = getAccountUnit(account)
     const name = getAccountName(account)
-    let title
 
+    let title
     switch (account.type) {
       case 'Account':
       case 'AccountChild':
@@ -54,6 +54,7 @@ class Header extends PureComponent<{
         title = 'token'
         break
       default:
+        title = ''
     }
 
     return (
@@ -67,13 +68,13 @@ class Header extends PureComponent<{
           />
           <Star accountId={account.id} />
         </Box>
-        <Bar size={1} color="fog" />
+        <Bar size={1} color="palette.divider" />
         <Box justifyContent="center">
           <FormattedVal
             alwaysShowSign={false}
             animateTicker={false}
             ellipsis
-            color="dark"
+            color="palette.text.shade100"
             unit={unit}
             showCode
             val={account.balance}

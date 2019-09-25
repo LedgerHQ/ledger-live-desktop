@@ -3,12 +3,58 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 
 import React, { PureComponent } from 'react'
+import styled from 'styled-components'
 
-class ModalContent extends PureComponent<{
+const ContentWrapper = styled.div`
+  position: relative;
+  flex: 0;
+  display: flex;
+  flex-direction: column;
+`
+
+const ContentScrollableContainer = styled.div`
+  padding: 20px 20px 40px;
+  overflow: ${p => (p.noScroll ? 'visible' : 'auto')};
+  position: relative;
+  flex: 0;
+`
+
+const ContentScrollableContainerGradient = styled.div.attrs(p => ({
+  style: {
+    opacity: p.opacity,
+  },
+}))`
+  background: linear-gradient(
+    rgba(255, 255, 255, 0),
+    ${p => p.theme.colors.palette.background.paper}
+  );
+  transition: opacity 150ms;
+  height: 40px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+`
+
+type Props = {
   children: any,
-  onIsScrollableChange: boolean => void,
   noScroll?: boolean,
-}> {
+}
+
+type State = {
+  isScrollable: boolean,
+}
+
+class ModalContent extends PureComponent<Props, State> {
+  constructor() {
+    super()
+
+    this.state = {
+      isScrollable: false,
+    }
+  }
+
   componentDidMount() {
     window.requestAnimationFrame(() => {
       if (this._isUnmounted) return
@@ -29,31 +75,23 @@ class ModalContent extends PureComponent<{
 
   showHideGradient = () => {
     if (!this._outer) return
-    const { onIsScrollableChange } = this.props
     const isScrollable = this._outer.scrollHeight > this._outer.clientHeight
-    onIsScrollableChange(isScrollable)
+    this.setState({ isScrollable })
   }
 
   render() {
     const { children, noScroll } = this.props
-
-    const contentStyle = {
-      ...CONTENT_STYLE,
-      overflow: noScroll ? 'visible' : 'auto',
-    }
+    const { isScrollable } = this.state
 
     return (
-      <div style={contentStyle} ref={n => (this._outer = n)} tabIndex={0}>
-        {children}
-      </div>
+      <ContentWrapper>
+        <ContentScrollableContainer ref={n => (this._outer = n)} tabIndex={0} noScroll={noScroll}>
+          {children}
+        </ContentScrollableContainer>
+        <ContentScrollableContainerGradient opacity={isScrollable ? 1 : 0} />
+      </ContentWrapper>
     )
   }
-}
-
-const CONTENT_STYLE = {
-  flexShrink: 1,
-  padding: 20,
-  paddingBottom: 40,
 }
 
 export default ModalContent

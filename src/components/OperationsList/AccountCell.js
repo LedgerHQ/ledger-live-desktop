@@ -6,11 +6,11 @@ import type { Currency } from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 
-const Cell = styled(Box).attrs({
+const Cell = styled(Box).attrs(() => ({
   px: 4,
   horizontal: true,
   alignItems: 'center',
-})`
+}))`
   flex: 1;
   overflow: hidden;
   max-width: 400px;
@@ -37,12 +37,12 @@ class AccountCell extends PureComponent<Props> {
 
 export default AccountCell
 
-const AccountNameEllipsis = styled(Box).attrs({
+const AccountNameEllipsis = styled(Box).attrs(() => ({
   ff: 'Open Sans|SemiBold',
   fontSize: 3,
-  color: 'dark',
+  color: 'palette.text.shade100',
   flexShrink: 1,
-})`
+}))`
   flex: 1;
   min-width: 0;
   display: block;

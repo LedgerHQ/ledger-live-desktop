@@ -16,21 +16,21 @@ import InputCurrency from 'components/base/InputCurrency'
 import Box from 'components/base/Box'
 import type { State } from 'reducers'
 
-const InputRight = styled(Box).attrs({
+const InputRight = styled(Box).attrs(() => ({
   ff: 'Rubik',
-  color: 'graphite',
+  color: 'palette.text.shade80',
   fontSize: 4,
   justifyContent: 'center',
   pr: 3,
-})``
+}))``
 
-const InputCenter = styled(Box).attrs({
+const InputCenter = styled(Box).attrs(() => ({
   ff: 'Rubik',
-  color: 'graphite',
+  color: 'palette.text.shade80',
   fontSize: 4,
   alignItems: 'center',
   justifyContent: 'center',
-})`
+}))`
   width: 30px;
 `
 

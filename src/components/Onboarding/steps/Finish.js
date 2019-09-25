@@ -116,7 +116,7 @@ export default class Finish extends Component<StepProps, *> {
               {t('onboarding.finish.openAppButton')}
             </Button>
           </Box>
-          <Box horizontal mt={3} flow={5} color="grey">
+          <Box horizontal mt={3} flow={5} color="palette.text.shade60">
             {socialMedia.map(socMed => (
               <SocialMediaBox key={socMed.key} socMed={socMed} />
             ))}
@@ -136,7 +136,7 @@ type SocMed = {
 const StyledBox = styled(Box)`
   cursor: default; // this here needs reset because it inherits from cursor: text from parent
   &:hover {
-    color: ${p => lighten(p.theme.colors.grey, 0.1)};
+    color: ${p => lighten(p.theme.colors.palette.text.shade60, 0.1)};
   }
 `
 
@@ -149,11 +149,11 @@ export function SocialMediaBox({ socMed }: { socMed: SocMed }) {
   )
 }
 
-export const FollowUsDesc = styled(Box).attrs({
+export const FollowUsDesc = styled(Box).attrs(() => ({
   ff: 'Museo Sans|Regular',
   fontSize: 4,
   textAlign: 'center',
-  color: 'grey',
-})`
+  color: 'palette.text.shade60',
+}))`
   margin: 10px auto;
 `

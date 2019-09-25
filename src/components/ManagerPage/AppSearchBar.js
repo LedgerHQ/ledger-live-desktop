@@ -13,12 +13,12 @@ import Search from 'components/base/Search'
 import SearchIcon from 'icons/Search'
 import CrossIcon from 'icons/Cross'
 
-const CrossContainer = styled(Box).attrs({
+const CrossContainer = styled(Box).attrs(() => ({
   justify: 'center',
   px: 3,
-})`
+}))`
   &:hover {
-    color: ${p => p.theme.colors.dark};
+    color: ${p => p.theme.colors.palette.text.shade100};
   }
 `
 
@@ -52,18 +52,18 @@ class AppSearchBar extends PureComponent<Props, State> {
     this.setState(state => ({ ...state, query: '' }), () => input && input.focus())
   }
 
-  input = null
+  input: any = null
 
   render() {
     const { children, list, searchKeys } = this.props
     const { query, focused } = this.state
 
-    const color = focused ? 'dark' : 'grey'
+    const color = focused ? 'palette.text.shade100' : 'palette.text.shade60'
 
     return (
       <Fragment>
         <Input
-          innerRef={c => (this.input = c)}
+          ref={c => (this.input = c)}
           type="text"
           value={query}
           onChange={this.handleChange}

@@ -16,30 +16,34 @@ import Interactions from 'icons/device/interactions'
 import type { Device } from 'types/common'
 import type { StepProps } from '../'
 
-const Container = styled(Box).attrs({
+const Container = styled(Box).attrs(() => ({
   alignItems: 'center',
   fontSize: 4,
-  color: 'dark',
+  color: 'palette.text.shade100',
   px: 7,
-})``
+}))``
 
-const Title = styled(Box).attrs({
+const Title = styled(Box).attrs(() => ({
   ff: 'Museo Sans|Regular',
   fontSize: 5,
   mb: 3,
-})``
+}))``
 
-const Address = styled(Box).attrs({
-  bg: p => (p.notValid ? 'transparent' : p.withQRCode ? 'white' : 'lightGrey'),
+const Address = styled(Box).attrs(p => ({
+  bg: p.notValid
+    ? 'transparent'
+    : p.withQRCode
+    ? 'palette.background.paper'
+    : 'palette.background.default',
   borderRadius: 1,
-  color: 'dark',
+  color: 'palette.text.shade100',
   ff: 'Open Sans|SemiBold',
   fontSize: 4,
   mt: 2,
-  px: p => (p.notValid ? 0 : 4),
-  py: p => (p.notValid ? 0 : 3),
-})`
-  border: ${p => (p.notValid ? 'none' : `1px dashed ${p.theme.colors.fog}`)};
+  px: p.notValid ? 0 : 4,
+  py: p.notValid ? 0 : 3,
+}))`
+  border: ${p => (p.notValid ? 'none' : `1px dashed ${p.theme.colors.palette.divider}`)};
   cursor: text;
   user-select: text;
   width: 325px;
@@ -113,7 +117,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
     if (!displayedOnDevice) {
       return (
         <>
-          <Text ff="Open Sans|Regular" align="center" color="smoke">
+          <Text ff="Open Sans|Regular" align="center" color="palette.text.shade80">
             {t('manager.firmware.downloadingUpdateDesc')}
           </Text>
           <Box my={5}>
@@ -125,11 +129,11 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
 
     return (
       <>
-        <Text ff="Open Sans|Regular" align="center" color="smoke">
+        <Text ff="Open Sans|Regular" align="center" color="palette.text.shade80">
           {t('manager.modal.confirmIdentifierText')}
         </Text>
         <Box mx={7} mt={5} mb={isBlue ? 0 : 5}>
-          <Text ff="Open Sans|SemiBold" align="center" color="smoke">
+          <Text ff="Open Sans|SemiBold" align="center" color="palette.text.shade80">
             {t('manager.modal.identifier')}
           </Text>
           <Address>{firmware.osu && this.formatHashName(firmware.osu.hash)}</Address>

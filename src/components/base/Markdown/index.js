@@ -6,12 +6,12 @@ import { shell } from 'electron'
 
 import Box from 'components/base/Box'
 
-export const Notes = styled(Box).attrs({
+export const Notes = styled(Box).attrs(() => ({
   ff: 'Open Sans',
   fontSize: 4,
-  color: 'smoke',
+  color: 'palette.text.shade80',
   flow: 4,
-})`
+}))`
   ul,
   ol {
     padding-left: 20px;
@@ -29,7 +29,7 @@ export const Notes = styled(Box).attrs({
   code {
     padding: 0.2em 0.4em;
     font-size: 0.9em;
-    background-color: ${p => p.theme.colors.lightGrey};
+    background-color: ${p => p.theme.colors.palette.background.default};
     border-radius: 3px;
   }
 
@@ -49,7 +49,7 @@ export const Notes = styled(Box).attrs({
   h4,
   h5,
   h6 {
-    color: ${p => p.theme.colors.dark};
+    color: ${p => p.theme.colors.palette.text.shade100};
     font-weight: bold;
     margin-top: 24px;
     margin-bottom: 16px;
@@ -90,7 +90,7 @@ export const Notes = styled(Box).attrs({
   hr {
     height: 1px;
     border: none;
-    background-color: ${p => p.theme.colors.fog};
+    background-color: ${p => p.theme.colors.palette.divider};
   }
 
   blockquote {

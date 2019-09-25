@@ -7,10 +7,10 @@ import type { T } from 'types/common'
 import Box from 'components/base/Box'
 import OperationDate from './OperationDate'
 
-const Cell = styled(Box).attrs({
+const Cell = styled(Box).attrs(() => ({
   px: 3,
   horizontal: false,
-})`
+}))`
   width: ${p => (p.compact ? 90 : 120)}px;
 `
 
@@ -37,7 +37,7 @@ class DateCell extends PureComponent<Props> {
 
     return (
       <Cell compact={compact}>
-        <Box ff="Open Sans|SemiBold" fontSize={3} color="smoke" style={ellipsis}>
+        <Box ff="Open Sans|SemiBold" fontSize={3} color="palette.text.shade80" style={ellipsis}>
           {text || t(`operation.type.${operation.type}`)}
         </Box>
         <OperationDate date={operation.date} />

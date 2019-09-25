@@ -78,7 +78,7 @@ class AccountsList extends Component<
               <Box
                 horizontal
                 ff="Open Sans|Bold"
-                color="dark"
+                color="palette.text.shade100"
                 fontSize={2}
                 textTransform="uppercase"
                 cursor={collapsible ? 'pointer' : undefined}

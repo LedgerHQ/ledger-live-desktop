@@ -267,24 +267,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
             ) : null}
             <Spoiler textTransform title={t('account.settings.advancedLogs')}>
               <SyncAgo date={account.lastSyncDate} />
-              <div
-                style={{
-                  userSelect: 'text',
-                  border: '1px dashed #f9f9f9',
-                  backgroundColor: '#f9f9f9',
-                  color: '#000',
-                  fontFamily: 'monospace',
-                  fontSize: '10px',
-                  outline: 'none',
-                  padding: '20px',
-                  width: '100%',
-                  whiteSpace: 'pre-wrap',
-                  wordWrap: 'break-word',
-                  overflow: 'auto',
-                }}
-              >
-                {JSON.stringify(usefulData, null, 2)}
-              </div>
+              <AdvancedLogsContainer>{JSON.stringify(usefulData, null, 2)}</AdvancedLogsContainer>
             </Spoiler>
             <ConfirmModal
               analyticsName="RemoveAccount"
@@ -321,6 +304,20 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
   }
 }
 
+const AdvancedLogsContainer = styled.div`
+  border: 1px dashed ${p => p.theme.colors.palette.background.default};
+  background-color: ${p => p.theme.colors.palette.background.default};
+  color: ${p => p.theme.colors.palette.text.shade100};
+  font-family: monospace;
+  font-size: 11px;
+  outline: none;
+  padding: 20px;
+  width: 100%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: auto;
+`
+
 export default compose(
   connect(
     null,
@@ -337,28 +334,28 @@ export function InputLeft({ currency }: { currency: CryptoCurrency }) {
   )
 }
 
-export const Container = styled(Box).attrs({
+export const Container = styled(Box).attrs(() => ({
   flow: 2,
   justify: 'space-between',
   horizontal: true,
   mb: 3,
   pb: 4,
-})`
-  border-bottom: 1px solid ${p => p.theme.colors.lightGrey};
+}))`
+  border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
 `
 
-export const OptionRowDesc = styled(Box).attrs({
+export const OptionRowDesc = styled(Box).attrs(() => ({
   ff: 'Open Sans|Regular',
   fontSize: 3,
   textAlign: 'left',
   lineHeight: 1.69,
-  color: 'grey',
+  color: 'palette.text.shade60',
   shrink: 1,
-})``
-export const OptionRowTitle = styled(Box).attrs({
+}))``
+export const OptionRowTitle = styled(Box).attrs(() => ({
   ff: 'Open Sans|SemiBold',
-  color: 'black',
+  color: 'palette.text.shade100',
   fontSize: 4,
   textAlign: 'left',
   lineHeight: 1.69,
-})``
+}))``

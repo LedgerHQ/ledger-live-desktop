@@ -4,7 +4,7 @@ import React, { useMemo, useCallback } from 'react'
 import styled from 'styled-components'
 import { BigNumber } from 'bignumber.js'
 import { Trans } from 'react-i18next'
-import type { Account, Transaction } from '@ledgerhq/live-common/lib/types'
+import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
 import {
   inferDynamicRange,
   reverseRangeIndex,
@@ -23,6 +23,7 @@ import TranslatedError from '../../components/TranslatedError'
 type Props = {
   account: Account,
   transaction: Transaction,
+  status: TransactionStatus,
   onChange: Transaction => void,
 }
 
@@ -44,7 +45,7 @@ const GasSlider = React.memo(({ defaultGas, value, onChange, error }: *) => {
 
 const fallbackGasPrice = BigNumber(10e9)
 
-const FeesField = ({ onChange, account, transaction, error }: Props) => {
+const FeesField = ({ onChange, account, transaction, status }: Props) => {
   invariant(transaction.family === 'ethereum', 'FeeField: ethereum family expected')
 
   const bridge = getAccountBridge(account)
@@ -55,11 +56,16 @@ const FeesField = ({ onChange, account, transaction, error }: Props) => {
   const { units } = account.currency
   const unit = units.length > 1 ? units[1] : units[0]
 
+  const error = null // TODO we need to introduce gasLimitError (or error per field...)
+
+  // TODO^^^ use for errors?
+  status
+
   const onGasPriceChange = useCallback(
     gasPrice => {
       onChange(bridge.updateTransaction(transaction, { gasPrice }))
     },
-    [onChange, bridge],
+    [onChange, transaction, bridge],
   )
 
   return (

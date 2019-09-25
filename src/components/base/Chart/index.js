@@ -38,6 +38,7 @@ import React, { Component } from 'react'
 import * as d3 from 'd3'
 import noop from 'lodash/noop'
 import last from 'lodash/last'
+import { withTheme } from 'styled-components'
 
 import refreshNodes from './refreshNodes'
 import refreshDraw from './refreshDraw'
@@ -59,6 +60,7 @@ export type Props = {
   renderTickY: (t: number) => string | number,
   mapValue: (*) => number,
   onlyUpdateIfLastPointChanges?: boolean,
+  theme: any,
 }
 
 class Chart extends Component<Props> {
@@ -137,7 +139,16 @@ class Chart extends Component<Props> {
 
     this.refreshChart = prevProps => {
       const { _node: node, props } = this
-      const { data: raw, color, height, hideAxis, isInteractive, mapValue, renderTooltip } = props
+      const {
+        data: raw,
+        color,
+        height,
+        hideAxis,
+        isInteractive,
+        mapValue,
+        renderTooltip,
+        theme,
+      } = props
 
       ctx.DATA = enrichData(raw)
 
@@ -180,16 +191,17 @@ class Chart extends Component<Props> {
       let lastDisplayedTooltip = null
 
       // Add/remove nodes depending on props
-      refreshNodes({ ctx, node, props })
+      refreshNodes(theme, { ctx, node, props })
 
       // Redraw
-      refreshDraw({ ctx, props })
+      refreshDraw(theme, { ctx, props })
 
       // Mouse handler
       mouseHandler && mouseHandler.remove() // eslint-disable-line no-unused-expressions
       if (isInteractive) {
         mouseHandler = handleMouseEvents({
           ctx,
+          theme,
           shouldTooltipUpdate: d => d !== lastDisplayedTooltip,
           onTooltipUpdate: d => (lastDisplayedTooltip = d),
           renderTooltip,
@@ -214,4 +226,4 @@ class Chart extends Component<Props> {
   }
 }
 
-export default Chart
+export default withTheme(Chart)

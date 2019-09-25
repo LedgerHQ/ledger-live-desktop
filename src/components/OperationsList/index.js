@@ -33,7 +33,7 @@ import { accountsSelector } from 'reducers/accounts'
 import SectionTitle from './SectionTitle'
 import OperationC from './Operation'
 
-const ShowMore = styled(Box).attrs({
+const ShowMore = styled(Box).attrs(() => ({
   horizontal: true,
   flow: 1,
   ff: 'Open Sans|SemiBold',
@@ -42,7 +42,7 @@ const ShowMore = styled(Box).attrs({
   align: 'center',
   p: 6,
   color: 'wallet',
-})`
+}))`
   &:hover {
     text-decoration: underline;
   }
@@ -119,7 +119,12 @@ export class OperationsList extends PureComponent<Props, State> {
     return (
       <Box flow={4}>
         {title && (
-          <Text color="dark" ff="Museo Sans" fontSize={6} data-e2e="dashboard_OperationList">
+          <Text
+            color="palette.text.shade100"
+            ff="Museo Sans"
+            fontSize={6}
+            data-e2e="dashboard_OperationList"
+          >
             {title}
           </Text>
         )}

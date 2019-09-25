@@ -5,18 +5,21 @@ import styled from 'styled-components'
 
 import { Tabbable } from 'components/base/Box'
 
-const Base = styled(Tabbable).attrs({ relative: true })`
+const Base = styled(Tabbable).attrs(() => ({ relative: true }))`
   outline: none;
-  box-shadow: 0 0 0 1px ${p => (p.isChecked ? p.theme.colors.lightGrey : p.theme.colors.fog)};
+  box-shadow: 0 0 0 1px
+    ${p =>
+      p.isChecked ? p.theme.colors.palette.background.default : p.theme.colors.palette.divider};
   border-radius: 50%;
   height: 19px;
   width: 19px;
   transition: all ease-in-out 0.1s;
-  background-color: white;
+  background-color: ${p => p.theme.colors.palette.background.paper};
 
   &:focus {
     box-shadow: 0 0 0 ${p => (p.isChecked ? 4 : 2)}px
-      ${p => (p.isChecked ? p.theme.colors.lightGrey : p.theme.colors.fog)};
+      ${p =>
+        p.isChecked ? p.theme.colors.palette.background.default : p.theme.colors.palette.divider};
   }
 
   &:before,
@@ -44,7 +47,7 @@ const Base = styled(Tabbable).attrs({ relative: true })`
   }
 
   &:after {
-    background-color: ${p => p.theme.colors.white};
+    background-color: ${p => p.theme.colors.palette.background.paper};
     ${p =>
       p.isChecked &&
       `

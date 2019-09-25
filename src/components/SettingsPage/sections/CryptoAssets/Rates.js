@@ -53,7 +53,7 @@ const RateTooltipWrapper = styled.div`
 `
 
 const TooltipButtonWrapper = styled.div`
-  color: ${p => p.theme.colors.grey};
+  color: ${p => p.theme.colors.palette.text.shade60};
   margin-left: 8px;
   display: flex;
   align-items: center;
@@ -86,7 +86,13 @@ class Rates extends PureComponent<Props> {
         />
         <Body>
           <RateRowWrapper>
-            <Box ff="Open Sans|SemiBold" alignItems="center" horizontal color="dark" fontSize={4}>
+            <Box
+              ff="Open Sans|SemiBold"
+              alignItems="center"
+              horizontal
+              color="palette.text.shade100"
+              fontSize={4}
+            >
               <Trans i18nKey="settings.rates.rate" />
               <TooltipButtonWrapper>
                 <Tooltip render={RateTooltip}>
@@ -94,13 +100,13 @@ class Rates extends PureComponent<Props> {
                 </Tooltip>
               </TooltipButtonWrapper>
             </Box>
-            <Box ff="Open Sans|SemiBold" color="dark" fontSize={4}>
+            <Box ff="Open Sans|SemiBold" color="palette.text.shade100" fontSize={4}>
               <Trans i18nKey="settings.rates.rpice" />
             </Box>
-            <Box ff="Open Sans|SemiBold" color="dark" fontSize={4}>
+            <Box ff="Open Sans|SemiBold" color="palette.text.shade100" fontSize={4}>
               <Trans i18nKey={`settings.rates.last`} values={{ days }} />
             </Box>
-            <Box ff="Open Sans|SemiBold" color="dark" fontSize={4}>
+            <Box ff="Open Sans|SemiBold" color="palette.text.shade100" fontSize={4}>
               <Trans i18nKey="settings.rates.exchange" />
             </Box>
           </RateRowWrapper>

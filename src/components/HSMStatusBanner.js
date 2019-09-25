@@ -5,7 +5,6 @@ import { warnings } from '@ledgerhq/live-common/lib/api/socket'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
 
-import { colors } from 'styles/theme'
 import uniqueId from 'lodash/uniqueId'
 import { openURL } from 'helpers/linking'
 import IconCross from 'icons/Cross'
@@ -29,7 +28,7 @@ const CloseIconContainer = styled.div`
 
 const CloseIcon = (props: *) => (
   <CloseIconContainer {...props}>
-    <IconCross size={16} color="white" />
+    <IconCross size={16} color="palette.background.paper" />
   </CloseIconContainer>
 )
 
@@ -107,16 +106,16 @@ class BannerItem extends PureComponent<{
   render() {
     const { item, t } = this.props
     return (
-      <Box relative key={item.id} style={styles.banner}>
+      <Banner relative key={item.id}>
         <CloseIcon onClick={this.dismiss} />
         <Box horizontal flow={2}>
-          <IconExclamationCircle size={16} color="white" />
+          <IconExclamationCircle size={16} color="palette.background.paper" />
           <Box shrink ff="Open Sans|SemiBold" style={styles.message}>
             {item.message}
           </Box>
         </Box>
         <BannerItemLink t={t} onClick={this.onLinkClick} />
-      </Box>
+      </Banner>
     )
   }
 }
@@ -124,8 +123,19 @@ class BannerItem extends PureComponent<{
 const UnderlinedLink = styled.span`
   border-bottom: 1px solid transparent;
   &:hover {
-    border-bottom-color: white;
+    border-bottom-color: ${p => p.theme.colors.palette.background.paper};
   }
+`
+
+const Banner = styled(Box)`
+  background: ${p => p.theme.colors.orange};
+  overflow: hidden;
+  border-radius: 4px;
+  font-size: 13px;
+  color: ${p => p.theme.colors.palette.background.paper};
+  font-weight: bold;
+  padding: 17px 30px 15px 15px;
+  width: 350px;
 `
 
 const BannerItemLink = ({ t, onClick }: { t: *, onClick: void => * }) => (
@@ -137,9 +147,9 @@ const BannerItemLink = ({ t, onClick }: { t: *, onClick: void => * }) => (
     align="center"
     cursor="pointer"
     onClick={onClick}
-    color="white"
+    color="palette.background.paper"
   >
-    <IconChevronRight size={16} color="white" />
+    <IconChevronRight size={16} color="palette.background.paper" />
     <UnderlinedLink>{t('common.learnMore')}</UnderlinedLink>
   </Box>
 )
@@ -150,18 +160,6 @@ const styles = {
     left: 32,
     bottom: 32,
     zIndex: 100,
-  },
-  banner: {
-    background: colors.orange,
-    overflow: 'hidden',
-    borderRadius: 4,
-    fontSize: 13,
-    paddingTop: 17,
-    padding: 15,
-    color: 'white',
-    fontWeight: 'bold',
-    paddingRight: 30,
-    width: 350,
   },
   message: {
     marginTop: -3,

@@ -2,11 +2,11 @@
 
 /* eslint-disable no-unused-expressions */
 
-import { injectGlobal } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 import omitBy from 'lodash/omitBy'
 
 import { fontFace, rgba } from 'styles/helpers'
-import { radii, colors } from 'styles/theme'
+import { radii } from 'styles/theme'
 import reset from './reset'
 
 const { STORYBOOK_ENV, NODE_ENV } = process.env
@@ -90,21 +90,21 @@ function transformFonts(allFonts) {
     .join('\n')
 }
 
-injectGlobal`
+export const GlobalStyle = createGlobalStyle`
   ${transformFonts(fonts)};
   ${reset};
 
   .tippy-tooltip {
-    background-color: ${colors.dark};
+    background-color: ${p => p.theme.colors.palette.text.shade100};
     border-radius: ${radii[1]}px;
   }
 
   .tippy-popper .tippy-roundarrow {
-    fill: ${colors.dark};
+    fill: ${p => p.theme.colors.palette.text.shade100};
   }
 
   .select__control:hover, .select__control-is-focused {
-    border-color: ${colors.fog};
+    border-color: ${p => p.theme.colors.palette.divider};
   }
 
   .select__single-value {
@@ -112,16 +112,12 @@ injectGlobal`
     right: 0;
     left: 15px;
   }
-
+  
   .select__placeholder {
-    color ${colors.fog} !important;
-  }
-
-  .select__option:active {
-    background: ${colors.lightGrey} !important;
+    color ${p => p.theme.colors.palette.divider} !important;
   }
 
   ::selection {
-    background: ${rgba(colors.wallet, 0.1)};
+    background: ${p => rgba(p.theme.colors.wallet, 0.1)};
   }
 `

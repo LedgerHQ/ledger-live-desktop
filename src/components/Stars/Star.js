@@ -12,14 +12,17 @@ import { rgba } from '../../styles/helpers'
 const ButtonWrapper = styled.div`
   height: 34px;
   width: 34px;
-  border: 1px solid ${p => (p.filled ? p.theme.colors.starYellow : p.theme.colors.grey)};
+  border: 1px solid
+    ${p => (p.filled ? p.theme.colors.starYellow : p.theme.colors.palette.text.shade60)};
   border-radius: 4px;
   padding: 8px;
   text-align: center;
   background: ${p => (p.filled ? p.theme.colors.starYellow : 'transparent')};
   &:hover {
-    background: ${p => (p.filled ? p.theme.colors.starYellow : rgba(p.theme.colors.fog, 0.2))};
-    border-color: ${p => (p.filled ? p.theme.colors.starYellow : p.theme.colors.dark)};
+    background: ${p =>
+      p.filled ? p.theme.colors.starYellow : rgba(p.theme.colors.palette.divider, 0.2)};
+    border-color: ${p =>
+      p.filled ? p.theme.colors.starYellow : p.theme.colors.palette.text.shade100};
   }
 `
 const FloatingWrapper = styled.div``

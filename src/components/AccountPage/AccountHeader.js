@@ -23,18 +23,18 @@ import { openURL } from 'helpers/linking'
 import { colors } from 'styles/theme'
 import ParentCryptoCurrencyIcon from '../ParentCryptoCurrencyIcon'
 
-const CurName = styled(Text).attrs({
+const CurName = styled(Text).attrs(() => ({
   ff: 'Open Sans|SemiBold',
   fontSize: 2,
-})`
+}))`
   text-transform: uppercase;
   letter-spacing: 1px;
 `
 
-const CurNameToken = styled(Text).attrs({
+const CurNameToken = styled(Text).attrs(() => ({
   ff: 'Museo Sans|Bold',
   fontSize: 2,
-})``
+}))``
 
 const CurNameTokenLink = styled(CurNameToken)`
   margin-left: 5px;
@@ -42,10 +42,10 @@ const CurNameTokenLink = styled(CurNameToken)`
   border-radius: ${p => p.theme.radii[1]}px;
 `
 
-const CurNameTokenIcon = styled(Text).attrs({
+const CurNameTokenIcon = styled(Text).attrs(() => ({
   ff: 'Open Sans|SemiBold',
   fontSize: 2,
-})`
+}))`
   color: ${colors.wallet};
   display: none;
   margin-left: 5px;
@@ -67,11 +67,11 @@ const Wrapper = styled(Box)`
   }
 `
 
-const AccountName = styled(Text).attrs({
-  color: 'dark',
+const AccountName = styled(Text).attrs(() => ({
+  color: 'palette.text.shade100',
   ff: 'Museo Sans',
   fontSize: 7,
-})`
+}))`
   line-height: 1.1;
 `
 

@@ -195,7 +195,9 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             />
           </GenuineCheckCardWrapper>
           <GenuineCheckCardWrapper mt={3} isDisabled={!genuine.pinStepPass}>
-            <IconOptionRow color={!genuine.pinStepPass ? 'grey' : 'wallet'}>{'2.'}</IconOptionRow>
+            <IconOptionRow color={!genuine.pinStepPass ? 'palette.text.shade60' : 'wallet'}>
+              {'2.'}
+            </IconOptionRow>
             <CardTitle>{t('onboarding.genuineCheck.step2.title')}</CardTitle>
             {genuine.pinStepPass && (
               <RadioGroup
@@ -210,7 +212,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             isDisabled={!genuine.recoveryStepPass}
             isError={genuine.genuineCheckUnavailable}
           >
-            <IconOptionRow color={!genuine.recoveryStepPass ? 'grey' : 'wallet'}>
+            <IconOptionRow color={!genuine.recoveryStepPass ? 'palette.text.shade60' : 'wallet'}>
               {'3.'}
             </IconOptionRow>
             <CardTitle>{t('onboarding.genuineCheck.step3.title')}</CardTitle>
@@ -278,12 +280,12 @@ export default connect(
   mapDispatchToProps,
 )(GenuineCheck)
 
-export const CardTitle = styled(Box).attrs({
+export const CardTitle = styled(Box).attrs(() => ({
   ff: 'Open Sans|SemiBold',
   fontSize: 4,
   textAlign: 'left',
   pl: 2,
-})`
+}))`
   flex-shrink: 1;
 `
 export const Spacer = styled.div``

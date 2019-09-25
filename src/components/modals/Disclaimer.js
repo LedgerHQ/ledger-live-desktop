@@ -35,7 +35,7 @@ class DisclaimerModal extends PureComponent<Props> {
           onClose={this.onClose}
           title={t('disclaimerModal.title')}
           render={() => (
-            <Box flow={4} ff="Open Sans|Regular" fontSize={4} color="smoke">
+            <Box flow={4} ff="Open Sans|Regular" fontSize={4} color="palette.text.shade80">
               <Box align="center" mt={4} pb={4}>
                 <HandShield size={55} />
               </Box>

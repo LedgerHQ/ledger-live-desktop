@@ -55,32 +55,32 @@ const ImportError = ({ error }: { error: Error }) => (
   </Box>
 )
 
-const LoadingRow = styled(Box).attrs({
+const LoadingRow = styled(Box).attrs(() => ({
   horizontal: true,
   borderRadius: 1,
   px: 3,
   align: 'center',
   justify: 'center',
   mt: 1,
-})`
+}))`
   height: 48px;
-  border: 1px dashed ${p => p.theme.colors.grey};
+  border: 1px dashed ${p => p.theme.colors.palette.text.shade60};
 `
-const Title = styled(Box).attrs({
+const Title = styled(Box).attrs(() => ({
   ff: 'Museo Sans',
   fontSize: 5,
   mt: 2,
-  color: 'black',
-})`
+  color: 'palette.text.shade100',
+}))`
   text-align: center;
 `
 
-const Desc = styled(Box).attrs({
+const Desc = styled(Box).attrs(() => ({
   ff: 'Open Sans',
   fontSize: 4,
   mt: 2,
-  color: 'graphite',
-})`
+  color: 'palette.text.shade80',
+}))`
   text-align: center;
 `
 
@@ -243,14 +243,14 @@ class StepImport extends PureComponent<StepProps> {
       creatable: alreadyEmptyAccount ? (
         <Trans i18nKey="addAccounts.createNewAccount.noOperationOnLastAccount" parent="div">
           {' '}
-          <Text ff="Open Sans|SemiBold" color="dark">
+          <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
             {alreadyEmptyAccount.name}
           </Text>{' '}
         </Trans>
       ) : (
         <Trans i18nKey="addAccounts.createNewAccount.noAccountToCreate" parent="div">
           {' '}
-          <Text ff="Open Sans|SemiBold" color="dark">
+          <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
             {currencyName}
           </Text>{' '}
         </Trans>
@@ -282,8 +282,8 @@ class StepImport extends PureComponent<StepProps> {
 
           {scanStatus === 'scanning' ? (
             <LoadingRow>
-              <Spinner color="grey" size={16} />
-              <Box ml={2} ff="Open Sans|Regular" color="grey" fontSize={4}>
+              <Spinner color="palette.text.shade60" size={16} />
+              <Box ml={2} ff="Open Sans|Regular" color="palette.text.shade60" fontSize={4}>
                 {t('common.sync.syncing')}
               </Box>
             </LoadingRow>

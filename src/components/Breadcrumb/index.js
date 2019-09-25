@@ -8,18 +8,18 @@ import styled from 'styled-components'
 import Box from 'components/base/Box'
 import Step from './Step'
 
-const Wrapper = styled(Box).attrs({
+const Wrapper = styled(Box).attrs(() => ({
   horizontal: true,
   alignItems: 'center',
   justifyContent: 'center',
   relative: true,
-})`
+}))`
   margin-bottom: 25px;
   z-index: 2;
 `
 
 const Bar = styled.div`
-  background: ${p => p.theme.colors.fog};
+  background: ${p => p.theme.colors.palette.divider};
   flex-grow: 1;
   height: 1px;
   left: ${p => p.start}%;
@@ -47,7 +47,7 @@ const Bar = styled.div`
   }
 
   &:before {
-    background: ${p => p.theme.colors.fog};
+    background: ${p => p.theme.colors.palette.divider};
     left: ${p => (p.disabled ? `${p.disabled[0]}%` : 0)};
     right: ${p => (p.disabled ? `${p.disabled[1]}%` : 'auto')};
     z-index: 2;

@@ -41,16 +41,16 @@ const Wrapper = styled(Box)`
   flex-direction: row;
 `
 
-const SwapButton = styled(Tabbable).attrs({
-  color: 'dark',
+const SwapButton = styled(Tabbable).attrs(() => ({
+  color: 'palette.text.shade100',
   ff: 'Museo Sans',
   fontSize: 7,
-})`
+}))`
   align-items: center;
   align-self: center;
   border-radius: 4px;
-  border: 1px solid ${p => p.theme.colors.fog};
-  color: ${p => p.theme.colors.fog};
+  border: 1px solid ${p => p.theme.colors.palette.text.shade20};
+  color: ${p => p.theme.colors.palette.text.shade20};
   cursor: pointer;
   display: flex;
   height: 53px;
@@ -59,8 +59,8 @@ const SwapButton = styled(Tabbable).attrs({
   width: 25px;
 
   &:hover {
-    border-color: ${p => p.theme.colors.dark};
-    color: ${p => p.theme.colors.dark};
+    border-color: ${p => p.theme.colors.palette.text.shade100};
+    color: ${p => p.theme.colors.palette.text.shade100};
   }
 
   &:active {

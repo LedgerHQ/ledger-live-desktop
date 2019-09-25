@@ -13,17 +13,17 @@ import ExclamationCircleThin from 'icons/ExclamationCircleThin'
 
 import type { StepProps } from '../'
 
-const Container = styled(Box).attrs({
+const Container = styled(Box).attrs(() => ({
   alignItems: 'center',
   fontSize: 4,
-  color: 'dark',
-})``
+  color: 'palette.text.shade100',
+}))``
 
-const Title = styled(Box).attrs({
+const Title = styled(Box).attrs(() => ({
   fontFamily: 'Museo Sans',
   fontSize: 6,
-  color: 'dark',
-})`
+  color: 'palette.text.shade100',
+}))`
   font-weight: 500;
 `
 
@@ -35,7 +35,7 @@ function StepConfirmation({ t, error }: StepProps) {
           <ExclamationCircleThin size={44} />
         </Box>
         <Box
-          color="dark"
+          color="palette.text.shade100"
           mt={4}
           fontSize={5}
           ff="Museo Sans|Regular"
@@ -45,7 +45,7 @@ function StepConfirmation({ t, error }: StepProps) {
           <TranslatedError error={error} field="title" />
         </Box>
         <Box
-          color="graphite"
+          color="palette.text.shade80"
           mt={4}
           fontSize={4}
           ff="Open Sans"
@@ -66,7 +66,7 @@ function StepConfirmation({ t, error }: StepProps) {
       </Box>
       <Title>{t('manager.modal.successTitle')}</Title>
       <Box mt={2} mb={5}>
-        <Text ff="Open Sans|Regular" fontSize={4} color="graphite">
+        <Text ff="Open Sans|Regular" fontSize={4} color="palette.text.shade80">
           {t('manager.modal.successText')}
         </Text>
       </Box>

@@ -588,6 +588,8 @@
       "desc": "Configure general Ledger Live settings.",
       "language": "Display language",
       "languageDesc": "Set the language displayed in Ledger Live.",
+      "theme": "Theme",
+      "themeDesc": "Select the theme.",
       "counterValue": "Countervalue",
       "counterValueDesc": "Choose the currency shown next to your balance and operations.",
       "exchange": "Rate provider",
@@ -759,6 +761,12 @@
   },
   "language": {
     "system": "Use system language"
+  },
+  "theme": {
+    "system": "Use system theme",
+    "light": "Light",
+    "dusk": "Dusk",
+    "dark": "Dark"
   },
   "onboarding": {
     "breadcrumb": {

@@ -44,7 +44,8 @@ const Item = styled.div`
   flex-direction: row;
   padding: 12px;
   min-width: 200px;
-  color: ${p => (p.isActive ? p.theme.colors.dark : p.theme.colors.smoke)};
+  color: ${p =>
+    p.isActive ? p.theme.colors.palette.text.shade100 : p.theme.colors.palette.text.shade80};
   > :first-child {
     margin-right: 10px;
   }
@@ -54,7 +55,7 @@ const Item = styled.div`
   }
 
   &:hover {
-    background: ${p => p.theme.colors.lightGrey};
+    background: ${p => p.theme.colors.palette.background.default};
     border-radius: 4px;
   }
 `
@@ -92,7 +93,7 @@ const AngleDown = styled.div`
   line-height: 16px;
 
   &:hover {
-    background: ${p => p.theme.colors.fog};
+    background: ${p => p.theme.colors.palette.divider};
   }
 `
 

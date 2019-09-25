@@ -34,7 +34,7 @@ class Countervalue extends PureComponent<{
             alwaysShowSign={false}
             showCode
             fontSize={3}
-            color="graphite"
+            color="palette.text.shade80"
             placeholder={placeholder}
           />
         ) : (

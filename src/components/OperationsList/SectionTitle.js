@@ -21,7 +21,7 @@ export class SectionTitle extends PureComponent<Props> {
     const { day } = this.props
     const d = moment(day)
     return (
-      <Box ff="Open Sans|SemiBold" fontSize={4} color="grey">
+      <Box ff="Open Sans|SemiBold" fontSize={4} color="palette.text.shade60">
         {d.calendar(null, calendarOpts)}
       </Box>
     )

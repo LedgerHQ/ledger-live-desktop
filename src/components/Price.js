@@ -40,10 +40,10 @@ type Props = OwnProps & {
   value: BigNumber,
 }
 
-const PriceWrapper = styled(Box).attrs({
+const PriceWrapper = styled(Box).attrs(() => ({
   ff: 'Rubik',
   horizontal: true,
-})`
+}))`
   line-height: 1.2;
   white-space: pre;
   align-items: baseline;

@@ -63,7 +63,15 @@ class ActivityIndicatorInner extends PureComponent<Props, { lastClickTime: numbe
         <Rotating
           size={16}
           isRotating={isRotating}
-          color={isError ? 'alertRed' : isRotating ? 'grey' : isUpToDate ? 'positiveGreen' : 'grey'}
+          color={
+            isError
+              ? 'alertRed'
+              : isRotating
+              ? 'palette.text.shade60'
+              : isUpToDate
+              ? 'positiveGreen'
+              : 'palette.text.shade60'
+          }
         >
           {isError ? (
             <IconExclamationCircle size={16} />

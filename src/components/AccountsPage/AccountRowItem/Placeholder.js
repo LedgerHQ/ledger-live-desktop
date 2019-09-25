@@ -34,8 +34,8 @@ const AddAccountButton = styled.div`
 
   &:hover {
     cursor: pointer;
-    border-color: ${p => p.theme.colors.dark};
-    color: ${p => p.theme.colors.dark};
+    border-color: ${p => p.theme.colors.palette.text.shade100};
+    color: ${p => p.theme.colors.palette.text.shade100};
   }
 `
 

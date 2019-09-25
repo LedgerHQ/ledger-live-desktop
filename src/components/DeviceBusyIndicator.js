@@ -6,7 +6,7 @@ const Indicator = styled.div`
   width: 6px;
   height: 6px;
   border-radius: 3px;
-  background-color: black;
+  background-color: ${p => p.theme.colors.palette.text.shade100};
   position: fixed;
   top: 4px;
   right: 4px;

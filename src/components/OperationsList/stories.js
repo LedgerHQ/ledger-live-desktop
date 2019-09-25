@@ -14,7 +14,7 @@ const account1 = genAccount('account1')
 const account2 = genAccount('account2')
 
 stories.add('OperationsList', () => (
-  <Box bg="lightGrey" p={6} m={-4}>
+  <Box bg="palette.background.default" p={6} m={-4}>
     <OperationsList accounts={[account1, account2]} withAccount={boolean('withAccount')} />
   </Box>
 ))
