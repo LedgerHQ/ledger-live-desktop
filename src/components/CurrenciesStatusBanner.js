@@ -8,7 +8,6 @@ import { createStructuredSelector } from 'reselect'
 import styled from 'styled-components'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
-import { colors } from 'styles/theme'
 import { openURL } from 'helpers/linking'
 import { CHECK_CUR_STATUS_INTERVAL } from 'config/constants'
 import IconCross from 'icons/Cross'
@@ -54,7 +53,7 @@ const CloseIconContainer = styled.div`
 
 const CloseIcon = (props: *) => (
   <CloseIconContainer {...props}>
-    <IconCross size={16} color="white" />
+    <IconCross size={16} color="palette.background.paper" />
   </CloseIconContainer>
 )
 
@@ -120,14 +119,10 @@ class BannerItem extends PureComponent<{
   render() {
     const { item, t } = this.props
     return (
-      <Box
-        relative
-        key={item.id}
-        style={{ ...styles.banner, ...(item.warning ? styles.warning : null) }}
-      >
+      <Box relative key={item.id} bg={item.warning ? 'orange' : 'alertRed'} style={styles.banner}>
         <CloseIcon onClick={this.dismiss} />
         <Box horizontal flow={2}>
-          <IconTriangleWarning height={16} width={16} color="white" />
+          <IconTriangleWarning height={16} width={16} color="palette.background.paper" />
           <Box shrink ff="Open Sans|SemiBold">
             {item.message}
           </Box>
@@ -141,7 +136,7 @@ class BannerItem extends PureComponent<{
 const UnderlinedLink = styled.span`
   border-bottom: 1px solid transparent;
   &:hover {
-    border-bottom-color: white;
+    border-bottom-color: ${p => p.theme.colors.palette.background.paper};
   }
 `
 
@@ -154,9 +149,9 @@ const BannerItemLink = ({ t, onClick }: { t: *, onClick: void => * }) => (
     align="center"
     cursor="pointer"
     onClick={onClick}
-    color="white"
+    color="palette.background.paper"
   >
-    <IconChevronRight size={16} color="white" />
+    <IconChevronRight size={16} color="palette.background.paper" />
     <UnderlinedLink>{t('common.learnMore')}</UnderlinedLink>
   </Box>
 )
@@ -167,16 +162,12 @@ const styles = {
     left: 32,
     bottom: 32,
   },
-  warning: {
-    background: colors.orange,
-  },
   banner: {
-    background: colors.alertRed,
     overflow: 'hidden',
     borderRadius: 4,
     fontSize: 13,
     padding: 14,
-    color: 'white',
+    color: 'palette.background.paper',
     fontWeight: 'bold',
     paddingRight: 50,
     width: 350,

@@ -32,10 +32,10 @@ const fillInAnimation = keyframes`
   }
 `
 
-const Bar = styled(Box).attrs({
-  color: 'fog',
+const Bar = styled(Box).attrs(() => ({
+  color: 'palette.divider',
   borderRadius: '2.5px',
-})`
+}))`
   height: 5px;
   width: 100%;
   position: relative;
@@ -43,9 +43,9 @@ const Bar = styled(Box).attrs({
   overflow: hidden;
 `
 
-const Progression = styled(Bar).attrs({
+const Progression = styled(Bar).attrs(() => ({
   color: 'wallet',
-})`
+}))`
   position: absolute;
   top: 0;
   left: 0;

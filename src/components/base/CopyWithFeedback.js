@@ -59,7 +59,7 @@ class CopyWithFeedback extends PureComponent<Props, State> {
   }
 }
 
-const ClickableWrapper = styled(Box).attrs({
+const ClickableWrapper = styled(Box).attrs(() => ({
   horizontal: true,
   align: 'center',
   flow: 1,
@@ -67,7 +67,7 @@ const ClickableWrapper = styled(Box).attrs({
   fontSize: 4,
   ff: 'Open Sans|SemiBold',
   cursor: 'default', // this here needs reset because it inherits from cursor: text from parent
-})`
+}))`
   &:hover {
     color: ${p => lighten(p.theme.colors.wallet, 0.1)};
   }

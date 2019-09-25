@@ -20,14 +20,13 @@ import Ellipsis from 'components/base/Ellipsis'
 import Text from 'components/base/Text'
 import ExternalLink from 'icons/ExternalLink'
 import { openURL } from 'helpers/linking'
-import { colors } from 'styles/theme'
 import IconInfoCircle from 'icons/InfoCircle'
 import ParentCryptoCurrencyIcon from '../ParentCryptoCurrencyIcon'
 
-const CurNameToken = styled(Text).attrs({
+const CurNameToken = styled(Text).attrs(() => ({
   ff: 'Museo Sans|Bold',
   fontSize: 2,
-})``
+}))``
 
 const CurNameTokenLink = styled(CurNameToken)`
   margin-left: 5px;
@@ -35,11 +34,11 @@ const CurNameTokenLink = styled(CurNameToken)`
   border-radius: ${p => p.theme.radii[1]}px;
 `
 
-const CurNameTokenIcon = styled(Text).attrs({
+const CurNameTokenIcon = styled(Text).attrs(() => ({
   ff: 'Open Sans|SemiBold',
   fontSize: 2,
-})`
-  color: ${colors.wallet};
+}))`
+  color: ${p => p.theme.colors.wallet};
   display: none;
   margin-left: 5px;
   align-items: center;
@@ -55,16 +54,16 @@ const Wrapper = styled(Box)`
   }
 
   :hover ${CurNameTokenLink} {
-    color: ${colors.wallet};
-    background-color: ${colors.pillActiveBackground};
+    color: ${p => p.theme.colors.wallet};
+    background-color: ${p => p.theme.colors.pillActiveBackground};
   }
 `
 
-const AccountName = styled(Text).attrs({
-  color: 'dark',
+const AccountName = styled(Text).attrs(() => ({
+  color: 'palette.text.shade100',
   ff: 'Museo Sans',
   fontSize: 7,
-})`
+}))`
   line-height: 1.1;
 `
 

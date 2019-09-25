@@ -100,7 +100,7 @@ class RenderError extends PureComponent<
         <Space of={100} />
         <img alt="" src={i('crash-screen.svg')} width={380} />
         <Space of={40} />
-        <Box ff="Museo Sans|Regular" fontSize={7} color="dark">
+        <Box ff="Museo Sans|Regular" fontSize={7} color="palette.text.shade100">
           {t('crash.oops')}
         </Box>
         <Space of={15} />
@@ -108,7 +108,7 @@ class RenderError extends PureComponent<
           style={{ width: 500 }}
           textAlign="center"
           ff="Open Sans|Regular"
-          color="smoke"
+          color="palette.text.shade80"
           fontSize={4}
         >
           {t('crash.uselessText')}

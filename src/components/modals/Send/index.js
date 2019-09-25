@@ -72,6 +72,7 @@ export type StepProps<Transaction> = DefaultStepProps & {
   onOperationBroadcasted: Operation => void,
   onRetry: void => void,
   signTransaction: ({ transitionTo: string => void }) => void,
+  theme: any,
 }
 
 const createSteps = () => [

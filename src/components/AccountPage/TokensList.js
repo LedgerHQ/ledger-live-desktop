@@ -38,7 +38,7 @@ const Wrapper = styled.div`
 `
 
 const EmptyState = styled.div`
-  border: 1px dashed ${p => p.theme.colors.grey};
+  border: 1px dashed ${p => p.theme.colors.palette.text.shade60};
   padding: 15px 20px;
   border-radius: 4px;
   display: flex;
@@ -91,7 +91,7 @@ class TokensList extends PureComponent<Props> {
     return (
       <Box mb={50}>
         <Wrapper>
-          <Text color="dark" mb={2} ff="Museo Sans" fontSize={6}>
+          <Text color="palette.text.shade100" mb={2} ff="Museo Sans" fontSize={6}>
             {t('tokensList.title')}
           </Text>
           {!isEmpty && <ReceiveButton onClick={this.onReceiveClick} />}
@@ -99,7 +99,7 @@ class TokensList extends PureComponent<Props> {
         {isEmpty && (
           <EmptyState>
             <Placeholder>
-              <Text color="graphite" ff="Open Sans|SemiBold" fontSize={4}>
+              <Text color="palette.text.shade80" ff="Open Sans|SemiBold" fontSize={4}>
                 <Trans i18nKey={'tokensList.placeholder'} />{' '}
                 <LabelWithExternalIcon
                   color="wallet"

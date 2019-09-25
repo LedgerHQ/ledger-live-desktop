@@ -55,19 +55,18 @@ class DisclaimerModal extends PureComponent<Props, State> {
           title={t('manager.firmware.update')}
           render={() => (
             <Box>
-              <Text ff="Open Sans|Regular" fontSize={4} color="graphite" align="center">
+              <Text ff="Open Sans|Regular" fontSize={4} color="palette.text.shade80" align="center">
                 <Trans i18nKey="manager.firmware.disclaimerTitle">
                   You are about to install
-                  <Text ff="Open Sans|SemiBold" color="dark">
+                  <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
                     {`firmware version ${
                       firmware && firmware.osu ? getCleanVersion(firmware.osu.name) : ''
                     }`}
                   </Text>
                 </Trans>
               </Text>
-              <Text ff="Open Sans|Regular" fontSize={4} color="graphite" align="center">
-                {t('manager.firmware.disclaimerAppDelete')}
-                {' '}
+              <Text ff="Open Sans|Regular" fontSize={4} color="palette.text.shade80" align="center">
+                {t('manager.firmware.disclaimerAppDelete')}{' '}
                 {t('manager.firmware.disclaimerAppReinstall')}
               </Text>
               {firmware && firmware.osu ? (

@@ -2,7 +2,6 @@
 
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { colors } from 'styles/theme'
 
 import styled from 'styled-components'
 import { flowType } from 'reducers/onboarding'
@@ -104,26 +103,26 @@ type CardType = {
 export function OptionFlowCard({ card }: { card: CardType }) {
   const { icon, title, onClick } = card
   return (
-    <InitCardContainer onClick={onClick}>
-      <Box justify="center" style={{ color: colors.wallet }}>
+    <InitCardContainer onClick={onClick} color="palette.text.shade100">
+      <Box justify="center" color={'palette.primary.main'}>
         <InitIconContainer justify="center">{icon}</InitIconContainer>
       </Box>
       <Box justify="center" grow>
         <CardTitle>{title}</CardTitle>
       </Box>
       <Box justify="center" mx={1} my={4}>
-        <IconChevronRight style={{ color: colors.grey }} size={16} />
+        <IconChevronRight size={16} />
       </Box>
     </InitCardContainer>
   )
 }
 
-const InitCardContainer = styled(Box).attrs({
+const InitCardContainer = styled(Box).attrs(() => ({
   p: 3,
   horizontal: true,
   borderRadius: '4px',
-})`
-  border: 1px solid ${p => p.theme.colors.fog};
+}))`
+  border: 1px solid ${p => p.theme.colors.palette.divider};
   width: 530px;
   height: 70px;
   transition: all ease-in-out 0.2s;
@@ -132,15 +131,15 @@ const InitCardContainer = styled(Box).attrs({
   }
 `
 
-export const CardTitle = styled(Box).attrs({
+export const CardTitle = styled(Box).attrs(() => ({
   ff: 'Open Sans|SemiBold',
   fontSize: 4,
   textAlign: 'left',
-})``
+}))``
 
-const InitIconContainer = styled(Box).attrs({
+const InitIconContainer = styled(Box).attrs(() => ({
   ml: 3,
   mr: 4,
-})`
+}))`
   text-align: -webkit-center;
 `

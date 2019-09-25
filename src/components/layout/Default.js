@@ -44,9 +44,9 @@ import SyncContinuouslyPendingOperations from '../SyncContinouslyPendingOperatio
 import HSMStatusBanner from '../HSMStatusBanner'
 import type { State } from '../../reducers'
 
-const Main = styled(GrowScroll).attrs({
+const Main = styled(GrowScroll).attrs(() => ({
   px: 6,
-})`
+}))`
   outline: none;
   padding-top: ${p => p.theme.sizes.topBarHeight + p.theme.space[6]}px;
 `
@@ -117,21 +117,21 @@ class Default extends Component<Props> {
 
             <div id="sticky-back-to-top-root" />
 
-            <Box grow horizontal bg="white">
+            <Box grow horizontal bg="palette.background.paper">
               <SideBar />
 
               <Box
                 className={'main-container'}
                 shrink
                 grow
-                bg="lightGrey"
-                color="grey"
+                bg="palette.background.default"
+                color="palette.text.shade60"
                 overflow="visible"
                 relative
               >
                 <HSMStatusBanner />
                 <TopBar />
-                <Main innerRef={n => (this._scrollContainer = n)} tabIndex={-1}>
+                <Main ref={n => (this._scrollContainer = n)} tabIndex={-1}>
                   <Switch>
                     <Route path="/" exact component={DashboardPage} />
                     <Route path="/settings" component={SettingsPage} />

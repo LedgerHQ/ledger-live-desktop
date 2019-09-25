@@ -53,11 +53,11 @@ const fadeIn = keyframes`
   }
 `
 
-const SuccessLogoContainer = styled(Box).attrs({
+const SuccessLogoContainer = styled(Box).attrs(() => ({
   borderRadius: '50%',
   alignItems: 'center',
   justifyContent: 'center',
-})`
+}))`
   width: ${p => `${p.width}px`};
   height: ${p => `${p.width}px`};
 

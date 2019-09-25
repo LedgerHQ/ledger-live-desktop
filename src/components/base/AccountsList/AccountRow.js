@@ -94,7 +94,7 @@ export default class AccountRow extends PureComponent<Props> {
         onClick={isDisabled ? null : this.onToggleAccount}
       >
         <CryptoCurrencyIconWithCount currency={account.currency} count={tokenCount} withTooltip />
-        <Box shrink grow ff="Open Sans|SemiBold" color="dark" fontSize={4}>
+        <Box shrink grow ff="Open Sans|SemiBold" color="palette.text.shade100" fontSize={4}>
           {onEditName ? (
             <InputWrapper>
               <Input
@@ -122,7 +122,7 @@ export default class AccountRow extends PureComponent<Props> {
             style={{ textAlign: 'right', width: 'auto' }}
             showCode
             fontSize={4}
-            color="grey"
+            color="palette.text.shade60"
           />
         ) : null}
         {!isDisabled && !isReadonly && <CheckBox disabled isChecked={isChecked || !!isDisabled} />}
@@ -131,13 +131,13 @@ export default class AccountRow extends PureComponent<Props> {
   }
 }
 
-const AccountRowContainer = styled(Tabbable).attrs({
+const AccountRowContainer = styled(Tabbable).attrs(() => ({
   horizontal: true,
   align: 'center',
-  bg: 'lightGrey',
+  bg: 'palette.background.default',
   px: 3,
   flow: 3,
-})`
+}))`
   height: 48px;
   border-radius: 4px;
 
@@ -145,10 +145,10 @@ const AccountRowContainer = styled(Tabbable).attrs({
   pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};
 
   &:hover {
-    background-color: ${p => darken(p.theme.colors.lightGrey, 0.015)};
+    background-color: ${p => darken(p.theme.colors.palette.background.default, 0.015)};
   }
 
   &:active {
-    background-color: ${p => darken(p.theme.colors.lightGrey, 0.03)};
+    background-color: ${p => darken(p.theme.colors.palette.background.default, 0.03)};
   }
 `

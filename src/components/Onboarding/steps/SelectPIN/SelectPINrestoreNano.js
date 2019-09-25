@@ -1,9 +1,9 @@
 // @flow
 import React, { PureComponent } from 'react'
 import { translate, Trans } from 'react-i18next'
-import { colors } from 'styles/theme'
 import { i } from 'helpers/staticPath'
 
+import InvertableImg from 'components/InvertableImg'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 
@@ -36,11 +36,11 @@ class SelectPINrestoreNano extends PureComponent<Props, *> {
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="onboarding.selectPIN.restore.instructions.nano.step2">
               {'Press the left button to cancel'}
-              <Text ff="Open Sans|SemiBold" color="dark">
+              <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
                 {configureAsNewDevice}
               </Text>
               {'Then press the right button to select'}
-              <Text ff="Open Sans|SemiBold" color="dark">
+              <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
                 {restoreConfiguration}
               </Text>
             </Trans>
@@ -61,17 +61,17 @@ class SelectPINrestoreNano extends PureComponent<Props, *> {
     const disclaimerNotes = [
       {
         key: 'note1',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.selectPIN.disclaimer.note1'),
       },
       {
         key: 'note2',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.selectPIN.disclaimer.note2'),
       },
       {
         key: 'note3',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.selectPIN.disclaimer.note3'),
       },
     ]
@@ -79,14 +79,14 @@ class SelectPINrestoreNano extends PureComponent<Props, *> {
     return (
       <Box align="center" mt={3}>
         <Inner style={{ width: 700 }}>
-          <img alt="" src={i('select-pin-nano-onb.svg')} />
+          <InvertableImg alt="" src={i('select-pin-nano-onb.svg')} />
           <Box shrink grow flow={4} style={{ marginLeft: 40 }}>
             {stepsLedgerNano.map(step => (
               <OptionRow key={step.key} step={step} />
             ))}
           </Box>
         </Inner>
-        <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} />
+        <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} color="palette.text.shade80" />
       </Box>
     )
   }

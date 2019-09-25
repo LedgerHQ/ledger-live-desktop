@@ -1,21 +1,23 @@
 // @flow
 
-import { colors } from 'styles/theme'
 import { ff } from 'styles/helpers'
 
-export default ({
-  width,
-  minWidth,
-  small,
-  isRight,
-  isLeft,
-}: {
-  width: number,
-  minWidth: number,
-  small: boolean,
-  isRight: boolean,
-  isLeft: boolean,
-}) => ({
+export default (
+  theme: any,
+  {
+    width,
+    minWidth,
+    small,
+    isRight,
+    isLeft,
+  }: {
+    width: number,
+    minWidth: number,
+    small: boolean,
+    isRight: boolean,
+    isLeft: boolean,
+  },
+) => ({
   control: (styles: Object, { isFocused }: Object) => ({
     ...styles,
     width,
@@ -24,12 +26,12 @@ export default ({
     height: small ? 34 : 40,
     minHeight: 'unset',
     borderRadius: isRight ? '0 4px 4px 0' : isLeft ? '4px 0 0 4px' : 4,
-    borderColor: colors.fog,
-    backgroundColor: 'white',
+    borderColor: theme.colors.palette.divider,
+    backgroundColor: theme.colors.palette.background.paper,
 
     ...(isFocused
       ? {
-          borderColor: colors.wallet,
+          borderColor: theme.colors.palette.primary.main,
           boxShadow: 'rgba(0, 0, 0, 0.05) 0 2px 2px',
         }
       : {}),
@@ -37,7 +39,7 @@ export default ({
   valueContainer: (styles: Object) => ({
     ...styles,
     paddingLeft: 15,
-    color: colors.graphite,
+    color: theme.colors.palette.text.shade80,
   }),
   indicatorSeparator: (styles: Object) => ({
     ...styles,
@@ -51,12 +53,16 @@ export default ({
     ...styles,
     ...ff('Open Sans|Regular'),
     fontSize: small ? 12 : 13,
-    color: colors.dark,
+    color: theme.colors.palette.text.shade100,
     padding: '10px 15px 10px 15px',
+    ':active': {
+      ...styles[':active'],
+      backgroundColor: theme.colors.palette.action.active,
+    },
     ...(isFocused
       ? {
-          background: colors.lightGrey,
-          color: colors.dark,
+          background: theme.colors.palette.background.default,
+          color: theme.colors.palette.text.shade100,
         }
       : {}),
     ...(isSelected
@@ -68,12 +74,13 @@ export default ({
   }),
   menu: (styles: Object) => ({
     ...styles,
-    border: `1px solid ${colors.fog}`,
+    border: `1px solid ${theme.colors.palette.divider}`,
     boxShadow: 'rgba(0, 0, 0, 0.05) 0 2px 2px',
+    background: theme.colors.palette.background.paper,
   }),
   menuList: (styles: Object) => ({
     ...styles,
-    background: 'white',
+    background: theme.colors.palette.background.paper,
     borderRadius: 3,
   }),
   menuPortal: (styles: Object) => ({ ...styles, zIndex: 101 }),

@@ -22,11 +22,11 @@ const mapStateToProps = createStructuredSelector({
   marketIndicator: marketIndicatorSelector,
 })
 
-const Cell = styled(Box).attrs({
+const Cell = styled(Box).attrs(() => ({
   px: 4,
   horizontal: true,
   alignItems: 'center',
-})`
+}))`
   width: 44px;
 `
 

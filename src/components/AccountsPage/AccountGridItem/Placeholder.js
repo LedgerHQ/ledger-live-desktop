@@ -12,12 +12,12 @@ import { i } from 'helpers/staticPath'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 
-const Wrapper = styled(Box).attrs({
+const Wrapper = styled(Box).attrs(() => ({
   p: 4,
   flex: 1,
   alignItems: 'center',
-})`
-  border: 1px dashed ${p => p.theme.colors.fog};
+}))`
+  border: 1px dashed ${p => p.theme.colors.palette.divider};
   border-radius: 4px;
   height: 215px;
 `
@@ -39,7 +39,7 @@ class Placeholder extends PureComponent<{
           <Box
             ff="Open Sans"
             fontSize={3}
-            color="grey"
+            color="palette.text.shade60"
             pb={2}
             mt={3}
             textAlign="center"

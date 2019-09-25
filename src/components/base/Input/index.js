@@ -9,10 +9,13 @@ import Spinner from 'components/base/Spinner'
 import Box from 'components/base/Box'
 import TranslatedError from 'components/TranslatedError'
 
-const Container = styled(Box).attrs({
+const Container = styled(Box).attrs(() => ({
   horizontal: true,
-})`
-  background: ${p => (p.disabled ? p.theme.colors.lightGrey : p.theme.colors.white)};
+}))`
+  background: ${p =>
+    p.disabled
+      ? p.theme.colors.palette.background.default
+      : p.theme.colors.palette.background.paper};
   border-radius: ${p => p.theme.radii[1]}px;
   border-width: 1px;
   border-style: solid;
@@ -23,7 +26,7 @@ const Container = styled(Box).attrs({
       ? p.theme.colors.warning
       : p.isFocus
       ? p.theme.colors.wallet
-      : p.theme.colors.fog};
+      : p.theme.colors.palette.divider};
   box-shadow: ${p => (p.isFocus ? `rgba(0, 0, 0, 0.05) 0 2px 2px` : 'none')};
   height: ${p => (p.small ? '34' : '40')}px;
   position: relative;
@@ -48,7 +51,7 @@ const LoadingDisplay = styled(Box)`
   left: 0px;
   top: 0px;
   bottom: 0px;
-  background: white;
+  background: ${p => p.theme.colors.palette.background.paper};
   pointer-events: none;
   flex-direction: row;
   align-items: center;
@@ -60,15 +63,15 @@ const WarningDisplay = styled(ErrorDisplay)`
   color: ${p => p.theme.colors.warning};
 `
 
-const Base = styled.input.attrs({
+const Base = styled.input.attrs(() => ({
   fontSize: 4,
-})`
+}))`
   font-family: 'Open Sans';
   font-weight: 600;
   ${fontFamily};
   ${fontSize};
   border: 0;
-  color: ${p => p.theme.colors.graphite};
+  color: ${p => p.theme.colors.palette.text.shade80};
   height: 100%;
   outline: none;
   padding: 0;
@@ -77,23 +80,23 @@ const Base = styled.input.attrs({
   cursor: text;
 
   &::placeholder {
-    color: ${p => p.theme.colors.fog};
+    color: ${p => p.theme.colors.palette.divider};
   }
 `
 
-export const Textarea = styled.textarea.attrs({
+export const Textarea = styled.textarea.attrs(p => ({
   p: 2,
   fontSize: 4,
-  ff: p => p.ff || 'Open Sans|SemiBold',
-})`
+  ff: p.ff || 'Open Sans|SemiBold',
+}))`
   ${space};
   ${fontFamily};
   ${fontSize};
   min-height: 80px;
-  color: ${p => p.theme.colors.dark};
-  background: ${p => p.theme.colors.white};
+  color: ${p => p.theme.colors.palette.text.shade100};
+  background: ${p => p.theme.colors.palette.background.paper};
   border-radius: ${p => p.theme.radii[1]}px;
-  border: 1px solid ${p => p.theme.colors.fog};
+  border: 1px solid ${p => p.theme.colors.palette.divider};
   box-shadow: none;
   &:focus {
     box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
@@ -221,7 +224,7 @@ class Input extends PureComponent<Props, State> {
             {...props}
             small={small}
             disabled={disabled}
-            innerRef={n => (this._input = n)}
+            ref={n => (this._input = n)}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
             onChange={this.handleChange}

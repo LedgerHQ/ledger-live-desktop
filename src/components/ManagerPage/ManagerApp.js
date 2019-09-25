@@ -12,14 +12,14 @@ import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 
-export const Container = styled(Box).attrs({
+export const Container = styled(Box).attrs(() => ({
   horizontal: true,
   p: 4,
-  bg: 'white',
+  bg: 'palette.background.paper',
   boxShadow: p => (p.noShadow ? -1 : 0),
   borderRadius: 4,
   flow: 2,
-})`
+}))`
   line-height: normal;
 `
 
@@ -30,11 +30,11 @@ const AppIcon = styled.img`
   pointer-events: none;
 `
 
-const AppName = styled(Box).attrs({
+const AppName = styled(Box).attrs(() => ({
   ff: 'Museo Sans|Regular',
   fontSize: 4,
-  color: 'dark',
-})`
+  color: 'palette.text.shade100',
+}))`
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -57,7 +57,7 @@ function ManagerApp({ name, version, icon, onInstall, onUninstall, t }: Props) {
       <AppIcon src={iconUrl} />
       <Box flex="1" ml={3}>
         <AppName flex={1}>{name}</AppName>
-        <Text ff="Open Sans|Regular" fontSize={3} color="grey">
+        <Text ff="Open Sans|Regular" fontSize={3} color="palette.text.shade60">
           {version}
         </Text>
       </Box>
@@ -82,9 +82,9 @@ function ManagerApp({ name, version, icon, onInstall, onUninstall, t }: Props) {
           appName: name,
           appVersion: version,
         }}
-        outlineColor="grey"
+        outlineColor="palette.text.shade60"
       >
-        <Trash size={16} fill="grey" />
+        <Trash size={16} fill="palette.text.shade60" />
       </Button>
     </Container>
   )

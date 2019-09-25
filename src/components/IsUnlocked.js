@@ -62,18 +62,18 @@ const defaultState = {
   isHardResetModalOpened: false,
 }
 
-export const PageTitle = styled(Box).attrs({
+export const PageTitle = styled(Box).attrs(() => ({
   ff: 'Museo Sans|Regular',
   fontSize: 7,
-  color: 'dark',
-})``
+  color: 'palette.text.shade100',
+}))``
 
-export const LockScreenDesc = styled(Box).attrs({
+export const LockScreenDesc = styled(Box).attrs(() => ({
   ff: 'Open Sans|Regular',
   fontSize: 4,
   textAlign: 'center',
-  color: 'smoke',
-})`
+  color: 'palette.text.shade80',
+}))`
   margin: 10px auto 25px;
 `
 class IsUnlocked extends Component<Props, State> {
@@ -225,7 +225,7 @@ export default compose(
   translate(),
 )(IsUnlocked)
 
-const IconWrapperCircle = styled(Box).attrs({})`
+const IconWrapperCircle = styled(Box)`
   width: 50px;
   height: 50px;
   border-radius: 50%;

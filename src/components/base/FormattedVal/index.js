@@ -23,11 +23,11 @@ import IconBottom from 'icons/ArrowDownRight'
 import IconTop from 'icons/ArrowUpRight'
 import Ellipsis from '../Ellipsis'
 
-const T = styled(Box).attrs({
+const T = styled(Box).attrs(p => ({
   ff: 'Rubik',
   horizontal: true,
-  color: p => (p.withIcon ? p.theme.colors.dark : p.color),
-})`
+  color: p.color,
+}))`
   line-height: 1.2;
   white-space: pre;
   text-overflow: ellipsis;

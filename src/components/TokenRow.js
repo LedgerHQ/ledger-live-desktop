@@ -28,7 +28,7 @@ const mapDispatchToProps = {
 }
 
 const TopLevelRow = styled(Box)`
-  background: #ffffff;
+  background: ${p => p.theme.colors.palette.background.paper};
   align-items: center;
   border-radius: 4px;
   border: 1px solid transparent;
@@ -40,7 +40,7 @@ const TopLevelRow = styled(Box)`
   margin-bottom: 9px;
   padding: 20px;
   :hover {
-    border-color: ${p => p.theme.colors.lightFog};
+    border-color: ${p => p.theme.colors.palette.text.shade40};
   }
 `
 

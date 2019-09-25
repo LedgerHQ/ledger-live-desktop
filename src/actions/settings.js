@@ -29,6 +29,7 @@ export const setCounterValue = (counterValue: string) =>
     pairExchanges: {},
   })
 export const setLanguage = (language: ?string) => saveSettings({ language })
+export const setTheme = (theme: ?string) => saveSettings({ theme })
 export const setRegion = (region: ?string) => saveSettings({ region })
 export const setHideEmptyTokenAccounts = (hideEmptyTokenAccounts: boolean) => async (
   dispatch: *,

@@ -86,7 +86,7 @@ const SelectCurrency = React.memo(
 const renderOption = ({ data: currency }: Option) => (
   <Box grow horizontal alignItems="center" flow={2}>
     <CryptoCurrencyIcon currency={currency} size={16} />
-    <Box grow ff="Open Sans|SemiBold" color="dark" fontSize={4}>
+    <Box grow ff="Open Sans|SemiBold" color="palette.text.shade100" fontSize={4}>
       {`${currency.name} (${currency.ticker})`}
     </Box>
   </Box>

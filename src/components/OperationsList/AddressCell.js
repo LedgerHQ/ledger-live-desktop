@@ -18,7 +18,7 @@ const Address = ({ value }: { value: string }) => {
   const right = value.slice(-quarter)
 
   return (
-    <Box horizontal color="smoke" ff="Open Sans" fontSize={3}>
+    <Box horizontal color="palette.text.shade80" ff="Open Sans" fontSize={3}>
       <Left>{left}</Left>
       <Middle>{middle}</Middle>
       <Right>{right}</Right>
@@ -47,11 +47,11 @@ const Middle = styled.div`
   min-width: 1em;
 `
 
-const Cell = styled(Box).attrs({
+const Cell = styled(Box).attrs(() => ({
   px: 4,
   horizontal: true,
   alignItems: 'center',
-})`
+}))`
   width: 150px;
 `
 

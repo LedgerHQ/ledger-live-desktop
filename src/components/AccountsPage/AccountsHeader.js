@@ -31,11 +31,17 @@ class AccountsHeader extends PureComponent<Props> {
     const { t } = this.props
     return (
       <Box horizontal style={{ paddingBottom: 32 }}>
-        <Box grow ff="Museo Sans|Regular" fontSize={7} color="dark" data-e2e='accountsPage_title'>
+        <Box
+          grow
+          ff="Museo Sans|Regular"
+          fontSize={7}
+          color="palette.text.shade100"
+          data-e2e="accountsPage_title"
+        >
           {t('accounts.title')}
         </Box>
         <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
-          <Button small primary onClick={this.handleAddAccountModal} data-e2e='addAccount_button'>
+          <Button small primary onClick={this.handleAddAccountModal} data-e2e="addAccount_button">
             <Box horizontal flow={1} alignItems="center">
               <IconPlus size={12} />
               <Box>{t('addAccounts.cta.add')}</Box>

@@ -59,10 +59,10 @@ const STYLES_OVERRIDE = {
   ),
 }
 
-const CheckContainer = styled(Box).attrs({
+const CheckContainer = styled(Box).attrs(() => ({
   align: 'center',
   justify: 'center',
-})`
+}))`
   position: absolute;
   top: 0;
   right: 0;

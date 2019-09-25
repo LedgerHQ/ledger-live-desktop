@@ -27,11 +27,11 @@ type State = {
   error: ?Error,
 }
 
-const Title = styled(Text).attrs({
+const Title = styled(Text).attrs(() => ({
   ff: 'Museo Sans',
   fontSize: 5,
-  color: 'dark',
-})``
+  color: 'palette.text.shade100',
+}))``
 
 class ReleaseNotesBody extends PureComponent<Props, State> {
   state = {
@@ -124,7 +124,7 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
         )}
         renderFooter={() => (
           <Box horizontal justifyContent="flex-end">
-            <Button onClick={onClose} primary data-e2e='modal_buttonClose_releaseNote'>
+            <Button onClick={onClose} primary data-e2e="modal_buttonClose_releaseNote">
               {t('common.continue')}
             </Button>
           </Box>

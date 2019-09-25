@@ -18,7 +18,7 @@ stories.add('DeviceInteraction', () => <Wrapper />)
 const MockIcon = styled.div`
   width: ${p => p.size}px;
   height: ${p => p.size}px;
-  background: ${p => p.theme.colors.lightFog};
+  background: ${p => p.theme.colors.palette.text.shade40};
   border-radius: 50%;
 `
 
@@ -50,7 +50,7 @@ class Wrapper extends React.Component<any> {
               title: 'Connect your device',
               icon: <IconUsb size={26} />,
               render: ({ onSuccess, onFail }) => (
-                <Box p={2} bg="lightGrey" mt={2} borderRadius={1}>
+                <Box p={2} bg="palette.background.default" mt={2} borderRadius={1}>
                   <Box horizontal flow={2}>
                     <Button small primary onClick={() => onSuccess({ name: 'Nano S' })}>
                       {'Nano S'}
