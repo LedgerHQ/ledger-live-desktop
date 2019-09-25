@@ -1835,16 +1835,16 @@
     "@ledgerhq/errors" "^4.70.0"
     events "^3.0.0"
 
-"@ledgerhq/ledger-core@^3.1.3":
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-3.1.3.tgz#db9bdd9770128965ad7803a2a13a74b6d317e49a"
-  integrity sha512-RDy5xX4ClU6S+xN4MMujPLJvLw1K9/VCG3XMalfYfMUx3pKee+SqGAGaZiFizZwYxMx+NGdVIhdzTNF7LfPaSQ==
+"@ledgerhq/ledger-core@^3.1.7":
+  version "3.1.7"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-3.1.7.tgz#e26d853596f0af684b2dfbb762d22b77a860bc2f"
+  integrity sha512-ktrUMZR+TEpI4CG4KK3M/141nzXHuqEivmhjnuEzVApsRedcamtKYXWoawWHFnl+a9ylV82cDJsAb1U/aUgYGQ==
   dependencies:
     bindings "^1.3.0"
     nan "^2.6.2"
 
 "@ledgerhq/live-common@file:.yalc/@ledgerhq/live-common":
-  version "7.15.3-a38e618d"
+  version "7.15.3-30faf4a3"
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/errors" "4.70.0"
