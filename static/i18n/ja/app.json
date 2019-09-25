@@ -588,6 +588,8 @@
       "desc": "全般的なLedger Liveの設定。",
       "language": "言語を表示",
       "languageDesc": "Ledger Liveに表示される言語を設定します。",
+      "theme": "Theme",
+      "themeDesc": "Select the theme.",
       "counterValue": "対価",
       "counterValueDesc": "残高と操作の隣に表示される資産を選択します。",
       "exchange": "レートプロバイダー",
@@ -759,6 +761,12 @@
   },
   "language": {
     "system": "システム言語を使用"
+  },
+  "theme": {
+    "system": "Use system theme",
+    "light": "Light",
+    "dusk": "Dusk",
+    "dark": "Dark"
   },
   "onboarding": {
     "breadcrumb": {
