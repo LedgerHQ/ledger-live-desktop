@@ -66,8 +66,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
                 </Trans>
               </Text>
               <Text ff="Open Sans|Regular" fontSize={4} color="graphite" align="center">
-                {t('manager.firmware.disclaimerAppDelete')}
-                {' '}
+                {t('manager.firmware.disclaimerAppDelete')}{' '}
                 {t('manager.firmware.disclaimerAppReinstall')}
               </Text>
               {firmware && firmware.osu ? (
