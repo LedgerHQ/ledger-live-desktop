@@ -61,7 +61,7 @@ const FeesField = ({ transaction, account, onChange }: Props) => {
   )
 
   const onInputChange = feePerByte => onSelectChange({ feePerByte })
-  let error = !feePerByte ? new FeeNotLoaded() : feePerByte.isZero() ? new FeeRequired() : null
+  const error = !feePerByte ? new FeeNotLoaded() : feePerByte.isZero() ? new FeeRequired() : null
 
   return (
     <GenericContainer>
