@@ -1,5 +1,55 @@
 // @flow
 
+import React, { useCallback } from 'react'
+import { FeeNotLoaded } from '@ledgerhq/errors'
+import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
+import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
+import InputCurrency from 'components/base/InputCurrency'
+import GenericContainer from './GenericContainer'
+
+type Props = {
+  account: Account,
+  transaction: Transaction,
+  status: TransactionStatus,
+  onChange: Transaction => void,
+}
+
+function FeesField({ account, transaction, onChange, status }: Props) {
+  const bridge = getAccountBridge(account)
+
+  const onChangeFee = useCallback(fee => onChange(bridge.updateTransaction(transaction, { fee })), [
+    transaction,
+    onChange,
+    bridge,
+  ])
+
+  const { units } = account.currency
+  const fee = bridge.getTransactionExtra(account, transaction, 'fee')
+
+  const error = !fee ? new FeeNotLoaded() : null
+  // TODO^^^ fee error to add on status
+  status
+
+  return (
+    <GenericContainer>
+      <InputCurrency
+        defaultUnit={units[0]}
+        units={units}
+        containerProps={{ grow: true }}
+        loading={!error && !fee}
+        error={error}
+        value={fee}
+        onChange={onChangeFee}
+      />
+    </GenericContainer>
+  )
+}
+
+export default FeesField
+
+/*
+// @flow
+
 import React, { Component } from 'react'
 import type { BigNumber } from 'bignumber.js'
 import { RippleAPI } from 'ripple-lib'
@@ -81,3 +131,4 @@ class FeesField extends Component<Props, State> {
 }
 
 export default FeesField
+*/
