@@ -30,7 +30,7 @@
     "lock": "Заблокировать экран",
     "showMore": "Показать больше",
     "max": "Макс.",
-    "new": "New",
+    "new": "Новый",
     "back": "Назад",
     "reset": "Сбросить",
     "retry": "Повторить попытку",
@@ -46,7 +46,7 @@
     "copyAddress": "Копировать",
     "copied": "Скопировано",
     "addressCopied": "Адрес скопирован",
-    "experimentalFeature": "Experimental",
+    "experimentalFeature": "Экспериментальная функция",
     "lockScreen": {
       "title": "С возвращением",
       "subTitle": null,
@@ -58,7 +58,7 @@
       "syncing": "Синхронизация...",
       "upToDate": "Синхронизировано",
       "outdated": "Приостановлено",
-      "needsMigration": "Click to update account",
+      "needsMigration": "Нажмите, чтобы обновить аккаунт",
       "error": "Ошибка синхронизации",
       "refresh": "Обновить",
       "ago": "Синхронизировано {{time}}"
@@ -72,11 +72,11 @@
   },
   "time": {
     "day": "День",
-    "day_plural": "Days",
+    "day_plural": "Дней",
     "week": "Неделя",
-    "week_plural": "Weeks",
+    "week_plural": "Недели",
     "month": "Месяц",
-    "month_plural": "Months",
+    "month_plural": "Месяцев",
     "year": "Год",
     "year_plural": "Лет",
     "minute": "Минута",
@@ -84,7 +84,7 @@
     "second": "Секунды",
     "second_plural": "Сек",
     "hour": "Час",
-    "hour_plural": "Hours",
+    "hour_plural": "Часов",
     "range": {
       "week": "1Н",
       "month": "1М",
@@ -115,7 +115,7 @@
   },
   "stars": {
     "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
-    "tooltip": "Star account"
+    "tooltip": "Избранные счета"
   },
   "account": {
     "lastOperations": "Последние операции",
@@ -161,7 +161,7 @@
       "year": "Год"
     },
     "optionsMenu": {
-      "title": "Options",
+      "title": "Параметры",
       "exportOperations": "История операций экспорта",
       "exportToMobile": "Экспорт на мобильный"
     },
@@ -1069,8 +1069,8 @@
       "description": "Please check your connection and try again or contact Ledger Support."
     },
     "LedgerAPI5xx": {
-      "title": "Sorry, try again.",
-      "description": "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
+      "title": "Извините, попробуйте еще раз.",
+      "description": "Сервер не может обработать ваш запрос. Пожалуйста, попробуйте еще раз позднее или обратитесь в службу поддержки Ledger. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Службы для {{currencyName}} недоступны.",
@@ -1093,12 +1093,12 @@
       "description": "Устройство было заблокировано. Разблокируйте его."
     },
     "ManagerFirmwareNotEnoughSpace": {
-      "title": "Uninstall all apps from your device",
-      "description": "The private keys providing access to your crypto assets will stay safe on your device and should be backed up on your recovery sheet."
+      "title": "Удалить все приложения с вашего устройства",
+      "description": "Закрытые ключи, обеспечивающие доступ к вашим крипто-активам, остаются в безопасности на вашем устройстве, а также должны быть сохранены в вашей карточке восстановления."
     },
     "ManagerNotEnoughSpace": {
       "title": "Недостаточно свободного места.",
-      "description": "Uninstall some apps to make space. The private keys providing access to your crypto assets will stay safe on your device."
+      "description": "Удалите некоторые приложения для освобождения места. Закрытые ключи, обеспечивающие доступ к вашим крипто-активам, будут оставаться в безопасности на вашем устройстве."
     },
     "ManagerUninstallBTCDep": {
       "title": "Это приложение является обязательным.",
@@ -1120,7 +1120,7 @@
       "title": "Адрес получателя неактивен. Чтобы активировать его, выберите сумму не менее {{minimalAmount}}."
     },
     "NotEnoughGas": {
-      "title": "ETH balance in parent account insufficient for network fees"
+      "title": "Недостаточный баланс ETH для оплаты комиссии"
     },
     "PasswordsDontMatch": {
       "title": "Пароли не совпадают.",
@@ -1151,18 +1151,18 @@
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
-      "title": "Please open the {{appName}} app",
-      "description": "Keep the {{appName}} app open while we look for your accounts"
+      "title": "Пожалуйста, откройте приложение {{appName}}",
+      "description": "Держите приложение {{appName}} открытым, пока мы ищем ваши аккаунты"
     },
     "UnexpectedBootloader": {
       "title": "Устройство не должно быть в режиме загрузчика.",
       "description": "Перезапустите устройство или свяжитесь с нами."
     },
     "UserRefusedAllowManager": {
-      "title": "Manager refused on device"
+      "title": "Менеджер отменен на устройстве"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Update canceled",
+      "title": "Обновление отменено",
       "description": "Повторите попытку или обратитесь в службу поддержки компании Ledger."
     },
     "UserRefusedOnDevice": {
@@ -1195,7 +1195,7 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Требуется обновить приложение.",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "description": "Удалить и переустановить приложение {{managerAppName}} в менеджере"
     },
     "InvalidAddress": {
       "title": "Этот адрес {{currencyName}} недействительный."
