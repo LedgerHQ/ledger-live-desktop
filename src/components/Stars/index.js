@@ -64,7 +64,7 @@ class Stars extends PureComponent<{
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable droppableId="list" direction="vertical">
           {provided => (
-            <Container key={pathname} innerRef={provided.innerRef}>
+            <Container key={pathname} ref={provided.innerRef}>
               {starredAccounts.map((account, i) => (
                 <SideBarTooltip
                   text={
