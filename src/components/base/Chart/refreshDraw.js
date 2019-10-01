@@ -50,7 +50,10 @@ export default function refreshDraw(theme: any, { ctx, props }: { ctx: CTX, prop
     .y(d => y(mapValue(d)))
 
   // Resize container
-  NODES.svg.attr('width', '100%').attr('height', '100%')
+  NODES.svg
+    .attr('width', '100%')
+    .attr('height', '100%')
+    .attr('preserveAspectRatio', 'none')
 
   // Resize wrapper & axis
   NODES.wrapper.attr('transform', `translate(${MARGINS.left},${MARGINS.top})`)
