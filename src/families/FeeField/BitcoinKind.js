@@ -69,6 +69,8 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
 
   const onInputChange = feePerByte => onSelectChange({ feePerByte })
   const { transactionError } = status
+  const feeError =
+    transactionError && whiteListErrorName.includes(transactionError.name) ? transactionError : null
 
   return (
     <GenericContainer>
@@ -87,11 +89,7 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
           value={feePerByte}
           onChange={onInputChange}
           loading={!feePerByte}
-          error={
-            transactionError && whiteListErrorName.includes(transactionError.name)
-              ? transactionError
-              : null
-          }
+          error={feeError}
           renderRight={
             <InputRight>
               <Trans i18nKey="send.steps.amount.unitPerByte" values={{ unit: satoshi.code }} />

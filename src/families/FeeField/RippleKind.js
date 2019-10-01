@@ -1,10 +1,10 @@
 // @flow
 
 import React, { useCallback } from 'react'
-import { FeeNotLoaded } from '@ledgerhq/errors'
 import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
 import InputCurrency from 'components/base/InputCurrency'
+import invariant from 'invariant'
 import GenericContainer from './GenericContainer'
 
 type Props = {
@@ -14,7 +14,11 @@ type Props = {
   onChange: Transaction => void,
 }
 
+const whiteListErrorName = ['FeeRequired', 'FeeNotLoaded']
+
 function FeesField({ account, transaction, onChange, status }: Props) {
+  invariant(transaction.family === 'ripple', 'FeeField: ripple family expected')
+
   const bridge = getAccountBridge(account)
 
   const onChangeFee = useCallback(fee => onChange(bridge.updateTransaction(transaction, { fee })), [
@@ -24,11 +28,10 @@ function FeesField({ account, transaction, onChange, status }: Props) {
   ])
 
   const { units } = account.currency
-  const fee = bridge.getTransactionExtra(account, transaction, 'fee')
-
-  const error = !fee ? new FeeNotLoaded() : null
-  // TODO^^^ fee error to add on status
-  status
+  const { transactionError } = status
+  const { fee } = transaction
+  const feeError =
+    transactionError && whiteListErrorName.includes(transactionError.name) ? transactionError : null
 
   return (
     <GenericContainer>
@@ -36,8 +39,8 @@ function FeesField({ account, transaction, onChange, status }: Props) {
         defaultUnit={units[0]}
         units={units}
         containerProps={{ grow: true }}
-        loading={!error && !fee}
-        error={error}
+        loading={!feeError && !fee}
+        error={feeError}
         value={fee}
         onChange={onChangeFee}
       />
