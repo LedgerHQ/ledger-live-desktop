@@ -1066,7 +1066,7 @@
       "description": "Вы пробовали обновить микроконтроллер устройства без необходимости. Если устройство неисправно, обратитесь в службу поддержки компании Ledger."
     },
     "LedgerAPI4xx": {
-      "description": "Please check your connection and try again or contact Ledger Support."
+      "description": "Пожалуйста, проверьте подключение и повторите попытку или обратитесь в службу поддержки Ledger."
     },
     "LedgerAPI5xx": {
       "title": "Извините, попробуйте еще раз.",
