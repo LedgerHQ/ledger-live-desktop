@@ -54,7 +54,14 @@ class PortfolioBalanceSummary extends PureComponent<Props> {
           </Box>
         ) : null}
 
-        <Box ff="Open Sans" fontSize={4} color="palette.text.shade80" pt={5}>
+        <Box
+          px={5}
+          ff="Open Sans"
+          fontSize={4}
+          color="palette.text.shade80"
+          pt={5}
+          style={{ overflow: 'visible' }}
+        >
           {portfolio.balanceAvailable ? (
             <Chart
               onlyUpdateIfLastPointChanges

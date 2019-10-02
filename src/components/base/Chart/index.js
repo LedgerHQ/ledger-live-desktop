@@ -38,7 +38,8 @@ import React, { Component } from 'react'
 import * as d3 from 'd3'
 import noop from 'lodash/noop'
 import last from 'lodash/last'
-import { withTheme } from 'styled-components'
+import styled, { withTheme } from 'styled-components'
+import debounce from 'lodash/debounce'
 
 import refreshNodes from './refreshNodes'
 import refreshDraw from './refreshDraw'
@@ -80,12 +81,14 @@ class Chart extends Component<Props> {
     const { width } = this._ruler.getBoundingClientRect()
     this._width = width
     this.createChart()
-    this.subResize = observeResize(this._ruler, width => {
-      if (width !== this._width) {
-        this._width = width
-        this.refreshChart(this.props)
-      }
-    })
+    if (this.props.isInteractive) {
+      this.subResize = observeResize(this._ruler, width => {
+        if (width !== this._width) {
+          this._width = width
+          this.refreshChart(this.props)
+        }
+      })
+    }
   }
 
   shouldComponentUpdate(nextProps: Props) {
@@ -137,18 +140,30 @@ class Chart extends Component<Props> {
     // Keep reference to mouse handler to allow destroy when refresh
     let mouseHandler = null
 
+    const refreshToolTip = debounce(() => {
+      const { props } = this
+      const { isInteractive, renderTooltip, theme } = props
+
+      // Reference to last tooltip, to prevent un-necessary re-render
+      let lastDisplayedTooltip = null
+
+      // Mouse handler
+      mouseHandler && mouseHandler.remove() // eslint-disable-line no-unused-expressions
+      if (isInteractive) {
+        mouseHandler = handleMouseEvents({
+          ctx,
+          theme,
+          shouldTooltipUpdate: d => d !== lastDisplayedTooltip,
+          onTooltipUpdate: d => (lastDisplayedTooltip = d),
+          renderTooltip,
+          mapValue: props.mapValue,
+        })
+      }
+    }, 200)
+
     this.refreshChart = prevProps => {
       const { _node: node, props } = this
-      const {
-        data: raw,
-        color,
-        height,
-        hideAxis,
-        isInteractive,
-        mapValue,
-        renderTooltip,
-        theme,
-      } = props
+      const { data: raw, color, height, hideAxis, mapValue, theme } = props
 
       ctx.DATA = enrichData(raw)
 
@@ -187,43 +202,39 @@ class Chart extends Component<Props> {
       ctx.x = x
       ctx.y = y
 
-      // Reference to last tooltip, to prevent un-necessary re-render
-      let lastDisplayedTooltip = null
-
       // Add/remove nodes depending on props
       refreshNodes(theme, { ctx, node, props })
 
       // Redraw
       refreshDraw(theme, { ctx, props })
 
-      // Mouse handler
-      mouseHandler && mouseHandler.remove() // eslint-disable-line no-unused-expressions
-      if (isInteractive) {
-        mouseHandler = handleMouseEvents({
-          ctx,
-          theme,
-          shouldTooltipUpdate: d => d !== lastDisplayedTooltip,
-          onTooltipUpdate: d => (lastDisplayedTooltip = d),
-          renderTooltip,
-          mapValue: props.mapValue,
-        })
-      }
+      // Refreshing tooltip
+      refreshToolTip({ ctx, props })
     }
 
     this.refreshChart()
   }
 
   render() {
-    const { height } = this.props
+    const { height, hideAxis } = this.props
     return (
-      <div style={{ position: 'relative', height }} ref={n => (this._ruler = n)}>
+      <Ruler height={height} hideAxis={hideAxis} ref={n => (this._ruler = n)}>
         <div
           style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
           ref={n => (this._node = n)}
         />
-      </div>
+      </Ruler>
     )
   }
 }
+
+const Ruler = styled.div.attrs(({ height }) => ({
+  style: {
+    height,
+  },
+}))`
+  position: relative;
+  width: 100%;
+`
 
 export default withTheme(Chart)

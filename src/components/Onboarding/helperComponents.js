@@ -51,6 +51,7 @@ export const OnboardingFooterWrapper = styled(Box).attrs(() => ({
   border-top: 2px solid ${p => p.theme.colors.palette.divider};
   border-bottom-left-radius: ${radii[1]}px;
   border-bottom-right-radius: ${radii[1]}px;
+  justify-content: space-between;
 `
 
 // INSTRUCTION LIST
