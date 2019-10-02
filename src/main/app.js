@@ -182,6 +182,8 @@ app.on('ready', async () => {
   await clearSessionCache(mainWindow.webContents.session)
 })
 
+app.setAsDefaultProtocolClient('ledgerlive')
+
 function clearSessionCache(session) {
   return new Promise(r => session.clearCache(r))
 }
