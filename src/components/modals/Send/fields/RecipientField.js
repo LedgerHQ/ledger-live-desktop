@@ -48,9 +48,9 @@ const RecipientField = ({
   }, [])
 
   if (!status) return null
-  const { recipientError, recipientWarning } = status
-
-  const error = transaction.recipient && !bridgePending ? recipientError : null
+  const { recipient: recipientError } = status.errors
+  const { recipient: recipientWarning } = status.warnings
+  const showErrorAndWarning = transaction.recipient && !bridgePending
 
   return (
     <Box flow={1}>
@@ -62,8 +62,8 @@ const RecipientField = ({
         autoFocus={autoFocus}
         withQrCode={!status.recipientIsReadOnly}
         readOnly={status.recipientIsReadOnly}
-        error={error}
-        warning={recipientWarning}
+        error={showErrorAndWarning && recipientError}
+        warning={showErrorAndWarning && recipientWarning}
         value={transaction.recipient}
         onChange={onChange}
       />

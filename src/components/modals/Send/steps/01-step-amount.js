@@ -149,12 +149,13 @@ export class StepAmountFooter extends PureComponent<
   onNext = async () => {
     const {
       transitionTo,
-      status: { showFeeWarning },
+      status: { warnings },
     } = this.props
-    if (showFeeWarning) {
+    if (Object.keys(warnings).includes('feeTooHigh')) {
       this.setState({ highFeesOpen: true })
+    } else {
+      transitionTo('device')
     }
-    transitionTo('device')
   }
 
   onAcceptFees = () => {
@@ -169,14 +170,14 @@ export class StepAmountFooter extends PureComponent<
   render() {
     const { t, account, parentAccount, status, bridgePending } = this.props
     const { highFeesOpen } = this.state
-    const { amount, recipientError, transactionError, totalSpent } = status
+    const { amount, errors, totalSpent } = status
 
     const mainAccount = account ? getMainAccount(account, parentAccount) : null
     const currency = account ? getAccountCurrency(account) : null
     const accountUnit = account ? getAccountUnit(account) : null
 
     const isTerminated = mainAccount && mainAccount.currency.terminated
-    const canNext = !bridgePending && !recipientError && !transactionError && !isTerminated
+    const canNext = !bridgePending && !errors.length && !isTerminated
 
     return (
       <Fragment>

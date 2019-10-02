@@ -34,7 +34,7 @@ const AdvancedOptions = ({ onChange, account, transaction, status }: Props) => {
   )
 
   const gasLimit = getGasLimit(transaction)
-  const isValid = !!status.recipientError
+  const { gasLimit: gasLimitError } = status.errors
 
   return (
     <Box horizontal align="center" flow={5}>
@@ -48,9 +48,10 @@ const AdvancedOptions = ({ onChange, account, transaction, status }: Props) => {
       <Box grow>
         <Input
           ff="Rubik"
+          error={gasLimitError}
           value={gasLimit.toString()}
           onChange={onGasLimitChange}
-          loading={isValid && !gasLimit}
+          loading={!gasLimitError && !gasLimit}
         />
       </Box>
     </Box>

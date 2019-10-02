@@ -24,9 +24,6 @@ type Props = {
   t: *,
 }
 
-// list of errors that are handled somewhere else on UI, otherwise the field will catch every other errors.
-const blacklistErrorName = ['FeeRequired', 'FeeNotLoaded', 'InvalidAddress', 'NotEnoughGas']
-
 const SendMaxSeparator = styled.div`
   margin: 0 10px;
   width: 1px;
@@ -59,7 +56,8 @@ const AmountField = ({
   )
 
   if (!status) return null
-  const { useAllAmount, amount, transactionError } = status
+  const { useAllAmount, amount, errors } = status
+  const { amount: amountError } = errors
 
   return (
     <Box flow={1}>
@@ -84,11 +82,7 @@ const AmountField = ({
       <RequestAmount
         disabled={!!useAllAmount}
         account={account}
-        validTransactionError={
-          transactionError && blacklistErrorName.includes(transactionError.name)
-            ? null
-            : transactionError
-        }
+        validTransactionError={amountError}
         onChange={onChange}
         value={amount}
       />
