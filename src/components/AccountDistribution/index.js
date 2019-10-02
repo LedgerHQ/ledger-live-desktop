@@ -26,16 +26,18 @@ const mapStateToProps = (state, props) => {
   const total = accounts.reduce((total, a) => total.plus(a.balance), BigNumber(0))
 
   return {
-    accountDistribution: accounts.map(a => ({
-      account: a,
-      currency: a.type === 'Account' ? a.currency : a.token,
-      distribution: a.balance.div(total).toFixed(2),
-      amount: a.balance,
-      countervalue: calculateCountervalueSelector(state)(
-        a.type === 'Account' ? a.currency : a.token,
-        a.balance,
-      ),
-    })),
+    accountDistribution: accounts
+      .map(a => ({
+        account: a,
+        currency: a.type === 'Account' ? a.currency : a.token,
+        distribution: a.balance.div(total).toFixed(2),
+        amount: a.balance,
+        countervalue: calculateCountervalueSelector(state)(
+          a.type === 'Account' ? a.currency : a.token,
+          a.balance,
+        ),
+      }))
+      .sort((a, b) => b.distribution - a.distribution),
     counterValueCurrency: counterValueCurrencySelector,
   }
 }
