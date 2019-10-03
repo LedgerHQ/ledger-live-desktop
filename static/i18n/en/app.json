@@ -1220,6 +1220,9 @@
     "FeeRequired": {
       "title": "Fees are required"
     },
+    "GasLessThanEstimate": {
+      "title": "Provided gas limit is less than the estimated"
+    },
     "UnknownMCU": {
       "title": "Unknown MCU version",
       "description": "Please contact Ledger Support"
