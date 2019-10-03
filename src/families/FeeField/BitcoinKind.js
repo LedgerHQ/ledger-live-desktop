@@ -4,6 +4,7 @@ import React, { useCallback, useMemo } from 'react'
 import { BigNumber } from 'bignumber.js'
 import styled from 'styled-components'
 import { Trans, translate } from 'react-i18next'
+import last from 'lodash/last'
 import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
 import InputCurrency from 'components/base/InputCurrency'
 import Select from 'components/base/Select'
@@ -36,8 +37,6 @@ const fallbackFeeItems = [
   },
 ]
 
-const whiteListErrorName = ['FeeRequired', 'FeeNotLoaded']
-
 const FeesField = ({ transaction, account, onChange, status }: Props) => {
   invariant(transaction.family === 'bitcoin', 'FeeField: bitcoin family expected')
 
@@ -55,7 +54,9 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
         : fallbackFeeItems,
     [networkInfo],
   )
-  const selectedValue = feeItems.find(f => f.feePerByte.eq(feePerByte))
+  const selectedValue = feePerByte
+    ? feeItems.find(f => f.feePerByte.eq(feePerByte))
+    : last(feeItems)
 
   const { units } = account.currency
   const satoshi = units[units.length - 1]
