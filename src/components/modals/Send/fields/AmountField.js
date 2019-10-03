@@ -56,7 +56,8 @@ const AmountField = ({
   )
 
   if (!status) return null
-  const { useAllAmount, amount, errors } = status
+  const { useAllAmount } = transaction
+  const { amount, errors } = status
   const { amount: amountError } = errors
 
   return (
