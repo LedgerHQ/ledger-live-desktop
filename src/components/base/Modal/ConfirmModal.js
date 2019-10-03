@@ -84,7 +84,7 @@ class ConfirmModal extends PureComponent<Props> {
             <Box>
               {subTitle && (
                 <Box
-                  ff="Museo Sans|Regular"
+                  ff="Inter|Regular"
                   color="palette.text.shade100"
                   textAlign="center"
                   mb={2}
@@ -99,7 +99,7 @@ class ConfirmModal extends PureComponent<Props> {
                 </Box>
               )}
               {desc && (
-                <Box ff="Open Sans" color="palette.text.shade80" fontSize={4} textAlign="center">
+                <Box ff="Inter" color="palette.text.shade80" fontSize={4} textAlign="center">
                   {desc}
                 </Box>
               )}

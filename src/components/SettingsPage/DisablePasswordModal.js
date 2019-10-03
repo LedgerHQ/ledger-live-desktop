@@ -69,7 +69,7 @@ class DisablePasswordModal extends PureComponent<Props, State> {
             title={t('password.disablePassword.title')}
             render={() => (
               <Box
-                ff="Open Sans"
+                ff="Inter"
                 color="palette.text.shade80"
                 fontSize={4}
                 textAlign="center"

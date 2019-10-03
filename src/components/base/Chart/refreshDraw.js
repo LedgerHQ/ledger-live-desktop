@@ -143,5 +143,5 @@ function stylizeAxis(theme, axis, showAxisLine) {
     .selectAll('text')
     .attr('fill', theme.colors.palette.text.shade60)
     .style('font-size', '12px')
-    .style('font-family', 'Open Sans')
+    .style('font-family', 'Inter')
 }

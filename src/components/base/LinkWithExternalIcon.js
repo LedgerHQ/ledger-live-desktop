@@ -10,7 +10,7 @@ import Label from './Label'
 import { rgba } from '../../styles/helpers'
 
 const Wrapper = styled(Label).attrs(() => ({
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   color: 'wallet',
   fontSize: 4,
   align: 'center',

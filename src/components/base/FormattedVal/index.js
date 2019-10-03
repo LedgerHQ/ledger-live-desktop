@@ -24,7 +24,7 @@ import IconTop from 'icons/ArrowUpRight'
 import Ellipsis from '../Ellipsis'
 
 const T = styled(Box).attrs(p => ({
-  ff: 'Rubik',
+  ff: 'Inter|Medium',
   horizontal: true,
   color: p.color,
 }))`

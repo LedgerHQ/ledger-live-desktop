@@ -9,7 +9,7 @@ const TagWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Open Sans';
+  font-family: 'Inter';
   font-weight: bold;
   font-size: 10px;
   padding: 0px 4px;
@@ -44,7 +44,7 @@ const Tag = ({
   onClick?: Function,
 }) => (
   <TagWrapper onClick={onClick} color={color} backgroundColor={backgroundColor}>
-    <Text ff="Open Sans|Bold" align="center" fontSize={11}>
+    <Text ff="Inter|Bold" align="center" fontSize={11}>
       {children}
     </Text>
   </TagWrapper>

@@ -7,7 +7,7 @@ import Label from 'components/base/Label'
 import Box from 'components/base/Box'
 import IconExternalLink from 'icons/ExternalLink'
 
-const LabelWrapper = styled(Label).attrs(p => ({ ff: p.ff ? p.ff : 'Museo Sans|Bold' }))`
+const LabelWrapper = styled(Label).attrs(p => ({ ff: p.ff ? p.ff : 'Inter|Bold' }))`
   display: inline-flex;
   color: ${p => p.theme.colors[p.color] || 'inherit'};
   &:hover {

@@ -38,7 +38,7 @@ class AccountCell extends PureComponent<Props> {
 export default AccountCell
 
 const AccountNameEllipsis = styled(Box).attrs(() => ({
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 3,
   color: 'palette.text.shade100',
   flexShrink: 1,

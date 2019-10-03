@@ -107,7 +107,7 @@ const FeesField = ({ fees, account, transaction, onChange }: Props & { fees?: Fe
   return (
     <GenericContainer
       header={
-        <div style={{ fontFamily: 'Rubik', textAlign: 'right' }}>
+        <div style={{ fontFamily: 'Inter', textAlign: 'right' }}>
           <Text color="#999" fontSize={4}>
             <CurrencyUnitValue value={value} unit={unit} />
           </Text>{' '}
@@ -121,7 +121,7 @@ const FeesField = ({ fees, account, transaction, onChange }: Props & { fees?: Fe
         <GasSlider error={error} defaultGas={defaultGas} value={value} onChange={onChangeF} />
       </Box>
       <Box
-        ff="Open Sans|SemiBold"
+        ff="Inter|SemiBold"
         fontSize="11px"
         horizontal
         justifyContent="space-between"
@@ -137,7 +137,7 @@ const FeesField = ({ fees, account, transaction, onChange }: Props & { fees?: Fe
       {error && (
         <Error>
           <IconExclamationCircle size={12} />
-          <Box color="alertRed" ff="Open Sans|Regular" fontSize={4} textAlign="center">
+          <Box color="alertRed" ff="Inter|Regular" fontSize={4} textAlign="center">
             <TranslatedError error={error} />
           </Box>
         </Error>

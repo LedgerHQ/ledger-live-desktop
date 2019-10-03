@@ -33,7 +33,7 @@ const Tooltip = ({ counterValue, d }: *) => (
       unit={counterValue.units[0]}
       val={d.value}
     />
-    <Box ff="Open Sans|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
+    <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
       {moment(d.date).format('LL')}
     </Box>
   </Fragment>
@@ -56,7 +56,7 @@ class PortfolioBalanceSummary extends PureComponent<Props> {
 
         <Box
           px={5}
-          ff="Open Sans"
+          ff="Inter"
           fontSize={4}
           color="palette.text.shade80"
           pt={5}

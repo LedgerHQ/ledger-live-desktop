@@ -18,7 +18,7 @@ module.exports = `* {
 
 body {
   cursor: default;
-  font-family: 'Museo Sans', 'Open Sans', Arial, Helvetica, sans-serif;
+  font-family: 'Inter', 'Inter', Arial, Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 300;
   line-height: 1.5;

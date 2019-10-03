@@ -208,14 +208,14 @@ export default connect(
 )(Analytics)
 
 const MandatoryText = styled(Box).attrs(() => ({
-  ff: 'Open Sans|Regular',
+  ff: 'Inter|Regular',
   fontSize: 2,
   textAlign: 'left',
   color: 'palette.text.shade60',
   mt: 1,
 }))``
 export const AnalyticsText = styled(Box).attrs(() => ({
-  ff: 'Open Sans|Regular',
+  ff: 'Inter|Regular',
   fontSize: 3,
   textAlign: 'left',
   color: 'palette.text.shade80',
@@ -223,7 +223,7 @@ export const AnalyticsText = styled(Box).attrs(() => ({
   max-width: 400px;
 `
 export const AnalyticsTitle = styled(Box).attrs(() => ({
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 4,
   textAlign: 'left',
 }))``

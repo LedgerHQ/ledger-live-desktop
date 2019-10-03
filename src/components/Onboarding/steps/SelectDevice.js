@@ -131,7 +131,7 @@ const DeviceIcon = styled(Box).attrs(() => ({
 `
 
 export const BlockTitle = styled(Box).attrs(() => ({
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 4,
   textAlign: 'center',
   pt: 3,
@@ -165,7 +165,7 @@ const SelectDeviceIconWrapper = styled(Box).attrs(() => ({
 const USBOnly = styled(Box).attrs(() => ({
   alignItems: 'center',
   justifyContent: 'center',
-  ff: 'Open Sans|Bold',
+  ff: 'Inter|Bold',
   fontSize: 0,
   borderRadius: '2px',
 }))`

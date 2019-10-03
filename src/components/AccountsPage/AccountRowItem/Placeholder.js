@@ -50,7 +50,7 @@ class Placeholder extends PureComponent<Props> {
       <Box mb={5}>
         <AddAccountButton isAccountRow onClick={this.handleAddAccountModal} pb={6}>
           <IconPlus size={16} mr={20} />
-          <Box ml={2} ff="Open Sans|Regular" fontSize={4}>
+          <Box ml={2} ff="Inter|Regular" fontSize={4}>
             {t('addAccounts.cta.add')}
           </Box>
         </AddAccountButton>

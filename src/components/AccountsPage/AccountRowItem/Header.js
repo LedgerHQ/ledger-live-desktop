@@ -41,7 +41,7 @@ class Header extends PureComponent<Props> {
     return (
       <Box
         horizontal
-        ff="Open Sans|SemiBold"
+        ff="Inter|SemiBold"
         flow={3}
         flex={`${nested ? 42 : 30}%`}
         pr={1}

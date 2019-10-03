@@ -29,7 +29,7 @@ const TokenTipsContainer = styled(Box)`
 const TokenTips = React.memo(({ currency }: *) => (
   <TokenTipsContainer mt={4} horizontal alignItems="center">
     <InfoCircle size={16} color={colors.wallet} />
-    <Text style={{ flex: 1, marginLeft: 20 }} ff="Open Sans|Regular" fontSize={4}>
+    <Text style={{ flex: 1, marginLeft: 20 }} ff="Inter|Regular" fontSize={4}>
       <Trans
         i18nKey="addAccounts.tokensTip"
         values={{

@@ -16,7 +16,7 @@ const Container = styled(Box).attrs(() => ({
 }))``
 
 const Title = styled(Box).attrs(() => ({
-  ff: 'Museo Sans|Regular',
+  ff: 'Inter|Regular',
   fontSize: 5,
   mb: 3,
 }))``

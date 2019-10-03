@@ -176,7 +176,7 @@ class Chart extends Component<Props> {
 
       // Reset color if needed
       if (ctx.INVALIDATED.color) {
-        ctx.COLORS = generateColors(color)
+        ctx.COLORS = generateColors(theme, color)
       }
 
       // Reset margins if needed

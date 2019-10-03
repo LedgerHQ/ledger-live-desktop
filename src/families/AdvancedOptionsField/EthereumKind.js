@@ -77,7 +77,7 @@ class AdvancedOptions extends PureComponent<Props, *> {
         </Box>
         <Box grow>
           <Input
-            ff="Rubik"
+            ff="Inter"
             value={gasLimit ? gasLimit.toString() : ''}
             onChange={this.onChange}
             loading={isValid && !gasLimit}

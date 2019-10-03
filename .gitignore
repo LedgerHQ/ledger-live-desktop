@@ -2,7 +2,6 @@ xliffs/
 /.env
 /dist/
 /node_modules/
-/static/fonts/museosans/
 /storybook-static/
 
 /build/linux/arch/.SRCINFO

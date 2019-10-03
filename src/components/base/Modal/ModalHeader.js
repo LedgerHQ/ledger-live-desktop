@@ -21,7 +21,7 @@ const MODAL_HEADER_STYLE = {
 
 const ModalTitle = styled(Box).attrs(() => ({
   color: 'palette.text.shade100',
-  ff: 'Museo Sans|Regular',
+  ff: 'Inter|Medium',
   fontSize: 6,
   grow: true,
   shrink: true,

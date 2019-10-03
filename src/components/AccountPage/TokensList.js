@@ -91,7 +91,7 @@ class TokensList extends PureComponent<Props> {
     return (
       <Box mb={50}>
         <Wrapper>
-          <Text color="palette.text.shade100" mb={2} ff="Museo Sans" fontSize={6}>
+          <Text color="palette.text.shade100" mb={2} ff="Inter|Medium" fontSize={6}>
             {t('tokensList.title')}
           </Text>
           {!isEmpty && <ReceiveButton onClick={this.onReceiveClick} />}
@@ -99,11 +99,11 @@ class TokensList extends PureComponent<Props> {
         {isEmpty && (
           <EmptyState>
             <Placeholder>
-              <Text color="palette.text.shade80" ff="Open Sans|SemiBold" fontSize={4}>
+              <Text color="palette.text.shade80" ff="Inter|SemiBold" fontSize={4}>
                 <Trans i18nKey={'tokensList.placeholder'} />{' '}
                 <LabelWithExternalIcon
                   color="wallet"
-                  ff="Open Sans|SemiBold"
+                  ff="Inter|SemiBold"
                   onClick={() => {
                     openURL(urls.managerERC20)
                     track('More info on Manage ERC20 tokens')

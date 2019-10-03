@@ -110,7 +110,7 @@ class BannerItem extends PureComponent<{
         <CloseIcon onClick={this.dismiss} />
         <Box horizontal flow={2}>
           <IconExclamationCircle size={16} color="palette.background.paper" />
-          <Box shrink ff="Open Sans|SemiBold" style={styles.message}>
+          <Box shrink ff="Inter|SemiBold" style={styles.message}>
             {item.message}
           </Box>
         </Box>

@@ -31,8 +31,8 @@ function BoldToggle(props: Props) {
 }
 
 BoldToggle.defaultProps = {
-  ff: 'Open Sans',
-  ffBold: 'Open Sans|SemiBold',
+  ff: 'Inter',
+  ffBold: 'Inter|SemiBold',
 }
 
 export default BoldToggle

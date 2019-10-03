@@ -263,7 +263,7 @@ export class StepAmountFooter extends PureComponent<
               />
             )}
             <Box horizontal align="center">
-              <Text ff="Rubik" fontSize={3}>
+              <Text ff="Inter" fontSize={3}>
                 {'(' /* eslint-disable-line react/jsx-no-literals */}
               </Text>
               {account && (
@@ -277,7 +277,7 @@ export class StepAmountFooter extends PureComponent<
                   alwaysShowSign={false}
                 />
               )}
-              <Text ff="Rubik" fontSize={3}>
+              <Text ff="Inter" fontSize={3}>
                 {')' /* eslint-disable-line react/jsx-no-literals */}
               </Text>
             </Box>

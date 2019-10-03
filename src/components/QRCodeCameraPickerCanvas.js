@@ -32,7 +32,7 @@ const CameraWrapper = styled.div`
     align-items: center;
     flex-grow: 1;
     p {
-      font-family: 'Open Sans';
+      font-family: 'Inter';
       font-weight: 600;
       padding: 12px 24px;
       font-size: 13px;

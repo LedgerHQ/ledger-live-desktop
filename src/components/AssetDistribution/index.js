@@ -89,7 +89,7 @@ class AssetDistribution extends PureComponent<Props, State> {
       <>
         <Box horizontal alignItems="center">
           <Text
-            ff="Museo Sans|Regular"
+            ff="Inter|Regular"
             fontSize={6}
             color="palette.text.shade100"
             data-e2e="title_assetDistribution"
@@ -105,7 +105,7 @@ class AssetDistribution extends PureComponent<Props, State> {
               <Trans i18nKey="common.new" />
             </Tag>
           </TagWrapper>
-          <Text ff="Open Sans|SemiBold" fontSize={12} color="wallet">
+          <Text ff="Inter|SemiBold" fontSize={12} color="wallet">
             <Trans i18nKey="distribution.notice" />
           </Text>
         </Box>
@@ -116,7 +116,7 @@ class AssetDistribution extends PureComponent<Props, State> {
           ))}
           {!almostAll && (
             <SeeAllButton expanded={showAll} onClick={this.toggleShowAll}>
-              <Text color="wallet" ff="Open Sans|SemiBold" fontSize={4}>
+              <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
                 <Trans i18nKey={showAll ? 'distribution.showLess' : 'distribution.showAll'} />
               </Text>
               <IconAngleDown size={16} />

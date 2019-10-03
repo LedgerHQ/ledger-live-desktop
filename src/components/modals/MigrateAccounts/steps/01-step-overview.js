@@ -41,7 +41,7 @@ const MobileIllu = styled.img`
 `
 
 const Desc = styled(Box).attrs(() => ({
-  ff: 'Open Sans',
+  ff: 'Inter',
   fontSize: 4,
   mt: 2,
   color: 'palette.text.shade80',
@@ -62,7 +62,7 @@ const MobileTextWrapper = styled.div`
 `
 
 const MobileWrapper = styled(Box).attrs(() => ({
-  ff: 'Open Sans',
+  ff: 'Inter',
   fontSize: 4,
   mt: 2,
   color: 'palette.text.shade80',
@@ -192,7 +192,7 @@ const StepOverview = ({
         )}
       </Logo>
       <Title>
-        <Text ff="Museo Sans|Regular" fontSize={6} color="palette.text.shade100">
+        <Text ff="Inter|Regular" fontSize={6} color="palette.text.shade100">
           <Trans
             i18nKey={
               !migratableAccounts.length
@@ -204,7 +204,7 @@ const StepOverview = ({
       </Title>
       {migratableAccounts.length ? (
         <>
-          <Text color="palette.text.shade80" ff="Open Sans|Regular" fontSize={4}>
+          <Text color="palette.text.shade80" ff="Inter|Regular" fontSize={4}>
             <Trans i18nKey="migrateAccounts.overview.description" />
           </Text>
 
@@ -213,7 +213,7 @@ const StepOverview = ({
               {!currency ? (
                 <NextDeviceWarning>
                   <IconExclamationCircle size={16} />
-                  <TextWrap ff="Open Sans|Bold" fontSize={4}>
+                  <TextWrap ff="Inter|Bold" fontSize={4}>
                     <Text>
                       <Trans
                         i18nKey="migrateAccounts.overview.pendingDevices"
@@ -234,7 +234,7 @@ const StepOverview = ({
                 const accounts = migratableAccounts.filter(a => a.currency.id === currencyId)
                 return (
                   <Currency key={currencyId}>
-                    <Text color="palette.text.shade100" ff="Open Sans|SemiBold" fontSize={4}>
+                    <Text color="palette.text.shade100" ff="Inter|SemiBold" fontSize={4}>
                       <Trans
                         i18nKey="migrateAccounts.overview.currency"
                         count={accounts.length}
@@ -263,7 +263,7 @@ const StepOverview = ({
       ) : (
         <>
           <Desc>
-            <Text color="palette.text.shade80" ff="Open Sans|Regular" fontSize={4}>
+            <Text color="palette.text.shade80" ff="Inter|Regular" fontSize={4}>
               <Trans
                 i18nKey={`migrateAccounts.overview.${
                   migratedAccountNames.length > 1 ? 'successDescPlu' : 'successDesc'
@@ -278,11 +278,11 @@ const StepOverview = ({
             <MobileContent>
               <MobileIllu alt="" src={i('mobile-export.svg')} />
               <MobileTextWrapper>
-                <Text ff="Museo Sans|Regular" fontSize={5} color="palette.text.shade100">
+                <Text ff="Inter|Regular" fontSize={5} color="palette.text.shade100">
                   <Trans i18nKey="migrateAccounts.overview.mobileTitle" />
                 </Text>
                 <MobileDesc>
-                  <Text color="palette.text.shade80" ff="Open Sans|Regular" fontSize={4}>
+                  <Text color="palette.text.shade80" ff="Inter|Regular" fontSize={4}>
                     <Trans i18nKey="migrateAccounts.overview.mobileDesc" />
                   </Text>
                 </MobileDesc>
@@ -336,7 +336,7 @@ export const StepOverviewFooter = ({
           <IconExclamationCircle size={16} />
         </Exclamation>
         <Box>
-          <Text color="wallet" ff="Open Sans|Bold" fontSize={12}>
+          <Text color="wallet" ff="Inter|Bold" fontSize={12}>
             <Trans i18nKey="migrateAccounts.overview.footer" />
           </Text>
         </Box>

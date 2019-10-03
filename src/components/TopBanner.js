@@ -95,7 +95,7 @@ const Container = styled(Box).attrs(p => ({
   mt: -32,
   mb: 20,
   fontSize: 4,
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
 }))`
   border-radius: ${radii[1]}px;
 `

@@ -61,7 +61,7 @@ class Header extends PureComponent<{
 
     return (
       <Box flow={4}>
-        <Box horizontal ff="Open Sans|SemiBold" flow={3} alignItems="center">
+        <Box horizontal ff="Inter|SemiBold" flow={3} alignItems="center">
           <ParentCryptoCurrencyIcon currency={currency} withTooltip />
           <HeadText name={name} title={title} />
           <AccountSyncStatusIndicator

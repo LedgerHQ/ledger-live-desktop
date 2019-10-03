@@ -63,13 +63,13 @@ const defaultState = {
 }
 
 export const PageTitle = styled(Box).attrs(() => ({
-  ff: 'Museo Sans|Regular',
+  ff: 'Inter|Regular',
   fontSize: 7,
   color: 'palette.text.shade100',
 }))``
 
 export const LockScreenDesc = styled(Box).attrs(() => ({
-  ff: 'Open Sans|Regular',
+  ff: 'Inter|Regular',
   fontSize: 4,
   textAlign: 'center',
   color: 'palette.text.shade80',
