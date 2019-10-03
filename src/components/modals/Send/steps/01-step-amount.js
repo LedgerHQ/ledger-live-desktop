@@ -177,7 +177,8 @@ export class StepAmountFooter extends PureComponent<
     const accountUnit = account ? getAccountUnit(account) : null
 
     const isTerminated = mainAccount && mainAccount.currency.terminated
-    const canNext = !bridgePending && !errors.length && !isTerminated
+    const canNext =
+      amount.gt(0) && !bridgePending && !Object.entries(errors).length && !isTerminated
 
     return (
       <Fragment>

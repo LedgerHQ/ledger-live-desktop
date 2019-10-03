@@ -16,7 +16,6 @@ type Props = {
   autoFocus?: boolean,
   status: TransactionStatus,
   onChangeTransaction: Transaction => void,
-  bridgePending: boolean,
   t: T,
 }
 
@@ -27,7 +26,6 @@ const RecipientField = ({
   onChangeTransaction,
   autoFocus,
   status,
-  bridgePending,
 }: Props) => {
   const bridge = getAccountBridge(account, null)
 
@@ -50,7 +48,6 @@ const RecipientField = ({
   if (!status) return null
   const { recipient: recipientError } = status.errors
   const { recipient: recipientWarning } = status.warnings
-  const showErrorAndWarning = transaction.recipient && !bridgePending
 
   return (
     <Box flow={1}>
@@ -62,8 +59,8 @@ const RecipientField = ({
         autoFocus={autoFocus}
         withQrCode={!status.recipientIsReadOnly}
         readOnly={status.recipientIsReadOnly}
-        error={showErrorAndWarning && recipientError}
-        warning={showErrorAndWarning && recipientWarning}
+        error={transaction.recipient && recipientError}
+        warning={recipientWarning}
         value={transaction.recipient}
         onChange={onChange}
       />
