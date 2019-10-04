@@ -4,11 +4,13 @@ import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-com
 import BitcoinKind from './BitcoinKind'
 import EthereumKind from './EthereumKind'
 import RippleKind from './RippleKind'
+import TezosKind from './TezosKind'
 
 const byFamily = {
   bitcoin: BitcoinKind,
   ethereum: EthereumKind,
   ripple: RippleKind,
+  tezos: TezosKind,
 }
 
 type Props = {
