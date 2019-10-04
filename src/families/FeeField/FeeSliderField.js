@@ -50,18 +50,23 @@ export function useDynamicRange({
     range,
     onChange,
   ])
-  return { range, index, setValueIndex }
+  const constraintValue = projectRangeIndex(range, index)
+  return { range, index, constraintValue, setValueIndex }
 }
 
 const FeeSliderField = ({ value, onChange, unit, error, defaultValue }: Props) => {
-  const { range, index, setValueIndex } = useDynamicRange({ value, defaultValue, onChange })
+  const { range, index, constraintValue, setValueIndex } = useDynamicRange({
+    value,
+    defaultValue,
+    onChange,
+  })
 
   return (
     <GenericContainer
       header={
         <div style={{ fontFamily: 'Rubik', textAlign: 'right' }}>
           <Text color="#999" fontSize={4}>
-            <CurrencyUnitValue value={value} unit={unit} />
+            <CurrencyUnitValue value={constraintValue} unit={unit} />
           </Text>{' '}
           <Text color="#767676" fontSize={4}>
             {unit.code}
