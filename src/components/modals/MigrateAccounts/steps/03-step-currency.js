@@ -44,7 +44,7 @@ const MigrationError = ({ error }: { error: Error }) => (
   </Box>
 )
 const Title = styled(Box).attrs(() => ({
-  ff: 'Museo Sans',
+  ff: 'Inter',
   fontSize: 5,
   mt: 2,
   color: 'palette.text.shade100',
@@ -53,7 +53,7 @@ const Title = styled(Box).attrs(() => ({
 `
 
 const Desc = styled(Box).attrs(() => ({
-  ff: 'Open Sans',
+  ff: 'Inter',
   fontSize: 4,
   mt: 2,
   color: 'palette.text.shade80',
@@ -166,7 +166,7 @@ class StepCurrency extends PureComponent<Props> {
             />
           )}
           <Box
-            ff="Museo Sans|Regular"
+            ff="Inter|Regular"
             fontSize={6}
             color="palette.text.shade100"
             mb={10}
@@ -179,7 +179,7 @@ class StepCurrency extends PureComponent<Props> {
               values={{ currencyName }}
             />
           </Box>
-          <Text color="palette.text.shade80" ff="Open Sans|Regular" fontSize={4}>
+          <Text color="palette.text.shade80" ff="Inter|Regular" fontSize={4}>
             <Trans
               i18nKey={`migrateAccounts.progress.${scanStatus}.description`}
               values={{ currencyName }}

@@ -132,7 +132,7 @@ const InitCardContainer = styled(Box).attrs(() => ({
 `
 
 export const CardTitle = styled(Box).attrs(() => ({
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 4,
   textAlign: 'left',
 }))``

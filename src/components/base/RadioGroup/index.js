@@ -31,7 +31,7 @@ const Btn = styled(Box).attrs(p => ({
   alignItems: 'center',
   justifyContent: 'center',
   fontSize: 3,
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   px: 3,
 }))`
   cursor: pointer;

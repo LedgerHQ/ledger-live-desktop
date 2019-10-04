@@ -11,7 +11,7 @@ const Container = styled(Box).attrs(() => ({
   px: 4,
   py: 3,
   horizontal: true,
-  ff: 'Open Sans',
+  ff: 'Inter',
   fontSize: 4,
   flow: 4,
 }))`

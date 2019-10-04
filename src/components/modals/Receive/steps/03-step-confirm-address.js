@@ -110,7 +110,7 @@ const Container = styled(Box).attrs(() => ({
 }))``
 
 const Title = styled(Box).attrs(() => ({
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 6,
   mb: 1,
 }))``

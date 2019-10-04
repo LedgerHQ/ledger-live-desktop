@@ -222,7 +222,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                 {genuine.isDeviceGenuine ? (
                   <Box horizontal align="center" flow={1} color={colors.wallet}>
                     <IconCheck size={16} />
-                    <Box ff="Open Sans|SemiBold" fontSize={4}>
+                    <Box ff="Inter|SemiBold" fontSize={4}>
                       {t('onboarding.genuineCheck.isGenuinePassed')}
                     </Box>
                   </Box>
@@ -281,7 +281,7 @@ export default connect(
 )(GenuineCheck)
 
 export const CardTitle = styled(Box).attrs(() => ({
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 4,
   textAlign: 'left',
   pl: 2,

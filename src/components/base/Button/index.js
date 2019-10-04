@@ -22,10 +22,10 @@ const buttonStyles: { [_: string]: Style } = {
       box-shadow: ${p.isFocused ? focusedShadowStyle : ''}
     `,
     active: p => `
-      background: ${rgba(p.theme.colors.palette.divider, 0.3)};
+      background: ${rgba(p.theme.colors.palette.divider, 0.2)};
     `,
     hover: p => `
-      background: ${rgba(p.theme.colors.palette.divider, 0.2)};
+      background: ${rgba(p.theme.colors.palette.divider, 0.1)};
     `,
   },
   primary: {
@@ -184,7 +184,7 @@ function getStyles(props, state) {
 }
 
 export const Base = styled.button.attrs(p => ({
-  ff: 'Museo Sans|Regular',
+  ff: 'Inter|SemiBold',
   fontSize: p.fontSize || (!p.small ? 4 : 3),
   px: !p.small ? 4 : 3,
   py: !p.small ? 2 : 0,

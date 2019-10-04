@@ -33,7 +33,7 @@ const SelectPINnano = ({ t }: Props) => {
         <Box style={{ display: 'block' }}>
           <Trans i18nKey="onboarding.selectPIN.initialize.instructions.nano.step2">
             {'Press the right button to select'}
-            <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
+            <Text ff="Inter|SemiBold" color="palette.text.shade100">
               {configureAsNewDevice}
             </Text>
           </Trans>

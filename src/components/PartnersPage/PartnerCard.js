@@ -31,7 +31,7 @@ export default class PartnerCard extends PureComponent<{ t: T, card: CardType }>
         <Box justify="center" style={{ width: 180, marginRight: 64 }}>
           <Logo width={180} />
         </Box>
-        <Box shrink ff="Open Sans|Regular" fontSize={4} flow={3}>
+        <Box shrink ff="Inter|Regular" fontSize={4} flow={3}>
           <Box>{t(`partners.${id}`)}</Box>
           <Box horizontal align="center" color="wallet" flow={1}>
             <FakeLink onClick={this.onClick}>{t('partners.visitWebsite')}</FakeLink>

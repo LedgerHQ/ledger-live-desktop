@@ -42,7 +42,7 @@ const ChoiceBox = styled.div`
 
 const Choice = React.memo(({ selected, choice, onSelect }) => (
   <ChoiceBox selected={selected} onClick={() => onSelect(selected ? null : choice)}>
-    <Text ff="Open Sans|SemiBold" fontSize={4}>
+    <Text ff="Inter|SemiBold" fontSize={4}>
       {choice.label}
     </Text>
     {selected ? (
@@ -56,7 +56,7 @@ const Choice = React.memo(({ selected, choice, onSelect }) => (
 const DisclaimerStep = ({ desc }: { desc?: string }) => (
   <Box>
     {desc ? (
-      <Box ff="Open Sans" color="palette.text.shade80" fontSize={4} textAlign="center" mb={2}>
+      <Box ff="Inter" color="palette.text.shade80" fontSize={4} textAlign="center" mb={2}>
         {desc}
       </Box>
     ) : null}
@@ -85,14 +85,14 @@ const FlashStep = ({
         mx={7}
         mt={3}
         mb={2}
-        ff="Museo Sans|Regular"
+        ff="Inter|Regular"
         color="palette.text.shade100"
         textAlign="center"
       >
         {t(`manager.modal.steps.flash`)}
       </Box>
       <Box mx={7} mt={2} mb={2}>
-        <Text ff="Open Sans|Regular" align="center" color="palette.text.shade80" fontSize={4}>
+        <Text ff="Inter|Regular" align="center" color="palette.text.shade80" fontSize={4}>
           {t('manager.modal.mcuPin')}
         </Text>
       </Box>
@@ -109,7 +109,7 @@ const ErrorStep = ({ error }: { error: Error }) => (
         color="palette.text.shade100"
         mt={4}
         fontSize={6}
-        ff="Museo Sans|Regular"
+        ff="Inter|Regular"
         textAlign="center"
         style={{ maxWidth: 350 }}
       >
@@ -119,7 +119,7 @@ const ErrorStep = ({ error }: { error: Error }) => (
         color="palette.text.shade80"
         mt={3}
         fontSize={4}
-        ff="Open Sans"
+        ff="Inter"
         textAlign="center"
         style={{ maxWidth: 350 }}
       >

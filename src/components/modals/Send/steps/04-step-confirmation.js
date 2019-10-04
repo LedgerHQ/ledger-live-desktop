@@ -30,7 +30,7 @@ const Container = styled(Box).attrs(() => ({
 `
 
 const Title = styled(Box).attrs(() => ({
-  ff: 'Museo Sans',
+  ff: 'Inter',
   fontSize: 5,
   mt: 2,
 }))`
@@ -39,7 +39,7 @@ const Title = styled(Box).attrs(() => ({
 `
 
 const Text = styled(Box).attrs(() => ({
-  ff: 'Open Sans',
+  ff: 'Inter',
   fontSize: 4,
   mt: 2,
 }))`
@@ -77,7 +77,7 @@ function StepConfirmation({ account, t, optimisticOperation, error, signed, them
           <Box mr={3}>
             <IconTriangleWarning height={16} width={16} />
           </Box>
-          <Box style={{ display: 'block' }} ff="Open Sans|SemiBold" fontSize={3} horizontal shrink>
+          <Box style={{ display: 'block' }} ff="Inter|SemiBold" fontSize={3} horizontal shrink>
             <Trans i18nKey="send.steps.confirmation.broadcastError" />
           </Box>
         </Disclaimer>

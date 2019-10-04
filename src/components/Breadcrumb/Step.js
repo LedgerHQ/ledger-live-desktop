@@ -31,14 +31,14 @@ const StepNumber = styled(Box).attrs(p => ({
   alignItems: 'center',
   justifyContent: 'center',
   color: ['active', 'valid', 'error'].includes(p.status)
-    ? 'palette.background.paper'
+    ? 'palette.primary.contrastText'
     : 'palette.divider',
   bg: ['active', 'valid'].includes(p.status)
     ? 'wallet'
     : p.status === 'error'
     ? 'alertRed'
     : 'palette.background.paper',
-  ff: 'Rubik|Regular',
+  ff: 'Inter|Bold',
 }))`
   border-radius: 50%;
   border: 1px solid
@@ -57,7 +57,7 @@ const StepNumber = styled(Box).attrs(p => ({
 
 const Label = styled(Box).attrs(() => ({
   fontSize: 3,
-  ff: 'Museo Sans|Bold',
+  ff: 'Inter|Bold',
   px: 2,
 }))`
   line-height: 1.2;

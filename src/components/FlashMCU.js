@@ -30,7 +30,7 @@ type Props = {
 const FlashMCUNanos = React.memo(({ deviceModelId }: Props) => (
   <>
     <Box mx={7}>
-      <Text ff="Open Sans|Regular" align="center" color="palette.text.shade80">
+      <Text ff="Inter|Regular" align="center" color="palette.text.shade80">
         <Bullet>{'1. '}</Bullet>
         <Trans i18nKey="manager.modal.mcuFirst" />
       </Text>
@@ -40,11 +40,11 @@ const FlashMCUNanos = React.memo(({ deviceModelId }: Props) => (
     </Box>
     <Separator my={6} />
     <Box mx={7}>
-      <Text ff="Open Sans|Regular" align="center" color="palette.text.shade80">
+      <Text ff="Inter|Regular" align="center" color="palette.text.shade80">
         <Bullet>{'2. '}</Bullet>
         <Trans i18nKey="manager.modal.mcuSecond">
           {'Press the left button and hold it while you reconnect the USB cable until the '}
-          <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
+          <Text ff="Inter|SemiBold" color="palette.text.shade100">
             {bootloader}
           </Text>
           {' screen appears'}
@@ -75,7 +75,7 @@ const FlashMCUBlue = React.memo(({ deviceModelId }: Props) => (
   <>
     <Box mx={7} horizontal>
       <Container px={1}>
-        <Text ff="Open Sans|Regular" align="center" color="palette.text.shade80">
+        <Text ff="Inter|Regular" align="center" color="palette.text.shade80">
           <Bullet>{'1. '}</Bullet>
           <Trans i18nKey="manager.modal.mcuBlueFirst" />
         </Text>
@@ -84,7 +84,7 @@ const FlashMCUBlue = React.memo(({ deviceModelId }: Props) => (
         </Box>
       </Container>
       <Container>
-        <Text ff="Open Sans|Regular" align="center" color="palette.text.shade80">
+        <Text ff="Inter|Regular" align="center" color="palette.text.shade80">
           <Bullet>{'2. '}</Bullet>
           <Trans i18nKey="manager.modal.mcuBlueSecond" />
         </Text>

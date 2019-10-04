@@ -65,7 +65,7 @@ const ClickableWrapper = styled(Box).attrs(() => ({
   flow: 1,
   color: 'wallet',
   fontSize: 4,
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   cursor: 'default', // this here needs reset because it inherits from cursor: text from parent
 }))`
   &:hover {

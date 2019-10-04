@@ -22,7 +22,7 @@ const ConnectTroubleshooting = ({ appearsAfterDelay = 20000, onRepair }: Props) 
   return visible ? (
     <Box p={4} alignItems="center">
       <Box p={2}>
-        <Text ff="Open Sans|SemiBold" fontSize={4}>
+        <Text ff="Inter|SemiBold" fontSize={4}>
           <Trans i18nKey="connectTroubleshooting.desc" />
         </Text>
       </Box>

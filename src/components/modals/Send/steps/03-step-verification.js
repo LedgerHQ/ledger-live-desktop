@@ -17,7 +17,7 @@ import type { StepProps } from '../index'
 
 const Container = styled(Box).attrs(() => ({ alignItems: 'center', fontSize: 4, pb: 4 }))``
 const Info = styled(Box).attrs(() => ({
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   color: 'palette.text.shade100',
   mt: 6,
   mb: 4,

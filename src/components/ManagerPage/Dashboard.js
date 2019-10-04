@@ -26,11 +26,11 @@ const Dashboard = ({ device, deviceInfo, t, handleHelpRequest }: Props) => (
   <Box flow={4} pb={8} selectable>
     <TrackPage category="Manager" name="Dashboard" />
     <Box>
-      <Text ff="Museo Sans|Regular" fontSize={7} color="palette.text.shade100">
+      <Text ff="Inter|SemiBold" fontSize={7} color="palette.text.shade100">
         {t('manager.title')}
       </Text>
       <Box horizontal>
-        <Text ff="Museo Sans|Light" fontSize={5}>
+        <Text ff="Inter|Light" fontSize={5}>
           {t('manager.subtitle')}
         </Text>
         <HelpLink onClick={handleHelpRequest}>

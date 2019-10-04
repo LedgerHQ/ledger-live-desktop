@@ -182,7 +182,7 @@ class DeviceInteractionStep extends PureComponent<
           {title && (
             <Box
               color={isActive || isSuccess ? 'palette.text.shade100' : ''}
-              ff="Open Sans|Regular"
+              ff="Inter|Regular"
             >
               {title}
             </Box>

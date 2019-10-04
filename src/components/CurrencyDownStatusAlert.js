@@ -52,7 +52,7 @@ class CurrencyDownStatusAlert extends PureComponent<Props> {
         <Box mr={2}>
           <IconTriangleWarning height={16} width={16} />
         </Box>
-        <Box style={{ display: 'block' }} ff="Open Sans|SemiBold" fontSize={3} horizontal shrink>
+        <Box style={{ display: 'block' }} ff="Inter|SemiBold" fontSize={3} horizontal shrink>
           {status.message}
           <Link onClick={this.onClick}>{t('common.learnMore')}</Link>
           <IconExternalLink size={12} />

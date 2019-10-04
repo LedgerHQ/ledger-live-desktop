@@ -31,7 +31,7 @@ export const TooltipContainer = React.forwardRef(
         background: theme.colors[tooltipBg] || theme.colors.palette.text.shade100,
         borderRadius: 4,
         color: theme.colors.palette.background.paper,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Inter',
         fontWeight: 600,
         fontSize: 10,
         padding: '5px 10px 5px 10px',

@@ -37,11 +37,12 @@ const SearchInput = styled.input`
   background: transparent;
   outline: none;
   flex-grow: 1;
-  font-family: 'Open Sans';
+  font-family: 'Inter';
   cursor: text;
   color: ${p => p.theme.colors.palette.text.shade100};
   &::placeholder {
     color: #999999;
+    font-weight: 500;
   }
 `
 

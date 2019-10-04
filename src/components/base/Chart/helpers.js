@@ -13,14 +13,14 @@ export function enrichData(data) {
   }))
 }
 
-export function generateColors(color) {
+export function generateColors(theme, color) {
   const cColor = c(color)
   return {
     line: color,
     focus: color,
     gradientStart: cColor.fade(0.7),
     gradientStop: cColor.fade(1),
-    focusBar: '#d8d8d8',
+    focusBar: theme.colors.palette.divider,
   }
 }
 

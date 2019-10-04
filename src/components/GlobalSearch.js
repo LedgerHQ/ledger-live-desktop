@@ -12,7 +12,7 @@ import Box from 'components/base/Box'
 const Container = styled(Box).attrs(() => ({
   grow: true,
   horizontal: true,
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|Regular',
   fontSize: 4,
 }))``
 

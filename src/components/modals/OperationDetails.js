@@ -52,13 +52,13 @@ import Link from '../base/Link'
 const OpDetailsSection = styled(Box).attrs(() => ({
   horizontal: true,
   alignItems: 'center',
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 4,
   color: 'palette.text.shade60',
 }))``
 
 const OpDetailsTitle = styled(Box).attrs(() => ({
-  ff: 'Museo Sans|ExtraBold',
+  ff: 'Inter|ExtraBold',
   fontSize: 2,
   color: 'palette.text.shade100',
   textTransform: 'uppercase',
@@ -94,7 +94,7 @@ export const GradientHover = styled(Box).attrs(() => ({
 `
 
 const OpDetailsData = styled(Box).attrs(p => ({
-  ff: 'Open Sans',
+  ff: 'Inter',
   color: p.color || 'palette.text.shade80',
   fontSize: 4,
   relative: true,
@@ -127,7 +127,7 @@ const NoMarginWrapper = styled.div`
 `
 
 const B = styled(Bar).attrs(() => ({
-  color: 'palette.background.default',
+  color: 'palette.divider',
   size: 1,
 }))``
 
@@ -531,7 +531,7 @@ const OperationDetailsWrapper = ({ t }: { t: T }) => (
 export default translate()(OperationDetailsWrapper)
 
 const More = styled(Text).attrs(p => ({
-  ff: p.ff ? p.ff : 'Museo Sans|Bold',
+  ff: p.ff ? p.ff : 'Inter|Bold',
   fontSize: p.fontSize ? p.fontSize : 2,
   color: p.color || 'palette.text.shade100',
   tabIndex: 0,
@@ -565,7 +565,7 @@ export class DataList extends Component<{ lines: string[], t: T }, *> {
         ))}
         {shouldShowMore && !showMore && (
           <Box onClick={this.onClick} py={1}>
-            <More fontSize={4} color="wallet" ff="Open Sans|SemiBold" mt={1}>
+            <More fontSize={4} color="wallet" ff="Inter|SemiBold" mt={1}>
               <IconChevronRight size={12} style={{ marginRight: 5 }} />
               {t('operationDetails.showMore', { recipients: lines.length - numToShow })}
             </More>
@@ -582,7 +582,7 @@ export class DataList extends Component<{ lines: string[], t: T }, *> {
           ))}
         {shouldShowMore && showMore && (
           <Box onClick={this.onClick} py={1}>
-            <More fontSize={4} color="wallet" ff="Open Sans|SemiBold" mt={1}>
+            <More fontSize={4} color="wallet" ff="Inter|SemiBold" mt={1}>
               <IconChevronRight size={12} style={{ marginRight: 5 }} />
               {t('operationDetails.showLess')}
             </More>

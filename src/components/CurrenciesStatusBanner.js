@@ -123,7 +123,7 @@ class BannerItem extends PureComponent<{
         <CloseIcon onClick={this.dismiss} />
         <Box horizontal flow={2}>
           <IconTriangleWarning height={16} width={16} color="palette.background.paper" />
-          <Box shrink ff="Open Sans|SemiBold">
+          <Box shrink ff="Inter|SemiBold">
             {item.message}
           </Box>
         </Box>

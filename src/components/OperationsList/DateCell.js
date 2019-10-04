@@ -37,7 +37,7 @@ class DateCell extends PureComponent<Props> {
 
     return (
       <Cell compact={compact}>
-        <Box ff="Open Sans|SemiBold" fontSize={3} color="palette.text.shade80" style={ellipsis}>
+        <Box ff="Inter|SemiBold" fontSize={3} color="palette.text.shade80" style={ellipsis}>
           {text || t(`operation.type.${operation.type}`)}
         </Box>
         <OperationDate date={operation.date} />

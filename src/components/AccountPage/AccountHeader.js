@@ -24,7 +24,7 @@ import { colors } from 'styles/theme'
 import ParentCryptoCurrencyIcon from '../ParentCryptoCurrencyIcon'
 
 const CurName = styled(Text).attrs(() => ({
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 2,
 }))`
   text-transform: uppercase;
@@ -32,7 +32,7 @@ const CurName = styled(Text).attrs(() => ({
 `
 
 const CurNameToken = styled(Text).attrs(() => ({
-  ff: 'Museo Sans|Bold',
+  ff: 'Inter|Bold',
   fontSize: 2,
 }))``
 
@@ -43,7 +43,7 @@ const CurNameTokenLink = styled(CurNameToken)`
 `
 
 const CurNameTokenIcon = styled(Text).attrs(() => ({
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 2,
 }))`
   color: ${colors.wallet};
@@ -69,7 +69,7 @@ const Wrapper = styled(Box)`
 
 const AccountName = styled(Text).attrs(() => ({
   color: 'palette.text.shade100',
-  ff: 'Museo Sans',
+  ff: 'Inter|SemiBold',
   fontSize: 7,
 }))`
   line-height: 1.1;

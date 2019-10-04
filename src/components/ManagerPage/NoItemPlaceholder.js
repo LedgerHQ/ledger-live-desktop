@@ -13,7 +13,7 @@ import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 
 const Title = styled(Box).attrs(() => ({
-  ff: 'Museo Sans|Regular',
+  ff: 'Inter|Regular',
   fontSize: 5,
 }))`
   color: ${p => p.theme.colors.palette.text.shade100};
@@ -59,7 +59,7 @@ const NoItemPlaceholder = ({ query, installApp, app, push }: Props) => {
       </Title>
       <Box pt={2} style={{ maxWidth: 500 }} alignItems="center">
         <Text
-          ff="Open Sans|Regular"
+          ff="Inter|Regular"
           color="palette.text.shade80"
           fontSize={4}
           textAlign="center"
@@ -74,11 +74,11 @@ const NoItemPlaceholder = ({ query, installApp, app, push }: Props) => {
             }}
           >
             {'placeholder'}
-            <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
+            <Text ff="Inter|SemiBold" color="palette.text.shade100">
               {'placeholder'}
             </Text>
             {'placeholder'}
-            <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
+            <Text ff="Inter|SemiBold" color="palette.text.shade100">
               {'placeholder'}
             </Text>
           </Trans>
