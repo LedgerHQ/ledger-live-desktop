@@ -41,7 +41,7 @@ const Pill = styled(Tabbable).attrs(p => ({
   width: ${p => (p.bordered ? '40px' : '')};
 
   &:hover {
-    color: ${p => p.isActive ? p.theme.colors.wallet : p.theme.colors.palette.text.shade100};
+    color: ${p => (p.isActive ? p.theme.colors.wallet : p.theme.colors.palette.text.shade100)};
   }
 
   &:focus {

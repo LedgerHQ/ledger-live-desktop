@@ -85,12 +85,7 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
       return (
         <Notes>
           <Title>{t('releaseNotes.version', { versionNb: version })}</Title>
-          <Box
-            style={{ wordWrap: 'break-word' }}
-            color="alertRed"
-            ff="Inter|SemiBold"
-            fontSize={3}
-          >
+          <Box style={{ wordWrap: 'break-word' }} color="alertRed" ff="Inter|SemiBold" fontSize={3}>
             <TranslatedError error={error} />
           </Box>
         </Notes>

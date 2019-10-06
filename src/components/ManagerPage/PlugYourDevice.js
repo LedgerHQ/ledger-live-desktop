@@ -30,13 +30,7 @@ function PlugYourDevice(props: Props) {
         >
           {t('manager.device.title')}
         </Box>
-        <Box
-          textAlign="center"
-          mb={5}
-          ff="Inter|Regular"
-          color="palette.text.shade80"
-          fontSize={4}
-        >
+        <Box textAlign="center" mb={5} ff="Inter|Regular" color="palette.text.shade80" fontSize={4}>
           {t('manager.device.desc')}
         </Box>
         <Button primary>{t('manager.device.cta')}</Button>

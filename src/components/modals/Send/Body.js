@@ -259,8 +259,6 @@ const Body = ({
     errorSteps.push(0)
   }
 
-  console.log(account, transaction, status, bridgePending, bridgeError)
-
   const stepperProps = {
     title: t('send.title'),
     initialStepId: stepId,

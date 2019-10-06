@@ -22,7 +22,7 @@
     "install-flow-typed": "flow-typed install -s",
     "remove-breaking-flow-typed": "rm -f flow-typed/npm/{reselect_*,redux-actions_*,react-redux_*,react-i18next_v7.x.x.js,styled-components_v3.x.x.js,winston*}",
     "prettier": "prettier --write \"{src,webpack,.storybook,test-e2e}/**/*.{js,json}\"",
-    "ci": "yarn check --integrity && ./scripts/check-no-dups.sh && yarn lint && yarn prettier && yarn test",
+    "ci": "yarn check --integrity && ./scripts/check-no-dups.sh && yarn lint && yarn prettier -l && yarn test",
     "storybook": "NODE_ENV=development STORYBOOK_ENV=1 start-storybook -s ./static -p 4444",
     "publish-storybook": "bash ./scripts/legacy/publish-storybook.sh",
     "reset-files": "bash ./scripts/legacy/reset-files.sh"
