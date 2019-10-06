@@ -128,10 +128,10 @@ class Row extends PureComponent<Props, State> {
             <Box grow>
               {parentAccount ? (
                 <Box fontSize={10} color="palette.text.shade80">
-                  <Text ff="Open Sans|SemiBold">{parentAccount.name}</Text>
+                  <Text ff="Inter|SemiBold">{parentAccount.name}</Text>
                 </Box>
               ) : null}
-              <Ellipsis ff="Open Sans|SemiBold" color="palette.text.shade100" fontSize={3}>
+              <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
                 {displayName}
               </Ellipsis>
             </Box>
@@ -139,7 +139,7 @@ class Row extends PureComponent<Props, State> {
           <Distribution>
             {!!distribution && (
               <Fragment>
-                <Text ff="Rubik" color="palette.text.shade100" fontSize={3}>
+                <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
                   {`${percentage}%`}
                 </Text>
                 <Bar progress={percentage} progressColor={color} />
@@ -170,7 +170,7 @@ class Row extends PureComponent<Props, State> {
                   alwaysShowSign={false}
                 />
               ) : (
-                <Text ff="Rubik" color="palette.text.shade100" fontSize={3}>
+                <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
                   {'-'}
                 </Text>
               )}

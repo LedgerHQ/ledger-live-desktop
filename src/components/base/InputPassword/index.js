@@ -37,7 +37,7 @@ const Strength = styled(Box).attrs(() => ({
 const Warning = styled(Box).attrs(() => ({
   alignItems: 'flex-end',
   color: p => (p.passwordStrength <= 1 ? 'alertRed' : 'positiveGreen'),
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 3,
 }))``
 

@@ -66,7 +66,7 @@ const WarningDisplay = styled(ErrorDisplay)`
 const Base = styled.input.attrs(() => ({
   fontSize: 4,
 }))`
-  font-family: 'Open Sans';
+  font-family: 'Inter';
   font-weight: 600;
   ${fontFamily};
   ${fontSize};
@@ -87,7 +87,7 @@ const Base = styled.input.attrs(() => ({
 export const Textarea = styled.textarea.attrs(p => ({
   p: 2,
   fontSize: 4,
-  ff: p.ff || 'Open Sans|SemiBold',
+  ff: p.ff || 'Inter|SemiBold',
 }))`
   ${space};
   ${fontFamily};

@@ -61,7 +61,7 @@ const Item = styled.div`
 `
 
 const TextLink = styled.div`
-  font-family: 'Open Sans';
+  font-family: 'Inter';
   font-size: 12px;
   align-items: center;
   display: flex;
@@ -119,7 +119,7 @@ class AccountCrumb extends PureComponent<Props> {
     return (
       <Item key={item.account.id} isActive={isActive}>
         <CryptoCurrencyIcon size={16} currency={currency} />
-        <Text ff={`Open Sans|${isActive ? 'SemiBold' : 'Regular'}`} fontSize={4}>
+        <Text ff={`Inter|${isActive ? 'SemiBold' : 'Regular'}`} fontSize={4}>
           {getAccountName(item.account)}
         </Text>
         {isActive && (

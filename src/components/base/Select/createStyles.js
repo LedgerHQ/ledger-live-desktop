@@ -22,7 +22,7 @@ export default (
     ...styles,
     width,
     minWidth,
-    ...ff('Open Sans|SemiBold'),
+    ...ff('Inter|SemiBold'),
     height: small ? 34 : 40,
     minHeight: 'unset',
     borderRadius: isRight ? '0 4px 4px 0' : isLeft ? '4px 0 0 4px' : 4,
@@ -51,7 +51,7 @@ export default (
   }),
   option: (styles: Object, { isFocused, isSelected }: Object) => ({
     ...styles,
-    ...ff('Open Sans|Regular'),
+    ...ff('Inter|Regular'),
     fontSize: small ? 12 : 13,
     color: theme.colors.palette.text.shade100,
     padding: '10px 15px 10px 15px',
@@ -68,7 +68,7 @@ export default (
     ...(isSelected
       ? {
           background: 'unset !important',
-          ...ff('Open Sans|SemiBold'),
+          ...ff('Inter|SemiBold'),
         }
       : {}),
   }),

@@ -62,7 +62,7 @@ const ProgressCircle = ({ size, progress }: Props) => {
     <Container size={size}>
       <TextContainer>
         <Text
-          ff="Rubik|Regular"
+          ff="Inter|Regular"
           color={progress === 0 ? 'palette.text.shade80' : 'wallet'}
           fontSize={5}
         >

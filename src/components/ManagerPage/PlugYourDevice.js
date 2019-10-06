@@ -24,7 +24,7 @@ function PlugYourDevice(props: Props) {
         <Box
           textAlign="center"
           mb={1}
-          ff="Museo Sans|Regular"
+          ff="Inter|Regular"
           color="palette.text.shade100"
           fontSize={6}
         >
@@ -33,7 +33,7 @@ function PlugYourDevice(props: Props) {
         <Box
           textAlign="center"
           mb={5}
-          ff="Open Sans|Regular"
+          ff="Inter|Regular"
           color="palette.text.shade80"
           fontSize={4}
         >

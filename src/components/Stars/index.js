@@ -92,14 +92,14 @@ class Stars extends PureComponent<{
         <Placeholder>
           <img alt="stars placeholder" src={i('starsPlaceholder.png')} width="95" height="53" />
           <Text
-            ff="Open Sans|SemiBold"
+            ff="Inter|SemiBold"
             color="palette.text.shade60"
             fontSize={3}
             style={{ minWidth: 180 }}
           >
             <Trans i18nKey={'stars.placeholder'}>
               {'Accounts that you star on the'}
-              <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
+              <Text ff="Inter|SemiBold" color="palette.text.shade100">
                 {'Accounts'}
               </Text>
               {' page will now appear here!.'}

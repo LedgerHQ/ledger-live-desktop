@@ -168,7 +168,7 @@ class InputCurrency extends PureComponent<Props, State> {
     return (
       <Input
         {...this.props}
-        ff="Rubik"
+        ff="Inter"
         ref={this.props.forwardedRef}
         disabled={disabled}
         value={displayValue}

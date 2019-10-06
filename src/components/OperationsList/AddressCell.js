@@ -18,7 +18,7 @@ const Address = ({ value }: { value: string }) => {
   const right = value.slice(-quarter)
 
   return (
-    <Box horizontal color="palette.text.shade80" ff="Open Sans" fontSize={3}>
+    <Box horizontal color="palette.text.shade80" ff="Inter" fontSize={3}>
       <Left>{left}</Left>
       <Middle>{middle}</Middle>
       <Right>{right}</Right>

@@ -27,13 +27,15 @@ const mapStateToProps = (state, props) => {
   const total = accounts.reduce((total, a) => total.plus(a.balance), BigNumber(0))
 
   return {
-    accountDistribution: accounts.map(a => ({
-      account: a,
-      currency: getAccountCurrency(a),
-      distribution: a.balance.div(total).toFixed(2),
-      amount: a.balance,
-      countervalue: calculateCountervalueSelector(state)(getAccountCurrency(a), a.balance),
-    })),
+    accountDistribution: accounts
+      .map(a => ({
+        account: a,
+        currency: getAccountCurrency(a),
+        distribution: a.balance.div(total).toFixed(2),
+        amount: a.balance,
+        countervalue: calculateCountervalueSelector(state)(getAccountCurrency(a), a.balance),
+      }))
+      .sort((a, b) => b.distribution - a.distribution),
     counterValueCurrency: counterValueCurrencySelector,
   }
 }
@@ -49,7 +51,7 @@ class AccountDistribution extends PureComponent<Props, State> {
     return (
       <>
         <Box horizontal alignItems="center">
-          <Text ff="Museo Sans|Regular" fontSize={6} color="palette.text.shade100">
+          <Text ff="Inter|Regular" fontSize={6} color="palette.text.shade100">
             <Trans
               i18nKey="accountDistribution.header"
               values={{ count: accountDistribution.length }}
@@ -61,7 +63,7 @@ class AccountDistribution extends PureComponent<Props, State> {
               <Trans i18nKey="common.new" />
             </Tag>
           </TagWrapper>
-          <Text ff="Open Sans|SemiBold" fontSize={12} color="wallet">
+          <Text ff="Inter|SemiBold" fontSize={12} color="wallet">
             <Trans i18nKey="accountDistribution.notice" />
           </Text>
         </Box>

@@ -13,7 +13,7 @@ import PillsDaysCount from 'components/PillsDaysCount'
 import { PlaceholderLine } from './Placeholder'
 
 const Sub = styled(Box).attrs(() => ({
-  ff: 'Open Sans',
+  ff: 'Inter',
   fontSize: 4,
 }))`
   text-transform: lowercase;

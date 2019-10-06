@@ -31,7 +31,7 @@ const AppIcon = styled.img`
 `
 
 const AppName = styled(Box).attrs(() => ({
-  ff: 'Museo Sans|Regular',
+  ff: 'Inter|Regular',
   fontSize: 4,
   color: 'palette.text.shade100',
 }))`
@@ -57,7 +57,7 @@ function ManagerApp({ name, version, icon, onInstall, onUninstall, t }: Props) {
       <AppIcon src={iconUrl} />
       <Box flex="1" ml={3}>
         <AppName flex={1}>{name}</AppName>
-        <Text ff="Open Sans|Regular" fontSize={3} color="palette.text.shade60">
+        <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade60">
           {version}
         </Text>
       </Box>

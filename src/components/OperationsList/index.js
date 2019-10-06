@@ -36,7 +36,7 @@ import OperationC from './Operation'
 const ShowMore = styled(Box).attrs(() => ({
   horizontal: true,
   flow: 1,
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 3,
   justify: 'center',
   align: 'center',
@@ -121,7 +121,7 @@ export class OperationsList extends PureComponent<Props, State> {
         {title && (
           <Text
             color="palette.text.shade100"
-            ff="Museo Sans"
+            ff="Inter|Medium"
             fontSize={6}
             data-e2e="dashboard_OperationList"
           >
@@ -181,7 +181,7 @@ export class OperationsList extends PureComponent<Props, State> {
           </ShowMore>
         ) : (
           <Box p={6} align="center">
-            <Text ff="Open Sans" fontSize={3}>
+            <Text ff="Inter" fontSize={3}>
               {t('operationList.noMoreOperations')}
             </Text>
           </Box>

@@ -33,7 +33,7 @@ class AccountsHeader extends PureComponent<Props> {
       <Box horizontal style={{ paddingBottom: 32 }}>
         <Box
           grow
-          ff="Museo Sans|Regular"
+          ff="Inter|SemiBold"
           fontSize={7}
           color="palette.text.shade100"
           data-e2e="accountsPage_title"

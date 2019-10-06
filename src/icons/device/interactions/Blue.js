@@ -225,7 +225,7 @@ const BootloaderScreen = () => (
       <rect width="86" height="18" y="27" fill="#EDEDED" rx="9" />
       <rect width="86" height="18" fill="#41CCB4" rx="9" />
     </g>
-    <text fill="#4D4D4D" fontFamily="OpenSans-Extrabold, Open Sans" fontSize="7" fontWeight="600">
+    <text fill="#4D4D4D" fontFamily="OpenSans-Extrabold, Inter" fontSize="7" fontWeight="600">
       <tspan x="36.898" y="114.5">
         BOOTLOADER MODE
       </tspan>

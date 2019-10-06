@@ -47,7 +47,7 @@ class DeviceInfos extends PureComponent<Props, State> {
 
     const title = (
       <Text>
-        <Text ff="Museo Sans|Bold">{`${deviceInfos.productName}`}</Text>
+        <Text ff="Inter|Bold">{`${deviceInfos.productName}`}</Text>
       </Text>
     )
     return (

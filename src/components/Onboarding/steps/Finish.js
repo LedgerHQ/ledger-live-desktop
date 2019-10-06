@@ -150,7 +150,7 @@ export function SocialMediaBox({ socMed }: { socMed: SocMed }) {
 }
 
 export const FollowUsDesc = styled(Box).attrs(() => ({
-  ff: 'Museo Sans|Regular',
+  ff: 'Inter|Regular',
   fontSize: 4,
   textAlign: 'center',
   color: 'palette.text.shade60',

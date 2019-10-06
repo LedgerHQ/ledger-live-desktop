@@ -17,7 +17,7 @@ import Box from 'components/base/Box'
 import type { State } from 'reducers'
 
 const InputRight = styled(Box).attrs(() => ({
-  ff: 'Rubik',
+  ff: 'Inter',
   color: 'palette.text.shade80',
   fontSize: 4,
   justifyContent: 'center',
@@ -25,7 +25,7 @@ const InputRight = styled(Box).attrs(() => ({
 }))``
 
 const InputCenter = styled(Box).attrs(() => ({
-  ff: 'Rubik',
+  ff: 'Inter',
   color: 'palette.text.shade80',
   fontSize: 4,
   alignItems: 'center',

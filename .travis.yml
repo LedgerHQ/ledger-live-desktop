@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "8.15"
+os: windows
+env:
+  - YARN_GPG=no
+cache:
+  directories:
+    - node_modules
+before_install:
+  - choco install yarn
+script:
+  - yarn install
+  - yarn ci
+  - yarn dist

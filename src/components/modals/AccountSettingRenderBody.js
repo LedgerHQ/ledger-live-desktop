@@ -316,6 +316,7 @@ const AdvancedLogsContainer = styled.div`
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow: auto;
+  user-select: auto;
 `
 
 export default compose(
@@ -345,7 +346,7 @@ export const Container = styled(Box).attrs(() => ({
 `
 
 export const OptionRowDesc = styled(Box).attrs(() => ({
-  ff: 'Open Sans|Regular',
+  ff: 'Inter|Regular',
   fontSize: 3,
   textAlign: 'left',
   lineHeight: 1.69,
@@ -353,7 +354,7 @@ export const OptionRowDesc = styled(Box).attrs(() => ({
   shrink: 1,
 }))``
 export const OptionRowTitle = styled(Box).attrs(() => ({
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   color: 'palette.text.shade100',
   fontSize: 4,
   textAlign: 'left',

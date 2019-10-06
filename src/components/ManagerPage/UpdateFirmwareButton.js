@@ -17,7 +17,7 @@ type Props = {
 const UpdateFirmwareButton = ({ t, firmware, onClick }: Props) =>
   firmware ? (
     <Fragment>
-      <Text ff="Open Sans|Regular" fontSize={4} style={{ marginLeft: 'auto', marginRight: 15 }}>
+      <Text ff="Inter|Regular" fontSize={4} style={{ marginLeft: 'auto', marginRight: 15 }}>
         {t('manager.firmware.latest', { version: getCleanVersion(firmware.final.name) })}
       </Text>
       <Button

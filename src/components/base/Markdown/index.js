@@ -7,7 +7,7 @@ import { shell } from 'electron'
 import Box from 'components/base/Box'
 
 export const Notes = styled(Box).attrs(() => ({
-  ff: 'Open Sans',
+  ff: 'Inter',
   fontSize: 4,
   color: 'palette.text.shade80',
   flow: 4,

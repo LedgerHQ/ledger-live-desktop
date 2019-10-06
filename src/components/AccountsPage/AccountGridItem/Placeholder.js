@@ -37,7 +37,7 @@ class Placeholder extends PureComponent<{
             <img alt="" src={i('empty-account-tile.svg')} />
           </Box>
           <Box
-            ff="Open Sans"
+            ff="Inter"
             fontSize={3}
             color="palette.text.shade60"
             pb={2}

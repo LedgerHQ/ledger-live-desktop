@@ -10,68 +10,44 @@ import { radii } from 'styles/theme'
 import reset from './reset'
 
 const { STORYBOOK_ENV, NODE_ENV } = process.env
-const COPYRIGHTED_FONTS = ['Museo Sans']
+const COPYRIGHTED_FONTS = []
 
 const fonts = {
-  'Open Sans': [
+  Inter: [
     {
       style: 'normal',
-      weight: 700,
-      file: 'opensans/OpenSans-Bold',
-    },
-    {
-      style: 'normal',
-      weight: 800,
-      file: 'opensans/OpenSans-ExtraBold',
+      weight: 100,
+      file: 'inter/Inter-ExtraLight-BETA',
     },
     {
       style: 'normal',
       weight: 300,
-      file: 'opensans/OpenSans-Light',
+      file: 'inter/Inter-Light-BETA',
     },
     {
       style: 'normal',
       weight: 400,
-      file: 'opensans/OpenSans-Regular',
+      file: 'inter/Inter-Regular',
+    },
+    {
+      style: 'normal',
+      weight: 500,
+      file: 'inter/Inter-Medium',
     },
     {
       style: 'normal',
       weight: 600,
-      file: 'opensans/OpenSans-SemiBold',
-    },
-  ],
-  'Museo Sans': [
-    {
-      style: 'normal',
-      weight: 100,
-      file: 'museosans/MuseoSans-ExtraLight',
-    },
-    {
-      style: 'normal',
-      weight: 300,
-      file: 'museosans/MuseoSans-Light',
-    },
-    {
-      style: 'normal',
-      weight: 500,
-      file: 'museosans/MuseoSans-Regular',
+      file: 'inter/Inter-SemiBold',
     },
     {
       style: 'normal',
       weight: 700,
-      file: 'museosans/MuseoSans-Bold',
+      file: 'inter/Inter-Bold',
     },
     {
       style: 'normal',
       weight: 900,
-      file: 'museosans/MuseoSans-ExtraBold',
-    },
-  ],
-  Rubik: [
-    {
-      style: 'normal',
-      weight: 500,
-      file: 'rubik/Rubik-Regular',
+      file: 'inter/Inter-ExtraBold',
     },
   ],
 }

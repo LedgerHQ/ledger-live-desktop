@@ -48,7 +48,7 @@ const AdvancedOptions = ({ onChange, account, transaction, status }: Props) => {
       </Box>
       <Box grow>
         <Input
-          ff="Rubik"
+          ff="Inter"
           warning={gasLimitWarning}
           error={gasLimitError}
           value={gasLimit.toString()}

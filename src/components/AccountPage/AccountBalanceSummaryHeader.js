@@ -43,7 +43,7 @@ const Wrapper = styled(Box)`
 
 const SwapButton = styled(Tabbable).attrs(() => ({
   color: 'palette.text.shade100',
-  ff: 'Museo Sans',
+  ff: 'Inter',
   fontSize: 7,
 }))`
   align-items: center;

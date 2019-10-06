@@ -224,7 +224,7 @@ class AccountRowItem extends PureComponent<Props, State> {
           )}
           {showTokensIndicator && !disabled && tokens && (
             <TokenShowMoreIndicator expanded={expanded} onClick={this.toggleAccordion}>
-              <Text color="wallet" ff="Open Sans|SemiBold" fontSize={4}>
+              <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
                 <Trans
                   i18nKey={expanded ? 'tokensList.hideTokens' : 'tokensList.seeTokens'}
                   values={{ tokenCount: tokens.length }}

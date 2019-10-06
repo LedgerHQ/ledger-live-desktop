@@ -90,7 +90,7 @@ const Item = ({
           active={active}
           onClick={onAccountClick}
         >
-          <Box horizontal ff="Open Sans|SemiBold" flex={1} flow={3} alignItems="center">
+          <Box horizontal ff="Inter|SemiBold" flex={1} flow={3} alignItems="center">
             <ParentCryptoCurrencyIconWrapper
               collapsed={collapsed}
               isToken={account.type === 'TokenAccount'}

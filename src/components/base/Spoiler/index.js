@@ -20,7 +20,7 @@ type State = {
 }
 
 const Title = styled(Text).attrs(p => ({
-  ff: p.ff ? p.ff : 'Museo Sans|Bold',
+  ff: p.ff ? p.ff : 'Inter|Bold',
   fontSize: p.fontSize ? p.fontSize : 2,
   color: p.color ? p.color : 'palette.text.shade100',
   tabIndex: 0,

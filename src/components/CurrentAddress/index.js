@@ -41,7 +41,7 @@ const Address = styled(Box).attrs(() => ({
   bg: 'palette.background.paper',
   borderRadius: 1,
   color: 'palette.text.shade100',
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 4,
   mt: 2,
   px: 4,
@@ -65,7 +65,7 @@ const CopyFeedback = styled(Box).attrs(() => ({
 const Label = styled(Box).attrs(() => ({
   alignItems: 'center',
   color: 'palette.text.shade80',
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 4,
   flow: 1,
   horizontal: true,
@@ -128,7 +128,7 @@ const FooterButton = ({
   <Box alignItems="center" justifyContent="center">
     <FooterButtonWrapper onClick={onClick}>
       {icon}
-      <Box fontSize={3} ff="Museo Sans|Bold" mt={1}>
+      <Box fontSize={3} ff="Inter|Bold" mt={1}>
         {label}
       </Box>
     </FooterButtonWrapper>
@@ -221,7 +221,7 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
             shrink
             fontSize={12}
             color={isAddressVerified === false ? 'alertRed' : 'palette.text.shade100'}
-            ff="Open Sans"
+            ff="Inter"
           >
             {isAddressVerified === null
               ? t('currentAddress.messageIfUnverified', { currencyName })

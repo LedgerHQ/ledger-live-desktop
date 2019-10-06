@@ -20,7 +20,7 @@ const Container = styled(Box).attrs(() => ({
 }))``
 
 const Title = styled(Box).attrs(() => ({
-  fontFamily: 'Museo Sans',
+  fontFamily: 'Inter',
   fontSize: 6,
   color: 'palette.text.shade100',
 }))`
@@ -38,7 +38,7 @@ function StepConfirmation({ t, error }: StepProps) {
           color="palette.text.shade100"
           mt={4}
           fontSize={5}
-          ff="Museo Sans|Regular"
+          ff="Inter|Regular"
           textAlign="center"
           style={{ maxWidth: 350 }}
         >
@@ -48,7 +48,7 @@ function StepConfirmation({ t, error }: StepProps) {
           color="palette.text.shade80"
           mt={4}
           fontSize={4}
-          ff="Open Sans"
+          ff="Inter"
           textAlign="center"
           style={{ maxWidth: 350 }}
         >
@@ -66,7 +66,7 @@ function StepConfirmation({ t, error }: StepProps) {
       </Box>
       <Title>{t('manager.modal.successTitle')}</Title>
       <Box mt={2} mb={5}>
-        <Text ff="Open Sans|Regular" fontSize={4} color="palette.text.shade80">
+        <Text ff="Inter|Regular" fontSize={4} color="palette.text.shade80">
           {t('manager.modal.successText')}
         </Text>
       </Box>

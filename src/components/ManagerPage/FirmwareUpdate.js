@@ -123,7 +123,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
           </Box>
           <Box>
             <Box horizontal align="center">
-              <Text ff="Open Sans|SemiBold" fontSize={4} color="palette.text.shade100">
+              <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade100">
                 {deviceSpecs.productName}
               </Text>
               <Box color="wallet" ml={2}>
@@ -132,7 +132,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
                 </Tooltip>
               </Box>
             </Box>
-            <Text ff="Open Sans|SemiBold" fontSize={2}>
+            <Text ff="Inter|SemiBold" fontSize={2}>
               {t('manager.firmware.installed', {
                 version: deviceInfo.version,
               })}

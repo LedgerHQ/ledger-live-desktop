@@ -54,7 +54,7 @@ class BalanceSummary extends PureComponent<Props> {
       <Fragment>
         <FormattedVal fontSize={5} color="palette.text.shade100" showCode {...data[0]} />
         <FormattedVal fontSize={4} color="warmGrey" showCode {...data[1]} />
-        <Box ff="Open Sans|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
+        <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
           {moment(d.date).format('LL')}
         </Box>
       </Fragment>
@@ -92,7 +92,7 @@ class BalanceSummary extends PureComponent<Props> {
           />
         </Box>
 
-        <Box ff="Open Sans" fontSize={4} color="palette.text.shade80" pt={6}>
+        <Box px={5} ff="Inter" fontSize={4} color="palette.text.shade80" pt={6}>
           <Chart
             id={chartId}
             color={chartColor}

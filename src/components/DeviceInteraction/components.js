@@ -21,7 +21,7 @@ import IconSmoothBorders from 'icons/SmoothBorders'
 
 export const DeviceInteractionStepContainer = styled(Box).attrs(() => ({
   horizontal: true,
-  ff: 'Open Sans',
+  ff: 'Inter',
   fontSize: 3,
   color: 'palette.text.shade80',
 }))`
@@ -127,14 +127,14 @@ export const ErrorDescContainer = translate()(
         color="alertRed"
         align="flex-start"
         cursor="text"
-        ff="Open Sans|SemiBold"
+        ff="Inter|SemiBold"
         style={{ maxWidth: 500 }}
         {...p}
       >
         <IconExclamationCircle size={16} />
         <Box ml={2} mr={1} shrink grow style={{ maxWidth: 300 }}>
           <TranslatedError error={error} />
-          <Box ff="Open Sans|Regular" mt={1}>
+          <Box ff="Inter|Regular" mt={1}>
             <TranslatedError error={error} field="description" />
           </Box>
         </Box>

@@ -64,7 +64,7 @@ const FeeSliderField = ({ value, onChange, unit, error, defaultValue }: Props) =
   return (
     <GenericContainer
       header={
-        <div style={{ fontFamily: 'Rubik', textAlign: 'right' }}>
+        <div style={{ fontFamily: 'Inter', textAlign: 'right' }}>
           <Text color="#999" fontSize={4}>
             <CurrencyUnitValue value={constraintValue} unit={unit} />
           </Text>{' '}

@@ -12,7 +12,7 @@ import { CurrencyCircleIcon } from '../../../base/CurrencyBadge'
 import type { StepProps } from '../index'
 
 const Title = styled(Box).attrs(() => ({
-  ff: 'Museo Sans',
+  ff: 'Inter',
   fontSize: 5,
   mt: 2,
   color: 'palette.text.shade100',
@@ -21,7 +21,7 @@ const Title = styled(Box).attrs(() => ({
 `
 
 const Text = styled(Box).attrs(() => ({
-  ff: 'Open Sans',
+  ff: 'Inter',
   fontSize: 4,
   mt: 2,
 }))`

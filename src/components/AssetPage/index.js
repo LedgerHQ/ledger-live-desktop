@@ -1,11 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import {
-  flattenAccounts,
-  getAccountCurrency,
-  getAccountUnit,
-} from '@ledgerhq/live-common/lib/account'
+import { getAccountCurrency, getAccountUnit } from '@ledgerhq/live-common/lib/account'
 import { findCurrencyByTicker, getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types'
 import { compose } from 'redux'
@@ -24,6 +20,7 @@ import {
   countervalueFirstSelector,
   selectedTimeRangeSelector,
 } from '../../reducers/settings'
+import { flattenSortAccountsEnforceHideEmptyTokenSelector } from '../../actions/general'
 import AssetHeader from './AssetHeader'
 
 type Props = {
@@ -57,9 +54,9 @@ const mapStateToProps = (state, props) => ({
   counterValue: counterValueCurrencySelector(state),
   allAccounts: accountsSelector(state),
   countervalueFirst: countervalueFirstSelector(state),
-  accounts: flattenAccounts(accountsSelector(state), {
-    enforceHideEmptySubAccounts: true,
-  }).filter(a => getAccountCurrency(a) === findCurrencyByTicker(props.match.params.assetTicker)),
+  accounts: flattenSortAccountsEnforceHideEmptyTokenSelector(state).filter(
+    a => getAccountCurrency(a) === findCurrencyByTicker(props.match.params.assetTicker),
+  ),
 })
 
 class AssetPage extends PureComponent<Props, State> {

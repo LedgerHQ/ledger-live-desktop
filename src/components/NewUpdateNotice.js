@@ -62,7 +62,7 @@ class NewUpdateNotice extends PureComponent<{
           <IconCross size={12} />
         </NewUpdateNoticeDismissButton>
         <Text
-          ff="Open Sans|SemiBold"
+          ff="Inter|SemiBold"
           color="palette.background.paper"
           fontSize="10px"
           style={{
@@ -72,7 +72,7 @@ class NewUpdateNotice extends PureComponent<{
         >
           {title}
         </Text>
-        <Text ff="Open Sans" color="palette.background.paper" fontSize="10px">
+        <Text ff="Inter" color="palette.background.paper" fontSize="10px">
           {description}
         </Text>
       </NewUpdateNoticeWrapper>

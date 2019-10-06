@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import {
   getAccountCurrency,
@@ -14,6 +14,7 @@ import FormattedVal from 'components/base/FormattedVal'
 import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
 import AccountSyncStatusIndicator from '../AccountSyncStatusIndicator'
 import Star from '../../Stars/Star'
+import Tooltip from '../../base/Tooltip'
 
 class HeadText extends PureComponent<{
   title: string,
@@ -21,14 +22,18 @@ class HeadText extends PureComponent<{
 }> {
   render() {
     const { title, name } = this.props
+    const MaybeTooltip = name.length > 10 ? Tooltip : Fragment
+
     return (
       <Box grow>
         <Box style={{ textTransform: 'uppercase' }} fontSize={10} color="palette.text.shade80">
           {title}
         </Box>
-        <Ellipsis fontSize={13} color="palette.text.shade100">
-          {name}
-        </Ellipsis>
+        <MaybeTooltip render={() => name}>
+          <Ellipsis fontSize={13} color="palette.text.shade100">
+            {name}
+          </Ellipsis>
+        </MaybeTooltip>
       </Box>
     )
   }
@@ -59,7 +64,7 @@ class Header extends PureComponent<{
 
     return (
       <Box flow={4}>
-        <Box horizontal ff="Open Sans|SemiBold" flow={3} alignItems="center">
+        <Box horizontal ff="Inter|SemiBold" flow={3} alignItems="center">
           <ParentCryptoCurrencyIcon currency={currency} withTooltip />
           <HeadText name={name} title={title} />
           <AccountSyncStatusIndicator

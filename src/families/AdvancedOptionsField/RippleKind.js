@@ -45,7 +45,7 @@ const AdvancedOptions = ({ onChange, account, transaction }: Props) => {
             <Trans i18nKey="send.steps.amount.rippleTag" />
           </span>
         </Label>
-        <Input ff="Rubik" value={String(transaction.tag || '')} onChange={onChangeTag} />
+        <Input ff="Inter" value={String(transaction.tag || '')} onChange={onChangeTag} />
       </Box>
     </Box>
   )

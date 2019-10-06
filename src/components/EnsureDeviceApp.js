@@ -28,7 +28,7 @@ import { WrongDeviceForAccount } from '@ledgerhq/errors'
 import { getCurrentDevice } from 'reducers/devices'
 
 const usbIcon = <IconUsb size={16} />
-const Bold = props => <Text ff="Open Sans|SemiBold" {...props} />
+const Bold = props => <Text ff="Inter|SemiBold" {...props} />
 
 const mapStateToProps = state => ({
   device: getCurrentDevice(state),

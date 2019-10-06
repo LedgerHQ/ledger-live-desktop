@@ -19,11 +19,21 @@ import { accountsSelector } from 'reducers/accounts'
 import { createStructuredSelector } from 'reselect'
 import type { AccountLike, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
+import styled from 'styled-components'
+
 import Ellipsis from '../base/Ellipsis'
 
 const mapStateToProps = createStructuredSelector({
   accounts: accountsSelector,
 })
+
+const Tick = styled.div`
+  position: absolute;
+  top: -10px;
+  height: 40px;
+  width: 1px;
+  background: ${p => p.theme.colors.palette.divider};
+`
 
 const tokenTick = (
   <div
@@ -31,15 +41,7 @@ const tokenTick = (
       padding: '0px 6px',
     }}
   >
-    <div
-      style={{
-        position: 'absolute',
-        top: -10,
-        height: 40,
-        width: 1,
-        background: '#e8e8e8',
-      }}
-    />
+    <Tick />
   </div>
 )
 
@@ -95,7 +97,7 @@ const AccountOption = React.memo(
       <Box grow horizontal alignItems="center" flow={2} style={{ opacity: disabled ? 0.2 : 1 }}>
         {!isValue && account.type === 'TokenAccount' ? tokenTick : null}
         <CryptoCurrencyIcon currency={currency} size={16} />
-        <Ellipsis ff="Open Sans|SemiBold" color="palette.text.shade100" fontSize={4}>
+        <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
           {name}
         </Ellipsis>
         <Box>
