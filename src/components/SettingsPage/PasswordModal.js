@@ -103,13 +103,7 @@ class PasswordModal extends PureComponent<Props, State> {
                   ? t('password.changePassword.subTitle')
                   : t('password.setPassword.subTitle')}
               </Box>
-              <Box
-                ff="Inter"
-                color="palette.text.shade80"
-                fontSize={4}
-                textAlign="center"
-                px={4}
-              >
+              <Box ff="Inter" color="palette.text.shade80" fontSize={4} textAlign="center" px={4}>
                 {t('password.setPassword.desc')}
               </Box>
               <PasswordForm

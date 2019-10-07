@@ -53,7 +53,7 @@ class AccountDistribution extends PureComponent<Props, State> {
     return (
       <>
         <Box horizontal alignItems="center">
-          <Text ff="Inter|Regular" fontSize={6} color="palette.text.shade100">
+          <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
             <Trans
               i18nKey="accountDistribution.header"
               values={{ count: accountDistribution.length }}

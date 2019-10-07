@@ -28,8 +28,8 @@ export function generateMargins(hideAxis) {
   const margins = {
     top: hideAxis ? 5 : 10,
     bottom: hideAxis ? 5 : 40,
-    right: hideAxis ? 5 : 10,
-    left: hideAxis ? 5 : 40,
+    right: hideAxis ? 0 : 10,
+    left: hideAxis ? 0 : 40,
   }
 
   // FIXME: Forced to "use" margins here to prevent babel/uglify to believe

@@ -89,7 +89,7 @@ class AssetDistribution extends PureComponent<Props, State> {
       <>
         <Box horizontal alignItems="center">
           <Text
-            ff="Inter|Regular"
+            ff="Inter|Medium"
             fontSize={6}
             color="palette.text.shade100"
             data-e2e="title_assetDistribution"
