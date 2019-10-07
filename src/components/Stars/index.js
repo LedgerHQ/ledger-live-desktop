@@ -68,7 +68,7 @@ class Stars extends PureComponent<{
               {starredAccounts.map((account: Account | TokenAccount, i) => (
                 <SideBarTooltip
                   text={account.type === 'Account' ? account.name : account.token.name}
-                  enabled={collapsed}
+                  enabled={!provided.isDragging && collapsed}
                   key={account.id}
                 >
                   <Item
