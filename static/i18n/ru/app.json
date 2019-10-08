@@ -8,7 +8,7 @@
     "confirm": "Подтвердить",
     "connecting": "Подключение..",
     "cancel": "Отменить",
-    "getSupport": "Get support",
+    "getSupport": "Поддержка",
     "delete": "Удалить",
     "launch": "Запустить",
     "continue": "Продолжить",
@@ -119,12 +119,12 @@
   },
   "account": {
     "lastOperations": "Последние операции",
-    "contractAddress": "Contract:",
-    "openInExplorer": "Open in explorer",
+    "contractAddress": "Контракт:",
+    "openInExplorer": "Открыть в обозревателе блоков",
     "emptyState": {
       "title": "Еще не получили криптоактивы?",
       "desc": "Убедитесь в том, что на устройстве установлено приложение <1><0>{{managerAppName}}</0></1>, и начните получать.",
-      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
+      "descToken": "Убедитесь, что приложение <1><0>{{managerAppName}}</0></1> установлено и начните получать <3><0>{{ticker}}</0></3> и <5><0>{{tokenList}}</0> токены</5>",
       "buttons": {
         "receiveFunds": "Получить"
       }
@@ -169,12 +169,12 @@
       "star": "Добавить в избранное",
       "receive": "Получить",
       "send": "Отправить",
-      "edit": "Edit Account"
+      "edit": "Изменить аккаунт"
     }
   },
   "banners": {
     "promoteMobile": "Наслаждайтесь использованием Ledger Live теперь и на мобильных устройствах с {{productName}}",
-    "migrate": "Ledger Live accounts update available",
+    "migrate": "Доступно обновление учётных записей Ledger Live",
     "genericTerminatedCrypto": "{{coinName}} больше не поддерживается"
   },
   "dashboard": {
@@ -198,15 +198,15 @@
   },
   "currentAddress": {
     "title": "Текущий адрес",
-    "for": "Address for <1><0>{{name}}</0></1>",
-    "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
+    "for": "Адрес для <1><0>{{name}}</0></1>",
+    "messageIfUnverified": "Пожалуйста сравните {{currencyName}} адрес который отображается в Ledger Live и на вашем устройстве Ledger. Он должен совпадать",
     "messageIfAccepted": "Адрес подтвержден. Если он был вставлен из буфера обмена или введен в результате сканирования QR-кода, проверьте его еще раз.",
     "messageIfSkipped": "На используемом устройстве Ledger адрес {{currencyName}} не был подтвержден. Для обеспечения оптимального уровня безопасности проверьте его."
   },
   "deviceConnect": {
     "dashboard": "Перейдите на <1>панель мониторинга</1> на устройстве.",
     "step1": "Подключите и разблокируйте <1>устройство Ledger</1>.",
-    "step2": "Open the <1><0>{{managerAppName}}</0></1> app on your device",
+    "step2": "Откройте приложение <1><0>{{managerAppName}}</0></1> на вашем устройстве",
     "step3": "Разрешите приложению <1>Ledger Manager</1> доступ к своему устройству."
   },
   "emptyState": {
