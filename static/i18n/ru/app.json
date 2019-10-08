@@ -290,16 +290,16 @@
       },
       "scanning": {
         "title": "{{currencyName}} в процессе обновления...",
-        "description": "Please wait while your accounts are updated"
+        "description": "Пожалуйста, подождите, пока ваши аккаунты обновлены"
       },
       "finished-empty": {
-        "title": "{{currencyName}} update incomplete",
-        "description": "No {{currencyName}} accounts to update"
+        "title": "{{currencyName}} обновление не завершено",
+        "description": "Нет учётных записей {{currencyName}} для обновления"
       }
     },
     "cta": {
       "startUpdate": "Начать обновление",
-      "nextCurrency": "Continue with {{currency}} update"
+      "nextCurrency": "Продолжить обновление {{currency}}"
     }
   },
   "addAccounts": {
@@ -313,7 +313,7 @@
     "connectDevice": {
       "desc": "Чтобы добавить счета <1><0>{{currencyName}}</0></1>, выполните перечисленные ниже действия."
     },
-    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
+    "tokensTip": "{{token}} ({{ticker}}) является токеном {{tokenType}}. Вы можете получать токены непосредственно на учетной записи {{currency}}.",
     "accountToImportSubtitle_plural": "Добавить существующие счета",
     "selectAll": "Выбрать все ({{count}})",
     "unselectAll": "Отменить выбор всех ({{count}})",
@@ -337,16 +337,16 @@
     },
     "sections": {
       "importable": {
-        "title": "Add existing account"
+        "title": "Добавить существующий аккаунт"
       },
       "creatable": {
-        "title": "Add new account"
+        "title": "Добавить новый аккаунт"
       },
       "imported": {
-        "title": "Accounts already in portfolio ({{count}})"
+        "title": "Аккаунты уже в портфеле ({{count}})"
       },
       "migrate": {
-        "title": "Accounts to update"
+        "title": "Аккаунты для обновления"
       }
     }
   },
@@ -366,62 +366,62 @@
     "viewOperation": "Просмотреть в Explorer",
     "showMore": "Показать больше {{recipients}}",
     "showLess": "Показать меньше",
-    "tokenOperations": "Token operations",
-    "tokenTooltip": "This operation is related to the following token operations",
-    "internalOperations": "Internal operations",
-    "internalOpTooltip": "This operation has internal operations",
-    "details": "{{ currency }} details",
-    "multipleAddresses": "Why multiple addresses?"
+    "tokenOperations": "Операции токена",
+    "tokenTooltip": "Эта операция связана с следующими операциями токена",
+    "internalOperations": "Внутренние операции",
+    "internalOpTooltip": "Эта операция имеет внутренние операции",
+    "details": "{{ currency }} подробности",
+    "multipleAddresses": "Почему несколько адресов?"
   },
   "operationList": {
     "noMoreOperations": "Вот и все"
   },
   "manager": {
     "yourDeviceIsGenuine": "Ваше устройство подлинное",
-    "goToAccounts": "Go to accounts",
-    "intallEthApp": "Install Ethereum app",
+    "goToAccounts": "Перейти к аккаунтам",
+    "intallEthApp": "Установить приложение Ethereum",
     "apps": {
       "install": "Установить",
       "all": "Каталог приложений",
       "installing": "Установка {{app}}...",
       "uninstalling": "Удаление {{app}}...",
-      "installSuccess": "{{app}} was successfully installed",
-      "unsupportedSuccess": "Learn how to use {{app}}",
+      "installSuccess": "{{app}} успешно установлено",
+      "unsupportedSuccess": "Узнайте, как использовать {{app}}",
       "uninstallSuccess": "{{app}} удалено",
-      "supportedCurrency": "{{app}} is now installed on your {{device}}.",
-      "supportedCurrencyNeedAccount": "{{app}} is now installed on your {{device}}. You need to add a {{currency}} account in order to receive and manage assets.",
-      "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
+      "supportedCurrency": "{{app}} теперь установлен на вашем {{device}}.",
+      "supportedCurrencyNeedAccount": "{{app}} теперь установлен на вашем {{device}}. Вам нужно добавить аккаунт {{currency}} для получения и управления активами.",
+      "unsupportedCurrency": "Поддержка {{app}} не интегрирована в Ledger Live. Нажмите кнопку, чтобы научиться использовать его.",
       "help": "Проверьте, какие приложения уже установлены на устройстве.",
-      "installed": "App installed",
-      "uninstalled": "App uninstalled",
-      "addAccount": "Add {{name}} account",
-      "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
-      "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>"
+      "installed": "Приложение установлено",
+      "uninstalled": "Приложение удалено",
+      "addAccount": "Добавить аккаунт {{name}}",
+      "noAppNeededForToken": "Установить приложение {{appName}} для {{tokenName}}",
+      "tokenAppDisclaimer": "{{tokenName}} это токен {{tokenType}}, использующий приложение {{appName}}. Чтобы управлять {{tokenName}}, <1>установить {{appName}} приложение</1> и отправить токены <3>на ваш {{appName}} аккаунт</3>"
     },
     "firmware": {
       "installed": "Версия встроенного ПО {{version}}",
       "update": "Обновить",
       "latest": "Доступно встроенное ПО версии {{version}}.",
       "disclaimerTitle": "Вы собираетесь установить <1><0>встроенное ПО версии {{version}}</0></1>.",
-      "disclaimerAppDelete": "Uninstall all apps from your device. This does not affect your crypto assets.",
-      "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
-      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
+      "disclaimerAppDelete": "Чтобы освободить место, удалите некоторые приложения. Это не повлияет на криптоактивы.",
+      "disclaimerAppReinstall": "В качестве предосторожности убедитесь, что ваша карточка восстановления цела и невредима.",
+      "downloadingUpdateDesc": "Подождите пока программа установки загрузится"
     },
     "modal": {
       "steps": {
-        "downloadingUpdate": "Downloading update",
+        "downloadingUpdate": "Заргузка обновления",
         "updateMCU": "Обновление встроенного ПО",
-        "reset": "Prepare device",
+        "reset": "Подготовка устройства",
         "osu": "Установка обновления ОС...",
         "flash-mcu": "Обновление микроконтроллера...",
         "flash-bootloader": "Обновление загрузчика...",
         "firmware": "Обновление встроенного ПО...",
-        "flash": "Preparing your device..."
+        "flash": "Подготовка вашего устройства..."
       },
       "confirmIdentifier": "Проверить идентификатор",
       "confirmIdentifierText": "Убедитесь в том, что идентификатор на устройстве совпадает с приведенным ниже идентификатором. Для подтверждения нажмите правую кнопку и введите PIN-код.",
       "identifier": "Идентификатор",
-      "mcuTitle": "Finalize update",
+      "mcuTitle": "Завершить обновление",
       "mcuFirst": "Отсоедините USB-кабель от устройства.",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Дождитесь завершения обновления.",
@@ -460,18 +460,18 @@
       "chooseAccount": {
         "title": "Счет",
         "label": "Счет для зачисления средств",
-        "parentAccount": "1. Select {{currencyName}} account",
-        "token": "2. Select a token"
+        "parentAccount": "1. Выберите аккаунт {{currencyName}}",
+        "token": "2. Выберите токен"
       },
       "connectDevice": {
         "title": "Устройство",
         "withoutDevice": "Нет устройства?",
-        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
+        "tokensTip": "* Откройте приложение {{currency}} для управления токенами {{token}}"
       },
       "confirmAddress": {
         "title": "Проверка",
         "action": "Проверить адрес на устройстве",
-        "text": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
+        "text": "Пожалуйста сравните {{currencyName}} адрес который отображается в Ledger Live и на вашем устройстве Ledger. Он должен совпадать",
         "support": "Обратная связь"
       },
       "receiveFunds": {
@@ -489,7 +489,7 @@
         "recipientAddress": "Адрес получателя",
         "amount": "Сумма",
         "fees": "Комиссия за пользование сетью",
-        "useMax": "Max",
+        "useMax": "Максимум",
         "advancedOptions": "Дополнительные параметры",
         "useRBF": "Использовать транзакцию Replace-by-Fee (замена с повышением комиссии)",
         "message": "Оставьте сообщение (140)",
@@ -497,8 +497,8 @@
         "ethereumGasLimit": "Лимит газа",
         "unitPerByte": "{{unit}} на байт",
         "highFeeModal": {
-          "title": "High fees",
-          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
+          "title": "Высокие комиссии",
+          "desc": "Будьте осторожны, плата за транзакцию (<1><0>{{fees}}</0></1>) составляет более 10% от суммы (<3><0>{{amount}}</0></3>). Продолжить?"
         }
       },
       "connectDevice": {
@@ -519,7 +519,7 @@
         "pending": {
           "title": "Трансляция транзакции..."
         },
-        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        "broadcastError": "Возможно, ваша транзакция не прошла. Пожалуйста, проверьте еще раз через несколько минут, чтобы убедиться, что транзакция не прошла, прежде чем попытаться снова."
       }
     }
   },
@@ -528,47 +528,47 @@
     "version": "Ledger Live {{versionNb}}"
   },
   "distribution": {
-    "asset": "Asset",
-    "price": "Price",
-    "distribution": "Distribution",
-    "amount": "Amount",
-    "value": "Value",
-    "showAll": "Show all",
-    "showLess": "Show less",
-    "header": "Asset distribution ({{count}})",
-    "notice": "You can now click on assets for more details!"
+    "asset": "Актив",
+    "price": "Цена",
+    "distribution": "Распределение",
+    "amount": "Сумма",
+    "value": "Значение",
+    "showAll": "Показать все",
+    "showLess": "Показать меньше",
+    "header": "Распределение активов ({{count}})",
+    "notice": "Теперь вы можете нажать на активы для получения более подробной информации!"
   },
   "accountDistribution": {
-    "account": "Account",
-    "price": "Price",
+    "account": "Аккаунт",
+    "price": "Цена",
     "distribution": "Distribution",
     "amount": "Amount",
     "value": "Value",
-    "showAll": "Show all",
+    "showAll": "Показать все",
     "showLess": "Show less",
     "header": "Account distribution ({{count}})",
-    "notice": "You can right-click on an account to see its options!"
+    "notice": "Вы можете нажать правой кнопкой мыши на учетной записи, чтобы увидеть ее параметры!"
   },
   "asset": {
-    "notice": "Summary of all {{currency}} accounts"
+    "notice": "Сводка всех {{currency}} аккаунтов"
   },
   "settings": {
     "title": "Настройки",
     "tabs": {
       "display": "Общие",
-      "cryptoAssets": "Crypto assets",
-      "currencies": "Crypto assets",
-      "rates": "Rates",
+      "cryptoAssets": "Криптоактивы",
+      "currencies": "Криптоактивы",
+      "rates": "Курсы",
       "help": "Справка",
       "about": "О программе",
-      "experimental": "Experimental features",
+      "experimental": "Экспериментальные возможности",
       "accounts": "Счета"
     },
     "export": {
       "accounts": {
-        "title": "Export accounts",
-        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
-        "button": "Export"
+        "title": "Экспорт аккаунтов",
+        "desc": "Добавьте свои аккаунты на мобильное устройство в Ledger Live. Ваши аккаунты будут синхронизированы только с блокчейном, а не между приложениями мобильного и настольного компьютера.",
+        "button": "Экспорт"
       },
       "operations": {
         "title": "Operation history",
