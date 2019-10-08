@@ -1220,6 +1220,9 @@
     "FeeRequired": {
       "title": "수수료가 필요합니다."
     },
+    "GasLessThanEstimate": {
+      "title": "This may be too low, please increase"
+    },
     "UnknownMCU": {
       "title": "알 수 없는 MCU 버전",
       "description": "Ledger 지원 센터에 문의하십시오."

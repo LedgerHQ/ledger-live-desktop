@@ -1220,6 +1220,9 @@
     "FeeRequired": {
       "title": "Комиссия обязательная"
     },
+    "GasLessThanEstimate": {
+      "title": "This may be too low, please increase"
+    },
     "UnknownMCU": {
       "title": "Неизвестная версия микроконтроллера",
       "description": "Обратитесь в службу поддержки компании Ledger."
