@@ -18,7 +18,7 @@ const Drop = styled(Box).attrs(() => ({
   borderRadius: 1,
   p: 2,
 }))`
-  border: ${p => p.border ? `1px solid ${p.theme.colors.palette.divider}` : 'none'};
+  border: ${p => (p.border ? `1px solid ${p.theme.colors.palette.divider}` : 'none')};
   max-height: 400px;
   position: absolute;
   right: 0;

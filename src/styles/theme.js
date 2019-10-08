@@ -8,7 +8,7 @@ export const radii = [0, 4]
 export const shadows = ['0 4px 8px 0 rgba(0, 0, 0, 0.03)']
 
 export const fontFamilies = {
-  'Inter': {
+  Inter: {
     ExtraLight: {
       weight: 100,
       style: 'normal',
@@ -23,7 +23,7 @@ export const fontFamilies = {
     },
     Medium: {
       weight: 500,
-      style: 'normal'
+      style: 'normal',
     },
     SemiBold: {
       weight: 600,

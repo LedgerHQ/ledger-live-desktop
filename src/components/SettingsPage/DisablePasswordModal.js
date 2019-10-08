@@ -68,13 +68,7 @@ class DisablePasswordModal extends PureComponent<Props, State> {
             onClose={onClose}
             title={t('password.disablePassword.title')}
             render={() => (
-              <Box
-                ff="Inter"
-                color="palette.text.shade80"
-                fontSize={4}
-                textAlign="center"
-                px={4}
-              >
+              <Box ff="Inter" color="palette.text.shade80" fontSize={4} textAlign="center" px={4}>
                 {t('password.disablePassword.desc')}
                 <Box px={7} mt={4} flow={3}>
                   <Box flow={1}>

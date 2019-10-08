@@ -42,7 +42,7 @@ class GridBody extends PureComponent<Props> {
             key={account.id}
             account={account}
             parentAccount={
-              account.type === 'TokenAccount' ? lookupParentAccount(account.parentId) : null
+              account.type !== 'Account' ? lookupParentAccount(account.parentId) : null
             }
             range={range}
             onClick={onAccountClick}
@@ -55,7 +55,7 @@ class GridBody extends PureComponent<Props> {
             key={account.id}
             account={account}
             parentAccount={
-              account.type === 'TokenAccount' ? lookupParentAccount(account.parentId) : null
+              account.type !== 'Account' ? lookupParentAccount(account.parentId) : null
             }
             range={range}
             onClick={onAccountClick}

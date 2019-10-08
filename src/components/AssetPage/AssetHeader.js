@@ -61,7 +61,7 @@ const Wrapper = styled(Box)`
 
 const AccountName = styled(Text).attrs(() => ({
   color: 'palette.text.shade100',
-  ff: 'Inter',
+  ff: 'Inter|SemiBold',
   fontSize: 7,
 }))`
   line-height: 1.1;
@@ -78,7 +78,7 @@ const AssetHeader: React$ComponentType<Props> = React.memo(({ account, parentAcc
   const explorerView = getDefaultExplorerView(mainAccount.currency)
 
   const getContract = () =>
-    account.type === 'TokenAccount' && parentAccount
+    account.type !== 'Account' && parentAccount
       ? getAccountContractExplorer(explorerView, account, parentAccount)
       : null
 

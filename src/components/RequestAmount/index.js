@@ -5,7 +5,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import type { Currency, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
-import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
+import { getAccountCurrency, getAccountUnit } from '@ledgerhq/live-common/lib/account'
 import {
   counterValueCurrencySelector,
   exchangeSettingsForPairSelector,
@@ -139,7 +139,7 @@ export class RequestAmount extends PureComponent<Props> {
     } = this.props
     const right = getCounterValue(value) || BigNumber(0)
     const rightUnit = rightCurrency.units[0]
-    const defaultUnit = account.type === 'Account' ? account.unit : account.token.units[0]
+    const defaultUnit = getAccountUnit(account)
     return (
       <Box horizontal flow={5} alignItems="center">
         <Box horizontal grow shrink>

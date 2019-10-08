@@ -4,7 +4,7 @@ import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { Trans } from 'react-i18next'
 
-import type { TokenAccount, Account } from '@ledgerhq/live-common/lib/types'
+import type { AccountLike, Account } from '@ledgerhq/live-common/lib/types'
 import {
   getDefaultExplorerView,
   getAccountContractExplorer,
@@ -13,8 +13,8 @@ import {
   getAccountCurrency,
   getMainAccount,
   shortAddressPreview,
-} from '@ledgerhq/live-common/lib/account/helpers'
-
+  getAccountName,
+} from '@ledgerhq/live-common/lib/account'
 import Box from 'components/base/Box'
 import Ellipsis from 'components/base/Ellipsis'
 import Text from 'components/base/Text'
@@ -76,7 +76,7 @@ const AccountName = styled(Text).attrs(() => ({
 `
 
 type Props = {
-  account: TokenAccount | Account,
+  account: AccountLike,
   parentAccount: ?Account,
 }
 
@@ -124,7 +124,7 @@ const AccountHeader: React$ComponentType<Props> = React.memo(
             <CurName>{currency.name}</CurName>
           )}
           <AccountName>
-            <Ellipsis>{account.type === 'Account' ? account.name : currency.name}</Ellipsis>
+            <Ellipsis>{getAccountName(account)}</Ellipsis>
           </AccountName>
         </Box>
       </Box>

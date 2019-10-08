@@ -81,14 +81,7 @@ const FlashStep = ({
       <Box mx={7} align="center">
         <ProgressCircle size={64} progress={progress} />
       </Box>
-      <Box
-        mx={7}
-        mt={3}
-        mb={2}
-        ff="Inter|Regular"
-        color="palette.text.shade100"
-        textAlign="center"
-      >
+      <Box mx={7} mt={3} mb={2} ff="Inter|Regular" color="palette.text.shade100" textAlign="center">
         {t(`manager.modal.steps.flash`)}
       </Box>
       <Box mx={7} mt={2} mb={2}>

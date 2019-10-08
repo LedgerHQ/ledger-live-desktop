@@ -7,8 +7,8 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { push } from 'react-router-redux'
-import type { Account, TokenAccount } from '@ledgerhq/live-common/src/types'
-
+import type { AccountLike } from '@ledgerhq/live-common/lib/types'
+import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import SideBarTooltip from 'components/base/SideBar/SideBarTooltip'
 import { Hide } from 'components/MainSideBar'
 import Text from 'components/base/Text'
@@ -44,7 +44,7 @@ const mapDispatchToProps = {
 
 class Stars extends PureComponent<{
   pathname: string,
-  starredAccounts: (Account | TokenAccount)[],
+  starredAccounts: AccountLike[],
   dragDropStarAction: (*) => any,
   collapsed: boolean,
 }> {
@@ -65,9 +65,11 @@ class Stars extends PureComponent<{
         <Droppable droppableId="list" direction="vertical">
           {provided => (
             <Container key={pathname} ref={provided.innerRef}>
-              {starredAccounts.map((account: Account | TokenAccount, i) => (
+              {starredAccounts.map((account, i) => (
                 <SideBarTooltip
-                  text={account.type === 'Account' ? account.name : account.token.name}
+                  text={
+                    account.type === 'Account' ? account.name : getAccountCurrency(account).name
+                  }
                   enabled={!provided.isDragging && collapsed}
                   key={account.id}
                 >

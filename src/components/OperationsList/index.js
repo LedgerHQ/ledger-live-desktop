@@ -11,7 +11,7 @@ import {
   flattenAccounts,
 } from '@ledgerhq/live-common/lib/account'
 import logger from 'logger'
-import type { Operation, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
+import type { Operation, Account, AccountLike } from '@ledgerhq/live-common/lib/types'
 
 import keyBy from 'lodash/keyBy'
 
@@ -53,14 +53,14 @@ const mapDispatchToProps = {
 }
 
 type Props = {
-  account: Account | TokenAccount,
+  account: AccountLike,
   parentAccount?: ?Account,
-  accounts: (Account | TokenAccount)[],
-  allAccounts: (Account | TokenAccount)[],
+  accounts: AccountLike[],
+  allAccounts: AccountLike[],
   openModal: (string, Object) => *,
   t: T,
   withAccount?: boolean,
-  withTokenAccounts?: boolean,
+  withSubAccounts?: boolean,
   title?: string,
 }
 
@@ -79,11 +79,7 @@ export class OperationsList extends PureComponent<Props, State> {
 
   state = initialState
 
-  handleClickOperation = (
-    operation: Operation,
-    account: Account | TokenAccount,
-    parentAccount?: Account,
-  ) =>
+  handleClickOperation = (operation: Operation, account: AccountLike, parentAccount?: Account) =>
     this.props.openModal(MODAL_OPERATION_DETAILS, {
       operationId: operation.id,
       accountId: account.id,
@@ -105,7 +101,7 @@ export class OperationsList extends PureComponent<Props, State> {
       t,
       title,
       withAccount,
-      withTokenAccounts,
+      withSubAccounts,
     } = this.props
     const { nbToShow } = this.state
 
@@ -114,8 +110,8 @@ export class OperationsList extends PureComponent<Props, State> {
       return null
     }
     const groupedOperations = account
-      ? groupAccountOperationsByDay(account, { count: nbToShow, withTokenAccounts })
-      : groupAccountsOperationsByDay(accounts, { count: nbToShow, withTokenAccounts })
+      ? groupAccountOperationsByDay(account, { count: nbToShow, withSubAccounts })
+      : groupAccountsOperationsByDay(accounts, { count: nbToShow, withSubAccounts })
 
     const all = flattenAccounts(accounts || []).concat([account, parentAccount].filter(Boolean))
     const accountsMap = keyBy(all, 'id')
@@ -143,7 +139,7 @@ export class OperationsList extends PureComponent<Props, State> {
                   return null
                 }
                 let parentAccount
-                if (account.type === 'TokenAccount') {
+                if (account.type !== 'Account') {
                   const pa =
                     accountsMap[account.parentId] ||
                     allAccounts.find(a => a.id === account.parentId)

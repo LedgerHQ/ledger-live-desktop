@@ -2,6 +2,7 @@
 
 import React, { Fragment, PureComponent } from 'react'
 import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
+import { getAccountName } from '@ledgerhq/live-common/lib/account'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/account'
 import type { CryptoCurrency, TokenCurrency } from '@ledgerhq/live-common/lib/types/currencies'
 import { BigNumber } from 'bignumber.js'
@@ -114,12 +115,11 @@ class Row extends PureComponent<Props, State> {
     } = this.props
 
     const parentAccount =
-      account.type === 'TokenAccount' ? accounts.find(a => a.id === account.parentId) : null
+      account.type !== 'Account' ? accounts.find(a => a.id === account.parentId) : null
     const color = getCurrencyColor(currency)
+    const displayName = getAccountName(account)
     const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2)
     const icon = <ParentCryptoCurrencyIcon currency={currency} size={16} />
-    const displayName = account.type === 'TokenAccount' ? currency.name : account.name
-
     return (
       <AccountContextMenu account={account} parentAccount={parentAccount} withStar>
         <Wrapper onClick={() => this.onAccountClick(account)}>

@@ -4,7 +4,8 @@ import {
   flattenAccounts,
   getAccountCurrency,
   getAccountUnit,
-  listTokenAccounts,
+  getAccountName,
+  listSubAccounts,
 } from '@ledgerhq/live-common/lib/account'
 import Box from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
@@ -16,7 +17,7 @@ import { connect } from 'react-redux'
 import { createFilter } from 'react-select'
 import { accountsSelector } from 'reducers/accounts'
 import { createStructuredSelector } from 'reselect'
-import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
+import type { AccountLike, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import styled from 'styled-components'
 
@@ -52,22 +53,23 @@ type Option = {
 const getOptionValue = option => option.account.id
 
 const defaultFilter = createFilter({
-  stringify: ({ data: account }) =>
-    account.type === 'Account'
-      ? `${account.currency.ticker}|${account.currency.name}|${account.name}`
-      : `${account.token.ticker}|${account.token.name}`,
+  stringify: ({ data: account }) => {
+    const currency = getAccountCurrency(account)
+    const name = getAccountName(account)
+    return `${currency.ticker}|${currency.name}|${name}`
+  },
 })
 const filterOption = o => (candidate, input) => {
   const selfMatches = defaultFilter(candidate, input)
   if (selfMatches) return [selfMatches, true]
 
-  if (candidate.data.type === 'Account' && o.withTokenAccounts) {
-    const tokenAccounts = o.enforceHideEmptyTokenAccounts
-      ? listTokenAccounts(candidate.data)
-      : candidate.data.tokenAccounts
-    if (tokenAccounts) {
-      for (let i = 0; i < tokenAccounts.length; i++) {
-        const ta = tokenAccounts[i]
+  if (candidate.data.type === 'Account' && o.withSubAccounts) {
+    const subAccounts = o.enforceHideEmptySubAccounts
+      ? listSubAccounts(candidate.data)
+      : candidate.data.subAccounts
+    if (subAccounts) {
+      for (let i = 0; i < subAccounts.length; i++) {
+        const ta = subAccounts[i]
         if (defaultFilter({ value: ta.id, data: ta }, input)) {
           return [true, false]
         }
@@ -83,13 +85,13 @@ const AccountOption = React.memo(
     isValue,
     disabled,
   }: {
-    account: Account | TokenAccount,
+    account: AccountLike,
     isValue?: boolean,
     disabled?: boolean,
   }) => {
     const currency = getAccountCurrency(account)
     const unit = getAccountUnit(account)
-    const name = account.type === 'Account' ? account.name : currency.name
+    const name = getAccountName(account)
 
     return (
       <Box grow horizontal alignItems="center" flow={2} style={{ opacity: disabled ? 0.2 : 1 }}>
@@ -119,11 +121,11 @@ const renderOption = ({ data }: { data: Option }) => (
 )
 
 type Props = {
-  withTokenAccounts?: boolean,
-  enforceHideEmptyTokenAccounts?: boolean,
+  withSubAccounts?: boolean,
+  enforceHideEmptySubAccounts?: boolean,
   filter?: Account => boolean,
   accounts: Account[],
-  onChange: (account: ?(Account | TokenAccount), tokenAccount: ?Account) => void,
+  onChange: (account: ?AccountLike, tokenAccount: ?Account) => void,
   value: ?Account,
   t: T,
 }
@@ -132,8 +134,8 @@ const RawSelectAccount = ({
   accounts,
   onChange,
   value,
-  withTokenAccounts,
-  enforceHideEmptyTokenAccounts,
+  withSubAccounts,
+  enforceHideEmptySubAccounts,
   filter,
   t,
   ...props
@@ -141,8 +143,8 @@ const RawSelectAccount = ({
   const [searchInputValue, setSearchInputValue] = useState('')
 
   const filtered: Account[] = filter ? accounts.filter(filter) : accounts
-  const all = withTokenAccounts
-    ? flattenAccounts(filtered, { enforceHideEmptyTokenAccounts })
+  const all = withSubAccounts
+    ? flattenAccounts(filtered, { enforceHideEmptySubAccounts })
     : filtered
   const selectedOption = value
     ? {
@@ -156,7 +158,7 @@ const RawSelectAccount = ({
       } else {
         const { account } = option
         const parentAccount =
-          account.type === 'TokenAccount' ? accounts.find(a => a.id === account.parentId) : null
+          account.type !== 'Account' ? accounts.find(a => a.id === account.parentId) : null
         onChange(account, parentAccount)
       }
     },
@@ -166,7 +168,7 @@ const RawSelectAccount = ({
   const manualFilter = useCallback(
     () =>
       all.reduce((result, option) => {
-        const [display, match] = filterOption({ withTokenAccounts, enforceHideEmptyTokenAccounts })(
+        const [display, match] = filterOption({ withSubAccounts, enforceHideEmptySubAccounts })(
           { data: option },
           searchInputValue,
         )
@@ -179,7 +181,7 @@ const RawSelectAccount = ({
         }
         return result
       }, []),
-    [searchInputValue, all, withTokenAccounts, enforceHideEmptyTokenAccounts],
+    [searchInputValue, all, withSubAccounts, enforceHideEmptySubAccounts],
   )
 
   const structuredResults = manualFilter()

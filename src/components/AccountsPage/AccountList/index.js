@@ -1,8 +1,13 @@
 // @flow
 
 import React, { Component } from 'react'
-import type { TokenAccount, Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
-import { listTokenAccounts } from '@ledgerhq/live-common/lib/account/helpers'
+import type {
+  TokenAccount,
+  Account,
+  AccountLike,
+  PortfolioRange,
+} from '@ledgerhq/live-common/lib/types'
+import { listSubAccounts, getAccountCurrency } from '@ledgerhq/live-common/lib/account/helpers'
 import { Trans } from 'react-i18next'
 
 import Text from 'components/base/Text'
@@ -31,7 +36,7 @@ const BodyByMode = {
 
 export const matchesSearch = (
   search?: string,
-  account: Account | TokenAccount,
+  account: AccountLike,
   subMatch: boolean = false,
 ): boolean => {
   if (!search) return true
@@ -41,10 +46,11 @@ export const matchesSearch = (
     match = `${account.currency.ticker}|${account.currency.name}|${account.name}`
     subMatch =
       subMatch &&
-      !!account.tokenAccounts &&
-      listTokenAccounts(account).some(token => matchesSearch(search, token))
+      !!account.subAccounts &&
+      listSubAccounts(account).some(token => matchesSearch(search, token))
   } else {
-    match = `${account.token.ticker}|${account.token.name}`
+    const c = getAccountCurrency(account)
+    match = `${c.ticker}|${c.name}`
   }
 
   return match.toLowerCase().includes(search.toLowerCase()) || subMatch
