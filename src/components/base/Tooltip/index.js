@@ -51,6 +51,7 @@ type Props = {
   tooltipBg?: string,
   options?: { [string]: any },
   theme: any,
+  delay: number,
 }
 
 export const replaceTippyArrow = (_tippy: any, tooltipBg?: string) => {
@@ -75,10 +76,11 @@ class Tooltip extends PureComponent<Props> {
   static defaultProps = {
     offset: [0, 0],
     enabled: true,
+    delay: 0,
   }
 
   componentDidMount() {
-    const { offset, tooltipBg, enabled, options } = this.props
+    const { offset, tooltipBg, enabled, options, delay } = this.props
 
     if (this._node && this._template) {
       tippy(this._node, {
@@ -86,6 +88,7 @@ class Tooltip extends PureComponent<Props> {
         html: this._template,
         offset: offset ? offset.map(v => space[v]).join(',') : 0,
         ...options,
+        delay: [delay, 0],
       })
 
       const _tippy = this._node && this._node._tippy
