@@ -1220,6 +1220,9 @@
     "FeeRequired": {
       "title": "交易手续费为必填项"
     },
+    "GasLessThanEstimate": {
+      "title": "This may be too low, please increase"
+    },
     "UnknownMCU": {
       "title": "MCU 版本未知",
       "description": "请联系 Ledger 客服"
