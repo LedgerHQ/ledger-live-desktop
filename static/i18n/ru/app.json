@@ -571,9 +571,9 @@
         "button": "Экспорт"
       },
       "operations": {
-        "title": "Operation history",
-        "desc": "Save a CSV file of your account operations on your computer.",
-        "button": "Save"
+        "title": "История операций",
+        "desc": "Сохраните CSV-файл операций ваших аккаунтов на вашем компьютере.",
+        "button": "Сохранить"
       },
       "modal": {
         "button": "Готово",
@@ -588,8 +588,8 @@
       "desc": "Настройте общие параметры Ledger Live.",
       "language": "Язык интерфейса",
       "languageDesc": "Настройте язык интерфейса Ledger Live.",
-      "theme": "Theme",
-      "themeDesc": "Select the theme.",
+      "theme": "Тема",
+      "themeDesc": "Выбрать тему.",
       "counterValue": "Эквивалент",
       "counterValueDesc": "Выберите валюту для отображения состояния счета и операций.",
       "exchange": "Обменник",
@@ -600,23 +600,23 @@
       "stockDesc": "Выберите «Западный», чтобы увеличение рыночной стоимости отображалось синим цветом, или «Восточный», чтобы увеличение рыночной стоимости отображалось красным цветом."
     },
     "currencies": {
-      "desc": "Change settings for each of your crypto assets",
-      "select": "Select a crypto asset to edit its settings.",
+      "desc": "Изменить настройки для каждого вашего криптоактива",
+      "select": "Выберите криптоактив для изменения его настроек.",
       "exchange": "Обменник ({{ticker}} → BTC)",
       "exchangeDesc": "Выберите обменник для обмена из {{currencyName}} в биткоины, используемый для оценки ценности криптоактивов ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Количество подтверждений",
       "confirmationsNbDesc": "Задайте количество подтверждений транзакции, выполняемых сетью, необходимое для того, чтобы такая транзакция была отмечена как подтвержденная."
     },
     "rates": {
-      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
-      "fromTo": "{{from}} to {{to}}",
-      "noCounterValue": "We have no data for this trading pair.",
-      "cryptoToFiat": "Crypto to fiat",
-      "cryptoToCrypto": "Crypto to Crypto",
-      "rate": "Rate",
-      "last": "Last {{days}} days",
-      "price": "Price",
-      "exchange": "Rate provider"
+      "desc": "Вот все ставки, которые используются Ledger Live для расчета счетчиков.\nВыберите, какие провайдеры тарифов используются для каждой ставки.",
+      "fromTo": "от {from} до {to}",
+      "noCounterValue": "У нас нет данных для этой торговой пары.",
+      "cryptoToFiat": "Крипто в фиат",
+      "cryptoToCrypto": "Крипто в крипто",
+      "rate": "Курс",
+      "last": "За последние {{days}} дней",
+      "price": "Цена",
+      "exchange": "Провайдер курсов"
     },
     "profile": {
       "password": "Блокировка паролем",
@@ -654,8 +654,8 @@
       "privacyDesc": "О том, какие персональные данные мы собираем, каким образом и для чего, можно узнать в нашей политике конфиденциальности."
     },
     "experimental": {
-      "desc": "Try out experimental features and let us know what you think",
-      "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
+      "desc": "Попробуйте экспериментальные возможности и дайте нам знать, что вы думаете",
+      "disclaimer": "Это экспериментальные возможности, которые мы предоставляем на основаниях «как есть», чтобы наше сообщество тестировало. Они могут быть изменены, сломаны или удалены в любое время. Включая их, вы соглашаетесь использовать их на свой страх и риск. Ваши криптоактивы остаются защищены вашим аппаратным кошельком Ledger."
     },
     "hardResetModal": {
       "title": "Сбросить Ledger Live",
@@ -689,14 +689,14 @@
       "button": "Ремонт"
     },
     "exportLogs": {
-      "title": "Save logs",
-      "desc": "Saving Ledger Live logs may be necessary for troubleshooting purposes.",
-      "btn": "Save"
+      "title": "Сохранить логи",
+      "desc": "Сохранение логов Ledger Live может потребоваться для устранения неполадок.",
+      "btn": "Сохранить"
     },
     "accounts": {
       "hideEmptyTokens": {
-        "title": "Hide empty token accounts",
-        "desc": "Hide token accounts with zero balance on the Accounts page."
+        "title": "Скрыть пустые токен аккаунты",
+        "desc": "Скрыть токены с нулевым балансом на странице счетов."
       }
     }
   },
@@ -750,23 +750,23 @@
   },
   "exportOperationsModal": {
     "title": "История операций",
-    "desc": "Select the accounts for which to save the operation history",
+    "desc": "Выберите счета, для которых сохранить историю операций",
     "descSuccess": "CSV-файл истории операций успешно сохранен в выбранной папке",
     "titleSuccess": "История операций успешно сохранена",
     "cta": "Сохранить",
     "ctaSuccess": "Готово",
     "noAccounts": "Нет аккаунтов для экспорта",
-    "selectedAccounts": "Accounts to include",
-    "selectedAccounts_plural": "Accounts to include ({{count}})"
+    "selectedAccounts": "Учетные записи для включения",
+    "selectedAccounts_plural": "Учетные записи для включения ({{count}})"
   },
   "language": {
     "system": "Использовать язык системы"
   },
   "theme": {
-    "system": "Use system theme",
-    "light": "Light",
+    "system": "Использовать системную тему",
+    "light": "Светлая",
     "dusk": "Dusk",
-    "dark": "Dark"
+    "dark": "Темная"
   },
   "onboarding": {
     "breadcrumb": {
@@ -807,7 +807,7 @@
     "selectDevice": {
       "title": "Выберите свое устройство",
       "usbOnly": "только usb",
-      "usbOnlyTooltip": "Ledger Live desktop currently does not support Bluetooth"
+      "usbOnlyTooltip": "Приложение Ledger Live для настольного компьютера в настоящее время не поддерживает Bluetooth соединение"
     },
     "selectPIN": {
       "disclaimer": {
@@ -820,19 +820,19 @@
         "instructions": {
           "nano": {
             "step1": "Подключите {{productName}} к компьютеру. Чтобы начать, нажмите обе кнопки.",
-            "step2": "Press the right button to select <1><0>{{configureAsNewDevice}}?</0></1>.",
+            "step2": "Нажмите правой кнопкой, чтобы выбрать <1><0>{{configureAsNewDevice}}?</0></1>.",
             "step3": "Для выбора цифры нажимайте левую или правую кнопку. Для подтверждения нажмите обе кнопки.",
             "step4": "Для подтверждения PIN-кода выберите символ ✓. Для удаления цифры выберите символ ⬅."
           },
           "nanoX": {
             "step1": "Подключите {{productName}} к компьютеру.",
-            "step2": "Press both buttons to choose <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step2": "Нажмите на обе кнопки, чтобы выбрать <1><0>{{setUpAsNewDevice}}</0></1>.",
             "step3": "Для выбора цифры нажимайте левую или правую кнопку.",
             "step4": "Для подтверждения PIN-кода выберите символ ✓. Для удаления цифры выберите символ ⬅."
           },
           "blue": {
             "step1": "Подключите {{productName}} к компьютеру.",
-            "step2": "Tap on <1><0>{{configureAsNewDevice}}</0></1>.",
+            "step2": "Нажмите <1><0>{{configureAsNewDevice}}</0></1>.",
             "step3": "Выберите PIN-код длиной 4–8 символов."
           }
         }
@@ -842,20 +842,20 @@
         "instructions": {
           "nano": {
             "step1": "Подключите {{productName}} к компьютеру. Чтобы начать, нажмите обе кнопки.",
-            "step2": "Press the left button to cancel <1><0>{{configureAsNewDevice}}?</0></1>. Then press the right button to select <3><0>{{restoreConfiguration}}?</0></3>.",
+            "step2": "Нажмите левую кнопку, чтобы отменить <1><0>{{configureAsNewDevice}}?</0></1>. Затем нажмите правую кнопку, чтобы выбрать <3><0>{{restoreConfiguration}}?</0></3>.",
             "step3": "Для выбора цифры нажимайте левую или правую кнопку. Для подтверждения нажмите обе кнопки.",
             "step4": "Для подтверждения PIN-кода выберите символ ✓. Для удаления цифры выберите символ ⬅."
           },
           "nanoX": {
             "step1": "Подключите {{productName}} к компьютеру.",
             "step2": "Нажмите одновременно обе кнопки, как указано на экране {{productName}}.",
-            "step3": "Press the left button to cancel <1><0>{{setUpAsNewDevice}}</0></1>.",
-            "step4": "Press the right button to select <1><0>{{restoreConfiguration}}</0></1>.",
+            "step3": "Нажмите левую кнопку, чтобы отменить <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step4": "Нажмите правой кнопкой, чтобы выбрать <1><0>{{restoreConfiguration}}</0></1>.",
             "step5": "Выберите PIN-код длиной от 4 до 8 символов."
           },
           "blue": {
             "step1": "Подключите {{productName}} к компьютеру.",
-            "step2": "Tap on <1><0>{{restoreConfiguration}}</0></1>.",
+            "step2": "Нажмите <1><0>{{restoreConfiguration}}</0></1>.",
             "step3": "Выберите PIN-код длиной 4–8 символов."
           }
         }
@@ -864,15 +864,15 @@
     "writeSeed": {
       "initialize": {
         "title": "Сохраните свою фразу восстановления",
-        "desc": "Your device will display a 24-word recovery phrase to back up your private keys",
+        "desc": "На экране устройства отобразится фраза восстановления из 24 слов, необходимая для резервного копирования закрытых ключей.",
         "nano": {
-          "step1": "Write <1><0>{{seedWord1}}</0></1> in position 1 on a blank Recovery sheet.",
+          "step1": "Запишите <1><0>{{seedWord1}}</0></1> в позицию 1 на пустой карточке восстановления.",
           "step2": "Нажмите правую кнопку, чтобы продолжить, и таким же образом запишите все 24 слова.",
           "step3": "Подтвердите фразу восстановления, для чего выделите каждое требуемое слово и нажмите обе кнопки для ее подтверждения."
         },
         "blue": {
           "step1": "Запишите каждое слово в карточку восстановления, соблюдая порядок слов.",
-          "step2": "Tap <1><0>{{seedNext}}</0></1> and write down all words until the <3><0>{{seedConfirmation}}</0></3> screen appears.",
+          "step2": "Нажмите <1><0>{{seedNext}}</0></1> и напишите все слова <3><0>{{seedConfirmation}}</0></3>.",
           "step3": "Чтобы подтвердить фразу восстановления, введите каждое слово."
         }
       },
@@ -881,8 +881,8 @@
         "desc": "Введите фразу восстановления, сохраненную в карточке восстановления.",
         "nano": {
           "step1": "Выберите длину фразы восстановления.",
-          "step2": "Enter the first letters of <1><0>{{seedWord1}}</0></1> until suggested words appear.",
-          "step3": "Choose <1><0>{{seedWord1}}</0></1> from the suggested words by pressing both buttons.",
+          "step2": "Введите первые буквы <1><0>{{seedWord1}}</0></1> до тех пор, пока не появятся предложенные слова.",
+          "step3": "Выберите <1><0>{{seedWord1}}</0></1> из предложенных слов, нажав обе кнопки.",
           "step4": "Повторяйте всю процедуру до тех пор, пока не будет выбрано последнее слово."
         },
         "blue": {
@@ -983,7 +983,7 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having a hard time connecting your device?"
+    "desc": "У вас трудности с подключением вашего устройства?"
   },
   "errors": {
     "generic": {
@@ -1221,15 +1221,15 @@
       "title": "Комиссия обязательная"
     },
     "GasLessThanEstimate": {
-      "title": "This may be too low, please increase"
+      "title": "Это может быть слишком низким, пожалуйста, увеличте"
     },
     "UnknownMCU": {
       "title": "Неизвестная версия микроконтроллера",
       "description": "Обратитесь в службу поддержки компании Ledger."
     },
     "MCUNotGenuineToDashboard": {
-      "title": "Access dashboard to update",
-      "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
+      "title": "Доступ к панели управления для обновления",
+      "description": "Пожалуйста, перезапустите устройство без нажатия любой кнопки. Затем нажмите обе кнопки на устройстве три раза, чтобы получить доступ к панели управления. Наконец, откройте менеджер для обновления прошивки."
     }
   }
 }
