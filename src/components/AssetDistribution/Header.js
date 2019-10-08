@@ -28,17 +28,17 @@ const Wrapper = styled.div`
 
 export default () => (
   <Wrapper>
-    <Text ff="Open Sans|SemiBold" color="palette.text.shade60" fontSize={3}>
+    <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
       <Trans i18nKey={'distribution.asset'} />
     </Text>
-    <Text ff="Open Sans|SemiBold" color="palette.text.shade60" fontSize={3}>
+    <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
       <Trans i18nKey={'distribution.price'} />
     </Text>
-    <Text ff="Open Sans|SemiBold" color="palette.text.shade60" fontSize={3}>
+    <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
       <Trans i18nKey={'distribution.distribution'} />
     </Text>
     <Text
-      ff="Open Sans|SemiBold"
+      ff="Inter|SemiBold"
       color="palette.text.shade60"
       style={{ justifyContent: 'flex-end' }}
       fontSize={3}
@@ -46,7 +46,7 @@ export default () => (
       <Trans i18nKey={'distribution.amount'} />
     </Text>
     <Text
-      ff="Open Sans|SemiBold"
+      ff="Inter|SemiBold"
       color="palette.text.shade60"
       style={{ justifyContent: 'flex-end' }}
       fontSize={3}

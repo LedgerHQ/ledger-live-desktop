@@ -13,6 +13,7 @@ import { createCancelablePolling } from 'helpers/promise'
 import {
   isSegwitDerivationMode,
   getDerivationScheme,
+  getDerivationModesForCurrency,
   runDerivationScheme,
 } from '@ledgerhq/live-common/lib/derivation'
 
@@ -27,7 +28,7 @@ import { WrongDeviceForAccount } from '@ledgerhq/errors'
 import { getCurrentDevice } from 'reducers/devices'
 
 const usbIcon = <IconUsb size={16} />
-const Bold = props => <Text ff="Open Sans|SemiBold" {...props} />
+const Bold = props => <Text ff="Inter|SemiBold" {...props} />
 
 const mapStateToProps = state => ({
   device: getCurrentDevice(state),
@@ -113,15 +114,25 @@ class EnsureDeviceApp extends Component<{
 }
 
 async function getAddressFromAccountOrCurrency(device, account, currency) {
+  let derivationMode
+  let path
+
+  if (account) {
+    derivationMode = account.derivationMode
+    path = account.freshAddressPath
+  } else {
+    const modes = getDerivationModesForCurrency(currency)
+    derivationMode = modes[modes.length - 1]
+    path = runDerivationScheme(getDerivationScheme({ currency, derivationMode }), currency)
+  }
+
   const { address } = await getAddress
     .send({
-      derivationMode: account ? account.derivationMode : '',
+      derivationMode,
       devicePath: device.path,
       currencyId: currency.id,
-      path: account
-        ? account.freshAddressPath
-        : runDerivationScheme(getDerivationScheme({ currency, derivationMode: '' }), currency),
-      segwit: account ? isSegwitDerivationMode(account.derivationMode) : false,
+      path,
+      segwit: isSegwitDerivationMode(derivationMode),
     })
     .toPromise()
   return address

@@ -53,7 +53,7 @@ const ContextMenuContainer = styled(Box)`
 `
 
 const ContextMenuItemContainer = styled(Box).attrs(() => ({
-  ff: 'Museo Sans',
+  ff: 'Inter',
 }))`
   padding: 8px 16px;
   text-align: center;

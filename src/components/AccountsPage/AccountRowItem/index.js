@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Box from 'components/base/Box'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/account'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
-import { listTokenAccounts } from '@ledgerhq/live-common/lib/account/helpers'
+import { listSubAccounts } from '@ledgerhq/live-common/lib/account/helpers'
 import { Trans } from 'react-i18next'
 import Text from 'components/base/Text'
 import IconAngleDown from 'icons/AngleDown'
@@ -127,7 +127,7 @@ class AccountRowItem extends PureComponent<Props, State> {
 
   static getDerivedStateFromProps(nextProps: Props) {
     const { account } = nextProps
-    if (account.tokenAccounts) {
+    if (account.subAccounts) {
       return {
         expanded: expandedStates[account.id] || !!nextProps.search,
       }
@@ -178,7 +178,7 @@ class AccountRowItem extends PureComponent<Props, State> {
       currency = account.currency
       unit = account.unit
       mainAccount = account
-      tokens = listTokenAccounts(account)
+      tokens = listSubAccounts(account)
       disabled = !matchesSearch(search, account)
       if (tokens) tokens = tokens.filter(t => matchesSearch(search, t))
     }
@@ -224,7 +224,7 @@ class AccountRowItem extends PureComponent<Props, State> {
           )}
           {showTokensIndicator && !disabled && tokens && (
             <TokenShowMoreIndicator expanded={expanded} onClick={this.toggleAccordion}>
-              <Text color="wallet" ff="Open Sans|SemiBold" fontSize={4}>
+              <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
                 <Trans
                   i18nKey={expanded ? 'tokensList.hideTokens' : 'tokensList.seeTokens'}
                   values={{ tokenCount: tokens.length }}

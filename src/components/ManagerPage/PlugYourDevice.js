@@ -24,19 +24,13 @@ function PlugYourDevice(props: Props) {
         <Box
           textAlign="center"
           mb={1}
-          ff="Museo Sans|Regular"
+          ff="Inter|Regular"
           color="palette.text.shade100"
           fontSize={6}
         >
           {t('manager.device.title')}
         </Box>
-        <Box
-          textAlign="center"
-          mb={5}
-          ff="Open Sans|Regular"
-          color="palette.text.shade80"
-          fontSize={4}
-        >
+        <Box textAlign="center" mb={5} ff="Inter|Regular" color="palette.text.shade80" fontSize={4}>
           {t('manager.device.desc')}
         </Box>
         <Button primary>{t('manager.device.cta')}</Button>

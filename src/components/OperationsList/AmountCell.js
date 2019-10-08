@@ -15,6 +15,8 @@ const Cell = styled(Box).attrs(() => ({
 }))`
   width: 150px;
   text-align: right;
+  justify-content: space-between;
+  height: 32px;
 `
 
 type Props = {

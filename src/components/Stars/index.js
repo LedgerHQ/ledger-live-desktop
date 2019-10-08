@@ -7,8 +7,8 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { push } from 'react-router-redux'
-import type { Account, TokenAccount } from '@ledgerhq/live-common/src/types'
-
+import type { AccountLike } from '@ledgerhq/live-common/lib/types'
+import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import SideBarTooltip from 'components/base/SideBar/SideBarTooltip'
 import { Hide } from 'components/MainSideBar'
 import Text from 'components/base/Text'
@@ -44,7 +44,7 @@ const mapDispatchToProps = {
 
 class Stars extends PureComponent<{
   pathname: string,
-  starredAccounts: (Account | TokenAccount)[],
+  starredAccounts: AccountLike[],
   dragDropStarAction: (*) => any,
   collapsed: boolean,
 }> {
@@ -65,9 +65,11 @@ class Stars extends PureComponent<{
         <Droppable droppableId="list" direction="vertical">
           {provided => (
             <Container key={pathname} ref={provided.innerRef}>
-              {starredAccounts.map((account: Account | TokenAccount, i) => (
+              {starredAccounts.map((account, i) => (
                 <SideBarTooltip
-                  text={account.type === 'Account' ? account.name : account.token.name}
+                  text={
+                    account.type === 'Account' ? account.name : getAccountCurrency(account).name
+                  }
                   enabled={collapsed}
                   key={account.id}
                 >
@@ -90,14 +92,14 @@ class Stars extends PureComponent<{
         <Placeholder>
           <img alt="stars placeholder" src={i('starsPlaceholder.png')} width="95" height="53" />
           <Text
-            ff="Open Sans|SemiBold"
+            ff="Inter|SemiBold"
             color="palette.text.shade60"
             fontSize={3}
             style={{ minWidth: 180 }}
           >
             <Trans i18nKey={'stars.placeholder'}>
               {'Accounts that you star on the'}
-              <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
+              <Text ff="Inter|SemiBold" color="palette.text.shade100">
                 {'Accounts'}
               </Text>
               {' page will now appear here!.'}

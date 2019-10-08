@@ -124,7 +124,7 @@ const Tag = styled(Link)`
   justify-self: flex-end;
   justify-content: center;
   align-items: center;
-  font-family: 'Open Sans';
+  font-family: 'Inter';
   font-weight: bold;
   font-size: 10px;
   padding: 2px 8px;

@@ -14,7 +14,7 @@ const Container = styled(Box).attrs(() => ({
   alignItems: 'center',
   justifyContent: 'center',
   fontSize: 4,
-  ff: 'Rubik',
+  ff: 'Inter',
   color: 'palette.text.shade80',
 }))`
   background-color: rgba(100, 144, 241, 0.1);

@@ -19,7 +19,7 @@ export const TokenIconWrapper = styled.div`
 `
 export const TokenIcon = styled.div`
   font-size: ${p => (p.fontSize ? p.fontSize : p.size / 2)}px;
-  font-family: 'Open Sans';
+  font-family: 'Inter';
   font-weight: bold;
   color: ${p => p.color};
   background-color: ${p => rgba(p.color, 0.1)};

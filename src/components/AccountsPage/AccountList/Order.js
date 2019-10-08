@@ -51,17 +51,10 @@ const Order = ({
       value={value}
     >
       <Track onUpdate event="ChangeSort" orderAccounts={orderAccounts} />
-      <Text ff="Open Sans|SemiBold" fontSize={4}>
+      <Text ff="Inter|SemiBold" fontSize={4}>
         <Trans i18nKey="common.sortBy" />
       </Text>
-      <Box
-        alignItems="center"
-        color="wallet"
-        ff="Open Sans|SemiBold"
-        flow={1}
-        fontSize={4}
-        horizontal
-      >
+      <Box alignItems="center" color="wallet" ff="Inter|SemiBold" flow={1} fontSize={4} horizontal>
         <Text color="wallet">
           <Trans i18nKey={`accounts.order.${orderAccounts}`} />
         </Text>

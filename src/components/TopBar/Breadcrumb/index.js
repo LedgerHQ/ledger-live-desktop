@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   break-word: break-all;
   white-space: nowrap;
   > * {
-    font-family: 'Open Sans';
+    font-family: 'Inter';
     font-weight: 600;
     font-size: 12px;
     color: ${p => p.theme.colors.palette.text.shade60};

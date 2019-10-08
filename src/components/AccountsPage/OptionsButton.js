@@ -26,7 +26,7 @@ import IconDownloadCloud from 'icons/DownloadCloud'
 import IconSend from 'icons/Send'
 
 const Separator = styled.div`
-  background-color: ${p => p.theme.colors.palette.text.shade40};
+  background-color: ${p => p.theme.colors.palette.divider};
   height: 1px;
   margin-top: 8px;
   margin-bottom: 8px;
@@ -83,13 +83,13 @@ class OptionsButton extends PureComponent<Props, State> {
     {
       key: 'exportOperations',
       label: this.props.t('accounts.optionsMenu.exportOperations'),
-      icon: <IconDownloadCloud size={12} />,
+      icon: <IconDownloadCloud size={16} />,
       onClick: () => this.props.openModal(MODAL_EXPORT_OPERATIONS),
     },
     {
       key: 'exportAccounts',
       label: this.props.t('accounts.optionsMenu.exportToMobile'),
-      icon: <IconSend size={12} />,
+      icon: <IconSend size={16} />,
       onClick: () => this.setState({ isModalOpened: true }),
     },
     {
@@ -148,7 +148,7 @@ class OptionsButton extends PureComponent<Props, State> {
 
     return (
       <>
-        <DropDown horizontal offsetTop={2} items={this.items} renderItem={this.renderItem}>
+        <DropDown border horizontal offsetTop={2} items={this.items} renderItem={this.renderItem}>
           <Tooltip render={() => this.props.t('accounts.optionsMenu.title')}>
             <Button small outlineGrey flow={1} style={{ width: 34, padding: 0 }}>
               <Box horizontal flow={1} alignItems="center" justifyContent="center">

@@ -1220,6 +1220,9 @@
     "FeeRequired": {
       "title": "Se requieren comisiones"
     },
+    "GasLessThanEstimate": {
+      "title": "This may be too low, please increase"
+    },
     "UnknownMCU": {
       "title": "Versión de MCU desconocida",
       "description": "Por favor, ponte en contacto con el Soporte de Ledger"

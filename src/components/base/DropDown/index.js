@@ -18,7 +18,7 @@ const Drop = styled(Box).attrs(() => ({
   borderRadius: 1,
   p: 2,
 }))`
-  ${p => p.border && `border:1px solid ${p.theme.colors.palette.text.divider}`};
+  border: ${p => (p.border ? `1px solid ${p.theme.colors.palette.divider}` : 'none')};
   max-height: 400px;
   position: absolute;
   right: 0;
@@ -30,7 +30,7 @@ const Drop = styled(Box).attrs(() => ({
 export const DropDownItem = styled(Box).attrs(p => ({
   borderRadius: 1,
   justifyContent: 'center',
-  ff: p.isActive ? 'Open Sans|SemiBold' : 'Open Sans',
+  ff: p.isActive ? 'Inter|SemiBold' : 'Inter',
   fontSize: 4,
   px: 3,
   color: p.isHighlighted || p.isActive ? 'palette.text.shade100' : 'palette.text.shade80',

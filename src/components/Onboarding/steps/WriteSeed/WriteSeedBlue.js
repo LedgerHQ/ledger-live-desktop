@@ -40,11 +40,11 @@ class WriteSeedBlue extends PureComponent<Props, *> {
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="onboarding.writeSeed.initialize.blue.step2">
               {'Tap'}
-              <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
+              <Text ff="Inter|SemiBold" color="palette.text.shade100">
                 {{ seedNext }}
               </Text>
               {'to move to the next words. Repeat the process until the'}
-              <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
+              <Text ff="Inter|SemiBold" color="palette.text.shade100">
                 {{ seedConfirmation }}
               </Text>
               {'screen appears.'}

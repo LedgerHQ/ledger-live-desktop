@@ -37,7 +37,7 @@ class SideBarList extends Component<Props> {
             {children}
           </ListWrapper>
         ) : emptyState ? (
-          <Box px={4} ff="Open Sans|Regular" selectable fontSize={3} color="palette.text.shade60">
+          <Box px={4} ff="Inter|Regular" selectable fontSize={3} color="palette.text.shade60">
             {emptyState}
           </Box>
         ) : null}
@@ -50,7 +50,7 @@ const SideBarListTitle = styled(Box).attrs(() => ({
   horizontal: true,
   align: 'center',
   color: 'palette.text.shade100',
-  ff: 'Museo Sans|ExtraBold',
+  ff: 'Inter|ExtraBold',
   fontSize: 1,
   px: 4,
 }))`

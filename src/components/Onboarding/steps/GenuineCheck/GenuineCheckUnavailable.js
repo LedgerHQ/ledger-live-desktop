@@ -63,7 +63,7 @@ export function GenuineCheckUnavailableMessage({
       align="center"
       flow={2}
       color={colors.alertRed}
-      ff="Open Sans|SemiBold"
+      ff="Inter|SemiBold"
       fontSize={4}
     >
       <IconExclamationCircle size={16} />
@@ -72,7 +72,7 @@ export function GenuineCheckUnavailableMessage({
       </span>
       <FakeLink
         color="alertRed"
-        ff="Open Sans|SemiBold"
+        ff="Inter|SemiBold"
         fontSize={4}
         underline
         onClick={() => {

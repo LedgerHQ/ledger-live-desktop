@@ -50,6 +50,7 @@ export default (Raven: any, shouldSendCallback: () => boolean, userId: string) =
 
       if (typeof data !== 'object' || !data) return data
 
+      // $FlowFixMe
       delete data.server_name // hides the user machine name
 
       if (typeof data.request === 'object' && data.request) {

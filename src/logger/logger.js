@@ -107,11 +107,13 @@ const logAnalytics = !__DEV__ || DEBUG_ANALYTICS
 const logApdu = !__DEV__ || DEBUG_DEVICE
 
 const blacklistTooVerboseCommandInput = [
-  'libcoreSyncAccount',
-  'libcoreGetFees',
-  'libcoreSignAndBroadcast',
+  'CurrencyScanAccountsOnDevice',
+  'AccountStartSync',
+  'AccountPrepareTransaction',
+  'AccountGetTransactionStatus',
+  'AccountSignAndBroadcast',
 ]
-const blacklistTooVerboseCommandResponse = ['libcoreSyncAccount', 'libcoreScanAccounts']
+const blacklistTooVerboseCommandResponse = ['AccountStartSync', 'CurrencyScanAccountsOnDevice']
 
 export default {
   onCmd: (type: string, id: string, spentTime: number, data?: any) => {
@@ -330,9 +332,9 @@ export default {
         message: context,
       })
     }
-    // $FlowFixMe
     logger.log('error', error && error.message, {
       stack: error && error.stack,
+      // $FlowFixMe
       ...error,
     })
     if (!process.env.STORYBOOK_ENV) {

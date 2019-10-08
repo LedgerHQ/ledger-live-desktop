@@ -86,7 +86,7 @@ export default class AccountRow extends PureComponent<Props> {
       hideAmount,
     } = this.props
 
-    const tokenCount = (account.tokenAccounts && account.tokenAccounts.length) || 0
+    const tokenCount = (account.subAccounts && account.subAccounts.length) || 0
 
     return (
       <AccountRowContainer
@@ -94,7 +94,7 @@ export default class AccountRow extends PureComponent<Props> {
         onClick={isDisabled ? null : this.onToggleAccount}
       >
         <CryptoCurrencyIconWithCount currency={account.currency} count={tokenCount} withTooltip />
-        <Box shrink grow ff="Open Sans|SemiBold" color="palette.text.shade100" fontSize={4}>
+        <Box shrink grow ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
           {onEditName ? (
             <InputWrapper>
               <Input

@@ -9,7 +9,7 @@ import IconSensitiveOperationShield from 'icons/SensitiveOperationShield'
 
 // GENERAL
 export const Title = styled(Box).attrs(() => ({
-  ff: 'Museo Sans|Regular',
+  ff: 'Inter|Regular',
   fontSize: 7,
   color: 'palette.text.shade100',
 }))`
@@ -20,7 +20,7 @@ export const Title = styled(Box).attrs(() => ({
 export const StepContainerInner = styled(GrowScroll).attrs(() => ({ pb: 6, align: 'center' }))``
 
 export const Description = styled(Box).attrs(() => ({
-  ff: 'Museo Sans|Regular',
+  ff: 'Inter|Regular',
   fontSize: 5,
   lineHeight: 1.5,
   textAlign: 'center',
@@ -84,7 +84,7 @@ export function BulletRow({ step, ...p }: { step: StepType }) {
   )
 }
 export const OptionRowDesc = styled(Box).attrs(() => ({
-  ff: 'Open Sans|Regular',
+  ff: 'Inter|Regular',
   fontSize: 4,
   textAlign: 'left',
   color: 'palette.text.shade80',
@@ -93,7 +93,7 @@ export const OptionRowDesc = styled(Box).attrs(() => ({
 }))``
 
 export const IconOptionRow = styled(Box).attrs(p => ({
-  ff: 'Rubik|Regular',
+  ff: 'Inter|Regular',
   fontSize: 14,
   color: p.color || 'wallet',
 }))``

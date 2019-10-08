@@ -104,7 +104,7 @@ export default compose(
 )(ShareAnalytics)
 
 export const Ul = styled.ul.attrs(() => ({
-  ff: 'Open Sans|Regular',
+  ff: 'Inter|Regular',
 }))`
   margin-top: 15px;
   font-size: 13px;
@@ -112,7 +112,7 @@ export const Ul = styled.ul.attrs(() => ({
   line-height: 1.69;
 `
 export const InlineDesc = styled(Box).attrs(() => ({
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 4,
   color: 'palette.text.shade100',
   mx: '15px',

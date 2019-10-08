@@ -108,7 +108,7 @@ class SelectExchange extends Component<
       <Box
         style={{ wordWrap: 'break-word', width: 250 }}
         color="alertRed"
-        ff="Open Sans|SemiBold"
+        ff="Inter|SemiBold"
         fontSize={3}
         textAlign="center"
       >

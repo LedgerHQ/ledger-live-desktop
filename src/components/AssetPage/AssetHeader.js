@@ -24,7 +24,7 @@ import IconInfoCircle from 'icons/InfoCircle'
 import ParentCryptoCurrencyIcon from '../ParentCryptoCurrencyIcon'
 
 const CurNameToken = styled(Text).attrs(() => ({
-  ff: 'Museo Sans|Bold',
+  ff: 'Inter|Bold',
   fontSize: 2,
 }))``
 
@@ -35,7 +35,7 @@ const CurNameTokenLink = styled(CurNameToken)`
 `
 
 const CurNameTokenIcon = styled(Text).attrs(() => ({
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 2,
 }))`
   color: ${p => p.theme.colors.wallet};
@@ -61,7 +61,7 @@ const Wrapper = styled(Box)`
 
 const AccountName = styled(Text).attrs(() => ({
   color: 'palette.text.shade100',
-  ff: 'Museo Sans',
+  ff: 'Inter|SemiBold',
   fontSize: 7,
 }))`
   line-height: 1.1;
@@ -78,7 +78,7 @@ const AssetHeader: React$ComponentType<Props> = React.memo(({ account, parentAcc
   const explorerView = getDefaultExplorerView(mainAccount.currency)
 
   const getContract = () =>
-    account.type === 'TokenAccount' && parentAccount
+    account.type !== 'Account' && parentAccount
       ? getAccountContractExplorer(explorerView, account, parentAccount)
       : null
 
@@ -117,7 +117,7 @@ const AssetHeader: React$ComponentType<Props> = React.memo(({ account, parentAcc
         </AccountName>
       </Box>
       <IconInfoCircle size={14} />
-      <Text ff="Open Sans|SemiBold" fontSize={12} style={{ marginLeft: 8 }}>
+      <Text ff="Inter|SemiBold" fontSize={12} style={{ marginLeft: 8 }}>
         <Trans i18nKey="asset.notice" values={{ currency: currency.name }} />
       </Text>
     </Box>

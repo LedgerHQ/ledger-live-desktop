@@ -64,7 +64,7 @@ const NoDataContainer = styled(Box)`
 `
 
 const NoData = () => (
-  <NoDataContainer ff="Open Sans|SemiBold" color="palette.text.shade40" fontSize={4}>
+  <NoDataContainer ff="Inter|SemiBold" color="palette.text.shade40" fontSize={4}>
     <Trans style={{ whiteSpace: 'nowrap' }} i18nKey="settings.rates.noCounterValue" />
   </NoDataContainer>
 )
@@ -85,7 +85,7 @@ class RateRow extends PureComponent<Props> {
     return (
       <RateRowWrapper>
         <Box
-          ff="Museo Sans|Regular"
+          ff="Inter|Regular"
           horizontal
           alignItems="center"
           color="palette.text.shade100"

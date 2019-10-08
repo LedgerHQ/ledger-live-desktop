@@ -52,7 +52,7 @@ class SideBarListItem extends PureComponent<Props> {
           disabled={disabled}
         >
           {!!Icon && <Icon size={16} />}
-          <Box grow shrink data-e2e={`sidebarItem_${label}`}>
+          <Box grow shrink data-e2e={`sidebarItem_${String(label)}`}>
             <Hide visible={!collapsed}>
               {renderedLabel}
               {!!desc && desc(this.props)}
@@ -68,7 +68,7 @@ class SideBarListItem extends PureComponent<Props> {
 const Container = styled(Tabbable).attrs(() => ({
   align: 'center',
   borderRadius: 1,
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   flow: 3,
   horizontal: true,
   px: 3,

@@ -17,7 +17,7 @@ export const TokenTips: React$ComponentType<{ token: TokenCurrency }> = React.me
   <Box mt={4} horizontal alignItems="center">
     <Text
       style={{ flex: 1, marginLeft: 10 }}
-      ff="Open Sans|Regular"
+      ff="Inter|Regular"
       color="palette.text.shade80"
       fontSize={3}
     >

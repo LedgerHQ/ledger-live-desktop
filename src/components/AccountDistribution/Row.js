@@ -2,6 +2,7 @@
 
 import React, { Fragment, PureComponent } from 'react'
 import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
+import { getAccountName } from '@ledgerhq/live-common/lib/account'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/account'
 import type { CryptoCurrency, TokenCurrency } from '@ledgerhq/live-common/lib/types/currencies'
 import { BigNumber } from 'bignumber.js'
@@ -114,12 +115,11 @@ class Row extends PureComponent<Props, State> {
     } = this.props
 
     const parentAccount =
-      account.type === 'TokenAccount' ? accounts.find(a => a.id === account.parentId) : null
+      account.type !== 'Account' ? accounts.find(a => a.id === account.parentId) : null
     const color = getCurrencyColor(currency)
+    const displayName = getAccountName(account)
     const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2)
     const icon = <ParentCryptoCurrencyIcon currency={currency} size={16} />
-    const displayName = account.type === 'TokenAccount' ? currency.name : account.name
-
     return (
       <AccountContextMenu account={account} parentAccount={parentAccount} withStar>
         <Wrapper onClick={() => this.onAccountClick(account)}>
@@ -128,10 +128,10 @@ class Row extends PureComponent<Props, State> {
             <Box grow>
               {parentAccount ? (
                 <Box fontSize={10} color="palette.text.shade80">
-                  <Text ff="Open Sans|SemiBold">{parentAccount.name}</Text>
+                  <Text ff="Inter|SemiBold">{parentAccount.name}</Text>
                 </Box>
               ) : null}
-              <Ellipsis ff="Open Sans|SemiBold" color="palette.text.shade100" fontSize={3}>
+              <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
                 {displayName}
               </Ellipsis>
             </Box>
@@ -139,7 +139,7 @@ class Row extends PureComponent<Props, State> {
           <Distribution>
             {!!distribution && (
               <Fragment>
-                <Text ff="Rubik" color="palette.text.shade100" fontSize={3}>
+                <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
                   {`${percentage}%`}
                 </Text>
                 <Bar progress={percentage} progressColor={color} />
@@ -170,7 +170,7 @@ class Row extends PureComponent<Props, State> {
                   alwaysShowSign={false}
                 />
               ) : (
-                <Text ff="Rubik" color="palette.text.shade100" fontSize={3}>
+                <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
                   {'-'}
                 </Text>
               )}

@@ -28,7 +28,7 @@ type State = {
 }
 
 const Title = styled(Text).attrs(() => ({
-  ff: 'Museo Sans',
+  ff: 'Inter',
   fontSize: 5,
   color: 'palette.text.shade100',
 }))``
@@ -85,12 +85,7 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
       return (
         <Notes>
           <Title>{t('releaseNotes.version', { versionNb: version })}</Title>
-          <Box
-            style={{ wordWrap: 'break-word' }}
-            color="alertRed"
-            ff="Open Sans|SemiBold"
-            fontSize={3}
-          >
+          <Box style={{ wordWrap: 'break-word' }} color="alertRed" ff="Inter|SemiBold" fontSize={3}>
             <TranslatedError error={error} />
           </Box>
         </Notes>

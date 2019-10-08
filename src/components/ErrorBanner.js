@@ -34,7 +34,7 @@ class ErrorBanner extends PureComponent<Props> {
         <Box mr={2} alignSelf="center">
           <IconTriangleWarning height={16} width={16} />
         </Box>
-        <Box ff="Open Sans|SemiBold" fontSize={3} vertical shrink>
+        <Box ff="Inter|SemiBold" fontSize={3} vertical shrink>
           <Box>
             <TranslatedError error={error} />
           </Box>

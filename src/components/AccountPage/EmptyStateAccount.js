@@ -10,6 +10,7 @@ import { openModal } from 'reducers/modals'
 import type { T } from 'types/common'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import { listTokenTypesForCryptoCurrency } from '@ledgerhq/live-common/lib/currencies'
+import { getMainAccount } from '@ledgerhq/live-common/lib/account'
 
 import { MODAL_RECEIVE } from 'config/constants'
 
@@ -33,10 +34,10 @@ type Props = {
 class EmptyStateAccount extends PureComponent<Props, *> {
   render() {
     const { t, account, parentAccount, openModal } = this.props
-    const mainAccount = account.type === 'Account' ? account : parentAccount
+    const mainAccount = getMainAccount(account, parentAccount)
     if (!mainAccount) return null
 
-    const hasTokens = Array.isArray(mainAccount.tokenAccounts)
+    const hasTokens = Array.isArray(mainAccount.subAccounts)
 
     return (
       <Box mt={7} alignItems="center" selectable>
@@ -52,15 +53,15 @@ class EmptyStateAccount extends PureComponent<Props, *> {
             {hasTokens ? (
               <Trans i18nKey="account.emptyState.descToken">
                 {'Make sure the'}
-                <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
+                <Text ff="Inter|SemiBold" color="palette.text.shade100">
                   {mainAccount.currency.managerAppName}
                 </Text>
                 {'app is installed and start receiving'}
-                <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
+                <Text ff="Inter|SemiBold" color="palette.text.shade100">
                   {mainAccount.currency.ticker}
                 </Text>
                 {'and'}
-                <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
+                <Text ff="Inter|SemiBold" color="palette.text.shade100">
                   {account &&
                     account.currency &&
                     // $FlowFixMe
@@ -71,7 +72,7 @@ class EmptyStateAccount extends PureComponent<Props, *> {
             ) : (
               <Trans i18nKey="account.emptyState.desc">
                 {'Make sure the'}
-                <Text ff="Open Sans|SemiBold" color="palette.text.shade100">
+                <Text ff="Inter|SemiBold" color="palette.text.shade100">
                   {mainAccount.currency.managerAppName}
                 </Text>
                 {'app is installed and start receiving'}

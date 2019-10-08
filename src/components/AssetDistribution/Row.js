@@ -100,7 +100,7 @@ class Row extends PureComponent<Props, State> {
       <Wrapper onClick={() => this.props.push(`/asset/${currency.ticker}`)}>
         <Asset>
           {icon}
-          <Ellipsis ff="Open Sans|SemiBold" color="palette.text.shade100" fontSize={3}>
+          <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
             {currency.name}
           </Ellipsis>
         </Asset>
@@ -108,7 +108,7 @@ class Row extends PureComponent<Props, State> {
           {distribution ? (
             <Price from={currency} color="palette.text.shade80" fontSize={3} />
           ) : (
-            <Text ff="Rubik" color="palette.text.shade100" fontSize={3}>
+            <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
               {'-'}
             </Text>
           )}
@@ -116,7 +116,7 @@ class Row extends PureComponent<Props, State> {
         <Distribution>
           {!!distribution && (
             <Fragment>
-              <Text ff="Rubik" color="palette.text.shade100" fontSize={3}>
+              <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
                 {`${percentage}%`}
               </Text>
               <Bar progress={percentage} progressColor={color} />
@@ -147,7 +147,7 @@ class Row extends PureComponent<Props, State> {
                 alwaysShowSign={false}
               />
             ) : (
-              <Text ff="Rubik" color="palette.text.shade100" fontSize={3}>
+              <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
                 {'-'}
               </Text>
             )}

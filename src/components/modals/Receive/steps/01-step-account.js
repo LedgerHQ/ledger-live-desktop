@@ -19,7 +19,7 @@ const AccountSelection = ({ onChangeAccount, account }) => (
     <Label>
       <Trans i18nKey="receive.steps.chooseAccount.label" />
     </Label>
-    <SelectAccount autoFocus withTokenAccounts onChange={onChangeAccount} value={account} />
+    <SelectAccount autoFocus withSubAccounts onChange={onChangeAccount} value={account} />
   </>
 )
 

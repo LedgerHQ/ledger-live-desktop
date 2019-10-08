@@ -286,7 +286,7 @@ class AppsList extends PureComponent<Props, State> {
           </Box>
         )}
         {app ? (
-          <Text ff="Museo Sans|Regular" fontSize={6} color="palette.text.shade100">
+          <Text ff="Inter|Regular" fontSize={6} color="palette.text.shade100">
             {mode !== 'home' ? t(`manager.apps.${mode}`, { app: app.name || '' }) : null}
           </Text>
         ) : null}
@@ -310,7 +310,7 @@ class AppsList extends PureComponent<Props, State> {
             color="palette.text.shade100"
             mt={4}
             fontSize={6}
-            ff="Museo Sans|Regular"
+            ff="Inter|Regular"
             textAlign="center"
             style={{ maxWidth: 350 }}
           >
@@ -320,7 +320,7 @@ class AppsList extends PureComponent<Props, State> {
             color="palette.text.shade80"
             mt={2}
             fontSize={4}
-            ff="Open Sans"
+            ff="Inter"
             textAlign="center"
             style={{ maxWidth: 350 }}
           >
@@ -340,7 +340,7 @@ class AppsList extends PureComponent<Props, State> {
           color="palette.text.shade100"
           mt={4}
           fontSize={6}
-          ff="Museo Sans|Regular"
+          ff="Inter|Regular"
           textAlign="center"
           style={{ maxWidth: 350 }}
         >
@@ -362,7 +362,7 @@ class AppsList extends PureComponent<Props, State> {
             color="palette.text.shade80"
             mt={2}
             fontSize={4}
-            ff="Open Sans|Regular"
+            ff="Inter|Regular"
             textAlign="center"
             style={{ maxWidth: 350 }}
           >
@@ -502,7 +502,7 @@ class AppsList extends PureComponent<Props, State> {
   renderTooltip = () => {
     const { t } = this.props
     return (
-      <Box ff="Open Sans|SemiBold" fontSize={2}>
+      <Box ff="Inter|SemiBold" fontSize={2}>
         {t('manager.apps.help')}
       </Box>
     )
@@ -516,7 +516,7 @@ class AppsList extends PureComponent<Props, State> {
         <Box
           mb={4}
           color="palette.text.shade100"
-          ff="Museo Sans"
+          ff="Inter"
           fontSize={5}
           flow={2}
           horizontal
