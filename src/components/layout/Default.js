@@ -65,15 +65,13 @@ class Default extends Component<Props> {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.location !== prevProps.location) {
-      const canScroll =
-        this._scrollContainer &&
-        this._scrollContainer._scrollbar &&
-        this._scrollContainer._scrollbar.scrollTo
-      if (canScroll) {
-        // $FlowFixMe already checked this._scrollContainer
-        this._scrollContainer._scrollbar.scrollTo(0, 0)
-      }
+    if (
+      this.props.location !== prevProps.location &&
+      this.ref &&
+      this.ref.scrollContainer &&
+      this.ref.scrollContainer.scrollTo
+    ) {
+      this.ref.scrollContainer.scrollTo(0, 0)
     }
   }
 
@@ -89,7 +87,7 @@ class Default extends Component<Props> {
     }
   }
 
-  _scrollContainer = null
+  ref = null
 
   render() {
     const { visibleModals } = this.props
@@ -131,7 +129,7 @@ class Default extends Component<Props> {
               >
                 <HSMStatusBanner />
                 <TopBar />
-                <Main ref={n => (this._scrollContainer = n)} tabIndex={-1}>
+                <Main ref={n => (this.ref = n)} tabIndex={-1}>
                   <Switch>
                     <Route path="/" exact component={DashboardPage} />
                     <Route path="/settings" component={SettingsPage} />
