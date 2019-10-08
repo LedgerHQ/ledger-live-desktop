@@ -1221,7 +1221,7 @@
       "title": "Fees are required"
     },
     "GasLessThanEstimate": {
-      "title": "Provided gas limit is less than the estimated"
+      "title": "This may be too low, please increase"
     },
     "UnknownMCU": {
       "title": "Unknown MCU version",
