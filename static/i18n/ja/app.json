@@ -1220,6 +1220,9 @@
     "FeeRequired": {
       "title": "手数料が必要です"
     },
+    "GasLessThanEstimate": {
+      "title": "This may be too low, please increase"
+    },
     "UnknownMCU": {
       "title": "未知のMCUバージョンです",
       "description": "Ledger Supportにご連絡ください。"
