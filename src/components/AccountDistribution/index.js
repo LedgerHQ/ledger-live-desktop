@@ -6,6 +6,7 @@ import { Trans } from 'react-i18next'
 import { BigNumber } from 'bignumber.js'
 import Text from 'components/base/Text'
 import Card from 'components/base/Box/Card'
+import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import { counterValueCurrencySelector } from 'reducers/settings'
 import styled from 'styled-components'
 import Box from 'components/base/Box'
@@ -29,13 +30,10 @@ const mapStateToProps = (state, props) => {
     accountDistribution: accounts
       .map(a => ({
         account: a,
-        currency: a.type === 'Account' ? a.currency : a.token,
+        currency: getAccountCurrency(a),
         distribution: a.balance.div(total).toFixed(2),
         amount: a.balance,
-        countervalue: calculateCountervalueSelector(state)(
-          a.type === 'Account' ? a.currency : a.token,
-          a.balance,
-        ),
+        countervalue: calculateCountervalueSelector(state)(getAccountCurrency(a), a.balance),
       }))
       .sort((a, b) => b.distribution - a.distribution),
     counterValueCurrency: counterValueCurrencySelector,

@@ -10,7 +10,7 @@ import type {
   PortfolioRange,
   TokenCurrency,
 } from '@ledgerhq/live-common/lib/types'
-import { flattenAccounts } from '@ledgerhq/live-common/lib/account'
+import { flattenAccounts, getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import {
   exchangeSettingsForPairSelector,
   counterValueCurrencySelector,
@@ -31,7 +31,7 @@ export const balanceHistoryWithCountervalueSelector = (
   },
 ) => {
   const counterValueCurrency = counterValueCurrencySelector(state)
-  const currency = account.type === 'Account' ? account.currency : account.token
+  const currency = getAccountCurrency(account)
   const intermediary = intermediaryCurrency(currency, counterValueCurrency)
   const exchange = exchangeSettingsForPairSelector(state, { from: currency, to: intermediary })
   const toExchange = exchangeSettingsForPairSelector(state, {
@@ -91,7 +91,7 @@ export const currencyPortfolioSelector = (
   },
 ) => {
   const accounts = flattenAccounts(accountsSelector(state)).filter(
-    a => (a.type === 'Account' ? a.currency : a.token) === currency,
+    a => getAccountCurrency(a) === currency,
   )
   const counterValueCurrency = counterValueCurrencySelector(state)
   return getCurrencyPortfolio(accounts, range, (currency, value, date) => {

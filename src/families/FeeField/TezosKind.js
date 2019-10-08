@@ -14,34 +14,34 @@ type Props = {
   onChange: Transaction => void,
 }
 
-const fallbackGasPrice = BigNumber(10e9)
-let lastNetworkGasPrice // local cache of last value to prevent extra blinks
+const fallbackFees = BigNumber(1e5)
+let lastNetworkFees // local cache of last value to prevent extra blinks
 
 const FeesField = ({ onChange, account, transaction, status }: Props) => {
-  invariant(transaction.family === 'ethereum', 'FeeField: ethereum family expected')
+  invariant(transaction.family === 'tezos', 'FeeField: tezos family expected')
 
   const bridge = getAccountBridge(account)
 
-  const onGasPriceChange = useCallback(
-    gasPrice => {
-      onChange(bridge.updateTransaction(transaction, { gasPrice }))
+  const onFeesChange = useCallback(
+    fees => {
+      onChange(bridge.updateTransaction(transaction, { fees }))
     },
     [onChange, transaction, bridge],
   )
 
-  const networkGasPrice = transaction.networkInfo && transaction.networkInfo.gasPrice
-  if (!lastNetworkGasPrice && networkGasPrice) {
-    lastNetworkGasPrice = networkGasPrice
+  const networkFees = transaction.networkInfo && transaction.networkInfo.fees
+  if (!lastNetworkFees && networkFees) {
+    lastNetworkFees = networkFees
   }
-  const defaultGasPrice = networkGasPrice || lastNetworkGasPrice || fallbackGasPrice
-  const gasPrice = transaction.gasPrice || defaultGasPrice
+  const defaultFees = networkFees || lastNetworkFees || fallbackFees
+  const fees = transaction.fees || defaultFees
   const { units } = account.currency
 
   return (
     <FeeSliderField
-      defaultValue={defaultGasPrice}
-      value={gasPrice}
-      onChange={onGasPriceChange}
+      defaultValue={defaultFees}
+      value={fees}
+      onChange={onFeesChange}
       unit={units.length > 1 ? units[1] : units[0]}
       error={status.errors.gasPrice}
     />

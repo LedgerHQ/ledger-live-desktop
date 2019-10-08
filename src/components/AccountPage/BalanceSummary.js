@@ -14,7 +14,7 @@ import type {
   PortfolioRange,
   AccountPortfolio,
 } from '@ledgerhq/live-common/lib/types'
-
+import { getAccountUnit } from '@ledgerhq/live-common/lib/account'
 import Chart from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
@@ -37,7 +37,7 @@ class AccountBalanceSummary extends PureComponent<Props> {
     const { account, counterValue, balanceHistoryWithCountervalue, countervalueFirst } = this.props
     const displayCountervalue =
       countervalueFirst && balanceHistoryWithCountervalue.countervalueAvailable
-    const unit = account.type === 'Account' ? account.unit : account.token.units[0]
+    const unit = getAccountUnit(account)
     const data = [{ val: d.value, unit }, { val: d.countervalue, unit: counterValue.units[0] }]
     if (displayCountervalue) data.reverse()
     return (
@@ -53,7 +53,7 @@ class AccountBalanceSummary extends PureComponent<Props> {
 
   renderTickYCryptoValue = val => {
     const { account } = this.props
-    const unit = account.type === 'Account' ? account.unit : account.token.units[0]
+    const unit = getAccountUnit(account)
     return formatShort(unit, BigNumber(val))
   }
 

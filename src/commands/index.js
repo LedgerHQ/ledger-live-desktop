@@ -15,25 +15,20 @@ import getIsGenuine from 'commands/getIsGenuine'
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
 import installApp from 'commands/installApp'
 import killInternalProcess from 'commands/killInternalProcess'
-import libcoreGetFees from 'commands/libcoreGetFees'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 import libcoreReset from 'commands/libcoreReset'
-import libcoreScanAccounts from 'commands/libcoreScanAccounts'
-import libcoreScanFromXPUB from 'commands/libcoreScanFromXPUB'
-import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
-import libcoreSyncAccount from 'commands/libcoreSyncAccount'
-import libcoreValidAddress from 'commands/libcoreValidAddress'
 import listenDevices from 'commands/listenDevices'
 import ping from 'commands/ping'
 import quitAndInstallElectronUpdate from 'commands/quitAndInstallElectronUpdate'
-import signTransaction from 'commands/signTransaction'
 import testApdu from 'commands/testApdu'
 import testCrash from 'commands/testCrash'
 import testInterval from 'commands/testInterval'
 import uninstallApp from 'commands/uninstallApp'
+import { commands as bridgeProxyCommands } from '../bridge/proxy'
 
 const all: Array<Command<any, any>> = [
   autoUpdate,
+  ...bridgeProxyCommands,
   getAppAndVersion,
   firmwarePrepare,
   firmwareMain,
@@ -45,18 +40,11 @@ const all: Array<Command<any, any>> = [
   getLatestFirmwareForDevice,
   installApp,
   killInternalProcess,
-  libcoreGetFees,
   libcoreGetVersion,
   libcoreReset,
-  libcoreScanAccounts,
-  libcoreScanFromXPUB,
-  libcoreSignAndBroadcast,
-  libcoreSyncAccount,
-  libcoreValidAddress,
   listenDevices,
   ping,
   quitAndInstallElectronUpdate,
-  signTransaction,
   testApdu,
   testCrash,
   testInterval,

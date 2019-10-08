@@ -31,7 +31,8 @@ type OwnProps = {|
 
   placeholder?: React$Node,
 
-  prefix: React$Node,
+  prefix?: React$Node,
+  suffix?: React$Node,
 |}
 
 type StateProps = {|
@@ -83,6 +84,7 @@ class CounterValue extends PureComponent<Props> {
       alwaysShowSign,
       placeholder,
       prefix,
+      suffix,
       ...props
     } = this.props
 
@@ -100,6 +102,7 @@ class CounterValue extends PureComponent<Props> {
           alwaysShowSign={alwaysShowSign}
           {...props}
         />
+        {suffix || null}
       </>
     )
   }

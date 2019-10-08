@@ -15,7 +15,7 @@ import { validateNameEdition } from '@ledgerhq/live-common/lib/account'
 import { updateAccount, removeAccount } from 'actions/accounts'
 import { setDataModal } from 'reducers/modals'
 
-import { getAccountBridge } from 'bridge'
+import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 
 import { AccountNameRequiredError, EnpointConfigError } from '@ledgerhq/errors'
 

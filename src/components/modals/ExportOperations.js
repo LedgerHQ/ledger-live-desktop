@@ -145,9 +145,7 @@ class ExportOperations extends PureComponent<Props, State> {
                 <IconWrapperCircle>
                   <IconDownloadCloud />
                 </IconWrapperCircle>
-                <LabelWrapper ff="Inter|Regular">
-                  {t('exportOperationsModal.desc')}
-                </LabelWrapper>
+                <LabelWrapper ff="Inter|Regular">{t('exportOperationsModal.desc')}</LabelWrapper>
                 <AccountsList
                   emptyText={t('exportOperationsModal.noAccounts')}
                   title={headerText}

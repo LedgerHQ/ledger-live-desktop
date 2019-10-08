@@ -1,20 +1,23 @@
 // @flow
 import React from 'react'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
 import BitcoinKind from './BitcoinKind'
 import EthereumKind from './EthereumKind'
 import RippleKind from './RippleKind'
+import TezosKind from './TezosKind'
 
 const byFamily = {
   bitcoin: BitcoinKind,
   ethereum: EthereumKind,
   ripple: RippleKind,
+  tezos: TezosKind,
 }
 
 type Props = {
   account: Account,
-  transaction: *,
-  onChange: (*) => void,
+  transaction: Transaction,
+  status: TransactionStatus,
+  onChange: Transaction => void,
 }
 
 const FeeField = (props: Props) => {

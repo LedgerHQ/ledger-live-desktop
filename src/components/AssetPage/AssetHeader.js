@@ -78,7 +78,7 @@ const AssetHeader: React$ComponentType<Props> = React.memo(({ account, parentAcc
   const explorerView = getDefaultExplorerView(mainAccount.currency)
 
   const getContract = () =>
-    account.type === 'TokenAccount' && parentAccount
+    account.type !== 'Account' && parentAccount
       ? getAccountContractExplorer(explorerView, account, parentAccount)
       : null
 

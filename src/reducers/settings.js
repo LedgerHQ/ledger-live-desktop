@@ -21,7 +21,7 @@ const bitcoin = getCryptoCurrencyById('bitcoin')
 const ethereum = getCryptoCurrencyById('ethereum')
 export const possibleIntermediaries = [bitcoin, ethereum]
 export const intermediaryCurrency = (from: Currency, _to: Currency) => {
-  if (from === ethereum || from.type === 'TokenCurrency') return ethereum
+  if (from === ethereum || (from && from.type === 'TokenCurrency')) return ethereum
   return bitcoin
 }
 

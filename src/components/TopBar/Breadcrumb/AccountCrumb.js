@@ -8,8 +8,13 @@ import IconCheck from 'icons/Check'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import type { TokenAccount, Account } from '@ledgerhq/live-common/lib/types'
-import { listTokenAccounts } from '@ledgerhq/live-common/lib/account/helpers'
+import type { Account, AccountLike } from '@ledgerhq/live-common/lib/types'
+import {
+  listSubAccounts,
+  getAccountCurrency,
+  findSubAccountById,
+  getAccountName,
+} from '@ledgerhq/live-common/lib/account'
 import { push } from 'react-router-redux'
 
 import Text from 'components/base/Text'
@@ -110,16 +115,12 @@ const mapDispatchToProps = {
 
 class AccountCrumb extends PureComponent<Props> {
   renderItem = ({ item, isActive }) => {
-    const { parentId } = this.props.match.params
-
+    const currency = getAccountCurrency(item.account)
     return (
       <Item key={item.account.id} isActive={isActive}>
-        <CryptoCurrencyIcon
-          size={16}
-          currency={parentId ? item.account.token : item.account.currency}
-        />
+        <CryptoCurrencyIcon size={16} currency={currency} />
         <Text ff={`Inter|${isActive ? 'SemiBold' : 'Regular'}`} fontSize={4}>
-          {parentId ? item.account.token.name : item.account.name}
+          {getAccountName(item.account)}
         </Text>
         {isActive && (
           <Check>
@@ -177,7 +178,7 @@ class AccountCrumb extends PureComponent<Props> {
     }
 
     let account: ?Account
-    let tokenAccount: ?TokenAccount
+    let tokenAccount: ?AccountLike
     let currency
     let name
     let items
@@ -185,16 +186,14 @@ class AccountCrumb extends PureComponent<Props> {
     if (parentId) {
       const parentAccount: ?Account = accounts.find(a => a.id === parentId)
 
-      if (parentAccount && parentAccount.tokenAccounts) {
-        items = parentAccount.tokenAccounts
-        tokenAccount = items.find(t => t.id === id)
-
+      if (parentAccount && parentAccount.subAccounts) {
+        tokenAccount = findSubAccountById(parentAccount, id)
         if (tokenAccount) {
-          currency = tokenAccount.token
-          name = tokenAccount.token.name
+          currency = getAccountCurrency(tokenAccount)
+          name = currency.name
         }
       }
-      items = parentAccount && listTokenAccounts(parentAccount)
+      items = parentAccount && listSubAccounts(parentAccount)
     } else {
       account = accounts.find(a => a.id === id)
       items = accounts

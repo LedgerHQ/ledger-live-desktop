@@ -18,7 +18,7 @@ import IconCheckCircle from 'icons/CheckCircle'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 import IconTriangleWarning from 'icons/TriangleWarning'
 
-import type { StepProps } from '../index'
+import type { StepProps } from '../types'
 
 const Container = styled(Box).attrs(() => ({
   alignItems: 'center',
@@ -59,7 +59,14 @@ const Disclaimer = styled(Box).attrs(() => ({
   color: ${p => p.theme.colors.alertRed};
 `
 
-function StepConfirmation({ account, t, optimisticOperation, error, signed, theme }: StepProps<*>) {
+function StepConfirmation({
+  account,
+  t,
+  optimisticOperation,
+  error,
+  signed,
+  theme,
+}: StepProps & { theme: * }) {
   const Icon = optimisticOperation ? IconCheckCircle : error ? IconExclamationCircleThin : Spinner
   const iconColor = optimisticOperation
     ? theme.colors.positiveGreen
@@ -116,7 +123,7 @@ export function StepConfirmationFooter({
   error,
   openModal,
   closeModal,
-}: StepProps<*>) {
+}: StepProps) {
   const concernedOperation = optimisticOperation
     ? optimisticOperation.subOperations && optimisticOperation.subOperations.length > 0
       ? optimisticOperation.subOperations[0]
