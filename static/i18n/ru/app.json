@@ -114,7 +114,7 @@
     }
   },
   "stars": {
-    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "placeholder": "Избранные счета <1><0> аккаунтов </0></1> теперь появятся здесь!",
     "tooltip": "Избранные счета"
   },
   "account": {
