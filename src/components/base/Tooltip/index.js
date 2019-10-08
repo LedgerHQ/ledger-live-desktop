@@ -23,7 +23,7 @@ type ContainerProps = {
   theme: any,
 }
 
-export const TooltipContainer = React.forwardRef(
+export const TooltipContainer: any = React.forwardRef(
   ({ children, style, tooltipBg, theme }: ContainerProps, ref: any) => (
     <div
       ref={ref}
@@ -42,11 +42,6 @@ export const TooltipContainer = React.forwardRef(
     </div>
   ),
 )
-
-TooltipContainer.defaultProps = {
-  innerRef: undefined,
-  style: undefined,
-}
 
 type Props = {
   offset?: Array<number>,

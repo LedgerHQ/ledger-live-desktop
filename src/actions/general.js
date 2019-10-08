@@ -64,7 +64,7 @@ export const flattenSortAccountsEnforceHideEmptyTokenSelector = createSelector(
   accountsSelector,
   sortAccountsComparatorSelector,
   (accounts, comparator) =>
-    flattenSortAccounts(accounts, comparator, { enforceHideEmptyTokenAccounts: true }),
+    flattenSortAccounts(accounts, comparator, { enforceHideEmptySubAccounts: true }),
 )
 
 export const refreshAccountsOrdering = () => (dispatch: *, getState: *) => {

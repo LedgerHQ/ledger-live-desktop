@@ -5,7 +5,12 @@ import { handleActions } from 'redux-actions'
 import accountModel from 'helpers/accountModel'
 import logger from 'logger'
 import type { Account } from '@ledgerhq/live-common/lib/types'
-import { flattenAccounts, clearAccount, canBeMigrated } from '@ledgerhq/live-common/lib/account'
+import {
+  flattenAccounts,
+  clearAccount,
+  canBeMigrated,
+  getAccountCurrency,
+} from '@ledgerhq/live-common/lib/account'
 import { getEnv } from '@ledgerhq/live-common/lib/env'
 import { OUTDATED_CONSIDERED_DELAY, DEBUG_SYNC } from 'config/constants'
 import { currenciesStatusSelector, currencyDownStatusLocal } from './currenciesStatus'
@@ -97,9 +102,9 @@ export const someAccountsNeedMigrationSelector = createSelector(
 export const currenciesSelector = createSelector(
   accountsSelector,
   accounts =>
-    [
-      ...new Set(flattenAccounts(accounts).map(a => (a.type === 'Account' ? a.currency : a.token))),
-    ].sort((a, b) => a.name.localeCompare(b.name)),
+    [...new Set(flattenAccounts(accounts).map(a => getAccountCurrency(a)))].sort((a, b) =>
+      a.name.localeCompare(b.name),
+    ),
 )
 
 export const cryptoCurrenciesSelector = createSelector(
@@ -135,7 +140,7 @@ export const starredAccountsEnforceHideEmptyTokenSelector = createSelector(
   accountsSelector,
   starredAccountIdsSelector,
   () => getEnv('HIDE_EMPTY_TOKEN_ACCOUNTS'), // The result of this func is not used but it allows the input params to be different so that reselect recompute the output
-  (accounts, ids) => flattenFilterAndSort(accounts, ids, { enforceHideEmptyTokenAccounts: true }),
+  (accounts, ids) => flattenFilterAndSort(accounts, ids, { enforceHideEmptySubAccounts: true }),
 )
 
 export const isStarredAccountSelector = createSelector(

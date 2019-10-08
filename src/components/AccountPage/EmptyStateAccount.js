@@ -10,6 +10,7 @@ import { openModal } from 'reducers/modals'
 import type { T } from 'types/common'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import { listTokenTypesForCryptoCurrency } from '@ledgerhq/live-common/lib/currencies'
+import { getMainAccount } from '@ledgerhq/live-common/lib/account'
 
 import { MODAL_RECEIVE } from 'config/constants'
 
@@ -33,10 +34,10 @@ type Props = {
 class EmptyStateAccount extends PureComponent<Props, *> {
   render() {
     const { t, account, parentAccount, openModal } = this.props
-    const mainAccount = account.type === 'Account' ? account : parentAccount
+    const mainAccount = getMainAccount(account, parentAccount)
     if (!mainAccount) return null
 
-    const hasTokens = Array.isArray(mainAccount.tokenAccounts)
+    const hasTokens = Array.isArray(mainAccount.subAccounts)
 
     return (
       <Box mt={7} alignItems="center" selectable>

@@ -55,9 +55,7 @@ const mapStateToProps = (state, props) => ({
   allAccounts: accountsSelector(state),
   countervalueFirst: countervalueFirstSelector(state),
   accounts: flattenSortAccountsEnforceHideEmptyTokenSelector(state).filter(
-    a =>
-      (a.type === 'Account' ? a.currency : a.token) ===
-      findCurrencyByTicker(props.match.params.assetTicker),
+    a => getAccountCurrency(a) === findCurrencyByTicker(props.match.params.assetTicker),
   ),
 })
 
@@ -68,7 +66,7 @@ class AssetPage extends PureComponent<Props, State> {
   render() {
     const { t, accounts, counterValue, range, countervalueFirst } = this.props
     const parentAccount =
-      accounts[0].type === 'TokenAccount' ? this.lookupParentAccount(accounts[0].parentId) : null
+      accounts[0].type !== 'Account' ? this.lookupParentAccount(accounts[0].parentId) : null
     const currency = getAccountCurrency(accounts[0])
     const unit = getAccountUnit(accounts[0])
     const color = getCurrencyColor(currency)

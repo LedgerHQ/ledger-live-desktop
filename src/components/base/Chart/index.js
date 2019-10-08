@@ -209,7 +209,7 @@ class Chart extends Component<Props> {
       refreshDraw(theme, { ctx, props })
 
       // Refreshing tooltip
-      refreshToolTip({ ctx, props })
+      refreshToolTip()
     }
 
     this.refreshChart()

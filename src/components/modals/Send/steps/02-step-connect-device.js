@@ -6,14 +6,14 @@ import TrackPage from 'analytics/TrackPage'
 import Button from 'components/base/Button'
 import EnsureDeviceApp from 'components/EnsureDeviceApp'
 
-import type { StepProps } from '../index'
+import type { StepProps } from '../types'
 import { TokenTips } from '../../Receive/steps/02-step-connect-device'
 
 export default function StepConnectDevice({
   account,
   parentAccount,
   onChangeAppOpened,
-}: StepProps<*>) {
+}: StepProps) {
   const token = account && account.type === 'TokenAccount' && account.token
   return (
     <Fragment>
@@ -29,7 +29,7 @@ export default function StepConnectDevice({
   )
 }
 
-export function StepConnectDeviceFooter({ t, transitionTo, isAppOpened }: StepProps<*>) {
+export function StepConnectDeviceFooter({ t, transitionTo, isAppOpened }: StepProps) {
   return (
     <Button disabled={!isAppOpened} primary onClick={() => transitionTo('verification')}>
       {t('common.continue')}

@@ -2,6 +2,11 @@
 
 import React, { Fragment, PureComponent } from 'react'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
+import {
+  getAccountCurrency,
+  getAccountUnit,
+  getAccountName,
+} from '@ledgerhq/live-common/lib/account'
 import Box from 'components/base/Box'
 import Bar from 'components/base/Bar'
 import Ellipsis from 'components/base/Ellipsis'
@@ -40,23 +45,21 @@ class Header extends PureComponent<{
 }> {
   render() {
     const { account, parentAccount } = this.props
-    let currency
-    let unit
+    const currency = getAccountCurrency(account)
+    const unit = getAccountUnit(account)
+    const name = getAccountName(account)
+
     let title
-    let name
-
-    if (account.type !== 'Account') {
-      currency = account.token
-      unit = account.token.units[0]
-      title = 'token'
-      name = currency.name
-
-      if (!parentAccount) return null
-    } else {
-      currency = account.currency
-      unit = account.unit
-      title = currency.name
-      name = account.name
+    switch (account.type) {
+      case 'Account':
+      case 'AccountChild':
+        title = currency.name
+        break
+      case 'TokenAccount':
+        title = 'token'
+        break
+      default:
+        title = ''
     }
 
     return (

@@ -86,7 +86,7 @@ export default class AccountRow extends PureComponent<Props> {
       hideAmount,
     } = this.props
 
-    const tokenCount = (account.tokenAccounts && account.tokenAccounts.length) || 0
+    const tokenCount = (account.subAccounts && account.subAccounts.length) || 0
 
     return (
       <AccountRowContainer
