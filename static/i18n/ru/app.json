@@ -242,54 +242,54 @@
     "thorswap": "ThorSwap представляет собой мгновенную, безопасную и честную биржу криптоактивов, работающую на основе децентрализованных технологий атомных свопов. Это наиболее удобный способ начать торговлю, не требующий регистрации или соблюдения правила KYC (Know Your Customer — знай своего клиента) для проведения транзакций на небольшую сумму.",
     "bitpanda": "Bitpanda — это ведущая в Европе розничная брокерская компания, специализирующаяся на покупке и продаже такой криптовалюты, как Bitcoin, Ethereum, IOTA и много других. Вносите деньги, используя кредитную карточку, систему SOFORT-Transfer, NETELLER и другие варианты.",
     "exmo": "Основанная в 2013 году биржа EXMO, отделения которой расположены в Лондоне, Киеве, Барселоне и Москве, занимает первое место среди бирж в Восточной Европе и является одной из крупнейших в мире по объему и ликвидности.",
-    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure and intuitive platform to buy and sell Bitcoin, Litecoin, Ethereum, XRP and other digital assets. Other key features include advanced trading, free deposits, and an institutional-grade custody solution via Ledger Vault."
+    "ndax": "Ведущая канадская криптовалютная биржа NDAX предоставляет регулируемую, безопасную и интуитивно понятную платформу для покупки и продажи Bitcoin, Litecoin, Ethereum, XRP и других цифровых активов. Другие ключевые функции включают расширенную торговлю, бесплатные депозиты и решение для хранения институционального уровня через Ledger Vault."
   },
   "genuinecheck": {
     "modal": {
       "title": "Проверка подлинности"
     },
-    "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
+    "deviceInBootloader": "Ваше устройство находится в режиме Bootloader. Нажмите {{button}}, чтобы обновить его."
   },
   "tokensList": {
-    "title": "Tokens",
+    "title": "Токены",
     "cta": "Добавить Токен",
-    "placeholder": "To add tokens, simply send them to your Ethereum address.",
+    "placeholder": "Чтобы добавить токены, просто отправьте их на ваш Ethereum адрес.",
     "link": "Подробнее",
-    "seeTokens": "See tokens ({{tokenCount}})",
-    "hideTokens": "Hide tokens ({{tokenCount}})",
-    "tooltip": "Token from",
+    "seeTokens": "Посмотреть токены ({{tokenCount}})",
+    "hideTokens": "Скрыть токены ({{tokenCount}})",
+    "tooltip": "Токен от",
     "countTooltip": "1 токен",
     "countTooltip_plural": "{{count}} токенов"
   },
   "migrateAccounts": {
     "overview": {
-      "title": "Ledger Live accounts update",
-      "done": "Ledger Live accounts update completed",
-      "successTitle": "Accounts updated successfully",
-      "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
-      "successDesc": "Your {{assets}} account is now updated and ready to use",
-      "mobileTitle": "Export accounts to mobile",
-      "mobileDesc": "Click the button below to export your updated accounts to the Ledger Live mobile app.",
-      "mobileCTA": "Export to mobile",
-      "description": "New features in Ledger Live require an update of your accounts.",
-      "currency": "1 {{currency}} account needs to be updated:",
-      "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
-      "footer": "You need your Ledger Device to complete the update",
-      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
-      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
-      "doItLaterBtn": "Do it later"
+      "title": "Доступно обновление учётных записей Ledger Live",
+      "done": "Обновление учётных записей Ledger Live завершено",
+      "successTitle": "Учётные записи обновлены успешно",
+      "successDescPlu": "Ваши учётные записи {{assets}} обновлены и готовы к использованию",
+      "successDesc": "Ваши учётные записи {{assets}} обновлены и готовы к использованию",
+      "mobileTitle": "Экспорт аккаунтов на мобильный",
+      "mobileDesc": "Нажмите кнопку ниже, чтобы экспортировать ваши обновленные учетные записи в мобильное приложение Ledger Live.",
+      "mobileCTA": "Экспорт на мобильный",
+      "description": "Новые возможности в Ledger Live требуют обновления ваших аккаунтов.",
+      "currency": "1 {{currency}} аккаунт должен быть обновлен:",
+      "currency_plural": "{{count}} {{currency}} учетных записей необходимо обновить:",
+      "footer": "Для завершения обновления вам нужно устройство Ledger",
+      "pendingDevices": "1 аккаунт не может быть обновлен. Пожалуйста, подключите устройство, связанное с учетной записью ниже",
+      "pendingDevices_plural": "{{totalMigratableAccounts}} учетных записей не может быть обновлено. Пожалуйста, подключите устройство, связанное с учетной записью ниже",
+      "doItLaterBtn": "Отложить на потом"
     },
     "connectDevice": {
-      "title": "{{currencyName}} update",
+      "title": "Обновление {{currencyName}}",
       "description": ""
     },
     "progress": {
       "finished": {
-        "title": "{{currencyName}} update completed",
+        "title": "Обновление {{currencyName}} завершено",
         "description": ""
       },
       "scanning": {
-        "title": "{{currencyName}} update in progress...",
+        "title": "{{currencyName}} в процессе обновления...",
         "description": "Please wait while your accounts are updated"
       },
       "finished-empty": {
