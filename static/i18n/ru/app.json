@@ -423,27 +423,27 @@
       "identifier": "Идентификатор",
       "mcuTitle": "Завершить обновление",
       "mcuFirst": "Отсоедините USB-кабель от устройства.",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
+      "mcuSecond": "Нажмите и удерживайте левую кнопку во время повторного подключения USB-кабеля до тех пор пока не появится на экране <0>{{repairProcessing}}</0></1>",
       "mcuPin": "Дождитесь завершения обновления.",
-      "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
-      "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
+      "mcuBlueFirst": "Нажмите и удерживайте боковую кнопку в течение 10 секунд, чтобы отключить устройство. Затем отпустите кнопку.",
+      "mcuBlueSecond": "Нажмите и удерживайте кнопку не менее 5 секунд до тех пор, пока не будут показаны варианты загрузки. Выберите режим Bootloader",
       "successTitle": "Встроенное ПО обновлено",
       "successText": "Повторно установите приложения на устройстве.",
-      "resetTitle": "Prepare Device",
+      "resetTitle": "Подготовить устройство",
       "resetSteps": {
-        "first": "1. Reset your device",
-        "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
-        "turnOn": "Press the button on the device to turn it on.",
-        "falsePin": "Enter three wrong PIN codes to reset the device.",
-        "turnOff": "Press and hold the side button until {{action}} is displayed.",
-        "confirmTurnOff": "Tap {{action}} to confirm.",
-        "second": "2. Boot in {{mode}} mode",
-        "boot": "Press and hold the side button until {{option}} is displayed",
-        "recoveryMode": "Tap {{mode}} Mode. Wait until the dashboard appears.",
-        "third": "3. Uninstall all apps",
-        "openLive": "Open the Manager in Ledger Live.",
-        "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
-        "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secured on your Recovery sheet."
+        "first": "1. Сбросить устройство",
+        "connect": "Подключите {{deviceName}} к компьютеру с помощью USB-кабеля.",
+        "turnOn": "Нажмите кнопку на устройстве, чтобы включить его.",
+        "falsePin": "Введите три неверных PIN-кода для сброса устройства.",
+        "turnOff": "Нажмите и удерживайте боковую кнопку до отображения {{action}}.",
+        "confirmTurnOff": "Нажмите {{action}} для подтверждения.",
+        "second": "2. Загрузить в режиме {{mode}}",
+        "boot": "Нажмите и удерживайте боковую кнопку до отображения {{option}}",
+        "recoveryMode": "Выберите режим {{mode}}. Подождите, пока не появится панель управления.",
+        "third": "3. Удалить все приложения",
+        "openLive": "Откройте менеджер в Ledger Live.",
+        "uninstall": "Нажмите на значок корзины для всех приложений, установленных в настоящее время на {{deviceName}}. Это освободит место для установки прошивки.",
+        "disclaimer": "Примечание: Ваши средства не будут затронуты этой операцией, закрытые ключи для доступа к вашим крипто-активам остаются защищенными на вашей карточке восстановления."
       }
     },
     "title": "Диспетчер",
@@ -995,20 +995,20 @@
       "description": "Укажите название счета."
     },
     "AccountNotSupported": {
-      "title": "Account not supported.",
-      "description": "Please retry or contact Support ({{reason}})"
+      "title": "Аккаунт не поддерживается.",
+      "description": "Повторите попытку или свяжитесь со службой поддержки ({{reason}})"
     },
     "BtcUnmatchedApp": {
       "title": "Это не то приложение.",
       "description": "Откройте приложение ‘{{managerAppName}}‘ на устройстве."
     },
     "NoAccessToCamera": {
-      "title": "Please ensure your system has a camera, that it's not in use by another application and that Ledger Live has permission to use it.",
+      "title": "Пожалуйста, убедитесь, что ваша система имеет камеру, что она не используется другим приложением и что Ledger Live имеет разрешение на ее использование.",
       "description": ""
     },
     "CurrencyNotSupported": {
-      "title": "{{currencyName}} is not supported",
-      "description": "This crypto asset is not yet supported. Please contact us."
+      "title": "{{currencyName}} не поддерживается",
+      "description": "Этот крипто актив еще не поддерживается. Пожалуйста, свяжитесь с нами."
     },
     "DeviceNotGenuine": {
       "title": "Возможно, устройство не подлинное.",
@@ -1019,12 +1019,12 @@
       "description": null
     },
     "DeviceInOSUExpected": {
-      "title": "Sorry, update failed",
-      "description": "Please retry or contact Ledger Support"
+      "title": "Извините, обновление не удалось",
+      "description": "Пожалуйста, повторите попытку или свяжитесь с службой поддержки Ledger"
     },
     "DeviceHalted": {
-      "title": "Please restart your Ledger device and retry",
-      "description": "An unexpected error occurred, so please try again"
+      "title": "Пожалуйста, перезапустите устройство Ledger и повторите попытку",
+      "description": "При отправке запроса возникла ошибка. Пожалуйста, попробуйте позже."
     },
     "DeviceSocketFail": {
       "description": "Повторите попытку."
@@ -1042,8 +1042,8 @@
       "description": "Повторите попытку."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Oops, device disconnected",
-      "description": "The connection to the device was lost during an operation, please try again"
+      "title": "Упс, устройство отключено",
+      "description": "Соединение с устройством было потеряно во время операции, пожалуйста, попробуйте еще раз"
     },
     "EnpointConfig": {
       "title": "Недействительная конечная точка.",
@@ -1054,8 +1054,8 @@
       "description": "Попробуйте настроить пользовательскую комиссию (status: {{status}})."
     },
     "FirmwareOrAppUpdateRequired": {
-      "title": "Firmware or app update required",
-      "description": "Please use the Manager to uninstall all apps and check if a firmware update is available before reinstalling them"
+      "title": "Требуется обновление прошивки или приложения",
+      "description": "Пожалуйста, используйте Менеджер для удаления всех приложений и проверьте, доступно ли обновление прошивки перед их переустановкой"
     },
     "HardResetFail": {
       "title": "Не удалось сбросить.",
