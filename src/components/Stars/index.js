@@ -12,9 +12,9 @@ import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import SideBarTooltip from 'components/base/SideBar/SideBarTooltip'
 import { Hide } from 'components/MainSideBar'
 import Text from 'components/base/Text'
+import Image from 'components/base/Image'
 import { dragDropStarAction } from '../../actions/settings'
 import { starredAccountsEnforceHideEmptyTokenSelector } from '../../reducers/accounts'
-import { i } from '../../helpers/staticPath'
 import Item from './Item'
 
 const Container = styled.div`
@@ -90,7 +90,13 @@ class Stars extends PureComponent<{
     ) : (
       <Hide visible={!collapsed}>
         <Placeholder>
-          <img alt="stars placeholder" src={i('starsPlaceholder.png')} width="95" height="53" />
+          <Image
+            alt="stars placeholder"
+            resource="empty-bookmarks.png"
+            width="95"
+            height="53"
+            themeTyped
+          />
           <Text
             ff="Inter|SemiBold"
             color="palette.text.shade60"
