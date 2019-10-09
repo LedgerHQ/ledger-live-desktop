@@ -10,8 +10,6 @@ import Modal from 'components/base/Modal'
 import ModalBody from 'components/base/Modal/ModalBody'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
-import GrowScroll from 'components/base/GrowScroll'
-import GradientBox from 'components/GradientBox'
 import Markdown, { Notes } from 'components/base/Markdown'
 import styled from 'styled-components'
 import TrackPage from 'analytics/TrackPage'
@@ -35,8 +33,7 @@ type Props = {
 type State = *
 
 const NotesWrapper = styled(Box)`
-  border-top: 1px solid ${p => p.theme.colors.lightGrey};
-  height: 250px;
+  border-top: 1px solid ${p => p.theme.colors.palette.divider};
   margin-top: 8px;
   position: relative;
 `
@@ -71,12 +68,9 @@ class DisclaimerModal extends PureComponent<Props, State> {
               </Text>
               {firmware && firmware.osu ? (
                 <NotesWrapper>
-                  <GrowScroll pb={5}>
-                    <Notes>
-                      <Markdown>{firmware.osu.notes}</Markdown>
-                    </Notes>
-                  </GrowScroll>
-                  <GradientBox />
+                  <Notes>
+                    <Markdown>{firmware.osu.notes}</Markdown>
+                  </Notes>
                 </NotesWrapper>
               ) : null}
             </Box>
