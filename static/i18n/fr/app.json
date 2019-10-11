@@ -226,23 +226,24 @@
     "title": "Acheter des cryptos",
     "desc": "Essayez quelques services que nous avons sélectionnés",
     "visitWebsite": "Visiter le site internet",
-    "btcdirect": "Achetez et vendez en toute simplicité auprès du principal courtier en cryptomonnaies européen. Inscrivez-vous gratuitement et recevez vos coins en quelques minutes ! Nos utilisateurs sur Trustpilot nous ont attribué une note de 8,7",
+    "btcdirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot.",
     "changelly": "Changelly est un service d'échange instantané de crypto-actifs, très utilisé et listant plus de 100 coins et tokens.",
-    "changenow": "ChangeNOW est un service d’échange instantané sans service de custody.",
+    "changenow": "ChangeNOW is one of the leading custody-free instant exchange services.",
     "coinberry": "Considérée comme la plateforme la plus fiable au Canada, Coinberry offre une meilleure sécurité que les banques, une interface utilisateur de pointe et un service de dépôt ou de retrait sans frais. Préinscrivez-vous dès maintenant pour y accéder rapidement si vous n‘êtes pas un citoyen canadien.",
     "coinhouse": "Coinhouse est une plateforme de confiance pour les particuliers et les investisseurs institutionnels cherchant à analyser, acquérir, vendre et stocker des crypto-actifs de manière sécurisée.",
     "coinmama": "Coinmama est un service financier d’achat d’actifs numériques rapide, sécurisé et amusant, disponible partout dans le monde.",
     "genesis": "Genesis est une société de trading institutionnelle offrant des liquidités et des prêts de monnaies numériques, dont bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin et XRP.",
     "kyberswap": "Plateforme d’échange de tokens rapide, simple et sécurisée. Optimisée par le protocole de liquidité on-chain de Kyber Network.",
-    "luno": "Luno sécurise et facilite l’achat, le stockage et l’apprentissage des cryptomonnaies telles que Bitcoin et Ethereum.",
-    "paybis": "Les cartes bancaires simplifient et sécurisent l'achat de Bitcoins. Ce service est disponible aux États-Unis, au Canada, en Allemagne, en Russie et en Arabie Saoudite.",
+    "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum.",
+    "paybis": "Paybis.com is one of the most trusted cryptocurrency brokers worldwide since 2014, customer satisfaction - 4.7/5 via Trustpilot. Visa/Master cards, Bank Transfers, Skrill/Neteller accepted. 24/7 online customer support.",
     "shapeshift": "ShapeShift est un marché en ligne sur lequel les utilisateurs peuvent acheter et vendre des actifs numériques. Il s’agit d’un moyen sécurisé et rapide d’acheter et de vendre des actifs numériques, sans long processus d’inscription, sans risques de contrepartie et sans friction.",
     "simplex": "Simplex est une institution financière agréée par l’UE, qui fournit une solution anti-fraude de paiement par carte bancaire.",
     "taxtoken": "Logiciel automatisé de gestion des coûts initiaux et des taxes pour les cryptomonnaies réservé aux citoyens américains.",
     "thorswap": "ThorSwap est un marché de crypto-actifs instantané, sécurisé et équitable qui s'appuie sur les technologies décentralisées d’Atomic Swap. Il s’agit du moyen le plus pratique pour se lancer dans le trading, aucune inscription, aucun formulaire à remplir pour les transactions de faible montant.",
     "bitpanda": "Bitpanda est le service de courtage leader en Europe pour acheter et revendre Bitcoins, Ethereum, IOTA et bien d’autres. Déposez de l’argent avec votre carte bancaire, SOFORT-Transfer, NETELLER et d’autres options.",
     "exmo": "Créé en 2013 et basé à Londres, Kiev, Barcelone et Moscou, EXMO est la plateforme d'échange numéro 1 en Europe de l’Est et l’une des plus grandes plateformes d'échange mondiales en termes de volume et de liquidités.",
-    "ndax": "NDAX est une plateforme Canadienne d'échange de cryptomonnaies, qui offre une plateforme réglementée, sécurisée et intuitive, qui permet d’acheter et de vendre des biens numériques, Bitcoin, Litecoin, Ethereum, XRP et autres."
+    "ndax": "NDAX est une plateforme Canadienne d'échange de cryptomonnaies, qui offre une plateforme réglementée, sécurisée et intuitive, qui permet d’acheter et de vendre des biens numériques, Bitcoin, Litecoin, Ethereum, XRP et autres.",
+    "voyager": "Love your Crypto Journey with Voyager. A licensed crypto broker with commission-free trading of 20+ cryptocurrencies."
   },
   "genuinecheck": {
     "modal": {
@@ -998,10 +999,6 @@
       "title": "Compte non pris en charge.",
       "description": "Veuillez réessayer ou contacter le Support ({{reason}})"
     },
-    "BtcUnmatchedApp": {
-      "title": "Il ne s’agit pas de la bonne application.",
-      "description": "Ouvrez l’application « {{managerAppName}} » sur votre appareil."
-    },
     "NoAccessToCamera": {
       "title": "Veuillez vous assurer que votre système a une caméra qui n'est pas utilisée par une autre application, et que Ledger Live a la permission de l'utiliser.",
       "description": ""
@@ -1084,9 +1081,13 @@
       "title": "Désolé, cette application est déjà installée",
       "description": "Consultez votre appareil pour voir quelles applications sont déjà installées"
     },
-    "ManagerAppRelyOnBTC": {
-      "title": "Applications Bitcoin et Ethereum requises",
-      "description": "Installez dans un premier temps la dernière version des applications Bitcoin et Ethereum"
+    "ManagerAppDepInstallRequired": {
+      "title": "{{dependency}} app required",
+      "description": "If you already have the {{dependency}} app installed, please reinstall it to get the latest version"
+    },
+    "ManagerAppDepUninstallRequired": {
+      "title": "Sorry, this app is required",
+      "description": "You must first uninstall all apps that require the {{appName}} app"
     },
     "ManagerDeviceLocked": {
       "title": "Veuillez déverrouiller votre appareil.",
