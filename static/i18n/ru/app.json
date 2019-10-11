@@ -999,10 +999,6 @@
       "title": "Аккаунт не поддерживается.",
       "description": "Повторите попытку или свяжитесь со службой поддержки ({{reason}})"
     },
-    "BtcUnmatchedApp": {
-      "title": "Это не то приложение.",
-      "description": "Откройте приложение ‘{{managerAppName}}‘ на устройстве."
-    },
     "NoAccessToCamera": {
       "title": "Пожалуйста, убедитесь, что ваша система имеет камеру, что она не используется другим приложением и что Ledger Live имеет разрешение на ее использование.",
       "description": ""
@@ -1085,9 +1081,13 @@
       "title": "Уже установлено.",
       "description": "Проверьте, какие приложения уже были установлены на устройстве."
     },
-    "ManagerAppRelyOnBTC": {
-      "title": "Необходимы приложения Bitcoin и Ethereum.",
-      "description": "Сначала установите последнюю версию приложений Bitcoin и Ethereum."
+    "ManagerAppDepInstallRequired": {
+      "title": "{{dependency}} app required",
+      "description": "If you already have the {{dependency}} app installed, please reinstall it to get the latest version"
+    },
+    "ManagerAppDepUninstallRequired": {
+      "title": "Sorry, this app is required",
+      "description": "You must first uninstall all apps that require the {{appName}} app"
     },
     "ManagerDeviceLocked": {
       "title": "Разблокируйте устройство.",
