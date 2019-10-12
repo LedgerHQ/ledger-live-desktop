@@ -1,6 +1,7 @@
 /* eslint-disable flowtype/generic-spacing */
 // @flow
 
+import { from } from 'rxjs'
 import { map } from 'rxjs/operators'
 import type {
   CryptoCurrency,
@@ -16,7 +17,6 @@ import type {
   ScanAccountEventRaw,
 } from '@ledgerhq/live-common/lib/types'
 import isEqual from 'lodash/isEqual'
-import { from } from 'rxjs'
 import {
   fromTransactionRaw,
   toTransactionRaw,

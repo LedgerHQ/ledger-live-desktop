@@ -67,6 +67,10 @@ function transformFonts(allFonts) {
 }
 
 export const GlobalStyle = createGlobalStyle`
+  body, #preload {
+    background-color: ${p => p.theme.colors.palette.background.default} !important;
+  }
+
   ${transformFonts(fonts)};
   ${reset};
 
