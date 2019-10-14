@@ -139,7 +139,7 @@ class Default extends Component<Props> {
                     <Route path="/partners" component={PartnersPage} />
                     <Route path="/account/:parentId/:id" component={AccountPage} />
                     <Route path="/account/:id" component={AccountPage} />
-                    <Route path="/asset/:assetTicker" component={AssetPage} />
+                    <Route path="/asset/:assetId+" component={AssetPage} />
                   </Switch>
                 </Main>
               </Box>

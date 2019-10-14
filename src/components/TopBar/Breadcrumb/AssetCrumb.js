@@ -22,7 +22,7 @@ import { Separator } from './index'
 type Props = {
   match: {
     params: {
-      assetTicker: string,
+      assetId: string,
     },
     isExact: boolean,
     path: string,
@@ -120,7 +120,7 @@ const mapDispatchToProps = {
 
 class AssetCrumb extends PureComponent<Props> {
   renderItem = ({ item, isActive }) => (
-    <Item key={item.ticker} isActive={isActive}>
+    <Item key={item.currency.id} isActive={isActive}>
       <CryptoCurrencyIcon size={16} currency={item.currency} />
       <Text ff={`Inter|${isActive ? 'SemiBold' : 'Regular'}`} fontSize={4}>
         {item.label}
@@ -139,22 +139,26 @@ class AssetCrumb extends PureComponent<Props> {
     }
 
     const { push } = this.props
-    const { key } = item
+    const { currency } = item
 
-    push(`/asset/${key}`)
+    push(`/asset/${currency.id}`)
   }
 
   processItemsForDropdown = (items: any[]) =>
-    items.map(({ currency }) => ({ key: currency.ticker, label: currency.name, currency }))
+    items.map(({ currency }) => ({ key: currency.id, label: currency.name, currency }))
 
   render() {
-    const { assetTicker } = this.props.match.params
-    const { distribution, push } = this.props
+    const {
+      distribution,
+      push,
+      match: {
+        params: { assetId },
+      },
+    } = this.props
     if (!distribution || !distribution.list) return null
 
     const items = this.processItemsForDropdown(distribution.list)
-    const activeItem = distribution.list.find(({ currency }) => currency.ticker === assetTicker)
-
+    const activeItem = distribution.list.find(distribution => distribution.currency.id === assetId)
     if (!activeItem) return null
     return (
       <>
