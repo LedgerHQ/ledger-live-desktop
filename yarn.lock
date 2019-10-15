@@ -1914,10 +1914,10 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@^8.0.0-alpha.3":
-  version "8.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-8.0.0-alpha.3.tgz#e619888a6b868b68c63c11d442d6a6ae87b977c1"
-  integrity sha512-R3UwKB5rUAghEDNwWuLtKIyOcM9+Fp39v1XvFwkChL8RnyeqRSdpzqpbb15o5mxsn1exLIbFFMFzxTNSyIjqWA==
+"@ledgerhq/live-common@^8.0.0-alpha.4":
+  version "8.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-8.0.0-alpha.4.tgz#ec15fe1c8bb8b09198b11cd1d7fc600b8285635b"
+  integrity sha512-iENV7npASW0i+OiykKtglqJiXyW0U47hXC5zOG4QdBjqHeCm9KHnvf4qedWqR78byZQGkZaGvvcwowROV6JRkg==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/errors" "4.72.1"
