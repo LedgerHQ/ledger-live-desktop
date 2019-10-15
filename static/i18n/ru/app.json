@@ -401,12 +401,20 @@
     },
     "firmware": {
       "installed": "Версия встроенного ПО {{version}}",
-      "update": "Обновить",
+      "updateLater": "Update later",
+      "seedReady": "I have my recovery phrase",
+      "dontHaveSeed": "Don't have your recovery phrase?",
+      "followTheGuide": "Follow our step by step update guide",
+      "removeApps": "Uninstall all apps before updating",
+      "update": "Firmware update",
       "latest": "Доступно встроенное ПО версии {{version}}.",
+      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible.",
       "disclaimerTitle": "Вы собираетесь установить <1><0>встроенное ПО версии {{version}}</0></1>.",
       "disclaimerAppDelete": "Чтобы освободить место, удалите некоторые приложения. Это не повлияет на криптоактивы.",
       "disclaimerAppReinstall": "В качестве предосторожности убедитесь, что ваша карточка восстановления цела и невредима.",
-      "downloadingUpdateDesc": "Подождите пока программа установки загрузится"
+      "downloadingUpdateDesc": "Подождите пока программа установки загрузится",
+      "appsAutoUninstallTitle": "Apps will be uninstalled",
+      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
