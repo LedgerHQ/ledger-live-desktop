@@ -401,12 +401,20 @@
     },
     "firmware": {
       "installed": "固件版本 {{version}}",
-      "update": "更新",
+      "updateLater": "Update later",
+      "seedReady": "I have my recovery phrase",
+      "dontHaveSeed": "Don't have your recovery phrase?",
+      "followTheGuide": "Follow our step by step update guide",
+      "removeApps": "Uninstall all apps before updating",
+      "update": "Firmware update",
       "latest": "固件版本 {{version}} 已可用",
+      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible.",
       "disclaimerTitle": "您即将安装<1><0>固件版本 {{version}}</0></1>。",
       "disclaimerAppDelete": "请卸载设备上所有应用程序，此操作不会影响您的加密资产。",
       "disclaimerAppReinstall": "为谨慎起见，请安全保存您的恢复短语列表。",
-      "downloadingUpdateDesc": "请等待更新安装程序下载"
+      "downloadingUpdateDesc": "请等待更新安装程序下载",
+      "appsAutoUninstallTitle": "Apps will be uninstalled",
+      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
