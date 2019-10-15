@@ -401,12 +401,20 @@
     },
     "firmware": {
       "installed": "ファームウェアバージョン {{version}}",
-      "update": "更新",
+      "updateLater": "Update later",
+      "seedReady": "I have my recovery phrase",
+      "dontHaveSeed": "Don't have your recovery phrase?",
+      "followTheGuide": "Follow our step by step update guide",
+      "removeApps": "Uninstall all apps before updating",
+      "update": "Firmware update",
       "latest": "ファームウェアバージョン {{version}} をご利用いただけます",
+      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible.",
       "disclaimerTitle": "<1><0>ファームウェアバージョン{{version}}</0></1>をインストールしようとしてします。",
       "disclaimerAppDelete": "お手持ちのLedgerデバイスから全てのアプリをアンインストールしてください。この作業は、お客様の暗号資産に影響しません。",
       "disclaimerAppReinstall": "念のため、リカバリシートにアクセスできることを確認してください。",
-      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
+      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded",
+      "appsAutoUninstallTitle": "Apps will be uninstalled",
+      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
