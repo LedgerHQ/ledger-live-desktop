@@ -401,12 +401,20 @@
     },
     "firmware": {
       "installed": "펌웨어 버전 {{version}}",
-      "update": "업데이트",
+      "updateLater": "Update later",
+      "seedReady": "I have my recovery phrase",
+      "dontHaveSeed": "Don't have your recovery phrase?",
+      "followTheGuide": "Follow our step by step update guide",
+      "removeApps": "Uninstall all apps before updating",
+      "update": "Firmware update",
       "latest": "펌웨어 버전 {{version}}을(를) 사용할 수 있습니다.",
+      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible.",
       "disclaimerTitle": "<1><0>펌웨어 버전 {{version}}</0></1>을(를) 설치하려합니다.",
       "disclaimerAppDelete": "일부 앱을 제거하여 공간을 확보하십시오. 그렇게 해도 귀하의 암호화 자산에는 영향을 미치지 않습니다.",
       "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
-      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
+      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded",
+      "appsAutoUninstallTitle": "Apps will be uninstalled",
+      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
