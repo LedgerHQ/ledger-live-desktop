@@ -39,6 +39,10 @@ export default (
   valueContainer: (styles: Object) => ({
     ...styles,
     paddingLeft: 15,
+    color: theme.colors.palette.text.shade100,
+  }),
+  input: (styles: Object) => ({
+    ...styles,
     color: theme.colors.palette.text.shade80,
   }),
   indicatorSeparator: (styles: Object) => ({
@@ -53,7 +57,7 @@ export default (
     ...styles,
     ...ff('Inter|Regular'),
     fontSize: small ? 12 : 13,
-    color: theme.colors.palette.text.shade100,
+    color: theme.colors.palette.text.shade80,
     padding: '10px 15px 10px 15px',
     ':active': {
       ...styles[':active'],

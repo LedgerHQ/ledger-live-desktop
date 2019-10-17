@@ -5,6 +5,7 @@ import React, { PureComponent } from 'react'
 import { delay } from 'helpers/promise'
 
 import Box from 'components/base/Box'
+
 import DeviceInteractionStep from './DeviceInteractionStep'
 import { ErrorDescContainer } from './components'
 
