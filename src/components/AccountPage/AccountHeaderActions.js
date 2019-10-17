@@ -65,8 +65,13 @@ class AccountHeaderActions extends PureComponent<Props> {
   render() {
     const { account, parentAccount, openModal, t } = this.props
     const mainAccount = getMainAccount(account, parentAccount)
-    const bridge = getAccountBridge(account, parentAccount)
-    const cap = bridge.getCapabilities(mainAccount)
+    let cap
+    try {
+      const bridge = getAccountBridge(account, parentAccount)
+      cap = bridge.getCapabilities(mainAccount)
+    } catch (e) {
+      return null
+    }
     return (
       <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
         {!isAccountEmpty(account) ? (
