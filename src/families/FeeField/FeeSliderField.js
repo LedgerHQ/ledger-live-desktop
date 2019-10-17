@@ -78,7 +78,7 @@ const FeeSliderField = ({ value, onChange, unit, error, defaultValue }: Props) =
         <Slider error={error} value={index} onChange={setValueIndex} steps={range.steps} />
       </Box>
       <Box
-        ff="Open Sans|SemiBold"
+        ff="Inter|SemiBold"
         fontSize="11px"
         horizontal
         justifyContent="space-between"
@@ -94,7 +94,7 @@ const FeeSliderField = ({ value, onChange, unit, error, defaultValue }: Props) =
       {error && (
         <Error>
           <IconExclamationCircle size={12} />
-          <Box color="alertRed" ff="Open Sans|Regular" fontSize={4} textAlign="center">
+          <Box color="alertRed" ff="Inter|Regular" fontSize={4} textAlign="center">
             <TranslatedError error={error} />
           </Box>
         </Error>

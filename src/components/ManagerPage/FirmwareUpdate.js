@@ -138,12 +138,17 @@ class FirmwareUpdate extends PureComponent<Props, State> {
               })}
             </Text>
           </Box>
-          <UpdateFirmwareButton firmware={firmware} onClick={this.handleDisclaimerModal} />
+          <UpdateFirmwareButton
+            deviceInfo={deviceInfo}
+            firmware={firmware}
+            onClick={this.handleDisclaimerModal}
+          />
         </Box>
         {ready ? (
           <>
             <DisclaimerModal
               firmware={firmware}
+              deviceInfo={deviceInfo}
               status={modal}
               goToNextStep={this.handleDisclaimerNext}
               onClose={this.handleCloseModal}
