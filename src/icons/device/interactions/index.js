@@ -32,13 +32,36 @@ export const Wrapper = styled.div`
   position: relative;
 `
 
-const Interactions = ({ type = 'nanoS', ...rest }: TypeProps & Props) =>
-  type === 'blue' ? (
-    <Blue {...rest} />
-  ) : type === 'nanoX' ? (
-    <NanoX {...rest} />
-  ) : (
-    <NanoS {...rest} />
-  )
+const usbMap = {
+  wired: 'plugged',
+  disconnecting: 'unplugHint',
+  connecting: 'plugHint',
+}
+
+const devices = {
+  blue: Blue,
+  nanoX: NanoX,
+  nanoS: NanoS,
+}
+
+const Interactions = ({
+  type = 'nanoS',
+  wire,
+  screen,
+  error,
+  action,
+  ...rest
+}: TypeProps & Props) => {
+  const Device = devices[type]
+  const props = {
+    error: !!error,
+    screen: error ? 'fail' : screen,
+    usb: wire && usbMap[wire],
+    leftHint: action === 'left' || action === 'accept',
+    rightHing: action === 'accept',
+  }
+
+  return <Device open {...rest} {...props} />
+}
 
 export default Interactions

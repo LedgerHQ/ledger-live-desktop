@@ -91,6 +91,7 @@ class Default extends Component<Props> {
 
   render() {
     const { visibleModals } = this.props
+
     return (
       <Fragment>
         <TriggerAppReady />

@@ -160,7 +160,7 @@ ipcMain.on('ready-to-show', () => {
     // move window here
     mainWindow.show()
     setImmediate(() => {
-      mainWindow.focus()
+      mainWindow && mainWindow.focus()
     })
   }
 })
