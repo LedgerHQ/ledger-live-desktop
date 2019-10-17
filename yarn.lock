@@ -2264,6 +2264,14 @@
     react-split-pane "^0.1.77"
     react-treebeard "^2.1.0"
 
+"@tippy.js/react@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@tippy.js/react/-/react-3.1.0.tgz#778ebb49468abbd314b278a02b7462780ca1bb74"
+  integrity sha512-UhhgqyYAZG8XSHrSlgmlUj+el9Rk48LYMPOI+Fcbg5w0ZF714HJ+32/xdwqANlDNuYxdF+pZQDitzd4eUDTEMQ==
+  dependencies:
+    prop-types "^15.6.2"
+    tippy.js "^5.0.2"
+
 "@types/lodash@^4.14.85":
   version "4.14.110"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.110.tgz#fb07498f84152947f30ea09d89207ca07123461e"
@@ -2537,6 +2545,11 @@ acorn@^6.0.7:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.1.1.tgz#7d25ae05bb8ad1f9b699108e1094ecd7884adc1f"
   integrity sha512-jPTiwtOxaHNaAPg/dmrJ/beuzLRnXtB0kQPQ8JpotKJgTB6rX6c8mlf315941pyjBSaPg8NHXS9fhP4u17DpGA==
+
+add@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
+  integrity sha1-JI8Kn25aUo7yKV2+7DBTITCuIjU=
 
 address-rfc2822@^2.0.3:
   version "2.0.4"
@@ -12959,10 +12972,10 @@ pngjs@^3.3.0:
   resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-3.3.3.tgz#85173703bde3edac8998757b96e5821d0966a21b"
   integrity sha512-1n3Z4p3IOxArEs1VRXnZ/RXdfEniAUS9jb68g58FIXMNkPJeZd+Qh4Uq7/e0LVxAQGos1eIUrqrt4FpjdnEd+Q==
 
-popper.js@^1.14.3:
-  version "1.14.3"
-  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.3.tgz#1438f98d046acf7b4d78cd502bf418ac64d4f095"
-  integrity sha1-FDj5jQRqz3tNeM1QK/QYrGTU8JU=
+popper.js@^1.15.0:
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.0.tgz#2e1816bcbbaa518ea6c2e15a466f4cb9c6e2fbb3"
+  integrity sha512-+G+EkOPoE5S/zChTpmBSSDYmhXJ5PsW8eMhH8cP/CQHMFPBG/kC9Y5IIw6qNYgdJ+/COf0ddY2li28iHaZRSjw==
 
 portfinder@^1.0.9:
   version "1.0.13"
@@ -16361,12 +16374,12 @@ tinycolor2@^1.4.1:
   resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
   integrity sha1-9PrTM0R7wLB9TcjpIJ2POaisd+g=
 
-tippy.js@^2.5.2:
-  version "2.5.3"
-  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-2.5.3.tgz#a75b0b6d18633cea8ec79658a85d07599c77c9a4"
-  integrity sha512-OteEPlF3/LrYbozp/wEInSveC5ar9BDg8hsEb/xUwzKXqhj8UDuifI1JMLbI+OEyHzqaBL0pvBoc7nxAPLoGug==
+tippy.js@^5.0.2:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-5.0.3.tgz#f019c1e467addd1087a08e9fb43968195076da4f"
+  integrity sha512-6OVy2/pWuzcphHdEAK/2GPOOsT75AY9D7Xhk9U6WHB/dT737avXtgW1K6ch8jrp81PxbXxHgdmeHRPBnqunwpQ==
   dependencies:
-    popper.js "^1.14.3"
+    popper.js "^1.15.0"
 
 tmp@^0.0.33:
   version "0.0.33"
@@ -17962,6 +17975,11 @@ yarn-deduplicate@^1.1.1:
     "@yarnpkg/lockfile" "^1.1.0"
     commander "^2.10.0"
     semver "^5.3.0"
+
+yarn@^1.19.1:
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.19.1.tgz#14b92410dd1ba5bab87a12b4a3d807f4569bea97"
+  integrity sha512-gBnfbL9rYY05Gt0cjJhs/siqQXHYlZalTjK3nXn2QO20xbkIFPob+LlH44ML47GcR4VU9/2dYck1BWFM0Javxw==
 
 yauzl@2.4.1:
   version "2.4.1"

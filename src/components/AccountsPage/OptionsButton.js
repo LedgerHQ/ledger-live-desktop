@@ -149,7 +149,7 @@ class OptionsButton extends PureComponent<Props, State> {
     return (
       <>
         <DropDown border horizontal offsetTop={2} items={this.items} renderItem={this.renderItem}>
-          <Tooltip render={() => this.props.t('accounts.optionsMenu.title')}>
+          <Tooltip content={this.props.t('accounts.optionsMenu.title')}>
             <Button small outlineGrey flow={1} style={{ width: 34, padding: 0 }}>
               <Box horizontal flow={1} alignItems="center" justifyContent="center">
                 <IconDots size={14} />

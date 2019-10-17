@@ -8,10 +8,12 @@ import {
   getAccountName,
 } from '@ledgerhq/live-common/lib/account'
 import Box from 'components/base/Box'
+import Ellipsis from 'components/base/Ellipsis'
 import Bar from 'components/base/Bar'
+import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
 import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
-import TooltipEllipsis from 'components/base/TooltipEllipsis'
+import Tooltip from 'components/base/Tooltip'
 import AccountSyncStatusIndicator from '../AccountSyncStatusIndicator'
 import Star from '../../Stars/Star'
 
@@ -27,9 +29,13 @@ class HeadText extends PureComponent<{
         <Box style={{ textTransform: 'uppercase' }} fontSize={10} color="palette.text.shade80">
           {title}
         </Box>
-        <TooltipEllipsis fontSize={13} color="palette.text.shade100">
-          {name}
-        </TooltipEllipsis>
+        <Tooltip content={name} delay={1200}>
+          <Ellipsis>
+            <Text fontSize={13} color="palette.text.shade100">
+              {name}
+            </Text>
+          </Ellipsis>
+        </Tooltip>
       </Box>
     )
   }
