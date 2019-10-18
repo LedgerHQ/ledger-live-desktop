@@ -169,7 +169,7 @@
       "star": "星标",
       "receive": "接收",
       "send": "发送",
-      "edit": "编辑账户"
+      "edit": "Edit account"
     }
   },
   "banners": {
@@ -256,7 +256,7 @@
     "cta": "添加代币",
     "placeholder": "如要添加代币，您只需将代币发送至您的 Ethereum 地址。",
     "link": "了解更多",
-    "seeTokens": "查看代币 ({{tokenCount}})",
+    "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "隐藏代币 ({{tokenCount}})",
     "tooltip": "代币来自",
     "countTooltip": "1 Token",
@@ -539,23 +539,23 @@
   "distribution": {
     "asset": "资产",
     "price": "价格",
-    "distribution": "分布",
+    "distribution": "Allocation",
     "amount": "金额",
     "value": "价值",
     "showAll": "显示全部",
     "showLess": "隐藏显示",
-    "header": "资产分布 ({{count}})",
+    "header": "Asset allocation ({{count}})",
     "notice": "You can now click on assets for more details!"
   },
   "accountDistribution": {
     "account": "Account",
     "price": "Price",
-    "distribution": "Distribution",
+    "distribution": "Allocation",
     "amount": "Amount",
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Account distribution ({{count}})",
+    "header": "Account allocation ({{count}})",
     "notice": "You can right-click on an account to see its options!"
   },
   "asset": {
@@ -617,9 +617,9 @@
       "confirmationsNbDesc": "设置要标记为已确认的交易的网络确认数量。"
     },
     "rates": {
-      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
+      "desc": "Here are all the rates that are used to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} 至 {{to}}",
-      "noCounterValue": "We have no data for this trading pair.",
+      "noCounterValue": "We have no data for this trading pair",
       "cryptoToFiat": "加密货币换作法定货币",
       "cryptoToCrypto": "加密货币换作加密货币",
       "rate": "汇率",
