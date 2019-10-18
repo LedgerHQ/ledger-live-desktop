@@ -1,5 +1,6 @@
 // @flow
 import React, { useCallback } from 'react'
+import { RecipientRequired } from '@ledgerhq/errors'
 import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
 import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import type { T } from 'types/common'
@@ -59,7 +60,7 @@ const RecipientField = ({
         autoFocus={autoFocus}
         withQrCode={!status.recipientIsReadOnly}
         readOnly={status.recipientIsReadOnly}
-        error={transaction.recipient && recipientError}
+        error={recipientError instanceof RecipientRequired ? null : recipientError}
         warning={recipientWarning}
         value={transaction.recipient}
         onChange={onChange}

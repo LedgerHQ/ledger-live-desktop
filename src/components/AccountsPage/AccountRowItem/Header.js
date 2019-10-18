@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import Box from 'components/base/Box'
-import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
+import { getAccountCurrency, getAccountName } from '@ledgerhq/live-common/lib/account'
 import type { AccountLike } from '@ledgerhq/live-common/lib/types/account'
 import styled, { withTheme } from 'styled-components'
 import CryptoCurrencyIcon from '../../CryptoCurrencyIcon'
@@ -10,7 +10,6 @@ import Ellipsis from '../../base/Ellipsis'
 
 type Props = {
   account: AccountLike,
-  name: string,
   nested?: boolean,
   theme: any,
 }
@@ -25,8 +24,9 @@ const NestedIndicator = styled.div`
 
 class Header extends PureComponent<Props> {
   render() {
-    const { account, name, nested, theme } = this.props
+    const { account, nested, theme } = this.props
     const currency = getAccountCurrency(account)
+    const name = getAccountName(account)
     const color =
       currency.type === 'CryptoCurrency' ? currency.color : theme.colors.palette.text.shade60
     const title = currency.type === 'CryptoCurrency' ? currency.name : 'token'
