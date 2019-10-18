@@ -44,7 +44,7 @@ const ContextMenuContainer = styled(Box)`
   position: absolute;
   top: ${p => p.y}px;
   left: ${p => p.x}px;
-  width: 170px;
+  width: auto;
   border-radius: 4px;
   box-shadow: 0 4px 8px 0 #00000007;
   border: 1px solid ${p => p.theme.colors.palette.divider};
