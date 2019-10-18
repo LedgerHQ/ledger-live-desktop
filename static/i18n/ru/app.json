@@ -1,10 +1,10 @@
 {
   "common": {
     "labelYes": "Да",
-    "labelNo": "Нет",
-    "never": "Никогда",
-    "apply": "Применить",
-    "done": "Готово",
+    "labelNo": "No",
+    "never": "Never",
+    "apply": "Apply",
+    "done": "Done",
     "confirm": "Подтвердить",
     "connecting": "Подключение..",
     "cancel": "Отменить",
