@@ -169,7 +169,7 @@
       "star": "Star",
       "receive": "Receive",
       "send": "Send",
-      "edit": "Edit Account"
+      "edit": "Edit account"
     }
   },
   "banners": {
@@ -256,7 +256,7 @@
     "cta": "Add token",
     "placeholder": "To add tokens, simply send them to your Ethereum address.",
     "link": "Learn more",
-    "seeTokens": "See tokens ({{tokenCount}})",
+    "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "tooltip": "Token from",
     "countTooltip": "1 Token",
@@ -539,23 +539,23 @@
   "distribution": {
     "asset": "Asset",
     "price": "Price",
-    "distribution": "Distribution",
+    "distribution": "Allocation",
     "amount": "Amount",
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Asset distribution ({{count}})",
+    "header": "Asset allocation ({{count}})",
     "notice": "You can now click on assets for more details!"
   },
   "accountDistribution": {
     "account": "Account",
     "price": "Price",
-    "distribution": "Distribution",
+    "distribution": "Allocation",
     "amount": "Amount",
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Account distribution ({{count}})",
+    "header": "Account allocation ({{count}})",
     "notice": "You can right-click on an account to see its options!"
   },
   "asset": {
@@ -617,9 +617,9 @@
       "confirmationsNbDesc": "Set the number of network confirmations for a transaction to be marked as confirmed."
     },
     "rates": {
-      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
+      "desc": "Here are all the rates that are used to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} to {{to}}",
-      "noCounterValue": "We have no data for this trading pair.",
+      "noCounterValue": "We have no data for this trading pair",
       "cryptoToFiat": "Crypto to fiat",
       "cryptoToCrypto": "Crypto to Crypto",
       "rate": "Rate",
