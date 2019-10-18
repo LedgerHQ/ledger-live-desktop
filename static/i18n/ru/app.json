@@ -1,10 +1,10 @@
 {
   "common": {
     "labelYes": "Да",
-    "labelNo": "Нет",
-    "never": "Никогда",
-    "apply": "Применить",
-    "done": "Готово",
+    "labelNo": "No",
+    "never": "Never",
+    "apply": "Apply",
+    "done": "Done",
     "confirm": "Подтвердить",
     "connecting": "Подключение..",
     "cancel": "Отменить",
@@ -169,7 +169,7 @@
       "star": "Добавить в избранное",
       "receive": "Получить",
       "send": "Отправить",
-      "edit": "Изменить аккаунт"
+      "edit": "Edit account"
     }
   },
   "banners": {
@@ -256,7 +256,7 @@
     "cta": "Добавить Токен",
     "placeholder": "Чтобы добавить токены, просто отправьте их на ваш Ethereum адрес.",
     "link": "Подробнее",
-    "seeTokens": "Посмотреть токены ({{tokenCount}})",
+    "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "Скрыть токены ({{tokenCount}})",
     "tooltip": "Токен от",
     "countTooltip": "1 токен",
@@ -401,12 +401,20 @@
     },
     "firmware": {
       "installed": "Версия встроенного ПО {{version}}",
-      "update": "Обновить",
+      "updateLater": "Update later",
+      "seedReady": "I have my recovery phrase",
+      "dontHaveSeed": "Don't have your recovery phrase?",
+      "followTheGuide": "Follow our step by step update guide",
+      "removeApps": "Uninstall all apps before updating",
+      "update": "Firmware update",
       "latest": "Доступно встроенное ПО версии {{version}}.",
+      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible.",
       "disclaimerTitle": "Вы собираетесь установить <1><0>встроенное ПО версии {{version}}</0></1>.",
       "disclaimerAppDelete": "Чтобы освободить место, удалите некоторые приложения. Это не повлияет на криптоактивы.",
       "disclaimerAppReinstall": "В качестве предосторожности убедитесь, что ваша карточка восстановления цела и невредима.",
-      "downloadingUpdateDesc": "Подождите пока программа установки загрузится"
+      "downloadingUpdateDesc": "Подождите пока программа установки загрузится",
+      "appsAutoUninstallTitle": "Apps will be uninstalled",
+      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -531,23 +539,23 @@
   "distribution": {
     "asset": "Актив",
     "price": "Цена",
-    "distribution": "Распределение",
+    "distribution": "Allocation",
     "amount": "Сумма",
     "value": "Значение",
     "showAll": "Показать все",
     "showLess": "Показать меньше",
-    "header": "Распределение активов ({{count}})",
+    "header": "Asset allocation ({{count}})",
     "notice": "Теперь вы можете нажать на активы для получения более подробной информации!"
   },
   "accountDistribution": {
     "account": "Аккаунт",
     "price": "Цена",
-    "distribution": "Распределение",
+    "distribution": "Allocation",
     "amount": "Сумма",
     "value": "Значение",
     "showAll": "Показать все",
     "showLess": "Показать меньше",
-    "header": "Распределение активов ({{count}})",
+    "header": "Account allocation ({{count}})",
     "notice": "Вы можете нажать правой кнопкой мыши на учетной записи, чтобы увидеть ее параметры!"
   },
   "asset": {
@@ -609,9 +617,9 @@
       "confirmationsNbDesc": "Задайте количество подтверждений транзакции, выполняемых сетью, необходимое для того, чтобы такая транзакция была отмечена как подтвержденная."
     },
     "rates": {
-      "desc": "Вот все ставки, которые используются Ledger Live для расчета счетчиков.\nВыберите, какие провайдеры тарифов используются для каждой ставки.",
+      "desc": "Here are all the rates that are used to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "от {from} до {to}",
-      "noCounterValue": "У нас нет данных для этой торговой пары.",
+      "noCounterValue": "We have no data for this trading pair",
       "cryptoToFiat": "Крипто в фиат",
       "cryptoToCrypto": "Крипто в крипто",
       "rate": "Курс",
@@ -999,10 +1007,6 @@
       "title": "Аккаунт не поддерживается.",
       "description": "Повторите попытку или свяжитесь со службой поддержки ({{reason}})"
     },
-    "BtcUnmatchedApp": {
-      "title": "Это не то приложение.",
-      "description": "Откройте приложение ‘{{managerAppName}}‘ на устройстве."
-    },
     "NoAccessToCamera": {
       "title": "Пожалуйста, убедитесь, что ваша система имеет камеру, что она не используется другим приложением и что Ledger Live имеет разрешение на ее использование.",
       "description": ""
@@ -1085,9 +1089,13 @@
       "title": "Уже установлено.",
       "description": "Проверьте, какие приложения уже были установлены на устройстве."
     },
-    "ManagerAppRelyOnBTC": {
-      "title": "Необходимы приложения Bitcoin и Ethereum.",
-      "description": "Сначала установите последнюю версию приложений Bitcoin и Ethereum."
+    "ManagerAppDepInstallRequired": {
+      "title": "{{dependency}} app required",
+      "description": "If you already have the {{dependency}} app installed, please reinstall it to get the latest version"
+    },
+    "ManagerAppDepUninstallRequired": {
+      "title": "Sorry, this app is required",
+      "description": "You must first uninstall all apps that require the {{appName}} app"
     },
     "ManagerDeviceLocked": {
       "title": "Разблокируйте устройство.",
