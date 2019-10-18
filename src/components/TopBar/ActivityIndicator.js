@@ -118,11 +118,11 @@ class ActivityIndicatorInner extends PureComponent<Props, { lastClickTime: numbe
       return (
         <Tooltip
           tooltipBg="alertRed"
-          render={() => (
+          content={
             <Box fontSize={4} p={2} style={{ maxWidth: 250 }}>
               <TranslatedError error={error} />
             </Box>
-          )}
+          }
         >
           {content}
         </Tooltip>

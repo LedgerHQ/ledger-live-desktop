@@ -111,7 +111,7 @@ class TopBar extends PureComponent<Props> {
                   </Box>
                 </Fragment>
               )}
-              <Tooltip render={() => t('settings.title')} data-e2e="setting_button">
+              <Tooltip content={t('settings.title')} placement="bottom" data-e2e="setting_button">
                 <ItemContainer isInteractive onClick={this.navigateToSettings}>
                   <IconSettings size={16} />
                 </ItemContainer>
@@ -121,7 +121,7 @@ class TopBar extends PureComponent<Props> {
                   <Box justifyContent="center">
                     <Bar />
                   </Box>
-                  <Tooltip render={() => t('common.lock')}>
+                  <Tooltip content={t('common.lock')}>
                     <ItemContainer isInteractive justifyContent="center" onClick={this.handleLock}>
                       <IconLock size={16} />
                     </ItemContainer>

@@ -14,7 +14,7 @@ function LabelInfoTooltip(props: Props) {
   const { text, ...p } = props
   return (
     <Box {...p}>
-      <Tooltip render={() => text} style={{ height: 12 }}>
+      <Tooltip content={text} style={{ height: 12 }}>
         <IconInfoCircle size={12} />
       </Tooltip>
     </Box>

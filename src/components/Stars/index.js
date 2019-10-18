@@ -9,7 +9,7 @@ import { createStructuredSelector } from 'reselect'
 import { push } from 'react-router-redux'
 import type { AccountLike } from '@ledgerhq/live-common/lib/types'
 import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
-import SideBarTooltip from 'components/base/SideBar/SideBarTooltip'
+import Tooltip from 'components/base/Tooltip'
 import { Hide } from 'components/MainSideBar'
 import Text from 'components/base/Text'
 import Image from 'components/base/Image'
@@ -66,12 +66,14 @@ class Stars extends PureComponent<{
           {provided => (
             <Container key={pathname} ref={provided.innerRef}>
               {starredAccounts.map((account, i) => (
-                <SideBarTooltip
-                  text={
+                <Tooltip
+                  content={
                     account.type === 'Account' ? account.name : getAccountCurrency(account).name
                   }
-                  enabled={collapsed}
+                  delay={collapsed ? 0 : 1200}
                   key={account.id}
+                  placement={collapsed ? 'right' : 'top'}
+                  boundary={collapsed ? 'window' : undefined}
                 >
                   <Item
                     index={i}
@@ -80,7 +82,7 @@ class Stars extends PureComponent<{
                     pathname={pathname}
                     collapsed={collapsed}
                   />
-                </SideBarTooltip>
+                </Tooltip>
               ))}
               {provided.placeholder}
             </Container>

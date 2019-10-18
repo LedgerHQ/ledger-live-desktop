@@ -198,7 +198,7 @@ export const Base = styled.button.attrs(p => ({
   ${fontFamily};
   border: none;
   border-radius: ${p => p.theme.radii[1]}px;
-  cursor: ${p => (p.disabled ? 'not-allowed' : 'default')};
+  cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
   height: ${p => (p.small ? 34 : 40)}px;
   pointer-events: ${p => (p.disabled ? 'none' : '')};
   outline: none;

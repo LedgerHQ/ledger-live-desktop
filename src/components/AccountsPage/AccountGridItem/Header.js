@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import {
   getAccountCurrency,
@@ -8,13 +8,14 @@ import {
   getAccountName,
 } from '@ledgerhq/live-common/lib/account'
 import Box from 'components/base/Box'
-import Bar from 'components/base/Bar'
 import Ellipsis from 'components/base/Ellipsis'
+import Bar from 'components/base/Bar'
+import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
 import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
+import Tooltip from 'components/base/Tooltip'
 import AccountSyncStatusIndicator from '../AccountSyncStatusIndicator'
 import Star from '../../Stars/Star'
-import Tooltip from '../../base/Tooltip'
 
 class HeadText extends PureComponent<{
   title: string,
@@ -22,18 +23,19 @@ class HeadText extends PureComponent<{
 }> {
   render() {
     const { title, name } = this.props
-    const MaybeTooltip = name.length > 10 ? Tooltip : Fragment
 
     return (
       <Box grow>
         <Box style={{ textTransform: 'uppercase' }} fontSize={10} color="palette.text.shade80">
           {title}
         </Box>
-        <MaybeTooltip render={() => name}>
-          <Ellipsis fontSize={13} color="palette.text.shade100">
-            {name}
+        <Tooltip content={name} delay={1200}>
+          <Ellipsis>
+            <Text fontSize={13} color="palette.text.shade100">
+              {name}
+            </Text>
           </Ellipsis>
-        </MaybeTooltip>
+        </Tooltip>
       </Box>
     )
   }

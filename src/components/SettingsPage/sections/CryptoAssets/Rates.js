@@ -95,7 +95,7 @@ class Rates extends PureComponent<Props> {
             >
               <Trans i18nKey="settings.rates.rate" />
               <TooltipButtonWrapper>
-                <Tooltip render={RateTooltip}>
+                <Tooltip content={<RateTooltip />}>
                   <IconInfoCircle size={12} />
                 </Tooltip>
               </TooltipButtonWrapper>

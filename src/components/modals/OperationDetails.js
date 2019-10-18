@@ -374,7 +374,9 @@ const OperationDetails = connect(
             <Box flex={1}>
               <OpDetailsTitle>{t('operationDetails.account')}</OpDetailsTitle>
               <OpDetailsData horizontal>
-                <Link onClick={goToMainAccount}>{name}</Link>
+                <Ellipsis>
+                  <Link onClick={goToMainAccount}>{name}</Link>
+                </Ellipsis>
                 {parentAccount ? (
                   <>
                     {' / '}

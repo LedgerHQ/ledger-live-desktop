@@ -30,7 +30,7 @@ class StatusQueued extends PureComponent<{ onClick: (*) => void }> {
   render() {
     const { onClick } = this.props
     return (
-      <Tooltip render={() => <Trans i18nKey="common.sync.outdated" />}>
+      <Tooltip content={<Trans i18nKey="common.sync.outdated" />}>
         <Box onClick={onClick}>
           <IconPending color={colors.grey} size={16} />
         </Box>
@@ -43,7 +43,7 @@ class StatusSynchronizing extends PureComponent<{ onClick: (*) => void }> {
   render() {
     const { onClick } = this.props
     return (
-      <Tooltip render={() => <Trans i18nKey="common.sync.syncing" />}>
+      <Tooltip content={<Trans i18nKey="common.sync.syncing" />}>
         <Box onClick={onClick}>
           <Rotating onClick={onClick} size={16}>
             <IconLoader color={colors.grey} size={16} />
@@ -58,7 +58,7 @@ class StatusUpToDate extends PureComponent<{ onClick: (*) => void }> {
   render() {
     const { onClick } = this.props
     return (
-      <Tooltip render={() => <Trans i18nKey="common.sync.upToDate" />}>
+      <Tooltip content={<Trans i18nKey="common.sync.upToDate" />}>
         <Box onClick={onClick}>
           <IconCheck onClick={onClick} color={colors.positiveGreen} size={16} />
         </Box>
@@ -73,11 +73,11 @@ class StatusError extends PureComponent<{ onClick: (*) => void, error: ?Error }>
     return (
       <Tooltip
         tooltipBg="alertRed"
-        render={() => (
+        content={
           <Box style={{ maxWidth: 250 }}>
             <TranslatedError error={error} />
           </Box>
-        )}
+        }
       >
         <Box onClick={onClick}>
           <IconError onClick={onClick} color={colors.alertRed} size={16} />
@@ -94,7 +94,7 @@ class StatusNeedsMigration extends PureComponent<{ openModal: string => void }> 
   }
   render() {
     return (
-      <Tooltip render={() => <Trans i18nKey="common.sync.needsMigration" />}>
+      <Tooltip content={<Trans i18nKey="common.sync.needsMigration" />}>
         <Box onClick={this.openMigrateAccountsModal}>
           <IconWarning onClick={this.openMigrateAccountsModal} color={colors.orange} size={16} />
         </Box>

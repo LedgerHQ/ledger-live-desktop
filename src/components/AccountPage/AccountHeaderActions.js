@@ -101,11 +101,11 @@ class AccountHeaderActions extends PureComponent<Props> {
             </Button>
           </Fragment>
         ) : null}
-        <Tooltip render={() => t('stars.tooltip')}>
+        <Tooltip content={t('stars.tooltip')}>
           <Star accountId={account.id} account={account} yellow />
         </Tooltip>
         {account.type === 'Account' ? (
-          <Tooltip render={() => t('account.settings.title')}>
+          <Tooltip content={t('account.settings.title')}>
             <ButtonSettings
               onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { parentAccount, account })}
             >

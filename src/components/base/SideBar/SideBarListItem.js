@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import { Hide } from 'components/MainSideBar'
 import Box, { Tabbable } from 'components/base/Box'
-import SideBarTooltip from './SideBarTooltip'
+import Tooltip from 'components/base/Tooltip'
 
 export type Props = {
   label: string | (Props => React$Node),
@@ -44,7 +44,7 @@ class SideBarListItem extends PureComponent<Props> {
       )
 
     return (
-      <SideBarTooltip text={renderedLabel} enabled={!!collapsed}>
+      <Tooltip content={renderedLabel} enabled={!!collapsed} boundary="window" placement="right">
         <Container
           isActive={!disabled && isActive}
           iconActiveColor={iconActiveColor}
@@ -60,7 +60,7 @@ class SideBarListItem extends PureComponent<Props> {
           </Box>
           {NotifComponent && <NotifComponent />}
         </Container>
-      </SideBarTooltip>
+      </Tooltip>
     )
   }
 }
@@ -74,7 +74,8 @@ const Container = styled(Tabbable).attrs(() => ({
   px: 3,
   py: 2,
 }))`
-  cursor: ${p => (p.disabled ? 'not-allowed' : 'default')};
+  width: 100%;
+  cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
   color: ${p =>
     p.isActive ? p.theme.colors.palette.text.shade100 : p.theme.colors.palette.text.shade80};
   background: ${p => (p.isActive ? p.theme.colors.palette.action.hover : '')};

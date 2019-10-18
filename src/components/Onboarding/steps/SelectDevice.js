@@ -59,7 +59,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
                   <InvertableImg alt="" src={i('ledger-nano-x-onb.svg')} />
                 </DeviceIcon>
                 <BlockTitle>{getDeviceModel('nanoX').productName}</BlockTitle>
-                <Tooltip render={() => <Trans i18nKey="onboarding.selectDevice.usbOnlyTooltip" />}>
+                <Tooltip content={<Trans i18nKey="onboarding.selectDevice.usbOnlyTooltip" />}>
                   <USBOnly>
                     <Trans i18nKey="onboarding.selectDevice.usbOnly" />
                   </USBOnly>

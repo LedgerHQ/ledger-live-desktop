@@ -66,9 +66,7 @@ class CryptoCurrencyIconWithCount extends PureComponent<Props> {
     if (withTooltip && count > 0) {
       return (
         <Tooltip
-          render={() => (
-            <Trans i18nKey={'tokensList.countTooltip'} count={count} values={{ count }} />
-          )}
+          content={<Trans i18nKey={'tokensList.countTooltip'} count={count} values={{ count }} />}
         >
           {content}
         </Tooltip>

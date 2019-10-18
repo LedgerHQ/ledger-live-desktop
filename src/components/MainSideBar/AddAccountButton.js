@@ -31,7 +31,7 @@ export default class AddAccountButton extends PureComponent<{
   render() {
     const { onClick, tooltipText } = this.props
     return (
-      <Tooltip render={() => tooltipText}>
+      <Tooltip content={tooltipText}>
         <PlusWrapper onClick={onClick}>
           <IconCirclePlus size={16} data-e2e="menuAddAccount_button" />
         </PlusWrapper>

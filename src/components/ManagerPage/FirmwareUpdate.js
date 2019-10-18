@@ -127,7 +127,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
                 {deviceSpecs.productName}
               </Text>
               <Box color="wallet" ml={2}>
-                <Tooltip render={() => t('manager.yourDeviceIsGenuine')}>
+                <Tooltip content={t('manager.yourDeviceIsGenuine')}>
                   <CheckFull size={13} color="palette.primary.main" />
                 </Tooltip>
               </Box>
