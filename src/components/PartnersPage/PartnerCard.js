@@ -28,7 +28,7 @@ export default class PartnerCard extends PureComponent<{ t: T, card: CardType }>
     } = this.props
     return (
       <Card horizontal py={5} px={6}>
-        <Box justify="center" style={{ width: 180, marginRight: 64 }}>
+        <Box justify="center" style={{ width: 180, marginRight: 32 }}>
           <Logo width={180} />
         </Box>
         <Box shrink ff="Inter|Regular" fontSize={4} flow={3}>
