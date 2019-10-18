@@ -97,7 +97,7 @@ const AccountOption = React.memo(
       <Box grow horizontal alignItems="center" flow={2} style={{ opacity: disabled ? 0.2 : 1 }}>
         {!isValue && account.type === 'TokenAccount' ? tokenTick : null}
         <CryptoCurrencyIcon currency={currency} size={16} />
-        <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
+        <Ellipsis ff="Inter|SemiBold" fontSize={4}>
           {name}
         </Ellipsis>
         <Box>
