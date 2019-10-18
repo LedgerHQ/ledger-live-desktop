@@ -4,7 +4,7 @@ import styled, { withTheme } from 'styled-components'
 import { Trans } from 'react-i18next'
 
 import type { Currency } from '@ledgerhq/live-common/lib/types'
-import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
+import { getCurrencyColor } from 'helpers/getCurrencyColor'
 
 import Tooltip from 'components/base/Tooltip'
 import CryptoCurrencyIcon, { TokenIconWrapper, TokenIcon } from './CryptoCurrencyIcon'
@@ -45,7 +45,9 @@ const Wrapper = styled.div`
 class CryptoCurrencyIconWithCount extends PureComponent<Props> {
   render() {
     const { currency, bigger, withTooltip, inactive, count, theme } = this.props
-    const color = inactive ? theme.colors.palette.text.shade60 : getCurrencyColor(currency)
+    const color = inactive
+      ? theme.colors.palette.text.shade60
+      : getCurrencyColor(currency, theme.colors.palette.background.paper)
 
     const size = bigger ? 20 : 16
     const fontSize = size / 2 + (count < 10 ? 2 : count >= 100 ? -2 : 0)

@@ -37,12 +37,5 @@ export default ({ resource, alt, themeTyped = false, resourcePath, className, ..
   const fileName = themeTyped ? `${type}-${resource}` : resource
   const finalPath = resourcePath ? path.join(resourcePath, fileName) : fileName
 
-  return (
-    <Img
-      {...rest}
-      alt={alt}
-      className={className}
-      src={i(finalPath)}
-    />
-  )
+  return <Img {...rest} alt={alt} className={className} src={i(finalPath)} />
 }

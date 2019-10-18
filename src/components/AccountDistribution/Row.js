@@ -1,13 +1,13 @@
 // @flow
 
 import React, { Fragment, PureComponent } from 'react'
-import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
+import { getCurrencyColor } from 'helpers/getCurrencyColor'
 import { getAccountName } from '@ledgerhq/live-common/lib/account'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/account'
 import type { CryptoCurrency, TokenCurrency } from '@ledgerhq/live-common/lib/types/currencies'
 import { BigNumber } from 'bignumber.js'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
+import styled, { withTheme } from 'styled-components'
 import { push } from 'react-router-redux'
 import CounterValue from 'components/CounterValue'
 import FormattedVal from 'components/base/FormattedVal'
@@ -33,6 +33,7 @@ type Props = {
   item: AccountDistributionItem,
   push: typeof push,
   accounts: Account[],
+  theme: any,
 }
 
 type State = {}
@@ -112,11 +113,12 @@ class Row extends PureComponent<Props, State> {
     const {
       item: { currency, amount, distribution, account },
       accounts,
+      theme,
     } = this.props
 
     const parentAccount =
       account.type !== 'Account' ? accounts.find(a => a.id === account.parentId) : null
-    const color = getCurrencyColor(currency)
+    const color = getCurrencyColor(currency, theme.colors.palette.background.paper)
     const displayName = getAccountName(account)
     const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2)
     const icon = <ParentCryptoCurrencyIcon currency={currency} size={16} />
@@ -187,7 +189,9 @@ class Row extends PureComponent<Props, State> {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Row)
+export default withTheme(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(Row),
+)

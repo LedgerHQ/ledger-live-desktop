@@ -2,10 +2,10 @@
 
 import React, { Fragment, PureComponent } from 'react'
 import type { CryptoCurrency, TokenCurrency } from '@ledgerhq/live-common/lib/types/currencies'
-import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
+import { getCurrencyColor } from 'helpers/getCurrencyColor'
 import { BigNumber } from 'bignumber.js'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
+import styled, { withTheme } from 'styled-components'
 import { push } from 'react-router-redux'
 import CounterValue from 'components/CounterValue'
 import FormattedVal from 'components/base/FormattedVal'
@@ -25,6 +25,7 @@ export type DistributionItem = {
 type Props = {
   item: DistributionItem,
   push: typeof push,
+  theme: any,
 }
 
 type State = {}
@@ -92,8 +93,9 @@ class Row extends PureComponent<Props, State> {
   render() {
     const {
       item: { currency, amount, distribution },
+      theme,
     } = this.props
-    const color = getCurrencyColor(currency)
+    const color = getCurrencyColor(currency, theme.colors.palette.background.paper)
     const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2)
     const icon = <CryptoCurrencyIcon currency={currency} size={16} />
     return (
@@ -158,7 +160,9 @@ class Row extends PureComponent<Props, State> {
   }
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(Row)
+export default withTheme(
+  connect(
+    null,
+    mapDispatchToProps,
+  )(Row),
+)

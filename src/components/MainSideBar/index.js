@@ -105,7 +105,7 @@ const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
         alignSelf: 'center',
         justifyContent: 'flex-end',
         textAlign: 'center',
-        cursor: 'pointer'
+        cursor: 'pointer',
       }}
     >
       <Tag to="/settings/experimental">

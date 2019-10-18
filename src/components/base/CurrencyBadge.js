@@ -8,6 +8,9 @@ import { rgba } from 'styles/helpers'
 import IconCheck from 'icons/Check'
 import Box from 'components/base/Box'
 import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
+import useTheme from 'hooks/useTheme'
+import ensureContrast from 'helpers/ensureContrast'
+
 
 import Spinner from './Spinner'
 
@@ -53,6 +56,7 @@ export function CurrencyCircleIcon({
   showSpinner?: boolean,
   showCheckmark?: boolean,
 }) {
+  const bgColor = useTheme('colors.palette.background.paper')
   if (currency.type === 'TokenCurrency') {
     return <ParentCryptoCurrencyIcon currency={currency} bigger />
   }
@@ -61,7 +65,7 @@ export function CurrencyCircleIcon({
     <CryptoIconWrapper
       size={size}
       showCheckmark={showCheckmark}
-      cryptoColor={currency.color}
+      cryptoColor={ensureContrast(currency.color, bgColor)}
       {...props}
     >
       {Icon && <Icon size={size / 2} />}

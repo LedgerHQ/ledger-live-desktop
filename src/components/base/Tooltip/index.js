@@ -5,7 +5,7 @@ import Tippy from '@tippy.js/react'
 import styled from 'styled-components'
 import get from 'lodash/get'
 import useTheme from 'hooks/useTheme'
-import { followCursor as followCursorPlugin } from 'tippy.js';
+import { followCursor as followCursorPlugin } from 'tippy.js'
 
 import 'tippy.js/dist/tippy.css'
 import 'tippy.js/animations/shift-toward.css'
@@ -44,7 +44,7 @@ type Props = {
   children: React$Node,
   content: React$Node,
   delay?: number,
-  followCursor?: boolean
+  followCursor?: boolean,
 }
 
 const ToolTip = ({ followCursor, tooltipBg, children, content, delay, ...props }: Props) => {
