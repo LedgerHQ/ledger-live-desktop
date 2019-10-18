@@ -5,7 +5,7 @@ import Tippy from '@tippy.js/react'
 import styled from 'styled-components'
 import get from 'lodash/get'
 import useTheme from 'hooks/useTheme'
-import { followCursor as followCursorPlugin } from 'tippy.js';
+import { followCursor as followCursorPlugin } from 'tippy.js'
 
 import 'tippy.js/dist/tippy.css'
 import 'tippy.js/animations/shift-toward.css'
@@ -34,6 +34,7 @@ export const defaultTippyOptions = {
   animation: 'shift-toward',
   offset: 0,
   theme: 'ledger',
+  plugins: [followCursorPlugin],
 }
 
 const arrow = bg =>
@@ -44,7 +45,7 @@ type Props = {
   children: React$Node,
   content: React$Node,
   delay?: number,
-  followCursor?: boolean
+  followCursor?: boolean,
 }
 
 const ToolTip = ({ followCursor, tooltipBg, children, content, delay, ...props }: Props) => {
@@ -58,7 +59,6 @@ const ToolTip = ({ followCursor, tooltipBg, children, content, delay, ...props }
       delay={[delay, 0]}
       arrow={arrow(bg)}
       followCursor={followCursor}
-      plugins={followCursor ? [followCursorPlugin] : []}
       {...props}
     >
       <ChildrenContainer>{children}</ChildrenContainer>

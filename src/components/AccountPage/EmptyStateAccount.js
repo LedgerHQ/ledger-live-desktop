@@ -1,7 +1,6 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { i } from 'helpers/staticPath'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate, Trans } from 'react-i18next'
@@ -16,6 +15,7 @@ import { MODAL_RECEIVE } from 'config/constants'
 
 import IconReceive from 'icons/Receive'
 import Box from 'components/base/Box'
+import Image from 'components/base/Image'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 import { Title, Description } from '../AccountsPage/EmptyState'
@@ -41,11 +41,12 @@ class EmptyStateAccount extends PureComponent<Props, *> {
 
     return (
       <Box mt={7} alignItems="center" selectable>
-        <img
+        <Image
           alt="emptyState Dashboard logo"
-          src={i('logos/emptyStateAccount.png')}
+          resource="empty-state-account.svg"
           width="400"
           height="89"
+          themeTyped
         />
         <Box mt={5} alignItems="center">
           <Title>{t('account.emptyState.title')}</Title>

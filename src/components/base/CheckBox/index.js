@@ -14,14 +14,13 @@ const Base = styled(Tabbable).attrs(() => ({
   outline: none;
   border-radius: 4px;
   background-color: ${p =>
-    p.isChecked ? p.theme.colors.wallet : p.theme.colors.palette.background.paper};
-  border: 1px solid;
-  border-color: ${p =>
-    p.isChecked ? p.theme.colors.palette.primary.main : p.theme.colors.palette.divider};
+  p.isChecked ? p.theme.colors.wallet : p.theme.colors.palette.background.paper};
+  border: 1px solid ${p =>
+  p.isChecked ? p.theme.colors.palette.primary.main : p.theme.colors.palette.divider};
   color: ${p =>
-    p.isChecked
-      ? p.theme.colors.palette.primary.contrastText
-      : p.theme.colors.palette.text.shade20};
+  p.isChecked
+    ? p.theme.colors.palette.primary.contrastText
+    : p.theme.colors.palette.background.paper};
   height: 18px;
   width: 18px;
   transition: all ease-in-out 0.1s;
