@@ -544,8 +544,7 @@
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Asset allocation ({{count}})",
-    "notice": "You can now click on assets for more details!"
+    "header": "Asset allocation ({{count}})"
   },
   "accountDistribution": {
     "account": "Account",
@@ -555,8 +554,7 @@
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Account allocation ({{count}})",
-    "notice": "You can right-click on an account to see its options!"
+    "header": "Account allocation ({{count}})"
   },
   "asset": {
     "notice": "Summary of all {{currency}} accounts"
