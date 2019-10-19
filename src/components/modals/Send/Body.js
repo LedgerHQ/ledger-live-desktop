@@ -107,6 +107,7 @@ const Body = ({
   stepId,
   params,
   accounts,
+  updateAccountWithUpdater,
 }: Props) => {
   const openedFromAccount = !!params.account
   const [steps] = useState(createSteps)
