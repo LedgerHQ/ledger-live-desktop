@@ -72,7 +72,7 @@ class TokenRow extends PureComponent<Props> {
     const Row = nested ? NestedRow : TopLevelRow
     return (
       <Row index={index} onClick={this.onClick}>
-        <Header nested={nested} account={account} name={currency.name} />
+        <Header nested={nested} account={account} />
         <Balance unit={unit} balance={account.balance} disableRounding={disableRounding} />
         <Countervalue account={account} currency={currency} range={range} />
         <Delta account={account} range={range} />
