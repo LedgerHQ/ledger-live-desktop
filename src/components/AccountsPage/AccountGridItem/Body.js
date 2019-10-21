@@ -1,12 +1,12 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import styled from 'styled-components'
+import styled, { withTheme } from 'styled-components'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { balanceHistoryWithCountervalueSelector } from 'actions/portfolio'
 import type { Account, TokenAccount, AccountPortfolio } from '@ledgerhq/live-common/lib/types'
-import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
+import { getCurrencyColor } from 'helpers/getCurrencyColor'
 import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import Box from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
@@ -20,6 +20,7 @@ const Placeholder = styled.div`
 class Body extends PureComponent<{
   histo: AccountPortfolio,
   account: Account | TokenAccount,
+  theme: any,
 }> {
   // $FlowFixMe
   mapValueCounterValue = d => d.countervalue.toNumber()
@@ -29,6 +30,7 @@ class Body extends PureComponent<{
     const {
       histo: { history, countervalueAvailable, countervalueChange },
       account,
+      theme,
     } = this.props
     const currency = getAccountCurrency(account)
     return (
@@ -59,7 +61,7 @@ class Body extends PureComponent<{
         </Box>
         <Chart
           data={history}
-          color={getCurrencyColor(currency)}
+          color={getCurrencyColor(currency, theme.colors.palette.background.paper)}
           mapValue={countervalueAvailable ? this.mapValueCounterValue : this.mapValue}
           height={52}
           hideAxis
@@ -71,8 +73,10 @@ class Body extends PureComponent<{
   }
 }
 
-export default connect(
-  createStructuredSelector({
-    histo: balanceHistoryWithCountervalueSelector,
-  }),
-)(Body)
+export default withTheme(
+  connect(
+    createStructuredSelector({
+      histo: balanceHistoryWithCountervalueSelector,
+    }),
+  )(Body),
+)

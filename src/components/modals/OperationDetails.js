@@ -132,6 +132,17 @@ const B = styled(Bar).attrs(() => ({
   size: 1,
 }))``
 
+const TextEllipsis = styled.div`
+  flex-shrink: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`
+
+const Separator = styled.div`
+  margin: 0 4px;
+`
+
 const mapDispatchToProps = {
   openModal,
   push,
@@ -374,15 +385,21 @@ const OperationDetails = connect(
             <Box flex={1}>
               <OpDetailsTitle>{t('operationDetails.account')}</OpDetailsTitle>
               <OpDetailsData horizontal>
-                <Ellipsis>
+
+                <TextEllipsis style={parentAccount ? { maxWidth: '50%', flexShrink: 0 } : null}>
                   <Link onClick={goToMainAccount}>{name}</Link>
-                </Ellipsis>
-                {parentAccount ? (
-                  <>
-                    {' / '}
-                    <Link onClick={goToSubAccount}>{currency.name}</Link>
-                  </>
-                ) : null}
+                </TextEllipsis>
+
+                {
+                  parentAccount ? (
+                    <>
+                      <Separator>{'/'}</Separator>
+                      <TextEllipsis>
+                        <Link onClick={goToSubAccount}>{currency.name}</Link>
+                      </TextEllipsis>
+                    </>
+                  ) : null
+                }
               </OpDetailsData>
             </Box>
             <Box flex={1}>
