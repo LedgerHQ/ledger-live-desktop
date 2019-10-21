@@ -112,7 +112,11 @@ class TopBar extends PureComponent<Props> {
                 </Fragment>
               )}
               <Tooltip content={t('settings.title')} placement="bottom">
-                <ItemContainer data-e2e="setting_button" isInteractive onClick={this.navigateToSettings}>
+                <ItemContainer
+                  data-e2e="setting_button"
+                  isInteractive
+                  onClick={this.navigateToSettings}
+                >
                   <IconSettings size={16} />
                 </ItemContainer>
               </Tooltip>
