@@ -34,6 +34,7 @@ export const defaultTippyOptions = {
   animation: 'shift-toward',
   offset: 0,
   theme: 'ledger',
+  plugins: [followCursorPlugin],
 }
 
 const arrow = bg =>
@@ -58,7 +59,6 @@ const ToolTip = ({ followCursor, tooltipBg, children, content, delay, ...props }
       delay={[delay, 0]}
       arrow={arrow(bg)}
       followCursor={followCursor}
-      plugins={followCursor ? [followCursorPlugin] : []}
       {...props}
     >
       <ChildrenContainer>{children}</ChildrenContainer>

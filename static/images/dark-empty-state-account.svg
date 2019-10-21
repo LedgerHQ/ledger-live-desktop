@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="398" height="88">
+    <defs/>
+    <defs>
+        <filter id="a" width="104.7%" height="254.5%" x="-2.4%" y="-59.1%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2.5"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0"/>
+        </filter>
+        <filter id="c" width="104.6%" height="254.5%" x="-2.3%" y="-59.1%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2.5"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0"/>
+        </filter>
+        <filter id="e" width="104.4%" height="129.3%" x="-2.2%" y="-11.2%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2.5"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0"/>
+        </filter>
+        <path id="b" d="M15 67h358v7c0 2.209139-1.790861 4-4 4H19c-2.209139 0-4-1.790861-4-4v-7z"/>
+        <path id="d" d="M7 57h373v7c0 2.209139-1.790861 4-4 4H11c-2.209139 0-4-1.790861-4-4v-7z"/>
+        <rect id="f" width="388" height="58" x="0" y="0" rx="4"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g fill="#000" opacity=".30000001" transform="translate(5 3)">
+            <use filter="url(#a)" xlink:href="#b"/>
+            <path fill-opacity=".16" stroke="#3D3D3E" stroke-linejoin="square" d="M15.5 67.5V74c0 1.9329966 1.5670034 3.5 3.5 3.5h350c1.932997 0 3.5-1.5670034 3.5-3.5v-6.5h-357z"/>
+        </g>
+        <g fill="#000" opacity=".60000002" transform="translate(5 3)">
+            <use filter="url(#c)" xlink:href="#d"/>
+            <path fill-opacity=".16" stroke="#3D3D3E" stroke-linejoin="square" d="M7.5 57.5V64c0 1.9329966 1.56700338 3.5 3.5 3.5h365c1.932997 0 3.5-1.5670034 3.5-3.5v-6.5H7.5z"/>
+        </g>
+        <g fill="#000" transform="translate(5 3)">
+            <use filter="url(#e)" xlink:href="#f"/>
+            <rect width="387" height="57" x=".5" y=".5" fill-opacity=".16" stroke="#3D3D3E" stroke-linejoin="square" rx="4"/>
+        </g>
+        <path fill="#FFF" d="M88.787234 35c1.1045695 0 2 .8954305 2 2s-.8954305 2-2 2H60c-1.1045695 0-2-.8954305-2-2s.8954305-2 2-2h28.787234zm291.084659 0c1.104569 0 2 .8954305 2 2s-.895431 2-2 2h-27.900574c-1.104569 0-2-.8954305-2-2s.895431-2 2-2h27.900574zM272 30c1.104569 0 2 .8954305 2 2s-.895431 2-2 2h-96c-1.104569 0-2-.8954305-2-2s.895431-2 2-2h96zm-152.56383-5c1.10457 0 2 .8954305 2 2s-.89543 2-2 2H60c-1.1045695 0-2-.8954305-2-2s.8954305-2 2-2h59.43617zm260.435723 0c1.104569 0 2 .8954305 2 2s-.895431 2-2 2h-36.061186c-1.104569 0-2-.8954305-2-2s.895431-2 2-2h36.061186z" opacity=".30000001"/>
+        <g fill="#66BE54" transform="translate(22 20)">
+            <rect width="24" height="24" opacity=".2" rx="12"/>
+            <path fill-rule="nonzero" d="M16.1875 16.3125c.2761424 0 .5.2518398.5.5625s-.2238576.5625-.5.5625h-8c-.27614237 0-.5-.2518398-.5-.5625s.22385763-.5625.5-.5625h8zM12 6.37500001c.3106602 0 .5625.23318502.5625.52083333V13.829l2.0397524-2.0392476c.2196699-.2196699.5758253-.2196699.7954952 0 .2196699.21967.2196699.5758253 0 .7954952l-2.9277752 2.9302126c-.0726474.1020365-.183013.1790139-.3127166.2139133l-.1096927.0186523L12 15.75c-.1964469 0-.3693732-.0932437-.4699724-.2345398l-2.92777516-2.9302126c-.21966992-.2196699-.21966992-.5758252 0-.7954952.21966991-.2196699.57582521-.2196699.79549512 0L11.4375 13.83V6.89583334c0-.28764831.2518398-.52083333.5625-.52083333z"/>
+        </g>
+    </g>
+</svg>

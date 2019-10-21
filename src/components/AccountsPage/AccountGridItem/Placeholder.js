@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { openModal } from 'reducers/modals'
 import { MODAL_ADD_ACCOUNTS } from 'config/constants'
 import type { T } from 'types/common'
-import { i } from 'helpers/staticPath'
+import Image from 'components/base/Image'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 
@@ -34,7 +34,7 @@ class Placeholder extends PureComponent<{
       <Box mb={5}>
         <Wrapper data-e2e="dashboard_AccountPlaceOrder">
           <Box mt={2}>
-            <img alt="" src={i('empty-account-tile.svg')} />
+            <Image alt="empty account placeholder" resource="empty-account-tile.svg" themeTyped />
           </Box>
           <Box
             ff="Inter"
