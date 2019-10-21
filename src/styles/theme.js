@@ -50,6 +50,7 @@ export const colors = {
   warning: '#f57f17',
   black: '#000000',
   dark: '#142533',
+  separator: '#aaaaaa',
   fog: '#d8d8d8',
   graphite: '#767676',
   grey: '#999999',

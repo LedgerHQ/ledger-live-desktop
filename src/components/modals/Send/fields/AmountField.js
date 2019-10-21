@@ -14,6 +14,7 @@ import Label from 'components/base/Label'
 import RequestAmount from 'components/RequestAmount'
 import Switch from 'components/base/Switch'
 import styled from 'styled-components'
+import { colors } from 'styles/theme'
 
 type Props = {
   parentAccount: ?Account,
@@ -64,20 +65,19 @@ const AmountField = ({
     <Box flow={1}>
       <Box horizontal alignItems="center">
         <Label>{t('send.steps.amount.amount')}</Label>
+        {/* Two ternaries due to Fragment <></> style glitch ↓ */}
+        {typeof useAllAmount === 'boolean' ? <SendMaxSeparator /> : null}
         {typeof useAllAmount === 'boolean' ? (
-          <>
-            <SendMaxSeparator />
-            <Box horizontal alignItems="center">
-              <Label
-                color="#aaa"
-                style={{ paddingRight: 8 }}
-                onClick={() => onChangeSendMax(!useAllAmount)}
-              >
-                <Trans i18nKey="send.steps.amount.useMax" />
-              </Label>
-              <Switch small isChecked={useAllAmount} onChange={onChangeSendMax} />
-            </Box>
-          </>
+          <Box horizontal alignItems="center">
+            <Label
+              color={colors.separator}
+              style={{ paddingRight: 8 }}
+              onClick={() => onChangeSendMax(!useAllAmount)}
+            >
+              <Trans i18nKey="send.steps.amount.useMax" />
+            </Label>
+            <Switch small isChecked={useAllAmount} onChange={onChangeSendMax} />
+          </Box>
         ) : null}
       </Box>
       <RequestAmount
