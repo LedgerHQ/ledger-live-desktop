@@ -98,8 +98,12 @@
     }
   },
   "fees": {
+    "custom": "Custom",
+    "fast": "Rapide",
+    "high": "High",
+    "low": "Low",
     "slow": "Lent",
-    "fast": "Rapide"
+    "standard": "Standard"
   },
   "sidebar": {
     "menu": "Menu",
@@ -544,8 +548,7 @@
     "value": "Valeur",
     "showAll": "Afficher tout",
     "showLess": "Afficher moins",
-    "header": "Répartition des actifs ({{count}})",
-    "notice": "Vous pouvez maintenant cliquer sur les actifs pour plus de détails !"
+    "header": "Répartition des actifs ({{count}})"
   },
   "accountDistribution": {
     "account": "Compte",
@@ -555,8 +558,7 @@
     "value": "Valeur",
     "showAll": "Tout afficher",
     "showLess": "Afficher moins",
-    "header": "Répartition des comptes ({{count}})",
-    "notice": "Vous pouvez faire un click droit sur un compte pour voir ses options !"
+    "header": "Répartition des comptes ({{count}})"
   },
   "asset": {
     "notice": "Résumé de tous les comptes {{currency}}"
