@@ -168,7 +168,7 @@ const Body = ({
       setOptimisticOperation(optimisticOperation)
       setTransactionError(null)
     },
-    [account, parentAccount],
+    [account, parentAccount, updateAccountWithUpdater],
   )
 
   const handleSignTransaction = useCallback(

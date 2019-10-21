@@ -84,7 +84,7 @@ class AssetPage extends PureComponent<Props, State> {
           unit={unit}
           counterValue={counterValue}
           accounts={accounts}
-          chartId={`asset-chart-${this.props.match.params.assetTicker}`}
+          chartId={`asset-chart-${this.props.match.params.assetId}`}
         />
         <Box mt={40}>
           <AccountDistribution accounts={accounts} />
