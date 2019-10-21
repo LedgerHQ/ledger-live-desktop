@@ -98,8 +98,12 @@
     }
   },
   "fees": {
+    "custom": "Custom",
+    "fast": "Fast",
+    "high": "High",
+    "low": "Low",
     "slow": "Slow",
-    "fast": "Fast"
+    "standard": "Standard"
   },
   "sidebar": {
     "menu": "Menú",
@@ -169,7 +173,7 @@
       "star": "Star",
       "receive": "Recibir",
       "send": "Enviar",
-      "edit": "Editar Cuenta"
+      "edit": "Edit account"
     }
   },
   "banners": {
@@ -226,23 +230,24 @@
     "title": "Comprar crypto",
     "desc": "Prueba algunos de los servicios que hemos seleccionado",
     "visitWebsite": "Visita la página web",
-    "btcdirect": "Compra y vende con total comodidad en el principal agente de criptomonedas de Europa. Inscríbete gratuitamente y recibe tus monedas en solo unos minutos. Nuestros usuarios nos califican con un 8,7 en Trustpilot",
+    "btcdirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot.",
     "changelly": "Changelly es un conocido cambiador instantáneo de criptoactivos que cotiza más de 100 monedas y tokens.",
-    "changenow": "ChangeNOW es uno de los principales servicios de intercambios instantáneos sin custodia",
+    "changenow": "ChangeNOW is one of the leading custody-free instant exchange services.",
     "coinberry": "Coinberry es la plataforma de criptomonedas que disfruta de mayor confianza al ofrecer una seguridad superior a la de los bancos, una interfaz de usuario de primera clase y financiación y retirada sin comisión. Preinscríbete para obtener un acceso rápido a nuestra plataforma si no eres ciudadano canadiense.",
     "coinhouse": "Coinhouse es una plataforma de confianza para individuos e inversores institucionales que buscan analizar, comprar, vender y guardar criptoactivos con seguridad.",
     "coinmama": "Coinmama es un servicio financiero que permite comprar criptoactivos de forma segura, rápida y divertida en cualquier parte del mundo.",
     "genesis": "Genesis es una empresa comercial institucional que ofrece liquidez y préstamos en monedas digitales, incluidas bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin y XRP.",
     "kyberswap": "Plataforma rápida, sencilla y segura de canje de tokens. Alimentada por el protocolo de liquidez en cadena de Kyber Network.",
-    "luno": "Luno te permite comprar, guardar y aprender sobre criptomonedas como Bitcoin y Ethereum de una forma segura y sencilla.",
-    "paybis": "Comprar Bitcoin con tarjeta de crédito en PayBis es seguro y sencillo. El servicio opera en Estados Unidos, Canadá, Alemania, Rusia y Arabia Saudí.",
+    "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum.",
+    "paybis": "Paybis.com is one of the most trusted cryptocurrency brokers worldwide since 2014, customer satisfaction - 4.7/5 via Trustpilot. Visa/Master cards, Bank Transfers, Skrill/Neteller accepted. 24/7 online customer support.",
     "shapeshift": "ShapeShift es un marketplace en línea donde los usuarios pueden comprar y vender criptoactivos. Es una forma rápida y segura para que cualquiera compre o venda activos digitales, sin tediosos procesos de inscripción, sin riesgos de contraparte y sin fricciones.",
     "simplex": "Simplex es una institución financiera con licencia en la UE que ofrece una solución de pago antifraude con tarjeta de crédito.",
     "taxtoken": "Software de base fiscal y costes de criptomonedas automatizado para ciudadanos de EE.UU.",
     "thorswap": "ThorSwap es una plataforma para el intercambio de criptoactivos de forma instantánea, segura y fiable, utilizando tecnologías descentralizadas para intercambios atómicos. Es la forma más fácil de comenzar a negociar, sin registro ni procesos KYC para operaciones con pequeñas cantidades.",
     "bitpanda": "Bitpanda es el principal agente minorista en Europa de intercambio para la compra y venta de Bitcoin, Ethereum, IOTA y muchas otras. Deposita monedas utilizando tu tarjeta de crédito, Transferencia SOFORT, NETELLER y otras opciones.",
     "exmo": "Fundada en 2013 y con sede en Londres, Kiev, Barcelona y Moscú, EXMO es la casa de bolsa número uno en Europa del Este y una de las bolsas mundiales de volumen y liquidez más grandes del mundo.",
-    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure and intuitive platform to buy and sell Bitcoin, Litecoin, Ethereum, XRP and other digital assets. Other key features include advanced trading, free deposits, and an institutional-grade custody solution via Ledger Vault."
+    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure and intuitive platform to buy and sell Bitcoin, Litecoin, Ethereum, XRP and other digital assets. Other key features include advanced trading, free deposits, and an institutional-grade custody solution via Ledger Vault.",
+    "voyager": "Love your Crypto Journey with Voyager. A licensed crypto broker with commission-free trading of 20+ cryptocurrencies."
   },
   "genuinecheck": {
     "modal": {
@@ -255,7 +260,7 @@
     "cta": "Add token",
     "placeholder": "To add tokens, simply send them to your Ethereum address.",
     "link": "Learn more",
-    "seeTokens": "See tokens ({{tokenCount}})",
+    "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "tooltip": "Token from",
     "countTooltip": "1 Token",
@@ -400,12 +405,20 @@
     },
     "firmware": {
       "installed": "Versión {{version}} del firmware",
-      "update": "Actualizar",
+      "updateLater": "Update later",
+      "seedReady": "I have my recovery phrase",
+      "dontHaveSeed": "Don't have your recovery phrase?",
+      "followTheGuide": "Follow our step by step update guide",
+      "removeApps": "Uninstall all apps before updating",
+      "update": "Firmware update",
       "latest": "La versión {{version}} del firmware está disponible.",
+      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible.",
       "disclaimerTitle": "Estás a punto de instalar la versión <1><0>del firmware {{version}}</0></1>.",
       "disclaimerAppDelete": "Desinstala todas las aplicaciones de tu dispositivo. Esto no afectará a tus criptoactivos.",
       "disclaimerAppReinstall": "Como precaución, ten a mano la hoja de recuperacion.",
-      "downloadingUpdateDesc": "Por favor, espera mientras se descarga el instalador de actualización"
+      "downloadingUpdateDesc": "Por favor, espera mientras se descarga el instalador de actualización",
+      "appsAutoUninstallTitle": "Apps will be uninstalled",
+      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -530,24 +543,22 @@
   "distribution": {
     "asset": "Asset",
     "price": "Price",
-    "distribution": "Distribution",
+    "distribution": "Allocation",
     "amount": "Amount",
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Asset distribution ({{count}})",
-    "notice": "You can now click on assets for more details!"
+    "header": "Asset allocation ({{count}})"
   },
   "accountDistribution": {
     "account": "Account",
     "price": "Price",
-    "distribution": "Distribution",
+    "distribution": "Allocation",
     "amount": "Amount",
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Account distribution ({{count}})",
-    "notice": "You can right-click on an account to see its options!"
+    "header": "Account allocation ({{count}})"
   },
   "asset": {
     "notice": "Summary of all {{currency}} accounts"
@@ -608,9 +619,9 @@
       "confirmationsNbDesc": "Establece el número de confirmaciones de red para que una transacción se marque como confirmada."
     },
     "rates": {
-      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
+      "desc": "Here are all the rates that are used to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} to {{to}}",
-      "noCounterValue": "We have no data for this trading pair.",
+      "noCounterValue": "We have no data for this trading pair",
       "cryptoToFiat": "Crypto to fiat",
       "cryptoToCrypto": "Crypto to Crypto",
       "rate": "Rate",
@@ -998,10 +1009,6 @@
       "title": "Account not supported.",
       "description": "Please retry or contact Support ({{reason}})"
     },
-    "BtcUnmatchedApp": {
-      "title": "Esa aplicación no es correcta,",
-      "description": "Abre la aplicación «{{managerAppName}}» en tu dispositivo"
-    },
     "NoAccessToCamera": {
       "title": "Please ensure your system has a camera, that it's not in use by another application and that Ledger Live has permission to use it.",
       "description": ""
@@ -1084,9 +1091,13 @@
       "title": "Vaya, esa ya está instalada",
       "description": "Comprueba tu dispositivo para ver qué aplicaciones ya están instaladas"
     },
-    "ManagerAppRelyOnBTC": {
-      "title": "Se requieren las aplicaciones Bitcoin y Ethereum.",
-      "description": "Instala primero las últimas aplicaciones Bitcoin y Ethereum"
+    "ManagerAppDepInstallRequired": {
+      "title": "{{dependency}} app required",
+      "description": "If you already have the {{dependency}} app installed, please reinstall it to get the latest version"
+    },
+    "ManagerAppDepUninstallRequired": {
+      "title": "Sorry, this app is required",
+      "description": "You must first uninstall all apps that require the {{appName}} app"
     },
     "ManagerDeviceLocked": {
       "title": "Desbloquea tu dispositivo",

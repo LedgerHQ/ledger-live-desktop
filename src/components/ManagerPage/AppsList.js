@@ -499,15 +499,6 @@ class AppsList extends PureComponent<Props, State> {
     )
   }
 
-  renderTooltip = () => {
-    const { t } = this.props
-    return (
-      <Box ff="Inter|SemiBold" fontSize={2}>
-        {t('manager.apps.help')}
-      </Box>
-    )
-  }
-
   render() {
     const { t } = this.props
 
@@ -523,7 +514,15 @@ class AppsList extends PureComponent<Props, State> {
           align="center"
         >
           <span>{t('manager.apps.all')}</span>
-          <Tooltip render={this.renderTooltip}>{CATALOG_INFO_ICON}</Tooltip>
+          <Tooltip
+            content={
+              <Box ff="Inter|SemiBold" fontSize={2}>
+                {t('manager.apps.help')}
+              </Box>
+            }
+          >
+            {CATALOG_INFO_ICON}
+          </Tooltip>
         </Box>
         {this.renderList()}
       </Box>

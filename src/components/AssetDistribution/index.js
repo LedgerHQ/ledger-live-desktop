@@ -8,7 +8,6 @@ import { getAssetsDistribution } from '@ledgerhq/live-common/lib/portfolio'
 import type { AssetsDistribution } from '@ledgerhq/live-common/lib/types/portfolio'
 import styled from 'styled-components'
 import Text from 'components/base/Text'
-import Tag from 'components/Tag'
 import Box from 'components/base/Box'
 import Card from 'components/base/Box/Card'
 import IconAngleDown from 'icons/AngleDown'
@@ -26,10 +25,6 @@ type State = {
   showAll: boolean,
 }
 
-const TagWrapper = styled.div`
-  margin-left: 16px;
-  margin-right: 8px;
-`
 const SeeAllButton = styled.div`
   margin-top: 15px;
   display: flex;
@@ -99,14 +94,6 @@ class AssetDistribution extends PureComponent<Props, State> {
               values={{ count: 0 }}
               count={distribution.list.length}
             />
-          </Text>
-          <TagWrapper>
-            <Tag>
-              <Trans i18nKey="common.new" />
-            </Tag>
-          </TagWrapper>
-          <Text ff="Inter|SemiBold" fontSize={12} color="wallet">
-            <Trans i18nKey="distribution.notice" />
           </Text>
         </Box>
         <Card p={0} mt={24}>

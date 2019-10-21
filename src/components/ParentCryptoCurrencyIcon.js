@@ -65,9 +65,7 @@ class ParentCryptoCurrencyIcon extends PureComponent<Props> {
     )
 
     if (withTooltip && parent) {
-      return (
-        <Tooltip render={() => <CryptoCurrencyIconTooltip name={parent.name} />}>{content}</Tooltip>
-      )
+      return <Tooltip content={<CryptoCurrencyIconTooltip name={parent.name} />}>{content}</Tooltip>
     }
 
     return content

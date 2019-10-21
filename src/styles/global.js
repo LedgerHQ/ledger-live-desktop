@@ -67,15 +67,28 @@ function transformFonts(allFonts) {
 }
 
 export const GlobalStyle = createGlobalStyle`
+  body, #preload {
+    background-color: ${p => p.theme.colors.palette.background.default} !important;
+  }
+
   ${transformFonts(fonts)};
   ${reset};
 
-  .tippy-tooltip {
-    background-color: ${p => p.theme.colors.palette.text.shade100};
-    border-radius: ${radii[1]}px;
+  .tippy-content {
+    padding: 0 !important;
   }
 
-  .tippy-popper .tippy-roundarrow {
+  .tippy-tooltip.ledger-theme {
+    background-color: ${p => p.theme.colors.palette.text.shade100};
+    color: ${p => p.theme.colors.palette.background.default};
+    border-radius: ${radii[1]}px;
+  }
+  
+  .tippy-tooltip.ledger-theme .tippy-svg-arrow {
+    fill: ${p => p.theme.colors.palette.text.shade100};
+  }
+
+  .tippy-popper.ledger-theme .tippy-roundarrow {
     fill: ${p => p.theme.colors.palette.text.shade100};
   }
 

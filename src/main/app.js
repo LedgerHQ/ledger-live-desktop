@@ -2,7 +2,7 @@
 
 import 'helpers/live-common-setup'
 
-import { app, BrowserWindow, Menu, screen } from 'electron'
+import { app, BrowserWindow, Menu, screen, ipcMain } from 'electron'
 import debounce from 'lodash/debounce'
 import {
   MIN_HEIGHT,
@@ -135,13 +135,6 @@ async function createMainWindow() {
 
   window.on('close', terminateAllTheThings)
 
-  window.on('ready-to-show', () => {
-    window.show()
-    setImmediate(() => {
-      window.focus()
-    })
-  })
-
   window.webContents.on('devtools-opened', () => {
     window.focus()
     setImmediate(() => {
@@ -158,7 +151,17 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
   if (mainWindow) {
+    mainWindow.focus()
+  }
+})
+
+ipcMain.on('ready-to-show', () => {
+  if (mainWindow) {
+    // move window here
     mainWindow.show()
+    setImmediate(() => {
+      mainWindow && mainWindow.focus()
+    })
   }
 })
 

@@ -15,6 +15,7 @@ import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
 import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
 import { Hide } from 'components/MainSideBar'
+import Ellipsis from 'components/base/Ellipsis'
 import Box from '../base/Box/Box'
 
 const AccountName = styled(Text)`
@@ -26,15 +27,20 @@ const ParentCryptoCurrencyIconWrapper = styled.div`
   width: 20px;
 `
 
-const ItemWrapper = styled.div`
+const ItemWrapper = styled.div.attrs(p => ({
+  style: {
+    backgroundColor: p.active
+      ? p.theme.colors.palette.action.hover
+      : p.theme.colors.palette.background.paper,
+  },
+}))`
   flex: 1;
   align-items: center;
   display: flex;
   padding: 10px 15px;
+  width: 200px;
   border-radius: 4px;
   border: 1px solid transparent;
-  background: ${p =>
-    p.active ? p.theme.colors.palette.action.hover : p.theme.colors.palette.background.paper};
   margin-bottom: 10px;
   &:hover ${AccountName},&:active ${AccountName} {
     color: ${p => p.theme.colors.palette.text.shade100};
@@ -99,7 +105,7 @@ const Item = ({
             </ParentCryptoCurrencyIconWrapper>
             <Box vertical flex={1}>
               <Hide visible={snapshot.isDragging || !collapsed}>
-                <AccountName color="palette.text.shade80">{getAccountName(account)}</AccountName>
+                <Ellipsis color="palette.text.shade80">{getAccountName(account)}</Ellipsis>
                 <FormattedVal
                   alwaysShowSign={false}
                   animateTicker={false}

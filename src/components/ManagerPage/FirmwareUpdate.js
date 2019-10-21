@@ -127,7 +127,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
                 {deviceSpecs.productName}
               </Text>
               <Box color="wallet" ml={2}>
-                <Tooltip render={() => t('manager.yourDeviceIsGenuine')}>
+                <Tooltip content={t('manager.yourDeviceIsGenuine')}>
                   <CheckFull size={13} color="palette.primary.main" />
                 </Tooltip>
               </Box>
@@ -138,12 +138,17 @@ class FirmwareUpdate extends PureComponent<Props, State> {
               })}
             </Text>
           </Box>
-          <UpdateFirmwareButton firmware={firmware} onClick={this.handleDisclaimerModal} />
+          <UpdateFirmwareButton
+            deviceInfo={deviceInfo}
+            firmware={firmware}
+            onClick={this.handleDisclaimerModal}
+          />
         </Box>
         {ready ? (
           <>
             <DisclaimerModal
               firmware={firmware}
+              deviceInfo={deviceInfo}
               status={modal}
               goToNextStep={this.handleDisclaimerNext}
               onClose={this.handleCloseModal}

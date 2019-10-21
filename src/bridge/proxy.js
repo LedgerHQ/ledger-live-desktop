@@ -1,6 +1,7 @@
 /* eslint-disable flowtype/generic-spacing */
 // @flow
 
+import { from } from 'rxjs'
 import { map } from 'rxjs/operators'
 import type {
   CryptoCurrency,
@@ -16,7 +17,6 @@ import type {
   ScanAccountEventRaw,
 } from '@ledgerhq/live-common/lib/types'
 import isEqual from 'lodash/isEqual'
-import { from } from 'rxjs'
 import {
   fromTransactionRaw,
   toTransactionRaw,
@@ -139,7 +139,10 @@ export const getAccountBridge = (
         transaction,
       })
       .toPromise()
-    if (isEqual(transaction, result)) {
+
+    // this will remove the `undefined` fields due to JSON back&forth
+    const sentTransaction = JSON.parse(JSON.stringify(transaction))
+    if (isEqual(sentTransaction, result)) {
       return t // preserve reference by deep equality of the TransactionRaw
     }
     return fromTransactionRaw(result)

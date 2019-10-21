@@ -65,8 +65,13 @@ class AccountHeaderActions extends PureComponent<Props> {
   render() {
     const { account, parentAccount, openModal, t } = this.props
     const mainAccount = getMainAccount(account, parentAccount)
-    const bridge = getAccountBridge(account, parentAccount)
-    const cap = bridge.getCapabilities(mainAccount)
+    let cap
+    try {
+      const bridge = getAccountBridge(account, parentAccount)
+      cap = bridge.getCapabilities(mainAccount)
+    } catch (e) {
+      return null
+    }
     return (
       <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
         {!isAccountEmpty(account) ? (
@@ -96,11 +101,11 @@ class AccountHeaderActions extends PureComponent<Props> {
             </Button>
           </Fragment>
         ) : null}
-        <Tooltip render={() => t('stars.tooltip')}>
+        <Tooltip content={t('stars.tooltip')}>
           <Star accountId={account.id} account={account} yellow />
         </Tooltip>
         {account.type === 'Account' ? (
-          <Tooltip render={() => t('account.settings.title')}>
+          <Tooltip content={t('account.settings.title')}>
             <ButtonSettings
               onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { parentAccount, account })}
             >

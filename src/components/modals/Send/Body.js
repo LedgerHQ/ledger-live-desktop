@@ -107,6 +107,7 @@ const Body = ({
   stepId,
   params,
   accounts,
+  updateAccountWithUpdater,
 }: Props) => {
   const openedFromAccount = !!params.account
   const [steps] = useState(createSteps)
@@ -167,7 +168,7 @@ const Body = ({
       setOptimisticOperation(optimisticOperation)
       setTransactionError(null)
     },
-    [account, parentAccount],
+    [account, parentAccount, updateAccountWithUpdater],
   )
 
   const handleSignTransaction = useCallback(
@@ -259,6 +260,8 @@ const Body = ({
     errorSteps.push(0)
   }
 
+  const error = transactionError || bridgeError
+
   const stepperProps = {
     title: t('send.title'),
     initialStepId: stepId,
@@ -270,7 +273,8 @@ const Body = ({
     parentAccount,
     transaction,
     isAppOpened,
-    error: transactionError || bridgeError,
+    hideBreadcrumb: !!error && stepId === 'amount',
+    error,
     status,
     bridgePending,
     signed,
