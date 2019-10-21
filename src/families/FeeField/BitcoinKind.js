@@ -30,8 +30,14 @@ const InputRight = styled(Box).attrs(() => ({
 
 const fallbackFeeItems = [
   {
-    label: 'Standard',
+    label: 'standard',
     value: 'standard',
+    blockCount: 0,
+    feePerByte: BigNumber(0),
+  },
+  {
+    label: 'custom',
+    value: 'custom',
     blockCount: 0,
     feePerByte: BigNumber(0),
   },
@@ -46,24 +52,29 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
   const feeItems = useMemo(
     () =>
       networkInfo
-        ? networkInfo.feeItems.items.map(fee => ({
-            label: fee.speed,
-            value: fee.speed,
-            feePerByte: fee.feePerByte,
-          }))
+        ? [
+            ...networkInfo.feeItems.items.map(fee => ({
+              label: fee.speed,
+              value: fee.speed,
+              feePerByte: fee.feePerByte,
+            })),
+            fallbackFeeItems[1],
+          ]
         : fallbackFeeItems,
     [networkInfo],
   )
+
   const selectedValue = feePerByte
-    ? feeItems.find(f => f.feePerByte.eq(feePerByte))
+    ? feeItems.find(f => f.feePerByte.eq(feePerByte)) || last(feeItems)
     : last(feeItems)
 
   const { units } = account.currency
   const satoshi = units[units.length - 1]
 
   const onSelectChange = useCallback(
-    ({ feePerByte }) => {
-      onChange(bridge.updateTransaction(transaction, { feePerByte }))
+    (item: any) => {
+      if (item.label === 'custom') return
+      onChange(bridge.updateTransaction(transaction, { feePerByte: item.feePerByte }))
     },
     [onChange, transaction, bridge],
   )
@@ -81,6 +92,8 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
           width={156}
           options={feeItems}
           onChange={onSelectChange}
+          renderOption={({ label }) => <Trans i18nKey={`fees.${label}`} />}
+          renderValue={({ data: { label } }) => <Trans i18nKey={`fees.${label}`} />}
           value={selectedValue}
         />
         <InputCurrency
