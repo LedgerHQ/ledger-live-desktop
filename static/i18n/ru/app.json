@@ -98,8 +98,12 @@
     }
   },
   "fees": {
+    "custom": "Custom",
+    "fast": "Быстро",
+    "high": "High",
+    "low": "Low",
     "slow": "Медленно",
-    "fast": "Быстро"
+    "standard": "Standard"
   },
   "sidebar": {
     "menu": "Меню",
@@ -544,8 +548,7 @@
     "value": "Значение",
     "showAll": "Показать все",
     "showLess": "Показать меньше",
-    "header": "Asset allocation ({{count}})",
-    "notice": "Теперь вы можете нажать на активы для получения более подробной информации!"
+    "header": "Asset allocation ({{count}})"
   },
   "accountDistribution": {
     "account": "Аккаунт",
@@ -555,8 +558,7 @@
     "value": "Значение",
     "showAll": "Показать все",
     "showLess": "Показать меньше",
-    "header": "Account allocation ({{count}})",
-    "notice": "Вы можете нажать правой кнопкой мыши на учетной записи, чтобы увидеть ее параметры!"
+    "header": "Account allocation ({{count}})"
   },
   "asset": {
     "notice": "Сводка всех {{currency}} аккаунтов"
