@@ -139,7 +139,10 @@ export const getAccountBridge = (
         transaction,
       })
       .toPromise()
-    if (isEqual(transaction, result)) {
+
+    // this will remove the `undefined` fields due to JSON back&forth
+    const sentTransaction = JSON.parse(JSON.stringify(transaction))
+    if (isEqual(sentTransaction, result)) {
       return t // preserve reference by deep equality of the TransactionRaw
     }
     return fromTransactionRaw(result)
