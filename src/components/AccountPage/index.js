@@ -1,12 +1,12 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { Redirect } from 'react-router'
 import type { Currency, AccountLike, Account } from '@ledgerhq/live-common/lib/types'
-import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
+import { getCurrencyColor } from 'helpers/getCurrencyColor'
 import type { T } from 'types/common'
 import { accountSelector } from 'reducers/accounts'
 import {
@@ -28,6 +28,7 @@ import SyncOneAccountOnMount from 'components/SyncOneAccountOnMount'
 import Box from 'components/base/Box'
 import OperationsList from 'components/OperationsList'
 import StickyBackToTop from 'components/StickyBackToTop'
+import useTheme from 'hooks/useTheme'
 
 import BalanceSummary from './BalanceSummary'
 import AccountHeader from './AccountHeader'
@@ -73,68 +74,66 @@ type Props = {
   setCountervalueFirst: boolean => void,
 }
 
-class AccountPage extends PureComponent<Props> {
-  render() {
-    const {
-      account,
-      parentAccount,
-      t,
-      counterValue,
-      selectedTimeRange,
-      countervalueFirst,
-      setCountervalueFirst,
-    } = this.props
+const AccountPage = ({
+  account,
+  parentAccount,
+  t,
+  counterValue,
+  selectedTimeRange,
+  countervalueFirst,
+  setCountervalueFirst,
+}: Props) => {
+  const mainAccount = account ? getMainAccount(account, parentAccount) : null
+  const bgColor = useTheme('colors.palette.background.paper')
 
-    const mainAccount = account ? getMainAccount(account, parentAccount) : null
-    if (!account || !mainAccount) {
-      return <Redirect to="/accounts" />
-    }
+  if (!account || !mainAccount) {
+    return <Redirect to="/accounts" />
+  }
 
-    const currency = getAccountCurrency(account)
-    const color = getCurrencyColor(currency)
+  const currency = getAccountCurrency(account)
+  const color = getCurrencyColor(currency, bgColor)
 
-    return (
-      <Box key={account.id}>
-        <TrackPage
-          category="Account"
-          currency={currency.id}
-          operationsLength={account.operations.length}
-        />
-        <SyncOneAccountOnMount priority={10} accountId={mainAccount.id} />
+  return (
+    <Box key={account.id}>
+      <TrackPage
+        category="Account"
+        currency={currency.id}
+        operationsLength={account.operations.length}
+      />
+      <SyncOneAccountOnMount priority={10} accountId={mainAccount.id} />
 
-        <Box horizontal mb={5} flow={4}>
-          <AccountHeader account={account} parentAccount={parentAccount} />
-          <AccountHeaderActions account={account} parentAccount={parentAccount} />
-        </Box>
+      <Box horizontal mb={5} flow={4}>
+        <AccountHeader account={account} parentAccount={parentAccount} />
+        <AccountHeaderActions account={account} parentAccount={parentAccount} />
+      </Box>
 
-        {!isAccountEmpty(account) ? (
-          <>
-            <Box mb={7}>
-              <BalanceSummary
-                account={account}
-                parentAccount={parentAccount}
-                chartColor={color}
-                chartId={`account-chart-${account.id}`}
-                counterValue={counterValue}
-                range={selectedTimeRange}
-                countervalueFirst={countervalueFirst}
-                setCountervalueFirst={setCountervalueFirst}
-              />
-            </Box>
-            <TokenList account={account} range={selectedTimeRange} />
-            <OperationsList
+      {!isAccountEmpty(account) ? (
+        <>
+          <Box mb={7}>
+            <BalanceSummary
               account={account}
               parentAccount={parentAccount}
-              title={t('account.lastOperations')}
+              chartColor={color}
+              chartId={`account-chart-${account.id}`}
+              counterValue={counterValue}
+              range={selectedTimeRange}
+              countervalueFirst={countervalueFirst}
+              setCountervalueFirst={setCountervalueFirst}
             />
-            <StickyBackToTop scrollUpOnMount />
-          </>
-        ) : (
-          <EmptyStateAccount account={account} parentAccount={parentAccount} />
-        )}
-      </Box>
-    )
-  }
+          </Box>
+          <TokenList account={account} range={selectedTimeRange} />
+          <OperationsList
+            account={account}
+            parentAccount={parentAccount}
+            title={t('account.lastOperations')}
+          />
+          <StickyBackToTop scrollUpOnMount />
+        </>
+      ) : (
+        <EmptyStateAccount account={account} parentAccount={parentAccount} />
+      )}
+    </Box>
+  )
 }
 
 export default compose(

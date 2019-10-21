@@ -1,7 +1,7 @@
 // @flow
-import React, { PureComponent } from 'react'
+import React from 'react'
 import styled, { withTheme } from 'styled-components'
-import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
+import { getCurrencyColor } from 'helpers/getCurrencyColor'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import { rgba } from 'styles/helpers'
@@ -33,25 +33,24 @@ export const TokenIcon = styled.div`
   height: ${p => p.size}px;
 `
 
-class CryptoCurrencyIcon extends PureComponent<Props> {
-  render() {
-    const { currency, size, inactive, theme } = this.props
-    const color = inactive ? theme.colors.palette.text.shade60 : getCurrencyColor(currency)
-    if (currency.type === 'FiatCurrency') {
-      return null
-    }
-    if (currency.type === 'TokenCurrency') {
-      return (
-        <TokenIconWrapper>
-          <TokenIcon color={color} size={size}>
-            {currency.ticker[0]}
-          </TokenIcon>
-        </TokenIconWrapper>
-      )
-    }
-    const IconCurrency = getCryptoCurrencyIcon(currency)
-    return IconCurrency ? <IconCurrency size={size} color={color} /> : null
+const CryptoCurrencyIcon = ({ currency, size, inactive, theme }: Props) => {
+  const currencyColor = getCurrencyColor(currency, theme.colors.palette.background.paper)
+  const color = inactive ? theme.colors.palette.text.shade60 : currencyColor
+
+  if (currency.type === 'FiatCurrency') {
+    return null
   }
+  if (currency.type === 'TokenCurrency') {
+    return (
+      <TokenIconWrapper>
+        <TokenIcon color={color} size={size}>
+          {currency.ticker[0]}
+        </TokenIcon>
+      </TokenIconWrapper>
+    )
+  }
+  const IconCurrency = getCryptoCurrencyIcon(currency)
+  return IconCurrency ? <IconCurrency size={size} color={color} /> : null
 }
 
 export default withTheme(CryptoCurrencyIcon)
