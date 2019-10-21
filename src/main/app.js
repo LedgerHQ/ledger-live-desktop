@@ -155,13 +155,19 @@ app.on('activate', () => {
   }
 })
 
+const show = win => {
+  win.show()
+  setImmediate(() => win.focus())
+}
+
+const showTimeout = setTimeout(() => {
+  if (mainWindow) show(mainWindow)
+}, 5000)
+
 ipcMain.on('ready-to-show', () => {
   if (mainWindow) {
-    // move window here
-    mainWindow.show()
-    setImmediate(() => {
-      mainWindow && mainWindow.focus()
-    })
+    clearTimeout(showTimeout)
+    show(mainWindow)
   }
 })
 
