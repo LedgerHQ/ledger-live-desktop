@@ -10,7 +10,7 @@ type Props = {
   chartId: string,
   data: Array<*>,
   tickXScale: PortfolioRange,
-  theme: any
+  theme: any,
 }
 
 class PlaceholderChart extends Component<Props> {
@@ -23,7 +23,7 @@ class PlaceholderChart extends Component<Props> {
     return (
       <Chart
         id={chartId}
-        color={themeType === 'dark' ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}
+        color={themeType === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'}
         data={data.map(i => ({
           ...i,
           value: BigNumber(
