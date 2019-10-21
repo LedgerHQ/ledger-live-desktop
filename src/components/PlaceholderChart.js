@@ -23,7 +23,7 @@ class PlaceholderChart extends Component<Props> {
     return (
       <Chart
         id={chartId}
-        color={themeType === 'dark' ? "rgba(1,1,1,0.04)" : "rgba(0,0,0,0.04)"}
+        color={themeType === 'dark' ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}
         data={data.map(i => ({
           ...i,
           value: BigNumber(
