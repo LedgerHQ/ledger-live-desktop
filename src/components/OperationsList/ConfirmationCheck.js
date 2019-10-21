@@ -96,7 +96,13 @@ class ConfirmationCheck extends PureComponent<{
 
     return withTooltip ? (
       <Tooltip
-        content={t(isConfirmed ? 'operationDetails.confirmed' : 'operationDetails.notConfirmed')}
+        content={t(
+          hasFailed
+            ? 'operationDetails.failed'
+            : isConfirmed
+            ? 'operationDetails.confirmed'
+            : 'operationDetails.notConfirmed',
+        )}
       >
         {content}
       </Tooltip>
