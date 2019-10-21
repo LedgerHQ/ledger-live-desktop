@@ -63,7 +63,7 @@ class Stars extends PureComponent<{
     return starredAccounts && starredAccounts.length ? (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable droppableId="list" direction="vertical">
-          {provided => (
+          {(provided, snapshot) => (
             <Container key={pathname} ref={provided.innerRef}>
               {starredAccounts.map((account, i) => (
                 <Tooltip
@@ -74,6 +74,7 @@ class Stars extends PureComponent<{
                   key={account.id}
                   placement={collapsed ? 'right' : 'top'}
                   boundary={collapsed ? 'window' : undefined}
+                  enabled={!snapshot.isDraggingOver}
                 >
                   <Item
                     index={i}

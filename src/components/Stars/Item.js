@@ -93,7 +93,7 @@ const Item = ({
           isDragging={snapshot.isDragging}
           collapsed={collapsed}
           ref={provided.innerRef}
-          active={active}
+          active={active && !snapshot.isDragging}
           onClick={onAccountClick}
         >
           <Box horizontal ff="Inter|SemiBold" flex={1} flow={3} alignItems="center">
