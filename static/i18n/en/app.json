@@ -98,8 +98,12 @@
     }
   },
   "fees": {
+    "custom": "Custom",
+    "fast": "Fast",
+    "high": "High",
+    "low": "Low",
     "slow": "Slow",
-    "fast": "Fast"
+    "standard": "Standard"
   },
   "sidebar": {
     "menu": "Menu",

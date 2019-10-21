@@ -1794,15 +1794,6 @@
     "@ledgerhq/logs" "^4.72.0"
     rxjs "^6.5.3"
 
-"@ledgerhq/devices@^4.72.2":
-  version "4.72.2"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/devices/-/devices-4.72.2.tgz#9f91371c6a08cd4d93be0d6fe1c5d53a9ccd4a14"
-  integrity sha512-iX6ZfxFrKxlO3A7rDypjsqbu1Ta2IB+OsOk/7jnd3fzcvwlSEQwflAHb81CsjOPhdVG2aPIFU/VxzMioDFz24g==
-  dependencies:
-    "@ledgerhq/errors" "^4.72.2"
-    "@ledgerhq/logs" "^4.72.0"
-    rxjs "^6.5.3"
-
 "@ledgerhq/electron-updater@^3.3.1":
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/@ledgerhq/electron-updater/-/electron-updater-3.3.1.tgz#d7d175aa1371e68ec10ba198f8539f403c9bb76e"
@@ -1824,12 +1815,7 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-4.72.2.tgz#62a87a249c3c05e7295f66c3d49d78e7d46d611f"
   integrity sha512-Q9SnjsoIiNhoTujUWfNgGqvYHgaPGRLzuYAC0Rx2WjEKp7swO42BMukYtSgXyyrz4yfHhMBMYerEF2sonBVzXw==
 
-"@ledgerhq/errors@^4.72.1":
-  version "4.72.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-4.72.1.tgz#de2d0390476078d5bd5a0659dae796f36ed3970a"
-  integrity sha512-zzxy/pGSLPBkd9RJXhiQj53lsx4c3vMFMy0rMymhnKcBZboI+uD2E7WOToHvxtY34jka9vnH/ySjUIB/Ytvyzg==
-
-"@ledgerhq/hw-app-btc@4.72.2":
+"@ledgerhq/hw-app-btc@4.72.2", "@ledgerhq/hw-app-btc@^4.72.2":
   version "4.72.2"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-4.72.2.tgz#d4fbfb93a34729b5d5087249632be240d9607952"
   integrity sha512-ANa1Dmcmvm1S4CKvnbmEhEYHdIslAF3p/3cd7VspC3Z4NbJbRxgQTV/9o9e23/6brkDKDPYLmPyTZcLCf4JSUQ==
@@ -1837,15 +1823,7 @@
     "@ledgerhq/hw-transport" "^4.72.2"
     create-hash "^1.1.3"
 
-"@ledgerhq/hw-app-btc@^4.72.1":
-  version "4.72.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-4.72.1.tgz#19c5666e8a4213e73d8392473db9b861389ef958"
-  integrity sha512-VCV+hv6arrOTc5Upb5B6WhQJOXOd5ZVVtfaCLDidSF8sTqx8K9W3lILf9545v34Nu41WxWFnMargcR9z5u2Wwg==
-  dependencies:
-    "@ledgerhq/hw-transport" "^4.72.2"
-    create-hash "^1.1.3"
-
-"@ledgerhq/hw-app-eth@4.72.2":
+"@ledgerhq/hw-app-eth@4.72.2", "@ledgerhq/hw-app-eth@^4.72.2":
   version "4.72.2"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-4.72.2.tgz#64ec0377efa462bc8092cba88b700d11ed51c13f"
   integrity sha512-pW2vOX29M5UvjqvEHVQsd3pDskJBcRPtQCSXtknLj4ZlSuCCuZtOhtD4qO3/nEiiHZL0DejTlRB9gl2Qug50lw==
@@ -1853,26 +1831,10 @@
     "@ledgerhq/errors" "^4.72.2"
     "@ledgerhq/hw-transport" "^4.72.2"
 
-"@ledgerhq/hw-app-eth@^4.72.1":
-  version "4.72.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-4.72.1.tgz#4098a64d20d337d808aad92428cda95ef00ac31d"
-  integrity sha512-rx1gQOkUF9GVN5qg6VdlyD2Ap+/4E+2svb0RBj5tk94WBiiQv477on5fZCjQVEd/VOuSInNGSeoArbK9DTspJw==
-  dependencies:
-    "@ledgerhq/errors" "^4.72.2"
-    "@ledgerhq/hw-transport" "^4.72.2"
-
-"@ledgerhq/hw-app-xrp@4.72.2":
+"@ledgerhq/hw-app-xrp@4.72.2", "@ledgerhq/hw-app-xrp@^4.72.2":
   version "4.72.2"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-xrp/-/hw-app-xrp-4.72.2.tgz#d0c99c3a6a182be29afdcf435e55e2ad95a1ae76"
   integrity sha512-iJG//i3rlwp+LMxKQT+onIY/nXpaywKfjHlRgzqyGqiZDea1sVp+Zh1vXEPyqpINfX8q48T64nwmUNmdQKBixg==
-  dependencies:
-    "@ledgerhq/hw-transport" "^4.72.2"
-    bip32-path "0.4.2"
-
-"@ledgerhq/hw-app-xrp@^4.72.1":
-  version "4.72.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-xrp/-/hw-app-xrp-4.72.1.tgz#58879d391759c83222444b458589cdd98a58b060"
-  integrity sha512-6NJN1ZQK4fd1ANGYA/NSQ/fuCHi6468i5zYptaH/LWB9pLzGdA9BVB0VQmHhlBg5XMw1lEtFrlbDFz4tfAUrVQ==
   dependencies:
     "@ledgerhq/hw-transport" "^4.72.2"
     bip32-path "0.4.2"
@@ -1939,15 +1901,6 @@
   version "4.72.2"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-4.72.2.tgz#b13d1797ba7530b9b94ebee71f3d0d2185153988"
   integrity sha512-HYe3kTNoA9YHGCsktAzMURpXqZ1QvMUreI24GhMKfec6AIuB0d05avn2j7z8QeOpAUh5L6/OaPPWi9t4KpqG5A==
-  dependencies:
-    "@ledgerhq/devices" "^4.72.2"
-    "@ledgerhq/errors" "^4.72.2"
-    events "^3.0.0"
-
-"@ledgerhq/hw-transport@^4.72.1":
-  version "4.72.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-4.72.1.tgz#431be99e883c71be6fc6bd7480902bcd41ae24a0"
-  integrity sha512-6RBiDALBiVfBWK6zaZzhVj/jPZR4vEfxfRvh8iDerxYhcFY/uVVbQkoegt6dBtCX0q5T4nDLAWp5jqV8j0dcZw==
   dependencies:
     "@ledgerhq/devices" "^4.72.2"
     "@ledgerhq/errors" "^4.72.2"
