@@ -8,9 +8,7 @@ import Text from 'components/base/Text'
 import Card from 'components/base/Box/Card'
 import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import { counterValueCurrencySelector } from 'reducers/settings'
-import styled from 'styled-components'
 import Box from 'components/base/Box'
-import Tag from 'components/Tag'
 import Header from './Header'
 import Row from './Row'
 import type { AccountDistributionItem } from './Row'
@@ -40,11 +38,6 @@ const mapStateToProps = (state, props) => {
   }
 }
 
-const TagWrapper = styled.div`
-  margin-left: 16px;
-  margin-right: 8px;
-`
-
 class AccountDistribution extends PureComponent<Props, State> {
   render() {
     const { accountDistribution } = this.props
@@ -57,14 +50,6 @@ class AccountDistribution extends PureComponent<Props, State> {
               values={{ count: accountDistribution.length }}
               count={accountDistribution.length}
             />
-          </Text>
-          <TagWrapper>
-            <Tag>
-              <Trans i18nKey="common.new" />
-            </Tag>
-          </TagWrapper>
-          <Text ff="Inter|SemiBold" fontSize={12} color="wallet">
-            <Trans i18nKey="accountDistribution.notice" />
           </Text>
         </Box>
 

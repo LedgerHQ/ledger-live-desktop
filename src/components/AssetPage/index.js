@@ -3,7 +3,6 @@
 import React, { PureComponent } from 'react'
 import { getAccountCurrency, getAccountUnit } from '@ledgerhq/live-common/lib/account'
 import { getCurrencyColor } from 'helpers/getCurrencyColor'
-import { findCurrencyByTicker } from '@ledgerhq/live-common/lib/currencies'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
@@ -28,7 +27,7 @@ import AssetHeader from './AssetHeader'
 type Props = {
   match: {
     params: {
-      assetTicker: string,
+      assetId: string,
     },
     isExact: boolean,
     path: string,
@@ -58,7 +57,7 @@ const mapStateToProps = (state, props) => ({
   allAccounts: accountsSelector(state),
   countervalueFirst: countervalueFirstSelector(state),
   accounts: flattenSortAccountsEnforceHideEmptyTokenSelector(state).filter(
-    a => getAccountCurrency(a) === findCurrencyByTicker(props.match.params.assetTicker),
+    a => getAccountCurrency(a).id === props.match.params.assetId,
   ),
 })
 
@@ -87,7 +86,7 @@ class AssetPage extends PureComponent<Props, State> {
           unit={unit}
           counterValue={counterValue}
           accounts={accounts}
-          chartId={`asset-chart-${this.props.match.params.assetTicker}`}
+          chartId={`asset-chart-${this.props.match.params.assetId}`}
         />
         <Box mt={40}>
           <AccountDistribution accounts={accounts} />

@@ -99,7 +99,7 @@ class Row extends PureComponent<Props, State> {
     const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2)
     const icon = <CryptoCurrencyIcon currency={currency} size={16} />
     return (
-      <Wrapper onClick={() => this.props.push(`/asset/${currency.ticker}`)}>
+      <Wrapper onClick={() => this.props.push(`/asset/${currency.id}`)}>
         <Asset>
           {icon}
           <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>

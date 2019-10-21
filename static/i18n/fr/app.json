@@ -169,7 +169,7 @@
       "star": "Favori",
       "receive": "Recevoir",
       "send": "Envoyer",
-      "edit": "Edit account"
+      "edit": "Modifier le compte"
     }
   },
   "banners": {
@@ -256,7 +256,7 @@
     "cta": "Ajouter un token",
     "placeholder": "Pour ajouter des tokens, envoyez-les simplement sur votre adresse Ethereum.",
     "link": "En savoir plus",
-    "seeTokens": "Show tokens ({{tokenCount}})",
+    "seeTokens": "Afficher les tokens ({{tokenCount}})",
     "hideTokens": "Cacher tokens ({{tokenCount}})",
     "tooltip": "Token de",
     "countTooltip": "1 Token",
@@ -401,20 +401,20 @@
     },
     "firmware": {
       "installed": "Version {{version}} du firmware",
-      "updateLater": "Update later",
-      "seedReady": "I have my recovery phrase",
-      "dontHaveSeed": "Don't have your recovery phrase?",
-      "followTheGuide": "Follow our step by step update guide",
-      "removeApps": "Uninstall all apps before updating",
-      "update": "Firmware update",
+      "updateLater": "Mettre à jour plus tard",
+      "seedReady": "J'ai ma phrase de récupération",
+      "dontHaveSeed": "Vous n'avez pas votre phrase de récupération ?",
+      "followTheGuide": "Suivez notre guide de mise à jour étape par étape",
+      "removeApps": "Désinstaller toutes les applications avant d'effectuer la mise à jour",
+      "update": "Mise à jour du firmware",
       "latest": "La version {{version}} du firmware est disponible.",
-      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible.",
+      "prepareSeed": "Assurez-vous que votre phrase de récupération en 24 mots est écrite sur votre feuille de récupération et accessible.",
       "disclaimerTitle": "Vous êtes sur le point d’installer la <1><0>version {{version}}</0></1>du firmware.",
       "disclaimerAppDelete": "Désinstallez des applications pour libérer de l’espace. Cette opération n’affectera pas vos crypto-actifs.",
       "disclaimerAppReinstall": "Assurez-vous que votre feuille de récupération est accessible, par mesure de précaution.",
       "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour",
-      "appsAutoUninstallTitle": "Apps will be uninstalled",
-      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
+      "appsAutoUninstallTitle": "Les applications seront désinstallées",
+      "appsAutoUninstallDesc": "Toutes les applications seront désinstallées de votre appareil pour la mise à jour du firmware. Vous pourrez les réinstaller après la mise à jour. Cela n'affectera pas vos actifs crypto."
     },
     "modal": {
       "steps": {
@@ -539,23 +539,23 @@
   "distribution": {
     "asset": "Actif ",
     "price": "Prix",
-    "distribution": "Allocation",
+    "distribution": "Répartition",
     "amount": "Montant",
     "value": "Valeur",
     "showAll": "Afficher tout",
     "showLess": "Afficher moins",
-    "header": "Asset allocation ({{count}})",
+    "header": "Répartition des actifs ({{count}})",
     "notice": "Vous pouvez maintenant cliquer sur les actifs pour plus de détails !"
   },
   "accountDistribution": {
     "account": "Compte",
     "price": "Prix",
-    "distribution": "Allocation",
+    "distribution": "Répartition",
     "amount": "Montant",
     "value": "Valeur",
     "showAll": "Tout afficher",
     "showLess": "Afficher moins",
-    "header": "Account allocation ({{count}})",
+    "header": "Répartition des comptes ({{count}})",
     "notice": "Vous pouvez faire un click droit sur un compte pour voir ses options !"
   },
   "asset": {
@@ -597,8 +597,8 @@
       "desc": "Configurez les paramètres généraux de Ledger Live.",
       "language": "Langue d'affichage",
       "languageDesc": "Sélectionner la langue affichée dans Ledger Live.",
-      "theme": "Theme",
-      "themeDesc": "Select the theme.",
+      "theme": "Thème",
+      "themeDesc": "Sélectionner un thème.",
       "counterValue": "Contre-valeur",
       "counterValueDesc": "Choisissez la devise affichée à côté de votre solde et de vos opérations.",
       "exchange": "Prestataire de change",
@@ -617,9 +617,9 @@
       "confirmationsNbDesc": "Définissez le nombre de confirmations réseau pour qu’une transaction soit marquée comme confirmée."
     },
     "rates": {
-      "desc": "Here are all the rates that are used to calculate countervalues.\nChoose which rate providers are used for each rate.",
+      "desc": "Voici tous les taux utilisés pour calculer les contrevaleurs.\nChoisissez quels fournisseurs de taux sont utilisés pour chaque taux.",
       "fromTo": "{{from}} à {{to}}",
-      "noCounterValue": "We have no data for this trading pair",
+      "noCounterValue": "Aucune donnée disponible pour cette paire de trading",
       "cryptoToFiat": "Crypto vers fiat",
       "cryptoToCrypto": "Crypto vers Crypto",
       "rate": "Taux",
@@ -772,7 +772,7 @@
     "system": "Utiliser la langue du système"
   },
   "theme": {
-    "system": "Use system theme",
+    "system": "Utiliser le thème système",
     "light": "Light",
     "dusk": "Dusk",
     "dark": "Dark"
@@ -1090,12 +1090,12 @@
       "description": "Consultez votre appareil pour voir quelles applications sont déjà installées"
     },
     "ManagerAppDepInstallRequired": {
-      "title": "{{dependency}} app required",
-      "description": "If you already have the {{dependency}} app installed, please reinstall it to get the latest version"
+      "title": "App {{dependency}} requise",
+      "description": "Si vous avez déjà installé l'application {{dependency}} , réinstallez-la pour obtenir la dernière version"
     },
     "ManagerAppDepUninstallRequired": {
-      "title": "Sorry, this app is required",
-      "description": "You must first uninstall all apps that require the {{appName}} app"
+      "title": "Désolé, cette application est requise",
+      "description": "Vous devez d'abord désinstaller toutes les applications qui nécessitent l'application {{appName}}"
     },
     "ManagerDeviceLocked": {
       "title": "Veuillez déverrouiller votre appareil.",
@@ -1230,7 +1230,7 @@
       "title": "Des frais sont requis"
     },
     "GasLessThanEstimate": {
-      "title": "This may be too low, please increase"
+      "title": "Cela peut être trop peu, veuillez augmenter"
     },
     "UnknownMCU": {
       "title": "Version MCU inconnue",

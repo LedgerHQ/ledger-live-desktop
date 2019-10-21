@@ -114,7 +114,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
                       You are about to install
                       <Text ff="Inter|SemiBold" color="palette.text.shade100">
                         {`firmware version ${
-                          firmware && firmware.osu ? getCleanVersion(firmware.osu.name) : ''
+                          firmware && firmware.final ? getCleanVersion(firmware.final.name) : ''
                         }`}
                       </Text>
                     </Trans>

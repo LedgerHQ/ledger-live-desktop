@@ -21,10 +21,10 @@ import path from 'path'
 
 type Props = {
   resource: string,
-  resourcePath: string,
+  resourcePath?: string,
   alt: string,
-  themeTyped: boolean,
-  className: string,
+  themeTyped?: boolean,
+  className?: string,
 }
 
 const Img = styled.img`
