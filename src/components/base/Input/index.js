@@ -51,12 +51,26 @@ const LoadingDisplay = styled(Box)`
   left: 0px;
   top: 0px;
   bottom: 0px;
+  width: 100%;
   background: ${p => p.theme.colors.palette.background.paper};
   pointer-events: none;
   flex-direction: row;
   align-items: center;
   padding: 0 15px;
   border-radius: 4px;
+`
+
+const RenderRightWrapper = styled(Box)`
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & > * {
+    flex: 1;
+  }
 `
 
 const WarningDisplay = styled(ErrorDisplay)`
@@ -245,7 +259,7 @@ class Input extends PureComponent<Props, State> {
             </LoadingDisplay>
           ) : null}
         </Box>
-        {renderRight}
+        {renderRight ? <RenderRightWrapper>{renderRight}</RenderRightWrapper> : null}
       </Container>
     )
   }
