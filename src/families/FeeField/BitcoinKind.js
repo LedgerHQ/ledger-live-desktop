@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { BigNumber } from 'bignumber.js'
 import styled from 'styled-components'
 import { Trans, translate } from 'react-i18next'
@@ -64,8 +64,11 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
     [networkInfo],
   )
 
+  const [selectedItem, setSelectedItem] = useState(last(feeItems))
   const selectedValue = feePerByte
-    ? feeItems.find(f => f.feePerByte.eq(feePerByte)) || last(feeItems)
+    ? selectedItem.feePerByte.eq(feePerByte)
+      ? selectedItem
+      : feeItems.find(f => f.feePerByte.eq(feePerByte)) || last(feeItems)
     : last(feeItems)
 
   const { units } = account.currency
@@ -74,9 +77,10 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
   const onSelectChange = useCallback(
     (item: any) => {
       if (item.label === 'custom') return
+      if (item.label) setSelectedItem(item)
       onChange(bridge.updateTransaction(transaction, { feePerByte: item.feePerByte }))
     },
-    [onChange, transaction, bridge],
+    [onChange, transaction, bridge, setSelectedItem],
   )
 
   const onInputChange = feePerByte => onSelectChange({ feePerByte })
