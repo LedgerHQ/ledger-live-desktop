@@ -48,7 +48,7 @@ const Breadcrumb = () => (
     <Route path="/account/:id/" component={AccountCrumb} />
     <Route path="/account/:parentId/:id/" component={AccountCrumb} />
 
-    <Route path="/asset/:assetTicker/" component={AssetCrumb} />
+    <Route path="/asset/:assetId+" component={AssetCrumb} />
   </Wrapper>
 )
 

@@ -100,14 +100,6 @@ class AssetDistribution extends PureComponent<Props, State> {
               count={distribution.list.length}
             />
           </Text>
-          <TagWrapper>
-            <Tag>
-              <Trans i18nKey="common.new" />
-            </Tag>
-          </TagWrapper>
-          <Text ff="Inter|SemiBold" fontSize={12} color="wallet">
-            <Trans i18nKey="distribution.notice" />
-          </Text>
         </Box>
         <Card p={0} mt={24}>
           <Header />
