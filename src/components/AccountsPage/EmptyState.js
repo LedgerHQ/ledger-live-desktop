@@ -42,7 +42,7 @@ class EmptyState extends PureComponent<Props, *> {
           alt="emptyState Dashboard logo"
           resource="empty-state-accounts.svg"
           width="500"
-          themeStyled
+          themeTyped
         />
         <Box mt={5} alignItems="center">
           <Title data-e2e="dashboard_empty_title">{t('emptyState.dashboard.title')}</Title>
