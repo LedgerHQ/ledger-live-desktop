@@ -385,21 +385,18 @@ const OperationDetails = connect(
             <Box flex={1}>
               <OpDetailsTitle>{t('operationDetails.account')}</OpDetailsTitle>
               <OpDetailsData horizontal>
-
                 <TextEllipsis style={parentAccount ? { maxWidth: '50%', flexShrink: 0 } : null}>
                   <Link onClick={goToMainAccount}>{name}</Link>
                 </TextEllipsis>
 
-                {
-                  parentAccount ? (
-                    <>
-                      <Separator>{'/'}</Separator>
-                      <TextEllipsis>
-                        <Link onClick={goToSubAccount}>{currency.name}</Link>
-                      </TextEllipsis>
-                    </>
-                  ) : null
-                }
+                {parentAccount ? (
+                  <>
+                    <Separator>{'/'}</Separator>
+                    <TextEllipsis>
+                      <Link onClick={goToSubAccount}>{currency.name}</Link>
+                    </TextEllipsis>
+                  </>
+                ) : null}
               </OpDetailsData>
             </Box>
             <Box flex={1}>

@@ -11,7 +11,6 @@ import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
 import useTheme from 'hooks/useTheme'
 import ensureContrast from 'helpers/ensureContrast'
 
-
 import Spinner from './Spinner'
 
 const CryptoIconWrapper = styled(Box).attrs(p => ({
