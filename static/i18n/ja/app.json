@@ -98,8 +98,12 @@
     }
   },
   "fees": {
+    "custom": "Custom",
+    "fast": "Fast",
+    "high": "High",
+    "low": "Low",
     "slow": "Slow",
-    "fast": "Fast"
+    "standard": "Standard"
   },
   "sidebar": {
     "menu": "メニュー",
@@ -169,7 +173,7 @@
       "star": "Star",
       "receive": "Receive",
       "send": "Send",
-      "edit": "Edit Account"
+      "edit": "Edit account"
     }
   },
   "banners": {
@@ -226,23 +230,24 @@
     "title": "暗号資産を購入",
     "desc": "当社が選択したサービスをいくつかお試しください",
     "visitWebsite": "ウェブサイトを訪問してください",
-    "btcdirect": "ヨーロッパを代表する暗号資産ブローカーを通じて、とても簡単に売買ができます。サインアップは無料で、数分以内にコインを受け取ることができます！ ユーザーはTrustpilotで8,7と評価しています。",
+    "btcdirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot.",
     "changelly": "Changellyは、100を超えるコインやトークンが上場された人気の高い即時暗号資産取引所です。",
-    "changenow": "ChangeNOWは、カストディフリーの大手即時交換サービスです",
+    "changenow": "ChangeNOW is one of the leading custody-free instant exchange services.",
     "coinberry": "Coinberryはカナダで最も信頼されている暗号資産プラットフォームです。銀行より優れたセキュリティ、クラス最高のユーザーインターフェース、そして手数料無しの積み立てと引き出しを実現しています。 あなたがカナダ市民でないならば、事前登録して我々のプラットフォームへのアーリーアクセス権を取得してください。",
     "coinhouse": "コインハウスは、暗号資産の分析、取得、販売および安全な保管を検討している、個人および機関投資家にとって信頼できるプラットフォームです",
     "coinmama": "Coinmamaは、世界中どこにいても、デジタルアセットの購入が迅速、安全、かつ楽しくできる金融サービスです。",
     "genesis": "Genesisは、Bitcoin、Bitcoin Cash、Ethereum、Ethereum Classic、Litecoin、XRPなどの暗号資産による流動性と借入れを提供する機関投資会社です。",
     "kyberswap": "迅速・簡単かつ安全なトークン交換プラットフォーム。 Kyber Networkのオンチェーン流動性プロトコルを採用。",
-    "luno": "LunoではBitcoinやEthereumといった暗号資産を安全かつ簡単に購入・保管し、またそれらについて学習することができます。",
-    "paybis": "クレジットカードを使って、PayBisからBitcoinを安心して簡単に購入できます。米国、カナダ、ドイツ、ロシア、サウジアラビアでサービスを提供しています。",
+    "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum.",
+    "paybis": "Paybis.com is one of the most trusted cryptocurrency brokers worldwide since 2014, customer satisfaction - 4.7/5 via Trustpilot. Visa/Master cards, Bank Transfers, Skrill/Neteller accepted. 24/7 online customer support.",
     "shapeshift": "ShapeShiftは、ユーザーがデジタルアセットを迅速かつ安全に売買できるオンライン市場です。カウンターパーティリスクがなく、サインアッププロセスにも時間がかからず、容易です。",
     "simplex": "SimplexはEUで認可を受けた金融機関であり、不正行為に悩まされることなくクレジットカード決済を行えるソリューションを提供します。",
     "taxtoken": "米国市民向けに、自動化された暗号資産の税金と費用計算ソフトウェア。",
     "thorswap": "ThorSwapは、分散型アトミックスワップテクノロジを採用した、迅速かつ安全で公正な暗号資産市場です。少額取引であれば、登録なし、またはKYC無しでお始めいただけますので、初心者には最も簡便です。",
     "bitpanda": "Bitpandaは、 Bitcoin、Ethereum、IOTAなどの売買のための欧州の個人向け大手ブローカーです。資金の預入には、クレジットカード、SOFORT-Transfer、NETELLERその他の方法がご使用になれます。",
     "exmo": "EXMOは、2013年に設立され、ロンドン、キエフ、バルセロナ、モスクワに拠点を置く東ヨーロッパで第1位の取引所であり、量と流動性において世界最大の取引所の1つです。",
-    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure and intuitive platform to buy and sell Bitcoin, Litecoin, Ethereum, XRP and other digital assets. Other key features include advanced trading, free deposits, and an institutional-grade custody solution via Ledger Vault."
+    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure and intuitive platform to buy and sell Bitcoin, Litecoin, Ethereum, XRP and other digital assets. Other key features include advanced trading, free deposits, and an institutional-grade custody solution via Ledger Vault.",
+    "voyager": "Love your Crypto Journey with Voyager. A licensed crypto broker with commission-free trading of 20+ cryptocurrencies."
   },
   "genuinecheck": {
     "modal": {
@@ -255,7 +260,7 @@
     "cta": "Add token",
     "placeholder": "To add tokens, simply send them to your Ethereum address.",
     "link": "Learn more",
-    "seeTokens": "See tokens ({{tokenCount}})",
+    "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "tooltip": "Token from",
     "countTooltip": "1 Token",
@@ -400,12 +405,20 @@
     },
     "firmware": {
       "installed": "ファームウェアバージョン {{version}}",
-      "update": "更新",
+      "updateLater": "Update later",
+      "seedReady": "I have my recovery phrase",
+      "dontHaveSeed": "Don't have your recovery phrase?",
+      "followTheGuide": "Follow our step by step update guide",
+      "removeApps": "Uninstall all apps before updating",
+      "update": "Firmware update",
       "latest": "ファームウェアバージョン {{version}} をご利用いただけます",
+      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible.",
       "disclaimerTitle": "<1><0>ファームウェアバージョン{{version}}</0></1>をインストールしようとしてします。",
       "disclaimerAppDelete": "お手持ちのLedgerデバイスから全てのアプリをアンインストールしてください。この作業は、お客様の暗号資産に影響しません。",
       "disclaimerAppReinstall": "念のため、リカバリシートにアクセスできることを確認してください。",
-      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
+      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded",
+      "appsAutoUninstallTitle": "Apps will be uninstalled",
+      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -530,24 +543,22 @@
   "distribution": {
     "asset": "Asset",
     "price": "Price",
-    "distribution": "Distribution",
+    "distribution": "Allocation",
     "amount": "Amount",
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Asset distribution ({{count}})",
-    "notice": "You can now click on assets for more details!"
+    "header": "Asset allocation ({{count}})"
   },
   "accountDistribution": {
     "account": "Account",
     "price": "Price",
-    "distribution": "Distribution",
+    "distribution": "Allocation",
     "amount": "Amount",
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Account distribution ({{count}})",
-    "notice": "You can right-click on an account to see its options!"
+    "header": "Account allocation ({{count}})"
   },
   "asset": {
     "notice": "Summary of all {{currency}} accounts"
@@ -588,6 +599,8 @@
       "desc": "全般的なLedger Liveの設定。",
       "language": "言語を表示",
       "languageDesc": "Ledger Liveに表示される言語を設定します。",
+      "theme": "Theme",
+      "themeDesc": "Select the theme.",
       "counterValue": "対価",
       "counterValueDesc": "残高と操作の隣に表示される資産を選択します。",
       "exchange": "レートプロバイダー",
@@ -606,9 +619,9 @@
       "confirmationsNbDesc": "取引を確認済みにするためのネットワーク確認数を設定します。"
     },
     "rates": {
-      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
+      "desc": "Here are all the rates that are used to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} to {{to}}",
-      "noCounterValue": "We have no data for this trading pair.",
+      "noCounterValue": "We have no data for this trading pair",
       "cryptoToFiat": "Crypto to fiat",
       "cryptoToCrypto": "Crypto to Crypto",
       "rate": "Rate",
@@ -759,6 +772,12 @@
   },
   "language": {
     "system": "システム言語を使用"
+  },
+  "theme": {
+    "system": "Use system theme",
+    "light": "Light",
+    "dusk": "Dusk",
+    "dark": "Dark"
   },
   "onboarding": {
     "breadcrumb": {
@@ -990,10 +1009,6 @@
       "title": "Account not supported.",
       "description": "Please retry or contact Support ({{reason}})"
     },
-    "BtcUnmatchedApp": {
-      "title": "アプリが間違っています",
-      "description": "お使いの機器で‘{{managerAppName}}’ アプリを開きます"
-    },
     "NoAccessToCamera": {
       "title": "Please ensure your system has a camera, that it's not in use by another application and that Ledger Live has permission to use it.",
       "description": ""
@@ -1076,9 +1091,13 @@
       "title": "すでにインストールされています",
       "description": "お客様のデバイスにインストール済みのアプリをご確認ください"
     },
-    "ManagerAppRelyOnBTC": {
-      "title": "BitcoinとEthereumアプリが必要です",
-      "description": "まず、BitcoinとEthereumの最新のアプリをインストールします"
+    "ManagerAppDepInstallRequired": {
+      "title": "{{dependency}} app required",
+      "description": "If you already have the {{dependency}} app installed, please reinstall it to get the latest version"
+    },
+    "ManagerAppDepUninstallRequired": {
+      "title": "Sorry, this app is required",
+      "description": "You must first uninstall all apps that require the {{appName}} app"
     },
     "ManagerDeviceLocked": {
       "title": "機器のロックを解除してください",
@@ -1211,6 +1230,9 @@
     },
     "FeeRequired": {
       "title": "手数料が必要です"
+    },
+    "GasLessThanEstimate": {
+      "title": "This may be too low, please increase"
     },
     "UnknownMCU": {
       "title": "未知のMCUバージョンです",

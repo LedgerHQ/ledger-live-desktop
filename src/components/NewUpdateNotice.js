@@ -5,15 +5,13 @@ import styled from 'styled-components'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import IconCross from 'icons/Cross'
-import { colors } from 'styles/theme'
-import { rgba } from '../styles/helpers'
 
 const NewUpdateNoticeDismissButton = styled(Box)`
   position: absolute;
   top: 0;
   right: 0;
   padding: 8px;
-  color: white;
+  color: ${p => p.theme.colors.palette.background.paper};
   opacity: 0.5;
   &:hover {
     cursor: pointer;
@@ -64,8 +62,8 @@ class NewUpdateNotice extends PureComponent<{
           <IconCross size={12} />
         </NewUpdateNoticeDismissButton>
         <Text
-          ff="Open Sans|SemiBold"
-          color="white"
+          ff="Inter|SemiBold"
+          color="palette.background.paper"
           fontSize="10px"
           style={{
             textTransform: 'uppercase',
@@ -74,7 +72,7 @@ class NewUpdateNotice extends PureComponent<{
         >
           {title}
         </Text>
-        <Text ff="Open Sans" color={rgba(colors.white, 0.8)} fontSize="10px">
+        <Text ff="Inter" color="palette.background.paper" fontSize="10px">
           {description}
         </Text>
       </NewUpdateNoticeWrapper>

@@ -1,7 +1,6 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { i } from 'helpers/staticPath'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -14,6 +13,7 @@ import { openModal } from 'reducers/modals'
 import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
+import Image from 'components/base/Image'
 import Button from 'components/base/Button'
 
 const mapDispatchToProps = {
@@ -38,7 +38,12 @@ class EmptyState extends PureComponent<Props, *> {
 
     return (
       <Box alignItems="center" pb={8} style={{ margin: 'auto' }}>
-        <img alt="emptyState Dashboard logo" src={i('empty-state-accounts.svg')} width="500" />
+        <Image
+          alt="emptyState Dashboard logo"
+          resource="empty-state-accounts.svg"
+          width="500"
+          themeTyped
+        />
         <Box mt={5} alignItems="center">
           <Title data-e2e="dashboard_empty_title">{t('emptyState.dashboard.title')}</Title>
           <Description mt={3} style={{ maxWidth: 600 }}>
@@ -68,18 +73,18 @@ class EmptyState extends PureComponent<Props, *> {
   }
 }
 
-export const Title = styled(Box).attrs({
-  ff: 'Museo Sans|Regular',
+export const Title = styled(Box).attrs(() => ({
+  ff: 'Inter|Regular',
   fontSize: 6,
-  color: p => p.theme.colors.dark,
-})``
+  color: p => p.theme.colors.palette.text.shade100,
+}))``
 
-export const Description = styled(Box).attrs({
-  ff: 'Open Sans|Regular',
+export const Description = styled(Box).attrs(() => ({
+  ff: 'Inter|Regular',
   fontSize: 4,
-  color: p => p.theme.colors.graphite,
+  color: p => p.theme.colors.palette.text.shade80,
   textAlign: 'center',
-})``
+}))``
 
 export default compose(
   connect(

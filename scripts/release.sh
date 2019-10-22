@@ -25,29 +25,6 @@ if [ -z "$GH_TOKEN" ]; then
   exit 1
 fi
 
-if [ ! -d "static/fonts/museosans" ]; then
-  if ! command -v aws ; then
-    if ! command -v apt ; then
-      echo "Museo Sans is missing, and I can't fetch it (no aws, no apt)" >&2
-      exit 1
-    fi
-
-    runJob "sudo apt install awscli" "installing aws cli..." "installed aws cli" "failed to install aws cli"
-  fi
-
-  runJob \
-    "set -e ;\
-    rm -rf /tmp/museosans* ;\
-    aws s3 cp s3://ledger-ledgerlive-resources-dev/resources/museosans.zip /tmp/museosans.zip ;\
-    unzip /tmp/museosans.zip -d /tmp/museosans ;\
-    mv /tmp/museosans/museosans static/fonts ;\
-    rm static/fonts/museosans/.DS_Store # remove crappy macOS file ;\
-    rm -rf /tmp/museosans*" \
-    "no museosans font. fetching it from private bucket..." \
-    "successfully fetched museosans" \
-    "error fetching museosans"
-fi
-
 if ! git diff-index --quiet HEAD --; then
   echo "you have uncommitted local changes!" >&2
   exit 1

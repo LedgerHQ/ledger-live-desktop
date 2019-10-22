@@ -8,22 +8,25 @@ import { rgba } from 'styles/helpers'
 import IconCheck from 'icons/Check'
 import Box from 'components/base/Box'
 import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
+import useTheme from 'hooks/useTheme'
+import ensureContrast from 'helpers/ensureContrast'
 
 import Spinner from './Spinner'
 
-const CryptoIconWrapper = styled(Box).attrs({
+const CryptoIconWrapper = styled(Box).attrs(p => ({
   align: 'center',
   justify: 'center',
-  bg: p => rgba(p.cryptoColor, 0.1),
-  color: p => p.cryptoColor,
-})`
+  bg: rgba(p.cryptoColor, 0.1),
+  color: p.cryptoColor,
+}))`
   border-radius: ${p => p.borderRadius || '50%'};
   width: ${p => p.size || 40}px;
   height: ${p => p.size || 40}px;
   position: relative;
 
   & > :nth-child(2) {
-    background: ${p => (p.showCheckmark ? p.theme.colors.positiveGreen : 'white')};
+    background: ${p =>
+      p.showCheckmark ? p.theme.colors.positiveGreen : 'palette.background.paper'};
     border-radius: 100%;
     padding: 2px;
     position: absolute;
@@ -52,6 +55,7 @@ export function CurrencyCircleIcon({
   showSpinner?: boolean,
   showCheckmark?: boolean,
 }) {
+  const bgColor = useTheme('colors.palette.background.paper')
   if (currency.type === 'TokenCurrency') {
     return <ParentCryptoCurrencyIcon currency={currency} bigger />
   }
@@ -60,16 +64,16 @@ export function CurrencyCircleIcon({
     <CryptoIconWrapper
       size={size}
       showCheckmark={showCheckmark}
-      cryptoColor={currency.color}
+      cryptoColor={ensureContrast(currency.color, bgColor)}
       {...props}
     >
       {Icon && <Icon size={size / 2} />}
       {showCheckmark && (
         <div>
-          <IconCheck color="white" size={16} />
+          <IconCheck color="palette.background.paper" size={16} />
         </div>
       )}
-      {showSpinner && <Spinner color="grey" size={14} />}
+      {showSpinner && <Spinner color="palette.text.shade60" size={14} />}
     </CryptoIconWrapper>
   )
 }
@@ -79,10 +83,15 @@ function CurrencyBadge({ currency, ...props }: { currency: CryptoCurrency | Toke
     <Box horizontal flow={3} {...props}>
       <CurrencyCircleIcon size={40} currency={currency} />
       <Box>
-        <Box ff="Museo Sans|ExtraBold" color="dark" fontSize={2} style={{ letterSpacing: 2 }}>
+        <Box
+          ff="Inter|ExtraBold"
+          color="palette.text.shade100"
+          fontSize={2}
+          style={{ letterSpacing: 2 }}
+        >
           {currency.ticker}
         </Box>
-        <Box ff="Open Sans" color="dark" fontSize={5} data-e2e="currencyBadge">
+        <Box ff="Inter" color="palette.text.shade100" fontSize={5} data-e2e="currencyBadge">
           {currency.name}
         </Box>
       </Box>

@@ -2,11 +2,18 @@
 
 import React, { PureComponent } from 'react'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
+import {
+  getAccountCurrency,
+  getAccountUnit,
+  getAccountName,
+} from '@ledgerhq/live-common/lib/account'
 import Box from 'components/base/Box'
-import Bar from 'components/base/Bar'
 import Ellipsis from 'components/base/Ellipsis'
+import Bar from 'components/base/Bar'
+import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
 import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
+import Tooltip from 'components/base/Tooltip'
 import AccountSyncStatusIndicator from '../AccountSyncStatusIndicator'
 import Star from '../../Stars/Star'
 
@@ -16,14 +23,19 @@ class HeadText extends PureComponent<{
 }> {
   render() {
     const { title, name } = this.props
+
     return (
       <Box grow>
-        <Box style={{ textTransform: 'uppercase' }} fontSize={10} color="graphite">
+        <Box style={{ textTransform: 'uppercase' }} fontSize={10} color="palette.text.shade80">
           {title}
         </Box>
-        <Ellipsis fontSize={13} color="dark">
-          {name}
-        </Ellipsis>
+        <Tooltip content={name} delay={1200}>
+          <Ellipsis>
+            <Text fontSize={13} color="palette.text.shade100">
+              {name}
+            </Text>
+          </Ellipsis>
+        </Tooltip>
       </Box>
     )
   }
@@ -35,28 +47,26 @@ class Header extends PureComponent<{
 }> {
   render() {
     const { account, parentAccount } = this.props
-    let currency
-    let unit
+    const currency = getAccountCurrency(account)
+    const unit = getAccountUnit(account)
+    const name = getAccountName(account)
+
     let title
-    let name
-
-    if (account.type !== 'Account') {
-      currency = account.token
-      unit = account.token.units[0]
-      title = 'token'
-      name = currency.name
-
-      if (!parentAccount) return null
-    } else {
-      currency = account.currency
-      unit = account.unit
-      title = currency.name
-      name = account.name
+    switch (account.type) {
+      case 'Account':
+      case 'AccountChild':
+        title = currency.name
+        break
+      case 'TokenAccount':
+        title = 'token'
+        break
+      default:
+        title = ''
     }
 
     return (
       <Box flow={4}>
-        <Box horizontal ff="Open Sans|SemiBold" flow={3} alignItems="center">
+        <Box horizontal ff="Inter|SemiBold" flow={3} alignItems="center">
           <ParentCryptoCurrencyIcon currency={currency} withTooltip />
           <HeadText name={name} title={title} />
           <AccountSyncStatusIndicator
@@ -65,13 +75,13 @@ class Header extends PureComponent<{
           />
           <Star accountId={account.id} />
         </Box>
-        <Bar size={1} color="fog" />
+        <Bar size={1} color="palette.divider" />
         <Box justifyContent="center">
           <FormattedVal
             alwaysShowSign={false}
             animateTicker={false}
             ellipsis
-            color="dark"
+            color="palette.text.shade100"
             unit={unit}
             showCode
             val={account.balance}

@@ -4,7 +4,7 @@ import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { Trans } from 'react-i18next'
 
-import type { TokenAccount, Account } from '@ledgerhq/live-common/lib/types'
+import type { AccountLike, Account } from '@ledgerhq/live-common/lib/types'
 import {
   getDefaultExplorerView,
   getAccountContractExplorer,
@@ -13,8 +13,8 @@ import {
   getAccountCurrency,
   getMainAccount,
   shortAddressPreview,
-} from '@ledgerhq/live-common/lib/account/helpers'
-
+  getAccountName,
+} from '@ledgerhq/live-common/lib/account'
 import Box from 'components/base/Box'
 import Ellipsis from 'components/base/Ellipsis'
 import Text from 'components/base/Text'
@@ -23,18 +23,18 @@ import { openURL } from 'helpers/linking'
 import { colors } from 'styles/theme'
 import ParentCryptoCurrencyIcon from '../ParentCryptoCurrencyIcon'
 
-const CurName = styled(Text).attrs({
-  ff: 'Open Sans|SemiBold',
+const CurName = styled(Text).attrs(() => ({
+  ff: 'Inter|SemiBold',
   fontSize: 2,
-})`
+}))`
   text-transform: uppercase;
   letter-spacing: 1px;
 `
 
-const CurNameToken = styled(Text).attrs({
-  ff: 'Museo Sans|Bold',
+const CurNameToken = styled(Text).attrs(() => ({
+  ff: 'Inter|Bold',
   fontSize: 2,
-})``
+}))``
 
 const CurNameTokenLink = styled(CurNameToken)`
   margin-left: 5px;
@@ -42,10 +42,10 @@ const CurNameTokenLink = styled(CurNameToken)`
   border-radius: ${p => p.theme.radii[1]}px;
 `
 
-const CurNameTokenIcon = styled(Text).attrs({
-  ff: 'Open Sans|SemiBold',
+const CurNameTokenIcon = styled(Text).attrs(() => ({
+  ff: 'Inter|SemiBold',
   fontSize: 2,
-})`
+}))`
   color: ${colors.wallet};
   display: none;
   margin-left: 5px;
@@ -67,16 +67,14 @@ const Wrapper = styled(Box)`
   }
 `
 
-const AccountName = styled(Text).attrs({
-  color: 'dark',
-  ff: 'Museo Sans',
+const AccountName = styled(Text).attrs(() => ({
+  color: 'palette.text.shade100',
+  ff: 'Inter|SemiBold',
   fontSize: 7,
-})`
-  line-height: 1.1;
-`
+}))``
 
 type Props = {
-  account: TokenAccount | Account,
+  account: AccountLike,
   parentAccount: ?Account,
 }
 
@@ -124,7 +122,7 @@ const AccountHeader: React$ComponentType<Props> = React.memo(
             <CurName>{currency.name}</CurName>
           )}
           <AccountName>
-            <Ellipsis>{account.type === 'Account' ? account.name : currency.name}</Ellipsis>
+            <Ellipsis>{getAccountName(account)}</Ellipsis>
           </AccountName>
         </Box>
       </Box>

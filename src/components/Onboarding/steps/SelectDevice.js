@@ -13,6 +13,7 @@ import { rgba } from 'styles/helpers'
 
 import { deviceModelId } from 'reducers/onboarding'
 
+import InvertableImg from 'components/InvertableImg'
 import Box from 'components/base/Box'
 import TrackPage from 'analytics/TrackPage'
 
@@ -55,10 +56,10 @@ class SelectDevice extends PureComponent<StepProps, {}> {
               >
                 {onboarding.deviceModelId === 'nanoX' && <DeviceSelected />}
                 <DeviceIcon>
-                  <img alt="" src={i('ledger-nano-x-onb.svg')} />
+                  <InvertableImg alt="" src={i('ledger-nano-x-onb.svg')} />
                 </DeviceIcon>
                 <BlockTitle>{getDeviceModel('nanoX').productName}</BlockTitle>
-                <Tooltip render={() => <Trans i18nKey="onboarding.selectDevice.usbOnlyTooltip" />}>
+                <Tooltip content={<Trans i18nKey="onboarding.selectDevice.usbOnlyTooltip" />}>
                   <USBOnly>
                     <Trans i18nKey="onboarding.selectDevice.usbOnly" />
                   </USBOnly>
@@ -70,7 +71,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
               >
                 {onboarding.deviceModelId === 'nanoS' && <DeviceSelected />}
                 <DeviceIcon>
-                  <img alt="" src={i('ledger-nano-s-onb.svg')} />
+                  <InvertableImg alt="" src={i('ledger-nano-s-onb.svg')} />
                 </DeviceIcon>
                 <BlockTitle>{getDeviceModel('nanoS').productName}</BlockTitle>
               </DeviceContainer>
@@ -80,7 +81,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
               >
                 {onboarding.deviceModelId === 'blue' && <DeviceSelected />}
                 <DeviceIcon>
-                  <img alt="" src={i('ledger-blue-onb.svg')} />
+                  <InvertableImg alt="" src={i('ledger-blue-onb.svg')} />
                 </DeviceIcon>
                 <BlockTitle>{getDeviceModel('blue').productName}</BlockTitle>
               </DeviceContainer>
@@ -104,34 +105,38 @@ export default connect(
   mapDispatchToProps,
 )(SelectDevice)
 
-const DeviceContainer = styled(Box).attrs({
+const DeviceContainer = styled(Box).attrs(() => ({
   alignItems: 'center',
   justifyContent: 'center',
   relative: true,
   borderRadius: '4px',
-})`
+}))`
   width: 218px;
   height: 204px;
-  border: ${props => `1px solid ${props.theme.colors[props.isActive ? 'wallet' : 'fog']}`};
+  border: ${p =>
+    `1px solid ${
+      p.isActive ? p.theme.colors.palette.primary.main : p.theme.colors.palette.divider
+    }`};
   &:hover {
     cursor: default; // this here needs reset because it inherits from cursor: text from parent
     background: ${p => rgba(p.theme.colors.wallet, 0.04)};
   }
 `
-const DeviceIcon = styled(Box).attrs({
+const DeviceIcon = styled(Box).attrs(() => ({
   alignItems: 'center',
   justifyContent: 'center',
-})`
+}))`
   width: 55px;
   height: 80px;
 `
 
-export const BlockTitle = styled(Box).attrs({
-  ff: 'Open Sans|SemiBold',
+export const BlockTitle = styled(Box).attrs(() => ({
+  ff: 'Inter|SemiBold',
   fontSize: 4,
   textAlign: 'center',
   pt: 3,
-})``
+  color: 'palette.text.shade100',
+}))``
 export function DeviceSelected() {
   return (
     <SelectDeviceIconWrapper
@@ -146,27 +151,28 @@ export function DeviceSelected() {
   )
 }
 
-const SelectDeviceIconWrapper = styled(Box).attrs({
+const SelectDeviceIconWrapper = styled(Box).attrs(() => ({
   alignItems: 'center',
   justifyContent: 'center',
-  color: 'white',
+  color: 'palette.background.paper',
   bg: 'wallet',
-})`
+}))`
   border-radius: 50%;
   width: 18px;
   height: 18px;
 `
 
-const USBOnly = styled(Box).attrs({
+const USBOnly = styled(Box).attrs(() => ({
   alignItems: 'center',
   justifyContent: 'center',
-  ff: 'Open Sans|Bold',
+  ff: 'Inter|Bold',
   fontSize: 0,
   borderRadius: '2px',
-})`
+}))`
   position: absolute;
   bottom: 20px;
-  background-color: ${p => p.theme.colors.lightFog};
+  color: ${p => p.theme.colors.palette.primary.contrastText};
+  background-color: ${p => p.theme.colors.palette.text.shade40};
   line-height: 16px;
   padding: 0 4px;
   text-transform: uppercase;

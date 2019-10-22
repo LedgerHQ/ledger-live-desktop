@@ -3,7 +3,7 @@
 import invariant from 'invariant'
 import React, { Fragment, PureComponent } from 'react'
 import logger from 'logger'
-import { reduce } from 'rxjs/operators'
+import { reduce, filter, map } from 'rxjs/operators'
 import { Trans } from 'react-i18next'
 
 import type { Account } from '@ledgerhq/live-common/lib/types/account'
@@ -16,7 +16,7 @@ import IconExclamationCircle from 'icons/ExclamationCircle'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import { CurrencyCircleIcon } from 'components/base/CurrencyBadge'
-import { getCurrencyBridge } from 'bridge'
+import { getCurrencyBridge } from '@ledgerhq/live-common/lib/bridge'
 import styled from 'styled-components'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 import TranslatedError from 'components/TranslatedError'
@@ -43,21 +43,21 @@ const MigrationError = ({ error }: { error: Error }) => (
     </Desc>
   </Box>
 )
-const Title = styled(Box).attrs({
-  ff: 'Museo Sans',
+const Title = styled(Box).attrs(() => ({
+  ff: 'Inter',
   fontSize: 5,
   mt: 2,
-  color: 'black',
-})`
+  color: 'palette.text.shade100',
+}))`
   text-align: center;
 `
 
-const Desc = styled(Box).attrs({
-  ff: 'Open Sans',
+const Desc = styled(Box).attrs(() => ({
+  ff: 'Inter',
   fontSize: 4,
   mt: 2,
-  color: 'graphite',
-})`
+  color: 'palette.text.shade80',
+}))`
   text-align: center;
 `
 
@@ -108,7 +108,11 @@ class StepCurrency extends PureComponent<Props> {
 
     this.scanSubscription = getCurrencyBridge(currency)
       .scanAccountsOnDevice(currency, device.path)
-      .pipe(reduce<Account>((all, acc) => all.concat(acc), []))
+      .pipe(
+        filter(e => e.type === 'discovered'),
+        map(e => e.account),
+        reduce<Account>((all, acc) => all.concat(acc), []),
+      )
       .subscribe({
         next: scannedAccounts => {
           let totalMigratedAccounts = 0
@@ -166,9 +170,9 @@ class StepCurrency extends PureComponent<Props> {
             />
           )}
           <Box
-            ff="Museo Sans|Regular"
+            ff="Inter|Regular"
             fontSize={6}
-            color="dark"
+            color="palette.text.shade100"
             mb={10}
             textAlign="center"
             style={{ width: 370 }}
@@ -179,7 +183,7 @@ class StepCurrency extends PureComponent<Props> {
               values={{ currencyName }}
             />
           </Box>
-          <Text color="graphite" ff="Open Sans|Regular" fontSize={4}>
+          <Text color="palette.text.shade80" ff="Inter|Regular" fontSize={4}>
             <Trans
               i18nKey={`migrateAccounts.progress.${scanStatus}.description`}
               values={{ currencyName }}

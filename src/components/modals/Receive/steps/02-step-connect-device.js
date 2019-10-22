@@ -15,7 +15,12 @@ import type { StepProps } from '../index'
 
 export const TokenTips: React$ComponentType<{ token: TokenCurrency }> = React.memo(({ token }) => (
   <Box mt={4} horizontal alignItems="center">
-    <Text style={{ flex: 1, marginLeft: 10 }} ff="Open Sans|Regular" color="graphite" fontSize={3}>
+    <Text
+      style={{ flex: 1, marginLeft: 10 }}
+      ff="Inter|Regular"
+      color="palette.text.shade80"
+      fontSize={3}
+    >
       <Trans
         i18nKey="receive.steps.connectDevice.tokensTip"
         values={{ currency: token.parentCurrency.name, token: token.name }}
@@ -32,6 +37,7 @@ export default function StepConnectDevice({
 }: StepProps) {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null
   const tokenCur = (account && account.type === 'TokenAccount' && account.token) || token
+
   return (
     <Fragment>
       {mainAccount ? <CurrencyDownStatusAlert currency={mainAccount.currency} /> : null}

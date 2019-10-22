@@ -92,8 +92,8 @@ class PasswordModal extends PureComponent<Props, State> {
           render={() => (
             <Fragment>
               <Box
-                ff="Museo Sans|Regular"
-                color="dark"
+                ff="Inter|Regular"
+                color="palette.text.shade100"
                 textAlign="center"
                 mb={2}
                 mt={3}
@@ -103,7 +103,7 @@ class PasswordModal extends PureComponent<Props, State> {
                   ? t('password.changePassword.subTitle')
                   : t('password.setPassword.subTitle')}
               </Box>
-              <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center" px={4}>
+              <Box ff="Inter" color="palette.text.shade80" fontSize={4} textAlign="center" px={4}>
                 {t('password.setPassword.desc')}
               </Box>
               <PasswordForm

@@ -10,6 +10,8 @@ import React, { Component, useContext } from 'react'
 import priorityQueue from 'async/priorityQueue'
 import { connect } from 'react-redux'
 import type { Account } from '@ledgerhq/live-common/lib/types'
+import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
+import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import { createStructuredSelector } from 'reselect'
 import { updateAccountWithUpdater } from 'actions/accounts'
 import { setAccountSyncState } from 'actions/bridgeSync'
@@ -19,7 +21,6 @@ import { accountsSelector, isUpToDateSelector } from 'reducers/accounts'
 import { currenciesStatusSelector, currencyDownStatusLocal } from 'reducers/currenciesStatus'
 import { SYNC_MAX_CONCURRENT } from 'config/constants'
 import type { CurrencyStatus } from 'reducers/currenciesStatus'
-import { getAccountBridge } from '.'
 import { track } from '../analytics/segment'
 
 type BridgeSyncProviderProps = {
@@ -104,21 +105,21 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
           if (trackedRecently) return
           const account = this.props.accounts.find(a => a.id === accountId)
           if (!account) return
-          const tokenAccounts = account.tokenAccounts || []
+          const subAccounts = account.subAccounts || []
           track(event, {
             duration: (Date.now() - startSyncTime) / 1000,
             currencyName: account.currency.name,
             derivationMode: account.derivationMode,
             freshAddressPath: account.freshAddressPath,
             operationsLength: account.operations.length,
-            tokensLength: tokenAccounts.length,
+            tokensLength: subAccounts.length,
           })
           if (event === 'SyncSuccess') {
-            tokenAccounts.forEach(tokenAccount => {
+            subAccounts.forEach(a => {
               track('SyncSuccessToken', {
-                tokenId: tokenAccount.token.id,
-                tokenTicker: tokenAccount.token.ticker,
-                operationsLength: tokenAccount.operations.length,
+                tokenId: getAccountCurrency(a).id,
+                tokenTicker: getAccountCurrency(a).ticker,
+                operationsLength: a.operations.length,
                 parentCurrencyName: account.currency.name,
                 parentDerivationMode: account.derivationMode,
               })

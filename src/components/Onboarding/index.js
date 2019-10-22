@@ -107,21 +107,21 @@ export type StepProps = {
   flowType: Function,
 }
 
-const CloseContainer = styled(Box).attrs({
+const CloseContainer = styled(Box).attrs(() => ({
   p: 4,
-  color: 'fog',
-})`
+  color: 'palette.divider',
+}))`
   position: absolute;
   top: 0;
   right: 0;
   z-index: 1;
 
   &:hover {
-    color: ${p => p.theme.colors.grey};
+    color: ${p => p.theme.colors.palette.text.shade60};
   }
 
   &:active {
-    color: ${p => p.theme.colors.dark};
+    color: ${p => p.theme.colors.palette.text.shade100};
   }
 `
 
@@ -199,11 +199,11 @@ class Onboarding extends PureComponent<Props> {
   }
 }
 
-const Container = styled(Box).attrs({
-  bg: 'white',
+const Container = styled(Box).attrs(() => ({
+  bg: 'palette.background.paper',
   p: 60,
   selectable: true,
-})`
+}))`
   position: fixed;
   top: 0;
   left: 0;
@@ -211,9 +211,9 @@ const Container = styled(Box).attrs({
   bottom: 0;
   z-index: 25;
 `
-const StepContainer = styled(Box).attrs({
+const StepContainer = styled(Box).attrs(() => ({
   p: 40,
-})``
+}))``
 
 export default compose(
   connect(

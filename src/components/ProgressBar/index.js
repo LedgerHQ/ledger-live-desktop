@@ -18,7 +18,7 @@ const animIndeterminate = keyframes`
 `
 
 const Outer = styled.div`
-  background-color: ${colors.fog};
+  background-color: ${p => p.theme.colors.palette.divider};
   border-radius: 3px;
   overflow: hidden;
   height: 5px;

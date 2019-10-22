@@ -16,30 +16,30 @@ import Input from 'components/base/Input'
 import IconEye from 'icons/Eye'
 import IconEyeOff from 'icons/EyeOff'
 
-const InputRight = styled(Box).attrs({
-  color: 'grey',
+const InputRight = styled(Box).attrs(() => ({
+  color: 'palette.text.shade60',
   justifyContent: 'center',
   pr: 3,
-})`
+}))`
   &:hover {
-    color: ${p => p.theme.colors.graphite};
+    color: ${p => p.theme.colors.palette.text.shade80};
   }
 `
 
-const Strength = styled(Box).attrs({
-  bg: p => (p.activated ? (p.warning ? 'alertRed' : 'positiveGreen') : 'fog'),
+const Strength = styled(Box).attrs(() => ({
+  bg: p => (p.activated ? (p.warning ? 'alertRed' : 'positiveGreen') : 'palette.divider'),
   grow: true,
-})`
+}))`
   border-radius: 13px;
   height: 4px;
 `
 
-const Warning = styled(Box).attrs({
+const Warning = styled(Box).attrs(() => ({
   alignItems: 'flex-end',
   color: p => (p.passwordStrength <= 1 ? 'alertRed' : 'positiveGreen'),
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 3,
-})``
+}))``
 
 const getPasswordStrength = (v: string) => zxcvbn(v).score
 

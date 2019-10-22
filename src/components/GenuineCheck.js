@@ -58,7 +58,7 @@ const mapStateToProps = state => ({
   device: getCurrentDevice(state),
 })
 
-const Bold = props => <Text ff="Open Sans|SemiBold" {...props} />
+const Bold = props => <Text ff="Inter|SemiBold" {...props} />
 
 class GenuineCheck extends PureComponent<Props, State> {
   state = {
@@ -173,7 +173,13 @@ class GenuineCheck extends PureComponent<Props, State> {
         return null
       }
       return (
-        <Box fontSize={3} color="dark" align="center" cursor="text" ff="Open Sans|SemiBold">
+        <Box
+          fontSize={3}
+          color="palette.text.shade100"
+          align="center"
+          cursor="text"
+          ff="Inter|SemiBold"
+        >
           <Box mt={4} mb={2}>
             <Trans
               i18nKey="genuinecheck.deviceInBootloader"

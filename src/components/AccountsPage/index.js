@@ -49,7 +49,7 @@ const mapDispatchToProps = {
 }
 
 export const GenericBox = styled(Box)`
-  background: #ffffff;
+  background: ${p => p.theme.colors.palette.background.paper};
   flex: 1;
   padding: 10px 20px;
   margin-bottom: 9px;

@@ -5,7 +5,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import type { Currency, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
-import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
+import { getAccountCurrency, getAccountUnit } from '@ledgerhq/live-common/lib/account'
 import {
   counterValueCurrencySelector,
   exchangeSettingsForPairSelector,
@@ -16,21 +16,21 @@ import InputCurrency from 'components/base/InputCurrency'
 import Box from 'components/base/Box'
 import type { State } from 'reducers'
 
-const InputRight = styled(Box).attrs({
-  ff: 'Rubik',
-  color: 'graphite',
+const InputRight = styled(Box).attrs(() => ({
+  ff: 'Inter',
+  color: 'palette.text.shade80',
   fontSize: 4,
   justifyContent: 'center',
   pr: 3,
-})``
+}))``
 
-const InputCenter = styled(Box).attrs({
-  ff: 'Rubik',
-  color: 'graphite',
+const InputCenter = styled(Box).attrs(() => ({
+  ff: 'Inter',
+  color: 'palette.text.shade80',
   fontSize: 4,
   alignItems: 'center',
   justifyContent: 'center',
-})`
+}))`
   width: 30px;
 `
 
@@ -139,7 +139,7 @@ export class RequestAmount extends PureComponent<Props> {
     } = this.props
     const right = getCounterValue(value) || BigNumber(0)
     const rightUnit = rightCurrency.units[0]
-    const defaultUnit = account.type === 'Account' ? account.unit : account.token.units[0]
+    const defaultUnit = getAccountUnit(account)
     return (
       <Box horizontal flow={5} alignItems="center">
         <Box horizontal grow shrink>

@@ -103,17 +103,17 @@ export default compose(
   translate(),
 )(ShareAnalytics)
 
-export const Ul = styled.ul.attrs({
-  ff: 'Open Sans|Regular',
-})`
+export const Ul = styled.ul.attrs(() => ({
+  ff: 'Inter|Regular',
+}))`
   margin-top: 15px;
   font-size: 13px;
-  color: ${p => p.theme.colors.graphite};
+  color: ${p => p.theme.colors.palette.text.shade80};
   line-height: 1.69;
 `
-export const InlineDesc = styled(Box).attrs({
-  ff: 'Open Sans|SemiBold',
+export const InlineDesc = styled(Box).attrs(() => ({
+  ff: 'Inter|SemiBold',
   fontSize: 4,
-  color: 'dark',
+  color: 'palette.text.shade100',
   mx: '15px',
-})``
+}))``

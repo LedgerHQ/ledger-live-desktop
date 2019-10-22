@@ -8,8 +8,13 @@ import IconCheck from 'icons/Check'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import type { TokenAccount, Account } from '@ledgerhq/live-common/lib/types'
-import { listTokenAccounts } from '@ledgerhq/live-common/lib/account/helpers'
+import type { Account, AccountLike } from '@ledgerhq/live-common/lib/types'
+import {
+  listSubAccounts,
+  getAccountCurrency,
+  findSubAccountById,
+  getAccountName,
+} from '@ledgerhq/live-common/lib/account'
 import { push } from 'react-router-redux'
 
 import Text from 'components/base/Text'
@@ -39,7 +44,8 @@ const Item = styled.div`
   flex-direction: row;
   padding: 12px;
   min-width: 200px;
-  color: ${p => (p.isActive ? p.theme.colors.dark : p.theme.colors.smoke)};
+  color: ${p =>
+    p.isActive ? p.theme.colors.palette.text.shade100 : p.theme.colors.palette.text.shade80};
   > :first-child {
     margin-right: 10px;
   }
@@ -49,13 +55,13 @@ const Item = styled.div`
   }
 
   &:hover {
-    background: ${p => p.theme.colors.lightGrey};
+    background: ${p => p.theme.colors.palette.background.default};
     border-radius: 4px;
   }
 `
 
 const TextLink = styled.div`
-  font-family: 'Open Sans';
+  font-family: 'Inter';
   font-size: 12px;
   align-items: center;
   display: flex;
@@ -87,7 +93,7 @@ const AngleDown = styled.div`
   line-height: 16px;
 
   &:hover {
-    background: ${p => p.theme.colors.fog};
+    background: ${p => p.theme.colors.palette.divider};
   }
 `
 
@@ -109,16 +115,12 @@ const mapDispatchToProps = {
 
 class AccountCrumb extends PureComponent<Props> {
   renderItem = ({ item, isActive }) => {
-    const { parentId } = this.props.match.params
-
+    const currency = getAccountCurrency(item.account)
     return (
       <Item key={item.account.id} isActive={isActive}>
-        <CryptoCurrencyIcon
-          size={16}
-          currency={parentId ? item.account.token : item.account.currency}
-        />
-        <Text ff={`Open Sans|${isActive ? 'SemiBold' : 'Regular'}`} fontSize={4}>
-          {parentId ? item.account.token.name : item.account.name}
+        <CryptoCurrencyIcon size={16} currency={currency} />
+        <Text ff={`Inter|${isActive ? 'SemiBold' : 'Regular'}`} fontSize={4}>
+          {getAccountName(item.account)}
         </Text>
         {isActive && (
           <Check>
@@ -176,7 +178,7 @@ class AccountCrumb extends PureComponent<Props> {
     }
 
     let account: ?Account
-    let tokenAccount: ?TokenAccount
+    let tokenAccount: ?AccountLike
     let currency
     let name
     let items
@@ -184,16 +186,14 @@ class AccountCrumb extends PureComponent<Props> {
     if (parentId) {
       const parentAccount: ?Account = accounts.find(a => a.id === parentId)
 
-      if (parentAccount && parentAccount.tokenAccounts) {
-        items = parentAccount.tokenAccounts
-        tokenAccount = items.find(t => t.id === id)
-
+      if (parentAccount && parentAccount.subAccounts) {
+        tokenAccount = findSubAccountById(parentAccount, id)
         if (tokenAccount) {
-          currency = tokenAccount.token
-          name = tokenAccount.token.name
+          currency = getAccountCurrency(tokenAccount)
+          name = currency.name
         }
       }
-      items = parentAccount && listTokenAccounts(parentAccount)
+      items = parentAccount && listSubAccounts(parentAccount)
     } else {
       account = accounts.find(a => a.id === id)
       items = accounts

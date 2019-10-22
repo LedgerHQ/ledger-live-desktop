@@ -7,6 +7,7 @@ import type { T } from 'types/common'
 import type { OnboardingState } from 'reducers/onboarding'
 import { urls } from 'config/urls'
 
+import InvertableImg from 'components/InvertableImg'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import ExternalLinkButton from 'components/base/ExternalLinkButton'
@@ -18,11 +19,11 @@ import { Title, Description, OnboardingFooterWrapper } from '../../helperCompone
 const Img = ({ type }: { type: string }) => {
   switch (type) {
     case 'blue':
-      return <img alt="" src={i('blue-error-onb.svg')} />
+      return <InvertableImg alt="" src={i('blue-error-onb.svg')} />
     case 'nanoX':
-      return <img alt="" src={i('nano-x-error-onb.svg')} />
+      return <InvertableImg alt="" src={i('nano-x-error-onb.svg')} />
     default:
-      return <img alt="" src={i('nano-error-onb.svg')} />
+      return <InvertableImg alt="" src={i('nano-error-onb.svg')} />
   }
 }
 

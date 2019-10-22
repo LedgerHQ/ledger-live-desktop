@@ -1,12 +1,13 @@
 // @flow
 
 import React, { Fragment, PureComponent } from 'react'
-import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
+import { getCurrencyColor } from 'helpers/getCurrencyColor'
+import { getAccountName } from '@ledgerhq/live-common/lib/account'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/account'
 import type { CryptoCurrency, TokenCurrency } from '@ledgerhq/live-common/lib/types/currencies'
 import { BigNumber } from 'bignumber.js'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
+import styled, { withTheme } from 'styled-components'
 import { push } from 'react-router-redux'
 import CounterValue from 'components/CounterValue'
 import FormattedVal from 'components/base/FormattedVal'
@@ -32,6 +33,7 @@ type Props = {
   item: AccountDistributionItem,
   push: typeof push,
   accounts: Account[],
+  theme: any,
 }
 
 type State = {}
@@ -51,7 +53,7 @@ const Wrapper = styled.div`
   }
 
   &:hover {
-    background: ${p => p.theme.colors.lightGrey};
+    background: ${p => p.theme.colors.palette.background.default};
   }
 `
 
@@ -87,9 +89,9 @@ const Dots = styled.div`
   width: 5%;
   justify-content: flex-end;
   cursor: pointer;
-  color: ${p => p.theme.colors.fog};
+  color: ${p => p.theme.colors.palette.divider};
   &:hover {
-    color: ${p => p.theme.colors.grey};
+    color: ${p => p.theme.colors.palette.text.shade60};
   }
 `
 
@@ -111,15 +113,15 @@ class Row extends PureComponent<Props, State> {
     const {
       item: { currency, amount, distribution, account },
       accounts,
+      theme,
     } = this.props
 
     const parentAccount =
-      account.type === 'TokenAccount' ? accounts.find(a => a.id === account.parentId) : null
-    const color = getCurrencyColor(currency)
+      account.type !== 'Account' ? accounts.find(a => a.id === account.parentId) : null
+    const color = getCurrencyColor(currency, theme.colors.palette.background.paper)
+    const displayName = getAccountName(account)
     const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2)
     const icon = <ParentCryptoCurrencyIcon currency={currency} size={16} />
-    const displayName = account.type === 'TokenAccount' ? currency.name : account.name
-
     return (
       <AccountContextMenu account={account} parentAccount={parentAccount} withStar>
         <Wrapper onClick={() => this.onAccountClick(account)}>
@@ -127,11 +129,11 @@ class Row extends PureComponent<Props, State> {
             {icon}
             <Box grow>
               {parentAccount ? (
-                <Box fontSize={10} color="graphite">
-                  <Text ff="Open Sans|SemiBold">{parentAccount.name}</Text>
+                <Box fontSize={10} color="palette.text.shade80">
+                  <Text ff="Inter|SemiBold">{parentAccount.name}</Text>
                 </Box>
               ) : null}
-              <Ellipsis ff="Open Sans|SemiBold" color="dark" fontSize={3}>
+              <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
                 {displayName}
               </Ellipsis>
             </Box>
@@ -139,7 +141,7 @@ class Row extends PureComponent<Props, State> {
           <Distribution>
             {!!distribution && (
               <Fragment>
-                <Text ff="Rubik" color="dark" fontSize={3}>
+                <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
                   {`${percentage}%`}
                 </Text>
                 <Bar progress={percentage} progressColor={color} />
@@ -149,7 +151,7 @@ class Row extends PureComponent<Props, State> {
           <Amount>
             <Ellipsis>
               <FormattedVal
-                color={'graphite'}
+                color={'palette.text.shade80'}
                 unit={currency.units[0]}
                 val={amount}
                 fontSize={3}
@@ -164,13 +166,13 @@ class Row extends PureComponent<Props, State> {
                   currency={currency}
                   value={amount}
                   disableRounding
-                  color="dark"
+                  color="palette.text.shade100"
                   fontSize={3}
                   showCode
                   alwaysShowSign={false}
                 />
               ) : (
-                <Text ff="Rubik" color="dark" fontSize={3}>
+                <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
                   {'-'}
                 </Text>
               )}
@@ -187,7 +189,9 @@ class Row extends PureComponent<Props, State> {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Row)
+export default withTheme(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(Row),
+)

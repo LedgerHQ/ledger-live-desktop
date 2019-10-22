@@ -12,17 +12,17 @@ import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 
-const Title = styled(Box).attrs({
-  ff: 'Museo Sans|Regular',
+const Title = styled(Box).attrs(() => ({
+  ff: 'Inter|Regular',
   fontSize: 5,
-})`
-  color: ${p => p.theme.colors.dark};
+}))`
+  color: ${p => p.theme.colors.palette.text.shade100};
 `
 
-const Wrapper = styled(Box).attrs({
+const Wrapper = styled(Box).attrs(() => ({
   alignItems: 'center',
   pt: 5,
-})``
+}))``
 
 type Props = {
   query: string,
@@ -59,8 +59,8 @@ const NoItemPlaceholder = ({ query, installApp, app, push }: Props) => {
       </Title>
       <Box pt={2} style={{ maxWidth: 500 }} alignItems="center">
         <Text
-          ff="Open Sans|Regular"
-          color="graphite"
+          ff="Inter|Regular"
+          color="palette.text.shade80"
           fontSize={4}
           textAlign="center"
           style={{ lineHeight: 1.6 }}
@@ -74,11 +74,11 @@ const NoItemPlaceholder = ({ query, installApp, app, push }: Props) => {
             }}
           >
             {'placeholder'}
-            <Text ff="Open Sans|SemiBold" color="dark">
+            <Text ff="Inter|SemiBold" color="palette.text.shade100">
               {'placeholder'}
             </Text>
             {'placeholder'}
-            <Text ff="Open Sans|SemiBold" color="dark">
+            <Text ff="Inter|SemiBold" color="palette.text.shade100">
               {'placeholder'}
             </Text>
           </Trans>
@@ -87,7 +87,7 @@ const NoItemPlaceholder = ({ query, installApp, app, push }: Props) => {
       <Box pt={5} horizontal>
         <Button
           outline
-          outlineColor="grey"
+          outlineColor="palette.text.shade60"
           onClick={() => push('/accounts')}
           style={{ marginRight: 32 }}
         >

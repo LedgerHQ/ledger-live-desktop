@@ -1,11 +1,11 @@
 // @flow
 import React, { PureComponent } from 'react'
 import { translate, Trans } from 'react-i18next'
-import { colors } from 'styles/theme'
 import { i } from 'helpers/staticPath'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
+import InvertableImg from 'components/InvertableImg'
 
 import type { T } from 'types/common'
 
@@ -36,7 +36,7 @@ class SelectPIN extends PureComponent<Props, *> {
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="onboarding.selectPIN.initialize.instructions.blue.step2">
               {'Tap on'}
-              <Text ff="Open Sans|SemiBold" color="dark">
+              <Text ff="Inter|SemiBold" color="palette.text.shade100">
                 {configureAsNewDevice}
               </Text>
             </Trans>
@@ -53,17 +53,17 @@ class SelectPIN extends PureComponent<Props, *> {
     const disclaimerNotes = [
       {
         key: 'note1',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.selectPIN.disclaimer.note1'),
       },
       {
         key: 'note2',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.selectPIN.disclaimer.note2'),
       },
       {
         key: 'note3',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.selectPIN.disclaimer.note3'),
       },
     ]
@@ -72,7 +72,7 @@ class SelectPIN extends PureComponent<Props, *> {
       <Box align="center">
         <Inner style={{ width: 550 }}>
           <Box style={{ width: 180, justifyContent: 'center', alignItems: 'center' }}>
-            <img alt="" src={i('select-pin-blue-onb.svg')} />
+            <InvertableImg alt="" src={i('select-pin-blue-onb.svg')} />
           </Box>
           <Box>
             <Box shrink grow flow={4}>
@@ -82,7 +82,7 @@ class SelectPIN extends PureComponent<Props, *> {
             </Box>
           </Box>
         </Inner>
-        <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} />
+        <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} color={'palette.text.shade80'} />
       </Box>
     )
   }

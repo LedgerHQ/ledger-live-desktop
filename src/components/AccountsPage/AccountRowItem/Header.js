@@ -2,16 +2,17 @@
 
 import React, { PureComponent } from 'react'
 import Box from 'components/base/Box'
-import { colors } from 'styles/theme'
-import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/account'
-import styled from 'styled-components'
+import { getAccountCurrency, getAccountName } from '@ledgerhq/live-common/lib/account'
+import type { AccountLike } from '@ledgerhq/live-common/lib/types/account'
+import styled, { withTheme } from 'styled-components'
+import Ellipsis from 'components/base/Ellipsis'
+import Tooltip from 'components/base/Tooltip'
 import CryptoCurrencyIcon from '../../CryptoCurrencyIcon'
-import Ellipsis from '../../base/Ellipsis'
 
 type Props = {
-  account: Account | TokenAccount,
-  name: string,
+  account: AccountLike,
   nested?: boolean,
+  theme: any,
 }
 
 // NB Inside Head to not break alignment with parent row;
@@ -24,24 +25,16 @@ const NestedIndicator = styled.div`
 
 class Header extends PureComponent<Props> {
   render() {
-    const { account, name, nested } = this.props
-    let currency
-    let color
-    let title
-
-    if (account.type === 'Account') {
-      currency = account.currency
-      color = currency.color
-      title = currency.name
-    } else {
-      currency = account.token
-      color = colors.grey
-      title = 'token'
-    }
+    const { account, nested, theme } = this.props
+    const currency = getAccountCurrency(account)
+    const name = getAccountName(account)
+    const color =
+      currency.type === 'CryptoCurrency' ? currency.color : theme.colors.palette.text.shade60
+    const title = currency.type === 'CryptoCurrency' ? currency.name : 'token'
     return (
       <Box
         horizontal
-        ff="Open Sans|SemiBold"
+        ff="Inter|SemiBold"
         flow={3}
         flex={`${nested ? 42 : 30}%`}
         pr={1}
@@ -53,17 +46,19 @@ class Header extends PureComponent<Props> {
         </Box>
         <Box grow>
           {!nested && account.type === 'Account' && (
-            <Box style={{ textTransform: 'uppercase' }} fontSize={9} color="grey">
+            <Box style={{ textTransform: 'uppercase' }} fontSize={9} color="palette.text.shade60">
               {title}
             </Box>
           )}
-          <Ellipsis fontSize={12} color="dark">
-            {name}
-          </Ellipsis>
+          <Tooltip delay={1200} content={name}>
+            <Ellipsis fontSize={12} color="palette.text.shade100">
+              {name}
+            </Ellipsis>
+          </Tooltip>
         </Box>
       </Box>
     )
   }
 }
 
-export default Header
+export default withTheme(Header)

@@ -19,30 +19,34 @@ type Props = {
   bordered?: boolean,
 }
 
-const Container = styled(Box).attrs({
+const Container = styled(Box).attrs(() => ({
   horizontal: true,
-})``
+}))``
 
-const Pill = styled(Tabbable).attrs({
-  ff: p => (p.bordered ? 'Open Sans|Bold' : p.isActive ? 'Open Sans|SemiBold' : 'Open Sans'),
-  color: p => (p.isActive ? 'wallet' : 'smoke'),
-  bg: p => (p.isActive ? rgba(p.theme.colors.wallet, 0.1) : ''),
-  px: p => (p.bordered ? 2 : 3),
+const Pill = styled(Tabbable).attrs(p => ({
+  ff: p.bordered ? 'Inter|Bold' : 'Inter|SemiBold',
+  color: p.isActive ? 'wallet' : 'palette.text.shade60',
+  bg: p.isActive ? rgba(p.theme.colors.wallet, 0.1) : '',
+  px: p.bordered ? 2 : 3,
   fontSize: 3,
   borderRadius: 1,
   alignItems: 'center',
   justifyContent: 'center',
-})`
+}))`
   border: ${p => (p.bordered ? '1px solid' : 'none')};
-  border-color: ${p => (p.isActive ? p.theme.colors.wallet : p.theme.colors.fog)};
+  border-color: ${p => (p.isActive ? p.theme.colors.wallet : p.theme.colors.palette.divider)};
   height: 28px;
   outline: none;
   cursor: ${p => (p.isActive ? 'default' : 'pointer')};
   width: ${p => (p.bordered ? '40px' : '')};
 
+  &:hover {
+    color: ${p => (p.isActive ? p.theme.colors.wallet : p.theme.colors.palette.text.shade100)};
+  }
+
   &:focus {
     color: ${p => p.theme.colors.wallet};
-    background-color: ${p => (p.isActive ? '' : rgba(p.theme.colors.black, 0.02))};
+    background-color: ${p => (p.isActive ? '' : rgba(p.theme.colors.palette.text.shade100, 0.02))};
   }
 `
 

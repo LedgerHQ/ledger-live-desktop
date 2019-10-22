@@ -9,12 +9,12 @@ import IconSearch from 'icons/Search'
 
 import Box from 'components/base/Box'
 
-const Container = styled(Box).attrs({
+const Container = styled(Box).attrs(() => ({
   grow: true,
   horizontal: true,
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|Regular',
   fontSize: 4,
-})``
+}))``
 
 const Input = styled.input`
   border: none;
@@ -67,7 +67,7 @@ class GlobalSearch extends PureComponent<Props, State> {
             </Box>
             <Input
               placeholder={t('common.search')}
-              innerRef={input => (this._input = input)}
+              ref={input => (this._input = input)}
               onBlur={this.handleBlur}
               onFocus={this.handleFocus}
               isFocused={isFocused}

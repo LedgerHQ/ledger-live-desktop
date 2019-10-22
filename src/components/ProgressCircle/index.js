@@ -1,9 +1,8 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
-
-import { colors } from 'styles/theme'
+import useTheme from 'hooks/useTheme'
 
 import Text from 'components/base/Text'
 
@@ -53,46 +52,47 @@ const TextContainer = styled.div`
   justify-content: center;
 `
 
-class ProgressCircle extends PureComponent<Props> {
-  render() {
-    const { size, progress } = this.props
-    const radius = size / 2
-    const normalizedRadius = radius - STROKE_WIDTH / 2
-    const circumference = normalizedRadius * 2 * Math.PI
-    const strokeDashoffset = circumference - progress * circumference
+const ProgressCircle = ({ size, progress }: Props) => {
+  const radius = size / 2
+  const normalizedRadius = radius - STROKE_WIDTH / 2
+  const circumference = normalizedRadius * 2 * Math.PI
+  const strokeDashoffset = circumference - progress * circumference
 
-    return (
-      <Container size={size}>
-        <TextContainer>
-          <Text ff="Rubik|Regular" color={progress === 0 ? 'graphite' : 'wallet'} fontSize={5}>
-            {`${Math.round(progress * 100)}%`}
-          </Text>
-        </TextContainer>
-        <svg height={size} width={size}>
-          <circle
-            stroke={colors.lightFog}
-            fill="transparent"
-            strokeWidth={STROKE_WIDTH}
-            style={{ strokeDashoffset }}
-            r={normalizedRadius}
-            cx={radius}
-            cy={radius}
-          />
-          <InnerCircle
-            progress={progress}
-            stroke={colors.wallet}
-            fill="transparent"
-            strokeWidth={STROKE_WIDTH}
-            strokeDasharray={`${circumference} ${circumference}`}
-            style={{ strokeDashoffset }}
-            r={normalizedRadius}
-            cx={radius}
-            cy={radius}
-          />
-        </svg>
-      </Container>
-    )
-  }
+  return (
+    <Container size={size}>
+      <TextContainer>
+        <Text
+          ff="Inter|Regular"
+          color={progress === 0 ? 'palette.text.shade80' : 'wallet'}
+          fontSize={5}
+        >
+          {`${Math.round(progress * 100)}%`}
+        </Text>
+      </TextContainer>
+      <svg height={size} width={size}>
+        <circle
+          stroke={useTheme('colors.palette.text.shade40')}
+          fill="transparent"
+          strokeWidth={STROKE_WIDTH}
+          style={{ strokeDashoffset }}
+          r={normalizedRadius}
+          cx={radius}
+          cy={radius}
+        />
+        <InnerCircle
+          progress={progress}
+          stroke={useTheme('colors.wallet')}
+          fill="transparent"
+          strokeWidth={STROKE_WIDTH}
+          strokeDasharray={`${circumference} ${circumference}`}
+          style={{ strokeDashoffset }}
+          r={normalizedRadius}
+          cx={radius}
+          cy={radius}
+        />
+      </svg>
+    </Container>
+  )
 }
 
 export default ProgressCircle

@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
-import { listTokenAccounts } from '@ledgerhq/live-common/lib/account/helpers'
+import { listSubAccounts } from '@ledgerhq/live-common/lib/account/helpers'
 import styled from 'styled-components'
 import { Trans, translate } from 'react-i18next'
 import { push } from 'react-router-redux'
@@ -38,7 +38,7 @@ const Wrapper = styled.div`
 `
 
 const EmptyState = styled.div`
-  border: 1px dashed ${p => p.theme.colors.grey};
+  border: 1px dashed ${p => p.theme.colors.palette.text.shade60};
   padding: 15px 20px;
   border-radius: 4px;
   display: flex;
@@ -85,13 +85,13 @@ class TokensList extends PureComponent<Props> {
 
   render() {
     const { account, t, range } = this.props
-    if (!account.tokenAccounts) return null
-    const tokenAccounts = listTokenAccounts(account)
-    const isEmpty = tokenAccounts.length === 0
+    if (!account.subAccounts) return null
+    const subAccounts = listSubAccounts(account)
+    const isEmpty = subAccounts.length === 0
     return (
       <Box mb={50}>
         <Wrapper>
-          <Text color="dark" mb={2} ff="Museo Sans" fontSize={6}>
+          <Text color="palette.text.shade100" mb={2} ff="Inter|Medium" fontSize={6}>
             {t('tokensList.title')}
           </Text>
           {!isEmpty && <ReceiveButton onClick={this.onReceiveClick} />}
@@ -99,11 +99,11 @@ class TokensList extends PureComponent<Props> {
         {isEmpty && (
           <EmptyState>
             <Placeholder>
-              <Text color="graphite" ff="Open Sans|SemiBold" fontSize={4}>
+              <Text color="palette.text.shade80" ff="Inter|SemiBold" fontSize={4}>
                 <Trans i18nKey={'tokensList.placeholder'} />{' '}
                 <LabelWithExternalIcon
                   color="wallet"
-                  ff="Open Sans|SemiBold"
+                  ff="Inter|SemiBold"
                   onClick={() => {
                     openURL(urls.managerERC20)
                     track('More info on Manage ERC20 tokens')
@@ -115,7 +115,7 @@ class TokensList extends PureComponent<Props> {
             <ReceiveButton onClick={this.onReceiveClick} />
           </EmptyState>
         )}
-        {tokenAccounts.map((token, index) => (
+        {subAccounts.map((token, index) => (
           <AccountContextMenu key={token.id} account={token} parentAccount={account}>
             <TokenRow
               index={index}

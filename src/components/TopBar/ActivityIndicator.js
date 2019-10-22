@@ -63,7 +63,15 @@ class ActivityIndicatorInner extends PureComponent<Props, { lastClickTime: numbe
         <Rotating
           size={16}
           isRotating={isRotating}
-          color={isError ? 'alertRed' : isRotating ? 'grey' : isUpToDate ? 'positiveGreen' : 'grey'}
+          color={
+            isError
+              ? 'alertRed'
+              : isRotating
+              ? 'palette.text.shade60'
+              : isUpToDate
+              ? 'positiveGreen'
+              : 'palette.text.shade60'
+          }
         >
           {isError ? (
             <IconExclamationCircle size={16} />
@@ -78,7 +86,7 @@ class ActivityIndicatorInner extends PureComponent<Props, { lastClickTime: numbe
         <Box
           data-e2e="syncButton"
           ml={isRotating ? 2 : 1}
-          ff="Open Sans|SemiBold"
+          ff="Inter|SemiBold"
           color={isError ? 'alertRed' : undefined}
           fontSize={4}
           horizontal
@@ -110,11 +118,11 @@ class ActivityIndicatorInner extends PureComponent<Props, { lastClickTime: numbe
       return (
         <Tooltip
           tooltipBg="alertRed"
-          render={() => (
+          content={
             <Box fontSize={4} p={2} style={{ maxWidth: 250 }}>
               <TranslatedError error={error} />
             </Box>
-          )}
+          }
         >
           {content}
         </Tooltip>

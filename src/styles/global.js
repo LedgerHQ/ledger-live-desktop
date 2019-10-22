@@ -2,76 +2,52 @@
 
 /* eslint-disable no-unused-expressions */
 
-import { injectGlobal } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 import omitBy from 'lodash/omitBy'
 
 import { fontFace, rgba } from 'styles/helpers'
-import { radii, colors } from 'styles/theme'
+import { radii } from 'styles/theme'
 import reset from './reset'
 
 const { STORYBOOK_ENV, NODE_ENV } = process.env
-const COPYRIGHTED_FONTS = ['Museo Sans']
+const COPYRIGHTED_FONTS = []
 
 const fonts = {
-  'Open Sans': [
+  Inter: [
     {
       style: 'normal',
-      weight: 700,
-      file: 'opensans/OpenSans-Bold',
-    },
-    {
-      style: 'normal',
-      weight: 800,
-      file: 'opensans/OpenSans-ExtraBold',
+      weight: 100,
+      file: 'inter/Inter-ExtraLight-BETA',
     },
     {
       style: 'normal',
       weight: 300,
-      file: 'opensans/OpenSans-Light',
+      file: 'inter/Inter-Light-BETA',
     },
     {
       style: 'normal',
       weight: 400,
-      file: 'opensans/OpenSans-Regular',
+      file: 'inter/Inter-Regular',
+    },
+    {
+      style: 'normal',
+      weight: 500,
+      file: 'inter/Inter-Medium',
     },
     {
       style: 'normal',
       weight: 600,
-      file: 'opensans/OpenSans-SemiBold',
-    },
-  ],
-  'Museo Sans': [
-    {
-      style: 'normal',
-      weight: 100,
-      file: 'museosans/MuseoSans-ExtraLight',
-    },
-    {
-      style: 'normal',
-      weight: 300,
-      file: 'museosans/MuseoSans-Light',
-    },
-    {
-      style: 'normal',
-      weight: 500,
-      file: 'museosans/MuseoSans-Regular',
+      file: 'inter/Inter-SemiBold',
     },
     {
       style: 'normal',
       weight: 700,
-      file: 'museosans/MuseoSans-Bold',
+      file: 'inter/Inter-Bold',
     },
     {
       style: 'normal',
       weight: 900,
-      file: 'museosans/MuseoSans-ExtraBold',
-    },
-  ],
-  Rubik: [
-    {
-      style: 'normal',
-      weight: 500,
-      file: 'rubik/Rubik-Regular',
+      file: 'inter/Inter-ExtraBold',
     },
   ],
 }
@@ -90,21 +66,34 @@ function transformFonts(allFonts) {
     .join('\n')
 }
 
-injectGlobal`
+export const GlobalStyle = createGlobalStyle`
+  body, #preload {
+    background-color: ${p => p.theme.colors.palette.background.default} !important;
+  }
+
   ${transformFonts(fonts)};
   ${reset};
 
-  .tippy-tooltip {
-    background-color: ${colors.dark};
-    border-radius: ${radii[1]}px;
+  .tippy-content {
+    padding: 0 !important;
   }
 
-  .tippy-popper .tippy-roundarrow {
-    fill: ${colors.dark};
+  .tippy-tooltip.ledger-theme {
+    background-color: ${p => p.theme.colors.palette.text.shade100};
+    color: ${p => p.theme.colors.palette.background.default};
+    border-radius: ${radii[1]}px;
+  }
+  
+  .tippy-tooltip.ledger-theme .tippy-svg-arrow {
+    fill: ${p => p.theme.colors.palette.text.shade100};
+  }
+
+  .tippy-popper.ledger-theme .tippy-roundarrow {
+    fill: ${p => p.theme.colors.palette.text.shade100};
   }
 
   .select__control:hover, .select__control-is-focused {
-    border-color: ${colors.fog};
+    border-color: ${p => p.theme.colors.palette.divider};
   }
 
   .select__single-value {
@@ -112,16 +101,12 @@ injectGlobal`
     right: 0;
     left: 15px;
   }
-
+  
   .select__placeholder {
-    color ${colors.fog} !important;
-  }
-
-  .select__option:active {
-    background: ${colors.lightGrey} !important;
+    color ${p => p.theme.colors.palette.divider} !important;
   }
 
   ::selection {
-    background: ${rgba(colors.wallet, 0.1)};
+    background: ${p => rgba(p.theme.colors.wallet, 0.1)};
   }
 `

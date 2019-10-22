@@ -15,30 +15,30 @@ import Button from 'components/base/Button'
 import { powerOff, powerOffDevice, bootOptions, recovery } from 'config/nontranslatables'
 import type { StepProps } from '../'
 
-const Container = styled(Box).attrs({
+const Container = styled(Box).attrs(() => ({
   alignItems: 'center',
   fontSize: 4,
-  color: 'dark',
+  color: 'palette.text.shade100',
   px: 7,
-})``
+}))``
 
-const SubTitle = styled(Box).attrs({
-  ff: 'Museo Sans|Regular',
+const SubTitle = styled(Box).attrs(() => ({
+  ff: 'Inter|Regular',
   fontSize: 4,
   mb: 3,
-})``
+}))``
 
-const Wrapper = styled(Box).attrs({
+const Wrapper = styled(Box).attrs(() => ({
   my: 2,
-})`
+}))`
   width: 100%;
 `
 
-const BulletText = styled(Text).attrs({
-  ff: 'Open Sans|Regular',
-  color: 'smoke',
+const BulletText = styled(Text).attrs(() => ({
+  ff: 'Inter|Regular',
+  color: 'palette.text.shade80',
   fontSize: 2,
-})``
+}))``
 
 type Props = {
   deviceModelId: DeviceModelId,
@@ -54,22 +54,22 @@ const StepResetDevice = ({ deviceModelId }: Props) => {
         <SubTitle justifyContent="start">
           <Trans i18nKey="manager.modal.resetSteps.first" />
         </SubTitle>
-        <BulletText ff="Open Sans|Regular" color="smoke" fontSize={2}>
+        <BulletText ff="Inter|Regular" color="palette.text.shade80" fontSize={2}>
           <Trans
             i18nKey="manager.modal.resetSteps.connect"
             values={{ deviceName: device ? device.productName : '' }}
           />
         </BulletText>
-        <BulletText ff="Open Sans|Regular" color="smoke" fontSize={2}>
+        <BulletText ff="Inter|Regular" color="palette.text.shade80" fontSize={2}>
           <Trans i18nKey="manager.modal.resetSteps.turnOn" />
         </BulletText>
-        <BulletText ff="Open Sans|Regular" color="smoke" fontSize={2}>
+        <BulletText ff="Inter|Regular" color="palette.text.shade80" fontSize={2}>
           <Trans i18nKey="manager.modal.resetSteps.falsePin" />
         </BulletText>
-        <BulletText ff="Open Sans|Regular" color="smoke" fontSize={2}>
+        <BulletText ff="Inter|Regular" color="palette.text.shade80" fontSize={2}>
           <Trans i18nKey="manager.modal.resetSteps.turnOff" values={{ action: powerOffDevice }} />
         </BulletText>
-        <BulletText ff="Open Sans|Regular" color="smoke" fontSize={2}>
+        <BulletText ff="Inter|Regular" color="palette.text.shade80" fontSize={2}>
           <Trans i18nKey="manager.modal.resetSteps.confirmTurnOff" values={{ action: powerOff }} />
         </BulletText>
       </Wrapper>
@@ -78,10 +78,10 @@ const StepResetDevice = ({ deviceModelId }: Props) => {
         <SubTitle justifyContent="start">
           <Trans i18nKey="manager.modal.resetSteps.second" values={{ mode: recovery }} />
         </SubTitle>
-        <BulletText ff="Open Sans|Regular" color="smoke" fontSize={2}>
+        <BulletText ff="Inter|Regular" color="palette.text.shade80" fontSize={2}>
           <Trans i18nKey="manager.modal.resetSteps.boot" values={{ option: bootOptions }} />
         </BulletText>
-        <BulletText ff="Open Sans|Regular" color="smoke" fontSize={2}>
+        <BulletText ff="Inter|Regular" color="palette.text.shade80" fontSize={2}>
           <Trans i18nKey="manager.modal.resetSteps.recoveryMode" values={{ mode: recovery }} />
         </BulletText>
       </Wrapper>
@@ -90,16 +90,16 @@ const StepResetDevice = ({ deviceModelId }: Props) => {
         <SubTitle justifyContent="start">
           <Trans i18nKey="manager.modal.resetSteps.third" />
         </SubTitle>
-        <BulletText ff="Open Sans|Regular" color="smoke" fontSize={2}>
+        <BulletText ff="Inter|Regular" color="palette.text.shade80" fontSize={2}>
           <Trans i18nKey="manager.modal.resetSteps.openLive" />
         </BulletText>
-        <BulletText ff="Open Sans|Regular" color="smoke" fontSize={2}>
+        <BulletText ff="Inter|Regular" color="palette.text.shade80" fontSize={2}>
           <Trans
             i18nKey="manager.modal.resetSteps.uninstall"
             values={{ deviceName: device ? device.productName : '' }}
           />
         </BulletText>
-        <Text ff="Open Sans|Regular" color="smoke" fontSize={1}>
+        <Text ff="Inter|Regular" color="palette.text.shade80" fontSize={1}>
           <Trans i18nKey="manager.modal.resetSteps.disclaimer" />
         </Text>
       </Wrapper>

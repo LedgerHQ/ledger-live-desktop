@@ -2,10 +2,10 @@
 
 import React, { Fragment, PureComponent } from 'react'
 import type { CryptoCurrency, TokenCurrency } from '@ledgerhq/live-common/lib/types/currencies'
-import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
+import { getCurrencyColor } from 'helpers/getCurrencyColor'
 import { BigNumber } from 'bignumber.js'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
+import styled, { withTheme } from 'styled-components'
 import { push } from 'react-router-redux'
 import CounterValue from 'components/CounterValue'
 import FormattedVal from 'components/base/FormattedVal'
@@ -25,6 +25,7 @@ export type DistributionItem = {
 type Props = {
   item: DistributionItem,
   push: typeof push,
+  theme: any,
 }
 
 type State = {}
@@ -44,7 +45,7 @@ const Wrapper = styled.div`
   cursor: pointer;
 
   &:hover {
-    background: ${p => p.theme.colors.lightGrey};
+    background: ${p => p.theme.colors.palette.background.default};
   }
 `
 
@@ -92,23 +93,24 @@ class Row extends PureComponent<Props, State> {
   render() {
     const {
       item: { currency, amount, distribution },
+      theme,
     } = this.props
-    const color = getCurrencyColor(currency)
+    const color = getCurrencyColor(currency, theme.colors.palette.background.paper)
     const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2)
     const icon = <CryptoCurrencyIcon currency={currency} size={16} />
     return (
-      <Wrapper onClick={() => this.props.push(`/asset/${currency.ticker}`)}>
+      <Wrapper onClick={() => this.props.push(`/asset/${currency.id}`)}>
         <Asset>
           {icon}
-          <Ellipsis ff="Open Sans|SemiBold" color="dark" fontSize={3}>
+          <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
             {currency.name}
           </Ellipsis>
         </Asset>
         <PriceSection>
           {distribution ? (
-            <Price from={currency} color="graphite" fontSize={3} />
+            <Price from={currency} color="palette.text.shade80" fontSize={3} />
           ) : (
-            <Text ff="Rubik" color="dark" fontSize={3}>
+            <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
               {'-'}
             </Text>
           )}
@@ -116,7 +118,7 @@ class Row extends PureComponent<Props, State> {
         <Distribution>
           {!!distribution && (
             <Fragment>
-              <Text ff="Rubik" color="dark" fontSize={3}>
+              <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
                 {`${percentage}%`}
               </Text>
               <Bar progress={percentage} progressColor={color} />
@@ -126,7 +128,7 @@ class Row extends PureComponent<Props, State> {
         <Amount>
           <Ellipsis>
             <FormattedVal
-              color={'graphite'}
+              color={'palette.text.shade80'}
               unit={currency.units[0]}
               val={amount}
               fontSize={3}
@@ -141,13 +143,13 @@ class Row extends PureComponent<Props, State> {
                 currency={currency}
                 value={amount}
                 disableRounding
-                color="dark"
+                color="palette.text.shade100"
                 fontSize={3}
                 showCode
                 alwaysShowSign={false}
               />
             ) : (
-              <Text ff="Rubik" color="dark" fontSize={3}>
+              <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
                 {'-'}
               </Text>
             )}
@@ -158,7 +160,9 @@ class Row extends PureComponent<Props, State> {
   }
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(Row)
+export default withTheme(
+  connect(
+    null,
+    mapDispatchToProps,
+  )(Row),
+)

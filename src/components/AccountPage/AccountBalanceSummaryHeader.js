@@ -1,23 +1,21 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { BigNumber } from 'bignumber.js'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
+import { BigNumber } from 'bignumber.js'
+import styled from 'styled-components'
 import type { Currency, ValueChange, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
-
 import type { T } from 'types/common'
-
-import { setSelectedTimeRange } from 'actions/settings'
+import { getAccountCurrency, getAccountUnit } from '@ledgerhq/live-common/lib/account'
 import type { TimeRange } from 'reducers/settings'
-
+import { setSelectedTimeRange } from 'actions/settings'
 import { BalanceTotal, BalanceDiff } from 'components/BalanceInfos'
 import Box, { Tabbable } from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
 import Price from 'components/Price'
 import PillsDaysCount from 'components/PillsDaysCount'
-import styled from 'styled-components'
 import Swap from '../../icons/Swap'
 
 type Props = {
@@ -43,16 +41,16 @@ const Wrapper = styled(Box)`
   flex-direction: row;
 `
 
-const SwapButton = styled(Tabbable).attrs({
-  color: 'dark',
-  ff: 'Museo Sans',
+const SwapButton = styled(Tabbable).attrs(() => ({
+  color: 'palette.text.shade100',
+  ff: 'Inter',
   fontSize: 7,
-})`
+}))`
   align-items: center;
   align-self: center;
   border-radius: 4px;
-  border: 1px solid ${p => p.theme.colors.fog};
-  color: ${p => p.theme.colors.fog};
+  border: 1px solid ${p => p.theme.colors.palette.text.shade20};
+  color: ${p => p.theme.colors.palette.text.shade20};
   cursor: pointer;
   display: flex;
   height: 53px;
@@ -61,8 +59,8 @@ const SwapButton = styled(Tabbable).attrs({
   width: 25px;
 
   &:hover {
-    border-color: ${p => p.theme.colors.dark};
-    color: ${p => p.theme.colors.dark};
+    border-color: ${p => p.theme.colors.palette.text.shade100};
+    color: ${p => p.theme.colors.palette.text.shade100};
   }
 
   &:active {
@@ -93,8 +91,8 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
       setCountervalueFirst,
     } = this.props
 
-    const currency = account.type === 'Account' ? account.currency : account.token
-    const unit = account.type === 'Account' ? account.unit : currency.units[0]
+    const currency = getAccountCurrency(account)
+    const unit = getAccountUnit(account)
     const cvUnit = counterValue.units[0]
     const data = [
       { valueChange: cryptoChange, balance: last.value, unit },

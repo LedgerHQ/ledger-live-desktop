@@ -26,7 +26,7 @@ import IconDownloadCloud from 'icons/DownloadCloud'
 import IconSend from 'icons/Send'
 
 const Separator = styled.div`
-  background-color: ${p => p.theme.colors.lightFog};
+  background-color: ${p => p.theme.colors.palette.divider};
   height: 1px;
   margin-top: 8px;
   margin-bottom: 8px;
@@ -36,7 +36,10 @@ const Item = styled(DropDownItem)`
   width: 230px;
   cursor: pointer;
   white-space: pre-wrap;
-  background-color: ${p => !p.disableHover && p.isHighlighted && p.theme.colors.lightGrey};
+  justify-content: flex-start;
+  align-items: center;
+  background-color: ${p =>
+    !p.disableHover && p.isHighlighted && p.theme.colors.palette.background.default};
 `
 
 type StateProps = {|
@@ -80,13 +83,13 @@ class OptionsButton extends PureComponent<Props, State> {
     {
       key: 'exportOperations',
       label: this.props.t('accounts.optionsMenu.exportOperations'),
-      icon: <IconDownloadCloud size={12} />,
+      icon: <IconDownloadCloud size={16} />,
       onClick: () => this.props.openModal(MODAL_EXPORT_OPERATIONS),
     },
     {
       key: 'exportAccounts',
       label: this.props.t('accounts.optionsMenu.exportToMobile'),
-      icon: <IconSend size={12} />,
+      icon: <IconSend size={16} />,
       onClick: () => this.setState({ isModalOpened: true }),
     },
     {
@@ -112,8 +115,6 @@ class OptionsButton extends PureComponent<Props, State> {
     return (
       <Item
         horizontal
-        alignItems="center"
-        justifyContent="flex-start"
         isHighlighted={isHighlighted}
         flow={2}
         onClick={item.onClick}
@@ -147,8 +148,8 @@ class OptionsButton extends PureComponent<Props, State> {
 
     return (
       <>
-        <DropDown horizontal offsetTop={2} items={this.items} renderItem={this.renderItem}>
-          <Tooltip render={() => this.props.t('accounts.optionsMenu.title')}>
+        <DropDown border horizontal offsetTop={2} items={this.items} renderItem={this.renderItem}>
+          <Tooltip content={this.props.t('accounts.optionsMenu.title')}>
             <Button small outlineGrey flow={1} style={{ width: 34, padding: 0 }}>
               <Box horizontal flow={1} alignItems="center" justifyContent="center">
                 <IconDots size={14} />

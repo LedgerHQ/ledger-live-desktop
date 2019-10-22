@@ -1,4 +1,4 @@
-import debounce from 'lodash/debounce'
+import throttle from 'lodash/throttle'
 import c from 'color'
 
 export function enrichData(data) {
@@ -13,14 +13,14 @@ export function enrichData(data) {
   }))
 }
 
-export function generateColors(color) {
+export function generateColors(theme, color) {
   const cColor = c(color)
   return {
     line: color,
     focus: color,
     gradientStart: cColor.fade(0.7),
     gradientStop: cColor.fade(1),
-    focusBar: '#d8d8d8',
+    focusBar: theme.colors.palette.divider,
   }
 }
 
@@ -28,8 +28,8 @@ export function generateMargins(hideAxis) {
   const margins = {
     top: hideAxis ? 5 : 10,
     bottom: hideAxis ? 5 : 40,
-    right: hideAxis ? 5 : 40,
-    left: hideAxis ? 5 : 70,
+    right: hideAxis ? 0 : 10,
+    left: hideAxis ? 0 : 40,
   }
 
   // FIXME: Forced to "use" margins here to prevent babel/uglify to believe
@@ -41,14 +41,10 @@ export function generateMargins(hideAxis) {
 }
 
 export function observeResize(node, cb) {
-  const onResize = debounce(
-    () => {
-      const { width } = node.getBoundingClientRect()
-      cb(width)
-    },
-    100,
-    { maxWait: 1000 },
-  )
+  const onResize = throttle(() => {
+    const { width } = node.getBoundingClientRect()
+    cb(width)
+  }, 30)
 
   const ro = new ResizeObserver(onResize)
   ro.observe(node)

@@ -7,7 +7,8 @@ import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import Tooltip from 'components/base/Tooltip'
-import { isAccountEmpty } from '@ledgerhq/live-common/lib/account'
+import { isAccountEmpty, getMainAccount } from '@ledgerhq/live-common/lib/account'
+import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
@@ -25,22 +26,22 @@ import Box, { Tabbable } from 'components/base/Box'
 import Button from 'components/base/Button'
 import Star from '../Stars/Star'
 
-const ButtonSettings = styled(Tabbable).attrs({
+const ButtonSettings = styled(Tabbable).attrs(() => ({
   align: 'center',
   justify: 'center',
-})`
+}))`
   width: 34px;
   height: 34px;
-  border: 1px solid ${p => p.theme.colors.grey};
+  border: 1px solid ${p => p.theme.colors.palette.text.shade60};
   border-radius: 4px;
   &:hover {
-    color: ${p => (p.disabled ? '' : p.theme.colors.dark)};
-    background: ${p => (p.disabled ? '' : rgba(p.theme.colors.fog, 0.2))};
-    border-color: ${p => p.theme.colors.dark};
+    color: ${p => (p.disabled ? '' : p.theme.colors.palette.text.shade100)};
+    background: ${p => (p.disabled ? '' : rgba(p.theme.colors.palette.divider, 0.2))};
+    border-color: ${p => p.theme.colors.palette.text.shade100};
   }
 
   &:active {
-    background: ${p => (p.disabled ? '' : rgba(p.theme.colors.fog, 0.3))};
+    background: ${p => (p.disabled ? '' : rgba(p.theme.colors.palette.divider, 0.3))};
   }
 `
 
@@ -63,16 +64,30 @@ type Props = OwnProps & {
 class AccountHeaderActions extends PureComponent<Props> {
   render() {
     const { account, parentAccount, openModal, t } = this.props
+    const mainAccount = getMainAccount(account, parentAccount)
+    let cap
+    try {
+      const bridge = getAccountBridge(account, parentAccount)
+      cap = bridge.getCapabilities(mainAccount)
+    } catch (e) {
+      return null
+    }
     return (
       <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
         {!isAccountEmpty(account) ? (
           <Fragment>
-            <Button small primary onClick={() => openModal(MODAL_SEND, { parentAccount, account })}>
-              <Box horizontal flow={1} alignItems="center">
-                <IconSend size={12} />
-                <Box>{t('send.title')}</Box>
-              </Box>
-            </Button>
+            {cap.canSend ? (
+              <Button
+                small
+                primary
+                onClick={() => openModal(MODAL_SEND, { parentAccount, account })}
+              >
+                <Box horizontal flow={1} alignItems="center">
+                  <IconSend size={12} />
+                  <Box>{t('send.title')}</Box>
+                </Box>
+              </Button>
+            ) : null}
 
             <Button
               small
@@ -86,11 +101,11 @@ class AccountHeaderActions extends PureComponent<Props> {
             </Button>
           </Fragment>
         ) : null}
-        <Tooltip render={() => t('stars.tooltip')}>
+        <Tooltip content={t('stars.tooltip')}>
           <Star accountId={account.id} account={account} yellow />
         </Tooltip>
         {account.type === 'Account' ? (
-          <Tooltip render={() => t('account.settings.title')}>
+          <Tooltip content={t('account.settings.title')}>
             <ButtonSettings
               onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { parentAccount, account })}
             >

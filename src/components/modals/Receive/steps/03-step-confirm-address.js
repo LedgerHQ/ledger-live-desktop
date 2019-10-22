@@ -101,22 +101,22 @@ export function StepConfirmAddressFooter({ t, transitionTo, onRetry }: StepProps
   )
 }
 
-const Container = styled(Box).attrs({
+const Container = styled(Box).attrs(() => ({
   alignItems: 'center',
   fontSize: 4,
-  color: 'dark',
+  color: 'palette.text.shade100',
   px: 5,
   mb: 2,
-})``
+}))``
 
-const Title = styled(Box).attrs({
-  ff: 'Open Sans|SemiBold',
+const Title = styled(Box).attrs(() => ({
+  ff: 'Inter|SemiBold',
   fontSize: 6,
   mb: 1,
-})``
+}))``
 
-const Text = styled(Box).attrs({
-  color: 'smoke',
-})`
+const Text = styled(Box).attrs(() => ({
+  color: 'palette.text.shade80',
+}))`
   text-align: center;
 `

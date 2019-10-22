@@ -14,7 +14,7 @@ import type {
   PortfolioRange,
   AccountPortfolio,
 } from '@ledgerhq/live-common/lib/types'
-
+import { getAccountUnit } from '@ledgerhq/live-common/lib/account'
 import Chart from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
@@ -37,14 +37,14 @@ class AccountBalanceSummary extends PureComponent<Props> {
     const { account, counterValue, balanceHistoryWithCountervalue, countervalueFirst } = this.props
     const displayCountervalue =
       countervalueFirst && balanceHistoryWithCountervalue.countervalueAvailable
-    const unit = account.type === 'Account' ? account.unit : account.token.units[0]
+    const unit = getAccountUnit(account)
     const data = [{ val: d.value, unit }, { val: d.countervalue, unit: counterValue.units[0] }]
     if (displayCountervalue) data.reverse()
     return (
       <Fragment>
-        <FormattedVal fontSize={5} color="dark" showCode {...data[0]} />
+        <FormattedVal fontSize={5} color="palette.text.shade100" showCode {...data[0]} />
         <FormattedVal fontSize={4} color="warmGrey" showCode {...data[1]} />
-        <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
+        <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
           {moment(d.date).format('LL')}
         </Box>
       </Fragment>
@@ -53,7 +53,7 @@ class AccountBalanceSummary extends PureComponent<Props> {
 
   renderTickYCryptoValue = val => {
     const { account } = this.props
-    const unit = account.type === 'Account' ? account.unit : account.token.units[0]
+    const unit = getAccountUnit(account)
     return formatShort(unit, BigNumber(val))
   }
 
@@ -97,7 +97,7 @@ class AccountBalanceSummary extends PureComponent<Props> {
           />
         </Box>
 
-        <Box ff="Open Sans" fontSize={4} color="graphite" pt={5}>
+        <Box px={5} ff="Inter" fontSize={4} color="palette.text.shade80" pt={5}>
           <Chart
             id={chartId}
             color={chartColor}

@@ -3,8 +3,6 @@
 import * as d3 from 'd3'
 import moment from 'moment'
 
-import { colors as themeColors } from 'styles/theme'
-
 import type { Props } from '.'
 import type { CTX } from './types'
 
@@ -28,7 +26,7 @@ function getRenderTickX(selectedTimeRange) {
   return t => moment(t).format(RENDER_TICK_X[selectedTimeRange] || RENDER_TICK_X.default)
 }
 
-export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) {
+export default function refreshDraw(theme: any, { ctx, props }: { ctx: CTX, props: Props }) {
   const { NODES, WIDTH, HEIGHT, MARGINS, COLORS, INVALIDATED, DATA, x, y } = ctx
   const { hideAxis, isInteractive, tickXScale, renderTickY, mapValue } = props
 
@@ -52,7 +50,10 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
     .y(d => y(mapValue(d)))
 
   // Resize container
-  NODES.svg.attr('width', '100%').attr('height', '100%')
+  NODES.svg
+    .attr('width', '100%')
+    .attr('height', '100%')
+    .attr('preserveAspectRatio', 'none')
 
   // Resize wrapper & axis
   NODES.wrapper.attr('transform', `translate(${MARGINS.left},${MARGINS.top})`)
@@ -102,8 +103,8 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
         .tickPadding(nearZero ? 0 : 10)
         .tickFormat(val => (renderTickX ? renderTickX(val) : val)),
     )
-    stylizeAxis(NODES.axisLeft)
-    stylizeAxis(NODES.axisBot, !nearZero)
+    stylizeAxis(theme, NODES.axisLeft)
+    stylizeAxis(theme, NODES.axisBot, !nearZero)
   }
 
   // Draw ticks
@@ -119,7 +120,7 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
 
     NODES.yTicks
       .selectAll('.tick line')
-      .attr('stroke', 'rgba(0, 0, 0, 0.1)')
+      .attr('stroke', theme.colors.palette.divider)
       .attr('stroke-dasharray', '5, 5')
 
     if (nearZero) {
@@ -135,12 +136,12 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
   NODES.line.data([DATA]).attr('d', valueline)
 }
 
-function stylizeAxis(axis, showAxisLine) {
+function stylizeAxis(theme, axis, showAxisLine) {
   axis.selectAll('.tick line').attr('stroke', 'none')
-  axis.selectAll('path').attr('stroke', showAxisLine ? 'rgba(0, 0, 0, 0.1)' : 'none')
+  axis.selectAll('path').attr('stroke', showAxisLine ? theme.colors.palette.divider : 'none')
   axis
     .selectAll('text')
-    .attr('fill', themeColors.grey)
+    .attr('fill', theme.colors.palette.text.shade60)
     .style('font-size', '12px')
-    .style('font-family', 'Open Sans')
+    .style('font-family', 'Inter')
 }

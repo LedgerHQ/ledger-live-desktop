@@ -21,9 +21,9 @@ const StepConnectDevice = ({ t, currency, device, setAppOpened }: StepProps) => 
       <Box align="center" mb={6}>
         <CurrencyCircleIcon borderRadius="10px" mb={15} size={40} currency={currency} />
         <Box
-          ff="Museo Sans|Regular"
+          ff="Inter|Regular"
           fontSize={6}
-          color="dark"
+          color="palette.text.shade100"
           textAlign="center"
           style={{ width: 370 }}
         >

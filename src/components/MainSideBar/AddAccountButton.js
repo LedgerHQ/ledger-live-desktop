@@ -9,13 +9,13 @@ import IconCirclePlus from 'icons/CirclePlus'
 
 import { rgba } from 'styles/helpers'
 
-const PlusWrapper = styled(Tabbable).attrs({
+const PlusWrapper = styled(Tabbable).attrs(() => ({
   p: 1,
   borderRadius: 1,
-})`
-  color: ${p => p.theme.colors.smoke};
+}))`
+  color: ${p => p.theme.colors.palette.text.shade80};
   &:hover {
-    color: ${p => p.theme.colors.dark};
+    color: ${p => p.theme.colors.palette.text.shade100};
   }
 
   &:focus {
@@ -31,7 +31,7 @@ export default class AddAccountButton extends PureComponent<{
   render() {
     const { onClick, tooltipText } = this.props
     return (
-      <Tooltip render={() => tooltipText}>
+      <Tooltip content={tooltipText}>
         <PlusWrapper onClick={onClick}>
           <IconCirclePlus size={16} data-e2e="menuAddAccount_button" />
         </PlusWrapper>

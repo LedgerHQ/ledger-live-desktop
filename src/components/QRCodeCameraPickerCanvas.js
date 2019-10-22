@@ -21,9 +21,9 @@ const CameraWrapper = styled.div`
   align-items: center;
   justify-content: space-evenly;
   background: #f9f9f9;
-  color: ${p => p.theme.colors.grey};
+  color: ${p => p.theme.colors.palette.text.shade60};
   overflow: hidden;
-  border: 1px solid ${p => p.theme.colors.fog};
+  border: 1px solid ${p => p.theme.colors.palette.divider};
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
 
   > div:nth-of-type(2) {
@@ -32,11 +32,11 @@ const CameraWrapper = styled.div`
     align-items: center;
     flex-grow: 1;
     p {
-      font-family: 'Open Sans';
+      font-family: 'Inter';
       font-weight: 600;
       padding: 12px 24px;
       font-size: 13px;
-      color: ${p => p.theme.colors.smoke};
+      color: ${p => p.theme.colors.palette.text.shade80};
     }
   }
 `
@@ -64,7 +64,7 @@ const Close = styled.div`
   align-self: flex-end;
   margin-right: 12px;
   margin-top: 12px;
-  color: ${p => p.theme.colors.fog};
+  color: ${p => p.theme.colors.palette.divider};
 `
 export default class QRCodeCameraPickerCanvas extends PureComponent<
   {
@@ -263,8 +263,8 @@ export default class QRCodeCameraPickerCanvas extends PureComponent<
       </CameraWrapper>
     ) : (
       <CameraWrapper width={width} height={height}>
-        <Camera innerRef={this._onMainRef} dpr={dpr} width={dpr * width} height={dpr * height} />
-        <Overlay innerRef={this._onSecondRef} dpr={dpr} width={dpr * width} height={dpr * height} />
+        <Camera ref={this._onMainRef} dpr={dpr} width={dpr * width} height={dpr * height} />
+        <Overlay ref={this._onSecondRef} dpr={dpr} width={dpr * width} height={dpr * height} />
       </CameraWrapper>
     )
   }

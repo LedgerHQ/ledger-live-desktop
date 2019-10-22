@@ -26,9 +26,9 @@ import ActivityIndicator from './ActivityIndicator'
 import ItemContainer from './ItemContainer'
 import Breadcrumb from './Breadcrumb'
 
-const Container = styled(Box).attrs({
+const Container = styled(Box).attrs(() => ({
   px: 6,
-})`
+}))`
   height: ${p => p.theme.sizes.topBarHeight}px;
   position: absolute;
   left: 0;
@@ -37,19 +37,19 @@ const Container = styled(Box).attrs({
   z-index: 20;
 `
 
-const Inner = styled(Box).attrs({
+const Inner = styled(Box).attrs(() => ({
   horizontal: true,
   grow: true,
   flow: 4,
   align: 'center',
-})``
+}))``
 
 const Bar = styled.div`
   margin-left: 5px;
   margin-right: 5px;
   height: 15px;
   width: 1px;
-  background: ${p => p.theme.colors.fog};
+  background: ${p => p.theme.colors.palette.divider};
 `
 
 const mapStateToProps = state => ({
@@ -97,7 +97,7 @@ class TopBar extends PureComponent<Props> {
     const { hasPassword, hasAccounts, t } = this.props
 
     return (
-      <Container bg="lightGrey" color="graphite">
+      <Container bg="palette.background.default" color="palette.text.shade80">
         <Inner>
           <Box grow horizontal justifyContent="space-between">
             <Breadcrumb />
@@ -111,8 +111,12 @@ class TopBar extends PureComponent<Props> {
                   </Box>
                 </Fragment>
               )}
-              <Tooltip render={() => t('settings.title')} data-e2e="setting_button">
-                <ItemContainer isInteractive onClick={this.navigateToSettings}>
+              <Tooltip content={t('settings.title')} placement="bottom">
+                <ItemContainer
+                  data-e2e="setting_button"
+                  isInteractive
+                  onClick={this.navigateToSettings}
+                >
                   <IconSettings size={16} />
                 </ItemContainer>
               </Tooltip>
@@ -121,7 +125,7 @@ class TopBar extends PureComponent<Props> {
                   <Box justifyContent="center">
                     <Bar />
                   </Box>
-                  <Tooltip render={() => t('common.lock')}>
+                  <Tooltip content={t('common.lock')}>
                     <ItemContainer isInteractive justifyContent="center" onClick={this.handleLock}>
                       <IconLock size={16} />
                     </ItemContainer>
@@ -139,7 +143,7 @@ class TopBar extends PureComponent<Props> {
 
 export const SeparatorBar = styled.div`
   height: 1px;
-  border-bottom: 1px solid ${p => p.theme.colors.fog};
+  border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
 `
 
 export default compose(

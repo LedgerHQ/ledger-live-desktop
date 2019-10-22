@@ -46,9 +46,9 @@ import ManagerApp, { Container as FakeManagerAppContainer } from './ManagerApp'
 import AppSearchBar from './AppSearchBar'
 import NoItemPlaceholder from './NoItemPlaceholder'
 
-const List = styled(Box).attrs({
+const List = styled(Box).attrs(() => ({
   horizontal: true,
-})`
+}))`
   flex-wrap: wrap;
 
   > * {
@@ -67,7 +67,7 @@ const List = styled(Box).attrs({
   }
 `
 
-const IconWrapper = styled(Box).attrs({})`
+const IconWrapper = styled(Box)`
   position: relative;
 `
 
@@ -78,13 +78,13 @@ const AppIcon = styled.img`
   pointer-events: none;
 `
 
-const AppCheck = styled(Box).attrs({
+const AppCheck = styled(Box).attrs(() => ({
   align: 'center',
   justify: 'center',
-})`
+}))`
   color: ${({ theme }) => theme.colors.positiveGreen};
   border-radius: 24px;
-  border: 4px solid white;
+  border: 4px solid ${p => p.theme.colors.palette.background.paper};
   position: absolute;
   top: -18px;
   right: -12px;
@@ -95,7 +95,7 @@ const ICONS_FALLBACK = {
 }
 
 const CATALOG_INFO_ICON = (
-  <Box color="grey">
+  <Box color="palette.text.shade60">
     <IconInfoCircle size={12} />
   </Box>
 )
@@ -138,7 +138,7 @@ const canHandleInstall = app =>
 
 const LoadingApp = () => (
   <FakeManagerAppContainer noShadow align="center" justify="center" style={{ height: 90 }}>
-    <Spinner size={16} color="rgba(0, 0, 0, 0.3)" />
+    <Spinner size={16} color="palette.text.shade40" />
   </FakeManagerAppContainer>
 )
 
@@ -277,16 +277,16 @@ class AppsList extends PureComponent<Props, State> {
     return ['busy', 'idle'].includes(status) ? (
       <Box grow align="center" justify="center">
         {isInstalling ? (
-          <Box color="grey" grow align="center" mb={5}>
+          <Box color="palette.text.shade60" grow align="center" mb={5}>
             <Update size={30} />
           </Box>
         ) : (
-          <Box color="grey" grow align="center" mb={5}>
+          <Box color="palette.text.shade60" grow align="center" mb={5}>
             <Trash size={30} />
           </Box>
         )}
         {app ? (
-          <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
+          <Text ff="Inter|Regular" fontSize={6} color="palette.text.shade100">
             {mode !== 'home' ? t(`manager.apps.${mode}`, { app: app.name || '' }) : null}
           </Text>
         ) : null}
@@ -307,20 +307,20 @@ class AppsList extends PureComponent<Props, State> {
             <ExclamationCircleThin size={44} />
           </Box>
           <Box
-            color="dark"
+            color="palette.text.shade100"
             mt={4}
             fontSize={6}
-            ff="Museo Sans|Regular"
+            ff="Inter|Regular"
             textAlign="center"
             style={{ maxWidth: 350 }}
           >
             <TranslatedError error={error} field="title" />
           </Box>
           <Box
-            color="graphite"
+            color="palette.text.shade80"
             mt={2}
             fontSize={4}
-            ff="Open Sans"
+            ff="Inter"
             textAlign="center"
             style={{ maxWidth: 350 }}
           >
@@ -337,10 +337,10 @@ class AppsList extends PureComponent<Props, State> {
           <AppIcon src={manager.getIconUrl(app ? app.icon : '')} />
         </IconWrapper>
         <Box
-          color="dark"
+          color="palette.text.shade100"
           mt={4}
           fontSize={6}
-          ff="Museo Sans|Regular"
+          ff="Inter|Regular"
           textAlign="center"
           style={{ maxWidth: 350 }}
         >
@@ -359,10 +359,10 @@ class AppsList extends PureComponent<Props, State> {
         </Box>
         {app && app.currency && isInstalling ? (
           <Box
-            color="smoke"
+            color="palette.text.shade80"
             mt={2}
             fontSize={4}
-            ff="Open Sans|Regular"
+            ff="Inter|Regular"
             textAlign="center"
             style={{ maxWidth: 350 }}
           >
@@ -499,23 +499,30 @@ class AppsList extends PureComponent<Props, State> {
     )
   }
 
-  renderTooltip = () => {
-    const { t } = this.props
-    return (
-      <Box ff="Open Sans|SemiBold" fontSize={2}>
-        {t('manager.apps.help')}
-      </Box>
-    )
-  }
-
   render() {
     const { t } = this.props
 
     return (
       <Box>
-        <Box mb={4} color="dark" ff="Museo Sans" fontSize={5} flow={2} horizontal align="center">
+        <Box
+          mb={4}
+          color="palette.text.shade100"
+          ff="Inter"
+          fontSize={5}
+          flow={2}
+          horizontal
+          align="center"
+        >
           <span>{t('manager.apps.all')}</span>
-          <Tooltip render={this.renderTooltip}>{CATALOG_INFO_ICON}</Tooltip>
+          <Tooltip
+            content={
+              <Box ff="Inter|SemiBold" fontSize={2}>
+                {t('manager.apps.help')}
+              </Box>
+            }
+          >
+            {CATALOG_INFO_ICON}
+          </Tooltip>
         </Box>
         {this.renderList()}
       </Box>

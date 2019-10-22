@@ -105,6 +105,7 @@ const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
         alignSelf: 'center',
         justifyContent: 'flex-end',
         textAlign: 'center',
+        cursor: 'pointer',
       }}
     >
       <Tag to="/settings/experimental">
@@ -124,18 +125,18 @@ const Tag = styled(Link)`
   justify-self: flex-end;
   justify-content: center;
   align-items: center;
-  font-family: 'Open Sans';
+  font-family: 'Inter';
   font-weight: bold;
   font-size: 10px;
   padding: 2px 8px;
   min-height: 32px;
   border-radius: 4px;
-  color: ${p => p.theme.colors.dark};
-  background-color: ${p => p.theme.colors.lightGrey};
+  color: ${p => p.theme.colors.palette.text.shade100};
+  background-color: ${p => p.theme.colors.palette.background.default};
   text-decoration: none;
 
   &:hover {
-    background-color: ${p => darken(p.theme.colors.lightGrey, 0.05)};
+    background-color: ${p => darken(p.theme.colors.palette.action.hover, 0.05)};
     border: solid 1px ${p => p.theme.colors.wallet};
   }
 `
@@ -143,10 +144,10 @@ const Tag = styled(Link)`
 const collapserSize = 24
 const collapsedWidth = 15 * 4 + 16 // 15 * 4 margins + 16 icon size
 
-const Collapser = styled(Box).attrs({
+const Collapser = styled(Box).attrs(() => ({
   alignItems: 'center',
   justifyContent: 'center',
-})`
+}))`
   position: absolute;
   top: ${58 - collapserSize / 2}px;
   left: ${p => (p.collapsed ? collapsedWidth : MAIN_SIDEBAR_WIDTH) - collapserSize / 2}px;
@@ -156,9 +157,9 @@ const Collapser = styled(Box).attrs({
 
   cursor: pointer;
   border-radius: 50%;
-  background: ${p => p.theme.colors.white};
-  color: ${p => p.theme.colors.grey};
-  border-color: ${p => p.theme.colors.fog};
+  background: ${p => p.theme.colors.palette.background.paper};
+  color: ${p => p.theme.colors.palette.text.shade80};
+  border-color: ${p => p.theme.colors.palette.divider};
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
   border: 1px solid;
   transition: all 0.5s;
@@ -178,11 +179,11 @@ const Collapser = styled(Box).attrs({
   }
 `
 
-const Separator = styled(Box).attrs({
+const Separator = styled(Box).attrs(() => ({
   mx: 4,
-})`
+}))`
   height: 1px;
-  background: ${p => p.theme.colors.fog};
+  background: ${p => p.theme.colors.palette.divider};
 `
 
 const sideBarTransitionStyles = {
@@ -203,10 +204,10 @@ const disableTransitions = () =>
 
 const sideBarTransitionSpeed = 500
 
-const SideBar = styled(Box).attrs({
+const SideBar = styled(Box).attrs(() => ({
   relative: true,
-})`
-  background-color: ${p => p.theme.colors.white};
+}))`
+  background-color: ${p => p.theme.colors.palette.background.paper};
   transition: width ${sideBarTransitionSpeed}ms;
   will-change: width;
   transform: translate3d(0, 0, 10);

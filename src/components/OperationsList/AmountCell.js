@@ -8,13 +8,15 @@ import Box from 'components/base/Box'
 import CounterValue from 'components/CounterValue'
 import FormattedVal from 'components/base/FormattedVal'
 
-const Cell = styled(Box).attrs({
+const Cell = styled(Box).attrs(() => ({
   px: 4,
   horizontal: false,
   alignItems: 'flex-end',
-})`
+}))`
   width: 150px;
   text-align: right;
+  justify-content: space-between;
+  height: 32px;
 `
 
 type Props = {
@@ -35,10 +37,10 @@ class AmountCell extends PureComponent<Props> {
           showCode
           fontSize={4}
           alwaysShowSign
-          color={amount.isNegative() ? 'smoke' : undefined}
+          color={amount.isNegative() ? 'palette.text.shade80' : undefined}
         />
         <CounterValue
-          color="grey"
+          color="palette.text.shade60"
           fontSize={3}
           alwaysShowSign
           date={operation.date}

@@ -8,15 +8,15 @@ import noop from 'lodash/noop'
 
 import Box from 'components/base/Box'
 
-const Container = styled(Box).attrs({
+const Container = styled(Box).attrs(() => ({
   horizontal: true,
   flow: 1,
   alignItems: 'center',
   justifyContent: 'center',
   fontSize: 4,
-  ff: 'Rubik',
-  color: 'smoke',
-})`
+  ff: 'Inter',
+  color: 'palette.text.shade80',
+}))`
   background-color: rgba(100, 144, 241, 0.1);
   border-radius: 12px;
   display: inline-flex;
@@ -24,22 +24,22 @@ const Container = styled(Box).attrs({
   padding: 0 3px;
 `
 
-const Btn = styled(Box).attrs({
-  bg: p => (p.disabled ? 'rgba(100, 144, 241, 0.5)' : 'wallet'),
-  color: 'white',
+const Btn = styled(Box).attrs(p => ({
+  bg: p.disabled ? 'rgba(100, 144, 241, 0.5)' : 'wallet',
+  color: 'palette.background.paper',
   alignItems: 'center',
   justifyContent: 'center',
-})`
+}))`
   border-radius: 50%;
   cursor: ${p => (p.disabled ? 'default' : 'pointer')};
   height: 18px;
   width: 18px;
 `
 
-const Num = styled(Box).attrs({
+const Num = styled(Box).attrs(() => ({
   alignItems: 'center',
   justifyContent: 'center',
-})`
+}))`
   min-width: 20px;
 `
 

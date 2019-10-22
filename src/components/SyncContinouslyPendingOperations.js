@@ -31,7 +31,7 @@ class SyncContPendingOpsConnected extends Component<{
     const { sync, accounts, priority, interval } = this.props
     setTimeout(this.check, interval)
     if (accounts.length > 0) {
-      logger.log(`SyncContinouslyPendingOperations: found ${accounts.length} accounts`, accounts)
+      logger.log(`SyncContinouslyPendingOperations: found ${accounts.length} accounts`)
       sync({
         type: 'SYNC_SOME_ACCOUNTS',
         accountIds: accounts.map(a => a.id),

@@ -11,20 +11,20 @@ import IconCheckFull from 'icons/CheckFull'
 import { CurrencyCircleIcon } from '../../../base/CurrencyBadge'
 import type { StepProps } from '../index'
 
-const Title = styled(Box).attrs({
-  ff: 'Museo Sans',
+const Title = styled(Box).attrs(() => ({
+  ff: 'Inter',
   fontSize: 5,
   mt: 2,
-  color: 'dark',
-})`
+  color: 'palette.text.shade100',
+}))`
   text-align: center;
 `
 
-const Text = styled(Box).attrs({
-  ff: 'Open Sans',
+const Text = styled(Box).attrs(() => ({
+  ff: 'Inter',
   fontSize: 4,
   mt: 2,
-})`
+}))`
   text-align: center;
 `
 

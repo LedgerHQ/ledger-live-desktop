@@ -27,7 +27,7 @@ export const RateRowWrapper = styled.div`
   height: 80px;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid ${p => p.theme.colors.lightFog};
+  border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
   &:last-of-type {
     border: none;
   }
@@ -64,7 +64,7 @@ const NoDataContainer = styled(Box)`
 `
 
 const NoData = () => (
-  <NoDataContainer ff="Open Sans|SemiBold" color="gray" fontSize={4}>
+  <NoDataContainer ff="Inter|SemiBold" color="palette.text.shade40" fontSize={4}>
     <Trans style={{ whiteSpace: 'nowrap' }} i18nKey="settings.rates.noCounterValue" />
   </NoDataContainer>
 )
@@ -84,7 +84,13 @@ class RateRow extends PureComponent<Props> {
     const { from, to, exchange, timeRange } = this.props
     return (
       <RateRowWrapper>
-        <Box ff="Museo Sans|Regular" horizontal alignItems="center" color="dark" fontSize={4}>
+        <Box
+          ff="Inter|Regular"
+          horizontal
+          alignItems="center"
+          color="palette.text.shade100"
+          fontSize={4}
+        >
           <RateTypeBar currencyType={to.type} />
           <Trans i18nKey="settings.rates.fromTo" values={{ from: from.ticker, to: to.ticker }} />
         </Box>
@@ -93,7 +99,7 @@ class RateRow extends PureComponent<Props> {
             withEquality
             from={from}
             to={to}
-            color="graphite"
+            color="palette.text.shade80"
             fontSize={3}
             placeholder={<NoData />}
           />

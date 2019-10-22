@@ -1,11 +1,10 @@
 // @flow
 
 import React, { Fragment } from 'react'
-import styled from 'styled-components'
+import styled, { withTheme } from 'styled-components'
 import { Trans } from 'react-i18next'
 
 import { MODAL_OPERATION_DETAILS } from 'config/constants'
-import { colors } from 'styles/theme'
 import { multiline } from 'styles/helpers'
 
 import TrackPage from 'analytics/TrackPage'
@@ -19,60 +18,61 @@ import IconCheckCircle from 'icons/CheckCircle'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 import IconTriangleWarning from 'icons/TriangleWarning'
 
-import type { StepProps } from '../index'
+import type { StepProps } from '../types'
 
-const Container = styled(Box).attrs({
+const Container = styled(Box).attrs(() => ({
   alignItems: 'center',
   grow: true,
-  color: 'dark',
-})`
+  color: 'palette.text.shade100',
+}))`
   justify-content: ${p => (p.shouldSpace ? 'space-between' : 'center')};
   min-height: 220px;
 `
 
-const Title = styled(Box).attrs({
-  ff: 'Museo Sans',
+const Title = styled(Box).attrs(() => ({
+  ff: 'Inter',
   fontSize: 5,
   mt: 2,
-})`
+}))`
   text-align: center;
   word-break: break-word;
 `
 
-const Text = styled(Box).attrs({
-  ff: 'Open Sans',
+const Text = styled(Box).attrs(() => ({
+  ff: 'Inter',
   fontSize: 4,
   mt: 2,
-})`
+}))`
   text-align: center;
 `
 
-const Disclaimer = styled(Box).attrs({
+const Disclaimer = styled(Box).attrs(() => ({
   horizontal: true,
   align: 'center',
-  color: 'white',
+  color: 'palette.background.paper',
   borderRadius: 1,
   p: 3,
   mb: 5,
-})`
+}))`
   width: 100%;
   background-color: ${p => p.theme.colors.lightRed};
   color: ${p => p.theme.colors.alertRed};
 `
 
-export default function StepConfirmation({
+function StepConfirmation({
   account,
   t,
   optimisticOperation,
   error,
   signed,
-}: StepProps<*>) {
+  theme,
+}: StepProps & { theme: * }) {
   const Icon = optimisticOperation ? IconCheckCircle : error ? IconExclamationCircleThin : Spinner
   const iconColor = optimisticOperation
-    ? colors.positiveGreen
+    ? theme.colors.positiveGreen
     : error
-    ? colors.alertRed
-    : colors.grey
+    ? theme.colors.alertRed
+    : theme.colors.palette.text.shade60
 
   const broadcastError = error && signed
 
@@ -84,7 +84,7 @@ export default function StepConfirmation({
           <Box mr={3}>
             <IconTriangleWarning height={16} width={16} />
           </Box>
-          <Box style={{ display: 'block' }} ff="Open Sans|SemiBold" fontSize={3} horizontal shrink>
+          <Box style={{ display: 'block' }} ff="Inter|SemiBold" fontSize={3} horizontal shrink>
             <Trans i18nKey="send.steps.confirmation.broadcastError" />
           </Box>
         </Disclaimer>
@@ -102,7 +102,7 @@ export default function StepConfirmation({
           <Trans i18nKey="send.steps.confirmation.pending.title" />
         )}
       </Title>
-      <Text style={{ userSelect: 'text' }} color="smoke">
+      <Text style={{ userSelect: 'text' }} color="palette.text.shade80">
         {optimisticOperation ? (
           multiline(t('send.steps.confirmation.success.text'))
         ) : error ? (
@@ -123,7 +123,7 @@ export function StepConfirmationFooter({
   error,
   openModal,
   closeModal,
-}: StepProps<*>) {
+}: StepProps) {
   const concernedOperation = optimisticOperation
     ? optimisticOperation.subOperations && optimisticOperation.subOperations.length > 0
       ? optimisticOperation.subOperations[0]
@@ -162,3 +162,5 @@ export function StepConfirmationFooter({
     </Fragment>
   )
 }
+
+export default withTheme(StepConfirmation)

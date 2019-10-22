@@ -98,8 +98,12 @@
     }
   },
   "fees": {
+    "custom": "Custom",
+    "fast": "Fast",
+    "high": "High",
+    "low": "Low",
     "slow": "Slow",
-    "fast": "Fast"
+    "standard": "Standard"
   },
   "sidebar": {
     "menu": "메뉴",
@@ -169,7 +173,7 @@
       "star": "Star",
       "receive": "Receive",
       "send": "Send",
-      "edit": "Edit Account"
+      "edit": "Edit account"
     }
   },
   "banners": {
@@ -226,23 +230,24 @@
     "title": "암호화 자산 구입",
     "desc": "저희가 선택한 몇 가지 서비스를 사용해 보십시오.",
     "visitWebsite": "웹 사이트 방문",
-    "btcdirect": "유럽 최고의 암호 화폐 브로커를 통해 암호 화폐를 쉽게 구입하고 판매하십시오. 무료로 가입하시고 몇 분 내로 코인을 받으십시오! 저희는 Trustpilot에서 8.7점의 사용자 평가를 받았습니다.",
+    "btcdirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot.",
     "changelly": "Changelly는 100개 이상의 코인과 토큰이 상장되어 있는 인스턴트 암호화 자산 거래소입니다.",
-    "changenow": "ChangeNOW는 수탁이 없는 즉시 교환 서비스 중 하나입니다.",
+    "changenow": "ChangeNOW is one of the leading custody-free instant exchange services.",
     "coinberry": "Coinberry는 은행보다 우수한 보안과 동급 최고의 사용자 인터페이스 및 수수료 없는 입출금으로 캐나다에서 가장 신뢰할 수 있는 암호화 플랫폼입니다. 캐나다 시민이 아닌 경우 조기에 액세스하려면 사전 등록을 하셔야 합니다.",
     "coinhouse": "Coinhouse는 암호화 자산을 분석, 취득, 판매 및 안전하게 저장하려는 개인 및 기관 투자자를 위한 신뢰할 수 있는 플랫폼입니다.",
     "coinmama": "Coinmama는 세계 어느 곳에서나 디지털 자산을 빠르고 안전하게 구입할 수 있게 해주는 금융 서비스입니다.",
     "genesis": "Genesis는 유동성을 제공하고 Bitcoin, Bitcoin cash, Ethereum, Ethereum Classic, Litecoin, XRP 등의 디지털 통화에 대한 대출을 실시하는 기관 거래 회사입니다.",
     "kyberswap": "빠르고 간단하며 안전한 토큰 교환 플랫폼입니다. Kyber Network의 온체인(on-chain) 유동성 프로토콜을 통해 제공됩니다.",
-    "luno": "Luno는 Bitcoin 및 Ethereum과 같은 암호화 통화를 안전하고 쉽게 구입, 저장 및 학습할 수 있게 해줍니다.",
-    "paybis": "PayBis에서는 신용 카드로 Bitcoin을 안전하고 쉽게 구입하실 수 있습니다. 이 서비스는 미국, 캐나다, 독일, 러시아 및 사우디 아라비아에서 운영됩니다.",
+    "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum.",
+    "paybis": "Paybis.com is one of the most trusted cryptocurrency brokers worldwide since 2014, customer satisfaction - 4.7/5 via Trustpilot. Visa/Master cards, Bank Transfers, Skrill/Neteller accepted. 24/7 online customer support.",
     "shapeshift": "ShapeShift는 사용자가 디지털 자산을 구입 및 판매할 수 있는 온라인 마켓 플레이스입니다. 전 세계에서 디지털 자산을 구입 및 판매할 수 있는 빠르고 안전한 방법으로, 오랜 가입 절차, 거래 상대방 위험 및 마찰이 없습니다.",
     "simplex": "Simplex는 사기로부터 자유로운 신용 카드 결제 솔루션을 제공하는 EU 허가 금융 기관입니다.",
     "taxtoken": "미국 시민을 위한 자동화된 암호 화폐 세금 및 비용 기반 소프트웨어입니다.",
     "thorswap": "ThorSwap은 아토믹 스왑(atomic swap) 기술을 통해 제공되는 즉각적이고 안전하며 공정한 암호 자산 시장입니다. 등록이 필요 없고 소액 거래는 KYC가 없는, 거래를 시작하는 가장 편리한 방법입니다.",
     "bitpanda": "Bitpanda는 Bitcoin, Ethereum, IOTA 등을 매매할 수 있는 유럽 최고의 소매 브로커입니다. 신용 카드, SOFORT-Transfer, NETELLER 및 기타 옵션을 사용하여 입급하실 수 있습니다.",
     "exmo": "2013년에 설립되어 런던, 키예프, 바르셀로나 및 모스코바에 위치하고 있는 EXMO는 동유럽 최고의 거래소이며 볼륨 및 유동성에 있어서 세계 최대의 글로벌 거래소 중 하나입니다.",
-    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure and intuitive platform to buy and sell Bitcoin, Litecoin, Ethereum, XRP and other digital assets. Other key features include advanced trading, free deposits, and an institutional-grade custody solution via Ledger Vault."
+    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure and intuitive platform to buy and sell Bitcoin, Litecoin, Ethereum, XRP and other digital assets. Other key features include advanced trading, free deposits, and an institutional-grade custody solution via Ledger Vault.",
+    "voyager": "Love your Crypto Journey with Voyager. A licensed crypto broker with commission-free trading of 20+ cryptocurrencies."
   },
   "genuinecheck": {
     "modal": {
@@ -255,7 +260,7 @@
     "cta": "Add token",
     "placeholder": "To add tokens, simply send them to your Ethereum address.",
     "link": "Learn more",
-    "seeTokens": "See tokens ({{tokenCount}})",
+    "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "tooltip": "Token from",
     "countTooltip": "1 Token",
@@ -400,12 +405,20 @@
     },
     "firmware": {
       "installed": "펌웨어 버전 {{version}}",
-      "update": "업데이트",
+      "updateLater": "Update later",
+      "seedReady": "I have my recovery phrase",
+      "dontHaveSeed": "Don't have your recovery phrase?",
+      "followTheGuide": "Follow our step by step update guide",
+      "removeApps": "Uninstall all apps before updating",
+      "update": "Firmware update",
       "latest": "펌웨어 버전 {{version}}을(를) 사용할 수 있습니다.",
+      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible.",
       "disclaimerTitle": "<1><0>펌웨어 버전 {{version}}</0></1>을(를) 설치하려합니다.",
       "disclaimerAppDelete": "일부 앱을 제거하여 공간을 확보하십시오. 그렇게 해도 귀하의 암호화 자산에는 영향을 미치지 않습니다.",
       "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
-      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
+      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded",
+      "appsAutoUninstallTitle": "Apps will be uninstalled",
+      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -530,24 +543,22 @@
   "distribution": {
     "asset": "Asset",
     "price": "Price",
-    "distribution": "Distribution",
+    "distribution": "Allocation",
     "amount": "Amount",
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Asset distribution ({{count}})",
-    "notice": "You can now click on assets for more details!"
+    "header": "Asset allocation ({{count}})"
   },
   "accountDistribution": {
     "account": "Account",
     "price": "Price",
-    "distribution": "Distribution",
+    "distribution": "Allocation",
     "amount": "Amount",
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
-    "header": "Account distribution ({{count}})",
-    "notice": "You can right-click on an account to see its options!"
+    "header": "Account allocation ({{count}})"
   },
   "asset": {
     "notice": "Summary of all {{currency}} accounts"
@@ -588,6 +599,8 @@
       "desc": "Ledger Live의 일반 설정을 구성합니다.",
       "language": "표시 언어",
       "languageDesc": "Ledger Live에 표시되는 언어를 설정합니다.",
+      "theme": "Theme",
+      "themeDesc": "Select the theme.",
       "counterValue": "반대 가치(Countervalue)",
       "counterValueDesc": "잔액 및 작업 옆에 표시할 통화를 선택합니다.",
       "exchange": "환율 공급자",
@@ -606,9 +619,9 @@
       "confirmationsNbDesc": "트랜잭션이 확인된 것으로 표시되는 네트워크 확인 수를 설정합니다."
     },
     "rates": {
-      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
+      "desc": "Here are all the rates that are used to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} to {{to}}",
-      "noCounterValue": "We have no data for this trading pair.",
+      "noCounterValue": "We have no data for this trading pair",
       "cryptoToFiat": "Crypto to fiat",
       "cryptoToCrypto": "Crypto to Crypto",
       "rate": "Rate",
@@ -759,6 +772,12 @@
   },
   "language": {
     "system": "시스템 언어 사용"
+  },
+  "theme": {
+    "system": "Use system theme",
+    "light": "Light",
+    "dusk": "Dusk",
+    "dark": "Dark"
   },
   "onboarding": {
     "breadcrumb": {
@@ -990,10 +1009,6 @@
       "title": "Account not supported.",
       "description": "Please retry or contact Support ({{reason}})"
     },
-    "BtcUnmatchedApp": {
-      "title": "잘못된 앱입니다.",
-      "description": "장치에서 ‘{{managerAppName}}’ 앱을 여십시오."
-    },
     "NoAccessToCamera": {
       "title": "Please ensure your system has a camera, that it's not in use by another application and that Ledger Live has permission to use it.",
       "description": ""
@@ -1076,9 +1091,13 @@
       "title": "죄송합니다. 이미 설치되었습니다.",
       "description": "어떤 앱이 이미 설치되어 있는지 장치를 확인하십시오."
     },
-    "ManagerAppRelyOnBTC": {
-      "title": "Bitcoin 및 Ethereum 앱이 필요합니다.",
-      "description": "Bitcoin 및 Ethereum 앱을 먼저 설치하십시오"
+    "ManagerAppDepInstallRequired": {
+      "title": "{{dependency}} app required",
+      "description": "If you already have the {{dependency}} app installed, please reinstall it to get the latest version"
+    },
+    "ManagerAppDepUninstallRequired": {
+      "title": "Sorry, this app is required",
+      "description": "You must first uninstall all apps that require the {{appName}} app"
     },
     "ManagerDeviceLocked": {
       "title": "장치를 잠금 해제하십시오.",
@@ -1211,6 +1230,9 @@
     },
     "FeeRequired": {
       "title": "수수료가 필요합니다."
+    },
+    "GasLessThanEstimate": {
+      "title": "This may be too low, please increase"
     },
     "UnknownMCU": {
       "title": "알 수 없는 MCU 버전",

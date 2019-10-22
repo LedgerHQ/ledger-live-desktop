@@ -20,8 +20,8 @@ const Container = styled(Box)`
   cursor: pointer;
   height: 36px;
   width: 36px;
-  color: white;
-  background-color: #6490f1;
+  color: ${p => p.theme.colors.palette.primary.contrastText};
+  background-color: ${p => p.theme.colors.palette.primary.main};
   transition: all 0.5s;
   opacity: ${p => (p.visible ? 1 : 0)};
   pointer-events: ${p => (!p.visible ? 'none' : 'initial')};

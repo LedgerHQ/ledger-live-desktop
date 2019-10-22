@@ -32,10 +32,6 @@ Ledger Live is an hybrid desktop application built with Electron, React, Redux, 
 - [Python](https://www.python.org/) v2.7.10 (used by [node-gyp](https://github.com/nodejs/node-gyp) to build native addons)
 - You will also need a C++ compiler
 
-### Optional
-
-- In the application we use `Museo Sans` font. To include it in the app, you need to have a zip file `museosans.zip` which you should extract and place inside the `static/fonts/museosans` directory
-
 ## Install
 
 ```bash

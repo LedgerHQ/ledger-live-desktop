@@ -9,4 +9,4 @@ import Bar from 'components/base/Bar'
 
 const stories = storiesOf('Components/base', module)
 
-stories.add('Bar', () => <Bar size={number('size', 1)} color="grey" />)
+stories.add('Bar', () => <Bar size={number('size', 1)} color="palette.text.shade60" />)

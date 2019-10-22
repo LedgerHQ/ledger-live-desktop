@@ -35,7 +35,7 @@ class ListBody extends PureComponent<Props> {
             account={account}
             search={search}
             parentAccount={
-              account.type === 'TokenAccount' ? lookupParentAccount(account.parentId) : null
+              account.type !== 'Account' ? lookupParentAccount(account.parentId) : null
             }
             range={range}
             onClick={onAccountClick}
@@ -49,7 +49,7 @@ class ListBody extends PureComponent<Props> {
             account={account}
             search={search}
             parentAccount={
-              account.type === 'TokenAccount' ? lookupParentAccount(account.parentId) : null
+              account.type !== 'Account' ? lookupParentAccount(account.parentId) : null
             }
             range={range}
             onClick={onAccountClick}

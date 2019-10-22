@@ -8,13 +8,21 @@ export const radii = [0, 4]
 export const shadows = ['0 4px 8px 0 rgba(0, 0, 0, 0.03)']
 
 export const fontFamilies = {
-  'Open Sans': {
+  Inter: {
+    ExtraLight: {
+      weight: 100,
+      style: 'normal',
+    },
     Light: {
       weight: 300,
       style: 'normal',
     },
     Regular: {
       weight: 400,
+      style: 'normal',
+    },
+    Medium: {
+      weight: 500,
       style: 'normal',
     },
     SemiBold: {
@@ -30,36 +38,6 @@ export const fontFamilies = {
       style: 'normal',
     },
   },
-
-  'Museo Sans': {
-    ExtraLight: {
-      weight: 100,
-      style: 'normal',
-    },
-    Light: {
-      weight: 300,
-      style: 'normal',
-    },
-    Regular: {
-      weight: 500,
-      style: 'normal',
-    },
-    Bold: {
-      weight: 700,
-      style: 'normal',
-    },
-    ExtraBold: {
-      weight: 900,
-      style: 'normal',
-    },
-  },
-
-  Rubik: {
-    Regular: {
-      weight: 500,
-      style: 'normal',
-    },
-  },
 }
 
 export const colors = {
@@ -72,6 +50,7 @@ export const colors = {
   warning: '#f57f17',
   black: '#000000',
   dark: '#142533',
+  separator: '#aaaaaa',
   fog: '#d8d8d8',
   graphite: '#767676',
   grey: '#999999',

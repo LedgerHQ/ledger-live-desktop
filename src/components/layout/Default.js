@@ -44,9 +44,9 @@ import SyncContinuouslyPendingOperations from '../SyncContinouslyPendingOperatio
 import HSMStatusBanner from '../HSMStatusBanner'
 import type { State } from '../../reducers'
 
-const Main = styled(GrowScroll).attrs({
+const Main = styled(GrowScroll).attrs(() => ({
   px: 6,
-})`
+}))`
   outline: none;
   padding-top: ${p => p.theme.sizes.topBarHeight + p.theme.space[6]}px;
 `
@@ -65,15 +65,13 @@ class Default extends Component<Props> {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.location !== prevProps.location) {
-      const canScroll =
-        this._scrollContainer &&
-        this._scrollContainer._scrollbar &&
-        this._scrollContainer._scrollbar.scrollTo
-      if (canScroll) {
-        // $FlowFixMe already checked this._scrollContainer
-        this._scrollContainer._scrollbar.scrollTo(0, 0)
-      }
+    if (
+      this.props.location !== prevProps.location &&
+      this.ref &&
+      this.ref.scrollContainer &&
+      this.ref.scrollContainer.scrollTo
+    ) {
+      this.ref.scrollContainer.scrollTo(0, 0)
     }
   }
 
@@ -89,10 +87,11 @@ class Default extends Component<Props> {
     }
   }
 
-  _scrollContainer = null
+  ref = null
 
   render() {
     const { visibleModals } = this.props
+
     return (
       <Fragment>
         <TriggerAppReady />
@@ -117,21 +116,21 @@ class Default extends Component<Props> {
 
             <div id="sticky-back-to-top-root" />
 
-            <Box grow horizontal bg="white">
+            <Box grow horizontal bg="palette.background.paper">
               <SideBar />
 
               <Box
                 className={'main-container'}
                 shrink
                 grow
-                bg="lightGrey"
-                color="grey"
+                bg="palette.background.default"
+                color="palette.text.shade60"
                 overflow="visible"
                 relative
               >
                 <HSMStatusBanner />
                 <TopBar />
-                <Main innerRef={n => (this._scrollContainer = n)} tabIndex={-1}>
+                <Main ref={n => (this.ref = n)} tabIndex={-1}>
                   <Switch>
                     <Route path="/" exact component={DashboardPage} />
                     <Route path="/settings" component={SettingsPage} />
@@ -140,7 +139,7 @@ class Default extends Component<Props> {
                     <Route path="/partners" component={PartnersPage} />
                     <Route path="/account/:parentId/:id" component={AccountPage} />
                     <Route path="/account/:id" component={AccountPage} />
-                    <Route path="/asset/:assetTicker" component={AssetPage} />
+                    <Route path="/asset/:assetId+" component={AssetPage} />
                   </Switch>
                 </Main>
               </Box>

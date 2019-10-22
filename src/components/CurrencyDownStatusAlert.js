@@ -18,16 +18,16 @@ type Props = {
   status: ?CurrencyStatus,
 }
 
-const CurrencyDownBox = styled(Box).attrs({
+const CurrencyDownBox = styled(Box).attrs(() => ({
   horizontal: true,
   align: 'center',
-  color: 'white',
+  color: 'palette.background.paper',
   borderRadius: 1,
   fontSize: 1,
   px: 4,
   py: 2,
   mb: 4,
-})`
+}))`
   background-color: ${p => (p.warning ? p.theme.colors.orange : p.theme.colors.alertRed)};
 `
 
@@ -52,7 +52,7 @@ class CurrencyDownStatusAlert extends PureComponent<Props> {
         <Box mr={2}>
           <IconTriangleWarning height={16} width={16} />
         </Box>
-        <Box style={{ display: 'block' }} ff="Open Sans|SemiBold" fontSize={3} horizontal shrink>
+        <Box style={{ display: 'block' }} ff="Inter|SemiBold" fontSize={3} horizontal shrink>
           {status.message}
           <Link onClick={this.onClick}>{t('common.learnMore')}</Link>
           <IconExternalLink size={12} />

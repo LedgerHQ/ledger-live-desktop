@@ -13,14 +13,20 @@ import LinkWithExternalIcon from 'components/base/LinkWithExternalIcon'
 import WarnBox from 'components/WarnBox'
 import Interactions from 'icons/device/interactions'
 
-import type { StepProps } from '../index'
+import type { StepProps } from '../types'
 
-const Container = styled(Box).attrs({ alignItems: 'center', fontSize: 4, pb: 4 })``
-const Info = styled(Box).attrs({ ff: 'Open Sans|SemiBold', color: 'dark', mt: 6, mb: 4, px: 5 })`
+const Container = styled(Box).attrs(() => ({ alignItems: 'center', fontSize: 4, pb: 4 }))``
+const Info = styled(Box).attrs(() => ({
+  ff: 'Inter|SemiBold',
+  color: 'palette.text.shade100',
+  mt: 6,
+  mb: 4,
+  px: 5,
+}))`
   text-align: center;
 `
 
-export default class StepVerification extends PureComponent<StepProps<*>> {
+export default class StepVerification extends PureComponent<StepProps> {
   componentDidMount() {
     this.signTransaction()
   }

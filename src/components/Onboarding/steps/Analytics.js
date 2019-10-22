@@ -93,7 +93,7 @@ class Analytics extends PureComponent<StepProps, State> {
                     <FakeLink
                       underline
                       fontSize={3}
-                      color="smoke"
+                      color="palette.text.shade80"
                       ml={2}
                       onClick={this.handleTechnicalDataModal}
                       data-e2e="analytics_techData_Link"
@@ -122,7 +122,7 @@ class Analytics extends PureComponent<StepProps, State> {
                     <FakeLink
                       style={{ textDecoration: 'underline' }}
                       fontSize={3}
-                      color="smoke"
+                      color="palette.text.shade80"
                       ml={2}
                       onClick={this.handleShareAnalyticsModal}
                       data-e2e="analytics_shareAnalytics_Link"
@@ -207,30 +207,30 @@ export default connect(
   mapDispatchToProps,
 )(Analytics)
 
-const MandatoryText = styled(Box).attrs({
-  ff: 'Open Sans|Regular',
+const MandatoryText = styled(Box).attrs(() => ({
+  ff: 'Inter|Regular',
   fontSize: 2,
   textAlign: 'left',
-  color: 'grey',
+  color: 'palette.text.shade60',
   mt: 1,
-})``
-export const AnalyticsText = styled(Box).attrs({
-  ff: 'Open Sans|Regular',
+}))``
+export const AnalyticsText = styled(Box).attrs(() => ({
+  ff: 'Inter|Regular',
   fontSize: 3,
   textAlign: 'left',
-  color: 'smoke',
-})`
+  color: 'palette.text.shade80',
+}))`
   max-width: 400px;
 `
-export const AnalyticsTitle = styled(Box).attrs({
-  ff: 'Open Sans|SemiBold',
+export const AnalyticsTitle = styled(Box).attrs(() => ({
+  ff: 'Inter|SemiBold',
   fontSize: 4,
   textAlign: 'left',
-})``
-const Container = styled(Box).attrs({
+}))``
+const Container = styled(Box).attrs(() => ({
   horizontal: true,
   p: 3,
-})`
+}))`
   width: 550px;
   justify-content: space-between;
 `

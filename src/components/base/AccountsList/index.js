@@ -77,8 +77,8 @@ class AccountsList extends Component<
             {title && (
               <Box
                 horizontal
-                ff="Open Sans|Bold"
-                color="dark"
+                ff="Inter|Bold"
+                color="palette.text.shade100"
                 fontSize={2}
                 textTransform="uppercase"
                 cursor={collapsible ? 'pointer' : undefined}
@@ -91,7 +91,7 @@ class AccountsList extends Component<
             {withToggleAll && (
               <FakeLink
                 ml="auto"
-                ff="Museo Sans|Regular"
+                ff="Inter|Regular"
                 onClick={isAllSelected ? this.onUnselectAll : this.onSelectAll}
                 fontSize={3}
                 style={{ lineHeight: '10px' }}
@@ -125,7 +125,7 @@ class AccountsList extends Component<
             ))}
           </Box>
         ) : emptyText ? (
-          <Box ff="Open Sans|Regular" fontSize={3}>
+          <Box ff="Inter|Regular" fontSize={3}>
             {emptyText}
           </Box>
         ) : null}

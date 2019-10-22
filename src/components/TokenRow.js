@@ -2,8 +2,9 @@
 
 import React, { PureComponent } from 'react'
 import Box from 'components/base/Box'
-import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/account'
+import type { Account, AccountLike } from '@ledgerhq/live-common/lib/types/account'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
+import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import { openModal } from 'reducers/modals'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
@@ -14,12 +15,12 @@ import Countervalue from './AccountsPage/AccountRowItem/Countervalue'
 import Star from './Stars/Star'
 
 type Props = {
-  account: TokenAccount,
+  account: AccountLike,
   nested?: boolean,
   disableRounding?: boolean,
   index: number,
   parentAccount: Account,
-  onClick: (Account | TokenAccount, ?Account) => void,
+  onClick: (AccountLike, ?Account) => void,
   range: PortfolioRange,
 }
 
@@ -28,7 +29,7 @@ const mapDispatchToProps = {
 }
 
 const TopLevelRow = styled(Box)`
-  background: #ffffff;
+  background: ${p => p.theme.colors.palette.background.paper};
   align-items: center;
   border-radius: 4px;
   border: 1px solid transparent;
@@ -40,7 +41,7 @@ const TopLevelRow = styled(Box)`
   margin-bottom: 9px;
   padding: 20px;
   :hover {
-    border-color: ${p => p.theme.colors.lightFog};
+    border-color: ${p => p.theme.colors.palette.text.shade40};
   }
 `
 
@@ -65,21 +66,15 @@ class TokenRow extends PureComponent<Props> {
   }
 
   render() {
-    const {
-      account,
-      account: { token },
-      range,
-      index,
-      nested,
-      disableRounding,
-    } = this.props
-    const unit = account.token.units[0]
+    const { account, range, index, nested, disableRounding } = this.props
+    const currency = getAccountCurrency(account)
+    const unit = currency.units[0]
     const Row = nested ? NestedRow : TopLevelRow
     return (
       <Row index={index} onClick={this.onClick}>
-        <Header nested={nested} account={account} name={token.name} />
+        <Header nested={nested} account={account} />
         <Balance unit={unit} balance={account.balance} disableRounding={disableRounding} />
-        <Countervalue account={account} currency={token} range={range} />
+        <Countervalue account={account} currency={currency} range={range} />
         <Delta account={account} range={range} />
         <Star accountId={account.id} />
       </Row>

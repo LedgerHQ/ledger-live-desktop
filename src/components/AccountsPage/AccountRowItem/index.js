@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Box from 'components/base/Box'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/account'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
-import { listTokenAccounts } from '@ledgerhq/live-common/lib/account/helpers'
+import { listSubAccounts } from '@ledgerhq/live-common/lib/account/helpers'
 import { Trans } from 'react-i18next'
 import Text from 'components/base/Text'
 import IconAngleDown from 'icons/AngleDown'
@@ -20,7 +20,7 @@ import Star from '../../Stars/Star'
 import AccountContextMenu from '../../ContextMenu/AccountContextMenu'
 
 const Row = styled(Box)`
-  background: #ffffff;
+  background: ${p => p.theme.colors.palette.background.paper};
   border-radius: 4px;
   border: 1px solid transparent;
   box-shadow: 0 4px 8px 0 #00000007;
@@ -35,7 +35,7 @@ const Row = styled(Box)`
   padding: 16px 20px;
   position: relative;
   :hover {
-    border-color: ${p => p.theme.colors.lightFog};
+    border-color: ${p => p.theme.colors.palette.text.shade40};
   }
 `
 
@@ -46,8 +46,8 @@ const RowContent = styled.div`
   flex-grow: 1;
   opacity: ${p => (p.disabled ? 0.3 : 1)};
   & * {
-    color: ${p => (p.disabled ? p.theme.colors.dark : 'auto')};
-    fill: ${p => (p.disabled ? p.theme.colors.dark : 'auto')};
+    color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : 'auto')};
+    fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : 'auto')};
   }
 `
 
@@ -64,7 +64,7 @@ const TokenContentWrapper = styled.div`
 
 const TokenBarIndicator = styled.div`
   width: 15px;
-  border-left: 1px solid ${p => p.theme.colors.lightFog};
+  border-left: 1px solid ${p => p.theme.colors.palette.divider};
   z-index: 2;
   margin-left: 9px;
   padding-left: 5px;
@@ -72,7 +72,7 @@ const TokenBarIndicator = styled.div`
   left: 0;
   height: 100%;
   &:hover {
-    border-color: ${p => p.theme.colors.grey};
+    border-color: ${p => p.theme.colors.palette.text.shade60};
   }
 `
 
@@ -82,8 +82,8 @@ const TokenShowMoreIndicator = styled.div`
   color: ${p => p.theme.colors.wallet};
   align-items: center;
   justify-content: center;
-  border-top: 1px solid ${p => p.theme.colors.lightFog};
-  background: white;
+  border-top: 1px solid ${p => p.theme.colors.palette.divider};
+  background: ${p => p.theme.colors.palette.background.paper};
   border-radius: 0px 0px 4px 4px;
   height: 32px;
   text-align: center;
@@ -127,7 +127,7 @@ class AccountRowItem extends PureComponent<Props, State> {
 
   static getDerivedStateFromProps(nextProps: Props) {
     const { account } = nextProps
-    if (account.tokenAccounts) {
+    if (account.subAccounts) {
       return {
         expanded: expandedStates[account.id] || !!nextProps.search,
       }
@@ -178,7 +178,7 @@ class AccountRowItem extends PureComponent<Props, State> {
       currency = account.currency
       unit = account.unit
       mainAccount = account
-      tokens = listTokenAccounts(account)
+      tokens = listSubAccounts(account)
       disabled = !matchesSearch(search, account)
       if (tokens) tokens = tokens.filter(t => matchesSearch(search, t))
     }
@@ -224,7 +224,7 @@ class AccountRowItem extends PureComponent<Props, State> {
           )}
           {showTokensIndicator && !disabled && tokens && (
             <TokenShowMoreIndicator expanded={expanded} onClick={this.toggleAccordion}>
-              <Text color="wallet" ff="Open Sans|SemiBold" fontSize={4}>
+              <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
                 <Trans
                   i18nKey={expanded ? 'tokensList.hideTokens' : 'tokensList.seeTokens'}
                   values={{ tokenCount: tokens.length }}

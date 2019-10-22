@@ -3,7 +3,7 @@
 import React from 'react'
 
 export default () => (
-  <svg width="26" height="31">
+  <svg width="27" height="31">
     <defs>
       <path id="a" d="M4 0h600a4 4 0 0 1 4 4v112a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z" />
       <mask id="b" width="608" height="120" x="0" y="0" fill="#fff">
@@ -32,23 +32,9 @@ export default () => (
       <path id="d" d="M13 30s13-4.426 13-14.016V4.795L13 0 0 4.795v11.189C0 25.574 13 30 13 30z" />
     </defs>
     <g fill="none" fillRule="evenodd" transform="translate(-567 -15)">
-      <use
-        fill="#F9F9F9"
-        fillOpacity=".5"
-        stroke="#D8D8D8"
-        strokeDasharray="3"
-        strokeWidth="2"
-        mask="url(#b)"
-        xlinkHref="#a"
-      />
       <g filter="url(#c)" transform="translate(567 15)">
         <g strokeLinecap="round" strokeLinejoin="round">
           <use fill="#FFF" stroke="#EA2E49" strokeWidth="1.5" xlinkHref="#d" />
-          <path
-            stroke="#FFF"
-            strokeWidth="2"
-            d="M12.678 30.947c-.116-.04-.321-.115-.603-.225-.462-.182-.975-.4-1.527-.656a29.353 29.353 0 0 1-4.627-2.662C1.621 24.354-1 20.56-1 15.984V4.098l14-5.164 14 5.164v11.886c0 4.577-2.62 8.37-6.921 11.42a29.353 29.353 0 0 1-4.627 2.662c-.552.256-1.065.474-1.527.656-.282.11-.487.185-.603.225l-.322.11-.322-.11z"
-          />
         </g>
         <path
           fill="#EA2E49"

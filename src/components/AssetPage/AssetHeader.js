@@ -20,14 +20,13 @@ import Ellipsis from 'components/base/Ellipsis'
 import Text from 'components/base/Text'
 import ExternalLink from 'icons/ExternalLink'
 import { openURL } from 'helpers/linking'
-import { colors } from 'styles/theme'
 import IconInfoCircle from 'icons/InfoCircle'
 import ParentCryptoCurrencyIcon from '../ParentCryptoCurrencyIcon'
 
-const CurNameToken = styled(Text).attrs({
-  ff: 'Museo Sans|Bold',
+const CurNameToken = styled(Text).attrs(() => ({
+  ff: 'Inter|Bold',
   fontSize: 2,
-})``
+}))``
 
 const CurNameTokenLink = styled(CurNameToken)`
   margin-left: 5px;
@@ -35,11 +34,11 @@ const CurNameTokenLink = styled(CurNameToken)`
   border-radius: ${p => p.theme.radii[1]}px;
 `
 
-const CurNameTokenIcon = styled(Text).attrs({
-  ff: 'Open Sans|SemiBold',
+const CurNameTokenIcon = styled(Text).attrs(() => ({
+  ff: 'Inter|SemiBold',
   fontSize: 2,
-})`
-  color: ${colors.wallet};
+}))`
+  color: ${p => p.theme.colors.wallet};
   display: none;
   margin-left: 5px;
   align-items: center;
@@ -55,16 +54,16 @@ const Wrapper = styled(Box)`
   }
 
   :hover ${CurNameTokenLink} {
-    color: ${colors.wallet};
-    background-color: ${colors.pillActiveBackground};
+    color: ${p => p.theme.colors.wallet};
+    background-color: ${p => p.theme.colors.pillActiveBackground};
   }
 `
 
-const AccountName = styled(Text).attrs({
-  color: 'dark',
-  ff: 'Museo Sans',
+const AccountName = styled(Text).attrs(() => ({
+  color: 'palette.text.shade100',
+  ff: 'Inter|SemiBold',
   fontSize: 7,
-})`
+}))`
   line-height: 1.1;
 `
 
@@ -79,7 +78,7 @@ const AssetHeader: React$ComponentType<Props> = React.memo(({ account, parentAcc
   const explorerView = getDefaultExplorerView(mainAccount.currency)
 
   const getContract = () =>
-    account.type === 'TokenAccount' && parentAccount
+    account.type !== 'Account' && parentAccount
       ? getAccountContractExplorer(explorerView, account, parentAccount)
       : null
 
@@ -118,7 +117,7 @@ const AssetHeader: React$ComponentType<Props> = React.memo(({ account, parentAcc
         </AccountName>
       </Box>
       <IconInfoCircle size={14} />
-      <Text ff="Open Sans|SemiBold" fontSize={12} style={{ marginLeft: 8 }}>
+      <Text ff="Inter|SemiBold" fontSize={12} style={{ marginLeft: 8 }}>
         <Trans i18nKey="asset.notice" values={{ currency: currency.name }} />
       </Text>
     </Box>

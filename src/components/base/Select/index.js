@@ -5,7 +5,7 @@ import ReactSelect, { components } from 'react-select'
 import AsyncReactSelect from 'react-select/lib/Async'
 import { translate } from 'react-i18next'
 import { FixedSizeList as List } from 'react-window'
-import styled from 'styled-components'
+import styled, { withTheme } from 'styled-components'
 import debounce from 'lodash/debounce'
 
 import createStyles from './createStyles'
@@ -16,6 +16,7 @@ type Props = {
   value: ?Option,
   options: Option[],
   onChange: (?Option) => void,
+  theme: any,
 
   // custom renders
   renderOption: Option => Node,
@@ -44,7 +45,10 @@ export type Option = {
 
 const Row = styled.div`
   &:hover {
-    background: ${p => p.theme.colors.lightGraphite};
+    background: ${p => p.theme.colors.palette.background.default};
+  }
+  &:active {
+    background: ${p => p.theme.colors.palette.background.default};
   }
 `
 const rowHeight = 40 // Fixme We should pass this as a prop for dynamic rows?
@@ -181,6 +185,7 @@ class Select extends PureComponent<Props> {
       width,
       minWidth,
       small,
+      theme,
       ...props
     } = this.props
 
@@ -197,7 +202,7 @@ class Select extends PureComponent<Props> {
           MenuList,
           ...createRenderers({ renderOption, renderValue }),
         }}
-        styles={createStyles({ width, minWidth, small, isRight, isLeft })}
+        styles={createStyles(theme, { width, minWidth, small, isRight, isLeft })}
         placeholder={placeholder}
         isDisabled={isDisabled}
         isLoading={isLoading}
@@ -215,4 +220,4 @@ class Select extends PureComponent<Props> {
   }
 }
 
-export default translate()(Select)
+export default translate()(withTheme(Select))

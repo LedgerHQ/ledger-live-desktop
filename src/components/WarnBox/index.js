@@ -5,18 +5,18 @@ import styled from 'styled-components'
 
 import Box from 'components/base/Box'
 
-const Container = styled(Box).attrs({
-  color: 'graphite',
+const Container = styled(Box).attrs(() => ({
+  color: 'palette.text.shade80',
   borderRadius: 1,
   px: 4,
   py: 3,
   horizontal: true,
-  ff: 'Open Sans',
+  ff: 'Inter',
   fontSize: 4,
   flow: 4,
-})`
+}))`
   border: solid 1px;
-  border-color: ${p => p.theme.colors.fog};
+  border-color: ${p => p.theme.colors.palette.divider};
   align-items: center;
 `
 

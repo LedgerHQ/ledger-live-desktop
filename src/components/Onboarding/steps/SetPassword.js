@@ -4,10 +4,9 @@ import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { getDeviceModel } from '@ledgerhq/devices'
 
-import { colors } from 'styles/theme'
-
 import db from 'helpers/db'
 import { saveSettings } from 'actions/settings'
+import { withTheme } from 'styled-components'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -45,6 +44,7 @@ const INITIAL_STATE = {
 
 type Props = StepProps & {
   saveSettings: any => void,
+  theme: any,
 }
 
 class SetPassword extends PureComponent<Props, State> {
@@ -78,7 +78,7 @@ class SetPassword extends PureComponent<Props, State> {
   }
 
   render() {
-    const { nextStep, prevStep, t, settings, onboarding } = this.props
+    const { nextStep, prevStep, t, settings, onboarding, theme } = this.props
     const { newPassword, currentPassword, confirmPassword } = this.state
 
     const hasPassword = settings.hasPassword === true
@@ -86,17 +86,17 @@ class SetPassword extends PureComponent<Props, State> {
     const disclaimerNotes = [
       {
         key: 'note1',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} style={{ color: theme.colors.palette.text.shade80 }} />,
         desc: t('onboarding.setPassword.disclaimer.note1'),
       },
       {
         key: 'note2',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} style={{ color: theme.colors.palette.text.shade80 }} />,
         desc: t('onboarding.setPassword.disclaimer.note2'),
       },
       {
         key: 'note3',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} style={{ color: theme.colors.palette.text.shade80 }} />,
         desc: t('onboarding.setPassword.disclaimer.note3'),
       },
     ]
@@ -161,7 +161,9 @@ class SetPassword extends PureComponent<Props, State> {
   }
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(SetPassword)
+export default withTheme(
+  connect(
+    null,
+    mapDispatchToProps,
+  )(SetPassword),
+)

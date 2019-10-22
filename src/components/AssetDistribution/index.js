@@ -8,7 +8,6 @@ import { getAssetsDistribution } from '@ledgerhq/live-common/lib/portfolio'
 import type { AssetsDistribution } from '@ledgerhq/live-common/lib/types/portfolio'
 import styled from 'styled-components'
 import Text from 'components/base/Text'
-import Tag from 'components/Tag'
 import Box from 'components/base/Box'
 import Card from 'components/base/Box/Card'
 import IconAngleDown from 'icons/AngleDown'
@@ -26,17 +25,13 @@ type State = {
   showAll: boolean,
 }
 
-const TagWrapper = styled.div`
-  margin-left: 16px;
-  margin-right: 8px;
-`
 const SeeAllButton = styled.div`
   margin-top: 15px;
   display: flex;
   color: ${p => p.theme.colors.wallet};
   align-items: center;
   justify-content: center;
-  border-top: 1px solid ${p => p.theme.colors.lightFog};
+  border-top: 1px solid ${p => p.theme.colors.palette.divider};
   height: 40px;
   cursor: pointer;
 
@@ -88,20 +83,17 @@ class AssetDistribution extends PureComponent<Props, State> {
     return (
       <>
         <Box horizontal alignItems="center">
-          <Text ff="Museo Sans|Regular" fontSize={6} color="dark" data-e2e='title_assetDistribution'>
+          <Text
+            ff="Inter|Medium"
+            fontSize={6}
+            color="palette.text.shade100"
+            data-e2e="title_assetDistribution"
+          >
             <Trans
               i18nKey="distribution.header"
               values={{ count: 0 }}
               count={distribution.list.length}
             />
-          </Text>
-          <TagWrapper>
-            <Tag>
-              <Trans i18nKey="common.new" />
-            </Tag>
-          </TagWrapper>
-          <Text ff="Open Sans|SemiBold" fontSize={12} color="wallet">
-            <Trans i18nKey="distribution.notice" />
           </Text>
         </Box>
         <Card p={0} mt={24}>
@@ -111,7 +103,7 @@ class AssetDistribution extends PureComponent<Props, State> {
           ))}
           {!almostAll && (
             <SeeAllButton expanded={showAll} onClick={this.toggleShowAll}>
-              <Text color="wallet" ff="Open Sans|SemiBold" fontSize={4}>
+              <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
                 <Trans i18nKey={showAll ? 'distribution.showLess' : 'distribution.showAll'} />
               </Text>
               <IconAngleDown size={16} />

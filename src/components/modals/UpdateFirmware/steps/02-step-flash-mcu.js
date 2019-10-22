@@ -9,17 +9,17 @@ import FlashMCU from 'components/FlashMCU'
 import type { StepProps } from '../'
 import Installing from '../Installing'
 
-const Container = styled(Box).attrs({
+const Container = styled(Box).attrs(() => ({
   alignItems: 'center',
   fontSize: 4,
-  color: 'dark',
-})``
+  color: 'palette.text.shade100',
+}))``
 
-const Title = styled(Box).attrs({
-  ff: 'Museo Sans|Regular',
+const Title = styled(Box).attrs(() => ({
+  ff: 'Inter|Regular',
   fontSize: 5,
   mb: 3,
-})``
+}))``
 
 type Props = StepProps
 

@@ -1,7 +1,6 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { i } from 'helpers/staticPath'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate, Trans } from 'react-i18next'
@@ -10,11 +9,13 @@ import { openModal } from 'reducers/modals'
 import type { T } from 'types/common'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import { listTokenTypesForCryptoCurrency } from '@ledgerhq/live-common/lib/currencies'
+import { getMainAccount } from '@ledgerhq/live-common/lib/account'
 
 import { MODAL_RECEIVE } from 'config/constants'
 
 import IconReceive from 'icons/Receive'
 import Box from 'components/base/Box'
+import Image from 'components/base/Image'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 import { Title, Description } from '../AccountsPage/EmptyState'
@@ -33,18 +34,19 @@ type Props = {
 class EmptyStateAccount extends PureComponent<Props, *> {
   render() {
     const { t, account, parentAccount, openModal } = this.props
-    const mainAccount = account.type === 'Account' ? account : parentAccount
+    const mainAccount = getMainAccount(account, parentAccount)
     if (!mainAccount) return null
 
-    const hasTokens = Array.isArray(mainAccount.tokenAccounts)
+    const hasTokens = Array.isArray(mainAccount.subAccounts)
 
     return (
       <Box mt={7} alignItems="center" selectable>
-        <img
+        <Image
           alt="emptyState Dashboard logo"
-          src={i('logos/emptyStateAccount.png')}
+          resource="empty-state-account.svg"
           width="400"
           height="89"
+          themeTyped
         />
         <Box mt={5} alignItems="center">
           <Title>{t('account.emptyState.title')}</Title>
@@ -52,15 +54,15 @@ class EmptyStateAccount extends PureComponent<Props, *> {
             {hasTokens ? (
               <Trans i18nKey="account.emptyState.descToken">
                 {'Make sure the'}
-                <Text ff="Open Sans|SemiBold" color="dark">
+                <Text ff="Inter|SemiBold" color="palette.text.shade100">
                   {mainAccount.currency.managerAppName}
                 </Text>
                 {'app is installed and start receiving'}
-                <Text ff="Open Sans|SemiBold" color="dark">
+                <Text ff="Inter|SemiBold" color="palette.text.shade100">
                   {mainAccount.currency.ticker}
                 </Text>
                 {'and'}
-                <Text ff="Open Sans|SemiBold" color="dark">
+                <Text ff="Inter|SemiBold" color="palette.text.shade100">
                   {account &&
                     account.currency &&
                     // $FlowFixMe
@@ -71,7 +73,7 @@ class EmptyStateAccount extends PureComponent<Props, *> {
             ) : (
               <Trans i18nKey="account.emptyState.desc">
                 {'Make sure the'}
-                <Text ff="Open Sans|SemiBold" color="dark">
+                <Text ff="Inter|SemiBold" color="palette.text.shade100">
                   {mainAccount.currency.managerAppName}
                 </Text>
                 {'app is installed and start receiving'}

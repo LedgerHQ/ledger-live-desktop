@@ -1,9 +1,9 @@
 // @flow
 import React, { PureComponent, Fragment } from 'react'
 import { translate, Trans } from 'react-i18next'
-import { colors } from 'styles/theme'
 import { i } from 'helpers/staticPath'
 
+import InvertableImg from 'components/InvertableImg'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 
@@ -44,7 +44,7 @@ class WriteSeedRestore extends PureComponent<Props, *> {
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="onboarding.writeSeed.restore.nano.step2">
               {'Select the first letters of'}
-              <Text ff="Open Sans|SemiBold" color="dark">
+              <Text ff="Inter|SemiBold" color="palette.text.shade100">
                 {{ seedWord1 }}
               </Text>
               {'by pressing the right or left button. Press both buttons to confirm each letter.'}
@@ -59,7 +59,7 @@ class WriteSeedRestore extends PureComponent<Props, *> {
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="onboarding.writeSeed.restore.nano.step3">
               {'Select'}
-              <Text ff="Open Sans|SemiBold" color="dark">
+              <Text ff="Inter|SemiBold" color="palette.text.shade100">
                 {{ seedWord1 }}
               </Text>
               {'from the suggested words. Press both buttons to continue.'}
@@ -93,22 +93,22 @@ class WriteSeedRestore extends PureComponent<Props, *> {
     const disclaimerNotes = [
       {
         key: 'note1',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.writeSeed.disclaimer.note1'),
       },
       {
         key: 'note2',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.writeSeed.disclaimer.note2'),
       },
       {
         key: 'note3',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.writeSeed.disclaimer.note3'),
       },
       {
         key: 'note4',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.writeSeed.disclaimer.note4'),
       },
     ]
@@ -122,7 +122,7 @@ class WriteSeedRestore extends PureComponent<Props, *> {
         <Box align="center">
           <Inner style={{ width: 760 }}>
             <Box style={{ width: 260, justifyContent: 'center', alignItems: 'center' }}>
-              <img alt="" src={i('write-seed-onb.svg')} />
+              <InvertableImg alt="" src={i('write-seed-onb.svg')} />
             </Box>
             {onboarding.deviceModelId === 'nanoS' ? (
               <Box shrink flow={2} m={0}>
@@ -138,7 +138,7 @@ class WriteSeedRestore extends PureComponent<Props, *> {
               </Box>
             )}
           </Inner>
-          <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} />
+          <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} color="palette.text.shade80" />
         </Box>
       </Fragment>
     )

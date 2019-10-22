@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react'
 import { Trans } from 'react-i18next'
 import styled from 'styled-components'
 import Box from 'components/base/Box'
-import { colors } from 'styles/theme'
 
 // $FlowFixMe
 export const ContextMenuContext = React.createContext({})
@@ -45,29 +44,29 @@ const ContextMenuContainer = styled(Box)`
   position: absolute;
   top: ${p => p.y}px;
   left: ${p => p.x}px;
-  width: 170px;
+  width: auto;
   border-radius: 4px;
   box-shadow: 0 4px 8px 0 #00000007;
-  border: 1px solid ${p => p.theme.colors.lightFog};
-  background-color: white;
+  border: 1px solid ${p => p.theme.colors.palette.divider};
+  background-color: ${p => p.theme.colors.palette.background.paper};
   padding: 10px;
 `
 
-const ContextMenuItemContainer = styled(Box).attrs({
-  ff: 'Museo Sans',
-})`
+const ContextMenuItemContainer = styled(Box).attrs(() => ({
+  ff: 'Inter',
+}))`
   padding: 8px 16px;
   text-align: center;
   flex-direction: row;
   align-items: left;
   border-radius: 4px;
-  color: ${p => p.theme.colors.dark};
+  color: ${p => p.theme.colors.palette.text.shade100};
   font-size: 12px;
   font-weight: 500;
 
   &:hover {
     cursor: pointer;
-    background: ${p => p.theme.colors.lightGrey};
+    background: ${p => p.theme.colors.palette.background.default};
   }
 `
 
@@ -98,7 +97,7 @@ class ContextMenuWrapper extends PureComponent<Props, State> {
     return (
       <ContextMenuItemContainer key={index} onClick={callback}>
         {Icon && (
-          <Box pr={2} color={colors.grey}>
+          <Box pr={2} color="palette.text.shade60">
             <Icon size={16} />
           </Box>
         )}

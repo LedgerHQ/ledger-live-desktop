@@ -83,7 +83,13 @@ class ConfirmModal extends PureComponent<Props> {
           render={() => (
             <Box>
               {subTitle && (
-                <Box ff="Museo Sans|Regular" color="dark" textAlign="center" mb={2} mt={3}>
+                <Box
+                  ff="Inter|Regular"
+                  color="palette.text.shade100"
+                  textAlign="center"
+                  mb={2}
+                  mt={3}
+                >
                   {subTitle}
                 </Box>
               )}
@@ -93,7 +99,7 @@ class ConfirmModal extends PureComponent<Props> {
                 </Box>
               )}
               {desc && (
-                <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center">
+                <Box ff="Inter" color="palette.text.shade80" fontSize={4} textAlign="center">
                   {desc}
                 </Box>
               )}

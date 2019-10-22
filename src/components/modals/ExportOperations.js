@@ -136,7 +136,7 @@ class ExportOperations extends PureComponent<Props, State> {
                   <IconCheckCircle size={43} />
                 </IconWrapper>
                 <Title>{t('exportOperationsModal.titleSuccess')}</Title>
-                <LabelWrapper ff="Open Sans|Regular">
+                <LabelWrapper ff="Inter|Regular">
                   {t('exportOperationsModal.descSuccess')}
                 </LabelWrapper>
               </Box>
@@ -145,9 +145,7 @@ class ExportOperations extends PureComponent<Props, State> {
                 <IconWrapperCircle>
                   <IconDownloadCloud />
                 </IconWrapperCircle>
-                <LabelWrapper ff="Open Sans|Regular">
-                  {t('exportOperationsModal.desc')}
-                </LabelWrapper>
+                <LabelWrapper ff="Inter|Regular">{t('exportOperationsModal.desc')}</LabelWrapper>
                 <AccountsList
                   emptyText={t('exportOperationsModal.noAccounts')}
                   title={headerText}
@@ -179,7 +177,7 @@ class ExportOperations extends PureComponent<Props, State> {
 const LabelWrapper = styled(Box)`
   text-align: center;
   font-size: 13px;
-  font-family: 'Open Sans';
+  font-family: 'Inter';
   font-weight: ;
 `
 const IconWrapperCircle = styled(Box)`
@@ -200,13 +198,13 @@ const IconWrapper = styled(Box)`
   margin-bottom: 15px;
 `
 
-const Title = styled(Box).attrs({
-  ff: 'Museo Sans',
+const Title = styled(Box).attrs(() => ({
+  ff: 'Inter',
   fontSize: 5,
   mt: 2,
   mb: 15,
-  color: 'dark',
-})`
+  color: 'palette.text.shade100',
+}))`
   text-align: center;
 `
 

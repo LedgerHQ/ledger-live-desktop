@@ -4,7 +4,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import type { Currency, Unit } from '@ledgerhq/live-common/lib/types/currencies'
-import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
+import { getCurrencyColor } from 'helpers/getCurrencyColor'
+import useTheme from 'hooks/useTheme'
 import { connect } from 'react-redux'
 import { BigNumber } from 'bignumber.js'
 import { colors } from 'styles/theme'
@@ -40,10 +41,10 @@ type Props = OwnProps & {
   value: BigNumber,
 }
 
-const PriceWrapper = styled(Box).attrs({
-  ff: 'Rubik',
+const PriceWrapper = styled(Box).attrs(() => ({
+  ff: 'Inter',
   horizontal: true,
-})`
+}))`
   line-height: 1.2;
   white-space: pre;
   align-items: baseline;
@@ -63,6 +64,7 @@ const Price = ({
   fontSize,
   iconSize,
 }: Props) => {
+  const bgColor = useTheme('colors.palette.background.paper')
   if (!counterValue || counterValue.isZero()) return placeholder || null
 
   const activityColor = withActivityColor
@@ -71,7 +73,7 @@ const Price = ({
     ? color
       ? colors[color]
       : undefined
-    : getCurrencyColor(from)
+    : getCurrencyColor(from, bgColor)
 
   const subMagnitude = counterValue.lt(1) ? 1 : 0
 

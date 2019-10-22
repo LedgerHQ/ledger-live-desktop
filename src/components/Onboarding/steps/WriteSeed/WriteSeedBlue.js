@@ -1,11 +1,10 @@
 // @flow
 import React, { PureComponent, Fragment } from 'react'
 import { translate, Trans } from 'react-i18next'
-import { colors } from 'styles/theme'
 import { i } from 'helpers/staticPath'
-
 import type { T } from 'types/common'
 
+import InvertableImg from 'components/InvertableImg'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import IconChevronRight from 'icons/ChevronRight'
@@ -41,11 +40,11 @@ class WriteSeedBlue extends PureComponent<Props, *> {
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="onboarding.writeSeed.initialize.blue.step2">
               {'Tap'}
-              <Text ff="Open Sans|SemiBold" color="dark">
+              <Text ff="Inter|SemiBold" color="palette.text.shade100">
                 {{ seedNext }}
               </Text>
               {'to move to the next words. Repeat the process until the'}
-              <Text ff="Open Sans|SemiBold" color="dark">
+              <Text ff="Inter|SemiBold" color="palette.text.shade100">
                 {{ seedConfirmation }}
               </Text>
               {'screen appears.'}
@@ -62,22 +61,22 @@ class WriteSeedBlue extends PureComponent<Props, *> {
     const disclaimerNotes = [
       {
         key: 'note1',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.writeSeed.disclaimer.note1'),
       },
       {
         key: 'note2',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.writeSeed.disclaimer.note2'),
       },
       {
         key: 'note3',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.writeSeed.disclaimer.note3'),
       },
       {
         key: 'note4',
-        icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+        icon: <IconChevronRight size={12} />,
         desc: t('onboarding.writeSeed.disclaimer.note4'),
       },
     ]
@@ -91,7 +90,7 @@ class WriteSeedBlue extends PureComponent<Props, *> {
         <Box align="center">
           <Inner style={{ width: 760 }}>
             <Box style={{ width: 260, justifyContent: 'center', alignItems: 'center' }}>
-              <img alt="" src={i('write-seed-onb.svg')} />
+              <InvertableImg alt="" src={i('write-seed-onb.svg')} />
             </Box>
             <Box shrink flow={2} m={0}>
               {steps.map(step => (
@@ -99,7 +98,7 @@ class WriteSeedBlue extends PureComponent<Props, *> {
               ))}
             </Box>
           </Inner>
-          <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} />
+          <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} color="palette.text.shade80" />
         </Box>
       </Fragment>
     )

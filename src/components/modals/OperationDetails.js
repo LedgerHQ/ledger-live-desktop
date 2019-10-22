@@ -15,13 +15,13 @@ import { getTransactionExplorer, getDefaultExplorerView } from '@ledgerhq/live-c
 import uniq from 'lodash/uniq'
 
 import TrackPage from 'analytics/TrackPage'
-import type { TokenAccount, Account, Operation } from '@ledgerhq/live-common/lib/types'
+import type { AccountLike, Account, Operation } from '@ledgerhq/live-common/lib/types'
 import {
   getAccountCurrency,
   getAccountUnit,
   getMainAccount,
+  findSubAccountById,
 } from '@ledgerhq/live-common/lib/account'
-import { colors } from 'styles/theme'
 
 import type { T } from 'types/common'
 import { MODAL_OPERATION_DETAILS } from 'config/constants'
@@ -50,26 +50,26 @@ import IconExternalLink from 'icons/ExternalLink'
 import CounterValue from 'components/CounterValue'
 import Link from '../base/Link'
 
-const OpDetailsSection = styled(Box).attrs({
+const OpDetailsSection = styled(Box).attrs(() => ({
   horizontal: true,
   alignItems: 'center',
-  ff: 'Open Sans|SemiBold',
+  ff: 'Inter|SemiBold',
   fontSize: 4,
-  color: 'grey',
-})``
+  color: 'palette.text.shade60',
+}))``
 
-const OpDetailsTitle = styled(Box).attrs({
-  ff: 'Museo Sans|ExtraBold',
+const OpDetailsTitle = styled(Box).attrs(() => ({
+  ff: 'Inter|ExtraBold',
   fontSize: 2,
-  color: 'black',
+  color: 'palette.text.shade100',
   textTransform: 'uppercase',
   mb: 1,
-})`
+}))`
   justify-content: center;
   height: 18px;
   letter-spacing: 2px;
 `
-export const Address = styled(Text).attrs({})`
+export const Address = styled(Text)`
   margin-left: -4px;
   border-radius: 4px;
   flex-wrap: wrap;
@@ -77,25 +77,29 @@ export const Address = styled(Text).attrs({})`
   width: fit-content;
 `
 
-export const GradientHover = styled(Box).attrs({
+export const GradientHover = styled(Box).attrs(() => ({
   align: 'center',
   color: 'wallet',
-})`
-  background: white;
+}))`
+  background: ${p => p.theme.colors.palette.background.paper};
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   padding-left: 20px;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0), #ffffff 20%);
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    ${p => p.theme.colors.palette.background.paper} 20%
+  );
 `
 
-const OpDetailsData = styled(Box).attrs({
-  ff: 'Open Sans',
-  color: 'smoke',
+const OpDetailsData = styled(Box).attrs(p => ({
+  ff: 'Inter',
+  color: p.color || 'palette.text.shade80',
   fontSize: 4,
   relative: true,
-})`
+}))`
   ${GradientHover} {
     display: none;
   }
@@ -108,8 +112,8 @@ const OpDetailsData = styled(Box).attrs({
   }
 
   &:hover ${Address} {
-    background: ${colors.pillActiveBackground};
-    color: ${colors.wallet};
+    background: ${p => p.theme.colors.pillActiveBackground};
+    color: ${p => p.theme.colors.palette.primary.main};
     font-weight: 400;
   }
 
@@ -123,10 +127,21 @@ const NoMarginWrapper = styled.div`
   margin-right: -20px;
 `
 
-const B = styled(Bar).attrs({
-  color: 'lightGrey',
+const B = styled(Bar).attrs(() => ({
+  color: 'palette.divider',
   size: 1,
-})``
+}))``
+
+const TextEllipsis = styled.div`
+  flex-shrink: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`
+
+const Separator = styled.div`
+  margin: 0 4px;
+`
 
 const mapDispatchToProps = {
   openModal,
@@ -136,12 +151,9 @@ const mapDispatchToProps = {
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const marketIndicator = marketIndicatorSelector(state)
   const parentAccount: ?Account = parentId && accountSelector(state, { accountId: parentId })
-  let account: ?(TokenAccount | Account)
+  let account: ?AccountLike
   if (parentAccount) {
-    const { tokenAccounts } = parentAccount
-    if (tokenAccounts) {
-      account = tokenAccounts.find(t => t.id === accountId)
-    }
+    account = findSubAccountById(parentAccount, accountId)
   } else {
     account = accountSelector(state, { accountId })
   }
@@ -167,7 +179,7 @@ const mapStateToProps = (state, { operationId, accountId, parentId }) => {
 type Props = {
   t: T,
   operation: ?Operation,
-  account: ?(Account | TokenAccount),
+  account: ?AccountLike,
   accountId: string,
   parentAccount: ?Account,
   parentId: ?string,
@@ -280,7 +292,7 @@ const OperationDetails = connect(
             <Box selectable>
               {hasFailed ? null : (
                 <FormattedVal
-                  color={amount.isNegative() ? 'smoke' : undefined}
+                  color={amount.isNegative() ? 'palette.text.shade80' : undefined}
                   unit={unit}
                   alwaysShowSign
                   showCode
@@ -293,7 +305,7 @@ const OperationDetails = connect(
             <Box mt={1} selectable>
               {hasFailed ? null : (
                 <CounterValue
-                  color="grey"
+                  color="palette.text.shade60"
                   fontSize={5}
                   date={date}
                   currency={currency}
@@ -313,9 +325,7 @@ const OperationDetails = connect(
               </OpDetailsSection>
               <Box>
                 {subOperations.map((op, i) => {
-                  const opAccount = (account.tokenAccounts || []).find(
-                    acc => acc.id === op.accountId,
-                  )
+                  const opAccount = findSubAccountById(account, op.accountId)
 
                   if (!opAccount) return null
 
@@ -323,7 +333,7 @@ const OperationDetails = connect(
                     <NoMarginWrapper key={`${op.id}`}>
                       <OperationComponent
                         compact
-                        text={opAccount.token.name}
+                        text={getAccountCurrency(opAccount).name}
                         operation={op}
                         account={opAccount}
                         parentAccount={account}
@@ -375,11 +385,16 @@ const OperationDetails = connect(
             <Box flex={1}>
               <OpDetailsTitle>{t('operationDetails.account')}</OpDetailsTitle>
               <OpDetailsData horizontal>
-                <Link onClick={goToMainAccount}>{name}</Link>
+                <TextEllipsis style={parentAccount ? { maxWidth: '50%', flexShrink: 0 } : null}>
+                  <Link onClick={goToMainAccount}>{name}</Link>
+                </TextEllipsis>
+
                 {parentAccount ? (
                   <>
-                    {' / '}
-                    <Link onClick={goToSubAccount}>{currency.name}</Link>
+                    <Separator>{'/'}</Separator>
+                    <TextEllipsis>
+                      <Link onClick={goToSubAccount}>{currency.name}</Link>
+                    </TextEllipsis>
                   </>
                 ) : null}
               </OpDetailsData>
@@ -397,10 +412,15 @@ const OperationDetails = connect(
                 {fee ? (
                   <Fragment>
                     <OpDetailsData>
-                      <FormattedVal unit={mainAccount.unit} showCode val={fee} color="smoke" />
+                      <FormattedVal
+                        unit={mainAccount.unit}
+                        showCode
+                        val={fee}
+                        color="palette.text.shade80"
+                      />
                       <Box horizontal>
                         <CounterValue
-                          color="grey"
+                          color="palette.text.shade60"
                           date={date}
                           fontSize={3}
                           currency={mainAccount.currency}
@@ -408,7 +428,7 @@ const OperationDetails = connect(
                           alwaysShowSign={false}
                           subMagnitude={1}
                           prefix={
-                            <Box mr={1} color="grey" style={{ lineHeight: 1.2 }}>
+                            <Box mr={1} color="palette.text.shade60" style={{ lineHeight: 1.2 }}>
                               {'≈'}
                             </Box>
                           }
@@ -464,7 +484,7 @@ const OperationDetails = connect(
                     underline
                     fontSize={3}
                     ml={2}
-                    color="smoke"
+                    color="palette.text.shade80"
                     onClick={() => openURL(urls.multipleDestinationAddresses)}
                     iconFirst
                   >
@@ -522,12 +542,12 @@ const OperationDetailsWrapper = ({ t }: { t: T }) => (
 
 export default translate()(OperationDetailsWrapper)
 
-const More = styled(Text).attrs({
-  ff: p => (p.ff ? p.ff : 'Museo Sans|Bold'),
-  fontSize: p => (p.fontSize ? p.fontSize : 2),
-  color: p => (p.color ? p.color : 'dark'),
+const More = styled(Text).attrs(p => ({
+  ff: p.ff ? p.ff : 'Inter|Bold',
+  fontSize: p.fontSize ? p.fontSize : 2,
+  color: p.color || 'palette.text.shade100',
   tabIndex: 0,
-})`
+}))`
   text-transform: ${p => (!p.textTransform ? 'auto' : 'uppercase')};
   outline: none;
 `
@@ -557,7 +577,7 @@ export class DataList extends Component<{ lines: string[], t: T }, *> {
         ))}
         {shouldShowMore && !showMore && (
           <Box onClick={this.onClick} py={1}>
-            <More fontSize={4} color="wallet" ff="Open Sans|SemiBold" mt={1}>
+            <More fontSize={4} color="wallet" ff="Inter|SemiBold" mt={1}>
               <IconChevronRight size={12} style={{ marginRight: 5 }} />
               {t('operationDetails.showMore', { recipients: lines.length - numToShow })}
             </More>
@@ -574,7 +594,7 @@ export class DataList extends Component<{ lines: string[], t: T }, *> {
           ))}
         {shouldShowMore && showMore && (
           <Box onClick={this.onClick} py={1}>
-            <More fontSize={4} color="wallet" ff="Open Sans|SemiBold" mt={1}>
+            <More fontSize={4} color="wallet" ff="Inter|SemiBold" mt={1}>
               <IconChevronRight size={12} style={{ marginRight: 5 }} />
               {t('operationDetails.showLess')}
             </More>

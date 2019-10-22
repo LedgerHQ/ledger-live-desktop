@@ -8,7 +8,10 @@ export default styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(rgba(255, 255, 255, 0), #ffffff);
+  background: linear-gradient(
+    rgba(255, 255, 255, 0),
+    ${p => p.theme.colors.palette.background.paper}
+  );
   z-index: 2;
   pointer-events: none;
 `

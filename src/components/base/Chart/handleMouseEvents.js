@@ -3,12 +3,9 @@
 import React from 'react'
 import * as d3 from 'd3'
 import { renderToString } from 'react-dom/server'
-import { ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux'
-
+import { ThemeProvider } from 'styled-components'
 import createStore from 'renderer/createStore'
-
-import theme from 'styles/theme'
 
 import type { CTX } from './types'
 
@@ -20,12 +17,14 @@ export default function handleMouseEvents({
   onTooltipUpdate,
   renderTooltip,
   mapValue,
+  theme,
 }: {
   ctx: CTX,
   shouldTooltipUpdate: Function,
   onTooltipUpdate: Function,
   renderTooltip?: Function,
   mapValue: (*) => number,
+  theme: any,
 }) {
   const { MARGINS, HEIGHT, WIDTH, NODES, DATA, x, y } = ctx
 

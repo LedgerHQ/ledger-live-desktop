@@ -11,16 +11,16 @@ type Props = {
   warning?: boolean,
 }
 
-const ErrorBannerBox = styled(Box).attrs({
+const ErrorBannerBox = styled(Box).attrs(() => ({
   horizontal: true,
   align: 'flex-start',
-  color: 'white',
+  color: 'palette.background.paper',
   borderRadius: 1,
   fontSize: 1,
   px: 4,
   py: 2,
   mb: 4,
-})`
+}))`
   background-color: ${p => (p.warning ? p.theme.colors.orange : p.theme.colors.alertRed)};
 `
 
@@ -34,7 +34,7 @@ class ErrorBanner extends PureComponent<Props> {
         <Box mr={2} alignSelf="center">
           <IconTriangleWarning height={16} width={16} />
         </Box>
-        <Box ff="Open Sans|SemiBold" fontSize={3} vertical shrink>
+        <Box ff="Inter|SemiBold" fontSize={3} vertical shrink>
           <Box>
             <TranslatedError error={error} />
           </Box>
