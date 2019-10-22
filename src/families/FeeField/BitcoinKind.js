@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useRef, useCallback, useMemo, useState } from 'react'
 import { BigNumber } from 'bignumber.js'
 import styled from 'styled-components'
 import { Trans, translate } from 'react-i18next'
@@ -48,7 +48,7 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
 
   const bridge = getAccountBridge(account)
   const { feePerByte, networkInfo } = transaction
-  let input: ?HTMLInputElement
+  const inputRef = useRef()
 
   const feeItems = useMemo(
     () =>
@@ -78,13 +78,13 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
   const onSelectChange = useCallback(
     (item: any) => {
       setSelectedItem(item)
-      if (item.label === 'custom' && input) {
-        input.select()
+      if (item.label === 'custom' && inputRef.current) {
+        inputRef.current.select()
         return
       }
       onChange(bridge.updateTransaction(transaction, { feePerByte: item.feePerByte }))
     },
-    [onChange, transaction, bridge, setSelectedItem, input],
+    [onChange, transaction, bridge, setSelectedItem, inputRef],
   )
 
   const onInputChange = feePerByte => onSelectChange({ feePerByte })
@@ -107,7 +107,7 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
         <InputCurrency
           defaultUnit={satoshi}
           units={units}
-          ref={_input => (input = _input)}
+          ref={inputRef}
           containerProps={{ grow: true }}
           value={feePerByte}
           onChange={onInputChange}
