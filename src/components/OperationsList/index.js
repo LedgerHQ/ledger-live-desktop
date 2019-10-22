@@ -153,6 +153,7 @@ export class OperationsList extends PureComponent<Props, State> {
                 }
                 return (
                   <OperationC
+                    compact
                     operation={operation}
                     account={account}
                     parentAccount={parentAccount}
