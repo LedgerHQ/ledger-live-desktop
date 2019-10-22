@@ -48,6 +48,7 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
 
   const bridge = getAccountBridge(account)
   const { feePerByte, networkInfo } = transaction
+  let input: ?HTMLInputElement
 
   const feeItems = useMemo(
     () =>
@@ -65,22 +66,25 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
   )
 
   const [selectedItem, setSelectedItem] = useState(last(feeItems))
-  const selectedValue = feePerByte
-    ? selectedItem.feePerByte.eq(feePerByte)
+  const selectedValue =
+    !feePerByte || selectedItem.label === 'custom'
+      ? last(feeItems)
+      : selectedItem.feePerByte.eq(feePerByte) && !!selectedItem.label
       ? selectedItem
       : feeItems.find(f => f.feePerByte.eq(feePerByte)) || last(feeItems)
-    : last(feeItems)
-
   const { units } = account.currency
   const satoshi = units[units.length - 1]
 
   const onSelectChange = useCallback(
     (item: any) => {
-      if (item.label === 'custom') return
-      if (item.label) setSelectedItem(item)
+      setSelectedItem(item)
+      if (item.label === 'custom' && input) {
+        input.select()
+        return
+      }
       onChange(bridge.updateTransaction(transaction, { feePerByte: item.feePerByte }))
     },
-    [onChange, transaction, bridge, setSelectedItem],
+    [onChange, transaction, bridge, setSelectedItem, input],
   )
 
   const onInputChange = feePerByte => onSelectChange({ feePerByte })
@@ -103,6 +107,7 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
         <InputCurrency
           defaultUnit={satoshi}
           units={units}
+          ref={_input => (input = _input)}
           containerProps={{ grow: true }}
           value={feePerByte}
           onChange={onInputChange}
