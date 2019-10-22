@@ -9,12 +9,16 @@ import IconSensitiveOperationShield from 'icons/SensitiveOperationShield'
 
 // GENERAL
 export const Title = styled(Box).attrs(() => ({
-  ff: 'Inter|Regular',
+  ff: 'Inter|Medium',
   fontSize: 7,
   color: 'palette.text.shade100',
 }))`
   max-width: 550px;
   text-align: center;
+  transition: color ease-out 300ms;
+  transition-delay: 300ms;
+  margin-top: 40px;
+  margin-bottom: 20px;
 `
 
 export const StepContainerInner = styled(GrowScroll).attrs(() => ({ pb: 6, align: 'center' }))``
@@ -26,8 +30,10 @@ export const Description = styled(Box).attrs(() => ({
   textAlign: 'center',
   color: 'palette.text.shade60',
 }))`
+  transition: color ease-out 300ms;
+  transition-delay: 300ms;
   margin: 10px auto 25px;
-  max-width: 640px;
+  max-width: 480px;
 `
 
 export const Inner = styled(Box).attrs(() => ({
