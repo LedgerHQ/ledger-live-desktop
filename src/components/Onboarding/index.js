@@ -200,7 +200,6 @@ class Onboarding extends PureComponent<Props> {
 }
 
 const Container = styled(Box).attrs(() => ({
-  bg: 'palette.background.paper',
   p: 60,
   selectable: true,
 }))`
@@ -210,6 +209,9 @@ const Container = styled(Box).attrs(() => ({
   right: 0;
   bottom: 0;
   z-index: 25;
+  background-color: ${p => p.theme.colors.palette.background.paper};
+  transition: background-color ease-out 300ms;
+  transition-delay: 300ms;
 `
 const StepContainer = styled(Box).attrs(() => ({
   p: 40,

@@ -34,8 +34,13 @@ const Row = styled(Box)`
   margin-bottom: 9px;
   padding: 16px 20px;
   position: relative;
+  transition: background-color ease-in-out 200ms;
   :hover {
-    border-color: ${p => p.theme.colors.palette.text.shade40};
+    border-color: ${p => p.theme.colors.palette.text.shade20};
+  }
+  :active {
+    border-color: ${p => p.theme.colors.palette.text.shade20};
+    background: ${p => p.theme.colors.palette.action.hover};
   }
 `
 
