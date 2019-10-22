@@ -9,7 +9,7 @@ const ensureContrast = (color1: string, color2: string) => {
 
   const lRatio = colorL1 > colorL2 ? colorL1 / colorL2 : colorL2 / colorL1
 
-  if (lRatio < 4.5) {
+  if (lRatio < 1.5) {
     return Color(color1)
       .rotate(180)
       .negate()

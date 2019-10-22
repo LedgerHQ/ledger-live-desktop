@@ -25,6 +25,7 @@ const OperationRow = styled(Box).attrs(() => ({
   border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
   height: 68px;
   opacity: ${p => (p.isOptimistic ? 0.5 : 1)};
+  cursor: pointer;
 
   &:last-child {
     border-bottom: 0;
