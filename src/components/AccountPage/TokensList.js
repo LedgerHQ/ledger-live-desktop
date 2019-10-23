@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
 import { listSubAccounts } from '@ledgerhq/live-common/lib/account/helpers'
+import { listTokenTypesForCryptoCurrency } from '@ledgerhq/live-common/lib/currencies'
 import styled from 'styled-components'
 import { Trans, translate } from 'react-i18next'
 import { push } from 'react-router-redux'
@@ -87,14 +88,18 @@ class TokensList extends PureComponent<Props> {
     const { account, t, range } = this.props
     if (!account.subAccounts) return null
     const subAccounts = listSubAccounts(account)
+    const isTokenAccount = listTokenTypesForCryptoCurrency(account.currency).length > 0
     const isEmpty = subAccounts.length === 0
+
+    if (!isTokenAccount && isEmpty) return null
+
     return (
       <Box mb={50}>
         <Wrapper>
           <Text color="palette.text.shade100" mb={2} ff="Inter|Medium" fontSize={6}>
-            {t('tokensList.title')}
+            {isTokenAccount ? t('tokensList.title') : t('subAccounts.title')}
           </Text>
-          {!isEmpty && <ReceiveButton onClick={this.onReceiveClick} />}
+          {!isEmpty && isTokenAccount && <ReceiveButton onClick={this.onReceiveClick} />}
         </Wrapper>
         {isEmpty && (
           <EmptyState>

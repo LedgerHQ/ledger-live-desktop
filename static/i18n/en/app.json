@@ -67,7 +67,10 @@
   "operation": {
     "type": {
       "IN": "Received",
-      "OUT": "Sent"
+      "OUT": "Sent",
+      "CREATE": "Created",
+      "REVEAL": "Revealed",
+      "DELEGATE": "Delegated"
     }
   },
   "time": {
@@ -266,6 +269,11 @@
     "countTooltip": "1 Token",
     "countTooltip_plural": "{{count}} Tokens"
   },
+  "subAccounts": {
+    "title": "Subaccounts",
+    "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
+    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})"
+  },
   "migrateAccounts": {
     "overview": {
       "title": "Ledger Live accounts update",
@@ -372,7 +380,9 @@
     "showMore": "Show {{recipients}} more",
     "showLess": "Show less",
     "tokenOperations": "Token operations",
+    "subAccountOperations": "Subaccount operations",
     "tokenTooltip": "This operation is related to the following token operations",
+    "subAccountTooltip": "This operation is related to the following subaccount operations",
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
     "details": "{{ currency }} details",
@@ -1241,6 +1251,10 @@
     "MCUNotGenuineToDashboard": {
       "title": "Access dashboard to update",
       "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
+    },
+    "UnavailableTezosOriginatedAccountReceive": {
+      "title": "Cannot receive funds on originated account",
+      "description": "If you want to receive funds, please use the parent account"
     }
   }
 }

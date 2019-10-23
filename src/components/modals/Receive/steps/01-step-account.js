@@ -2,7 +2,7 @@
 
 import React, { useCallback, useMemo } from 'react'
 import { Trans } from 'react-i18next'
-import { getMainAccount } from '@ledgerhq/live-common/lib/account'
+import { getMainAccount, getReceiveFlowError } from '@ledgerhq/live-common/lib/account'
 import { listTokensForCryptoCurrency } from '@ledgerhq/live-common/lib/currencies'
 import type { CryptoCurrency, TokenCurrency } from '@ledgerhq/live-common/lib/types/currencies'
 import TrackPage from 'analytics/TrackPage'
@@ -12,6 +12,7 @@ import Button from 'components/base/Button'
 import SelectAccount from 'components/SelectAccount'
 import SelectCurrency from 'components/SelectCurrency'
 import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
+import ErrorBanner from 'components/ErrorBanner'
 import type { StepProps } from '..'
 
 const AccountSelection = ({ onChangeAccount, account }) => (
@@ -71,10 +72,13 @@ export default function StepAccount({
   onChangeToken,
 }: StepProps) {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null
+  const error = account ? getReceiveFlowError(account, parentAccount) : null
+
   return (
     <Box flow={1}>
       <TrackPage category="Receive Flow" name="Step 1" />
       {mainAccount ? <CurrencyDownStatusAlert currency={mainAccount.currency} /> : null}
+      {error ? <ErrorBanner error={error} /> : null}
       {receiveTokenMode && mainAccount ? (
         <TokenParentSelection mainAccount={mainAccount} onChangeAccount={onChangeAccount} />
       ) : (
@@ -91,10 +95,17 @@ export default function StepAccount({
   )
 }
 
-export function StepAccountFooter({ transitionTo, receiveTokenMode, token, account }: StepProps) {
+export function StepAccountFooter({
+  transitionTo,
+  receiveTokenMode,
+  token,
+  account,
+  parentAccount,
+}: StepProps) {
+  const error = account ? getReceiveFlowError(account, parentAccount) : null
   return (
     <Button
-      disabled={!account || (receiveTokenMode && !token)}
+      disabled={!account || (receiveTokenMode && !token) || !!error}
       primary
       onClick={() => transitionTo('device')}
     >

@@ -21,6 +21,7 @@ type Props = {
 }
 
 const FeeField = (props: Props) => {
+  if (props.account.currency.family === 'tezos') return null
   const Cmp = byFamily[props.account.currency.family]
   if (!Cmp) return null
   return <Cmp {...props} />

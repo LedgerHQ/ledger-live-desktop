@@ -65,7 +65,13 @@ class AddressCell extends PureComponent<Props> {
 
     return (
       <Cell grow shrink style={{ display: 'block' }}>
-        <Address value={operation.type === 'IN' ? operation.senders[0] : operation.recipients[0]} />
+        <Address
+          value={
+            operation.type === 'IN' || operation.type === 'CREATE' || operation.type === 'REVEAL'
+              ? operation.senders[0]
+              : operation.recipients[0]
+          }
+        />
       </Cell>
     )
   }
