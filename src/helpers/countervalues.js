@@ -1,9 +1,9 @@
 // @flow
 
 import { createSelector } from 'reselect'
+import { getEnv } from '@ledgerhq/live-common/lib/env'
 import { implementCountervalues, getCountervalues } from '@ledgerhq/live-common/lib/countervalues'
 import uniq from 'lodash/uniq'
-import { LEDGER_COUNTERVALUES_API } from 'config/constants'
 import { setExchangePairsAction } from 'actions/settings'
 import { currenciesSelector } from 'reducers/accounts'
 import {
@@ -65,7 +65,7 @@ const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
 
 implementCountervalues({
   log: (...args) => logger.log('CounterValues:', ...args),
-  getAPIBaseURL: () => LEDGER_COUNTERVALUES_API,
+  getAPIBaseURL: () => getEnv('LEDGER_COUNTERVALUES_API'),
   storeSelector: state => state.countervalues,
   pairsSelector,
   setExchangePairsAction,
