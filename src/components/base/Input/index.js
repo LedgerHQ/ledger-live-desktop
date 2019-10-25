@@ -1,8 +1,8 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { fontSize, space } from 'styled-system'
+import { fontSize } from 'styled-system'
 import noop from 'lodash/noop'
 import fontFamily from 'styles/styled/fontFamily'
 import Spinner from 'components/base/Spinner'
@@ -98,26 +98,6 @@ const Base = styled.input.attrs(() => ({
   }
 `
 
-export const Textarea = styled.textarea.attrs(p => ({
-  p: 2,
-  fontSize: 4,
-  ff: p.ff || 'Inter|SemiBold',
-}))`
-  ${space};
-  ${fontFamily};
-  ${fontSize};
-  min-height: 80px;
-  color: ${p => p.theme.colors.palette.text.shade100};
-  background: ${p => p.theme.colors.palette.background.paper};
-  border-radius: ${p => p.theme.radii[1]}px;
-  border: 1px solid ${p => p.theme.colors.palette.divider};
-  box-shadow: none;
-  &:focus {
-    box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
-    outline: none;
-  }
-`
-
 type Props = {
   keepEvent?: boolean,
   onBlur: (SyntheticInputEvent<HTMLInputElement>) => void,
@@ -136,93 +116,80 @@ type Props = {
   disabled?: boolean,
 }
 
-type State = {
-  isFocus: boolean,
-}
-
-class Input extends PureComponent<Props, State> {
-  static defaultProps = {
-    onBlur: noop,
-    onFocus: noop,
-    renderLeft: null,
-    renderRight: null,
-    small: false,
-  }
-
-  state = {
-    isFocus: false,
-  }
-
-  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
-    const { onChange, keepEvent } = this.props
-
-    if (onChange) {
-      onChange(keepEvent ? e : e.target.value)
-    }
-  }
-
-  handleKeyDown = (e: SyntheticKeyboardEvent<HTMLInputElement>) => {
-    // handle enter key
-    if (e.which === 13) {
-      const { onEnter } = this.props
-      if (onEnter) {
-        onEnter(e)
-      }
-    } else if (e.which === 27) {
-      const { onEsc } = this.props
-      if (onEsc) {
-        onEsc(e)
-      }
-    }
-  }
-
-  // FIXME this is a bad idea! this is the behavior of an input. instead renderLeft/renderRight should be pointer-event:none !
-  handleClick = () => this._input && this._input.focus()
-
-  handleFocus = (e: SyntheticInputEvent<HTMLInputElement>) => {
-    const { onFocus } = this.props
-    this.setState({
-      isFocus: true,
-    })
-    onFocus(e)
-  }
-
-  handleBlur = (e: SyntheticInputEvent<HTMLInputElement>) => {
-    const { onBlur } = this.props
-    this.setState({
-      isFocus: false,
-    })
-    onBlur(e)
-  }
-
-  select = () => {
-    const { _input } = this
-    if (_input) {
-      _input.select()
-      _input.focus()
-    }
-  }
-
-  _input = null
-
-  render() {
-    const { isFocus } = this.state
-    const {
-      renderLeft,
-      renderRight,
+const Input = React.forwardRef(
+  (
+    {
+      renderLeft = null,
+      renderRight = null,
       containerProps,
       editInPlace,
-      small,
+      small = false,
       error,
       loading,
       warning,
       disabled,
+      onChange,
+      keepEvent,
+      onEnter,
+      onEsc,
+      onFocus = noop,
+      onBlur = noop,
       ...props
-    } = this.props
+    }: Props,
+    inputRef,
+  ) => {
+    const [isFocus, setFocus] = useState(false)
+
+    const handleChange = useCallback(
+      (e: SyntheticInputEvent<HTMLInputElement>) => {
+        if (onChange) {
+          onChange(keepEvent ? e : e.target.value)
+        }
+      },
+      [onChange, keepEvent],
+    )
+
+    const handleKeyDown = useCallback(
+      (e: SyntheticKeyboardEvent<HTMLInputElement>) => {
+        // handle enter key
+        if (e.which === 13 && onEnter) {
+          onEnter(e)
+        } else if (e.which === 27 && onEsc) {
+          onEsc(e)
+        }
+      },
+      [onEnter, onEsc],
+    )
+
+    const handleClick = useCallback(() => {
+      if (inputRef.current) {
+        inputRef.current.focus()
+      }
+    }, [inputRef])
+
+    const handleFocus = useCallback(
+      (e: SyntheticInputEvent<HTMLInputElement>) => {
+        setFocus(true)
+        if (onFocus) {
+          onFocus(e)
+        }
+      },
+      [onFocus],
+    )
+
+    const handleBlur = useCallback(
+      (e: SyntheticInputEvent<HTMLInputElement>) => {
+        setFocus(false)
+        if (onBlur) {
+          onBlur(e)
+        }
+      },
+      [onBlur],
+    )
 
     return (
       <Container
-        onClick={this.handleClick}
+        onClick={handleClick}
         isFocus={isFocus}
         shrink
         {...containerProps}
@@ -238,11 +205,11 @@ class Input extends PureComponent<Props, State> {
             {...props}
             small={small}
             disabled={disabled}
-            ref={n => (this._input = n)}
-            onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
-            onChange={this.handleChange}
-            onKeyDown={this.handleKeyDown}
+            ref={inputRef}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
           />
           {error ? (
             <ErrorDisplay>
@@ -262,7 +229,7 @@ class Input extends PureComponent<Props, State> {
         {renderRight ? <RenderRightWrapper>{renderRight}</RenderRightWrapper> : null}
       </Container>
     )
-  }
-}
+  },
+)
 
 export default Input
