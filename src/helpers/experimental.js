@@ -11,11 +11,17 @@ export type FeatureCommon = {
   shadow?: boolean,
 }
 
-export type FeatureToggle = {
-  type: 'toggle',
-  valueOn?: any,
-  valueOff?: any,
-}
+export type FeatureToggle =
+  | {
+      type: 'toggle',
+      valueOn?: any,
+      valueOff?: any,
+    }
+  | {
+      type: 'integer',
+      minValue?: number,
+      maxValue?: number,
+    }
 
 export type Feature = FeatureCommon & FeatureToggle
 
@@ -46,13 +52,27 @@ export const experimentalFeatures: Feature[] = [
     description: 'Alternative USB implementation that might help solve USB issues.',
   },
   {
-    shadow: true,
     type: 'toggle',
+    name: 'LEDGER_COUNTERVALUES_API',
+    valueOn: 'http://countervalue-service.dev.aws.ledger.fr',
+    valueOff: 'https://countervalues.api.live.ledger.com',
+    title: 'Experimental Countervalues API',
+    description: 'Experimental Countervalues API upgrade',
+  },
+  {
+    type: 'integer',
+    name: 'KEYCHAIN_OBSERVABLE_RANGE',
+    title: 'Gap Limit',
+    description: 'Custom gap limit for all accounts',
+    minValue: 20,
+    maxValue: 999,
+  },
+  {
+    type: 'integer',
     name: 'FORCE_PROVIDER',
-    valueOn: 4,
-    valueOff: 1,
-    title: 'Pre-release apps',
-    description: 'Enable pre-release apps in the Manager',
+    title: 'Manager provider',
+    description: 'Change apps provider in the Manager',
+    minValue: 1,
   },
   {
     shadow: true, // not correct yet
