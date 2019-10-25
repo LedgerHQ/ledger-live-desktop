@@ -98,10 +98,10 @@
     }
   },
   "fees": {
-    "custom": "Custom",
+    "custom": "Personnalisé",
     "fast": "Rapide",
-    "high": "High",
-    "low": "Low",
+    "high": "Haut",
+    "low": "Bas",
     "slow": "Lent",
     "standard": "Standard"
   },
@@ -405,15 +405,15 @@
     },
     "firmware": {
       "installed": "Version {{version}} du firmware",
-      "updateLater": "Mettre à jour plus tard",
+      "updateLater": "MAJ plus tard",
       "seedReady": "J'ai ma phrase de récupération",
       "dontHaveSeed": "Vous n'avez pas votre phrase de récupération ?",
       "followTheGuide": "Suivez notre guide de mise à jour étape par étape",
-      "removeApps": "Désinstaller toutes les applications avant d'effectuer la mise à jour",
-      "update": "Mise à jour du firmware",
+      "removeApps": "Désinstaller toutes les apps avant de mettre à jour",
+      "update": "Mettre à jour",
       "latest": "La version {{version}} du firmware est disponible.",
-      "prepareSeed": "Assurez-vous que votre phrase de récupération en 24 mots est écrite sur votre feuille de récupération et accessible.",
-      "disclaimerTitle": "Vous êtes sur le point d’installer la <1><0>version {{version}}</0></1>du firmware.",
+      "prepareSeed": "Assurez-vous que votre phrase de récupération en 24 mots est écrite sur votre feuille de récupération et accessible, par précaution.",
+      "disclaimerTitle": "Vous êtes sur le point d’installer la <1><0>version {{version}}</0></1> du firmware.",
       "disclaimerAppDelete": "Désinstallez des applications pour libérer de l’espace. Cette opération n’affectera pas vos crypto-actifs.",
       "disclaimerAppReinstall": "Assurez-vous que votre feuille de récupération est accessible, par mesure de précaution.",
       "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour",
@@ -935,7 +935,7 @@
         },
         "desc": {
           "pinFailed": "N’utilisez jamais un appareil fourni avec un code PIN. En cas de doute, veuillez nous contacter.",
-          "recoveryPhraseFailed": "Enregistrez uniquement une phrase de récupération qui s’est affichée sur votre appareil et pour vous seul. En cas de doute, veuillez nous contacter.",
+          "recoveryPhraseFailed": "Enregistrez seulement une phrase de récupération affichée sur votre appareil et à vous seul. Veuillez nous contacter en cas de doute.",
           "isGenuineFail": "Votre appareil a échoué au test d’authenticité requis pour se connecter au serveur sécurisé de Ledger. Veuillez contacter l’assistance Ledger pour obtenir de l’aide."
         }
       }
