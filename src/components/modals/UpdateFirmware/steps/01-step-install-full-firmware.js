@@ -63,7 +63,7 @@ type State = {
 class StepFullFirmwareInstall extends PureComponent<Props, State> {
   state = {
     progress: 0,
-    displayedOnDevice: true,
+    displayedOnDevice: false,
   }
 
   componentDidMount() {
