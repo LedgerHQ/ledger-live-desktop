@@ -1240,7 +1240,12 @@
     },
     "MCUNotGenuineToDashboard": {
       "title": "Accéder au tableau de bord pour effectuer la mise à jour",
-      "description": "Veuillez redémarrer l'appareil sans appuyer sur un bouton. Appuyez ensuite trois fois sur les deux boutons de l'appareil pour accéder au tableau de bord. Enfin, ouvrez le Gestionnaire pour mettre à jour le firmware."
+      "description": "",
+      "list": {
+        "1": "Disconnect and reconnect the USB cable without pressing any button.",
+        "2": "Press both buttons three times to access the Dashboard.",
+        "3": "Open the Manager and click Update firmware."
+      }
     }
   }
 }
