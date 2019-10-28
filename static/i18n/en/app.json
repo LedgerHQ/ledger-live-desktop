@@ -1253,8 +1253,12 @@
       "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive funds on originated account",
+      "title": "You can't receive funds on originated account",
       "description": "If you want to receive funds, please use the parent account"
+    },
+    "UnavailableTezosOriginatedAccountSend": {
+      "title": "Sorry, you can't send funds from originated account yet",
+      "description": "Please contact Ledger Support for more information"
     }
   }
 }
