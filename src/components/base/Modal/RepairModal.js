@@ -114,9 +114,12 @@ const ErrorStep = ({ error }: { error: Error }) => (
         fontSize={4}
         ff="Inter"
         textAlign="center"
-        style={{ maxWidth: 350 }}
+        style={{ maxWidth: 380 }}
       >
         <TranslatedError error={error} field="description" />
+        <ol style={{ textAlign: 'justify' }}>
+          <TranslatedError error={error} field="list" />
+        </ol>
       </Box>
     </Container>
   </Box>
