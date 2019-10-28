@@ -1240,7 +1240,12 @@
     },
     "MCUNotGenuineToDashboard": {
       "title": "Доступ к панели управления для обновления",
-      "description": "Пожалуйста, перезапустите устройство без нажатия любой кнопки. Затем нажмите обе кнопки на устройстве три раза, чтобы получить доступ к панели управления. Наконец, откройте менеджер для обновления прошивки."
+      "description": "",
+      "list": {
+        "1": "Disconnect and reconnect the USB cable without pressing any button.",
+        "2": "Press both buttons three times to access the Dashboard.",
+        "3": "Open the Manager and click Update firmware."
+      }
     }
   }
 }
