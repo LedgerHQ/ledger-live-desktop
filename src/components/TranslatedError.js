@@ -5,7 +5,7 @@
 // - returned value is intentially not styled (is universal). wrap this in whatever you need
 
 import logger from 'logger'
-import { PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import type { T } from 'types/common'
 
@@ -31,15 +31,23 @@ class TranslatedError extends PureComponent<Props> {
       return null
     }
     // $FlowFixMe
-    const arg: Object = Object.assign({ message: error.message }, error)
+    const arg: Object = Object.assign({ message: error.message, returnObjects: true }, error)
     if (error.name) {
       const translation = t(`errors.${error.name}.${field}`, arg)
       if (translation !== `errors.${error.name}.${field}`) {
         // It is translated
+        if (typeof translation === 'object') {
+          // It is a list
+          return Object.entries(translation).map(([key, str]) =>
+            typeof str === 'string' ? <li key={key}>{str}</li> : null,
+          )
+        }
         return translation
       }
     }
-    return t(`errors.generic.${field}`, arg)
+
+    const genericTranslation = t(`errors.generic.${field}`, arg)
+    return genericTranslation === `errors.generic.${field}` ? null : genericTranslation
   }
 }
 
