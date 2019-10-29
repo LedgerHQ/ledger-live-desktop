@@ -413,7 +413,7 @@
       "update": "Mettre à jour",
       "latest": "La version {{version}} du firmware est disponible.",
       "prepareSeed": "Assurez-vous que votre phrase de récupération en 24 mots est écrite sur votre feuille de récupération et accessible, par précaution.",
-      "disclaimerTitle": "Vous êtes sur le point d’installer la <1><0>version {{version}}</0></1> du firmware.",
+      "disclaimerTitle": "Vous êtes sur le point d’installer la <1>version {{version}}</1> du firmware.",
       "disclaimerAppDelete": "Désinstallez des applications pour libérer de l’espace. Cette opération n’affectera pas vos crypto-actifs.",
       "disclaimerAppReinstall": "Assurez-vous que votre feuille de récupération est accessible, par mesure de précaution.",
       "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour",
