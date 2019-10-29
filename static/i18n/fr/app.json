@@ -412,8 +412,8 @@
       "removeApps": "Désinstaller toutes les apps avant de mettre à jour",
       "update": "Mettre à jour",
       "latest": "La version {{version}} du firmware est disponible.",
-      "prepareSeed": "Assurez-vous que votre phrase de récupération en 24 mots est écrite sur votre feuille de récupération et accessible, par précaution.",
-      "disclaimerTitle": "Vous êtes sur le point d’installer la <1>version {{version}}</1> du firmware.",
+      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible, as a precaution.",
+      "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
       "disclaimerAppDelete": "Désinstallez des applications pour libérer de l’espace. Cette opération n’affectera pas vos crypto-actifs.",
       "disclaimerAppReinstall": "Assurez-vous que votre feuille de récupération est accessible, par mesure de précaution.",
       "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour",
@@ -1240,7 +1240,12 @@
     },
     "MCUNotGenuineToDashboard": {
       "title": "Accéder au tableau de bord pour effectuer la mise à jour",
-      "description": "Veuillez redémarrer l'appareil sans appuyer sur un bouton. Appuyez ensuite trois fois sur les deux boutons de l'appareil pour accéder au tableau de bord. Enfin, ouvrez le Gestionnaire pour mettre à jour le firmware."
+      "description": "",
+      "list": {
+        "1": "Disconnect and reconnect the USB cable without pressing any button.",
+        "2": "Press both buttons three times to access the Dashboard.",
+        "3": "Open the Manager and click Update firmware."
+      }
     }
   }
 }
