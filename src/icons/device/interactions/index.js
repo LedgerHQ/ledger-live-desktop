@@ -57,8 +57,8 @@ const Interactions = ({
     error: !!error,
     screen: error ? 'fail' : screen,
     usb: wire && usbMap[wire],
-    leftHint: action === 'left' || action === 'accept',
-    rightHing: action === 'accept',
+    leftHint: action === 'left' || (type === 'nanoX' && action === 'accept'),
+    rightHint: action === 'accept',
   }
 
   return <Device open {...rest} {...props} />
