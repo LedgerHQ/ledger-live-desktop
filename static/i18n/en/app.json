@@ -1258,12 +1258,12 @@
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "You can't receive funds on originated account",
+      "title": "Cannot receive on subaccounts, please select the parent account.",
       "description": "If you want to receive funds, please use the parent account"
     },
     "UnavailableTezosOriginatedAccountSend": {
-      "title": "Sorry, you can't send funds from originated account yet",
-      "description": "Please contact Ledger Support for more information"
+      "title": "Cannot send from subaccounts yet",
+      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon amendment."
     }
   }
 }
