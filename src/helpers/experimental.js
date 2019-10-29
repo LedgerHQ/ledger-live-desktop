@@ -57,13 +57,14 @@ export const experimentalFeatures: Feature[] = [
     valueOn: 'http://countervalue-service.dev.aws.ledger.fr',
     valueOff: 'https://countervalues.api.live.ledger.com',
     title: 'Experimental Countervalues API',
-    description: 'Experimental Countervalues API upgrade',
+    description: 'Changing this value may break the countervalues displayed for your accounts.',
   },
   {
     type: 'integer',
     name: 'KEYCHAIN_OBSERVABLE_RANGE',
-    title: 'Gap Limit',
-    description: 'Custom gap limit for all accounts',
+    title: 'Custom gap limit',
+    description:
+      'Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts.',
     minValue: 20,
     maxValue: 999,
   },
@@ -71,7 +72,8 @@ export const experimentalFeatures: Feature[] = [
     type: 'integer',
     name: 'FORCE_PROVIDER',
     title: 'Manager provider',
-    description: 'Change apps provider in the Manager',
+    description:
+      'Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device.',
     minValue: 1,
   },
   {
