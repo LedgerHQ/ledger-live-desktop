@@ -1907,17 +1907,17 @@
     events "^3.0.0"
 
 "@ledgerhq/ledger-core@^3.4.0":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-3.5.0.tgz#784e5bff69b812c4615511915d536fbdf98d3e78"
-  integrity sha512-yhiekWOiTgma4bsxIfPXV1s4xPO75T/9iusIJ/5l23DEkibTS8j0sjUz6Wow/FG6L58x/2IoESYu7yghx1Th8Q==
+  version "3.5.4"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-3.5.4.tgz#f8d7bc0cf04f15a12bff95f6a5f61edb33f6e01a"
+  integrity sha512-OPUHZ0v/xe6Q6akYFNZKfB6EvqyTr6npu1Ld/x1f8UlgxaEDl7oXGvOfoMbW9qqcldK/sqKys/KUnnxw7wNEww==
   dependencies:
-    bindings "^1.3.0"
+    bindings "1.3.0"
     nan "^2.6.2"
 
 "@ledgerhq/live-common@^8.4.0":
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-8.4.0.tgz#efb81315f306aeaefdb6e89fdba493336a72c612"
-  integrity sha512-LzHJW6RVrcjK0fr3TLRspi7qeJMR+BWdl6crDGO/qr3s6NJ8+rdY5+5a6QVNDDJfPujplLCxWGFXVQzQ+W2Vkw==
+  version "8.4.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-8.4.1.tgz#e60726692e6e669e3ec5eca594bffe42659ed651"
+  integrity sha512-geJdm/lF2qAS+0UAIpq0TphzItXVUsL4/GJZkcz/3wc1JKcUgTPn1+xLpy1URVZPPuWq4nHcST9PQYF4ZYjGRg==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "4"
@@ -4480,6 +4480,11 @@ binaryextensions@2:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/binaryextensions/-/binaryextensions-2.1.1.tgz#3209a51ca4a4ad541a3b8d3d6a6d5b83a2485935"
   integrity sha512-XBaoWE9RW8pPdPQNibZsW2zh8TW6gcarXp1FZPwT8Uop8ScSNldJEWf2k9l3HeTqdrEwsOsFcq74RiJECW34yA==
+
+bindings@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.3.0.tgz#b346f6ecf6a95f5a815c5839fc7cdb22502f1ed7"
+  integrity sha512-DpLh5EzMR2kzvX1KIlVC0VkC3iZtHKTgdtZ0a3pglBZdaQFjt5S9g9xd1lE+YvXyfd6mtCeRnrUfOLYiTMlNSw==
 
 bindings@^1.2.1, bindings@^1.3.0, bindings@^1.4.0, bindings@^1.5.0:
   version "1.5.0"
