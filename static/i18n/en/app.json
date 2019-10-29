@@ -1250,7 +1250,12 @@
     },
     "MCUNotGenuineToDashboard": {
       "title": "Access dashboard to update",
-      "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
+      "description": "",
+      "list": {
+        "1": "Disconnect and reconnect the USB cable without pressing any button.",
+        "2": "Press both buttons three times to access the Dashboard.",
+        "3": "Open the Manager and click Update firmware."
+      }
     },
     "UnavailableTezosOriginatedAccountReceive": {
       "title": "You can't receive funds on originated account",
