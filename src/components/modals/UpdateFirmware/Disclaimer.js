@@ -3,11 +3,7 @@
 
 import React, { PureComponent } from 'react'
 import { Trans, translate } from 'react-i18next'
-import type {
-  DeviceInfo,
-  FinalFirmware,
-  OsuFirmware,
-} from '@ledgerhq/live-common/lib/types/manager'
+import type { FinalFirmware, OsuFirmware } from '@ledgerhq/live-common/lib/types/manager'
 import type { T } from 'types/common'
 import { openURL } from 'helpers/linking'
 import { urls } from 'config/urls'
@@ -41,7 +37,6 @@ type Props = {
   },
   goToNextStep: () => void,
   onClose: () => void,
-  deviceInfo: DeviceInfo,
 }
 
 type State = *
@@ -78,7 +73,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
   }
 
   render(): React$Node {
-    const { status, firmware, onClose, t, goToNextStep, deviceInfo } = this.props
+    const { status, firmware, onClose, t, goToNextStep } = this.props
     const { showUninsWarning } = this.state
 
     return (
@@ -185,11 +180,9 @@ class DisclaimerModal extends PureComponent<Props, State> {
                   disabled={!this.state.seedReady}
                   primary
                   onClick={
-                    deviceInfo.version === '1.5.5'
-                      ? showUninsWarning
-                        ? goToNextStep
-                        : () => this.setState({ showUninsWarning: true })
-                      : goToNextStep
+                    showUninsWarning
+                      ? goToNextStep
+                      : () => this.setState({ showUninsWarning: true })
                   }
                   style={{ marginLeft: 10 }}
                 >
