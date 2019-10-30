@@ -15,7 +15,7 @@ import {
   findSubAccountById,
   getAccountName,
 } from '@ledgerhq/live-common/lib/account'
-import { push } from 'react-router-redux'
+import { push } from 'connected-react-router'
 
 import Text from 'components/base/Text'
 import { accountsSelector } from '../../../reducers/accounts'

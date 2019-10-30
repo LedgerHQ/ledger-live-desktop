@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { openURL } from 'helpers/linking'
 import { Trans, translate } from 'react-i18next'
 import styled from 'styled-components'
-import { push } from 'react-router-redux'
+import { push } from 'connected-react-router'
 import moment from 'moment'
 import {
   getOperationAmountNumber,

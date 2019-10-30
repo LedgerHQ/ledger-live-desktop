@@ -9,7 +9,7 @@ import { createSelector, createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { getAssetsDistribution } from '@ledgerhq/live-common/lib/portfolio'
-import { push } from 'react-router-redux'
+import { push } from 'connected-react-router'
 
 import Text from 'components/base/Text'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'

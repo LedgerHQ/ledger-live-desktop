@@ -4,7 +4,7 @@ import React, { useMemo, useCallback } from 'react'
 import { connect } from 'react-redux'
 import { Trans } from 'react-i18next'
 import styled from 'styled-components'
-import { push } from 'react-router-redux'
+import { push } from 'connected-react-router'
 import { listTokens } from '@ledgerhq/live-common/lib/currencies'
 import type { ApplicationVersion } from '@ledgerhq/live-common/lib/types/manager'
 

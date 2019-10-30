@@ -5,7 +5,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { translate } from 'react-i18next'
-import { push } from 'react-router-redux'
+import { push } from 'connected-react-router'
 import logger from 'logger'
 
 import type { T } from 'types/common'
