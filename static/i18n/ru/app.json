@@ -67,7 +67,10 @@
   "operation": {
     "type": {
       "IN": "Получено",
-      "OUT": "Отправлено"
+      "OUT": "Отправлено",
+      "CREATE": "Created",
+      "REVEAL": "Revealed",
+      "DELEGATE": "Delegated"
     }
   },
   "time": {
@@ -266,6 +269,11 @@
     "countTooltip": "1 токен",
     "countTooltip_plural": "{{count}} токенов"
   },
+  "subAccounts": {
+    "title": "Subaccounts",
+    "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
+    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})"
+  },
   "migrateAccounts": {
     "overview": {
       "title": "Доступно обновление учётных записей Ledger Live",
@@ -372,7 +380,9 @@
     "showMore": "Показать больше {{recipients}}",
     "showLess": "Показать меньше",
     "tokenOperations": "Операции токена",
+    "subAccountOperations": "Subaccount operations",
     "tokenTooltip": "Эта операция связана с следующими операциями токена",
+    "subAccountTooltip": "This operation is related to the following subaccount operations",
     "internalOperations": "Внутренние операции",
     "internalOpTooltip": "Эта операция имеет внутренние операции",
     "details": "{{ currency }} подробности",
@@ -412,8 +422,8 @@
       "removeApps": "Uninstall all apps before updating",
       "update": "Firmware update",
       "latest": "Доступно встроенное ПО версии {{version}}.",
-      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible.",
-      "disclaimerTitle": "Вы собираетесь установить <1><0>встроенное ПО версии {{version}}</0></1>.",
+      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible, as a precaution.",
+      "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
       "disclaimerAppDelete": "Чтобы освободить место, удалите некоторые приложения. Это не повлияет на криптоактивы.",
       "disclaimerAppReinstall": "В качестве предосторожности убедитесь, что ваша карточка восстановления цела и невредима.",
       "downloadingUpdateDesc": "Подождите пока программа установки загрузится",
@@ -1240,7 +1250,20 @@
     },
     "MCUNotGenuineToDashboard": {
       "title": "Доступ к панели управления для обновления",
-      "description": "Пожалуйста, перезапустите устройство без нажатия любой кнопки. Затем нажмите обе кнопки на устройстве три раза, чтобы получить доступ к панели управления. Наконец, откройте менеджер для обновления прошивки."
+      "description": "",
+      "list": {
+        "1": "Disconnect and reconnect the USB cable without pressing any button.",
+        "2": "Press both buttons three times to access the Dashboard.",
+        "3": "Open the Manager and click Update firmware."
+      }
+    },
+    "UnavailableTezosOriginatedAccountReceive": {
+      "title": "Cannot receive on subaccounts, please select the parent account.",
+      "description": "If you want to receive funds, please use the parent account"
+    },
+    "UnavailableTezosOriginatedAccountSend": {
+      "title": "Cannot send from subaccounts yet",
+      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon amendment."
     }
   }
 }
