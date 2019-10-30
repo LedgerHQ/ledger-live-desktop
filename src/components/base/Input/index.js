@@ -162,7 +162,7 @@ const Input = React.forwardRef(
     )
 
     const handleClick = useCallback(() => {
-      if (inputRef.current) {
+      if (inputRef && inputRef.current) {
         inputRef.current.focus()
       }
     }, [inputRef])
