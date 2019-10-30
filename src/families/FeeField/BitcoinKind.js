@@ -115,7 +115,7 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
           error={showError && feePerByteError}
           renderRight={
             <InputRight>
-              <Trans i18nKey="send.steps.amount.unitPerByte" values={{ unit: satoshi.code }} />
+              <Trans i18nKey="send.steps.details.unitPerByte" values={{ unit: satoshi.code }} />
             </InputRight>
           }
           allowZero

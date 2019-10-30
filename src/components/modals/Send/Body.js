@@ -25,10 +25,12 @@ import { DisconnectedDevice, UserRefusedOnDevice } from '@ledgerhq/errors'
 import Stepper from 'components/base/Stepper'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 
-import StepAmount, { StepAmountFooter } from './steps/01-step-amount'
-import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
-import StepVerification from './steps/03-step-verification'
-import StepConfirmation, { StepConfirmationFooter } from './steps/04-step-confirmation'
+import StepRecipient, { StepRecipientFooter } from './steps/StepRecipient'
+import StepAmount, { StepAmountFooter } from './steps/StepAmount'
+import StepConnectDevice, { StepConnectDeviceFooter } from './steps/StepConnectDevice'
+import StepVerification from './steps/StepVerification'
+import StepSummary, { StepSummaryFooter } from './steps/StepSummary'
+import StepConfirmation, { StepConfirmationFooter } from './steps/StepConfirmation'
 
 type OwnProps = {|
   stepId: string,
@@ -56,20 +58,35 @@ type Props = {|
 
 const createSteps = () => [
   {
+    id: 'recipient',
+    label: <Trans i18nKey="send.steps.details.title" />,
+    component: StepRecipient,
+    footer: StepRecipientFooter,
+  },
+  {
     id: 'amount',
-    label: <Trans i18nKey="send.steps.amount.title" />,
+    excludeFromBreadcrumb: true,
     component: StepAmount,
     footer: StepAmountFooter,
+    onBack: ({ transitionTo }) => transitionTo('recipient'),
+  },
+  {
+    id: 'summary',
+    label: <Trans i18nKey="send.steps.summary.title" />,
+    component: StepSummary,
+    footer: StepSummaryFooter,
+    onBack: ({ transitionTo }) => transitionTo('recipient'),
   },
   {
     id: 'device',
-    label: <Trans i18nKey="send.steps.connectDevice.title" />,
+    label: <Trans i18nKey="send.steps.device.title" />,
     component: StepConnectDevice,
     footer: StepConnectDeviceFooter,
-    onBack: ({ transitionTo }) => transitionTo('amount'),
+    onBack: ({ transitionTo }) => transitionTo('recipient'),
   },
   {
     id: 'verification',
+    excludeFromBreadcrumb: true,
     label: <Trans i18nKey="send.steps.verification.title" />,
     component: StepVerification,
     shouldPreventClose: true,
@@ -81,7 +98,7 @@ const createSteps = () => [
     footer: StepConfirmationFooter,
     onBack: ({ transitionTo, onRetry }) => {
       onRetry()
-      transitionTo('amount')
+      transitionTo('recipient')
     },
   },
 ]
@@ -121,7 +138,7 @@ const Body = ({
     bridgeError,
     bridgePending,
   } = useBridgeTransaction()
-
+  // console.log({ status, bridgeError })
   const [isAppOpened, setAppOpened] = useState(false)
   const [optimisticOperation, setOptimisticOperation] = useState(null)
   const [transactionError, setTransactionError] = useState(null)

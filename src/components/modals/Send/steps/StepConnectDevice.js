@@ -7,7 +7,7 @@ import Button from 'components/base/Button'
 import EnsureDeviceApp from 'components/EnsureDeviceApp'
 
 import type { StepProps } from '../types'
-import { TokenTips } from '../../Receive/steps/02-step-connect-device'
+import TokenTips from '../../TokenTips'
 
 export default function StepConnectDevice({
   account,

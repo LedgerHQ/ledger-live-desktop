@@ -27,7 +27,6 @@ function format(unit: Unit, value: BigNumber, { locale, isFocused, showAllDigits
 }
 
 const Currencies = styled(Box)`
-  position: relative;
   top: -1px;
   right: -1px;
   width: 100px;

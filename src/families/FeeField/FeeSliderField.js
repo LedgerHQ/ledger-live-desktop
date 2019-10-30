@@ -63,6 +63,7 @@ const FeeSliderField = ({ value, onChange, unit, error, defaultValue }: Props) =
 
   return (
     <GenericContainer
+      i18nKeyOverride="send.steps.details.ethereumGasPrice"
       header={
         <div style={{ fontFamily: 'Inter', textAlign: 'right' }}>
           <Text color="#999" fontSize={4}>
@@ -74,15 +75,15 @@ const FeeSliderField = ({ value, onChange, unit, error, defaultValue }: Props) =
         </div>
       }
     >
-      <Box flex={1} pt={2}>
+      <Box flex={1}>
         <Slider error={error} value={index} onChange={setValueIndex} steps={range.steps} />
       </Box>
       <Box
-        ff="Inter|SemiBold"
-        fontSize="11px"
+        ff="Inter|Medium"
+        fontSize="12px"
         horizontal
         justifyContent="space-between"
-        color="gray"
+        color="palette.text.shade60"
       >
         <Text>
           <Trans i18nKey="fees.slow" />

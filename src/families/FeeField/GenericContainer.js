@@ -10,7 +10,17 @@ import { urls } from 'config/urls'
 import { track } from 'analytics/segment'
 
 export default translate()(
-  ({ children, header, t }: { children: React$Node, header?: React$Node, t: * }) => (
+  ({
+    children,
+    header,
+    t,
+    i18nKeyOverride,
+  }: {
+    children: React$Node,
+    header?: React$Node,
+    i18nKeyOverride?: string,
+    t: *,
+  }) => (
     <Box flow={1}>
       <Box horizontal alignItems="center" justifyContent="space-between">
         <LabelWithExternalIcon
@@ -18,7 +28,7 @@ export default translate()(
             openURL(urls.feesMoreInfo)
             track('Send Flow Fees Help Requested')
           }}
-          label={t('send.steps.amount.fees')}
+          label={t(i18nKeyOverride || 'send.steps.details.fees')}
         />
         {header}
       </Box>

@@ -1541,9 +1541,9 @@
     regenerator-runtime "^0.13.2"
 
 "@babel/runtime@^7.1.2":
-  version "7.7.2"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.2.tgz#111a78002a5c25fc8e3361bedc9529c696b85a6a"
-  integrity sha512-JONRbXbTXc9WQE2mAZd1p0Z3DZ/6vaQIkgYMSTP3KjRCyd7rCZCcfhCyX+YjwcKxcZ82UrxbRD358bpExNgrjw==
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.0.tgz#9b309d493864d69e0b9ec093e1426535a76b4b94"
+  integrity sha512-xdf3hZAzoqL9q7ItTe/KyUGw214oXdHmq2XhW8ANRuo2KMX+s17RK+z4DsQiPkdOqCjep14eNTneRoiTs9T1AQ==
   dependencies:
     regenerator-runtime "^0.13.2"
 
@@ -1914,10 +1914,10 @@
     bindings "1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@^8.4.0":
-  version "8.8.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-8.8.0.tgz#5007c419efe290bc4d71fb2bc5e0b3423de3c5e2"
-  integrity sha512-GAl9l1XyesrhdSnyIcxVsk9ubFH1sSW3RtSH41v299bhHzeKzBUWx1bvMHhL5/UJsOU7DZiD+MocBgOvAkpg/A==
+"@ledgerhq/live-common@^8.6.0":
+  version "8.6.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-8.6.0.tgz#180dfb8a05e0c918303a966d651491c77e87112b"
+  integrity sha512-X3AarjqZxlz67+f8yQjr+ul1IAMrug3KXTGCxLu5i355lEA8iRkNq+Z1kYMRLk32tRhaguYKmPXC4FyP3VTe8g==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "4"
@@ -17049,6 +17049,11 @@ usb@^1.6.0:
     bindings "^1.4.0"
     nan "2.13.2"
     prebuild-install "^5.2.4"
+
+use-debounce@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/use-debounce/-/use-debounce-3.1.0.tgz#05a5c8cd3c2f309699f08961d7c8bbe7f68720bb"
+  integrity sha512-DEf3L/ZKkOSTARk/DHlC6KAAJKwMqpck8Zx06SM2Wr+LfU1TzhO8hZRzB/qbpSQqREYWQes24n1q9doeTMqF4g==
 
 use-memo-one@^1.1.0:
   version "1.1.1"

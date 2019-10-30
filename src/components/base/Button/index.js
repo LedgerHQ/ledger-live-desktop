@@ -182,7 +182,16 @@ function getStyles(props, state) {
 
   return output
 }
-
+const LoadingWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 export const Base = styled.button.attrs(p => ({
   ff: 'Inter|SemiBold',
   fontSize: p.fontSize || (!p.small ? 4 : 3),
@@ -197,6 +206,11 @@ export const Base = styled.button.attrs(p => ({
   ${fontWeight};
   ${fontFamily};
   border: none;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  flex-direction: row;
+  alig-items: center;
   border-radius: ${p => p.theme.radii[1]}px;
   cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
   height: ${p => (p.small ? 34 : 40)}px;
@@ -277,7 +291,12 @@ class Button extends PureComponent<
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
       >
-        {isLoading ? <Spinner size={16} /> : children}
+        {isLoading ? (
+          <LoadingWrapper>
+            <Spinner size={16} />
+          </LoadingWrapper>
+        ) : null}
+        <div style={{ opacity: !isLoading ? 1 : 0 }}>{children}</div>
       </Base>
     )
   }

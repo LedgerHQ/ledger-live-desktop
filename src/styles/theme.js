@@ -1,6 +1,7 @@
 // @flow
 
 import { rgba } from './helpers'
+import { WARN_LEGACY_COLORS } from '../config/constants'
 
 export const space = [0, 5, 10, 15, 20, 30, 40, 50, 70]
 export const fontSizes = [8, 9, 10, 12, 13, 16, 18, 22, 32]
@@ -40,7 +41,7 @@ export const fontFamilies = {
   },
 }
 
-export const colors = {
+const colors = {
   transparent: 'transparent',
 
   pearl: '#ff0000',
@@ -75,6 +76,18 @@ export const colors = {
   marketDown_eastern: '#6490f1',
   marketDown_western: '#ea2e49',
 }
+
+const exportedColors = WARN_LEGACY_COLORS
+  ? new Proxy(colors, {
+      get: (target, prop) => {
+        // eslint-disable-next-line no-console
+        console.warn(`Usage of the deprecated legacy color scheme detected ${prop}`)
+        return '#FF0000'
+      },
+    })
+  : colors
+
+export { exportedColors as colors }
 
 export default {
   sizes: {

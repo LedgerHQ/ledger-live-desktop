@@ -40,12 +40,17 @@ const AdvancedOptions = ({ onChange, account, transaction }: Props) => {
   return (
     <Box vertical flow={5}>
       <Box grow>
-        <Label>
+        <Label mb={5}>
           <span>
-            <Trans i18nKey="send.steps.amount.rippleTag" />
+            <Trans i18nKey="send.steps.details.rippleTag" />
           </span>
         </Label>
-        <Input ff="Inter" value={String(transaction.tag || '')} onChange={onChangeTag} />
+        <Input
+          placeholder={'!!Optional!!'}
+          ff="Inter"
+          value={String(transaction.tag || '')}
+          onChange={onChangeTag}
+        />
       </Box>
     </Box>
   )

@@ -19,7 +19,7 @@ const Wrapper = styled(Box).attrs(() => ({
 `
 
 const Bar = styled.div`
-  background: ${p => p.theme.colors.palette.divider};
+  background: ${p => p.theme.colors.palette.text.shade20};
   flex-grow: 1;
   height: 1px;
   left: ${p => p.start}%;
@@ -47,7 +47,7 @@ const Bar = styled.div`
   }
 
   &:before {
-    background: ${p => p.theme.colors.palette.divider};
+    background: ${p => p.theme.colors.palette.text.shade20};
     left: ${p => (p.disabled ? `${p.disabled[0]}%` : 0)};
     right: ${p => (p.disabled ? `${p.disabled[1]}%` : 'auto')};
     z-index: 2;
@@ -77,33 +77,35 @@ class Breadcrumb extends PureComponent<Props> {
     return (
       <Box {...props} relative>
         <Wrapper>
-          {items.map((item, i) => {
-            let status = 'next'
+          {items
+            .filter(i => !i.excludeFromBreadcrumb)
+            .map((item, i) => {
+              let status = 'next'
 
-            const stepIndex = parseInt(currentStep, 10)
+              const stepIndex = parseInt(currentStep, 10)
 
-            if (i === stepIndex) {
-              status = 'active'
-            }
+              if (i === stepIndex) {
+                status = 'active'
+              }
 
-            if (i < stepIndex) {
-              status = 'valid'
-            }
+              if (i < stepIndex) {
+                status = 'valid'
+              }
 
-            if (stepsErrors.includes(i)) {
-              status = 'error'
-            }
+              if (stepsErrors.includes(i)) {
+                status = 'error'
+              }
 
-            if (stepsDisabled.includes(i)) {
-              status = 'disable'
-            }
+              if (stepsDisabled.includes(i)) {
+                status = 'disable'
+              }
 
-            return (
-              <Step key={i} status={status} number={i + 1}>
-                {item.label}
-              </Step>
-            )
-          })}
+              return (
+                <Step key={i} status={status} number={i + 1}>
+                  {item.label}
+                </Step>
+              )
+            })}
         </Wrapper>
         <Bar
           end={start}

@@ -42,7 +42,7 @@ const AdvancedOptions = ({ onChange, account, transaction, status }: Props) => {
       <Box style={{ width: 200 }}>
         <Label>
           <span>
-            <Trans i18nKey="send.steps.amount.ethereumGasLimit" />
+            <Trans i18nKey="send.steps.details.ethereumGasLimit" />
           </span>
         </Label>
       </Box>

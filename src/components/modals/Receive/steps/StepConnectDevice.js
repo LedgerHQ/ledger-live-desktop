@@ -3,8 +3,6 @@
 import React, { Fragment } from 'react'
 import { Trans } from 'react-i18next'
 import { getMainAccount } from '@ledgerhq/live-common/lib/account/helpers'
-import type { TokenCurrency } from '@ledgerhq/live-common/lib/types'
-import Text from 'components/base/Text'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import EnsureDeviceApp from 'components/EnsureDeviceApp'
@@ -12,22 +10,7 @@ import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
 import TrackPage from 'analytics/TrackPage'
 
 import type { StepProps } from '../index'
-
-export const TokenTips: React$ComponentType<{ token: TokenCurrency }> = React.memo(({ token }) => (
-  <Box mt={4} horizontal alignItems="center">
-    <Text
-      style={{ flex: 1, marginLeft: 10 }}
-      ff="Inter|Regular"
-      color="palette.text.shade80"
-      fontSize={3}
-    >
-      <Trans
-        i18nKey="receive.steps.connectDevice.tokensTip"
-        values={{ currency: token.parentCurrency.name, token: token.name }}
-      />
-    </Text>
-  </Box>
-))
+import TokenTips from '../../TokenTips'
 
 export default function StepConnectDevice({
   account,
