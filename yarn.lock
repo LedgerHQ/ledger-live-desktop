@@ -1907,17 +1907,17 @@
     events "^3.0.0"
 
 "@ledgerhq/ledger-core@^3.4.0":
-  version "3.5.4"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-3.5.4.tgz#f8d7bc0cf04f15a12bff95f6a5f61edb33f6e01a"
-  integrity sha512-OPUHZ0v/xe6Q6akYFNZKfB6EvqyTr6npu1Ld/x1f8UlgxaEDl7oXGvOfoMbW9qqcldK/sqKys/KUnnxw7wNEww==
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-3.6.0.tgz#fb8e24f17be88981be72004f9a4255a169bdb2e9"
+  integrity sha512-upYixeGwYozenYuuDgvhTnImObnO871sCWWJwbNmmeUPWFVl+HaS/ZQhLfVrZqChUOZFANayvmSAUjWBVhVsIw==
   dependencies:
     bindings "1.3.0"
     nan "^2.6.2"
 
 "@ledgerhq/live-common@^8.4.0":
-  version "8.4.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-8.4.1.tgz#e60726692e6e669e3ec5eca594bffe42659ed651"
-  integrity sha512-geJdm/lF2qAS+0UAIpq0TphzItXVUsL4/GJZkcz/3wc1JKcUgTPn1+xLpy1URVZPPuWq4nHcST9PQYF4ZYjGRg==
+  version "8.5.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-8.5.0.tgz#9cfe48973f24c8e5a2f76864339750e317aa38a9"
+  integrity sha512-Snz4R/MciWOGo9MhUot8hdC+2zWAGp94/iCfqMn7qq/O2fNAbID3zLJdkBkUIOTQPDWGwQRL+rB3xNqHnLqdlQ==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "4"
