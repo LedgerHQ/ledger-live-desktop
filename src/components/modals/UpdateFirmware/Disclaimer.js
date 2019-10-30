@@ -69,13 +69,20 @@ class DisclaimerModal extends PureComponent<Props, State> {
     showUninsWarning: false,
   }
 
+  onClose() {
+    this.setState({
+      seedReady: false,
+      showUninsWarning: false,
+    })
+    this.props.onClose()
+  }
+
   render(): React$Node {
     const { status, firmware, onClose, t, goToNextStep, deviceInfo } = this.props
     const { showUninsWarning } = this.state
 
     return (
       <Modal isOpened={status === 'disclaimer'} onClose={onClose}>
-        <TrackPage category="Manager" name="DisclaimerModal" />
         <ModalBody
           grow
           align="center"
@@ -86,6 +93,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
             <Box align="center">
               {showUninsWarning ? (
                 <>
+                  <TrackPage category="Manager" name="DisclaimerModalUninstallAppWarning" />
                   <InfoBubble>
                     <IconInfoCircle size={20} />
                   </InfoBubble>
@@ -109,13 +117,18 @@ class DisclaimerModal extends PureComponent<Props, State> {
                 </>
               ) : (
                 <>
+                  <TrackPage category="Manager" name="DisclaimerModal" />
                   <Text ff="Inter|Regular" fontSize={4} color="palette.text.shade80" align="center">
-                    <Trans i18nKey="manager.firmware.disclaimerTitle">
+                    <Trans
+                      i18nKey="manager.firmware.disclaimerTitle"
+                      values={{
+                        version:
+                          firmware && firmware.final ? getCleanVersion(firmware.final.name) : '',
+                      }}
+                    >
                       You are about to install
                       <Text ff="Inter|SemiBold" color="palette.text.shade100">
-                        {`firmware version ${
-                          firmware && firmware.final ? getCleanVersion(firmware.final.name) : ''
-                        }`}
+                        {'firmware version {{version}}'}
                       </Text>
                     </Trans>
                   </Text>
@@ -148,15 +161,26 @@ class DisclaimerModal extends PureComponent<Props, State> {
             </Box>
           )}
           renderFooter={() => (
-            <Box horizontal justifyContent="space-between" alignItems="center" style={{ flex: 1 }}>
-              <Button onClick={() => this.setState(state => ({ seedReady: !state.seedReady }))}>
-                <Box horizontal align="center">
+            <Box horizontal justifyContent="flex-end" alignItems="center" style={{ flex: 1 }}>
+              {!showUninsWarning ? (
+                <Box
+                  horizontal
+                  align="center"
+                  onClick={() => this.setState(state => ({ seedReady: !state.seedReady }))}
+                  style={{ flex: 1 }}
+                >
                   <CheckBox isChecked={this.state.seedReady} />
-                  <span style={{ marginLeft: 8 }}>{t('manager.firmware.seedReady')}</span>
+                  <Text
+                    ff="Inter|SemiBold"
+                    fontSize={4}
+                    style={{ marginLeft: 8, overflowWrap: 'break-word', flex: 1 }}
+                  >
+                    {t('manager.firmware.seedReady')}
+                  </Text>
                 </Box>
-              </Button>
+              ) : null}
               <Box horizontal>
-                <Button onClick={onClose}>{t('manager.firmware.updateLater')}</Button>
+                <Button onClick={() => this.onClose()}>{t('manager.firmware.updateLater')}</Button>
                 <Button
                   disabled={!this.state.seedReady}
                   primary
