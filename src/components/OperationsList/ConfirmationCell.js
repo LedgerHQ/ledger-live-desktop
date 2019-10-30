@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { createStructuredSelector } from 'reselect'
 import type { TokenAccount, Account, Operation } from '@ledgerhq/live-common/lib/types'
 import { getMainAccount } from '@ledgerhq/live-common/lib/account'
+import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/operation'
 import type { T } from 'types/common'
 import { confirmationsNbForCurrencySelector, marketIndicatorSelector } from 'reducers/settings'
 import { getMarketColor } from 'styles/helpers'
@@ -44,7 +45,9 @@ class ConfirmationCell extends PureComponent<Props> {
     const { account, parentAccount, confirmationsNb, t, operation, marketIndicator } = this.props
     const mainAccount = getMainAccount(account, parentAccount)
 
-    const isNegative = operation.type === 'OUT'
+    const amount = getOperationAmountNumber(operation)
+
+    const isNegative = amount.isNegative()
 
     const isConfirmed =
       (operation.blockHeight ? mainAccount.blockHeight - operation.blockHeight : 0) >
