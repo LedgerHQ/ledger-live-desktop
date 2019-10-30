@@ -36,7 +36,7 @@ class TranslatedError extends PureComponent<Props> {
       const translation = t(`errors.${error.name}.${field}`, arg)
       if (translation !== `errors.${error.name}.${field}`) {
         // It is translated
-        if (typeof translation === 'object') {
+        if (translation && typeof translation === 'object') {
           // It is a list
           return Object.entries(translation).map(([key, str]) =>
             typeof str === 'string' ? <li key={key}>{str}</li> : null,
