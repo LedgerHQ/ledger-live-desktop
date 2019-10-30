@@ -19,8 +19,9 @@ const makeError = (msg, status, url, method) => {
 
 const extractErrorMessage = (raw: string): ?string => {
   try {
-    const data = JSON.parse(raw)
-    let msg = data.error || data.message || data.error_message
+    let data = JSON.parse(raw)
+    if (data && Array.isArray(data)) data = data[0]
+    let msg = data.error || data.message || data.error_message || data.msg
     if (typeof msg === 'string') {
       const m = msg.match(/^JsDefined\((.*)\)$/)
       const innerPart = m ? m[1] : msg
