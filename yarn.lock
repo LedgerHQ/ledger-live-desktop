@@ -2471,6 +2471,11 @@
     text-table "^0.2.0"
     webpack-log "^1.1.2"
 
+"@xstate/react@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@xstate/react/-/react-0.8.0.tgz#7435f949d1211bdda61569f890801b05322385af"
+  integrity sha512-cN9YZr8eh0Pp28qID55BuYyvUBA88RUjhHF9iZGnhnIHoviXQ+Ya1yewz1+Qvekyti3aiggtVQny6oDqlDNzYg==
+
 "@yarnpkg/lockfile@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@yarnpkg/lockfile/-/lockfile-1.1.0.tgz#e77a97fbd345b76d83245edcd17d393b1b41fb31"
@@ -17838,6 +17843,11 @@ xpipe@*:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/xpipe/-/xpipe-1.0.5.tgz#8dd8bf45fc3f7f55f0e054b878f43a62614dafdf"
   integrity sha1-jdi/Rfw/f1Xw4FS4ePQ6YmFNr98=
+
+xstate@^4.6.7:
+  version "4.6.7"
+  resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.6.7.tgz#1f325df07d75676c90d65b17a3a56692f259fd41"
+  integrity sha512-mqgtH6BXOgjOHVDxZPyW/h6QUC5kfEggh5IN8uOitjzrdCScE/a/cwcRvgcH8CGAXYReDNvasOKD0aFBWAZ1fg==
 
 xtend@^4.0.0:
   version "4.0.2"
