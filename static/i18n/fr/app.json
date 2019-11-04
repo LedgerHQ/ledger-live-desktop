@@ -68,9 +68,9 @@
     "type": {
       "IN": "Reçu",
       "OUT": "Envoyé",
-      "CREATE": "Created",
-      "REVEAL": "Revealed",
-      "DELEGATE": "Delegated"
+      "CREATE": "Créée",
+      "REVEAL": "Révélée",
+      "DELEGATE": "Déléguée"
     }
   },
   "time": {
@@ -422,8 +422,8 @@
       "removeApps": "Désinstaller toutes les apps avant de mettre à jour",
       "update": "Mettre à jour",
       "latest": "La version {{version}} du firmware est disponible.",
-      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible, as a precaution.",
-      "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
+      "prepareSeed": "Assurez-vous que votre phrase de récupération de 24 mots est écrite sur votre feuille de récupération et accessible, par précaution.",
+      "disclaimerTitle": "Vous êtes sur le point d’installer la <1>version {{version}}</1> du firmware.",
       "disclaimerAppDelete": "Désinstallez des applications pour libérer de l’espace. Cette opération n’affectera pas vos crypto-actifs.",
       "disclaimerAppReinstall": "Assurez-vous que votre feuille de récupération est accessible, par mesure de précaution.",
       "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour",
@@ -1252,18 +1252,18 @@
       "title": "Accéder au tableau de bord pour effectuer la mise à jour",
       "description": "",
       "list": {
-        "1": "Disconnect and reconnect the USB cable without pressing any button.",
+        "1": "Déconnectez et rebranchez le câble USB sans appuyer sur aucun bouton.",
         "2": "Appuyez trois fois sur les deux boutons pour accéder au tableau de bord.",
-        "3": "Open the Manager and click Update firmware."
+        "3": "Ouvrez le Gestionnaire et cliquez sur Mettre à jour."
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive on subaccounts, please select the parent account.",
-      "description": "If you want to receive funds, please use the parent account"
+      "title": "Impossible de recevoir sur les sous-comptes, veuillez sélectionner le compte parent.",
+      "description": "Si vous souhaitez recevoir des fonds, veuillez utiliser le compte parent"
     },
     "UnavailableTezosOriginatedAccountSend": {
-      "title": "Cannot send from subaccounts yet",
-      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon amendment."
+      "title": "Impossible d'envoyer depuis des sous-comptes",
+      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     }
   }
 }
