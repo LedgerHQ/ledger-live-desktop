@@ -1,7 +1,7 @@
 // @flow
 
 import { combineReducers } from 'redux'
-import { routerReducer as router } from 'react-router-redux'
+import { connectRouter } from 'connected-react-router'
 
 import type { LocationShape } from 'react-router'
 
@@ -39,15 +39,16 @@ export type State = {
 }
 
 // $FlowFixMe
-export default combineReducers({
-  accounts,
-  application,
-  countervalues: CounterValues.reducer,
-  currenciesStatus,
-  devices,
-  modals,
-  router,
-  settings,
-  onboarding,
-  bridgeSync,
-})
+export default history =>
+  combineReducers({
+    accounts,
+    application,
+    countervalues: CounterValues.reducer,
+    currenciesStatus,
+    devices,
+    modals,
+    router: connectRouter(history),
+    settings,
+    onboarding,
+    bridgeSync,
+  })

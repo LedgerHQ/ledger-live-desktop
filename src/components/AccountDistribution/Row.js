@@ -8,7 +8,7 @@ import type { CryptoCurrency, TokenCurrency } from '@ledgerhq/live-common/lib/ty
 import { BigNumber } from 'bignumber.js'
 import { connect } from 'react-redux'
 import styled, { withTheme } from 'styled-components'
-import { push } from 'react-router-redux'
+import { push } from 'connected-react-router'
 import CounterValue from 'components/CounterValue'
 import FormattedVal from 'components/base/FormattedVal'
 import Text from 'components/base/Text'

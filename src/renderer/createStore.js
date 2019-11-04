@@ -1,12 +1,12 @@
 // @flow
 
 import { createStore, applyMiddleware, compose } from 'redux'
-import { routerMiddleware } from 'react-router-redux'
+import { routerMiddleware } from 'connected-react-router'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createHashHistory'
 import type { HashHistory } from 'history'
 import logger from 'middlewares/logger'
-import reducers from 'reducers'
+import createRootReducer from 'reducers'
 
 type Props = {
   history: HashHistory,
@@ -32,5 +32,5 @@ export default ({ state, history, dbMiddleware }: Props) => {
     window.devToolsExtension ? window.devToolsExtension() : f => f, // eslint-disable-line
   )
   // $FlowFixMe
-  return createStore(reducers, state, enhancers)
+  return createStore(createRootReducer(history), state, enhancers)
 }

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import * as d3 from 'd3'
-import { renderToString } from 'react-dom/server'
+import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 import createStore from 'renderer/createStore'
@@ -83,19 +83,19 @@ export default function handleMouseEvents({
     }
     onTooltipUpdate(d)
     NODES.focus.attr('transform', `translate(${x(d.parsedDate)},${y(mapValue(d))})`)
-    renderTooltip &&
-      NODES.tooltip
-        .html(
-          renderToString(
-            // FIXME :o why is this not in React tree. maybe use a portal (native in React now)
-            <Provider store={createStore({})}>
-              <ThemeProvider theme={theme}>
-                <Tooltip renderTooltip={renderTooltip} item={d.ref} />
-              </ThemeProvider>
-            </Provider>,
-          ),
-        )
-        .style('left', `${Math.floor(MARGINS.left + x(d.parsedDate))}px`)
+
+    ReactDOM.render(
+      // FIXME :o why is this not in React tree. maybe use a portal (native in React now)
+      <Provider store={createStore({})}>
+        <ThemeProvider theme={theme}>
+          <Tooltip renderTooltip={renderTooltip} item={d.ref} />
+        </ThemeProvider>
+      </Provider>,
+      NODES.tooltip.node(),
+    )
+
+    NODES.tooltip.style('left', `${Math.floor(MARGINS.left + x(d.parsedDate))}px`)
+
     NODES.xBar
       .attr('x1', x(d.parsedDate))
       .attr('x2', x(d.parsedDate))

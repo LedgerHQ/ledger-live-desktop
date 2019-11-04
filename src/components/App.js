@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { ConnectedRouter } from 'react-router-redux'
+import { ConnectedRouter } from 'connected-react-router'
 import { Switch, Route } from 'react-router'
 import { Provider } from 'react-redux'
 import { I18nextProvider } from 'react-i18next'
