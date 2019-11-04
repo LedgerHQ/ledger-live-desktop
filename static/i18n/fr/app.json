@@ -1263,7 +1263,7 @@
     },
     "UnavailableTezosOriginatedAccountSend": {
       "title": "Impossible d'envoyer depuis des sous-comptes",
-      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+      "description": "Suites aux changements récemment introduits par la mise à jour Babylon, cette fonctionnalité sera ajoutée ultérieurement."
     }
   }
 }
