@@ -270,9 +270,9 @@
     "countTooltip_plural": "{{count}} Tokens"
   },
   "subAccounts": {
-    "title": "Subaccounts",
-    "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
-    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})"
+    "title": "Sous-comptes",
+    "seeSubAccounts": "Afficher les sous-comptes ({{tokenCount}})",
+    "hideSubAccounts": "Masquer les sous-comptes ({{tokenCount}})"
   },
   "migrateAccounts": {
     "overview": {
@@ -380,9 +380,9 @@
     "showMore": "Afficher plus de {{recipients}}",
     "showLess": "Afficher moins",
     "tokenOperations": "Opérations de tokens",
-    "subAccountOperations": "Subaccount operations",
+    "subAccountOperations": "Opérations du sous-compte",
     "tokenTooltip": "Cette opération est liée aux opérations sur tokens suivants",
-    "subAccountTooltip": "This operation is related to the following subaccount operations",
+    "subAccountTooltip": "Cette opération est liée aux opérations de sous-compte suivantes",
     "internalOperations": "Opérations internes",
     "internalOpTooltip": "Cette opération a des opérations internes",
     "details": "Détails sur {{ currency }}",
@@ -1253,7 +1253,7 @@
       "description": "",
       "list": {
         "1": "Disconnect and reconnect the USB cable without pressing any button.",
-        "2": "Press both buttons three times to access the Dashboard.",
+        "2": "Appuyez trois fois sur les deux boutons pour accéder au tableau de bord.",
         "3": "Open the Manager and click Update firmware."
       }
     },
