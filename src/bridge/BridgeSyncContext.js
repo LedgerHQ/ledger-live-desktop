@@ -6,6 +6,7 @@
 
 import logger from 'logger'
 import shuffle from 'lodash/shuffle'
+import uniq from 'lodash/uniq'
 import React, { Component, useContext } from 'react'
 import priorityQueue from 'async/priorityQueue'
 import { connect } from 'react-redux'
@@ -22,6 +23,7 @@ import { currenciesStatusSelector, currencyDownStatusLocal } from 'reducers/curr
 import { SYNC_MAX_CONCURRENT } from 'config/constants'
 import type { CurrencyStatus } from 'reducers/currenciesStatus'
 import { track } from '../analytics/segment'
+import { prepareCurrency } from './cache'
 
 type BridgeSyncProviderProps = {
   children: *,
@@ -70,8 +72,11 @@ const actions = {
 const lastTimeAnalyticsTrackPerAccountId = {}
 
 class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
-  constructor() {
+  constructor(props) {
     super()
+
+    uniq(props.accounts.map(a => a.currency)).forEach(prepareCurrency)
+
     const synchronize = (accountId: string, next: () => void) => {
       const state = syncStateLocalSelector(this.props.bridgeSync, { accountId })
       if (state.pending) {

@@ -7,8 +7,7 @@ import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import Tooltip from 'components/base/Tooltip'
-import { isAccountEmpty, getMainAccount } from '@ledgerhq/live-common/lib/account'
-import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
+import { isAccountEmpty, canSend } from '@ledgerhq/live-common/lib/account'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
@@ -64,19 +63,11 @@ type Props = OwnProps & {
 class AccountHeaderActions extends PureComponent<Props> {
   render() {
     const { account, parentAccount, openModal, t } = this.props
-    const mainAccount = getMainAccount(account, parentAccount)
-    let cap
-    try {
-      const bridge = getAccountBridge(account, parentAccount)
-      cap = bridge.getCapabilities(mainAccount)
-    } catch (e) {
-      return null
-    }
     return (
       <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
         {!isAccountEmpty(account) ? (
           <Fragment>
-            {cap.canSend ? (
+            {canSend(account, parentAccount) ? (
               <Button
                 small
                 primary
