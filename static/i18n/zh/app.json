@@ -421,6 +421,7 @@
       "followTheGuide": "Follow our step by step update guide",
       "removeApps": "Uninstall all apps before updating",
       "update": "Firmware update",
+      "updateBtn": "Update firmware",
       "latest": "固件版本 {{version}} 已可用",
       "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible, as a precaution.",
       "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
