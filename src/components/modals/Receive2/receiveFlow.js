@@ -1,69 +1,115 @@
 import { Machine, assign } from 'xstate'
 
-import SelectAccountStep from './steps/1-select-account'
-import PrepareDeviceStep from './steps/2-prepare-device'
-import VerifyDeviceStep from './steps/3-verify-device'
+// States
+export const SELECT_ACCOUNT = 'select_account'
+export const PREPARE_DEVICE = 'prepare_device'
+export const INFORM_USER = 'inform_user'
+export const VERIFY_DEVICE = 'verify_device'
 
-// states
-const SELECT_ACCOUNT = "selectAccount"
-const PREPARE_DEVICE = "prepareDevice"
-const VERIFY_DEVICE = "verifyDevice"
-const COMPLETE = "complete"
+// Events
+export const ACCOUNT_SELECTED = 'account_selected'
+export const DEVICE_READY = 'device_ready'
+export const DEVICE_VERIFIED = 'device_verified'
+export const DEVICE_DECLINED = 'device_declined'
+export const NEXT = 'next'
+export const PREV = 'prev'
+export const AGAIN = 'again'
+export const SKIP = 'skip'
 
-// actions
-export const ACCOUNT_SELECTED = "accountSelected"
-export const DEVICE_READY = "deviceReady"
-export const ACTION_VERIFIED = "actionVerified"
+export const machine = Machine(
+  {
+    id: 'receiveFlow',
+    initial: SELECT_ACCOUNT,
+    context: {
+      account: null,
+      parentAccount: null,
+      deviceReady: false,
+      deviceVerified: null,
+      verifyAddressError: null,
+      deviceSkipped: false,
+    },
+    states: {
+      [SELECT_ACCOUNT]: {
+        on: {
+          [ACCOUNT_SELECTED]: {
+            actions: 'setAccount',
+          },
+          [NEXT]: {
+            target: PREPARE_DEVICE,
+            cond: 'accountNotNull',
+          },
+        },
+      },
 
-export const components = {
-  [SELECT_ACCOUNT]: SelectAccountStep,
-  [PREPARE_DEVICE]: PrepareDeviceStep,
-  [VERIFY_DEVICE]: VerifyDeviceStep,
-  [COMPLETE]: null,
-}
+      [PREPARE_DEVICE]: {
+        entry: () => assign({
+          deviceReady: false,
+          deviceVerified: null,
+          verifyAddressError: null,
+          deviceSkipped: false,
+        }),
+        on: {
+          [PREV]: SELECT_ACCOUNT,
+          [DEVICE_READY]: {
+            actions: () => assign({
+              deviceReady: true,
+            }),
+          },
+          [NEXT]: {
+            target: INFORM_USER,
+            cond: 'deviceConnected',
+          },
+          [SKIP]: {
+            target: VERIFY_DEVICE,
+            actions: () => assign({
+              deviceVerified: false,
+              deviceSkipped: true,
+            }),
+          },
+        },
+      },
 
-export const machine = Machine({
-  id: 'receiveFlow',
-  initial: SELECT_ACCOUNT,
-  context: {
-    account: null,
+      [INFORM_USER]: {
+        on: {
+          [PREV]: PREPARE_DEVICE,
+          [NEXT]: {
+            target: VERIFY_DEVICE,
+            actions: () => assign({
+              deviceVerified: null,
+            }),
+          },
+        },
+      },
+
+      [VERIFY_DEVICE]: {
+        on: {
+          [DEVICE_VERIFIED]: {
+            actions: () => assign({
+              deviceVerified: true,
+            }),
+          },
+          [DEVICE_DECLINED]: {
+            target: INFORM_USER,
+            actions: () => assign((context, event) => ({
+              verifyAddressError: event.error,
+              deviceVerified: false,
+            })),
+          },
+          [AGAIN]: PREPARE_DEVICE,
+        },
+      },
+    },
   },
-  states: {
-    [SELECT_ACCOUNT]: {
-      meta: {
-        index: 1
-      },
-      on: {
-        [ACCOUNT_SELECTED]: {
-          target: PREPARE_DEVICE,
-          actions: assign((context, event) => ({
-            account: event.account
-          }))
-        }
-      }
+  {
+    guards: {
+      accountNotNull: context => !!context.account,
+      deviceConnected: context => context.deviceReady,
     },
-    [PREPARE_DEVICE]: {
-      meta: {
-        index: 2
-      },
-      on: {
-        [DEVICE_READY]: VERIFY_DEVICE,
-      }
+    actions: {
+      setAccount: assign((context, event) => ({
+        account: event.account,
+        parentAccount: event.parentAccount,
+      })),
     },
-    [VERIFY_DEVICE]: {
-      meta: {
-        index: 3
-      },
-      on: {
-        [ACTION_VERIFIED]: COMPLETE,
-      }
-    },
-    [COMPLETE]: {
-      meta: {
-        index: 4
-      },
-      type: 'final'
-    },
-  }
-});
-
+  },
+)
