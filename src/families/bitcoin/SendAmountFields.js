@@ -11,7 +11,7 @@ import Select from 'components/base/Select'
 import Box from 'components/base/Box'
 import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import invariant from 'invariant'
-import GenericContainer from './GenericContainer'
+import GenericContainer from '../../components/FeesContainer'
 
 type Props = {
   account: Account,

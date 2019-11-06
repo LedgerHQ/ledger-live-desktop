@@ -15,8 +15,8 @@ import Text from 'components/base/Text'
 import CurrencyUnitValue from 'components/CurrencyUnitValue'
 import Slider from 'components/Slider'
 import IconExclamationCircle from 'icons/ExclamationCircle'
-import GenericContainer from './GenericContainer'
-import TranslatedError from '../../components/TranslatedError'
+import GenericContainer from './FeesContainer'
+import TranslatedError from './TranslatedError'
 
 type Props = {
   value: BigNumber,

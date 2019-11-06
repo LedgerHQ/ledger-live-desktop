@@ -13,11 +13,10 @@ import Label from 'components/base/Label'
 import FormattedVal from 'components/base/FormattedVal'
 import CounterValue from 'components/CounterValue'
 import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
-import FeeField from 'families/FeeField'
 import AmountField from '../fields/AmountField'
 import ErrorBanner from '../../../ErrorBanner'
 import type { StepProps } from '../types'
-import AmountRelatedField from '../../../../families/AmountRelatedField'
+import SendAmountFields from '../SendAmountFields'
 
 export default ({
   t,
@@ -46,14 +45,7 @@ export default ({
             onChangeTransaction={onChangeTransaction}
             t={t}
           />
-
-          <FeeField
-            account={mainAccount}
-            status={status}
-            transaction={transaction}
-            onChange={onChangeTransaction}
-          />
-          <AmountRelatedField
+          <SendAmountFields
             account={mainAccount}
             status={status}
             transaction={transaction}

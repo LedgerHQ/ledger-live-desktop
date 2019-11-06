@@ -1,11 +1,7 @@
 // @flow
 import React from 'react'
 import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
-import EthereumKind from './EthereumKind'
-
-const byFamily = {
-  ethereum: EthereumKind,
-}
+import byFamily from 'generated/SendAmountFields'
 
 type Props = {
   account: Account,

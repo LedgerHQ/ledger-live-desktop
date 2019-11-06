@@ -7,6 +7,7 @@
   "author": "Ledger",
   "license": "MIT",
   "scripts": {
+    "prepublish": "bash ./scripts/sync-families-dispatch.sh",
     "postinstall": "bash ./scripts/postinstall.sh",
     "start": "bash ./scripts/start.sh",
     "release": "bash ./scripts/release.sh",
@@ -122,7 +123,6 @@
     "styled-components": "^4.3.2",
     "styled-system": "^2.2.9",
     "uncontrollable": "^6.0.0",
-    "use-debounce": "^3.1.0",
     "uuid": "^3.3.3",
     "winston": "^3.0.0",
     "winston-transport": "^4.2.0",

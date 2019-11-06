@@ -16,7 +16,7 @@ type Props = {
 
 const uint32maxPlus1 = BigNumber(2).pow(32)
 
-const AdvancedOptions = ({ onChange, account, transaction }: Props) => {
+const TagField = ({ onChange, account, transaction }: Props) => {
   const onChangeTag = useCallback(
     str => {
       const bridge = getAccountBridge(account)
@@ -56,4 +56,4 @@ const AdvancedOptions = ({ onChange, account, transaction }: Props) => {
   )
 }
 
-export default translate()(AdvancedOptions)
+export default translate()(TagField)

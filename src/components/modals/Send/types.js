@@ -10,7 +10,8 @@ import type {
 import type { Device } from 'types/common'
 import type { StepProps as DefaultStepProps } from 'components/base/Stepper'
 
-export type StepProps = DefaultStepProps & {
+export type StepProps = {
+  ...DefaultStepProps,
   openedFromAccount: boolean,
   device: ?Device,
   account: ?AccountLike,

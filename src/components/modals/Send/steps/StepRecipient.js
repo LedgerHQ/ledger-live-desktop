@@ -13,7 +13,7 @@ import IconArrowDown from 'icons/ArrowDown'
 import RecipientField from '../fields/RecipientField'
 import ErrorBanner from '../../../ErrorBanner'
 import type { StepProps } from '../types'
-import RecipientRelatedField from '../../../../families/RecipientRelatedField'
+import SendRecipientFields from '../SendRecipientFields'
 
 const Separator = styled.div`
   display: flex;
@@ -85,7 +85,7 @@ export default ({
             bridgePending={bridgePending}
             t={t}
           />
-          <RecipientRelatedField
+          <SendRecipientFields
             account={mainAccount}
             status={status}
             transaction={transaction}

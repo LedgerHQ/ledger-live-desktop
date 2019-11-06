@@ -5,7 +5,7 @@ import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
 import InputCurrency from 'components/base/InputCurrency'
 import invariant from 'invariant'
-import GenericContainer from './GenericContainer'
+import GenericContainer from '../../components/FeesContainer'
 
 type Props = {
   account: Account,

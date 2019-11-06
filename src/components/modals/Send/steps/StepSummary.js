@@ -14,6 +14,7 @@ import {
   getAccountCurrency,
   getAccountUnit,
   getMainAccount,
+  getAccountName,
 } from '@ledgerhq/live-common/lib/account'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import { rgba } from 'styles/helpers'
@@ -47,9 +48,11 @@ const Separator = styled.div`
   width: 100%;
   margin: 15px 0;
 `
+
 export default class StepSummary extends PureComponent<StepProps> {
   render() {
     const { account, transaction, status } = this.props
+    if (!account || !transaction) return null
     const { estimatedFees, amount, totalSpent, warnings } = status
     const feeTooHigh = Object.keys(warnings).includes('feeTooHigh')
     const currency = getAccountCurrency(account)
@@ -71,7 +74,7 @@ export default class StepSummary extends PureComponent<StepProps> {
                     <CryptoCurrencyIcon size={16} currency={currency} />
                   </div>
                   <Text ff="Inter" color="palette.text.shade100" fontSize={4}>
-                    {account.name}
+                    {getAccountName(account)}
                   </Text>
                 </Box>
               </div>
