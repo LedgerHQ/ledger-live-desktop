@@ -83,6 +83,7 @@ const AmountField = ({
         validTransactionError={amountError}
         onChange={onChange}
         value={amount}
+        autoFocus
       />
     </Box>
   )

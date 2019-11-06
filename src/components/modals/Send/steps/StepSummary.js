@@ -50,7 +50,7 @@ export default class StepSummary extends PureComponent<StepProps> {
     const currency = getAccountCurrency(account)
     return (
       <Box flow={4} mx={40}>
-        <TrackPage category="Send Flow" name="Step 3" />
+        <TrackPage category="Send Flow" name="Step Summary" />
         <FromToWrapper>
           <Box>
             <Box horizontal alignItems="center">

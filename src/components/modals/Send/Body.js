@@ -87,9 +87,18 @@ const createSteps = () => [
   {
     id: 'verification',
     excludeFromBreadcrumb: true,
-    label: <Trans i18nKey="send.steps.verification.title" />,
     component: StepVerification,
     shouldPreventClose: true,
+  },
+  {
+    id: 'refused',
+    excludeFromBreadcrumb: true,
+    component: StepConfirmation,
+    footer: StepConfirmationFooter,
+    onBack: ({ transitionTo, onRetry }) => {
+      onRetry()
+      transitionTo('summary')
+    },
   },
   {
     id: 'confirmation',
@@ -228,15 +237,15 @@ const Body = ({
             }
           },
           error: err => {
-            const error = err.statusCode === 0x6985 ? new UserRefusedOnDevice() : err
-            track(
-              error instanceof UserRefusedOnDevice
-                ? 'SendTransactionRefused'
-                : 'SendTransactionError',
-              eventProps,
-            )
-            handleTransactionError(error)
-            transitionTo('confirmation')
+            if (err.statusCode === 0x6985) {
+              track('SendTransactionRefused', eventProps)
+              handleTransactionError(new UserRefusedOnDevice())
+              transitionTo('refused')
+            } else {
+              track('SendTransactionError', eventProps)
+              handleTransactionError(err)
+              transitionTo('confirmation')
+            }
           },
         })
     },

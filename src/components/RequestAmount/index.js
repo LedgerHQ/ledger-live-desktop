@@ -36,6 +36,7 @@ const InputCenter = styled(Box).attrs(() => ({
 `
 
 type OwnProps = {
+  autoFocus?: boolean,
   // left value (always the one which is returned)
   value: BigNumber,
 
@@ -131,6 +132,7 @@ export class RequestAmount extends PureComponent<Props> {
 
   render() {
     const {
+      autoFocus,
       disabled,
       value,
       account,
@@ -145,6 +147,7 @@ export class RequestAmount extends PureComponent<Props> {
       <Box horizontal flow={5} alignItems="center">
         <Box horizontal grow shrink>
           <InputCurrency
+            autoFocus={autoFocus}
             disabled={disabled}
             error={validTransactionError}
             containerProps={{ grow: true }}

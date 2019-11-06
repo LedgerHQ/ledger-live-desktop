@@ -54,7 +54,7 @@ export default ({
 
   return (
     <Box flow={4}>
-      <TrackPage category="Send Flow" name="Step 1" />
+      <TrackPage category="Send Flow" name="Step Recipient" />
       {mainAccount ? <CurrencyDownStatusAlert currency={mainAccount.currency} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       <Box flow={1}>

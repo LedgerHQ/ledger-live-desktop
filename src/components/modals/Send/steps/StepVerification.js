@@ -45,7 +45,7 @@ export default class StepVerification extends PureComponent<StepProps> {
 
     return (
       <Container>
-        <TrackPage category="Send Flow" name="Step 3" />
+        <TrackPage category="Send Flow" name="Step Verification" />
         {!device ? null : (
           <Box mt={isBlue ? 4 : null}>
             <Interactions
