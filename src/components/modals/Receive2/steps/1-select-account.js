@@ -1,41 +1,44 @@
 // @flow
 
-import React, { useState } from 'react'
-import { ModalBody } from 'components/base/Modal'
+import React from 'react'
 import SelectAccount from 'components/SelectAccount'
 import { Trans } from 'react-i18next'
 import Label from 'components/base/Label'
-import Button from 'components/base/Button'
-import { ACCOUNT_SELECTED } from '../receiveFlow'
+import { ACCOUNT_SELECTED, NEXT } from '../receiveFlow'
+import Button from '../../../base/Button'
 
 type Props = {
   send: string => void,
-  context: any
+  context: any,
 }
 
 const SelectAccountStep = ({ send, context }: Props) => {
-  const [ account, setAccount ] = useState()
+  const { account } = context
 
   return (
-    <ModalBody
-      render={() => (
-        <>
-          <Label>
-            <Trans i18nKey="receive.steps.chooseAccount.label" />
-          </Label>
-          <SelectAccount autoFocus withSubAccounts onChange={setAccount} value={account} />
-        </>
-      )}
-      renderFooter={() => (
-        <Button
-          disabled={!account}
-          primary
-          onClick={() => send({ type: ACCOUNT_SELECTED, account})}
-        >
-          <Trans i18nKey="common.continue" />
-        </Button>
-      )}
-    />
+    <>
+      <Label>
+        <Trans i18nKey="receive.steps.chooseAccount.label" />
+      </Label>
+      <SelectAccount
+        autoFocus
+        withSubAccounts
+        onChange={(acc, parentAcc) =>
+          send({ type: ACCOUNT_SELECTED, account: acc, parentAccount: parentAcc })
+        }
+        value={account}
+      />
+    </>
+  )
+}
+
+SelectAccountStep.Footer = ({ send, context }: Props) => {
+  const { account } = context
+
+  return (
+    <Button disabled={!account} primary onClick={() => send(NEXT)}>
+      <Trans i18nKey="common.continue" />
+    </Button>
   )
 }
 

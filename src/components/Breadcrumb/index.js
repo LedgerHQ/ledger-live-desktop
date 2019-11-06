@@ -54,7 +54,7 @@ const Bar = styled.div`
   }
 `
 
-const indexToPurcent = (index, itemsLength) => 100 - (100 / (itemsLength - 1)) * parseInt(index, 10)
+const indexToPercent = (index, itemsLength) => 100 - (100 / (itemsLength - 1)) * parseInt(index, 10)
 
 type Props = {
   currentStep: number | string,
@@ -111,12 +111,12 @@ class Breadcrumb extends PureComponent<Props> {
           disabled={
             stepsDisabled.length > 0
               ? [
-                  stepsDisabled[0] === 0 ? 0 : indexToPurcent(stepsDisabled[0] + 1, itemsLength),
-                  indexToPurcent(stepsDisabled[stepsDisabled.length - 1], itemsLength),
+                  stepsDisabled[0] === 0 ? 0 : indexToPercent(stepsDisabled[0] + 1, itemsLength),
+                  indexToPercent(stepsDisabled[stepsDisabled.length - 1], itemsLength),
                 ]
               : null
           }
-          current={!currentStep ? 100 : indexToPurcent(currentStep, itemsLength)}
+          current={!currentStep ? 100 : indexToPercent(currentStep, itemsLength)}
         />
       </Box>
     )
