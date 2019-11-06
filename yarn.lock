@@ -1541,9 +1541,9 @@
     regenerator-runtime "^0.13.2"
 
 "@babel/runtime@^7.1.2":
-  version "7.6.3"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.6.3.tgz#935122c74c73d2240cafd32ddb5fc2a6cd35cf1f"
-  integrity sha512-kq6anf9JGjW8Nt5rYfEuGRaEAaH1mkv3Bbu6rYvLOpPh/RusSJXuKPEAoZ7L7gybZkchE8+NV5g9vKF4AGAtsA==
+  version "7.7.1"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.1.tgz#b223497bbfbcbbb38116673904debc71470ca528"
+  integrity sha512-SQ0sS7KUJDvgCI2cpZG0nJygO6002oTbhgSuw4WcocsnbxLwL5Q8I3fqbJdyBAc3uFrWZiR2JomseuxSuci3SQ==
   dependencies:
     regenerator-runtime "^0.13.2"
 
@@ -1907,17 +1907,17 @@
     events "^3.0.0"
 
 "@ledgerhq/ledger-core@^3.4.0":
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-3.6.0.tgz#fb8e24f17be88981be72004f9a4255a169bdb2e9"
-  integrity sha512-upYixeGwYozenYuuDgvhTnImObnO871sCWWJwbNmmeUPWFVl+HaS/ZQhLfVrZqChUOZFANayvmSAUjWBVhVsIw==
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-3.8.0.tgz#2f8cd92bd86b31e64b5cee9f7e1dd8d75afd3682"
+  integrity sha512-89W7FxJevTHXdbtGs/eVr8EbhV4s31WKkiP2XFQNmyRSOSqOO++SPWZGmfbULswrjXzYi+5Q+gwxlttWTG+N2A==
   dependencies:
     bindings "1.3.0"
     nan "^2.6.2"
 
 "@ledgerhq/live-common@^8.4.0":
-  version "8.5.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-8.5.1.tgz#46ad33635cca60af3b35b1bc85b54a8812265740"
-  integrity sha512-zzyRRowfoK7HZymD9tKi0pqpf6aW7G0SUGrdNco28G4PJdZ5rY+fuSr2H841YEtecvXO5+/aeCNNqZINkimZKg==
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-8.7.0.tgz#e7fdb754e388d49698c2b4668d919ce86fb46a1f"
+  integrity sha512-p0KZ7MdquG5325t2mYx/2/v5Pg9TvCCfAvFEPaNdemoFkBPkqE5Kz9S6KEpdHe6vMGQBTX5KXTdg2PA2QvHr9A==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "4"
