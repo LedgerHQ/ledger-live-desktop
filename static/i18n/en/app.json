@@ -509,6 +509,9 @@
     "totalSpent": "Total to debit",
     "totalBalance": "Total balance",
     "steps": {
+      "recipient": {
+        "title": "Account"
+      },
       "details": {
         "from": "From",
         "to": "To",

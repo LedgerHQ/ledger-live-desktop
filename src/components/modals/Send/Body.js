@@ -59,13 +59,13 @@ type Props = {|
 const createSteps = () => [
   {
     id: 'recipient',
-    label: <Trans i18nKey="send.steps.details.title" />,
+    label: <Trans i18nKey="send.steps.recipient.title" />,
     component: StepRecipient,
     footer: StepRecipientFooter,
   },
   {
     id: 'amount',
-    excludeFromBreadcrumb: true,
+    label: <Trans i18nKey="send.steps.details.title" />,
     component: StepAmount,
     footer: StepAmountFooter,
     onBack: ({ transitionTo }) => transitionTo('recipient'),
@@ -75,11 +75,11 @@ const createSteps = () => [
     label: <Trans i18nKey="send.steps.summary.title" />,
     component: StepSummary,
     footer: StepSummaryFooter,
-    onBack: ({ transitionTo }) => transitionTo('recipient'),
+    onBack: ({ transitionTo }) => transitionTo('amount'),
   },
   {
     id: 'device',
-    label: <Trans i18nKey="send.steps.device.title" />,
+    excludeFromBreadcrumb: true,
     component: StepConnectDevice,
     footer: StepConnectDeviceFooter,
     onBack: ({ transitionTo }) => transitionTo('recipient'),
