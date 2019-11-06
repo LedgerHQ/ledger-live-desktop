@@ -1,22 +1,16 @@
 // @flow
 
 import React, { PureComponent, Fragment } from 'react'
-import {
-  getMainAccount,
-  getAccountCurrency,
-  getAccountUnit,
-} from '@ledgerhq/live-common/lib/account'
+import { getMainAccount } from '@ledgerhq/live-common/lib/account'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
-import Label from 'components/base/Label'
-import FormattedVal from 'components/base/FormattedVal'
-import CounterValue from 'components/CounterValue'
 import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
 import AmountField from '../fields/AmountField'
 import ErrorBanner from '../../../ErrorBanner'
 import type { StepProps } from '../types'
 import SendAmountFields from '../SendAmountFields'
+import AccountFooter from '../AccountFooter'
 
 export default ({
   t,
@@ -65,50 +59,19 @@ export class StepAmountFooter extends PureComponent<StepProps> {
 
   render() {
     const { t, account, parentAccount, status, bridgePending } = this.props
-    const { amount, errors, totalSpent } = status
+    const { amount, errors } = status
+    if (!account) return null
 
-    const mainAccount = account ? getMainAccount(account, parentAccount) : null
-    const currency = account ? getAccountCurrency(account) : null
-    const accountUnit = account ? getAccountUnit(account) : null
-
-    const isTerminated = mainAccount && mainAccount.currency.terminated
-    const canNext =
-      amount.gt(0) && !bridgePending && !Object.entries(errors).length && !isTerminated
+    const mainAccount = getMainAccount(account, parentAccount)
+    const isTerminated = mainAccount.currency.terminated
+    const hasErrors = Object.keys(errors).length
+    const canNext = amount.gt(0) && !bridgePending && !hasErrors && !isTerminated
 
     return (
       <Fragment>
-        <Box grow>
-          <Label>{t('send.totalSpent')}</Label>
-          <Box horizontal flow={2} align="center">
-            {accountUnit && (
-              <FormattedVal
-                disableRounding
-                style={{ width: 'auto' }}
-                color="palette.text.shade100"
-                val={totalSpent}
-                unit={accountUnit}
-                showCode
-              />
-            )}
-            <Box horizontal align="center">
-              {account && (
-                <CounterValue
-                  prefix="("
-                  suffix=")"
-                  currency={currency}
-                  value={totalSpent}
-                  disableRounding
-                  color="palette.text.shade60"
-                  fontSize={3}
-                  showCode
-                  alwaysShowSign={false}
-                />
-              )}
-            </Box>
-          </Box>
-        </Box>
+        <AccountFooter account={account} />
         <Button
-          isLoading={bridgePending && !Object.entries(errors).length}
+          isLoading={bridgePending && !hasErrors}
           primary
           disabled={!canNext}
           onClick={this.onNext}

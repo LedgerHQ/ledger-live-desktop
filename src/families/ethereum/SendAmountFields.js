@@ -3,9 +3,14 @@ import React from 'react'
 import GasLimitField from './GasLimitField'
 import GasPriceField from './GasPriceField'
 
-export default (props: *) => (
+const Root = (props: *) => (
   <>
     <GasPriceField {...props} />
     <GasLimitField {...props} />
   </>
 )
+
+export default {
+  component: Root,
+  fields: ['gasPrice', 'gasLimit'],
+}

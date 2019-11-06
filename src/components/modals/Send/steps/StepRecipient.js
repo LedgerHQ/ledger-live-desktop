@@ -13,7 +13,7 @@ import IconArrowDown from 'icons/ArrowDown'
 import RecipientField from '../fields/RecipientField'
 import ErrorBanner from '../../../ErrorBanner'
 import type { StepProps } from '../types'
-import SendRecipientFields from '../SendRecipientFields'
+import SendRecipientFields, { getFields } from '../SendRecipientFields'
 
 const Separator = styled.div`
   display: flex;
@@ -110,8 +110,9 @@ export class StepRecipientFooter extends PureComponent<StepProps> {
     const mainAccount = account ? getMainAccount(account, parentAccount) : null
 
     const isTerminated = mainAccount && mainAccount.currency.terminated
-    // FIXME expose fields whose errors we should manage, {recipient + recipientRelated}
-    const canNext = !bridgePending && !Object.entries(errors).length && !isTerminated
+    const fields = ['recipient'].concat(mainAccount ? getFields(mainAccount) : [])
+    const hasFieldError = Object.keys(errors).some(name => fields.includes(name))
+    const canNext = !bridgePending && !hasFieldError && !isTerminated
 
     return (
       <Fragment>

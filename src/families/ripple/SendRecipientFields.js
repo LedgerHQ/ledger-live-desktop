@@ -12,11 +12,12 @@ type Props = {
   onChange: Transaction => void,
   transaction: Transaction,
   account: Account,
+  t: *,
 }
 
 const uint32maxPlus1 = BigNumber(2).pow(32)
 
-const TagField = ({ onChange, account, transaction }: Props) => {
+const TagField = ({ onChange, account, transaction, t }: Props) => {
   const onChangeTag = useCallback(
     str => {
       const bridge = getAccountBridge(account)
@@ -46,7 +47,7 @@ const TagField = ({ onChange, account, transaction }: Props) => {
           </span>
         </Label>
         <Input
-          placeholder={'!!Optional!!'}
+          placeholder={t('send.steps.details.rippleTagPlaceholder')}
           ff="Inter"
           value={String(transaction.tag || '')}
           onChange={onChangeTag}
@@ -56,4 +57,7 @@ const TagField = ({ onChange, account, transaction }: Props) => {
   )
 }
 
-export default translate()(TagField)
+export default {
+  component: translate()(TagField),
+  fields: ['tag'],
+}

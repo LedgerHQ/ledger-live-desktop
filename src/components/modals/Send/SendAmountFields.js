@@ -11,8 +11,9 @@ type Props = {
 }
 
 const AmountRelatedField = (props: Props) => {
-  const Cmp = byFamily[props.account.currency.family]
-  if (!Cmp) return null
+  const module = byFamily[props.account.currency.family]
+  if (!module) return null
+  const Cmp = module.component
   return <Cmp {...props} />
 }
 

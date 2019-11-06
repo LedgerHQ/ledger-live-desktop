@@ -45,4 +45,7 @@ function FeesField({ account, transaction, onChange, status }: Props) {
   )
 }
 
-export default FeesField
+export default {
+  component: FeesField,
+  fields: ['fee'],
+}

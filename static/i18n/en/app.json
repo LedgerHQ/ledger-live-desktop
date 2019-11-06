@@ -507,6 +507,7 @@
   "send": {
     "title": "Send",
     "totalSpent": "Total to debit",
+    "totalBalance": "Total balance",
     "steps": {
       "details": {
         "from": "From",
@@ -521,6 +522,7 @@
         "useRBF": "Use a replace-by-fee transaction",
         "message": "Leave a message (140)",
         "rippleTag": "Tag",
+        "rippleTagPlaceholder": "Optional",
         "ethereumGasLimit": "Gas limit",
         "ethereumGasPrice": "Gas price",
         "unitPerByte": "{{unit}} per byte"

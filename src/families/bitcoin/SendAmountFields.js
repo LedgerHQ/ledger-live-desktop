@@ -125,4 +125,7 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
   )
 }
 
-export default translate()(FeesField)
+export default {
+  component: translate()(FeesField),
+  fields: ['feePerByte'],
+}

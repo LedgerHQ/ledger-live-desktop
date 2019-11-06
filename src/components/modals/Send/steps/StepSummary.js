@@ -4,23 +4,15 @@ import React, { Fragment, PureComponent } from 'react'
 import styled from 'styled-components'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
-import Label from 'components/base/Label'
 import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
 import IconWallet from 'icons/Wallet'
 import IconQrCode from 'icons/QrCode'
-import CounterValue from 'components/CounterValue'
-import {
-  getAccountCurrency,
-  getAccountUnit,
-  getMainAccount,
-  getAccountName,
-} from '@ledgerhq/live-common/lib/account'
+import { getAccountCurrency, getAccountName } from '@ledgerhq/live-common/lib/account'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import { rgba } from 'styles/helpers'
 import Ellipsis from 'components/base/Ellipsis'
 import Button from 'components/base/Button'
-import Spinner from 'components/base/Spinner'
 import { Trans } from 'react-i18next'
 import type { StepProps } from '../types'
 
@@ -132,6 +124,7 @@ export default class StepSummary extends PureComponent<StepProps> {
             </Text>
             <FormattedVal
               color={'palette.text.shade80'}
+              disableRounding
               unit={currency.units[0]}
               val={totalSpent}
               fontSize={4}
@@ -152,50 +145,12 @@ export class StepSummaryFooter extends PureComponent<StepProps> {
   }
 
   render() {
-    const { t, account, parentAccount, status, bridgePending } = this.props
-    const { amount, errors, totalSpent } = status
-
-    const mainAccount = account ? getMainAccount(account, parentAccount) : null
-    const currency = account ? getAccountCurrency(account) : null
-    const accountUnit = account ? getAccountUnit(account) : null
-
-    const isTerminated = mainAccount && mainAccount.currency.terminated
-    const canNext =
-      amount.gt(0) && !bridgePending && !Object.entries(errors).length && !isTerminated
-
+    const { t, account, status, bridgePending } = this.props
+    if (!account) return null
+    const { amount, errors } = status
+    const canNext = amount.gt(0) && !bridgePending && !Object.keys(errors).length
     return (
       <Fragment>
-        <Box grow>
-          <Label>{t('send.totalSpent')}</Label>
-          <Box horizontal flow={2} align="center">
-            {accountUnit && (
-              <FormattedVal
-                disableRounding
-                style={{ width: 'auto' }}
-                color="palette.text.shade100"
-                val={totalSpent}
-                unit={accountUnit}
-                showCode
-              />
-            )}
-            <Box horizontal align="center">
-              {account && (
-                <CounterValue
-                  prefix="("
-                  suffix=")"
-                  currency={currency}
-                  value={totalSpent}
-                  disableRounding
-                  color="palette.text.shade60"
-                  fontSize={3}
-                  showCode
-                  alwaysShowSign={false}
-                />
-              )}
-            </Box>
-            {bridgePending && <Spinner size={10} />}
-          </Box>
-        </Box>
         <Button primary disabled={!canNext} onClick={this.onNext}>
           {t('common.continue')}
         </Button>
