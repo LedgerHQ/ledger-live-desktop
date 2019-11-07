@@ -7,7 +7,11 @@ import type {
   AccountLike,
   PortfolioRange,
 } from '@ledgerhq/live-common/lib/types'
-import { listSubAccounts, getAccountCurrency } from '@ledgerhq/live-common/lib/account/helpers'
+import {
+  listSubAccounts,
+  getAccountCurrency,
+  getAccountName,
+} from '@ledgerhq/live-common/lib/account/helpers'
 import { Trans } from 'react-i18next'
 
 import Text from 'components/base/Text'
@@ -43,14 +47,14 @@ export const matchesSearch = (
   let match
 
   if (account.type === 'Account') {
-    match = `${account.currency.ticker}|${account.currency.name}|${account.name}`
+    match = `${account.currency.ticker}|${account.currency.name}|${getAccountName(account)}`
     subMatch =
       subMatch &&
       !!account.subAccounts &&
       listSubAccounts(account).some(token => matchesSearch(search, token))
   } else {
     const c = getAccountCurrency(account)
-    match = `${c.ticker}|${c.name}`
+    match = `${c.ticker}|${c.name}|${getAccountName(account)}`
   }
 
   return match.toLowerCase().includes(search.toLowerCase()) || subMatch

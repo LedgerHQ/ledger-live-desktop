@@ -2,7 +2,7 @@
 
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 
-import React, { PureComponent } from 'react'
+import React, { useEffect, useState, useLayoutEffect, useCallback } from 'react'
 import styled from 'styled-components'
 
 const ContentWrapper = styled.div`
@@ -42,56 +42,33 @@ type Props = {
   noScroll?: boolean,
 }
 
-type State = {
-  isScrollable: boolean,
-}
+const ModalContent = React.forwardRef(({ children, noScroll }: Props, containerRef) => {
+  const [isScrollable, setScrollable] = useState(false)
 
-class ModalContent extends PureComponent<Props, State> {
-  constructor() {
-    super()
+  const onHeightUpdate = useCallback(() => {
+    setScrollable(containerRef.scrollHeight > containerRef.clientHeight)
+  }, [containerRef])
 
-    this.state = {
-      isScrollable: false,
+  useLayoutEffect(() => {
+    const ro = new ResizeObserver(onHeightUpdate)
+    if (containerRef.current) {
+      ro.observe(containerRef.current)
     }
-  }
+    return () => {
+      ro.disconnect()
+    }
+  }, [containerRef, onHeightUpdate])
 
-  componentDidMount() {
-    window.requestAnimationFrame(() => {
-      if (this._isUnmounted) return
-      this.showHideGradient()
-      if (this._outer) {
-        const ro = new ResizeObserver(this.showHideGradient)
-        ro.observe(this._outer)
-      }
-    })
-  }
+  useEffect(() => {}, [isScrollable])
 
-  componentWillUnmount() {
-    this._isUnmounted = true
-  }
-
-  _outer = null
-  _isUnmounted = false
-
-  showHideGradient = () => {
-    if (!this._outer) return
-    const isScrollable = this._outer.scrollHeight > this._outer.clientHeight
-    this.setState({ isScrollable })
-  }
-
-  render() {
-    const { children, noScroll } = this.props
-    const { isScrollable } = this.state
-
-    return (
-      <ContentWrapper>
-        <ContentScrollableContainer ref={n => (this._outer = n)} tabIndex={0} noScroll={noScroll}>
-          {children}
-        </ContentScrollableContainer>
-        <ContentScrollableContainerGradient opacity={isScrollable ? 1 : 0} />
-      </ContentWrapper>
-    )
-  }
-}
+  return (
+    <ContentWrapper>
+      <ContentScrollableContainer ref={containerRef} tabIndex={0} noScroll={noScroll}>
+        {children}
+      </ContentScrollableContainer>
+      <ContentScrollableContainerGradient opacity={isScrollable ? 1 : 0} />
+    </ContentWrapper>
+  )
+})
 
 export default ModalContent

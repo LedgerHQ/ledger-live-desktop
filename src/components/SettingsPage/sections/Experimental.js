@@ -6,6 +6,7 @@ import { isEnvDefault } from '@ledgerhq/live-common/lib/env'
 import { experimentalFeatures, isReadOnlyEnv } from 'helpers/experimental'
 import { setEnvOnAllThreads } from 'helpers/env'
 import type { T } from 'types/common'
+import useEnv from 'hooks/useEnv'
 import TrackPage from 'analytics/TrackPage'
 import IconAtom from 'icons/Atom'
 import IconSensitiveOperationShield from 'icons/SensitiveOperationShield'
@@ -19,6 +20,7 @@ import {
   SettingsSectionRow as Row,
 } from '../SettingsSection'
 import ExperimentalSwitch from '../ExperimentalSwitch'
+import ExperimentalInteger from '../ExperimentalInteger'
 
 type Props = {
   t: T,
@@ -26,17 +28,24 @@ type Props = {
 
 const experimentalTypesMap = {
   toggle: ExperimentalSwitch,
+  integer: ExperimentalInteger,
 }
 
 const ExperimentalFeatureRow = ({ feature }: { feature: Feature }) => {
   const { type, ...rest } = feature
   const Children = experimentalTypesMap[feature.type]
+  const envValue = useEnv(feature.name)
+  const isDefault = isEnvDefault(feature.name)
 
   return Children ? (
     <Row title={feature.title} desc={feature.description}>
+      {/* $FlowFixMe */}
       <Children
+        // $FlowFixMe
+        value={envValue}
         readOnly={isReadOnlyEnv(feature.name)}
-        checked={!isEnvDefault(feature.name)}
+        // $FlowFixMe
+        isDefault={isDefault}
         onChange={setEnvOnAllThreads}
         {...rest}
       />
@@ -66,6 +75,7 @@ class SectionExperimental extends PureComponent<Props> {
           />
           {experimentalFeatures.map(feature =>
             !feature.shadow || (feature.shadow && !isEnvDefault(feature.name)) ? (
+              // $FlowFixMe
               <ExperimentalFeatureRow key={feature.name} feature={feature} />
             ) : null,
           )}

@@ -1,7 +1,6 @@
 // @flow
 
 import React, { PureComponent, Fragment } from 'react'
-import { findDOMNode } from 'react-dom'
 
 import ModalContent from './ModalContent'
 import ModalHeader from './ModalHeader'
@@ -23,18 +22,12 @@ type Props = {
 class ModalBody extends PureComponent<Props> {
   componentDidUpdate(prevProps: Props) {
     const shouldFocus = prevProps.refocusWhenChange !== this.props.refocusWhenChange
-    if (shouldFocus) {
-      if (this._content) {
-        const node = findDOMNode(this._content) // eslint-disable-line react/no-find-dom-node
-        if (node) {
-          // $FlowFixMe
-          node.focus()
-        }
-      }
+    if (shouldFocus && this._content.current) {
+      this._content.current.focus()
     }
   }
 
-  _content = null
+  _content = React.createRef()
 
   render() {
     const { onBack, onClose, title, render, renderFooter, renderProps, noScroll } = this.props
@@ -47,7 +40,7 @@ class ModalBody extends PureComponent<Props> {
         <ModalHeader onBack={onBack} onClose={onClose}>
           {title}
         </ModalHeader>
-        <ModalContent tabIndex={0} ref={n => (this._content = n)} noScroll={noScroll}>
+        <ModalContent tabIndex={0} ref={this._content} noScroll={noScroll}>
           {render && render(renderProps)}
         </ModalContent>
         {renderedFooter && <ModalFooter>{renderedFooter}</ModalFooter>}

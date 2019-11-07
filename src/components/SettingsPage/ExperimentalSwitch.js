@@ -9,7 +9,7 @@ type Props = {
   name: string,
   valueOn: mixed,
   valueOff: mixed,
-  checked: boolean,
+  isDefault: boolean,
   readOnly: boolean,
   onChange: (name: string, val: mixed) => boolean,
 }
@@ -20,7 +20,7 @@ export default class ExperimentalSwitch extends PureComponent<Props, { checked: 
     valueOff: false,
   }
   state = {
-    checked: this.props.checked,
+    checked: !this.props.isDefault,
   }
 
   onChange = (evt: boolean) => {

@@ -67,7 +67,10 @@
   "operation": {
     "type": {
       "IN": "수신됨",
-      "OUT": "전송됨"
+      "OUT": "전송됨",
+      "CREATE": "Created",
+      "REVEAL": "Revealed",
+      "DELEGATE": "Delegated"
     }
   },
   "time": {
@@ -266,6 +269,11 @@
     "countTooltip": "1 Token",
     "countTooltip_plural": "{{count}} Tokens"
   },
+  "subAccounts": {
+    "title": "Subaccounts",
+    "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
+    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})"
+  },
   "migrateAccounts": {
     "overview": {
       "title": "Ledger Live accounts update",
@@ -372,7 +380,9 @@
     "showMore": "{{recipients}} 자세히 표시",
     "showLess": "간단히 표시",
     "tokenOperations": "Token operations",
+    "subAccountOperations": "Subaccount operations",
     "tokenTooltip": "This operation is related to the following token operations",
+    "subAccountTooltip": "This operation is related to the following subaccount operations",
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
     "details": "{{ currency }} details",
@@ -411,9 +421,10 @@
       "followTheGuide": "Follow our step by step update guide",
       "removeApps": "Uninstall all apps before updating",
       "update": "Firmware update",
+      "updateBtn": "Update firmware",
       "latest": "펌웨어 버전 {{version}}을(를) 사용할 수 있습니다.",
-      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible.",
-      "disclaimerTitle": "<1><0>펌웨어 버전 {{version}}</0></1>을(를) 설치하려합니다.",
+      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible, as a precaution.",
+      "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
       "disclaimerAppDelete": "일부 앱을 제거하여 공간을 확보하십시오. 그렇게 해도 귀하의 암호화 자산에는 영향을 미치지 않습니다.",
       "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded",
@@ -1240,7 +1251,20 @@
     },
     "MCUNotGenuineToDashboard": {
       "title": "Access dashboard to update",
-      "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
+      "description": "",
+      "list": {
+        "1": "Disconnect and reconnect the USB cable without pressing any button.",
+        "2": "Press both buttons three times to access the Dashboard.",
+        "3": "Open the Manager and click Update firmware."
+      }
+    },
+    "UnavailableTezosOriginatedAccountReceive": {
+      "title": "Cannot receive on subaccounts, please select the parent account.",
+      "description": "If you want to receive funds, please use the parent account"
+    },
+    "UnavailableTezosOriginatedAccountSend": {
+      "title": "Cannot send from subaccounts yet",
+      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     }
   }
 }

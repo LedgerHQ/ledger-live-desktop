@@ -30,7 +30,7 @@ const UpdateFirmwareButton = ({ t, firmware, onClick, deviceInfo }: Props) =>
           {t('manager.firmware.latest', { version: getCleanVersion(firmware.final.name) })}
         </Text>
         {semver.lte(deviceInfo.version, '1.4.2') && (
-          <Box horizontal>
+          <Box horizontal alignItems="center">
             <IconInfoCircle size={12} style={{ marginRight: 6 }} />
             <Text ff="Inter" fontSize={3} color="palette.text.shade60">
               {t('manager.firmware.removeApps')}
@@ -47,7 +47,7 @@ const UpdateFirmwareButton = ({ t, firmware, onClick, deviceInfo }: Props) =>
           firmwareName: firmware.final.name,
         }}
       >
-        {t('manager.firmware.update')}
+        {t('manager.firmware.updateBtn')}
       </Button>
     </Fragment>
   ) : null
