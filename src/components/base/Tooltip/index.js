@@ -28,6 +28,8 @@ const ContentContainer = styled.div.attrs(p => ({
 
 const ChildrenContainer = styled.div`
   display: inline-flex;
+  flex-shrink: 1;
+  max-width: 100%;
 `
 
 export const defaultTippyOptions = {

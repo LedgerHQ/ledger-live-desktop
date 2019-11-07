@@ -15,6 +15,7 @@ const Container = styled(Box).attrs(() => ({
   border-radius: 4px;
   width: 150px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
+  text-align: center;
 `
 
 const Tooltip = ({ item, renderTooltip }: { item: Item, renderTooltip: Item => * }) => (
@@ -29,7 +30,7 @@ const Tooltip = ({ item, renderTooltip }: { item: Item, renderTooltip: Item => *
         marginBottom: -5,
       }}
     >
-      <Container style={{ textAlign: 'center' }}>{renderTooltip(item)}</Container>
+      <Container>{renderTooltip(item)}</Container>
     </div>
   </div>
 )

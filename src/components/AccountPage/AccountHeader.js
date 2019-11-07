@@ -67,12 +67,6 @@ const Wrapper = styled(Box)`
   }
 `
 
-const AccountName = styled(Text).attrs(() => ({
-  color: 'palette.text.shade100',
-  ff: 'Inter|SemiBold',
-  fontSize: 7,
-}))``
-
 type Props = {
   account: AccountLike,
   parentAccount: ?Account,
@@ -98,11 +92,11 @@ const AccountHeader: React$ComponentType<Props> = React.memo(
     }, [contract])
 
     return (
-      <Box horizontal align="center" flow={2} grow>
+      <Box horizontal shrink align="center" flow={2}>
         <Box>
           <ParentCryptoCurrencyIcon currency={currency} bigger />
         </Box>
-        <Box grow>
+        <Box style={{ alignItems: 'flex-start', flex: 1 }}>
           {contract && account.type === 'TokenAccount' ? (
             <Box horizontal alignItems="center">
               <CurNameToken>
@@ -121,9 +115,9 @@ const AccountHeader: React$ComponentType<Props> = React.memo(
           ) : (
             <CurName>{currency.name}</CurName>
           )}
-          <AccountName>
-            <Ellipsis>{getAccountName(account)}</Ellipsis>
-          </AccountName>
+          <Ellipsis color="palette.text.shade100" ff="Inter|SemiBold" fontSize={7}>
+            {getAccountName(account)}
+          </Ellipsis>
         </Box>
       </Box>
     )

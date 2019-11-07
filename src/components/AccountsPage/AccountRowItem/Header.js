@@ -44,7 +44,7 @@ class Header extends PureComponent<Props> {
         <Box alignItems="center" justifyContent="center" style={{ color }}>
           <CryptoCurrencyIcon currency={currency} size={20} />
         </Box>
-        <Box grow>
+        <Box style={{ flexShrink: 1 }}>
           {!nested && account.type === 'Account' && (
             <Box style={{ textTransform: 'uppercase' }} fontSize={9} color="palette.text.shade60">
               {title}

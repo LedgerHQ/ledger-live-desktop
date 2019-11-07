@@ -25,7 +25,7 @@ class HeadText extends PureComponent<{
     const { title, name } = this.props
 
     return (
-      <Box grow>
+      <Box style={{ flex: 1, alignItems: 'flex-start' }}>
         <Box style={{ textTransform: 'uppercase' }} fontSize={10} color="palette.text.shade80">
           {title}
         </Box>
