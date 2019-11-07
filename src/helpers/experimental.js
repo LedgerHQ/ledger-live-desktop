@@ -54,7 +54,7 @@ export const experimentalFeatures: Feature[] = [
   {
     type: 'toggle',
     name: 'API_TEZOS_NODE',
-    valueOn: 'https://xtz-node.explorers.prod.aws.ledger.fr/',
+    valueOn: 'https://xtznode.explorers.prod.aws.ledger.fr/',
     valueOff: 'https://mainnet.tezrpc.me/',
     title: 'Experimental Tezos Send',
     description: 'Workaround for Sending Tezos. Switch to another experimental node.',

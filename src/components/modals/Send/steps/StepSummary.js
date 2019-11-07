@@ -166,8 +166,8 @@ export class StepSummaryFooter extends PureComponent<StepProps> {
   render() {
     const { t, account, status, bridgePending } = this.props
     if (!account) return null
-    const { amount, errors } = status
-    const canNext = amount.gt(0) && !bridgePending && !Object.keys(errors).length
+    const { errors } = status
+    const canNext = !bridgePending && !Object.keys(errors).length
     return (
       <Fragment>
         <Button primary disabled={!canNext} onClick={this.onNext}>

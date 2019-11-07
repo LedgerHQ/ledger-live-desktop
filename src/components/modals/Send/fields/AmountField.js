@@ -53,7 +53,12 @@ const AmountField = ({
   if (!status) return null
   const { useAllAmount } = transaction
   const { amount, errors } = status
-  const { amount: amountError } = errors
+  let { amount: amountError } = errors
+
+  // we ignore zero case for displaying field error because field is empty.
+  if (amount.eq(0)) {
+    amountError = null
+  }
 
   return (
     <Box flow={1}>

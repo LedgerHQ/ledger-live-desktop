@@ -529,9 +529,7 @@
         "title": "장치"
       },
       "verification": {
-        "title": "확인",
-        "warning": "장치에서 거래의 세부 정보를 확인하십시오.",
-        "body": "전송하려면 장치의 거래 정보를 승인하십시오."
+        "title": "확인"
       },
       "confirmation": {
         "title": "확인",
@@ -1266,5 +1264,9 @@
       "title": "Cannot send from subaccounts yet",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     }
+  },
+  "TransactionConfirm": {
+    "warning": "장치에서 거래의 세부 정보를 확인하십시오.",
+    "title": "전송하려면 장치의 거래 정보를 승인하십시오."
   }
 }

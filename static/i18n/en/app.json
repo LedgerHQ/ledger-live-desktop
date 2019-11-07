@@ -5,7 +5,7 @@
     "labelNo": "No",
     "never": "Never",
     "apply": "Apply",
-    "done" : "Done",
+    "done": "Done",
     "confirm": "Confirm",
     "connecting": "Connecting..",
     "cancel": "Cancel",
@@ -48,6 +48,7 @@
     "copied": "Copied",
     "addressCopied": "Address copied",
     "experimentalFeature": "Experimental",
+    "dismiss": "Dismiss",
     "lockScreen": {
       "title": "Welcome back",
       "subTitle": null,
@@ -123,7 +124,7 @@
   },
   "stars": {
     "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
-    "tooltip" : "Star account"
+    "tooltip": "Star account"
   },
   "account": {
     "lastOperations": "Last operations",
@@ -327,7 +328,7 @@
     "connectDevice": {
       "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
     },
-    "tokensTip":"{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
+    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "Add existing accounts",
     "selectAll": "Select all ({{count}})",
     "unselectAll": "Deselect all ({{count}})",
@@ -491,7 +492,7 @@
       "connectDevice": {
         "title": "Device",
         "withoutDevice": "Don't have your device?",
-        "tokensTip":"* Open the {{currency}} app to manage your {{token}} tokens"
+        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
       },
       "confirmAddress": {
         "title": "Verification",
@@ -540,9 +541,7 @@
         "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
-        "title": "Verification",
-        "body": "Please verify all transaction details on your device",
-        "warning": "Always verify that your device displays the address exactly as provided by the recipient"
+        "title": "Verification"
       },
       "confirmation": {
         "title": "Confirmation",
@@ -581,6 +580,27 @@
     "showAll": "Show all",
     "showLess": "Show less",
     "header": "Account allocation ({{count}})"
+  },
+  "delegation": {
+    "title": "Earn rewards",
+    "header": "Delegation",
+    "validator": "Validator",
+    "address": "Address",
+    "transactionID": "Transaction ID",
+    "value": "Value",
+    "amount": "Amount",
+    "duration": "Duration",
+    "durationJustStarted": "Just started",
+    "durationDays": "{{count}} day",
+    "durationDays_plural": "{{count}} days",
+    "banner": {
+      "text": "You can earn Tezos staking rewards by delegating your account"
+    },
+    "contextMenu": {
+      "topUp": "Top up",
+      "redelegate": "Redelegate",
+      "stopDelegation": "Stop delegation"
+    }
   },
   "asset": {
     "notice": "Summary of all {{currency}} accounts"
@@ -1019,6 +1039,15 @@
   "connectTroubleshooting": {
     "desc": "Having a hard time connecting your device?"
   },
+  "TransactionConfirm": {
+    "title": "Please verify all operation details on your device",
+    "warning": "Carefully verify all {{mode}} details on your device.",
+    "modes": {
+      "send": "transaction",
+      "delegate": "delegation",
+      "undelegate": "undelegation"
+    }
+  },
   "errors": {
     "generic": {
       "title": "{{message}}",
@@ -1028,7 +1057,7 @@
       "title": "An account name is required",
       "description": "Please provide an account name"
     },
-    "AccountNotSupported" : {
+    "AccountNotSupported": {
       "title": "Account not supported.",
       "description": "Please retry or contact Support ({{reason}})"
     },

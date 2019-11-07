@@ -1,13 +1,13 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import Tooltip from 'components/base/Tooltip'
-import { isAccountEmpty, canSend } from '@ledgerhq/live-common/lib/account'
+import { isAccountEmpty, canSend, getMainAccount } from '@ledgerhq/live-common/lib/account'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
@@ -21,6 +21,7 @@ import IconAccountSettings from 'icons/AccountSettings'
 import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
 
+import perFamily from 'generated/AccountHeaderActions'
 import Box, { Tabbable } from 'components/base/Box'
 import Button from 'components/base/Button'
 import Star from '../Stars/Star'
@@ -63,10 +64,13 @@ type Props = OwnProps & {
 class AccountHeaderActions extends PureComponent<Props> {
   render() {
     const { account, parentAccount, openModal, t } = this.props
+    const mainAccount = getMainAccount(account, parentAccount)
+    const PerFamily = perFamily[mainAccount.currency.family]
     return (
       <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
         {!isAccountEmpty(account) ? (
-          <Fragment>
+          <>
+            {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}
             {canSend(account, parentAccount) ? (
               <Button
                 small
@@ -90,7 +94,7 @@ class AccountHeaderActions extends PureComponent<Props> {
                 <Box>{t('receive.title')}</Box>
               </Box>
             </Button>
-          </Fragment>
+          </>
         ) : null}
         <Tooltip content={t('stars.tooltip')}>
           <Star accountId={account.id} account={account} yellow />

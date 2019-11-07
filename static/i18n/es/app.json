@@ -529,9 +529,7 @@
         "title": "Dispositivo"
       },
       "verification": {
-        "title": "Comprobación",
-        "warning": "Comprueba todos los datos de la transacción en tu dispositivo.",
-        "body": "Confirma la transacción en tu dispositivo para enviarla"
+        "title": "Comprobación"
       },
       "confirmation": {
         "title": "Confirmación",
@@ -1266,5 +1264,9 @@
       "title": "Cannot send from subaccounts yet",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     }
+  },
+  "TransactionConfirm": {
+    "warning": "Comprueba todos los datos de la transacción en tu dispositivo.",
+    "title": "Confirma la transacción en tu dispositivo para enviarla"
   }
 }

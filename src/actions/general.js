@@ -3,6 +3,7 @@
 import type { BigNumber } from 'bignumber.js'
 import type { State } from 'reducers'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
+import { isAccountDelegating } from '@ledgerhq/live-common/lib/families/tezos/bakers'
 import { createSelector } from 'reselect'
 import CounterValues from 'helpers/countervalues'
 import {
@@ -65,6 +66,14 @@ export const flattenSortAccountsEnforceHideEmptyTokenSelector = createSelector(
   sortAccountsComparatorSelector,
   (accounts, comparator) =>
     flattenSortAccounts(accounts, comparator, { enforceHideEmptySubAccounts: true }),
+)
+
+export const haveUndelegatedAccountsSelector = createSelector(
+  flattenSortAccountsEnforceHideEmptyTokenSelector,
+  accounts =>
+    accounts.some(
+      acc => acc.currency && acc.currency.family === 'tezos' && !isAccountDelegating(acc),
+    ),
 )
 
 export const refreshAccountsOrdering = () => (dispatch: *, getState: *) => {

@@ -529,9 +529,7 @@
         "title": "Appareil"
       },
       "verification": {
-        "title": "Vérification",
-        "warning": "Veuillez vérifier tous les détails de la transaction sur votre appareil",
-        "body": "Confirmez la transaction sur votre appareil pour l’envoyer"
+        "title": "Vérification"
       },
       "confirmation": {
         "title": "Confirmation",
@@ -1266,5 +1264,9 @@
       "title": "Impossible d'envoyer depuis des sous-comptes",
       "description": "Suites aux changements récemment introduits par la mise à jour Babylon, cette fonctionnalité sera ajoutée ultérieurement."
     }
+  },
+  "TransactionConfirm": {
+    "warning": "Veuillez vérifier tous les détails de la transaction sur votre appareil",
+    "title": "Confirmez la transaction sur votre appareil pour l’envoyer"
   }
 }

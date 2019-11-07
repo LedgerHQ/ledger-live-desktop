@@ -529,9 +529,7 @@
         "title": "设备"
       },
       "verification": {
-        "title": "验证",
-        "warning": "请验证您设备上的所有交易详情",
-        "body": "确认您设备上的交易以进行发送"
+        "title": "验证"
       },
       "confirmation": {
         "title": "确认",
@@ -1266,5 +1264,9 @@
       "title": "Cannot send from subaccounts yet",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     }
+  },
+  "TransactionConfirm": {
+    "warning": "请验证您设备上的所有交易详情",
+    "title": "确认您设备上的交易以进行发送"
   }
 }
