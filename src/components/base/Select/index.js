@@ -43,15 +43,7 @@ export type Option = {
   data: any,
 }
 
-const Row = styled.div`
-  &:hover {
-    background: ${p => p.theme.colors.palette.background.default};
-  }
-  &:active {
-    background: ${p => p.theme.colors.palette.background.default};
-  }
-`
-const rowHeight = 40 // Fixme We should pass this as a prop for dynamic rows?
+const Row = styled.div``
 class MenuList extends PureComponent<*, *> {
   state = {
     children: null,
@@ -94,12 +86,12 @@ class MenuList extends PureComponent<*, *> {
       options,
       maxHeight,
       getValue,
-      selectProps: { noOptionsMessage },
+      selectProps: { noOptionsMessage, small },
     } = this.props
     const { children } = this.state
     if (!children) return null
-
     const [value] = getValue()
+    const rowHeight = small ? 34 : 40
     const initialOffset = options.indexOf(value) * rowHeight
     const minHeight = Math.min(...[maxHeight, rowHeight * children.length])
 
@@ -190,6 +182,7 @@ class Select extends PureComponent<Props> {
     } = this.props
 
     const Comp = async ? AsyncReactSelect : ReactSelect
+    const rowHeight = small ? 34 : 40
 
     return (
       <Comp
@@ -213,6 +206,7 @@ class Select extends PureComponent<Props> {
         backspaceRemovesValue
         menuShouldBlockScroll
         menuPortalTarget={document.body}
+        small={small}
         {...props}
         onChange={this.handleChange}
       />
