@@ -800,6 +800,7 @@
     },
     "start": {
       "title": "Welcome to Ledger Live",
+      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
       "startBtn": "Get started"
     },
     "init": {
