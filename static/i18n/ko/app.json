@@ -800,6 +800,7 @@
     },
     "start": {
       "title": "Ledger Live에 오신 것을 환영합니다.",
+      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
       "startBtn": "시작하기"
     },
     "init": {
