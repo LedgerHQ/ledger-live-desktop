@@ -43,7 +43,9 @@ const AmountField = ({
 
   const onChangeSendMax = useCallback(
     (useAllAmount: boolean) => {
-      onChangeTransaction(bridge.updateTransaction(transaction, { useAllAmount }))
+      onChangeTransaction(
+        bridge.updateTransaction(transaction, { useAllAmount, amount: BigNumber(0) }),
+      )
     },
     [bridge, transaction, onChangeTransaction],
   )
