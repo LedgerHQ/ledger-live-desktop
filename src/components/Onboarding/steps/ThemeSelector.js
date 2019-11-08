@@ -79,6 +79,7 @@ const ThemeContainer = styled.div`
 const ThemeName = styled(Text)`
   transition: color ease-out 300ms;
   transition-delay: 300ms;
+  cursor: pointer;
 `
 
 const ThemeSelector = ({ t, setTheme, currentTheme }: Props) => (
@@ -94,6 +95,7 @@ const ThemeSelector = ({ t, setTheme, currentTheme }: Props) => (
           ff="Inter|SemiBold"
           color={paletteName === currentTheme ? 'palette.primary.main' : 'palette.text.shade80'}
           fontSize={5}
+          onClick={() => setTheme(paletteName)}
         >
           {t(themeLabels[paletteName])}
         </ThemeName>
