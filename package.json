@@ -174,7 +174,7 @@
     "dotenv": "^5.0.1",
     "electron": "^2.0.17",
     "electron-devtools-installer": "^2.2.3",
-    "electron-notarize": "^0.1.1",
+    "electron-notarize": "^0.2.0",
     "electron-rebuild": "^1.7.3",
     "electron-webpack": "^2.1.0",
     "eslint": "^4.19.1",
