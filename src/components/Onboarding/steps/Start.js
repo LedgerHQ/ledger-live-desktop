@@ -7,9 +7,10 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import TrackPage from 'analytics/TrackPage'
 import LedgerLiveLogo from 'components/base/LedgerLiveLogo'
+import ThemeSelector from './ThemeSelector'
 
 import type { StepProps } from '..'
-import { Title } from '../helperComponents'
+import { Title, Description } from '../helperComponents'
 
 export default (props: StepProps) => {
   const { jumpStep, t } = props
@@ -20,9 +21,13 @@ export default (props: StepProps) => {
         <LedgerLiveLogo
           icon={<img src={i('ledgerlive-logo.svg')} alt="" width={50} height={50} />}
         />
-        <Box my={5}>
+        <Box>
           <Title>{t('onboarding.start.title')}</Title>
         </Box>
+        <Box>
+          <Description>{t('onboarding.start.themeDesc')}</Description>
+        </Box>
+        <ThemeSelector />
         <Button primary onClick={() => jumpStep('init')}>
           {t('onboarding.start.startBtn')}
         </Button>

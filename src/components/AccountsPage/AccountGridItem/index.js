@@ -16,8 +16,13 @@ const Card = styled(Box).attrs(() => ({
 }))`
   cursor: pointer;
   border: 1px solid transparent;
+  transition: background-color ease-in-out 200ms;
   :hover {
-    border-color: ${p => p.theme.colors.palette.divider};
+    border-color: ${p => p.theme.colors.palette.text.shade20};
+  }
+  :active {
+    border-color: ${p => p.theme.colors.palette.text.shade20};
+    background: ${p => p.theme.colors.palette.action.hover};
   }
 `
 

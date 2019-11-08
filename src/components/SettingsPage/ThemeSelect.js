@@ -23,18 +23,13 @@ const themeLabels = {
 }
 
 const ThemeSelect = ({ setTheme, theme, t }: Props) => {
-  const system = { value: null, label: t(`theme.system`) }
-
-  const options = [system].concat(
-    map(themeLabels, (value, key) => ({
-      value: key,
-      label: t(themeLabels[key]),
-    })),
-  )
+  const options = map(themeLabels, (value, key) => ({
+    value: key,
+    label: t(themeLabels[key]),
+  }))
 
   const handleChangeTheme = ({ value: themeKey }: *) => {
     setTheme(themeKey)
-    window.localStorage.setItem('theme', themeKey)
   }
 
   const currentTheme = options.find(option => option.value === theme)
