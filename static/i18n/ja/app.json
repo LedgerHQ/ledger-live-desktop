@@ -800,6 +800,7 @@
     },
     "start": {
       "title": "Ledger Liveにようこそ",
+      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
       "startBtn": "はじめに"
     },
     "init": {
