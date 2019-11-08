@@ -34,7 +34,7 @@ const TagField = ({ onChange, account, transaction, t }: Props) => {
           tag.lt(uint32maxPlus1)
             ? tag.toNumber()
             : str === ''
-            ? ''
+            ? undefined
             : transaction.tag,
       }
       onChange(bridge.updateTransaction(transaction, patch))
