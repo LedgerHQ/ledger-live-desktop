@@ -7,6 +7,7 @@ import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import Box from 'components/base/Box'
 import Input from 'components/base/Input'
 import Label from 'components/base/Label'
+import invariant from 'invariant'
 
 type Props = {
   onChange: Transaction => void,
@@ -18,6 +19,7 @@ type Props = {
 const uint32maxPlus1 = BigNumber(2).pow(32)
 
 const TagField = ({ onChange, account, transaction, t }: Props) => {
+  invariant(transaction.family === 'ripple', 'TagField: ripple family expected')
   const onChangeTag = useCallback(
     str => {
       const bridge = getAccountBridge(account)
@@ -31,7 +33,9 @@ const TagField = ({ onChange, account, transaction, t }: Props) => {
           tag.isPositive() &&
           tag.lt(uint32maxPlus1)
             ? tag.toNumber()
-            : null,
+            : str === ''
+            ? ''
+            : transaction.tag,
       }
       onChange(bridge.updateTransaction(transaction, patch))
     },

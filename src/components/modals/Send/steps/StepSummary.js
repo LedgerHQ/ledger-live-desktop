@@ -8,7 +8,11 @@ import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
 import IconWallet from 'icons/Wallet'
 import IconQrCode from 'icons/QrCode'
-import { getAccountCurrency, getAccountName } from '@ledgerhq/live-common/lib/account'
+import {
+  getAccountCurrency,
+  getAccountName,
+  getAccountUnit,
+} from '@ledgerhq/live-common/lib/account'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import { rgba } from 'styles/helpers'
 import Ellipsis from 'components/base/Ellipsis'
@@ -48,6 +52,8 @@ export default class StepSummary extends PureComponent<StepProps> {
     const { estimatedFees, amount, totalSpent, warnings } = status
     const feeTooHigh = Object.keys(warnings).includes('feeTooHigh')
     const currency = getAccountCurrency(account)
+    const unit = getAccountUnit(account)
+
     return (
       <Box flow={4} mx={40}>
         <TrackPage category="Send Flow" name="Step Summary" />
@@ -96,7 +102,7 @@ export default class StepSummary extends PureComponent<StepProps> {
             <FormattedVal
               color={'palette.text.shade80'}
               disableRounding
-              unit={currency.units[0]}
+              unit={unit}
               val={amount}
               fontSize={4}
               inline
@@ -110,7 +116,7 @@ export default class StepSummary extends PureComponent<StepProps> {
             <FormattedVal
               color={feeTooHigh ? 'warning' : 'palette.text.shade80'}
               disableRounding
-              unit={currency.units[0]}
+              unit={unit}
               val={estimatedFees}
               fontSize={4}
               inline
@@ -125,7 +131,7 @@ export default class StepSummary extends PureComponent<StepProps> {
             <FormattedVal
               color={'palette.text.shade80'}
               disableRounding
-              unit={currency.units[0]}
+              unit={unit}
               val={totalSpent}
               fontSize={4}
               inline
