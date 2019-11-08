@@ -14,7 +14,6 @@ module.exports = {
       shade40: 'rgba(20,37,51, 0.4)',
       shade20: 'rgba(20,37,51, 0.2)',
       shade10: 'rgba(20,37,51, 0.1)',
-      shade04: 'rgba(20,37,51, 0.04)',
     },
     divider: 'rgba(20,37,51, 0.1)',
     background: {
@@ -44,7 +43,6 @@ module.exports = {
       shade40: 'rgba(255, 255, 255, 0.4)',
       shade20: 'rgba(255, 255, 255, 0.2)',
       shade10: 'rgba(255, 255, 255, 0.1)',
-      shade04: 'rgba(255, 255, 255, 0.04)',
     },
     divider: 'rgba(255, 255, 255, 0.1)',
     background: {
@@ -74,7 +72,6 @@ module.exports = {
       shade40: 'rgba(255, 255, 255, 0.4)',
       shade20: 'rgba(255, 255, 255, 0.2)',
       shade10: 'rgba(255, 255, 255, 0.1)',
-      shade04: 'rgba(255, 255, 255, 0.04)',
     },
     divider: 'rgba(255, 255, 255, 0.1)',
     background: {

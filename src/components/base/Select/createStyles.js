@@ -63,10 +63,10 @@ export default (
         : theme.colors.palette.text.shade80,
     padding: small ? '8px 15px 8px 15px' : '10px 15px 11px 15px',
     cursor: isDisabled ? 'not-allowed' : 'default',
-    backgroundColor: isFocused ? theme.colors.palette.text.shade04 : null,
+    backgroundColor: isFocused ? theme.colors.palette.background.default : null,
     // NB hover doesn't trigger isFocused since we disabled the onMouseMove/onMouseOver
     ':hover:not(:active)': {
-      backgroundColor: theme.colors.palette.text.shade04,
+      backgroundColor: theme.colors.palette.background.default,
       color: theme.colors.palette.text.shade100,
     },
     ':hover:active': {
