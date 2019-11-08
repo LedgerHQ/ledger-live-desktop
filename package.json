@@ -3,7 +3,7 @@
   "productName": "Ledger Live",
   "description": "Ledger Live - Desktop",
   "repository": "https://github.com/LedgerHQ/ledger-live-desktop",
-  "version": "1.18.1",
+  "version": "1.18.2",
   "author": "Ledger",
   "license": "MIT",
   "scripts": {
@@ -48,7 +48,7 @@
     "@ledgerhq/hw-transport-node-hid": "4",
     "@ledgerhq/hw-transport-node-hid-singleton": "4",
     "@ledgerhq/ledger-core": "^3.4.0",
-    "@ledgerhq/live-common": "file:.yalc/@ledgerhq/live-common",
+    "@ledgerhq/live-common": "^8.4.0",
     "@ledgerhq/logs": "4",
     "@tippy.js/react": "^3.1.0",
     "add": "^2.0.6",
