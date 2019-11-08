@@ -12,6 +12,7 @@ import {
   findOperationInAccount,
 } from '@ledgerhq/live-common/lib/operation'
 import { getTransactionExplorer, getDefaultExplorerView } from '@ledgerhq/live-common/lib/explorers'
+import { listTokenTypesForCryptoCurrency } from '@ledgerhq/live-common/lib/currencies'
 import uniq from 'lodash/uniq'
 
 import TrackPage from 'analytics/TrackPage'
@@ -218,7 +219,7 @@ const OperationDetails = connect(
   const currency = getAccountCurrency(account)
   const unit = getAccountUnit(account)
   const amount = getOperationAmountNumber(operation)
-  const isNegative = operation.type === 'OUT'
+  const isNegative = amount.isNegative()
   const marketColor = getMarketColor({
     marketIndicator,
     isNegative,
@@ -232,6 +233,8 @@ const OperationDetails = connect(
   const { hasFailed } = operation
   const subOperations = operation.subOperations || []
   const internalOperations = operation.internalOperations || []
+
+  const isToken = listTokenTypesForCryptoCurrency(mainAccount.currency).length > 0
 
   const openOperation = useCallback(
     (type: openOperationType, operation: Operation, parentOperation?: Operation) => {
@@ -317,9 +320,17 @@ const OperationDetails = connect(
           {subOperations.length > 0 && account.type === 'Account' && (
             <React.Fragment>
               <OpDetailsSection>
-                {t('operationDetails.tokenOperations')}
+                {t(
+                  isToken
+                    ? 'operationDetails.tokenOperations'
+                    : 'operationDetails.subAccountOperations',
+                )}
                 <LabelInfoTooltip
-                  text={t('operationDetails.tokenTooltip')}
+                  text={t(
+                    isToken
+                      ? 'operationDetails.tokenTooltip'
+                      : 'operationDetails.subAccountTooltip',
+                  )}
                   style={{ marginLeft: 4 }}
                 />
               </OpDetailsSection>
@@ -406,7 +417,7 @@ const OperationDetails = connect(
           </Box>
           <B />
           <Box horizontal flow={2}>
-            {type === 'OUT' && (
+            {isNegative && (
               <Box flex={1}>
                 <OpDetailsTitle>{t('operationDetails.fees')}</OpDetailsTitle>
                 {fee ? (

@@ -11,11 +11,17 @@ export type FeatureCommon = {
   shadow?: boolean,
 }
 
-export type FeatureToggle = {
-  type: 'toggle',
-  valueOn?: any,
-  valueOff?: any,
-}
+export type FeatureToggle =
+  | {
+      type: 'toggle',
+      valueOn?: any,
+      valueOff?: any,
+    }
+  | {
+      type: 'integer',
+      minValue?: number,
+      maxValue?: number,
+    }
 
 export type Feature = FeatureCommon & FeatureToggle
 
@@ -46,13 +52,37 @@ export const experimentalFeatures: Feature[] = [
     description: 'Alternative USB implementation that might help solve USB issues.',
   },
   {
-    shadow: true,
     type: 'toggle',
+    name: 'API_TEZOS_NODE',
+    valueOn: 'https://xtz-node.explorers.prod.aws.ledger.fr/',
+    valueOff: 'https://mainnet.tezrpc.me/',
+    title: 'Experimental Tezos Send',
+    description: 'Workaround for Sending Tezos. Switch to another experimental node.',
+  },
+  {
+    type: 'toggle',
+    name: 'LEDGER_COUNTERVALUES_API',
+    valueOn: 'http://countervalue-service.dev.aws.ledger.fr',
+    valueOff: 'https://countervalues.api.live.ledger.com',
+    title: 'Experimental Countervalues API',
+    description: 'Changing this value may break the countervalues displayed for your accounts.',
+  },
+  {
+    type: 'integer',
+    name: 'KEYCHAIN_OBSERVABLE_RANGE',
+    title: 'Custom gap limit',
+    description:
+      'Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts.',
+    minValue: 20,
+    maxValue: 999,
+  },
+  {
+    type: 'integer',
     name: 'FORCE_PROVIDER',
-    valueOn: 4,
-    valueOff: 1,
-    title: 'Pre-release apps',
-    description: 'Enable pre-release apps in the Manager',
+    title: 'Manager provider',
+    description:
+      'Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device.',
+    minValue: 1,
   },
   {
     shadow: true, // not correct yet

@@ -67,7 +67,10 @@
   "operation": {
     "type": {
       "IN": "Recibido",
-      "OUT": "Enviado"
+      "OUT": "Enviado",
+      "CREATE": "Created",
+      "REVEAL": "Revealed",
+      "DELEGATE": "Delegated"
     }
   },
   "time": {
@@ -266,6 +269,11 @@
     "countTooltip": "1 Token",
     "countTooltip_plural": "{{count}} Tokens"
   },
+  "subAccounts": {
+    "title": "Subaccounts",
+    "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
+    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})"
+  },
   "migrateAccounts": {
     "overview": {
       "title": "Ledger Live accounts update",
@@ -372,7 +380,9 @@
     "showMore": "Ver {{recipients}} más",
     "showLess": "Ver menos",
     "tokenOperations": "Token operations",
+    "subAccountOperations": "Subaccount operations",
     "tokenTooltip": "This operation is related to the following token operations",
+    "subAccountTooltip": "This operation is related to the following subaccount operations",
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
     "details": "{{ currency }} details",
@@ -411,9 +421,10 @@
       "followTheGuide": "Follow our step by step update guide",
       "removeApps": "Uninstall all apps before updating",
       "update": "Firmware update",
+      "updateBtn": "Update firmware",
       "latest": "La versión {{version}} del firmware está disponible.",
-      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible.",
-      "disclaimerTitle": "Estás a punto de instalar la versión <1><0>del firmware {{version}}</0></1>.",
+      "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible, as a precaution.",
+      "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
       "disclaimerAppDelete": "Desinstala todas las aplicaciones de tu dispositivo. Esto no afectará a tus criptoactivos.",
       "disclaimerAppReinstall": "Como precaución, ten a mano la hoja de recuperacion.",
       "downloadingUpdateDesc": "Por favor, espera mientras se descarga el instalador de actualización",
@@ -1240,7 +1251,20 @@
     },
     "MCUNotGenuineToDashboard": {
       "title": "Access dashboard to update",
-      "description": "Please restart the device without pressing any button. Then press both buttons on the device three times to access the dashboard. Finally open the Manager to update the firmware."
+      "description": "",
+      "list": {
+        "1": "Disconnect and reconnect the USB cable without pressing any button.",
+        "2": "Press both buttons three times to access the Dashboard.",
+        "3": "Open the Manager and click Update firmware."
+      }
+    },
+    "UnavailableTezosOriginatedAccountReceive": {
+      "title": "Cannot receive on subaccounts, please select the parent account.",
+      "description": "If you want to receive funds, please use the parent account"
+    },
+    "UnavailableTezosOriginatedAccountSend": {
+      "title": "Cannot send from subaccounts yet",
+      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     }
   }
 }

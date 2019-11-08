@@ -13,6 +13,7 @@ const Base = styled(Tabbable).attrs(() => ({
 }))`
   outline: none;
   border-radius: 4px;
+  cursor: pointer;
   background-color: ${p =>
     p.isChecked ? p.theme.colors.wallet : p.theme.colors.palette.background.paper};
   border: 1px solid

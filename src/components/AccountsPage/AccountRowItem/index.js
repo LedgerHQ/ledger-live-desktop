@@ -6,6 +6,7 @@ import Box from 'components/base/Box'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/account'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
 import { listSubAccounts } from '@ledgerhq/live-common/lib/account/helpers'
+import { listTokenTypesForCryptoCurrency } from '@ledgerhq/live-common/lib/currencies'
 import { Trans } from 'react-i18next'
 import Text from 'components/base/Text'
 import IconAngleDown from 'icons/AngleDown'
@@ -172,11 +173,13 @@ class AccountRowItem extends PureComponent<Props, State> {
     let mainAccount
     let tokens
     let disabled
+    let isToken
 
     if (account.type !== 'Account') {
       currency = account.token
       unit = account.token.units[0]
       mainAccount = parentAccount
+      isToken = mainAccount && listTokenTypesForCryptoCurrency(mainAccount.currency).length > 0
 
       if (!mainAccount) return null
     } else {
@@ -185,10 +188,22 @@ class AccountRowItem extends PureComponent<Props, State> {
       mainAccount = account
       tokens = listSubAccounts(account)
       disabled = !matchesSearch(search, account)
+      isToken = listTokenTypesForCryptoCurrency(currency).length > 0
       if (tokens) tokens = tokens.filter(t => matchesSearch(search, t))
     }
 
     const showTokensIndicator = tokens && tokens.length > 0 && !hidden
+
+    const translationMap = isToken
+      ? {
+          see: 'tokensList.seeTokens',
+          hide: 'tokensList.hideTokens',
+        }
+      : {
+          see: 'subAccounts.seeSubAccounts',
+          hide: 'subAccounts.hideSubAccounts',
+        }
+
     return (
       <div style={{ position: 'relative' }} hidden={hidden}>
         <span style={{ position: 'absolute', top: -70 }} ref={this.scrollTopFocusRef} />
@@ -231,7 +246,7 @@ class AccountRowItem extends PureComponent<Props, State> {
             <TokenShowMoreIndicator expanded={expanded} onClick={this.toggleAccordion}>
               <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
                 <Trans
-                  i18nKey={expanded ? 'tokensList.hideTokens' : 'tokensList.seeTokens'}
+                  i18nKey={translationMap[expanded ? 'hide' : 'see']}
                   values={{ tokenCount: tokens.length }}
                 />
               </Text>

@@ -190,17 +190,16 @@ class AccountCrumb extends PureComponent<Props> {
         tokenAccount = findSubAccountById(parentAccount, id)
         if (tokenAccount) {
           currency = getAccountCurrency(tokenAccount)
-          name = currency.name
+          name = getAccountName(tokenAccount)
         }
       }
       items = parentAccount && listSubAccounts(parentAccount)
     } else {
       account = accounts.find(a => a.id === id)
       items = accounts
-
       if (account) {
-        currency = account.currency
-        name = account.name
+        currency = getAccountCurrency(account)
+        name = getAccountName(account)
       }
     }
 
