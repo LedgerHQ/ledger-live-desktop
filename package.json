@@ -11,6 +11,7 @@
     "start": "bash ./scripts/start.sh",
     "release": "bash ./scripts/release.sh",
     "dist": "bash ./scripts/dist.sh",
+    "dist:signed": "bash ./scripts/dist.sh --sign",
     "dist:dir": "bash ./scripts/dist-dir.sh",
     "compile": "bash ./scripts/compile.sh",
     "lint": "eslint src webpack .storybook test-e2e",
