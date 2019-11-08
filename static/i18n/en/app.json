@@ -510,16 +510,25 @@
     "totalBalance": "Total balance",
     "steps": {
       "recipient": {
-        "title": "Account"
+        "title": "Recipient"
+      },
+      "amount": {
+        "title": "Amount"
+      },
+      "summary": {
+        "title": "Summary"
+      },
+      "device": {
+        "title": "Device"
       },
       "details": {
         "from": "From",
         "to": "To",
-        "title": "Details",
         "selectAccountDebit": "Account to debit",
         "recipientAddress": "Recipient address",
         "amount": "Amount",
         "fees": "Network fees",
+        "feesTooHigh": "Network fees represent more than 10% of the amount",
         "useMax": "Send Max",
         "advancedOptions": "Advanced options",
         "useRBF": "Use a replace-by-fee transaction",
@@ -530,16 +539,10 @@
         "ethereumGasPrice": "Gas price",
         "unitPerByte": "{{unit}} per byte"
       },
-      "summary": {
-        "title": "Summary"
-      },
       "verification": {
         "title": "Verification",
         "body": "Please verify all transaction details on your device",
         "warning": "Always verify that your device displays the address exactly as provided by the recipient"
-      },
-      "device": {
-        "title": "Device"
       },
       "confirmation": {
         "title": "Confirmation",

@@ -65,7 +65,7 @@ const createSteps = () => [
   },
   {
     id: 'amount',
-    label: <Trans i18nKey="send.steps.details.title" />,
+    label: <Trans i18nKey="send.steps.amount.title" />,
     component: StepAmount,
     footer: StepAmountFooter,
     onBack: ({ transitionTo }) => transitionTo('recipient'),
@@ -79,7 +79,7 @@ const createSteps = () => [
   },
   {
     id: 'device',
-    excludeFromBreadcrumb: true,
+    label: <Trans i18nKey="send.steps.device.title" />,
     component: StepConnectDevice,
     footer: StepConnectDeviceFooter,
     onBack: ({ transitionTo }) => transitionTo('recipient'),
@@ -103,6 +103,7 @@ const createSteps = () => [
   {
     id: 'confirmation',
     label: <Trans i18nKey="send.steps.confirmation.title" />,
+    excludeFromBreadcrumb: true,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
     onBack: ({ transitionTo, onRetry }) => {
@@ -277,11 +278,7 @@ const Body = ({
   const errorSteps = []
 
   if (transactionError) {
-    if (transactionError instanceof UserRefusedOnDevice) {
-      errorSteps.push(2)
-    } else {
-      errorSteps.push(3)
-    }
+    errorSteps.push(3)
   } else if (bridgeError) {
     errorSteps.push(0)
   }

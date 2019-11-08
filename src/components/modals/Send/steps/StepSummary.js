@@ -18,6 +18,8 @@ import { rgba } from 'styles/helpers'
 import Ellipsis from 'components/base/Ellipsis'
 import Button from 'components/base/Button'
 import { Trans } from 'react-i18next'
+import IconExclamationCircle from 'icons/ExclamationCircle'
+import colors from 'colors'
 import type { StepProps } from '../types'
 
 const FromToWrapper = styled.div``
@@ -123,6 +125,14 @@ export default class StepSummary extends PureComponent<StepProps> {
               showCode
             />
           </Box>
+          {feeTooHigh ? (
+            <Box horizontal justifyContent="flex-end" alignItems="center" color="warning">
+              <IconExclamationCircle size={10} />
+              <Text ff="Inter|Medium" fontSize={2} style={{ marginLeft: '5px' }}>
+                <Trans i18nKey="send.steps.details.feesTooHigh" />
+              </Text>
+            </Box>
+          ) : null}
           <Separator />
           <Box horizontal justifyContent="space-between">
             <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={4}>
