@@ -1,5 +1,6 @@
 {
   "common": {
+    "loading": "Loading",
     "labelYes": "确定",
     "labelNo": "取消",
     "never": "从不",
@@ -506,32 +507,42 @@
   "send": {
     "title": "发送",
     "totalSpent": "总借额",
+    "totalBalance": "Total balance",
     "steps": {
-      "amount": {
-        "title": "详情",
-        "selectAccountDebit": "付币账户",
-        "recipientAddress": "收件人地址",
-        "amount": "金额",
-        "fees": "网络费用",
-        "useMax": "最大值",
-        "advancedOptions": "高级选项",
-        "useRBF": "使用费用替代法交易",
-        "message": "留言 (140)",
-        "rippleTag": "标签",
-        "ethereumGasLimit": "Gas 上限",
-        "unitPerByte": "{{unit}} 每字节",
-        "highFeeModal": {
-          "title": "高交易费",
-          "desc": "请注意，该操作的交易费 (<1><0>{{fees}}</0></1>) 占操作金额的10%以上 (<3><0> > >{{amount}}</0></3>)。 您还想要继续交易吗？"
-        }
+      "recipient": {
+        "title": "Recipient"
       },
-      "connectDevice": {
-        "title": "设备"
+      "amount": {
+        "title": "Amount"
+      },
+      "summary": {
+        "title": "Summary"
+      },
+      "device": {
+        "title": "Device"
+      },
+      "details": {
+        "from": "From",
+        "to": "To",
+        "selectAccountDebit": "Account to debit",
+        "recipientAddress": "Recipient address",
+        "amount": "Amount",
+        "fees": "Network fees",
+        "feesTooHigh": "Network fees represent more than 10% of the amount",
+        "useMax": "Send Max",
+        "advancedOptions": "Advanced options",
+        "useRBF": "Use a replace-by-fee transaction",
+        "message": "Leave a message (140)",
+        "rippleTag": "Tag",
+        "rippleTagPlaceholder": "Optional",
+        "ethereumGasLimit": "Gas limit",
+        "ethereumGasPrice": "Gas price",
+        "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
         "title": "验证",
-        "warning": "请验证您设备上的所有交易详情",
-        "body": "确认您设备上的交易以进行发送"
+        "body": "Please verify all transaction details on your device",
+        "warning": "Always verify that your device displays the address exactly as provided by the recipient"
       },
       "confirmation": {
         "title": "确认",
@@ -800,6 +811,7 @@
     },
     "start": {
       "title": "欢迎使用 Ledger Live",
+      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
       "startBtn": "入门指南"
     },
     "init": {
