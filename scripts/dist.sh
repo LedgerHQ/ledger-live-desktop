@@ -24,12 +24,21 @@ fi
 
 yarn compile
 
-runJob \
-  "CSC_IDENTITY_AUTO_DISCOVERY=false DEBUG=electron-builder electron-builder --publish never --config electron-builder-nightly.yml" \
-  "building and packaging app..." \
-  "app built and packaged successfully" \
-  "failed to build app" \
-  "verbose"
+if [ "$1" == "--sign" ]; then
+  runJob \
+    "DEBUG=electron-builder electron-builder --publish never" \
+    "building, packaging and signing app..." \
+    "app built, packaged and signed successfully" \
+    "failed to build app" \
+    "verbose"
+else
+  runJob \
+    "CSC_IDENTITY_AUTO_DISCOVERY=false DEBUG=electron-builder electron-builder --publish never --config electron-builder-nightly.yml" \
+    "building and packaging app..." \
+    "app built and packaged successfully" \
+    "failed to build app" \
+    "verbose"
+fi
 
 # hilarious fix continuation: put back the icon where it was
 if [[ $(uname) == 'Linux' ]]; then
