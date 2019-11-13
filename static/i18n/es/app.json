@@ -1,5 +1,6 @@
 {
   "common": {
+    "loading": "Loading",
     "labelYes": "Sí",
     "labelNo": "No",
     "never": "Nunca",
@@ -506,32 +507,42 @@
   "send": {
     "title": "Enviar",
     "totalSpent": "Total a cargar",
+    "totalBalance": "Total balance",
     "steps": {
-      "amount": {
-        "title": "Detalles",
-        "selectAccountDebit": "Cuenta de débito",
-        "recipientAddress": "Dirección del destinatario",
-        "amount": "Importe",
-        "fees": "Comisiones de red",
-        "useMax": "Max",
-        "advancedOptions": "Opciones avanzadas",
-        "useRBF": "Utilizar una transacción RBF",
-        "message": "Dejar un mensaje (140) ",
-        "rippleTag": "Etiquetar",
-        "ethereumGasLimit": "Límite de gas",
-        "unitPerByte": "{{unit}} por byte",
-        "highFeeModal": {
-          "title": "Comisiones elevadas",
-          "desc": "Ten cuidado, las comisiones de transacción (<1><0>{{fees}}</0></1>) representan más del 10% de la cantidad (<3><0>{{amount}}</0></3>). ¿Deseas continuar?"
-        }
+      "recipient": {
+        "title": "Recipient"
       },
-      "connectDevice": {
-        "title": "Dispositivo"
+      "amount": {
+        "title": "Amount"
+      },
+      "summary": {
+        "title": "Summary"
+      },
+      "device": {
+        "title": "Device"
+      },
+      "details": {
+        "from": "From",
+        "to": "To",
+        "selectAccountDebit": "Account to debit",
+        "recipientAddress": "Recipient address",
+        "amount": "Amount",
+        "fees": "Network fees",
+        "feesTooHigh": "Network fees represent more than 10% of the amount",
+        "useMax": "Send Max",
+        "advancedOptions": "Advanced options",
+        "useRBF": "Use a replace-by-fee transaction",
+        "message": "Leave a message (140)",
+        "rippleTag": "Tag",
+        "rippleTagPlaceholder": "Optional",
+        "ethereumGasLimit": "Gas limit",
+        "ethereumGasPrice": "Gas price",
+        "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
         "title": "Comprobación",
-        "warning": "Comprueba todos los datos de la transacción en tu dispositivo.",
-        "body": "Confirma la transacción en tu dispositivo para enviarla"
+        "body": "Please verify all transaction details on your device",
+        "warning": "Always verify that your device displays the address exactly as provided by the recipient"
       },
       "confirmation": {
         "title": "Confirmación",
@@ -800,6 +811,7 @@
     },
     "start": {
       "title": "Bienvenido a Ledger Live",
+      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
       "startBtn": "Empezar"
     },
     "init": {
