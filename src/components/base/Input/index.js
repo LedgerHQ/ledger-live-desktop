@@ -138,6 +138,7 @@ type Props = {
   disabled?: boolean,
 }
 
+// $FlowFixMe @IAmMorrow
 const Input = React.forwardRef(
   (
     {
@@ -185,6 +186,7 @@ const Input = React.forwardRef(
 
     const handleClick = useCallback(() => {
       if (inputRef && inputRef.current) {
+        // $FlowFixMe @IAmMorrow
         inputRef.current.focus()
       }
     }, [inputRef])

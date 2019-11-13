@@ -50,6 +50,7 @@ const Separator = styled.div`
 export default class StepSummary extends PureComponent<StepProps> {
   render() {
     const { account, parentAccount, transaction, status } = this.props
+    if (!account) return null
     const mainAccount = getMainAccount(account, parentAccount)
     if (!mainAccount || !transaction) return null
     const { estimatedFees, amount, totalSpent, warnings } = status

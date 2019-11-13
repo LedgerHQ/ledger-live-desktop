@@ -38,6 +38,7 @@ export default class StepVerification extends PureComponent<StepProps> {
 
   render() {
     const { t, device, account, parentAccount, status } = this.props
+    if (!account) return null
     const mainAccount = getMainAccount(account, parentAccount)
     if (!mainAccount) return null
     const isBlue = device && device.modelId === 'blue'
