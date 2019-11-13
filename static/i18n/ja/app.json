@@ -1,5 +1,6 @@
 {
   "common": {
+    "loading": "Loading",
     "labelYes": "はい",
     "labelNo": "いいえ",
     "never": "オートロックしない",
@@ -506,32 +507,42 @@
   "send": {
     "title": "送信",
     "totalSpent": "出金総額",
+    "totalBalance": "Total balance",
     "steps": {
-      "amount": {
-        "title": "詳細",
-        "selectAccountDebit": "借方アカウントの選択",
-        "recipientAddress": "受取人のアドレス",
-        "amount": "金額",
-        "fees": "ネットワーク手数料",
-        "useMax": "Max",
-        "advancedOptions": "詳細オプション",
-        "useRBF": "replace-by-fee取引を利用する",
-        "message": "メッセージを残す（140）",
-        "rippleTag": "タグ",
-        "ethereumGasLimit": "ガス制限",
-        "unitPerByte": "バイト当たり{{unit}}",
-        "highFeeModal": {
-          "title": "High fees",
-          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
-        }
+      "recipient": {
+        "title": "Recipient"
       },
-      "connectDevice": {
-        "title": "機器"
+      "amount": {
+        "title": "Amount"
+      },
+      "summary": {
+        "title": "Summary"
+      },
+      "device": {
+        "title": "Device"
+      },
+      "details": {
+        "from": "From",
+        "to": "To",
+        "selectAccountDebit": "Account to debit",
+        "recipientAddress": "Recipient address",
+        "amount": "Amount",
+        "fees": "Network fees",
+        "feesTooHigh": "Network fees represent more than 10% of the amount",
+        "useMax": "Send Max",
+        "advancedOptions": "Advanced options",
+        "useRBF": "Use a replace-by-fee transaction",
+        "message": "Leave a message (140)",
+        "rippleTag": "Tag",
+        "rippleTagPlaceholder": "Optional",
+        "ethereumGasLimit": "Gas limit",
+        "ethereumGasPrice": "Gas price",
+        "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
         "title": "検証",
-        "warning": "Ledgerデバイスに表示されているトランザクションの明細をすべて確認してください",
-        "body": "送信前に、Ledgerデバイス上のトランザクションをもう一度確認してください"
+        "body": "Please verify all transaction details on your device",
+        "warning": "Always verify that your device displays the address exactly as provided by the recipient"
       },
       "confirmation": {
         "title": "確認",
@@ -800,6 +811,7 @@
     },
     "start": {
       "title": "Ledger Liveにようこそ",
+      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
       "startBtn": "はじめに"
     },
     "init": {
