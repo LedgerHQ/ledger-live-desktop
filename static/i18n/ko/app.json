@@ -1,5 +1,6 @@
 {
   "common": {
+    "loading": "Loading",
     "labelYes": "예",
     "labelNo": "아니오",
     "never": "결코 아님",
@@ -506,32 +507,42 @@
   "send": {
     "title": "전송",
     "totalSpent": "인출할 총액",
+    "totalBalance": "Total balance",
     "steps": {
-      "amount": {
-        "title": "세부 사항",
-        "selectAccountDebit": "인출할 계정",
-        "recipientAddress": "수취인 주소",
-        "amount": "금액",
-        "fees": "네트워크 수수료",
-        "useMax": "Max",
-        "advancedOptions": "고급 옵션",
-        "useRBF": "RBF(replace-by-fee) 트랜잭션 사용",
-        "message": "메시지 남기기 (140 )",
-        "rippleTag": "태그",
-        "ethereumGasLimit": "가스 리밋",
-        "unitPerByte": "바이트 당 {{unit}}",
-        "highFeeModal": {
-          "title": "High fees",
-          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
-        }
+      "recipient": {
+        "title": "Recipient"
       },
-      "connectDevice": {
-        "title": "장치"
+      "amount": {
+        "title": "Amount"
+      },
+      "summary": {
+        "title": "Summary"
+      },
+      "device": {
+        "title": "Device"
+      },
+      "details": {
+        "from": "From",
+        "to": "To",
+        "selectAccountDebit": "Account to debit",
+        "recipientAddress": "Recipient address",
+        "amount": "Amount",
+        "fees": "Network fees",
+        "feesTooHigh": "Network fees represent more than 10% of the amount",
+        "useMax": "Send Max",
+        "advancedOptions": "Advanced options",
+        "useRBF": "Use a replace-by-fee transaction",
+        "message": "Leave a message (140)",
+        "rippleTag": "Tag",
+        "rippleTagPlaceholder": "Optional",
+        "ethereumGasLimit": "Gas limit",
+        "ethereumGasPrice": "Gas price",
+        "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
         "title": "확인",
-        "warning": "장치에서 거래의 세부 정보를 확인하십시오.",
-        "body": "전송하려면 장치의 거래 정보를 승인하십시오."
+        "body": "Please verify all transaction details on your device",
+        "warning": "Always verify that your device displays the address exactly as provided by the recipient"
       },
       "confirmation": {
         "title": "확인",
@@ -800,6 +811,7 @@
     },
     "start": {
       "title": "Ledger Live에 오신 것을 환영합니다.",
+      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
       "startBtn": "시작하기"
     },
     "init": {
