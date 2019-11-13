@@ -9,7 +9,7 @@ import WarnBox from 'components/WarnBox'
 import Interactions from 'icons/device/interactions'
 import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
-import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
+import { getAccountUnit, getMainAccount } from '@ledgerhq/live-common/lib/account'
 import { Trans } from 'react-i18next'
 import type { StepProps } from '../types'
 
@@ -37,11 +37,13 @@ export default class StepVerification extends PureComponent<StepProps> {
   }
 
   render() {
-    const { t, device, account, status } = this.props
-    if (!account) return null
+    const { t, device, account, parentAccount, status } = this.props
+    const mainAccount = getMainAccount(account, parentAccount)
+    if (!mainAccount) return null
     const isBlue = device && device.modelId === 'blue'
     const { estimatedFees, amount } = status
-    const currency = getAccountCurrency(account)
+    const unit = getAccountUnit(account)
+    const feesUnit = getAccountUnit(mainAccount)
 
     return (
       <Container>
@@ -65,7 +67,7 @@ export default class StepVerification extends PureComponent<StepProps> {
             </Text>
             <FormattedVal
               color={'palette.text.shade80'}
-              unit={currency.units[0]}
+              unit={unit}
               val={amount}
               fontSize={3}
               inline
@@ -78,7 +80,7 @@ export default class StepVerification extends PureComponent<StepProps> {
             </Text>
             <FormattedVal
               color={'palette.text.shade80'}
-              unit={currency.units[0]}
+              unit={feesUnit}
               val={estimatedFees}
               fontSize={3}
               inline

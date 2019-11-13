@@ -12,6 +12,7 @@ import {
   getAccountCurrency,
   getAccountName,
   getAccountUnit,
+  getMainAccount,
 } from '@ledgerhq/live-common/lib/account'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import { rgba } from 'styles/helpers'
@@ -19,7 +20,6 @@ import Ellipsis from 'components/base/Ellipsis'
 import Button from 'components/base/Button'
 import { Trans } from 'react-i18next'
 import IconExclamationCircle from 'icons/ExclamationCircle'
-import colors from 'colors'
 import type { StepProps } from '../types'
 
 const FromToWrapper = styled.div``
@@ -49,11 +49,13 @@ const Separator = styled.div`
 
 export default class StepSummary extends PureComponent<StepProps> {
   render() {
-    const { account, transaction, status } = this.props
-    if (!account || !transaction) return null
+    const { account, parentAccount, transaction, status } = this.props
+    const mainAccount = getMainAccount(account, parentAccount)
+    if (!mainAccount || !transaction) return null
     const { estimatedFees, amount, totalSpent, warnings } = status
     const feeTooHigh = Object.keys(warnings).includes('feeTooHigh')
     const currency = getAccountCurrency(account)
+    const feesUnit = getAccountUnit(mainAccount)
     const unit = getAccountUnit(account)
 
     return (
@@ -118,7 +120,7 @@ export default class StepSummary extends PureComponent<StepProps> {
             <FormattedVal
               color={feeTooHigh ? 'warning' : 'palette.text.shade80'}
               disableRounding
-              unit={unit}
+              unit={feesUnit}
               val={estimatedFees}
               fontSize={4}
               inline
