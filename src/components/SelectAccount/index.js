@@ -30,7 +30,7 @@ const mapStateToProps = createStructuredSelector({
 const Tick = styled.div`
   position: absolute;
   top: -10px;
-  height: 40px;
+  height: 48px;
   width: 1px;
   background: ${p => p.theme.colors.palette.divider};
 `

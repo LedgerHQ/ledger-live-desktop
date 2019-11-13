@@ -1,5 +1,6 @@
 {
   "common": {
+    "loading": "Loading",
     "labelYes": "Yes",
     "labelNo": "No",
     "never": "Never",
@@ -506,32 +507,42 @@
   "send": {
     "title": "Send",
     "totalSpent": "Total to debit",
+    "totalBalance": "Total balance",
     "steps": {
+      "recipient": {
+        "title": "Recipient"
+      },
       "amount": {
-        "title": "Details",
+        "title": "Amount"
+      },
+      "summary": {
+        "title": "Summary"
+      },
+      "device": {
+        "title": "Device"
+      },
+      "details": {
+        "from": "From",
+        "to": "To",
         "selectAccountDebit": "Account to debit",
         "recipientAddress": "Recipient address",
         "amount": "Amount",
         "fees": "Network fees",
-        "useMax": "Max",
+        "feesTooHigh": "Network fees represent more than 10% of the amount",
+        "useMax": "Send Max",
         "advancedOptions": "Advanced options",
         "useRBF": "Use a replace-by-fee transaction",
         "message": "Leave a message (140)",
         "rippleTag": "Tag",
+        "rippleTagPlaceholder": "Optional",
         "ethereumGasLimit": "Gas limit",
-        "unitPerByte": "{{unit}} per byte",
-        "highFeeModal": {
-          "title": "High fees",
-          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
-        }
-      },
-      "connectDevice": {
-        "title": "Device"
+        "ethereumGasPrice": "Gas price",
+        "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
         "title": "Verification",
-        "warning": "Please verify all transaction details on your device",
-        "body": "Confirm the transaction on your device to send it"
+        "body": "Please verify all transaction details on your device",
+        "warning": "Always verify that your device displays the address exactly as provided by the recipient"
       },
       "confirmation": {
         "title": "Confirmation",

@@ -23,7 +23,7 @@ export default (
     width,
     minWidth,
     ...ff('Inter|SemiBold'),
-    height: small ? 34 : 40,
+    height: small ? 34 : 48,
     minHeight: 'unset',
     borderRadius: isRight ? '0 4px 4px 0' : isLeft ? '4px 0 0 4px' : 4,
     borderColor: theme.colors.palette.divider,

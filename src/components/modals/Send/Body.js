@@ -25,10 +25,12 @@ import { DisconnectedDevice, UserRefusedOnDevice } from '@ledgerhq/errors'
 import Stepper from 'components/base/Stepper'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 
-import StepAmount, { StepAmountFooter } from './steps/01-step-amount'
-import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
-import StepVerification from './steps/03-step-verification'
-import StepConfirmation, { StepConfirmationFooter } from './steps/04-step-confirmation'
+import StepRecipient, { StepRecipientFooter } from './steps/StepRecipient'
+import StepAmount, { StepAmountFooter } from './steps/StepAmount'
+import StepConnectDevice, { StepConnectDeviceFooter } from './steps/StepConnectDevice'
+import StepVerification from './steps/StepVerification'
+import StepSummary, { StepSummaryFooter } from './steps/StepSummary'
+import StepConfirmation, { StepConfirmationFooter } from './steps/StepConfirmation'
 
 type OwnProps = {|
   stepId: string,
@@ -56,32 +58,57 @@ type Props = {|
 
 const createSteps = () => [
   {
+    id: 'recipient',
+    label: <Trans i18nKey="send.steps.recipient.title" />,
+    component: StepRecipient,
+    footer: StepRecipientFooter,
+  },
+  {
     id: 'amount',
     label: <Trans i18nKey="send.steps.amount.title" />,
     component: StepAmount,
     footer: StepAmountFooter,
+    onBack: ({ transitionTo }) => transitionTo('recipient'),
   },
   {
-    id: 'device',
-    label: <Trans i18nKey="send.steps.connectDevice.title" />,
-    component: StepConnectDevice,
-    footer: StepConnectDeviceFooter,
+    id: 'summary',
+    label: <Trans i18nKey="send.steps.summary.title" />,
+    component: StepSummary,
+    footer: StepSummaryFooter,
     onBack: ({ transitionTo }) => transitionTo('amount'),
   },
   {
+    id: 'device',
+    label: <Trans i18nKey="send.steps.device.title" />,
+    component: StepConnectDevice,
+    footer: StepConnectDeviceFooter,
+    onBack: ({ transitionTo }) => transitionTo('recipient'),
+  },
+  {
     id: 'verification',
-    label: <Trans i18nKey="send.steps.verification.title" />,
+    excludeFromBreadcrumb: true,
     component: StepVerification,
     shouldPreventClose: true,
   },
   {
-    id: 'confirmation',
-    label: <Trans i18nKey="send.steps.confirmation.title" />,
+    id: 'refused',
+    excludeFromBreadcrumb: true,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
     onBack: ({ transitionTo, onRetry }) => {
       onRetry()
-      transitionTo('amount')
+      transitionTo('summary')
+    },
+  },
+  {
+    id: 'confirmation',
+    label: <Trans i18nKey="send.steps.confirmation.title" />,
+    excludeFromBreadcrumb: true,
+    component: StepConfirmation,
+    footer: StepConfirmationFooter,
+    onBack: ({ transitionTo, onRetry }) => {
+      onRetry()
+      transitionTo('recipient')
     },
   },
 ]
@@ -121,7 +148,7 @@ const Body = ({
     bridgeError,
     bridgePending,
   } = useBridgeTransaction()
-
+  // console.log({ status, bridgeError })
   const [isAppOpened, setAppOpened] = useState(false)
   const [optimisticOperation, setOptimisticOperation] = useState(null)
   const [transactionError, setTransactionError] = useState(null)
@@ -211,15 +238,15 @@ const Body = ({
             }
           },
           error: err => {
-            const error = err.statusCode === 0x6985 ? new UserRefusedOnDevice() : err
-            track(
-              error instanceof UserRefusedOnDevice
-                ? 'SendTransactionRefused'
-                : 'SendTransactionError',
-              eventProps,
-            )
-            handleTransactionError(error)
-            transitionTo('confirmation')
+            if (err.statusCode === 0x6985) {
+              track('SendTransactionRefused', eventProps)
+              handleTransactionError(new UserRefusedOnDevice())
+              transitionTo('refused')
+            } else {
+              track('SendTransactionError', eventProps)
+              handleTransactionError(err)
+              transitionTo('confirmation')
+            }
           },
         })
     },
@@ -251,11 +278,7 @@ const Body = ({
   const errorSteps = []
 
   if (transactionError) {
-    if (transactionError instanceof UserRefusedOnDevice) {
-      errorSteps.push(2)
-    } else {
-      errorSteps.push(3)
-    }
+    errorSteps.push(3)
   } else if (bridgeError) {
     errorSteps.push(0)
   }

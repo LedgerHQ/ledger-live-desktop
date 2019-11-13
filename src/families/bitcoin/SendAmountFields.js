@@ -11,7 +11,7 @@ import Select from 'components/base/Select'
 import Box from 'components/base/Box'
 import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import invariant from 'invariant'
-import GenericContainer from './GenericContainer'
+import GenericContainer from '../../components/FeesContainer'
 
 type Props = {
   account: Account,
@@ -115,7 +115,7 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
           error={showError && feePerByteError}
           renderRight={
             <InputRight>
-              <Trans i18nKey="send.steps.amount.unitPerByte" values={{ unit: satoshi.code }} />
+              <Trans i18nKey="send.steps.details.unitPerByte" values={{ unit: satoshi.code }} />
             </InputRight>
           }
           allowZero
@@ -125,4 +125,7 @@ const FeesField = ({ transaction, account, onChange, status }: Props) => {
   )
 }
 
-export default translate()(FeesField)
+export default {
+  component: translate()(FeesField),
+  fields: ['feePerByte'],
+}

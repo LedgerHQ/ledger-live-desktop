@@ -89,7 +89,7 @@ function StepConfirmation({
           </Box>
         </Disclaimer>
       ) : null}
-      <TrackPage category="Send Flow" name="Step 4" />
+      <TrackPage category="Send Flow" name="Step Confirmed" />
       <span style={{ color: iconColor }}>
         <Icon size={43} />
       </span>
@@ -155,7 +155,7 @@ export function StepConfirmationFooter({
           primary
           onClick={() => {
             onRetry()
-            transitionTo('amount')
+            transitionTo('summary')
           }}
         />
       ) : null}

@@ -5,7 +5,7 @@ import { BigNumber } from 'bignumber.js'
 import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
 import invariant from 'invariant'
 import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
-import FeeSliderField from './FeeSliderField'
+import FeeSliderField from '../../components/FeeSliderField'
 
 type Props = {
   account: Account,

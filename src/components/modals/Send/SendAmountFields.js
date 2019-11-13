@@ -1,13 +1,7 @@
 // @flow
 import React from 'react'
 import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
-import EthereumKind from './EthereumKind'
-import RippleKind from './RippleKind'
-
-const byFamily = {
-  ethereum: EthereumKind,
-  ripple: RippleKind,
-}
+import byFamily from 'generated/SendAmountFields'
 
 type Props = {
   account: Account,
@@ -16,10 +10,11 @@ type Props = {
   onChange: Transaction => void,
 }
 
-const FeeField = (props: Props) => {
-  const Cmp = byFamily[props.account.currency.family]
-  if (!Cmp) return null
+const AmountRelatedField = (props: Props) => {
+  const module = byFamily[props.account.currency.family]
+  if (!module) return null
+  const Cmp = module.component
   return <Cmp {...props} />
 }
 
-export default FeeField
+export default AmountRelatedField

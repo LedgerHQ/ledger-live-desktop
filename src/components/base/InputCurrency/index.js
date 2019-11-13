@@ -27,7 +27,6 @@ function format(unit: Unit, value: BigNumber, { locale, isFocused, showAllDigits
 }
 
 const Currencies = styled(Box)`
-  position: relative;
   top: -1px;
   right: -1px;
   width: 100px;
@@ -162,15 +161,14 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   render() {
-    const { renderRight, showAllDigits, unit, subMagnitude, locale, disabled } = this.props
+    const { renderRight, showAllDigits, unit, subMagnitude, locale, ...rest } = this.props
     const { displayValue } = this.state
 
     return (
       <Input
-        {...this.props}
+        {...rest}
         ff="Inter"
         ref={this.props.forwardedRef}
-        disabled={disabled}
         value={displayValue}
         onChange={this.handleChange}
         onFocus={this.handleFocus}

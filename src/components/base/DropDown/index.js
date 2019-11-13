@@ -36,7 +36,7 @@ export const DropDownItem = styled(Box).attrs(p => ({
   color: p.isHighlighted || p.isActive ? 'palette.text.shade100' : 'palette.text.shade80',
   bg: p.isActive ? 'palette.background.default' : '',
 }))`
-  height: 40px;
+  height: 48px;
   white-space: nowrap;
 `
 
