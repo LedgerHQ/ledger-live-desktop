@@ -1,20 +1,25 @@
 // @flow
 
 import invariant from 'invariant'
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { Trans } from 'react-i18next'
-
 import TrackPage from 'analytics/TrackPage'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
 import ConnectDevice from 'components/modals/StepConnectDevice'
 import { CurrencyCircleIcon } from 'components/base/CurrencyBadge'
-
 import type { StepProps } from '../index'
+import { prepareCurrency } from '../../../../bridge/cache'
 
 function StepConnectDevice({ t, currency, device, setAppOpened }: StepProps) {
   invariant(currency, 'No crypto asset given')
+
+  useEffect(() => {
+    if (currency && currency.type === 'CryptoCurrency') {
+      prepareCurrency(currency)
+    }
+  }, [currency])
 
   const currencyName = `${currency.name} (${currency.ticker})`
 

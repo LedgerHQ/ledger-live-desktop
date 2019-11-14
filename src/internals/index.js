@@ -6,6 +6,9 @@ import { serializeError } from '@ledgerhq/errors'
 import 'helpers/live-common-setup'
 import 'helpers/live-common-setup-internal-hw'
 
+import { log } from '@ledgerhq/logs'
+import { getCurrencyBridge } from '@ledgerhq/live-common/lib/bridge'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import logger from 'logger'
 import LoggerTransport from 'logger/logger-transport-internal'
 import uuid from 'uuid/v4'
@@ -61,25 +64,62 @@ if (EXPERIMENTAL_HTTP_ON_RENDERER) {
 }
 
 process.on('message', m => {
-  if (m.type === 'command') {
-    executeCommand(m.command, process.send.bind(process))
-  } else if (m.type === 'command-unsubscribe') {
-    unsubscribeCommand(m.requestId)
-  } else if (m.type === 'executeHttpQueryPayload') {
-    const { payload } = m
-    const defer = defers[payload.id]
-    if (!defer) {
-      logger.warn('executeHttpQueryPayload: no defer found')
-      return
+  switch (m.type) {
+    case 'command':
+      executeCommand(m.command, process.send.bind(process))
+      break
+
+    case 'command-unsubscribe':
+      unsubscribeCommand(m.requestId)
+      break
+
+    case 'executeHttpQueryPayload': {
+      const { payload } = m
+      const defer = defers[payload.id]
+      if (!defer) {
+        logger.warn('executeHttpQueryPayload: no defer found')
+        return
+      }
+      if (payload.type === 'success') {
+        defer.resolve(payload.result)
+      } else {
+        defer.reject(payload.error)
+      }
+      break
     }
-    if (payload.type === 'success') {
-      defer.resolve(payload.result)
-    } else {
-      defer.reject(payload.error)
+
+    case 'sentryLogsChanged': {
+      const { payload } = m
+      sentryEnabled = payload.value
+      break
     }
-  } else if (m.type === 'sentryLogsChanged') {
-    const { payload } = m
-    sentryEnabled = payload.value
+
+    case 'hydrateCurrencyData': {
+      const { currencyId, serialized } = m
+      const currency = getCryptoCurrencyById(currencyId)
+      const data = serialized && JSON.stringify(serialized)
+      log('hydrateCurrencyData', `hydrate currency ${currency.id}`)
+      getCurrencyBridge(currency).hydrate(data)
+      break
+    }
+
+    case 'init': {
+      const { hydratedPerCurrency } = m
+
+      // hydrate all
+      log('init', `hydrate currencies ${Object.keys(hydratedPerCurrency).join(', ')}`)
+      Object.keys(hydratedPerCurrency).forEach(currencyId => {
+        const currency = getCryptoCurrencyById(currencyId)
+        const serialized = hydratedPerCurrency[currencyId]
+        const data = serialized && JSON.stringify(serialized)
+        getCurrencyBridge(currency).hydrate(data)
+      })
+
+      break
+    }
+
+    default:
+      log('error', `internal thread: '${m.type}' event not supported`)
   }
 })
 

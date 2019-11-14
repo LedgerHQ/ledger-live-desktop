@@ -25,7 +25,6 @@ import {
   toSignAndBroadcastEventRaw,
   fromSignAndBroadcastEventRaw,
 } from '@ledgerhq/live-common/lib/transaction'
-import { inferDeprecatedMethods } from '@ledgerhq/live-common/lib/bridge/deprecationUtils'
 import { fromAccountRaw, toAccountRaw } from '@ledgerhq/live-common/lib/account'
 import { patchAccount } from '@ledgerhq/live-common/lib/reconciliation'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
@@ -42,14 +41,20 @@ const cmdCurrencyScanAccountsOnDevice: Command<
   return bridge.scanAccountsOnDevice(currency, o.deviceId).pipe(map(toScanAccountEventRaw))
 })
 
-export const getCurrencyBridge = (_currency: CryptoCurrency): CurrencyBridge => ({
-  scanAccountsOnDevice: (currency, deviceId) =>
-    cmdCurrencyScanAccountsOnDevice
-      .send({
-        currencyId: currency.id,
-        deviceId,
-      })
-      .pipe(map(fromScanAccountEventRaw)),
+const scanAccountsOnDevice = (currency, deviceId) =>
+  cmdCurrencyScanAccountsOnDevice
+    .send({
+      currencyId: currency.id,
+      deviceId,
+    })
+    .pipe(map(fromScanAccountEventRaw))
+
+export const getCurrencyBridge = (currency: CryptoCurrency): CurrencyBridge => ({
+  preload: () => bridgeImpl.getCurrencyBridge(currency).preload(),
+
+  hydrate: value => bridgeImpl.getCurrencyBridge(currency).hydrate(value),
+
+  scanAccountsOnDevice,
 })
 
 const cmdAccountStartSync: Command<
@@ -128,9 +133,6 @@ export const getAccountBridge = (
   const updateTransaction = (a, patch) =>
     bridgeImpl.getAccountBridge(account, parentAccount).updateTransaction(a, patch)
 
-  const getCapabilities = a =>
-    bridgeImpl.getAccountBridge(account, parentAccount).getCapabilities(a)
-
   const prepareTransaction = async (a, t) => {
     const transaction = toTransactionRaw(t)
     const result = await cmdAccountPrepareTransaction
@@ -173,13 +175,6 @@ export const getAccountBridge = (
     prepareTransaction,
     startSync,
     signAndBroadcast,
-    getCapabilities,
-    ...inferDeprecatedMethods({
-      name: 'DesktopBridgeProxy',
-      createTransaction,
-      getTransactionStatus,
-      prepareTransaction,
-    }),
   }
 }
 
