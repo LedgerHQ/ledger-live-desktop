@@ -113,10 +113,10 @@ const Base = styled.input.attrs(() => ({
   padding: 0;
   width: 100%;
   background: none;
-  cursor: text;
+  cursor: ${p => (p.disabled ? 'not-allowed' : 'text')};
 
   &::placeholder {
-    color: ${p => p.theme.colors.palette.divider};
+    color: ${p => p.theme.colors.palette.text.shade40};
   }
 `
 

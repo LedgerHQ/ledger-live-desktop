@@ -7,9 +7,9 @@ import Label from 'components/base/Label'
 import Box from 'components/base/Box'
 import IconExternalLink from 'icons/ExternalLink'
 
-const LabelWrapper = styled(Label).attrs(p => ({ ff: p.ff ? p.ff : 'Inter|Bold' }))`
+const LabelWrapper = styled(Label).attrs(p => ({ ff: p.ff ? p.ff : 'Inter|Medium' }))`
   display: inline-flex;
-  color: ${p => p.theme.colors[p.color] || 'inherit'};
+  color: ${p => p.theme.colors[p.color] || 'palette.text.shade60'};
   &:hover {
     color: ${p => p.theme.colors.wallet};
     cursor: pointer;
