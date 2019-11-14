@@ -101,6 +101,7 @@ class Modal extends PureComponent<Props, State> {
     })
 
     document.addEventListener('keyup', this.handleKeyup)
+    document.addEventListener('keydown', this.preventFocusEscape)
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -118,12 +119,39 @@ class Modal extends PureComponent<Props, State> {
 
   componentWillUnmount() {
     document.removeEventListener('keyup', this.handleKeyup)
+    document.removeEventListener('keydown', this.preventFocusEscape)
   }
 
   handleKeyup = (e: KeyboardEvent) => {
     const { onClose, preventBackdropClick } = this.props
     if (e.which === 27 && onClose && !preventBackdropClick) {
       onClose()
+    }
+  }
+
+  preventFocusEscape = (e: KeyboardEvent) => {
+    if (e.key === 'Tab') {
+      const { target } = e
+      const focusableQuery =
+        'input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), *[tabindex]'
+      const modalWrapper = document.getElementById('modals')
+      if (!modalWrapper || !(target instanceof window.HTMLElement)) return
+
+      const focusableElements = modalWrapper.querySelectorAll(focusableQuery)
+      if (!focusableElements.length) return
+
+      const firstFocusable = focusableElements[0]
+      const lastFocusable = focusableElements[focusableElements.length - 1]
+
+      if (e.shiftKey && firstFocusable.isSameNode(target)) {
+        lastFocusable.focus()
+        e.stopPropagation()
+        e.preventDefault()
+      } else if (!e.shiftKey && lastFocusable.isSameNode(target)) {
+        firstFocusable.focus()
+        e.stopPropagation()
+        e.preventDefault()
+      }
     }
   }
 

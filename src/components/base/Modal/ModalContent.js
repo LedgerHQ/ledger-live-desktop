@@ -65,7 +65,7 @@ const ModalContent = React.forwardRef(({ children, noScroll }: Props, containerR
 
   return (
     <ContentWrapper>
-      <ContentScrollableContainer ref={containerRef} tabIndex={0} noScroll={noScroll}>
+      <ContentScrollableContainer ref={containerRef} noScroll={noScroll}>
         {children}
       </ContentScrollableContainer>
       <ContentScrollableContainerGradient opacity={isScrollable ? 1 : 0} />
