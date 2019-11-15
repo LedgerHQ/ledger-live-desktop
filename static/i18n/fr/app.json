@@ -48,6 +48,7 @@
     "copied": "Copié",
     "addressCopied": "Adresse copiée",
     "experimentalFeature": "Expérimental",
+    "dismiss": "Dismiss",
     "lockScreen": {
       "title": "Bienvenue",
       "subTitle": null,
@@ -540,9 +541,7 @@
         "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
-        "title": "Vérification",
-        "body": "Please verify all transaction details on your device",
-        "warning": "Always verify that your device displays the address exactly as provided by the recipient"
+        "title": "Vérification"
       },
       "confirmation": {
         "title": "Confirmation",
@@ -581,6 +580,27 @@
     "showAll": "Tout afficher",
     "showLess": "Afficher moins",
     "header": "Répartition des comptes ({{count}})"
+  },
+  "delegation": {
+    "title": "Earn rewards",
+    "header": "Delegation",
+    "validator": "Validator",
+    "address": "Address",
+    "transactionID": "Transaction ID",
+    "value": "Value",
+    "amount": "Amount",
+    "duration": "Duration",
+    "durationJustStarted": "Just started",
+    "durationDays": "{{count}} day",
+    "durationDays_plural": "{{count}} days",
+    "banner": {
+      "text": "You can earn Tezos staking rewards by delegating your account"
+    },
+    "contextMenu": {
+      "topUp": "Top up",
+      "redelegate": "Redelegate",
+      "stopDelegation": "Stop delegation"
+    }
   },
   "asset": {
     "notice": "Résumé de tous les comptes {{currency}}"
@@ -1018,6 +1038,15 @@
   },
   "connectTroubleshooting": {
     "desc": "Des difficultés à connecter votre appareil ?"
+  },
+  "TransactionConfirm": {
+    "title": "Please verify all operation details on your device",
+    "warning": "Carefully verify all {{mode}} details on your device.",
+    "modes": {
+      "send": "transaction",
+      "delegate": "delegation",
+      "undelegate": "undelegation"
+    }
   },
   "errors": {
     "generic": {
