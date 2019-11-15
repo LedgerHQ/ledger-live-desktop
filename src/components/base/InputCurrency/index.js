@@ -55,6 +55,7 @@ type Props = {
 type State = {
   isFocused: boolean,
   displayValue: string,
+  rawValue: string,
 }
 
 class InputCurrency extends PureComponent<Props, State> {
@@ -72,6 +73,7 @@ class InputCurrency extends PureComponent<Props, State> {
   state = {
     isFocused: false,
     displayValue: '',
+    rawValue: '',
   }
 
   componentDidMount() {
@@ -108,7 +110,7 @@ class InputCurrency extends PureComponent<Props, State> {
     if (!value || !value.isEqualTo(satoshiValue)) {
       onChange(satoshiValue, unit)
     }
-    this.setState({ displayValue: r.display })
+    this.setState({ rawValue: v, displayValue: r.display })
   }
 
   handleBlur = () => {
@@ -122,7 +124,17 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   syncInput = ({ isFocused }: { isFocused: boolean }) => {
-    const { value, showAllDigits, subMagnitude, unit, allowZero, locale } = this.props
+    const {
+      showAllDigits,
+      subMagnitude,
+      unit,
+      allowZero,
+      locale,
+      value: fallbackValue,
+    } = this.props
+    const { rawValue } = this.state
+    const value = BigNumber(rawValue || fallbackValue).times(BigNumber(10).pow(unit.magnitude))
+
     this.setState({
       isFocused,
       displayValue:
