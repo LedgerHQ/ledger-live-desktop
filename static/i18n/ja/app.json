@@ -529,9 +529,7 @@
         "title": "機器"
       },
       "verification": {
-        "title": "検証",
-        "warning": "Ledgerデバイスに表示されているトランザクションの明細をすべて確認してください",
-        "body": "送信前に、Ledgerデバイス上のトランザクションをもう一度確認してください"
+        "title": "検証"
       },
       "confirmation": {
         "title": "確認",
@@ -1266,5 +1264,9 @@
       "title": "Cannot send from subaccounts yet",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     }
+  },
+  "TransactionConfirm": {
+    "warning": "Ledgerデバイスに表示されているトランザクションの明細をすべて確認してください",
+    "title": "送信前に、Ledgerデバイス上のトランザクションをもう一度確認してください"
   }
 }

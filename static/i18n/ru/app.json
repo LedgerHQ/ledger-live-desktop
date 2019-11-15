@@ -529,9 +529,7 @@
         "title": "Устройство"
       },
       "verification": {
-        "title": "Проверка",
-        "warning": "Проверьте все детали транзакции на устройстве.",
-        "body": "Для отправки транзакции подтвердите ее на устройстве."
+        "title": "Проверка"
       },
       "confirmation": {
         "title": "Подтверждение",
@@ -1266,5 +1264,9 @@
       "title": "Cannot send from subaccounts yet",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     }
+  },
+  "TransactionConfirm": {
+    "warning": "Проверьте все детали транзакции на устройстве.",
+    "title": "Для отправки транзакции подтвердите ее на устройстве."
   }
 }

@@ -58,6 +58,7 @@ type Props = {
   items: Array<DropDownItemType>,
   keepOpenOnChange?: boolean,
   offsetTop: number | string,
+  offsetRight: number | string,
   border?: boolean,
   onChange?: DropDownItemType => void,
   onStateChange?: Function,
@@ -73,6 +74,7 @@ class DropDown extends PureComponent<Props> {
     onChange: noop,
     onStateChange: noop,
     offsetTop: 1,
+    offsetRight: 0,
     renderItem: ({
       item,
       isHighlighted,
@@ -124,11 +126,11 @@ class DropDown extends PureComponent<Props> {
     selectedItem: DropDownItemType,
     downshiftProps: Object,
   ) => {
-    const { offsetTop, renderItem, border } = this.props
+    const { offsetTop, offsetRight, renderItem, border } = this.props
     const { getItemProps, highlightedIndex } = downshiftProps
 
     return (
-      <Drop mt={offsetTop} border={border}>
+      <Drop mt={offsetTop} mr={offsetRight} border={border}>
         {items.map((item, i) => {
           const { key, ...props } = item
           return (
@@ -153,7 +155,8 @@ class DropDown extends PureComponent<Props> {
         stateReducer={this.handleStateChange}
         itemToString={itemToString}
         selectedItem={value}
-        render={({
+      >
+        {({
           getToggleButtonProps,
           getRootProps,
           isOpen,
@@ -173,7 +176,7 @@ class DropDown extends PureComponent<Props> {
             {isOpen && this.renderItems(items, selectedItem, downshiftProps)}
           </Wrapper>
         )}
-      />
+      </Downshift>
     )
   }
 }
