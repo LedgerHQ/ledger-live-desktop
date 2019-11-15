@@ -35,6 +35,16 @@ const Error = styled.div`
   }
 `
 
+const Holder = styled.div`
+  font-family: Inter;
+  font-weight: 500;
+  text-align: right;
+  color: ${p => p.theme.colors.wallet};
+  background-color: ${p => p.theme.colors.pillActiveBackground};
+  padding: 0 8px;
+  border-radius: 4px;
+`
+
 export function useDynamicRange({
   value,
   defaultValue,
@@ -65,14 +75,12 @@ const FeeSliderField = ({ value, onChange, unit, error, defaultValue }: Props) =
     <GenericContainer
       i18nKeyOverride="send.steps.details.ethereumGasPrice"
       header={
-        <div style={{ fontFamily: 'Inter', textAlign: 'right' }}>
-          <Text color="#999" fontSize={4}>
+        <Holder>
+          <Text fontSize={4}>
             <CurrencyUnitValue value={constraintValue} unit={unit} />
           </Text>{' '}
-          <Text color="#767676" fontSize={4}>
-            {unit.code}
-          </Text>
-        </div>
+          <Text fontSize={4}>{unit.code}</Text>
+        </Holder>
       }
     >
       <Box flex={1}>

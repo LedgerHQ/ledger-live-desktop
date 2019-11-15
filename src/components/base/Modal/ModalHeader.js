@@ -10,37 +10,40 @@ import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import IconAngleLeft from 'icons/AngleLeft'
 import IconCross from 'icons/Cross'
+import Tabbable from '../Box/Tabbable'
 
 const MODAL_HEADER_STYLE = {
-  position: 'relative',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
-  padding: 20,
+  justifyContent: 'space-between',
+  padding: 10,
+  position: 'relative',
+  flexDirection: 'row',
 }
 
 const ModalTitle = styled(Box).attrs(() => ({
   color: 'palette.text.shade100',
   ff: 'Inter|Medium',
   fontSize: 6,
-  grow: true,
-  shrink: true,
 }))`
+  position: absolute;
+  left: 0;
+  right: 0;
   text-align: center;
   line-height: 1;
+  pointer-events: none;
 `
 
-const ModalHeaderAction = styled(Box).attrs(() => ({
+const ModalHeaderAction = styled(Tabbable).attrs(() => ({
   horizontal: true,
   align: 'center',
   fontSize: 3,
-  p: 4,
+  p: 3,
 }))`
+  border-radius: 8px;
   color: ${p => p.color || p.theme.colors.palette.text.shade60};
-  position: absolute;
   top: 0;
-  left: ${p => (p.right ? 'auto' : 0)};
-  right: ${p => (p.right ? 0 : 'auto')};
+  align-self: ${p => (p.right ? 'flex-end' : 'flex-start')};
   line-height: 0;
   cursor: pointer;
 
@@ -58,7 +61,7 @@ const ModalHeaderAction = styled(Box).attrs(() => ({
     border-bottom: 1px dashed transparent;
   }
   &:focus span {
-    border-bottom-color: inherit;
+    border-bottom-color: none;
   }
 `
 
@@ -74,19 +77,23 @@ const ModalHeader = ({
   t: T,
 }) => (
   <div style={MODAL_HEADER_STYLE}>
-    {onBack && (
+    {onBack ? (
       <ModalHeaderAction onClick={onBack}>
         <IconAngleLeft size={12} />
         <Text ff="Inter|Medium" fontSize={4} color="palette.text.shade40">
           {t('common.back')}
         </Text>
       </ModalHeaderAction>
+    ) : (
+      <div />
     )}
     <ModalTitle data-e2e="modalTitle">{children}</ModalTitle>
-    {onClose && (
+    {onClose ? (
       <ModalHeaderAction right color="palette.text.shade40" onClick={onClose}>
         <IconCross size={16} />
       </ModalHeaderAction>
+    ) : (
+      <div />
     )}
   </div>
 )

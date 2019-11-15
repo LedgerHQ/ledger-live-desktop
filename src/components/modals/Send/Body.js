@@ -82,7 +82,7 @@ const createSteps = () => [
     label: <Trans i18nKey="send.steps.device.title" />,
     component: StepConnectDevice,
     footer: StepConnectDeviceFooter,
-    onBack: ({ transitionTo }) => transitionTo('recipient'),
+    onBack: ({ transitionTo }) => transitionTo('summary'),
   },
   {
     id: 'verification',
