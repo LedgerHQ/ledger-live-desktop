@@ -13,6 +13,7 @@ import Price from 'components/Price'
 import Text from 'components/base/Text'
 import Ellipsis from 'components/base/Ellipsis'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
+import Tooltip from 'components/base/Tooltip'
 import Bar from './Bar'
 
 export type DistributionItem = {
@@ -50,6 +51,7 @@ const Wrapper = styled.div`
 `
 
 const Asset = styled.div`
+  flex: 1;
   width: 20%;
   > :first-child {
     margin-right: 10px;
@@ -76,13 +78,13 @@ const Distribution = styled.div`
 `
 const Amount = styled.div`
   width: 25%;
-  text-align: right;
+  justify-content: flex-end;
 `
 const Value = styled.div`
   width: 15%;
   box-sizing: border-box;
   padding-left: 8px;
-  text-align: right;
+  justify-content: flex-end;
 `
 
 const mapDispatchToProps = {
@@ -102,9 +104,11 @@ class Row extends PureComponent<Props, State> {
       <Wrapper onClick={() => this.props.push(`/asset/${currency.id}`)}>
         <Asset>
           {icon}
-          <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
-            {currency.name}
-          </Ellipsis>
+          <Tooltip delay={1200} content={currency.name}>
+            <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
+              {currency.name}
+            </Ellipsis>
+          </Tooltip>
         </Asset>
         <PriceSection>
           {distribution ? (
