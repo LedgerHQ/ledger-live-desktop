@@ -19,6 +19,7 @@ const MODAL_HEADER_STYLE = {
   padding: 10,
   position: 'relative',
   flexDirection: 'row',
+  minHeight: 66,
 }
 
 const ModalTitle = styled(Box).attrs(() => ({
@@ -45,24 +46,29 @@ const ModalHeaderAction = styled(Tabbable).attrs(() => ({
   top: 0;
   align-self: ${p => (p.right ? 'flex-end' : 'flex-start')};
   line-height: 0;
-  cursor: pointer;
-
-  &:hover,
-  &:hover ${Text} {
-    color: ${p => p.theme.colors.palette.text.shade80};
-  }
-
-  &:active,
-  &:active ${Text} {
-    color: ${p => p.theme.colors.palette.text.shade100};
-  }
-
-  ${Text} {
-    border-bottom: 1px dashed transparent;
-  }
-  &:focus span {
-    border-bottom-color: none;
-  }
+  ${p =>
+    p.onClick
+      ? `
+    cursor: pointer;
+  
+    &:hover,
+    &:hover ${Text} {
+      color: ${p => p.theme.colors.palette.text.shade80};
+    }
+  
+    &:active,
+    &:active ${Text} {
+      color: ${p => p.theme.colors.palette.text.shade100};
+    }
+  
+    ${Text} {
+      border-bottom: 1px dashed transparent;
+    }
+    &:focus span {
+      border-bottom-color: none;
+    }
+  `
+      : ''}
 `
 
 const ModalHeader = ({
@@ -85,7 +91,7 @@ const ModalHeader = ({
         </Text>
       </ModalHeaderAction>
     ) : (
-      <div />
+      <ModalHeaderAction />
     )}
     <ModalTitle data-e2e="modalTitle">{children}</ModalTitle>
     {onClose ? (
@@ -93,7 +99,7 @@ const ModalHeader = ({
         <IconCross size={16} />
       </ModalHeaderAction>
     ) : (
-      <div />
+      <ModalHeaderAction />
     )}
   </div>
 )
