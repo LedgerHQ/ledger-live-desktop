@@ -53,12 +53,12 @@ const ModalHeaderAction = styled(Tabbable).attrs(() => ({
   
     &:hover,
     &:hover ${Text} {
-      color: ${p => p.theme.colors.palette.text.shade80};
+      color: ${p.theme.colors.palette.text.shade80};
     }
   
     &:active,
     &:active ${Text} {
-      color: ${p => p.theme.colors.palette.text.shade100};
+      color: ${p.theme.colors.palette.text.shade100};
     }
   
     ${Text} {
