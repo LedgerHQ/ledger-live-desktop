@@ -8,6 +8,21 @@ import fontFamily from 'styles/styled/fontFamily'
 import Spinner from 'components/base/Spinner'
 import Box from 'components/base/Box'
 import TranslatedError from 'components/TranslatedError'
+import Text from 'components/base/Text'
+
+const RenderLeftWrapper = styled(Box)`
+  align-items: center;
+  justify-content: center;
+`
+const RenderRightWrapper = styled(Box)`
+  margin-left: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & > * {
+    flex: 1;
+  }
+`
 
 const Container = styled(Box).attrs(() => ({
   horizontal: true,
@@ -25,16 +40,33 @@ const Container = styled(Box).attrs(() => ({
       : p.warning
       ? p.theme.colors.warning
       : p.isFocus
-      ? p.theme.colors.wallet
+      ? p.theme.colors.palette.primary.main
       : p.theme.colors.palette.divider};
   box-shadow: ${p => (p.isFocus ? `rgba(0, 0, 0, 0.05) 0 2px 2px` : 'none')};
-  height: ${p => (p.small ? '34' : '40')}px;
+  height: ${p => (p.small ? '34' : '48')}px;
   position: relative;
 
   &:not(:hover) {
     background: ${p => (!p.isFocus && p.editInPlace ? 'transparent' : undefined)};
     border-color: ${p => (!p.isFocus && p.editInPlace ? 'transparent' : undefined)};
   }
+
+  ${p =>
+    p.error
+      ? `--status-color: ${p.theme.colors.pearl};`
+      : p.warning
+      ? `--status-color: ${p.theme.colors.warning};`
+      : p.isFocus
+      ? `--status-color: ${p.theme.colors.palette.primary.main};`
+      : ''}
+
+  ${p =>
+    (p.error || p.warning || p.isFocus) &&
+    `> ${RenderRightWrapper} *, 
+    > ${RenderLeftWrapper} *{
+      color: var(--status-color);
+      border-color: var(--status-color);
+    }`}
 `
 
 const ErrorDisplay = styled(Box)`
@@ -48,28 +80,18 @@ const ErrorDisplay = styled(Box)`
 
 const LoadingDisplay = styled(Box)`
   position: absolute;
+  background: ${p => p.theme.colors.palette.text.shade10};
   left: 0px;
   top: 0px;
   bottom: 0px;
   width: 100%;
-  background: ${p => p.theme.colors.palette.background.paper};
   pointer-events: none;
   flex-direction: row;
   align-items: center;
   padding: 0 15px;
   border-radius: 4px;
-`
-
-const RenderRightWrapper = styled(Box)`
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  bottom: 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  & > * {
-    flex: 1;
+  > :first-child {
+    margin-right: 10px;
   }
 `
 
@@ -85,16 +107,16 @@ const Base = styled.input.attrs(() => ({
   ${fontFamily};
   ${fontSize};
   border: 0;
-  color: ${p => p.theme.colors.palette.text.shade80};
+  color: ${p => p.theme.colors.palette.text.shade100};
   height: 100%;
   outline: none;
   padding: 0;
   width: 100%;
   background: none;
-  cursor: text;
+  cursor: ${p => (p.disabled ? 'not-allowed' : 'text')};
 
   &::placeholder {
-    color: ${p => p.theme.colors.palette.divider};
+    color: ${p => p.theme.colors.palette.text.shade40};
   }
 `
 
@@ -116,6 +138,7 @@ type Props = {
   disabled?: boolean,
 }
 
+// $FlowFixMe @IAmMorrow
 const Input = React.forwardRef(
   (
     {
@@ -163,6 +186,7 @@ const Input = React.forwardRef(
 
     const handleClick = useCallback(() => {
       if (inputRef && inputRef.current) {
+        // $FlowFixMe @IAmMorrow
         inputRef.current.focus()
       }
     }, [inputRef])
@@ -199,7 +223,7 @@ const Input = React.forwardRef(
         warning={warning}
         editInPlace={editInPlace}
       >
-        {renderLeft}
+        {!loading || isFocus ? <RenderLeftWrapper>{renderLeft}</RenderLeftWrapper> : null}
         <Box px={3} grow shrink>
           <Base
             {...props}
@@ -222,7 +246,10 @@ const Input = React.forwardRef(
           ) : null}
           {loading && !isFocus ? (
             <LoadingDisplay>
-              <Spinner size={16} />
+              <Spinner size={16} color="palette.text.shade50" />
+              <Text ff="Inter" color="palette.text.shade50" fontSize={4}>
+                {'Loading'}
+              </Text>
             </LoadingDisplay>
           ) : null}
         </Box>

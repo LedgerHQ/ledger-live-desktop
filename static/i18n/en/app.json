@@ -1,10 +1,11 @@
 {
   "common": {
+    "loading": "Loading",
     "labelYes": "Yes",
     "labelNo": "No",
     "never": "Never",
     "apply": "Apply",
-    "done" : "Done",
+    "done": "Done",
     "confirm": "Confirm",
     "connecting": "Connecting..",
     "cancel": "Cancel",
@@ -47,6 +48,7 @@
     "copied": "Copied",
     "addressCopied": "Address copied",
     "experimentalFeature": "Experimental",
+    "dismiss": "Dismiss",
     "lockScreen": {
       "title": "Welcome back",
       "subTitle": null,
@@ -122,7 +124,7 @@
   },
   "stars": {
     "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
-    "tooltip" : "Star account"
+    "tooltip": "Star account"
   },
   "account": {
     "lastOperations": "Last operations",
@@ -326,7 +328,7 @@
     "connectDevice": {
       "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
     },
-    "tokensTip":"{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
+    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "Add existing accounts",
     "selectAll": "Select all ({{count}})",
     "unselectAll": "Deselect all ({{count}})",
@@ -421,6 +423,7 @@
       "followTheGuide": "Follow our step by step update guide",
       "removeApps": "Uninstall all apps before updating",
       "update": "Firmware update",
+      "updateBtn": "Update firmware",
       "latest": "Firmware version {{version}} is available",
       "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible, as a precaution.",
       "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
@@ -489,7 +492,7 @@
       "connectDevice": {
         "title": "Device",
         "withoutDevice": "Don't have your device?",
-        "tokensTip":"* Open the {{currency}} app to manage your {{token}} tokens"
+        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
       },
       "confirmAddress": {
         "title": "Verification",
@@ -505,32 +508,40 @@
   "send": {
     "title": "Send",
     "totalSpent": "Total to debit",
+    "totalBalance": "Total balance",
     "steps": {
+      "recipient": {
+        "title": "Recipient"
+      },
       "amount": {
-        "title": "Details",
+        "title": "Amount"
+      },
+      "summary": {
+        "title": "Summary"
+      },
+      "device": {
+        "title": "Device"
+      },
+      "details": {
+        "from": "From",
+        "to": "To",
         "selectAccountDebit": "Account to debit",
         "recipientAddress": "Recipient address",
         "amount": "Amount",
         "fees": "Network fees",
-        "useMax": "Max",
+        "feesTooHigh": "Network fees represent more than 10% of the amount",
+        "useMax": "Send Max",
         "advancedOptions": "Advanced options",
         "useRBF": "Use a replace-by-fee transaction",
         "message": "Leave a message (140)",
         "rippleTag": "Tag",
+        "rippleTagPlaceholder": "Optional",
         "ethereumGasLimit": "Gas limit",
-        "unitPerByte": "{{unit}} per byte",
-        "highFeeModal": {
-          "title": "High fees",
-          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
-        }
-      },
-      "connectDevice": {
-        "title": "Device"
+        "ethereumGasPrice": "Gas price",
+        "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
-        "title": "Verification",
-        "warning": "Please verify all transaction details on your device",
-        "body": "Confirm the transaction on your device to send it"
+        "title": "Verification"
       },
       "confirmation": {
         "title": "Confirmation",
@@ -569,6 +580,27 @@
     "showAll": "Show all",
     "showLess": "Show less",
     "header": "Account allocation ({{count}})"
+  },
+  "delegation": {
+    "title": "Earn rewards",
+    "header": "Delegation",
+    "validator": "Validator",
+    "address": "Address",
+    "transactionID": "Transaction ID",
+    "value": "Value",
+    "amount": "Amount",
+    "duration": "Duration",
+    "durationJustStarted": "Just started",
+    "durationDays": "{{count}} day",
+    "durationDays_plural": "{{count}} days",
+    "banner": {
+      "text": "You can earn Tezos staking rewards by delegating your account"
+    },
+    "contextMenu": {
+      "topUp": "Top up",
+      "redelegate": "Redelegate",
+      "stopDelegation": "Stop delegation"
+    }
   },
   "asset": {
     "notice": "Summary of all {{currency}} accounts"
@@ -799,6 +831,7 @@
     },
     "start": {
       "title": "Welcome to Ledger Live",
+      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
       "startBtn": "Get started"
     },
     "init": {
@@ -1006,6 +1039,15 @@
   "connectTroubleshooting": {
     "desc": "Having a hard time connecting your device?"
   },
+  "TransactionConfirm": {
+    "title": "Please verify all operation details on your device",
+    "warning": "Carefully verify all {{mode}} details on your device.",
+    "modes": {
+      "send": "transaction",
+      "delegate": "delegation",
+      "undelegate": "undelegation"
+    }
+  },
   "errors": {
     "generic": {
       "title": "{{message}}",
@@ -1015,7 +1057,7 @@
       "title": "An account name is required",
       "description": "Please provide an account name"
     },
-    "AccountNotSupported" : {
+    "AccountNotSupported": {
       "title": "Account not supported.",
       "description": "Please retry or contact Support ({{reason}})"
     },
@@ -1263,7 +1305,7 @@
     },
     "UnavailableTezosOriginatedAccountSend": {
       "title": "Cannot send from subaccounts yet",
-      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon amendment."
+      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     }
   }
 }

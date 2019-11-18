@@ -10,7 +10,7 @@ import {
   getAccountUnit,
   getAccountName,
 } from '@ledgerhq/live-common/lib/account/helpers'
-import type { AccountLike } from '@ledgerhq/live-common/src/types'
+import type { AccountLike } from '@ledgerhq/live-common/lib/types'
 import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
 import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'

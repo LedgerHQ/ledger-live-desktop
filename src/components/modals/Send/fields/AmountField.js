@@ -13,8 +13,7 @@ import Box from 'components/base/Box'
 import Label from 'components/base/Label'
 import RequestAmount from 'components/RequestAmount'
 import Switch from 'components/base/Switch'
-import styled from 'styled-components'
-import { colors } from 'styles/theme'
+import Text from 'components/base/Text'
 
 type Props = {
   parentAccount: ?Account,
@@ -24,13 +23,6 @@ type Props = {
   status: TransactionStatus,
   t: *,
 }
-
-const SendMaxSeparator = styled.div`
-  margin: 0 10px;
-  width: 1px;
-  height: 8px;
-  background: ${p => p.theme.colors.fog};
-`
 
 const AmountField = ({
   account,
@@ -51,7 +43,9 @@ const AmountField = ({
 
   const onChangeSendMax = useCallback(
     (useAllAmount: boolean) => {
-      onChangeTransaction(bridge.updateTransaction(transaction, { useAllAmount }))
+      onChangeTransaction(
+        bridge.updateTransaction(transaction, { useAllAmount, amount: BigNumber(0) }),
+      )
     },
     [bridge, transaction, onChangeTransaction],
   )
@@ -59,23 +53,33 @@ const AmountField = ({
   if (!status) return null
   const { useAllAmount } = transaction
   const { amount, errors } = status
-  const { amount: amountError } = errors
+  let { amount: amountError } = errors
+
+  // we ignore zero case for displaying field error because field is empty.
+  if (amount.eq(0)) {
+    amountError = null
+  }
 
   return (
     <Box flow={1}>
-      <Box horizontal alignItems="center">
-        <Label>{t('send.steps.amount.amount')}</Label>
-        {/* Two ternaries due to Fragment <></> style glitch ↓ */}
-        {typeof useAllAmount === 'boolean' ? <SendMaxSeparator /> : null}
+      <Box
+        horizontal
+        alignItems="center"
+        justifyContent="space-between"
+        style={{ width: '50%', paddingRight: 28 }}
+      >
+        <Label>{t('send.steps.details.amount')}</Label>
         {typeof useAllAmount === 'boolean' ? (
           <Box horizontal alignItems="center">
-            <Label
-              color={colors.separator}
-              style={{ paddingRight: 8 }}
+            <Text
+              color="palette.text.shade40"
+              ff="Inter|Medium"
+              fontSize={10}
+              style={{ paddingRight: 5 }}
               onClick={() => onChangeSendMax(!useAllAmount)}
             >
-              <Trans i18nKey="send.steps.amount.useMax" />
-            </Label>
+              <Trans i18nKey="send.steps.details.useMax" />
+            </Text>
             <Switch small isChecked={useAllAmount} onChange={onChangeSendMax} />
           </Box>
         ) : null}
@@ -86,6 +90,7 @@ const AmountField = ({
         validTransactionError={amountError}
         onChange={onChange}
         value={amount}
+        autoFocus
       />
     </Box>
   )

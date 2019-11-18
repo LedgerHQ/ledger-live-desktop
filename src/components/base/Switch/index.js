@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { Tabbable } from 'components/base/Box'
 
 const Base = styled(Tabbable).attrs(p => ({
-  bg: p.isChecked ? 'wallet' : 'palette.text.shade20',
+  bg: p.isChecked ? 'wallet' : 'palette.text.shade10',
   horizontal: true,
   align: 'center',
 }))`

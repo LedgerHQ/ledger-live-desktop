@@ -28,10 +28,10 @@ const Right = styled(Box).attrs(() => ({
 `
 
 const WrapperQrCode = styled(Box)`
-  margin-top: 10px;
+  margin-bottom: 10px;
   position: absolute;
   right: 0;
-  top: 100%;
+  bottom: 100%;
   z-index: 3;
 `
 

@@ -47,7 +47,7 @@ const UpdateFirmwareButton = ({ t, firmware, onClick, deviceInfo }: Props) =>
           firmwareName: firmware.final.name,
         }}
       >
-        {t('manager.firmware.update')}
+        {t('manager.firmware.updateBtn')}
       </Button>
     </Fragment>
   ) : null

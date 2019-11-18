@@ -4,12 +4,9 @@ import { RecipientRequired } from '@ledgerhq/errors'
 import type { Account, Transaction, TransactionStatus } from '@ledgerhq/live-common/lib/types'
 import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import type { T } from 'types/common'
-import { openURL } from 'helpers/linking'
-import { urls } from 'config/urls'
 import Box from 'components/base/Box'
-import LabelWithExternalIcon from 'components/base/LabelWithExternalIcon'
+import Label from 'components/base/Label'
 import RecipientAddress from 'components/RecipientAddress'
-import { track } from 'analytics/segment'
 
 type Props = {
   account: Account,
@@ -41,22 +38,17 @@ const RecipientField = ({
     [bridge, account, transaction, onChangeTransaction],
   )
 
-  const handleRecipientAddressHelp = useCallback(() => {
-    openURL(urls.recipientAddressInfo)
-    track('Send Flow Recipient Address Help Requested')
-  }, [])
-
   if (!status) return null
   const { recipient: recipientError } = status.errors
   const { recipient: recipientWarning } = status.warnings
 
   return (
     <Box flow={1}>
-      <LabelWithExternalIcon
-        onClick={handleRecipientAddressHelp}
-        label={t('send.steps.amount.recipientAddress')}
-      />
+      <Label>
+        <span>{t('send.steps.details.recipientAddress')}</span>
+      </Label>
       <RecipientAddress
+        placeholder="Enter recipient address"
         autoFocus={autoFocus}
         withQrCode={!status.recipientIsReadOnly}
         readOnly={status.recipientIsReadOnly}

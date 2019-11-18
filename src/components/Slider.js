@@ -1,7 +1,7 @@
 // @flow
 import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { withTheme } from 'styled-components'
-
+import IconOpposingChevrons from 'icons/OpposingChevrons'
 import { lighten } from 'styles/helpers'
 
 const getPalette = theme => ({
@@ -44,7 +44,7 @@ const Handle = React.memo(({ active, x, colors }: { active: boolean, x: number, 
     boxSizing: 'border-box',
     cursor: active ? 'ew-resize' : 'pointer',
     WebkitTapHighlightColor: 'rgba(0,0,0,0)',
-    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.09)',
+    boxShadow: '0 6px 8px 0 rgba(0, 0, 0, 0.09)',
     left: `${(100 * x).toPrecision(3)}%`,
     width: 2 * size,
     height: 2 * size,
@@ -59,17 +59,10 @@ const Handle = React.memo(({ active, x, colors }: { active: boolean, x: number, 
     transition: '100ms transform',
     transform: `translate(-${size + 2}px,-${size + 2}px) scale(${active ? 1.1 : 1})`,
   }
-  const innerDotSize = 6
-  const innerDotStyle = {
-    width: innerDotSize,
-    height: innerDotSize,
-    borderRadius: innerDotSize,
-    backgroundColor: colors.buttonInner,
-  }
 
   return (
     <div style={style} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      <span style={innerDotStyle} />
+      <IconOpposingChevrons size={12} color={colors.buttonInner} />
     </div>
   )
 })
@@ -78,8 +71,8 @@ const Track = React.memo(({ x, colors }: { x: number, colors: * }) => (
   <div
     style={{
       width: `${(100 * x).toPrecision(3)}%`,
-      height: 4,
-      borderRadius: 4,
+      height: 6,
+      borderRadius: 6,
       backgroundColor: colors.primary,
     }}
   />
@@ -207,8 +200,8 @@ const Slider = ({ steps, value, onChange, error, theme }: Props) => {
       <div
         style={{
           width: '100%',
-          height: 4,
-          borderRadius: 4,
+          height: 6,
+          borderRadius: 6,
           backgroundColor: colors.secondary,
           position: 'relative',
         }}

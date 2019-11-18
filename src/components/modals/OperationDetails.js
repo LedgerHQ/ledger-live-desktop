@@ -293,7 +293,11 @@ const OperationDetails = connect(
           </Box>
           <Box my={4} alignItems="center">
             <Box selectable>
-              {hasFailed ? null : (
+              {hasFailed ? (
+                <Box color="alertRed">
+                  <Trans i18nKey="operationDetails.failed" />
+                </Box>
+              ) : (
                 <FormattedVal
                   color={amount.isNegative() ? 'palette.text.shade80' : undefined}
                   unit={unit}

@@ -40,7 +40,7 @@ class ModalBody extends PureComponent<Props> {
         <ModalHeader onBack={onBack} onClose={onClose}>
           {title}
         </ModalHeader>
-        <ModalContent tabIndex={0} ref={this._content} noScroll={noScroll}>
+        <ModalContent ref={this._content} noScroll={noScroll}>
           {render && render(renderProps)}
         </ModalContent>
         {renderedFooter && <ModalFooter>{renderedFooter}</ModalFooter>}

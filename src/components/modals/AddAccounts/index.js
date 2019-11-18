@@ -19,10 +19,10 @@ import type { StepProps as DefaultStepProps, Step } from 'components/base/Steppe
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
-import StepChooseCurrency, { StepChooseCurrencyFooter } from './steps/01-step-choose-currency'
-import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
-import StepImport, { StepImportFooter } from './steps/03-step-import'
-import StepFinish, { StepFinishFooter } from './steps/04-step-finish'
+import StepChooseCurrency, { StepChooseCurrencyFooter } from './steps/StepChooseCurrency'
+import StepConnectDevice, { StepConnectDeviceFooter } from './steps/StepConnectDevice'
+import StepImport, { StepImportFooter } from './steps/StepImport'
+import StepFinish, { StepFinishFooter } from './steps/StepFinish'
 
 const createSteps = () => {
   const onBack = ({ transitionTo, resetScanState }: StepProps) => {

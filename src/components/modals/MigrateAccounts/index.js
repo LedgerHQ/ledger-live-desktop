@@ -12,7 +12,7 @@ import { migratableAccountsSelector, accountsSelector } from 'reducers/accounts'
 import logger from 'logger'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import type { Account } from '@ledgerhq/live-common/lib/types/account'
-import type { CryptoCurrency } from '@ledgerhq/live-common/src/types'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { Device } from 'types/common'
 
 import type { StepProps as DefaultStepProps, Step } from 'components/base/Stepper'

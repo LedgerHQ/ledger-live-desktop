@@ -75,7 +75,7 @@ class BalanceSummary extends PureComponent<Props> {
       currency,
       unit,
     } = this.props
-    const displayCountervalue = countervalueFirst
+    const displayCountervalue = countervalueFirst && portfolio.countervalueAvailable
     return (
       <Card p={0} py={5}>
         <Box px={6}>

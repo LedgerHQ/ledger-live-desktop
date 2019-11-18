@@ -14,10 +14,7 @@ import { validateNameEdition } from '@ledgerhq/live-common/lib/account'
 
 import { updateAccount, removeAccount } from 'actions/accounts'
 import { setDataModal } from 'reducers/modals'
-
-import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
-
-import { AccountNameRequiredError, EnpointConfigError } from '@ledgerhq/errors'
+import { AccountNameRequiredError } from '@ledgerhq/errors'
 
 import TrackPage from 'analytics/TrackPage'
 import Spoiler from 'components/base/Spoiler'
@@ -50,8 +47,6 @@ type Props = {
   data: any,
 }
 
-const canConfigureEndpointConfig = account => account.currency.id === 'ripple'
-
 const unitGetOptionValue = unit => unit.magnitude
 const renderUnitItemCode = item => item.data.code
 
@@ -75,10 +70,6 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
     ...defaultState,
   }
 
-  componentWillUnmount() {
-    this.handleChangeEndpointConfig_id++
-  }
-
   getAccount(data: Object): Account {
     const { accountName } = this.state
     const account = get(data, 'account', {})
@@ -90,31 +81,6 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
             name: accountName,
           }
         : {}),
-    }
-  }
-
-  handleChangeEndpointConfig_id = 0
-  handleChangeEndpointConfig = async (endpointConfig: string) => {
-    const bridge = getAccountBridge(this.getAccount(this.props.data))
-    this.handleChangeEndpointConfig_id++
-    const { handleChangeEndpointConfig_id } = this
-    this.setState({
-      endpointConfig,
-      endpointConfigError: null,
-    })
-    try {
-      if (bridge.validateEndpointConfig) {
-        await bridge.validateEndpointConfig(endpointConfig)
-      }
-      if (handleChangeEndpointConfig_id === this.handleChangeEndpointConfig_id) {
-        this.setState({
-          endpointConfigError: null,
-        })
-      }
-    } catch (endpointConfigError) {
-      if (handleChangeEndpointConfig_id === this.handleChangeEndpointConfig_id) {
-        this.setState({ endpointConfigError: new EnpointConfigError() })
-      }
     }
   }
 
@@ -180,18 +146,11 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
   }
 
   render() {
-    const {
-      accountUnit,
-      endpointConfig,
-      accountNameError,
-      isRemoveAccountModalOpen,
-      endpointConfigError,
-    } = this.state
+    const { accountUnit, accountNameError, isRemoveAccountModalOpen } = this.state
     const { t, onClose, data } = this.props
     if (!data) return null
 
     const account = this.getAccount(data)
-    const bridge = getAccountBridge(account)
     const usefulData = {
       xpub: account.xpub || undefined,
       index: account.index,
@@ -244,27 +203,6 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
                 />
               </Box>
             </Container>
-            {canConfigureEndpointConfig(account) ? (
-              <Container>
-                <Box>
-                  <OptionRowTitle>{t('account.settings.endpointConfig.title')}</OptionRowTitle>
-                  <OptionRowDesc>{t('account.settings.endpointConfig.desc')}</OptionRowDesc>
-                </Box>
-                <Box>
-                  <Input
-                    value={
-                      endpointConfig ||
-                      account.endpointConfig ||
-                      (bridge.getDefaultEndpointConfig && bridge.getDefaultEndpointConfig()) ||
-                      ''
-                    }
-                    onChange={this.handleChangeEndpointConfig}
-                    onFocus={e => this.handleFocus(e, 'endpointConfig')}
-                    error={endpointConfigError}
-                  />
-                </Box>
-              </Container>
-            ) : null}
             <Spoiler textTransform title={t('account.settings.advancedLogs')}>
               <SyncAgo date={account.lastSyncDate} />
               <AdvancedLogsContainer>{JSON.stringify(usefulData, null, 2)}</AdvancedLogsContainer>

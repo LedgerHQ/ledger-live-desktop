@@ -92,10 +92,10 @@ const AccountOption = React.memo(
     const currency = getAccountCurrency(account)
     const unit = getAccountUnit(account)
     const name = getAccountName(account)
-
+    const nested = ['TokenAccount', 'ChildAccount'].includes(account.type)
     return (
       <Box grow horizontal alignItems="center" flow={2} style={{ opacity: disabled ? 0.2 : 1 }}>
-        {!isValue && account.type === 'TokenAccount' ? tokenTick : null}
+        {!isValue && nested ? tokenTick : null}
         <CryptoCurrencyIcon currency={currency} size={16} />
         <Ellipsis ff="Inter|SemiBold" fontSize={4}>
           {name}

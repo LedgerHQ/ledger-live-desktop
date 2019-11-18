@@ -23,10 +23,10 @@ import { closeModal } from 'reducers/modals'
 import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
 
-import StepAccount, { StepAccountFooter } from './steps/01-step-account'
-import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
-import StepConfirmAddress, { StepConfirmAddressFooter } from './steps/03-step-confirm-address'
-import StepReceiveFunds from './steps/04-step-receive-funds'
+import StepAccount, { StepAccountFooter } from './steps/StepAccount'
+import StepConnectDevice, { StepConnectDeviceFooter } from './steps/StepConnectDevice'
+import StepConfirmAddress, { StepConfirmAddressFooter } from './steps/StepConfirmAddress'
+import StepReceiveFunds from './steps/StepReceiveFunds'
 
 type Props = {
   t: T,
