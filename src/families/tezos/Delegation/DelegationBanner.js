@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Trans } from 'react-i18next'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
@@ -66,11 +66,13 @@ const LogoContainer = styled(Box).attrs(() => ({
   }
 `
 
-const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner }: Props) =>
-  hasUndelegated && !isDismissed ? (
+const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner }: Props) => {
+  const closeBanner = useCallback(() => dismissBanner(DELEGATION_BANNER), [dismissBanner])
+
+  return hasUndelegated && !isDismissed ? (
     <Card>
       <Box horizontal px={6} py={4} style={{ position: 'relative' }}>
-        <IconContainer>
+        <IconContainer onClick={closeBanner}>
           <IconCross size={16} />
         </IconContainer>
         <Box flex={1} justifyContent="space-between">
@@ -94,7 +96,7 @@ const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner }: Props)
             >
               <Trans i18nKey="delegation.title" />
             </Button>
-            <Button onClick={() => dismissBanner(DELEGATION_BANNER)}>
+            <Button onClick={closeBanner}>
               <Trans i18nKey="common.dismiss" />
             </Button>
           </Box>
@@ -105,6 +107,7 @@ const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner }: Props)
       </Box>
     </Card>
   ) : null
+}
 
 export default connect(
   mapStateToProps,
