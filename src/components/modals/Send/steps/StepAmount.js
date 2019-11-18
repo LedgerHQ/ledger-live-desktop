@@ -70,12 +70,7 @@ export class StepAmountFooter extends PureComponent<StepProps> {
     return (
       <Fragment>
         <AccountFooter account={account} />
-        <Button
-          isLoading={bridgePending && !hasErrors}
-          primary
-          disabled={!canNext}
-          onClick={this.onNext}
-        >
+        <Button isLoading={bridgePending} primary disabled={!canNext} onClick={this.onNext}>
           {t('common.continue')}
         </Button>
       </Fragment>
