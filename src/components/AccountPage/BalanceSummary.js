@@ -43,7 +43,9 @@ class AccountBalanceSummary extends PureComponent<Props> {
     return (
       <Fragment>
         <FormattedVal fontSize={5} color="palette.text.shade100" showCode {...data[0]} />
-        {balanceHistoryWithCountervalue.countervalueAvailable ? <FormattedVal fontSize={4} color="warmGrey" showCode {...data[1]} /> : null}
+        {balanceHistoryWithCountervalue.countervalueAvailable ? (
+          <FormattedVal fontSize={4} color="warmGrey" showCode {...data[1]} />
+        ) : null}
         <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
           {moment(d.date).format('LL')}
         </Box>
