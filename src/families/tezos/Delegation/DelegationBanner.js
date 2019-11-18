@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Trans } from 'react-i18next'
 import { connect } from 'react-redux'
 
@@ -69,11 +69,13 @@ const LogoContainer = styled(Box).attrs(() => ({
   }
 `
 
-const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner, openModal }: Props) =>
-  hasUndelegated && !isDismissed ? (
+const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner, openModal }: Props) => {
+  const closeBanner = useCallback(() => dismissBanner(DELEGATION_BANNER), [dismissBanner])
+
+  return hasUndelegated && !isDismissed ? (
     <Card>
       <Box horizontal px={6} py={4} style={{ position: 'relative' }}>
-        <IconContainer onClick={() => dismissBanner(DELEGATION_BANNER)}>
+        <IconContainer onClick={closeBanner}>
           <IconCross size={16} />
         </IconContainer>
         <Box flex={1} justifyContent="space-between">
@@ -97,7 +99,7 @@ const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner, openModa
             >
               <Trans i18nKey="delegation.title" />
             </Button>
-            <Button onClick={() => dismissBanner(DELEGATION_BANNER)}>
+            <Button onClick={closeBanner}>
               <Trans i18nKey="common.dismiss" />
             </Button>
           </Box>
@@ -108,6 +110,7 @@ const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner, openModa
       </Box>
     </Card>
   ) : null
+}
 
 export default connect(
   mapStateToProps,
