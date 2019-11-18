@@ -23,11 +23,16 @@ const getScreens = color => ({
       <defs />
       <defs>
         <path
-          id="id3"
+          id="NanoXScreen-id3"
           d="M71.8 15.5h2.4v1.2222222H73h2.4v1.2222222h1.2v1.2222223h1.2v1.2222222H79v1.2222222h-2.4V26.5h-2.4v-3.6666667h-2.4V26.5h-2.4v-4.8888889H67v-1.2222222h1.2v-1.2222222h1.2v-1.2222223h1.2v-1.2222222h1.2z"
         />
       </defs>
-      <use fill={color} fillRule="nonzero" transform="translate(-67 -15)" xlinkHref="#id3" />
+      <use
+        fill={color}
+        fillRule="nonzero"
+        transform="translate(-67 -15)"
+        xlinkHref="#NanoXScreen-id3"
+      />
     </g>
   ),
   validation: (
@@ -80,7 +85,7 @@ export default ({ active, display, error, ...props }: Props) => {
   return (
     <ScreenSVG {...props} width="66" height="30">
       <defs />
-      <g id="screen">
+      <g id="NanoXScreen-screen">
         <rect
           width="65"
           height="29"
@@ -91,7 +96,7 @@ export default ({ active, display, error, ...props }: Props) => {
           rx="2"
           transform="translate(-40 -6)"
         />
-        <g id="screen-content" opacity={active ? 1 : 0}>
+        <g id="NanoXScreen-screen-content" opacity={active ? 1 : 0}>
           {display ? screens[display] : null}
         </g>
       </g>

@@ -22,7 +22,7 @@ export default ({ children, overlay, error }: Props) => {
     <FrameSVG width="156" height="42">
       <defs />
       <defs>
-        <circle id="a" cx="135" cy="21" r="11" />
+        <circle id="NanoXFrame-a" cx="135" cy="21" r="11" />
       </defs>
       <g fill="none" fillRule="evenodd">
         <rect
@@ -45,7 +45,7 @@ export default ({ children, overlay, error }: Props) => {
         />
         {children}
         <g>
-          <use fill="#131415" xlinkHref="#a" />
+          <use fill="#131415" xlinkHref="#NanoXFrame-a" />
           <circle
             cx="135"
             cy="21"
