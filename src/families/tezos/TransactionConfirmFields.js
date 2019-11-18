@@ -22,6 +22,8 @@ const Pre = ({ account, parentAccount, transaction }: *) => {
     if (bakerURL) openURL(bakerURL)
   }, [bakerURL])
 
+  const isDelegateOperation = transaction.mode === 'delegate'
+
   return (
     <>
       <TransactionConfirmField label="Source">
@@ -35,28 +37,32 @@ const Pre = ({ account, parentAccount, transaction }: *) => {
           {account.freshAddress}
         </Text>
       </TransactionConfirmField>
-      <TransactionConfirmField label="Validator">
-        <Text
-          onClick={openBaker}
-          color="palette.primary.main"
-          ml={1}
-          ff="Inter|Medium"
-          fontSize={3}
-        >
-          {baker ? baker.name : shortAddressPreview(transaction.recipient)}
-        </Text>
-      </TransactionConfirmField>
-      <TransactionConfirmField label="Delegate">
-        <Text
-          style={addressStyle}
-          ml={1}
-          ff="Inter|Medium"
-          color="palette.text.shade80"
-          fontSize={3}
-        >
-          {transaction.recipient}
-        </Text>
-      </TransactionConfirmField>
+      {isDelegateOperation ? (
+        <>
+          <TransactionConfirmField label="Validator">
+            <Text
+              onClick={openBaker}
+              color="palette.primary.main"
+              ml={1}
+              ff="Inter|Medium"
+              fontSize={3}
+            >
+              {baker ? baker.name : shortAddressPreview(transaction.recipient)}
+            </Text>
+          </TransactionConfirmField>
+          <TransactionConfirmField label="Delegate">
+            <Text
+              style={addressStyle}
+              ml={1}
+              ff="Inter|Medium"
+              color="palette.text.shade80"
+              fontSize={3}
+            >
+              {transaction.recipient}
+            </Text>
+          </TransactionConfirmField>
+        </>
+      ) : null}
     </>
   )
 }
