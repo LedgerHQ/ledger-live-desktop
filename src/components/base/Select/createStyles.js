@@ -53,28 +53,29 @@ export default (
     ...styles,
     fontSize: small ? 12 : 13,
   }),
-  option: (styles: Object, { isFocused, isSelected }: Object) => ({
+  option: (styles: Object, { isFocused, isSelected, isDisabled }: Object) => ({
     ...styles,
-    ...ff('Inter|Regular'),
+    ...(isSelected ? ff('Inter|SemiBold') : ff('Inter|Regular')),
     fontSize: small ? 12 : 13,
-    color: theme.colors.palette.text.shade80,
-    padding: '10px 15px 10px 15px',
+    color:
+      isSelected || isFocused
+        ? theme.colors.palette.text.shade100
+        : theme.colors.palette.text.shade80,
+    padding: small ? '8px 15px 8px 15px' : '10px 15px 11px 15px',
+    cursor: isDisabled ? 'not-allowed' : 'default',
+    backgroundColor: isFocused ? theme.colors.palette.background.default : null,
+    // NB hover doesn't trigger isFocused since we disabled the onMouseMove/onMouseOver
+    ':hover:not(:active)': {
+      backgroundColor: theme.colors.palette.background.default,
+      color: theme.colors.palette.text.shade100,
+    },
+    ':hover:active': {
+      color: theme.colors.palette.text.shade100,
+    },
     ':active': {
       ...styles[':active'],
-      backgroundColor: theme.colors.palette.action.active,
+      backgroundColor: isDisabled ? null : theme.colors.palette.text.shade10,
     },
-    ...(isFocused
-      ? {
-          background: theme.colors.palette.background.default,
-          color: theme.colors.palette.text.shade100,
-        }
-      : {}),
-    ...(isSelected
-      ? {
-          background: 'unset !important',
-          ...ff('Inter|SemiBold'),
-        }
-      : {}),
   }),
   menu: (styles: Object) => ({
     ...styles,
