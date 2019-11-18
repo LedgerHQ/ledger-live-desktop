@@ -5,6 +5,8 @@ import styled from 'styled-components'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
+import Ellipsis from 'components/base/Ellipsis'
+import Tooltip from 'components/base/Tooltip'
 
 const Cell = styled(Box).attrs(() => ({
   px: 4,
@@ -29,24 +31,14 @@ class AccountCell extends PureComponent<Props> {
         <Box alignItems="center" justifyContent="center">
           <CryptoCurrencyIcon size={16} currency={currency} />
         </Box>
-        <AccountNameEllipsis>{accountName}</AccountNameEllipsis>
+        <Tooltip delay={1200} content={accountName}>
+          <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
+            {accountName}
+          </Ellipsis>
+        </Tooltip>
       </Cell>
     )
   }
 }
 
 export default AccountCell
-
-const AccountNameEllipsis = styled(Box).attrs(() => ({
-  ff: 'Inter|SemiBold',
-  fontSize: 3,
-  color: 'palette.text.shade100',
-  flexShrink: 1,
-}))`
-  flex: 1;
-  min-width: 0;
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`
