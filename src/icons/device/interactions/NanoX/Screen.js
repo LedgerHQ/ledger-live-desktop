@@ -8,11 +8,11 @@ import colors from '../colors'
 const ScreenSVG = styled.svg`
   overflow: visible;
 
-  #screen {
+  #NanoXScreen-screen {
     transform: translate(0%, -50%);
   }
 
-  #screen-content {
+  #NanoXScreen-screen-content {
     transition: opacity 200ms;
   }
 `

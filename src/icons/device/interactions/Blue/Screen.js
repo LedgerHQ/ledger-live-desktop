@@ -8,11 +8,11 @@ import colors from '../colors'
 const ScreenSVG = styled.svg`
   overflow: visible;
 
-  #screen {
+  #Blue-screen {
     transform: translate(0%, -50%);
   }
 
-  #screen-content {
+  #Blue-screen-content {
     transition: opacity 200ms;
   }
 `
@@ -80,7 +80,7 @@ export default ({ active, display, error, ...props }: Props) => {
   return (
     <ScreenSVG {...props} width="83" height="111">
       <defs />
-      <g id="screen">
+      <g id="Blue-screen">
         <rect
           transform="translate(-40 -16)"
           width="83"
@@ -92,7 +92,7 @@ export default ({ active, display, error, ...props }: Props) => {
           stroke={error ? '#EA2E49' : colors[type].screenStroke}
           rx="2"
         />
-        <g id="screen-content" opacity={active ? 1 : 0}>
+        <g id="Blue-screen-content" opacity={active ? 1 : 0}>
           {display ? screens[display] : null}
         </g>
       </g>
