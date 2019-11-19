@@ -4,12 +4,15 @@ import uuid from 'uuid/v4'
 import logger from 'logger'
 import invariant from 'invariant'
 import { getSystemLocale } from 'helpers/systemLocale'
-import { langAndRegionSelector, shareAnalyticsSelector } from 'reducers/settings'
+import {
+  sidebarCollapsedSelector,
+  langAndRegionSelector,
+  shareAnalyticsSelector,
+} from 'reducers/settings'
 import { getCurrentDevice } from 'reducers/devices'
 import type { State } from 'reducers'
 
 import { load } from './inject-in-window'
-import { sidebarCollapsedSelector } from '../reducers/settings'
 
 invariant(typeof window !== 'undefined', 'analytics/segment must be called on renderer thread')
 

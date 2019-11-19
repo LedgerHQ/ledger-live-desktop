@@ -52,8 +52,9 @@ const Snow = ({ numFlakes }: Props) => {
   const [dimension, setDimension] = useState({ width: 0, height: 0 })
 
   useLayoutEffect(() => {
+    if (!containerRef.current) return () => {}
     const updateDimension = () => {
-      setDimension(containerRef.current.getBoundingClientRect())
+      if (containerRef.current) setDimension(containerRef.current.getBoundingClientRect())
     }
 
     const ro = new ResizeObserver(throttle(updateDimension, 250))
@@ -70,6 +71,7 @@ const Snow = ({ numFlakes }: Props) => {
     const { width, height } = dimension
 
     const canvas = canvasRef.current
+    if (!canvas) return () => {}
     const ctx = canvas.getContext('2d')
 
     const flakes = times(
