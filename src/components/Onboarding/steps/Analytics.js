@@ -226,6 +226,7 @@ export const AnalyticsTitle = styled(Box).attrs(() => ({
   ff: 'Inter|SemiBold',
   fontSize: 4,
   textAlign: 'left',
+  color: 'palette.text.shade100',
 }))``
 const Container = styled(Box).attrs(() => ({
   horizontal: true,
