@@ -4,7 +4,8 @@ import logger from 'logger'
 import styled from 'styled-components'
 import { Trans } from 'react-i18next'
 import React, { PureComponent, Fragment, useEffect } from 'react'
-import { filter, map } from 'rxjs/operators'
+import { concat, from } from 'rxjs'
+import { ignoreElements, filter, map } from 'rxjs/operators'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import uniq from 'lodash/uniq'
 import { urls } from 'config/urls'
@@ -23,6 +24,7 @@ import TranslatedError from 'components/TranslatedError'
 import Spinner from 'components/base/Spinner'
 import Text from 'components/base/Text'
 import DebugAppInfosForCurrency from 'components/DebugAppInfosForCurrency'
+import { prepareCurrency } from '../../../../bridge/cache'
 
 import type { StepProps } from '../index'
 
@@ -142,8 +144,10 @@ class StepImport extends PureComponent<StepProps> {
       // will be set to false if an existing account is found
       let onlyNewAccounts = true
 
-      this.scanSubscription = bridge
-        .scanAccountsOnDevice(mainCurrency, devicePath)
+      this.scanSubscription = concat(
+        from(prepareCurrency(mainCurrency)).pipe(ignoreElements()),
+        bridge.scanAccountsOnDevice(mainCurrency, devicePath),
+      )
         .pipe(
           filter(e => e.type === 'discovered'),
           map(e => e.account),

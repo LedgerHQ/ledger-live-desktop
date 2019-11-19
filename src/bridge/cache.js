@@ -1,6 +1,7 @@
 // @flow
 
 import { ipcRenderer } from 'electron'
+import { makeLRUCache } from '@ledgerhq/live-common/lib/cache'
 import { getCurrencyBridge } from '@ledgerhq/live-common/lib/bridge'
 import { log } from '@ledgerhq/logs'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
@@ -32,10 +33,13 @@ export function getCurrencyCache(currency: CryptoCurrency): mixed {
   return undefined
 }
 
-export const prepareCurrency = async (currency: CryptoCurrency) => {
-  const value = getCurrencyCache(currency)
-  const bridge = getCurrencyBridge(currency)
-  bridge.hydrate(value)
-  const preloaded = await bridge.preload()
-  setCurrencyCache(currency, preloaded)
-}
+export const prepareCurrency: (currency: CryptoCurrency) => Promise<void> = makeLRUCache(
+  async currency => {
+    const value = getCurrencyCache(currency)
+    const bridge = getCurrencyBridge(currency)
+    bridge.hydrate(value)
+    const preloaded = await bridge.preload()
+    setCurrencyCache(currency, preloaded)
+  },
+  currency => currency.id,
+)
