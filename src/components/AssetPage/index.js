@@ -33,6 +33,7 @@ type Props = {
     path: string,
     url: string,
   },
+  push: Function,
   t: T,
   accounts: Account[],
   allAccounts: Account[],
@@ -65,6 +66,8 @@ class AssetPage extends PureComponent<Props, State> {
   lookupParentAccount = (id: string): ?Account =>
     this.props.allAccounts.find(a => a.id === id) || null
 
+  onAccountClick = account => this.props.push(`/account/${account.id}`)
+
   render() {
     const { t, accounts, counterValue, range, countervalueFirst, theme } = this.props
     const parentAccount =
@@ -92,7 +95,12 @@ class AssetPage extends PureComponent<Props, State> {
           <AccountDistribution accounts={accounts} />
         </Box>
         <Box mt={40}>
-          <OperationsList accounts={accounts} title={t('dashboard.recentActivity')} />
+          <OperationsList
+            accounts={accounts}
+            title={t('dashboard.recentActivity')}
+            onAccountClick={this.onAccountClick}
+            withAccount
+          />
         </Box>
       </Box>
     )
