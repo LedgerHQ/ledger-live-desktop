@@ -6,10 +6,11 @@
 
 import logger from 'logger'
 import shuffle from 'lodash/shuffle'
-import uniq from 'lodash/uniq'
 import React, { Component, useContext } from 'react'
 import priorityQueue from 'async/priorityQueue'
 import { connect } from 'react-redux'
+import { concat, from } from 'rxjs'
+import { ignoreElements } from 'rxjs/operators'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
@@ -72,10 +73,8 @@ const actions = {
 const lastTimeAnalyticsTrackPerAccountId = {}
 
 class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
-  constructor(props) {
+  constructor() {
     super()
-
-    uniq(props.accounts.map(a => a.currency)).forEach(prepareCurrency)
 
     const synchronize = (accountId: string, next: () => void) => {
       const state = syncStateLocalSelector(this.props.bridgeSync, { accountId })
@@ -132,7 +131,10 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
           }
         }
 
-        bridge.startSync(account, false).subscribe({
+        concat(
+          from(prepareCurrency(account.currency)).pipe(ignoreElements()),
+          bridge.startSync(account, false),
+        ).subscribe({
           next: accountUpdater => {
             this.props.updateAccountWithUpdater(accountId, accountUpdater)
           },
