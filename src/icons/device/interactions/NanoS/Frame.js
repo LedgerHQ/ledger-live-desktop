@@ -23,12 +23,12 @@ export default ({ children, overlay, error }: Props) => {
       <defs />
       <defs>
         <path
-          id="a"
+          id="NanoSFrame-a"
           d="M129 2c1.104569 0 2 .8954305 2 2v38c0 1.1045695-.895431 2-2 2H2c-1.1045695 0-2-.8954305-2-2V4c0-1.1045695.8954305-2 2-2h127zm-19 11c-5.522847 0-10 4.4771525-10 10s4.477153 10 10 10 10-4.4771525 10-10-4.477153-10-10-10z"
         />
       </defs>
       <g fill="none" fillRule="evenodd">
-        <use fill={colors[type].stroke} xlinkHref="#a" />
+        <use fill={colors[type].stroke} xlinkHref="#NanoSFrame-a" />
         <path
           fill={error ? colors[type].errorFrame : colors[type].frame}
           stroke={colors[type].stroke}

@@ -133,9 +133,9 @@ class InputCurrency extends PureComponent<Props, State> {
       value: fallbackValue,
     } = this.props
     const { rawValue } = this.state
-    const value = BigNumber(rawValue || fallbackValue || '').times(
-      BigNumber(10).pow(unit.magnitude),
-    )
+    const value = rawValue
+      ? BigNumber(rawValue).times(BigNumber(10).pow(unit.magnitude))
+      : fallbackValue || ''
 
     this.setState({
       isFocused,

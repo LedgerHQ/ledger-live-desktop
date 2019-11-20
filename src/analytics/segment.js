@@ -4,7 +4,11 @@ import uuid from 'uuid/v4'
 import logger from 'logger'
 import invariant from 'invariant'
 import { getSystemLocale } from 'helpers/systemLocale'
-import { langAndRegionSelector, shareAnalyticsSelector } from 'reducers/settings'
+import {
+  sidebarCollapsedSelector,
+  langAndRegionSelector,
+  shareAnalyticsSelector,
+} from 'reducers/settings'
 import { getCurrentDevice } from 'reducers/devices'
 import type { State } from 'reducers'
 
@@ -34,6 +38,8 @@ const extraProperties = store => {
   const systemLocale = getSystemLocale()
   const device = getCurrentDevice(state)
   const deviceInfo = device
+  const sidebarCollapsed = sidebarCollapsedSelector(state)
+
   return {
     appVersion: __APP_VERSION__,
     language,
@@ -44,6 +50,7 @@ const extraProperties = store => {
     osType,
     osVersion,
     sessionId,
+    sidebarCollapsed,
     ...deviceInfo,
   }
 }

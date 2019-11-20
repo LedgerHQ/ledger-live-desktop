@@ -1964,9 +1964,9 @@
     nan "^2.6.2"
 
 "@ledgerhq/live-common@^9.0.0-alpha.8":
-  version "9.0.0-alpha.9"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-9.0.0-alpha.9.tgz#9b9bb783dda982d65739bea277aee5a27b0d1300"
-  integrity sha512-FinBpjyk0dBJ0UQx/l6zaS2WKqshvBY5//G2Doz+oLgSF6L42wgB596+jdYyW53hHdvDUoTXPVw0TqGMcQuIBQ==
+  version "9.0.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-9.0.0-alpha.11.tgz#5c1c89aa643580e23df948a3f498fd02add8d817"
+  integrity sha512-RfYJMjJwFQV1wzdut49mTeL2mbKva6R0C4vNY2EI94sPPPAYiwhWvTiNtdjTWAmZ9BKydNVQTXPpFvNDcvW4jQ==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "4"

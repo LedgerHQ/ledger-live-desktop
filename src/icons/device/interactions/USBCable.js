@@ -68,17 +68,17 @@ export default ({ active, state, vertical, ...props }: Props) => {
   return (
     <USBCable {...props} width="126" height="23">
       <defs>
-        <linearGradient id="gradient">
+        <linearGradient id="USBCable-gradient">
           <stop offset="0" stopColor="black" stopOpacity="1" />
           <stop offset="1" stopColor="white" stopOpacity="1" />
         </linearGradient>
-        <mask id="myMask">
-          <rect x="20" y="0" width="36" height="25" fill="url(#gradient)" />
+        <mask id="USBCable-myMask">
+          <rect x="20" y="0" width="36" height="25" fill="url(#USBCable-gradient)" />
           <rect x="56" y="0" width="57" height="25" fill="white" />
         </mask>
       </defs>
       <g
-        mask="url(#myMask)"
+        mask="url(#USBCable-myMask)"
         opacity={active ? 1 : 0}
         transform={`rotate(${vertical ? -90 : 0} 126 11.5)`}
       >

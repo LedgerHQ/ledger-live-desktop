@@ -7,7 +7,7 @@ import React from 'react'
 const defs = (
   <defs>
     <filter
-      id="a"
+      id="LockScreen-a"
       width="178.9%"
       height="178.9%"
       x="-39.4%"
@@ -30,7 +30,7 @@ const defs = (
 )
 
 const group = (
-  <g fill="none" fillRule="evenodd" filter="url(#a)" transform="translate(23 21)">
+  <g fill="none" fillRule="evenodd" filter="url(#LockScreen-a)" transform="translate(23 21)">
     <rect width="90" height="90" fill="#FFF" rx="20" />
     <path fill="#6490F1" d="M45 13.36c-17.475 0-31.64 14.165-31.64 31.64S27.524 76.64 45 76.64" />
     <path fill="#142533" fillOpacity=".1" d="M13.36 45c0 17.475 14.165 31.64 31.64 31.64V45" />

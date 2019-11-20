@@ -5,12 +5,15 @@ import React from 'react'
 export default () => (
   <svg width="27" height="31">
     <defs>
-      <path id="a" d="M4 0h600a4 4 0 0 1 4 4v112a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z" />
-      <mask id="b" width="608" height="120" x="0" y="0" fill="#fff">
-        <use xlinkHref="#a" />
+      <path
+        id="sensitiveOperationShield-a"
+        d="M4 0h600a4 4 0 0 1 4 4v112a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z"
+      />
+      <mask id="sensitiveOperationShield-b" width="608" height="120" x="0" y="0" fill="#fff">
+        <use xlinkHref="#sensitiveOperationShield-a" />
       </mask>
       <filter
-        id="c"
+        id="sensitiveOperationShield-c"
         width="153.8%"
         height="141.9%"
         x="-26.9%"
@@ -29,12 +32,20 @@ export default () => (
           <feMergeNode in="SourceGraphic" />
         </feMerge>
       </filter>
-      <path id="d" d="M13 30s13-4.426 13-14.016V4.795L13 0 0 4.795v11.189C0 25.574 13 30 13 30z" />
+      <path
+        id="sensitiveOperationShield-d"
+        d="M13 30s13-4.426 13-14.016V4.795L13 0 0 4.795v11.189C0 25.574 13 30 13 30z"
+      />
     </defs>
     <g fill="none" fillRule="evenodd" transform="translate(-567 -15)">
-      <g filter="url(#c)" transform="translate(567 15)">
+      <g filter="url(#sensitiveOperationShield-c)" transform="translate(567 15)">
         <g strokeLinecap="round" strokeLinejoin="round">
-          <use fill="#FFF" stroke="#EA2E49" strokeWidth="1.5" xlinkHref="#d" />
+          <use
+            fill="#FFF"
+            stroke="#EA2E49"
+            strokeWidth="1.5"
+            xlinkHref="#sensitiveOperationShield-d"
+          />
         </g>
         <path
           fill="#EA2E49"

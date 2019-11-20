@@ -296,7 +296,7 @@ const Body = ({
     parentAccount,
     transaction,
     isAppOpened,
-    hideBreadcrumb: !!error && stepId === 'amount',
+    hideBreadcrumb: !!error && ['recipient', 'amount'].includes(stepId),
     error,
     status,
     bridgePending,
