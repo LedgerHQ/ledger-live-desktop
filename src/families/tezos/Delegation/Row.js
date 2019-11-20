@@ -24,6 +24,8 @@ import CounterValue from 'components/CounterValue'
 import FormattedVal from 'components/base/FormattedVal'
 import Text from 'components/base/Text'
 import Ellipsis from 'components/base/Ellipsis'
+
+import BakerImage from '../BakerImage'
 import ContextMenu from './ContextMenu'
 
 type Props = {
@@ -53,7 +55,8 @@ const Baker = styled.div`
   flex: 1.5;
   color: ${p => p.theme.colors.palette.text.shade100};
   > :first-child {
-    padding-right: 6px;
+    margin-right: 6px;
+    border-radius: 50%;
   }
 
   > :nth-child(2),
@@ -62,11 +65,6 @@ const Baker = styled.div`
   }
 
   cursor: pointer;
-`
-
-const Logo = styled.img`
-  width: 24px;
-  height: 24px;
 `
 
 const Address = styled.div`
@@ -98,18 +96,12 @@ const Row = ({ account, parentAccount, delegation }: Props) => {
 
   const name = delegation.baker ? delegation.baker.name : shortAddressPreview(delegation.address)
 
-  const imgSrc = delegation.baker ? delegation.baker.logoURL : null
-
   const diffInDays = useMemo(() => moment().diff(delegation.operation.date, 'days'), [
     delegation.operation.date,
   ])
 
-  const bakerAddress = delegation.baker
-    ? delegation.baker.address
-    : delegation.operation.recipients[0]
-
   const explorerView = getDefaultExplorerView(mainAccount.currency)
-  const bakerURL = getAddressExplorer(explorerView, bakerAddress)
+  const bakerURL = getAddressExplorer(explorerView, delegation.address)
   const txURL = getTransactionExplorer(explorerView, delegation.operation.hash)
 
   const openBaker = useCallback(() => {
@@ -123,7 +115,7 @@ const Row = ({ account, parentAccount, delegation }: Props) => {
   return (
     <Wrapper>
       <Baker onClick={openBaker}>
-        {imgSrc ? <Logo src={imgSrc} /> : null}
+        <BakerImage baker={delegation.baker} />
         <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
           {name}
         </Ellipsis>

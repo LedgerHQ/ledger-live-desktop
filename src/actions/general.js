@@ -12,7 +12,7 @@ import {
   getOrderAccounts,
   counterValueCurrencySelector,
 } from 'reducers/settings'
-import { accountsSelector } from 'reducers/accounts'
+import { accountsSelector, activeAccountsSelector } from 'reducers/accounts'
 import {
   nestedSortAccounts,
   flattenSortAccounts,
@@ -74,6 +74,11 @@ export const haveUndelegatedAccountsSelector = createSelector(
     accounts.some(
       acc => acc.currency && acc.currency.family === 'tezos' && !isAccountDelegating(acc),
     ),
+)
+
+export const delegatableAccountsSelector = createSelector(
+  activeAccountsSelector,
+  accounts => accounts.filter(acc => acc.currency.family === 'tezos' && !isAccountDelegating(acc)),
 )
 
 export const refreshAccountsOrdering = () => (dispatch: *, getState: *) => {

@@ -1,4 +1,3 @@
-// @flow
 export MODAL_DEBUG from './Debug'
 export MODAL_ADD_ACCOUNTS from './AddAccounts'
 export MODAL_MIGRATE_ACCOUNTS from './MigrateAccounts'

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback, useMemo } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { Trans, translate } from 'react-i18next'
@@ -10,24 +10,31 @@ import { getMainAccount, addPendingOperation } from '@ledgerhq/live-common/lib/a
 import useBridgeTransaction from '@ledgerhq/live-common/lib/bridge/useBridgeTransaction'
 import Track from 'analytics/Track'
 import { updateAccountWithUpdater } from 'actions/accounts'
-import { MODAL_SEND } from 'config/constants'
+import { MODAL_DELEGATE } from 'config/constants'
 import logger from 'logger'
 import type { T, Device } from 'types/common'
 
 import { useSignTransactionCallback } from 'helpers/useSignTransaction'
 import { getCurrentDevice } from 'reducers/devices'
-import { accountsSelector } from 'reducers/accounts'
+import { delegatableAccountsSelector } from 'actions/general'
 import { closeModal, openModal } from 'reducers/modals'
 import { UserRefusedOnDevice } from '@ledgerhq/errors'
 
 import Stepper from 'components/base/Stepper'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 
-import StepRecipient, { StepRecipientFooter } from './steps/StepRecipient'
+import StepAccount, { StepAccountFooter } from './steps/StepAccount'
+import StepStarter from './steps/StepStarter'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/StepConnectDevice'
 import StepVerification from './steps/StepVerification'
 import StepSummary, { StepSummaryFooter } from './steps/StepSummary'
 import StepConfirmation, { StepConfirmationFooter } from './steps/StepConfirmation'
+
+const createTitles = t => ({
+  account: t('delegation.flow.steps.account.title'),
+  starter: t('delegation.flow.steps.starter.title'),
+  summary: t('delegation.flow.steps.summary.title'),
+})
 
 type OwnProps = {|
   stepId: string,
@@ -56,23 +63,20 @@ type Props = {|
 const createSteps = () => [
   {
     id: 'account',
-    label: <Trans i18nKey="delegationflow.steps.account.title" />,
-    component: StepRecipient,
-    footer: StepRecipientFooter,
+    label: <Trans i18nKey="delegation.flow.steps.account.label" />,
+    component: StepAccount,
+    footer: StepAccountFooter,
   },
   {
     id: 'starter',
-    label: <Trans i18nKey="delegationflow.steps.starter.title" />,
-    component: ({ transitionTo }) => (
-      <button onClick={() => transitionTo('account')}>starter</button>
-    ),
+    component: StepStarter,
     excludeFromBreadcrumb: true,
   },
   {
     id: 'summary',
-    label: <Trans i18nKey="delegationflow.steps.summary.title" />,
+    label: <Trans i18nKey="delegation.flow.steps.summary.label" />,
     component: StepSummary,
-    footer: StepSummaryFooter,
+    // footer: StepSummaryFooter,
     onBack: ({ transitionTo }) => transitionTo('account'),
   },
   {
@@ -85,7 +89,7 @@ const createSteps = () => [
   },
   {
     id: 'device',
-    label: <Trans i18nKey="delegationflow.steps.device.title" />,
+    label: <Trans i18nKey="delegation.flow.steps.device.title" />,
     component: StepConnectDevice,
     footer: StepConnectDeviceFooter,
     onBack: ({ transitionTo }) => transitionTo('summary'),
@@ -108,7 +112,7 @@ const createSteps = () => [
   },
   {
     id: 'confirmation',
-    label: <Trans i18nKey="delegationflow.steps.confirmation.title" />,
+    label: <Trans i18nKey="delegation.flow.steps.confirmation.title" />,
     excludeFromBreadcrumb: true,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
@@ -121,7 +125,7 @@ const createSteps = () => [
 
 const mapStateToProps = createStructuredSelector({
   device: getCurrentDevice,
-  accounts: accountsSelector, // TODO only tezos accounts not yet delegated
+  accounts: delegatableAccountsSelector, // TODO only tezos accounts not yet delegated
 })
 
 const mapDispatchToProps = {
@@ -160,7 +164,7 @@ const Body = ({
   const [transactionError, setTransactionError] = useState(null)
   const [signed, setSigned] = useState(false)
 
-  const handleCloseModal = useCallback(() => closeModal(MODAL_SEND), [closeModal])
+  const handleCloseModal = useCallback(() => closeModal(MODAL_DELEGATE), [closeModal])
 
   const handleChangeAccount = useCallback(
     (nextAccount: AccountLike, nextParentAccount: ?Account) => {
@@ -216,6 +220,10 @@ const Body = ({
 
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId])
 
+  const titles = useMemo(() => createTitles(t), [t])
+
+  const title = titles[stepId] || titles.account
+
   // only call on mount/unmount
   useEffect(() => {
     const parentAccount = params && params.parentAccount
@@ -235,7 +243,7 @@ const Body = ({
   const error = transactionError || bridgeError
 
   const stepperProps = {
-    title: t('send.title'),
+    title,
     initialStepId: stepId,
     steps,
     errorSteps,

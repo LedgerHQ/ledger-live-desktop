@@ -210,7 +210,7 @@ export const Base = styled.button.attrs(p => ({
   overflow: hidden;
   position: relative;
   flex-direction: row;
-  alig-items: center;
+  align-items: center;
   border-radius: ${p => p.theme.radii[1]}px;
   cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
   height: ${p => (p.small ? 34 : 40)}px;

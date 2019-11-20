@@ -9,7 +9,7 @@ import { MODAL_RECEIVE } from 'config/constants'
 import { openModal } from 'reducers/modals'
 
 import UserEdit from 'icons/UserEdit'
-import ArrowUp from 'icons/ArrowUp'
+import ArrowDown from 'icons/ArrowDown'
 import StopCircle from 'icons/StopCircle'
 
 import Box from 'components/base/Box'
@@ -47,7 +47,7 @@ const ContextMenu = ({ account, parentAccount, openModal }: Props) => {
     {
       key: 'topUp',
       label: <Trans i18nKey="delegation.contextMenu.topUp" />,
-      icon: <ArrowUp size={16} />,
+      icon: <ArrowDown size={16} />,
       onClick: () => openModal(MODAL_RECEIVE, { parentAccount, account }),
     },
     {

@@ -97,7 +97,7 @@ const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner, openModa
               }}
               mr={1}
             >
-              <Trans i18nKey="delegation.title" />
+              <Trans i18nKey="delegation.banner.title" />
             </Button>
             <Button onClick={closeBanner}>
               <Trans i18nKey="common.dismiss" />

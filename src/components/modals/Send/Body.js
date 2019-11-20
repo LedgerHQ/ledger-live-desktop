@@ -318,7 +318,7 @@ const Body = ({
   return (
     <Stepper {...stepperProps}>
       <SyncSkipUnderPriority priority={100} />
-      <Track onUnmount event="CloseModalSend" />
+      <Track onUnmount event="CloseModalDelegate" />
     </Stepper>
   )
 }
