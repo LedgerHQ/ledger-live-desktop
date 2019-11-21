@@ -115,11 +115,11 @@ const AccountOption = React.memo(
   },
 )
 
-const renderValue = ({ data }: { data: Option }) => <AccountOption account={data.account} isValue />
+const renderValue = ({ data }: { data: Option }) =>
+  data.account ? <AccountOption account={data.account} isValue /> : null
 
-const renderOption = ({ data }: { data: Option }) => (
-  <AccountOption account={data.account} disabled={!data.matched} />
-)
+const renderOption = ({ data }: { data: Option }) =>
+  data.account ? <AccountOption account={data.account} disabled={!data.matched} /> : null
 
 type Props = {
   withSubAccounts?: boolean,

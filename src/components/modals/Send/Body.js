@@ -147,7 +147,14 @@ const Body = ({
     status,
     bridgeError,
     bridgePending,
-  } = useBridgeTransaction()
+  } = useBridgeTransaction(() => {
+    const parentAccount = params && params.parentAccount
+    const account = (params && params.account) || accounts[0]
+    return {
+      account,
+      parentAccount,
+    }
+  })
   // console.log({ status, bridgeError })
   const [isAppOpened, setAppOpened] = useState(false)
   const [optimisticOperation, setOptimisticOperation] = useState(null)
@@ -263,17 +270,14 @@ const Body = ({
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId])
 
   // only call on mount/unmount
-  useEffect(() => {
-    const parentAccount = params && params.parentAccount
-    const account = (params && params.account) || accounts[0]
-    setAccount(account, parentAccount)
-    return () => {
+  useEffect(
+    () => () => {
       if (signTransactionSubRef.current) {
         signTransactionSubRef.current.unsubscribe()
       }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    },
+    [],
+  )
 
   const errorSteps = []
 

@@ -54,13 +54,24 @@ const ContextMenu = ({ account, parentAccount, openModal }: Props) => {
       key: 'redelegate',
       label: <Trans i18nKey="delegation.contextMenu.redelegate" />,
       icon: <UserEdit size={16} />,
-      onClick: () => {},
+      onClick: () =>
+        openModal('MODAL_DELEGATE', {
+          parentAccount,
+          account,
+          stepId: 'summary',
+        }),
     },
     {
       key: 'stopDelegation',
       label: <Trans i18nKey="delegation.contextMenu.stopDelegation" />,
       icon: <StopCircle size={16} />,
-      onClick: () => {},
+      onClick: () =>
+        openModal('MODAL_DELEGATE', {
+          parentAccount,
+          account,
+          mode: 'undelegate',
+          stepId: 'summary',
+        }),
     },
   ]
 

@@ -6,6 +6,9 @@ import { connect } from 'react-redux'
 import { Trans, translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
 import type { Account, AccountLike, Operation } from '@ledgerhq/live-common/lib/types'
+import { useBakers } from '@ledgerhq/live-common/lib/families/tezos/bakers'
+import whitelist from '@ledgerhq/live-common/lib/families/tezos/bakers.whitelist-default'
+import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import { getMainAccount, addPendingOperation } from '@ledgerhq/live-common/lib/account'
 import useBridgeTransaction from '@ledgerhq/live-common/lib/bridge/useBridgeTransaction'
 import Track from 'analytics/Track'
@@ -43,6 +46,8 @@ type OwnProps = {|
   params: {
     account: ?AccountLike,
     parentAccount: ?Account,
+    mode: ?string,
+    stepId: ?string,
   },
 |}
 
@@ -60,23 +65,24 @@ type Props = {|
   ...StateProps,
 |}
 
-const createSteps = () => [
-  {
-    id: 'account',
-    label: <Trans i18nKey="delegation.flow.steps.account.label" />,
-    component: StepAccount,
-    footer: StepAccountFooter,
-  },
+const createSteps = params => [
   {
     id: 'starter',
     component: StepStarter,
     excludeFromBreadcrumb: true,
   },
   {
+    id: 'account',
+    label: <Trans i18nKey="delegation.flow.steps.account.label" />,
+    component: StepAccount,
+    footer: StepAccountFooter,
+    excludeFromBreadcrumb: params && params.stepId === 'summary',
+  },
+  {
     id: 'summary',
     label: <Trans i18nKey="delegation.flow.steps.summary.label" />,
     component: StepSummary,
-    // footer: StepSummaryFooter,
+    footer: StepSummaryFooter,
     onBack: ({ transitionTo }) => transitionTo('account'),
   },
   {
@@ -147,7 +153,10 @@ const Body = ({
   updateAccountWithUpdater,
 }: Props) => {
   const openedFromAccount = !!params.account
-  const [steps] = useState(createSteps)
+  const bakers = useBakers(whitelist)
+  const firstBaker = bakers[0]
+
+  const [steps] = useState(() => createSteps(params))
   const {
     transaction,
     setTransaction,
@@ -157,7 +166,44 @@ const Body = ({
     status,
     bridgeError,
     bridgePending,
-  } = useBridgeTransaction()
+  } = useBridgeTransaction(() => {
+    const parentAccount = params && params.parentAccount
+    const account = (params && params.account) || accounts[0]
+    const mode = (params && params.mode) || 'delegate'
+    const transaction = account && {
+      ...getAccountBridge(account, parentAccount).createTransaction(
+        getMainAccount(account, parentAccount),
+      ),
+      mode,
+      recipient: mode === 'delegate' && firstBaker ? firstBaker.address : '',
+    }
+    return {
+      account,
+      parentAccount,
+      transaction,
+    }
+  })
+
+  useEffect(() => {
+    const stepId = params && params.stepId
+    if (stepId) onChangeStepId(stepId)
+  }, [onChangeStepId, params])
+
+  useEffect(() => {
+    if (
+      transaction &&
+      account &&
+      firstBaker &&
+      transaction.mode === 'delegate' &&
+      !transaction.recipient
+    ) {
+      setTransaction(
+        getAccountBridge(account, parentAccount).updateTransaction(transaction, {
+          recipient: firstBaker.address,
+        }),
+      )
+    }
+  }, [account, firstBaker, parentAccount, setTransaction, transaction])
 
   const [isAppOpened, setAppOpened] = useState(false)
   const [optimisticOperation, setOptimisticOperation] = useState(null)
@@ -224,14 +270,6 @@ const Body = ({
 
   const title = titles[stepId] || titles.account
 
-  // only call on mount/unmount
-  useEffect(() => {
-    const parentAccount = params && params.parentAccount
-    const account = (params && params.account) || accounts[0]
-    setAccount(account, parentAccount)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   const errorSteps = []
 
   if (transactionError) {
@@ -244,7 +282,7 @@ const Body = ({
 
   const stepperProps = {
     title,
-    initialStepId: stepId,
+    initialStepId: (params && params.stepId) || stepId,
     steps,
     errorSteps,
     device,

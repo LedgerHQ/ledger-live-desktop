@@ -1,15 +1,15 @@
 // @flow
 
+import invariant from 'invariant'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import {
+  shortAddressPreview,
   getAccountCurrency,
   getAccountName,
   getAccountUnit,
-  getMainAccount,
 } from '@ledgerhq/live-common/lib/account'
-import { useBakers } from '@ledgerhq/live-common/lib/families/tezos/bakers'
-import whitelist from '@ledgerhq/live-common/lib/families/tezos/bakers.whitelist-default'
+import { useBaker, useDelegation } from '@ledgerhq/live-common/lib/families/tezos/bakers'
 import { Trans } from 'react-i18next'
 
 import TrackPage from 'analytics/TrackPage'
@@ -48,73 +48,81 @@ const Wrapper = styled(Box).attrs(() => ({
 `
 
 const StepSummary = ({ account, transaction }: StepProps) => {
+  invariant(account && transaction, 'step summary requires account and transaction settled')
   const [checked, setChecked] = useState(false)
-  const bakers = useBakers(whitelist)
-  const baker = bakers.find(bk => transaction && bk.address === transaction.recipient)
-  if (!account) return null
-
+  const delegation = useDelegation(account)
+  const baker = useBaker(transaction.recipient)
   const currency = getAccountCurrency(account)
   const unit = getAccountUnit(account)
+
+  const bakerName = baker ? baker.name : shortAddressPreview(transaction.recipient)
 
   return (
     <Box flow={4} mx={40}>
       <TrackPage category="Delegation Flow" name="Step Summary" />
-      <Wrapper>
-        <Box>
-          <Text ff="Inter|Medium" color="palette.text.shade60" fontSize={3}>
-            <Trans i18nKey="delegation.flow.steps.summary.toDelegate" />
-          </Text>
-          <Container mt={1}>
-            <CryptoCurrencyIcon size={32} currency={currency} />
-            <Ellipsis>
-              <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
-                {getAccountName(account)}
-              </Text>
-            </Ellipsis>
-            <FormattedVal
-              color={'palette.text.shade60'}
-              disableRounding
-              unit={unit}
-              val={account.balance}
-              fontSize={3}
-              inline
-              showCode
-            />
-          </Container>
-        </Box>
+      {delegation ? "there is already a delegation (so it's a change delegation)" : null}
 
-        <Box>
-          <Box horizontal>
+      {transaction.mode === 'delegate' ? (
+        // TODO We really need to component-ize things
+        <Wrapper>
+          <Box>
             <Text ff="Inter|Medium" color="palette.text.shade60" fontSize={3}>
-              <Trans i18nKey="delegation.flow.steps.summary.validator" />
+              <Trans i18nKey="delegation.flow.steps.summary.toDelegate" />
+            </Text>
+            <Container mt={1}>
+              <CryptoCurrencyIcon size={32} currency={currency} />
+              <Ellipsis>
+                <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
+                  {getAccountName(account)}
+                </Text>
+              </Ellipsis>
+              <FormattedVal
+                color={'palette.text.shade60'}
+                disableRounding
+                unit={unit}
+                val={account.balance}
+                fontSize={3}
+                inline
+                showCode
+              />
+            </Container>
+          </Box>
+
+          <Box>
+            <Box horizontal>
+              <Text ff="Inter|Medium" color="palette.text.shade60" fontSize={3}>
+                <Trans i18nKey="delegation.flow.steps.summary.validator" />
+              </Text>
+            </Box>
+            <Container my={1}>
+              <BakerImage size={32} baker={baker} />
+              <Ellipsis>
+                <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
+                  {bakerName}
+                </Text>
+              </Ellipsis>
+              {baker ? (
+                <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
+                  <Trans
+                    i18nKey="delegation.flow.steps.summary.yield"
+                    values={{ amount: baker.nominalYield }}
+                  />
+                </Text>
+              ) : null}
+            </Container>
+            <Text ff="Inter|Medium" color="palette.text.shade60" fontSize={2}>
+              <Trans i18nKey="delegation.flow.steps.summary.randomly" />
             </Text>
           </Box>
-          <Container my={1}>
-            <BakerImage size={32} baker={baker} />
-            <Ellipsis>
-              <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
-                {baker.name}
-              </Text>
-            </Ellipsis>
-            <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
-              <Trans
-                i18nKey="delegation.flow.steps.summary.yield"
-                values={{ amount: baker.nominalYield }}
-              />
-            </Text>
-          </Container>
-          <Text ff="Inter|Medium" color="palette.text.shade60" fontSize={2}>
-            <Trans i18nKey="delegation.flow.steps.summary.randomly" />
-          </Text>
-        </Box>
-      </Wrapper>
+        </Wrapper>
+      ) : (
+        'THIS. IS. UNDELEGATED.'
+      )}
     </Box>
   )
 }
 
 export default StepSummary
-
-export const StepSummaryFooter = (props: StepProps) => 'Footer'
 
 // export default class StepSummary extends PureComponent<StepProps> {
 //   render() {
@@ -226,23 +234,19 @@ export const StepSummaryFooter = (props: StepProps) => 'Footer'
 //   }
 // }
 
-// export class StepSummaryFooter extends PureComponent<StepProps> {
-//   onNext = async () => {
-//     const { transitionTo } = this.props
-//     transitionTo('device')
-//   }
-
-//   render() {
-//     const { t, account, status, bridgePending } = this.props
-//     if (!account) return null
-//     const { errors } = status
-//     const canNext = !bridgePending && !Object.keys(errors).length
-//     return (
-//       <Fragment>
-//         <Button primary disabled={!canNext} onClick={this.onNext}>
-//           {t('common.continue')}
-//         </Button>
-//       </Fragment>
-//     )
-//   }
-// }
+export const StepSummaryFooter = ({
+  t,
+  account,
+  status,
+  bridgePending,
+  transitionTo,
+}: StepProps) => {
+  if (!account) return null
+  const { errors } = status
+  const canNext = !bridgePending && !Object.keys(errors).length
+  return (
+    <Button primary disabled={!canNext} onClick={() => transitionTo('device')}>
+      {t('common.continue')}
+    </Button>
+  )
+}

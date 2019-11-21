@@ -160,9 +160,11 @@ const Row = ({ account, parentAccount, delegation }: Props) => {
           </Text>
         </Text>
       </Base>
-      <CTA>
-        <ContextMenu account={account} parentAccount={parentAccount} />
-      </CTA>
+      {account.type === 'Account' ? (
+        <CTA>
+          <ContextMenu account={account} parentAccount={parentAccount} />
+        </CTA>
+      ) : null}
     </Wrapper>
   )
 }

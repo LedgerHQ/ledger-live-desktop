@@ -24,7 +24,6 @@ class SendModal extends PureComponent<{}, State> {
 
   render() {
     const { stepId } = this.state
-
     const isModalLocked = !['account', 'confirmation'].includes(stepId)
 
     return (

@@ -79,11 +79,6 @@ class Stepper extends PureComponent<Props, State> {
     const stepIndex = steps.findIndex(s => s.id === stepId)
     const step = steps[stepIndex]
 
-    invariant(
-      !(step.excludeFromBreadcrumb && stepIndex === 0),
-      `Stepper: First step cannot be excluded`,
-    )
-
     const { index: breadcrumbStepIndex, offset } = steps
       .slice(0, stepIndex + 1)
       .reduce(

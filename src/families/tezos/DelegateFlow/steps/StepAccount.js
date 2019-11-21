@@ -1,13 +1,9 @@
 // @flow
 
-import React from 'react'
+import React, { useCallback } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { getMainAccount } from '@ledgerhq/live-common/lib/account'
-import { useBakers } from '@ledgerhq/live-common/lib/families/tezos/bakers'
-import whitelist from '@ledgerhq/live-common/lib/families/tezos/bakers.whitelist-default'
-import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
-
 import TrackPage from 'analytics/TrackPage'
 import { delegatableAccountsSelector } from 'actions/general'
 
@@ -62,32 +58,13 @@ export const StepAccountFooter = ({
   parentAccount,
   bridgePending,
   transitionTo,
-  onChangeTransaction,
-  transaction,
   closeModal,
 }: StepProps) => {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null
-  const bridge = account ? getAccountBridge(account, null) : null
-
-  const bakers = useBakers(whitelist)
-  const firstBaker = bakers[0]
   const isTerminated = mainAccount && mainAccount.currency.terminated
-  const canNext = !bridgePending && !isTerminated && !!firstBaker
+  const canNext = !bridgePending && !isTerminated
 
-  const onNext = async () => {
-    if (bridge && firstBaker) {
-      onChangeTransaction(
-        bridge.updateTransaction(transaction, {
-          mode: 'delegate',
-          recipient: firstBaker.address,
-        }),
-      )
-    }
-
-    transitionTo('summary')
-  }
-
-  console.log(closeModal)
+  const onNext = useCallback(() => transitionTo('summary'), [transitionTo])
 
   return (
     <>
