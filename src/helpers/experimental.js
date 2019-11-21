@@ -28,6 +28,13 @@ export type Feature = FeatureCommon & FeatureToggle
 export const experimentalFeatures: Feature[] = [
   {
     type: 'toggle',
+    name: 'EXPERIMENTAL_MANAGER',
+    title: 'Experimental manager v2',
+    description:
+      'Building upon the development done on the hackathon, we aim to rebuild the manager.',
+  },
+  {
+    type: 'toggle',
     name: 'EXPERIMENTAL_LANGUAGES',
     title: 'Translation testing',
     description: 'Adds unreleased languages to the language list in the general settings tab.',

@@ -129,6 +129,7 @@
     "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
     "tooltip": "Star account"
   },
+
   "account": {
     "lastOperations": "Last operations",
     "contractAddress": "Contract:",
@@ -516,6 +517,56 @@
         "tezos": {
           "text": "The amount received on a delegated account will be added to the total staked amount. Choose another account if you want to avoid this."
         }
+      }
+    }
+  },
+  "managerv2": {
+    "loading": {
+      "step4": {
+        "title": "Loading apps and fancy stuff"
+      }
+    },
+    "tabs": {
+      "appCatalog": "App Catalog",
+      "appsOnDevice": "Apps Installed"
+    },
+    "deviceStorage": {
+      "freeSpace": "{{space}} free",
+      "installed": "Installed",
+      "capacity": "Capacity",
+      "used": "Used",
+      "firmware": "Firmware {{version}}",
+      "genuine": "Device is genuine"
+    },
+    "applist": {
+      "placeholder": "There are no apps matching the search and filters selected",
+      "placeholderInstalled": "There are no installed apps matching the search and filters selected",
+      "filter": {
+        "title": "Filter",
+        "all": "All",
+        "supported": "Live Supported",
+        "installed": "Installed",
+        "notInstalled": "Not Installed"
+      },
+      "sort": {
+        "title": "Sort",
+        "name": "Name",
+        "marketcap": "Marketcap"
+      },
+      "updatable": {
+        "title": "Updates available"
+      },
+      "item": {
+        "installing": "Installing...",
+        "uninstalling": "Uninstalling...",
+        "cancel": "Cancel",
+        "update": "Update",
+        "updateAll": "Update All",
+        "install": "Install",
+        "installed": "Installed",
+        "uninstall": "Uninstall",
+        "notEnoughSpace": "Not enough space",
+        "supported": "Supported"
       }
     }
   },

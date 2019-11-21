@@ -34,6 +34,7 @@ import useExperimental from '../../hooks/useExperimental'
 import { darken, rgba } from '../../styles/helpers'
 import Stars from '../Stars'
 import ExperimentalIcon from '../../icons/Experimental'
+import { getManagerPageRoute } from '../ManagerV2Page'
 
 const mapStateToProps = state => ({
   noAccounts: accountsSelector(state).length === 0,
@@ -250,12 +251,12 @@ class MainSideBar extends PureComponent<Props> {
     this.maybeRedirectToAccounts()
     this.props.openModal(MODAL_RECEIVE)
   }
-  handleClickManager = () => this.push('/manager')
+  handleClickManager = () => this.push(getManagerPageRoute())
   handleClickAccounts = () => this.push('/accounts')
   handleClickExchange = () => this.push('/partners')
   handleClickDev = () => this.push('/dev')
   maybeRedirectToAccounts = () => {
-    this.props.location.pathname === '/manager' && this.push('/accounts')
+    this.props.location.pathname === getManagerPageRoute() && this.push('/accounts')
   }
 
   render() {
@@ -321,7 +322,7 @@ class MainSideBar extends PureComponent<Props> {
                   icon={IconManager}
                   iconActiveColor="wallet"
                   onClick={this.handleClickManager}
-                  isActive={pathname === '/manager'}
+                  isActive={pathname === getManagerPageRoute()}
                   collapsed={secondAnim}
                 />
                 <SideBarListItem

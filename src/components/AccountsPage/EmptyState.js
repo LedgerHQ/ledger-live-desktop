@@ -15,6 +15,7 @@ import type { T } from 'types/common'
 import Box from 'components/base/Box'
 import Image from 'components/base/Image'
 import Button from 'components/base/Button'
+import { getManagerPageRoute } from '../ManagerV2Page'
 
 const mapDispatchToProps = {
   openModal,
@@ -30,8 +31,7 @@ type Props = {
 class EmptyState extends PureComponent<Props, *> {
   handleInstallApp = () => {
     const { push } = this.props
-    const url = '/manager'
-    push(url)
+    push(getManagerPageRoute())
   }
   render() {
     const { t, openModal } = this.props

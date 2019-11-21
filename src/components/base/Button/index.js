@@ -97,6 +97,63 @@ const buttonStyles: { [_: string]: Style } = {
       background: ${darken(p.theme.colors.alertRed, 0.1)};
      `,
   },
+  lighterPrimary: {
+    default: p => `
+      background: ${
+        p.disabled
+          ? `${p.theme.colors.palette.action.disabled} !important`
+          : p.theme.colors.palette.action.hover
+      };
+      color: ${
+        p.disabled
+          ? `${p.theme.colors.palette.text.shade20} !important`
+          : p.theme.colors.palette.primary.main
+      };
+      box-shadow: ${
+        p.isFocused
+          ? `
+          0 0 0 1px ${darken(p.theme.colors.palette.primary.main, 0.3)} inset,
+          0 0 0 1px ${rgba(p.theme.colors.palette.primary.main, 0.5)},
+          0 0 0 3px ${rgba(p.theme.colors.palette.primary.main, 0.3)};`
+          : ''
+      }
+    `,
+    hover: p => `
+       background: ${lighten(p.theme.colors.palette.action.hover, 0.05)};
+     `,
+    active: p => `
+       background: ${darken(p.theme.colors.palette.action.hover, 0.1)};
+     `,
+  },
+  lighterDanger: {
+    default: p => `
+      background: ${
+        p.disabled
+          ? `${p.theme.colors.palette.action.disabled} !important`
+          : rgba(p.theme.colors.alertRed, 0.15)
+      };
+      color: ${
+        p.disabled
+          ? p.theme.colors.palette.text.shade20
+          : p.theme.colors.palette.primary.contrastText
+      };
+      box-shadow: ${
+        p.isFocused
+          ? `
+          0 0 0 1px ${darken(p.theme.colors.alertRed, 0.3)} inset,
+          0 0 0 1px ${rgba(p.theme.colors.alertRed, 0.5)},
+          0 0 0 3px ${rgba(p.theme.colors.alertRed, 0.3)};
+        `
+          : ''
+      }
+    `,
+    hover: p => `
+      background: ${lighten(rgba(p.theme.colors.alertRed, 0.15), 0.1)};
+     `,
+    active: p => `
+      background: ${darken(rgba(p.theme.colors.alertRed, 0.15), 0.1)};
+     `,
+  },
   outline: {
     default: p => {
       const c = p.outlineColor
@@ -247,7 +304,9 @@ type Props = {
   icon?: string,
   primary?: boolean,
   inverted?: boolean, // only used with primary for now
+  lighterPrimary?: boolean,
   danger?: boolean,
+  lighterDanger?: boolean,
   disabled?: boolean,
   onClick?: Function,
   small?: boolean,
@@ -310,7 +369,7 @@ class Button extends PureComponent<
             <Spinner size={16} />
           </LoadingWrapper>
         ) : null}
-        <div style={{ opacity: !isLoading ? 1 : 0 }}>{children}</div>
+        {children}
       </Base>
     )
   }
