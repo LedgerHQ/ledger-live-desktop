@@ -10,6 +10,7 @@ import Spinner from 'components/base/Spinner'
 import IconUpdate from 'icons/Update'
 import IconDonjon from 'icons/Donjon'
 import IconWarning from 'icons/TriangleWarning'
+import IconInfoCircle from 'icons/InfoCircle'
 
 import { withUpdaterContext } from './UpdaterContext'
 import type { UpdaterContextType } from './UpdaterContext'
@@ -62,10 +63,22 @@ class UpdaterTopBanner extends PureComponent<Props> {
     const { status, quitAndInstall, downloadProgress } = context
     if (!VISIBLE_STATUS.includes(status)) return null
 
-    const content: ?Content = CONTENT_BY_STATUS(quitAndInstall, this.reDownload, downloadProgress)[
+    let content: ?Content = CONTENT_BY_STATUS(quitAndInstall, this.reDownload, downloadProgress)[
       status
     ]
     if (!content) return null
+
+    if (__APP_VERSION__.includes('nightly')) {
+      content = {
+        Icon: IconInfoCircle,
+        message: <Trans i18nKey="update.nightlyWarning" />,
+        right: (
+          <FakeLink onClick={() => openURL(urls.liveHome)}>
+            <Trans i18nKey="update.downloadNow" />
+          </FakeLink>
+        ),
+      }
+    }
 
     return <TopBanner content={content} status={status} />
   }

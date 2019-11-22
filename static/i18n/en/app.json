@@ -787,7 +787,9 @@
     "checkSuccess": "Update ready to install",
     "quitAndInstall": "Install now",
     "error": "Error during update. Please download again",
-    "reDownload": "Download again"
+    "reDownload": "Download again",
+    "nightlyWarning":  "This version cannot auto-update, please install the latest version manually",
+    "downloadNow": "Download now"
   },
   "crash": {
     "oops": "Oops, something went wrong",
