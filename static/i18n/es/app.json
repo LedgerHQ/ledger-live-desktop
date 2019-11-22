@@ -1,5 +1,6 @@
 {
   "common": {
+    "loading": "Loading",
     "labelYes": "Sí",
     "labelNo": "No",
     "never": "Nunca",
@@ -47,6 +48,7 @@
     "copied": "Copiado",
     "addressCopied": "Dirección copiada",
     "experimentalFeature": "Experimental",
+    "dismiss": "Dismiss",
     "lockScreen": {
       "title": "Bienvenido de nuevo",
       "subTitle": null,
@@ -239,6 +241,7 @@
     "coinberry": "Coinberry es la plataforma de criptomonedas que disfruta de mayor confianza al ofrecer una seguridad superior a la de los bancos, una interfaz de usuario de primera clase y financiación y retirada sin comisión. Preinscríbete para obtener un acceso rápido a nuestra plataforma si no eres ciudadano canadiense.",
     "coinhouse": "Coinhouse es una plataforma de confianza para individuos e inversores institucionales que buscan analizar, comprar, vender y guardar criptoactivos con seguridad.",
     "coinmama": "Coinmama es un servicio financiero que permite comprar criptoactivos de forma segura, rápida y divertida en cualquier parte del mundo.",
+    "crypto": "Crypto.com is the best place to buy, sell, track and pay with crypto.",
     "genesis": "Genesis es una empresa comercial institucional que ofrece liquidez y préstamos en monedas digitales, incluidas bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin y XRP.",
     "kyberswap": "Plataforma rápida, sencilla y segura de canje de tokens. Alimentada por el protocolo de liquidez en cadena de Kyber Network.",
     "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum.",
@@ -415,7 +418,7 @@
     },
     "firmware": {
       "installed": "Versión {{version}} del firmware",
-      "updateLater": "Update later",
+      "updateLater": "Cancel",
       "seedReady": "I have my recovery phrase",
       "dontHaveSeed": "Don't have your recovery phrase?",
       "followTheGuide": "Follow our step by step update guide",
@@ -428,8 +431,11 @@
       "disclaimerAppDelete": "Desinstala todas las aplicaciones de tu dispositivo. Esto no afectará a tus criptoactivos.",
       "disclaimerAppReinstall": "Como precaución, ten a mano la hoja de recuperacion.",
       "downloadingUpdateDesc": "Por favor, espera mientras se descarga el instalador de actualización",
-      "appsAutoUninstallTitle": "Apps will be uninstalled",
-      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
+      "appsAutoUninstallTitle": "All applications will be uninstalled from your device",
+      "appsAutoUninstallBullet1": "<0><0>Don't worry</0></0>, this does not affect your crypto assets",
+      "appsAutoUninstallBullet2": "You will be able to reinstall them all after the update",
+      "appsUninstallTitle": "Apps will be uninstalled",
+      "appsUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -506,27 +512,37 @@
   "send": {
     "title": "Enviar",
     "totalSpent": "Total a cargar",
+    "totalBalance": "Total balance",
     "steps": {
-      "amount": {
-        "title": "Detalles",
-        "selectAccountDebit": "Cuenta de débito",
-        "recipientAddress": "Dirección del destinatario",
-        "amount": "Importe",
-        "fees": "Comisiones de red",
-        "useMax": "Max",
-        "advancedOptions": "Opciones avanzadas",
-        "useRBF": "Utilizar una transacción RBF",
-        "message": "Dejar un mensaje (140) ",
-        "rippleTag": "Etiquetar",
-        "ethereumGasLimit": "Límite de gas",
-        "unitPerByte": "{{unit}} por byte",
-        "highFeeModal": {
-          "title": "Comisiones elevadas",
-          "desc": "Ten cuidado, las comisiones de transacción (<1><0>{{fees}}</0></1>) representan más del 10% de la cantidad (<3><0>{{amount}}</0></3>). ¿Deseas continuar?"
-        }
+      "recipient": {
+        "title": "Recipient"
       },
-      "connectDevice": {
-        "title": "Dispositivo"
+      "amount": {
+        "title": "Amount"
+      },
+      "summary": {
+        "title": "Summary"
+      },
+      "device": {
+        "title": "Device"
+      },
+      "details": {
+        "from": "From",
+        "to": "To",
+        "selectAccountDebit": "Account to debit",
+        "recipientAddress": "Recipient address",
+        "amount": "Amount",
+        "fees": "Network fees",
+        "feesTooHigh": "Network fees represent more than 10% of the amount",
+        "useMax": "Send Max",
+        "advancedOptions": "Advanced options",
+        "useRBF": "Use a replace-by-fee transaction",
+        "message": "Leave a message (140)",
+        "rippleTag": "Tag",
+        "rippleTagPlaceholder": "Optional",
+        "ethereumGasLimit": "Gas limit",
+        "ethereumGasPrice": "Gas price",
+        "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
         "title": "Comprobación"
@@ -568,6 +584,27 @@
     "showAll": "Show all",
     "showLess": "Show less",
     "header": "Account allocation ({{count}})"
+  },
+  "delegation": {
+    "title": "Earn rewards",
+    "header": "Delegation",
+    "validator": "Validator",
+    "address": "Address",
+    "transactionID": "Transaction ID",
+    "value": "Value",
+    "amount": "Amount",
+    "duration": "Duration",
+    "durationJustStarted": "Just started",
+    "durationDays": "{{count}} day",
+    "durationDays_plural": "{{count}} days",
+    "banner": {
+      "text": "You can earn Tezos staking rewards by delegating your account"
+    },
+    "contextMenu": {
+      "topUp": "Top up",
+      "redelegate": "Redelegate",
+      "stopDelegation": "Stop delegation"
+    }
   },
   "asset": {
     "notice": "Summary of all {{currency}} accounts"
@@ -753,7 +790,9 @@
     "checkSuccess": "Actualización lista para instalarse",
     "quitAndInstall": "Instalar ahora",
     "error": "Error durante la actualización. Por favor, descárgala de nuevo",
-    "reDownload": "Descargar de nuevo"
+    "reDownload": "Descargar de nuevo",
+    "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
+    "downloadNow": "Download now"
   },
   "crash": {
     "oops": "Vaya, algo ha fallado.",
@@ -798,6 +837,7 @@
     },
     "start": {
       "title": "Bienvenido a Ledger Live",
+      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
       "startBtn": "Empezar"
     },
     "init": {
@@ -1004,6 +1044,15 @@
   },
   "connectTroubleshooting": {
     "desc": "¿Tienes problemas para conectar tu dispositivo?"
+  },
+  "TransactionConfirm": {
+    "title": "Please verify all operation details on your device",
+    "warning": "Carefully verify all {{mode}} details on your device.",
+    "modes": {
+      "send": "transaction",
+      "delegate": "delegation",
+      "undelegate": "undelegation"
+    }
   },
   "errors": {
     "generic": {
@@ -1264,9 +1313,5 @@
       "title": "Cannot send from subaccounts yet",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     }
-  },
-  "TransactionConfirm": {
-    "warning": "Comprueba todos los datos de la transacción en tu dispositivo.",
-    "title": "Confirma la transacción en tu dispositivo para enviarla"
   }
 }
