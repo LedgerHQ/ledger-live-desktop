@@ -1,5 +1,4 @@
 // @flow
-/* eslint react/jsx-no-literals: 0 */
 
 import React, { PureComponent } from 'react'
 import { Trans, translate } from 'react-i18next'
@@ -8,7 +7,7 @@ import type { T } from 'types/common'
 import { openURL } from 'helpers/linking'
 import { urls } from 'config/urls'
 
-import IconInfoCircle from 'icons/InfoCircle'
+import IconTrash from 'icons/Trash'
 import Modal from 'components/base/Modal'
 import ModalBody from 'components/base/Modal/ModalBody'
 import Text from 'components/base/Text'
@@ -46,9 +45,24 @@ const NotesWrapper = styled(Box)`
   position: relative;
 `
 
+const Bullets = styled.div`
+  & > div {
+    margin-bottom: 8px;
+  }
+`
+
+const Bullet = styled.div`
+  height: 6px;
+  width: 6px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-right: 11px;
+  background-color: ${p => rgba(p.theme.colors.palette.primary.main, 0.5)};
+`
+
 const InfoBubble = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   background-color: ${p => rgba(p.theme.colors.palette.primary.main, 0.1)};
   border-radius: 50%;
   display: flex;
@@ -77,7 +91,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
     const { showUninsWarning } = this.state
 
     return (
-      <Modal isOpened={status === 'disclaimer'} onClose={onClose}>
+      <Modal isOpened={status === 'disclaimer'} centered onClose={onClose}>
         <ModalBody
           grow
           align="center"
@@ -90,25 +104,36 @@ class DisclaimerModal extends PureComponent<Props, State> {
                 <>
                   <TrackPage category="Manager" name="DisclaimerModalUninstallAppWarning" />
                   <InfoBubble>
-                    <IconInfoCircle size={20} />
+                    <IconTrash size={32} />
                   </InfoBubble>
+
                   <Text
                     ff="Inter|SemiBold"
                     fontSize={5}
-                    style={{ marginBottom: 24 }}
+                    style={{ marginBottom: 24, maxWidth: 250, textAlign: 'center' }}
                     color="palette.text.shade100"
                   >
                     {t('manager.firmware.appsAutoUninstallTitle')}
                   </Text>
-                  <Text
-                    align="center"
-                    ff="Inter"
-                    fontSize={4}
-                    style={{ maxWidth: 360 }}
-                    color="palette.text.shade60"
-                  >
-                    {t('manager.firmware.appsAutoUninstallDesc')}
-                  </Text>
+                  <Bullets>
+                    <div>
+                      <Bullet />
+                      <Text ff="Inter" fontSize={4} color="palette.text.shade60">
+                        <Trans i18nKey={'manager.firmware.appsAutoUninstallBullet1'}>
+                          <Text ff="Inter|Bold" fontSize={4} color="palette.text.shade100">
+                            {"Don't worry"}
+                          </Text>
+                          {', this does not affect your crypto assets'}
+                        </Trans>
+                      </Text>
+                    </div>
+                    <div>
+                      <Text align="center" ff="Inter" fontSize={4} color="palette.text.shade60">
+                        <Bullet />
+                        <Trans i18nKey="manager.firmware.appsAutoUninstallBullet2" />
+                      </Text>
+                    </div>
+                  </Bullets>
                 </>
               ) : (
                 <>
@@ -121,7 +146,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
                           firmware && firmware.final ? getCleanVersion(firmware.final.name) : '',
                       }}
                     >
-                      You are about to install
+                      {'You are about to install'}
                       <Text ff="Inter|SemiBold" color="palette.text.shade100">
                         {'firmware version {{version}}'}
                       </Text>
@@ -137,7 +162,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
                     <Text ff="Inter|Regular" fontSize={4}>
                       {t('manager.firmware.prepareSeed')}
                     </Text>
-                    <FakeLink onClick={() => openURL(urls.lostPinOrSeed)}>
+                    <FakeLink style={{ marginTop: 4 }} onClick={() => openURL(urls.lostPinOrSeed)}>
                       <Text ff="Inter|Regular" fontSize={4} style={{ textDecoration: 'underline' }}>
                         {t('manager.firmware.dontHaveSeed')}
                       </Text>
