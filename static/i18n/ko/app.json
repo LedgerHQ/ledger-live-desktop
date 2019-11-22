@@ -418,7 +418,7 @@
     },
     "firmware": {
       "installed": "펌웨어 버전 {{version}}",
-      "updateLater": "Update later",
+      "updateLater": "Cancel",
       "seedReady": "I have my recovery phrase",
       "dontHaveSeed": "Don't have your recovery phrase?",
       "followTheGuide": "Follow our step by step update guide",
@@ -431,8 +431,11 @@
       "disclaimerAppDelete": "일부 앱을 제거하여 공간을 확보하십시오. 그렇게 해도 귀하의 암호화 자산에는 영향을 미치지 않습니다.",
       "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded",
-      "appsAutoUninstallTitle": "Apps will be uninstalled",
-      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
+      "appsAutoUninstallTitle": "All applications will be uninstalled from your device",
+      "appsAutoUninstallBullet1": "<0><0>Don't worry</0></0>, this does not affect your crypto assets",
+      "appsAutoUninstallBullet2": "You will be able to reinstall them all after the update",
+      "appsUninstallTitle": "Apps will be uninstalled",
+      "appsUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -787,7 +790,9 @@
     "checkSuccess": "업데이트 설치 준비 완료",
     "quitAndInstall": "지금 설치",
     "error": "업데이트 중 오류가 발생했습니다. 다시 다운로드하십시오.",
-    "reDownload": "다시 다운로드"
+    "reDownload": "다시 다운로드",
+    "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
+    "downloadNow": "Download now"
   },
   "crash": {
     "oops": "죄송합니다. 무언가가 잘못되었습니다.",
