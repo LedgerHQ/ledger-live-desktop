@@ -418,7 +418,7 @@
     },
     "firmware": {
       "installed": "Version {{version}} du firmware",
-      "updateLater": "MAJ plus tard",
+      "updateLater": "Cancel",
       "seedReady": "J'ai ma phrase de récupération",
       "dontHaveSeed": "Vous n'avez pas votre phrase de récupération ?",
       "followTheGuide": "Suivez notre guide de mise à jour étape par étape",
@@ -431,8 +431,11 @@
       "disclaimerAppDelete": "Désinstallez des applications pour libérer de l’espace. Cette opération n’affectera pas vos crypto-actifs.",
       "disclaimerAppReinstall": "Assurez-vous que votre feuille de récupération est accessible, par mesure de précaution.",
       "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour",
-      "appsAutoUninstallTitle": "Les applications seront désinstallées",
-      "appsAutoUninstallDesc": "Toutes les applications seront désinstallées de votre appareil pour la mise à jour du firmware. Vous pourrez les réinstaller après la mise à jour. Cela n'affectera pas vos actifs crypto."
+      "appsAutoUninstallTitle": "All applications will be uninstalled from your device",
+      "appsAutoUninstallBullet1": "<0><0>Don't worry</0></0>, this does not affect your crypto assets",
+      "appsAutoUninstallBullet2": "You will be able to reinstall them all after the update",
+      "appsUninstallTitle": "Apps will be uninstalled",
+      "appsUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -787,7 +790,9 @@
     "checkSuccess": "La mise à jour est prête à être installée",
     "quitAndInstall": "Installer maintenant",
     "error": "Erreur lors de la mise à jour. Veuillez télécharger à nouveau",
-    "reDownload": "Télécharger à nouveau"
+    "reDownload": "Télécharger à nouveau",
+    "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
+    "downloadNow": "Download now"
   },
   "crash": {
     "oops": "Oups, une erreur c'est produite",
