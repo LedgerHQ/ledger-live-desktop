@@ -1,5 +1,6 @@
 {
   "common": {
+    "loading": "Loading",
     "labelYes": "确定",
     "labelNo": "取消",
     "never": "从不",
@@ -47,6 +48,7 @@
     "copied": "已复制",
     "addressCopied": "地址已复制",
     "experimentalFeature": "Experimental",
+    "dismiss": "Dismiss",
     "lockScreen": {
       "title": "欢迎回来",
       "subTitle": null,
@@ -239,6 +241,7 @@
     "coinberry": "Coinberry 是加拿大备受信赖的加密资产交易平台，其安全性甚至超过银行，用户界面十分出色，存取与提现均为免费。如果您不是加拿大公民，请预注册以便尽早使用我们的平台。",
     "coinhouse": "Coinhouse 是一个值得信赖的平台，为个人和机构投资者寻求分析、收购、出售和安全存储加密资产。",
     "coinmama": "Coinmama 是一家金融服务机构，让您在世界各地都能快速、安全和愉快地购买数字资产。",
+    "crypto": "Crypto.com is the best place to buy, sell, track and pay with crypto.",
     "genesis": "Genesis 是一家机构交易公司，提供数字货币流动性和借贷服务，支持比特币、比特币现金、以太坊、以太坊经典、莱特币和瑞波币。",
     "kyberswap": "快捷、简单、安全的代币交易平台，由 Kyber Network 的链上流动性协议提供支持。",
     "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum.",
@@ -415,7 +418,7 @@
     },
     "firmware": {
       "installed": "固件版本 {{version}}",
-      "updateLater": "Update later",
+      "updateLater": "Cancel",
       "seedReady": "I have my recovery phrase",
       "dontHaveSeed": "Don't have your recovery phrase?",
       "followTheGuide": "Follow our step by step update guide",
@@ -428,8 +431,11 @@
       "disclaimerAppDelete": "请卸载设备上所有应用程序，此操作不会影响您的加密资产。",
       "disclaimerAppReinstall": "为谨慎起见，请安全保存您的恢复短语列表。",
       "downloadingUpdateDesc": "请等待更新安装程序下载",
-      "appsAutoUninstallTitle": "Apps will be uninstalled",
-      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
+      "appsAutoUninstallTitle": "All applications will be uninstalled from your device",
+      "appsAutoUninstallBullet1": "<0><0>Don't worry</0></0>, this does not affect your crypto assets",
+      "appsAutoUninstallBullet2": "You will be able to reinstall them all after the update",
+      "appsUninstallTitle": "Apps will be uninstalled",
+      "appsUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -506,27 +512,37 @@
   "send": {
     "title": "发送",
     "totalSpent": "总借额",
+    "totalBalance": "Total balance",
     "steps": {
-      "amount": {
-        "title": "详情",
-        "selectAccountDebit": "付币账户",
-        "recipientAddress": "收件人地址",
-        "amount": "金额",
-        "fees": "网络费用",
-        "useMax": "最大值",
-        "advancedOptions": "高级选项",
-        "useRBF": "使用费用替代法交易",
-        "message": "留言 (140)",
-        "rippleTag": "标签",
-        "ethereumGasLimit": "Gas 上限",
-        "unitPerByte": "{{unit}} 每字节",
-        "highFeeModal": {
-          "title": "高交易费",
-          "desc": "请注意，该操作的交易费 (<1><0>{{fees}}</0></1>) 占操作金额的10%以上 (<3><0> > >{{amount}}</0></3>)。 您还想要继续交易吗？"
-        }
+      "recipient": {
+        "title": "Recipient"
       },
-      "connectDevice": {
-        "title": "设备"
+      "amount": {
+        "title": "Amount"
+      },
+      "summary": {
+        "title": "Summary"
+      },
+      "device": {
+        "title": "Device"
+      },
+      "details": {
+        "from": "From",
+        "to": "To",
+        "selectAccountDebit": "Account to debit",
+        "recipientAddress": "Recipient address",
+        "amount": "Amount",
+        "fees": "Network fees",
+        "feesTooHigh": "Network fees represent more than 10% of the amount",
+        "useMax": "Send Max",
+        "advancedOptions": "Advanced options",
+        "useRBF": "Use a replace-by-fee transaction",
+        "message": "Leave a message (140)",
+        "rippleTag": "Tag",
+        "rippleTagPlaceholder": "Optional",
+        "ethereumGasLimit": "Gas limit",
+        "ethereumGasPrice": "Gas price",
+        "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
         "title": "验证"
@@ -568,6 +584,27 @@
     "showAll": "Show all",
     "showLess": "Show less",
     "header": "Account allocation ({{count}})"
+  },
+  "delegation": {
+    "title": "Earn rewards",
+    "header": "Delegation",
+    "validator": "Validator",
+    "address": "Address",
+    "transactionID": "Transaction ID",
+    "value": "Value",
+    "amount": "Amount",
+    "duration": "Duration",
+    "durationJustStarted": "Just started",
+    "durationDays": "{{count}} day",
+    "durationDays_plural": "{{count}} days",
+    "banner": {
+      "text": "You can earn Tezos staking rewards by delegating your account"
+    },
+    "contextMenu": {
+      "topUp": "Top up",
+      "redelegate": "Redelegate",
+      "stopDelegation": "Stop delegation"
+    }
   },
   "asset": {
     "notice": "Summary of all {{currency}} accounts"
@@ -753,7 +790,9 @@
     "checkSuccess": "更新安装已就绪",
     "quitAndInstall": "立即安装",
     "error": "更新时出错。请重新下载",
-    "reDownload": "重新下载"
+    "reDownload": "重新下载",
+    "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
+    "downloadNow": "Download now"
   },
   "crash": {
     "oops": "糟糕，出错了",
@@ -798,6 +837,7 @@
     },
     "start": {
       "title": "欢迎使用 Ledger Live",
+      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
       "startBtn": "入门指南"
     },
     "init": {
@@ -1004,6 +1044,15 @@
   },
   "connectTroubleshooting": {
     "desc": "无法连接您的设备？"
+  },
+  "TransactionConfirm": {
+    "title": "Please verify all operation details on your device",
+    "warning": "Carefully verify all {{mode}} details on your device.",
+    "modes": {
+      "send": "transaction",
+      "delegate": "delegation",
+      "undelegate": "undelegation"
+    }
   },
   "errors": {
     "generic": {
@@ -1264,9 +1313,5 @@
       "title": "Cannot send from subaccounts yet",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     }
-  },
-  "TransactionConfirm": {
-    "warning": "请验证您设备上的所有交易详情",
-    "title": "确认您设备上的交易以进行发送"
   }
 }
