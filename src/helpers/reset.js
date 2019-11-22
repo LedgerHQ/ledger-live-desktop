@@ -8,6 +8,7 @@ import db from 'helpers/db'
 import { delay } from 'helpers/promise'
 import killInternalProcess from 'commands/killInternalProcess'
 import libcoreReset from 'commands/libcoreReset'
+import { clearBridgeCache } from 'bridge/cache'
 
 async function resetLibcore() {
   log('clear-cache', 'resetLibcore...')
@@ -29,6 +30,8 @@ function reload() {
 }
 
 export async function hardReset() {
+  log('clear-cache', 'clearBridgeCache()')
+  clearBridgeCache()
   log('clear-cache', 'hardReset()')
   disableDBMiddleware()
   db.resetAll()
@@ -40,6 +43,8 @@ export async function hardReset() {
 }
 
 export async function softReset({ cleanAccountsCache }: *) {
+  log('clear-cache', 'clearBridgeCache()')
+  clearBridgeCache()
   log('clear-cache', 'cleanAccountsCache()')
   cleanAccountsCache()
   await delay(500)
