@@ -47,7 +47,7 @@ const Wrapper = styled(Box).attrs(() => ({
   justify-content: space-between;
 `
 
-const StepSummary = ({ account, transaction }: StepProps) => {
+const StepSummary = ({ account, transaction, transitionTo }: StepProps) => {
   invariant(account && transaction, 'step summary requires account and transaction settled')
   const [checked, setChecked] = useState(false)
   const delegation = useDelegation(account)
@@ -94,7 +94,7 @@ const StepSummary = ({ account, transaction }: StepProps) => {
                 <Trans i18nKey="delegation.flow.steps.summary.validator" />
               </Text>
             </Box>
-            <Container my={1}>
+            <Container my={1} onClick={/* quick hack */ () => transitionTo('validator')}>
               <BakerImage size={32} baker={baker} />
               <Ellipsis>
                 <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
@@ -110,6 +110,8 @@ const StepSummary = ({ account, transaction }: StepProps) => {
                 </Text>
               ) : null}
             </Container>
+
+            {/* TODO only if it was not changed yet. (use a state on Body to track it?) */}
             <Text ff="Inter|Medium" color="palette.text.shade60" fontSize={2}>
               <Trans i18nKey="delegation.flow.steps.summary.randomly" />
             </Text>
