@@ -79,19 +79,9 @@ class Stepper extends PureComponent<Props, State> {
     const stepIndex = steps.findIndex(s => s.id === stepId)
     const step = steps[stepIndex]
 
-    const { index: breadcrumbStepIndex, offset } = steps
-      .slice(0, stepIndex + 1)
-      .reduce(
-        (result, step, index) =>
-          step.excludeFromBreadcrumb
-            ? { ...result, offset: result.offset + 1 }
-            : { ...result, index },
-        { offset: 0, index: 0 },
-      )
-
-    const realIndex = step.excludeFromBreadcrumb
-      ? breadcrumbStepIndex
-      : breadcrumbStepIndex - offset
+    const visibleSteps = steps.filter(s => !s.excludeFromBreadcrumb)
+    const indexVisible =
+      steps.slice(0, stepIndex + 1).filter(s => !s.excludeFromBreadcrumb).length - 1
 
     invariant(step, `Stepper: step ${stepId} doesn't exists`)
 
@@ -130,8 +120,8 @@ class Stepper extends PureComponent<Props, State> {
             {!hideBreadcrumb && (
               <Breadcrumb
                 mb={props.error && props.signed ? 4 : 6}
-                currentStep={realIndex}
-                items={steps.filter(s => !s.excludeFromBreadcrumb)}
+                currentStep={indexVisible}
+                items={visibleSteps}
                 stepsDisabled={disabledSteps}
                 stepsErrors={errorSteps}
               />

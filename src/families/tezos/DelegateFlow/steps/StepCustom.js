@@ -57,7 +57,7 @@ export const StepCustomFooter = ({
     // we need to revert
     onChangeTransaction(
       getAccountBridge(account, parentAccount).updateTransaction(transaction, {
-        recipient: initialRecipient,
+        recipient: initialRecipient.current,
       }),
     )
     transitionTo('summary')
