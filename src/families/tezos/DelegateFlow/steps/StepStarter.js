@@ -15,10 +15,11 @@ import TrackPage from 'analytics/TrackPage'
 
 import type { StepProps } from '../types'
 
-const Row = styled(Box).attrs(() => ({
+const Row = styled(Box).attrs(p => ({
   horizontal: true,
   justifyContent: 'flex-start',
   alignItems: 'center',
+  color: p.theme.colors.greenPill,
 }))`
   margin-bottom: 6px;
 
@@ -52,7 +53,7 @@ export default ({ transitionTo, t }: StepProps) => {
         </Box>
         <Box>
           <Row>
-            <Check size={16} style={{ color: '#41ccb4' }} />
+            <Check size={16} />
             <Text
               ff="Inter|Bold"
               style={{ lineHeight: 1.57 }}
@@ -63,7 +64,7 @@ export default ({ transitionTo, t }: StepProps) => {
             </Text>
           </Row>
           <Row>
-            <Check size={16} style={{ color: '#41ccb4' }} />
+            <Check size={16} />
             <Text
               ff="Inter|Bold"
               style={{ lineHeight: 1.57 }}
@@ -74,7 +75,7 @@ export default ({ transitionTo, t }: StepProps) => {
             </Text>
           </Row>
           <Row>
-            <Check size={16} style={{ color: '#41ccb4' }} />
+            <Check size={16} />
             <Text
               ff="Inter|Bold"
               style={{ lineHeight: 1.57 }}

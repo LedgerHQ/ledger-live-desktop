@@ -31,12 +31,14 @@ import StepStarter from './steps/StepStarter'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/StepConnectDevice'
 import StepVerification from './steps/StepVerification'
 import StepSummary, { StepSummaryFooter } from './steps/StepSummary'
+import StepValidator from './steps/StepValidator'
 import StepConfirmation, { StepConfirmationFooter } from './steps/StepConfirmation'
 
 const createTitles = t => ({
   account: t('delegation.flow.steps.account.title'),
   starter: t('delegation.flow.steps.starter.title'),
   summary: t('delegation.flow.steps.summary.title'),
+  validator: t('delegation.flow.steps.validator.title'),
 })
 
 type OwnProps = {|
@@ -88,10 +90,16 @@ const createSteps = params => [
   {
     id: 'validator',
     excludeFromBreadcrumb: true,
-    component: ({ transitionTo }) => (
-      <button onClick={() => transitionTo('summary')}>validator</button>
-    ),
+    component: StepValidator,
     shouldPreventClose: true,
+    onBack: ({ transitionTo }) => transitionTo('summary'),
+  },
+  {
+    id: 'custom',
+    excludeFromBreadcrumb: true,
+    component: StepValidator,
+    shouldPreventClose: true,
+    onBack: ({ transitionTo }) => transitionTo('summary'),
   },
   {
     id: 'device',

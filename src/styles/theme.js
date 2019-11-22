@@ -63,6 +63,7 @@ const colors = {
   starYellow: '#FFD24A',
   orange: '#ffa726',
   positiveGreen: '#66be54',
+  greenPill: '#41ccb4',
   smoke: '#666666',
   wallet: '#6490f1',
   pillActiveBackground: rgba('#6490f1', 0.1),
