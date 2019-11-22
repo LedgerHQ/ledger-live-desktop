@@ -1,36 +1,47 @@
 // @flow
 
-import React, { useEffect, useState, useRef, useCallback } from 'react'
-import invariant from 'invariant'
+import React, { useEffect, useState, useCallback, useMemo } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { Trans, translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
 import type { Account, AccountLike, Operation } from '@ledgerhq/live-common/lib/types'
+import { useBakers } from '@ledgerhq/live-common/lib/families/tezos/bakers'
+import whitelist from '@ledgerhq/live-common/lib/families/tezos/bakers.whitelist-default'
+import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import { getMainAccount, addPendingOperation } from '@ledgerhq/live-common/lib/account'
 import useBridgeTransaction from '@ledgerhq/live-common/lib/bridge/useBridgeTransaction'
 import Track from 'analytics/Track'
 import { updateAccountWithUpdater } from 'actions/accounts'
-import { MODAL_SEND } from 'config/constants'
+import { MODAL_DELEGATE } from 'config/constants'
 import logger from 'logger'
-import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import type { T, Device } from 'types/common'
-import { track } from 'analytics/segment'
 
+import { useSignTransactionCallback } from 'helpers/useSignTransaction'
 import { getCurrentDevice } from 'reducers/devices'
-import { accountsSelector } from 'reducers/accounts'
+import { delegatableAccountsSelector } from 'actions/general'
 import { closeModal, openModal } from 'reducers/modals'
-import { DisconnectedDevice, UserRefusedOnDevice } from '@ledgerhq/errors'
+import { UserRefusedOnDevice } from '@ledgerhq/errors'
 
 import Stepper from 'components/base/Stepper'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 
-import StepRecipient, { StepRecipientFooter } from './steps/StepRecipient'
-import StepAmount, { StepAmountFooter } from './steps/StepAmount'
+import StepAccount, { StepAccountFooter } from './steps/StepAccount'
+import StepStarter from './steps/StepStarter'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/StepConnectDevice'
 import StepVerification from './steps/StepVerification'
 import StepSummary, { StepSummaryFooter } from './steps/StepSummary'
+import StepValidator from './steps/StepValidator'
+import StepCustom, { StepCustomFooter } from './steps/StepCustom'
 import StepConfirmation, { StepConfirmationFooter } from './steps/StepConfirmation'
+
+const createTitles = t => ({
+  account: t('delegation.flow.steps.account.title'),
+  starter: t('delegation.flow.steps.starter.title'),
+  summary: t('delegation.flow.steps.summary.title'),
+  validator: t('delegation.flow.steps.validator.title'),
+  undelegate: t('delegation.flow.steps.undelegate.title'),
+})
 
 type OwnProps = {|
   stepId: string,
@@ -39,6 +50,8 @@ type OwnProps = {|
   params: {
     account: ?AccountLike,
     parentAccount: ?Account,
+    mode: ?string,
+    stepId: ?string,
   },
 |}
 
@@ -56,30 +69,42 @@ type Props = {|
   ...StateProps,
 |}
 
-const createSteps = () => [
+const createSteps = params => [
   {
-    id: 'recipient',
-    label: <Trans i18nKey="send.steps.recipient.title" />,
-    component: StepRecipient,
-    footer: StepRecipientFooter,
+    id: 'starter',
+    component: StepStarter,
+    excludeFromBreadcrumb: true,
   },
   {
-    id: 'amount',
-    label: <Trans i18nKey="send.steps.amount.title" />,
-    component: StepAmount,
-    footer: StepAmountFooter,
-    onBack: ({ transitionTo }) => transitionTo('recipient'),
+    id: 'account',
+    label: <Trans i18nKey="delegation.flow.steps.account.label" />,
+    component: StepAccount,
+    footer: StepAccountFooter,
+    excludeFromBreadcrumb: params && params.stepId === 'summary',
   },
   {
     id: 'summary',
-    label: <Trans i18nKey="send.steps.summary.title" />,
+    label: <Trans i18nKey="delegation.flow.steps.summary.label" />,
     component: StepSummary,
     footer: StepSummaryFooter,
-    onBack: ({ transitionTo }) => transitionTo('amount'),
+    onBack: ({ transitionTo }) => transitionTo('account'),
+  },
+  {
+    id: 'validator',
+    excludeFromBreadcrumb: true,
+    component: StepValidator,
+    onBack: ({ transitionTo }) => transitionTo('summary'),
+  },
+  {
+    id: 'custom',
+    excludeFromBreadcrumb: true,
+    component: StepCustom,
+    footer: StepCustomFooter,
+    onBack: ({ transitionTo }) => transitionTo('summary'),
   },
   {
     id: 'device',
-    label: <Trans i18nKey="send.steps.device.title" />,
+    excludeFromBreadcrumb: true,
     component: StepConnectDevice,
     footer: StepConnectDeviceFooter,
     onBack: ({ transitionTo }) => transitionTo('summary'),
@@ -102,8 +127,7 @@ const createSteps = () => [
   },
   {
     id: 'confirmation',
-    label: <Trans i18nKey="send.steps.confirmation.title" />,
-    excludeFromBreadcrumb: true,
+    label: <Trans i18nKey="delegation.flow.steps.confirmation.label" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
     onBack: ({ transitionTo, onRetry }) => {
@@ -115,7 +139,7 @@ const createSteps = () => [
 
 const mapStateToProps = createStructuredSelector({
   device: getCurrentDevice,
-  accounts: accountsSelector,
+  accounts: delegatableAccountsSelector, // TODO only tezos accounts not yet delegated
 })
 
 const mapDispatchToProps = {
@@ -137,7 +161,10 @@ const Body = ({
   updateAccountWithUpdater,
 }: Props) => {
   const openedFromAccount = !!params.account
-  const [steps] = useState(createSteps)
+  const bakers = useBakers(whitelist)
+  const firstBaker = bakers[0]
+
+  const [steps] = useState(() => createSteps(params))
   const {
     transaction,
     setTransaction,
@@ -150,19 +177,48 @@ const Body = ({
   } = useBridgeTransaction(() => {
     const parentAccount = params && params.parentAccount
     const account = (params && params.account) || accounts[0]
+    const mode = (params && params.mode) || 'delegate'
+    const transaction = account && {
+      ...getAccountBridge(account, parentAccount).createTransaction(
+        getMainAccount(account, parentAccount),
+      ),
+      mode,
+      recipient: mode === 'delegate' && firstBaker ? firstBaker.address : '',
+    }
     return {
       account,
       parentAccount,
+      transaction,
     }
   })
-  // console.log({ status, bridgeError })
+
+  useEffect(() => {
+    const stepId = params && params.stepId
+    if (stepId) onChangeStepId(stepId)
+  }, [onChangeStepId, params])
+
+  useEffect(() => {
+    if (
+      transaction &&
+      account &&
+      firstBaker &&
+      transaction.mode === 'delegate' &&
+      !transaction.recipient
+    ) {
+      setTransaction(
+        getAccountBridge(account, parentAccount).updateTransaction(transaction, {
+          recipient: firstBaker.address,
+        }),
+      )
+    }
+  }, [account, firstBaker, parentAccount, setTransaction, transaction])
+
   const [isAppOpened, setAppOpened] = useState(false)
   const [optimisticOperation, setOptimisticOperation] = useState(null)
   const [transactionError, setTransactionError] = useState(null)
   const [signed, setSigned] = useState(false)
-  const signTransactionSubRef = useRef(null)
 
-  const handleCloseModal = useCallback(() => closeModal(MODAL_SEND), [closeModal])
+  const handleCloseModal = useCallback(() => closeModal(MODAL_DELEGATE), [closeModal])
 
   const handleChangeAccount = useCallback(
     (nextAccount: AccountLike, nextParentAccount: ?Account) => {
@@ -205,93 +261,39 @@ const Body = ({
     [account, parentAccount, updateAccountWithUpdater],
   )
 
-  const handleSignTransaction = useCallback(
-    async ({ transitionTo }: { transitionTo: string => void }) => {
-      if (!account) return
-      const mainAccount = getMainAccount(account, parentAccount)
-      const bridge = getAccountBridge(account, parentAccount)
-      if (!device) {
-        handleTransactionError(new DisconnectedDevice())
-        transitionTo('confirmation')
-        return
-      }
-
-      invariant(account && transaction && bridge, 'signTransaction invalid conditions')
-
-      const eventProps = {
-        currencyName: mainAccount.currency.name,
-        derivationMode: mainAccount.derivationMode,
-        freshAddressPath: mainAccount.freshAddressPath,
-        operationsLength: mainAccount.operations.length,
-      }
-      track('SendTransactionStart', eventProps)
-      signTransactionSubRef.current = bridge
-        .signAndBroadcast(mainAccount, transaction, device.path)
-        .subscribe({
-          next: e => {
-            switch (e.type) {
-              case 'signed': {
-                track('SendTransactionSigned', eventProps)
-                setSigned(true)
-                transitionTo('confirmation')
-                break
-              }
-              case 'broadcasted': {
-                track('SendTransactionBroadcasted', eventProps)
-                handleOperationBroadcasted(e.operation)
-                break
-              }
-              default:
-            }
-          },
-          error: err => {
-            if (err.statusCode === 0x6985) {
-              track('SendTransactionRefused', eventProps)
-              handleTransactionError(new UserRefusedOnDevice())
-              transitionTo('refused')
-            } else {
-              track('SendTransactionError', eventProps)
-              handleTransactionError(err)
-              transitionTo('confirmation')
-            }
-          },
-        })
-    },
-    [
-      device,
-      account,
-      parentAccount,
-      handleOperationBroadcasted,
-      transaction,
-      handleTransactionError,
-    ],
-  )
+  const handleSignTransaction = useSignTransactionCallback({
+    context: 'Delegate',
+    device,
+    account,
+    parentAccount,
+    handleOperationBroadcasted,
+    transaction,
+    handleTransactionError,
+    setSigned,
+  })
 
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId])
 
-  // only call on mount/unmount
-  useEffect(
-    () => () => {
-      if (signTransactionSubRef.current) {
-        signTransactionSubRef.current.unsubscribe()
-      }
-    },
-    [],
-  )
+  const titles = useMemo(() => createTitles(t), [t])
+
+  const title =
+    transaction && transaction.family === 'tezos' && transaction.mode === 'undelegate'
+      ? titles.undelegate
+      : titles[stepId] || titles.account
 
   const errorSteps = []
 
   if (transactionError) {
-    errorSteps.push(3)
+    errorSteps.push(2)
   } else if (bridgeError) {
-    errorSteps.push(0)
+    errorSteps.push(1)
   }
 
   const error = transactionError || bridgeError
 
   const stepperProps = {
-    title: t('send.title'),
-    initialStepId: stepId,
+    title,
+    initialStepId: (params && params.stepId) || stepId,
     steps,
     errorSteps,
     device,
@@ -300,7 +302,7 @@ const Body = ({
     parentAccount,
     transaction,
     isAppOpened,
-    hideBreadcrumb: !!error && ['recipient', 'amount'].includes(stepId),
+    hideBreadcrumb: stepId === 'starter' || stepId === 'validator',
     error,
     status,
     bridgePending,

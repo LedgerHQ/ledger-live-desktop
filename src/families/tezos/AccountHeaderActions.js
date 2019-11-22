@@ -1,22 +1,28 @@
 // @flow
 
 import React from 'react'
+import { connect } from 'react-redux'
 import { Trans } from 'react-i18next'
-import type { AccountLike } from '@ledgerhq/live-common/lib/types'
+import type { AccountLike, Account } from '@ledgerhq/live-common/lib/types'
 import { isAccountDelegating } from '@ledgerhq/live-common/lib/families/tezos/bakers'
-
+import { openModal } from 'reducers/modals'
 import IconChartLine from 'icons/ChartLine'
-
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 
 type Props = {
   account: AccountLike,
+  parentAccount: ?Account,
+  dispatch: any => void,
 }
 
-export default ({ account }: Props) =>
-  isAccountDelegating(account) ? null : (
-    <Button small primary onClick={() => {}}>
+const AccountHeaderActions = ({ account, parentAccount, dispatch }: Props) =>
+  account.type !== 'Account' || isAccountDelegating(account) ? null : (
+    <Button
+      small
+      primary
+      onClick={() => dispatch(openModal('MODAL_DELEGATE', { parentAccount, account }))}
+    >
       <Box horizontal flow={1} alignItems="center">
         <IconChartLine size={12} />
         <Box>
@@ -25,3 +31,5 @@ export default ({ account }: Props) =>
       </Box>
     </Button>
   )
+
+export default connect()(AccountHeaderActions)
