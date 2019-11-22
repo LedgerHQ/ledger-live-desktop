@@ -7,6 +7,14 @@ import { log } from '@ledgerhq/logs'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import { logger } from '../logger'
 
+export function clearBridgeCache() {
+  Object.keys(global.localStorage)
+    .filter(k => k.startsWith('bridgeproxypreload'))
+    .forEach(k => {
+      global.localStorage.removeItem(k)
+    })
+}
+
 function currencyCacheId(currency) {
   return `bridgeproxypreload_${currency.id}`
 }
