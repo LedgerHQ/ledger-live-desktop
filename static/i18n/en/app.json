@@ -788,7 +788,7 @@
     "quitAndInstall": "Install now",
     "error": "Error during update. Please download again",
     "reDownload": "Download again",
-    "nightlyWarning":  "This version cannot auto-update, please install latest version manually",
+    "nightlyWarning":  "This version cannot auto-update, please install the latest version manually",
     "downloadNow": "Download now"
   },
   "crash": {
