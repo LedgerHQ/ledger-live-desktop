@@ -10,6 +10,7 @@ import {
   getAccountUnit,
 } from '@ledgerhq/live-common/lib/account'
 import { useBaker, useDelegation } from '@ledgerhq/live-common/lib/families/tezos/bakers'
+import type { Baker } from '@ledgerhq/live-common/lib/families/tezos/bakers'
 import { Trans } from 'react-i18next'
 
 import TrackPage from 'analytics/TrackPage'
@@ -52,12 +53,13 @@ const StepSummary = ({ account, transaction, transitionTo }: StepProps) => {
   const currency = getAccountCurrency(account)
   const unit = getAccountUnit(account)
 
-  const bakerName = baker ? baker.name : shortAddressPreview(transaction.recipient)
+  // const bakerName = baker ? baker.name : shortAddressPreview(transaction.recipient)
+  const getBakerName = (baker: ?Baker, fallback: string) =>
+    baker ? baker.name : shortAddressPreview(fallback)
 
   return (
     <Box flow={4} mx={40}>
       <TrackPage category="Delegation Flow" name="Step Summary" />
-      {delegation ? "there is already a delegation (so it's a change delegation)" : null}
 
       <DelegationContainer
         undelegation={transaction.mode === 'undelegate'}
@@ -110,7 +112,7 @@ const StepSummary = ({ account, transaction, transitionTo }: StepProps) => {
                 <BakerImage size={32} baker={baker} />
                 <Ellipsis>
                   <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
-                    {bakerName}
+                    {getBakerName(baker, transaction.recipient)}
                   </Text>
                 </Ellipsis>
                 {baker ? (
@@ -129,7 +131,29 @@ const StepSummary = ({ account, transaction, transitionTo }: StepProps) => {
               </Text>
             </Box>
           ) : delegation ? (
-            'undelegator image bla bla'
+            <Box>
+              <Box horizontal justifyContent="space-between">
+                <Text ff="Inter|Medium" color="palette.text.shade60" fontSize={3}>
+                  <Trans i18nKey="delegation.flow.steps.summary.validator" />
+                </Text>
+              </Box>
+              <Container my={1}>
+                <BakerImage size={32} baker={delegation.baker} />
+                <Ellipsis>
+                  <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
+                    {getBakerName(delegation.baker, delegation.address)}
+                  </Text>
+                </Ellipsis>
+                {delegation.baker ? (
+                  <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
+                    <Trans
+                      i18nKey="delegation.flow.steps.summary.yield"
+                      values={{ amount: delegation.baker.nominalYield }}
+                    />
+                  </Text>
+                ) : null}
+              </Container>
+            </Box>
           ) : null
         }
       />

@@ -68,9 +68,6 @@ export const StepAccountFooter = ({
 
   return (
     <>
-      <Button onClick={closeModal} mr={1}>
-        {t('common.cancel')}
-      </Button>
       <Button isLoading={bridgePending} primary disabled={!canNext} onClick={onNext}>
         {t('common.continue')}
       </Button>

@@ -111,12 +111,14 @@ export default ({
           ))}
         </ScrollList>
       </Box>
-      <Box>
-        <Button>
-          <Box horizontal flow={1} alignItems="center">
+      <Box align="center">
+        <Button onClick={() => transitionTo('custom')}>
+          <Box horizontal flow={1} alignItems="center" color="palette.primary.main">
             <UserPlusIcon size={24} />
-            <Box>
-              <Trans i18nKey="delegation.flow.steps.validator.customValidator" />
+            <Box ml={10}>
+              <Text ff="Inter|SemiBold" fontSize={4}>
+                <Trans i18nKey="delegation.flow.steps.validator.customValidator" />
+              </Text>
             </Box>
           </Box>
         </Button>

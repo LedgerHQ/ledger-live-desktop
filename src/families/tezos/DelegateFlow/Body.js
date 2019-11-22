@@ -39,6 +39,7 @@ const createTitles = t => ({
   starter: t('delegation.flow.steps.starter.title'),
   summary: t('delegation.flow.steps.summary.title'),
   validator: t('delegation.flow.steps.validator.title'),
+  undelegate: t('delegation.flow.steps.undelegate.title'),
 })
 
 type OwnProps = {|
@@ -103,7 +104,7 @@ const createSteps = params => [
   },
   {
     id: 'device',
-    label: <Trans i18nKey="delegation.flow.steps.device.title" />,
+    excludeFromBreadcrumb: true,
     component: StepConnectDevice,
     footer: StepConnectDeviceFooter,
     onBack: ({ transitionTo }) => transitionTo('summary'),
@@ -126,8 +127,7 @@ const createSteps = params => [
   },
   {
     id: 'confirmation',
-    label: <Trans i18nKey="delegation.flow.steps.confirmation.title" />,
-    excludeFromBreadcrumb: true,
+    label: <Trans i18nKey="delegation.flow.steps.confirmation.label" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
     onBack: ({ transitionTo, onRetry }) => {
@@ -276,7 +276,10 @@ const Body = ({
 
   const titles = useMemo(() => createTitles(t), [t])
 
-  const title = titles[stepId] || titles.account
+  const title =
+    transaction && transaction.family === 'tezos' && transaction.mode === 'undelegate'
+      ? titles.undelegate
+      : titles[stepId] || titles.account
 
   const errorSteps = []
 
