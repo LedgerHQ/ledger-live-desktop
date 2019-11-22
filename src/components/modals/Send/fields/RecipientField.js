@@ -15,6 +15,7 @@ type Props = {
   status: TransactionStatus,
   onChangeTransaction: Transaction => void,
   t: T,
+  label?: React$Node,
 }
 
 const RecipientField = ({
@@ -24,6 +25,7 @@ const RecipientField = ({
   onChangeTransaction,
   autoFocus,
   status,
+  label,
 }: Props) => {
   const bridge = getAccountBridge(account, null)
 
@@ -45,7 +47,7 @@ const RecipientField = ({
   return (
     <Box flow={1}>
       <Label>
-        <span>{t('send.steps.details.recipientAddress')}</span>
+        <span>{label || t('send.steps.details.recipientAddress')}</span>
       </Label>
       <RecipientAddress
         placeholder="Enter recipient address"

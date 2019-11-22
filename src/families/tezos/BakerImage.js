@@ -30,7 +30,6 @@ const BakerImage = ({ size = 24, baker }: Props) => (
   <Circle size={size}>
     <Img
       src={baker ? baker.logoURL : null} // TODO: Fallback for custom validator
-      alt={baker ? baker.name : 'Custom validator'}
       size={size}
     />
   </Circle>

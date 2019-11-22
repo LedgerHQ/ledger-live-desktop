@@ -32,6 +32,7 @@ import StepConnectDevice, { StepConnectDeviceFooter } from './steps/StepConnectD
 import StepVerification from './steps/StepVerification'
 import StepSummary, { StepSummaryFooter } from './steps/StepSummary'
 import StepValidator from './steps/StepValidator'
+import StepCustom, { StepCustomFooter } from './steps/StepCustom'
 import StepConfirmation, { StepConfirmationFooter } from './steps/StepConfirmation'
 
 const createTitles = t => ({
@@ -92,14 +93,13 @@ const createSteps = params => [
     id: 'validator',
     excludeFromBreadcrumb: true,
     component: StepValidator,
-    shouldPreventClose: true,
     onBack: ({ transitionTo }) => transitionTo('summary'),
   },
   {
     id: 'custom',
     excludeFromBreadcrumb: true,
-    component: StepValidator,
-    shouldPreventClose: true,
+    component: StepCustom,
+    footer: StepCustomFooter,
     onBack: ({ transitionTo }) => transitionTo('summary'),
   },
   {
