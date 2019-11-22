@@ -418,7 +418,7 @@
     },
     "firmware": {
       "installed": "ファームウェアバージョン {{version}}",
-      "updateLater": "Update later",
+      "updateLater": "Cancel",
       "seedReady": "I have my recovery phrase",
       "dontHaveSeed": "Don't have your recovery phrase?",
       "followTheGuide": "Follow our step by step update guide",
@@ -431,8 +431,11 @@
       "disclaimerAppDelete": "お手持ちのLedgerデバイスから全てのアプリをアンインストールしてください。この作業は、お客様の暗号資産に影響しません。",
       "disclaimerAppReinstall": "念のため、リカバリシートにアクセスできることを確認してください。",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded",
-      "appsAutoUninstallTitle": "Apps will be uninstalled",
-      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
+      "appsAutoUninstallTitle": "All applications will be uninstalled from your device",
+      "appsAutoUninstallBullet1": "<0><0>Don't worry</0></0>, this does not affect your crypto assets",
+      "appsAutoUninstallBullet2": "You will be able to reinstall them all after the update",
+      "appsUninstallTitle": "Apps will be uninstalled",
+      "appsUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -787,7 +790,9 @@
     "checkSuccess": "アップデートをインストールする準備ができました",
     "quitAndInstall": "今すぐインストールする",
     "error": "更新中のエラー。再度ダウンロードしてください",
-    "reDownload": "再度ダウンロードする"
+    "reDownload": "再度ダウンロードする",
+    "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
+    "downloadNow": "Download now"
   },
   "crash": {
     "oops": "エラーが発生しました",
