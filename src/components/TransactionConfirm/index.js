@@ -76,7 +76,7 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
         {Pre ? (
           <Pre
             account={account}
-            mainAccount={mainAccount}
+            parentAccount={parentAccount}
             transaction={transaction}
             status={status}
           />
@@ -109,7 +109,7 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
         {Post ? (
           <Post
             account={account}
-            mainAccount={mainAccount}
+            parentAccount={parentAccount}
             transaction={transaction}
             status={status}
           />
