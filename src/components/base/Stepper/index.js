@@ -80,7 +80,10 @@ class Stepper extends PureComponent<Props, State> {
     const step = steps[stepIndex]
 
     const visibleSteps = steps.filter(s => !s.excludeFromBreadcrumb)
-    const indexVisible = steps.slice(0, stepIndex).filter(s => !s.excludeFromBreadcrumb).length
+    const indexVisible = Math.min(
+      steps.slice(0, stepIndex).filter(s => !s.excludeFromBreadcrumb).length,
+      visibleSteps.length - 1,
+    )
 
     invariant(step, `Stepper: step ${stepId} doesn't exists`)
 
