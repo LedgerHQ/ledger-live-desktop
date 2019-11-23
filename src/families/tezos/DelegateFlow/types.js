@@ -33,4 +33,5 @@ export type StepProps = {
   onOperationBroadcasted: Operation => void,
   onRetry: void => void,
   signTransaction: ({ transitionTo: string => void }) => void,
+  isRandomChoice: boolean,
 }

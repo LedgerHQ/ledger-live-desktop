@@ -1,5 +1,6 @@
 // @flow
 
+import invariant from 'invariant'
 import React, { useEffect, useState, useCallback, useMemo } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -177,41 +178,38 @@ const Body = ({
   } = useBridgeTransaction(() => {
     const parentAccount = params && params.parentAccount
     const account = (params && params.account) || accounts[0]
-    const mode = (params && params.mode) || 'delegate'
-    const transaction = account && {
-      ...getAccountBridge(account, parentAccount).createTransaction(
-        getMainAccount(account, parentAccount),
-      ),
-      mode,
-      recipient: mode === 'delegate' && firstBaker ? firstBaker.address : '',
-    }
     return {
       account,
       parentAccount,
-      transaction,
     }
   })
 
+  // make sure tx is in sync
+  useEffect(() => {
+    if (!transaction || !account) return
+    invariant(transaction.family === 'tezos', 'tezos tx')
+
+    // make sure the mode is in sync (an account changes can reset it)
+    const patch: Object = {
+      mode: (params && params.mode) || 'delegate',
+    }
+
+    // make sure that in delegate mode, a transaction recipient is set (random pick)
+    if (patch.mode === 'delegate' && !transaction.recipient && firstBaker) {
+      patch.recipient = firstBaker.address
+    }
+
+    // when changes, we set again
+    if (patch.mode !== transaction.mode || 'recipient' in patch) {
+      setTransaction(getAccountBridge(account, parentAccount).updateTransaction(transaction, patch))
+    }
+  }, [account, firstBaker, params, parentAccount, setTransaction, transaction])
+
+  // make sure step id is in sync
   useEffect(() => {
     const stepId = params && params.stepId
     if (stepId) onChangeStepId(stepId)
   }, [onChangeStepId, params])
-
-  useEffect(() => {
-    if (
-      transaction &&
-      account &&
-      firstBaker &&
-      transaction.mode === 'delegate' &&
-      !transaction.recipient
-    ) {
-      setTransaction(
-        getAccountBridge(account, parentAccount).updateTransaction(transaction, {
-          recipient: firstBaker.address,
-        }),
-      )
-    }
-  }, [account, firstBaker, parentAccount, setTransaction, transaction])
 
   const [isAppOpened, setAppOpened] = useState(false)
   const [optimisticOperation, setOptimisticOperation] = useState(null)
@@ -289,6 +287,8 @@ const Body = ({
     errorSteps.push(1)
   }
 
+  const isRandomChoice = !transaction || !firstBaker || transaction.recipient === firstBaker.address
+
   const error = transactionError || bridgeError
 
   const stepperProps = {
@@ -304,12 +304,14 @@ const Body = ({
     isAppOpened,
     hideBreadcrumb: stepId === 'starter' || stepId === 'validator',
     error,
+    bridgeError,
     status,
     bridgePending,
     signed,
     optimisticOperation,
     openModal,
     onClose,
+    isRandomChoice,
     closeModal: handleCloseModal,
     onChangeAccount: handleChangeAccount,
     onChangeAppOpened: setAppOpened,

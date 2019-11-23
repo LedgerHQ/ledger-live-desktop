@@ -3,15 +3,15 @@ import React, { useCallback } from 'react'
 import { Trans } from 'react-i18next'
 import styled from 'styled-components'
 
+import { openURL } from 'helpers/linking'
+import { urls } from 'config/urls'
+import CoinWallet from 'icons/CoinWallet'
+import Check from 'icons/CheckFull'
+import TrackPage from 'analytics/TrackPage'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import LinkWithExternalIcon from 'components/base/LinkWithExternalIcon'
-
-import CoinWallet from 'icons/CoinWallet'
-import Check from 'icons/CheckFull'
-
-import TrackPage from 'analytics/TrackPage'
 
 import type { StepProps } from '../types'
 
@@ -89,7 +89,7 @@ export default ({ transitionTo, t }: StepProps) => {
         <Box my={4}>
           <LinkWithExternalIcon
             label={t('delegation.flow.steps.starter.button.howItWorks')}
-            onClick={() => {}} // TODO: open url
+            onClick={() => openURL(urls.delegation)}
           />
         </Box>
         <Button onClick={onClick} primary>

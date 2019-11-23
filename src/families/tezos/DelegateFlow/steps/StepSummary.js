@@ -20,6 +20,7 @@ import FormattedVal from 'components/base/FormattedVal'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import Button from 'components/base/Button'
 import Ellipsis from 'components/base/Ellipsis'
+import TranslatedError from 'components/TranslatedError'
 
 import BakerImage from '../../BakerImage'
 import DelegationContainer from './../DelegationContainer'
@@ -43,7 +44,7 @@ const Container = styled(Box)`
   }
 `
 
-const StepSummary = ({ account, transaction, transitionTo }: StepProps) => {
+const StepSummary = ({ account, transaction, transitionTo, isRandomChoice }: StepProps) => {
   invariant(
     account && transaction && transaction.family === 'tezos',
     'step summary requires account and transaction settled',
@@ -125,10 +126,11 @@ const StepSummary = ({ account, transaction, transitionTo }: StepProps) => {
                 ) : null}
               </Container>
 
-              {/* TODO only if it was not changed yet. (use a state on Body to track it?) */}
-              <Text ff="Inter|Medium" color="palette.text.shade60" fontSize={2}>
-                <Trans i18nKey="delegation.flow.steps.summary.randomly" />
-              </Text>
+              {isRandomChoice ? (
+                <Text ff="Inter|Medium" color="palette.text.shade60" fontSize={2}>
+                  <Trans i18nKey="delegation.flow.steps.summary.randomly" />
+                </Text>
+              ) : null}
             </Box>
           ) : delegation ? (
             <Box>
@@ -166,18 +168,27 @@ export default StepSummary
 export const StepSummaryFooter = ({
   t,
   account,
+  bridgeError,
   status,
   bridgePending,
   transitionTo,
 }: StepProps) => {
   if (!account) return null
-  const { errors } = status
-  const canNext = !bridgePending && !Object.keys(errors).length
+  const error = bridgeError || Object.values(status.errors)[0]
+  const canNext = !bridgePending && !error
   return (
-    <>
-      <Button primary disabled={!canNext} onClick={() => transitionTo('device')}>
+    <Box horizontal alignItems="center" flow={2}>
+      <Text fontSize={13} color="alertRed">
+        <TranslatedError error={error} field="title" />
+      </Text>
+      <Button
+        primary
+        isLoading={bridgePending}
+        disabled={!canNext}
+        onClick={() => transitionTo('device')}
+      >
         {t('common.continue')}
       </Button>
-    </>
+    </Box>
   )
 }

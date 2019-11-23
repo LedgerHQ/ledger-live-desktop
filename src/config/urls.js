@@ -32,6 +32,7 @@ export const urls = {
   multipleDestinationAddresses: 'https://support.ledger.com/hc/en-us/articles/360033801034',
   updateDeviceFirmware: 'https://support.ledger.com/hc/en-us/articles/360002731113',
   lostPinOrSeed: 'https://support.ledger.com/hc/en-us/articles/360000609933',
+  delegation: 'https://www.ledger.com/staking-tezos',
 
   // Exchanges
   coinhouse: 'https://www.coinhouse.com/r/157530?utm_source=legderlive&utm_medium=referral',
