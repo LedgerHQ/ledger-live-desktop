@@ -66,12 +66,13 @@ function filepathRecursiveReplacer(obj: mixed, seen: Array<*>) {
 }
 
 export default {
-  url: (url: string): string =>
+  url: (url: ?string): ?string =>
+    url &&
     url
       .replace(/\/addresses\/[^/]+/g, '/addresses/<HIDDEN>')
       .replace(/blockHash=[^&]+/g, 'blockHash=<HIDDEN>'),
 
-  appURI: (uri: string): string => uri.replace(/account\/[^/]+/g, 'account/<HIDDEN>'),
+  appURI: (uri: ?string): ?string => uri && uri.replace(/account\/[^/]+/g, 'account/<HIDDEN>'),
 
   filepath: filepathReplace,
 

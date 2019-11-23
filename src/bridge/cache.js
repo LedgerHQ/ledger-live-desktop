@@ -20,12 +20,14 @@ function currencyCacheId(currency) {
 }
 
 export function setCurrencyCache(currency: CryptoCurrency, data: mixed) {
-  const serialized = JSON.stringify(data)
-  global.localStorage.setItem(currencyCacheId(currency), serialized)
-  ipcRenderer.send('hydrateCurrencyData', {
-    currencyId: currency.id,
-    serialized,
-  })
+  if (data) {
+    const serialized = JSON.stringify(data)
+    global.localStorage.setItem(currencyCacheId(currency), serialized)
+    ipcRenderer.send('hydrateCurrencyData', {
+      currencyId: currency.id,
+      serialized,
+    })
+  }
 }
 
 export function getCurrencyCache(currency: CryptoCurrency): mixed {
