@@ -1,14 +1,12 @@
 // @flow
 import invariant from 'invariant'
 import React, { useCallback, useRef } from 'react'
-import { Trans } from 'react-i18next'
 import { getMainAccount } from '@ledgerhq/live-common/lib/account'
 import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import TrackPage from 'analytics/TrackPage'
 import RecipientField from 'components/modals/Send/fields/RecipientField'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
-import Text from 'components/base/Text'
 import type { StepProps } from '../types'
 
 export default ({

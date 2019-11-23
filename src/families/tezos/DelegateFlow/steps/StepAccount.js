@@ -58,7 +58,6 @@ export const StepAccountFooter = ({
   parentAccount,
   bridgePending,
   transitionTo,
-  closeModal,
 }: StepProps) => {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null
   const isTerminated = mainAccount && mainAccount.currency.terminated
