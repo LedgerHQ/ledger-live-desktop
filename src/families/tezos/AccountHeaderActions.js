@@ -21,7 +21,15 @@ const AccountHeaderActions = ({ account, parentAccount, dispatch }: Props) =>
     <Button
       small
       primary
-      onClick={() => dispatch(openModal('MODAL_DELEGATE', { parentAccount, account }))}
+      onClick={() =>
+        dispatch(
+          openModal('MODAL_DELEGATE', {
+            parentAccount,
+            account,
+            stepId: 'summary',
+          }),
+        )
+      }
     >
       <Box horizontal flow={1} alignItems="center">
         <IconChartLine size={12} />
