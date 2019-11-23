@@ -1,6 +1,9 @@
 // @flow
+
+import invariant from 'invariant'
 import React, { useCallback } from 'react'
 import { useBaker } from '@ledgerhq/live-common/lib/families/tezos/bakers'
+import type { AccountLike, Account, Transaction } from '@ledgerhq/live-common/lib/types'
 import { shortAddressPreview, getMainAccount } from '@ledgerhq/live-common/lib/account'
 import { getDefaultExplorerView, getAddressExplorer } from '@ledgerhq/live-common/lib/explorers'
 import { openURL } from 'helpers/linking'
@@ -13,7 +16,15 @@ const addressStyle = {
   maxWidth: '50%',
 }
 
-const Pre = ({ account, parentAccount, transaction }: *) => {
+const Pre = ({
+  account,
+  parentAccount,
+  transaction,
+}: {
+  account: AccountLike,
+  parentAccount: ?Account,
+  transaction: Transaction,
+}) => {
   const mainAccount = getMainAccount(account, parentAccount)
   const baker = useBaker(transaction.recipient)
   const explorerView = getDefaultExplorerView(mainAccount.currency)
@@ -21,6 +32,8 @@ const Pre = ({ account, parentAccount, transaction }: *) => {
   const openBaker = useCallback(() => {
     if (bakerURL) openURL(bakerURL)
   }, [bakerURL])
+
+  invariant(transaction.family === 'tezos', 'tezos transaction')
 
   const isDelegateOperation = transaction.mode === 'delegate'
 
@@ -34,7 +47,7 @@ const Pre = ({ account, parentAccount, transaction }: *) => {
           color="palette.text.shade80"
           fontSize={3}
         >
-          {account.freshAddress}
+          {account.type === 'ChildAccount' ? account.address : mainAccount.freshAddress}{' '}
         </Text>
       </TransactionConfirmField>
       {isDelegateOperation ? (
@@ -67,15 +80,17 @@ const Pre = ({ account, parentAccount, transaction }: *) => {
   )
 }
 
-const Post = ({ transaction }: *) => (
-  <>
+const Post = ({ transaction }: { transaction: Transaction }) => {
+  invariant(transaction.family === 'tezos', 'tezos transaction')
+
+  return (
     <TransactionConfirmField label="Storage">
       <Text ff="Inter|Medium" color="palette.text.shade80" fontSize={3}>
-        {transaction.storageLimit.toString()}
+        {(transaction.storageLimit || '').toString()}
       </Text>
     </TransactionConfirmField>
-  </>
-)
+  )
+}
 
 export default {
   pre: Pre,
