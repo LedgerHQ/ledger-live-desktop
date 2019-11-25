@@ -1873,9 +1873,9 @@
     create-hash "^1.1.3"
 
 "@ledgerhq/hw-app-eth@4":
-  version "4.74.2"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-4.74.2.tgz#0b2d1c4dcd03e6ee9f9a711c78012a22d4156c9d"
-  integrity sha512-sZDutrYiVr6zZ+BU6gPtnBXnSehcEvO2Xm6LtYA/pDgOSZQA5ZodugVXQqO4m7gyFeMA9NOnS3DHHahVP4oGKA==
+  version "4.76.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-4.76.0.tgz#360ecf7ec8cc7c5bac31ccdc3521d62e4a8e7747"
+  integrity sha512-ks/kWEmqBtVW4plMBGY4m5nicuy4eI6YzwGH9/b+cX6xb72ZcZj/2v7hUZxkIXdLfYUyoZifZe9ko6fihaAbDw==
   dependencies:
     "@ledgerhq/errors" "^4.74.2"
     "@ledgerhq/hw-transport" "^4.74.2"
@@ -1955,18 +1955,18 @@
     "@ledgerhq/errors" "^4.74.2"
     events "^3.0.0"
 
-"@ledgerhq/ledger-core@^3.4.0":
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-3.11.0.tgz#b2d94aafd1c3130359123637b2daffb88ea0df0e"
-  integrity sha512-y8jn+jC6WclAz7q8QYJ23X+DffF7e9iqGVrxhlYfszeLFb3Vwp3CyjentWRAGmoBsrDt6S6v+ta4wNhqbXACSg==
+"@ledgerhq/ledger-core@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-4.1.0.tgz#dea925d96f57abf4e3e411808fbda9d27a8c953a"
+  integrity sha512-bv+F7BqRhLmymz8ih55W6qQPvZ0qt7bVcwSnV69TqlVeN77qO3JutetZ3Tnv/hDFw9eadPM8t9JN9vbmhCKMOQ==
   dependencies:
     bindings "1.3.0"
     nan "^2.6.2"
 
 "@ledgerhq/live-common@^9.0.0-alpha.15":
-  version "9.0.0-alpha.17"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-9.0.0-alpha.17.tgz#572569faf07773c89b5a20bc5adb18019c805176"
-  integrity sha512-y2T2LdLzgaLHJ7gXUq2TMC64izvSVhUFKY5Kqpr0jjW3K3QCyOpnA5/Tw5VziiGueV6hwQAWas1/+zU94+OvzQ==
+  version "9.0.0-alpha.18"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-9.0.0-alpha.18.tgz#bcf84adedb5ba83eea7ba80b1a77f4ed8e5b07fe"
+  integrity sha512-DrHg39FAdg4nnOjil97IWlXImE6w+g1pM7HUAUZcFFfRwqv9NApHxTqQiV1chIvmXPD5OZa2Hwc0S1agqUyeDQ==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "4"
