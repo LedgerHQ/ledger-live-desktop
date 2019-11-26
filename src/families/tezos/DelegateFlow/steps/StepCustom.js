@@ -1,6 +1,6 @@
 // @flow
 import invariant from 'invariant'
-import React, { useCallback, useRef } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { getMainAccount } from '@ledgerhq/live-common/lib/account'
 import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import TrackPage from 'analytics/TrackPage'
@@ -49,13 +49,23 @@ export const StepCustomFooter = ({
   invariant(account && transaction, 'account and transaction')
   const { errors } = status
   const canNext = !bridgePending && !Object.keys(errors).length
+  console.log(errors)
 
-  const initialRecipient = useRef(transaction.recipient)
+  const initialTransaction = useRef(transaction)
+  useEffect(() => {
+    // empty the field
+    onChangeTransaction(
+      getAccountBridge(account, parentAccount).updateTransaction(initialTransaction.current, {
+        recipient: '',
+      }),
+    )
+  }, [onChangeTransaction, account, parentAccount])
+
   const onBack = useCallback(() => {
     // we need to revert
     onChangeTransaction(
       getAccountBridge(account, parentAccount).updateTransaction(transaction, {
-        recipient: initialRecipient.current,
+        recipient: initialTransaction.current.recipient,
       }),
     )
     transitionTo('summary')

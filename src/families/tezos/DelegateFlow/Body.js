@@ -103,7 +103,7 @@ const createSteps = params => [
     excludeFromBreadcrumb: true,
     component: StepCustom,
     footer: StepCustomFooter,
-    onBack: ({ transitionTo }) => transitionTo('summary'),
+    // NB do not put a back here. we need to manage back ourself to reset the transaction back in initial state
   },
   {
     id: 'device',
@@ -193,7 +193,7 @@ const Body = ({
     }
 
     // make sure that in delegate mode, a transaction recipient is set (random pick)
-    if (patch.mode === 'delegate' && !transaction.recipient && randomBaker) {
+    if (patch.mode === 'delegate' && !transaction.recipient && stepId !== 'custom' && randomBaker) {
       patch.recipient = randomBaker.address
     }
 
@@ -201,7 +201,7 @@ const Body = ({
     if (patch.mode !== transaction.mode || 'recipient' in patch) {
       setTransaction(getAccountBridge(account, parentAccount).updateTransaction(transaction, patch))
     }
-  }, [account, randomBaker, params, parentAccount, setTransaction, transaction])
+  }, [account, randomBaker, stepId, params, parentAccount, setTransaction, transaction])
 
   // make sure step id is in sync
   useEffect(() => {
