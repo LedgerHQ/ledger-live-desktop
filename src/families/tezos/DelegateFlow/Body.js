@@ -1,11 +1,12 @@
 // @flow
 
-import invariant from 'invariant'
 import React, { useEffect, useState, useCallback, useMemo } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { Trans, translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
+import invariant from 'invariant'
+import sample from 'lodash/sample'
 import type { Account, AccountLike, Operation } from '@ledgerhq/live-common/lib/types'
 import { useBakers } from '@ledgerhq/live-common/lib/families/tezos/bakers'
 import whitelist from '@ledgerhq/live-common/lib/families/tezos/bakers.whitelist-default'
@@ -160,7 +161,7 @@ const Body = ({
 }: Props) => {
   const openedFromAccount = !!params.account
   const bakers = useBakers(whitelist)
-  const firstBaker = bakers[0]
+  const randomBaker = useMemo(() => sample(bakers), [bakers])
 
   const [steps] = useState(() => createSteps(params))
   const {
@@ -192,15 +193,15 @@ const Body = ({
     }
 
     // make sure that in delegate mode, a transaction recipient is set (random pick)
-    if (patch.mode === 'delegate' && !transaction.recipient && firstBaker) {
-      patch.recipient = firstBaker.address
+    if (patch.mode === 'delegate' && !transaction.recipient && randomBaker) {
+      patch.recipient = randomBaker.address
     }
 
     // when changes, we set again
     if (patch.mode !== transaction.mode || 'recipient' in patch) {
       setTransaction(getAccountBridge(account, parentAccount).updateTransaction(transaction, patch))
     }
-  }, [account, firstBaker, params, parentAccount, setTransaction, transaction])
+  }, [account, randomBaker, params, parentAccount, setTransaction, transaction])
 
   // make sure step id is in sync
   useEffect(() => {
@@ -284,7 +285,8 @@ const Body = ({
     errorSteps.push(1)
   }
 
-  const isRandomChoice = !transaction || !firstBaker || transaction.recipient === firstBaker.address
+  const isRandomChoice =
+    !transaction || !randomBaker || transaction.recipient === randomBaker.address
 
   const error = transactionError || bridgeError
 
