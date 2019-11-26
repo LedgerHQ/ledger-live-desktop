@@ -35,9 +35,11 @@ const Progress = ({ onClick, progress }: { onClick: () => undefined, progress: *
       <Text ff="Inter|SemiBold" fontSize={3} color="palette.primary.main" mb={5}>
         <Trans
           i18nKey={
-            (progress && progress.appOp && progress.appOp.type) === 'install'
-              ? 'managerv2.applist.item.installing'
-              : 'managerv2.applist.item.uninstalling'
+            progress && progress.appOp
+              ? progress.appOp.type === 'install'
+                ? 'managerv2.applist.item.installing'
+                : 'managerv2.applist.item.uninstalling'
+              : 'managerv2.applist.item.scheduled'
           }
         />
       </Text>

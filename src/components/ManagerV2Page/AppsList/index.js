@@ -82,9 +82,7 @@ const AppsList = ({ device, deviceInfo, listAppsRes, exec }: *) => {
   const onDeviceTab = activeTab === 1
   const { currentProgress, currentError } = state
   const plan = getActionPlan(state)
-  const onUpdateAll = useCallback(() => {
-    // TODO
-  }, [])
+  const onUpdateAll = useCallback(() => dispatch({ type: 'updateAll' }), [dispatch])
 
   const searchFilter = ({ name, currency }) => {
     if (!search) return true
@@ -135,12 +133,8 @@ const AppsList = ({ device, deviceInfo, listAppsRes, exec }: *) => {
     />
   )
 
-  // @gre If we can skip the genuine check screen we could show this page faster and
-  // have feedback of the loading, requesting auth on device, etc, steps :shrug:
   return (
     <Box>
-      <h1>{listAppsRes ? '' : 'LOADING'}</h1>
-
       <Box mb={50}>
         <DeviceStorage
           state={state}
@@ -187,6 +181,7 @@ const AppsList = ({ device, deviceInfo, listAppsRes, exec }: *) => {
       <Card>
         <FilterHeader>
           <Input
+            containerProps={{ noBoxShadow: true }}
             renderLeft={<IconSearch size={16} />}
             onChange={setSearch}
             placeholder="Search app or version number"
