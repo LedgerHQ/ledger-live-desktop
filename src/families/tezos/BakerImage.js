@@ -2,7 +2,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import type { Baker } from '@ledgerhq/live-common/lib/families/tezos/bakers'
+
 import Box from 'components/base/Box'
+import CustomValidator from 'icons/CustomValidator'
 
 const Circle = styled(Box).attrs(props => ({
   style: {
@@ -28,10 +30,7 @@ type Props = {
 
 const BakerImage = ({ size = 24, baker }: Props) => (
   <Circle size={size}>
-    <Img
-      src={baker ? baker.logoURL : null} // TODO: Fallback for custom validator
-      size={size}
-    />
+    {baker ? <Img src={baker.logoURL} size={size} /> : <CustomValidator size={size} />}
   </Circle>
 )
 

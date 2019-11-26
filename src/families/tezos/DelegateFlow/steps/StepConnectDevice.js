@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Fragment } from 'react'
+import React from 'react'
 import { getMainAccount } from '@ledgerhq/live-common/lib/account'
 import TrackPage from 'analytics/TrackPage'
 import Button from 'components/base/Button'
@@ -16,7 +16,7 @@ export default function StepConnectDevice({
 }: StepProps) {
   const token = account && account.type === 'TokenAccount' && account.token
   return (
-    <Fragment>
+    <>
       <TrackPage category="Send Flow" name="Step ConnectDevice" />
       <EnsureDeviceApp
         account={account ? getMainAccount(account, parentAccount) : null}
@@ -25,7 +25,7 @@ export default function StepConnectDevice({
         onSuccess={() => onChangeAppOpened(true)}
       />
       {!token ? null : <TokenTips token={token} />}
-    </Fragment>
+    </>
   )
 }
 

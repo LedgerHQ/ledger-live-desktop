@@ -4,7 +4,6 @@ import invariant from 'invariant'
 import React from 'react'
 import styled from 'styled-components'
 import {
-  shortAddressPreview,
   getAccountCurrency,
   getAccountName,
   getAccountUnit,
@@ -44,6 +43,10 @@ const Container = styled(Box)`
   }
 `
 
+const Placeholder = styled(Box)`
+  height: 14px;
+`
+
 const StepSummary = ({ account, transaction, transitionTo, isRandomChoice }: StepProps) => {
   invariant(
     account && transaction && transaction.family === 'tezos',
@@ -55,8 +58,7 @@ const StepSummary = ({ account, transaction, transitionTo, isRandomChoice }: Ste
   const unit = getAccountUnit(account)
 
   // const bakerName = baker ? baker.name : shortAddressPreview(transaction.recipient)
-  const getBakerName = (baker: ?Baker, fallback: string) =>
-    baker ? baker.name : shortAddressPreview(fallback)
+  const getBakerName = (baker: ?Baker, fallback: string) => (baker ? baker.name : fallback)
 
   return (
     <Box flow={4} mx={40}>
@@ -123,7 +125,9 @@ const StepSummary = ({ account, transaction, transitionTo, isRandomChoice }: Ste
                       values={{ amount: baker.nominalYield }}
                     />
                   </Text>
-                ) : null}
+                ) : (
+                  <Placeholder />
+                )}
               </Container>
 
               {isRandomChoice ? (

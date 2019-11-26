@@ -88,7 +88,7 @@ export default ({ transitionTo, t }: StepProps) => {
         </Box>
         <Box my={4}>
           <LinkWithExternalIcon
-            label={t('delegation.flow.steps.starter.button.howItWorks')}
+            label={t('delegation.howItWorks')}
             onClick={() => openURL(urls.delegation)}
           />
         </Box>
