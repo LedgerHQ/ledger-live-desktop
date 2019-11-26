@@ -4,7 +4,6 @@ import invariant from 'invariant'
 import React from 'react'
 import styled from 'styled-components'
 import {
-  // shortAddressPreview,
   getAccountCurrency,
   getAccountName,
   getAccountUnit,

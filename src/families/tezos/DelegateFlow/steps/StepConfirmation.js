@@ -97,10 +97,7 @@ function StepConfirmation({
           </Box>
         </Disclaimer>
       ) : null}
-      <TrackPage
-        category={undelegating ? 'Undelegation Flow' : 'Delegation Flow'}
-        name="Step Confirmed"
-      />
+      <TrackPage category="Delegation Flow" name="Step Confirmed" />
       <span style={{ color: iconColor }}>
         <Icon size={43} />
       </span>
