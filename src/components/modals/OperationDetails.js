@@ -347,7 +347,6 @@ const OperationDetails = connect(
                   return (
                     <NoMarginWrapper key={`${op.id}`}>
                       <OperationComponent
-                        compact
                         text={getAccountCurrency(opAccount).name}
                         operation={op}
                         account={opAccount}
@@ -376,7 +375,6 @@ const OperationDetails = connect(
                 {internalOperations.map((op, i) => (
                   <NoMarginWrapper key={`${op.id}`}>
                     <OperationComponent
-                      compact
                       text={account.currency.name}
                       operation={op}
                       account={account}
