@@ -1,5 +1,5 @@
 // @flow
-
+import invariant from 'invariant'
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import { Trans } from 'react-i18next'
@@ -66,13 +66,21 @@ function StepConfirmation({
   error,
   signed,
   theme,
+  transaction,
 }: StepProps & { theme: * }) {
+  invariant(
+    transaction && transaction.family === 'tezos',
+    'transaction is required and must be of tezos family',
+  )
+
   const Icon = optimisticOperation ? IconCheckCircle : error ? IconExclamationCircleThin : Spinner
   const iconColor = optimisticOperation
     ? theme.colors.positiveGreen
     : error
     ? theme.colors.alertRed
     : theme.colors.palette.text.shade60
+
+  const undelegating = transaction.mode === 'undelegate'
 
   const broadcastError = error && signed
 
@@ -85,11 +93,14 @@ function StepConfirmation({
             <IconTriangleWarning height={16} width={16} />
           </Box>
           <Box style={{ display: 'block' }} ff="Inter|SemiBold" fontSize={3} horizontal shrink>
-            <Trans i18nKey="send.steps.confirmation.broadcastError" />
+            <Trans i18nKey="delegation.flow.steps.confirmation.broadcastError" />
           </Box>
         </Disclaimer>
       ) : null}
-      <TrackPage category="Send Flow" name="Step Confirmed" />
+      <TrackPage
+        category={undelegating ? 'Undelegation Flow' : 'Delegation Flow'}
+        name="Step Confirmed"
+      />
       <span style={{ color: iconColor }}>
         <Icon size={43} />
       </span>
@@ -97,14 +108,20 @@ function StepConfirmation({
         {error ? (
           <TranslatedError error={error} />
         ) : optimisticOperation ? (
-          <Trans i18nKey="send.steps.confirmation.success.title" />
+          // TODO: Contextualize message for undelegation
+          <Trans
+            i18nKey={`delegation.flow.steps.confirmation.success.${
+              undelegating ? 'titleUndelegated' : 'title'
+            }`}
+          />
         ) : (
-          <Trans i18nKey="send.steps.confirmation.pending.title" />
+          <Trans i18nKey="delegation.flow.steps.confirmation.pending.title" />
         )}
       </Title>
       <Text style={{ userSelect: 'text' }} color="palette.text.shade80">
         {optimisticOperation ? (
-          multiline(t('send.steps.confirmation.success.text'))
+          // TODO: Contextualize message for undelegation
+          multiline(t('delegation.flow.steps.confirmation.success.text'))
         ) : error ? (
           <TranslatedError error={error} field="description" />
         ) : null}

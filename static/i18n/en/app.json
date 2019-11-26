@@ -638,11 +638,20 @@
           "providedBy": "Yield rates provided by <1><0>MyTezosBaker</0></1>"
         },
         "undelegate": {
-          "title": "Undelegate"
+          "title": "Undelegate account"
         },
         "confirmation": {
-          "title": "Delegation sent",
-          "label": "confirmation"
+          "title": "Confirmation",
+          "label": "confirmation",
+          "success": {
+            "title": "Delegation sent",
+            "titleUndelegated": "Delegation withdrawn",
+            "text":"Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator."
+          },
+          "pending": {
+            "title": "Broadcasting transaction..."
+          },
+          "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
         }
       }
     },
