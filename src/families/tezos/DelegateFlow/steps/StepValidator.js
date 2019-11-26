@@ -122,6 +122,14 @@ export default ({
             </Box>
           </Box>
         </Button>
+        <Box mt={5}>
+          <Text ff="Inter|Medium" fontSize={2} color="palette.text.shade40">
+            <Trans i18nKey="delegation.flow.steps.validator.providedBy">
+              {'Yield rates provided by'}
+              <Text style={{ textDecoration: 'underline' }}>{'MyTezosBaker'}</Text>
+            </Trans>
+          </Text>
+        </Box>
       </Box>
     </Box>
   )

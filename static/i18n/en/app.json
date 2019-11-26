@@ -599,10 +599,13 @@
     "durationJustStarted": "Just started",
     "durationDays": "{{count}} day",
     "durationDays_plural": "{{count}} days",
+    "howItWorks": "How delegation works",
+    "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
+    "earnRewards": "Earn rewards",
     "flow": {
       "steps": {
         "starter": {
-          "title": "Earn stacking rewards",
+          "title": "Earn staking rewards",
           "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets",
           "bullet": {
             "delegate":"Delegated accounts stay yours.",
@@ -610,7 +613,6 @@
             "ledger": "Delegate securely with your Ledger device."
           },
           "button": {
-            "howItWorks": "How delegation works",
             "cta": "Delegate to earn rewards"
           }
         },
@@ -632,12 +634,14 @@
         "validator": {
           "title": "Select validator",
           "description": "You can select a validator by comparing estimated reward rates",
-          "customValidator": "Custom validator"
+          "customValidator": "Custom validator",
+          "providedBy": "Yield rates provided by <1><0>MyTezosBaker</0></1>"
         },
         "undelegate": {
           "title": "Undelegate"
         },
         "confirmation": {
+          "title": "Delegation sent",
           "label": "confirmation"
         }
       }

@@ -42,6 +42,7 @@ const createTitles = t => ({
   summary: t('delegation.flow.steps.summary.title'),
   validator: t('delegation.flow.steps.validator.title'),
   undelegate: t('delegation.flow.steps.undelegate.title'),
+  confirmation: t('delegation.flow.steps.confirmation.title'),
 })
 
 type OwnProps = {|
@@ -131,10 +132,6 @@ const createSteps = params => [
     label: <Trans i18nKey="delegation.flow.steps.confirmation.label" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
-    onBack: ({ transitionTo, onRetry }) => {
-      onRetry()
-      transitionTo('recipient')
-    },
   },
 ]
 

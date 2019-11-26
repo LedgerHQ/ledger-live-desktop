@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import { Trans } from 'react-i18next'
 
@@ -130,7 +130,7 @@ export function StepConfirmationFooter({
       : optimisticOperation
     : null
   return (
-    <Fragment>
+    <>
       {concernedOperation ? (
         <Button
           ml={2}
@@ -159,7 +159,7 @@ export function StepConfirmationFooter({
           }}
         />
       ) : null}
-    </Fragment>
+    </>
   )
 }
 
