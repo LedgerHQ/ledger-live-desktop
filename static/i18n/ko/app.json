@@ -73,7 +73,8 @@
       "OUT": "전송됨",
       "CREATE": "Created",
       "REVEAL": "Revealed",
-      "DELEGATE": "Delegated"
+      "DELEGATE": "Delegated",
+      "UNDELEGATE": "Undelegated"
     }
   },
   "time": {
