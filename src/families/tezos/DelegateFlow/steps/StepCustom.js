@@ -49,7 +49,6 @@ export const StepCustomFooter = ({
   invariant(account && transaction, 'account and transaction')
   const { errors } = status
   const canNext = !bridgePending && !Object.keys(errors).length
-  console.log(errors)
 
   const initialTransaction = useRef(transaction)
   useEffect(() => {
