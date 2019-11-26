@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent, Fragment } from 'react'
-import { timeout, filter, map } from 'rxjs/operators'
+import { timeout } from 'rxjs/operators'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate, Trans } from 'react-i18next'
@@ -12,17 +12,13 @@ import type { T, Device } from 'types/common'
 import manager from '@ledgerhq/live-common/lib/manager'
 import type { DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
 
-import { GENUINE_TIMEOUT, DEVICE_INFOS_TIMEOUT } from 'config/constants'
+import { DEVICE_INFOS_TIMEOUT } from 'config/constants'
 
 import { getCurrentDevice } from 'reducers/devices'
-import {
-  DeviceNotGenuineError,
-  DeviceGenuineSocketEarlyClose,
-  UnexpectedBootloader,
-} from '@ledgerhq/errors'
+import { DeviceNotGenuineError, UnexpectedBootloader } from '@ledgerhq/errors'
 
 import getDeviceInfo from 'commands/getDeviceInfo'
-import getIsGenuine from 'commands/getIsGenuine'
+import listApps from 'commands/listApps'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -60,7 +56,7 @@ const mapStateToProps = state => ({
 
 const Bold = props => <Text ff="Inter|SemiBold" {...props} />
 
-class GenuineCheck extends PureComponent<Props, State> {
+class Connect extends PureComponent<Props, State> {
   state = {
     isBootloader: false,
     autoRepair: false,
@@ -89,13 +85,7 @@ class GenuineCheck extends PureComponent<Props, State> {
       return deviceInfo
     })
 
-  checkGenuineInteractionHandler = async ({
-    device,
-    deviceInfo,
-  }: {
-    device: Device,
-    deviceInfo: DeviceInfo,
-  }) => {
+  listAppsHandler = async ({ device, deviceInfo }: { device: Device, deviceInfo: DeviceInfo }) => {
     if (deviceInfo.isBootloader) {
       logger.log('device is in bootloader mode')
       this.setState({ isBootloader: true })
@@ -105,46 +95,35 @@ class GenuineCheck extends PureComponent<Props, State> {
 
     if (deviceInfo.isOSU) {
       logger.log('device is in update mode. skipping genuine')
-      return true
+      return null
     }
 
     // Preload things in parallel
-    Promise.all([
-      // Step dashboard, we preload the applist before entering manager while we're still doing the genuine check
-      manager.getAppsList(deviceInfo),
-      // we also preload as much info as possible in case of a MCU
-      manager.getLatestFirmwareForDevice(deviceInfo),
-    ]).catch(e => {
+    manager.getLatestFirmwareForDevice(deviceInfo).catch(e => {
       logger.warn(e)
     })
 
-    const beforeDate = Date.now()
-
     const res = await new Promise((resolve, reject) => {
-      this.sub = getIsGenuine
-        .send({ devicePath: device.path, deviceInfo })
-        .pipe(
-          filter(e => e.type === 'result'),
-          map(e => e.payload),
-          timeout(GENUINE_TIMEOUT),
-        )
-        .subscribe({
-          next: data => resolve(data),
-          error: err => reject(err),
-        })
+      this.sub = listApps.send({ devicePath: device.path, deviceInfo }).subscribe({
+        next: e => {
+          if (e.type === 'result') {
+            resolve(e.result)
+          }
+          // we can use internal state to display the info
+          // but we need a design solution on what we do
+          /*
+            else if (e.type === 'device-permission-requested') {
+              setDevicePermissionRequested({ wording: e.wording })
+            } else if (e.type === 'device-permission-granted') {
+              setDevicePermissionRequested(null)
+            }
+            */
+        },
+        error: err => reject(err),
+      })
     })
 
-    logger.log(`genuine check resulted ${res} after ${(Date.now() - beforeDate) / 1000}s`, {
-      deviceInfo,
-    })
-    if (!res) {
-      throw new DeviceGenuineSocketEarlyClose()
-    }
-    const isGenuine = res === '0000'
-    if (!isGenuine) {
-      throw new DeviceNotGenuineError()
-    }
-    return true
+    return res
   }
 
   handleFail = (err: Error) => {
@@ -226,7 +205,7 @@ class GenuineCheck extends PureComponent<Props, State> {
         run: this.checkDashboardInteractionHandler,
       },
       {
-        id: 'isGenuine',
+        id: 'listAppsRes',
         title: (
           <Trans i18nKey="deviceConnect.step3" parent="div">
             {'Allow'}
@@ -235,7 +214,7 @@ class GenuineCheck extends PureComponent<Props, State> {
           </Trans>
         ),
         icon: genuineCheckIcon,
-        run: this.checkGenuineInteractionHandler,
+        run: this.listAppsHandler,
       },
     ]
 
@@ -265,4 +244,4 @@ class GenuineCheck extends PureComponent<Props, State> {
 export default compose(
   translate(),
   connect(mapStateToProps),
-)(GenuineCheck)
+)(Connect)
