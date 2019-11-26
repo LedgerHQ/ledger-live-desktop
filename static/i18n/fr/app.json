@@ -73,7 +73,8 @@
       "OUT": "Envoyé",
       "CREATE": "Créée",
       "REVEAL": "Révélée",
-      "DELEGATE": "Déléguée"
+      "DELEGATE": "Déléguée",
+      "UNDELEGATE": "Undelegated"
     }
   },
   "time": {
