@@ -73,7 +73,8 @@
       "OUT": "送信済み",
       "CREATE": "Created",
       "REVEAL": "Revealed",
-      "DELEGATE": "Delegated"
+      "DELEGATE": "Delegated",
+      "UNDELEGATE": "Undelegated"
     }
   },
   "time": {
