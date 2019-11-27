@@ -4,6 +4,7 @@
 // it handles automatically re-calling synchronize
 // this is an even high abstraction than the bridge
 
+import uniq from 'lodash/uniq'
 import logger from 'logger'
 import shuffle from 'lodash/shuffle'
 import React, { Component, useContext } from 'react'
@@ -24,7 +25,7 @@ import { currenciesStatusSelector, currencyDownStatusLocal } from 'reducers/curr
 import { SYNC_MAX_CONCURRENT } from 'config/constants'
 import type { CurrencyStatus } from 'reducers/currenciesStatus'
 import { track } from '../analytics/segment'
-import { prepareCurrency } from './cache'
+import { prepareCurrency, hydrateCurrency } from './cache'
 
 type BridgeSyncProviderProps = {
   children: *,
@@ -225,6 +226,10 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
   }
 
   api: Sync
+
+  componentDidMount() {
+    uniq(this.props.accounts.map(a => a.currency)).forEach(hydrateCurrency)
+  }
 
   render() {
     return (
