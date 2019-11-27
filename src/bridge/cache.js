@@ -32,7 +32,7 @@ export function setCurrencyCache(currency: CryptoCurrency, data: mixed) {
 
 export function getCurrencyCache(currency: CryptoCurrency): mixed {
   const res = global.localStorage.getItem(currencyCacheId(currency))
-  if (res) {
+  if (res && res !== 'undefined') {
     try {
       return JSON.parse(res)
     } catch (e) {
