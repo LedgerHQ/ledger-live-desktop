@@ -1372,6 +1372,12 @@
     "UnavailableTezosOriginatedAccountSend": {
       "title": "Cannot send from subaccounts yet",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+    },
+    "RecommendUndelegation": {
+      "title": "Please end this account's delegation first"
+    },
+    "RecommendSubAccountsToEmpty": {
+      "title": "Please empty all subaccounts first"
     }
   }
 }

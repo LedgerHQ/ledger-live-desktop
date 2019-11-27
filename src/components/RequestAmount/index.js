@@ -43,6 +43,7 @@ type OwnProps = {
   disabled?: boolean,
 
   validTransactionError: ?Error,
+  validTransactionWarning: ?Error,
 
   // max left value
   max: BigNumber,
@@ -139,6 +140,7 @@ export class RequestAmount extends PureComponent<Props> {
       rightCurrency,
       getCounterValue,
       validTransactionError,
+      validTransactionWarning,
     } = this.props
     const right = getCounterValue(value) || BigNumber(0)
     const rightUnit = rightCurrency.units[0]
@@ -150,6 +152,7 @@ export class RequestAmount extends PureComponent<Props> {
             autoFocus={autoFocus}
             disabled={disabled}
             error={validTransactionError}
+            warning={validTransactionWarning}
             containerProps={{ grow: true }}
             defaultUnit={defaultUnit}
             value={value}

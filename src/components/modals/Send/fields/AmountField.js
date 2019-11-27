@@ -52,7 +52,7 @@ const AmountField = ({
 
   if (!status) return null
   const { useAllAmount } = transaction
-  const { amount, errors } = status
+  const { amount, errors, warnings } = status
   let { amount: amountError } = errors
 
   // we ignore zero case for displaying field error because field is empty.
@@ -88,6 +88,7 @@ const AmountField = ({
         disabled={!!useAllAmount}
         account={account}
         validTransactionError={amountError}
+        validTransactionWarning={warnings.amount}
         onChange={onChange}
         value={amount}
         autoFocus
