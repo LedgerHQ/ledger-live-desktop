@@ -73,7 +73,8 @@
       "OUT": "Отправлено",
       "CREATE": "Created",
       "REVEAL": "Revealed",
-      "DELEGATE": "Delegated"
+      "DELEGATE": "Delegated",
+      "UNDELEGATE": "Undelegated"
     }
   },
   "time": {
@@ -599,10 +600,13 @@
     "durationJustStarted": "Just started",
     "durationDays": "{{count}} day",
     "durationDays_plural": "{{count}} days",
+    "howItWorks": "How delegation works",
+    "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
+    "earnRewards": "Earn rewards",
     "flow": {
       "steps": {
         "starter": {
-          "title": "Earn stacking rewards",
+          "title": "Earn staking rewards",
           "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets",
           "bullet": {
             "delegate": "Delegated accounts stay yours.",
@@ -610,7 +614,6 @@
             "ledger": "Delegate securely with your Ledger device."
           },
           "button": {
-            "howItWorks": "How delegation works",
             "cta": "Delegate to earn rewards"
           }
         },
@@ -632,13 +635,24 @@
         "validator": {
           "title": "Select validator",
           "description": "You can select a validator by comparing estimated reward rates",
-          "customValidator": "Custom validator"
+          "customValidator": "Custom validator",
+          "providedBy": "Yield rates provided by <1><0>MyTezosBaker</0></1>"
         },
         "undelegate": {
-          "title": "Undelegate"
+          "title": "Undelegate account"
         },
         "confirmation": {
-          "label": "confirmation"
+          "title": "Confirmation",
+          "label": "confirmation",
+          "success": {
+            "title": "Delegation sent",
+            "titleUndelegated": "Delegation withdrawn",
+            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator."
+          },
+          "pending": {
+            "title": "Broadcasting transaction..."
+          },
+          "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
         }
       }
     },
@@ -1358,6 +1372,12 @@
     "UnavailableTezosOriginatedAccountSend": {
       "title": "Cannot send from subaccounts yet",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+    },
+    "RecommendUndelegation": {
+      "title": "Please end this account's delegation first"
+    },
+    "RecommendSubAccountsToEmpty": {
+      "title": "Please empty all subaccounts first"
     }
   }
 }

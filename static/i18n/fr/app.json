@@ -1,6 +1,6 @@
 {
   "common": {
-    "loading": "Loading",
+    "loading": "Chargement en cours",
     "labelYes": "Oui",
     "labelNo": "Non",
     "never": "Jamais",
@@ -48,8 +48,8 @@
     "copied": "Copié",
     "addressCopied": "Adresse copiée",
     "experimentalFeature": "Expérimental",
-    "dismiss": "Dismiss",
-    "choose": "Choose",
+    "dismiss": "Ignorer",
+    "choose": "Choisir",
     "lockScreen": {
       "title": "Bienvenue",
       "subTitle": null,
@@ -73,7 +73,8 @@
       "OUT": "Envoyé",
       "CREATE": "Créée",
       "REVEAL": "Révélée",
-      "DELEGATE": "Déléguée"
+      "DELEGATE": "Déléguée",
+      "UNDELEGATE": "Terminée"
     }
   },
   "time": {
@@ -419,7 +420,7 @@
     },
     "firmware": {
       "installed": "Version {{version}} du firmware",
-      "updateLater": "Cancel",
+      "updateLater": "Annuler",
       "seedReady": "J'ai ma phrase de récupération",
       "dontHaveSeed": "Vous n'avez pas votre phrase de récupération ?",
       "followTheGuide": "Suivez notre guide de mise à jour étape par étape",
@@ -432,11 +433,11 @@
       "disclaimerAppDelete": "Désinstallez des applications pour libérer de l’espace. Cette opération n’affectera pas vos crypto-actifs.",
       "disclaimerAppReinstall": "Assurez-vous que votre feuille de récupération est accessible, par mesure de précaution.",
       "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour",
-      "appsAutoUninstallTitle": "All applications will be uninstalled from your device",
-      "appsAutoUninstallBullet1": "<0><0>Don't worry</0></0>, this does not affect your crypto assets",
-      "appsAutoUninstallBullet2": "You will be able to reinstall them all after the update",
-      "appsUninstallTitle": "Apps will be uninstalled",
-      "appsUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
+      "appsAutoUninstallTitle": "Toutes les applications seront désinstallées de votre appareil",
+      "appsAutoUninstallBullet1": "<0><0>Pas d'inquiétudes</0></0>, cela n'affecte pas vos actifs crypto",
+      "appsAutoUninstallBullet2": "Vous pourrez les réinstaller après la mise à jour",
+      "appsUninstallTitle": "Les applications seront désinstallées",
+      "appsUninstallDesc": "Toutes les applications seront désinstallées de votre appareil pour la mise à jour du firmware. Vous pourrez les réinstaller après la mise à jour. Cela n'affectera pas vos actifs crypto."
     },
     "modal": {
       "steps": {
@@ -513,37 +514,37 @@
   "send": {
     "title": "Envoyer",
     "totalSpent": "Total à débiter",
-    "totalBalance": "Total balance",
+    "totalBalance": "Solde total",
     "steps": {
       "recipient": {
-        "title": "Recipient"
+        "title": "Destinataire"
       },
       "amount": {
-        "title": "Amount"
+        "title": "Montant"
       },
       "summary": {
-        "title": "Summary"
+        "title": "Récapitulatif"
       },
       "device": {
-        "title": "Device"
+        "title": "Appareil"
       },
       "details": {
-        "from": "From",
-        "to": "To",
-        "selectAccountDebit": "Account to debit",
-        "recipientAddress": "Recipient address",
-        "amount": "Amount",
-        "fees": "Network fees",
-        "feesTooHigh": "Network fees represent more than 10% of the amount",
-        "useMax": "Send Max",
-        "advancedOptions": "Advanced options",
-        "useRBF": "Use a replace-by-fee transaction",
-        "message": "Leave a message (140)",
+        "from": "De",
+        "to": "Vers",
+        "selectAccountDebit": "Compte à débiter",
+        "recipientAddress": "Adresse du destinataire",
+        "amount": "Montant",
+        "fees": "Frais de réseau",
+        "feesTooHigh": "Les frais de réseau représentent plus de 10% du montant",
+        "useMax": "Max",
+        "advancedOptions": "Options avancées",
+        "useRBF": "Utiliser une transaction Replace-by-Fee",
+        "message": "Laisser un message (140)",
         "rippleTag": "Tag",
-        "rippleTagPlaceholder": "Optional",
+        "rippleTagPlaceholder": "Facultatif",
         "ethereumGasLimit": "Gas limit",
-        "ethereumGasPrice": "Gas price",
-        "unitPerByte": "{{unit}} per byte"
+        "ethereumGasPrice": "Gas Price",
+        "unitPerByte": "{{unit}} par octet"
       },
       "verification": {
         "title": "Vérification"
@@ -587,22 +588,25 @@
     "header": "Répartition des comptes ({{count}})"
   },
   "delegation": {
-    "title": "Earn rewards",
-    "header": "Delegation",
-    "validator": "Validator",
-    "yield": "Yield",
-    "address": "Address",
-    "transactionID": "Transaction ID",
-    "value": "Value",
-    "amount": "Amount",
-    "duration": "Duration",
-    "durationJustStarted": "Just started",
-    "durationDays": "{{count}} day",
-    "durationDays_plural": "{{count}} days",
+    "title": "Obtenez des récompenses",
+    "header": "Délégation",
+    "validator": "Validateur",
+    "yield": "Rendement",
+    "address": "Adresse",
+    "transactionID": "ID de transaction",
+    "value": "Valeur",
+    "amount": "Montant",
+    "duration": "Durée",
+    "durationJustStarted": "A l'instant",
+    "durationDays": "{{count}} jour",
+    "durationDays_plural": "{{count}} jours",
+    "howItWorks": "Comment fonctionne la délégation",
+    "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
+    "earnRewards": "Earn rewards",
     "flow": {
       "steps": {
         "starter": {
-          "title": "Earn stacking rewards",
+          "title": "Earn staking rewards",
           "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets",
           "bullet": {
             "delegate": "Delegated accounts stay yours.",
@@ -610,7 +614,6 @@
             "ledger": "Delegate securely with your Ledger device."
           },
           "button": {
-            "howItWorks": "How delegation works",
             "cta": "Delegate to earn rewards"
           }
         },
@@ -632,13 +635,24 @@
         "validator": {
           "title": "Select validator",
           "description": "You can select a validator by comparing estimated reward rates",
-          "customValidator": "Custom validator"
+          "customValidator": "Custom validator",
+          "providedBy": "Yield rates provided by <1><0>MyTezosBaker</0></1>"
         },
         "undelegate": {
-          "title": "Undelegate"
+          "title": "Undelegate account"
         },
         "confirmation": {
-          "label": "confirmation"
+          "title": "Confirmation",
+          "label": "confirmation",
+          "success": {
+            "title": "Delegation sent",
+            "titleUndelegated": "Delegation withdrawn",
+            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator."
+          },
+          "pending": {
+            "title": "Broadcasting transaction..."
+          },
+          "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
         }
       }
     },
@@ -1097,7 +1111,7 @@
     "modes": {
       "send": "transaction",
       "delegate": "delegation",
-      "undelegate": "undelegation"
+      "undelegate": "terminer"
     }
   },
   "errors": {
@@ -1358,6 +1372,12 @@
     "UnavailableTezosOriginatedAccountSend": {
       "title": "Impossible d'envoyer depuis des sous-comptes",
       "description": "Suites aux changements récemment introduits par la mise à jour Babylon, cette fonctionnalité sera ajoutée ultérieurement."
+    },
+    "RecommendUndelegation": {
+      "title": "Please end this account's delegation first"
+    },
+    "RecommendSubAccountsToEmpty": {
+      "title": "Please empty all subaccounts first"
     }
   }
 }
