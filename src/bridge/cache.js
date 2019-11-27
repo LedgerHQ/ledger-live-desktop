@@ -32,7 +32,7 @@ export function setCurrencyCache(currency: CryptoCurrency, data: mixed) {
 
 export function getCurrencyCache(currency: CryptoCurrency): mixed {
   const res = global.localStorage.getItem(currencyCacheId(currency))
-  if (res) {
+  if (res && res !== 'undefined') {
     try {
       return JSON.parse(res)
     } catch (e) {
@@ -43,11 +43,16 @@ export function getCurrencyCache(currency: CryptoCurrency): mixed {
   return undefined
 }
 
+export async function hydrateCurrency(currency: CryptoCurrency) {
+  const value = await getCurrencyCache(currency)
+  const bridge = getCurrencyBridge(currency)
+  bridge.hydrate(value)
+}
+
 export const prepareCurrency: (currency: CryptoCurrency) => Promise<void> = makeLRUCache(
   async currency => {
-    const value = getCurrencyCache(currency)
+    await hydrateCurrency(currency)
     const bridge = getCurrencyBridge(currency)
-    bridge.hydrate(value)
     const preloaded = await bridge.preload()
     setCurrencyCache(currency, preloaded)
   },
