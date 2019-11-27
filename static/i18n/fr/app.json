@@ -74,7 +74,7 @@
       "CREATE": "Créée",
       "REVEAL": "Révélée",
       "DELEGATE": "Déléguée",
-      "UNDELEGATE": "Undelegated"
+      "UNDELEGATE": "Terminée"
     }
   },
   "time": {
@@ -537,14 +537,14 @@
         "fees": "Frais de réseau",
         "feesTooHigh": "Les frais de réseau représentent plus de 10% du montant",
         "useMax": "Max",
-        "advancedOptions": "Advanced options",
-        "useRBF": "Use a replace-by-fee transaction",
-        "message": "Leave a message (140)",
+        "advancedOptions": "Options avancées",
+        "useRBF": "Utiliser une transaction Replace-by-Fee",
+        "message": "Laisser un message (140)",
         "rippleTag": "Tag",
-        "rippleTagPlaceholder": "Optional",
+        "rippleTagPlaceholder": "Facultatif",
         "ethereumGasLimit": "Gas limit",
-        "ethereumGasPrice": "Gas price",
-        "unitPerByte": "{{unit}} per byte"
+        "ethereumGasPrice": "Gas Price",
+        "unitPerByte": "{{unit}} par octet"
       },
       "verification": {
         "title": "Vérification"
@@ -588,19 +588,19 @@
     "header": "Répartition des comptes ({{count}})"
   },
   "delegation": {
-    "title": "Earn rewards",
-    "header": "Delegation",
-    "validator": "Validator",
-    "yield": "Yield",
-    "address": "Address",
-    "transactionID": "Transaction ID",
-    "value": "Value",
-    "amount": "Amount",
-    "duration": "Duration",
-    "durationJustStarted": "Just started",
-    "durationDays": "{{count}} day",
-    "durationDays_plural": "{{count}} days",
-    "howItWorks": "How delegation works",
+    "title": "Obtenez des récompenses",
+    "header": "Délégation",
+    "validator": "Validateur",
+    "yield": "Rendement",
+    "address": "Adresse",
+    "transactionID": "ID de transaction",
+    "value": "Valeur",
+    "amount": "Montant",
+    "duration": "Durée",
+    "durationJustStarted": "A l'instant",
+    "durationDays": "{{count}} jour",
+    "durationDays_plural": "{{count}} jours",
+    "howItWorks": "Comment fonctionne la délégation",
     "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
     "earnRewards": "Earn rewards",
     "flow": {
@@ -1111,7 +1111,7 @@
     "modes": {
       "send": "transaction",
       "delegate": "delegation",
-      "undelegate": "undelegation"
+      "undelegate": "terminer"
     }
   },
   "errors": {
