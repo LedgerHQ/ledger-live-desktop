@@ -271,13 +271,15 @@
     "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "Скрыть токены ({{tokenCount}})",
     "tooltip": "Токен от",
-    "countTooltip": "1 токен",
-    "countTooltip_plural": "{{count}} токенов"
+    "countTooltip": "1 token",
+    "countTooltip_plural": "{{count}} tokens"
   },
   "subAccounts": {
     "title": "Subaccounts",
     "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
-    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})"
+    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
+    "countTooltip": "1 subaccount",
+    "countTooltip_plural": "{{count}} subaccounts"
   },
   "migrateAccounts": {
     "overview": {
