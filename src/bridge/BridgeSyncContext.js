@@ -225,11 +225,11 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
     this.api = sync
   }
 
-  api: Sync
-
   componentDidMount() {
     uniq(this.props.accounts.map(a => a.currency)).forEach(hydrateCurrency)
   }
+
+  api: Sync
 
   render() {
     return (

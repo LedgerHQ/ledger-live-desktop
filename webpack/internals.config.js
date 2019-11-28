@@ -21,7 +21,7 @@ module.exports = webpackMain().then(config => ({
   mode: config.mode,
 
   context: config.context,
-  devtool: config.devtool,
+  devtool: 'cheap-module-source-map',
   target: config.target,
 
   entry: {
