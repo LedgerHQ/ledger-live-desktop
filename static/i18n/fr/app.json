@@ -271,13 +271,15 @@
     "seeTokens": "Afficher les tokens ({{tokenCount}})",
     "hideTokens": "Cacher tokens ({{tokenCount}})",
     "tooltip": "Token de",
-    "countTooltip": "1 Token",
-    "countTooltip_plural": "{{count}} Tokens"
+    "countTooltip": "1 token",
+    "countTooltip_plural": "{{count}} tokens"
   },
   "subAccounts": {
     "title": "Sous-comptes",
     "seeSubAccounts": "Afficher les sous-comptes ({{tokenCount}})",
-    "hideSubAccounts": "Masquer les sous-comptes ({{tokenCount}})"
+    "hideSubAccounts": "Masquer les sous-comptes ({{tokenCount}})",
+    "countTooltip": "1 subaccount",
+    "countTooltip_plural": "{{count}} subaccounts"
   },
   "migrateAccounts": {
     "overview": {
