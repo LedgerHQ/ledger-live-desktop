@@ -772,7 +772,7 @@
     },
     "experimental": {
       "desc": "Попробуйте экспериментальные возможности и дайте нам знать, что вы думаете",
-      "disclaimer": "Это экспериментальные возможности, которые мы предоставляем на основаниях «как есть», чтобы наше сообщество тестировало. Они могут быть изменены, сломаны или удалены в любое время. Включая их, вы соглашаетесь использовать их на свой страх и риск. Ваши криптоактивы остаются защищены вашим аппаратным кошельком Ledger."
+      "disclaimer": "These are experimental features we provide on an “as is” basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
       "title": "Сбросить Ledger Live",
