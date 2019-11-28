@@ -772,7 +772,7 @@
     },
     "experimental": {
       "desc": "Prueba las funcionalidades experimentales y dínos qué te parecen",
-      "disclaimer": "Estas son características experimentales que proporcionamos en una base “tal como está” para que nuestra comunidad pruebe. Pueden cambiar, romper o ser eliminados en cualquier momento. Al habilitarlas, aceptas usarlas bajo tu responsabilidad. Tus criptoactivos permanecen protegidos por tu monedero de hardware de Ledger."
+      "disclaimer": "These are experimental features we provide on an “as is” basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
       "title": "Restablecer Ledger Live",
