@@ -271,13 +271,15 @@
     "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "tooltip": "Token from",
-    "countTooltip": "1 Token",
-    "countTooltip_plural": "{{count}} Tokens"
+    "countTooltip": "1 token",
+    "countTooltip_plural": "{{count}} tokens"
   },
   "subAccounts": {
     "title": "Subaccounts",
     "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
-    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})"
+    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
+    "countTooltip": "1 subaccount",
+    "countTooltip_plural": "{{count}} subaccounts"
   },
   "migrateAccounts": {
     "overview": {
