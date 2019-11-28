@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react'
 import styled, { withTheme } from 'styled-components'
 import { Trans } from 'react-i18next'
+import { listTokenTypesForCryptoCurrency } from '@ledgerhq/live-common/lib/currencies'
 
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import { getCurrencyColor } from 'helpers/getCurrencyColor'
@@ -65,10 +66,17 @@ class CryptoCurrencyIconWithCount extends PureComponent<Props> {
       </Wrapper>
     )
 
+    const isToken = listTokenTypesForCryptoCurrency(currency).length > 0
     if (withTooltip && count > 0) {
       return (
         <Tooltip
-          content={<Trans i18nKey={'tokensList.countTooltip'} count={count} values={{ count }} />}
+          content={
+            <Trans
+              i18nKey={isToken ? 'tokensList.countTooltip' : 'subAccounts.countTooltip'}
+              count={count}
+              values={{ count }}
+            />
+          }
         >
           {content}
         </Tooltip>
