@@ -42,7 +42,7 @@ const Wrapper = styled(Box).attrs(() => ({
 const Delegation = ({ account, parentAccount, openModal }: Props) => {
   const delegation = useDelegation(account)
 
-  return (
+  return account.type === 'ChildAccount' && !delegation ? null : (
     <>
       <Box horizontal alignItems="center">
         <Text
