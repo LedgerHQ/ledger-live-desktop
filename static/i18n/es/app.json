@@ -563,6 +563,9 @@
         },
         "broadcastError": "Tu transacción puede haber fallado. Por favor, comprueba que no se ha enviado en unos minutos para asegurarte antes de volver a intentarlo."
       }
+    },
+    "footer": {
+      "estimatedFees": "Network fees"
     }
   },
   "releaseNotes": {
@@ -1376,10 +1379,13 @@
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     },
     "RecommendUndelegation": {
-      "title": "Please end this account's delegation first"
+      "title": "You should end this account's delegation first"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Please empty all subaccounts first"
+      "title": "You should empty all subaccounts first"
+    },
+    "NotSupportedLegacyAddress": {
+      "title": "This legacy address format is no longer supported"
     }
   }
 }
