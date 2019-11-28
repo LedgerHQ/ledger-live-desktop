@@ -561,6 +561,9 @@
         },
         "broadcastError": "Tu transacción puede haber fallado. Por favor, comprueba que no se ha enviado en unos minutos para asegurarte antes de volver a intentarlo."
       }
+    },
+    "footer": {
+      "estimatedFees": "Network fees"
     }
   },
   "releaseNotes": {

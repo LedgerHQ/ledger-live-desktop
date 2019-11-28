@@ -160,7 +160,7 @@ const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   }
   const mainCurrency = parentAccount
     ? parentAccount.currency
-    : account && account.type === 'Account'
+    : account && account.type !== 'TokenAccount'
     ? account.currency
     : null
   const confirmationsNb = mainCurrency

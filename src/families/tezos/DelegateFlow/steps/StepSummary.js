@@ -20,6 +20,7 @@ import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import Button from 'components/base/Button'
 import Ellipsis from 'components/base/Ellipsis'
 import TranslatedError from 'components/TranslatedError'
+import AccountFooter from 'components/modals/Send/AccountFooter'
 
 import BakerImage from '../../BakerImage'
 import DelegationContainer from './../DelegationContainer'
@@ -172,6 +173,7 @@ export default StepSummary
 export const StepSummaryFooter = ({
   t,
   account,
+  parentAccount,
   bridgeError,
   status,
   bridgePending,
@@ -181,7 +183,9 @@ export const StepSummaryFooter = ({
   const error = bridgeError || Object.values(status.errors)[0]
   const canNext = !bridgePending && !error
   return (
-    <Box horizontal alignItems="center" flow={2}>
+    <Box horizontal alignItems="center" flow={2} grow>
+      <AccountFooter parentAccount={parentAccount} account={account} status={status} />
+
       <Text fontSize={13} color="alertRed">
         <TranslatedError error={error} field="title" />
       </Text>

@@ -561,6 +561,9 @@
         },
         "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
+    },
+    "footer": {
+      "estimatedFees": "Network fees"
     }
   },
   "releaseNotes": {

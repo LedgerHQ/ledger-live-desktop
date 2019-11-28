@@ -563,6 +563,9 @@
         },
         "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
+    },
+    "footer": {
+      "estimatedFees": "Network fees"
     }
   },
   "releaseNotes": {
@@ -611,7 +614,7 @@
           "title": "Earn staking rewards",
           "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets",
           "bullet": {
-            "delegate":"Delegated accounts stay yours.",
+            "delegate": "Delegated accounts stay yours.",
             "access": "You can access your assets anytime.",
             "ledger": "Delegate securely with your Ledger device."
           },
@@ -649,7 +652,7 @@
           "success": {
             "title": "Delegation sent",
             "titleUndelegated": "Delegation withdrawn",
-            "text":"Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator."
+            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator."
           },
           "pending": {
             "title": "Broadcasting transaction..."
@@ -853,7 +856,7 @@
     "quitAndInstall": "Install now",
     "error": "Error during update. Please download again",
     "reDownload": "Download again",
-    "nightlyWarning":  "This version cannot auto-update, please install the latest version manually",
+    "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
     "downloadNow": "Download now"
   },
   "crash": {
@@ -1376,10 +1379,13 @@
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     },
     "RecommendUndelegation": {
-      "title": "Please end this account's delegation first"
+      "title": "You should end this account's delegation first"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Please empty all subaccounts first"
+      "title": "You should empty all subaccounts first"
+    },
+    "NotSupportedLegacyAddress": {
+      "title": "This legacy address format is no longer supported"
     }
   }
 }

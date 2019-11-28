@@ -561,6 +561,9 @@
         },
         "broadcastError": "您的交易可能失败。请在几分钟后查看并确保您的交易没有通过后，然后再试一次。"
       }
+    },
+    "footer": {
+      "estimatedFees": "Network fees"
     }
   },
   "releaseNotes": {

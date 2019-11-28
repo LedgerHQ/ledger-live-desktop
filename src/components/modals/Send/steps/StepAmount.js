@@ -20,6 +20,7 @@ export default ({
   onChangeTransaction,
   error,
   status,
+  bridgePending,
 }: StepProps) => {
   if (!status) return null
   const mainAccount = account ? getMainAccount(account, parentAccount) : null
@@ -37,6 +38,7 @@ export default ({
             parentAccount={parentAccount}
             transaction={transaction}
             onChangeTransaction={onChangeTransaction}
+            bridgePending={bridgePending}
             t={t}
           />
           <SendAmountFields
@@ -69,7 +71,7 @@ export class StepAmountFooter extends PureComponent<StepProps> {
 
     return (
       <Fragment>
-        <AccountFooter account={account} />
+        <AccountFooter parentAccount={parentAccount} account={account} status={status} />
         <Button isLoading={bridgePending} primary disabled={!canNext} onClick={this.onNext}>
           {t('common.continue')}
         </Button>

@@ -561,6 +561,9 @@
         },
         "broadcastError": "Votre transaction a peut-être échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée avant de réessayer."
       }
+    },
+    "footer": {
+      "estimatedFees": "Frais de réseau"
     }
   },
   "releaseNotes": {

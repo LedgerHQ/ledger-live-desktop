@@ -21,6 +21,7 @@ type Props = {
   transaction: Transaction,
   onChangeTransaction: (*) => void,
   status: TransactionStatus,
+  bridgePending: boolean,
   t: *,
 }
 
@@ -30,6 +31,7 @@ const AmountField = ({
   transaction,
   onChangeTransaction,
   status,
+  bridgePending,
   t,
 }: Props) => {
   const bridge = getAccountBridge(account, parentAccount)
@@ -56,7 +58,7 @@ const AmountField = ({
   let { amount: amountError } = errors
 
   // we ignore zero case for displaying field error because field is empty.
-  if (amount.eq(0)) {
+  if (amount.eq(0) && (bridgePending || !useAllAmount)) {
     amountError = null
   }
 
