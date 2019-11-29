@@ -50,6 +50,7 @@
     "experimentalFeature": "Experimental",
     "dismiss": "Dismiss",
     "choose": "Choose",
+    "information": "Information",
     "lockScreen": {
       "title": "欢迎回来",
       "subTitle": null,
@@ -271,13 +272,15 @@
     "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "隐藏代币 ({{tokenCount}})",
     "tooltip": "代币来自",
-    "countTooltip": "1 Token",
-    "countTooltip_plural": "{{count}} Tokens"
+    "countTooltip": "1 token",
+    "countTooltip_plural": "{{count}} tokens"
   },
   "subAccounts": {
     "title": "Subaccounts",
     "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
-    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})"
+    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
+    "countTooltip": "1 subaccount",
+    "countTooltip_plural": "{{count}} subaccounts"
   },
   "migrateAccounts": {
     "overview": {
@@ -508,6 +511,11 @@
       },
       "receiveFunds": {
         "title": "接收"
+      },
+      "warning": {
+        "tezos": {
+          "text": "The amount received on a delegated account will be added to the total staked amount. Choose another account if you want to avoid this."
+        }
       }
     }
   },
@@ -560,6 +568,11 @@
           "title": "正在传送交易信息…"
         },
         "broadcastError": "您的交易可能失败。请在几分钟后查看并确保您的交易没有通过后，然后再试一次。"
+      },
+      "warning": {
+        "tezos": {
+          "text": "The amount to be sent will be deducted from the balance of your delegated account."
+        }
       }
     },
     "footer": {
@@ -594,7 +607,7 @@
     "title": "Earn rewards",
     "header": "Delegation",
     "validator": "Validator",
-    "yield": "Yield",
+    "yield": "Est. Yield",
     "address": "Address",
     "transactionID": "Transaction ID",
     "value": "Value",
@@ -627,7 +640,7 @@
         },
         "summary": {
           "title": "Delegate account",
-          "label": "summary",
+          "label": "Summary",
           "toDelegate": "Account to delegate",
           "toUndelegate": "Account to undelegate",
           "validator": "Validator",
@@ -637,20 +650,25 @@
         },
         "validator": {
           "title": "Select validator",
-          "description": "You can select a validator by comparing estimated reward rates",
+          "description": "You can select a validator by comparing the estimated reward rates",
           "customValidator": "Custom validator",
           "providedBy": "Yield rates provided by <1><0>MyTezosBaker</0></1>"
+        },
+        "custom": {
+          "title": "Custom validator",
+          "text": "Please enter the address of the custom validator to delegate your account to."
         },
         "undelegate": {
           "title": "Undelegate account"
         },
         "confirmation": {
           "title": "Confirmation",
-          "label": "confirmation",
+          "label": "Confirmation",
           "success": {
             "title": "Delegation sent",
-            "titleUndelegated": "Delegation withdrawn",
-            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator."
+            "titleUndelegated": "End delegation",
+            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator.",
+            "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
           },
           "pending": {
             "title": "Broadcasting transaction..."
@@ -664,8 +682,8 @@
       "text": "You can earn Tezos staking rewards by delegating your account"
     },
     "contextMenu": {
-      "topUp": "Receive",
-      "redelegate": "Choose validator",
+      "topUp": "Receive more",
+      "redelegate": "Change validator",
       "stopDelegation": "End delegation"
     }
   },
@@ -775,7 +793,7 @@
     },
     "experimental": {
       "desc": "请尝试实验功能并让告知您的意见。",
-      "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
+      "disclaimer": "These are experimental features we provide on an “as is” basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
       "title": "重置 Ledger Live",
@@ -1109,13 +1127,16 @@
     "desc": "无法连接您的设备？"
   },
   "TransactionConfirm": {
-    "title": "Please verify all operation details on your device",
-    "warning": "Carefully verify all {{mode}} details on your device.",
-    "modes": {
-      "send": "transaction",
-      "delegate": "delegation",
-      "undelegate": "undelegation"
+    "title": "Please confirm the operation on your device to send it",
+    "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
+    "recipientWording": {
+      "send": "recipient",
+      "delegate": "validator",
+      "undelegate": "validator"
     }
+  },
+  "RecipientField": {
+    "placeholder": "Enter {{currencyName}} address"
   },
   "errors": {
     "generic": {
@@ -1377,10 +1398,13 @@
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     },
     "RecommendUndelegation": {
-      "title": "Please end this account's delegation first"
+      "title": "You should end this account's delegation first"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Please empty all subaccounts first"
+      "title": "You should empty all subaccounts first"
+    },
+    "NotSupportedLegacyAddress": {
+      "title": "This legacy address format is no longer supported"
     }
   }
 }
