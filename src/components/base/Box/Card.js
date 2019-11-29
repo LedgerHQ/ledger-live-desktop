@@ -6,10 +6,11 @@ import styled from 'styled-components'
 import Text from 'components/base/Text'
 import Box from './Box'
 
-const RawCard = styled(Box).attrs(() => ({
-  bg: 'palette.background.paper',
+const RawCard = styled(Box).attrs(p => ({
+  bg: p.bg || 'palette.background.paper',
   boxShadow: 0,
   borderRadius: 1,
+  color: p.color || 'inherit',
 }))``
 
 export default ({ title, ...props }: { title?: any }) => {

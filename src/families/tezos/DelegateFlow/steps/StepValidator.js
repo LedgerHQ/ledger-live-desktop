@@ -36,10 +36,7 @@ const Row = styled(Box).attrs(() => ({
   align-items: center;
   transition: box-shadow 250ms ease-out;
 
-  &:hover {
-    box-shadow: 0 2px 4px 0 ${p => p.theme.colors.palette.text.shade10};
-  }
-
+  &:hover,
   &:active {
     background-color: ${p => p.theme.colors.palette.action.active};
   }

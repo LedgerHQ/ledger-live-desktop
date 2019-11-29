@@ -302,7 +302,7 @@ const Body = ({
     parentAccount,
     transaction,
     isAppOpened,
-    hideBreadcrumb: stepId === 'starter' || stepId === 'validator',
+    hideBreadcrumb: stepId === 'starter' || stepId === 'validator' || stepId === 'custom',
     error,
     bridgeError,
     status,

@@ -37,21 +37,12 @@ const IconContainer = styled(Box).attrs(() => ({
   horizontal: true,
   align: 'center',
   p: 4,
-  color: 'palette.text.shade60',
 }))`
   position: absolute;
   top: 0;
   right: 0;
 
   cursor: pointer;
-
-  &:hover {
-    color: ${p => p.theme.colors.palette.text.shade80};
-  }
-
-  &:active {
-    color: ${p => p.theme.colors.palette.text.shade100};
-  }
 `
 
 const LogoContainer = styled(Box).attrs(() => ({
@@ -73,7 +64,11 @@ const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner, openModa
   const closeBanner = useCallback(() => dismissBanner(DELEGATION_BANNER), [dismissBanner])
 
   return hasUndelegated && !isDismissed ? (
-    <Card>
+    <Card
+      bg="palette.primary.main"
+      style={{ overflow: 'hidden' }}
+      color="palette.primary.contrastText"
+    >
       <Box horizontal px={6} py={4} style={{ position: 'relative' }}>
         <IconContainer onClick={closeBanner}>
           <IconCross size={16} />
@@ -83,7 +78,7 @@ const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner, openModa
             <Text
               ff="Inter|SemiBold"
               fontSize={6}
-              color="palette.text.shade100"
+              color="palette.primary.contrastText"
               style={{ maxWidth: 320 }}
             >
               <Trans i18nKey="delegation.banner.text" />
@@ -92,6 +87,7 @@ const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner, openModa
           <Box horizontal>
             <Button
               primary
+              inverted
               onClick={() => {
                 openModal('MODAL_DELEGATE')
               }}
@@ -99,13 +95,13 @@ const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner, openModa
             >
               <Trans i18nKey="delegation.banner.title" />
             </Button>
-            <Button onClick={closeBanner}>
+            <Button onClick={closeBanner} color="palette.primary.contrastText">
               <Trans i18nKey="common.dismiss" />
             </Button>
           </Box>
         </Box>
         <LogoContainer>
-          <CoinWallet size={100} />
+          <CoinWallet size={140} />
         </LogoContainer>
       </Box>
     </Card>

@@ -1,7 +1,7 @@
 // @flow
 
 import invariant from 'invariant'
-import React from 'react'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import {
   getAccountCurrency,
@@ -13,6 +13,9 @@ import type { Baker } from '@ledgerhq/live-common/lib/families/tezos/bakers'
 import { Trans } from 'react-i18next'
 
 import TrackPage from 'analytics/TrackPage'
+import { urls } from 'config/urls'
+import { openURL } from 'helpers/linking'
+
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
@@ -21,6 +24,7 @@ import Button from 'components/base/Button'
 import Ellipsis from 'components/base/Ellipsis'
 import TranslatedError from 'components/TranslatedError'
 import AccountFooter from 'components/modals/Send/AccountFooter'
+import LinkWithExternalIcon from 'components/base/LinkWithExternalIcon'
 
 import BakerImage from '../../BakerImage'
 import DelegationContainer from './../DelegationContainer'
@@ -58,8 +62,10 @@ const StepSummary = ({ account, transaction, transitionTo, isRandomChoice }: Ste
   const currency = getAccountCurrency(account)
   const unit = getAccountUnit(account)
 
-  // const bakerName = baker ? baker.name : shortAddressPreview(transaction.recipient)
   const getBakerName = (baker: ?Baker, fallback: string) => (baker ? baker.name : fallback)
+
+  const openTerms = useCallback(() => openURL(urls.terms), [])
+  const openPrivacy = useCallback(() => openURL(urls.privacyPolicy), [])
 
   return (
     <Box flow={4} mx={40}>
@@ -164,6 +170,26 @@ const StepSummary = ({ account, transaction, transitionTo, isRandomChoice }: Ste
           ) : null
         }
       />
+      <Box mt={32}>
+        <Text ff="Inter|Medium" color="palette.text.shade80" fontSize={3}>
+          <Trans i18nKey="delegation.flow.steps.summary.termsAndPrivacy">
+            {'I have read and I accept the Ledger Live'}
+            <LinkWithExternalIcon
+              onClick={openTerms}
+              style={{ fontSize: 12, display: 'inline-flex', fontWeight: 500, padding: '0px 1px' }}
+            >
+              {'Terms of Use'}
+            </LinkWithExternalIcon>
+            {'and'}
+            <LinkWithExternalIcon
+              onClick={openPrivacy}
+              style={{ fontSize: 12, display: 'inline-flex', fontWeight: 500, padding: '0px 1px' }}
+            >
+              {'Privacy Policy'}
+            </LinkWithExternalIcon>
+          </Trans>
+        </Text>
+      </Box>
     </Box>
   )
 }

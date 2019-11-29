@@ -646,7 +646,8 @@
           "validator": "Validator",
           "choose": "Choose",
           "yield": "Yield {{amount}}",
-          "randomly": "Randomly chosen validator"
+          "randomly": "Randomly chosen validator",
+          "termsAndPrivacy": "I have read and I accept the Ledger Live<1><0>Terms of Use</0></1> and <3><0>Privacy Policy</0></3>"
         },
         "validator": {
           "title": "Select validator",
@@ -656,7 +657,8 @@
         },
         "custom": {
           "title": "Custom validator",
-          "text": "Please enter the address of the custom validator to delegate your account to."
+          "text": "Please enter the address of the custom validator to delegate your account to.",
+          "button": "Use validator"
         },
         "undelegate": {
           "title": "Undelegate account"
