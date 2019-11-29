@@ -1157,13 +1157,10 @@
       "description": "An unexpected error occurred, so please try again"
     },
     "DeviceSocketFail": {
+      "title": "{{message}}",
       "description": "Please try again"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "Oops, connection failed",
-      "description": "Please try again"
-    },
-    "DeviceSocketNoHandler": {
       "title": "Oops, connection failed",
       "description": "Please try again"
     },
@@ -1196,6 +1193,7 @@
       "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
     "LedgerAPI4xx": {
+      "title": "{{message}}",
       "description": "Please check your connection and try again or contact Ledger Support."
     },
     "LedgerAPI5xx": {
@@ -1205,10 +1203,6 @@
     "LedgerAPINotAvailable": {
       "title": "Sorry, {{currencyName}} services unavailable",
       "description": "Please retry or contact Ledger Support"
-    },
-    "ManagerAPIsFail": {
-      "title": "Oops, Manager services unavailable",
-      "description": "Please check the network status"
     },
     "ManagerAppAlreadyInstalled": {
       "title": "Oops, that's already installed",
@@ -1263,10 +1257,6 @@
     "PasswordIncorrect": {
       "title": "The password you entered is incorrect",
       "description": "Please try again"
-    },
-    "SelectExchangesLoadError": {
-      "title": "Unable to load",
-      "description": "Please try again later"
     },
     "TimeoutError": {
       "title": "Oops, a time out occurred",
@@ -1386,6 +1376,37 @@
     },
     "NotSupportedLegacyAddress": {
       "title": "This legacy address format is no longer supported"
+    },
+    "BtcUnmatchedApp": {
+      "title": "That's the wrong app",
+      "description": "Open the ‘{{managerAppName}}’ app on your device"
+    },
+    "DeviceNameInvalid": {
+      "title": "Please choose a device name without '{{invalidCharacters}}'"
+    },
+    "LedgerAPIErrorWithMessage": {
+      "title": "{{message}}",
+      "description": "Please retry or contact Ledger Support."
+    },
+    "ManagerAppRelyOnBTC": {
+      "title": "Bitcoin and Ethereum apps required",
+      "description": "Install the latest Bitcoin and Ethereum apps first."
+    },
+    "UserRefusedDeviceNameChange": {
+      "title": "Rename canceled on device",
+      "description": "Try again and allow renaming on your device"
+    },
+    "SyncError": {
+      "title": "Synchronization error",
+      "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
+    },
+    "PairingFailed": {
+      "title": "Pairing unsuccessful",
+      "description": "Please try again or contact Ledger Support when in doubt."
+    },
+    "GenuineCheckFailed": {
+      "title": "Genuine check failed",
+      "description": "Something went wrong. Please try again or contact Ledger Support when in doubt."
     }
   }
 }
