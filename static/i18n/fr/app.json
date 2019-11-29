@@ -1390,7 +1390,7 @@
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Impossible de recevoir sur les sous-comptes, veuillez sélectionner le compte parent.",
+      "title": "Cannot receive on subaccounts",
       "description": "Si vous souhaitez recevoir des fonds, veuillez utiliser le compte parent"
     },
     "UnavailableTezosOriginatedAccountSend": {
