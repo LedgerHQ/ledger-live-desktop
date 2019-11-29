@@ -1175,13 +1175,10 @@
       "description": "Une erreur inattendue s'est produite, veuillez réessayer"
     },
     "DeviceSocketFail": {
+      "title": "{{message}}",
       "description": "Veuillez essayer à nouveau"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "Désolé, échec de la connexion",
-      "description": "Veuillez essayer à nouveau"
-    },
-    "DeviceSocketNoHandler": {
       "title": "Désolé, échec de la connexion",
       "description": "Veuillez essayer à nouveau"
     },
@@ -1214,6 +1211,7 @@
       "description": "Tentative de mise à jour inutile du microcontrôleur de l’appareil. En cas de problème avec votre appareil, veuillez contacter l’assistance Ledger."
     },
     "LedgerAPI4xx": {
+      "title": "{{message}}",
       "description": "Veuillez vérifier votre connexion et réessayer ou contacter le Support Ledger."
     },
     "LedgerAPI5xx": {
@@ -1223,10 +1221,6 @@
     "LedgerAPINotAvailable": {
       "title": "Désolé, les services {{currencyName}} ne sont pas disponibles.",
       "description": "Veuillez essayer à nouveau ou contacter l’assistance Ledger."
-    },
-    "ManagerAPIsFail": {
-      "title": "Désolé, les services du Manager ne sont pas disponibles",
-      "description": "Veuillez vérifier le statut du réseau"
     },
     "ManagerAppAlreadyInstalled": {
       "title": "Désolé, cette application est déjà installée",
@@ -1281,10 +1275,6 @@
     "PasswordIncorrect": {
       "title": "Le mot de passe saisi est incorrect.",
       "description": "Veuillez essayer à nouveau."
-    },
-    "SelectExchangesLoadError": {
-      "title": "Chargement impossible",
-      "description": "Veuillez essayer à nouveau plus tard"
     },
     "TimeoutError": {
       "title": "Désolé, le délai est dépassé.",
@@ -1389,7 +1379,7 @@
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Impossible de recevoir sur les sous-comptes",
+      "title": "Cannot receive on subaccounts",
       "description": "Si vous souhaitez recevoir des fonds, veuillez utiliser le compte parent"
     },
     "UnavailableTezosOriginatedAccountSend": {
@@ -1397,16 +1387,65 @@
       "description": "Suites aux changements récemment introduits par la mise à jour Babylon, cette fonctionnalité sera ajoutée ultérieurement."
     },
     "RecommendUndelegation": {
-      "title": "You should end this account's delegation first"
+      "title": "Please undelegate account before emptying it"
     },
     "RecommendSubAccountsToEmpty": {
       "title": "Please empty all subaccounts first"
     },
-    "FeeTooHigh": {
-      "title": "Les frais de réseau représentent plus de 10% du montant"
-    },
     "NotSupportedLegacyAddress": {
       "title": "This legacy address format is no longer supported"
+    },
+    "BtcUnmatchedApp": {
+      "title": "That's the wrong app",
+      "description": "Open the ‘{{managerAppName}}’ app on your device"
+    },
+    "DeviceNameInvalid": {
+      "title": "Please choose a device name without '{{invalidCharacters}}'"
+    },
+    "LedgerAPIErrorWithMessage": {
+      "title": "{{message}}",
+      "description": "Please retry or contact Ledger Support."
+    },
+    "ManagerAppRelyOnBTC": {
+      "title": "Bitcoin and Ethereum apps required",
+      "description": "Install the latest Bitcoin and Ethereum apps first."
+    },
+    "UserRefusedDeviceNameChange": {
+      "title": "Rename canceled on device",
+      "description": "Try again and allow renaming on your device"
+    },
+    "SyncError": {
+      "title": "Synchronization error",
+      "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
+    },
+    "PairingFailed": {
+      "title": "Pairing unsuccessful",
+      "description": "Please try again or contact Ledger Support when in doubt."
+    },
+    "GenuineCheckFailed": {
+      "title": "Genuine check failed",
+      "description": "Something went wrong. Please try again or contact Ledger Support when in doubt."
+    },
+    "EthAppPleaseEnableContractData": {
+      "title": "Please enable contract data in the Ethereum app settings"
+    },
+    "InvalidXRPTag": {
+      "title": "Invalid XRP Destination tag"
+    },
+    "NotEnoughBalanceToDelegate": {
+      "title": "Insufficient balance to delegate"
+    },
+    "NotEnoughBalanceInParentAccount": {
+      "title": "Insufficient balance in parent account"
+    },
+    "NotEnoughSpendableBalance": {
+      "title": "Insufficient balance for this operation"
+    },
+    "WrongAppForCurrency": {
+      "title": "Please open the {{expected}} app"
+    },
+    "FeeTooHigh": {
+      "title": "Network fees represent more than 10% of the amount"
     }
   }
 }
