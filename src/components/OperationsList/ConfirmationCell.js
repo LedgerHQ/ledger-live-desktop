@@ -27,8 +27,7 @@ const Cell = styled(Box).attrs(() => ({
   pl: 4,
   horizontal: true,
   alignItems: 'center',
-}))`
-`
+}))``
 
 type Props = {
   account: Account | TokenAccount,

@@ -16,6 +16,7 @@ import {
 } from '@ledgerhq/live-common/lib/account'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import { rgba } from 'styles/helpers'
+import TranslatedError from 'components/TranslatedError'
 import Ellipsis from 'components/base/Ellipsis'
 import Button from 'components/base/Button'
 import { Trans } from 'react-i18next'
@@ -54,7 +55,7 @@ export default class StepSummary extends PureComponent<StepProps> {
     const mainAccount = getMainAccount(account, parentAccount)
     if (!mainAccount || !transaction) return null
     const { estimatedFees, amount, totalSpent, warnings } = status
-    const feeTooHigh = Object.keys(warnings).includes('feeTooHigh')
+    const feeTooHigh = warnings.feeTooHigh
     const currency = getAccountCurrency(account)
     const feesUnit = getAccountUnit(mainAccount)
     const unit = getAccountUnit(account)
@@ -132,7 +133,7 @@ export default class StepSummary extends PureComponent<StepProps> {
             <Box horizontal justifyContent="flex-end" alignItems="center" color="warning">
               <IconExclamationCircle size={10} />
               <Text ff="Inter|Medium" fontSize={2} style={{ marginLeft: '5px' }}>
-                <Trans i18nKey="send.steps.details.feesTooHigh" />
+                <TranslatedError error={feeTooHigh} />
               </Text>
             </Box>
           ) : null}
