@@ -44,6 +44,7 @@ const createTitles = t => ({
   validator: t('delegation.flow.steps.validator.title'),
   undelegate: t('delegation.flow.steps.undelegate.title'),
   confirmation: t('delegation.flow.steps.confirmation.title'),
+  custom: t('delegation.flow.steps.custom.title'),
 })
 
 type OwnProps = {|
@@ -302,7 +303,7 @@ const Body = ({
     parentAccount,
     transaction,
     isAppOpened,
-    hideBreadcrumb: stepId === 'starter' || stepId === 'validator',
+    hideBreadcrumb: stepId === 'starter' || stepId === 'validator' || stepId === 'custom',
     error,
     bridgeError,
     status,

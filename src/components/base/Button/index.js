@@ -33,11 +33,15 @@ const buttonStyles: { [_: string]: Style } = {
       background: ${
         p.disabled
           ? `${p.theme.colors.palette.action.disabled} !important`
+          : p.inverted
+          ? p.theme.colors.palette.primary.contrastText
           : p.theme.colors.palette.primary.main
       };
       color: ${
         p.disabled
           ? p.theme.colors.palette.text.shade20
+          : p.inverted
+          ? p.theme.colors.palette.primary.main
           : p.theme.colors.palette.primary.contrastText
       };
       box-shadow: ${
@@ -50,10 +54,18 @@ const buttonStyles: { [_: string]: Style } = {
       }
     `,
     hover: p => `
-       background: ${lighten(p.theme.colors.palette.primary.main, 0.05)};
+       background: ${
+         p.inverted
+           ? darken(p.theme.colors.palette.primary.contrastText, 0.05)
+           : lighten(p.theme.colors.palette.primary.main, 0.05)
+       };
      `,
     active: p => `
-       background: ${darken(p.theme.colors.palette.primary.main, 0.1)};
+       background: ${
+         p.inverted
+           ? darken(p.theme.colors.palette.primary.contrastText, 0.1)
+           : darken(p.theme.colors.palette.primary.main, 0.1)
+       };
      `,
   },
   danger: {
@@ -197,7 +209,7 @@ export const Base = styled.button.attrs(p => ({
   fontSize: p.fontSize || (!p.small ? 4 : 3),
   px: !p.small ? 4 : 3,
   py: !p.small ? 2 : 0,
-  color: p.theme.colors.palette.text.shade60,
+  color: p.color || p.theme.colors.palette.text.shade60,
   bg: 'transparent',
 }))`
   ${space};
@@ -234,6 +246,7 @@ type Props = {
   children?: any,
   icon?: string,
   primary?: boolean,
+  inverted?: boolean, // only used with primary for now
   danger?: boolean,
   disabled?: boolean,
   onClick?: Function,
@@ -254,6 +267,7 @@ class Button extends PureComponent<
     primary: false,
     small: false,
     danger: false,
+    inverted: false,
   }
 
   state = {

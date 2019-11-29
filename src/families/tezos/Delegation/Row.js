@@ -46,10 +46,6 @@ const Wrapper = styled.div`
     flex-direction: row;
     box-sizing: border-box;
   }
-
-  &:hover {
-    background: ${p => p.theme.colors.palette.background.default};
-  }
 `
 
 const Baker = styled.div`

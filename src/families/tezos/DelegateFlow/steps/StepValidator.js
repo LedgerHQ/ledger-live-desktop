@@ -32,10 +32,7 @@ const Row = styled(Box).attrs(() => ({
   align-items: center;
   transition: box-shadow 250ms ease-out;
 
-  &:hover {
-    box-shadow: 0 2px 4px 0 ${p => p.theme.colors.palette.text.shade10};
-  }
-
+  &:hover,
   &:active {
     background-color: ${p => p.theme.colors.palette.action.active};
   }
@@ -86,7 +83,7 @@ export default ({
     [account, onChangeTransaction, parentAccount, transaction, transitionTo],
   )
   return (
-    <Box flow={4} mx={40}>
+    <Box flow={4} mx={20}>
       <TrackPage category="Delegation Flow" name="Step Validator" />
       <Box>
         <Text ff="Inter|Regular" color="palette.text.shade80" fontSize={4} align="center">

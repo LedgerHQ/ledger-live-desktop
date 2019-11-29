@@ -1,13 +1,32 @@
 // @flow
 import invariant from 'invariant'
 import React, { useCallback, useEffect, useRef } from 'react'
+import { Trans } from 'react-i18next'
+import styled from 'styled-components'
+
 import { getMainAccount } from '@ledgerhq/live-common/lib/account'
 import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
+
 import TrackPage from 'analytics/TrackPage'
 import RecipientField from 'components/modals/Send/fields/RecipientField'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
+import Text from 'components/base/Text'
+
+import UserPlusIcon from 'icons/UserPlus'
+
 import type { StepProps } from '../types'
+
+const IconWrapper = styled(Box).attrs(() => ({
+  py: 4,
+  px: 17,
+}))`
+  border-radius: 18px;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  background-color: ${p => p.theme.colors.palette.action.hover};
+`
 
 export default ({
   account,
@@ -22,6 +41,16 @@ export default ({
   return (
     <Box flow={4} mx={40}>
       <TrackPage category="Delegation Flow" name="Step Custom" />
+      <Box>
+        <IconWrapper color="palette.primary.main">
+          <UserPlusIcon size={30} />
+        </IconWrapper>
+        <Box mt={24} px={2}>
+          <Text ff="Inter|Regular" color="palette.text.shade80" fontSize={4} align="center">
+            <Trans i18nKey="delegation.flow.steps.custom.text" />
+          </Text>
+        </Box>
+      </Box>
       <Box my={24}>
         <RecipientField
           label="Validator address"
@@ -76,11 +105,11 @@ export const StepCustomFooter = ({
 
   return (
     <>
-      <Button secondary onClick={onBack}>
+      <Button secondary onClick={onBack} mr={1}>
         {t('common.back')}
       </Button>
       <Button primary disabled={!canNext} onClick={onNext}>
-        {t('common.continue')}
+        {t('delegation.flow.steps.custom.button')}
       </Button>
     </>
   )
