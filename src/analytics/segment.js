@@ -30,6 +30,13 @@ const sessionId = uuid()
 
 const getContext = _store => ({
   ip: '0.0.0.0',
+  page: {
+    path: '/',
+    referrer: '',
+    search: '',
+    title: 'Ledger Live',
+    url: '',
+  },
 })
 
 const extraProperties = store => {

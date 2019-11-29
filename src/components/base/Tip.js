@@ -8,6 +8,7 @@ import InfoCircle from '../../icons/InfoCircle'
 
 const TokenTipsContainer = styled(Box)`
   background: ${p => p.theme.colors.pillActiveBackground};
+  border-radius: 4px;
   color: ${p => p.theme.colors.wallet};
   font-weight: 400;
   padding: 16px;

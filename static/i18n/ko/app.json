@@ -1,5 +1,6 @@
 {
   "common": {
+    "loading": "Loading",
     "labelYes": "예",
     "labelNo": "아니오",
     "never": "결코 아님",
@@ -47,6 +48,8 @@
     "copied": "복사됨",
     "addressCopied": "주소 복사됨",
     "experimentalFeature": "Experimental",
+    "dismiss": "Dismiss",
+    "choose": "Choose",
     "lockScreen": {
       "title": "다시 돌아오신 것을 환영합니다.",
       "subTitle": null,
@@ -70,7 +73,8 @@
       "OUT": "전송됨",
       "CREATE": "Created",
       "REVEAL": "Revealed",
-      "DELEGATE": "Delegated"
+      "DELEGATE": "Delegated",
+      "UNDELEGATE": "Undelegated"
     }
   },
   "time": {
@@ -239,6 +243,7 @@
     "coinberry": "Coinberry는 은행보다 우수한 보안과 동급 최고의 사용자 인터페이스 및 수수료 없는 입출금으로 캐나다에서 가장 신뢰할 수 있는 암호화 플랫폼입니다. 캐나다 시민이 아닌 경우 조기에 액세스하려면 사전 등록을 하셔야 합니다.",
     "coinhouse": "Coinhouse는 암호화 자산을 분석, 취득, 판매 및 안전하게 저장하려는 개인 및 기관 투자자를 위한 신뢰할 수 있는 플랫폼입니다.",
     "coinmama": "Coinmama는 세계 어느 곳에서나 디지털 자산을 빠르고 안전하게 구입할 수 있게 해주는 금융 서비스입니다.",
+    "crypto": "Crypto.com is the best place to buy, sell, track and pay with crypto.",
     "genesis": "Genesis는 유동성을 제공하고 Bitcoin, Bitcoin cash, Ethereum, Ethereum Classic, Litecoin, XRP 등의 디지털 통화에 대한 대출을 실시하는 기관 거래 회사입니다.",
     "kyberswap": "빠르고 간단하며 안전한 토큰 교환 플랫폼입니다. Kyber Network의 온체인(on-chain) 유동성 프로토콜을 통해 제공됩니다.",
     "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum.",
@@ -415,7 +420,7 @@
     },
     "firmware": {
       "installed": "펌웨어 버전 {{version}}",
-      "updateLater": "Update later",
+      "updateLater": "Cancel",
       "seedReady": "I have my recovery phrase",
       "dontHaveSeed": "Don't have your recovery phrase?",
       "followTheGuide": "Follow our step by step update guide",
@@ -428,8 +433,11 @@
       "disclaimerAppDelete": "일부 앱을 제거하여 공간을 확보하십시오. 그렇게 해도 귀하의 암호화 자산에는 영향을 미치지 않습니다.",
       "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded",
-      "appsAutoUninstallTitle": "Apps will be uninstalled",
-      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
+      "appsAutoUninstallTitle": "All applications will be uninstalled from your device",
+      "appsAutoUninstallBullet1": "<0><0>Don't worry</0></0>, this does not affect your crypto assets",
+      "appsAutoUninstallBullet2": "You will be able to reinstall them all after the update",
+      "appsUninstallTitle": "Apps will be uninstalled",
+      "appsUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -506,27 +514,37 @@
   "send": {
     "title": "전송",
     "totalSpent": "인출할 총액",
+    "totalBalance": "Total balance",
     "steps": {
-      "amount": {
-        "title": "세부 사항",
-        "selectAccountDebit": "인출할 계정",
-        "recipientAddress": "수취인 주소",
-        "amount": "금액",
-        "fees": "네트워크 수수료",
-        "useMax": "Max",
-        "advancedOptions": "고급 옵션",
-        "useRBF": "RBF(replace-by-fee) 트랜잭션 사용",
-        "message": "메시지 남기기 (140 )",
-        "rippleTag": "태그",
-        "ethereumGasLimit": "가스 리밋",
-        "unitPerByte": "바이트 당 {{unit}}",
-        "highFeeModal": {
-          "title": "High fees",
-          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
-        }
+      "recipient": {
+        "title": "Recipient"
       },
-      "connectDevice": {
-        "title": "장치"
+      "amount": {
+        "title": "Amount"
+      },
+      "summary": {
+        "title": "Summary"
+      },
+      "device": {
+        "title": "Device"
+      },
+      "details": {
+        "from": "From",
+        "to": "To",
+        "selectAccountDebit": "Account to debit",
+        "recipientAddress": "Recipient address",
+        "amount": "Amount",
+        "fees": "Network fees",
+        "feesTooHigh": "Network fees represent more than 10% of the amount",
+        "useMax": "Send Max",
+        "advancedOptions": "Advanced options",
+        "useRBF": "Use a replace-by-fee transaction",
+        "message": "Leave a message (140)",
+        "rippleTag": "Tag",
+        "rippleTagPlaceholder": "Optional",
+        "ethereumGasLimit": "Gas limit",
+        "ethereumGasPrice": "Gas price",
+        "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
         "title": "확인"
@@ -543,6 +561,9 @@
         },
         "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
+    },
+    "footer": {
+      "estimatedFees": "Network fees"
     }
   },
   "releaseNotes": {
@@ -568,6 +589,85 @@
     "showAll": "Show all",
     "showLess": "Show less",
     "header": "Account allocation ({{count}})"
+  },
+  "delegation": {
+    "title": "Earn rewards",
+    "header": "Delegation",
+    "validator": "Validator",
+    "yield": "Yield",
+    "address": "Address",
+    "transactionID": "Transaction ID",
+    "value": "Value",
+    "amount": "Amount",
+    "duration": "Duration",
+    "durationJustStarted": "Just started",
+    "durationDays": "{{count}} day",
+    "durationDays_plural": "{{count}} days",
+    "howItWorks": "How delegation works",
+    "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
+    "earnRewards": "Earn rewards",
+    "flow": {
+      "steps": {
+        "starter": {
+          "title": "Earn staking rewards",
+          "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets",
+          "bullet": {
+            "delegate": "Delegated accounts stay yours.",
+            "access": "You can access your assets anytime.",
+            "ledger": "Delegate securely with your Ledger device."
+          },
+          "button": {
+            "cta": "Delegate to earn rewards"
+          }
+        },
+        "account": {
+          "title": "Delegate account",
+          "label": "Account",
+          "toDelegate": "Account to delegate"
+        },
+        "summary": {
+          "title": "Delegate account",
+          "label": "summary",
+          "toDelegate": "Account to delegate",
+          "toUndelegate": "Account to undelegate",
+          "validator": "Validator",
+          "choose": "Choose",
+          "yield": "Yield {{amount}}",
+          "randomly": "Randomly chosen validator"
+        },
+        "validator": {
+          "title": "Select validator",
+          "description": "You can select a validator by comparing estimated reward rates",
+          "customValidator": "Custom validator",
+          "providedBy": "Yield rates provided by <1><0>MyTezosBaker</0></1>"
+        },
+        "undelegate": {
+          "title": "Undelegate account"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "confirmation",
+          "success": {
+            "title": "Delegation sent",
+            "titleUndelegated": "Delegation withdrawn",
+            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator."
+          },
+          "pending": {
+            "title": "Broadcasting transaction..."
+          },
+          "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        }
+      }
+    },
+    "banner": {
+      "title": "Earn rewards",
+      "text": "You can earn Tezos staking rewards by delegating your account"
+    },
+    "contextMenu": {
+      "topUp": "Receive",
+      "redelegate": "Choose validator",
+      "stopDelegation": "End delegation"
+    }
   },
   "asset": {
     "notice": "Summary of all {{currency}} accounts"
@@ -753,7 +853,9 @@
     "checkSuccess": "업데이트 설치 준비 완료",
     "quitAndInstall": "지금 설치",
     "error": "업데이트 중 오류가 발생했습니다. 다시 다운로드하십시오.",
-    "reDownload": "다시 다운로드"
+    "reDownload": "다시 다운로드",
+    "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
+    "downloadNow": "Download now"
   },
   "crash": {
     "oops": "죄송합니다. 무언가가 잘못되었습니다.",
@@ -798,6 +900,7 @@
     },
     "start": {
       "title": "Ledger Live에 오신 것을 환영합니다.",
+      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
       "startBtn": "시작하기"
     },
     "init": {
@@ -1004,6 +1107,15 @@
   },
   "connectTroubleshooting": {
     "desc": "Having a hard time connecting your device?"
+  },
+  "TransactionConfirm": {
+    "title": "Please verify all operation details on your device",
+    "warning": "Carefully verify all {{mode}} details on your device.",
+    "modes": {
+      "send": "transaction",
+      "delegate": "delegation",
+      "undelegate": "undelegation"
+    }
   },
   "errors": {
     "generic": {
@@ -1263,10 +1375,12 @@
     "UnavailableTezosOriginatedAccountSend": {
       "title": "Cannot send from subaccounts yet",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+    },
+    "RecommendUndelegation": {
+      "title": "Please end this account's delegation first"
+    },
+    "RecommendSubAccountsToEmpty": {
+      "title": "Please empty all subaccounts first"
     }
-  },
-  "TransactionConfirm": {
-    "warning": "장치에서 거래의 세부 정보를 확인하십시오.",
-    "title": "전송하려면 장치의 거래 정보를 승인하십시오."
   }
 }

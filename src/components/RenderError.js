@@ -24,8 +24,26 @@ import IconTriangleWarning from 'icons/TriangleWarning'
 // SERIOUSLY plz refactor to use <ResetButton>
 import { IconWrapperCircle } from './SettingsPage/ResetButton'
 
-const printError = (error: mixed) => `${String(error)}
-${String((error && error.stack) || 'no stacktrace')}`
+const printError = (error: mixed) => {
+  const print = []
+
+  if (!error) {
+    return 'bad error'
+  }
+
+  if (error.message) {
+    print.push(error.message)
+  }
+
+  if (error.stack) {
+    print.push(error.stack)
+  } else {
+    print.push(error.name)
+    print.push('no call stack available :(')
+  }
+
+  return print.join('\n')
+}
 
 type Props = {
   error: Error,
@@ -95,7 +113,7 @@ class RenderError extends PureComponent<
     const { error, t, withoutAppData, children } = this.props
     const { isHardResetting, isHardResetModalOpened } = this.state
     return (
-      <Box align="center" grow>
+      <Box align="center" grow bg="palette.background.default">
         <TriggerAppReady />
         <Space of={100} />
         <img alt="" src={i('crash-screen.svg')} width={380} />
@@ -127,7 +145,7 @@ class RenderError extends PureComponent<
             {t('common.reset')}
           </Button>
         </Box>
-        <Box my={6}>
+        <Box my={6} color="palette.text.shade80">
           <ErrContainer>{printError(error)}</ErrContainer>
         </Box>
         <Unsafe prefix="redux failed">
@@ -145,22 +163,20 @@ class RenderError extends PureComponent<
             renderIcon={this.hardResetIconRender}
           />
         </Unsafe>
-        <pre
-          style={{
-            position: 'fixed',
-            bottom: 8,
-            left: 8,
-            opacity: 0.2,
-            fontSize: 10,
-          }}
-        >
-          {`Ledger Live ${__APP_VERSION__}`}
-        </pre>
+        <VersionContainer>{`Ledger Live ${__APP_VERSION__}`}</VersionContainer>
         {children}
       </Box>
     )
   }
 }
+
+const VersionContainer = styled.pre`
+  position: fixed;
+  bottom: 8px;
+  left: 8px;
+  fontsize: 8;
+  color: ${p => p.theme.colors.palette.text.shade60};
+`
 
 const ErrContainer = styled.pre`
   margin: auto;
@@ -170,7 +186,6 @@ const ErrContainer = styled.pre`
   font-family: monospace;
   cursor: text;
   user-select: text;
-  opacity: 0.3;
 `
 
 export default translate()(RenderError)

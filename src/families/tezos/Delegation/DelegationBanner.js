@@ -1,7 +1,8 @@
 // @flow
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Trans } from 'react-i18next'
 import { connect } from 'react-redux'
+
 import styled from 'styled-components'
 
 import Box, { Card } from 'components/base/Box'
@@ -12,12 +13,13 @@ import CoinWallet from 'icons/CoinWallet'
 import IconCross from 'icons/Cross'
 
 import { dismissBanner } from 'actions/settings'
+import { openModal } from 'reducers/modals'
 import { dismissedBannerSelector } from 'reducers/settings'
 import { haveUndelegatedAccountsSelector } from 'actions/general'
 
 export const DELEGATION_BANNER = 'DELEGATION_BANNER'
 
-const mapDispatchToProps = { dismissBanner }
+const mapDispatchToProps = { dismissBanner, openModal }
 
 const mapStateToProps = state => ({
   isDismissed: dismissedBannerSelector(state, { bannerKey: DELEGATION_BANNER }),
@@ -28,6 +30,7 @@ type Props = {
   isDismissed: boolean,
   hasUndelegated: boolean,
   dismissBanner: string => void,
+  openModal: string => void,
 }
 
 const IconContainer = styled(Box).attrs(() => ({
@@ -66,11 +69,13 @@ const LogoContainer = styled(Box).attrs(() => ({
   }
 `
 
-const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner }: Props) =>
-  hasUndelegated && !isDismissed ? (
+const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner, openModal }: Props) => {
+  const closeBanner = useCallback(() => dismissBanner(DELEGATION_BANNER), [dismissBanner])
+
+  return hasUndelegated && !isDismissed ? (
     <Card>
       <Box horizontal px={6} py={4} style={{ position: 'relative' }}>
-        <IconContainer>
+        <IconContainer onClick={closeBanner}>
           <IconCross size={16} />
         </IconContainer>
         <Box flex={1} justifyContent="space-between">
@@ -88,13 +93,13 @@ const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner }: Props)
             <Button
               primary
               onClick={() => {
-                // TODO: Open delegation flow
+                openModal('MODAL_DELEGATE')
               }}
               mr={1}
             >
-              <Trans i18nKey="delegation.title" />
+              <Trans i18nKey="delegation.banner.title" />
             </Button>
-            <Button onClick={() => dismissBanner(DELEGATION_BANNER)}>
+            <Button onClick={closeBanner}>
               <Trans i18nKey="common.dismiss" />
             </Button>
           </Box>
@@ -105,6 +110,7 @@ const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner }: Props)
       </Box>
     </Card>
   ) : null
+}
 
 export default connect(
   mapStateToProps,

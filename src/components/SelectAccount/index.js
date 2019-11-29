@@ -7,21 +7,22 @@ import {
   getAccountName,
   listSubAccounts,
 } from '@ledgerhq/live-common/lib/account'
-import Box from 'components/base/Box'
-import FormattedVal from 'components/base/FormattedVal'
-import Select from 'components/base/Select'
-import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
+import type { AccountLike, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
+import styled from 'styled-components'
 import React, { useCallback, useState } from 'react'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { createFilter } from 'react-select'
-import { accountsSelector } from 'reducers/accounts'
 import { createStructuredSelector } from 'reselect'
-import type { AccountLike, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
-import styled from 'styled-components'
 
-import Ellipsis from '../base/Ellipsis'
+import { accountsSelector } from 'reducers/accounts'
+
+import Box from 'components/base/Box'
+import FormattedVal from 'components/base/FormattedVal'
+import Select from 'components/base/Select'
+import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
+import Ellipsis from 'components/base/Ellipsis'
 
 const mapStateToProps = createStructuredSelector({
   accounts: accountsSelector,
@@ -50,7 +51,7 @@ type Option = {
   account: Account | TokenAccount,
 }
 
-const getOptionValue = option => option.account.id
+const getOptionValue = option => option.account && option.account.id
 
 const defaultFilter = createFilter({
   stringify: ({ data: account }) => {
@@ -114,11 +115,11 @@ const AccountOption = React.memo(
   },
 )
 
-const renderValue = ({ data }: { data: Option }) => <AccountOption account={data.account} isValue />
+const renderValue = ({ data }: { data: Option }) =>
+  data.account ? <AccountOption account={data.account} isValue /> : null
 
-const renderOption = ({ data }: { data: Option }) => (
-  <AccountOption account={data.account} disabled={!data.matched} />
-)
+const renderOption = ({ data }: { data: Option }) =>
+  data.account ? <AccountOption account={data.account} disabled={!data.matched} /> : null
 
 type Props = {
   withSubAccounts?: boolean,
@@ -146,6 +147,7 @@ const RawSelectAccount = ({
   const all = withSubAccounts
     ? flattenAccounts(filtered, { enforceHideEmptySubAccounts })
     : filtered
+
   const selectedOption = value
     ? {
         account: all.find(o => o.id === value.id),

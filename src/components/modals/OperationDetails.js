@@ -160,7 +160,7 @@ const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   }
   const mainCurrency = parentAccount
     ? parentAccount.currency
-    : account && account.type === 'Account'
+    : account && account.type !== 'TokenAccount'
     ? account.currency
     : null
   const confirmationsNb = mainCurrency
@@ -347,7 +347,6 @@ const OperationDetails = connect(
                   return (
                     <NoMarginWrapper key={`${op.id}`}>
                       <OperationComponent
-                        compact
                         text={getAccountCurrency(opAccount).name}
                         operation={op}
                         account={opAccount}
@@ -376,7 +375,6 @@ const OperationDetails = connect(
                 {internalOperations.map((op, i) => (
                   <NoMarginWrapper key={`${op.id}`}>
                     <OperationComponent
-                      compact
                       text={account.currency.name}
                       operation={op}
                       account={account}

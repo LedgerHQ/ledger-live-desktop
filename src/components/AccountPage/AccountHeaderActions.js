@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { useCallback } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
@@ -8,23 +8,16 @@ import styled from 'styled-components'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import Tooltip from 'components/base/Tooltip'
 import { isAccountEmpty, canSend, getMainAccount } from '@ledgerhq/live-common/lib/account'
-
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'config/constants'
-
 import type { T } from 'types/common'
-
 import { rgba } from 'styles/helpers'
-
 import { openModal } from 'reducers/modals'
-
 import IconAccountSettings from 'icons/AccountSettings'
-import IconReceive from 'icons/Receive'
-import IconSend from 'icons/Send'
-
 import perFamily from 'generated/AccountHeaderActions'
 import Box, { Tabbable } from 'components/base/Box'
-import Button from 'components/base/Button'
 import Star from '../Stars/Star'
+import { ReceiveActionDefault, SendActionDefault } from './AccountActionsDefault'
+import perFamilyAccountActions from '../../generated/accountActions'
 
 const ButtonSettings = styled(Tabbable).attrs(() => ({
   align: 'center',
@@ -61,58 +54,49 @@ type Props = OwnProps & {
   openModal: Function,
 }
 
-class AccountHeaderActions extends PureComponent<Props> {
-  render() {
-    const { account, parentAccount, openModal, t } = this.props
-    const mainAccount = getMainAccount(account, parentAccount)
-    const PerFamily = perFamily[mainAccount.currency.family]
-    return (
-      <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
-        {!isAccountEmpty(account) ? (
-          <>
-            {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}
-            {canSend(account, parentAccount) ? (
-              <Button
-                small
-                primary
-                onClick={() => openModal(MODAL_SEND, { parentAccount, account })}
-              >
-                <Box horizontal flow={1} alignItems="center">
-                  <IconSend size={12} />
-                  <Box>{t('send.title')}</Box>
-                </Box>
-              </Button>
-            ) : null}
+const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) => {
+  const mainAccount = getMainAccount(account, parentAccount)
+  const PerFamily = perFamily[mainAccount.currency.family]
+  const decorators = perFamilyAccountActions[mainAccount.currency.family]
+  const SendAction = (decorators && decorators.SendAction) || SendActionDefault
+  const ReceiveAction = (decorators && decorators.ReceiveAction) || ReceiveActionDefault
 
-            <Button
-              small
-              primary
-              onClick={() => openModal(MODAL_RECEIVE, { parentAccount, account })}
-            >
-              <Box horizontal flow={1} alignItems="center">
-                <IconReceive size={12} />
-                <Box>{t('receive.title')}</Box>
-              </Box>
-            </Button>
-          </>
-        ) : null}
-        <Tooltip content={t('stars.tooltip')}>
-          <Star accountId={account.id} account={account} yellow />
+  const onSend = useCallback(() => {
+    openModal(MODAL_SEND, { parentAccount, account })
+  }, [parentAccount, account, openModal])
+
+  const onReceive = useCallback(() => {
+    openModal(MODAL_RECEIVE, { parentAccount, account })
+  }, [parentAccount, account, openModal])
+
+  return (
+    <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
+      {!isAccountEmpty(account) ? (
+        <>
+          {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}
+          {canSend(account, parentAccount) ? (
+            <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
+          ) : null}
+
+          <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
+        </>
+      ) : null}
+      <Tooltip content={t('stars.tooltip')}>
+        <Star accountId={account.id} account={account} yellow />
+      </Tooltip>
+      {account.type === 'Account' ? (
+        <Tooltip content={t('account.settings.title')}>
+          <ButtonSettings
+            onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { parentAccount, account })}
+          >
+            <Box justifyContent="center">
+              <IconAccountSettings size={14} />
+            </Box>
+          </ButtonSettings>
         </Tooltip>
-        {account.type === 'Account' ? (
-          <Tooltip content={t('account.settings.title')}>
-            <ButtonSettings
-              onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { parentAccount, account })}
-            >
-              <Box justifyContent="center">
-                <IconAccountSettings size={14} />
-              </Box>
-            </ButtonSettings>
-          </Tooltip>
-        ) : null}
-      </Box>
-    )
-  }
+      ) : null}
+    </Box>
+  )
 }
 
 export default compose(

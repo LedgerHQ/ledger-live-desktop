@@ -97,7 +97,7 @@ process.on('message', m => {
     case 'hydrateCurrencyData': {
       const { currencyId, serialized } = m
       const currency = getCryptoCurrencyById(currencyId)
-      const data = serialized && JSON.stringify(serialized)
+      const data = serialized && JSON.parse(serialized)
       log('hydrateCurrencyData', `hydrate currency ${currency.id}`)
       getCurrencyBridge(currency).hydrate(data)
       break
@@ -111,7 +111,7 @@ process.on('message', m => {
       Object.keys(hydratedPerCurrency).forEach(currencyId => {
         const currency = getCryptoCurrencyById(currencyId)
         const serialized = hydratedPerCurrency[currencyId]
-        const data = serialized && JSON.stringify(serialized)
+        const data = serialized && JSON.parse(serialized)
         getCurrencyBridge(currency).hydrate(data)
       })
 
