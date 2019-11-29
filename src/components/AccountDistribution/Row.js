@@ -134,9 +134,9 @@ class Row extends PureComponent<Props, State> {
             {icon}
             <Box>
               {parentAccount ? (
-                <Box fontSize={10} color="palette.text.shade80">
+                <Ellipsis fontSize={10} color="palette.text.shade80">
                   <Text ff="Inter|SemiBold">{parentAccount.name}</Text>
-                </Box>
+                </Ellipsis>
               ) : null}
               <ToolTip content={displayName} delay={1200}>
                 <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
