@@ -33,6 +33,7 @@ import type { StepProps } from '../types'
 
 const Container = styled(Box)`
   width: 148px;
+  min-height: 170px;
   padding: 24px;
   border: 1px solid ${p => p.theme.colors.palette.text.shade20};
   border-radius: 4px;
@@ -115,7 +116,7 @@ const StepSummary = ({ account, transaction, transitionTo, isRandomChoice }: Ste
                   onClick={/* quick hack */ () => transitionTo('validator')}
                   style={{ cursor: 'pointer' }}
                 >
-                  <Trans i18nKey="common.choose" />
+                  <Trans i18nKey="delegation.flow.steps.summary.select" />
                 </Text>
               </Box>
               <Container my={1}>
