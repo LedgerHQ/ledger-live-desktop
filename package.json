@@ -24,7 +24,7 @@
     "install-flow-typed": "flow-typed install -s",
     "remove-breaking-flow-typed": "rm -f flow-typed/npm/{reselect_*,redux-actions_*,react-redux_*,react-i18next_v7.x.x.js,styled-components_v3.x.x.js,winston*}",
     "prettier": "prettier --write \"{src,webpack,.storybook,test-e2e}/**/*.{js,json}\"",
-    "ci": "prettier -l \"{src,webpack,.storybook,test-e2e}/**/*.{js,json}\" && yarn check --integrity && ./scripts/check-no-dups.sh && ./scripts/svg-id-collisions.sh && yarn lint && yarn prettier -l && yarn test",
+    "ci": "prettier -l \"{src,webpack,.storybook,test-e2e}/**/*.{js,json}\" && yarn check --integrity && ./scripts/check-no-dups.sh && ./scripts/svg-id-collisions.sh && node ./scripts/check-errors-wordings.js && yarn lint && yarn prettier -l && yarn test",
     "storybook": "NODE_ENV=development STORYBOOK_ENV=1 start-storybook -s ./static -p 4444",
     "publish-storybook": "bash ./scripts/legacy/publish-storybook.sh",
     "reset-files": "bash ./scripts/legacy/reset-files.sh"
@@ -50,7 +50,7 @@
     "@ledgerhq/hw-transport-node-hid": "4.78.0",
     "@ledgerhq/hw-transport-node-hid-singleton": "4.78.0",
     "@ledgerhq/ledger-core": "^4.2.0",
-    "@ledgerhq/live-common": "^9.0.0-alpha.25",
+    "@ledgerhq/live-common": "^9.0.0-alpha.26",
     "@ledgerhq/logs": "4",
     "@tippy.js/react": "^3.1.0",
     "add": "^2.0.6",

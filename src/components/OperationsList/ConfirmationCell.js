@@ -24,12 +24,10 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const Cell = styled(Box).attrs(() => ({
-  px: 4,
+  pl: 4,
   horizontal: true,
   alignItems: 'center',
-}))`
-  width: 44px;
-`
+}))``
 
 type Props = {
   account: Account | TokenAccount,

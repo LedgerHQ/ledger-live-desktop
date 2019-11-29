@@ -1,6 +1,6 @@
 // @flow
 import invariant from 'invariant'
-import React, { useCallback } from 'react'
+import React, { useCallback, useRef } from 'react'
 import styled from 'styled-components'
 import { Trans } from 'react-i18next'
 import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
@@ -13,16 +13,12 @@ import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
+import ModalContent from 'components/base/Modal/ModalContent'
 
 import UserPlusIcon from 'icons/UserPlus'
 
 import type { StepProps } from '../types'
 import BakerImage from '../../BakerImage'
-
-const ScrollList = styled(Box)`
-  max-height: 225px;
-  overflow-y: scroll;
-`
 
 const Row = styled(Box).attrs(() => ({
   horizontal: true,
@@ -73,6 +69,7 @@ export default ({
   onChangeTransaction,
 }: StepProps) => {
   invariant(account, 'account is required')
+  const contentRef = useRef()
   const bakers = useBakers(bakersWhitelistDefault)
   const onBakerClick = useCallback(
     baker => {
@@ -102,11 +99,13 @@ export default ({
             <Trans i18nKey="delegation.yield" />
           </Text>
         </Box>
-        <ScrollList>
-          {bakers.map(baker => (
-            <BakerRow baker={baker} key={baker.name} onClick={onBakerClick} />
-          ))}
-        </ScrollList>
+        <Box style={{ maxHeight: 255, margin: -20 }}>
+          <ModalContent ref={contentRef}>
+            {bakers.map(baker => (
+              <BakerRow baker={baker} key={baker.name} onClick={onBakerClick} />
+            ))}
+          </ModalContent>
+        </Box>
       </Box>
       <Box align="center">
         <Button onClick={() => transitionTo('custom')}>

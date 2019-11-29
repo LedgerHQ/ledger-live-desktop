@@ -39,6 +39,7 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding: 16px 20px;
+  opacity: ${p => (p.isPending ? 0.5 : 1)};
   > * {
     display: flex;
     align-items: center;
@@ -109,7 +110,7 @@ const Row = ({ account, parentAccount, delegation }: Props) => {
   }, [txURL])
 
   return (
-    <Wrapper>
+    <Wrapper isPending={delegation.isPending}>
       <Baker onClick={openBaker}>
         <BakerImage baker={delegation.baker} />
         <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
@@ -122,16 +123,6 @@ const Row = ({ account, parentAccount, delegation }: Props) => {
         </Text>
       </Address>
       <Base>
-        <CounterValue
-          alwaysShowSign={false}
-          ff="Inter|SemiBold"
-          color="palette.text.shade80"
-          fontSize={3}
-          currency={currency}
-          value={account.balance}
-        />
-      </Base>
-      <Base>
         <FormattedVal
           ff="Inter|SemiBold"
           val={account.balance}
@@ -139,6 +130,16 @@ const Row = ({ account, parentAccount, delegation }: Props) => {
           showCode
           fontSize={3}
           color="palette.text.shade80"
+        />
+      </Base>
+      <Base>
+        <CounterValue
+          alwaysShowSign={false}
+          ff="Inter|SemiBold"
+          color="palette.text.shade80"
+          fontSize={3}
+          currency={currency}
+          value={account.balance}
         />
       </Base>
       <Base>
@@ -156,11 +157,13 @@ const Row = ({ account, parentAccount, delegation }: Props) => {
           </Text>
         </Text>
       </Base>
-      {account.type === 'Account' ? (
+      {account.type === 'Account' && !delegation.isPending ? (
         <CTA>
           <ContextMenu account={account} parentAccount={parentAccount} />
         </CTA>
-      ) : null}
+      ) : (
+        <CTA />
+      )}
     </Wrapper>
   )
 }

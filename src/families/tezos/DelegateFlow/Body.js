@@ -84,14 +84,14 @@ const createSteps = params => [
     label: <Trans i18nKey="delegation.flow.steps.account.label" />,
     component: StepAccount,
     footer: StepAccountFooter,
-    excludeFromBreadcrumb: params && params.stepId === 'summary',
+    excludeFromBreadcrumb: Boolean(params && params.account),
   },
   {
     id: 'summary',
     label: <Trans i18nKey="delegation.flow.steps.summary.label" />,
     component: StepSummary,
     footer: StepSummaryFooter,
-    onBack: ({ transitionTo }) => transitionTo('account'),
+    onBack: params && params.account ? null : ({ transitionTo }) => transitionTo('account'),
   },
   {
     id: 'validator',
@@ -294,6 +294,7 @@ const Body = ({
   const stepperProps = {
     title,
     initialStepId: (params && params.stepId) || stepId,
+    openedWithAccount: Boolean(params && params.account),
     steps,
     errorSteps,
     device,

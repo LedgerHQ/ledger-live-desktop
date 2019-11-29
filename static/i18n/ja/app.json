@@ -50,6 +50,7 @@
     "experimentalFeature": "Experimental",
     "dismiss": "Dismiss",
     "choose": "Choose",
+    "information": "Information",
     "lockScreen": {
       "title": "お帰りなさい",
       "subTitle": null,
@@ -271,13 +272,15 @@
     "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "tooltip": "Token from",
-    "countTooltip": "1 Token",
-    "countTooltip_plural": "{{count}} Tokens"
+    "countTooltip": "1 token",
+    "countTooltip_plural": "{{count}} tokens"
   },
   "subAccounts": {
     "title": "Subaccounts",
     "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
-    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})"
+    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
+    "countTooltip": "1 subaccount",
+    "countTooltip_plural": "{{count}} subaccounts"
   },
   "migrateAccounts": {
     "overview": {
@@ -508,6 +511,11 @@
       },
       "receiveFunds": {
         "title": "受信"
+      },
+      "warning": {
+        "tezos": {
+          "text": "The amount received on a delegated account will be added to the total staked amount. Choose another account if you want to avoid this."
+        }
       }
     }
   },
@@ -535,7 +543,6 @@
         "recipientAddress": "Recipient address",
         "amount": "Amount",
         "fees": "Network fees",
-        "feesTooHigh": "Network fees represent more than 10% of the amount",
         "useMax": "Send Max",
         "advancedOptions": "Advanced options",
         "useRBF": "Use a replace-by-fee transaction",
@@ -560,6 +567,11 @@
           "title": "取引をブロードキャストしています..."
         },
         "broadcastError": "あなたのトランザクションが失敗している可能性があります。しかし、トランザクションが成功していたならば結果が表示されますので、トランザクション再試行する前に数分待ってください。"
+      },
+      "warning": {
+        "tezos": {
+          "text": "The amount to be sent will be deducted from the balance of your delegated account."
+        }
       }
     },
     "footer": {
@@ -594,7 +606,7 @@
     "title": "Earn rewards",
     "header": "Delegation",
     "validator": "Validator",
-    "yield": "Yield",
+    "yield": "Est. Yield",
     "address": "Address",
     "transactionID": "Transaction ID",
     "value": "Value",
@@ -627,7 +639,7 @@
         },
         "summary": {
           "title": "Delegate account",
-          "label": "summary",
+          "label": "Summary",
           "toDelegate": "Account to delegate",
           "toUndelegate": "Account to undelegate",
           "validator": "Validator",
@@ -637,20 +649,25 @@
         },
         "validator": {
           "title": "Select validator",
-          "description": "You can select a validator by comparing estimated reward rates",
+          "description": "You can select a validator by comparing the estimated reward rates",
           "customValidator": "Custom validator",
           "providedBy": "Yield rates provided by <1><0>MyTezosBaker</0></1>"
+        },
+        "custom": {
+          "title": "Custom validator",
+          "text": "Please enter the address of the custom validator to delegate your account to."
         },
         "undelegate": {
           "title": "Undelegate account"
         },
         "confirmation": {
           "title": "Confirmation",
-          "label": "confirmation",
+          "label": "Confirmation",
           "success": {
             "title": "Delegation sent",
-            "titleUndelegated": "Delegation withdrawn",
-            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator."
+            "titleUndelegated": "End delegation",
+            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator.",
+            "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
           },
           "pending": {
             "title": "Broadcasting transaction..."
@@ -664,8 +681,8 @@
       "text": "You can earn Tezos staking rewards by delegating your account"
     },
     "contextMenu": {
-      "topUp": "Receive",
-      "redelegate": "Choose validator",
+      "topUp": "Receive more",
+      "redelegate": "Change validator",
       "stopDelegation": "End delegation"
     }
   },
@@ -775,7 +792,7 @@
     },
     "experimental": {
       "desc": "Try out experimental features and let us know what you think",
-      "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
+      "disclaimer": "These are experimental features we provide on an “as is” basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
       "title": "Ledger Liveをリセット",
@@ -1109,13 +1126,16 @@
     "desc": "Having a hard time connecting your device?"
   },
   "TransactionConfirm": {
-    "title": "Please verify all operation details on your device",
-    "warning": "Carefully verify all {{mode}} details on your device.",
-    "modes": {
-      "send": "transaction",
-      "delegate": "delegation",
-      "undelegate": "undelegation"
+    "title": "Please confirm the operation on your device to send it",
+    "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
+    "recipientWording": {
+      "send": "recipient",
+      "delegate": "validator",
+      "undelegate": "validator"
     }
+  },
+  "RecipientField": {
+    "placeholder": "Enter {{currencyName}} address"
   },
   "errors": {
     "generic": {
@@ -1155,13 +1175,10 @@
       "description": "An unexpected error occurred, so please try again"
     },
     "DeviceSocketFail": {
+      "title": "{{message}}",
       "description": "再試行してください"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "接続できませんでした",
-      "description": "再試行してください"
-    },
-    "DeviceSocketNoHandler": {
       "title": "接続できませんでした",
       "description": "再試行してください"
     },
@@ -1194,6 +1211,7 @@
       "description": "機器のマイクロコントローラの更新が試みられました。機器に問題がある場合は、Ledger Supportにお問い合わせください。"
     },
     "LedgerAPI4xx": {
+      "title": "{{message}}",
       "description": "接続を確認して再試行するか、またはLedgerのサポートにお問い合わせください。"
     },
     "LedgerAPI5xx": {
@@ -1203,10 +1221,6 @@
     "LedgerAPINotAvailable": {
       "title": "申し訳ございません。{{currencyName}}サービスをご利用いただけません",
       "description": "再試行するか、Ledger Supportにご連絡ください。"
-    },
-    "ManagerAPIsFail": {
-      "title": "マネージャーサービスをご利用いただけません",
-      "description": "ネットワーク状況をご確認ください"
     },
     "ManagerAppAlreadyInstalled": {
       "title": "すでにインストールされています",
@@ -1261,10 +1275,6 @@
     "PasswordIncorrect": {
       "title": "入力したパスワードが間違っています",
       "description": "再試行してください"
-    },
-    "SelectExchangesLoadError": {
-      "title": "ロードできません",
-      "description": "後ほど再試行してください"
     },
     "TimeoutError": {
       "title": "タイムアウトが発生しました",
@@ -1369,7 +1379,7 @@
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive on subaccounts, please select the parent account.",
+      "title": "Cannot receive on subaccounts",
       "description": "If you want to receive funds, please use the parent account"
     },
     "UnavailableTezosOriginatedAccountSend": {
@@ -1377,10 +1387,65 @@
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     },
     "RecommendUndelegation": {
-      "title": "Please end this account's delegation first"
+      "title": "Please undelegate account before emptying it"
     },
     "RecommendSubAccountsToEmpty": {
       "title": "Please empty all subaccounts first"
+    },
+    "NotSupportedLegacyAddress": {
+      "title": "This legacy address format is no longer supported"
+    },
+    "BtcUnmatchedApp": {
+      "title": "That's the wrong app",
+      "description": "Open the ‘{{managerAppName}}’ app on your device"
+    },
+    "DeviceNameInvalid": {
+      "title": "Please choose a device name without '{{invalidCharacters}}'"
+    },
+    "LedgerAPIErrorWithMessage": {
+      "title": "{{message}}",
+      "description": "Please retry or contact Ledger Support."
+    },
+    "ManagerAppRelyOnBTC": {
+      "title": "Bitcoin and Ethereum apps required",
+      "description": "Install the latest Bitcoin and Ethereum apps first."
+    },
+    "UserRefusedDeviceNameChange": {
+      "title": "Rename canceled on device",
+      "description": "Try again and allow renaming on your device"
+    },
+    "SyncError": {
+      "title": "Synchronization error",
+      "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
+    },
+    "PairingFailed": {
+      "title": "Pairing unsuccessful",
+      "description": "Please try again or contact Ledger Support when in doubt."
+    },
+    "GenuineCheckFailed": {
+      "title": "Genuine check failed",
+      "description": "Something went wrong. Please try again or contact Ledger Support when in doubt."
+    },
+    "EthAppPleaseEnableContractData": {
+      "title": "Please enable contract data in the Ethereum app settings"
+    },
+    "InvalidXRPTag": {
+      "title": "Invalid XRP Destination tag"
+    },
+    "NotEnoughBalanceToDelegate": {
+      "title": "Insufficient balance to delegate"
+    },
+    "NotEnoughBalanceInParentAccount": {
+      "title": "Insufficient balance in parent account"
+    },
+    "NotEnoughSpendableBalance": {
+      "title": "Insufficient balance for this operation"
+    },
+    "WrongAppForCurrency": {
+      "title": "Please open the {{expected}} app"
+    },
+    "FeeTooHigh": {
+      "title": "Network fees represent more than 10% of the amount"
     }
   }
 }

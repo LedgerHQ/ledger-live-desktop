@@ -14,7 +14,6 @@ import getDeviceInfo from 'commands/getDeviceInfo'
 import getIsGenuine from 'commands/getIsGenuine'
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
 import installApp from 'commands/installApp'
-import killInternalProcess from 'commands/killInternalProcess'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 import libcoreReset from 'commands/libcoreReset'
 import listenDevices from 'commands/listenDevices'
@@ -39,7 +38,6 @@ const all: Array<Command<any, any>> = [
   getIsGenuine,
   getLatestFirmwareForDevice,
   installApp,
-  killInternalProcess,
   libcoreGetVersion,
   libcoreReset,
   listenDevices,

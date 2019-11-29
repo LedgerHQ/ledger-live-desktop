@@ -1956,17 +1956,17 @@
     events "^3.0.0"
 
 "@ledgerhq/ledger-core@^4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-4.2.0.tgz#aeab3c75e43aaff19340f224d77223bbe0f7d120"
-  integrity sha512-lNiTBXgxtDKJNGQoKRbz1NSqAi0Pp74DD6IjF09ATC0fYwGjuxrzWW0VGMj68yNx0G2pDIE+M333muEQscd7QQ==
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-4.3.0.tgz#6f55273a49dba9fcaad2549f75125009dd9ad408"
+  integrity sha512-4oxfJiGbx/8IEiOvOHbjcxC0UAm7gc12Z5WY8lSUVTikSDRaeSIuFa2JaE8X3Cq9QiWyhll5Z9E8AQBYQYoAqQ==
   dependencies:
     bindings "1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@^9.0.0-alpha.25":
-  version "9.0.0-alpha.25"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-9.0.0-alpha.25.tgz#877a811a1698881b6ba35ef2082ebdcf1e907eee"
-  integrity sha512-fkKyl0EcKwlmmNr2j6Ve0MzaEWG53N8yRj77NEURiboE7wpIlf/iqk1o/pHGoI4GFS4qYpSje+kb4g8JGZEWXQ==
+"@ledgerhq/live-common@^9.0.0-alpha.26":
+  version "9.0.0-alpha.26"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-9.0.0-alpha.26.tgz#13df61c04a984bff6aca4c7652d923a192fadd70"
+  integrity sha512-89I32dLkXK7H2VZ9Jqn7uz55NWLquCrG4vX7BS4np2vBkaFTucUptdSGaU5oYd1J+c3EZBOeCrq+bZ/Woa33uA==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "4"
