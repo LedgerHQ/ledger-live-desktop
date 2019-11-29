@@ -535,7 +535,6 @@
         "recipientAddress": "Recipient address",
         "amount": "Amount",
         "fees": "Network fees",
-        "feesTooHigh": "Network fees represent more than 10% of the amount",
         "useMax": "Send Max",
         "advancedOptions": "Advanced options",
         "useRBF": "Use a replace-by-fee transaction",
@@ -1381,6 +1380,9 @@
     },
     "RecommendSubAccountsToEmpty": {
       "title": "Please empty all subaccounts first"
+    },
+    "FeeTooHigh": {
+      "title": "Network fees represent more than 10% of the amount"
     }
   }
 }

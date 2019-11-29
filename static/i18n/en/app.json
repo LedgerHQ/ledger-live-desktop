@@ -543,7 +543,6 @@
         "recipientAddress": "Recipient address",
         "amount": "Amount",
         "fees": "Network fees",
-        "feesTooHigh": "Network fees represent more than 10% of the amount",
         "useMax": "Send Max",
         "advancedOptions": "Advanced options",
         "useRBF": "Use a replace-by-fee transaction",
@@ -1388,10 +1387,10 @@
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     },
     "RecommendUndelegation": {
-      "title": "You should end this account's delegation first"
+      "title": "Please undelegate account before emptying it"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "You should empty all subaccounts first"
+      "title": "Please empty all subaccounts first"
     },
     "NotSupportedLegacyAddress": {
       "title": "This legacy address format is no longer supported"
@@ -1426,6 +1425,27 @@
     "GenuineCheckFailed": {
       "title": "Genuine check failed",
       "description": "Something went wrong. Please try again or contact Ledger Support when in doubt."
+    },
+    "EthAppPleaseEnableContractData": {
+      "title": "Please enable contract data in the Ethereum app settings"
+    },
+    "InvalidXRPTag": {
+      "title": "Invalid XRP Destination tag"
+    },
+    "NotEnoughBalanceToDelegate": {
+      "title": "Insufficient balance to delegate"
+    },
+    "NotEnoughBalanceInParentAccount": {
+      "title": "Insufficient balance in parent account"
+    },
+    "NotEnoughSpendableBalance": {
+      "title": "Insufficient balance for this operation"
+    },
+    "WrongAppForCurrency": {
+      "title": "Please open the {{expected}} app"
+    },
+    "FeeTooHigh": {
+      "title": "Network fees represent more than 10% of the amount"
     }
   }
 }

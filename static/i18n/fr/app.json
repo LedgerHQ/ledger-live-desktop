@@ -535,7 +535,6 @@
         "recipientAddress": "Adresse du destinataire",
         "amount": "Montant",
         "fees": "Frais de réseau",
-        "feesTooHigh": "Les frais de réseau représentent plus de 10% du montant",
         "useMax": "Max",
         "advancedOptions": "Options avancées",
         "useRBF": "Utiliser une transaction Replace-by-Fee",
@@ -1381,6 +1380,9 @@
     },
     "RecommendSubAccountsToEmpty": {
       "title": "Please empty all subaccounts first"
+    },
+    "FeeTooHigh": {
+      "title": "Les frais de réseau représentent plus de 10% du montant"
     }
   }
 }

@@ -4,22 +4,23 @@ const WORDINGS = require('../static/i18n/en/app.json')
 const ERRORS = require('@ledgerhq/errors')
 
 const blacklist = [
-  "Error",
-  "CustomError",
-  "BluetoothRequired",
-  "TransportWebUSBGestureRequired",
-  "LedgerAPIError",
-  "LedgerAPIErrorMessage",
-  "generic",
-  "TimeoutError",
-  "AmountRequired",
-  "CashAddrNotSupported",
-  "RecipientRequired",
-  "TransportOpenUserCancelled",
-  "TransportInterfaceNotAvailable",
-  "NoDBPathGiven",
-  "DBWrongPassword",
-  "DBNotReset"
+  'Error',
+  'CustomError',
+  'BluetoothRequired',
+  'TransportWebUSBGestureRequired',
+  'LedgerAPIError',
+  'LedgerAPIErrorMessage',
+  'generic',
+  'TimeoutError',
+  'AmountRequired',
+  'CashAddrNotSupported',
+  'RecipientRequired',
+  'TransportOpenUserCancelled',
+  'TransportInterfaceNotAvailable',
+  'NoDBPathGiven',
+  'DBWrongPassword',
+  'DBNotReset',
+  'DeviceOnDashboardUnexpected',
 ]
 
 async function main() {
@@ -61,8 +62,6 @@ async function main() {
       incomplete = true
     }
   })
-
-
 
   if (incomplete) {
     console.error('some defined errors are lacking wordings. Please define wordings.')
