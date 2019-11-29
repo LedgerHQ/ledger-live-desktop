@@ -683,7 +683,7 @@
     },
     "contextMenu": {
       "topUp": "Receive more",
-      "redelegate": "Choose validator",
+      "redelegate": "Change validator",
       "stopDelegation": "End delegation"
     }
   },
