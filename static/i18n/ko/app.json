@@ -1175,13 +1175,10 @@
       "description": "An unexpected error occurred, so please try again"
     },
     "DeviceSocketFail": {
+      "title": "{{message}}",
       "description": "다시 시도하십시오."
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "죄송합니다. 연결에 실패했습니다.",
-      "description": "다시 시도하십시오."
-    },
-    "DeviceSocketNoHandler": {
       "title": "죄송합니다. 연결에 실패했습니다.",
       "description": "다시 시도하십시오."
     },
@@ -1214,6 +1211,7 @@
       "description": "불필요하게 장치 마이크로 컨트롤러를 업데이트하려 했습니다. 장치에 문제가 있는 경우 Ledger 지원 센터에 문의하십시오."
     },
     "LedgerAPI4xx": {
+      "title": "{{message}}",
       "description": "Please check your connection and try again or contact Ledger Support."
     },
     "LedgerAPI5xx": {
@@ -1223,10 +1221,6 @@
     "LedgerAPINotAvailable": {
       "title": "죄송합니다. {{currencyName}} 서비스를 사용할 수 없습니다.",
       "description": "다시 시도하거나 Ledger 지원 센터에 문의하십시오."
-    },
-    "ManagerAPIsFail": {
-      "title": "죄송합니다. Manager 서비스를 사용할 수 없습니다.",
-      "description": "네트워크 상태를 확인하십시오"
     },
     "ManagerAppAlreadyInstalled": {
       "title": "죄송합니다. 이미 설치되었습니다.",
@@ -1281,10 +1275,6 @@
     "PasswordIncorrect": {
       "title": "입력된 암호가 올바르지 않습니다.",
       "description": "다시 시도하십시오."
-    },
-    "SelectExchangesLoadError": {
-      "title": "로드할 수 없습니다.",
-      "description": "나중에 다시 시도하십시오."
     },
     "TimeoutError": {
       "title": "죄송합니다. 시간이 초과되었습니다.",
@@ -1389,7 +1379,7 @@
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive on subaccounts, please select the parent account.",
+      "title": "Cannot receive on subaccounts",
       "description": "If you want to receive funds, please use the parent account"
     },
     "UnavailableTezosOriginatedAccountSend": {
@@ -1397,16 +1387,65 @@
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     },
     "RecommendUndelegation": {
-      "title": "You should end this account's delegation first"
+      "title": "Please undelegate account before emptying it"
     },
     "RecommendSubAccountsToEmpty": {
       "title": "Please empty all subaccounts first"
     },
-    "FeeTooHigh": {
-      "title": "Network fees represent more than 10% of the amount"
-    },
     "NotSupportedLegacyAddress": {
       "title": "This legacy address format is no longer supported"
+    },
+    "BtcUnmatchedApp": {
+      "title": "That's the wrong app",
+      "description": "Open the ‘{{managerAppName}}’ app on your device"
+    },
+    "DeviceNameInvalid": {
+      "title": "Please choose a device name without '{{invalidCharacters}}'"
+    },
+    "LedgerAPIErrorWithMessage": {
+      "title": "{{message}}",
+      "description": "Please retry or contact Ledger Support."
+    },
+    "ManagerAppRelyOnBTC": {
+      "title": "Bitcoin and Ethereum apps required",
+      "description": "Install the latest Bitcoin and Ethereum apps first."
+    },
+    "UserRefusedDeviceNameChange": {
+      "title": "Rename canceled on device",
+      "description": "Try again and allow renaming on your device"
+    },
+    "SyncError": {
+      "title": "Synchronization error",
+      "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
+    },
+    "PairingFailed": {
+      "title": "Pairing unsuccessful",
+      "description": "Please try again or contact Ledger Support when in doubt."
+    },
+    "GenuineCheckFailed": {
+      "title": "Genuine check failed",
+      "description": "Something went wrong. Please try again or contact Ledger Support when in doubt."
+    },
+    "EthAppPleaseEnableContractData": {
+      "title": "Please enable contract data in the Ethereum app settings"
+    },
+    "InvalidXRPTag": {
+      "title": "Invalid XRP Destination tag"
+    },
+    "NotEnoughBalanceToDelegate": {
+      "title": "Insufficient balance to delegate"
+    },
+    "NotEnoughBalanceInParentAccount": {
+      "title": "Insufficient balance in parent account"
+    },
+    "NotEnoughSpendableBalance": {
+      "title": "Insufficient balance for this operation"
+    },
+    "WrongAppForCurrency": {
+      "title": "Please open the {{expected}} app"
+    },
+    "FeeTooHigh": {
+      "title": "Network fees represent more than 10% of the amount"
     }
   }
 }
