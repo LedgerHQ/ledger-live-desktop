@@ -50,7 +50,7 @@ const RecipientField = ({
         <span>{label || t('send.steps.details.recipientAddress')}</span>
       </Label>
       <RecipientAddress
-        placeholder="Enter recipient address"
+        placeholder={t('RecipientField.placeholder', { currencyName: account.currency.name })}
         autoFocus={autoFocus}
         withQrCode={!status.recipientIsReadOnly}
         readOnly={status.recipientIsReadOnly}

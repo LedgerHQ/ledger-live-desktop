@@ -607,7 +607,7 @@
     "title": "Earn rewards",
     "header": "Delegation",
     "validator": "Validator",
-    "yield": "Yield",
+    "yield": "Est. Yield",
     "address": "Address",
     "transactionID": "Transaction ID",
     "value": "Value",
@@ -650,7 +650,7 @@
         },
         "validator": {
           "title": "Select validator",
-          "description": "You can select a validator by comparing estimated reward rates",
+          "description": "You can select a validator by comparing the estimated reward rates",
           "customValidator": "Custom validator",
           "providedBy": "Yield rates provided by <1><0>MyTezosBaker</0></1>"
         },
@@ -682,7 +682,7 @@
       "text": "You can earn Tezos staking rewards by delegating your account"
     },
     "contextMenu": {
-      "topUp": "Receive",
+      "topUp": "Receive more",
       "redelegate": "Choose validator",
       "stopDelegation": "End delegation"
     }
@@ -1127,13 +1127,16 @@
     "desc": "Having a hard time connecting your device?"
   },
   "TransactionConfirm": {
-    "title": "Please verify all operation details on your device",
-    "warning": "Carefully verify all {{mode}} details on your device.",
-    "modes": {
-      "send": "transaction",
-      "delegate": "delegation",
-      "undelegate": "undelegation"
+    "title": "Please confirm the operation on your device to send it",
+    "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
+    "recipientWording": {
+      "send": "recipient",
+      "delegate": "validator",
+      "undelegate": "validator"
     }
+  },
+  "RecipientField": {
+    "placeholder": "Enter {{currencyName}} address"
   },
   "errors": {
     "generic": {
