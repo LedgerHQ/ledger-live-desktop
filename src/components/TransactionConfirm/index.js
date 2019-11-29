@@ -54,7 +54,7 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
   const Pre = r && r.pre
   const Post = r && r.post
 
-  const mode = t(`TransactionConfirm.modes.${transaction.mode || 'send'}`)
+  const recipientWording = t(`TransactionConfirm.recipientWording.${transaction.mode || 'send'}`)
 
   return (
     <Container>
@@ -70,7 +70,7 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
         </Box>
       )}
       <Info>
-        <Trans i18nKey="TransactionConfirm.title" values={{ mode }} />
+        <Trans i18nKey="TransactionConfirm.title" />
       </Info>
       <Box style={{ width: '100%' }} px={80} mb={20}>
         {Pre ? (
@@ -116,7 +116,7 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
         ) : null}
       </Box>
       <WarnBox>
-        <Trans i18nKey="TransactionConfirm.warning" values={{ mode }} />
+        <Trans i18nKey="TransactionConfirm.warning" values={{ recipientWording }} />
       </WarnBox>
     </Container>
   )
