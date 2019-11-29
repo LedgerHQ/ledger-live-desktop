@@ -11,7 +11,15 @@ const blacklist = [
   "LedgerAPIError",
   "LedgerAPIErrorMessage",
   "generic",
-  "TimeoutError"
+  "TimeoutError",
+  "AmountRequired",
+  "CashAddrNotSupported",
+  "RecipientRequired",
+  "TransportOpenUserCancelled",
+  "TransportInterfaceNotAvailable",
+  "NoDBPathGiven",
+  "DBWrongPassword",
+  "DBNotReset"
 ]
 
 async function main() {
