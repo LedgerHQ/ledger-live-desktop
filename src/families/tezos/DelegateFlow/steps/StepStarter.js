@@ -28,10 +28,11 @@ const Row = styled(Box).attrs(p => ({
   }
 `
 
-export default ({ transitionTo, t }: StepProps) => {
+export default ({ transitionTo, t, openedWithAccount }: StepProps) => {
   const onClick = useCallback(() => {
-    transitionTo('account')
-  }, [transitionTo])
+    if (openedWithAccount) transitionTo('summary')
+    else transitionTo('account')
+  }, [transitionTo, openedWithAccount])
 
   return (
     <Box flow={4} mx={4}>

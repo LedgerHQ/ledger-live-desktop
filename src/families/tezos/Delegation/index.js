@@ -79,7 +79,6 @@ const Delegation = ({ account, parentAccount, openModal }: Props) => {
                 openModal('MODAL_DELEGATE', {
                   parentAccount,
                   account,
-                  stepId: 'summary',
                 })
               }}
             >
