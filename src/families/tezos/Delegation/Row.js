@@ -126,16 +126,6 @@ const Row = ({ account, parentAccount, delegation }: Props) => {
         </Text>
       </Address>
       <Base>
-        <CounterValue
-          alwaysShowSign={false}
-          ff="Inter|SemiBold"
-          color="palette.text.shade80"
-          fontSize={3}
-          currency={currency}
-          value={account.balance}
-        />
-      </Base>
-      <Base>
         <FormattedVal
           ff="Inter|SemiBold"
           val={account.balance}
@@ -143,6 +133,16 @@ const Row = ({ account, parentAccount, delegation }: Props) => {
           showCode
           fontSize={3}
           color="palette.text.shade80"
+        />
+      </Base>
+      <Base>
+        <CounterValue
+          alwaysShowSign={false}
+          ff="Inter|SemiBold"
+          color="palette.text.shade80"
+          fontSize={3}
+          currency={currency}
+          value={account.balance}
         />
       </Base>
       <Base>
