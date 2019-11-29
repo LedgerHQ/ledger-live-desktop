@@ -34,4 +34,5 @@ export type StepProps = {
   onRetry: void => void,
   signTransaction: ({ transitionTo: string => void }) => void,
   isRandomChoice: boolean,
+  openedWithAccount: boolean,
 }

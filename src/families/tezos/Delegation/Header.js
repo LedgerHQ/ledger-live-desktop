@@ -37,10 +37,10 @@ export default () => (
       <Trans i18nKey={'delegation.transactionID'} />
     </Text>
     <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
-      <Trans i18nKey={'delegation.value'} />
+      <Trans i18nKey={'delegation.amount'} />
     </Text>
     <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
-      <Trans i18nKey={'delegation.amount'} />
+      <Trans i18nKey={'delegation.value'} />
     </Text>
     <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
       <Trans i18nKey={'delegation.duration'} />

@@ -682,7 +682,7 @@
     },
     "contextMenu": {
       "topUp": "Receive more",
-      "redelegate": "Choose validator",
+      "redelegate": "Change validator",
       "stopDelegation": "End delegation"
     }
   },
@@ -1379,7 +1379,7 @@
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive on subaccounts, please select the parent account.",
+      "title": "Cannot receive on subaccounts",
       "description": "If you want to receive funds, please use the parent account"
     },
     "UnavailableTezosOriginatedAccountSend": {

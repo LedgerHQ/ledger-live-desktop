@@ -50,6 +50,7 @@
     "experimentalFeature": "Expérimental",
     "dismiss": "Ignorer",
     "choose": "Choisir",
+    "information": "Information",
     "lockScreen": {
       "title": "Bienvenue",
       "subTitle": null,
@@ -271,13 +272,15 @@
     "seeTokens": "Afficher les tokens ({{tokenCount}})",
     "hideTokens": "Cacher tokens ({{tokenCount}})",
     "tooltip": "Token de",
-    "countTooltip": "1 Token",
-    "countTooltip_plural": "{{count}} Tokens"
+    "countTooltip": "1 token",
+    "countTooltip_plural": "{{count}} tokens"
   },
   "subAccounts": {
     "title": "Sous-comptes",
     "seeSubAccounts": "Afficher les sous-comptes ({{tokenCount}})",
-    "hideSubAccounts": "Masquer les sous-comptes ({{tokenCount}})"
+    "hideSubAccounts": "Masquer les sous-comptes ({{tokenCount}})",
+    "countTooltip": "1 subaccount",
+    "countTooltip_plural": "{{count}} subaccounts"
   },
   "migrateAccounts": {
     "overview": {
@@ -508,6 +511,11 @@
       },
       "receiveFunds": {
         "title": "Recevoir"
+      },
+      "warning": {
+        "tezos": {
+          "text": "The amount received on a delegated account will be added to the total staked amount. Choose another account if you want to avoid this."
+        }
       }
     }
   },
@@ -559,10 +567,15 @@
           "title": "Diffusion de la transaction..."
         },
         "broadcastError": "Votre transaction a peut-être échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée avant de réessayer."
+      },
+      "warning": {
+        "tezos": {
+          "text": "The amount to be sent will be deducted from the balance of your delegated account."
+        }
       }
     },
     "footer": {
-      "estimatedFees": "Frais de réseau"
+      "estimatedFees": "Network fees"
     }
   },
   "releaseNotes": {
@@ -593,7 +606,7 @@
     "title": "Obtenez des récompenses",
     "header": "Délégation",
     "validator": "Validateur",
-    "yield": "Rendement",
+    "yield": "Est. Yield",
     "address": "Adresse",
     "transactionID": "ID de transaction",
     "value": "Valeur",
@@ -626,7 +639,7 @@
         },
         "summary": {
           "title": "Delegate account",
-          "label": "summary",
+          "label": "Summary",
           "toDelegate": "Account to delegate",
           "toUndelegate": "Account to undelegate",
           "validator": "Validator",
@@ -636,20 +649,25 @@
         },
         "validator": {
           "title": "Select validator",
-          "description": "You can select a validator by comparing estimated reward rates",
+          "description": "You can select a validator by comparing the estimated reward rates",
           "customValidator": "Custom validator",
           "providedBy": "Yield rates provided by <1><0>MyTezosBaker</0></1>"
+        },
+        "custom": {
+          "title": "Custom validator",
+          "text": "Please enter the address of the custom validator to delegate your account to."
         },
         "undelegate": {
           "title": "Undelegate account"
         },
         "confirmation": {
           "title": "Confirmation",
-          "label": "confirmation",
+          "label": "Confirmation",
           "success": {
             "title": "Delegation sent",
-            "titleUndelegated": "Delegation withdrawn",
-            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator."
+            "titleUndelegated": "End delegation",
+            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator.",
+            "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
           },
           "pending": {
             "title": "Broadcasting transaction..."
@@ -663,8 +681,8 @@
       "text": "You can earn Tezos staking rewards by delegating your account"
     },
     "contextMenu": {
-      "topUp": "Receive",
-      "redelegate": "Choose validator",
+      "topUp": "Receive more",
+      "redelegate": "Change validator",
       "stopDelegation": "End delegation"
     }
   },
@@ -774,7 +792,7 @@
     },
     "experimental": {
       "desc": "Essayez des fonctionnalités expérimentales et faites-nous savoir ce que vous en pensez",
-      "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
+      "disclaimer": "These are experimental features we provide on an “as is” basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
       "title": "Réinitialiser Ledger Live",
@@ -1108,13 +1126,16 @@
     "desc": "Des difficultés à connecter votre appareil ?"
   },
   "TransactionConfirm": {
-    "title": "Please verify all operation details on your device",
-    "warning": "Carefully verify all {{mode}} details on your device.",
-    "modes": {
-      "send": "transaction",
-      "delegate": "delegation",
-      "undelegate": "terminer"
+    "title": "Please confirm the operation on your device to send it",
+    "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
+    "recipientWording": {
+      "send": "recipient",
+      "delegate": "validator",
+      "undelegate": "validator"
     }
+  },
+  "RecipientField": {
+    "placeholder": "Enter {{currencyName}} address"
   },
   "errors": {
     "generic": {
@@ -1368,7 +1389,7 @@
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Impossible de recevoir sur les sous-comptes, veuillez sélectionner le compte parent.",
+      "title": "Impossible de recevoir sur les sous-comptes",
       "description": "Si vous souhaitez recevoir des fonds, veuillez utiliser le compte parent"
     },
     "UnavailableTezosOriginatedAccountSend": {
@@ -1376,13 +1397,16 @@
       "description": "Suites aux changements récemment introduits par la mise à jour Babylon, cette fonctionnalité sera ajoutée ultérieurement."
     },
     "RecommendUndelegation": {
-      "title": "Please end this account's delegation first"
+      "title": "You should end this account's delegation first"
     },
     "RecommendSubAccountsToEmpty": {
       "title": "Please empty all subaccounts first"
     },
     "FeeTooHigh": {
       "title": "Les frais de réseau représentent plus de 10% du montant"
+    },
+    "NotSupportedLegacyAddress": {
+      "title": "This legacy address format is no longer supported"
     }
   }
 }
