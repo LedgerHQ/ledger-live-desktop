@@ -89,7 +89,7 @@ export default ({
     [account, onChangeTransaction, parentAccount, transaction, transitionTo],
   )
   return (
-    <Box flow={4} mx={40}>
+    <Box flow={4} mx={20}>
       <TrackPage category="Delegation Flow" name="Step Validator" />
       <Box>
         <Text ff="Inter|Regular" color="palette.text.shade80" fontSize={4} align="center">

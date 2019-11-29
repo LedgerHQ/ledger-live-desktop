@@ -44,6 +44,7 @@ const createTitles = t => ({
   validator: t('delegation.flow.steps.validator.title'),
   undelegate: t('delegation.flow.steps.undelegate.title'),
   confirmation: t('delegation.flow.steps.confirmation.title'),
+  custom: t('delegation.flow.steps.custom.title'),
 })
 
 type OwnProps = {|

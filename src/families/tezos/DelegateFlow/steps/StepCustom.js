@@ -1,13 +1,27 @@
 // @flow
 import invariant from 'invariant'
 import React, { useCallback, useEffect, useRef } from 'react'
+import styled from 'styled-components'
 import { getMainAccount } from '@ledgerhq/live-common/lib/account'
 import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
+
 import TrackPage from 'analytics/TrackPage'
 import RecipientField from 'components/modals/Send/fields/RecipientField'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
+
+import CustomValidatorIcon from 'icons/CustomValidator'
+
 import type { StepProps } from '../types'
+
+const IconWrapper = styled(Box).attrs(() => ({
+  p: 3,
+}))`
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  background-color: ${p => p.theme.colors.palette.action.hover};
+`
 
 export default ({
   account,
@@ -22,6 +36,11 @@ export default ({
   return (
     <Box flow={4} mx={40}>
       <TrackPage category="Delegation Flow" name="Step Custom" />
+      <Box>
+        <IconWrapper color="palette.primary.main">
+          <CustomValidatorIcon size={30} />
+        </IconWrapper>
+      </Box>
       <Box my={24}>
         <RecipientField
           label="Validator address"
