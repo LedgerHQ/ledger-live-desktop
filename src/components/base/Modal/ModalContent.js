@@ -42,20 +42,18 @@ type Props = {
   noScroll?: boolean,
 }
 
-// $FlowFixMe @IAmMorrow
 const ModalContent = React.forwardRef(({ children, noScroll }: Props, containerRef) => {
   const [isScrollable, setScrollable] = useState(false)
 
   const onHeightUpdate = useCallback(() => {
-    // $FlowFixMe @IAmMorrow
-    setScrollable(containerRef.scrollHeight > containerRef.clientHeight)
+    if (!containerRef.current) return
+    setScrollable(containerRef.current.scrollHeight > containerRef.current.clientHeight)
   }, [containerRef])
 
   useLayoutEffect(() => {
+    if (!containerRef.current) return null
     const ro = new ResizeObserver(onHeightUpdate)
-    if (containerRef.current) {
-      ro.observe(containerRef.current)
-    }
+    ro.observe(containerRef.current)
     return () => {
       ro.disconnect()
     }
