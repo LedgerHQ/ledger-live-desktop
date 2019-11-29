@@ -12,7 +12,7 @@ import RetryButton from 'components/base/RetryButton'
 import LinkWithExternalIcon from 'components/base/LinkWithExternalIcon'
 import Interactions from 'icons/device/interactions'
 
-import type { StepProps } from '../index'
+import type { StepProps } from '../Body'
 import TranslatedError from '../../../TranslatedError'
 import DebugAppInfosForCurrency from '../../../DebugAppInfosForCurrency'
 

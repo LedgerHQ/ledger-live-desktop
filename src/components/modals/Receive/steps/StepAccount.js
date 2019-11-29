@@ -13,7 +13,7 @@ import SelectAccount from 'components/SelectAccount'
 import SelectCurrency from 'components/SelectCurrency'
 import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
 import ErrorBanner from 'components/ErrorBanner'
-import type { StepProps } from '..'
+import type { StepProps } from '../Body'
 
 const AccountSelection = ({ onChangeAccount, account }) => (
   <>

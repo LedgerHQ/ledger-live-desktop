@@ -10,6 +10,8 @@ AccountHeaderActions.js \
 AccountBodyHeader.js \
 SendAmountFields.js \
 SendRecipientFields.js \
+SendWarning.js \
+ReceiveWarning.js \
 "
 
 cd ../src

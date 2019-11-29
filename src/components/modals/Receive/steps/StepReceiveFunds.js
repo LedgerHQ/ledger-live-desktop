@@ -9,7 +9,7 @@ import Box from 'components/base/Box'
 import CurrentAddress from 'components/CurrentAddress'
 import { DisconnectedDevice, WrongDeviceForAccount } from '@ledgerhq/errors'
 
-import type { StepProps } from '..'
+import type { StepProps } from '../Body'
 
 export default class StepReceiveFunds extends PureComponent<StepProps> {
   componentDidMount() {

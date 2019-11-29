@@ -31,6 +31,7 @@ import StepConnectDevice, { StepConnectDeviceFooter } from './steps/StepConnectD
 import StepVerification from './steps/StepVerification'
 import StepSummary, { StepSummaryFooter } from './steps/StepSummary'
 import StepConfirmation, { StepConfirmationFooter } from './steps/StepConfirmation'
+import StepWarning, { StepWarningFooter } from './steps/StepWarning'
 
 type OwnProps = {|
   stepId: string,
@@ -39,6 +40,7 @@ type OwnProps = {|
   params: {
     account: ?AccountLike,
     parentAccount: ?Account,
+    startWithWarning?: boolean,
   },
 |}
 
@@ -57,6 +59,12 @@ type Props = {|
 |}
 
 const createSteps = () => [
+  {
+    id: 'warning',
+    excludeFromBreadcrumb: true,
+    component: StepWarning,
+    footer: StepWarningFooter,
+  },
   {
     id: 'recipient',
     label: <Trans i18nKey="send.steps.recipient.title" />,
@@ -155,7 +163,13 @@ const Body = ({
       parentAccount,
     }
   })
-  // console.log({ status, bridgeError })
+
+  // make sure step id is in sync
+  useEffect(() => {
+    const stepId = params && params.startWithWarning ? 'warning' : null
+    if (stepId) onChangeStepId(stepId)
+  }, [onChangeStepId, params])
+
   const [isAppOpened, setAppOpened] = useState(false)
   const [optimisticOperation, setOptimisticOperation] = useState(null)
   const [transactionError, setTransactionError] = useState(null)
@@ -290,8 +304,8 @@ const Body = ({
   const error = transactionError || bridgeError
 
   const stepperProps = {
-    title: t('send.title'),
-    initialStepId: stepId,
+    title: stepId === 'warning' ? t('common.information') : t('send.title'),
+    initialStepId: params && params.startWithWarning ? 'warning' : stepId,
     steps,
     errorSteps,
     device,
@@ -300,7 +314,7 @@ const Body = ({
     parentAccount,
     transaction,
     isAppOpened,
-    hideBreadcrumb: !!error && ['recipient', 'amount'].includes(stepId),
+    hideBreadcrumb: (!!error && ['recipient', 'amount'].includes(stepId)) || stepId === 'warning',
     error,
     status,
     bridgePending,
