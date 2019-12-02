@@ -144,17 +144,15 @@ const Row = ({ account, parentAccount, delegation }: Props) => {
       </Base>
       <Base>
         <Text ff="Inter|Medium" color="palette.text.shade80" fontSize={3}>
-          <Text style={{ paddingLeft: '4px' }}>
-            {diffInDays ? (
-              <Trans
-                i18nKey="delegation.durationDays"
-                count={diffInDays}
-                values={{ count: diffInDays }}
-              />
-            ) : (
-              <Trans i18nKey="delegation.durationJustStarted" />
-            )}
-          </Text>
+          {diffInDays ? (
+            <Trans
+              i18nKey="delegation.durationDays"
+              count={diffInDays}
+              values={{ count: diffInDays }}
+            />
+          ) : (
+            <Trans i18nKey="delegation.durationJustStarted" />
+          )}
         </Text>
       </Base>
       {account.type === 'Account' && !delegation.isPending ? (
