@@ -57,9 +57,9 @@ const ToolTip = ({ followCursor, tooltipBg, children, content, delay, ...props }
   return (
     <Tippy
       {...defaultTippyOptions}
-      content={<ContentContainer bg={bg}>{content}</ContentContainer>}
+      content={content ? <ContentContainer bg={bg}>{content}</ContentContainer> : null}
       delay={[delay, 0]}
-      arrow={arrow(bg)}
+      arrow={content ? arrow(bg) : null}
       followCursor={followCursor}
       {...props}
     >

@@ -43,6 +43,7 @@ import IsNewVersion from 'components/IsNewVersion'
 import SyncContinuouslyPendingOperations from '../SyncContinouslyPendingOperations'
 import HSMStatusBanner from '../HSMStatusBanner'
 import type { State } from '../../reducers'
+import ManagerV2Page from '../ManagerV2Page'
 
 const Main = styled(GrowScroll).attrs(() => ({
   px: 6,
@@ -136,6 +137,7 @@ class Default extends Component<Props> {
                     <Route path="/settings" component={SettingsPage} />
                     <Route path="/accounts" component={AccountsPage} />
                     <Route path="/manager" component={ManagerPage} />
+                    <Route path="/managerv2" component={ManagerV2Page} />
                     <Route path="/partners" component={PartnersPage} />
                     <Route path="/account/:parentId/:id" component={AccountPage} />
                     <Route path="/account/:id" component={AccountPage} />

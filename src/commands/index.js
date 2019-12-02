@@ -17,6 +17,7 @@ import installApp from 'commands/installApp'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 import libcoreReset from 'commands/libcoreReset'
 import listenDevices from 'commands/listenDevices'
+import listApps from 'commands/listApps'
 import ping from 'commands/ping'
 import quitAndInstallElectronUpdate from 'commands/quitAndInstallElectronUpdate'
 import testApdu from 'commands/testApdu'
@@ -24,8 +25,10 @@ import testCrash from 'commands/testCrash'
 import testInterval from 'commands/testInterval'
 import uninstallApp from 'commands/uninstallApp'
 import { commands as bridgeProxyCommands } from '../bridge/proxy'
+import appOpExec from './appOpExec'
 
 const all: Array<Command<any, any>> = [
+  appOpExec,
   autoUpdate,
   ...bridgeProxyCommands,
   getAppAndVersion,
@@ -40,6 +43,7 @@ const all: Array<Command<any, any>> = [
   installApp,
   libcoreGetVersion,
   libcoreReset,
+  listApps,
   listenDevices,
   ping,
   quitAndInstallElectronUpdate,

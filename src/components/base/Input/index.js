@@ -42,7 +42,7 @@ const Container = styled(Box).attrs(() => ({
       : p.isFocus
       ? p.theme.colors.palette.primary.main
       : p.theme.colors.palette.divider};
-  box-shadow: ${p => (p.isFocus ? `rgba(0, 0, 0, 0.05) 0 2px 2px` : 'none')};
+  box-shadow: ${p => (p.isFocus && !p.noBoxShadow ? `rgba(0, 0, 0, 0.05) 0 2px 2px` : 'none')};
   height: ${p => (p.small ? '34' : '48')}px;
   position: relative;
 

@@ -5,7 +5,7 @@ import React from 'react'
 export default ({
   height,
   width,
-  size,
+  size = 16,
   color = 'currentColor',
 }: {
   height?: number,
