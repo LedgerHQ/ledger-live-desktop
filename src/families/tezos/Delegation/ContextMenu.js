@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Trans } from 'react-i18next'
 import { connect } from 'react-redux'
 import type { AccountLike, Account } from '@ledgerhq/live-common/lib/types'
+import { useDelegation } from '@ledgerhq/live-common/lib/families/tezos/bakers'
 
 import { MODAL_RECEIVE } from 'config/constants'
 import { openModal } from 'reducers/modals'
@@ -43,12 +44,20 @@ type Props = {
 }
 
 const ContextMenu = ({ account, parentAccount, openModal }: Props) => {
+  const delegation = useDelegation(account)
+  const receiveShouldWarnDelegation = delegation && delegation.receiveShouldWarnDelegation
+
   const items = [
     {
       key: 'topUp',
       label: <Trans i18nKey="delegation.contextMenu.topUp" />,
       icon: <ArrowDown size={16} />,
-      onClick: () => openModal(MODAL_RECEIVE, { parentAccount, account }),
+      onClick: () =>
+        openModal(MODAL_RECEIVE, {
+          parentAccount,
+          account,
+          startWithWarning: receiveShouldWarnDelegation,
+        }),
     },
     {
       key: 'redelegate',

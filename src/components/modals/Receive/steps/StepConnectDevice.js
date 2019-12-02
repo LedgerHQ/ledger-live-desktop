@@ -9,7 +9,7 @@ import EnsureDeviceApp from 'components/EnsureDeviceApp'
 import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
 import TrackPage from 'analytics/TrackPage'
 
-import type { StepProps } from '../index'
+import type { StepProps } from '../Body'
 import TokenTips from '../../TokenTips'
 
 export default function StepConnectDevice({
