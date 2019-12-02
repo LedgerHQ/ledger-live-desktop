@@ -17,6 +17,9 @@ import DebugAppInfosForCurrency from 'components/DebugAppInfosForCurrency'
 import IconCheckCircle from 'icons/CheckCircle'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 import IconTriangleWarning from 'icons/TriangleWarning'
+import LinkWithExternalIcon from 'components/base/LinkWithExternalIcon'
+import { openURL } from 'helpers/linking'
+import { urls } from 'config/urls'
 
 import type { StepProps } from '../types'
 
@@ -149,6 +152,12 @@ export function StepConfirmationFooter({
     : null
   return (
     <>
+      <Box mr={2} ff="Inter|SemiBold" fontSize={4}>
+        <LinkWithExternalIcon
+          label={<Trans i18nKey="delegation.howItWorks" />}
+          onClick={() => openURL(urls.delegation)}
+        />
+      </Box>
       {concernedOperation ? (
         <Button
           ml={2}
