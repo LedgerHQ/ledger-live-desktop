@@ -12,13 +12,14 @@ import Box from 'components/base/Box'
 import Space from 'components/base/Space'
 import Text from 'components/base/Text'
 import TrackPage from 'analytics/TrackPage'
+import Connect from './Connect'
 
 type Props = {
   t: T,
   onSuccess: void => void,
 }
 
-class ManagerGenuineCheck extends PureComponent<Props> {
+class ManagerConnect extends PureComponent<Props> {
   render() {
     const { t, onSuccess } = this.props
     return (
@@ -36,17 +37,17 @@ class ManagerGenuineCheck extends PureComponent<Props> {
             color="palette.text.shade100"
             style={{ marginBottom: 10 }}
           >
-            {t('manager.device.title')}
+            {t('managerv2.device.title')}
           </Text>
           <Text ff="Inter|Light" fontSize={5} color="palette.text.shade60" align="center">
-            {t('manager.device.desc')}
+            {t('managerv2.device.desc')}
           </Text>
         </Box>
         <Space of={40} />
-        <GenuineCheck shouldRenderRetry onSuccess={onSuccess} style={{ width: 400 }} />
+        <Connect shouldRenderRetry onSuccess={onSuccess} style={{ width: 400 }} />
       </Box>
     )
   }
 }
 
-export default translate()(ManagerGenuineCheck)
+export default translate()(ManagerConnect)

@@ -30,8 +30,7 @@ export const experimentalFeatures: Feature[] = [
     type: 'toggle',
     name: 'EXPERIMENTAL_MANAGER',
     title: 'Experimental manager v2',
-    description:
-      'Building upon the development done on the hackathon, we aim to rebuild the manager.',
+    description: 'Access the wip for the new Manager area',
   },
   {
     type: 'toggle',

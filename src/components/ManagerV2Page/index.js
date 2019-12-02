@@ -3,7 +3,7 @@ import React, { Fragment, useState, useCallback } from 'react'
 import { getEnv } from '@ledgerhq/live-common/lib/env'
 import HookDeviceChange from './HookDeviceChange'
 import Dashboard from './Dashboard'
-import Connect from './Connect'
+import ManagerConnect from './ManagerConnect'
 
 export const getManagerPageRoute = () =>
   getEnv('EXPERIMENTAL_MANAGER') ? '/managerv2' : '/manager'
@@ -20,7 +20,7 @@ const ManagerV2Page = () => {
   }, [])
 
   if (!connectResult) {
-    return <Connect onSuccess={onConnect} />
+    return <ManagerConnect onSuccess={onConnect} />
   }
 
   return (

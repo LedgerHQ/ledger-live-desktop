@@ -526,6 +526,11 @@
         "title": "Loading apps and fancy stuff"
       }
     },
+    "device": {
+      "title": "Connect your device",
+      "desc": "Follow the steps below to open the Manager v2",
+      "cta": "Connect my device"
+    },
     "tabs": {
       "appCatalog": "App Catalog",
       "appsOnDevice": "Apps Installed"
