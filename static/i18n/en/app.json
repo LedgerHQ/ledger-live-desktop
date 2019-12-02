@@ -622,7 +622,7 @@
       "steps": {
         "starter": {
           "title": "Earn staking rewards",
-          "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets",
+          "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets.",
           "bullet": {
             "delegate": "Delegated accounts stay yours.",
             "access": "You can access your assets anytime.",
@@ -657,7 +657,7 @@
         "custom": {
           "title": "Custom validator",
           "text": "Please enter the address of the custom validator to delegate your account to.",
-          "button": "Use validator"
+          "button": "Confirm validator"
         },
         "undelegate": {
           "title": "Undelegate account"
@@ -667,7 +667,7 @@
           "label": "Confirmation",
           "success": {
             "title": "Delegation sent",
-            "titleUndelegated": "End delegation",
+            "titleUndelegated": "Operation sent",
             "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator.",
             "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
           },
@@ -1218,7 +1218,7 @@
     },
     "LedgerAPI5xx": {
       "title": "Sorry, try again.",
-      "description": "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
+      "description": "The server could not handle your request. Please try again at a later moment. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Sorry, {{currencyName}} services unavailable",
