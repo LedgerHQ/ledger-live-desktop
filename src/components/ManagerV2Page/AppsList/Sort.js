@@ -9,13 +9,16 @@ import DropDown, { DropDownItem } from 'components/base/DropDown'
 import Text from 'components/base/Text'
 import IconAngleDown from 'icons/AngleDown'
 
-const Sort = ({ onSortChange, sort }) => {
-  const onSortChangeWrapper = useCallback(({ selectedItem: item }) => {
-    if (!item) {
-      return
-    }
-    onSortChange(item.key)
-  }, [])
+const Sort = ({ onSortChange, sort }: *) => {
+  const onSortChangeWrapper = useCallback(
+    ({ selectedItem: item }) => {
+      if (!item) {
+        return
+      }
+      onSortChange(item.key)
+    },
+    [onSortChange],
+  )
 
   const sortItems = [
     {

@@ -7,7 +7,6 @@ import type { T } from 'types/common'
 import { i } from 'helpers/staticPath'
 
 import InvertableImg from 'components/InvertableImg'
-import GenuineCheck from 'components/GenuineCheck'
 import Box from 'components/base/Box'
 import Space from 'components/base/Space'
 import Text from 'components/base/Text'

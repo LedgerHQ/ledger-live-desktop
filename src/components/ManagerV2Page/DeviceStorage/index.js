@@ -121,14 +121,14 @@ const TooltipContentWrapper = styled.div`
   }
 `
 
-const TooltipContent = ({ name, bytes }) => (
+const TooltipContent = ({ name, bytes }: { name: string, bytes: number }) => (
   <TooltipContentWrapper>
     <Text>{name}</Text>
     <Text>{formatSize(bytes)}</Text>
   </TooltipContentWrapper>
 )
 
-export const StorageBar = ({ distribution }: { distribution: AppsDistribution }) => (
+export const StorageBar = ({ distribution }: { distribution: * }) => (
   <StorageBarWrapper>
     {distribution.apps.map(({ name, currency, bytes, blocks }) => {
       const color = currency ? currency.color : 'black'
@@ -145,7 +145,7 @@ export const StorageBar = ({ distribution }: { distribution: AppsDistribution })
   </StorageBarWrapper>
 )
 
-const DeviceStorage = ({ state, deviceInfo }) => {
+const DeviceStorage = ({ state, deviceInfo }: *) => {
   const distribution = distribute(state)
 
   return (

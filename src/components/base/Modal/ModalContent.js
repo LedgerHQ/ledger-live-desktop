@@ -42,33 +42,36 @@ type Props = {
   noScroll?: boolean,
 }
 
-const ModalContent = React.forwardRef(({ children, noScroll }: Props, containerRef) => {
-  const [isScrollable, setScrollable] = useState(false)
+const ModalContent: React$ComponentType<Props> = React.forwardRef(
+  ({ children, noScroll }, containerRef) => {
+    const [isScrollable, setScrollable] = useState(false)
 
-  const onHeightUpdate = useCallback(() => {
-    if (!containerRef.current) return
-    setScrollable(containerRef.current.scrollHeight > containerRef.current.clientHeight)
-  }, [containerRef])
+    const onHeightUpdate = useCallback(() => {
+      const { current } = containerRef
+      if (!current) return
+      setScrollable(current.scrollHeight > current.clientHeight)
+    }, [containerRef])
 
-  useLayoutEffect(() => {
-    if (!containerRef.current) return null
-    const ro = new ResizeObserver(onHeightUpdate)
-    ro.observe(containerRef.current)
-    return () => {
-      ro.disconnect()
-    }
-  }, [containerRef, onHeightUpdate])
+    useLayoutEffect(() => {
+      if (!containerRef.current) return null
+      const ro = new ResizeObserver(onHeightUpdate)
+      ro.observe(containerRef.current)
+      return () => {
+        ro.disconnect()
+      }
+    }, [containerRef, onHeightUpdate])
 
-  useEffect(() => {}, [isScrollable])
+    useEffect(() => {}, [isScrollable])
 
-  return (
-    <ContentWrapper>
-      <ContentScrollableContainer ref={containerRef} noScroll={noScroll}>
-        {children}
-      </ContentScrollableContainer>
-      <ContentScrollableContainerGradient opacity={isScrollable ? 1 : 0} />
-    </ContentWrapper>
-  )
-})
+    return (
+      <ContentWrapper>
+        <ContentScrollableContainer ref={containerRef} noScroll={noScroll}>
+          {children}
+        </ContentScrollableContainer>
+        <ContentScrollableContainerGradient opacity={isScrollable ? 1 : 0} />
+      </ContentWrapper>
+    )
+  },
+)
 
 export default ModalContent

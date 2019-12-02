@@ -29,7 +29,7 @@ const Cancel = styled.div`
   color: ${p => p.theme.colors.palette.primary.main};
 `
 
-const Progress = ({ onClick, progress }: { onClick: () => undefined, progress: * }) => (
+const Progress = ({ onClick, progress }: { onClick: () => void, progress: * }) => (
   <div style={{ textAlign: 'right' }}>
     <Box horizontal alignItems="center" justifyContent="flex-end">
       <Text ff="Inter|SemiBold" fontSize={3} color="palette.primary.main" mb={5}>

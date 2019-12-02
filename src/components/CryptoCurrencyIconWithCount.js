@@ -66,7 +66,8 @@ class CryptoCurrencyIconWithCount extends PureComponent<Props> {
       </Wrapper>
     )
 
-    const isToken = listTokenTypesForCryptoCurrency(currency).length > 0
+    const isToken =
+      currency.type === 'CryptoCurrency' && listTokenTypesForCryptoCurrency(currency).length > 0
     if (withTooltip && count > 0) {
       return (
         <Tooltip

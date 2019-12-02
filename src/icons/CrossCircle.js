@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 
-export default ({ size = 16, color = 'currentColor', ...p }: { size: number, color: string }) => (
+export default ({ size = 16, color = 'currentColor' }: { size: number, color?: string }) => (
   <svg
     width={size}
     height={size}

@@ -89,7 +89,9 @@ const LiveCompatible = styled.div`
   }
 `
 
-const Item = React.memo(
+type Props = * // FIXME
+
+const Item: React$ComponentType<Props> = React.memo(
   ({
     state,
     app,
@@ -102,8 +104,6 @@ const Item = React.memo(
     appStoreView,
     onlyUpdate,
     deviceModel,
-  }: {
-    state: *,
   }) => {
     const { name } = app
     const onInstall = useCallback(() => dispatch({ type: 'install', name }), [dispatch, name])

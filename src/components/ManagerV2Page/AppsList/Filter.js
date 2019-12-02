@@ -9,13 +9,16 @@ import DropDown, { DropDownItem } from 'components/base/DropDown'
 import Text from 'components/base/Text'
 import IconAngleDown from 'icons/AngleDown'
 
-const Filter = ({ onFilterChange, filter }) => {
-  const onFilterChangeWrapper = useCallback(({ selectedItem: item }) => {
-    if (!item) {
-      return
-    }
-    onFilterChange(item.key)
-  }, [])
+const Filter = ({ onFilterChange, filter }: *) => {
+  const onFilterChangeWrapper = useCallback(
+    ({ selectedItem: item }) => {
+      if (!item) {
+        return
+      }
+      onFilterChange(item.key)
+    },
+    [onFilterChange],
+  )
 
   const filterItems = [
     {

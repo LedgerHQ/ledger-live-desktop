@@ -8,12 +8,12 @@ import { setEnvUnsafe, getEnv } from '@ledgerhq/live-common/lib/env'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
 import TransportNodeHidSingleton from '@ledgerhq/hw-transport-node-hid-singleton'
 import TransportHttp from '@ledgerhq/hw-transport-http'
+import { implementCountervalues } from '@ledgerhq/live-common/lib/countervalues'
 import { DisconnectedDevice } from '@ledgerhq/errors'
 import { LISTEN_DEVICES_DEBOUNCE } from 'config/constants'
 import { retry } from './promise'
 import './implement-libcore'
 import './live-common-set-supported-currencies'
-import { implementCountervalues } from '@ledgerhq/live-common/lib/countervalues'
 
 /* eslint-disable guard-for-in */
 for (const k in process.env) {

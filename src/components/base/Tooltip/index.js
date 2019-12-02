@@ -44,7 +44,7 @@ const arrow = bg =>
 
 type Props = {
   tooltipBg?: string,
-  children: React$Node,
+  children?: React$Node,
   content: React$Node,
   delay?: number,
   followCursor?: boolean,

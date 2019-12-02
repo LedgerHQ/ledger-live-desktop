@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-export default ({ size, color = 'currentColor', ...p }: { size: number, color: string }) => (
+export default ({ size, color = 'currentColor', ...p }: { size: number, color?: string }) => (
   <svg viewBox="0 0 16 17.6" height={size} width={size} {...p}>
     <g transform="translate(670.57 190.38)">
       <path

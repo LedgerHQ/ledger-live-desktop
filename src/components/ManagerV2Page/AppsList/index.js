@@ -8,14 +8,14 @@ import Text from 'components/base/Text'
 import IconSearch from 'icons/Search'
 import IconLoader from 'icons/Loader'
 import Input from 'components/base/Input'
-import { getActionPlan, useAppsRunner } from '@ledgerhq/live-common/lib/apps'
-import Item from './Item'
-import DeviceStorage from '../DeviceStorage'
-import Filter from './Filter'
 import {
   getCryptoCurrencyById,
   isCurrencySupported,
 } from '@ledgerhq/live-common/lib/data/cryptocurrencies'
+import { getActionPlan, useAppsRunner } from '@ledgerhq/live-common/lib/apps'
+import Item from './Item'
+import DeviceStorage from '../DeviceStorage'
+import Filter from './Filter'
 import Sort from './Sort'
 import Placeholder from './Placeholder'
 
@@ -73,7 +73,7 @@ const Badge = styled(Text)`
   margin-left: 10px;
 `
 
-const AppsList = ({ device, deviceInfo, listAppsRes, exec }: *) => {
+const AppsList = ({ deviceInfo, listAppsRes, exec }: *) => {
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('all')
   const [sort, setSort] = useState('name')
@@ -84,8 +84,9 @@ const AppsList = ({ device, deviceInfo, listAppsRes, exec }: *) => {
   const plan = getActionPlan(state)
   const onUpdateAll = useCallback(() => dispatch({ type: 'updateAll' }), [dispatch])
 
-  const searchFilter = ({ name, currency }) => {
+  const searchFilter = ({ name, currencyId }) => {
     if (!search) return true
+    const currency = currencyId ? getCryptoCurrencyById(currencyId) : null
     const terms = `${name} ${currency ? `${currency.name} ${currency.ticker}` : ''}`
     return terms.toLowerCase().includes(search.toLowerCase().trim())
   }
