@@ -84,7 +84,7 @@ const Post = ({ transaction }: { transaction: Transaction }) => {
   invariant(transaction.family === 'tezos', 'tezos transaction')
 
   return (
-    <TransactionConfirmField label="Storage">
+    <TransactionConfirmField label="Storage Limit">
       <Text ff="Inter|Medium" color="palette.text.shade80" fontSize={3}>
         {(transaction.storageLimit || '').toString()}
       </Text>
