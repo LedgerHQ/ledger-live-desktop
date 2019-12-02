@@ -4,6 +4,7 @@ set -e
 cd $(dirname $0)
 
 targets="\
+operationDetails.js \
 accountActions.js \
 TransactionConfirmFields.js \
 AccountHeaderActions.js \

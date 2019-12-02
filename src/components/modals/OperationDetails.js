@@ -49,6 +49,8 @@ import { confirmationsNbForCurrencySelector, marketIndicatorSelector } from 'red
 import IconChevronRight from 'icons/ChevronRight'
 import IconExternalLink from 'icons/ExternalLink'
 import CounterValue from 'components/CounterValue'
+import LinkHelp from 'components/base/LinkHelp'
+import byFamiliesOperationDetails from 'generated/operationDetails'
 import Link from '../base/Link'
 
 const OpDetailsSection = styled(Box).attrs(() => ({
@@ -227,6 +229,9 @@ const OperationDetails = connect(
   const confirmations = operation.blockHeight ? mainAccount.blockHeight - operation.blockHeight : 0
   const isConfirmed = confirmations >= confirmationsNb
 
+  const specific = byFamiliesOperationDetails[mainAccount.currency.family]
+  const urlWhatIsThis =
+    specific && specific.getURLWhatIsThis && specific.getURLWhatIsThis(operation)
   const url = getTransactionExplorer(getDefaultExplorerView(mainAccount.currency), operation.hash)
   const uniqueSenders = uniq(senders)
 
@@ -521,13 +526,23 @@ const OperationDetails = connect(
           ))}
         </Box>
       )}
-      renderFooter={() =>
-        url && (
-          <Button primary onClick={() => openURL(url)}>
-            {t('operationDetails.viewOperation')}
-          </Button>
-        )
-      }
+      renderFooter={() => (
+        <Box horizontal grow justifyContent="space-between">
+          {urlWhatIsThis ? (
+            <Box ff="Inter|SemiBold" fontSize={4}>
+              <LinkHelp
+                label={<Trans i18nKey="operationDetails.whatIsThis" />}
+                onClick={() => openURL(urlWhatIsThis)}
+              />
+            </Box>
+          ) : null}
+          {url ? (
+            <Button primary onClick={() => openURL(url)}>
+              {t('operationDetails.viewOperation')}
+            </Button>
+          ) : null}
+        </Box>
+      )}
     >
       <TrackPage category="Modal" name="OperationDetails" />
     </ModalBody>
