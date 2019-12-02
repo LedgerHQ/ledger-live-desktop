@@ -105,7 +105,6 @@ function StepConfirmation({
         {error ? (
           <TranslatedError error={error} />
         ) : optimisticOperation ? (
-          // TODO: Contextualize message for undelegation
           <Trans
             i18nKey={`delegation.flow.steps.confirmation.success.${
               undelegating ? 'titleUndelegated' : 'title'
@@ -117,8 +116,13 @@ function StepConfirmation({
       </Title>
       <Text style={{ userSelect: 'text' }} color="palette.text.shade80">
         {optimisticOperation ? (
-          // TODO: Contextualize message for undelegation
-          multiline(t('delegation.flow.steps.confirmation.success.text'))
+          multiline(
+            t(
+              `delegation.flow.steps.confirmation.success.${
+                undelegating ? 'textUndelegated' : 'text'
+              }`,
+            ),
+          )
         ) : error ? (
           <TranslatedError error={error} field="description" />
         ) : null}
