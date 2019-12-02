@@ -1,5 +1,4 @@
 // @flow
-// TODO: WORK IN PROGRESS / FLOW IS BROKEN WITH THIS COMPONENT / index.js IS NOT SPLITTED YET
 import React, { useState, useCallback, useEffect } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
