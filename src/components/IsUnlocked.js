@@ -23,7 +23,7 @@ import Box from 'components/base/Box'
 import InputPassword from 'components/base/InputPassword'
 import LedgerLiveLogo from 'components/base/LedgerLiveLogo'
 import IconArrowRight from 'icons/ArrowRight'
-import Button from 'components/base/Button/index'
+import Button from 'components/base/Button'
 import ConfirmModal from 'components/base/Modal/ConfirmModal'
 
 type InputValue = {
@@ -179,9 +179,14 @@ class IsUnlocked extends Component<Props, State> {
                   />
                 </Box>
                 <Box ml={2}>
-                  <Button style={{ width: 38, height: 38 }} primary onClick={this.handleSubmit}>
-                    <Box style={{ alignItems: 'center' }}>
-                      <IconArrowRight size={16} />
+                  <Button
+                    onClick={this.handleSubmit}
+                    primary
+                    flow={1}
+                    style={{ width: 46, height: 46, padding: 0, justifyContent: 'center' }}
+                  >
+                    <Box alignItems="center">
+                      <IconArrowRight size={20} />
                     </Box>
                   </Button>
                 </Box>
