@@ -162,7 +162,8 @@ const Body = ({
 }: Props) => {
   const openedFromAccount = !!params.account
   const bakers = useBakers(whitelist)
-  const randomBaker = useMemo(() => sample(bakers), [bakers])
+  const randomBakerIndex = useMemo(() => Math.floor(Math.random() * bakers.length), [bakers.length])
+  const randomBaker = bakers[randomBakerIndex]
 
   const [steps] = useState(() => createSteps(params))
   const {

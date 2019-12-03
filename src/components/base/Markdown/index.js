@@ -19,6 +19,7 @@ export const Notes = styled(Box).attrs(() => ({
 
   p {
     margin: 1em 0;
+    text-align: justify;
   }
 
   code,

@@ -173,22 +173,7 @@ const StepSummary = ({ account, transaction, transitionTo, isRandomChoice }: Ste
       />
       <Box mt={32}>
         <Text ff="Inter|Medium" color="palette.text.shade80" fontSize={3}>
-          <Trans i18nKey="delegation.flow.steps.summary.termsAndPrivacy">
-            {'I have read and I accept the Ledger Live'}
-            <LinkWithExternalIcon
-              onClick={openTerms}
-              style={{ fontSize: 12, display: 'inline-flex', fontWeight: 500, padding: '0px 1px' }}
-            >
-              {'Terms of Use'}
-            </LinkWithExternalIcon>
-            {'and'}
-            <LinkWithExternalIcon
-              onClick={openPrivacy}
-              style={{ fontSize: 12, display: 'inline-flex', fontWeight: 500, padding: '0px 1px' }}
-            >
-              {'Privacy Policy'}
-            </LinkWithExternalIcon>
-          </Trans>
+          <Trans i18nKey="delegation.flow.steps.summary.termsAndPrivacy" />
         </Text>
       </Box>
     </Box>
