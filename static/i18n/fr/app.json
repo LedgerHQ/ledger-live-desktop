@@ -940,12 +940,6 @@
     "support": "Contacter l'assistance",
     "github": "GitHub"
   },
-  "disclaimerModal": {
-    "title": "Tradez en toute sécurité.",
-    "desc_1": "Avant d’envoyer et de recevoir des crypto-actifs, renseignez-vous afin de prendre des décisions éclairées. Les crypto-actifs sont volatiles et les prix peuvent monter ou baisser. Évaluez attentivement vos objectifs de trading et les risques financiers que vous êtes prêt à prendre.",
-    "desc_2": "Veuillez noter que Ledger ne fournit aucun conseil financier, fiscal ou juridique. Vous devrez prendre ces décisions par vous-même ou consulter des experts fiables.",
-    "cta": "Compris"
-  },
   "exportOperationsModal": {
     "title": "Historique des opérations",
     "desc": "Sélectionnez les comptes pour lesquels sauvegarder l'historique d'opération",
@@ -1195,6 +1189,11 @@
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"
+  },
+  "Terms": {
+    "title": "Terms of Use",
+    "read": "Read the Terms of Use",
+    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
   },
   "errors": {
     "generic": {
