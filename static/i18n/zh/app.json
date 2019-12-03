@@ -703,7 +703,7 @@
           "select": "Select",
           "yield": "Est. Yield {{amount}}",
           "randomly": "Randomly chosen validator",
-          "termsAndPrivacy": "I have read and I accept the Ledger Live<1><0>Terms of Use</0></1> and <3><0>Privacy Policy</0></3>"
+          "termsAndPrivacy": "Delegating your voting rights does not guarantee you will be paid any reward by your validator."
         },
         "validator": {
           "title": "Select validator",
@@ -939,12 +939,6 @@
     "restart": "重启",
     "support": "联系客服",
     "github": "GitHub"
-  },
-  "disclaimerModal": {
-    "title": "安全交易",
-    "desc_1": "发送和接收加密资产之前，请务必了解相关知识，以便做出知情决策。加密资产并不稳定，价格也可能上下起伏。请认真评估您的交易目标和您愿意承担的财务风险。",
-    "desc_2": "请注意，Ledger 不提供财务、税务或法律建议。您应自行做出这些决定，或咨询可靠的专家。",
-    "cta": "明白了"
   },
   "exportOperationsModal": {
     "title": "操作历史",
@@ -1195,6 +1189,11 @@
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"
+  },
+  "Terms": {
+    "title": "Terms of Use",
+    "read": "Read the Terms of Use",
+    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
   },
   "errors": {
     "generic": {

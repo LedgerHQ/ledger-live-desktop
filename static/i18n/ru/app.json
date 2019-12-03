@@ -703,7 +703,7 @@
           "select": "Select",
           "yield": "Est. Yield {{amount}}",
           "randomly": "Randomly chosen validator",
-          "termsAndPrivacy": "I have read and I accept the Ledger Live<1><0>Terms of Use</0></1> and <3><0>Privacy Policy</0></3>"
+          "termsAndPrivacy": "Delegating your voting rights does not guarantee you will be paid any reward by your validator."
         },
         "validator": {
           "title": "Select validator",
@@ -939,12 +939,6 @@
     "restart": "Перезапустить",
     "support": "Связаться со службой поддержки",
     "github": "GitHub"
-  },
-  "disclaimerModal": {
-    "title": "Выполняйте торговые операции в условиях безопасности",
-    "desc_1": "Перед отправкой и получением криптоактивов получите как можно больше информации, чтобы принять обоснованные решения. Криптоактивы отличаются изменчивостью, а цены могут повышаться и снижаться. Тщательно оцените свои торговые задачи и финансовый риск, который вы готовы принять.",
-    "desc_2": "Будьте осторожны и помните, что компания Ledger не оказывает финансовые, налоговые или юридические консультации. Подобные решения необходимо принимать по своему усмотрению или предварительно проконсультироваться с заслуживающими доверия специалистами.",
-    "cta": "Понятно"
   },
   "exportOperationsModal": {
     "title": "История операций",
@@ -1195,6 +1189,11 @@
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"
+  },
+  "Terms": {
+    "title": "Terms of Use",
+    "read": "Read the Terms of Use",
+    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
   },
   "errors": {
     "generic": {
