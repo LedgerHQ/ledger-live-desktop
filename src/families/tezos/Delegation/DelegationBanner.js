@@ -52,7 +52,7 @@ const LogoContainer = styled(Box).attrs(() => ({
 }))`
   position: absolute;
   top: 10px;
-  right: 25%;
+  left: 20px;
 
   ${IconContainer} {
     width: 100%;
@@ -64,16 +64,12 @@ const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner, openModa
   const closeBanner = useCallback(() => dismissBanner(DELEGATION_BANNER), [dismissBanner])
 
   return hasUndelegated && !isDismissed ? (
-    <Card
-      bg="palette.primary.main"
-      style={{ overflow: 'hidden' }}
-      color="palette.primary.contrastText"
-    >
-      <Box horizontal px={6} py={4} style={{ position: 'relative' }}>
-        <IconContainer onClick={closeBanner}>
+    <Card bg="#2C7DF7" style={{ overflow: 'hidden' }} color="palette.primary.contrastText">
+      <Box horizontal pr={6} pl={180} py={3} style={{ position: 'relative' }}>
+        <IconContainer style={{ zIndex: 10 }} onClick={closeBanner}>
           <IconCross size={16} />
         </IconContainer>
-        <Box flex={1} justifyContent="space-between">
+        <Box style={{ zIndex: 10 }} flex={1} justifyContent="space-between">
           <Box mb={24}>
             <Text
               ff="Inter|SemiBold"
@@ -101,7 +97,7 @@ const DelegationBanner = ({ hasUndelegated, isDismissed, dismissBanner, openModa
           </Box>
         </Box>
         <LogoContainer>
-          <CoinWallet size={140} />
+          <CoinWallet size={130} />
         </LogoContainer>
       </Box>
     </Card>
