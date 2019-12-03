@@ -384,6 +384,7 @@
     "from": "Desde",
     "to": "Hasta",
     "identifier": "ID de la transacción",
+    "whatIsThis": "What is this operation?",
     "viewOperation": "Ver en el explorador",
     "showMore": "Ver {{recipients}} más",
     "showLess": "Ver menos",

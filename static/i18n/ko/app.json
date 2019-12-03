@@ -384,6 +384,7 @@
     "from": "수신",
     "to": "발신",
     "identifier": "트랜잭션 ID",
+    "whatIsThis": "What is this operation?",
     "viewOperation": "탐색기에서 보기",
     "showMore": "{{recipients}} 자세히 표시",
     "showLess": "간단히 표시",

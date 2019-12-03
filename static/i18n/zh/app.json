@@ -384,6 +384,7 @@
     "from": "自",
     "to": "至",
     "identifier": "交易 ID",
+    "whatIsThis": "What is this operation?",
     "viewOperation": "在区块链浏览器中查看",
     "showMore": "显示更多 {{recipients}}",
     "showLess": "显示更少",

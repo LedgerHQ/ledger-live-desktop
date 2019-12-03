@@ -384,6 +384,7 @@
     "from": "От",
     "to": "Кому",
     "identifier": "Идентификатор транзакции",
+    "whatIsThis": "What is this operation?",
     "viewOperation": "Просмотреть в Explorer",
     "showMore": "Показать больше {{recipients}}",
     "showLess": "Показать меньше",
