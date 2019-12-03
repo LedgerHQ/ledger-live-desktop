@@ -50,7 +50,7 @@
     "experimentalFeature": "Expérimental",
     "dismiss": "Ignorer",
     "choose": "Choisir",
-    "information": "Information",
+    "information": "Informations",
     "lockScreen": {
       "title": "Bienvenue",
       "subTitle": null,
@@ -272,15 +272,15 @@
     "seeTokens": "Afficher les tokens ({{tokenCount}})",
     "hideTokens": "Cacher tokens ({{tokenCount}})",
     "tooltip": "Token de",
-    "countTooltip": "1 token",
-    "countTooltip_plural": "{{count}} tokens"
+    "countTooltip": "1 Token",
+    "countTooltip_plural": "{{count}} Tokens"
   },
   "subAccounts": {
     "title": "Sous-comptes",
     "seeSubAccounts": "Afficher les sous-comptes ({{tokenCount}})",
     "hideSubAccounts": "Masquer les sous-comptes ({{tokenCount}})",
-    "countTooltip": "1 subaccount",
-    "countTooltip_plural": "{{count}} subaccounts"
+    "countTooltip": "1 sous-compte",
+    "countTooltip_plural": "{{count}} sous-comptes"
   },
   "migrateAccounts": {
     "overview": {
@@ -384,7 +384,7 @@
     "from": "De",
     "to": "Vers",
     "identifier": "ID de la transaction",
-    "whatIsThis": "What is this operation?",
+    "whatIsThis": "À quoi correspond cette information ?",
     "viewOperation": "Afficher dans l'explorer",
     "showMore": "Afficher plus de {{recipients}}",
     "showLess": "Afficher moins",
@@ -515,7 +515,7 @@
       },
       "warning": {
         "tezos": {
-          "text": "The amount received on a delegated account will be added to the total staked amount. Choose another account if you want to avoid this."
+          "text": "Le montant reçu sur un compte délégué sera ajouté au montant total staké. Choisissez un autre compte si vous souhaitez éviter cela."
         }
       }
     }
@@ -527,7 +527,7 @@
       }
     },
     "device": {
-      "title": "Connect your device",
+      "title": "Connectez votre appareil",
       "desc": "Follow the steps below to open the Manager v2",
       "cta": "Connect my device"
     },
