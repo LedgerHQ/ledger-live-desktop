@@ -384,6 +384,7 @@
     "from": "から",
     "to": "へ",
     "identifier": "取引ID",
+    "whatIsThis": "What is this operation?",
     "viewOperation": "Explorerで表示",
     "showMore": "{{recipients}} 展開",
     "showLess": "折りたたむ",
