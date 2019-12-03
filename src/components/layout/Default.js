@@ -39,6 +39,7 @@ import SyncBackground from 'components/SyncBackground'
 import DebugUpdater from 'components/Updater/DebugUpdater'
 import ListenDevices from 'components/ListenDevices'
 import IsNewVersion from 'components/IsNewVersion'
+import CheckTermsAccepted from 'components/CheckTermsAccepted'
 
 import SyncContinuouslyPendingOperations from '../SyncContinouslyPendingOperations'
 import HSMStatusBanner from '../HSMStatusBanner'
@@ -107,6 +108,8 @@ class Default extends Component<Props> {
             {visibleModals.map(([name, ModalComponent]) => (
               <ModalComponent key={name} />
             ))}
+
+            <CheckTermsAccepted />
 
             <IsNewVersion />
 
