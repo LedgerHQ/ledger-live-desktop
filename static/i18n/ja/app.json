@@ -940,12 +940,6 @@
     "support": "サポートに問い合わせる",
     "github": "GitHub"
   },
-  "disclaimerModal": {
-    "title": "安全に取引",
-    "desc_1": "クリプトアセットを送受信する前に、十分な情報収集を行った上で、決定を行うようにしてください。クリプトアセットはボラティリティが高く、価格は乱高下することがあります。取引目標とお客様がとることができる財務リスクを慎重に定めてください。",
-    "desc_2": "Ledgerは財務、税務または法務に関する助言を提供しません。それらはお客様ご自身で決定するか、信頼のおける専門家にご相談ください。",
-    "cta": "了解"
-  },
   "exportOperationsModal": {
     "title": "操作履歴",
     "desc": "操作履歴を保存するアカウントを選択します。",
@@ -1195,6 +1189,11 @@
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"
+  },
+  "Terms": {
+    "title": "Terms of Use",
+    "read": "Read the Terms of Use",
+    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
   },
   "errors": {
     "generic": {
