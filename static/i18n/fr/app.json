@@ -384,6 +384,7 @@
     "from": "De",
     "to": "Vers",
     "identifier": "ID de la transaction",
+    "whatIsThis": "What is this operation?",
     "viewOperation": "Afficher dans l'explorer",
     "showMore": "Afficher plus de {{recipients}}",
     "showLess": "Afficher moins",
