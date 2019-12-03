@@ -940,12 +940,6 @@
     "support": "지원 센터 문의",
     "github": "GitHub"
   },
-  "disclaimerModal": {
-    "title": "안전한 거래",
-    "desc_1": "암호화 자산을 전송 및 수신하기 전에 정보에 입각한 결정을 내릴 수 있도록 관련 지식을 학습하십시오. 암호화 화폐는 변동성이 높으며 가격이 상승 또는 하락할 수 있습니다. 자신의 거래 목표와 감수하려는 금융 위험을 조심스럽게 평가하십시오.",
-    "desc_2": "Ledger는 재무, 세금 또는 법적 조언을 제공하지 않는다는 점에 유의하십시오. 귀하는 결정을 스스로 내리거나 신뢰할 수 있는 전문가와 상의해야 합니다.",
-    "cta": "알겠습니다"
-  },
   "exportOperationsModal": {
     "title": "Operation history",
     "desc": "Select the accounts for which to save the operation history",
@@ -1195,6 +1189,11 @@
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"
+  },
+  "Terms": {
+    "title": "Terms of Use",
+    "read": "Read the Terms of Use",
+    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
   },
   "errors": {
     "generic": {
