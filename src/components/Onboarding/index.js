@@ -12,7 +12,6 @@ import type { T } from 'types/common'
 import type { OnboardingState } from 'reducers/onboarding'
 import type { SettingsState } from 'reducers/settings'
 
-import { MODAL_DISCLAIMER, MODAL_DISCLAIMER_DELAY } from 'config/constants'
 import { saveSettings } from 'actions/settings'
 import { openModal } from 'reducers/modals'
 import {
@@ -133,9 +132,6 @@ class Onboarding extends PureComponent<Props> {
   finish = () => {
     this.props.saveSettings({ hasCompletedOnboarding: true })
     this.props.relaunchOnboarding(false)
-    setTimeout(() => {
-      this.props.openModal(MODAL_DISCLAIMER)
-    }, MODAL_DISCLAIMER_DELAY)
   }
   savePassword = hash => {
     this.props.saveSettings({

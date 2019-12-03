@@ -940,12 +940,6 @@
     "support": "Contact Support",
     "github": "GitHub"
   },
-  "disclaimerModal": {
-    "title": "Trade safely",
-    "desc_1": "Before sending and receiving crypto assets, educate yourself to make informed decisions. Crypto assets are volatile and the prices can go up and down. Carefully evaluate your trading goals and the financial risk you are willing to take.",
-    "desc_2": "Please beware that Ledger does not provide financial, tax, or legal advice. You should take such decisions on your own or consult with reliable experts.",
-    "cta": "Got it"
-  },
   "exportOperationsModal": {
     "title": "Operation history",
     "desc": "Select the accounts for which to save the operation history",
@@ -1195,6 +1189,11 @@
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"
+  },
+  "Terms": {
+    "title": "Terms of Use",
+    "read": "Read the Terms of Use",
+    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
   },
   "errors": {
     "generic": {

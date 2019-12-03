@@ -128,6 +128,8 @@ export const Notes = styled(Box).attrs(() => ({
   }
 `
 
+export const Terms = Notes
+
 type Props = {
   children: *,
 }
