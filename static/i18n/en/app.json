@@ -385,6 +385,7 @@
     "from": "From",
     "to": "To",
     "identifier": "Transaction ID",
+    "whatIsThis": "What is this operation?",
     "viewOperation": "View in explorer",
     "showMore": "Show {{recipients}} more",
     "showLess": "Show less",
