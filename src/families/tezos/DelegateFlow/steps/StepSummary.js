@@ -1,7 +1,7 @@
 // @flow
 
 import invariant from 'invariant'
-import React, { useCallback } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {
   getAccountCurrency,
@@ -11,11 +11,7 @@ import {
 import { useBaker, useDelegation } from '@ledgerhq/live-common/lib/families/tezos/bakers'
 import type { Baker } from '@ledgerhq/live-common/lib/families/tezos/bakers'
 import { Trans } from 'react-i18next'
-
 import TrackPage from 'analytics/TrackPage'
-import { urls } from 'config/urls'
-import { openURL } from 'helpers/linking'
-
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
@@ -24,7 +20,6 @@ import Button from 'components/base/Button'
 import Ellipsis from 'components/base/Ellipsis'
 import TranslatedError from 'components/TranslatedError'
 import AccountFooter from 'components/modals/Send/AccountFooter'
-import LinkWithExternalIcon from 'components/base/LinkWithExternalIcon'
 
 import BakerImage from '../../BakerImage'
 import DelegationContainer from './../DelegationContainer'
@@ -64,9 +59,6 @@ const StepSummary = ({ account, transaction, transitionTo, isRandomChoice }: Ste
   const unit = getAccountUnit(account)
 
   const getBakerName = (baker: ?Baker, fallback: string) => (baker ? baker.name : fallback)
-
-  const openTerms = useCallback(() => openURL(urls.terms), [])
-  const openPrivacy = useCallback(() => openURL(urls.privacyPolicy), [])
 
   return (
     <Box flow={4} mx={40}>
