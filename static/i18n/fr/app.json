@@ -75,7 +75,7 @@
       "CREATE": "Créée",
       "REVEAL": "Révélée",
       "DELEGATE": "Déléguée",
-      "UNDELEGATE": "Terminée"
+      "UNDELEGATE": "Interrompue"
     }
   },
   "time": {
@@ -1448,32 +1448,32 @@
       "title": "Veuillez interrompre la délégation du compte avant de le vider"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Please empty all subaccounts first"
+      "title": "Veuillez d'abord vider tous les sous-comptes"
     },
     "NotSupportedLegacyAddress": {
-      "title": "This legacy address format is no longer supported"
+      "title": "Ce format d'adresse legacy n'est plus pris en charge"
     },
     "BtcUnmatchedApp": {
-      "title": "That's the wrong app",
-      "description": "Open the ‘{{managerAppName}}’ app on your device"
+      "title": "Ce n'est pas la bonne application",
+      "description": "Ouvrez l’application « {{managerAppName}} » sur votre appareil"
     },
     "DeviceNameInvalid": {
-      "title": "Please choose a device name without '{{invalidCharacters}}'"
+      "title": "Veuillez choisir un nom d'appareil sans '{{invalidCharacters}}'"
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
-      "description": "Please retry or contact Ledger Support."
+      "description": "Veuillez essayer à nouveau ou contacter l’assistance Ledger."
     },
     "ManagerAppRelyOnBTC": {
-      "title": "Bitcoin and Ethereum apps required",
-      "description": "Install the latest Bitcoin and Ethereum apps first."
+      "title": "Applications Bitcoin et Ethereum requises",
+      "description": "Installez d'abord les dernières applications Bitcoin et Ethereum."
     },
     "UserRefusedDeviceNameChange": {
-      "title": "Rename canceled on device",
-      "description": "Try again and allow renaming on your device"
+      "title": "Renommage annulé sur l'appareil",
+      "description": "Essayez à nouveau et autorisez le renommage sur votre appareil"
     },
     "SyncError": {
-      "title": "Synchronization error",
+      "title": "Erreur de synchronisation",
       "description": "Un problème est survenu avec la synchronisation de la blockchain. Veuillez réessayer ou nous contacter."
     },
     "PairingFailed": {
