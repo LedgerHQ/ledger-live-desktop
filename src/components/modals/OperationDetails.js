@@ -527,7 +527,7 @@ const OperationDetails = connect(
         </Box>
       )}
       renderFooter={() => (
-        <Box horizontal grow justifyContent="space-between">
+        <Box horizontal grow>
           {urlWhatIsThis ? (
             <Box ff="Inter|SemiBold" fontSize={4}>
               <LinkHelp
@@ -536,6 +536,7 @@ const OperationDetails = connect(
               />
             </Box>
           ) : null}
+          <div style={{ flex: 1 }} />
           {url ? (
             <Button primary onClick={() => openURL(url)}>
               {t('operationDetails.viewOperation')}
