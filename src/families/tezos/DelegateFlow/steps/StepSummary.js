@@ -18,6 +18,7 @@ import FormattedVal from 'components/base/FormattedVal'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import Button from 'components/base/Button'
 import Ellipsis from 'components/base/Ellipsis'
+import WarnBox from 'components/WarnBox'
 import TranslatedError from 'components/TranslatedError'
 import AccountFooter from 'components/modals/Send/AccountFooter'
 
@@ -119,7 +120,12 @@ const StepSummary = ({ account, transaction, transitionTo, isRandomChoice }: Ste
                   </Text>
                 </Ellipsis>
                 {baker ? (
-                  <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
+                  <Text
+                    textAlign="center"
+                    ff="Inter|Medium"
+                    color="palette.text.shade60"
+                    fontSize={3}
+                  >
                     <Trans
                       i18nKey="delegation.flow.steps.summary.yield"
                       values={{ amount: baker.nominalYield }}
@@ -151,7 +157,12 @@ const StepSummary = ({ account, transaction, transitionTo, isRandomChoice }: Ste
                   </Text>
                 </Ellipsis>
                 {delegation.baker ? (
-                  <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
+                  <Text
+                    textAlign="center"
+                    ff="Inter|Medium"
+                    color="palette.text.shade60"
+                    fontSize={3}
+                  >
                     <Trans
                       i18nKey="delegation.flow.steps.summary.yield"
                       values={{ amount: delegation.baker.nominalYield }}
@@ -163,11 +174,13 @@ const StepSummary = ({ account, transaction, transitionTo, isRandomChoice }: Ste
           ) : null
         }
       />
-      <Box mt={32}>
-        <Text ff="Inter|Medium" color="palette.text.shade80" fontSize={3}>
-          <Trans i18nKey="delegation.flow.steps.summary.termsAndPrivacy" />
-        </Text>
-      </Box>
+      {transaction.mode === 'delegate' ? (
+        <Box mt={32}>
+          <WarnBox>
+            <Trans i18nKey="delegation.flow.steps.summary.termsAndPrivacy" />
+          </WarnBox>
+        </Box>
+      ) : null}
     </Box>
   )
 }

@@ -61,8 +61,8 @@ const Delegation = ({ account, parentAccount, openModal }: Props) => {
         </Card>
       ) : (
         <Wrapper horizontal>
-          <Box>
-            <Text ff="Inter|Medium" color="palette.text.shade60" fontSize={3}>
+          <Box style={{ maxWidth: '65%' }}>
+            <Text ff="Inter|Medium|SemiBold" color="palette.text.shade60" fontSize={4}>
               <Trans i18nKey="delegation.delegationEarn" />
             </Text>
             <Box mt={2}>

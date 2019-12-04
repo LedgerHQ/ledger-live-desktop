@@ -232,6 +232,7 @@ const OperationDetails = connect(
   const specific = byFamiliesOperationDetails[mainAccount.currency.family]
   const urlWhatIsThis =
     specific && specific.getURLWhatIsThis && specific.getURLWhatIsThis(operation)
+  const urlFeesInfo = specific && specific.getURLFeesInfo && specific.getURLFeesInfo(operation)
   const url = getTransactionExplorer(getDefaultExplorerView(mainAccount.currency), operation.hash)
   const uniqueSenders = uniq(senders)
 
@@ -426,7 +427,28 @@ const OperationDetails = connect(
           <Box horizontal flow={2}>
             {isNegative && (
               <Box flex={1}>
-                <OpDetailsTitle>{t('operationDetails.fees')}</OpDetailsTitle>
+                <Box horizontal>
+                  <OpDetailsTitle>{t('operationDetails.fees')}</OpDetailsTitle>
+
+                  {urlFeesInfo ? (
+                    <Link>
+                      <FakeLink
+                        underline
+                        fontSize={3}
+                        ml={2}
+                        color="palette.text.shade80"
+                        onClick={() => openURL(urlFeesInfo)}
+                        iconFirst
+                      >
+                        <Box mr={1}>
+                          <IconExternalLink size={12} />
+                        </Box>
+                        {t('common.learnMore')}
+                      </FakeLink>
+                    </Link>
+                  ) : null}
+                </Box>
+
                 {fee ? (
                   <Fragment>
                     <OpDetailsData>
