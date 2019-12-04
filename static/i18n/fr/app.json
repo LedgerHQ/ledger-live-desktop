@@ -706,43 +706,43 @@
           "termsAndPrivacy": "Déléguer vos droits de vote ne garantit pas que vous recevrez des récompenses de la part de votre validateur."
         },
         "validator": {
-          "title": "Select validator",
-          "description": "You can select a validator by comparing the estimated reward rates",
-          "customValidator": "Custom validator",
-          "providedBy": "Yield rates provided by <1><0>MyTezosBaker</0></1>"
+          "title": "Sélectionner un validateur",
+          "description": "Vous pouvez sélectionner un validateur en comparant les taux de rendement estimés",
+          "customValidator": "Validateur personnalisé",
+          "providedBy": "Taux de rendements fournis par <1><0>MyTezosBaker</0></1>"
         },
         "custom": {
-          "title": "Custom validator",
-          "text": "Please enter the address of the custom validator to delegate your account to.",
-          "button": "Confirm validator"
+          "title": "Validateur personnalisé",
+          "text": "Veuillez saisir l'adresse du validateur auquel vous souhaitez déléguer votre compte.",
+          "button": "Confirmer le validateur"
         },
         "undelegate": {
-          "title": "Undelegate account"
+          "title": "Interrompre la délégation"
         },
         "confirmation": {
           "title": "Confirmation",
           "label": "Confirmation",
           "success": {
-            "title": "Delegation sent",
-            "titleUndelegated": "Operation sent",
-            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator.",
-            "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
+            "title": "Délégation envoyée",
+            "titleUndelegated": "Opération envoyée",
+            "text": "Transaction de délégation diffusée avec succès. Vous devriez recevoir vos premières récompenses dans un délai d'environ 40 jours, en fonction du validateur.",
+            "textUndelegated": "La délégation de votre compte se terminera une fois l'opération confirmée. Vous pouvez déléguer à nouveau votre compte à tout moment."
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "Diffusion de la transaction..."
           },
-          "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+          "broadcastError": "Votre transaction a potentiellement échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée, avant de réessayer."
         }
       }
     },
     "banner": {
-      "title": "Earn rewards",
-      "text": "You can earn Tezos staking rewards by delegating your account"
+      "title": "Obtenez des récompenses",
+      "text": "Vous pouvez obtenir des récompenses staking Tezos en déléguant votre compte"
     },
     "contextMenu": {
-      "topUp": "Receive more",
-      "redelegate": "Change validator",
-      "stopDelegation": "End delegation"
+      "topUp": "Recevoir plus",
+      "redelegate": "Changer de validateur",
+      "stopDelegation": "Terminer la délégation"
     }
   },
   "asset": {
@@ -930,8 +930,8 @@
     "quitAndInstall": "Installer maintenant",
     "error": "Erreur lors de la mise à jour. Veuillez télécharger à nouveau",
     "reDownload": "Télécharger à nouveau",
-    "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
-    "downloadNow": "Download now"
+    "nightlyWarning": "Cette version ne peut pas être mise à jour automatiquement, veuillez installer la dernière version manuellement",
+    "downloadNow": "Télécharger Maintenant"
   },
   "crash": {
     "oops": "Oups, une erreur c'est produite",
@@ -970,7 +970,7 @@
     },
     "start": {
       "title": "Bienvenue sur Ledger Live",
-      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
+      "themeDesc": "Commençons par choisir l'apparence de Ledger Live.\nVous pouvez changer cela à tout moment dans vos paramètres.",
       "startBtn": "Premiers pas"
     },
     "init": {
@@ -1179,21 +1179,21 @@
     "desc": "Des difficultés à connecter votre appareil ?"
   },
   "TransactionConfirm": {
-    "title": "Please confirm the operation on your device to send it",
-    "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
+    "title": "Veuillez confirmer l'opération sur votre appareil pour l'envoyer",
+    "warning": "Vérifiez toujours que votre appareil affiche exactement l'adresse fournie par le {{recipientWording}}",
     "recipientWording": {
-      "send": "recipient",
-      "delegate": "validator",
-      "undelegate": "validator"
+      "send": "destinataire",
+      "delegate": "validateur",
+      "undelegate": "validateur"
     }
   },
   "RecipientField": {
-    "placeholder": "Enter {{currencyName}} address"
+    "placeholder": "Entrer l'adresse {{currencyName}}"
   },
   "Terms": {
-    "title": "Terms of Use",
-    "read": "Read the Terms of Use",
-    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
+    "title": "Conditions d’utilisation",
+    "read": "Lire nos Conditions d'utilisation",
+    "switchLabel": "J'ai lu et accepte les conditions d'utilisation et la politique de confidentialité"
   },
   "errors": {
     "generic": {
@@ -1274,7 +1274,7 @@
     },
     "LedgerAPI5xx": {
       "title": "Désolé, essayez à nouveau.",
-      "description": "The server could not handle your request. Please try again at a later moment. {{message}}"
+      "description": "Le serveur n'a pas pu traiter votre demande. Veuillez réessayer ultérieurement. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Désolé, les services {{currencyName}} ne sont pas disponibles.",
@@ -1437,7 +1437,7 @@
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive on subaccounts",
+      "title": "Impossible de recevoir sur les sous-comptes",
       "description": "Si vous souhaitez recevoir des fonds, veuillez utiliser le compte parent"
     },
     "UnavailableTezosOriginatedAccountSend": {
@@ -1445,7 +1445,7 @@
       "description": "Suites aux changements récemment introduits par la mise à jour Babylon, cette fonctionnalité sera ajoutée ultérieurement."
     },
     "RecommendUndelegation": {
-      "title": "Please undelegate account before emptying it"
+      "title": "Veuillez interrompre la délégation du compte avant de le vider"
     },
     "RecommendSubAccountsToEmpty": {
       "title": "Please empty all subaccounts first"
