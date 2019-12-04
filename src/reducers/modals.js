@@ -24,14 +24,7 @@ const handlers = {
   MODAL_OPEN: (state, { payload }: { payload: OpenPayload }) => {
     const { name, data } = payload
     return {
-      // Close all modal before
-      ...Object.keys(state).reduce((result, key) => {
-        result[key] = {
-          isOpened: false,
-          data: undefined,
-        }
-        return result
-      }, {}),
+      ...state,
       [name]: {
         isOpened: true,
         data,
