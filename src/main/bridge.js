@@ -33,6 +33,8 @@ let internalProcess
 let userId = null
 let sentryEnabled = false
 
+const hydratedPerCurrency = {}
+
 async function init() {
   const u = await user()
   userId = u.id
@@ -75,6 +77,10 @@ const bootInternalProcess = () => {
   setInternalProcessPID(internalProcess.pid)
   internalProcess.on('message', handleGlobalInternalMessage)
   internalProcess.on('exit', handleExit)
+  internalProcess.send({
+    type: 'init',
+    hydratedPerCurrency,
+  })
 }
 
 process.on('exit', () => {
@@ -186,5 +192,14 @@ ipcMain.on('setEnv', (event, env) => {
       if (!p) return
       p.send({ type: 'setEnv', env })
     }
+  }
+})
+
+ipcMain.on('hydrateCurrencyData', (event, { currencyId, serialized }) => {
+  if (hydratedPerCurrency[currencyId] === serialized) return
+  hydratedPerCurrency[currencyId] = serialized
+  const p = internalProcess
+  if (p) {
+    p.send({ type: 'hydrateCurrencyData', serialized })
   }
 })

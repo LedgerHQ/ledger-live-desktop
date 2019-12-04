@@ -45,7 +45,10 @@ export default class Tabbable extends Component<
     const { onClick } = this.props
     const canPress =
       (e.which === KEY_ENTER || e.which === KEY_SPACE) && isGlobalTabEnabled() && isFocused
-    if (canPress && onClick) onClick(e)
+    if (canPress && onClick) {
+      e.preventDefault()
+      onClick(e)
+    }
   }
 
   render() {

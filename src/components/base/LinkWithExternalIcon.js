@@ -23,13 +23,13 @@ const Wrapper = styled(Label).attrs(() => ({
   }
 `
 
-type Props = { onClick: ?() => void, label: string }
+type Props = { onClick: ?() => void, label?: React$Node, children?: React$Node, style?: * }
 
 // can add more dynamic options if needed
-export function LinkWithExternalIcon({ onClick, label }: Props) {
+export function LinkWithExternalIcon({ onClick, label, children, style }: Props) {
   return (
-    <Wrapper onClick={onClick}>
-      <span>{label}</span>
+    <Wrapper onClick={onClick} style={style}>
+      <span>{label || children}</span>
       <Box ml={1}>
         <IconExternalLink size={12} />
       </Box>

@@ -22,6 +22,7 @@ import LinkWithExternalIcon from 'components/base/LinkWithExternalIcon'
 import IconRecheck from 'icons/Recover'
 import IconCopy from 'icons/Copy'
 import IconShield from 'icons/Shield'
+import Ellipsis from '../base/Ellipsis'
 
 const Container = styled(Box).attrs(p => ({
   borderRadius: 1,
@@ -70,6 +71,7 @@ const Label = styled(Box).attrs(() => ({
   flow: 1,
   horizontal: true,
 }))`
+  width: 100%;
   strong {
     color: ${p => p.theme.colors.palette.text.shade100};
     font-weight: 600;
@@ -198,16 +200,16 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
           />
         </QRCodeContainer>
         <Label>
-          <Box>
-            {name ? (
-              <Trans i18nKey="currentAddress.for" parent="div">
+          {name ? (
+            <Ellipsis textAlign="center">
+              <Trans i18nKey="currentAddress.for">
                 {'Address for '}
                 <strong>{name}</strong>
               </Trans>
-            ) : (
-              t('currentAddress.title')
-            )}
-          </Box>
+            </Ellipsis>
+          ) : (
+            t('currentAddress.title')
+          )}
         </Label>
         <Address>
           {copyFeedback && <CopyFeedback>{t('common.addressCopied')}</CopyFeedback>}

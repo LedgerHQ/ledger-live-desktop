@@ -12,6 +12,7 @@ import type { T } from 'types/common'
 import firmwareRepair from 'commands/firmwareRepair'
 import Button from 'components/base/Button'
 import RepairModal from 'components/base/Modal/RepairModal'
+import { getManagerPageRoute } from '../ManagerV2Page'
 
 type Props = {
   t: T,
@@ -77,7 +78,7 @@ class RepairDeviceButton extends PureComponent<Props, State> {
       complete: () => {
         if (this.timeout) clearTimeout(this.timeout)
         this.setState({ opened: false, isLoading: false, progress: 0 }, () => {
-          push('/manager')
+          push(getManagerPageRoute())
         })
         if (onRepair) {
           onRepair(false)

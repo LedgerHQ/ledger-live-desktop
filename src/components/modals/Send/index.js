@@ -7,12 +7,12 @@ import Body from './Body'
 
 class SendModal extends PureComponent<{}, { stepId: string }> {
   state = {
-    stepId: 'amount',
+    stepId: 'recipient',
   }
 
   handleReset = () =>
     this.setState({
-      stepId: 'amount',
+      stepId: 'recipient',
     })
 
   handleStepChange = (stepId: string) => this.setState({ stepId })
@@ -20,7 +20,7 @@ class SendModal extends PureComponent<{}, { stepId: string }> {
   render() {
     const { stepId } = this.state
 
-    const isModalLocked = stepId === 'amount' || stepId === 'verification'
+    const isModalLocked = !['recipient', 'confirmation'].includes(stepId)
 
     return (
       <Modal

@@ -1,21 +1,23 @@
 // @flow
 
 import { log } from '@ledgerhq/logs'
-import { shell, remote } from 'electron'
+import { ipcRenderer, shell, remote } from 'electron'
 import resolveUserDataDirectory from 'helpers/resolveUserDataDirectory'
 import { disable as disableDBMiddleware } from 'middlewares/db'
 import db from 'helpers/db'
 import { delay } from 'helpers/promise'
-import killInternalProcess from 'commands/killInternalProcess'
 import libcoreReset from 'commands/libcoreReset'
+import { clearBridgeCache } from 'bridge/cache'
+
+async function killInternalProcess() {
+  ipcRenderer.send('clean-processes')
+  return delay(1000)
+}
 
 async function resetLibcore() {
   log('clear-cache', 'resetLibcore...')
   // we need to stop everything that is happening right now, like syncs
-  await killInternalProcess
-    .send()
-    .toPromise()
-    .catch(() => {}) // this is a normal error due to the crash of the process, we ignore it
+  await killInternalProcess()
   log('clear-cache', 'killed.')
   // we can now ask libcore to reset itself
   await libcoreReset.send().toPromise()
@@ -29,6 +31,8 @@ function reload() {
 }
 
 export async function hardReset() {
+  log('clear-cache', 'clearBridgeCache()')
+  clearBridgeCache()
   log('clear-cache', 'hardReset()')
   disableDBMiddleware()
   db.resetAll()
@@ -40,6 +44,8 @@ export async function hardReset() {
 }
 
 export async function softReset({ cleanAccountsCache }: *) {
+  log('clear-cache', 'clearBridgeCache()')
+  clearBridgeCache()
   log('clear-cache', 'cleanAccountsCache()')
   cleanAccountsCache()
   await delay(500)

@@ -53,14 +53,6 @@ export const experimentalFeatures: Feature[] = [
   },
   {
     type: 'toggle',
-    name: 'API_TEZOS_NODE',
-    valueOn: 'https://xtz-node.explorers.prod.aws.ledger.fr/',
-    valueOff: 'https://mainnet.tezrpc.me/',
-    title: 'Experimental Tezos Send',
-    description: 'Workaround for Sending Tezos. Switch to another experimental node.',
-  },
-  {
-    type: 'toggle',
     name: 'LEDGER_COUNTERVALUES_API',
     valueOn: 'http://countervalue-service.dev.aws.ledger.fr',
     valueOff: 'https://countervalues.api.live.ledger.com',

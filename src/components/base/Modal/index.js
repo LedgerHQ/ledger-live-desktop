@@ -10,6 +10,7 @@ import noop from 'lodash/noop'
 import Animated from 'animated/lib/targets/react-dom'
 import Easing from 'animated/lib/Easing'
 import { withTheme } from 'styled-components'
+import Snow, { isSnowTime } from 'components/extra/Snow'
 
 import { closeModal, isModalOpened, getModalData } from 'reducers/modals'
 
@@ -101,6 +102,7 @@ class Modal extends PureComponent<Props, State> {
     })
 
     document.addEventListener('keyup', this.handleKeyup)
+    document.addEventListener('keydown', this.preventFocusEscape)
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -118,12 +120,39 @@ class Modal extends PureComponent<Props, State> {
 
   componentWillUnmount() {
     document.removeEventListener('keyup', this.handleKeyup)
+    document.removeEventListener('keydown', this.preventFocusEscape)
   }
 
   handleKeyup = (e: KeyboardEvent) => {
     const { onClose, preventBackdropClick } = this.props
     if (e.which === 27 && onClose && !preventBackdropClick) {
       onClose()
+    }
+  }
+
+  preventFocusEscape = (e: KeyboardEvent) => {
+    if (e.key === 'Tab') {
+      const { target } = e
+      const focusableQuery =
+        'input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), *[tabindex]'
+      const modalWrapper = document.getElementById('modals')
+      if (!modalWrapper || !(target instanceof window.HTMLElement)) return
+
+      const focusableElements = modalWrapper.querySelectorAll(focusableQuery)
+      if (!focusableElements.length) return
+
+      const firstFocusable = focusableElements[0]
+      const lastFocusable = focusableElements[focusableElements.length - 1]
+
+      if (e.shiftKey && firstFocusable.isSameNode(target)) {
+        lastFocusable.focus()
+        e.stopPropagation()
+        e.preventDefault()
+      } else if (!e.shiftKey && lastFocusable.isSameNode(target)) {
+        firstFocusable.focus()
+        e.stopPropagation()
+        e.preventDefault()
+      }
     }
   }
 
@@ -186,7 +215,10 @@ class Modal extends PureComponent<Props, State> {
 
     const modal = (
       <Fragment>
-        <Animated.div style={backdropStyle} />
+        <Animated.div style={backdropStyle}>
+          {// Will only render at the end of december
+          isSnowTime() ? <Snow numFlakes={200} /> : null}
+        </Animated.div>
         <div style={containerStyle} onClick={this.handleClickOnBackdrop}>
           <Animated.div style={bodyWrapperStyle} onClick={this.swallowClick}>
             {render && render(renderProps)}

@@ -24,6 +24,7 @@ import {
 import type { TimeRange } from 'reducers/settings'
 
 import TrackPage from 'analytics/TrackPage'
+import perFamilyAccountBodyHeader from 'generated/AccountBodyHeader'
 import SyncOneAccountOnMount from 'components/SyncOneAccountOnMount'
 import Box from 'components/base/Box'
 import OperationsList from 'components/OperationsList'
@@ -84,6 +85,9 @@ const AccountPage = ({
   setCountervalueFirst,
 }: Props) => {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null
+  const AccountBodyHeader = mainAccount
+    ? perFamilyAccountBodyHeader[mainAccount.currency.family]
+    : null
   const bgColor = useTheme('colors.palette.background.paper')
 
   if (!account || !mainAccount) {
@@ -102,7 +106,7 @@ const AccountPage = ({
       />
       <SyncOneAccountOnMount priority={10} accountId={mainAccount.id} />
 
-      <Box horizontal mb={5} flow={4}>
+      <Box horizontal mb={5} flow={4} style={{ justifyContent: 'space-between' }}>
         <AccountHeader account={account} parentAccount={parentAccount} />
         <AccountHeaderActions account={account} parentAccount={parentAccount} />
       </Box>
@@ -121,6 +125,9 @@ const AccountPage = ({
               setCountervalueFirst={setCountervalueFirst}
             />
           </Box>
+          {AccountBodyHeader ? (
+            <AccountBodyHeader account={account} parentAccount={parentAccount} />
+          ) : null}
           <TokenList account={account} range={selectedTimeRange} />
           <OperationsList
             account={account}

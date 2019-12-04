@@ -16,7 +16,7 @@ setSupportedCurrencies([
   'dogecoin',
   'digibyte',
   'hcash',
-  //   'tezos',
+  'tezos',
   'komodo',
   'pivx',
   'zencash',

@@ -1,5 +1,6 @@
 {
   "common": {
+    "loading": "Loading",
     "labelYes": "确定",
     "labelNo": "取消",
     "never": "从不",
@@ -47,6 +48,9 @@
     "copied": "已复制",
     "addressCopied": "地址已复制",
     "experimentalFeature": "Experimental",
+    "dismiss": "Dismiss",
+    "choose": "Choose",
+    "information": "Information",
     "lockScreen": {
       "title": "欢迎回来",
       "subTitle": null,
@@ -70,7 +74,8 @@
       "OUT": "已发送",
       "CREATE": "Created",
       "REVEAL": "Revealed",
-      "DELEGATE": "Delegated"
+      "DELEGATE": "Delegated",
+      "UNDELEGATE": "Undelegated"
     }
   },
   "time": {
@@ -239,6 +244,7 @@
     "coinberry": "Coinberry 是加拿大备受信赖的加密资产交易平台，其安全性甚至超过银行，用户界面十分出色，存取与提现均为免费。如果您不是加拿大公民，请预注册以便尽早使用我们的平台。",
     "coinhouse": "Coinhouse 是一个值得信赖的平台，为个人和机构投资者寻求分析、收购、出售和安全存储加密资产。",
     "coinmama": "Coinmama 是一家金融服务机构，让您在世界各地都能快速、安全和愉快地购买数字资产。",
+    "crypto": "Crypto.com is the best place to buy, sell, track and pay with crypto.",
     "genesis": "Genesis 是一家机构交易公司，提供数字货币流动性和借贷服务，支持比特币、比特币现金、以太坊、以太坊经典、莱特币和瑞波币。",
     "kyberswap": "快捷、简单、安全的代币交易平台，由 Kyber Network 的链上流动性协议提供支持。",
     "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum.",
@@ -266,13 +272,15 @@
     "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "隐藏代币 ({{tokenCount}})",
     "tooltip": "代币来自",
-    "countTooltip": "1 Token",
-    "countTooltip_plural": "{{count}} Tokens"
+    "countTooltip": "1 token",
+    "countTooltip_plural": "{{count}} tokens"
   },
   "subAccounts": {
     "title": "Subaccounts",
     "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
-    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})"
+    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
+    "countTooltip": "1 subaccount",
+    "countTooltip_plural": "{{count}} subaccounts"
   },
   "migrateAccounts": {
     "overview": {
@@ -376,6 +384,7 @@
     "from": "自",
     "to": "至",
     "identifier": "交易 ID",
+    "whatIsThis": "What is this operation?",
     "viewOperation": "在区块链浏览器中查看",
     "showMore": "显示更多 {{recipients}}",
     "showLess": "显示更少",
@@ -415,7 +424,7 @@
     },
     "firmware": {
       "installed": "固件版本 {{version}}",
-      "updateLater": "Update later",
+      "updateLater": "Cancel",
       "seedReady": "I have my recovery phrase",
       "dontHaveSeed": "Don't have your recovery phrase?",
       "followTheGuide": "Follow our step by step update guide",
@@ -428,8 +437,11 @@
       "disclaimerAppDelete": "请卸载设备上所有应用程序，此操作不会影响您的加密资产。",
       "disclaimerAppReinstall": "为谨慎起见，请安全保存您的恢复短语列表。",
       "downloadingUpdateDesc": "请等待更新安装程序下载",
-      "appsAutoUninstallTitle": "Apps will be uninstalled",
-      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
+      "appsAutoUninstallTitle": "All applications will be uninstalled from your device",
+      "appsAutoUninstallBullet1": "<0><0>Don't worry</0></0>, this does not affect your crypto assets",
+      "appsAutoUninstallBullet2": "You will be able to reinstall them all after the update",
+      "appsUninstallTitle": "Apps will be uninstalled",
+      "appsUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -500,38 +512,106 @@
       },
       "receiveFunds": {
         "title": "接收"
+      },
+      "warning": {
+        "tezos": {
+          "text": "The amount received on a delegated account will be added to the total staked amount. Choose another account if you want to avoid this."
+        }
+      }
+    }
+  },
+  "managerv2": {
+    "loading": {
+      "step4": {
+        "title": "Loading apps and fancy stuff"
+      }
+    },
+    "device": {
+      "title": "Connect your device",
+      "desc": "Follow the steps below to open the Manager v2",
+      "cta": "Connect my device"
+    },
+    "tabs": {
+      "appCatalog": "App Catalog",
+      "appsOnDevice": "Apps Installed"
+    },
+    "deviceStorage": {
+      "freeSpace": "{{space}} free",
+      "installed": "Installed",
+      "capacity": "Capacity",
+      "used": "Used",
+      "firmware": "Firmware {{version}}",
+      "genuine": "Device is genuine"
+    },
+    "applist": {
+      "placeholder": "There are no apps matching the search and filters selected",
+      "placeholderInstalled": "There are no installed apps matching the search and filters selected",
+      "filter": {
+        "title": "Filter",
+        "all": "All",
+        "supported": "Live Supported",
+        "installed": "Installed",
+        "notInstalled": "Not Installed"
+      },
+      "sort": {
+        "title": "Sort",
+        "name": "Name",
+        "marketcap": "Marketcap"
+      },
+      "updatable": {
+        "title": "Updates available"
+      },
+      "item": {
+        "installing": "Installing...",
+        "uninstalling": "Uninstalling...",
+        "scheduled": "Scheduled",
+        "cancel": "Cancel",
+        "update": "Update",
+        "updateAll": "Update All",
+        "install": "Install",
+        "installed": "Installed",
+        "uninstall": "Uninstall",
+        "notEnoughSpace": "Not enough space",
+        "supported": "Supported"
       }
     }
   },
   "send": {
     "title": "发送",
     "totalSpent": "总借额",
+    "totalBalance": "Total balance",
     "steps": {
-      "amount": {
-        "title": "详情",
-        "selectAccountDebit": "付币账户",
-        "recipientAddress": "收件人地址",
-        "amount": "金额",
-        "fees": "网络费用",
-        "useMax": "最大值",
-        "advancedOptions": "高级选项",
-        "useRBF": "使用费用替代法交易",
-        "message": "留言 (140)",
-        "rippleTag": "标签",
-        "ethereumGasLimit": "Gas 上限",
-        "unitPerByte": "{{unit}} 每字节",
-        "highFeeModal": {
-          "title": "高交易费",
-          "desc": "请注意，该操作的交易费 (<1><0>{{fees}}</0></1>) 占操作金额的10%以上 (<3><0> > >{{amount}}</0></3>)。 您还想要继续交易吗？"
-        }
+      "recipient": {
+        "title": "Recipient"
       },
-      "connectDevice": {
-        "title": "设备"
+      "amount": {
+        "title": "Amount"
+      },
+      "summary": {
+        "title": "Summary"
+      },
+      "device": {
+        "title": "Device"
+      },
+      "details": {
+        "from": "From",
+        "to": "To",
+        "selectAccountDebit": "Account to debit",
+        "recipientAddress": "Recipient address",
+        "amount": "Amount",
+        "fees": "Network fees",
+        "useMax": "Send Max",
+        "advancedOptions": "Advanced options",
+        "useRBF": "Use a replace-by-fee transaction",
+        "message": "Leave a message (140)",
+        "rippleTag": "Tag",
+        "rippleTagPlaceholder": "Optional",
+        "ethereumGasLimit": "Gas limit",
+        "ethereumGasPrice": "Gas price",
+        "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
-        "title": "验证",
-        "warning": "请验证您设备上的所有交易详情",
-        "body": "确认您设备上的交易以进行发送"
+        "title": "验证"
       },
       "confirmation": {
         "title": "确认",
@@ -544,7 +624,15 @@
           "title": "正在传送交易信息…"
         },
         "broadcastError": "您的交易可能失败。请在几分钟后查看并确保您的交易没有通过后，然后再试一次。"
+      },
+      "warning": {
+        "tezos": {
+          "text": "The amount to be sent will be deducted from the balance of your delegated account."
+        }
       }
+    },
+    "footer": {
+      "estimatedFees": "Network fees"
     }
   },
   "releaseNotes": {
@@ -570,6 +658,92 @@
     "showAll": "Show all",
     "showLess": "Show less",
     "header": "Account allocation ({{count}})"
+  },
+  "delegation": {
+    "title": "Earn rewards",
+    "header": "Delegation",
+    "validator": "Validator",
+    "yield": "Est. Yield",
+    "address": "Address",
+    "transactionID": "Transaction ID",
+    "value": "Value",
+    "amount": "Amount",
+    "duration": "Duration",
+    "durationJustStarted": "Just started",
+    "durationDays": "{{count}} day",
+    "durationDays_plural": "{{count}} days",
+    "howItWorks": "How delegation works",
+    "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
+    "earnRewards": "Earn rewards",
+    "flow": {
+      "steps": {
+        "starter": {
+          "title": "Earn staking rewards",
+          "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets.",
+          "bullet": {
+            "delegate": "Delegated accounts stay yours.",
+            "access": "You can access your assets anytime.",
+            "ledger": "Delegate securely with your Ledger device."
+          },
+          "button": {
+            "cta": "Delegate to earn rewards"
+          }
+        },
+        "account": {
+          "title": "Delegate account",
+          "label": "Account",
+          "toDelegate": "Account to delegate"
+        },
+        "summary": {
+          "title": "Delegate account",
+          "label": "Summary",
+          "toDelegate": "Account to delegate",
+          "toUndelegate": "Account to undelegate",
+          "validator": "Validator",
+          "select": "Select",
+          "yield": "Est. Yield {{amount}}",
+          "randomly": "Randomly chosen validator",
+          "termsAndPrivacy": "Delegating your voting rights does not guarantee you will be paid any reward by your validator."
+        },
+        "validator": {
+          "title": "Select validator",
+          "description": "You can select a validator by comparing the estimated reward rates",
+          "customValidator": "Custom validator",
+          "providedBy": "Yield rates provided by <1><0>MyTezosBaker</0></1>"
+        },
+        "custom": {
+          "title": "Custom validator",
+          "text": "Please enter the address of the custom validator to delegate your account to.",
+          "button": "Confirm validator"
+        },
+        "undelegate": {
+          "title": "Undelegate account"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "Confirmation",
+          "success": {
+            "title": "Delegation sent",
+            "titleUndelegated": "Operation sent",
+            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator.",
+            "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
+          },
+          "pending": {
+            "title": "Broadcasting transaction..."
+          },
+          "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        }
+      }
+    },
+    "banner": {
+      "title": "Earn rewards",
+      "text": "You can earn Tezos staking rewards by delegating your account"
+    },
+    "contextMenu": {
+      "topUp": "Receive more",
+      "redelegate": "Change validator",
+      "stopDelegation": "End delegation"
+    }
   },
   "asset": {
     "notice": "Summary of all {{currency}} accounts"
@@ -677,7 +851,7 @@
     },
     "experimental": {
       "desc": "请尝试实验功能并让告知您的意见。",
-      "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
+      "disclaimer": "These are experimental features we provide on an “as is” basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
       "title": "重置 Ledger Live",
@@ -755,7 +929,9 @@
     "checkSuccess": "更新安装已就绪",
     "quitAndInstall": "立即安装",
     "error": "更新时出错。请重新下载",
-    "reDownload": "重新下载"
+    "reDownload": "重新下载",
+    "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
+    "downloadNow": "Download now"
   },
   "crash": {
     "oops": "糟糕，出错了",
@@ -763,12 +939,6 @@
     "restart": "重启",
     "support": "联系客服",
     "github": "GitHub"
-  },
-  "disclaimerModal": {
-    "title": "安全交易",
-    "desc_1": "发送和接收加密资产之前，请务必了解相关知识，以便做出知情决策。加密资产并不稳定，价格也可能上下起伏。请认真评估您的交易目标和您愿意承担的财务风险。",
-    "desc_2": "请注意，Ledger 不提供财务、税务或法律建议。您应自行做出这些决定，或咨询可靠的专家。",
-    "cta": "明白了"
   },
   "exportOperationsModal": {
     "title": "操作历史",
@@ -800,6 +970,7 @@
     },
     "start": {
       "title": "欢迎使用 Ledger Live",
+      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
       "startBtn": "入门指南"
     },
     "init": {
@@ -1007,6 +1178,23 @@
   "connectTroubleshooting": {
     "desc": "无法连接您的设备？"
   },
+  "TransactionConfirm": {
+    "title": "Please confirm the operation on your device to send it",
+    "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
+    "recipientWording": {
+      "send": "recipient",
+      "delegate": "validator",
+      "undelegate": "validator"
+    }
+  },
+  "RecipientField": {
+    "placeholder": "Enter {{currencyName}} address"
+  },
+  "Terms": {
+    "title": "Terms of Use",
+    "read": "Read the Terms of Use",
+    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
+  },
   "errors": {
     "generic": {
       "title": "{{message}}",
@@ -1045,13 +1233,10 @@
       "description": "意外错误，请稍后重试。"
     },
     "DeviceSocketFail": {
+      "title": "{{message}}",
       "description": "请重试"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "抱歉，连接失败",
-      "description": "请重试"
-    },
-    "DeviceSocketNoHandler": {
       "title": "抱歉，连接失败",
       "description": "请重试"
     },
@@ -1084,19 +1269,16 @@
       "description": "无需尝试更新设备的微控制器。如果您的设备出现问题，请联系 Ledger 客服。"
     },
     "LedgerAPI4xx": {
+      "title": "{{message}}",
       "description": "请检查您的连接后重试，或联系 Ledger 客服。"
     },
     "LedgerAPI5xx": {
       "title": "抱歉，请重试。",
-      "description": "服务器无法处理您的请求。请稍后再试，或联系Ledger客服。 {{message}}"
+      "description": "The server could not handle your request. Please try again at a later moment. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "抱歉，{{currencyName}} 服务不可用",
       "description": "请重试或联系 Ledger 客服"
-    },
-    "ManagerAPIsFail": {
-      "title": "抱歉，Manager 服务暂不可用",
-      "description": "请检查网络状态"
     },
     "ManagerAppAlreadyInstalled": {
       "title": "抱歉，该应用已安装",
@@ -1151,10 +1333,6 @@
     "PasswordIncorrect": {
       "title": "您输入的密码有误",
       "description": "请再试一次"
-    },
-    "SelectExchangesLoadError": {
-      "title": "无法加载",
-      "description": "请稍后再试"
     },
     "TimeoutError": {
       "title": "糟糕，已超时",
@@ -1259,12 +1437,73 @@
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive on subaccounts, please select the parent account.",
+      "title": "Cannot receive on subaccounts",
       "description": "If you want to receive funds, please use the parent account"
     },
     "UnavailableTezosOriginatedAccountSend": {
       "title": "Cannot send from subaccounts yet",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+    },
+    "RecommendUndelegation": {
+      "title": "Please undelegate account before emptying it"
+    },
+    "RecommendSubAccountsToEmpty": {
+      "title": "Please empty all subaccounts first"
+    },
+    "NotSupportedLegacyAddress": {
+      "title": "This legacy address format is no longer supported"
+    },
+    "BtcUnmatchedApp": {
+      "title": "That's the wrong app",
+      "description": "Open the ‘{{managerAppName}}’ app on your device"
+    },
+    "DeviceNameInvalid": {
+      "title": "Please choose a device name without '{{invalidCharacters}}'"
+    },
+    "LedgerAPIErrorWithMessage": {
+      "title": "{{message}}",
+      "description": "Please retry or contact Ledger Support."
+    },
+    "ManagerAppRelyOnBTC": {
+      "title": "Bitcoin and Ethereum apps required",
+      "description": "Install the latest Bitcoin and Ethereum apps first."
+    },
+    "UserRefusedDeviceNameChange": {
+      "title": "Rename canceled on device",
+      "description": "Try again and allow renaming on your device"
+    },
+    "SyncError": {
+      "title": "Synchronization error",
+      "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
+    },
+    "PairingFailed": {
+      "title": "Pairing unsuccessful",
+      "description": "Please try again or contact Ledger Support when in doubt."
+    },
+    "GenuineCheckFailed": {
+      "title": "Genuine check failed",
+      "description": "Something went wrong. Please try again or contact Ledger Support when in doubt."
+    },
+    "EthAppPleaseEnableContractData": {
+      "title": "Please enable contract data in the Ethereum app settings"
+    },
+    "InvalidXRPTag": {
+      "title": "Invalid XRP Destination tag"
+    },
+    "NotEnoughBalanceToDelegate": {
+      "title": "Insufficient balance to delegate"
+    },
+    "NotEnoughBalanceInParentAccount": {
+      "title": "Insufficient balance in parent account"
+    },
+    "NotEnoughSpendableBalance": {
+      "title": "Insufficient balance for this operation"
+    },
+    "WrongAppForCurrency": {
+      "title": "Please open the {{expected}} app"
+    },
+    "FeeTooHigh": {
+      "title": "Network fees represent more than 10% of the amount"
     }
   }
 }

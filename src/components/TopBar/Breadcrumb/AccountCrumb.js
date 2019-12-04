@@ -23,6 +23,7 @@ import CryptoCurrencyIcon from '../../CryptoCurrencyIcon'
 import DropDown from '../../base/DropDown'
 import Button, { Base } from '../../base/Button'
 import { Separator } from './index'
+import Ellipsis from '../../base/Ellipsis'
 
 type Props = {
   match: {
@@ -119,9 +120,9 @@ class AccountCrumb extends PureComponent<Props> {
     return (
       <Item key={item.account.id} isActive={isActive}>
         <CryptoCurrencyIcon size={16} currency={currency} />
-        <Text ff={`Inter|${isActive ? 'SemiBold' : 'Regular'}`} fontSize={4}>
+        <Ellipsis ff={`Inter|${isActive ? 'SemiBold' : 'Regular'}`} fontSize={4}>
           {getAccountName(item.account)}
-        </Text>
+        </Ellipsis>
         {isActive && (
           <Check>
             <IconCheck size={14} />

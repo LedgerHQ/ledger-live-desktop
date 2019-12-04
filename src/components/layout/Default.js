@@ -39,16 +39,18 @@ import SyncBackground from 'components/SyncBackground'
 import DebugUpdater from 'components/Updater/DebugUpdater'
 import ListenDevices from 'components/ListenDevices'
 import IsNewVersion from 'components/IsNewVersion'
+import CheckTermsAccepted from 'components/CheckTermsAccepted'
 
 import SyncContinuouslyPendingOperations from '../SyncContinouslyPendingOperations'
 import HSMStatusBanner from '../HSMStatusBanner'
 import type { State } from '../../reducers'
+import ManagerV2Page from '../ManagerV2Page'
 
 const Main = styled(GrowScroll).attrs(() => ({
   px: 6,
 }))`
   outline: none;
-  padding-top: ${p => p.theme.sizes.topBarHeight + p.theme.space[6]}px;
+  padding-top: ${p => p.theme.sizes.topBarHeight + p.theme.space[4]}px;
 `
 
 type Props = {
@@ -107,6 +109,8 @@ class Default extends Component<Props> {
               <ModalComponent key={name} />
             ))}
 
+            <CheckTermsAccepted />
+
             <IsNewVersion />
 
             {process.env.DEBUG_UPDATE && <DebugUpdater />}
@@ -136,6 +140,7 @@ class Default extends Component<Props> {
                     <Route path="/settings" component={SettingsPage} />
                     <Route path="/accounts" component={AccountsPage} />
                     <Route path="/manager" component={ManagerPage} />
+                    <Route path="/managerv2" component={ManagerV2Page} />
                     <Route path="/partners" component={PartnersPage} />
                     <Route path="/account/:parentId/:id" component={AccountPage} />
                     <Route path="/account/:id" component={AccountPage} />

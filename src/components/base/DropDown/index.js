@@ -20,6 +20,7 @@ const Drop = styled(Box).attrs(() => ({
 }))`
   border: ${p => (p.border ? `1px solid ${p.theme.colors.palette.divider}` : 'none')};
   max-height: 400px;
+  max-width: 250px;
   position: absolute;
   right: 0;
   top: 100%;
@@ -36,7 +37,7 @@ export const DropDownItem = styled(Box).attrs(p => ({
   color: p.isHighlighted || p.isActive ? 'palette.text.shade100' : 'palette.text.shade80',
   bg: p.isActive ? 'palette.background.default' : '',
 }))`
-  height: 40px;
+  height: 48px;
   white-space: nowrap;
 `
 
@@ -58,6 +59,7 @@ type Props = {
   items: Array<DropDownItemType>,
   keepOpenOnChange?: boolean,
   offsetTop: number | string,
+  offsetRight: number | string,
   border?: boolean,
   onChange?: DropDownItemType => void,
   onStateChange?: Function,
@@ -73,6 +75,7 @@ class DropDown extends PureComponent<Props> {
     onChange: noop,
     onStateChange: noop,
     offsetTop: 1,
+    offsetRight: 0,
     renderItem: ({
       item,
       isHighlighted,
@@ -124,11 +127,11 @@ class DropDown extends PureComponent<Props> {
     selectedItem: DropDownItemType,
     downshiftProps: Object,
   ) => {
-    const { offsetTop, renderItem, border } = this.props
+    const { offsetTop, offsetRight, renderItem, border } = this.props
     const { getItemProps, highlightedIndex } = downshiftProps
 
     return (
-      <Drop mt={offsetTop} border={border}>
+      <Drop mt={offsetTop} mr={offsetRight} border={border}>
         {items.map((item, i) => {
           const { key, ...props } = item
           return (
@@ -153,7 +156,8 @@ class DropDown extends PureComponent<Props> {
         stateReducer={this.handleStateChange}
         itemToString={itemToString}
         selectedItem={value}
-        render={({
+      >
+        {({
           getToggleButtonProps,
           getRootProps,
           isOpen,
@@ -173,7 +177,7 @@ class DropDown extends PureComponent<Props> {
             {isOpen && this.renderItems(items, selectedItem, downshiftProps)}
           </Wrapper>
         )}
-      />
+      </Downshift>
     )
   }
 }

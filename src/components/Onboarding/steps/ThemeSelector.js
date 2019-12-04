@@ -84,7 +84,7 @@ const ThemeName = styled(Text)`
 
 const ThemeSelector = ({ t, setTheme, currentTheme }: Props) => (
   <ThemeSelectorContainer>
-    {map(palette, (palette, paletteName) => (
+    {map(palette, (palette, paletteName: string) => (
       <ThemeContainer>
         <ThemePicto
           onClick={() => setTheme(paletteName)}

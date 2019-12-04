@@ -33,11 +33,15 @@ const buttonStyles: { [_: string]: Style } = {
       background: ${
         p.disabled
           ? `${p.theme.colors.palette.action.disabled} !important`
+          : p.inverted
+          ? p.theme.colors.palette.primary.contrastText
           : p.theme.colors.palette.primary.main
       };
       color: ${
         p.disabled
           ? p.theme.colors.palette.text.shade20
+          : p.inverted
+          ? p.theme.colors.palette.primary.main
           : p.theme.colors.palette.primary.contrastText
       };
       box-shadow: ${
@@ -50,10 +54,18 @@ const buttonStyles: { [_: string]: Style } = {
       }
     `,
     hover: p => `
-       background: ${lighten(p.theme.colors.palette.primary.main, 0.05)};
+       background: ${
+         p.inverted
+           ? darken(p.theme.colors.palette.primary.contrastText, 0.05)
+           : lighten(p.theme.colors.palette.primary.main, 0.05)
+       };
      `,
     active: p => `
-       background: ${darken(p.theme.colors.palette.primary.main, 0.1)};
+       background: ${
+         p.inverted
+           ? darken(p.theme.colors.palette.primary.contrastText, 0.1)
+           : darken(p.theme.colors.palette.primary.main, 0.1)
+       };
      `,
   },
   danger: {
@@ -83,6 +95,63 @@ const buttonStyles: { [_: string]: Style } = {
      `,
     active: p => `
       background: ${darken(p.theme.colors.alertRed, 0.1)};
+     `,
+  },
+  lighterPrimary: {
+    default: p => `
+      background: ${
+        p.disabled
+          ? `${p.theme.colors.palette.action.disabled} !important`
+          : p.theme.colors.palette.action.hover
+      };
+      color: ${
+        p.disabled
+          ? `${p.theme.colors.palette.text.shade20} !important`
+          : p.theme.colors.palette.primary.main
+      };
+      box-shadow: ${
+        p.isFocused
+          ? `
+          0 0 0 1px ${darken(p.theme.colors.palette.primary.main, 0.3)} inset,
+          0 0 0 1px ${rgba(p.theme.colors.palette.primary.main, 0.5)},
+          0 0 0 3px ${rgba(p.theme.colors.palette.primary.main, 0.3)};`
+          : ''
+      }
+    `,
+    hover: p => `
+       background: ${lighten(p.theme.colors.palette.action.hover, 0.05)};
+     `,
+    active: p => `
+       background: ${darken(p.theme.colors.palette.action.hover, 0.1)};
+     `,
+  },
+  lighterDanger: {
+    default: p => `
+      background: ${
+        p.disabled
+          ? `${p.theme.colors.palette.action.disabled} !important`
+          : rgba(p.theme.colors.alertRed, 0.15)
+      };
+      color: ${
+        p.disabled
+          ? p.theme.colors.palette.text.shade20
+          : p.theme.colors.palette.primary.contrastText
+      };
+      box-shadow: ${
+        p.isFocused
+          ? `
+          0 0 0 1px ${darken(p.theme.colors.alertRed, 0.3)} inset,
+          0 0 0 1px ${rgba(p.theme.colors.alertRed, 0.5)},
+          0 0 0 3px ${rgba(p.theme.colors.alertRed, 0.3)};
+        `
+          : ''
+      }
+    `,
+    hover: p => `
+      background: ${lighten(rgba(p.theme.colors.alertRed, 0.15), 0.1)};
+     `,
+    active: p => `
+      background: ${darken(rgba(p.theme.colors.alertRed, 0.15), 0.1)};
      `,
   },
   outline: {
@@ -182,13 +251,22 @@ function getStyles(props, state) {
 
   return output
 }
-
+const LoadingWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 export const Base = styled.button.attrs(p => ({
   ff: 'Inter|SemiBold',
   fontSize: p.fontSize || (!p.small ? 4 : 3),
   px: !p.small ? 4 : 3,
   py: !p.small ? 2 : 0,
-  color: p.theme.colors.palette.text.shade60,
+  color: p.color || p.theme.colors.palette.text.shade60,
   bg: 'transparent',
 }))`
   ${space};
@@ -197,6 +275,11 @@ export const Base = styled.button.attrs(p => ({
   ${fontWeight};
   ${fontFamily};
   border: none;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
   border-radius: ${p => p.theme.radii[1]}px;
   cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
   height: ${p => (p.small ? 34 : 40)}px;
@@ -220,7 +303,10 @@ type Props = {
   children?: any,
   icon?: string,
   primary?: boolean,
+  inverted?: boolean, // only used with primary for now
+  lighterPrimary?: boolean,
   danger?: boolean,
+  lighterDanger?: boolean,
   disabled?: boolean,
   onClick?: Function,
   small?: boolean,
@@ -240,6 +326,7 @@ class Button extends PureComponent<
     primary: false,
     small: false,
     danger: false,
+    inverted: false,
   }
 
   state = {
@@ -277,7 +364,12 @@ class Button extends PureComponent<
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
       >
-        {isLoading ? <Spinner size={16} /> : children}
+        {isLoading ? (
+          <LoadingWrapper>
+            <Spinner size={16} />
+          </LoadingWrapper>
+        ) : null}
+        {children}
       </Base>
     )
   }

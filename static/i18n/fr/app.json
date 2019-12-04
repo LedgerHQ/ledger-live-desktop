@@ -1,5 +1,6 @@
 {
   "common": {
+    "loading": "Chargement en cours",
     "labelYes": "Oui",
     "labelNo": "Non",
     "never": "Jamais",
@@ -47,6 +48,9 @@
     "copied": "Copié",
     "addressCopied": "Adresse copiée",
     "experimentalFeature": "Expérimental",
+    "dismiss": "Ignorer",
+    "choose": "Choisir",
+    "information": "Informations",
     "lockScreen": {
       "title": "Bienvenue",
       "subTitle": null,
@@ -70,7 +74,8 @@
       "OUT": "Envoyé",
       "CREATE": "Créée",
       "REVEAL": "Révélée",
-      "DELEGATE": "Déléguée"
+      "DELEGATE": "Déléguée",
+      "UNDELEGATE": "Interrompue"
     }
   },
   "time": {
@@ -239,6 +244,7 @@
     "coinberry": "Considérée comme la plateforme la plus fiable au Canada, Coinberry offre une meilleure sécurité que les banques, une interface utilisateur de pointe et un service de dépôt ou de retrait sans frais. Préinscrivez-vous dès maintenant pour y accéder rapidement si vous n‘êtes pas un citoyen canadien.",
     "coinhouse": "Coinhouse est une plateforme de confiance pour les particuliers et les investisseurs institutionnels cherchant à analyser, acquérir, vendre et stocker des crypto-actifs de manière sécurisée.",
     "coinmama": "Coinmama est un service financier d’achat d’actifs numériques rapide, sécurisé et amusant, disponible partout dans le monde.",
+    "crypto": "Crypto.com is the best place to buy, sell, track and pay with crypto.",
     "genesis": "Genesis est une société de trading institutionnelle offrant des liquidités et des prêts de monnaies numériques, dont bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin et XRP.",
     "kyberswap": "Plateforme d’échange de tokens rapide, simple et sécurisée. Optimisée par le protocole de liquidité on-chain de Kyber Network.",
     "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum.",
@@ -272,7 +278,9 @@
   "subAccounts": {
     "title": "Sous-comptes",
     "seeSubAccounts": "Afficher les sous-comptes ({{tokenCount}})",
-    "hideSubAccounts": "Masquer les sous-comptes ({{tokenCount}})"
+    "hideSubAccounts": "Masquer les sous-comptes ({{tokenCount}})",
+    "countTooltip": "1 sous-compte",
+    "countTooltip_plural": "{{count}} sous-comptes"
   },
   "migrateAccounts": {
     "overview": {
@@ -376,6 +384,7 @@
     "from": "De",
     "to": "Vers",
     "identifier": "ID de la transaction",
+    "whatIsThis": "À quoi correspond cette information ?",
     "viewOperation": "Afficher dans l'explorer",
     "showMore": "Afficher plus de {{recipients}}",
     "showLess": "Afficher moins",
@@ -415,7 +424,7 @@
     },
     "firmware": {
       "installed": "Version {{version}} du firmware",
-      "updateLater": "MAJ plus tard",
+      "updateLater": "Annuler",
       "seedReady": "J'ai ma phrase de récupération",
       "dontHaveSeed": "Vous n'avez pas votre phrase de récupération ?",
       "followTheGuide": "Suivez notre guide de mise à jour étape par étape",
@@ -428,8 +437,11 @@
       "disclaimerAppDelete": "Désinstallez des applications pour libérer de l’espace. Cette opération n’affectera pas vos crypto-actifs.",
       "disclaimerAppReinstall": "Assurez-vous que votre feuille de récupération est accessible, par mesure de précaution.",
       "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour",
-      "appsAutoUninstallTitle": "Les applications seront désinstallées",
-      "appsAutoUninstallDesc": "Toutes les applications seront désinstallées de votre appareil pour la mise à jour du firmware. Vous pourrez les réinstaller après la mise à jour. Cela n'affectera pas vos actifs crypto."
+      "appsAutoUninstallTitle": "Toutes les applications seront désinstallées de votre appareil",
+      "appsAutoUninstallBullet1": "<0><0>Pas d'inquiétudes</0></0>, cela n'affecte pas vos actifs crypto",
+      "appsAutoUninstallBullet2": "Vous pourrez les réinstaller après la mise à jour",
+      "appsUninstallTitle": "Les applications seront désinstallées",
+      "appsUninstallDesc": "Toutes les applications seront désinstallées de votre appareil pour la mise à jour du firmware. Vous pourrez les réinstaller après la mise à jour. Cela n'affectera pas vos actifs crypto."
     },
     "modal": {
       "steps": {
@@ -500,15 +512,90 @@
       },
       "receiveFunds": {
         "title": "Recevoir"
+      },
+      "warning": {
+        "tezos": {
+          "text": "Le montant reçu sur un compte délégué sera ajouté au montant total staké. Choisissez un autre compte si vous souhaitez éviter cela."
+        }
+      }
+    }
+  },
+  "managerv2": {
+    "loading": {
+      "step4": {
+        "title": "Loading apps and fancy stuff"
+      }
+    },
+    "device": {
+      "title": "Connectez votre appareil",
+      "desc": "Suivez les étapes ci-dessous pour ouvrir le Manager v2",
+      "cta": "Connecter l'appareil"
+    },
+    "tabs": {
+      "appCatalog": "Catalogue d'applications",
+      "appsOnDevice": "Applications installées"
+    },
+    "deviceStorage": {
+      "freeSpace": "{{space}} libre",
+      "installed": "Installée",
+      "capacity": "Capacité",
+      "used": "Utilisé",
+      "firmware": "Firmware {{version}}",
+      "genuine": "L'appareil est authentique"
+    },
+    "applist": {
+      "placeholder": "Aucune application ne correspond à la recherche et aux filtres sélectionnés",
+      "placeholderInstalled": "Aucune application installée ne correspond à la recherche et aux filtres sélectionnés",
+      "filter": {
+        "title": "Filter",
+        "all": "All",
+        "supported": "Live Supported",
+        "installed": "Installed",
+        "notInstalled": "Not Installed"
+      },
+      "sort": {
+        "title": "Trier",
+        "name": "Nom",
+        "marketcap": "Capitalisation"
+      },
+      "updatable": {
+        "title": "Mises à jours disponibles"
+      },
+      "item": {
+        "installing": "Installation ...",
+        "uninstalling": "Désinstallation...",
+        "scheduled": "Scheduled",
+        "cancel": "Annuler",
+        "update": "Update",
+        "updateAll": "Update All",
+        "install": "Install",
+        "installed": "Installed",
+        "uninstall": "Uninstall",
+        "notEnoughSpace": "Not enough space",
+        "supported": "Supported"
       }
     }
   },
   "send": {
     "title": "Envoyer",
     "totalSpent": "Total à débiter",
+    "totalBalance": "Solde total",
     "steps": {
+      "recipient": {
+        "title": "Destinataire"
+      },
       "amount": {
-        "title": "Détails",
+        "title": "Montant"
+      },
+      "summary": {
+        "title": "Récapitulatif"
+      },
+      "device": {
+        "title": "Appareil"
+      },
+      "details": {
+        "from": "De",
+        "to": "Vers",
         "selectAccountDebit": "Compte à débiter",
         "recipientAddress": "Adresse du destinataire",
         "amount": "Montant",
@@ -516,22 +603,15 @@
         "useMax": "Max",
         "advancedOptions": "Options avancées",
         "useRBF": "Utiliser une transaction Replace-by-Fee",
-        "message": "Laisser un message (140) ",
-        "rippleTag": "Balise",
+        "message": "Laisser un message (140)",
+        "rippleTag": "Tag",
+        "rippleTagPlaceholder": "Facultatif",
         "ethereumGasLimit": "Gas limit",
-        "unitPerByte": "{{unit}} par octet",
-        "highFeeModal": {
-          "title": "Frais élevés",
-          "desc": "Attention, les frais de transaction (<1><0>{{fees}}</0></1>) représentent plus de 10% du montant (<3><0>{{amount}}</0></3>). Souhaitez-vous continuer ?"
-        }
-      },
-      "connectDevice": {
-        "title": "Appareil"
+        "ethereumGasPrice": "Gas Price",
+        "unitPerByte": "{{unit}} par octet"
       },
       "verification": {
-        "title": "Vérification",
-        "warning": "Veuillez vérifier tous les détails de la transaction sur votre appareil",
-        "body": "Confirmez la transaction sur votre appareil pour l’envoyer"
+        "title": "Vérification"
       },
       "confirmation": {
         "title": "Confirmation",
@@ -544,7 +624,15 @@
           "title": "Diffusion de la transaction..."
         },
         "broadcastError": "Votre transaction a peut-être échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée avant de réessayer."
+      },
+      "warning": {
+        "tezos": {
+          "text": "Le montant à envoyer sera déduit du solde de votre compte délégué."
+        }
       }
+    },
+    "footer": {
+      "estimatedFees": "Frais de réseau"
     }
   },
   "releaseNotes": {
@@ -570,6 +658,92 @@
     "showAll": "Tout afficher",
     "showLess": "Afficher moins",
     "header": "Répartition des comptes ({{count}})"
+  },
+  "delegation": {
+    "title": "Obtenez des récompenses",
+    "header": "Délégation",
+    "validator": "Validateur",
+    "yield": "Rendement estimé",
+    "address": "Adresse",
+    "transactionID": "ID de transaction",
+    "value": "Valeur",
+    "amount": "Montant",
+    "duration": "Durée",
+    "durationJustStarted": "A l'instant",
+    "durationDays": "{{count}} jour",
+    "durationDays_plural": "{{count}} jours",
+    "howItWorks": "Comment fonctionne la délégation",
+    "delegationEarn": "Vous pouvez maintenant obtenir des récompenses staking Tezos en déléguant votre compte.",
+    "earnRewards": "Obtenez des récompenses",
+    "flow": {
+      "steps": {
+        "starter": {
+          "title": "Obtenez des récompenses staking",
+          "description": "Déléguez votre compte Tezos à un validateur tiers pour obtenir des récompenses en toute sécurité et en conservant le contrôle total de vos actifs.",
+          "bullet": {
+            "delegate": "Vous conservez la propriété de vos comptes délégués.",
+            "access": "Vous pouvez accéder à vos actifs à tout moment.",
+            "ledger": "Déléguez en toute sécurité avec votre appareil Ledger."
+          },
+          "button": {
+            "cta": "Déléguer pour obtenir des récompenses"
+          }
+        },
+        "account": {
+          "title": "Déléguer le compte",
+          "label": "Compte",
+          "toDelegate": "Compte à déléguer"
+        },
+        "summary": {
+          "title": "Déléguer le compte",
+          "label": "Résumé",
+          "toDelegate": "Compte à déléguer",
+          "toUndelegate": "Compte à interrompre",
+          "validator": "Validateur",
+          "select": "Sélectionner",
+          "yield": "Rendement estimé {{amount}}",
+          "randomly": "Validateur choisi aléatoirement",
+          "termsAndPrivacy": "Déléguer vos droits de vote ne garantit pas que vous recevrez des récompenses de la part de votre validateur."
+        },
+        "validator": {
+          "title": "Sélectionner un validateur",
+          "description": "Vous pouvez sélectionner un validateur en comparant les taux de rendement estimés",
+          "customValidator": "Validateur personnalisé",
+          "providedBy": "Taux de rendements fournis par <1><0>MyTezosBaker</0></1>"
+        },
+        "custom": {
+          "title": "Validateur personnalisé",
+          "text": "Veuillez saisir l'adresse du validateur auquel vous souhaitez déléguer votre compte.",
+          "button": "Confirmer le validateur"
+        },
+        "undelegate": {
+          "title": "Interrompre la délégation"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "Confirmation",
+          "success": {
+            "title": "Délégation envoyée",
+            "titleUndelegated": "Opération envoyée",
+            "text": "Transaction de délégation diffusée avec succès. Vous devriez recevoir vos premières récompenses dans un délai d'environ 40 jours, en fonction du validateur.",
+            "textUndelegated": "La délégation de votre compte se terminera une fois l'opération confirmée. Vous pouvez déléguer à nouveau votre compte à tout moment."
+          },
+          "pending": {
+            "title": "Diffusion de la transaction..."
+          },
+          "broadcastError": "Votre transaction a potentiellement échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée, avant de réessayer."
+        }
+      }
+    },
+    "banner": {
+      "title": "Obtenez des récompenses",
+      "text": "Vous pouvez obtenir des récompenses staking Tezos en déléguant votre compte"
+    },
+    "contextMenu": {
+      "topUp": "Recevoir plus",
+      "redelegate": "Changer de validateur",
+      "stopDelegation": "Terminer la délégation"
+    }
   },
   "asset": {
     "notice": "Résumé de tous les comptes {{currency}}"
@@ -677,7 +851,7 @@
     },
     "experimental": {
       "desc": "Essayez des fonctionnalités expérimentales et faites-nous savoir ce que vous en pensez",
-      "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
+      "disclaimer": "These are experimental features we provide on an “as is” basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
       "title": "Réinitialiser Ledger Live",
@@ -755,7 +929,9 @@
     "checkSuccess": "La mise à jour est prête à être installée",
     "quitAndInstall": "Installer maintenant",
     "error": "Erreur lors de la mise à jour. Veuillez télécharger à nouveau",
-    "reDownload": "Télécharger à nouveau"
+    "reDownload": "Télécharger à nouveau",
+    "nightlyWarning": "Cette version ne peut pas être mise à jour automatiquement, veuillez installer la dernière version manuellement",
+    "downloadNow": "Télécharger Maintenant"
   },
   "crash": {
     "oops": "Oups, une erreur c'est produite",
@@ -763,12 +939,6 @@
     "restart": "Redémarrer",
     "support": "Contacter l'assistance",
     "github": "GitHub"
-  },
-  "disclaimerModal": {
-    "title": "Tradez en toute sécurité.",
-    "desc_1": "Avant d’envoyer et de recevoir des crypto-actifs, renseignez-vous afin de prendre des décisions éclairées. Les crypto-actifs sont volatiles et les prix peuvent monter ou baisser. Évaluez attentivement vos objectifs de trading et les risques financiers que vous êtes prêt à prendre.",
-    "desc_2": "Veuillez noter que Ledger ne fournit aucun conseil financier, fiscal ou juridique. Vous devrez prendre ces décisions par vous-même ou consulter des experts fiables.",
-    "cta": "Compris"
   },
   "exportOperationsModal": {
     "title": "Historique des opérations",
@@ -800,6 +970,7 @@
     },
     "start": {
       "title": "Bienvenue sur Ledger Live",
+      "themeDesc": "Commençons par choisir l'apparence de Ledger Live.\nVous pouvez changer cela à tout moment dans vos paramètres.",
       "startBtn": "Premiers pas"
     },
     "init": {
@@ -1007,6 +1178,23 @@
   "connectTroubleshooting": {
     "desc": "Des difficultés à connecter votre appareil ?"
   },
+  "TransactionConfirm": {
+    "title": "Veuillez confirmer l'opération sur votre appareil pour l'envoyer",
+    "warning": "Vérifiez toujours que votre appareil affiche exactement l'adresse fournie par le {{recipientWording}}",
+    "recipientWording": {
+      "send": "destinataire",
+      "delegate": "validateur",
+      "undelegate": "validateur"
+    }
+  },
+  "RecipientField": {
+    "placeholder": "Entrer l'adresse {{currencyName}}"
+  },
+  "Terms": {
+    "title": "Conditions d’utilisation",
+    "read": "Lire nos Conditions d'utilisation",
+    "switchLabel": "J'ai lu et accepte les conditions d'utilisation et la politique de confidentialité"
+  },
   "errors": {
     "generic": {
       "title": "{{message}}",
@@ -1045,13 +1233,10 @@
       "description": "Une erreur inattendue s'est produite, veuillez réessayer"
     },
     "DeviceSocketFail": {
+      "title": "{{message}}",
       "description": "Veuillez essayer à nouveau"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "Désolé, échec de la connexion",
-      "description": "Veuillez essayer à nouveau"
-    },
-    "DeviceSocketNoHandler": {
       "title": "Désolé, échec de la connexion",
       "description": "Veuillez essayer à nouveau"
     },
@@ -1084,19 +1269,16 @@
       "description": "Tentative de mise à jour inutile du microcontrôleur de l’appareil. En cas de problème avec votre appareil, veuillez contacter l’assistance Ledger."
     },
     "LedgerAPI4xx": {
+      "title": "{{message}}",
       "description": "Veuillez vérifier votre connexion et réessayer ou contacter le Support Ledger."
     },
     "LedgerAPI5xx": {
       "title": "Désolé, essayez à nouveau.",
-      "description": "Le serveur n'a pas pu gérer votre demande. Veuillez réessayer ultérieurement ou contacter le Support Ledger. {{message}}"
+      "description": "Le serveur n'a pas pu traiter votre demande. Veuillez réessayer ultérieurement. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Désolé, les services {{currencyName}} ne sont pas disponibles.",
       "description": "Veuillez essayer à nouveau ou contacter l’assistance Ledger."
-    },
-    "ManagerAPIsFail": {
-      "title": "Désolé, les services du Manager ne sont pas disponibles",
-      "description": "Veuillez vérifier le statut du réseau"
     },
     "ManagerAppAlreadyInstalled": {
       "title": "Désolé, cette application est déjà installée",
@@ -1151,10 +1333,6 @@
     "PasswordIncorrect": {
       "title": "Le mot de passe saisi est incorrect.",
       "description": "Veuillez essayer à nouveau."
-    },
-    "SelectExchangesLoadError": {
-      "title": "Chargement impossible",
-      "description": "Veuillez essayer à nouveau plus tard"
     },
     "TimeoutError": {
       "title": "Désolé, le délai est dépassé.",
@@ -1259,12 +1437,73 @@
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Impossible de recevoir sur les sous-comptes, veuillez sélectionner le compte parent.",
+      "title": "Impossible de recevoir sur les sous-comptes",
       "description": "Si vous souhaitez recevoir des fonds, veuillez utiliser le compte parent"
     },
     "UnavailableTezosOriginatedAccountSend": {
       "title": "Impossible d'envoyer depuis des sous-comptes",
       "description": "Suites aux changements récemment introduits par la mise à jour Babylon, cette fonctionnalité sera ajoutée ultérieurement."
+    },
+    "RecommendUndelegation": {
+      "title": "Veuillez interrompre la délégation du compte avant de le vider"
+    },
+    "RecommendSubAccountsToEmpty": {
+      "title": "Veuillez d'abord vider tous les sous-comptes"
+    },
+    "NotSupportedLegacyAddress": {
+      "title": "Ce format d'adresse legacy n'est plus pris en charge"
+    },
+    "BtcUnmatchedApp": {
+      "title": "Ce n'est pas la bonne application",
+      "description": "Ouvrez l’application « {{managerAppName}} » sur votre appareil"
+    },
+    "DeviceNameInvalid": {
+      "title": "Veuillez choisir un nom d'appareil sans '{{invalidCharacters}}'"
+    },
+    "LedgerAPIErrorWithMessage": {
+      "title": "{{message}}",
+      "description": "Veuillez essayer à nouveau ou contacter l’assistance Ledger."
+    },
+    "ManagerAppRelyOnBTC": {
+      "title": "Applications Bitcoin et Ethereum requises",
+      "description": "Installez d'abord les dernières applications Bitcoin et Ethereum."
+    },
+    "UserRefusedDeviceNameChange": {
+      "title": "Renommage annulé sur l'appareil",
+      "description": "Essayez à nouveau et autorisez le renommage sur votre appareil"
+    },
+    "SyncError": {
+      "title": "Erreur de synchronisation",
+      "description": "Un problème est survenu avec la synchronisation de la blockchain. Veuillez réessayer ou nous contacter."
+    },
+    "PairingFailed": {
+      "title": "Echec du jumelage",
+      "description": "Veuillez réessayer ou contacter l'assistance de Ledger en cas de doute."
+    },
+    "GenuineCheckFailed": {
+      "title": "Échec de la vérification d'authenticité",
+      "description": "Une erreur s'est produite. Veuillez réessayer ou contacter l'assistance de Ledger en cas de doute."
+    },
+    "EthAppPleaseEnableContractData": {
+      "title": "Veuillez activer les contract data dans les paramètres de l'application Ethereum"
+    },
+    "InvalidXRPTag": {
+      "title": "Tag de destination XRP invalide"
+    },
+    "NotEnoughBalanceToDelegate": {
+      "title": "Solde insuffisant pour déléguer"
+    },
+    "NotEnoughBalanceInParentAccount": {
+      "title": "Solde insuffisant dans le compte parent"
+    },
+    "NotEnoughSpendableBalance": {
+      "title": "Solde insuffisant pour cette opération"
+    },
+    "WrongAppForCurrency": {
+      "title": "Veuillez ouvrir l'application {{expected}}"
+    },
+    "FeeTooHigh": {
+      "title": "Les frais de réseau représentent plus de 10% du montant"
     }
   }
 }

@@ -11,7 +11,11 @@ import type { T } from 'types/common'
 
 import IconClock from 'icons/Clock'
 import IconReceive from 'icons/Receive'
+import IconDelegate from 'icons/Delegate'
+import IconUndelegate from 'icons/Undelegate'
 import IconSend from 'icons/Send'
+import IconPlus from 'icons/Plus'
+import IconEye from 'icons/Eye'
 
 import Box from 'components/base/Box'
 import Tooltip from 'components/base/Tooltip'
@@ -57,6 +61,16 @@ const WrapperClock = styled(Box).attrs(() => ({
   padding: 1px;
 `
 
+const iconsComponent = {
+  OUT: IconSend,
+  IN: IconReceive,
+  DELEGATE: IconDelegate,
+  UNDELEGATE: IconUndelegate,
+  REVEAL: IconEye,
+  CREATE: IconPlus,
+  NONE: IconSend,
+}
+
 class ConfirmationCheck extends PureComponent<{
   marketColor: string,
   isConfirmed: boolean,
@@ -77,6 +91,8 @@ class ConfirmationCheck extends PureComponent<{
   render() {
     const { marketColor, isConfirmed, t, type, withTooltip, hasFailed, ...props } = this.props
 
+    const Icon = iconsComponent[type]
+
     const content = (
       <Container
         type={type}
@@ -85,7 +101,7 @@ class ConfirmationCheck extends PureComponent<{
         hasFailed={hasFailed}
         {...props}
       >
-        {type === 'IN' ? <IconReceive size={12} /> : <IconSend size={12} />}
+        {Icon ? <Icon size={12} /> : null}
         {!isConfirmed && !hasFailed && (
           <WrapperClock>
             <IconClock size={10} />

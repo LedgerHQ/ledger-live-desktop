@@ -28,6 +28,8 @@ const ContentContainer = styled.div.attrs(p => ({
 
 const ChildrenContainer = styled.div`
   display: inline-flex;
+  flex-shrink: 1;
+  max-width: 100%;
 `
 
 export const defaultTippyOptions = {
@@ -42,7 +44,7 @@ const arrow = bg =>
 
 type Props = {
   tooltipBg?: string,
-  children: React$Node,
+  children?: React$Node,
   content: React$Node,
   delay?: number,
   followCursor?: boolean,
@@ -55,9 +57,9 @@ const ToolTip = ({ followCursor, tooltipBg, children, content, delay, ...props }
   return (
     <Tippy
       {...defaultTippyOptions}
-      content={<ContentContainer bg={bg}>{content}</ContentContainer>}
+      content={content ? <ContentContainer bg={bg}>{content}</ContentContainer> : null}
       delay={[delay, 0]}
-      arrow={arrow(bg)}
+      arrow={content ? arrow(bg) : null}
       followCursor={followCursor}
       {...props}
     >

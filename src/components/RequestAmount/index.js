@@ -14,33 +14,36 @@ import {
 import CounterValues from 'helpers/countervalues'
 import InputCurrency from 'components/base/InputCurrency'
 import Box from 'components/base/Box'
+import IconTransfer from 'icons/Transfer'
 import type { State } from 'reducers'
 
 const InputRight = styled(Box).attrs(() => ({
-  ff: 'Inter',
-  color: 'palette.text.shade80',
+  ff: 'Inter|Medium',
+  color: 'palette.text.shade60',
   fontSize: 4,
-  justifyContent: 'center',
-  pr: 3,
-}))``
-
-const InputCenter = styled(Box).attrs(() => ({
-  ff: 'Inter',
-  color: 'palette.text.shade80',
-  fontSize: 4,
-  alignItems: 'center',
   justifyContent: 'center',
 }))`
-  width: 30px;
+  padding-right: 10px;
+`
+
+const InputCenter = styled(Box).attrs(() => ({
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: 'palette.text.shade40',
+}))`
+  margin-left: 19px;
+  margin-right: 19px;
 `
 
 type OwnProps = {
+  autoFocus?: boolean,
   // left value (always the one which is returned)
   value: BigNumber,
 
   disabled?: boolean,
 
   validTransactionError: ?Error,
+  validTransactionWarning: ?Error,
 
   // max left value
   max: BigNumber,
@@ -130,12 +133,14 @@ export class RequestAmount extends PureComponent<Props> {
 
   render() {
     const {
+      autoFocus,
       disabled,
       value,
       account,
       rightCurrency,
       getCounterValue,
       validTransactionError,
+      validTransactionWarning,
     } = this.props
     const right = getCounterValue(value) || BigNumber(0)
     const rightUnit = rightCurrency.units[0]
@@ -144,15 +149,19 @@ export class RequestAmount extends PureComponent<Props> {
       <Box horizontal flow={5} alignItems="center">
         <Box horizontal grow shrink>
           <InputCurrency
+            autoFocus={autoFocus}
             disabled={disabled}
             error={validTransactionError}
+            warning={validTransactionWarning}
             containerProps={{ grow: true }}
             defaultUnit={defaultUnit}
             value={value}
             onChange={this.onLeftChange}
             renderRight={<InputRight>{defaultUnit.code}</InputRight>}
           />
-          <InputCenter>{'='}</InputCenter>
+          <InputCenter>
+            <IconTransfer />
+          </InputCenter>
           <InputCurrency
             disabled={disabled}
             containerProps={{ grow: true }}

@@ -20,6 +20,7 @@ import { createStructuredSelector } from 'reselect'
 import { accountsSelector } from 'reducers/accounts'
 import IconDots from 'icons/Dots'
 import Bar from './Bar'
+import ToolTip from '../base/Tooltip'
 
 export type AccountDistributionItem = {
   account: Account | TokenAccount,
@@ -63,6 +64,8 @@ const AccountWrapper = styled.div`
     margin-right: 10px;
   }
   > :nth-child(2) {
+    flex: 1;
+    align-items: flex-start;
     margin-right: 8px;
   }
 `
@@ -78,12 +81,14 @@ const Distribution = styled.div`
 const Amount = styled.div`
   width: 25%;
   text-align: right;
+  justify-content: flex-end;
 `
 const Value = styled.div`
   width: 20%;
   box-sizing: border-box;
   padding-left: 8px;
   text-align: right;
+  justify-content: flex-end;
 `
 const Dots = styled.div`
   width: 5%;
@@ -127,15 +132,17 @@ class Row extends PureComponent<Props, State> {
         <Wrapper onClick={() => this.onAccountClick(account)}>
           <AccountWrapper>
             {icon}
-            <Box grow>
+            <Box>
               {parentAccount ? (
-                <Box fontSize={10} color="palette.text.shade80">
+                <Ellipsis fontSize={10} color="palette.text.shade80">
                   <Text ff="Inter|SemiBold">{parentAccount.name}</Text>
-                </Box>
+                </Ellipsis>
               ) : null}
-              <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
-                {displayName}
-              </Ellipsis>
+              <ToolTip content={displayName} delay={1200}>
+                <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
+                  {displayName}
+                </Ellipsis>
+              </ToolTip>
             </Box>
           </AccountWrapper>
           <Distribution>

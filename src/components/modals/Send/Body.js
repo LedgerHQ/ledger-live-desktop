@@ -25,10 +25,13 @@ import { DisconnectedDevice, UserRefusedOnDevice } from '@ledgerhq/errors'
 import Stepper from 'components/base/Stepper'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 
-import StepAmount, { StepAmountFooter } from './steps/01-step-amount'
-import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
-import StepVerification from './steps/03-step-verification'
-import StepConfirmation, { StepConfirmationFooter } from './steps/04-step-confirmation'
+import StepRecipient, { StepRecipientFooter } from './steps/StepRecipient'
+import StepAmount, { StepAmountFooter } from './steps/StepAmount'
+import StepConnectDevice, { StepConnectDeviceFooter } from './steps/StepConnectDevice'
+import StepVerification from './steps/StepVerification'
+import StepSummary, { StepSummaryFooter } from './steps/StepSummary'
+import StepConfirmation, { StepConfirmationFooter } from './steps/StepConfirmation'
+import StepWarning, { StepWarningFooter } from './steps/StepWarning'
 
 type OwnProps = {|
   stepId: string,
@@ -37,6 +40,7 @@ type OwnProps = {|
   params: {
     account: ?AccountLike,
     parentAccount: ?Account,
+    startWithWarning?: boolean,
   },
 |}
 
@@ -56,32 +60,63 @@ type Props = {|
 
 const createSteps = () => [
   {
+    id: 'warning',
+    excludeFromBreadcrumb: true,
+    component: StepWarning,
+    footer: StepWarningFooter,
+  },
+  {
+    id: 'recipient',
+    label: <Trans i18nKey="send.steps.recipient.title" />,
+    component: StepRecipient,
+    footer: StepRecipientFooter,
+  },
+  {
     id: 'amount',
     label: <Trans i18nKey="send.steps.amount.title" />,
     component: StepAmount,
     footer: StepAmountFooter,
+    onBack: ({ transitionTo }) => transitionTo('recipient'),
   },
   {
-    id: 'device',
-    label: <Trans i18nKey="send.steps.connectDevice.title" />,
-    component: StepConnectDevice,
-    footer: StepConnectDeviceFooter,
+    id: 'summary',
+    label: <Trans i18nKey="send.steps.summary.title" />,
+    component: StepSummary,
+    footer: StepSummaryFooter,
     onBack: ({ transitionTo }) => transitionTo('amount'),
   },
   {
+    id: 'device',
+    label: <Trans i18nKey="send.steps.device.title" />,
+    component: StepConnectDevice,
+    footer: StepConnectDeviceFooter,
+    onBack: ({ transitionTo }) => transitionTo('summary'),
+  },
+  {
     id: 'verification',
-    label: <Trans i18nKey="send.steps.verification.title" />,
+    excludeFromBreadcrumb: true,
     component: StepVerification,
     shouldPreventClose: true,
   },
   {
-    id: 'confirmation',
-    label: <Trans i18nKey="send.steps.confirmation.title" />,
+    id: 'refused',
+    excludeFromBreadcrumb: true,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
     onBack: ({ transitionTo, onRetry }) => {
       onRetry()
-      transitionTo('amount')
+      transitionTo('summary')
+    },
+  },
+  {
+    id: 'confirmation',
+    label: <Trans i18nKey="send.steps.confirmation.title" />,
+    excludeFromBreadcrumb: true,
+    component: StepConfirmation,
+    footer: StepConfirmationFooter,
+    onBack: ({ transitionTo, onRetry }) => {
+      onRetry()
+      transitionTo('recipient')
     },
   },
 ]
@@ -120,7 +155,20 @@ const Body = ({
     status,
     bridgeError,
     bridgePending,
-  } = useBridgeTransaction()
+  } = useBridgeTransaction(() => {
+    const parentAccount = params && params.parentAccount
+    const account = (params && params.account) || accounts[0]
+    return {
+      account,
+      parentAccount,
+    }
+  })
+
+  // make sure step id is in sync
+  useEffect(() => {
+    const stepId = params && params.startWithWarning ? 'warning' : null
+    if (stepId) onChangeStepId(stepId)
+  }, [onChangeStepId, params])
 
   const [isAppOpened, setAppOpened] = useState(false)
   const [optimisticOperation, setOptimisticOperation] = useState(null)
@@ -211,15 +259,15 @@ const Body = ({
             }
           },
           error: err => {
-            const error = err.statusCode === 0x6985 ? new UserRefusedOnDevice() : err
-            track(
-              error instanceof UserRefusedOnDevice
-                ? 'SendTransactionRefused'
-                : 'SendTransactionError',
-              eventProps,
-            )
-            handleTransactionError(error)
-            transitionTo('confirmation')
+            if (err.statusCode === 0x6985) {
+              track('SendTransactionRefused', eventProps)
+              handleTransactionError(new UserRefusedOnDevice())
+              transitionTo('refused')
+            } else {
+              track('SendTransactionError', eventProps)
+              handleTransactionError(err)
+              transitionTo('confirmation')
+            }
           },
         })
     },
@@ -236,26 +284,19 @@ const Body = ({
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId])
 
   // only call on mount/unmount
-  useEffect(() => {
-    const parentAccount = params && params.parentAccount
-    const account = (params && params.account) || accounts[0]
-    setAccount(account, parentAccount)
-    return () => {
+  useEffect(
+    () => () => {
       if (signTransactionSubRef.current) {
         signTransactionSubRef.current.unsubscribe()
       }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    },
+    [],
+  )
 
   const errorSteps = []
 
   if (transactionError) {
-    if (transactionError instanceof UserRefusedOnDevice) {
-      errorSteps.push(2)
-    } else {
-      errorSteps.push(3)
-    }
+    errorSteps.push(3)
   } else if (bridgeError) {
     errorSteps.push(0)
   }
@@ -263,8 +304,8 @@ const Body = ({
   const error = transactionError || bridgeError
 
   const stepperProps = {
-    title: t('send.title'),
-    initialStepId: stepId,
+    title: stepId === 'warning' ? t('common.information') : t('send.title'),
+    initialStepId: params && params.startWithWarning ? 'warning' : stepId,
     steps,
     errorSteps,
     device,
@@ -273,7 +314,7 @@ const Body = ({
     parentAccount,
     transaction,
     isAppOpened,
-    hideBreadcrumb: !!error && stepId === 'amount',
+    hideBreadcrumb: (!!error && ['recipient', 'amount'].includes(stepId)) || stepId === 'warning',
     error,
     status,
     bridgePending,
@@ -295,7 +336,7 @@ const Body = ({
   return (
     <Stepper {...stepperProps}>
       <SyncSkipUnderPriority priority={100} />
-      <Track onUnmount event="CloseModalSend" />
+      <Track onUnmount event="CloseModalDelegate" />
     </Stepper>
   )
 }

@@ -49,6 +49,8 @@ import { confirmationsNbForCurrencySelector, marketIndicatorSelector } from 'red
 import IconChevronRight from 'icons/ChevronRight'
 import IconExternalLink from 'icons/ExternalLink'
 import CounterValue from 'components/CounterValue'
+import LinkHelp from 'components/base/LinkHelp'
+import byFamiliesOperationDetails from 'generated/operationDetails'
 import Link from '../base/Link'
 
 const OpDetailsSection = styled(Box).attrs(() => ({
@@ -160,7 +162,7 @@ const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   }
   const mainCurrency = parentAccount
     ? parentAccount.currency
-    : account && account.type === 'Account'
+    : account && account.type !== 'TokenAccount'
     ? account.currency
     : null
   const confirmationsNb = mainCurrency
@@ -227,6 +229,10 @@ const OperationDetails = connect(
   const confirmations = operation.blockHeight ? mainAccount.blockHeight - operation.blockHeight : 0
   const isConfirmed = confirmations >= confirmationsNb
 
+  const specific = byFamiliesOperationDetails[mainAccount.currency.family]
+  const urlWhatIsThis =
+    specific && specific.getURLWhatIsThis && specific.getURLWhatIsThis(operation)
+  const urlFeesInfo = specific && specific.getURLFeesInfo && specific.getURLFeesInfo(operation)
   const url = getTransactionExplorer(getDefaultExplorerView(mainAccount.currency), operation.hash)
   const uniqueSenders = uniq(senders)
 
@@ -293,7 +299,11 @@ const OperationDetails = connect(
           </Box>
           <Box my={4} alignItems="center">
             <Box selectable>
-              {hasFailed ? null : (
+              {hasFailed ? (
+                <Box color="alertRed">
+                  <Trans i18nKey="operationDetails.failed" />
+                </Box>
+              ) : (
                 <FormattedVal
                   color={amount.isNegative() ? 'palette.text.shade80' : undefined}
                   unit={unit}
@@ -343,7 +353,6 @@ const OperationDetails = connect(
                   return (
                     <NoMarginWrapper key={`${op.id}`}>
                       <OperationComponent
-                        compact
                         text={getAccountCurrency(opAccount).name}
                         operation={op}
                         account={opAccount}
@@ -372,7 +381,6 @@ const OperationDetails = connect(
                 {internalOperations.map((op, i) => (
                   <NoMarginWrapper key={`${op.id}`}>
                     <OperationComponent
-                      compact
                       text={account.currency.name}
                       operation={op}
                       account={account}
@@ -419,7 +427,28 @@ const OperationDetails = connect(
           <Box horizontal flow={2}>
             {isNegative && (
               <Box flex={1}>
-                <OpDetailsTitle>{t('operationDetails.fees')}</OpDetailsTitle>
+                <Box horizontal>
+                  <OpDetailsTitle>{t('operationDetails.fees')}</OpDetailsTitle>
+
+                  {urlFeesInfo ? (
+                    <Link>
+                      <FakeLink
+                        underline
+                        fontSize={3}
+                        ml={2}
+                        color="palette.text.shade80"
+                        onClick={() => openURL(urlFeesInfo)}
+                        iconFirst
+                      >
+                        <Box mr={1}>
+                          <IconExternalLink size={12} />
+                        </Box>
+                        {t('common.learnMore')}
+                      </FakeLink>
+                    </Link>
+                  ) : null}
+                </Box>
+
                 {fee ? (
                   <Fragment>
                     <OpDetailsData>
@@ -519,13 +548,24 @@ const OperationDetails = connect(
           ))}
         </Box>
       )}
-      renderFooter={() =>
-        url && (
-          <Button primary onClick={() => openURL(url)}>
-            {t('operationDetails.viewOperation')}
-          </Button>
-        )
-      }
+      renderFooter={() => (
+        <Box horizontal grow>
+          {urlWhatIsThis ? (
+            <Box ff="Inter|SemiBold" fontSize={4}>
+              <LinkHelp
+                label={<Trans i18nKey="operationDetails.whatIsThis" />}
+                onClick={() => openURL(urlWhatIsThis)}
+              />
+            </Box>
+          ) : null}
+          <div style={{ flex: 1 }} />
+          {url ? (
+            <Button primary onClick={() => openURL(url)}>
+              {t('operationDetails.viewOperation')}
+            </Button>
+          ) : null}
+        </Box>
+      )}
     >
       <TrackPage category="Modal" name="OperationDetails" />
     </ModalBody>

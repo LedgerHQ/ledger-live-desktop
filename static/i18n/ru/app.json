@@ -1,5 +1,6 @@
 {
   "common": {
+    "loading": "Loading",
     "labelYes": "Да",
     "labelNo": "No",
     "never": "Never",
@@ -47,6 +48,9 @@
     "copied": "Скопировано",
     "addressCopied": "Адрес скопирован",
     "experimentalFeature": "Экспериментальная функция",
+    "dismiss": "Dismiss",
+    "choose": "Choose",
+    "information": "Information",
     "lockScreen": {
       "title": "С возвращением",
       "subTitle": null,
@@ -70,7 +74,8 @@
       "OUT": "Отправлено",
       "CREATE": "Created",
       "REVEAL": "Revealed",
-      "DELEGATE": "Delegated"
+      "DELEGATE": "Delegated",
+      "UNDELEGATE": "Undelegated"
     }
   },
   "time": {
@@ -239,6 +244,7 @@
     "coinberry": "Coinberry - это наиболее надежная криптоплатформа в Канаде с уровнем безопасности, превосходящим банковскую защиту, с лучшим в своем классе пользовательским интерфейсом, финансированием и выводом средств без комиссии. Регистрируйтесь заранее, чтобы получить ранний доступ к платформе, если вы не являетесь гражданином Канады.",
     "coinhouse": "Coinhouse - это надежная платформа для частных лиц и институциональных инвесторов, которая предназначена для анализа, приобретения, продажи и безопасного хранения криптоактивов.",
     "coinmama": "Coinmama представляет собой финансовую службу для быстрой, безопасной и оживленной покупки цифровых активов из любой точки мира.",
+    "crypto": "Crypto.com is the best place to buy, sell, track and pay with crypto.",
     "genesis": "Genesis — это институциональная торговая фирма, предлагающая ликвидность и займы для цифровых валют, включая биткоин, биткоин кэш (Bitcoin Cash), Ethereum, Ethereum Classic, Litecoin и XRP.",
     "kyberswap": "Быстрая, простая и надежная платформа миграции токенов. Она работает на протоколе Kyber Network ликвидности сети.",
     "luno": "Компания Luno обеспечивает возможность безопасной и простой покупки, хранения и изучения криптовалют, таких как биткоин и Ethereum.",
@@ -266,13 +272,15 @@
     "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "Скрыть токены ({{tokenCount}})",
     "tooltip": "Токен от",
-    "countTooltip": "1 токен",
-    "countTooltip_plural": "{{count}} токенов"
+    "countTooltip": "1 token",
+    "countTooltip_plural": "{{count}} tokens"
   },
   "subAccounts": {
     "title": "Subaccounts",
     "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
-    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})"
+    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
+    "countTooltip": "1 subaccount",
+    "countTooltip_plural": "{{count}} subaccounts"
   },
   "migrateAccounts": {
     "overview": {
@@ -376,6 +384,7 @@
     "from": "От",
     "to": "Кому",
     "identifier": "Идентификатор транзакции",
+    "whatIsThis": "What is this operation?",
     "viewOperation": "Просмотреть в Explorer",
     "showMore": "Показать больше {{recipients}}",
     "showLess": "Показать меньше",
@@ -415,7 +424,7 @@
     },
     "firmware": {
       "installed": "Версия встроенного ПО {{version}}",
-      "updateLater": "Update later",
+      "updateLater": "Cancel",
       "seedReady": "I have my recovery phrase",
       "dontHaveSeed": "Don't have your recovery phrase?",
       "followTheGuide": "Follow our step by step update guide",
@@ -428,8 +437,11 @@
       "disclaimerAppDelete": "Чтобы освободить место, удалите некоторые приложения. Это не повлияет на криптоактивы.",
       "disclaimerAppReinstall": "В качестве предосторожности убедитесь, что ваша карточка восстановления цела и невредима.",
       "downloadingUpdateDesc": "Подождите пока программа установки загрузится",
-      "appsAutoUninstallTitle": "Apps will be uninstalled",
-      "appsAutoUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
+      "appsAutoUninstallTitle": "All applications will be uninstalled from your device",
+      "appsAutoUninstallBullet1": "<0><0>Don't worry</0></0>, this does not affect your crypto assets",
+      "appsAutoUninstallBullet2": "You will be able to reinstall them all after the update",
+      "appsUninstallTitle": "Apps will be uninstalled",
+      "appsUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -500,38 +512,106 @@
       },
       "receiveFunds": {
         "title": "Получить"
+      },
+      "warning": {
+        "tezos": {
+          "text": "The amount received on a delegated account will be added to the total staked amount. Choose another account if you want to avoid this."
+        }
+      }
+    }
+  },
+  "managerv2": {
+    "loading": {
+      "step4": {
+        "title": "Loading apps and fancy stuff"
+      }
+    },
+    "device": {
+      "title": "Connect your device",
+      "desc": "Follow the steps below to open the Manager v2",
+      "cta": "Connect my device"
+    },
+    "tabs": {
+      "appCatalog": "App Catalog",
+      "appsOnDevice": "Apps Installed"
+    },
+    "deviceStorage": {
+      "freeSpace": "{{space}} free",
+      "installed": "Installed",
+      "capacity": "Capacity",
+      "used": "Used",
+      "firmware": "Firmware {{version}}",
+      "genuine": "Device is genuine"
+    },
+    "applist": {
+      "placeholder": "There are no apps matching the search and filters selected",
+      "placeholderInstalled": "There are no installed apps matching the search and filters selected",
+      "filter": {
+        "title": "Filter",
+        "all": "All",
+        "supported": "Live Supported",
+        "installed": "Installed",
+        "notInstalled": "Not Installed"
+      },
+      "sort": {
+        "title": "Sort",
+        "name": "Name",
+        "marketcap": "Marketcap"
+      },
+      "updatable": {
+        "title": "Updates available"
+      },
+      "item": {
+        "installing": "Installing...",
+        "uninstalling": "Uninstalling...",
+        "scheduled": "Scheduled",
+        "cancel": "Cancel",
+        "update": "Update",
+        "updateAll": "Update All",
+        "install": "Install",
+        "installed": "Installed",
+        "uninstall": "Uninstall",
+        "notEnoughSpace": "Not enough space",
+        "supported": "Supported"
       }
     }
   },
   "send": {
     "title": "Отправить",
     "totalSpent": "Всего для списания",
+    "totalBalance": "Total balance",
     "steps": {
-      "amount": {
-        "title": "Сведения",
-        "selectAccountDebit": "Счет для списания",
-        "recipientAddress": "Адрес получателя",
-        "amount": "Сумма",
-        "fees": "Комиссия за пользование сетью",
-        "useMax": "Максимум",
-        "advancedOptions": "Дополнительные параметры",
-        "useRBF": "Использовать транзакцию Replace-by-Fee (замена с повышением комиссии)",
-        "message": "Оставьте сообщение (140)",
-        "rippleTag": "Тег",
-        "ethereumGasLimit": "Лимит газа",
-        "unitPerByte": "{{unit}} на байт",
-        "highFeeModal": {
-          "title": "Высокие комиссии",
-          "desc": "Будьте осторожны, плата за транзакцию (<1><0>{{fees}}</0></1>) составляет более 10% от суммы (<3><0>{{amount}}</0></3>). Продолжить?"
-        }
+      "recipient": {
+        "title": "Recipient"
       },
-      "connectDevice": {
-        "title": "Устройство"
+      "amount": {
+        "title": "Amount"
+      },
+      "summary": {
+        "title": "Summary"
+      },
+      "device": {
+        "title": "Device"
+      },
+      "details": {
+        "from": "From",
+        "to": "To",
+        "selectAccountDebit": "Account to debit",
+        "recipientAddress": "Recipient address",
+        "amount": "Amount",
+        "fees": "Network fees",
+        "useMax": "Send Max",
+        "advancedOptions": "Advanced options",
+        "useRBF": "Use a replace-by-fee transaction",
+        "message": "Leave a message (140)",
+        "rippleTag": "Tag",
+        "rippleTagPlaceholder": "Optional",
+        "ethereumGasLimit": "Gas limit",
+        "ethereumGasPrice": "Gas price",
+        "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
-        "title": "Проверка",
-        "warning": "Проверьте все детали транзакции на устройстве.",
-        "body": "Для отправки транзакции подтвердите ее на устройстве."
+        "title": "Проверка"
       },
       "confirmation": {
         "title": "Подтверждение",
@@ -544,7 +624,15 @@
           "title": "Трансляция транзакции..."
         },
         "broadcastError": "Возможно, ваша транзакция не прошла. Пожалуйста, проверьте еще раз через несколько минут, чтобы убедиться, что транзакция не прошла, прежде чем попытаться снова."
+      },
+      "warning": {
+        "tezos": {
+          "text": "The amount to be sent will be deducted from the balance of your delegated account."
+        }
       }
+    },
+    "footer": {
+      "estimatedFees": "Network fees"
     }
   },
   "releaseNotes": {
@@ -570,6 +658,92 @@
     "showAll": "Показать все",
     "showLess": "Показать меньше",
     "header": "Account allocation ({{count}})"
+  },
+  "delegation": {
+    "title": "Earn rewards",
+    "header": "Delegation",
+    "validator": "Validator",
+    "yield": "Est. Yield",
+    "address": "Address",
+    "transactionID": "Transaction ID",
+    "value": "Value",
+    "amount": "Amount",
+    "duration": "Duration",
+    "durationJustStarted": "Just started",
+    "durationDays": "{{count}} day",
+    "durationDays_plural": "{{count}} days",
+    "howItWorks": "How delegation works",
+    "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
+    "earnRewards": "Earn rewards",
+    "flow": {
+      "steps": {
+        "starter": {
+          "title": "Earn staking rewards",
+          "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets.",
+          "bullet": {
+            "delegate": "Delegated accounts stay yours.",
+            "access": "You can access your assets anytime.",
+            "ledger": "Delegate securely with your Ledger device."
+          },
+          "button": {
+            "cta": "Delegate to earn rewards"
+          }
+        },
+        "account": {
+          "title": "Delegate account",
+          "label": "Account",
+          "toDelegate": "Account to delegate"
+        },
+        "summary": {
+          "title": "Delegate account",
+          "label": "Summary",
+          "toDelegate": "Account to delegate",
+          "toUndelegate": "Account to undelegate",
+          "validator": "Validator",
+          "select": "Select",
+          "yield": "Est. Yield {{amount}}",
+          "randomly": "Randomly chosen validator",
+          "termsAndPrivacy": "Delegating your voting rights does not guarantee you will be paid any reward by your validator."
+        },
+        "validator": {
+          "title": "Select validator",
+          "description": "You can select a validator by comparing the estimated reward rates",
+          "customValidator": "Custom validator",
+          "providedBy": "Yield rates provided by <1><0>MyTezosBaker</0></1>"
+        },
+        "custom": {
+          "title": "Custom validator",
+          "text": "Please enter the address of the custom validator to delegate your account to.",
+          "button": "Confirm validator"
+        },
+        "undelegate": {
+          "title": "Undelegate account"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "Confirmation",
+          "success": {
+            "title": "Delegation sent",
+            "titleUndelegated": "Operation sent",
+            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator.",
+            "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
+          },
+          "pending": {
+            "title": "Broadcasting transaction..."
+          },
+          "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        }
+      }
+    },
+    "banner": {
+      "title": "Earn rewards",
+      "text": "You can earn Tezos staking rewards by delegating your account"
+    },
+    "contextMenu": {
+      "topUp": "Receive more",
+      "redelegate": "Change validator",
+      "stopDelegation": "End delegation"
+    }
   },
   "asset": {
     "notice": "Сводка всех {{currency}} аккаунтов"
@@ -677,7 +851,7 @@
     },
     "experimental": {
       "desc": "Попробуйте экспериментальные возможности и дайте нам знать, что вы думаете",
-      "disclaimer": "Это экспериментальные возможности, которые мы предоставляем на основаниях «как есть», чтобы наше сообщество тестировало. Они могут быть изменены, сломаны или удалены в любое время. Включая их, вы соглашаетесь использовать их на свой страх и риск. Ваши криптоактивы остаются защищены вашим аппаратным кошельком Ledger."
+      "disclaimer": "These are experimental features we provide on an “as is” basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
       "title": "Сбросить Ledger Live",
@@ -755,7 +929,9 @@
     "checkSuccess": "Обновления готовы к установке",
     "quitAndInstall": "Установить сейчас",
     "error": "Во время обновления возникла ошибка. Скачайте еще раз.",
-    "reDownload": "Скачать еще раз"
+    "reDownload": "Скачать еще раз",
+    "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
+    "downloadNow": "Download now"
   },
   "crash": {
     "oops": "Произошла ошибка",
@@ -763,12 +939,6 @@
     "restart": "Перезапустить",
     "support": "Связаться со службой поддержки",
     "github": "GitHub"
-  },
-  "disclaimerModal": {
-    "title": "Выполняйте торговые операции в условиях безопасности",
-    "desc_1": "Перед отправкой и получением криптоактивов получите как можно больше информации, чтобы принять обоснованные решения. Криптоактивы отличаются изменчивостью, а цены могут повышаться и снижаться. Тщательно оцените свои торговые задачи и финансовый риск, который вы готовы принять.",
-    "desc_2": "Будьте осторожны и помните, что компания Ledger не оказывает финансовые, налоговые или юридические консультации. Подобные решения необходимо принимать по своему усмотрению или предварительно проконсультироваться с заслуживающими доверия специалистами.",
-    "cta": "Понятно"
   },
   "exportOperationsModal": {
     "title": "История операций",
@@ -800,6 +970,7 @@
     },
     "start": {
       "title": "Добро пожаловать в Ledger Live",
+      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
       "startBtn": "Начало работы"
     },
     "init": {
@@ -1007,6 +1178,23 @@
   "connectTroubleshooting": {
     "desc": "У вас трудности с подключением вашего устройства?"
   },
+  "TransactionConfirm": {
+    "title": "Please confirm the operation on your device to send it",
+    "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
+    "recipientWording": {
+      "send": "recipient",
+      "delegate": "validator",
+      "undelegate": "validator"
+    }
+  },
+  "RecipientField": {
+    "placeholder": "Enter {{currencyName}} address"
+  },
+  "Terms": {
+    "title": "Terms of Use",
+    "read": "Read the Terms of Use",
+    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
+  },
   "errors": {
     "generic": {
       "title": "{{message}}",
@@ -1045,13 +1233,10 @@
       "description": "При отправке запроса возникла ошибка. Пожалуйста, попробуйте позже."
     },
     "DeviceSocketFail": {
+      "title": "{{message}}",
       "description": "Повторите попытку."
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "Произошел сбой подключения.",
-      "description": "Повторите попытку."
-    },
-    "DeviceSocketNoHandler": {
       "title": "Произошел сбой подключения.",
       "description": "Повторите попытку."
     },
@@ -1084,19 +1269,16 @@
       "description": "Вы пробовали обновить микроконтроллер устройства без необходимости. Если устройство неисправно, обратитесь в службу поддержки компании Ledger."
     },
     "LedgerAPI4xx": {
+      "title": "{{message}}",
       "description": "Пожалуйста, проверьте подключение и повторите попытку или обратитесь в службу поддержки Ledger."
     },
     "LedgerAPI5xx": {
       "title": "Извините, попробуйте еще раз.",
-      "description": "Сервер не может обработать ваш запрос. Пожалуйста, попробуйте еще раз позднее или обратитесь в службу поддержки Ledger. {{message}}"
+      "description": "The server could not handle your request. Please try again at a later moment. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Службы для {{currencyName}} недоступны.",
       "description": "Повторите попытку или обратитесь в службу поддержки компании Ledger."
-    },
-    "ManagerAPIsFail": {
-      "title": "Службы диспетчера недоступны.",
-      "description": "Проверьте состояние сети."
     },
     "ManagerAppAlreadyInstalled": {
       "title": "Уже установлено.",
@@ -1150,10 +1332,6 @@
     },
     "PasswordIncorrect": {
       "title": "Введен неправильный пароль.",
-      "description": "Повторите попытку."
-    },
-    "SelectExchangesLoadError": {
-      "title": "Невозможно загрузить.",
       "description": "Повторите попытку."
     },
     "TimeoutError": {
@@ -1259,12 +1437,73 @@
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive on subaccounts, please select the parent account.",
+      "title": "Cannot receive on subaccounts",
       "description": "If you want to receive funds, please use the parent account"
     },
     "UnavailableTezosOriginatedAccountSend": {
       "title": "Cannot send from subaccounts yet",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+    },
+    "RecommendUndelegation": {
+      "title": "Please undelegate account before emptying it"
+    },
+    "RecommendSubAccountsToEmpty": {
+      "title": "Please empty all subaccounts first"
+    },
+    "NotSupportedLegacyAddress": {
+      "title": "This legacy address format is no longer supported"
+    },
+    "BtcUnmatchedApp": {
+      "title": "That's the wrong app",
+      "description": "Open the ‘{{managerAppName}}’ app on your device"
+    },
+    "DeviceNameInvalid": {
+      "title": "Please choose a device name without '{{invalidCharacters}}'"
+    },
+    "LedgerAPIErrorWithMessage": {
+      "title": "{{message}}",
+      "description": "Please retry or contact Ledger Support."
+    },
+    "ManagerAppRelyOnBTC": {
+      "title": "Bitcoin and Ethereum apps required",
+      "description": "Install the latest Bitcoin and Ethereum apps first."
+    },
+    "UserRefusedDeviceNameChange": {
+      "title": "Rename canceled on device",
+      "description": "Try again and allow renaming on your device"
+    },
+    "SyncError": {
+      "title": "Synchronization error",
+      "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
+    },
+    "PairingFailed": {
+      "title": "Pairing unsuccessful",
+      "description": "Please try again or contact Ledger Support when in doubt."
+    },
+    "GenuineCheckFailed": {
+      "title": "Genuine check failed",
+      "description": "Something went wrong. Please try again or contact Ledger Support when in doubt."
+    },
+    "EthAppPleaseEnableContractData": {
+      "title": "Please enable contract data in the Ethereum app settings"
+    },
+    "InvalidXRPTag": {
+      "title": "Invalid XRP Destination tag"
+    },
+    "NotEnoughBalanceToDelegate": {
+      "title": "Insufficient balance to delegate"
+    },
+    "NotEnoughBalanceInParentAccount": {
+      "title": "Insufficient balance in parent account"
+    },
+    "NotEnoughSpendableBalance": {
+      "title": "Insufficient balance for this operation"
+    },
+    "WrongAppForCurrency": {
+      "title": "Please open the {{expected}} app"
+    },
+    "FeeTooHigh": {
+      "title": "Network fees represent more than 10% of the amount"
     }
   }
 }

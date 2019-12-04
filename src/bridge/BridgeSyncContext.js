@@ -4,11 +4,14 @@
 // it handles automatically re-calling synchronize
 // this is an even high abstraction than the bridge
 
+import uniq from 'lodash/uniq'
 import logger from 'logger'
 import shuffle from 'lodash/shuffle'
 import React, { Component, useContext } from 'react'
 import priorityQueue from 'async/priorityQueue'
 import { connect } from 'react-redux'
+import { concat, from } from 'rxjs'
+import { ignoreElements } from 'rxjs/operators'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
@@ -22,6 +25,7 @@ import { currenciesStatusSelector, currencyDownStatusLocal } from 'reducers/curr
 import { SYNC_MAX_CONCURRENT } from 'config/constants'
 import type { CurrencyStatus } from 'reducers/currenciesStatus'
 import { track } from '../analytics/segment'
+import { prepareCurrency, hydrateCurrency } from './cache'
 
 type BridgeSyncProviderProps = {
   children: *,
@@ -72,6 +76,7 @@ const lastTimeAnalyticsTrackPerAccountId = {}
 class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
   constructor() {
     super()
+
     const synchronize = (accountId: string, next: () => void) => {
       const state = syncStateLocalSelector(this.props.bridgeSync, { accountId })
       if (state.pending) {
@@ -127,7 +132,10 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
           }
         }
 
-        bridge.startSync(account, false).subscribe({
+        concat(
+          from(prepareCurrency(account.currency)).pipe(ignoreElements()),
+          bridge.startSync(account, false),
+        ).subscribe({
           next: accountUpdater => {
             this.props.updateAccountWithUpdater(accountId, accountUpdater)
           },
@@ -215,6 +223,10 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
     }
 
     this.api = sync
+  }
+
+  componentDidMount() {
+    uniq(this.props.accounts.map(a => a.currency)).forEach(hydrateCurrency)
   }
 
   api: Sync

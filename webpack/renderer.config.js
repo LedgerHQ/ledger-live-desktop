@@ -7,6 +7,7 @@ const rules = require('./rules')
 const config = {
   mode: __ENV__,
   plugins: [...plugins('renderer'), new HardSourceWebpackPlugin()],
+  devtool: 'cheap-module-source-map',
   resolve,
   module: {
     rules,

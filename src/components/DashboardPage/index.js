@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import uniq from 'lodash/uniq'
 import { Redirect } from 'react-router'
 import { compose } from 'redux'
@@ -8,6 +8,7 @@ import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { createStructuredSelector } from 'reselect'
+import styled from 'styled-components'
 import type { Account, Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
@@ -26,10 +27,10 @@ import BalanceInfos from 'components/BalanceInfos'
 import Box from 'components/base/Box'
 import OperationsList from 'components/OperationsList'
 import StickyBackToTop from 'components/StickyBackToTop'
-import styled from 'styled-components'
+import AssetDistribution from 'components/AssetDistribution'
+import MigrationBanner from 'components/modals/MigrateAccounts/Banner'
+import DelegationBanner from 'families/tezos/Delegation/DelegationBanner'
 import BalanceSummary from './BalanceSummary'
-import AssetDistribution from '../AssetDistribution'
-import MigrationBanner from '../modals/MigrateAccounts/Banner'
 
 const mapStateToProps = createStructuredSelector({
   accounts: accountsSelector,
@@ -51,80 +52,93 @@ type Props = {
   saveSettings: ({ selectedTimeRange: TimeRange }) => *,
 }
 
-class DashboardPage extends PureComponent<Props> {
-  onAccountClick = account => this.props.push(`/account/${account.id}`)
+function DashboardPage({
+  accounts,
+  t,
+  counterValue,
+  selectedTimeRange,
+  push,
+  saveSettings,
+}: Props) {
+  const totalAccounts = accounts.length
+  const totalCurrencies = useMemo(() => uniq(accounts.map(a => a.currency.id)).length, [accounts])
+  const totalOperations = useMemo(() => accounts.reduce((sum, a) => sum + a.operations.length, 0), [
+    accounts,
+  ])
 
-  handleChangeSelectedTime = item => {
-    this.props.saveSettings({ selectedTimeRange: item.key })
-  }
+  const onAccountClick = useCallback(account => push(`/account/${account.id}`), [push])
 
-  Header = ({ portfolio }) => (
-    <BalanceInfos
-      t={this.props.t}
-      unit={this.props.counterValue.units[0]}
-      isAvailable={portfolio.balanceAvailable}
-      since={this.props.selectedTimeRange}
-      valueChange={portfolio.countervalueChange}
-      totalBalance={portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value}
-      handleChangeSelectedTime={this.handleChangeSelectedTime}
-    />
+  const handleChangeSelectedTime = useCallback(
+    item => saveSettings({ selectedTimeRange: item.key }),
+    [saveSettings],
   )
 
-  render() {
-    const { accounts, t, counterValue, selectedTimeRange } = this.props
-    const totalAccounts = accounts.length
-    const totalCurrencies = uniq(accounts.map(a => a.currency.id)).length
-    const totalOperations = accounts.reduce((sum, a) => sum + a.operations.length, 0)
+  const Header = useCallback(
+    ({ portfolio }) => (
+      <BalanceInfos
+        t={t}
+        unit={counterValue.units[0]}
+        isAvailable={portfolio.balanceAvailable}
+        since={selectedTimeRange}
+        valueChange={portfolio.countervalueChange}
+        totalBalance={portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value}
+        handleChangeSelectedTime={handleChangeSelectedTime}
+      />
+    ),
+    [t, counterValue.units, selectedTimeRange, handleChangeSelectedTime],
+  )
 
-    return (
-      <Fragment>
-        <TopBannerContainer>
-          <UpdateBanner />
-          <MigrationBanner />
-        </TopBannerContainer>
-        <RefreshAccountsOrdering onMount />
-        <TrackPage
-          category="Portfolio"
-          totalAccounts={totalAccounts}
-          totalOperations={totalOperations}
-          totalCurrencies={totalCurrencies}
-        />
-        <Box flow={7}>
-          {totalAccounts > 0 ? (
-            <Fragment>
-              <BalanceSummary
-                counterValue={counterValue}
-                chartId="dashboard-chart"
-                chartColor={colors.wallet}
+  return (
+    <>
+      <TopBannerContainer>
+        <UpdateBanner />
+        <MigrationBanner />
+        <DelegationBanner />
+      </TopBannerContainer>
+      <RefreshAccountsOrdering onMount />
+      <TrackPage
+        category="Portfolio"
+        totalAccounts={totalAccounts}
+        totalOperations={totalOperations}
+        totalCurrencies={totalCurrencies}
+      />
+      <Box flow={7}>
+        {totalAccounts > 0 ? (
+          <>
+            <BalanceSummary
+              counterValue={counterValue}
+              chartId="dashboard-chart"
+              chartColor={colors.wallet}
+              accounts={accounts}
+              range={selectedTimeRange}
+              Header={Header}
+              handleChangeSelectedTime={handleChangeSelectedTime}
+              selectedTimeRange={selectedTimeRange}
+            />
+            <AssetDistribution />
+            {totalOperations > 0 && (
+              <OperationsList
+                onAccountClick={onAccountClick}
                 accounts={accounts}
-                range={selectedTimeRange}
-                Header={this.Header}
-                handleChangeSelectedTime={this.handleChangeSelectedTime}
-                selectedTimeRange={selectedTimeRange}
+                title={t('dashboard.recentActivity')}
+                withAccount
+                withSubAccounts
               />
-              <AssetDistribution />
-              {totalOperations > 0 && (
-                <OperationsList
-                  onAccountClick={this.onAccountClick}
-                  accounts={accounts}
-                  title={t('dashboard.recentActivity')}
-                  withAccount
-                  withSubAccounts
-                />
-              )}
-              <StickyBackToTop scrollUpOnMount />
-            </Fragment>
-          ) : (
-            <Redirect to="/accounts" />
-          )}
-        </Box>
-      </Fragment>
-    )
-  }
+            )}
+            <StickyBackToTop scrollUpOnMount />
+          </>
+        ) : (
+          <Redirect to="/accounts" />
+        )}
+      </Box>
+    </>
+  )
 }
+
 // This forces only one visible top banner at a time
 export const TopBannerContainer = styled.div`
   z-index: 19;
+  margin-bottom: 16px;
 
   & > *:not(:first-child) {
     display: none;

@@ -27,6 +27,7 @@ type Props = {
 export type Step = {
   id: string,
   label: string,
+  excludeFromBreadcrumb?: boolean,
   component: StepProps => React$Node,
   footer: StepProps => React$Node,
   shouldRenderFooter?: StepProps => boolean,
@@ -78,6 +79,12 @@ class Stepper extends PureComponent<Props, State> {
     const stepIndex = steps.findIndex(s => s.id === stepId)
     const step = steps[stepIndex]
 
+    const visibleSteps = steps.filter(s => !s.excludeFromBreadcrumb)
+    const indexVisible = Math.min(
+      steps.slice(0, stepIndex).filter(s => !s.excludeFromBreadcrumb).length,
+      visibleSteps.length - 1,
+    )
+
     invariant(step, `Stepper: step ${stepId} doesn't exists`)
 
     const {
@@ -115,8 +122,8 @@ class Stepper extends PureComponent<Props, State> {
             {!hideBreadcrumb && (
               <Breadcrumb
                 mb={props.error && props.signed ? 4 : 6}
-                currentStep={stepIndex}
-                items={steps}
+                currentStep={indexVisible}
+                items={visibleSteps}
                 stepsDisabled={disabledSteps}
                 stepsErrors={errorSteps}
               />

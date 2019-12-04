@@ -19,6 +19,7 @@ export const Notes = styled(Box).attrs(() => ({
 
   p {
     margin: 1em 0;
+    text-align: justify;
   }
 
   code,
@@ -127,6 +128,8 @@ export const Notes = styled(Box).attrs(() => ({
     margin-right: 0.5em;
   }
 `
+
+export const Terms = Notes
 
 type Props = {
   children: *,
