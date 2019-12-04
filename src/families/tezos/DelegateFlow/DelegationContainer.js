@@ -20,16 +20,14 @@ const Wrapper = styled(Box).attrs(() => ({
   align-items: flex-start;
 `
 
-const Container = styled(Box).attrs(() => ({
-  mx: 2,
-}))`
+const Container = styled(Box)`
   align-self: center;
 `
 
 const DelegationContainer = ({ left, right, undelegation }: Props) => (
   <Wrapper>
     {left}
-    <Container mx={2}>
+    <Container>
       {undelegation ? <UndelegationIcon size={76} /> : <DelegationIcon size={76} />}
     </Container>
     {right}
