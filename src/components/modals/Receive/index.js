@@ -27,7 +27,7 @@ class ReceiveModal extends PureComponent<{}, State> {
 
   handleStepChange = (stepId: string) => this.setState({ stepId })
 
-  handleChangeAddressVerified = (isAddressVerified: boolean, err: ?Error) => {
+  handleChangeAddressVerified = (isAddressVerified: ?boolean, err: ?Error) => {
     if (err && err.name !== 'UserRefusedAddress') {
       logger.critical(err)
     }

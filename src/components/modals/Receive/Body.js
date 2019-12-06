@@ -35,7 +35,7 @@ type OwnProps = {|
   stepId: string,
   onClose: () => void,
   onChangeStepId: string => void,
-  isAddressVerified: boolean,
+  isAddressVerified: ?boolean,
   verifyAddressError: ?Error,
   onChangeAddressVerified: (isAddressVerified: boolean, err: ?Error) => void,
   params: {
@@ -162,7 +162,7 @@ const Body = ({
   }, [setDisabledSteps])
 
   const handleRetry = useCallback(() => {
-    onChangeAddressVerified(false, null)
+    onChangeAddressVerified(null, null)
     setAppOpened(false)
   }, [onChangeAddressVerified, setAppOpened])
 
@@ -196,7 +196,7 @@ const Body = ({
     : []
 
   const stepperProps = {
-    title: stepId === 'warning' ? t('common.information') : t('send.title'),
+    title: stepId === 'warning' ? t('common.information') : t('receive.title'),
     device,
     account,
     parentAccount,

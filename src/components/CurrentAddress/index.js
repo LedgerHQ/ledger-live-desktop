@@ -65,6 +65,7 @@ const CopyFeedback = styled(Box).attrs(() => ({
 
 const Label = styled(Box).attrs(() => ({
   alignItems: 'center',
+  justifyContent: 'center',
   color: 'palette.text.shade80',
   ff: 'Inter|SemiBold',
   fontSize: 4,
