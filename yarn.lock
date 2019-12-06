@@ -1956,9 +1956,9 @@
     events "^3.0.0"
 
 "@ledgerhq/ledger-core@^4.2.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-4.3.0.tgz#6f55273a49dba9fcaad2549f75125009dd9ad408"
-  integrity sha512-4oxfJiGbx/8IEiOvOHbjcxC0UAm7gc12Z5WY8lSUVTikSDRaeSIuFa2JaE8X3Cq9QiWyhll5Z9E8AQBYQYoAqQ==
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-4.4.0.tgz#22040a616ef74638a72c6c7f9b251e487f6e3833"
+  integrity sha512-1gq/GvC5DO2QkqlsutZJl2AL3f9H18f15dHjIboIaKGOi7giokLJDiLlCQ0pGRJxrB2AGy1zWqvVB1ORw1n+xQ==
   dependencies:
     bindings "1.3.0"
     nan "^2.6.2"
