@@ -60,27 +60,15 @@ const Body = ({ onClose }: Props) => {
           )}
         </>
       )}
-      modalFooterStyle={{ justifyContent: 'stretch' }}
       renderFooter={() => (
-        <Box
-          style={{ position: 'relative' }}
-          grow
-          horizontal
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Box style={{ width: '50%' }} horizontal align="center" onClick={onSwitchAccept}>
+        <Box flex={1} horizontal justifyContent="space-between" alignItems="center">
+          <Box flex={1} horizontal align="center" onClick={onSwitchAccept}>
             <CheckBox isChecked={accepted} />
-            <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
+            <Text ff="Inter|SemiBold" fontSize={4} style={{ padding: '0 16px', flex: 1 }}>
               <Trans i18nKey="Terms.switchLabel" />
             </Text>
           </Box>
-          <Button
-            style={{ position: 'absolute', right: 0 /* flex and <Box> hell */ }}
-            onClick={onClick}
-            primary
-            disabled={!accepted}
-          >
+          <Button onClick={onClick} primary disabled={!accepted}>
             <Trans i18nKey="common.confirm" />
           </Button>
         </Box>
