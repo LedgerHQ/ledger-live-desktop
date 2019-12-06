@@ -742,7 +742,7 @@
     "contextMenu": {
       "topUp": "Recevoir plus",
       "redelegate": "Changer de validateur",
-      "stopDelegation": "Terminer la délégation"
+      "stopDelegation": "Terminer"
     }
   },
   "asset": {
