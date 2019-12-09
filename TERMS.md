@@ -1,12 +1,12 @@
 _December 10, 2019_
 
-You are about to use the Ledger Live platform. We&#39;re excited for you! Before you get on, Ledger needs you to carefully read, understand and accept our Terms of Use (the or these &quot;Terms&quot;).
+You are about to use the Ledger Live platform. We're excited for you! Before you get on, Ledger needs you to carefully read, understand and accept our Terms of Use (the or these "Terms").
 
 ## Overview
 
-This agreement is between you (&quot;you&quot;, &quot;your&quot;, or &quot;User&quot;) and Ledger SAS (&quot;Ledger&quot;, &quot;us&quot;, &quot;we,&#39;&#39; &quot;our&quot;, or the &quot;Company&quot;). By using or clicking &quot;I agree&quot; to any of the services provided by Ledger or its affiliates in connection with the Ledge Live software (the &quot;Ledger Services&quot;), you agree that you have carefully read and accept all of the below terms and conditions.
+This agreement is between you ("you", "your", or "User") and Ledger SAS ("Ledger", "us", "we,'' "our", or the "Company"). By using or clicking "I agree" to any of the services provided by Ledger or its affiliates in connection with the Ledge Live software (the "Ledger Services"), you agree that you have carefully read and accept all of the below terms and conditions.
 
-Your use of Ledger Services is also subject to Ledger&#39;s Privacy Policy, which is available at [https://shop.ledger.com/pages/privacy-policy](https://shop.ledger.com/pages/privacy-policy).
+Your use of Ledger Services is also subject to Ledger's Privacy Policy, which is available at [https://shop.ledger.com/pages/privacy-policy](https://shop.ledger.com/pages/privacy-policy).
 
 BEFORE USING THE SERVICES, PLEASE EDUCATE YOURSELF TO MAKE INFORMED DECISIONS. CRYPTO ASSETS ARE VOLATILE. THE PRICES CAN GO UP AND DOWN. CAREFULLY EVALUATE YOUR GOALS AND THE FINANCIAL RISK YOU ARE WILLING TO TAKE. PLEASE BE AWARE THAT LEDGER DOES NOT PROVIDE FINANCIAL, TAX, OR LEGAL ADVICE. DECISIONS TO PERFORM OPERATIONS INVOLVING CRYPTO ASSETS SHOULD BE TAKEN ON YOUR OWN OR RELY ON OPINIONS OF RELIABLE AND QUALIFIED EXPERTS.
 
@@ -14,57 +14,57 @@ BEFORE USING THE SERVICES, PLEASE EDUCATE YOURSELF TO MAKE INFORMED DECISIONS. C
 
 The following terms, when used in this Agreement, shall have the meanings described below, it being specified for the avoidance of doubt that in these definitions, reference to the singular includes a reference to the plural and vice versa, except when clearly inappropriate.
 
-&quot; **Crypto Assets**&quot;
+" **Crypto Assets**"
 
 means types of digital assets which can be transmitted with blockchain technologies, including but not limited to Bitcoin, Ethereum, Ripple.
 
-**&quot;Device Application&quot;**
+**"Device Application"**
 
-means a software application, developed by Ledger or by third parties, which embeds a specific cryptographic signature logic within Ledger&#39;s operating system BOLOS in order to create a transaction, on Ledger Live or a third party application, and signs various operations with a Ledger Device, including but not limited to: Crypto Assets transactions broadcast, authentication, password management.
+means a software application, developed by Ledger or by third parties, which embeds a specific cryptographic signature logic within Ledger's operating system BOLOS in order to create a transaction, on Ledger Live or a third party application, and signs various operations with a Ledger Device, including but not limited to: Crypto Assets transactions broadcast, authentication, password management.
 
-&quot; **Fork**&quot;
+" **Fork**"
 
 means a change to the underlying protocol of a blockchain network that results in more than one version of a Crypto Asset, the result of which may be one or more versions that are not supported on Ledger Services.
 
-**&quot;Ledger Device&quot;**
+**"Ledger Device"**
 
-means an electronic device, developed and distributed by Ledger, generally referred to as a &quot;hardware wallet&quot;, used to manage and secure Users&#39; Private Keys and other cryptographic secrets, compatible with Ledger Live or compatible Wallets.
+means an electronic device, developed and distributed by Ledger, generally referred to as a "hardware wallet", used to manage and secure Users' Private Keys and other cryptographic secrets, compatible with Ledger Live or compatible Wallets.
 
-&quot; **Ledger Live Manager**&quot;
+" **Ledger Live Manager**"
 
 means a catalogue of Device Applications available for download, which enables Users to update their Ledger Device firmware, install Device Applications and manage supported Crypto Assets.
 
-**&quot;Materials&quot;**
+**"Materials"**
 
 means content, Ledger Service documentation as well as source and object codes for all software embedded within Ledger Live and Ledger Devices.
 
-**&quot;PIN&quot;**
+**"PIN"**
 
 means the numeric password chosen by the User to unlock a Ledger Device.
 
-**&quot;Private Keys&quot;**
+**"Private Keys"**
 
 means a critical piece of data used to authorize outgoing transactions on blockchain networks.
 
-&quot; **Services**&quot;
+" **Services**"
 
 means one or more of the Ledger Services or Third Party Services.
 
-&quot; **Third Party Services&quot;**
+" **Third Party Services"**
 
 refers to applications, softwares or other Materials that are hosted, developed or operated by a third party, including, but not limited to: cryptocurrency exchanges, staking service providers.
 
-&quot; **Wallet**&quot;
+" **Wallet**"
 
 means a software program which interacts with various blockchain networks to generate and manage sets of private keys and public keys, configure transactions and monitor their balance.
 
-**&quot;Website&quot;**
+**"Website"**
 
 means websites owned and operated by Ledger, including the e-commerce and corporate website hosted at ledger.com
 
-**&quot;24-word Recovery Phrase&quot;**
+**"24-word Recovery Phrase"**
 
-means a confidential combination of human readable words, generated by Ledger Devices, from which Users&#39; Private Keys are derived. They are used to back-up and restore access to Crypto Assets on other Ledger Devices or compatible Wallets.
+means a confidential combination of human readable words, generated by Ledger Devices, from which Users' Private Keys are derived. They are used to back-up and restore access to Crypto Assets on other Ledger Devices or compatible Wallets.
 
 ## Eligibility
 
@@ -97,9 +97,9 @@ You are deemed to be fully aware of all the legal norms and technical constraint
 
 **Tax.** Transactions in Crypto Assets, or more generally Crypto Assets events, including but not limited to exchanges, air-drops, forks, and gains arising from staking, may be considered tax events according to the legislations under which you are subject to taxation. These rules may be unclear or subject to change, and you are therefore encouraged to consult your own tax or accounting adviser before doing Crypto Assets events.
 
-**Technology**. Users understand that some of the technology supported or made available through the Services are new, untested and outside of Ledger&#39;s control. Advances in cryptography, or other technical advances such as the development of quantum computers, could present risks to blockchain networks which could result in the theft or loss of Crypto Assets. Other adverse changes in market forces or in the technology, broadly construed, may prevent or compromise Ledger&#39;s performance under these Terms.
+**Technology**. Users understand that some of the technology supported or made available through the Services are new, untested and outside of Ledger's control. Advances in cryptography, or other technical advances such as the development of quantum computers, could present risks to blockchain networks which could result in the theft or loss of Crypto Assets. Other adverse changes in market forces or in the technology, broadly construed, may prevent or compromise Ledger's performance under these Terms.
 
-**Cybersecurity**. Hackers or other groups or organizations may attempt to interfere with Ledger&#39;s products and information systems in several ways, including without limitation denial of service attacks, side-channel attacks, spoofing, smurfing, malware attacks, or consensus-based attacks.
+**Cybersecurity**. Hackers or other groups or organizations may attempt to interfere with Ledger's products and information systems in several ways, including without limitation denial of service attacks, side-channel attacks, spoofing, smurfing, malware attacks, or consensus-based attacks.
 
 There may be additional risks that we have not foreseen or identified in these Terms. Before you use our Services, you are strongly encouraged to carefully assess whether your financial situation and risk tolerance is compatible with such use.
 
@@ -115,19 +115,19 @@ For the avoidance of doubt, and notwithstanding the generality of the Limitation
 
 As a user of the Ledger Services, we grant you a limited, personal, non-commercial, non-exclusive, non-transferable, and revocable license to use the Ledger Services. When using Ledger Services, we ask that you follow some basic rules:
 
-**Do no harm.** You agree (i) not to distribute any virus or other harmful computer code through Ledger&#39;s systems, (ii) not to use any robot, spider, crawler, scraper or other automated means or interface not provided by us to access Ledger Services or to extract data, (iii) not to provide false, inaccurate, or misleading information, and (iv) not to take any action that may impose an unreasonable or disproportionately large load on our or any of our third party providers&#39; infrastructure.
+**Do no harm.** You agree (i) not to distribute any virus or other harmful computer code through Ledger's systems, (ii) not to use any robot, spider, crawler, scraper or other automated means or interface not provided by us to access Ledger Services or to extract data, (iii) not to provide false, inaccurate, or misleading information, and (iv) not to take any action that may impose an unreasonable or disproportionately large load on our or any of our third party providers' infrastructure.
 
-**Don&#39;t circumvent our security**. You agree not to bypass, circumvent, or attempt to bypass or circumvent any measures that we may use to prevent or restrict access to Ledger Services including, without limitation, Ledger Devices connected to Ledger Services, other accounts, information systems, or networks.
+**Don't circumvent our security**. You agree not to bypass, circumvent, or attempt to bypass or circumvent any measures that we may use to prevent or restrict access to Ledger Services including, without limitation, Ledger Devices connected to Ledger Services, other accounts, information systems, or networks.
 
-**Don&#39;t break the law**. You agree that you will not violate any laws when using Ledger Services. This includes any local, provincial, state, federal, national, or international laws that may apply to you. You agree that you will not use Ledger Services to pay for, support, or otherwise engage in any illegal activities including, but not limited to, fraud, illegal gambling, money laundering, or terrorist activities. You further agree not to encourage or induce any third party to engage in any of the activities prohibited under this section.
+**Don't break the law**. You agree that you will not violate any laws when using Ledger Services. This includes any local, provincial, state, federal, national, or international laws that may apply to you. You agree that you will not use Ledger Services to pay for, support, or otherwise engage in any illegal activities including, but not limited to, fraud, illegal gambling, money laundering, or terrorist activities. You further agree not to encourage or induce any third party to engage in any of the activities prohibited under this section.
 
-**Don&#39;t interfere**. You agree that you will not use or attempt to use another user&#39;s Wallet without authorization, or use Ledger Services in any manner that could interfere with, disrupt, negatively affect, or inhibit other Users from fully enjoying Ledger Services, or that could damage, disable, overburden or impair the functioning of Ledger Services in any manner.
+**Don't interfere**. You agree that you will not use or attempt to use another user's Wallet without authorization, or use Ledger Services in any manner that could interfere with, disrupt, negatively affect, or inhibit other Users from fully enjoying Ledger Services, or that could damage, disable, overburden or impair the functioning of Ledger Services in any manner.
 
 Any use of Ledger Services other than as specifically authorized in these Terms, without our prior written permission, is strictly prohibited and will terminate your license to use Ledger Services.
 
 ## Warranties and Disclaimers
 
-Ledger will use reasonable level of skill and care to ensure that Ledger Services can be accessed by you in accordance with the present Terms of Use, but there are no guarantees that access and features will not be interrupted or that there will be no delays, failures, errors, omissions, corruption or loss of transmitted information. Ledger Services are provided &quot;as is&quot; without any warranty of any kind, either express or implied, and in particular without implied warranties of merchantability, reliability, and fitness for a particular purpose.
+Ledger will use reasonable level of skill and care to ensure that Ledger Services can be accessed by you in accordance with the present Terms of Use, but there are no guarantees that access and features will not be interrupted or that there will be no delays, failures, errors, omissions, corruption or loss of transmitted information. Ledger Services are provided "as is" without any warranty of any kind, either express or implied, and in particular without implied warranties of merchantability, reliability, and fitness for a particular purpose.
 
 ### Availability of Ledger Services
 
@@ -153,17 +153,17 @@ Ledger does not warranty that Device Applications will be maintained over time a
 
 ### Experimental features
 
-In order to accommodate advanced Users&#39; requests and to build new features and functionalities, we have released a series of experimental features on Ledger Live. These features may not be complete and have not been fully tested, which may present heightened risks. They may contain errors or inaccuracies that could cause failures, corruption or loss of data and/or information. You can think of these features as beta features. Ledger does not guarantee the stability, functionality, or long-term support of these features. We do not recommend to use these features unless you are an advanced User with strong technical skills. You expressly acknowledge and agree that all use of the Experimental Features is at your sole risk.
+In order to accommodate advanced Users' requests and to build new features and functionalities, we have released a series of experimental features on Ledger Live. These features may not be complete and have not been fully tested, which may present heightened risks. They may contain errors or inaccuracies that could cause failures, corruption or loss of data and/or information. You can think of these features as beta features. Ledger does not guarantee the stability, functionality, or long-term support of these features. We do not recommend to use these features unless you are an advanced User with strong technical skills. You expressly acknowledge and agree that all use of the Experimental Features is at your sole risk.
 
 ## Transaction details
 
-**Do not trust. Verify.** Software integrity, especially when connected to the Internet, is very hard to verify. Ledger&#39;s security model relies on trusted display.This is why the verification of the information on your Ledger Device is paramount. Before you approve an operation, you must always double check that the information displayed on your mobile or desktop screen is correct and matches the information displayed on your Ledger Device. Upon sending Crypto Assets, you are solely responsible for verifying that the recipient address, amount and fees are correct and that they are the same on both your computer or mobile and on your Ledger Device&#39;s screen. You also acknowledge that using unverified addresses to receive Crypto Assets comes at your own risk.
+**Do not trust. Verify.** Software integrity, especially when connected to the Internet, is very hard to verify. Ledger's security model relies on trusted display.This is why the verification of the information on your Ledger Device is paramount. Before you approve an operation, you must always double check that the information displayed on your mobile or desktop screen is correct and matches the information displayed on your Ledger Device. Upon sending Crypto Assets, you are solely responsible for verifying that the recipient address, amount and fees are correct and that they are the same on both your computer or mobile and on your Ledger Device's screen. You also acknowledge that using unverified addresses to receive Crypto Assets comes at your own risk.
 
 ## Third Party Services and Materials
 
 Ledger Live may incorporate, reference or provide access to Third Party Services.
 
-You agree that your use of Third Party Services is subject to separate terms and conditions between you and the third party identified in Ledger Live. Ledger is not responsible for any performance, or failure to perform the Third Party Services. It is your responsibility to review the third party&#39;s terms and policies before using a Third Party Service. Some Third Party Services may request or require access to your personal data. The processing of such data will be handled in accordance with the relevant Third Party&#39;s privacy policy and best practices.
+You agree that your use of Third Party Services is subject to separate terms and conditions between you and the third party identified in Ledger Live. Ledger is not responsible for any performance, or failure to perform the Third Party Services. It is your responsibility to review the third party's terms and policies before using a Third Party Service. Some Third Party Services may request or require access to your personal data. The processing of such data will be handled in accordance with the relevant Third Party's privacy policy and best practices.
 
 Third Party Services may not work appropriately with your software or Ledger Device, and we may not be able to provide support for issues caused by Third Party Services. If you have questions or concerns about how a Third Party Service operates, or need support, please contact the relevant third party directly.
 
@@ -187,7 +187,7 @@ Links to Buy Crypto services are sponsored links. The existence of a link to or 
 
 YOU EXPRESSLY UNDERSTAND AND AGREE THAT LEDGER AND ITS DIRECTORS AND EMPLOYEES SHALL NOT BE LIABLE TO YOU FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR EXEMPLARY DAMAGES, INCLUDING, BUT NOT LIMITED TO, DAMAGES FOR LOSS OF PROFITS, GOODWILL, USE, DATA, COST OF PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, OR OTHER INTANGIBLE LOSSES, RESULTING FROM: (I) THE USE OR INABILITY TO USE THE SERVICES (II) ANY CHANGES MADE TO THE SERVICE OR ANY SUSPENSION OR CESSATION OF THE SERVICES OR ANY PART THEREOF; (III) THE UNAUTHORIZED ACCESS TO OR ALTERATION OF YOUR TRANSMISSIONS OR DATA; (IV) THE DELETION OF, CORRUPTION OF, OR FAILURE TO STORE AND/OR SEND OR RECEIVE YOUR TRANSMISSIONS OR DATA ON OR THROUGH THE SERVICE; AND (V) ANY OTHER MATTER RELATING TO THE SERVICE.
 
-THE ABOVE LIMITATIONS DO NOT APPLY IN RESPECT OF LOSS RESULTING FROM (A) LEDGER&#39;S FRAUD, WILFUL MISCONDUCT OR GROSS NEGLIGENCE, WILFUL MISCONDUCT OR FRAUD; OR (B) DEATH OR PERSONAL INJURY.
+THE ABOVE LIMITATIONS DO NOT APPLY IN RESPECT OF LOSS RESULTING FROM (A) LEDGER'S FRAUD, WILFUL MISCONDUCT OR GROSS NEGLIGENCE, WILFUL MISCONDUCT OR FRAUD; OR (B) DEATH OR PERSONAL INJURY.
 
 ## Intellectual Property
 
@@ -195,15 +195,15 @@ Ledger respects the intellectual property of others and we ask our Users to do t
 
 You may view, print and/or download a copy of proprietary Materials from Ledger Services on any single computer solely for your personal, informational and/or non-commercial use, provided you comply with all copyright and other proprietary notices.
 
-The trademarks, service marks and logos of Ledger and others used in the Services (&quot;Trademarks&quot;) are the property of Ledger and their respective owners. It is strictly prohibited to use these Trademarks without our express written authorisation or the express written authorisation of any third parties.
+The trademarks, service marks and logos of Ledger and others used in the Services ("Trademarks") are the property of Ledger and their respective owners. It is strictly prohibited to use these Trademarks without our express written authorisation or the express written authorisation of any third parties.
 
 ## Feedback
 
-We welcome feedback, comments, ideas, and suggestions for improvements to the Services (&quot;Feedback&quot;). You grant to us a non-exclusive, worldwide, perpetual, irrevocable, fully-paid, royalty-free, sublicensable and transferable license under any and all intellectual property rights that you own or control to use, copy, modify, create derivative works based upon and otherwise exploit the Feedback for any purpose.
+We welcome feedback, comments, ideas, and suggestions for improvements to the Services ("Feedback"). You grant to us a non-exclusive, worldwide, perpetual, irrevocable, fully-paid, royalty-free, sublicensable and transferable license under any and all intellectual property rights that you own or control to use, copy, modify, create derivative works based upon and otherwise exploit the Feedback for any purpose.
 
 ## Compliance and Export Control
 
-Users shall comply, at their own expense, with all laws that apply to or result from their obligations under these Terms. By accessing and using the Services, you represent and warrant that you are not on any trade or economic sanctions lists, such as (but not limited to) the UN Security Council Sanctions list, designated as a &quot;Specially Designated National&quot; by OFAC (Office of Foreign Assets Control of the U.S. Treasury Department) or placed on the U.S. Commerce Department&#39;s &quot;Denied Persons List&quot;.
+Users shall comply, at their own expense, with all laws that apply to or result from their obligations under these Terms. By accessing and using the Services, you represent and warrant that you are not on any trade or economic sanctions lists, such as (but not limited to) the UN Security Council Sanctions list, designated as a "Specially Designated National" by OFAC (Office of Foreign Assets Control of the U.S. Treasury Department) or placed on the U.S. Commerce Department's "Denied Persons List".
 
 Ledger reserves the right to select the markets and jurisdictions where it operates and may restrict or deny access to Ledger Services in certain countries, states or territories.
 
@@ -223,7 +223,7 @@ Any dispute, controversy, difference or claim arising out of or relating to this
 
 These Terms constitute the entire and exclusive understanding and agreement between Ledger and you regarding Ledger Services, and supersede and replace any and all prior oral or written understandings or agreements between Ledger and you regarding Ledger Services. If you do not read and accept the Terms in their entirety you should not use or continue using Ledger Services.
 
-We reserve the right to alter, amend or modify these Terms from time to time, in our sole discretion. We will provide you with notice of such changes by posting the amended Terms via Ledger Live and updating the &quot;Last Updated&quot; date at the top of these Terms. The amended Terms will be deemed effective immediately upon posting on Ledger Live.
+We reserve the right to alter, amend or modify these Terms from time to time, in our sole discretion. We will provide you with notice of such changes by posting the amended Terms via Ledger Live and updating the "Last Updated" date at the top of these Terms. The amended Terms will be deemed effective immediately upon posting on Ledger Live.
 
 You may not assign your rights or obligations under these Terms of Use in whole or in part to any third party.
 
