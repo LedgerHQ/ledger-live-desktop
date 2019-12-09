@@ -8,15 +8,13 @@ import { useBakers } from '@ledgerhq/live-common/lib/families/tezos/bakers'
 import type { Baker } from '@ledgerhq/live-common/lib/families/tezos/bakers'
 import bakersWhitelistDefault from '@ledgerhq/live-common/lib/families/tezos/bakers.whitelist-default'
 
+import { openURL } from 'helpers/linking'
 import TrackPage from 'analytics/TrackPage'
-
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 import ModalContent from 'components/base/Modal/ModalContent'
-
 import UserPlusIcon from 'icons/UserPlus'
-
 import type { StepProps } from '../types'
 import BakerImage from '../../BakerImage'
 
@@ -82,6 +80,10 @@ export default ({
     },
     [account, onChangeTransaction, parentAccount, transaction, transitionTo],
   )
+  const openPartner = useCallback(() => {
+    openURL('https://mytezosbaker.com/')
+  }, [])
+
   return (
     <Box flow={4} mx={20}>
       <TrackPage category="Delegation Flow" name="Step Validator" />
@@ -122,7 +124,12 @@ export default ({
           <Text ff="Inter|Medium" fontSize={2} color="palette.text.shade40">
             <Trans i18nKey="delegation.flow.steps.validator.providedBy">
               {'Yield rates provided by'}
-              <Text style={{ textDecoration: 'underline' }}>{'MyTezosBaker'}</Text>
+              <Text
+                onClick={openPartner}
+                style={{ cursor: 'pointer', textDecoration: 'underline' }}
+              >
+                {'MyTezosBaker'}
+              </Text>
             </Trans>
           </Text>
         </Box>

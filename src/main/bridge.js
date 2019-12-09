@@ -200,6 +200,6 @@ ipcMain.on('hydrateCurrencyData', (event, { currencyId, serialized }) => {
   hydratedPerCurrency[currencyId] = serialized
   const p = internalProcess
   if (p) {
-    p.send({ type: 'hydrateCurrencyData', serialized })
+    p.send({ type: 'hydrateCurrencyData', serialized, currencyId })
   }
 })
