@@ -1,5 +1,3 @@
-**Ledger Live Terms of Use**
-
 _December 10, 2019_
 
 You are about to use the Ledger Live platform. We&#39;re excited for you! Before you get on, Ledger needs you to carefully read, understand and accept our Terms of Use (the or these &quot;Terms&quot;).
