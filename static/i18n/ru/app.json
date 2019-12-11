@@ -1503,7 +1503,7 @@
       "title": "Please open the {{expected}} app"
     },
     "FeeTooHigh": {
-      "title": "Network fees represent more than 10% of the amount"
+      "title": "Сетевые сборы составляют более 10% от суммы"
     }
   }
 }
