@@ -1,10 +1,20 @@
+import path from 'path'
 import { waitForDisappear, waitForExpectedText } from './helpers'
 import { applicationProxy } from './applicationProxy'
 import * as selector from './selectors'
 
+const { toMatchImageSnapshot } = require('jest-image-snapshot')
+
+expect.extend({ toMatchImageSnapshot });
+
 let app
 
 const TIMEOUT = 50 * 1000
+
+const getPath = name => {
+  const screenshotPath = path.resolve(__dirname, 'data/screenshots')
+  return `${screenshotPath}/${name}.png`
+}
 
 describe('Launch LL with empty user data, Skip onboarding, Welcome steps, check Empty state', () => {
   beforeAll(async () => {
@@ -26,6 +36,11 @@ describe('Launch LL with empty user data, Skip onboarding, Welcome steps, check 
       await app.client.waitUntilWindowLoaded()
       await waitForDisappear(app, '#preload')
       await waitForExpectedText(app, selector.onboarding_title, 'Bugs and analytics')
+      const image = await app.client.saveScreenshot(getPath('bugAnalytics'))
+      expect(image).toMatchImageSnapshot({
+        failureThreshold: 0.05,
+        failureThresholdType: 'percent'
+      })
     },
     TIMEOUT,
   )
@@ -37,6 +52,11 @@ describe('Launch LL with empty user data, Skip onboarding, Welcome steps, check 
       expect(analytics_techData_title).toEqual('Technical data*')
       await app.client.click(selector.techData_link)
       await waitForExpectedText(app, selector.modal_title, 'Technical data')
+      const image = await app.client.saveScreenshot(getPath('techData'))
+      expect(image).toMatchImageSnapshot({
+        failureThreshold: 0.05,
+        failureThresholdType: 'percent'
+      })
       await app.client.click(selector.button_closeTechdata)
     },
     TIMEOUT,
@@ -51,6 +71,8 @@ describe('Launch LL with empty user data, Skip onboarding, Welcome steps, check 
       expect(analytics_shareAnalytics_title).toEqual('Analytics')
       await app.client.click(selector.shareAnalytics_link)
       await waitForExpectedText(app, selector.modal_title, 'Analytics')
+      const image = await app.client.saveScreenshot(getPath('analytics'))
+      expect(image).toMatchImageSnapshot()
       await app.client.click(selector.button_closeShareAnalytics)
     },
     TIMEOUT,
@@ -66,12 +88,34 @@ describe('Launch LL with empty user data, Skip onboarding, Welcome steps, check 
   )
 
   test(
-    'Your device is ready then tradesafely modals should be displayed',
+    'Your device is ready then Terms of Use modals should be displayed',
     async () => {
       await app.client.click(selector.button_continue)
       await waitForExpectedText(app, selector.onboarding_finish_title, 'Your device is ready!')
+      let image = await app.client.saveScreenshot(getPath('deviceReady'))
+      expect(image).toMatchImageSnapshot({
+        failureThreshold: 0.05,
+        failureThresholdType: 'percent'
+      })
       await app.client.click(selector.button_continue)
-      await waitForExpectedText(app, selector.modal_title, 'Trade safely')
+      await waitForExpectedText(app, selector.modal_title, 'Terms of Use')
+      await app.client.pause(1000)
+
+      image = await app.client.saveScreenshot(getPath('termsOfUse_off'))
+      expect(image).toMatchImageSnapshot()
+      await app.client.pause(1000)
+
+      expect(await app.client.isEnabled(selector.button_continue)).toEqual(false)
+      await app.client.pause(1000)
+
+      await app.client.click(selector.checkbox_termsOfUse)
+      await app.client.pause(2000)
+
+      image = await app.client.saveScreenshot(getPath('termsOfUse_on'))
+      expect(image).toMatchImageSnapshot()
+      expect(await app.client.isEnabled(selector.button_continue)).toEqual(true)
+
+      await waitForExpectedText(app, selector.button_continue, 'Confirm')
       await app.client.click(selector.button_continue)
     },
     TIMEOUT,
@@ -85,9 +129,12 @@ describe('Launch LL with empty user data, Skip onboarding, Welcome steps, check 
         '[data-e2e=dashboard_empty_title]',
         'Install apps or add accounts',
       )
+      await app.client.pause(2000)
+      const image = await app.client.saveScreenshot(getPath('emptyDashboard'))
+      expect(image).toMatchImageSnapshot()
       const openManager_button = await app.client.getText(selector.button_openManager)
       expect(openManager_button).toEqual('Open Manager')
-      const addAccount_button = await app.client.getText(selector.button_addAccount)
+      const addAccount_button = await app.client.getText(selector.button_emptyAddAccount)
       expect(addAccount_button).toEqual('Add accounts')
     },
     TIMEOUT,

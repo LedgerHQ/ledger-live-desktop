@@ -63,12 +63,12 @@ const Body = ({ onClose }: Props) => {
       renderFooter={() => (
         <Box flex={1} horizontal justifyContent="space-between" alignItems="center">
           <Box flex={1} horizontal align="center" onClick={onSwitchAccept}>
-            <CheckBox isChecked={accepted} />
+            <CheckBox isChecked={accepted} data-e2e="termsOfUse_checkbox" />
             <Text ff="Inter|SemiBold" fontSize={4} style={{ padding: '0 16px', flex: 1 }}>
               <Trans i18nKey="Terms.switchLabel" />
             </Text>
           </Box>
-          <Button onClick={onClick} primary disabled={!accepted}>
+          <Button onClick={onClick} primary disabled={!accepted} data-e2e="continue_button">
             <Trans i18nKey="common.confirm" />
           </Button>
         </Box>
