@@ -58,7 +58,12 @@ const BakerRow = ({ baker, onClick }: { baker: Baker, onClick: Baker => void }) 
         </Text>
       ) : null}
     </Box>
-    <Text ff="Inter|SemiBold" fontSize={3} color="palette.text.shade100">
+    <Text
+      style={{ opacity: baker.capacityStatus === 'full' ? 0.5 : 1 }}
+      ff="Inter|SemiBold"
+      fontSize={3}
+      color="palette.text.shade100"
+    >
       {baker.nominalYield}
     </Text>
   </Row>
