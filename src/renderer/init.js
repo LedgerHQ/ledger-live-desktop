@@ -7,6 +7,10 @@ import 'helpers/experimental'
 import logger from 'logger'
 import LoggerTransport from 'logger/logger-transport-renderer'
 import React from 'react'
+import Transport from '@ledgerhq/hw-transport'
+import { NotEnoughBalance } from '@ledgerhq/errors'
+import { log } from '@ledgerhq/logs'
+import { checkLibs } from '@ledgerhq/live-common/lib/sanityChecks'
 import { remote, webFrame } from 'electron'
 import { render } from 'react-dom'
 import createHistory from 'history/createHashHistory'
@@ -53,6 +57,13 @@ const TAB_KEY = 9
 db.init(userDataDirectory)
 
 async function init() {
+  checkLibs({
+    NotEnoughBalance,
+    React,
+    log,
+    Transport,
+  })
+
   db.init(userDataDirectory)
   db.registerTransform('app', 'accounts', { get: decodeAccountsModel, set: encodeAccountsModel })
 
