@@ -12,6 +12,7 @@ import { useBaker, useDelegation } from '@ledgerhq/live-common/lib/families/tezo
 import type { Baker } from '@ledgerhq/live-common/lib/families/tezos/bakers'
 import { Trans } from 'react-i18next'
 import TrackPage from 'analytics/TrackPage'
+import { openURL } from 'helpers/linking'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
@@ -20,12 +21,13 @@ import Button from 'components/base/Button'
 import Ellipsis from 'components/base/Ellipsis'
 import WarnBox from 'components/WarnBox'
 import TranslatedError from 'components/TranslatedError'
+import InfoCircle from 'icons/InfoCircle'
 import AccountFooter from 'components/modals/Send/AccountFooter'
-
 import BakerImage from '../../BakerImage'
 import DelegationContainer from './../DelegationContainer'
-
 import type { StepProps } from '../types'
+
+const urlDelegationHelp = 'https://support.ledger.com/hc/en-us/articles/360010653260'
 
 const Container = styled(Box)`
   width: 148px;
@@ -120,17 +122,32 @@ const StepSummary = ({ account, transaction, transitionTo, isRandomChoice }: Ste
                   </Text>
                 </Ellipsis>
                 {baker ? (
-                  <Text
-                    textAlign="center"
-                    ff="Inter|Medium"
-                    color="palette.text.shade60"
-                    fontSize={3}
-                  >
-                    <Trans
-                      i18nKey="delegation.flow.steps.summary.yield"
-                      values={{ amount: baker.nominalYield }}
-                    />
-                  </Text>
+                  baker.capacityStatus === 'full' ? (
+                    <Box
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => openURL(urlDelegationHelp)}
+                      horizontal
+                      flow={1}
+                      color="warning"
+                    >
+                      <Text textAlign="center" ff="Inter|Medium" color="warning" fontSize={3}>
+                        <Trans i18nKey="delegation.overdelegated" />
+                      </Text>
+                      <InfoCircle size={16} />
+                    </Box>
+                  ) : (
+                    <Text
+                      textAlign="center"
+                      ff="Inter|Medium"
+                      color="palette.text.shade60"
+                      fontSize={3}
+                    >
+                      <Trans
+                        i18nKey="delegation.flow.steps.summary.yield"
+                        values={{ amount: baker.nominalYield }}
+                      />
+                    </Text>
+                  )
                 ) : (
                   <Placeholder />
                 )}
