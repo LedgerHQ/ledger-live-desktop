@@ -660,7 +660,7 @@
     "header": "Répartition des comptes ({{count}})"
   },
   "delegation": {
-    "overdelegated": "Overdelegated",
+    "overdelegated": "Surdélégué",
     "title": "Obtenez des récompenses",
     "header": "Délégation",
     "validator": "Validateur",
