@@ -51,7 +51,6 @@ export async function hydrateCurrency(currency: CryptoCurrency) {
 
 export const prepareCurrency: (currency: CryptoCurrency) => Promise<void> = makeLRUCache(
   async currency => {
-    await hydrateCurrency(currency)
     const bridge = getCurrencyBridge(currency)
     const preloaded = await bridge.preload()
     setCurrencyCache(currency, preloaded)

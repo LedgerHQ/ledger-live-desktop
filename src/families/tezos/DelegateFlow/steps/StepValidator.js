@@ -52,6 +52,11 @@ const BakerRow = ({ baker, onClick }: { baker: Baker, onClick: Baker => void }) 
       >
         {baker.name}
       </Text>
+      {baker.capacityStatus === 'full' ? (
+        <Text ff="Inter|SemiBold" fontSize={3} color="warning" style={{ marginLeft: 8 }}>
+          <Trans i18nKey="delegation.overdelegated" />
+        </Text>
+      ) : null}
     </Box>
     <Text ff="Inter|SemiBold" fontSize={3} color="palette.text.shade100">
       {baker.nominalYield}
@@ -101,7 +106,7 @@ export default ({
             <Trans i18nKey="delegation.yield" />
           </Text>
         </Box>
-        <Box style={{ maxHeight: 255, margin: -20 }}>
+        <Box style={{ maxHeight: 255, margin: -20, marginTop: 0 }}>
           <ModalContent ref={contentRef}>
             {bakers.map(baker => (
               <BakerRow baker={baker} key={baker.name} onClick={onBakerClick} />
