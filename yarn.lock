@@ -1963,10 +1963,10 @@
     bindings "1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@^9.1.0":
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-9.1.0.tgz#4f1a733f4afda8bd49ab9531a1e2af651a147733"
-  integrity sha512-OItcwWfR8ZG+tk8ifGeRmD95r0tnoGNX8XELKqqAyGEvIjJDyUdFu8yb7VXX5imZrPvZM1xaMLDMtE0IuxCK4w==
+"@ledgerhq/live-common@^9.3.0-beta.0":
+  version "9.3.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-9.3.0-beta.0.tgz#921896724f4ca6b08b11c18857ce605ff587b55d"
+  integrity sha512-6aahD0n8cE6xjQfOq4ViPHPls+zKNNyr3p9iDSLCpQc9pOgqcNKs1llCGcBs4TU47Tjt43bkXpsFoEQ7/83XYg==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "4"
