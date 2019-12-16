@@ -5,7 +5,7 @@ import * as selector from './selectors'
 
 const { toMatchImageSnapshot } = require('jest-image-snapshot')
 
-expect.extend({ toMatchImageSnapshot });
+expect.extend({ toMatchImageSnapshot })
 
 let app
 
