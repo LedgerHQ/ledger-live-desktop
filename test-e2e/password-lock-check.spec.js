@@ -1,5 +1,5 @@
 import { waitForDisappear, waitForExpectedText } from './helpers'
-import { applicationProxy, getConfigPath } from './applicationProxy'
+import { applicationProxy, getConfigPath, getScreenshotPath } from './applicationProxy'
 import * as selector from './selectors'
 
 const path = require('path')
@@ -15,11 +15,6 @@ const TIMEOUT = 50 * 1000
 
 const tmpAppJSONPath = path.resolve(getConfigPath(), 'app.json')
 const accountsOperations = '"operations":[{'
-
-const getPath = name => {
-  const screenshotPath = path.resolve(__dirname, 'data/screenshots')
-  return `${screenshotPath}/${name}.png`
-}
 
 describe(
   'Start LL after verion update, Release Note, Check password lock',
@@ -51,7 +46,7 @@ describe(
       async () => {
         const titleModal = await app.client.getText(selector.modal_title)
         expect(titleModal[1]).toEqual('Terms of Use')
-        let image = await app.client.saveScreenshot(getPath('termsOfUse_off'))
+        let image = await app.client.saveScreenshot(getScreenshotPath('termsOfUse_off'))
         expect(image).toMatchImageSnapshot({
           failureThreshold: 0.05,
           failureThresholdType: 'percent'
@@ -60,7 +55,7 @@ describe(
         await app.client.click(selector.checkbox_termsOfUse)
 
         await app.client.pause(1000)
-        image = await app.client.saveScreenshot(getPath('termsOfUse_on'))
+        image = await app.client.saveScreenshot(getScreenshotPath('termsOfUse_on'))
         expect(image).toMatchImageSnapshot({
           failureThreshold: 0.05,
           failureThresholdType: 'percent'
@@ -76,7 +71,7 @@ describe(
       'Release Note should be displayed',
       async () => {
         await waitForExpectedText(app, selector.modal_title, 'Release notes')
-        const image = await app.client.saveScreenshot(getPath('releaseNote'))
+        const image = await app.client.saveScreenshot(getScreenshotPath('releaseNote'))
         expect(image).toMatchImageSnapshot({
           failureThreshold: 0.05,
           failureThresholdType: 'percent'
@@ -97,7 +92,7 @@ describe(
         const lastOperations = await app.client.getText(selector.portfolio_operationList_title)
         expect(lastOperations).toEqual('Last operations')
         await app.client.pause(3000)
-        const image = await app.client.saveScreenshot(getPath('portfolio'))
+        const image = await app.client.saveScreenshot(getScreenshotPath('portfolio'))
         expect(image).toMatchImageSnapshot({
           failureThreshold: 0.05,
           failureThresholdType: 'percent'
@@ -113,7 +108,7 @@ describe(
         await waitForExpectedText(app, selector.settings_title, 'Settings')
         await app.client.click(selector.button_reportBug)
         await app.client.click(selector.button_shareAnalytics)
-        const image = await app.client.saveScreenshot(getPath('generalSettings'))
+        const image = await app.client.saveScreenshot(getScreenshotPath('generalSettings'))
         expect(image).toMatchImageSnapshot({
           failureThreshold: 0.02,
           failureThresholdType: 'percent'
@@ -128,7 +123,7 @@ describe(
         await app.client.click(selector.button_passwordLock)
         await waitForExpectedText(app, selector.modal_title, 'Password lock')
         await waitForExpectedText(app, selector.setPassword_title, 'Set a password')
-        let image = await app.client.saveScreenshot(getPath('setPassword'))
+        let image = await app.client.saveScreenshot(getScreenshotPath('setPassword'))
         expect(image).toMatchImageSnapshot({
           failureThreshold: 0.02,
           failureThresholdType: 'percent'
@@ -139,7 +134,7 @@ describe(
         await app.client.keys('Enter')
         await waitForExpectedText(app, selector.settings_title, 'Settings')
         await app.client.pause(1000)
-        image = await app.client.saveScreenshot(getPath('generalSettings_passwordOn'))
+        image = await app.client.saveScreenshot(getScreenshotPath('generalSettings_passwordOn'))
         expect(image).toMatchImageSnapshot({
           failureThreshold: 0.02,
           failureThresholdType: 'percent'
@@ -157,7 +152,7 @@ describe(
         await waitForExpectedText(app, selector.modal_title, 'Disable password lock')
         await app.client.setValue('#password', 5)
         await app.client.pause(500)
-        const image = await app.client.saveScreenshot(getPath('disablePassword'))
+        const image = await app.client.saveScreenshot(getScreenshotPath('disablePassword'))
         expect(image).toMatchImageSnapshot({
           failureThreshold: 0.05,
           failureThresholdType: 'percent'

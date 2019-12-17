@@ -96,7 +96,7 @@ const ModalHeader = ({
     <ModalTitle data-e2e="modalTitle">{children}</ModalTitle>
     {onClose ? (
       <ModalHeaderAction right color="palette.text.shade40" onClick={onClose}>
-        <IconCross size={16} />
+        <IconCross size={16} data-e2e="closeButton" />
       </ModalHeaderAction>
     ) : (
       <ModalHeaderAction />

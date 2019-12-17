@@ -109,7 +109,7 @@ const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
         cursor: 'pointer',
       }}
     >
-      <Tag to="/settings/experimental">
+      <Tag to="/settings/experimental" data-e2e="flag_experimental">
         <ExperimentalIcon width={16} height={16} />
         <Hide visible={collapsed}>
           <TagText>

@@ -48,3 +48,8 @@ export function applicationProxy(userData = null, envVar = {}) {
   })
   return app
 }
+
+export function getScreenshotPath(name) {
+  const screenshotPath = path.resolve(__dirname, 'data/screenshots')
+  return `${screenshotPath}/${name}.png`
+}
