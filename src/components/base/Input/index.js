@@ -236,7 +236,7 @@ const Input = React.forwardRef(
             onKeyDown={handleKeyDown}
           />
           {error ? (
-            <ErrorDisplay>
+            <ErrorDisplay data-e2e="error_input">
               <TranslatedError error={error} />
             </ErrorDisplay>
           ) : warning ? (

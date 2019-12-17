@@ -21,7 +21,7 @@ export default translate()(
     i18nKeyOverride?: string,
     t: *,
   }) => (
-    <Box flow={1}>
+    <Box flow={1} data-e2e="feesBloc">
       <Box horizontal alignItems="center" justifyContent="space-between">
         <LabelWithExternalIcon
           onClick={() => {

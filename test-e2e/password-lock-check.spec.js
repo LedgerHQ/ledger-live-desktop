@@ -1,6 +1,7 @@
-import { waitForDisappear, waitForExpectedText } from './helpers'
+import { waitForExpectedText } from './helpers'
 import { applicationProxy, getConfigPath, getScreenshotPath } from './applicationProxy'
 import * as selector from './selectors'
+import * as step from './scenarios'
 
 const path = require('path')
 const fs = require('fs')
@@ -20,7 +21,7 @@ describe(
   'Start LL after verion update, Release Note, Check password lock',
   () => {
     beforeAll(async () => {
-      app = applicationProxy('btcFamily.json', { SKIP_ONBOARDING: '1' })
+      app = applicationProxy('ethXtzXrp.json', { SKIP_ONBOARDING: '1' })
       await app.start()
     }, TIMEOUT)
 
@@ -33,10 +34,7 @@ describe(
     test(
       'App start',
       async () => {
-        const title = await app.client.getTitle()
-        expect(title).toEqual('Ledger Live')
-        await app.client.waitUntilWindowLoaded()
-        await waitForDisappear(app, '#preload')
+        await step.applicationStart(app)
       },
       TIMEOUT,
     )
@@ -44,58 +42,27 @@ describe(
     test(
       'Terms of use modal should be displayed',
       async () => {
-        const titleModal = await app.client.getText(selector.modal_title)
-        expect(titleModal[1]).toEqual('Terms of Use')
-        let image = await app.client.saveScreenshot(getScreenshotPath('termsOfUse_off'))
-        expect(image).toMatchImageSnapshot({
-          failureThreshold: 0.05,
-          failureThresholdType: 'percent'
-        })
-        expect(await app.client.isEnabled(selector.button_continue)).toEqual(false)
-        await app.client.click(selector.checkbox_termsOfUse)
-
-        await app.client.pause(1000)
-        image = await app.client.saveScreenshot(getScreenshotPath('termsOfUse_on'))
-        expect(image).toMatchImageSnapshot({
-          failureThreshold: 0.05,
-          failureThresholdType: 'percent'
-        })
-        expect(await app.client.isEnabled(selector.button_continue)).toEqual(true)
-        await waitForExpectedText(app, selector.button_continue, 'Confirm')
-        await app.client.click(selector.button_continue)
-      },
-      TIMEOUT,
-    ) 
-
-    test(
-      'Release Note should be displayed',
-      async () => {
-        await waitForExpectedText(app, selector.modal_title, 'Release notes')
-        const image = await app.client.saveScreenshot(getScreenshotPath('releaseNote'))
-        expect(image).toMatchImageSnapshot({
-          failureThreshold: 0.05,
-          failureThresholdType: 'percent'
-        })
-        await app.client.click(selector.button_closeReleaseNote)
+        await step.termsOfUse(app)
       },
       TIMEOUT,
     )
 
+    // test(
+    //   'Release Note should be displayed',
+    //   async () => {
+    //     await step.releaseNote(app)
+    //   },
+    //   TIMEOUT,
+    // )
+
     test(
       'Dashboard: Portfolio should show Graph, Assets, Operations',
       async () => {
-        await waitForExpectedText(
-          app,
-          selector.portfolio_assetDistribution_tile,
-          'Asset allocation (',
-        )
-        const lastOperations = await app.client.getText(selector.portfolio_operationList_title)
-        expect(lastOperations).toEqual('Last operations')
-        await app.client.pause(3000)
+        await step.dashboard(app)
         const image = await app.client.saveScreenshot(getScreenshotPath('portfolio'))
         expect(image).toMatchImageSnapshot({
           failureThreshold: 0.05,
-          failureThresholdType: 'percent'
+          failureThresholdType: 'percent',
         })
       },
       TIMEOUT,
@@ -104,14 +71,11 @@ describe(
     test(
       'Click setting icon -> Check General settings',
       async () => {
-        await app.client.click(selector.button_settings)
-        await waitForExpectedText(app, selector.settings_title, 'Settings')
-        await app.client.click(selector.button_reportBug)
-        await app.client.click(selector.button_shareAnalytics)
-        const image = await app.client.saveScreenshot(getScreenshotPath('generalSettings'))
+        await step.generalSettings(app)
+        const image = await app.client.saveScreenshot(getScreenshotPath('generalSettings_On'))
         expect(image).toMatchImageSnapshot({
           failureThreshold: 0.02,
-          failureThresholdType: 'percent'
+          failureThresholdType: 'percent',
         })
       },
       TIMEOUT,
@@ -126,7 +90,7 @@ describe(
         let image = await app.client.saveScreenshot(getScreenshotPath('setPassword'))
         expect(image).toMatchImageSnapshot({
           failureThreshold: 0.02,
-          failureThresholdType: 'percent'
+          failureThresholdType: 'percent',
         })
 
         await app.client.setValue(selector.input_newPassword, 5)
@@ -137,7 +101,7 @@ describe(
         image = await app.client.saveScreenshot(getScreenshotPath('generalSettings_passwordOn'))
         expect(image).toMatchImageSnapshot({
           failureThreshold: 0.02,
-          failureThresholdType: 'percent'
+          failureThresholdType: 'percent',
         })
         const LockedfileContent = fs.readFileSync(tmpAppJSONPath, 'utf-8')
         await expect(LockedfileContent).not.toContain(accountsOperations)
@@ -155,7 +119,7 @@ describe(
         const image = await app.client.saveScreenshot(getScreenshotPath('disablePassword'))
         expect(image).toMatchImageSnapshot({
           failureThreshold: 0.05,
-          failureThresholdType: 'percent'
+          failureThresholdType: 'percent',
         })
         await app.client.keys('Enter')
         await waitForExpectedText(app, selector.settings_title, 'Settings')

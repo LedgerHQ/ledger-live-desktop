@@ -58,6 +58,7 @@ const RecipientField = ({
         warning={recipientWarning}
         value={transaction.recipient}
         onChange={onChange}
+        data-e2e="recipient_address"
       />
     </Box>
   )

@@ -43,5 +43,12 @@ export const button_settings = '[data-e2e=setting_button]'
 export const button_close = '[data-e2e=closeButton]'
 export const sidebar_accounts = '[data-e2e=sidebarItem_Accounts]'
 export const sidebar_portfolio = '[data-e2e=sidebarItem_Portfolio]'
+export const sidebar_send = '[data-e2e=sidebarItem_Send]'
 export const checkbox_termsOfUse = '[data-e2e=termsOfUse_checkbox]'
 export const flag_experimental = '[data-e2e=flag_experimental]'
+
+// Send Flow
+export const account_to_debit = '[data-e2e=account_to_debit] input'
+export const recipient_address = '[data-e2e=recipient_address]'
+export const error_input = '[data-e2e=error_input]'
+export const amountField = '[data-e2e=amountFieldName]'

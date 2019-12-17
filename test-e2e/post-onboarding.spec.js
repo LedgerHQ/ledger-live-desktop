@@ -1,6 +1,7 @@
-import { waitForDisappear, waitForExpectedText } from './helpers'
+import { waitForExpectedText } from './helpers'
 import { applicationProxy, getScreenshotPath } from './applicationProxy'
 import * as selector from './selectors'
+import * as step from './scenarios'
 
 const { toMatchImageSnapshot } = require('jest-image-snapshot')
 
@@ -25,15 +26,12 @@ describe('Launch LL with empty user data, Skip onboarding, Welcome steps, check 
   test(
     'Launch app, Analytics infos should be displayed',
     async () => {
-      const title = await app.client.getTitle()
-      expect(title).toEqual('Ledger Live')
-      await app.client.waitUntilWindowLoaded()
-      await waitForDisappear(app, '#preload')
+      await step.applicationStart(app)
       await waitForExpectedText(app, selector.onboarding_title, 'Bugs and analytics')
       const image = await app.client.saveScreenshot(getScreenshotPath('bugAnalytics'))
       expect(image).toMatchImageSnapshot({
         failureThreshold: 0.05,
-        failureThresholdType: 'percent'
+        failureThresholdType: 'percent',
       })
     },
     TIMEOUT,
@@ -49,7 +47,7 @@ describe('Launch LL with empty user data, Skip onboarding, Welcome steps, check 
       const image = await app.client.saveScreenshot(getScreenshotPath('techData'))
       expect(image).toMatchImageSnapshot({
         failureThreshold: 0.05,
-        failureThresholdType: 'percent'
+        failureThresholdType: 'percent',
       })
       await app.client.click(selector.button_closeTechdata)
     },
@@ -86,31 +84,14 @@ describe('Launch LL with empty user data, Skip onboarding, Welcome steps, check 
     async () => {
       await app.client.click(selector.button_continue)
       await waitForExpectedText(app, selector.onboarding_finish_title, 'Your device is ready!')
-      let image = await app.client.saveScreenshot(getScreenshotPath('deviceReady'))
+      await app.client.pause(1000)
+      const image = await app.client.saveScreenshot(getScreenshotPath('deviceReady'))
       expect(image).toMatchImageSnapshot({
         failureThreshold: 0.05,
-        failureThresholdType: 'percent'
+        failureThresholdType: 'percent',
       })
       await app.client.click(selector.button_continue)
-      await waitForExpectedText(app, selector.modal_title, 'Terms of Use')
-      await app.client.pause(1000)
-
-      image = await app.client.saveScreenshot(getScreenshotPath('termsOfUse_off'))
-      expect(image).toMatchImageSnapshot()
-      await app.client.pause(1000)
-
-      expect(await app.client.isEnabled(selector.button_continue)).toEqual(false)
-      await app.client.pause(1000)
-
-      await app.client.click(selector.checkbox_termsOfUse)
-      await app.client.pause(2000)
-
-      image = await app.client.saveScreenshot(getScreenshotPath('termsOfUse_on'))
-      expect(image).toMatchImageSnapshot()
-      expect(await app.client.isEnabled(selector.button_continue)).toEqual(true)
-
-      await waitForExpectedText(app, selector.button_continue, 'Confirm')
-      await app.client.click(selector.button_continue)
+      await step.termsOfUse(app)
     },
     TIMEOUT,
   )
@@ -125,7 +106,10 @@ describe('Launch LL with empty user data, Skip onboarding, Welcome steps, check 
       )
       await app.client.pause(2000)
       const image = await app.client.saveScreenshot(getScreenshotPath('emptyDashboard'))
-      expect(image).toMatchImageSnapshot()
+      expect(image).toMatchImageSnapshot({
+        failureThreshold: 0.02,
+        failureThresholdType: 'percent',
+      })
       const openManager_button = await app.client.getText(selector.button_openManager)
       expect(openManager_button).toEqual('Open Manager')
       const addAccount_button = await app.client.getText(selector.button_emptyAddAccount)

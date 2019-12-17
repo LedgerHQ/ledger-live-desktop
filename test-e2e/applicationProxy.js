@@ -50,6 +50,9 @@ export function applicationProxy(userData = null, envVar = {}) {
 }
 
 export function getScreenshotPath(name) {
+  if (!fs.existsSync('data/screenshots')) {
+    fs.mkdirSync('data/screenshots')
+  }
   const screenshotPath = path.resolve(__dirname, 'data/screenshots')
   return `${screenshotPath}/${name}.png`
 }

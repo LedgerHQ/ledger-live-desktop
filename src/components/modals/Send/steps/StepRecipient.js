@@ -57,7 +57,7 @@ export default ({
       <TrackPage category="Send Flow" name="Step Recipient" />
       {mainAccount ? <CurrencyDownStatusAlert currency={mainAccount.currency} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
-      <Box flow={1}>
+      <Box flow={1} data-e2e="account_to_debit">
         <Label>{t('send.steps.details.selectAccountDebit')}</Label>
         <SelectAccount
           withSubAccounts
@@ -116,7 +116,13 @@ export class StepRecipientFooter extends PureComponent<StepProps> {
 
     return (
       <Fragment>
-        <Button isLoading={bridgePending} primary disabled={!canNext} onClick={this.onNext}>
+        <Button
+          isLoading={bridgePending}
+          primary
+          disabled={!canNext}
+          onClick={this.onNext}
+          data-e2e="continue_button"
+        >
           {t('common.continue')}
         </Button>
       </Fragment>

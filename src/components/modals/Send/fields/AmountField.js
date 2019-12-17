@@ -63,14 +63,14 @@ const AmountField = ({
   }
 
   return (
-    <Box flow={1}>
+    <Box flow={1} data-e2e="amountBloc">
       <Box
         horizontal
         alignItems="center"
         justifyContent="space-between"
         style={{ width: '50%', paddingRight: 28 }}
       >
-        <Label>{t('send.steps.details.amount')}</Label>
+        <Label data-e2e="amountFieldName">{t('send.steps.details.amount')}</Label>
         {typeof useAllAmount === 'boolean' ? (
           <Box horizontal alignItems="center">
             <Text

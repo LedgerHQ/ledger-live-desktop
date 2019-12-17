@@ -11,9 +11,8 @@ xliffs/
 /build/linux/arch/*.tar.gz
 /build/linux/arch/*.tar.xz
 
-/test-e2e/sync/data/actual_app.json
-/test-e2e/data/screenshots
-/test-e2e/__image_snapshots__/__diff_output__
+/test-e2e/data/screenshots/*
+/test-e2e/__image_snapshots__
 
 .yalc
 yalc.lock
