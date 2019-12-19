@@ -9,7 +9,7 @@ set -e
 [[ "$GH_TOKEN" == "" ]] && echo "GH_TOKEN is unset" && exit 1
 
 function main {
-  ASSETS_FILTER="(AppImage|zip|exe)"
+  ASSETS_FILTER="(AppImage|zip|exe|dmg)"
   PKG_VER=$(grep version package.json | sed -E 's/.*: "(.*)",/\1/g')
 
   read -p "> release version ($PKG_VER): " -r RELEASE_VERSION
