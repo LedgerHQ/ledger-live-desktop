@@ -18,6 +18,8 @@ import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import { createStructuredSelector } from 'reselect'
 import { updateAccountWithUpdater } from 'actions/accounts'
 import { setAccountSyncState } from 'actions/bridgeSync'
+import { recentlyChangedExperimental } from 'helpers/experimental'
+import { recentlyKilledInternalProcess, onUnusualInternalProcessError } from 'helpers/reset'
 import { bridgeSyncSelector, syncStateLocalSelector } from 'reducers/bridgeSync'
 import type { BridgeSyncState } from 'reducers/bridgeSync'
 import { accountsSelector, isUpToDateSelector } from 'reducers/accounts'
@@ -145,9 +147,26 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
             next()
           },
           error: error => {
-            if (!error || error.name !== 'NetworkDown') {
+            const isInternalProcessError = error && error.message.includes('Internal process error')
+
+            if (
+              isInternalProcessError &&
+              (recentlyKilledInternalProcess() || recentlyChangedExperimental())
+            ) {
+              // This error is normal because the thread was recently killed. we silent it for the user.
+              this.props.setAccountSyncState(accountId, { pending: false, error: null })
+              next()
+              return
+            }
+
+            if (isInternalProcessError) {
+              onUnusualInternalProcessError()
+            }
+
+            if (error && error.name !== 'NetworkDown') {
               trackEnd('SyncError')
             }
+
             logger.critical(error)
             this.props.setAccountSyncState(accountId, { pending: false, error })
             next()

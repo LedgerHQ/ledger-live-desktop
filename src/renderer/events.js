@@ -6,6 +6,7 @@ import debug from 'debug'
 
 import network from 'api/network'
 import db from 'helpers/db'
+import { killInternalProcess } from 'helpers/reset'
 
 import { CHECK_UPDATE_DELAY, DISABLE_ACTIVITY_INDICATORS } from 'config/constants'
 import { onSetDeviceBusy } from 'components/DeviceBusyIndicator'
@@ -28,7 +29,7 @@ export function sendEvent(channel: string, msgType: string, data: any) {
 
 export default ({ store }: { store: Object }) => {
   // Ensure all sub-processes are killed before creating new ones (dev mode...)
-  ipcRenderer.send('clean-processes')
+  killInternalProcess()
 
   ipcRenderer.on('lock', () => {
     if (db.hasEncryptionKey('app', 'accounts')) {
@@ -60,7 +61,7 @@ export default ({ store }: { store: Object }) => {
 
 if (module.hot) {
   module.hot.accept('commands', () => {
-    ipcRenderer.send('clean-processes')
+    killInternalProcess()
   })
 }
 

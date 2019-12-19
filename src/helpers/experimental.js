@@ -137,8 +137,15 @@ for (const k in process.env) {
 }
 /* eslint-enable guard-for-in */
 
+let lastChange = 0
+
+export function recentlyChangedExperimental() {
+  return Date.now() - lastChange < 10000
+}
+
 changes.subscribe(({ name, value }) => {
   if (experimentalFeatures.find(f => f.name === name) && !isReadOnlyEnv(name)) {
+    lastChange = Date.now()
     setLocalStorageEnv(name, value)
   }
 })
