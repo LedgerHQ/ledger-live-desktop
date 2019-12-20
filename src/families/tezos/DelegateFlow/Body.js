@@ -7,7 +7,7 @@ import { Trans, translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
 import invariant from 'invariant'
 import type { Account, AccountLike, Operation } from '@ledgerhq/live-common/lib/types'
-import { useBakers } from '@ledgerhq/live-common/lib/families/tezos/bakers'
+import { useBakers, useRandomBaker } from '@ledgerhq/live-common/lib/families/tezos/bakers'
 import whitelist from '@ledgerhq/live-common/lib/families/tezos/bakers.whitelist-default'
 import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import { getMainAccount, addPendingOperation } from '@ledgerhq/live-common/lib/account'
@@ -161,8 +161,7 @@ const Body = ({
 }: Props) => {
   const openedFromAccount = !!params.account
   const bakers = useBakers(whitelist)
-  const randomBakerIndex = useMemo(() => Math.floor(Math.random() * bakers.length), [bakers.length])
-  const randomBaker = bakers[randomBakerIndex]
+  const randomBaker = useRandomBaker(bakers)
 
   const [steps] = useState(() => createSteps(params))
   const {

@@ -661,6 +661,7 @@
     "header": "Account allocation ({{count}})"
   },
   "delegation": {
+    "overdelegated": "Overdelegated",
     "title": "Earn rewards",
     "header": "Delegation",
     "validator": "Validator",
