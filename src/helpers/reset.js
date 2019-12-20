@@ -2,26 +2,47 @@
 
 import { log } from '@ledgerhq/logs'
 import { ipcRenderer, shell, remote } from 'electron'
+import path from 'path'
+import rimraf from 'rimraf'
 import resolveUserDataDirectory from 'helpers/resolveUserDataDirectory'
 import { disable as disableDBMiddleware } from 'middlewares/db'
 import db from 'helpers/db'
 import { delay } from 'helpers/promise'
-import libcoreReset from 'commands/libcoreReset'
 import { clearBridgeCache } from 'bridge/cache'
 
-async function killInternalProcess() {
+let lastKill = 0
+
+export function recentlyKilledInternalProcess() {
+  return Date.now() - lastKill < 5000
+}
+
+export async function killInternalProcess() {
+  lastKill = Date.now()
   ipcRenderer.send('clean-processes')
   return delay(1000)
 }
+
+const removeSQLite = () =>
+  new Promise((resolve, reject) =>
+    rimraf(path.resolve(resolveUserDataDirectory(), 'sqlite/'), e => {
+      if (e) reject(e)
+      else resolve()
+    }),
+  )
 
 async function resetLibcore() {
   log('clear-cache', 'resetLibcore...')
   // we need to stop everything that is happening right now, like syncs
   await killInternalProcess()
   log('clear-cache', 'killed.')
-  // we can now ask libcore to reset itself
-  await libcoreReset.send().toPromise()
-  log('clear-cache', 'reset.')
+
+  await removeSQLite()
+  log('clear-cache', 'removeSQLite done.')
+}
+
+export function onUnusualInternalProcessError() {
+  if (recentlyKilledInternalProcess()) return
+  resetLibcore()
 }
 
 function reload() {
