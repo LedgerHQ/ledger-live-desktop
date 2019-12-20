@@ -3,7 +3,7 @@
   "productName": "Ledger Live",
   "description": "Ledger Live - Desktop",
   "repository": "https://github.com/LedgerHQ/ledger-live-desktop",
-  "version": "1.19.2-nightly.20191219T2134",
+  "version": "1.20.0",
   "author": "Ledger",
   "license": "MIT",
   "scripts": {
