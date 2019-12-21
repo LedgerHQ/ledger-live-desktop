@@ -25,202 +25,202 @@
     "selectExchange": "Válassz egy váltót",
     "selectExchangeNoOption": "No exchange matching \"{{exchangeName}}\"",
     "selectExchangeNoOptionAtAll": "Váltó nem található",
-    "sortBy": "Sort by",
-    "search": "Search",
-    "save": "Save",
-    "lock": "Lock",
-    "showMore": "Show more",
+    "sortBy": "Rendezés",
+    "search": "Keresés",
+    "save": "Mentés",
+    "lock": "Lezár",
+    "showMore": "Mutass többet",
     "max": "Max",
-    "new": "New",
-    "back": "Back",
-    "reset": "Reset",
-    "retry": "Retry",
+    "new": "Új",
+    "back": "Vissza",
+    "reset": "Visszaállítás",
+    "retry": "Újra",
     "range": "Range",
-    "stop": "Stop",
-    "updateNow": "Update now",
-    "close": "Close",
-    "eastern": "Eastern",
-    "western": "Western",
-    "reverify": "Re-verify",
-    "verify": "Verify",
-    "copy": "Copy",
-    "copyAddress": "Copy",
-    "copied": "Copied",
-    "addressCopied": "Address copied",
-    "experimentalFeature": "Experimental",
-    "dismiss": "Dismiss",
-    "choose": "Choose",
-    "information": "Information",
+    "stop": "Állj",
+    "updateNow": "Frissítés most",
+    "close": "Bezárás",
+    "eastern": "Keleti",
+    "western": "Nyugati",
+    "reverify": "Újra megerősít",
+    "verify": "Megerősít",
+    "copy": "Másolás",
+    "copyAddress": "Másolás",
+    "copied": "Másolva",
+    "addressCopied": "Cím másolva",
+    "experimentalFeature": "Kísérleti",
+    "dismiss": "Elvetés",
+    "choose": "Választ",
+    "information": "Információ",
     "lockScreen": {
-      "title": "Welcome back",
+      "title": "Üdv újra",
       "subTitle": null,
-      "description": "Enter your password to continue",
-      "inputPlaceholder": "Type your password",
-      "lostPassword": "I lost my password"
+      "description": "A folytatáshoz írd be a jelszavad",
+      "inputPlaceholder": "Írd be a jelszavad",
+      "lostPassword": "Elfelejtettem a jelszavam"
     },
     "sync": {
-      "syncing": "Synchronizing...",
-      "upToDate": "Synchronized",
-      "outdated": "Paused",
-      "needsMigration": "Click to update account",
-      "error": "Synchronization error",
-      "refresh": "Refresh",
-      "ago": "Synchronized {{time}}"
+      "syncing": "Szinkronizálás...",
+      "upToDate": "Szinkronizálva",
+      "outdated": "Szünetel",
+      "needsMigration": "Klikkelj a számlád frissítéséhez",
+      "error": "Szinkronizáció hiba",
+      "refresh": "Frissítés",
+      "ago": "Szinkronizálva {{time}}"
     }
   },
   "operation": {
     "type": {
-      "IN": "Received",
-      "OUT": "Sent",
-      "CREATE": "Created",
-      "REVEAL": "Revealed",
+      "IN": "Fogadott",
+      "OUT": "Küldött",
+      "CREATE": "Készítve",
+      "REVEAL": "Feltárva",
       "DELEGATE": "Delegated",
       "UNDELEGATE": "Undelegated"
     }
   },
   "time": {
-    "day": "Day",
-    "day_plural": "Days",
-    "week": "Week",
-    "week_plural": "Weeks",
-    "month": "Month",
-    "month_plural": "Months",
-    "year": "Year",
-    "year_plural": "Years",
-    "minute": "Minute",
-    "minute_plural": "Minutes",
-    "second": "Second",
-    "second_plural": "Seconds",
-    "hour": "Hour",
-    "hour_plural": "Hours",
+    "day": "Nap",
+    "day_plural": "Napok",
+    "week": "Hét",
+    "week_plural": "Hetek",
+    "month": "Hónap",
+    "month_plural": "Hónapok",
+    "year": "Év",
+    "year_plural": "Évek",
+    "minute": "Perc",
+    "minute_plural": "Percek",
+    "second": "Másodperc",
+    "second_plural": "Másodpercek",
+    "hour": "Óra",
+    "hour_plural": "Órák",
     "range": {
-      "week": "1W",
-      "month": "1M",
-      "year": "1Y"
+      "week": "1Hét",
+      "month": "1Hónap",
+      "year": "1É"
     },
     "since": {
-      "day": "past day",
-      "week": "past week",
-      "month": "past month",
-      "year": "past year"
+      "day": "Múlt nap",
+      "week": "Múlt hét",
+      "month": "Múlt hónap",
+      "year": "Múlt év"
     }
   },
   "fees": {
-    "custom": "Custom",
-    "fast": "Fast",
-    "high": "High",
-    "low": "Low",
-    "slow": "Slow",
-    "standard": "Standard"
+    "custom": "Egyedi",
+    "fast": "Gyors",
+    "high": "Magas",
+    "low": "Alacsony",
+    "slow": "Lassú",
+    "standard": "Alapértelmezett"
   },
   "sidebar": {
-    "menu": "Menu",
-    "stars": "Starred accounts",
-    "accounts": "Accounts",
-    "manager": "Manager",
-    "exchange": "Buy crypto",
-    "developer": "Dev tools",
+    "menu": "Menü",
+    "stars": "Csillagozott számlák",
+    "accounts": "Számlák",
+    "manager": "Menedzser",
+    "exchange": "Kripto vásárlása",
+    "developer": "Fejlesztői eszközök",
     "newUpdate": {
-      "title": "New Update",
-      "description": "Your accounts have been moved to a new dedicated page!"
+      "title": "Új frissítés",
+      "description": "Számláid át lettek helyezve egy új dedikált oldalra!"
     }
   },
   "stars": {
     "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
-    "tooltip": "Star account"
+    "tooltip": "Számla csillagozása"
   },
 
   "account": {
-    "lastOperations": "Last operations",
-    "contractAddress": "Contract:",
-    "openInExplorer": "Open in explorer",
+    "lastOperations": "Útolsó műveletek",
+    "contractAddress": "Szerződés:",
+    "openInExplorer": "Megnyitás felfedezőben",
     "emptyState": {
-      "title": "No crypto assets yet?",
-      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
-      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
+      "title": "Még nincsenek kriptók?",
+      "desc": "Bizonyosodj meg róla, hogy az <1><0>{{managerAppName}}</0></1> alkalmazás telepítve van és kezdj fogadni",
+      "descToken": "Bizonyosodj meg róla, hogy az <1><0>{{managerAppName}}</0></1> alkalmazás telepítve van és kezdj el fogadni <3><0>{{ticker}}</0></3> és <5><0>{{tokenList}}</0> tokeneket</5>",
       "buttons": {
-        "receiveFunds": "Receive"
+        "receiveFunds": "Fogadás"
       }
     },
     "settings": {
-      "title": "Edit account",
-      "advancedLogs": "Advanced logs",
+      "title": "Számla szerkesztése",
+      "advancedLogs": "Speciális naplók",
       "accountName": {
-        "title": "Account name",
-        "desc": "Describe this account"
+        "title": "Számla neve",
+        "desc": "Számla leírása"
       },
       "unit": {
-        "title": "Unit",
-        "desc": "Choose the unit to display"
+        "title": "Egység",
+        "desc": "Válaszd ki a megjelenítendő egységet"
       },
       "endpointConfig": {
-        "title": "Node",
-        "desc": "The API node to use"
+        "title": "Csomópont",
+        "desc": "Az API csomópont használata"
       }
     }
   },
   "accounts": {
-    "title": "Accounts",
-    "noResultFound": "No accounts found.",
+    "title": "Számlák",
+    "noResultFound": "Nem található számla.",
     "order": {
-      "name|asc": "Name A-Z",
-      "name|desc": "Name Z-A",
-      "balance|asc": "Lowest Balance",
-      "balance|desc": "Highest Balance"
+      "name|asc": "Név A-Z",
+      "name|desc": "Név Z-A",
+      "balance|asc": "Legalacsonyabb egyenleg",
+      "balance|desc": "Legmagasabb egyenleg"
     },
     "range": {
-      "week": "Week",
-      "month": "Month",
-      "year": "Year"
+      "week": "Hét",
+      "month": "Hónap",
+      "year": "Év"
     },
     "optionsMenu": {
-      "title": "Options",
-      "exportOperations": "Export operation history",
-      "exportToMobile": "Export to mobile"
+      "title": "Opciók",
+      "exportOperations": "Tevékenységnapló exportálása",
+      "exportToMobile": "Exportálás mobilra"
     },
     "contextMenu": {
-      "star": "Star",
-      "receive": "Receive",
-      "send": "Send",
-      "edit": "Edit account"
+      "star": "Csillag",
+      "receive": "Fogadás",
+      "send": "Küldés",
+      "edit": "Számla szerkesztése"
     }
   },
   "banners": {
-    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the {{productName}}",
-    "migrate": "Ledger Live accounts update available",
-    "genericTerminatedCrypto": "{{coinName}} is not supported anymore"
+    "promoteMobile": "Élvezd a  Ledger Live élményt, most eléhető mobilon az {{productName}}",
+    "migrate": "Ledger Live számlák frissítése lehetséges",
+    "genericTerminatedCrypto": "{{coinName}} többé nem támogatott"
   },
   "dashboard": {
-    "title": "Portfolio",
+    "title": "Portfólio",
     "emptyAccountTile": {
-      "desc": "Add accounts to manage more crypto assets",
-      "createAccount": "Add account"
+      "desc": "Adj hozzá számlákat a további kriptók kezeléséhez",
+      "createAccount": "Számla hozzáadása"
     },
     "accounts": {
-      "title": "Accounts ({{count}})"
+      "title": "Számlák ({{count}})"
     },
     "greeting": {
-      "morning": "Good morning",
-      "evening": "Good evening",
-      "afternoon": "Good afternoon"
+      "morning": "Jó reggelt",
+      "evening": "Jó estét",
+      "afternoon": "Jó napot"
     },
-    "summary": "Here's the summary of your account",
-    "summary_plural": "Here's the summary of your {{count}} accounts",
-    "recentActivity": "Last operations",
-    "totalBalance": "Total balance"
+    "summary": "Itt a számláid összegzése",
+    "summary_plural": "Itt az összegzése az {{count}} számláidnak",
+    "recentActivity": "Utolsó tevékenységek",
+    "totalBalance": "Összes egyenleg"
   },
   "currentAddress": {
-    "title": "Current address",
-    "for": "Address for <1><0>{{name}}</0></1>",
-    "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
-    "messageIfAccepted": "Address confirmed, please re-verify it if you copy/paste or scan the QR code.",
-    "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
+    "title": "Jelenlegi cím",
+    "for": " <1><0>{{name}}</0></1> hoz",
+    "messageIfUnverified": "Kérlek erősítsd meg, hogy az {{currencyName}} cím ami a Ledger Liveban megjelenik, egyezik-e a Ledger eszközön megjelenő címmel",
+    "messageIfAccepted": "Cím megerősítve, kérlek ellenőrizd újra ha másolás/beillesztést használtál, vagy olvasd be a QR kódot.",
+    "messageIfSkipped": "A {{currencyName}} címed nem lett megerősítve a Ledger eszközön. Kérlek erősítsd meg az optimális biztonságért."
   },
   "deviceConnect": {
     "dashboard": "Navigate to the <1>Dashboard</1> on your device",
-    "step1": "Connect and unlock your <1>Ledger device</1>",
-    "step2": "Open the <1><0>{{managerAppName}}</0></1> app on your device",
-    "step3": "Allow <1>Ledger Manager</1> on your device"
+    "step1": "Csatlakoztasd, és old fel a <1>Ledger device</1>-t",
+    "step2": "Nyisd meg az <1><0>{{managerAppName}}</0></1> alkalmazást az eszközön",
+    "step3": "Engedélyezd a  <1>Ledger Manager</1> -t az eszközön"
   },
   "emptyState": {
     "sidebar": {
