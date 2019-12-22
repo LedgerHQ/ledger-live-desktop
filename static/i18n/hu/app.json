@@ -1279,7 +1279,7 @@
       "description": "A szerver nem tudta elküldeni a kérésed. Kérlek, próbáld meg később. {{message}}"
     },
     "LedgerAPINotAvailable": {
-      "title": "Sajnáljuk, {{currencyName}} szolgáltatások nem elérhetőek",
+      "title": "Sajnáljuk, a(z) {{currencyName}} szolgáltatások nem elérhetőek",
       "description": "Kérlek, próbáld újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
     },
     "ManagerAppAlreadyInstalled": {
