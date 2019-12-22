@@ -136,8 +136,8 @@
     "openInExplorer": "Megnyitás felfedezőben",
     "emptyState": {
       "title": "Még nincs kriptód?",
-      "desc": "Bizonyosodj meg róla, hogy az <1><0>{{managerAppName}}</0></1> alkalmazás telepítve van és kezdj fogadni",
-      "descToken": "Bizonyosodj meg róla, hogy az <1><0>{{managerAppName}}</0></1> alkalmazás telepítve van és kezdj el fogadni <3><0>{{ticker}}</0></3> és <5><0>{{tokenList}}</0> tokeneket</5>",
+      "desc": "Bizonyosodj meg róla, hogy a(z) <1><0>{{managerAppName}}</0></1> alkalmazás telepítve van és kezdj fogadni",
+      "descToken": "Bizonyosodj meg róla, hogy a(z) <1><0>{{managerAppName}}</0></1> alkalmazás telepítve van és kezdj el fogadni <3><0>{{ticker}}</0></3> és <5><0>{{tokenList}}</0> tokeneket</5>",
       "buttons": {
         "receiveFunds": "Fogadás"
       }
@@ -219,7 +219,7 @@
   "deviceConnect": {
     "dashboard": "Navigálj a <1>Dashboard</1>-ra az eszközödön",
     "step1": "Csatlakoztasd, és old fel a <1>Ledger device</1>-t",
-    "step2": "Nyisd meg az <1><0>{{managerAppName}}</0></1> alkalmazást az eszközön",
+    "step2": "Nyisd meg a(z) <1><0>{{managerAppName}}</0></1> alkalmazást az eszközön",
     "step3": "Engedélyezd a  <1>Ledger Manager</1> -t"
   },
   "emptyState": {
@@ -349,7 +349,7 @@
     "successDescription": "Adj hozzá több számlát vagy térj vissza a portfólióhoz",
     "successDescription_plural": "Adj hozzá több számlát vagy térj vissza a portfólióhoz",
     "createNewAccount": {
-      "noOperationOnLastAccount": "Nem tudsz új számlát hozzáadni mielőtt fogadtál a <1><0>{{accountName}}</0></1> számládon",
+      "noOperationOnLastAccount": "Nem tudsz új számlát hozzáadni mielőtt fogadnál a(z) <1><0>{{accountName}}</0></1> számládon",
       "noAccountToCreate": "Nem található elkészíthető <1><0>{{currencyName}}</0></1> számla"
     },
     "cta": {
@@ -420,8 +420,8 @@
       "installed": "Alkalmazás telepítve",
       "uninstalled": "Alkalmazás törölve",
       "addAccount": "{{name}} számla hozzáadása",
-      "noAppNeededForToken": "{{appName}} telepítése a {{tokenName}} tokenhez",
-      "tokenAppDisclaimer": "{{tokenName}} egy {{tokenType}} mely a {{appName}} alkalmazást használja.{{tokenName}} kezeléséhez, <1>telepítsd a {{appName}} alkalmazást</1> és küld a tokeneket a <3> {{appName}} számládra</3>"
+      "noAppNeededForToken": "{{appName}} telepítése a(z) {{tokenName}} tokenhez",
+      "tokenAppDisclaimer": "{{tokenName}} egy {{tokenType}} mely a(z) {{appName}} alkalmazást használja.{{tokenName}} kezeléséhez, <1>telepítsd a(z) {{appName}} alkalmazást</1> és küld a tokeneket a(z) <3> {{appName}} számládra</3>"
     },
     "firmware": {
       "installed": "Szoftver verziója {{version}}",
@@ -516,7 +516,7 @@
       },
       "warning": {
         "tezos": {
-          "text": "Az megjelölt számlán kapott összeget hozzáadjuk a teljes összeghez. Válassz másik számlát ha el szeretnéd ezt kerülni."
+          "text": "Az megjelölt számlán jelölt összeget hozzáadjuk a teljes összeghez. Válassz másik számlát ha el szeretnéd ezt kerülni."
         }
       }
     }
@@ -936,576 +936,576 @@
     "downloadNow": "Letöltés most"
   },
   "crash": {
-    "oops": "Oops, valami hiba történt",
+    "Hoppá": "Hoppá, valami hiba történt",
     "uselessText": "Megpróbálhatod újra újraindítva a Ledger Live-ot. Kérlek exportáld a naplóid,és vedd fel a kapcsolatot a Ledger Supporttal ha a probléma azután is fennáll.",
     "restart": "Újraindítás",
     "support": "Vedd fel a kapcsolatot az ügyfélszolgálattal",
     "github": "GitHub"
   },
   "exportOperationsModal": {
-    "title": "Operation history",
-    "desc": "Select the accounts for which to save the operation history",
-    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
-    "titleSuccess": "Operation history successfully saved",
-    "cta": "Save",
-    "ctaSuccess": "Done",
-    "noAccounts": "No accounts to export",
-    "selectedAccounts": "Accounts to include",
-    "selectedAccounts_plural": "Accounts to include ({{count}})"
+    "title": "Műveleti előzmények",
+    "desc": "Válaszd ki, hogy mely számlák műveleti előzményeit szeretnéd menteni",
+    "descSuccess": "Egy CSV fájl sikeresen mentésre került a műveleti előzményeidről a kiválasztott mappába",
+    "titleSuccess": "Műveleti előzmények sikeresen mentve",
+    "cta": "Mentés",
+    "ctaSuccess": "Kész",
+    "noAccounts": "Nincsenek exportálható számlák",
+    "selectedAccounts": "Mely számlákat tartalmazza",
+    "selectedAccounts_plural": "Számlák melyeket tartalmazza ({{count}})"
   },
   "language": {
-    "system": "Use system language"
+    "system": "Rendszernyelv használata"
   },
   "theme": {
-    "system": "Use system theme",
-    "light": "Light",
-    "dusk": "Dusk",
-    "dark": "Dark"
+    "system": "Használja a rendszer témáját",
+    "light": "Világos",
+    "dusk": "Szürkés",
+    "dark": "Sötét"
   },
   "onboarding": {
     "breadcrumb": {
-      "selectDevice": "Device selection",
-      "selectPIN": "PIN code",
-      "writeSeed": "Recovery phrase",
-      "setPassword": "Password lock",
-      "analytics": "Bugs & analytics"
+      "selectDevice": "Eszköz kiválasztása",
+      "selectPIN": "PIN kód",
+      "writeSeed": "Helyreállítás kártya",
+      "setPassword": "Jelszóval lezárás",
+      "analytics": "Hibák és elemzések"
     },
     "start": {
-      "title": "Welcome to Ledger Live",
-      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
-      "startBtn": "Get started"
+      "title": "Üdvözlünk a Ledger Live-ban",
+      "themeDesc": "Kezd azzal, hogy kiválasztod, hogy nézzen ki a Ledger Live.\nKésőbb ezt bármikor módosíthatod a beállításokban.",
+      "startBtn": "Kezdj hozzá"
     },
     "init": {
-      "title": "Get started with your Ledger device",
+      "title": "Kezd a Ledger eszközöddel",
       "newDevice": {
-        "title": "Initialize as new device"
+        "title": "Új eszközként való beállítás"
       },
       "restoreDevice": {
-        "title": "Restore device from recovery phrase"
+        "title": "Eszköz helyreállítása a helyreállítási kártyáról"
       },
       "initializedDevice": {
-        "title": "Use an initialized device"
+        "title": "Már beállított eszköz használata"
       }
     },
     "noDevice": {
-      "title": "Don't have a Ledger device?",
+      "title": "Nem rendelkezel Ledger eszközzel??",
       "buyNew": {
-        "title": "Buy a Ledger device"
+        "title": "Vásárolj egy Ledger eszközt"
       },
       "trackOrder": {
-        "title": "Track your order"
+        "title": "Rendelésed követése"
       },
       "learnMore": {
-        "title": "Learn about Ledger"
+        "title": "Tudj meg többet Ledger-ről"
       }
     },
     "selectDevice": {
-      "title": "Select your device",
-      "usbOnly": "usb only",
-      "usbOnlyTooltip": "Ledger Live desktop currently does not support Bluetooth"
+      "title": "Válaszd ki az eszközöd
+      "usbOnly": "csak usb",
+      "usbOnlyTooltip": "A Ledger Live asztali verziója jelenleg nem támogatja a Bluetooth-ot"
     },
     "selectPIN": {
       "disclaimer": {
-        "note1": "Always choose your own PIN code.",
-        "note2": "Use 8 digits for optimal security.",
-        "note3": "Never use a device supplied with a PIN code or a recovery phrase."
+        "note1": "Mindig válassz saját PIN kódot.",
+        "note2": "Használj 8 számjegyet az optimális biztonság érdekében.",
+        "note3": "Soha ne használj olyan eszközt, amit már meglévő PIN kóddal, vagy kitöltött helyreállítás kártyával kapsz."
       },
       "initialize": {
-        "title": "Choose your PIN code",
+        "title": "Válaszd ki a PIN kódod",
         "instructions": {
           "nano": {
-            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
-            "step2": "Press the right button to select <1><0>{{configureAsNewDevice}}?</0></1>.",
-            "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step1": "Csatlakoztasd a {{productName}} -t a számítógépedhez. Nyomd meg mindkét gombot a kezdéshez.",
+            "step2": "Nyomd meg a jobb gombot a kiválasztáshoz <1><0>{{configureAsNewDevice}}?</0></1>.",
+            "step3": "Nyomd meg a bal vagy jobb gombot egy számjegy kiválasztásához. Nyomd meg mindkét gombot a megerősítéshez.",
+            "step4": "Válaszd a ✓ -t hogy megerősítsd a PIN kódod. Válaszd a ⬅ -t hogy törölj egy számjegyet."
           },
           "nanoX": {
-            "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Press both buttons to choose <1><0>{{setUpAsNewDevice}}</0></1>.",
-            "step3": "Press the left or right button to select a digit.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step1": "Csatlakoztasd a {{productName}} -t a számítógépedhez.",
+            "step2": "Nyomd meg mindkét gombot, hogy kiválaszd <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step3": "Nyomd meg a bal vagy a jobb gombot hogy kiválassz egy számjegyet.",
+            "step4": "Válaszd a ✓ -t hogy megerősítsd a PIN kódod. Válaszd a ⬅ -t hogy törölj egy számjegyet."
           },
           "blue": {
-            "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Tap on <1><0>{{configureAsNewDevice}}</0></1>.",
-            "step3": "Choose a PIN code of 4 to 8 digits."
+            "step1": "Csatlakoztasd a {{productName}} -t a számítógépedhez.",
+            "step2": "Nyomj rá <1><0>{{configureAsNewDevice}}</0></1>.",
+            "step3": "Válassz egy 4-8 számjegy hosszú PIN kódot."
           }
         }
       },
       "restore": {
-        "title": "Choose your PIN code",
+        "title": "Válaszd ki a PIN kódod",
         "instructions": {
           "nano": {
-            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
-            "step2": "Press the left button to cancel <1><0>{{configureAsNewDevice}}?</0></1>. Then press the right button to select <3><0>{{restoreConfiguration}}?</0></3>.",
-            "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step1": "Csatlakoztasd a {{productName}} -t a számítógéphez. Nyomd meg mindkét gombot a kezdéshez.",
+            "step2": "Nyomd meg a bal gombot a visszavonáshoz <1><0>{{configureAsNewDevice}}?</0></1>. Azután nyomd meg a jobb gombot a kiválasztáshoz <3><0>{{restoreConfiguration}}?</0></3>.",
+            "step3": "Nyomd meg a bal vagy a jobb gombot egy számjegy kiválasztásához. Nyomd meg mindkét gombot a megerősítéshez.",
+            "step4": "Válaszd a ✓ -t hogy megerősítsd a PIN kódod. Válaszd a ⬅ -t hogy törölj egy számjegyet."
           },
           "nanoX": {
-            "step1": "Connect your {{productName}} to your computer.",
-            "step2": "Press both buttons as instructed on your {{productName}} screen.",
-            "step3": "Press the left button to cancel <1><0>{{setUpAsNewDevice}}</0></1>.",
-            "step4": "Press the right button to select <1><0>{{restoreConfiguration}}</0></1>.",
-            "step5": "Choose a PIN code between 4 és 8 digits long."
+            "step1": "Csatlakoztasd a {{productName}} -t a számítógépedhez.",
+            "step2": "Nyomd meg mindkét gombot ahogy a {{productName}} képernyőjén látod.",
+            "step3": "Nyomd meg a bal gombot a visszavonáshoz <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step4": "Nyomd meg a jobb gombot a kiválasztáshoz <1><0>{{restoreConfiguration}}</0></1>.",
+            "step5": "Válassz egy 4-8 számjegy hosszú PIN kódot."
           },
           "blue": {
-            "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Tap on <1><0>{{restoreConfiguration}}</0></1>.",
-            "step3": "Choose a PIN code of 4 to 8 digits."
+            "step1": "Csatlakoztasd a {{productName}} -t a számítógépedhez.",
+            "step2": "Nyomj rá <1><0>{{restoreConfiguration}}</0></1>.",
+            "step3": "Válassz egy 4-8 számjegy hosszú PIN kódot."
           }
         }
       }
     },
     "writeSeed": {
       "initialize": {
-        "title": "Save your recovery phrase",
-        "desc": "Your device will display a 24-word recovery phrase to back up your private keys",
+        "title": "Írd le a helyreállítási szavakat",
+        "desc": "Az eszközöd egy 24 szóból álló helyreállítási kulcsot fog megjeleníteni, amik a privát kulcsaid visszaállítására szolgálnak",
         "nano": {
-          "step1": "Write <1><0>{{seedWord1}}</0></1> in position 1 on a blank Recovery sheet.",
-          "step2": "Press the right button to continue és write down all 24 words.",
-          "step3": "Confirm your recovery phrase: select és validate each word by pressing both buttons."
+          "step1": "Írd be <1><0>{{seedWord1}}</0></1> az 1-es helyre az üres helyreállítási kártyádon.",
+          "step2": "Nyomd meg a jobb gombot a folytatáshoz, és írd le mind a 24 szót.",
+          "step3": "Erősítsd meg a helyreállítási szavakat: válaszd ki, és egyesével erősítsd meg őket mindkét gombot lenyomva."
         },
         "blue": {
-          "step1": "Write down each word on a blank Recovery sheet while keeping the order.",
-          "step2": "Tap <1><0>{{seedNext}}</0></1> és write down all words until the <3><0>{{seedConfirmation}}</0></3> screen appears.",
-          "step3": "Enter each word to confirm your recovery phrase."
+          "step1": "Írj le minden egyes szót az üres helyreállítási kártyára amit a csomagban kaptál.",
+          "step2": "Nyomj rá <1><0>{{seedNext}}</0></1> és írj le minden szót míg a <3><0>{{seedConfirmation}}</0></3> megjelenik a képernyőn.",
+          "step3": "Írj be minden egyes szót, hogy megerősítsd a helyreállítási szavakat."
         }
       },
       "restore": {
-        "title": "Enter your recovery phrase",
-        "desc": "Enter the recovery phrase saved on your Recovery sheet",
+        "title": "Írd be a helyreállítási szavakat",
+        "desc": "Írd be a helyreállítási szavakat amik a helyreállítási kártyádon találhatóak",
         "nano": {
-          "step1": "Choose the length of your recovery phrase.",
-          "step2": "Enter the first letters of <1><0>{{seedWord1}}</0></1> until suggested words appear.",
-          "step3": "Choose <1><0>{{seedWord1}}</0></1> from the suggested words by pressing both buttons.",
-          "step4": "Repeat the process until the last word."
+          "step1": "Válaszd ki a helyreállítási szavak mennyiségét.",
+          "step2": "Írd be a szó első betűit amíg <1><0>{{seedWord1}}</0></1> javasolt szó meg nem jelenik.",
+          "step3": "Válaszd ki a <1><0>{{seedWord1}}</0></1> szót a javasolt szavak közül mindkét gomb megnyomásával.",
+          "step4": "Ismételd a folyamatot, míg az utolsó szót is beírod."
         },
         "blue": {
-          "step1": "Select the length of your recovery phrase.",
-          "step2": "Type the first word of your recovery phrase. Tap the word when it appears.",
-          "step3": "Repeat the process until the last word."
+          "step1": "Válaszd ki a helyreállítási szavak mennyiségét.",
+          "step2": "Írd be a helyreállítási kártyát első szavát. Nyomj rá a szóra mikor megjelenik a kijelzőn.",
+          "step3": "Ismételd a folyamatot, míg az utolsó szót is beírod."
         }
       },
       "disclaimer": {
-        "note1": "Carefully secure your 24-word recovery phrase out of sight.",
-        "note2": "Make sure you are the sole holder of your recovery phrase.",
-        "note3": "Ledger does not keep any backup of your recovery phrase.",
-        "note4": "Never use a device supplied with a PIN code or a recovery phrase."
+        "note1": "Tedd a 24 szavas helyreállítási kártyád egy olyan biztonságos helyre ami nincs szemelőtt.",
+        "note2": "Győződj meg róla, hogy csak te férsz hozzá a helyreállítási kártyádhoz.",
+        "note3": "A Ledger nem tárol semmilyen biztonsági mentést a helyreállítási szavaidról.",
+        "note4": "Soha ne használj olyan eszközt, ami mielőtt hozzádkerült már rendelkezett pinkóddal, vagy helyreállítási szavakkal."
       }
     },
     "genuineCheck": {
-      "title": "Security checklist",
-      "descGeneric": "Before continuing, please complete the security checklist",
-      "descRestore": "Before getting started, please confirm:",
+      "title": "Biztonsági ellenőrzőlista",
+      "descGeneric": "Mielőtt folytatnád, kérlek menj végig a biztonsági ellenőrzőlistán",
+      "descRestore": "Mielőtt elkezdenéd, kérlek erősítsd meg:",
       "step1": {
-        "title": "Did you choose your PIN code by yourself?"
+        "title": "Te magad pálasztottad ki a PIN kódod?"
       },
       "step2": {
-        "title": "Did you save your recovery phrase by yourself?"
+        "title": "Te magad tetted biztonságos helyre a helyreállítási szavaid?"
       },
       "step3": {
-        "title": "Is your Ledger device genuine?"
+        "title": "A Ledger eszközöd eredeti?"
       },
-      "isGenuinePassed": "Your device is genuine",
+      "isGenuinePassed": "Az eszközöd eredeti",
       "buttons": {
-        "genuineCheck": "Check now",
-        "contactSupport": "Contact us"
+        "genuineCheck": "Ellenőrzés most",
+        "contactSupport": "Lépj kapcsolatba velünk"
       },
       "errorPage": {
         "title": {
-          "pinFailed": "Didn't choose your own PIN code?",
-          "recoveryPhraseFailed": "Didn't save your recovery phrase by yourself?",
-          "isGenuineFail": "Oops, your device does not seem genuine..."
+          "pinFailed": "Nem a saját PIN kódod választottad ki?",
+          "recoveryPhraseFailed": "Nem általad lett biztonságos helyre téve a visszaállítási kártyád?",
+          "isGenuineFail": "Hoppá, az eszközöd nem tűnik eredetinek..."
         },
         "desc": {
-          "pinFailed": "Never use a device supplied with a PIN code. Please contact us when in doubt.",
-          "recoveryPhraseFailed": "Only save a recovery phrase that was displayed on your device és to you alone. Please contact us when in doubt.",
-          "isGenuineFail": "Your device did not pass the authenticity test required to connect to Ledger’s secure server. Please contact Ledger Support to get assistance."
+          "pinFailed": "Soha ne használd az eszközt mellé írt PIN kóddal. Ha kétséged támadt, vedd fel velünk a kapcsolatot.",
+          "recoveryPhraseFailed": "Csak azt a szót írd le, ami az eszközödön is megjelent. Ha kétséged támadt, vedd fel velünk a kapcsolatot.",
+          "isGenuineFail": "Az eszköz nem teljesítette a Ledger biztonsági szerveréhez történő kapcsolódáshoz szükséges hitelesítési tesztet. Kérlek, fordulj a Ledger ügyfélszolgálathoz segítségért."
         }
       }
     },
     "setPassword": {
-      "title": "Password lock (optional)",
-      "desc": "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions és public addresses",
+      "title": "Jelszóval történő zárolás (opcionális)",
+      "desc": "Állíts be jelszót, hogy védve legyél a számítógépeden tárolt Ledger Live adatok illetéktelen hozzáférésétől, beleértve a számlák neveit, tranzakciókat és nyilvános kulcsokat",
       "disclaimer": {
-        "note1": "Make sure to remember your password. Do not share it.",
-        "note2": "Losing your password requires resetting Ledger Live és re-adding accounts.",
-        "note3": "Resetting Ledger Live does not affect your crypto assets."
+        "note1": "Ne felejtsd el jelszavad. Ne oszd meg senkivel.",
+        "note2": "Jelszavad elvesztése a Ledger Live alaphelyzetbe állítását, és a számlák újboli hozzáadását igényli.",
+        "note3": "A Ledger Live alaphelyzetbe állítása nem befolyásolja a tárolt kriptókat."
       }
     },
     "analytics": {
-      "title": "Bugs és analytics",
-      "desc": "Share anonymized data to help improve Ledger security products és services",
+      "title": "Hibák és elemzések",
+      "desc": "Névtelen adatok megosztása, hogy hozzájárulj a Ledger biztonsága, és szolgáltatásai fejlesztéséhez",
       "shareAnalytics": {
-        "title": "Analytics",
-        "desc": "Enable analytics to help Ledger understés how to improve user experience.",
+        "title": "Elemzések",
+        "desc": "Elemzések engedélyezése, hogy segíts a Ledger-nek a felhasználói élmény fejlesztésében.",
         "mésatoryContextual": {
-          "item1": "Clicks",
-          "item2": "In-app page visits",
-          "item3": "Redirection to webpage",
-          "item4": "Actions: send, receive, lock, etc.",
-          "item5": "End of page scroll",
-          "item6": "App (un)installation és version",
-          "item7": "Number of accounts, crypto assets és operations",
-          "item8": "Overall és page session duration",
-          "item9": "Ledger device type és firmware"
+          "item1": "Kattintások",
+          "item2": "Alkalmazáson belüli oldalak megnyitása",
+          "item3": "Átirányítás a weboldalra",
+          "item4": "Műveletek: küldés, fogadás, lezárás, stb.",
+          "item5": "Oldal görgetés vége",
+          "item6": "Alkalmazások telepítése és törlése és verziójuk",
+          "item7": "Számlák mennyisége, kriptók és műveletek",
+          "item8": "A munkamenet teljes időtartama",
+          "item9": "Ledger eszköz típusa és szoftververziója"
         }
       },
       "sentryLogs": {
-        "title": "Bug reports",
-        "desc": "Automatically send reports to help Ledger fix bugs."
+        "title": "Hibajelentések",
+        "desc": "Automatikusan elküldi a hibajelentéseket a Ledger-nek, segítve a kijavításukban."
       },
       "technicalData": {
-        "title": "Technical data*",
-        "desc": "Ledger will automatically collect fully anonymized technical data to help improve user experience.",
+        "title": "Technikai adatok*",
+        "desc": "A Ledger automatikusan névtelen technikai adatokat gyűjt a felhasználói élmény javításának érdekében.",
         "mésatoryText": "* mésatory",
         "mésatoryContextual": {
-          "title": "Technical data",
-          "item1": "Anonymous unique application ID",
-          "item2": "Ledger Live version, language és region",
-          "item3": "OS version, language és region"
+          "title": "Technikai adatok",
+          "item1": "Névtelen egyedi alkalmazás-azonosító",
+          "item2": "Ledger Live verzió, nyelv és régió",
+          "item3": "OS verzió, nyelv és régió"
         }
       },
       "terms": {
-        "title": "Terms *",
-        "desc": "By continuing, you acknowledge that you have read és agree to the <1>Terms of Use</1> és <3>Privacy Policy</3>."
+        "title": "Feltételek *",
+        "desc": "A folytatással elismered, hogy elolvastad és elfogadod a <1>Terms of Use</1> és <3>Privacy Policy</3>."
       }
     },
     "finish": {
-      "title": "Your device is ready!",
-      "desc": "Install some apps on your device és access the Portfolio",
-      "openAppButton": "Open Ledger Live"
+      "title": "Az eszközöd készen áll!",
+      "desc": "Telepíts néhány alkalmazást az eszközödre, és nyisd meg a portfóliót",
+      "openAppButton": "Ledger Live megnyitása"
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having a hard time connecting your device?"
+    "desc": "Nehezen tudod csatlakoztatni a készüléked?"
   },
   "TransactionConfirm": {
-    "title": "Please confirm the operation on your device to send it",
-    "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
+    "title": "Kérlek, erősítsd meg a készüléken végrehajtott műveletet annak elküldéséhez",
+    "warning": "Mindig ellenőrizd, hogy készüléked pontosan azt címet jeleníti-e meg mint ami itt található {{recipientWording}}",
     "recipientWording": {
-      "send": "recipient",
-      "delegate": "validator",
-      "undelegate": "validator"
+      "send": "fogadó",
+      "delegate": "megerősítő",
+      "undelegate": "megerősítő"
     }
   },
   "RecipientField": {
-    "placeholder": "Enter {{currencyName}} address"
+    "placeholder": "Írd be a {{currencyName}} címet"
   },
   "Terms": {
-    "title": "Terms of Use",
-    "read": "Read the Terms of Use",
-    "switchLabel": "I have read és agree with the Terms of Use és Privacy Policy"
+    "title": "Felhasználási feltételek",
+    "read": "Olvasd el a Felhasználási feltételeket",
+    "switchLabel": "Elolvastam, és elfogadom a Felhasználási feltételeket és az Adatvédelmi irányelveket"
   },
   "errors": {
     "generic": {
       "title": "{{message}}",
-      "description": "Something went wrong. Please retry or contact us."
+      "description": "Valami elromlott. Kérlek próbáld újra, vagy lépj kapcsolatba velünk."
     },
     "AccountNameRequired": {
-      "title": "An account name is required",
-      "description": "Please provide an account name"
+      "title": "Egy számla név szükséges",
+      "description": "Kérlek add meg a számlád nevét"
     },
     "AccountNotSupported": {
-      "title": "Account not supported.",
-      "description": "Please retry or contact Support ({{reason}})"
+      "title": "Számla nem támogatott.",
+      "description": "Kérlek próbáld újra, vagy lépj kapcsolatba velünk ({{reason}})"
     },
     "NoAccessToCamera": {
-      "title": "Please ensure your system has a camera, that it's not in use by another application és that Ledger Live has permission to use it.",
+      "title": "Kérlek bizonyosodj meg róla, hogy csatlakoztatva van a kamera, és más alkalmazás nem használja és a Ledger Live-nak van jogosultsága használni azt.",
       "description": ""
     },
     "CurrencyNotSupported": {
-      "title": "{{currencyName}} is not supported",
-      "description": "This crypto asset is not yet supported. Please contact us."
+      "title": "{{currencyName}} nem támogatott",
+      "description": "Ez a kripto egyenlőre nem támogatott. Kérlek lépj kapcsolatba velünk."
     },
     "DeviceNotGenuine": {
-      "title": "Possibly not genuine",
-      "description": "Request Ledger Support assistance"
+      "title": "Lehetséges, hogy nem eredeti",
+      "description": "Ledger ügyféltámogatás kérése"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "Sorry, try again (genuine-close)",
+      "title": "Sajnáljuk, próbáld újra (genuine-close)",
       "description": null
     },
     "DeviceInOSUExpected": {
-      "title": "Sorry, update failed",
-      "description": "Please retry or contact Ledger Support"
+      "title": "Sajnáljuk, frissítés sikertelen",
+      "description": "Kérlek próbáld újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
     },
     "DeviceHalted": {
-      "title": "Please restart your Ledger device és retry",
-      "description": "An unexpected error occurred, so please try again"
+      "title": "Kérlek indítsd újra a Ledger eszközöd, és próbáld újra",
+      "description": "Váratlan hiba történt, próbáld újra"
     },
     "DeviceSocketFail": {
       "title": "{{message}}",
-      "description": "Please try again"
+      "description": "Kérlek próbáld újra"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "Oops, connection failed",
-      "description": "Please try again"
+      "title": "Hoppá, csatlakozás sikertelen",
+      "description": "Kérlek próbáld újra"
     },
     "DisconnectedDevice": {
-      "title": "Oops, device connection lost",
-      "description": "Please try again"
+      "title": "Hoppá, az eszköz csatlakozása megszűnt",
+      "description": "Kérlek próbáld újra"
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Oops, device disconnected",
-      "description": "The connection to the device was lost during an operation, please try again"
+      "title": "Hoppá, az eszköz lecsatlakoztatva",
+      "description": "A készülékhez való kapcsolódás megszűnt egy művelet során, próbálkozz újra"
     },
     "EnpointConfig": {
-      "title": "Invalid endpoint",
-      "description": "Please provide a valid endpoint"
+      "title": "Érvénytelen végpont",
+      "description": "Adj meg egy érvényes végpontot"
     },
     "FeeEstimationFailed": {
-      "title": "Sorry, fee estimation failed",
-      "description": "Try setting a custom fee (status: {{status}})"
+      "title": "Sajnáljuk, a díjbecslés sikertelen",
+      "description": "Próbálj beállítani egyedi díjat (státusz: {{status}})"
     },
     "FirmwareOrAppUpdateRequired": {
-      "title": "Firmware or app update required",
-      "description": "Please use the Manager to uninstall all apps és check if a firmware update is available before reinstalling them"
+      "title": "Szoftver vagy alkalmazás frissítés szükséges",
+      "description": "Kérlek használd az eszközkezelőt minden alkalmazás törléséhez és ellenőrizd, hogy elérhető-e szoftverfrissítés mielőtt ójratelepítenéd őket"
     },
     "HardResetFail": {
-      "title": "Oops, could not reset",
-      "description": "Please try again or contact us when in doubt"
+      "title": "Hoppá, nem sikerült visszaállítani",
+      "description": "Kérlek, próbáld újra, vagy vedd fel velünk a kapcsolatot, ha kétségeid vannak"
     },
     "LatestMCUInstalledError": {
-      "title": "Oops, nothing to update",
-      "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
+      "title": "Hoppá, semmit sem kell frissíteni",
+      "description": "Feleslegesen megpróbáltad frissíteni az eszköz mikrovezérlőjét. Vedd fel a kapcsolatot a Ledger ügyfélszolgálatával, ha problémád van az eszközzel."
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Please check your connection és try again or contact Ledger Support."
+      "description": "Ellenőrizd a kapcsolatot, és próbáld újra, vagy lépj kapcsolatba a Ledger ügyfélszolgálatával."
     },
     "LedgerAPI5xx": {
-      "title": "Sorry, try again.",
-      "description": "The server could not hésle your request. Please try again at a later moment. {{message}}"
+      "title": "Sajnáljuk, próbáld újra.",
+      "description": "A szerver nem tudta elküldeni a kérésed. Kérlek, próbáld meg később. {{message}}"
     },
     "LedgerAPINotAvailable": {
-      "title": "Sorry, {{currencyName}} services unavailable",
-      "description": "Please retry or contact Ledger Support"
+      "title": "Sajnáljuk, {{currencyName}} szolgáltatások nem elérhetőek",
+      "description": "Kérlek, próbáld újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Oops, that's already installed",
-      "description": "Check your device to see which apps are already installed"
+      "title": "Hoppá, ez már telepítve van",
+      "description": "Ellenőrizd az eszközöd, hogy megtudd, mely alkalmazások vannak már telepítve"
     },
     "ManagerAppDepInstallRequired": {
-      "title": "{{dependency}} app required",
-      "description": "If you already have the {{dependency}} app installed, please reinstall it to get the latest version"
+      "title": "{{dependency}} alkalmazás szükséges",
+      "description": "Ha már telepítetted a(z) {{dependency}} alkalmazást, kérlek telepítsd újra, hogy megkapd a legújabb verziót"
     },
     "ManagerAppDepUninstallRequired": {
-      "title": "Sorry, this app is required",
-      "description": "You must first uninstall all apps that require the {{appName}} app"
+      "title": "Sajnáljuk, ez az alkalmazás szükséges",
+      "description": "Először el kell távolítanod az összes alkalmazást amelyek szükségesek a(z) {{appName}} alkalmazáshoz"
     },
     "ManagerDeviceLocked": {
-      "title": "Please unlock your device",
-      "description": "Your device was locked, please unlock it"
+      "title": "Kérlek old fel az eszközöd",
+      "description": "Az eszközöd zárolva van, kérlek old fel"
     },
     "ManagerFirmwareNotEnoughSpace": {
-      "title": "Uninstall all apps from your device",
-      "description": "The private keys providing access to your crypto assets will stay safe on your device és should be backed up on your recovery sheet."
+      "title": "Távolítsd el az összes alkalmazást az eszközödről",
+      "description": "A kripto eszközökhöz hozzáférést biztosító privát kulcsok biztonságban vannak az eszközön, és biztosítva vannak a helyreállítási kártyán."
     },
     "ManagerNotEnoughSpace": {
-      "title": "Sorry, not enough storage left",
-      "description": "Uninstall some apps to make space. The private keys providing access to your crypto assets will stay safe on your device."
+      "title": "Sajnáljuk, nincs elegendő tárhely",
+      "description": "Távolíts el néhány alkalmazást, hogy helyet szabadíts fel. A kripto eszközökhöz hozzáférést biztosító privát kulcsok biztonságban maradnak az eszközön."
     },
     "ManagerUninstallBTCDep": {
-      "title": "Sorry, this app is required",
-      "description": "Uninstall the Bitcoin or Ethereum app last"
+      "title": "Sajnáljuk, ez az alkalmazás szükséges",
+      "description": "A Bitcoin vagy Ethereum alkalmazást utoljára távolítsd el"
     },
     "NetworkDown": {
-      "title": "Oops, internet seems down",
-      "description": "Please check your internet connection"
+      "title": "Hoppá, úgy tűnik, nincs internetkapcsolat",
+      "description": "Kérlek ellenőrizd az internetkapcsolatod"
     },
     "NoAddressesFound": {
-      "title": "Sorry, no accounts found",
-      "description": "Something went wrong with address calculation, try again or contact Ledger Support"
+      "title": "Sajnáljuk, nem található számla",
+      "description": "Valami hiba történt a cím kiszámításakor, próbálkozz újra, vagy lépj kapcsolatba a Ledger ügyféltámogatással"
     },
     "NotEnoughBalance": {
-      "title": "Oops, insufficient balance",
-      "description": "Make sure the account to debit has sufficient balance"
+      "title": "Hoppá, fedezethiány",
+      "description": "Győződj meg róla, hogy a terhelni kívánt számla egyenlege megfelelő"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
+      "title": "A fogadó cím inaktív. Küldj minimum {{minimalAmount}} mennyiséget az aktiválásához"
     },
     "NotEnoughGas": {
-      "title": "ETH balance in parent account insufficient for network fees"
+      "title": "Az ETH főszámla egyenlege nem elegendő a hálózati díjakhoz"
     },
     "PasswordsDontMatch": {
-      "title": "Passwords don't match",
-      "description": "Please try again"
+      "title": "Helytelen jelszó",
+      "description": "Kérlek próbáld újra"
     },
     "PasswordIncorrect": {
-      "title": "The password you entered is incorrect",
-      "description": "Please try again"
+      "title": "A megadott jelszó helytelen",
+      "description": "Kérlek próbáld újra"
     },
     "TimeoutError": {
-      "title": "Oops, a time out occurred",
-      "description": "It took too long for the server to respond, please retry"
+      "title": "Hoppá, időtúllépés történt",
+      "description": "Túl sokáig tartott a szerver válaszolása, kérlek, próbálja újra"
     },
     "TimeoutTagged": {
-      "title": "Oops, a time out occurred ({{tag}})",
-      "description": "It took too long for the server to respond"
+      "title": "Hoppá, időtúllépés történt ({{tag}})",
+      "description": "Túl sokáig tartott a szerver válaszolása"
     },
     "TransportError": {
-      "title": "Something went wrong, please reconnect your device",
+      "title": "Valami hiba történt, kérlek, csatlakoztasd újra az eszközt",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "Something went wrong, please reconnect your device",
+      "title": "Valami hiba történt, kérlek csatlakoztasd újra az eszközt",
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
-      "title": "Please open the {{appName}} app",
-      "description": "Keep the {{appName}} app open while we look for your accounts"
+      "title": "Kérlek nyisd meg a(z) {{appName}} alkalmazást",
+      "description": "Tartsd megnyitva a(z) {{appName}} alkalmazást amíg a számláid keressük"
     },
     "UnexpectedBootloader": {
-      "title": "Oops, your device should not be in Bootloader mode",
-      "description": "Please restart your device or contact us"
+      "title": "Hoppá, eszközödnek nem szabad Bootloader módban lennie",
+      "description": "Kérlek indítsd újra az eszközöd vagy lépj kapcsolatba velünk"
     },
     "UserRefusedAllowManager": {
-      "title": "Manager refused on device"
+      "title": "Az eszközkezelő megtagadta az eszköz használatát"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Update canceled",
-      "description": "Please retry or contact Ledger Support"
+      "title": "A frissítés megszakítva",
+      "description": "Kérlek, próbáld újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
     },
     "UserRefusedOnDevice": {
-      "title": "Transaction refused on device",
-      "description": "Please retry or contact Ledger Support in case of doubt"
+      "title": "A tranzakciót az eszköz visszautasította",
+      "description": "Kétség esetén kérlek, próbáld meg újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálattal"
     },
     "UserRefusedAddress": {
-      "title": "Receive address rejected",
-      "description": "Please try again or contact Ledger Support when in doubt"
+      "title": "A fogadáó cím elutasítva",
+      "description": "Kérlek, próbálkozz újra, vagy kétség esetén vedd fel a kapcsolatot a Ledger ügyféltámogatással"
     },
     "UpdateYourApp": {
-      "title": "App update required",
-      "description": "Uninstall és reinstall the {{managerAppName}} app in the Manager"
+      "title": "Az alkalmazás frissítése szükséges",
+      "description": "Távolítsd el és telepítsd újra a(z) {{managerAppName}} alkalmazást az eszközkezelőben"
     },
     "DeviceOnDashboardExpected": {
-      "title": "Return to Dashboard",
-      "description": "Please navigate back to Dashboard on your device"
+      "title": "Visszatérés a Főoldalra",
+      "description": "Kérlek lépj vissza a Főoldalra az eszközödön"
     },
     "WebsocketConnectionError": {
-      "title": "Sorry, try again (websocket error)",
+      "title": "Sajnáljuk, próbáld újra (websocket error)",
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "Sorry, try again (websocket failed)",
+      "title": "Sajnáljuk, próbáld újra (websocket failed)",
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "Wrong device or passphrase for ‘{{accountName}}’",
-      "description": "Please use the device or passphrase for the selected account"
+      "title": "Rossz eszköz vagy jelszó a(z) ‘{{accountName}}’ számlához",
+      "description": "Kérlek, használd a készüléket vagy a jelszót a kiválasztott számlához"
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "App update required",
-      "description": "Uninstall és reinstall the {{managerAppName}} app in the Manager"
+      "title": "Alkalmazásfrissítés szükséges",
+      "description": "Töröld és telepítsd újra a(z) {{managerAppName}} alkalmazást az eszközkezelőben"
     },
     "InvalidAddress": {
-      "title": "This is not a valid {{currencyName}} address"
+      "title": "Ez nem egy valós {{currencyName}} cím"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Recipient address is the same as the sender address"
+      "title": "A fogadó címe megegyezik a küldő címével"
     },
     "CantOpenDevice": {
-      "title": "Oops, couldn’t connect to device",
-      "description": "Device detected but connection failed. Please try again or contact us if the problem persists."
+      "title": "Hoppá, nem sikerült csatlakozni az eszközhöz",
+      "description": "A készülék észlelhető, de a kapcsolódás sikertelen. Kérlek próbáld újra vagy vedd fel velünk a kapcsolatot ha a probléma továbbra is fennál."
     },
     "ETHAddressNonEIP": {
-      "title": "Auto-verification not available: carefully verify the address",
+      "title": "Az automatikus ellenőrzés nem érhető el: gondosan ellenőrizd a címet",
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
+      "title": "Nem sikerült beolvasni ezt a QR-kódot: az automatikus hitelesítés nem támogatott ennél a címnél"
     },
     "FeeNotLoaded": {
-      "title": "Couldn’t load fee rates, please set manual fees"
+      "title": "Nem sikerült betölteni a díjakat, kérlek állítsd be a díjat manuálisan"
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "Díjak szükségesek"
     },
     "GasLessThanEstimate": {
-      "title": "This may be too low, please increase"
+      "title": "ez lehet, hogy túl alacsony, kérlek, növeld"
     },
     "UnknownMCU": {
-      "title": "Unknown MCU version",
-      "description": "Please contact Ledger Support"
+      "title": "Ismeretlen MCU verzió",
+      "description": "Kérlek lépj kapcsolatba a Ledger ügyféltámogatással"
     },
     "MCUNotGenuineToDashboard": {
-      "title": "Access dashboard to update",
+      "title": "Hozzáférés a főoldalhoz a frissítéshez",
       "description": "",
       "list": {
-        "1": "Disconnect és reconnect the USB cable without pressing any button.",
-        "2": "Press both buttons three times to access the Dashboard.",
-        "3": "Open the Manager és click Update firmware."
+        "1": "Válaszd le és csatlakoztasd újra az USB kábel anélkül, hogy megnyomnál bármilyen gombot.",
+        "2": "Nyomd meg mindkét gombot háromszor hogy hozzáférj a Főoldalhoz.",
+        "3": "Nyisd meg az eszközkezelőt és kattints a szoftver frissítésére."
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive on subaccounts",
-      "description": "If you want to receive funds, please use the parent account"
+      "title": "Nem fogadható az alszámlán",
+      "description": "Ha pénzt szeretnél fogadni, kérlek használd a főszámlát"
     },
     "UnavailableTezosOriginatedAccountSend": {
-      "title": "Cannot send from subaccounts yet",
-      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+      "title": "Az alszámlákról még nem lehet küldeni",
+      "description": "Ez a funkció később lesz hozzáadva a Babylon frissítés által nemrégiben bevezetett változások miatt."
     },
     "RecommendUndelegation": {
-      "title": "Please undelegate account before emptying it"
+      "title": "Kérlek vond vissza a számla átruházását mielőtt kiürítenéd"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Please empty all subaccounts first"
+      "title": "Kérlek előszőr ürítsd ki minden alszámládat"
     },
     "NotSupportedLegacyAddress": {
-      "title": "This legacy address format is no longer supported"
+      "title": "Ez a régi címformátum már nem támogatott"
     },
     "BtcUnmatchedApp": {
-      "title": "That's the wrong app",
-      "description": "Open the ‘{{managerAppName}}’ app on your device"
+      "title": "Ez a rossz alkalmazás",
+      "description": "Nyisd meg a(z) ‘{{managerAppName}}’ alkalmazást az eszközödön"
     },
     "DeviceNameInvalid": {
-      "title": "Please choose a device name without '{{invalidCharacters}}'"
+      "title": "Kérlek, válaszd ki az eszköz nevét '{{invalidCharacters}}' karakterek nélkül"
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
-      "description": "Please retry or contact Ledger Support."
+      "description": "Kérlek, próbáld újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával."
     },
     "ManagerAppRelyOnBTC": {
-      "title": "Bitcoin és Ethereum apps required",
-      "description": "Install the latest Bitcoin és Ethereum apps first."
+      "title": "Bitcoin és Ethereum alkalmazások szükségesek",
+      "description": "Előszőr telepítsd a legfrissebb Bitcoin és Ethereum alkalmazásokat."
     },
     "UserRefusedDeviceNameChange": {
-      "title": "Rename canceled on device",
-      "description": "Try again és allow renaming on your device"
+      "title": "Az átnevezés megszakítva az eszközön",
+      "description": "Próbáld újra, és engedélyezd az eszköz átnevezését"
     },
     "SyncError": {
-      "title": "Synchronization error",
-      "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
+      "title": "Szinkronizáció hiba",
+      "description": "Valami hiba történt a bloklánc szinkronizálásával kapcsolatban.  Kérlek, próbáld újra, vagy vedd fel velünk a kapcsolatot."
     },
     "PairingFailed": {
-      "title": "Pairing unsuccessful",
-      "description": "Please try again or contact Ledger Support when in doubt."
+      "title": "Párosítás sikertelen",
+      "description": "Kérlek, próbálkozz újra, vagy kétség esetén vedd fel a kapcsolatot a Ledger ügyféltámogatással."
     },
     "GenuineCheckFailed": {
-      "title": "Genuine check failed",
-      "description": "Something went wrong. Please try again or contact Ledger Support when in doubt."
+      "title": "Eredetiség ellenőrzése sikertelen",
+      "description": "Valami hiba történt. Kérlek, próbálkozz újra, vagy kétség esetén vedd fel a kapcsolatot a Ledger ügyféltámogatással."
     },
     "EthAppPleaseEnableContractData": {
-      "title": "Please enable contract data in the Ethereum app settings"
+      "title": "Kérlek, engedélyezd a szerződéses adatokat az Ethereum alkalmazás beállításaiban"
     },
     "InvalidXRPTag": {
-      "title": "Invalid XRP Destination tag"
+      "title": "Érvénytelen XRP célcímke"
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "Insufficient balance to delegate"
+      "title": "Nincs elég egyenleg az átruházáshoz"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "Insufficient balance in parent account"
+      "title": "Nem elegendő a fő számla egyenlege"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Insufficient balance for this operation"
+      "title": "Nem elegendő egyenleg ehhez a művelethez"
     },
     "WrongAppForCurrency": {
-      "title": "Please open the {{expected}} app"
+      "title": "Kérlek nyisd meg a(z) {{expected}} alkalmazást"
     },
     "FeeTooHigh": {
-      "title": "Network fees represent more than 10% of the amount"
+      "title": "A hálózati díjak költsége több mint az összeg 10% -át teszik ki"
     }
   }
 }
