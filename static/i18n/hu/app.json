@@ -111,7 +111,7 @@
     "high": "Magas",
     "low": "Alacsony",
     "slow": "Lassú",
-    "stésard": "Alapértelmezett"
+    "standard": "Standard"
   },
   "sidebar": {
     "menu": "Menü",
@@ -129,7 +129,6 @@
     "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
     "tooltip": "Számla csillagozása"
   },
-
   "account": {
     "lastOperations": "Útolsó műveletek",
     "contractAddress": "Szerződés:",
@@ -254,7 +253,7 @@
     "simplex": "Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.",
     "taxtoken": "Automated cryptocurrency tax és cost basis software for US citizens.",
     "thorswap": "ThorSwap is an instant, safe és fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
-    "bitpésa": "Bitpésa is Europe’s leading retail broker for buying és selling Bitcoin, Ethereum, IOTA és many more. Deposit money using your credit card, SOFORT-Transfer, NETELLER, és other options.",
+    "bitpanda": "Bitpanda is Europe’s leading retail broker for buying and selling Bitcoin, Ethereum, IOTA and many more. Deposit money using your credit card, SOFORT-Transfer, NETELLER, and other options.",
     "exmo": "Founded in 2013 és based in London, Kiev, Barcelona, és Moscow, EXMO is #1 exchange in Eastern Europe, és one of the world's largest global exchanges in volume és liquidity.",
     "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure és intuitive platform to buy és sell Bitcoin, Litecoin, Ethereum, XRP és other digital assets. Other key features include advanced trading, free deposits, és an institutional-grade custody solution via Ledger Vault.",
     "voyager": "Love your Crypto Journey with Voyager. A licensed crypto broker with commission-free trading of 20+ cryptocurrencies."
@@ -704,8 +703,8 @@
           "validator": "Érvényesítő",
           "select": "Kiválaszt",
           "yield": "Kb. Hozam {{amount}}",
-          "résomly": "Résomly választott érvényesítő",
-          "termsésPrivacy": "Szavazati jogod kiadása nem garantálja, hogy a érvényesítőd jutalmat fog fizetni neked."
+          "randomly": "Randomly chosen validator",
+          "termsAndPrivacy": "Delegating your voting rights does not guarantee you will be paid any reward by your validator."
         },
         "validator": {
           "title": "Válassz érvényesítőt",
@@ -929,14 +928,14 @@
     "downloadProgress": "{{progress}}% letöltve",
     "checking": "Frissítések ellenőrzése...",
     "checkSuccess": "A frissítés készen áll a telepítésre",
-    "quitésInstall": "Telepítés most",
+    "quitAndInstall": "Install now",
     "error": "Hiba a frissítés során. Kérlek töltsd le újra",
     "reDownload": "Letöltés újra",
     "nightlyWarning": "Ez a verzió nem frissíthető automatikusan, kérlek telepítsd az utolsó verziót manuálisan",
     "downloadNow": "Letöltés most"
   },
   "crash": {
-    "Hoppá": "Hoppá, valami hiba történt",
+    "oops": "Oops, something went wrong",
     "uselessText": "Megpróbálhatod újra újraindítva a Ledger Live-ot. Kérlek exportáld a naplóid,és vedd fel a kapcsolatot a Ledger Supporttal ha a probléma azután is fennáll.",
     "restart": "Újraindítás",
     "support": "Vedd fel a kapcsolatot az ügyfélszolgálattal",
@@ -1139,16 +1138,16 @@
       "shareAnalytics": {
         "title": "Elemzések",
         "desc": "Elemzések engedélyezése, hogy segíts a Ledger-nek a felhasználói élmény fejlesztésében.",
-        "mésatoryContextual": {
-          "item1": "Kattintások",
-          "item2": "Alkalmazáson belüli oldalak megnyitása",
-          "item3": "Átirányítás a weboldalra",
-          "item4": "Műveletek: küldés, fogadás, lezárás, stb.",
-          "item5": "Oldal görgetés vége",
-          "item6": "Alkalmazások telepítése és törlése és verziójuk",
-          "item7": "Számlák mennyisége, kriptók és műveletek",
-          "item8": "A munkamenet teljes időtartama",
-          "item9": "Ledger eszköz típusa és szoftververziója"
+        "mandatoryContextual": {
+          "item1": "Clicks",
+          "item2": "In-app page visits",
+          "item3": "Redirection to webpage",
+          "item4": "Actions: send, receive, lock, etc.",
+          "item5": "End of page scroll",
+          "item6": "App (un)installation and version",
+          "item7": "Number of accounts, crypto assets and operations",
+          "item8": "Overall and page session duration",
+          "item9": "Ledger device type and firmware"
         }
       },
       "sentryLogs": {
@@ -1158,12 +1157,12 @@
       "technicalData": {
         "title": "Technikai adatok*",
         "desc": "A Ledger automatikusan névtelen technikai adatokat gyűjt a felhasználói élmény javításának érdekében.",
-        "mésatoryText": "* mésatory",
-        "mésatoryContextual": {
-          "title": "Technikai adatok",
-          "item1": "Névtelen egyedi alkalmazás-azonosító",
-          "item2": "Ledger Live verzió, nyelv és régió",
-          "item3": "OS verzió, nyelv és régió"
+        "mandatoryText": "* mandatory",
+        "mandatoryContextual": {
+          "title": "Technical data",
+          "item1": "Anonymous unique application ID",
+          "item2": "Ledger Live version, language and region",
+          "item3": "OS version, language and region"
         }
       },
       "terms": {
