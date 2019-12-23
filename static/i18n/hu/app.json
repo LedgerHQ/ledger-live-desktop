@@ -111,7 +111,7 @@
     "high": "Magas",
     "low": "Alacsony",
     "slow": "Lassú",
-    "stésard": "Alapértelmezett"
+    "standard": "Alapértelmezett"
   },
   "sidebar": {
     "menu": "Menü",
@@ -254,7 +254,7 @@
     "simplex": "Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.",
     "taxtoken": "Automated cryptocurrency tax és cost basis software for US citizens.",
     "thorswap": "ThorSwap is an instant, safe és fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
-    "bitpésa": "Bitpésa is Europe’s leading retail broker for buying és selling Bitcoin, Ethereum, IOTA és many more. Deposit money using your credit card, SOFORT-Transfer, NETELLER, és other options.",
+    "bitpanda": "Bitpésa is Europe’s leading retail broker for buying és selling Bitcoin, Ethereum, IOTA és many more. Deposit money using your credit card, SOFORT-Transfer, NETELLER, és other options.",
     "exmo": "Founded in 2013 és based in London, Kiev, Barcelona, és Moscow, EXMO is #1 exchange in Eastern Europe, és one of the world's largest global exchanges in volume és liquidity.",
     "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure és intuitive platform to buy és sell Bitcoin, Litecoin, Ethereum, XRP és other digital assets. Other key features include advanced trading, free deposits, és an institutional-grade custody solution via Ledger Vault.",
     "voyager": "Love your Crypto Journey with Voyager. A licensed crypto broker with commission-free trading of 20+ cryptocurrencies."
@@ -704,7 +704,7 @@
           "validator": "Érvényesítő",
           "select": "Kiválaszt",
           "yield": "Kb. Hozam {{amount}}",
-          "résomly": "Résomly választott érvényesítő",
+          "randomly": "Résomly választott érvényesítő",
           "termsésPrivacy": "Szavazati jogod kiadása nem garantálja, hogy a érvényesítőd jutalmat fog fizetni neked."
         },
         "validator": {
@@ -929,14 +929,14 @@
     "downloadProgress": "{{progress}}% letöltve",
     "checking": "Frissítések ellenőrzése...",
     "checkSuccess": "A frissítés készen áll a telepítésre",
-    "quitésInstall": "Telepítés most",
+    "quitAndInstall": "Telepítés most",
     "error": "Hiba a frissítés során. Kérlek töltsd le újra",
     "reDownload": "Letöltés újra",
     "nightlyWarning": "Ez a verzió nem frissíthető automatikusan, kérlek telepítsd az utolsó verziót manuálisan",
     "downloadNow": "Letöltés most"
   },
   "crash": {
-    "Hoppá": "Hoppá, valami hiba történt",
+    "oops": "Hoppá, valami hiba történt",
     "uselessText": "Megpróbálhatod újra újraindítva a Ledger Live-ot. Kérlek exportáld a naplóid,és vedd fel a kapcsolatot a Ledger Supporttal ha a probléma azután is fennáll.",
     "restart": "Újraindítás",
     "support": "Vedd fel a kapcsolatot az ügyfélszolgálattal",
@@ -1139,7 +1139,7 @@
       "shareAnalytics": {
         "title": "Elemzések",
         "desc": "Elemzések engedélyezése, hogy segíts a Ledger-nek a felhasználói élmény fejlesztésében.",
-        "mésatoryContextual": {
+        "mandatoryContextual": {
           "item1": "Kattintások",
           "item2": "Alkalmazáson belüli oldalak megnyitása",
           "item3": "Átirányítás a weboldalra",
@@ -1158,7 +1158,7 @@
       "technicalData": {
         "title": "Technikai adatok*",
         "desc": "A Ledger automatikusan névtelen technikai adatokat gyűjt a felhasználói élmény javításának érdekében.",
-        "mésatoryText": "* mésatory",
+        "mandatoryText": "* mésatory",
         "mésatoryContextual": {
           "title": "Technikai adatok",
           "item1": "Névtelen egyedi alkalmazás-azonosító",
