@@ -704,7 +704,7 @@
           "validator": "Érvényesítő",
           "select": "Kiválaszt",
           "yield": "Kb. Hozam {{amount}}",
-          "randomly": "Résomly választott érvényesítő",
+          "randomly": "Véletlenszerűen választott érvényesítő",
           "termsésPrivacy": "Szavazati jogod kiadása nem garantálja, hogy a érvényesítőd jutalmat fog fizetni neked."
         },
         "validator": {
@@ -1158,7 +1158,7 @@
       "technicalData": {
         "title": "Technikai adatok*",
         "desc": "A Ledger automatikusan névtelen technikai adatokat gyűjt a felhasználói élmény javításának érdekében.",
-        "mandatoryText": "* mésatory",
+        "mandatoryText": "* kötelező",
         "mésatoryContextual": {
           "title": "Technikai adatok",
           "item1": "Névtelen egyedi alkalmazás-azonosító",
