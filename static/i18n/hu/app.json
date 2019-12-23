@@ -1000,7 +1000,7 @@
       }
     },
     "selectDevice": {
-      "title": "Válaszd ki az eszközöd
+      "title": "Válaszd ki az eszközöd",
       "usbOnly": "csak usb",
       "usbOnlyTooltip": "A Ledger Live asztali verziója jelenleg nem támogatja a Bluetooth-ot"
     },
