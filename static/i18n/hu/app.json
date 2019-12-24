@@ -840,35 +840,35 @@
       "desc": "Alkalmazás információk, Felhasználási feltételek, és Adatvédelmi irányelvek."
     },
     "help": {
-      "desc": "Tudj meg többet Ledger Liveról, vagy kapj segítséget.",
+      "desc": "Tudj meg többet a Ledger Live-ról, vagy kapj segítséget.",
       "version": "Verzió",
       "releaseNotesBtn": "Részletek",
       "faq": "Ledger Támogatás",
       "faqDesc": "Problémád akadt? Kapj segítséget a Ledger Live, és a hardware pénztárcáddal kapcsolatban.",
       "terms": "Felhasználási feltételek",
-      "termsDesc": "A Ledger Live használatával elfogadtad a felhasználási feltételeinket.",
+      "termsDesc": "A Ledger Live használatával elfogadod a felhasználási feltételeinket.",
       "privacy": "Adatvédelmi irányelvek",
-      "privacyDesc": "Nézd meg adatvédelmi irányelveinket, hogy megtudd, milyen személyes adatokat gyűjtünk, miért és hogyan használjuk őket."
+      "privacyDesc": "Tekintsd meg adatvédelmi irányelveinket, hogy megtudd, milyen személyes adatokat gyűjtünk, miért, és hogyan használjuk őket."
     },
     "experimental": {
       "desc": "Próbáld ki kísérleti funkcióinkat, és tudasd velünk, hogy mit gondolsz róluk",
-      "disclaimer": "Ezek kísérleti funkciók „elengedhetetlen” alapon biztosítjuk a tech hozzáértésű közösség tesztelését. Ezek változhatnak, szünetelhetnek, vagy megszűnhetnek bármikor. Ezek engedélyezésével, elfogadod, hogy saját felelősségre használod őket."
+      "disclaimer": "Ezek kísérleti funkciók, melyekhez „elengedhetetlenül” biztosítjuk a tech hozzáértésű közösségünk tesztelését. Ezek változhatnak, szünetelhetnek, vagy megszűnhetnek bármikor. Ezek engedélyezésével, elfogadod, hogy saját felelősségre használod őket."
     },
     "hardResetModal": {
       "title": "Ledger Live alaphelyzetbe állítása",
-      "desc": "Töröli a számítógépen tárolt összes Ledger Live adatot, beleértve számláid, tranzakciód történeted és beállításaid! A privát kulcsaid hozzáférést biztosítanak kriptóidhoz, tartsd őket biztonságban a Ledger eszközödön, és a visszaállítási kártyádon."
+      "desc": "Töröli a számítógépen tárolt összes Ledger Live adatot, beleértve számláid, tranzakciós történeteid és beállításaid! A privát kulcsaid hozzáférést biztosítanak kriptóidhoz, tartsd őket biztonságban a Ledger eszközödön, és a visszaállítási kártyádon."
     },
     "softResetModal": {
       "title": "Sütik törlése",
-      "desc": "A sütik törlése a hálózatot újraszinkronizálásra kényszeríti. A beállításaid és a számláid megmaradnak. A privát kulcsaid hozzáférést biztosítanak a kriptóidhoz biztonságban tartva őket a Ledger eszközödön, és a visszaállítási kártyádon."
+      "desc": "A sütik törlése a hálózatot újraszinkronizálásra kényszeríti. A beállításaid és a számláid megmaradnak. A privát kulcsaid hozzáférést biztosítanak a kriptovalutáidhoz biztonságban tartva őket a Ledger eszközödön, és a visszaállítási kártyádon."
     },
     "resetFallbackModal": {
-      "title": "Felhasználói művelet szükséges",
-      "part1": "Süütik mappa nem törölhető. Kérlek töröld a mappát manuálisan:",
-      "part2": "Kattints a mappa megnyitása gombra, az",
-      "part3": "alkalmazás be lesz zárva",
+      "title": "Felhasználói beavatkozás szükséges",
+      "part1": "Sütik mappa nem törölhető. Kérlek töröld a mappát manuálisan:",
+      "part2": "Kattints a mappa megnyitása gombra, a(z) ",
+      "part3": "az alkalmazás be lesz zárva",
       "part4": ", és manuálisan törli a \"sqlite\" mappát.",
-      "part5": "Ezután újra tudod indítani az alkalmazást a szokott módon."
+      "part5": "Ezután újra tudod indítani az alkalmazást a megszokott módon."
     },
     "removeAccountModal": {
       "title": "Számla eltávolítása",
