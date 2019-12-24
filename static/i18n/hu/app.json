@@ -475,11 +475,11 @@
         "confirmTurnOff": "Nyomj rá a {{action}} -ra a megerősítéshez.",
         "second": "2. Bootolás {{mode}} módban",
         "boot": "Nyomd meg, és tartsd lenyomva az oldalsó gombot míg a(z) {{option}} meg nem jelenik",
-        "recoveryMode": "Nyomj rá a {{mode}} módra. Várj, míg az irányítópult megjelenik.",
+        "recoveryMode": "Nyomj rá a {{mode}} módra. Várj, míg a főképernyő megjelenik.",
         "third": "3. Minden alkalmazás törlése",
-        "openLive": "Eszközkezelő megnyitása a Ledger Live-ban.",
-        "uninstall": "Kattints a szürke kuka ikonra minden jelenleg telepített alkalmazás törléséhez a {{deviceName}} eszközön. Ez helyet csinál a szoftverfrissítés számára.",
-        "disclaimer": "Megjegyzés: Ez a művelet nem érinti az rajtuk tárolt pénzed, a privát kulcsod, amivel hozzáférsz a kriptóidhoz a blokkláncon, biztonságban maradnak a helyreállítási kártyádon."
+        "openLive": "Nyisd meg az Eszközkezelőt a Ledger Live-ban.",
+        "uninstall": "Kattints a szürke kuka ikonra minden jelenleg telepített alkalmazás törléséhez a {{deviceName}} eszközön. Ez tárhelyet szabadít fel a szoftverfrissítés számára.",
+        "disclaimer": "Megjegyzés: Ez a művelet nem érinti az rajtuk tárolt pénzed, a privát kulcsaid, melyekkel hozzáférsz a kriptóidhoz a blokkláncon, biztonságban maradnak a helyreállítási kártyádon."
       }
     },
     "title": "Eszközkezelő",
@@ -496,13 +496,13 @@
       "chooseAccount": {
         "title": "Számla",
         "label": "Számla a jóváírásra",
-        "parentAccount": "1. Válaszd ki a {{currencyName}} számlát",
+        "parentAccount": "1. Válassz ki egy {{currencyName}} számlát",
         "token": "2. Válassz egy tokent"
       },
       "connectDevice": {
         "title": "Eszköz",
         "withoutDevice": "Nincs nálad az eszközöd?",
-        "tokensTip": "* Nyisd meg a {{currency}} alkalmazást a {{token}} token kezeléséhez"
+        "tokensTip": "* Nyisd meg a(z) {{currency}} alkalmazást a {{token}} token kezeléséhez"
       },
       "confirmAddress": {
         "title": "Jóváhagyás",
