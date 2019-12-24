@@ -25,7 +25,7 @@
     "selectExchange": "Válassz egy váltót",
     "selectExchangeNoOption": "Nincs egyező váltó {{exchangeName}}",
     "selectExchangeNoOptionAtAll": "Váltó nem található",
-    "sortBy": "Rendezés",
+    "sortBy": "Rendezési szempont",
     "search": "Keresés",
     "save": "Mentés",
     "lock": "Lezár",
@@ -38,7 +38,7 @@
     "range": "Időszak",
     "stop": "Állj",
     "updateNow": "Frissítés most",
-    "close": "Bezárás",
+    "close": "Bezár",
     "eastern": "Keleti",
     "western": "Nyugati",
     "reverify": "Újra megerősít",
@@ -63,7 +63,7 @@
       "upToDate": "Szinkronizálva",
       "outdated": "Szünetel",
       "needsMigration": "Kattints a számlád frissítéséhez",
-      "error": "Szinkronizáció hiba",
+      "error": "Szinkronizálási hiba",
       "refresh": "Frissítés",
       "ago": "Szinkronizálva {{time}}"
     }
@@ -94,9 +94,9 @@
     "hour": "Óra",
     "hour_plural": "Órák",
     "range": {
-      "week": "1Hét",
-      "month": "1Hónap",
-      "year": "1É"
+      "week": "1 Hét",
+      "month": "1 Hónap",
+      "year": "1 Év"
     },
     "since": {
       "day": "Múlt nap",
@@ -130,7 +130,7 @@
     "tooltip": "Számla csillagozása"
   },
   "account": {
-    "lastOperations": "Útolsó műveletek",
+    "lastOperations": "Legutóbbi műveletek",
     "contractAddress": "Szerződés:",
     "openInExplorer": "Megnyitás felfedezőben",
     "emptyState": {
@@ -260,7 +260,7 @@
   },
   "genuinecheck": {
     "modal": {
-      "title": "Eredetiség vizsgálat"
+      "title": "Eredetiség ellenőrzés"
     },
     "deviceInBootloader": "Az eszközöd Bootloader módban van. Kattints {{button}} hogy frissítsd."
   },
