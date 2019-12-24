@@ -807,7 +807,7 @@
     "rates": {
       "desc": "Itt található az összes arány, amelyet az ellenérték kiszámításához használnak.\nVálaszd ki, hogy melyik tarifa szolgáltatót használja az egyes tarifákhoz.",
       "fromTo": "Innen {{from}} ide {{to}}",
-      "noCounterValue": "Nincs adat erről a kereskedési párról",
+      "noCounterValue": "Nincs adat ehhez a kereskedési párhoz",
       "cryptoToFiat": "Kripto fiatra",
       "cryptoToCrypto": "Kripto Kriptóra",
       "rate": "Mérték",
@@ -818,23 +818,23 @@
     "profile": {
       "password": "Kóddal történő lezárás",
       "passwordDesc": "Állíts be jelszót az illetéktelen hozzáférés megakadályozása érdekében a Ledger Live-ban a számítógépedben tárolt adataidhoz, beleértve a számla neveket, egyenlegeket, tranzakciókat és nyilvános címeket.",
-      "passwordAutoLock": "Autómatikus lezárás",
-      "passwordAutoLockDesc": "Ledger Live automatikus zárolása inaktivitás után.",
+      "passwordAutoLock": "Automatikus lezárás",
+      "passwordAutoLockDesc": "Ledger Live automatikus zárolása ennyi inaktivitás után.",
       "changePassword": "Jelszó megváltoztatása",
       "softResetTitle": "Sütik törlése",
-      "softResetDesc": "Ledger Live sütik törlése a blokkláncal való szinkronizálás kényszerítésének érdekében.",
+      "softResetDesc": "Ledger Live sütik törlése a blokklánccal való szinkronizálás kényszerítésének érdekében.",
       "softReset": "Törlés",
-      "hardResetTitle": "Ledger Live alapértelmezések beállítása",
+      "hardResetTitle": "Ledger Live alaphelyzetbe állítása",
       "hardResetDesc": "Minden Ledger Live számítógépen tárolt adatának törlése, beleértve a számláidat, tranzakciótörténeteket és beállításokat.",
-      "hardReset": "Alapértelmezések beállítása",
+      "hardReset": "Alaphelyzetbe állítás",
       "developerMode": "Fejlesztői mód",
       "developerModeDesc": "Fejlesztői és testnet alkalmazások mutatása az Eszközkezelőben.",
       "analytics": "Elemzések",
-      "analyticsDesc": "Elemzések engedélyezése a Ledger számára hogy fejleszteni tudja a felhasználói élémnyed. Ideértve a kattintásokat, megnyitott oldalakat, átirányításokat, tevékenységeket (küldés, fogadás, lezárás, stb.), az oldal görgetések végét, alkalmazások telepítését/törlését, alkalmazás verziókat, számlák mennyiségét, kriptokat, és a velük folytatott műveleteket,munkamenet időtartamokat, Ledger eszköz típusa, és szoftververziója.",
+      "analyticsDesc": "Elemzések engedélyezése a Ledger számára, hogy fejleszteni tudja a felhasználói élményt. Ideértve a kattintásokat, megnyitott oldalakat, átirányításokat, tevékenységeket (küldés, fogadás, lezárás, stb.), az oldalgörgetések végét, alkalmazások telepítését/törlését, alkalmazás verziókat, számlák mennyiségét, kriptovalutákat, és a velük folytatott műveleteket, munkamenet időtartamokat, Ledger eszköz típusa, és szoftververziója.",
       "reportErrors": "Hibajelentések",
       "reportErrorsDesc": "Automatikusan elküldi a hibák jelentéseit, hogy segítsen kijavítani őket a Ledgernek.",
-      "launchOnboarding": "Az eszköz beállítása",
-      "launchOnboardingDesc": "Beállítás új vagy helyreállítási Ledger eszközként. Számlákat és beállításokat megtartja."
+      "launchOnboarding": "Eszköz beállítása",
+      "launchOnboardingDesc": "Beállítás új, vagy helyreállítási Ledger eszközként. Számlák és beállítások megmaradnak."
     },
     "about": {
       "desc": "Alkalmazás információk, Felhasználási feltételek, és Adatvédelmi irányelvek."
