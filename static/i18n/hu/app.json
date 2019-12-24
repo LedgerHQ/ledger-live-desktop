@@ -21,9 +21,9 @@
     "selectAccount": "Válassz ki egy számlát",
     "selectAccountNoOption": "Nincs megfelelő számla \"{{accountName}}\"",
     "selectCurrency": "Válassz egy Kriptovalutát",
-    "selectCurrencyNoOption": "No crypto asset \"{{currencyName}}\"",
+    "selectCurrencyNoOption": "Nincsenek kriptovaluták {{currencyName}}",
     "selectExchange": "Válassz egy váltót",
-    "selectExchangeNoOption": "No exchange matching \"{{exchangeName}}\"",
+    "selectExchangeNoOption": "Nincs egyező váltó {{exchangeName}}",
     "selectExchangeNoOptionAtAll": "Váltó nem található",
     "sortBy": "Rendezés",
     "search": "Keresés",
@@ -35,7 +35,7 @@
     "back": "Vissza",
     "reset": "Visszaállítás",
     "retry": "Újra",
-    "range": "Range",
+    "range": "Időszak",
     "stop": "Állj",
     "updateNow": "Frissítés most",
     "close": "Bezárás",
@@ -72,8 +72,8 @@
     "type": {
       "IN": "Fogadott",
       "OUT": "Küldött",
-      "CREATE": "Elkészített",
-      "REVEAL": "Feltárt",
+      "CREATE": "Készítve",
+      "REVEAL": "Feltárva",
       "DELEGATE": "Delegated",
       "UNDELEGATE": "Undelegated"
     }
@@ -94,9 +94,9 @@
     "hour": "Óra",
     "hour_plural": "Órák",
     "range": {
-      "week": "1 Hét",
-      "month": "1 Hónap",
-      "year": "1 Év"
+      "week": "1Hét",
+      "month": "1Hónap",
+      "year": "1É"
     },
     "since": {
       "day": "Múlt nap",
@@ -126,7 +126,7 @@
     }
   },
   "stars": {
-    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0> Számlák </0></1> oldal innentől itt fog megjelenni!",
     "tooltip": "Számla csillagozása"
   },
   "account": {
@@ -243,24 +243,24 @@
     "changenow": "ChangeNOW egyike a vezető letét mentes azonnali váltó szolgáltatóknak.",
     "coinberry": "Coinberry a legmegbízhatóbb kriptoplatform Kanadában a bankoknál nagyobb biztonsággal, első osztályú felhasználói felülettel és díjmentes finanszírozással & kiküldéssel. Regisztálj elő, hogy korai hozzáférést szerezz a platformunkhoz ha nem vagy Kanadai állampolgár.",
     "coinhouse": "Coinhouse egy megbízható platform az egyéni, és társasági befektetőknek akik eladni, és biztonságosan szeretnék tárólni kriptójukat.",
-    "coinmama": "A Coinmama egy pénzügyi szolgáltatás, amely gyorsan, biztonságosan és szórakoztatóan teszi lehetővé digitális eszközök vásárlását a világ bármely pontján.",
-    "crypto": "A Crypto.com a legjobb hely kriptovaluták vásárlására, eladására, nyomon követéshez és a velük történő fizetéshez.",
-    "genesis": "A Genesis egy olyan intézményi kereskedelmi vállalkozás, amely likviditást és kölcsönfelvételt kínál digitális valutákhoz, beleértve a bitcoint, a bitcoin casht, az ethereumot, az ethereum classicot, a litecoint és az XRP-t..",
-    "kyberswap": "Gyors, egyszerű és biztonságos token-csereplatform. A Kyber Network lánc-likviditási protokollján alapulva..",
-    "luno": "A Luno biztonságossá és egyszerűvé teszi a kriptovaluták, mint például a Bitcoin és Ethereum vásárlását, tárolását és megismerését.",
-    "paybis": "Paybis.com egyike a legmegbízhatóbb kriptovaluta brókereknek világszerte 2014 óta. Ügyfélelégedettségi mutatónk 4.7/5 a Trustpilot adatai szerint. Visa/Mastercard kártyákat, banki utalásokat Skrill/Neteller szolgáltatókat is elfogadunk. 24/7 online ügyfélszolgálati támogatás..",
-    "shapeshift": "A ShapeShift egy online piac, ahol a felhasználók digitális eszközöket vásárolhatnak és adhatnak el. Ez gyors és biztonságos módja a digitális eszközök vásárlására és eladására világszerte, hosszú regisztrációs folyamat, partneri kockázat, és súrlódás nélkül..",
-    "simplex": A Simplex egy EU engedéllyel rendelkező pénzügyi intézmény, amely csalásmentes hitelkártya-fizetési megoldást kínál.",
-    "taxtoken": "Automatizált kriptovaluta adó és költség alapú szoftver amerikai állampolgárok számára..",
-    "thorswap": "A ThorSwap azonnali, biztonságos és tisztességes kriptoeszköz-piac, amelyet decentralizált atomswap-technológia működtet. Ez a legkényelmesebb módja a kereskedés megkezdésének, regisztráció nélkül, akár kis összegű KYC tranzakciók esetére.",
+    "coinmama": "Coinmama is a financial service that makes it fast, safe és fun to buy digital assets, anywhere in the world.",
+    "crypto": "Crypto.com is the best place to buy, sell, track és pay with crypto.",
+    "genesis": "Genesis is an institutional trading firm offering liquidity és borrow for digital currencies, including bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin, és XRP.",
+    "kyberswap": "Fast, simple és secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
+    "luno": "Luno makes it safe és easy to buy, store és learn about cryptocurrencies like Bitcoin és Ethereum.",
+    "paybis": "Paybis.com egyike a legmegbízhatóbb kriptovaluta brókereknek világszerte 2014 óta. Ügyfélelégedettségi mutatónk 4.7/5 a Trustpilot adatai szerint. Visa/Mastercard kártyákat, banki utalásokat Skrill/Neteller szolgáltatókat is elfogadunk. 24/7 online ügyfélszolgálati támogatás.",
+    "shapeshift": "ShapeShift is an online marketplace where users can buy és sell digital assets. It is a fast és secure way for the world to buy és sell digital assets, with no lengthy signup process, no counterparty risk, és no friction.",
+    "simplex": "A Simplex egy uniós engedéllyel rendelkező pénzügyi intézmény, amely csalásmentes hitelkártya-fizetési megoldást kínál.",
+    "taxtoken": "Automated cryptocurrency tax és cost basis software for US citizens.",
+    "thorswap": "ThorSwap is an instant, safe és fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
     "bitpanda": "A Bitpanda Európa vezető kiskereskedelmi brókere a Bitcoin, az Ethereum, az IOTA és még sok más vásárlására és eladására. Fizessen be pénzt hitelkártyájával, SOFORT-utalással, NETELLER és egyéb lehetőségekkel.",
-    "exmo": "A 2013-ban alapított, Londonban, Kijevben, Barcelonában és Moszkvában is székhellyel rendelkező EXMO Kelet-Európában az első számú tőzsde, és a világ egyik legnagyobb globális tőzsdéje kereskedési mennyiség, és likviditás szempontjából.",
-    "ndax": "Kanadai vezető kriptovaluta-váltója, az NDAX szabályozott, biztonságos és intuitív platformot kínál a Bitcoin, Litecoin, Ethereum, XRP és más digitális eszközök vásárlására és eladására. További kulcsfontosságú funkcióki közé tartozik a fejlett kereskedelem, a szabad betétek és az intézményi szintű letéti megoldás a Ledger tárcákon keresztül.",
-    "voyager": "Szeresd a Kripto Utazást a Voyager segítségével. Engedéllyel rendelkező kripto bróker 20+ kriptovaluta jutalék nélküli kereskedelmével."
+    "exmo": "Founded in 2013 és based in London, Kiev, Barcelona, és Moscow, EXMO is #1 exchange in Eastern Europe, és one of the world's largest global exchanges in volume és liquidity.",
+    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure és intuitive platform to buy és sell Bitcoin, Litecoin, Ethereum, XRP és other digital assets. Other key features include advanced trading, free deposits, és an institutional-grade custody solution via Ledger Vault.",
+    "voyager": "Élvezd a Kripto Utazást a Voyager segítségével. Engedéllyel rendelkező kripto bróker 20+ kriptovaluta jutalék nélküli kereskedelmével."
   },
   "genuinecheck": {
     "modal": {
-      "title": "Eredetiség ellenőrzése"
+      "title": "Eredetiség vizsgálat"
     },
     "deviceInBootloader": "Az eszközöd Bootloader módban van. Kattints {{button}} hogy frissítsd."
   },
@@ -703,8 +703,8 @@
           "validator": "Érvényesítő",
           "select": "Kiválaszt",
           "yield": "Kb. Hozam {{amount}}",
-          "randomly": "Véletlenszerűen választott érvényesítő",
-          "termsAndPrivacy": "Szavazati jogod kiadása nem garantálja, hogy a hitelesítő jutalmat fog fizetni neked."
+          "randomly": "Véletlenszerűen választott hitelesítő",
+          "termsAndPrivacy": "A szavazati jogod átruházása nem garantálja, hogy bármilyen kifizetésben részesülsz a megerősítődtől."
         },
         "validator": {
           "title": "Válassz érvényesítőt",
@@ -808,8 +808,8 @@
       "desc": "Itt található az összes arány, amelyet az ellenérték kiszámításához használnak.\nVálaszd ki, hogy melyik tarifa szolgáltatót használja az egyes tarifákhoz.",
       "fromTo": "Innen {{from}} ide {{to}}",
       "noCounterValue": "Nincs adat erről a kereskedési párról",
-      "cryptoToFiat": "Crypto to fiat",
-      "cryptoToCrypto": "Crypto to Crypto",
+      "cryptoToFiat": "Kripto fiatra",
+      "cryptoToCrypto": "Kripto Kriptóra",
       "rate": "Mérték",
       "last": "Utolsó {{days}} nap",
       "price": "Ár",
@@ -1140,13 +1140,13 @@
         "desc": "Elemzések engedélyezése, hogy segíts a Ledger-nek a felhasználói élmény fejlesztésében.",
         "mandatoryContextual": {
           "item1": "Kattintások",
-          "item2": "Alkalmazáson belüli oldalak megnyitása",
-          "item3": "Átirányítás a weboldalra",
+          "item2": "Alkalmazáson belüli oldallátogatások",
+          "item3": "Átirányítás weboldalra",
           "item4": "Műveletek: küldés, fogadás, lezárás, stb.",
-          "item5": "Oldal görgetés vége",
-          "item6": "Alkalmazások telepítése, törlése és verziója",
-          "item7": "Számlák mennyisége, kriptók és műveletek",
-          "item8": "A munkamenet teljes időtartama",
+          "item5": "Oldalgörgetés vége",
+          "item6": "Alkalmazások telepítése, törlése, és verziója",
+          "item7": "Számlák mennyisége, kriptovaluták és műveletek",
+          "item8": "Összefoglaló és oldalmegnyitások időtartama",
           "item9": "Ledger eszköz típusa és szoftververziója"
         }
       },
@@ -1160,9 +1160,9 @@
         "mandatoryText": "* kötelező",
         "mandatoryContextual": {
           "title": "Technikai adatok",
-          "item1": "Névtelen egyedi alkalmazás-azonosító",
-          "item2": "Ledger Live verzió, nyelv és régió",
-          "item3": "Operációs rendszer verziója, nyelve és régió"
+          "item1": "Névtelen egyedi alkalmazás azonosító",
+          "item2": "Ledger Live verziója, nyelve, és régiója",
+          "item3": "Operációs rendszer verziója, nyelve, és régiója"
         }
       },
       "terms": {
