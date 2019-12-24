@@ -726,7 +726,7 @@
           "success": {
             "title": "Delegálás elküldve",
             "titleUndelegated": "A művelet elküldve",
-            "text": "Az átruházási tranzakció sikeresen kiküldve. Körülbelül 40 napon belül kell megszereznie első jutalmait, az érvényesítőtől függően.",
+            "text": "A delegálási tranzakció sikeresen kiküldve. Körülbelül 40 napon belül kell megszerezned első jutalmaid, a megerősítőtől függően.",
             "textUndelegated": "Fiókod átruházása akkor fejeződik be, amikor a művelet megerősítésre kerül. A számlád bármikor újra átruházhatod."
           },
           "pending": {
@@ -737,13 +737,13 @@
       }
     },
     "banner": {
-      "title": "Kaplj jutalmakat",
-      "text": "Tezos tárolási jutalmakat érhetsz el számlád átruházásával"
+      "title": "Kapj jutalmakat",
+      "text": "Tezos tárolási jutalmakat érhetsz el számlád delegálásával"
     },
     "contextMenu": {
       "topUp": "Fogadj többet",
       "redelegate": "Érvényesítő cseréje",
-      "stopDelegation": "Átruházás befejezése"
+      "stopDelegation": "Delegálás befejezése"
     }
   },
   "asset": {
@@ -753,9 +753,9 @@
     "title": "Beállítások",
     "tabs": {
       "display": "Általános",
-      "cryptoAssets": "Kriptók",
-      "currencies": "Kriptók",
-      "rates": "Árak",
+      "cryptoAssets": "Kriptovaluták",
+      "currencies": "Kriptovaluták",
+      "rates": "Arányok",
       "help": "Segítség",
       "about": "Rólunk",
       "experimental": "Kísérleti funkciók",
@@ -776,17 +776,17 @@
         "button": "Kész",
         "title": "Olvasd be a mobilra torténő exportáláshoz",
         "listTitle": "A Ledger Live mobilalkalmazásban:",
-        "step1": "Nyomd meg a <1><0>+</0></1> gombot a <3><0>Accounts</0></3> számlánál",
-        "step2": "Nyomd meg, hogy <1><0>Importáld asztali számláid</0></1>",
-        "step3": "Olvasd be a <1><0>LiveQR code</0></1> QR kódot, míg a számláló el nem éri a 100%-ot"
+        "step1": "Nyomj a <1><0>+</0></1> gombra a <3><0>Számlák</0></3> menüpontban",
+        "step2": "Nyomj az <1><0>Asztali számlák importálására</0></1>",
+        "step3": "Olvasd be a <1><0>LiveQR-kódot</0></1>, míg a számláló el nem éri a 100%-ot"
       }
     },
     "display": {
-      "desc": "Általános Ledger Live beállítások.",
+      "desc": "Általános Ledger Live beállítások konfigurálása.",
       "language": "Megjelenítés nyelve",
-      "languageDesc": "Állítsd be a Ledger Live-ban kívánt megjelenítési nyelvet.",
+      "languageDesc": "Állítsd be a Ledger Live-ban megjeleníteni kívánt nyelvet.",
       "theme": "Téma",
-      "themeDesc": "Válaszd ki a témát.",
+      "themeDesc": "Téma kiválasztása.",
       "counterValue": "Ellenérték",
       "counterValueDesc": "Válaszd ki a megjeleníteni kívánt valutát az egyenlegeid, és műveleteid számára.",
       "exchange": "Ár szolgáltató",
