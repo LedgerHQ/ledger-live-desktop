@@ -434,8 +434,8 @@
       "latest": "{{version}} Szoftververzió elérhető",
       "prepareSeed": "Óvintézkedésként bizonyosodj meg róla, hogy a 24 szó ami a visszaállításhoz szükséges le van írva a visszaállítási kártyádra és hozzáférhető.",
       "disclaimerTitle": "Telepíteni készülsz a <1>szoftververziót {{version}}</1>.",
-      "disclaimerAppDelete": "Minden alkalmazást törölj az eszközödről. Ez a lépés nem érinti a rajta tárolt kriptókat.",
-      "disclaimerAppReinstall": "Ügyelj arra, hogy a helyreállítási kártya hozzáférhető legyen, elővigyázatosságból.",
+      "disclaimerAppDelete": "Töröld az összes alkalmazást az eszközödről. Ez a lépés nem érinti a rajta tárolt kriptókat.",
+      "disclaimerAppReinstall": "Ügyelj arra, hogy óvintézkedésként a helyreállítási kártyád hozzáférhető legyen.",
       "downloadingUpdateDesc": "Kérlek várj, míg a frissítő telepítője letöltésre kerül",
       "appsAutoUninstallTitle": "Minden alkalmazás törölve lesz az eszközödről",
       "appsAutoUninstallBullet1": "<0><0>Ne aggódj</0></0>, ez nem érinti a rajta található kriptókat",
@@ -446,12 +446,12 @@
     "modal": {
       "steps": {
         "downloadingUpdate": "Frissítés letöltése",
-        "updateMCU": "Szoftver frissítése",
+        "updateMCU": "Szoftverfrissítés",
         "reset": "Eszköz előkészítése",
         "osu": "OSU telepítése...",
         "flash-mcu": "MCU frissítése...",
         "flash-bootloader": "Bootloader frissítése...",
-        "firmware": "Szoftver telepítése...",
+        "firmware": "Szoftver frissítése...",
         "flash": "Eszköz előkészítése..."
       },
       "confirmIdentifier": "Azonosító ellenőrzése",
