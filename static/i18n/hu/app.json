@@ -21,9 +21,9 @@
     "selectAccount": "Válassz ki egy számlát",
     "selectAccountNoOption": "Nincs megfelelő számla \"{{accountName}}\"",
     "selectCurrency": "Válassz egy Kriptovalutát",
-    "selectCurrencyNoOption": "No crypto asset \"{{currencyName}}\"",
+    "selectCurrencyNoOption": "Nincsenek kriptovaluták {{currencyName}}",
     "selectExchange": "Válassz egy váltót",
-    "selectExchangeNoOption": "No exchange matching \"{{exchangeName}}\"",
+    "selectExchangeNoOption": "Nincs egyező váltó {{exchangeName}}",
     "selectExchangeNoOptionAtAll": "Váltó nem található",
     "sortBy": "Rendezés",
     "search": "Keresés",
@@ -35,7 +35,7 @@
     "back": "Vissza",
     "reset": "Visszaállítás",
     "retry": "Újra",
-    "range": "Range",
+    "range": "Időszak",
     "stop": "Állj",
     "updateNow": "Frissítés most",
     "close": "Bezárás",
@@ -111,7 +111,7 @@
     "high": "Magas",
     "low": "Alacsony",
     "slow": "Lassú",
-    "standard": "Standard"
+    "standard": "Általános"
   },
   "sidebar": {
     "menu": "Menü",
@@ -126,7 +126,7 @@
     }
   },
   "stars": {
-    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0> Számlák </0></1> oldal innentől itt fog megjelenni!",
     "tooltip": "Számla csillagozása"
   },
   "account": {
@@ -248,15 +248,15 @@
     "genesis": "Genesis is an institutional trading firm offering liquidity és borrow for digital currencies, including bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin, és XRP.",
     "kyberswap": "Fast, simple és secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
     "luno": "Luno makes it safe és easy to buy, store és learn about cryptocurrencies like Bitcoin és Ethereum.",
-    "paybis": "Paybis.com is one of the most trusted cryptocurrency brokers worldwide since 2014, customer satisfaction - 4.7/5 via Trustpilot. Visa/Master cards, Bank Transfers, Skrill/Neteller accepted. 24/7 online customer support.",
+    "paybis": "Paybis.com egyike a legmegbízhatóbb kriptovaluta brókereknek világszerte 2014 óta. Ügyfélelégedettségi mutatónk 4.7/5 a Trustpilot adatai szerint. Visa/Mastercard kártyákat, banki utalásokat Skrill/Neteller szolgáltatókat is elfogadunk. 24/7 online ügyfélszolgálati támogatás.",
     "shapeshift": "ShapeShift is an online marketplace where users can buy és sell digital assets. It is a fast és secure way for the world to buy és sell digital assets, with no lengthy signup process, no counterparty risk, és no friction.",
-    "simplex": "Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.",
+    "simplex": "A Simplex egy uniós engedéllyel rendelkező pénzügyi intézmény, amely csalásmentes hitelkártya-fizetési megoldást kínál.",
     "taxtoken": "Automated cryptocurrency tax és cost basis software for US citizens.",
     "thorswap": "ThorSwap is an instant, safe és fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
-    "bitpanda": "Bitpanda is Europe’s leading retail broker for buying and selling Bitcoin, Ethereum, IOTA and many more. Deposit money using your credit card, SOFORT-Transfer, NETELLER, and other options.",
+    "bitpanda": "A Bitpanda Európa vezető kiskereskedelmi brókere a Bitcoin, az Ethereum, az IOTA és még sok más vásárlására és eladására. Fizessen be pénzt hitelkártyájával, SOFORT-utalással, NETELLER és egyéb lehetőségekkel.",
     "exmo": "Founded in 2013 és based in London, Kiev, Barcelona, és Moscow, EXMO is #1 exchange in Eastern Europe, és one of the world's largest global exchanges in volume és liquidity.",
     "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure és intuitive platform to buy és sell Bitcoin, Litecoin, Ethereum, XRP és other digital assets. Other key features include advanced trading, free deposits, és an institutional-grade custody solution via Ledger Vault.",
-    "voyager": "Love your Crypto Journey with Voyager. A licensed crypto broker with commission-free trading of 20+ cryptocurrencies."
+    "voyager": "Élvezd a Kripto Utazást a Voyager segítségével. Engedéllyel rendelkező kripto bróker 20+ kriptovaluta jutalék nélküli kereskedelmével."
   },
   "genuinecheck": {
     "modal": {
@@ -703,8 +703,8 @@
           "validator": "Érvényesítő",
           "select": "Kiválaszt",
           "yield": "Kb. Hozam {{amount}}",
-          "randomly": "Randomly chosen validator",
-          "termsAndPrivacy": "Delegating your voting rights does not guarantee you will be paid any reward by your validator."
+          "randomly": "Véletlenszerűen választott hitelesítő",
+          "termsAndPrivacy": "A szavazati jogod átruházása nem garantálja, hogy bármilyen kifizetésben részesülsz a megerősítődtől."
         },
         "validator": {
           "title": "Válassz érvényesítőt",
@@ -808,8 +808,8 @@
       "desc": "Itt található az összes arány, amelyet az ellenérték kiszámításához használnak.\nVálaszd ki, hogy melyik tarifa szolgáltatót használja az egyes tarifákhoz.",
       "fromTo": "Innen {{from}} ide {{to}}",
       "noCounterValue": "Nincs adat erről a kereskedési párról",
-      "cryptoToFiat": "Crypto to fiat",
-      "cryptoToCrypto": "Crypto to Crypto",
+      "cryptoToFiat": "Kripto fiatra",
+      "cryptoToCrypto": "Kripto Kriptóra",
       "rate": "Mérték",
       "last": "Utolsó {{days}} nap",
       "price": "Ár",
@@ -928,14 +928,14 @@
     "downloadProgress": "{{progress}}% letöltve",
     "checking": "Frissítések ellenőrzése...",
     "checkSuccess": "A frissítés készen áll a telepítésre",
-    "quitAndInstall": "Install now",
+    "quitAndInstall": "Telepítés most",
     "error": "Hiba a frissítés során. Kérlek töltsd le újra",
     "reDownload": "Letöltés újra",
     "nightlyWarning": "Ez a verzió nem frissíthető automatikusan, kérlek telepítsd az utolsó verziót manuálisan",
     "downloadNow": "Letöltés most"
   },
   "crash": {
-    "oops": "Oops, something went wrong",
+    "oops": "Hoppá, valami hiba történt",
     "uselessText": "Megpróbálhatod újra újraindítva a Ledger Live-ot. Kérlek exportáld a naplóid,és vedd fel a kapcsolatot a Ledger Supporttal ha a probléma azután is fennáll.",
     "restart": "Újraindítás",
     "support": "Vedd fel a kapcsolatot az ügyfélszolgálattal",
@@ -1139,15 +1139,15 @@
         "title": "Elemzések",
         "desc": "Elemzések engedélyezése, hogy segíts a Ledger-nek a felhasználói élmény fejlesztésében.",
         "mandatoryContextual": {
-          "item1": "Clicks",
-          "item2": "In-app page visits",
-          "item3": "Redirection to webpage",
-          "item4": "Actions: send, receive, lock, etc.",
-          "item5": "End of page scroll",
-          "item6": "App (un)installation and version",
-          "item7": "Number of accounts, crypto assets and operations",
-          "item8": "Overall and page session duration",
-          "item9": "Ledger device type and firmware"
+          "item1": "Kattintások",
+          "item2": "Alkalmazáson belüli oldallátogatások",
+          "item3": "Átirányítás weboldalra",
+          "item4": "Műveletek: küldés, fogadás, lezárás, stb.",
+          "item5": "Oldalgörgetés vége",
+          "item6": "Alkalmazások telepítése, törlése, és verziója",
+          "item7": "Számlák mennyisége, kriptovaluták és műveletek",
+          "item8": "Összefoglaló és oldalmegnyitások időtartama",
+          "item9": "Ledger eszköz típusa és szoftververziója"
         }
       },
       "sentryLogs": {
@@ -1157,12 +1157,12 @@
       "technicalData": {
         "title": "Technikai adatok*",
         "desc": "A Ledger automatikusan névtelen technikai adatokat gyűjt a felhasználói élmény javításának érdekében.",
-        "mandatoryText": "* mandatory",
+        "mandatoryText": "* kötelező",
         "mandatoryContextual": {
-          "title": "Technical data",
-          "item1": "Anonymous unique application ID",
-          "item2": "Ledger Live version, language and region",
-          "item3": "OS version, language and region"
+          "title": "Technikai adatok",
+          "item1": "Névtelen egyedi alkalmazás azonosító",
+          "item2": "Ledger Live verziója, nyelve, és régiója",
+          "item3": "Operációs rendszer verziója, nyelve, és régiója"
         }
       },
       "terms": {
