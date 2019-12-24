@@ -134,7 +134,7 @@
     "contractAddress": "Szerződés:",
     "openInExplorer": "Megnyitás felfedezőben",
     "emptyState": {
-      "title": "Még nincs kriptód?",
+      "title": "Nem rendelkezel még kriptovalutával?",
       "desc": "Bizonyosodj meg róla, hogy a(z) <1><0>{{managerAppName}}</0></1> alkalmazás telepítve van és kezdj fogadni",
       "descToken": "Bizonyosodj meg róla, hogy a(z) <1><0>{{managerAppName}}</0></1> alkalmazás telepítve van és kezdj el fogadni <3><0>{{ticker}}</0></3> és <5><0>{{tokenList}}</0> tokeneket</5>",
       "buttons": {
@@ -160,12 +160,12 @@
   },
   "accounts": {
     "title": "Számlák",
-    "noResultFound": "Nem található számla.",
+    "noResultFound": "Nem találhatók számlák.",
     "order": {
       "name|asc": "Név A-Z",
       "name|desc": "Név Z-A",
-      "balance|asc": "Legalacsonyabb egyenleg",
-      "balance|desc": "Legmagasabb egyenleg"
+      "balance|asc": "Legalacsonyabb Egyenleg",
+      "balance|desc": "Legmagasabb Egyenleg"
     },
     "range": {
       "week": "Hét",
@@ -185,14 +185,14 @@
     }
   },
   "banners": {
-    "promoteMobile": "Élvezd a  Ledger Live élményt, most eléhető mobilon az {{productName}}",
+    "promoteMobile": "Élvezd a Ledger Live élményt, már elérhető mobilon a(z) {{productName}}",
     "migrate": "Ledger Live számlák frissítése lehetséges",
     "genericTerminatedCrypto": "{{coinName}} többé nem támogatott"
   },
   "dashboard": {
     "title": "Portfólio",
     "emptyAccountTile": {
-      "desc": "Adj hozzá számlákat a további kriptok kezeléséhez",
+      "desc": "Adj hozzá számlákat a további kriptovaluták kezeléséhez",
       "createAccount": "Számla hozzáadása"
     },
     "accounts": {
@@ -205,12 +205,12 @@
     },
     "summary": "Itt a számláid összegzése",
     "summary_plural": "Itt az összegzése az {{count}} számláidnak",
-    "recentActivity": "Utolsó tevékenységek",
+    "recentActivity": "Legutóbbi műveletek",
     "totalBalance": "Összes egyenleg"
   },
   "currentAddress": {
     "title": "Jelenlegi cím",
-    "for": " <1><0>{{name}}</0></1> hoz",
+    "for": "Cím a(z) <1><0>{{name}}</0></1> -hoz",
     "messageIfUnverified": "Kérlek erősítsd meg, hogy az {{currencyName}} cím ami a Ledger Liveban megjelenik, egyezik-e a Ledger eszközön megjelenő címmel",
     "messageIfAccepted": "Cím megerősítve, kérlek ellenőrizd újra ha másolás/beillesztést használtál, vagy olvasd be a QR kódot.",
     "messageIfSkipped": "A {{currencyName}} címed nem lett megerősítve a Ledger eszközön. Kérlek erősítsd meg az optimális biztonságért."
