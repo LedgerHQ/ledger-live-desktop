@@ -788,7 +788,7 @@
       "theme": "Téma",
       "themeDesc": "Téma kiválasztása.",
       "counterValue": "Ellenérték",
-      "counterValueDesc": "Válaszd ki a megjeleníteni kívánt valutát az egyenlegeid, és műveleteid számára.",
+      "counterValueDesc": "Válaszd ki az egyenleged, és a műveleteid mellett megjelenő valutát.",
       "exchange": "Ár szolgáltató",
       "exchangeDesc": "Biztosítja az árfolyamot a Bitcoin és a {{fiat}} között, a kripto eszközök értékének becslésére szolgál (crypto asset → BTC → {{fiat}}).",
       "region": "Régió",
@@ -797,12 +797,12 @@
       "stockDesc": "Válaszd a Nyugatit a piac növekedésének kékkel történő kijelzéséhez, vagy a Keletit a pirossal történő megjelenítéshez."
     },
     "currencies": {
-      "desc": "Módisítsd beállításaid minden egyes kriptohoz",
-      "select": "Válassz egy kriptot a beállításainak módosításához.",
+      "desc": "Módisítsd a beállításokat minden egyes kriptovalutához",
+      "select": "Válassz egy kriptovalutát a beállításainak módosításához.",
       "exchange": "Ár szolgáltató ({{ticker}} → BTC)",
       "exchangeDesc": "Válaszd ki az árfolyam adatszolgáltatóját {{currencyName}} Bitcoinhoz, ami alapján a kriptovalutáid értéke becslésre kerül ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Megerősítések száma",
-      "confirmationsNbDesc": "Állítsd be a tranzakció megerősítésének számát amik ahhoz szükségesek, hogy egy tranzakció megerősítettként legyen megjelenítve."
+      "confirmationsNbDesc": "Állítsd be, hogy hány megerősített tranzakció szükséges ahhoz, hogy egy tranzakció megerősítettként legyen megjelenítve."
     },
     "rates": {
       "desc": "Itt található az összes arány, amelyet az ellenérték kiszámításához használnak.\nVálaszd ki, hogy melyik tarifa szolgáltatót használja az egyes tarifákhoz.",
