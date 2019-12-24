@@ -515,7 +515,7 @@
       },
       "warning": {
         "tezos": {
-          "text": "Az megjelölt számlán jelölt összeget hozzáadjuk a teljes összeghez. Válassz másik számlát ha el szeretnéd ezt kerülni."
+          "text": "Az megjelölt számlára kapott összeget hozzáadjuk a teljes összeghez. Válassz másik számlát ha el szeretnéd ezt kerülni."
         }
       }
     }
@@ -532,7 +532,7 @@
       "cta": "Eszközöm csatlakoztatása"
     },
     "tabs": {
-      "appCatalog": "Alkalmazások kistája",
+      "appCatalog": "Alkalmazások listája",
       "appsOnDevice": "Telepített alkalmazások"
     },
     "deviceStorage": {
@@ -544,12 +544,12 @@
       "genuine": "Az eszköz eredeti"
     },
     "applist": {
-      "placeholder": "Nincsenek a keresési szűrőknek megfelelő alkalmazások",
-      "placeholderInstalled": "Nincsenek a keresési szűrőknek megfelelő telepített alkalmazások",
+      "placeholder": "Nincsenek a keresésnek és szűrőknek megfelelő alkalmazások",
+      "placeholderInstalled": "Nincsenek a keresésnek és szűrőknek megfelelő telepített alkalmazások",
       "filter": {
         "title": "Szűrő",
         "all": "Összes",
-        "supported": "Live Támogatott",
+        "supported": "Live által támogatott",
         "installed": "Telepített",
         "notInstalled": "Nem telepített"
       },
@@ -578,7 +578,7 @@
   },
   "send": {
     "title": "Küldés",
-    "totalSpent": "Összesen jóváírt",
+    "totalSpent": "Összesen jóváírandó",
     "totalBalance": "Összes egyenleg",
     "steps": {
       "recipient": {
@@ -599,7 +599,7 @@
         "selectAccountDebit": "Jóváírandó számla",
         "recipientAddress": "Fogadó címe",
         "amount": "Mennyiség",
-        "fees": "Hálózati költségek",
+        "fees": "Hálózati díjak",
         "useMax": "Összes küldése",
         "advancedOptions": "Haladó beállítások",
         "useRBF": "Használjon díj ellenében tranzakciót",
@@ -632,7 +632,7 @@
       }
     },
     "footer": {
-      "estimatedFees": "Hálózati költségek"
+      "estimatedFees": "Hálózati díjak"
     }
   },
   "releaseNotes": {
@@ -640,7 +640,7 @@
     "version": "Ledger Live {{versionNb}}"
   },
   "distribution": {
-    "asset": "Vagyontárgy",
+    "asset": "Kriptovaluta",
     "price": "Ár",
     "distribution": "Átruházás",
     "amount": "Mennyiség",
@@ -660,7 +660,7 @@
     "header": "Számlaátruházás ({{count}})"
   },
   "delegation": {
-    "overdelegated": "Tólhalmozott",
+    "overdelegated": "Túlhalmozott",
     "title": "Érj el jutalmakat",
     "header": "Delegation",
     "validator": "Érvényesítő",
