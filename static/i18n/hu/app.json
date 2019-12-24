@@ -217,9 +217,9 @@
   },
   "deviceConnect": {
     "dashboard": "Navigálj a <1>Dashboard</1>-ra az eszközödön",
-    "step1": "Csatlakoztasd, és old fel a <1>Ledger device</1>-t",
+    "step1": "Csatlakoztasd, és old fel a <1>Ledger eszközöd</1>",
     "step2": "Nyisd meg a(z) <1><0>{{managerAppName}}</0></1> alkalmazást az eszközön",
-    "step3": "Engedélyezd a  <1>Ledger Manager</1> -t"
+    "step3": "Engedélyezd a <1>Ledger Manager</1> -t az eszközödön"
   },
   "emptyState": {
     "sidebar": {
