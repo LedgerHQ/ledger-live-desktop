@@ -662,7 +662,7 @@
   "delegation": {
     "overdelegated": "Túlhalmozott",
     "title": "Érj el jutalmakat",
-    "header": "Delegation",
+    "header": "Delegálás",
     "validator": "Érvényesítő",
     "yield": "Kb. Hozam",
     "address": "Cím",
@@ -673,58 +673,58 @@
     "durationJustStarted": "Most kezdődött",
     "durationDays": "{{count}} nap",
     "durationDays_plural": "{{count}} napok",
-    "howItWorks": "Hogyan működik az átruházás?",
-    "delegationEarn": "Mostmár kaphatsz Tezos tárolási jutalmat a számlád átruházásával.",
-    "earnRewards": "Érj el jutalmakat",
+    "howItWorks": "Hogyan működik a delegálás",
+    "delegationEarn": "Mostantól részesülhetsz Tezos tárolási jutalmakban a számlád delegálásával.",
+    "earnRewards": "Kapj jutalmakat",
     "flow": {
       "steps": {
         "starter": {
           "title": "Kapj tárolási jutalmakat",
-          "description": "Érj el tárolási jutalmakat Tezos számlád harmadik személy általi megerősítésre történő kiutalásával, miközben teljes biztonságban és irányítás alatt tartod a kriptód.",
+          "description": "Kapj tárolási jutalmakat Tezos számlád harmadik személy általi megerősítésre történő delegálásával, miközben teljes biztonságban és irányítás alatt tartod a kriptód.",
           "bullet": {
-            "delegate": "Átruházott számláid a tieid maradnak.",
+            "delegate": "Delegált számláid a tieid maradnak.",
             "access": "Bármikor hozzáférhetsz a kriptóidhoz.",
-            "ledger": "Ossz ki biztonságosan a Ledger eszközöd segítségével."
+            "ledger": "Delegálj biztonságosan a Ledger eszközöd segítségével."
           },
           "button": {
-            "cta": "Ossz ki, hogy jutalmakat kapj"
+            "cta": "Delegálj, hogy jutalmakat kapj"
           }
         },
         "account": {
-          "title": "Számla átruházása",
+          "title": "Számla delegálása",
           "label": "Számla",
-          "toDelegate": "Átruházandó számla"
+          "toDelegate": "Delegálandó számla"
         },
         "summary": {
-          "title": "Számla átruházása",
+          "title": "Számla delegálása",
           "label": "Összegzés",
-          "toDelegate": "Átruházandó számla",
-          "toUndelegate": "Átruházás visszavonása számláról",
+          "toDelegate": "Delegálandó számla",
+          "toUndelegate": "Delegálás visszavonása erről a számláról",
           "validator": "Érvényesítő",
           "select": "Kiválaszt",
           "yield": "Kb. Hozam {{amount}}",
           "randomly": "Véletlenszerűen választott hitelesítő",
-          "termsAndPrivacy": "A szavazati jogod átruházása nem garantálja, hogy bármilyen kifizetésben részesülsz a megerősítődtől."
+          "termsAndPrivacy": "A szavazati jogod delegálása nem garantálja, hogy bármilyen kifizetésben részesülsz a megerősítődtől."
         },
         "validator": {
-          "title": "Válassz érvényesítőt",
-          "description": "Választhatsz érvényesítőt a becsült jutalom mértékének összehasonlításával",
+          "title": "Válassz hitelesítőt",
+          "description": "Választhatsz hitelesítőt a becsült jutalom mértékének összehasonlításával",
           "customValidator": "Egyedi érvényesítő",
-          "providedBy": "A hozam mértéke biztosított ezáltal <1><0>MyTezosBaker</0></1>"
+          "providedBy": "A hozam mértéke biztosított általa: <1><0>MyTezosBaker</0></1>"
         },
         "custom": {
-          "title": "Egyedi érvényesítő",
-          "text": "Kérlek írd be az egyedi érvényesítő címét a számlád átruházásához.",
+          "title": "Egyedi megerősítő",
+          "text": "Kérlek írd be az egyedi megerősítő címét a számlád delegálásához.",
           "button": "Erősítsd meg az érvényesítőt"
         },
         "undelegate": {
-          "title": "Számlád átruházásának visszavonása"
+          "title": "Számlád delegálásának visszavonása"
         },
         "confirmation": {
           "title": "Megerősítés",
           "label": "Megerősítés",
           "success": {
-            "title": "átruházás elküldve",
+            "title": "Delegálás elküldve",
             "titleUndelegated": "A művelet elküldve",
             "text": "Az átruházási tranzakció sikeresen kiküldve. Körülbelül 40 napon belül kell megszereznie első jutalmait, az érvényesítőtől függően.",
             "textUndelegated": "Fiókod átruházása akkor fejeződik be, amikor a művelet megerősítésre kerül. A számlád bármikor újra átruházhatod."
