@@ -310,31 +310,31 @@
         "description": ""
       },
       "scanning": {
-        "title": "{{currencyName}} frissítése folyamatban...",
+        "title": "{{currencyName}} frissítés folyamatban...",
         "description": "Kérlek várj míg a számláid frissítésre kerülnek"
       },
       "finished-empty": {
-        "title": "{{currencyName}} frissítés befejezetlen",
-        "description": "Nincs {{currencyName}} frissíthető számla"
+        "title": "{{currencyName}} frissítés nincs befejezve",
+        "description": "Nincs frissíthető {{currencyName}} számla"
       }
     },
     "cta": {
-      "startUpdate": "Frissítés megkezdése",
-      "nextCurrency": "Folytatás {{currency}} frissítéssel"
+      "startUpdate": "Frissítés indítása",
+      "nextCurrency": "Folytatás a(z) {{currency}} frissítésével"
     }
   },
   "addAccounts": {
     "title": "Számlák hozzáadása",
     "breadcrumb": {
-      "informations": "Kriptodevizák",
+      "informations": "Kriptovaluta",
       "connectDevice": "Eszköz",
       "import": "Számlák",
       "finish": "Megerősítés"
     },
     "connectDevice": {
-      "desc": "Kövesd az alábbi lépéseket a <1><0>{{currencyName}}</0></1> számla hozzáadásához"
+      "desc": "Kövesd az alábbi lépéseket a(z) <1><0>{{currencyName}}</0></1> számlák hozzáadásához"
     },
-    "tokensTip": "{{token}} ({{ticker}}) egy {{tokenType}} token. Közvetlenül tudsz tokeneket fogadni a {{currency}} számlán.",
+    "tokensTip": "{{token}} ({{ticker}}) egy {{tokenType}} token. Közvetlenül tudsz tokeneket fogadni a(z) {{currency}} számlán.",
     "accountToImportSubtitle_plural": "Meglévő számlák hozzáadása",
     "selectAll": "Összes kiválasztása ({{count}})",
     "unselectAll": "Összes kiválasztásának megszűntetése ({{count}})",
