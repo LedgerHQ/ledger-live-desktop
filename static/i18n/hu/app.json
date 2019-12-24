@@ -210,7 +210,7 @@
   },
   "currentAddress": {
     "title": "Jelenlegi cím",
-    "for": "Cím a(z) <1><0>{{name}}</0></1> -hoz",
+    "for": "Cím <1><0>{{name}}</0></1> -hoz",
     "messageIfUnverified": "Kérlek erősítsd meg, hogy a(z) {{currencyName}} cím ami a Ledger Live-ban megjelenik, egyezik-e a Ledger eszközödön megjelenő címmel",
     "messageIfAccepted": "Cím megerősítve, kérlek ellenőrizd újra ha másolás/beillesztést használtál, vagy olvasd be a QR kódot.",
     "messageIfSkipped": "A(z) {{currencyName}} címed nem lett megerősítve a Ledger eszközön. Kérlek erősítsd meg az optimális biztonság érdekében."
@@ -285,17 +285,17 @@
   "migrateAccounts": {
     "overview": {
       "title": "Ledger Live számlák frissítése",
-      "done": "Ledger Live accounts frissítése megtörtént",
+      "done": "Ledger Live számlák frissítése megtörtént",
       "successTitle": "Számlák sikeresen frissítve",
-      "successDescPlu": "A {{assets}} számláid frissítve, és készen állnak a használatra",
-      "successDesc": "A {{assets}} számlád frissítve, és készen áll a használatra",
+      "successDescPlu": "A(z) {{assets}} számláid frissítve, és készen állnak a használatra",
+      "successDesc": "A(z) {{assets}} számlád frissítve, és készen áll a használatra",
       "mobileTitle": "Számlák exportálása mobilra",
       "mobileDesc": "Klikkelj az alább található gombra, hogy exportáld a frissített számláid a Ledger Live mobilalkalmazásba.",
       "mobileCTA": "Exportálás mobilra",
       "description": "Új funkciók a Ledger Live-ban a számláid frissítését igénylik.",
       "currency": "1 {{currency}} számla frissítése szükséges:",
       "currency_plural": "{{count}} {{currency}} számlák frissítése szükséges:",
-      "footer": "Szükséged van a  Ledger eszközre a frissítés befejezéséhez",
+      "footer": "Szükséged van a Ledger eszközödre a frissítés befejezéséhez",
       "pendingDevices": "1 számlát nem lehet frissíteni. Kérlek csatlakoztasd az eszközt társítva az alábbi fiókhoz",
       "pendingDevices_plural": "{{totalMigratableAccounts}} számlákat nem lehet frissíteni. Kérlek csatlakoztasd az eszközt társítva az alábbi fiókhoz",
       "doItLaterBtn": "Későbbre halasztás"
