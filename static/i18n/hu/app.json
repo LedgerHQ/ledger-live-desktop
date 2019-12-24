@@ -211,9 +211,9 @@
   "currentAddress": {
     "title": "Jelenlegi cím",
     "for": "Cím a(z) <1><0>{{name}}</0></1> -hoz",
-    "messageIfUnverified": "Kérlek erősítsd meg, hogy az {{currencyName}} cím ami a Ledger Liveban megjelenik, egyezik-e a Ledger eszközön megjelenő címmel",
+    "messageIfUnverified": "Kérlek erősítsd meg, hogy a(z) {{currencyName}} cím ami a Ledger Live-ban megjelenik, egyezik-e a Ledger eszközödön megjelenő címmel",
     "messageIfAccepted": "Cím megerősítve, kérlek ellenőrizd újra ha másolás/beillesztést használtál, vagy olvasd be a QR kódot.",
-    "messageIfSkipped": "A {{currencyName}} címed nem lett megerősítve a Ledger eszközön. Kérlek erősítsd meg az optimális biztonságért."
+    "messageIfSkipped": "A(z) {{currencyName}} címed nem lett megerősítve a Ledger eszközön. Kérlek erősítsd meg az optimális biztonság érdekében."
   },
   "deviceConnect": {
     "dashboard": "Navigálj a <1>Dashboard</1>-ra az eszközödön",
@@ -262,11 +262,11 @@
     "modal": {
       "title": "Eredetiség ellenőrzés"
     },
-    "deviceInBootloader": "Az eszközöd Bootloader módban van. Kattints {{button}} hogy frissítsd."
+    "deviceInBootloader": "Az eszközöd Bootloader módban van. Kattints a {{button}} gombra, hogy frissítsd."
   },
   "tokensList": {
     "title": "Tokenek",
-    "cta": "Tokenek hozzáadása",
+    "cta": "Token hozzáadása",
     "placeholder": "Tokenek hozzáadásához, egyszerűen küld őket Ethereum címedre.",
     "link": "Tudj meg többet",
     "seeTokens": "Tokenek megjelenítése ({{tokenCount}})",
@@ -800,7 +800,7 @@
       "desc": "Módisítsd beállításaid minden egyes kriptohoz",
       "select": "Válassz egy kriptot a beállításainak módosításához.",
       "exchange": "Ár szolgáltató ({{ticker}} → BTC)",
-      "exchangeDesc": "Válaszd ki az árfolyam szolgáltatót {{currencyName}} Bitcoinhoz, a kripto eszközök értékének becslésére szolgál ({{ticker}} → BTC → {{fiat}}).",
+      "exchangeDesc": "Válaszd ki az árfolyam adatszolgáltatóját {{currencyName}} Bitcoinhoz, ami alapján a kriptovalutáid értéke becslésre kerül ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Megerősítések száma",
       "confirmationsNbDesc": "Állítsd be a tranzakció megerősítésének számát amik ahhoz szükségesek, hogy egy tranzakció megerősítettként legyen megjelenítve."
     },
