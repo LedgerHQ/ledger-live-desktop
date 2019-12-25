@@ -816,7 +816,7 @@
       "exchange": "Ár szolgáltató"
     },
     "profile": {
-      "password": "Kóddal történő lezárás",
+      "password": "Jelszavas védelem",
       "passwordDesc": "Állíts be jelszót az illetéktelen hozzáférés megakadályozása érdekében a Ledger Live-ban a számítógépedben tárolt adataidhoz, beleértve a számla neveket, egyenlegeket, tranzakciókat és nyilvános címeket.",
       "passwordAutoLock": "Automatikus lezárás",
       "passwordAutoLockDesc": "Ledger Live automatikus zárolása ennyi inaktivitás után.",
@@ -1118,18 +1118,18 @@
         },
         "desc": {
           "pinFailed": "Soha ne használj olyan eszközt, ami mielőtt hozzád került már rendelkezett PIN kóddal. Ha kétséged támadt, vedd fel velünk a kapcsolatot.",
-          "recoveryPhraseFailed": "Csak azt a szót írd le, ami az eszközödön is megjelent. Ha kétséged támadt, vedd fel velünk a kapcsolatot.",
-          "isGenuineFail": "Az eszköz nem teljesítette a Ledger biztonsági szerveréhez történő kapcsolódáshoz szükséges hitelesítési tesztet. Kérlek, fordulj a Ledger ügyfélszolgálathoz segítségért."
+          "recoveryPhraseFailed": "Csak azt a helyreállítási kártyát tedd el, melyek szavait az eszköz megjelenítette és egyedül te láttad. Kétség esetén vedd fel velünk a kapcsolatot.",
+          "isGenuineFail": "Az eszköz nem teljesítette a Ledger biztonságos szerveréhez való kapcsolódáshoz szükséges hitelességi tesztet. Kérlek, fordulj a Ledger ügyfélszolgálathoz segítségért."
         }
       }
     },
     "setPassword": {
-      "title": "Jelszóval történő zárolás (opcionális)",
-      "desc": "Állíts be jelszót, hogy védve legyél a számítógépeden tárolt Ledger Live adatok illetéktelen hozzáférésétől, beleértve a számlák neveit, tranzakciókat és nyilvános kulcsokat",
+      "title": "Jelszavas védelem (opcionális)",
+      "desc": "Állíts be jelszót, hogy védve legyenek a számítógépeden tárolt Ledger Live adatok az illetéktelen hozzáférésektől, beleértve a számlák neveit, tranzakciókat és nyilvános kulcsokat",
       "disclaimer": {
-        "note1": "Ne felejtsd el jelszavad. Ne oszd meg senkivel.",
-        "note2": "Jelszavad elvesztése a Ledger Live alaphelyzetbe állítását, és a számlák újboli hozzáadását igényli.",
-        "note3": "A Ledger Live alaphelyzetbe állítása nem befolyásolja a tárolt kriptókat."
+        "note1": "Ne felejtsd el a jelszavad, és ne oszd meg senkivel.",
+        "note2": "Jelszavad elvesztése a Ledger Live alaphelyzetbe állítását, és a számlák újra történő hozzáadását igényli.",
+        "note3": "A Ledger Live alaphelyzetbe állítása nem befolyásolja a tárolt kriptovalutáidat."
       }
     },
     "analytics": {
@@ -1137,7 +1137,7 @@
       "desc": "Névtelen adatok megosztása, hogy hozzájárulj a Ledger biztonsága, és szolgáltatásai fejlesztéséhez",
       "shareAnalytics": {
         "title": "Elemzések",
-        "desc": "Elemzések engedélyezése, hogy segíts a Ledger-nek a felhasználói élmény fejlesztésében.",
+        "desc": "Engedélyezd az elemzéseket, hogy segíts a Ledger-nek a felhasználói élmény fejlesztésében.",
         "mandatoryContextual": {
           "item1": "Kattintások",
           "item2": "Alkalmazáson belüli oldallátogatások",
