@@ -1210,64 +1210,64 @@
       "description": "Kérlek próbáld újra, vagy lépj kapcsolatba az ügyféltámogatással ({{reason}})"
     },
     "NoAccessToCamera": {
-      "title": "Kérlek bizonyosodj meg róla, hogy csatlakoztatva van a kamera, és más alkalmazás nem használja és a Ledger Live-nak van jogosultsága használni azt.",
+      "title": "Kérlek bizonyosodj meg róla, hogy a kamera csatlakoztatva van, más alkalmazás nem használja, és a Ledger Live-nak van jogosultsága használni azt.",
       "description": ""
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} nem támogatott",
-      "description": "Ez a kripto egyenlőre nem támogatott. Kérlek lépj kapcsolatba velünk."
+      "description": "Ez a kriptovaluta egyenlőre nem támogatott. Kérlek lépj kapcsolatba velünk."
     },
     "DeviceNotGenuine": {
       "title": "Lehetséges, hogy nem eredeti",
       "description": "Ledger ügyféltámogatás kérése"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "Sajnáljuk, próbáld újra (genuine-close)",
+      "title": "Sajnáljuk, próbáld meg újra (genuine-close)",
       "description": null
     },
     "DeviceInOSUExpected": {
-      "title": "Sajnáljuk, frissítés sikertelen",
-      "description": "Kérlek próbáld újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
+      "title": "Sajnáljuk, a frissítés sikertelen",
+      "description": "Kérlek próbáld újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálattal"
     },
     "DeviceHalted": {
-      "title": "Kérlek indítsd újra a Ledger eszközöd, és próbáld újra",
-      "description": "Váratlan hiba történt, próbáld újra"
+      "title": "Kérlek indítsd újra a Ledger eszközöd, és próbáld meg újra",
+      "description": "Váratlan hiba történt, próbáld meg újra"
     },
     "DeviceSocketFail": {
       "title": "{{message}}",
-      "description": "Kérlek próbáld újra"
+      "description": "Kérlek próbáld meg újra"
     },
     "DeviceSocketNoBulkStatus": {
       "title": "Hoppá, csatlakozás sikertelen",
-      "description": "Kérlek próbáld újra"
+      "description": "Kérlek próbáld meg újra"
     },
     "DisconnectedDevice": {
       "title": "Hoppá, az eszköz csatlakozása megszűnt",
-      "description": "Kérlek próbáld újra"
+      "description": "Kérlek próbáld meg újra"
     },
     "DisconnectedDeviceDuringOperation": {
       "title": "Hoppá, az eszköz lecsatlakoztatva",
-      "description": "A készülékhez való kapcsolódás megszűnt egy művelet során, próbálkozz újra"
+      "description": "A készülékhez való kapcsolódás megszűnt egy művelet során, próbáld meg újra"
     },
     "EnpointConfig": {
       "title": "Érvénytelen végpont",
-      "description": "Adj meg egy érvényes végpontot"
+      "description": "Kérlek adj meg egy érvényes végpontot"
     },
     "FeeEstimationFailed": {
       "title": "Sajnáljuk, a díjbecslés sikertelen",
-      "description": "Próbálj beállítani egyedi díjat (státusz: {{status}})"
+      "description": "Próbálj meg beállítani egyedi díjat (státusz: {{status}})"
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "Szoftver vagy alkalmazás frissítés szükséges",
-      "description": "Kérlek használd az eszközkezelőt minden alkalmazás törléséhez és ellenőrizd, hogy elérhető-e szoftverfrissítés mielőtt ójratelepítenéd őket"
+      "description": "Kérlek használd az eszközkezelőt minden alkalmazás törléséhez és ellenőrizd, hogy elérhető-e szoftverfrissítés mielőtt újratelepítenéd őket"
     },
     "HardResetFail": {
-      "title": "Hoppá, nem sikerült visszaállítani",
-      "description": "Kérlek, próbáld újra, vagy vedd fel velünk a kapcsolatot, ha kétségeid vannak"
+      "title": "Hoppá, nem sikerült az újraindítás",
+      "description": "Kérlek próbáld meg újra, vagy ha kétségeid vannak, vedd fel velünk a kapcsolatot"
     },
     "LatestMCUInstalledError": {
-      "title": "Hoppá, semmit sem kell frissíteni",
-      "description": "Feleslegesen megpróbáltad frissíteni az eszköz mikrovezérlőjét. Vedd fel a kapcsolatot a Ledger ügyfélszolgálatával, ha problémád van az eszközzel."
+      "title": "Hoppá, nincs mit frissíteni",
+      "description": "Feleslegesen megpróbáltad frissíteni az eszköz mikrovezérlőjét. Vedd fel a kapcsolatot a Ledger ügyfélszolgálatával, ha problémád támadt az eszközzel."
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
