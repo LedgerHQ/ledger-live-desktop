@@ -876,7 +876,7 @@
     },
     "openUserDataDirectory": {
       "title": "Felhasználói adatok megtekintése",
-      "desc": "A számítógépeden tárolt felhasználói adatok megtekintése, beleértve a számláid, sütiket és beállításokat.",
+      "desc": "A számítógépeden tárolt felhasználói adatok megtekintése, beleértve a számláid, sütiket, és beállításokat.",
       "btn": "Megtekintés"
     },
     "repairDevice": {
@@ -910,13 +910,13 @@
       }
     },
     "changePassword": {
-      "title": "Jelszóval lezárva",
+      "title": "Jelszavas védelem",
       "subTitle": "Változtasd meg a jelszavad"
     },
     "setPassword": {
-      "title": "Jelszóval lezárva",
+      "title": "Jelszavas védelem",
       "subTitle": "Jelszó beállítása",
-      "desc": "Ne felejtsd el a jelszavad. Jelszavad elfejeltése esetén alaphelyzetbe kell állítanod a Ledger Live-ot, és újra hozzá kell adnod a számláidat."
+      "desc": "Ne felejtsd el a jelszavad. Jelszavad elvesztése esetén alaphelyzetbe kell állítanod a Ledger Live-ot, és újra hozzá kell adnod a számláidat."
     },
     "disablePassword": {
       "title": "Jelszóval való lezárás kikapcsolása",
