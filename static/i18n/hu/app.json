@@ -1337,18 +1337,18 @@
     },
     "TimeoutError": {
       "title": "Hoppá, időtúllépés történt",
-      "description": "Túl sokáig tartott a szerver válaszolása, kérlek, próbálja újra"
+      "description": "Túl sokáig tartott a szerver válasza, kérlek próbálja meg újra"
     },
     "TimeoutTagged": {
       "title": "Hoppá, időtúllépés történt ({{tag}})",
-      "description": "Túl sokáig tartott a szerver válaszolása"
+      "description": "Túl sokáig tartott a szerver válasza"
     },
     "TransportError": {
-      "title": "Valami hiba történt, kérlek, csatlakoztasd újra az eszközt",
+      "title": "Valami hiba történt, kérlek csatlakoztasd újra az eszközöd",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "Valami hiba történt, kérlek csatlakoztasd újra az eszközt",
+      "title": "Valami hiba történt, kérlek csatlakoztasd újra az eszközöd",
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
@@ -1356,23 +1356,23 @@
       "description": "Tartsd megnyitva a(z) {{appName}} alkalmazást amíg a számláid keressük"
     },
     "UnexpectedBootloader": {
-      "title": "Hoppá, eszközödnek nem szabad Bootloader módban lennie",
-      "description": "Kérlek indítsd újra az eszközöd vagy lépj kapcsolatba velünk"
+      "title": "Hoppá, az eszközödnek nem szabad Bootloader módban lennie",
+      "description": "Kérlek indítsd újra az eszközöd, vagy lépj kapcsolatba velünk"
     },
     "UserRefusedAllowManager": {
-      "title": "Az eszközkezelő megtagadta az eszköz használatát"
+      "title": "Az eszközkezelő engedélyezése vissza lett utasítva az eszközön"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "A frissítés megszakítva",
-      "description": "Kérlek, próbáld újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
+      "description": "Kérlek próbáld újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
     },
     "UserRefusedOnDevice": {
-      "title": "A tranzakciót az eszköz visszautasította",
-      "description": "Kétség esetén kérlek, próbáld meg újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálattal"
+      "title": "A tranzakciót vissza lett utasítva az eszközön",
+      "description": "Kétség esetén kérlek próbáld meg újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálattal"
     },
     "UserRefusedAddress": {
-      "title": "A fogadáó cím elutasítva",
-      "description": "Kérlek, próbálkozz újra, vagy kétség esetén vedd fel a kapcsolatot a Ledger ügyféltámogatással"
+      "title": "A fogadó cím elutasítva",
+      "description": "Kérlek próbáld meg újra, vagy kétség esetén vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
     },
     "UpdateYourApp": {
       "title": "Az alkalmazás frissítése szükséges",
@@ -1383,19 +1383,19 @@
       "description": "Kérlek lépj vissza a Főoldalra az eszközödön"
     },
     "WebsocketConnectionError": {
-      "title": "Sajnáljuk, próbáld újra (websocket error)",
+      "title": "Sajnáljuk, próbáld meg újra (websocket error)",
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "Sajnáljuk, próbáld újra (websocket failed)",
+      "title": "Sajnáljuk, próbáld meg újra (websocket failed)",
       "description": null
     },
     "WrongDeviceForAccount": {
       "title": "Rossz eszköz vagy jelszó a(z) ‘{{accountName}}’ számlához",
-      "description": "Kérlek, használd a készüléket vagy a jelszót a kiválasztott számlához"
+      "description": "Kérlek használd a készüléket vagy a jelszót a kiválasztott számlához"
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "Alkalmazásfrissítés szükséges",
+      "title": "Az alkalmazás frissítése szükséges",
       "description": "Töröld és telepítsd újra a(z) {{managerAppName}} alkalmazást az eszközkezelőben"
     },
     "InvalidAddress": {
