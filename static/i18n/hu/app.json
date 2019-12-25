@@ -460,11 +460,11 @@
       "mcuTitle": "Frissítés befejezése",
       "mcuFirst": "Válaszd le az USB kábelt az eszközödről",
       "mcuSecond": "Nyomd meg a bal gombot, és tartsd nyomva miközben újracsatlakoztatod az USB kábelt, míg a <1><0>{{repairProcessing}}</0></1> meg nem jelenik",
-      "mcuPin": "Kérlek légy türelemmel amíg a frissítés befejeződik",
+      "mcuPin": "Kérlek, légy türelemmel, amíg a frissítés befejeződik",
       "mcuBlueFirst": "Nyomd meg, és tartsd lenyomva 10 másodpercig az oldalsó gombot az eszköz kikapcsolásához. Engedd el a gombot.",
       "mcuBlueSecond": "Nyomd meg, és tartsd lenyomva a gombot minimum 5 másodpercig, amíg a Boot Options meg nem jelenig. Nyomj a Bootloader Mode-ra",
       "successTitle": "Szoftver frissítve",
-      "successText": "Kérlek telepítsd újra az alkalmazásokat az eszközödön",
+      "successText": "Kérlek, telepítsd újra az alkalmazásokat az eszközödön",
       "resetTitle": "Eszköz előkészítése",
       "resetSteps": {
         "first": "1. Indítsd újra az eszközöd",
@@ -507,7 +507,7 @@
       "confirmAddress": {
         "title": "Jóváhagyás",
         "action": "Hagyd jóvá a címet az eszközödön",
-        "text": "Kérlek hagyd jóvá a Ledger Live-ban található {{currencyName}} címet ha egyezik az eszközödön látható címmel",
+        "text": "Kérlek, hagyd jóvá a Ledger Live-ban található {{currencyName}} címet ha egyezik az eszközödön látható címmel",
         "support": "Lépj velünk kapcsolatba"
       },
       "receiveFunds": {
@@ -623,7 +623,7 @@
         "pending": {
           "title": "Tranzakció küldése folyamatban..."
         },
-        "broadcastError": "Lehet, hogy a tranzakciód sikertelen volt. Kérlek ellenőrizd pár perc múlva, hogy megbizonyosodj róla, hogy a tranzakciód valóban nem lett elküldve mielőtt újra megpróbálnád."
+        "broadcastError": "Lehet, hogy a tranzakciód sikertelen volt. Kérlek, ellenőrizd pár perc múlva, hogy megbizonyosodj róla, hogy a tranzakciód valóban nem lett elküldve mielőtt újra megpróbálnád."
       },
       "warning": {
         "tezos": {
@@ -714,7 +714,7 @@
         },
         "custom": {
           "title": "Egyedi megerősítő",
-          "text": "Kérlek írd be az egyedi megerősítő címét a számlád delegálásához.",
+          "text": "Kérlek, írd be az egyedi megerősítő címét a számlád delegálásához.",
           "button": "Erősítsd meg az érvényesítőt"
         },
         "undelegate": {
@@ -732,7 +732,7 @@
           "pending": {
             "title": "Tranzakció elküldése..."
           },
-          "broadcastError": "Lehet, hogy a tranzakciód sikertelen volt. Kérlek ellenőrizd pár perc múlva, hogy megbizonyosodj róla, hogy a tranzakciód valóban nem lett elküldve mielőtt újra megpróbálnád."
+          "broadcastError": "Lehet, hogy a tranzakciód sikertelen volt. Kérlek, ellenőrizd pár perc múlva, hogy megbizonyosodj róla, hogy a tranzakciód valóban nem lett elküldve mielőtt újra megpróbálnád."
         }
       }
     },
@@ -864,7 +864,7 @@
     },
     "resetFallbackModal": {
       "title": "Felhasználói beavatkozás szükséges",
-      "part1": "Sütik mappa nem törölhető. Kérlek töröld a mappát manuálisan:",
+      "part1": "Sütik mappa nem törölhető. Kérlek, töröld a mappát manuálisan:",
       "part2": "Kattints a mappa megnyitása gombra, a(z) ",
       "part3": "az alkalmazás be lesz zárva",
       "part4": ", és manuálisan törli a \"sqlite\" mappát.",
@@ -882,7 +882,7 @@
     "repairDevice": {
       "title": "Ledger eszközöd javítása",
       "descSettings": "Használd ezt a funkciót Ledger eszközöd helyreállításához, ha megakadt szoftverfrissítés közben.",
-      "desc": "Kérlek válaszd ki a Ledger eszközöd állapotát.",
+      "desc": "Kérlek, válaszd ki a Ledger eszközöd állapotát.",
       "button": "Javítás"
     },
     "exportLogs": {
@@ -929,9 +929,9 @@
     "checking": "Frissítés ellenőrzése...",
     "checkSuccess": "A frissítés készen áll a telepítésre",
     "quitAndInstall": "Telepítés most",
-    "error": "Hiba történt a frissítés során. Kérlek töltsd le újra",
+    "error": "Hiba történt a frissítés során. Kérlek, töltsd le újra",
     "reDownload": "Letöltés újra",
-    "nightlyWarning": "Ez a verzió nem frissíthető automatikusan, kérlek telepítsd az utolsó verziót manuálisan",
+    "nightlyWarning": "Ez a verzió nem frissíthető automatikusan, kérlek, telepítsd az utolsó verziót manuálisan",
     "downloadNow": "Letöltés most"
   },
   "crash": {
@@ -1180,7 +1180,7 @@
     "desc": "Nehezen tudod csatlakoztatni a készüléked?"
   },
   "TransactionConfirm": {
-    "title": "Kérlek erősítsd meg a műveletet az eszközödön az elküldéshez",
+    "title": "Kérlek, erősítsd meg a műveletet az eszközödön az elküldéshez",
     "warning": "Mindig ellenőrizd, hogy készüléked pontosan az itt található címet jeleníti-e meg {{recipientWording}}",
     "recipientWording": {
       "send": "fogadó",
@@ -1199,23 +1199,23 @@
   "errors": {
     "generic": {
       "title": "{{message}}",
-      "description": "Valami hiba történt. Kérlek próbáld újra, vagy lépj kapcsolatba velünk."
+      "description": "Valami hiba történt. Kérlek, próbáld meg újra, vagy lépj kapcsolatba velünk."
     },
     "AccountNameRequired": {
       "title": "Egy számlanév szükséges",
-      "description": "Kérlek adj meg egy számlanevet"
+      "description": "Kérlek, adj meg egy számlanevet"
     },
     "AccountNotSupported": {
       "title": "Számla nem támogatott.",
-      "description": "Kérlek próbáld újra, vagy lépj kapcsolatba az ügyféltámogatással ({{reason}})"
+      "description": "Kérlek, próbáld meg újra, vagy lépj kapcsolatba az ügyféltámogatással ({{reason}})"
     },
     "NoAccessToCamera": {
-      "title": "Kérlek bizonyosodj meg róla, hogy a kamera csatlakoztatva van, más alkalmazás nem használja, és a Ledger Live-nak van jogosultsága használni azt.",
+      "title": "Kérlek, bizonyosodj meg róla, hogy a kamera csatlakoztatva van, más alkalmazás nem használja, és a Ledger Live-nak van jogosultsága használni azt.",
       "description": ""
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} nem támogatott",
-      "description": "Ez a kriptovaluta egyenlőre nem támogatott. Kérlek lépj kapcsolatba velünk."
+      "description": "Ez a kriptovaluta egyenlőre nem támogatott. Kérlek, lépj kapcsolatba velünk."
     },
     "DeviceNotGenuine": {
       "title": "Lehetséges, hogy nem eredeti",
@@ -1227,23 +1227,23 @@
     },
     "DeviceInOSUExpected": {
       "title": "Sajnáljuk, a frissítés sikertelen",
-      "description": "Kérlek próbáld újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálattal"
+      "description": "Kérlek, próbáld meg újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálattal"
     },
     "DeviceHalted": {
-      "title": "Kérlek indítsd újra a Ledger eszközöd, és próbáld meg újra",
+      "title": "Kérlek, indítsd újra a Ledger eszközöd, és próbáld meg újra",
       "description": "Váratlan hiba történt, próbáld meg újra"
     },
     "DeviceSocketFail": {
       "title": "{{message}}",
-      "description": "Kérlek próbáld meg újra"
+      "description": "Kérlek, próbáld meg újra"
     },
     "DeviceSocketNoBulkStatus": {
       "title": "Hoppá, csatlakozás sikertelen",
-      "description": "Kérlek próbáld meg újra"
+      "description": "Kérlek, próbáld meg újra"
     },
     "DisconnectedDevice": {
       "title": "Hoppá, az eszköz csatlakozása megszűnt",
-      "description": "Kérlek próbáld meg újra"
+      "description": "Kérlek, próbáld meg újra"
     },
     "DisconnectedDeviceDuringOperation": {
       "title": "Hoppá, az eszköz lecsatlakoztatva",
@@ -1251,7 +1251,7 @@
     },
     "EnpointConfig": {
       "title": "Érvénytelen végpont",
-      "description": "Kérlek adj meg egy érvényes végpontot"
+      "description": "Kérlek, adj meg egy érvényes végpontot"
     },
     "FeeEstimationFailed": {
       "title": "Sajnáljuk, a díjbecslés sikertelen",
@@ -1259,11 +1259,11 @@
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "Szoftver vagy alkalmazás frissítés szükséges",
-      "description": "Kérlek használd az eszközkezelőt minden alkalmazás törléséhez és ellenőrizd, hogy elérhető-e szoftverfrissítés mielőtt újratelepítenéd őket"
+      "description": "Kérlek, használd az eszközkezelőt minden alkalmazás törléséhez és ellenőrizd, hogy elérhető-e szoftverfrissítés mielőtt újratelepítenéd őket"
     },
     "HardResetFail": {
       "title": "Hoppá, nem sikerült az újraindítás",
-      "description": "Kérlek próbáld meg újra, vagy ha kétségeid vannak, vedd fel velünk a kapcsolatot"
+      "description": "Kérlek, próbáld meg újra, vagy ha kétségeid vannak, vedd fel velünk a kapcsolatot"
     },
     "LatestMCUInstalledError": {
       "title": "Hoppá, nincs mit frissíteni",
@@ -1271,11 +1271,11 @@
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Kérlek ellenőrizd a kapcsolatot, és próbáld meg újra, vagy lépj kapcsolatba a Ledger ügyfélszolgálatával."
+      "description": "Kérlek, ellenőrizd a kapcsolatot, és próbáld meg újra, vagy lépj kapcsolatba a Ledger ügyfélszolgálatával."
     },
     "LedgerAPI5xx": {
       "title": "Sajnáljuk, próbáld meg újra.",
-      "description": "A szerver nem tudta elküldeni a kérésed. Kérlek próbáld meg később. {{message}}"
+      "description": "A szerver nem tudta elküldeni a kérésed. Kérlek, próbáld meg később. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Sajnáljuk, a(z) {{currencyName}} szolgáltatások nem elérhetőek",
@@ -1287,15 +1287,15 @@
     },
     "ManagerAppDepInstallRequired": {
       "title": "{{dependency}} alkalmazás szükséges",
-      "description": "Ha már telepítetted a(z) {{dependency}} alkalmazást, kérlek telepítsd újra, hogy megkapd a legújabb verziót"
+      "description": "Ha már telepítetted a(z) {{dependency}} alkalmazást, kérlek, telepítsd újra, hogy megkapd a legújabb verziót"
     },
     "ManagerAppDepUninstallRequired": {
       "title": "Sajnáljuk, ez az alkalmazás szükséges",
       "description": "Először el kell távolítanod az összes alkalmazást amelyek szükségesek a(z) {{appName}} alkalmazáshoz"
     },
     "ManagerDeviceLocked": {
-      "title": "Kérlek old fel az eszközöd",
-      "description": "Az eszközöd zárolva van, kérlek old fel"
+      "title": "Kérlek, old fel az eszközöd",
+      "description": "Az eszközöd zárolva van, kérlek, old fel"
     },
     "ManagerFirmwareNotEnoughSpace": {
       "title": "Távolítsd el az összes alkalmazást az eszközödről",
@@ -1311,7 +1311,7 @@
     },
     "NetworkDown": {
       "title": "Hoppá, úgy tűnik nincs internetkapcsolat",
-      "description": "Kérlek ellenőrizd az internetkapcsolatod"
+      "description": "Kérlek, ellenőrizd az internetkapcsolatod"
     },
     "NoAddressesFound": {
       "title": "Sajnáljuk, nem találhatók számlák",
@@ -1329,50 +1329,50 @@
     },
     "PasswordsDontMatch": {
       "title": "Helytelen jelszó",
-      "description": "Kérlek próbáld meg újra"
+      "description": "Kérlek, próbáld meg újra"
     },
     "PasswordIncorrect": {
       "title": "A megadott jelszó helytelen",
-      "description": "Kérlek próbáld meg újra"
+      "description": "Kérlek, próbáld meg újra"
     },
     "TimeoutError": {
       "title": "Hoppá, időtúllépés történt",
-      "description": "Túl sokáig tartott a szerver válasza, kérlek próbálja meg újra"
+      "description": "Túl sokáig tartott a szerver válasza, kérlek, próbálja meg újra"
     },
     "TimeoutTagged": {
       "title": "Hoppá, időtúllépés történt ({{tag}})",
       "description": "Túl sokáig tartott a szerver válasza"
     },
     "TransportError": {
-      "title": "Valami hiba történt, kérlek csatlakoztasd újra az eszközöd",
+      "title": "Valami hiba történt, kérlek, csatlakoztasd újra az eszközöd",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "Valami hiba történt, kérlek csatlakoztasd újra az eszközöd",
+      "title": "Valami hiba történt, kérlek, csatlakoztasd újra az eszközöd",
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
-      "title": "Kérlek nyisd meg a(z) {{appName}} alkalmazást",
+      "title": "Kérlek, nyisd meg a(z) {{appName}} alkalmazást",
       "description": "Tartsd megnyitva a(z) {{appName}} alkalmazást amíg a számláid keressük"
     },
     "UnexpectedBootloader": {
       "title": "Hoppá, az eszközödnek nem szabad Bootloader módban lennie",
-      "description": "Kérlek indítsd újra az eszközöd, vagy lépj kapcsolatba velünk"
+      "description": "Kérlek, indítsd újra az eszközöd, vagy lépj kapcsolatba velünk"
     },
     "UserRefusedAllowManager": {
       "title": "Az eszközkezelő engedélyezése vissza lett utasítva az eszközön"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "A frissítés megszakítva",
-      "description": "Kérlek próbáld újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
+      "description": "Kérlek, próbáld újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
     },
     "UserRefusedOnDevice": {
       "title": "A tranzakciót vissza lett utasítva az eszközön",
-      "description": "Kétség esetén kérlek próbáld meg újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálattal"
+      "description": "Kétség esetén kérlek, próbáld meg újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálattal"
     },
     "UserRefusedAddress": {
       "title": "A fogadó cím elutasítva",
-      "description": "Kérlek próbáld meg újra, vagy kétség esetén vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
+      "description": "Kérlek, próbáld meg újra, vagy kétség esetén vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
     },
     "UpdateYourApp": {
       "title": "Az alkalmazás frissítése szükséges",
@@ -1380,7 +1380,7 @@
     },
     "DeviceOnDashboardExpected": {
       "title": "Visszatérés a Főoldalra",
-      "description": "Kérlek lépj vissza a Főoldalra az eszközödön"
+      "description": "Kérlek, lépj vissza a Főoldalra az eszközödön"
     },
     "WebsocketConnectionError": {
       "title": "Sajnáljuk, próbáld meg újra (websocket error)",
@@ -1392,7 +1392,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "Rossz eszköz vagy jelszó a(z) ‘{{accountName}}’ számlához",
-      "description": "Kérlek használd a készüléket vagy a jelszót a kiválasztott számlához"
+      "description": "Kérlek, használd a készüléket vagy a jelszót a kiválasztott számlához"
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Az alkalmazás frissítése szükséges",
@@ -1406,7 +1406,7 @@
     },
     "CantOpenDevice": {
       "title": "Hoppá, nem sikerült csatlakozni az eszközhöz",
-      "description": "A készülék észlelhető, de a kapcsolódás sikertelen. Kérlek próbáld újra vagy vedd fel velünk a kapcsolatot ha a probléma továbbra is fennáll."
+      "description": "A készülék észlelhető, de a kapcsolódás sikertelen. Kérlek, próbáld újra vagy vedd fel velünk a kapcsolatot ha a probléma továbbra is fennáll."
     },
     "ETHAddressNonEIP": {
       "title": "Az automatikus ellenőrzés nem elérhető: gondosan ellenőrizd a címet",
@@ -1416,7 +1416,7 @@
       "title": "Nem sikerült beolvasni ezt a QR-kódot: az automatikus hitelesítés nem támogatott ennél a címnél"
     },
     "FeeNotLoaded": {
-      "title": "Nem sikerült betölteni a díjakat, kérlek állítsd be a díjat manuálisan"
+      "title": "Nem sikerült betölteni a díjakat, kérlek, állítsd be a díjat manuálisan"
     },
     "FeeRequired": {
       "title": "Díjak szükségesek"
@@ -1426,7 +1426,7 @@
     },
     "UnknownMCU": {
       "title": "Ismeretlen MCU verzió",
-      "description": "Kérlek lépj kapcsolatba a Ledger ügyféltámogatással"
+      "description": "Kérlek, lépj kapcsolatba a Ledger ügyféltámogatással"
     },
     "MCUNotGenuineToDashboard": {
       "title": "Lépj a főoldalra a frissítéshez",
@@ -1439,17 +1439,17 @@
     },
     "UnavailableTezosOriginatedAccountReceive": {
       "title": "Nem fogadható az alszámlán",
-      "description": "Ha pénzt szeretnél fogadni, kérlek használd a főszámlát"
+      "description": "Ha pénzt szeretnél fogadni, kérlek, használd a főszámlát"
     },
     "UnavailableTezosOriginatedAccountSend": {
       "title": "Az alszámlákról még nem lehet küldeni",
       "description": "Ez a funkció később lesz hozzáadva a Babylon frissítés által nemrégiben bevezetett változtatások miatt."
     },
     "RecommendUndelegation": {
-      "title": "Kérlek vond vissza a számla átruházását mielőtt kiürítenéd"
+      "title": "Kérlek, vond vissza a számla átruházását mielőtt kiürítenéd"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Kérlek először üríts ki minden alszámlát"
+      "title": "Kérlek, először üríts ki minden alszámlát"
     },
     "NotSupportedLegacyAddress": {
       "title": "Ez a régi címformátum már nem támogatott"
@@ -1459,11 +1459,11 @@
       "description": "Nyisd meg a(z) ‘{{managerAppName}}’ alkalmazást az eszközödön"
     },
     "DeviceNameInvalid": {
-      "title": "Kérlek válaszd ki az eszköz nevét '{{invalidCharacters}}' karakterek nélkül"
+      "title": "Kérlek, válaszd ki az eszköz nevét '{{invalidCharacters}}' karakterek nélkül"
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
-      "description": "Kérlek próbáld meg újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával."
+      "description": "Kérlek, próbáld meg újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával."
     },
     "ManagerAppRelyOnBTC": {
       "title": "Bitcoin és Ethereum alkalmazások szükségesek",
@@ -1475,11 +1475,11 @@
     },
     "SyncError": {
       "title": "Szinkronizálási hiba",
-      "description": "Valami hiba történt a blokklánc szinkronizálásával kapcsolatban.  Kérlek próbáld újra, vagy vedd fel velünk a kapcsolatot."
+      "description": "Valami hiba történt a blokklánc szinkronizálásával kapcsolatban.  Kérlek, próbáld újra, vagy vedd fel velünk a kapcsolatot."
     },
     "PairingFailed": {
       "title": "Párosítás sikertelen",
-      "description": "Kérlek próbálkozz újra, vagy kétség esetén vedd fel a kapcsolatot a Ledger ügyféltámogatással."
+      "description": "Kérlek, próbáld meg újra, vagy kétség esetén vedd fel a kapcsolatot a Ledger ügyféltámogatással."
     },
     "GenuineCheckFailed": {
       "title": "Eredetiség ellenőrzése sikertelen",
@@ -1501,7 +1501,7 @@
       "title": "Nincs elegendő egyenleg ehhez a művelethez"
     },
     "WrongAppForCurrency": {
-      "title": "Kérlek nyisd meg a(z) {{expected}} alkalmazást"
+      "title": "Kérlek, nyisd meg a(z) {{expected}} alkalmazást"
     },
     "FeeTooHigh": {
       "title": "A hálózati díjak költsége több mint az összeg 10% -át teszik ki"
