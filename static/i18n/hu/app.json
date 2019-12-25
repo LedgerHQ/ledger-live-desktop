@@ -1145,9 +1145,9 @@
           "item4": "Műveletek: küldés, fogadás, lezárás, stb.",
           "item5": "Oldalgörgetés vége",
           "item6": "Alkalmazások telepítése, törlése, és verziója",
-          "item7": "Számlák mennyisége, kriptovaluták és műveletek",
+          "item7": "Számlák mennyisége, kriptovaluták, és műveletek",
           "item8": "Összefoglaló és oldalmegnyitások időtartama",
-          "item9": "Ledger eszköz típusa és szoftververziója"
+          "item9": "Ledger eszköz típusa, és szoftververziója"
         }
       },
       "sentryLogs": {
@@ -1180,8 +1180,8 @@
     "desc": "Nehezen tudod csatlakoztatni a készüléked?"
   },
   "TransactionConfirm": {
-    "title": "Kérlek, erősítsd meg a készüléken végrehajtott műveletet annak elküldéséhez",
-    "warning": "Mindig ellenőrizd, hogy készüléked pontosan azt címet jeleníti-e meg mint ami itt található {{recipientWording}}",
+    "title": "Kérlek erősítsd meg a műveletet az eszközödön az elküldéshez",
+    "warning": "Mindig ellenőrizd, hogy készüléked pontosan az itt található címet jeleníti-e meg {{recipientWording}}",
     "recipientWording": {
       "send": "fogadó",
       "delegate": "megerősítő",
@@ -1199,15 +1199,15 @@
   "errors": {
     "generic": {
       "title": "{{message}}",
-      "description": "Valami elromlott. Kérlek próbáld újra, vagy lépj kapcsolatba velünk."
+      "description": "Valami hiba történt. Kérlek próbáld újra, vagy lépj kapcsolatba velünk."
     },
     "AccountNameRequired": {
-      "title": "Egy számla név szükséges",
-      "description": "Kérlek add meg a számlád nevét"
+      "title": "Egy számlanév szükséges",
+      "description": "Kérlek adj meg egy számlanevet"
     },
     "AccountNotSupported": {
       "title": "Számla nem támogatott.",
-      "description": "Kérlek próbáld újra, vagy lépj kapcsolatba velünk ({{reason}})"
+      "description": "Kérlek próbáld újra, vagy lépj kapcsolatba az ügyféltámogatással ({{reason}})"
     },
     "NoAccessToCamera": {
       "title": "Kérlek bizonyosodj meg róla, hogy csatlakoztatva van a kamera, és más alkalmazás nem használja és a Ledger Live-nak van jogosultsága használni azt.",
