@@ -1007,7 +1007,7 @@
       "disclaimer": {
         "note1": "Mindig válassz saját PIN kódot.",
         "note2": "Használj 8 számjegyet az optimális biztonság érdekében.",
-        "note3": "Soha ne használj olyan eszközt, amit már meglévő PIN kóddal, vagy kitöltött helyreállítás kártyával kapsz."
+        "note3": "Soha ne használj olyan eszközt, ami mielőtt hozzád került már rendelkezett PIN kóddal, vagy kitöltött helyreállítási kártyával."
       },
       "initialize": {
         "title": "Válaszd ki a PIN kódod",
@@ -1088,19 +1088,19 @@
       "disclaimer": {
         "note1": "Tedd a 24 szavas helyreállítási kártyád egy olyan biztonságos helyre, ami nincs szem előtt.",
         "note2": "Győződj meg róla, hogy csak te férsz hozzá a helyreállítási kártyádhoz.",
-        "note3": "A Ledger nem tárol semmilyen biztonsági mentést a helyreállítási szavaidról.",
-        "note4": "Soha ne használj olyan eszközt, ami mielőtt hozzádkerült már rendelkezett pinkóddal, vagy helyreállítási szavakkal."
+        "note3": "A Ledger nem tárol semmilyen biztonsági mentést a helyreállítási kártyádról.",
+        "note4": "Soha ne használj olyan eszközt, ami mielőtt hozzád került már rendelkezett PIN kóddal, vagy kitöltött helyreállítási kártyával."
       }
     },
     "genuineCheck": {
       "title": "Biztonsági ellenőrzőlista",
       "descGeneric": "Mielőtt folytatnád, kérlek menj végig a biztonsági ellenőrzőlistán",
-      "descRestore": "Mielőtt elkezdenéd, kérlek erősítsd meg:",
+      "descRestore": "Mielőtt elkezdenéd, kérlek erősítsd meg, hogy:",
       "step1": {
-        "title": "Te magad pálasztottad ki a PIN kódod?"
+        "title": "Te magad választottad ki a PIN kódod?"
       },
       "step2": {
-        "title": "Te magad tetted biztonságos helyre a helyreállítási szavaid?"
+        "title": "Te magad tetted biztonságos helyre a helyreállítási kártyád?"
       },
       "step3": {
         "title": "A Ledger eszközöd eredeti?"
@@ -1112,12 +1112,12 @@
       },
       "errorPage": {
         "title": {
-          "pinFailed": "Nem a saját PIN kódod választottad ki?",
+          "pinFailed": "Nem te választottad ki a PIN kódod?",
           "recoveryPhraseFailed": "Nem általad lett biztonságos helyre téve a visszaállítási kártyád?",
           "isGenuineFail": "Hoppá, az eszközöd nem tűnik eredetinek..."
         },
         "desc": {
-          "pinFailed": "Soha ne használd az eszközt mellé írt PIN kóddal. Ha kétséged támadt, vedd fel velünk a kapcsolatot.",
+          "pinFailed": "Soha ne használj olyan eszközt, ami mielőtt hozzád került már rendelkezett PIN kóddal. Ha kétséged támadt, vedd fel velünk a kapcsolatot.",
           "recoveryPhraseFailed": "Csak azt a szót írd le, ami az eszközödön is megjelent. Ha kétséged támadt, vedd fel velünk a kapcsolatot.",
           "isGenuineFail": "Az eszköz nem teljesítette a Ledger biztonsági szerveréhez történő kapcsolódáshoz szükséges hitelesítési tesztet. Kérlek, fordulj a Ledger ügyfélszolgálathoz segítségért."
         }
