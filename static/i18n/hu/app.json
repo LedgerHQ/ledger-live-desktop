@@ -1402,14 +1402,14 @@
       "title": "Ez nem egy valós {{currencyName}} cím"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "A fogadó címe megegyezik a küldő címével"
+      "title": "A fogadó cím megegyezik a küldő címmel"
     },
     "CantOpenDevice": {
       "title": "Hoppá, nem sikerült csatlakozni az eszközhöz",
-      "description": "A készülék észlelhető, de a kapcsolódás sikertelen. Kérlek próbáld újra vagy vedd fel velünk a kapcsolatot ha a probléma továbbra is fennál."
+      "description": "A készülék észlelhető, de a kapcsolódás sikertelen. Kérlek próbáld újra vagy vedd fel velünk a kapcsolatot ha a probléma továbbra is fennáll."
     },
     "ETHAddressNonEIP": {
-      "title": "Az automatikus ellenőrzés nem érhető el: gondosan ellenőrizd a címet",
+      "title": "Az automatikus ellenőrzés nem elérhető: gondosan ellenőrizd a címet",
       "description": null
     },
     "CantScanQRCode": {
@@ -1422,18 +1422,18 @@
       "title": "Díjak szükségesek"
     },
     "GasLessThanEstimate": {
-      "title": "ez lehet, hogy túl alacsony, kérlek, növeld"
+      "title": "Ez lehet, hogy túl alacsony, kérlek növeld"
     },
     "UnknownMCU": {
       "title": "Ismeretlen MCU verzió",
       "description": "Kérlek lépj kapcsolatba a Ledger ügyféltámogatással"
     },
     "MCUNotGenuineToDashboard": {
-      "title": "Hozzáférés a főoldalhoz a frissítéshez",
+      "title": "Lépj a főoldalra a frissítéshez",
       "description": "",
       "list": {
-        "1": "Válaszd le és csatlakoztasd újra az USB kábel anélkül, hogy megnyomnál bármilyen gombot.",
-        "2": "Nyomd meg mindkét gombot háromszor hogy hozzáférj a Főoldalhoz.",
+        "1": "Válaszd le és csatlakoztasd újra az USB kábelt anélkül, hogy megnyomnál bármilyen gombot.",
+        "2": "Nyomd meg mindkét gombot háromszor, hogy a Főoldalra lépj.",
         "3": "Nyisd meg az eszközkezelőt és kattints a szoftver frissítésére."
       }
     },
@@ -1443,13 +1443,13 @@
     },
     "UnavailableTezosOriginatedAccountSend": {
       "title": "Az alszámlákról még nem lehet küldeni",
-      "description": "Ez a funkció később lesz hozzáadva a Babylon frissítés által nemrégiben bevezetett változások miatt."
+      "description": "Ez a funkció később lesz hozzáadva a Babylon frissítés által nemrégiben bevezetett változtatások miatt."
     },
     "RecommendUndelegation": {
       "title": "Kérlek vond vissza a számla átruházását mielőtt kiürítenéd"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Kérlek előszőr ürítsd ki minden alszámládat"
+      "title": "Kérlek először üríts ki minden alszámlát"
     },
     "NotSupportedLegacyAddress": {
       "title": "Ez a régi címformátum már nem támogatott"
