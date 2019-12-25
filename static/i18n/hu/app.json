@@ -1045,12 +1045,12 @@
             "step2": "Nyomd meg mindkét gombot ahogy a {{productName}} képernyőjén látod.",
             "step3": "Nyomd meg a bal gombot a visszavonáshoz <1><0>{{setUpAsNewDevice}}</0></1>.",
             "step4": "Nyomd meg a jobb gombot a kiválasztáshoz <1><0>{{restoreConfiguration}}</0></1>.",
-            "step5": "Válassz egy 4-8 számjegy hosszú PIN kódot."
+            "step5": "Válassz egy 4-8 számjegyből álló PIN kódot."
           },
           "blue": {
             "step1": "Csatlakoztasd a {{productName}} -t a számítógépedhez.",
             "step2": "Nyomj rá <1><0>{{restoreConfiguration}}</0></1>.",
-            "step3": "Válassz egy 4-8 számjegy hosszú PIN kódot."
+            "step3": "Válassz egy 4-8 számjegyből álló PIN kódot."
           }
         }
       }
@@ -1072,21 +1072,21 @@
       },
       "restore": {
         "title": "Írd be a helyreállítási szavakat",
-        "desc": "Írd be a helyreállítási szavakat amik a helyreállítási kártyádon találhatóak",
+        "desc": "Írd be a helyreállítási kártyádon található szavakat",
         "nano": {
           "step1": "Válaszd ki a helyreállítási szavak mennyiségét.",
-          "step2": "Írd be a szó első betűit amíg <1><0>{{seedWord1}}</0></1> javasolt szó meg nem jelenik.",
+          "step2": "Írd be a szó első betűit amíg a <1><0>{{seedWord1}}</0></1> javasolt szó meg nem jelenik.",
           "step3": "Válaszd ki a <1><0>{{seedWord1}}</0></1> szót a javasolt szavak közül mindkét gomb megnyomásával.",
           "step4": "Ismételd a folyamatot, míg az utolsó szót is beírod."
         },
         "blue": {
           "step1": "Válaszd ki a helyreállítási szavak mennyiségét.",
-          "step2": "Írd be a helyreállítási kártyát első szavát. Nyomj rá a szóra mikor megjelenik a kijelzőn.",
+          "step2": "Írd be a helyreállítási kártyád első szavát. Nyomj rá a szóra amikor megjelenik a kijelzőn.",
           "step3": "Ismételd a folyamatot, míg az utolsó szót is beírod."
         }
       },
       "disclaimer": {
-        "note1": "Tedd a 24 szavas helyreállítási kártyád egy olyan biztonságos helyre ami nincs szemelőtt.",
+        "note1": "Tedd a 24 szavas helyreállítási kártyád egy olyan biztonságos helyre, ami nincs szem előtt.",
         "note2": "Győződj meg róla, hogy csak te férsz hozzá a helyreállítási kártyádhoz.",
         "note3": "A Ledger nem tárol semmilyen biztonsági mentést a helyreállítási szavaidról.",
         "note4": "Soha ne használj olyan eszközt, ami mielőtt hozzádkerült már rendelkezett pinkóddal, vagy helyreállítási szavakkal."
