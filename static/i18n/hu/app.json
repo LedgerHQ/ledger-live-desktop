@@ -1337,7 +1337,7 @@
     },
     "TimeoutError": {
       "title": "Hoppá, időtúllépés történt",
-      "description": "Túl sokáig tartott a szerver válasza, kérlek, próbálja meg újra"
+      "description": "Túl sokáig tartott a szerver válasza, kérlek, próbáld meg újra"
     },
     "TimeoutTagged": {
       "title": "Hoppá, időtúllépés történt ({{tag}})",
@@ -1364,7 +1364,7 @@
     },
     "UserRefusedFirmwareUpdate": {
       "title": "A frissítés megszakítva",
-      "description": "Kérlek, próbáld újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
+      "description": "Kérlek, próbáld meg újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
     },
     "UserRefusedOnDevice": {
       "title": "A tranzakciót vissza lett utasítva az eszközön",
@@ -1406,7 +1406,7 @@
     },
     "CantOpenDevice": {
       "title": "Hoppá, nem sikerült csatlakozni az eszközhöz",
-      "description": "A készülék észlelhető, de a kapcsolódás sikertelen. Kérlek, próbáld újra vagy vedd fel velünk a kapcsolatot ha a probléma továbbra is fennáll."
+      "description": "A készülék észlelhető, de a kapcsolódás sikertelen. Kérlek, próbáld meg újra, vagy vedd fel velünk a kapcsolatot ha a probléma továbbra is fennáll."
     },
     "ETHAddressNonEIP": {
       "title": "Az automatikus ellenőrzés nem elérhető: gondosan ellenőrizd a címet",
@@ -1471,11 +1471,11 @@
     },
     "UserRefusedDeviceNameChange": {
       "title": "Az átnevezés megszakítva az eszközön",
-      "description": "Próbáld újra, és fogadd el az átnevezést az eszközödön"
+      "description": "Próbáld meg újra, és fogadd el az átnevezést az eszközödön"
     },
     "SyncError": {
       "title": "Szinkronizálási hiba",
-      "description": "Valami hiba történt a blokklánc szinkronizálásával kapcsolatban.  Kérlek, próbáld újra, vagy vedd fel velünk a kapcsolatot."
+      "description": "Valami hiba történt a blokklánc szinkronizálásával kapcsolatban.  Kérlek, próbáld meg újra, vagy vedd fel velünk a kapcsolatot."
     },
     "PairingFailed": {
       "title": "Párosítás sikertelen",
