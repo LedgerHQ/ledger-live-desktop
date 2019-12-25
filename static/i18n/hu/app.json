@@ -1014,20 +1014,20 @@
         "instructions": {
           "nano": {
             "step1": "Csatlakoztasd a {{productName}} -t a számítógépedhez. Nyomd meg mindkét gombot a kezdéshez.",
-            "step2": "Press the right button to select <1><0>{{configureAsNewDevice}}?</0></1>.",
-            "step3": "Nyomd meg a bal vagy jobb gombot egy számjegy kiválasztásához. Nyomd meg mindkét gombot a megerősítéshez.",
-            "step4": "Válaszd a ✓ -t hogy megerősítsd a PIN kódod. Válaszd a ⬅ -t hogy törölj egy számjegyet."
+            "step2": "Nyomd meg a jobb gombot a kiválasztáshoz <1><0>{{configureAsNewDevice}}?</0></1>.",
+            "step3": "Nyomd meg a bal vagy a jobb a gombot egy számjegy kiválasztásához. Nyomd meg mindkét gombot a megerősítéshez.",
+            "step4": "Válaszd a ✓ -t a PIN kódod megerősítéséhez. Válaszd a ⬅ -t egy számjegy törléséhez."
           },
           "nanoX": {
             "step1": "Csatlakoztasd a {{productName}} -t a számítógépedhez.",
             "step2": "Nyomd meg mindkét gombot, hogy kiválaszd <1><0>{{setUpAsNewDevice}}</0></1>.",
-            "step3": "Nyomd meg a bal vagy a jobb gombot hogy kiválassz egy számjegyet.",
-            "step4": "Válaszd a ✓ -t hogy megerősítsd a PIN kódod. Válaszd a ⬅ -t hogy törölj egy számjegyet."
+            "step3": "Nyomd meg a bal vagy a jobb gombot egy számjegy kiválasztásához.",
+            "step4": "Válaszd a ✓ -t a PIN kódod megerősítéséhez. Válaszd a ⬅ -t egy számjegy törléséhez."
           },
           "blue": {
             "step1": "Csatlakoztasd a {{productName}} -t a számítógépedhez.",
             "step2": "Nyomj rá <1><0>{{configureAsNewDevice}}</0></1>.",
-            "step3": "Válassz egy 4-8 számjegy hosszú PIN kódot."
+            "step3": "Válassz egy 4-8 számjegyből álló PIN kódot."
           }
         }
       },
@@ -1038,7 +1038,7 @@
             "step1": "Csatlakoztasd a {{productName}} -t a számítógéphez. Nyomd meg mindkét gombot a kezdéshez.",
             "step2": "Nyomd meg a bal gombot a visszavonáshoz <1><0>{{configureAsNewDevice}}?</0></1>. Azután nyomd meg a jobb gombot a kiválasztáshoz <3><0>{{restoreConfiguration}}?</0></3>.",
             "step3": "Nyomd meg a bal vagy a jobb gombot egy számjegy kiválasztásához. Nyomd meg mindkét gombot a megerősítéshez.",
-            "step4": "Válaszd a ✓ -t hogy megerősítsd a PIN kódod. Válaszd a ⬅ -t hogy törölj egy számjegyet."
+            "step4": "Válaszd a ✓ -t a PIN kódod megerősítéséhez. Válaszd a ⬅ -t egy számjegy törléséhez."
           },
           "nanoX": {
             "step1": "Csatlakoztasd a {{productName}} -t a számítógépedhez.",
