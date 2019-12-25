@@ -1271,19 +1271,19 @@
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Ellenőrizd a kapcsolatot, és próbáld újra, vagy lépj kapcsolatba a Ledger ügyfélszolgálatával."
+      "description": "Kérlek ellenőrizd a kapcsolatot, és próbáld meg újra, vagy lépj kapcsolatba a Ledger ügyfélszolgálatával."
     },
     "LedgerAPI5xx": {
-      "title": "Sajnáljuk, próbáld újra.",
-      "description": "A szerver nem tudta elküldeni a kérésed. Kérlek, próbáld meg később. {{message}}"
+      "title": "Sajnáljuk, próbáld meg újra.",
+      "description": "A szerver nem tudta elküldeni a kérésed. Kérlek próbáld meg később. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Sajnáljuk, a(z) {{currencyName}} szolgáltatások nem elérhetőek",
-      "description": "Kérlek, próbáld újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
+      "description": "Kérlek, próbáld meg újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
     },
     "ManagerAppAlreadyInstalled": {
       "title": "Hoppá, ez már telepítve van",
-      "description": "Ellenőrizd az eszközöd, hogy megtudd, mely alkalmazások vannak már telepítve"
+      "description": "Ellenőrizd az eszközöd, hogy lásd, mely alkalmazások vannak már telepítve"
     },
     "ManagerAppDepInstallRequired": {
       "title": "{{dependency}} alkalmazás szükséges",
@@ -1299,27 +1299,27 @@
     },
     "ManagerFirmwareNotEnoughSpace": {
       "title": "Távolítsd el az összes alkalmazást az eszközödről",
-      "description": "A kripto eszközökhöz hozzáférést biztosító privát kulcsok biztonságban vannak az eszközön, és biztosítva vannak a helyreállítási kártyán."
+      "description": "A kriptovalutáidhoz való hozzáférést biztosító privát kulcsok biztonságban maradnak az eszközödön, és a helyreállítási kártyán."
     },
     "ManagerNotEnoughSpace": {
       "title": "Sajnáljuk, nincs elegendő tárhely",
-      "description": "Távolíts el néhány alkalmazást, hogy helyet szabadíts fel. A kripto eszközökhöz hozzáférést biztosító privát kulcsok biztonságban maradnak az eszközön."
+      "description": "Távolíts el néhány alkalmazást, hogy helyet szabadíts fel. A kriptovalutáidhoz való hozzáférést biztosító privát kulcsok biztonságban maradnak az eszközön."
     },
     "ManagerUninstallBTCDep": {
       "title": "Sajnáljuk, ez az alkalmazás szükséges",
       "description": "A Bitcoin vagy Ethereum alkalmazást utoljára távolítsd el"
     },
     "NetworkDown": {
-      "title": "Hoppá, úgy tűnik, nincs internetkapcsolat",
+      "title": "Hoppá, úgy tűnik nincs internetkapcsolat",
       "description": "Kérlek ellenőrizd az internetkapcsolatod"
     },
     "NoAddressesFound": {
-      "title": "Sajnáljuk, nem található számla",
-      "description": "Valami hiba történt a cím kiszámításakor, próbálkozz újra, vagy lépj kapcsolatba a Ledger ügyféltámogatással"
+      "title": "Sajnáljuk, nem találhatók számlák",
+      "description": "Valami hiba történt a cím kiszámításával kapcsolatban, próbáld meg újra, vagy lépj kapcsolatba a Ledger ügyféltámogatással"
     },
     "NotEnoughBalance": {
       "title": "Hoppá, fedezethiány",
-      "description": "Győződj meg róla, hogy a terhelni kívánt számla egyenlege megfelelő"
+      "description": "Győződj meg róla, hogy a terhelni kívánt számla egyenlege elegendő"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "A fogadó cím inaktív. Küldj minimum {{minimalAmount}} mennyiséget az aktiválásához"
@@ -1329,11 +1329,11 @@
     },
     "PasswordsDontMatch": {
       "title": "Helytelen jelszó",
-      "description": "Kérlek próbáld újra"
+      "description": "Kérlek próbáld meg újra"
     },
     "PasswordIncorrect": {
       "title": "A megadott jelszó helytelen",
-      "description": "Kérlek próbáld újra"
+      "description": "Kérlek próbáld meg újra"
     },
     "TimeoutError": {
       "title": "Hoppá, időtúllépés történt",
