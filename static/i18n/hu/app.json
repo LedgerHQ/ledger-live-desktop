@@ -950,10 +950,10 @@
     "ctaSuccess": "Kész",
     "noAccounts": "Nincsenek exportálható számlák",
     "selectedAccounts": "Mely számlákat tartalmazza",
-    "selectedAccounts_plural": "Számlák melyeket tartalmazza ({{count}})"
+    "selectedAccounts_plural": "Mely számlákat tartalmazza ({{count}})"
   },
   "language": {
-    "system": "Rendszernyelv használata"
+    "system": "Használja a rendszer nyelvét"
   },
   "theme": {
     "system": "Használja a rendszer témáját",
@@ -966,7 +966,7 @@
       "selectDevice": "Eszköz kiválasztása",
       "selectPIN": "PIN kód",
       "writeSeed": "Helyreállítás kártya",
-      "setPassword": "Jelszóval lezárás",
+      "setPassword": "Jelszavas védelem",
       "analytics": "Hibák és elemzések"
     },
     "start": {
@@ -975,7 +975,7 @@
       "startBtn": "Kezdj hozzá"
     },
     "init": {
-      "title": "Kezd a Ledger eszközöddel",
+      "title": "Kezdd a Ledger eszközöddel",
       "newDevice": {
         "title": "Új eszközként való beállítás"
       },
@@ -1014,7 +1014,7 @@
         "instructions": {
           "nano": {
             "step1": "Csatlakoztasd a {{productName}} -t a számítógépedhez. Nyomd meg mindkét gombot a kezdéshez.",
-            "step2": "Nyomd meg a jobb gombot a kiválasztáshoz <1><0>{{configureAsNewDevice}}?</0></1>.",
+            "step2": "Press the right button to select <1><0>{{configureAsNewDevice}}?</0></1>.",
             "step3": "Nyomd meg a bal vagy jobb gombot egy számjegy kiválasztásához. Nyomd meg mindkét gombot a megerősítéshez.",
             "step4": "Válaszd a ✓ -t hogy megerősítsd a PIN kódod. Válaszd a ⬅ -t hogy törölj egy számjegyet."
           },
