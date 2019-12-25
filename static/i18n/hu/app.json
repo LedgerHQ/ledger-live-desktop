@@ -919,26 +919,26 @@
       "desc": "Ne felejtsd el a jelszavad. Jelszavad elvesztése esetén alaphelyzetbe kell állítanod a Ledger Live-ot, és újra hozzá kell adnod a számláidat."
     },
     "disablePassword": {
-      "title": "Jelszóval való lezárás kikapcsolása",
-      "desc": "Ledger Live titkosítatlanul lesznek tárolva a számítógépeden. Beleértve a számlák neveit, tranzakciókat, és nyilvános címeket."
+      "title": "Jelszavas védelem kikapcsolása",
+      "desc": "A Ledger Live adatai titkosítatlanul lesznek tárolva a számítógépeden. Beleértve a számlák neveit, tranzakciókat, és nyilvános címeket."
     }
   },
   "update": {
     "downloadInProgress": "Frissítés letöltése...",
     "downloadProgress": "{{progress}}% letöltve",
-    "checking": "Frissítések ellenőrzése...",
+    "checking": "Frissítés ellenőrzése...",
     "checkSuccess": "A frissítés készen áll a telepítésre",
     "quitAndInstall": "Telepítés most",
-    "error": "Hiba a frissítés során. Kérlek töltsd le újra",
+    "error": "Hiba történt a frissítés során. Kérlek töltsd le újra",
     "reDownload": "Letöltés újra",
     "nightlyWarning": "Ez a verzió nem frissíthető automatikusan, kérlek telepítsd az utolsó verziót manuálisan",
     "downloadNow": "Letöltés most"
   },
   "crash": {
     "oops": "Hoppá, valami hiba történt",
-    "uselessText": "Megpróbálhatod újra újraindítva a Ledger Live-ot. Kérlek exportáld a naplóid,és vedd fel a kapcsolatot a Ledger Supporttal ha a probléma azután is fennáll.",
+    "uselessText": "Megpróbálhatod újra a Ledger Live újraindításával. Kérlek exportáld a naplóid, és ha a probléma továbbra is fennáll, vedd fel a kapcsolatot a Ledger Ügyféltámogatással.",
     "restart": "Újraindítás",
-    "support": "Vedd fel a kapcsolatot az ügyfélszolgálattal",
+    "support": "Vedd fel a kapcsolatot az Ügyfélszolgálattal",
     "github": "GitHub"
   },
   "exportOperationsModal": {
