@@ -211,9 +211,9 @@
   "currentAddress": {
     "title": "Jelenlegi cím",
     "for": "Cím <1><0>{{name}}</0></1> -hoz",
-    "messageIfUnverified": "Kérlek erősítsd meg, hogy a(z) {{currencyName}} cím ami a Ledger Live-ban megjelenik, egyezik-e a Ledger eszközödön megjelenő címmel",
-    "messageIfAccepted": "Cím megerősítve, kérlek ellenőrizd újra ha másolás/beillesztést használtál, vagy olvasd be a QR kódot.",
-    "messageIfSkipped": "A(z) {{currencyName}} címed nem lett megerősítve a Ledger eszközön. Kérlek erősítsd meg az optimális biztonság érdekében."
+    "messageIfUnverified": "Kérlek, erősítsd meg, hogy a(z) {{currencyName}} cím ami a Ledger Live-ban megjelenik, egyezik-e a Ledger eszközödön megjelenő címmel",
+    "messageIfAccepted": "Cím megerősítve, kérlek, ellenőrizd újra ha másolás/beillesztést használtál, vagy olvasd be a QR kódot.",
+    "messageIfSkipped": "A(z) {{currencyName}} címed nem lett megerősítve a Ledger eszközön. Kérlek, erősítsd meg az optimális biztonság érdekében."
   },
   "deviceConnect": {
     "dashboard": "Navigálj a <1>Dashboard</1>-ra az eszközödön",
@@ -296,8 +296,8 @@
       "currency": "1 {{currency}} számla frissítése szükséges:",
       "currency_plural": "{{count}} {{currency}} számlák frissítése szükséges:",
       "footer": "Szükséged van a Ledger eszközödre a frissítés befejezéséhez",
-      "pendingDevices": "1 számlát nem lehet frissíteni. Kérlek csatlakoztasd az eszközt társítva az alábbi fiókhoz",
-      "pendingDevices_plural": "{{totalMigratableAccounts}} számlákat nem lehet frissíteni. Kérlek csatlakoztasd az eszközt társítva az alábbi fiókhoz",
+      "pendingDevices": "1 számlát nem lehet frissíteni. Kérlek, csatlakoztasd az eszközt, társítva az alábbi fiókhoz",
+      "pendingDevices_plural": "{{totalMigratableAccounts}} számlákat nem lehet frissíteni. Kérlek, csatlakoztasd az eszközt, társítva az alábbi fiókhoz",
       "doItLaterBtn": "Későbbre halasztás"
     },
     "connectDevice": {
@@ -311,7 +311,7 @@
       },
       "scanning": {
         "title": "{{currencyName}} frissítés folyamatban...",
-        "description": "Kérlek várj míg a számláid frissítésre kerülnek"
+        "description": "Kérlek várj, míg a számláid frissítésre kerülnek"
       },
       "finished-empty": {
         "title": "{{currencyName}} frissítés nincs befejezve",
@@ -1459,31 +1459,31 @@
       "description": "Nyisd meg a(z) ‘{{managerAppName}}’ alkalmazást az eszközödön"
     },
     "DeviceNameInvalid": {
-      "title": "Kérlek, válaszd ki az eszköz nevét '{{invalidCharacters}}' karakterek nélkül"
+      "title": "Kérlek válaszd ki az eszköz nevét '{{invalidCharacters}}' karakterek nélkül"
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
-      "description": "Kérlek, próbáld újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával."
+      "description": "Kérlek próbáld meg újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával."
     },
     "ManagerAppRelyOnBTC": {
       "title": "Bitcoin és Ethereum alkalmazások szükségesek",
-      "description": "Előszőr telepítsd a legfrissebb Bitcoin és Ethereum alkalmazásokat."
+      "description": "Először telepítsd a legfrissebb Bitcoin és Ethereum alkalmazásokat."
     },
     "UserRefusedDeviceNameChange": {
       "title": "Az átnevezés megszakítva az eszközön",
-      "description": "Próbáld újra, és engedélyezd az eszköz átnevezését"
+      "description": "Próbáld újra, és fogadd el az átnevezést az eszközödön"
     },
     "SyncError": {
-      "title": "Szinkronizáció hiba",
-      "description": "Valami hiba történt a bloklánc szinkronizálásával kapcsolatban.  Kérlek, próbáld újra, vagy vedd fel velünk a kapcsolatot."
+      "title": "Szinkronizálási hiba",
+      "description": "Valami hiba történt a blokklánc szinkronizálásával kapcsolatban.  Kérlek próbáld újra, vagy vedd fel velünk a kapcsolatot."
     },
     "PairingFailed": {
       "title": "Párosítás sikertelen",
-      "description": "Kérlek, próbálkozz újra, vagy kétség esetén vedd fel a kapcsolatot a Ledger ügyféltámogatással."
+      "description": "Kérlek próbálkozz újra, vagy kétség esetén vedd fel a kapcsolatot a Ledger ügyféltámogatással."
     },
     "GenuineCheckFailed": {
       "title": "Eredetiség ellenőrzése sikertelen",
-      "description": "Valami hiba történt. Kérlek, próbálkozz újra, vagy kétség esetén vedd fel a kapcsolatot a Ledger ügyféltámogatással."
+      "description": "Valami hiba történt. Kérlek, próbáld meg újra, vagy kétség esetén vedd fel a kapcsolatot a Ledger ügyféltámogatással."
     },
     "EthAppPleaseEnableContractData": {
       "title": "Kérlek, engedélyezd a szerződéses adatokat az Ethereum alkalmazás beállításaiban"
@@ -1492,13 +1492,13 @@
       "title": "Érvénytelen XRP célcímke"
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "Nincs elég egyenleg az átruházáshoz"
+      "title": "Nincs elegendő egyenleg a delegáláshoz"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "Nem elegendő a fő számla egyenlege"
+      "title": "Nincs elegendő egyenleg a főszámlán"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Nem elegendő egyenleg ehhez a művelethez"
+      "title": "Nincs elegendő egyenleg ehhez a művelethez"
     },
     "WrongAppForCurrency": {
       "title": "Kérlek nyisd meg a(z) {{expected}} alkalmazást"
