@@ -91,15 +91,20 @@ const Init: React$ComponentType<StepProps> = connect(null, mapDispatchToProps)(I
 export default Init;
 
 type CardType = {
+  key: string,
   icon: any,
   title: any,
   onClick: Function,
 };
 
 export function OptionFlowCard({ card }: { card: CardType }) {
-  const { icon, title, onClick } = card;
+  const { key, icon, title, onClick } = card;
   return (
-    <InitCardContainer onClick={onClick} color="palette.text.shade100">
+    <InitCardContainer
+      onClick={onClick}
+      color="palette.text.shade100"
+      data-automation-id={`onboarding-${key.toLowerCase()}-button`}
+    >
       <Box justifyContent="center" color={"palette.primary.main"}>
         <InitIconContainer justifyContent="center">{icon}</InitIconContainer>
       </Box>

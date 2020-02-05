@@ -46,13 +46,14 @@ class SideBarListItem extends PureComponent<Props> {
     return (
       <Tooltip content={renderedLabel} enabled={!!collapsed} boundary="window" placement="right">
         <Container
+          data-automation-id={`drawer-${String(label).toLowerCase()}-button`}
           isActive={!disabled && isActive}
           iconActiveColor={iconActiveColor}
           onClick={disabled ? undefined : onClick}
           disabled={disabled}
         >
           {!!Icon && <Icon size={16} />}
-          <Box grow shrink data-e2e={`sidebarItem_${String(label)}`}>
+          <Box grow shrink>
             <Hide visible={!collapsed}>
               {renderedLabel}
               {!!desc && desc(this.props)}

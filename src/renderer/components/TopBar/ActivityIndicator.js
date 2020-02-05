@@ -55,7 +55,11 @@ class ActivityIndicatorInner extends PureComponent<Props, { lastClickTime: numbe
     const isDisabled = isError || isRotating;
 
     const content = (
-      <ItemContainer disabled={isDisabled} onClick={isDisabled ? undefined : this.onClick}>
+      <ItemContainer
+        data-automation-id="topbar-synchronize-button"
+        disabled={isDisabled}
+        onClick={isDisabled ? undefined : this.onClick}
+      >
         <Rotating
           size={16}
           isRotating={isRotating}
@@ -80,7 +84,6 @@ class ActivityIndicatorInner extends PureComponent<Props, { lastClickTime: numbe
           )}
         </Rotating>
         <Box
-          data-e2e="syncButton"
           ml={isRotating ? 2 : 1}
           ff="Inter|SemiBold"
           color={isError ? "alertRed" : undefined}

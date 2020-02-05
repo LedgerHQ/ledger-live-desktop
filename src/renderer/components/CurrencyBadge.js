@@ -95,7 +95,12 @@ function CurrencyBadge({ currency }: { currency: CryptoCurrency | TokenCurrency 
         >
           {currency.ticker}
         </Box>
-        <Box ff="Inter" color="palette.text.shade100" fontSize={5} data-e2e="currencyBadge">
+        <Box
+          ff="Inter"
+          color="palette.text.shade100"
+          fontSize={5}
+          data-automation-id="currency-badge"
+        >
           {currency.name}
         </Box>
       </Box>

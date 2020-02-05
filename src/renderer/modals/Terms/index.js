@@ -75,7 +75,7 @@ const TermsModal = () => {
             alignItems="center"
           >
             <Box style={{ width: "50%" }} horizontal alignItems="center" onClick={onSwitchAccept}>
-              <CheckBox isChecked={accepted} />
+              <CheckBox isChecked={accepted} data-automation-id="terms-checkbox" />
               <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
                 <Trans i18nKey="Terms.switchLabel" />
               </Text>
@@ -85,6 +85,7 @@ const TermsModal = () => {
               onClick={onClick}
               primary
               disabled={!accepted}
+              data-automation-id="terms-confirm-button"
             >
               <Trans i18nKey="common.confirm" />
             </Button>

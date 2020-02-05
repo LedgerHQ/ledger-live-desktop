@@ -99,11 +99,11 @@ export default class Finish extends Component<StepProps, *> {
           </Box>
 
           <Box pt={5} alignItems="center">
-            <Title data-e2e="finish_title">{t("onboarding.finish.title")}</Title>
+            <Title>{t("onboarding.finish.title")}</Title>
             <Description>{t("onboarding.finish.desc")}</Description>
           </Box>
           <Box p={5}>
-            <Button primary onClick={() => finish()} data-e2e="continue_button">
+            <Button primary onClick={() => finish()} data-automation-id="modal-continue-button">
               {t("onboarding.finish.openAppButton")}
             </Button>
           </Box>

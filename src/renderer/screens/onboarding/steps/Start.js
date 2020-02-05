@@ -30,7 +30,11 @@ const Start = (props: StepProps) => {
           </Description>
         </Box>
         <ThemeSelector />
-        <Button primary onClick={() => jumpStep("init")}>
+        <Button
+          primary
+          onClick={() => jumpStep("init")}
+          data-automation-id="onboarding-get-started-button"
+        >
           <Trans i18nKey="onboarding.start.startBtn" />
         </Button>
       </Box>

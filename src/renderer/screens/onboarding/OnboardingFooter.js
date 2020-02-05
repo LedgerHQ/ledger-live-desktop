@@ -19,11 +19,11 @@ const OnboardingFooter = ({ nextStep, prevStep, isContinueDisabled, ...props }: 
         {t("common.back")}
       </Button>
       <Button
-        data-e2e="continue_button"
         disabled={isContinueDisabled}
         primary
         onClick={() => nextStep()}
         ml="auto"
+        data-automation-id="modal-continue-button"
       >
         {t("common.continue")}
       </Button>
