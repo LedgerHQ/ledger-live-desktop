@@ -27,7 +27,7 @@ const AccountsHeader = () => {
         ff="Inter|SemiBold"
         fontSize={7}
         color="palette.text.shade100"
-        data-e2e="accountsPage_title"
+        data-automation-id="accounts-title"
       >
         {t("accounts.title")}
       </Box>

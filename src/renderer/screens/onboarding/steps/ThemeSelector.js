@@ -83,7 +83,11 @@ const ThemeSelector = ({ setTheme, currentTheme }: Props) => (
   <ThemeSelectorContainer>
     <Track event="ThemeSelector" onUpdate currentTheme={currentTheme} />
     {map(palettes, (palette, paletteName: string) => (
-      <ThemeContainer key={paletteName} id={paletteName}>
+      <ThemeContainer
+        key={paletteName}
+        id={paletteName}
+        data-automation-id={`theme-${paletteName}-button`}
+      >
         <ThemePicto
           onClick={() => setTheme(paletteName)}
           active={paletteName === currentTheme}

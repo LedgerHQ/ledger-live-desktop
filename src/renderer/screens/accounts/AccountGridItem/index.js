@@ -51,7 +51,7 @@ class AccountCard extends PureComponent<Props> {
           style={{ display: hidden && "none" }}
           p={20}
           onClick={this.onClick}
-          data-e2e="dashboard_AccountCardWrapper"
+          data-automation-id="dashboard_AccountCardWrapper"
         >
           <AccountCardHeader account={account} parentAccount={parentAccount} />
           <AccountCardBody account={account} parentAccount={parentAccount} range={range} />
