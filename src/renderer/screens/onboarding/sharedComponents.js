@@ -13,6 +13,7 @@ export const Title: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
   fontSize: 7,
   color: "palette.text.shade100",
+  "data-automation-id": "page-title",
 }))`
   max-width: 550px;
   text-align: center;
@@ -33,6 +34,7 @@ export const Description: ThemedComponent<{}> = styled(Box).attrs(() => ({
   lineHeight: 1.5,
   textAlign: "center",
   color: "palette.text.shade60",
+  "data-automation-id": "page-description",
 }))`
   transition: color ease-out 300ms;
   transition-delay: 300ms;

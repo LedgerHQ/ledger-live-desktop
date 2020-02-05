@@ -33,6 +33,8 @@ function getAppPath() {
   } else {
     appPath = `./dist/ledger-live-desktop-${version}-linux-x86_64.AppImage`;
   }
+  console.log("appPath", appPath);
+  console.log("exists", fs.existsSync(appPath));
   return appPath;
 }
 
@@ -43,11 +45,19 @@ export function applicationProxy(userData = null, envVar = {}) {
     fs.mkdirSync(configPath);
   }
   if (userData != null) {
-    const jsonFile = path.resolve("test-e2e/data/", userData);
+    const jsonFile = path.resolve("tests/setups/", userData);
     fs.copyFileSync(jsonFile, `${configPath}/app.json`);
   }
   const app = new Application({
     path: getAppPath(),
+    startTimeout: 60000,
+    waitTimeout: 60000,
+    chromeDriverArgs: [
+      "--disable-extensions",
+      "disable-dev-shm-usage",
+      "--no-sandbox",
+      "--headless",
+    ],
     env: envVar,
   });
   return app;

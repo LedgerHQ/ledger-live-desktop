@@ -85,6 +85,7 @@ const TermsModal = () => {
               onClick={onClick}
               primary
               disabled={!accepted}
+              data-automation-id="terms-confirm-button"
             >
               <Trans i18nKey="common.confirm" />
             </Button>
