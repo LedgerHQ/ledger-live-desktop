@@ -13,6 +13,7 @@ export const Title: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
   fontSize: 7,
   color: "palette.text.shade100",
+  "data-automation-id": "page-title",
 }))`
   max-width: 550px;
   text-align: center;
