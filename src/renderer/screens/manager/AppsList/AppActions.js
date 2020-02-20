@@ -85,7 +85,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
     addAccount,
   }: Props) => {
     const { name } = app;
-    const { installedAvailable, installQueue, uninstallQueue } = state;
+    const { installedAvailable, installQueue, uninstallQueue, updateAllQueue } = state;
 
     const needsInstallDeps = useAppInstallNeedsDeps(state, app);
 
@@ -109,6 +109,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
       openURL(urls.appSupport);
     }, []);
 
+    const updating = useMemo(() => updateAllQueue.includes(name), [updateAllQueue, name]);
     const installing = useMemo(() => installQueue.includes(name), [installQueue, name]);
     const uninstalling = useMemo(() => uninstallQueue.includes(name), [uninstallQueue, name]);
 
@@ -120,7 +121,12 @@ const AppActions: React$ComponentType<Props> = React.memo(
     return (
       <AppActionsWrapper>
         {installing || uninstalling ? (
-          <Progress installing={installing} uninstalling={uninstalling} progress={progress} />
+          <Progress
+            updating={updating}
+            installing={installing}
+            uninstalling={uninstalling}
+            progress={progress}
+          />
         ) : (
           showActions && (
             <>

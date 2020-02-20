@@ -67,11 +67,12 @@ type Props = {
   dispatch: Action => void,
   isIncomplete: boolean,
   addAccount: (*) => void,
+  disabled: boolean,
 };
 
-const InstallSuccessBanner = ({ state, isIncomplete, dispatch, addAccount }: Props) => {
+const InstallSuccessBanner = ({ state, isIncomplete, dispatch, addAccount, disabled }: Props) => {
   const cardRef = useRef();
-  const [hasBeenShown, setHasBeenShown] = useState(false);
+  const [hasBeenShown, setHasBeenShown] = useState(disabled);
   const { installQueue, uninstallQueue, recentlyInstalledApps, appByName } = state;
 
   const installedSupportedApps = useMemo(() => {

@@ -406,6 +406,7 @@
         "versionNew": "Version {{version}} (NEW{{newVersion}})",
         "installing": "Installing...",
         "uninstalling": "Uninstalling...",
+        "updating": "Updating...",
         "scheduled": "Scheduled",
         "update": "Update available",
         "updateAll": "Update All",
