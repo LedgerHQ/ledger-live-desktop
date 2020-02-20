@@ -384,7 +384,6 @@
     "from": "自",
     "to": "至",
     "identifier": "交易 ID",
-    "whatIsThis": "What is this operation?",
     "viewOperation": "在区块链浏览器中查看",
     "showMore": "显示更多 {{recipients}}",
     "showLess": "显示更少",
@@ -520,62 +519,6 @@
       }
     }
   },
-  "managerv2": {
-    "loading": {
-      "step4": {
-        "title": "Loading apps and fancy stuff"
-      }
-    },
-    "device": {
-      "title": "Connect your device",
-      "desc": "Follow the steps below to open the Manager v2",
-      "cta": "Connect my device"
-    },
-    "tabs": {
-      "appCatalog": "App Catalog",
-      "appsOnDevice": "Apps Installed"
-    },
-    "deviceStorage": {
-      "freeSpace": "{{space}} free",
-      "installed": "Installed",
-      "capacity": "Capacity",
-      "used": "Used",
-      "firmware": "Firmware {{version}}",
-      "genuine": "Device is genuine"
-    },
-    "applist": {
-      "placeholder": "There are no apps matching the search and filters selected",
-      "placeholderInstalled": "There are no installed apps matching the search and filters selected",
-      "filter": {
-        "title": "Filter",
-        "all": "All",
-        "supported": "Live Supported",
-        "installed": "Installed",
-        "notInstalled": "Not Installed"
-      },
-      "sort": {
-        "title": "Sort",
-        "name": "Name",
-        "marketcap": "Marketcap"
-      },
-      "updatable": {
-        "title": "Updates available"
-      },
-      "item": {
-        "installing": "Installing...",
-        "uninstalling": "Uninstalling...",
-        "scheduled": "Scheduled",
-        "cancel": "Cancel",
-        "update": "Update",
-        "updateAll": "Update All",
-        "install": "Install",
-        "installed": "Installed",
-        "uninstall": "Uninstall",
-        "notEnoughSpace": "Not enough space",
-        "supported": "Supported"
-      }
-    }
-  },
   "send": {
     "title": "发送",
     "totalSpent": "总借额",
@@ -660,7 +603,6 @@
     "header": "Account allocation ({{count}})"
   },
   "delegation": {
-    "overdelegated": "Overdelegated",
     "title": "Earn rewards",
     "header": "Delegation",
     "validator": "Validator",
@@ -680,7 +622,7 @@
       "steps": {
         "starter": {
           "title": "Earn staking rewards",
-          "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets.",
+          "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets",
           "bullet": {
             "delegate": "Delegated accounts stay yours.",
             "access": "You can access your assets anytime.",
@@ -704,7 +646,7 @@
           "select": "Select",
           "yield": "Est. Yield {{amount}}",
           "randomly": "Randomly chosen validator",
-          "termsAndPrivacy": "Delegating your voting rights does not guarantee you will be paid any reward by your validator."
+          "termsAndPrivacy": "I have read and I accept the Ledger Live<1><0>Terms of Use</0></1> and <3><0>Privacy Policy</0></3>"
         },
         "validator": {
           "title": "Select validator",
@@ -715,7 +657,7 @@
         "custom": {
           "title": "Custom validator",
           "text": "Please enter the address of the custom validator to delegate your account to.",
-          "button": "Confirm validator"
+          "button": "Use validator"
         },
         "undelegate": {
           "title": "Undelegate account"
@@ -725,7 +667,7 @@
           "label": "Confirmation",
           "success": {
             "title": "Delegation sent",
-            "titleUndelegated": "Operation sent",
+            "titleUndelegated": "End delegation",
             "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator.",
             "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
           },
@@ -940,6 +882,12 @@
     "restart": "重启",
     "support": "联系客服",
     "github": "GitHub"
+  },
+  "disclaimerModal": {
+    "title": "安全交易",
+    "desc_1": "发送和接收加密资产之前，请务必了解相关知识，以便做出知情决策。加密资产并不稳定，价格也可能上下起伏。请认真评估您的交易目标和您愿意承担的财务风险。",
+    "desc_2": "请注意，Ledger 不提供财务、税务或法律建议。您应自行做出这些决定，或咨询可靠的专家。",
+    "cta": "明白了"
   },
   "exportOperationsModal": {
     "title": "操作历史",
@@ -1191,11 +1139,6 @@
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"
   },
-  "Terms": {
-    "title": "Terms of Use",
-    "read": "Read the Terms of Use",
-    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
-  },
   "errors": {
     "generic": {
       "title": "{{message}}",
@@ -1275,7 +1218,7 @@
     },
     "LedgerAPI5xx": {
       "title": "抱歉，请重试。",
-      "description": "The server could not handle your request. Please try again at a later moment. {{message}}"
+      "description": "服务器无法处理您的请求。请稍后再试，或联系Ledger客服。 {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "抱歉，{{currencyName}} 服务不可用",

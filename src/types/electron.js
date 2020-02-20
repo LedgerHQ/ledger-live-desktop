@@ -1,3 +1,3 @@
 // @flow
 
-export type IPCSend = (string, any, any) => void
+export type IPCSend = (string, any, any) => void;

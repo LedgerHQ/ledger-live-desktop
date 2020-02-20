@@ -1,0 +1,9 @@
+name: "get-pr-number"
+description: "find PR number"
+author: "Ledger"
+outputs:
+  pr:
+    description: The PR's number if the PR was found
+runs:
+  using: "node12"
+  main: "./get-pr-number.js"

@@ -1,5 +1,5 @@
-// flow-typed signature: 29b72ec0ac677361ff6dc475317decc8
-// flow-typed version: 77d9eda30f/rxjs_v6.x.x/flow_>=v0.72.x
+// flow-typed signature: f87f05ad0621d19d73802cc578db13a6
+// flow-typed version: c6154227d1/rxjs_v6.x.x/flow_>=v0.104.x
 
 /** OPERATOR INTERFACES */
 declare interface rxjs$UnaryFunction<T, R> {
@@ -47,9 +47,7 @@ declare type rxjs$ObservableInput<T> =
   | Array<T>
   | Iterable<T>;
 
-declare type rxjs$InteropObservable<T> = {
-  [string | mixed]: () => rxjs$Subscribable<T>
-};
+declare type rxjs$InteropObservable<T> = { [string | mixed]: () => rxjs$Subscribable<T>, ... };
 /** OBSERVER INTERFACES */
 declare interface rxjs$NextObserver<T> {
   closed?: boolean;
@@ -205,7 +203,7 @@ declare class rxjs$Observable<T> implements rxjs$Subscribable<T> {
     op8: rxjs$OperatorFunction<G, H>,
     op9: rxjs$OperatorFunction<H, I>,
     ...operations: rxjs$OperatorFunction<any, any>[]
-  ): rxjs$Observable<{}>;
+  ): rxjs$Observable<{...}>;
   toPromise<T>(): Promise<T>;
   toPromise<T>(PromiseCtor: typeof Promise): Promise<T>;
   toPromise<T>(PromiseCtor: Promise.constructor): Promise<T>;
@@ -447,7 +445,7 @@ declare module "rxjs" {
         fn8: rxjs$UnaryFunction<G, H>,
         fn9: rxjs$UnaryFunction<H, I>,
         ...fns: rxjs$UnaryFunction<any, any>[]
-      ) => rxjs$UnaryFunction<T, {}>),
+      ) => rxjs$UnaryFunction<T, {...}>),
     noop(): void,
     identity<T>(x: T): T,
     isObservable<T>(obj: any): boolean,
@@ -835,7 +833,8 @@ declare module "rxjs" {
     ): rxjs$Observable<T>,
     config: {
       Promise: Promise.constructor,
-      useDeprecatedSynchronousErrorHandling: boolean
+      useDeprecatedSynchronousErrorHandling: boolean,
+      ...
     },
     // @deprecated  resultSelector is no longer supported, pipe to map instead
     zip: (<T, R>(
@@ -1719,7 +1718,8 @@ declare module "rxjs" {
           | ((...values: Array<any>) => R)
           | rxjs$SchedulerLike
         >
-      ) => rxjs$Observable<R>)
+      ) => rxjs$Observable<R>),
+    ...
   };
 
   declare class BehaviorSubject<T> extends rxjs$Subject<T> {
@@ -2911,11 +2911,13 @@ declare module "rxjs/operators" {
   ): rxjs$MonoTypeOperatorFunction<T>;
 
   declare export function takeWhile<T, S: T>(
-    predicate: (value: T, index: number) => S
+    predicate: (value: T, index: number) => S,
+    inclusive?: boolean
   ): rxjs$OperatorFunction<T, S>;
 
   declare export function takeWhile<T>(
-    predicate: (value: T, index: number) => boolean
+    predicate: (value: T, index: number) => boolean,
+    inclusive?: boolean
   ): rxjs$MonoTypeOperatorFunction<T>;
 
   declare export function tap<T>(
@@ -3295,9 +3297,7 @@ declare module "rxjs/webSocket" {
     openObserver?: rxjs$NextObserver<Event>;
     closeObserver?: rxjs$NextObserver<CloseEvent>;
     closingObserver?: rxjs$NextObserver<void>;
-    WebSocketCtor?: {
-      new(url: string, protocols?: string | string[]): WebSocket
-    };
+    WebSocketCtor?: { new(url: string, protocols?: string | string[]): WebSocket, ... };
     binaryType?: "blob" | "arraybuffer";
   }
 

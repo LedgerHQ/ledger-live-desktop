@@ -1,7 +1,7 @@
 // @flow
-import { getEnv } from '@ledgerhq/live-common/lib/env'
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 
-export const allLanguages = ['en', 'es', 'fr', 'hu', 'ja', 'ko', 'ru', 'zh']
-export const prodStableLanguages = ['en', 'fr']
+export const allLanguages = ["en", "es", "fr", "ja", "ko", "ru", "zh"];
+export const prodStableLanguages = ["en"];
 export const getLanguages = () =>
-  getEnv('EXPERIMENTAL_LANGUAGES') ? allLanguages : prodStableLanguages
+  getEnv("EXPERIMENTAL_LANGUAGES") ? allLanguages : prodStableLanguages;

@@ -1,16 +1,16 @@
 // @flow
 
-import Raven from 'raven'
-import install from './install'
+import Raven from "raven";
+import install from "./install";
 
 export default (shouldSendCallback: () => boolean, userId: string) => {
-  install(Raven, shouldSendCallback, userId)
-}
+  install(Raven, shouldSendCallback, userId);
+};
 
 export const captureException = (e: Error) => {
-  Raven.captureException(e)
-}
+  Raven.captureException(e);
+};
 
 export const captureBreadcrumb = (o: *) => {
-  Raven.captureBreadcrumb(o)
-}
+  Raven.captureBreadcrumb(o);
+};

@@ -1,28 +1,40 @@
-require('dotenv').config()
-require('debug').enable('electron-notarize')
+const platform = require("os").platform();
+const { notarize } = require("electron-notarize");
+const chalk = require("chalk");
 
-const platform = require('os').platform()
-const { notarize } = require('electron-notarize')
+require("dotenv").config();
+require("debug").enable("electron-notarize");
 
-async function doTheNotarization(path) {
-  if (platform !== 'darwin') {
-    // eslint-disable-next-line no-console
-    console.log('OS is not mac, skipping notarization.')
-    return
+const info = str => {
+  console.log(chalk.blue(str));
+};
+
+async function notarizeApp(context) {
+  if (platform !== "darwin") {
+    info("OS is not mac, skipping notarization.");
+    return;
   }
 
-  const { APPLEID, APPLEID_PASSWORD } = process.env
+  info(
+    "Don't mind electron-builder error 'Cannot find module 'scripts/notarize.js', it definitively found me",
+  );
+
+  const { APPLEID, APPLEID_PASSWORD } = process.env;
 
   if (!APPLEID || !APPLEID_PASSWORD) {
-    throw new Error('APPLEID and APPLEID_PASSWORD env variable are required for notarization.')
+    throw new Error("APPLEID and APPLEID_PASSWORD env variable are required for notarization.");
   }
 
+  const { appOutDir } = context;
+  const appName = context.packager.appInfo.productFilename;
+  const path = `${appOutDir}/${appName}.app`;
+
   await notarize({
-    appBundleId: 'com.ledger.live',
+    appBundleId: "com.ledger.live",
     appPath: path,
     appleId: APPLEID,
     appleIdPassword: APPLEID_PASSWORD,
-  })
+  });
 }
 
-module.exports = doTheNotarization
+exports.default = notarizeApp;

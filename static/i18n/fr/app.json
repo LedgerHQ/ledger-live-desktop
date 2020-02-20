@@ -50,7 +50,7 @@
     "experimentalFeature": "Expérimental",
     "dismiss": "Ignorer",
     "choose": "Choisir",
-    "information": "Informations",
+    "information": "Information",
     "lockScreen": {
       "title": "Bienvenue",
       "subTitle": null,
@@ -75,7 +75,7 @@
       "CREATE": "Créée",
       "REVEAL": "Révélée",
       "DELEGATE": "Déléguée",
-      "UNDELEGATE": "Interrompue"
+      "UNDELEGATE": "Terminée"
     }
   },
   "time": {
@@ -272,15 +272,15 @@
     "seeTokens": "Afficher les tokens ({{tokenCount}})",
     "hideTokens": "Cacher tokens ({{tokenCount}})",
     "tooltip": "Token de",
-    "countTooltip": "1 Token",
-    "countTooltip_plural": "{{count}} Tokens"
+    "countTooltip": "1 token",
+    "countTooltip_plural": "{{count}} tokens"
   },
   "subAccounts": {
     "title": "Sous-comptes",
     "seeSubAccounts": "Afficher les sous-comptes ({{tokenCount}})",
     "hideSubAccounts": "Masquer les sous-comptes ({{tokenCount}})",
-    "countTooltip": "1 sous-compte",
-    "countTooltip_plural": "{{count}} sous-comptes"
+    "countTooltip": "1 subaccount",
+    "countTooltip_plural": "{{count}} subaccounts"
   },
   "migrateAccounts": {
     "overview": {
@@ -384,7 +384,6 @@
     "from": "De",
     "to": "Vers",
     "identifier": "ID de la transaction",
-    "whatIsThis": "À quoi correspond cette information ?",
     "viewOperation": "Afficher dans l'explorer",
     "showMore": "Afficher plus de {{recipients}}",
     "showLess": "Afficher moins",
@@ -515,64 +514,8 @@
       },
       "warning": {
         "tezos": {
-          "text": "Le montant reçu sur un compte délégué sera ajouté au montant total staké. Choisissez un autre compte si vous souhaitez éviter cela."
+          "text": "The amount received on a delegated account will be added to the total staked amount. Choose another account if you want to avoid this."
         }
-      }
-    }
-  },
-  "managerv2": {
-    "loading": {
-      "step4": {
-        "title": "Loading apps and fancy stuff"
-      }
-    },
-    "device": {
-      "title": "Connectez votre appareil",
-      "desc": "Suivez les étapes ci-dessous pour ouvrir le Manager v2",
-      "cta": "Connecter l'appareil"
-    },
-    "tabs": {
-      "appCatalog": "Catalogue d'applications",
-      "appsOnDevice": "Applications installées"
-    },
-    "deviceStorage": {
-      "freeSpace": "{{space}} libre",
-      "installed": "Installée",
-      "capacity": "Capacité",
-      "used": "Utilisé",
-      "firmware": "Firmware {{version}}",
-      "genuine": "L'appareil est authentique"
-    },
-    "applist": {
-      "placeholder": "Aucune application ne correspond à la recherche et aux filtres sélectionnés",
-      "placeholderInstalled": "Aucune application installée ne correspond à la recherche et aux filtres sélectionnés",
-      "filter": {
-        "title": "Filter",
-        "all": "All",
-        "supported": "Live Supported",
-        "installed": "Installed",
-        "notInstalled": "Not Installed"
-      },
-      "sort": {
-        "title": "Trier",
-        "name": "Nom",
-        "marketcap": "Capitalisation"
-      },
-      "updatable": {
-        "title": "Mises à jours disponibles"
-      },
-      "item": {
-        "installing": "Installation ...",
-        "uninstalling": "Désinstallation...",
-        "scheduled": "Scheduled",
-        "cancel": "Annuler",
-        "update": "Update",
-        "updateAll": "Update All",
-        "install": "Install",
-        "installed": "Installed",
-        "uninstall": "Uninstall",
-        "notEnoughSpace": "Not enough space",
-        "supported": "Supported"
       }
     }
   },
@@ -627,12 +570,12 @@
       },
       "warning": {
         "tezos": {
-          "text": "Le montant à envoyer sera déduit du solde de votre compte délégué."
+          "text": "The amount to be sent will be deducted from the balance of your delegated account."
         }
       }
     },
     "footer": {
-      "estimatedFees": "Frais de réseau"
+      "estimatedFees": "Network fees"
     }
   },
   "releaseNotes": {
@@ -660,11 +603,10 @@
     "header": "Répartition des comptes ({{count}})"
   },
   "delegation": {
-    "overdelegated": "Surdélégué",
     "title": "Obtenez des récompenses",
     "header": "Délégation",
     "validator": "Validateur",
-    "yield": "Rendement estimé",
+    "yield": "Est. Yield",
     "address": "Adresse",
     "transactionID": "ID de transaction",
     "value": "Valeur",
@@ -674,76 +616,76 @@
     "durationDays": "{{count}} jour",
     "durationDays_plural": "{{count}} jours",
     "howItWorks": "Comment fonctionne la délégation",
-    "delegationEarn": "Vous pouvez maintenant obtenir des récompenses staking Tezos en déléguant votre compte.",
-    "earnRewards": "Obtenez des récompenses",
+    "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
+    "earnRewards": "Earn rewards",
     "flow": {
       "steps": {
         "starter": {
-          "title": "Obtenez des récompenses staking",
-          "description": "Déléguez votre compte Tezos à un validateur tiers pour obtenir des récompenses en toute sécurité et en conservant le contrôle total de vos actifs.",
+          "title": "Earn staking rewards",
+          "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets",
           "bullet": {
-            "delegate": "Vous conservez la propriété de vos comptes délégués.",
-            "access": "Vous pouvez accéder à vos actifs à tout moment.",
-            "ledger": "Déléguez en toute sécurité avec votre appareil Ledger."
+            "delegate": "Delegated accounts stay yours.",
+            "access": "You can access your assets anytime.",
+            "ledger": "Delegate securely with your Ledger device."
           },
           "button": {
-            "cta": "Déléguer pour obtenir des récompenses"
+            "cta": "Delegate to earn rewards"
           }
         },
         "account": {
-          "title": "Déléguer le compte",
-          "label": "Compte",
-          "toDelegate": "Compte à déléguer"
+          "title": "Delegate account",
+          "label": "Account",
+          "toDelegate": "Account to delegate"
         },
         "summary": {
-          "title": "Déléguer le compte",
-          "label": "Résumé",
-          "toDelegate": "Compte à déléguer",
-          "toUndelegate": "Compte à interrompre",
-          "validator": "Validateur",
-          "select": "Sélectionner",
-          "yield": "Rendement estimé {{amount}}",
-          "randomly": "Validateur choisi aléatoirement",
-          "termsAndPrivacy": "Déléguer vos droits de vote ne garantit pas que vous recevrez des récompenses de la part de votre validateur."
+          "title": "Delegate account",
+          "label": "Summary",
+          "toDelegate": "Account to delegate",
+          "toUndelegate": "Account to undelegate",
+          "validator": "Validator",
+          "select": "Select",
+          "yield": "Est. Yield {{amount}}",
+          "randomly": "Randomly chosen validator",
+          "termsAndPrivacy": "I have read and I accept the Ledger Live<1><0>Terms of Use</0></1> and <3><0>Privacy Policy</0></3>"
         },
         "validator": {
-          "title": "Sélectionner un validateur",
-          "description": "Vous pouvez sélectionner un validateur en comparant les taux de rendement estimés",
-          "customValidator": "Validateur personnalisé",
-          "providedBy": "Taux de rendements fournis par <1><0>MyTezosBaker</0></1>"
+          "title": "Select validator",
+          "description": "You can select a validator by comparing the estimated reward rates",
+          "customValidator": "Custom validator",
+          "providedBy": "Yield rates provided by <1><0>MyTezosBaker</0></1>"
         },
         "custom": {
-          "title": "Validateur personnalisé",
-          "text": "Veuillez saisir l'adresse du validateur auquel vous souhaitez déléguer votre compte.",
-          "button": "Confirmer le validateur"
+          "title": "Custom validator",
+          "text": "Please enter the address of the custom validator to delegate your account to.",
+          "button": "Use validator"
         },
         "undelegate": {
-          "title": "Interrompre la délégation"
+          "title": "Undelegate account"
         },
         "confirmation": {
           "title": "Confirmation",
           "label": "Confirmation",
           "success": {
-            "title": "Délégation envoyée",
-            "titleUndelegated": "Opération envoyée",
-            "text": "Transaction de délégation diffusée avec succès. Vous devriez recevoir vos premières récompenses dans un délai d'environ 40 jours, en fonction du validateur.",
-            "textUndelegated": "La délégation de votre compte se terminera une fois l'opération confirmée. Vous pouvez déléguer à nouveau votre compte à tout moment."
+            "title": "Delegation sent",
+            "titleUndelegated": "End delegation",
+            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator.",
+            "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
           },
           "pending": {
-            "title": "Diffusion de la transaction..."
+            "title": "Broadcasting transaction..."
           },
-          "broadcastError": "Votre transaction a potentiellement échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée, avant de réessayer."
+          "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
         }
       }
     },
     "banner": {
-      "title": "Obtenez des récompenses",
-      "text": "Vous pouvez obtenir des récompenses staking Tezos en déléguant votre compte"
+      "title": "Earn rewards",
+      "text": "You can earn Tezos staking rewards by delegating your account"
     },
     "contextMenu": {
-      "topUp": "Recevoir plus",
-      "redelegate": "Changer validateur",
-      "stopDelegation": "Terminer"
+      "topUp": "Receive more",
+      "redelegate": "Change validator",
+      "stopDelegation": "End delegation"
     }
   },
   "asset": {
@@ -931,8 +873,8 @@
     "quitAndInstall": "Installer maintenant",
     "error": "Erreur lors de la mise à jour. Veuillez télécharger à nouveau",
     "reDownload": "Télécharger à nouveau",
-    "nightlyWarning": "Cette version ne peut pas être mise à jour automatiquement, veuillez installer la dernière version manuellement",
-    "downloadNow": "Télécharger Maintenant"
+    "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
+    "downloadNow": "Download now"
   },
   "crash": {
     "oops": "Oups, une erreur c'est produite",
@@ -940,6 +882,12 @@
     "restart": "Redémarrer",
     "support": "Contacter l'assistance",
     "github": "GitHub"
+  },
+  "disclaimerModal": {
+    "title": "Tradez en toute sécurité.",
+    "desc_1": "Avant d’envoyer et de recevoir des crypto-actifs, renseignez-vous afin de prendre des décisions éclairées. Les crypto-actifs sont volatiles et les prix peuvent monter ou baisser. Évaluez attentivement vos objectifs de trading et les risques financiers que vous êtes prêt à prendre.",
+    "desc_2": "Veuillez noter que Ledger ne fournit aucun conseil financier, fiscal ou juridique. Vous devrez prendre ces décisions par vous-même ou consulter des experts fiables.",
+    "cta": "Compris"
   },
   "exportOperationsModal": {
     "title": "Historique des opérations",
@@ -971,7 +919,7 @@
     },
     "start": {
       "title": "Bienvenue sur Ledger Live",
-      "themeDesc": "Commençons par choisir l'apparence de Ledger Live.\nVous pouvez changer cela à tout moment dans vos paramètres.",
+      "themeDesc": "Let’s start by choosing how Ledger Live looks to you.\nYou can change this later at any time in your settings.",
       "startBtn": "Premiers pas"
     },
     "init": {
@@ -1180,21 +1128,16 @@
     "desc": "Des difficultés à connecter votre appareil ?"
   },
   "TransactionConfirm": {
-    "title": "Veuillez confirmer l'opération sur votre appareil pour l'envoyer",
-    "warning": "Vérifiez toujours que votre appareil affiche exactement l'adresse fournie par le {{recipientWording}}",
+    "title": "Please confirm the operation on your device to send it",
+    "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
     "recipientWording": {
-      "send": "destinataire",
-      "delegate": "validateur",
-      "undelegate": "validateur"
+      "send": "recipient",
+      "delegate": "validator",
+      "undelegate": "validator"
     }
   },
   "RecipientField": {
-    "placeholder": "Entrer l'adresse {{currencyName}}"
-  },
-  "Terms": {
-    "title": "Conditions d’utilisation",
-    "read": "Lire nos Conditions d'utilisation",
-    "switchLabel": "J'ai lu et accepte les conditions d'utilisation et la politique de confidentialité"
+    "placeholder": "Enter {{currencyName}} address"
   },
   "errors": {
     "generic": {
@@ -1275,7 +1218,7 @@
     },
     "LedgerAPI5xx": {
       "title": "Désolé, essayez à nouveau.",
-      "description": "Le serveur n'a pas pu traiter votre demande. Veuillez réessayer ultérieurement. {{message}}"
+      "description": "Le serveur n'a pas pu gérer votre demande. Veuillez réessayer ultérieurement ou contacter le Support Ledger. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Désolé, les services {{currencyName}} ne sont pas disponibles.",
@@ -1438,7 +1381,7 @@
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Impossible de recevoir sur les sous-comptes",
+      "title": "Cannot receive on subaccounts",
       "description": "Si vous souhaitez recevoir des fonds, veuillez utiliser le compte parent"
     },
     "UnavailableTezosOriginatedAccountSend": {
@@ -1446,65 +1389,65 @@
       "description": "Suites aux changements récemment introduits par la mise à jour Babylon, cette fonctionnalité sera ajoutée ultérieurement."
     },
     "RecommendUndelegation": {
-      "title": "Veuillez interrompre la délégation du compte avant de le vider"
+      "title": "Please undelegate account before emptying it"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Veuillez d'abord vider tous les sous-comptes"
+      "title": "Please empty all subaccounts first"
     },
     "NotSupportedLegacyAddress": {
-      "title": "Ce format d'adresse legacy n'est plus pris en charge"
+      "title": "This legacy address format is no longer supported"
     },
     "BtcUnmatchedApp": {
-      "title": "Ce n'est pas la bonne application",
-      "description": "Ouvrez l’application « {{managerAppName}} » sur votre appareil"
+      "title": "That's the wrong app",
+      "description": "Open the ‘{{managerAppName}}’ app on your device"
     },
     "DeviceNameInvalid": {
-      "title": "Veuillez choisir un nom d'appareil sans '{{invalidCharacters}}'"
+      "title": "Please choose a device name without '{{invalidCharacters}}'"
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
-      "description": "Veuillez essayer à nouveau ou contacter l’assistance Ledger."
+      "description": "Please retry or contact Ledger Support."
     },
     "ManagerAppRelyOnBTC": {
-      "title": "Applications Bitcoin et Ethereum requises",
-      "description": "Installez d'abord les dernières applications Bitcoin et Ethereum."
+      "title": "Bitcoin and Ethereum apps required",
+      "description": "Install the latest Bitcoin and Ethereum apps first."
     },
     "UserRefusedDeviceNameChange": {
-      "title": "Renommage annulé sur l'appareil",
-      "description": "Essayez à nouveau et autorisez le renommage sur votre appareil"
+      "title": "Rename canceled on device",
+      "description": "Try again and allow renaming on your device"
     },
     "SyncError": {
-      "title": "Erreur de synchronisation",
-      "description": "Un problème est survenu avec la synchronisation de la blockchain. Veuillez réessayer ou nous contacter."
+      "title": "Synchronization error",
+      "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
     },
     "PairingFailed": {
-      "title": "Echec du jumelage",
-      "description": "Veuillez réessayer ou contacter l'assistance de Ledger en cas de doute."
+      "title": "Pairing unsuccessful",
+      "description": "Please try again or contact Ledger Support when in doubt."
     },
     "GenuineCheckFailed": {
-      "title": "Échec de la vérification d'authenticité",
-      "description": "Une erreur s'est produite. Veuillez réessayer ou contacter l'assistance de Ledger en cas de doute."
+      "title": "Genuine check failed",
+      "description": "Something went wrong. Please try again or contact Ledger Support when in doubt."
     },
     "EthAppPleaseEnableContractData": {
-      "title": "Veuillez activer les contract data dans les paramètres de l'application Ethereum"
+      "title": "Please enable contract data in the Ethereum app settings"
     },
     "InvalidXRPTag": {
-      "title": "Tag de destination XRP invalide"
+      "title": "Invalid XRP Destination tag"
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "Solde insuffisant pour déléguer"
+      "title": "Insufficient balance to delegate"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "Solde insuffisant dans le compte parent"
+      "title": "Insufficient balance in parent account"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Solde insuffisant pour cette opération"
+      "title": "Insufficient balance for this operation"
     },
     "WrongAppForCurrency": {
-      "title": "Veuillez ouvrir l'application {{expected}}"
+      "title": "Please open the {{expected}} app"
     },
     "FeeTooHigh": {
-      "title": "Les frais de réseau représentent plus de 10% du montant"
+      "title": "Network fees represent more than 10% of the amount"
     }
   }
 }
