@@ -384,7 +384,6 @@
     "from": "수신",
     "to": "발신",
     "identifier": "트랜잭션 ID",
-    "whatIsThis": "What is this operation?",
     "viewOperation": "탐색기에서 보기",
     "showMore": "{{recipients}} 자세히 표시",
     "showLess": "간단히 표시",
@@ -520,62 +519,6 @@
       }
     }
   },
-  "managerv2": {
-    "loading": {
-      "step4": {
-        "title": "Loading apps and fancy stuff"
-      }
-    },
-    "device": {
-      "title": "Connect your device",
-      "desc": "Follow the steps below to open the Manager v2",
-      "cta": "Connect my device"
-    },
-    "tabs": {
-      "appCatalog": "App Catalog",
-      "appsOnDevice": "Apps Installed"
-    },
-    "deviceStorage": {
-      "freeSpace": "{{space}} free",
-      "installed": "Installed",
-      "capacity": "Capacity",
-      "used": "Used",
-      "firmware": "Firmware {{version}}",
-      "genuine": "Device is genuine"
-    },
-    "applist": {
-      "placeholder": "There are no apps matching the search and filters selected",
-      "placeholderInstalled": "There are no installed apps matching the search and filters selected",
-      "filter": {
-        "title": "Filter",
-        "all": "All",
-        "supported": "Live Supported",
-        "installed": "Installed",
-        "notInstalled": "Not Installed"
-      },
-      "sort": {
-        "title": "Sort",
-        "name": "Name",
-        "marketcap": "Marketcap"
-      },
-      "updatable": {
-        "title": "Updates available"
-      },
-      "item": {
-        "installing": "Installing...",
-        "uninstalling": "Uninstalling...",
-        "scheduled": "Scheduled",
-        "cancel": "Cancel",
-        "update": "Update",
-        "updateAll": "Update All",
-        "install": "Install",
-        "installed": "Installed",
-        "uninstall": "Uninstall",
-        "notEnoughSpace": "Not enough space",
-        "supported": "Supported"
-      }
-    }
-  },
   "send": {
     "title": "전송",
     "totalSpent": "인출할 총액",
@@ -660,7 +603,6 @@
     "header": "Account allocation ({{count}})"
   },
   "delegation": {
-    "overdelegated": "Overdelegated",
     "title": "Earn rewards",
     "header": "Delegation",
     "validator": "Validator",
@@ -680,7 +622,7 @@
       "steps": {
         "starter": {
           "title": "Earn staking rewards",
-          "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets.",
+          "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets",
           "bullet": {
             "delegate": "Delegated accounts stay yours.",
             "access": "You can access your assets anytime.",
@@ -704,7 +646,7 @@
           "select": "Select",
           "yield": "Est. Yield {{amount}}",
           "randomly": "Randomly chosen validator",
-          "termsAndPrivacy": "Delegating your voting rights does not guarantee you will be paid any reward by your validator."
+          "termsAndPrivacy": "I have read and I accept the Ledger Live<1><0>Terms of Use</0></1> and <3><0>Privacy Policy</0></3>"
         },
         "validator": {
           "title": "Select validator",
@@ -715,7 +657,7 @@
         "custom": {
           "title": "Custom validator",
           "text": "Please enter the address of the custom validator to delegate your account to.",
-          "button": "Confirm validator"
+          "button": "Use validator"
         },
         "undelegate": {
           "title": "Undelegate account"
@@ -725,7 +667,7 @@
           "label": "Confirmation",
           "success": {
             "title": "Delegation sent",
-            "titleUndelegated": "Operation sent",
+            "titleUndelegated": "End delegation",
             "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator.",
             "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
           },
@@ -940,6 +882,12 @@
     "restart": "다시 시작",
     "support": "지원 센터 문의",
     "github": "GitHub"
+  },
+  "disclaimerModal": {
+    "title": "안전한 거래",
+    "desc_1": "암호화 자산을 전송 및 수신하기 전에 정보에 입각한 결정을 내릴 수 있도록 관련 지식을 학습하십시오. 암호화 화폐는 변동성이 높으며 가격이 상승 또는 하락할 수 있습니다. 자신의 거래 목표와 감수하려는 금융 위험을 조심스럽게 평가하십시오.",
+    "desc_2": "Ledger는 재무, 세금 또는 법적 조언을 제공하지 않는다는 점에 유의하십시오. 귀하는 결정을 스스로 내리거나 신뢰할 수 있는 전문가와 상의해야 합니다.",
+    "cta": "알겠습니다"
   },
   "exportOperationsModal": {
     "title": "Operation history",
@@ -1191,11 +1139,6 @@
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"
   },
-  "Terms": {
-    "title": "Terms of Use",
-    "read": "Read the Terms of Use",
-    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
-  },
   "errors": {
     "generic": {
       "title": "{{message}}",
@@ -1275,7 +1218,7 @@
     },
     "LedgerAPI5xx": {
       "title": "Sorry, try again.",
-      "description": "The server could not handle your request. Please try again at a later moment. {{message}}"
+      "description": "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "죄송합니다. {{currencyName}} 서비스를 사용할 수 없습니다.",

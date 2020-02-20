@@ -1,0 +1,93 @@
+name: nightly build
+on:
+  push:
+    tags:
+      - "*nightly*"
+
+jobs:
+  nightly-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12.x
+      - name: get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: install dependencies
+        run: yarn --ignore-scripts --frozen-lockfile
+      - name: build the app
+        run: yarn nightly
+      - uses: "./.github/actions/get-package-infos"
+        id: version
+      - name: upload macOS app
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-macos.dmg
+          path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-mac.dmg
+  nightly-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12.x
+      - name: install linux dependencies
+        run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev 
+      - name: get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: install dependencies
+        run: yarn --ignore-scripts --frozen-lockfile
+      - name: build the app
+        run: yarn nightly
+      - uses: "./.github/actions/get-package-infos"
+        id: version
+      - name: upload linux app
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-linux.AppImage
+          path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-linux-x86_64.AppImage
+  nightly-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12.x
+      - uses: actions/setup-python@v1
+        with:
+          python-version: "2.7.x"
+      - name: get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: install dependencies
+        run: yarn --ignore-scripts --frozen-lockfile
+      - name: build the app
+        run: yarn nightly
+      - uses: "./.github/actions/get-package-infos"
+        id: version
+      - name: upload windows
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-win.exe
+          path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-win.exe
