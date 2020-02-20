@@ -1,0 +1,3 @@
+files:
+  - source: /static/i18n/en
+    translation: /static/i18n/%two_letters_code%/%original_file_name%
