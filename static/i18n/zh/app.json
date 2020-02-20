@@ -1,13 +1,11 @@
 {
   "common": {
-    "loading": "Loading",
     "labelYes": "确定",
     "labelNo": "取消",
     "never": "从不",
     "apply": "应用",
     "done": "已完成",
     "confirm": "确认",
-    "connecting": "正在连接......",
     "cancel": "取消",
     "getSupport": "获取支持",
     "delete": "删除",
@@ -26,12 +24,9 @@
     "selectExchangeNoOption": "不存在与 \"{{exchangeName}}\" 匹配的交易",
     "selectExchangeNoOptionAtAll": "未找到交易所",
     "sortBy": "排序方式",
-    "search": "搜索",
     "save": "保存",
     "lock": "锁定",
     "showMore": "显示更多",
-    "max": "最大值",
-    "new": "New",
     "back": "返回",
     "reset": "重置",
     "retry": "重试",
@@ -49,7 +44,6 @@
     "addressCopied": "地址已复制",
     "experimentalFeature": "Experimental",
     "dismiss": "Dismiss",
-    "choose": "Choose",
     "information": "Information",
     "lockScreen": {
       "title": "欢迎回来",
@@ -78,31 +72,18 @@
       "UNDELEGATE": "Undelegated"
     }
   },
+  "byteSize": {
+    "kbUnit": "{{size}}Kb"
+  },
   "time": {
-    "day": "日度",
-    "day_plural": "Days",
-    "week": "周度",
-    "week_plural": "Weeks",
-    "month": "月度",
-    "month_plural": "Months",
-    "year": "年度",
-    "year_plural": "Years",
     "minute": "分",
     "minute_plural": "Minutes",
-    "second": "秒",
-    "second_plural": "Seconds",
     "hour": "时",
     "hour_plural": "Hours",
     "range": {
       "week": "1W",
       "month": "1M",
       "year": "1Y"
-    },
-    "since": {
-      "day": "昨天",
-      "week": "上周",
-      "month": "上个月",
-      "year": "去年"
     }
   },
   "fees": {
@@ -118,12 +99,7 @@
     "stars": "星标账户",
     "accounts": "账户",
     "manager": "管理器",
-    "exchange": "购买加密资产",
-    "developer": "开发工具",
-    "newUpdate": {
-      "title": "新版本更新",
-      "description": "您的账户已被移至新页面！"
-    }
+    "exchange": "购买加密资产"
   },
   "stars": {
     "placeholder": "您在 <1><0>账户</0></1> 页面上的星标账户将在这里显示！",
@@ -151,10 +127,6 @@
       "unit": {
         "title": "单位",
         "desc": "选择要显示的单位"
-      },
-      "endpointConfig": {
-        "title": "节点",
-        "desc": "要使用的 API 节点"
       }
     }
   },
@@ -185,7 +157,6 @@
     }
   },
   "banners": {
-    "promoteMobile": "享受 Ledger Live 体验，现已推出移动版本，尽在 {{productName}}",
     "migrate": "Ledger Live 账户可更新",
     "genericTerminatedCrypto": "不再支持 {{coinName}}"
   },
@@ -195,36 +166,16 @@
       "desc": "添加更多的加密资产账户",
       "createAccount": "添加账户"
     },
-    "accounts": {
-      "title": "账户 ({{count}})"
-    },
-    "greeting": {
-      "morning": "早上好",
-      "evening": "晚上好",
-      "afternoon": "下午好"
-    },
-    "summary": "以下是您的账户概览",
-    "summary_plural": "以下是您 {{count}} 个账户的概览",
     "recentActivity": "近期操作",
     "totalBalance": "总余额"
   },
   "currentAddress": {
     "title": "当前地址",
     "for": "<1><0>{{name}}</0></1>地址",
-    "messageIfUnverified": "请验证您设备上显示的 {{currencyName}} 地址与您的 Ledger Live 上显示的地址是否匹配",
-    "messageIfAccepted": "地址已确认，如果您采用复制/粘贴或扫描二维码方式，则请重新验证。",
-    "messageIfSkipped": "尚未在您的 Ledger 设备上确认您的 {{currencyName}} 地址。请验证以确保最优安全性。"
-  },
-  "deviceConnect": {
-    "dashboard": "导航至您设备上的<1>仪表板</1>",
-    "step1": "连接并解锁您的 <1>Ledger 设备</1>",
-    "step2": "打开您设备上的 <1><0>{{managerAppName}}</0></1> 应用程序",
-    "step3": "在您的设备上允许 <1>Ledger Manager</1>"
+    "messageIfUnverified": "Verify that the shared address matches the one on your device",
+    "messageIfSkipped": "Your {{name}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
   "emptyState": {
-    "sidebar": {
-      "text": "单击此按钮添加账户至资产组合"
-    },
     "dashboard": {
       "title": "安装应用程序或添加账户",
       "desc": "打开 Manager 以安装应用程序，如果您的 Ledger 设备已安装应用程序，请添加相应账户",
@@ -251,6 +202,7 @@
     "paybis": "Paybis.com is one of the most trusted cryptocurrency brokers worldwide since 2014, customer satisfaction - 4.7/5 via Trustpilot. Visa/Master cards, Bank Transfers, Skrill/Neteller accepted. 24/7 online customer support.",
     "shapeshift": "ShapeShift 是一个在线市场，用户可在此购买和销售数字资产，可快速且安全地在世界各地买卖数字资产，既没有冗长的注册过程，也没有交易对手风险，更不会产生摩擦。",
     "simplex": "Simplex 是一家欧盟许可的金融机构，提供无欺诈的信用卡支付解决方案。",
+    "swft": "SWFT Blockchain is a worldwide cross-blockchain transfer protocol and payment network, enabling simpler, faster and safer swaps between over 200 cryptocurrencies and free crypto payments to anyone anywhere",
     "taxtoken": "为美国公民打造的自动化加密货币税费和成本基础软件。",
     "thorswap": "ThorSwap 是一个即时、安全和公平的加密资产市场，由分散原子交换技术提供动力。操作简单便捷，小额交易无需注册或 KYC，是开启交易的理想之选。",
     "bitpanda": "Bitpanda 是欧洲领先的比特币、以太币、IOTA 等加密货币的交易零售代理商。可使用信用卡、SOFORT-Transfer、NETELLER 或其他方式进行存款。",
@@ -262,7 +214,7 @@
     "modal": {
       "title": "正版查验"
     },
-    "deviceInBootloader": "您的设备处于 Bootloader 模式。请点击 {{button}} 进行更新。"
+    "deviceInBootloader": "Device in Bootloader mode. Click on Continue to update it."
   },
   "tokensList": {
     "title": "代币",
@@ -285,7 +237,6 @@
   "migrateAccounts": {
     "overview": {
       "title": "Ledger Live 账户可更新",
-      "done": "Ledger Live 账户已更新",
       "successTitle": "Accounts updated successfully",
       "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
       "successDesc": "Your {{assets}} account is now updated and ready to use",
@@ -301,8 +252,7 @@
       "doItLaterBtn": "Do it later"
     },
     "connectDevice": {
-      "title": "{{currencyName}} 更新",
-      "description": ""
+      "title": "{{currencyName}} 更新"
     },
     "progress": {
       "finished": {
@@ -331,17 +281,10 @@
       "import": "账户",
       "finish": "确认"
     },
-    "connectDevice": {
-      "desc": "按照以下步骤，添加 <1><0>{{currencyName}}</0></1> 账户"
-    },
     "tokensTip": "{{token}} ({{ticker}}) 是一个 {{tokenType}} 代币。您可以直接在 {{currency}} 账户上接收代币。",
     "accountToImportSubtitle_plural": "添加现有账户",
     "selectAll": "全选 ({{count}})",
     "unselectAll": "取消全选 ({{count}})",
-    "newAccount": "新建账户",
-    "legacyAccount": "{{accountName}} (legacy)",
-    "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
-    "unsplitAccount": "{{accountName}} (unsplit)",
     "noAccountToImport": "没有要添加的现有 {{currencyName}} 账户",
     "success": "已成功添加账户",
     "success_plural": "已成功添加账户",
@@ -399,30 +342,106 @@
   "operationList": {
     "noMoreOperations": "以上"
   },
+  "DeviceAction": {
+    "allowAppPermission": "Open the {{wording}} app on your device",
+    "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
+    "allowManagerPermission": "{{wording}} on your device",
+    "loading": "Loading...",
+    "connectAndUnlockDevice": "Connect and unlock your device",
+    "unlockDevice": "Unlock your device",
+    "quitApp": "Quit the application on your device",
+    "appNotInstalled": "Please install the {{appName}} app",
+    "openManager": "Open Manager"
+  },
   "manager": {
-    "yourDeviceIsGenuine": "您的设备为正版",
-    "goToAccounts": "Go to accounts",
-    "intallEthApp": "Install Ethereum app",
+    "tabs": {
+      "appCatalog": "App catalog",
+      "appCatalogSearch": "Search app in catalog...",
+      "appsOnDevice": "Apps installed",
+      "appOnDeviceSearch": "Search installed apps..."
+    },
+    "deviceStorage": {
+      "freeSpace": "<0>{{space}}</0> free",
+      "noFreeSpace": "no storage left",
+      "installed": "Installed",
+      "capacity": "Capacity",
+      "used": "Used",
+      "firmware": "Firmware {{version}}",
+      "genuine": "Device is genuine",
+      "incomplete": "Some apps were not recognized by our apps catalog. Please uninstall and reinstall them."
+    },
+    "applist": {
+      "placeholder": "There are no apps matching the search and filters selected",
+      "placeholderNoAppsInstalled": "No apps installed on your device",
+      "placeholderGoToCatalog": "Go to the Apps catalog to install apps",
+      "noResultsFound": "No results found",
+      "noResultsDesc": "Please verify the spelling and try again",
+      "filter": {
+        "title": "Show",
+        "all": "All",
+        "supported": "Supported in Live",
+        "installed": "Installed",
+        "not_installed": "Not installed"
+      },
+      "sort": {
+        "title": "Sort",
+        "name_asc": "Name A-Z",
+        "name_desc": "Name Z-A",
+        "marketcap_desc": "Market cap"
+      },
+      "installSuccess": {
+        "title": "App successfully installed, you can now add your {{app}} accounts",
+        "title_plural": "Apps successfully installed, you can now add your accounts",
+        "manageAccount": "Manage my accounts",
+        "later": "Do it later"
+      },
+      "updatable": {
+        "title": "Updates available",
+        "progressTitle": "{{number}} app updates",
+        "progressWarning": "Do not quit manager during update",
+        "progress": "Updating all..."
+      },
+      "item": {
+        "version": "Version {{version}}",
+        "versionNew": "Version {{version}} (NEW{{newVersion}})",
+        "installing": "Installing...",
+        "uninstalling": "Uninstalling...",
+        "scheduled": "Scheduled",
+        "update": "Update available",
+        "updateAll": "Update All",
+        "updateAllOutOfMemory": "Not enough space to update, please uninstall some apps",
+        "install": "Install",
+        "installed": "Installed",
+        "uninstall": "Uninstall",
+        "notEnoughSpace": "Not enough space",
+        "supported": "Ledger Live supported",
+        "addAccount": "Add account",
+        "addAccountTooltip": "Add {{appName}} account",
+        "addAccountWarn": "Please wait for the app updates to finish",
+        "learnMore": "Learn more",
+        "learnMoreTooltip": "Learn more about {{appName}}",
+        "removeTooltip": "Uninstall {{appName}}"
+      },
+      "uninstall": {
+        "title": "Uninstall all",
+        "subtitle": "Uninstall all apps?",
+        "description": "Don’t worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog"
+      }
+    },
     "apps": {
-      "install": "安装",
-      "all": "应用程序目录",
-      "installing": "正在安装 {{app}}...",
-      "uninstalling": "正在卸载 {{app}}...",
-      "installSuccess": "{{app}} 已成功安装",
-      "unsupportedSuccess": "了解如何使用 {{app}}",
-      "uninstallSuccess": "{{app}} 已卸载",
-      "supportedCurrency": "{{app}} 现已安装在你的 {{device}} 上。",
-      "supportedCurrencyNeedAccount": "{{app}} 现已安装在你的 {{device}} 上。您需要添加 {{currency}} 账户来接收和管理资产。",
-      "unsupportedCurrency": "{{app}} 尚未在 LedgerLive 中整合。请点击此按钮来了解如何管理它。",
-      "help": "检查您的设备，查看已安装了哪些应用程序",
-      "installed": "该应用程序安装完成",
-      "uninstalled": "该应用程序已卸载",
-      "addAccount": "添加 {{name}} 账户",
-      "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
-      "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>"
+      "dependencyInstall": {
+        "title": "{{dependency}} app is required",
+        "description": "The {{dependency}} app will also be installed because the {{app}} app needs it.",
+        "confirm": "Install apps"
+      },
+      "dependencyUninstall": {
+        "title": " Uninstall {{app}} and its related apps?",
+        "showAll": "Show apps to uninstall",
+        "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled aswell.",
+        "confirm": "Uninstall {{app}} and other apps"
+      }
     },
     "firmware": {
-      "installed": "固件版本 {{version}}",
       "updateLater": "Cancel",
       "seedReady": "I have my recovery phrase",
       "dontHaveSeed": "Don't have your recovery phrase?",
@@ -433,14 +452,10 @@
       "latest": "固件版本 {{version}} 已可用",
       "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible, as a precaution.",
       "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
-      "disclaimerAppDelete": "请卸载设备上所有应用程序，此操作不会影响您的加密资产。",
-      "disclaimerAppReinstall": "为谨慎起见，请安全保存您的恢复短语列表。",
       "downloadingUpdateDesc": "请等待更新安装程序下载",
       "appsAutoUninstallTitle": "All applications will be uninstalled from your device",
       "appsAutoUninstallBullet1": "<0><0>Don't worry</0></0>, this does not affect your crypto assets",
-      "appsAutoUninstallBullet2": "You will be able to reinstall them all after the update",
-      "appsUninstallTitle": "Apps will be uninstalled",
-      "appsUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
+      "appsAutoUninstallBullet2": "You will be able to reinstall them all after the update"
     },
     "modal": {
       "steps": {
@@ -464,7 +479,6 @@
       "mcuBlueSecond": "持续按住设备侧面按钮5秒至设备显示 Boot Options ，请轻击 Bootloader Mode 。",
       "successTitle": "固件已更新",
       "successText": "请在设备上重新安装应用程序",
-      "resetTitle": "准备设备",
       "resetSteps": {
         "first": "1. 重置您的设备",
         "connect": "通过 USB 数据线，连接 {{deviceName}} 到您的计算机。",
@@ -480,17 +494,11 @@
         "uninstall": "点击 {{deviceName}} 的灰色回收站图标，这将为安装固件释放空间。",
         "disclaimer": "注意：您的加密资产不受此操作的影响，用于在区块链中访问您加密资产的私钥仍安全储存在您的恢复短语列表中。"
       }
-    },
-    "title": "管理器",
-    "subtitle": "在设备上安装或卸载应用程序",
-    "device": {
-      "title": "连接设备",
-      "desc": "按照以下步骤打开管理器",
-      "cta": "连接我的设备"
     }
   },
   "receive": {
     "title": "接收",
+    "successTitle": "Address shared securely",
     "steps": {
       "chooseAccount": {
         "title": "账户",
@@ -500,8 +508,7 @@
       },
       "connectDevice": {
         "title": "设备",
-        "withoutDevice": "您还没有 Ledger 设备？",
-        "tokensTip": "* 打开 {{currency}} 应用来管理您的 {{token}} 代币"
+        "withoutDevice": "您还没有 Ledger 设备？"
       },
       "confirmAddress": {
         "title": "验证",
@@ -522,7 +529,6 @@
   "send": {
     "title": "发送",
     "totalSpent": "总借额",
-    "totalBalance": "Total balance",
     "steps": {
       "recipient": {
         "title": "Recipient"
@@ -544,9 +550,6 @@
         "amount": "Amount",
         "fees": "Network fees",
         "useMax": "Send Max",
-        "advancedOptions": "Advanced options",
-        "useRBF": "Use a replace-by-fee transaction",
-        "message": "Leave a message (140)",
         "rippleTag": "Tag",
         "rippleTagPlaceholder": "Optional",
         "ethereumGasLimit": "Gas limit",
@@ -554,7 +557,11 @@
         "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
-        "title": "验证"
+        "title": "验证",
+        "streaming": {
+          "accurate": "Loading... ({{percentage}})",
+          "inaccurate": "Loading..."
+        }
       },
       "confirmation": {
         "title": "确认",
@@ -594,12 +601,9 @@
   },
   "accountDistribution": {
     "account": "Account",
-    "price": "Price",
     "distribution": "Allocation",
     "amount": "Amount",
     "value": "Value",
-    "showAll": "Show all",
-    "showLess": "Show less",
     "header": "Account allocation ({{count}})"
   },
   "delegation": {
@@ -618,6 +622,7 @@
     "howItWorks": "How delegation works",
     "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
     "earnRewards": "Earn rewards",
+    "overdelegated": "Overdelegated",
     "flow": {
       "steps": {
         "starter": {
@@ -646,7 +651,7 @@
           "select": "Select",
           "yield": "Est. Yield {{amount}}",
           "randomly": "Randomly chosen validator",
-          "termsAndPrivacy": "I have read and I accept the Ledger Live<1><0>Terms of Use</0></1> and <3><0>Privacy Policy</0></3>"
+          "termsAndPrivacy": "Delegating your voting rights does not guarantee you will be paid any reward by your validator."
         },
         "validator": {
           "title": "Select validator",
@@ -693,6 +698,7 @@
   },
   "settings": {
     "title": "设置",
+    "discreet": "Toggle discreet mode",
     "tabs": {
       "display": "通用",
       "cryptoAssets": "加密资产",
@@ -711,8 +717,7 @@
       },
       "operations": {
         "title": "操作历史",
-        "desc": "在您的计算机上保存帐户操作的 CSV 文件。",
-        "button": "保存"
+        "desc": "在您的计算机上保存帐户操作的 CSV 文件。"
       },
       "modal": {
         "button": "完成",
@@ -731,8 +736,6 @@
       "themeDesc": "Select the theme.",
       "counterValue": "对价",
       "counterValueDesc": "选择在余额和操作旁显示的货币币种。",
-      "exchange": "汇率提供商",
-      "exchangeDesc": "提供比特币兑 {{fiat}} 的汇率，以估算您的加密资产的价值 (crypto asset → BTC → {{fiat}}) 。",
       "region": "地区",
       "regionDesc": "选择您所在的地区，以用于设置 Ledger Live 的时区。",
       "stock": "地区市场指示器",
@@ -740,9 +743,8 @@
     },
     "currencies": {
       "desc": "更改您每个加密资产账户的设置",
+      "placeholder": "No settings for this asset",
       "select": "选择一种加密资产，并编辑设置。",
-      "exchange": "汇率提供商 ({{ticker}} → BTC)",
-      "exchangeDesc": "选择 {{currencyName}} 兑比特币汇率的提供商，以估算您的加密资产的价值 ({{ticker}} → BTC → {{fiat}}) 。",
       "confirmationsNb": "确认数量",
       "confirmationsNbDesc": "设置要标记为已确认的交易的网络确认数量。"
     },
@@ -883,12 +885,6 @@
     "support": "联系客服",
     "github": "GitHub"
   },
-  "disclaimerModal": {
-    "title": "安全交易",
-    "desc_1": "发送和接收加密资产之前，请务必了解相关知识，以便做出知情决策。加密资产并不稳定，价格也可能上下起伏。请认真评估您的交易目标和您愿意承担的财务风险。",
-    "desc_2": "请注意，Ledger 不提供财务、税务或法律建议。您应自行做出这些决定，或咨询可靠的专家。",
-    "cta": "明白了"
-  },
   "exportOperationsModal": {
     "title": "操作历史",
     "desc": "选择需保存操作历史的帐户",
@@ -925,13 +921,13 @@
     "init": {
       "title": "开始使用您的 Ledger 设备",
       "newDevice": {
-        "title": "初始化为新设备"
+        "title": "Set up as new device"
       },
       "restoreDevice": {
         "title": "通过恢复短语恢复设备配置"
       },
       "initializedDevice": {
-        "title": "使用已初始化设备"
+        "title": "Skip device setup"
       }
     },
     "noDevice": {
@@ -961,10 +957,11 @@
         "title": "选择您的 PIN 码",
         "instructions": {
           "nano": {
-            "step1": "将 {{productName}} 连接至您的电脑，同时按下两个按钮后开始。",
-            "step2": "按右键选择<1><0>{{configureAsNewDevice}}</0></1>。",
-            "step3": "按左键或右键选择数字，同时按下两个按钮进行确认。",
-            "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
+            "step1": "Connect the {{productName}} to your computer.",
+            "step2": "Press the left or right button to navigate through the on-screen instructions.",
+            "step3": "Press both buttons to select <1><0>{{configureAsNewDevice }}</0></1>.",
+            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "nanoX": {
             "step1": "将 {{productName}} 连接至您的计算机。",
@@ -983,10 +980,11 @@
         "title": "选择您的 PIN 码",
         "instructions": {
           "nano": {
-            "step1": "将 {{productName}} 连接至您的电脑，同时按下两个按钮后开始。",
-            "step2": "按左键取消<1><0>{{configureAsNewDevice}}?</0></1>，然后按右键选择<3><0>{{restoreConfiguration}}?</0></3>。",
-            "step3": "按左键或右键选择数字，同时按下两个按钮进行确认。",
-            "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
+            "step1": "Connect the {{productName}} to your computer.",
+            "step2": "Press the left or right button to navigate through the on-screen instructions.",
+            "step3": "Press both buttons to select <1><0>{{restoreConfiguration}}</0></1>.",
+            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "nanoX": {
             "step1": "将您的 {{productName}} 连接到您的计算机。",
@@ -1005,8 +1003,8 @@
     },
     "writeSeed": {
       "initialize": {
-        "title": "保存您的恢复短语",
-        "desc": "您的设备将显示一组 24 词恢复短语来备份您的私钥",
+        "title": "Write down your recovery phrase",
+        "desc": "Your 24-word recovery phrase is the <1>only backup</1> of your private keys.",
         "nano": {
           "step1": "在空白恢复短语列表上的位置 1 记下<1><0>{{seedWord1}}</0></1>。",
           "step2": "按下右键以继续，直至 24 个助记词输入完成。",
@@ -1020,7 +1018,7 @@
       },
       "restore": {
         "title": "输入您的恢复短语",
-        "desc": "输入您在恢复短语列表上中记下的恢复短语助记词。",
+        "desc": "Enter the recovery phrase from your Recovery phrase.",
         "nano": {
           "step1": "选择您的恢复短语的长度。",
           "step2": "输入<1><0>{{seedWord1}}</0></1>的开头字母，直至显示建议助记词。",
@@ -1034,10 +1032,10 @@
         }
       },
       "disclaimer": {
-        "note1": "请仔细将您的 24 词恢复短语保存在安全的地方。",
-        "note2": "确保不要将您的恢复短语告知任何人。",
-        "note3": "Ledger 不会保留您恢复短语的任何备份。",
-        "note4": "请勿使用自带 PIN 码或附有恢复短语的设备。"
+        "note1": "Anyone who gets your recovery phrase can take your crypto assets.",
+        "note2": "Never use a device supplied with a PIN code or a recovery phrase.",
+        "note3": "Store your recovery phrase in a secure location, out of sight.",
+        "note4": "Ledger does not store your private keys, nor ever asks for it."
       }
     },
     "genuineCheck": {
@@ -1061,13 +1059,11 @@
       "errorPage": {
         "title": {
           "pinFailed": "没有选择您自己的 PIN 码？",
-          "recoveryPhraseFailed": "您是否已自行保存您的恢复短语？",
-          "isGenuineFail": "糟糕，您的设备似乎不是正版…"
+          "recoveryPhraseFailed": "您是否已自行保存您的恢复短语？"
         },
         "desc": {
           "pinFailed": "请勿使用自带 PIN 码的设备。若有任何疑问，请随时联系我们。",
-          "recoveryPhraseFailed": "保存只显示在您的设备上的恢复短语，且勿告知他人。如有疑问，请联系我们。",
-          "isGenuineFail": "您的设备未通过连接到 Ledger 安全服务器所需的真伪测试。请联系 Ledger 客服以获取帮助。"
+          "recoveryPhraseFailed": "保存只显示在您的设备上的恢复短语，且勿告知他人。如有疑问，请联系我们。"
         }
       }
     },
@@ -1112,10 +1108,6 @@
           "item2": "Ledger Live 版本、语言和地区",
           "item3": "OS 版本、语言和地区"
         }
-      },
-      "terms": {
-        "title": "条款 *",
-        "desc": "若继续，则表明您已阅读并同意<1>使用条款</1>和<3>隐私政策</3>。"
       }
     },
     "finish": {
@@ -1138,6 +1130,11 @@
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"
+  },
+  "Terms": {
+    "title": "Terms of Use",
+    "read": "Read the Terms of Use",
+    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
   },
   "errors": {
     "generic": {
@@ -1177,8 +1174,8 @@
       "description": "意外错误，请稍后重试。"
     },
     "DeviceSocketFail": {
-      "title": "{{message}}",
-      "description": "请重试"
+      "title": "Please restart your Ledger device and retry",
+      "description": "An unexpected error occurred, so please try again. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
       "title": "抱歉，连接失败",
@@ -1204,6 +1201,10 @@
       "title": "固件或应用程序需更新",
       "description": "请使用管理器卸载所有应用程序，并在重装应用前，检查是否有安装固件更新"
     },
+    "FirmwareNotRecognized": {
+      "title": "Firmware is not recognized",
+      "description": "Please contact Ledger Support"
+    },
     "HardResetFail": {
       "title": "糟糕，无法重置",
       "description": "请重试，如有疑问，请随时联系我们"
@@ -1218,7 +1219,7 @@
     },
     "LedgerAPI5xx": {
       "title": "抱歉，请重试。",
-      "description": "服务器无法处理您的请求。请稍后再试，或联系Ledger客服。 {{message}}"
+      "description": "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "抱歉，{{currencyName}} 服务不可用",
@@ -1247,6 +1248,24 @@
     "ManagerNotEnoughSpace": {
       "title": "抱歉，剩余存储空间不足",
       "description": "请卸载一些应用以提供空间。请放心，提供访问您的加密资产的私钥将安全存储在在您的设备中。"
+    },
+    "ManagerQuitPage": {
+      "install": {
+        "title": "Quit and cancel app install?",
+        "description": "Quitting will cancel the app installing in progress.",
+        "stay": "Finish install"
+      },
+      "uninstall": {
+        "title": "Quit and cancel app uninstalling?",
+        "description": "Quitting will cancel the app uninstalls in progress.",
+        "stay": "Finish uninstalling"
+      },
+      "update": {
+        "title": "Quit and cancel app updates?",
+        "description": "Quitting will cancel the app updates in progress.",
+        "stay": "Finish updates"
+      },
+      "quit": "Quit Manager"
     },
     "ManagerUninstallBTCDep": {
       "title": "抱歉，需要安装此应用程序",
@@ -1290,6 +1309,10 @@
       "title": "出错了。请重新连接您的设备",
       "description": "{{message}}"
     },
+    "TransportRaceCondition": {
+      "title": "Something went wrong, please reconnect your device",
+      "description": "{{message}}"
+    },
     "TransportStatusError": {
       "title": "出错了。请重新连接您的设备",
       "description": "{{message}}"
@@ -1303,15 +1326,19 @@
       "description": "请重启您的设备或联系我们"
     },
     "UserRefusedAllowManager": {
-      "title": "Manager 在设备上被拒绝"
+      "title": "Manager denied on device"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "更新已取消",
       "description": "请重试或联系 Ledger 支持人员"
     },
     "UserRefusedOnDevice": {
-      "title": "设备上的交易被拒绝",
+      "title": "Action denied on device",
       "description": "请重试，如有疑问，请随时联系 Ledger 客服"
+    },
+    "TransactionRefusedOnDevice": {
+      "title": "Operation denied on device",
+      "description": "Please retry or contact Ledger Support in case of doubt"
     },
     "UserRefusedAddress": {
       "title": "接收地址被拒",
@@ -1326,16 +1353,16 @@
       "description": "请回到您设备上的仪表板"
     },
     "WebsocketConnectionError": {
-      "title": "抱歉，请重试（WebSocket 错误）",
+      "title": "Sorry, try again (connection error)",
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "抱歉，请重试 （WebSocket 错误）",
+      "title": "Sorry, try again (connection closed)",
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "“{{accountName}}”的设备或密码短语错误",
-      "description": "请使用所选账户的设备或密码短语"
+      "title": "Something went wrong",
+      "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase that belongs to the selected account."
     },
     "DeviceAppVerifyNotSupported": {
       "title": "应用程序待更新",
