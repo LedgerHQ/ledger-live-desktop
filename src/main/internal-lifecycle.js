@@ -12,6 +12,8 @@ import InternalProcess from "./InternalProcess";
 // ~~~ Local state that main thread keep
 
 const hydratedPerCurrency = {};
+// const libcorePassword = "k";
+// let libcoreInitSuccess = false;
 
 // ~~~
 
@@ -27,7 +29,8 @@ const cleanUpBeforeClosingSync = () => {
 const sentryEnabled = false;
 const userId = "TODO";
 
-const spawnCoreProcess = () => {
+const spawnCoreProcess = async () => {
+  // libcoreInitSuccess = false;
   const env = {
     ...getAllEnvs(),
     // $FlowFixMe
@@ -44,7 +47,14 @@ const spawnCoreProcess = () => {
     execArgv: (process.env.LEDGER_INTERNAL_ARGS || "").split(/[ ]+/).filter(Boolean),
     silent: true,
   });
-  internal.start();
+  // internal.setPassword(libcorePassword);
+  try {
+    await internal.start();
+    console.log("--- Start success ---");
+  } catch (error) {
+    console.log("--- Start failure ---");
+    console.log(error);
+  }
 };
 
 internal.onStart(() => {
@@ -53,6 +63,7 @@ internal.onStart(() => {
   internal.send({
     type: "init",
     hydratedPerCurrency,
+    // libcorePassword,
   });
 });
 
@@ -65,12 +76,17 @@ app.on("window-all-closed", async () => {
   app.quit();
 });
 
-ipcMain.on("clean-processes", async () => {
+const restartInternal = async () => {
   logger.info("cleaning processes on demand");
   if (internal.active) {
     await internal.stop();
   }
   spawnCoreProcess();
+};
+
+ipcMain.on("clean-processes", async () => {
+  logger.info("cleaning processes on demand");
+  restartInternal();
 });
 
 const ongoing = {};
@@ -86,7 +102,18 @@ internal.onMessage(message => {
   }
 });
 
-internal.onExit((code, signal, unexpected) => {
+internal.onExit((code, signal, unexpected, libcoreInitialized) => {
+  console.log("---------");
+  console.log("code", code);
+  console.log("signal", signal);
+  console.log("unexpected", unexpected);
+  console.log("libcoreInitialized", libcoreInitialized);
+  console.log("---------");
+
+  if (!libcoreInitialized) {
+    console.log("libcore failed to init");
+  }
+
   if (unexpected) {
     Object.keys(ongoing).forEach(requestId => {
       const event = ongoing[requestId];
@@ -133,6 +160,11 @@ function handleGlobalInternalMessage(payload) {
       win.webContents.send(payload.type, payload);
       break;
     }
+    // case "libcoreInitSuccess": {
+    //   console.log("libcore init success");
+    //   // libcoreInitSuccess = true;
+    //   break;
+    // }
     default:
   }
 }
@@ -152,10 +184,7 @@ ipcMain.on("setEnv", async (event, env) => {
 
   if (setEnvUnsafe(name, value)) {
     if (isRestartNeeded(name)) {
-      if (internal.active) {
-        await internal.stop();
-      }
-      spawnCoreProcess();
+      restartInternal();
     } else {
       internal.send({ type: "setEnv", env });
     }
@@ -168,3 +197,9 @@ ipcMain.on("hydrateCurrencyData", (event, { currencyId, serialized }) => {
 
   internal.send({ type: "hydrateCurrencyData", serialized, currencyId });
 });
+
+ipcMain.on("setLibcorePassword", (password: string) => {
+  internal.setPassword(password);
+});
+
+export default internal;

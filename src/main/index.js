@@ -3,7 +3,7 @@ import "./setup";
 import { app, Menu, ipcMain } from "electron";
 import menu from "./menu";
 import { createMainWindow, getMainWindow, loadWindow } from "./window-lifecycle";
-import "./internal-lifecycle";
+import internal from "./internal-lifecycle";
 import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import db from "./db";
 import debounce from "lodash/debounce";
@@ -53,7 +53,15 @@ app.on("ready", async () => {
     return db.hasEncryptionKey(ns, keyPath);
   });
 
-  ipcMain.handle("setEncryptionKey", (event, { ns, keyPath, encryptionKey }) => {
+  ipcMain.handle("setEncryptionKey", async (event, { ns, keyPath, encryptionKey }) => {
+    console.log("encryptionKey", encryptionKey);
+    try {
+      await internal.setPassword(encryptionKey);
+      console.log("setPassword success");
+    } catch (error) {
+      console.log("--- set password failed ---");
+      console.log(error);
+    }
     return db.setEncryptionKey(ns, keyPath, encryptionKey);
   });
 

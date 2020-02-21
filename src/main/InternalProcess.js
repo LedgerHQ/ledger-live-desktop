@@ -13,6 +13,7 @@ class InternalProcess {
   process: ?ChildProcess;
   timeout: number;
   active: boolean;
+  libcoreInitialized: boolean;
   onStartCallback: ?Function;
   onMessageCallback: ?Function;
   onExitCallback: ?Function;
@@ -22,11 +23,14 @@ class InternalProcess {
   args: ?(string[]);
   options: ?ForkOptions;
 
+  startPromise: {};
+
   constructor({ timeout }: { timeout: number }) {
     this.process = null;
 
     this.timeout = timeout;
     this.active = false;
+    this.libcoreInitialized = false;
 
     this.onStartCallback = null;
     this.onMessageCallback = null;
@@ -35,6 +39,8 @@ class InternalProcess {
     this.messageQueue = [];
 
     this.password = "";
+
+    this.startPromise = {};
   }
 
   onMessage(callback: Function) {
@@ -70,79 +76,122 @@ class InternalProcess {
     this.options = options;
   }
 
+  setPassword(password: string) {
+    if (password !== this.password) {
+      this.password = password;
+
+      if (this.process) {
+        return this.restart();
+      }
+    }
+  }
+
   start() {
-    if (this.process) {
-      throw new Error("Internal process is already running !");
-    }
+    return new Promise<any>((resolve, reject) => {
+      if (this.process) {
+        throw new Error("Internal process is already running !");
+      }
 
-    invariant(
-      this.path && this.args && this.options,
-      "configure() was not completed before start()",
-    );
-    this.process = fork(this.path, this.args, this.options);
+      if (!this.path || !this.args || !this.options) {
+        throw new Error("configure() was not completed before start()");
+      }
 
-    this.active = true;
-    const pid = this.process.pid;
+      this.process = fork(this.path, this.args, this.options);
 
-    logger.info(`spawned internal process ${pid}`);
-    console.log(`spawned internal process ${pid}`);
+      this.startPromise = { resolve, reject };
 
-    this.process && // A bit stupid, but Flow complains otherwise
-      this.process.on("exit", (code, signal) => {
-        this.process = null;
+      this.active = true;
+      const pid = this.process.pid;
 
-        if (code !== null) {
-          console.log(`internal process ${pid} gracefully exited with code ${code}`);
-          logger.info(`Internal process ${pid} ended with code ${code}`);
-        } else {
-          console.log(`internal process ${pid} got killed by signal ${signal}`);
-          logger.info(`Internal process ${pid} killed with signal ${signal}`);
-        }
+      logger.info(`spawned internal process ${pid}`);
+      console.log(`spawned internal process ${pid}`);
 
-        if (this.onExitCallback) {
-          this.onExitCallback(code, signal, this.active);
-        }
-      });
+      this.process && // A bit stupid, but Flow complains otherwise
+        this.process.on("exit", (code, signal) => {
+          this.process = null;
 
-    this.process && // And, yeah, even wrapping all this in a big if (this.process) isn't enough
-      this.process.on("message", message => {
-        if (this.onMessageCallback && this.active) {
-          this.onMessageCallback(message);
-        }
-      });
+          if (code !== null) {
+            console.log(`internal process ${pid} gracefully exited with code ${code}`);
+            logger.info(`Internal process ${pid} ended with code ${code}`);
+          } else {
+            console.log(`internal process ${pid} got killed by signal ${signal}`);
+            logger.info(`Internal process ${pid} killed with signal ${signal}`);
+          }
 
-    if (this.messageQueue.length) {
-      this.run();
-    }
+          if (this.active && !this.libcoreInitialized) {
+            this.startPromise.reject();
+          }
 
-    this.process && // You have to do this for every one of this.process.whatever 🤷‍♂️
-      this.process.stdout.on("data", data =>
-        String(data)
-          .split("\n")
-          .forEach(msg => {
-            if (!msg) return;
-            if (process.env.INTERNAL_LOGS) console.log(msg);
-            try {
-              const obj = JSON.parse(msg);
-              if (obj && obj.type === "log") {
-                logger.onLog(obj.log);
-                return;
-              }
-            } catch (e) {}
-            logger.debug("I: " + msg);
-          }),
-      );
+          if (this.onExitCallback) {
+            this.onExitCallback(
+              code,
+              signal,
+              this.active && this.libcoreInitialized,
+              this.libcoreInitialized,
+            );
+          }
 
-    this.process &&
-      this.process.stderr.on("data", data => {
-        const msg = String(data).trim();
-        if (__DEV__) console.error("I.e: " + msg);
-        logger.error("I.e: " + String(data).trim());
-      });
+          this.active = false;
+          this.libcoreInitialized = false;
+        });
 
-    if (this.onStartCallback) {
-      this.onStartCallback();
-    }
+      this.process && // And, yeah, even wrapping all this in a big if(this.process) isn't enough
+        this.process.on("message", message => {
+          if (message.type === "libcoreInitialized") {
+            console.log("Libcore init successful");
+            this.libcoreInitialized = true;
+
+            this.startPromise.resolve();
+
+            if (this.onStartCallback) {
+              this.onStartCallback();
+            }
+          }
+          if (this.onMessageCallback && this.active) {
+            this.onMessageCallback(message);
+          }
+        });
+
+      if (this.messageQueue.length) {
+        this.run();
+      }
+
+      this.process && // You have to do this for every one of this.process.whatever 🤷‍♂️
+        this.process.stdout.on("data", data =>
+          String(data)
+            .split("\n")
+            .forEach(msg => {
+              if (!msg) return;
+              if (process.env.INTERNAL_LOGS) console.log(msg);
+              try {
+                const obj = JSON.parse(msg);
+                if (obj && obj.type === "log") {
+                  logger.onLog(obj.log);
+                  return;
+                }
+              } catch (e) {}
+              logger.debug("I: " + msg);
+            }),
+        );
+
+      this.process &&
+        this.process.stderr.on("data", data => {
+          const msg = String(data).trim();
+          if (__DEV__) console.error("I.e: " + msg);
+          logger.error("I.e: " + String(data).trim());
+        });
+
+      // this.process.on("libcoreInitialized", () => {
+      //   console.log("Libcore init successful");
+      //   this.libcoreInitialized = true;
+
+      //   if (this.onStartCallback) {
+      //     this.onStartCallback();
+      //   }
+      // });
+
+      this.process.send({ type: "initLibcore", password: this.password });
+    });
   }
 
   stop() {
@@ -171,10 +220,9 @@ class InternalProcess {
     });
   }
 
-  restart() {
-    return this.stop().then(() => {
-      this.start();
-    });
+  async restart() {
+    await this.stop();
+    await this.start();
   }
 }
 

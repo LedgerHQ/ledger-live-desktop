@@ -8,6 +8,7 @@ import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 import { log } from "@ledgerhq/logs";
 import logger from "~/logger";
 import LoggerTransport from "~/logger/logger-transport-internal";
+import implementLibcore from "./implement-libcore";
 
 import { executeCommand, unsubscribeCommand, unsubscribeAllCommands } from "./commandHandler";
 
@@ -101,6 +102,12 @@ process.on("message", m => {
     case "setEnv": {
       const { name, value } = m.env;
       setEnvUnsafe(name, value);
+      break;
+    }
+
+    case "initLibcore": {
+      const { password } = m;
+      implementLibcore(password);
       break;
     }
 
