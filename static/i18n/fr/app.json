@@ -407,38 +407,38 @@
         "installing": "Installation en cours...",
         "uninstalling": "Désinstallation...",
         "scheduled": "Planifié",
-        "update": "Update available",
-        "updateAll": "Update All",
-        "updateAllOutOfMemory": "Not enough space to update, please uninstall some apps",
-        "install": "Install",
-        "installed": "Installed",
-        "uninstall": "Uninstall",
-        "notEnoughSpace": "Not enough space",
-        "supported": "Ledger Live supported",
-        "addAccount": "Add account",
-        "addAccountTooltip": "Add {{appName}} account",
-        "addAccountWarn": "Please wait for the app updates to finish",
-        "learnMore": "Learn more",
-        "learnMoreTooltip": "Learn more about {{appName}}",
-        "removeTooltip": "Uninstall {{appName}}"
+        "update": "Mise à jour disponible",
+        "updateAll": "Tout mettre à jour",
+        "updateAllOutOfMemory": "Pas assez d'espace pour mettre à jour, veuillez désinstaller des applications",
+        "install": "Installer",
+        "installed": "Installée",
+        "uninstall": "Désinstaller",
+        "notEnoughSpace": "Espace insuffisant",
+        "supported": "Supporté dans Ledger Live",
+        "addAccount": "Ajouter un compte",
+        "addAccountTooltip": "Ajouter un compte {{appName}}",
+        "addAccountWarn": "Veuillez attendre que les mises à jour soient terminées",
+        "learnMore": "En savoir plus",
+        "learnMoreTooltip": "En savoir plus sur {{appName}}",
+        "removeTooltip": "Désinstaller {{appName}}"
       },
       "uninstall": {
-        "title": "Uninstall all",
-        "subtitle": "Uninstall all apps?",
-        "description": "Don’t worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog"
+        "title": "Tout désinstaller",
+        "subtitle": "Désinstaller toutes les applications ?",
+        "description": "Pas d'inquiétude, la désinstallation des applications n'affecte pas vos crypto actifs. Vous pouvez réinstaller des applications depuis le catalogue d'applications"
       }
     },
     "apps": {
       "dependencyInstall": {
-        "title": "{{dependency}} app is required",
-        "description": "The {{dependency}} app will also be installed because the {{app}} app needs it.",
-        "confirm": "Install apps"
+        "title": "L'application {{dependency}} est requise",
+        "description": "L'application {{dependency}} sera également installée car elle est dépendante de l'application {{app}}.",
+        "confirm": "Installer les applications"
       },
       "dependencyUninstall": {
-        "title": " Uninstall {{app}} and its related apps?",
-        "showAll": "Show apps to uninstall",
-        "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled aswell.",
-        "confirm": "Uninstall {{app}} and other apps"
+        "title": " Désinstaller {{app}} et ses applications dépendantes ?",
+        "showAll": "Afficher les applications à désinstaller",
+        "description": "Certaines de vos applications installées sont liées à l'application {{app}} . Elles seront également désinstallées.",
+        "confirm": "Désinstaller {{app}} et les autres applications"
       }
     },
     "firmware": {
@@ -498,7 +498,7 @@
   },
   "receive": {
     "title": "Recevoir",
-    "successTitle": "Address shared securely",
+    "successTitle": "Adresse partagée de manière sécurisée",
     "steps": {
       "chooseAccount": {
         "title": "Compte",
@@ -559,8 +559,8 @@
       "verification": {
         "title": "Vérification",
         "streaming": {
-          "accurate": "Loading... ({{percentage}})",
-          "inaccurate": "Loading..."
+          "accurate": "Chargement... ({{percentage}})",
+          "inaccurate": "Chargement en cours..."
         }
       },
       "confirmation": {
@@ -627,7 +627,7 @@
       "steps": {
         "starter": {
           "title": "Obtenez des récompenses staking",
-          "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets",
+          "description": "Déléguez votre compte Tezos à un validateur tiers pour obtenir des récompenses en toute sécurité et en conservant le contrôle total de vos actifs",
           "bullet": {
             "delegate": "Vous conservez la propriété de vos comptes délégués.",
             "access": "Vous pouvez accéder à vos actifs à tout moment.",
@@ -662,7 +662,7 @@
         "custom": {
           "title": "Validateur personnalisé",
           "text": "Veuillez saisir l'adresse du validateur auquel vous souhaitez déléguer votre compte.",
-          "button": "Use validator"
+          "button": "Utiliser ce validateur"
         },
         "undelegate": {
           "title": "Interrompre la délégation"
@@ -672,7 +672,7 @@
           "label": "Confirmation",
           "success": {
             "title": "Délégation envoyée",
-            "titleUndelegated": "End delegation",
+            "titleUndelegated": "Terminer la délégation",
             "text": "Transaction de délégation diffusée avec succès. Vous devriez recevoir vos premières récompenses dans un délai d'environ 40 jours, en fonction du validateur.",
             "textUndelegated": "La délégation de votre compte se terminera une fois l'opération confirmée. Vous pouvez déléguer à nouveau votre compte à tout moment."
           },
@@ -698,7 +698,7 @@
   },
   "settings": {
     "title": "Paramètres",
-    "discreet": "Toggle discreet mode",
+    "discreet": "Basculer en mode discret",
     "tabs": {
       "display": "Général",
       "cryptoAssets": "Crypto-actifs",
@@ -743,7 +743,7 @@
     },
     "currencies": {
       "desc": "Modifier les paramètres pour chacun de vos crypto-actifs",
-      "placeholder": "No settings for this asset",
+      "placeholder": "Aucun paramètre pour cet actif",
       "select": "Sélectionnez un crypto-actif pour modifier ses paramètres.",
       "confirmationsNb": "Nombre de confirmations",
       "confirmationsNbDesc": "Définissez le nombre de confirmations réseau pour qu’une transaction soit marquée comme confirmée."
@@ -921,13 +921,13 @@
     "init": {
       "title": "Premiers pas avec votre appareil Ledger",
       "newDevice": {
-        "title": "Set up as new device"
+        "title": "Initialiser en tant que nouvel appareil"
       },
       "restoreDevice": {
         "title": "Restaurer l’appareil à partir de la phrase de récupération"
       },
       "initializedDevice": {
-        "title": "Skip device setup"
+        "title": "Utiliser un appareil initialisé"
       }
     },
     "noDevice": {
@@ -957,11 +957,11 @@
         "title": "Choisissez votre code PIN.",
         "instructions": {
           "nano": {
-            "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Press the left or right button to navigate through the on-screen instructions.",
-            "step3": "Press both buttons to select <1><0>{{configureAsNewDevice }}</0></1>.",
-            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
-            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step1": "Connectez {{productName}} à votre ordinateur. Appuyez sur les deux boutons pour commencer.",
+            "step2": "Appuyez sur le bouton gauche ou droit pour naviguer à travers les instructions à l'écran.",
+            "step3": "Appuyez sur les deux boutons pour sélectionner <1><0>{{configureAsNewDevice }}</0></1>.",
+            "step4": "Appuyez sur le bouton gauche ou droit pour sélectionner un chiffre. Appuyez sur les deux boutons pour valider.",
+            "step5": "Sélectionnez ✓ pour confirmer votre code PIN. Sélectionnez ⬅ pour effacer un chiffre."
           },
           "nanoX": {
             "step1": "Connectez {{productName}} à votre ordinateur.",
@@ -980,11 +980,11 @@
         "title": "Choisissez votre code PIN.",
         "instructions": {
           "nano": {
-            "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Press the left or right button to navigate through the on-screen instructions.",
-            "step3": "Press both buttons to select <1><0>{{restoreConfiguration}}</0></1>.",
-            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
-            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step1": "Connectez le {{productName}} à votre ordinateur. Appuyez sur les deux boutons pour commencer.",
+            "step2": "Appuyez sur le bouton gauche ou droit pour naviguer à travers les instructions à l'écran.",
+            "step3": "Appuyez sur les deux boutons pour sélectionner <1><0>{{restoreConfiguration}}</0></1>.",
+            "step4": "Appuyez sur le bouton gauche ou droit pour sélectionner un chiffre. Appuyez sur les deux boutons pour valider.",
+            "step5": "Sélectionnez ✓ pour confirmer votre code PIN. Sélectionnez ⬅ pour effacer un chiffre."
           },
           "nanoX": {
             "step1": "Connectez {{productName}} à votre ordinateur.",
@@ -1003,8 +1003,8 @@
     },
     "writeSeed": {
       "initialize": {
-        "title": "Write down your recovery phrase",
-        "desc": "Your 24-word recovery phrase is the <1>only backup</1> of your private keys.",
+        "title": "Enregistrez votre phrase de récupération",
+        "desc": "Votre phrase de récupération de 24 mots est la <1>seule sauvegarde</1> de vos clés privées.",
         "nano": {
           "step1": "Écrivez le <1><0>{{seedWord1}}</0></1> dans la position 1 sur une feuille de récupération vide.",
           "step2": "Appuyez sur le bouton droit pour continuer et notez les 24 mots.",
@@ -1018,7 +1018,7 @@
       },
       "restore": {
         "title": "Saisissez votre phrase de récupération.",
-        "desc": "Enter the recovery phrase from your Recovery phrase.",
+        "desc": "Saisissez la phrase de récupération enregistrée sur votre feuille de récupération.",
         "nano": {
           "step1": "Choisissez la longueur de votre phrase de récupération.",
           "step2": "Entrez les premières lettres de <1><0>{{seedWord1}}</0></1> jusqu'à ce que les mots suggérés apparaissent.",
@@ -1032,7 +1032,7 @@
         }
       },
       "disclaimer": {
-        "note1": "Anyone who gets your recovery phrase can take your crypto assets.",
+        "note1": "Conservez votre phrase de récupération de 24 mots de manière sécurisée, hors de portée.",
         "note2": "Assurez-vous d’être le seul détenteur de votre phrase de récupération.",
         "note3": "Ledger ne conserve aucune sauvegarde de votre phrase de récupération.",
         "note4": "Ledger ne stocke pas vos clés privées, et ne vous les demandera jamais."
