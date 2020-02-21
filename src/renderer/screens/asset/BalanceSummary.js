@@ -109,6 +109,7 @@ class BalanceSummary extends PureComponent<Props> {
 
         <Box px={5} ff="Inter" fontSize={4} color="palette.text.shade80" pt={6}>
           <Chart
+            key={chartId}
             id={chartId}
             color={chartColor}
             data={portfolio.history}
