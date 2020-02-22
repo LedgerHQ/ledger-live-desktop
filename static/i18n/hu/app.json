@@ -662,7 +662,7 @@
         "custom": {
           "title": "Egyedi megerősítő",
           "text": "Kérlek, írd be az egyedi megerősítő címét a számlád delegálásához.",
-          "button": "Use validator"
+          "button": "Megerősítő használata"
         },
         "undelegate": {
           "title": "Számlád delegálásának visszavonása"
@@ -672,7 +672,7 @@
           "label": "Megerősítés",
           "success": {
             "title": "Delegálás elküldve",
-            "titleUndelegated": "End delegation",
+            "titleUndelegated": "Delegálás visszavonása",
             "text": "A delegálási tranzakció sikeresen kiküldve. Körülbelül 40 napon belül kell megszerezned első jutalmaid, a megerősítőtől függően.",
             "textUndelegated": "Fiókod átruházása akkor fejeződik be, amikor a művelet megerősítésre kerül. A számlád bármikor újra átruházhatod."
           },
