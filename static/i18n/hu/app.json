@@ -396,7 +396,7 @@
         "later": "Do it later"
       },
       "updatable": {
-        "title": "Updates available",
+        "title": "Frissítések elérhetők",
         "progressTitle": "{{number}} app updates",
         "progressWarning": "Do not quit manager during update",
         "progress": "Updating all..."
