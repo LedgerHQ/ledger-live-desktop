@@ -172,8 +172,8 @@
   "currentAddress": {
     "title": "Jelenlegi cím",
     "for": "Cím <1><0>{{name}}</0></1> -hoz",
-    "messageIfUnverified": "Verify that the shared address matches the one on your device",
-    "messageIfSkipped": "Your {{name}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
+    "messageIfUnverified": "Ellenőrizd, hogy a megadott cím megegyezik-e a készülékeden találhatóval",
+    "messageIfSkipped": "A(z) {{name}} címed nem lett megerősítve a Ledger eszközödön. Kérlek, erősítsd meg az optimális biztonság érdekében."
   },
   "emptyState": {
     "dashboard": {
@@ -202,7 +202,7 @@
     "paybis": "Paybis.com egyike a legmegbízhatóbb kriptovaluta brókereknek világszerte 2014 óta. Ügyfélelégedettségi mutatónk 4.7/5 a Trustpilot adatai szerint. Visa/Mastercard kártyákat, banki utalásokat Skrill/Neteller szolgáltatókat is elfogadunk. 24/7 online ügyfélszolgálati támogatás.",
     "shapeshift": "ShapeShift is an online marketplace where users can buy és sell digital assets. It is a fast és secure way for the world to buy és sell digital assets, with no lengthy signup process, no counterparty risk, és no friction.",
     "simplex": "A Simplex egy uniós engedéllyel rendelkező pénzügyi intézmény, amely csalásmentes hitelkártya-fizetési megoldást kínál.",
-    "swft": "SWFT Blockchain is a worldwide cross-blockchain transfer protocol and payment network, enabling simpler, faster and safer swaps between over 200 cryptocurrencies and free crypto payments to anyone anywhere",
+    "swft": "Az SWFT Blokklánc egy világméretű, többszörös blokklánc alapú átviteli protokoll és fizetési hálózat, amely egyszerűbb, gyorsabb és biztonságosabb cserét tesz lehetővé több mint 200 kriptovaluta között, valamint ingyenes kriptofizetéseket bárki számára bárhol",
     "taxtoken": "Automated cryptocurrency tax és cost basis software for US citizens.",
     "thorswap": "ThorSwap is an instant, safe és fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
     "bitpanda": "A Bitpanda Európa vezető kiskereskedelmi brókere a Bitcoin, az Ethereum, az IOTA és még sok más vásárlására és eladására. Fizessen be pénzt hitelkártyájával, SOFORT-utalással, NETELLER és egyéb lehetőségekkel.",
@@ -214,7 +214,7 @@
     "modal": {
       "title": "Eredetiség ellenőrzés"
     },
-    "deviceInBootloader": "Device in Bootloader mode. Click on Continue to update it."
+    "deviceInBootloader": "Az eszköz Bootloader módban. Kattints a Folytatásra a frissítéshez."
   },
   "tokensList": {
     "title": "Tokenek",
@@ -343,61 +343,61 @@
     "noMoreOperations": "Ez minden"
   },
   "DeviceAction": {
-    "allowAppPermission": "Open the {{wording}} app on your device",
-    "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
-    "allowManagerPermission": "{{wording}} on your device",
-    "loading": "Loading...",
-    "connectAndUnlockDevice": "Connect and unlock your device",
-    "unlockDevice": "Unlock your device",
-    "quitApp": "Quit the application on your device",
-    "appNotInstalled": "Please install the {{appName}} app",
-    "openManager": "Open Manager"
+    "allowAppPermission": "Nyisd meg a(z) {{wording}} alkalmazást az eszközödön",
+    "allowAppPermissionSubtitleToken": "a {{token}} tokenjeid kezeléséhez",
+    "allowManagerPermission": "{{wording}} az eszközödön",
+    "loading": "Betöltés...",
+    "connectAndUnlockDevice": "Csatlakoztasd, és old fel az eszközöd",
+    "unlockDevice": "Old fel az eszközöd",
+    "quitApp": "Lépj ki az alkalmazásból az eszközödön",
+    "appNotInstalled": "Kérlek, telepítsd a(z) {{appName}} alkalmazást",
+    "openManager": "Eszközkezelő megnyitása"
   },
   "manager": {
     "tabs": {
-      "appCatalog": "App catalog",
-      "appCatalogSearch": "Search app in catalog...",
-      "appsOnDevice": "Apps installed",
-      "appOnDeviceSearch": "Search installed apps..."
+      "appCatalog": "Alkalmazások listája",
+      "appCatalogSearch": "Alkalmazás keresése a listában...",
+      "appsOnDevice": "Telepített alkalmazások",
+      "appOnDeviceSearch": "Telepített alkalmazások keresése..."
     },
     "deviceStorage": {
-      "freeSpace": "<0>{{space}}</0> free",
-      "noFreeSpace": "no storage left",
-      "installed": "Installed",
-      "capacity": "Capacity",
-      "used": "Used",
-      "firmware": "Firmware {{version}}",
-      "genuine": "Device is genuine",
-      "incomplete": "Some apps were not recognized by our apps catalog. Please uninstall and reinstall them."
+      "freeSpace": "<0>{{space}}</0> szabad",
+      "noFreeSpace": "nincs elég hely",
+      "installed": "Telepített",
+      "capacity": "Kapacitás",
+      "used": "Felhasznált",
+      "firmware": "Szoftver {{version}}",
+      "genuine": "Az eszköz eredeti",
+      "incomplete": "Egyes alkalmazásokat az alkalmazáskatalógusunk nem ismert fel. Távolítsd el és telepítsd újra őket."
     },
     "applist": {
-      "placeholder": "There are no apps matching the search and filters selected",
-      "placeholderNoAppsInstalled": "No apps installed on your device",
-      "placeholderGoToCatalog": "Go to the Apps catalog to install apps",
-      "noResultsFound": "No results found",
-      "noResultsDesc": "Please verify the spelling and try again",
+      "placeholder": "Nincsenek a keresésnek és szűrőknek megfelelő alkalmazások",
+      "placeholderNoAppsInstalled": "Nincsenek telepített alkalmazások az eszközödön",
+      "placeholderGoToCatalog": "Nyisd meg az Alkalmazás katalógust az alkalmazások telepítéséhez",
+      "noResultsFound": "Nincs találat",
+      "noResultsDesc": "Kérjük, ellenőrizd a helyesírást, és próbáld újra",
       "filter": {
-        "title": "Show",
-        "all": "All",
-        "supported": "Supported in Live",
-        "installed": "Installed",
-        "not_installed": "Not installed"
+        "title": "Mutat",
+        "all": "Összes",
+        "supported": "Live által támogatott",
+        "installed": "Telepített",
+        "not_installed": "Nincs telepítve"
       },
       "sort": {
-        "title": "Sort",
-        "name_asc": "Name A-Z",
-        "name_desc": "Name Z-A",
-        "marketcap_desc": "Market cap"
+        "title": "Rendezés",
+        "name_asc": "Név A-Z",
+        "name_desc": "Név Z-A",
+        "marketcap_desc": "Piaci Kapitalizáció"
       },
       "installSuccess": {
-        "title": "App successfully installed, you can now add your {{app}} accounts",
-        "title_plural": "Apps successfully installed, you can now add your accounts",
-        "manageAccount": "Manage my accounts",
-        "later": "Do it later"
+        "title": "Alkalmazás sikeresen telepítve, most már hozzá tudod adni a(z) {{app}} számláidat",
+        "title_plural": "Alkalmazások sikeresen telepítve, most már hozzá tudod adni a számláidat",
+        "manageAccount": "Számláim kezelése",
+        "later": "Későbbre halasztás"
       },
       "updatable": {
         "title": "Frissítések elérhetők",
-        "progressTitle": "{{number}} app updates",
+        "progressTitle": "{{number}} alkalmazás frissítések",
         "progressWarning": "Do not quit manager during update",
         "progress": "Updating all..."
       },
