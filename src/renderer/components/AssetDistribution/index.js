@@ -14,27 +14,6 @@ import { calculateCountervalueSelector } from "~/renderer/actions/general";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import Row from "./Row";
 import Header from "./Header";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-
-const SeeAllButton: ThemedComponent<{ expanded: boolean }> = styled.div`
-  margin-top: 15px;
-  display: flex;
-  color: ${p => p.theme.colors.wallet};
-  align-items: center;
-  justify-content: center;
-  border-top: 1px solid ${p => p.theme.colors.palette.divider};
-  height: 40px;
-  cursor: pointer;
-
-  &:hover ${Text} {
-    text-decoration: underline;
-  }
-
-  > :nth-child(2) {
-    margin-left: 8px;
-    transform: rotate(${p => (p.expanded ? "180deg" : "0deg")});
-  }
-`;
 
 const distributionSelector = createSelector(
   accountsSelector,
@@ -47,8 +26,12 @@ const distributionSelector = createSelector(
     }),
 );
 
-const AssetDistribution = () => {
-  const distribution = useSelector(distributionSelector);
+export default function AssetDistribution() {
+  const {
+    showFirst: initialRowCount,
+    list,
+    list: { length: totalRowCount },
+  } = useSelector(distributionSelector);
   const cardRef = useRef(null);
   const [showAll, setShowAll] = useState(false);
 
@@ -74,12 +57,6 @@ const AssetDistribution = () => {
     };
   }, []);
 
-  const {
-    showFirst: initialRowCount,
-    list,
-    list: { length: totalRowCount },
-  } = distribution;
-
   const almostAll = initialRowCount + 3 > totalRowCount;
   const subList = showAll || almostAll ? list : list.slice(0, initialRowCount);
 
@@ -92,7 +69,7 @@ const AssetDistribution = () => {
           color="palette.text.shade100"
           data-e2e="title_assetDistribution"
         >
-          <Trans i18nKey="distribution.header" values={{ count: distribution.list.length }} />
+          <Trans i18nKey="distribution.header" values={{ count: totalRowCount }} />
         </Text>
       </Box>
       <Card p={0} mt={24}>
@@ -113,6 +90,31 @@ const AssetDistribution = () => {
       </Card>
     </>
   );
-};
+}
 
-export default AssetDistribution;
+interface SeeAllButtonProps {
+  expanded: boolean;
+}
+
+const SeeAllButton =
+  styled.div <
+  SeeAllButtonProps >
+  `
+  margin-top: 15px;
+  display: flex;
+  color: ${p => p.theme.colors.wallet};
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid ${p => p.theme.colors.palette.divider};
+  height: 40px;
+  cursor: pointer;
+
+  &:hover ${Text} {
+    text-decoration: underline;
+  }
+
+  > :nth-child(2) {
+    margin-left: 8px;
+    transform: rotate(${p => (p.expanded ? "180deg" : "0deg")});
+  }
+`;

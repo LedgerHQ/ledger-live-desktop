@@ -22,7 +22,6 @@ import ToolTip from "~/renderer/components/Tooltip";
 
 import { useHistory } from "react-router-dom";
 import useTheme from "~/renderer/hooks/useTheme";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 export interface AccountDistributionItem {
   account: Account | TokenAccount;
@@ -149,7 +148,7 @@ const Wrapper: ThemedComponent<{}> = styled.div`
   }
 `;
 
-const AccountWrapper: ThemedComponent<{}> = styled.div`
+const AccountWrapper = styled.div`
   width: 25%;
   > :first-child {
     margin-right: 10px;
@@ -161,7 +160,7 @@ const AccountWrapper: ThemedComponent<{}> = styled.div`
   }
 `;
 
-const Distribution: ThemedComponent<{}> = styled.div`
+const Distribution = styled.div`
   width: 25%;
   text-align: right;
   > :first-child {
@@ -171,13 +170,13 @@ const Distribution: ThemedComponent<{}> = styled.div`
   }
 `;
 
-const Amount: ThemedComponent<{}> = styled.div`
+const Amount = styled.div`
   width: 25%;
   text-align: right;
   justify-content: flex-end;
 `;
 
-const Value: ThemedComponent<{}> = styled.div`
+const Value = styled.div`
   width: 20%;
   box-sizing: border-box;
   padding-left: 8px;
@@ -185,7 +184,7 @@ const Value: ThemedComponent<{}> = styled.div`
   justify-content: flex-end;
 `;
 
-const Dots: ThemedComponent<{}> = styled.div`
+const Dots = styled.div`
   width: 5%;
   justify-content: flex-end;
   cursor: pointer;

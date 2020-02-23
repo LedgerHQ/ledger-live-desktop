@@ -5,7 +5,6 @@ import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { darken } from "~/renderer/styles/helpers";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Box, { Tabbable } from "~/renderer/components/Box";
 import CheckBox from "~/renderer/components/CheckBox";
 import CryptoCurrencyIconWithCount from "~/renderer/components/CryptoCurrencyIconWithCount";
@@ -114,9 +113,11 @@ export default function AccountRow({
   );
 }
 
-const AccountRowContainer: ThemedComponent<{
-  isDisabled?: boolean,
-}> = styled(Tabbable).attrs(() => ({
+interface AccountRowContainerProps {
+  isDisabled?: boolean;
+}
+
+const AccountRowContainer = styled(Tabbable).attrs<AccountRowContainerProps>(() => ({
   horizontal: true,
   alignItems: "center",
   bg: "palette.background.default",

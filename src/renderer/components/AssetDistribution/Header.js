@@ -4,9 +4,40 @@ import React from "react";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 import { Trans } from "react-i18next";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const Wrapper: ThemedComponent<{}> = styled.div`
+export default function Header() {
+  return (
+    <Wrapper>
+      <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
+        <Trans i18nKey={"distribution.asset"} />
+      </Text>
+      <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
+        <Trans i18nKey={"distribution.price"} />
+      </Text>
+      <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
+        <Trans i18nKey={"distribution.distribution"} />
+      </Text>
+      <Text
+        ff="Inter|SemiBold"
+        color="palette.text.shade60"
+        style={{ justifyContent: "flex-end" }}
+        fontSize={3}
+      >
+        <Trans i18nKey={"distribution.amount"} />
+      </Text>
+      <Text
+        ff="Inter|SemiBold"
+        color="palette.text.shade60"
+        style={{ justifyContent: "flex-end" }}
+        fontSize={3}
+      >
+        <Trans i18nKey={"distribution.value"} />
+      </Text>
+    </Wrapper>
+  );
+}
+
+const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   padding: 16px 20px;
@@ -26,35 +57,3 @@ const Wrapper: ThemedComponent<{}> = styled.div`
     width: 15%;
   }
 `;
-
-const Header = () => (
-  <Wrapper>
-    <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
-      <Trans i18nKey={"distribution.asset"} />
-    </Text>
-    <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
-      <Trans i18nKey={"distribution.price"} />
-    </Text>
-    <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
-      <Trans i18nKey={"distribution.distribution"} />
-    </Text>
-    <Text
-      ff="Inter|SemiBold"
-      color="palette.text.shade60"
-      style={{ justifyContent: "flex-end" }}
-      fontSize={3}
-    >
-      <Trans i18nKey={"distribution.amount"} />
-    </Text>
-    <Text
-      ff="Inter|SemiBold"
-      color="palette.text.shade60"
-      style={{ justifyContent: "flex-end" }}
-      fontSize={3}
-    >
-      <Trans i18nKey={"distribution.value"} />
-    </Text>
-  </Wrapper>
-);
-
-export default Header;
