@@ -24,81 +24,23 @@ import { useHistory } from "react-router-dom";
 import useTheme from "~/renderer/hooks/useTheme";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-export type AccountDistributionItem = {
-  account: Account | TokenAccount,
-  distribution: number, // % of the total (normalized in 0-1)
-  amount: BigNumber,
-  currency: CryptoCurrency | TokenCurrency,
-  countervalue: BigNumber, // countervalue of the amount that was calculated based of the rate provided
-};
+export interface AccountDistributionItem {
+  account: Account | TokenAccount;
+  distribution: number; // % of the total (normalized in 0-1)
+  amount: BigNumber;
+  currency: CryptoCurrency | TokenCurrency;
+  countervalue: BigNumber; // countervalue of the amount that was calculated based of the rate provided
+}
 
-type Props = {
-  item: AccountDistributionItem,
-  isVisible: boolean,
-};
+interface Props {
+  item: AccountDistributionItem;
+  isVisible: boolean;
+}
 
-const Wrapper: ThemedComponent<{}> = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 16px 20px;
-  cursor: pointer;
-
-  > * {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    box-sizing: border-box;
-  }
-
-  &:hover {
-    background: ${p => p.theme.colors.palette.background.default};
-  }
-`;
-
-const AccountWrapper: ThemedComponent<{}> = styled.div`
-  width: 25%;
-  > :first-child {
-    margin-right: 10px;
-  }
-  > :nth-child(2) {
-    flex: 1;
-    align-items: flex-start;
-    margin-right: 8px;
-  }
-`;
-const Distribution: ThemedComponent<{}> = styled.div`
-  width: 25%;
-  text-align: right;
-  > :first-child {
-    margin-right: 11px;
-    width: 40px; //max width for a 99.99% case
-    text-align: right;
-  }
-`;
-const Amount: ThemedComponent<{}> = styled.div`
-  width: 25%;
-  text-align: right;
-  justify-content: flex-end;
-`;
-const Value: ThemedComponent<{}> = styled.div`
-  width: 20%;
-  box-sizing: border-box;
-  padding-left: 8px;
-  text-align: right;
-  justify-content: flex-end;
-`;
-const Dots: ThemedComponent<{}> = styled.div`
-  width: 5%;
-  justify-content: flex-end;
-  cursor: pointer;
-  color: ${p => p.theme.colors.palette.divider};
-  &:hover {
-    color: ${p => p.theme.colors.palette.text.shade60};
-  }
-`;
-
-const Row = ({ item: { currency, amount, distribution, account }, isVisible }: Props) => {
+export default function Row({
+  item: { currency, amount, distribution, account },
+  isVisible,
+}: Props) {
   const accounts = useSelector(accountsSelector);
   const theme = useTheme();
   const history = useHistory();
@@ -119,6 +61,7 @@ const Row = ({ item: { currency, amount, distribution, account }, isVisible }: P
   const displayName = getAccountName(account);
   const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2);
   const icon = <ParentCryptoCurrencyIcon currency={currency} size={16} />;
+
   return (
     <AccountContextMenu account={account} parentAccount={parentAccount} withStar>
       <Wrapper onClick={() => onAccountClick(account)}>
@@ -185,6 +128,69 @@ const Row = ({ item: { currency, amount, distribution, account }, isVisible }: P
       </Wrapper>
     </AccountContextMenu>
   );
-};
+}
 
-export default Row;
+const Wrapper: ThemedComponent<{}> = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+
+  > * {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    box-sizing: border-box;
+  }
+
+  &:hover {
+    background: ${p => p.theme.colors.palette.background.default};
+  }
+`;
+
+const AccountWrapper: ThemedComponent<{}> = styled.div`
+  width: 25%;
+  > :first-child {
+    margin-right: 10px;
+  }
+  > :nth-child(2) {
+    flex: 1;
+    align-items: flex-start;
+    margin-right: 8px;
+  }
+`;
+
+const Distribution: ThemedComponent<{}> = styled.div`
+  width: 25%;
+  text-align: right;
+  > :first-child {
+    margin-right: 11px;
+    width: 40px; //max width for a 99.99% case
+    text-align: right;
+  }
+`;
+
+const Amount: ThemedComponent<{}> = styled.div`
+  width: 25%;
+  text-align: right;
+  justify-content: flex-end;
+`;
+
+const Value: ThemedComponent<{}> = styled.div`
+  width: 20%;
+  box-sizing: border-box;
+  padding-left: 8px;
+  text-align: right;
+  justify-content: flex-end;
+`;
+
+const Dots: ThemedComponent<{}> = styled.div`
+  width: 5%;
+  justify-content: flex-end;
+  cursor: pointer;
+  color: ${p => p.theme.colors.palette.divider};
+  &:hover {
+    color: ${p => p.theme.colors.palette.text.shade60};
+  }
+`;

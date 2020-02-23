@@ -1,12 +1,13 @@
 // @flow
 
 import React, { useLayoutEffect, useRef, useState } from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import Text from "~/renderer/components/Text";
 import Card from "~/renderer/components/Box/Card";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+import type { Account } from "@ledgerhq/live-common/lib/account/type";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 import Box from "~/renderer/components/Box";
 import Header from "./Header";
@@ -14,16 +15,14 @@ import Row from "./Row";
 import type { AccountDistributionItem } from "./Row";
 import { calculateCountervalueSelector } from "~/renderer/actions/general";
 
-type Props = {
-  accountDistribution: AccountDistributionItem[],
-};
+interface Props {
+  accounts: Account[];
+}
 
-const mapStateToProps = (state, props) => {
-  const { accounts } = props;
-  const total = accounts.reduce((total, a) => total.plus(a.balance), BigNumber(0));
-
-  return {
-    accountDistribution: accounts
+export default function AccountDistribution({ accounts }: Props) {
+  const accountDistribution = useSelector(state => {
+    const total = accounts.reduce((total, a) => total.plus(a.balance), BigNumber(0));
+    return accounts
       .map(a => ({
         account: a,
         currency: getAccountCurrency(a),
@@ -31,12 +30,11 @@ const mapStateToProps = (state, props) => {
         amount: a.balance,
         countervalue: calculateCountervalueSelector(state)(getAccountCurrency(a), a.balance),
       }))
-      .sort((a, b) => b.distribution - a.distribution),
-    counterValueCurrency: counterValueCurrencySelector,
-  };
-};
+      .sort((a, b) => b.distribution - a.distribution);
+  });
 
-const AccountDistribution = ({ accountDistribution }: Props) => {
+  const counterValueCurrency = useSelector(counterValueCurrencySelector);
+
   const cardRef = useRef(null);
   const [isVisible, setVisible] = useState(false);
   useLayoutEffect(() => {
@@ -82,9 +80,4 @@ const AccountDistribution = ({ accountDistribution }: Props) => {
       </Card>
     </>
   );
-};
-
-const ConnectedAccountDistribution: React$ComponentType<{}> = connect(mapStateToProps)(
-  AccountDistribution,
-);
-export default ConnectedAccountDistribution;
+}
