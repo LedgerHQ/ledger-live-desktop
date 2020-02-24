@@ -73,7 +73,9 @@
     }
   },
   "byteSize": {
-    "kbUnit": "{{size}}Kb"
+    "bytes": "{{size}}bytes",
+    "kbUnit": "{{size}}Kb",
+    "mbUnit": "{{size}}Mb"
   },
   "time": {
     "minute": "Minute",
@@ -362,7 +364,7 @@
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> free",
-      "noFreeSpace": "no storage left",
+      "noFreeSpace": "No storage left",
       "installed": "Installed",
       "capacity": "Capacity",
       "used": "Used",
@@ -397,8 +399,8 @@
       },
       "updatable": {
         "title": "Updates available",
-        "progressTitle": "{{number}} app updates",
-        "progressWarning": "Do not quit manager during update",
+        "progressTitle": "{{number}} App updates",
+        "progressWarning": "Do not quit the Manager during updates",
         "progress": "Updating all..."
       },
       "item": {

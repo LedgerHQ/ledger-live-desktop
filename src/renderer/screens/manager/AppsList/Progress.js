@@ -52,7 +52,7 @@ const Progress = ({ installing, uninstalling, progress }: Props) => {
           ) : installing && progress !== 1 ? (
             <ProgressBar infinite timing={1200} progress={progress || 0} />
           ) : (
-            <ProgressBar infinite color="palette.text.shade20" timing={1200} />
+            <ProgressBar color="palette.text.shade20" progress={-1} />
           )}
         </Holder>
       </Box>
