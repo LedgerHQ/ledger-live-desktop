@@ -337,7 +337,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                   style={{ marginLeft: 4 }}
                 />
               </OpDetailsSection>
-              <Box>
+              <Box style={{ overflowX: "hidden" }}>
                 {subOperations.map((op, i) => {
                   const opAccount = findSubAccountById(account, op.accountId);
 
