@@ -73,13 +73,16 @@ type Props = {
 const InstallSuccessBanner = ({ state, isIncomplete, dispatch, addAccount, disabled }: Props) => {
   const cardRef = useRef();
   const [hasBeenShown, setHasBeenShown] = useState(disabled);
-  const { installQueue, uninstallQueue, recentlyInstalledApps, appByName } = state;
+  const { installQueue, uninstallQueue, recentlyInstalledApps, appByName, installed } = state;
 
   const installedSupportedApps = useMemo(() => {
     return installQueue.length <= 0 && uninstallQueue.length <= 0
-      ? recentlyInstalledApps.map(appName => appByName[appName]).filter(isLiveSupportedApp)
+      ? recentlyInstalledApps
+          .filter(appName => installed.some(({ name }) => name === appName))
+          .map(appName => appByName[appName])
+          .filter(isLiveSupportedApp)
       : [];
-  }, [installQueue.length, uninstallQueue.length, recentlyInstalledApps, appByName]);
+  }, [installQueue.length, uninstallQueue.length, recentlyInstalledApps, appByName, installed]);
 
   const onAddAccount = useCallback(() => {
     const app = installedSupportedApps[0];
