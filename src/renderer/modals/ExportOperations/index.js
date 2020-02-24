@@ -17,6 +17,7 @@ import Modal from "~/renderer/components/Modal";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
+// $FlowFixMe
 import AccountsList from "~/renderer/components/AccountsList";
 import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
 import IconCheckCircle from "~/renderer/icons/CheckCircle";

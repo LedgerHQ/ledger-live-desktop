@@ -19,6 +19,7 @@ import RetryButton from "~/renderer/components/RetryButton";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import CurrencyBadge from "~/renderer/components/CurrencyBadge";
+// $FlowFixMe
 import AccountsList from "~/renderer/components/AccountsList";
 import Spinner from "~/renderer/components/Spinner";
 import Text from "~/renderer/components/Text";

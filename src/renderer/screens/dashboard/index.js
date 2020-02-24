@@ -16,6 +16,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import RefreshAccountsOrdering from "~/renderer/components/RefreshAccountsOrdering";
 import OperationsList from "~/renderer/components/OperationsList";
+// $FlowFixMe
 import AssetDistribution from "~/renderer/components/AssetDistribution";
 import DelegationBanner from "~/renderer/families/tezos/Delegation/DelegationBanner";
 import MigrationBanner from "~/renderer/modals/MigrateAccounts/Banner";

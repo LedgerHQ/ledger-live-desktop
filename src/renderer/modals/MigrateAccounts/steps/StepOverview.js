@@ -14,6 +14,7 @@ import LedgerLiveLogo from "~/renderer/components/LedgerLiveLogo";
 import SuccessAnimatedIcon from "~/renderer/components/SuccessAnimatedIcon";
 import Text from "~/renderer/components/Text";
 import IconExclamationCircle from "~/renderer/icons/ExclamationCircle";
+// $FlowFixMe
 import AccountRow from "~/renderer/components/AccountsList/AccountRow";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 import { openURL } from "~/renderer/linking";
