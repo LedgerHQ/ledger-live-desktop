@@ -25,8 +25,8 @@ const Placeholder = ({ query, addAccount, dispatch, installed }: Props) => {
     () =>
       tokens.find(
         token =>
-          token.name.toLocaleLowerCase().includes(query.toLowerCase()) ||
-          token.ticker.toLocaleLowerCase().includes(query.toLowerCase()),
+          token.name.toLowerCase().includes(query.toLowerCase()) ||
+          token.ticker.toLowerCase().includes(query.toLowerCase()),
       ),
     [query],
   );

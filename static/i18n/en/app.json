@@ -73,9 +73,9 @@
     }
   },
   "byteSize": {
-    "bytes": "{{size}}bytes",
-    "kbUnit": "{{size}}Kb",
-    "mbUnit": "{{size}}Mb"
+    "bytes": "{{size}} bytes",
+    "kbUnit": "{{size}} Kb",
+    "mbUnit": "{{size}} Mb"
   },
   "time": {
     "minute": "Minute",
