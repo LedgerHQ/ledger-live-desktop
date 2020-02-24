@@ -152,22 +152,20 @@ const AppsList = ({
 
   return (
     <>
-      {update.length <= 0 ? (
-        <InstallSuccessBanner
-          state={state}
-          dispatch={dispatch}
-          isIncomplete={isIncomplete}
-          addAccount={addAccount}
-        />
-      ) : (
-        <UpdateAllApps
-          update={update}
-          state={state}
-          dispatch={dispatch}
-          isIncomplete={isIncomplete}
-          progress={progress}
-        />
-      )}
+      <InstallSuccessBanner
+        state={state}
+        dispatch={dispatch}
+        isIncomplete={isIncomplete}
+        addAccount={addAccount}
+        disabled={update.length >= 1}
+      />
+      <UpdateAllApps
+        update={update}
+        state={state}
+        dispatch={dispatch}
+        isIncomplete={isIncomplete}
+        progress={progress}
+      />
       {isIncomplete ? null : (
         <StickyTabBar>
           <TabBar
