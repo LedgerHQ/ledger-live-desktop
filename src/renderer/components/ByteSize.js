@@ -3,6 +3,9 @@ import React from "react";
 import { Trans } from "react-i18next";
 import type { DeviceModel } from "@ledgerhq/devices";
 
+const k = 1024; // 1kb unit
+const sizes = ["bytes", "kbUnit", "mbUnit"];
+
 /** formats a byte value into its correct size in kb or mb unit takling in account the device block size */
 const ByteSize = ({
   value,
@@ -14,9 +17,6 @@ const ByteSize = ({
   decimals?: number,
 }) => {
   if (!value) return "–";
-
-  const k = 1024; // 1kb unit
-  const sizes = ["bytes", "kbUnit", "mbUnit"];
 
   const bytes = Math.ceil(value / deviceModel.blockSize) * deviceModel.blockSize;
 
