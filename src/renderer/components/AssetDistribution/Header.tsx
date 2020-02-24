@@ -1,18 +1,20 @@
-// @flow
-
 import React from "react";
 import styled from "styled-components";
-import Text from "~/renderer/components/Text";
+// @ts-ignore
+import Text from "../Text";
 import { Trans } from "react-i18next";
 
 export default function Header() {
   return (
     <Wrapper>
       <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
-        <Trans i18nKey={"accountDistribution.account"} />
+        <Trans i18nKey={"distribution.asset"} />
       </Text>
       <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
-        <Trans i18nKey={"accountDistribution.distribution"} />
+        <Trans i18nKey={"distribution.price"} />
+      </Text>
+      <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
+        <Trans i18nKey={"distribution.distribution"} />
       </Text>
       <Text
         ff="Inter|SemiBold"
@@ -20,7 +22,7 @@ export default function Header() {
         style={{ justifyContent: "flex-end" }}
         fontSize={3}
       >
-        <Trans i18nKey={"accountDistribution.amount"} />
+        <Trans i18nKey={"distribution.amount"} />
       </Text>
       <Text
         ff="Inter|SemiBold"
@@ -28,9 +30,8 @@ export default function Header() {
         style={{ justifyContent: "flex-end" }}
         fontSize={3}
       >
-        <Trans i18nKey={"accountDistribution.value"} />
+        <Trans i18nKey={"distribution.value"} />
       </Text>
-      <Text />
     </Wrapper>
   );
 }
@@ -41,20 +42,17 @@ const Wrapper = styled.div`
   padding: 16px 20px;
   border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
   > * {
-    width: 25%;
+    width: 20%;
     display: flex;
     align-items: center;
     flex-direction: row;
     box-sizing: border-box;
   }
 
-  > *:nth-of-type(3) {
+  > *:nth-of-type(4) {
     width: 25%;
   }
-  > *:nth-of-type(4) {
-    width: 20%;
-  }
   > *:nth-of-type(5) {
-    width: 5%;
+    width: 15%;
   }
 `;

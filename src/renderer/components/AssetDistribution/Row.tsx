@@ -1,24 +1,35 @@
 // @flow
 
 import React from "react";
-import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
-import { getCurrencyColor } from "~/renderer/getCurrencyColor";
+// import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
+// @ts-ignore
+import { getCurrencyColor } from "../../getCurrencyColor";
 import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
-import CounterValue from "~/renderer/components/CounterValue";
+// @ts-ignore
+import CounterValue from "../CounterValue";
 import { useHistory } from "react-router-dom";
+// @ts-ignore
 import useTheme from "~/renderer/hooks/useTheme";
 
-import FormattedVal from "~/renderer/components/FormattedVal";
-import Price from "~/renderer/components/Price";
-import Text from "~/renderer/components/Text";
-import Ellipsis from "~/renderer/components/Ellipsis";
-import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
-import Tooltip from "~/renderer/components/Tooltip";
+// @ts-ignore
+import FormattedVal from "../FormattedVal";
+// @ts-ignore
+import Price from "../Price";
+// @ts-ignore
+import Text from "../Text";
+// @ts-ignore
+import Ellipsis from "../Ellipsis";
+// @ts-ignore
+import CryptoCurrencyIcon from "../CryptoCurrencyIcon";
+// @ts-ignore
+import Tooltip from "../Tooltip";
+// @ts-ignore
 import Bar from "./Bar";
 
 export interface DistributionItem {
-  currency: CryptoCurrency | TokenCurrency;
+  // [TODO] currency: CryptoCurrency | TokenCurrency;
+  currency: any;
   distribution: number; // % of the total (normalized in 0-1)
   amount: BigNumber;
   countervalue: BigNumber; // countervalue of the amount that was calculated based of the rate provided

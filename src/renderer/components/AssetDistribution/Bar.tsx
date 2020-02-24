@@ -4,16 +4,16 @@ import React from "react";
 import styled from "styled-components";
 
 interface Props {
-  height: number;
+  height?: number;
   progress: string;
   progressColor: string;
   backgroundColor?: string;
 }
 
-export default function Bar({ height = 6, backgroundColor, progressColor, progress }) {
+export default function Bar({ height = 6, backgroundColor, progressColor, progress }: Props) {
   return (
     <Wrapper height={height} backgroundColor={backgroundColor}>
-      <Progress height={height} width={progress} backgroundColor={progressColor} />
+      <Progress height={height} width={Number(progress)} backgroundColor={progressColor} />
     </Wrapper>
   );
 }
@@ -23,10 +23,7 @@ interface WrapperProps {
   backgroundColor?: string;
 }
 
-const Wrapper =
-  styled.div <
-  WrapperProps >
-  `
+const Wrapper = styled.div<WrapperProps>`
   height: ${p => p.height}px;
   flex-grow: 1;
   background-color: ${p => p.backgroundColor || p.theme.colors.palette.divider};
@@ -35,19 +32,18 @@ const Wrapper =
 `;
 
 interface ProgressProps {
-  height: number;
-  width: string;
+  height?: number;
+  width: number;
   backgroundColor: string | undefined;
 }
 
-const Progress = styled.div.attrs<ProgressProps>(p => ({
-  style: {
-    transform: `translateX(-${100 - p.width}%)`,
-  },
-}))`
+const Progress = styled.div<ProgressProps>`
   height: ${p => p.height}px;
   background-color: ${p => p.backgroundColor};
   border-radius: ${p => p.height}px;
   transition: transform 800ms ease-out;
   width: 100%;
+  ${({ width }) => `
+    transform: translateX(-${100 - Number(width)}%)}
+  `}
 `;

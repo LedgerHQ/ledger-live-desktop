@@ -4,14 +4,21 @@ import React, { useState, useRef, useLayoutEffect } from "react";
 import { createSelector } from "reselect";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
+// @ts-ignore
 import { getAssetsDistribution } from "@ledgerhq/live-common/lib/portfolio";
 import styled from "styled-components";
-import Text from "~/renderer/components/Text";
-import Box from "~/renderer/components/Box";
-import Card from "~/renderer/components/Box/Card";
-import IconAngleDown from "~/renderer/icons/AngleDown";
-import { calculateCountervalueSelector } from "~/renderer/actions/general";
-import { accountsSelector } from "~/renderer/reducers/accounts";
+// @ts-ignore
+import Text from "../Text";
+// @ts-ignore
+import Box from "../Box";
+// @ts-ignore
+import Card from "../Box/Card";
+// @ts-ignore
+import IconAngleDown from "../../icons/AngleDown";
+// @ts-ignore
+import { calculateCountervalueSelector } from "../../actions/general";
+// @ts-ignore
+import { accountsSelector } from "../../reducers/accounts";
 import Row from "./Row";
 import Header from "./Header";
 
@@ -32,7 +39,7 @@ export default function AssetDistribution() {
     list,
     list: { length: totalRowCount },
   } = useSelector(distributionSelector);
-  const cardRef = useRef(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const [showAll, setShowAll] = useState(false);
 
   const [isVisible, setVisible] = useState(false);
@@ -41,7 +48,7 @@ export default function AssetDistribution() {
     if (!cardRef.current) {
       return;
     }
-    const callback = entries => {
+    const callback: ConstructorParameters<typeof IntersectionObserver>[0] = entries => {
       if (entries[0] && entries[0].isIntersecting) {
         setVisible(true);
       }
@@ -58,7 +65,7 @@ export default function AssetDistribution() {
   }, []);
 
   const almostAll = initialRowCount + 3 > totalRowCount;
-  const subList = showAll || almostAll ? list : list.slice(0, initialRowCount);
+  const subList: any[] = showAll || almostAll ? list : list.slice(0, initialRowCount);
 
   return (
     <>
@@ -96,10 +103,7 @@ interface SeeAllButtonProps {
   expanded: boolean;
 }
 
-const SeeAllButton =
-  styled.div <
-  SeeAllButtonProps >
-  `
+const SeeAllButton = styled.div<SeeAllButtonProps>`
   margin-top: 15px;
   display: flex;
   color: ${p => p.theme.colors.wallet};

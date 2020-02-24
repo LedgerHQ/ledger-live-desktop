@@ -1,25 +1,33 @@
-// @flow
-
 import React from "react";
-import styled from "styled-components";
-import type { Account } from "@ledgerhq/live-common/lib/types";
+import styled, { CSSProperties } from "styled-components";
+// import type { Account } from "@ledgerhq/live-common/lib/types";
+// @ts-ignore
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { darken } from "~/renderer/styles/helpers";
-import Box, { Tabbable } from "~/renderer/components/Box";
-import CheckBox from "~/renderer/components/CheckBox";
-import CryptoCurrencyIconWithCount from "~/renderer/components/CryptoCurrencyIconWithCount";
-import FormattedVal from "~/renderer/components/FormattedVal";
-import Input from "~/renderer/components/Input";
+// @ts-ignore
+import { darken } from "../../styles/helpers";
+// @ts-ignore
+import Box, { Tabbable } from "../Box";
+// @ts-ignore
+import CheckBox from "../CheckBox";
+// @ts-ignore
+import CryptoCurrencyIconWithCount from "../CryptoCurrencyIconWithCount";
+// @ts-ignore
+import FormattedVal from "../FormattedVal";
+// @ts-ignore
+import Input from "../Input";
 
 interface Props {
-  account: Account;
+  // [TODO] account: Account;
+  account: any;
   isChecked?: boolean;
   isDisabled?: boolean;
   isReadonly?: boolean;
   autoFocusInput?: boolean;
   accountName: string;
-  onToggleAccount?: (Account, boolean) => void;
-  onEditName?: (Account, string) => void;
+  // [TODO] onToggleAccount?: (account: Account, isChecked?: boolean) => void;
+  onToggleAccount?: (account: any, isChecked?: boolean) => void;
+  // [TODO] onEditName?: (account: Account, name: string) => void;
+  onEditName?: (account: any, name: string) => void;
   hideAmount?: boolean;
 }
 
@@ -28,54 +36,62 @@ export default function AccountRow({
   isChecked,
   onEditName,
   accountName,
+  onToggleAccount: onToggleAccountProp,
   isDisabled,
   isReadonly,
   autoFocusInput,
   hideAmount,
 }: Props) {
-  function handlePreventSubmit(e: SyntheticEvent<*>) {
+  // @ts-ignore
+  const handlePreventSubmit: React.ComponentProps<Input>["onEnter"] = e => {
     e.preventDefault();
     e.stopPropagation();
-  }
+  };
 
-  function handleKeyPress(e: SyntheticEvent<HTMLInputElement>) {
+  // @ts-ignore
+  const handleKeyPress: React.ComponentProps<Input>["onKeyPress"] = e => {
     // this fixes a bug with the event propagating to the Tabbable
     e.stopPropagation();
-  }
+  };
 
-  function onToggleAccount() {
-    const { onToggleAccount, account, isChecked } = this.props;
-    if (onToggleAccount) onToggleAccount(account, !isChecked);
-  }
+  const onToggleAccount: React.ComponentProps<typeof AccountRowContainer>["onClick"] = () => {
+    if (onToggleAccountProp) onToggleAccountProp(account, !isChecked);
+  };
 
-  function handleChangeName(name: string) {
-    const { onEditName, account } = this.props;
+  // @ts-ignore
+  const handleChangeName: React.ComponentProps<Input>["onChange"] = name => {
     if (onEditName) onEditName(account, name);
-  }
+  };
 
-  function onClickInput(e: SyntheticEvent<*>) {
+  // @ts-ignore
+  const onClickInput: React.ComponentProps<Input>["onClick"] = e => {
     e.preventDefault();
     e.stopPropagation();
-  }
+  };
 
-  function onFocus(e: *) {
+  // @ts-ignore
+  const onFocus: React.ComponentProps<Input>["onFocus"] = e => {
     e.target.select();
-  }
+  };
 
-  function onBlur(e: *) {
-    const { onEditName, account } = this.props;
+  // @ts-ignore
+  const onBlur: React.ComponentProps<Input>["onBlur"] = e => {
     const { value } = e.target;
     if (!value && onEditName) {
       // don't leave an empty input on blur
       onEditName(account, account.name);
     }
-  }
+  };
 
-  const overflowStyles = { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" };
+  const overflowStyles: CSSProperties = {
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+  };
   const tokenCount = (account.subAccounts && account.subAccounts.length) || 0;
 
   return (
-    <AccountRowContainer isDisabled={isDisabled} onClick={isDisabled ? null : this.onToggleAccount}>
+    <AccountRowContainer isDisabled={isDisabled} onClick={isDisabled ? null : onToggleAccount}>
       <CryptoCurrencyIconWithCount currency={account.currency} count={tokenCount} withTooltip />
       <Box shrink grow ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
         {onEditName ? (
@@ -95,7 +111,7 @@ export default function AccountRow({
             />
           </InputWrapper>
         ) : (
-          <div style={{ ...this.overflowStyles, paddingLeft: 15 }}>{accountName}</div>
+          <div style={{ ...overflowStyles, paddingLeft: 15 }}>{accountName}</div>
         )}
       </Box>
       {!hideAmount ? (

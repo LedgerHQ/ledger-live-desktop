@@ -1,25 +1,33 @@
 // @flow
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import type { TFunction } from "react-i18next";
-import type { Account, CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
-import Box from "~/renderer/components/Box";
-import FakeLink from "~/renderer/components/FakeLink";
-import { SpoilerIcon } from "~/renderer/components/Spoiler";
+// import type { Account, CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
+// @ts-ignore
+import Box from "../Box";
+// @ts-ignore
+import FakeLink from "../FakeLink";
+// @ts-ignore
+import { SpoilerIcon } from "../Spoiler";
 import AccountRow from "./AccountRow";
 
 interface Props {
-  accounts: Account[];
-  currency?: CryptoCurrency | TokenCurrency;
+  // [TODO] accounts: Account[];
+  accounts: any[];
+  // [TODO] currency?: CryptoCurrency | TokenCurrency;
+  currency?: any;
   checkedIds?: string[];
   editedNames: { [accountId: string]: string };
-  setAccountName?: (Account, string) => void;
-  onToggleAccount?: Account => void;
-  onSelectAll?: (Account[]) => void;
-  onUnselectAll?: (Account[]) => void;
-  title?: React$Node;
-  emptyText?: React$Node;
+  // [TODO] setAccountName?: (account: Account, name: string) => void;
+  setAccountName?: (account: Account, name: string) => void;
+  // [TODO] onToggleAccount?: (account: Account) => void;
+  onToggleAccount?: (account: any) => void;
+  // [TODO] onSelectAll?: (accounts: Account[]) => void;
+  onSelectAll?: (accounts: any[]) => void;
+  // [TODO] onUnselectAll?: (accounts: Account[]) => void;
+  onUnselectAll?: (accounts: any[]) => void;
+  title?: React.ReactNode;
+  emptyText?: React.ReactNode;
   autoFocusFirstInput?: boolean;
   collapsible?: boolean;
   hideAmount?: boolean;
@@ -32,29 +40,27 @@ export default function AccountsList({
   onToggleAccount,
   editedNames = {},
   setAccountName,
-  onSelectAll,
-  onUnselectAll,
+  onSelectAll: onSelectAllProp,
+  onUnselectAll: onUnselectAllProp,
   title,
   emptyText,
   autoFocusFirstInput,
   collapsible,
   hideAmount,
-}) {
-  const collapsed = useState(collapsible);
+}: Props) {
+  const [collapsed, setCollapsed] = useState(collapsible);
   const { t } = useTranslation();
 
   function toggleCollapse() {
-    this.setState(({ collapsed }) => ({ collapsed: !collapsed }));
+    setCollapsed(!collapsed);
   }
 
   function onSelectAll() {
-    const { accounts, onSelectAll } = this.props;
-    if (onSelectAll) onSelectAll(accounts);
+    if (onSelectAllProp) onSelectAllProp(accounts);
   }
 
   function onUnselectAll() {
-    const { accounts, onUnselectAll } = this.props;
-    if (onUnselectAll) onUnselectAll(accounts);
+    if (onUnselectAllProp) onUnselectAllProp(accounts);
   }
 
   const withToggleAll = !!onSelectAll && !!onUnselectAll && accounts.length > 1;
@@ -72,7 +78,7 @@ export default function AccountsList({
               fontSize={2}
               textTransform="uppercase"
               cursor={collapsible ? "pointer" : undefined}
-              onClick={collapsible ? this.toggleCollapse : undefined}
+              onClick={collapsible ? toggleCollapse : undefined}
             >
               {collapsible ? <SpoilerIcon isOpened={!collapsed} mr={1} /> : null}
               {title}
@@ -82,7 +88,7 @@ export default function AccountsList({
             <FakeLink
               ml="auto"
               ff="Inter|Regular"
-              onClick={isAllSelected ? this.onUnselectAll : this.onSelectAll}
+              onClick={isAllSelected ? onUnselectAll : onSelectAll}
               fontSize={3}
               style={{ lineHeight: "10px" }}
             >
@@ -99,7 +105,6 @@ export default function AccountsList({
             <AccountRow
               key={account.id}
               account={account}
-              currency={currency}
               autoFocusInput={i === 0 && autoFocusFirstInput}
               isDisabled={!onToggleAccount || !checkedIds}
               isChecked={!checkedIds || checkedIds.find(id => id === account.id) !== undefined}
@@ -107,7 +112,9 @@ export default function AccountsList({
               onEditName={setAccountName}
               hideAmount={hideAmount}
               accountName={
-                typeof editedNames[account.id] === "string" ? editedNames[account.id] : account.name
+                typeof editedNames[account.id] === "string"
+                  ? editedNames[account.id]
+                  : (account.name as string)
               }
             />
           ))}

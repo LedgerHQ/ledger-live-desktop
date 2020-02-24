@@ -1,27 +1,30 @@
-// @flow
-
 import React, { useLayoutEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
-import Text from "~/renderer/components/Text";
-import Card from "~/renderer/components/Box/Card";
+// @ts-ignore
+import Text from "../Text";
+// @ts-ignore
+import Card from "../Box/Card";
+// @ts-ignore
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
-import type { Account } from "@ledgerhq/live-common/lib/account/type";
-import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
-import Box from "~/renderer/components/Box";
+// @ts-ignore
+import { counterValueCurrencySelector } from "../../reducers/settings";
+// @ts-ignore
+import Box from "../Box";
 import Header from "./Header";
 import Row from "./Row";
-import type { AccountDistributionItem } from "./Row";
-import { calculateCountervalueSelector } from "~/renderer/actions/general";
+// @ts-ignore
+import { calculateCountervalueSelector } from "../../actions/general";
 
 interface Props {
-  accounts: Account[];
+  // [TODO] accounts: Account[];
+  accounts: any[];
 }
 
 export default function AccountDistribution({ accounts }: Props) {
   const accountDistribution = useSelector(state => {
-    const total = accounts.reduce((total, a) => total.plus(a.balance), BigNumber(0));
+    const total = accounts.reduce((total, a) => total.plus(a.balance), new BigNumber(0));
     return accounts
       .map(a => ({
         account: a,
@@ -35,14 +38,14 @@ export default function AccountDistribution({ accounts }: Props) {
 
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
 
-  const cardRef = useRef(null);
+  const cardRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setVisible] = useState(false);
   useLayoutEffect(() => {
     const scrollArea = document.getElementById("scroll-area");
     if (!cardRef.current) {
       return;
     }
-    const callback = entries => {
+    const callback: IntersectionObserverCallback = entries => {
       if (entries[0] && entries[0].isIntersecting) {
         setVisible(true);
       }
@@ -52,7 +55,9 @@ export default function AccountDistribution({ accounts }: Props) {
       root: scrollArea,
       rootMargin: "-48px",
     });
+
     observer.observe(cardRef.current);
+
     return () => {
       observer.disconnect();
     };

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "jsx": "react",
+    "module": "CommonJS",
+    "noEmit": true,
+    "outDir": "lib",
+    "rootDir": "src",
+    "strict": true,
+    "target": "ESNext",
+    "types": ["react"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}
