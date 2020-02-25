@@ -13,11 +13,10 @@ export default async (dbPassword: string) => {
     dbPassword,
   });
 
-  console.log("----------------------");
-  console.log(`Libcore init with password: "${dbPassword}"`);
-  console.log("----------------------");
-
+  // The following line will consistently crash if the password is wrong.
+  // We rather crash now and know right away libcore is unusable (until the correct password is set)
   await withLibcore(async core => core.getPoolInstance().getName());
+
   invariant(process.send, "Internal has no IPC channel! (process.send is missing)");
-  process.send({ type: "libcoreInitialized" });
+  process.send({ type: "libcoreInitialized" }); // We didn't crash 🎉
 };

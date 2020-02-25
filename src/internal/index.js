@@ -112,7 +112,7 @@ process.on("message", m => {
     }
 
     default:
-      log("error", `internal thread: '${m.type}' event not supported`);
+      log("internal-message", `'${m.type}' event not supported`);
   }
 });
 

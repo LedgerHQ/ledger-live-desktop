@@ -9,11 +9,11 @@ import logger from "~/logger";
 import { getMainWindow } from "./window-lifecycle";
 import InternalProcess from "./InternalProcess";
 
+const logType = { type: "internal-lifecycle" };
+
 // ~~~ Local state that main thread keep
 
 const hydratedPerCurrency = {};
-// const libcorePassword = "k";
-// let libcoreInitSuccess = false;
 
 // ~~~
 
@@ -30,7 +30,6 @@ const sentryEnabled = false;
 const userId = "TODO";
 
 const spawnCoreProcess = async () => {
-  // libcoreInitSuccess = false;
   const env = {
     ...getAllEnvs(),
     // $FlowFixMe
@@ -47,28 +46,28 @@ const spawnCoreProcess = async () => {
     execArgv: (process.env.LEDGER_INTERNAL_ARGS || "").split(/[ ]+/).filter(Boolean),
     silent: true,
   });
-  // internal.setPassword(libcorePassword);
   try {
     await internal.start();
-    console.log("--- Start success ---");
+    logger.info("Internal thread started successfully", logType);
   } catch (error) {
-    console.log("--- Start failure ---");
-    console.log(error);
+    logger.warn("Internal thread failed to start. Expected in case of encrypted libcore db.", {
+      error,
+      ...logType,
+    });
   }
 };
 
 internal.onStart(() => {
-  internal.process.on("message", handleGlobalInternalMessage);
+  internal.process && internal.process.on("message", handleGlobalInternalMessage);
 
   internal.send({
     type: "init",
     hydratedPerCurrency,
-    // libcorePassword,
   });
 });
 
 app.on("window-all-closed", async () => {
-  logger.info("cleaning internal because main is done");
+  logger.info("cleaning internal because main is done", logType);
   if (internal.active) {
     await internal.stop();
   }
@@ -77,15 +76,14 @@ app.on("window-all-closed", async () => {
 });
 
 const restartInternal = async () => {
-  logger.info("cleaning processes on demand");
+  logger.info("cleaning processes on demand", logType);
   if (internal.active) {
     await internal.stop();
   }
   spawnCoreProcess();
 };
 
-ipcMain.on("clean-processes", async () => {
-  logger.info("cleaning processes on demand");
+ipcMain.on("clean-processes", () => {
   restartInternal();
 });
 
@@ -103,17 +101,6 @@ internal.onMessage(message => {
 });
 
 internal.onExit((code, signal, unexpected, libcoreInitialized) => {
-  console.log("---------");
-  console.log("code", code);
-  console.log("signal", signal);
-  console.log("unexpected", unexpected);
-  console.log("libcoreInitialized", libcoreInitialized);
-  console.log("---------");
-
-  if (!libcoreInitialized) {
-    console.log("libcore failed to init");
-  }
-
   if (unexpected) {
     Object.keys(ongoing).forEach(requestId => {
       const event = ongoing[requestId];
@@ -154,17 +141,12 @@ function handleGlobalInternalMessage(payload) {
     case "setDeviceBusy": {
       const win = getMainWindow && getMainWindow();
       if (!win) {
-        logger.warn(`can't ${payload.type} because no renderer`);
+        logger.warn(`can't ${payload.type} because no renderer`, logType);
         return;
       }
       win.webContents.send(payload.type, payload);
       break;
     }
-    // case "libcoreInitSuccess": {
-    //   console.log("libcore init success");
-    //   // libcoreInitSuccess = true;
-    //   break;
-    // }
     default:
   }
 }

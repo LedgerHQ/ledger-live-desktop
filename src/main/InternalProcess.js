@@ -9,6 +9,8 @@ type Message = { type: string };
 // eslint-disable-next-line camelcase
 type ForkOptions = child_process$forkOpts;
 
+const logType = { type: "InternalProcess" };
+
 class InternalProcess {
   process: ?ChildProcess;
   timeout: number;
@@ -23,7 +25,7 @@ class InternalProcess {
   args: ?(string[]);
   options: ?ForkOptions;
 
-  startPromise: {};
+  startPromise: { resolve?: Function, reject?: Function };
 
   constructor({ timeout }: { timeout: number }) {
     this.process = null;
@@ -79,6 +81,7 @@ class InternalProcess {
   setPassword(password: string) {
     if (password !== this.password) {
       this.password = password;
+      logger.info("Libcore password set", logType);
 
       if (this.process) {
         return this.restart();
@@ -87,6 +90,8 @@ class InternalProcess {
   }
 
   start() {
+    logger.info("Started internal process", logType);
+
     return new Promise<any>((resolve, reject) => {
       if (this.process) {
         throw new Error("Internal process is already running !");
@@ -103,23 +108,21 @@ class InternalProcess {
       this.active = true;
       const pid = this.process.pid;
 
-      logger.info(`spawned internal process ${pid}`);
-      console.log(`spawned internal process ${pid}`);
+      logger.info(`spawned internal process ${pid}`, logType);
 
       this.process && // A bit stupid, but Flow complains otherwise
         this.process.on("exit", (code, signal) => {
           this.process = null;
 
           if (code !== null) {
-            console.log(`internal process ${pid} gracefully exited with code ${code}`);
-            logger.info(`Internal process ${pid} ended with code ${code}`);
+            logger.info(`Internal process ${pid} ended with code ${code}`, logType);
           } else {
-            console.log(`internal process ${pid} got killed by signal ${signal}`);
-            logger.info(`Internal process ${pid} killed with signal ${signal}`);
+            logger.warn(`Internal process ${pid} killed with signal ${signal}`, logType);
           }
 
           if (this.active && !this.libcoreInitialized) {
-            this.startPromise.reject();
+            logger.warn("Libcore failed to initialize", logType);
+            this.startPromise.reject && this.startPromise.reject();
           }
 
           if (this.onExitCallback) {
@@ -138,10 +141,10 @@ class InternalProcess {
       this.process && // And, yeah, even wrapping all this in a big if(this.process) isn't enough
         this.process.on("message", message => {
           if (message.type === "libcoreInitialized") {
-            console.log("Libcore init successful");
+            logger.info("Libcore initialized successfully", logType);
             this.libcoreInitialized = true;
 
-            this.startPromise.resolve();
+            this.startPromise.resolve && this.startPromise.resolve();
 
             if (this.onStartCallback) {
               this.onStartCallback();
@@ -170,7 +173,7 @@ class InternalProcess {
                   return;
                 }
               } catch (e) {}
-              logger.debug("I: " + msg);
+              logger.debug("I: " + msg, { type: "internal-stdout" });
             }),
         );
 
@@ -178,19 +181,10 @@ class InternalProcess {
         this.process.stderr.on("data", data => {
           const msg = String(data).trim();
           if (__DEV__) console.error("I.e: " + msg);
-          logger.error("I.e: " + String(data).trim());
+          logger.error("I.e: " + String(data).trim(), { type: "internal-stderr" });
         });
 
-      // this.process.on("libcoreInitialized", () => {
-      //   console.log("Libcore init successful");
-      //   this.libcoreInitialized = true;
-
-      //   if (this.onStartCallback) {
-      //     this.onStartCallback();
-      //   }
-      // });
-
-      this.process.send({ type: "initLibcore", password: this.password });
+      this.process && this.process.send({ type: "initLibcore", password: this.password });
     });
   }
 
@@ -204,8 +198,7 @@ class InternalProcess {
       this.messageQueue = [];
       const pid = this.process.pid;
 
-      logger.info(`ending process ${pid} ...`);
-      console.log(`ending process ${pid} ...`);
+      logger.info(`ending process ${pid} ...`, logType);
       this.active = false;
       this.process &&
         this.process.once("exit", () => {
