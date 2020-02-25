@@ -58,12 +58,22 @@ class SideBarListItem extends PureComponent<Props> {
               {!!desc && desc(this.props)}
             </Hide>
           </Box>
-          {NotifComponent && <NotifComponent />}
+          {NotifComponent && (
+            <NotifWrapper collapsed={!!collapsed}>
+              <NotifComponent />
+            </NotifWrapper>
+          )}
         </Container>
       </Tooltip>
     );
   }
 }
+
+const NotifWrapper = styled.div`
+  ${p => p.collapsed && "margin-left:-10px;"}
+  ${p => p.collapsed && "margin-top:-18px;"}
+  transition: margin-top ease-in-out 200ms;
+`;
 
 const Container = styled(Tabbable).attrs(() => ({
   alignItems: "center",
