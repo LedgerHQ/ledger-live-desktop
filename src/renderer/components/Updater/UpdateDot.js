@@ -17,20 +17,32 @@ const getColor = ({ status }: { status: UpdateStatus }) =>
 const getOpacity = ({ status }: { status: UpdateStatus }) =>
   status === "download-progress" || status === "checking" ? 0.5 : 1;
 
-export const Dot: ThemedComponent<{ status: UpdateStatus }> = styled.div`
+export const Dot: ThemedComponent<{ status: UpdateStatus, collapsed?: ?boolean }> = styled.div`
   opacity: ${getOpacity};
-  width: 8px;
-  height: 8px;
   background-color: ${getColor};
   border-radius: 50%;
+  ${p =>
+    p.collapsed
+      ? `
+      width: 12px;
+      height: 12px;
+      margin-left: -4px;
+      margin-top: -36px;
+      border:1.5px solid ${p.theme.colors.palette.background.paper};
+  `
+      : `
+      width: 8px;
+      height: 8px;
+  `}
+  transition: margin-top linear 200ms;
 `;
 
-const UpdateDot = () => {
+const UpdateDot = ({ collapsed }: { collapsed: ?boolean }) => {
   const context = useContext(UpdaterContext);
   if (context) {
     const { status } = context;
     if (!VISIBLE_STATUS.includes(status)) return null;
-    return <Dot status={status} />;
+    return <Dot collapsed={collapsed} status={status} />;
   }
 
   return null;
