@@ -87,9 +87,9 @@ export const getAccountBridge = (
   const broadcast = ({ account, signedOperation }) =>
     command("AccountBroadcast")({
       account: toAccountRaw(account),
-      signedOperation: toSignedOperationRaw(signedOperation),
+      signedOperation: toSignedOperationRaw(signedOperation, true),
     })
-      .pipe(map(raw => fromOperationRaw(raw, account.id, account.subAccounts)))
+      .pipe(map(raw => fromOperationRaw(raw, account.id)))
       .toPromise();
 
   return {
