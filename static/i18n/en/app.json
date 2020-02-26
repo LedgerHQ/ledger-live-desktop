@@ -366,12 +366,12 @@
       "used": "Used",
       "firmware": "Firmware {{version}}",
       "genuine": "Device is genuine",
-      "incomplete": "Some apps were not recognized by our apps catalog. Please uninstall and reinstall them."
+      "incomplete": "Some apps were not recognized by our App catalog. Please uninstall and reinstall them."
     },
     "applist": {
       "placeholder": "There are no apps matching the search and filters selected",
       "placeholderNoAppsInstalled": "No apps installed on your device",
-      "placeholderGoToCatalog": "Go to the Apps catalog to install apps",
+      "placeholderGoToCatalog": "Go to the App catalog to install apps",
       "noResultsFound": "No results found",
       "noResultsDesc": "Please verify the spelling and try again",
       "filter": {
