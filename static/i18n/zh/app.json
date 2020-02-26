@@ -39,7 +39,6 @@
     "reverify": "重新验证",
     "verify": "验证",
     "copy": "复制",
-    "copyAddress": "复制",
     "copied": "已复制",
     "addressCopied": "地址已复制",
     "experimentalFeature": "Experimental",
@@ -250,9 +249,6 @@
       "pendingDevices": "无法更新 1 个账户。请连接与以下的账户相关的设备",
       "pendingDevices_plural": "无法更新 {{totalMigratableAccounts}} 账户。请连接与以下账户相关的设备",
       "doItLaterBtn": "Do it later"
-    },
-    "connectDevice": {
-      "title": "{{currencyName}} 更新"
     },
     "progress": {
       "finished": {
@@ -511,12 +507,6 @@
         "title": "设备",
         "withoutDevice": "您还没有 Ledger 设备？"
       },
-      "confirmAddress": {
-        "title": "验证",
-        "action": "验证设备上的地址",
-        "text": "请验证您设备上显示的 {{currencyName}} 地址与您的 Ledger Live 上显示的地址是否匹配",
-        "support": "联系我们"
-      },
       "receiveFunds": {
         "title": "接收"
       },
@@ -558,7 +548,6 @@
         "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
-        "title": "验证",
         "streaming": {
           "accurate": "Loading... ({{percentage}})",
           "inaccurate": "Loading..."
@@ -622,7 +611,6 @@
     "durationDays_plural": "{{count}} days",
     "howItWorks": "How delegation works",
     "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
-    "earnRewards": "Earn rewards",
     "overdelegated": "Overdelegated",
     "flow": {
       "steps": {
