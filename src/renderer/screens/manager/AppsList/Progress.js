@@ -20,10 +20,11 @@ type Props = {
   installing?: boolean,
   uninstalling?: boolean,
   progress?: number,
+  isCurrent: boolean,
 };
 
 // we can forward appOp from state.currentAppOp if it matches the contextual app
-const Progress = ({ updating, installing, uninstalling, progress }: Props) => {
+const Progress = ({ updating, installing, uninstalling, progress, isCurrent }: Props) => {
   return (
     <Box flex="1" horizontal justifyContent="flex-end" overflow="hidden">
       <Box flex="0 0 auto" vertical alignItems="flex-end" justifyContent="center">
@@ -42,7 +43,7 @@ const Progress = ({ updating, installing, uninstalling, progress }: Props) => {
                   ? "manager.applist.item.updating"
                   : uninstalling
                   ? "manager.applist.item.uninstalling"
-                  : installing && progress !== 1
+                  : installing && isCurrent && progress !== 1
                   ? "manager.applist.item.installing"
                   : "manager.applist.item.scheduled"
               }
@@ -52,7 +53,7 @@ const Progress = ({ updating, installing, uninstalling, progress }: Props) => {
         <Holder>
           {uninstalling ? (
             <ProgressBar infinite timing={1200} />
-          ) : installing && progress !== 1 ? (
+          ) : installing && isCurrent && progress !== 1 ? (
             <ProgressBar infinite timing={1200} progress={progress || 0} />
           ) : (
             <ProgressBar color="palette.text.shade20" progress={-1} />

@@ -111,7 +111,7 @@ const AppsList = ({
     }
   }, [search]);
 
-  const { installed: installedApps, uninstallQueue } = state;
+  const { installed: installedApps, uninstallQueue, apps } = state;
 
   const addAccount = useCallback(
     currency => {
@@ -219,6 +219,7 @@ const AppsList = ({
                 addAccount={addAccount}
                 dispatch={dispatch}
                 installed={installedApps}
+                apps={apps}
               />
             )}
           </>

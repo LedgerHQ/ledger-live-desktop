@@ -90,8 +90,8 @@ const NavigationGuard = ({
         analyticsName={analyticsName}
         isOpened={modalVisible}
         onCancel={closeModal}
-        onReject={closeModal}
-        onConfirm={handleConfirmNavigationClick}
+        onReject={handleConfirmNavigationClick}
+        onConfirm={closeModal}
       />
     </>
   );

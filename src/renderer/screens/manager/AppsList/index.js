@@ -101,8 +101,8 @@ const AppsList = ({ deviceInfo, result, exec, t }: Props) => {
           </>
         }
         desc={t(`errors.ManagerQuitPage.${installState}.description`)}
-        confirmText={t(`errors.ManagerQuitPage.quit`)}
-        cancelText={t(`errors.ManagerQuitPage.${installState}.stay`)}
+        confirmText={t(`errors.ManagerQuitPage.${installState}.stay`)}
+        cancelText={t(`errors.ManagerQuitPage.quit`)}
         centered
       />
       <DeviceStorage
