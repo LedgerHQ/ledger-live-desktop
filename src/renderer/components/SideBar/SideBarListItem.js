@@ -13,7 +13,7 @@ export type Props = {
   icon?: any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
   disabled?: boolean,
   iconActiveColor: ?string,
-  NotifComponent?: React$ComponentType<*>,
+  NotifComponent?: React$Node,
   isActive?: boolean,
   onClick?: void => void,
   isActive?: boolean,
@@ -58,7 +58,7 @@ class SideBarListItem extends PureComponent<Props> {
               {!!desc && desc(this.props)}
             </Hide>
           </Box>
-          {NotifComponent && <NotifComponent />}
+          {NotifComponent}
         </Container>
       </Tooltip>
     );
@@ -74,6 +74,7 @@ const Container = styled(Tabbable).attrs(() => ({
   px: 3,
   py: 2,
 }))`
+  position: relative;
   width: 100%;
   cursor: ${p => (p.disabled ? "not-allowed" : "pointer")};
   color: ${p =>
