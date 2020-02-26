@@ -371,8 +371,9 @@ class Button extends PureComponent<
           <LoadingWrapper>
             <Spinner size={16} />
           </LoadingWrapper>
-        ) : null}
-        {children}
+        ) : (
+          children
+        )}
       </Base>
     );
   }
