@@ -40,7 +40,7 @@ const UpdatableHeader = styled.div`
 const Badge = styled(Text)`
   border-radius: 29px;
   background-color: ${p => p.theme.colors.palette.primary.main};
-  color: ${p => p.theme.colors.palette.background.paper};
+  color: ${p => p.color || p.theme.colors.palette.background.paper};
   height: 18px;
   display: flex;
   align-items: center;
@@ -123,7 +123,7 @@ const UpdateAllApps = ({ update, state, dispatch, isIncomplete, progress }: Prop
         <Text ff="Inter|SemiBold" fontSize={4} color="palette.primary.main">
           <Trans i18nKey="manager.applist.updatable.title" />
         </Text>
-        <Badge ff="Inter|Bold" fontSize={3} color="palette.text.shade100">
+        <Badge ff="Inter|Bold" fontSize={3} color="white">
           {update.length}
         </Badge>
         <Box flex={1} />

@@ -26,7 +26,7 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
 
 const Btn = styled(Box).attrs(p => ({
   bg: p.disabled ? "rgba(100, 144, 241, 0.5)" : "wallet",
-  color: "palette.background.paper",
+  color: "white",
   alignItems: "center",
   justifyContent: "center",
 }))`
