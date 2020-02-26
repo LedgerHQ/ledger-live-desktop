@@ -14,6 +14,7 @@ const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
   horizontal: false,
   alignItems: "flex-end",
 }))`
+  flex: 0.5;
   width: 150px;
   text-align: right;
   justify-content: space-between;
