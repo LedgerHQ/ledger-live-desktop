@@ -39,7 +39,6 @@
     "reverify": "Проверить повторно",
     "verify": "Проверить",
     "copy": "Копировать",
-    "copyAddress": "Копировать",
     "copied": "Скопировано",
     "addressCopied": "Адрес скопирован",
     "experimentalFeature": "Экспериментальная функция",
@@ -250,9 +249,6 @@
       "pendingDevices": "1 аккаунт не может быть обновлен. Пожалуйста, подключите устройство, связанное с учетной записью ниже",
       "pendingDevices_plural": "{{totalMigratableAccounts}} учетных записей не может быть обновлено. Пожалуйста, подключите устройство, связанное с учетной записью ниже",
       "doItLaterBtn": "Отложить на потом"
-    },
-    "connectDevice": {
-      "title": "Обновление {{currencyName}}"
     },
     "progress": {
       "finished": {
@@ -511,12 +507,6 @@
         "title": "Устройство",
         "withoutDevice": "Нет устройства?"
       },
-      "confirmAddress": {
-        "title": "Проверка",
-        "action": "Проверить адрес на устройстве",
-        "text": "Пожалуйста сравните {{currencyName}} адрес который отображается в Ledger Live и на вашем устройстве Ledger. Он должен совпадать",
-        "support": "Обратная связь"
-      },
       "receiveFunds": {
         "title": "Получить"
       },
@@ -558,7 +548,6 @@
         "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
-        "title": "Проверка",
         "streaming": {
           "accurate": "Loading... ({{percentage}})",
           "inaccurate": "Loading..."
@@ -622,7 +611,6 @@
     "durationDays_plural": "{{count}} days",
     "howItWorks": "How delegation works",
     "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
-    "earnRewards": "Earn rewards",
     "overdelegated": "Overdelegated",
     "flow": {
       "steps": {
