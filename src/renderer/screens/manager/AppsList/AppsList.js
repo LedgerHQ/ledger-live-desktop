@@ -214,7 +214,12 @@ const AppsList = ({
             {displayedAppList.length ? (
               displayedAppList.map(app => mapApp(app, !isDeviceTab))
             ) : (
-              <Placeholder />
+              <Placeholder
+                query={query}
+                addAccount={addAccount}
+                dispatch={dispatch}
+                installed={installedApps}
+              />
             )}
           </>
         )}
