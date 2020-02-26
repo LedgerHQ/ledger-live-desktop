@@ -514,7 +514,7 @@
       "confirmAddress": {
         "title": "Vérification",
         "action": "Confirmez votre adresse sur l’appareil",
-        "text": "Veuillez vérifier que l’adresse {{currencyName}} qui sera affichée sur Ledger Live va correspondre à celle indiquée sur votre appareil",
+        "text": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
         "support": "Nous contacter"
       },
       "receiveFunds": {
