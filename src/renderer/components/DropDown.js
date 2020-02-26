@@ -165,7 +165,17 @@ class DropDown extends PureComponent<Props> {
   };
 
   render() {
-    const { children, items, value, onChange, shrink, multiple, ...props } = this.props;
+    const {
+      children,
+      items,
+      value,
+      onChange,
+      shrink,
+      multiple,
+      onStateChange,
+      ...props
+    } = this.props;
+
     return (
       <Downshift
         onChange={onChange}
