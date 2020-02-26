@@ -366,12 +366,12 @@
       "used": "Felhasznált",
       "firmware": "Szoftver {{version}}",
       "genuine": "Az eszköz eredeti",
-      "incomplete": "Egyes alkalmazásokat az alkalmazáskatalógusunk nem ismert fel. Távolítsd el és telepítsd újra őket."
+      "incomplete": "Some apps were not recognized by our App catalog. Please uninstall and reinstall them."
     },
     "applist": {
       "placeholder": "Nincsenek a keresésnek és szűrőknek megfelelő alkalmazások",
       "placeholderNoAppsInstalled": "Nincsenek telepített alkalmazások az eszközödön",
-      "placeholderGoToCatalog": "Nyisd meg az Alkalmazás katalógust az alkalmazások telepítéséhez",
+      "placeholderGoToCatalog": "Go to the App catalog to install apps",
       "noResultsFound": "Nincs találat",
       "noResultsDesc": "Kérjük, ellenőrizd a helyesírást, és próbáld újra",
       "filter": {
@@ -420,6 +420,7 @@
         "learnMore": "Tudj meg többet",
         "learnMoreTooltip": "Tudj meg többet a(z) {{appName}} alkalmazásról",
         "removeTooltip": "{{appName}} törlése",
+        "useAppForToken": "{{tokenName}} tokens can be managed using the {{appName}} app",
         "noAppNeededForToken": "{{appName}} telepítése a(z) {{tokenName}} tokenhez",
         "tokenAppDisclaimer": "{{tokenName}} egy {{tokenType}} token, mely a(z) {{appName}} alkalmazást használja. {{tokenName}} kezeléséhez, <1>telepítsd a(z) {{appName}} alkalmazást </1> és küld a tokeneket a(z) <3> {{appName}} számládra </3>",
         "tokenAppDisclaimerInstalled": "{{tokenName}} egy {{tokenType}} token, mely a(z) {{appName}} alkalmazást használja. A(z) {{tokenName}} kezeléséhez, <1>nyisd meg a(z) {{appName}} alkalmazást </1> és küld a tokeneket a(z) <3> {{appName}} számládra </3>",
