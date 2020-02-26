@@ -72,9 +72,9 @@
     }
   },
   "byteSize": {
-    "bytes": "{{size}} bytes",
-    "kbUnit": "{{size}} Kb",
-    "mbUnit": "{{size}} Mb"
+    "bytes": "{{size}} octets",
+    "kbUnit": "{{size}} Ko",
+    "mbUnit": "{{size}} Mo"
   },
   "time": {
     "minute": "Minute",
@@ -360,18 +360,18 @@
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> libre",
-      "noFreeSpace": "No storage left",
+      "noFreeSpace": "Plus d'espace disponible",
       "installed": "Installée",
       "capacity": "Capacité",
       "used": "Utilisé",
       "firmware": "Firmware {{version}}",
       "genuine": "L'appareil est authentique",
-      "incomplete": "Certaines applications ne sont pas reconnues par notre catalogue d'applications. Veuillez les désinstaller et les réinstaller."
+      "incomplete": "Certaines applications n'ont pas été reconnues par notre catalogue d'applications. Veuillez les désinstaller et les réinstaller."
     },
     "applist": {
       "placeholder": "Aucune application ne correspond à la recherche et aux filtres sélectionnés",
       "placeholderNoAppsInstalled": "Aucune application installée sur votre appareil",
-      "placeholderGoToCatalog": "Allez dans le catalogue pour installer des applications",
+      "placeholderGoToCatalog": "Allez dans le catalogue d'applications pour installer des applications",
       "noResultsFound": "Aucun résultat",
       "noResultsDesc": "Veuillez vérifier vos recherche et réessayer",
       "filter": {
@@ -395,8 +395,8 @@
       },
       "updatable": {
         "title": "Mises à jours disponibles",
-        "progressTitle": "{{number}} App updates",
-        "progressWarning": "Do not quit the Manager during updates",
+        "progressTitle": "{{number}} mises à jours d'applications",
+        "progressWarning": "Ne pas quitter le Manager pendant les mises à jour",
         "progress": "Mise à jour..."
       },
       "item": {
@@ -404,10 +404,10 @@
         "versionNew": "Version {{version}} (NOUVEAU{{newVersion}})",
         "installing": "Installation en cours...",
         "uninstalling": "Désinstallation...",
-        "updating": "Updating...",
-        "scheduled": "Queued",
+        "updating": "Mise à jour...",
+        "scheduled": "En attente",
         "update": "Mise à jour disponible",
-        "updateAll": "Update all",
+        "updateAll": "Tout mettre à jour",
         "updateAllOutOfMemory": "Pas assez d'espace pour mettre à jour, veuillez désinstaller des applications",
         "install": "Installer",
         "installed": "Installée",
@@ -420,11 +420,12 @@
         "learnMore": "En savoir plus",
         "learnMoreTooltip": "En savoir plus sur {{appName}}",
         "removeTooltip": "Désinstaller {{appName}}",
-        "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
-        "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>",
-        "tokenAppDisclaimerInstalled": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>open the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>",
-        "goToAccounts": "Go to accounts",
-        "intallParentApp": "Install {{appName}} app"
+        "useAppForToken": "{{tokenName}} tokens peuvent être gérés en utilisant l'application {{appName}}",
+        "noAppNeededForToken": "Installer l'application {{appName}} pour {{tokenName}}",
+        "tokenAppDisclaimer": "{{tokenName}} est un token {{tokenType}} utilisant l'application {{appName}}. Pour gérer {{tokenName}}, <1>installer l'application </1> {{appName}} et envoyer les tokens <3> sur votre compte {{appName}} </3>",
+        "tokenAppDisclaimerInstalled": "{{tokenName}} est un token {{tokenType}} utilisant l'application {{appName}} . Pour gérer {{tokenName}}, <1>ouvrez l'application {{appName}} </1> et envoyez les tokens <3>sur votre compte {{appName}} </3>",
+        "goToAccounts": "Accéder aux comptes",
+        "intallParentApp": "Installer l'application {{appName}}"
       },
       "uninstall": {
         "title": "Tout désinstaller",
@@ -441,7 +442,7 @@
       "dependencyUninstall": {
         "title": " Désinstaller {{app}} et ses applications dépendantes ?",
         "showAll": "Afficher les applications à désinstaller",
-        "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled as well.",
+        "description": "Certaines de vos applications installées sont liées à l'application {{app}} . Elles seront également désinstallées.",
         "confirm": "Désinstaller {{app}} et les autres applications"
       }
     },
