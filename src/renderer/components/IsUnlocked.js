@@ -1,4 +1,5 @@
 // @flow
+import { ipcRenderer } from "electron";
 import React, { useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -8,7 +9,7 @@ import { setEncryptionKey, isEncryptionKeyCorrect, hasBeenDecrypted } from "~/re
 
 import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 
-import { hardReset } from "~/renderer/reset";
+import { hardReset, removeSQLite } from "~/renderer/reset";
 
 import { fetchAccounts } from "~/renderer/actions/accounts";
 import { unlock } from "~/renderer/actions/application";
@@ -47,6 +48,9 @@ export const LockScreenDesc: ThemedComponent<{}> = styled(Box).attrs(() => ({
 }))`
   margin: 10px auto 25px;
 `;
+
+const setLibcorePassword = (password: string) =>
+  ipcRenderer.invoke("setLibcorePassword", { password });
 
 const IconWrapperCircle = styled(Box)`
   width: 50px;
@@ -91,6 +95,15 @@ const IsUnlocked = ({ children }: Props) => {
       try {
         if (!isAccountDecrypted) {
           await setEncryptionKey("app", "accounts", inputValue.password);
+          try {
+            // The password worked for db, it should be the same for libcore
+            await setLibcorePassword(inputValue.password);
+          } catch (e) {
+            // db password didn't work for libcore, this shouldn't happen
+            // let's wipe libcore database and start again
+            await removeSQLite();
+            await setLibcorePassword(inputValue.password);
+          }
           await dispatch(fetchAccounts());
         } else if (!(await isEncryptionKeyCorrect("app", "accounts", inputValue.password))) {
           throw new PasswordIncorrectError();

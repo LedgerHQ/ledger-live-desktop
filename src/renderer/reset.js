@@ -23,7 +23,7 @@ export async function killInternalProcess() {
   return delay(1000);
 }
 
-const removeSQLite = () =>
+export const removeSQLite: () => Promise<any> = () =>
   new Promise((resolve, reject) =>
     rimraf(path.resolve(resolveUserDataDirectory(), "sqlite/"), e => {
       if (e) reject(e);

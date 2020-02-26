@@ -53,15 +53,7 @@ app.on("ready", async () => {
     return db.hasEncryptionKey(ns, keyPath);
   });
 
-  ipcMain.handle("setEncryptionKey", async (event, { ns, keyPath, encryptionKey }) => {
-    console.log("encryptionKey", encryptionKey);
-    try {
-      await internal.setPassword(encryptionKey);
-      console.log("setPassword success");
-    } catch (error) {
-      console.log("--- set password failed ---");
-      console.log(error);
-    }
+  ipcMain.handle("setEncryptionKey", (event, { ns, keyPath, encryptionKey }) => {
     return db.setEncryptionKey(ns, keyPath, encryptionKey);
   });
 
@@ -92,6 +84,17 @@ app.on("ready", async () => {
   ipcMain.handle("reloadRenderer", () => {
     console.log("reloading renderer ...");
     loadWindow();
+  });
+
+  ipcMain.handle("setLibcorePassword", async (event, { password }) => {
+    try {
+      await internal.setPassword(password);
+      if (!internal.process) {
+        await internal.start();
+      }
+    } catch (e) {
+      throw new Error("wrong password");
+    }
   });
 
   Menu.setApplicationMenu(menu);
