@@ -413,7 +413,7 @@
         "installed": "Installée",
         "uninstall": "Désinstaller",
         "notEnoughSpace": "Espace insuffisant",
-        "supported": "Supporté dans Ledger Live",
+        "supported": "Compatible Ledger Live",
         "addAccount": "Ajouter un compte",
         "addAccountTooltip": "Ajouter un compte {{appName}}",
         "addAccountWarn": "Veuillez attendre que les mises à jour soient terminées",
