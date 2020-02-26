@@ -72,7 +72,7 @@
     }
   },
   "byteSize": {
-    "bytes": "{{size}} bytes",
+    "bytes": "{{size}} bájt",
     "kbUnit": "{{size}} Kb",
     "mbUnit": "{{size}} Mb"
   },
@@ -360,7 +360,7 @@
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> szabad",
-      "noFreeSpace": "No storage left",
+      "noFreeSpace": "Nincs elég hely",
       "installed": "Telepített",
       "capacity": "Kapacitás",
       "used": "Felhasznált",
@@ -395,8 +395,8 @@
       },
       "updatable": {
         "title": "Frissítések elérhetők",
-        "progressTitle": "{{number}} App updates",
-        "progressWarning": "Do not quit the Manager during updates",
+        "progressTitle": "{{number}} Alkalmazás frissítések",
+        "progressWarning": "Ne lépj ki az eszközkezelőből a frissítés alatt",
         "progress": "Összes frissítése..."
       },
       "item": {
@@ -420,11 +420,11 @@
         "learnMore": "Tudj meg többet",
         "learnMoreTooltip": "Tudj meg többet a(z) {{appName}} alkalmazásról",
         "removeTooltip": "{{appName}} törlése",
-        "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
-        "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>",
-        "tokenAppDisclaimerInstalled": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>open the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>",
-        "goToAccounts": "Go to accounts",
-        "intallParentApp": "Install {{appName}} app"
+        "noAppNeededForToken": "{{appName}} telepítése a(z) {{tokenName}} tokenhez",
+        "tokenAppDisclaimer": "{{tokenName}} egy {{tokenType}} token, mely a(z) {{appName}} alkalmazást használja. {{tokenName}} kezeléséhez, <1>telepítsd a(z) {{appName}} alkalmazást </1> és küld a tokeneket a(z) <3> {{appName}} számládra </3>",
+        "tokenAppDisclaimerInstalled": "{{tokenName}} egy {{tokenType}} token, mely a(z) {{appName}} alkalmazást használja. A(z) {{tokenName}} kezeléséhez, <1>nyisd meg a(z) {{appName}} alkalmazást </1> és küld a tokeneket a(z) <3> {{appName}} számládra </3>",
+        "goToAccounts": "Irány a számlákhoz",
+        "intallParentApp": "{{appName}} alkalmazás telepítése"
       },
       "uninstall": {
         "title": "Összes törlése",
@@ -441,7 +441,7 @@
       "dependencyUninstall": {
         "title": " {{app}} és vele összefüggő alkalmazások törlése?",
         "showAll": "Eltávolítandó alkalmazások megjelenítése",
-        "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled as well.",
+        "description": "Pár telepített alkalmazásod társítva van a(z) {{app}} alkalmazáshoz. Ezek is el lesznek távolítva.",
         "confirm": "{{app}} és egyéb alkalmazások törlése"
       }
     },
