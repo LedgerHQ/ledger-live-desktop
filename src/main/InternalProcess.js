@@ -89,6 +89,23 @@ class InternalProcess {
     }
   }
 
+  changePassword(newPassword: string) {
+    logger.info("Changing Libcore password", logType);
+
+    if (!this.libcoreInitialized) {
+      throw new Error("Can't change password if libcore is not unlocked first!");
+    }
+
+    this.process &&
+      this.process.send({
+        type: "changeLibcorePassword",
+        currentPassword: this.password,
+        newPassword,
+      });
+
+    this.password = newPassword;
+  }
+
   start() {
     logger.info("Started internal process", logType);
 

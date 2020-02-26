@@ -8,6 +8,7 @@ import rimraf from "rimraf";
 import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import { delay } from "@ledgerhq/live-common/lib/promise";
 import { resetAll, cleanCache } from "~/renderer/storage";
+import { setLibcorePassword } from "~/renderer/libcoreEncryption";
 import { disable as disableDBMiddleware } from "./middlewares/db";
 import { clearBridgeCache } from "./bridge/cache";
 
@@ -60,6 +61,7 @@ export async function hardReset() {
   resetAll();
   window.localStorage.clear();
   await delay(500);
+  await setLibcorePassword("");
   await resetLibcore();
   log("clear-cache", "reload()");
   reload();

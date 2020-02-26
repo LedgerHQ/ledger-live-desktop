@@ -97,6 +97,10 @@ app.on("ready", async () => {
     }
   });
 
+  ipcMain.handle("changeLibcorePassword", async (event, { password }) =>
+    internal.changePassword(password),
+  );
+
   Menu.setApplicationMenu(menu);
 
   const windowParams = await db.getKey("windowParams", "MainWindow", {});

@@ -3,6 +3,10 @@ import invariant from "invariant";
 import implementLibcore from "@ledgerhq/live-common/lib/libcore/platforms/nodejs";
 import { withLibcore } from "@ledgerhq/live-common/lib/libcore/access";
 
+export const changePassword = async (currentPassword: string, newPassword: string) => {
+  withLibcore(async core => core.getPoolInstance().changePassword(currentPassword, newPassword));
+};
+
 export default async (dbPassword: string) => {
   const dbPath = process.env.LEDGER_LIVE_SQLITE_PATH;
   invariant(dbPath, "process.env.LEDGER_LIVE_SQLITE_PATH required");

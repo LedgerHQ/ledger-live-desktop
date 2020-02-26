@@ -10,6 +10,7 @@ import Button from "~/renderer/components/Button";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
 import PasswordForm from "./PasswordForm";
 import { setEncryptionKey, removeEncryptionKey, isEncryptionKeyCorrect } from "~/renderer/storage";
+import { changeLibcorePassword } from "~/renderer/libcoreEncryption";
 import { hasPasswordSelector } from "~/renderer/reducers/application";
 import { setHasPassword } from "~/renderer/actions/application";
 
@@ -34,9 +35,11 @@ const PasswordModal = () => {
       if (password) {
         dispatch(setHasPassword(true));
         await setEncryptionKey("app", "accounts", password);
+        await changeLibcorePassword(password);
       } else {
         dispatch(setHasPassword(false));
         await removeEncryptionKey("app", "accounts");
+        await changeLibcorePassword("");
       }
     },
     [dispatch],

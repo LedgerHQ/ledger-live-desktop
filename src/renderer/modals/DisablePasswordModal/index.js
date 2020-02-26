@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { PasswordIncorrectError } from "@ledgerhq/errors";
 import { useTranslation } from "react-i18next";
 import { setEncryptionKey, removeEncryptionKey, isEncryptionKeyCorrect } from "~/renderer/storage";
+import { changeLibcorePassword } from "~/renderer/libcoreEncryption";
 import { closeModal } from "~/renderer/actions/modals";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -35,9 +36,11 @@ const DisablePasswordModal = () => {
       if (password) {
         dispatch(setHasPassword(true));
         await setEncryptionKey("app", "accounts", password);
+        await changeLibcorePassword(password);
       } else {
         dispatch(setHasPassword(false));
         await removeEncryptionKey("app", "accounts");
+        await changeLibcorePassword("");
       }
     },
     [dispatch],

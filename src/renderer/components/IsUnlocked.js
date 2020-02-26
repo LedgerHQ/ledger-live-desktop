@@ -1,11 +1,12 @@
 // @flow
-import { ipcRenderer } from "electron";
+
 import React, { useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { PasswordIncorrectError } from "@ledgerhq/errors";
 import { setEncryptionKey, isEncryptionKeyCorrect, hasBeenDecrypted } from "~/renderer/storage";
+import { setLibcorePassword } from "~/renderer/libcoreEncryption";
 
 import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 
@@ -48,9 +49,6 @@ export const LockScreenDesc: ThemedComponent<{}> = styled(Box).attrs(() => ({
 }))`
   margin: 10px auto 25px;
 `;
-
-const setLibcorePassword = (password: string) =>
-  ipcRenderer.invoke("setLibcorePassword", { password });
 
 const IconWrapperCircle = styled(Box)`
   width: 50px;
