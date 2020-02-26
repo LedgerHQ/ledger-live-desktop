@@ -74,6 +74,7 @@ const Container = styled(Tabbable).attrs(() => ({
   px: 3,
   py: 2,
 }))`
+  position: relative;
   width: 100%;
   cursor: ${p => (p.disabled ? "not-allowed" : "pointer")};
   color: ${p =>

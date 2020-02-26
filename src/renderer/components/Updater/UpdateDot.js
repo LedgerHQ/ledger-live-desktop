@@ -21,20 +21,12 @@ export const Dot: ThemedComponent<{ status: UpdateStatus, collapsed?: ?boolean }
   opacity: ${getOpacity};
   background-color: ${getColor};
   border-radius: 50%;
-  ${p =>
-    p.collapsed
-      ? `
-      width: 12px;
-      height: 12px;
-      margin-left: -4px;
-      margin-top: -36px;
-      border:1.5px solid ${p.theme.colors.palette.background.paper};
-  `
-      : `
-      width: 8px;
-      height: 8px;
-  `}
-  transition: margin-top linear 200ms;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid ${p => p.theme.colors.palette.background.paper};
 `;
 
 const UpdateDot = ({ collapsed }: { collapsed: ?boolean }) => {
