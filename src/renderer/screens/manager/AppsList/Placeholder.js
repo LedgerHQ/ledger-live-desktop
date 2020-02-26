@@ -2,7 +2,8 @@
 import React, { useMemo, useCallback } from "react";
 import { Trans } from "react-i18next";
 
-import type { Action, InstalledItem, App } from "@ledgerhq/live-common/lib/apps/types";
+import type { Action, InstalledItem } from "@ledgerhq/live-common/lib/apps/types";
+import type { App } from "@ledgerhq/live-common/lib/types/manager";
 
 import { listTokens } from "@ledgerhq/live-common/lib/currencies";
 import manager from "@ledgerhq/live-common/lib/manager";
