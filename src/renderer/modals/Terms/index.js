@@ -68,13 +68,13 @@ const TermsModal = () => {
         modalFooterStyle={{ justifyContent: "stretch" }}
         renderFooter={() => (
           <Box
-            style={{ position: "relative" }}
+            style={{ position: "relative", width: "100%" }}
             grow
             horizontal
             justifyContent="space-between"
             alignItems="center"
           >
-            <Box style={{ width: "50%" }} horizontal alignItems="center" onClick={onSwitchAccept}>
+            <Box style={{ width: "75%" }} horizontal alignItems="center" onClick={onSwitchAccept}>
               <CheckBox isChecked={accepted} />
               <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
                 <Trans i18nKey="Terms.switchLabel" />
