@@ -39,7 +39,6 @@
     "reverify": "재확인",
     "verify": "확인",
     "copy": "복사",
-    "copyAddress": "복사",
     "copied": "복사됨",
     "addressCopied": "주소 복사됨",
     "experimentalFeature": "Experimental",
@@ -250,9 +249,6 @@
       "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
       "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
       "doItLaterBtn": "Do it later"
-    },
-    "connectDevice": {
-      "title": "{{currencyName}} update"
     },
     "progress": {
       "finished": {
@@ -511,12 +507,6 @@
         "title": "장치",
         "withoutDevice": "장치가 없습니까?"
       },
-      "confirmAddress": {
-        "title": "확인",
-        "action": "장치의 주소 확인",
-        "text": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
-        "support": "연락처"
-      },
       "receiveFunds": {
         "title": "수신"
       },
@@ -558,7 +548,6 @@
         "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
-        "title": "확인",
         "streaming": {
           "accurate": "Loading... ({{percentage}})",
           "inaccurate": "Loading..."
@@ -622,7 +611,6 @@
     "durationDays_plural": "{{count}} days",
     "howItWorks": "How delegation works",
     "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
-    "earnRewards": "Earn rewards",
     "overdelegated": "Overdelegated",
     "flow": {
       "steps": {
