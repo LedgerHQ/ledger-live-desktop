@@ -172,7 +172,7 @@
   "currentAddress": {
     "title": "Adresse actuelle",
     "for": "Adresse pour <1><0>{{name}}</0></1>",
-    "messageIfUnverified": "Veuillez vérifier que l’adresse {{currencyName}} affichée sur Ledger Live correspond à celle indiquée sur votre appareil",
+    "messageIfUnverified": "Verify that the shared address matches the one on your device",
     "messageIfSkipped": "Votre adresse {{name}} n’a pas été confirmée sur votre appareil Ledger. Veuillez la vérifier pour une sécurité optimale."
   },
   "emptyState": {
