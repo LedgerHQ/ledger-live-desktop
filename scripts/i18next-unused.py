@@ -8,7 +8,7 @@ hideFound = len(argv)>1
 
 
 folder1 = './src'
-locales = './src/renderer/i18n/en/app.json'
+locales = './static/i18n/en/app.json'
 files = []
 keys = {}
 excludedKeys = [
