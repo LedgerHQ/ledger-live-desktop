@@ -2,9 +2,10 @@
 import React, { useMemo, useCallback } from "react";
 import { Trans } from "react-i18next";
 
-import type { Action, InstalledItem } from "@ledgerhq/live-common/lib/apps/types";
+import type { Action, InstalledItem, App } from "@ledgerhq/live-common/lib/apps/types";
 
 import { listTokens } from "@ledgerhq/live-common/lib/currencies";
+import manager from "@ledgerhq/live-common/lib/manager";
 
 import Text from "~/renderer/components/Text";
 import NoResults from "~/renderer/icons/NoResults";
@@ -18,9 +19,10 @@ type Props = {
   addAccount: (*) => void,
   dispatch: Action => void,
   installed: InstalledItem[],
+  apps: App[],
 };
 
-const Placeholder = ({ query, addAccount, dispatch, installed }: Props) => {
+const Placeholder = ({ query, addAccount, dispatch, installed, apps }: Props) => {
   const found = useMemo(
     () =>
       tokens.find(
@@ -39,23 +41,31 @@ const Placeholder = ({ query, addAccount, dispatch, installed }: Props) => {
     [found, dispatch],
   );
 
-  const parentInstalled = useMemo(
+  const parent = useMemo(
     () =>
-      found &&
-      found.parentCurrency &&
-      installed.find(({ name }) => name === found.parentCurrency.name),
-    [found, installed],
+      found && found.parentCurrency && apps.find(({ name }) => name === found.parentCurrency.name),
+    [found, apps],
+  );
+
+  const parentInstalled = useMemo(
+    () => parent && installed.find(({ name }) => name === parent.name),
+    [parent, installed],
   );
 
   const goToAccounts = useCallback(() => addAccount(found), [addAccount, found]);
 
-  return found && found.parentCurrency ? (
+  return found && parent ? (
     <Box alignItems="center" pt={5} py={6}>
-      <Box ff="Inter|Regular" fontSize={5} color="palette.text.shade100">
+      <img alt="" src={manager.getIconUrl(parent.icon)} width={40} height={40} />
+      <Box mt={2} ff="Inter|Regular" fontSize={5} color="palette.text.shade100">
         <Trans
-          i18nKey="manager.applist.item.noAppNeededForToken"
+          i18nKey={
+            parentInstalled
+              ? "manager.applist.item.useAppForToken"
+              : "manager.applist.item.noAppNeededForToken"
+          }
           values={{
-            appName: found.parentCurrency.name,
+            appName: parent.name,
             tokenName: `${found.name} (${found.ticker})`,
           }}
         />
@@ -75,7 +85,7 @@ const Placeholder = ({ query, addAccount, dispatch, installed }: Props) => {
                 : "manager.applist.item.tokenAppDisclaimerInstalled"
             }
             values={{
-              appName: found.parentCurrency.name,
+              appName: parent.name,
               tokenName: found.name,
               tokenType: found.tokenType.toUpperCase(),
             }}
@@ -92,19 +102,14 @@ const Placeholder = ({ query, addAccount, dispatch, installed }: Props) => {
         </Text>
       </Box>
       <Box pt={5} horizontal>
-        <Button
-          outline
-          outlineColor="palette.text.shade60"
-          onClick={goToAccounts}
-          style={{ marginRight: 32 }}
-        >
+        <Button outline outlineColor="palette.text.shade60" onClick={goToAccounts}>
           <Trans i18nKey="manager.applist.item.goToAccounts" />
         </Button>
         {!parentInstalled && (
-          <Button primary onClick={install}>
+          <Button primary onClick={install} style={{ marginLeft: 32 }}>
             <Trans
               i18nKey="manager.applist.item.intallParentApp"
-              values={{ appName: found.parentCurrency.name }}
+              values={{ appName: parent.name }}
             />
           </Button>
         )}

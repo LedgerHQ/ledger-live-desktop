@@ -124,6 +124,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
           <Progress
             updating={updating}
             installing={installing}
+            isCurrent={installQueue.length > 0 && installQueue[0] === name}
             uninstalling={uninstalling}
             progress={progress}
           />
