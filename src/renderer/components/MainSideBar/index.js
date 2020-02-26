@@ -246,7 +246,7 @@ const MainSideBar = () => {
                 iconActiveColor="wallet"
                 onClick={handleClickDashboard}
                 isActive={location.pathname === "/"}
-                NotifComponent={noAccounts ? undefined : UpdateDot}
+                NotifComponent={noAccounts ? undefined : <UpdateDot collapsed={collapsed} />}
                 disabled={noAccounts}
                 collapsed={secondAnim}
               />
@@ -256,7 +256,7 @@ const MainSideBar = () => {
                 iconActiveColor="wallet"
                 isActive={location.pathname === "/accounts"}
                 onClick={handleClickAccounts}
-                NotifComponent={noAccounts ? UpdateDot : undefined}
+                NotifComponent={noAccounts ? <UpdateDot collapsed={collapsed} /> : undefined}
                 collapsed={secondAnim}
               />
               <SideBarListItem

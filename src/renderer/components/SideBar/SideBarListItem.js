@@ -13,7 +13,7 @@ export type Props = {
   icon?: any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
   disabled?: boolean,
   iconActiveColor: ?string,
-  NotifComponent?: React$ComponentType<*>,
+  NotifComponent?: React$Node,
   isActive?: boolean,
   onClick?: void => void,
   isActive?: boolean,
@@ -58,7 +58,7 @@ class SideBarListItem extends PureComponent<Props> {
               {!!desc && desc(this.props)}
             </Hide>
           </Box>
-          {NotifComponent && <NotifComponent collapsed={!!collapsed} />}
+          {NotifComponent}
         </Container>
       </Tooltip>
     );
