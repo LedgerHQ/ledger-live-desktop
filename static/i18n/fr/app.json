@@ -72,7 +72,9 @@
     }
   },
   "byteSize": {
-    "kbUnit": "{{size}}Ko"
+    "bytes": "{{size}} bytes",
+    "kbUnit": "{{size}} Kb",
+    "mbUnit": "{{size}} Mb"
   },
   "time": {
     "minute": "Minute",
@@ -358,7 +360,7 @@
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> libre",
-      "noFreeSpace": "Plus d'espace disponible",
+      "noFreeSpace": "No storage left",
       "installed": "Installée",
       "capacity": "Capacité",
       "used": "Utilisé",
@@ -393,8 +395,8 @@
       },
       "updatable": {
         "title": "Mises à jours disponibles",
-        "progressTitle": "{{number}} mises à jours d'applications",
-        "progressWarning": "Ne pas quitter le gestionnaire pendant la mise à jour",
+        "progressTitle": "{{number}} App updates",
+        "progressWarning": "Do not quit the Manager during updates",
         "progress": "Mise à jour..."
       },
       "item": {
@@ -417,7 +419,12 @@
         "addAccountWarn": "Veuillez attendre que les mises à jour soient terminées",
         "learnMore": "En savoir plus",
         "learnMoreTooltip": "En savoir plus sur {{appName}}",
-        "removeTooltip": "Désinstaller {{appName}}"
+        "removeTooltip": "Désinstaller {{appName}}",
+        "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
+        "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>",
+        "tokenAppDisclaimerInstalled": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>open the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>",
+        "goToAccounts": "Go to accounts",
+        "intallParentApp": "Install {{appName}} app"
       },
       "uninstall": {
         "title": "Tout désinstaller",
