@@ -262,6 +262,11 @@ const LoadingWrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+const ChildrenWrapper = styled.div`
+  opacity: ${p => (p.isLoading ? 0 : 1)};
+`;
+
 export const Base: ThemedComponent<*> = styled.button.attrs(p => ({
   ff: "Inter|SemiBold",
   fontSize: p.fontSize || (!p.small ? 4 : 3),
@@ -372,7 +377,7 @@ class Button extends PureComponent<
             <Spinner size={16} />
           </LoadingWrapper>
         ) : null}
-        {children}
+        <ChildrenWrapper isLoading={isLoading}>{children}</ChildrenWrapper>
       </Base>
     );
   }
