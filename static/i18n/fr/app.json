@@ -39,7 +39,6 @@
     "reverify": "Revérifier",
     "verify": "Vérifier",
     "copy": "Copier",
-    "copyAddress": "Copier",
     "copied": "Copié",
     "addressCopied": "Adresse copiée",
     "experimentalFeature": "Expérimental",
@@ -250,9 +249,6 @@
       "pendingDevices": "1 compte n'a pas pu être mis à jour. Veuillez connecter l'appareil associé au compte ci-dessous",
       "pendingDevices_plural": "{{totalMigratableAccounts}} comptes n'ont pas pu être mis à jour. Veuillez connecter l'appareil associé au compte ci-dessous",
       "doItLaterBtn": "Plus tard"
-    },
-    "connectDevice": {
-      "title": "Mise à jour de {{currencyName}}"
     },
     "progress": {
       "finished": {
@@ -511,12 +507,6 @@
         "title": "Appareil",
         "withoutDevice": "Vous n’avez pas votre appareil ?"
       },
-      "confirmAddress": {
-        "title": "Vérification",
-        "action": "Confirmez votre adresse sur l’appareil",
-        "text": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
-        "support": "Nous contacter"
-      },
       "receiveFunds": {
         "title": "Recevoir"
       },
@@ -558,7 +548,6 @@
         "unitPerByte": "{{unit}} par octet"
       },
       "verification": {
-        "title": "Vérification",
         "streaming": {
           "accurate": "Chargement... ({{percentage}})",
           "inaccurate": "Chargement en cours..."
@@ -622,7 +611,6 @@
     "durationDays_plural": "{{count}} jours",
     "howItWorks": "Comment fonctionne la délégation",
     "delegationEarn": "Vous pouvez maintenant obtenir des récompenses staking Tezos en déléguant votre compte.",
-    "earnRewards": "Obtenez des récompenses",
     "overdelegated": "Surdélégué",
     "flow": {
       "steps": {
