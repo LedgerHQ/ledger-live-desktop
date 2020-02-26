@@ -366,12 +366,12 @@
       "used": "Utilisé",
       "firmware": "Firmware {{version}}",
       "genuine": "L'appareil est authentique",
-      "incomplete": "Certaines applications ne sont pas reconnues par notre catalogue d'applications. Veuillez les désinstaller et les réinstaller."
+      "incomplete": "Some apps were not recognized by our App catalog. Please uninstall and reinstall them."
     },
     "applist": {
       "placeholder": "Aucune application ne correspond à la recherche et aux filtres sélectionnés",
       "placeholderNoAppsInstalled": "Aucune application installée sur votre appareil",
-      "placeholderGoToCatalog": "Allez dans le catalogue pour installer des applications",
+      "placeholderGoToCatalog": "Go to the App catalog to install apps",
       "noResultsFound": "Aucun résultat",
       "noResultsDesc": "Veuillez vérifier vos recherche et réessayer",
       "filter": {
@@ -420,6 +420,7 @@
         "learnMore": "En savoir plus",
         "learnMoreTooltip": "En savoir plus sur {{appName}}",
         "removeTooltip": "Désinstaller {{appName}}",
+        "useAppForToken": "{{tokenName}} tokens can be managed using the {{appName}} app",
         "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
         "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>",
         "tokenAppDisclaimerInstalled": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>open the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>",
