@@ -216,7 +216,7 @@
     "modal": {
       "title": "Vérification d'authenticité"
     },
-    "deviceInBootloader": "Votre appareil est en mode Bootloader. Cliquez sur {{button}} pour le mettre à jour."
+    "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
   },
   "tokensList": {
     "title": "Tokens",
@@ -362,15 +362,15 @@
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> libre",
       "noFreeSpace": "Plus d'espace disponible",
-      "installed": "Installée",
+      "installed": "Apps",
       "capacity": "Capacité",
       "used": "Utilisé",
       "firmware": "Firmware {{version}}",
       "genuine": "L'appareil est authentique",
-      "incomplete": "Certaines applications n'ont pas été reconnues par notre catalogue d'applications. Veuillez les désinstaller et les réinstaller."
+      "incomplete": "Some apps were not recognized. Please uninstall and reinstall them."
     },
     "applist": {
-      "placeholder": "Aucune application ne correspond à la recherche et aux filtres sélectionnés",
+      "placeholder": "No match for the search and selected filters",
       "placeholderNoAppsInstalled": "Aucune application installée sur votre appareil",
       "placeholderGoToCatalog": "Allez dans le catalogue d'applications pour installer des applications",
       "noResultsFound": "Aucun résultat",
@@ -397,7 +397,7 @@
       "updatable": {
         "title": "Mises à jours disponibles",
         "progressTitle": "{{number}} mises à jours d'applications",
-        "progressWarning": "Ne pas quitter le Manager pendant les mises à jour",
+        "progressWarning": "Do not quit Manager during update.",
         "progress": "Mise à jour..."
       },
       "item": {
@@ -408,11 +408,11 @@
         "scheduled": "En attente",
         "update": "Mise à jour disponible",
         "updateAll": "Tout mettre à jour",
-        "updateAllOutOfMemory": "Pas assez d'espace pour mettre à jour, veuillez désinstaller des applications",
+        "updateAllOutOfMemory": "Not enough storage to update, please uninstall some apps",
         "install": "Installer",
         "installed": "Installée",
         "uninstall": "Désinstaller",
-        "notEnoughSpace": "Espace insuffisant",
+        "notEnoughSpace": "Not enough storage",
         "supported": "Compatible Ledger Live",
         "addAccount": "Ajouter un compte",
         "addAccountTooltip": "Ajouter un compte {{appName}}",
@@ -430,7 +430,7 @@
       "uninstall": {
         "title": "Tout désinstaller",
         "subtitle": "Désinstaller toutes les applications ?",
-        "description": "Pas d'inquiétude, la désinstallation des applications n'affecte pas vos crypto actifs. Vous pouvez réinstaller des applications depuis le catalogue d'applications"
+        "description": "Don’t worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog."
       }
     },
     "apps": {
@@ -624,7 +624,7 @@
       "steps": {
         "starter": {
           "title": "Obtenez des récompenses staking",
-          "description": "Déléguez votre compte Tezos à un validateur tiers pour obtenir des récompenses en toute sécurité et en conservant le contrôle total de vos actifs",
+          "description": "Delegate your Tezos account to a third-party validator to earn staking rewards while keeping full security and control of your assets",
           "bullet": {
             "delegate": "Vous conservez la propriété de vos comptes délégués.",
             "access": "Vous pouvez accéder à vos actifs à tout moment.",
@@ -1199,7 +1199,7 @@
       "description": "Veuillez utiliser le Manager pour désinstaller toutes les applications et vérifier si une mise à jour du firmware est disponible avant de les réinstaller"
     },
     "FirmwareNotRecognized": {
-      "title": "Firmware non reconnu",
+      "title": "Device firmware is not recognized",
       "description": "Veuillez contacter l’assistance Ledger"
     },
     "HardResetFail": {
