@@ -32,6 +32,7 @@ async function notarizeApp(context) {
   await notarize({
     appBundleId: "com.ledger.live",
     appPath: path,
+    ascProvider: "EpicDreamSAS",
     appleId: APPLEID,
     appleIdPassword: APPLEID_PASSWORD,
   });
