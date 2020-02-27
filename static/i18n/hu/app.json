@@ -401,7 +401,6 @@
       },
       "item": {
         "version": "Verzió {{version}}",
-        "versionNew": "Verzió {{version}} (ÚJ{{newVersion}})",
         "installing": "Telepítés...",
         "uninstalling": "Törlés...",
         "updating": "Frissítés...",
