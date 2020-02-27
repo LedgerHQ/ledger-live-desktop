@@ -401,7 +401,6 @@
       },
       "item": {
         "version": "Version {{version}}",
-        "versionNew": "Version {{version}} (NOUVEAU{{newVersion}})",
         "installing": "Installation en cours...",
         "uninstalling": "Désinstallation...",
         "updating": "Mise à jour...",
