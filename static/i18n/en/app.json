@@ -374,7 +374,7 @@
       "placeholderNoAppsInstalled": "No apps installed on your device",
       "placeholderGoToCatalog": "Go to the App catalog to install apps",
       "noResultsFound": "No results found",
-      "noResultsDesc": "You can check on your device which apps are installed.",
+      "noResultsDesc": "Please verify the spelling and try again",
       "filter": {
         "title": "Show",
         "all": "All",
