@@ -37,6 +37,7 @@ import React, { useRef, useLayoutEffect, useState, useMemo } from "react";
 import ChartJs from "chart.js";
 import styled from "styled-components";
 import Color from "color";
+import moment from "moment";
 
 import useTheme from "~/renderer/hooks/useTheme";
 import Tooltip from "./Tooltip";
@@ -67,7 +68,15 @@ const ChartContainer: ThemedComponent<{}> = styled.div.attrs(({ height }) => ({
   position: relative;
 `;
 
-const Chart = ({ height, data, color, renderTickY, renderTooltip, valueKey = "value" }: Props) => {
+const Chart = ({
+  height,
+  data,
+  color,
+  renderTickY,
+  renderTooltip,
+  valueKey = "value",
+  dateFormat = "MMM D",
+}: Props) => {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
   const theme = useTheme("colors.palette");
@@ -76,6 +85,7 @@ const Chart = ({ height, data, color, renderTickY, renderTooltip, valueKey = "va
 
   const generatedData = useMemo(
     () => ({
+      labels: data.map(d => moment(d.date).format(dateFormat)),
       datasets: [
         {
           label: "all accounts",
@@ -95,7 +105,7 @@ const Chart = ({ height, data, color, renderTickY, renderTooltip, valueKey = "va
         },
       ],
     }),
-    [color, data, valueKey],
+    [color, data, valueKey, dateFormat],
   );
 
   const generateOptions = useMemo(
@@ -115,28 +125,6 @@ const Chart = ({ height, data, color, renderTickY, renderTooltip, valueKey = "va
         display: false,
       },
       scales: {
-        xAxes: [
-          {
-            type: "time",
-            gridLines: {
-              display: false,
-              color: theme.text.shade10,
-            },
-            ticks: {
-              fontColor: theme.text.shade60,
-              fontFamily: "Inter",
-              maxTicksLimit: 7,
-              maxRotation: 0,
-              minRotation: 0,
-            },
-            time: {
-              minUnit: "day",
-              displayFormats: {
-                quarter: "MMM YYYY",
-              },
-            },
-          },
-        ],
         yAxes: [
           {
             gridLines: {
