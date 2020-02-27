@@ -99,7 +99,7 @@ const InstallSuccessBanner = ({ state, isIncomplete, dispatch, addAccount, disab
   return (
     <Container ref={cardRef}>
       <FadeInOutBox in={visible} timing={800} color="palette.primary.contrastText">
-        <Box horizontal pt={1} overflow="hidden">
+        <Box horizontal pt={2} overflow="hidden">
           <Box
             borderRadius={1}
             flex="1"
