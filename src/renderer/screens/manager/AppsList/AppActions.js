@@ -84,7 +84,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
     isLiveSupported,
     addAccount,
   }: Props) => {
-    const { name } = app;
+    const { name, supportURL } = app;
     const { installedAvailable, installQueue, uninstallQueue, updateAllQueue } = state;
 
     const needsInstallDeps = useAppInstallNeedsDeps(state, app);
@@ -106,8 +106,8 @@ const AppActions: React$ComponentType<Props> = React.memo(
     }, [addAccount]);
 
     const onSupportLink = useCallback(() => {
-      openURL(urls.appSupport);
-    }, []);
+      openURL(supportURL || urls.appSupport);
+    }, [supportURL]);
 
     const updating = useMemo(() => updateAllQueue.includes(name), [updateAllQueue, name]);
     const installing = useMemo(() => installQueue.includes(name), [installQueue, name]);
