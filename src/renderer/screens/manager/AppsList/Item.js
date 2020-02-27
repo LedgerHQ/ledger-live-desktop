@@ -27,8 +27,10 @@ const AppRow = styled.div`
 `;
 
 const AppName = styled.div`
+  flex: 1;
   flex-direction: column;
   padding-left: 15px;
+  max-height: 40px;
   & > * {
     display: block;
   }
@@ -98,14 +100,9 @@ const Item: React$ComponentType<Props> = ({
           }`}</Text>
           <Text ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
             <Trans
-              i18nKey={
-                installed && !installed.updated
-                  ? "manager.applist.item.versionNew"
-                  : "manager.applist.item.version"
-              }
+              i18nKey="manager.applist.item.version"
               values={{
-                version,
-                newVersion: newVersion && newVersion !== version ? ` ${newVersion}` : null,
+                version: onlyUpdate && newVersion && newVersion !== version ? newVersion : version,
               }}
             />
           </Text>
@@ -120,7 +117,7 @@ const Item: React$ComponentType<Props> = ({
       <Box flex="0.6" horizontal alignContent="center" justifyContent="center">
         {isLiveSupported && (
           <>
-            <Box mr={2}>
+            <Box pr={2}>
               <IconCheckFull size={16} />
             </Box>
             <Text ml={1} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>

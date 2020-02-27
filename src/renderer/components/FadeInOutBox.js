@@ -28,10 +28,16 @@ type Props = {
   ...
 };
 
-const UpdateAllApps = ({ timing = 400, unmountOnExit = true, children, ...rest }: Props) => {
+const UpdateAllApps = ({
+  timing = 400,
+  unmountOnExit = true,
+  children,
+  in: _in,
+  ...rest
+}: Props) => {
   return (
     <Transition
-      in={rest.in}
+      in={_in}
       unmountOnExit
       timeout={{
         appear: 0,
