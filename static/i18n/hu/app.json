@@ -216,7 +216,7 @@
     "modal": {
       "title": "Eredetiség ellenőrzés"
     },
-    "deviceInBootloader": "Az eszköz Bootloader módban. Kattints a Folytatásra a frissítéshez."
+    "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
   },
   "tokensList": {
     "title": "Tokenek",
@@ -362,15 +362,15 @@
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> szabad",
       "noFreeSpace": "Nincs elég hely",
-      "installed": "Telepített",
+      "installed": "Apps",
       "capacity": "Kapacitás",
       "used": "Felhasznált",
       "firmware": "Szoftver {{version}}",
       "genuine": "Az eszköz eredeti",
-      "incomplete": "Some apps were not recognized by our App catalog. Please uninstall and reinstall them."
+      "incomplete": "Some apps were not recognized. Please uninstall and reinstall them."
     },
     "applist": {
-      "placeholder": "Nincsenek a keresésnek és szűrőknek megfelelő alkalmazások",
+      "placeholder": "No match for the search and selected filters",
       "placeholderNoAppsInstalled": "Nincsenek telepített alkalmazások az eszközödön",
       "placeholderGoToCatalog": "Go to the App catalog to install apps",
       "noResultsFound": "Nincs találat",
@@ -397,7 +397,7 @@
       "updatable": {
         "title": "Frissítések elérhetők",
         "progressTitle": "{{number}} Alkalmazás frissítések",
-        "progressWarning": "Ne lépj ki az eszközkezelőből a frissítés alatt",
+        "progressWarning": "Do not quit Manager during update.",
         "progress": "Összes frissítése..."
       },
       "item": {
@@ -408,11 +408,11 @@
         "scheduled": "Sorban áll",
         "update": "Frissítés elérhető",
         "updateAll": "Összes frissítése",
-        "updateAllOutOfMemory": "Nincs elég hely a frissítéshez, kérlek törölj pár alkalmazást",
+        "updateAllOutOfMemory": "Not enough storage to update, please uninstall some apps",
         "install": "Telepítés",
         "installed": "Telepített",
         "uninstall": "Törlés",
-        "notEnoughSpace": "Nincs elég hely",
+        "notEnoughSpace": "Not enough storage",
         "supported": "Ledger Live által támogatott",
         "addAccount": "Számla hozzáadása",
         "addAccountTooltip": "{{appName}} számla hozzáadása",
@@ -430,7 +430,7 @@
       "uninstall": {
         "title": "Összes törlése",
         "subtitle": "Minden alkalmazás törlése?",
-        "description": "Ne aggódj, az alkalmazások törlése nem érinti a bennük tárolt kriptóidat. Újratelepítheted őket az Alkalmazás katalógusban"
+        "description": "Don’t worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog."
       }
     },
     "apps": {
@@ -624,7 +624,7 @@
       "steps": {
         "starter": {
           "title": "Kapj tárolási jutalmakat",
-          "description": "Kapj tárolási jutalmakat Tezos számlád harmadik személy általi megerősítésre történő delegálásával, miközben teljes biztonságban és irányítás alatt tartod a kriptód",
+          "description": "Delegate your Tezos account to a third-party validator to earn staking rewards while keeping full security and control of your assets",
           "bullet": {
             "delegate": "Delegált számláid a tieid maradnak.",
             "access": "Bármikor hozzáférhetsz a kriptóidhoz.",
@@ -1199,7 +1199,7 @@
       "description": "Kérlek, használd az eszközkezelőt minden alkalmazás törléséhez és ellenőrizd, hogy elérhető-e szoftverfrissítés mielőtt újratelepítenéd őket"
     },
     "FirmwareNotRecognized": {
-      "title": "A Szoftver nem lett felismerve",
+      "title": "Device firmware is not recognized",
       "description": "Kérlek, lépj kapcsolatba a Ledger ügyféltámogatással"
     },
     "HardResetFail": {

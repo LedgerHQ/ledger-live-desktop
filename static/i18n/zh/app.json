@@ -216,7 +216,7 @@
     "modal": {
       "title": "正版查验"
     },
-    "deviceInBootloader": "Device in Bootloader mode. Click on Continue to update it."
+    "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
   },
   "tokensList": {
     "title": "代币",
@@ -362,15 +362,15 @@
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> free",
       "noFreeSpace": "No storage left",
-      "installed": "Installed",
+      "installed": "Apps",
       "capacity": "Capacity",
       "used": "Used",
       "firmware": "Firmware {{version}}",
       "genuine": "Device is genuine",
-      "incomplete": "Some apps were not recognized by our App catalog. Please uninstall and reinstall them."
+      "incomplete": "Some apps were not recognized. Please uninstall and reinstall them."
     },
     "applist": {
-      "placeholder": "There are no apps matching the search and filters selected",
+      "placeholder": "No match for the search and selected filters",
       "placeholderNoAppsInstalled": "No apps installed on your device",
       "placeholderGoToCatalog": "Go to the App catalog to install apps",
       "noResultsFound": "No results found",
@@ -397,7 +397,7 @@
       "updatable": {
         "title": "Updates available",
         "progressTitle": "{{number}} App updates",
-        "progressWarning": "Do not quit the Manager during updates",
+        "progressWarning": "Do not quit Manager during update.",
         "progress": "Updating all..."
       },
       "item": {
@@ -408,11 +408,11 @@
         "scheduled": "Queued",
         "update": "Update available",
         "updateAll": "Update all",
-        "updateAllOutOfMemory": "Not enough space to update, please uninstall some apps",
+        "updateAllOutOfMemory": "Not enough storage to update, please uninstall some apps",
         "install": "Install",
         "installed": "Installed",
         "uninstall": "Uninstall",
-        "notEnoughSpace": "Not enough space",
+        "notEnoughSpace": "Not enough storage",
         "supported": "Ledger Live supported",
         "addAccount": "Add account",
         "addAccountTooltip": "Add {{appName}} account",
@@ -430,7 +430,7 @@
       "uninstall": {
         "title": "Uninstall all",
         "subtitle": "Uninstall all apps?",
-        "description": "Don’t worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog"
+        "description": "Don’t worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog."
       }
     },
     "apps": {
@@ -624,7 +624,7 @@
       "steps": {
         "starter": {
           "title": "Earn staking rewards",
-          "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets",
+          "description": "Delegate your Tezos account to a third-party validator to earn staking rewards while keeping full security and control of your assets",
           "bullet": {
             "delegate": "Delegated accounts stay yours.",
             "access": "You can access your assets anytime.",
@@ -1199,7 +1199,7 @@
       "description": "请使用管理器卸载所有应用程序，并在重装应用前，检查是否有安装固件更新"
     },
     "FirmwareNotRecognized": {
-      "title": "Firmware is not recognized",
+      "title": "Device firmware is not recognized",
       "description": "Please contact Ledger Support"
     },
     "HardResetFail": {
