@@ -1,6 +1,5 @@
 // @flow
-import { remote } from "electron";
-import fs from "fs";
+import { remote, ipcRenderer } from "electron";
 import React, { PureComponent } from "react";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
@@ -38,17 +37,16 @@ const mapDispatchToProps = {
   closeModal,
 };
 
-function writeToFile(file, data) {
-  return new Promise((resolve, reject) => {
-    fs.writeFile(file, data, error => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve();
-      }
-    });
-  });
-}
+const exportOperations = async (
+  path: { canceled: boolean, filePath: string },
+  csv: string,
+  callback?: () => void,
+) => {
+  await ipcRenderer.invoke("export-operations", path, csv);
+  if (callback) {
+    callback();
+  }
+};
 
 class ExportOperations extends PureComponent<Props, State> {
   state = {
@@ -59,7 +57,7 @@ class ExportOperations extends PureComponent<Props, State> {
   export = async () => {
     const { accounts } = this.props;
     const { checkedIds } = this.state;
-    const path = remote.dialog.showSaveDialog({
+    const path = await remote.dialog.showSaveDialog({
       title: "Exported account transactions",
       defaultPath: `ledgerlive-operations-${moment().format("YYYY.MM.DD")}.csv`,
       filters: [
@@ -71,11 +69,13 @@ class ExportOperations extends PureComponent<Props, State> {
     });
 
     if (path) {
-      writeToFile(
+      exportOperations(
         path,
         accountsOpToCSV(accounts.filter(account => checkedIds.includes(account.id))),
+        () => {
+          this.setState({ success: true });
+        },
       );
-      this.setState({ success: true });
     }
   };
 

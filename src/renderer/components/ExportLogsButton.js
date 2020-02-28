@@ -10,8 +10,7 @@ import getUser from "~/helpers/user";
 import Button from "~/renderer/components/Button";
 
 const saveLogs = async (path: { canceled: boolean, filePath: string }) => {
-  const res = await ipcRenderer.invoke("save-logs", path);
-  console.log("res", res);
+  await ipcRenderer.invoke("save-logs", path);
 };
 
 type RestProps = {|

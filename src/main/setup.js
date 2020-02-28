@@ -31,6 +31,15 @@ ipcMain.handle("save-logs", async (event, path: { canceled: boolean, filePath: s
   ),
 );
 
+ipcMain.handle(
+  "export-operations",
+  async (event, path: { canceled: boolean, filePath: string }, csv: string) => {
+    Promise.resolve().then(
+      () => !path.canceled && path.filePath && csv && fsWriteFile(path.filePath, csv),
+    );
+  },
+);
+
 process.setMaxListeners(0);
 
 // eslint-disable-next-line no-console
