@@ -195,6 +195,10 @@ const useHook = (device: ?Device, appRequest: AppRequest): AppState => {
             // no debounce for allow event
             return empty();
           }
+          if (!s.device) {
+            // extra debounce for the disconnect event
+            return interval(2000);
+          }
           // default debounce (to be tweak)
           return interval(1500);
         }),
