@@ -4,7 +4,7 @@
   "description": "Ledger Live - Desktop",
   "version": "1.107.0",
   "author": "Ledger Live Team <team-live@ledger.fr>",
-  "repository": "https://github.com/LedgerHQ/lld-v2",
+  "repository": "https://github.com/LedgerHQ/ledger-live-desktop",
   "license": "MIT",
   "private": true,
   "main": "./.webpack/main.bundle.js",
