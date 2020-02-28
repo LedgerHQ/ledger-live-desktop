@@ -1,13 +1,11 @@
 {
   "common": {
-    "loading": "Loading",
     "labelYes": "예",
     "labelNo": "아니오",
     "never": "결코 아님",
     "apply": "신청",
     "done": "Done",
     "confirm": "확인",
-    "connecting": "Connecting..",
     "cancel": "취소",
     "getSupport": "지원 받기",
     "delete": "삭제",
@@ -26,12 +24,9 @@
     "selectExchangeNoOption": "\"{{exchangeName}}\"와(과) 일치하는 거래소 없음",
     "selectExchangeNoOptionAtAll": "거래소를 찾을 수 없음",
     "sortBy": "정렬 기준",
-    "search": "검색",
     "save": "저장",
     "lock": "잠금",
     "showMore": "자세히 표시",
-    "max": "최대",
-    "new": "New",
     "back": "뒤로",
     "reset": "재설정",
     "retry": "다시 시도",
@@ -44,13 +39,12 @@
     "reverify": "재확인",
     "verify": "확인",
     "copy": "복사",
-    "copyAddress": "복사",
     "copied": "복사됨",
     "addressCopied": "주소 복사됨",
     "experimentalFeature": "Experimental",
     "dismiss": "Dismiss",
-    "choose": "Choose",
     "information": "Information",
+    "search": "Search...",
     "lockScreen": {
       "title": "다시 돌아오신 것을 환영합니다.",
       "subTitle": null,
@@ -78,31 +72,20 @@
       "UNDELEGATE": "Undelegated"
     }
   },
+  "byteSize": {
+    "bytes": "{{size}} bytes",
+    "kbUnit": "{{size}} Kb",
+    "mbUnit": "{{size}} Mb"
+  },
   "time": {
-    "day": "일",
-    "day_plural": "Days",
-    "week": "주",
-    "week_plural": "Weeks",
-    "month": "월",
-    "month_plural": "Months",
-    "year": "년",
-    "year_plural": "Years",
     "minute": "분",
     "minute_plural": "Minutes",
-    "second": "초",
-    "second_plural": "Seconds",
     "hour": "시",
     "hour_plural": "Hours",
     "range": {
       "week": "1W",
       "month": "1M",
       "year": "1Y"
-    },
-    "since": {
-      "day": "전날",
-      "week": "지난 주",
-      "month": "지난 달",
-      "year": "지난 해"
     }
   },
   "fees": {
@@ -118,12 +101,7 @@
     "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "관리자",
-    "exchange": "암호화 자산 구입",
-    "developer": "개발 도구",
-    "newUpdate": {
-      "title": "New Update",
-      "description": "Your accounts have been moved to a new dedicated page!"
-    }
+    "exchange": "암호화 자산 구입"
   },
   "stars": {
     "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
@@ -151,10 +129,6 @@
       "unit": {
         "title": "단위",
         "desc": "표시할 단위 선택"
-      },
-      "endpointConfig": {
-        "title": "노드",
-        "desc": "사용할 API 노드"
       }
     }
   },
@@ -185,7 +159,6 @@
     }
   },
   "banners": {
-    "promoteMobile": "이제 {{productName}}을(를) 통해 모바일에서 제공되는 Ledger Live를 즐기세요.",
     "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "{{coinName}}은(는) 더 이상 지원되지 않습니다."
   },
@@ -195,36 +168,16 @@
       "desc": "더 많은 암호화 자산을 관리하려면 계정을 추가하십시오.",
       "createAccount": "계정 추가"
     },
-    "accounts": {
-      "title": "계정 ({{count}})"
-    },
-    "greeting": {
-      "morning": "안녕하세요.",
-      "evening": "안녕하세요.",
-      "afternoon": "안녕하세요."
-    },
-    "summary": "다음은 귀하의 계정 요약입니다.",
-    "summary_plural": "다음은 귀하의 {{count}} 계정 요약입니다.",
     "recentActivity": "마지막 작업",
     "totalBalance": "총 잔액"
   },
   "currentAddress": {
     "title": "현재 주소",
     "for": "Address for <1><0>{{name}}</0></1>",
-    "messageIfUnverified": "장치에 표시된 {{currencyName}} 주소가 컴퓨터에 표시된 주소와 일치하는지 확인하십시오.",
-    "messageIfAccepted": "주소가 확인되었습니다. 복사/붙여넣기를 하거나 QR 코드를 스캔하는 경우 주소를 다시 확인하십시오.",
-    "messageIfSkipped": "Ledger 장치에서 귀하의 {{currencyName}} 주소가 확인되지 않았습니다. 최적의 보안을 위해 주소를 확인하십시오."
-  },
-  "deviceConnect": {
-    "dashboard": "장치의 <1>대시 보드</1>로 이동",
-    "step1": "<1>Ledger 장치</1> 연결 및 잠금 해제",
-    "step2": "Open the <1><0>{{managerAppName}}</0></1> app on your device",
-    "step3": "장치에서 <1>Ledger Manager</1> 허용"
+    "messageIfUnverified": "Verify that the shared address matches the one on your device",
+    "messageIfSkipped": "Your {{name}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
   "emptyState": {
-    "sidebar": {
-      "text": "포트폴리오에 계정을 추가하려면 이 버튼을 클릭하십시오."
-    },
     "dashboard": {
       "title": "앱 설치 또는 계정 추가",
       "desc": "Manager를 열고 앱을 설치하거나 장치에 이미 앱이 설치되어 있는 경우 계정을 추가하십시오.",
@@ -251,6 +204,7 @@
     "paybis": "Paybis.com is one of the most trusted cryptocurrency brokers worldwide since 2014, customer satisfaction - 4.7/5 via Trustpilot. Visa/Master cards, Bank Transfers, Skrill/Neteller accepted. 24/7 online customer support.",
     "shapeshift": "ShapeShift는 사용자가 디지털 자산을 구입 및 판매할 수 있는 온라인 마켓 플레이스입니다. 전 세계에서 디지털 자산을 구입 및 판매할 수 있는 빠르고 안전한 방법으로, 오랜 가입 절차, 거래 상대방 위험 및 마찰이 없습니다.",
     "simplex": "Simplex는 사기로부터 자유로운 신용 카드 결제 솔루션을 제공하는 EU 허가 금융 기관입니다.",
+    "swft": "SWFT Blockchain is a worldwide cross-blockchain transfer protocol and payment network, enabling simpler, faster and safer swaps between over 200 cryptocurrencies and free crypto payments to anyone anywhere",
     "taxtoken": "미국 시민을 위한 자동화된 암호 화폐 세금 및 비용 기반 소프트웨어입니다.",
     "thorswap": "ThorSwap은 아토믹 스왑(atomic swap) 기술을 통해 제공되는 즉각적이고 안전하며 공정한 암호 자산 시장입니다. 등록이 필요 없고 소액 거래는 KYC가 없는, 거래를 시작하는 가장 편리한 방법입니다.",
     "bitpanda": "Bitpanda는 Bitcoin, Ethereum, IOTA 등을 매매할 수 있는 유럽 최고의 소매 브로커입니다. 신용 카드, SOFORT-Transfer, NETELLER 및 기타 옵션을 사용하여 입급하실 수 있습니다.",
@@ -262,7 +216,7 @@
     "modal": {
       "title": "정품 확인"
     },
-    "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
+    "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
   },
   "tokensList": {
     "title": "Tokens",
@@ -285,7 +239,6 @@
   "migrateAccounts": {
     "overview": {
       "title": "Ledger Live accounts update",
-      "done": "Ledger Live accounts update completed",
       "successTitle": "Accounts updated successfully",
       "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
       "successDesc": "Your {{assets}} account is now updated and ready to use",
@@ -299,10 +252,6 @@
       "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
       "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
       "doItLaterBtn": "Do it later"
-    },
-    "connectDevice": {
-      "title": "{{currencyName}} update",
-      "description": ""
     },
     "progress": {
       "finished": {
@@ -331,17 +280,10 @@
       "import": "계정",
       "finish": "확인"
     },
-    "connectDevice": {
-      "desc": "<1><0>{{currencyName}}</0></1> 계정을 추가하려면 아래 단계를 따르십시오."
-    },
     "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "기존 계정 추가",
     "selectAll": "모든 ({{count}}) 선택",
     "unselectAll": "모든 ({{count}}) 선택 해제",
-    "newAccount": "새 계정",
-    "legacyAccount": "{{accountName}} (legacy)",
-    "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
-    "unsplitAccount": "{{accountName}} (unsplit)",
     "noAccountToImport": "추가할 기존 {{currencyName}} 계정이 없습니다.",
     "success": "계정이 성공적으로 추가되었습니다.",
     "success_plural": "계정이 성공적으로 추가되었습니다.",
@@ -384,7 +326,6 @@
     "from": "수신",
     "to": "발신",
     "identifier": "트랜잭션 ID",
-    "whatIsThis": "What is this operation?",
     "viewOperation": "탐색기에서 보기",
     "showMore": "{{recipients}} 자세히 표시",
     "showLess": "간단히 표시",
@@ -400,30 +341,112 @@
   "operationList": {
     "noMoreOperations": "모두 끝났습니다."
   },
+  "DeviceAction": {
+    "allowAppPermission": "Open the {{wording}} app on your device",
+    "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
+    "allowManagerPermission": "{{wording}} on your device",
+    "loading": "Loading...",
+    "connectAndUnlockDevice": "Connect and unlock your device",
+    "unlockDevice": "Unlock your device",
+    "quitApp": "Quit the application on your device",
+    "appNotInstalled": "Please install the {{appName}} app",
+    "openManager": "Open Manager"
+  },
   "manager": {
-    "yourDeviceIsGenuine": "귀하의 장치는 정품입니다.",
-    "goToAccounts": "Go to accounts",
-    "intallEthApp": "Install Ethereum app",
+    "tabs": {
+      "appCatalog": "App catalog",
+      "appCatalogSearch": "Search app in catalog...",
+      "appsOnDevice": "Apps installed",
+      "appOnDeviceSearch": "Search installed apps..."
+    },
+    "deviceStorage": {
+      "freeSpace": "<0>{{space}}</0> free",
+      "noFreeSpace": "No storage left",
+      "installed": "Apps",
+      "capacity": "Capacity",
+      "used": "Used",
+      "firmware": "Firmware {{version}}",
+      "genuine": "Device is genuine",
+      "incomplete": "Some apps were not recognized. Please uninstall and reinstall them."
+    },
+    "applist": {
+      "placeholder": "No match for the search and selected filters",
+      "placeholderNoAppsInstalled": "No apps installed on your device",
+      "placeholderGoToCatalog": "Go to the App catalog to install apps",
+      "noResultsFound": "No results found",
+      "noResultsDesc": "Please verify the spelling and try again",
+      "filter": {
+        "title": "Show",
+        "all": "All",
+        "supported": "Supported in Live",
+        "installed": "Installed",
+        "not_installed": "Not installed"
+      },
+      "sort": {
+        "title": "Sort",
+        "name_asc": "Name A-Z",
+        "name_desc": "Name Z-A",
+        "marketcap_desc": "Market cap"
+      },
+      "installSuccess": {
+        "title": "App successfully installed, you can now add your {{app}} accounts",
+        "title_plural": "Apps successfully installed, you can now add your accounts",
+        "manageAccount": "Manage my accounts",
+        "later": "Do it later"
+      },
+      "updatable": {
+        "title": "Updates available",
+        "progressTitle": "{{number}} App updates",
+        "progressWarning": "Do not quit Manager during update.",
+        "progress": "Updating all..."
+      },
+      "item": {
+        "version": "Version {{version}}",
+        "installing": "Installing...",
+        "uninstalling": "Uninstalling...",
+        "updating": "Updating...",
+        "scheduled": "Queued",
+        "update": "Update available",
+        "updateAll": "Update all",
+        "updateAllOutOfMemory": "Not enough storage to update, please uninstall some apps",
+        "install": "Install",
+        "installed": "Installed",
+        "uninstall": "Uninstall",
+        "notEnoughSpace": "Not enough storage",
+        "supported": "Ledger Live supported",
+        "addAccount": "Add account",
+        "addAccountTooltip": "Add {{appName}} account",
+        "addAccountWarn": "Please wait for the app updates to finish",
+        "learnMore": "Learn more",
+        "learnMoreTooltip": "Learn more about {{appName}}",
+        "removeTooltip": "Uninstall {{appName}}",
+        "useAppForToken": "{{tokenName}} tokens can be managed using the {{appName}} app",
+        "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
+        "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>",
+        "tokenAppDisclaimerInstalled": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>open the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>",
+        "goToAccounts": "Go to accounts",
+        "intallParentApp": "Install {{appName}} app"
+      },
+      "uninstall": {
+        "title": "Uninstall all",
+        "subtitle": "Uninstall all apps?",
+        "description": "Don’t worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog."
+      }
+    },
     "apps": {
-      "install": "설치",
-      "all": "앱 카탈로그",
-      "installing": "{{app}} 설치 중...",
-      "uninstalling": "{{app}} 제거 중...",
-      "installSuccess": "{{app}} was successfully installed",
-      "unsupportedSuccess": "Learn how to use {{app}}",
-      "uninstallSuccess": "{{app}} 제거됨",
-      "supportedCurrency": "{{app}} is now installed on your {{device}}.",
-      "supportedCurrencyNeedAccount": "{{app}} is now installed on your {{device}}. You need to add a {{currency}} account in order to receive and manage assets.",
-      "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
-      "help": "어떤 앱이 이미 설치되어 있는지 장치를 확인하십시오.",
-      "installed": "App installed",
-      "uninstalled": "App uninstalled",
-      "addAccount": "Add {{name}} account",
-      "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
-      "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>"
+      "dependencyInstall": {
+        "title": "{{dependency}} app is required",
+        "description": "The {{dependency}} app will also be installed because the {{app}} app needs it.",
+        "confirm": "Install apps"
+      },
+      "dependencyUninstall": {
+        "title": " Uninstall {{app}} and its related apps?",
+        "showAll": "Show apps to uninstall",
+        "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled as well.",
+        "confirm": "Uninstall {{app}} and other apps"
+      }
     },
     "firmware": {
-      "installed": "펌웨어 버전 {{version}}",
       "updateLater": "Cancel",
       "seedReady": "I have my recovery phrase",
       "dontHaveSeed": "Don't have your recovery phrase?",
@@ -434,14 +457,10 @@
       "latest": "펌웨어 버전 {{version}}을(를) 사용할 수 있습니다.",
       "prepareSeed": "Make sure your 24-word recovery phrase is written down on your Recovery sheet and accessible, as a precaution.",
       "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
-      "disclaimerAppDelete": "일부 앱을 제거하여 공간을 확보하십시오. 그렇게 해도 귀하의 암호화 자산에는 영향을 미치지 않습니다.",
-      "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded",
       "appsAutoUninstallTitle": "All applications will be uninstalled from your device",
       "appsAutoUninstallBullet1": "<0><0>Don't worry</0></0>, this does not affect your crypto assets",
-      "appsAutoUninstallBullet2": "You will be able to reinstall them all after the update",
-      "appsUninstallTitle": "Apps will be uninstalled",
-      "appsUninstallDesc": "All applications will be uninstalled from your device for the firmware update. You will be able to reinstall them after the update. Don't worry, this does not affect your crypto assets."
+      "appsAutoUninstallBullet2": "You will be able to reinstall them all after the update"
     },
     "modal": {
       "steps": {
@@ -465,7 +484,6 @@
       "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "펌웨어 업데이트됨",
       "successText": "장치에 앱을 다시 설치하십시오.",
-      "resetTitle": "Prepare Device",
       "resetSteps": {
         "first": "1. Reset your device",
         "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
@@ -481,17 +499,11 @@
         "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
         "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secured on your Recovery sheet."
       }
-    },
-    "title": "Manager",
-    "subtitle": "장치에 앱 설치 또는 제거",
-    "device": {
-      "title": "장치 연결",
-      "desc": "Manager를 열려면 아래의 단계를 따르십시오.",
-      "cta": "장치 연결"
     }
   },
   "receive": {
     "title": "수신",
+    "successTitle": "Address shared securely",
     "steps": {
       "chooseAccount": {
         "title": "계정",
@@ -501,14 +513,7 @@
       },
       "connectDevice": {
         "title": "장치",
-        "withoutDevice": "장치가 없습니까?",
-        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
-      },
-      "confirmAddress": {
-        "title": "확인",
-        "action": "장치의 주소 확인",
-        "text": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
-        "support": "연락처"
+        "withoutDevice": "장치가 없습니까?"
       },
       "receiveFunds": {
         "title": "수신"
@@ -520,66 +525,9 @@
       }
     }
   },
-  "managerv2": {
-    "loading": {
-      "step4": {
-        "title": "Loading apps and fancy stuff"
-      }
-    },
-    "device": {
-      "title": "Connect your device",
-      "desc": "Follow the steps below to open the Manager v2",
-      "cta": "Connect my device"
-    },
-    "tabs": {
-      "appCatalog": "App Catalog",
-      "appsOnDevice": "Apps Installed"
-    },
-    "deviceStorage": {
-      "freeSpace": "{{space}} free",
-      "installed": "Installed",
-      "capacity": "Capacity",
-      "used": "Used",
-      "firmware": "Firmware {{version}}",
-      "genuine": "Device is genuine"
-    },
-    "applist": {
-      "placeholder": "There are no apps matching the search and filters selected",
-      "placeholderInstalled": "There are no installed apps matching the search and filters selected",
-      "filter": {
-        "title": "Filter",
-        "all": "All",
-        "supported": "Live Supported",
-        "installed": "Installed",
-        "notInstalled": "Not Installed"
-      },
-      "sort": {
-        "title": "Sort",
-        "name": "Name",
-        "marketcap": "Marketcap"
-      },
-      "updatable": {
-        "title": "Updates available"
-      },
-      "item": {
-        "installing": "Installing...",
-        "uninstalling": "Uninstalling...",
-        "scheduled": "Scheduled",
-        "cancel": "Cancel",
-        "update": "Update",
-        "updateAll": "Update All",
-        "install": "Install",
-        "installed": "Installed",
-        "uninstall": "Uninstall",
-        "notEnoughSpace": "Not enough space",
-        "supported": "Supported"
-      }
-    }
-  },
   "send": {
     "title": "전송",
     "totalSpent": "인출할 총액",
-    "totalBalance": "Total balance",
     "steps": {
       "recipient": {
         "title": "Recipient"
@@ -601,9 +549,6 @@
         "amount": "Amount",
         "fees": "Network fees",
         "useMax": "Send Max",
-        "advancedOptions": "Advanced options",
-        "useRBF": "Use a replace-by-fee transaction",
-        "message": "Leave a message (140)",
         "rippleTag": "Tag",
         "rippleTagPlaceholder": "Optional",
         "ethereumGasLimit": "Gas limit",
@@ -611,7 +556,10 @@
         "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
-        "title": "확인"
+        "streaming": {
+          "accurate": "Loading... ({{percentage}})",
+          "inaccurate": "Loading..."
+        }
       },
       "confirmation": {
         "title": "확인",
@@ -651,16 +599,12 @@
   },
   "accountDistribution": {
     "account": "Account",
-    "price": "Price",
     "distribution": "Allocation",
     "amount": "Amount",
     "value": "Value",
-    "showAll": "Show all",
-    "showLess": "Show less",
     "header": "Account allocation ({{count}})"
   },
   "delegation": {
-    "overdelegated": "Overdelegated",
     "title": "Earn rewards",
     "header": "Delegation",
     "validator": "Validator",
@@ -675,12 +619,12 @@
     "durationDays_plural": "{{count}} days",
     "howItWorks": "How delegation works",
     "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
-    "earnRewards": "Earn rewards",
+    "overdelegated": "Overdelegated",
     "flow": {
       "steps": {
         "starter": {
           "title": "Earn staking rewards",
-          "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets.",
+          "description": "Delegate your Tezos account to a third-party validator to earn staking rewards while keeping full security and control of your assets",
           "bullet": {
             "delegate": "Delegated accounts stay yours.",
             "access": "You can access your assets anytime.",
@@ -715,7 +659,7 @@
         "custom": {
           "title": "Custom validator",
           "text": "Please enter the address of the custom validator to delegate your account to.",
-          "button": "Confirm validator"
+          "button": "Use validator"
         },
         "undelegate": {
           "title": "Undelegate account"
@@ -725,7 +669,7 @@
           "label": "Confirmation",
           "success": {
             "title": "Delegation sent",
-            "titleUndelegated": "Operation sent",
+            "titleUndelegated": "End delegation",
             "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within about 40 days, depending on the validator.",
             "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
           },
@@ -751,6 +695,7 @@
   },
   "settings": {
     "title": "설정",
+    "discreet": "Toggle discreet mode",
     "tabs": {
       "display": "일반",
       "cryptoAssets": "Crypto assets",
@@ -769,8 +714,7 @@
       },
       "operations": {
         "title": "Operation history",
-        "desc": "Save a CSV file of your account operations on your computer.",
-        "button": "Save"
+        "desc": "Save a CSV file of your account operations on your computer."
       },
       "modal": {
         "button": "완료",
@@ -789,8 +733,6 @@
       "themeDesc": "Select the theme.",
       "counterValue": "반대 가치(Countervalue)",
       "counterValueDesc": "잔액 및 작업 옆에 표시할 통화를 선택합니다.",
-      "exchange": "환율 공급자",
-      "exchangeDesc": "암호화 자산 (crypto asset → BTC → {{fiat}})의 가치를 추정하는 데 사용되는 Bitcoin에서 {{fiat}}(으)로의 환율을 공급합니다.",
       "region": "지역",
       "regionDesc": "Ledger Live의 시간대 설정에 사용되는 지역을 선택하십시오.",
       "stock": "지역 시장 지표",
@@ -798,9 +740,8 @@
     },
     "currencies": {
       "desc": "Change settings for each of your crypto assets",
+      "placeholder": "No settings for this asset",
       "select": "Select a crypto asset to edit its settings.",
-      "exchange": "환율 공급자 ({{ticker}} → BTC)",
-      "exchangeDesc": "암호화 자산 ({{ticker}} → BTC → {{fiat}})의 가치를 추정하는 데 사용되는 {{currencyName}}에서 Bitcoin으로의 환율 공급자를 선택하십시오.",
       "confirmationsNb": "확인 수",
       "confirmationsNbDesc": "트랜잭션이 확인된 것으로 표시되는 네트워크 확인 수를 설정합니다."
     },
@@ -977,13 +918,13 @@
     "init": {
       "title": "Ledger 장치로 시작하기",
       "newDevice": {
-        "title": "새 장치로 초기화"
+        "title": "Set up as new device"
       },
       "restoreDevice": {
         "title": "복구 구문으로 장치 복원"
       },
       "initializedDevice": {
-        "title": "이미 설정된 장치 사용"
+        "title": "Skip device setup"
       }
     },
     "noDevice": {
@@ -1013,10 +954,11 @@
         "title": "PIN 코드 선택",
         "instructions": {
           "nano": {
-            "step1": "{{productName}}을(를) 컴퓨터에 연결합니다. 두 버튼을 모두 누르면 시작됩니다.",
-            "step2": "Press the right button to select <1><0>{{configureAsNewDevice}}?</0></1>.",
-            "step3": "왼쪽 또는 오른쪽 버튼을 눌러 숫자를 선택합니다. 확인하려면 두 버튼을 모두 누릅니다.",
-            "step4": "PIN 코드를 확인하려면 ✓를 선택합니다. 숫자를 지우려면 ⬅를 선택합니다"
+            "step1": "Connect the {{productName}} to your computer.",
+            "step2": "Press the left or right button to navigate through the on-screen instructions.",
+            "step3": "Press both buttons to select <1><0>{{configureAsNewDevice }}</0></1>.",
+            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "nanoX": {
             "step1": "{{productName}}을(를) 컴퓨터에 연결합니다.",
@@ -1035,10 +977,11 @@
         "title": "PIN 코드 선택",
         "instructions": {
           "nano": {
-            "step1": "{{productName}}을(를) 컴퓨터에 연결합니다. 두 버튼을 모두 누르면 시작됩니다.",
-            "step2": "Press the left button to cancel <1><0>{{configureAsNewDevice}}?</0></1>. Then press the right button to select <3><0>{{restoreConfiguration}}?</0></3>.",
-            "step3": "왼쪽 또는 오른쪽 버튼을 눌러 숫자를 선택합니다. 확인하려면 두 버튼을 모두 누릅니다.",
-            "step4": "PIN 코드를 확인하려면 ✓를 선택합니다. 숫자를 지우려면 ⬅를 선택합니다"
+            "step1": "Connect the {{productName}} to your computer.",
+            "step2": "Press the left or right button to navigate through the on-screen instructions.",
+            "step3": "Press both buttons to select <1><0>{{restoreConfiguration}}</0></1>.",
+            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "nanoX": {
             "step1": "{{productName}}을(를) 컴퓨터에 연결합니다.",
@@ -1057,8 +1000,8 @@
     },
     "writeSeed": {
       "initialize": {
-        "title": "복구 구문 저장",
-        "desc": "귀하의 장치는 개인 키를 백업하기 위한 24 단어 복구 구문을 표시합니다.",
+        "title": "Write down your recovery phrase",
+        "desc": "Your 24-word recovery phrase is the <1>only backup</1> of your private keys.",
         "nano": {
           "step1": "Write <1><0>{{seedWord1}}</0></1> in position 1 on a blank Recovery sheet.",
           "step2": "오른쪽 버튼을 눌러 계속한 다음 24 단어를 모두 기록합니다.",
@@ -1072,7 +1015,7 @@
       },
       "restore": {
         "title": "복구 구문 입력",
-        "desc": "복구 시트에 저장된 복구 구문을 입력합니다.",
+        "desc": "Enter the recovery phrase from your Recovery phrase.",
         "nano": {
           "step1": "복구 구문의 길이를 선택합니다.",
           "step2": "Enter the first letters of <1><0>{{seedWord1}}</0></1> until suggested words appear.",
@@ -1086,10 +1029,10 @@
         }
       },
       "disclaimer": {
-        "note1": "24 단어 복구 구문이 눈에 띄지 않도록 조심스럽게 보호하십시오.",
-        "note2": "자신만 복구 구문을 보유하도록 하십시오.",
-        "note3": "Ledger는 복구 구문의 백업을 유지하지 않습니다.",
-        "note4": "PIN 코드 또는 복구 구문이 미리 설정된 장치는 절대 사용하지 마십시오."
+        "note1": "Anyone who gets your recovery phrase can take your crypto assets.",
+        "note2": "Never use a device supplied with a PIN code or a recovery phrase.",
+        "note3": "Store your recovery phrase in a secure location, out of sight.",
+        "note4": "Ledger does not store your private keys, nor ever asks for it."
       }
     },
     "genuineCheck": {
@@ -1113,13 +1056,11 @@
       "errorPage": {
         "title": {
           "pinFailed": "자신의 PIN 코드를 선택하지 않았습니까?",
-          "recoveryPhraseFailed": "복구 구문을 직접 저장하지 않았습니까?",
-          "isGenuineFail": "죄송합니다. 장치가 정품이 아닌 것 같습니다..."
+          "recoveryPhraseFailed": "복구 구문을 직접 저장하지 않았습니까?"
         },
         "desc": {
           "pinFailed": "PIN 코드가 미리 설정된 장치는 절대 사용하지 마십시오. 의심스러운 경우 저희에게 문의하십시오.",
-          "recoveryPhraseFailed": "자신의 장치에 표시된 복구 구문을 직접 저장하십시오. 의심스러운 경우 저희에게 문의하십시오.",
-          "isGenuineFail": "장치가 Ledger의 보안 서버에 연결하는 데 필요한 인증 테스트를 통과하지 못했습니다.  Ledger 지원 센터에 문의하여 지원을 받으십시오."
+          "recoveryPhraseFailed": "자신의 장치에 표시된 복구 구문을 직접 저장하십시오. 의심스러운 경우 저희에게 문의하십시오."
         }
       }
     },
@@ -1164,10 +1105,6 @@
           "item2": "Ledger Live 버전, 언어 및 지역",
           "item3": "OS 버전, 언어 및 지역"
         }
-      },
-      "terms": {
-        "title": "이용 약관 *",
-        "desc": "계속하면 귀하가 <1>이용 약관</1> 및 <3>개인 정보 보호 정책</3>을 읽고 동의한 것으로 간주됩니다."
       }
     },
     "finish": {
@@ -1234,8 +1171,8 @@
       "description": "An unexpected error occurred, so please try again"
     },
     "DeviceSocketFail": {
-      "title": "{{message}}",
-      "description": "다시 시도하십시오."
+      "title": "Please restart your Ledger device and retry",
+      "description": "An unexpected error occurred, so please try again. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
       "title": "죄송합니다. 연결에 실패했습니다.",
@@ -1261,6 +1198,10 @@
       "title": "Firmware or app update required",
       "description": "Please use the Manager to uninstall all apps and check if a firmware update is available before reinstalling them"
     },
+    "FirmwareNotRecognized": {
+      "title": "Device firmware is not recognized",
+      "description": "Please contact Ledger Support"
+    },
     "HardResetFail": {
       "title": "죄송합니다. 재설정하지 못했습니다.",
       "description": "다시 시도하거나 의심스러운 경우 저희에게 문의하십시오."
@@ -1275,7 +1216,7 @@
     },
     "LedgerAPI5xx": {
       "title": "Sorry, try again.",
-      "description": "The server could not handle your request. Please try again at a later moment. {{message}}"
+      "description": "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "죄송합니다. {{currencyName}} 서비스를 사용할 수 없습니다.",
@@ -1304,6 +1245,24 @@
     "ManagerNotEnoughSpace": {
       "title": "죄송합니다. 남아 있는 저장 공간이 충분하지 않습니다.",
       "description": "Uninstall some apps to make space. The private keys providing access to your crypto assets will stay safe on your device."
+    },
+    "ManagerQuitPage": {
+      "install": {
+        "title": "Quit and cancel app install?",
+        "description": "Quitting will cancel the app installing in progress.",
+        "stay": "Finish install"
+      },
+      "uninstall": {
+        "title": "Quit and cancel app uninstalling?",
+        "description": "Quitting will cancel the app uninstalls in progress.",
+        "stay": "Finish uninstalling"
+      },
+      "update": {
+        "title": "Quit and cancel app updates?",
+        "description": "Quitting will cancel the app updates in progress.",
+        "stay": "Finish updates"
+      },
+      "quit": "Quit Manager"
     },
     "ManagerUninstallBTCDep": {
       "title": "죄송합니다. 이 앱은 필요합니다.",
@@ -1347,6 +1306,10 @@
       "title": "무언가가 잘못되었습니다. 장치를 다시 연결하십시오.",
       "description": "{{message}}"
     },
+    "TransportRaceCondition": {
+      "title": "Something went wrong, please reconnect your device",
+      "description": "{{message}}"
+    },
     "TransportStatusError": {
       "title": "무언가가 잘못되었습니다. 장치를 다시 연결하십시오.",
       "description": "{{message}}"
@@ -1360,15 +1323,19 @@
       "description": "장치를 다시 시작하거나 저희에게 문의하십시오."
     },
     "UserRefusedAllowManager": {
-      "title": "Manager refused on device"
+      "title": "Manager denied on device"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "Update canceled",
       "description": "다시 시도하거나 Ledger 지원 센터에 문의하십시오."
     },
     "UserRefusedOnDevice": {
-      "title": "장치에서 트랜잭션이 거부되었습니다.",
+      "title": "Action denied on device",
       "description": "다시 시도하거나 의심스러운 경우 Ledger 지원 센터에 문의하십시오"
+    },
+    "TransactionRefusedOnDevice": {
+      "title": "Operation denied on device",
+      "description": "Please retry or contact Ledger Support in case of doubt"
     },
     "UserRefusedAddress": {
       "title": "수신 주소가 거부되었습니다.",
@@ -1383,16 +1350,16 @@
       "description": "장치의 대시 보드로 이동하십시오."
     },
     "WebsocketConnectionError": {
-      "title": "죄송합니다. 다시 시도하십시오(웹소켓 에러).",
+      "title": "Sorry, try again (connection error)",
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "죄송합니다. 다시 시도하십시오(웹소켓 실패).",
+      "title": "Sorry, try again (connection closed)",
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "잘못된 장치 또는 ‘{{accountName}}’에 대한 암호",
-      "description": "선택된 계정에 대한 장치 또는 리커버리를 사용하십시오."
+      "title": "Something went wrong",
+      "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase that belongs to the selected account."
     },
     "DeviceAppVerifyNotSupported": {
       "title": "앱 업데이트가 필요합니다.",

@@ -1,5 +1,5 @@
-// flow-typed signature: 1adacdaf603397a6871d73b327109ca2
-// flow-typed version: 6e0a040d65/zxcvbn_v4.x.x/flow_>=v0.25.x
+// flow-typed signature: db193c5a080de3c6dc4b21485099462b
+// flow-typed version: c6154227d1/zxcvbn_v4.x.x/flow_>=v0.104.x
 
 declare module 'zxcvbn' {
   declare export type Result = {|
@@ -52,9 +52,9 @@ declare module 'zxcvbn' {
      * in milliseconds.
      */
     +calc_time: number,
-  |};
+  |}
 
-  declare export type Score = 0 | 1 | 2 | 3 | 4;
+  declare export type Score = 0 | 1 | 2 | 3 | 4
 
   declare export type AttackTime = {|
     /**
@@ -83,7 +83,7 @@ declare module 'zxcvbn' {
      * ballparking at 10B/sec.
      */
     +offline_fast_hashing_1e10_per_second: string | number,
-  |};
+  |}
 
   declare export type Feedback = {|
     /**
@@ -97,7 +97,7 @@ declare module 'zxcvbn' {
      * guessable password. eg. 'Add another word or two'
      */
     +suggestions: string[],
-  |};
+  |}
 
   declare export type Sequence = {|
     /**
@@ -199,10 +199,7 @@ declare module 'zxcvbn' {
      * uppercase variations of the token.
      */
     +uppercase_variations: number,
-  |};
+  |}
 
-  declare export default function zxcvbn(
-    password: string,
-    userInputs?: string[]
-  ): Result;
+  declare export default function zxcvbn(password: string, userInputs?: string[]): Result
 }

@@ -1,12 +1,14 @@
-#!/bin/env bash
+#!/bin/bash
 
 # Fetch release binaries for all platforms
 # and produce a .sha512sum file in the current folder
 
-# exit on error
 set -e
+cd $(dirname $0)/..
 
 [[ "$GH_TOKEN" == "" ]] && echo "GH_TOKEN is unset" && exit 1
+
+repoPath=`node -e 'console.log(require("./package.json").repository.split("github.com/")[1])'`
 
 function main {
   ASSETS_FILTER="(AppImage|zip|exe|dmg)"
@@ -16,7 +18,7 @@ function main {
   RELEASE_VERSION=${RELEASE_VERSION:-$PKG_VER}
   OUTPUT_FILE="ledger-live-desktop-$RELEASE_VERSION.sha512sum"
 
-  RELEASES=$(do_request "/repos/LedgerHQ/ledger-live-desktop/releases")
+  RELEASES=$(do_request "/repos/$repoPath/releases")
   printf """
   console.log(
     (%s).find(r => r.tag_name === 'v%s').assets

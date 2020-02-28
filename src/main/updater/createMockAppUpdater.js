@@ -1,6 +1,6 @@
 // @flow
 
-import createAppUpdater from './createAppUpdater'
+import createAppUpdater from "./createAppUpdater";
 
 export default ({
   filename,
@@ -23,18 +23,18 @@ export default ({
     getHashFile: () => Promise.resolve(hashFile),
     getHashFileSignature: () => Promise.resolve(signature),
     getNextKey: async (fingerprint: ?string) => {
-      if (!fingerprint) return Promise.resolve(pubKey)
-      const key = pubKeys.find(k => k.fingerprint === fingerprint)
+      if (!fingerprint) return Promise.resolve(pubKey);
+      const key = pubKeys.find(k => k.fingerprint === fingerprint);
       if (!key) {
-        throw new Error(`Cannot find key for fingerprint ${fingerprint}`)
+        throw new Error(`Cannot find key for fingerprint ${fingerprint}`);
       }
-      return key.content
+      return key.content;
     },
     getNextKeySignature: async (fingerprint: string) => {
-      const key = pubKeys.find(k => k.fingerprint === fingerprint)
+      const key = pubKeys.find(k => k.fingerprint === fingerprint);
       if (!key) {
-        throw new Error(`Cannot find signature for key ${fingerprint}`)
+        throw new Error(`Cannot find signature for key ${fingerprint}`);
       }
-      return key.signature
+      return key.signature;
     },
-  })
+  });

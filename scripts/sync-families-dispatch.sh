@@ -15,7 +15,7 @@ SendWarning.js \
 ReceiveWarning.js \
 "
 
-cd ../src
+cd ../src/renderer
 
 rm -rf generated
 mkdir generated

@@ -1,7 +1,7 @@
 // @flow
 
-import { UpdateIncorrectHash, UpdateIncorrectSig } from './errors'
-import * as sslHelper from './sslHelper'
+import { UpdateIncorrectHash, UpdateIncorrectSig } from "@ledgerhq/errors";
+import * as sslHelper from "./sslHelper";
 
 type Opts = {
   filename: string,
@@ -10,7 +10,7 @@ type Opts = {
   getNextKeySignature: string => Promise<Buffer>,
   getHashFile: () => Promise<string>,
   getHashFileSignature: () => Promise<Buffer>,
-}
+};
 
 export default function createAppUpdater(opts: Opts): { verify: () => Promise<void> } {
   const {
@@ -20,7 +20,7 @@ export default function createAppUpdater(opts: Opts): { verify: () => Promise<vo
     getNextKeySignature,
     getHashFile,
     getHashFileSignature,
-  } = opts
+  } = opts;
 
   // main logic:
   // - fetch hashFile + its signature
@@ -28,17 +28,21 @@ export default function createAppUpdater(opts: Opts): { verify: () => Promise<vo
   // - compare hash with update hash
   // throw if any step fail.
   async function verify() {
-    const [hashFile, hashFileSignature] = await Promise.all([getHashFile(), getHashFileSignature()])
-    await verifyHashFileSignature(hashFile, hashFileSignature, await getNextKey())
-    await compareHash(hashFile)
+    const [hashFile, hashFileSignature, key] = await Promise.all([
+      getHashFile(),
+      getHashFileSignature(),
+      getNextKey(),
+    ]);
+    await verifyHashFileSignature(hashFile, hashFileSignature, key);
+    await compareHash(hashFile);
   }
 
   // compute the update hash and compare it to the hash located in hash file
   async function compareHash(hashFile) {
-    const computedHash = await computeHash()
-    const hashFromFile = extractHashFromHashFile(hashFile, filename)
+    const computedHash = await computeHash();
+    const hashFromFile = extractHashFromHashFile(hashFile, filename);
     if (hashFromFile !== computedHash) {
-      throw new UpdateIncorrectHash(computedHash)
+      throw new UpdateIncorrectHash(computedHash);
     }
   }
 
@@ -47,13 +51,13 @@ export default function createAppUpdater(opts: Opts): { verify: () => Promise<vo
   // if no more key, throw
   async function verifyHashFileSignature(hash, sigContent, pubKey) {
     try {
-      await sslHelper.verify(hash, sigContent, pubKey)
+      await sslHelper.verify(hash, sigContent, pubKey);
     } catch (err) {
       try {
-        const nextPubKey = await getNextPubKey(pubKey)
-        await verifyHashFileSignature(hash, sigContent, nextPubKey)
+        const nextPubKey = await getNextPubKey(pubKey);
+        await verifyHashFileSignature(hash, sigContent, nextPubKey);
       } catch (err) {
-        throw new UpdateIncorrectSig()
+        throw new UpdateIncorrectSig();
       }
     }
   }
@@ -61,26 +65,26 @@ export default function createAppUpdater(opts: Opts): { verify: () => Promise<vo
   // fetch the next pubkey based on the previous key fingerprint
   // also fetch signature, and verify against previous pubkey
   async function getNextPubKey(pubKey) {
-    const fingerprint = await sslHelper.getFingerprint(pubKey)
-    const nextPubKey = await getNextKey(fingerprint)
-    const nextPubKeySignature = await getNextKeySignature(fingerprint)
-    await sslHelper.verify(nextPubKey, nextPubKeySignature, pubKey)
-    return nextPubKey
+    const fingerprint = await sslHelper.getFingerprint(pubKey);
+    const nextPubKey = await getNextKey(fingerprint);
+    const nextPubKeySignature = await getNextKeySignature(fingerprint);
+    await sslHelper.verify(nextPubKey, nextPubKeySignature, pubKey);
+    return nextPubKey;
   }
 
   return {
     verify,
-  }
+  };
 }
 
 // a hash file looks like: "<hash>  <filename>\n<hash>  <filename>"
 // we only need the hash for the given filename
 function extractHashFromHashFile(hashFile, filename) {
-  let hash
-  hashFile.split('\n').find(r => {
-    const row = r.split(/\s+/)
-    hash = row[1] === filename ? row[0] : ''
-    return !!hash
-  })
-  return hash
+  let hash;
+  hashFile.split("\n").find(r => {
+    const row = r.split(/\s+/);
+    hash = row[1] === filename ? row[0] : "";
+    return !!hash;
+  });
+  return hash;
 }

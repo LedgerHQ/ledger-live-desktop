@@ -1,0 +1,13 @@
+name: "get-package-infos"
+description: "get package.json version and name and exposes them"
+author: "Ledger"
+outputs:
+  name:
+    description: name found in package.json
+  clean:
+    description: clean version found in package.json so it looks like X.Y.Z
+  version:
+    description: version found in package.json
+runs:
+  using: "node12"
+  main: "./get-package-infos.js"

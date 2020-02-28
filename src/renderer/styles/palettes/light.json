@@ -1,0 +1,20 @@
+{
+  "type": "light",
+  "primary": {
+    "main": "#6490F1",
+    "contrastText": "#FFFFFF"
+  },
+  "secondary": {
+    "main": "#142533"
+  },
+  "divider": "rgba(20,37,51, 0.1)",
+  "background": {
+    "paper": "#FFFFFF",
+    "default": "#F9F9F9"
+  },
+  "action": {
+    "active": "rgba(20, 37, 51, 0.1)",
+    "hover": "rgba(100, 144, 241, 0.1)",
+    "disabled": "rgba(20, 37, 51, 0.1)"
+  }
+}
