@@ -1,11 +1,10 @@
 // @flow
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { autoLockTimeoutSelector } from "~/renderer/reducers/settings";
 import { lock } from "~/renderer/actions/application";
 
-import useInterval from "~/renderer/hooks/useInterval";
 import { useDebouncedCallback } from "~/renderer/hooks/useDebounce";
 import { hasPasswordSelector } from "~/renderer/reducers/application";
 
@@ -20,14 +19,6 @@ const Idler = () => {
     leading: true,
   });
 
-  const checkForAutoLock = useCallback(() => {
-    if (hasPassword && autoLockTimeout && autoLockTimeout !== -1) {
-      if (Date.now() - (lastAction + autoLockTimeout + 60000) > 0) {
-        dispatch(lock());
-      }
-    }
-  }, [autoLockTimeout, dispatch, hasPassword, lastAction]);
-
   // onMount & willUnmount
   useEffect(() => {
     window.addEventListener("keydown", debounceOnChange);
@@ -40,7 +31,21 @@ const Idler = () => {
     };
   }, [debounceOnChange]);
 
-  useInterval(checkForAutoLock, 10000);
+  useEffect(() => {
+    let timeout = null;
+
+    if (hasPassword && autoLockTimeout && autoLockTimeout !== -1) {
+      timeout = setTimeout(() => {
+        dispatch(lock());
+      }, autoLockTimeout * 60000);
+    }
+
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
+  }, [lastAction, autoLockTimeout, hasPassword, dispatch]);
 
   return null;
 };
