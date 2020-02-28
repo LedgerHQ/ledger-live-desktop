@@ -37,7 +37,6 @@ import React, { useRef, useLayoutEffect, useState, useMemo } from "react";
 import ChartJs from "chart.js";
 import styled from "styled-components";
 import Color from "color";
-import moment from "moment";
 
 import useTheme from "~/renderer/hooks/useTheme";
 import Tooltip from "./Tooltip";
@@ -85,7 +84,6 @@ const Chart = ({
 
   const generatedData = useMemo(
     () => ({
-      labels: data.map(d => moment(d.date).format(dateFormat)),
       datasets: [
         {
           label: "all accounts",
@@ -99,13 +97,13 @@ const Chart = ({
           pointRadius: 0,
           borderWidth: 2,
           data: data.map(d => ({
-            x: new Date(d.date),
+            x: new Date(d.date).toLocaleDateString(),
             y: d[valueKey].toNumber(),
           })),
         },
       ],
     }),
-    [color, data, valueKey, dateFormat],
+    [color, data, valueKey],
   );
 
   const generateOptions = useMemo(
@@ -125,6 +123,28 @@ const Chart = ({
         display: false,
       },
       scales: {
+        xAxes: [
+          {
+            type: "time",
+            gridLines: {
+              display: false,
+              color: theme.text.shade10,
+            },
+            ticks: {
+              fontColor: theme.text.shade60,
+              fontFamily: "Inter",
+              maxTicksLimit: 7,
+              maxRotation: 0,
+              minRotation: 0,
+            },
+            time: {
+              minUnit: "day",
+              displayFormats: {
+                quarter: "MMM YYYY",
+              },
+            },
+          },
+        ],
         yAxes: [
           {
             gridLines: {
