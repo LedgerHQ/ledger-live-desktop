@@ -92,16 +92,15 @@ class InternalProcess {
   changePassword(newPassword: string) {
     logger.info("Changing Libcore password", logType);
 
-    if (!this.libcoreInitialized) {
+    if (!this.libcoreInitialized || !this.process) {
       throw new Error("Can't change password if libcore is not unlocked first!");
     }
 
-    this.process &&
-      this.process.send({
-        type: "changeLibcorePassword",
-        currentPassword: this.password,
-        newPassword,
-      });
+    this.process.send({
+      type: "changeLibcorePassword",
+      currentPassword: this.password,
+      newPassword,
+    });
 
     this.password = newPassword;
   }
@@ -118,90 +117,87 @@ class InternalProcess {
         throw new Error("configure() was not completed before start()");
       }
 
-      this.process = fork(this.path, this.args, this.options);
+      const proc = fork(this.path, this.args, this.options);
 
+      this.process = proc;
       this.startPromise = { resolve, reject };
-
       this.active = true;
-      const pid = this.process.pid;
+
+      const { pid } = proc;
 
       logger.info(`spawned internal process ${pid}`, logType);
 
-      this.process && // A bit stupid, but Flow complains otherwise
-        this.process.on("exit", (code, signal) => {
-          this.process = null;
+      proc.on("exit", (code, signal) => {
+        this.process = null;
 
-          if (code !== null) {
-            logger.info(`Internal process ${pid} ended with code ${code}`, logType);
-          } else {
-            logger.warn(`Internal process ${pid} killed with signal ${signal}`, logType);
+        if (code !== null) {
+          logger.info(`Internal process ${pid} ended with code ${code}`, logType);
+        } else {
+          logger.warn(`Internal process ${pid} killed with signal ${signal}`, logType);
+        }
+
+        if (this.active && !this.libcoreInitialized) {
+          logger.warn("Libcore failed to initialize", logType);
+          this.startPromise.reject && this.startPromise.reject();
+        }
+
+        if (this.onExitCallback) {
+          this.onExitCallback(
+            code,
+            signal,
+            this.active && this.libcoreInitialized,
+            this.libcoreInitialized,
+          );
+        }
+
+        this.active = false;
+        this.libcoreInitialized = false;
+      });
+
+      proc.on("message", message => {
+        if (message.type === "libcoreInitialized") {
+          logger.info("Libcore initialized successfully", logType);
+          this.libcoreInitialized = true;
+
+          this.startPromise.resolve && this.startPromise.resolve();
+
+          if (this.onStartCallback) {
+            this.onStartCallback();
           }
-
-          if (this.active && !this.libcoreInitialized) {
-            logger.warn("Libcore failed to initialize", logType);
-            this.startPromise.reject && this.startPromise.reject();
-          }
-
-          if (this.onExitCallback) {
-            this.onExitCallback(
-              code,
-              signal,
-              this.active && this.libcoreInitialized,
-              this.libcoreInitialized,
-            );
-          }
-
-          this.active = false;
-          this.libcoreInitialized = false;
-        });
-
-      this.process && // And, yeah, even wrapping all this in a big if(this.process) isn't enough
-        this.process.on("message", message => {
-          if (message.type === "libcoreInitialized") {
-            logger.info("Libcore initialized successfully", logType);
-            this.libcoreInitialized = true;
-
-            this.startPromise.resolve && this.startPromise.resolve();
-
-            if (this.onStartCallback) {
-              this.onStartCallback();
-            }
-          }
-          if (this.onMessageCallback && this.active) {
-            this.onMessageCallback(message);
-          }
-        });
+        }
+        if (this.onMessageCallback && this.active) {
+          this.onMessageCallback(message);
+        }
+      });
 
       if (this.messageQueue.length) {
         this.run();
       }
 
-      this.process && // You have to do this for every one of this.process.whatever 🤷‍♂️
-        this.process.stdout.on("data", data =>
-          String(data)
-            .split("\n")
-            .forEach(msg => {
-              if (!msg) return;
-              if (process.env.INTERNAL_LOGS) console.log(msg);
-              try {
-                const obj = JSON.parse(msg);
-                if (obj && obj.type === "log") {
-                  logger.onLog(obj.log);
-                  return;
-                }
-              } catch (e) {}
-              logger.debug("I: " + msg, { type: "internal-stdout" });
-            }),
-        );
+      proc.stdout.on("data", data =>
+        String(data)
+          .split("\n")
+          .forEach(msg => {
+            if (!msg) return;
+            if (process.env.INTERNAL_LOGS) console.log(msg);
+            try {
+              const obj = JSON.parse(msg);
+              if (obj && obj.type === "log") {
+                logger.onLog(obj.log);
+                return;
+              }
+            } catch (e) {}
+            logger.debug("I: " + msg, { type: "internal-stdout" });
+          }),
+      );
 
-      this.process &&
-        this.process.stderr.on("data", data => {
-          const msg = String(data).trim();
-          if (__DEV__) console.error("I.e: " + msg);
-          logger.error("I.e: " + String(data).trim(), { type: "internal-stderr" });
-        });
+      proc.stderr.on("data", data => {
+        const msg = String(data).trim();
+        if (__DEV__) console.error("I.e: " + msg);
+        logger.error("I.e: " + String(data).trim(), { type: "internal-stderr" });
+      });
 
-      this.process && this.process.send({ type: "initLibcore", password: this.password });
+      proc.send({ type: "initLibcore", password: this.password });
     });
   }
 
