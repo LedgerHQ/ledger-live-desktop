@@ -96,11 +96,19 @@ const IsUnlocked = ({ children }: Props) => {
           try {
             // The password worked for db, it should be the same for libcore
             await setLibcorePassword(inputValue.password);
-          } catch (e) {
-            // db password didn't work for libcore, this shouldn't happen
-            // let's wipe libcore database and start again
-            await removeSQLite();
-            await setLibcorePassword(inputValue.password);
+          } catch (error) {
+            if (
+              error &&
+              error.message &&
+              error.message.indexOf("setLibcorePasswordFailed") !== -1
+            ) {
+              // db password didn't work for libcore, this shouldn't happen
+              // let's wipe libcore database and start again
+              await removeSQLite();
+              await setLibcorePassword(inputValue.password);
+            } else {
+              throw error;
+            }
           }
           await dispatch(fetchAccounts());
         } else if (!(await isEncryptionKeyCorrect("app", "accounts", inputValue.password))) {

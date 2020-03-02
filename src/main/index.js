@@ -93,7 +93,9 @@ app.on("ready", async () => {
         await internal.start();
       }
     } catch (e) {
-      throw new Error("wrong password");
+      // If we don't catch here then throw ourself, the error is not sent to renderer
+      // Also `error` is always undefined, so let's throw something more useful
+      throw new Error("setLibcorePasswordFailed");
     }
   });
 
