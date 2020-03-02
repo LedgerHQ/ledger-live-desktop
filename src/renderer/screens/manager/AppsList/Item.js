@@ -51,7 +51,6 @@ type Props = {
   onlyUpdate?: boolean,
   forceUninstall?: boolean,
   showActions?: boolean,
-  progress: number,
   setAppInstallDep?: (*) => void,
   setAppUninstallDep?: (*) => void,
   addAccount?: (*) => void,
@@ -67,7 +66,6 @@ const Item: React$ComponentType<Props> = ({
   onlyUpdate,
   forceUninstall,
   showActions = true,
-  progress,
   setAppInstallDep,
   setAppUninstallDep,
   addAccount,
@@ -136,7 +134,6 @@ const Item: React$ComponentType<Props> = ({
         onlyUpdate={onlyUpdate}
         showActions={showActions}
         notEnoughMemoryToInstall={notEnoughMemoryToInstall}
-        progress={progress}
         setAppInstallDep={setAppInstallDep}
         setAppUninstallDep={setAppUninstallDep}
         isLiveSupported={isLiveSupported}
@@ -146,17 +143,4 @@ const Item: React$ComponentType<Props> = ({
   );
 };
 
-export default memo<Props>(
-  Item,
-  (
-    { state: { installQueue: _installQueue, uninstallQueue: _uninstallQueue } },
-    { state: { installQueue, uninstallQueue }, progress, app: { name } },
-  ) => {
-    /** compare _prev to next props that if different should trigger a rerender */
-    return (
-      !(progress !== 1 && installQueue.length > 0 && installQueue[0] === name) &&
-      installQueue.length === _installQueue.length &&
-      uninstallQueue.length === _uninstallQueue.length
-    );
-  },
-);
+export default memo<Props>(Item);

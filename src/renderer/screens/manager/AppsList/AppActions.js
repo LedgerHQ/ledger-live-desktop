@@ -59,7 +59,6 @@ type Props = {
   forceUninstall?: boolean,
   notEnoughMemoryToInstall: boolean,
   showActions?: boolean,
-  progress: number,
   setAppInstallDep?: (*) => void,
   setAppUninstallDep?: (*) => void,
   isLiveSupported: boolean,
@@ -78,7 +77,6 @@ const AppActions: React$ComponentType<Props> = React.memo(
     onlyUpdate,
     notEnoughMemoryToInstall,
     showActions = true,
-    progress,
     setAppInstallDep,
     setAppUninstallDep,
     isLiveSupported,
@@ -122,11 +120,12 @@ const AppActions: React$ComponentType<Props> = React.memo(
       <AppActionsWrapper>
         {installing || uninstalling ? (
           <Progress
+            state={state}
+            name={name}
             updating={updating}
             installing={installing}
             isCurrent={installQueue.length > 0 && installQueue[0] === name}
             uninstalling={uninstalling}
-            progress={progress}
           />
         ) : (
           showActions && (

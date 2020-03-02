@@ -58,8 +58,6 @@ const AppsList = ({ deviceInfo, result, exec, t }: Props) => {
 
   const { installQueue, uninstallQueue, currentError } = state;
 
-  const progress = useAppInstallProgress(state, installQueue[0]);
-
   const jobInProgress = installQueue.length > 0 || uninstallQueue.length > 0;
 
   const distribution = useMemo(() => {
@@ -119,7 +117,6 @@ const AppsList = ({ deviceInfo, result, exec, t }: Props) => {
         state={state}
         dispatch={dispatch}
         isIncomplete={isIncomplete}
-        progress={progress}
         setAppInstallDep={setAppInstallDep}
         setAppUninstallDep={setAppUninstallDep}
         t={t}
