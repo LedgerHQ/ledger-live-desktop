@@ -11,7 +11,7 @@ import {
   isIncompleteState,
   distribute,
 } from "@ledgerhq/live-common/lib/apps";
-import { useAppsRunner, useAppInstallProgress } from "@ledgerhq/live-common/lib/apps/react";
+import { useAppsRunner } from "@ledgerhq/live-common/lib/apps/react";
 
 import NavigationGuard from "~/renderer/components/NavigationGuard";
 import Quit from "~/renderer/icons/Quit";
