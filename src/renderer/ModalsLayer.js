@@ -5,7 +5,7 @@ import { Transition } from "react-transition-group";
 import { connect } from "react-redux";
 import { createStructuredSelector, createSelector } from "reselect";
 
-import type { ThemedComponent } from "styled-components";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import { modalsStateSelector } from "~/renderer/reducers/modals";
 import modals from "~/renderer/modals";
@@ -54,9 +54,9 @@ const ModalsLayer = ({ visibleModals }: *) => (
 );
 
 const visibleModalsSelector = createSelector(modalsStateSelector, state =>
-  Object.entries(state)
-    .filter(([name, { isOpened }]) => !!modals[name] && isOpened)
-    .map(([name, data]) => ({ name, ...data })),
+  Object.keys(state)
+    .filter((name: string) => !!modals[name] && state[name].isOpened)
+    .map((name: string) => ({ name, ...state[name].data })),
 );
 
 const mapStateToProps = createStructuredSelector({
