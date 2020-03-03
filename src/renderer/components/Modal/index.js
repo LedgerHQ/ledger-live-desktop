@@ -3,22 +3,15 @@
 import React, { PureComponent } from "react";
 import { createPortal } from "react-dom";
 import { connect } from "react-redux";
+import styled from "styled-components";
 import noop from "lodash/noop";
-import Animated from "animated/lib/targets/react-dom";
-import Easing from "animated/lib/Easing";
-import { withTheme } from "styled-components";
-// TODO: SNOOOOOOOOWW
-// import Snow, { isSnowTime } from '~/renderer/components/extra/Snow'
+
+import { Transition } from "react-transition-group";
 
 import { closeModal } from "~/renderer/actions/modals";
 import { isModalOpened, getModalData } from "~/renderer/reducers/modals";
 
 export { default as ModalBody } from "./ModalBody";
-
-const animShowHide = {
-  duration: 200,
-  easing: Easing.bezier(0.3, 1.0, 0.5, 0.8),
-};
 
 const domNode = document.getElementById("modals");
 
@@ -45,6 +38,62 @@ const mapDispatchToProps = (dispatch: *, { name, onClose = noop }: Props): * => 
     : onClose,
 });
 
+const transitionsOpacity = {
+  entering: { opacity: 0 },
+  entered: { opacity: 1 },
+  exiting: { opacity: 0 },
+  exited: { opacity: 0 },
+};
+
+const transitionsScale = {
+  entering: { transform: "scale(1.1)" },
+  entered: { transform: "scale(1)" },
+  exiting: { transform: "scale(1.1)" },
+  exited: { transform: "scale(1.1)" },
+};
+
+const Container = styled.div.attrs(({ state, centered, isOpened }) => ({
+  style: {
+    ...transitionsOpacity[state],
+    justifyContent: centered ? "center" : "flex-start",
+    pointerEvents: isOpened ? "auto" : "none",
+  },
+}))`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 100;
+  opacity: 0;
+  padding: 60px 0 60px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 200ms cubic-bezier(0.3, 1, 0.5, 0.8);
+`;
+
+const BodyWrapper = styled.div.attrs(({ state, centered, isOpened }) => ({
+  style: {
+    ...transitionsOpacity[state],
+    ...transitionsScale[state],
+  },
+}))`
+  background: ${p => p.theme.colors.palette.background.paper};
+  color: ${p => p.theme.colors.palette.text.shade80};
+  width: ${p => p.width || 500}px;
+  border-radius: 3px;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+  flex-shrink: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  transform: scale(1.1);
+  opacity: 0;
+  transition: all 200ms cubic-bezier(0.3, 1, 0.5, 0.8);
+`;
+
 export type RenderProps = {
   onClose?: void => void,
   data: any,
@@ -65,56 +114,14 @@ type Props = {
   onBeforeOpen?: ({ data: * }) => *, // eslint-disable-line
 };
 
-type State = {
-  animShowHide: Animated.Value,
-  isInDOM: boolean,
-};
-
-class Modal extends PureComponent<Props, State> {
-  state = {
-    animShowHide: new Animated.Value(0),
-    isInDOM: this.props.isOpened === true,
-  };
-
-  static getDerivedStateFromProps(nextProps: Props) {
-    const patch = {};
-    if (nextProps.isOpened) {
-      patch.isInDOM = true;
-    }
-    return patch;
-  }
-
+class Modal extends PureComponent<Props> {
   componentDidMount() {
-    if (this.props.isOpened) {
-      this.animateEnter();
-    }
-
-    this.state.animShowHide.addListener(({ value }) => {
-      if (value === 0) {
-        const { onHide } = this.props;
-        this.setState({ isInDOM: false });
-        if (onHide) {
-          onHide();
-        }
-      }
-      if (value === 1) this.setState({ isInDOM: true });
-    });
-
     document.addEventListener("keyup", this.handleKeyup);
     document.addEventListener("keydown", this.preventFocusEscape);
   }
 
-  componentDidUpdate(prevProps: Props) {
-    const didOpened = !prevProps.isOpened && this.props.isOpened;
-    const didClosed = prevProps.isOpened && !this.props.isOpened;
-
-    if (didOpened) {
-      this.animateEnter();
-    }
-
-    if (didClosed) {
-      this.animateLeave();
-    }
+  componentDidUpdate({ isOpened, onHide }) {
+    if (!isOpened && onHide) onHide();
   }
 
   componentWillUnmount() {
@@ -167,45 +174,8 @@ class Modal extends PureComponent<Props, State> {
     e.stopPropagation();
   };
 
-  animateEnter = () =>
-    Animated.timing(this.state.animShowHide, { ...animShowHide, toValue: 1 }).start();
-
-  animateLeave = () =>
-    Animated.timing(this.state.animShowHide, { ...animShowHide, toValue: 0 }).start();
-
   render() {
-    const { animShowHide, isInDOM } = this.state;
-    const { children, render, centered, onClose, data, isOpened, width, theme } = this.props;
-
-    if (!isInDOM) {
-      return null;
-    }
-
-    const backdropStyle = {
-      ...BACKDROP_STYLE,
-      opacity: animShowHide,
-    };
-
-    const containerStyle = {
-      ...CONTAINER_STYLE,
-      justifyContent: centered ? "center" : "flex-start",
-      pointerEvents: isOpened ? "auto" : "none",
-    };
-
-    const scale = animShowHide.interpolate({
-      inputRange: [0, 1],
-      outputRange: [1.1, 1],
-      clamp: true,
-    });
-
-    const bodyWrapperStyle = {
-      ...BODY_WRAPPER_STYLE,
-      background: theme.colors.palette.background.paper,
-      color: theme.colors.palette.text.shade80,
-      opacity: animShowHide,
-      transform: [{ scale }],
-      width: width || BODY_WRAPPER_STYLE.width,
-    };
+    const { children, render, centered, onClose, data, isOpened, width } = this.props;
 
     const renderProps = {
       onClose,
@@ -213,53 +183,40 @@ class Modal extends PureComponent<Props, State> {
     };
 
     const modal = (
-      <>
-        <Animated.div style={backdropStyle}>
-          {/* {// Will only render at the end of december
-          isSnowTime() ? <Snow numFlakes={200} /> : null} */}
-        </Animated.div>
-        <div style={containerStyle} onClick={this.handleClickOnBackdrop}>
-          <Animated.div style={bodyWrapperStyle} onClick={this.swallowClick}>
-            {render && render(renderProps)}
-            {children}
-          </Animated.div>
-        </div>
-      </>
+      <Transition
+        in={isOpened}
+        appear
+        mountOnEnter
+        unmountOnExit
+        timeout={{
+          appear: 100,
+          enter: 100,
+          exit: 200,
+        }}
+      >
+        {state => {
+          return (
+            <>
+              <Container
+                state={state}
+                centered={centered}
+                isOpened={isOpened}
+                onClick={this.handleClickOnBackdrop}
+              >
+                <BodyWrapper state={state} width={width} onClick={this.swallowClick}>
+                  {render && render(renderProps)}
+                  {children}
+                </BodyWrapper>
+              </Container>
+            </>
+          );
+        }}
+      </Transition>
     );
 
     return domNode ? createPortal(modal, domNode) : null;
   }
 }
 
-const BACKDROP_STYLE = {
-  pointerEvents: "none",
-  position: "fixed",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  background: "rgba(0, 0, 0, 0.4)",
-  zIndex: 100,
-};
-
-const CONTAINER_STYLE = {
-  ...BACKDROP_STYLE,
-  background: "transparent",
-  padding: "60px 0 60px 0",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-};
-
-const BODY_WRAPPER_STYLE = {
-  width: 500,
-  borderRadius: 3,
-  boxShadow: "box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2)",
-  flexShrink: 1,
-  display: "flex",
-  flexDirection: "column",
-  overflow: "auto",
-};
-
 // $FlowFixMe: define a OwnProps
-export default withTheme(connect(mapStateToProps, mapDispatchToProps)(Modal));
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);
