@@ -196,19 +196,17 @@ class Modal extends PureComponent<Props> {
       >
         {state => {
           return (
-            <>
-              <Container
-                state={state}
-                centered={centered}
-                isOpened={isOpened}
-                onClick={this.handleClickOnBackdrop}
-              >
-                <BodyWrapper state={state} width={width} onClick={this.swallowClick}>
-                  {render && render(renderProps)}
-                  {children}
-                </BodyWrapper>
-              </Container>
-            </>
+            <Container
+              state={state}
+              centered={centered}
+              isOpened={isOpened}
+              onClick={this.handleClickOnBackdrop}
+            >
+              <BodyWrapper state={state} width={width} onClick={this.swallowClick}>
+                {render && render(renderProps)}
+                {children}
+              </BodyWrapper>
+            </Container>
           );
         }}
       </Transition>
