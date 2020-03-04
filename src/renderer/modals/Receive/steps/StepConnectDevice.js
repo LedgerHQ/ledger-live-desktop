@@ -5,11 +5,15 @@ import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import DeviceAction from "~/renderer/components/DeviceAction";
-import { action } from "~/renderer/components/DeviceAction/actions/app";
+import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 import TrackPage from "~/renderer/analytics/TrackPage";
+import { command } from "~/renderer/commands";
 
 import type { StepProps } from "../Body";
+
+const connectAppExec = command("connectApp");
+const action = createAction(connectAppExec);
 
 export default function StepConnectDevice({
   account,

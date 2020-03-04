@@ -2,15 +2,17 @@
 
 import React from "react";
 import { Trans } from "react-i18next";
-
+import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
+import type { SignedOperation } from "@ledgerhq/live-common/lib/types";
 import type { StepProps } from "../types";
 import type { Device } from "~/renderer/reducers/devices";
-import type { SignedOperation } from "@ledgerhq/live-common/lib/types";
-
 import DeviceAction from "~/renderer/components/DeviceAction";
 import StepProgress from "~/renderer/components/StepProgress";
-import { action } from "~/renderer/components/DeviceAction/actions/transaction";
 import { useBroadcast } from "~/renderer/hooks/useBroadcast";
+import { command } from "~/renderer/commands";
+
+const connectAppExec = command("connectApp");
+const action = createAction(connectAppExec);
 
 const Result = ({
   signedOperation,
