@@ -43,8 +43,8 @@ const exportOperations = async (
   callback?: () => void,
 ) => {
   try {
-    await ipcRenderer.invoke("export-operations", path, csv);
-    if (callback) {
+    const res = await ipcRenderer.invoke("export-operations", path, csv);
+    if (res && callback) {
       callback();
     }
   } catch (error) {}
@@ -139,7 +139,7 @@ class ExportOperations extends PureComponent<Props, State> {
             ) : (
               <Box>
                 <IconWrapperCircle>
-                  <IconDownloadCloud size={42} />
+                  <IconDownloadCloud size={30} />
                 </IconWrapperCircle>
                 <LabelWrapper ff="Inter|Regular">
                   <Trans i18nKey="exportOperationsModal.desc" />
