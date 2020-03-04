@@ -1248,18 +1248,18 @@
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "Quitter et annuler l'installation de l'application ?",
-        "description": "Quitter annulera l'installation de l'application en cours.",
+        "title": "Finish app installation in progress?",
+        "description": "Quitting the Manager will interrupt the app installation. Please finish the installation to install the apps in the queue.",
         "stay": "Terminer l'installation"
       },
       "uninstall": {
-        "title": "Quitter et annuler la désinstallation de l'application ?",
-        "description": "Quitter annulera la désinstallation de l'application en cours.",
+        "title": "Finish app uninstallation in progress?",
+        "description": "Quitting the Manager will interrupt the app uninstallations in progress.",
         "stay": "Terminer la désinstallation"
       },
       "update": {
-        "title": "Quitter et annuler les mises à jour ?",
-        "description": "Quitter annulera les mises à jour en cours.",
+        "title": "Finish app updates in progress?",
+        "description": "Quitting the Manager will interrupt the app updates in progress.",
         "stay": "Terminer les mises à jour"
       },
       "quit": "Quitter le Manager"
