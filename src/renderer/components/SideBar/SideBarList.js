@@ -15,7 +15,6 @@ const ListWrapper = styled(Box)`
   ${p => (p.scroll ? p.theme.overflow.y : "")};
   ${p => (p.scroll ? "padding-right: 2px" : "")};
   will-change: unset;
-  flex: auto;
   ${p =>
     p.collapsed
       ? `
@@ -33,11 +32,20 @@ type Props = {
   titleRight?: any,
   emptyState?: any,
   collapsed?: boolean,
+  flex?: string,
 };
 
 class SideBarList extends Component<Props> {
   render() {
-    const { children, title, scroll, titleRight, emptyState, collapsed } = this.props;
+    const {
+      children,
+      title,
+      scroll,
+      titleRight,
+      emptyState,
+      collapsed,
+      flex = "auto",
+    } = this.props;
 
     return (
       <>
@@ -51,7 +59,14 @@ class SideBarList extends Component<Props> {
           </>
         )}
         {children ? (
-          <ListWrapper collapsed={collapsed} scroll={scroll} flow={2} px={3} fontSize={3}>
+          <ListWrapper
+            collapsed={collapsed}
+            scroll={scroll}
+            flow={2}
+            px={3}
+            fontSize={3}
+            flex={flex}
+          >
             {children}
           </ListWrapper>
         ) : emptyState ? (

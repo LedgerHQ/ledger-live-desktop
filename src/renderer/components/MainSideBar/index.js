@@ -293,15 +293,15 @@ const MainSideBar = () => {
               />
               <Space of={30} />
             </SideBarList>
-
+            <Space grow of={30} />
             <Hide visible={secondAnim && hasStarredAccounts} mb={"-8px"}>
               <Separator />
             </Hide>
 
-            <SideBarList scroll title={t("sidebar.stars")} collapsed={secondAnim}>
+            <SideBarList scroll flex="1 1 40%" title={t("sidebar.stars")} collapsed={secondAnim}>
               <Stars pathname={location.pathname} collapsed={secondAnim} />
             </SideBarList>
-            <Space grow />
+            <Space of={30} grow />
             <TagContainer collapsed={!secondAnim} />
           </SideBar>
         );
