@@ -1248,18 +1248,18 @@
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "Kilépés és az alkalmazás telepítés megszakítása?",
-        "description": "A kilépés megszakítja az alkalmazás telepítési folyamatát.",
+        "title": "Finish app installation in progress?",
+        "description": "Quitting the Manager will interrupt the app installation. Please finish the installation to install the apps in the queue.",
         "stay": "Telepítés befejezése"
       },
       "uninstall": {
-        "title": "Kilépés és az alkalmazás törlés megszakítása?",
-        "description": "A kilépés megszakítja az alkalmazás törlési folyamatát.",
+        "title": "Finish app uninstallation in progress?",
+        "description": "Quitting the Manager will interrupt the app uninstallations in progress.",
         "stay": "Törlés befejezése"
       },
       "update": {
-        "title": "Kilépés és az alkalmazás frissítés megszakítása?",
-        "description": "A kilépés megszakítja az alkalmazás frissítési folyamatát.",
+        "title": "Finish app updates in progress?",
+        "description": "Quitting the Manager will interrupt the app updates in progress.",
         "stay": "Frissítés befejezése"
       },
       "quit": "Eszközkezelő bezárása"
