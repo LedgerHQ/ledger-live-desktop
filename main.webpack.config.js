@@ -45,6 +45,13 @@ module.exports = {
         exclude: /node_modules/,
         options: babelConfig,
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: "file-loader",
+        options: {
+          name: "[path][name].[ext]",
+        },
+      },
     ],
   },
   resolve: {
