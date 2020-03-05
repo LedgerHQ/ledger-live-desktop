@@ -411,6 +411,7 @@
         "updateAllOutOfMemory": "Pas assez d'espace pour mettre à jour, veuillez désinstaller des applications",
         "install": "Installer",
         "installed": "Installée",
+        "updated": "Updated",
         "uninstall": "Désinstaller",
         "notEnoughSpace": "Espace insuffisant",
         "supported": "Compatible Ledger Live",
