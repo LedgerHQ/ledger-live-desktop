@@ -41,7 +41,7 @@
     "copy": "Másolás",
     "copied": "Másolva",
     "addressCopied": "Cím másolva",
-    "experimentalFeature": "Kísérleti",
+    "experimentalFeature": "Kísérleti funkciók",
     "dismiss": "Elvetés",
     "information": "Információ",
     "search": "Keresés...",
@@ -104,7 +104,7 @@
     "exchange": "Kripto vásárlása"
   },
   "stars": {
-    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0> Számlák </0></1> oldal innentől itt fog megjelenni!",
+    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0>Számlák</0></1> oldalon innentől itt fog megjelenni!",
     "tooltip": "Számla csillagozása"
   },
   "account": {
