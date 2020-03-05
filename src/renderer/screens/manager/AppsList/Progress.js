@@ -3,6 +3,10 @@ import React from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
+import type { State } from "@ledgerhq/live-common/lib/apps/types";
+
+import { useAppInstallProgress } from "@ledgerhq/live-common/lib/apps/react";
+
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import ProgressBar from "~/renderer/components/Progress";
@@ -16,15 +20,18 @@ const Holder = styled.div`
 `;
 
 type Props = {
+  state: State,
+  name: string,
   updating?: boolean,
   installing?: boolean,
   uninstalling?: boolean,
-  progress?: number,
   isCurrent: boolean,
 };
 
 // we can forward appOp from state.currentAppOp if it matches the contextual app
-const Progress = ({ updating, installing, uninstalling, progress, isCurrent }: Props) => {
+const Progress = ({ state, name, updating, installing, uninstalling, isCurrent }: Props) => {
+  const progress = useAppInstallProgress(state, name);
+
   return (
     <Box flex="1" horizontal justifyContent="flex-end" overflow="hidden">
       <Box flex="0 0 auto" vertical alignItems="flex-end" justifyContent="center">

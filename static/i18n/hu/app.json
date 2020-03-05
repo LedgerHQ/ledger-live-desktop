@@ -41,10 +41,10 @@
     "copy": "Másolás",
     "copied": "Másolva",
     "addressCopied": "Cím másolva",
-    "experimentalFeature": "Kísérleti",
+    "experimentalFeature": "Kísérleti funkciók",
     "dismiss": "Elvetés",
     "information": "Információ",
-    "search": "Search...",
+    "search": "Keresés...",
     "lockScreen": {
       "title": "Üdv újra",
       "subTitle": null,
@@ -104,7 +104,7 @@
     "exchange": "Kripto vásárlása"
   },
   "stars": {
-    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0> Számlák </0></1> oldal innentől itt fog megjelenni!",
+    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0>Számlák</0></1> oldalon innentől itt fog megjelenni!",
     "tooltip": "Számla csillagozása"
   },
   "account": {
@@ -216,7 +216,7 @@
     "modal": {
       "title": "Eredetiség ellenőrzés"
     },
-    "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
+    "deviceInBootloader": "Az eszköz Bootloader módban. Kattints a <1>Folytatásra</1> a frissítéshez."
   },
   "tokensList": {
     "title": "Tokenek",
@@ -362,17 +362,17 @@
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> szabad",
       "noFreeSpace": "Nincs elég hely",
-      "installed": "Apps",
+      "installed": "Alkalmazások",
       "capacity": "Kapacitás",
       "used": "Felhasznált",
       "firmware": "Szoftver {{version}}",
       "genuine": "Az eszköz eredeti",
-      "incomplete": "Some apps were not recognized. Please uninstall and reinstall them."
+      "incomplete": "Egyes alkalmazások nem lettek felismerve. Távolítsd el, és telepítsd újra őket."
     },
     "applist": {
-      "placeholder": "No match for the search and selected filters",
+      "placeholder": "Nincs egyezés a kereséshez és a kiválasztott szűrőkhöz",
       "placeholderNoAppsInstalled": "Nincsenek telepített alkalmazások az eszközödön",
-      "placeholderGoToCatalog": "Go to the App catalog to install apps",
+      "placeholderGoToCatalog": "Nyisd meg az Alkalmazás katalógust alkalmazások telepítéséhez",
       "noResultsFound": "Nincs találat",
       "noResultsDesc": "Kérjük, ellenőrizd a helyesírást, és próbáld újra",
       "filter": {
@@ -397,7 +397,7 @@
       "updatable": {
         "title": "Frissítések elérhetők",
         "progressTitle": "{{number}} Alkalmazás frissítések",
-        "progressWarning": "Do not quit Manager during update.",
+        "progressWarning": "Ne zárd be az eszközkezelőt a frissítés alatt.",
         "progress": "Összes frissítése..."
       },
       "item": {
@@ -408,11 +408,11 @@
         "scheduled": "Sorban áll",
         "update": "Frissítés elérhető",
         "updateAll": "Összes frissítése",
-        "updateAllOutOfMemory": "Not enough storage to update, please uninstall some apps",
+        "updateAllOutOfMemory": "Nincs elég hely a frissítéshez, kérlek törölj pár alkalmazást",
         "install": "Telepítés",
         "installed": "Telepített",
         "uninstall": "Törlés",
-        "notEnoughSpace": "Not enough storage",
+        "notEnoughSpace": "Nincs elég hely",
         "supported": "Ledger Live által támogatott",
         "addAccount": "Számla hozzáadása",
         "addAccountTooltip": "{{appName}} számla hozzáadása",
@@ -420,7 +420,7 @@
         "learnMore": "Tudj meg többet",
         "learnMoreTooltip": "Tudj meg többet a(z) {{appName}} alkalmazásról",
         "removeTooltip": "{{appName}} törlése",
-        "useAppForToken": "{{tokenName}} tokens can be managed using the {{appName}} app",
+        "useAppForToken": "A(z) {{tokenName}} tokenek a(z) {{appName}} alkalmazással kezelhetők",
         "noAppNeededForToken": "{{appName}} telepítése a(z) {{tokenName}} tokenhez",
         "tokenAppDisclaimer": "{{tokenName}} egy {{tokenType}} token, mely a(z) {{appName}} alkalmazást használja. {{tokenName}} kezeléséhez, <1>telepítsd a(z) {{appName}} alkalmazást </1> és küld a tokeneket a(z) <3> {{appName}} számládra </3>",
         "tokenAppDisclaimerInstalled": "{{tokenName}} egy {{tokenType}} token, mely a(z) {{appName}} alkalmazást használja. A(z) {{tokenName}} kezeléséhez, <1>nyisd meg a(z) {{appName}} alkalmazást </1> és küld a tokeneket a(z) <3> {{appName}} számládra </3>",
@@ -430,7 +430,7 @@
       "uninstall": {
         "title": "Összes törlése",
         "subtitle": "Minden alkalmazás törlése?",
-        "description": "Don’t worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog."
+        "description": "Ne aggódj, az alkalmazások törlése nem érinti a bennük tárolt kriptóidat. Újratelepítheted őket az Alkalmazás katalógusban."
       }
     },
     "apps": {
@@ -624,7 +624,7 @@
       "steps": {
         "starter": {
           "title": "Kapj tárolási jutalmakat",
-          "description": "Delegate your Tezos account to a third-party validator to earn staking rewards while keeping full security and control of your assets",
+          "description": "Kapj tárolási jutalmakat Tezos számlád harmadik személy általi megerősítésre történő delegálásával, miközben teljes biztonságban és irányítás alatt tartod a kriptód",
           "bullet": {
             "delegate": "Delegált számláid a tieid maradnak.",
             "access": "Bármikor hozzáférhetsz a kriptóidhoz.",
@@ -1199,7 +1199,7 @@
       "description": "Kérlek, használd az eszközkezelőt minden alkalmazás törléséhez és ellenőrizd, hogy elérhető-e szoftverfrissítés mielőtt újratelepítenéd őket"
     },
     "FirmwareNotRecognized": {
-      "title": "Device firmware is not recognized",
+      "title": "Az Eszközszoftver nem lett felismerve",
       "description": "Kérlek, lépj kapcsolatba a Ledger ügyféltámogatással"
     },
     "HardResetFail": {
@@ -1248,18 +1248,18 @@
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "Kilépés és az alkalmazás telepítés megszakítása?",
-        "description": "A kilépés megszakítja az alkalmazás telepítési folyamatát.",
+        "title": "Alkalmazás telepítési folyamat befejezése?",
+        "description": "Az eszközkezelő bezárása megszakítja az alkalmazás telepítést. Kérlek, fejezd be a sorba állított alkalmazások telepítését.",
         "stay": "Telepítés befejezése"
       },
       "uninstall": {
-        "title": "Kilépés és az alkalmazás törlés megszakítása?",
-        "description": "A kilépés megszakítja az alkalmazás törlési folyamatát.",
+        "title": "Folyamatban lévő alkalmazás törlés befejezése?",
+        "description": "Az eszközkezelő bezárása megszakítja az alkalmazás folyamatban lévő törlését.",
         "stay": "Törlés befejezése"
       },
       "update": {
-        "title": "Kilépés és az alkalmazás frissítés megszakítása?",
-        "description": "A kilépés megszakítja az alkalmazás frissítési folyamatát.",
+        "title": "Folyamatban lévő alkalmazás frissítések megszakítása?",
+        "description": "Az eszközkezelő bezárása megszakítja az alkalmazás frissítési folyamatát.",
         "stay": "Frissítés befejezése"
       },
       "quit": "Eszközkezelő bezárása"

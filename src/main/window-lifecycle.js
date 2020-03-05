@@ -2,6 +2,7 @@
 import "./setup";
 import { BrowserWindow, screen } from "electron";
 import path from "path";
+import icon from "../../build/icons/icon.png";
 
 const intFromEnv = (key: string, def: number): number => {
   const v = process.env[key];
@@ -30,7 +31,7 @@ const getWindowPosition = (width, height, display = screen.getPrimaryDisplay()) 
 };
 
 const defaultWindowOptions = {
-  // icons: 'path/to/icon'
+  icon,
   backgroundColor: "#fff",
   webPreferences: {
     blinkFeatures: "OverlayScrollbars",

@@ -63,7 +63,6 @@ type Props = {
   state: State,
   dispatch: Action => void,
   isIncomplete: boolean,
-  progress?: number,
   setAppInstallDep: (*) => void,
   setAppUninstallDep: (*) => void,
   t: TFunction,
@@ -75,7 +74,6 @@ const AppsList = ({
   state,
   dispatch,
   isIncomplete,
-  progress = {},
   setAppInstallDep,
   setAppUninstallDep,
   t,
@@ -140,13 +138,12 @@ const AppsList = ({
         appStoreView={appStoreView}
         onlyUpdate={onlyUpdate}
         showActions={showActions}
-        progress={progress}
         setAppInstallDep={setAppInstallDep}
         setAppUninstallDep={setAppUninstallDep}
         addAccount={addAccount}
       />
     ),
-    [state, dispatch, isIncomplete, progress, setAppInstallDep, setAppUninstallDep, addAccount],
+    [state, dispatch, isIncomplete, setAppInstallDep, setAppUninstallDep, addAccount],
   );
 
   return (
@@ -163,7 +160,6 @@ const AppsList = ({
         state={state}
         dispatch={dispatch}
         isIncomplete={isIncomplete}
-        progress={progress}
       />
       {isIncomplete ? null : (
         <StickyTabBar>

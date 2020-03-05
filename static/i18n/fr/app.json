@@ -1248,18 +1248,18 @@
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "Quitter et annuler l'installation de l'application ?",
-        "description": "Quitter annulera l'installation de l'application en cours.",
+        "title": "Terminer l'installation de l'application en cours ?",
+        "description": "Quitter le Manager interrompra l'installation de l'application. Veuillez terminer l'installation pour installer les applications dans la file d'attente.",
         "stay": "Terminer l'installation"
       },
       "uninstall": {
-        "title": "Quitter et annuler la désinstallation de l'application ?",
-        "description": "Quitter annulera la désinstallation de l'application en cours.",
+        "title": "Terminer la désinstallation de l'application en cours ?",
+        "description": "Quitter le Manager interrompra la désinstallation des applications en cours.",
         "stay": "Terminer la désinstallation"
       },
       "update": {
-        "title": "Quitter et annuler les mises à jour ?",
-        "description": "Quitter annulera les mises à jour en cours.",
+        "title": "Terminer les mises à jour d'applications en cours ?",
+        "description": "Quitter le Manager interrompra les mises à jour d'applications en cours.",
         "stay": "Terminer les mises à jour"
       },
       "quit": "Quitter le Manager"

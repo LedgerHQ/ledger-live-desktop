@@ -1279,21 +1279,21 @@
     "@ledgerhq/errors" "^5.9.0"
     events "^3.1.0"
 
-"@ledgerhq/ledger-core@^6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-6.0.1.tgz#90f44c4bd194863980248cc7281fa0fd62c67ec4"
-  integrity sha512-LHbqbwJu9BRYNhcRv/17YeXR9srOXKgDw7EpC7TFbS1Q9dc4zQwK8mOEKT8TJmrN7SZgT3N3BVaRGm3MG1nR0A==
+"@ledgerhq/ledger-core@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-6.1.0.tgz#aba2da91a538afaedf73ef402ff4aa0f767317df"
+  integrity sha512-H6Kvtfr8xO0eOFI7CU08XyrDP9Q1GW6tTtj8/e7k5dK/vUO3JdpgssL6PB+Fyn57N7lCYqxv7neShXCn5+vqDQ==
   dependencies:
-    bindings "1.3.0"
+    bindings "1.5.0"
     nan "^2.6.2"
     node-gyp "^6.1.0"
     node-pre-gyp "^0.14.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^12.0.3":
-  version "12.0.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.0.3.tgz#f030e14e3d3026d487514484925f15e8c33048d1"
-  integrity sha512-/z9LN4FPQHE77teAQxkTritNHXxFN+7aUkbW2n8VlYhA74jAAgrza3ZEBGSMAhIlSwLVFEdvlpV65ifoQeKZdQ==
+"@ledgerhq/live-common@^12.3.0":
+  version "12.3.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.3.0.tgz#2596cae3a4e648ac587f9984731a996a4761c4c3"
+  integrity sha512-xPjKjfrYgNIgP8ELkfTWVvV2qUht8jUWq4FkHXC/5QSxsvHPUkVp0vahGXM1HCBi8AyDSuldojZzdcN1vknTjQ==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "5.9.0"
@@ -2753,12 +2753,7 @@ binary@~0.3.0:
     buffers "~0.1.1"
     chainsaw "~0.1.0"
 
-bindings@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.3.0.tgz#b346f6ecf6a95f5a815c5839fc7cdb22502f1ed7"
-  integrity sha512-DpLh5EzMR2kzvX1KIlVC0VkC3iZtHKTgdtZ0a3pglBZdaQFjt5S9g9xd1lE+YvXyfd6mtCeRnrUfOLYiTMlNSw==
-
-bindings@^1.2.1, bindings@^1.3.0, bindings@^1.5.0:
+bindings@1.5.0, bindings@^1.2.1, bindings@^1.3.0, bindings@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.5.0.tgz#10353c9e945334bc0511a6d90b38fbc7c9c504df"
   integrity sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==
