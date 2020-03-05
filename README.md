@@ -19,14 +19,27 @@ Ledger Live is an hybrid desktop application built with Electron, React, Redux, 
  <img src="/docs/architecture.png" width="550"/>
 </p>
 
+## Download
+
+The latest stable release is available on [ledger.com/ledger-live](https://www.ledger.com/ledger-live/).
+
+Previous versions and pre-releases can be downloaded on here from the [Releases](https://github.com/LedgerHQ/ledger-live-desktop/releases) section.
+
+### Compatibility
+- macOS 10.10+
+- Windows 8+ (x64)
+- Linux (x64)
+
+# Development
+
 ## Setup
 
 ### Requirements
 
-- [NodeJS](https://nodejs.org) lts/erbium (Node 12.x)
-- [Yarn](https://yarnpkg.com) lts
-- [Python](https://www.python.org/) v2.7.10 (used by [node-gyp](https://github.com/nodejs/node-gyp) to build native addons)
-- You will also need a C++ compiler
+- [NodeJS](https://nodejs.org) LTS/erbium (Node 12.x)
+- [Yarn 1.x](https://classic.yarnpkg.com/) (Classic)
+- [Python](https://www.python.org/) 2.7 or 3.5+
+- A C/C++ toolchain (see [node-gyp documentation](https://github.com/nodejs/node-gyp#on-unix))
 
 ## Install
 

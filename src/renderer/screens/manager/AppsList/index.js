@@ -11,7 +11,7 @@ import {
   isIncompleteState,
   distribute,
 } from "@ledgerhq/live-common/lib/apps";
-import { useAppsRunner, useAppInstallProgress } from "@ledgerhq/live-common/lib/apps/react";
+import { useAppsRunner } from "@ledgerhq/live-common/lib/apps/react";
 
 import NavigationGuard from "~/renderer/components/NavigationGuard";
 import Quit from "~/renderer/icons/Quit";
@@ -57,8 +57,6 @@ const AppsList = ({ deviceInfo, result, exec, t }: Props) => {
   const isIncomplete = isIncompleteState(state);
 
   const { installQueue, uninstallQueue, currentError } = state;
-
-  const progress = useAppInstallProgress(state, installQueue[0]);
 
   const jobInProgress = installQueue.length > 0 || uninstallQueue.length > 0;
 
@@ -119,7 +117,6 @@ const AppsList = ({ deviceInfo, result, exec, t }: Props) => {
         state={state}
         dispatch={dispatch}
         isIncomplete={isIncomplete}
-        progress={progress}
         setAppInstallDep={setAppInstallDep}
         setAppUninstallDep={setAppUninstallDep}
         t={t}

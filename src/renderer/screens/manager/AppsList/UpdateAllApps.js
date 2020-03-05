@@ -61,10 +61,9 @@ type Props = {
   state: State,
   dispatch: Action => void,
   isIncomplete: boolean,
-  progress: number,
 };
 
-const UpdateAllApps = ({ update, state, dispatch, isIncomplete, progress }: Props) => {
+const UpdateAllApps = ({ update, state, dispatch, isIncomplete }: Props) => {
   const [open, setIsOpen] = useState();
   const { updateAllQueue } = state;
 
@@ -160,10 +159,9 @@ const UpdateAllApps = ({ update, state, dispatch, isIncomplete, progress }: Prop
         appStoreView={false}
         onlyUpdate={true}
         showActions={false}
-        progress={progress}
       />
     ),
-    [state, dispatch, isIncomplete, progress],
+    [state, dispatch, isIncomplete],
   );
 
   return (
