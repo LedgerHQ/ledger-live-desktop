@@ -79,7 +79,7 @@
   },
   "time": {
     "minute": "Perc",
-    "minute_plural": "Percek",
+    "minute_plural": "Perc",
     "hour": "Óra",
     "hour_plural": "Órák",
     "range": {
@@ -104,7 +104,7 @@
     "exchange": "Kripto vásárlása"
   },
   "stars": {
-    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0>Számlák</0></1> oldalon innentől itt fog megjelenni!",
+    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0>Számlák</0></1> oldalon innentől itt fognak megjelenni!",
     "tooltip": "Számla csillagozása"
   },
   "account": {
@@ -508,7 +508,7 @@
     "steps": {
       "chooseAccount": {
         "title": "Számla",
-        "label": "Számla a jóváírásra",
+        "label": "Jóváírandó számla",
         "parentAccount": "1. Válassz ki egy {{currencyName}} számlát",
         "token": "2. Válassz egy tokent"
       },
@@ -545,7 +545,7 @@
       "details": {
         "from": "Innen",
         "to": "Ide",
-        "selectAccountDebit": "Jóváírandó számla",
+        "selectAccountDebit": "Használni kívánt számla",
         "recipientAddress": "Fogadó címe",
         "amount": "Mennyiség",
         "fees": "Hálózati díjak",
@@ -591,7 +591,7 @@
   "distribution": {
     "asset": "Kriptovaluta",
     "price": "Ár",
-    "distribution": "Átruházás",
+    "distribution": "Arány",
     "amount": "Mennyiség",
     "value": "Érték",
     "showAll": "Összes megjelenítése",
@@ -701,7 +701,7 @@
       "display": "Általános",
       "cryptoAssets": "Kriptovaluták",
       "currencies": "Kriptovaluták",
-      "rates": "Arányok",
+      "rates": "Árak",
       "help": "Segítség",
       "about": "Rólunk",
       "experimental": "Kísérleti funkciók",
@@ -747,12 +747,12 @@
       "confirmationsNbDesc": "Állítsd be, hogy hány megerősített tranzakció szükséges ahhoz, hogy egy tranzakció megerősítettként legyen megjelenítve."
     },
     "rates": {
-      "desc": "Itt található az összes arány, amelyet az ellenérték kiszámításához használnak.\nVálaszd ki, hogy melyik tarifa szolgáltatót használja az egyes tarifákhoz.",
+      "desc": "Itt található az összes ár, amelyet az ellenérték kiszámításához használnak.\nVálaszd ki, hogy melyik ár szolgáltatót használja az egyes kriptókhoz.",
       "fromTo": "Innen {{from}} ide {{to}}",
       "noCounterValue": "Nincs adat ehhez a kereskedési párhoz",
       "cryptoToFiat": "Kripto fiatra",
       "cryptoToCrypto": "Kripto Kriptóra",
-      "rate": "Mérték",
+      "rate": "Eszközpár",
       "last": "Utolsó {{days}} nap",
       "price": "Ár",
       "exchange": "Ár szolgáltató"
@@ -794,7 +794,7 @@
     },
     "experimental": {
       "desc": "Próbáld ki kísérleti funkcióinkat, és tudasd velünk, hogy mit gondolsz róluk",
-      "disclaimer": "Ezek kísérleti funkciók, melyekhez „elengedhetetlenül” biztosítjuk a tech hozzáértésű közösségünk tesztelését. Ezek változhatnak, szünetelhetnek, vagy megszűnhetnek bármikor. Ezek engedélyezésével, elfogadod, hogy saját felelősségre használod őket."
+      "disclaimer": "Ezek kísérleti funkciók, melyekhez „elengedhetetlenül” biztosítjuk a tech hozzáértésű közösségünk tesztelését. Ezek változhatnak, szünetelhetnek, vagy megszűnhetnek bármikor. Ezek engedélyezésével elfogadod, hogy saját felelősségre használod őket."
     },
     "hardResetModal": {
       "title": "Ledger Live alaphelyzetbe állítása",
@@ -1127,7 +1127,7 @@
     }
   },
   "RecipientField": {
-    "placeholder": "Írd be a {{currencyName}} címet"
+    "placeholder": "Írd be a(z) {{currencyName}} címet"
   },
   "Terms": {
     "title": "Felhasználási feltételek",
