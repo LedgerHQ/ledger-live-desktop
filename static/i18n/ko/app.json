@@ -411,6 +411,7 @@
         "updateAllOutOfMemory": "Not enough storage to update, please uninstall some apps",
         "install": "Install",
         "installed": "Installed",
+        "updated": "Updated",
         "uninstall": "Uninstall",
         "notEnoughSpace": "Not enough storage",
         "supported": "Ledger Live supported",
