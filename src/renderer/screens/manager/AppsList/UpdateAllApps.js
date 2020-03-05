@@ -138,10 +138,12 @@ const UpdateAllApps = ({ update, state, dispatch, isIncomplete }: Props) => {
             fontSize={3}
             event="Manager Update All"
           >
-            <IconLoader size={14} />
-            <Text style={{ marginLeft: 8 }}>
-              <Trans i18nKey="manager.applist.item.updateAll" />
-            </Text>
+            <Box horizontal alignItems="center" justifyContent="center">
+              <IconLoader size={14} />
+              <Text style={{ marginLeft: 8 }}>
+                <Trans i18nKey="manager.applist.item.updateAll" />
+              </Text>
+            </Box>
           </Button>
         </ToolTip>
       </>
