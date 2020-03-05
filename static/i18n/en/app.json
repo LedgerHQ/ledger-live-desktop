@@ -715,7 +715,10 @@
         "ethereumGasLimit": "Gas limit",
         "ethereumGasPrice": "Gas price",
         "unitPerByte": "{{unit}} per byte",
-        "stellarMemo": "Memo"
+        "stellarMemo": "Memo",
+        "stellarNetwork": "Network",
+        "stellarNetworkPublic": "Public",
+        "stellarSource": "Source Address"
       },
       "verification": {
         "streaming": {
@@ -1787,6 +1790,9 @@
     },
     "NewAccountMinimumTransaction": {
       "title": "A new account requires at least 1 XLM to be activated"
+    },
+    "SourceHasMultiSign": {
+      "title": "Please disable multisign to send XLM"
     }
   }
 }
