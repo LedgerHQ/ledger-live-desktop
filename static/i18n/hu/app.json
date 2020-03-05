@@ -411,6 +411,7 @@
         "updateAllOutOfMemory": "Nincs elég hely a frissítéshez, kérlek törölj pár alkalmazást",
         "install": "Telepítés",
         "installed": "Telepített",
+        "updated": "Updated",
         "uninstall": "Törlés",
         "notEnoughSpace": "Nincs elég hely",
         "supported": "Ledger Live által támogatott",
