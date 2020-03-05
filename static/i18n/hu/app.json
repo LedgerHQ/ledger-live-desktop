@@ -41,7 +41,7 @@
     "copy": "Másolás",
     "copied": "Másolva",
     "addressCopied": "Cím másolva",
-    "experimentalFeature": "Kísérleti",
+    "experimentalFeature": "Kísérleti funkciók",
     "dismiss": "Elvetés",
     "information": "Információ",
     "search": "Keresés...",
@@ -104,7 +104,7 @@
     "exchange": "Kripto vásárlása"
   },
   "stars": {
-    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0> Számlák </0></1> oldal innentől itt fog megjelenni!",
+    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0>Számlák</0></1> oldalon innentől itt fog megjelenni!",
     "tooltip": "Számla csillagozása"
   },
   "account": {
@@ -1248,18 +1248,18 @@
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "Kilépés és az alkalmazás telepítés megszakítása?",
-        "description": "A kilépés megszakítja az alkalmazás telepítési folyamatát.",
+        "title": "Alkalmazás telepítési folyamat befejezése?",
+        "description": "Az eszközkezelő bezárása megszakítja az alkalmazás telepítést. Kérlek, fejezd be a sorba állított alkalmazások telepítését.",
         "stay": "Telepítés befejezése"
       },
       "uninstall": {
-        "title": "Kilépés és az alkalmazás törlés megszakítása?",
-        "description": "A kilépés megszakítja az alkalmazás törlési folyamatát.",
+        "title": "Folyamatban lévő alkalmazás törlés befejezése?",
+        "description": "Az eszközkezelő bezárása megszakítja az alkalmazás folyamatban lévő törlését.",
         "stay": "Törlés befejezése"
       },
       "update": {
-        "title": "Kilépés és az alkalmazás frissítés megszakítása?",
-        "description": "A kilépés megszakítja az alkalmazás frissítési folyamatát.",
+        "title": "Folyamatban lévő alkalmazás frissítések megszakítása?",
+        "description": "Az eszközkezelő bezárása megszakítja az alkalmazás frissítési folyamatát.",
         "stay": "Frissítés befejezése"
       },
       "quit": "Eszközkezelő bezárása"

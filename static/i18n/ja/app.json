@@ -1248,18 +1248,18 @@
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "Quit and cancel app install?",
-        "description": "Quitting will cancel the app installing in progress.",
+        "title": "Finish app installation in progress?",
+        "description": "Quitting the Manager will interrupt the app installation. Please finish the installation to install the apps in the queue.",
         "stay": "Finish install"
       },
       "uninstall": {
-        "title": "Quit and cancel app uninstalling?",
-        "description": "Quitting will cancel the app uninstalls in progress.",
+        "title": "Finish app uninstallation in progress?",
+        "description": "Quitting the Manager will interrupt the app uninstallations in progress.",
         "stay": "Finish uninstalling"
       },
       "update": {
-        "title": "Quit and cancel app updates?",
-        "description": "Quitting will cancel the app updates in progress.",
+        "title": "Finish app updates in progress?",
+        "description": "Quitting the Manager will interrupt the app updates in progress.",
         "stay": "Finish updates"
       },
       "quit": "Quit Manager"
