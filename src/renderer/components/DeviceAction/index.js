@@ -3,6 +3,7 @@ import React, { useEffect, Component } from "react";
 import { createStructuredSelector } from "reselect";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
+import type { Action } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { setPreferredDeviceModel } from "~/renderer/actions/settings";
 import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
@@ -11,7 +12,6 @@ import type { Device } from "~/renderer/reducers/devices";
 import AutoRepair from "~/renderer/components/AutoRepair";
 import TransactionConfirm from "~/renderer/components/TransactionConfirm";
 import useTheme from "~/renderer/hooks/useTheme";
-import type { Action } from "./actions/shared";
 import {
   renderAllowManager,
   renderAllowOpeningApp,

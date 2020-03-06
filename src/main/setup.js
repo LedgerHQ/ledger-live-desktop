@@ -33,10 +33,15 @@ ipcMain.handle("save-logs", async (event, path: { canceled: boolean, filePath: s
 
 ipcMain.handle(
   "export-operations",
-  async (event, path: { canceled: boolean, filePath: string }, csv: string) => {
-    Promise.resolve().then(
-      () => !path.canceled && path.filePath && csv && fsWriteFile(path.filePath, csv),
-    );
+  async (event, path: { canceled: boolean, filePath: string }, csv: string): Promise<boolean> => {
+    try {
+      if (!path.canceled && path.filePath && csv) {
+        await fsWriteFile(path.filePath, csv);
+        return true;
+      }
+    } catch (error) {}
+
+    return false;
   },
 );
 
