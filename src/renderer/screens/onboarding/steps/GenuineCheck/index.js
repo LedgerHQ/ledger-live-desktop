@@ -21,6 +21,9 @@ import OnboardingFooter from "../../OnboardingFooter";
 import type { StepProps } from "../..";
 import GenuineCheckModal from "./GenuineCheckModal";
 import GenuineCheckErrorPage from "./GenuineCheckErrorPage";
+import { useDispatch, useSelector } from "react-redux";
+import { setHasInstalledApps } from "~/renderer/actions/settings";
+import { hasCompletedOnboardingSelector } from "~/renderer/reducers/settings";
 
 const CardTitle = styled(Box).attrs(() => ({
   ff: "Inter|SemiBold",
@@ -38,7 +41,9 @@ const GenuineCheck = (props: StepProps) => {
   const { displayErrorScreen } = genuine;
   const model = getDeviceModel(onboarding.deviceModelId || "nanoS");
 
+  const dispatch = useDispatch();
   const [pin, setPin] = useState(undefined);
+  const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
   const [recovery, setRecovery] = useState(undefined);
   const [isGenuineCheckModalOpened, setGenuineCheckModalOpened] = useState(false);
 
@@ -76,12 +81,18 @@ const GenuineCheck = (props: StepProps) => {
     setGenuineCheckModalOpened(false);
   }, []);
 
-  const handleGenuineCheckPass = useCallback(() => {
-    updateGenuineCheck({
-      isDeviceGenuine: true,
-    });
-    setGenuineCheckModalOpened(false);
-  }, [updateGenuineCheck]);
+  const handleGenuineCheckPass = useCallback(
+    ({ result }: any) => {
+      if (!hasCompletedOnboarding && (!result || !result.installed.length)) {
+        dispatch(setHasInstalledApps(false));
+      }
+      updateGenuineCheck({
+        isDeviceGenuine: true,
+      });
+      setGenuineCheckModalOpened(false);
+    },
+    [hasCompletedOnboarding, updateGenuineCheck, dispatch],
+  );
 
   const redoGenuineCheck = useCallback(() => {
     setRecovery(undefined);
