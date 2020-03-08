@@ -52,7 +52,6 @@ export type Props = {
   tickXScale: string,
   color?: string,
   hideAxis?: boolean,
-  dateFormat?: string,
   isInteractive?: boolean,
   renderTooltip?: Function,
   renderTickY: (t: number) => string | number,
@@ -68,15 +67,7 @@ const ChartContainer: ThemedComponent<{}> = styled.div.attrs(({ height }) => ({
   position: relative;
 `;
 
-const Chart = ({
-  height,
-  data,
-  color,
-  renderTickY,
-  renderTooltip,
-  valueKey = "value",
-  dateFormat = "MMM D",
-}: Props) => {
+const Chart = ({ height, data, color, renderTickY, renderTooltip, valueKey = "value" }: Props) => {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
   const theme = useTheme("colors.palette");
