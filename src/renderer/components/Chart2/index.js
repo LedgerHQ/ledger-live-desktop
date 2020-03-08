@@ -37,6 +37,7 @@ import React, { useRef, useLayoutEffect, useState, useMemo } from "react";
 import ChartJs from "chart.js";
 import styled from "styled-components";
 import Color from "color";
+import moment from "moment";
 
 import useTheme from "~/renderer/hooks/useTheme";
 import Tooltip from "./Tooltip";
@@ -97,7 +98,9 @@ const Chart = ({
           pointRadius: 0,
           borderWidth: 2,
           data: data.map(d => ({
-            x: new Date(d.date).toLocaleDateString(),
+            x: moment(new Date(d.date))
+              .startOf("day")
+              .toDate(),
             y: d[valueKey].toNumber(),
           })),
         },
