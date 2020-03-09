@@ -15,7 +15,7 @@ import { replaceAccounts } from "~/renderer/actions/accounts";
 import { closeModal } from "~/renderer/actions/modals";
 import Track from "~/renderer/analytics/Track";
 import type { Step } from "~/renderer/components/Stepper";
-import SyncSkipUnderPriority from "~/renderer/components/SyncSkipUnderPriority";
+import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import Modal from "~/renderer/components/Modal";
 import Stepper from "~/renderer/components/Stepper";
 import StepChooseCurrency, { StepChooseCurrencyFooter } from "./steps/StepChooseCurrency";

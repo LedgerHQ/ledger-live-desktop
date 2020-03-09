@@ -4,6 +4,7 @@ import React, { PureComponent, useCallback, useEffect, useRef, useState } from "
 import { Trans } from "react-i18next";
 import { connect, useDispatch } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { useBridgeSync, useAccountSyncState } from "@ledgerhq/live-common/lib/bridge/react";
 
 import Box from "~/renderer/components/Box";
 import { Rotating } from "~/renderer/components/Spinner";
@@ -20,12 +21,8 @@ import {
 } from "~/renderer/reducers/accounts";
 import { colors } from "~/renderer/styles/theme";
 import { openModal } from "~/renderer/actions/modals";
-import { useBridgeSync } from "~/renderer/bridge/BridgeSyncContext";
-import { accountSyncStateSelector } from "~/renderer/reducers/bridgeSync";
-import type { AsyncState } from "~/renderer/reducers/bridgeSync";
 
 const mapStateToProps = createStructuredSelector({
-  syncState: accountSyncStateSelector,
   isUpToDateAccount: isUpToDateAccountSelector,
   needsMigration: accountNeedsMigrationSelector,
 });
@@ -118,32 +115,23 @@ type OwnProps = {
 type Props = OwnProps & {
   isUpToDateAccount: boolean,
   needsMigration: boolean,
-  syncState: AsyncState,
 };
 
-const AccountSyncStatusIndicator = ({
-  accountId,
-  isUpToDateAccount,
-  needsMigration,
-  syncState: { pending, error },
-}: Props) => {
-  const setSyncBehavior = useBridgeSync();
+const AccountSyncStatusIndicator = ({ accountId, isUpToDateAccount, needsMigration }: Props) => {
+  const { pending, error } = useAccountSyncState({ accountId });
+  const sync = useBridgeSync();
   const [userAction, setUserAction] = useState(false);
   const timeout = useRef(null);
   const onClick = useCallback(
     e => {
       e.stopPropagation();
-      setSyncBehavior({
-        type: "SYNC_ONE_ACCOUNT",
-        accountId,
-        priority: 10,
-      });
+      sync({ type: "SYNC_ONE_ACCOUNT", accountId, priority: 10 });
       setUserAction(true);
       // a user action is kept in memory for a short time (which will correspond to a spinner time)
       clearTimeout(timeout.current);
       timeout.current = setTimeout(() => setUserAction(false), 1000);
     },
-    [setSyncBehavior, accountId],
+    [sync, accountId],
   );
 
   // at unmount, clear all timeouts

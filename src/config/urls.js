@@ -55,7 +55,4 @@ export const urls = {
     CantOpenDevice: "https://support.ledger.com/hc/en-us/articles/115005165269",
     WrongDeviceForAccount: "https://support.ledger.com/hc/en-us/articles/360025321733",
   },
-
-  // Currencies status
-  currenciesStatus: "http://resources.live.ledger.app/public_resources/currencies.json",
 };

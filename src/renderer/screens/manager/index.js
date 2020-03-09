@@ -1,7 +1,7 @@
 // @flow
 import React, { useState, useCallback } from "react";
 import Dashboard from "~/renderer/screens/manager/Dashboard";
-import SyncSkipUnderPriority from "~/renderer/components/SyncSkipUnderPriority";
+import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import { action } from "~/renderer/components/DeviceAction/actions/manager";
 
