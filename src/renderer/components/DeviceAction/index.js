@@ -3,7 +3,6 @@ import React, { useEffect, Component } from "react";
 import { createStructuredSelector } from "reselect";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
-import type { Action } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { setPreferredDeviceModel } from "~/renderer/actions/settings";
 import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
@@ -23,6 +22,7 @@ import {
   renderRequestQuitApp,
   renderRequiresAppInstallation,
 } from "./rendering";
+import type { Action } from "./actions/shared";
 
 type OwnProps<R, H, P> = {
   overridesPreferredDeviceModel?: DeviceModelId,
