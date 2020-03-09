@@ -27,8 +27,10 @@ const AppRow = styled.div`
 `;
 
 const AppName = styled.div`
+  flex: 1;
   flex-direction: column;
   padding-left: 15px;
+  max-height: 40px;
   & > * {
     display: block;
   }
@@ -49,7 +51,6 @@ type Props = {
   onlyUpdate?: boolean,
   forceUninstall?: boolean,
   showActions?: boolean,
-  progress: number,
   setAppInstallDep?: (*) => void,
   setAppUninstallDep?: (*) => void,
   addAccount?: (*) => void,
@@ -65,7 +66,6 @@ const Item: React$ComponentType<Props> = ({
   onlyUpdate,
   forceUninstall,
   showActions = true,
-  progress,
   setAppInstallDep,
   setAppUninstallDep,
   addAccount,
@@ -98,14 +98,9 @@ const Item: React$ComponentType<Props> = ({
           }`}</Text>
           <Text ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
             <Trans
-              i18nKey={
-                installed && !installed.updated
-                  ? "manager.applist.item.versionNew"
-                  : "manager.applist.item.version"
-              }
+              i18nKey="manager.applist.item.version"
               values={{
-                version,
-                newVersion: newVersion && newVersion !== version ? ` ${newVersion}` : null,
+                version: onlyUpdate && newVersion && newVersion !== version ? newVersion : version,
               }}
             />
           </Text>
@@ -120,7 +115,7 @@ const Item: React$ComponentType<Props> = ({
       <Box flex="0.6" horizontal alignContent="center" justifyContent="center">
         {isLiveSupported && (
           <>
-            <Box mr={2}>
+            <Box pr={2}>
               <IconCheckFull size={16} />
             </Box>
             <Text ml={1} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
@@ -139,7 +134,6 @@ const Item: React$ComponentType<Props> = ({
         onlyUpdate={onlyUpdate}
         showActions={showActions}
         notEnoughMemoryToInstall={notEnoughMemoryToInstall}
-        progress={progress}
         setAppInstallDep={setAppInstallDep}
         setAppUninstallDep={setAppUninstallDep}
         isLiveSupported={isLiveSupported}
@@ -149,17 +143,4 @@ const Item: React$ComponentType<Props> = ({
   );
 };
 
-export default memo<Props>(
-  Item,
-  (
-    { state: { installQueue: _installQueue, uninstallQueue: _uninstallQueue } },
-    { state: { installQueue, uninstallQueue }, progress, app: { name } },
-  ) => {
-    /** compare _prev to next props that if different should trigger a rerender */
-    return (
-      !(progress !== 1 && installQueue.length > 0 && installQueue[0] === name) &&
-      installQueue.length === _installQueue.length &&
-      uninstallQueue.length === _uninstallQueue.length
-    );
-  },
-);
+export default memo<Props>(Item);

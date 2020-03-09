@@ -31,6 +31,7 @@ const Bar: ThemedComponent<{
   height: 1px;
   left: ${p => p.start}%;
   position: absolute;
+  overflow: hidden;
   right: ${p => p.end}%;
   top: 8px;
   z-index: 1;

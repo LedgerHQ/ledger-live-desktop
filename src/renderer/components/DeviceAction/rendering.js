@@ -356,7 +356,11 @@ export const renderLoading = ({
 export const renderBootloaderStep = ({ onAutoRepair }: { onAutoRepair: () => void }) => (
   <Wrapper>
     <Title>
-      <Trans i18nKey="genuinecheck.deviceInBootloader" />
+      <Trans i18nKey="genuinecheck.deviceInBootloader">
+        {"placeholder"}
+        <b>{"placeholder"}</b>
+        {"placeholder"}
+      </Trans>
     </Title>
     <Button mt={2} primary onClick={onAutoRepair}>
       <Trans i18nKey="common.continue" />

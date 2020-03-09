@@ -17,7 +17,7 @@ import Text from "~/renderer/components/Text";
 
 import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
-// import CryptoCurrencyIcon from '~/renderer/icons/CryptoCurrencyIcon'
+import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 
 import { Separator, Item, TextLink, AngleDown, Check } from "./common";
 
@@ -41,7 +41,7 @@ const AssetCrumb = () => {
   const renderItem = useCallback(
     ({ item, isActive }) => (
       <Item key={item.currency.id} isActive={isActive}>
-        {/* <CryptoCurrencyIcon size={16} currency={item.currency} /> */}
+        <CryptoCurrencyIcon size={16} currency={item.currency} />
         <Text ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
           {item.label}
         </Text>
@@ -56,7 +56,7 @@ const AssetCrumb = () => {
   );
 
   const onAccountSelected = useCallback(
-    ({ selectedIem: item }) => {
+    ({ selectedItem: item }) => {
       if (!item) {
         return null;
       }
@@ -102,7 +102,7 @@ const AssetCrumb = () => {
         onStateChange={onAccountSelected}
       >
         <TextLink>
-          {/* {activeItem && <CryptoCurrencyIcon size={14} currency={activeItem.currency} />} */}
+          {activeItem && <CryptoCurrencyIcon size={14} currency={activeItem.currency} />}
           <Button>{activeItem.currency.name}</Button>
           <AngleDown>
             <IconAngleDown size={16} />

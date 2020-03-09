@@ -43,6 +43,7 @@ const SuccessInstall = styled.div`
   color: ${p => p.theme.colors.positiveGreen};
   display: flex;
   flex-direction: row;
+  align-items: center;
   padding: 10px 20px;
   > svg {
     padding-right: 5px;
@@ -59,7 +60,6 @@ type Props = {
   forceUninstall?: boolean,
   notEnoughMemoryToInstall: boolean,
   showActions?: boolean,
-  progress: number,
   setAppInstallDep?: (*) => void,
   setAppUninstallDep?: (*) => void,
   isLiveSupported: boolean,
@@ -78,14 +78,13 @@ const AppActions: React$ComponentType<Props> = React.memo(
     onlyUpdate,
     notEnoughMemoryToInstall,
     showActions = true,
-    progress,
     setAppInstallDep,
     setAppUninstallDep,
     isLiveSupported,
     addAccount,
   }: Props) => {
     const { name } = app;
-    const { installedAvailable, installQueue, uninstallQueue } = state;
+    const { installedAvailable, installQueue, uninstallQueue, updateAllQueue } = state;
 
     const needsInstallDeps = useAppInstallNeedsDeps(state, app);
 
@@ -109,6 +108,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
       openURL(urls.appSupport);
     }, []);
 
+    const updating = useMemo(() => updateAllQueue.includes(name), [updateAllQueue, name]);
     const installing = useMemo(() => installQueue.includes(name), [installQueue, name]);
     const uninstalling = useMemo(() => uninstallQueue.includes(name), [uninstallQueue, name]);
 
@@ -120,130 +120,144 @@ const AppActions: React$ComponentType<Props> = React.memo(
     return (
       <AppActionsWrapper>
         {installing || uninstalling ? (
-          <Progress installing={installing} uninstalling={uninstalling} progress={progress} />
-        ) : (
-          showActions && (
-            <>
-              {installed ? (
-                isLiveSupported ? (
-                  <Tooltip
-                    content={
-                      canAddAccount ? (
-                        <Trans
-                          i18nKey="manager.applist.item.addAccountTooltip"
-                          values={{ appName: name }}
-                        />
-                      ) : (
-                        <Trans i18nKey="manager.applist.item.addAccountWarn" />
-                      )
-                    }
-                  >
-                    <Button
-                      color={canAddAccount ? "palette.primary.main" : "palette.text.shade40"}
-                      inverted
-                      style={{ display: "flex", backgroundColor: "rgba(0,0,0,0)" }}
-                      fontSize={3}
-                      disabled={!canAddAccount}
-                      onClick={onAddAccount}
-                      event="Manager AddAccount Click"
-                      eventProperties={{
-                        appName: name,
-                        appVersion: app.version,
-                      }}
-                    >
-                      <AccountAdd size={16} />
-                      <Text style={{ marginLeft: 8 }}>
-                        <Trans i18nKey="manager.applist.item.addAccount" />
-                      </Text>
-                    </Button>
-                  </Tooltip>
-                ) : (
-                  <Tooltip
-                    content={
-                      <Trans
-                        i18nKey="manager.applist.item.learnMoreTooltip"
-                        values={{ appName: name }}
-                      />
-                    }
-                  >
-                    <Button
-                      inverted
-                      style={{ display: "flex" }}
-                      fontSize={3}
-                      onClick={onSupportLink}
-                      event="Manager SupportLink Click"
-                      eventProperties={{
-                        appName: name,
-                        appVersion: app.version,
-                      }}
-                    >
-                      <LinkIcon size={16} />
-                      <Text ff="Inter" style={{ marginLeft: 8 }}>
-                        <Trans i18nKey="manager.applist.item.learnMore" />
-                      </Text>
-                    </Button>
-                  </Tooltip>
-                )
-              ) : null}
-              {appStoreView && installed && (
-                <SuccessInstall>
-                  <IconCheck size={16} />
-                  <Text ff="Inter|SemiBold" fontSize={4}>
-                    <Trans i18nKey="manager.applist.item.installed" />
-                  </Text>
-                </SuccessInstall>
-              )}
-
-              {!installed && (
+          <Progress
+            state={state}
+            name={name}
+            updating={updating}
+            installing={installing}
+            isCurrent={installQueue.length > 0 && installQueue[0] === name}
+            uninstalling={uninstalling}
+          />
+        ) : showActions ? (
+          <>
+            {installed ? (
+              isLiveSupported ? (
                 <Tooltip
                   content={
-                    notEnoughMemoryToInstall ? (
-                      <Trans i18nKey="manager.applist.item.notEnoughSpace" />
-                    ) : null
+                    canAddAccount ? (
+                      <Trans
+                        i18nKey="manager.applist.item.addAccountTooltip"
+                        values={{ appName: name }}
+                      />
+                    ) : (
+                      <Trans i18nKey="manager.applist.item.addAccountWarn" />
+                    )
                   }
                 >
                   <Button
-                    style={{ display: "flex" }}
-                    lighterPrimary
-                    disabled={notEnoughMemoryToInstall}
-                    onClick={onInstall}
-                    event="Manager Install Click"
+                    color={canAddAccount ? "palette.primary.main" : "palette.text.shade40"}
+                    inverted
+                    style={{ display: "flex", backgroundColor: "rgba(0,0,0,0)" }}
+                    fontSize={3}
+                    disabled={!canAddAccount}
+                    onClick={onAddAccount}
+                    event="Manager AddAccount Click"
                     eventProperties={{
                       appName: name,
                       appVersion: app.version,
                     }}
                   >
-                    <IconArrowDown size={14} />
+                    <AccountAdd size={16} />
                     <Text style={{ marginLeft: 8 }}>
-                      <Trans i18nKey="manager.applist.item.install" />
+                      <Trans i18nKey="manager.applist.item.addAccount" />
                     </Text>
                   </Button>
                 </Tooltip>
-              )}
-              {(((installed || !installedAvailable) && !appStoreView && !onlyUpdate) ||
-                forceUninstall) && (
+              ) : (
                 <Tooltip
                   content={
                     <Trans
-                      i18nKey="manager.applist.item.removeTooltip"
+                      i18nKey="manager.applist.item.learnMoreTooltip"
                       values={{ appName: name }}
                     />
                   }
                 >
                   <Button
-                    style={{ padding: 13 }}
-                    onClick={onUninstall}
-                    event="Manager Uninstall Click"
+                    inverted
+                    style={{ display: "flex" }}
+                    fontSize={3}
+                    onClick={onSupportLink}
+                    event="Manager SupportLink Click"
                     eventProperties={{
                       appName: name,
                       appVersion: app.version,
                     }}
                   >
-                    <IconTrash color={colors.grey} size={14} />
+                    <LinkIcon size={16} />
+                    <Text ff="Inter" style={{ marginLeft: 8 }}>
+                      <Trans i18nKey="manager.applist.item.learnMore" />
+                    </Text>
                   </Button>
                 </Tooltip>
-              )}
-            </>
+              )
+            ) : null}
+            {appStoreView && installed && (
+              <SuccessInstall>
+                <IconCheck size={16} />
+                <Text ff="Inter|SemiBold" fontSize={4}>
+                  <Trans i18nKey="manager.applist.item.installed" />
+                </Text>
+              </SuccessInstall>
+            )}
+
+            {!installed && (
+              <Tooltip
+                content={
+                  notEnoughMemoryToInstall ? (
+                    <Trans i18nKey="manager.applist.item.notEnoughSpace" />
+                  ) : null
+                }
+              >
+                <Button
+                  style={{ display: "flex" }}
+                  lighterPrimary
+                  disabled={notEnoughMemoryToInstall}
+                  onClick={onInstall}
+                  event="Manager Install Click"
+                  eventProperties={{
+                    appName: name,
+                    appVersion: app.version,
+                  }}
+                >
+                  <IconArrowDown size={14} />
+                  <Text style={{ marginLeft: 8 }}>
+                    <Trans i18nKey="manager.applist.item.install" />
+                  </Text>
+                </Button>
+              </Tooltip>
+            )}
+            {(((installed || !installedAvailable) && !appStoreView && !onlyUpdate) ||
+              forceUninstall) && (
+              <Tooltip
+                content={
+                  <Trans i18nKey="manager.applist.item.removeTooltip" values={{ appName: name }} />
+                }
+              >
+                <Button
+                  style={{ padding: 13 }}
+                  onClick={onUninstall}
+                  event="Manager Uninstall Click"
+                  eventProperties={{
+                    appName: name,
+                    appVersion: app.version,
+                  }}
+                >
+                  <IconTrash color={colors.grey} size={14} />
+                </Button>
+              </Tooltip>
+            )}
+          </>
+        ) : (
+          onlyUpdate &&
+          updating &&
+          !uninstalling &&
+          installed && (
+            <SuccessInstall>
+              <IconCheck size={16} />
+              <Text ff="Inter|SemiBold" fontSize={4}>
+                <Trans i18nKey="manager.applist.item.updated" />
+              </Text>
+            </SuccessInstall>
           )
         )}
       </AppActionsWrapper>

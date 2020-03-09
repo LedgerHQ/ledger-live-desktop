@@ -3,6 +3,10 @@ import React from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
+import type { State } from "@ledgerhq/live-common/lib/apps/types";
+
+import { useAppInstallProgress } from "@ledgerhq/live-common/lib/apps/react";
+
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import ProgressBar from "~/renderer/components/Progress";
@@ -16,13 +20,18 @@ const Holder = styled.div`
 `;
 
 type Props = {
+  state: State,
+  name: string,
+  updating?: boolean,
   installing?: boolean,
   uninstalling?: boolean,
-  progress?: number,
+  isCurrent: boolean,
 };
 
 // we can forward appOp from state.currentAppOp if it matches the contextual app
-const Progress = ({ installing, uninstalling, progress }: Props) => {
+const Progress = ({ state, name, updating, installing, uninstalling, isCurrent }: Props) => {
+  const progress = useAppInstallProgress(state, name);
+
   return (
     <Box flex="1" horizontal justifyContent="flex-end" overflow="hidden">
       <Box flex="0 0 auto" vertical alignItems="flex-end" justifyContent="center">
@@ -37,9 +46,11 @@ const Progress = ({ installing, uninstalling, progress }: Props) => {
           <Text ff="Inter|SemiBold" fontSize={3} color="palette.primary.main">
             <Trans
               i18nKey={
-                uninstalling
+                updating
+                  ? "manager.applist.item.updating"
+                  : uninstalling
                   ? "manager.applist.item.uninstalling"
-                  : installing && progress !== 1
+                  : installing && isCurrent && progress !== 1
                   ? "manager.applist.item.installing"
                   : "manager.applist.item.scheduled"
               }
@@ -49,10 +60,10 @@ const Progress = ({ installing, uninstalling, progress }: Props) => {
         <Holder>
           {uninstalling ? (
             <ProgressBar infinite timing={1200} />
-          ) : installing && progress !== 1 ? (
+          ) : installing && isCurrent && progress !== 1 ? (
             <ProgressBar infinite timing={1200} progress={progress || 0} />
           ) : (
-            <ProgressBar infinite color="palette.text.shade20" timing={1200} />
+            <ProgressBar color="palette.text.shade20" progress={-1} />
           )}
         </Holder>
       </Box>

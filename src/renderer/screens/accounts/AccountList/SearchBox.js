@@ -1,8 +1,8 @@
 // @flow
 
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import styled from "styled-components";
-
+import { useTranslation } from "react-i18next";
 import Box from "~/renderer/components/Box";
 import SearchIcon from "~/renderer/icons/Search";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -10,6 +10,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 type Props = {
   onTextChange: (evt: SyntheticInputEvent<HTMLInputElement>) => void,
   search?: string,
+  placeholder?: *,
 };
 
 const SearchInput: ThemedComponent<{}> = styled.input`
@@ -34,9 +35,9 @@ const SearchIconContainer: ThemedComponent<{ focused?: boolean }> = styled(Box).
   justify-content: center;
 `;
 
-const SearchBox = ({ onTextChange, search }: Props) => {
+const SearchBox = forwardRef(function Search({ onTextChange, search, placeholder }: Props, ref) {
   const [focused, setFocused] = useState(false);
-
+  const { t } = useTranslation();
   return (
     <>
       <SearchIconContainer pr={3} focused={focused || !!search}>
@@ -46,12 +47,13 @@ const SearchBox = ({ onTextChange, search }: Props) => {
         autoFocus
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
-        placeholder="Search"
+        placeholder={placeholder || t("common.search")}
         onChange={onTextChange}
         value={search}
+        ref={ref}
       />
     </>
   );
-};
+});
 
 export default React.memo<Props>(SearchBox);

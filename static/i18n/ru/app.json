@@ -39,12 +39,12 @@
     "reverify": "Проверить повторно",
     "verify": "Проверить",
     "copy": "Копировать",
-    "copyAddress": "Копировать",
     "copied": "Скопировано",
     "addressCopied": "Адрес скопирован",
     "experimentalFeature": "Экспериментальная функция",
     "dismiss": "Dismiss",
     "information": "Information",
+    "search": "Search...",
     "lockScreen": {
       "title": "С возвращением",
       "subTitle": null,
@@ -73,7 +73,9 @@
     }
   },
   "byteSize": {
-    "kbUnit": "{{size}}Kb"
+    "bytes": "{{size}} bytes",
+    "kbUnit": "{{size}} Kb",
+    "mbUnit": "{{size}} Mb"
   },
   "time": {
     "minute": "Минута",
@@ -214,7 +216,7 @@
     "modal": {
       "title": "Проверка подлинности"
     },
-    "deviceInBootloader": "Device in Bootloader mode. Click on Continue to update it."
+    "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
   },
   "tokensList": {
     "title": "Токены",
@@ -250,9 +252,6 @@
       "pendingDevices": "1 аккаунт не может быть обновлен. Пожалуйста, подключите устройство, связанное с учетной записью ниже",
       "pendingDevices_plural": "{{totalMigratableAccounts}} учетных записей не может быть обновлено. Пожалуйста, подключите устройство, связанное с учетной записью ниже",
       "doItLaterBtn": "Отложить на потом"
-    },
-    "connectDevice": {
-      "title": "Обновление {{currencyName}}"
     },
     "progress": {
       "finished": {
@@ -362,18 +361,18 @@
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> free",
-      "noFreeSpace": "no storage left",
-      "installed": "Installed",
+      "noFreeSpace": "No storage left",
+      "installed": "Apps",
       "capacity": "Capacity",
       "used": "Used",
       "firmware": "Firmware {{version}}",
       "genuine": "Device is genuine",
-      "incomplete": "Some apps were not recognized by our apps catalog. Please uninstall and reinstall them."
+      "incomplete": "Some apps were not recognized. Please uninstall and reinstall them."
     },
     "applist": {
-      "placeholder": "There are no apps matching the search and filters selected",
+      "placeholder": "No match for the search and selected filters",
       "placeholderNoAppsInstalled": "No apps installed on your device",
-      "placeholderGoToCatalog": "Go to the Apps catalog to install apps",
+      "placeholderGoToCatalog": "Go to the App catalog to install apps",
       "noResultsFound": "No results found",
       "noResultsDesc": "Please verify the spelling and try again",
       "filter": {
@@ -397,35 +396,41 @@
       },
       "updatable": {
         "title": "Updates available",
-        "progressTitle": "{{number}} app updates",
-        "progressWarning": "Do not quit manager during update",
+        "progressTitle": "{{number}} App updates",
+        "progressWarning": "Do not quit Manager during update.",
         "progress": "Updating all..."
       },
       "item": {
         "version": "Version {{version}}",
-        "versionNew": "Version {{version}} (NEW{{newVersion}})",
         "installing": "Installing...",
         "uninstalling": "Uninstalling...",
-        "scheduled": "Scheduled",
+        "updating": "Updating...",
+        "scheduled": "Queued",
         "update": "Update available",
-        "updateAll": "Update All",
-        "updateAllOutOfMemory": "Not enough space to update, please uninstall some apps",
+        "updateAll": "Update all",
+        "updateAllOutOfMemory": "Not enough storage to update, please uninstall some apps",
         "install": "Install",
         "installed": "Installed",
         "uninstall": "Uninstall",
-        "notEnoughSpace": "Not enough space",
+        "notEnoughSpace": "Not enough storage",
         "supported": "Ledger Live supported",
         "addAccount": "Add account",
         "addAccountTooltip": "Add {{appName}} account",
         "addAccountWarn": "Please wait for the app updates to finish",
         "learnMore": "Learn more",
         "learnMoreTooltip": "Learn more about {{appName}}",
-        "removeTooltip": "Uninstall {{appName}}"
+        "removeTooltip": "Uninstall {{appName}}",
+        "useAppForToken": "{{tokenName}} tokens can be managed using the {{appName}} app",
+        "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
+        "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>",
+        "tokenAppDisclaimerInstalled": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>open the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>",
+        "goToAccounts": "Go to accounts",
+        "intallParentApp": "Install {{appName}} app"
       },
       "uninstall": {
         "title": "Uninstall all",
         "subtitle": "Uninstall all apps?",
-        "description": "Don’t worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog"
+        "description": "Don’t worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog."
       }
     },
     "apps": {
@@ -437,7 +442,7 @@
       "dependencyUninstall": {
         "title": " Uninstall {{app}} and its related apps?",
         "showAll": "Show apps to uninstall",
-        "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled aswell.",
+        "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled as well.",
         "confirm": "Uninstall {{app}} and other apps"
       }
     },
@@ -510,12 +515,6 @@
         "title": "Устройство",
         "withoutDevice": "Нет устройства?"
       },
-      "confirmAddress": {
-        "title": "Проверка",
-        "action": "Проверить адрес на устройстве",
-        "text": "Пожалуйста сравните {{currencyName}} адрес который отображается в Ledger Live и на вашем устройстве Ledger. Он должен совпадать",
-        "support": "Обратная связь"
-      },
       "receiveFunds": {
         "title": "Получить"
       },
@@ -557,7 +556,6 @@
         "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
-        "title": "Проверка",
         "streaming": {
           "accurate": "Loading... ({{percentage}})",
           "inaccurate": "Loading..."
@@ -621,13 +619,12 @@
     "durationDays_plural": "{{count}} days",
     "howItWorks": "How delegation works",
     "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
-    "earnRewards": "Earn rewards",
     "overdelegated": "Overdelegated",
     "flow": {
       "steps": {
         "starter": {
           "title": "Earn staking rewards",
-          "description": "Delegate your Tezos account to a third party validator to earn staking rewards while keeping full security and control of your assets",
+          "description": "Delegate your Tezos account to a third-party validator to earn staking rewards while keeping full security and control of your assets",
           "bullet": {
             "delegate": "Delegated accounts stay yours.",
             "access": "You can access your assets anytime.",
@@ -1202,7 +1199,7 @@
       "description": "Пожалуйста, используйте Менеджер для удаления всех приложений и проверьте, доступно ли обновление прошивки перед их переустановкой"
     },
     "FirmwareNotRecognized": {
-      "title": "Firmware is not recognized",
+      "title": "Device firmware is not recognized",
       "description": "Please contact Ledger Support"
     },
     "HardResetFail": {
@@ -1251,18 +1248,18 @@
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "Quit and cancel app install?",
-        "description": "Quitting will cancel the app installing in progress.",
+        "title": "Finish app installation in progress?",
+        "description": "Quitting the Manager will interrupt the app installation. Please finish the installation to install the apps in the queue.",
         "stay": "Finish install"
       },
       "uninstall": {
-        "title": "Quit and cancel app uninstalling?",
-        "description": "Quitting will cancel the app uninstalls in progress.",
+        "title": "Finish app uninstallation in progress?",
+        "description": "Quitting the Manager will interrupt the app uninstallations in progress.",
         "stay": "Finish uninstalling"
       },
       "update": {
-        "title": "Quit and cancel app updates?",
-        "description": "Quitting will cancel the app updates in progress.",
+        "title": "Finish app updates in progress?",
+        "description": "Quitting the Manager will interrupt the app updates in progress.",
         "stay": "Finish updates"
       },
       "quit": "Quit Manager"

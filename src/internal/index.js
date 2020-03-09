@@ -1,6 +1,7 @@
 // @flow
 import { unsubscribeSetup } from "./live-common-setup";
 
+import { setEnvUnsafe } from "@ledgerhq/live-common/lib/env";
 import { serializeError } from "@ledgerhq/errors";
 import { getCurrencyBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
@@ -94,6 +95,12 @@ process.on("message", m => {
         getCurrencyBridge(currency).hydrate(data);
       });
 
+      break;
+    }
+
+    case "setEnv": {
+      const { name, value } = m.env;
+      setEnvUnsafe(name, value);
       break;
     }
 

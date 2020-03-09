@@ -250,7 +250,7 @@ const MainSideBar = () => {
                 iconActiveColor="wallet"
                 onClick={handleClickDashboard}
                 isActive={location.pathname === "/"}
-                NotifComponent={noAccounts ? undefined : UpdateDot}
+                NotifComponent={noAccounts ? undefined : <UpdateDot collapsed={collapsed} />}
                 disabled={noAccounts}
                 collapsed={secondAnim}
               />
@@ -260,7 +260,7 @@ const MainSideBar = () => {
                 iconActiveColor="wallet"
                 isActive={location.pathname === "/accounts"}
                 onClick={handleClickAccounts}
-                NotifComponent={noAccounts ? UpdateDot : undefined}
+                NotifComponent={noAccounts ? <UpdateDot collapsed={collapsed} /> : undefined}
                 collapsed={secondAnim}
               />
               <SideBarListItem
@@ -297,15 +297,15 @@ const MainSideBar = () => {
               />
               <Space of={30} />
             </SideBarList>
-
+            <Space grow of={30} />
             <Hide visible={secondAnim && hasStarredAccounts} mb={"-8px"}>
               <Separator />
             </Hide>
 
-            <SideBarList scroll title={t("sidebar.stars")} collapsed={secondAnim}>
+            <SideBarList scroll flex="1 1 40%" title={t("sidebar.stars")} collapsed={secondAnim}>
               <Stars pathname={location.pathname} collapsed={secondAnim} />
             </SideBarList>
-            <Space grow />
+            <Space of={30} grow />
             <TagContainer collapsed={!secondAnim} />
           </SideBar>
         );

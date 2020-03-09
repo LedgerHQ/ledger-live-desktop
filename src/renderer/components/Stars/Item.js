@@ -13,15 +13,8 @@ import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import Hide from "~/renderer/components/MainSideBar/Hide";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import Box from "~/renderer/components/Box";
-import Text from "~/renderer/components/Text";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import ParentCryptoCurrencyIcon from "~/renderer/components/ParentCryptoCurrencyIcon";
-
-const AccountName: ThemedComponent<{}> = styled(Text)`
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-`;
 
 const ParentCryptoCurrencyIconWrapper: ThemedComponent<{}> = styled.div`
   width: 20px;
@@ -37,11 +30,16 @@ const ItemWrapper: ThemedComponent<{ active: boolean }> = styled.div.attrs(p => 
   flex: 1;
   align-items: center;
   display: flex;
-  padding: 10px 15px;
+  padding: 6px 15px;
   width: 200px;
   border-radius: 4px;
   border: 1px solid transparent;
-  &:hover ${AccountName},&:active ${AccountName} {
+  cursor: pointer;
+  margin: 2px 0px;
+  color: ${p =>
+    p.active ? p.theme.colors.palette.text.shade100 : p.theme.colors.palette.text.shade80};
+
+  &:hover {
     color: ${p => p.theme.colors.palette.text.shade100};
   }
 `;
@@ -77,7 +75,7 @@ const Item = ({ account, index, pathname, collapsed }: Props) => {
         </ParentCryptoCurrencyIconWrapper>
         <Box vertical flex={1}>
           <Hide visible={!collapsed}>
-            <Ellipsis color="palette.text.shade80">{getAccountName(account)}</Ellipsis>
+            <Ellipsis>{getAccountName(account)}</Ellipsis>
             <FormattedVal
               alwaysShowSign={false}
               animateTicker={false}

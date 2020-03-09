@@ -1,4 +1,5 @@
 const babelPlugins = require("./babel.plugins");
+const electronVersion = require("./package.json").devDependencies.electron;
 
 module.exports = api =>
   api.env("test")
@@ -8,7 +9,7 @@ module.exports = api =>
             "@babel/preset-env",
             {
               targets: {
-                electron: "7.1.9",
+                electron: electronVersion,
                 node: "current",
               },
               modules: "commonjs",

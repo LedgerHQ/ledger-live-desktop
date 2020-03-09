@@ -40,7 +40,7 @@ const UpdatableHeader = styled.div`
 const Badge = styled(Text)`
   border-radius: 29px;
   background-color: ${p => p.theme.colors.palette.primary.main};
-  color: ${p => p.theme.colors.palette.background.paper};
+  color: ${p => p.color || p.theme.colors.palette.background.paper};
   height: 18px;
   display: flex;
   align-items: center;
@@ -61,10 +61,9 @@ type Props = {
   state: State,
   dispatch: Action => void,
   isIncomplete: boolean,
-  progress: number,
 };
 
-const UpdateAllApps = ({ update, state, dispatch, isIncomplete, progress }: Props) => {
+const UpdateAllApps = ({ update, state, dispatch, isIncomplete }: Props) => {
   const [open, setIsOpen] = useState();
   const { updateAllQueue } = state;
 
@@ -123,7 +122,7 @@ const UpdateAllApps = ({ update, state, dispatch, isIncomplete, progress }: Prop
         <Text ff="Inter|SemiBold" fontSize={4} color="palette.primary.main">
           <Trans i18nKey="manager.applist.updatable.title" />
         </Text>
-        <Badge ff="Inter|Bold" fontSize={3} color="palette.text.shade100">
+        <Badge ff="Inter|Bold" fontSize={3} color="white">
           {update.length}
         </Badge>
         <Box flex={1} />
@@ -139,10 +138,12 @@ const UpdateAllApps = ({ update, state, dispatch, isIncomplete, progress }: Prop
             fontSize={3}
             event="Manager Update All"
           >
-            <IconLoader size={14} />
-            <Text style={{ marginLeft: 8 }}>
-              <Trans i18nKey="manager.applist.item.updateAll" />
-            </Text>
+            <Box horizontal alignItems="center" justifyContent="center">
+              <IconLoader size={14} />
+              <Text style={{ marginLeft: 8 }}>
+                <Trans i18nKey="manager.applist.item.updateAll" />
+              </Text>
+            </Box>
           </Button>
         </ToolTip>
       </>
@@ -160,10 +161,9 @@ const UpdateAllApps = ({ update, state, dispatch, isIncomplete, progress }: Prop
         appStoreView={false}
         onlyUpdate={true}
         showActions={false}
-        progress={progress}
       />
     ),
-    [state, dispatch, isIncomplete, progress],
+    [state, dispatch, isIncomplete],
   );
 
   return (

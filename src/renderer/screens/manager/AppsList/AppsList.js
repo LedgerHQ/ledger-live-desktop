@@ -15,8 +15,6 @@ import Placeholder from "./Placeholder";
 import Card from "~/renderer/components/Box/Card";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import Input from "~/renderer/components/Input";
-import IconSearch from "~/renderer/icons/Search";
 import TabBar from "~/renderer/components/TabBar";
 import Item from "./Item";
 import Filter from "./Filter";
@@ -27,6 +25,7 @@ import { openModal } from "~/renderer/actions/modals";
 
 import debounce from "lodash/debounce";
 import InstallSuccessBanner from "./InstallSuccessBanner";
+import SearchBox from "../../accounts/AccountList/SearchBox";
 
 // sticky top bar with extra width to cover card boxshadow underneath
 const StickyTabBar = styled.div`
@@ -64,7 +63,6 @@ type Props = {
   state: State,
   dispatch: Action => void,
   isIncomplete: boolean,
-  progress?: number,
   setAppInstallDep: (*) => void,
   setAppUninstallDep: (*) => void,
   t: TFunction,
@@ -76,7 +74,6 @@ const AppsList = ({
   state,
   dispatch,
   isIncomplete,
-  progress = {},
   setAppInstallDep,
   setAppUninstallDep,
   t,
@@ -86,15 +83,19 @@ const AppsList = ({
   const { search } = useLocation();
   const reduxDispatch = useDispatch();
 
-  const inputRef = useRef();
+  const inputRef = useRef<any>();
   const [query, setQuery] = useState("");
   const [appFilter, setFilter] = useState("all");
   const [sort, setSort] = useState({ type: "marketcap", order: "desc" });
   const [activeTab, setActiveTab] = useState(0);
 
+  const onTextChange = useCallback(
+    (evt: SyntheticInputEvent<HTMLInputElement>, v) => setQuery(evt.target.value),
+    [setQuery],
+  );
+
   /** clear search field on tab change */
   useEffect(() => {
-    if (inputRef && inputRef.current) inputRef.current.value = "";
     setQuery("");
   }, [activeTab]);
   const isDeviceTab = activeTab === 1;
@@ -103,15 +104,11 @@ const AppsList = ({
   useEffect(() => {
     const params = new URLSearchParams(search);
     const q = params.get("q");
-
-    if (inputRef && inputRef.current && q) {
-      inputRef.current.value = q;
-      inputRef.current.focus();
-      setQuery(q);
-    }
+    if (q) setQuery(q);
+    if (inputRef.current && inputRef.current && inputRef.current.focus) inputRef.current.focus();
   }, [search]);
 
-  const { installed: installedApps, uninstallQueue } = state;
+  const { installed: installedApps, uninstallQueue, apps } = state;
 
   const addAccount = useCallback(
     currency => {
@@ -141,33 +138,29 @@ const AppsList = ({
         appStoreView={appStoreView}
         onlyUpdate={onlyUpdate}
         showActions={showActions}
-        progress={progress}
         setAppInstallDep={setAppInstallDep}
         setAppUninstallDep={setAppUninstallDep}
         addAccount={addAccount}
       />
     ),
-    [state, dispatch, isIncomplete, progress, setAppInstallDep, setAppUninstallDep, addAccount],
+    [state, dispatch, isIncomplete, setAppInstallDep, setAppUninstallDep, addAccount],
   );
 
   return (
     <>
-      {update.length <= 0 ? (
-        <InstallSuccessBanner
-          state={state}
-          dispatch={dispatch}
-          isIncomplete={isIncomplete}
-          addAccount={addAccount}
-        />
-      ) : (
-        <UpdateAllApps
-          update={update}
-          state={state}
-          dispatch={dispatch}
-          isIncomplete={isIncomplete}
-          progress={progress}
-        />
-      )}
+      <InstallSuccessBanner
+        state={state}
+        dispatch={dispatch}
+        isIncomplete={isIncomplete}
+        addAccount={addAccount}
+        disabled={update.length >= 1}
+      />
+      <UpdateAllApps
+        update={update}
+        state={state}
+        dispatch={dispatch}
+        isIncomplete={isIncomplete}
+      />
       {isIncomplete ? null : (
         <StickyTabBar>
           <TabBar
@@ -189,15 +182,18 @@ const AppsList = ({
         ) : (
           <>
             <FilterHeader isIncomplete={isIncomplete}>
-              <Input
-                containerProps={{ noBorder: true, noBoxShadow: true, flex: 1 }}
-                renderLeft={<IconSearch size={16} />}
-                onChange={debounce(setQuery, 100)}
-                placeholder={t(
-                  !isDeviceTab ? "manager.tabs.appCatalogSearch" : "manager.tabs.appOnDeviceSearch",
-                )}
-                ref={inputRef}
-              />
+              <Box flex="1" horizontal height={40}>
+                <SearchBox
+                  onTextChange={onTextChange}
+                  search={query}
+                  placeholder={t(
+                    !isDeviceTab
+                      ? "manager.tabs.appCatalogSearch"
+                      : "manager.tabs.appOnDeviceSearch",
+                  )}
+                  ref={inputRef}
+                />
+              </Box>
               {!isDeviceTab ? (
                 <>
                   <Filter onFilterChange={debounce(setFilter, 100)} filter={appFilter} />
@@ -216,7 +212,13 @@ const AppsList = ({
             {displayedAppList.length ? (
               displayedAppList.map(app => mapApp(app, !isDeviceTab))
             ) : (
-              <Placeholder />
+              <Placeholder
+                query={query}
+                addAccount={addAccount}
+                dispatch={dispatch}
+                installed={installedApps}
+                apps={apps}
+              />
             )}
           </>
         )}
