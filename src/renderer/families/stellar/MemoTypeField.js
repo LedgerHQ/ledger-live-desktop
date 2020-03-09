@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { StellarMemoType } from "@ledgerhq/live-common/lib/families/stellar/types";
 import Select from "~/renderer/components/Select";
@@ -25,27 +25,19 @@ const MemoTypeField = ({
     value: type,
   }));
 
-  const [selectedMemoType, setSelectedMemoType] = useState(
-    transaction.memoType
-      ? options.find(option => option.value === transaction.memoType)
-      : options[0],
-  );
+  const [selectedMemoType, setSelectedMemoType] = useState(options[0]);
 
   const onMemoTypeChange = useCallback(
     memoType => {
       setSelectedMemoType(memoType);
       onChange(bridge.updateTransaction(transaction, { memoType: memoType.value }));
     },
-    [onChange, transaction, bridge],
+    [onChange, transaction.memoType, bridge],
   );
 
-  useCallback(() => {
-    setSelectedMemoType(
-      transaction.memoType
-        ? options.find(option => option.value === transaction.memoType)
-        : options[0],
-    );
-  }, [transaction.memoType, options]);
+  useEffect(() => {
+    setSelectedMemoType(options.find(option => option.value === transaction.memoType));
+  }, [transaction.memoType]);
 
   return (
     <Select

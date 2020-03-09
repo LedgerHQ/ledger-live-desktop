@@ -718,7 +718,7 @@
         "stellarMemo": "Memo",
         "stellarNetwork": "Network",
         "stellarNetworkPublic": "Public",
-        "stellarSource": "Source Address"
+        "stellarSource": "Source address"
       },
       "verification": {
         "streaming": {
@@ -743,7 +743,8 @@
           "text": "The amount to be sent will be deducted from the balance of your delegated account."
         },
         "stellar": {
-          "text": "When using a Memo, carefully verify the type used with the recipient"
+          "text": "When using a Memo, carefully verify the type used with the recipient",
+          "recommendedMemo": "When sending to this recipient, a memo may be required"
         }
       }
     },
