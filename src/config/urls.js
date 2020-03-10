@@ -6,7 +6,7 @@ export const urls = {
   // Social
   twitter: "https://twitter.com/Ledger",
   github: "https://github.com/LedgerHQ/ledger-live-desktop",
-  reddit: "https://www.reddit.com/r/ledger/",
+  reddit: "https://www.reddit.com/r/ledgerwallet/",
 
   // Campaigns
   promoNanoX:
