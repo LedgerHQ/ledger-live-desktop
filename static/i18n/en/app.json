@@ -1443,7 +1443,7 @@
     },
     "SyncError": {
       "title": "Synchronization error",
-      "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
+      "description": "Some accounts could not be synchronized."
     },
     "PairingFailed": {
       "title": "Pairing unsuccessful",
