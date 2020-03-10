@@ -30,4 +30,5 @@ setSupportedCurrencies([
   "decred",
   "bitcoin_testnet",
   "ethereum_ropsten",
+  // "tron",
 ]);

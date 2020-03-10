@@ -8,6 +8,7 @@ import type { OperationType } from "@ledgerhq/live-common/lib/types";
 import { rgba } from "~/renderer/styles/helpers";
 
 import type { TFunction } from "react-i18next";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import IconClock from "~/renderer/icons/Clock";
 import IconReceive from "~/renderer/icons/Receive";
@@ -17,9 +18,13 @@ import IconSend from "~/renderer/icons/Send";
 import IconPlus from "~/renderer/icons/Plus";
 import IconEye from "~/renderer/icons/Eye";
 
+import Freeze from "~/renderer/icons/Freeze";
+import Unfreeze from "~/renderer/icons/Unfreeze";
+
 import Box from "~/renderer/components/Box";
 import Tooltip from "~/renderer/components/Tooltip";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import ClaimRewards from "~/renderer/icons/ClaimReward";
+import Vote from "~/renderer/icons/Vote";
 
 const border = p =>
   p.hasFailed
@@ -75,11 +80,11 @@ const iconsComponent = {
   REVEAL: IconEye,
   CREATE: IconPlus,
   NONE: IconSend,
-  // TODO
-  FREEZE: IconSend,
-  UNFREEZE: IconSend,
-  VOTE: IconSend,
-  REWARD: IconReceive,
+  // @TODO replace icons
+  FREEZE: Freeze,
+  UNFREEZE: Unfreeze,
+  VOTE: Vote,
+  REWARD: ClaimRewards,
 };
 
 class ConfirmationCheck extends PureComponent<{

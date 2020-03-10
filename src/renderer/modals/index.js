@@ -1,8 +1,13 @@
 // @flow
 
 import MODAL_DELEGATE from "~/renderer/families/tezos/DelegateFlowModal";
+import MODAL_DELEGATE_TRON from "./Delegation";
 import MODAL_EXPORT_OPERATIONS from "./ExportOperations";
 import MODAL_CONFIRM from "./ConfirmModal";
+import MODAL_MANAGE_TRON from "./ManageTron";
+import MODAL_CLAIM_REWARDS from "./ClaimRewards";
+import MODAL_FREEZE from "./Freeze";
+import MODAL_UNFREEZE from "./Unfreeze";
 import MODAL_PASSWORD from "./PasswordModal";
 import MODAL_DISABLE_PASSWORD from "./DisablePasswordModal";
 import MODAL_ADD_ACCOUNTS from "./AddAccounts";
@@ -21,6 +26,10 @@ import MODAL_RELEASE_NOTES from "./ReleaseNotes";
 const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_EXPORT_OPERATIONS,
   MODAL_CONFIRM,
+  MODAL_MANAGE_TRON,
+  MODAL_CLAIM_REWARDS,
+  MODAL_FREEZE,
+  MODAL_UNFREEZE,
   MODAL_PASSWORD,
   MODAL_DISABLE_PASSWORD,
   MODAL_ADD_ACCOUNTS,
@@ -30,6 +39,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_UPDATE_FIRMWARE,
   MODAL_OPERATION_DETAILS,
   MODAL_DELEGATE,
+  MODAL_DELEGATE_TRON,
   MODAL_MIGRATE_ACCOUNTS,
   MODAL_EXPORT_ACCOUNTS,
   MODAL_TECHNICAL_DATA,

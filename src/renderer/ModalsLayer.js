@@ -44,7 +44,7 @@ const ModalsLayer = ({ visibleModals }: *) => (
       <BackDrop state={state}>
         {/* {// Will only render at the end of december
           isSnowTime() ? <Snow numFlakes={200} /> : null} */}
-        {visibleModals.map(({ name, data }, i) => {
+        {visibleModals.map(({ name, ...data }, i) => {
           const ModalComponent = modals[name];
           return <ModalComponent key={name} name={name} {...data} />;
         })}
