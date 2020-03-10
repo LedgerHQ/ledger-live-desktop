@@ -121,7 +121,7 @@
     },
     "settings": {
       "title": "Modifier le compte",
-      "advancedLogs": "Journaux détaillés",
+      "advancedLogs": "Logs détaillés",
       "accountName": {
         "title": "Nom du compte",
         "desc": "Décrire ce compte"
@@ -877,8 +877,8 @@
     "downloadNow": "Télécharger Maintenant"
   },
   "crash": {
-    "oops": "Oups, une erreur c'est produite",
-    "uselessText": "Vous pouvez essayer à nouveau en redémarrant Ledger Live. Si le problème persiste, veuillez exporter vos journaux et contacter l’assistance Ledger.",
+    "oops": "Une erreur s'est produite",
+    "uselessText": "Vous pouvez essayer à nouveau en redémarrant Ledger Live. Si le problème persiste, veuillez exporter vos logs et contacter l’assistance Ledger.",
     "restart": "Redémarrer",
     "support": "Contacter l'assistance",
     "github": "GitHub"
