@@ -13,6 +13,7 @@ import LedgerLiveImg from "~/renderer/images/ledgerlive-logo.svg";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { OptionFlowCard } from "~/renderer/screens/onboarding/steps/Init";
 import Button from "~/renderer/components/Button";
+import Image from "~/renderer/components/Image";
 import { Title, OnboardingFooterWrapper } from "../sharedComponents";
 import type { StepProps } from "..";
 
@@ -55,7 +56,9 @@ class NoDevice extends PureComponent<StepProps, *> {
             <LedgerLiveLogo
               width="64px"
               height="64px"
-              icon={<img src={LedgerLiveImg} alt="" draggable="false" width={40} height={40} />}
+              icon={
+                <Image resource={LedgerLiveImg} alt="" draggable="false" width={40} height={40} />
+              }
             />
             <Box m={5} style={{ maxWidth: 480 }}>
               <Title>

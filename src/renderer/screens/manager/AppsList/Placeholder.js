@@ -12,6 +12,7 @@ import Text from "~/renderer/components/Text";
 import NoResults from "~/renderer/icons/NoResults";
 import Box from "~/renderer/components/Box/Box";
 import Button from "~/renderer/components/Button";
+import Image from "~/renderer/components/Image";
 
 const tokens = listTokens();
 
@@ -57,7 +58,7 @@ const Placeholder = ({ query, addAccount, dispatch, installed, apps }: Props) =>
 
   return found && parent ? (
     <Box alignItems="center" pt={5} py={6}>
-      <img alt="" src={manager.getIconUrl(parent.icon)} width={40} height={40} />
+      <Image alt="" resource={manager.getIconUrl(parent.icon)} width={40} height={40} />
       <Box mt={2} ff="Inter|Regular" fontSize={5} color="palette.text.shade100">
         <Trans
           i18nKey={

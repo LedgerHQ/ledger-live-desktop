@@ -22,6 +22,7 @@ import ConfirmModal from "~/renderer/modals/ConfirmModal";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import IconArrowRight from "~/renderer/icons/ArrowRight";
 import LedgerLiveImg from "~/renderer/images/ledgerlive-logo.svg";
+import Image from "./Image";
 
 type InputValue = {
   password: string,
@@ -130,7 +131,9 @@ const IsUnlocked = ({ children }: Props) => {
           <Box alignItems="center">
             <LedgerLiveLogo
               style={{ marginBottom: 40 }}
-              icon={<img src={LedgerLiveImg} alt="" draggable="false" width={50} height={50} />}
+              icon={
+                <Image resource={LedgerLiveImg} alt="" draggable="false" width={50} height={50} />
+              }
             />
             <PageTitle>{t("common.lockScreen.title")}</PageTitle>
             <LockScreenDesc>
