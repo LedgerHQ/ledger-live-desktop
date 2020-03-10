@@ -34,6 +34,7 @@ export const Description: ThemedComponent<{}> = styled(Box).attrs(() => ({
   lineHeight: 1.5,
   textAlign: "center",
   color: "palette.text.shade60",
+  "data-automation-id": "page-description",
 }))`
   transition: color ease-out 300ms;
   transition-delay: 300ms;
