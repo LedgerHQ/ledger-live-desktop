@@ -29,6 +29,7 @@ describe("When I launch the app for the first time", () => {
 
   it("should be able to change theme", async () => {
     expect(await onboardingPage.visible()).toBe(true);
+    expect(await onboardingPage.logo.isVisible()).toBe(true);
     expect(await onboardingPage.getPageTitle()).toBe("Bienvenue sur Ledger Live");
     await onboardingPage.setTheme("dusk");
     expect(await onboardingPage.getTheme()).toBe("#182532");
