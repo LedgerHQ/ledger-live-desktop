@@ -11,20 +11,28 @@ export default class Page {
     return this.app.client.element('[data-automation-id="page-title"]');
   }
 
+  get pageDescription() {
+    return this.app.client.element('[data-automation-id="page-description"]');
+  }
+
   get theme() {
     return this.app.client.element('[data-automation-id="main-container"]');
   }
 
-  async getTheme() {
+  async getThemeColor() {
     const bgColor = await this.theme.getCssProperty("background-color");
     return bgColor.parsed.hex;
   }
 
-  visible() {
+  isVisible() {
     return this.app.client.waitForVisible('[data-automation-id="main-container"]');
   }
 
   getPageTitle() {
     return this.pageTitle.getText();
+  }
+
+  getPageDescription() {
+    return this.pageDescription.getText();
   }
 }

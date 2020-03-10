@@ -35,6 +35,18 @@ export default class OnboardingPage extends Page {
     return this.app.client.element('[data-automation-id="onboarding-nodevice-button"]');
   }
 
+  get buyNewButton() {
+    return this.app.client.element('[data-automation-id="onboarding-buynew-button"]');
+  }
+
+  get trackOrderButton() {
+    return this.app.client.element('[data-automation-id="onboarding-trackorder-button"]');
+  }
+
+  get learnMoreButton() {
+    return this.app.client.element('[data-automation-id="onboarding-learnmore-button"]');
+  }
+
   get nanoX() {
     return this.app.client.element('[data-automation-id="onboarding-select-nanox"]');
   }
@@ -65,6 +77,10 @@ export default class OnboardingPage extends Page {
 
   get backButton() {
     return this.app.client.element('[data-automation-id="onboarding-back-button"]');
+  }
+
+  get contactUsButton() {
+    return this.app.client.element('[data-automation-id="onboarding-contactus-button"]');
   }
 
   /** methods **/
@@ -112,7 +128,7 @@ export default class OnboardingPage extends Page {
         await this.nanoX.click();
         break;
       case "nanos":
-        await this.nanos.click();
+        await this.nanoS.click();
         break;
       case "blue":
         await this.blue.click();
