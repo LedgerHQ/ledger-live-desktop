@@ -1,97 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <script
-      async
-      src="https://resources.live.ledger.app/public_resources/analytics.min.js"
-    ></script>
-    <style>
-      html {
-        overflow: hidden;
+
+<head>
+  <meta charset="utf-8" />
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <script async src="https://resources.live.ledger.app/public_resources/analytics.min.js"></script>
+  <style>
+    html {
+      overflow: hidden;
+    }
+
+    @keyframes loaded-anim {
+      0% {
+        transform: translateZ(1px);
       }
 
-      @keyframes loaded-anim {
-        0% {
-          transform: translateZ(1px);
-        }
+      100% {
+        transform: translateZ(2000px);
+      }
+    }
 
-        100% {
-          transform: translateZ(2000px);
-        }
+    @keyframes logo-anim {
+      0% {
+        transform: rotate(0);
+        animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
       }
 
-      @keyframes logo-anim {
-        0% {
-          transform: rotate(0);
-          animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-        }
-
-        50% {
-          transform: rotate(-360deg);
-          animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-        }
-
-        100% {
-          transform: rotate(-1080deg);
-        }
+      50% {
+        transform: rotate(-360deg);
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
       }
 
-      #react-root {
-        visibility: hidden;
+      100% {
+        transform: rotate(-1080deg);
       }
+    }
 
-      #loader-container {
-        z-index: 99;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        perspective: 2000px;
-        transition: opacity 0.8s ease-out;
-        opacity: 0;
-        pointer-events: none;
-      }
+    #react-root {
+      visibility: hidden;
+    }
 
-      #loader-container.loading {
-        opacity: 1;
-      }
+    #loader-container {
+      z-index: 99;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 2000px;
+      transition: opacity 0.8s ease-out;
+      opacity: 0;
+      pointer-events: none;
+    }
 
-      #loader {
-        width: 70px;
-        height: 70px;
-        background-color: white;
-        border-radius: 50%;
-        padding: 12px;
-        box-sizing: content-box;
-      }
+    #loader-container.loading {
+      opacity: 1;
+    }
 
-      #loader.loaded {
-        animation: loaded-anim 0.7s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
-      }
+    #loader {
+      width: 70px;
+      height: 70px;
+      background-color: white;
+      border-radius: 50%;
+      padding: 12px;
+      box-sizing: content-box;
+    }
 
-      #logo {
-        animation: logo-anim 1.8s infinite;
-        height: 100%;
-        width: 100%;
-        user-select: none;
-        pointer-events: none;
-      }
-    </style>
-  </head>
+    #loader.loaded {
+      animation: loaded-anim 0.7s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+    }
 
-  <body>
-    <div id="react-root"></div>
-    <div id="loader-container">
-      <div id="loader">
-        <img id="logo" />
-      </div>
+    #logo {
+      animation: logo-anim 1.8s infinite;
+      height: 100%;
+      width: 100%;
+      user-select: none;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="react-root"></div>
+  <div id="loader-container">
+    <div id="loader">
+      <img id="logo" />
     </div>
-    <div id="modals"></div>
-  </body>
+  </div>
+  <div id="modals"></div>
+</body>
+
 </html>
