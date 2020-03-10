@@ -11,7 +11,7 @@ type Props = {
 class LedgerLiveLogo extends PureComponent<Props> {
   render() {
     const { icon, ...p } = this.props;
-    return <LiveLogoContainer {...p}>{icon}</LiveLogoContainer>;
+    return <LiveLogoContainer {...p} data-automation-id="logo">{icon}</LiveLogoContainer>;
   }
 }
 
