@@ -39,8 +39,6 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-mac.dmg
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
-      - name: spectron
-        run: yarn jest tests/specs/onboarding.spec.js
 
   bundle-linux:
     runs-on: ubuntu-latest
@@ -81,8 +79,10 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
-      - name: spectron
-        run: yarn jest tests/specs/onboarding.spec.js
+      - name: Run headless test
+        uses: GabrielBB/xvfb-action@v1.0
+        with:
+          run: yarn jest tests/specs/onboarding.spec.js
 
   bundle-windows:
     runs-on: windows-latest
@@ -124,5 +124,3 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-win.exe
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-win.exe
-      - name: spectron
-        run: yarn jest tests/specs/onboarding.spec.js
