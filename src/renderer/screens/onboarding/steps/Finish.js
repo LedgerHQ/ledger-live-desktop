@@ -18,6 +18,8 @@ import IconSocialReddit from "~/renderer/icons/Reddit";
 import IconSocialGithub from "~/renderer/icons/Github";
 import ConfettiParty from "~/renderer/components/ConfettiParty";
 import LedgerLiveLogo from "~/renderer/components/LedgerLiveLogo";
+import Image from "~/renderer/components/Image";
+
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { StepProps } from "~/renderer/screens/onboarding";
 
@@ -91,7 +93,9 @@ export default class Finish extends Component<StepProps, *> {
             <LedgerLiveLogo
               width="64px"
               height="64px"
-              icon={<img src={LedgerLiveImg} alt="" draggable="false" width={40} height={40} />}
+              icon={
+                <Image resource={LedgerLiveImg} alt="" draggable="false" width={40} height={40} />
+              }
             />
             <Box color="positiveGreen" style={{ position: "absolute", right: 0, bottom: 0 }}>
               <IconCheckFull size={18} />

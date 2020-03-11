@@ -39,6 +39,8 @@ export const DeviceIllustration: ThemedComponent<{}> = styled.img.attrs(p => ({
   max-height: 100%;
   filter: drop-shadow(0px 5px 7px ${p => p.theme.colors.palette.text.shade10});
   transform: translateX(-50%);
+  user-select: none;
+  pointer-events: none;
 `;
 
 const Separator = styled.div`
