@@ -68,6 +68,7 @@
     "lru-cache": "^5.1.1",
     "measure-scrollbar": "^1.1.0",
     "moment": "^2.24.0",
+    "node-abi": "^2.15.0",
     "openpgp": "^4.10.1",
     "os-locale": "^4.0.0",
     "os-name": "^3.1.0",
