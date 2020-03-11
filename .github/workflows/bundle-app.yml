@@ -39,6 +39,10 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-mac.dmg
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
+      - name: spectron
+        run: yarn jest tests/specs/onboarding.spec.js
+        env:
+          CI: true
 
   bundle-linux:
     runs-on: ubuntu-latest
@@ -52,7 +56,7 @@ jobs:
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
       - name: install linux dependencies
-        run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
+        run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev xvfb
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -79,48 +83,50 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
-      - name: Run headless test
-        uses: GabrielBB/xvfb-action@v1.0
-        with:
-          run: yarn jest tests/specs/onboarding.spec.js
-
-  bundle-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@master
-        with:
-          node-version: 12.x
-      - uses: actions/setup-python@v1
-        with:
-          python-version: "2.7.x"
-      - name: set git user
+      - name: run spectron with xvfb
         run: |
-          git config user.email "team-live@ledger.fr"
-          git config user.name "Team Live"
-      - name: get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: install dependencies
-        run: yarn --ignore-scripts --frozen-lockfile
-      - uses: "./.github/actions/get-package-infos"
-        id: version
-      - uses: "./.github/actions/get-pr-number"
-        id: pr
-      - name: make local version
-        run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
-      - name: build the app
-        run: yarn nightly
-      - uses: "./.github/actions/get-package-infos"
-        id: post-version
-      - name: upload windows
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{ steps.post-version.outputs.version }}-win.exe
-          path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-win.exe
+          xvfb-run --auto-servernum yarn jest tests/specs/onboarding.spec.js
+        env:
+          CI: true
+      - name: Cleanup xvfb pidx
+        uses: bcomnes/cleanup-xvfb@v1
+  # bundle-windows:
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - uses: actions/setup-node@master
+  #       with:
+  #         node-version: 12.x
+  #     - uses: actions/setup-python@v1
+  #       with:
+  #         python-version: "2.7.x"
+  #     - name: set git user
+  #       run: |
+  #         git config user.email "team-live@ledger.fr"
+  #         git config user.name "Team Live"
+  #     - name: get yarn cache
+  #       id: yarn-cache
+  #       run: echo "::set-output name=dir::$(yarn cache dir)"
+  #     - uses: actions/cache@v1
+  #       with:
+  #         path: ${{ steps.yarn-cache.outputs.dir }}
+  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-yarn-
+  #     - name: install dependencies
+  #       run: yarn --ignore-scripts --frozen-lockfile
+  #     - uses: "./.github/actions/get-package-infos"
+  #       id: version
+  #     - uses: "./.github/actions/get-pr-number"
+  #       id: pr
+  #     - name: make local version
+  #       run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
+  #     - name: build the app
+  #       run: yarn nightly
+  #     - uses: "./.github/actions/get-package-infos"
+  #       id: post-version
+  #     - name: upload windows
+  #       uses: actions/upload-artifact@v1
+  #       with:
+  #         name: ${{ steps.post-version.outputs.version }}-win.exe
+  #         path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-win.exe
