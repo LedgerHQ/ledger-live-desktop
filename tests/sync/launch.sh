@@ -20,14 +20,14 @@ rm -rf "$settingsPath"
 mkdir "$settingsPath"
 
 # Copy app.json init file for testing
-cp test-e2e/sync/data/empty-app.json "$settingsPath/app.json"
+cp tests/sync/data/empty-app.json "$settingsPath/app.json"
 
 # Start Ledger Live Desktop app
 "$appPath" &
 lastPid=$!
 
 # wait for sync
-electron ./test-e2e/sync/wait-sync.js
+electron ./tests/sync/wait-sync.js
 returnCode=$?
 
 # kill Ledger Live Desktop process
@@ -41,7 +41,7 @@ else
 fi
 
 # Copy app.json file to test folder
-cp "$settingsPath"/app.json test-e2e/sync/data/actual-app.json
+cp "$settingsPath"/app.json tests/sync/data/actual-app.json
 
 # compare new app.json with expected_app.json
-./node_modules/.bin/jest test-e2e/sync/sync-accounts.spec.js
+./node_modules/.bin/jest tests/sync/sync-accounts.spec.js
