@@ -13,6 +13,8 @@ jobs:
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
+      - name: setup macos dependencies
+        run: brew cask install xquartz
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -39,6 +41,10 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-mac.dmg
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
+      - name: run xquartz
+        run: |
+          /opt/X11/bin/startx
+          /opt/X11/bin/Xvfb :99 -ac -screen 0 1024x768x8
       - name: spectron
         run: yarn jest tests/specs/onboarding.spec.js
         env:
@@ -59,7 +65,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install libudev-dev libusb-1.0-0-dev xvfb
-          sudo service xvfb start
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -86,13 +91,13 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
-      - name: run spectron with xvfb
-        run: |
-          xvfb-run --auto-servernum yarn jest tests/specs/onboarding.spec.js
-        env:
-          CI: true
-      - name: Cleanup xvfb pidx
-        uses: bcomnes/cleanup-xvfb@v1
+      # - name: run spectron with xvfb
+      #   run: |
+      #     xvfb-run --auto-servernum yarn jest tests/specs/onboarding.spec.js
+      #   env:
+      #     CI: true
+      # - name: Cleanup xvfb pidx
+      #   uses: bcomnes/cleanup-xvfb@v1
   # bundle-windows:
   #   runs-on: windows-latest
   #   steps:

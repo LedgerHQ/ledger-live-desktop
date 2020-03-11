@@ -48,12 +48,7 @@ export function applicationProxy(userData = null, envVar = {}) {
   }
   const app = new Application({
     path: getAppPath(),
-    chromeDriverArgs: [
-      "--disable-extensions",
-      "disable-dev-shm-usage",
-      "--no-sandbox",
-      "--headless",
-    ],
+    chromeDriverArgs: ["--disable-extensions", "disable-dev-shm-usage", "--no-sandbox"],
     env: envVar,
   });
   return app;
