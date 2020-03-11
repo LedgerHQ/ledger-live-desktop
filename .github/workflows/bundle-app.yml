@@ -41,12 +41,11 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-mac.dmg
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
-      - name: run xquartz
-        run: |
-          /opt/X11/bin/startx
-          /opt/X11/bin/Xvfb :99 -ac -screen 0 1024x768x8
       - name: spectron
-        run: yarn jest tests/specs/onboarding.spec.js
+        run: |
+          export DISPLAY=":99"
+          /opt/X11/bin/Xvfb $DISPLAY -ac -screen 0 1024x768x8 &
+          yarn jest tests/specs/onboarding.spec.js
         env:
           CI: true
 
@@ -91,13 +90,15 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
-      # - name: run spectron with xvfb
-      #   run: |
-      #     xvfb-run --auto-servernum yarn jest tests/specs/onboarding.spec.js
-      #   env:
-      #     CI: true
-      # - name: Cleanup xvfb pidx
-      #   uses: bcomnes/cleanup-xvfb@v1
+      - name: run spectron with xvfb
+        run: |
+          export DISPLAY=:99.0
+          Xvfb :99.0 -ac &
+          yarn jest tests/specs/onboarding.spec.js
+        env:
+          CI: true
+      - name: Cleanup xvfb pidx
+        uses: bcomnes/cleanup-xvfb@v1
   # bundle-windows:
   #   runs-on: windows-latest
   #   steps:
