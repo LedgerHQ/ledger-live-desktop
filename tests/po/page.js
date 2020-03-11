@@ -27,12 +27,4 @@ export default class Page {
   isVisible() {
     return this.app.client.waitForVisible('[data-automation-id="main-container"]');
   }
-
-  getPageTitle() {
-    return this.pageTitle.getText();
-  }
-
-  getPageDescription() {
-    return this.pageDescription.getText();
-  }
 }

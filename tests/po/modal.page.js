@@ -21,11 +21,7 @@ export default class ModalPage extends Page {
     return this.app.client.element('[data-automation-id="modal-close-button"]');
   }
 
-  visible() {
+  isVisible() {
     return this.app.client.waitForVisible('[data-automation-id="modal-container"]');
-  }
-
-  getTitle() {
-    return this.title.getText();
   }
 }
