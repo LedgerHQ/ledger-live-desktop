@@ -39,6 +39,8 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-mac.dmg
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
+      - name: spectron
+        run: yarn jest tests/specs/onboarding.spec.js
 
   bundle-linux:
     runs-on: ubuntu-latest
@@ -79,6 +81,8 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
+      - name: spectron
+        run: yarn jest tests/specs/onboarding.spec.js
 
   bundle-windows:
     runs-on: windows-latest
@@ -113,19 +117,6 @@ jobs:
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
       - name: build the app
         run: yarn nightly
-      # - name: clean up
-      #   run: npx rimraf ./dist
-      # - name: install and rebuild
-      #   run: yarn --frozen-lockfile
-      # - name: build
-      #   run: |
-      #     set NODE_ENV=production
-      #     node ./tools/main.js build
-      # - name: nightly
-      #   run: |
-      #     set DEBUG=electron-builder
-      #     set NODE_ENV=production
-      #     npx electron-builder --config electron-builder-nightly.yml
       - uses: "./.github/actions/get-package-infos"
         id: post-version
       - name: upload windows
@@ -133,3 +124,5 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-win.exe
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-win.exe
+      - name: spectron
+        run: yarn jest tests/specs/onboarding.spec.js
