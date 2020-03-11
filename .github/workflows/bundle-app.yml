@@ -45,7 +45,7 @@ jobs:
         run: |
           export DISPLAY=":99"
           /opt/X11/bin/startx &
-          /opt/X11/bin/Xvfb $DISPLAY -ac &
+          /opt/X11/bin/Xvfb $DISPLAY -ac -nolisten tcp -nolisten unix &
           sleep 3
           yarn jest tests/specs/onboarding.spec.js
         env:
