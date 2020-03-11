@@ -41,10 +41,12 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-mac.dmg
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
-      - name: spectron
+      - name: run spectron with xvfb
         run: |
           export DISPLAY=":99"
-          /opt/X11/bin/Xvfb $DISPLAY -ac -screen 0 1024x768x8 &
+          /opt/X11/bin/startx &
+          /opt/X11/bin/Xvfb $DISPLAY -ac &
+          sleep 3
           yarn jest tests/specs/onboarding.spec.js
         env:
           CI: true
@@ -94,6 +96,7 @@ jobs:
         run: |
           export DISPLAY=:99.0
           Xvfb :99.0 -ac &
+          sleep 3
           yarn jest tests/specs/onboarding.spec.js
         env:
           CI: true
