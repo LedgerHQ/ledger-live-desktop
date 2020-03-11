@@ -95,7 +95,7 @@ jobs:
       - name: run spectron with xvfb
         run: |
           export DISPLAY=:99.0
-          Xvfb :99.0 -ac &
+          Xvfb :99.0 -ac  -nolisten tcp -nolisten unix &
           sleep 3
           yarn jest tests/specs/onboarding.spec.js
         env:
