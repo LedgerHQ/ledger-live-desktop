@@ -56,7 +56,10 @@ jobs:
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
       - name: install linux dependencies
-        run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev xvfb
+        run: |
+          sudo apt-get update
+          sudo apt-get install libudev-dev libusb-1.0-0-dev xvfb
+          sudo service xvfb start
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
