@@ -43,11 +43,12 @@ export function applicationProxy(userData = null, envVar = {}) {
     fs.mkdirSync(configPath);
   }
   if (userData != null) {
-    const jsonFile = path.resolve("test-e2e/data/", userData);
+    const jsonFile = path.resolve("tests/setups/", userData);
     fs.copyFileSync(jsonFile, `${configPath}/app.json`);
   }
   const app = new Application({
     path: getAppPath(),
+    chromeDriverArgs: ["--disable-extensions", "disable-dev-shm-usage", "--no-sandbox"],
     env: envVar,
   });
   return app;

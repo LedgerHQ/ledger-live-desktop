@@ -187,11 +187,20 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "Install apps or add accounts",
-      "desc": "Open the Manager to install apps or add accounts if your Ledger device already has apps installed",
+      "title": "Install some apps on your device",
+      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
       "buttons": {
-        "addAccount": "Add accounts",
-        "installApp": "Open Manager"
+        "installApp": "Go to Manager",
+        "help": "Help"
+      }
+    },
+    "accounts": {
+      "title": "Add an account to get started",
+      "desc": "Add an account to start managing your crypto assets. You should have installed the apps for your crypto assets on your device.",
+      "buttons": {
+        "addAccount": "Add account",
+        "installApp": "Go to Manager to install apps",
+        "help": "Help"
       }
     }
   },
@@ -510,19 +519,29 @@
       }
     }
   },
-  "claimRewards": {
+  "claimReward": {
     "title": "Claim rewards",
     "steps": {
       "rewards": {
         "title": "Rewards",
         "description": "Congratulations! You earned <1>{{amount}}</1> by voting for validators.",
-        "info": "---INFO TO BE FILLED---"
+        "info": "Rewards can be claimed once every 24 hours."
       },
       "connectDevice": {
         "title": "Device"
       },
       "confirmation": {
-        "title": "Confirmation"
+        "title": "Confirmation",
+        "success": {
+          "title": "Rewards claimed",
+          "text": "Your rewards have been added to your balance.",
+          "cta": "View details",
+          "done": "Done"
+        },
+        "pending": {
+          "title": "Claiming your rewards..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
   },
@@ -530,13 +549,30 @@
     "title": "Freeze",
     "steps": {
       "amount": {
-        "title": "Freeze assets"
+        "title": "Freeze assets",
+        "resourceInfo": "Bandwith or Energy?",
+        "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
+        "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
+        "amountLabel": "Amount to freeze",
+        "available": "Available: {{amountAvailable}}",
+        "info": "Frozen assets cannot be sent for 3 days."
       },
       "connectDevice": {
         "title": "Device"
       },
       "confirmation": {
-        "title": "Confirmation"
+        "title": "Confirmation",
+        "success": {
+          "title": "",
+          "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+          "votePending": "Vote in {{time}}",
+          "vote": "Vote",
+          "later": "Vote later"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
   },
@@ -661,6 +697,7 @@
     "voting": {
       "manageTP": "Manage Tron Power",
       "claimRewards": "Claim rewards",
+      "nextRewardsDate": "Rewards can be claimed {{date}}",
       "claimAvailableRewards": "Claim {{amount}}",
       "title": "Claim rewards",
       "header": "Votes",
@@ -1221,10 +1258,16 @@
   "TransactionConfirm": {
     "title": "Please confirm the operation on your device to send it",
     "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
+    "warningWording": {},
+    "titleWording": {
+      "claimReward": "Please confirm the operation on your device to claim your rewards",
+      "freeze": "Please confirm the operation on yur device to freeze assets"
+    },
     "recipientWording": {
       "send": "recipient",
       "delegate": "validator",
-      "undelegate": "validator"
+      "undelegate": "validator",
+      "claimReward": "delegation rewards recipient"
     }
   },
   "RecipientField": {
@@ -1567,7 +1610,7 @@
       "title": "Insufficient balance in parent account"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Insufficient balance for this operation"
+      "title": "Balance cannot get below {{minimumAmount}}"
     },
     "WrongAppForCurrency": {
       "title": "Please open the {{expected}} app"

@@ -1,5 +1,6 @@
 // @flow
 
+import { log } from "@ledgerhq/logs";
 import path from "path";
 import cloneDeep from "lodash/cloneDeep";
 import get from "lodash/get";
@@ -154,6 +155,8 @@ async function setEncryptionKey(ns: string, keyPath: string, encryptionKey: stri
 
     return save(ns);
   } catch (err) {
+    log("db", "setEncryptionKey failure: " + String(err));
+    logger.error(err);
     throw new DBWrongPassword();
   }
 }

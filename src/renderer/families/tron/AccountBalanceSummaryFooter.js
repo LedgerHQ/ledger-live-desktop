@@ -81,9 +81,12 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
     formatConfig,
   );
 
-  const formatedEnergy = energy;
+  const formatedEnergy = energy && energy.gt(0);
 
-  const formatedBandwidth = freeLimit + gainedLimit - gainedUsed - freeUsed;
+  const formatedBandwidth = freeLimit
+    .plus(gainedLimit)
+    .minus(gainedUsed)
+    .minus(freeUsed);
 
   return (
     <Wrapper>
@@ -118,7 +121,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
             <InfoCircle size={13} />
           </TitleWrapper>
         </ToolTip>
-        <AmountValue>{formatedBandwidth || "–"}</AmountValue>
+        <AmountValue>{`${formatedBandwidth || "–"}`}</AmountValue>
       </BalanceDetail>
       <BalanceDetail>
         <ToolTip content={<Trans i18nKey="account.energy" />}>
@@ -129,7 +132,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
             <InfoCircle size={13} />
           </TitleWrapper>
         </ToolTip>
-        <AmountValue>{formatedEnergy || "–"}</AmountValue>
+        <AmountValue>{`${formatedEnergy || "–"}`}</AmountValue>
       </BalanceDetail>
     </Wrapper>
   );

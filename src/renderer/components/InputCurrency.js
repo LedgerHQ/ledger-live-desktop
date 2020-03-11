@@ -50,6 +50,7 @@ type OwnProps = {
   allowZero?: boolean,
   disabled?: boolean,
   autoFocus?: boolean,
+  decimals?: number,
 };
 
 type Props = {
@@ -99,6 +100,7 @@ class InputCurrency extends PureComponent<Props, State> {
       (value !== nextProps.value ||
         showAllDigits !== nextProps.showAllDigits ||
         unit !== nextProps.unit);
+
     if (needsToBeReformatted) {
       const { isFocused } = this.state;
       this.setState({
@@ -116,8 +118,9 @@ class InputCurrency extends PureComponent<Props, State> {
     }
   }
 
-  handleChange = (v: string) => {
-    const { onChange, unit, value, locale } = this.props;
+  handleChange = (val: string) => {
+    const { onChange, unit, value, locale, decimals } = this.props;
+    const v = decimals === 0 ? val.replace(/[.,]/g, "") : val;
     const r = sanitizeValueString(unit, v, locale);
     const satoshiValue = BigNumber(r.value);
     if (!value || !value.isEqualTo(satoshiValue)) {

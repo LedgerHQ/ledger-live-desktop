@@ -202,7 +202,12 @@ class Modal extends PureComponent<Props> {
               isOpened={isOpened}
               onClick={this.handleClickOnBackdrop}
             >
-              <BodyWrapper state={state} width={width} onClick={this.swallowClick}>
+              <BodyWrapper
+                state={state}
+                width={width}
+                onClick={this.swallowClick}
+                id="modal-container"
+              >
                 {render && render(renderProps)}
                 {children}
               </BodyWrapper>
