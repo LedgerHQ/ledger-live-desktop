@@ -1783,16 +1783,16 @@
     "FeeTooHigh": {
       "title": "Network fees represent more than 10% of the amount"
     },
-    "WrongMemoFormat": {
+    "StellarWrongMemoFormat": {
       "title": "Memo format is wrong"
     },
-    "MinimumBalanceWarning": {
+    "StellarMinimumBalanceWarning": {
       "title": "A minimum balance is required to be kept in a Stellar account"
     },
-    "NewAccountMinimumTransaction": {
+    "StellarNewAccountMinimumTransaction": {
       "title": "A new account requires at least 1 XLM to be activated"
     },
-    "SourceHasMultiSign": {
+    "StellarSourceHasMultiSign": {
       "title": "Please disable multisign to send XLM"
     }
   }
