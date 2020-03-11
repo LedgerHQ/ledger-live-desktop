@@ -62,6 +62,7 @@ class OperationComponent extends PureComponent<Props> {
     const isOptimistic = operation.blockHeight === null;
     const currency = getAccountCurrency(account);
     const unit = getAccountUnit(account);
+
     return (
       <OperationRow isOptimistic={isOptimistic} onClick={this.onOperationClick}>
         <ConfirmationCell
