@@ -34,11 +34,11 @@ jobs:
         run: yarn nightly
       - uses: "./.github/actions/get-package-infos"
         id: post-version
-      - name: upload macOS app
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{ steps.post-version.outputs.version }}-mac.dmg
-          path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
+      # - name: upload macOS app
+      #   uses: actions/upload-artifact@v1
+      #   with:
+      #     name: ${{ steps.post-version.outputs.version }}-mac.dmg
+      #     path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
       - name: run spectron
         run: yarn jest tests/specs/simple.spec.js
         env:
@@ -80,11 +80,11 @@ jobs:
         run: yarn nightly
       - uses: "./.github/actions/get-package-infos"
         id: post-version
-      - name: upload linux app
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
-          path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
+      # - name: upload linux app
+      #   uses: actions/upload-artifact@v1
+      #   with:
+      #     name: ${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
+      #     path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
       - name: run spectron with xvfb
         run: yarn jest tests/specs/simple.spec.js
   # bundle-windows:

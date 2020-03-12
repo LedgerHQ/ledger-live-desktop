@@ -33,6 +33,7 @@ function getAppPath() {
   } else {
     appPath = `./dist/ledger-live-desktop-${version}-linux-x86_64.AppImage`;
   }
+  console.log("appPath", appPath);
   return appPath;
 }
 
