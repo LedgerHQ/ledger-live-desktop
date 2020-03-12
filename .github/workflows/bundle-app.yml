@@ -13,8 +13,6 @@ jobs:
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
-      - name: setup macos dependencies
-        run: brew cask install xquartz
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -41,13 +39,8 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-mac.dmg
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
-      - name: run spectron with xvfb
-        run: |
-          export DISPLAY=":99"
-          /opt/X11/bin/startx &
-          /opt/X11/bin/Xvfb $DISPLAY -ac -nolisten tcp -nolisten unix &
-          sleep 3
-          yarn jest tests/specs/onboarding.spec.js
+      - name: run spectron
+        run: yarn jest tests/specs/onboarding.spec.js
         env:
           CI: true
 
