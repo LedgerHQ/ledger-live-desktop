@@ -1,6 +1,6 @@
 // @flow
 
-import "../env";
+import "../live-common-setup-base";
 import { ipcMain } from "electron";
 import contextMenu from "electron-context-menu";
 import logger, { enableDebugLogger } from "../logger";
