@@ -3,7 +3,7 @@ import { applicationProxy } from "../applicationProxy";
 describe("quick test", () => {
   let app;
 
-  jest.setTimeout(20000);
+  jest.setTimeout(60000);
 
   beforeAll(async () => {
     app = applicationProxy();
@@ -16,8 +16,12 @@ describe("quick test", () => {
     }
   });
 
-  it("should get the title", () => {
+  it("should get the title", async () => {
     console.log(app.client);
+    if (app && !app.isRunning()) {
+      await app.start();
+    }
+
     return app.client
       .waitUntilWindowLoaded()
       .getTitle()
