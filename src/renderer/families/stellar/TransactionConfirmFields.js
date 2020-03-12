@@ -1,13 +1,10 @@
 // @flow
 
 import invariant from "invariant";
-import React, { useCallback } from "react";
+import React from "react";
 import { Trans, withTranslation } from "react-i18next";
-import { useBaker } from "@ledgerhq/live-common/lib/families/tezos/bakers";
-import type { AccountLike, Account, Transaction } from "@ledgerhq/live-common/lib/types";
-import { shortAddressPreview, getMainAccount } from "@ledgerhq/live-common/lib/account";
-import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
-import { openURL } from "~/renderer/linking";
+import type { Account, Transaction } from "@ledgerhq/live-common/lib/types";
+import { shortAddressPreview } from "@ledgerhq/live-common/lib/account";
 import TransactionConfirmField from "~/renderer/components/TransactionConfirm/TransactionConfirmField";
 import Text from "~/renderer/components/Text";
 

@@ -32,12 +32,12 @@ const MemoTypeField = ({
       setSelectedMemoType(memoType);
       onChange(bridge.updateTransaction(transaction, { memoType: memoType.value }));
     },
-    [onChange, transaction.memoType, bridge],
+    [onChange, bridge, transaction],
   );
 
   useEffect(() => {
     setSelectedMemoType(options.find(option => option.value === transaction.memoType));
-  }, [transaction.memoType]);
+  }, [transaction.memoType, options]);
 
   return (
     <Select
