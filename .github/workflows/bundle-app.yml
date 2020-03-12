@@ -40,9 +40,7 @@ jobs:
       #     name: ${{ steps.post-version.outputs.version }}-mac.dmg
       #     path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
       - name: run spectron
-        run: |
-          export {no_proxy,NO_PROXY}="127.0.0.1,localhost"
-          yarn jest tests/specs/simple.spec.js
+        run: yarn jest tests/specs/simple.spec.js
         env:
           CI: true
   # bundle-linux:
