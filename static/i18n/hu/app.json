@@ -187,11 +187,20 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "Alkalmazások telepítése vagy számlák hozzáadása",
-      "desc": "Nyisd meg az eszközkezelőt alkalmazások telepítéséhez vagy számlák hozzáadásához ha már vannak alkalmazások telepítve az eszközödön",
+      "title": "Install some apps on your device",
+      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
       "buttons": {
-        "addAccount": "Számlák hozzáadása",
-        "installApp": "Eszközkezelő megnyitása"
+        "installApp": "Go to Manager",
+        "help": "Help"
+      }
+    },
+    "accounts": {
+      "title": "Add an account to get started",
+      "desc": "Add an account to start managing your crypto assets. You should have installed the apps for your crypto assets on your device.",
+      "buttons": {
+        "addAccount": "Add account",
+        "installApp": "Go to Manager to install apps",
+        "help": "Help"
       }
     }
   },
