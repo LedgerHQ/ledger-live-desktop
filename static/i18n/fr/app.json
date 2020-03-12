@@ -69,7 +69,11 @@
       "CREATE": "Créée",
       "REVEAL": "Révélée",
       "DELEGATE": "Déléguée",
-      "UNDELEGATE": "Interrompue"
+      "UNDELEGATE": "Interrompue",
+      "VOTE": "Voted",
+      "FREEZE": "Frozen",
+      "UNFREEZE": "Unfrozen",
+      "REWARD": "Claimed reward"
     }
   },
   "byteSize": {
@@ -121,7 +125,7 @@
     },
     "settings": {
       "title": "Modifier le compte",
-      "advancedLogs": "Journaux détaillés",
+      "advancedLogs": "Logs détaillés",
       "accountName": {
         "title": "Nom du compte",
         "desc": "Décrire ce compte"
@@ -130,7 +134,11 @@
         "title": "Unité",
         "desc": "Choisir l'unité à afficher"
       }
-    }
+    },
+    "availableBalance": "Available balance",
+    "frozenAssets": "Frozen assets",
+    "bandwidth": "Bandwidth",
+    "energy": "Energy"
   },
   "accounts": {
     "title": "Comptes",
@@ -179,11 +187,20 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "Installer des applications ou ajouter des comptes",
-      "desc": "Ouvrez le Manager pour installer des applications ou bien ajoutez des comptes si des applications sont déjà installées sur votre appareil Ledger",
+      "title": "Install some apps on your device",
+      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
       "buttons": {
-        "addAccount": "Ajouter des comptes",
-        "installApp": "Ouvrir le Manager"
+        "installApp": "Go to Manager",
+        "help": "Help"
+      }
+    },
+    "accounts": {
+      "title": "Add an account to get started",
+      "desc": "Add an account to start managing your crypto assets. You should have installed the apps for your crypto assets on your device.",
+      "buttons": {
+        "addAccount": "Add account",
+        "installApp": "Go to Manager to install apps",
+        "help": "Help"
       }
     }
   },
@@ -411,6 +428,7 @@
         "updateAllOutOfMemory": "Pas assez d'espace pour mettre à jour, veuillez désinstaller des applications",
         "install": "Installer",
         "installed": "Installée",
+        "updated": "Updated",
         "uninstall": "Désinstaller",
         "notEnoughSpace": "Espace insuffisant",
         "supported": "Compatible Ledger Live",
@@ -498,6 +516,50 @@
         "openLive": "Ouvrez le Manager dans Ledger Live.",
         "uninstall": "Cliquez sur l'icône de corbeille grise pour toutes les applications actuellement installées sur le {{deviceName}}. Cela permet de faire de la place pour l'installateur du firmware.",
         "disclaimer": "Remarque : Vos fonds ne sont pas affectés par cette opération, les clés privées pour accéder à vos actifs de crypto dans la blockchain restent sécurisées sur votre feuille de récupération."
+      }
+    }
+  },
+  "claimRewards": {
+    "title": "Claim rewards",
+    "steps": {
+      "rewards": {
+        "title": "Rewards",
+        "description": "Congratulations! You earned <1>{{amount}}</1> by voting for validators.",
+        "info": "---INFO TO BE FILLED---"
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation"
+      }
+    }
+  },
+  "freeze": {
+    "title": "Freeze",
+    "steps": {
+      "amount": {
+        "title": "Freeze assets"
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation"
+      }
+    }
+  },
+  "unfreeze": {
+    "title": "Unfreeze",
+    "steps": {
+      "amount": {
+        "title": "Unfreeze assets"
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation"
       }
     }
   },
@@ -604,6 +666,54 @@
     "value": "Valeur",
     "header": "Répartition des comptes ({{count}})"
   },
+  "tron": {
+    "voting": {
+      "manageTP": "Manage Tron Power",
+      "claimRewards": "Claim rewards",
+      "claimAvailableRewards": "Claim {{amount}}",
+      "title": "Claim rewards",
+      "header": "Votes",
+      "Amount": "Amount",
+      "percentageTP": "% of used TP",
+      "noRewards": "No rewards available",
+      "remainingVotes": {
+        "title": "You still have {{amount}}TP remaining",
+        "description": "You didn't use all of your frozen assets to vote for a SR.",
+        "button": "Vote now"
+      },
+      "flow": {
+        "steps": {
+          "starter": {
+            "title": "Earn staking rewards",
+            "description": "Delegate TRX to a third party candidate to earn staking rewards. Click on continue to freeze assets and vote.",
+            "bullet": {
+              "delegate": "Delegated assets stay yours.",
+              "access": "You can access your assets 3 days after you froze them.",
+              "ledger": "Delegate securely with your Ledger device."
+            },
+            "button": {
+              "cta": "Continue"
+            }
+          }
+        }
+      }
+    },
+    "manage": {
+      "title": "Manage Tron Power",
+      "freeze": {
+        "title": "Freeze",
+        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also earn TRON Power to vote for Super Representatives."
+      },
+      "unfreeze": {
+        "title": "Unfreeze",
+        "description": "Unfreeze TRX if you want to spend them. You will stop earning rewards and TRON Power to vote with."
+      },
+      "vote": {
+        "title": "Vote",
+        "description": "Cast votes for Super Representatives using your TRON Power to earn TRX rewards."
+      }
+    }
+  },
   "delegation": {
     "title": "Obtenez des récompenses",
     "header": "Délégation",
@@ -618,7 +728,8 @@
     "durationDays": "{{count}} jour",
     "durationDays_plural": "{{count}} jours",
     "howItWorks": "Comment fonctionne la délégation",
-    "delegationEarn": "Vous pouvez maintenant obtenir des récompenses staking Tezos en déléguant votre compte.",
+    "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
+    "earnRewards": "Earn rewards",
     "overdelegated": "Surdélégué",
     "flow": {
       "steps": {
@@ -876,8 +987,8 @@
     "downloadNow": "Télécharger Maintenant"
   },
   "crash": {
-    "oops": "Oups, une erreur c'est produite",
-    "uselessText": "Vous pouvez essayer à nouveau en redémarrant Ledger Live. Si le problème persiste, veuillez exporter vos journaux et contacter l’assistance Ledger.",
+    "oops": "Une erreur s'est produite",
+    "uselessText": "Vous pouvez essayer à nouveau en redémarrant Ledger Live. Si le problème persiste, veuillez exporter vos logs et contacter l’assistance Ledger.",
     "restart": "Redémarrer",
     "support": "Contacter l'assistance",
     "github": "GitHub"

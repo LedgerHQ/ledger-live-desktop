@@ -69,7 +69,11 @@
       "CREATE": "Készítve",
       "REVEAL": "Feltárva",
       "DELEGATE": "Delegated",
-      "UNDELEGATE": "Undelegated"
+      "UNDELEGATE": "Undelegated",
+      "VOTE": "Voted",
+      "FREEZE": "Frozen",
+      "UNFREEZE": "Unfrozen",
+      "REWARD": "Claimed reward"
     }
   },
   "byteSize": {
@@ -79,7 +83,7 @@
   },
   "time": {
     "minute": "Perc",
-    "minute_plural": "Percek",
+    "minute_plural": "Perc",
     "hour": "Óra",
     "hour_plural": "Órák",
     "range": {
@@ -104,7 +108,7 @@
     "exchange": "Kripto vásárlása"
   },
   "stars": {
-    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0>Számlák</0></1> oldalon innentől itt fog megjelenni!",
+    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0>Számlák</0></1> oldalon innentől itt fognak megjelenni!",
     "tooltip": "Számla csillagozása"
   },
   "account": {
@@ -130,7 +134,11 @@
         "title": "Egység",
         "desc": "Válaszd ki a megjelenítendő egységet"
       }
-    }
+    },
+    "availableBalance": "Available balance",
+    "frozenAssets": "Frozen assets",
+    "bandwidth": "Bandwidth",
+    "energy": "Energy"
   },
   "accounts": {
     "title": "Számlák",
@@ -179,11 +187,20 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "Alkalmazások telepítése vagy számlák hozzáadása",
-      "desc": "Nyisd meg az eszközkezelőt alkalmazások telepítéséhez vagy számlák hozzáadásához ha már vannak alkalmazások telepítve az eszközödön",
+      "title": "Install some apps on your device",
+      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
       "buttons": {
-        "addAccount": "Számlák hozzáadása",
-        "installApp": "Eszközkezelő megnyitása"
+        "installApp": "Go to Manager",
+        "help": "Help"
+      }
+    },
+    "accounts": {
+      "title": "Add an account to get started",
+      "desc": "Add an account to start managing your crypto assets. You should have installed the apps for your crypto assets on your device.",
+      "buttons": {
+        "addAccount": "Add account",
+        "installApp": "Go to Manager to install apps",
+        "help": "Help"
       }
     }
   },
@@ -411,6 +428,7 @@
         "updateAllOutOfMemory": "Nincs elég hely a frissítéshez, kérlek törölj pár alkalmazást",
         "install": "Telepítés",
         "installed": "Telepített",
+        "updated": "Frissítve",
         "uninstall": "Törlés",
         "notEnoughSpace": "Nincs elég hely",
         "supported": "Ledger Live által támogatott",
@@ -501,13 +519,57 @@
       }
     }
   },
+  "claimRewards": {
+    "title": "Claim rewards",
+    "steps": {
+      "rewards": {
+        "title": "Rewards",
+        "description": "Congratulations! You earned <1>{{amount}}</1> by voting for validators.",
+        "info": "---INFO TO BE FILLED---"
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation"
+      }
+    }
+  },
+  "freeze": {
+    "title": "Freeze",
+    "steps": {
+      "amount": {
+        "title": "Freeze assets"
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation"
+      }
+    }
+  },
+  "unfreeze": {
+    "title": "Unfreeze",
+    "steps": {
+      "amount": {
+        "title": "Unfreeze assets"
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation"
+      }
+    }
+  },
   "receive": {
     "title": "Fogadás",
     "successTitle": "A cím biztonságosan megosztva",
     "steps": {
       "chooseAccount": {
         "title": "Számla",
-        "label": "Számla a jóváírásra",
+        "label": "Jóváírandó számla",
         "parentAccount": "1. Válassz ki egy {{currencyName}} számlát",
         "token": "2. Válassz egy tokent"
       },
@@ -544,7 +606,7 @@
       "details": {
         "from": "Innen",
         "to": "Ide",
-        "selectAccountDebit": "Jóváírandó számla",
+        "selectAccountDebit": "Használni kívánt számla",
         "recipientAddress": "Fogadó címe",
         "amount": "Mennyiség",
         "fees": "Hálózati díjak",
@@ -590,7 +652,7 @@
   "distribution": {
     "asset": "Kriptovaluta",
     "price": "Ár",
-    "distribution": "Átruházás",
+    "distribution": "Arány",
     "amount": "Mennyiség",
     "value": "Érték",
     "showAll": "Összes megjelenítése",
@@ -603,6 +665,54 @@
     "amount": "Mennyiség",
     "value": "Érték",
     "header": "Számlaátruházás ({{count}})"
+  },
+  "tron": {
+    "voting": {
+      "manageTP": "Manage Tron Power",
+      "claimRewards": "Claim rewards",
+      "claimAvailableRewards": "Claim {{amount}}",
+      "title": "Claim rewards",
+      "header": "Votes",
+      "Amount": "Amount",
+      "percentageTP": "% of used TP",
+      "noRewards": "No rewards available",
+      "remainingVotes": {
+        "title": "You still have {{amount}}TP remaining",
+        "description": "You didn't use all of your frozen assets to vote for a SR.",
+        "button": "Vote now"
+      },
+      "flow": {
+        "steps": {
+          "starter": {
+            "title": "Earn staking rewards",
+            "description": "Delegate TRX to a third party candidate to earn staking rewards. Click on continue to freeze assets and vote.",
+            "bullet": {
+              "delegate": "Delegated assets stay yours.",
+              "access": "You can access your assets 3 days after you froze them.",
+              "ledger": "Delegate securely with your Ledger device."
+            },
+            "button": {
+              "cta": "Continue"
+            }
+          }
+        }
+      }
+    },
+    "manage": {
+      "title": "Manage Tron Power",
+      "freeze": {
+        "title": "Freeze",
+        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also earn TRON Power to vote for Super Representatives."
+      },
+      "unfreeze": {
+        "title": "Unfreeze",
+        "description": "Unfreeze TRX if you want to spend them. You will stop earning rewards and TRON Power to vote with."
+      },
+      "vote": {
+        "title": "Vote",
+        "description": "Cast votes for Super Representatives using your TRON Power to earn TRX rewards."
+      }
+    }
   },
   "delegation": {
     "title": "Érj el jutalmakat",
@@ -618,7 +728,8 @@
     "durationDays": "{{count}} nap",
     "durationDays_plural": "{{count}} napok",
     "howItWorks": "Hogyan működik a delegálás",
-    "delegationEarn": "Mostantól részesülhetsz Tezos tárolási jutalmakban a számlád delegálásával.",
+    "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
+    "earnRewards": "Earn rewards",
     "overdelegated": "Túlhalmozott",
     "flow": {
       "steps": {
@@ -700,7 +811,7 @@
       "display": "Általános",
       "cryptoAssets": "Kriptovaluták",
       "currencies": "Kriptovaluták",
-      "rates": "Arányok",
+      "rates": "Árak",
       "help": "Segítség",
       "about": "Rólunk",
       "experimental": "Kísérleti funkciók",
@@ -746,12 +857,12 @@
       "confirmationsNbDesc": "Állítsd be, hogy hány megerősített tranzakció szükséges ahhoz, hogy egy tranzakció megerősítettként legyen megjelenítve."
     },
     "rates": {
-      "desc": "Itt található az összes arány, amelyet az ellenérték kiszámításához használnak.\nVálaszd ki, hogy melyik tarifa szolgáltatót használja az egyes tarifákhoz.",
+      "desc": "Itt található az összes ár, amelyet az ellenérték kiszámításához használnak.\nVálaszd ki, hogy melyik ár szolgáltatót használja az egyes kriptókhoz.",
       "fromTo": "Innen {{from}} ide {{to}}",
       "noCounterValue": "Nincs adat ehhez a kereskedési párhoz",
       "cryptoToFiat": "Kripto fiatra",
       "cryptoToCrypto": "Kripto Kriptóra",
-      "rate": "Mérték",
+      "rate": "Eszközpár",
       "last": "Utolsó {{days}} nap",
       "price": "Ár",
       "exchange": "Ár szolgáltató"
@@ -793,7 +904,7 @@
     },
     "experimental": {
       "desc": "Próbáld ki kísérleti funkcióinkat, és tudasd velünk, hogy mit gondolsz róluk",
-      "disclaimer": "Ezek kísérleti funkciók, melyekhez „elengedhetetlenül” biztosítjuk a tech hozzáértésű közösségünk tesztelését. Ezek változhatnak, szünetelhetnek, vagy megszűnhetnek bármikor. Ezek engedélyezésével, elfogadod, hogy saját felelősségre használod őket."
+      "disclaimer": "Ezek kísérleti funkciók, melyekhez „elengedhetetlenül” biztosítjuk a tech hozzáértésű közösségünk tesztelését. Ezek változhatnak, szünetelhetnek, vagy megszűnhetnek bármikor. Ezek engedélyezésével elfogadod, hogy saját felelősségre használod őket."
     },
     "hardResetModal": {
       "title": "Ledger Live alaphelyzetbe állítása",
@@ -1126,7 +1237,7 @@
     }
   },
   "RecipientField": {
-    "placeholder": "Írd be a {{currencyName}} címet"
+    "placeholder": "Írd be a(z) {{currencyName}} címet"
   },
   "Terms": {
     "title": "Felhasználási feltételek",
