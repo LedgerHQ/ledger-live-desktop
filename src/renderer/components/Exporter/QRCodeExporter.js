@@ -14,7 +14,7 @@ import { exportSettingsSelector } from "~/renderer/reducers/settings";
 import QRCode from "~/renderer/components/QRCode";
 
 const mapStateToProps = createStructuredSelector({
-  accounts: (state, props) => props.accounts || activeAccountsSelector(state, props),
+  accounts: (state, props) => props.accounts || activeAccountsSelector(state),
   settings: exportSettingsSelector,
 });
 

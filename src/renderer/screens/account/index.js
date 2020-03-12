@@ -7,6 +7,7 @@ import { withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import { Redirect } from "react-router";
 import type { Currency, AccountLike, Account } from "@ledgerhq/live-common/lib/types";
+import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import {
@@ -25,7 +26,6 @@ import type { TimeRange } from "~/renderer/reducers/settings";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
 import perFamilyAccountBodyHeader from "~/renderer/generated/AccountBodyHeader";
-import SyncOneAccountOnMount from "~/renderer/components/SyncOneAccountOnMount";
 import Box from "~/renderer/components/Box";
 import OperationsList from "~/renderer/components/OperationsList";
 import useTheme from "~/renderer/hooks/useTheme";
