@@ -82,7 +82,7 @@ const GenuineCheck = (props: StepProps) => {
 
   const handleOpenGenuineCheckModal = useCallback(() => {
     setGenuineCheckModalOpened(true);
-    if (__DEV__ && process.env.SKIP_GENUINE_CHECK) {
+    if (getEnv("MOCK")) {
       setTimeout(() => {
         handleCloseGenuineCheckModal();
         handleGenuineCheckPass();
