@@ -2,6 +2,7 @@
 
 import React, { useState, useCallback } from "react";
 import { Trans } from "react-i18next";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getDeviceModel } from "@ledgerhq/devices";
 import styled from "styled-components";
 import IconCheck from "~/renderer/icons/Check";
@@ -68,10 +69,6 @@ const GenuineCheck = (props: StepProps) => {
     [updateGenuineCheck],
   );
 
-  const handleOpenGenuineCheckModal = useCallback(() => {
-    setGenuineCheckModalOpened(true);
-  }, []);
-
   const handleCloseGenuineCheckModal = useCallback(() => {
     setGenuineCheckModalOpened(false);
   }, []);
@@ -82,6 +79,16 @@ const GenuineCheck = (props: StepProps) => {
     });
     setGenuineCheckModalOpened(false);
   }, [updateGenuineCheck]);
+
+  const handleOpenGenuineCheckModal = useCallback(() => {
+    setGenuineCheckModalOpened(true);
+    if (__DEV__ && process.env.SKIP_GENUINE_CHECK) {
+      setTimeout(() => {
+        handleCloseGenuineCheckModal();
+        handleGenuineCheckPass();
+      }, 5000);
+    }
+  }, [handleCloseGenuineCheckModal, handleGenuineCheckPass]);
 
   const redoGenuineCheck = useCallback(() => {
     setRecovery(undefined);
