@@ -15,6 +15,7 @@ import ListTreeLine from "~/renderer/icons/ListTreeLine";
 import CollapsibleCard from "~/renderer/components/CollapsibleCard";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box/Box";
+import Image from "~/renderer/components/Image";
 
 const IconsSection = styled.div`
   display: flex;
@@ -113,7 +114,7 @@ const AppDepsUninstallModal = ({
               <ListTreeLine size={55} />
             </ListIcon>
             <Box ml={4} mr={2}>
-              <img alt="" src={manager.getIconUrl(a.icon)} width={22} height={22} />
+              <Image alt="" resource={manager.getIconUrl(a.icon)} width={22} height={22} />
             </Box>
             <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
               {a.name}

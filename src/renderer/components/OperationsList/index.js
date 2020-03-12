@@ -100,6 +100,7 @@ export class OperationsList extends PureComponent<Props, State> {
       console.warn("Preventing render OperationsList because not received account or accounts"); // eslint-disable-line no-console
       return null;
     }
+
     const groupedOperations = account
       ? groupAccountOperationsByDay(account, { count: nbToShow, withSubAccounts })
       : groupAccountsOperationsByDay(accounts, { count: nbToShow, withSubAccounts });

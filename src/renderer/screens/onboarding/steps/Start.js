@@ -9,6 +9,7 @@ import Button from "~/renderer/components/Button";
 import { Description, Title } from "../sharedComponents";
 import type { StepProps } from "..";
 import ThemeSelector from "./ThemeSelector";
+import Image from "~/renderer/components/Image";
 
 const Start = (props: StepProps) => {
   const { jumpStep } = props;
@@ -17,7 +18,7 @@ const Start = (props: StepProps) => {
       <TrackPage category="Onboarding" name="Start" />
       <Box alignItems="center">
         <LedgerLiveLogo
-          icon={<img src={LedgerLiveImg} alt="" draggable="false" width={50} height={50} />}
+          icon={<Image resource={LedgerLiveImg} alt="" draggable="false" width={50} height={50} />}
         />
         <Box>
           <Title>

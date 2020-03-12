@@ -114,6 +114,7 @@ const AccountPage = ({
         <>
           <Box mb={7}>
             <BalanceSummary
+              mainAccount={mainAccount}
               account={account}
               parentAccount={parentAccount}
               chartColor={color}

@@ -22,6 +22,7 @@ import type { StepProps } from "~/renderer/modals/MigrateAccounts";
 
 import LedgerLiveImg from "~/renderer/images/ledgerlive-logo.svg";
 import MobileExport from "~/renderer/images/mobile-export.svg";
+import Image from "~/renderer/components/Image";
 
 const getAllImportedAccounts = accountsByAsset =>
   reduce(accountsByAsset, (acc, accounts) => [...acc, ...accounts], []);
@@ -186,7 +187,7 @@ const StepOverview = ({
           <LedgerLiveLogo
             width="58px"
             height="58px"
-            icon={<img src={LedgerLiveImg} alt="" width={35} height={35} />}
+            icon={<Image resource={LedgerLiveImg} alt="" width={35} height={35} />}
           />
         ) : (
           <SuccessAnimatedIcon width={70} height={70} />

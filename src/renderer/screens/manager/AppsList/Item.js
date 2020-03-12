@@ -16,6 +16,7 @@ import Box from "~/renderer/components/Box";
 
 import IconCheckFull from "~/renderer/icons/CheckFull";
 import AppActions from "./AppActions";
+import Image from "~/renderer/components/Image";
 
 const AppRow = styled.div`
   display: flex;
@@ -91,7 +92,7 @@ const Item: React$ComponentType<Props> = ({
   return (
     <AppRow>
       <Box flex="0.7" horizontal>
-        <img alt="" src={manager.getIconUrl(app.icon)} width={40} height={40} />
+        <Image alt="" resource={manager.getIconUrl(app.icon)} width={40} height={40} />
         <AppName>
           <Text ff="Inter|Bold" color="palette.text.shade100" fontSize={3}>{`${app.name}${
             currency ? ` (${currency.ticker})` : ""

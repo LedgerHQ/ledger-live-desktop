@@ -16,6 +16,7 @@ import IconCheck from "~/renderer/icons/Check";
 import IconChevronRight from "~/renderer/icons/ChevronRight";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 import { Title } from "../sharedComponents";
+import Image from "~/renderer/components/Image";
 import type { StepProps } from "..";
 
 const mapDispatchToProps = { flowType };
@@ -70,7 +71,9 @@ class InitC extends PureComponent<StepProps, *> {
           <LedgerLiveLogo
             width="64px"
             height="64px"
-            icon={<img src={LedgerLiveImg} alt="" draggable="false" width={40} height={40} />}
+            icon={
+              <Image resource={LedgerLiveImg} alt="" draggable="false" width={40} height={40} />
+            }
           />
           <Box m={5} style={{ maxWidth: 480 }}>
             <Title>{t("onboarding.init.title")}</Title>
