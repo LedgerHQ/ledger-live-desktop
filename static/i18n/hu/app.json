@@ -1576,7 +1576,7 @@
       "title": "Nincs elegendő egyenleg a főszámlán"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Nincs elegendő egyenleg ehhez a művelethez"
+      "title": "Balance cannot get below {{minimumAmount}}"
     },
     "WrongAppForCurrency": {
       "title": "Kérlek, nyisd meg a(z) {{expected}} alkalmazást"
