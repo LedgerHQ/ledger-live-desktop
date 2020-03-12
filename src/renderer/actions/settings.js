@@ -27,6 +27,8 @@ export const setSentryLogs = (sentryLogs: boolean) => saveSettings({ sentryLogs 
 export const setShareAnalytics = (shareAnalytics: boolean) => saveSettings({ shareAnalytics });
 export const setMarketIndicator = (marketIndicator: *) => saveSettings({ marketIndicator });
 export const setAutoLockTimeout = (autoLockTimeout: *) => saveSettings({ autoLockTimeout });
+export const setHasInstalledApps = (hasInstalledApps: boolean) =>
+  saveSettings({ hasInstalledApps });
 export const setCounterValue = (counterValue: string) =>
   saveSettings({
     counterValue,
