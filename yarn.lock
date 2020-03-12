@@ -1226,6 +1226,14 @@
     "@ledgerhq/errors" "^5.11.0"
     "@ledgerhq/hw-transport" "^5.11.0"
 
+"@ledgerhq/hw-app-trx@5.11.1":
+  version "5.11.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-trx/-/hw-app-trx-5.11.1.tgz#c7bae2825f48e1ecacf509ee064439e717ff2fdd"
+  integrity sha512-3GxAHZ2NoDvx1WoqIzkH7LgiXKbNFCI2G99X0pR+HRrOcRPN78urdWIoQE2yUmbtMMd3+2YbtQH9xxLL9O7H6Q==
+  dependencies:
+    "@ledgerhq/errors" "^5.11.0"
+    "@ledgerhq/hw-transport" "^5.11.0"
+
 "@ledgerhq/hw-app-xrp@5.11.0":
   version "5.11.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-xrp/-/hw-app-xrp-5.11.0.tgz#53768b81f54c0603791134f0f02d32d4c69472d9"
@@ -1298,16 +1306,17 @@
     node-pre-gyp "^0.14.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^12.5.0":
-  version "12.5.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.5.0.tgz#d5ac5fd6a03d8c7a9ff7ccb10ae30a76f67c1b1b"
-  integrity sha512-+e+G3Ni/U7t1v7ucTsnawZc2TOIODS7MYIphW/yHBuS1Rp0pLJTFQ0t0yQQzB+nWWb6eXmmRXcqc0lLXH9O8UA==
+"@ledgerhq/live-common@^12.6.1":
+  version "12.6.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.6.1.tgz#d1f7cc095f6b32172edcdd04142678050751a13c"
+  integrity sha512-RHJJLzsvUxe8kQcY0uFWS4NawMoGnzM07IoZFvqsQzbJz7fytIo4kmWkXNCw4dPPuUv96CVZ8NwJ8RRco1eYWQ==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "5.11.0"
     "@ledgerhq/errors" "5.11.0"
     "@ledgerhq/hw-app-btc" "5.11.0"
     "@ledgerhq/hw-app-eth" "5.11.0"
+    "@ledgerhq/hw-app-trx" "5.11.1"
     "@ledgerhq/hw-app-xrp" "5.11.0"
     "@ledgerhq/hw-transport" "5.11.0"
     "@ledgerhq/hw-transport-mocker" "^5.11.0"
