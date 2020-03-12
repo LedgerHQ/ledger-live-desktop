@@ -187,11 +187,20 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "安装应用程序或添加账户",
-      "desc": "打开 Manager 以安装应用程序，如果您的 Ledger 设备已安装应用程序，请添加相应账户",
+      "title": "Install some apps on your device",
+      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
       "buttons": {
-        "addAccount": "添加账户",
-        "installApp": "打开管理器"
+        "installApp": "Go to Manager",
+        "help": "Help"
+      }
+    },
+    "accounts": {
+      "title": "Add an account to get started",
+      "desc": "Add an account to start managing your crypto assets. You should have installed the apps for your crypto assets on your device.",
+      "buttons": {
+        "addAccount": "Add account",
+        "installApp": "Go to Manager to install apps",
+        "help": "Help"
       }
     }
   },
