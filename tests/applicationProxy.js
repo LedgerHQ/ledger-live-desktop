@@ -50,9 +50,8 @@ export function applicationProxy(userData = null, envVar = {}) {
   }
   const app = new Application({
     path: getAppPath(),
-    startTimeout: 20000,
-    waitTimeout: 20000,
-    connectionRetryTimeout: 20000,
+    startTimeout: 60000,
+    waitTimeout: 60000,
     chromeDriverArgs: [
       "--disable-extensions",
       "disable-dev-shm-usage",
