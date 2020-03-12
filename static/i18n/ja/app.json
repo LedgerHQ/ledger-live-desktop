@@ -187,11 +187,20 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "アプリをインストールするか、アカウントを追加",
-      "desc": "マネージャーを開き、アプリをインストールするか、Ledgerデバイスにすでにアプリがインストールされている場合、アカウントを追加",
+      "title": "Install some apps on your device",
+      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
       "buttons": {
-        "addAccount": "アカウントを追加",
-        "installApp": "マネージャーを開く"
+        "installApp": "Go to Manager",
+        "help": "Help"
+      }
+    },
+    "accounts": {
+      "title": "Add an account to get started",
+      "desc": "Add an account to start managing your crypto assets. You should have installed the apps for your crypto assets on your device.",
+      "buttons": {
+        "addAccount": "Add account",
+        "installApp": "Go to Manager to install apps",
+        "help": "Help"
       }
     }
   },
