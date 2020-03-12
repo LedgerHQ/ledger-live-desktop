@@ -17,6 +17,7 @@ describe("quick test", () => {
   });
 
   it("should get the title", () => {
+    console.log(app);
     return app.client
       .waitUntilWindowLoaded()
       .getTitle()
