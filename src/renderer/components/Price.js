@@ -21,6 +21,8 @@ import IconActivity from "~/renderer/icons/Activity";
 
 type OwnProps = {
   unit?: Unit,
+  rate?: BigNumber,
+  showAllDigits?: boolean,
   from: Currency,
   to?: Currency,
   withActivityCurrencyColor?: boolean,
@@ -62,6 +64,7 @@ const Price = ({
   color,
   fontSize,
   iconSize,
+  showAllDigits = true,
 }: Props) => {
   const bgColor = useTheme("colors.palette.background.paper");
   if (!counterValue || counterValue.isZero()) return placeholder || null;
@@ -74,7 +77,7 @@ const Price = ({
       : undefined
     : getCurrencyColor(from, bgColor);
 
-  const subMagnitude = counterValue.lt(1) ? 1 : 0;
+  const subMagnitude = counterValue.lt(1) || showAllDigits ? 1 : 0;
 
   return (
     <PriceWrapper color={color} fontSize={fontSize}>
@@ -97,14 +100,19 @@ const Price = ({
 };
 
 const mapStateToProps = (state: State, props: OwnProps) => {
-  const { unit, from, to, date } = props;
+  const { unit, from, to, date, rate } = props;
   const effectiveUnit = unit || from.units[0];
   const value = new BigNumber(10 ** effectiveUnit.magnitude);
   const counterValueCurrency = to || counterValueCurrencySelector(state);
   const intermediary = intermediaryCurrency(from, counterValueCurrency);
   const fromExchange = exchangeSettingsForPairSelector(state, { from, to: intermediary });
   let counterValue;
-  if (from && to && intermediary.ticker !== from.ticker) {
+  if (rate) {
+    // NB Allow to override the rate for swap
+    counterValue = BigNumber(1)
+      .times(rate)
+      .times(BigNumber(10).pow(counterValueCurrency.units[0].magnitude));
+  } else if (from && to && intermediary.ticker !== from.ticker) {
     counterValue = CounterValues.calculateSelector(state, {
       from,
       to,

@@ -116,11 +116,30 @@
     "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "Manager",
+    "swap": "Swap",
     "exchange": "Buy crypto"
   },
   "stars": {
     "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
     "tooltip": "Star account"
+  },
+  "swap": {
+    "title": "Swap",
+    "landing": {
+      "title": "Swap your assets",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet mi quam. Etiam semper justo et augue dignissim placerat non at risus.",
+      "continue": "Continue",
+      "link": "More about Swap",
+      "sorry": "Sorry, Swap isn’t available in your country :("
+    },
+    "start": {
+      "from": "Source account",
+      "to": "Destination account"
+    },
+    "modal": {
+      "title": "Summary of swap operation",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet mi quam. Etiam semper justo et augue dignissim placerat non at risus."
+    }
   },
   "account": {
     "lastOperations": "Latest operations",
