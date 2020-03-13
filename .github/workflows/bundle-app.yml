@@ -24,6 +24,10 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
+      - uses: "./.github/actions/check-member"
+        with:
+          username: ${{ github.actor }}
+          ban: ledgerlive
       - uses: "./.github/actions/get-package-infos"
         id: version
       - uses: "./.github/actions/get-pr-number"
