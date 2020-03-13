@@ -86,7 +86,7 @@ const GenuineCheck = (props: StepProps) => {
       setTimeout(() => {
         handleCloseGenuineCheckModal();
         handleGenuineCheckPass();
-      }, 5000);
+      }, 2000);
     }
   }, [handleCloseGenuineCheckModal, handleGenuineCheckPass]);
 
