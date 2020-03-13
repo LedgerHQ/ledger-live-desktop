@@ -5,6 +5,10 @@ jobs:
   bundle-macos:
     runs-on: macos-latest
     steps:
+      - uses: valpinkman/actions/check-member@v1.0.0
+        with:
+          username: ${{ github.actor }}
+          ban: ledgerlive
       - uses: actions/checkout@v1
       - uses: actions/setup-node@master
         with:
@@ -24,10 +28,6 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
-      - uses: "./.github/actions/check-member"
-        with:
-          username: ${{ github.actor }}
-          ban: ledgerlive
       - uses: "./.github/actions/get-package-infos"
         id: version
       - uses: "./.github/actions/get-pr-number"
