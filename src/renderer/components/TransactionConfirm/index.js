@@ -57,18 +57,38 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
   const r = transactionConfirmFieldsPerFamily[mainAccount.currency.family];
   const Pre = r && r.pre;
   const Post = r && r.post;
+  const Warning = r && r.warning;
+  const Title = r && r.title;
 
   const recipientWording = t(`TransactionConfirm.recipientWording.${transaction.mode || "send"}`);
 
   return (
     <Container>
-      <WarnBox>
-        <Trans i18nKey="TransactionConfirm.warning" values={{ recipientWording }} />
-      </WarnBox>
+      {Warning ? (
+        <Warning
+          account={account}
+          parentAccount={parentAccount}
+          transaction={transaction}
+          status={status}
+        />
+      ) : (
+        <WarnBox>
+          <Trans i18nKey="TransactionConfirm.warning" values={{ recipientWording }} />
+        </WarnBox>
+      )}
+      {Title ? (
+        <Title
+          account={account}
+          parentAccount={parentAccount}
+          transaction={transaction}
+          status={status}
+        />
+      ) : (
+        <Info>
+          <Trans i18nKey="TransactionConfirm.title" />
+        </Info>
+      )}
 
-      <Info>
-        <Trans i18nKey="TransactionConfirm.title" />
-      </Info>
       <Box style={{ width: "100%" }} px={80} mb={20}>
         {Pre ? (
           <Pre
@@ -91,18 +111,18 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
             />
           </TransactionConfirmField>
         )}
-
-        <TransactionConfirmField label={<Trans i18nKey="send.steps.details.fees" />}>
-          <FormattedVal
-            color={"palette.text.shade80"}
-            unit={feesUnit}
-            val={estimatedFees}
-            fontSize={3}
-            inline
-            showCode
-          />
-        </TransactionConfirmField>
-
+        {!estimatedFees.isZero() && (
+          <TransactionConfirmField label={<Trans i18nKey="send.steps.details.fees" />}>
+            <FormattedVal
+              color={"palette.text.shade80"}
+              unit={feesUnit}
+              val={estimatedFees}
+              fontSize={3}
+              inline
+              showCode
+            />
+          </TransactionConfirmField>
+        )}
         {Post ? (
           <Post
             account={account}
