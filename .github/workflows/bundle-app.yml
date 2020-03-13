@@ -41,8 +41,6 @@ jobs:
       #     path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
       - name: run spectron
         run: yarn jest tests/specs/simple.spec.js
-        env:
-          CI: true
   # bundle-linux:
   #   runs-on: ubuntu-latest
   #   steps:
