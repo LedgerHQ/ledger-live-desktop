@@ -10,36 +10,69 @@ describe("When I launch the app for the first time", () => {
 
   beforeAll(async () => {
     app = applicationProxy();
-    await app.start();
     onboardingPage = new OnboardingPage(app);
     modalPage = new ModalPage(app);
+
+    return app.start();
   });
 
   afterAll(async () => {
-    await app.stop();
+    return app.stop();
   });
 
-  it("opens a window", () => {
+  it("opens a window", async () => {
     return app.client
       .waitUntilWindowLoaded()
+      .getWindowCount()
+      .then(count => expect(count).toBe(1))
+      .browserWindow.isMinimized()
+      .then(minimized => expect(minimized).toBe(false))
+      .browserWindow.isVisible()
+      .then(visible => expect(visible).toBe(false))
+      .browserWindow.isFocused()
+      .then(focused => expect(focused).toBe(false))
       .getTitle()
       .then(title => {
         expect(title).toBe(onboardingData.appTitle);
       });
   });
 
-  it("should be able to change theme", async () => {
-    expect(await onboardingPage.isVisible()).toBe(true);
-    expect(await onboardingPage.logo.isVisible()).toBe(true);
-    expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.welcomeTitle);
-    expect(await onboardingPage.pageDescription.getText()).toBe(onboardingData.welcomeDesc);
+  describe("When the app starts", () => {
+    it("should load and display an animated logo", async () => {
+      await app.client.waitForVisible("#loading-logo");
+      expect(await onboardingPage.loadingLogo.isVisible()).toBe(true);
+    });
 
-    await onboardingPage.setTheme("dusk");
-    expect(await onboardingPage.getThemeColor()).toBe(onboardingData.duskColor);
-    await onboardingPage.setTheme("dark");
-    expect(await onboardingPage.getThemeColor()).toBe(onboardingData.darkColor);
-    await onboardingPage.setTheme("light");
-    expect(await onboardingPage.getThemeColor()).toBe(onboardingData.lightColor);
+    it("should end loading and animated logo is hidden", async () => {
+      await app.client.waitForVisible("#loading-logo", 5000, true);
+      expect(await onboardingPage.loadingLogo.isVisible()).toBe(false);
+    });
+  });
+
+  describe("When it displays the welcome page", () => {
+    it("should propose to change the theme", async () => {
+      expect(await onboardingPage.isVisible()).toBe(true);
+      expect(await onboardingPage.logo.isVisible()).toBe(true);
+      expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.welcomeTitle);
+      expect(await onboardingPage.pageDescription.getText()).toBe(onboardingData.welcomeDesc);
+    });
+
+    describe("When I change the theme", () => {
+      it("should change the appearance to dusk", async () => {
+        await onboardingPage.setTheme("dusk");
+        expect(await onboardingPage.getThemeColor()).toBe(onboardingData.duskColor);
+      });
+
+      it("should change the appearance to dark", async () => {
+        await onboardingPage.setTheme("dark");
+        expect(await onboardingPage.getThemeColor()).toBe(onboardingData.darkColor);
+      });
+
+      it("should change the appearance to light", async () => {
+        await onboardingPage.setTheme("light");
+        expect(await onboardingPage.getThemeColor()).toBe(onboardingData.lightColor);
+      });
+    });
   });
 
   describe("When I start the onboarding", () => {
