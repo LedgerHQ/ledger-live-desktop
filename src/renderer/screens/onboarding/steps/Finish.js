@@ -107,7 +107,7 @@ export default class Finish extends Component<StepProps, *> {
             <Description>{t("onboarding.finish.desc")}</Description>
           </Box>
           <Box p={5}>
-            <Button primary onClick={() => finish()} data-automation-id="modal-continue-button">
+            <Button primary onClick={() => finish()} id="modal-continue-button">
               {t("onboarding.finish.openAppButton")}
             </Button>
           </Box>

@@ -16,71 +16,71 @@ export default class OnboardingPage extends Page {
   }
 
   get getStartedButton() {
-    return this.app.client.element('[data-automation-id="onboarding-get-started-button"]');
+    return this.app.client.element("#onboarding-get-started-button");
   }
 
   get newDeviceButton() {
-    return this.app.client.element('[data-automation-id="onboarding-newdevice-button"]');
+    return this.app.client.element("#onboarding-newdevice-button");
   }
 
   get restoreDeviceButton() {
-    return this.app.client.element('[data-automation-id="onboarding-restoredevice-button"]');
+    return this.app.client.element("#onboarding-restoredevice-button");
   }
 
   get initializedDeviceButton() {
-    return this.app.client.element('[data-automation-id="onboarding-initializeddevice-button"]');
+    return this.app.client.element("#onboarding-initializeddevice-button");
   }
 
   get noDeviceButton() {
-    return this.app.client.element('[data-automation-id="onboarding-nodevice-button"]');
+    return this.app.client.element("#onboarding-nodevice-button");
   }
 
   get buyNewButton() {
-    return this.app.client.element('[data-automation-id="onboarding-buynew-button"]');
+    return this.app.client.element("#onboarding-buynew-button");
   }
 
   get trackOrderButton() {
-    return this.app.client.element('[data-automation-id="onboarding-trackorder-button"]');
+    return this.app.client.element("#onboarding-trackorder-button");
   }
 
   get learnMoreButton() {
-    return this.app.client.element('[data-automation-id="onboarding-learnmore-button"]');
+    return this.app.client.element("#onboarding-learnmore-button");
   }
 
   get nanoX() {
-    return this.app.client.element('[data-automation-id="onboarding-select-nanox"]');
+    return this.app.client.element("#onboarding-select-nanox");
   }
 
   get nanoS() {
-    return this.app.client.element('[data-automation-id="onboarding-select-nanos"]');
+    return this.app.client.element("#onboarding-select-nanos");
   }
 
   get blue() {
-    return this.app.client.element('[data-automation-id="onboarding-select-blue"]');
+    return this.app.client.element("#onboarding-select-blue");
   }
 
   get genuineCheckPinRatio() {
-    return '[data-automation-id="onboarding-genuine-pin-ratio"]';
+    return "#onboarding-genuine-pin-ratio";
   }
 
   get genuineCheckSeedRatio() {
-    return '[data-automation-id="onboarding-genuine-seed-ratio"]';
+    return "#onboarding-genuine-seed-ratio";
   }
 
   get genuineCheckButton() {
-    return this.app.client.element('[data-automation-id="onboarding-genuine-check"]');
+    return this.app.client.element("#onboarding-genuine-check");
   }
 
   get continueButton() {
-    return this.app.client.element('[data-automation-id="onboarding-continue-button"]');
+    return this.app.client.element("#onboarding-continue-button");
   }
 
   get backButton() {
-    return this.app.client.element('[data-automation-id="onboarding-back-button"]');
+    return this.app.client.element("#onboarding-back-button");
   }
 
   get contactUsButton() {
-    return this.app.client.element('[data-automation-id="onboarding-contactus-button"]');
+    return this.app.client.element("#onboarding-contactus-button");
   }
 
   /** methods **/

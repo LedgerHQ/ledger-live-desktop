@@ -40,8 +40,8 @@ const EmptyState = () => {
         themeTyped
       />
       <Box mt={5} alignItems="center">
-        <Title data-automation-id="empty-state-title">{t("emptyState.dashboard.title")}</Title>
-        <Description mt={3} style={{ maxWidth: 600 }} data-automation-id="empty-state-description">
+        <Title id="empty-state-title">{t("emptyState.dashboard.title")}</Title>
+        <Description mt={3} style={{ maxWidth: 600 }} id="empty-state-description">
           {t("emptyState.dashboard.desc")}
         </Description>
         <Box mt={5} horizontal style={{ width: 300 }} flow={3} justifyContent="center">
@@ -49,7 +49,7 @@ const EmptyState = () => {
             primary
             style={{ minWidth: 120 }}
             onClick={handleInstallApp}
-            data-automation-id="accounts-empty-state-openmanager-button"
+            id="accounts-empty-state-openmanager-button"
           >
             {t("emptyState.dashboard.buttons.installApp")}
           </Button>
@@ -57,7 +57,7 @@ const EmptyState = () => {
             outline
             style={{ minWidth: 120 }}
             onClick={openAddAccounts}
-            data-automation-id="accounts-empty-state-addaccounts-button"
+            id="accounts-empty-state-addaccounts-button"
           >
             {t("emptyState.dashboard.buttons.addAccount")}
           </Button>

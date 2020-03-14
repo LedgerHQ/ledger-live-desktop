@@ -159,7 +159,7 @@ const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
   const { t } = useTranslation();
 
   return isExperimental ? (
-    <Tag data-automation-id="drawer-experimental-button" to="/settings/experimental">
+    <Tag id="drawer-experimental-button" to="/settings/experimental">
       <IconExperimental width={16} height={16} />
       <TagText collapsed={collapsed}>{t("common.experimentalFeature")}</TagText>
     </Tag>
@@ -237,7 +237,7 @@ const MainSideBar = () => {
             <Collapser
               collapsed={collapsed}
               onClick={handleCollapse}
-              data-automation-id="drawer-collapse-button"
+              id="drawer-collapse-button"
             >
               <IconChevron size={16} />
             </Collapser>

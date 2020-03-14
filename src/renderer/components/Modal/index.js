@@ -206,7 +206,7 @@ class Modal extends PureComponent<Props> {
                 state={state}
                 width={width}
                 onClick={this.swallowClick}
-                data-automation-id="modal-container"
+                id="modal-container"
               >
                 {render && render(renderProps)}
                 {children}

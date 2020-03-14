@@ -106,11 +106,7 @@ const TopBar = () => {
               </>
             )}
             <Tooltip content={t("settings.discreet")} placement="bottom">
-              <ItemContainer
-                data-automation-id="topbar-discreet-button"
-                isInteractive
-                onClick={handleDiscreet}
-              >
+              <ItemContainer id="topbar-discreet-button" isInteractive onClick={handleDiscreet}>
                 {discreetMode ? <IconEyeOff size={16} /> : <IconEye size={16} />}
               </ItemContainer>
             </Tooltip>
@@ -118,11 +114,7 @@ const TopBar = () => {
               <Bar />
             </Box>
             <Tooltip content={t("settings.title")} placement="bottom">
-              <ItemContainer
-                data-automation-id="topbar-settings-button"
-                isInteractive
-                onClick={navigateToSettings}
-              >
+              <ItemContainer id="topbar-settings-button" isInteractive onClick={navigateToSettings}>
                 <IconSettings size={16} />
               </ItemContainer>
             </Tooltip>
@@ -133,7 +125,7 @@ const TopBar = () => {
                 </Box>
                 <Tooltip content={t("common.lock")}>
                   <ItemContainer
-                    data-automation-id="topbar-password-lock-button"
+                    id="topbar-password-lock-button"
                     isInteractive
                     justifyContent="center"
                     onClick={handleLock}

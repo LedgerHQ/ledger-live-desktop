@@ -45,7 +45,7 @@ const PasswordButton = () => {
         <Switch
           isChecked={hasPassword}
           onChange={handleChangePasswordCheck}
-          data-automation-id="settings-password-lock-switch"
+          id="settings-password-lock-switch"
         />
       </Box>
     </>

@@ -46,7 +46,7 @@ class SideBarListItem extends PureComponent<Props> {
     return (
       <Tooltip content={renderedLabel} enabled={!!collapsed} boundary="window" placement="right">
         <Container
-          data-automation-id={`drawer-${String(label).toLowerCase()}-button`}
+          id={`drawer-${String(label).toLowerCase()}-button`}
           isActive={!disabled && isActive}
           iconActiveColor={iconActiveColor}
           onClick={disabled ? undefined : onClick}

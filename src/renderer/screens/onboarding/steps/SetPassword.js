@@ -151,7 +151,7 @@ class SetPassword extends PureComponent<Props, State> {
               onClick={this.handleSave}
               disabled={!this.isValid() || !newPassword.length || !confirmPassword.length}
               primary
-              data-automation-id="modal-continue-button"
+              id="modal-continue-button"
             >
               {t("common.continue")}
             </Button>

@@ -72,7 +72,7 @@ export const StepChooseCurrencyFooter = ({ transitionTo, currency }: StepProps) 
           primary
           disabled={!currency}
           onClick={() => transitionTo("connectDevice")}
-          data-automation-id="modal-continue-button"
+          id="modal-continue-button"
         >
           {t("common.continue")}
         </Button>

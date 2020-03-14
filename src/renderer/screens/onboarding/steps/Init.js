@@ -106,7 +106,7 @@ export function OptionFlowCard({ card }: { card: CardType }) {
     <InitCardContainer
       onClick={onClick}
       color="palette.text.shade100"
-      data-automation-id={`onboarding-${key.toLowerCase()}-button`}
+      id={`onboarding-${key.toLowerCase()}-button`}
     >
       <Box justifyContent="center" color={"palette.primary.main"}>
         <InitIconContainer justifyContent="center">{icon}</InitIconContainer>

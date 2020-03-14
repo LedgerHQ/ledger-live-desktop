@@ -166,7 +166,7 @@ const GenuineCheck = (props: StepProps) => {
             items={radioItems}
             activeKey={pin === undefined ? "" : pin ? "yes" : "no"}
             onChange={onPinChange}
-            data-automation-id="onboarding-genuine-pin-ratio"
+            id="onboarding-genuine-pin-ratio"
           />
         </GenuineCheckCardWrapper>
         <GenuineCheckCardWrapper mt={3} isDisabled={!pin}>
@@ -177,7 +177,7 @@ const GenuineCheck = (props: StepProps) => {
               items={radioItems}
               activeKey={recovery === undefined ? "" : recovery ? "yes" : "no"}
               onChange={onRecoveryChange}
-              data-automation-id="onboarding-genuine-seed-ratio"
+              id="onboarding-genuine-seed-ratio"
             />
           )}
         </GenuineCheckCardWrapper>
@@ -201,7 +201,7 @@ const GenuineCheck = (props: StepProps) => {
                   primary
                   disabled={!recovery}
                   onClick={handleOpenGenuineCheckModal}
-                  data-automation-id="onboarding-genuine-check"
+                  id="onboarding-genuine-check"
                 >
                   {t("onboarding.genuineCheck.buttons.genuineCheck")}
                 </Button>

@@ -15,7 +15,7 @@ const OnboardingFooter = ({ nextStep, prevStep, isContinueDisabled, ...props }: 
   const { t } = useTranslation();
   return (
     <OnboardingFooterWrapper {...props}>
-      <Button outlineGrey onClick={() => prevStep()} data-automation-id="onboarding-back-button">
+      <Button outlineGrey onClick={() => prevStep()} id="onboarding-back-button">
         {t("common.back")}
       </Button>
       <Button
@@ -23,7 +23,7 @@ const OnboardingFooter = ({ nextStep, prevStep, isContinueDisabled, ...props }: 
         primary
         onClick={() => nextStep()}
         ml="auto"
-        data-automation-id="onboarding-continue-button"
+        id="onboarding-continue-button"
       >
         {t("common.continue")}
       </Button>

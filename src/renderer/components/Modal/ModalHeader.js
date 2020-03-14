@@ -92,7 +92,7 @@ const ModalHeader = ({
   return (
     <div style={MODAL_HEADER_STYLE}>
       {onBack ? (
-        <ModalHeaderAction onClick={onBack} data-automation-id="modal-back-button">
+        <ModalHeaderAction onClick={onBack} id="modal-back-button">
           <IconAngleLeft size={12} />
           <Text ff="Inter|Medium" fontSize={4} color="palette.text.shade40">
             {t("common.back")}
@@ -101,13 +101,13 @@ const ModalHeader = ({
       ) : (
         <div />
       )}
-      <ModalTitle data-automation-id="modal-title">{children}</ModalTitle>
+      <ModalTitle id="modal-title">{children}</ModalTitle>
       {onClose ? (
         <ModalHeaderAction
           right
           color="palette.text.shade40"
           onClick={onClose}
-          data-automation-id="modal-close-button"
+          id="modal-close-button"
         >
           <IconCross size={16} />
         </ModalHeaderAction>

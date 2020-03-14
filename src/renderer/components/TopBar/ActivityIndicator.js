@@ -46,7 +46,7 @@ class ActivityIndicatorInner extends PureComponent<Props, { lastClickTime: numbe
 
     const content = (
       <ItemContainer
-        data-automation-id="topbar-synchronize-button"
+        id="topbar-synchronize-button"
         disabled={isDisabled}
         onClick={isDisabled ? undefined : this.onClick}
       >

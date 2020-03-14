@@ -52,7 +52,7 @@ class SelectDeviceC extends PureComponent<StepProps, {}> {
               <DeviceContainer
                 isActive={onboarding.deviceModelId === "nanoX"}
                 onClick={() => this.handleDeviceModelId("nanoX")}
-                data-automation-id="onboarding-select-nanox"
+                id="onboarding-select-nanox"
               >
                 {onboarding.deviceModelId === "nanoX" && <DeviceSelected />}
                 <DeviceIcon>
@@ -68,7 +68,7 @@ class SelectDeviceC extends PureComponent<StepProps, {}> {
               <DeviceContainer
                 isActive={onboarding.deviceModelId === "nanoS"}
                 onClick={() => this.handleDeviceModelId("nanoS")}
-                data-automation-id="onboarding-select-nanos"
+                id="onboarding-select-nanos"
               >
                 {onboarding.deviceModelId === "nanoS" && <DeviceSelected />}
                 <DeviceIcon>
@@ -79,7 +79,7 @@ class SelectDeviceC extends PureComponent<StepProps, {}> {
               <DeviceContainer
                 isActive={onboarding.deviceModelId === "blue"}
                 onClick={() => this.handleDeviceModelId("blue")}
-                data-automation-id="onboarding-select-blue"
+                id="onboarding-select-blue"
               >
                 {onboarding.deviceModelId === "blue" && <DeviceSelected />}
                 <DeviceIcon>
