@@ -70,10 +70,10 @@
       "REVEAL": "Feltárva",
       "DELEGATE": "Delegated",
       "UNDELEGATE": "Undelegated",
-      "VOTE": "Voted",
-      "FREEZE": "Frozen",
-      "UNFREEZE": "Unfrozen",
-      "REWARD": "Claimed reward"
+      "VOTE": "Szavazott",
+      "FREEZE": "Befagyasztott",
+      "UNFREEZE": "Kiolvasztott",
+      "REWARD": "Begyűjtött jutalom"
     }
   },
   "byteSize": {
@@ -135,10 +135,10 @@
         "desc": "Válaszd ki a megjelenítendő egységet"
       }
     },
-    "availableBalance": "Available balance",
-    "frozenAssets": "Frozen assets",
-    "bandwidth": "Bandwidth",
-    "energy": "Energy"
+    "availableBalance": "Elérhető egyenleg",
+    "frozenAssets": "Befagyasztott eszközök",
+    "bandwidth": "Sávszélesség",
+    "energy": "Energia"
   },
   "accounts": {
     "title": "Számlák",
@@ -187,11 +187,11 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "Install some apps on your device",
-      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
+      "title": "Telepíts pár alkalmazást az eszközödre",
+      "desc": "Lépj az Eszközkezelőbe, hogy alkalmazásokat telepíts az eszközödre. Hozzá tudsz adni számlákat, ha már vannak telepített alkalmazások az eszközödön.",
       "buttons": {
-        "installApp": "Go to Manager",
-        "help": "Help"
+        "installApp": "Lépj az Eszközkezelőbe",
+        "help": "Segítség"
       }
     },
     "accounts": {
