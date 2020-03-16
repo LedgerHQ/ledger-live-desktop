@@ -25,7 +25,7 @@ const Root = (props: *) => (
       )}
     </Box>
     {props.transaction.memoTypeRecommended && (
-      <Box horizontal grow justifyContent="space-between">
+      <Box mt={20} horizontal grow justifyContent="space-between">
         <Text ff="Inter|Regular" color="palette.text.shade50" fontSize={4}>
           <Trans i18nKey="send.steps.warning.stellar.recommendedMemo" />
         </Text>

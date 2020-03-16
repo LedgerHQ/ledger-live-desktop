@@ -31,13 +31,10 @@ const MemoValueField = ({
   // We use transaction as an error here.
   // It will be usefull to block a memo wrong format
   // on the ledger-live mobile
-  const { transaction: memoError } = status.errors;
-  const { transaction: memoWarning } = status.warnings;
-
   return (
     <Input
-      warning={memoWarning}
-      error={memoError}
+      warning={status.warnings.transaction}
+      error={status.errors.transaction}
       value={transaction.memoValue}
       onChange={onMemoValueChange}
     />

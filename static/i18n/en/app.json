@@ -1786,14 +1786,8 @@
     "StellarWrongMemoFormat": {
       "title": "Memo format is wrong"
     },
-    "StellarMinimumBalanceWarning": {
-      "title": "A minimum balance is required to be kept in a Stellar account"
-    },
-    "StellarNewAccountMinimumTransaction": {
-      "title": "A new account requires at least 1 XLM to be activated"
-    },
-    "StellarSourceHasMultiSign": {
-      "title": "Please disable multisign to send XLM"
+    "SourceHasMultiSign": {
+      "title": "Please disable multisign to send {{currencyName}}"
     }
   }
 }

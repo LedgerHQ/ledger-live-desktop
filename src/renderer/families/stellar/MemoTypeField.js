@@ -7,6 +7,11 @@ import Select from "~/renderer/components/Select";
 import invariant from "invariant";
 import type { Account, Transaction } from "@ledgerhq/live-common/lib/types";
 
+const options = StellarMemoType.map(type => ({
+  label: type,
+  value: type,
+}));
+
 const MemoTypeField = ({
   onChange,
   account,
@@ -20,28 +25,19 @@ const MemoTypeField = ({
 
   const bridge = getAccountBridge(account);
 
-  const options = StellarMemoType.map(type => ({
-    label: type,
-    value: type,
-  }));
-
-  const [selectedMemoType, setSelectedMemoType] = useState(options[0]);
+  const selectedMemoType =
+    options.find(option => option.value === transaction.memoType) || options[0];
 
   const onMemoTypeChange = useCallback(
     memoType => {
-      setSelectedMemoType(memoType);
       onChange(bridge.updateTransaction(transaction, { memoType: memoType.value }));
     },
     [onChange, bridge, transaction],
   );
 
-  useEffect(() => {
-    setSelectedMemoType(options.find(option => option.value === transaction.memoType));
-  }, [transaction.memoType, options]);
-
   return (
     <Select
-      width={"156px"}
+      width="156px"
       isSearchable={false}
       onChange={onMemoTypeChange}
       value={selectedMemoType}
