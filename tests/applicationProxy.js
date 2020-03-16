@@ -48,8 +48,18 @@ export function applicationProxy(userData = null, envVar = {}) {
   }
   const app = new Application({
     path: getAppPath(),
-    chromeDriverArgs: ["--disable-extensions", "disable-dev-shm-usage", "--no-sandbox"],
+    chromeDriverArgs: [
+      "--disable-extensions",
+      "disable-dev-shm-usage",
+      "--no-sandbox",
+      "--headless",
+      "remote-debugging-port=" + Math.floor(Math.random() * (9999 - 9000) + 9000),
+    ],
     env: envVar,
+    waitTimeout: 100000,
+    startTimeout: 100000,
+    chromeDriverLogPath: path.resolve("chromedriver.log"),
+    connectionRetryTimeout: 100000,
   });
   return app;
 }
