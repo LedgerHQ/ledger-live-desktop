@@ -3,6 +3,8 @@ import OnboardingPage from "../po/onboarding.page";
 import ModalPage from "../po/modal.page";
 import onboardingData from "../data/onboarding/";
 
+jest.setTimeout(60000);
+
 describe("When I launch the app for the first time", () => {
   let app;
   let onboardingPage;
