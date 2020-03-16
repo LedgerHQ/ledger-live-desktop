@@ -56,5 +56,6 @@ export function applicationProxy(userData = null, envVar = {}) {
     ],
     env: envVar,
   });
+  console.log("app", app);
   return app;
 }
