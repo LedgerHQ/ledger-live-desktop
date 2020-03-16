@@ -48,6 +48,7 @@ export function applicationProxy(userData = null, envVar = {}) {
   }
   const app = new Application({
     path: getAppPath(),
+    startTimeout: 30000,
     chromeDriverArgs: [
       "--disable-extensions",
       "disable-dev-shm-usage",
