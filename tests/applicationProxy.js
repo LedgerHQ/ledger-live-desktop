@@ -55,6 +55,7 @@ export function applicationProxy(userData = null, envVar = {}) {
       "remote-debugging-port=" + Math.floor(Math.random() * (9999 - 9000) + 9000),
     ],
     env: envVar,
+    waitTimeout: 10e3,
   });
   return app;
 }
