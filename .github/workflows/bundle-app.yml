@@ -38,110 +38,97 @@ jobs:
         run: yarn nightly
       - uses: "./.github/actions/get-package-infos"
         id: post-version
-      - name: upload macOS app
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{ steps.post-version.outputs.version }}-mac.dmg
-          path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
-
-  bundle-linux:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: valpinkman/actions/check-member@v1.1.1
-        with:
-          username: ${{ github.actor }}
-          ban: ledgerlive
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@master
-        with:
-          node-version: 12.x
-      - name: set git user
-        run: |
-          git config user.email "team-live@ledger.fr"
-          git config user.name "Team Live"
-      - name: install linux dependencies
-        run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
-      - name: get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: install dependencies
-        run: yarn --ignore-scripts --frozen-lockfile
-      - uses: "./.github/actions/get-package-infos"
-        id: version
-      - uses: valpinkman/actions/get-pr-number@v1.1.1
-        id: pr
-      - name: make local version
-        run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
-      - name: build the app
-        run: yarn nightly
-      - uses: "./.github/actions/get-package-infos"
-        id: post-version
-      - name: upload linux app
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
-          path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
-
-  bundle-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: valpinkman/actions/check-member@v1.1.1
-        with:
-          username: ${{ github.actor }}
-          ban: ledgerlive
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@master
-        with:
-          node-version: 12.x
-      - uses: actions/setup-python@v1
-        with:
-          python-version: "2.7.x"
-      - name: set git user
-        run: |
-          git config user.email "team-live@ledger.fr"
-          git config user.name "Team Live"
-      - name: get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: install dependencies
-        run: yarn --ignore-scripts --frozen-lockfile
-      - uses: "./.github/actions/get-package-infos"
-        id: version
-      - uses: valpinkman/actions/get-pr-number@v1.1.1
-        id: pr
-      - name: make local version
-        run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
-      - name: build the app
-        run: yarn nightly
-      # - name: clean up
-      #   run: npx rimraf ./dist
-      # - name: install and rebuild
-      #   run: yarn --frozen-lockfile
-      # - name: build
-      #   run: |
-      #     set NODE_ENV=production
-      #     node ./tools/main.js build
-      # - name: nightly
-      #   run: |
-      #     set DEBUG=electron-builder
-      #     set NODE_ENV=production
-      #     npx electron-builder --config electron-builder-nightly.yml
-      - uses: "./.github/actions/get-package-infos"
-        id: post-version
-      - name: upload windows
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{ steps.post-version.outputs.version }}-win.exe
-          path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-win.exe
+      - name: run spectron
+        run: yarn jest tests/specs/onboarding.spec.js
+      # - name: upload macOS app
+      #   uses: actions/upload-artifact@v1
+      #   with:
+      #     name: ${{ steps.post-version.outputs.version }}-mac.dmg
+      #     path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
+  # bundle-linux:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: valpinkman/actions/check-member@v1.1.1
+  #       with:
+  #         username: ${{ github.actor }}
+  #         ban: ledgerlive
+  #     - uses: actions/checkout@v1
+  #     - uses: actions/setup-node@master
+  #       with:
+  #         node-version: 12.x
+  #     - name: set git user
+  #       run: |
+  #         git config user.email "team-live@ledger.fr"
+  #         git config user.name "Team Live"
+  #     - name: install linux dependencies
+  #       run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
+  #     - name: get yarn cache
+  #       id: yarn-cache
+  #       run: echo "::set-output name=dir::$(yarn cache dir)"
+  #     - uses: actions/cache@v1
+  #       with:
+  #         path: ${{ steps.yarn-cache.outputs.dir }}
+  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-yarn-
+  #     - name: install dependencies
+  #       run: yarn --ignore-scripts --frozen-lockfile
+  #     - uses: "./.github/actions/get-package-infos"
+  #       id: version
+  #     - uses: valpinkman/actions/get-pr-number@v1.1.1
+  #       id: pr
+  #     - name: make local version
+  #       run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
+  #     - name: build the app
+  #       run: yarn nightly
+  #     - uses: "./.github/actions/get-package-infos"
+  #       id: post-version
+  #     - name: upload linux app
+  #       uses: actions/upload-artifact@v1
+  #       with:
+  #         name: ${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
+  #         path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
+  # bundle-windows:
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: valpinkman/actions/check-member@v1.1.1
+  #       with:
+  #         username: ${{ github.actor }}
+  #         ban: ledgerlive
+  #     - uses: actions/checkout@v1
+  #     - uses: actions/setup-node@master
+  #       with:
+  #         node-version: 12.x
+  #     - uses: actions/setup-python@v1
+  #       with:
+  #         python-version: "2.7.x"
+  #     - name: set git user
+  #       run: |
+  #         git config user.email "team-live@ledger.fr"
+  #         git config user.name "Team Live"
+  #     - name: get yarn cache
+  #       id: yarn-cache
+  #       run: echo "::set-output name=dir::$(yarn cache dir)"
+  #     - uses: actions/cache@v1
+  #       with:
+  #         path: ${{ steps.yarn-cache.outputs.dir }}
+  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-yarn-
+  #     - name: install dependencies
+  #       run: yarn --ignore-scripts --frozen-lockfile
+  #     - uses: "./.github/actions/get-package-infos"
+  #       id: version
+  #     - uses: valpinkman/actions/get-pr-number@v1.1.1
+  #       id: pr
+  #     - name: make local version
+  #       run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
+  #     - name: build the app
+  #       run: yarn nightly
+  #     - uses: "./.github/actions/get-package-infos"
+  #       id: post-version
+  #     - name: upload windows
+  #       uses: actions/upload-artifact@v1
+  #       with:
+  #         name: ${{ steps.post-version.outputs.version }}-win.exe
+  #         path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-win.exe
