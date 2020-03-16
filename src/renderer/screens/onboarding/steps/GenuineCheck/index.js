@@ -166,6 +166,7 @@ const GenuineCheck = (props: StepProps) => {
             items={radioItems}
             activeKey={pin === undefined ? "" : pin ? "yes" : "no"}
             onChange={onPinChange}
+            id="onboarding-genuine-pin-ratio"
           />
         </GenuineCheckCardWrapper>
         <GenuineCheckCardWrapper mt={3} isDisabled={!pin}>
@@ -176,6 +177,7 @@ const GenuineCheck = (props: StepProps) => {
               items={radioItems}
               activeKey={recovery === undefined ? "" : recovery ? "yes" : "no"}
               onChange={onRecoveryChange}
+              id="onboarding-genuine-seed-ratio"
             />
           )}
         </GenuineCheckCardWrapper>
@@ -195,7 +197,12 @@ const GenuineCheck = (props: StepProps) => {
                   </Box>
                 </Box>
               ) : (
-                <Button primary disabled={!recovery} onClick={handleOpenGenuineCheckModal}>
+                <Button
+                  primary
+                  disabled={!recovery}
+                  onClick={handleOpenGenuineCheckModal}
+                  id="onboarding-genuine-check"
+                >
                   {t("onboarding.genuineCheck.buttons.genuineCheck")}
                 </Button>
               )}

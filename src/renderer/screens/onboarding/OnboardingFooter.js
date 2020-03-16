@@ -15,15 +15,15 @@ const OnboardingFooter = ({ nextStep, prevStep, isContinueDisabled, ...props }: 
   const { t } = useTranslation();
   return (
     <OnboardingFooterWrapper {...props}>
-      <Button outlineGrey onClick={() => prevStep()}>
+      <Button outlineGrey onClick={() => prevStep()} id="onboarding-back-button">
         {t("common.back")}
       </Button>
       <Button
-        data-e2e="continue_button"
         disabled={isContinueDisabled}
         primary
         onClick={() => nextStep()}
         ml="auto"
+        id="onboarding-continue-button"
       >
         {t("common.continue")}
       </Button>

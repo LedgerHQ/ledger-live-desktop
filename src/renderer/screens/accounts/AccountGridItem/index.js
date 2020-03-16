@@ -46,13 +46,7 @@ class AccountCard extends PureComponent<Props> {
 
     return (
       <AccountContextMenu account={account} parentAccount={parentAccount}>
-        <Card
-          {...props}
-          style={{ display: hidden && "none" }}
-          p={20}
-          onClick={this.onClick}
-          data-e2e="dashboard_AccountCardWrapper"
-        >
+        <Card {...props} style={{ display: hidden && "none" }} p={20} onClick={this.onClick}>
           <AccountCardHeader account={account} parentAccount={parentAccount} />
           <AccountCardBody account={account} parentAccount={parentAccount} range={range} />
         </Card>

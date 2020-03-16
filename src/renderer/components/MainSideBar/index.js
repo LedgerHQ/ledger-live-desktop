@@ -159,7 +159,7 @@ const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
   const { t } = useTranslation();
 
   return isExperimental ? (
-    <Tag to="/settings/experimental">
+    <Tag id="drawer-experimental-button" to="/settings/experimental">
       <IconExperimental width={16} height={16} />
       <TagText collapsed={collapsed}>{t("common.experimentalFeature")}</TagText>
     </Tag>
@@ -234,7 +234,7 @@ const MainSideBar = () => {
         const secondAnim = !(state === "entered" && !collapsed);
         return (
           <SideBar className="unstoppableAnimation" style={sideBarTransitionStyles[state]}>
-            <Collapser collapsed={collapsed} onClick={handleCollapse}>
+            <Collapser collapsed={collapsed} onClick={handleCollapse} id="drawer-collapse-button">
               <IconChevron size={16} />
             </Collapser>
             <TopGradient />
