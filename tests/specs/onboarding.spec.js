@@ -13,11 +13,11 @@ describe("When I launch the app for the first time", () => {
     onboardingPage = new OnboardingPage(app);
     modalPage = new ModalPage(app);
 
-    return app.start();
+    await app.start();
   });
 
   afterAll(async () => {
-    return app.stop();
+    await app.stop();
   });
 
   it("opens a window", async () => {

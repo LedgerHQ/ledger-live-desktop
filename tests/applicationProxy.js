@@ -48,7 +48,12 @@ export function applicationProxy(userData = null, envVar = {}) {
   }
   const app = new Application({
     path: getAppPath(),
-    chromeDriverArgs: ["--disable-extensions", "disable-dev-shm-usage", "--no-sandbox"],
+    chromeDriverArgs: [
+      "--disable-extensions",
+      "disable-dev-shm-usage",
+      "--no-sandbox",
+      "remote-debugging-port=" + Math.floor(Math.random() * (9999 - 9000) + 9000),
+    ],
     env: envVar,
   });
   return app;
