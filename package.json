@@ -35,7 +35,7 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@hot-loader/react-dom": "^16.12.0",
+    "@hot-loader/react-dom": "^16.13.0",
     "@ledgerhq/devices": "^5.11.0",
     "@ledgerhq/electron-updater": "^4.2.2",
     "@ledgerhq/errors": "^5.11.0",
@@ -59,7 +59,7 @@
     "electron-context-menu": "^0.16.0",
     "ethereumjs-tx": "^2.1.1",
     "fuse.js": "^3.6.1",
-    "getos": "^3.1.4",
+    "getos": "^3.1.5",
     "i18next": "^19.3.2",
     "invariant": "^2.2.4",
     "ip": "^1.1.5",
@@ -79,7 +79,7 @@
     "raven-js": "^3.27.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "react-hot-loader": "^4.12.18",
+    "react-hot-loader": "^4.12.20",
     "react-i18next": "^11.3.3",
     "react-key-handler": "^1.2.0-beta.3",
     "react-lottie": "^1.2.3",
@@ -110,7 +110,7 @@
     "winston": "^3.2.1",
     "winston-transport": "^4.3.0",
     "write-file-atomic": "^3.0.3",
-    "ws": "^7.2.2",
+    "ws": "^7.2.3",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
@@ -126,7 +126,7 @@
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-flow": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
-    "@octokit/rest": "^16.43.1",
+    "@octokit/rest": "^17.1.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^25.1.0",
@@ -137,7 +137,7 @@
     "cross-env": "^7.0.2",
     "css-loader": "^3.4.2",
     "electron": "8.1.1",
-    "electron-builder": "^22.4.0",
+    "electron-builder": "^22.4.1",
     "electron-devtools-installer": "^2.2.4",
     "electron-notarize": "^0.2.1",
     "eslint": "^6.8.0",
@@ -176,7 +176,7 @@
     "webpack-hot-middleware": "^2.25.0",
     "webpack-node-externals": "^1.7.2",
     "webpackbar": "^4.0.0",
-    "yargs": "^15.3.0",
-    "yarn-deduplicate": "^1.1.1"
+    "yargs": "^15.3.1",
+    "yarn-deduplicate": "^2.0.0"
   }
 }
