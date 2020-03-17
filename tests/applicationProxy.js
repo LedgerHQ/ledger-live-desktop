@@ -56,10 +56,10 @@ export function applicationProxy(userData = null, envVar = {}) {
       "remote-debugging-port=" + Math.floor(Math.random() * (9999 - 9000) + 9000),
     ],
     env: envVar,
-    waitTimeout: 100000,
-    startTimeout: 100000,
-    chromeDriverLogPath: path.resolve("chromedriver.log"),
-    connectionRetryTimeout: 100000,
+    waitTimeout: 30000,
+    startTimeout: 30000,
+    chromeDriverLogPath: path.resolve("dist", "chromedriver.log"),
+    connectionRetryTimeout: 30000,
   });
   return app;
 }
