@@ -73,37 +73,31 @@ export function enableDebugLogger() {
 }
 
 const captureBreadcrumb = (breadcrumb: any) => {
-  // FIXME
-  /*
   if (!process.env.STORYBOOK_ENV) {
     try {
-      if (typeof window !== 'undefined') {
-        require('sentry/browser').captureBreadcrumb(breadcrumb)
+      if (typeof window !== "undefined") {
+        require("~/sentry/browser").captureBreadcrumb(breadcrumb);
       } else {
-        require('sentry/node').captureBreadcrumb(breadcrumb)
+        require("~/sentry/node").captureBreadcrumb(breadcrumb);
       }
     } catch (e) {
-      logger.log('warn', "Can't captureBreadcrumb", e)
+      logger.log("warn", "Can't captureBreadcrumb", e);
     }
   }
-  */
 };
 
-const captureException = (_error: Error) => {
-  // FIXME
-  /*
+const captureException = (error: Error) => {
   if (!process.env.STORYBOOK_ENV) {
     try {
-      if (typeof window !== 'undefined') {
-        require('sentry/browser').captureException(error)
+      if (typeof window !== "undefined") {
+        require("~/sentry/browser").captureException(error);
       } else {
-        require('sentry/node').captureException(error)
+        require("~/sentry/node").captureException(error);
       }
     } catch (e) {
-      logger.log('warn', "Can't send to sentry", error, e)
+      logger.log("warn", "Can't send to sentry", error, e);
     }
   }
-  */
 };
 
 const logCmds = !process.env.NO_DEBUG_COMMANDS;
