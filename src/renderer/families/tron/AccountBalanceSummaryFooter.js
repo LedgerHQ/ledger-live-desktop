@@ -81,7 +81,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
     formatConfig,
   );
 
-  const formatedEnergy = energy && energy.gt(0);
+  const formatedEnergy = energy && energy.gt(0) ? energy : null;
 
   const formatedBandwidth = freeLimit
     .plus(gainedLimit)
