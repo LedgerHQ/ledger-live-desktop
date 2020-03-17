@@ -4,6 +4,7 @@ import { getEnv } from "@ledgerhq/live-common/lib/env";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 
+// $FlowFixMe
 const Badge = styled(Text)`
   border-radius: 4px;
   padding: 0 4px;

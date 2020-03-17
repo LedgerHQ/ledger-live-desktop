@@ -2,6 +2,8 @@
 
 import { handleActions } from "redux-actions";
 import type { State } from "~/renderer/reducers";
+import { registeredModalNames } from "~/renderer/modals";
+import invariant from "invariant";
 
 export type ModalsState = {
   [key: string]: {
@@ -24,6 +26,7 @@ type ClosePayload = {
 const handlers = {
   MODAL_OPEN: (state, { payload }: { payload: OpenPayload }) => {
     const { name, data } = payload;
+    invariant(registeredModalNames.includes(name), `Attempt to open unregistered modal '${name}'`);
     return {
       ...state,
       [name]: {
@@ -34,6 +37,7 @@ const handlers = {
   },
   MODAL_CLOSE: (state, { payload }: { payload: ClosePayload }) => {
     const { name } = payload;
+    invariant(registeredModalNames.includes(name), `Attempt to close unregistered modal '${name}'`);
     return {
       ...state,
       [name]: {
@@ -46,6 +50,10 @@ const handlers = {
   },
   MODAL_SET_DATA: (state, { payload }: { payload: OpenPayload }) => {
     const { name, data } = payload;
+    invariant(
+      registeredModalNames.includes(name),
+      `Attempt to update unregistered modal '${name}'`,
+    );
     return {
       ...state,
       [name]: {

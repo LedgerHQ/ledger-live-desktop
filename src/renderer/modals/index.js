@@ -21,6 +21,7 @@ import MODAL_RELEASE_NOTES from "./ReleaseNotes";
 import MODAL_EXCHANGE_CRYPTO_DEVICE from "./ExchangeDeviceConfirm";
 import MODAL_HELP from "./Help";
 import MODAL_SWAP from "./Swap";
+import MODAL_SWAP_OPERATION_DETAILS from "./SwapOperationDetails";
 
 import MODAL_CLAIM_REWARDS from "./ClaimRewards";
 import MODAL_FREEZE from "./Freeze";
@@ -76,6 +77,9 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_ALGORAND_EARN_REWARDS_INFO,
   MODAL_HELP,
   MODAL_SWAP,
+  MODAL_SWAP_OPERATION_DETAILS,
 };
+
+export const registeredModalNames: string[] = Object.keys(modals);
 
 export default modals;

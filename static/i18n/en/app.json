@@ -125,20 +125,90 @@
   },
   "swap": {
     "title": "Swap",
+    "tabs": {
+      "exchange": "Exchange",
+      "history": "History"
+    },
     "landing": {
       "title": "Swap your assets",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet mi quam. Etiam semper justo et augue dignissim placerat non at risus.",
       "continue": "Continue",
       "link": "More about Swap",
-      "sorry": "Sorry, Swap isn’t available in your country :("
+      "sorry": "Swap feature is not available in your country"
     },
-    "start": {
-      "from": "Source account",
-      "to": "Destination account"
+    "missingApp": {
+      "title": "Please install the Exchange app on your device",
+      "subtitle": "Go to manager and install Exchange app to swap assets",
+      "cta": "Go to manager"
+    },
+    "history": {
+      "title": "Lorem ipsum dolor sit amet"
+    },
+    "form": {
+      "from": {
+        "title": "From",
+        "account": "Account",
+        "amount": "Amount to swap",
+        "currency": "Asset type",
+        "balance": "Balance: {{balance}}"
+      },
+      "to": {
+        "title":  "To",
+        "account": "Parent account",
+        "amount": "I will receive",
+        "currency": "Asset type",
+        "addAccountCTA": "Add new account"
+      },
+      "addAccount": "Add Account",
+      "openManager": "Open Manager",
+      "helpCTA": "What isg Swap?",
+      "noAccounts": "You don't have {{currencyName}} accounts",
+      "noApp": "You don't have the {{currencyName}} app installed"
     },
     "modal": {
-      "title": "Summary of swap operation",
+      "title": "Swap",
+      "tos": "Terms & Conditions",
+      "steps":{
+        "summary": {
+          "title": "Summary",
+          "from": "From",
+          "to": "To",
+          "toExchange": "Amount send",
+          "toReceive": "Amount receive",
+          "provider": "Provider",
+          "disclaimer": {
+            "header": "Details",
+            "description": "\"By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by Changelly's"
+          },
+          "details": {
+            "provider": "Provider",
+            "estimatedArrival": "Estimated arrival",
+            "estimatedArrivalRight": "15:00 min",
+            "address": "Address"
+          }
+        },
+        "device": {
+          "title": "Device"
+        },
+        "finished": {
+          "title": "Pending operation",
+          "swap": "Your Swap ID:",
+          "description": "Swap operation is being broadcasted to {{provider}}, that will treat it before sending you the requested funds. To see the status of your operation, click on “See details”, or go the history tab of the swap page"
+        }
+      },
+
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet mi quam. Etiam semper justo et augue dignissim placerat non at risus."
+    },
+    "operationDetailsModal": {
+      "title": "Operation details",
+      "provider": "Provider",
+      "txid": "Transaction ID",
+      "status": "Status",
+      "date": "Date",
+      "from": "From",
+      "to": "To",
+      "initialAmount": "Initial Amount",
+      "creditedAmount": "Credited Amount"
     }
   },
   "account": {
@@ -2303,6 +2373,9 @@
     },
     "StellarMemoRecommended": {
       "title": "A memo may be required when sending to this recipient"
+    },
+    "SwapExchangeRateOutOfBounds": {
+      "title": "Amount must be between {{unit}} {{minAmountFrom}} and {{unit}} {{maxAmountFrom}}"
     }
   }
 }

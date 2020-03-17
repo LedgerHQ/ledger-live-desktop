@@ -33,7 +33,6 @@ const ChildrenContainer = styled.div`
 
 export const defaultTippyOptions = {
   animation: "shift-toward",
-  offset: 0,
   theme: "ledger",
   plugins: [followCursorPlugin],
 };

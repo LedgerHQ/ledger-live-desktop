@@ -312,6 +312,7 @@ const MainSideBar = () => {
                 icon={IconSwap}
                 iconActiveColor="wallet"
                 onClick={handleClickSwap}
+                disabled={noAccounts || navigationLocked}
                 isActive={location.pathname === "/swap"}
                 collapsed={secondAnim}
               />

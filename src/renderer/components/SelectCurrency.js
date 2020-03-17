@@ -19,6 +19,9 @@ type Props<C: Currency> = {
   autoFocus?: boolean,
   minWidth?: number,
   width?: number,
+  rowHeight?: number,
+  isDisabled?: Currency => boolean,
+  renderOptionOverride?: (option: Option) => any,
 };
 
 const getOptionValue = c => c.id;
@@ -32,6 +35,9 @@ const SelectCurrency = <C: Currency>({
   autoFocus,
   minWidth,
   width,
+  rowHeight = 47,
+  renderOptionOverride,
+  isDisabled,
 }: Props<C>) => {
   const { t } = useTranslation();
   const devMode = useEnv("MANAGER_DEV_MODE");
@@ -50,8 +56,15 @@ const SelectCurrency = <C: Currency>({
   );
 
   const options = useMemo(
-    () => cryptos.map(c => ({ ...c, value: c, label: c.name, currency: c })),
-    [cryptos],
+    () =>
+      cryptos.map(c => ({
+        ...c,
+        value: c,
+        label: c.name,
+        currency: c,
+        isDisabled: isDisabled ? isDisabled(c) : false,
+      })),
+    [isDisabled, cryptos],
   );
 
   const fuseOptions = {
@@ -72,8 +85,8 @@ const SelectCurrency = <C: Currency>({
       options={filteredOptions}
       filterOption={false}
       getOptionValue={getOptionValue}
-      renderOption={renderOption}
-      renderValue={renderOption}
+      renderOption={renderOptionOverride || renderOption}
+      renderValue={renderOptionOverride || renderOption}
       onInputChange={v => setSearchInputValue(v)}
       inputValue={searchInputValue}
       placeholder={placeholder || t("common.selectCurrency")}
@@ -81,13 +94,14 @@ const SelectCurrency = <C: Currency>({
       onChange={onChangeCallback}
       minWidth={minWidth}
       width={width}
+      rowHeight={rowHeight}
     />
   );
 };
 
 const renderOption = ({ data: currency }: Option) => (
   <Box grow horizontal alignItems="center" flow={2}>
-    <CryptoCurrencyIcon currency={currency} size={16} />
+    <CryptoCurrencyIcon circle currency={currency} size={26} />
     <Box grow ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
       {`${currency.name} (${currency.ticker})`}
     </Box>

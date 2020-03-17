@@ -93,6 +93,7 @@ const DeviceAction = <R, H, P>({
     deviceStreamingProgress,
     displayUpgradeWarning,
     passWarning,
+    initSwapRequested,
   } = hookState;
 
   const type = useTheme("colors.palette.type");
@@ -124,6 +125,10 @@ const DeviceAction = <R, H, P>({
   if (allowManagerRequestedWording) {
     const wording = allowManagerRequestedWording;
     return renderAllowManager({ modelId, type, wording });
+  }
+
+  if (initSwapRequested) {
+    return <div>{"Some UI for swap confirm requested"}</div>;
   }
 
   if (allowOpeningRequestedWording || requestOpenApp) {

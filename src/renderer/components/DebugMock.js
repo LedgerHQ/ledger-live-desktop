@@ -67,7 +67,11 @@ const helpfulEvents = [
     name: "result",
     event: {
       type: "result",
-      result: mockListAppsResult("Bitcoin", "Bitcoin", deviceInfo155),
+      result: mockListAppsResult(
+        "Bitcoin,Tron,Litecoin,Ethereum",
+        "Bitcoin,Tron,Litecoin",
+        deviceInfo155,
+      ),
     },
   },
   {
@@ -214,7 +218,6 @@ const DebugMock = () => {
         <Item
           id={nonce}
           color="palette.text.shade100"
-          mb={3}
           ff="Inter|Medium"
           fontSize={3}
           onClick={toggleExpanded}
@@ -228,7 +231,6 @@ const DebugMock = () => {
             <Box vertical>
               <Text
                 color="palette.text.shade100"
-                mb={3}
                 ff="Inter|SemiBold"
                 fontSize={3}
                 onClick={toggleExpandedQueue}
@@ -258,7 +260,6 @@ const DebugMock = () => {
             <Box vertical>
               <Text
                 color="palette.text.shade100"
-                mb={3}
                 ff="Inter|SemiBold"
                 fontSize={3}
                 onClick={toggleExpandedHistory}
@@ -278,7 +279,6 @@ const DebugMock = () => {
           <Box vertical>
             <Text
               color="palette.text.shade100"
-              mb={3}
               ff="Inter|SemiBold"
               fontSize={3}
               onClick={toggleExpandedQuick}
