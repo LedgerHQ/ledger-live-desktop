@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: chromedriver.log
-          path: chromedriver.log
+          path: ./chromedriver.log
       # - name: upload macOS app
       #   uses: actions/upload-artifact@v1
       #   with:
