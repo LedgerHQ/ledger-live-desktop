@@ -104,4 +104,7 @@ export const OpDetailsVoteData: ThemedComponent<{}> = styled.blockquote`
   margin-bottom: 13px;
   padding-left: 10px;
   border-left: 4px solid currentColor;
+  ${Address} {
+    cursor: pointer;
+  }
 `;
