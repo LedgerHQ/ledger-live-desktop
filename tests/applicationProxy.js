@@ -57,6 +57,10 @@ export function applicationProxy(userData = null, envVar = {}) {
     ],
     env: envVar,
     waitTimeout: 100000,
+    startTimeout: 100000,
+    // chromeDriverLogPath: "./",
+    // webdriverLogPath: "./",
+    connectionRetryTimeout: 100000,
   });
   return app;
 }

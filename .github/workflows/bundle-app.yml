@@ -40,6 +40,9 @@ jobs:
         id: post-version
       - name: run spectron
         run: yarn jest tests/specs/onboarding.spec.js
+      - name: run spectron again
+        run: yarn jest tests/specs/onboarding.spec.js
+        if: failure()
       # - name: upload macOS app
       #   uses: actions/upload-artifact@v1
       #   with:
