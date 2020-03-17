@@ -90,7 +90,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
   switch (type) {
     case "VOTE": {
       const { votes } = extra;
-      if (!votes && votes.length) return null;
+      if (!votes || !votes.length) return null;
 
       return <OperationDetailsVotes votes={votes} account={account} />;
     }

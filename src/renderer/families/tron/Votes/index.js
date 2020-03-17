@@ -63,7 +63,7 @@ export const formatVotes = (votes: ?Array<any>, superRepresentatives: ?Array<any
 };
 
 // @TODO move this to common
-const useNewVotingDate = () => {
+const useNextVotingDate = () => {
   const [nextVotingDate, setNextVotingDate] = useState("");
   useEffect(() => {
     getNextVotingDate().then(date => setNextVotingDate(moment(date).fromNow()));
@@ -76,7 +76,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
   const dispatch = useDispatch();
 
   const superRepresentatives = useTronSuperRepresentatives();
-  const nextVotingDate = useNewVotingDate();
+  const nextVotingDate = useNextVotingDate();
 
   const { tronResources: { votes, tronPower, unwithdrawnReward } = {} } = account;
 
