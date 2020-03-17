@@ -93,6 +93,7 @@ export type SettingsState = {
   sidebarCollapsed: boolean,
   discreetMode: boolean,
   starredAccountIds?: string[],
+  hasInstalledApps: boolean,
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -127,6 +128,7 @@ const INITIAL_STATE: SettingsState = {
   hideEmptyTokenAccounts: getEnv("HIDE_EMPTY_TOKEN_ACCOUNTS"),
   sidebarCollapsed: false,
   discreetMode: false,
+  hasInstalledApps: true,
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -281,6 +283,7 @@ export const sentryLogsSelector = (state: State) => state.settings.sentryLogs;
 export const autoLockTimeoutSelector = (state: State) => state.settings.autoLockTimeout;
 export const shareAnalyticsSelector = (state: State) => state.settings.shareAnalytics;
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange;
+export const hasInstalledAppsSelector = (state: State) => state.settings.hasInstalledApps;
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;
 

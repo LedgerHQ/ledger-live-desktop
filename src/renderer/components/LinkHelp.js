@@ -23,14 +23,20 @@ const Wrapper: ThemedComponent<{}> = styled(Label).attrs(() => ({
   }
 `;
 
-type Props = { onClick: ?() => void, label?: React$Node, children?: React$Node, style?: * };
+type Props = {
+  onClick: ?() => void,
+  label?: React$Node,
+  children?: React$Node,
+  iconSize?: number,
+  style?: *,
+};
 
 // can add more dynamic options if needed
-export function LinkHelp({ onClick, label, children, style }: Props) {
+export function LinkHelp({ onClick, label, children, iconSize = 12, style }: Props) {
   return (
     <Wrapper onClick={onClick} style={style}>
       <Box mr={1}>
-        <IconHelp size={12} />
+        <IconHelp size={iconSize} />
       </Box>
       <span>{label || children}</span>
     </Wrapper>

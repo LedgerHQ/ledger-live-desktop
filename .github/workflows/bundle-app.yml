@@ -5,6 +5,10 @@ jobs:
   bundle-macos:
     runs-on: macos-latest
     steps:
+      - uses: valpinkman/actions/check-member@v1.1.1
+        with:
+          username: ${{ github.actor }}
+          ban: ledgerlive
       - uses: actions/checkout@v1
       - uses: actions/setup-node@master
         with:
@@ -26,7 +30,7 @@ jobs:
         run: yarn --ignore-scripts --frozen-lockfile
       - uses: "./.github/actions/get-package-infos"
         id: version
-      - uses: "./.github/actions/get-pr-number"
+      - uses: valpinkman/actions/get-pr-number@v1.1.1
         id: pr
       - name: make local version
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
@@ -43,6 +47,10 @@ jobs:
   bundle-linux:
     runs-on: ubuntu-latest
     steps:
+      - uses: valpinkman/actions/check-member@v1.1.1
+        with:
+          username: ${{ github.actor }}
+          ban: ledgerlive
       - uses: actions/checkout@v1
       - uses: actions/setup-node@master
         with:
@@ -66,7 +74,7 @@ jobs:
         run: yarn --ignore-scripts --frozen-lockfile
       - uses: "./.github/actions/get-package-infos"
         id: version
-      - uses: "./.github/actions/get-pr-number"
+      - uses: valpinkman/actions/get-pr-number@v1.1.1
         id: pr
       - name: make local version
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
@@ -83,6 +91,10 @@ jobs:
   bundle-windows:
     runs-on: windows-latest
     steps:
+      - uses: valpinkman/actions/check-member@v1.1.1
+        with:
+          username: ${{ github.actor }}
+          ban: ledgerlive
       - uses: actions/checkout@v1
       - uses: actions/setup-node@master
         with:
@@ -107,7 +119,7 @@ jobs:
         run: yarn --ignore-scripts --frozen-lockfile
       - uses: "./.github/actions/get-package-infos"
         id: version
-      - uses: "./.github/actions/get-pr-number"
+      - uses: valpinkman/actions/get-pr-number@v1.1.1
         id: pr
       - name: make local version
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}

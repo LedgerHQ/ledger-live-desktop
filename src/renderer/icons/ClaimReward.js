@@ -4,7 +4,7 @@ import React from "react";
 
 const ClaimRewards = ({ size }: { size: number }) => (
   <svg viewBox="0 0 16 16" height={size} width={size}>
-    <g opacity="0.9">
+    <g>
       <rect
         x="0.75"
         y="11.6593"
@@ -12,6 +12,7 @@ const ClaimRewards = ({ size }: { size: number }) => (
         height="3.59091"
         stroke="currentColor"
         strokeWidth="1.5"
+        fill="none"
       />
       <line
         x1="3.49483"
@@ -38,13 +39,14 @@ const ClaimRewards = ({ size }: { size: number }) => (
         width="13"
         height="10"
       >
-        <rect x="2.18164" y="0.000244141" width="12.3636" height="9.45455" fill="#C4C4C4" />
+        <rect x="2.18164" y="0.000244141" width="12.3636" height="9.45455" fill="#000" />
       </mask>
       <g mask="url(#mask0)">
         <path
           d="M12.704 5.45479C12.704 8.05304 10.5977 10.1593 7.99947 10.1593C5.40122 10.1593 3.29492 8.05304 3.29492 5.45479C3.29492 2.85654 5.40122 0.750244 7.99947 0.750244C10.5977 0.750244 12.704 2.85654 12.704 5.45479Z"
           stroke="currentColor"
           strokeWidth="1.5"
+          fill="none"
         />
       </g>
       <line

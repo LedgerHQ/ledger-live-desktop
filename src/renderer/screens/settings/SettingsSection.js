@@ -64,7 +64,7 @@ export const SettingsSectionHeader = ({
   <SettingsSectionHeaderContainer tabIndex={-1} onClick={onClick} style={style}>
     <RoundIconContainer mr={3}>{icon}</RoundIconContainer>
     <Box grow flex={1} mr={3}>
-      <Box ff="Inter|Medium" color="palette.text.shade100" data-e2e="settingsSection_title">
+      <Box ff="Inter|Medium" color="palette.text.shade100">
         {title}
       </Box>
       <Box ff="Inter" fontSize={3} mt={1}>

@@ -19,6 +19,8 @@ import MODAL_SHARE_ANALYTICS from "./ShareAnalytics";
 import MODAL_SETTINGS_ACCOUNT from "./SettingsAccount";
 import MODAL_RELEASE_NOTES from "./ReleaseNotes";
 
+import MODAL_CLAIM_REWARDS from "./ClaimRewards";
+
 const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_EXPORT_OPERATIONS,
   MODAL_CONFIRM,
@@ -38,6 +40,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_SHARE_ANALYTICS,
   MODAL_SETTINGS_ACCOUNT,
   MODAL_RELEASE_NOTES,
+  MODAL_CLAIM_REWARDS,
 };
 
 export default modals;

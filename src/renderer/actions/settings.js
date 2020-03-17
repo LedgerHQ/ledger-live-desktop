@@ -7,6 +7,7 @@ import type { Currency } from "@ledgerhq/live-common/lib/types";
 
 import { setEnvOnAllThreads } from "./../../helpers/env";
 import type { SettingsState as Settings } from "./../reducers/settings";
+import { refreshAccountsOrdering } from "~/renderer/actions/general";
 
 export type SaveSettings = ($Shape<Settings>) => { type: string, payload: $Shape<Settings> };
 
@@ -26,6 +27,8 @@ export const setSentryLogs = (sentryLogs: boolean) => saveSettings({ sentryLogs 
 export const setShareAnalytics = (shareAnalytics: boolean) => saveSettings({ shareAnalytics });
 export const setMarketIndicator = (marketIndicator: *) => saveSettings({ marketIndicator });
 export const setAutoLockTimeout = (autoLockTimeout: *) => saveSettings({ autoLockTimeout });
+export const setHasInstalledApps = (hasInstalledApps: boolean) =>
+  saveSettings({ hasInstalledApps });
 export const setCounterValue = (counterValue: string) =>
   saveSettings({
     counterValue,
@@ -39,6 +42,7 @@ export const setHideEmptyTokenAccounts = (hideEmptyTokenAccounts: boolean) => as
 ) => {
   if (setEnvOnAllThreads("HIDE_EMPTY_TOKEN_ACCOUNTS", hideEmptyTokenAccounts)) {
     dispatch(saveSettings({ hideEmptyTokenAccounts }));
+    dispatch(refreshAccountsOrdering());
   }
 };
 export const setSidebarCollapsed = (sidebarCollapsed: boolean) =>

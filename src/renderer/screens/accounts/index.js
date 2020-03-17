@@ -11,7 +11,7 @@ import type { PortfolioRange } from "@ledgerhq/live-common/lib/types/portfolio";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
-import UpdateBanner from "~/renderer/components/Updater/Banner";
+import { Redirect } from "react-router";
 import { TopBannerContainer } from "~/renderer/screens/dashboard";
 import { flattenSortAccountsEnforceHideEmptyTokenSelector } from "~/renderer/actions/general";
 import { setAccountsViewMode, setSelectedTimeRange } from "~/renderer/actions/settings";
@@ -21,7 +21,6 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import AccountList from "./AccountList";
 import AccountsHeader from "./AccountsHeader";
-import EmptyState from "./EmptyState";
 import MigrationBanner from "~/renderer/modals/MigrateAccounts/Banner";
 
 type Props = {
@@ -83,17 +82,8 @@ const AccountsPage = ({
     [history],
   );
 
-  if (accounts.length === 0) {
-    return (
-      <>
-        <TrackPage category="Accounts" accountsLength={accounts.length} />
-        <TopBannerContainer>
-          <UpdateBanner />
-          <MigrationBanner />
-        </TopBannerContainer>
-        <EmptyState />
-      </>
-    );
+  if (!accounts.length) {
+    return <Redirect to="/" />;
   }
 
   return (

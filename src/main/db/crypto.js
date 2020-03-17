@@ -1,5 +1,6 @@
 // @flow
 
+import { log } from "@ledgerhq/logs";
 import crypto from "crypto";
 
 // /!\ changing those presets would lock out users with already encrypted databases due to breaking changes.
@@ -30,6 +31,7 @@ export const encryptData = (data: string, encryptionKey: string) => {
 
 export const decryptData = (raw: string, encryptionKey: string) => {
   const data = Buffer.from(raw, "base64");
+  log("db/crypto", "decryptData. full data length = " + data.length);
 
   // We check if the data include an initialization vector
   if (data.slice(IV_LENGTH, IV_LENGTH + 1).toString() === ":") {
@@ -46,6 +48,9 @@ export const decryptData = (raw: string, encryptionKey: string) => {
       "utf8",
     );
   }
+
+  log("db/crypto", "fallback to deprecated API");
+
   // if not, then we fallback to the deprecated API
   // eslint-disable-next-line node/no-deprecated-api
   const decipher = crypto.createDecipher(ENCRYPTION_ALGORITHM, encryptionKey);
