@@ -45,7 +45,7 @@ const PasswordButton = () => {
         <Switch
           isChecked={hasPassword}
           onChange={handleChangePasswordCheck}
-          data-e2e="passwordLock_button"
+          id="settings-password-lock-switch"
         />
       </Box>
     </>

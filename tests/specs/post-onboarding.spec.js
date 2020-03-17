@@ -1,7 +1,7 @@
-import { waitForExpectedText } from "./helpers.js";
-import { applicationProxy, getScreenshotPath } from "./applicationProxy";
-import * as selector from "./selectors.js";
-import * as step from "./scenarios.js";
+import { waitForExpectedText } from "../helpers.js";
+import { applicationProxy, getScreenshotPath } from "../applicationProxy";
+import * as selector from "../selectors.js";
+import * as step from "../scenarios.js";
 
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
 

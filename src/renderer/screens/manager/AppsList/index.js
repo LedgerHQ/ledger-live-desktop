@@ -1,5 +1,5 @@
 // @flow
-import React, { memo, useState, useCallback, useMemo } from "react";
+import React, { memo, useState, useCallback, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
@@ -23,6 +23,9 @@ import AppDepsInstallModal from "./AppDepsInstallModal";
 import AppDepsUnInstallModal from "./AppDepsUnInstallModal";
 
 import ErrorModal from "~/renderer/modals/ErrorModal/index";
+import { setHasInstalledApps } from "~/renderer/actions/settings";
+import { useDispatch, useSelector } from "react-redux";
+import { hasInstalledAppsSelector } from "~/renderer/reducers/settings";
 
 const Container = styled.div`
   display: flex;
@@ -55,6 +58,8 @@ const AppsList = ({ deviceInfo, result, exec, t }: Props) => {
   const [appInstallDep, setAppInstallDep] = useState(undefined);
   const [appUninstallDep, setAppUninstallDep] = useState(undefined);
   const isIncomplete = isIncompleteState(state);
+  const hasInstalledApps = useSelector(hasInstalledAppsSelector);
+  const reduxDispatch = useDispatch();
 
   const { installQueue, uninstallQueue, currentError } = state;
 
@@ -81,6 +86,12 @@ const AppsList = ({ deviceInfo, result, exec, t }: Props) => {
   const onCloseError = useCallback(() => {
     dispatch({ type: "recover" });
   }, [dispatch]);
+
+  useEffect(() => {
+    if (state.installed.length && !hasInstalledApps) {
+      reduxDispatch(setHasInstalledApps(true));
+    }
+  }, [state.installed.length, reduxDispatch, hasInstalledApps]);
 
   return (
     <Container>

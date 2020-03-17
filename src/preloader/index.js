@@ -47,7 +47,7 @@ const init = async () => {
   remote.getCurrentWindow().setBackgroundColor(palette.background.default);
 
   window.onload = () => {
-    const imgNode = ((document.getElementById("logo"): any): HTMLImageElement);
+    const imgNode = ((document.getElementById("loading-logo"): any): HTMLImageElement);
     const loaderContainer = document.getElementById("loader-container");
 
     if (imgNode && loaderContainer) {

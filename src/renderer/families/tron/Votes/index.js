@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
@@ -23,6 +23,7 @@ import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { BigNumber } from "bignumber.js";
 import moment from "moment";
 import ToolTip from "~/renderer/components/Tooltip";
+import ClaimRewards from "~/renderer/icons/ClaimReward";
 
 type Props = {
   account: Account,
@@ -72,6 +73,23 @@ const useNextVotingDate = () => {
   return nextVotingDate;
 };
 
+// @TODO move this to common
+const getNextRewardDate = (account: Account) => {
+  const { operations } = account;
+  const lastRewardOp = operations.find(({ type }) => type === "REWARD");
+
+  if (lastRewardOp) {
+    const { date } = lastRewardOp;
+    if (date) {
+      // add 24hours
+      const nextDate = date.getTime() + 24 * 60 * 60 * 1000;
+      if (nextDate > Date.now()) return nextDate;
+    }
+  }
+
+  return null;
+};
+
 const Delegation = ({ account, parentAccount }: Props) => {
   const dispatch = useDispatch();
 
@@ -106,6 +124,12 @@ const Delegation = ({ account, parentAccount }: Props) => {
   );
 
   const hasRewards = unwithdrawnReward > 0;
+  const nextRewardDate = getNextRewardDate(account);
+  const formattedNextRewardDate = useMemo(
+    () => nextRewardDate && moment(nextRewardDate).fromNow(),
+    [nextRewardDate],
+  );
+  const canClaimRewards = hasRewards && !formattedNextRewardDate;
 
   return (
     <>
@@ -119,9 +143,22 @@ const Delegation = ({ account, parentAccount }: Props) => {
           <Trans i18nKey="tron.voting.header" />
         </Text>
         {tronPower > 0 && (
-          <ToolTip content={hasRewards ? null : <Trans i18nKey="tron.voting.noRewards" />}>
+          <ToolTip
+            content={
+              !canClaimRewards ? (
+                hasRewards && formattedNextRewardDate ? (
+                  <Trans
+                    i18nKey="tron.voting.nextRewardsDate"
+                    values={{ date: formattedNextRewardDate }}
+                  />
+                ) : (
+                  <Trans i18nKey="tron.voting.noRewards" />
+                )
+              ) : null
+            }
+          >
             <Button
-              disabled={!hasRewards}
+              disabled={!canClaimRewards}
               primary
               onClick={() => {
                 // @TODO open claim rewards transaction modal
@@ -135,7 +172,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
               }}
             >
               <Box horizontal flow={1} alignItems="center">
-                <IconChartLine size={12} />
+                <ClaimRewards size={12} />
                 <Box>
                   <Trans
                     i18nKey={

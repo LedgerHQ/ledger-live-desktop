@@ -90,7 +90,7 @@ class GenuineCheckErrorPage extends PureComponent<Props, *> {
           {this.renderErrorPage()}
         </Box>
         <OnboardingFooterWrapper>
-          <Button outlineGrey onClick={() => redoGenuineCheck()}>
+          <Button outlineGrey onClick={() => redoGenuineCheck()} id="onboarding-back-button">
             <Trans i18nKey="common.back" />
           </Button>
           <ExternalLinkButton
@@ -98,6 +98,7 @@ class GenuineCheckErrorPage extends PureComponent<Props, *> {
             ml="auto"
             label={<Trans i18nKey="onboarding.genuineCheck.buttons.contactSupport" />}
             url={urls.contactSupport}
+            id="onboarding-contactus-button"
           />
         </OnboardingFooterWrapper>
       </Box>
