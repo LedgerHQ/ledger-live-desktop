@@ -16,8 +16,6 @@ describe("When I launch the app for the first time", () => {
     modalPage = new ModalPage(app);
 
     await app.start();
-    console.log("started");
-    console.log(app);
   });
 
   afterAll(async () => {
