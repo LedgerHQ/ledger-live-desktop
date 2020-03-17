@@ -52,10 +52,11 @@ export function applicationProxy(userData = null, envVar = {}) {
       "--disable-extensions",
       "disable-dev-shm-usage",
       "--no-sandbox",
+      "--headless",
       "remote-debugging-port=" + Math.floor(Math.random() * (9999 - 9000) + 9000),
     ],
     env: envVar,
-    waitTimeout: 10e3,
+    waitTimeout: 100000,
   });
   return app;
 }

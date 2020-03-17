@@ -8,7 +8,7 @@ describe("When I launch the app for the first time", () => {
   let onboardingPage;
   let modalPage;
 
-  jest.setTimeout(10e3);
+  jest.setTimeout(100000);
 
   beforeAll(async () => {
     app = applicationProxy();
