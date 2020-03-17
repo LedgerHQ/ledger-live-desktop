@@ -40,6 +40,9 @@ jobs:
         id: post-version
       - name: run spectron
         run: yarn jest tests/specs/onboarding.spec.js
+      - name: ls
+        if: always()
+        run: ls
       - name: upload logs
         if: always()
         uses: actions/upload-artifact@v1
