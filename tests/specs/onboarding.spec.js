@@ -10,7 +10,7 @@ describe("When I launch the app for the first time", () => {
 
   jest.setTimeout(100000);
 
-  beforeAll(async done => {
+  beforeAll(async () => {
     app = applicationProxy();
     onboardingPage = new OnboardingPage(app);
     modalPage = new ModalPage(app);
@@ -20,12 +20,10 @@ describe("When I launch the app for the first time", () => {
       console.log("shit happened");
       console.log(error);
     }
-    done();
   });
 
-  afterAll(async done => {
+  afterAll(async () => {
     await app.stop();
-    done();
   });
 
   it("opens a window", async () => {
