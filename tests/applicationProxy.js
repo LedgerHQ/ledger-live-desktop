@@ -58,5 +58,10 @@ export function applicationProxy(userData = null, envVar = {}) {
     env: envVar,
   });
   console.log("app", app);
+  setInterval(() => {
+    const logs = app.chromeDriver.getLogs();
+    app.chromeDriver.clearLogs();
+    logs.forEach(l => console.log("FROM CHROME DRIVER:", l));
+  }, 1000);
   return app;
 }
