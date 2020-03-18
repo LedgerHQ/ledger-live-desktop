@@ -9,10 +9,6 @@ import { radii } from "./theme";
 import reset from "./reset";
 
 export const GlobalStyle = createGlobalStyle`
-  body, #preload {
-    background-color: ${p => p.theme.colors.palette.background.default} !important;
-  }
-
   ${reset};
 
   .tippy-content {

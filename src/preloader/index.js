@@ -35,31 +35,22 @@ window.api = {
   reloadRenderer,
 };
 
-const init = async () => {
-  const settings =
-    (await ipcRenderer.invoke("getKey", {
-      ns: "app",
-      keyPath: "settings",
-    })) || {};
+const theme = new URLSearchParams(window.location.search).get("theme");
+const osTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+const palette = palettes[theme || osTheme];
+remote.getCurrentWindow().setBackgroundColor(palette.background.default);
 
-  const osTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  const palette = palettes[settings.theme || osTheme];
-  remote.getCurrentWindow().setBackgroundColor(palette.background.default);
+window.addEventListener("DOMContentLoaded", () => {
+  const imgNode = ((document.getElementById("loading-logo"): any): HTMLImageElement);
+  const loaderContainer = document.getElementById("loader-container");
 
-  window.onload = () => {
-    const imgNode = ((document.getElementById("loading-logo"): any): HTMLImageElement);
-    const loaderContainer = document.getElementById("loader-container");
+  if (imgNode && loaderContainer) {
+    imgNode.src = logo;
+    loaderContainer.style.backgroundColor = palette.background.default;
+    loaderContainer.classList.add("loading");
+  }
 
-    if (imgNode && loaderContainer) {
-      imgNode.src = logo;
-      loaderContainer.style.backgroundColor = palette.background.default;
-      loaderContainer.classList.add("loading");
-    }
-
-    setTimeout(() => {
-      ipcRenderer.send("ready-to-show", {});
-    }, 200);
-  };
-};
-
-init();
+  setTimeout(() => {
+    ipcRenderer.send("ready-to-show", {});
+  }, 200);
+});
