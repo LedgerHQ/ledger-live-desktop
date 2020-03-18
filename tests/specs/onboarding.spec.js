@@ -22,7 +22,7 @@ describe("When I launch the app for the first time", () => {
     await app.stop();
   });
 
-  it("opens a window", async () => {
+  it("opens a window", () => {
     return app.client
       .waitUntilWindowLoaded()
       .getWindowCount()
