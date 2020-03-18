@@ -14,12 +14,7 @@ describe("When I launch the app for the first time", () => {
     app = applicationProxy();
     onboardingPage = new OnboardingPage(app);
     modalPage = new ModalPage(app);
-    try {
-      await app.start();
-    } catch (error) {
-      console.log("shit happened");
-      console.log(error);
-    }
+    await app.start();
     done();
   });
 
