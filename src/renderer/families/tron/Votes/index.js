@@ -116,6 +116,17 @@ const Delegation = ({ account, parentAccount }: Props) => {
     [account, parentAccount, dispatch],
   );
 
+  const onEarnRewards = useCallback(
+    () =>
+      dispatch(
+        openModal("MODAL_REWARDS_INFO", {
+          parentAccount,
+          account,
+        }),
+      ),
+    [account, parentAccount, dispatch],
+  );
+
   const hasRewards = unwithdrawnReward > 0;
   const nextRewardDate = getNextRewardDate(account);
   const formattedNextRewardDate = useMemo(
@@ -209,7 +220,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
             </Box>
           </Box>
           <Box>
-            <Button primary onClick={onDelegate}>
+            <Button primary onClick={onEarnRewards}>
               <Box horizontal flow={1} alignItems="center">
                 <IconChartLine size={12} />
                 <Box>

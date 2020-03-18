@@ -21,6 +21,7 @@ import MODAL_RELEASE_NOTES from "./ReleaseNotes";
 
 import MODAL_CLAIM_REWARDS from "./ClaimRewards";
 import MODAL_FREEZE from "./Freeze";
+import MODAL_REWARDS_INFO from "./EarnRewardsInfoModal";
 
 const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_EXPORT_OPERATIONS,
@@ -43,6 +44,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_RELEASE_NOTES,
   MODAL_CLAIM_REWARDS,
   MODAL_FREEZE,
+  MODAL_REWARDS_INFO,
 };
 
 export default modals;
