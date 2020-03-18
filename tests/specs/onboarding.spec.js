@@ -8,19 +8,18 @@ describe("When I launch the app for the first time", () => {
   let onboardingPage;
   let modalPage;
 
-  beforeAll(async () => {
+  beforeAll(() => {
     app = applicationProxy();
     onboardingPage = new OnboardingPage(app);
     modalPage = new ModalPage(app);
-
     return app.start();
   });
 
-  afterAll(async () => {
+  afterAll(() => {
     return app.stop();
   });
 
-  it("opens a window", async () => {
+  it("opens a window", () => {
     return app.client
       .waitUntilWindowLoaded()
       .getWindowCount()
