@@ -40,12 +40,15 @@ jobs:
         id: post-version
       - name: run spectron
         run: yarn jest tests/specs/onboarding.spec.js
+      - name: ls
+        if: always()
+        run: ls
       - name: upload logs
         if: always()
         uses: actions/upload-artifact@v1
         with:
           name: chromedriver.log
-          path: dist/chromedriver.log
+          path: ./chromedriver.log
       # - name: upload macOS app
       #   uses: actions/upload-artifact@v1
       #   with:
