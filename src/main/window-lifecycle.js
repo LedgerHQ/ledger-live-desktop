@@ -18,6 +18,7 @@ export const MIN_HEIGHT = intFromEnv("LEDGER_MIN_HEIGHT", 700);
 const { DEV_TOOLS } = process.env;
 
 let mainWindow = null;
+let theme;
 
 export const getMainWindow = () => mainWindow;
 
@@ -42,12 +43,15 @@ const defaultWindowOptions = {
 };
 
 export const loadWindow = async () => {
+  const url = __DEV__ ? INDEX_URL : `file://${__dirname}/index.html`;
   if (mainWindow) {
-    await mainWindow.loadURL(__DEV__ ? INDEX_URL : `file://${__dirname}/index.html`);
+    await mainWindow.loadURL(`${url}?theme=${theme}`);
   }
 };
 
-export async function createMainWindow({ dimensions, positions }: any) {
+export async function createMainWindow({ dimensions, positions }: any, settings: any) {
+  theme = settings.theme;
+
   // TODO renderer should provide the saved window rectangle
   const width = dimensions ? dimensions.width : DEFAULT_WINDOW_WIDTH;
   const height = dimensions ? dimensions.height : DEFAULT_WINDOW_HEIGHT;
