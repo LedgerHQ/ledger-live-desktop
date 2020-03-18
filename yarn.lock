@@ -11611,10 +11611,9 @@ spdx-license-ids@^3.0.0:
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.5.tgz#3694b5804567a458d3c8045842a6358632f62654"
   integrity sha512-J+FWzZoynJEXGphVIS+XEh3kFSjZX/1i9gFBaWQcB+/tmpe2qUsSBABpcxqxnAxFdiUFEgAX1bjYGQvIZmoz9Q==
 
-spectron@^10.0.1:
+"spectron@https://github.com/LukeSugiura/spectron.git#log-chrome-driver":
   version "10.0.1"
-  resolved "https://registry.yarnpkg.com/spectron/-/spectron-10.0.1.tgz#d89fdd3c9625c7dbb5d1f047fda7cb922eda0125"
-  integrity sha512-eMAOr7ovYf+e6+DhkoxVWAMRfZvLJMjtZKwWYkL56fv3Ij6rxhYLjOxybKj0phgMYZ7o2cX5zu2NoyiUM756CA==
+  resolved "https://github.com/LukeSugiura/spectron.git#cdaa1d6b82eb08c5f9b117d1d7cbfe80bada2df3"
   dependencies:
     "@types/webdriverio" "^4.8.0"
     dev-null "^0.1.1"
