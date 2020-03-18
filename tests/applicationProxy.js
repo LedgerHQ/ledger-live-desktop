@@ -27,13 +27,13 @@ function getAppPath() {
   const platform = os.platform();
   let appPath;
   if (platform === "darwin") {
-    appPath = "./dist/mac/Ledger Live.app/Contents/MacOS/Ledger Live";
+    appPath = "../dist/mac/Ledger Live.app/Contents/MacOS/Ledger Live";
   } else if (platform === "win32") {
-    appPath = ".\\dist\\win-unpacked\\Ledger Live.exe";
+    appPath = "..\\dist\\win-unpacked\\Ledger Live.exe";
   } else {
-    appPath = `./dist/ledger-live-desktop-${version}-linux-x86_64.AppImage`;
+    appPath = `../dist/ledger-live-desktop-${version}-linux-x86_64.AppImage`;
   }
-  return appPath;
+  return path.resolve(__dirname, appPath);
 }
 
 export function applicationProxy(userData = null, envVar = {}) {
