@@ -60,6 +60,7 @@ export function applicationProxy(userData = null, envVar = {}) {
   setInterval(() => {
     const logs = app.chromeDriver.getLogs();
     app.chromeDriver.clearLogs();
+    console.log("log length", logs.length);
     logs.forEach(l => console.log("FROM CHROME DRIVER:", l));
   }, 1000);
   return app;
