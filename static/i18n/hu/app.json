@@ -353,7 +353,15 @@
     "internalOperations": "Belső műveletek",
     "internalOpTooltip": "Ennek a műveletnek belső műveletei vannak",
     "details": "{{ currency }} részletek",
-    "multipleAddresses": "Miért van több cím?"
+    "multipleAddresses": "Miért van több cím?",
+    "extra": {
+      "resource": "Resource",
+      "frozenAmount": "Frozen amount",
+      "unfreezeAmount": "Unfreeze amount",
+      "address": "Address",
+      "votes": "Votes ({{number}})",
+      "votesAddress": "<0>TP {{votes}}</0> to <2>{{name}}</2>"
+    }
   },
   "operationList": {
     "noMoreOperations": "Ez minden"

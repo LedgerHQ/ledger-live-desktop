@@ -353,7 +353,15 @@
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
     "details": "{{ currency }} details",
-    "multipleAddresses": "Why multiple addresses?"
+    "multipleAddresses": "Why multiple addresses?",
+    "extra": {
+      "resource": "Resource",
+      "frozenAmount": "Frozen amount",
+      "unfreezeAmount": "Unfreeze amount",
+      "address": "Address",
+      "votes": "Votes ({{number}})",
+      "votesAddress": "<0>TP {{votes}}</0> to <2>{{name}}</2>"
+    }
   },
   "operationList": {
     "noMoreOperations": "모두 끝났습니다."
