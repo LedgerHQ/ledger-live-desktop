@@ -17,7 +17,7 @@ const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
   flex: 0.5;
   width: 150px;
   text-align: right;
-  justify-content: space-between;
+  justify-content: stretch;
   height: 32px;
 `;
 
@@ -34,24 +34,27 @@ class AmountCell extends PureComponent<Props> {
     const amount = getOperationAmountNumber(operation);
 
     return (
-      <Cell>
-        <FormattedVal
-          val={amount}
-          unit={unit}
-          showCode
-          fontSize={4}
-          alwaysShowSign
-          color={amount.isNegative() ? "palette.text.shade80" : undefined}
-        />
-        <CounterValue
-          color="palette.text.shade60"
-          fontSize={3}
-          alwaysShowSign
-          date={operation.date}
-          currency={currency}
-          value={amount}
-        />
-      </Cell>
+      !amount.isZero() && (
+        <Cell>
+          <FormattedVal
+            val={amount}
+            unit={unit}
+            showCode
+            fontSize={4}
+            alwaysShowSign
+            color={amount.isNegative() ? "palette.text.shade80" : undefined}
+          />
+
+          <CounterValue
+            color="palette.text.shade60"
+            fontSize={3}
+            alwaysShowSign
+            date={operation.date}
+            currency={currency}
+            value={amount}
+          />
+        </Cell>
+      )
     );
   }
 }
