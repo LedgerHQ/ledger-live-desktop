@@ -549,13 +549,30 @@
     "title": "Freeze",
     "steps": {
       "amount": {
-        "title": "Freeze assets"
+        "title": "Freeze assets",
+        "resourceInfo": "Bandwith or Energy?",
+        "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
+        "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
+        "amountLabel": "Amount to freeze",
+        "available": "Available: {{amountAvailable}}",
+        "info": "Frozen assets cannot be sent for 3 days."
       },
       "connectDevice": {
         "title": "Device"
       },
       "confirmation": {
-        "title": "Confirmation"
+        "title": "Confirmation",
+        "success": {
+          "title": "",
+          "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+          "votePending": "Vote in {{time}}",
+          "vote": "Vote",
+          "later": "Vote later"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
   },
@@ -1243,7 +1260,8 @@
     "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
-      "claimReward": "Please confirm the operation on your device to claim your rewards"
+      "claimReward": "Please confirm the operation on your device to claim your rewards",
+      "freeze": "Please confirm the operation on yur device to freeze assets"
     },
     "recipientWording": {
       "send": "recipient",
