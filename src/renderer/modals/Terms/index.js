@@ -19,7 +19,7 @@ import Modal from "~/renderer/components/Modal";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import { closeModal } from "~/renderer/actions/modals";
 
-const TermsModal = () => {
+const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
   const dispatch = useDispatch();
 
   const [markdown, error] = useTerms();
@@ -36,87 +36,80 @@ const TermsModal = () => {
   }, [onClickClose]);
 
   return (
-    <Modal
-      name="MODAL_TERMS"
-      preventBackdropClick
-      centered
-      render={(
-        { data }: { data?: { showClose: boolean } }, // Why u no get the correct type ?
-      ) => (
-        <ModalBody
-          title={<Trans i18nKey="Terms.title" />}
-          render={() => (
-            <>
-              <TrackPage category="Modal" name="Terms" />
+    <Modal name="MODAL_TERMS" preventBackdropClick centered>
+      <ModalBody
+        title={<Trans i18nKey="Terms.title" />}
+        render={() => (
+          <>
+            <TrackPage category="Modal" name="Terms" />
 
-              {markdown ? (
-                <Terms px={5} pb={8}>
-                  <Markdown>{markdown}</Markdown>
-                </Terms>
-              ) : error ? (
-                <Box grow alignItems="center" justifyContent="space-around">
-                  <Text ff="Inter|SemiBold" fontSize={3}>
-                    <TranslatedError error={error} />
+            {markdown ? (
+              <Terms px={5} pb={8}>
+                <Markdown>{markdown}</Markdown>
+              </Terms>
+            ) : error ? (
+              <Box grow alignItems="center" justifyContent="space-around">
+                <Text ff="Inter|SemiBold" fontSize={3}>
+                  <TranslatedError error={error} />
+                </Text>
+
+                <LinkWithExternalIcon onClick={() => openURL(url)}>
+                  <Trans i18nKey="Terms.read" />
+                </LinkWithExternalIcon>
+              </Box>
+            ) : (
+              <Box horizontal alignItems="center">
+                <Spinner
+                  size={32}
+                  style={{
+                    margin: "auto",
+                  }}
+                />
+              </Box>
+            )}
+          </>
+        )}
+        modalFooterStyle={{ justifyContent: "stretch" }}
+        renderFooter={() => (
+          <Box
+            style={{ position: "relative", width: "100%" }}
+            grow
+            horizontal
+            justifyContent={showClose ? "flex-end" : "space-between"}
+            alignItems="center"
+          >
+            {showClose ? (
+              <Button primary onClick={onClickClose}>
+                <Trans i18nKey="common.close" />
+              </Button>
+            ) : (
+              <>
+                <Box
+                  style={{ width: "75%" }}
+                  horizontal
+                  alignItems="center"
+                  onClick={onSwitchAccept}
+                >
+                  <CheckBox isChecked={accepted} id="terms-checkbox" />
+                  <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
+                    <Trans i18nKey="Terms.switchLabel" />
                   </Text>
-
-                  <LinkWithExternalIcon onClick={() => openURL(url)}>
-                    <Trans i18nKey="Terms.read" />
-                  </LinkWithExternalIcon>
                 </Box>
-              ) : (
-                <Box horizontal alignItems="center">
-                  <Spinner
-                    size={32}
-                    style={{
-                      margin: "auto",
-                    }}
-                  />
-                </Box>
-              )}
-            </>
-          )}
-          modalFooterStyle={{ justifyContent: "stretch" }}
-          renderFooter={() => (
-            <Box
-              style={{ position: "relative", width: "100%" }}
-              grow
-              horizontal
-              justifyContent={data && data.showClose ? "flex-end" : "space-between"}
-              alignItems="center"
-            >
-              {data && data.showClose ? (
-                <Button primary onClick={onClickClose}>
-                  <Trans i18nKey="common.close" />
+                <Button
+                  style={{ position: "absolute", right: 0 /* flex and <Box> hell */ }}
+                  onClick={onClick}
+                  primary
+                  disabled={!accepted}
+                  id="terms-confirm-button"
+                >
+                  <Trans i18nKey="common.confirm" />
                 </Button>
-              ) : (
-                <>
-                  <Box
-                    style={{ width: "75%" }}
-                    horizontal
-                    alignItems="center"
-                    onClick={onSwitchAccept}
-                  >
-                    <CheckBox isChecked={accepted} id="terms-checkbox" />
-                    <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
-                      <Trans i18nKey="Terms.switchLabel" />
-                    </Text>
-                  </Box>
-                  <Button
-                    style={{ position: "absolute", right: 0 /* flex and <Box> hell */ }}
-                    onClick={onClick}
-                    primary
-                    disabled={!accepted}
-                    id="terms-confirm-button"
-                  >
-                    <Trans i18nKey="common.confirm" />
-                  </Button>
-                </>
-              )}
-            </Box>
-          )}
-        />
-      )}
-    />
+              </>
+            )}
+          </Box>
+        )}
+      />
+    </Modal>
   );
 };
 
