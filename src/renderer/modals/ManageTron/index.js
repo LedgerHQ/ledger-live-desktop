@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 import { Trans } from "react-i18next";
@@ -123,19 +123,22 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
 
   const canFreeze = spendableBalance && spendableBalance.gt(minAmount);
 
-  const canUnfreeze =
-    frozen &&
-    BigNumber((bandwidth && bandwidth.amount) || 0)
-      .plus((energy && energy.amount) || 0)
-      .gt(minAmount);
-
   const timeToUnfreezeBandwidth =
     bandwidth && bandwidth.expiredAt ? +bandwidth.expiredAt : Infinity;
   const timeToUnfreezeEnergy = energy && energy.expiredAt ? +energy.expiredAt : Infinity;
 
-  const effectiveTimeToUnfreeze = moment(
-    Math.min(timeToUnfreezeBandwidth, timeToUnfreezeEnergy),
-  ).fromNow();
+  const effectiveTimeToUnfreeze = Math.min(timeToUnfreezeBandwidth, timeToUnfreezeEnergy);
+
+  const canUnfreeze =
+    frozen &&
+    BigNumber((bandwidth && bandwidth.amount) || 0)
+      .plus((energy && energy.amount) || 0)
+      .gt(minAmount) &&
+    effectiveTimeToUnfreeze < Date.now();
+
+  const formattedTimeToUnfreeze = useMemo(() => moment(effectiveTimeToUnfreeze).fromNow(), [
+    effectiveTimeToUnfreeze,
+  ]);
 
   const canVote = tronPower > 0;
 
@@ -200,7 +203,7 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
                   {!canUnfreeze && (
                     <TimerWrapper>
                       <Clock size={12} />
-                      <Description>{effectiveTimeToUnfreeze}</Description>
+                      <Description>{formattedTimeToUnfreeze}</Description>
                     </TimerWrapper>
                   )}
                 </ManageButton>

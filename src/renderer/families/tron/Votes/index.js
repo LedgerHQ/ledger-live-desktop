@@ -102,6 +102,8 @@ const Delegation = ({ account, parentAccount }: Props) => {
     },
   );
 
+  console.log(JSON.stringify(account));
+
   const formattedVotes = votes.map(({ address, ...rest }) => ({
     validator: superRepresentatives.find(sp => sp.address === address),
     address,
