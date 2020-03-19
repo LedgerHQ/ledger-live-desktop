@@ -549,13 +549,30 @@
     "title": "Befagyasztás",
     "steps": {
       "amount": {
-        "title": "Eszközök befagyasztása"
+        "title": "Eszközök befagyasztása",
+        "resourceInfo": "Bandwith or Energy?",
+        "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
+        "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
+        "amountLabel": "Amount to freeze",
+        "available": "Available: {{amountAvailable}}",
+        "info": "Frozen assets cannot be sent for 3 days."
       },
       "connectDevice": {
         "title": "Eszköz"
       },
       "confirmation": {
-        "title": "Megerősítés"
+        "title": "Megerősítés",
+        "success": {
+          "title": "",
+          "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+          "votePending": "Vote in {{time}}",
+          "vote": "Vote",
+          "later": "Vote later"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
   },
@@ -1243,7 +1260,8 @@
     "warning": "Mindig ellenőrizd, hogy készüléked pontosan az itt található címet jeleníti-e meg {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
-      "claimReward": "Kérlek, erősítsd meg a műveletet az eszközödön a jutalmaid begyűjtéséhez"
+      "claimReward": "Kérlek, erősítsd meg a műveletet az eszközödön a jutalmaid begyűjtéséhez",
+      "freeze": "Please confirm the operation on yur device to freeze assets"
     },
     "recipientWording": {
       "send": "fogadó",
