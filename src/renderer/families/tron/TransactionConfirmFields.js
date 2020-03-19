@@ -55,6 +55,11 @@ const Pre = ({
           {account.type === "ChildAccount" ? account.address : mainAccount.freshAddress}{" "}
         </AddressText>
       </TransactionConfirmField>
+      {transaction.resource && (
+        <TransactionConfirmField label="Resource">
+          <AddressText ff="Inter|SemiBold">{transaction.resource}</AddressText>
+        </TransactionConfirmField>
+      )}
     </>
   );
 };
@@ -70,6 +75,7 @@ const Warning = ({ transaction }: { transaction: Transaction }) => {
 
   switch (transaction.mode) {
     case "claimReward":
+    case "freeze":
       return null;
     default:
       return (
