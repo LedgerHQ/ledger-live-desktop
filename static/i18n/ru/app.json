@@ -353,7 +353,15 @@
     "internalOperations": "Внутренние операции",
     "internalOpTooltip": "Эта операция имеет внутренние операции",
     "details": "{{ currency }} подробности",
-    "multipleAddresses": "Почему несколько адресов?"
+    "multipleAddresses": "Почему несколько адресов?",
+    "extra": {
+      "resource": "Resource",
+      "frozenAmount": "Frozen amount",
+      "unfreezeAmount": "Unfreeze amount",
+      "address": "Address",
+      "votes": "Votes ({{number}})",
+      "votesAddress": "<0>TP {{votes}}</0> to <2>{{name}}</2>"
+    }
   },
   "operationList": {
     "noMoreOperations": "Вот и все"
