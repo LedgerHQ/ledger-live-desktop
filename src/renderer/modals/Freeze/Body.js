@@ -25,7 +25,7 @@ import { closeModal, openModal } from "~/renderer/actions/modals";
 
 import Stepper from "~/renderer/components/Stepper";
 import StepAmount, { StepAmountFooter } from "./steps/StepAmount";
-import StepConnectDevice from "./steps/StepConnectDevice";
+import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
 
@@ -66,7 +66,7 @@ const createSteps = (): Array<St> => [
   {
     id: "connectDevice",
     label: <Trans i18nKey="freeze.steps.connectDevice.title" />,
-    component: StepConnectDevice,
+    component: GenericStepConnectDevice,
     onBack: ({ transitionTo }: StepProps) => transitionTo("rewards"),
   },
   {

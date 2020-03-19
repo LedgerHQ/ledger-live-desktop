@@ -1,10 +1,11 @@
 // @flow
-
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 
 import { Trans } from "react-i18next";
+
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { Account } from "@ledgerhq/live-common/lib/types";
@@ -14,6 +15,7 @@ import Box from "~/renderer/components/Box/Box";
 import IconChartLine from "~/renderer/icons/ChartLine";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { openModal } from "~/renderer/actions/modals";
+import ToolTip from "~/renderer/components/Tooltip";
 
 const ButtonBase: ThemedComponent<*> = styled(Button)`
   height: 34px;
@@ -28,8 +30,14 @@ type Props = {
 
 const AccountHeaderActions = ({ account, parentAccount }: Props) => {
   const dispatch = useDispatch();
-  const { tronResources } = account;
+  const unit = getAccountUnit(account);
+  /** min 1TRX transactions */
+  const minAmount = 10 ** unit.magnitude;
+
+  const { tronResources, spendableBalance } = account;
   const tronPower = tronResources ? tronResources.tronPower : 0;
+  const earnRewardDisabled =
+    tronPower === 0 && (!spendableBalance || !spendableBalance.gt(minAmount));
 
   const onClick = useCallback(() => {
     if (tronPower > 0) {
@@ -52,18 +60,20 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
   if (parentAccount) return null;
 
   return (
-    <ButtonBase primary onClick={onClick}>
-      <Box horizontal flow={1} alignItems="center">
-        {tronPower > 0 ? (
-          <CryptoCurrencyIcon inactive currency={account.currency} size={16} />
-        ) : (
-          <IconChartLine size={16} />
-        )}
-        <Box>
-          <Trans i18nKey={tronPower > 0 ? "tron.voting.manageTP" : "delegation.title"} />
+    <ToolTip content={earnRewardDisabled ? <Trans i18nKey="tron.voting.warnEarnRewards" /> : null}>
+      <ButtonBase primary disabled={earnRewardDisabled} onClick={onClick}>
+        <Box horizontal flow={1} alignItems="center">
+          {tronPower > 0 ? (
+            <CryptoCurrencyIcon inactive currency={account.currency} size={16} />
+          ) : (
+            <IconChartLine size={16} />
+          )}
+          <Box>
+            <Trans i18nKey={tronPower > 0 ? "tron.voting.manageTP" : "delegation.title"} />
+          </Box>
         </Box>
-      </Box>
-    </ButtonBase>
+      </ButtonBase>
+    </ToolTip>
   );
 };
 

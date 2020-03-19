@@ -6,6 +6,8 @@ import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 
 import { getTronSuperRepresentatives, getNextVotingDate } from "@ledgerhq/live-common/lib/api/Tron";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
@@ -19,7 +21,6 @@ import Header from "./Header";
 import Row from "./Row";
 import Footer from "./Footer";
 
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { BigNumber } from "bignumber.js";
 import moment from "moment";
 import ToolTip from "~/renderer/components/Tooltip";
@@ -85,7 +86,11 @@ const Delegation = ({ account, parentAccount }: Props) => {
   const superRepresentatives = useTronSuperRepresentatives();
   const nextVotingDate = useNextVotingDate();
 
-  const { tronResources: { votes, tronPower, unwithdrawnReward } = {} } = account;
+  const unit = getAccountUnit(account);
+  /** min 1TRX transactions */
+  const minAmount = 10 ** unit.magnitude;
+
+  const { tronResources: { votes, tronPower, unwithdrawnReward } = {}, spendableBalance } = account;
 
   const formattedUnwidthDrawnReward = formatCurrencyUnit(
     account.unit,
@@ -134,6 +139,9 @@ const Delegation = ({ account, parentAccount }: Props) => {
     [nextRewardDate],
   );
   const canClaimRewards = hasRewards && !formattedNextRewardDate;
+
+  const earnRewardDisabled =
+    tronPower === 0 && (!spendableBalance || !spendableBalance.gt(minAmount));
 
   return (
     <>
@@ -220,14 +228,18 @@ const Delegation = ({ account, parentAccount }: Props) => {
             </Box>
           </Box>
           <Box>
-            <Button primary onClick={onEarnRewards}>
-              <Box horizontal flow={1} alignItems="center">
-                <IconChartLine size={12} />
-                <Box>
-                  <Trans i18nKey="delegation.title" />
+            <ToolTip
+              content={earnRewardDisabled ? <Trans i18nKey="tron.voting.warnEarnRewards" /> : null}
+            >
+              <Button primary disabled={earnRewardDisabled} onClick={onEarnRewards}>
+                <Box horizontal flow={1} alignItems="center">
+                  <IconChartLine size={12} />
+                  <Box>
+                    <Trans i18nKey="delegation.title" />
+                  </Box>
                 </Box>
-              </Box>
-            </Button>
+              </Button>
+            </ToolTip>
           </Box>
         </Wrapper>
       )}

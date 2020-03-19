@@ -6,7 +6,7 @@ import styled, { css } from "styled-components";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
+import { getMainAccount, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 
@@ -112,19 +112,22 @@ type Props = {
 const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
   const dispatch = useDispatch();
   const mainAccount = getMainAccount(account, parentAccount);
+  const unit = getAccountUnit(mainAccount);
+  /** min 1 TRX for frozen and unfreeze transactions */
+  const minAmount = 10 ** unit.magnitude;
 
   const {
     spendableBalance,
     tronResources: { tronPower, frozen: { bandwidth, energy } = {}, frozen } = {},
   } = mainAccount;
 
-  const canFreeze = spendableBalance && spendableBalance.gt(0);
+  const canFreeze = spendableBalance && spendableBalance.gt(minAmount);
 
   const canUnfreeze =
     frozen &&
     BigNumber((bandwidth && bandwidth.amount) || 0)
       .plus((energy && energy.amount) || 0)
-      .gt(0);
+      .gt(minAmount);
 
   const timeToUnfreezeBandwidth =
     bandwidth && bandwidth.expiredAt ? +bandwidth.expiredAt : Infinity;

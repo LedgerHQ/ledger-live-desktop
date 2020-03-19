@@ -696,6 +696,7 @@
   "tron": {
     "voting": {
       "manageTP": "Manage Tron Power",
+      "warnEarnRewards": "You need at least 1TRX to start earning rewards",
       "claimRewards": "Claim rewards",
       "nextRewardsDate": "Rewards can be claimed {{date}}",
       "claimAvailableRewards": "Claim {{amount}}",
