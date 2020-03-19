@@ -9,8 +9,11 @@ import type { SignedOperation } from "@ledgerhq/live-common/lib/types";
 
 import DeviceAction from "~/renderer/components/DeviceAction";
 import StepProgress from "~/renderer/components/StepProgress";
-import { action } from "~/renderer/components/DeviceAction/actions/transaction";
 import { useBroadcast } from "~/renderer/hooks/useBroadcast";
+import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
+import { command } from "~/renderer/commands";
+const connectAppExec = command("connectApp");
+const action = createAction(connectAppExec);
 
 const Result = ({
   signedOperation,
