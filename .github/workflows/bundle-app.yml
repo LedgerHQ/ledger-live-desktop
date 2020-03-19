@@ -5,7 +5,7 @@ jobs:
   bundle-macos:
     runs-on: macos-latest
     steps:
-      - uses: valpinkman/actions/check-member@v1.1.1
+      - uses: ledgerhq/actions/check-member@v1.0.0
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
@@ -28,15 +28,15 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
-      - uses: "./.github/actions/get-package-infos"
+      - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: version
-      - uses: valpinkman/actions/get-pr-number@v1.1.1
+      - uses: ledgerhq/actions/get-pr-number@v1.0.0
         id: pr
       - name: make local version
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
       - name: build the app
         run: yarn nightly
-      - uses: "./.github/actions/get-package-infos"
+      - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: upload macOS app
         uses: actions/upload-artifact@v1
@@ -47,7 +47,7 @@ jobs:
   bundle-linux:
     runs-on: ubuntu-latest
     steps:
-      - uses: valpinkman/actions/check-member@v1.1.1
+      - uses: ledgerhq/actions/check-member@v1.0.0
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
@@ -72,15 +72,15 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
-      - uses: "./.github/actions/get-package-infos"
+      - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: version
-      - uses: valpinkman/actions/get-pr-number@v1.1.1
+      - uses: ledgerhq/actions/get-pr-number@v1.0.0
         id: pr
       - name: make local version
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
       - name: build the app
         run: yarn nightly
-      - uses: "./.github/actions/get-package-infos"
+      - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: upload linux app
         uses: actions/upload-artifact@v1
@@ -91,7 +91,7 @@ jobs:
   bundle-windows:
     runs-on: windows-latest
     steps:
-      - uses: valpinkman/actions/check-member@v1.1.1
+      - uses: ledgerhq/actions/check-member@v1.0.0
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
@@ -117,28 +117,15 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
-      - uses: "./.github/actions/get-package-infos"
+      - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: version
-      - uses: valpinkman/actions/get-pr-number@v1.1.1
+      - uses: ledgerhq/actions/get-pr-number@v1.0.0
         id: pr
       - name: make local version
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
       - name: build the app
         run: yarn nightly
-      # - name: clean up
-      #   run: npx rimraf ./dist
-      # - name: install and rebuild
-      #   run: yarn --frozen-lockfile
-      # - name: build
-      #   run: |
-      #     set NODE_ENV=production
-      #     node ./tools/main.js build
-      # - name: nightly
-      #   run: |
-      #     set DEBUG=electron-builder
-      #     set NODE_ENV=production
-      #     npx electron-builder --config electron-builder-nightly.yml
-      - uses: "./.github/actions/get-package-infos"
+      - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: upload windows
         uses: actions/upload-artifact@v1
