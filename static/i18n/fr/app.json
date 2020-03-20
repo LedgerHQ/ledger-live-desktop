@@ -931,6 +931,7 @@
       "desc": "En savoir plus sur Ledger Live ou obtenir de l’aide.",
       "version": "Version",
       "releaseNotesBtn": "Détails",
+      "termsBtn": "Read",
       "faq": "Assistance Ledger",
       "faqDesc": "Un problème ? Obtenez de l’aide sur l'utilisation de Ledger Live avec votre coffre-fort digital.",
       "terms": "Conditions d’utilisation",
