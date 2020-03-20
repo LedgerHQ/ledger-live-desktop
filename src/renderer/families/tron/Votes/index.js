@@ -43,7 +43,7 @@ const Wrapper = styled(Box).attrs(() => ({
 `;
 
 // @TODO move this to common
-const useTronSuperRepresentatives = () => {
+export const useTronSuperRepresentatives = () => {
   const [sp, setSp] = useState([]);
 
   useEffect(() => {
@@ -51,6 +51,17 @@ const useTronSuperRepresentatives = () => {
   }, []);
 
   return sp;
+};
+
+// @TODO move this to common
+export const formatVotes = (votes: ?Array<any>, superRepresentatives: ?Array<any>): Array<any> => {
+  return votes
+    ? votes.map(({ address, ...rest }) => ({
+        validator: superRepresentatives && superRepresentatives.find(sp => sp.address === address),
+        address,
+        ...rest,
+      }))
+    : [];
 };
 
 // @TODO move this to common
@@ -102,13 +113,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
     },
   );
 
-  console.log(JSON.stringify(account));
-
-  const formattedVotes = votes.map(({ address, ...rest }) => ({
-    validator: superRepresentatives.find(sp => sp.address === address),
-    address,
-    ...rest,
-  }));
+  const formattedVotes = formatVotes(votes, superRepresentatives);
 
   const totalVotesUsed = votes.reduce((sum, { voteCount }) => sum + voteCount, 0);
 
