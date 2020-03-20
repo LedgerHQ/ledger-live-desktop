@@ -5,7 +5,10 @@ import { useDispatch } from "react-redux";
 
 import { Trans } from "react-i18next";
 
+import { BigNumber } from "bignumber.js";
+
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { Account } from "@ledgerhq/live-common/lib/types";
@@ -30,9 +33,16 @@ type Props = {
 
 const AccountHeaderActions = ({ account, parentAccount }: Props) => {
   const dispatch = useDispatch();
+
+  /** @TODO get this from common */
   const unit = getAccountUnit(account);
-  /** min 1TRX transactions */
   const minAmount = 10 ** unit.magnitude;
+
+  const formattedMinAmount = formatCurrencyUnit(account.unit, BigNumber(minAmount), {
+    disableRounding: true,
+    alwaysShowSign: false,
+    showCode: true,
+  });
 
   const { tronResources, spendableBalance } = account;
   const tronPower = tronResources ? tronResources.tronPower : 0;
@@ -60,7 +70,13 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
   if (parentAccount) return null;
 
   return (
-    <ToolTip content={earnRewardDisabled ? <Trans i18nKey="tron.voting.warnEarnRewards" /> : null}>
+    <ToolTip
+      content={
+        earnRewardDisabled ? (
+          <Trans i18nKey="tron.voting.warnEarnRewards" values={{ amount: formattedMinAmount }} />
+        ) : null
+      }
+    >
       <ButtonBase primary disabled={earnRewardDisabled} onClick={onClick}>
         <Box horizontal flow={1} alignItems="center">
           {tronPower > 0 ? (

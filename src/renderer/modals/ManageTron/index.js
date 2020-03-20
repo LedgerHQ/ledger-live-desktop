@@ -112,8 +112,8 @@ type Props = {
 const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
   const dispatch = useDispatch();
   const mainAccount = getMainAccount(account, parentAccount);
-  const unit = getAccountUnit(mainAccount);
-  /** min 1 TRX for frozen and unfreeze transactions */
+  /** @TODO get this from common */
+  const unit = getAccountUnit(account);
   const minAmount = 10 ** unit.magnitude;
 
   const {
