@@ -931,6 +931,7 @@
       "desc": "Ledger Liveについて詳しく知る。または支援を得る。",
       "version": "バージョン",
       "releaseNotesBtn": "詳細",
+      "termsBtn": "Read",
       "faq": "Ledgerのサポート",
       "faqDesc": "問題がありますか？ハードウェアウォレットとともにLedger Liveを使用してヘルプを受けてください。",
       "terms": "利用条件",
