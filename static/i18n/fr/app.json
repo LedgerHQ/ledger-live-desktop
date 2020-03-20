@@ -70,10 +70,10 @@
       "REVEAL": "Révélée",
       "DELEGATE": "Déléguée",
       "UNDELEGATE": "Interrompue",
-      "VOTE": "Voted",
-      "FREEZE": "Frozen",
-      "UNFREEZE": "Unfrozen",
-      "REWARD": "Claimed reward"
+      "VOTE": "Voté",
+      "FREEZE": "Gelé",
+      "UNFREEZE": "Dégelé",
+      "REWARD": "Récompense réclamée"
     }
   },
   "byteSize": {
@@ -135,8 +135,8 @@
         "desc": "Choisir l'unité à afficher"
       }
     },
-    "availableBalance": "Available balance",
-    "frozenAssets": "Frozen assets",
+    "availableBalance": "Solde disponible",
+    "frozenAssets": "Actifs gelés",
     "bandwidth": "Bandwidth",
     "energy": "Energy"
   },
@@ -187,20 +187,20 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "Install some apps on your device",
-      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
+      "title": "Installez des applications sur votre appareil",
+      "desc": "Allez dans le Manager pour installer des applications sur votre appareil. Vous pouvez ajouter des comptes une fois que vous avez des applications sur votre appareil.",
       "buttons": {
-        "installApp": "Go to Manager",
-        "help": "Help"
+        "installApp": "Aller au Manager",
+        "help": "Aide"
       }
     },
     "accounts": {
-      "title": "Add an account to get started",
-      "desc": "Add an account to start managing your crypto assets. You should have installed the apps for your crypto assets on your device.",
+      "title": "Ajouter un compte pour commencer",
+      "desc": "Ajoutez un compte pour commencer à gérer vos crypto-actifs. Vous devriez avoir les applications pour vos crypto-actifs sur votre appareil.",
       "buttons": {
-        "addAccount": "Add account",
-        "installApp": "Go to Manager to install apps",
-        "help": "Help"
+        "addAccount": "Ajouter un compte",
+        "installApp": "Allez dans le Manager pour installer des applications",
+        "help": "Aide"
       }
     }
   },
@@ -355,12 +355,12 @@
     "details": "Détails sur {{ currency }}",
     "multipleAddresses": "Pourquoi plusieurs adresses ?",
     "extra": {
-      "resource": "Resource",
-      "frozenAmount": "Frozen amount",
-      "unfreezeAmount": "Unfreeze amount",
-      "address": "Address",
+      "resource": "Ressources",
+      "frozenAmount": "Montant gelé",
+      "unfreezeAmount": "Dégeler le montant",
+      "address": "Adresse",
       "votes": "Votes ({{number}})",
-      "votesAddress": "<0>TP {{votes}}</0> to <2>{{name}}</2>"
+      "votesAddress": "<0>{{votes}} TP</0> à <2>{{name}}</2>"
     }
   },
   "operationList": {
@@ -436,7 +436,7 @@
         "updateAllOutOfMemory": "Pas assez d'espace pour mettre à jour, veuillez désinstaller des applications",
         "install": "Installer",
         "installed": "Installée",
-        "updated": "Updated",
+        "updated": "Mis à jour",
         "uninstall": "Désinstaller",
         "notEnoughSpace": "Espace insuffisant",
         "supported": "Compatible Ledger Live",
@@ -528,70 +528,70 @@
     }
   },
   "claimReward": {
-    "title": "Claim rewards",
+    "title": "Réclamer les récompenses",
     "steps": {
       "rewards": {
-        "title": "Rewards",
-        "description": "Congratulations! You earned <1>{{amount}}</1> by voting for validators.",
-        "info": "Rewards can be claimed once every 24 hours."
+        "title": "Récompenses",
+        "description": "Félicitations ! Vous avez gagné <1>{{amount}}</1> en votant pour les validateurs.",
+        "info": "Les récompenses peuvent être collectées une fois toutes les 24 heures."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "Appareil"
       },
       "confirmation": {
         "title": "Confirmation",
         "success": {
-          "title": "Rewards claimed",
-          "text": "Your rewards have been added to your balance.",
-          "cta": "View details",
-          "done": "Done"
+          "title": "Récompenses réclamées",
+          "text": "Vos récompenses ont été ajoutées à votre solde.",
+          "cta": "Voir le détail",
+          "done": "Terminé"
         },
         "pending": {
-          "title": "Claiming your rewards..."
+          "title": "Réclamation de vos récompenses..."
         },
-        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        "broadcastError": "Votre transaction a peut-être échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée avant de réessayer."
       }
     }
   },
   "freeze": {
-    "title": "Freeze",
+    "title": "Geler",
     "steps": {
       "amount": {
-        "title": "Freeze assets",
-        "resourceInfo": "Bandwith or Energy?",
-        "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
-        "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
-        "amountLabel": "Amount to freeze",
-        "available": "Available: {{amountAvailable}}",
-        "info": "Frozen assets cannot be sent for 3 days."
+        "title": "Geler les fonds",
+        "resourceInfo": "Bandwidth ou Energy?",
+        "bandwidthDescription": "Les points de bandwidth sont utilisés pour effectuer des transactions sans payer de TRX en frais de réseau. Choisissez la bandwidth pour augmenter vos transactions quotidiennes gratuites.",
+        "energyDescription": "Les points Energy sont requis pour exécuter des smart contracts. Si vous n'exécutez aucun smart contract, il n'est pas nécessaire de choisir des récompenses dans Energy.",
+        "amountLabel": "Montant à geler",
+        "available": "Disponible: {{amountAvailable}}",
+        "info": "Les actifs gelés ne peuvent pas être envoyés pendant 3 jours."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "Appareil"
       },
       "confirmation": {
         "title": "Confirmation",
         "success": {
           "title": "",
-          "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
-          "votePending": "Vote in {{time}}",
-          "vote": "Vote",
-          "later": "Vote later"
+          "text": "Vous commencerez à gagner de la Bandwidth une fois que le réseau aura confirmé le gel. Vous pouvez bientôt voter pour les Super Representatives pour gagner des récompenses.",
+          "votePending": "Voter dans {{time}}",
+          "vote": "Voter",
+          "later": "Voter plus tard"
         },
         "pending": {
-          "title": "Freezing your assets..."
+          "title": "Gel de vos actifs..."
         },
-        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        "broadcastError": "Votre transaction a peut-être échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée avant de réessayer."
       }
     }
   },
   "unfreeze": {
-    "title": "Unfreeze",
+    "title": "Dégeler",
     "steps": {
       "amount": {
-        "title": "Unfreeze assets"
+        "title": "Dégeler les actifs"
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "Appareil"
       },
       "confirmation": {
         "title": "Confirmation"
@@ -703,50 +703,50 @@
   },
   "tron": {
     "voting": {
-      "manageTP": "Manage Tron Power",
-      "claimRewards": "Claim rewards",
-      "nextRewardsDate": "Rewards can be claimed {{date}}",
-      "claimAvailableRewards": "Claim {{amount}}",
-      "title": "Claim rewards",
+      "manageTP": "Gérer les Tron Power",
+      "claimRewards": "Réclamer les récompenses",
+      "nextRewardsDate": "Les récompenses peuvent être réclamées {{date}}",
+      "claimAvailableRewards": "Réclamer {{amount}}",
+      "title": "Réclamer les récompenses",
       "header": "Votes",
-      "Amount": "Amount",
-      "percentageTP": "% of used TP",
-      "noRewards": "No rewards available",
+      "Amount": "Montant",
+      "percentageTP": "% de TP utilisés",
+      "noRewards": "Aucune récompense disponible",
       "remainingVotes": {
-        "title": "You still have {{amount}}TP remaining",
-        "description": "You didn't use all of your frozen assets to vote for a SR.",
-        "button": "Vote now"
+        "title": "Vous avez encore {{amount}}TP restants",
+        "description": "Vous n'avez pas utilisé tous vos actifs gelés pour voter en faveur d'un SR.",
+        "button": "Voter maintenant"
       },
       "flow": {
         "steps": {
           "starter": {
-            "title": "Earn staking rewards",
-            "description": "Delegate TRX to a third party candidate to earn staking rewards. Click on continue to freeze assets and vote.",
+            "title": "Obtenez des récompenses staking",
+            "description": "Déléguez des TRX à un candidat tiers pour obtenir des récompenses de staking. Cliquez sur continuer pour geler les actifs et voter.",
             "bullet": {
-              "delegate": "Delegated assets stay yours.",
-              "access": "You can access your assets 3 days after you froze them.",
-              "ledger": "Delegate securely with your Ledger device."
+              "delegate": "Les actifs délégués restent les vôtres.",
+              "access": "Vous pouvez accéder à vos actifs après 3 jours de gel.",
+              "ledger": "Déléguez en toute sécurité avec votre appareil Ledger."
             },
             "button": {
-              "cta": "Continue"
+              "cta": "Poursuivre"
             }
           }
         }
       }
     },
     "manage": {
-      "title": "Manage Tron Power",
+      "title": "Gérer les Tron Power",
       "freeze": {
-        "title": "Freeze",
-        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also earn TRON Power to vote for Super Representatives."
+        "title": "Geler",
+        "description": "Geler des TRX pour gagner de la Bandwidth ou de l'Energy. Vous gagnerez aussi TRON Power pour voter pour des Super Représentatives."
       },
       "unfreeze": {
-        "title": "Unfreeze",
-        "description": "Unfreeze TRX if you want to spend them. You will stop earning rewards and TRON Power to vote with."
+        "title": "Dégeler",
+        "description": "Dégeler des TRX si vous voulez les dépenser. Vous cesserez de gagner des récompenses et des TRON Power pour voter."
       },
       "vote": {
-        "title": "Vote",
-        "description": "Cast votes for Super Representatives using your TRON Power to earn TRX rewards."
+        "title": "Voter",
+        "description": "Votez pour les Super Représentatives en utilisant vos TRON Power pour obtenir des récompenses TRX."
       }
     }
   },
@@ -764,8 +764,8 @@
     "durationDays": "{{count}} jour",
     "durationDays_plural": "{{count}} jours",
     "howItWorks": "Comment fonctionne la délégation",
-    "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
-    "earnRewards": "Earn rewards",
+    "delegationEarn": "Vous pouvez maintenant obtenir {{name}} récompenses de staking en déléguant votre compte.",
+    "earnRewards": "Obtenez des récompenses",
     "overdelegated": "Surdélégué",
     "flow": {
       "steps": {
@@ -931,7 +931,7 @@
       "desc": "En savoir plus sur Ledger Live ou obtenir de l’aide.",
       "version": "Version",
       "releaseNotesBtn": "Détails",
-      "termsBtn": "Read",
+      "termsBtn": "Lire",
       "faq": "Assistance Ledger",
       "faqDesc": "Un problème ? Obtenez de l’aide sur l'utilisation de Ledger Live avec votre coffre-fort digital.",
       "terms": "Conditions d’utilisation",
@@ -1269,14 +1269,14 @@
     "warning": "Vérifiez toujours que votre appareil affiche exactement l'adresse fournie par le {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
-      "claimReward": "Please confirm the operation on your device to claim your rewards",
-      "freeze": "Please confirm the operation on yur device to freeze assets"
+      "claimReward": "Veuillez confirmer l'opération sur votre appareil pour réclamer vos récompenses",
+      "freeze": "Veuillez confirmer l'opération sur votre appareil pour geler les ressources"
     },
     "recipientWording": {
       "send": "destinataire",
       "delegate": "validateur",
       "undelegate": "validateur",
-      "claimReward": "delegation rewards recipient"
+      "claimReward": "récompense de délégation"
     }
   },
   "RecipientField": {
@@ -1619,7 +1619,7 @@
       "title": "Solde insuffisant dans le compte parent"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Balance cannot get below {{minimumAmount}}"
+      "title": "Le solde ne peut pas être inférieur à {{minimumAmount}}"
     },
     "WrongAppForCurrency": {
       "title": "Veuillez ouvrir l'application {{expected}}"
