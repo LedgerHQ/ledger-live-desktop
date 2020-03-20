@@ -931,6 +931,7 @@
       "desc": "Learn more about Ledger Live or get help.",
       "version": "Version",
       "releaseNotesBtn": "Details",
+      "termsBtn": "Read",
       "faq": "Ledger Support",
       "faqDesc": "A problem? Get help using Ledger Live with your hardware wallet.",
       "terms": "Terms of Use",
