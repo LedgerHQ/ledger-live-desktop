@@ -931,6 +931,7 @@
       "desc": "了解更多 Ledger Live 相关信息或获取帮助。",
       "version": "版本",
       "releaseNotesBtn": "详情",
+      "termsBtn": "Read",
       "faq": "Ledger 支持人员",
       "faqDesc": "使用 Ledger Live 和您的硬件钱包时遇到问题？请随时联系我们。",
       "terms": "使用条款",
