@@ -76,6 +76,7 @@ const Warning = ({ transaction }: { transaction: Transaction }) => {
   switch (transaction.mode) {
     case "claimReward":
     case "freeze":
+    case "unfreeze":
       return null;
     default:
       return (
