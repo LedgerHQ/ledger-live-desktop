@@ -23,6 +23,14 @@ export default class Page {
     return this.app.client.element("#main-container");
   }
 
+  get inputError() {
+    return this.app.client.element("#input-error");
+  }
+
+  get inputWarning() {
+    return this.app.client.element("#input-warning");
+  }
+
   async getThemeColor() {
     const bgColor = await this.theme.getCssProperty("background-color");
     return bgColor.parsed.hex;

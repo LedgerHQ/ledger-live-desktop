@@ -59,20 +59,12 @@ export default class OnboardingPage extends Page {
     return this.app.client.element("#onboarding-select-blue");
   }
 
-  get genuineCheckPinRatio() {
-    return "#onboarding-genuine-pin-ratio";
-  }
-
-  get genuineCheckSeedRatio() {
-    return "#onboarding-genuine-seed-ratio";
-  }
-
-  get genuineCheckButton() {
-    return this.app.client.element("#onboarding-genuine-check");
-  }
-
   get continueButton() {
     return this.app.client.element("#onboarding-continue-button");
+  }
+
+  get skipButton() {
+    return this.app.client.element("#onboarding-skip-button");
   }
 
   get backButton() {
@@ -136,37 +128,19 @@ export default class OnboardingPage extends Page {
     }
   }
 
-  async genuineCheckPin(answer) {
-    switch (answer) {
-      case "yes":
-        await this.app.client.element(`${this.genuineCheckPinRatio} > :nth-child(1)`).click();
-        break;
-      case "no":
-        await this.app.client.element(`${this.genuineCheckPinRatio} > :nth-child(2)`).click();
-        break;
-    }
-  }
-
-  async genuineCheckSeed(answer) {
-    switch (answer) {
-      case "yes":
-        await this.app.client.element(`${this.genuineCheckSeedRatio} > :nth-child(1)`).click();
-        break;
-      case "no":
-        await this.app.client.element(`${this.genuineCheckSeedRatio} > :nth-child(2)`).click();
-        break;
-    }
-  }
-
-  async genuineCheck() {
-    await this.genuineCheckButton.click();
-  }
-
   async continue() {
     await this.continueButton.click();
+    await this.app.client.waitUntilWindowLoaded();
+    await this.app.client.pause(1000); // FIXME: Do not use fixed waiting time
+  }
+
+  async skip() {
+    await this.skipButton.click();
+    await this.app.client.waitUntilWindowLoaded();
   }
 
   async back() {
     await this.backButton.click();
+    await this.app.client.waitUntilWindowLoaded();
   }
 }
