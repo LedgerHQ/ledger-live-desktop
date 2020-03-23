@@ -10,15 +10,14 @@ import logger from "~/logger";
 import LoggerTransport from "~/logger/logger-transport-internal";
 
 import { executeCommand, unsubscribeCommand, unsubscribeAllCommands } from "./commandHandler";
+import sentry from "~/sentry/node";
+// import uuid from 'uuid/v4'
 
 process.on("exit", () => {
   logger.debug("exiting process, unsubscribing all...");
   unsubscribeSetup();
   unsubscribeAllCommands();
 });
-
-// import uuid from 'uuid/v4'
-// import sentry from '~/sentry/node'
 
 logger.add(new LoggerTransport());
 
@@ -39,8 +38,10 @@ process.on("uncaughtException", err => {
 const defers = {};
 
 // eslint-disable-next-line no-unused-vars
-let sentryEnabled = process.env.INITIAL_SENTRY_ENABLED || false;
-// sentry(() => sentryEnabled, process.env.SENTRY_USER_ID)
+let sentryEnabled = !!process.env.INITIAL_SENTRY_ENABLED || false;
+if (process.env.SENTRY_USER_ID) {
+  sentry(() => sentryEnabled, process.env.SENTRY_USER_ID);
+}
 
 process.on("message", m => {
   switch (m.type) {
