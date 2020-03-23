@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import type { TFunction } from "react-i18next";
 import { Trans, withTranslation } from "react-i18next";
 import { createStructuredSelector } from "reselect";
-import SyncSkipUnderPriority from "~/renderer/components/SyncSkipUnderPriority";
+import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import Track from "~/renderer/analytics/Track";
 import type { Account, TokenCurrency, AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { Device } from "~/renderer/reducers/devices";

@@ -6,7 +6,7 @@ export const urls = {
   // Social
   twitter: "https://twitter.com/Ledger",
   github: "https://github.com/LedgerHQ/ledger-live-desktop",
-  reddit: "https://www.reddit.com/r/ledger/",
+  reddit: "https://www.reddit.com/r/ledgerwallet/",
 
   // Campaigns
   promoNanoX:
@@ -55,7 +55,4 @@ export const urls = {
     CantOpenDevice: "https://support.ledger.com/hc/en-us/articles/115005165269",
     WrongDeviceForAccount: "https://support.ledger.com/hc/en-us/articles/360025321733",
   },
-
-  // Currencies status
-  currenciesStatus: "http://resources.live.ledger.app/public_resources/currencies.json",
 };

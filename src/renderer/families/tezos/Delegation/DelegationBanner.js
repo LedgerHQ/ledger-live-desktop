@@ -23,7 +23,6 @@ const IconContainer = styled(Box).attrs(() => ({
   position: absolute;
   top: 0;
   right: 0;
-
   cursor: pointer;
 `;
 
@@ -35,7 +34,6 @@ const LogoContainer = styled(Box).attrs(() => ({
   position: absolute;
   top: 10px;
   left: 20px;
-
   ${IconContainer} {
     width: 100%;
     max-width: 110px;

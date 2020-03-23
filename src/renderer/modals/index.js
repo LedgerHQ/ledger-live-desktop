@@ -3,6 +3,7 @@
 import MODAL_DELEGATE from "~/renderer/families/tezos/DelegateFlowModal";
 import MODAL_EXPORT_OPERATIONS from "./ExportOperations";
 import MODAL_CONFIRM from "./ConfirmModal";
+import MODAL_MANAGE_TRON from "./ManageTron";
 import MODAL_PASSWORD from "./PasswordModal";
 import MODAL_DISABLE_PASSWORD from "./DisablePasswordModal";
 import MODAL_ADD_ACCOUNTS from "./AddAccounts";
@@ -18,9 +19,14 @@ import MODAL_SHARE_ANALYTICS from "./ShareAnalytics";
 import MODAL_SETTINGS_ACCOUNT from "./SettingsAccount";
 import MODAL_RELEASE_NOTES from "./ReleaseNotes";
 
+import MODAL_CLAIM_REWARDS from "./ClaimRewards";
+import MODAL_FREEZE from "./Freeze";
+import MODAL_REWARDS_INFO from "./EarnRewardsInfoModal";
+
 const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_EXPORT_OPERATIONS,
   MODAL_CONFIRM,
+  MODAL_MANAGE_TRON,
   MODAL_PASSWORD,
   MODAL_DISABLE_PASSWORD,
   MODAL_ADD_ACCOUNTS,
@@ -36,6 +42,9 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_SHARE_ANALYTICS,
   MODAL_SETTINGS_ACCOUNT,
   MODAL_RELEASE_NOTES,
+  MODAL_CLAIM_REWARDS,
+  MODAL_FREEZE,
+  MODAL_REWARDS_INFO,
 };
 
 export default modals;

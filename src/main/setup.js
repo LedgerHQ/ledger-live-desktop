@@ -1,12 +1,13 @@
 // @flow
 
-import "../env";
+import "../live-common-setup-base";
 import { ipcMain } from "electron";
 import contextMenu from "electron-context-menu";
 import logger, { enableDebugLogger } from "../logger";
 import LoggerTransport from "~/logger/logger-transport-main";
 import LoggerTransportFirmware from "~/logger/logger-transport-firmware";
 import { fsWriteFile } from "~/helpers/fs";
+import osName from "~/helpers/osName";
 import updater from "./updater";
 
 const loggerTransport = new LoggerTransport();
@@ -33,10 +34,15 @@ ipcMain.handle("save-logs", async (event, path: { canceled: boolean, filePath: s
 
 ipcMain.handle(
   "export-operations",
-  async (event, path: { canceled: boolean, filePath: string }, csv: string) => {
-    Promise.resolve().then(
-      () => !path.canceled && path.filePath && csv && fsWriteFile(path.filePath, csv),
-    );
+  async (event, path: { canceled: boolean, filePath: string }, csv: string): Promise<boolean> => {
+    try {
+      if (!path.canceled && path.filePath && csv) {
+        await fsWriteFile(path.filePath, csv);
+        return true;
+      }
+    } catch (error) {}
+
+    return false;
   },
 );
 
@@ -57,3 +63,14 @@ contextMenu({
     inspect: "Inspect element",
   },
 });
+
+const systemInfo = async () => {
+  const name = await osName();
+  const locale = await require("os-locale")();
+
+  logger.info(`Ledger Live version: ${__APP_VERSION__}`, { type: "system-info" });
+  logger.info(`OS: ${name}`, { type: "system-info" });
+  logger.info(`System locale: ${locale}`, { type: "system-info" });
+};
+
+systemInfo();

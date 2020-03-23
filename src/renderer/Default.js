@@ -3,7 +3,9 @@
 import React, { useEffect, useRef } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 
-import { getEnv } from "@ledgerhq/live-common/lib/env";
+import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
+import CounterValues from "~/renderer/countervalues";
+
 import Track from "~/renderer/analytics/Track";
 import Dashboard from "~/renderer/screens/dashboard";
 import Settings from "~/renderer/screens/settings";
@@ -12,8 +14,6 @@ import Manager from "~/renderer/screens/manager";
 import Partners from "~/renderer/screens/partners";
 import Account from "~/renderer/screens/account";
 import Asset from "~/renderer/screens/asset";
-import SyncBackground from "~/renderer/components/SyncBackground";
-import SyncContinuouslyPendingOperations from "~/renderer/components/SyncContinouslyPendingOperations";
 import Box from "~/renderer/components/Box/Box";
 import ListenDevices from "~/renderer/components/ListenDevices";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
@@ -66,50 +66,52 @@ const Default = () => {
       {process.platform === "darwin" ? <AppRegionDrag /> : null}
 
       <IsUnlocked>
-        <ContextMenuWrapper>
-          <ModalsLayer />
-          <OnboardingOrElse>
-            <CheckTermsAccepted />
+        <CounterValues.PollingProvider>
+          <BridgeSyncProvider>
+            <ContextMenuWrapper>
+              <ModalsLayer />
+              <OnboardingOrElse>
+                <CheckTermsAccepted />
 
-            <IsNewVersion />
+                <IsNewVersion />
 
-            {process.env.DEBUG_UPDATE && <DebugUpdater />}
+                {process.env.DEBUG_UPDATE && <DebugUpdater />}
 
-            <SyncContinuouslyPendingOperations
-              priority={20}
-              interval={getEnv("SYNC_PENDING_INTERVAL")}
-            />
-            <SyncBackground />
-            <Box
-              grow
-              horizontal
-              bg="palette.background.default"
-              color="palette.text.shade60"
-              style={{ width: "100%", height: "100%" }}
-            >
-              <MainSideBar />
-              <Page>
-                <Switch>
-                  <Route path="/" exact render={props => <Dashboard {...props} />} />
-                  <Route path="/settings" render={props => <Settings {...props} />} />
-                  <Route path="/accounts" render={props => <Accounts {...props} />} />
-                  <Route path="/manager" render={props => <Manager {...props} />} />
-                  <Route path="/partners" render={props => <Partners {...props} />} />
-                  <Route path="/account/:parentId/:id" render={props => <Account {...props} />} />
-                  <Route path="/account/:id" render={props => <Account {...props} />} />
-                  <Route path="/asset/:assetId+" render={props => <Asset {...props} />} />
-                </Switch>
-              </Page>
-            </Box>
+                <Box
+                  grow
+                  horizontal
+                  bg="palette.background.default"
+                  color="palette.text.shade60"
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  <MainSideBar />
+                  <Page>
+                    <Switch>
+                      <Route path="/" exact render={props => <Dashboard {...props} />} />
+                      <Route path="/settings" render={props => <Settings {...props} />} />
+                      <Route path="/accounts" render={props => <Accounts {...props} />} />
+                      <Route path="/manager" render={props => <Manager {...props} />} />
+                      <Route path="/partners" render={props => <Partners {...props} />} />
+                      <Route
+                        path="/account/:parentId/:id"
+                        render={props => <Account {...props} />}
+                      />
+                      <Route path="/account/:id" render={props => <Account {...props} />} />
+                      <Route path="/asset/:assetId+" render={props => <Asset {...props} />} />
+                    </Switch>
+                  </Page>
+                </Box>
 
-            <LibcoreBusyIndicator />
-            <DeviceBusyIndicator />
+                <LibcoreBusyIndicator />
+                <DeviceBusyIndicator />
 
-            <KeyboardContent sequence="BJBJBJ">
-              <PerfIndicator />
-            </KeyboardContent>
-          </OnboardingOrElse>
-        </ContextMenuWrapper>
+                <KeyboardContent sequence="BJBJBJ">
+                  <PerfIndicator />
+                </KeyboardContent>
+              </OnboardingOrElse>
+            </ContextMenuWrapper>
+          </BridgeSyncProvider>
+        </CounterValues.PollingProvider>
       </IsUnlocked>
     </>
   );

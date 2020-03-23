@@ -7,7 +7,7 @@ import type { TFunction } from "react-i18next";
 import logger from "~/logger";
 import { hardReset } from "~/renderer/reset";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import SyncSkipUnderPriority from "./SyncSkipUnderPriority";
+import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import ResetFallbackModal from "~/renderer/modals/ResetFallbackModal";

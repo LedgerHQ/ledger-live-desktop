@@ -10,6 +10,7 @@ import manager from "@ledgerhq/live-common/lib/manager";
 
 import ConfirmModal from "~/renderer/modals/ConfirmModal/index";
 import LinkIcon from "~/renderer/icons/LinkIcon";
+import Image from "~/renderer/components/Image";
 
 const IconsSection = styled.div`
   height: ${p => p.theme.space[7]}px;
@@ -68,13 +69,20 @@ const AppDepsInstallModal = ({ app, dependencies, appList, dispatch, onClose }: 
       subTitle={
         <>
           <IconsSection>
-            <img alt="" src={manager.getIconUrl(app.icon)} width={40} height={40} />
+            <Image alt="" resource={manager.getIconUrl(app.icon)} width={40} height={40} />
             <Separator />
             <LinkIconWrapper>
               <LinkIcon size={20} />
             </LinkIconWrapper>
             <Separator />
-            {<img alt="" src={manager.getIconUrl(dependencies[0].icon)} width={40} height={40} />}
+            {
+              <Image
+                alt=""
+                resource={manager.getIconUrl(dependencies[0].icon)}
+                width={40}
+                height={40}
+              />
+            }
           </IconsSection>
           <Trans
             i18nKey="manager.apps.dependencyInstall.title"

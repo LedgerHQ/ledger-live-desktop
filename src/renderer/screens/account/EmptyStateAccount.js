@@ -19,7 +19,8 @@ import darkEmptyStateAccount from "~/renderer/images/dark-empty-state-account.sv
 
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
-import { Title, Description } from "~/renderer/screens/accounts/EmptyState";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import styled from "styled-components";
 
 const mapDispatchToProps = {
   openModal,
@@ -50,7 +51,7 @@ class EmptyStateAccount extends PureComponent<Props, *> {
     return (
       <Box mt={7} alignItems="center" selectable>
         <Image
-          alt="emptyState Dashboard logo"
+          alt="emptyState Account logo"
           resource={{
             light: lightEmptyStateAccount,
             dark: darkEmptyStateAccount,
@@ -105,6 +106,19 @@ class EmptyStateAccount extends PureComponent<Props, *> {
     );
   }
 }
+
+const Title: ThemedComponent<{}> = styled(Box).attrs(() => ({
+  ff: "Inter|Regular",
+  fontSize: 6,
+  color: p => p.theme.colors.palette.text.shade100,
+}))``;
+
+const Description: ThemedComponent<{}> = styled(Box).attrs(() => ({
+  ff: "Inter|Regular",
+  fontSize: 4,
+  color: p => p.theme.colors.palette.text.shade80,
+  textAlign: "center",
+}))``;
 
 const ConnectedEmptyStateAccount: React$ComponentType<OwnProps> = compose(
   connect(null, mapDispatchToProps),

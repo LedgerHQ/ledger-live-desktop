@@ -19,7 +19,7 @@ import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { delegatableAccountsSelector } from "~/renderer/actions/general";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 import Stepper from "~/renderer/components/Stepper";
-import SyncSkipUnderPriority from "~/renderer/components/SyncSkipUnderPriority";
+import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import StepAccount, { StepAccountFooter } from "./steps/StepAccount";
 import StepStarter from "./steps/StepStarter";
 import StepConnectDevice from "./steps/StepConnectDevice";

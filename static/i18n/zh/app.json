@@ -69,7 +69,11 @@
       "CREATE": "Created",
       "REVEAL": "Revealed",
       "DELEGATE": "Delegated",
-      "UNDELEGATE": "Undelegated"
+      "UNDELEGATE": "Undelegated",
+      "VOTE": "Voted",
+      "FREEZE": "Frozen",
+      "UNFREEZE": "Unfrozen",
+      "REWARD": "Claimed reward"
     }
   },
   "byteSize": {
@@ -130,7 +134,11 @@
         "title": "单位",
         "desc": "选择要显示的单位"
       }
-    }
+    },
+    "availableBalance": "Available balance",
+    "frozenAssets": "Frozen assets",
+    "bandwidth": "Bandwidth",
+    "energy": "Energy"
   },
   "accounts": {
     "title": "账户",
@@ -179,11 +187,20 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "安装应用程序或添加账户",
-      "desc": "打开 Manager 以安装应用程序，如果您的 Ledger 设备已安装应用程序，请添加相应账户",
+      "title": "Install some apps on your device",
+      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
       "buttons": {
-        "addAccount": "添加账户",
-        "installApp": "打开管理器"
+        "installApp": "Go to Manager",
+        "help": "Help"
+      }
+    },
+    "accounts": {
+      "title": "Add an account to get started",
+      "desc": "Add an account to start managing your crypto assets. You should have installed the apps for your crypto assets on your device.",
+      "buttons": {
+        "addAccount": "Add account",
+        "installApp": "Go to Manager to install apps",
+        "help": "Help"
       }
     }
   },
@@ -336,7 +353,15 @@
     "internalOperations": "内部操作",
     "internalOpTooltip": "此操作存在内部操作",
     "details": "{{ currency }} 详细信息",
-    "multipleAddresses": "Why multiple addresses?"
+    "multipleAddresses": "Why multiple addresses?",
+    "extra": {
+      "resource": "Resource",
+      "frozenAmount": "Frozen amount",
+      "unfreezeAmount": "Unfreeze amount",
+      "address": "Address",
+      "votes": "Votes ({{number}})",
+      "votesAddress": "<0>TP {{votes}}</0> to <2>{{name}}</2>"
+    }
   },
   "operationList": {
     "noMoreOperations": "以上"
@@ -411,6 +436,7 @@
         "updateAllOutOfMemory": "Not enough storage to update, please uninstall some apps",
         "install": "Install",
         "installed": "Installed",
+        "updated": "Updated",
         "uninstall": "Uninstall",
         "notEnoughSpace": "Not enough storage",
         "supported": "Ledger Live supported",
@@ -498,6 +524,77 @@
         "openLive": "在 LedgerLive 中打开管理器。",
         "uninstall": "点击 {{deviceName}} 的灰色回收站图标，这将为安装固件释放空间。",
         "disclaimer": "注意：您的加密资产不受此操作的影响，用于在区块链中访问您加密资产的私钥仍安全储存在您的恢复短语列表中。"
+      }
+    }
+  },
+  "claimReward": {
+    "title": "Claim rewards",
+    "steps": {
+      "rewards": {
+        "title": "Rewards",
+        "description": "Congratulations! You earned <1>{{amount}}</1> by voting for validators.",
+        "info": "Rewards can be claimed once every 24 hours."
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "success": {
+          "title": "Rewards claimed",
+          "text": "Your rewards have been added to your balance.",
+          "cta": "View details",
+          "done": "Done"
+        },
+        "pending": {
+          "title": "Claiming your rewards..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+      }
+    }
+  },
+  "freeze": {
+    "title": "Freeze",
+    "steps": {
+      "amount": {
+        "title": "Freeze assets",
+        "resourceInfo": "Bandwith or Energy?",
+        "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
+        "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
+        "amountLabel": "Amount to freeze",
+        "available": "Available: {{amountAvailable}}",
+        "info": "Frozen assets cannot be sent for 3 days."
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "success": {
+          "title": "",
+          "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+          "votePending": "Vote in {{time}}",
+          "vote": "Vote",
+          "later": "Vote later"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+      }
+    }
+  },
+  "unfreeze": {
+    "title": "Unfreeze",
+    "steps": {
+      "amount": {
+        "title": "Unfreeze assets"
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation"
       }
     }
   },
@@ -604,6 +701,55 @@
     "value": "Value",
     "header": "Account allocation ({{count}})"
   },
+  "tron": {
+    "voting": {
+      "manageTP": "Manage Tron Power",
+      "claimRewards": "Claim rewards",
+      "nextRewardsDate": "Rewards can be claimed {{date}}",
+      "claimAvailableRewards": "Claim {{amount}}",
+      "title": "Claim rewards",
+      "header": "Votes",
+      "Amount": "Amount",
+      "percentageTP": "% of used TP",
+      "noRewards": "No rewards available",
+      "remainingVotes": {
+        "title": "You still have {{amount}}TP remaining",
+        "description": "You didn't use all of your frozen assets to vote for a SR.",
+        "button": "Vote now"
+      },
+      "flow": {
+        "steps": {
+          "starter": {
+            "title": "Earn staking rewards",
+            "description": "Delegate TRX to a third party candidate to earn staking rewards. Click on continue to freeze assets and vote.",
+            "bullet": {
+              "delegate": "Delegated assets stay yours.",
+              "access": "You can access your assets 3 days after you froze them.",
+              "ledger": "Delegate securely with your Ledger device."
+            },
+            "button": {
+              "cta": "Continue"
+            }
+          }
+        }
+      }
+    },
+    "manage": {
+      "title": "Manage Tron Power",
+      "freeze": {
+        "title": "Freeze",
+        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also earn TRON Power to vote for Super Representatives."
+      },
+      "unfreeze": {
+        "title": "Unfreeze",
+        "description": "Unfreeze TRX if you want to spend them. You will stop earning rewards and TRON Power to vote with."
+      },
+      "vote": {
+        "title": "Vote",
+        "description": "Cast votes for Super Representatives using your TRON Power to earn TRX rewards."
+      }
+    }
+  },
   "delegation": {
     "title": "Earn rewards",
     "header": "Delegation",
@@ -618,7 +764,8 @@
     "durationDays": "{{count}} day",
     "durationDays_plural": "{{count}} days",
     "howItWorks": "How delegation works",
-    "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
+    "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
+    "earnRewards": "Earn rewards",
     "overdelegated": "Overdelegated",
     "flow": {
       "steps": {
@@ -784,6 +931,7 @@
       "desc": "了解更多 Ledger Live 相关信息或获取帮助。",
       "version": "版本",
       "releaseNotesBtn": "详情",
+      "termsBtn": "Read",
       "faq": "Ledger 支持人员",
       "faqDesc": "使用 Ledger Live 和您的硬件钱包时遇到问题？请随时联系我们。",
       "terms": "使用条款",
@@ -1119,10 +1267,16 @@
   "TransactionConfirm": {
     "title": "Please confirm the operation on your device to send it",
     "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
+    "warningWording": {},
+    "titleWording": {
+      "claimReward": "Please confirm the operation on your device to claim your rewards",
+      "freeze": "Please confirm the operation on yur device to freeze assets"
+    },
     "recipientWording": {
       "send": "recipient",
       "delegate": "validator",
-      "undelegate": "validator"
+      "undelegate": "validator",
+      "claimReward": "delegation rewards recipient"
     }
   },
   "RecipientField": {
@@ -1465,7 +1619,7 @@
       "title": "Insufficient balance in parent account"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Insufficient balance for this operation"
+      "title": "Balance cannot get below {{minimumAmount}}"
     },
     "WrongAppForCurrency": {
       "title": "Please open the {{expected}} app"

@@ -9,11 +9,11 @@ import {
   clearAccount,
   canBeMigrated,
   getAccountCurrency,
+  isUpToDateAccount,
 } from "@ledgerhq/live-common/lib/account";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import logger from "./../../logger/logger";
 import accountModel from "./../../helpers/accountModel";
-import { currenciesStatusSelector, currencyDownStatusLocal } from "./currenciesStatus";
 import type { State } from ".";
 
 export type AccountsState = Account[];
@@ -66,13 +66,8 @@ const handlers: Object = {
 
 export const accountsSelector = (state: { accounts: AccountsState }): Account[] => state.accounts;
 
-export const activeAccountsSelector: OutputSelector<
-  State,
-  void,
-  Account[],
-> = createSelector(accountsSelector, currenciesStatusSelector, (accounts, currenciesStatus) =>
-  accounts.filter(a => !currencyDownStatusLocal(currenciesStatus, a.currency)),
-);
+// FIXME we might reboot this idea later!
+export const activeAccountsSelector = accountsSelector;
 
 export const isUpToDateSelector: OutputSelector<State, void, boolean> = createSelector(
   activeAccountsSelector,
@@ -143,17 +138,6 @@ export const accountNeedsMigrationSelector: OutputSelector<
   { accountId: string },
   boolean,
 > = createSelector(accountSelector, account => (account ? canBeMigrated(account) : false));
-
-const isUpToDateAccount = (a: ?Account) => {
-  if (!a) return true;
-  const { lastSyncDate } = a;
-  const { blockAvgTime } = a.currency;
-  if (!blockAvgTime) return true;
-  const outdated =
-    Date.now() - (lastSyncDate || 0) >
-    blockAvgTime * 1000 + getEnv("SYNC_OUTDATED_CONSIDERED_DELAY");
-  return !outdated;
-};
 
 export const isUpToDateAccountSelector: OutputSelector<
   State,

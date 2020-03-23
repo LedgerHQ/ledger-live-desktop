@@ -18,6 +18,8 @@ import IconSocialReddit from "~/renderer/icons/Reddit";
 import IconSocialGithub from "~/renderer/icons/Github";
 import ConfettiParty from "~/renderer/components/ConfettiParty";
 import LedgerLiveLogo from "~/renderer/components/LedgerLiveLogo";
+import Image from "~/renderer/components/Image";
+
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { StepProps } from "~/renderer/screens/onboarding";
 
@@ -91,7 +93,9 @@ export default class Finish extends Component<StepProps, *> {
             <LedgerLiveLogo
               width="64px"
               height="64px"
-              icon={<img src={LedgerLiveImg} alt="" draggable="false" width={40} height={40} />}
+              icon={
+                <Image resource={LedgerLiveImg} alt="" draggable="false" width={40} height={40} />
+              }
             />
             <Box color="positiveGreen" style={{ position: "absolute", right: 0, bottom: 0 }}>
               <IconCheckFull size={18} />
@@ -99,11 +103,11 @@ export default class Finish extends Component<StepProps, *> {
           </Box>
 
           <Box pt={5} alignItems="center">
-            <Title data-e2e="finish_title">{t("onboarding.finish.title")}</Title>
+            <Title>{t("onboarding.finish.title")}</Title>
             <Description>{t("onboarding.finish.desc")}</Description>
           </Box>
           <Box p={5}>
-            <Button primary onClick={() => finish()} data-e2e="continue_button">
+            <Button primary onClick={() => finish()} id="modal-continue-button">
               {t("onboarding.finish.openAppButton")}
             </Button>
           </Box>

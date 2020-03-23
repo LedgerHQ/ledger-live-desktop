@@ -12,7 +12,7 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 import logger from "~/logger";
 import Stepper from "~/renderer/components/Stepper";
-import SyncSkipUnderPriority from "~/renderer/components/SyncSkipUnderPriority";
+import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
