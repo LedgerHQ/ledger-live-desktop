@@ -355,12 +355,12 @@
     "details": "{{ currency }} részletek",
     "multipleAddresses": "Miért van több cím?",
     "extra": {
-      "resource": "Resource",
-      "frozenAmount": "Frozen amount",
-      "unfreezeAmount": "Unfreeze amount",
-      "address": "Address",
-      "votes": "Votes ({{number}})",
-      "votesAddress": "<0>TP {{votes}}</0> to <2>{{name}}</2>"
+      "resource": "Forrás",
+      "frozenAmount": "Befagyasztott mennyiség",
+      "unfreezeAmount": "Kiolvasztott mennyiség",
+      "address": "Cím",
+      "votes": "Szavazatok ({{number}})",
+      "votesAddress": "<0>TP {{votes}}</0> a <2>{{name}}</2>"
     }
   },
   "operationList": {
@@ -558,12 +558,12 @@
     "steps": {
       "amount": {
         "title": "Eszközök befagyasztása",
-        "resourceInfo": "Bandwith or Energy?",
-        "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
-        "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
-        "amountLabel": "Amount to freeze",
-        "available": "Available: {{amountAvailable}}",
-        "info": "Frozen assets cannot be sent for 3 days."
+        "resourceInfo": "Sávszélesség vagy Energia?",
+        "bandwidthDescription": "Sávszélesség pontok felhasználhatók tranzakciók küldéséhez anélkül, hogy TRX-et költenél a hálózati díjak fedezésére. Válassz sávszélességet a napi ingyenes tranzakciók növeléséhez.",
+        "energyDescription": "Energia pontok szükségesek az okosszerződések végrehajtásához. Ha nem futtatsz semmilyen okosszerződést, nem szükséges, hogy a jutalmaid Energiában kérd.",
+        "amountLabel": "Befagyasztandó mennyiség",
+        "available": "Elérhető: {{amountAvailable}}",
+        "info": "Befagyasztott eszközöket nem lehet küldeni 3 napig."
       },
       "connectDevice": {
         "title": "Eszköz"
@@ -572,15 +572,15 @@
         "title": "Megerősítés",
         "success": {
           "title": "",
-          "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
-          "votePending": "Vote in {{time}}",
-          "vote": "Vote",
-          "later": "Vote later"
+          "text": "Sávszélességet kezdesz el gyűjteni, ha a hálózat megerősítette a befagyasztást. Rövidesen szavazhatsz a Szuper Képviselőkre, hogy jutalmakat kapj.",
+          "votePending": "Szavazás {{time}}",
+          "vote": "Szavazás",
+          "later": "Szavazás később"
         },
         "pending": {
-          "title": "Freezing your assets..."
+          "title": "Eszközeid befagyasztása..."
         },
-        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        "broadcastError": "Lehet, hogy a tranzakciód sikertelen volt. Kérlek, ellenőrizd pár perc múlva, hogy megbizonyosodj róla, hogy a tranzakciód valóban nem lett elküldve mielőtt újra megpróbálnád."
       }
     }
   },
@@ -931,7 +931,7 @@
       "desc": "Tudj meg többet a Ledger Live-ról, vagy kapj segítséget.",
       "version": "Verzió",
       "releaseNotesBtn": "Részletek",
-      "termsBtn": "Read",
+      "termsBtn": "Olvasás",
       "faq": "Ledger Támogatás",
       "faqDesc": "Problémád akadt? Kapj segítséget a Ledger Live, és a hardware pénztárcáddal kapcsolatban.",
       "terms": "Felhasználási feltételek",
@@ -1270,7 +1270,7 @@
     "warningWording": {},
     "titleWording": {
       "claimReward": "Kérlek, erősítsd meg a műveletet az eszközödön a jutalmaid begyűjtéséhez",
-      "freeze": "Please confirm the operation on yur device to freeze assets"
+      "freeze": "Kérlek, erősítsd meg a műveletet az eszközödön az eszközök befagyasztásához"
     },
     "recipientWording": {
       "send": "fogadó",
