@@ -135,7 +135,7 @@ class SetPassword extends PureComponent<Props, State> {
         </StepContainerInner>
 
         <OnboardingFooterWrapper>
-          <Button outlineGrey onClick={() => prevStep()}>
+          <Button outlineGrey onClick={() => prevStep()} id="onboarding-back-button">
             {t("common.back")}
           </Button>
           <Box horizontal ml="auto">
@@ -144,6 +144,7 @@ class SetPassword extends PureComponent<Props, State> {
               onClick={() => nextStep()}
               disabled={false}
               mx={2}
+              id="onboarding-skip-button"
             >
               {t("common.skipThisStep")}
             </Button>
@@ -151,7 +152,7 @@ class SetPassword extends PureComponent<Props, State> {
               onClick={this.handleSave}
               disabled={!this.isValid() || !newPassword.length || !confirmPassword.length}
               primary
-              id="modal-continue-button"
+              id="onboarding-continue-button"
             >
               {t("common.continue")}
             </Button>

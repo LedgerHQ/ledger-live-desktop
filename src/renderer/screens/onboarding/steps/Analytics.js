@@ -81,15 +81,13 @@ class Analytics extends PureComponent<StepProps, State> {
           deviceType={model.productName}
         />
         <StepContainerInner>
-          <Title data-e2e="onboarding_title">{t("onboarding.analytics.title")}</Title>
+          <Title>{t("onboarding.analytics.title")}</Title>
           <Description>{t("onboarding.analytics.desc")}</Description>
           <Box mt={5}>
-            <Container>
+            <Container id="onboarding-analytics-data">
               <Box>
                 <Box horizontal mb={1}>
-                  <AnalyticsTitle data-e2e="analytics_techData">
-                    {t("onboarding.analytics.technicalData.title")}
-                  </AnalyticsTitle>
+                  <AnalyticsTitle>{t("onboarding.analytics.technicalData.title")}</AnalyticsTitle>
                   <LearnMoreWrapper>
                     <FakeLink
                       underline
@@ -97,7 +95,6 @@ class Analytics extends PureComponent<StepProps, State> {
                       color="palette.text.shade80"
                       ml={2}
                       onClick={this.handleTechnicalDataModal}
-                      data-e2e="analytics_techData_Link"
                     >
                       {t("common.learnMore")}
                     </FakeLink>
@@ -112,12 +109,10 @@ class Analytics extends PureComponent<StepProps, State> {
                 <Switch disabled isChecked />
               </Box>
             </Container>
-            <Container>
+            <Container id="onboarding-analytics-share">
               <Box>
                 <Box horizontal mb={1}>
-                  <AnalyticsTitle data-e2e="analytics_shareAnalytics">
-                    {t("onboarding.analytics.shareAnalytics.title")}
-                  </AnalyticsTitle>
+                  <AnalyticsTitle>{t("onboarding.analytics.shareAnalytics.title")}</AnalyticsTitle>
                   <LearnMoreWrapper>
                     <FakeLink
                       style={{ textDecoration: "underline" }}
@@ -125,7 +120,6 @@ class Analytics extends PureComponent<StepProps, State> {
                       color="palette.text.shade80"
                       ml={2}
                       onClick={this.handleShareAnalyticsModal}
-                      data-e2e="analytics_shareAnalytics_Link"
                     >
                       {t("common.learnMore")}
                     </FakeLink>
@@ -145,12 +139,10 @@ class Analytics extends PureComponent<StepProps, State> {
                 <Switch isChecked={analyticsToggle} onChange={this.handleAnalyticsToggle} />
               </Box>
             </Container>
-            <Container>
+            <Container id="onboarding-analytics-logs">
               <Box>
                 <Box mb={1}>
-                  <AnalyticsTitle data-e2e="analytics_reportBugs">
-                    {t("onboarding.analytics.sentryLogs.title")}
-                  </AnalyticsTitle>
+                  <AnalyticsTitle>{t("onboarding.analytics.sentryLogs.title")}</AnalyticsTitle>
                 </Box>
                 <AnalyticsText>{t("onboarding.analytics.sentryLogs.desc")}</AnalyticsText>
               </Box>
@@ -201,6 +193,7 @@ export const AnalyticsText: ThemedComponent<{}> = styled(Box).attrs(() => ({
   fontSize: 3,
   textAlign: "left",
   color: "palette.text.shade80",
+  className: "analytics-text",
 }))`
   max-width: 400px;
 `;
@@ -210,6 +203,7 @@ export const AnalyticsTitle: ThemedComponent<{}> = styled(Box).attrs(() => ({
   fontSize: 4,
   textAlign: "left",
   color: "palette.text.shade100",
+  className: "analytics-title",
 }))``;
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
