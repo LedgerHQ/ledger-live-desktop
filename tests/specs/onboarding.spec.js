@@ -1,17 +1,28 @@
 import { applicationProxy } from "../applicationProxy";
 import OnboardingPage from "../po/onboarding.page";
 import ModalPage from "../po/modal.page";
-import onboardingData from "../data/onboarding/";
+import GenuinePage from "../po/genuine.page";
+import PasswordPage from "../po/password.page";
+import AnalyticsPage from "../po/analytics.page";
+import data from "../data/onboarding/";
+
+jest.setTimeout(5000);
 
 describe("When I launch the app for the first time", () => {
   let app;
   let onboardingPage;
   let modalPage;
+  let genuinePage;
+  let passwordPage;
+  let analyticsPage;
 
   beforeAll(() => {
-    app = applicationProxy();
+    app = applicationProxy(null, { MOCK: true });
     onboardingPage = new OnboardingPage(app);
     modalPage = new ModalPage(app);
+    genuinePage = new GenuinePage(app);
+    passwordPage = new PasswordPage(app);
+    analyticsPage = new AnalyticsPage(app);
     return app.start();
   });
 
@@ -27,12 +38,12 @@ describe("When I launch the app for the first time", () => {
       .browserWindow.isMinimized()
       .then(minimized => expect(minimized).toBe(false))
       .browserWindow.isVisible()
-      .then(visible => expect(visible).toBe(false))
+      .then(visible => expect(visible).toBe(true))
       .browserWindow.isFocused()
-      .then(focused => expect(focused).toBe(false))
+      .then(focused => expect(focused).toBe(true))
       .getTitle()
       .then(title => {
-        expect(title).toBe(onboardingData.appTitle);
+        expect(title).toBe(data.appTitle);
       });
   });
 
@@ -52,24 +63,24 @@ describe("When I launch the app for the first time", () => {
     it("should propose to change the theme", async () => {
       expect(await onboardingPage.isVisible()).toBe(true);
       expect(await onboardingPage.logo.isVisible()).toBe(true);
-      expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.welcomeTitle);
-      expect(await onboardingPage.pageDescription.getText()).toBe(onboardingData.welcomeDesc);
+      expect(await onboardingPage.pageTitle.getText()).toBe(data.welcome.title);
+      expect(await onboardingPage.pageDescription.getText()).toBe(data.welcome.description);
     });
 
     describe("When I change the theme", () => {
       it("should change the appearance to dusk", async () => {
         await onboardingPage.setTheme("dusk");
-        expect(await onboardingPage.getThemeColor()).toBe(onboardingData.duskColor);
+        expect(await onboardingPage.getThemeColor()).toBe(data.duskColor);
       });
 
       it("should change the appearance to dark", async () => {
         await onboardingPage.setTheme("dark");
-        expect(await onboardingPage.getThemeColor()).toBe(onboardingData.darkColor);
+        expect(await onboardingPage.getThemeColor()).toBe(data.darkColor);
       });
 
       it("should change the appearance to light", async () => {
         await onboardingPage.setTheme("light");
-        expect(await onboardingPage.getThemeColor()).toBe(onboardingData.lightColor);
+        expect(await onboardingPage.getThemeColor()).toBe(data.lightColor);
       });
     });
   });
@@ -78,17 +89,17 @@ describe("When I launch the app for the first time", () => {
     it("should display different options", async () => {
       await onboardingPage.getStarted();
       expect(await onboardingPage.logo.isVisible()).toBe(true);
-      expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.getStartedTitle);
+      expect(await onboardingPage.pageTitle.getText()).toBe(data.getStartedTitle);
       expect(await onboardingPage.newDeviceButton.isVisible()).toBe(true);
       expect(await onboardingPage.restoreDeviceButton.isVisible()).toBe(true);
       expect(await onboardingPage.initializedDeviceButton.isVisible()).toBe(true);
       expect(await onboardingPage.noDeviceButton.isVisible()).toBe(true);
     });
 
-    describe("Setup new device flow", () => {
+    describe("When I start 'Setup new device' flow", () => {
       it("should allow to setup new device (nanoX)", async () => {
         await onboardingPage.selectConfiguration("new");
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.selectDeviceTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.selectDeviceTitle);
         expect(await onboardingPage.nanoX.isVisible()).toBe(true);
         expect(await onboardingPage.nanoS.isVisible()).toBe(true);
         expect(await onboardingPage.blue.isVisible()).toBe(true);
@@ -97,42 +108,42 @@ describe("When I launch the app for the first time", () => {
       });
 
       it("should help user to setup a new device", async () => {
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.choosePinTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.choosePinTitle);
         await onboardingPage.continue();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.saveSeedTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.saveSeedTitle);
         await onboardingPage.continue();
       });
 
       it("should ask to fill a security checklist", async () => {
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.securityTitle);
-        expect(await onboardingPage.pageDescription.getText()).toBe(onboardingData.securityDesc2);
-        await onboardingPage.genuineCheckPin("yes");
-        await onboardingPage.genuineCheckSeed("yes");
-        await onboardingPage.genuineCheck();
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.genuine.title);
+        expect(await onboardingPage.pageDescription.getText()).toBe(data.genuine.description2);
+        await genuinePage.checkPin(true);
+        await genuinePage.checkSeed(true);
+        await genuinePage.check();
       });
 
       it("should display a modal to perform a genuine check", async () => {
         expect(await modalPage.isVisible()).toBe(true);
-        expect(await modalPage.title.getText()).toBe(onboardingData.genuineModalTitle);
+        expect(await modalPage.title.getText()).toBe(data.genuine.modalTitle);
         await modalPage.closeButton.click();
       });
 
       it("should be able to browse to previous steps", async () => {
         await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.saveSeedTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.saveSeedTitle);
         await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.choosePinTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.choosePinTitle);
         await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.selectDeviceTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.selectDeviceTitle);
         await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.getStartedTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.getStartedTitle);
       });
     });
 
-    describe("Restore device flow", () => {
+    describe("When I start 'Restore device' flow", () => {
       it("should allow to restore a device (blue)", async () => {
         await onboardingPage.selectConfiguration("restore");
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.selectDeviceTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.selectDeviceTitle);
         expect(await onboardingPage.nanoX.isVisible()).toBe(true);
         expect(await onboardingPage.nanoS.isVisible()).toBe(true);
         expect(await onboardingPage.blue.isVisible()).toBe(true);
@@ -141,102 +152,42 @@ describe("When I launch the app for the first time", () => {
       });
 
       it("should help user to restore a device", async () => {
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.choosePinTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.choosePinTitle);
         await onboardingPage.continue();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.enterSeedTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.enterSeedTitle);
         await onboardingPage.continue();
       });
 
       it("should ask to fill a security checklist", async () => {
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.securityTitle);
-        expect(await onboardingPage.pageDescription.getText()).toBe(onboardingData.securityDesc);
-        await onboardingPage.genuineCheckPin("yes");
-        await onboardingPage.genuineCheckSeed("yes");
-        await onboardingPage.genuineCheck();
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.genuine.title);
+        expect(await onboardingPage.pageDescription.getText()).toBe(data.genuine.description);
+        await genuinePage.checkPin(true);
+        await genuinePage.checkSeed(true);
+        await genuinePage.check();
       });
 
       it("should display a modal to perform a genuine check", async () => {
         expect(await modalPage.isVisible()).toBe(true);
-        expect(await modalPage.title.getText()).toBe(onboardingData.genuineModalTitle);
+        expect(await modalPage.title.getText()).toBe(data.modalTitle);
         await modalPage.closeButton.click();
       });
 
       it("should be able to browse to previous steps", async () => {
         await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.enterSeedTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.enterSeedTitle);
         await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.choosePinTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.choosePinTitle);
         await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.selectDeviceTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.selectDeviceTitle);
         await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.getStartedTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.getStartedTitle);
       });
     });
 
-    describe("Initialized device flow", () => {
-      it("should allow to use an initialized device (nanoS)", async () => {
-        await onboardingPage.selectConfiguration("initialized");
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.selectDeviceTitle);
-        expect(await onboardingPage.nanoX.isVisible()).toBe(true);
-        expect(await onboardingPage.nanoS.isVisible()).toBe(true);
-        expect(await onboardingPage.blue.isVisible()).toBe(true);
-        await onboardingPage.selectDevice("nanos");
-        await onboardingPage.continue();
-      });
-
-      describe("When it ask to fill a security checklist", () => {
-        it("should fail if PIN not choosen by user", async () => {
-          expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.securityTitle);
-          await onboardingPage.genuineCheckPin("no");
-          expect(await onboardingPage.pageTitle.getText()).toBe(
-            onboardingData.genuinePinErrorTitle,
-          );
-          expect(await onboardingPage.pageDescription.getText()).toBe(
-            onboardingData.genuinePinErrorDesc,
-          );
-          expect(await onboardingPage.contactUsButton.isVisible()).toBe(true);
-          await onboardingPage.back();
-        });
-
-        it("should fail if SEED not choosen by user", async () => {
-          await onboardingPage.genuineCheckPin("yes");
-          await onboardingPage.genuineCheckSeed("no");
-          expect(await onboardingPage.pageTitle.getText()).toBe(
-            onboardingData.genuineSeedErrorTitle,
-          );
-          expect(await onboardingPage.pageDescription.getText()).toBe(
-            onboardingData.genuineSeedErrorDesc,
-          );
-          expect(await onboardingPage.contactUsButton.isVisible()).toBe(true);
-          await onboardingPage.back();
-        });
-
-        it("should success if all requirements have been met", async () => {
-          expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.securityTitle);
-          await onboardingPage.genuineCheckPin("yes");
-          await onboardingPage.genuineCheckSeed("yes");
-          await onboardingPage.genuineCheck();
-        });
-
-        it("should display a modal to perform a genuine check", async () => {
-          expect(await modalPage.isVisible()).toBe(true);
-          expect(await modalPage.title.getText()).toBe(onboardingData.genuineModalTitle);
-          await modalPage.closeButton.click();
-        });
-
-        it("should be able to browse to previous steps", async () => {
-          await onboardingPage.back();
-          expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.selectDeviceTitle);
-          await onboardingPage.back();
-          expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.getStartedTitle);
-        });
-      });
-    });
-
-    describe("No device flow", () => {
+    describe("When I start 'No device' flow", () => {
       it("should display a menu", async () => {
         await onboardingPage.selectConfiguration("nodevice");
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.noDeviceTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.noDeviceTitle);
         expect(await onboardingPage.buyNewButton.isVisible()).toBe(true);
         expect(await onboardingPage.trackOrderButton.isVisible()).toBe(true);
         expect(await onboardingPage.learnMoreButton.isVisible()).toBe(true);
@@ -244,7 +195,146 @@ describe("When I launch the app for the first time", () => {
 
       it("should be able to browse to previous steps", async () => {
         await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.getStartedTitle);
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.getStartedTitle);
+      });
+    });
+
+    describe("When I start 'Initialized device' flow", () => {
+      it("should allow to use an initialized device (nanoS)", async () => {
+        await onboardingPage.selectConfiguration("initialized");
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.selectDeviceTitle);
+        expect(await onboardingPage.nanoX.isVisible()).toBe(true);
+        expect(await onboardingPage.nanoS.isVisible()).toBe(true);
+        expect(await onboardingPage.blue.isVisible()).toBe(true);
+        await onboardingPage.selectDevice("nanos");
+        await onboardingPage.continue();
+      });
+
+      describe("When it display 'Security checklist' form", () => {
+        it("should fail if PIN not choosen by user", async () => {
+          expect(await onboardingPage.pageTitle.getText()).toBe(data.genuine.title);
+          await genuinePage.checkPin(false);
+          expect(await onboardingPage.pageTitle.getText()).toBe(data.genuine.pinError.title);
+          expect(await onboardingPage.pageDescription.getText()).toBe(
+            data.genuine.pinError.description,
+          );
+          expect(await onboardingPage.contactUsButton.isVisible()).toBe(true);
+          await onboardingPage.back();
+        });
+
+        it("should fail if SEED not choosen by user", async () => {
+          await genuinePage.checkPin(true);
+          await genuinePage.checkSeed(false);
+          expect(await onboardingPage.pageTitle.getText()).toBe(data.genuine.seedError.title);
+          expect(await onboardingPage.pageDescription.getText()).toBe(
+            data.genuine.seedError.description,
+          );
+          expect(await onboardingPage.contactUsButton.isVisible()).toBe(true);
+          await onboardingPage.back();
+        });
+      });
+
+      describe("When all security checklist requirements have been met", () => {
+        it("should display a modal", async () => {
+          expect(await onboardingPage.pageTitle.getText()).toBe(data.genuine.title);
+          await genuinePage.checkPin(true);
+          await genuinePage.checkSeed(true);
+          await genuinePage.check();
+          expect(await modalPage.isVisible()).toBe(true);
+        });
+
+        it("should perform a genuine check", async () => {
+          expect(await modalPage.title.getText()).toBe(data.genuine.modalTitle);
+          /* MOCKED PART TO HANDLE GENUINE CHECK */
+        });
+
+        /*
+        it("on failure, should ...", async () => {
+          TODO: MOCK
+        });
+        */
+
+        it("on success, should close the modal and change button into label", async () => {
+          expect(await modalPage.isVisible(true)).toBe(true);
+          expect(await genuinePage.checkLabel.getText()).toBe(data.genuine.checkLabel);
+        });
+      });
+    });
+
+    describe("When it displays 'Password' form", () => {
+      it("should have a title and a description", async () => {
+        await onboardingPage.continue();
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.password.title);
+        expect(await onboardingPage.pageDescription.getText()).toBe(data.password.description);
+      });
+
+      it("should be possible to skip this step", async () => {
+        await onboardingPage.skip();
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.analytics.title);
+        expect(await onboardingPage.pageDescription.getText()).toBe(data.analytics.description);
+        await onboardingPage.back();
+      });
+
+      it("should disable continue button if passwords don't match", async () => {
+        expect(await onboardingPage.continueButton.isEnabled()).toBe(false);
+        await passwordPage.newPasswordInput.addValue(data.password.new);
+        expect(await onboardingPage.continueButton.isEnabled()).toBe(false);
+        await passwordPage.confirmPasswordInput.addValue(data.password.bad);
+        expect(await onboardingPage.continueButton.isEnabled()).toBe(false);
+        expect(await passwordPage.inputError.getText()).toBe(data.password.mismatchError);
+      });
+
+      it("should enable continue button if passwords match", async () => {
+        // FIXME: setValue() is not working so we use backspace to clear the input field.
+        await passwordPage.confirmPasswordInput.addValue("\uE003\uE003\uE003\uE003");
+        await passwordPage.confirmPasswordInput.addValue(data.password.confirm);
+        expect(await onboardingPage.continueButton.isEnabled()).toBe(true);
+      });
+    });
+
+    describe("When it displays 'Bugs and Analytics' form", () => {
+      it("should ask to send analytics data", async () => {
+        await onboardingPage.continue();
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.analytics.title);
+        expect(await onboardingPage.pageDescription.getText()).toBe(data.analytics.description);
+      });
+
+      it("data", async () => {
+        expect(await analyticsPage.dataTitle.getText()).toBe(data.analytics.data.title);
+        expect(await analyticsPage.dataText.getText()).toBe(data.analytics.data.text);
+        expect(await analyticsPage.dataFakeLink.isEnabled()).toBe(true);
+        await analyticsPage.dataFakeLink.click();
+        expect(await modalPage.isVisible()).toBe(true);
+        expect(await modalPage.title.getText()).toBe(data.analytics.data.modalTitle);
+        await modalPage.close();
+        expect(await modalPage.isVisible(true)).toBe(true);
+        expect(await analyticsPage.dataSwitch.isEnabled()).toBe(false);
+      });
+
+      it("share", async () => {
+        expect(await analyticsPage.shareTitle.getText()).toBe(data.analytics.share.title);
+        expect(await analyticsPage.shareText.getText()).toBe(data.analytics.share.text);
+        expect(await analyticsPage.shareFakeLink.isEnabled()).toBe(true);
+        await analyticsPage.shareFakeLink.click();
+        expect(await modalPage.isVisible()).toBe(true);
+        expect(await modalPage.title.getText()).toBe(data.analytics.share.modalTitle);
+        await modalPage.close();
+        expect(await modalPage.isVisible(true)).toBe(true);
+        expect(await analyticsPage.shareSwitch.isEnabled()).toBe(true);
+      });
+
+      it("logs", async () => {
+        expect(await analyticsPage.logsTitle.getText()).toBe(data.analytics.logs.title);
+        expect(await analyticsPage.logsText.getText()).toBe(data.analytics.logs.text);
+        expect(await analyticsPage.logsSwitch.isEnabled()).toBe(true);
+      });
+    });
+
+    describe("When the onboarding is finished", () => {
+      it("should display the success page", async () => {
+        await onboardingPage.continue();
+        expect(await onboardingPage.pageTitle.getText()).toBe(data.end.title);
+        expect(await onboardingPage.pageDescription.getText()).toBe(data.end.description);
       });
     });
   });
