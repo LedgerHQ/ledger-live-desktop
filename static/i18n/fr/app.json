@@ -585,16 +585,26 @@
     }
   },
   "unfreeze": {
-    "title": "Dégeler",
+    "title": "Unfreeze assets",
     "steps": {
       "amount": {
-        "title": "Dégeler les actifs"
+        "title": "Unfreeze",
+        "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
       },
       "connectDevice": {
         "title": "Appareil"
       },
       "confirmation": {
-        "title": "Confirmation"
+        "title": "Confirmation",
+        "success": {
+          "title": "",
+          "text": "Your assets have been unfrozen successfully. Your Bandwidth points will be decreased and your votes will be canceled.",
+          "continue": "Continue"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
   },
@@ -704,6 +714,7 @@
   "tron": {
     "voting": {
       "manageTP": "Gérer les Tron Power",
+      "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
       "claimRewards": "Réclamer les récompenses",
       "nextRewardsDate": "Les récompenses peuvent être réclamées {{date}}",
       "claimAvailableRewards": "Réclamer {{amount}}",
@@ -1270,7 +1281,8 @@
     "warningWording": {},
     "titleWording": {
       "claimReward": "Veuillez confirmer l'opération sur votre appareil pour réclamer vos récompenses",
-      "freeze": "Veuillez confirmer l'opération sur votre appareil pour geler les ressources"
+      "freeze": "Please confirm the operation on your device to freeze assets",
+      "unfreeze": "Please confirm the operation on your device to unfreeze your assets"
     },
     "recipientWording": {
       "send": "destinataire",

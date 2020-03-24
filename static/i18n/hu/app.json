@@ -585,16 +585,26 @@
     }
   },
   "unfreeze": {
-    "title": "Kiolvasztás",
+    "title": "Unfreeze assets",
     "steps": {
       "amount": {
-        "title": "Eszközök kiolvasztása"
+        "title": "Unfreeze",
+        "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
       },
       "connectDevice": {
         "title": "Eszköz"
       },
       "confirmation": {
-        "title": "Megerősítés"
+        "title": "Megerősítés",
+        "success": {
+          "title": "",
+          "text": "Your assets have been unfrozen successfully. Your Bandwidth points will be decreased and your votes will be canceled.",
+          "continue": "Continue"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
   },
@@ -704,6 +714,7 @@
   "tron": {
     "voting": {
       "manageTP": "Tron Power Kezelése",
+      "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
       "claimRewards": "Jutalmak begyűjtése",
       "nextRewardsDate": "A jutalmak begyűjthetők {{date}}",
       "claimAvailableRewards": "{{amount}} begyűjtése",
@@ -1270,7 +1281,8 @@
     "warningWording": {},
     "titleWording": {
       "claimReward": "Kérlek, erősítsd meg a műveletet az eszközödön a jutalmaid begyűjtéséhez",
-      "freeze": "Kérlek, erősítsd meg a műveletet az eszközödön az eszközök befagyasztásához"
+      "freeze": "Please confirm the operation on your device to freeze assets",
+      "unfreeze": "Please confirm the operation on your device to unfreeze your assets"
     },
     "recipientWording": {
       "send": "fogadó",
