@@ -9,6 +9,7 @@ import "./global.css";
 import type { State } from "~/renderer/reducers";
 import StyleProvider from "~/renderer/styles/StyleProvider";
 import { UpdaterProvider } from "~/renderer/components/Updater/UpdaterContext";
+import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
 import ThrowBlock from "~/renderer/components/ThrowBlock";
 import LiveStyleSheetManager from "~/renderer/styles/LiveStyleSheetManager";
 import Default from "./Default";
@@ -22,11 +23,13 @@ const App = ({ store }: Props) => (
     <Provider store={store}>
       <StyleProvider selectedPalette="light">
         <ThrowBlock>
-          <UpdaterProvider>
-            <Router>
-              <Default />
-            </Router>
-          </UpdaterProvider>
+          <RemoteConfigProvider>
+            <UpdaterProvider>
+              <Router>
+                <Default />
+              </Router>
+            </UpdaterProvider>
+          </RemoteConfigProvider>
         </ThrowBlock>
       </StyleProvider>
     </Provider>

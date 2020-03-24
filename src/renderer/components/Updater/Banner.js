@@ -16,6 +16,8 @@ import TopBanner, { FakeLink } from "~/renderer/components/TopBanner";
 import type { Content } from "~/renderer/components/TopBanner";
 
 import { UpdaterContext } from "./UpdaterContext";
+import { getProgressiveUpdateIndex } from "~/helpers/user";
+import { useRemoteConfig } from "~/renderer/components/RemoteConfig";
 
 export const VISIBLE_STATUS = ["download-progress", "checking", "check-success", "error"];
 
@@ -55,8 +57,17 @@ const UpdaterTopBanner = () => {
   const reDownload = useCallback(() => {
     openURL(urls.liveHome);
   }, []);
+  const remoteConfig = useRemoteConfig();
 
-  if (context) {
+  const progressiveUpdateIndex = getProgressiveUpdateIndex();
+
+  if (remoteConfig) {
+    const deploy = remoteConfig["progressive-update"]["2.0.2"][process.platform];
+
+    console.log(deploy);
+  }
+
+  if (context && remoteConfig) {
     const { status, quitAndInstall, downloadProgress } = context;
 
     if (!VISIBLE_STATUS.includes(status)) return null;

@@ -1,6 +1,7 @@
 // @flow
 
 import uuid from "uuid/v4";
+import seedrandom from "seedrandom"
 
 import { setKey, getKey } from "~/renderer/storage";
 
@@ -28,4 +29,10 @@ export const getUserId = () => {
     return localStorage.getItem("userId");
   }
   throw new Error("user is only to be called from renderer");
+};
+
+export const getProgressiveUpdateIndex = () => {
+  const userId = getUserId();
+  const rng = seedrandom(userId);
+  return rng();
 };
