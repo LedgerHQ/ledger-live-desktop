@@ -9,6 +9,7 @@ const Vote = ({ size }: { size: number }) => (
       stroke="currentColor"
       strokeOpacity="0.5"
       strokeWidth="1.5"
+      fill="none"
     />
     <path
       fillRule="evenodd"

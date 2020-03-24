@@ -2,7 +2,10 @@
 // @flow
 import React, { useCallback } from "react";
 
+import { BigNumber } from "bignumber.js";
+
 import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
+import type { Vote } from "@ledgerhq/live-common/lib/families/tron/types";
 
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 
@@ -16,8 +19,12 @@ import {
 } from "~/renderer/modals/OperationDetails/styledComponents";
 import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box/Box";
-import { useTronSuperRepresentatives, formatVotes } from "./Votes/index";
+import {
+  useTronSuperRepresentatives,
+  formatVotes,
+} from "@ledgerhq/live-common/lib/families/tron/react";
 import Text from "~/renderer/components/Text";
+import FormattedVal from "~/renderer/components/FormattedVal";
 
 const helpURL = "https://support.ledger.com/hc/en-us/articles/360010653260";
 
@@ -34,7 +41,7 @@ function getURLWhatIsThis(op: Operation): ?string {
 }
 
 type OperationsDetailsVotesProps = {
-  votes: Array<{ address: string, count: number }>,
+  votes: ?Array<Vote>,
   account: Account,
 };
 
@@ -53,18 +60,23 @@ const OperationDetailsVotes = ({ votes, account }: OperationsDetailsVotesProps) 
   return (
     <Box>
       <OpDetailsTitle>
-        <Trans i18nKey={"operationDetails.extra.votes"} values={{ number: votes.length }} />
+        <Trans
+          i18nKey={"operationDetails.extra.votes"}
+          values={{ number: votes && votes.length }}
+        />
       </OpDetailsTitle>
 
-      {formattedVotes &&
-        formattedVotes.map(({ count, validator: { address, name } = {} }, i) => (
-          <OpDetailsData key={address}>
+      {sp.length > 0 &&
+        formattedVotes &&
+        formattedVotes.length > 0 &&
+        formattedVotes.map(({ voteCount, address, validator }, i) => (
+          <OpDetailsData key={address + i}>
             <OpDetailsVoteData>
               <Box>
                 <Text>
                   <Trans
                     i18nKey="operationDetails.extra.votesAddress"
-                    values={{ votes: count, name }}
+                    values={{ votes: voteCount, name: validator && validator.name }}
                   >
                     <b>{""}</b>
                     {""}
@@ -94,24 +106,38 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
 
       return <OperationDetailsVotes votes={votes} account={account} />;
     }
-    /** @TODO use formatted number value for the amount */
     case "FREEZE":
       return (
         <Box>
           <OpDetailsTitle>
             <Trans i18nKey="operationDetails.extra.frozenAmount" />
           </OpDetailsTitle>
-          <OpDetailsData>{extra.frozenAmount}</OpDetailsData>
+          <OpDetailsData>
+            <FormattedVal
+              val={BigNumber(extra.frozenAmount)}
+              unit={account.unit}
+              showCode
+              fontSize={4}
+              color="palette.text.shade60"
+            />
+          </OpDetailsData>
         </Box>
       );
-    /** @TODO use formatted number value for the amount */
     case "UNFREEZE":
       return (
         <Box>
           <OpDetailsTitle>
             <Trans i18nKey="operationDetails.extra.unfreezeAmount" />
           </OpDetailsTitle>
-          <OpDetailsData>{extra.unfreezeAmount}</OpDetailsData>
+          <OpDetailsData>
+            <FormattedVal
+              val={BigNumber(extra.unfreezeAmount)}
+              unit={account.unit}
+              showCode
+              fontSize={4}
+              color="palette.text.shade60"
+            />
+          </OpDetailsData>
         </Box>
       );
     default:

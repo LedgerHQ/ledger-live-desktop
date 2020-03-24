@@ -1,25 +1,25 @@
 // @flow
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import { createStructuredSelector } from "reselect";
-import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
-import Track from "~/renderer/analytics/Track";
+import { BigNumber } from "bignumber.js";
 
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
-
+import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
-import type { StepId, StepProps, St } from "./types";
 import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
 import type { TFunction } from "react-i18next";
 import type { Device } from "~/renderer/reducers/devices";
+import type { StepId, StepProps, St } from "./types";
 
-import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 
+import Track from "~/renderer/analytics/Track";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 
@@ -58,20 +58,20 @@ type Props = {|
 const createSteps = (): Array<St> => [
   {
     id: "amount",
-    label: <Trans i18nKey="freeze.steps.amount.title" />,
+    label: <Trans i18nKey="unfreeze.steps.amount.title" />,
     component: StepAmount,
     noScroll: true,
     footer: StepAmountFooter,
   },
   {
     id: "connectDevice",
-    label: <Trans i18nKey="freeze.steps.connectDevice.title" />,
+    label: <Trans i18nKey="unfreeze.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
     onBack: ({ transitionTo }: StepProps) => transitionTo("rewards"),
   },
   {
     id: "confirmation",
-    label: <Trans i18nKey="freeze.steps.confirmation.title" />,
+    label: <Trans i18nKey="unfreeze.steps.confirmation.title" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
   },
@@ -113,13 +113,17 @@ const Body = ({
   } = useBridgeTransaction(() => {
     const { account, parentAccount } = params;
 
+    const { tronResources: { frozen: { bandwidth } = {} } = {} } = account;
+
+    const UnfreezeBandwidth = BigNumber((bandwidth && bandwidth.amount) || 0);
+
     const bridge = getAccountBridge(account, parentAccount);
 
     const t = bridge.createTransaction(account);
 
     const transaction = bridge.updateTransaction(t, {
-      mode: "freeze",
-      resource: "BANDWIDTH",
+      mode: "unfreeze",
+      resource: UnfreezeBandwidth.gt(0) ? "BANDWIDTH" : "ENERGY",
     });
 
     return { account, parentAccount, transaction };
@@ -154,10 +158,15 @@ const Body = ({
     [account],
   );
 
-  const error = transactionError || bridgeError;
+  const statusError = useMemo(() => status.errors && Object.values(status.errors)[0], [
+    status.errors,
+  ]);
+
+  const error =
+    transactionError || bridgeError || (statusError instanceof Error ? statusError : null);
 
   const stepperProps = {
-    title: t("freeze.title"),
+    title: t("unfreeze.title"),
     device,
     account,
     parentAccount,
@@ -187,7 +196,7 @@ const Body = ({
   return (
     <Stepper {...stepperProps}>
       <SyncSkipUnderPriority priority={100} />
-      <Track onUnmount event="CloseModalFreeze" />
+      <Track onUnmount event="CloseModalUnfreeze" />
     </Stepper>
   );
 };

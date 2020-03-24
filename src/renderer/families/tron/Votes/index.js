@@ -1,11 +1,18 @@
 // @flow
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 
-import { getTronSuperRepresentatives, getNextVotingDate } from "@ledgerhq/live-common/lib/api/Tron";
+import {
+  useTronSuperRepresentatives,
+  useNextVotingDate,
+  formatVotes,
+  getNextRewardDate,
+} from "@ledgerhq/live-common/lib/families/tron/react";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
@@ -19,7 +26,6 @@ import Header from "./Header";
 import Row from "./Row";
 import Footer from "./Footer";
 
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { BigNumber } from "bignumber.js";
 import moment from "moment";
 import ToolTip from "~/renderer/components/Tooltip";
@@ -41,62 +47,20 @@ const Wrapper = styled(Box).attrs(() => ({
   align-items: center;
 `;
 
-// @TODO move this to common
-export const useTronSuperRepresentatives = () => {
-  const [sp, setSp] = useState([]);
-
-  useEffect(() => {
-    getTronSuperRepresentatives().then(setSp);
-  }, []);
-
-  return sp;
-};
-
-// @TODO move this to common
-export const formatVotes = (votes: ?Array<any>, superRepresentatives: ?Array<any>): Array<any> => {
-  return votes
-    ? votes.map(({ address, ...rest }) => ({
-        validator: superRepresentatives && superRepresentatives.find(sp => sp.address === address),
-        address,
-        ...rest,
-      }))
-    : [];
-};
-
-// @TODO move this to common
-const useNextVotingDate = () => {
-  const [nextVotingDate, setNextVotingDate] = useState("");
-  useEffect(() => {
-    getNextVotingDate().then(date => setNextVotingDate(moment(date).fromNow()));
-  }, []);
-
-  return nextVotingDate;
-};
-
-// @TODO move this to common
-const getNextRewardDate = (account: Account) => {
-  const { operations } = account;
-  const lastRewardOp = operations.find(({ type }) => type === "REWARD");
-
-  if (lastRewardOp) {
-    const { date } = lastRewardOp;
-    if (date) {
-      // add 24hours
-      const nextDate = date.getTime() + 24 * 60 * 60 * 1000;
-      if (nextDate > Date.now()) return nextDate;
-    }
-  }
-
-  return null;
-};
-
 const Delegation = ({ account, parentAccount }: Props) => {
   const dispatch = useDispatch();
 
   const superRepresentatives = useTronSuperRepresentatives();
   const nextVotingDate = useNextVotingDate();
 
-  const { tronResources: { votes, tronPower, unwithdrawnReward } = {} } = account;
+  const formattedVotingDate = useMemo(() => moment(nextVotingDate).fromNow(), [nextVotingDate]);
+
+  const unit = getAccountUnit(account);
+  /** min 1TRX transactions */
+  const minAmount = 10 ** unit.magnitude;
+
+  const { tronResources, spendableBalance } = account;
+  const { votes, tronPower, unwithdrawnReward } = tronResources || {};
 
   const formattedUnwidthDrawnReward = formatCurrencyUnit(
     account.unit,
@@ -142,6 +106,9 @@ const Delegation = ({ account, parentAccount }: Props) => {
   );
   const canClaimRewards = hasRewards && !formattedNextRewardDate;
 
+  const earnRewardDisabled =
+    tronPower === 0 && (!spendableBalance || !spendableBalance.gt(minAmount));
+
   return (
     <>
       <Box horizontal alignItems="center" justifyContent="space-between">
@@ -153,7 +120,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
         >
           <Trans i18nKey="tron.voting.header" />
         </Text>
-        {tronPower > 0 && (
+        {tronPower > 0 && (formattedVotes.length > 0 || canClaimRewards) ? (
           <ToolTip
             content={
               !canClaimRewards ? (
@@ -172,7 +139,6 @@ const Delegation = ({ account, parentAccount }: Props) => {
               disabled={!canClaimRewards}
               primary
               onClick={() => {
-                // @TODO open claim rewards transaction modal
                 dispatch(
                   openModal("MODAL_CLAIM_REWARDS", {
                     parentAccount,
@@ -195,7 +161,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
               </Box>
             </Button>
           </ToolTip>
-        )}
+        ) : null}
       </Box>
       {tronPower > 0 && formattedVotes.length > 0 ? (
         <Card p={0} mt={24} mb={6}>
@@ -206,7 +172,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
               validator={validator}
               address={address}
               amount={voteCount}
-              duration={nextVotingDate.toString()}
+              duration={formattedVotingDate}
               percentTP={Number((voteCount * 1e2) / tronPower).toFixed(2)}
               currency={account.currency}
             />
@@ -227,14 +193,18 @@ const Delegation = ({ account, parentAccount }: Props) => {
             </Box>
           </Box>
           <Box>
-            <Button primary onClick={onEarnRewards}>
-              <Box horizontal flow={1} alignItems="center">
-                <IconChartLine size={12} />
-                <Box>
-                  <Trans i18nKey="delegation.title" />
+            <ToolTip
+              content={earnRewardDisabled ? <Trans i18nKey="tron.voting.warnEarnRewards" /> : null}
+            >
+              <Button primary disabled={earnRewardDisabled} onClick={onEarnRewards}>
+                <Box horizontal flow={1} alignItems="center">
+                  <IconChartLine size={12} />
+                  <Box>
+                    <Trans i18nKey="delegation.title" />
+                  </Box>
                 </Box>
-              </Box>
-            </Button>
+              </Button>
+            </ToolTip>
           </Box>
         </Wrapper>
       )}
