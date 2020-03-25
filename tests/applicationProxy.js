@@ -11,9 +11,9 @@ export function getConfigPath() {
   if (platform === "darwin") {
     userDataPath = `${os.homedir()}/Library/Application Support/Ledger Live`;
   } else if (platform === "win32") {
-    userDataPath = "%AppData\\Roaming\\Ledger Live";
+    userDataPath = `${os.homedir()}/AppData/Roaming/Ledger Live`;
   } else {
-    userDataPath = ".config/Ledger live";
+    userDataPath = `${os.homedir()}/.config/Ledger Live`;
   }
   return userDataPath;
 }
@@ -29,7 +29,7 @@ function getAppPath() {
   if (platform === "darwin") {
     appPath = "./dist/mac/Ledger Live.app/Contents/MacOS/Ledger Live";
   } else if (platform === "win32") {
-    appPath = ".\\dist\\win-unpacked\\Ledger Live.exe";
+    appPath = "./dist/win-unpacked/Ledger Live.exe";
   } else {
     appPath = `./dist/ledger-live-desktop-${version}-linux-x86_64.AppImage`;
   }
@@ -38,10 +38,9 @@ function getAppPath() {
 
 export function applicationProxy(userData = null, envVar = {}) {
   const configPath = getConfigPath();
-  if (fs.existsSync(configPath)) {
-    rimraf.sync(configPath);
-    fs.mkdirSync(configPath);
-  }
+
+  fs.existsSync(configPath) ? rimraf.sync(configPath) : fs.mkdirSync(configPath);
+
   if (userData != null) {
     const jsonFile = path.resolve("tests/setups/", userData);
     fs.copyFileSync(jsonFile, `${configPath}/app.json`);
