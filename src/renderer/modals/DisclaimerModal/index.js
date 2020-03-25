@@ -82,6 +82,8 @@ class DisclaimerModal extends PureComponent<Props, State> {
     this.props.onClose();
   }
 
+  onSeedReady = () => this.setState(state => ({ seedReady: !state.seedReady }));
+
   render(): React$Node {
     const { status, firmware, onClose, t, goToNextStep } = this.props;
     const { showUninsWarning } = this.state;
@@ -184,13 +186,8 @@ class DisclaimerModal extends PureComponent<Props, State> {
           renderFooter={() => (
             <Box horizontal justifyContent="flex-end" alignItems="center" style={{ flex: 1 }}>
               {!showUninsWarning ? (
-                <Box
-                  horizontal
-                  alignItems="center"
-                  onClick={() => this.setState(state => ({ seedReady: !state.seedReady }))}
-                  style={{ flex: 1 }}
-                >
-                  <CheckBox isChecked={this.state.seedReady} />
+                <Box horizontal alignItems="center" onClick={this.onSeedReady} style={{ flex: 1 }}>
+                  <CheckBox isChecked={this.state.seedReady} onChange={this.onSeedReady} />
                   <Text
                     ff="Inter|SemiBold"
                     fontSize={4}
