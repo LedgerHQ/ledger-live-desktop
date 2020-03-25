@@ -15,6 +15,9 @@ const Base: ThemedComponent<{
   alignItems: "center",
   justifyContent: "center",
 }))`
+  & input[type="checkbox"] {
+    display: none;
+  }
   outline: none;
   border-radius: ${p => (p.isRadio ? 24 : 4)}px;
   cursor: pointer;
@@ -53,6 +56,7 @@ function CheckBox(props: Props) {
       disabled={disabled}
       onClick={() => onChange && onChange(!isChecked)}
     >
+      <input type="checkbox" disabled={disabled || null} checked={isChecked || null} />
       <Check size={12} />
     </Base>
   );
