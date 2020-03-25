@@ -16,7 +16,6 @@ export const urls = {
   faq: "https://support.ledger.com/hc/en-us",
   terms: "https://www.ledger.com/pages/terms-of-use-and-disclaimer",
   noDeviceBuyNew: "https://www.ledger.com/",
-  noDeviceTrackOrder: "http://order.ledger.com/",
   noDeviceLearnMore: "https://www.ledger.com/",
   managerHelpRequest: "https://support.ledger.com/hc/en-us/articles/360006523674 ",
   contactSupport: "https://support.ledger.com/hc/en-us/requests/new?ticket_form_id=248165",

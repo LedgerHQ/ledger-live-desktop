@@ -4,7 +4,6 @@ import { Trans } from "react-i18next";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import IconCart from "~/renderer/icons/Cart";
-import IconTruck from "~/renderer/icons/Truck";
 import IconInfoCircle from "~/renderer/icons/InfoCircle";
 import Box from "~/renderer/components/Box";
 import GrowScroll from "~/renderer/components/GrowScroll";
@@ -28,14 +27,6 @@ class NoDevice extends PureComponent<StepProps, *> {
         title: t("onboarding.noDevice.buyNew.title"),
         onClick: () => {
           openURL(urls.noDeviceBuyNew);
-        },
-      },
-      {
-        key: "trackOrder",
-        icon: <IconTruck size={20} />,
-        title: t("onboarding.noDevice.trackOrder.title"),
-        onClick: () => {
-          openURL(urls.noDeviceTrackOrder);
         },
       },
       {
