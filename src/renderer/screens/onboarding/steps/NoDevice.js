@@ -11,10 +11,10 @@ import LedgerLiveLogo from "~/renderer/components/LedgerLiveLogo";
 import LedgerLiveImg from "~/renderer/images/ledgerlive-logo.svg";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { OptionFlowCard } from "~/renderer/screens/onboarding/steps/Init";
-import Button from "~/renderer/components/Button";
 import Image from "~/renderer/components/Image";
-import { Title, OnboardingFooterWrapper } from "../sharedComponents";
+import { Title } from "../sharedComponents";
 import type { StepProps } from "..";
+import OnboardingFooter from "~/renderer/screens/onboarding/OnboardingFooter";
 
 class NoDevice extends PureComponent<StepProps, *> {
   render() {
@@ -63,11 +63,7 @@ class NoDevice extends PureComponent<StepProps, *> {
             </Box>
           </Box>
         </GrowScroll>
-        <OnboardingFooterWrapper>
-          <Button outlineGrey onClick={() => prevStep()} mr="auto" id="onboarding-back-button">
-            <Trans i18nKey="common.back" />
-          </Button>
-        </OnboardingFooterWrapper>
+        <OnboardingFooter prevStep={prevStep} />
       </Box>
     );
   }

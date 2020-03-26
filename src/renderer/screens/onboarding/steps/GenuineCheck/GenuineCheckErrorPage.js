@@ -11,11 +11,11 @@ import LedgerNanoX from "~/renderer/images/ledger-nano-x-error-onb.svg";
 import type { OnboardingState } from "~/renderer/reducers/onboarding";
 import InvertableImg from "~/renderer/components/InvertableImg";
 import Box from "~/renderer/components/Box";
-import Button from "~/renderer/components/Button";
 import ExternalLinkButton from "~/renderer/components/ExternalLinkButton";
 import TrackPage from "~/renderer/analytics/TrackPage";
 
-import { Title, Description, OnboardingFooterWrapper } from "../../sharedComponents";
+import { Title, Description } from "../../sharedComponents";
+import OnboardingFooter from "~/renderer/screens/onboarding/OnboardingFooter";
 
 const Img = ({ type }: { type: string }) => {
   switch (type) {
@@ -89,18 +89,18 @@ class GenuineCheckErrorPage extends PureComponent<Props, *> {
         <Box grow alignItems="center" justifyContent="center">
           {this.renderErrorPage()}
         </Box>
-        <OnboardingFooterWrapper>
-          <Button outlineGrey onClick={() => redoGenuineCheck()} id="onboarding-back-button">
-            <Trans i18nKey="common.back" />
-          </Button>
-          <ExternalLinkButton
-            danger
-            ml="auto"
-            label={<Trans i18nKey="onboarding.genuineCheck.buttons.contactSupport" />}
-            url={urls.contactSupport}
-            id="onboarding-contactus-button"
-          />
-        </OnboardingFooterWrapper>
+        <OnboardingFooter
+          prevStep={redoGenuineCheck}
+          right={
+            <ExternalLinkButton
+              danger
+              ml="auto"
+              label={<Trans i18nKey="onboarding.genuineCheck.buttons.contactSupport" />}
+              url={urls.contactSupport}
+              id="onboarding-contactus-button"
+            />
+          }
+        />
       </Box>
     );
   }
