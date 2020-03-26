@@ -90,7 +90,7 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
                   alignItems="center"
                   onClick={onSwitchAccept}
                 >
-                  <CheckBox isChecked={accepted} id="terms-checkbox" />
+                  <CheckBox isChecked={accepted} onChange={onSwitchAccept} id="terms-checkbox" />
                   <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
                     <Trans i18nKey="Terms.switchLabel" />
                   </Text>

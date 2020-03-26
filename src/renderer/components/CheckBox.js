@@ -54,7 +54,10 @@ function CheckBox(props: Props) {
       isRadio={isRadio}
       isChecked={isChecked}
       disabled={disabled}
-      onClick={() => onChange && onChange(!isChecked)}
+      onClick={e => {
+        e.stopPropagation();
+        onChange && onChange(!isChecked);
+      }}
     >
       <input type="checkbox" disabled={disabled || null} checked={isChecked || null} />
       <Check size={12} />
