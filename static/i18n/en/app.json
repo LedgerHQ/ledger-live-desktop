@@ -757,7 +757,25 @@
       },
       "vote": {
         "title": "Vote",
-        "description": "Cast votes for Super Representatives using your TRON Power to earn TRX rewards."
+        "description": "Cast votes for Super Representatives using your TRON Power to earn TRX rewards.",
+        "steps": {
+          "vote": {
+            "title": "Cast votes",
+            "description": "Vote for one or more Super Representatives to start earning rewards.",
+            "nextButton": "Cast Votes",
+            "info": {
+              "message": "Super Representatives or candidates?",
+              "superRepresentative": {
+                "title": "Super Representatives",
+                "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+              },
+              "candidates": {
+                "title": "Candidates",
+                "description": "127 individuals elected through voting by the entire token holder community. Votes are updated once every 6 hours."
+              }
+            }
+          }
+        }
       }
     }
   },
