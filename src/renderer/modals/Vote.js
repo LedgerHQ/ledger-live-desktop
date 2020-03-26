@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -9,6 +9,7 @@ import { openModal, closeModal } from "~/renderer/actions/modals";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
+import CheckBox from "~/renderer/components/CheckBox";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
 import Popover from "~/renderer/components/Popover";
 import Text from "~/renderer/components/Text";
@@ -34,6 +35,12 @@ export default function CastVotesModal({ name, account, parentAccount }: Props) 
       }),
     );
   }, [parentAccount, account, dispatch, name]);
+
+  const [showAgain, setShowAgain] = useState(false);
+
+  function onClickShowAgain() {
+    setShowAgain(!showAgain);
+  }
 
   return (
     <Modal
@@ -99,8 +106,18 @@ export default function CastVotesModal({ name, account, parentAccount }: Props) 
           )}
           renderFooter={() => (
             <>
+              <Box horizontal alignItems="center" onClick={onClickShowAgain} style={{ flex: 1 }}>
+                <CheckBox isChecked={showAgain} />
+                <Text
+                  ff="Inter|SemiBold"
+                  fontSize={4}
+                  style={{ marginLeft: 8, overflowWrap: "break-word", flex: 1 }}
+                >
+                  {t("tron.manage.vote.steps.vote.footer.doNotShowAgain")}
+                </Text>
+              </Box>
               <Button primary onClick={onNext}>
-                {t("tron.manage.vote.steps.vote.nextButton")}
+                {t("tron.manage.vote.steps.vote.footer.next")}
               </Button>
             </>
           )}

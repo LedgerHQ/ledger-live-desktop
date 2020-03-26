@@ -762,7 +762,10 @@
           "vote": {
             "title": "Cast votes",
             "description": "Vote for one or more Super Representatives to start earning rewards.",
-            "nextButton": "Cast Votes",
+            "footer": {
+              "doNotShowAgain": "Don't show again",
+              "next": "Cast Votes"
+            },
             "info": {
               "message": "Super Representatives or candidates?",
               "superRepresentative": {
