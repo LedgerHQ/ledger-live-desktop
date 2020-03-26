@@ -13,6 +13,7 @@ import {
 } from "@ledgerhq/live-common/lib/families/tron/react";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
+import { getDefaultExplorerView } from "@ledgerhq/live-common/lib/explorers";
 
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
@@ -56,6 +57,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
   const formattedVotingDate = useMemo(() => moment(nextVotingDate).fromNow(), [nextVotingDate]);
 
   const unit = getAccountUnit(account);
+  const explorerView = getDefaultExplorerView(account.currency);
   /** min 1TRX transactions */
   const minAmount = 10 ** unit.magnitude;
 
@@ -79,12 +81,13 @@ const Delegation = ({ account, parentAccount }: Props) => {
   const onDelegate = useCallback(
     () =>
       dispatch(
-        openModal("MODAL_DELEGATE_TRON", {
+        /** @TODO replace MODAL_VOTE_TRON_INFO with the right naming if different */
+        openModal(votes.length > 0 ? "MODAL_VOTE_TRON" : "MODAL_VOTE_TRON_INFO", {
           parentAccount,
           account,
         }),
       ),
-    [account, parentAccount, dispatch],
+    [account, parentAccount, dispatch, votes],
   );
 
   const onEarnRewards = useCallback(
@@ -121,46 +124,58 @@ const Delegation = ({ account, parentAccount }: Props) => {
           <Trans i18nKey="tron.voting.header" />
         </Text>
         {tronPower > 0 && (formattedVotes.length > 0 || canClaimRewards) ? (
-          <ToolTip
-            content={
-              !canClaimRewards ? (
-                hasRewards && formattedNextRewardDate ? (
-                  <Trans
-                    i18nKey="tron.voting.nextRewardsDate"
-                    values={{ date: formattedNextRewardDate }}
-                  />
-                ) : (
-                  <Trans i18nKey="tron.voting.noRewards" />
-                )
-              ) : null
-            }
-          >
-            <Button
-              disabled={!canClaimRewards}
-              primary
-              onClick={() => {
-                dispatch(
-                  openModal("MODAL_CLAIM_REWARDS", {
-                    parentAccount,
-                    account,
-                    reward: unwithdrawnReward,
-                  }),
-                );
-              }}
-            >
+          <Box horizontal>
+            <Button primary onClick={onDelegate} mr={2}>
               <Box horizontal flow={1} alignItems="center">
-                <ClaimRewards size={12} />
+                <IconChartLine size={12} />
                 <Box>
-                  <Trans
-                    i18nKey={
-                      hasRewards ? "tron.voting.claimAvailableRewards" : "tron.voting.claimRewards"
-                    }
-                    values={{ amount: formattedUnwidthDrawnReward }}
-                  />
+                  <Trans i18nKey="tron.voting.emptyState.vote" />
                 </Box>
               </Box>
             </Button>
-          </ToolTip>
+            <ToolTip
+              content={
+                !canClaimRewards ? (
+                  hasRewards && formattedNextRewardDate ? (
+                    <Trans
+                      i18nKey="tron.voting.nextRewardsDate"
+                      values={{ date: formattedNextRewardDate }}
+                    />
+                  ) : (
+                    <Trans i18nKey="tron.voting.noRewards" />
+                  )
+                ) : null
+              }
+            >
+              <Button
+                disabled={!canClaimRewards}
+                primary
+                onClick={() => {
+                  dispatch(
+                    openModal("MODAL_CLAIM_REWARDS", {
+                      parentAccount,
+                      account,
+                      reward: unwithdrawnReward,
+                    }),
+                  );
+                }}
+              >
+                <Box horizontal flow={1} alignItems="center">
+                  <ClaimRewards size={12} />
+                  <Box>
+                    <Trans
+                      i18nKey={
+                        hasRewards
+                          ? "tron.voting.claimAvailableRewards"
+                          : "tron.voting.claimRewards"
+                      }
+                      values={{ amount: formattedUnwidthDrawnReward }}
+                    />
+                  </Box>
+                </Box>
+              </Button>
+            </ToolTip>
+          </Box>
         ) : null}
       </Box>
       {tronPower > 0 && formattedVotes.length > 0 ? (
@@ -175,6 +190,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
               duration={formattedVotingDate}
               percentTP={Number((voteCount * 1e2) / tronPower).toFixed(2)}
               currency={account.currency}
+              explorerView={explorerView}
             />
           ))}
           <Footer total={tronPower} used={totalVotesUsed} onClick={onDelegate} />
@@ -183,11 +199,18 @@ const Delegation = ({ account, parentAccount }: Props) => {
         <Wrapper horizontal>
           <Box style={{ maxWidth: "65%" }}>
             <Text ff="Inter|Medium|SemiBold" color="palette.text.shade60" fontSize={4}>
-              <Trans i18nKey="delegation.delegationEarn" values={{ name: account.currency.name }} />
+              <Trans
+                i18nKey={
+                  tronPower > 0
+                    ? "tron.voting.emptyState.votesDesc"
+                    : "tron.voting.emptyState.description"
+                }
+                values={{ name: account.currency.name }}
+              />
             </Text>
             <Box mt={2}>
               <LinkWithExternalIcon
-                label={<Trans i18nKey="delegation.howItWorks" />}
+                label={<Trans i18nKey="tron.voting.emptyState.info" />}
                 onClick={() => openURL(urls.delegation)}
               />
             </Box>
@@ -196,11 +219,17 @@ const Delegation = ({ account, parentAccount }: Props) => {
             <ToolTip
               content={earnRewardDisabled ? <Trans i18nKey="tron.voting.warnEarnRewards" /> : null}
             >
-              <Button primary disabled={earnRewardDisabled} onClick={onEarnRewards}>
+              <Button
+                primary
+                disabled={earnRewardDisabled}
+                onClick={tronPower > 0 ? onDelegate : onEarnRewards}
+              >
                 <Box horizontal flow={1} alignItems="center">
                   <IconChartLine size={12} />
                   <Box>
-                    <Trans i18nKey="delegation.title" />
+                    <Trans
+                      i18nKey={tronPower > 0 ? "tron.voting.emptyState.vote" : "delegation.title"}
+                    />
                   </Box>
                 </Box>
               </Button>

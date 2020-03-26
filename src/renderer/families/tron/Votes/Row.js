@@ -3,9 +3,13 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
 
+import { getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
+
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import type { ExplorerView } from "@ledgerhq/live-common/lib/types";
+
 import { openURL } from "~/renderer/linking";
 import Ellipsis from "~/renderer/components/Ellipsis";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import { TableLine } from "./Header";
 
@@ -31,10 +35,19 @@ type Props = {
   duration: string,
   percentTP: string,
   currency: *,
+  explorerView: ?ExplorerView,
 };
 
-const Row = ({ validator, address, amount, duration, percentTP, currency }: Props) => {
-  const srURL = validator && validator.url;
+const Row = ({
+  validator,
+  address,
+  amount,
+  duration,
+  percentTP,
+  currency,
+  explorerView,
+}: Props) => {
+  const srURL = explorerView && getAddressExplorer(explorerView, address);
 
   const openSR = useCallback(() => {
     if (srURL) openURL(srURL);
