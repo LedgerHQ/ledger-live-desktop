@@ -69,6 +69,7 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
           account={account}
           parentAccount={parentAccount}
           transaction={transaction}
+          recipientWording={recipientWording}
           status={status}
         />
       ) : (

@@ -99,7 +99,10 @@ export function StepConfirmationFooter({
   const openVote = useCallback(() => {
     onClose();
     if (account) {
-      openModal("MODAL_OPERATION_DETAILS", {
+      const { tronResources } = account;
+      const { votes } = tronResources || {};
+
+      openModal(votes.length > 0 ? "MODAL_VOTE_TRON" : "MODAL_VOTE_TRON_INFO", {
         accountId: account.id,
         parentId: parentAccount && parentAccount.id,
       });
