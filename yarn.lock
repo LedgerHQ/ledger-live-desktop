@@ -1402,10 +1402,10 @@
     node-pre-gyp "^0.14.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^12.7.3":
-  version "12.7.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.7.3.tgz#e3320a794d217098a8622d881d863defc9b08b02"
-  integrity sha512-1M1+LJX+ycVc8LIZgwHvcQ/RgkX+zAkYHvXPjZsBqo08yoKmpTt/sXyQd1svec1nkgMvknWGlHnRHgwljZR8+A==
+"@ledgerhq/live-common@12.8.0-alpha.0":
+  version "12.8.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.8.0-alpha.0.tgz#4e8dd62fffd88248efc809d828cfbd77d717b236"
+  integrity sha512-R0Oj3ky37PEwvDl5rm3YvqLWVcm96FFE9inomLNtCYNj2EIpY3LBMlMKjjh4Hhy2ULXzD5Z9cpf23FMFTcqyVg==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "5.12.0"
