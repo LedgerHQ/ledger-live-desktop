@@ -174,6 +174,7 @@ describe("When I launch the app for the first time", () => {
         expect(await modalPage.isVisible()).toBe(true);
         expect(await modalPage.title.getText()).toBe(data.genuine.modalTitle);
         await modalPage.closeButton.click();
+        expect(await modalPage.isVisible(true)).toBe(false);
       });
 
       it("should be able to browse to previous steps", async () => {

@@ -37,10 +37,12 @@ export default class ModalPage extends Page {
     return this.app.client.element("#modal-close-button");
   }
 
-  isVisible(reverse = false) {
-    return reverse
-      ? !this.app.client.waitForVisible("#modal-container", 3000, reverse)
-      : this.app.client.waitForVisible("#modal-container", 3000);
+  async isVisible(reverse = false) {
+    const visible = reverse
+      ? await !this.app.client.waitForVisible("#modal-container", 3000, reverse)
+      : await this.app.client.waitForVisible("#modal-container");
+
+    return visible;
   }
 
   close() {
