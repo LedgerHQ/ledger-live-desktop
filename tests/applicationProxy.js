@@ -3,7 +3,6 @@ import fs from "fs";
 import path from "path";
 import rimraf from "rimraf";
 import { Application } from "spectron";
-import electronPath from "electron";
 
 export function getUserPath() {
   const platform = os.platform();
@@ -34,7 +33,7 @@ export function applicationProxy(envVar = {}, userData = null) {
   }
 
   return new Application({
-    path: electronPath,
+    path: "./node_modules/.bin/electron",
     args: [`${process.cwd()}/.webpack/main.bundle.js`],
     chromeDriverArgs: [
       "--disable-extensions",
