@@ -1,8 +1,8 @@
 // @flow
 import invariant from "invariant";
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useState, useRef } from "react";
 import { Trans } from "react-i18next";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { useTronSuperRepresentatives } from "@ledgerhq/live-common/lib/families/tron/react";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
@@ -23,6 +23,9 @@ import Medal from "~/renderer/icons/Medal";
 import Text from "~/renderer/components/Text";
 import ExternalLink from "~/renderer/icons/ExternalLink";
 import Cross from "~/renderer/icons/Cross";
+import Check from "~/renderer/icons/Check";
+import { useThrottledCallback } from "~/renderer/hooks/useDebounce";
+import ExclamationCircle from "~/renderer/icons/ExclamationCircle";
 
 const ScrollContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({
   vertical: true,
@@ -58,6 +61,14 @@ const Row: ThemedComponent<{ active: boolean, disabled: boolean }> = styled(Box)
         position: absolute;
         background-color: ${p.theme.colors.palette.primary.main};
       }`
+      : ""}
+  ${p =>
+    p.disabled
+      ? css`
+          ${InputBox} {
+            pointer-events: none;
+          }
+        `
       : ""}
 `;
 
@@ -99,6 +110,13 @@ const Title = styled(Box).attrs(() => ({
   &:hover > ${IconContainer} {
     opacity: 1;
   }
+  ${Text} {
+    flex: 0 1 auto;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 `;
 
 const SubTitle = styled(Box).attrs(() => ({
@@ -125,6 +143,7 @@ const InputBox = styled(Box).attrs(() => ({
     opacity: 0;
     background-color: rgba(0,0,0,0);
     flex: 0 0 24px;
+    cursor: pointer;
   }
   &:hover > ${IconContainer} {
     opacity: 1;
@@ -136,7 +155,7 @@ const InputBox = styled(Box).attrs(() => ({
 `;
 
 const VoteInput = styled.input.attrs(() => ({
-  type: "text",
+  type: "number",
   step: 1,
   min: 0,
   pattern: "[0-9]",
@@ -148,6 +167,14 @@ const VoteInput = styled.input.attrs(() => ({
   height: 100%;
   padding: 0 6px;
   transition all 200ms ease-in;
+  background-color: rgba(0,0,0,0);
+`;
+
+const Separator = styled.div`
+  margin: 0 10px;
+  height: 13px;
+  width: 1px;
+  background-color: ${p => p.theme.colors.palette.text.shade60};
 `;
 
 type SRRowProps = {
@@ -156,38 +183,55 @@ type SRRowProps = {
   isSR?: boolean,
   value?: number,
   disabled?: boolean,
-  onChange: (vote: number) => void,
+  max: number,
+  onChange: (address: string, vote: number) => void,
   onExternalLink: (address: string) => void,
 };
 
-const SRRow = ({ sr, rank, isSR, value, disabled, onChange, onExternalLink }: SRRowProps) => (
-  <Row disabled={value && disabled} active={!!value}>
-    <IconContainer isSR={isSR}>{isSR ? <Trophy size={16} /> : <Medal size={16} />}</IconContainer>
-    <InfoContainer>
-      <Title onClick={() => onExternalLink(sr.address)}>
-        <Text>{sr.name}</Text>
-        <IconContainer>
-          <ExternalLink size={16} />
+const SRRow = ({ sr, rank, isSR, value, disabled, max, onChange, onExternalLink }: SRRowProps) => {
+  const inputRef = useRef();
+  const onReset = useCallback(() => {
+    onChange(sr.address, 0);
+    if (inputRef.current) inputRef.current.value = 0;
+  }, [onChange, inputRef, sr.address]);
+
+  return (
+    <Row disabled={!value && disabled} active={!!value}>
+      <IconContainer isSR={isSR}>{isSR ? <Trophy size={16} /> : <Medal size={16} />}</IconContainer>
+      <InfoContainer>
+        <Title onClick={() => onExternalLink(sr.address)}>
+          <Text>{`${rank}. ${sr.name || sr.address}`}</Text>
+          <IconContainer>
+            <ExternalLink size={16} />
+          </IconContainer>
+        </Title>
+        <SubTitle>
+          <Trans i18nKey="vote.steps.castVotes.totalVotes" values={{ total: sr.voteCount }}>
+            <b></b>
+          </Trans>
+          {/** @TODO add estimated yield here */}
+        </SubTitle>
+      </InfoContainer>
+      <InputBox active={!!value}>
+        <IconContainer onClick={onReset}>
+          <Cross size={16} />
         </IconContainer>
-      </Title>
-      <SubTitle>
-        <Trans i18nKey="vote.steps.castVotes.rank" values={{ rank }}>
-          <b></b>
-        </Trans>
-        {/** @TODO add estimated yield here */}
-      </SubTitle>
-    </InfoContainer>
-    <Box flex="1" />
-    <InputBox active={!!value}>
-      <IconContainer onClick={() => onChange(0)}>
-        <Cross size={16} />
-      </IconContainer>
-      <VoteInput value={value} disabled={disabled} onChange={e => onChange(e.target.value)} />
-    </InputBox>
-  </Row>
-);
+        <VoteInput
+          /** $FlowFixMe */
+          ref={inputRef}
+          defaultValue={value}
+          disabled={!value && disabled}
+          min={0}
+          {...(max > 0 ? { max } : {})}
+          onChange={e => onChange(sr.address, e.target.value)}
+        />
+      </InputBox>
+    </Row>
+  );
+};
 
 const SR_THRESHOLD = 27;
+const SR_MAX_VOTES = 5;
 
 type Props = {
   votes: Vote[],
@@ -199,16 +243,30 @@ type Props = {
 };
 
 const AmountField = ({ account, onChangeVotes, transaction, status, bridgePending }: Props) => {
-  invariant(account && transaction, "account and transaction required");
+  invariant(account && transaction && account.tronResources, "account and transaction required");
+
+  const formattedVotes = useMemo(
+    () =>
+      transaction.votes.reduce(
+        (sum, { voteCount, address }) => ({ ...sum, [address]: voteCount }),
+        {},
+      ),
+    [transaction.votes],
+  );
+
+  const [votes, setVotes] = useState(formattedVotes);
 
   const explorerView = getDefaultExplorerView(account.currency);
 
-  const { votes } = transaction;
+  const { tronResources } = account;
 
-  const formattedVotes = useMemo(
-    () => votes.reduce((sum, { voteCount, address }) => ({ ...sum, [address]: voteCount }), {}),
-    [votes],
-  );
+  const votesAvailable = useMemo(() => (tronResources ? tronResources.tronPower : 0), [
+    tronResources,
+  ]);
+
+  const votesUsed = Object.values(votes).reduce((sum, voteCount) => sum + Number(voteCount), 0);
+
+  const max = Math.max(0, votesAvailable - votesUsed);
 
   const superRepresentatives = useTronSuperRepresentatives();
   const SR = useMemo(
@@ -226,22 +284,90 @@ const AmountField = ({ account, onChangeVotes, transaction, status, bridgePendin
     [explorerView],
   );
 
+  const onUpdateVote = useThrottledCallback((address: string, count: number) => {
+    const newVotes = votes;
+
+    newVotes[address] = parseInt(Number(count));
+
+    if (count <= 0 || Object.keys(newVotes).length > SR_MAX_VOTES) delete newVotes[address];
+
+    setVotes(newVotes);
+    onChangeVotes(
+      Object.entries(newVotes).map(([address, voteCount]) => ({
+        address,
+        voteCount: Number(voteCount),
+      })),
+    );
+  }, 100);
+
   if (!status) return null;
 
+  const error = Object.values(status.errors)[0];
+
   return (
-    <ScrollContainer>
-      {SR.map(({ sr, rank, isSR }, i) => (
-        <SRRow
-          key={`SR_${sr.address}_${i}`}
-          sr={sr}
-          rank={rank}
-          isSR={isSR}
-          value={formattedVotes[sr.address]}
-          onChange={() => {}}
-          onExternalLink={() => onExternalLink(sr.address)}
-        />
-      ))}
-    </ScrollContainer>
+    <>
+      <Box horizontal alignItems="center" justifyContent="space-between" py={2} px={3}>
+        <Text fontSize={3} ff="Inter|Medium">
+          <Trans i18nKey="vote.steps.castVotes.validators" values={{ total: SR.length }} />
+        </Text>
+        <Box horizontal alignItems="center">
+          {Object.keys(votes).length === SR_MAX_VOTES ? (
+            <Text fontSize={3} ff="Inter|Medium">
+              <Trans i18nKey="vote.steps.castVotes.maxSelected" values={{ total: SR_MAX_VOTES }} />
+            </Text>
+          ) : (
+            <Text fontSize={3} ff="Inter|Medium">
+              <Trans
+                i18nKey="vote.steps.castVotes.selected"
+                values={{ total: Object.keys(votes).length }}
+              />
+            </Text>
+          )}
+          <Separator />
+          {max > 0 ? (
+            <Text fontSize={3} ff="Inter|Medium">
+              <Trans i18nKey="vote.steps.castVotes.votes" values={{ total: max }} />
+            </Text>
+          ) : error ? (
+            <Box horizontal alignItems="center" color="alertRed">
+              <ExclamationCircle size={13} />
+              <Box ml={1}>
+                <Text fontSize={3} ff="Inter|Medium">
+                  <Trans
+                    i18nKey="vote.steps.castVotes.maxUsed"
+                    values={{ total: votesAvailable }}
+                  />
+                </Text>
+              </Box>
+            </Box>
+          ) : (
+            <Box horizontal alignItems="center" color="positiveGreen">
+              <Check size={13} />
+              <Box ml={1}>
+                <Text fontSize={3} ff="Inter|Medium">
+                  <Trans i18nKey="vote.steps.castVotes.allVotesAreUsed" />
+                </Text>
+              </Box>
+            </Box>
+          )}
+        </Box>
+      </Box>
+      <ScrollContainer>
+        {SR.map(({ sr, rank, isSR }, i) => (
+          <SRRow
+            key={`SR_${sr.address}_${i}`}
+            sr={sr}
+            rank={rank}
+            isSR={isSR}
+            value={votes[sr.address]}
+            onChange={onUpdateVote}
+            onExternalLink={onExternalLink}
+            disabled={max <= 0 || Object.keys(votes).length >= SR_MAX_VOTES}
+            max={max + votes[sr.address]}
+          />
+        ))}
+      </ScrollContainer>
+    </>
   );
 };
 

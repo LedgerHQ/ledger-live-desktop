@@ -614,13 +614,17 @@
       "castVotes": {
         "title": "Vote",
         "search": "Search",
-        "rank": "Rank: <0>{{rank}}</0>",
-        "selected": "Selected: {{amount}}",
+        "totalVotes": "Total votes: {{total}}",
+        "selected": "Selected: {{total}}",
+        "maxSelected": "Max selected: {{total}}",
         "allVotesAreUsed": "All votes are used",
+        "maxUsed": "Max votes: {{total}}",
         "superRepresentatives": "Super Representatives",
         "candidates": "Candidates",
         "estYield": "est. yield",
-        "srInfo": "SR or Candidates?"
+        "srInfo": "SR or Candidates?",
+        "validators": "Validators ({{total}})",
+        "votes": "Votes: {{total}}"
       },
       "connectDevice": {
         "title": "Device"
