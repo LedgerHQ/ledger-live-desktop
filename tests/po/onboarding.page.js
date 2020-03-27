@@ -39,10 +39,6 @@ export default class OnboardingPage extends Page {
     return this.app.client.element("#onboarding-buynew-button");
   }
 
-  get trackOrderButton() {
-    return this.app.client.element("#onboarding-trackorder-button");
-  }
-
   get learnMoreButton() {
     return this.app.client.element("#onboarding-learnmore-button");
   }

@@ -193,7 +193,6 @@ describe("When I launch the app for the first time", () => {
         await onboardingPage.selectConfiguration("nodevice");
         expect(await onboardingPage.pageTitle.getText()).toBe(data.noDeviceTitle);
         expect(await onboardingPage.buyNewButton.isVisible()).toBe(true);
-        expect(await onboardingPage.trackOrderButton.isVisible()).toBe(true);
         expect(await onboardingPage.learnMoreButton.isVisible()).toBe(true);
       });
 
