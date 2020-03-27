@@ -32,8 +32,7 @@ const SpendableBanner = ({ account, parentAccount, transaction }: Props) => {
   const [maxSpendable, setMaxSpendable] = useState(null);
 
   const bridge = getAccountBridge(account, parentAccount);
-  const mainAccount = getMainAccount(account, parentAccount);
-  const accountUnit = getAccountUnit(mainAccount);
+  const accountUnit = getAccountUnit(account);
 
   useEffect(() => {
     let cancel = false;
@@ -44,7 +43,8 @@ const SpendableBanner = ({ account, parentAccount, transaction }: Props) => {
           parentAccount,
           transaction,
         });
-        if (estimate && !cancel) {
+        console.log(estimate);
+        if (!cancel) {
           setMaxSpendable(estimate);
         }
       }
