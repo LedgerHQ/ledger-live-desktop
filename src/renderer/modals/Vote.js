@@ -15,6 +15,7 @@ import Popover from "~/renderer/components/Popover";
 import Text from "~/renderer/components/Text";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import votesImage from "~/renderer/images/votes.png";
+import { colors } from "~/renderer/styles/theme";
 
 type Props = {
   name?: string,
@@ -61,7 +62,7 @@ export default function CastVotesModal({ name, account, parentAccount }: Props) 
                 </Box>
 
                 <Box mb={4}>
-                  <Text ff="Inter|SemiBold" fontSize={16} textAlign="center">
+                  <Text ff="Inter|SemiBold" fontSize={4} textAlign="center">
                     {t("tron.manage.vote.steps.vote.description")}
                   </Text>
 
@@ -91,12 +92,20 @@ export default function CastVotesModal({ name, account, parentAccount }: Props) 
                       </Box>
                     }
                   >
-                    <Box horizontal alignItems="center" p={2} justifyContent="center">
-                      <Text ff="Inter|Medium" fontSize={4}>
+                    <Box
+                      horizontal
+                      alignSelf="center"
+                      alignItems="center"
+                      p={2}
+                      justifyContent="center"
+                      color="palette.text.shade50"
+                    >
+                      <Text ff="Inter|SemiBold" fontSize={2}>
                         {t("tron.manage.vote.steps.vote.info.message")}
                       </Text>
+
                       <Box ml={1}>
-                        <InfoCircle size={16} />
+                        <InfoCircle size={12} />
                       </Box>
                     </Box>
                   </Popover>
@@ -111,11 +120,13 @@ export default function CastVotesModal({ name, account, parentAccount }: Props) 
                 <Text
                   ff="Inter|SemiBold"
                   fontSize={4}
+                  color="palette.text.shade50"
                   style={{ marginLeft: 8, overflowWrap: "break-word", flex: 1 }}
                 >
                   {t("tron.manage.vote.steps.vote.footer.doNotShowAgain")}
                 </Text>
               </Box>
+
               <Button primary onClick={onNext}>
                 {t("tron.manage.vote.steps.vote.footer.next")}
               </Button>
