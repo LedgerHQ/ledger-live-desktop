@@ -4,6 +4,7 @@ import ModalPage from "../po/modal.page";
 import GenuinePage from "../po/genuine.page";
 import PasswordPage from "../po/password.page";
 import AnalyticsPage from "../po/analytics.page";
+import PortfolioPage from "../po/portfolio.page";
 import data from "../data/onboarding/";
 
 jest.setTimeout(5000);
@@ -15,14 +16,17 @@ describe("When I launch the app for the first time", () => {
   let genuinePage;
   let passwordPage;
   let analyticsPage;
+  let portfolioPage;
 
   beforeAll(() => {
-    app = applicationProxy(null, { MOCK: true });
+    app = applicationProxy({ MOCK: true });
     onboardingPage = new OnboardingPage(app);
     modalPage = new ModalPage(app);
     genuinePage = new GenuinePage(app);
     passwordPage = new PasswordPage(app);
     analyticsPage = new AnalyticsPage(app);
+    portfolioPage = new PortfolioPage(app);
+
     return app.start();
   });
 
@@ -168,7 +172,7 @@ describe("When I launch the app for the first time", () => {
 
       it("should display a modal to perform a genuine check", async () => {
         expect(await modalPage.isVisible()).toBe(true);
-        expect(await modalPage.title.getText()).toBe(data.modalTitle);
+        expect(await modalPage.title.getText()).toBe(data.genuine.modalTitle);
         await modalPage.closeButton.click();
       });
 
@@ -255,7 +259,7 @@ describe("When I launch the app for the first time", () => {
         */
 
         it("on success, should close the modal and change button into label", async () => {
-          expect(await modalPage.isVisible(true)).toBe(true);
+          expect(await modalPage.isVisible(true)).toBe(false);
           expect(await genuinePage.checkLabel.getText()).toBe(data.genuine.checkLabel);
         });
       });
@@ -294,47 +298,113 @@ describe("When I launch the app for the first time", () => {
 
     describe("When it displays 'Bugs and Analytics' form", () => {
       it("should ask to send analytics data", async () => {
-        await onboardingPage.continue();
+        await onboardingPage.continue(true);
+        expect(await analyticsPage.isVisible()).toBe(true);
         expect(await onboardingPage.pageTitle.getText()).toBe(data.analytics.title);
         expect(await onboardingPage.pageDescription.getText()).toBe(data.analytics.description);
       });
 
-      it("data", async () => {
-        expect(await analyticsPage.dataTitle.getText()).toBe(data.analytics.data.title);
-        expect(await analyticsPage.dataText.getText()).toBe(data.analytics.data.text);
-        expect(await analyticsPage.dataFakeLink.isEnabled()).toBe(true);
-        await analyticsPage.dataFakeLink.click();
-        expect(await modalPage.isVisible()).toBe(true);
-        expect(await modalPage.title.getText()).toBe(data.analytics.data.modalTitle);
-        await modalPage.close();
-        expect(await modalPage.isVisible(true)).toBe(true);
-        expect(await analyticsPage.dataSwitch.isEnabled()).toBe(false);
+      describe("Technical data", () => {
+        it("should display title, text and a link", async () => {
+          expect(await analyticsPage.dataTitle.getText()).toBe(data.analytics.data.title);
+          expect(await analyticsPage.dataText.getText()).toBe(data.analytics.data.text);
+          expect(await analyticsPage.dataFakeLink.isEnabled()).toBe(true);
+        });
+
+        it("should display a modal when clicking on learn more", async () => {
+          await analyticsPage.dataFakeLink.click();
+          expect(await modalPage.isVisible()).toBe(true);
+          expect(await modalPage.title.getText()).toBe(data.analytics.data.modalTitle);
+          await modalPage.close();
+          expect(await modalPage.isVisible(true)).toBe(false);
+        });
+
+        it("should display a switch selected and unabled", async () => {
+          expect(await analyticsPage.dataSwitch.isVisible()).toBe(true);
+          expect(await analyticsPage.dataSwitchInput.isVisible()).toBe(false);
+          expect(await analyticsPage.dataSwitchInput.isEnabled()).toBe(false);
+          expect(await analyticsPage.dataSwitchInput.isSelected()).toBe(true);
+        });
       });
 
-      it("share", async () => {
-        expect(await analyticsPage.shareTitle.getText()).toBe(data.analytics.share.title);
-        expect(await analyticsPage.shareText.getText()).toBe(data.analytics.share.text);
-        expect(await analyticsPage.shareFakeLink.isEnabled()).toBe(true);
-        await analyticsPage.shareFakeLink.click();
-        expect(await modalPage.isVisible()).toBe(true);
-        expect(await modalPage.title.getText()).toBe(data.analytics.share.modalTitle);
-        await modalPage.close();
-        expect(await modalPage.isVisible(true)).toBe(true);
-        expect(await analyticsPage.shareSwitch.isEnabled()).toBe(true);
+      describe("Share analytics", () => {
+        it("should display title, text and a link", async () => {
+          expect(await analyticsPage.shareTitle.getText()).toBe(data.analytics.share.title);
+          expect(await analyticsPage.shareText.getText()).toBe(data.analytics.share.text);
+          expect(await analyticsPage.shareFakeLink.isEnabled()).toBe(true);
+        });
+
+        it("should display a modal when clicking on learn more", async () => {
+          await analyticsPage.shareFakeLink.click();
+          expect(await modalPage.isVisible()).toBe(true);
+          expect(await modalPage.title.getText()).toBe(data.analytics.share.modalTitle);
+          await modalPage.close();
+          expect(await modalPage.isVisible(true)).toBe(false);
+        });
+
+        it("should display a switch selected and enabled", async () => {
+          expect(await analyticsPage.shareSwitch.isVisible()).toBe(true);
+          expect(await analyticsPage.shareSwitchInput.isVisible()).toBe(false);
+          expect(await analyticsPage.shareSwitchInput.isSelected()).toBe(true);
+        });
+
+        it("should be able to uncheck the switch", async () => {
+          await analyticsPage.shareSwitch.click();
+          expect(await analyticsPage.shareSwitchInput.isSelected()).toBe(false);
+          await analyticsPage.shareSwitch.click();
+          expect(await analyticsPage.shareSwitchInput.isSelected()).toBe(true);
+        });
       });
 
-      it("logs", async () => {
-        expect(await analyticsPage.logsTitle.getText()).toBe(data.analytics.logs.title);
-        expect(await analyticsPage.logsText.getText()).toBe(data.analytics.logs.text);
-        expect(await analyticsPage.logsSwitch.isEnabled()).toBe(true);
+      describe("Bug reports", () => {
+        it("should display title, text and a link", async () => {
+          expect(await analyticsPage.logsTitle.getText()).toBe(data.analytics.logs.title);
+          expect(await analyticsPage.logsText.getText()).toBe(data.analytics.logs.text);
+        });
+
+        it("should display a switch selected and enabled", async () => {
+          expect(await analyticsPage.logsSwitch.isVisible()).toBe(true);
+          expect(await analyticsPage.logsSwitchInput.isVisible()).toBe(false);
+          expect(await analyticsPage.logsSwitchInput.isSelected()).toBe(true);
+        });
+
+        it("should be able to uncheck the switch", async () => {
+          await analyticsPage.logsSwitch.click();
+          expect(await analyticsPage.logsSwitchInput.isSelected()).toBe(false);
+          await analyticsPage.logsSwitch.click();
+          expect(await analyticsPage.logsSwitchInput.isSelected()).toBe(true);
+        });
       });
     });
 
     describe("When the onboarding is finished", () => {
       it("should display the success page", async () => {
         await onboardingPage.continue();
+        expect(await onboardingPage.logo.isVisible()).toBe(true);
         expect(await onboardingPage.pageTitle.getText()).toBe(data.end.title);
         expect(await onboardingPage.pageDescription.getText()).toBe(data.end.description);
+        expect(await onboardingPage.openButton.isVisible()).toBe(true);
+        expect(await onboardingPage.twitterButton.isVisible()).toBe(true);
+        expect(await onboardingPage.githubButton.isVisible()).toBe(true);
+        expect(await onboardingPage.redditButton.isVisible()).toBe(true);
+      });
+    });
+
+    describe("When opening the app", () => {
+      it("should display the terms of use modal", async () => {
+        await onboardingPage.open();
+        expect(await modalPage.isVisible()).toBe(true);
+        expect(await modalPage.termsCheckbox.isVisible()).toBe(true);
+      });
+
+      it("should close the modal after accepting the terms of use", async () => {
+        await modalPage.termsCheckbox.click();
+        await modalPage.confirmButton.click();
+        expect(await modalPage.isVisible(true)).toBe(false);
+      });
+
+      it("should display the portfolio", async () => {
+        expect(await portfolioPage.isVisible()).toBe(true);
       });
     });
   });
