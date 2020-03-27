@@ -116,10 +116,10 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
   const unit = getAccountUnit(account);
   const minAmount = 10 ** unit.magnitude;
 
-  const {
-    spendableBalance,
-    tronResources: { tronPower, frozen: { bandwidth, energy } = {}, frozen } = {},
-  } = mainAccount;
+  const { spendableBalance, tronResources } = mainAccount;
+
+  const { tronPower, frozen, votes } = tronResources || {};
+  const { bandwidth, energy } = frozen || {};
 
   const canFreeze = spendableBalance && spendableBalance.gt(minAmount);
 
@@ -209,7 +209,13 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
                 </ManageButton>
                 <ManageButton
                   disabled={!canVote}
-                  onClick={() => onSelectAction("MODAL_DELEGATE_TRON", onClose)}
+                  onClick={() =>
+                    /** @TODO replace MODAL_VOTE_TRON_INFO with the right naming if different */
+                    onSelectAction(
+                      votes && votes.length > 0 ? "MODAL_VOTE_TRON" : "MODAL_VOTE_TRON_INFO",
+                      onClose,
+                    )
+                  }
                 >
                   <IconWrapper>
                     <Vote size={16} />

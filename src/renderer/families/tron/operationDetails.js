@@ -43,9 +43,14 @@ function getURLWhatIsThis(op: Operation): ?string {
 type OperationsDetailsVotesProps = {
   votes: ?Array<Vote>,
   account: Account,
+  isTransactionField?: boolean,
 };
 
-const OperationDetailsVotes = ({ votes, account }: OperationsDetailsVotesProps) => {
+export const OperationDetailsVotes = ({
+  votes,
+  account,
+  isTransactionField,
+}: OperationsDetailsVotesProps) => {
   const sp = useTronSuperRepresentatives();
   const formattedVotes = formatVotes(votes, sp);
 
@@ -59,12 +64,14 @@ const OperationDetailsVotes = ({ votes, account }: OperationsDetailsVotesProps) 
 
   return (
     <Box>
-      <OpDetailsTitle>
-        <Trans
-          i18nKey={"operationDetails.extra.votes"}
-          values={{ number: votes && votes.length }}
-        />
-      </OpDetailsTitle>
+      {!isTransactionField && (
+        <OpDetailsTitle>
+          <Trans
+            i18nKey={"operationDetails.extra.votes"}
+            values={{ number: votes && votes.length }}
+          />
+        </OpDetailsTitle>
+      )}
 
       {sp.length > 0 &&
         formattedVotes &&

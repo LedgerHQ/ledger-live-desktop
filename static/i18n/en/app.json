@@ -608,6 +608,39 @@
       }
     }
   },
+  "vote": {
+    "title": "Cast votes",
+    "steps": {
+      "castVotes": {
+        "title": "Vote",
+        "search": "Search",
+        "rank": "Rank: <0>{{rank}}</0>",
+        "selected": "Selected: {{amount}}",
+        "allVotesAreUsed": "All votes are used",
+        "superRepresentatives": "Super Representatives",
+        "candidates": "Candidates",
+        "estYield": "est. yield",
+        "srInfo": "SR or Candidates?"
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "success": {
+          "title": "Your votes were cast successfully.",
+          "text": "",
+          "howVotingWorks": "How voting works?",
+          "done": "Done",
+          "cta": "View details"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+      }
+    }
+  },
   "receive": {
     "title": "Receive",
     "successTitle": "Address shared securely",
@@ -713,6 +746,12 @@
   },
   "tron": {
     "voting": {
+      "emptyState": {
+        "description": "You can now earn rewards by freezing and voting.",
+        "info": "How voting works",
+        "votesDesc": "Cast your votes for one or more representatives to start earning staking rewards.",
+        "vote": "Cast votes"
+      },
       "manageTP": "Manage Tron Power",
       "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
       "claimRewards": "Claim rewards",
@@ -1300,14 +1339,18 @@
     "titleWording": {
       "claimReward": "Please confirm the operation on your device to claim your rewards",
       "freeze": "Please confirm the operation on your device to freeze assets",
-      "unfreeze": "Please confirm the operation on your device to unfreeze your assets"
+      "unfreeze": "Please confirm the operation on your device to unfreeze your assets",
+      "vote": "Please confirm the operation on your device to cast your votes"
     },
     "recipientWording": {
       "send": "recipient",
       "delegate": "validator",
       "undelegate": "validator",
       "claimReward": "delegation rewards recipient"
-    }
+    },
+    "address": "Address",
+    "resource": "Resource",
+    "votes": "Votes"
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"

@@ -50,12 +50,9 @@ type StateProps = {|
   openModal: string => void,
 |};
 
-type Props = {|
-  ...OwnProps,
-  ...StateProps,
-|};
+type Props = OwnProps & StateProps;
 
-const createSteps = (): Array<St> => [
+const steps: Array<St> = [
   {
     id: "amount",
     label: <Trans i18nKey="freeze.steps.amount.title" />,
@@ -96,8 +93,6 @@ const Body = ({
   params,
   name,
 }: Props) => {
-  const [steps] = useState(createSteps);
-
   const [optimisticOperation, setOptimisticOperation] = useState(null);
   const [transactionError, setTransactionError] = useState(null);
   const [signed, setSigned] = useState(false);

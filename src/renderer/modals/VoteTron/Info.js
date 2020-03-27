@@ -23,14 +23,14 @@ type Props = {
   parentAccount: ?Account,
 };
 
-export default function CastVotesModal({ name, account, parentAccount }: Props) {
+export default function VoteTronInfoModal({ name, account, parentAccount }: Props) {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const onNext = useCallback(() => {
     dispatch(closeModal(name));
     dispatch(
-      openModal("MODAL_VALIDATORS", {
+      openModal("MODAL_VOTE_TRON", {
         parentAccount,
         account,
       }),

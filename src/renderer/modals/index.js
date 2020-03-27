@@ -23,7 +23,8 @@ import MODAL_CLAIM_REWARDS from "./ClaimRewards";
 import MODAL_FREEZE from "./Freeze";
 import MODAL_UNFREEZE from "./Unfreeze";
 import MODAL_REWARDS_INFO from "./EarnRewardsInfoModal";
-import MODAL_DELEGATE_TRON from "./Vote";
+import MODAL_VOTE_TRON from "./VoteTron";
+import MODAL_VOTE_TRON_INFO from "./VoteTron/Info";
 
 const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_EXPORT_OPERATIONS,
@@ -48,7 +49,8 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_FREEZE,
   MODAL_UNFREEZE,
   MODAL_REWARDS_INFO,
-  MODAL_DELEGATE_TRON,
+  MODAL_VOTE_TRON,
+  MODAL_VOTE_TRON_INFO,
 };
 
 export default modals;

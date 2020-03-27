@@ -13,6 +13,7 @@ import TransactionConfirmField from "~/renderer/components/TransactionConfirm/Tr
 import Text from "~/renderer/components/Text";
 import WarnBox from "~/renderer/components/WarnBox";
 import Box from "~/renderer/components/Box";
+import { OperationDetailsVotes } from "./operationDetails";
 
 const Info: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|SemiBold",
@@ -50,15 +51,30 @@ const Pre = ({
 
   return (
     <>
-      <TransactionConfirmField label="Address">
+      <TransactionConfirmField label={<Trans i18nKey="TransactionConfirm.address" />}>
         <AddressText>
           {account.type === "ChildAccount" ? account.address : mainAccount.freshAddress}{" "}
         </AddressText>
       </TransactionConfirmField>
       {transaction.resource && (
-        <TransactionConfirmField label="Resource">
+        <TransactionConfirmField label={<Trans i18nKey="TransactionConfirm.resource" />}>
           <AddressText ff="Inter|SemiBold">{transaction.resource}</AddressText>
         </TransactionConfirmField>
+      )}
+      {transaction.votes && (
+        <Box vertical justifyContent="space-between" mb={2}>
+          <Box mb={2}>
+            <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={3}>
+              <Trans i18nKey="TransactionConfirm.votes" />
+            </Text>
+          </Box>
+
+          <OperationDetailsVotes
+            votes={transaction.votes}
+            account={mainAccount}
+            isTransactionField
+          />
+        </Box>
       )}
     </>
   );
@@ -77,6 +93,7 @@ const Warning = ({ transaction }: { transaction: Transaction }) => {
     case "claimReward":
     case "freeze":
     case "unfreeze":
+    case "vote":
       return null;
     default:
       return (
