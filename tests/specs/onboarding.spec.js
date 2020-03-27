@@ -7,7 +7,7 @@ import AnalyticsPage from "../po/analytics.page";
 import PortfolioPage from "../po/portfolio.page";
 import data from "../data/onboarding/";
 
-jest.setTimeout(5000);
+jest.setTimeout(60000);
 
 describe("When I launch the app for the first time", () => {
   let app;
