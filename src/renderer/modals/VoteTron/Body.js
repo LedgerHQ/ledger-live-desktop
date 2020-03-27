@@ -1,30 +1,31 @@
 // @flow
-import React, { useState, useCallback, useMemo } from "react";
+import invariant from "invariant";
+import React, { useState, useCallback } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import { createStructuredSelector } from "reselect";
-import { BigNumber } from "bignumber.js";
+import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
+import Track from "~/renderer/analytics/Track";
 
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
-import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
+
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
+import type { StepId, StepProps, St } from "./types";
 import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
 import type { TFunction } from "react-i18next";
 import type { Device } from "~/renderer/reducers/devices";
-import type { StepId, StepProps, St } from "./types";
 
+import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 
-import Track from "~/renderer/analytics/Track";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 
 import Stepper from "~/renderer/components/Stepper";
-import StepAmount, { StepAmountFooter } from "./steps/StepAmount";
+import StepVote, { StepVoteFooter } from "./steps/StepVote";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
@@ -54,21 +55,21 @@ type Props = OwnProps & StateProps;
 
 const steps: Array<St> = [
   {
-    id: "amount",
-    label: <Trans i18nKey="unfreeze.steps.amount.title" />,
-    component: StepAmount,
+    id: "castVotes",
+    label: <Trans i18nKey="vote.steps.castVotes.title" />,
+    component: StepVote,
     noScroll: true,
-    footer: StepAmountFooter,
+    footer: StepVoteFooter,
   },
   {
     id: "connectDevice",
-    label: <Trans i18nKey="unfreeze.steps.connectDevice.title" />,
+    label: <Trans i18nKey="vote.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
     onBack: ({ transitionTo }: StepProps) => transitionTo("rewards"),
   },
   {
     id: "confirmation",
-    label: <Trans i18nKey="unfreeze.steps.confirmation.title" />,
+    label: <Trans i18nKey="vote.steps.confirmation.title" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
   },
@@ -106,22 +107,24 @@ const Body = ({
     bridgeError,
     bridgePending,
   } = useBridgeTransaction(() => {
-    const { account, parentAccount } = params;
+    const { account } = params;
 
-    const { tronResources: { frozen: { bandwidth } = {} } = {} } = account;
+    invariant(account && account.tronResources, "tron: account and tron resources required");
 
-    const UnfreezeBandwidth = BigNumber((bandwidth && bandwidth.amount) || 0);
+    const { tronResources } = account;
 
-    const bridge = getAccountBridge(account, parentAccount);
+    const { votes } = tronResources;
+
+    const bridge = getAccountBridge(account, undefined);
 
     const t = bridge.createTransaction(account);
 
     const transaction = bridge.updateTransaction(t, {
-      mode: "unfreeze",
-      resource: UnfreezeBandwidth.gt(0) ? "BANDWIDTH" : "ENERGY",
+      mode: "vote",
+      votes,
     });
 
-    return { account, parentAccount, transaction };
+    return { account, parentAccount: undefined, transaction };
   });
 
   const handleCloseModal = useCallback(() => {
@@ -153,15 +156,10 @@ const Body = ({
     [account],
   );
 
-  const statusError = useMemo(() => status.errors && Object.values(status.errors)[0], [
-    status.errors,
-  ]);
-
-  const error =
-    transactionError || bridgeError || (statusError instanceof Error ? statusError : null);
+  const error = transactionError || bridgeError;
 
   const stepperProps = {
-    title: t("unfreeze.title"),
+    title: t("vote.title"),
     device,
     account,
     parentAccount,
@@ -191,7 +189,7 @@ const Body = ({
   return (
     <Stepper {...stepperProps}>
       <SyncSkipUnderPriority priority={100} />
-      <Track onUnmount event="CloseModalUnfreeze" />
+      <Track onUnmount event="CloseModalVote" />
     </Stepper>
   );
 };
