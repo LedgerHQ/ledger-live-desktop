@@ -13,6 +13,14 @@ export default class ModalPage extends Page {
     return this.app.client.element("#modal-title");
   }
 
+  get termsCheckbox() {
+    return this.app.client.element("#modal-terms-checkbox");
+  }
+
+  get confirmButton() {
+    return this.app.client.element("#modal-confirm-button");
+  }
+
   get continueButton() {
     return this.app.client.element("#modal-continue-button");
   }
@@ -30,7 +38,9 @@ export default class ModalPage extends Page {
   }
 
   isVisible(reverse = false) {
-    return this.app.client.waitForVisible("#modal-container", 3000, reverse);
+    return reverse
+      ? !this.app.client.waitForVisible("#modal-container", 3000, reverse)
+      : this.app.client.waitForVisible("#modal-container", 3000);
   }
 
   close() {

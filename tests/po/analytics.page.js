@@ -21,6 +21,10 @@ export default class AnalyticsPage extends Page {
     return this.app.client.element(`${this.dataContainer} .switch`);
   }
 
+  get dataSwitchInput() {
+    return this.app.client.element(`${this.dataContainer} .switch > input`);
+  }
+
   get shareContainer() {
     return "#onboarding-analytics-share";
   }
@@ -41,6 +45,10 @@ export default class AnalyticsPage extends Page {
     return this.app.client.element(`${this.shareContainer} .switch`);
   }
 
+  get shareSwitchInput() {
+    return this.app.client.element(`${this.shareContainer} .switch > input`);
+  }
+
   get logsContainer() {
     return "#onboarding-analytics-logs";
   }
@@ -59,5 +67,13 @@ export default class AnalyticsPage extends Page {
 
   get logsSwitch() {
     return this.app.client.element(`${this.logsContainer} .switch`);
+  }
+
+  get logsSwitchInput() {
+    return this.app.client.element(`${this.logsContainer} .switch > input`);
+  }
+
+  isVisible() {
+    return this.app.client.waitForVisible("#onboarding-analytics-data");
   }
 }

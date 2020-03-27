@@ -75,6 +75,22 @@ export default class OnboardingPage extends Page {
     return this.app.client.element("#onboarding-contactus-button");
   }
 
+  get openButton() {
+    return this.app.client.element("#onboarding-open-button");
+  }
+
+  get twitterButton() {
+    return this.app.client.element("#onboarding-twitter-button");
+  }
+
+  get githubButton() {
+    return this.app.client.element("#onboarding-github-button");
+  }
+
+  get redditButton() {
+    return this.app.client.element("#onboarding-reddit-button");
+  }
+
   /** methods **/
 
   async setTheme(theme) {
@@ -128,19 +144,23 @@ export default class OnboardingPage extends Page {
     }
   }
 
-  async continue() {
-    await this.continueButton.click();
-    await this.app.client.waitUntilWindowLoaded();
-    await this.app.client.pause(1000); // FIXME: Do not use fixed waiting time
+  continue() {
+    return this.continueButton.click().then(this.app.client.waitUntilWindowLoaded());
   }
 
-  async skip() {
-    await this.skipButton.click();
-    await this.app.client.waitUntilWindowLoaded();
+  skip() {
+    return this.skipButton.click().then(this.app.client.waitUntilWindowLoaded());
   }
 
-  async back() {
-    await this.backButton.click();
-    await this.app.client.waitUntilWindowLoaded();
+  back() {
+    return this.backButton.click().then(this.app.client.waitUntilWindowLoaded());
+  }
+
+  open() {
+    return this.openButton.click().then(this.app.client.waitUntilWindowLoaded());
+  }
+
+  isVisible() {
+    return this.app.client.waitForVisible("#onboarding-container");
   }
 }
