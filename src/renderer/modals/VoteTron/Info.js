@@ -1,6 +1,9 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
+import React, {
+  useCallback,
+  // useState
+} from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -9,13 +12,13 @@ import { openModal, closeModal } from "~/renderer/actions/modals";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-import CheckBox from "~/renderer/components/CheckBox";
+// import CheckBox from "~/renderer/components/CheckBox";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
 import Popover from "~/renderer/components/Popover";
 import Text from "~/renderer/components/Text";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import votesImage from "~/renderer/images/votes.png";
-import { colors } from "~/renderer/styles/theme";
+// import { colors } from "~/renderer/styles/theme";
 
 type Props = {
   name?: string,
@@ -37,11 +40,11 @@ export default function VoteTronInfoModal({ name, account, parentAccount }: Prop
     );
   }, [parentAccount, account, dispatch, name]);
 
-  const [showAgain, setShowAgain] = useState(false);
+  // const [showAgain, setShowAgain] = useState(false);
 
-  function onClickShowAgain() {
-    setShowAgain(!showAgain);
-  }
+  // function onClickShowAgain() {
+  //   setShowAgain(!showAgain);
+  // }
 
   return (
     <Modal
@@ -115,7 +118,7 @@ export default function VoteTronInfoModal({ name, account, parentAccount }: Prop
           )}
           renderFooter={() => (
             <>
-              <Box horizontal alignItems="center" onClick={onClickShowAgain} style={{ flex: 1 }}>
+              {/* <Box horizontal alignItems="center" onClick={onClickShowAgain} style={{ flex: 1 }}>
                 <CheckBox isChecked={showAgain} />
                 <Text
                   ff="Inter|SemiBold"
@@ -125,7 +128,7 @@ export default function VoteTronInfoModal({ name, account, parentAccount }: Prop
                 >
                   {t("tron.manage.vote.steps.vote.footer.doNotShowAgain")}
                 </Text>
-              </Box>
+              </Box> */}
 
               <Button primary onClick={onNext}>
                 {t("tron.manage.vote.steps.vote.footer.next")}
@@ -141,8 +144,4 @@ export default function VoteTronInfoModal({ name, account, parentAccount }: Prop
 const Img = styled.img`
   width: 182px;
   height: auto;
-`;
-
-const IntoTitle = styled(Text)`
-  margin-right: ${p => p.theme.space[1]}px;
 `;
