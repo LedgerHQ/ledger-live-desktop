@@ -108,6 +108,7 @@ export const GenuineCheckCardWrapper: ThemedComponent<{}> = styled(Box).attrs(()
   borderRadius: "4px",
   justifyContent: "flex-start",
 }))`
+  min-height: 102px;
   width: 580px;
   transition: all ease-in-out 0.2s;
   color: ${p =>
