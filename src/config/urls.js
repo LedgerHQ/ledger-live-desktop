@@ -23,6 +23,7 @@ export const urls = {
   recipientAddressInfo: "https://support.ledger.com/hc/en-us/articles/360006433934",
   privacyPolicy: "https://www.ledger.com/pages/privacy-policy",
   troubleshootingUSB: "https://support.ledger.com/hc/en-us/articles/115005165269",
+  troubleshootingCrash: "https://support.ledger.com/hc/en-us/articles/360012598060",
   managerERC20: "https://support.ledger.com/hc/en-us/articles/115005197845-Manage-ERC20-tokens",
   appSupport: "https://support.ledger.com/hc/en-us/categories/115000811829-Apps",
   migrateAccounts: "https://support.ledger.com/hc/en-us/articles/360025321733",

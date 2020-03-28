@@ -7,7 +7,13 @@ import logger from "~/logger";
 import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import Button from "~/renderer/components/Button";
 
-const OpenUserDataDirectoryBtn = () => {
+const OpenUserDataDirectoryBtn = ({
+  title,
+  ...props
+}: {|
+  title?: React$Node,
+  primary?: boolean,
+|}) => {
   const { t } = useTranslation();
   const handleOpenUserDataDirectory = useCallback(() => {
     const userDataDirectory = resolveUserDataDirectory();
@@ -16,8 +22,8 @@ const OpenUserDataDirectoryBtn = () => {
   }, []);
 
   return (
-    <Button primary small onClick={handleOpenUserDataDirectory}>
-      {t("settings.openUserDataDirectory.btn")}
+    <Button primary small onClick={handleOpenUserDataDirectory} {...props}>
+      {title || t("settings.openUserDataDirectory.btn")}
     </Button>
   );
 };
