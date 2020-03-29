@@ -1,12 +1,12 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
+import { getMainAccount, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 
@@ -112,27 +112,33 @@ type Props = {
 const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
   const dispatch = useDispatch();
   const mainAccount = getMainAccount(account, parentAccount);
+  /** @TODO get this from common */
+  const unit = getAccountUnit(account);
+  const minAmount = 10 ** unit.magnitude;
 
   const {
     spendableBalance,
     tronResources: { tronPower, frozen: { bandwidth, energy } = {}, frozen } = {},
   } = mainAccount;
 
-  const canFreeze = spendableBalance && spendableBalance.gt(0);
-
-  const canUnfreeze =
-    frozen &&
-    BigNumber((bandwidth && bandwidth.amount) || 0)
-      .plus((energy && energy.amount) || 0)
-      .gt(0);
+  const canFreeze = spendableBalance && spendableBalance.gt(minAmount);
 
   const timeToUnfreezeBandwidth =
     bandwidth && bandwidth.expiredAt ? +bandwidth.expiredAt : Infinity;
   const timeToUnfreezeEnergy = energy && energy.expiredAt ? +energy.expiredAt : Infinity;
 
-  const effectiveTimeToUnfreeze = moment(
-    Math.min(timeToUnfreezeBandwidth, timeToUnfreezeEnergy),
-  ).fromNow();
+  const effectiveTimeToUnfreeze = Math.min(timeToUnfreezeBandwidth, timeToUnfreezeEnergy);
+
+  const canUnfreeze =
+    frozen &&
+    BigNumber((bandwidth && bandwidth.amount) || 0)
+      .plus((energy && energy.amount) || 0)
+      .gt(minAmount) &&
+    effectiveTimeToUnfreeze < Date.now();
+
+  const formattedTimeToUnfreeze = useMemo(() => moment(effectiveTimeToUnfreeze).fromNow(), [
+    effectiveTimeToUnfreeze,
+  ]);
 
   const canVote = tronPower > 0;
 
@@ -197,7 +203,7 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
                   {!canUnfreeze && (
                     <TimerWrapper>
                       <Clock size={12} />
-                      <Description>{effectiveTimeToUnfreeze}</Description>
+                      <Description>{formattedTimeToUnfreeze}</Description>
                     </TimerWrapper>
                   )}
                 </ManageButton>

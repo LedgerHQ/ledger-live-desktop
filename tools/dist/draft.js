@@ -1,4 +1,4 @@
-const Octokit = require("@octokit/rest");
+const { Octokit } = require("@octokit/rest");
 
 class Draft {
   constructor(repo, tag, token) {

@@ -353,7 +353,15 @@
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
     "details": "{{ currency }} details",
-    "multipleAddresses": "Why multiple addresses?"
+    "multipleAddresses": "Why multiple addresses?",
+    "extra": {
+      "resource": "Resource",
+      "frozenAmount": "Frozen amount",
+      "unfreezeAmount": "Unfreeze amount",
+      "address": "Address",
+      "votes": "Votes ({{number}})",
+      "votesAddress": "<0>TP {{votes}}</0> to <2>{{name}}</2>"
+    }
   },
   "operationList": {
     "noMoreOperations": "すべて"
@@ -549,27 +557,54 @@
     "title": "Freeze",
     "steps": {
       "amount": {
-        "title": "Freeze assets"
+        "title": "Freeze assets",
+        "resourceInfo": "Bandwith or Energy?",
+        "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
+        "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
+        "amountLabel": "Amount to freeze",
+        "available": "Available: {{amountAvailable}}",
+        "info": "Frozen assets cannot be sent for 3 days."
       },
       "connectDevice": {
         "title": "Device"
       },
       "confirmation": {
-        "title": "Confirmation"
+        "title": "Confirmation",
+        "success": {
+          "title": "",
+          "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+          "votePending": "Vote in {{time}}",
+          "vote": "Vote",
+          "later": "Vote later"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
   },
   "unfreeze": {
-    "title": "Unfreeze",
+    "title": "Unfreeze assets",
     "steps": {
       "amount": {
-        "title": "Unfreeze assets"
+        "title": "Unfreeze",
+        "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
       },
       "connectDevice": {
         "title": "Device"
       },
       "confirmation": {
-        "title": "Confirmation"
+        "title": "Confirmation",
+        "success": {
+          "title": "",
+          "text": "Your assets have been unfrozen successfully. Your Bandwidth points will be decreased and your votes will be canceled.",
+          "continue": "Continue"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
   },
@@ -679,6 +714,7 @@
   "tron": {
     "voting": {
       "manageTP": "Manage Tron Power",
+      "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
       "claimRewards": "Claim rewards",
       "nextRewardsDate": "Rewards can be claimed {{date}}",
       "claimAvailableRewards": "Claim {{amount}}",
@@ -906,6 +942,7 @@
       "desc": "Ledger Liveについて詳しく知る。または支援を得る。",
       "version": "バージョン",
       "releaseNotesBtn": "詳細",
+      "termsBtn": "Read",
       "faq": "Ledgerのサポート",
       "faqDesc": "問題がありますか？ハードウェアウォレットとともにLedger Liveを使用してヘルプを受けてください。",
       "terms": "利用条件",
@@ -1053,9 +1090,6 @@
       "title": "Ledgerデバイスをお持ちではありませんか？",
       "buyNew": {
         "title": "Ledger機器を購入"
-      },
-      "trackOrder": {
-        "title": "注文を追跡"
       },
       "learnMore": {
         "title": "Ledgerについて"
@@ -1243,7 +1277,9 @@
     "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
-      "claimReward": "Please confirm the operation on your device to claim your rewards"
+      "claimReward": "Please confirm the operation on your device to claim your rewards",
+      "freeze": "Please confirm the operation on your device to freeze assets",
+      "unfreeze": "Please confirm the operation on your device to unfreeze your assets"
     },
     "recipientWording": {
       "send": "recipient",

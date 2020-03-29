@@ -19,17 +19,21 @@ import Modal from "~/renderer/components/Modal";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import { closeModal } from "~/renderer/actions/modals";
 
-const TermsModal = () => {
+const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
   const dispatch = useDispatch();
 
   const [markdown, error] = useTerms();
   const [accepted, setAccepted] = useState(false);
   const onSwitchAccept = useCallback(() => setAccepted(!accepted), [accepted]);
 
-  const onClick = useCallback(() => {
-    acceptTerms();
+  const onClickClose = useCallback(() => {
     dispatch(closeModal("MODAL_TERMS"));
   }, [dispatch]);
+
+  const onClick = useCallback(() => {
+    acceptTerms();
+    onClickClose();
+  }, [onClickClose]);
 
   return (
     <Modal name="MODAL_TERMS" preventBackdropClick centered>
@@ -71,24 +75,37 @@ const TermsModal = () => {
             style={{ position: "relative", width: "100%" }}
             grow
             horizontal
-            justifyContent="space-between"
+            justifyContent={showClose ? "flex-end" : "space-between"}
             alignItems="center"
           >
-            <Box style={{ width: "75%" }} horizontal alignItems="center" onClick={onSwitchAccept}>
-              <CheckBox isChecked={accepted} id="terms-checkbox" />
-              <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
-                <Trans i18nKey="Terms.switchLabel" />
-              </Text>
-            </Box>
-            <Button
-              style={{ position: "absolute", right: 0 /* flex and <Box> hell */ }}
-              onClick={onClick}
-              primary
-              disabled={!accepted}
-              id="terms-confirm-button"
-            >
-              <Trans i18nKey="common.confirm" />
-            </Button>
+            {showClose ? (
+              <Button primary onClick={onClickClose}>
+                <Trans i18nKey="common.close" />
+              </Button>
+            ) : (
+              <>
+                <Box
+                  style={{ width: "75%" }}
+                  horizontal
+                  alignItems="center"
+                  onClick={onSwitchAccept}
+                >
+                  <CheckBox isChecked={accepted} onChange={onSwitchAccept} id="terms-checkbox" />
+                  <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
+                    <Trans i18nKey="Terms.switchLabel" />
+                  </Text>
+                </Box>
+                <Button
+                  style={{ position: "absolute", right: 0 /* flex and <Box> hell */ }}
+                  onClick={onClick}
+                  primary
+                  disabled={!accepted}
+                  id="terms-confirm-button"
+                >
+                  <Trans i18nKey="common.confirm" />
+                </Button>
+              </>
+            )}
           </Box>
         )}
       />

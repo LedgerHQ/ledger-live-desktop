@@ -89,8 +89,9 @@ app.on("ready", async () => {
   Menu.setApplicationMenu(menu);
 
   const windowParams = await db.getKey("windowParams", "MainWindow", {});
+  const settings = await db.getKey("app", "settings");
 
-  const window = await createMainWindow(windowParams);
+  const window = await createMainWindow(windowParams, settings);
 
   window.on(
     "resize",

@@ -70,10 +70,10 @@
       "REVEAL": "Feltárva",
       "DELEGATE": "Delegated",
       "UNDELEGATE": "Undelegated",
-      "VOTE": "Voted",
-      "FREEZE": "Frozen",
-      "UNFREEZE": "Unfrozen",
-      "REWARD": "Claimed reward"
+      "VOTE": "Szavazott",
+      "FREEZE": "Befagyasztott",
+      "UNFREEZE": "Kiolvasztott",
+      "REWARD": "Begyűjtött jutalom"
     }
   },
   "byteSize": {
@@ -135,10 +135,10 @@
         "desc": "Válaszd ki a megjelenítendő egységet"
       }
     },
-    "availableBalance": "Available balance",
-    "frozenAssets": "Frozen assets",
-    "bandwidth": "Bandwidth",
-    "energy": "Energy"
+    "availableBalance": "Elérhető egyenleg",
+    "frozenAssets": "Befagyasztott eszközök",
+    "bandwidth": "Sávszélesség",
+    "energy": "Energia"
   },
   "accounts": {
     "title": "Számlák",
@@ -187,20 +187,20 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "Install some apps on your device",
-      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
+      "title": "Telepíts pár alkalmazást az eszközödre",
+      "desc": "Lépj az Eszközkezelőbe, hogy alkalmazásokat telepíts az eszközödre. Hozzá tudsz adni számlákat, ha már vannak telepített alkalmazások az eszközödön.",
       "buttons": {
-        "installApp": "Go to Manager",
-        "help": "Help"
+        "installApp": "Lépj az Eszközkezelőbe",
+        "help": "Segítség"
       }
     },
     "accounts": {
-      "title": "Add an account to get started",
-      "desc": "Add an account to start managing your crypto assets. You should have installed the apps for your crypto assets on your device.",
+      "title": "A kezdéshez adj hozzá egy számlát",
+      "desc": "Adj hozzá egy számlát, hogy kezelni tudd a kripto eszközeid. Kellenek telepített alkalmazások a kriptoidnak az eszközödön.",
       "buttons": {
-        "addAccount": "Add account",
-        "installApp": "Go to Manager to install apps",
-        "help": "Help"
+        "addAccount": "Számla hozzáadása",
+        "installApp": "Lépj az Eszközkezelőbe alkalmazások telepítéséhez",
+        "help": "Segítség"
       }
     }
   },
@@ -353,7 +353,15 @@
     "internalOperations": "Belső műveletek",
     "internalOpTooltip": "Ennek a műveletnek belső műveletei vannak",
     "details": "{{ currency }} részletek",
-    "multipleAddresses": "Miért van több cím?"
+    "multipleAddresses": "Miért van több cím?",
+    "extra": {
+      "resource": "Forrás",
+      "frozenAmount": "Befagyasztott mennyiség",
+      "unfreezeAmount": "Kiolvasztott mennyiség",
+      "address": "Cím",
+      "votes": "Szavazatok ({{number}})",
+      "votesAddress": "<0>TP {{votes}}</0> a <2>{{name}}</2>"
+    }
   },
   "operationList": {
     "noMoreOperations": "Ez minden"
@@ -520,56 +528,83 @@
     }
   },
   "claimReward": {
-    "title": "Claim rewards",
+    "title": "Jutalmak begyűjtése",
     "steps": {
       "rewards": {
-        "title": "Rewards",
-        "description": "Congratulations! You earned <1>{{amount}}</1> by voting for validators.",
-        "info": "Rewards can be claimed once every 24 hours."
+        "title": "Jutalmak",
+        "description": "Gratulálok! Elértél <1>{{amount}}</1> a megerősítőkre történő szavazással.",
+        "info": "24 óránkét tudod begyűjteni a jutalmaid."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "Eszköz"
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "Megerősítés",
         "success": {
-          "title": "Rewards claimed",
-          "text": "Your rewards have been added to your balance.",
-          "cta": "View details",
-          "done": "Done"
+          "title": "Jutalmak begyűjtve",
+          "text": "A jutalmaid hozzá lettek adva az egyenlegedhez.",
+          "cta": "Részletek megtekintése",
+          "done": "Kész"
         },
         "pending": {
-          "title": "Claiming your rewards..."
+          "title": "Jutalmaid begyűjtése..."
         },
-        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        "broadcastError": "Lehet, hogy a tranzakciód sikertelen volt. Kérlek, ellenőrizd pár perc múlva, hogy megbizonyosodj róla, hogy a tranzakciód valóban nem lett elküldve mielőtt újra megpróbálnád."
       }
     }
   },
   "freeze": {
-    "title": "Freeze",
+    "title": "Befagyasztás",
     "steps": {
       "amount": {
-        "title": "Freeze assets"
+        "title": "Eszközök befagyasztása",
+        "resourceInfo": "Sávszélesség vagy Energia?",
+        "bandwidthDescription": "Sávszélesség pontok felhasználhatók tranzakciók küldéséhez anélkül, hogy TRX-et költenél a hálózati díjak fedezésére. Válassz sávszélességet a napi ingyenes tranzakciók növeléséhez.",
+        "energyDescription": "Energia pontok szükségesek az okosszerződések végrehajtásához. Ha nem futtatsz semmilyen okosszerződést, nem szükséges, hogy a jutalmaid Energiában kérd.",
+        "amountLabel": "Befagyasztandó mennyiség",
+        "available": "Elérhető: {{amountAvailable}}",
+        "info": "Befagyasztott eszközöket nem lehet küldeni 3 napig."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "Eszköz"
       },
       "confirmation": {
-        "title": "Confirmation"
+        "title": "Megerősítés",
+        "success": {
+          "title": "",
+          "text": "Sávszélességet kezdesz el gyűjteni, ha a hálózat megerősítette a befagyasztást. Rövidesen szavazhatsz a Szuper Képviselőkre, hogy jutalmakat kapj.",
+          "votePending": "Szavazás {{time}}",
+          "vote": "Szavazás",
+          "later": "Szavazás később"
+        },
+        "pending": {
+          "title": "Eszközeid befagyasztása..."
+        },
+        "broadcastError": "Lehet, hogy a tranzakciód sikertelen volt. Kérlek, ellenőrizd pár perc múlva, hogy megbizonyosodj róla, hogy a tranzakciód valóban nem lett elküldve mielőtt újra megpróbálnád."
       }
     }
   },
   "unfreeze": {
-    "title": "Unfreeze",
+    "title": "Unfreeze assets",
     "steps": {
       "amount": {
-        "title": "Unfreeze assets"
+        "title": "Unfreeze",
+        "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "Eszköz"
       },
       "confirmation": {
-        "title": "Confirmation"
+        "title": "Megerősítés",
+        "success": {
+          "title": "",
+          "text": "Your assets have been unfrozen successfully. Your Bandwidth points will be decreased and your votes will be canceled.",
+          "continue": "Continue"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
   },
@@ -678,50 +713,51 @@
   },
   "tron": {
     "voting": {
-      "manageTP": "Manage Tron Power",
-      "claimRewards": "Claim rewards",
-      "nextRewardsDate": "Rewards can be claimed {{date}}",
-      "claimAvailableRewards": "Claim {{amount}}",
-      "title": "Claim rewards",
-      "header": "Votes",
-      "Amount": "Amount",
-      "percentageTP": "% of used TP",
-      "noRewards": "No rewards available",
+      "manageTP": "Tron Power Kezelése",
+      "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
+      "claimRewards": "Jutalmak begyűjtése",
+      "nextRewardsDate": "A jutalmak begyűjthetők {{date}}",
+      "claimAvailableRewards": "{{amount}} begyűjtése",
+      "title": "Jutalmak begyűjtése",
+      "header": "Szavazatok",
+      "Amount": "Mennyiség",
+      "percentageTP": "% felhasznált TP",
+      "noRewards": "Nincs elérhető jutalom",
       "remainingVotes": {
-        "title": "You still have {{amount}}TP remaining",
-        "description": "You didn't use all of your frozen assets to vote for a SR.",
-        "button": "Vote now"
+        "title": "Még {{amount}}TP-d maradt",
+        "description": "Nem használtad fel az összes befagyasztott eszközöd az SR-re történő szavazáshoz.",
+        "button": "Szavazz most"
       },
       "flow": {
         "steps": {
           "starter": {
-            "title": "Earn staking rewards",
-            "description": "Delegate TRX to a third party candidate to earn staking rewards. Click on continue to freeze assets and vote.",
+            "title": "Kapj tárolási jutalmakat",
+            "description": "A TRX-et delegálhatod harmadik fél számára, hogy jutalmakat szerezz.",
             "bullet": {
-              "delegate": "Delegated assets stay yours.",
-              "access": "You can access your assets 3 days after you froze them.",
-              "ledger": "Delegate securely with your Ledger device."
+              "delegate": "Delegált eszközeid a tieid maradnak.",
+              "access": "Befagyasztott eszközeidhez 3 nap után tudsz hozzá férni.",
+              "ledger": "Delegálj biztonságosan a Ledger eszközöd segítségével."
             },
             "button": {
-              "cta": "Continue"
+              "cta": "Folytatás"
             }
           }
         }
       }
     },
     "manage": {
-      "title": "Manage Tron Power",
+      "title": "Tron Power Kezelése",
       "freeze": {
-        "title": "Freeze",
-        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also earn TRON Power to vote for Super Representatives."
+        "title": "Befagyasztás",
+        "description": "Fagyassz be TRX-et, hogy sávszélességhez, vagy anergiához juss. Továbbá szerzel TRON Power-t, hogy szavazhass megbízottakra."
       },
       "unfreeze": {
-        "title": "Unfreeze",
-        "description": "Unfreeze TRX if you want to spend them. You will stop earning rewards and TRON Power to vote with."
+        "title": "Kiolvasztás",
+        "description": "Olvassz fel TRX-et ha el szeretnéd költeni. Tovább nem fogsz jutalmat, és TRON Power-t kapni, hogy szavazhass."
       },
       "vote": {
-        "title": "Vote",
-        "description": "Cast votes for Super Representatives using your TRON Power to earn TRX rewards."
+        "title": "Szavazás",
+        "description": "A szavazatok leadása a megbízottakra a TRON Power-t használja TRX jutalmak eléréséhez."
       }
     }
   },
@@ -739,8 +775,8 @@
     "durationDays": "{{count}} nap",
     "durationDays_plural": "{{count}} napok",
     "howItWorks": "Hogyan működik a delegálás",
-    "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
-    "earnRewards": "Earn rewards",
+    "delegationEarn": "Mostantól részesülhetsz {{name}} tárolási jutalmakban a számlád delegálásával.",
+    "earnRewards": "Kapj jutalmakat",
     "overdelegated": "Túlhalmozott",
     "flow": {
       "steps": {
@@ -906,6 +942,7 @@
       "desc": "Tudj meg többet a Ledger Live-ról, vagy kapj segítséget.",
       "version": "Verzió",
       "releaseNotesBtn": "Részletek",
+      "termsBtn": "Olvasás",
       "faq": "Ledger Támogatás",
       "faqDesc": "Problémád akadt? Kapj segítséget a Ledger Live, és a hardware pénztárcáddal kapcsolatban.",
       "terms": "Felhasználási feltételek",
@@ -1053,9 +1090,6 @@
       "title": "Nem rendelkezel Ledger eszközzel??",
       "buyNew": {
         "title": "Vásárolj egy Ledger eszközt"
-      },
-      "trackOrder": {
-        "title": "Rendelésed követése"
       },
       "learnMore": {
         "title": "Tudj meg többet Ledger-ről"
@@ -1243,13 +1277,15 @@
     "warning": "Mindig ellenőrizd, hogy készüléked pontosan az itt található címet jeleníti-e meg {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
-      "claimReward": "Please confirm the operation on your device to claim your rewards"
+      "claimReward": "Kérlek, erősítsd meg a műveletet az eszközödön a jutalmaid begyűjtéséhez",
+      "freeze": "Please confirm the operation on your device to freeze assets",
+      "unfreeze": "Please confirm the operation on your device to unfreeze your assets"
     },
     "recipientWording": {
       "send": "fogadó",
       "delegate": "megerősítő",
       "undelegate": "megerősítő",
-      "claimReward": "delegation rewards recipient"
+      "claimReward": "a delegálás jutalmazza a címzettet"
     }
   },
   "RecipientField": {
@@ -1592,7 +1628,7 @@
       "title": "Nincs elegendő egyenleg a főszámlán"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Balance cannot get below {{minimumAmount}}"
+      "title": "Az egyenleg nem lehet {{minimumAmount}} alatt"
     },
     "WrongAppForCurrency": {
       "title": "Kérlek, nyisd meg a(z) {{expected}} alkalmazást"
