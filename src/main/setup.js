@@ -1,6 +1,7 @@
 // @flow
 
 import "../live-common-setup-base";
+import winston from "winston";
 import { ipcMain } from "electron";
 import contextMenu from "electron-context-menu";
 import logger, { enableDebugLogger } from "../logger";
@@ -14,6 +15,20 @@ const loggerTransport = new LoggerTransport();
 const loggerFirmwareTransport = new LoggerTransportFirmware();
 logger.add(loggerTransport);
 logger.add(loggerFirmwareTransport);
+
+const { VERBOSE_FILE } = process.env;
+if (VERBOSE_FILE) {
+  const { format } = winston;
+  const { combine, timestamp, json } = format;
+  const winstonFormat = combine(timestamp(), json());
+  logger.add(
+    new winston.transports.File({
+      format: winstonFormat,
+      filename: VERBOSE_FILE,
+      level: "debug",
+    }),
+  );
+}
 
 if (process.env.DEV_TOOLS) {
   enableDebugLogger();
