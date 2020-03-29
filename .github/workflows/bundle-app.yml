@@ -39,7 +39,7 @@ jobs:
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: run spectron
-        run: yarn jest tests/specs/onboarding.spec.js
+        run: yarn spectron
       - name: upload macOS app
         uses: actions/upload-artifact@v1
         with:
@@ -85,7 +85,7 @@ jobs:
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: run spectron
-        run: yarn jest tests/specs/onboarding.spec.js
+        run: yarn spectron
       - name: upload linux app
         uses: actions/upload-artifact@v1
         with:
@@ -132,7 +132,7 @@ jobs:
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: run spectron
-        run: yarn jest tests/specs/onboarding.spec.js
+        run: yarn spectron
       - name: upload windows
         uses: actions/upload-artifact@v1
         with:
