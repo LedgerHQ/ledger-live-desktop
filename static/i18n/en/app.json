@@ -613,8 +613,8 @@
     "steps": {
       "castVotes": {
         "title": "Vote",
-        "search": "Search",
-        "totalVotes": "Total votes: {{total}}",
+        "search": "Search by name or address...",
+        "totalVotes": "Total SR votes: {{total}}",
         "selected": "Selected: {{total}}",
         "maxSelected": "Max selected: {{total}}",
         "allVotesAreUsed": "All votes are used",
@@ -624,7 +624,8 @@
         "estYield": "est. yield",
         "srInfo": "SR or Candidates?",
         "validators": "Validators ({{total}})",
-        "votes": "Votes: {{total}}"
+        "votes": "Votes available: {{total}}",
+        "noResults": "No validators found for \"<0>{{search}}</0>\"."
       },
       "connectDevice": {
         "title": "Device"
@@ -1320,6 +1321,7 @@
     "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
+      "send": "Please confirm the operation on your device to send it",
       "claimReward": "Please confirm the operation on your device to claim your rewards",
       "freeze": "Please confirm the operation on your device to freeze assets",
       "unfreeze": "Please confirm the operation on your device to unfreeze your assets",
@@ -1331,6 +1333,8 @@
       "undelegate": "validator",
       "claimReward": "delegation rewards recipient"
     },
+    "fromAddress": "From",
+    "toAddress": "To",
     "address": "Address",
     "resource": "Resource",
     "votes": "Votes"

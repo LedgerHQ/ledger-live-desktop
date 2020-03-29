@@ -49,19 +49,25 @@ const Pre = ({
 
   invariant(transaction.family === "tron", "tron transaction");
 
+  const from = account.type === "ChildAccount" ? account.address : mainAccount.freshAddress;
+
   return (
     <>
-      <TransactionConfirmField label={<Trans i18nKey="TransactionConfirm.address" />}>
-        <AddressText>
-          {account.type === "ChildAccount" ? account.address : mainAccount.freshAddress}{" "}
-        </AddressText>
+      <TransactionConfirmField label={<Trans i18nKey="TransactionConfirm.fromAddress" />}>
+        <AddressText>{from}</AddressText>
       </TransactionConfirmField>
+      {transaction.recipient && transaction.recipient !== from && (
+        <TransactionConfirmField label={<Trans i18nKey="TransactionConfirm.toAddress" />}>
+          <AddressText>{transaction.recipient}</AddressText>
+        </TransactionConfirmField>
+      )}
+
       {transaction.resource && (
         <TransactionConfirmField label={<Trans i18nKey="TransactionConfirm.resource" />}>
           <AddressText ff="Inter|SemiBold">{transaction.resource}</AddressText>
         </TransactionConfirmField>
       )}
-      {transaction.votes && (
+      {transaction.votes && transaction.votes.length > 0 && (
         <Box vertical justifyContent="space-between" mb={2}>
           <Box mb={2}>
             <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={3}>
@@ -86,7 +92,13 @@ const Post = ({ transaction }: { transaction: Transaction }) => {
   return null;
 };
 
-const Warning = ({ transaction }: { transaction: Transaction }) => {
+const Warning = ({
+  transaction,
+  recipientWording,
+}: {
+  transaction: Transaction,
+  recipientWording: string,
+}) => {
   invariant(transaction.family === "tron", "tron transaction");
 
   switch (transaction.mode) {
@@ -98,7 +110,7 @@ const Warning = ({ transaction }: { transaction: Transaction }) => {
     default:
       return (
         <WarnBox>
-          <Trans i18nKey={`TransactionConfirm.warningWording.${transaction.mode}`} />
+          <Trans i18nKey="TransactionConfirm.warning" values={{ recipientWording }} />
         </WarnBox>
       );
   }
