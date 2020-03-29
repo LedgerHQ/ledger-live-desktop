@@ -39,7 +39,16 @@ jobs:
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: run spectron
-        run: yarn spectron
+        run: mkdir -p spectron-logs && yarn spectron
+      - name: zip spectron logs
+        if: failure()
+        run: zip -qq -r ./spectron-logs.zip ./spectron-logs
+      - name: upload spectron logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v1
+        with:
+          name: spectron-logs.mac.zip
+          path: spectron-logs.zip
       - name: upload macOS app
         uses: actions/upload-artifact@v1
         with:
@@ -85,7 +94,16 @@ jobs:
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: run spectron
-        run: yarn spectron
+        run: mkdir -p spectron-logs && yarn spectron
+      - name: zip spectron logs
+        if: failure()
+        run: zip -qq -r ./spectron-logs.zip ./spectron-logs
+      - name: upload spectron logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v1
+        with:
+          name: spectron-logs.linux.zip
+          path: spectron-logs.zip
       - name: upload linux app
         uses: actions/upload-artifact@v1
         with:

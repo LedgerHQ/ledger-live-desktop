@@ -50,6 +50,7 @@ export const loadWindow = async () => {
 };
 
 export async function createMainWindow({ dimensions, positions }: any, settings: any) {
+  console.log("create main window...");
   theme = settings && settings.theme ? settings.theme : "null";
 
   // TODO renderer should provide the saved window rectangle
@@ -91,8 +92,10 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
   }
 
   mainWindow.on("closed", () => {
+    console.log("closed!!!");
     mainWindow = null;
   });
 
+  console.log("done created.");
   return mainWindow;
 }

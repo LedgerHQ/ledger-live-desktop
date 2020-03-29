@@ -35,6 +35,7 @@ app.on("activate", () => {
 });
 
 app.on("ready", async () => {
+  console.log("ready!!");
   if (__DEV__) {
     await installExtensions();
   }
@@ -113,6 +114,7 @@ app.on("ready", async () => {
 });
 
 ipcMain.on("ready-to-show", () => {
+  console.log("ready-to-show!");
   const w = getMainWindow();
   if (w) {
     show(w);
@@ -138,3 +140,5 @@ function show(win) {
   win.show();
   setImmediate(() => win.focus());
 }
+
+console.log("main has run!");

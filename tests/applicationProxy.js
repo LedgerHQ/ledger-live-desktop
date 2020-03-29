@@ -49,18 +49,25 @@ export function applicationProxy(userData = null, envVar = {}) {
   const app = new Application({
     path: getAppPath(),
     startTimeout: 30000,
+    /*
     chromeDriverArgs: [
       "--disable-extensions",
       "disable-dev-shm-usage",
       "--no-sandbox",
       "remote-debugging-port=" + Math.floor(Math.random() * (9999 - 9000) + 9000),
     ],
-    env: envVar,
+    */
+    webdriverLogPath: "spectron-logs/web-driver",
+    chromeDriverLogPath: "spectron-logs/chrome-driver",
+    env: {
+      ELECTRON_DISABLE_SANDBOX: 1,
+      VERBOSE_FILE: "spectron-logs/verbose.log",
+      ...envVar,
+    },
   });
   setInterval(() => {
     const logs = app.chromeDriver.getLogs();
     app.chromeDriver.clearLogs();
-    console.log("log length", logs.length);
     logs.forEach(l => console.log("FROM CHROME DRIVER:", l));
   }, 1000);
   return app;
