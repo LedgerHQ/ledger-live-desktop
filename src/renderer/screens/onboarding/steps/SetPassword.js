@@ -9,7 +9,6 @@ import {
   Description,
   DisclaimerBox,
   FixedTopContainer,
-  OnboardingFooterWrapper,
   StepContainerInner,
   Title,
 } from "~/renderer/screens/onboarding/sharedComponents";
@@ -22,6 +21,7 @@ import type { StepProps } from "~/renderer/screens/onboarding";
 import { setHasPassword } from "~/renderer/actions/application";
 import { hasPasswordSelector } from "~/renderer/reducers/application";
 import { createStructuredSelector } from "reselect";
+import OnboardingFooter from "~/renderer/screens/onboarding/OnboardingFooter";
 
 type State = {
   currentPassword: string,
@@ -134,29 +134,30 @@ class SetPassword extends PureComponent<Props, State> {
           </>
         </StepContainerInner>
 
-        <OnboardingFooterWrapper>
-          <Button outlineGrey onClick={() => prevStep()}>
-            {t("common.back")}
-          </Button>
-          <Box horizontal ml="auto">
-            <Button
-              event="Onboarding Skip Password"
-              onClick={() => nextStep()}
-              disabled={false}
-              mx={2}
-            >
-              {t("common.skipThisStep")}
-            </Button>
-            <Button
-              onClick={this.handleSave}
-              disabled={!this.isValid() || !newPassword.length || !confirmPassword.length}
-              primary
-              id="modal-continue-button"
-            >
-              {t("common.continue")}
-            </Button>
-          </Box>
-        </OnboardingFooterWrapper>
+        <OnboardingFooter
+          prevStep={prevStep}
+          right={
+            <Box horizontal ml="auto">
+              <Button
+                event="Onboarding Skip Password"
+                id="onboarding-password-skip-button"
+                onClick={() => nextStep()}
+                disabled={false}
+                mx={2}
+              >
+                {t("common.skipThisStep")}
+              </Button>
+              <Button
+                id="onboarding-password-continue-button"
+                onClick={this.handleSave}
+                disabled={!this.isValid() || !newPassword.length || !confirmPassword.length}
+                primary
+              >
+                {t("common.continue")}
+              </Button>
+            </Box>
+          }
+        />
       </FixedTopContainer>
     );
   }
