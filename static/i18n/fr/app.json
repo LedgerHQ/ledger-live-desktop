@@ -640,7 +640,8 @@
         "title": "Destinataire"
       },
       "amount": {
-        "title": "Montant"
+        "title": "Montant",
+        "banner": "Maximum spendable amount is"
       },
       "summary": {
         "title": "Récapitulatif"
