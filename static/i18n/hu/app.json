@@ -585,11 +585,11 @@
     }
   },
   "unfreeze": {
-    "title": "Unfreeze assets",
+    "title": "Eszközök kiolvasztása",
     "steps": {
       "amount": {
-        "title": "Unfreeze",
-        "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
+        "title": "Kiolvasztás",
+        "info": "A kiolvasztás csökkenteni fogja a {{resource}} és törli a szavazataid."
       },
       "connectDevice": {
         "title": "Eszköz"
@@ -598,13 +598,13 @@
         "title": "Megerősítés",
         "success": {
           "title": "",
-          "text": "Your assets have been unfrozen successfully. Your Bandwidth points will be decreased and your votes will be canceled.",
-          "continue": "Continue"
+          "text": "Az eszközeid sikeresen ki lettek olvasztva. A sávszélesség pontjaid csökkenni fognak, és a szavazataid törölve lesznek.",
+          "continue": "Folytatás"
         },
         "pending": {
-          "title": "Freezing your assets..."
+          "title": "Eszközeid befagyasztása..."
         },
-        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        "broadcastError": "Lehet, hogy a tranzakciód sikertelen volt. Kérlek, ellenőrizd pár perc múlva, hogy megbizonyosodj róla, hogy a tranzakciód valóban nem lett elküldve mielőtt újra megpróbálnád."
       }
     }
   },
@@ -640,7 +640,8 @@
         "title": "Fogadó"
       },
       "amount": {
-        "title": "Mennyiség"
+        "title": "Mennyiség",
+        "banner": "Maximum spendable amount is"
       },
       "summary": {
         "title": "Összegzés"
@@ -714,7 +715,7 @@
   "tron": {
     "voting": {
       "manageTP": "Tron Power Kezelése",
-      "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
+      "warnEarnRewards": "Szükséged van minimum {{amount}}, hogy jutalmakat kezdj kapni",
       "claimRewards": "Jutalmak begyűjtése",
       "nextRewardsDate": "A jutalmak begyűjthetők {{date}}",
       "claimAvailableRewards": "{{amount}} begyűjtése",
@@ -1278,8 +1279,8 @@
     "warningWording": {},
     "titleWording": {
       "claimReward": "Kérlek, erősítsd meg a műveletet az eszközödön a jutalmaid begyűjtéséhez",
-      "freeze": "Please confirm the operation on your device to freeze assets",
-      "unfreeze": "Please confirm the operation on your device to unfreeze your assets"
+      "freeze": "Kérlek, erősítsd meg a műveletet az eszközödön az eszközök befagyasztásához",
+      "unfreeze": "Kérlek, erősítsd meg a műveletet az eszközödön az eszközök kiolvasztásához"
     },
     "recipientWording": {
       "send": "fogadó",
