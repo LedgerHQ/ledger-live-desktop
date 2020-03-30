@@ -144,10 +144,6 @@ export default class OnboardingPage extends Page {
     return this.continueButton.click().then(this.app.client.waitUntilWindowLoaded());
   }
 
-  skip() {
-    return this.skipButton.click().then(this.app.client.waitUntilWindowLoaded());
-  }
-
   back() {
     return this.backButton.click().then(this.app.client.waitUntilWindowLoaded());
   }

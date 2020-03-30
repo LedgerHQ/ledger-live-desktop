@@ -267,14 +267,15 @@ describe("When I launch the app for the first time", () => {
 
     describe("When it displays 'Password' form", () => {
       it("should have a title and a description", async () => {
+        await app.client.pause(2000);
         await onboardingPage.continue();
         expect(await onboardingPage.pageTitle.getText()).toBe(data.password.title);
         expect(await onboardingPage.pageDescription.getText()).toBe(data.password.description);
       });
 
       it("should be possible to skip this step", async () => {
-        await onboardingPage.skip();
-        expect(await onboardingPage.pageTitle.getText()).toBe(data.analytics.title);
+        await passwordPage.skip();
+        expect(await passwordPage.pageTitle.getText()).toBe(data.analytics.title);
         expect(await onboardingPage.pageDescription.getText()).toBe(data.analytics.description);
         await onboardingPage.back();
       });
@@ -284,7 +285,7 @@ describe("When I launch the app for the first time", () => {
         await passwordPage.newPasswordInput.addValue(data.password.new);
         expect(await onboardingPage.continueButton.isEnabled()).toBe(false);
         await passwordPage.confirmPasswordInput.addValue(data.password.bad);
-        expect(await onboardingPage.continueButton.isEnabled()).toBe(false);
+        expect(await passwordPage.continueButton.isEnabled()).toBe(false);
         expect(await passwordPage.inputError.getText()).toBe(data.password.mismatchError);
       });
 
@@ -292,13 +293,13 @@ describe("When I launch the app for the first time", () => {
         // FIXME: setValue() is not working so we use backspace to clear the input field.
         await passwordPage.confirmPasswordInput.addValue("\uE003\uE003\uE003\uE003");
         await passwordPage.confirmPasswordInput.addValue(data.password.confirm);
-        expect(await onboardingPage.continueButton.isEnabled()).toBe(true);
+        expect(await passwordPage.continueButton.isEnabled()).toBe(true);
       });
     });
 
     describe("When it displays 'Bugs and Analytics' form", () => {
       it("should ask to send analytics data", async () => {
-        await onboardingPage.continue(true);
+        await passwordPage.continue(true);
         expect(await analyticsPage.isVisible()).toBe(true);
         expect(await onboardingPage.pageTitle.getText()).toBe(data.analytics.title);
         expect(await onboardingPage.pageDescription.getText()).toBe(data.analytics.description);
