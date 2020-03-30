@@ -640,7 +640,8 @@
         "title": "Fogadó"
       },
       "amount": {
-        "title": "Mennyiség"
+        "title": "Mennyiség",
+        "banner": "Maximum spendable amount is"
       },
       "summary": {
         "title": "Összegzés"
