@@ -6,6 +6,8 @@ import logger from "../logger";
 const subscriptions = {};
 
 export function executeCommand(command: *, send: *) {
+  while (1) {}
+  // eslint-disable-next-line no-unreachable
   const { data, requestId, id } = command;
   const cmd = commandsById[id];
   if (!cmd) {
@@ -32,6 +34,7 @@ export function executeCommand(command: *, send: *) {
         send({ type: "cmd.ERROR", requestId, data: serializeError(error) });
       },
     });
+    // eslint-disable-next-line no-unreachable
   } catch (error) {
     logger.warn("Command impl error:", { error });
     delete subscriptions[requestId];
