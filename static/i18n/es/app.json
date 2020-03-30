@@ -640,7 +640,8 @@
         "title": "Recipient"
       },
       "amount": {
-        "title": "Amount"
+        "title": "Amount",
+        "banner": "Maximum spendable amount is"
       },
       "summary": {
         "title": "Summary"
