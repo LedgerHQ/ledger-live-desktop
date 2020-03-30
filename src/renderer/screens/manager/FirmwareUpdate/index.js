@@ -21,6 +21,7 @@ type Props = {
   deviceInfo: DeviceInfo,
   device: Device,
   setFirmwareUpdateOpened: boolean => void,
+  disableFirmwareUpdate?: boolean,
 };
 
 type State = {
@@ -47,6 +48,10 @@ const initializeState = (props: Props): State => ({
 });
 
 class FirmwareUpdate extends PureComponent<Props, State> {
+  static defaultProps = {
+    disableFirmwareUpdate: false,
+  };
+
   state = initializeState(this.props);
 
   async componentDidMount() {
@@ -88,7 +93,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   handleDisclaimerNext = () => this.setState({ modal: "install" });
 
   render() {
-    const { deviceInfo, device, setFirmwareUpdateOpened } = this.props;
+    const { deviceInfo, device, setFirmwareUpdateOpened, disableFirmwareUpdate } = this.props;
     const { firmware, modal, stepId, ready, error } = this.state;
 
     if (!firmware) return null;
@@ -126,6 +131,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
           deviceInfo={deviceInfo}
           firmware={firmware}
           onClick={this.handleDisclaimerModal}
+          disabled={disableFirmwareUpdate}
         />
 
         {ready ? (
