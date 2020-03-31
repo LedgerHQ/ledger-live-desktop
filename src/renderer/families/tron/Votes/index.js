@@ -1,5 +1,6 @@
 // @flow
 import React, { useCallback, useMemo } from "react";
+import invariant from "invariant";
 import { useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
@@ -34,7 +35,6 @@ import ClaimRewards from "~/renderer/icons/ClaimReward";
 
 type Props = {
   account: Account,
-  parentAccount: ?Account,
 };
 
 const Wrapper = styled(Box).attrs(() => ({
@@ -48,7 +48,7 @@ const Wrapper = styled(Box).attrs(() => ({
   align-items: center;
 `;
 
-const Delegation = ({ account, parentAccount }: Props) => {
+const Delegation = ({ account }: Props) => {
   const dispatch = useDispatch();
 
   const superRepresentatives = useTronSuperRepresentatives();
@@ -62,17 +62,14 @@ const Delegation = ({ account, parentAccount }: Props) => {
   const minAmount = 10 ** unit.magnitude;
 
   const { tronResources, spendableBalance } = account;
-  const { votes, tronPower, unwithdrawnReward } = tronResources || {};
+  invariant(tronResources, "tron account expected");
+  const { votes, tronPower, unwithdrawnReward } = tronResources;
 
-  const formattedUnwidthDrawnReward = formatCurrencyUnit(
-    account.unit,
-    BigNumber(unwithdrawnReward || 0),
-    {
-      disableRounding: true,
-      alwaysShowSign: false,
-      showCode: true,
-    },
-  );
+  const formattedUnwidthDrawnReward = formatCurrencyUnit(unit, BigNumber(unwithdrawnReward || 0), {
+    disableRounding: true,
+    alwaysShowSign: false,
+    showCode: true,
+  });
 
   const formattedVotes = formatVotes(votes, superRepresentatives);
 
@@ -82,22 +79,20 @@ const Delegation = ({ account, parentAccount }: Props) => {
     () =>
       dispatch(
         openModal(votes.length > 0 ? "MODAL_VOTE_TRON" : "MODAL_VOTE_TRON_INFO", {
-          parentAccount,
           account,
         }),
       ),
-    [account, parentAccount, dispatch, votes],
+    [account, dispatch, votes],
   );
 
   const onEarnRewards = useCallback(
     () =>
       dispatch(
         openModal("MODAL_REWARDS_INFO", {
-          parentAccount,
           account,
         }),
       ),
-    [account, parentAccount, dispatch],
+    [account, dispatch],
   );
 
   const hasRewards = unwithdrawnReward > 0;
@@ -152,7 +147,6 @@ const Delegation = ({ account, parentAccount }: Props) => {
                 onClick={() => {
                   dispatch(
                     openModal("MODAL_CLAIM_REWARDS", {
-                      parentAccount,
                       account,
                       reward: unwithdrawnReward,
                     }),
@@ -240,10 +234,10 @@ const Delegation = ({ account, parentAccount }: Props) => {
   );
 };
 
-const Votes = ({ account, parentAccount }: Props) => {
+const Votes = ({ account }: Props) => {
   if (!account.tronResources) return null;
 
-  return <Delegation account={account} parentAccount={parentAccount} />;
+  return <Delegation account={account} />;
 };
 
 export default Votes;
