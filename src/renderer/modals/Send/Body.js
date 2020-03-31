@@ -232,7 +232,7 @@ const Body = ({
   return (
     <Stepper {...stepperProps}>
       <SyncSkipUnderPriority priority={100} />
-      <Track onUnmount event="CloseModalDelegate" />
+      <Track onUnmount event="CloseModalSend" />
     </Stepper>
   );
 };
