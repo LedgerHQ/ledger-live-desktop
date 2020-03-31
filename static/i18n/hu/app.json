@@ -608,6 +608,44 @@
       }
     }
   },
+  "vote": {
+    "title": "Cast votes",
+    "steps": {
+      "castVotes": {
+        "title": "Vote",
+        "search": "Search by name or address...",
+        "totalVotes": "Total SR votes: {{total}}",
+        "selected": "Selected: {{total}}",
+        "maxSelected": "Max selected: {{total}}",
+        "allVotesAreUsed": "All votes are used",
+        "maxUsed": "Max votes: {{total}}",
+        "superRepresentatives": "Super Representatives",
+        "candidates": "Candidates",
+        "estYield": "est. yield",
+        "srInfo": "SR or Candidates?",
+        "validators": "Validators ({{total}})",
+        "votes": "Votes available: {{total}}",
+        "noResults": "No validators found for \"<0>{{search}}</0>\"."
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "success": {
+          "title": "Your votes were cast successfully.",
+          "text": "",
+          "howVotingWorks": "How voting works?",
+          "done": "Done",
+          "cta": "View details"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+      }
+    }
+  },
   "receive": {
     "title": "Fogadás",
     "successTitle": "A cím biztonságosan megosztva",
@@ -714,6 +752,12 @@
   },
   "tron": {
     "voting": {
+      "emptyState": {
+        "description": "You can now earn rewards by freezing and voting.",
+        "info": "How voting works",
+        "votesDesc": "Cast your votes for one or more representatives to start earning staking rewards.",
+        "vote": "Cast votes"
+      },
       "manageTP": "Tron Power Kezelése",
       "warnEarnRewards": "Szükséged van minimum {{amount}}, hogy jutalmakat kezdj kapni",
       "claimRewards": "Jutalmak begyűjtése",
@@ -758,7 +802,28 @@
       },
       "vote": {
         "title": "Szavazás",
-        "description": "A szavazatok leadása a megbízottakra a TRON Power-t használja TRX jutalmak eléréséhez."
+        "description": "A szavazatok leadása a megbízottakra a TRON Power-t használja TRX jutalmak eléréséhez.",
+        "steps": {
+          "vote": {
+            "title": "Cast votes",
+            "description": "Vote for one or more Super Representatives to start earning rewards.",
+            "footer": {
+              "doNotShowAgain": "Don't show again",
+              "next": "Cast Votes"
+            },
+            "info": {
+              "message": "Super Representatives or candidates?",
+              "superRepresentative": {
+                "title": "Super Representatives",
+                "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+              },
+              "candidates": {
+                "title": "Candidates",
+                "description": "127 individuals elected through voting by the entire token holder community. Votes are updated once every 6 hours."
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -1278,16 +1343,23 @@
     "warning": "Mindig ellenőrizd, hogy készüléked pontosan az itt található címet jeleníti-e meg {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
+      "send": "Please confirm the operation on your device to send it",
       "claimReward": "Kérlek, erősítsd meg a műveletet az eszközödön a jutalmaid begyűjtéséhez",
       "freeze": "Kérlek, erősítsd meg a műveletet az eszközödön az eszközök befagyasztásához",
-      "unfreeze": "Kérlek, erősítsd meg a műveletet az eszközödön az eszközök kiolvasztásához"
+      "unfreeze": "Kérlek, erősítsd meg a műveletet az eszközödön az eszközök kiolvasztásához",
+      "vote": "Please confirm the operation on your device to cast your votes"
     },
     "recipientWording": {
       "send": "fogadó",
       "delegate": "megerősítő",
       "undelegate": "megerősítő",
       "claimReward": "a delegálás jutalmazza a címzettet"
-    }
+    },
+    "fromAddress": "From",
+    "toAddress": "To",
+    "address": "Address",
+    "resource": "Resource",
+    "votes": "Votes"
   },
   "RecipientField": {
     "placeholder": "Írd be a(z) {{currencyName}} címet"
