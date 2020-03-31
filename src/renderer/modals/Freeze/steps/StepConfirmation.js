@@ -88,7 +88,6 @@ export function StepConfirmationFooter({
   t,
   transitionTo,
   account,
-  parentAccount,
   onRetry,
   error,
   openModal,
@@ -103,11 +102,10 @@ export function StepConfirmationFooter({
       const { votes } = tronResources || {};
 
       openModal(votes.length > 0 ? "MODAL_VOTE_TRON" : "MODAL_VOTE_TRON_INFO", {
-        accountId: account.id,
-        parentId: parentAccount && parentAccount.id,
+        account: account,
       });
     }
-  }, [account, parentAccount, onClose, openModal]);
+  }, [account, onClose, openModal]);
 
   return error ? (
     <RetryButton ml={2} primary onClick={onRetry} />
