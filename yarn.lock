@@ -1402,10 +1402,10 @@
     node-pre-gyp "^0.14.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^12.9.0":
-  version "12.9.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.9.0.tgz#d7ef916c0d6e23f840cb967808d6f5a632435647"
-  integrity sha512-3hTUtSBWtNcxnYLENvJHjpJUDQbTXZeWq2tISrIFyCbiAGvZPvg6IdvL/uTFhjAfQvfB8rhXEgnpMBYySFiKOA==
+"@ledgerhq/live-common@^12.10.0":
+  version "12.10.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.10.0.tgz#8e42935118bf57cb4366b8dfa6836531abd9380c"
+  integrity sha512-DeBIEIy1Z+a17R6qWFxKcnTeVT1Kve3cAJrDsbFIykq9DRIZwO4vWHXzv7iymhD0LoCmH7nqaQME4cKsLLW9Nw==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "5.12.0"
@@ -5240,10 +5240,10 @@ eslint-plugin-flowtype@^4.7.0:
   dependencies:
     lodash "^4.17.15"
 
-eslint-plugin-import@^2.20.1:
-  version "2.20.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.20.1.tgz#802423196dcb11d9ce8435a5fc02a6d3b46939b3"
-  integrity sha512-qQHgFOTjguR+LnYRoToeZWT62XM55MBVXObHM6SKFd1VzDcX/vqT1kAz8ssqigh5eMj8qXcRoXXGZpPP6RfdCw==
+eslint-plugin-import@^2.20.2:
+  version "2.20.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.20.2.tgz#91fc3807ce08be4837141272c8b99073906e588d"
+  integrity sha512-FObidqpXrR8OnCh4iNsxy+WACztJLXAHBO5hK79T1Hc77PgQZkyDGA5Ag9xAvRpglvLNxhH/zSmZ70/pZ31dHg==
   dependencies:
     array-includes "^3.0.3"
     array.prototype.flat "^1.2.1"
