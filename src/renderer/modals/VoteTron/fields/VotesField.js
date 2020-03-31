@@ -1,176 +1,33 @@
 // @flow
 import invariant from "invariant";
-import React, { useMemo, useCallback, useState, useRef, useEffect, memo, useReducer } from "react";
+import React, { useCallback, useState, useRef, memo } from "react";
+import debounce from "lodash/debounce";
+import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import styled, { css } from "styled-components";
-
-import { useTronSuperRepresentatives } from "@ledgerhq/live-common/lib/families/tron/react";
-import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
-
 import type { TFunction } from "react-i18next";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import {
+  useTronSuperRepresentatives,
+  useSortedSr,
+} from "@ledgerhq/live-common/lib/families/tron/react";
+import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
-
 import type { Vote, SuperRepresentative } from "@ledgerhq/live-common/lib/families/tron/types";
-
+import { languageSelector } from "~/renderer/reducers/settings";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
 import Trophy from "~/renderer/icons/Trophy";
 import Medal from "~/renderer/icons/Medal";
 import Text from "~/renderer/components/Text";
 import ExternalLink from "~/renderer/icons/ExternalLink";
-import Cross from "~/renderer/icons/Cross";
 import Check from "~/renderer/icons/Check";
 import ExclamationCircle from "~/renderer/icons/ExclamationCircle";
 import SearchBox from "~/renderer/screens/accounts/AccountList/SearchBox";
-import debounce from "lodash/debounce";
 
 /** @TODO move this to common */
 const SR_THRESHOLD = 27;
 const SR_MAX_VOTES = 5;
-
-/** @TODO move this to common */
-const searchFilter = (query?: string) => ({
-  name,
-  address,
-}: {
-  name: ?string,
-  address: string,
-}) => {
-  if (!query) return true;
-  const terms = `${name || ""} ${address}`;
-  return terms.toLowerCase().includes(query.toLowerCase().trim());
-};
-
-/** @TODO move this to common */
-const useSortedSr = (
-  search: string,
-  superRepresentatives: SuperRepresentative[],
-  votes: Vote[],
-) => {
-  const [initialVotes] = useState(votes.map(({ address }) => address));
-
-  const SR = useMemo(
-    () =>
-      superRepresentatives.map((sr, rank) => ({
-        sr,
-        name: sr.name,
-        address: sr.address,
-        rank: rank + 1,
-        isSR: rank <= SR_THRESHOLD,
-      })),
-    [superRepresentatives],
-  );
-
-  const sortedVotes = useMemo(() => {
-    return SR.filter(({ address }) => initialVotes.includes(address)).concat(
-      SR.filter(({ address }) => !initialVotes.includes(address)),
-    );
-  }, [SR, initialVotes]);
-
-  const sr = useMemo(() => (search ? SR.filter(searchFilter(search)) : sortedVotes), [
-    search,
-    SR,
-    sortedVotes,
-  ]);
-
-  return sr;
-};
-
-/** @TODO move this to common */
-type VoteReducerAction = {
-  type: "updateVote" | "resetVotes" | "clearVotes",
-  address: string,
-  value: string,
-};
-
-function votesReducer(state, action: VoteReducerAction) {
-  const { type, address, value } = action;
-  switch (type) {
-    case "updateVote": {
-      const voteCount = value ? parseInt(Number(value.replace(/[^0-9]/g, ""))) : 0;
-      const currentVotes = Object.values({ ...state.votes, [address]: voteCount }).filter(Boolean);
-
-      const votes = {
-        ...state.votes,
-        [address]: voteCount <= 0 || currentVotes.length > SR_MAX_VOTES ? 0 : voteCount,
-      };
-
-      const votesUsed = Object.values(votes).reduce((sum, count) => sum + Number(count), 0);
-
-      return {
-        ...state,
-        votes,
-        votesUsed,
-        votesSelected: Object.values(votes).filter(Boolean).length,
-        max: Math.max(0, state.votesAvailable - votesUsed),
-      };
-    }
-    case "resetVotes": {
-      const { initialVotes, votesAvailable } = state;
-      const votesUsed = Object.values(initialVotes).reduce(
-        (sum, voteCount) => sum + Number(voteCount),
-        0,
-      );
-      return {
-        ...state,
-        votes: state.initialVotes,
-        votesUsed,
-        votesSelected: Object.keys(initialVotes).length,
-        max: Math.max(0, votesAvailable - votesUsed),
-      };
-    }
-    case "clearVotes": {
-      return {
-        ...state,
-        votes: {},
-        votesUsed: 0,
-        votesSelected: 0,
-        max: state.votesAvailable,
-      };
-    }
-    default:
-      return state;
-  }
-}
-
-function initState(initialVotes, tronResources) {
-  const votes = initialVotes.reduce(
-    (sum, { voteCount, address }) => ({ ...sum, [address]: voteCount }),
-    {},
-  );
-  const votesAvailable = tronResources ? tronResources.tronPower : 0;
-  const votesUsed = Object.values(votes).reduce((sum, voteCount) => sum + Number(voteCount), 0);
-
-  return {
-    votes,
-    votesAvailable,
-    votesUsed,
-    votesSelected: initialVotes.length,
-    max: Math.max(0, votesAvailable - votesUsed),
-    initialVotes: votes,
-  };
-}
-
-/** @TODO move this to common */
-function useVotesReducer(votes, onChangeVotes, tronResources) {
-  const [state, dispatch] = useReducer(votesReducer, initState(votes, tronResources));
-
-  useEffect(
-    debounce(
-      () =>
-        onChangeVotes(
-          Object.keys(state.votes)
-            .map(address => ({ address, voteCount: state.votes[address] }))
-            .filter(({ voteCount }) => voteCount > 0),
-        ),
-      400,
-    ),
-    [state],
-  );
-
-  return [state, dispatch];
-}
 
 const ScrollContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({
   vertical: true,
@@ -275,25 +132,9 @@ const InputBox = styled(Box).attrs(() => ({
   horizontal: true,
   alignItems: "center",
 }))`
+  position: relative;
   flex-basis: 150px;
-  border: 1px solid transparent;
-  border-color: ${p => p.theme.colors.palette.divider};
-  border-radius: 4px;
   height: 32px;
-  padding: 2px 0;
-  transition all 200ms ease-in;
-  ${IconContainer} {
-    opacity: 0;
-    background-color: rgba(0,0,0,0);
-    flex: 0 0 24px;
-    cursor: pointer;
-  }
-  &:hover > ${IconContainer} {
-    opacity: 1;
-  }
-  &:focus, &:focus-within {
-    color: ${p => p.theme.colors.palette.primary.main};
-  }
 `;
 
 const VoteInput = styled.input.attrs(() => ({
@@ -304,12 +145,20 @@ const VoteInput = styled.input.attrs(() => ({
   placeholder: 0,
 }))`
   flex: 1;
-  text-align: right;
-  border: none;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
   height: 100%;
   padding: 0 6px;
-  transition all 200ms ease-in;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  border-color: ${p => (p.notEnoughVotes ? p.theme.colors.pearl : p.theme.colors.palette.divider)};
+  &:disabled {
+    cursor: disabled;
+    color: ${p => p.theme.colors.palette.text.shade40};
+    background-color: ${p => p.theme.colors.palette.background.default};
+  }
 `;
 
 const Separator = styled.div`
@@ -341,7 +190,6 @@ const Placeholder = styled(Box).attrs(() => ({
   alignItems: "center",
   justifyContent: "center",
   borderRadius: 4,
-
   color: "palette.text.shade50",
   mt: 3,
   p: 3,
@@ -354,14 +202,26 @@ const Placeholder = styled(Box).attrs(() => ({
 type SRRowProps = {
   sr: SuperRepresentative,
   rank: number,
+  language: string,
   isSR?: boolean,
   value?: number,
   disabled?: boolean,
-  dispatch: VoteReducerAction => void,
+  notEnoughVotes: boolean,
+  onUpdateVote: (string, string) => void,
   onExternalLink: (address: string) => void,
 };
 
-const _SRRow = ({ sr, rank, isSR, value, disabled, dispatch, onExternalLink }: SRRowProps) => {
+const _SRRow = ({
+  sr,
+  rank,
+  language,
+  isSR,
+  value,
+  disabled,
+  onUpdateVote,
+  onExternalLink,
+  notEnoughVotes,
+}: SRRowProps) => {
   const inputRef = useRef();
   return (
     <Row disabled={!value && disabled} active={!!value}>
@@ -374,30 +234,29 @@ const _SRRow = ({ sr, rank, isSR, value, disabled, dispatch, onExternalLink }: S
           </IconContainer>
         </Title>
         <SubTitle>
-          <Trans i18nKey="vote.steps.castVotes.totalVotes" values={{ total: sr.voteCount }}>
+          <Trans
+            i18nKey="vote.steps.castVotes.totalVotes"
+            values={{ total: sr.voteCount.toLocaleString(language) }}
+          >
             <b></b>
           </Trans>
           {/** @TODO add estimated yield here */}
         </SubTitle>
       </InfoContainer>
       <InputBox active={!!value}>
-        <IconContainer
-          onClick={() => dispatch({ type: "updateVote", address: sr.address, value: "" })}
-        >
-          <Cross size={16} />
-        </IconContainer>
         <VoteInput
           // $FlowFixMe
           ref={inputRef}
-          placeholder={"0"}
-          min={0}
-          max={null}
+          placeholder="0"
           type="text"
-          value={value}
+          maxLength="12"
+          notEnoughVotes={notEnoughVotes}
+          value={typeof value === "number" ? String(value) : "0"}
           disabled={disabled}
-          onChange={e =>
-            dispatch({ type: "updateVote", address: sr.address, value: e.target.value })
-          }
+          onFocus={() => {
+            inputRef.current && inputRef.current.select();
+          }}
+          onChange={e => onUpdateVote(sr.address, e.target.value)}
         />
       </InputBox>
     </Row>
@@ -410,22 +269,41 @@ type Props = {
   votes: Vote[],
   account: Account,
   status: TransactionStatus,
-  onChangeVotes: (votes: Vote[]) => void,
+  onChangeVotes: (updater: (Vote[]) => Vote[]) => void,
   bridgePending: boolean,
 };
 
 const AmountField = ({ t, account, onChangeVotes, status, bridgePending, votes }: Props) => {
-  invariant(account && account.tronResources && votes, "account and transaction required");
+  invariant(account, "tron account required");
 
   const [search, setSearch] = useState("");
   const { tronResources } = account;
+  invariant(tronResources && votes, "tron transaction required");
+
+  const language = useSelector(languageSelector);
 
   const superRepresentatives = useTronSuperRepresentatives();
   const SR = useSortedSr(search, superRepresentatives, votes);
 
-  const [state, dispatch] = useVotesReducer(votes, onChangeVotes, tronResources);
+  const votesAvailable = tronResources.tronPower;
+  const votesUsed = votes.reduce((sum, v) => sum + v.voteCount, 0);
+  const votesSelected = votes.length;
+  const max = Math.max(0, votesAvailable - votesUsed);
 
-  const { votes: currentVotes, votesAvailable, votesSelected, max } = state;
+  const onUpdateVote = useCallback(
+    (address, value) => {
+      const raw = value ? parseInt(value.replace(/[^0-9]/g, ""), 10) : 0;
+      const voteCount = raw <= 0 || votesSelected > SR_MAX_VOTES ? 0 : raw;
+      onChangeVotes(existing => {
+        const update = existing.filter(v => v.address !== address);
+        if (voteCount > 0) {
+          update.push({ address, voteCount });
+        }
+        return update;
+      });
+    },
+    [onChangeVotes, votesSelected],
+  );
 
   const scrollRef = useRef();
   const [scrollOffset, setScrollOffset] = useState(SR_THRESHOLD);
@@ -452,7 +330,7 @@ const AmountField = ({ t, account, onChangeVotes, status, bridgePending, votes }
 
   if (!status) return null;
 
-  const error = Object.values(status.errors)[0];
+  const notEnoughVotes = votesUsed > votesAvailable;
 
   return (
     <>
@@ -482,7 +360,7 @@ const AmountField = ({ t, account, onChangeVotes, status, bridgePending, votes }
             <Text fontSize={3} ff="Inter|Medium">
               <Trans i18nKey="vote.steps.castVotes.votes" values={{ total: max }} />
             </Text>
-          ) : error ? (
+          ) : notEnoughVotes ? (
             <Box horizontal alignItems="center" color="alertRed">
               <ExclamationCircle size={13} />
               <Box ml={1}>
@@ -507,24 +385,29 @@ const AmountField = ({ t, account, onChangeVotes, status, bridgePending, votes }
         </Box>
       </Box>
       <ScrollContainer ref={scrollRef} onScroll={debounce(handleScroll, 50)}>
-        {SR.slice(0, scrollOffset).map(({ sr, rank, isSR }, i) => (
-          <SRRow
-            key={`SR_${sr.address}_${i}`}
-            sr={sr}
-            rank={rank}
-            isSR={isSR}
-            value={currentVotes[sr.address]}
-            dispatch={dispatch}
-            onExternalLink={onExternalLink}
-            disabled={!currentVotes[sr.address] && (max <= 0 || votesSelected >= SR_MAX_VOTES)}
-          />
-        ))}
+        {SR.slice(0, scrollOffset).map(({ sr, rank, isSR }, i) => {
+          const item = votes.find(v => v.address === sr.address);
+          return (
+            <SRRow
+              key={`SR_${sr.address}_${i}`}
+              sr={sr}
+              rank={rank}
+              isSR={isSR}
+              language={language}
+              value={item && item.voteCount}
+              onUpdateVote={onUpdateVote}
+              onExternalLink={onExternalLink}
+              disabled={!item && votesSelected >= SR_MAX_VOTES}
+              notEnoughVotes={item ? notEnoughVotes : false}
+            />
+          );
+        })}
         {SR.length <= 0 && search && (
           <Placeholder>
             <Box mb={2}>
               <ExclamationCircle size={30} />
             </Box>
-            <Text ff="Inter|Medium" fontSize={5}>
+            <Text ff="Inter|Medium" fontSize={4}>
               <Trans i18nKey="vote.steps.castVotes.noResults" values={{ search }}>
                 <b></b>
               </Trans>

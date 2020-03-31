@@ -101,6 +101,7 @@ const Body = ({
   const {
     transaction,
     setTransaction,
+    updateTransaction,
     account,
     parentAccount,
     status,
@@ -180,6 +181,7 @@ const Body = ({
     openModal,
     setSigned,
     onChangeTransaction: setTransaction,
+    onUpdateTransaction: updateTransaction,
     onOperationBroadcasted: handleOperationBroadcasted,
     onTransactionError: handleTransactionError,
     t,
