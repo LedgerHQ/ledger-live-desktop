@@ -1095,17 +1095,19 @@
     "checking": "Проверка обновлений...",
     "checkSuccess": "Обновления готовы к установке",
     "quitAndInstall": "Установить сейчас",
+    "updateAvailable": "Ledger Live {{version}} is available for update",
     "error": "Во время обновления возникла ошибка. Скачайте еще раз.",
     "reDownload": "Скачать еще раз",
     "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
     "downloadNow": "Download now"
   },
   "crash": {
-    "oops": "Произошла ошибка",
-    "uselessText": "Повторите попытку, перезапустив Ledger Live. Если проблема не будет устранена, выполните экспорт журналов и свяжитесь со службой поддержки компании Ledger.",
+    "title": "Something went wrong",
+    "description": "Please check our support article for a possible solution. If the problem persists, save your logs using the button below and provide them to Ledger Support.",
+    "troubleshooting": "Click here for possible solutions",
     "restart": "Перезапустить",
-    "support": "Связаться со службой поддержки",
-    "github": "GitHub"
+    "logs": "Save logs",
+    "dataFolder": "View user data"
   },
   "exportOperationsModal": {
     "title": "История операций",
