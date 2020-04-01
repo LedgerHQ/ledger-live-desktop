@@ -614,7 +614,7 @@
       "castVotes": {
         "title": "Vote",
         "search": "Search by name or address...",
-        "totalVotes": "Total SR votes: {{total}}",
+        "totalVotes": "Total votes: {{total}}",
         "selected": "Selected: {{total}}",
         "maxSelected": "Max selected: {{total}}",
         "allVotesAreUsed": "All votes are used",
