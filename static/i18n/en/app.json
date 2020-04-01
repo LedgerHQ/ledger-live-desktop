@@ -1095,6 +1095,7 @@
     "checking": "Checking update...",
     "checkSuccess": "Update ready to install",
     "quitAndInstall": "Install now",
+    "updateAvailable": "Ledger Live {{version}} is available for update",
     "error": "Error during update. Please download again",
     "reDownload": "Download again",
     "nightlyWarning": "This version cannot auto-update, please install the latest version manually",

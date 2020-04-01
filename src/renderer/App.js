@@ -11,6 +11,7 @@ import StyleProvider from "~/renderer/styles/StyleProvider";
 import { UpdaterProvider } from "~/renderer/components/Updater/UpdaterContext";
 import ThrowBlock from "~/renderer/components/ThrowBlock";
 import LiveStyleSheetManager from "~/renderer/styles/LiveStyleSheetManager";
+import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
 import Default from "./Default";
 
 type Props = {
@@ -22,11 +23,13 @@ const App = ({ store }: Props) => (
     <Provider store={store}>
       <StyleProvider selectedPalette="light">
         <ThrowBlock>
-          <UpdaterProvider>
-            <Router>
-              <Default />
-            </Router>
-          </UpdaterProvider>
+          <RemoteConfigProvider>
+            <UpdaterProvider>
+              <Router>
+                <Default />
+              </Router>
+            </UpdaterProvider>
+          </RemoteConfigProvider>
         </ThrowBlock>
       </StyleProvider>
     </Provider>
