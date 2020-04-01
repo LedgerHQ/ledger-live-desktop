@@ -443,25 +443,23 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
           <B />
           <Box>
             <Box horizontal>
+              <OpDetailsTitle>{t("operationDetails.to")}</OpDetailsTitle>
               {recipients.length > 1 ? (
-                <>
-                  <OpDetailsTitle>{t("operationDetails.to")}</OpDetailsTitle>
-                  <Link>
-                    <FakeLink
-                      underline
-                      fontSize={3}
-                      ml={2}
-                      color="palette.text.shade80"
-                      onClick={() => openURL(urls.multipleDestinationAddresses)}
-                      iconFirst
-                    >
-                      <Box mr={1}>
-                        <IconExternalLink size={12} />
-                      </Box>
-                      {t("operationDetails.multipleAddresses")}
-                    </FakeLink>
-                  </Link>
-                </>
+                <Link>
+                  <FakeLink
+                    underline
+                    fontSize={3}
+                    ml={2}
+                    color="palette.text.shade80"
+                    onClick={() => openURL(urls.multipleDestinationAddresses)}
+                    iconFirst
+                  >
+                    <Box mr={1}>
+                      <IconExternalLink size={12} />
+                    </Box>
+                    {t("operationDetails.multipleAddresses")}
+                  </FakeLink>
+                </Link>
               ) : null}
             </Box>
             <DataList lines={recipients} t={t} />
