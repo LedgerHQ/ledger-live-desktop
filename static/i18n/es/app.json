@@ -1095,17 +1095,19 @@
     "checking": "Comprobando actualización...",
     "checkSuccess": "Actualización lista para instalarse",
     "quitAndInstall": "Instalar ahora",
+    "updateAvailable": "Ledger Live {{version}} is available for update",
     "error": "Error durante la actualización. Por favor, descárgala de nuevo",
     "reDownload": "Descargar de nuevo",
     "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
     "downloadNow": "Download now"
   },
   "crash": {
-    "oops": "Vaya, algo ha fallado.",
-    "uselessText": "Puedes intentarlo de nuevo reiniciando Ledger Live. Exporta tus registros y ponte en contacto con Soporte de Ledger si el problema persiste.",
+    "title": "Something went wrong",
+    "description": "Please check our support article for a possible solution. If the problem persists, save your logs using the button below and provide them to Ledger Support.",
+    "troubleshooting": "Click here for possible solutions",
     "restart": "Reiniciar",
-    "support": "Contactar con Soporte",
-    "github": "GitHub"
+    "logs": "Save logs",
+    "dataFolder": "View user data"
   },
   "exportOperationsModal": {
     "title": "Historial de operaciones",
