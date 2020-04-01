@@ -107,7 +107,7 @@ export const StepConfirmationFooter = ({
       <Box mr={2} ff="Inter|SemiBold" fontSize={4}>
         <LinkWithExternalIcon
           label={<Trans i18nKey="delegation.howItWorks" />}
-          onClick={() => openURL(urls.delegation)}
+          onClick={() => openURL(urls.stakingTezos)}
         />
       </Box>
       {concernedOperation ? (

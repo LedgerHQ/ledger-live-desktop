@@ -19,6 +19,7 @@ import IconChartLine from "~/renderer/icons/ChartLine";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { openModal } from "~/renderer/actions/modals";
 import ToolTip from "~/renderer/components/Tooltip";
+import useTheme from "~/renderer/hooks/useTheme";
 
 const ButtonBase: ThemedComponent<*> = styled(Button)`
   height: 34px;
@@ -32,6 +33,7 @@ type Props = {
 };
 
 const AccountHeaderActions = ({ account, parentAccount }: Props) => {
+  const contrastText = useTheme("colors.palette.primary.contrastText");
   const dispatch = useDispatch();
   const unit = getAccountUnit(account);
   const currency = getAccountCurrency(account);
@@ -80,7 +82,7 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
       <ButtonBase primary disabled={earnRewardDisabled} onClick={onClick}>
         <Box horizontal flow={1} alignItems="center">
           {tronPower > 0 ? (
-            <CryptoCurrencyIcon inactive currency={currency} size={16} />
+            <CryptoCurrencyIcon overrideColor={contrastText} currency={currency} size={16} />
           ) : (
             <IconChartLine size={16} />
           )}
