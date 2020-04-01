@@ -1095,17 +1095,19 @@
     "checking": "업데이트 확인 중...",
     "checkSuccess": "업데이트 설치 준비 완료",
     "quitAndInstall": "지금 설치",
+    "updateAvailable": "Ledger Live {{version}} is available for update",
     "error": "업데이트 중 오류가 발생했습니다. 다시 다운로드하십시오.",
     "reDownload": "다시 다운로드",
     "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
     "downloadNow": "Download now"
   },
   "crash": {
-    "oops": "죄송합니다. 무언가가 잘못되었습니다.",
-    "uselessText": "Ledger Live를 재시작하여 다시 시도해야 할 수 있습니다. 문제가 지속되면 로그를 내보내기하고 Ledger 지원 센터에 문의하십시오.",
+    "title": "Something went wrong",
+    "description": "Please check our support article for a possible solution. If the problem persists, save your logs using the button below and provide them to Ledger Support.",
+    "troubleshooting": "Click here for possible solutions",
     "restart": "다시 시작",
-    "support": "지원 센터 문의",
-    "github": "GitHub"
+    "logs": "Save logs",
+    "dataFolder": "View user data"
   },
   "exportOperationsModal": {
     "title": "Operation history",
