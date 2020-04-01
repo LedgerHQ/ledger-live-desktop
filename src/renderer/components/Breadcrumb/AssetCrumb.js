@@ -101,13 +101,15 @@ const AssetCrumb = () => {
         renderItem={renderItem}
         onStateChange={onAccountSelected}
       >
-        <TextLink>
-          {activeItem && <CryptoCurrencyIcon size={14} currency={activeItem.currency} />}
-          <Button>{activeItem.currency.name}</Button>
-          <AngleDown>
-            <IconAngleDown size={16} />
-          </AngleDown>
-        </TextLink>
+        {activeItem ? (
+          <TextLink>
+            <CryptoCurrencyIcon size={14} currency={activeItem.currency} />
+            <Button>{activeItem.currency.name}</Button>
+            <AngleDown>
+              <IconAngleDown size={16} />
+            </AngleDown>
+          </TextLink>
+        ) : null}
       </DropDown>
     </>
   );
