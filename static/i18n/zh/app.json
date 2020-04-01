@@ -1095,17 +1095,19 @@
     "checking": "正在检查更新...",
     "checkSuccess": "更新安装已就绪",
     "quitAndInstall": "立即安装",
+    "updateAvailable": "Ledger Live {{version}} is available for update",
     "error": "更新时出错。请重新下载",
     "reDownload": "重新下载",
     "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
     "downloadNow": "Download now"
   },
   "crash": {
-    "oops": "糟糕，出错了",
-    "uselessText": "您可以重启 Ledger Live 再试一次。如果问题仍然存在，请导出您的记录并联系 Ledger 支持人员。",
+    "title": "Something went wrong",
+    "description": "Please check our support article for a possible solution. If the problem persists, save your logs using the button below and provide them to Ledger Support.",
+    "troubleshooting": "Click here for possible solutions",
     "restart": "重启",
-    "support": "联系客服",
-    "github": "GitHub"
+    "logs": "Save logs",
+    "dataFolder": "View user data"
   },
   "exportOperationsModal": {
     "title": "操作历史",
