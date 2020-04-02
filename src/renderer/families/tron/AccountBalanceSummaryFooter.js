@@ -13,6 +13,8 @@ import Box from "~/renderer/components/Box/Box";
 import Text from "~/renderer/components/Text";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import ToolTip from "~/renderer/components/Tooltip";
+import { useSelector } from "react-redux";
+import { discreetModeSelector } from "~/renderer/reducers/settings";
 
 const Wrapper: ThemedComponent<*> = styled(Box).attrs(() => ({
   horizontal: true,
@@ -55,14 +57,16 @@ type Props = {
   countervalue: any,
 };
 
-const formatConfig = {
-  disableRounding: true,
-  alwaysShowSign: false,
-  showCode: true,
-};
-
 const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
+  const discreet = useSelector(discreetModeSelector);
   if (!account.tronResources) return null;
+
+  const formatConfig = {
+    disableRounding: true,
+    alwaysShowSign: false,
+    showCode: true,
+    discreet,
+  };
 
   const {
     frozen: {
