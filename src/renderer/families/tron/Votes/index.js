@@ -241,7 +241,7 @@ const Delegation = ({ account }: Props) => {
                 disabled={earnRewardDisabled}
                 onClick={tronPower > 0 ? onDelegate : onEarnRewards}
               >
-                <Box horizontal flow={2} alignItems="center">
+                <Box horizontal flow={1} alignItems="center">
                   <IconChartLine size={12} />
                   <Box>
                     <Trans
