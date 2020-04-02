@@ -758,7 +758,7 @@
         "votesDesc": "Cast your votes for one or more representatives to start earning staking rewards.",
         "vote": "Cast votes"
       },
-      "manageTP": "Manage Tron Power",
+      "manageTP": "Manage assets",
       "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
       "claimRewards": "Claim rewards",
       "nextRewardsDate": "Rewards can be claimed {{date}}",
@@ -766,7 +766,7 @@
       "title": "Claim rewards",
       "header": "Votes",
       "Amount": "Amount",
-      "percentageTP": "% of used TP",
+      "percentageTP": "% of votes cast",
       "noRewards": "No rewards available",
       "remainingVotes": {
         "title": "You still have {{amount}}TP remaining",
@@ -791,18 +791,18 @@
       }
     },
     "manage": {
-      "title": "Manage Tron Power",
+      "title": "Manage assets",
       "freeze": {
         "title": "Freeze",
-        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also earn TRON Power to vote for Super Representatives."
+        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also be able to vote for Super Representatives."
       },
       "unfreeze": {
         "title": "Unfreeze",
-        "description": "Unfreeze TRX if you want to spend them. You will stop earning rewards and TRON Power to vote with."
+        "description": "Unfreeze TRX if you want to spend them. You will no longer earn rewards."
       },
       "vote": {
         "title": "Vote",
-        "description": "Cast votes for Super Representatives using your TRON Power to earn TRX rewards.",
+        "description": "Cast votes for Super Representatives to earn rewards.",
         "steps": {
           "vote": {
             "title": "Cast votes",

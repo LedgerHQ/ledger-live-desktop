@@ -20,10 +20,10 @@ const Wrapper: ThemedComponent<*> = styled.div`
   padding: 16px 20px;
 `;
 
-const Column: ThemedComponent<{ clickable?: boolean }> = styled(TableLine).attrs(() => ({
-  ff: "Inter|Bold",
-  color: "palette.text.shade70",
-  fontSize: 4,
+const Column: ThemedComponent<{ clickable?: boolean }> = styled(TableLine).attrs(p => ({
+  ff: "Inter|SemiBold",
+  color: p.strong ? "palette.text.shade100" : "palette.text.shade80",
+  fontSize: 3,
 }))`
   cursor: ${p => (p.clickable ? "pointer" : "cursor")};
 `;
@@ -31,9 +31,9 @@ const Column: ThemedComponent<{ clickable?: boolean }> = styled(TableLine).attrs
 type Props = {
   validator: *,
   address: string,
-  amount: number,
-  duration: string,
-  percentTP: string,
+  amount: React$Node,
+  duration: React$Node,
+  percentTP: React$Node,
   currency: *,
   explorerView: ?ExplorerView,
 };
@@ -55,12 +55,12 @@ const Row = ({
 
   return (
     <Wrapper>
-      <Column clickable onClick={openSR}>
+      <Column strong clickable onClick={openSR}>
         <Ellipsis>{validator ? validator.name : address}</Ellipsis>
       </Column>
-      <Column>TP {amount}</Column>
-      <Column>{duration}</Column>
+      <Column>{amount}</Column>
       <Column>{percentTP}%</Column>
+      <Column>{duration}</Column>
     </Wrapper>
   );
 };

@@ -59,11 +59,11 @@ export default function StepRewards({ account, parentAccount, reward }: StepProp
           </Trans>
         </Text>
       </Box>
-      <Box borderRadius={4} horizontal alignItems="center" mx={4} p={1} bg="palette.divider">
+      <Box borderRadius={4} horizontal alignItems="center" mx={4} p={2} bg="palette.divider">
         <Box mr={2}>
           <InfoCircle size={12} />
         </Box>
-        <Text ff="Inter|Regular" textAlign="center" fontSize={3}>
+        <Text ff="Inter|SemiBold" textAlign="center" fontSize={4}>
           <Trans i18nKey="claimReward.steps.rewards.info" />
         </Text>
       </Box>

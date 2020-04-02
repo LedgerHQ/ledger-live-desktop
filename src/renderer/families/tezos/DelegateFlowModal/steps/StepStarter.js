@@ -90,7 +90,7 @@ const StepStarter = ({ transitionTo, t, openedWithAccount }: StepProps) => {
         <Box my={4}>
           <LinkWithExternalIcon
             label={t("delegation.howItWorks")}
-            onClick={() => openURL(urls.delegation)}
+            onClick={() => openURL(urls.stakingTezos)}
           />
         </Box>
         <Button onClick={onClick} primary>
