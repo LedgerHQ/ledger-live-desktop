@@ -86,7 +86,7 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
           ) : (
             <IconChartLine size={12} />
           )}
-          <Box>
+          <Box fontSize={3}>
             <Trans i18nKey={tronPower > 0 ? "tron.voting.manageTP" : "delegation.title"} />
           </Box>
         </Box>
