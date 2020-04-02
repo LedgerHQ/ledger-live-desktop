@@ -83,7 +83,7 @@ export function StepConfirmationFooter({
   return (
     <Box horizontal alignItems="right">
       <Button ml={2} onClick={onClose}>
-        <Trans i18nKey="common.cancel" />
+        <Trans i18nKey="common.close" />
       </Button>
       {concernedOperation ? (
         // FIXME make a standalone component!
