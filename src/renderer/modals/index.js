@@ -25,6 +25,7 @@ import MODAL_UNFREEZE from "./Unfreeze";
 import MODAL_REWARDS_INFO from "./EarnRewardsInfoModal";
 import MODAL_VOTE_TRON from "./VoteTron";
 import MODAL_VOTE_TRON_INFO from "./VoteTron/Info";
+import MODAL_BLACKLIST_TOKEN from "./BlacklistToken";
 
 const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_EXPORT_OPERATIONS,
@@ -51,6 +52,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_REWARDS_INFO,
   MODAL_VOTE_TRON,
   MODAL_VOTE_TRON_INFO,
+  MODAL_BLACKLIST_TOKEN,
 };
 
 export default modals;

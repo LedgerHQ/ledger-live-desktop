@@ -48,6 +48,16 @@ export const setHideEmptyTokenAccounts = (hideEmptyTokenAccounts: boolean) => as
 export const setSidebarCollapsed = (sidebarCollapsed: boolean) =>
   saveSettings({ sidebarCollapsed });
 
+export const blacklistToken = (tokenId: string) => ({
+  type: "BLACKLIST_TOKEN",
+  payload: tokenId,
+});
+
+export const showToken = (tokenId: string) => ({
+  type: "SHOW_TOKEN",
+  payload: tokenId,
+});
+
 type FetchSettings = (*) => (Dispatch<*>) => void;
 export const fetchSettings: FetchSettings = (settings: *) => dispatch => {
   dispatch({
