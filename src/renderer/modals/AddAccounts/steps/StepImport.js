@@ -112,9 +112,9 @@ class StepImport extends PureComponent<StepProps> {
       let onlyNewAccounts = true;
 
       const syncConfig = {
-        // TODO later we need to paginate only a few ops, not all (for add accounts)
-        // paginationConfig will come from redux
-        paginationConfig: {},
+        paginationConfig: {
+          operations: 0,
+        },
         blacklistedTokenIds,
       };
 
