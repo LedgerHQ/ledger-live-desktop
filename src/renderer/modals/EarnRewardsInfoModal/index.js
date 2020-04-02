@@ -20,7 +20,7 @@ import Rewards from "~/renderer/images/rewards.svg";
 import Modal, { ModalBody } from "~/renderer/components/Modal/index";
 
 const RewardImg = styled.img.attrs(() => ({ src: Rewards }))`
-  width: 160px;
+  width: 130px;
   height: auto;
 `;
 
