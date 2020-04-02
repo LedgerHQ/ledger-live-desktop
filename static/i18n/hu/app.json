@@ -139,7 +139,7 @@
     "frozenAssets": "Befagyasztott eszközök",
     "bandwidth": "Sávszélesség",
     "energy": "Energia",
-    "availableBalanceTooltip": "Ez a mennyiség bármikor átállítható.",
+    "availableBalanceTooltip": "Ez a mennyiség bármikor küldhető.",
     "frozenAssetsTooltip": "Ez a mennyiség 3 nappal az után érhető el, hogy kiolvasztottad.",
     "bandwidthTooltip": "Fagyassz le eszközöket, hogy sávszélességet gyűjts",
     "energyTooltip": "Fagyassz le eszközöket, hogy energiát gyűjts"
