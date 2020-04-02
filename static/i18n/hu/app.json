@@ -138,7 +138,11 @@
     "availableBalance": "Elérhető egyenleg",
     "frozenAssets": "Befagyasztott eszközök",
     "bandwidth": "Sávszélesség",
-    "energy": "Energia"
+    "energy": "Energia",
+    "availableBalanceTooltip": "This amount can be sent anytime.",
+    "frozenAssetsTooltip": "This amount is available 3 days after you have unfrozen it.",
+    "bandwidthTooltip": "Freeze assets to gain bandwidth",
+    "energyTooltip": "Freeze assets to gain ernergy"
   },
   "accounts": {
     "title": "Számlák",
@@ -331,6 +335,7 @@
     }
   },
   "operationDetails": {
+    "whatIsThis": "What is this operation?",
     "title": "Művelet részletei",
     "account": "Számla",
     "date": "Dátum",
@@ -360,7 +365,7 @@
       "unfreezeAmount": "Kiolvasztott mennyiség",
       "address": "Cím",
       "votes": "Szavazatok ({{number}})",
-      "votesAddress": "<0>TP {{votes}}</0> a <2>{{name}}</2>"
+      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>"
     }
   },
   "operationList": {
@@ -554,10 +559,10 @@
     }
   },
   "freeze": {
-    "title": "Befagyasztás",
+    "title": "Freeze assets",
     "steps": {
       "amount": {
-        "title": "Eszközök befagyasztása",
+        "title": "Amount",
         "resourceInfo": "Sávszélesség vagy Energia?",
         "bandwidthDescription": "Sávszélesség pontok felhasználhatók tranzakciók küldéséhez anélkül, hogy TRX-et költenél a hálózati díjak fedezésére. Válassz sávszélességet a napi ingyenes tranzakciók növeléséhez.",
         "energyDescription": "Energia pontok szükségesek az okosszerződések végrehajtásához. Ha nem futtatsz semmilyen okosszerződést, nem szükséges, hogy a jutalmaid Energiában kérd.",
@@ -610,6 +615,7 @@
   },
   "vote": {
     "title": "Cast votes",
+    "titleExisting": "Manage votes",
     "steps": {
       "castVotes": {
         "title": "Vote",
@@ -619,7 +625,7 @@
         "maxSelected": "Max selected: {{total}}",
         "allVotesAreUsed": "All votes are used",
         "maxUsed": "Max votes: {{total}}",
-        "superRepresentatives": "Super Representatives",
+        "superRepresentatives": "Super Representatives (SR)",
         "candidates": "Candidates",
         "estYield": "est. yield",
         "srInfo": "SR or Candidates?",
@@ -756,9 +762,10 @@
         "description": "You can now earn rewards by freezing and voting.",
         "info": "How voting works",
         "votesDesc": "Cast your votes for one or more representatives to start earning staking rewards.",
-        "vote": "Cast votes"
+        "vote": "Cast votes",
+        "voteExisting": "Manage votes"
       },
-      "manageTP": "Tron Power Kezelése",
+      "manageTP": "Manage assets",
       "warnEarnRewards": "Szükséged van minimum {{amount}}, hogy jutalmakat kezdj kapni",
       "claimRewards": "Jutalmak begyűjtése",
       "nextRewardsDate": "A jutalmak begyűjthetők {{date}}",
@@ -766,23 +773,24 @@
       "title": "Jutalmak begyűjtése",
       "header": "Szavazatok",
       "Amount": "Mennyiség",
-      "percentageTP": "% felhasznált TP",
+      "percentageTP": "% of votes cast",
       "noRewards": "Nincs elérhető jutalom",
       "remainingVotes": {
-        "title": "Még {{amount}}TP-d maradt",
-        "description": "Nem használtad fel az összes befagyasztott eszközöd az SR-re történő szavazáshoz.",
+        "title": "You still have {{amount}} votes remaining",
+        "description": "Cast your remaining votes to earn more rewards",
         "button": "Szavazz most"
       },
       "flow": {
         "steps": {
           "starter": {
             "title": "Kapj tárolási jutalmakat",
-            "description": "A TRX-et delegálhatod harmadik fél számára, hogy jutalmakat szerezz.",
+            "description": "Freeze your TRX to earn rewards while keeping full security and control of your assets.",
             "bullet": {
               "delegate": "Delegált eszközeid a tieid maradnak.",
-              "access": "Befagyasztott eszközeidhez 3 nap után tudsz hozzá férni.",
-              "ledger": "Delegálj biztonságosan a Ledger eszközöd segítségével."
+              "access": "You can unfreeze your assets after 3 days.",
+              "ledger": "Freeze and vote securely with your Ledger device."
             },
+            "help": "How voting works",
             "button": {
               "cta": "Folytatás"
             }
@@ -791,18 +799,18 @@
       }
     },
     "manage": {
-      "title": "Tron Power Kezelése",
+      "title": "Manage assets",
       "freeze": {
         "title": "Befagyasztás",
-        "description": "Fagyassz be TRX-et, hogy sávszélességhez, vagy anergiához juss. Továbbá szerzel TRON Power-t, hogy szavazhass megbízottakra."
+        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also be able to vote for Super Representatives."
       },
       "unfreeze": {
         "title": "Kiolvasztás",
-        "description": "Olvassz fel TRX-et ha el szeretnéd költeni. Tovább nem fogsz jutalmat, és TRON Power-t kapni, hogy szavazhass."
+        "description": "Unfreeze TRX if you want to spend them. You will no longer earn rewards."
       },
       "vote": {
         "title": "Szavazás",
-        "description": "A szavazatok leadása a megbízottakra a TRON Power-t használja TRX jutalmak eléréséhez.",
+        "description": "Cast votes for Super Representatives to earn rewards.",
         "steps": {
           "vote": {
             "title": "Cast votes",
@@ -812,9 +820,9 @@
               "next": "Cast Votes"
             },
             "info": {
-              "message": "Super Representatives or candidates?",
+              "message": "SR or Candidates?",
               "superRepresentative": {
-                "title": "Super Representatives",
+                "title": "Super Representatives (SR)",
                 "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
               },
               "candidates": {
