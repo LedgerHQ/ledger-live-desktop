@@ -167,8 +167,14 @@
       "star": "星标",
       "receive": "接收",
       "send": "发送",
-      "edit": "Edit account"
+      "edit": "Edit account",
+      "hideToken": "Hide token"
     }
+  },
+  "blacklistToken": {
+    "title": "Hide token",
+    "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can restore their visibility at any time from <3>Settings</3>",
+    "hideCTA": "Hide token"
   },
   "banners": {
     "migrate": "Ledger Live 账户可更新",
@@ -1068,6 +1074,10 @@
       "hideEmptyTokens": {
         "title": "隐藏空代币帐户",
         "desc": "在账户页面隐藏零余额的代币账户。"
+      },
+      "tokenBlacklist": {
+        "title": "Hidden tokens",
+        "desc": "You can hide a token by right-clicking on it while in its parent screen and selecting 'Hide token'"
       }
     }
   },
