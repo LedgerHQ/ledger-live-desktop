@@ -140,9 +140,9 @@
     "bandwidth": "Sávszélesség",
     "energy": "Energia",
     "availableBalanceTooltip": "Ez a mennyiség bármikor átállítható.",
-    "frozenAssetsTooltip": "This amount is available 3 days after you have unfrozen it.",
-    "bandwidthTooltip": "Freeze assets to gain bandwidth",
-    "energyTooltip": "Freeze assets to gain ernergy"
+    "frozenAssetsTooltip": "Ez a mennyiség 3 nappal az után érhető el, hogy kiolvasztottad.",
+    "bandwidthTooltip": "Fagyassz le eszközöket, hogy sávszélességet gyűjts",
+    "energyTooltip": "Fagyassz le eszközöket, hogy energiát gyűjts"
   },
   "accounts": {
     "title": "Számlák",
@@ -168,13 +168,13 @@
       "receive": "Fogadás",
       "send": "Küldés",
       "edit": "Számla szerkesztése",
-      "hideToken": "Hide token"
+      "hideToken": "Token elrejtése"
     }
   },
   "blacklistToken": {
-    "title": "Hide token",
-    "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can restore their visibility at any time from <3>Settings</3>",
-    "hideCTA": "Hide token"
+    "title": "Token elrejtése",
+    "desc": "Ez a művelet elrejti minden <1><0>{{tokenName}}</0></1> számlád, bármikor visszaállíthatod a láthatóságukat a <3>Beállításoknál</3>",
+    "hideCTA": "Token elrejtése"
   },
   "banners": {
     "migrate": "Ledger Live számlák frissítése lehetséges",
@@ -341,7 +341,7 @@
     }
   },
   "operationDetails": {
-    "whatIsThis": "What is this operation?",
+    "whatIsThis": "Mi ez a művelet?",
     "title": "Művelet részletei",
     "account": "Számla",
     "date": "Dátum",
@@ -371,7 +371,7 @@
       "unfreezeAmount": "Kiolvasztott mennyiség",
       "address": "Cím",
       "votes": "Szavazatok ({{number}})",
-      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>"
+      "votesAddress": "<0>{{votes}}</0> a <2>{{name}}</2>"
     }
   },
   "operationList": {
@@ -565,10 +565,10 @@
     }
   },
   "freeze": {
-    "title": "Freeze assets",
+    "title": "Eszközök befagyasztása",
     "steps": {
       "amount": {
-        "title": "Amount",
+        "title": "Mennyiség",
         "resourceInfo": "Sávszélesség vagy Energia?",
         "bandwidthDescription": "Sávszélesség pontok felhasználhatók tranzakciók küldéséhez anélkül, hogy TRX-et költenél a hálózati díjak fedezésére. Válassz sávszélességet a napi ingyenes tranzakciók növeléséhez.",
         "energyDescription": "Energia pontok szükségesek az okosszerződések végrehajtásához. Ha nem futtatsz semmilyen okosszerződést, nem szükséges, hogy a jutalmaid Energiában kérd.",
@@ -620,41 +620,41 @@
     }
   },
   "vote": {
-    "title": "Cast votes",
-    "titleExisting": "Manage votes",
+    "title": "Leadott szavazatok",
+    "titleExisting": "Szavazatok kezelése",
     "steps": {
       "castVotes": {
-        "title": "Vote",
-        "search": "Search by name or address...",
-        "totalVotes": "Total votes: {{total}}",
-        "selected": "Selected: {{total}}",
-        "maxSelected": "Max selected: {{total}}",
-        "allVotesAreUsed": "All votes are used",
-        "maxUsed": "Max votes: {{total}}",
-        "superRepresentatives": "Super Representatives (SR)",
-        "candidates": "Candidates",
-        "estYield": "est. yield",
-        "srInfo": "SR or Candidates?",
-        "validators": "Validators ({{total}})",
-        "votes": "Votes available: {{total}}",
-        "noResults": "No validators found for \"<0>{{search}}</0>\"."
+        "title": "Szavazás",
+        "search": "Keresés név vagy cím alapján...",
+        "totalVotes": "Összes szavazat: {{total}}",
+        "selected": "Kiválasztott: {{total}}",
+        "maxSelected": "Max kiválasztott: {{total}}",
+        "allVotesAreUsed": "Minden szavazat felhasználva",
+        "maxUsed": "Max szavazat: {{total}}",
+        "superRepresentatives": "Szuper Képviselõk (SR)",
+        "candidates": "Jelöltek",
+        "estYield": "becsült hozam",
+        "srInfo": "SR vagy Jelöltek?",
+        "validators": "Megerősítők ({{total}})",
+        "votes": "Elérhető szavazatok: {{total}}",
+        "noResults": "Nem található megerősítő \"<0>{{search}}</0>\"."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "Eszköz"
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "Megerősítés",
         "success": {
-          "title": "Your votes were cast successfully.",
+          "title": "A szavazataid sikeresen leadtad.",
           "text": "",
-          "howVotingWorks": "How voting works?",
-          "done": "Done",
-          "cta": "View details"
+          "howVotingWorks": "Hogy működik a szavazás?",
+          "done": "Kész",
+          "cta": "Részletek megtekintése"
         },
         "pending": {
-          "title": "Freezing your assets..."
+          "title": "Eszközeid befagyasztása..."
         },
-        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        "broadcastError": "Lehet, hogy a tranzakciód sikertelen volt. Kérlek, ellenőrizd pár perc múlva, hogy megbizonyosodj róla, hogy a tranzakciód valóban nem lett elküldve mielőtt újra megpróbálnád."
       }
     }
   },
@@ -691,7 +691,7 @@
       },
       "amount": {
         "title": "Mennyiség",
-        "banner": "Maximum spendable amount is"
+        "banner": "Maximum elkölthető mennyiség"
       },
       "summary": {
         "title": "Összegzés"
@@ -765,13 +765,13 @@
   "tron": {
     "voting": {
       "emptyState": {
-        "description": "You can now earn rewards by freezing and voting.",
-        "info": "How voting works",
-        "votesDesc": "Cast your votes for one or more representatives to start earning staking rewards.",
-        "vote": "Cast votes",
-        "voteExisting": "Manage votes"
+        "description": "Most már kaphatsz jutalmakat lefagyasztással és szavazással.",
+        "info": "Hogy működik a szavazás",
+        "votesDesc": "Add le szavazataid egy vagy több képviselő számára, hogy tárolási jutalmakat szerezz.",
+        "vote": "Szavazatok leadása",
+        "voteExisting": "Szavazatok kezelése"
       },
-      "manageTP": "Manage assets",
+      "manageTP": "Eszközök kezelése",
       "warnEarnRewards": "Szükséged van minimum {{amount}}, hogy jutalmakat kezdj kapni",
       "claimRewards": "Jutalmak begyűjtése",
       "nextRewardsDate": "A jutalmak begyűjthetők {{date}}",
@@ -779,24 +779,24 @@
       "title": "Jutalmak begyűjtése",
       "header": "Szavazatok",
       "Amount": "Mennyiség",
-      "percentageTP": "% of votes cast",
+      "percentageTP": "%-a a leadott szavazatoknak",
       "noRewards": "Nincs elérhető jutalom",
       "remainingVotes": {
-        "title": "You still have {{amount}} votes remaining",
-        "description": "Cast your remaining votes to earn more rewards",
+        "title": "Még van {{amount}} szavazatod",
+        "description": "Add le a fennmaradó szavazataid, hogy további jutalmakat szerezz",
         "button": "Szavazz most"
       },
       "flow": {
         "steps": {
           "starter": {
             "title": "Kapj tárolási jutalmakat",
-            "description": "Freeze your TRX to earn rewards while keeping full security and control of your assets.",
+            "description": "Fagyaszd le a TRX-t hogy jutalmakat kapj mialatt eszközeid teljes biztonságban és irányításod alatt maradnak.",
             "bullet": {
               "delegate": "Delegált eszközeid a tieid maradnak.",
-              "access": "You can unfreeze your assets after 3 days.",
-              "ledger": "Freeze and vote securely with your Ledger device."
+              "access": "3 nap után olvaszthatod ki eszközeid.",
+              "ledger": "Fagyassz le és szavazz biztonságosan a Ledger eszközöddel."
             },
-            "help": "How voting works",
+            "help": "Hogy működik a szavazás",
             "button": {
               "cta": "Folytatás"
             }
@@ -805,35 +805,35 @@
       }
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "Eszközök kezelése",
       "freeze": {
         "title": "Befagyasztás",
-        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also be able to vote for Super Representatives."
+        "description": "Fagyassz be TRX-et, hogy sávszélességhez, vagy energiához juss. Továbbá lehetőséged lesz Szuper Képviselőkre szavazni."
       },
       "unfreeze": {
         "title": "Kiolvasztás",
-        "description": "Unfreeze TRX if you want to spend them. You will no longer earn rewards."
+        "description": "Olvassz ki TRX-et ha el akarod költeni. Nem fogsz tovább jutalmakat kapni."
       },
       "vote": {
         "title": "Szavazás",
-        "description": "Cast votes for Super Representatives to earn rewards.",
+        "description": "Add le szavazataid a Szuper Képviselőkre hogy jutalmakat kapj.",
         "steps": {
           "vote": {
-            "title": "Cast votes",
-            "description": "Vote for one or more Super Representatives to start earning rewards.",
+            "title": "Szavazatok leadása",
+            "description": "Szavazz egy vagy több Szuper Képviselőre hogy elkezdj jutalmakat kapni.",
             "footer": {
-              "doNotShowAgain": "Don't show again",
-              "next": "Cast Votes"
+              "doNotShowAgain": "Ne mutasd újra",
+              "next": "Szavazatok leadása"
             },
             "info": {
-              "message": "SR or Candidates?",
+              "message": "SR vagy Jelöltek?",
               "superRepresentative": {
-                "title": "Super Representatives (SR)",
-                "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+                "title": "Szuper Képviselõk (SR)",
+                "description": "A szuper képviselők kulcsszerepet játszanak a TRON közösség irányításában, és az alapvető funkciók ellátásában, pl. blokkok generálása és könyvelése."
               },
               "candidates": {
-                "title": "Candidates",
-                "description": "127 individuals elected through voting by the entire token holder community. Votes are updated once every 6 hours."
+                "title": "Jelöltek",
+                "description": "127 egyént választott meg a teljes token-birtokos közösség szavazás útján. A szavazatok minden 6 órában egyszer frissülnek."
               }
             }
           }
@@ -1076,8 +1076,8 @@
         "desc": "Nulla egyenleggel rendelkező tokenek elrejtése a Számlák lapon."
       },
       "tokenBlacklist": {
-        "title": "Hidden tokens",
-        "desc": "You can hide a token by right-clicking on it while in its parent screen and selecting 'Hide token'"
+        "title": "Rejtett tokenek",
+        "desc": "El tudsz rejteni egy tokent a főképernyőn jobb-kattintással, és a 'token elrejtése'-re kattintva"
       }
     }
   },
@@ -1113,19 +1113,19 @@
     "checking": "Frissítés ellenőrzése...",
     "checkSuccess": "A frissítés készen áll a telepítésre",
     "quitAndInstall": "Telepítés most",
-    "updateAvailable": "Ledger Live {{version}} is available for update",
+    "updateAvailable": "Ledger Live {{version}} frissítés elérhető",
     "error": "Hiba történt a frissítés során. Kérlek, töltsd le újra",
     "reDownload": "Letöltés újra",
     "nightlyWarning": "Ez a verzió nem frissíthető automatikusan, kérlek, telepítsd az utolsó verziót manuálisan",
     "downloadNow": "Letöltés most"
   },
   "crash": {
-    "title": "Something went wrong",
-    "description": "Please check our support article for a possible solution. If the problem persists, save your logs using the button below and provide them to Ledger Support.",
-    "troubleshooting": "Click here for possible solutions",
+    "title": "Valami hiba történt",
+    "description": "Kérlek, olvasd el a támogatás cikket a lehetséges megoldásért. Ha a probléma továbbra is fennáll, mentsd el a naplókat az alul található gombbal, és továbbítsd a Ledger Ügyféltámogatásnak.",
+    "troubleshooting": "Kattints ide a lehetséges megoldásokért",
     "restart": "Újraindítás",
-    "logs": "Save logs",
-    "dataFolder": "View user data"
+    "logs": "Naplók mentése",
+    "dataFolder": "Felhasználói adatok megtekintése"
   },
   "exportOperationsModal": {
     "title": "Műveleti előzmények",
@@ -1363,11 +1363,11 @@
     "warning": "Mindig ellenőrizd, hogy készüléked pontosan az itt található címet jeleníti-e meg {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
-      "send": "Please confirm the operation on your device to send it",
+      "send": "Kérlek, erősítsd meg a műveletet az eszközödön az elküldéshez",
       "claimReward": "Kérlek, erősítsd meg a műveletet az eszközödön a jutalmaid begyűjtéséhez",
       "freeze": "Kérlek, erősítsd meg a műveletet az eszközödön az eszközök befagyasztásához",
       "unfreeze": "Kérlek, erősítsd meg a műveletet az eszközödön az eszközök kiolvasztásához",
-      "vote": "Please confirm the operation on your device to cast your votes"
+      "vote": "Kérlek, erősítsd meg a műveletet az eszközödön a szavazataid leadásához"
     },
     "recipientWording": {
       "send": "fogadó",
@@ -1375,11 +1375,11 @@
       "undelegate": "megerősítő",
       "claimReward": "a delegálás jutalmazza a címzettet"
     },
-    "fromAddress": "From",
-    "toAddress": "To",
-    "address": "Address",
-    "resource": "Resource",
-    "votes": "Votes"
+    "fromAddress": "Innen",
+    "toAddress": "Ide",
+    "address": "Cím",
+    "resource": "Forrás",
+    "votes": "Szavazatok"
   },
   "RecipientField": {
     "placeholder": "Írd be a(z) {{currencyName}} címet"
