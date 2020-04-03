@@ -23,7 +23,6 @@ const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(
   color: "palette.text.shade100",
 }))`
   justify-content: ${p => (p.shouldSpace ? "space-between" : "center")};
-  min-height: 220px;
 `;
 
 function StepConfirmation({
@@ -101,7 +100,6 @@ export function StepConfirmationFooter({
               });
             }
           }}
-          secondary
         >
           <Trans i18nKey="vote.steps.confirmation.success.cta" />
         </Button>

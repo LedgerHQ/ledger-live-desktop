@@ -85,9 +85,9 @@ export const OperationDetailsVotes = ({
                     i18nKey="operationDetails.extra.votesAddress"
                     values={{ votes: voteCount, name: validator && validator.name }}
                   >
-                    <b>{""}</b>
+                    <Text ff="Inter|SemiBold">{""}</Text>
                     {""}
-                    <b>{""}</b>
+                    <Text ff="Inter|SemiBold">{""}</Text>
                   </Trans>
                 </Text>
               </Box>

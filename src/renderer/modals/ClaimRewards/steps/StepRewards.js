@@ -16,14 +16,10 @@ import Text from "~/renderer/components/Text";
 
 import { BigNumber } from "bignumber.js";
 import InfoCircle from "~/renderer/icons/InfoCircle";
-import ClaimRewards from "~/renderer/icons/ClaimReward";
+import ClaimRewardsIllu from "~/renderer/images/claim-rewards.svg";
+import Image from "~/renderer/components/Image";
 
 const IconWrapperCircle = styled(Box)`
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: ${props => (props.green ? "#66be5419" : "#6490f119")};
-  color: ${props => (props.green ? "#66be54" : "#6490f1")};
   align-items: center;
   justify-content: center;
   align-self: center;
@@ -44,17 +40,17 @@ export default function StepRewards({ account, parentAccount, reward }: StepProp
       <TrackPage category="Claim Reward Flow" name="Step reward" />
       <Box>
         <IconWrapperCircle>
-          <ClaimRewards size={24} />
+          <Image alt="" resource={ClaimRewardsIllu} width="100" />
         </IconWrapperCircle>
       </Box>
       <Box px={6} py={4}>
-        <Text ff="Inter|Medium" textAlign="center">
+        <Text ff="Inter|Medium" textAlign="center" fontSize={4}>
           <Trans
             i18nKey="claimReward.steps.rewards.description"
             values={{ amount: formattedReward }}
           >
             {"placeholder"}
-            <b>{"placeholder"}</b>
+            <Text ff="Inter|SemiBold">{"placeholder"}</Text>
             {"placeholder"}
           </Trans>
         </Text>
@@ -63,7 +59,7 @@ export default function StepRewards({ account, parentAccount, reward }: StepProp
         <Box mr={2}>
           <InfoCircle size={12} />
         </Box>
-        <Text ff="Inter|SemiBold" textAlign="center" fontSize={4}>
+        <Text ff="Inter|SemiBold" fontSize={3} style={{ flex: 1 }}>
           <Trans i18nKey="claimReward.steps.rewards.info" />
         </Text>
       </Box>

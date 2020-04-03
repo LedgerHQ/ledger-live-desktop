@@ -12,6 +12,8 @@ import { openURL } from "~/renderer/linking";
 import Ellipsis from "~/renderer/components/Ellipsis";
 
 import { TableLine } from "./Header";
+import Trophy from "~/renderer/icons/Trophy";
+import Medal from "~/renderer/icons/Medal";
 
 const Wrapper: ThemedComponent<*> = styled.div`
   display: flex;
@@ -31,6 +33,7 @@ const Column: ThemedComponent<{ clickable?: boolean }> = styled(TableLine).attrs
 type Props = {
   validator: *,
   address: string,
+  isSR: boolean,
   amount: React$Node,
   duration: React$Node,
   percentTP: React$Node,
@@ -38,10 +41,25 @@ type Props = {
   explorerView: ?ExplorerView,
 };
 
+const IconContainer = styled.div`
+  display: flex;
+  margin-right: 15px;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background-color: ${p =>
+    p.isSR ? p.theme.colors.palette.action.hover : p.theme.colors.palette.divider};
+  color: ${p =>
+    p.isSR ? p.theme.colors.palette.primary.main : p.theme.colors.palette.text.shade60};
+`;
+
 const Row = ({
   validator,
   address,
   amount,
+  isSR,
   duration,
   percentTP,
   currency,
@@ -56,6 +74,9 @@ const Row = ({
   return (
     <Wrapper>
       <Column strong clickable onClick={openSR}>
+        <IconContainer isSR={isSR}>
+          {isSR ? <Trophy size={16} /> : <Medal size={16} />}
+        </IconContainer>
         <Ellipsis>{validator ? validator.name : address}</Ellipsis>
       </Column>
       <Column>{amount}</Column>

@@ -84,7 +84,7 @@ export default function StepAmount({
       {error ? <ErrorBanner error={error} /> : null}
       <Box vertical>
         <SelectResource disabled={!UnfreezeBandwidth.gt(0)}>
-          <Text ff="Inter|Medium" fontSize={5}>
+          <Text ff="Inter|SemiBold" fontSize={4}>
             <Trans i18nKey="account.bandwidth" />
           </Text>
           <Box horizontal alignItems="center">
@@ -105,7 +105,7 @@ export default function StepAmount({
           </Box>
         </SelectResource>
         <SelectResource disabled={!UnfreezeEnergy.gt(0)}>
-          <Text ff="Inter|Medium" fontSize={5}>
+          <Text ff="Inter|SemiBold" fontSize={4}>
             <Trans i18nKey="account.energy" />
           </Text>
           <Box horizontal alignItems="center">
@@ -139,7 +139,7 @@ export default function StepAmount({
           <Box mr={2}>
             <InfoCircle size={12} />
           </Box>
-          <Text ff="Inter|Regular" textAlign="center" fontSize={3}>
+          <Text ff="Inter|SemiBold" textAlign="center" fontSize={3}>
             <Trans
               i18nKey="unfreeze.steps.amount.info"
               values={{ resource: resource.toLowerCase() }}
