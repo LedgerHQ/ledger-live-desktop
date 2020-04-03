@@ -12,8 +12,8 @@ export const SyncNewAccounts = ({ priority }: { priority: number }) => {
 
   useEffect(() => {
     const accountIds = ids.filter(a => !ref.current.includes(a));
-    ref.current = accountIds;
     if (accountIds.length > 0) {
+      ref.current = ids;
       sync({
         type: "SYNC_SOME_ACCOUNTS",
         accountIds,

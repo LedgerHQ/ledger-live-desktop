@@ -78,7 +78,7 @@ const Default = () => {
 
                 {process.env.DEBUG_UPDATE && <DebugUpdater />}
 
-                <SyncNewAccounts priority={101} />
+                <SyncNewAccounts priority={2} />
 
                 <Box
                   grow
