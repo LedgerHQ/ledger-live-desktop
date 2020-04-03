@@ -49,50 +49,70 @@ const Pre = ({
 
   invariant(transaction.family === "tron", "tron transaction");
 
-  const from = account.type === "ChildAccount" ? account.address : mainAccount.freshAddress;
+  const { votes, resource } = transaction;
 
   return (
     <>
-      <TransactionConfirmField label={<Trans i18nKey="TransactionConfirm.fromAddress" />}>
-        <AddressText>{from}</AddressText>
-      </TransactionConfirmField>
-      {transaction.recipient && transaction.recipient !== from && (
-        <TransactionConfirmField label={<Trans i18nKey="TransactionConfirm.toAddress" />}>
-          <AddressText>{transaction.recipient}</AddressText>
+      {resource && (
+        <TransactionConfirmField label="Resource">
+          <AddressText ff="Inter|SemiBold">
+            {resource.slice(0, 1).toUpperCase() + resource.slice(1).toLowerCase()}
+          </AddressText>
         </TransactionConfirmField>
       )}
 
-      {transaction.resource && (
-        <TransactionConfirmField label={<Trans i18nKey="TransactionConfirm.resource" />}>
-          <AddressText ff="Inter|SemiBold">{transaction.resource}</AddressText>
-        </TransactionConfirmField>
-      )}
-      {transaction.votes && transaction.votes.length > 0 && (
+      {votes && votes.length > 0 && (
         <Box vertical justifyContent="space-between" mb={2}>
-          <TransactionConfirmField label={<Trans i18nKey="TransactionConfirm.votes" />}>
-            <AddressText ff="Inter|SemiBold">
+          <TransactionConfirmField
+            label={
               <Trans
-                i18nKey="TransactionConfirm.validators"
-                values={{ nbrVote: transaction.votes.length }}
+                i18nKey="TransactionConfirm.votes"
+                count={votes.length}
+                values={{ count: votes.length }}
               />
-            </AddressText>
-          </TransactionConfirmField>
-
-          <OperationDetailsVotes
-            votes={transaction.votes}
-            account={mainAccount}
-            isTransactionField
+            }
           />
+
+          <OperationDetailsVotes votes={votes} account={mainAccount} isTransactionField />
         </Box>
       )}
     </>
   );
 };
 
-const Post = ({ transaction }: { transaction: Transaction }) => {
+const Post = ({
+  transaction,
+  account,
+  parentAccount,
+}: {
+  account: AccountLike,
+  parentAccount: ?Account,
+  transaction: Transaction,
+}) => {
+  invariant(transaction.family === "tron", "tron transaction");
+  const mainAccount = getMainAccount(account, parentAccount);
+
   invariant(transaction.family === "tron", "tron transaction");
 
-  return null;
+  const from = mainAccount.freshAddress;
+
+  const { mode } = transaction;
+
+  return (
+    <>
+      {(mode === "freeze" || mode === "unfreeze") && (
+        <TransactionConfirmField label={mode === "freeze" ? "Freeze To" : "Delegate To"}>
+          <AddressText>{from}</AddressText>
+        </TransactionConfirmField>
+      )}
+
+      {mode !== "send" ? (
+        <TransactionConfirmField label="From Address">
+          <AddressText>{from}</AddressText>
+        </TransactionConfirmField>
+      ) : null}
+    </>
+  );
 };
 
 const Warning = ({
@@ -134,4 +154,5 @@ export default {
   post: Post,
   warning: Warning,
   title: Title,
+  disableFees: () => true,
 };
