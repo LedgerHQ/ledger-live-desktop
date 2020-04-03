@@ -187,12 +187,13 @@ const Delegation = ({ account }: Props) => {
       {tronPower > 0 && formattedVotes.length > 0 ? (
         <Card p={0} mt={24} mb={6}>
           <Header />
-          {formattedVotes.map(({ validator, address, voteCount }, index) => (
+          {formattedVotes.map(({ validator, address, voteCount, isSR }, index) => (
             <Row
               key={index}
               validator={validator}
               address={address}
               amount={voteCount}
+              isSR={isSR}
               duration={
                 duration ? (
                   <Trans

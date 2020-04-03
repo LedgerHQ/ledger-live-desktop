@@ -37,12 +37,17 @@ const ManageButton = styled.button`
   padding: 16px;
   margin: 5px 0;
   border-radius: 4px;
-  border: 2px solid ${p => p.theme.colors.palette.divider};
+  border: 1px solid ${p => p.theme.colors.palette.divider};
   background-color: rgba(0, 0, 0, 0);
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+
+  &:hover {
+    border: 1px solid ${p => p.theme.colors.palette.primary.main};
+  }
+
   ${p =>
     p.disabled
       ? css`
@@ -61,9 +66,6 @@ const ManageButton = styled.button`
         `
       : `
       cursor: pointer;
-      &:hover {
-        background-color: ${p.theme.colors.palette.action.active};
-      }
   `};
 `;
 

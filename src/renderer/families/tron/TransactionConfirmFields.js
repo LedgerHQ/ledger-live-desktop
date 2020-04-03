@@ -33,7 +33,7 @@ const AddressText = styled(Text).attrs(() => ({
 }))`
   word-break: break-all;
   text-align: right;
-  ma-wwidth: 50%;
+  max-width: 50%;
 `;
 
 const Pre = ({
@@ -69,11 +69,14 @@ const Pre = ({
       )}
       {transaction.votes && transaction.votes.length > 0 && (
         <Box vertical justifyContent="space-between" mb={2}>
-          <Box mb={2}>
-            <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={3}>
-              <Trans i18nKey="TransactionConfirm.votes" />
-            </Text>
-          </Box>
+          <TransactionConfirmField label={<Trans i18nKey="TransactionConfirm.votes" />}>
+            <AddressText ff="Inter|SemiBold">
+              <Trans
+                i18nKey="TransactionConfirm.validators"
+                values={{ nbrVote: transaction.votes.length }}
+              />
+            </AddressText>
+          </TransactionConfirmField>
 
           <OperationDetailsVotes
             votes={transaction.votes}
