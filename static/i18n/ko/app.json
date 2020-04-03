@@ -1381,7 +1381,8 @@
     "toAddress": "To",
     "address": "Address",
     "resource": "Resource",
-    "votes": "Votes"
+    "votes": "Votes",
+    "validators": "{{ nbrVote }} validators"
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"
