@@ -584,6 +584,7 @@
         "title": "Confirmation",
         "success": {
           "title": "",
+          "textNRG": "You will start earning Energy once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
           "text": "Vous commencerez à gagner de la Bandwidth une fois que le réseau aura confirmé le gel. Vous pouvez bientôt voter pour les Super Representatives pour gagner des récompenses.",
           "votePending": "Voter dans {{time}}",
           "vote": "Voter",
