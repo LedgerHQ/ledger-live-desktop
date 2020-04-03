@@ -41,6 +41,7 @@
     "copy": "Copy",
     "copied": "Copied",
     "addressCopied": "Address copied",
+    "addressCopiedSuspicious": "Mismatch between the copied address and the one in the clipboard.",
     "experimentalFeature": "Experimental",
     "dismiss": "Dismiss",
     "information": "Information",
