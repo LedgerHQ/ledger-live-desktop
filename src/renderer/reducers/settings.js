@@ -14,6 +14,7 @@ import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getLanguages } from "~/config/languages";
 import type { State } from ".";
 import { osLangAndRegionSelector } from "~/renderer/reducers/application";
+import { listSupportedFiats } from "@ledgerhq/live-common/lib/data/fiat";
 
 export type CurrencySettings = {
   confirmationsNb: number,
@@ -135,6 +136,14 @@ const INITIAL_STATE: SettingsState = {
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
 
+export const supportedCountervalues = [...listSupportedFiats(), ...possibleIntermediaries].map<any>(
+  currency => ({
+    value: currency.ticker,
+    label: `${currency.name} - ${currency.ticker}`,
+    currency,
+  }),
+);
+
 const handlers: Object = {
   SETTINGS_SET_PAIRS: (
     state: SettingsState,
@@ -165,11 +174,19 @@ const handlers: Object = {
   FETCH_SETTINGS: (
     state: SettingsState,
     { payload: settings }: { payload: $Shape<SettingsState> },
-  ) => ({
-    ...state,
-    ...settings,
-    loaded: true,
-  }),
+  ) => {
+    if (
+      settings.counterValue &&
+      !supportedCountervalues.find(({ currency }) => currency.ticker === settings.counterValue)
+    ) {
+      settings.counterValue = INITIAL_STATE.counterValue;
+    }
+    return {
+      ...state,
+      ...settings,
+      loaded: true,
+    };
+  },
   SETTINGS_DISMISS_BANNER: (state: SettingsState, { payload: bannerId }) => ({
     ...state,
     dismissedBanners: [...state.dismissedBanners, bannerId],
