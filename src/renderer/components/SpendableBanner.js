@@ -1,16 +1,19 @@
 // @flow
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import type { Account, AccountLike, Transaction } from "@ledgerhq/live-common/lib/types";
 import { useDebounce } from "@ledgerhq/live-common/lib//hooks/useDebounce";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { urls } from "~/config/urls";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import FormattedVal from "~/renderer/components/FormattedVal";
+import { openURL } from "~/renderer/linking";
 import Box from "./Box";
 import Text from "./Text";
+import { FakeLink } from "./Link";
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   horizontal: true,
@@ -31,6 +34,10 @@ type Props = {
 const SpendableBanner = ({ account, parentAccount, transaction }: Props) => {
   const { t } = useTranslation();
   const [maxSpendable, setMaxSpendable] = useState(null);
+
+  const onClickHelp = useCallback(() => {
+    openURL(urls.maxSpendable);
+  }, []);
 
   const debouncedTransaction = useDebounce(transaction, 500);
 
@@ -74,6 +81,9 @@ const SpendableBanner = ({ account, parentAccount, transaction }: Props) => {
             showCode
           />
         ) : null}
+      </Text>
+      <Text ff="Inter|SemiBold" fontSize={3} style={{ marginLeft: "auto" }}>
+        <FakeLink onClick={onClickHelp}>{t("common.learnMore")}</FakeLink>
       </Text>
     </Container>
   );

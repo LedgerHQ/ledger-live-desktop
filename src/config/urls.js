@@ -32,6 +32,7 @@ export const urls = {
   multipleDestinationAddresses: "https://support.ledger.com/hc/en-us/articles/360033801034",
   updateDeviceFirmware: "https://support.ledger.com/hc/en-us/articles/360002731113",
   lostPinOrSeed: "https://support.ledger.com/hc/en-us/articles/360000609933",
+  maxSpendable: "https://support.ledger.com/hc/en-us/articles/360012960679",
   stakingTezos: "https://www.ledger.com/staking-tezos",
   stakingTron: "http://www.ledger.com/staking-tron",
 
