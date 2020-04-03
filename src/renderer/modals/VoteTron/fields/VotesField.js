@@ -144,6 +144,7 @@ const VoteInput = styled.input.attrs(() => ({
   pattern: "[0-9]",
   placeholder: 0,
 }))`
+  cursor: pointer;
   flex: 1;
   text-align: center;
   font-size: 13px;
