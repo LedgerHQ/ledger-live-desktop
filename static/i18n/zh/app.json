@@ -41,6 +41,7 @@
     "copy": "复制",
     "copied": "已复制",
     "addressCopied": "地址已复制",
+    "addressCopiedSuspicious": "Mismatch between the copied address and the one in the clipboard.",
     "experimentalFeature": "Experimental",
     "dismiss": "Dismiss",
     "information": "Information",
@@ -142,7 +143,7 @@
     "availableBalanceTooltip": "This amount can be sent anytime.",
     "frozenAssetsTooltip": "This amount is available 3 days after you have unfrozen it.",
     "bandwidthTooltip": "Freeze assets to gain bandwidth",
-    "energyTooltip": "Freeze assets to gain ernergy"
+    "energyTooltip": "Freeze assets to gain energy"
   },
   "accounts": {
     "title": "账户",
@@ -1699,6 +1700,49 @@
     "SyncError": {
       "title": "Synchronization error",
       "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
+    },
+    "TronNoFrozenForBandwidth": {
+      "title": "No assets to unfreeze",
+      "description": "You do not have assets to unfreeze associated to Bandwidth"
+    },
+    "TronNoFrozenForEnergy": {
+      "title": "No assets to unfreeze",
+      "description": "You do not have assets to unfreeze associated to Energy"
+    },
+    "TronUnfreezeNotExpired": {
+      "title": "Unfreeze is not available yet",
+      "description": "You need to wait 3 days before your last Freeze operation"
+    },
+    "TronVoteRequired": {
+      "title": "At least 1 vote is needed"
+    },
+    "TronInvalidVoteCount": {
+      "title": "Vote format is incorrect",
+      "description": "You can only vote using round numbers"
+    },
+    "TronRewardNotAvailable": {
+      "title": "Reward is not claimable yet",
+      "description": "You need to wait 24 hours between claims"
+    },
+    "TronNoReward": {
+      "title": "There is no reward to claim"
+    },
+    "TronInvalidFreezeAmount": {
+      "title": "Amount to freeze cannot be lower than 1"
+    },
+    "TronSendTrc20ToNewAccountForbidden": {
+      "title": "Sending TRC20 to a new account won't activate it",
+      "description": "The recipient account must be activated prior to sending TRC20 to it. Send either TRX or TRC10 to an account to activate it."
+    },
+    "TronUnexpectedFees": {
+      "title": "Additional fees may be applied"
+    },
+    "TronNotEnoughTronPower": {
+      "title": "Not enough votes available"
+    },
+    "TronTransactionExpired": {
+      "title": "Transaction has expired",
+      "description": "Signature must be applied within 30 seconds. Please try again."
     },
     "PairingFailed": {
       "title": "Pairing unsuccessful",
