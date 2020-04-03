@@ -7,7 +7,7 @@ import { Trans } from "react-i18next";
 import type { StepProps } from "../types";
 
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-
+import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -39,6 +39,7 @@ export default function StepAmount({
 
   return (
     <Box flow={1}>
+      <SyncSkipUnderPriority priority={100} />
       <TrackPage category="Freeze Flow" name="Step 1" />
       <ResourceField resource={resource || "BANDWITH"} onChange={setFrozenResource} />
       <AmountField

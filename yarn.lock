@@ -1402,10 +1402,10 @@
     node-pre-gyp "^0.14.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^12.11.2":
-  version "12.11.2"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.11.2.tgz#98dffbf6813f53c3e8a589e7f5778b87710d07d5"
-  integrity sha512-ScSWiAcy2OKXWn+qBk3q6Ajp2GAq9SKilvaZuaMTiluJqE9FRyKZFRNXrsm8r5wh4YHfuJL9fY8A0RTBEf8ANg==
+"@ledgerhq/live-common@^12.12.1":
+  version "12.12.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.12.1.tgz#24d7c1370395940e9a2db02ba9af3e7a765030a4"
+  integrity sha512-6yxSfho7igHEOyWQjICe72w/RfD81BcxW8E77y50eGHtL6KvB3szJuFyYC2DaO27PrTpKY2QOOHdz3EBSWhORA==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "5.12.0"
@@ -4378,10 +4378,10 @@ d3-zoom@1:
     d3-selection "1"
     d3-transition "1"
 
-d3@^5.14.2:
-  version "5.15.0"
-  resolved "https://registry.yarnpkg.com/d3/-/d3-5.15.0.tgz#ffd44958e6a3cb8a59a84429c45429b8bca5677a"
-  integrity sha512-C+E80SL2nLLtmykZ6klwYj5rPqB5nlfN5LdWEAVdWPppqTD8taoJi2PxLZjPeYT8FFRR2yucXq+kBlOnnvZeLg==
+d3@^5.15.1:
+  version "5.15.1"
+  resolved "https://registry.yarnpkg.com/d3/-/d3-5.15.1.tgz#7a8f32208559505bf1f56537a31c3fb8e76a519b"
+  integrity sha512-Xu9gT6Lm0jH3wWJJSRomFwqnGGi3YAfWIfxNFl4++YVgYOjo3F8V2idAG3nJBgpZOkD0/RHPZX6F4k6tzgOvYw==
   dependencies:
     d3-array "1"
     d3-axis "1"

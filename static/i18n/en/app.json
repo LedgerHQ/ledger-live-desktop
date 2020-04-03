@@ -1700,6 +1700,43 @@
       "title": "Synchronization error",
       "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
     },
+    "TronNoFrozenForBandwidth": {
+      "title": "TronNoFrozenForBandwidth"
+    },
+    "TronNoFrozenForEnergy": {
+      "title": "TronNoFrozenForEnergy"
+    },
+    "TronUnfreezeNotExpired": {
+      "title": "TronUnfreezeNotExpired"
+    },
+    "TronVoteRequired": {
+      "title": "TronVoteRequired"
+    },
+    "TronInvalidVoteCount": {
+      "title": "TronInvalidVoteCount"
+    },
+    "TronRewardNotAvailable": {
+      "title": "Reward is not claimable until {{until}}"
+    },
+    "TronNoReward": {
+      "title": "TronNoReward"
+    },
+    "TronInvalidFreezeAmount": {
+      "title": "TronInvalidFreezeAmount"
+    },
+    "TronSendTrc20ToNewAccountForbidden": {
+      "title": "TronSendTrc20ToNewAccountForbidden"
+    },
+    "TronUnexpectedFees": {
+      "title": "TronUnexpectedFees"
+    },
+    "TronNotEnoughTronPower": {
+      "title": "TronNotEnoughTronPower"
+    },
+    "TronTransactionExpired": {
+      "title": "The transaction has expired",
+      "description": "You were not fast enough to sign it on the device. Please try again."
+    },
     "PairingFailed": {
       "title": "Pairing unsuccessful",
       "description": "Please try again or contact Ledger Support when in doubt."
