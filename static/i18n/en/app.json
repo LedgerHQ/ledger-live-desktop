@@ -1701,41 +1701,47 @@
       "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
     },
     "TronNoFrozenForBandwidth": {
-      "title": "TronNoFrozenForBandwidth"
+      "title": "No assets to unfreeze",
+      "description": "You do not have assets to unfreeze associated to Bandwidth"
     },
     "TronNoFrozenForEnergy": {
-      "title": "TronNoFrozenForEnergy"
+      "title": "No assets to unfreeze",
+      "description": "You do not have assets to unfreeze associated to Energy"
     },
     "TronUnfreezeNotExpired": {
-      "title": "TronUnfreezeNotExpired"
+      "title": "Unfreeze is not available yet",
+      "description": "You need to wait 3 days before your last Freeze operation"
     },
     "TronVoteRequired": {
-      "title": "TronVoteRequired"
+      "title": "At least 1 vote is needed"
     },
     "TronInvalidVoteCount": {
-      "title": "TronInvalidVoteCount"
+      "title": "Vote format is incorrect",
+      "description": "You can only vote using round numbers"
     },
     "TronRewardNotAvailable": {
-      "title": "Reward is not claimable until {{until}}"
+      "title": "Reward is not claimable yet",
+      "description": "You need to wait 24 hours between claims"
     },
     "TronNoReward": {
-      "title": "TronNoReward"
+      "title": "There is no reward to claim"
     },
     "TronInvalidFreezeAmount": {
-      "title": "TronInvalidFreezeAmount"
+      "title": "Amount to freeze cannot be lower than 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
-      "title": "TronSendTrc20ToNewAccountForbidden"
+      "title": "Sending TRC20 to a new account won't activate it",
+      "description": "The recipient account must be activated prior to sending TRC20 to it. Send either TRX or TRC10 to an account to activate it."
     },
     "TronUnexpectedFees": {
-      "title": "TronUnexpectedFees"
+      "title": "Additional fees may be applied"
     },
     "TronNotEnoughTronPower": {
-      "title": "TronNotEnoughTronPower"
+      "title": "Not enough votes available"
     },
     "TronTransactionExpired": {
-      "title": "The transaction has expired",
-      "description": "You were not fast enough to sign it on the device. Please try again."
+      "title": "Transaction has expired",
+      "description": "Signature must be applied within 30 seconds. Please try again."
     },
     "PairingFailed": {
       "title": "Pairing unsuccessful",
