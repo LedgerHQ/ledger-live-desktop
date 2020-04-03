@@ -1381,7 +1381,8 @@
     "toAddress": "Ide",
     "address": "Cím",
     "resource": "Forrás",
-    "votes": "Szavazatok"
+    "votes": "Szavazatok",
+    "validators": "{{ nbrVote }} validators"
   },
   "RecipientField": {
     "placeholder": "Írd be a(z) {{currencyName}} címet"
