@@ -143,7 +143,7 @@
     "availableBalanceTooltip": "This amount can be sent anytime.",
     "frozenAssetsTooltip": "This amount is available 3 days after you have unfrozen it.",
     "bandwidthTooltip": "Freeze assets to gain bandwidth",
-    "energyTooltip": "Freeze assets to gain ernergy"
+    "energyTooltip": "Freeze assets to gain energy"
   },
   "accounts": {
     "title": "账户",
