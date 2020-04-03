@@ -167,8 +167,14 @@
       "star": "Star",
       "receive": "Receive",
       "send": "Send",
-      "edit": "Edit account"
+      "edit": "Edit account",
+      "hideToken": "Hide token"
     }
+  },
+  "blacklistToken": {
+    "title": "Hide token",
+    "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can restore their visibility at any time from <3>Settings</3>",
+    "hideCTA": "Hide token"
   },
   "banners": {
     "migrate": "Ledger Live accounts update available",
@@ -1068,6 +1074,10 @@
       "hideEmptyTokens": {
         "title": "Hide empty token accounts",
         "desc": "Hide token accounts with zero balance on the Accounts page."
+      },
+      "tokenBlacklist": {
+        "title": "Hidden tokens",
+        "desc": "You can hide a token by right-clicking on it while in its parent screen and selecting 'Hide token'"
       }
     }
   },

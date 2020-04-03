@@ -167,8 +167,14 @@
       "star": "Добавить в избранное",
       "receive": "Получить",
       "send": "Отправить",
-      "edit": "Edit account"
+      "edit": "Edit account",
+      "hideToken": "Hide token"
     }
+  },
+  "blacklistToken": {
+    "title": "Hide token",
+    "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can restore their visibility at any time from <3>Settings</3>",
+    "hideCTA": "Hide token"
   },
   "banners": {
     "migrate": "Доступно обновление учётных записей Ledger Live",
@@ -1068,6 +1074,10 @@
       "hideEmptyTokens": {
         "title": "Скрыть пустые токен аккаунты",
         "desc": "Скрыть токены с нулевым балансом на странице счетов."
+      },
+      "tokenBlacklist": {
+        "title": "Hidden tokens",
+        "desc": "You can hide a token by right-clicking on it while in its parent screen and selecting 'Hide token'"
       }
     }
   },
