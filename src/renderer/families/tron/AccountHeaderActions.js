@@ -82,11 +82,11 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
       <ButtonBase primary disabled={earnRewardDisabled} onClick={onClick}>
         <Box horizontal flow={1} alignItems="center">
           {tronPower > 0 ? (
-            <CryptoCurrencyIcon overrideColor={contrastText} currency={currency} size={16} />
+            <CryptoCurrencyIcon overrideColor={contrastText} currency={currency} size={12} />
           ) : (
-            <IconChartLine size={16} />
+            <IconChartLine size={12} />
           )}
-          <Box>
+          <Box fontSize={3}>
             <Trans i18nKey={tronPower > 0 ? "tron.voting.manageTP" : "delegation.title"} />
           </Box>
         </Box>

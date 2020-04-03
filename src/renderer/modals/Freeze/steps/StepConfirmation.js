@@ -1,9 +1,13 @@
 // @flow
 
-import React, { useState, useEffect, useCallback } from "react";
+import invariant from "invariant";
+import { useSelector } from "react-redux";
+import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import styled, { withTheme } from "styled-components";
-
+import { useTronPowerLoading } from "@ledgerhq/live-common/lib/families/tron/react";
+import { useTimer } from "@ledgerhq/live-common/lib/hooks/useTimer";
+import { accountSelector } from "~/renderer/reducers/accounts";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { multiline } from "~/renderer/styles/helpers";
@@ -63,37 +67,21 @@ function StepConfirmation({
   return null;
 }
 
-const useTimer = (timer: number) => {
-  const [time, setTime] = useState(timer);
-
-  useEffect(() => {
-    let T = timer;
-    const int = setInterval(() => {
-      if (T <= 0) {
-        clearInterval(int);
-      } else {
-        T--;
-        setTime(T);
-      }
-    }, 1000);
-    return () => {
-      if (int) clearInterval(int);
-    };
-  }, [timer]);
-
-  return time;
-};
-
 export function StepConfirmationFooter({
   t,
   transitionTo,
-  account,
+  account: initialAccount,
   onRetry,
   error,
   openModal,
   onClose,
 }: StepProps) {
+  invariant(initialAccount, "tron account required");
+  const account = useSelector(s => accountSelector(s, { accountId: initialAccount.id }));
+  invariant(account, "tron account still exists");
+
   const time = useTimer(60);
+  const isLoading = useTronPowerLoading(account);
 
   const openVote = useCallback(() => {
     onClose();
@@ -114,8 +102,14 @@ export function StepConfirmationFooter({
       <Button ml={2} event="Freeze Flow Step 3 View OpD Clicked" onClick={onClose} secondary>
         <Trans i18nKey="freeze.steps.confirmation.success.later" />
       </Button>
-      <Button ml={2} disabled={time > 0} primary onClick={openVote}>
-        {time > 0 ? (
+      <Button
+        ml={2}
+        isLoading={isLoading && time === 0}
+        disabled={isLoading}
+        primary
+        onClick={openVote}
+      >
+        {time > 0 && isLoading ? (
           <Trans i18nKey="freeze.steps.confirmation.success.votePending" values={{ time }} />
         ) : (
           <Trans i18nKey="freeze.steps.confirmation.success.vote" />

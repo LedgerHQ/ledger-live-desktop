@@ -7,7 +7,6 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import votesImage from "~/renderer/images/votes.svg";
-import SRInfoPopover from "./SRInfoPopover";
 import { useAccount } from "../shared";
 
 export default function VoteTronInfoModalBodyMain() {
@@ -28,7 +27,6 @@ export default function VoteTronInfoModalBodyMain() {
           <Text ff="Inter|SemiBold" fontSize={4} textAlign="center">
             <Trans i18nKey="tron.manage.vote.steps.vote.description" />
           </Text>
-          <SRInfoPopover />
         </Box>
       </Box>
     </Box>
@@ -36,6 +34,6 @@ export default function VoteTronInfoModalBodyMain() {
 }
 
 const Img = styled.img`
-  width: 182px;
+  width: 160px;
   height: auto;
 `;

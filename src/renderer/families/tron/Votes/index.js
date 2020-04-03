@@ -24,6 +24,7 @@ import Button from "~/renderer/components/Button";
 import Box, { Card } from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import IconChartLine from "~/renderer/icons/ChartLine";
+import Vote from "~/renderer/icons/Vote";
 import Header from "./Header";
 import Row from "./Row";
 import Footer from "./Footer";
@@ -126,7 +127,7 @@ const Delegation = ({ account }: Props) => {
           <Box horizontal>
             <Button small primary onClick={onDelegate} mr={2}>
               <Box horizontal flow={1} alignItems="center">
-                <IconChartLine size={12} />
+                <Vote size={12} />
                 <Box>
                   <Trans
                     i18nKey={
@@ -240,7 +241,7 @@ const Delegation = ({ account }: Props) => {
                 disabled={earnRewardDisabled}
                 onClick={tronPower > 0 ? onDelegate : onEarnRewards}
               >
-                <Box horizontal flow={2} alignItems="center">
+                <Box horizontal flow={1} alignItems="center">
                   <IconChartLine size={12} />
                   <Box>
                     <Trans
