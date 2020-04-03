@@ -64,6 +64,12 @@ const Delegation = ({ account }: Props) => {
   /** min 1TRX transactions */
   const minAmount = 10 ** unit.magnitude;
 
+  const formattedMinAmount = formatCurrencyUnit(unit, BigNumber(minAmount), {
+    disableRounding: true,
+    alwaysShowSign: false,
+    showCode: true,
+  });
+
   const { tronResources, spendableBalance } = account;
   invariant(tronResources, "tron account expected");
   const { votes, tronPower, unwithdrawnReward } = tronResources;
@@ -234,7 +240,14 @@ const Delegation = ({ account }: Props) => {
           </Box>
           <Box>
             <ToolTip
-              content={earnRewardDisabled ? <Trans i18nKey="tron.voting.warnEarnRewards" /> : null}
+              content={
+                earnRewardDisabled ? (
+                  <Trans
+                    i18nKey="tron.voting.warnEarnRewards"
+                    values={{ amount: formattedMinAmount }}
+                  />
+                ) : null
+              }
             >
               <Button
                 primary
