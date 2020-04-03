@@ -88,7 +88,8 @@ const ContentWrapper: ThemedComponent<{
   transform-origin: center;
   transition: all 200ms cubic-bezier(0.3, 1, 0.5, 0.8);
   z-index: 999;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid ${p => p.theme.colors.palette.text.shade20};
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1); */
   &:before {
     content: "";
     position: absolute;
@@ -98,6 +99,9 @@ const ContentWrapper: ThemedComponent<{
     top: ${p => topPosArrow[p.position]};
     left: ${p => leftPosArrow[p.position]};
     transform: translate(-50%, -50%) rotate(45deg);
+    border: 1px solid ${p => p.theme.colors.palette.text.shade20};
+    border-top: 0;
+    border-right: 0;
   }
 `;
 

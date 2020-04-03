@@ -79,11 +79,18 @@ const Title = styled(Text).attrs(() => ({
   fontSize: 4,
 }))``;
 
-const Description = styled(Text).attrs(() => ({
-  ff: "Inter|Regular",
-  fontSize: 3,
+const Description = styled(Text).attrs(({ isPill }) => ({
+  ff: isPill ? "Inter|SemiBold" : "Inter|Regular",
+  fontSize: isPill ? 2 : 3,
   color: "palette.text.shade60",
-}))``;
+}))`
+  ${p =>
+    p.isPill
+      ? `
+    text-transform: uppercase;
+  `
+      : ""}
+`;
 
 const TimerWrapper = styled(Box).attrs(() => ({
   horizontal: true,
@@ -95,8 +102,9 @@ const TimerWrapper = styled(Box).attrs(() => ({
   borderRadius: 4,
   p: 1,
   ml: 4,
-  mt: 2,
 }))`
+  align-self: center;
+
   ${Description} {
     margin-left: 5px;
   }
@@ -203,7 +211,7 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
                   {!canUnfreeze && (
                     <TimerWrapper>
                       <Clock size={12} />
-                      <Description>{formattedTimeToUnfreeze}</Description>
+                      <Description isPill>{formattedTimeToUnfreeze}</Description>
                     </TimerWrapper>
                   )}
                 </ManageButton>
