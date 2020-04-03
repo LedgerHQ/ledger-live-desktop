@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { listSupportedCurrencies, listTokens } from "@ledgerhq/live-common/lib/currencies";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
-import { urls } from "~/config/urls";
+import { supportLinkByTokenType } from "~/config/urls";
 import { colors } from "~/renderer/styles/theme";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
@@ -56,17 +56,23 @@ const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
 
 export const StepChooseCurrencyFooter = ({ transitionTo, currency }: StepProps) => {
   const { t } = useTranslation();
+  const url =
+    currency && currency.type === "TokenCurrency"
+      ? supportLinkByTokenType[currency.tokenType]
+      : null;
   return (
     <>
       <TrackPage category="AddAccounts" name="Step1" />
       {currency && <CurrencyBadge mr="auto" currency={currency} />}
       {currency && currency.type === "TokenCurrency" ? (
-        <ExternalLinkButton
-          primary
-          event="More info on Manage ERC20 tokens"
-          url={urls.managerERC20}
-          label={t("common.learnMore")}
-        />
+        url ? (
+          <ExternalLinkButton
+            primary
+            event="More info on Manage ERC20 tokens"
+            url={url}
+            label={t("common.learnMore")}
+          />
+        ) : null
       ) : (
         <Button
           primary

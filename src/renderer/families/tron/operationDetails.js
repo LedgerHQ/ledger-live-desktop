@@ -26,7 +26,7 @@ import {
 import Text from "~/renderer/components/Text";
 import FormattedVal from "~/renderer/components/FormattedVal";
 
-const helpURL = "https://support.ledger.com/"; // FIXME
+const helpURL = "https://support.ledger.com/hc/en-us/articles/360013062139";
 
 function getURLFeesInfo(op: Operation): ?string {
   if (op.fee.gt(200000)) {
