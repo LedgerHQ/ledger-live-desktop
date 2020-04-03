@@ -10,6 +10,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 type Props = {
   currency: Currency,
   size: number,
+  overrideColor?: string,
   inactive?: boolean,
   theme: any,
 };
@@ -38,9 +39,9 @@ export const TokenIcon: ThemedComponent<{
   height: ${p => p.size}px;
 `;
 
-const CryptoCurrencyIcon = ({ currency, size, inactive, theme }: Props) => {
+const CryptoCurrencyIcon = ({ currency, size, overrideColor, inactive, theme }: Props) => {
   const currencyColor = getCurrencyColor(currency, theme.colors.palette.background.paper);
-  const color = inactive ? theme.colors.palette.text.shade60 : currencyColor;
+  const color = overrideColor || (inactive ? theme.colors.palette.text.shade60 : currencyColor);
 
   if (currency.type === "FiatCurrency") {
     return null;

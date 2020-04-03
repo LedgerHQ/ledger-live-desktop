@@ -9,15 +9,12 @@ import { BigNumber } from "bignumber.js";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-
 import type { TFunction } from "react-i18next";
-
 import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
-
 import type { Transaction } from "@ledgerhq/live-common/lib/families/tron/types";
-
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
+import Label from "~/renderer/components/Label";
 import Box from "~/renderer/components/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import Text from "~/renderer/components/Text";
@@ -31,6 +28,15 @@ const InputRight = styled(Box).attrs(() => ({
 }))`
   padding: ${p => p.theme.space[2]}px;
 `;
+
+const InputLeft = styled(Box).attrs(() => ({
+  ff: "Inter|Medium",
+  color: "palette.text.shade60",
+  fontSize: 4,
+  justifyContent: "center",
+  horizontal: true,
+  pl: 3,
+}))``;
 
 const AmountButton: ThemedComponent<{ error: boolean }> = styled.button.attrs(() => ({
   type: "button",
@@ -143,19 +149,14 @@ const AmountField = ({
 
   return (
     <Box vertical flow={1}>
-      <Box
-        horizontal
-        justifyContent="space-between"
-        alignItems="center"
-        color="palette.text.shade80"
-      >
-        <Text fontSize={3}>
+      <Label>
+        <Text>
           <Trans i18nKey="freeze.steps.amount.amountLabel" />
         </Text>
-        <Text fontSize={3} textAlign="right">
+        <Text style={{ flex: 1 }} textAlign="right">
           <Trans i18nKey="freeze.steps.amount.available" values={{ amountAvailable }} />
         </Text>
-      </Box>
+      </Label>
       <InputCurrency
         autoFocus={false}
         error={amountError}
@@ -165,6 +166,7 @@ const AmountField = ({
         value={amount}
         decimals={0}
         onChange={onChange}
+        renderLeft={<InputLeft>{defaultUnit.code}</InputLeft>}
         renderRight={
           showAmountRatio && (
             <InputRight>

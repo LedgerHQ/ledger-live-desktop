@@ -12,6 +12,14 @@ export default function VoteTronInfoModalBodyFooter() {
 
   const accountContext = useAccount();
 
+  const tronResources =
+    accountContext &&
+    accountContext.account &&
+    accountContext.account.type === "Account" &&
+    accountContext.account.tronResources;
+
+  const hasVotesAvailable = tronResources ? tronResources.tronPower > 0 : false;
+
   // const [showAgain, setShowAgain] = useState(false);
 
   // function onClickShowAgain() {
@@ -48,7 +56,7 @@ export default function VoteTronInfoModalBodyFooter() {
                 </Text>
               </Box> */}
 
-      <Button primary onClick={onNext}>
+      <Button primary disabled={!hasVotesAvailable} onClick={onNext}>
         {t("tron.manage.vote.steps.vote.footer.next")}
       </Button>
     </>

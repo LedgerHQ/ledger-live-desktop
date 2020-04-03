@@ -94,6 +94,7 @@ export type SettingsState = {
   discreetMode: boolean,
   starredAccountIds?: string[],
   hasInstalledApps: boolean,
+  blacklistedTokenIds: string[],
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -129,6 +130,7 @@ const INITIAL_STATE: SettingsState = {
   sidebarCollapsed: false,
   discreetMode: false,
   hasInstalledApps: true,
+  blacklistedTokenIds: [],
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -172,6 +174,20 @@ const handlers: Object = {
     ...state,
     dismissedBanners: [...state.dismissedBanners, bannerId],
   }),
+  SHOW_TOKEN: (state: SettingsState, { payload: tokenId }) => {
+    const ids = state.blacklistedTokenIds;
+    return {
+      ...state,
+      blacklistedTokenIds: ids.filter(id => id !== tokenId),
+    };
+  },
+  BLACKLIST_TOKEN: (state: SettingsState, { payload: tokenId }) => {
+    const ids = state.blacklistedTokenIds;
+    return {
+      ...state,
+      blacklistedTokenIds: [...ids, tokenId],
+    };
+  },
   // used to debug performance of redux updates
   DEBUG_TICK: state => ({ ...state }),
 };
@@ -284,6 +300,7 @@ export const autoLockTimeoutSelector = (state: State) => state.settings.autoLock
 export const shareAnalyticsSelector = (state: State) => state.settings.shareAnalytics;
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange;
 export const hasInstalledAppsSelector = (state: State) => state.settings.hasInstalledApps;
+export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;
 

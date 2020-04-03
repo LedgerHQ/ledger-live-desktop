@@ -110,7 +110,7 @@ ipcMain.on("command", (event, command) => {
   internal.send({ type: "command", command });
 });
 
-ipcMain.removeListener("command-unsubscribe", (event, { requestId }) => {
+ipcMain.on("command-unsubscribe", (event, { requestId }) => {
   delete ongoing[requestId];
   internal.send({ type: "command-unsubscribe", requestId });
 });

@@ -28,6 +28,14 @@ export type Feature = FeatureCommon & FeatureToggle;
 export const experimentalFeatures: Feature[] = [
   {
     type: "toggle",
+    name: "API_TRONGRID_PROXY",
+    title: "use TronGrid.io",
+    description: "Use trongrid directly without ledger proxy",
+    valueOn: "https://api.trongrid.io",
+    valueOff: "https://tron.coin.ledger.com",
+  },
+  {
+    type: "toggle",
     name: "EXPERIMENTAL_LANGUAGES",
     title: "Translation testing",
     description: "Adds unreleased languages to the language list in the general settings tab.",

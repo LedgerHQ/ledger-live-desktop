@@ -16,11 +16,11 @@ import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 
-import Rewards from "~/renderer/images/rewards.png";
+import Rewards from "~/renderer/images/rewards.svg";
 import Modal, { ModalBody } from "~/renderer/components/Modal/index";
 
 const RewardImg = styled.img.attrs(() => ({ src: Rewards }))`
-  width: 182px;
+  width: 160px;
   height: auto;
 `;
 
@@ -72,8 +72,8 @@ const EarnRewardsInfoModal = ({ name, account, parentAccount }: Props) => {
                 </Box>
                 <Box mb={4}>
                   <Text
-                    ff="Inter|Regular"
-                    fontSize={14}
+                    ff="Inter|SemiBold"
+                    fontSize={13}
                     textAlign="center"
                     color="palette.text.shade80"
                     style={{ lineHeight: 1.57 }}
@@ -85,10 +85,10 @@ const EarnRewardsInfoModal = ({ name, account, parentAccount }: Props) => {
                   <Row>
                     <Check size={16} />
                     <Text
-                      ff="Inter|Bold"
+                      ff="Inter|SemiBold"
                       style={{ lineHeight: 1.57 }}
                       color="palette.text.shade100"
-                      fontSize={14}
+                      fontSize={13}
                     >
                       <Trans i18nKey="tron.voting.flow.steps.starter.bullet.delegate" />
                     </Text>
@@ -96,10 +96,10 @@ const EarnRewardsInfoModal = ({ name, account, parentAccount }: Props) => {
                   <Row>
                     <Check size={16} />
                     <Text
-                      ff="Inter|Bold"
+                      ff="Inter|SemiBold"
                       style={{ lineHeight: 1.57 }}
                       color="palette.text.shade100"
-                      fontSize={14}
+                      fontSize={13}
                     >
                       <Trans i18nKey="tron.voting.flow.steps.starter.bullet.access" />
                     </Text>
@@ -107,10 +107,10 @@ const EarnRewardsInfoModal = ({ name, account, parentAccount }: Props) => {
                   <Row>
                     <Check size={16} />
                     <Text
-                      ff="Inter|Bold"
+                      ff="Inter|SemiBold"
                       style={{ lineHeight: 1.57 }}
                       color="palette.text.shade100"
-                      fontSize={14}
+                      fontSize={13}
                     >
                       <Trans i18nKey="tron.voting.flow.steps.starter.bullet.ledger" />
                     </Text>
@@ -118,22 +118,22 @@ const EarnRewardsInfoModal = ({ name, account, parentAccount }: Props) => {
                 </Box>
                 <Box my={4}>
                   <LinkWithExternalIcon
-                    label={<Trans i18nKey="delegation.howItWorks" />}
-                    onClick={() => openURL(urls.delegation)}
+                    label={<Trans i18nKey="tron.voting.flow.steps.starter.help" />}
+                    onClick={() => openURL(urls.stakingTron)}
                   />
                 </Box>
               </Box>
             </Box>
           )}
           renderFooter={() => (
-            <>
+            <Box horizontal alignItems="right">
               <Button secondary onClick={onClose}>
                 <Trans i18nKey="common.cancel" />
               </Button>
               <Button primary onClick={onNext}>
                 <Trans i18nKey="common.continue" />
               </Button>
-            </>
+            </Box>
           )}
         />
       )}

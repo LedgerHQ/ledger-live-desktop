@@ -58,11 +58,12 @@ export default function StepAmount({
         alignItems="center"
         p={2}
         bg="palette.divider"
+        color="palette.text.shade100"
       >
         <Box mr={2}>
           <InfoCircle size={12} />
         </Box>
-        <Text ff="Inter|Regular" textAlign="center" fontSize={3}>
+        <Text ff="Inter|SemiBold" textAlign="center" fontSize={3}>
           <Trans i18nKey="freeze.steps.amount.info" />
         </Text>
       </Box>

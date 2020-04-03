@@ -65,7 +65,7 @@ const steps: Array<St> = [
     id: "connectDevice",
     label: <Trans i18nKey="vote.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
-    onBack: ({ transitionTo }: StepProps) => transitionTo("rewards"),
+    onBack: ({ transitionTo }: StepProps) => transitionTo("castVotes"),
   },
   {
     id: "confirmation",
@@ -101,6 +101,7 @@ const Body = ({
   const {
     transaction,
     setTransaction,
+    updateTransaction,
     account,
     parentAccount,
     status,
@@ -134,7 +135,7 @@ const Body = ({
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId]);
 
   const handleRetry = useCallback(() => {
-    onChangeStepId("connectDevice");
+    onChangeStepId("castVotes");
   }, [onChangeStepId]);
 
   const handleTransactionError = useCallback((error: Error) => {
@@ -158,8 +159,11 @@ const Body = ({
 
   const error = transactionError || bridgeError;
 
+  const tronResources = account && account.type === "Account" && account.tronResources;
+  const votes = tronResources && tronResources.votes;
+
   const stepperProps = {
-    title: t("vote.title"),
+    title: votes && votes.length > 0 ? t("vote.titleExisting") : t("vote.title"),
     device,
     account,
     parentAccount,
@@ -180,6 +184,7 @@ const Body = ({
     openModal,
     setSigned,
     onChangeTransaction: setTransaction,
+    onUpdateTransaction: updateTransaction,
     onOperationBroadcasted: handleOperationBroadcasted,
     onTransactionError: handleTransactionError,
     t,

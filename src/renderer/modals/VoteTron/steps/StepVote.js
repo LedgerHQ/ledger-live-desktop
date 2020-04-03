@@ -1,13 +1,9 @@
 // @flow
 import invariant from "invariant";
 import React, { useCallback } from "react";
-
 import { Trans } from "react-i18next";
-
 import type { StepProps } from "../types";
-
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -17,7 +13,7 @@ import SRInfoPopover from "../Info/Body/SRInfoPopover";
 export default function StepVote({
   account,
   parentAccount,
-  onChangeTransaction,
+  onUpdateTransaction,
   transaction,
   status,
   bridgePending,
@@ -27,9 +23,14 @@ export default function StepVote({
   const bridge = getAccountBridge(account, parentAccount);
 
   const updateVote = useCallback(
-    votes => onChangeTransaction(bridge.updateTransaction(transaction, { votes })),
-    [bridge, transaction, onChangeTransaction],
+    updater => {
+      onUpdateTransaction(transaction =>
+        bridge.updateTransaction(transaction, { votes: updater(transaction.votes) }),
+      );
+    },
+    [bridge, onUpdateTransaction],
   );
+
   return (
     <Box flow={1}>
       <TrackPage category="Vote Flow" name="Step 1" />

@@ -81,10 +81,14 @@ export function StepConfirmationFooter({
       : optimisticOperation
     : null;
   return (
-    <>
+    <Box horizontal alignItems="right">
+      <Button ml={2} onClick={onClose}>
+        <Trans i18nKey="common.cancel" />
+      </Button>
       {concernedOperation ? (
         // FIXME make a standalone component!
         <Button
+          primary
           ml={2}
           event="Vote Flow Step 3 View OpD Clicked"
           onClick={() => {
@@ -102,12 +106,9 @@ export function StepConfirmationFooter({
           <Trans i18nKey="vote.steps.confirmation.success.cta" />
         </Button>
       ) : error ? (
-        <RetryButton ml={2} primary onClick={onRetry} />
+        <RetryButton primary ml={2} onClick={onRetry} />
       ) : null}
-      <Button ml={2} primary onClick={onClose}>
-        <Trans i18nKey="vote.steps.confirmation.success.done" />
-      </Button>
-    </>
+    </Box>
   );
 }
 

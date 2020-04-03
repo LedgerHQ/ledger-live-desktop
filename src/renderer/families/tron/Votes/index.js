@@ -8,7 +8,7 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 
 import {
   useTronSuperRepresentatives,
-  useNextVotingDate,
+  getLastVotedDate,
   formatVotes,
   getNextRewardDate,
 } from "@ledgerhq/live-common/lib/families/tron/react";
@@ -52,9 +52,11 @@ const Delegation = ({ account }: Props) => {
   const dispatch = useDispatch();
 
   const superRepresentatives = useTronSuperRepresentatives();
-  const nextVotingDate = useNextVotingDate();
 
-  const formattedVotingDate = useMemo(() => moment(nextVotingDate).fromNow(), [nextVotingDate]);
+  const lastVoteDate = getLastVotedDate(account);
+  const duration = useMemo(() => (lastVoteDate ? moment().diff(lastVoteDate, "days") : 0), [
+    lastVoteDate,
+  ]);
 
   const unit = getAccountUnit(account);
   const explorerView = getDefaultExplorerView(account.currency);
@@ -95,7 +97,10 @@ const Delegation = ({ account }: Props) => {
     [account, dispatch],
   );
 
+  const hasVotes = formattedVotes.length > 0;
+
   const hasRewards = unwithdrawnReward > 0;
+
   const nextRewardDate = getNextRewardDate(account);
   const formattedNextRewardDate = useMemo(
     () => nextRewardDate && moment(nextRewardDate).fromNow(),
@@ -119,11 +124,17 @@ const Delegation = ({ account }: Props) => {
         </Text>
         {tronPower > 0 && (formattedVotes.length > 0 || canClaimRewards) ? (
           <Box horizontal>
-            <Button primary onClick={onDelegate} mr={2}>
+            <Button small primary onClick={onDelegate} mr={2}>
               <Box horizontal flow={1} alignItems="center">
                 <IconChartLine size={12} />
                 <Box>
-                  <Trans i18nKey="tron.voting.emptyState.vote" />
+                  <Trans
+                    i18nKey={
+                      hasVotes
+                        ? "tron.voting.emptyState.voteExisting"
+                        : "tron.voting.emptyState.vote"
+                    }
+                  />
                 </Box>
               </Box>
             </Button>
@@ -144,6 +155,7 @@ const Delegation = ({ account }: Props) => {
               <Button
                 disabled={!canClaimRewards}
                 primary
+                small
                 onClick={() => {
                   dispatch(
                     openModal("MODAL_CLAIM_REWARDS", {
@@ -180,8 +192,18 @@ const Delegation = ({ account }: Props) => {
               validator={validator}
               address={address}
               amount={voteCount}
-              duration={formattedVotingDate}
-              percentTP={Number((voteCount * 1e2) / tronPower).toFixed(2)}
+              duration={
+                duration ? (
+                  <Trans
+                    i18nKey="delegation.durationDays"
+                    count={duration}
+                    values={{ count: duration }}
+                  />
+                ) : (
+                  <Trans i18nKey="delegation.durationJustStarted" />
+                )
+              }
+              percentTP={String(Math.round(100 * Number((voteCount * 1e2) / tronPower)) / 100)}
               currency={account.currency}
               explorerView={explorerView}
             />
@@ -204,7 +226,7 @@ const Delegation = ({ account }: Props) => {
             <Box mt={2}>
               <LinkWithExternalIcon
                 label={<Trans i18nKey="tron.voting.emptyState.info" />}
-                onClick={() => openURL(urls.delegation)}
+                onClick={() => openURL(urls.stakingTron)}
               />
             </Box>
           </Box>
@@ -214,10 +236,11 @@ const Delegation = ({ account }: Props) => {
             >
               <Button
                 primary
+                small
                 disabled={earnRewardDisabled}
                 onClick={tronPower > 0 ? onDelegate : onEarnRewards}
               >
-                <Box horizontal flow={1} alignItems="center">
+                <Box horizontal flow={2} alignItems="center">
                   <IconChartLine size={12} />
                   <Box>
                     <Trans

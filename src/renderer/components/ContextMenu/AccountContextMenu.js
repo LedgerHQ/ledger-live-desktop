@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import IconReceive from "~/renderer/icons/Receive";
 import IconSend from "~/renderer/icons/Send";
 import IconStar from "~/renderer/icons/Star";
+import IconBan from "~/renderer/icons/Ban";
 import IconAccountSettings from "~/renderer/icons/AccountSettings";
 import ContextMenuItem from "./ContextMenuItem";
 import { toggleStarAction } from "~/renderer/actions/accounts";
@@ -72,6 +73,14 @@ class AccountContextMenu extends PureComponent<Props> {
         label: "accounts.contextMenu.edit",
         Icon: IconAccountSettings,
         callback: () => openModal("MODAL_SETTINGS_ACCOUNT", { account }),
+      });
+    }
+
+    if (account.type === "TokenAccount") {
+      items.push({
+        label: "accounts.contextMenu.hideToken",
+        Icon: IconBan,
+        callback: () => openModal("MODAL_BLACKLIST_TOKEN", { token: account.token }),
       });
     }
 

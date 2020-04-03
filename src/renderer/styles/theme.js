@@ -51,6 +51,7 @@ const colors = {
   dark: "#142533",
   separator: "#aaaaaa",
   fog: "#d8d8d8",
+  gold: "#d6ad42",
   graphite: "#767676",
   grey: "#999999",
   identity: "#41ccb4",

@@ -64,7 +64,7 @@ const steps: Array<St> = [
     id: "connectDevice",
     label: <Trans i18nKey="unfreeze.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
-    onBack: ({ transitionTo }: StepProps) => transitionTo("rewards"),
+    onBack: ({ transitionTo }: StepProps) => transitionTo("amount"),
   },
   {
     id: "confirmation",
@@ -131,7 +131,7 @@ const Body = ({
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId]);
 
   const handleRetry = useCallback(() => {
-    onChangeStepId("connectDevice");
+    onChangeStepId("amount");
   }, [onChangeStepId]);
 
   const handleTransactionError = useCallback((error: Error) => {
