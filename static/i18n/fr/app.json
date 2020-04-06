@@ -1377,12 +1377,7 @@
       "undelegate": "validateur",
       "claimReward": "récompense de délégation"
     },
-    "fromAddress": "De",
-    "toAddress": "Vers",
-    "address": "Adresse",
-    "resource": "Ressources",
-    "votes": "Votes",
-    "validators": "{{ nbrVote }} validateurs"
+    "votes": "Votes ({{count}})"
   },
   "RecipientField": {
     "placeholder": "Entrer l'adresse {{currencyName}}"
