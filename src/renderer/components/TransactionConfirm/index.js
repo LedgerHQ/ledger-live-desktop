@@ -59,6 +59,7 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
   const Post = r && r.post;
   const Warning = r && r.warning;
   const Title = r && r.title;
+  const noFees = r && r.disableFees && r.disableFees(transaction);
 
   const recipientWording = t(`TransactionConfirm.recipientWording.${transaction.mode || "send"}`);
 
@@ -112,7 +113,7 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
             />
           </TransactionConfirmField>
         )}
-        {!estimatedFees.isZero() && (
+        {noFees ? null : (
           <TransactionConfirmField label={<Trans i18nKey="send.steps.details.fees" />}>
             <FormattedVal
               color={"palette.text.shade80"}
