@@ -25,7 +25,7 @@ import { closeModal, openModal } from "~/renderer/actions/modals";
 
 import Stepper from "~/renderer/components/Stepper";
 import StepRewards, { StepRewardsFooter } from "./steps/StepRewards";
-import StepConnectDevice from "./steps/StepConnectDevice";
+import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
 
@@ -50,12 +50,9 @@ type StateProps = {|
   openModal: string => void,
 |};
 
-type Props = {|
-  ...OwnProps,
-  ...StateProps,
-|};
+type Props = OwnProps & StateProps;
 
-const createSteps = (): Array<St> => [
+const steps: Array<St> = [
   {
     id: "rewards",
     label: <Trans i18nKey="claimReward.steps.rewards.title" />,
@@ -66,7 +63,7 @@ const createSteps = (): Array<St> => [
   {
     id: "connectDevice",
     label: <Trans i18nKey="claimReward.steps.connectDevice.title" />,
-    component: StepConnectDevice,
+    component: GenericStepConnectDevice,
     onBack: ({ transitionTo }: StepProps) => transitionTo("rewards"),
   },
   {
@@ -96,8 +93,6 @@ const Body = ({
   params,
   name,
 }: Props) => {
-  const [steps] = useState(createSteps);
-
   const [optimisticOperation, setOptimisticOperation] = useState(null);
   const [transactionError, setTransactionError] = useState(null);
   const [signed, setSigned] = useState(false);
@@ -123,7 +118,7 @@ const Body = ({
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId]);
 
   const handleRetry = useCallback(() => {
-    onChangeStepId("connectDevice");
+    onChangeStepId("rewards");
   }, [onChangeStepId]);
 
   const handleTransactionError = useCallback((error: Error) => {

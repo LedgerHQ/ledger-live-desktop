@@ -23,6 +23,9 @@ const appLoaded = () => {
       requestAnimationFrame(() => {
         loader.classList.add("loaded");
         loaderContainer.classList.remove("loading");
+        setTimeout(() => {
+          loaderContainer.style.display = "none";
+        }, 1000);
       });
     }
   }, 2000);

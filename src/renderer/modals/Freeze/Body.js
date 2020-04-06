@@ -4,7 +4,6 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import { createStructuredSelector } from "reselect";
-import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import Track from "~/renderer/analytics/Track";
 
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
@@ -25,7 +24,7 @@ import { closeModal, openModal } from "~/renderer/actions/modals";
 
 import Stepper from "~/renderer/components/Stepper";
 import StepAmount, { StepAmountFooter } from "./steps/StepAmount";
-import StepConnectDevice from "./steps/StepConnectDevice";
+import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
 
@@ -50,12 +49,9 @@ type StateProps = {|
   openModal: string => void,
 |};
 
-type Props = {|
-  ...OwnProps,
-  ...StateProps,
-|};
+type Props = OwnProps & StateProps;
 
-const createSteps = (): Array<St> => [
+const steps: Array<St> = [
   {
     id: "amount",
     label: <Trans i18nKey="freeze.steps.amount.title" />,
@@ -66,8 +62,8 @@ const createSteps = (): Array<St> => [
   {
     id: "connectDevice",
     label: <Trans i18nKey="freeze.steps.connectDevice.title" />,
-    component: StepConnectDevice,
-    onBack: ({ transitionTo }: StepProps) => transitionTo("rewards"),
+    component: GenericStepConnectDevice,
+    onBack: ({ transitionTo }: StepProps) => transitionTo("amount"),
   },
   {
     id: "confirmation",
@@ -96,8 +92,6 @@ const Body = ({
   params,
   name,
 }: Props) => {
-  const [steps] = useState(createSteps);
-
   const [optimisticOperation, setOptimisticOperation] = useState(null);
   const [transactionError, setTransactionError] = useState(null);
   const [signed, setSigned] = useState(false);
@@ -132,7 +126,7 @@ const Body = ({
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId]);
 
   const handleRetry = useCallback(() => {
-    onChangeStepId("connectDevice");
+    onChangeStepId("amount");
   }, [onChangeStepId]);
 
   const handleTransactionError = useCallback((error: Error) => {
@@ -186,7 +180,6 @@ const Body = ({
 
   return (
     <Stepper {...stepperProps}>
-      <SyncSkipUnderPriority priority={100} />
       <Track onUnmount event="CloseModalFreeze" />
     </Stepper>
   );

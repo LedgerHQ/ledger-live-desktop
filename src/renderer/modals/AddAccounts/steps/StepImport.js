@@ -99,7 +99,7 @@ class StepImport extends PureComponent<StepProps> {
 
   startScanAccountsDevice() {
     this.unsub();
-    const { currency, device, setScanStatus, setScannedAccounts } = this.props;
+    const { currency, device, setScanStatus, setScannedAccounts, blacklistedTokenIds } = this.props;
     if (!currency || !device) return;
     const mainCurrency = currency.type === "TokenCurrency" ? currency.parentCurrency : currency;
     try {
@@ -112,9 +112,10 @@ class StepImport extends PureComponent<StepProps> {
       let onlyNewAccounts = true;
 
       const syncConfig = {
-        // TODO later we need to paginate only a few ops, not all (for add accounts)
-        // paginationConfig will come from redux
-        paginationConfig: {},
+        paginationConfig: {
+          operations: 0,
+        },
+        blacklistedTokenIds,
       };
 
       this.scanSubscription = concat(

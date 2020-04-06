@@ -48,11 +48,11 @@ const Footer = ({ total, used, onClick }: Props) => {
   return (
     <Box bg="palette.action.hover" horizontal alignItems="center" px={4} py={2}>
       <ProgressCircle size={50} progress={percentVotesUsed} />
-      <Box vertical ml={2} color="palette.primary.main">
-        <Text ff="Inter|Bold" fontSize={5}>
+      <Box vertical ml={2}>
+        <Text ff="Inter|SemiBold" fontSize={3} color="palette.text.shade100">
           <Trans i18nKey="tron.voting.remainingVotes.title" values={{ amount: total - used }} />
         </Text>
-        <Text ff="Inter|Medium" fontSize={3}>
+        <Text ff="Inter|Medium" fontSize={3} color="palette.text.shade60">
           <Trans i18nKey="tron.voting.remainingVotes.description" />
         </Text>
       </Box>

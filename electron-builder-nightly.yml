@@ -33,6 +33,7 @@ nsis:
   oneClick: false
   perMachine: true
   allowToChangeInstallationDirectory: true
+  warningsAsErrors: false
 
 files:
   # Include files

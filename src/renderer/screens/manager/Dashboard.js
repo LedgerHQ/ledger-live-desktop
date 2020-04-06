@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useMemo, useState, useEffect } from "react";
+import React, { useCallback, useMemo, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
@@ -24,12 +24,24 @@ const Dashboard = ({ device, deviceInfo, result, onReset }: Props) => {
   const { t } = useTranslation();
   const currentDevice = useSelector(getCurrentDevice);
   const [firmwareUpdateOpened, setFirmwareUpdateOpened] = useState(false);
+  const hasDisconnectedDuringFU = useRef(false);
 
   // on disconnect, go back to connect
   useEffect(() => {
-    if (currentDevice) return; // device is still plugged
-    if (firmwareUpdateOpened) return; // firmware update have some device disconnection involved
-    onReset();
+    // if there is no device but firmware update still happening
+    if (!currentDevice && firmwareUpdateOpened) {
+      hasDisconnectedDuringFU.current = true; // set disconnected to true for a later onReset()
+    }
+
+    // we must not reset during firmware update
+    if (firmwareUpdateOpened) {
+      return;
+    }
+
+    // we need to reset only if device is unplugged OR a disconnection happened during firmware update
+    if (!currentDevice || hasDisconnectedDuringFU.current) {
+      onReset();
+    }
   }, [onReset, firmwareUpdateOpened, currentDevice]);
 
   const exec = useCallback(
@@ -54,15 +66,30 @@ const Dashboard = ({ device, deviceInfo, result, onReset }: Props) => {
         appsStoragePercentage={appsStoragePercentage}
         appLength={result ? result.installed.length : 0}
       />
-      <FirmwareUpdate
-        t={t}
-        device={device}
-        deviceInfo={deviceInfo}
-        setFirmwareUpdateOpened={setFirmwareUpdateOpened}
-      />
       {result ? (
-        <AppsList device={device} deviceInfo={deviceInfo} result={result} exec={exec} />
-      ) : null}
+        <AppsList
+          device={device}
+          deviceInfo={deviceInfo}
+          result={result}
+          exec={exec}
+          render={disableFirmwareUpdate => (
+            <FirmwareUpdate
+              t={t}
+              device={device}
+              deviceInfo={deviceInfo}
+              setFirmwareUpdateOpened={setFirmwareUpdateOpened}
+              disableFirmwareUpdate={disableFirmwareUpdate}
+            />
+          )}
+        />
+      ) : (
+        <FirmwareUpdate
+          t={t}
+          device={device}
+          deviceInfo={deviceInfo}
+          setFirmwareUpdateOpened={setFirmwareUpdateOpened}
+        />
+      )}
     </Box>
   );
 };

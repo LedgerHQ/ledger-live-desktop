@@ -8,6 +8,7 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
+import SpendableBanner from "~/renderer/components/SpendableBanner";
 
 import AccountFooter from "../AccountFooter";
 import SendAmountFields from "../SendAmountFields";
@@ -34,6 +35,13 @@ const StepAmount = ({
       {error ? <ErrorBanner error={error} /> : null}
       {account && transaction && mainAccount && (
         <Fragment key={account.id}>
+          {account && transaction ? (
+            <SpendableBanner
+              account={account}
+              parentAccount={parentAccount}
+              transaction={transaction}
+            />
+          ) : null}
           <AmountField
             status={status}
             account={account}

@@ -1,5 +1,13 @@
 // @flow
 
+// FIXME live-common
+
+export const supportLinkByTokenType = {
+  erc20: "https://support.ledger.com/hc/en-us/articles/115005197845-Manage-ERC20-tokens",
+  trc10: "https://support.ledger.com/hc/en-us/articles/360013062159",
+  trc20: "https://support.ledger.com/hc/en-us/articles/360013062159",
+};
+
 export const urls = {
   liveHome: "https://www.ledger.com/pages/ledger-live",
 
@@ -16,7 +24,6 @@ export const urls = {
   faq: "https://support.ledger.com/hc/en-us",
   terms: "https://www.ledger.com/pages/terms-of-use-and-disclaimer",
   noDeviceBuyNew: "https://www.ledger.com/",
-  noDeviceTrackOrder: "http://order.ledger.com/",
   noDeviceLearnMore: "https://www.ledger.com/",
   managerHelpRequest: "https://support.ledger.com/hc/en-us/articles/360006523674 ",
   contactSupport: "https://support.ledger.com/hc/en-us/requests/new?ticket_form_id=248165",
@@ -24,7 +31,7 @@ export const urls = {
   recipientAddressInfo: "https://support.ledger.com/hc/en-us/articles/360006433934",
   privacyPolicy: "https://www.ledger.com/pages/privacy-policy",
   troubleshootingUSB: "https://support.ledger.com/hc/en-us/articles/115005165269",
-  managerERC20: "https://support.ledger.com/hc/en-us/articles/115005197845-Manage-ERC20-tokens",
+  troubleshootingCrash: "https://support.ledger.com/hc/en-us/articles/360012598060",
   appSupport: "https://support.ledger.com/hc/en-us/categories/115000811829-Apps",
   migrateAccounts: "https://support.ledger.com/hc/en-us/articles/360025321733",
   githubIssues:
@@ -32,7 +39,9 @@ export const urls = {
   multipleDestinationAddresses: "https://support.ledger.com/hc/en-us/articles/360033801034",
   updateDeviceFirmware: "https://support.ledger.com/hc/en-us/articles/360002731113",
   lostPinOrSeed: "https://support.ledger.com/hc/en-us/articles/360000609933",
-  delegation: "https://www.ledger.com/staking-tezos",
+  maxSpendable: "https://support.ledger.com/hc/en-us/articles/360012960679",
+  stakingTezos: "https://www.ledger.com/staking-tezos",
+  stakingTron: "http://www.ledger.com/staking-tron",
 
   // Exchanges
   coinhouse: "https://www.coinhouse.com/r/157530?utm_source=legderlive&utm_medium=referral",

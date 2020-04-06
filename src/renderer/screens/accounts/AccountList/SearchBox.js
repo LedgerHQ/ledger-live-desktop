@@ -19,6 +19,8 @@ const SearchInput: ThemedComponent<{}> = styled.input`
   outline: none;
   flex-grow: 1;
   font-family: "Inter";
+  font-weight: 500;
+  font-size: 13px;
   cursor: text;
   color: ${p => p.theme.colors.palette.text.shade100};
   &::placeholder {

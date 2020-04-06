@@ -91,7 +91,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
   return (
     <Wrapper>
       <BalanceDetail>
-        <ToolTip content={<Trans i18nKey="account.availableBalance" />}>
+        <ToolTip content={<Trans i18nKey="account.availableBalanceTooltip" />}>
           <TitleWrapper>
             <Title>
               <Trans i18nKey="account.availableBalance" />
@@ -102,7 +102,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
         <AmountValue>{spendableBalance}</AmountValue>
       </BalanceDetail>
       <BalanceDetail>
-        <ToolTip content={<Trans i18nKey="account.frozenAssets" />}>
+        <ToolTip content={<Trans i18nKey="account.frozenAssetsTooltip" />}>
           <TitleWrapper>
             <Title>
               <Trans i18nKey="account.frozenAssets" />
@@ -113,7 +113,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
         <AmountValue>{frozenAmount}</AmountValue>
       </BalanceDetail>
       <BalanceDetail>
-        <ToolTip content={<Trans i18nKey="account.bandwidth" />}>
+        <ToolTip content={<Trans i18nKey="account.bandwidthTooltip" />}>
           <TitleWrapper>
             <Title>
               <Trans i18nKey="account.bandwidth" />
@@ -124,7 +124,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
         <AmountValue>{`${formatedBandwidth || "–"}`}</AmountValue>
       </BalanceDetail>
       <BalanceDetail>
-        <ToolTip content={<Trans i18nKey="account.energy" />}>
+        <ToolTip content={<Trans i18nKey="account.energyTooltip" />}>
           <TitleWrapper>
             <Title>
               <Trans i18nKey="account.energy" />
