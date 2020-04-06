@@ -1,6 +1,6 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback, useState, useRef, memo } from "react";
+import React, { useCallback, useState, useRef, useEffect, memo } from "react";
 import debounce from "lodash/debounce";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
@@ -16,6 +16,7 @@ import type { Vote, SuperRepresentative } from "@ledgerhq/live-common/lib/famili
 import { languageSelector } from "~/renderer/reducers/settings";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openURL } from "~/renderer/linking";
+import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
 import Trophy from "~/renderer/icons/Trophy";
 import Medal from "~/renderer/icons/Medal";
@@ -137,6 +138,12 @@ const InputBox = styled(Box).attrs(() => ({
   height: 32px;
 `;
 
+const RightFloating = styled.div`
+  position: absolute;
+  right: 0;
+  padding: 8px;
+`;
+
 const VoteInput = styled.input.attrs(() => ({
   type: "text",
   step: 1,
@@ -146,11 +153,11 @@ const VoteInput = styled.input.attrs(() => ({
 }))`
   cursor: pointer;
   flex: 1;
-  text-align: center;
+  text-align: left;
   font-size: 13px;
   font-weight: 600;
   height: 100%;
-  padding: 0 6px;
+  padding: 0 8px;
   background-color: rgba(0, 0, 0, 0);
   border: 1px solid transparent;
   border-radius: 4px;
@@ -207,7 +214,9 @@ type SRRowProps = {
   isSR?: boolean,
   value?: number,
   disabled?: boolean,
+  maxAvailable: number,
   notEnoughVotes: boolean,
+  autoFocus: boolean,
   onUpdateVote: (string, string) => void,
   onExternalLink: (address: string) => void,
 };
@@ -221,14 +230,53 @@ const _SRRow = ({
   disabled,
   onUpdateVote,
   onExternalLink,
+  maxAvailable,
   notEnoughVotes,
+  autoFocus,
 }: SRRowProps) => {
   const inputRef = useRef();
+  const [focus, setFocus] = useState(false);
+  const onTitleClick = useCallback(() => {
+    onExternalLink(sr.address);
+  }, [sr, onExternalLink]);
+  const onFocus = useCallback(() => {
+    inputRef.current && inputRef.current.select();
+    setFocus(true);
+  }, []);
+  const onBlur = useCallback(e => {
+    if (
+      e.relatedTarget &&
+      e.relatedTarget.dataset &&
+      e.relatedTarget.dataset.preventvotesinputblur
+    ) {
+      // should let the click on max happen
+      return;
+    }
+    setFocus(false);
+  }, []);
+  const onChange = useCallback(
+    e => {
+      onUpdateVote(sr.address, e.target.value);
+    },
+    [sr, onUpdateVote],
+  );
+  const onMax = useCallback(() => {
+    onUpdateVote(sr.address, String(maxAvailable + (value || 0)));
+  }, [sr, onUpdateVote, maxAvailable, value]);
+
+  const itemExists = typeof value === "number";
+
+  useEffect(() => {
+    if (autoFocus && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [autoFocus]);
+
   return (
     <Row disabled={!value && disabled} active={!!value}>
       <IconContainer isSR={isSR}>{isSR ? <Trophy size={16} /> : <Medal size={16} />}</IconContainer>
       <InfoContainer>
-        <Title onClick={() => onExternalLink(sr.address)}>
+        <Title onClick={onTitleClick}>
           <Text>{`${rank}. ${sr.name || sr.address}`}</Text>
           <IconContainer>
             <ExternalLink size={16} />
@@ -251,14 +299,26 @@ const _SRRow = ({
           placeholder="0"
           type="text"
           maxLength="12"
-          notEnoughVotes={notEnoughVotes}
-          value={typeof value === "number" ? String(value) : "0"}
+          notEnoughVotes={itemExists && notEnoughVotes}
+          value={itemExists ? String(value) : "0"}
           disabled={disabled}
-          onFocus={() => {
-            inputRef.current && inputRef.current.select();
-          }}
-          onChange={e => onUpdateVote(sr.address, e.target.value)}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          onChange={onChange}
         />
+        {!maxAvailable || !focus ? null : (
+          <RightFloating>
+            <Button
+              onClick={onMax}
+              style={{ fontSize: "10px", padding: "0 8px", height: 22 }}
+              primary
+              small
+              data-preventVotesInputBlur
+            >
+              <Trans i18nKey="vote.steps.castVotes.max" />
+            </Button>
+          </RightFloating>
+        )}
       </InputBox>
     </Row>
   );
@@ -329,10 +389,19 @@ const AmountField = ({ t, account, onChangeVotes, status, bridgePending, votes }
 
   const onSearch = useCallback(evt => setSearch(evt.target.value), [setSearch]);
 
-  if (!status) return null;
+  const [autoFocusIndex, setAutoFocusIndex] = useState(-1);
+
+  const initialVotes = useRef(votes);
+
+  useEffect(() => {
+    const votes = initialVotes.current;
+    setAutoFocusIndex(votes.length === 0 ? 0 : SR.findIndex(sr => sr.address === votes[0].address));
+  }, [SR]);
 
   const notEnoughVotes = votesUsed > votesAvailable;
+  const maxAvailable = Math.max(0, votesAvailable - votesUsed);
 
+  if (!status || SR.length === 0) return null;
   return (
     <>
       <SearchContainer>
@@ -399,7 +468,9 @@ const AmountField = ({ t, account, onChangeVotes, status, bridgePending, votes }
               onUpdateVote={onUpdateVote}
               onExternalLink={onExternalLink}
               disabled={!item && votesSelected >= SR_MAX_VOTES}
-              notEnoughVotes={item ? notEnoughVotes : false}
+              notEnoughVotes={notEnoughVotes}
+              maxAvailable={maxAvailable}
+              autoFocus={i === autoFocusIndex}
             />
           );
         })}
