@@ -29,6 +29,45 @@ import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepCo
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
 
+/** @TODO move this to common */
+export const getUnfreezeData = (
+  account: Account,
+): {
+  unfreezeBandwidth: BigNumber,
+  unfreezeEnergy: BigNumber,
+  canUnfreezeBandwidth: boolean,
+  canUnfreezeEnergy: boolean,
+  bandwidthExpiredAt: Date,
+  energyExpiredAt: Date,
+} => {
+  const { tronResources } = account;
+  const {
+    frozen: { bandwidth, energy },
+  } = tronResources || {};
+
+  /** ! expiredAt should always be set with the amount if not this will disable the field by default ! */
+  const { amount: bandwidthAmount, expiredAt: bandwidthExpiredAt } = bandwidth || {};
+  const _bandwidthExpiredAt = +new Date(bandwidthExpiredAt);
+
+  const { amount: energyAmount, expiredAt: energyExpiredAt } = energy || {};
+  const _energyExpiredAt = +new Date(energyExpiredAt);
+
+  const unfreezeBandwidth = BigNumber(bandwidthAmount || 0);
+  const canUnfreezeBandwidth = unfreezeBandwidth.gt(0) && Date.now() > _bandwidthExpiredAt;
+
+  const unfreezeEnergy = BigNumber(energyAmount || 0);
+  const canUnfreezeEnergy = unfreezeEnergy.gt(0) && Date.now() > _energyExpiredAt;
+
+  return {
+    unfreezeBandwidth,
+    unfreezeEnergy,
+    canUnfreezeBandwidth,
+    canUnfreezeEnergy,
+    bandwidthExpiredAt,
+    energyExpiredAt,
+  };
+};
+
 type OwnProps = {|
   stepId: StepId,
   onClose: () => void,
@@ -108,9 +147,7 @@ const Body = ({
   } = useBridgeTransaction(() => {
     const { account, parentAccount } = params;
 
-    const { tronResources: { frozen: { bandwidth } = {} } = {} } = account;
-
-    const UnfreezeBandwidth = BigNumber((bandwidth && bandwidth.amount) || 0);
+    const { canUnfreezeBandwidth } = getUnfreezeData(account);
 
     const bridge = getAccountBridge(account, parentAccount);
 
@@ -118,7 +155,7 @@ const Body = ({
 
     const transaction = bridge.updateTransaction(t, {
       mode: "unfreeze",
-      resource: UnfreezeBandwidth.gt(0) ? "BANDWIDTH" : "ENERGY",
+      resource: canUnfreezeBandwidth ? "BANDWIDTH" : "ENERGY",
     });
 
     return { account, parentAccount, transaction };
