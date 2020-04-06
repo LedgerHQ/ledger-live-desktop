@@ -41,7 +41,7 @@
     "copy": "Másolás",
     "copied": "Másolva",
     "addressCopied": "Cím másolva",
-    "addressCopiedSuspicious": "Mismatch between the copied address and the one in the clipboard.",
+    "addressCopiedSuspicious": "A másolt, és a vágólapon lévő cím nem egyezik.",
     "experimentalFeature": "Kísérleti funkciók",
     "dismiss": "Elvetés",
     "information": "Információ",
@@ -143,7 +143,7 @@
     "availableBalanceTooltip": "Ez a mennyiség bármikor küldhető.",
     "frozenAssetsTooltip": "Ez a mennyiség 3 nappal az után érhető el, hogy kiolvasztottad.",
     "bandwidthTooltip": "Fagyassz le eszközöket, hogy sávszélességet gyűjts",
-    "energyTooltip": "Freeze assets to gain energy"
+    "energyTooltip": "Fagyassz le eszközöket, hogy energiát gyűjts"
   },
   "accounts": {
     "title": "Számlák",
@@ -584,7 +584,7 @@
         "title": "Megerősítés",
         "success": {
           "title": "",
-          "textNRG": "You will start earning Energy once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+          "textNRG": "Energiát kezdesz el gyűjteni, ha a hálózat megerősítette a befagyasztást. Rövidesen szavazhatsz a Szuper Képviselőkre, hogy jutalmakat kapj.",
           "text": "Sávszélességet kezdesz el gyűjteni, ha a hálózat megerősítette a befagyasztást. Rövidesen szavazhatsz a Szuper Képviselőkre, hogy jutalmakat kapj.",
           "votePending": "Szavazás {{time}}",
           "vote": "Szavazás",
@@ -1377,12 +1377,7 @@
       "undelegate": "megerősítő",
       "claimReward": "a delegálás jutalmazza a címzettet"
     },
-    "fromAddress": "Innen",
-    "toAddress": "Ide",
-    "address": "Cím",
-    "resource": "Forrás",
-    "votes": "Szavazatok",
-    "validators": "{{ nbrVote }} validators"
+    "votes": "Votes ({{count}})"
   },
   "RecipientField": {
     "placeholder": "Írd be a(z) {{currencyName}} címet"
@@ -1704,47 +1699,47 @@
       "description": "Valami hiba történt a blokklánc szinkronizálásával kapcsolatban.  Kérlek, próbáld meg újra, vagy vedd fel velünk a kapcsolatot."
     },
     "TronNoFrozenForBandwidth": {
-      "title": "No assets to unfreeze",
-      "description": "You do not have assets to unfreeze associated to Bandwidth"
+      "title": "Nincsenek kiolvasztható eszközök",
+      "description": "Nincsenek a Sávszélességhez kapcsolódó kiolvasztható eszközök"
     },
     "TronNoFrozenForEnergy": {
-      "title": "No assets to unfreeze",
-      "description": "You do not have assets to unfreeze associated to Energy"
+      "title": "Nincsenek kiolvasztható eszközök",
+      "description": "Nincsenek az Energiához kapcsolódó kiolvasztható eszközök"
     },
     "TronUnfreezeNotExpired": {
-      "title": "Unfreeze is not available yet",
-      "description": "You need to wait 3 days before your last Freeze operation"
+      "title": "Kiolvasztás még nem lehetséges",
+      "description": "Várnod kell 3 napot az utolsó Befagyasztás művelet előtt"
     },
     "TronVoteRequired": {
-      "title": "At least 1 vote is needed"
+      "title": "Legalább 1 szavazat szükséges"
     },
     "TronInvalidVoteCount": {
-      "title": "Vote format is incorrect",
-      "description": "You can only vote using round numbers"
+      "title": "A szavazási formátum helytelen",
+      "description": "Csak kerek számokat megadva szavazhatsz"
     },
     "TronRewardNotAvailable": {
-      "title": "Reward is not claimable yet",
-      "description": "You need to wait 24 hours between claims"
+      "title": "A jutalom még nem begyűjthető",
+      "description": "24 órát kell várnod a begyűjtések között"
     },
     "TronNoReward": {
-      "title": "There is no reward to claim"
+      "title": "Nincs begyűjthető jutalom"
     },
     "TronInvalidFreezeAmount": {
-      "title": "Amount to freeze cannot be lower than 1"
+      "title": "A befagyasztandó mennyiség nem lehet kevesebb, mint 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
-      "title": "Sending TRC20 to a new account won't activate it",
-      "description": "The recipient account must be activated prior to sending TRC20 to it. Send either TRX or TRC10 to an account to activate it."
+      "title": "TRC20 küldése egy új számlára nem aktiválja azt",
+      "description": "A fogadó számlát aktiválni kell TRC20 küldése előtt. Küldj TRX-et vagy TRC10-et a számla aktiváláshoz."
     },
     "TronUnexpectedFees": {
-      "title": "Additional fees may be applied"
+      "title": "További díjak merülhetnek fel"
     },
     "TronNotEnoughTronPower": {
-      "title": "Not enough votes available"
+      "title": "Nincs elég elérhető szavazat"
     },
     "TronTransactionExpired": {
-      "title": "Transaction has expired",
-      "description": "Signature must be applied within 30 seconds. Please try again."
+      "title": "Az tranzakció lejárt",
+      "description": "Az aláírást 30 másodpercen belül kell alkalmazni. Kérlek próbáld újra."
     },
     "PairingFailed": {
       "title": "Párosítás sikertelen",

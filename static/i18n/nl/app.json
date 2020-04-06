@@ -1377,12 +1377,7 @@
       "undelegate": "validator",
       "claimReward": "delegation rewards recipient"
     },
-    "fromAddress": "From",
-    "toAddress": "To",
-    "address": "Address",
-    "resource": "Resource",
-    "votes": "Votes",
-    "validators": "{{ nbrVote }} validators"
+    "votes": "Votes ({{count}})"
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"

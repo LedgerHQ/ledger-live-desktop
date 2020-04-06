@@ -41,7 +41,7 @@
     "copy": "Copier",
     "copied": "Copié",
     "addressCopied": "Adresse copiée",
-    "addressCopiedSuspicious": "Mismatch between the copied address and the one in the clipboard.",
+    "addressCopiedSuspicious": "Différence entre l'adresse copiée et celle dans le presse-papiers.",
     "experimentalFeature": "Expérimental",
     "dismiss": "Ignorer",
     "information": "Informations",
@@ -140,10 +140,10 @@
     "frozenAssets": "Actifs gelés",
     "bandwidth": "Bandwidth",
     "energy": "Energy",
-    "availableBalanceTooltip": "This amount can be sent anytime.",
-    "frozenAssetsTooltip": "This amount is available 3 days after you have unfrozen it.",
-    "bandwidthTooltip": "Freeze assets to gain bandwidth",
-    "energyTooltip": "Freeze assets to gain energy"
+    "availableBalanceTooltip": "Ce montant peut être envoyé à tout moment.",
+    "frozenAssetsTooltip": "Ce montant sera disponible 3 jours après l'avoir dégelé.",
+    "bandwidthTooltip": "Geler des actifs pour gagner de la bandwidth",
+    "energyTooltip": "Geler des actifs pour gagner de l'Energy"
   },
   "accounts": {
     "title": "Comptes",
@@ -169,13 +169,13 @@
       "receive": "Recevoir",
       "send": "Envoyer",
       "edit": "Modifier le compte",
-      "hideToken": "Hide token"
+      "hideToken": "Masquer le token"
     }
   },
   "blacklistToken": {
-    "title": "Hide token",
-    "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can restore their visibility at any time from <3>Settings</3>",
-    "hideCTA": "Hide token"
+    "title": "Masquer le token",
+    "desc": "Cette action masquera tous les comptes <1><0>{{tokenName}}</0></1>, vous pouvez restaurer leur visibilité à tout moment dans les <3>Paramètres</3>",
+    "hideCTA": "Masquer le token"
   },
   "banners": {
     "migrate": "Mise à jour des comptes Ledger Live disponible",
@@ -342,7 +342,7 @@
     }
   },
   "operationDetails": {
-    "whatIsThis": "What is this operation?",
+    "whatIsThis": "À quoi correspond cette opération ?",
     "title": "Détails de l'opération",
     "account": "Compte",
     "date": "Date",
@@ -372,7 +372,7 @@
       "unfreezeAmount": "Dégeler le montant",
       "address": "Adresse",
       "votes": "Votes ({{number}})",
-      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>"
+      "votesAddress": "<0>{{votes}}</0> pour <2>{{name}}</2>"
     }
   },
   "operationList": {
@@ -566,10 +566,10 @@
     }
   },
   "freeze": {
-    "title": "Freeze assets",
+    "title": "Geler les actifs",
     "steps": {
       "amount": {
-        "title": "Amount",
+        "title": "Montant",
         "resourceInfo": "Bandwidth ou Energy?",
         "bandwidthDescription": "Les points de bandwidth sont utilisés pour effectuer des transactions sans payer de TRX en frais de réseau. Choisissez la bandwidth pour augmenter vos transactions quotidiennes gratuites.",
         "energyDescription": "Les points Energy sont requis pour exécuter des smart contracts. Si vous n'exécutez aucun smart contract, il n'est pas nécessaire de choisir des récompenses dans Energy.",
@@ -584,7 +584,7 @@
         "title": "Confirmation",
         "success": {
           "title": "",
-          "textNRG": "You will start earning Energy once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+          "textNRG": "Vous commencerez à gagner de l'Energy une fois que le réseau aura confirmé le gel. Vous pouvez bientôt voter pour les Super Representatives pour gagner des récompenses.",
           "text": "Vous commencerez à gagner de la Bandwidth une fois que le réseau aura confirmé le gel. Vous pouvez bientôt voter pour les Super Representatives pour gagner des récompenses.",
           "votePending": "Voter dans {{time}}",
           "vote": "Voter",
@@ -598,11 +598,11 @@
     }
   },
   "unfreeze": {
-    "title": "Unfreeze assets",
+    "title": "Dégeler les actifs",
     "steps": {
       "amount": {
-        "title": "Unfreeze",
-        "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
+        "title": "Dégeler",
+        "info": "Dégeler réduira votre {{resource}} et annulera vos votes."
       },
       "connectDevice": {
         "title": "Appareil"
@@ -611,52 +611,52 @@
         "title": "Confirmation",
         "success": {
           "title": "",
-          "text": "Your assets have been unfrozen successfully. Your Bandwidth points will be decreased and your votes will be canceled.",
-          "continue": "Continue"
+          "text": "Vos actifs ont été dégelés avec succès. Vos points de Bandwidth seront réduits et vos votes seront annulés.",
+          "continue": "Poursuivre"
         },
         "pending": {
-          "title": "Freezing your assets..."
+          "title": "Gel de vos actifs..."
         },
-        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        "broadcastError": "Votre transaction a peut-être échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée avant de réessayer."
       }
     }
   },
   "vote": {
-    "title": "Cast votes",
-    "titleExisting": "Manage votes",
+    "title": "Voter",
+    "titleExisting": "Gérer les votes",
     "steps": {
       "castVotes": {
-        "title": "Vote",
-        "search": "Search by name or address...",
-        "totalVotes": "Total votes: {{total}}",
-        "selected": "Selected: {{total}}",
-        "maxSelected": "Max selected: {{total}}",
-        "allVotesAreUsed": "All votes are used",
-        "maxUsed": "Max votes: {{total}}",
+        "title": "Voter",
+        "search": "Rechercher par nom ou adresse...",
+        "totalVotes": "Total des votes: {{total}}",
+        "selected": "Sélectionné: {{total}}",
+        "maxSelected": "Max sélectionné: {{total}}",
+        "allVotesAreUsed": "Tous les votes sont utilisés",
+        "maxUsed": "Votes maximum : {{total}}",
         "superRepresentatives": "Super Representatives (SR)",
-        "candidates": "Candidates",
-        "estYield": "est. yield",
-        "srInfo": "SR or Candidates?",
-        "validators": "Validators ({{total}})",
-        "votes": "Votes available: {{total}}",
-        "noResults": "No validators found for \"<0>{{search}}</0>\"."
+        "candidates": "Candidats",
+        "estYield": "Rendement estimé",
+        "srInfo": "SR ou Candidats?",
+        "validators": "Validateurs ({{total}})",
+        "votes": "Votes disponibles : {{total}}",
+        "noResults": "Aucun validateur trouvé pour \"<0>{{search}}</0>\"."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "Appareil"
       },
       "confirmation": {
         "title": "Confirmation",
         "success": {
-          "title": "Your votes were cast successfully.",
+          "title": "Vos votes ont été effectués avec succès.",
           "text": "",
-          "howVotingWorks": "How voting works?",
-          "done": "Done",
-          "cta": "View details"
+          "howVotingWorks": "Comment fonctionne le vote ?",
+          "done": "Terminé",
+          "cta": "Voir les détails"
         },
         "pending": {
-          "title": "Freezing your assets..."
+          "title": "Gel de vos actifs..."
         },
-        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        "broadcastError": "Votre transaction a peut-être échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée avant de réessayer."
       }
     }
   },
@@ -693,7 +693,7 @@
       },
       "amount": {
         "title": "Montant",
-        "banner": "Maximum spendable amount is"
+        "banner": "Le montant maximum à dépenser est"
       },
       "summary": {
         "title": "Récapitulatif"
@@ -767,38 +767,38 @@
   "tron": {
     "voting": {
       "emptyState": {
-        "description": "You can now earn rewards by freezing and voting.",
-        "info": "How voting works",
-        "votesDesc": "Cast your votes for one or more representatives to start earning staking rewards.",
-        "vote": "Cast votes",
-        "voteExisting": "Manage votes"
+        "description": "Vous pouvez maintenant obtenir des récompenses en gelant et en votant.",
+        "info": "Comment fonctionne le vote",
+        "votesDesc": "Votez pour un ou plusieurs représentatives pour commencer à obtenir des récompenses de staking.",
+        "vote": "Voter",
+        "voteExisting": "Gérer les votes"
       },
-      "manageTP": "Manage assets",
-      "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
+      "manageTP": "Gérer les actifs",
+      "warnEarnRewards": "Vous avez besoin d'au moins {{amount}} pour commencer à obtenir des récompenses",
       "claimRewards": "Réclamer les récompenses",
       "nextRewardsDate": "Les récompenses peuvent être réclamées {{date}}",
       "claimAvailableRewards": "Réclamer {{amount}}",
       "title": "Réclamer les récompenses",
       "header": "Votes",
       "Amount": "Montant",
-      "percentageTP": "% of votes cast",
+      "percentageTP": "% de votes exprimés",
       "noRewards": "Aucune récompense disponible",
       "remainingVotes": {
-        "title": "You still have {{amount}} votes remaining",
-        "description": "Cast your remaining votes to earn more rewards",
+        "title": "Il vous reste {{amount}} votes",
+        "description": "Utilisez vos votes restants pour obtenir plus de récompenses",
         "button": "Voter maintenant"
       },
       "flow": {
         "steps": {
           "starter": {
             "title": "Obtenez des récompenses staking",
-            "description": "Freeze your TRX to earn rewards while keeping full security and control of your assets.",
+            "description": "Geler votre TRX pour obtenir des récompenses tout en gardant la sécurité et le contrôle de vos actifs.",
             "bullet": {
               "delegate": "Les actifs délégués restent les vôtres.",
-              "access": "You can unfreeze your assets after 3 days.",
-              "ledger": "Freeze and vote securely with your Ledger device."
+              "access": "Vous pouvez dégeler vos actifs après 3 jours.",
+              "ledger": "Geler et voter en toute sécurité avec votre appareil Ledger."
             },
-            "help": "How voting works",
+            "help": "Comment fonctionne le vote",
             "button": {
               "cta": "Poursuivre"
             }
@@ -807,35 +807,35 @@
       }
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "Gérer les actifs",
       "freeze": {
         "title": "Geler",
-        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also be able to vote for Super Representatives."
+        "description": "Geler des TRX pour gagner de la Bandwidth ou de l'Energy. Vous pourrez également voter pour les Super Representatives."
       },
       "unfreeze": {
         "title": "Dégeler",
-        "description": "Unfreeze TRX if you want to spend them. You will no longer earn rewards."
+        "description": "Dégelez des TRX si vous voulez les dépenser. Vous ne gagnerez plus de récompenses."
       },
       "vote": {
         "title": "Voter",
-        "description": "Cast votes for Super Representatives to earn rewards.",
+        "description": "Votez pour les Super Representatives pour gagner des Récompenses.",
         "steps": {
           "vote": {
-            "title": "Cast votes",
-            "description": "Vote for one or more Super Representatives to start earning rewards.",
+            "title": "Voter",
+            "description": "Votez pour un ou plusieurs Super Representatives pour commencer à gagner des récompenses.",
             "footer": {
-              "doNotShowAgain": "Don't show again",
-              "next": "Cast Votes"
+              "doNotShowAgain": "Ne plus afficher",
+              "next": "Voter"
             },
             "info": {
-              "message": "SR or Candidates?",
+              "message": "SR ou Candidats?",
               "superRepresentative": {
                 "title": "Super Representatives (SR)",
-                "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+                "description": "Les Super Représentatives jouent un rôle clé dans la gouvernance de la communauté TRON en assurant des fonctions de base, comme la génération de blocs et la tenue des comptes."
               },
               "candidates": {
-                "title": "Candidates",
-                "description": "127 individuals elected through voting by the entire token holder community. Votes are updated once every 6 hours."
+                "title": "Candidats",
+                "description": "127 personnes élues par le vote de la communauté des détenteurs de tokens. Les votes sont mis à jour une fois toutes les 6 heures."
               }
             }
           }
@@ -1078,8 +1078,8 @@
         "desc": "Masquer les tokens avec un solde à zéro dans la page Comptes."
       },
       "tokenBlacklist": {
-        "title": "Hidden tokens",
-        "desc": "You can hide a token by right-clicking on it while in its parent screen and selecting 'Hide token'"
+        "title": "Tokens masqués",
+        "desc": "Vous pouvez masquer un token en faisant un clic droit dessus, dans son compte parent et en sélectionnant 'Masquer le token'"
       }
     }
   },
@@ -1115,19 +1115,19 @@
     "checking": "Vérification de la mise à jour...",
     "checkSuccess": "La mise à jour est prête à être installée",
     "quitAndInstall": "Installer maintenant",
-    "updateAvailable": "Ledger Live {{version}} is available for update",
+    "updateAvailable": "La mise à jour {{version}} de Ledger Live est disponible",
     "error": "Erreur lors de la mise à jour. Veuillez télécharger à nouveau",
     "reDownload": "Télécharger à nouveau",
     "nightlyWarning": "Cette version ne peut pas être mise à jour automatiquement, veuillez installer la dernière version manuellement",
     "downloadNow": "Télécharger Maintenant"
   },
   "crash": {
-    "title": "Something went wrong",
-    "description": "Please check our support article for a possible solution. If the problem persists, save your logs using the button below and provide them to Ledger Support.",
-    "troubleshooting": "Click here for possible solutions",
+    "title": "Une erreur s'est produite",
+    "description": "Veuillez consulter notre article de support pour une solution éventuelle. Si le problème persiste, enregistrez vos logs en utilisant le bouton ci-dessous et fournissez-les au support de Ledger.",
+    "troubleshooting": "Cliquez ici pour trouver les solutions possibles",
     "restart": "Redémarrer",
-    "logs": "Save logs",
-    "dataFolder": "View user data"
+    "logs": "Sauvegarder les logs",
+    "dataFolder": "Voir les données utilisateur"
   },
   "exportOperationsModal": {
     "title": "Historique des opérations",
@@ -1365,11 +1365,11 @@
     "warning": "Vérifiez toujours que votre appareil affiche exactement l'adresse fournie par le {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
-      "send": "Please confirm the operation on your device to send it",
+      "send": "Veuillez confirmer l'opération sur votre appareil pour l'envoyer",
       "claimReward": "Veuillez confirmer l'opération sur votre appareil pour réclamer vos récompenses",
-      "freeze": "Please confirm the operation on your device to freeze assets",
-      "unfreeze": "Please confirm the operation on your device to unfreeze your assets",
-      "vote": "Please confirm the operation on your device to cast your votes"
+      "freeze": "Veuillez confirmer l'opération sur votre appareil pour geler les actifs",
+      "unfreeze": "Veuillez confirmer l'opération sur votre appareil pour dégeler les actifs",
+      "vote": "Veuillez confirmer l'opération sur votre appareil pour exprimer vos votes"
     },
     "recipientWording": {
       "send": "destinataire",
@@ -1377,12 +1377,7 @@
       "undelegate": "validateur",
       "claimReward": "récompense de délégation"
     },
-    "fromAddress": "From",
-    "toAddress": "To",
-    "address": "Address",
-    "resource": "Resource",
-    "votes": "Votes",
-    "validators": "{{ nbrVote }} validators"
+    "votes": "Votes ({{count}})"
   },
   "RecipientField": {
     "placeholder": "Entrer l'adresse {{currencyName}}"
@@ -1704,47 +1699,47 @@
       "description": "Un problème est survenu avec la synchronisation de la blockchain. Veuillez réessayer ou nous contacter."
     },
     "TronNoFrozenForBandwidth": {
-      "title": "No assets to unfreeze",
-      "description": "You do not have assets to unfreeze associated to Bandwidth"
+      "title": "Aucun actif à dégeler",
+      "description": "Vous n'avez pas d'actifs en Bandwidth à dégeler"
     },
     "TronNoFrozenForEnergy": {
-      "title": "No assets to unfreeze",
-      "description": "You do not have assets to unfreeze associated to Energy"
+      "title": "Aucun actif à dégeler",
+      "description": "Vous n'avez pas d'actifs en Energy à dégeler"
     },
     "TronUnfreezeNotExpired": {
-      "title": "Unfreeze is not available yet",
+      "title": "Pas de dégel disponible pour le moment",
       "description": "You need to wait 3 days before your last Freeze operation"
     },
     "TronVoteRequired": {
-      "title": "At least 1 vote is needed"
+      "title": "Au moins 1 vote est nécessaire"
     },
     "TronInvalidVoteCount": {
-      "title": "Vote format is incorrect",
+      "title": "Le format du vote est incorrect",
       "description": "You can only vote using round numbers"
     },
     "TronRewardNotAvailable": {
-      "title": "Reward is not claimable yet",
-      "description": "You need to wait 24 hours between claims"
+      "title": "La récompense n'est pas encore réclamable",
+      "description": "Vous devez attendre 24 heures entre les réclamations"
     },
     "TronNoReward": {
-      "title": "There is no reward to claim"
+      "title": "Il n'y a pas de récompense à réclamer"
     },
     "TronInvalidFreezeAmount": {
-      "title": "Amount to freeze cannot be lower than 1"
+      "title": "Le montant à geler ne peut pas être inférieur à 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
-      "title": "Sending TRC20 to a new account won't activate it",
-      "description": "The recipient account must be activated prior to sending TRC20 to it. Send either TRX or TRC10 to an account to activate it."
+      "title": "L'envoi de TRC20 vers un nouveau compte ne l'activera pas",
+      "description": "Le compte bénéficiaire doit être activé avant d'y envoyer un TRC20. Envoyez, soit des TRX, soit des TRC10 à un compte pour l'activer."
     },
     "TronUnexpectedFees": {
-      "title": "Additional fees may be applied"
+      "title": "Des frais supplémentaires peuvent être appliqués"
     },
     "TronNotEnoughTronPower": {
-      "title": "Not enough votes available"
+      "title": "Pas assez de votes disponibles"
     },
     "TronTransactionExpired": {
-      "title": "Transaction has expired",
-      "description": "Signature must be applied within 30 seconds. Please try again."
+      "title": "La transaction a expiré",
+      "description": "La signature doit être appliquée d'ici 30 secondes. Veuillez réessayer."
     },
     "PairingFailed": {
       "title": "Echec du jumelage",
