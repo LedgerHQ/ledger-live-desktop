@@ -1377,12 +1377,7 @@
       "undelegate": "megerősítő",
       "claimReward": "a delegálás jutalmazza a címzettet"
     },
-    "fromAddress": "Innen",
-    "toAddress": "Ide",
-    "address": "Cím",
-    "resource": "Forrás",
-    "votes": "Szavazatok",
-    "validators": "{{ nbrVote }} megerősítők"
+    "votes": "Votes ({{count}})"
   },
   "RecipientField": {
     "placeholder": "Írd be a(z) {{currencyName}} címet"
