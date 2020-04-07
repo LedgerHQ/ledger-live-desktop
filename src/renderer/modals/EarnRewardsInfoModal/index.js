@@ -18,6 +18,7 @@ import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 
 import Rewards from "~/renderer/images/rewards.svg";
 import Modal, { ModalBody } from "~/renderer/components/Modal/index";
+import WarnBox from "~/renderer/components/WarnBox";
 
 const RewardImg = styled.img.attrs(() => ({ src: Rewards }))`
   width: 130px;
@@ -123,6 +124,9 @@ const EarnRewardsInfoModal = ({ name, account, parentAccount }: Props) => {
                   />
                 </Box>
               </Box>
+              <WarnBox>
+                <Trans i18nKey="tron.voting.flow.steps.starter.termsAndPrivacy" />
+              </WarnBox>
             </Box>
           )}
           renderFooter={() => (
