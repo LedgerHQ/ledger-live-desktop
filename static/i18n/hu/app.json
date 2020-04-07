@@ -626,6 +626,7 @@
     "titleExisting": "Szavazatok kezelése",
     "steps": {
       "castVotes": {
+        "max": "MAX",
         "title": "Szavazás",
         "search": "Keresés név vagy cím alapján...",
         "totalVotes": "Összes szavazat: {{total}}",
