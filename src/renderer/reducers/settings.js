@@ -337,11 +337,19 @@ export const exportSettingsSelector: OutputSelector<State, void, *> = createSele
   state => state.settings.currenciesSettings,
   state => state.settings.pairExchanges,
   developerModeSelector,
-  (counterValueCurrency, currenciesSettings, pairExchanges, developerModeEnabled) => ({
+  blacklistedTokenIdsSelector,
+  (
+    counterValueCurrency,
+    currenciesSettings,
+    pairExchanges,
+    developerModeEnabled,
+    blacklistedTokenIds,
+  ) => ({
     counterValue: counterValueCurrency.ticker,
     currenciesSettings,
     pairExchanges,
     developerModeEnabled,
+    blacklistedTokenIds,
   }),
 );
 
