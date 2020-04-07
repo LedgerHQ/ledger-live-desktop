@@ -626,6 +626,7 @@
     "titleExisting": "Gérer les votes",
     "steps": {
       "castVotes": {
+        "max": "MAX",
         "title": "Voter",
         "search": "Rechercher par nom ou adresse...",
         "totalVotes": "Total des votes: {{total}}",
