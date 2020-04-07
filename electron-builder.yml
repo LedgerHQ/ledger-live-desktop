@@ -46,7 +46,6 @@ nsis:
   oneClick: false
   perMachine: true
   allowToChangeInstallationDirectory: true
-  warningsAsErrors: false
   installerIcon: build/windows/installer.ico
   installerSidebar: build/windows/installerSidebar.bmp
   uninstallerIcon: build/windows/uninstaller.ico
