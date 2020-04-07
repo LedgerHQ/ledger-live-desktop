@@ -1377,7 +1377,7 @@
       "undelegate": "megerősítő",
       "claimReward": "a delegálás jutalmazza a címzettet"
     },
-    "votes": "Votes ({{count}})"
+    "votes": "Szavazatok ({{count}})"
   },
   "RecipientField": {
     "placeholder": "Írd be a(z) {{currencyName}} címet"
