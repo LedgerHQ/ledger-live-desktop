@@ -6,9 +6,11 @@ import styled, { css } from "styled-components";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 
-import { getMainAccount, getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+
+import { MIN_TRANSACTION_AMOUNT } from "@ledgerhq/live-common/lib/families/tron/react";
 
 import { openModal } from "~/renderer/actions/modals";
 import Box from "~/renderer/components/Box";
@@ -122,16 +124,13 @@ type Props = {
 const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
   const dispatch = useDispatch();
   const mainAccount = getMainAccount(account, parentAccount);
-  /** @TODO get this from common */
-  const unit = getAccountUnit(account);
-  const minAmount = 10 ** unit.magnitude;
 
   const { spendableBalance, tronResources } = mainAccount;
 
   const { tronPower, frozen, votes } = tronResources || {};
   const { bandwidth, energy } = frozen || {};
 
-  const canFreeze = spendableBalance && spendableBalance.gt(minAmount);
+  const canFreeze = spendableBalance && spendableBalance.gte(MIN_TRANSACTION_AMOUNT);
 
   const timeToUnfreezeBandwidth =
     bandwidth && bandwidth.expiredAt ? +bandwidth.expiredAt : Infinity;
@@ -143,7 +142,7 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
     frozen &&
     BigNumber((bandwidth && bandwidth.amount) || 0)
       .plus((energy && energy.amount) || 0)
-      .gt(minAmount) &&
+      .gte(MIN_TRANSACTION_AMOUNT) &&
     effectiveTimeToUnfreeze < Date.now();
 
   const formattedTimeToUnfreeze = useMemo(() => moment(effectiveTimeToUnfreeze).fromNow(), [
