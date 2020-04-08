@@ -141,7 +141,7 @@
     "bandwidth": "Bandwidth",
     "energy": "Energy",
     "availableBalanceTooltip": "This amount can be sent anytime.",
-    "frozenAssetsTooltip": "This amount is available 3 days after you have unfrozen it.",
+    "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
     "bandwidthTooltip": "Freeze assets to gain bandwidth",
     "energyTooltip": "Freeze assets to gain energy"
   },
