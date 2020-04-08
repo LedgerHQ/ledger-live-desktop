@@ -32,7 +32,7 @@ const CounterValueSelect = () => {
         onChange={handleChangeCounterValue}
         itemToString={item => (item ? item.name : "")}
         renderSelected={item => item && item.name}
-        options={counterValueCurrency}
+        options={supportedCountervalues}
         value={cvOption}
       />
     </>

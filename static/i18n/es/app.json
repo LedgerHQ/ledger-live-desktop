@@ -141,7 +141,7 @@
     "bandwidth": "Bandwidth",
     "energy": "Energy",
     "availableBalanceTooltip": "This amount can be sent anytime.",
-    "frozenAssetsTooltip": "This amount is available 3 days after you have unfrozen it.",
+    "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
     "bandwidthTooltip": "Freeze assets to gain bandwidth",
     "energyTooltip": "Freeze assets to gain energy"
   },
@@ -626,6 +626,7 @@
     "titleExisting": "Manage votes",
     "steps": {
       "castVotes": {
+        "max": "MAX",
         "title": "Vote",
         "search": "Search by name or address...",
         "totalVotes": "Total votes: {{total}}",
@@ -785,7 +786,7 @@
       "noRewards": "No rewards available",
       "remainingVotes": {
         "title": "You still have {{amount}} votes remaining",
-        "description": "Cast your remaining votes to earn more rewards",
+        "description": "You can cast your remaining votes to earn more rewards",
         "button": "Vote now"
       },
       "flow": {
@@ -801,7 +802,8 @@
             "help": "How voting works",
             "button": {
               "cta": "Continue"
-            }
+            },
+            "termsAndPrivacy": "Delegating your voting rights does not guarantee you will be paid any reward by your super representative."
           }
         }
       }
@@ -1708,7 +1710,7 @@
     },
     "TronUnfreezeNotExpired": {
       "title": "Unfreeze is not available yet",
-      "description": "You need to wait 3 days before your last Freeze operation"
+      "description": "You need to wait 3 days after your last Freeze operation"
     },
     "TronVoteRequired": {
       "title": "At least 1 vote is needed"
@@ -1740,6 +1742,9 @@
     "TronTransactionExpired": {
       "title": "Transaction has expired",
       "description": "Signature must be applied within 30 seconds. Please try again."
+    },
+    "TronNotEnoughEnergy": {
+      "title": "Not enough Energy to send this token"
     },
     "PairingFailed": {
       "title": "Pairing unsuccessful",

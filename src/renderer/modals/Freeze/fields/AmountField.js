@@ -1,6 +1,6 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 
@@ -38,12 +38,21 @@ const InputLeft = styled(Box).attrs(() => ({
   pl: 3,
 }))``;
 
-const AmountButton: ThemedComponent<{ error: boolean }> = styled.button.attrs(() => ({
-  type: "button",
-}))`
+const AmountButton: ThemedComponent<{ error: boolean, active: boolean }> = styled.button.attrs(
+  () => ({
+    type: "button",
+  }),
+)`
   background-color: ${p =>
-    p.error ? p.theme.colors.lightRed : p.theme.colors.palette.action.hover};
-  color: ${p => p.theme.colors.palette.primary.main};
+    p.error
+      ? p.theme.colors.lightRed
+      : p.active
+      ? p.theme.colors.palette.primary.main
+      : p.theme.colors.palette.action.hover};
+  color: ${p =>
+    p.active
+      ? p.theme.colors.palette.primary.contrastText
+      : p.theme.colors.palette.primary.main}!important;
   border: none;
   border-radius: 4px;
   padding: 0px ${p => p.theme.space[2]}px;
@@ -53,10 +62,9 @@ const AmountButton: ThemedComponent<{ error: boolean }> = styled.button.attrs(()
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: filter 200ms ease-out;
-  &:hover,
-  &:focus {
-    filter: brightness(0.8);
+  transition: all 200ms ease-out;
+  &:hover {
+    filter: contrast(2);
   }
 `;
 
@@ -89,14 +97,26 @@ const AmountField = ({
   const defaultUnit = getAccountUnit(account);
   const { spendableBalance } = account;
 
+  const [ratio, setRatio] = useState();
+
   const onChange = useCallback(
-    (value: BigNumber) =>
+    (value: BigNumber) => {
+      setRatio();
       onChangeTransaction(
         bridge.updateTransaction(transaction, {
           amount: getDecimalPart(value, defaultUnit.magnitude),
         }),
-      ),
+      );
+    },
     [bridge, transaction, onChangeTransaction, defaultUnit],
+  );
+
+  const onSelectRatio = useCallback(
+    (label, value) => {
+      onChange(value);
+      setRatio(label);
+    },
+    [setRatio, onChange],
   );
 
   const amountAvailable = useMemo(
@@ -171,7 +191,12 @@ const AmountField = ({
           showAmountRatio && (
             <InputRight>
               {amountButtons.map(({ label, value }, key) => (
-                <AmountButton key={key} error={!!amountError} onClick={() => onChange(value)}>
+                <AmountButton
+                  active={ratio === label}
+                  key={key}
+                  error={!!amountError}
+                  onClick={() => onSelectRatio(label, value)}
+                >
                   {label}
                 </AmountButton>
               ))}

@@ -11,6 +11,7 @@ import {
   getLastVotedDate,
   formatVotes,
   getNextRewardDate,
+  MIN_TRANSACTION_AMOUNT,
 } from "@ledgerhq/live-common/lib/families/tron/react";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
@@ -61,10 +62,8 @@ const Delegation = ({ account }: Props) => {
 
   const unit = getAccountUnit(account);
   const explorerView = getDefaultExplorerView(account.currency);
-  /** min 1TRX transactions */
-  const minAmount = 10 ** unit.magnitude;
 
-  const formattedMinAmount = formatCurrencyUnit(unit, BigNumber(minAmount), {
+  const formattedMinAmount = formatCurrencyUnit(unit, BigNumber(MIN_TRANSACTION_AMOUNT), {
     disableRounding: true,
     alwaysShowSign: false,
     showCode: true,
@@ -116,7 +115,7 @@ const Delegation = ({ account }: Props) => {
   const canClaimRewards = hasRewards && !formattedNextRewardDate;
 
   const earnRewardDisabled =
-    tronPower === 0 && (!spendableBalance || !spendableBalance.gt(minAmount));
+    tronPower === 0 && (!spendableBalance || !spendableBalance.gte(MIN_TRANSACTION_AMOUNT));
 
   return (
     <>

@@ -141,7 +141,7 @@
     "bandwidth": "Bandwidth",
     "energy": "Energy",
     "availableBalanceTooltip": "Ce montant peut être envoyé à tout moment.",
-    "frozenAssetsTooltip": "Ce montant sera disponible 3 jours après l'avoir dégelé.",
+    "frozenAssetsTooltip": "Les actifs gelés sont utilisés dans le processus de vote de Tron. Cela représente votre nombre total de votes.",
     "bandwidthTooltip": "Geler des actifs pour gagner de la bandwidth",
     "energyTooltip": "Geler des actifs pour gagner de l'Energy"
   },
@@ -626,6 +626,7 @@
     "titleExisting": "Gérer les votes",
     "steps": {
       "castVotes": {
+        "max": "MAX",
         "title": "Voter",
         "search": "Rechercher par nom ou adresse...",
         "totalVotes": "Total des votes: {{total}}",
@@ -785,7 +786,7 @@
       "noRewards": "Aucune récompense disponible",
       "remainingVotes": {
         "title": "Il vous reste {{amount}} votes",
-        "description": "Utilisez vos votes restants pour obtenir plus de récompenses",
+        "description": "You can cast your remaining votes to earn more rewards",
         "button": "Voter maintenant"
       },
       "flow": {
@@ -801,7 +802,8 @@
             "help": "Comment fonctionne le vote",
             "button": {
               "cta": "Poursuivre"
-            }
+            },
+            "termsAndPrivacy": "Delegating your voting rights does not guarantee you will be paid any reward by your super representative."
           }
         }
       }
@@ -1708,14 +1710,14 @@
     },
     "TronUnfreezeNotExpired": {
       "title": "Pas de dégel disponible pour le moment",
-      "description": "You need to wait 3 days before your last Freeze operation"
+      "description": "Vous devez attendre 3 jours après votre dernière opération de gel"
     },
     "TronVoteRequired": {
       "title": "Au moins 1 vote est nécessaire"
     },
     "TronInvalidVoteCount": {
       "title": "Le format du vote est incorrect",
-      "description": "You can only vote using round numbers"
+      "description": "Vous ne pouvez voter qu'en utilisant des chiffres ronds"
     },
     "TronRewardNotAvailable": {
       "title": "La récompense n'est pas encore réclamable",
@@ -1740,6 +1742,9 @@
     "TronTransactionExpired": {
       "title": "La transaction a expiré",
       "description": "La signature doit être appliquée d'ici 30 secondes. Veuillez réessayer."
+    },
+    "TronNotEnoughEnergy": {
+      "title": "Pas assez d'Energy pour envoyer ce token"
     },
     "PairingFailed": {
       "title": "Echec du jumelage",
