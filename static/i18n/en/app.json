@@ -1742,6 +1742,9 @@
       "title": "Transaction has expired",
       "description": "Signature must be applied within 30 seconds. Please try again."
     },
+    "TronNotEnoughEnergy": {
+      "title": "Not enough Energy to send this token"
+    },
     "PairingFailed": {
       "title": "Pairing unsuccessful",
       "description": "Please try again or contact Ledger Support when in doubt."
