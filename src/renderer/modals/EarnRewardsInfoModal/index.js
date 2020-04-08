@@ -117,12 +117,6 @@ const EarnRewardsInfoModal = ({ name, account, parentAccount }: Props) => {
                     </Text>
                   </Row>
                 </Box>
-                <Box my={4}>
-                  <LinkWithExternalIcon
-                    label={<Trans i18nKey="tron.voting.flow.steps.starter.help" />}
-                    onClick={() => openURL(urls.stakingTron)}
-                  />
-                </Box>
               </Box>
               <WarnBox>
                 <Trans i18nKey="tron.voting.flow.steps.starter.termsAndPrivacy" />
@@ -130,7 +124,13 @@ const EarnRewardsInfoModal = ({ name, account, parentAccount }: Props) => {
             </Box>
           )}
           renderFooter={() => (
-            <Box horizontal alignItems="right">
+            <Box horizontal grow>
+              <Box grow>
+                <LinkWithExternalIcon
+                  label={<Trans i18nKey="tron.voting.flow.steps.starter.help" />}
+                  onClick={() => openURL(urls.stakingTron)}
+                />
+              </Box>
               <Button secondary onClick={onClose}>
                 <Trans i18nKey="common.cancel" />
               </Button>
