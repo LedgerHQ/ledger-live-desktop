@@ -786,7 +786,7 @@
       "noRewards": "Nincs elérhető jutalom",
       "remainingVotes": {
         "title": "Még van {{amount}} szavazatod",
-        "description": "Add le a fennmaradó szavazataid, hogy további jutalmakat szerezz",
+        "description": "You can cast your remaining votes to earn more rewards",
         "button": "Szavazz most"
       },
       "flow": {
@@ -802,7 +802,8 @@
             "help": "Hogy működik a szavazás",
             "button": {
               "cta": "Folytatás"
-            }
+            },
+            "termsAndPrivacy": "Delegating your voting rights does not guarantee you will be paid any reward by your super representative."
           }
         }
       }
