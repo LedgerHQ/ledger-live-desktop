@@ -92,6 +92,7 @@ class PortfolioBalanceSummary extends PureComponent<Props> {
             <Chart
               onlyUpdateIfLastPointChanges
               id={chartId}
+              magnitude={counterValue.units[0].magnitude}
               color={chartColor}
               data={portfolio.balanceHistory}
               height={250}
