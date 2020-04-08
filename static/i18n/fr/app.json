@@ -141,7 +141,7 @@
     "bandwidth": "Bandwidth",
     "energy": "Energy",
     "availableBalanceTooltip": "Ce montant peut être envoyé à tout moment.",
-    "frozenAssetsTooltip": "Ce montant sera disponible 3 jours après l'avoir dégelé.",
+    "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
     "bandwidthTooltip": "Geler des actifs pour gagner de la bandwidth",
     "energyTooltip": "Geler des actifs pour gagner de l'Energy"
   },
