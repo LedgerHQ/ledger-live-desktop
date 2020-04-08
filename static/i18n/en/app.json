@@ -1709,7 +1709,7 @@
     },
     "TronUnfreezeNotExpired": {
       "title": "Unfreeze is not available yet",
-      "description": "You need to wait 3 days before your last Freeze operation"
+      "description": "You need to wait 3 days after your last Freeze operation"
     },
     "TronVoteRequired": {
       "title": "At least 1 vote is needed"
