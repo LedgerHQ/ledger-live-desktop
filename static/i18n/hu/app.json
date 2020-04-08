@@ -141,7 +141,7 @@
     "bandwidth": "Sávszélesség",
     "energy": "Energia",
     "availableBalanceTooltip": "Ez a mennyiség bármikor küldhető.",
-    "frozenAssetsTooltip": "Ez a mennyiség 3 nappal az után érhető el, hogy kiolvasztottad.",
+    "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
     "bandwidthTooltip": "Fagyassz le eszközöket, hogy sávszélességet gyűjts",
     "energyTooltip": "Fagyassz le eszközöket, hogy energiát gyűjts"
   },
