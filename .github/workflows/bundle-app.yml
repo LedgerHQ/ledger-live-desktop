@@ -27,6 +27,8 @@ jobs:
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
       - name: build the app
         run: yarn nightly
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: upload macOS app
@@ -71,6 +73,8 @@ jobs:
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
       - name: build the app
         run: yarn nightly
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: upload linux app
@@ -116,6 +120,8 @@ jobs:
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
       - name: build the app
         run: yarn nightly
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: upload windows

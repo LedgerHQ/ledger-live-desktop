@@ -16,6 +16,8 @@ jobs:
         run: yarn --ignore-scripts --frozen-lockfile
       - name: build the app
         run: yarn nightly
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: version
       - name: upload macOS app
@@ -45,6 +47,8 @@ jobs:
         run: yarn --ignore-scripts --frozen-lockfile
       - name: build the app
         run: yarn nightly
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: version
       - name: upload linux app
@@ -75,6 +79,8 @@ jobs:
         run: yarn --ignore-scripts --frozen-lockfile
       - name: build the app
         run: yarn nightly
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: version
       - name: upload windows
