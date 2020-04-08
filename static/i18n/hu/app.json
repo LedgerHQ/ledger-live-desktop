@@ -1709,7 +1709,7 @@
     },
     "TronUnfreezeNotExpired": {
       "title": "Kiolvasztás még nem lehetséges",
-      "description": "Várnod kell 3 napot az utolsó Befagyasztás művelet előtt"
+      "description": "You need to wait 3 days after your last Freeze operation"
     },
     "TronVoteRequired": {
       "title": "Legalább 1 szavazat szükséges"
@@ -1741,6 +1741,9 @@
     "TronTransactionExpired": {
       "title": "Az tranzakció lejárt",
       "description": "Az aláírást 30 másodpercen belül kell alkalmazni. Kérlek próbáld újra."
+    },
+    "TronNotEnoughEnergy": {
+      "title": "Not enough Energy to send this token"
     },
     "PairingFailed": {
       "title": "Párosítás sikertelen",
