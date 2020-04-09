@@ -18,6 +18,7 @@ import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 
 import Rewards from "~/renderer/images/rewards.svg";
 import Modal, { ModalBody } from "~/renderer/components/Modal/index";
+import WarnBox from "~/renderer/components/WarnBox";
 
 const RewardImg = styled.img.attrs(() => ({ src: Rewards }))`
   width: 130px;
@@ -116,17 +117,20 @@ const EarnRewardsInfoModal = ({ name, account, parentAccount }: Props) => {
                     </Text>
                   </Row>
                 </Box>
-                <Box my={4}>
-                  <LinkWithExternalIcon
-                    label={<Trans i18nKey="tron.voting.flow.steps.starter.help" />}
-                    onClick={() => openURL(urls.stakingTron)}
-                  />
-                </Box>
               </Box>
+              <WarnBox>
+                <Trans i18nKey="tron.voting.flow.steps.starter.termsAndPrivacy" />
+              </WarnBox>
             </Box>
           )}
           renderFooter={() => (
-            <Box horizontal alignItems="right">
+            <Box horizontal grow>
+              <Box grow>
+                <LinkWithExternalIcon
+                  label={<Trans i18nKey="tron.voting.flow.steps.starter.help" />}
+                  onClick={() => openURL(urls.stakingTron)}
+                />
+              </Box>
               <Button secondary onClick={onClose}>
                 <Trans i18nKey="common.cancel" />
               </Button>

@@ -141,7 +141,7 @@
     "bandwidth": "Sávszélesség",
     "energy": "Energia",
     "availableBalanceTooltip": "Ez a mennyiség bármikor küldhető.",
-    "frozenAssetsTooltip": "Ez a mennyiség 3 nappal az után érhető el, hogy kiolvasztottad.",
+    "frozenAssetsTooltip": "A befagyasztott eszközeid a Tron szavazási folyamatban használhatod. Ez képviseli az összes rendelkezésedre álló szavazatod.",
     "bandwidthTooltip": "Fagyassz le eszközöket, hogy sávszélességet gyűjts",
     "energyTooltip": "Fagyassz le eszközöket, hogy energiát gyűjts"
   },
@@ -626,6 +626,7 @@
     "titleExisting": "Szavazatok kezelése",
     "steps": {
       "castVotes": {
+        "max": "MAX",
         "title": "Szavazás",
         "search": "Keresés név vagy cím alapján...",
         "totalVotes": "Összes szavazat: {{total}}",
@@ -785,7 +786,7 @@
       "noRewards": "Nincs elérhető jutalom",
       "remainingVotes": {
         "title": "Még van {{amount}} szavazatod",
-        "description": "Add le a fennmaradó szavazataid, hogy további jutalmakat szerezz",
+        "description": "Leadhatod a fennmaradó szavazataid, hogy további jutalmakat szerezz",
         "button": "Szavazz most"
       },
       "flow": {
@@ -801,7 +802,8 @@
             "help": "Hogy működik a szavazás",
             "button": {
               "cta": "Folytatás"
-            }
+            },
+            "termsAndPrivacy": "A szavazati jogod delegálása nem garantálja, hogy bármilyen kifizetésben részesülsz a szuper képviselődtől."
           }
         }
       }
@@ -1708,7 +1710,7 @@
     },
     "TronUnfreezeNotExpired": {
       "title": "Kiolvasztás még nem lehetséges",
-      "description": "Várnod kell 3 napot az utolsó Befagyasztás művelet előtt"
+      "description": "Várnod kell 3 napot az utolsó Befagyasztás művelet után"
     },
     "TronVoteRequired": {
       "title": "Legalább 1 szavazat szükséges"
@@ -1740,6 +1742,9 @@
     "TronTransactionExpired": {
       "title": "Az tranzakció lejárt",
       "description": "Az aláírást 30 másodpercen belül kell alkalmazni. Kérlek próbáld újra."
+    },
+    "TronNotEnoughEnergy": {
+      "title": "Nincs elég Energia ennek a tokennek az elküldéséhez"
     },
     "PairingFailed": {
       "title": "Párosítás sikertelen",
