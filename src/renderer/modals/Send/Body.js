@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useCallback, useEffect, useState } from "react";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { compose } from "redux";
 import type { TFunction } from "react-i18next";
 import { createStructuredSelector } from "reselect";
@@ -123,7 +123,6 @@ const Body = ({
 }: Props) => {
   const openedFromAccount = !!params.account;
   const [steps] = useState(createSteps);
-  const dispatch = useDispatch();
 
   const {
     transaction,
@@ -180,15 +179,13 @@ const Body = ({
     (optimisticOperation: Operation) => {
       if (!account) return;
       const mainAccount = getMainAccount(account, parentAccount);
-      dispatch(
-        updateAccountWithUpdater(mainAccount.id, account =>
-          addPendingOperation(account, optimisticOperation),
-        ),
+      updateAccountWithUpdater(mainAccount.id, account =>
+        addPendingOperation(account, optimisticOperation),
       );
       setOptimisticOperation(optimisticOperation);
       setTransactionError(null);
     },
-    [account, parentAccount, updateAccountWithUpdater, dispatch],
+    [account, parentAccount, updateAccountWithUpdater],
   );
 
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId]);
