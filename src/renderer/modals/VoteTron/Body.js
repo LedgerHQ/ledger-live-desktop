@@ -2,7 +2,7 @@
 import invariant from "invariant";
 import React, { useState, useCallback } from "react";
 import { compose } from "redux";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
@@ -97,6 +97,7 @@ const Body = ({
   const [optimisticOperation, setOptimisticOperation] = useState(null);
   const [transactionError, setTransactionError] = useState(null);
   const [signed, setSigned] = useState(false);
+  const dispatch = useDispatch();
 
   const {
     transaction,
@@ -148,13 +149,15 @@ const Body = ({
   const handleOperationBroadcasted = useCallback(
     (optimisticOperation: Operation) => {
       if (!account) return;
-      updateAccountWithUpdater(account.id, account =>
-        addPendingOperation(account, optimisticOperation),
+      dispatch(
+        updateAccountWithUpdater(account.id, account =>
+          addPendingOperation(account, optimisticOperation),
+        ),
       );
       setOptimisticOperation(optimisticOperation);
       setTransactionError(null);
     },
-    [account],
+    [account, dispatch],
   );
 
   const error = transactionError || bridgeError;

@@ -89,7 +89,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
     const { showUninsWarning } = this.state;
 
     return (
-      <Modal isOpened={status === "disclaimer"} centered onClose={onClose}>
+      <Modal isOpened={status === "disclaimer"} backdropColor centered onClose={onClose}>
         <ModalBody
           grow
           alignItems="center"

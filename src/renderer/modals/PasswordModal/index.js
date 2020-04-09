@@ -120,7 +120,7 @@ const PasswordModal = () => {
     setIncorrectPassword(null);
   }, [setCurrentPassword, setNewPassword, setConfirmPassword, setIncorrectPassword]);
   return (
-    <Modal name="MODAL_PASSWORD" centered>
+    <Modal name="MODAL_PASSWORD" onClose={onClose} centered>
       <ModalBody
         title={hasPassword ? t("password.changePassword.title") : t("password.setPassword.title")}
         onHide={handleReset}

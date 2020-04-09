@@ -1,7 +1,7 @@
 // @flow
 import React, { useState, useCallback, useMemo } from "react";
 import { compose } from "redux";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import { BigNumber } from "bignumber.js";
@@ -135,6 +135,7 @@ const Body = ({
   const [optimisticOperation, setOptimisticOperation] = useState(null);
   const [transactionError, setTransactionError] = useState(null);
   const [signed, setSigned] = useState(false);
+  const dispatch = useDispatch();
 
   const {
     transaction,
@@ -181,13 +182,15 @@ const Body = ({
   const handleOperationBroadcasted = useCallback(
     (optimisticOperation: Operation) => {
       if (!account) return;
-      updateAccountWithUpdater(account.id, account =>
-        addPendingOperation(account, optimisticOperation),
+      dispatch(
+        updateAccountWithUpdater(account.id, account =>
+          addPendingOperation(account, optimisticOperation),
+        ),
       );
       setOptimisticOperation(optimisticOperation);
       setTransactionError(null);
     },
-    [account],
+    [account, dispatch],
   );
 
   const statusError = useMemo(() => status.errors && Object.values(status.errors)[0], [

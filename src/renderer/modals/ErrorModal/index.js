@@ -27,7 +27,7 @@ const ErrorModal = ({
   ...props
 }: Props) => {
   return (
-    <Modal name={name} isOpened={isOpened} centered>
+    <Modal name={name} backdropColor isOpened={isOpened} onClose={onClose} centered>
       <ModalBody
         {...props}
         onClose={onClose}
