@@ -67,7 +67,7 @@ const ProgressCircle = ({ size, progress }: Props) => {
           color={progress === 0 ? "palette.text.shade80" : "wallet"}
           fontSize={4}
         >
-          {`${Math.round(progress * 100)}%`}
+          {`${Math.floor(progress * 100)}%`}
         </Text>
       </TextContainer>
       <svg height={size} width={size}>
