@@ -1313,6 +1313,16 @@
     "@ledgerhq/hw-transport" "^5.13.0"
     bignumber.js "^9.0.0"
 
+"@ledgerhq/hw-app-str@^5.13.0":
+  version "5.13.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-str/-/hw-app-str-5.13.0.tgz#d851180b1aad56328fe1f672d621749e19f73902"
+  integrity sha512-5ooxMNziHUTNpBr1MZlpqW1U5mRhkTQSg9BV00k3wELZIk2nb6Hy4JpeXPd0g016aWj8NfiwlldnLvflYx9TSg==
+  dependencies:
+    "@ledgerhq/hw-transport" "^5.13.0"
+    base32.js "^0.1.0"
+    sha.js "^2.3.6"
+    tweetnacl "^1.0.3"
+
 "@ledgerhq/hw-app-trx@5.13.0":
   version "5.13.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-trx/-/hw-app-trx-5.13.0.tgz#e284fe1505b0f2fe48c7075d2847647944f6ff5e"
@@ -1393,16 +1403,17 @@
     node-pre-gyp "^0.14.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^12.15.0":
-  version "12.15.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.15.0.tgz#b46d270db9a2daf9d5a333d83c341d3d71aa4604"
-  integrity sha512-NeQX3WhPW16emZq9GP7l2o8DLWN/jcTNo6RbxATBs38Wj03CG8ZRhd0bJGWrG+NcuLbHPXLUmKqc72ROa43CNg==
+"@ledgerhq/live-common@@stellar":
+  version "12.15.0-stellar.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.15.0-stellar.1.tgz#f7ddbb40c65df4d71f243572ef2ad90c1a49314e"
+  integrity sha512-q+1N+dOcwhRQeonGXIOQeBHZGH+syzlaRsHUT8YgMhlEKb3mAM1fwXafJHroJYdVR5EijAQQm5DcliVUSOoj5w==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "5.13.0"
     "@ledgerhq/errors" "5.13.0"
     "@ledgerhq/hw-app-btc" "^5.13.0"
     "@ledgerhq/hw-app-eth" "5.13.0"
+    "@ledgerhq/hw-app-str" "^5.13.0"
     "@ledgerhq/hw-app-trx" "5.13.0"
     "@ledgerhq/hw-app-xrp" "5.13.0"
     "@ledgerhq/hw-transport" "5.13.0"
@@ -2816,6 +2827,11 @@ base-x@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/base-x/-/base-x-1.1.0.tgz#42d3d717474f9ea02207f6d1aa1f426913eeb7ac"
   integrity sha1-QtPXF0dPnqAiB/bRqh9CaRPut6w=
+
+base32.js@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/base32.js/-/base32.js-0.1.0.tgz#b582dec693c2f11e893cf064ee6ac5b6131a2202"
+  integrity sha1-tYLexpPC8R6JPPBk7mrFthMaIgI=
 
 base64-js@^1.0.2:
   version "1.3.1"
@@ -11372,7 +11388,7 @@ setprototypeof@1.1.1:
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.1.tgz#7e95acb24aa92f5885e0abef5ba131330d4ae683"
   integrity sha512-JvdAWfbXeIGaZ9cILp38HntZSFSo3mWg6xGcJJsd+d4aRMOqauag1C63dJfDw7OaMYwEbHMOxEZ1lqVRYP2OAw==
 
-sha.js@2, sha.js@^2.4.0, sha.js@^2.4.11, sha.js@^2.4.8:
+sha.js@2, sha.js@^2.3.6, sha.js@^2.4.0, sha.js@^2.4.11, sha.js@^2.4.8:
   version "2.4.11"
   resolved "https://registry.yarnpkg.com/sha.js/-/sha.js-2.4.11.tgz#37a5cf0b81ecbc6943de109ba2960d1b26584ae7"
   integrity sha512-QMEp5B7cftE7APOjk5Y6xgrbWu+WkLVQwk8JNjZ8nKRciZaByEW6MubieAiToS7+dwvrjGhH8jRXz3MVd0AYqQ==
@@ -12464,6 +12480,11 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
+
+tweetnacl@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-1.0.3.tgz#ac0af71680458d8a6378d0d0d050ab1407d35596"
+  integrity sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==
 
 type-check@~0.3.2:
   version "0.3.2"
