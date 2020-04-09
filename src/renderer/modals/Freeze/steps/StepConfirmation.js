@@ -17,6 +17,8 @@ import RetryButton from "~/renderer/components/RetryButton";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import SuccessDisplay from "~/renderer/components/SuccessDisplay";
 import BroadcastErrorDisclaimer from "~/renderer/components/BroadcastErrorDisclaimer";
+import ToolTip from "~/renderer/components/Tooltip";
+import Text from "~/renderer/components/Text";
 
 import type { StepProps } from "../types";
 
@@ -28,6 +30,17 @@ const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(
   justify-content: ${p => (p.shouldSpace ? "space-between" : "center")};
   min-height: 220px;
 `;
+
+const TooltipContent = () => (
+  <Box style={{ padding: 4 }}>
+    <Text color="palette.primary.contrastText" style={{ marginBottom: 5 }}>
+      <Trans i18nKey="freeze.steps.confirmation.tooltip.title" />
+    </Text>
+    <Text color="palette.primary.contrastText">
+      <Trans i18nKey="freeze.steps.confirmation.tooltip.desc" />
+    </Text>
+  </Box>
+);
 
 function StepConfirmation({
   account,
@@ -107,19 +120,23 @@ export function StepConfirmationFooter({
       <Button ml={2} event="Freeze Flow Step 3 View OpD Clicked" onClick={onClose} secondary>
         <Trans i18nKey="freeze.steps.confirmation.success.later" />
       </Button>
-      <Button
-        ml={2}
-        isLoading={isLoading && time === 0}
-        disabled={isLoading}
-        primary
-        onClick={openVote}
-      >
-        {time > 0 && isLoading ? (
-          <Trans i18nKey="freeze.steps.confirmation.success.votePending" values={{ time }} />
-        ) : (
+      {time > 0 && isLoading ? (
+        <ToolTip content={<TooltipContent />}>
+          <Button
+            ml={2}
+            isLoading={isLoading && time === 0}
+            disabled={isLoading}
+            primary
+            onClick={openVote}
+          >
+            <Trans i18nKey="freeze.steps.confirmation.success.votePending" values={{ time }} />
+          </Button>
+        </ToolTip>
+      ) : (
+        <Button ml={2} primary onClick={openVote}>
           <Trans i18nKey="freeze.steps.confirmation.success.vote" />
-        )}
-      </Button>
+        </Button>
+      )}
     </Box>
   );
 }
