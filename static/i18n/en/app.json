@@ -718,7 +718,14 @@
         "stellarMemo": "Memo",
         "stellarNetwork": "Network",
         "stellarNetworkPublic": "Public",
-        "stellarSource": "Source address"
+        "stellarSource": "Source address",
+        "stellarMemoType": {
+          "MEMO_TEXT": "Memo Text",
+          "NO_MEMO": "Memo",
+          "MEMO_ID": "Memo ID",
+          "MEMO_HASH": "Memo Hash",
+          "MEMO_RETURN": "Memo Return"
+        }
       },
       "verification": {
         "streaming": {

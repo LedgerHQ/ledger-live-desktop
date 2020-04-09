@@ -19,6 +19,25 @@ const Post = ({ account, transaction }: { account: Account, transaction: Transac
 
   return (
     <>
+      <TransactionConfirmField
+        label={
+          <Trans
+            i18nKey={`send.steps.details.stellarMemoType.${
+              transaction.memoType ? transaction.memoType : "NO_MEMO"
+            }`}
+          />
+        }
+      >
+        <Text
+          style={addressStyle}
+          ml={1}
+          ff="Inter|Medium"
+          color="palette.text.shade80"
+          fontSize={3}
+        >
+          {transaction.memoValue ? `${transaction.memoValue} ` : "[none]"}
+        </Text>
+      </TransactionConfirmField>
       <TransactionConfirmField label={<Trans i18nKey="send.steps.details.stellarNetwork" />}>
         <Text ff="Inter|Medium" color="palette.text.shade80" fontSize={3}>
           <Trans i18nKey="send.steps.details.stellarNetworkPublic" />
