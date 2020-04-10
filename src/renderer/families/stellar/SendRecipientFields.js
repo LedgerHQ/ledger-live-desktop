@@ -16,7 +16,7 @@ const Root = (props: *) => (
         </span>
       </Label>
     </Box>
-    <Box horizontal grow alignItems="center" justifyContent="space-between">
+    <Box mb={15} horizontal grow alignItems="center" justifyContent="space-between">
       <MemoTypeField {...props} />
       {props.transaction.memoType && props.transaction.memoType !== "NO_MEMO" && (
         <Box ml={20} grow={1}>
@@ -25,7 +25,7 @@ const Root = (props: *) => (
       )}
     </Box>
     {props.transaction.memoTypeRecommended && (
-      <Box mt={20} horizontal grow justifyContent="space-between">
+      <Box horizontal grow justifyContent="space-between">
         <Text ff="Inter|Regular" color="palette.text.shade50" fontSize={4}>
           <Trans i18nKey="send.steps.warning.stellar.recommendedMemo" />
         </Text>
