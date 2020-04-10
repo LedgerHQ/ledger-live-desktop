@@ -21,7 +21,7 @@
     "install-deps": "electron-builder install-app-deps",
     "prepublish": "bash ./scripts/sync-families-dispatch.sh",
     "postinstall": "node ./scripts/post-install.js",
-    "dist:internal": "cross-env NODE_ENV=production electron-builder",
+    "dist:internal": "cross-env NODE_ENV=production DEBUG=electron-builder electron-builder",
     "dist": "node ./tools/dist",
     "dist:dirty": "node ./tools/dist --dirty",
     "dist:dir": "node ./tools/dist --dir",
