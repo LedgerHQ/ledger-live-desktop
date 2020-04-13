@@ -41,7 +41,7 @@ type Props = {
 };
 
 const Footer = ({ total, used, onClick }: Props) => {
-  const percentVotesUsed = used / total;
+  const percentVotesUsed = Math.floor(100 * (used / total)) / 100;
 
   if (percentVotesUsed >= 1) return null;
 
