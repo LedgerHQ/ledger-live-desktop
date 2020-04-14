@@ -123,6 +123,7 @@ const Body = ({
 }: Props) => {
   const openedFromAccount = !!params.account;
   const [steps] = useState(createSteps);
+
   const {
     transaction,
     setTransaction,

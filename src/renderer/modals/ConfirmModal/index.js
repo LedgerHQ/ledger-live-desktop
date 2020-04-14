@@ -55,7 +55,15 @@ const ConfirmModal = ({
   const realConfirmText = confirmText || t("common.confirm");
   const realCancelText = cancelText || t("common.cancel");
   return (
-    <Modal name={name} isOpened={isOpened} centered={centered} width={narrow && 380}>
+    <Modal
+      name={name}
+      isOpened={isOpened}
+      centered={centered}
+      width={narrow && 380}
+      onClose={!cancellable && isLoading ? undefined : onClose}
+      preventBackdropClick={isLoading}
+      backdropColor
+    >
       <ModalBody
         {...props}
         preventBackdropClick={isLoading}
