@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Switch, Route } from "react-router-dom";
 import type { RouterHistory, Match, Location } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { accountsSelector } from "~/renderer/reducers/accounts";
+import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import Pills from "~/renderer/components/Pills";
 import type { Item } from "~/renderer/components/Pills";
 import Box from "~/renderer/components/Box";
@@ -57,7 +57,7 @@ type Props = {
 // Props are passed from the <Route /> component in <Default />
 const Settings = ({ history, location, match }: Props) => {
   const { t } = useTranslation();
-  const accounts = useSelector(accountsSelector);
+  const accounts = useSelector(shallowAccountsSelector);
   const accountsCount = accounts.length;
 
   const items = useMemo(() => getItems(t), [t]);
