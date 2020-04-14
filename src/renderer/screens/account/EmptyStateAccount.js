@@ -110,13 +110,13 @@ class EmptyStateAccount extends PureComponent<Props, *> {
 const Title: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|Regular",
   fontSize: 6,
-  color: p => p.theme.colors.palette.text.shade100,
+  color: "palette.text.shade100",
 }))``;
 
 const Description: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|Regular",
   fontSize: 4,
-  color: p => p.theme.colors.palette.text.shade80,
+  color: "palette.text.shade80",
   textAlign: "center",
 }))``;
 
