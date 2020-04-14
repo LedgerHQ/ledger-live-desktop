@@ -581,6 +581,10 @@
         "title": "Appareil"
       },
       "confirmation": {
+        "tooltip": {
+          "title": "Transaction is under validation",
+          "desc": "You have to wait a minute before being able to vote"
+        },
         "title": "Confirmation",
         "success": {
           "title": "",
