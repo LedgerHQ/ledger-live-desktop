@@ -26,6 +26,7 @@ import {
 import Text from "~/renderer/components/Text";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import CounterValue from "~/renderer/components/CounterValue";
+import { useDiscreetMode } from "~/renderer/components/Discreet";
 
 const helpURL = "https://support.ledger.com/hc/en-us/articles/360013062139";
 
@@ -62,6 +63,7 @@ export const OperationDetailsVotes = ({
     },
     [account],
   );
+  const discreet = useDiscreetMode();
 
   return (
     <Box>
@@ -84,7 +86,10 @@ export const OperationDetailsVotes = ({
                 <Text>
                   <Trans
                     i18nKey="operationDetails.extra.votesAddress"
-                    values={{ votes: voteCount, name: validator && validator.name }}
+                    values={{
+                      votes: !discreet ? voteCount : "***",
+                      name: validator && validator.name,
+                    }}
                   >
                     <Text ff="Inter|SemiBold">{""}</Text>
                     {""}

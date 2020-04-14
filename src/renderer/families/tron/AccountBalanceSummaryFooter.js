@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { Trans } from "react-i18next";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { BigNumber } from "bignumber.js";
+import Discreet, { useDiscreetMode } from "~/renderer/components/Discreet";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
@@ -13,8 +14,6 @@ import Box from "~/renderer/components/Box/Box";
 import Text from "~/renderer/components/Text";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import ToolTip from "~/renderer/components/Tooltip";
-import { useSelector } from "react-redux";
-import { discreetModeSelector } from "~/renderer/reducers/settings";
 
 const Wrapper: ThemedComponent<*> = styled(Box).attrs(() => ({
   horizontal: true,
@@ -58,7 +57,7 @@ type Props = {
 };
 
 const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
-  const discreet = useSelector(discreetModeSelector);
+  const discreet = useDiscreetMode();
   if (!account.tronResources) return null;
 
   const formatConfig = {
@@ -125,7 +124,9 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
             <InfoCircle size={13} />
           </TitleWrapper>
         </ToolTip>
-        <AmountValue>{`${formatedBandwidth || "–"}`}</AmountValue>
+        <AmountValue>
+          <Discreet>{`${formatedBandwidth || "–"}`}</Discreet>
+        </AmountValue>
       </BalanceDetail>
       <BalanceDetail>
         <ToolTip content={<Trans i18nKey="account.energyTooltip" />}>
@@ -136,7 +137,9 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
             <InfoCircle size={13} />
           </TitleWrapper>
         </ToolTip>
-        <AmountValue>{`${formatedEnergy || "–"}`}</AmountValue>
+        <AmountValue>
+          <Discreet>{`${formatedEnergy || "–"}`}</Discreet>
+        </AmountValue>
       </BalanceDetail>
     </Wrapper>
   );
