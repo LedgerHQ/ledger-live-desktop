@@ -103,6 +103,10 @@ class AccountBalanceSummary extends PureComponent<Props> {
       ? perFamilyAccountBalanceSummaryFooter[mainAccount.currency.family]
       : null;
 
+    const chartMagnitude = displayCountervalue
+      ? counterValue.units[0].magnitude
+      : getAccountUnit(account).magnitude;
+
     return (
       <Card p={0} py={5}>
         <Box px={6}>
@@ -122,6 +126,7 @@ class AccountBalanceSummary extends PureComponent<Props> {
         <Box px={5} ff="Inter" fontSize={4} color="palette.text.shade80" pt={5}>
           <Chart
             id={chartId}
+            magnitude={chartMagnitude}
             color={chartColor}
             data={history}
             height={200}
