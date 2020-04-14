@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback } from "react";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { StellarMemoType } from "@ledgerhq/live-common/lib/families/stellar/types";
 import Select from "~/renderer/components/Select";
