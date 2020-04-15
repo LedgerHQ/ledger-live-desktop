@@ -27,8 +27,6 @@ jobs:
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
       - name: build the app
         run: yarn nightly
-      - name: run ui tests
-        run: yarn spectron
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: upload macOS app
