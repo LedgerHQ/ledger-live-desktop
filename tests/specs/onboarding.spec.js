@@ -281,9 +281,9 @@ describe("When I launch the app for the first time", () => {
       });
 
       it("should disable continue button if passwords don't match", async () => {
-        expect(await onboardingPage.continueButton.isEnabled()).toBe(false);
+        expect(await passwordPage.continueButton.isEnabled()).toBe(false);
         await passwordPage.newPasswordInput.addValue(data.password.new);
-        expect(await onboardingPage.continueButton.isEnabled()).toBe(false);
+        expect(await passwordPage.continueButton.isEnabled()).toBe(false);
         await passwordPage.confirmPasswordInput.addValue(data.password.bad);
         expect(await passwordPage.continueButton.isEnabled()).toBe(false);
         expect(await passwordPage.inputError.getText()).toBe(data.password.mismatchError);
