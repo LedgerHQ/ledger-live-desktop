@@ -2,6 +2,7 @@
 
 import uuid from "uuid/v4";
 import invariant from "invariant";
+import { ReplaySubject } from "rxjs";
 import logger from "~/logger";
 import { getSystemLocale } from "~/helpers/systemLocale";
 import user from "~/helpers/user";
@@ -86,11 +87,12 @@ export const stop = () => {
   analytics.reset();
 };
 
-export const track = (event: string, properties: ?Object, mandatory: ?boolean) => {
-  logger.analyticsTrack(event, properties);
-  if (!storeInstance || (!mandatory && !shareAnalyticsSelector(storeInstance.getState()))) {
-    return;
-  }
+export const trackSubject = new ReplaySubject<{
+  event: string,
+  properties: ?Object,
+}>(10);
+
+function sendTrack(event, properties: ?Object, storeInstance: *) {
   const { analytics } = window;
   if (typeof analytics === "undefined") {
     logger.error("analytics is not available");
@@ -106,6 +108,15 @@ export const track = (event: string, properties: ?Object, mandatory: ?boolean) =
       context: getContext(storeInstance),
     },
   );
+  trackSubject.next({ event, properties });
+}
+
+export const track = (event: string, properties: ?Object, mandatory: ?boolean) => {
+  logger.analyticsTrack(event, properties);
+  if (!storeInstance || (!mandatory && !shareAnalyticsSelector(storeInstance.getState()))) {
+    return;
+  }
+  sendTrack(event, properties, storeInstance);
 };
 
 export const page = (category: string, name: ?string, properties: ?Object) => {
@@ -113,20 +124,5 @@ export const page = (category: string, name: ?string, properties: ?Object) => {
   if (!storeInstance || !shareAnalyticsSelector(storeInstance.getState())) {
     return;
   }
-  const { analytics } = window;
-  if (typeof analytics === "undefined") {
-    logger.error("analytics is not available");
-    return;
-  }
-
-  analytics.track(
-    `Page ${category + (name ? ` ${name}` : "")}`,
-    {
-      ...extraProperties(storeInstance),
-      ...properties,
-    },
-    {
-      context: getContext(storeInstance),
-    },
-  );
+  sendTrack(`Page ${category + (name ? ` ${name}` : "")}`, properties, storeInstance);
 };

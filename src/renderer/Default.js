@@ -33,6 +33,7 @@ import TriggerAppReady from "~/renderer/components/TriggerAppReady";
 import ContextMenuWrapper from "~/renderer/components/ContextMenu/ContextMenuWrapper";
 import DebugUpdater from "~/renderer/components/Updater/DebugUpdater";
 import Page from "~/renderer/components/Page";
+import AnalyticsConsole from "~/renderer/components/AnalyticsConsole";
 import ModalsLayer from "./ModalsLayer";
 import DebugMock from "~/renderer/components/DebugMock";
 
@@ -117,6 +118,8 @@ const Default = () => {
           </BridgeSyncProvider>
         </CounterValues.PollingProvider>
       </IsUnlocked>
+
+      {process.env.ANALYTICS_CONSOLE ? <AnalyticsConsole /> : null}
     </>
   );
 };
