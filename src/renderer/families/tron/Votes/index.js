@@ -34,6 +34,7 @@ import { BigNumber } from "bignumber.js";
 import moment from "moment";
 import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
+import { useDiscreetMode } from "~/renderer/components/Discreet";
 
 type Props = {
   account: Account,
@@ -73,10 +74,13 @@ const Delegation = ({ account }: Props) => {
   invariant(tronResources, "tron account expected");
   const { votes, tronPower, unwithdrawnReward } = tronResources;
 
+  const discreet = useDiscreetMode();
+
   const formattedUnwidthDrawnReward = formatCurrencyUnit(unit, BigNumber(unwithdrawnReward || 0), {
     disableRounding: true,
     alwaysShowSign: false,
     showCode: true,
+    discreet,
   });
 
   const formattedVotes = formatVotes(votes, superRepresentatives);

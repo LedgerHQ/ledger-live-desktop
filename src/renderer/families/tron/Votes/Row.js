@@ -14,6 +14,7 @@ import Ellipsis from "~/renderer/components/Ellipsis";
 import { TableLine } from "./Header";
 import Trophy from "~/renderer/icons/Trophy";
 import Medal from "~/renderer/icons/Medal";
+import Discreet from "~/renderer/components/Discreet";
 
 const Wrapper: ThemedComponent<*> = styled.div`
   display: flex;
@@ -79,7 +80,9 @@ const Row = ({
         </IconContainer>
         <Ellipsis>{validator ? validator.name : address}</Ellipsis>
       </Column>
-      <Column>{amount}</Column>
+      <Column>
+        <Discreet>{amount}</Discreet>
+      </Column>
       <Column>{percentTP}%</Column>
       <Column>{duration}</Column>
     </Wrapper>

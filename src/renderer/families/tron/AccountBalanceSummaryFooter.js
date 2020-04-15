@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { Trans } from "react-i18next";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { BigNumber } from "bignumber.js";
+import Discreet, { useDiscreetMode } from "~/renderer/components/Discreet";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
@@ -55,14 +56,16 @@ type Props = {
   countervalue: any,
 };
 
-const formatConfig = {
-  disableRounding: true,
-  alwaysShowSign: false,
-  showCode: true,
-};
-
 const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
+  const discreet = useDiscreetMode();
   if (!account.tronResources) return null;
+
+  const formatConfig = {
+    disableRounding: true,
+    alwaysShowSign: false,
+    showCode: true,
+    discreet,
+  };
 
   const {
     frozen: {
@@ -121,7 +124,9 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
             <InfoCircle size={13} />
           </TitleWrapper>
         </ToolTip>
-        <AmountValue>{`${formatedBandwidth || "–"}`}</AmountValue>
+        <AmountValue>
+          <Discreet>{`${formatedBandwidth || "–"}`}</Discreet>
+        </AmountValue>
       </BalanceDetail>
       <BalanceDetail>
         <ToolTip content={<Trans i18nKey="account.energyTooltip" />}>
@@ -132,7 +137,9 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
             <InfoCircle size={13} />
           </TitleWrapper>
         </ToolTip>
-        <AmountValue>{`${formatedEnergy || "–"}`}</AmountValue>
+        <AmountValue>
+          <Discreet>{`${formatedEnergy || "–"}`}</Discreet>
+        </AmountValue>
       </BalanceDetail>
     </Wrapper>
   );
