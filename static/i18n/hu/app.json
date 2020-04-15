@@ -582,8 +582,8 @@
       },
       "confirmation": {
         "tooltip": {
-          "title": "Transaction is under validation",
-          "desc": "You have to wait a minute before being able to vote"
+          "title": "A tranzakció megerősítése folyamatban",
+          "desc": "Várnod kell egy percet mielőtt szavazni tudsz"
         },
         "title": "Megerősítés",
         "success": {
