@@ -57,7 +57,6 @@ import { getMarketColor } from "~/renderer/styles/helpers";
 import {
   OpDetailsSection,
   OpDetailsTitle,
-  Address,
   GradientHover,
   OpDetailsData,
   NoMarginWrapper,
@@ -556,16 +555,18 @@ export class DataList extends Component<{ lines: string[], t: TFunction }, *> {
     // Hardcoded for now
     const numToShow = 2;
     const shouldShowMore = lines.length > 3;
+    const renderLine = line => (
+      <OpDetailsData key={line}>
+        <Ellipsis canSelect>{line}</Ellipsis>
+        <GradientHover>
+          <CopyWithFeedback text={line} />
+        </GradientHover>
+      </OpDetailsData>
+    );
+
     return (
       <Box>
-        {(shouldShowMore ? lines.slice(0, numToShow) : lines).map(line => (
-          <OpDetailsData key={line}>
-            <Address>{line}</Address>
-            <GradientHover>
-              <CopyWithFeedback text={line} />
-            </GradientHover>
-          </OpDetailsData>
-        ))}
+        {(shouldShowMore ? lines.slice(0, numToShow) : lines).map(renderLine)}
         {shouldShowMore && !showMore && (
           <Box onClick={this.onClick} py={1}>
             <More fontSize={4} color="wallet" ff="Inter|SemiBold" mt={1}>
@@ -574,15 +575,7 @@ export class DataList extends Component<{ lines: string[], t: TFunction }, *> {
             </More>
           </Box>
         )}
-        {showMore &&
-          lines.slice(numToShow).map(line => (
-            <OpDetailsData key={line}>
-              <Address>{line}</Address>
-              <GradientHover>
-                <CopyWithFeedback text={line} />
-              </GradientHover>
-            </OpDetailsData>
-          ))}
+        {showMore ? lines.slice(numToShow).map(renderLine) : null}
         {shouldShowMore && showMore && (
           <Box onClick={this.onClick} py={1}>
             <More fontSize={4} color="wallet" ff="Inter|SemiBold" mt={1}>
