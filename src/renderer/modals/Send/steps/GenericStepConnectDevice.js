@@ -16,9 +16,12 @@ import type {
   SignedOperation,
 } from "@ledgerhq/live-common/lib/types";
 import { command } from "~/renderer/commands";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
+import { mockedAppExec } from "~/renderer/components/DebugMock";
 
 const connectAppExec = command("connectApp");
-const action = createAction(connectAppExec);
+
+const action = createAction(getEnv("MOCK") ? mockedAppExec : connectAppExec);
 
 const Result = ({
   signedOperation,

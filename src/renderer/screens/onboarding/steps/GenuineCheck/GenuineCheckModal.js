@@ -8,9 +8,11 @@ import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import { command } from "~/renderer/commands";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
+import { mockedAppExec } from "~/renderer/components/DebugMock";
 
 const connectManagerExec = command("connectManager");
-const action = createAction(connectManagerExec);
+const action = createAction(getEnv("MOCK") ? mockedAppExec : connectManagerExec);
 
 const Container = styled.div`
   min-height: 450px;

@@ -36,6 +36,7 @@ import WriteSeed from "./steps/WriteSeed";
 import SetPassword from "./steps/SetPassword";
 import Analytics from "./steps/Analytics";
 import Finish from "./steps/Finish";
+import DebugMock from "~/renderer/components/DebugMock";
 
 const STEPS = {
   init: InitStep,
@@ -183,6 +184,7 @@ class OnboardingC extends PureComponent<Props> {
         <StepContainer>
           <StepComponent {...stepProps} />
         </StepContainer>
+        <DebugMock />
       </Container>
     );
   }

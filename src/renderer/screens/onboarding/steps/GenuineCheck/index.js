@@ -2,7 +2,6 @@
 
 import React, { useState, useCallback } from "react";
 import { Trans } from "react-i18next";
-import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getDeviceModel } from "@ledgerhq/devices";
 import styled from "styled-components";
 import IconCheck from "~/renderer/icons/Check";
@@ -93,13 +92,7 @@ const GenuineCheck = (props: StepProps) => {
 
   const handleOpenGenuineCheckModal = useCallback(() => {
     setGenuineCheckModalOpened(true);
-    if (getEnv("MOCK")) {
-      setTimeout(() => {
-        handleCloseGenuineCheckModal();
-        handleGenuineCheckPass({ result: { installed: ["mock"] } });
-      }, 2000);
-    }
-  }, [handleCloseGenuineCheckModal, handleGenuineCheckPass]);
+  }, []);
 
   const redoGenuineCheck = useCallback(() => {
     setRecovery(undefined);

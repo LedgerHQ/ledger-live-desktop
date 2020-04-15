@@ -1,4 +1,4 @@
-import { applicationProxy } from "../applicationProxy";
+import { applicationProxy, getMockDeviceEvent } from "../applicationProxy";
 import OnboardingPage from "../po/onboarding.page";
 import ModalPage from "../po/modal.page";
 import GenuinePage from "../po/genuine.page";
@@ -6,6 +6,7 @@ import PasswordPage from "../po/password.page";
 import AnalyticsPage from "../po/analytics.page";
 import PortfolioPage from "../po/portfolio.page";
 import data from "../data/onboarding/";
+import { deviceInfo155, mockListAppsResult } from "@ledgerhq/live-common/lib/apps/mock";
 
 jest.setTimeout(60000);
 
@@ -17,6 +18,7 @@ describe("When I launch the app for the first time", () => {
   let passwordPage;
   let analyticsPage;
   let portfolioPage;
+  let mockDeviceEvent;
 
   beforeAll(() => {
     app = applicationProxy({ MOCK: true });
@@ -26,6 +28,7 @@ describe("When I launch the app for the first time", () => {
     passwordPage = new PasswordPage(app);
     analyticsPage = new AnalyticsPage(app);
     portfolioPage = new PortfolioPage(app);
+    mockDeviceEvent = getMockDeviceEvent(app);
 
     return app.start();
   });
@@ -247,16 +250,36 @@ describe("When I launch the app for the first time", () => {
           expect(await modalPage.isVisible()).toBe(true);
         });
 
-        it("should perform a genuine check", async () => {
+        it("should perform a genuine check - and fail", async () => {
           expect(await modalPage.title.getText()).toBe(data.genuine.modalTitle);
-          /* MOCKED PART TO HANDLE GENUINE CHECK */
+          await app.client.pause(2000); // FIXME wait until the spinner is visible?
+          await mockDeviceEvent({ type: "error", error: { name: "GenuineCheckFailed" } });
+          await app.client.pause(2000);
+          expect(await app.client.element("#error-GenuineCheckFailed").isVisible()).toBe(true);
+          await modalPage.closeButton.click();
+          await app.client.pause(2000);
         });
 
-        /*
-        it("on failure, should ...", async () => {
-          TODO: MOCK
+        it("should display a modal again", async () => {
+          expect(await onboardingPage.pageTitle.getText()).toBe(data.genuine.title);
+          await genuinePage.checkPin(true);
+          await genuinePage.checkSeed(true);
+          await genuinePage.check();
+          expect(await modalPage.isVisible()).toBe(true);
         });
-        */
+
+        it("should perform a genuine check - and pass", async () => {
+          expect(await modalPage.title.getText()).toBe(data.genuine.modalTitle);
+          await app.client.pause(2000); // FIXME wait until the spinner is visible?
+          await mockDeviceEvent(
+            { type: "listingApps", deviceInfo: deviceInfo155 },
+            {
+              type: "result",
+              result: mockListAppsResult("Bitcoin", "", deviceInfo155),
+            },
+          );
+          await app.client.pause(2000);
+        });
 
         it("on success, should close the modal and change button into label", async () => {
           expect(await modalPage.isVisible(true)).toBe(false);

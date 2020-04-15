@@ -55,13 +55,18 @@ function Switch(props: Props) {
   return (
     <Base
       {...p}
+      key={isChecked ? "ON" : "OFF"}
       disabled={disabled}
       small={small}
       isChecked={isChecked}
       onClick={() => onChange && onChange(!isChecked)}
       className="switch"
     >
-      <input type="checkbox" disabled={disabled || null} checked={isChecked || null} />
+      <input
+        type="checkbox"
+        disabled={disabled || null}
+        {...(isChecked ? { checked: true } : {})}
+      />
       <Ball small={small} isChecked={isChecked} />
     </Base>
   );
