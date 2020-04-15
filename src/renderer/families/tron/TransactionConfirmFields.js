@@ -13,6 +13,7 @@ import TransactionConfirmField from "~/renderer/components/TransactionConfirm/Tr
 import Text from "~/renderer/components/Text";
 import WarnBox from "~/renderer/components/WarnBox";
 import Box from "~/renderer/components/Box";
+import { OperationDetailsVotes } from "./operationDetails";
 
 const Info: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|SemiBold",
@@ -32,7 +33,7 @@ const AddressText = styled(Text).attrs(() => ({
 }))`
   word-break: break-all;
   text-align: right;
-  ma-wwidth: 50%;
+  max-width: 50%;
 `;
 
 const Pre = ({
@@ -48,40 +49,91 @@ const Pre = ({
 
   invariant(transaction.family === "tron", "tron transaction");
 
+  const { votes, resource } = transaction;
+
   return (
     <>
-      <TransactionConfirmField label="Address">
-        <AddressText>
-          {account.type === "ChildAccount" ? account.address : mainAccount.freshAddress}{" "}
-        </AddressText>
-      </TransactionConfirmField>
-      {transaction.resource && (
+      {resource && (
         <TransactionConfirmField label="Resource">
-          <AddressText ff="Inter|SemiBold">{transaction.resource}</AddressText>
+          <AddressText ff="Inter|SemiBold">
+            {resource.slice(0, 1).toUpperCase() + resource.slice(1).toLowerCase()}
+          </AddressText>
         </TransactionConfirmField>
+      )}
+
+      {votes && votes.length > 0 && (
+        <Box vertical justifyContent="space-between" mb={2}>
+          <TransactionConfirmField
+            label={
+              <Trans
+                i18nKey="TransactionConfirm.votes"
+                count={votes.length}
+                values={{ count: votes.length }}
+              />
+            }
+          />
+
+          <OperationDetailsVotes votes={votes} account={mainAccount} isTransactionField />
+        </Box>
       )}
     </>
   );
 };
 
-const Post = ({ transaction }: { transaction: Transaction }) => {
+const Post = ({
+  transaction,
+  account,
+  parentAccount,
+}: {
+  account: AccountLike,
+  parentAccount: ?Account,
+  transaction: Transaction,
+}) => {
+  invariant(transaction.family === "tron", "tron transaction");
+  const mainAccount = getMainAccount(account, parentAccount);
+
   invariant(transaction.family === "tron", "tron transaction");
 
-  return null;
+  const from = mainAccount.freshAddress;
+
+  const { mode } = transaction;
+
+  return (
+    <>
+      {(mode === "freeze" || mode === "unfreeze") && (
+        <TransactionConfirmField label={mode === "freeze" ? "Freeze To" : "Delegate To"}>
+          <AddressText>{from}</AddressText>
+        </TransactionConfirmField>
+      )}
+
+      {mode !== "send" ? (
+        <TransactionConfirmField label="From Address">
+          <AddressText>{from}</AddressText>
+        </TransactionConfirmField>
+      ) : null}
+    </>
+  );
 };
 
-const Warning = ({ transaction }: { transaction: Transaction }) => {
+const Warning = ({
+  transaction,
+  recipientWording,
+}: {
+  transaction: Transaction,
+  recipientWording: string,
+}) => {
   invariant(transaction.family === "tron", "tron transaction");
 
   switch (transaction.mode) {
     case "claimReward":
     case "freeze":
     case "unfreeze":
+    case "vote":
       return null;
     default:
       return (
         <WarnBox>
-          <Trans i18nKey={`TransactionConfirm.warningWording.${transaction.mode}`} />
+          <Trans i18nKey="TransactionConfirm.warning" values={{ recipientWording }} />
         </WarnBox>
       );
   }
@@ -102,4 +154,5 @@ export default {
   post: Post,
   warning: Warning,
   title: Title,
+  disableFees: () => true,
 };

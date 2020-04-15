@@ -10,6 +10,10 @@ import reset from "./reset";
 
 export const GlobalStyle = createGlobalStyle`
   ${reset};
+  
+  #react-root {
+    background-color: ${p => p.theme.colors.palette.background.default};
+  }
 
   .tippy-content {
     padding: 0 !important;

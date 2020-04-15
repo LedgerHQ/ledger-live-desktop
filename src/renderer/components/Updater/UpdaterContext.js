@@ -19,7 +19,9 @@ export type UpdateStatus =
 export type UpdaterContextType = {
   status: UpdateStatus,
   downloadProgress: number,
+  version: ?string,
   quitAndInstall: () => Promise<void>,
+  downloadUpdate: () => Promise<void>,
   setStatus: UpdateStatus => void,
   error: ?Error,
 };
@@ -33,6 +35,7 @@ type UpdaterProviderProps = {
 type UpdaterProviderState = {
   status: UpdateStatus,
   downloadProgress: number,
+  version?: string,
   error: ?Error,
 };
 
@@ -61,12 +64,17 @@ class Provider extends Component<UpdaterProviderProps, UpdaterProviderState> {
 
   listener = (
     e: IpcRendererEvent,
-    args: { status: UpdateStatus, payload?: { percent?: number } },
+    args: { status: UpdateStatus, payload?: { percent?: number, version?: string } },
   ) => {
     if (args.status === "download-progress") {
       const downloadProgress =
         args.payload && args.payload.percent ? +args.payload.percent.toFixed(0) : 0;
       this.setState({ status: args.status, downloadProgress });
+    } else if (args.status === "update-available") {
+      this.setState({
+        status: args.status,
+        version: args.payload ? args.payload.version : undefined,
+      });
     } else {
       this.setStatus(args.status);
     }
@@ -80,14 +88,18 @@ class Provider extends Component<UpdaterProviderProps, UpdaterProviderState> {
 
   quitAndInstall = () => ipcRenderer.send("updater", "quit-and-install");
 
+  downloadUpdate = () => ipcRenderer.send("updater", "download-update");
+
   render() {
-    const { status, downloadProgress, error } = this.state;
+    const { status, downloadProgress, error, version } = this.state;
     const value = {
       status,
+      version,
       downloadProgress,
       error,
       setStatus: this.setStatus,
       quitAndInstall: this.quitAndInstall,
+      downloadUpdate: this.downloadUpdate,
     };
     return <UpdaterContext.Provider value={value}>{this.props.children}</UpdaterContext.Provider>;
   }

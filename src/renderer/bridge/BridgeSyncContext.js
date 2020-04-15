@@ -10,9 +10,11 @@ import { recentlyChangedExperimental } from "~/renderer/experimental";
 import { recentlyKilledInternalProcess, onUnusualInternalProcessError } from "~/renderer/reset";
 import { track } from "~/renderer/analytics/segment";
 import { prepareCurrency, hydrateCurrency } from "./cache";
+import { blacklistedTokenIdsSelector } from "~/renderer/reducers/settings";
 
 export const BridgeSyncProvider = ({ children }: { children: React$Node }) => {
   const accounts = useSelector(accountsSelector);
+  const blacklistedTokenIds = useSelector(blacklistedTokenIdsSelector);
   const dispatch = useDispatch();
   const updateAccount = useCallback(
     (accountId, updater) => dispatch(updateAccountWithUpdater(accountId, updater)),
@@ -42,6 +44,7 @@ export const BridgeSyncProvider = ({ children }: { children: React$Node }) => {
       trackAnalytics={track}
       prepareCurrency={prepareCurrency}
       hydrateCurrency={hydrateCurrency}
+      blacklistedTokenIds={blacklistedTokenIds}
     >
       {children}
     </BridgeSync>

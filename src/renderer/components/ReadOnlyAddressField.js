@@ -35,6 +35,14 @@ const CopyFeedback = styled(Box).attrs(() => ({
   border-left: 1px solid ${p => p.theme.colors.palette.divider};
 `;
 
+const ClipboardSuspicious = styled.div`
+  font-family: Inter;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  color: ${p => p.theme.colors.alertRed};
+`;
+
 const CopyBtn = styled(Box).attrs(() => ({
   bg: "palette.background.paper",
   color: "palette.text.shade100",
@@ -58,6 +66,7 @@ type Props = {
 
 function ReadOnlyAddressField({ address }: Props) {
   const [copyFeedback, setCopyFeedback] = useState(false);
+  const [clibboardChanged, setClipboardChanged] = useState(false);
 
   const copyTimeout = useRef();
 
@@ -65,6 +74,12 @@ function ReadOnlyAddressField({ address }: Props) {
     clipboard.writeText(address);
     setCopyFeedback(true);
     clearTimeout(copyTimeout.current);
+    setTimeout(() => {
+      const copiedAddress = clipboard.readText();
+      if (copiedAddress !== address) {
+        setClipboardChanged(true);
+      }
+    }, 300);
     copyTimeout.current = setTimeout(() => setCopyFeedback(false), 1e3);
   }, [address]);
 
@@ -75,19 +90,25 @@ function ReadOnlyAddressField({ address }: Props) {
   }, []);
 
   return (
-    <Box horizontal alignItems="stretch">
-      <Address>
-        {!copyFeedback ? null : (
-          <CopyFeedback>
-            <Trans i18nKey="common.addressCopied" />
-          </CopyFeedback>
-        )}
-        {address}
-      </Address>
-
-      <CopyBtn onClick={onCopy}>
-        <IconCopy size={16} />
-      </CopyBtn>
+    <Box vertical alignItems="center">
+      {clibboardChanged ? (
+        <ClipboardSuspicious>
+          <Trans i18nKey="common.addressCopiedSuspicious" />
+        </ClipboardSuspicious>
+      ) : null}
+      <Box horizontal alignItems="stretch">
+        <Address>
+          {!copyFeedback ? null : (
+            <CopyFeedback>
+              <Trans i18nKey="common.addressCopied" />
+            </CopyFeedback>
+          )}
+          {address}
+        </Address>
+        <CopyBtn onClick={onCopy}>
+          <IconCopy size={16} />
+        </CopyBtn>
+      </Box>
     </Box>
   );
 }

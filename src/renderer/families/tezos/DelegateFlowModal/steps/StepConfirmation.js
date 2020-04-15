@@ -4,6 +4,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import styled, { withTheme } from "styled-components";
 import { Trans } from "react-i18next";
+import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import { multiline } from "~/renderer/styles/helpers";
 import { openModal, closeModal } from "~/renderer/actions/modals";
 import { urls } from "~/config/urls";
@@ -48,6 +49,7 @@ const StepConfirmation = ({
     return (
       <Container>
         <TrackPage category="Delegation Flow" name="Step Confirmed" />
+        <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={
             <Trans
@@ -105,7 +107,7 @@ export const StepConfirmationFooter = ({
       <Box mr={2} ff="Inter|SemiBold" fontSize={4}>
         <LinkWithExternalIcon
           label={<Trans i18nKey="delegation.howItWorks" />}
-          onClick={() => openURL(urls.delegation)}
+          onClick={() => openURL(urls.stakingTezos)}
         />
       </Box>
       {concernedOperation ? (

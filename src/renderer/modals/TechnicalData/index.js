@@ -42,7 +42,7 @@ class TechnicalData extends PureComponent<Props, *> {
     ];
 
     return (
-      <Modal name="MODAL_TECHNICAL_DATA" centered>
+      <Modal name="MODAL_TECHNICAL_DATA" onClose={this.onClose} centered>
         <ModalBody
           onClose={this.onClose}
           title={t("onboarding.analytics.technicalData.mandatoryContextual.title")}

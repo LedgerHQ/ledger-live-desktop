@@ -63,7 +63,7 @@ class ShareAnalyticsC extends PureComponent<Props, *> {
       },
     ];
     return (
-      <Modal name="MODAL_SHARE_ANALYTICS" centered>
+      <Modal name="MODAL_SHARE_ANALYTICS" onClose={this.onClose} centered>
         <ModalBody
           onClose={this.onClose}
           title={t("onboarding.analytics.shareAnalytics.title")}

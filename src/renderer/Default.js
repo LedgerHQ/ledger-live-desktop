@@ -6,6 +6,7 @@ import { Route, Switch, useLocation } from "react-router-dom";
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
 import CounterValues from "~/renderer/countervalues";
 
+import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
 import Track from "~/renderer/analytics/Track";
 import Dashboard from "~/renderer/screens/dashboard";
 import Settings from "~/renderer/screens/settings";
@@ -76,6 +77,8 @@ const Default = () => {
                 <IsNewVersion />
 
                 {process.env.DEBUG_UPDATE && <DebugUpdater />}
+
+                <SyncNewAccounts priority={2} />
 
                 <Box
                   grow

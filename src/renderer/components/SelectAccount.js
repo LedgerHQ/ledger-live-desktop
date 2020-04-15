@@ -15,7 +15,7 @@ import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { createFilter } from "react-select";
 import { createStructuredSelector } from "reselect";
-import { accountsSelector } from "~/renderer/reducers/accounts";
+import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import Select from "~/renderer/components/Select";
@@ -23,7 +23,7 @@ import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import Ellipsis from "~/renderer/components/Ellipsis";
 
 const mapStateToProps = createStructuredSelector({
-  accounts: accountsSelector,
+  accounts: shallowAccountsSelector,
 });
 
 const Tick = styled.div`

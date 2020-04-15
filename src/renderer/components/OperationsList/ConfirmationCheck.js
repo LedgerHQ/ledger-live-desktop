@@ -35,6 +35,19 @@ const border = p =>
         p.type === "IN" ? p.marketColor : rgba(p.theme.colors.palette.text.shade60, 0.2)
       }`;
 
+function inferColor(p) {
+  switch (p.type) {
+    case "IN":
+      return p.marketColor;
+    case "FREEZE":
+      return p.theme.colors.wallet;
+    case "REWARD":
+      return p.theme.colors.gold;
+    default:
+      return p.theme.colors.palette.text.shade60;
+  }
+}
+
 const Container: ThemedComponent<{
   isConfirmed: boolean,
   type: string,
@@ -44,13 +57,9 @@ const Container: ThemedComponent<{
   bg: p.hasFailed
     ? rgba(p.theme.colors.alertRed, 0.05)
     : p.isConfirmed
-    ? rgba(p.type === "IN" ? p.marketColor : p.theme.colors.palette.text.shade60, 0.2)
+    ? rgba(inferColor(p), 0.2)
     : "none",
-  color: p.hasFailed
-    ? p.theme.colors.alertRed
-    : p.type === "IN"
-    ? p.marketColor
-    : p.theme.colors.palette.text.shade60,
+  color: p.hasFailed ? p.theme.colors.alertRed : inferColor(p),
   alignItems: "center",
   justifyContent: "center",
 }))`

@@ -100,7 +100,7 @@ class AccountList extends Component<Props, State> {
     return (
       <div style={{ paddingBottom: 70 }}>
         <GenericBox horizontal p={0} alignItems="center">
-          <SearchBox onTextChange={this.onTextChange} search={search} />
+          <SearchBox autoFocus onTextChange={this.onTextChange} search={search} />
           <DisplayOptions
             onModeChange={onModeChange}
             onRangeChange={onRangeChange}

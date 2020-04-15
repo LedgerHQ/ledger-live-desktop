@@ -38,10 +38,10 @@ const Header = () => (
       <Trans i18nKey="delegation.amount" />
     </TableLine>
     <TableLine>
-      <Trans i18nKey="delegation.duration" />
+      <Trans i18nKey="tron.voting.percentageTP" />
     </TableLine>
     <TableLine>
-      <Trans i18nKey="tron.voting.percentageTP" />
+      <Trans i18nKey="delegation.duration" />
     </TableLine>
   </Wrapper>
 );

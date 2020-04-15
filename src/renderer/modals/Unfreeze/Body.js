@@ -1,7 +1,7 @@
 // @flow
 import React, { useState, useCallback, useMemo } from "react";
 import { compose } from "redux";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import { BigNumber } from "bignumber.js";
@@ -29,6 +29,45 @@ import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepCo
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
 
+/** @TODO move this to common */
+export const getUnfreezeData = (
+  account: Account,
+): {
+  unfreezeBandwidth: BigNumber,
+  unfreezeEnergy: BigNumber,
+  canUnfreezeBandwidth: boolean,
+  canUnfreezeEnergy: boolean,
+  bandwidthExpiredAt: Date,
+  energyExpiredAt: Date,
+} => {
+  const { tronResources } = account;
+  const {
+    frozen: { bandwidth, energy },
+  } = tronResources || {};
+
+  /** ! expiredAt should always be set with the amount if not this will disable the field by default ! */
+  const { amount: bandwidthAmount, expiredAt: bandwidthExpiredAt } = bandwidth || {};
+  const _bandwidthExpiredAt = +new Date(bandwidthExpiredAt);
+
+  const { amount: energyAmount, expiredAt: energyExpiredAt } = energy || {};
+  const _energyExpiredAt = +new Date(energyExpiredAt);
+
+  const unfreezeBandwidth = BigNumber(bandwidthAmount || 0);
+  const canUnfreezeBandwidth = unfreezeBandwidth.gt(0) && Date.now() > _bandwidthExpiredAt;
+
+  const unfreezeEnergy = BigNumber(energyAmount || 0);
+  const canUnfreezeEnergy = unfreezeEnergy.gt(0) && Date.now() > _energyExpiredAt;
+
+  return {
+    unfreezeBandwidth,
+    unfreezeEnergy,
+    canUnfreezeBandwidth,
+    canUnfreezeEnergy,
+    bandwidthExpiredAt,
+    energyExpiredAt,
+  };
+};
+
 type OwnProps = {|
   stepId: StepId,
   onClose: () => void,
@@ -50,12 +89,9 @@ type StateProps = {|
   openModal: string => void,
 |};
 
-type Props = {|
-  ...OwnProps,
-  ...StateProps,
-|};
+type Props = OwnProps & StateProps;
 
-const createSteps = (): Array<St> => [
+const steps: Array<St> = [
   {
     id: "amount",
     label: <Trans i18nKey="unfreeze.steps.amount.title" />,
@@ -67,7 +103,7 @@ const createSteps = (): Array<St> => [
     id: "connectDevice",
     label: <Trans i18nKey="unfreeze.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
-    onBack: ({ transitionTo }: StepProps) => transitionTo("rewards"),
+    onBack: ({ transitionTo }: StepProps) => transitionTo("amount"),
   },
   {
     id: "confirmation",
@@ -96,11 +132,10 @@ const Body = ({
   params,
   name,
 }: Props) => {
-  const [steps] = useState(createSteps);
-
   const [optimisticOperation, setOptimisticOperation] = useState(null);
   const [transactionError, setTransactionError] = useState(null);
   const [signed, setSigned] = useState(false);
+  const dispatch = useDispatch();
 
   const {
     transaction,
@@ -113,9 +148,7 @@ const Body = ({
   } = useBridgeTransaction(() => {
     const { account, parentAccount } = params;
 
-    const { tronResources: { frozen: { bandwidth } = {} } = {} } = account;
-
-    const UnfreezeBandwidth = BigNumber((bandwidth && bandwidth.amount) || 0);
+    const { canUnfreezeBandwidth } = getUnfreezeData(account);
 
     const bridge = getAccountBridge(account, parentAccount);
 
@@ -123,7 +156,7 @@ const Body = ({
 
     const transaction = bridge.updateTransaction(t, {
       mode: "unfreeze",
-      resource: UnfreezeBandwidth.gt(0) ? "BANDWIDTH" : "ENERGY",
+      resource: canUnfreezeBandwidth ? "BANDWIDTH" : "ENERGY",
     });
 
     return { account, parentAccount, transaction };
@@ -136,7 +169,7 @@ const Body = ({
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId]);
 
   const handleRetry = useCallback(() => {
-    onChangeStepId("connectDevice");
+    onChangeStepId("amount");
   }, [onChangeStepId]);
 
   const handleTransactionError = useCallback((error: Error) => {
@@ -149,13 +182,15 @@ const Body = ({
   const handleOperationBroadcasted = useCallback(
     (optimisticOperation: Operation) => {
       if (!account) return;
-      updateAccountWithUpdater(account.id, account =>
-        addPendingOperation(account, optimisticOperation),
+      dispatch(
+        updateAccountWithUpdater(account.id, account =>
+          addPendingOperation(account, optimisticOperation),
+        ),
       );
       setOptimisticOperation(optimisticOperation);
       setTransactionError(null);
     },
-    [account],
+    [account, dispatch],
   );
 
   const statusError = useMemo(() => status.errors && Object.values(status.errors)[0], [

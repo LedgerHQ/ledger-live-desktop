@@ -18,7 +18,7 @@ import type { TFunction } from "react-i18next";
 import IconPlus from "~/renderer/icons/Plus";
 import TokenRow from "~/renderer/components/TokenRow";
 import Button from "~/renderer/components/Button";
-import { urls } from "~/config/urls";
+import { supportLinkByTokenType } from "~/config/urls";
 import LabelWithExternalIcon from "~/renderer/components/LabelWithExternalIcon";
 import { openURL } from "~/renderer/linking";
 import { track } from "~/renderer/analytics/segment";
@@ -93,10 +93,16 @@ class TokensList extends PureComponent<Props> {
     const { account, t, range } = this.props;
     if (!account.subAccounts) return null;
     const subAccounts = listSubAccounts(account);
-    const isTokenAccount = listTokenTypesForCryptoCurrency(account.currency).length > 0;
+    const { currency } = account;
+    const isTokenAccount = listTokenTypesForCryptoCurrency(currency).length > 0;
     const isEmpty = subAccounts.length === 0;
 
     if (!isTokenAccount && isEmpty) return null;
+
+    const url =
+      currency && currency.type === "TokenCurrency"
+        ? supportLinkByTokenType[currency.tokenType]
+        : null;
 
     return (
       <Box mb={50}>
@@ -109,18 +115,20 @@ class TokensList extends PureComponent<Props> {
         {isEmpty && (
           <EmptyState>
             <Placeholder>
-              <Text color="palette.text.shade80" ff="Inter|SemiBold" fontSize={4}>
-                <Trans i18nKey={"tokensList.placeholder"} />{" "}
-                <LabelWithExternalIcon
-                  color="wallet"
-                  ff="Inter|SemiBold"
-                  onClick={() => {
-                    openURL(urls.managerERC20);
-                    track("More info on Manage ERC20 tokens");
-                  }}
-                  label={t("tokensList.link")}
-                />
-              </Text>
+              {url ? (
+                <Text color="palette.text.shade80" ff="Inter|SemiBold" fontSize={4}>
+                  <Trans i18nKey={"tokensList.placeholder"} />{" "}
+                  <LabelWithExternalIcon
+                    color="wallet"
+                    ff="Inter|SemiBold"
+                    onClick={() => {
+                      openURL(url);
+                      track("More info on Manage ERC20 tokens");
+                    }}
+                    label={t("tokensList.link")}
+                  />
+                </Text>
+              ) : null}
             </Placeholder>
             <ReceiveButton onClick={this.onReceiveClick} />
           </EmptyState>

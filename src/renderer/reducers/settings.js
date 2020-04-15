@@ -14,6 +14,7 @@ import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getLanguages } from "~/config/languages";
 import type { State } from ".";
 import { osLangAndRegionSelector } from "~/renderer/reducers/application";
+import { listSupportedFiats } from "@ledgerhq/live-common/lib/data/fiat";
 
 export type CurrencySettings = {
   confirmationsNb: number,
@@ -94,6 +95,7 @@ export type SettingsState = {
   discreetMode: boolean,
   starredAccountIds?: string[],
   hasInstalledApps: boolean,
+  blacklistedTokenIds: string[],
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -129,9 +131,18 @@ const INITIAL_STATE: SettingsState = {
   sidebarCollapsed: false,
   discreetMode: false,
   hasInstalledApps: true,
+  blacklistedTokenIds: [],
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
+
+export const supportedCountervalues = [...listSupportedFiats(), ...possibleIntermediaries].map<any>(
+  currency => ({
+    value: currency.ticker,
+    label: `${currency.name} - ${currency.ticker}`,
+    currency,
+  }),
+);
 
 const handlers: Object = {
   SETTINGS_SET_PAIRS: (
@@ -163,15 +174,37 @@ const handlers: Object = {
   FETCH_SETTINGS: (
     state: SettingsState,
     { payload: settings }: { payload: $Shape<SettingsState> },
-  ) => ({
-    ...state,
-    ...settings,
-    loaded: true,
-  }),
+  ) => {
+    if (
+      settings.counterValue &&
+      !supportedCountervalues.find(({ currency }) => currency.ticker === settings.counterValue)
+    ) {
+      settings.counterValue = INITIAL_STATE.counterValue;
+    }
+    return {
+      ...state,
+      ...settings,
+      loaded: true,
+    };
+  },
   SETTINGS_DISMISS_BANNER: (state: SettingsState, { payload: bannerId }) => ({
     ...state,
     dismissedBanners: [...state.dismissedBanners, bannerId],
   }),
+  SHOW_TOKEN: (state: SettingsState, { payload: tokenId }) => {
+    const ids = state.blacklistedTokenIds;
+    return {
+      ...state,
+      blacklistedTokenIds: ids.filter(id => id !== tokenId),
+    };
+  },
+  BLACKLIST_TOKEN: (state: SettingsState, { payload: tokenId }) => {
+    const ids = state.blacklistedTokenIds;
+    return {
+      ...state,
+      blacklistedTokenIds: [...ids, tokenId],
+    };
+  },
   // used to debug performance of redux updates
   DEBUG_TICK: state => ({ ...state }),
 };
@@ -284,6 +317,7 @@ export const autoLockTimeoutSelector = (state: State) => state.settings.autoLock
 export const shareAnalyticsSelector = (state: State) => state.settings.shareAnalytics;
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange;
 export const hasInstalledAppsSelector = (state: State) => state.settings.hasInstalledApps;
+export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;
 
@@ -303,11 +337,19 @@ export const exportSettingsSelector: OutputSelector<State, void, *> = createSele
   state => state.settings.currenciesSettings,
   state => state.settings.pairExchanges,
   developerModeSelector,
-  (counterValueCurrency, currenciesSettings, pairExchanges, developerModeEnabled) => ({
+  blacklistedTokenIdsSelector,
+  (
+    counterValueCurrency,
+    currenciesSettings,
+    pairExchanges,
+    developerModeEnabled,
+    blacklistedTokenIds,
+  ) => ({
     counterValue: counterValueCurrency.ticker,
     currenciesSettings,
     pairExchanges,
     developerModeEnabled,
+    blacklistedTokenIds,
   }),
 );
 

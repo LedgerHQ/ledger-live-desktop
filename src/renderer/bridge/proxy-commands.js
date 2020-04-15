@@ -113,7 +113,7 @@ const cmdAccountEstimateMaxSpendable = (o: {
   const account = fromAccountLikeRaw(o.account);
   const parentAccount = o.parentAccount ? fromAccountRaw(o.parentAccount) : null;
   const transaction = o.transaction ? fromTransactionRaw(o.transaction) : null;
-  const bridge = bridgeImpl.getAccountBridge(account, null);
+  const bridge = bridgeImpl.getAccountBridge(account, parentAccount);
   return from(
     bridge.estimateMaxSpendable({ account, parentAccount, transaction }).then(o => o.toString()),
   );

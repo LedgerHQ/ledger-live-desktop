@@ -91,6 +91,9 @@ class BalanceSummary extends PureComponent<Props> {
       discreetMode,
     } = this.props;
     const displayCountervalue = countervalueFirst && portfolio.countervalueAvailable;
+
+    const chartMagnitude = displayCountervalue ? counterValue.units[0].magnitude : unit.magnitude;
+
     return (
       <Card p={0} py={5}>
         <Box px={6}>
@@ -111,6 +114,7 @@ class BalanceSummary extends PureComponent<Props> {
           <Chart
             key={chartId}
             id={chartId}
+            magnitude={chartMagnitude}
             color={chartColor}
             data={portfolio.history}
             height={200}

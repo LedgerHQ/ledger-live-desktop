@@ -441,11 +441,11 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
             <DataList lines={uniqueSenders} t={t} />
           </Box>
           <B />
-          <Box>
-            <Box horizontal>
-              {recipients.length > 1 ? (
-                <>
-                  <OpDetailsTitle>{t("operationDetails.to")}</OpDetailsTitle>
+          {recipients.length ? (
+            <Box>
+              <Box horizontal>
+                <OpDetailsTitle>{t("operationDetails.to")}</OpDetailsTitle>
+                {recipients.length > 1 ? (
                   <Link>
                     <FakeLink
                       underline
@@ -461,11 +461,11 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                       {t("operationDetails.multipleAddresses")}
                     </FakeLink>
                   </Link>
-                </>
-              ) : null}
+                ) : null}
+              </Box>
+              <DataList lines={recipients} t={t} />
             </Box>
-            <DataList lines={recipients} t={t} />
-          </Box>
+          ) : null}
           <OpDetailsExtra extra={extra} type={type} account={account} />
         </Box>
       )}

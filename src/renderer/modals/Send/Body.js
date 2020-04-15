@@ -123,6 +123,7 @@ const Body = ({
 }: Props) => {
   const openedFromAccount = !!params.account;
   const [steps] = useState(createSteps);
+
   const {
     transaction,
     setTransaction,
@@ -232,7 +233,7 @@ const Body = ({
   return (
     <Stepper {...stepperProps}>
       <SyncSkipUnderPriority priority={100} />
-      <Track onUnmount event="CloseModalDelegate" />
+      <Track onUnmount event="CloseModalSend" />
     </Stepper>
   );
 };

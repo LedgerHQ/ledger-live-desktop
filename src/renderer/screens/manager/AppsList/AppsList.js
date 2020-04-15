@@ -184,6 +184,7 @@ const AppsList = ({
             <FilterHeader isIncomplete={isIncomplete}>
               <Box flex="1" horizontal height={40}>
                 <SearchBox
+                  autoFocus
                   onTextChange={onTextChange}
                   search={query}
                   placeholder={t(

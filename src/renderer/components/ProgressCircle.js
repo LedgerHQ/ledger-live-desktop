@@ -5,6 +5,7 @@ import styled, { css, keyframes } from "styled-components";
 import useTheme from "~/renderer/hooks/useTheme";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
+import { lighten } from "~/renderer/styles/helpers";
 
 const STROKE_WIDTH = 4;
 
@@ -62,16 +63,16 @@ const ProgressCircle = ({ size, progress }: Props) => {
     <Container size={size}>
       <TextContainer>
         <Text
-          ff="Inter|Regular"
+          ff="Inter|SemiBold"
           color={progress === 0 ? "palette.text.shade80" : "wallet"}
-          fontSize={5}
+          fontSize={4}
         >
-          {`${Math.round(progress * 100)}%`}
+          {`${Math.floor(progress * 100)}%`}
         </Text>
       </TextContainer>
       <svg height={size} width={size}>
         <circle
-          stroke={useTheme("colors.palette.text.shade40")}
+          stroke={lighten(useTheme("colors.wallet"), 0.2)}
           fill="transparent"
           strokeWidth={STROKE_WIDTH}
           style={{ strokeDashoffset }}
