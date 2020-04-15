@@ -107,7 +107,7 @@ export default class Finish extends Component<StepProps, *> {
             <Description>{t("onboarding.finish.desc")}</Description>
           </Box>
           <Box p={5}>
-            <Button primary onClick={() => finish()} id="modal-continue-button">
+            <Button primary onClick={() => finish()} id="onboarding-open-button">
               {t("onboarding.finish.openAppButton")}
             </Button>
           </Box>
@@ -123,6 +123,7 @@ export default class Finish extends Component<StepProps, *> {
 }
 
 type SocMed = {
+  key: string,
   icon: any,
   url: string,
   onClick: string => void,
@@ -136,9 +137,9 @@ const StyledBox: ThemedComponent<{}> = styled(Box)`
 `;
 
 export function SocialMediaBox({ socMed }: { socMed: SocMed }) {
-  const { icon, url, onClick } = socMed;
+  const { key, icon, url, onClick } = socMed;
   return (
-    <StyledBox horizontal onClick={() => onClick(url)}>
+    <StyledBox horizontal onClick={() => onClick(url)} id={`onboarding-${key}-button`}>
       {icon}
     </StyledBox>
   );

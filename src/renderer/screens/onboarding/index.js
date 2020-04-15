@@ -173,7 +173,7 @@ class OnboardingC extends PureComponent<Props> {
     };
 
     return (
-      <Container id="main-container">
+      <Container id="onboarding-container">
         {step.options.showBreadcrumb && <OnboardingBreadcrumb />}
         {onboardingRelaunched ? (
           <CloseContainer onClick={this.cancelRelaunch}>

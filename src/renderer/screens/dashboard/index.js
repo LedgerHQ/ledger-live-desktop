@@ -83,7 +83,7 @@ const DashboardPage = ({ saveSettings }: Props) => {
         totalOperations={totalOperations}
         totalCurrencies={totalCurrencies}
       />
-      <Box flow={7}>
+      <Box flow={7} id="portfolio-container">
         {!hasInstalledApps ? (
           <EmptyStateInstalledApps />
         ) : totalAccounts > 0 ? (

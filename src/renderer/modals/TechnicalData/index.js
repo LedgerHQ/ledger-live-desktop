@@ -62,7 +62,7 @@ class TechnicalData extends PureComponent<Props, *> {
           )}
           renderFooter={() => (
             <>
-              <Button onClick={this.onClose} primary data-e2e="modal_buttonClose_techData">
+              <Button onClick={this.onClose} primary>
                 <Trans i18nKey="common.close" />
               </Button>
             </>

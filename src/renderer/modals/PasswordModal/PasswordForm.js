@@ -58,7 +58,6 @@ class PasswordForm extends PureComponent<Props> {
               id="newPassword"
               onChange={onChange("newPassword")}
               value={newPassword}
-              data-e2e="setPassword_NewPassword"
             />
           </Box>
           <Box flow={1}>
@@ -72,7 +71,6 @@ class PasswordForm extends PureComponent<Props> {
               onChange={onChange("confirmPassword")}
               value={confirmPassword}
               error={!isValid() && confirmPassword.length > 0 && new PasswordsDontMatchError()}
-              data-e2e="setPassword_ConfirmPassword"
             />
           </Box>
           <button hidden type="submit" />

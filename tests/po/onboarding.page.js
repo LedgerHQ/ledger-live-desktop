@@ -39,10 +39,6 @@ export default class OnboardingPage extends Page {
     return this.app.client.element("#onboarding-buynew-button");
   }
 
-  get trackOrderButton() {
-    return this.app.client.element("#onboarding-trackorder-button");
-  }
-
   get learnMoreButton() {
     return this.app.client.element("#onboarding-learnmore-button");
   }
@@ -59,20 +55,12 @@ export default class OnboardingPage extends Page {
     return this.app.client.element("#onboarding-select-blue");
   }
 
-  get genuineCheckPinRatio() {
-    return "#onboarding-genuine-pin-ratio";
-  }
-
-  get genuineCheckSeedRatio() {
-    return "#onboarding-genuine-seed-ratio";
-  }
-
-  get genuineCheckButton() {
-    return this.app.client.element("#onboarding-genuine-check");
-  }
-
   get continueButton() {
     return this.app.client.element("#onboarding-continue-button");
+  }
+
+  get skipButton() {
+    return this.app.client.element("#onboarding-skip-button");
   }
 
   get backButton() {
@@ -81,6 +69,22 @@ export default class OnboardingPage extends Page {
 
   get contactUsButton() {
     return this.app.client.element("#onboarding-contactus-button");
+  }
+
+  get openButton() {
+    return this.app.client.element("#onboarding-open-button");
+  }
+
+  get twitterButton() {
+    return this.app.client.element("#onboarding-twitter-button");
+  }
+
+  get githubButton() {
+    return this.app.client.element("#onboarding-github-button");
+  }
+
+  get redditButton() {
+    return this.app.client.element("#onboarding-reddit-button");
   }
 
   /** methods **/
@@ -136,37 +140,19 @@ export default class OnboardingPage extends Page {
     }
   }
 
-  async genuineCheckPin(answer) {
-    switch (answer) {
-      case "yes":
-        await this.app.client.element(`${this.genuineCheckPinRatio} > :nth-child(1)`).click();
-        break;
-      case "no":
-        await this.app.client.element(`${this.genuineCheckPinRatio} > :nth-child(2)`).click();
-        break;
-    }
+  continue() {
+    return this.continueButton.click().then(this.app.client.waitUntilWindowLoaded());
   }
 
-  async genuineCheckSeed(answer) {
-    switch (answer) {
-      case "yes":
-        await this.app.client.element(`${this.genuineCheckSeedRatio} > :nth-child(1)`).click();
-        break;
-      case "no":
-        await this.app.client.element(`${this.genuineCheckSeedRatio} > :nth-child(2)`).click();
-        break;
-    }
+  back() {
+    return this.backButton.click().then(this.app.client.waitUntilWindowLoaded());
   }
 
-  async genuineCheck() {
-    await this.genuineCheckButton.click();
+  open() {
+    return this.openButton.click().then(this.app.client.waitUntilWindowLoaded());
   }
 
-  async continue() {
-    await this.continueButton.click();
-  }
-
-  async back() {
-    await this.backButton.click();
+  isVisible() {
+    return this.app.client.waitForVisible("#onboarding-container");
   }
 }
