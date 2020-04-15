@@ -714,18 +714,7 @@
         "rippleTagPlaceholder": "Optional",
         "ethereumGasLimit": "Gas limit",
         "ethereumGasPrice": "Gas price",
-        "unitPerByte": "{{unit}} per byte",
-        "stellarMemo": "Memo",
-        "stellarNetwork": "Network",
-        "stellarNetworkPublic": "Public",
-        "stellarSource": "Source address",
-        "stellarMemoType": {
-          "MEMO_TEXT": "Memo Text",
-          "NO_MEMO": "Memo",
-          "MEMO_ID": "Memo ID",
-          "MEMO_HASH": "Memo Hash",
-          "MEMO_RETURN": "Memo Return"
-        }
+        "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
         "streaming": {
@@ -748,10 +737,6 @@
       "warning": {
         "tezos": {
           "text": "The amount to be sent will be deducted from the balance of your delegated account."
-        },
-        "stellar": {
-          "text": "When using a Memo, carefully verify the type used with the recipient",
-          "recommendedMemo": "When sending to this recipient, a memo may be required"
         }
       }
     },
@@ -1404,6 +1389,20 @@
     "read": "Read the Terms of Use",
     "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
   },
+  "families": {
+    "stellar": {
+      "memo": "Memo",
+      "memoType": {
+        "MEMO_TEXT": "Memo Text",
+        "NO_MEMO": "No Memo",
+        "MEMO_ID": "Memo ID",
+        "MEMO_HASH": "Memo Hash",
+        "MEMO_RETURN": "Memo Return"
+      },
+      "whatsMemo": "What is a memo?",
+      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+    }
+  },
   "errors": {
     "generic": {
       "title": "{{message}}",
@@ -1795,6 +1794,9 @@
     },
     "SourceHasMultiSign": {
       "title": "Please disable multisign to send {{currencyName}}"
+    },
+    "StellarMemoRecommended": {
+      "title": "When sending to this recipient, a memo may be required"
     }
   }
 }

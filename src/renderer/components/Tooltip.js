@@ -27,6 +27,7 @@ const ContentContainer = styled.div.attrs(p => ({
   word-wrap: break-word;
 `;
 
+// FIXME this is annoying wrapper!
 const ChildrenContainer = styled.div`
   display: inline-flex;
   flex-shrink: 1;
@@ -54,6 +55,7 @@ type Props = {
   arrow?: boolean,
   flip?: boolean,
   hideOnClick?: boolean,
+  disableWrapper?: boolean,
 };
 
 const ToolTip = ({
@@ -63,6 +65,7 @@ const ToolTip = ({
   content,
   delay,
   enabled,
+  disableWrapper = false,
   placement = "top",
   arrow = true,
   flip = true,
@@ -84,7 +87,7 @@ const ToolTip = ({
       flip={flip}
       hideOnClick={hideOnClick}
     >
-      <ChildrenContainer>{children}</ChildrenContainer>
+      {disableWrapper ? children : <ChildrenContainer>{children}</ChildrenContainer>}
     </Tippy>
   );
 };

@@ -2,11 +2,18 @@
 
 import invariant from "invariant";
 import React from "react";
-import { Trans, withTranslation } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import type { Account, Transaction } from "@ledgerhq/live-common/lib/types";
-import { shortAddressPreview } from "@ledgerhq/live-common/lib/account";
 import TransactionConfirmField from "~/renderer/components/TransactionConfirm/TransactionConfirmField";
 import Text from "~/renderer/components/Text";
+
+const deviceMemoLabels = {
+  MEMO_TEXT: "Memo Text",
+  NO_MEMO: "Memo",
+  MEMO_ID: "Memo ID",
+  MEMO_HASH: "Memo Hash",
+  MEMO_RETURN: "Memo Return",
+};
 
 const addressStyle = {
   wordBreak: "break-all",
@@ -19,15 +26,7 @@ const Post = ({ account, transaction }: { account: Account, transaction: Transac
 
   return (
     <>
-      <TransactionConfirmField
-        label={
-          <Trans
-            i18nKey={`send.steps.details.stellarMemoType.${
-              transaction.memoType ? transaction.memoType : "NO_MEMO"
-            }`}
-          />
-        }
-      >
+      <TransactionConfirmField label={deviceMemoLabels[transaction.memoType || "NO_MEMO"]}>
         <Text
           style={addressStyle}
           ml={1}
@@ -38,20 +37,9 @@ const Post = ({ account, transaction }: { account: Account, transaction: Transac
           {transaction.memoValue ? `${transaction.memoValue} ` : "[none]"}
         </Text>
       </TransactionConfirmField>
-      <TransactionConfirmField label={<Trans i18nKey="send.steps.details.stellarNetwork" />}>
+      <TransactionConfirmField label="Network">
         <Text ff="Inter|Medium" color="palette.text.shade80" fontSize={3}>
-          <Trans i18nKey="send.steps.details.stellarNetworkPublic" />
-        </Text>
-      </TransactionConfirmField>
-      <TransactionConfirmField label={<Trans i18nKey="send.steps.details.stellarSource" />}>
-        <Text
-          style={addressStyle}
-          ml={1}
-          ff="Inter|Medium"
-          color="palette.text.shade80"
-          fontSize={3}
-        >
-          {shortAddressPreview(account.freshAddress, 16)}
+          {"Public"}
         </Text>
       </TransactionConfirmField>
     </>

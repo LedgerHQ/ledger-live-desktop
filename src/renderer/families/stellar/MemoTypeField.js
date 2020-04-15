@@ -1,6 +1,7 @@
 // @flow
 
 import React, { useCallback } from "react";
+import { Trans } from "react-i18next";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { StellarMemoType } from "@ledgerhq/live-common/lib/families/stellar/types";
 import Select from "~/renderer/components/Select";
@@ -42,6 +43,10 @@ const MemoTypeField = ({
       onChange={onMemoTypeChange}
       value={selectedMemoType}
       options={options}
+      renderOption={({ label }) => <Trans i18nKey={`families.stellar.memoType.${label}`} />}
+      renderValue={({ data: { label } }) => (
+        <Trans i18nKey={`families.stellar.memoType.${label}`} />
+      )}
     />
   );
 };
