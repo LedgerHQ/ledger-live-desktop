@@ -33,9 +33,10 @@ const SR_MAX_VOTES = 5;
 const ScrollContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({
   vertical: true,
   pl: p.theme.overflow.trackSize,
+  mb: -40,
 }))`
   ${p => p.theme.overflow.yAuto};
-  flex: 1 1 280px;
+  flex: 1 0 240px;
 `;
 
 const Row: ThemedComponent<{ active: boolean, disabled: boolean }> = styled(Box).attrs(() => ({
@@ -97,6 +98,8 @@ const Title = styled(Box).attrs(() => ({
   horizontal: true,
   alignItems: "center",
 }))`
+  width: min-content;
+  max-width: 100%;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -129,6 +132,14 @@ const SubTitle = styled(Box).attrs(() => ({
   color: ${p => p.theme.colors.palette.text.shade60};
 `;
 
+const RightFloating = styled.div`
+  position: absolute;
+  right: 0;
+  padding: 8px;
+  pointer-events none;
+  opacity: 0;
+`;
+
 const InputBox = styled(Box).attrs(() => ({
   horizontal: true,
   alignItems: "center",
@@ -136,12 +147,10 @@ const InputBox = styled(Box).attrs(() => ({
   position: relative;
   flex-basis: 150px;
   height: 32px;
-`;
-
-const RightFloating = styled.div`
-  position: absolute;
-  right: 0;
-  padding: 8px;
+  &:focus > ${RightFloating}, &:focus-within > ${RightFloating} {
+    opacity: 1;
+    pointer-events: auto;
+  }
 `;
 
 const VoteInput = styled.input.attrs(() => ({
@@ -216,7 +225,6 @@ type SRRowProps = {
   disabled?: boolean,
   maxAvailable: number,
   notEnoughVotes: boolean,
-  autoFocus: boolean,
   onUpdateVote: (string, string) => void,
   onExternalLink: (address: string) => void,
 };
@@ -232,28 +240,15 @@ const _SRRow = ({
   onExternalLink,
   maxAvailable,
   notEnoughVotes,
-  autoFocus,
 }: SRRowProps) => {
   const inputRef = useRef();
-  const [focus, setFocus] = useState(false);
   const onTitleClick = useCallback(() => {
     onExternalLink(sr.address);
   }, [sr, onExternalLink]);
   const onFocus = useCallback(() => {
     inputRef.current && inputRef.current.select();
-    setFocus(true);
   }, []);
-  const onBlur = useCallback(e => {
-    if (
-      e.relatedTarget &&
-      e.relatedTarget.dataset &&
-      e.relatedTarget.dataset.preventvotesinputblur
-    ) {
-      // should let the click on max happen
-      return;
-    }
-    setFocus(false);
-  }, []);
+
   const onChange = useCallback(
     e => {
       onUpdateVote(sr.address, e.target.value);
@@ -264,16 +259,17 @@ const _SRRow = ({
     onUpdateVote(sr.address, String(maxAvailable + (value || 0)));
   }, [sr, onUpdateVote, maxAvailable, value]);
 
-  const itemExists = typeof value === "number";
-
-  useEffect(() => {
-    if (autoFocus && inputRef.current) {
+  /** focus input on row click */
+  const onClick = useCallback(() => {
+    if (inputRef && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [autoFocus]);
+  }, [inputRef]);
+
+  const itemExists = typeof value === "number";
 
   return (
-    <Row disabled={!value && disabled} active={!!value}>
+    <Row disabled={!value && disabled} active={!!value} onClick={onClick}>
       <IconContainer isSR={isSR}>{isSR ? <Trophy size={16} /> : <Medal size={16} />}</IconContainer>
       <InfoContainer>
         <Title onClick={onTitleClick}>
@@ -303,17 +299,15 @@ const _SRRow = ({
           value={itemExists ? String(value) : "0"}
           disabled={disabled}
           onFocus={onFocus}
-          onBlur={onBlur}
           onChange={onChange}
         />
-        {!maxAvailable || !focus ? null : (
+        {!maxAvailable || disabled ? null : (
           <RightFloating>
             <Button
               onClick={onMax}
               style={{ fontSize: "10px", padding: "0 8px", height: 22 }}
               primary
               small
-              data-preventVotesInputBlur
             >
               <Trans i18nKey="vote.steps.castVotes.max" />
             </Button>
@@ -389,19 +383,19 @@ const AmountField = ({ t, account, onChangeVotes, status, bridgePending, votes }
 
   const onSearch = useCallback(evt => setSearch(evt.target.value), [setSearch]);
 
-  const [autoFocusIndex, setAutoFocusIndex] = useState(-1);
-
-  const initialVotes = useRef(votes);
-
-  useEffect(() => {
-    const votes = initialVotes.current;
-    setAutoFocusIndex(votes.length === 0 ? 0 : SR.findIndex(sr => sr.address === votes[0].address));
-  }, [SR]);
-
   const notEnoughVotes = votesUsed > votesAvailable;
   const maxAvailable = Math.max(0, votesAvailable - votesUsed);
 
-  if (!status || SR.length === 0) return null;
+  /** auto focus first input on mount */
+  useEffect(() => {
+    /** $FlowFixMe */
+    if (scrollRef && scrollRef.current && scrollRef.current.querySelector) {
+      const firstInput = scrollRef.current.querySelector("input");
+      if (firstInput && firstInput.focus) firstInput.focus();
+    }
+  }, []);
+
+  if (!status) return null;
   return (
     <>
       <SearchContainer>
@@ -470,7 +464,6 @@ const AmountField = ({ t, account, onChangeVotes, status, bridgePending, votes }
               disabled={!item && votesSelected >= SR_MAX_VOTES}
               notEnoughVotes={notEnoughVotes}
               maxAvailable={maxAvailable}
-              autoFocus={i === autoFocusIndex}
             />
           );
         })}
