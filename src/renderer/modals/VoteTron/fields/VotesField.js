@@ -33,6 +33,7 @@ const SR_MAX_VOTES = 5;
 const ScrollContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({
   vertical: true,
   pl: p.theme.overflow.trackSize,
+  pb: 56,
 }))`
   ${p => p.theme.overflow.yAuto};
   flex: 1 1 280px;
