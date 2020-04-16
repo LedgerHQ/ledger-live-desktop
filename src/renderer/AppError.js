@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import theme, { colors } from "~/renderer/styles/theme";
 import palette from "~/renderer/styles/palettes";
@@ -18,15 +18,27 @@ const lightLiveTheme = {
     palette: themePalette,
   },
 };
+const reloadApp = event => {
+  if ((event.ctrlKey || event.metaKey) && event.key === "r") {
+    window.api.reloadRenderer();
+  }
+};
 
-const App = ({ language, error }: { error: Error, language: string }) => (
-  <LiveStyleSheetManager>
-    <ThemeProvider theme={lightLiveTheme}>
-      <RenderError withoutAppData error={error}>
-        <TriggerAppReady />
-      </RenderError>
-    </ThemeProvider>
-  </LiveStyleSheetManager>
-);
+const App = ({ language, error }: { error: Error, language: string }) => {
+  useEffect(() => {
+    window.addEventListener("keydown", reloadApp);
+    return () => window.removeEventListener("keydown", reloadApp);
+  }, []);
+
+  return (
+    <LiveStyleSheetManager>
+      <ThemeProvider theme={lightLiveTheme}>
+        <RenderError withoutAppData error={error}>
+          <TriggerAppReady />
+        </RenderError>
+      </ThemeProvider>
+    </LiveStyleSheetManager>
+  );
+};
 
 export default App;
