@@ -33,10 +33,10 @@ const SR_MAX_VOTES = 5;
 const ScrollContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({
   vertical: true,
   pl: p.theme.overflow.trackSize,
-  pb: 56,
+  mb: -40,
 }))`
   ${p => p.theme.overflow.yAuto};
-  flex: 1 1 280px;
+  flex: 1 0 240px;
 `;
 
 const Row: ThemedComponent<{ active: boolean, disabled: boolean }> = styled(Box).attrs(() => ({
@@ -308,7 +308,6 @@ const _SRRow = ({
               style={{ fontSize: "10px", padding: "0 8px", height: 22 }}
               primary
               small
-              data-preventVotesInputBlur
             >
               <Trans i18nKey="vote.steps.castVotes.max" />
             </Button>
