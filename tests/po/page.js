@@ -67,6 +67,10 @@ export default class Page {
     return this.app.client.element("#topbar-settings-button");
   }
 
+  get topbarLockButton() {
+    return this.app.client.element("#topbar-password-lock-button");
+  }
+
   async getThemeColor() {
     const bgColor = await this.theme.getCssProperty("background-color");
     return bgColor.parsed.hex;

@@ -5,6 +5,7 @@ import GenuinePage from "../po/genuine.page";
 import PasswordPage from "../po/password.page";
 import AnalyticsPage from "../po/analytics.page";
 import PortfolioPage from "../po/portfolio.page";
+import LockPage from "../po/lock.page";
 import data from "../data/onboarding/";
 import { deviceInfo155, mockListAppsResult } from "@ledgerhq/live-common/lib/apps/mock";
 
@@ -18,6 +19,7 @@ describe("When I launch the app for the first time", () => {
   let passwordPage;
   let analyticsPage;
   let portfolioPage;
+  let lockPage;
   let mockDeviceEvent;
 
   beforeAll(() => {
@@ -28,6 +30,7 @@ describe("When I launch the app for the first time", () => {
     passwordPage = new PasswordPage(app);
     analyticsPage = new AnalyticsPage(app);
     portfolioPage = new PortfolioPage(app);
+    lockPage = new LockPage(app);
     mockDeviceEvent = getMockDeviceEvent(app);
 
     return app.start();
@@ -413,21 +416,55 @@ describe("When I launch the app for the first time", () => {
         expect(await onboardingPage.redditButton.isVisible()).toBe(true);
       });
     });
+  });
 
-    describe("When opening the app", () => {
-      it("should display the terms of use modal", async () => {
-        await onboardingPage.open();
-        expect(await modalPage.isVisible()).toBe(true);
-        expect(await modalPage.termsCheckbox.isVisible()).toBe(true);
+  describe("When the app is opened", () => {
+    it("should display the terms of use modal", async () => {
+      await onboardingPage.open();
+      expect(await modalPage.isVisible()).toBe(true);
+      expect(await modalPage.termsCheckbox.isVisible()).toBe(true);
+    });
+
+    it("should close the modal after accepting the terms of use", async () => {
+      await modalPage.termsCheckbox.click();
+      await modalPage.confirmButton.click();
+      expect(await modalPage.isVisible(true)).toBe(false);
+    });
+
+    it("should display the portfolio", async () => {
+      expect(await portfolioPage.isVisible()).toBe(true);
+    });
+
+    it("should display the lock icon", async () => {
+      expect(await portfolioPage.topbarLockButton.isVisible()).toBe(true);
+    });
+
+    describe("When I lock the app", () => {
+      it("should display lock screen", async () => {
+        await portfolioPage.topbarLockButton.click();
+        expect(await portfolioPage.isVisible()).toBe(false);
+        expect(await lockPage.isVisible()).toBe(true);
+        expect(await lockPage.logo.isVisible()).toBe(true);
+        expect(await lockPage.pageTitle.getText()).toBe(data.lock.title);
+        expect(await lockPage.pageDescription.getText()).toBe(data.lock.description);
+        expect(await lockPage.passwordInput.isVisible()).toBe(true);
+        expect(await lockPage.revealButton.isVisible()).toBe(true);
+        expect(await lockPage.loginButton.isVisible()).toBe(true);
+        expect(await lockPage.forgottenPasswordButton.isVisible()).toBe(true);
       });
 
-      it("should close the modal after accepting the terms of use", async () => {
-        await modalPage.termsCheckbox.click();
-        await modalPage.confirmButton.click();
-        expect(await modalPage.isVisible(true)).toBe(false);
+      describe("When I click on reveal button", () => {
+        it("should reveal the password input value", async () => {
+          await lockPage.revealButton.click();
+          expect(await lockPage.passwordInput.getValue()).toBe(true);
+        });
       });
+    });
 
-      it("should display the portfolio", async () => {
+    describe("When I unlock the app", () => {
+      it("should back to the portfolio", async () => {
+        await lockPage.topbarLockButton.click();
+        expect(await lockPage.isVisible()).toBe(false);
         expect(await portfolioPage.isVisible()).toBe(true);
       });
     });
