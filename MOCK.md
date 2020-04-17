@@ -14,31 +14,50 @@ It allows us to interact with all parts of the application without the need for 
 ## Snippets per-flow
 These are a series of snippets that allow you to reach the OK and KO ends of a device interaction for each of the flows. For the KOs, we can essentially use the name of any error and it will throw it, depending on the flow ones make more sense than others.
 
-### Receive
-- OK `{ type: "opened" }`
-- KO `{ type: "error", error: { name: "WrongDeviceForAccount" } }`
-- KO `{ type: "error", error: { name: "DisconnectedDevice" } }`
+### Successfully opening an app
 
-### Send
-- OK `{ type: "opened" }`
-- KO `{ type: "error", error: { name: "WrongDeviceForAccount" } }`
-- KO `{ type: "error", error: { name: "UserRefusedOnDevice" } }`
+```js
+mockDeviceEvent({ type: "opened" })
+```
 
-### Add accounts
-- OK `{ type: "opened" }`
-- KO `{ type: "error", error: { name: "DisconnectedDevice" } }`
+### Device allow events
 
-### Genuine Check / Manager
-- OK (note it's not an array) We could make other profiles for devices available and fix the sizes of the apps returned by `mockListAppsResult` to test things like the storage breakdown in the manager. **Note** for devs in the console you will be able to run this snippet only because we've exposed the dependencies as globals when in mock.
+```js
+ mockDeviceEvent(
+    { type: "device-permission-requested", wording: "Allow manager" }
+  )
+```
+
+```js
+ mockDeviceEvent(
+    { type: "device-permission-requested" }
+  )
+```
+
+### Genuine Check / Manager termination
+
+(note it's not an array) We could make other profiles for devices available and fix the sizes of the apps returned by `mockListAppsResult` to test things like the storage breakdown in the manager. **Note** for devs in the console you will be able to run this snippet only because we've exposed the dependencies as globals when in mock.
 
   Refer to the signature of `mockListAppsResult` to see the doors it opens. But a tldr is the first parameter are the apps available in the catalog, the second is the list of installed apps.
-    ```
+
+```js
+ mockDeviceEvent(
     { type: "listingApps", deviceInfo: deviceInfo155 },  
     {  
       type: "result",  
       result: mockListAppsResult("Bitcoin", "Bitcoin", deviceInfo155),  
     }
+  )
    ```
 
-- KO `{ type: "error", error: { name: "GenuineCheckFailed" } }`
-- KO `{ type: "error", error: { name: "WrongDeviceForAccount" } }`
+#### Error samples
+
+```
+mockDeviceEvent({ type: "error", error: { name: "DisconnectedDevice" } })
+
+mockDeviceEvent({ type: "error", error: { name: "GenuineCheckFailed" } })
+
+mockDeviceEvent({ type: "error", error: { name: "WrongDeviceForAccount" } })
+
+mockDeviceEvent({ type: "error", error: { name: "UserRefusedOnDevice" } })
+```
