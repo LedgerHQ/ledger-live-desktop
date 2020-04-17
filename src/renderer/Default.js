@@ -34,6 +34,7 @@ import ContextMenuWrapper from "~/renderer/components/ContextMenu/ContextMenuWra
 import DebugUpdater from "~/renderer/components/Updater/DebugUpdater";
 import Page from "~/renderer/components/Page";
 import ModalsLayer from "./ModalsLayer";
+import DebugMock from "~/renderer/components/DebugMock";
 
 const reloadApp = event => {
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {
@@ -107,7 +108,7 @@ const Default = () => {
 
                 <LibcoreBusyIndicator />
                 <DeviceBusyIndicator />
-
+                <DebugMock />
                 <KeyboardContent sequence="BJBJBJ">
                   <PerfIndicator />
                 </KeyboardContent>

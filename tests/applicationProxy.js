@@ -44,3 +44,9 @@ export function applicationProxy(envVar = {}, userData = null) {
     env: envVar,
   });
 }
+
+export const getMockDeviceEvent = app => async (...events) => {
+  return await app.client.execute(e => {
+    window.mockDeviceEvent(...e);
+  }, events);
+};

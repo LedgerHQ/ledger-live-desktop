@@ -243,7 +243,7 @@ export const renderError = ({
   withExportLogs?: boolean,
   list?: boolean,
 }) => (
-  <Wrapper>
+  <Wrapper id={`error-${error.name}`}>
     <Logo>
       <ErrorIcon size={44} error={error} />
     </Logo>
@@ -342,7 +342,7 @@ export const renderLoading = ({
   modelId: DeviceModelId,
   children?: React$Node,
 }) => (
-  <Wrapper>
+  <Wrapper id="deviceAction-loading">
     <Header />
     <AnimationWrapper modelId={modelId}>
       <BigSpinner size={50} />

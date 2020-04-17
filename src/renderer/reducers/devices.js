@@ -46,7 +46,7 @@ const handlers: Object = {
 };
 
 export function getCurrentDevice(state: { devices: DevicesState }) {
-  if (getEnv("DEVICE_PROXY_URL")) {
+  if (getEnv("DEVICE_PROXY_URL") || getEnv("MOCK")) {
     // bypass the listen devices (we should remove modelId here by instead get it at open time if needed)
     return { path: "", modelId: "nanoS" };
   }
