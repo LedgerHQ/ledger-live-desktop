@@ -2,7 +2,7 @@
   "name": "ledger-live-desktop",
   "productName": "Ledger Live",
   "description": "Ledger Live - Desktop",
-  "version": "2.2.3-nightly.20200416T2202",
+  "version": "2.2.4",
   "author": "Ledger Live Team <team-live@ledger.fr>",
   "repository": "https://github.com/LedgerHQ/ledger-live-desktop",
   "license": "MIT",
