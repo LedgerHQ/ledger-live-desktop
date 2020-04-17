@@ -23,22 +23,18 @@ mockDeviceEvent({ type: "opened" })
 ### Device allow events
 
 ```js
- mockDeviceEvent(
-    { type: "device-permission-requested", wording: "Allow manager" }
-  )
+ mockDeviceEvent({ type: "device-permission-requested", wording: "Allow manager" })
 ```
 
 ```js
- mockDeviceEvent(
-    { type: "device-permission-requested" }
-  )
+ mockDeviceEvent({ type: "device-permission-requested" })
 ```
 
 ### Genuine Check / Manager termination
 
 (note it's not an array) We could make other profiles for devices available and fix the sizes of the apps returned by `mockListAppsResult` to test things like the storage breakdown in the manager. **Note** for devs in the console you will be able to run this snippet only because we've exposed the dependencies as globals when in mock.
 
-  Refer to the signature of `mockListAppsResult` to see the doors it opens. But a tldr is the first parameter are the apps available in the catalog, the second is the list of installed apps.
+Refer to the signature of `mockListAppsResult` to see the doors it opens. But a tldr is the first parameter are the apps available in the catalog, the second is the list of installed apps.
 
 ```js
  mockDeviceEvent(
