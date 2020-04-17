@@ -27,7 +27,7 @@ mockDeviceEvent({ type: "opened" })
 ```
 
 ```js
- mockDeviceEvent({ type: "device-permission-requested" })
+ mockDeviceEvent({ type: "device-permission-granted" })
 ```
 
 ### Genuine Check / Manager termination
