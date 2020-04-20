@@ -25,6 +25,7 @@ export const VISIBLE_STATUS = [
   "check-success",
   "error",
   "update-available",
+  "downloading-update",
 ];
 
 const CONTENT_BY_STATUS = (
@@ -51,6 +52,10 @@ const CONTENT_BY_STATUS = (
         <Trans i18nKey="update.quitAndInstall" />
       </FakeLink>
     ),
+  },
+  "downloading-update": {
+    Icon: IconUpdate,
+    message: <Trans i18nKey="update.downloadInProgress" />,
   },
   "update-available": {
     Icon: IconUpdate,
