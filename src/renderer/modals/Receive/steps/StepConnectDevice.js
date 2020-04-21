@@ -11,9 +11,12 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import { command } from "~/renderer/commands";
 
 import type { StepProps } from "../Body";
+import { mockedAppExec } from "~/renderer/components/DebugMock";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 
 const connectAppExec = command("connectApp");
-const action = createAction(connectAppExec);
+
+const action = createAction(getEnv("MOCK") ? mockedAppExec : connectAppExec);
 
 export default function StepConnectDevice({
   account,

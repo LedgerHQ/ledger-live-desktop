@@ -170,6 +170,11 @@ class Modal extends PureComponent<Props> {
     }
   };
 
+  /** combined with tab-index 0 this will allow tab navigation into the modal disabling tab navigation behind it */
+  setFocus = (r: *) => {
+    r && r.focus();
+  };
+
   swallowClick = (e: Event) => {
     e.preventDefault();
     e.stopPropagation();
@@ -214,6 +219,8 @@ class Modal extends PureComponent<Props> {
               backdropColor={backdropColor}
             >
               <BodyWrapper
+                tabIndex="0"
+                ref={this.setFocus}
                 state={state}
                 width={width}
                 onClick={this.swallowClick}

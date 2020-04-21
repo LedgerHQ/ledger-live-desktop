@@ -24,6 +24,7 @@ const Address = styled(Box).attrs(() => ({
   user-select: text;
   text-align: center;
   flex: 1;
+  word-break: break-all;
 `;
 
 const CopyFeedback = styled(Box).attrs(() => ({

@@ -7,18 +7,20 @@ import Tooltip from "~/renderer/components/Tooltip";
 import IconInfoCircle from "~/renderer/icons/InfoCircle";
 
 type Props = {
-  text: string,
+  text: React$Node,
+  children?: React$Node,
 };
 
 function LabelInfoTooltip(props: Props) {
-  const { text, ...p } = props;
+  const { text, children } = props;
   return (
-    <Box {...p}>
-      <Tooltip content={text} style={{ height: 12 }}>
+    <Tooltip disableWrapper content={text}>
+      <Box horizontal alignItems="center" flow={1}>
+        {children}
         <IconInfoCircle size={12} />
-      </Tooltip>
-    </Box>
+      </Box>
+    </Tooltip>
   );
 }
 
-export default React.memo<Props>(LabelInfoTooltip, (prev, next) => prev.text === next.text);
+export default React.memo<Props>(LabelInfoTooltip);

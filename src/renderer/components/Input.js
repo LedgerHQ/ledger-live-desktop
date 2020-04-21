@@ -242,11 +242,11 @@ const Input = React.forwardRef(function Input(
           onKeyDown={handleKeyDown}
         />
         {error ? (
-          <ErrorDisplay>
+          <ErrorDisplay id="input-error">
             <TranslatedError error={error} />
           </ErrorDisplay>
         ) : warning ? (
-          <WarningDisplay>
+          <WarningDisplay id="input-warning">
             <TranslatedError error={warning} />
           </WarningDisplay>
         ) : null}

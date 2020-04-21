@@ -3,53 +3,50 @@ import fs from "fs";
 import path from "path";
 import rimraf from "rimraf";
 import { Application } from "spectron";
-const { version } = require(`${process.cwd()}/package.json`);
 
-export function getConfigPath() {
+export function getUserPath() {
   const platform = os.platform();
-  let userDataPath;
+  let path;
+
   if (platform === "darwin") {
-    userDataPath = `${os.homedir()}/Library/Application Support/Ledger Live`;
+    path = `${os.homedir()}/Library/Application Support/Electron`;
   } else if (platform === "win32") {
-    userDataPath = "%AppData\\Roaming\\Ledger Live";
+    path = `${os.homedir()}/AppData/Roaming/Electron`;
   } else {
-    userDataPath = ".config/Ledger live";
+    path = `${os.homedir()}/.config/Electron`;
   }
-  return userDataPath;
+
+  return path;
 }
 
-export function getScreenshotPath(name) {
-  const screenshotPath = path.resolve(__dirname, "../data/screenshots");
-  return `${screenshotPath}/${name}.png`;
-}
+export function applicationProxy(envVar = {}, userData = null) {
+  const userPath = getUserPath();
 
-function getAppPath() {
-  const platform = os.platform();
-  let appPath;
-  if (platform === "darwin") {
-    appPath = "./dist/mac/Ledger Live.app/Contents/MacOS/Ledger Live";
-  } else if (platform === "win32") {
-    appPath = ".\\dist\\win-unpacked\\Ledger Live.exe";
-  } else {
-    appPath = `./dist/ledger-live-desktop-${version}-linux-x86_64.AppImage`;
-  }
-  return appPath;
-}
+  if (fs.existsSync(userPath)) rimraf.sync(userPath);
 
-export function applicationProxy(userData = null, envVar = {}) {
-  const configPath = getConfigPath();
-  if (fs.existsSync(configPath)) {
-    rimraf.sync(configPath);
-    fs.mkdirSync(configPath);
-  }
   if (userData != null) {
     const jsonFile = path.resolve("tests/setups/", userData);
-    fs.copyFileSync(jsonFile, `${configPath}/app.json`);
+
+    fs.mkdirSync(userPath);
+    console.log(`${userPath}/app.json`);
+    fs.copyFileSync(jsonFile, `${userPath}/app.json`);
   }
-  const app = new Application({
-    path: getAppPath(),
-    chromeDriverArgs: ["--disable-extensions", "disable-dev-shm-usage", "--no-sandbox"],
+
+  return new Application({
+    path: "./node_modules/.bin/electron",
+    args: [`${process.cwd()}/.webpack/main.bundle.js`],
+    chromeDriverArgs: [
+      "--disable-extensions",
+      "--disable-dev-shm-usage",
+      "--no-sandbox",
+      "--lang=en",
+    ],
     env: envVar,
   });
-  return app;
 }
+
+export const getMockDeviceEvent = app => async (...events) => {
+  return await app.client.execute(e => {
+    window.mockDeviceEvent(...e);
+  }, events);
+};

@@ -14,6 +14,7 @@ export type UpdateStatus =
   | "update-downloaded"
   | "checking"
   | "check-success"
+  | "downloading-update"
   | "error";
 
 export type UpdaterContextType = {
@@ -88,7 +89,10 @@ class Provider extends Component<UpdaterProviderProps, UpdaterProviderState> {
 
   quitAndInstall = () => ipcRenderer.send("updater", "quit-and-install");
 
-  downloadUpdate = () => ipcRenderer.send("updater", "download-update");
+  downloadUpdate = () => {
+    this.setStatus("downloading-update");
+    return ipcRenderer.send("updater", "download-update");
+  };
 
   render() {
     const { status, downloadProgress, error, version } = this.state;

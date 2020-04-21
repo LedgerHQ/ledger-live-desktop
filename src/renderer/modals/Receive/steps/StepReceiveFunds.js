@@ -26,6 +26,7 @@ import type { StepProps } from "../Body";
 import Modal from "~/renderer/components/Modal";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import QRCode from "~/renderer/components/QRCode";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 
 const Separator = styled.div`
   border-top: 1px solid #99999933;
@@ -155,23 +156,30 @@ const StepReceiveFunds = ({
 
   const confirmAddress = useCallback(async () => {
     try {
-      if (!device) {
-        throw new DisconnectedDevice();
+      if (getEnv("MOCK")) {
+        setTimeout(() => {
+          onChangeAddressVerified(true);
+          transitionTo("receive");
+        }, 3000);
+      } else {
+        if (!device) {
+          throw new DisconnectedDevice();
+        }
+        const { address } = await command("getAddress")({
+          derivationMode: mainAccount.derivationMode,
+          currencyId: mainAccount.currency.id,
+          devicePath: device.path,
+          path: mainAccount.freshAddressPath,
+          verify: true,
+        }).toPromise();
+        if (address !== mainAccount.freshAddress) {
+          throw new WrongDeviceForAccount(`WrongDeviceForAccount ${mainAccount.name}`, {
+            accountName: mainAccount.name,
+          });
+        }
+        onChangeAddressVerified(true);
+        transitionTo("receive");
       }
-      const { address } = await command("getAddress")({
-        derivationMode: mainAccount.derivationMode,
-        currencyId: mainAccount.currency.id,
-        devicePath: device.path,
-        path: mainAccount.freshAddressPath,
-        verify: true,
-      }).toPromise();
-      if (address !== mainAccount.freshAddress) {
-        throw new WrongDeviceForAccount(`WrongDeviceForAccount ${mainAccount.name}`, {
-          accountName: mainAccount.name,
-        });
-      }
-      onChangeAddressVerified(true);
-      transitionTo("receive");
     } catch (err) {
       onChangeAddressVerified(false, err);
     }

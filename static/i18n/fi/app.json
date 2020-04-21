@@ -581,6 +581,10 @@
         "title": "Device"
       },
       "confirmation": {
+        "tooltip": {
+          "title": "Transaction is under validation",
+          "desc": "You have to wait a minute before being able to vote"
+        },
         "title": "Confirmation",
         "success": {
           "title": "",
@@ -1389,6 +1393,20 @@
     "read": "Read the Terms of Use",
     "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
   },
+  "families": {
+    "stellar": {
+      "memo": "Memo",
+      "memoType": {
+        "MEMO_TEXT": "Memo Text",
+        "NO_MEMO": "No Memo",
+        "MEMO_ID": "Memo ID",
+        "MEMO_HASH": "Memo Hash",
+        "MEMO_RETURN": "Memo Return"
+      },
+      "whatsMemo": "What is a memo?",
+      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+    }
+  },
   "errors": {
     "generic": {
       "title": "{{message}}",
@@ -1774,6 +1792,15 @@
     },
     "FeeTooHigh": {
       "title": "Network fees represent more than 10% of the amount"
+    },
+    "StellarWrongMemoFormat": {
+      "title": "Memo format is wrong"
+    },
+    "SourceHasMultiSign": {
+      "title": "Please disable multisign to send {{currencyName}}"
+    },
+    "StellarMemoRecommended": {
+      "title": "When sending to this recipient, a memo may be required"
     }
   }
 }

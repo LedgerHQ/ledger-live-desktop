@@ -110,6 +110,7 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
               fontSize={3}
               inline
               showCode
+              disableRounding
             />
           </TransactionConfirmField>
         )}

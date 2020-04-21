@@ -10,6 +10,7 @@ import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box/Box";
 import Button from "~/renderer/components/Button";
 import ProgressCircle from "~/renderer/components/ProgressCircle";
+import { useDiscreetMode } from "~/renderer/components/Discreet";
 
 export const Wrapper: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -41,7 +42,9 @@ type Props = {
 };
 
 const Footer = ({ total, used, onClick }: Props) => {
-  const percentVotesUsed = used / total;
+  const discreet = useDiscreetMode();
+
+  const percentVotesUsed = Math.floor(100 * (used / total)) / 100;
 
   if (percentVotesUsed >= 1) return null;
 
@@ -50,7 +53,10 @@ const Footer = ({ total, used, onClick }: Props) => {
       <ProgressCircle size={50} progress={percentVotesUsed} />
       <Box vertical ml={2}>
         <Text ff="Inter|SemiBold" fontSize={3} color="palette.text.shade100">
-          <Trans i18nKey="tron.voting.remainingVotes.title" values={{ amount: total - used }} />
+          <Trans
+            i18nKey="tron.voting.remainingVotes.title"
+            values={{ amount: !discreet ? total - used : "***" }}
+          />
         </Text>
         <Text ff="Inter|Medium" fontSize={3} color="palette.text.shade60">
           <Trans i18nKey="tron.voting.remainingVotes.description" />

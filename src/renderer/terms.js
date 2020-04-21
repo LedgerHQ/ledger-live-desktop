@@ -17,7 +17,7 @@ export function acceptTerms() {
 }
 
 export async function load() {
-  const { data } = await network(rawURL);
+  const { data } = await network({ url: rawURL });
   return data;
 }
 

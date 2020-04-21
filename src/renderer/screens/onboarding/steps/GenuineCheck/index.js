@@ -2,7 +2,6 @@
 
 import React, { useState, useCallback } from "react";
 import { Trans } from "react-i18next";
-import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getDeviceModel } from "@ledgerhq/devices";
 import styled from "styled-components";
 import IconCheck from "~/renderer/icons/Check";
@@ -93,13 +92,7 @@ const GenuineCheck = (props: StepProps) => {
 
   const handleOpenGenuineCheckModal = useCallback(() => {
     setGenuineCheckModalOpened(true);
-    if (getEnv("MOCK")) {
-      setTimeout(() => {
-        handleCloseGenuineCheckModal();
-        handleGenuineCheckPass();
-      }, 2000);
-    }
-  }, [handleCloseGenuineCheckModal, handleGenuineCheckPass]);
+  }, []);
 
   const redoGenuineCheck = useCallback(() => {
     setRecovery(undefined);
@@ -166,7 +159,7 @@ const GenuineCheck = (props: StepProps) => {
             items={radioItems}
             activeKey={pin === undefined ? "" : pin ? "yes" : "no"}
             onChange={onPinChange}
-            id="onboarding-genuine-pin-ratio"
+            id="onboarding-genuine-pin"
           />
         </GenuineCheckCardWrapper>
         <GenuineCheckCardWrapper mt={3} isDisabled={!pin}>
@@ -177,7 +170,7 @@ const GenuineCheck = (props: StepProps) => {
               items={radioItems}
               activeKey={recovery === undefined ? "" : recovery ? "yes" : "no"}
               onChange={onRecoveryChange}
-              id="onboarding-genuine-seed-ratio"
+              id="onboarding-genuine-seed"
             />
           )}
         </GenuineCheckCardWrapper>
@@ -190,7 +183,13 @@ const GenuineCheck = (props: StepProps) => {
           {pin && recovery && (
             <Box justifyContent="center">
               {genuine.isDeviceGenuine ? (
-                <Box horizontal alignItems="center" flow={1} color="wallet">
+                <Box
+                  horizontal
+                  alignItems="center"
+                  flow={1}
+                  color="wallet"
+                  id="onboarding-genuine-label"
+                >
                   <IconCheck size={16} />
                   <Box ff="Inter|SemiBold" fontSize={4}>
                     {t("onboarding.genuineCheck.isGenuinePassed")}
@@ -201,7 +200,7 @@ const GenuineCheck = (props: StepProps) => {
                   primary
                   disabled={!recovery}
                   onClick={handleOpenGenuineCheckModal}
-                  id="onboarding-genuine-check"
+                  id="onboarding-genuine-button"
                 >
                   {t("onboarding.genuineCheck.buttons.genuineCheck")}
                 </Button>

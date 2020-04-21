@@ -47,6 +47,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 export type Props = {
   data: Data,
+  magnitude: number,
   id?: string,
   height?: number,
   tickXScale: string,
@@ -67,7 +68,15 @@ const ChartContainer: ThemedComponent<{}> = styled.div.attrs(({ height }) => ({
   position: relative;
 `;
 
-const Chart = ({ height, data, color, renderTickY, renderTooltip, valueKey = "value" }: Props) => {
+const Chart = ({
+  magnitude,
+  height,
+  data,
+  color,
+  renderTickY,
+  renderTooltip,
+  valueKey = "value",
+}: Props) => {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
   const theme = useTheme("colors.palette");
@@ -150,6 +159,7 @@ const Chart = ({ height, data, color, renderTickY, renderTooltip, valueKey = "va
             },
             ticks: {
               beginAtZero: true,
+              suggestedMax: 10 ** Math.max(magnitude - 4, 1),
               maxTicksLimit: 4,
               fontColor: theme.text.shade60,
               fontFamily: "Inter",
@@ -160,7 +170,7 @@ const Chart = ({ height, data, color, renderTickY, renderTooltip, valueKey = "va
         ],
       },
     }),
-    [renderTickY, theme],
+    [renderTickY, theme, magnitude],
   );
 
   useLayoutEffect(() => {
