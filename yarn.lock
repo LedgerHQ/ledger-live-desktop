@@ -1305,10 +1305,10 @@
     ripemd160 "2"
     sha.js "2"
 
-"@ledgerhq/hw-app-eth@5.13.1":
-  version "5.13.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-5.13.1.tgz#73c8a339b00c7fce66a1cadad9a7bcedadc71bb5"
-  integrity sha512-ICqdRgaY9eSlxADAQDe6bVJZxf3Fyb6AcqyTmnANaIHioNeIDYm+gQI9DNq5FpgPxONVaDptqr4MFPswobVmEQ==
+"@ledgerhq/hw-app-eth@5.14.0":
+  version "5.14.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-5.14.0.tgz#a268c8f86035e88e637c38254cc7847a7dadf169"
+  integrity sha512-JCgKcyr/oQl4PW1uHlhCvgmqzoJZNQWrXiWZHrrvaCwZTJicGW8UlY8Gy/EWNbMG0yf591qk4bIOoXXFd3fjgg==
   dependencies:
     "@ledgerhq/errors" "^5.13.1"
     "@ledgerhq/hw-transport" "^5.13.1"
@@ -1404,16 +1404,16 @@
     node-pre-gyp "^0.14.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^12.16.3":
-  version "12.16.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.16.3.tgz#9c2e0fe8b903331117d96dcdc3806f758e3f26ec"
-  integrity sha512-r68vHPDe4REfV2QfNxt9EqVQYcEhcEPyjLEmVS7lFF9yd1zbx2+FukzF7+voEDBr9Yydin88yshFNg5sCqXk4g==
+"@ledgerhq/live-common@^12.17.0":
+  version "12.17.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.17.0.tgz#63ce8d6c0d9d08ee0a4c96e4014573ad21c9e9c5"
+  integrity sha512-1sIdweV1Ng1qo/gLRnfHWvFNpVICziKzMqacQAkXDXeOvlnj8IY9KRTZO7cra9WorIgwlym/F6sezh1STjfUHQ==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "5.13.1"
     "@ledgerhq/errors" "5.13.1"
     "@ledgerhq/hw-app-btc" "^5.13.1"
-    "@ledgerhq/hw-app-eth" "5.13.1"
+    "@ledgerhq/hw-app-eth" "5.14.0"
     "@ledgerhq/hw-app-str" "^5.13.1"
     "@ledgerhq/hw-app-trx" "5.13.1"
     "@ledgerhq/hw-app-xrp" "5.13.1"
