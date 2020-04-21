@@ -7,6 +7,7 @@ import "./internal-lifecycle";
 import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import db from "./db";
 import debounce from "lodash/debounce";
+import logger from "~/logger";
 
 app.allowRendererProcessReuse = false;
 
@@ -85,6 +86,8 @@ app.on("ready", async () => {
     console.log("reloading renderer ...");
     loadWindow();
   });
+
+  ipcMain.on("log", (event, { log }) => logger.log(log));
 
   Menu.setApplicationMenu(menu);
 
