@@ -24,7 +24,9 @@ export default ({
     return (
       <components.Option {...props}>
         <Box horizontal pr={4} relative>
-          <Box grow>{renderOption ? renderOption(props) : data.label}</Box>
+          <Box grow style={{ flex: 1 }}>
+            {renderOption ? renderOption(props) : data.label}
+          </Box>
           {isSelected && (
             <CheckContainer color="wallet">
               <IconCheck size={12} color={props.theme.colors.wallet} />
