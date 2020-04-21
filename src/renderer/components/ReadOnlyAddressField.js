@@ -41,6 +41,7 @@ const ClipboardSuspicious = styled.div`
   font-weight: 400;
   font-style: normal;
   font-size: 12px;
+  align-self: center;
   color: ${p => p.theme.colors.alertRed};
 `;
 
@@ -91,7 +92,7 @@ function ReadOnlyAddressField({ address }: Props) {
   }, []);
 
   return (
-    <Box vertical alignItems="center">
+    <Box vertical>
       {clibboardChanged ? (
         <ClipboardSuspicious>
           <Trans i18nKey="common.addressCopiedSuspicious" />
