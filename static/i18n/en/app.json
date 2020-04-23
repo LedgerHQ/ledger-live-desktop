@@ -853,6 +853,20 @@
       }
     }
   },
+  "cosmos": {
+    "delegation": {
+      "emptyState": {
+        "description": "Delegate your assets to one or more validators to start earning rewards.",
+        "info": "How Delegating works",
+        "delegation": "Earn rewards"
+      },
+      "claimRewards": "Claim rewards",
+      "claimAvailableRewards": "Claim {{amount}}",
+      "header": "Delegations",
+      "Amount": "Amount",
+      "noRewards": "No rewards available"
+    }
+  },
   "delegation": {
     "title": "Earn rewards",
     "header": "Delegation",
@@ -862,6 +876,7 @@
     "transactionID": "Transaction ID",
     "value": "Value",
     "amount": "Amount",
+    "distribution": "Distribution",
     "duration": "Duration",
     "durationJustStarted": "Just started",
     "durationDays": "{{count}} day",
@@ -870,6 +885,7 @@
     "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
     "earnRewards": "Earn rewards",
     "overdelegated": "Overdelegated",
+    "status": "Status",
     "flow": {
       "steps": {
         "starter": {

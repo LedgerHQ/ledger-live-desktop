@@ -41,7 +41,8 @@ export const urls = {
   lostPinOrSeed: "https://support.ledger.com/hc/en-us/articles/360000609933",
   maxSpendable: "https://support.ledger.com/hc/en-us/articles/360012960679",
   stakingTezos: "https://www.ledger.com/staking-tezos",
-  stakingTron: "http://www.ledger.com/staking-tron",
+  stakingTron: "https://www.ledger.com/staking-tron",
+  stakingCosmos: "http://www.ledger.com/staking-cosmos",
 
   // Exchanges
   coinhouse: "https://www.coinhouse.com/r/157530?utm_source=legderlive&utm_medium=referral",
