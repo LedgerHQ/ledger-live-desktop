@@ -36,7 +36,7 @@ export default class Page {
   }
 
   get drawerPortfolioButton() {
-    return this.app.client.element("#drawer-portfolio-button");
+    return this.app.client.element("#drawer-dashboard-button");
   }
 
   get drawerAccountsButton() {
@@ -56,7 +56,7 @@ export default class Page {
   }
 
   get drawerBuycryptoButton() {
-    return this.app.client.element("#drawer-buy cryptos-button");
+    return this.app.client.element("#drawer-partners-button");
   }
 
   get topbarDiscreetButton() {
@@ -65,6 +65,10 @@ export default class Page {
 
   get topbarSettingsButton() {
     return this.app.client.element("#topbar-settings-button");
+  }
+
+  get topbarLockButton() {
+    return this.app.client.element("#topbar-password-lock-button");
   }
 
   async getThemeColor() {

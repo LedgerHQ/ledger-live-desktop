@@ -215,31 +215,6 @@
       }
     }
   },
-  "partners": {
-    "title": "Acheter des cryptos",
-    "desc": "Essayez quelques services que nous avons sélectionnés",
-    "visitWebsite": "Visiter le site internet",
-    "btcdirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot.",
-    "changelly": "Changelly est un service d'échange instantané de crypto-actifs, très utilisé et listant plus de 100 coins et tokens.",
-    "changenow": "ChangeNOW is one of the leading custody-free instant exchange services.",
-    "coinberry": "Considérée comme la plateforme la plus fiable au Canada, Coinberry offre une meilleure sécurité que les banques, une interface utilisateur de pointe et un service de dépôt ou de retrait sans frais. Préinscrivez-vous dès maintenant pour y accéder rapidement si vous n‘êtes pas un citoyen canadien.",
-    "coinhouse": "Coinhouse est une plateforme de confiance pour les particuliers et les investisseurs institutionnels cherchant à analyser, acquérir, vendre et stocker des crypto-actifs de manière sécurisée.",
-    "coinmama": "Coinmama est un service financier d’achat d’actifs numériques rapide, sécurisé et amusant, disponible partout dans le monde.",
-    "crypto": "Crypto.com is the best place to buy, sell, track and pay with crypto.",
-    "genesis": "Genesis est une société de trading institutionnelle offrant des liquidités et des prêts de monnaies numériques, dont bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin et XRP.",
-    "kyberswap": "Plateforme d’échange de tokens rapide, simple et sécurisée. Optimisée par le protocole de liquidité on-chain de Kyber Network.",
-    "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum.",
-    "paybis": "Paybis.com is one of the most trusted cryptocurrency brokers worldwide since 2014, customer satisfaction - 4.7/5 via Trustpilot. Visa/Master cards, Bank Transfers, Skrill/Neteller accepted. 24/7 online customer support.",
-    "shapeshift": "ShapeShift est un marché en ligne sur lequel les utilisateurs peuvent acheter et vendre des actifs numériques. Il s’agit d’un moyen sécurisé et rapide d’acheter et de vendre des actifs numériques, sans long processus d’inscription, sans risques de contrepartie et sans friction.",
-    "simplex": "Simplex est une institution financière agréée par l’UE, qui fournit une solution anti-fraude de paiement par carte bancaire.",
-    "swft": "SWFT Blockchain is a worldwide cross-blockchain transfer protocol and payment network, enabling simpler, faster and safer swaps between over 200 cryptocurrencies and free crypto payments to anyone anywhere",
-    "taxtoken": "Logiciel automatisé de gestion des coûts initiaux et des taxes pour les cryptomonnaies réservé aux citoyens américains.",
-    "thorswap": "ThorSwap est un marché de crypto-actifs instantané, sécurisé et équitable qui s'appuie sur les technologies décentralisées d’Atomic Swap. Il s’agit du moyen le plus pratique pour se lancer dans le trading, aucune inscription, aucun formulaire à remplir pour les transactions de faible montant.",
-    "bitpanda": "Bitpanda est le service de courtage leader en Europe pour acheter et revendre Bitcoins, Ethereum, IOTA et bien d’autres. Déposez de l’argent avec votre carte bancaire, SOFORT-Transfer, NETELLER et d’autres options.",
-    "exmo": "Créé en 2013 et basé à Londres, Kiev, Barcelone et Moscou, EXMO est la plateforme d'échange numéro 1 en Europe de l’Est et l’une des plus grandes plateformes d'échange mondiales en termes de volume et de liquidités.",
-    "ndax": "NDAX est une plateforme Canadienne d'échange de cryptomonnaies, qui offre une plateforme réglementée, sécurisée et intuitive, qui permet d’acheter et de vendre des biens numériques, Bitcoin, Litecoin, Ethereum, XRP et autres.",
-    "voyager": "Love your Crypto Journey with Voyager. A licensed crypto broker with commission-free trading of 20+ cryptocurrencies."
-  },
   "genuinecheck": {
     "modal": {
       "title": "Vérification d'authenticité"
@@ -582,8 +557,8 @@
       },
       "confirmation": {
         "tooltip": {
-          "title": "Transaction is under validation",
-          "desc": "You have to wait a minute before being able to vote"
+          "title": "La transaction est en cours de validation",
+          "desc": "Vous devez attendre une minute avant de pouvoir voter"
         },
         "title": "Confirmation",
         "success": {
@@ -790,7 +765,7 @@
       "noRewards": "Aucune récompense disponible",
       "remainingVotes": {
         "title": "Il vous reste {{amount}} votes",
-        "description": "You can cast your remaining votes to earn more rewards",
+        "description": "Utilisez vos votes restants pour obtenir plus de récompenses",
         "button": "Voter maintenant"
       },
       "flow": {
@@ -807,7 +782,7 @@
             "button": {
               "cta": "Poursuivre"
             },
-            "termsAndPrivacy": "Delegating your voting rights does not guarantee you will be paid any reward by your super representative."
+            "termsAndPrivacy": "Déléguer vos droits de vote ne garantit pas que vous recevrez des récompenses de la part du super representative."
           }
         }
       }
@@ -1395,22 +1370,26 @@
   },
   "families": {
     "stellar": {
-      "memo": "Memo",
+      "memo": "Mémo",
       "memoType": {
         "MEMO_TEXT": "Memo Text",
-        "NO_MEMO": "No Memo",
+        "NO_MEMO": "Aucun mémo",
         "MEMO_ID": "Memo ID",
         "MEMO_HASH": "Memo Hash",
         "MEMO_RETURN": "Memo Return"
       },
-      "whatsMemo": "What is a memo?",
-      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+      "whatsMemo": "Qu'est-ce qu'un mémo ?",
+      "memoWarningText": "Lorsque vous utilisez un mémo, vérifiez soigneusement le type utilisé avec le destinataire"
     }
   },
   "errors": {
     "generic": {
       "title": "{{message}}",
       "description": "Quelque chose s’est mal passé. Veuillez essayer à nouveau ou nous contacter."
+    },
+    "AccountAwaitingSendPendingOperations": {
+      "title": "There is an operation pending for this account.",
+      "description": "Please wait a few minutes and come back."
     },
     "AccountNameRequired": {
       "title": "Un nom de compte est requis.",
@@ -1794,13 +1773,13 @@
       "title": "Les frais de réseau représentent plus de 10% du montant"
     },
     "StellarWrongMemoFormat": {
-      "title": "Memo format is wrong"
+      "title": "Le format du mémo est incorrect"
     },
     "SourceHasMultiSign": {
-      "title": "Please disable multisign to send {{currencyName}}"
+      "title": "Veuillez désactiver le multisign pour envoyer {{currencyName}}"
     },
     "StellarMemoRecommended": {
-      "title": "When sending to this recipient, a memo may be required"
+      "title": "Lors de l'envoi à ce destinataire, un mémo peut être requis"
     }
   }
 }

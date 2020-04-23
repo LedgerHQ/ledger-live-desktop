@@ -1,6 +1,7 @@
 import genuine from "./genuine";
 import password from "./password";
 import analytics from "./analytics";
+import lockscreen from "./lockscreen";
 
 export default {
   appTitle: "Ledger Live",
@@ -21,6 +22,7 @@ export default {
   genuine,
   password,
   analytics,
+  lockscreen,
   end: {
     title: "Your device is ready!",
     description: "Install some apps on your device and access the Portfolio",

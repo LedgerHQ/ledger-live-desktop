@@ -174,7 +174,12 @@ export class StepSummaryFooter extends PureComponent<StepProps> {
     const canNext = !bridgePending && !Object.keys(errors).length;
     return (
       <>
-        <Button primary disabled={!canNext} onClick={this.onNext}>
+        <Button
+          id={"send-summary-continue-button"}
+          primary
+          disabled={!canNext}
+          onClick={this.onNext}
+        >
           <Trans i18nKey="common.continue" />
         </Button>
       </>

@@ -22,6 +22,7 @@ const UpdateFirmwareButton = ({ firmware, onClick, deviceInfo, disabled = false 
     <Button
       primary
       onClick={onClick}
+      id={"manager-update-firmware-button"}
       event={"Manager Firmware Update Click"}
       eventProperties={{
         firmwareName: firmware.final.name,

@@ -276,7 +276,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                       ? opAccount.name
                       : getAccountCurrency(opAccount).name;
                   return (
-                    <NoMarginWrapper key={`${op.id}`}>
+                    <div key={`${op.id}`}>
                       <OperationComponent
                         text={subAccountName}
                         operation={op}
@@ -286,7 +286,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                         t={t}
                       />
                       {i < subOperations.length - 1 && <B />}
-                    </NoMarginWrapper>
+                    </div>
                   );
                 })}
               </Box>

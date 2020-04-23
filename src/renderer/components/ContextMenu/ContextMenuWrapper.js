@@ -34,13 +34,6 @@ type State = {
   y: number,
 };
 
-const ContextMenuOverlay: ThemedComponent<{}> = styled(Box)`
-  z-index: 30;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-`;
-
 const ContextMenuContainer: ThemedComponent<{ x: number, y: number }> = styled(Box)`
   position: absolute;
   top: ${p => p.y}px;
@@ -79,6 +72,12 @@ class ContextMenuWrapper extends PureComponent<Props, State> {
     y: 0,
   };
 
+  containerRef: *;
+
+  componentWillUnmount() {
+    window.removeEventListener("click", this.hideContextMenu, true);
+  }
+
   showContextMenu = (event: MouseEvent, items: ContextMenuItemType[]) => {
     const { clientX: x, clientY: y } = event;
     const { innerHeight: wy, innerWidth: wx } = window;
@@ -86,11 +85,20 @@ class ContextMenuWrapper extends PureComponent<Props, State> {
     const xOffset = wx - x < 170 ? -170 : 0; // FIXME do this dynamically?
     const yOffset = wy < y + items.length * 30 ? -items.length * 30 : 0;
     this.setState({ visible: true, items, x: x + xOffset, y: y + yOffset });
+    window.addEventListener("click", this.hideContextMenu, true);
   };
 
-  hideContextMenu = () => {
+  hideContextMenu = (evt: PointerEvent) => {
+    const srcElement = evt.srcElement;
+    if (srcElement && srcElement.parentElement && srcElement.parentElement === this.containerRef) {
+      return;
+    }
+
     this.setState({ visible: false, items: [] });
+    window.removeEventListener("click", this.hideContextMenu, true);
   };
+
+  setContainerRef = (ref: *) => (this.containerRef = ref);
 
   renderItem = (item: ContextMenuItemType, index: number) => {
     const { dontTranslateLabel, callback, label, Icon } = item;
@@ -114,11 +122,9 @@ class ContextMenuWrapper extends PureComponent<Props, State> {
       <ContextMenuContext.Provider value={{ showContextMenu: this.showContextMenu }}>
         {children}
         {this.state.visible && (
-          <ContextMenuOverlay onClick={this.hideContextMenu}>
-            <ContextMenuContainer x={x} y={y}>
-              {items.map(this.renderItem)}
-            </ContextMenuContainer>
-          </ContextMenuOverlay>
+          <ContextMenuContainer ref={this.setContainerRef} x={x} y={y}>
+            {items.map(this.renderItem)}
+          </ContextMenuContainer>
         )}
       </ContextMenuContext.Provider>
     );

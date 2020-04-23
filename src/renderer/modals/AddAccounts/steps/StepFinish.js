@@ -50,8 +50,10 @@ export const StepFinishFooter = ({ onGoStep1, onCloseModal }: StepProps) => {
   return (
     <>
       <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
-        <Button onClick={onCloseModal}>{t("common.close")}</Button>
-        <Button primary onClick={onGoStep1}>
+        <Button id={"add-accounts-finish-close-button"} onClick={onCloseModal}>
+          {t("common.close")}
+        </Button>
+        <Button id={"add-accounts-finish-add-more-button"} primary onClick={onGoStep1}>
           {t("addAccounts.cta.addMore")}
         </Button>
       </Box>

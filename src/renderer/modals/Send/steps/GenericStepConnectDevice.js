@@ -17,11 +17,11 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import { command } from "~/renderer/commands";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { mockedAppExec } from "~/renderer/components/DebugMock";
+import { mockedEventEmitter } from "~/renderer/components/DebugMock";
 
 const connectAppExec = command("connectApp");
 
-const action = createAction(getEnv("MOCK") ? mockedAppExec : connectAppExec);
+const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectAppExec);
 
 const Result = ({
   signedOperation,
