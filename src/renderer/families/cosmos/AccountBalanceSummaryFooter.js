@@ -5,14 +5,16 @@ import styled from "styled-components";
 
 import { Trans } from "react-i18next";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+
+import Discreet, { useDiscreetMode } from "~/renderer/components/Discreet";
 
 import Box from "~/renderer/components/Box/Box";
 import Text from "~/renderer/components/Text";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import ToolTip from "~/renderer/components/Tooltip";
-import FormattedVal from "~/renderer/components/FormattedVal";
 
 const Wrapper: ThemedComponent<*> = styled(Box).attrs(() => ({
   horizontal: true,
@@ -56,12 +58,32 @@ type Props = {
 };
 
 const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
+  const discreet = useDiscreetMode();
   if (!account.cosmosResources) return null;
 
-  const { spendableBalance, cosmosResources } = account;
-  const { delegatedBalance, unboundingBalance } = cosmosResources;
+  const { spendableBalance: _spendableBalance, cosmosResources } = account;
+  const {
+    delegatedBalance: _delegatedBalance,
+    unboundingBalance: _unboundingBalance,
+  } = cosmosResources;
 
   const unit = getAccountUnit(account);
+
+  const formatConfig = {
+    disableRounding: true,
+    alwaysShowSign: false,
+    showCode: false,
+    discreet,
+  };
+
+  const spendableBalance = formatCurrencyUnit(unit, _spendableBalance, {
+    ...formatConfig,
+    showCode: true,
+  });
+
+  const delegatedBalance = formatCurrencyUnit(unit, _delegatedBalance, formatConfig);
+
+  const unboundingBalance = formatCurrencyUnit(unit, _unboundingBalance, formatConfig);
 
   return (
     <Wrapper>
@@ -75,7 +97,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
           </TitleWrapper>
         </ToolTip>
         <AmountValue>
-          <FormattedVal color="palette.text.shade100" showCode unit={unit} val={spendableBalance} />
+          <Discreet>{spendableBalance}</Discreet>
         </AmountValue>
       </BalanceDetail>
       <BalanceDetail>
@@ -88,12 +110,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
           </TitleWrapper>
         </ToolTip>
         <AmountValue>
-          <FormattedVal
-            color="palette.text.shade100"
-            showCode={false}
-            unit={unit}
-            val={delegatedBalance}
-          />
+          <Discreet>{+delegatedBalance || "–"}</Discreet>
         </AmountValue>
       </BalanceDetail>
       <BalanceDetail>
@@ -106,12 +123,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
           </TitleWrapper>
         </ToolTip>
         <AmountValue>
-          <FormattedVal
-            color="palette.text.shade100"
-            showCode={false}
-            unit={unit}
-            val={unboundingBalance}
-          />
+          <Discreet>{+unboundingBalance || "–"}</Discreet>
         </AmountValue>
       </BalanceDetail>
     </Wrapper>
