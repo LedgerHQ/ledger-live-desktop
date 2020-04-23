@@ -140,10 +140,14 @@
     "frozenAssets": "Frozen assets",
     "bandwidth": "Bandwidth",
     "energy": "Energy",
+    "delegatedAssets": "Delegated assets",
+    "undelegating": "Undelegating",
     "availableBalanceTooltip": "This amount can be sent anytime.",
     "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
     "bandwidthTooltip": "Freeze assets to gain bandwidth",
-    "energyTooltip": "Freeze assets to gain energy"
+    "energyTooltip": "Freeze assets to gain energy",
+    "delegatedAssetsTooltip": "These are your currently delegated assets",
+    "undelegatingTooltip": "These are your assets currently being undelegated"
   },
   "accounts": {
     "title": "Accounts",
