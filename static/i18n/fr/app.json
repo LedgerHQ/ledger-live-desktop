@@ -582,8 +582,8 @@
       },
       "confirmation": {
         "tooltip": {
-          "title": "Transaction is under validation",
-          "desc": "You have to wait a minute before being able to vote"
+          "title": "La transaction est en cours de validation",
+          "desc": "Vous devez attendre une minute avant de pouvoir voter"
         },
         "title": "Confirmation",
         "success": {
@@ -790,7 +790,7 @@
       "noRewards": "Aucune récompense disponible",
       "remainingVotes": {
         "title": "Il vous reste {{amount}} votes",
-        "description": "You can cast your remaining votes to earn more rewards",
+        "description": "Utilisez vos votes restants pour obtenir plus de récompenses",
         "button": "Voter maintenant"
       },
       "flow": {
@@ -807,7 +807,7 @@
             "button": {
               "cta": "Poursuivre"
             },
-            "termsAndPrivacy": "Delegating your voting rights does not guarantee you will be paid any reward by your super representative."
+            "termsAndPrivacy": "Déléguer vos droits de vote ne garantit pas que vous recevrez des récompenses de la part du super representative."
           }
         }
       }
@@ -1395,22 +1395,26 @@
   },
   "families": {
     "stellar": {
-      "memo": "Memo",
+      "memo": "Mémo",
       "memoType": {
         "MEMO_TEXT": "Memo Text",
-        "NO_MEMO": "No Memo",
+        "NO_MEMO": "Aucun mémo",
         "MEMO_ID": "Memo ID",
         "MEMO_HASH": "Memo Hash",
         "MEMO_RETURN": "Memo Return"
       },
-      "whatsMemo": "What is a memo?",
-      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+      "whatsMemo": "Qu'est-ce qu'un mémo ?",
+      "memoWarningText": "Lorsque vous utilisez un mémo, vérifiez soigneusement le type utilisé avec le destinataire"
     }
   },
   "errors": {
     "generic": {
       "title": "{{message}}",
       "description": "Quelque chose s’est mal passé. Veuillez essayer à nouveau ou nous contacter."
+    },
+    "AccountAwaitingSendPendingOperations": {
+      "title": "There is an operation pending for this account.",
+      "description": "Please wait a few minutes and come back."
     },
     "AccountNameRequired": {
       "title": "Un nom de compte est requis.",
@@ -1794,13 +1798,13 @@
       "title": "Les frais de réseau représentent plus de 10% du montant"
     },
     "StellarWrongMemoFormat": {
-      "title": "Memo format is wrong"
+      "title": "Le format du mémo est incorrect"
     },
     "SourceHasMultiSign": {
-      "title": "Please disable multisign to send {{currencyName}}"
+      "title": "Veuillez désactiver le multisign pour envoyer {{currencyName}}"
     },
     "StellarMemoRecommended": {
-      "title": "When sending to this recipient, a memo may be required"
+      "title": "Lors de l'envoi à ce destinataire, un mémo peut être requis"
     }
   }
 }

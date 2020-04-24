@@ -1412,6 +1412,10 @@
       "title": "{{message}}",
       "description": "Valami hiba történt. Kérlek, próbáld meg újra, vagy lépj kapcsolatba velünk."
     },
+    "AccountAwaitingSendPendingOperations": {
+      "title": "There is an operation pending for this account.",
+      "description": "Please wait a few minutes and come back."
+    },
     "AccountNameRequired": {
       "title": "Egy számlanév szükséges",
       "description": "Kérlek, adj meg egy számlanevet"

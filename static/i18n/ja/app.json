@@ -1412,6 +1412,10 @@
       "title": "{{message}}",
       "description": "エラーが発生しました。再試行するか当社にご連絡ください。"
     },
+    "AccountAwaitingSendPendingOperations": {
+      "title": "There is an operation pending for this account.",
+      "description": "Please wait a few minutes and come back."
+    },
     "AccountNameRequired": {
       "title": "アカウント名が必要です",
       "description": "アカウント名を提供してください"
