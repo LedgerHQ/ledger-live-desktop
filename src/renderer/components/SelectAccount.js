@@ -95,9 +95,11 @@ const AccountOption = React.memo(function AccountOption({
     <Box grow horizontal alignItems="center" flow={2} style={{ opacity: disabled ? 0.2 : 1 }}>
       {!isValue && nested ? tokenTick : null}
       <CryptoCurrencyIcon currency={currency} size={16} />
-      <Ellipsis ff="Inter|SemiBold" fontSize={4}>
-        {name}
-      </Ellipsis>
+      <div style={{ flex: 1 }}>
+        <Ellipsis ff="Inter|SemiBold" fontSize={4}>
+          {name}
+        </Ellipsis>
+      </div>
       <Box>
         <FormattedVal
           color="palette.text.shade60"
