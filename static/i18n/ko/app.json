@@ -1412,6 +1412,10 @@
       "title": "{{message}}",
       "description": "무언가가 잘못되었습니다. 다시 시도하거나 저희에게 문의하십시오."
     },
+    "AccountAwaitingSendPendingOperations": {
+      "title": "There is an operation pending for this account.",
+      "description": "Please wait a few minutes and come back."
+    },
     "AccountNameRequired": {
       "title": "계정 이름이 필요합니다.",
       "description": "계정 이름을 입력하십시오."
