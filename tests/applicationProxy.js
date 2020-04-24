@@ -1,5 +1,6 @@
 import os from "os";
 import fs from "fs";
+import electronPath from "electron";
 import path from "path";
 import rimraf from "rimraf";
 import { Application } from "spectron";
@@ -32,9 +33,11 @@ export function applicationProxy(envVar = {}, userData = null) {
     fs.copyFileSync(jsonFile, `${userPath}/app.json`);
   }
 
+  const bundlePath = path.join(process.cwd(), "/.webpack/main.bundle.js");
+
   return new Application({
-    path: "./node_modules/.bin/electron",
-    args: [`${process.cwd()}/.webpack/main.bundle.js`],
+    path: electronPath,
+    args: [bundlePath],
     chromeDriverArgs: [
       "--disable-extensions",
       "--disable-dev-shm-usage",
