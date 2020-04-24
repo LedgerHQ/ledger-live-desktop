@@ -87,6 +87,7 @@ export function StepConfirmationFooter({
         // FIXME make a standalone component!
         <Button
           ml={2}
+          id={"send-confirmation-opc-button"}
           event="Send Flow Step 4 View OpD Clicked"
           onClick={() => {
             closeModal();

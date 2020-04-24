@@ -15,8 +15,9 @@ import Text from "~/renderer/components/Text";
 import ProgressCircle from "~/renderer/components/ProgressCircle";
 import Interactions from "~/renderer/icons/device/interactions";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-
+import { mockedEventEmitter } from "~/renderer/components/DebugMock";
 import type { StepProps } from "../";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   alignItems: "center",
@@ -131,10 +132,13 @@ const StepFullFirmwareInstall = ({ firmware, deviceModelId, transitionTo, setErr
       return;
     }
 
-    const sub = command("firmwarePrepare")({
-      devicePath: device ? device.path : "",
-      firmware,
-    }).subscribe({
+    const sub = (getEnv("MOCK")
+      ? mockedEventEmitter()
+      : command("firmwarePrepare")({
+          devicePath: device ? device.path : "",
+          firmware,
+        })
+    ).subscribe({
       next: ({ progress, displayedOnDevice: displayed }) => {
         setProgress(progress);
         setDisplayedOnDevice(displayed);

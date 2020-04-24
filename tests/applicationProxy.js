@@ -20,15 +20,29 @@ export function getUserPath() {
   return path;
 }
 
-export function applicationProxy(envVar = {}, userData = null) {
+export const backupUserData = () => {
   const userPath = getUserPath();
+  if (fs.existsSync(userPath)) {
+    rimraf.sync(`${userPath}_backup`);
+    fs.renameSync(userPath, `${userPath}_backup`);
+    fs.mkdirSync(userPath);
+  }
+};
 
-  if (fs.existsSync(userPath)) rimraf.sync(userPath);
+export const restoreUserData = () => {
+  const userPath = getUserPath();
+  if (fs.existsSync(`${userPath}_backup`)) {
+    rimraf.sync(userPath);
+    fs.renameSync(`${userPath}_backup`, userPath);
+  }
+};
+
+export function applicationProxy(envVar, userData = null) {
+  const userPath = getUserPath();
+  backupUserData();
 
   if (userData != null) {
     const jsonFile = path.resolve("tests/setups/", userData);
-
-    fs.mkdirSync(userPath);
     console.log(`${userPath}/app.json`);
     fs.copyFileSync(jsonFile, `${userPath}/app.json`);
   }
@@ -50,6 +64,6 @@ export function applicationProxy(envVar = {}, userData = null) {
 
 export const getMockDeviceEvent = app => async (...events) => {
   return await app.client.execute(e => {
-    window.mockDeviceEvent(...e);
+    window.mock.events.mockDeviceEvent(...e);
   }, events);
 };

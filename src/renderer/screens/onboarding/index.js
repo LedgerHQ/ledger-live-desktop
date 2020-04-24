@@ -174,18 +174,20 @@ class OnboardingC extends PureComponent<Props> {
     };
 
     return (
-      <Container id="onboarding-container">
-        {step.options.showBreadcrumb && <OnboardingBreadcrumb />}
-        {onboardingRelaunched ? (
-          <CloseContainer onClick={this.cancelRelaunch}>
-            <IconCross size={16} />
-          </CloseContainer>
-        ) : null}
-        <StepContainer>
-          <StepComponent {...stepProps} />
-        </StepContainer>
+      <>
+        <Container id="onboarding-container">
+          {step.options.showBreadcrumb && <OnboardingBreadcrumb />}
+          {onboardingRelaunched ? (
+            <CloseContainer onClick={this.cancelRelaunch}>
+              <IconCross size={16} />
+            </CloseContainer>
+          ) : null}
+          <StepContainer>
+            <StepComponent {...stepProps} />
+          </StepContainer>
+        </Container>
         <DebugMock />
-      </Container>
+      </>
     );
   }
 }

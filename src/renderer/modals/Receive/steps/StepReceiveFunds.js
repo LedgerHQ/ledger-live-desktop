@@ -228,7 +228,7 @@ const StepReceiveFunds = ({
                 <Button outlineGrey onClick={onVerify}>
                   <Trans i18nKey="common.reverify" />
                 </Button>
-                <Button primary onClick={onClose}>
+                <Button id={"receive-receive-continue-button"} primary onClick={onClose}>
                   <Trans i18nKey="common.done" />
                 </Button>
               </Box>

@@ -63,7 +63,13 @@ export const StepAccountFooter = ({
 
   return (
     <>
-      <Button isLoading={bridgePending} primary disabled={!canNext} onClick={onNext}>
+      <Button
+        id={"delegate-account-continue-button"}
+        isLoading={bridgePending}
+        primary
+        disabled={!canNext}
+        onClick={onNext}
+      >
         {t("common.continue")}
       </Button>
     </>
