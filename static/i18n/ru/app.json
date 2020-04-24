@@ -1412,6 +1412,10 @@
       "title": "{{message}}",
       "description": "Произошла ошибка. Повторите попытку или свяжитесь с нами."
     },
+    "AccountAwaitingSendPendingOperations": {
+      "title": "There is an operation pending for this account.",
+      "description": "Please wait a few minutes and come back."
+    },
     "AccountNameRequired": {
       "title": "Необходимо указать название счета.",
       "description": "Укажите название счета."
