@@ -113,7 +113,7 @@ class StepImport extends PureComponent<StepProps> {
 
       const syncConfig = {
         paginationConfig: {
-          operations: 0,
+          operations: 20,
         },
         blacklistedTokenIds,
       };
