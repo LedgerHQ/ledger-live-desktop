@@ -35,9 +35,16 @@ const useCosmosValidators = () => {
   return validators;
 };
 
-/** @TODO move this in common and code the formatting logic */
+/** @TODO move this in common */
 const formatDelegations = (delegations, validators) => {
-  return delegations;
+  const total = delegations.reduce((sum, d) => sum + d.amount, 0);
+  return delegations.map((d, i, arr) => ({
+    validator: validators.find(v => v.validatorAddress === d.validatorAddress),
+    address: d.validatorAddress,
+    amount: d.amount,
+    distribution: total / d.amount,
+    pendingRewards: d.pendingRewards,
+  }));
 };
 
 type Props = {
@@ -139,15 +146,19 @@ const Delegation = ({ account }: Props) => {
       {hasDelegations ? (
         <Card p={0} mt={24} mb={6}>
           <Header />
-          {formattedDelegations.map(({ validator, address, amount, distribution }, index) => (
-            <Row
-              key={index}
-              validator={validator}
-              address={address}
-              amount={amount}
-              distribution={distribution}
-            />
-          ))}
+          {formattedDelegations.map(
+            ({ validator, address, amount, distribution, pendingRewards }, index) => (
+              <Row
+                key={index}
+                validator={validator}
+                address={address}
+                amount={amount}
+                distribution={distribution}
+                pendingRewards={pendingRewards}
+                unit={unit}
+              />
+            ),
+          )}
         </Card>
       ) : (
         <Wrapper horizontal>

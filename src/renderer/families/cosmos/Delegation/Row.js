@@ -4,7 +4,10 @@ import React from "react";
 import styled from "styled-components";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import type { BigNumber } from "bignumber.js";
+import type { Unit } from "@ledgerhq/live-common/lib/types";
 
+import FormattedVal from "~/renderer/components/FormattedVal";
 import Ellipsis from "~/renderer/components/Ellipsis";
 
 import { TableLine } from "./Header";
@@ -30,9 +33,11 @@ type Props = {
   address: string,
   amount: React$Node,
   distribution: number,
+  pendingRewards: BigNumber,
+  unit: Unit,
 };
 
-const Row = ({ validator, address, amount, distribution }: Props) => {
+const Row = ({ validator, address, amount, distribution, pendingRewards, unit }: Props) => {
   return (
     <Wrapper>
       <Column strong>
@@ -41,8 +46,11 @@ const Row = ({ validator, address, amount, distribution }: Props) => {
       <Column>
         <Discreet>{amount}</Discreet>
       </Column>
-      <Column>{distribution}%</Column>
+      <Column>{(distribution * 100).toFixed(2)}%</Column>
       <Column>{validator ? validator.status : "–"}%</Column>
+      <Column>
+        <FormattedVal val={pendingRewards} unit={unit} showCode />
+      </Column>
     </Wrapper>
   );
 };
