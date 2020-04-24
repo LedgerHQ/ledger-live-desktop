@@ -215,31 +215,6 @@
       }
     }
   },
-  "partners": {
-    "title": "暗号資産を購入",
-    "desc": "当社が選択したサービスをいくつかお試しください",
-    "visitWebsite": "ウェブサイトを訪問してください",
-    "btcdirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot.",
-    "changelly": "Changellyは、100を超えるコインやトークンが上場された人気の高い即時暗号資産取引所です。",
-    "changenow": "ChangeNOW is one of the leading custody-free instant exchange services.",
-    "coinberry": "Coinberryはカナダで最も信頼されている暗号資産プラットフォームです。銀行より優れたセキュリティ、クラス最高のユーザーインターフェース、そして手数料無しの積み立てと引き出しを実現しています。 あなたがカナダ市民でないならば、事前登録して我々のプラットフォームへのアーリーアクセス権を取得してください。",
-    "coinhouse": "コインハウスは、暗号資産の分析、取得、販売および安全な保管を検討している、個人および機関投資家にとって信頼できるプラットフォームです",
-    "coinmama": "Coinmamaは、世界中どこにいても、デジタルアセットの購入が迅速、安全、かつ楽しくできる金融サービスです。",
-    "crypto": "Crypto.com is the best place to buy, sell, track and pay with crypto.",
-    "genesis": "Genesisは、Bitcoin、Bitcoin Cash、Ethereum、Ethereum Classic、Litecoin、XRPなどの暗号資産による流動性と借入れを提供する機関投資会社です。",
-    "kyberswap": "迅速・簡単かつ安全なトークン交換プラットフォーム。 Kyber Networkのオンチェーン流動性プロトコルを採用。",
-    "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum.",
-    "paybis": "Paybis.com is one of the most trusted cryptocurrency brokers worldwide since 2014, customer satisfaction - 4.7/5 via Trustpilot. Visa/Master cards, Bank Transfers, Skrill/Neteller accepted. 24/7 online customer support.",
-    "shapeshift": "ShapeShiftは、ユーザーがデジタルアセットを迅速かつ安全に売買できるオンライン市場です。カウンターパーティリスクがなく、サインアッププロセスにも時間がかからず、容易です。",
-    "simplex": "SimplexはEUで認可を受けた金融機関であり、不正行為に悩まされることなくクレジットカード決済を行えるソリューションを提供します。",
-    "swft": "SWFT Blockchain is a worldwide cross-blockchain transfer protocol and payment network, enabling simpler, faster and safer swaps between over 200 cryptocurrencies and free crypto payments to anyone anywhere",
-    "taxtoken": "米国市民向けに、自動化された暗号資産の税金と費用計算ソフトウェア。",
-    "thorswap": "ThorSwapは、分散型アトミックスワップテクノロジを採用した、迅速かつ安全で公正な暗号資産市場です。少額取引であれば、登録なし、またはKYC無しでお始めいただけますので、初心者には最も簡便です。",
-    "bitpanda": "Bitpandaは、 Bitcoin、Ethereum、IOTAなどの売買のための欧州の個人向け大手ブローカーです。資金の預入には、クレジットカード、SOFORT-Transfer、NETELLERその他の方法がご使用になれます。",
-    "exmo": "EXMOは、2013年に設立され、ロンドン、キエフ、バルセロナ、モスクワに拠点を置く東ヨーロッパで第1位の取引所であり、量と流動性において世界最大の取引所の1つです。",
-    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure and intuitive platform to buy and sell Bitcoin, Litecoin, Ethereum, XRP and other digital assets. Other key features include advanced trading, free deposits, and an institutional-grade custody solution via Ledger Vault.",
-    "voyager": "Love your Crypto Journey with Voyager. A licensed crypto broker with commission-free trading of 20+ cryptocurrencies."
-  },
   "genuinecheck": {
     "modal": {
       "title": "真贋性チェック"
