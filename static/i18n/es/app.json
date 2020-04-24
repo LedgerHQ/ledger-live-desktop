@@ -1412,6 +1412,10 @@
       "title": "{{message}}",
       "description": "Algo ha fallado. Vuelve a intentarlo o ponte en contacto con nosotros."
     },
+    "AccountAwaitingSendPendingOperations": {
+      "title": "There is an operation pending for this account.",
+      "description": "Please wait a few minutes and come back."
+    },
     "AccountNameRequired": {
       "title": "Se requiere un nombre de cuenta.",
       "description": "Indique un nombre de cuenta."

@@ -1412,6 +1412,10 @@
       "title": "{{message}}",
       "description": "出错了。请重试或联系我们。"
     },
+    "AccountAwaitingSendPendingOperations": {
+      "title": "There is an operation pending for this account.",
+      "description": "Please wait a few minutes and come back."
+    },
     "AccountNameRequired": {
       "title": "账户名为必填",
       "description": "请提供账户名"
