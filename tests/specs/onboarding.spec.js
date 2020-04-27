@@ -5,7 +5,7 @@ import GenuinePage from "../po/genuine.page";
 import PasswordPage from "../po/password.page";
 import AnalyticsPage from "../po/analytics.page";
 import PortfolioPage from "../po/portfolio.page";
-import LockPage from "../po/lock.page";
+import LockscreenPage from "../po/lockscreen.page";
 import data from "../data/onboarding/";
 import { deviceInfo155, mockListAppsResult } from "@ledgerhq/live-common/lib/apps/mock";
 
@@ -19,7 +19,7 @@ describe("When I launch the app for the first time", () => {
   let passwordPage;
   let analyticsPage;
   let portfolioPage;
-  let lockPage;
+  let lockscreenPage;
   let mockDeviceEvent;
 
   beforeAll(() => {
@@ -30,7 +30,7 @@ describe("When I launch the app for the first time", () => {
     passwordPage = new PasswordPage(app);
     analyticsPage = new AnalyticsPage(app);
     portfolioPage = new PortfolioPage(app);
-    lockPage = new LockPage(app);
+    lockscreenPage = new LockscreenPage(app);
     mockDeviceEvent = getMockDeviceEvent(app);
 
     return app.start();
@@ -442,30 +442,56 @@ describe("When I launch the app for the first time", () => {
     describe("When I lock the app", () => {
       it("should display lock screen", async () => {
         await portfolioPage.topbarLockButton.click();
-        expect(await portfolioPage.isVisible()).toBe(false);
-        expect(await lockPage.isVisible()).toBe(true);
-        expect(await lockPage.logo.isVisible()).toBe(true);
-        expect(await lockPage.pageTitle.getText()).toBe(data.lock.title);
-        expect(await lockPage.pageDescription.getText()).toBe(data.lock.description);
-        expect(await lockPage.passwordInput.isVisible()).toBe(true);
-        expect(await lockPage.revealButton.isVisible()).toBe(true);
-        expect(await lockPage.loginButton.isVisible()).toBe(true);
-        expect(await lockPage.forgottenPasswordButton.isVisible()).toBe(true);
+        expect(await portfolioPage.isVisible(true)).toBe(false);
+        expect(await lockscreenPage.isVisible()).toBe(true);
+        expect(await lockscreenPage.logo.isVisible()).toBe(true);
+        // FIXME: LL-
+        // expect(await lockscreenPage.pageTitle.getText()).toBe(data.lock.title);
+        // expect(await lockscreenPage.pageDescription.getText()).toBe(data.lock.description);
+        expect(await lockscreenPage.passwordInput.isVisible()).toBe(true);
+        expect(await lockscreenPage.revealButton.isVisible()).toBe(true);
+        expect(await lockscreenPage.loginButton.isVisible()).toBe(true);
+        expect(await lockscreenPage.forgottenButton.isVisible()).toBe(true);
       });
 
       describe("When I click on reveal button", () => {
         it("should reveal the password input value", async () => {
-          await lockPage.revealButton.click();
-          expect(await lockPage.passwordInput.getValue()).toBe(true);
+          await lockscreenPage.revealButton.click();
+          expect(await lockscreenPage.passwordInput.getAttribute("type")).toBe("text");
+        });
+      });
+
+      describe("When I click on forgotten password button", () => {
+        it("should open a modal and ask to reset the app", async () => {
+          await lockscreenPage.forgottenButton.click();
+          expect(await modalPage.isVisible()).toBe(true);
+          expect(await modalPage.title.getText()).toBe(data.lockscreen.reset.title);
+          expect(await modalPage.closeButton.isVisible()).toBe(true);
+          expect(await modalPage.cancelButton.isVisible()).toBe(true);
+          expect(await modalPage.confirmButton.isVisible()).toBe(true);
+          await modalPage.closeButton.click();
+          expect(await modalPage.isVisible(true)).toBe(false);
         });
       });
     });
 
     describe("When I unlock the app", () => {
-      it("should back to the portfolio", async () => {
-        await lockPage.topbarLockButton.click();
-        expect(await lockPage.isVisible()).toBe(false);
-        expect(await portfolioPage.isVisible()).toBe(true);
+      describe("and password is incorrect", () => {
+        it("should warn about password mismatch", async () => {
+          await lockscreenPage.passwordInput.addValue(`${data.password.bad}\uE007`);
+          expect(await lockscreenPage.inputError.getText()).toBe(
+            "The password you entered is incorrect",
+          );
+        });
+      });
+
+      describe("and password is correct", () => {
+        it("should back to the portfolio", async () => {
+          await lockscreenPage.passwordInput.setValue(data.password.new);
+          await lockscreenPage.loginButton.click();
+          expect(await lockscreenPage.isVisible(true)).toBe(false);
+          expect(await portfolioPage.isVisible()).toBe(true);
+        });
       });
     });
   });
