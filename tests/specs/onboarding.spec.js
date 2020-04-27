@@ -445,7 +445,7 @@ describe("When I launch the app for the first time", () => {
         expect(await portfolioPage.isVisible(true)).toBe(false);
         expect(await lockscreenPage.isVisible()).toBe(true);
         expect(await lockscreenPage.logo.isVisible()).toBe(true);
-        // FIXME: LL-
+        // FIXME: LL-2410
         // expect(await lockscreenPage.pageTitle.getText()).toBe(data.lock.title);
         // expect(await lockscreenPage.pageDescription.getText()).toBe(data.lock.description);
         expect(await lockscreenPage.passwordInput.isVisible()).toBe(true);
