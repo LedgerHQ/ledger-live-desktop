@@ -71,13 +71,18 @@ const ConfirmModal = ({
         title={title}
         renderFooter={() => (
           <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
-            {!isLoading && <Button onClick={onReject}>{realCancelText}</Button>}
+            {!isLoading && (
+              <Button onClick={onReject} id="modal-cancel-button">
+                {realCancelText}
+              </Button>
+            )}
             <Button
               onClick={onConfirm}
               primary={!isDanger}
               danger={isDanger}
               isLoading={isLoading}
               disabled={isLoading}
+              id="modal-confirm-button"
             >
               {realConfirmText}
             </Button>

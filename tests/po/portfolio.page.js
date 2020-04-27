@@ -5,7 +5,11 @@ export default class PortfolioPage extends Page {
     return this.app.client.element("#portfolio-container");
   }
 
-  isVisible() {
-    return this.app.client.waitForVisible("#portfolio-container");
+  async isVisible(reverse = false) {
+    const visible = reverse
+      ? await !this.app.client.waitForVisible("#portfolio-container", 3000, reverse)
+      : await this.app.client.waitForVisible("#portfolio-container");
+
+    return visible;
   }
 }

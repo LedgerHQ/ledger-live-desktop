@@ -1,6 +1,6 @@
 import Page from "./page";
 
-export default class LockPage extends Page {
+export default class LockscreenPage extends Page {
   get passwordInput() {
     return this.app.client.element("#lockscreen-password-input");
   }
@@ -21,7 +21,11 @@ export default class LockPage extends Page {
     return this.app.client.element("#lockscreen-forgotten-button");
   }
 
-  isVisible() {
-    return this.app.client.waitForVisible("#lockscreen-container");
+  async isVisible(reverse = false) {
+    const visible = reverse
+      ? await !this.app.client.waitForVisible("#lockscreen-container", 3000, reverse)
+      : await this.app.client.waitForVisible("#lockscreen-container");
+
+    return visible;
   }
 }

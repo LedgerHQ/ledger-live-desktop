@@ -150,7 +150,7 @@ const IsUnlocked = ({ children }: Props) => {
                   onChange={handleChangeInput("password")}
                   value={inputValue.password}
                   error={incorrectPassword}
-                  id="#lockscreen-password-input"
+                  id="lockscreen-password-input"
                 />
               </Box>
               <Box ml={2}>
@@ -159,7 +159,7 @@ const IsUnlocked = ({ children }: Props) => {
                   primary
                   flow={1}
                   style={{ width: 46, height: 46, padding: 0, justifyContent: "center" }}
-                  id="#lockscreen-login-button"
+                  id="lockscreen-login-button"
                 >
                   <Box alignItems="center">
                     <IconArrowRight size={20} />
@@ -172,7 +172,7 @@ const IsUnlocked = ({ children }: Props) => {
               mt={3}
               small
               onClick={handleOpenHardResetModal}
-              id="#lockscreen-forgotten-button"
+              id="lockscreen-forgotten-button"
             >
               {t("common.lockScreen.lostPassword")}
             </Button>
