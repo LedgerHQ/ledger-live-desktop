@@ -8,10 +8,11 @@ import type { PortfolioRange } from "@ledgerhq/live-common/lib/types/portfolio";
 import Track from "~/renderer/analytics/Track";
 import BoldToggle from "~/renderer/components/BoldToggle";
 import Box from "~/renderer/components/Box";
-import DropDown, { DropDownItem } from "~/renderer/components/DropDown";
-import type { DropDownItemType } from "~/renderer/components/DropDown";
+import type { DropDownItemType } from "~/renderer/components/DropDownSelector";
 import Text from "~/renderer/components/Text";
 import IconAngleDown from "~/renderer/icons/AngleDown";
+import IconAngleUp from "~/renderer/icons/AngleUp";
+import DropDownSelector, { DropDownItem } from "~/renderer/components/DropDownSelector";
 
 type Props = {
   onRangeChange: PortfolioRange => void,
@@ -20,13 +21,11 @@ type Props = {
 
 type RangeItemProps = {
   item: DropDownItemType,
-  isHighlighted: boolean,
   isActive: boolean,
 };
 
 const RangeItem = React.memo<RangeItemProps>(function RangeItem({
   item,
-  isHighlighted,
   isActive,
 }: RangeItemProps) {
   return (
@@ -34,7 +33,6 @@ const RangeItem = React.memo<RangeItemProps>(function RangeItem({
       alignItems="center"
       justifyContent="flex-start"
       horizontal
-      isHighlighted={isHighlighted}
       isActive={isActive}
       flow={2}
     >
@@ -65,33 +63,46 @@ const Range = ({ range, ...props }: Props) => {
     },
   ];
 
-  const onRangeChange = ({ selectedItem: item }) => {
+  const onRangeChange = item => {
     if (!item) {
       return;
     }
 
-    props.onRangeChange(item.key);
+    if (item.key === "year" || item.key === "month" || item.key === "week") {
+      props.onRangeChange(item.key);
+    }
   };
 
   return (
-    <DropDown
-      flow={1}
-      offsetTop={2}
-      horizontal
+    <DropDownSelector
       items={rangeItems}
       renderItem={renderItem}
-      onStateChange={onRangeChange}
+      onChange={onRangeChange}
+      controlled
       value={rangeItems.find(item => item.key === range)}
     >
-      <Track onUpdate event="ChangeRange" range={rangeItems} />
-      <Text color="palette.text.shade60" ff="Inter|SemiBold" fontSize={4}>
-        {t("common.range")}
-      </Text>
-      <Box alignItems="center" color="wallet" ff="Inter|SemiBold" flow={1} fontSize={4} horizontal>
-        <Text color="wallet">{t(`accounts.range.${range || "week"}`)}</Text>
-        <IconAngleDown size={16} />
-      </Box>
-    </DropDown>
+      {({ isOpen, value }) =>
+        value ? (
+          <Box horizontal flow={1}>
+            <Track onUpdate event="ChangeRange" range={rangeItems} />
+            <Text color="palette.text.shade60" ff="Inter|SemiBold" fontSize={4}>
+              {t("common.range")}
+            </Text>
+            <Box
+              alignItems="center"
+              color="wallet"
+              ff="Inter|SemiBold"
+              flow={1}
+              fontSize={4}
+              horizontal
+            >
+              <Text color="wallet">{t(`accounts.range.${value.key || "week"}`)}</Text>
+              {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
+            </Box>
+          </Box>
+        ) : null
+      }
+    </DropDownSelector>
   );
 };
 

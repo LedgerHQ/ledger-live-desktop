@@ -6,6 +6,11 @@ import type { Store } from "redux";
 import { HashRouter as Router } from "react-router-dom";
 
 import "./global.css";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/animations/shift-away.css";
+import "tippy.js/animations/shift-toward.css";
+import "tippy.js/dist/svg-arrow.css";
+
 import type { State } from "~/renderer/reducers";
 import StyleProvider from "~/renderer/styles/StyleProvider";
 import { UpdaterProvider } from "~/renderer/components/Updater/UpdaterContext";
