@@ -35,3 +35,6 @@ jobs:
           yarn prepublish
       - name: test
         run: yarn ci
+      - name: Run spectron
+        id: spectron
+        uses: IAmMorrow/run-headless@v4
