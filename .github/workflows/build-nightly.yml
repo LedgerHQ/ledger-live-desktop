@@ -16,7 +16,7 @@ jobs:
         run: yarn --ignore-scripts --frozen-lockfile
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.0.0
+      - uses: ledgerhq/actions/get-package-infos@v1.1.0
         id: version
       - name: upload macOS app
         uses: actions/upload-artifact@v1
@@ -45,7 +45,7 @@ jobs:
         run: yarn --ignore-scripts --frozen-lockfile
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.0.0
+      - uses: ledgerhq/actions/get-package-infos@v1.1.0
         id: version
       - name: upload linux app
         uses: actions/upload-artifact@v1
@@ -75,7 +75,7 @@ jobs:
         run: yarn --ignore-scripts --frozen-lockfile
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.0.0
+      - uses: ledgerhq/actions/get-package-infos@v1.1.0
         id: version
       - name: upload windows
         uses: actions/upload-artifact@v1
