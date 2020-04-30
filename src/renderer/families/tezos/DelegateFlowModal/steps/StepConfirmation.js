@@ -114,6 +114,7 @@ export const StepConfirmationFooter = ({
       {concernedOperation ? (
         <Button
           ml={2}
+          id={"delegate-confirmation-details-button"}
           event="Delegation Flow Step 4 View OpD Clicked"
           onClick={() => {
             closeModal();

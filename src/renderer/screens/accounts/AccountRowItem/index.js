@@ -224,7 +224,12 @@ class AccountRowItem extends PureComponent<Props, State> {
     const key = `${account.id}_${hideEmptyTokens ? "hide_empty_tokens" : ""}`;
 
     return (
-      <div style={{ position: "relative" }} key={key} hidden={hidden}>
+      <div
+        className={"accounts-account-row-item"}
+        style={{ position: "relative" }}
+        key={key}
+        hidden={hidden}
+      >
         <span style={{ position: "absolute", top: -70 }} ref={this.scrollTopFocusRef} />
         <Row expanded={expanded} tokens={showTokensIndicator} key={mainAccount.id}>
           <AccountContextMenu account={account}>

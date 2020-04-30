@@ -29,7 +29,7 @@
     "release": "node ./tools/dist --publish",
     "ci": "node ./tools/ci.js",
     "test": "jest src",
-    "spectron": "jest tests/specs/onboarding.spec.js"
+    "spectron": "jest tests/specs/bullrun.spec.js"
   },
   "engines": {
     "node": ">=12"

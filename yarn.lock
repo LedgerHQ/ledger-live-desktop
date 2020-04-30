@@ -1418,9 +1418,9 @@
     node-pre-gyp-github "^1.4.3"
 
 "@ledgerhq/live-common@^12.18.0":
-  version "12.18.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.18.0.tgz#5353d312114df9814f9269cc02ac671e1238ab3b"
-  integrity sha512-E9LoB7F3QSubhg6pRJH/0MIOXX4vWj+flMKwYQ9LPAYFyQVs28hPYhbtnX4Qr4tds4VLtaFvb8Ov8r0GkQQ2Gg==
+  version "12.19.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.19.0.tgz#3356855c74053e7da38bac5d4ff57141303397a0"
+  integrity sha512-3RTIhS0WAtp/bpnX2cv/Oq9YNk8yEYFJuyaiFM+f4IpaAtgbStQt/oMVb211T52jIbUWi9pkLc7a5QiKlz6Uhw==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "5.13.1"
