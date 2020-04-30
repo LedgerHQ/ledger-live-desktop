@@ -31,7 +31,7 @@ const SectionGeneral = () => {
 
   return (
     <Section>
-      <TrackPage category="Settings" name="Display" />
+      <TrackPage category="Settings" name="Display" id="settings-general-header" />
       <Header
         icon={<IconDisplay size={16} />}
         title={t("settings.tabs.display")}

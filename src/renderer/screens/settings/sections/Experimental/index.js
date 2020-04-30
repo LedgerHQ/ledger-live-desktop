@@ -51,7 +51,7 @@ const SectionExperimental = () => {
   const { t } = useTranslation();
 
   return (
-    <Section data-e2e="experimental_section_title">
+    <Section id="settings-experimental-container">
       <TrackPage category="Settings" name="Experimental" />
 
       <Header

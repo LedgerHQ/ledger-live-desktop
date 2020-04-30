@@ -17,12 +17,48 @@ export default class ModalPage extends Page {
     return this.app.client.element("#modal-terms-checkbox");
   }
 
-  get confirmButton() {
-    return this.app.client.element("#modal-confirm-button");
+  get selectCurrency() {
+    return this.app.client.element("#select-currency");
+  }
+
+  get selectCurrencyInput() {
+    return this.app.client.element("#select-currency input");
+  }
+
+  get currencyBadge() {
+    return this.app.client.element("#currency-badge");
+  }
+
+  get modalAddAccountsButton() {
+    return this.app.client.element("#add-accounts-import-add-button");
+  }
+
+  get modalAddAccountFinishCloseButton() {
+    return this.app.client.element("#add-accounts-finish-close-button");
+  }
+
+  get addAccountsSuccess() {
+    return this.app.client.element("#add-account-success");
+  }
+
+  get selectCurrencyInput() {
+    return this.app.client.element("#select-currency input");
+  }
+
+  get currencyBadge() {
+    return this.app.client.element("#currency-badge");
   }
 
   get continueButton() {
     return this.app.client.element("#modal-continue-button");
+  }
+
+  get confirmButton() {
+    return this.app.client.element("#modal-confirm-button");
+  }
+
+  get releaseNotesContinueButton() {
+    return this.app.client.element("#modal-release-notes-continue-button");
   }
 
   get saveButton() {
@@ -45,7 +81,19 @@ export default class ModalPage extends Page {
     return visible;
   }
 
+  async isEnabled(reverse = false) {
+    const enabled = reverse
+      ? await !this.app.client.waitForEnabled("#modal-confirm-button", 3000, reverse)
+      : await this.app.client.waitForEnabled("#modal-confirm-button");
+
+    return enabled;
+  }
+
   close() {
     return this.closeButton.click();
+  }
+
+  continue() {
+    return this.continueButton.click();
   }
 }

@@ -37,7 +37,9 @@ const StepFinish = ({ currency, checkedAccountsIds }: StepProps) => {
 
       <TrackPage category="AddAccounts" name="Step4" />
       {currency ? <CurrencyCircleIcon currency={currency} size={50} showCheckmark /> : null}
-      <Title>{t("addAccounts.success", { count: checkedAccountsIds.length })}</Title>
+      <Title id="add-account-success">
+        {t("addAccounts.success", { count: checkedAccountsIds.length })}
+      </Title>
       <Text>{t("addAccounts.successDescription", { count: checkedAccountsIds.length })}</Text>
     </Box>
   );

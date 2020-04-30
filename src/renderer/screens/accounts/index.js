@@ -87,7 +87,7 @@ const AccountsPage = ({
   }
 
   return (
-    <Box>
+    <Box id="accounts-container">
       <TrackPage category="Accounts" accountsLength={accounts.length} />
       <TopBannerContainer>
         <MigrationBanner />

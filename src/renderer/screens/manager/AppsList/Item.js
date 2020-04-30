@@ -94,9 +94,12 @@ const Item: React$ComponentType<Props> = ({
       <Box flex="0.7" horizontal>
         <Image alt="" resource={manager.getIconUrl(app.icon)} width={40} height={40} />
         <AppName>
-          <Text ff="Inter|Bold" color="palette.text.shade100" fontSize={3}>{`${app.name}${
-            currency ? ` (${currency.ticker})` : ""
-          }`}</Text>
+          <Text
+            ff="Inter|Bold"
+            color="palette.text.shade100"
+            fontSize={3}
+            id="manager-app-name"
+          >{`${app.name}${currency ? ` (${currency.ticker})` : ""}`}</Text>
           <Text ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
             <Trans
               i18nKey="manager.applist.item.version"

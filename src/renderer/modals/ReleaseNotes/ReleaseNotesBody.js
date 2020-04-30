@@ -118,7 +118,7 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
         )}
         renderFooter={() => (
           <Box horizontal justifyContent="flex-end">
-            <Button onClick={onClose} primary>
+            <Button onClick={onClose} primary id="modal-release-notes-continue-button">
               {t("common.continue")}
             </Button>
           </Box>

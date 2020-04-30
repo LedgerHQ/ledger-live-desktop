@@ -34,7 +34,12 @@ const EmptyStateAccounts = ({ theme }: { theme: any }) => {
     <Box alignItems="center" pb={8} style={{ margin: "auto" }}>
       <Image alt="emptyState accounts logo" resource={NoAccounts} width="250" />
       <Box mt={5} alignItems="center">
-        <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={5}>
+        <Text
+          ff="Inter|SemiBold"
+          color="palette.text.shade100"
+          fontSize={5}
+          id="empty-state-add-account-title"
+        >
           {t("emptyState.accounts.title")}
         </Text>
         <Box mt={3}>
@@ -44,6 +49,7 @@ const EmptyStateAccounts = ({ theme }: { theme: any }) => {
             textAlign="center"
             fontSize={4}
             style={{ maxWidth: 440 }}
+            id="empty-state-account-desc"
           >
             {t("emptyState.accounts.desc")}
           </Text>
@@ -58,7 +64,7 @@ const EmptyStateAccounts = ({ theme }: { theme: any }) => {
           fontSize={3}
           color="palette.text.shade80"
           onClick={handleInstallApp}
-          data-e2e="accounts_empty_InstallApps"
+          id="empty-state-install-app"
         >
           {t("emptyState.accounts.buttons.installApp")}
         </FakeLink>

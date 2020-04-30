@@ -67,6 +67,7 @@ const SelectCurrency = <C: Currency>({
   const filteredOptions = manualFilter();
   return (
     <Select
+      id="select-currency"
       autoFocus={autoFocus}
       value={value}
       options={filteredOptions}

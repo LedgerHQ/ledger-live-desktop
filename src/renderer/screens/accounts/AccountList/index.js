@@ -120,7 +120,6 @@ class AccountList extends Component<Props, State> {
         ) : null}
         <Body
           horizontal
-          data-e2e="dashboard_AccountList"
           range={range}
           search={search}
           visibleAccounts={visibleAccounts}

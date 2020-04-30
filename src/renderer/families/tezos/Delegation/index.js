@@ -44,7 +44,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
           ff="Inter|Medium"
           fontSize={6}
           color="palette.text.shade100"
-          data-e2e="title_Delegation"
+          id="tezos-delegation-title"
         >
           {t("delegation.header")}
         </Text>

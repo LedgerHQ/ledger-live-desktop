@@ -25,7 +25,7 @@ const ShareAnalyticsButton = () => {
       <Switch
         isChecked={shareAnalytics}
         onChange={onChangeShareAnalytics}
-        data-e2e="shareAnalytics_button"
+        id="settings-analytics-button"
       />
     </>
   );

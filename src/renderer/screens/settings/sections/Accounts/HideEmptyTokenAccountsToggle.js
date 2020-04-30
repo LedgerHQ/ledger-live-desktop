@@ -30,7 +30,7 @@ const HideEmptyTokenAccountsToggle = () => {
       <Switch
         isChecked={hideEmptyTokenAccounts}
         onChange={handleOnChange}
-        data-e2e="hideEmptyTokenAccounts_button"
+        id="settings-accounts-hide-empty-button"
       />
     </>
   );

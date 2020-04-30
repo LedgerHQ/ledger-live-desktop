@@ -67,8 +67,8 @@ class PortfolioBalanceSummary extends PureComponent<Props> {
       t,
     } = this.props;
     return (
-      <Card p={0} py={5}>
-        <Box px={6} data-e2e="dashboard_graph">
+      <Card p={0} py={5} id="dashboard-graph">
+        <Box px={6}>
           <BalanceInfos
             t={t}
             unit={counterValue.units[0]}

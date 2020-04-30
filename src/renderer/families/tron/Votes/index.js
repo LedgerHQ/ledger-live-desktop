@@ -132,7 +132,7 @@ const Delegation = ({ account }: Props) => {
           ff="Inter|Medium"
           fontSize={6}
           color="palette.text.shade100"
-          data-e2e="title_Delegation"
+          id="tron-delegation-title"
         >
           <Trans i18nKey="tron.voting.header" />
         </Text>

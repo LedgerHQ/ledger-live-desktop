@@ -124,8 +124,8 @@ const AppsList = ({
 
   return (
     <>
-      {render ? render({ disableFirmwareUpdate, installed: state.installed }) : null}
-      <Container>
+      {render ? render(disableFirmwareUpdate) : null}
+      <Container id="manager-applist-container">
         {currentError && (
           <ErrorModal isOpened={!!currentError} error={currentError.error} onClose={onCloseError} />
         )}

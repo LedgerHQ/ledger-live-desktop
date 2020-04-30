@@ -192,7 +192,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
               )
             ) : null}
             {appStoreView && installed && (
-              <SuccessInstall>
+              <SuccessInstall id="manager-app-install-success">
                 <IconCheck size={16} />
                 <Text ff="Inter|SemiBold" fontSize={4}>
                   <Trans i18nKey="manager.applist.item.installed" />
@@ -209,6 +209,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
                 }
               >
                 <Button
+                  id="manager-app-install-button"
                   style={{ display: "flex" }}
                   lighterPrimary
                   disabled={notEnoughMemoryToInstall}

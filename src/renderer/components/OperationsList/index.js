@@ -115,13 +115,13 @@ export class OperationsList extends PureComponent<Props, State> {
             color="palette.text.shade100"
             ff="Inter|Medium"
             fontSize={6}
-            data-e2e="dashboard_OperationList"
+            id="portfolio-last-ops-title"
           >
             {title}
           </Text>
         )}
         {groupedOperations.sections.map(group => (
-          <Box flow={2} key={group.day.toISOString()}>
+          <Box flow={2} key={group.day.toISOString()} id="operations-list">
             <SectionTitle day={group.day} />
             <Card p={0}>
               {group.data.map(operation => {

@@ -92,13 +92,13 @@ const Settings = ({ history, location, match }: Props) => {
   }, [getCurrentTab, location, match]);
 
   return (
-    <Box pb={4} selectable>
+    <Box pb={4} selectable id="settings-container">
       <Box
         ff="Inter|SemiBold"
         color="palette.text.shade100"
         fontSize={7}
         mb={5}
-        data-e2e="settings_title"
+        id="settings-title"
       >
         {t("settings.title")}
       </Box>

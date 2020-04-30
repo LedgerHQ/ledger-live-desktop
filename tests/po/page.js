@@ -59,6 +59,10 @@ export default class Page {
     return this.app.client.element("#drawer-exchange-button");
   }
 
+  get drawerExperimental() {
+    return this.app.client.element("#drawer-experimental-button");
+  }
+
   get topbarDiscreetButton() {
     return this.app.client.element("#topbar-discreet-button");
   }

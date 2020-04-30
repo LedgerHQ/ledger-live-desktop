@@ -163,7 +163,7 @@ class ExportOperations extends PureComponent<Props, State> {
             <Box horizontal justifyContent="flex-end">
               <Button
                 disabled={!success && !checkedIds.length}
-                data-e2e="continue_button"
+                id="modal-export-ops-continue-button"
                 onClick={this.handleButtonClick}
                 primary
               >
