@@ -152,7 +152,8 @@ if (getEnv("MOCK")) {
   observerAwareEventLoop();
 }
 
-export const mockedEventEmitter = window.mock.events.emitter;
+// $FlowFixMe
+export const mockedEventEmitter = getEnv("MOCK") ? window.mock.events.emitter : null;
 
 const DebugMock = () => {
   const [queue, setQueue] = useState(window.mock.events.queue);
