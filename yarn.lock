@@ -1307,15 +1307,16 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-5.13.1.tgz#1df73a8084609888fabcefbdb9edfd4c11ab3a22"
   integrity sha512-IuEw9a70K3C3AZV4yVGk75HlwmKmJaR6EjMIxBAupiCw0G6rBP0d62MA1Vx4dg082LKKNXKafWcDstLG4ySpBA==
 
-"@ledgerhq/hw-app-btc@^5.13.1":
-  version "5.13.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-5.13.1.tgz#a5ec50623369c8d1c7b040cb2236745077918c69"
-  integrity sha512-PrxrF1MiKLYZY1/WED8zhp5Q+kupLG38sPI6oFHZqruj+vcRqPkYkBZDUhNdpkrk31y4AJMcc1iuoxUF0wVqEA==
+"@ledgerhq/hw-app-btc@5.15.0-alpha.5":
+  version "5.15.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-5.15.0-alpha.5.tgz#937aeacfcf4d77defd9b835eab775c4b861ed41e"
+  integrity sha512-tkLhL+urTHOTL7Fa1ZN+BOfKDr1y3rxf9avt3SN2lWVRTNntbbgw6wNtIValWp/LSUOW3WdqSe4DB/YxJy6qZQ==
   dependencies:
     "@ledgerhq/hw-transport" "^5.13.1"
     bip32-path "^0.4.2"
     invariant "^2.2.4"
     ripemd160 "2"
+    semver "^7.3.2"
     sha.js "2"
 
 "@ledgerhq/hw-app-eth@5.14.0":
@@ -1417,15 +1418,15 @@
     node-pre-gyp "^0.14.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^12.18.0":
-  version "12.19.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.19.0.tgz#3356855c74053e7da38bac5d4ff57141303397a0"
-  integrity sha512-3RTIhS0WAtp/bpnX2cv/Oq9YNk8yEYFJuyaiFM+f4IpaAtgbStQt/oMVb211T52jIbUWi9pkLc7a5QiKlz6Uhw==
+"@ledgerhq/live-common@12.20.0-beta.0":
+  version "12.20.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.20.0-beta.0.tgz#5fc0956bde8dd3ac6c86fc1bd1d5bc7095cd4a71"
+  integrity sha512-vMS+3fxdU6ybLKPJOxyChL8FQ91jFOIJUwjd6aK6QsgFWwtiC0j5D+PpeGwqGA/cPR20kSSN8N2YoVEHBj+yeg==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "5.13.1"
     "@ledgerhq/errors" "5.13.1"
-    "@ledgerhq/hw-app-btc" "^5.13.1"
+    "@ledgerhq/hw-app-btc" "5.15.0-alpha.5"
     "@ledgerhq/hw-app-eth" "5.14.0"
     "@ledgerhq/hw-app-str" "^5.13.1"
     "@ledgerhq/hw-app-trx" "5.13.1"
