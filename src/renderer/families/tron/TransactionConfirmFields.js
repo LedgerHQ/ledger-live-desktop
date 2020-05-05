@@ -38,38 +38,22 @@ const AddressText = styled(Text).attrs(() => ({
 `;
 
 const TronResourceField = ({ account, parentAccount, transaction, field }: FieldComponentProps) => {
-  invariant(field.type === "tron.resources", "TronResourceField invalid");
+  invariant(field.type === "tron.resource", "TronResourceField invalid");
   return (
-    <TransactionConfirmField label="Resource">
+    <TransactionConfirmField label={field.label}>
       <AddressText ff="Inter|SemiBold">{field.value}</AddressText>
     </TransactionConfirmField>
   );
 };
 
-const TronVotesField = ({
-  account,
-  parentAccount,
-  transaction,
-}: {
-  account: AccountLike,
-  parentAccount: ?Account,
-  transaction: Transaction,
-}) => {
+const TronVotesField = ({ account, parentAccount, transaction, field }: FieldComponentProps) => {
   const mainAccount = getMainAccount(account, parentAccount);
   invariant(transaction.family === "tron", "tron transaction");
   const { votes } = transaction;
   if (!votes) return null;
   return (
     <Box vertical justifyContent="space-between" mb={2}>
-      <TransactionConfirmField
-        label={
-          <Trans
-            i18nKey="TransactionConfirm.votes"
-            count={votes.length}
-            values={{ count: votes.length }}
-          />
-        }
-      />
+      <TransactionConfirmField label={field.label} />
 
       <OperationDetailsVotes votes={votes} account={mainAccount} isTransactionField />
     </Box>

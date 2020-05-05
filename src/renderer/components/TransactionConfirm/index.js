@@ -24,7 +24,7 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/rendering";
 import TransactionConfirmField from "./TransactionConfirmField";
 
-const AddressText = styled(Text).attrs(() => ({
+const FieldText = styled(Text).attrs(() => ({
   ml: 1,
   ff: "Inter|Medium",
   color: "palette.text.shade80",
@@ -45,8 +45,8 @@ export type FieldComponentProps = {
 
 export type FieldComponent = React$ComponentType<FieldComponentProps>;
 
-const AmountField = ({ account, status: { amount } }: FieldComponentProps) => (
-  <TransactionConfirmField label={<Trans i18nKey="send.steps.details.amount" />}>
+const AmountField = ({ account, status: { amount }, field }: FieldComponentProps) => (
+  <TransactionConfirmField label={field.label}>
     <FormattedVal
       color={"palette.text.shade80"}
       unit={getAccountUnit(account)}
@@ -59,12 +59,12 @@ const AmountField = ({ account, status: { amount } }: FieldComponentProps) => (
   </TransactionConfirmField>
 );
 
-const FeesField = ({ account, parentAccount, status }: FieldComponentProps) => {
+const FeesField = ({ account, parentAccount, status, field }: FieldComponentProps) => {
   const mainAccount = getMainAccount(account, parentAccount);
   const { estimatedFees } = status;
   const feesUnit = getAccountUnit(mainAccount);
   return (
-    <TransactionConfirmField label={<Trans i18nKey="send.steps.details.fees" />}>
+    <TransactionConfirmField label={field.label}>
       <FormattedVal
         color={"palette.text.shade80"}
         unit={feesUnit}
@@ -77,11 +77,22 @@ const FeesField = ({ account, parentAccount, status }: FieldComponentProps) => {
   );
 };
 
-const AddressField = ({ account, parentAccount, field }: FieldComponentProps) => {
+const AddressField = ({ field }: FieldComponentProps) => {
   invariant(field.type === "address", "AddressField invalid");
   return (
     <TransactionConfirmField label={field.label}>
-      <AddressText>{field.address}</AddressText>
+      <FieldText>{field.address}</FieldText>
+    </TransactionConfirmField>
+  );
+};
+
+// NB Leaving AddressField although I think it's redundant at this point
+// in case we want specific styles for addresses.
+const TextField = ({ field }: FieldComponentProps) => {
+  invariant(field.type === "text", "TextField invalid");
+  return (
+    <TransactionConfirmField label={field.label}>
+      <FieldText>{field.value}</FieldText>
     </TransactionConfirmField>
   );
 };
@@ -90,6 +101,7 @@ const commonFieldComponents: { [_: *]: FieldComponent } = {
   amount: AmountField,
   fees: FeesField,
   address: AddressField,
+  text: TextField,
 };
 
 const Container = styled(Box).attrs(() => ({
