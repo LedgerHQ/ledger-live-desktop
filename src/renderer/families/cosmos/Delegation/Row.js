@@ -52,10 +52,6 @@ const Divider: ThemedComponent<*> = styled.div`
 
 const dropDownItems = [
   {
-    key: "DELEGATE",
-    label: <Trans i18nKey="cosmos.delegation.delegate" />,
-  },
-  {
     key: "REDELEGATE",
     label: <Trans i18nKey="cosmos.delegation.redelegate" />,
   },
