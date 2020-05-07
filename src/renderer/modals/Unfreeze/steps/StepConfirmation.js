@@ -29,6 +29,7 @@ const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(
 function StepConfirmation({
   account,
   t,
+  transaction,
   optimisticOperation,
   error,
   theme,
@@ -42,7 +43,11 @@ function StepConfirmation({
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={<Trans i18nKey="unfreeze.steps.confirmation.success.title" />}
-          description={multiline(t("unfreeze.steps.confirmation.success.text"))}
+          description={multiline(
+            t("unfreeze.steps.confirmation.success.text", {
+              resource: transaction && transaction.resource && transaction.resource.toLowerCase(),
+            }),
+          )}
         />
       </Container>
     );
