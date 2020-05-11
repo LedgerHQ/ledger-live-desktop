@@ -99,7 +99,10 @@ const AssetCrumb = () => {
         border
         horizontal
         items={processedItems}
-        value={{ label: activeItem.currency.name, key: activeItem.currency.id }}
+        value={{
+          label: activeItem ? activeItem.currency.name : "",
+          key: activeItem ? activeItem.currency.id : "",
+        }}
         controlled
         renderItem={renderItem}
         onChange={onAccountSelected}
