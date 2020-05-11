@@ -606,7 +606,7 @@
         "title": "Confirmation",
         "success": {
           "title": "",
-          "text": "Your assets have been unfrozen successfully. Your Bandwidth points will be decreased and your votes will be canceled.",
+          "text": "Your assets have been unfrozen successfully. Your {{resource}} points will be decreased and your votes will be canceled.",
           "continue": "Continue"
         },
         "pending": {
