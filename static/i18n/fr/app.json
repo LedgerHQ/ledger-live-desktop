@@ -606,7 +606,7 @@
         "title": "Confirmation",
         "success": {
           "title": "",
-          "text": "Vos actifs ont été dégelés avec succès. Vos points de Bandwidth seront réduits et vos votes seront annulés.",
+          "text": "Your assets have been unfrozen successfully. Your {{resource}} points will be decreased and your votes will be canceled.",
           "continue": "Poursuivre"
         },
         "pending": {
