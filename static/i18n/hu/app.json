@@ -606,7 +606,7 @@
         "title": "Megerősítés",
         "success": {
           "title": "",
-          "text": "Az eszközeid sikeresen ki lettek olvasztva. A sávszélesség pontjaid csökkenni fognak, és a szavazataid törölve lesznek.",
+          "text": "Your assets have been unfrozen successfully. Your {{resource}} points will be decreased and your votes will be canceled.",
           "continue": "Folytatás"
         },
         "pending": {
