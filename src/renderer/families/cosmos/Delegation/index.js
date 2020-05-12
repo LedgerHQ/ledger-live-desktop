@@ -97,6 +97,14 @@ const Delegation = ({ account }: Props) => {
     );
   }, [account, dispatch]);
 
+  const onDelegate = useCallback(() => {
+    dispatch(
+      openModal("MODAL_COSMOS_DELEGATE", {
+        account,
+      }),
+    );
+  }, [account, dispatch]);
+
   const hasDelegations = delegations.length > 0;
 
   const hasRewards = _pendingRewardsBalance.gt(0);
@@ -115,20 +123,7 @@ const Delegation = ({ account }: Props) => {
         {hasDelegations || hasRewards ? (
           <Box horizontal>
             {hasDelegations ? (
-              <Button
-                mr={2}
-                primary
-                small
-                onClick={() => {
-                  /** @TODO redirect to delegation flow */
-                  //  dispatch(
-                  //    openModal("MODAL_DELEGATION", {
-                  //      account,
-                  //      reward: pendingRewardsBalance,
-                  //    }),
-                  //  );
-                }}
-              >
+              <Button mr={2} primary small onClick={onDelegate}>
                 <Box horizontal flow={1} alignItems="center">
                   <ClaimRewards size={12} />
                   <Box>
