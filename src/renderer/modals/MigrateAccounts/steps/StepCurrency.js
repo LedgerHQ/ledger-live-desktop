@@ -179,7 +179,11 @@ export const StepCurrencyFooter = ({
   if (scanStatus === "error") {
     return (
       <>
-        <ExternalLinkButton mr={2} label={<Trans i18nKey="common.getSupport" />} url={urls.faq} />
+        <ExternalLinkButton
+          mr={2}
+          label={<Trans i18nKey="common.getSupport" />}
+          url={urls.syncErrors}
+        />
         <RetryButton primary onClick={() => transitionTo("device")} />
       </>
     );

@@ -22,6 +22,7 @@ export const urls = {
 
   // Ledger support
   faq: "https://support.ledger.com/hc/en-us",
+  syncErrors: "https://support.ledger.com/hc/en-us/articles/360012207759",
   terms: "https://www.ledger.com/pages/terms-of-use-and-disclaimer",
   noDeviceBuyNew: "https://www.ledger.com/",
   noDeviceLearnMore: "https://www.ledger.com/",

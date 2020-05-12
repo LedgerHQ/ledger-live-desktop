@@ -323,7 +323,7 @@ export const StepImportFooter = ({
       <Box grow>{currency && <CurrencyBadge currency={currency} />}</Box>
       {scanStatus === "error" && (
         <>
-          <ExternalLinkButton label={t("common.getSupport")} url={urls.faq} />
+          <ExternalLinkButton label={t("common.getSupport")} url={urls.syncErrors} />
           <RetryButton
             id={"add-accounts-import-retry-button"}
             primary
