@@ -324,14 +324,25 @@ export const StepImportFooter = ({
       {scanStatus === "error" && (
         <>
           <ExternalLinkButton label={t("common.getSupport")} url={urls.syncErrors} />
-          <RetryButton primary onClick={() => setScanStatus("scanning")} />
+          <RetryButton
+            id={"add-accounts-import-retry-button"}
+            primary
+            onClick={() => setScanStatus("scanning")}
+          />
         </>
       )}
       {scanStatus === "scanning" && (
-        <Button onClick={() => setScanStatus("finished")}>{t("common.stop")}</Button>
+        <Button id={"add-accounts-import-stop-button"} onClick={() => setScanStatus("finished")}>
+          {t("common.stop")}
+        </Button>
       )}
       {scanStatus !== "error" && (
-        <Button primary disabled={scanStatus !== "finished"} onClick={onClick}>
+        <Button
+          id={"add-accounts-import-add-button"}
+          primary
+          disabled={scanStatus !== "finished"}
+          onClick={onClick}
+        >
           {ctaWording}
         </Button>
       )}

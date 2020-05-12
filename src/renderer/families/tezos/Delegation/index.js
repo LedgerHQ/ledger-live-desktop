@@ -70,6 +70,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
           <Box>
             <Button
               primary
+              id={"account-delegate-button"}
               onClick={() => {
                 dispatch(
                   openModal("MODAL_DELEGATE", {

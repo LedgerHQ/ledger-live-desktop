@@ -112,6 +112,7 @@ class MenuList extends PureComponent<*, *> {
 
     return (
       <List
+        className={"select-options-list"}
         ref={this.list}
         width="100%"
         style={{
@@ -123,7 +124,11 @@ class MenuList extends PureComponent<*, *> {
         itemSize={rowHeight}
         initialScrollOffset={initialOffset}
       >
-        {({ index, style }) => <Row style={style}>{children[index]}</Row>}
+        {({ index, style }) => (
+          <Row className={"option"} style={style}>
+            {children[index]}
+          </Row>
+        )}
       </List>
     );
   }

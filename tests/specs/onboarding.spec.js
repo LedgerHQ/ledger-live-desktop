@@ -23,7 +23,7 @@ describe("When I launch the app for the first time", () => {
   let mockDeviceEvent;
 
   beforeAll(() => {
-    app = applicationProxy({ MOCK: true });
+    app = applicationProxy({ MOCK: true, DISABLE_MOCK_POINTER_EVENTS: true });
     onboardingPage = new OnboardingPage(app);
     modalPage = new ModalPage(app);
     genuinePage = new GenuinePage(app);
@@ -256,7 +256,10 @@ describe("When I launch the app for the first time", () => {
         it("should perform a genuine check - and fail", async () => {
           expect(await modalPage.title.getText()).toBe(data.genuine.modalTitle);
           await app.client.pause(2000); // FIXME wait until the spinner is visible?
-          await mockDeviceEvent({ type: "error", error: { name: "GenuineCheckFailed" } });
+          await mockDeviceEvent(
+            { type: "error", error: { name: "GenuineCheckFailed" } },
+            { type: "complete" },
+          );
           await app.client.pause(2000);
           expect(await app.client.element("#error-GenuineCheckFailed").isVisible()).toBe(true);
           await modalPage.closeButton.click();

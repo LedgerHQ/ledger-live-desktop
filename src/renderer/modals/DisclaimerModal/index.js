@@ -187,7 +187,11 @@ class DisclaimerModal extends PureComponent<Props, State> {
             <Box horizontal justifyContent="flex-end" alignItems="center" style={{ flex: 1 }}>
               {!showUninsWarning ? (
                 <Box horizontal alignItems="center" onClick={this.onSeedReady} style={{ flex: 1 }}>
-                  <CheckBox isChecked={this.state.seedReady} onChange={this.onSeedReady} />
+                  <CheckBox
+                    id={"firmware-update-disclaimer-modal-seed-ready-checkbox"}
+                    isChecked={this.state.seedReady}
+                    onChange={this.onSeedReady}
+                  />
                   <Text
                     ff="Inter|SemiBold"
                     fontSize={4}
@@ -198,8 +202,14 @@ class DisclaimerModal extends PureComponent<Props, State> {
                 </Box>
               ) : null}
               <Box horizontal>
-                <Button onClick={() => this.onClose()}>{t("manager.firmware.updateLater")}</Button>
                 <Button
+                  id={"firmware-update-disclaimer-modal-close-button"}
+                  onClick={() => this.onClose()}
+                >
+                  {t("manager.firmware.updateLater")}
+                </Button>
+                <Button
+                  id={"firmware-update-disclaimer-modal-continue-button"}
                   disabled={!this.state.seedReady}
                   primary
                   onClick={

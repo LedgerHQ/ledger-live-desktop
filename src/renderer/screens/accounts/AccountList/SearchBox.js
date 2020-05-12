@@ -39,7 +39,7 @@ const SearchIconContainer: ThemedComponent<{ focused?: boolean }> = styled(Box).
 `;
 
 const SearchBox = forwardRef(function Search(
-  { onTextChange, search, placeholder, autoFocus }: Props,
+  { onTextChange, search, placeholder, autoFocus, ...p }: Props,
   ref,
 ) {
   const [focused, setFocused] = useState(false);
@@ -50,6 +50,7 @@ const SearchBox = forwardRef(function Search(
         <SearchIcon size={16} />
       </SearchIconContainer>
       <SearchInput
+        {...p}
         autoFocus={autoFocus}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}

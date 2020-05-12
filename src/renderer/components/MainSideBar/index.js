@@ -241,6 +241,7 @@ const MainSideBar = () => {
             <Space of={70} />
             <SideBarList title={t("sidebar.menu")} collapsed={secondAnim}>
               <SideBarListItem
+                id={"dashboard"}
                 label={t("dashboard.title")}
                 icon={IconPortfolio}
                 iconActiveColor="wallet"
@@ -250,6 +251,7 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"accounts"}
                 label={t("sidebar.accounts")}
                 icon={IconWallet}
                 iconActiveColor="wallet"
@@ -259,6 +261,7 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"send"}
                 label={t("send.title")}
                 icon={IconSend}
                 iconActiveColor="wallet"
@@ -267,6 +270,7 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"receive"}
                 label={t("receive.title")}
                 icon={IconReceive}
                 iconActiveColor="wallet"
@@ -275,6 +279,7 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"manager"}
                 label={t("sidebar.manager")}
                 icon={IconManager}
                 iconActiveColor="wallet"
@@ -283,6 +288,7 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"partners"}
                 label={t("sidebar.exchange")}
                 icon={IconExchange}
                 iconActiveColor="wallet"

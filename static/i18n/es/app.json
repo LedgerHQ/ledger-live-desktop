@@ -46,6 +46,7 @@
     "dismiss": "Dismiss",
     "information": "Information",
     "search": "Search...",
+    "manage": "Manage",
     "lockScreen": {
       "title": "Bienvenido de nuevo",
       "subTitle": null,
@@ -70,6 +71,7 @@
       "CREATE": "Created",
       "REVEAL": "Revealed",
       "DELEGATE": "Delegated",
+      "REDELEGATE": "Redelegated",
       "UNDELEGATE": "Undelegated",
       "VOTE": "Voted",
       "FREEZE": "Frozen",
@@ -140,10 +142,14 @@
     "frozenAssets": "Frozen assets",
     "bandwidth": "Bandwidth",
     "energy": "Energy",
+    "delegatedAssets": "Delegated assets",
+    "undelegating": "Undelegating",
     "availableBalanceTooltip": "This amount can be sent anytime.",
     "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
     "bandwidthTooltip": "Freeze assets to gain bandwidth",
-    "energyTooltip": "Freeze assets to gain energy"
+    "energyTooltip": "Freeze assets to gain energy",
+    "delegatedAssetsTooltip": "These are your currently delegated assets",
+    "undelegatingTooltip": "These are your assets currently being undelegated"
   },
   "accounts": {
     "title": "Cuentas",
@@ -347,7 +353,17 @@
       "unfreezeAmount": "Unfreeze amount",
       "address": "Address",
       "votes": "Votes ({{number}})",
-      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>"
+      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
+      "validators": "Validators",
+      "delegated": "Delegated ({{amount}})",
+      "redelegated": "Redelegated ({{amount}})",
+      "redelegatedFrom": "Redelegated from",
+      "redelegatedTo": "Redelegated to",
+      "undelegated": "Undelegated ({{amount}})",
+      "undelegatedFrom": "Undelegated from",
+      "undelegatedAmount": "Undelegated amount",
+      "rewardFrom": "Reward from",
+      "rewardAmount": "Amount collected"
     }
   },
   "operationList": {
@@ -590,7 +606,7 @@
         "title": "Confirmation",
         "success": {
           "title": "",
-          "text": "Your assets have been unfrozen successfully. Your Bandwidth points will be decreased and your votes will be canceled.",
+          "text": "Your assets have been unfrozen successfully. Your {{resource}} points will be decreased and your votes will be canceled.",
           "continue": "Continue"
         },
         "pending": {
@@ -824,6 +840,24 @@
       }
     }
   },
+  "cosmos": {
+    "delegation": {
+      "emptyState": {
+        "description": "Delegate your assets to one or more validators to start earning rewards.",
+        "info": "How Delegating works",
+        "delegation": "Earn rewards"
+      },
+      "claimRewards": "Claim rewards",
+      "claimAvailableRewards": "Claim {{amount}}",
+      "header": "Delegations",
+      "Amount": "Amount",
+      "noRewards": "No rewards available",
+      "delegate": "Delegate",
+      "undelegate": "Undelegate",
+      "redelegate": "Redelegate",
+      "reward": "Collect rewards"
+    }
+  },
   "delegation": {
     "title": "Earn rewards",
     "header": "Delegation",
@@ -833,6 +867,9 @@
     "transactionID": "Transaction ID",
     "value": "Value",
     "amount": "Amount",
+    "delegated": "Delegated",
+    "rewards": "Rewards",
+    "distribution": "Distribution",
     "duration": "Duration",
     "durationJustStarted": "Just started",
     "durationDays": "{{count}} day",
@@ -841,6 +878,7 @@
     "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
     "earnRewards": "Earn rewards",
     "overdelegated": "Overdelegated",
+    "status": "Status",
     "flow": {
       "steps": {
         "starter": {
