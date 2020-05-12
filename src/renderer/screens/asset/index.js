@@ -24,6 +24,7 @@ import {
 import { flattenSortAccountsEnforceHideEmptyTokenSelector } from "~/renderer/actions/general";
 import AssetHeader from "./AssetHeader";
 import type { Currency } from "@ledgerhq/live-common/lib/types/currencies";
+import { Redirect } from "react-router";
 
 type Props = {
   match: {
@@ -68,6 +69,8 @@ class AssetPage extends PureComponent<Props, State> {
 
   render() {
     const { t, accounts, counterValue, range, countervalueFirst, theme } = this.props;
+    if (!accounts.length) return <Redirect to="/" />;
+
     const parentAccount =
       accounts[0].type !== "Account" ? this.lookupParentAccount(accounts[0].parentId) : null;
     const currency = getAccountCurrency(accounts[0]);

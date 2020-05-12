@@ -41,10 +41,12 @@
     "copy": "Másolás",
     "copied": "Másolva",
     "addressCopied": "Cím másolva",
+    "addressCopiedSuspicious": "A másolt, és a vágólapon lévő cím nem egyezik.",
     "experimentalFeature": "Kísérleti funkciók",
     "dismiss": "Elvetés",
     "information": "Információ",
     "search": "Keresés...",
+    "manage": "Manage",
     "lockScreen": {
       "title": "Üdv újra",
       "subTitle": null,
@@ -69,7 +71,12 @@
       "CREATE": "Készítve",
       "REVEAL": "Feltárva",
       "DELEGATE": "Delegated",
-      "UNDELEGATE": "Undelegated"
+      "REDELEGATE": "Redelegated",
+      "UNDELEGATE": "Undelegated",
+      "VOTE": "Szavazott",
+      "FREEZE": "Befagyasztott",
+      "UNFREEZE": "Kiolvasztott",
+      "REWARD": "Begyűjtött jutalom"
     }
   },
   "byteSize": {
@@ -79,7 +86,7 @@
   },
   "time": {
     "minute": "Perc",
-    "minute_plural": "Percek",
+    "minute_plural": "Perc",
     "hour": "Óra",
     "hour_plural": "Órák",
     "range": {
@@ -104,7 +111,7 @@
     "exchange": "Kripto vásárlása"
   },
   "stars": {
-    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0>Számlák</0></1> oldalon innentől itt fog megjelenni!",
+    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0>Számlák</0></1> oldalon innentől itt fognak megjelenni!",
     "tooltip": "Számla csillagozása"
   },
   "account": {
@@ -130,7 +137,19 @@
         "title": "Egység",
         "desc": "Válaszd ki a megjelenítendő egységet"
       }
-    }
+    },
+    "availableBalance": "Elérhető egyenleg",
+    "frozenAssets": "Befagyasztott eszközök",
+    "bandwidth": "Sávszélesség",
+    "energy": "Energia",
+    "delegatedAssets": "Delegated assets",
+    "undelegating": "Undelegating",
+    "availableBalanceTooltip": "Ez a mennyiség bármikor küldhető.",
+    "frozenAssetsTooltip": "A befagyasztott eszközeid a Tron szavazási folyamatban használhatod. Ez képviseli az összes rendelkezésedre álló szavazatod.",
+    "bandwidthTooltip": "Fagyassz le eszközöket, hogy sávszélességet gyűjts",
+    "energyTooltip": "Fagyassz le eszközöket, hogy energiát gyűjts",
+    "delegatedAssetsTooltip": "These are your currently delegated assets",
+    "undelegatingTooltip": "These are your assets currently being undelegated"
   },
   "accounts": {
     "title": "Számlák",
@@ -155,8 +174,14 @@
       "star": "Csillag",
       "receive": "Fogadás",
       "send": "Küldés",
-      "edit": "Számla szerkesztése"
+      "edit": "Számla szerkesztése",
+      "hideToken": "Token elrejtése"
     }
+  },
+  "blacklistToken": {
+    "title": "Token elrejtése",
+    "desc": "Ez a művelet elrejti minden <1><0>{{tokenName}}</0></1> számlád, bármikor visszaállíthatod a láthatóságukat a <3>Beállításoknál</3>",
+    "hideCTA": "Token elrejtése"
   },
   "banners": {
     "migrate": "Ledger Live számlák frissítése lehetséges",
@@ -179,38 +204,22 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "Alkalmazások telepítése vagy számlák hozzáadása",
-      "desc": "Nyisd meg az eszközkezelőt alkalmazások telepítéséhez vagy számlák hozzáadásához ha már vannak alkalmazások telepítve az eszközödön",
+      "title": "Telepíts pár alkalmazást az eszközödre",
+      "desc": "Lépj az Eszközkezelőbe, hogy alkalmazásokat telepíts az eszközödre. Hozzá tudsz adni számlákat, ha már vannak telepített alkalmazások az eszközödön.",
       "buttons": {
-        "addAccount": "Számlák hozzáadása",
-        "installApp": "Eszközkezelő megnyitása"
+        "installApp": "Lépj az Eszközkezelőbe",
+        "help": "Segítség"
+      }
+    },
+    "accounts": {
+      "title": "A kezdéshez adj hozzá egy számlát",
+      "desc": "Adj hozzá egy számlát, hogy kezelni tudd a kripto eszközeid. Kellenek telepített alkalmazások a kriptoidnak az eszközödön.",
+      "buttons": {
+        "addAccount": "Számla hozzáadása",
+        "installApp": "Lépj az Eszközkezelőbe alkalmazások telepítéséhez",
+        "help": "Segítség"
       }
     }
-  },
-  "partners": {
-    "title": "Kripto vásárlása",
-    "desc": "Próbálj ki néhány általunk választott szolgáltatást",
-    "visitWebsite": "Weboldal meglátogatása",
-    "btcdirect": "Vásárolj és adj el a legnagyobb nyugalommal Európa vezető Kriptodeviza brókerénél. Regisztrálj ingyen és kapd meg érméid perceken belül! A felhasználóink 8,7-re értékeltek minket a Trustpilot-on.",
-    "changelly": "Changelly egy népszerű kripto váltó 100+ listázott érmével és tokennel.",
-    "changenow": "ChangeNOW egyike a vezető letét mentes azonnali váltó szolgáltatóknak.",
-    "coinberry": "Coinberry a legmegbízhatóbb kriptoplatform Kanadában a bankoknál nagyobb biztonsággal, első osztályú felhasználói felülettel és díjmentes finanszírozással & kiküldéssel. Regisztálj elő, hogy korai hozzáférést szerezz a platformunkhoz ha nem vagy Kanadai állampolgár.",
-    "coinhouse": "Coinhouse egy megbízható platform az egyéni, és társasági befektetőknek akik eladni, és biztonságosan szeretnék tárólni kriptójukat.",
-    "coinmama": "Coinmama is a financial service that makes it fast, safe és fun to buy digital assets, anywhere in the world.",
-    "crypto": "Crypto.com is the best place to buy, sell, track és pay with crypto.",
-    "genesis": "Genesis is an institutional trading firm offering liquidity és borrow for digital currencies, including bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin, és XRP.",
-    "kyberswap": "Fast, simple és secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
-    "luno": "Luno makes it safe és easy to buy, store és learn about cryptocurrencies like Bitcoin és Ethereum.",
-    "paybis": "Paybis.com egyike a legmegbízhatóbb kriptovaluta brókereknek világszerte 2014 óta. Ügyfélelégedettségi mutatónk 4.7/5 a Trustpilot adatai szerint. Visa/Mastercard kártyákat, banki utalásokat Skrill/Neteller szolgáltatókat is elfogadunk. 24/7 online ügyfélszolgálati támogatás.",
-    "shapeshift": "ShapeShift is an online marketplace where users can buy és sell digital assets. It is a fast és secure way for the world to buy és sell digital assets, with no lengthy signup process, no counterparty risk, és no friction.",
-    "simplex": "A Simplex egy uniós engedéllyel rendelkező pénzügyi intézmény, amely csalásmentes hitelkártya-fizetési megoldást kínál.",
-    "swft": "Az SWFT Blokklánc egy világméretű, többszörös blokklánc alapú átviteli protokoll és fizetési hálózat, amely egyszerűbb, gyorsabb és biztonságosabb cserét tesz lehetővé több mint 200 kriptovaluta között, valamint ingyenes kriptofizetéseket bárki számára bárhol",
-    "taxtoken": "Automated cryptocurrency tax és cost basis software for US citizens.",
-    "thorswap": "ThorSwap is an instant, safe és fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
-    "bitpanda": "A Bitpanda Európa vezető kiskereskedelmi brókere a Bitcoin, az Ethereum, az IOTA és még sok más vásárlására és eladására. Fizessen be pénzt hitelkártyájával, SOFORT-utalással, NETELLER és egyéb lehetőségekkel.",
-    "exmo": "Founded in 2013 és based in London, Kiev, Barcelona, és Moscow, EXMO is #1 exchange in Eastern Europe, és one of the world's largest global exchanges in volume és liquidity.",
-    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure és intuitive platform to buy és sell Bitcoin, Litecoin, Ethereum, XRP és other digital assets. Other key features include advanced trading, free deposits, és an institutional-grade custody solution via Ledger Vault.",
-    "voyager": "Élvezd a Kripto Utazást a Voyager segítségével. Engedéllyel rendelkező kripto bróker 20+ kriptovaluta jutalék nélküli kereskedelmével."
   },
   "genuinecheck": {
     "modal": {
@@ -314,6 +323,7 @@
     }
   },
   "operationDetails": {
+    "whatIsThis": "Mi ez a művelet?",
     "title": "Művelet részletei",
     "account": "Számla",
     "date": "Dátum",
@@ -336,7 +346,25 @@
     "internalOperations": "Belső műveletek",
     "internalOpTooltip": "Ennek a műveletnek belső műveletei vannak",
     "details": "{{ currency }} részletek",
-    "multipleAddresses": "Miért van több cím?"
+    "multipleAddresses": "Miért van több cím?",
+    "extra": {
+      "resource": "Forrás",
+      "frozenAmount": "Befagyasztott mennyiség",
+      "unfreezeAmount": "Kiolvasztott mennyiség",
+      "address": "Cím",
+      "votes": "Szavazatok ({{number}})",
+      "votesAddress": "<0>{{votes}}</0> a <2>{{name}}</2>",
+      "validators": "Validators",
+      "delegated": "Delegated ({{amount}})",
+      "redelegated": "Redelegated ({{amount}})",
+      "redelegatedFrom": "Redelegated from",
+      "redelegatedTo": "Redelegated to",
+      "undelegated": "Undelegated ({{amount}})",
+      "undelegatedFrom": "Undelegated from",
+      "undelegatedAmount": "Undelegated amount",
+      "rewardFrom": "Reward from",
+      "rewardAmount": "Amount collected"
+    }
   },
   "operationList": {
     "noMoreOperations": "Ez minden"
@@ -411,6 +439,7 @@
         "updateAllOutOfMemory": "Nincs elég hely a frissítéshez, kérlek törölj pár alkalmazást",
         "install": "Telepítés",
         "installed": "Telepített",
+        "updated": "Frissítve",
         "uninstall": "Törlés",
         "notEnoughSpace": "Nincs elég hely",
         "supported": "Ledger Live által támogatott",
@@ -501,13 +530,139 @@
       }
     }
   },
+  "claimReward": {
+    "title": "Jutalmak begyűjtése",
+    "steps": {
+      "rewards": {
+        "title": "Jutalmak",
+        "description": "Gratulálok! Elértél <1>{{amount}}</1> a megerősítőkre történő szavazással.",
+        "info": "24 óránkét tudod begyűjteni a jutalmaid."
+      },
+      "connectDevice": {
+        "title": "Eszköz"
+      },
+      "confirmation": {
+        "title": "Megerősítés",
+        "success": {
+          "title": "Jutalmak begyűjtve",
+          "text": "A jutalmaid hozzá lettek adva az egyenlegedhez.",
+          "cta": "Részletek megtekintése",
+          "done": "Kész"
+        },
+        "pending": {
+          "title": "Jutalmaid begyűjtése..."
+        },
+        "broadcastError": "Lehet, hogy a tranzakciód sikertelen volt. Kérlek, ellenőrizd pár perc múlva, hogy megbizonyosodj róla, hogy a tranzakciód valóban nem lett elküldve mielőtt újra megpróbálnád."
+      }
+    }
+  },
+  "freeze": {
+    "title": "Eszközök befagyasztása",
+    "steps": {
+      "amount": {
+        "title": "Mennyiség",
+        "resourceInfo": "Sávszélesség vagy Energia?",
+        "bandwidthDescription": "Sávszélesség pontok felhasználhatók tranzakciók küldéséhez anélkül, hogy TRX-et költenél a hálózati díjak fedezésére. Válassz sávszélességet a napi ingyenes tranzakciók növeléséhez.",
+        "energyDescription": "Energia pontok szükségesek az okosszerződések végrehajtásához. Ha nem futtatsz semmilyen okosszerződést, nem szükséges, hogy a jutalmaid Energiában kérd.",
+        "amountLabel": "Befagyasztandó mennyiség",
+        "available": "Elérhető: {{amountAvailable}}",
+        "info": "Befagyasztott eszközöket nem lehet küldeni 3 napig."
+      },
+      "connectDevice": {
+        "title": "Eszköz"
+      },
+      "confirmation": {
+        "tooltip": {
+          "title": "A tranzakció megerősítése folyamatban",
+          "desc": "Várnod kell egy percet mielőtt szavazni tudsz"
+        },
+        "title": "Megerősítés",
+        "success": {
+          "title": "",
+          "textNRG": "Energiát kezdesz el gyűjteni, ha a hálózat megerősítette a befagyasztást. Rövidesen szavazhatsz a Szuper Képviselőkre, hogy jutalmakat kapj.",
+          "text": "Sávszélességet kezdesz el gyűjteni, ha a hálózat megerősítette a befagyasztást. Rövidesen szavazhatsz a Szuper Képviselőkre, hogy jutalmakat kapj.",
+          "votePending": "Szavazás {{time}}",
+          "vote": "Szavazás",
+          "later": "Szavazás később"
+        },
+        "pending": {
+          "title": "Eszközeid befagyasztása..."
+        },
+        "broadcastError": "Lehet, hogy a tranzakciód sikertelen volt. Kérlek, ellenőrizd pár perc múlva, hogy megbizonyosodj róla, hogy a tranzakciód valóban nem lett elküldve mielőtt újra megpróbálnád."
+      }
+    }
+  },
+  "unfreeze": {
+    "title": "Eszközök kiolvasztása",
+    "steps": {
+      "amount": {
+        "title": "Kiolvasztás",
+        "info": "A kiolvasztás csökkenteni fogja a {{resource}} és törli a szavazataid."
+      },
+      "connectDevice": {
+        "title": "Eszköz"
+      },
+      "confirmation": {
+        "title": "Megerősítés",
+        "success": {
+          "title": "",
+          "text": "Your assets have been unfrozen successfully. Your {{resource}} points will be decreased and your votes will be canceled.",
+          "continue": "Folytatás"
+        },
+        "pending": {
+          "title": "Eszközeid befagyasztása..."
+        },
+        "broadcastError": "Lehet, hogy a tranzakciód sikertelen volt. Kérlek, ellenőrizd pár perc múlva, hogy megbizonyosodj róla, hogy a tranzakciód valóban nem lett elküldve mielőtt újra megpróbálnád."
+      }
+    }
+  },
+  "vote": {
+    "title": "Leadott szavazatok",
+    "titleExisting": "Szavazatok kezelése",
+    "steps": {
+      "castVotes": {
+        "max": "MAX",
+        "title": "Szavazás",
+        "search": "Keresés név vagy cím alapján...",
+        "totalVotes": "Összes szavazat: {{total}}",
+        "selected": "Kiválasztott: {{total}}",
+        "maxSelected": "Max kiválasztott: {{total}}",
+        "allVotesAreUsed": "Minden szavazat felhasználva",
+        "maxUsed": "Max szavazat: {{total}}",
+        "superRepresentatives": "Szuper Képviselõk (SR)",
+        "candidates": "Jelöltek",
+        "estYield": "becsült hozam",
+        "srInfo": "SR vagy Jelöltek?",
+        "validators": "Megerősítők ({{total}})",
+        "votes": "Elérhető szavazatok: {{total}}",
+        "noResults": "Nem található megerősítő \"<0>{{search}}</0>\"."
+      },
+      "connectDevice": {
+        "title": "Eszköz"
+      },
+      "confirmation": {
+        "title": "Megerősítés",
+        "success": {
+          "title": "A szavazataid sikeresen leadtad.",
+          "text": "",
+          "howVotingWorks": "Hogy működik a szavazás?",
+          "done": "Kész",
+          "cta": "Részletek megtekintése"
+        },
+        "pending": {
+          "title": "Eszközeid befagyasztása..."
+        },
+        "broadcastError": "Lehet, hogy a tranzakciód sikertelen volt. Kérlek, ellenőrizd pár perc múlva, hogy megbizonyosodj róla, hogy a tranzakciód valóban nem lett elküldve mielőtt újra megpróbálnád."
+      }
+    }
+  },
   "receive": {
     "title": "Fogadás",
     "successTitle": "A cím biztonságosan megosztva",
     "steps": {
       "chooseAccount": {
         "title": "Számla",
-        "label": "Számla a jóváírásra",
+        "label": "Jóváírandó számla",
         "parentAccount": "1. Válassz ki egy {{currencyName}} számlát",
         "token": "2. Válassz egy tokent"
       },
@@ -533,7 +688,8 @@
         "title": "Fogadó"
       },
       "amount": {
-        "title": "Mennyiség"
+        "title": "Mennyiség",
+        "banner": "Maximum elkölthető mennyiség"
       },
       "summary": {
         "title": "Összegzés"
@@ -544,7 +700,7 @@
       "details": {
         "from": "Innen",
         "to": "Ide",
-        "selectAccountDebit": "Jóváírandó számla",
+        "selectAccountDebit": "Használni kívánt számla",
         "recipientAddress": "Fogadó címe",
         "amount": "Mennyiség",
         "fees": "Hálózati díjak",
@@ -590,7 +746,7 @@
   "distribution": {
     "asset": "Kriptovaluta",
     "price": "Ár",
-    "distribution": "Átruházás",
+    "distribution": "Arány",
     "amount": "Mennyiség",
     "value": "Érték",
     "showAll": "Összes megjelenítése",
@@ -604,6 +760,104 @@
     "value": "Érték",
     "header": "Számlaátruházás ({{count}})"
   },
+  "tron": {
+    "voting": {
+      "emptyState": {
+        "description": "Most már kaphatsz jutalmakat lefagyasztással és szavazással.",
+        "info": "Hogy működik a szavazás",
+        "votesDesc": "Add le szavazataid egy vagy több képviselő számára, hogy tárolási jutalmakat szerezz.",
+        "vote": "Szavazatok leadása",
+        "voteExisting": "Szavazatok kezelése"
+      },
+      "manageTP": "Eszközök kezelése",
+      "warnEarnRewards": "Szükséged van minimum {{amount}}, hogy jutalmakat kezdj kapni",
+      "claimRewards": "Jutalmak begyűjtése",
+      "nextRewardsDate": "A jutalmak begyűjthetők {{date}}",
+      "claimAvailableRewards": "{{amount}} begyűjtése",
+      "title": "Jutalmak begyűjtése",
+      "header": "Szavazatok",
+      "Amount": "Mennyiség",
+      "percentageTP": "%-a a leadott szavazatoknak",
+      "noRewards": "Nincs elérhető jutalom",
+      "remainingVotes": {
+        "title": "Még van {{amount}} szavazatod",
+        "description": "Leadhatod a fennmaradó szavazataid, hogy további jutalmakat szerezz",
+        "button": "Szavazz most"
+      },
+      "flow": {
+        "steps": {
+          "starter": {
+            "title": "Kapj tárolási jutalmakat",
+            "description": "Fagyaszd le a TRX-t hogy jutalmakat kapj mialatt eszközeid teljes biztonságban és irányításod alatt maradnak.",
+            "bullet": {
+              "delegate": "Delegált eszközeid a tieid maradnak.",
+              "access": "3 nap után olvaszthatod ki eszközeid.",
+              "ledger": "Fagyassz le és szavazz biztonságosan a Ledger eszközöddel."
+            },
+            "help": "Hogy működik a szavazás",
+            "button": {
+              "cta": "Folytatás"
+            },
+            "termsAndPrivacy": "A szavazati jogod delegálása nem garantálja, hogy bármilyen kifizetésben részesülsz a szuper képviselődtől."
+          }
+        }
+      }
+    },
+    "manage": {
+      "title": "Eszközök kezelése",
+      "freeze": {
+        "title": "Befagyasztás",
+        "description": "Fagyassz be TRX-et, hogy sávszélességhez, vagy energiához juss. Továbbá lehetőséged lesz Szuper Képviselőkre szavazni."
+      },
+      "unfreeze": {
+        "title": "Kiolvasztás",
+        "description": "Olvassz ki TRX-et ha el akarod költeni. Nem fogsz tovább jutalmakat kapni."
+      },
+      "vote": {
+        "title": "Szavazás",
+        "description": "Add le szavazataid a Szuper Képviselőkre hogy jutalmakat kapj.",
+        "steps": {
+          "vote": {
+            "title": "Szavazatok leadása",
+            "description": "Szavazz egy vagy több Szuper Képviselőre hogy elkezdj jutalmakat kapni.",
+            "footer": {
+              "doNotShowAgain": "Ne mutasd újra",
+              "next": "Szavazatok leadása"
+            },
+            "info": {
+              "message": "SR vagy Jelöltek?",
+              "superRepresentative": {
+                "title": "Szuper Képviselõk (SR)",
+                "description": "A szuper képviselők kulcsszerepet játszanak a TRON közösség irányításában, és az alapvető funkciók ellátásában, pl. blokkok generálása és könyvelése."
+              },
+              "candidates": {
+                "title": "Jelöltek",
+                "description": "127 egyént választott meg a teljes token-birtokos közösség szavazás útján. A szavazatok minden 6 órában egyszer frissülnek."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "cosmos": {
+    "delegation": {
+      "emptyState": {
+        "description": "Delegate your assets to one or more validators to start earning rewards.",
+        "info": "How Delegating works",
+        "delegation": "Earn rewards"
+      },
+      "claimRewards": "Claim rewards",
+      "claimAvailableRewards": "Claim {{amount}}",
+      "header": "Delegations",
+      "Amount": "Amount",
+      "noRewards": "No rewards available",
+      "delegate": "Delegate",
+      "undelegate": "Undelegate",
+      "redelegate": "Redelegate",
+      "reward": "Collect rewards"
+    }
+  },
   "delegation": {
     "title": "Érj el jutalmakat",
     "header": "Delegálás",
@@ -613,13 +867,18 @@
     "transactionID": "Tranzakció azonosító",
     "value": "Érték",
     "amount": "Mennyiség",
+    "delegated": "Delegated",
+    "rewards": "Rewards",
+    "distribution": "Distribution",
     "duration": "Tartam",
     "durationJustStarted": "Most kezdődött",
     "durationDays": "{{count}} nap",
     "durationDays_plural": "{{count}} napok",
     "howItWorks": "Hogyan működik a delegálás",
-    "delegationEarn": "Mostantól részesülhetsz Tezos tárolási jutalmakban a számlád delegálásával.",
+    "delegationEarn": "Mostantól részesülhetsz {{name}} tárolási jutalmakban a számlád delegálásával.",
+    "earnRewards": "Kapj jutalmakat",
     "overdelegated": "Túlhalmozott",
+    "status": "Status",
     "flow": {
       "steps": {
         "starter": {
@@ -700,7 +959,7 @@
       "display": "Általános",
       "cryptoAssets": "Kriptovaluták",
       "currencies": "Kriptovaluták",
-      "rates": "Arányok",
+      "rates": "Árak",
       "help": "Segítség",
       "about": "Rólunk",
       "experimental": "Kísérleti funkciók",
@@ -746,12 +1005,12 @@
       "confirmationsNbDesc": "Állítsd be, hogy hány megerősített tranzakció szükséges ahhoz, hogy egy tranzakció megerősítettként legyen megjelenítve."
     },
     "rates": {
-      "desc": "Itt található az összes arány, amelyet az ellenérték kiszámításához használnak.\nVálaszd ki, hogy melyik tarifa szolgáltatót használja az egyes tarifákhoz.",
+      "desc": "Itt található az összes ár, amelyet az ellenérték kiszámításához használnak.\nVálaszd ki, hogy melyik ár szolgáltatót használja az egyes kriptókhoz.",
       "fromTo": "Innen {{from}} ide {{to}}",
       "noCounterValue": "Nincs adat ehhez a kereskedési párhoz",
       "cryptoToFiat": "Kripto fiatra",
       "cryptoToCrypto": "Kripto Kriptóra",
-      "rate": "Mérték",
+      "rate": "Eszközpár",
       "last": "Utolsó {{days}} nap",
       "price": "Ár",
       "exchange": "Ár szolgáltató"
@@ -784,6 +1043,7 @@
       "desc": "Tudj meg többet a Ledger Live-ról, vagy kapj segítséget.",
       "version": "Verzió",
       "releaseNotesBtn": "Részletek",
+      "termsBtn": "Olvasás",
       "faq": "Ledger Támogatás",
       "faqDesc": "Problémád akadt? Kapj segítséget a Ledger Live, és a hardware pénztárcáddal kapcsolatban.",
       "terms": "Felhasználási feltételek",
@@ -793,7 +1053,7 @@
     },
     "experimental": {
       "desc": "Próbáld ki kísérleti funkcióinkat, és tudasd velünk, hogy mit gondolsz róluk",
-      "disclaimer": "Ezek kísérleti funkciók, melyekhez „elengedhetetlenül” biztosítjuk a tech hozzáértésű közösségünk tesztelését. Ezek változhatnak, szünetelhetnek, vagy megszűnhetnek bármikor. Ezek engedélyezésével, elfogadod, hogy saját felelősségre használod őket."
+      "disclaimer": "Ezek kísérleti funkciók, melyekhez „elengedhetetlenül” biztosítjuk a tech hozzáértésű közösségünk tesztelését. Ezek változhatnak, szünetelhetnek, vagy megszűnhetnek bármikor. Ezek engedélyezésével elfogadod, hogy saját felelősségre használod őket."
     },
     "hardResetModal": {
       "title": "Ledger Live alaphelyzetbe állítása",
@@ -835,6 +1095,10 @@
       "hideEmptyTokens": {
         "title": "Üres token számlák elrejtése",
         "desc": "Nulla egyenleggel rendelkező tokenek elrejtése a Számlák lapon."
+      },
+      "tokenBlacklist": {
+        "title": "Rejtett tokenek",
+        "desc": "El tudsz rejteni egy tokent a főképernyőn jobb-kattintással, és a 'token elrejtése'-re kattintva"
       }
     }
   },
@@ -870,17 +1134,19 @@
     "checking": "Frissítés ellenőrzése...",
     "checkSuccess": "A frissítés készen áll a telepítésre",
     "quitAndInstall": "Telepítés most",
+    "updateAvailable": "Ledger Live {{version}} frissítés elérhető",
     "error": "Hiba történt a frissítés során. Kérlek, töltsd le újra",
     "reDownload": "Letöltés újra",
     "nightlyWarning": "Ez a verzió nem frissíthető automatikusan, kérlek, telepítsd az utolsó verziót manuálisan",
     "downloadNow": "Letöltés most"
   },
   "crash": {
-    "oops": "Hoppá, valami hiba történt",
-    "uselessText": "Megpróbálhatod újra a Ledger Live újraindításával. Kérlek exportáld a naplóid, és ha a probléma továbbra is fennáll, vedd fel a kapcsolatot a Ledger Ügyféltámogatással.",
+    "title": "Valami hiba történt",
+    "description": "Kérlek, olvasd el a támogatás cikket a lehetséges megoldásért. Ha a probléma továbbra is fennáll, mentsd el a naplókat az alul található gombbal, és továbbítsd a Ledger Ügyféltámogatásnak.",
+    "troubleshooting": "Kattints ide a lehetséges megoldásokért",
     "restart": "Újraindítás",
-    "support": "Vedd fel a kapcsolatot az Ügyfélszolgálattal",
-    "github": "GitHub"
+    "logs": "Naplók mentése",
+    "dataFolder": "Felhasználói adatok megtekintése"
   },
   "exportOperationsModal": {
     "title": "Műveleti előzmények",
@@ -931,9 +1197,6 @@
       "title": "Nem rendelkezel Ledger eszközzel??",
       "buyNew": {
         "title": "Vásárolj egy Ledger eszközt"
-      },
-      "trackOrder": {
-        "title": "Rendelésed követése"
       },
       "learnMore": {
         "title": "Tudj meg többet Ledger-ről"
@@ -1119,24 +1382,52 @@
   "TransactionConfirm": {
     "title": "Kérlek, erősítsd meg a műveletet az eszközödön az elküldéshez",
     "warning": "Mindig ellenőrizd, hogy készüléked pontosan az itt található címet jeleníti-e meg {{recipientWording}}",
+    "warningWording": {},
+    "titleWording": {
+      "send": "Kérlek, erősítsd meg a műveletet az eszközödön az elküldéshez",
+      "claimReward": "Kérlek, erősítsd meg a műveletet az eszközödön a jutalmaid begyűjtéséhez",
+      "freeze": "Kérlek, erősítsd meg a műveletet az eszközödön az eszközök befagyasztásához",
+      "unfreeze": "Kérlek, erősítsd meg a műveletet az eszközödön az eszközök kiolvasztásához",
+      "vote": "Kérlek, erősítsd meg a műveletet az eszközödön a szavazataid leadásához"
+    },
     "recipientWording": {
       "send": "fogadó",
       "delegate": "megerősítő",
-      "undelegate": "megerősítő"
-    }
+      "undelegate": "megerősítő",
+      "claimReward": "a delegálás jutalmazza a címzettet"
+    },
+    "votes": "Szavazatok ({{count}})"
   },
   "RecipientField": {
-    "placeholder": "Írd be a {{currencyName}} címet"
+    "placeholder": "Írd be a(z) {{currencyName}} címet"
   },
   "Terms": {
     "title": "Felhasználási feltételek",
     "read": "Olvasd el a Felhasználási feltételeket",
     "switchLabel": "Elolvastam, és elfogadom a Felhasználási feltételeket és az Adatvédelmi irányelveket"
   },
+  "families": {
+    "stellar": {
+      "memo": "Memo",
+      "memoType": {
+        "MEMO_TEXT": "Memo Text",
+        "NO_MEMO": "No Memo",
+        "MEMO_ID": "Memo ID",
+        "MEMO_HASH": "Memo Hash",
+        "MEMO_RETURN": "Memo Return"
+      },
+      "whatsMemo": "What is a memo?",
+      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+    }
+  },
   "errors": {
     "generic": {
       "title": "{{message}}",
       "description": "Valami hiba történt. Kérlek, próbáld meg újra, vagy lépj kapcsolatba velünk."
+    },
+    "AccountAwaitingSendPendingOperations": {
+      "title": "There is an operation pending for this account.",
+      "description": "Please wait a few minutes and come back."
     },
     "AccountNameRequired": {
       "title": "Egy számlanév szükséges",
@@ -1444,6 +1735,52 @@
       "title": "Szinkronizálási hiba",
       "description": "Valami hiba történt a blokklánc szinkronizálásával kapcsolatban.  Kérlek, próbáld meg újra, vagy vedd fel velünk a kapcsolatot."
     },
+    "TronNoFrozenForBandwidth": {
+      "title": "Nincsenek kiolvasztható eszközök",
+      "description": "Nincsenek a Sávszélességhez kapcsolódó kiolvasztható eszközök"
+    },
+    "TronNoFrozenForEnergy": {
+      "title": "Nincsenek kiolvasztható eszközök",
+      "description": "Nincsenek az Energiához kapcsolódó kiolvasztható eszközök"
+    },
+    "TronUnfreezeNotExpired": {
+      "title": "Kiolvasztás még nem lehetséges",
+      "description": "Várnod kell 3 napot az utolsó Befagyasztás művelet után"
+    },
+    "TronVoteRequired": {
+      "title": "Legalább 1 szavazat szükséges"
+    },
+    "TronInvalidVoteCount": {
+      "title": "A szavazási formátum helytelen",
+      "description": "Csak kerek számokat megadva szavazhatsz"
+    },
+    "TronRewardNotAvailable": {
+      "title": "A jutalom még nem begyűjthető",
+      "description": "24 órát kell várnod a begyűjtések között"
+    },
+    "TronNoReward": {
+      "title": "Nincs begyűjthető jutalom"
+    },
+    "TronInvalidFreezeAmount": {
+      "title": "A befagyasztandó mennyiség nem lehet kevesebb, mint 1"
+    },
+    "TronSendTrc20ToNewAccountForbidden": {
+      "title": "TRC20 küldése egy új számlára nem aktiválja azt",
+      "description": "A fogadó számlát aktiválni kell TRC20 küldése előtt. Küldj TRX-et vagy TRC10-et a számla aktiváláshoz."
+    },
+    "TronUnexpectedFees": {
+      "title": "További díjak merülhetnek fel"
+    },
+    "TronNotEnoughTronPower": {
+      "title": "Nincs elég elérhető szavazat"
+    },
+    "TronTransactionExpired": {
+      "title": "Az tranzakció lejárt",
+      "description": "Az aláírást 30 másodpercen belül kell alkalmazni. Kérlek próbáld újra."
+    },
+    "TronNotEnoughEnergy": {
+      "title": "Nincs elég Energia ennek a tokennek az elküldéséhez"
+    },
     "PairingFailed": {
       "title": "Párosítás sikertelen",
       "description": "Kérlek, próbáld meg újra, vagy kétség esetén vedd fel a kapcsolatot a Ledger ügyféltámogatással."
@@ -1465,13 +1802,22 @@
       "title": "Nincs elegendő egyenleg a főszámlán"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Nincs elegendő egyenleg ehhez a művelethez"
+      "title": "Az egyenleg nem lehet {{minimumAmount}} alatt"
     },
     "WrongAppForCurrency": {
       "title": "Kérlek, nyisd meg a(z) {{expected}} alkalmazást"
     },
     "FeeTooHigh": {
       "title": "A hálózati díjak költsége több mint az összeg 10% -át teszik ki"
+    },
+    "StellarWrongMemoFormat": {
+      "title": "Memo format is wrong"
+    },
+    "SourceHasMultiSign": {
+      "title": "Please disable multisign to send {{currencyName}}"
+    },
+    "StellarMemoRecommended": {
+      "title": "When sending to this recipient, a memo may be required"
     }
   }
 }

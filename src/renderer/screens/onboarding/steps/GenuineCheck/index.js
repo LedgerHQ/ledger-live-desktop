@@ -21,6 +21,9 @@ import OnboardingFooter from "../../OnboardingFooter";
 import type { StepProps } from "../..";
 import GenuineCheckModal from "./GenuineCheckModal";
 import GenuineCheckErrorPage from "./GenuineCheckErrorPage";
+import { useDispatch, useSelector } from "react-redux";
+import { setHasInstalledApps } from "~/renderer/actions/settings";
+import { hasCompletedOnboardingSelector } from "~/renderer/reducers/settings";
 
 const CardTitle = styled(Box).attrs(() => ({
   ff: "Inter|SemiBold",
@@ -38,7 +41,9 @@ const GenuineCheck = (props: StepProps) => {
   const { displayErrorScreen } = genuine;
   const model = getDeviceModel(onboarding.deviceModelId || "nanoS");
 
+  const dispatch = useDispatch();
   const [pin, setPin] = useState(undefined);
+  const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
   const [recovery, setRecovery] = useState(undefined);
   const [isGenuineCheckModalOpened, setGenuineCheckModalOpened] = useState(false);
 
@@ -68,20 +73,26 @@ const GenuineCheck = (props: StepProps) => {
     [updateGenuineCheck],
   );
 
-  const handleOpenGenuineCheckModal = useCallback(() => {
-    setGenuineCheckModalOpened(true);
-  }, []);
-
   const handleCloseGenuineCheckModal = useCallback(() => {
     setGenuineCheckModalOpened(false);
   }, []);
 
-  const handleGenuineCheckPass = useCallback(() => {
-    updateGenuineCheck({
-      isDeviceGenuine: true,
-    });
-    setGenuineCheckModalOpened(false);
-  }, [updateGenuineCheck]);
+  const handleGenuineCheckPass = useCallback(
+    ({ result }: any) => {
+      if (!hasCompletedOnboarding && (!result || !result.installed.length)) {
+        dispatch(setHasInstalledApps(false));
+      }
+      updateGenuineCheck({
+        isDeviceGenuine: true,
+      });
+      setGenuineCheckModalOpened(false);
+    },
+    [hasCompletedOnboarding, updateGenuineCheck, dispatch],
+  );
+
+  const handleOpenGenuineCheckModal = useCallback(() => {
+    setGenuineCheckModalOpened(true);
+  }, []);
 
   const redoGenuineCheck = useCallback(() => {
     setRecovery(undefined);
@@ -148,6 +159,7 @@ const GenuineCheck = (props: StepProps) => {
             items={radioItems}
             activeKey={pin === undefined ? "" : pin ? "yes" : "no"}
             onChange={onPinChange}
+            id="onboarding-genuine-pin"
           />
         </GenuineCheckCardWrapper>
         <GenuineCheckCardWrapper mt={3} isDisabled={!pin}>
@@ -158,6 +170,7 @@ const GenuineCheck = (props: StepProps) => {
               items={radioItems}
               activeKey={recovery === undefined ? "" : recovery ? "yes" : "no"}
               onChange={onRecoveryChange}
+              id="onboarding-genuine-seed"
             />
           )}
         </GenuineCheckCardWrapper>
@@ -170,14 +183,25 @@ const GenuineCheck = (props: StepProps) => {
           {pin && recovery && (
             <Box justifyContent="center">
               {genuine.isDeviceGenuine ? (
-                <Box horizontal alignItems="center" flow={1} color="wallet">
+                <Box
+                  horizontal
+                  alignItems="center"
+                  flow={1}
+                  color="wallet"
+                  id="onboarding-genuine-label"
+                >
                   <IconCheck size={16} />
                   <Box ff="Inter|SemiBold" fontSize={4}>
                     {t("onboarding.genuineCheck.isGenuinePassed")}
                   </Box>
                 </Box>
               ) : (
-                <Button primary disabled={!recovery} onClick={handleOpenGenuineCheckModal}>
+                <Button
+                  primary
+                  disabled={!recovery}
+                  onClick={handleOpenGenuineCheckModal}
+                  id="onboarding-genuine-button"
+                >
                   {t("onboarding.genuineCheck.buttons.genuineCheck")}
                 </Button>
               )}

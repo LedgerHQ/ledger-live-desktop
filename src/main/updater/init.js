@@ -46,6 +46,7 @@ const init = () => {
   });
 
   autoUpdater.autoInstallOnAppQuit = false;
+  autoUpdater.autoDownload = false;
   autoUpdater.checkForUpdates();
 };
 
@@ -62,6 +63,8 @@ const quitAndInstall = () => {
   autoUpdater.quitAndInstall();
 };
 
+const downloadUpdate = () => autoUpdater.downloadUpdate();
+
 init();
 
-export default { quitAndInstall };
+export default { quitAndInstall, downloadUpdate };

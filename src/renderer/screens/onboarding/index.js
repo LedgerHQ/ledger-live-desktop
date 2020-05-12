@@ -36,6 +36,7 @@ import WriteSeed from "./steps/WriteSeed";
 import SetPassword from "./steps/SetPassword";
 import Analytics from "./steps/Analytics";
 import Finish from "./steps/Finish";
+import DebugMock from "~/renderer/components/DebugMock";
 
 const STEPS = {
   init: InitStep,
@@ -173,17 +174,20 @@ class OnboardingC extends PureComponent<Props> {
     };
 
     return (
-      <Container>
-        {step.options.showBreadcrumb && <OnboardingBreadcrumb />}
-        {onboardingRelaunched ? (
-          <CloseContainer onClick={this.cancelRelaunch}>
-            <IconCross size={16} />
-          </CloseContainer>
-        ) : null}
-        <StepContainer>
-          <StepComponent {...stepProps} />
-        </StepContainer>
-      </Container>
+      <>
+        <Container id="onboarding-container">
+          {step.options.showBreadcrumb && <OnboardingBreadcrumb />}
+          {onboardingRelaunched ? (
+            <CloseContainer onClick={this.cancelRelaunch}>
+              <IconCross size={16} />
+            </CloseContainer>
+          ) : null}
+          <StepContainer>
+            <StepComponent {...stepProps} />
+          </StepContainer>
+        </Container>
+        <DebugMock />
+      </>
     );
   }
 }

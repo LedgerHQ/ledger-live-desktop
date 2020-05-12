@@ -14,7 +14,6 @@ keys = {}
 excludedKeys = [
     'fees.',
     'errors.',
-    'partners.',
     'operation.type.',
     'time.range.',
     'delegation.flow.steps.',

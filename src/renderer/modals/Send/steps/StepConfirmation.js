@@ -4,6 +4,7 @@ import React from "react";
 import { Trans } from "react-i18next";
 import styled, { withTheme } from "styled-components";
 
+import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { multiline } from "~/renderer/styles/helpers";
@@ -38,6 +39,7 @@ function StepConfirmation({
     return (
       <Container>
         <TrackPage category="Send Flow" name="Step Confirmed" />
+        <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={<Trans i18nKey="send.steps.confirmation.success.title" />}
           description={multiline(t("send.steps.confirmation.success.text"))}
@@ -85,6 +87,7 @@ export function StepConfirmationFooter({
         // FIXME make a standalone component!
         <Button
           ml={2}
+          id={"send-confirmation-opc-button"}
           event="Send Flow Step 4 View OpD Clicked"
           onClick={() => {
             closeModal();

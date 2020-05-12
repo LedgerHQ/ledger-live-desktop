@@ -9,11 +9,11 @@ import { radii } from "./theme";
 import reset from "./reset";
 
 export const GlobalStyle = createGlobalStyle`
-  body, #preload {
-    background-color: ${p => p.theme.colors.palette.background.default} !important;
-  }
-
   ${reset};
+  
+  #react-root {
+    background-color: ${p => p.theme.colors.palette.background.default};
+  }
 
   .tippy-content {
     padding: 0 !important;
@@ -23,6 +23,10 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${p => p.theme.colors.palette.text.shade100};
     color: ${p => p.theme.colors.palette.background.default};
     border-radius: ${radii[1]}px;
+  }
+
+  .tippy-box[data-theme~='ledger'] > .tippy-svg-arrow {
+    fill: ${p => p.theme.colors.palette.text.shade100};
   }
 
   .tippy-tooltip.ledger-theme .tippy-svg-arrow {

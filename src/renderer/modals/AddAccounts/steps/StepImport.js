@@ -99,7 +99,7 @@ class StepImport extends PureComponent<StepProps> {
 
   startScanAccountsDevice() {
     this.unsub();
-    const { currency, device, setScanStatus, setScannedAccounts } = this.props;
+    const { currency, device, setScanStatus, setScannedAccounts, blacklistedTokenIds } = this.props;
     if (!currency || !device) return;
     const mainCurrency = currency.type === "TokenCurrency" ? currency.parentCurrency : currency;
     try {
@@ -112,9 +112,10 @@ class StepImport extends PureComponent<StepProps> {
       let onlyNewAccounts = true;
 
       const syncConfig = {
-        // TODO later we need to paginate only a few ops, not all (for add accounts)
-        // paginationConfig will come from redux
-        paginationConfig: {},
+        paginationConfig: {
+          operations: 20,
+        },
+        blacklistedTokenIds,
       };
 
       this.scanSubscription = concat(
@@ -322,15 +323,26 @@ export const StepImportFooter = ({
       <Box grow>{currency && <CurrencyBadge currency={currency} />}</Box>
       {scanStatus === "error" && (
         <>
-          <ExternalLinkButton label={t("common.getSupport")} url={urls.faq} />
-          <RetryButton primary onClick={() => setScanStatus("scanning")} />
+          <ExternalLinkButton label={t("common.getSupport")} url={urls.syncErrors} />
+          <RetryButton
+            id={"add-accounts-import-retry-button"}
+            primary
+            onClick={() => setScanStatus("scanning")}
+          />
         </>
       )}
       {scanStatus === "scanning" && (
-        <Button onClick={() => setScanStatus("finished")}>{t("common.stop")}</Button>
+        <Button id={"add-accounts-import-stop-button"} onClick={() => setScanStatus("finished")}>
+          {t("common.stop")}
+        </Button>
       )}
       {scanStatus !== "error" && (
-        <Button primary disabled={scanStatus !== "finished"} onClick={onClick}>
+        <Button
+          id={"add-accounts-import-add-button"}
+          primary
+          disabled={scanStatus !== "finished"}
+          onClick={onClick}
+        >
           {ctaWording}
         </Button>
       )}

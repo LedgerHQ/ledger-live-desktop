@@ -1,0 +1,281 @@
+import { applicationProxy, getMockDeviceEvent, restoreUserData } from "../applicationProxy";
+import OnboardingPage from "../po/onboarding.page";
+import ModalPage from "../po/modal.page";
+import GenuinePage from "../po/genuine.page";
+import PasswordPage from "../po/password.page";
+import AnalyticsPage from "../po/analytics.page";
+import PortfolioPage from "../po/portfolio.page";
+import data from "../data/onboarding/";
+import {
+  deviceInfo155 as deviceInfo,
+  mockListAppsResult,
+} from "@ledgerhq/live-common/lib/apps/mock";
+
+jest.setTimeout(600000);
+
+describe("Bullrun", () => {
+  let app;
+  let onboardingPage;
+  let modalPage;
+  let genuinePage;
+  let passwordPage;
+  let analyticsPage;
+  let portfolioPage;
+  let mockDeviceEvent;
+
+  beforeAll(async () => {
+    app = await applicationProxy({ MOCK: true, DISABLE_MOCK_POINTER_EVENTS: true });
+    onboardingPage = new OnboardingPage(app);
+    modalPage = new ModalPage(app);
+    genuinePage = new GenuinePage(app);
+    passwordPage = new PasswordPage(app);
+    analyticsPage = new AnalyticsPage(app);
+    portfolioPage = new PortfolioPage(app);
+    mockDeviceEvent = getMockDeviceEvent(app);
+
+    return app.start();
+  });
+
+  afterAll(async () => {
+    await restoreUserData();
+    return app.stop();
+  });
+
+  const $ = selector => app.client.element(selector);
+
+  it("opens a window", () => {
+    return app.client
+      .waitUntilWindowLoaded()
+      .getWindowCount()
+      .then(count => expect(count).toBe(1))
+      .browserWindow.isMinimized()
+      .then(minimized => expect(minimized).toBe(false))
+      .browserWindow.isVisible()
+      .then(visible => expect(visible).toBe(true))
+      .browserWindow.isFocused()
+      .then(focused => expect(focused).toBe(true))
+      .getTitle()
+      .then(title => {
+        expect(title).toBe(data.appTitle);
+      });
+  });
+
+  it("go through onboarding", async () => {
+    await app.client.waitForVisible("#onboarding-get-started-button", 20000);
+    await onboardingPage.getStarted();
+    await onboardingPage.selectConfiguration("new");
+    await onboardingPage.selectDevice("nanox");
+    await onboardingPage.continue();
+    await onboardingPage.continue();
+    await onboardingPage.continue();
+    await genuinePage.checkPin(true);
+    await genuinePage.checkSeed(true);
+    await genuinePage.check();
+    await modalPage.closeButton.click();
+    await onboardingPage.back();
+    await onboardingPage.back();
+    await onboardingPage.back();
+    await onboardingPage.back();
+    await onboardingPage.selectConfiguration("restore");
+    await onboardingPage.selectDevice("blue");
+    await onboardingPage.continue();
+    await onboardingPage.continue();
+    await onboardingPage.continue();
+    await genuinePage.checkPin(true);
+    await genuinePage.checkSeed(true);
+    await genuinePage.check();
+    await modalPage.closeButton.click();
+    await onboardingPage.back();
+    await onboardingPage.back();
+    await onboardingPage.back();
+    await onboardingPage.back();
+    await onboardingPage.selectConfiguration("nodevice");
+    await onboardingPage.back();
+    await onboardingPage.selectConfiguration("initialized");
+    await onboardingPage.selectDevice("nanos");
+    await onboardingPage.continue();
+    await genuinePage.checkPin(false);
+    await onboardingPage.back();
+    await genuinePage.checkPin(true);
+    await genuinePage.checkSeed(false);
+    await onboardingPage.back();
+    await genuinePage.checkPin(true);
+    await genuinePage.checkSeed(true);
+    await genuinePage.check();
+    await mockDeviceEvent(
+      {
+        type: "listingApps",
+        deviceInfo,
+      },
+      {
+        type: "result",
+        result: mockListAppsResult("Bitcoin", "Bitcoin", deviceInfo),
+      },
+      { type: "complete" },
+    );
+    await app.client.pause(2000);
+    await app.client.waitForVisible("#onboarding-continue-button");
+    await onboardingPage.continue();
+    await passwordPage.skip();
+    await analyticsPage.dataFakeLink.click();
+    await modalPage.close();
+    await analyticsPage.shareFakeLink.click();
+    await modalPage.close();
+    await analyticsPage.shareSwitch.click();
+    await analyticsPage.shareSwitch.click();
+    await analyticsPage.logsSwitch.click();
+    await analyticsPage.logsSwitch.click();
+    await onboardingPage.continue();
+    await onboardingPage.open();
+    await modalPage.isVisible();
+    await modalPage.termsCheckbox.click();
+    await app.client.waitForEnabled("#modal-confirm-button");
+    await modalPage.confirmButton.click();
+
+    expect(true).toBeTruthy();
+  });
+
+  it("access manager", async () => {
+    // Access manager and go through firmware update
+    await $("#drawer-manager-button").click();
+    await mockDeviceEvent(
+      {
+        type: "listingApps",
+        deviceInfo,
+      },
+      {
+        type: "result",
+        result: mockListAppsResult("Bitcoin, Ethereum, Stellar", "Bitcoin", deviceInfo),
+      },
+      { type: "complete" },
+    );
+    expect(true).toBeTruthy();
+  });
+
+  it("firmware update flow", async () => {
+    await app.client.waitForExist("#manager-update-firmware-button", 100000);
+    $("#manager-update-firmware-button").click();
+    await app.client.waitForExist("#firmware-update-disclaimer-modal-seed-ready-checkbox");
+    $("#firmware-update-disclaimer-modal-seed-ready-checkbox").click();
+    $("#firmware-update-disclaimer-modal-continue-button").click();
+    $("#firmware-update-disclaimer-modal-continue-button").click();
+    await mockDeviceEvent({}, { type: "complete" }); // .complete() install full firmware -> flash mcu
+    await app.client.waitForExist("#firmware-update-flash-mcu-title");
+    await mockDeviceEvent({}, { type: "complete" }); // .complete() flash mcu -> completed
+    await app.client.waitForExist("#firmware-update-completed-close-button");
+    $("#firmware-update-completed-close-button").click();
+    await $("#drawer-dashboard-button").click();
+    expect(true).toBeTruthy();
+  });
+  describe("add accounts flow", () => {
+    // Add accounts for all currencies with special flows (delegate, vote, etc)
+    const currencies = ["dogecoin", "ethereum", "xrp", "ethereum_classic", "tezos"];
+    for (let i = 0; i < currencies.length; i++) {
+      it(`for ${currencies[i]}`, async () => {
+        const currency = currencies[i];
+        const addAccountId = !i
+          ? "#accounts-empty-state-add-account-button"
+          : "#accounts-add-account-button";
+        await app.client.waitForExist(addAccountId);
+        await $(addAccountId).click();
+        await $("#modal-container .select__control").click();
+        await $("#modal-container .select__control input").addValue(currency);
+        await $(".select-options-list .option:first-child").click();
+        await $("#modal-continue-button").click();
+        await mockDeviceEvent({ type: "opened" });
+        await app.client.waitForExist("#add-accounts-import-add-button", 20000);
+        await app.client.waitForEnabled("#add-accounts-import-add-button", 20000);
+        await $("#add-accounts-import-add-button").click();
+        await $("#modal-close-button").click();
+        if (!i) {
+          await $("#drawer-accounts-button").click();
+        }
+        expect(true).toBeTruthy();
+      });
+    }
+  });
+
+  it("account migration flow", async () => {
+    // Account migration flow
+    await $("#drawer-dashboard-button").click();
+    await app.client.waitForExist("#modal-migrate-accounts-button");
+    await $("#modal-migrate-accounts-button").click();
+    await $("#migrate-overview-start-button").click();
+    await mockDeviceEvent({ type: "opened" });
+    await app.client.waitForExist("#migrate-currency-continue-button", 20000);
+    await $("#migrate-currency-continue-button").click();
+    await mockDeviceEvent({ type: "opened" });
+    await app.client.waitForExist("#migrate-currency-continue-button", 20000);
+    await $("#migrate-currency-continue-button").click();
+    await $("#migrate-overview-export-button").click();
+    await app.client.pause(2000);
+    await app.client.waitForExist("#export-accounts-done-button");
+    await $("#export-accounts-done-button").click();
+    await $("#migrate-overview-done-button").click();
+    expect(true).toBeTruthy();
+  });
+
+  it("receive flow", async () => {
+    // Receive flow without device
+    await $("#drawer-receive-button").click();
+    await $("#receive-account-continue-button").click();
+    await mockDeviceEvent({ type: "opened" }, { type: "complete" });
+    await app.client.waitForEnabled("#receive-receive-continue-button", 20000);
+    await $("#receive-receive-continue-button").click();
+    expect(true).toBeTruthy();
+  });
+
+  it("send flow", async () => {
+    // Send flow
+    await $("#drawer-send-button").click();
+    await $("#send-recipient-input").click();
+    await $("#send-recipient-input").addValue("1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA");
+    await app.client.waitForEnabled("#send-recipient-continue-button");
+    await $("#send-recipient-continue-button").click();
+    await $("#send-amount-continue-button").click();
+    await $("#send-summary-continue-button").click();
+    await mockDeviceEvent({ type: "opened" });
+    await app.client.waitForExist("#send-confirmation-opc-button", 60000);
+    await app.client.waitForEnabled("#send-confirmation-opc-button");
+    await $("#send-confirmation-opc-button").click();
+    await $("#modal-close-button").click();
+    expect(true).toBeTruthy();
+  });
+
+  it("tezos delegate flow", async () => {
+    // Tezos delegate flow
+    await $("#drawer-accounts-button").click();
+    await $("#accounts-search-input").addValue("tezos");
+    await app.client.waitForExist(".accounts-account-row-item:first-child");
+    await $(".accounts-account-row-item:first-child").click();
+    await app.client.waitForExist("#account-delegate-button");
+    await $("#account-delegate-button").click();
+    await $("#delegate-starter-continue-button").click();
+    await app.client.waitForEnabled("#delegate-summary-continue-button");
+    await $("#delegate-summary-continue-button").click();
+    await mockDeviceEvent({ type: "opened" });
+    await $("#modal-close-button").click();
+    expect(true).toBeTruthy();
+  });
+
+  it("naive discreet mode toggle and assorted screens", async () => {
+    // Toggle discreet mode twice
+    await $("#topbar-discreet-button").click();
+    await $("#topbar-discreet-button").click();
+
+    await $("#drawer-dashboard-button").click();
+    await $("#drawer-partners-button").click();
+
+    // Open settings and navigate all tabs
+    await $("#topbar-settings-button").click();
+
+    // Open settings and navigate all tabs
+    await $("#settings-currencies-tab").click();
+    await $("#settings-accounts-tab").click();
+    await $("#settings-about-tab").click();
+    await $("#settings-help-tab").click();
+    await $("#settings-experimental-tab").click();
+
+    expect(1).toEqual(1);
+  });
+});

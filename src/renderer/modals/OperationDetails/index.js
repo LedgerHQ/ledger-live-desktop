@@ -29,7 +29,6 @@ import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/
 import { urls } from "~/config/urls";
 import { openModal } from "~/renderer/actions/modals";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import Bar from "~/renderer/components/Bar";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
@@ -54,100 +53,17 @@ import {
   marketIndicatorSelector,
 } from "~/renderer/reducers/settings";
 import { getMarketColor } from "~/renderer/styles/helpers";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const OpDetailsSection = styled(Box).attrs(() => ({
-  horizontal: true,
-  alignItems: "center",
-  ff: "Inter|SemiBold",
-  fontSize: 4,
-  color: "palette.text.shade60",
-}))``;
-
-const OpDetailsTitle = styled(Box).attrs(() => ({
-  ff: "Inter|ExtraBold",
-  fontSize: 2,
-  color: "palette.text.shade100",
-  textTransform: "uppercase",
-  mb: 1,
-}))`
-  justify-content: center;
-  height: 18px;
-  letter-spacing: 2px;
-`;
-export const Address: ThemedComponent<{}> = styled(Text)`
-  margin-left: -4px;
-  border-radius: 4px;
-  flex-wrap: wrap;
-  padding: 4px;
-  width: fit-content;
-`;
-
-export const GradientHover: ThemedComponent<{}> = styled(Box).attrs(() => ({
-  alignItem: "center",
-  color: "wallet",
-}))`
-  background: ${p => p.theme.colors.palette.background.paper};
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  padding-left: 20px;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0),
-    ${p => p.theme.colors.palette.background.paper} 20%
-  );
-`;
-
-const OpDetailsData: ThemedComponent<{ color?: string }> = styled(Box).attrs(p => ({
-  ff: "Inter",
-  color: p.color || "palette.text.shade80",
-  fontSize: 4,
-  relative: true,
-}))`
-  ${GradientHover} {
-    display: none;
-  }
-
-  &:hover ${GradientHover} {
-    display: flex;
-    & > * {
-      cursor: pointer;
-    }
-  }
-
-  &:hover ${Address} {
-    background: ${p => p.theme.colors.pillActiveBackground};
-    color: ${p => p.theme.colors.palette.primary.main};
-    font-weight: 400;
-  }
-
-  & ${Link}:hover {
-    text-decoration: underline;
-  }
-`;
-
-const NoMarginWrapper: ThemedComponent<{}> = styled.div`
-  margin-left: -20px;
-  margin-right: -20px;
-`;
-
-const B: ThemedComponent<{}> = styled(Bar).attrs(() => ({
-  color: "palette.divider",
-  size: 1,
-}))``;
-
-const TextEllipsis: ThemedComponent<{}> = styled.div`
-  flex-shrink: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-
-const Separator: ThemedComponent<{}> = styled.div`
-  margin: 0 4px;
-`;
+import {
+  OpDetailsSection,
+  OpDetailsTitle,
+  GradientHover,
+  OpDetailsData,
+  NoMarginWrapper,
+  B,
+  TextEllipsis,
+  Separator,
+} from "./styledComponents";
 
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const marketIndicator = marketIndicatorSelector(state);
@@ -211,8 +127,11 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
   const mainAccount = getMainAccount(account, parentAccount);
   const { extra, hash, date, senders, type, fee, recipients } = operation;
   const { name } = mainAccount;
+
   const currency = getAccountCurrency(account);
+
   const unit = getAccountUnit(account);
+
   const amount = getOperationAmountNumber(operation);
   const isNegative = amount.isNegative();
   const marketColor = getMarketColor({
@@ -228,6 +147,11 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
   const urlFeesInfo = specific && specific.getURLFeesInfo && specific.getURLFeesInfo(operation);
   const url = getTransactionExplorer(getDefaultExplorerView(mainAccount.currency), operation.hash);
   const uniqueSenders = uniq(senders);
+
+  const OpDetailsExtra =
+    specific && specific.OperationDetailsExtra
+      ? specific.OperationDetailsExtra
+      : OperationDetailsExtra;
 
   const { hasFailed } = operation;
   const subOperations = operation.subOperations || [];
@@ -291,34 +215,38 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
             />
           </Box>
           <Box my={4} alignItems="center">
-            <Box selectable>
-              {hasFailed ? (
-                <Box color="alertRed">
-                  <Trans i18nKey="operationDetails.failed" />
+            {!amount.isZero() && (
+              <>
+                <Box selectable>
+                  {hasFailed ? (
+                    <Box color="alertRed">
+                      <Trans i18nKey="operationDetails.failed" />
+                    </Box>
+                  ) : (
+                    <FormattedVal
+                      color={amount.isNegative() ? "palette.text.shade80" : undefined}
+                      unit={unit}
+                      alwaysShowSign
+                      showCode
+                      val={amount}
+                      fontSize={7}
+                      disableRounding
+                    />
+                  )}
                 </Box>
-              ) : (
-                <FormattedVal
-                  color={amount.isNegative() ? "palette.text.shade80" : undefined}
-                  unit={unit}
-                  alwaysShowSign
-                  showCode
-                  val={amount}
-                  fontSize={7}
-                  disableRounding
-                />
-              )}
-            </Box>
-            <Box mt={1} selectable>
-              {hasFailed ? null : (
-                <CounterValue
-                  color="palette.text.shade60"
-                  fontSize={5}
-                  date={date}
-                  currency={currency}
-                  value={amount}
-                />
-              )}
-            </Box>
+                <Box mt={1} selectable>
+                  {hasFailed ? null : (
+                    <CounterValue
+                      color="palette.text.shade60"
+                      fontSize={5}
+                      date={date}
+                      currency={currency}
+                      value={amount}
+                    />
+                  )}
+                </Box>
+              </>
+            )}
           </Box>
           {subOperations.length > 0 && account.type === "Account" && (
             <>
@@ -348,7 +276,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                       ? opAccount.name
                       : getAccountCurrency(opAccount).name;
                   return (
-                    <NoMarginWrapper key={`${op.id}`}>
+                    <div key={`${op.id}`}>
                       <OperationComponent
                         text={subAccountName}
                         operation={op}
@@ -358,7 +286,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                         t={t}
                       />
                       {i < subOperations.length - 1 && <B />}
-                    </NoMarginWrapper>
+                    </div>
                   );
                 })}
               </Box>
@@ -512,37 +440,32 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
             <DataList lines={uniqueSenders} t={t} />
           </Box>
           <B />
-          <Box>
-            <Box horizontal>
-              <OpDetailsTitle>{t("operationDetails.to")}</OpDetailsTitle>
-              {recipients.length > 1 ? (
-                <Link>
-                  <FakeLink
-                    underline
-                    fontSize={3}
-                    ml={2}
-                    color="palette.text.shade80"
-                    onClick={() => openURL(urls.multipleDestinationAddresses)}
-                    iconFirst
-                  >
-                    <Box mr={1}>
-                      <IconExternalLink size={12} />
-                    </Box>
-                    {t("operationDetails.multipleAddresses")}
-                  </FakeLink>
-                </Link>
-              ) : null}
+          {recipients.length ? (
+            <Box>
+              <Box horizontal>
+                <OpDetailsTitle>{t("operationDetails.to")}</OpDetailsTitle>
+                {recipients.length > 1 ? (
+                  <Link>
+                    <FakeLink
+                      underline
+                      fontSize={3}
+                      ml={2}
+                      color="palette.text.shade80"
+                      onClick={() => openURL(urls.multipleDestinationAddresses)}
+                      iconFirst
+                    >
+                      <Box mr={1}>
+                        <IconExternalLink size={12} />
+                      </Box>
+                      {t("operationDetails.multipleAddresses")}
+                    </FakeLink>
+                  </Link>
+                ) : null}
+              </Box>
+              <DataList lines={recipients} t={t} />
             </Box>
-            <DataList lines={recipients} t={t} />
-          </Box>
-          {Object.entries(extra).map(([key, value]) => (
-            <Box key={key}>
-              <OpDetailsTitle>
-                <Trans i18nKey={`operationDetails.extra.${key}`} defaults={key} />
-              </OpDetailsTitle>
-              <OpDetailsData>{value}</OpDetailsData>
-            </Box>
-          ))}
+          ) : null}
+          <OpDetailsExtra extra={extra} type={type} account={account} />
         </Box>
       )}
       renderFooter={() => (
@@ -568,6 +491,23 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
     </ModalBody>
   );
 });
+
+type OperationDetailsExtraProps = {
+  extra: { [key: string]: string },
+  type: string,
+  account: ?AccountLike,
+};
+
+const OperationDetailsExtra = ({ extra }: OperationDetailsExtraProps) => {
+  return Object.entries(extra).map(([key, value]) => (
+    <Box key={key}>
+      <OpDetailsTitle>
+        <Trans i18nKey={`operationDetails.extra.${key}`} defaults={key} />
+      </OpDetailsTitle>
+      <OpDetailsData>{value}</OpDetailsData>
+    </Box>
+  ));
+};
 
 type ModalRenderProps = {
   data: {|
@@ -615,16 +555,18 @@ export class DataList extends Component<{ lines: string[], t: TFunction }, *> {
     // Hardcoded for now
     const numToShow = 2;
     const shouldShowMore = lines.length > 3;
+    const renderLine = line => (
+      <OpDetailsData key={line}>
+        <Ellipsis canSelect>{line}</Ellipsis>
+        <GradientHover>
+          <CopyWithFeedback text={line} />
+        </GradientHover>
+      </OpDetailsData>
+    );
+
     return (
       <Box>
-        {(shouldShowMore ? lines.slice(0, numToShow) : lines).map(line => (
-          <OpDetailsData key={line}>
-            <Address>{line}</Address>
-            <GradientHover>
-              <CopyWithFeedback text={line} />
-            </GradientHover>
-          </OpDetailsData>
-        ))}
+        {(shouldShowMore ? lines.slice(0, numToShow) : lines).map(renderLine)}
         {shouldShowMore && !showMore && (
           <Box onClick={this.onClick} py={1}>
             <More fontSize={4} color="wallet" ff="Inter|SemiBold" mt={1}>
@@ -633,15 +575,7 @@ export class DataList extends Component<{ lines: string[], t: TFunction }, *> {
             </More>
           </Box>
         )}
-        {showMore &&
-          lines.slice(numToShow).map(line => (
-            <OpDetailsData key={line}>
-              <Address>{line}</Address>
-              <GradientHover>
-                <CopyWithFeedback text={line} />
-              </GradientHover>
-            </OpDetailsData>
-          ))}
+        {showMore ? lines.slice(numToShow).map(renderLine) : null}
         {shouldShowMore && showMore && (
           <Box onClick={this.onClick} py={1}>
             <More fontSize={4} color="wallet" ff="Inter|SemiBold" mt={1}>

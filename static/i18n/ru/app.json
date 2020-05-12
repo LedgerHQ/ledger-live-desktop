@@ -41,10 +41,12 @@
     "copy": "Копировать",
     "copied": "Скопировано",
     "addressCopied": "Адрес скопирован",
+    "addressCopiedSuspicious": "Mismatch between the copied address and the one in the clipboard.",
     "experimentalFeature": "Экспериментальная функция",
     "dismiss": "Dismiss",
     "information": "Information",
     "search": "Search...",
+    "manage": "Manage",
     "lockScreen": {
       "title": "С возвращением",
       "subTitle": null,
@@ -69,7 +71,12 @@
       "CREATE": "Created",
       "REVEAL": "Revealed",
       "DELEGATE": "Delegated",
-      "UNDELEGATE": "Undelegated"
+      "REDELEGATE": "Redelegated",
+      "UNDELEGATE": "Undelegated",
+      "VOTE": "Voted",
+      "FREEZE": "Frozen",
+      "UNFREEZE": "Unfrozen",
+      "REWARD": "Claimed reward"
     }
   },
   "byteSize": {
@@ -130,7 +137,19 @@
         "title": "Единица",
         "desc": "Выберите единицу для отображения"
       }
-    }
+    },
+    "availableBalance": "Available balance",
+    "frozenAssets": "Frozen assets",
+    "bandwidth": "Bandwidth",
+    "energy": "Energy",
+    "delegatedAssets": "Delegated assets",
+    "undelegating": "Undelegating",
+    "availableBalanceTooltip": "This amount can be sent anytime.",
+    "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
+    "bandwidthTooltip": "Freeze assets to gain bandwidth",
+    "energyTooltip": "Freeze assets to gain energy",
+    "delegatedAssetsTooltip": "These are your currently delegated assets",
+    "undelegatingTooltip": "These are your assets currently being undelegated"
   },
   "accounts": {
     "title": "Счета",
@@ -155,8 +174,14 @@
       "star": "Добавить в избранное",
       "receive": "Получить",
       "send": "Отправить",
-      "edit": "Edit account"
+      "edit": "Edit account",
+      "hideToken": "Hide token"
     }
+  },
+  "blacklistToken": {
+    "title": "Hide token",
+    "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can restore their visibility at any time from <3>Settings</3>",
+    "hideCTA": "Hide token"
   },
   "banners": {
     "migrate": "Доступно обновление учётных записей Ledger Live",
@@ -179,38 +204,22 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "Установка приложений или добавление счетов",
-      "desc": "Чтобы установить приложения или добавить счета, если приложения уже установлены на устройстве Ledger, откройте диспетчер.",
+      "title": "Install some apps on your device",
+      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
       "buttons": {
-        "addAccount": "Добавить счета",
-        "installApp": "Открыть диспетчер"
+        "installApp": "Go to Manager",
+        "help": "Help"
+      }
+    },
+    "accounts": {
+      "title": "Add an account to get started",
+      "desc": "Add an account to start managing your crypto assets. You should have installed the apps for your crypto assets on your device.",
+      "buttons": {
+        "addAccount": "Add account",
+        "installApp": "Go to Manager to install apps",
+        "help": "Help"
       }
     }
-  },
-  "partners": {
-    "title": "Купить крипто",
-    "desc": "Попробуйте некоторые из специально подобранных служб",
-    "visitWebsite": "Посетить веб-сайт",
-    "btcdirect": "Совершайте операции покупки и продажи без особых усилий вместе с ведущей в Европе брокерской компанией криптовалют. Регистрируйтесь бесплатно и получайте криптоактивы в считанные минуты! На ресурсе Trustpilot пользователи оценили нас в 8,7 балла.",
-    "changelly": "Changelly - это широко используемая биржа криптоактивов, на которой представлены свыше 100 монет и токенов.",
-    "changenow": "ChangeNOW — одна из ведущих служб мгновенного обмена валют.",
-    "coinberry": "Coinberry - это наиболее надежная криптоплатформа в Канаде с уровнем безопасности, превосходящим банковскую защиту, с лучшим в своем классе пользовательским интерфейсом, финансированием и выводом средств без комиссии. Регистрируйтесь заранее, чтобы получить ранний доступ к платформе, если вы не являетесь гражданином Канады.",
-    "coinhouse": "Coinhouse - это надежная платформа для частных лиц и институциональных инвесторов, которая предназначена для анализа, приобретения, продажи и безопасного хранения криптоактивов.",
-    "coinmama": "Coinmama представляет собой финансовую службу для быстрой, безопасной и оживленной покупки цифровых активов из любой точки мира.",
-    "crypto": "Crypto.com is the best place to buy, sell, track and pay with crypto.",
-    "genesis": "Genesis — это институциональная торговая фирма, предлагающая ликвидность и займы для цифровых валют, включая биткоин, биткоин кэш (Bitcoin Cash), Ethereum, Ethereum Classic, Litecoin и XRP.",
-    "kyberswap": "Быстрая, простая и надежная платформа миграции токенов. Она работает на протоколе Kyber Network ликвидности сети.",
-    "luno": "Компания Luno обеспечивает возможность безопасной и простой покупки, хранения и изучения криптовалют, таких как биткоин и Ethereum.",
-    "paybis": "Paybis.com является одним из наиболее надежных брокеров криптовалюты по всему миру с 2014 года, удовлетворенность клиентов - 4.7/5 через Trustpilot.",
-    "shapeshift": "ShapeShift — это интернет-биржа, пользователи которой получают возможность покупать и продавать цифровые активы. Это быстрый и надежный способ покупки и продажи цифровых активов по всему миру без длительной регистрации, риска встречной стороны и помех.",
-    "simplex": "Simplex представляет собой финансовое учреждение, имеющее лицензию ЕС, которое предоставляет решение для проведения оплаты кредитными картами с защитой от мошенников.",
-    "swft": "SWFT Blockchain is a worldwide cross-blockchain transfer protocol and payment network, enabling simpler, faster and safer swaps between over 200 cryptocurrencies and free crypto payments to anyone anywhere",
-    "taxtoken": "Автоматизированная программа учета налогов и затрат на операции с криптовалютой для граждан США.",
-    "thorswap": "ThorSwap представляет собой мгновенную, безопасную и честную биржу криптоактивов, работающую на основе децентрализованных технологий атомных свопов. Это наиболее удобный способ начать торговлю, не требующий регистрации или соблюдения правила KYC (Know Your Customer — знай своего клиента) для проведения транзакций на небольшую сумму.",
-    "bitpanda": "Bitpanda — это ведущая в Европе розничная брокерская компания, специализирующаяся на покупке и продаже такой криптовалюты, как Bitcoin, Ethereum, IOTA и много других. Вносите деньги, используя кредитную карточку, систему SOFORT-Transfer, NETELLER и другие варианты.",
-    "exmo": "Основанная в 2013 году биржа EXMO, отделения которой расположены в Лондоне, Киеве, Барселоне и Москве, занимает первое место среди бирж в Восточной Европе и является одной из крупнейших в мире по объему и ликвидности.",
-    "ndax": "Ведущая канадская криптовалютная биржа NDAX предоставляет регулируемую, безопасную и интуитивно понятную платформу для покупки и продажи Bitcoin, Litecoin, Ethereum, XRP и других цифровых активов. Другие ключевые функции включают расширенную торговлю, бесплатные депозиты и решение для хранения институционального уровня через Ledger Vault.",
-    "voyager": "Любите ваш Крипто Журнал с Voyager. Лицензированный криптоброкер с безкомиссионной торговлей 20+ криптовалют."
   },
   "genuinecheck": {
     "modal": {
@@ -314,6 +323,7 @@
     }
   },
   "operationDetails": {
+    "whatIsThis": "What is this operation?",
     "title": "Сведения об операции",
     "account": "Счет",
     "date": "Дата",
@@ -336,7 +346,25 @@
     "internalOperations": "Внутренние операции",
     "internalOpTooltip": "Эта операция имеет внутренние операции",
     "details": "{{ currency }} подробности",
-    "multipleAddresses": "Почему несколько адресов?"
+    "multipleAddresses": "Почему несколько адресов?",
+    "extra": {
+      "resource": "Resource",
+      "frozenAmount": "Frozen amount",
+      "unfreezeAmount": "Unfreeze amount",
+      "address": "Address",
+      "votes": "Votes ({{number}})",
+      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
+      "validators": "Validators",
+      "delegated": "Delegated ({{amount}})",
+      "redelegated": "Redelegated ({{amount}})",
+      "redelegatedFrom": "Redelegated from",
+      "redelegatedTo": "Redelegated to",
+      "undelegated": "Undelegated ({{amount}})",
+      "undelegatedFrom": "Undelegated from",
+      "undelegatedAmount": "Undelegated amount",
+      "rewardFrom": "Reward from",
+      "rewardAmount": "Amount collected"
+    }
   },
   "operationList": {
     "noMoreOperations": "Вот и все"
@@ -411,6 +439,7 @@
         "updateAllOutOfMemory": "Not enough storage to update, please uninstall some apps",
         "install": "Install",
         "installed": "Installed",
+        "updated": "Updated",
         "uninstall": "Uninstall",
         "notEnoughSpace": "Not enough storage",
         "supported": "Ledger Live supported",
@@ -501,6 +530,132 @@
       }
     }
   },
+  "claimReward": {
+    "title": "Claim rewards",
+    "steps": {
+      "rewards": {
+        "title": "Rewards",
+        "description": "Congratulations! You earned <1>{{amount}}</1> by voting for validators.",
+        "info": "Rewards can be claimed once every 24 hours."
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "success": {
+          "title": "Rewards claimed",
+          "text": "Your rewards have been added to your balance.",
+          "cta": "View details",
+          "done": "Done"
+        },
+        "pending": {
+          "title": "Claiming your rewards..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+      }
+    }
+  },
+  "freeze": {
+    "title": "Freeze assets",
+    "steps": {
+      "amount": {
+        "title": "Amount",
+        "resourceInfo": "Bandwith or Energy?",
+        "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
+        "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
+        "amountLabel": "Amount to freeze",
+        "available": "Available: {{amountAvailable}}",
+        "info": "Frozen assets cannot be sent for 3 days."
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "tooltip": {
+          "title": "Transaction is under validation",
+          "desc": "You have to wait a minute before being able to vote"
+        },
+        "title": "Confirmation",
+        "success": {
+          "title": "",
+          "textNRG": "You will start earning Energy once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+          "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+          "votePending": "Vote in {{time}}",
+          "vote": "Vote",
+          "later": "Vote later"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+      }
+    }
+  },
+  "unfreeze": {
+    "title": "Unfreeze assets",
+    "steps": {
+      "amount": {
+        "title": "Unfreeze",
+        "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "success": {
+          "title": "",
+          "text": "Your assets have been unfrozen successfully. Your {{resource}} points will be decreased and your votes will be canceled.",
+          "continue": "Continue"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+      }
+    }
+  },
+  "vote": {
+    "title": "Cast votes",
+    "titleExisting": "Manage votes",
+    "steps": {
+      "castVotes": {
+        "max": "MAX",
+        "title": "Vote",
+        "search": "Search by name or address...",
+        "totalVotes": "Total votes: {{total}}",
+        "selected": "Selected: {{total}}",
+        "maxSelected": "Max selected: {{total}}",
+        "allVotesAreUsed": "All votes are used",
+        "maxUsed": "Max votes: {{total}}",
+        "superRepresentatives": "Super Representatives (SR)",
+        "candidates": "Candidates",
+        "estYield": "est. yield",
+        "srInfo": "SR or Candidates?",
+        "validators": "Validators ({{total}})",
+        "votes": "Votes available: {{total}}",
+        "noResults": "No validators found for \"<0>{{search}}</0>\"."
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "success": {
+          "title": "Your votes were cast successfully.",
+          "text": "",
+          "howVotingWorks": "How voting works?",
+          "done": "Done",
+          "cta": "View details"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+      }
+    }
+  },
   "receive": {
     "title": "Получить",
     "successTitle": "Address shared securely",
@@ -533,7 +688,8 @@
         "title": "Recipient"
       },
       "amount": {
-        "title": "Amount"
+        "title": "Amount",
+        "banner": "Maximum spendable amount is"
       },
       "summary": {
         "title": "Summary"
@@ -604,6 +760,104 @@
     "value": "Значение",
     "header": "Account allocation ({{count}})"
   },
+  "tron": {
+    "voting": {
+      "emptyState": {
+        "description": "You can now earn rewards by freezing and voting.",
+        "info": "How voting works",
+        "votesDesc": "Cast your votes for one or more representatives to start earning staking rewards.",
+        "vote": "Cast votes",
+        "voteExisting": "Manage votes"
+      },
+      "manageTP": "Manage assets",
+      "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
+      "claimRewards": "Claim rewards",
+      "nextRewardsDate": "Rewards can be claimed {{date}}",
+      "claimAvailableRewards": "Claim {{amount}}",
+      "title": "Claim rewards",
+      "header": "Votes",
+      "Amount": "Amount",
+      "percentageTP": "% of votes cast",
+      "noRewards": "No rewards available",
+      "remainingVotes": {
+        "title": "You still have {{amount}} votes remaining",
+        "description": "You can cast your remaining votes to earn more rewards",
+        "button": "Vote now"
+      },
+      "flow": {
+        "steps": {
+          "starter": {
+            "title": "Earn staking rewards",
+            "description": "Freeze your TRX to earn rewards while keeping full security and control of your assets.",
+            "bullet": {
+              "delegate": "Delegated assets stay yours.",
+              "access": "You can unfreeze your assets after 3 days.",
+              "ledger": "Freeze and vote securely with your Ledger device."
+            },
+            "help": "How voting works",
+            "button": {
+              "cta": "Continue"
+            },
+            "termsAndPrivacy": "Delegating your voting rights does not guarantee you will be paid any reward by your super representative."
+          }
+        }
+      }
+    },
+    "manage": {
+      "title": "Manage assets",
+      "freeze": {
+        "title": "Freeze",
+        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also be able to vote for Super Representatives."
+      },
+      "unfreeze": {
+        "title": "Unfreeze",
+        "description": "Unfreeze TRX if you want to spend them. You will no longer earn rewards."
+      },
+      "vote": {
+        "title": "Vote",
+        "description": "Cast votes for Super Representatives to earn rewards.",
+        "steps": {
+          "vote": {
+            "title": "Cast votes",
+            "description": "Vote for one or more Super Representatives to start earning rewards.",
+            "footer": {
+              "doNotShowAgain": "Don't show again",
+              "next": "Cast Votes"
+            },
+            "info": {
+              "message": "SR or Candidates?",
+              "superRepresentative": {
+                "title": "Super Representatives (SR)",
+                "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+              },
+              "candidates": {
+                "title": "Candidates",
+                "description": "127 individuals elected through voting by the entire token holder community. Votes are updated once every 6 hours."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "cosmos": {
+    "delegation": {
+      "emptyState": {
+        "description": "Delegate your assets to one or more validators to start earning rewards.",
+        "info": "How Delegating works",
+        "delegation": "Earn rewards"
+      },
+      "claimRewards": "Claim rewards",
+      "claimAvailableRewards": "Claim {{amount}}",
+      "header": "Delegations",
+      "Amount": "Amount",
+      "noRewards": "No rewards available",
+      "delegate": "Delegate",
+      "undelegate": "Undelegate",
+      "redelegate": "Redelegate",
+      "reward": "Collect rewards"
+    }
+  },
   "delegation": {
     "title": "Earn rewards",
     "header": "Delegation",
@@ -613,13 +867,18 @@
     "transactionID": "Transaction ID",
     "value": "Value",
     "amount": "Amount",
+    "delegated": "Delegated",
+    "rewards": "Rewards",
+    "distribution": "Distribution",
     "duration": "Duration",
     "durationJustStarted": "Just started",
     "durationDays": "{{count}} day",
     "durationDays_plural": "{{count}} days",
     "howItWorks": "How delegation works",
-    "delegationEarn": "You can now earn Tezos staking rewards by delegating your account.",
+    "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
+    "earnRewards": "Earn rewards",
     "overdelegated": "Overdelegated",
+    "status": "Status",
     "flow": {
       "steps": {
         "starter": {
@@ -784,6 +1043,7 @@
       "desc": "Узнайте больше о Ledger Live или воспользуйтесь справкой.",
       "version": "Версия",
       "releaseNotesBtn": "Сведения",
+      "termsBtn": "Read",
       "faq": "Служба поддержки компании Ledger",
       "faqDesc": "При возникновении проблемы воспользуйтесь справкой по использованию Ledger Live с аппаратным кошельком.",
       "terms": "Условия использования",
@@ -835,6 +1095,10 @@
       "hideEmptyTokens": {
         "title": "Скрыть пустые токен аккаунты",
         "desc": "Скрыть токены с нулевым балансом на странице счетов."
+      },
+      "tokenBlacklist": {
+        "title": "Hidden tokens",
+        "desc": "You can hide a token by right-clicking on it while in its parent screen and selecting 'Hide token'"
       }
     }
   },
@@ -870,17 +1134,19 @@
     "checking": "Проверка обновлений...",
     "checkSuccess": "Обновления готовы к установке",
     "quitAndInstall": "Установить сейчас",
+    "updateAvailable": "Ledger Live {{version}} is available for update",
     "error": "Во время обновления возникла ошибка. Скачайте еще раз.",
     "reDownload": "Скачать еще раз",
     "nightlyWarning": "This version cannot auto-update, please install the latest version manually",
     "downloadNow": "Download now"
   },
   "crash": {
-    "oops": "Произошла ошибка",
-    "uselessText": "Повторите попытку, перезапустив Ledger Live. Если проблема не будет устранена, выполните экспорт журналов и свяжитесь со службой поддержки компании Ledger.",
+    "title": "Something went wrong",
+    "description": "Please check our support article for a possible solution. If the problem persists, save your logs using the button below and provide them to Ledger Support.",
+    "troubleshooting": "Click here for possible solutions",
     "restart": "Перезапустить",
-    "support": "Связаться со службой поддержки",
-    "github": "GitHub"
+    "logs": "Save logs",
+    "dataFolder": "View user data"
   },
   "exportOperationsModal": {
     "title": "История операций",
@@ -931,9 +1197,6 @@
       "title": "Нет устройства Ledger?",
       "buyNew": {
         "title": "Купить устройство Ledger"
-      },
-      "trackOrder": {
-        "title": "Отслеживайте свой заказ"
       },
       "learnMore": {
         "title": "Узнать о Ledger"
@@ -1119,11 +1382,21 @@
   "TransactionConfirm": {
     "title": "Please confirm the operation on your device to send it",
     "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
+    "warningWording": {},
+    "titleWording": {
+      "send": "Please confirm the operation on your device to send it",
+      "claimReward": "Please confirm the operation on your device to claim your rewards",
+      "freeze": "Please confirm the operation on your device to freeze assets",
+      "unfreeze": "Please confirm the operation on your device to unfreeze your assets",
+      "vote": "Please confirm the operation on your device to cast your votes"
+    },
     "recipientWording": {
       "send": "recipient",
       "delegate": "validator",
-      "undelegate": "validator"
-    }
+      "undelegate": "validator",
+      "claimReward": "delegation rewards recipient"
+    },
+    "votes": "Votes ({{count}})"
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"
@@ -1133,10 +1406,28 @@
     "read": "Read the Terms of Use",
     "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
   },
+  "families": {
+    "stellar": {
+      "memo": "Memo",
+      "memoType": {
+        "MEMO_TEXT": "Memo Text",
+        "NO_MEMO": "No Memo",
+        "MEMO_ID": "Memo ID",
+        "MEMO_HASH": "Memo Hash",
+        "MEMO_RETURN": "Memo Return"
+      },
+      "whatsMemo": "What is a memo?",
+      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+    }
+  },
   "errors": {
     "generic": {
       "title": "{{message}}",
       "description": "Произошла ошибка. Повторите попытку или свяжитесь с нами."
+    },
+    "AccountAwaitingSendPendingOperations": {
+      "title": "There is an operation pending for this account.",
+      "description": "Please wait a few minutes and come back."
     },
     "AccountNameRequired": {
       "title": "Необходимо указать название счета.",
@@ -1444,6 +1735,52 @@
       "title": "Synchronization error",
       "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
     },
+    "TronNoFrozenForBandwidth": {
+      "title": "No assets to unfreeze",
+      "description": "You do not have assets to unfreeze associated to Bandwidth"
+    },
+    "TronNoFrozenForEnergy": {
+      "title": "No assets to unfreeze",
+      "description": "You do not have assets to unfreeze associated to Energy"
+    },
+    "TronUnfreezeNotExpired": {
+      "title": "Unfreeze is not available yet",
+      "description": "You need to wait 3 days after your last Freeze operation"
+    },
+    "TronVoteRequired": {
+      "title": "At least 1 vote is needed"
+    },
+    "TronInvalidVoteCount": {
+      "title": "Vote format is incorrect",
+      "description": "You can only vote using round numbers"
+    },
+    "TronRewardNotAvailable": {
+      "title": "Reward is not claimable yet",
+      "description": "You need to wait 24 hours between claims"
+    },
+    "TronNoReward": {
+      "title": "There is no reward to claim"
+    },
+    "TronInvalidFreezeAmount": {
+      "title": "Amount to freeze cannot be lower than 1"
+    },
+    "TronSendTrc20ToNewAccountForbidden": {
+      "title": "Sending TRC20 to a new account won't activate it",
+      "description": "The recipient account must be activated prior to sending TRC20 to it. Send either TRX or TRC10 to an account to activate it."
+    },
+    "TronUnexpectedFees": {
+      "title": "Additional fees may be applied"
+    },
+    "TronNotEnoughTronPower": {
+      "title": "Not enough votes available"
+    },
+    "TronTransactionExpired": {
+      "title": "Transaction has expired",
+      "description": "Signature must be applied within 30 seconds. Please try again."
+    },
+    "TronNotEnoughEnergy": {
+      "title": "Not enough Energy to send this token"
+    },
     "PairingFailed": {
       "title": "Pairing unsuccessful",
       "description": "Please try again or contact Ledger Support when in doubt."
@@ -1465,13 +1802,22 @@
       "title": "Insufficient balance in parent account"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Insufficient balance for this operation"
+      "title": "Balance cannot get below {{minimumAmount}}"
     },
     "WrongAppForCurrency": {
       "title": "Please open the {{expected}} app"
     },
     "FeeTooHigh": {
       "title": "Сетевые сборы составляют более 10% от суммы"
+    },
+    "StellarWrongMemoFormat": {
+      "title": "Memo format is wrong"
+    },
+    "SourceHasMultiSign": {
+      "title": "Please disable multisign to send {{currencyName}}"
+    },
+    "StellarMemoRecommended": {
+      "title": "When sending to this recipient, a memo may be required"
     }
   }
 }

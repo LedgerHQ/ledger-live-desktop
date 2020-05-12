@@ -4,7 +4,6 @@ import { Trans } from "react-i18next";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import IconCart from "~/renderer/icons/Cart";
-import IconTruck from "~/renderer/icons/Truck";
 import IconInfoCircle from "~/renderer/icons/InfoCircle";
 import Box from "~/renderer/components/Box";
 import GrowScroll from "~/renderer/components/GrowScroll";
@@ -12,9 +11,10 @@ import LedgerLiveLogo from "~/renderer/components/LedgerLiveLogo";
 import LedgerLiveImg from "~/renderer/images/ledgerlive-logo.svg";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { OptionFlowCard } from "~/renderer/screens/onboarding/steps/Init";
-import Button from "~/renderer/components/Button";
-import { Title, OnboardingFooterWrapper } from "../sharedComponents";
+import Image from "~/renderer/components/Image";
+import { Title } from "../sharedComponents";
 import type { StepProps } from "..";
+import OnboardingFooter from "~/renderer/screens/onboarding/OnboardingFooter";
 
 class NoDevice extends PureComponent<StepProps, *> {
   render() {
@@ -27,14 +27,6 @@ class NoDevice extends PureComponent<StepProps, *> {
         title: t("onboarding.noDevice.buyNew.title"),
         onClick: () => {
           openURL(urls.noDeviceBuyNew);
-        },
-      },
-      {
-        key: "trackOrder",
-        icon: <IconTruck size={20} />,
-        title: t("onboarding.noDevice.trackOrder.title"),
-        onClick: () => {
-          openURL(urls.noDeviceTrackOrder);
         },
       },
       {
@@ -55,7 +47,9 @@ class NoDevice extends PureComponent<StepProps, *> {
             <LedgerLiveLogo
               width="64px"
               height="64px"
-              icon={<img src={LedgerLiveImg} alt="" draggable="false" width={40} height={40} />}
+              icon={
+                <Image resource={LedgerLiveImg} alt="" draggable="false" width={40} height={40} />
+              }
             />
             <Box m={5} style={{ maxWidth: 480 }}>
               <Title>
@@ -69,11 +63,7 @@ class NoDevice extends PureComponent<StepProps, *> {
             </Box>
           </Box>
         </GrowScroll>
-        <OnboardingFooterWrapper>
-          <Button outlineGrey onClick={() => prevStep()} mr="auto">
-            <Trans i18nKey="common.back" />
-          </Button>
-        </OnboardingFooterWrapper>
+        <OnboardingFooter prevStep={prevStep} />
       </Box>
     );
   }

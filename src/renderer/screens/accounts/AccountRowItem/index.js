@@ -23,6 +23,9 @@ import Delta from "./Delta";
 import Header from "./Header";
 
 import Star from "~/renderer/components/Stars/Star";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { hideEmptyTokenAccountsSelector } from "~/renderer/reducers/settings";
 
 const Row: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
@@ -112,6 +115,7 @@ type Props = {
   account: TokenAccount | Account,
   parentAccount?: ?Account,
   disableRounding?: boolean,
+  hideEmptyTokens?: boolean,
   onClick: (AccountLike, ?Account) => void,
   hidden?: boolean,
   range: PortfolioRange,
@@ -169,7 +173,16 @@ class AccountRowItem extends PureComponent<Props, State> {
   };
 
   render() {
-    const { account, parentAccount, range, hidden, onClick, disableRounding, search } = this.props;
+    const {
+      account,
+      parentAccount,
+      range,
+      hidden,
+      onClick,
+      disableRounding,
+      search,
+      hideEmptyTokens,
+    } = this.props;
     const { expanded } = this.state;
 
     let currency;
@@ -208,8 +221,15 @@ class AccountRowItem extends PureComponent<Props, State> {
           hide: "subAccounts.hideSubAccounts",
         };
 
+    const key = `${account.id}_${hideEmptyTokens ? "hide_empty_tokens" : ""}`;
+
     return (
-      <div style={{ position: "relative" }} hidden={hidden}>
+      <div
+        className={"accounts-account-row-item"}
+        style={{ position: "relative" }}
+        key={key}
+        hidden={hidden}
+      >
         <span style={{ position: "absolute", top: -70 }} ref={this.scrollTopFocusRef} />
         <Row expanded={expanded} tokens={showTokensIndicator} key={mainAccount.id}>
           <AccountContextMenu account={account}>
@@ -266,5 +286,12 @@ class AccountRowItem extends PureComponent<Props, State> {
     );
   }
 }
+const mapStateToProps = createStructuredSelector({
+  hideEmptyTokenAccounts: hideEmptyTokenAccountsSelector,
+});
 
-export default AccountRowItem;
+const ConnectedAccountRowItem: React$ComponentType<{}> = connect(
+  mapStateToProps,
+  null,
+)(AccountRowItem);
+export default ConnectedAccountRowItem;

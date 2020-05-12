@@ -5,7 +5,7 @@ import { Trans } from "react-i18next";
 import type { Device } from "~/renderer/reducers/devices";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import StepProgress from "~/renderer/components/StepProgress";
-import { action } from "~/renderer/components/DeviceAction/actions/transaction";
+import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import { useBroadcast } from "~/renderer/hooks/useBroadcast";
 import type {
   Account,
@@ -15,6 +15,13 @@ import type {
   Operation,
   SignedOperation,
 } from "@ledgerhq/live-common/lib/types";
+import { command } from "~/renderer/commands";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
+import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+
+const connectAppExec = command("connectApp");
+
+const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectAppExec);
 
 const Result = ({
   signedOperation,

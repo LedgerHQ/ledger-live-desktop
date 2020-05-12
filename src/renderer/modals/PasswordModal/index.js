@@ -120,21 +120,14 @@ const PasswordModal = () => {
     setIncorrectPassword(null);
   }, [setCurrentPassword, setNewPassword, setConfirmPassword, setIncorrectPassword]);
   return (
-    <Modal name="MODAL_PASSWORD" centered>
+    <Modal name="MODAL_PASSWORD" onClose={onClose} centered>
       <ModalBody
         title={hasPassword ? t("password.changePassword.title") : t("password.setPassword.title")}
         onHide={handleReset}
         onClose={onClose}
         render={() => (
           <>
-            <Box
-              ff="Inter|Regular"
-              color="palette.text.shade100"
-              textAlign="center"
-              mb={2}
-              mt={3}
-              data-e2e="setPassword_modalTitle"
-            >
+            <Box ff="Inter|Regular" color="palette.text.shade100" textAlign="center" mb={2} mt={3}>
               {hasPassword
                 ? t("password.changePassword.subTitle")
                 : t("password.setPassword.subTitle")}
@@ -157,7 +150,7 @@ const PasswordModal = () => {
         )}
         renderFooter={() => (
           <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
-            <Button small type="button" onClick={onClose} data-e2e="setPassword_modalCancel_button">
+            <Button small type="button" onClick={onClose} id="modal-cancel-button">
               {t("common.cancel")}
             </Button>
             <Button
@@ -165,6 +158,7 @@ const PasswordModal = () => {
               primary
               onClick={handleSave}
               disabled={!isValid() || !newPassword.length || !confirmPassword.length}
+              id="modal-save-button"
             >
               {t("common.save")}
             </Button>

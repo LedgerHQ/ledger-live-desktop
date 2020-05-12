@@ -157,6 +157,7 @@ const UpdateModal = ({
       width={550}
       onClose={onClose}
       centered
+      backdropColor
       onHide={handleReset}
       isOpened={status === "install"}
       refocusWhenChange={stateStepId}

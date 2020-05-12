@@ -16,10 +16,25 @@ import TopBanner, { FakeLink } from "~/renderer/components/TopBanner";
 import type { Content } from "~/renderer/components/TopBanner";
 
 import { UpdaterContext } from "./UpdaterContext";
+import { shouldUpdateYet } from "~/helpers/user";
+import { useRemoteConfig } from "~/renderer/components/RemoteConfig";
 
-export const VISIBLE_STATUS = ["download-progress", "checking", "check-success", "error"];
+export const VISIBLE_STATUS = [
+  "download-progress",
+  "checking",
+  "check-success",
+  "error",
+  "update-available",
+  "downloading-update",
+];
 
-const CONTENT_BY_STATUS = (quitAndInstall, reDownload, progress): { [string]: Content } => ({
+const CONTENT_BY_STATUS = (
+  quitAndInstall,
+  reDownload,
+  progress,
+  downloadUpdate,
+  version,
+): { [string]: Content } => ({
   "download-progress": {
     Icon: Spinner,
     message: <Trans i18nKey="update.downloadInProgress" />,
@@ -38,6 +53,19 @@ const CONTENT_BY_STATUS = (quitAndInstall, reDownload, progress): { [string]: Co
       </FakeLink>
     ),
   },
+  "downloading-update": {
+    Icon: IconUpdate,
+    message: <Trans i18nKey="update.downloadInProgress" />,
+  },
+  "update-available": {
+    Icon: IconUpdate,
+    message: <Trans i18nKey="update.updateAvailable" values={{ version }} />,
+    right: (
+      <FakeLink onClick={downloadUpdate}>
+        <Trans i18nKey="update.downloadNow" />
+      </FakeLink>
+    ),
+  },
   error: {
     Icon: IconWarning,
     message: <Trans i18nKey="update.error" />,
@@ -51,17 +79,29 @@ const CONTENT_BY_STATUS = (quitAndInstall, reDownload, progress): { [string]: Co
 
 const UpdaterTopBanner = () => {
   const context = useContext(UpdaterContext);
+  const remoteConfig = useRemoteConfig();
 
   const reDownload = useCallback(() => {
     openURL(urls.liveHome);
   }, []);
 
-  if (context) {
-    const { status, quitAndInstall, downloadProgress } = context;
+  if (
+    context &&
+    remoteConfig.lastUpdatedAt &&
+    context.version &&
+    shouldUpdateYet(context.version, remoteConfig)
+  ) {
+    const { status, quitAndInstall, downloadProgress, version, downloadUpdate } = context;
 
     if (!VISIBLE_STATUS.includes(status)) return null;
 
-    let content: ?Content = CONTENT_BY_STATUS(quitAndInstall, reDownload, downloadProgress)[status];
+    let content: ?Content = CONTENT_BY_STATUS(
+      quitAndInstall,
+      reDownload,
+      downloadProgress,
+      downloadUpdate,
+      version,
+    )[status];
 
     if (!content) return null;
 

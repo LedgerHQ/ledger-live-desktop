@@ -7,6 +7,7 @@ import { colors } from "~/renderer/styles/theme";
 
 import {
   counterValueCurrencySelector,
+  hasInstalledAppsSelector,
   selectedTimeRangeSelector,
 } from "~/renderer/reducers/settings";
 
@@ -23,12 +24,13 @@ import UpdateBanner from "~/renderer/components/Updater/Banner";
 import { saveSettings } from "~/renderer/actions/settings";
 import { connect, useSelector } from "react-redux";
 import uniq from "lodash/uniq";
-import { Redirect } from "react-router";
 import type { Currency } from "@ledgerhq/live-common/lib/types/currencies";
 import type { Account } from "@ledgerhq/live-common/lib/types/account";
 import type { TimeRange } from "~/renderer/reducers/settings";
 import { useHistory } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
+import EmptyStateInstalledApps from "~/renderer/screens/dashboard/EmptyStateInstalledApps";
+import EmptyStateAccounts from "~/renderer/screens/dashboard/EmptyStateAccounts";
 
 // This forces only one visible top banner at a time
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
@@ -54,6 +56,7 @@ const DashboardPage = ({ saveSettings }: Props) => {
   const history = useHistory();
   const counterValue = useSelector(counterValueCurrencySelector);
   const selectedTimeRange = useSelector(selectedTimeRangeSelector);
+  const hasInstalledApps = useSelector(hasInstalledAppsSelector);
   const totalAccounts = accounts.length;
   const totalCurrencies = useMemo(() => uniq(accounts.map(a => a.currency.id)).length, [accounts]);
   const totalOperations = useMemo(() => accounts.reduce((sum, a) => sum + a.operations.length, 0), [
@@ -80,8 +83,10 @@ const DashboardPage = ({ saveSettings }: Props) => {
         totalOperations={totalOperations}
         totalCurrencies={totalCurrencies}
       />
-      <Box flow={7}>
-        {totalAccounts > 0 ? (
+      <Box flow={7} id="portfolio-container">
+        {!hasInstalledApps ? (
+          <EmptyStateInstalledApps />
+        ) : totalAccounts > 0 ? (
           <>
             <BalanceSummary
               t={t}
@@ -105,7 +110,7 @@ const DashboardPage = ({ saveSettings }: Props) => {
             )}
           </>
         ) : (
-          <Redirect to="/accounts" />
+          <EmptyStateAccounts />
         )}
       </Box>
     </>

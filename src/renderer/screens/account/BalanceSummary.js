@@ -21,6 +21,8 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import AccountBalanceSummaryHeader from "./AccountBalanceSummaryHeader";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
 
+import perFamilyAccountBalanceSummaryFooter from "~/renderer/generated/AccountBalanceSummaryFooter";
+
 type OwnProps = {
   counterValue: Currency,
   chartColor: string,
@@ -30,6 +32,7 @@ type OwnProps = {
   range: PortfolioRange,
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,
+  mainAccount: ?Account,
 };
 
 type Props = {
@@ -92,8 +95,18 @@ class AccountBalanceSummary extends PureComponent<Props> {
       countervalueFirst,
       setCountervalueFirst,
       discreetMode,
+      mainAccount,
     } = this.props;
     const displayCountervalue = countervalueFirst && countervalueAvailable;
+
+    const AccountBalanceSummaryFooter = mainAccount
+      ? perFamilyAccountBalanceSummaryFooter[mainAccount.currency.family]
+      : null;
+
+    const chartMagnitude = displayCountervalue
+      ? counterValue.units[0].magnitude
+      : getAccountUnit(account).magnitude;
+
     return (
       <Card p={0} py={5}>
         <Box px={6}>
@@ -113,6 +126,7 @@ class AccountBalanceSummary extends PureComponent<Props> {
         <Box px={5} ff="Inter" fontSize={4} color="palette.text.shade80" pt={5}>
           <Chart
             id={chartId}
+            magnitude={chartMagnitude}
             color={chartColor}
             data={history}
             height={200}
@@ -129,6 +143,13 @@ class AccountBalanceSummary extends PureComponent<Props> {
             renderTooltip={this.renderTooltip}
           />
         </Box>
+        {AccountBalanceSummaryFooter && (
+          <AccountBalanceSummaryFooter
+            account={account}
+            counterValue={counterValue}
+            discreetMode={discreetMode}
+          />
+        )}
       </Card>
     );
   }

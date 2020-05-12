@@ -22,6 +22,7 @@ import ConfirmModal from "~/renderer/modals/ConfirmModal";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import IconArrowRight from "~/renderer/icons/ArrowRight";
 import LedgerLiveImg from "~/renderer/images/ledgerlive-logo.svg";
+import Image from "./Image";
 
 type InputValue = {
   password: string,
@@ -125,12 +126,14 @@ const IsUnlocked = ({ children }: Props) => {
 
   if (isLocked) {
     return (
-      <Box sticky alignItems="center" justifyContent="center">
+      <Box sticky alignItems="center" justifyContent="center" id="lockscreen-container">
         <form onSubmit={handleSubmit}>
           <Box alignItems="center">
             <LedgerLiveLogo
               style={{ marginBottom: 40 }}
-              icon={<img src={LedgerLiveImg} alt="" draggable="false" width={50} height={50} />}
+              icon={
+                <Image resource={LedgerLiveImg} alt="" draggable="false" width={50} height={50} />
+              }
             />
             <PageTitle>{t("common.lockScreen.title")}</PageTitle>
             <LockScreenDesc>
@@ -147,6 +150,7 @@ const IsUnlocked = ({ children }: Props) => {
                   onChange={handleChangeInput("password")}
                   value={inputValue.password}
                   error={incorrectPassword}
+                  id="lockscreen-password-input"
                 />
               </Box>
               <Box ml={2}>
@@ -155,6 +159,7 @@ const IsUnlocked = ({ children }: Props) => {
                   primary
                   flow={1}
                   style={{ width: 46, height: 46, padding: 0, justifyContent: "center" }}
+                  id="lockscreen-login-button"
                 >
                   <Box alignItems="center">
                     <IconArrowRight size={20} />
@@ -162,7 +167,13 @@ const IsUnlocked = ({ children }: Props) => {
                 </Button>
               </Box>
             </Box>
-            <Button type="button" mt={3} small onClick={handleOpenHardResetModal}>
+            <Button
+              type="button"
+              mt={3}
+              small
+              onClick={handleOpenHardResetModal}
+              id="lockscreen-forgotten-button"
+            >
               {t("common.lockScreen.lostPassword")}
             </Button>
           </Box>

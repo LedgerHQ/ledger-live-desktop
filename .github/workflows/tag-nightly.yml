@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+        with:
+          ref: develop
       - name: check if current commit is on tag
         run: |
           git describe --exact-match &>/dev/null \
@@ -35,15 +37,7 @@ jobs:
       - name: push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.ACCESS_TOKEN_TEAM_LIVE }}
+          branch: develop
+          force: true
           tags: true
-      - name: push tag
-        run: |
-          curl -s -X POST https://api.github.com/repos/LedgerHQ/${{ steps.config.outputs.repo }}/git/refs \
-          -H "Authorization: token ${{ secrets.ACCESS_TOKEN_VAL }}" \
-          -d @- << EOF
-          {
-            "ref": "refs/tags/${{ steps.config.outputs.nightly }}",
-            "sha": "${{ steps.config.outputs.commit }}"
-          }
-          EOF

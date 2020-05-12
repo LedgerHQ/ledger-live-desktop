@@ -4,8 +4,11 @@ import React, { PureComponent } from "react";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
-import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
+import Image from "~/renderer/components/Image";
+import OpenUserDataDirectoryBtn from "~/renderer/components/OpenUserDataDirectoryBtn";
+import CrashScreen from "~/renderer/images/crash-screen.svg";
 import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 import { hardReset } from "~/renderer/reset";
 import TriggerAppReady from "./TriggerAppReady";
@@ -14,7 +17,6 @@ import Box from "~/renderer/components/Box";
 import Space from "~/renderer/components/Space";
 import Button from "~/renderer/components/Button";
 import ConfirmModal from "~/renderer/modals/ConfirmModal";
-import ExternalLinkButton from "./ExternalLinkButton";
 import { IconWrapperCircle } from "./ResetButton";
 
 const printError = (error: mixed) => {
@@ -57,14 +59,10 @@ class Unsafe extends PureComponent<*, *> {
   }
 
   render() {
-    const { children, prefix } = this.props;
+    const { children } = this.props;
     const { error } = this.state;
     if (error) {
-      return (
-        <Box my={6}>
-          <ErrContainer>{`${prefix}: ${printError(error)}`}</ErrContainer>
-        </Box>
-      );
+      return null;
     }
     return children;
   }
@@ -80,21 +78,18 @@ class RenderError extends PureComponent<
   };
 
   handleOpenHardResetModal = () => this.setState({ isHardResetModalOpened: true });
+
   handleCloseHardResetModal = () => this.setState({ isHardResetModalOpened: false });
+
+  troubleshootingCrash = () => {
+    openURL(urls.troubleshootingCrash);
+  };
 
   hardResetIconRender = () => (
     <IconWrapperCircle color="alertRed">
       <IconTriangleWarning width={23} height={21} />
     </IconWrapperCircle>
   );
-
-  github = () => {
-    openURL(urls.githubIssues);
-  };
-
-  handleRestart = () => {
-    window.api.reloadRenderer();
-  };
 
   handleHardReset = async () => {
     this.setState({ isHardResetting: true });
@@ -113,55 +108,56 @@ class RenderError extends PureComponent<
       <Box alignItems="center" grow bg="palette.background.default">
         <TriggerAppReady />
         <Space of={100} />
-        {/* FIXME HOW DO WE DO THIS? */}
-        {/* <img alt="" src={i("crash-screen.svg")} width={380} /> */}
+        <Image alt="" resource={CrashScreen} width="200" />
         <Space of={40} />
-        <Box ff="Inter|Regular" fontSize={7} color="palette.text.shade100">
-          {t("crash.oops")}
+        <Box ff="Inter|SemiBold" fontSize={6} color="palette.text.shade100">
+          {t("crash.title")}
         </Box>
         <Space of={15} />
         <Box
           style={{ width: 500 }}
           textAlign="center"
+          alignItems="center"
           ff="Inter|Regular"
           color="palette.text.shade80"
           fontSize={4}
         >
-          {t("crash.uselessText")}
+          {t("crash.description")}
         </Box>
-        <Space of={30} />
+        <Box py={6}>
+          <Button primary onClick={this.troubleshootingCrash}>
+            {t("crash.troubleshooting")}
+          </Button>
+        </Box>
         <Box horizontal flow={2}>
-          <Button small primary onClick={this.handleRestart}>
-            {t("crash.restart")}
-          </Button>
-          {/* FIXME: What is this ? It was not used in ExportLogsButton */}
-          <ExportLogsButton withoutAppData={withoutAppData} />
-          <ExternalLinkButton small primary label={t("crash.support")} url={urls.contactSupport} />
-          <Button small primary onClick={this.github}>
-            {t("crash.github")}
-          </Button>
-          <Button small danger onClick={this.handleOpenHardResetModal}>
-            {t("common.reset")}
-          </Button>
+          <ExportLogsButton
+            primary={false}
+            title={t("crash.logs")}
+            withoutAppData={withoutAppData}
+          />
+          <OpenUserDataDirectoryBtn primary={false} title={t("crash.dataFolder")} />
+          <Unsafe>
+            <Button lighterDanger onClick={this.handleOpenHardResetModal}>
+              {t("common.reset")}
+            </Button>
+            <ConfirmModal
+              analyticsName="HardReset"
+              isDanger
+              isLoading={isHardResetting}
+              isOpened={isHardResetModalOpened}
+              onClose={this.handleCloseHardResetModal}
+              onReject={this.handleCloseHardResetModal}
+              onConfirm={this.handleHardReset}
+              confirmText={t("common.reset")}
+              title={t("settings.hardResetModal.title")}
+              desc={t("settings.hardResetModal.desc")}
+              renderIcon={this.hardResetIconRender}
+            />
+          </Unsafe>
         </Box>
         <Box my={6} color="palette.text.shade80">
           <ErrContainer>{printError(error)}</ErrContainer>
         </Box>
-        <Unsafe prefix="redux failed">
-          <ConfirmModal
-            analyticsName="HardReset"
-            isDanger
-            isLoading={isHardResetting}
-            isOpened={isHardResetModalOpened}
-            onClose={this.handleCloseHardResetModal}
-            onReject={this.handleCloseHardResetModal}
-            onConfirm={this.handleHardReset}
-            confirmText={t("common.reset")}
-            title={t("settings.hardResetModal.title")}
-            desc={t("settings.hardResetModal.desc")}
-            renderIcon={this.hardResetIconRender}
-          />
-        </Unsafe>
         <VersionContainer>{`Ledger Live ${__APP_VERSION__}`}</VersionContainer>
         {children}
       </Box>
@@ -171,9 +167,9 @@ class RenderError extends PureComponent<
 
 const VersionContainer = styled.pre`
   position: fixed;
-  bottom: 8px;
-  left: 8px;
-  fontsize: 8;
+  top: 8px;
+  right: 8px;
+  font-size: 8px;
   color: ${p => p.theme.colors.palette.text.shade60};
 `;
 
@@ -181,6 +177,10 @@ const ErrContainer = styled.pre`
   margin: auto;
   max-width: 80vw;
   ${p => p.theme.overflow.xy};
+  padding: 10px;
+  border-radius: 2px;
+  background-color: ${p => p.theme.colors.palette.background.paper};
+  color: ${p => p.theme.colors.palette.text.shade80};
   font-size: 10px;
   font-family: monospace;
   cursor: text;

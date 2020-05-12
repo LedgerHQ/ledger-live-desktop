@@ -159,7 +159,7 @@ const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
   const { t } = useTranslation();
 
   return isExperimental ? (
-    <Tag to="/settings/experimental">
+    <Tag id="drawer-experimental-button" to="/settings/experimental">
       <IconExperimental width={16} height={16} />
       <TagText collapsed={collapsed}>{t("common.experimentalFeature")}</TagText>
     </Tag>
@@ -234,32 +234,34 @@ const MainSideBar = () => {
         const secondAnim = !(state === "entered" && !collapsed);
         return (
           <SideBar className="unstoppableAnimation" style={sideBarTransitionStyles[state]}>
-            <Collapser collapsed={collapsed} onClick={handleCollapse}>
+            <Collapser collapsed={collapsed} onClick={handleCollapse} id="drawer-collapse-button">
               <IconChevron size={16} />
             </Collapser>
             <TopGradient />
             <Space of={70} />
             <SideBarList title={t("sidebar.menu")} collapsed={secondAnim}>
               <SideBarListItem
+                id={"dashboard"}
                 label={t("dashboard.title")}
                 icon={IconPortfolio}
                 iconActiveColor="wallet"
                 onClick={handleClickDashboard}
                 isActive={location.pathname === "/"}
-                NotifComponent={noAccounts ? undefined : <UpdateDot collapsed={collapsed} />}
-                disabled={noAccounts}
+                NotifComponent={<UpdateDot collapsed={collapsed} />}
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"accounts"}
                 label={t("sidebar.accounts")}
                 icon={IconWallet}
                 iconActiveColor="wallet"
                 isActive={location.pathname === "/accounts"}
                 onClick={handleClickAccounts}
-                NotifComponent={noAccounts ? <UpdateDot collapsed={collapsed} /> : undefined}
+                disabled={noAccounts}
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"send"}
                 label={t("send.title")}
                 icon={IconSend}
                 iconActiveColor="wallet"
@@ -268,6 +270,7 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"receive"}
                 label={t("receive.title")}
                 icon={IconReceive}
                 iconActiveColor="wallet"
@@ -276,6 +279,7 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"manager"}
                 label={t("sidebar.manager")}
                 icon={IconManager}
                 iconActiveColor="wallet"
@@ -284,6 +288,7 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"partners"}
                 label={t("sidebar.exchange")}
                 icon={IconExchange}
                 iconActiveColor="wallet"

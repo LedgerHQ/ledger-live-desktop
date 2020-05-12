@@ -7,6 +7,7 @@ import "./internal-lifecycle";
 import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import db from "./db";
 import debounce from "lodash/debounce";
+import logger from "~/logger";
 
 app.allowRendererProcessReuse = false;
 
@@ -86,11 +87,14 @@ app.on("ready", async () => {
     loadWindow();
   });
 
+  ipcMain.on("log", (event, { log }) => logger.log(log));
+
   Menu.setApplicationMenu(menu);
 
   const windowParams = await db.getKey("windowParams", "MainWindow", {});
+  const settings = await db.getKey("app", "settings");
 
-  const window = await createMainWindow(windowParams);
+  const window = await createMainWindow(windowParams, settings);
 
   window.on(
     "resize",

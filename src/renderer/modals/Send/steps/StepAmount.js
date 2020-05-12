@@ -8,6 +8,7 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
+import SpendableBanner from "~/renderer/components/SpendableBanner";
 
 import AccountFooter from "../AccountFooter";
 import SendAmountFields from "../SendAmountFields";
@@ -34,6 +35,13 @@ const StepAmount = ({
       {error ? <ErrorBanner error={error} /> : null}
       {account && transaction && mainAccount && (
         <Fragment key={account.id}>
+          {account && transaction ? (
+            <SpendableBanner
+              account={account}
+              parentAccount={parentAccount}
+              transaction={transaction}
+            />
+          ) : null}
           <AmountField
             status={status}
             account={account}
@@ -74,7 +82,13 @@ export class StepAmountFooter extends PureComponent<StepProps> {
     return (
       <>
         <AccountFooter parentAccount={parentAccount} account={account} status={status} />
-        <Button isLoading={bridgePending} primary disabled={!canNext} onClick={this.onNext}>
+        <Button
+          id={"send-amount-continue-button"}
+          isLoading={bridgePending}
+          primary
+          disabled={!canNext}
+          onClick={this.onNext}
+        >
           <Trans i18nKey="common.continue" />
         </Button>
       </>

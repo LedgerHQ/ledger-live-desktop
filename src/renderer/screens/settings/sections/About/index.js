@@ -13,6 +13,7 @@ import {
 } from "../../SettingsSection";
 import RowItem from "../../RowItem";
 import ReleaseNotesButton from "./ReleaseNotesButton";
+import TermsButton from "./TermsButton";
 
 const SectionHelp = () => {
   const { t } = useTranslation();
@@ -33,11 +34,9 @@ const SectionHelp = () => {
           <ReleaseNotesButton />
         </Row>
 
-        <RowItem
-          title={t("settings.help.terms")}
-          desc={t("settings.help.termsDesc")}
-          url={urls.terms}
-        />
+        <Row title={t("settings.help.terms")} desc={t("settings.help.termsDesc")}>
+          <TermsButton />
+        </Row>
 
         <RowItem
           title={t("settings.help.privacy")}

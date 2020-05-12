@@ -13,6 +13,7 @@ export const Title: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
   fontSize: 7,
   color: "palette.text.shade100",
+  id: "page-title",
 }))`
   max-width: 550px;
   text-align: center;
@@ -33,6 +34,7 @@ export const Description: ThemedComponent<{}> = styled(Box).attrs(() => ({
   lineHeight: 1.5,
   textAlign: "center",
   color: "palette.text.shade60",
+  id: "page-description",
 }))`
   transition: color ease-out 300ms;
   transition-delay: 300ms;
@@ -106,6 +108,7 @@ export const GenuineCheckCardWrapper: ThemedComponent<{}> = styled(Box).attrs(()
   borderRadius: "4px",
   justifyContent: "flex-start",
 }))`
+  min-height: 102px;
   width: 580px;
   transition: all ease-in-out 0.2s;
   color: ${p =>

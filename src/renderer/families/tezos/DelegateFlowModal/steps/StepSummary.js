@@ -225,6 +225,7 @@ export const StepSummaryFooter = ({
         <TranslatedError error={anyError} field="title" />
       </Text>
       <Button
+        id={"delegate-summary-continue-button"}
         primary
         isLoading={bridgePending}
         disabled={!canNext}

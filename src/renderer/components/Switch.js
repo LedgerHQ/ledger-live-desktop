@@ -15,6 +15,9 @@ const Base: ThemedComponent<{
   horizontal: true,
   alignItems: "center",
 }))`
+  & input[type="checkbox"] {
+    display: none;
+  }
   width: ${p => (p.small ? 25 : 40)}px;
   height: ${p => (p.small ? 13 : 24)}px;
   border-radius: 13px;
@@ -42,19 +45,28 @@ const Ball = styled.div`
 
 type Props = {
   isChecked: boolean,
+  disabled?: boolean,
   onChange?: Function,
   small?: boolean,
 };
 
 function Switch(props: Props) {
-  const { isChecked, onChange, small, ...p } = props;
+  const { isChecked, onChange, small, disabled, ...p } = props;
   return (
     <Base
       {...p}
+      key={isChecked ? "ON" : "OFF"}
+      disabled={disabled}
       small={small}
       isChecked={isChecked}
       onClick={() => onChange && onChange(!isChecked)}
+      className="switch"
     >
+      <input
+        type="checkbox"
+        disabled={disabled || null}
+        {...(isChecked ? { checked: true } : {})}
+      />
       <Ball small={small} isChecked={isChecked} />
     </Base>
   );

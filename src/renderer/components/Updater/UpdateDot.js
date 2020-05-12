@@ -2,6 +2,8 @@
 
 import React, { useContext } from "react";
 import styled, { keyframes, css } from "styled-components";
+import { shouldUpdateYet } from "~/helpers/user";
+import { useRemoteConfig } from "~/renderer/components/RemoteConfig";
 
 import { colors } from "~/renderer/styles/theme";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -71,8 +73,14 @@ export const Dot: ThemedComponent<{ status: UpdateStatus, collapsed?: ?boolean }
 `;
 
 const UpdateDot = ({ collapsed }: { collapsed: ?boolean }) => {
+  const remoteConfig = useRemoteConfig();
   const context = useContext(UpdaterContext);
-  if (context) {
+  if (
+    context &&
+    remoteConfig.lastUpdatedAt &&
+    context.version &&
+    shouldUpdateYet(context.version, remoteConfig)
+  ) {
     const { status } = context;
     if (!VISIBLE_STATUS.includes(status)) return null;
     return <Dot collapsed={collapsed} status={status} />;

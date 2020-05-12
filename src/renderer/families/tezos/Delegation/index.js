@@ -63,13 +63,14 @@ const Delegation = ({ account, parentAccount }: Props) => {
             <Box mt={2}>
               <LinkWithExternalIcon
                 label={t("delegation.howItWorks")}
-                onClick={() => openURL(urls.delegation)}
+                onClick={() => openURL(urls.stakingTezos)}
               />
             </Box>
           </Box>
           <Box>
             <Button
               primary
+              id={"account-delegate-button"}
               onClick={() => {
                 dispatch(
                   openModal("MODAL_DELEGATE", {

@@ -59,6 +59,7 @@ const RecipientField = ({
         warning={recipientWarning}
         value={transaction.recipient}
         onChange={onChange}
+        id={"send-recipient-input"}
       />
     </Box>
   );

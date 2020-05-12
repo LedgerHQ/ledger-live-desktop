@@ -42,7 +42,7 @@ class TechnicalData extends PureComponent<Props, *> {
     ];
 
     return (
-      <Modal name="MODAL_TECHNICAL_DATA" centered>
+      <Modal name="MODAL_TECHNICAL_DATA" onClose={this.onClose} centered>
         <ModalBody
           onClose={this.onClose}
           title={t("onboarding.analytics.technicalData.mandatoryContextual.title")}
@@ -62,7 +62,7 @@ class TechnicalData extends PureComponent<Props, *> {
           )}
           renderFooter={() => (
             <>
-              <Button onClick={this.onClose} primary data-e2e="modal_buttonClose_techData">
+              <Button onClick={this.onClose} primary>
                 <Trans i18nKey="common.close" />
               </Button>
             </>

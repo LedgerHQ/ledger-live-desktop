@@ -95,6 +95,7 @@ const AmountField = ({
         validTransactionWarning={warnings.amount}
         onChange={onChange}
         value={amount}
+        showCountervalue={false}
         autoFocus
       />
     </Box>

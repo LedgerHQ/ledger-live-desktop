@@ -18,6 +18,7 @@ export type Props = {
   onClick?: void => void,
   isActive?: boolean,
   collapsed?: boolean,
+  id: string,
 };
 
 class SideBarListItem extends PureComponent<Props> {
@@ -32,6 +33,7 @@ class SideBarListItem extends PureComponent<Props> {
       isActive,
       disabled,
       collapsed,
+      id,
     } = this.props;
 
     const renderedLabel =
@@ -46,13 +48,14 @@ class SideBarListItem extends PureComponent<Props> {
     return (
       <Tooltip content={renderedLabel} enabled={!!collapsed} boundary="window" placement="right">
         <Container
+          id={`drawer-${id}-button`}
           isActive={!disabled && isActive}
           iconActiveColor={iconActiveColor}
           onClick={disabled ? undefined : onClick}
           disabled={disabled}
         >
           {!!Icon && <Icon size={16} />}
-          <Box grow shrink data-e2e={`sidebarItem_${String(label)}`}>
+          <Box grow shrink>
             <Hide visible={!collapsed}>
               {renderedLabel}
               {!!desc && desc(this.props)}

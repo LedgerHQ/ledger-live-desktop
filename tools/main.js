@@ -5,10 +5,16 @@ const WebpackBar = require("webpackbar");
 const webpack = require("webpack");
 const yargs = require("yargs");
 const nodeExternals = require("webpack-node-externals");
+const childProcess = require("child_process");
 
 const pkg = require("./../package.json");
 
-const { SENTRY_URL, GIT_REVISION } = process.env;
+const { SENTRY_URL } = process.env;
+
+const GIT_REVISION = childProcess
+  .execSync("git rev-parse --short HEAD")
+  .toString("utf8")
+  .trim();
 
 // TODO: ADD BUNDLE ANALYZER
 
@@ -35,6 +41,7 @@ const buildMainEnv = (mode, config, argv) => {
     __DEV__: JSON.stringify(mode === "development"),
     __APP_VERSION__: JSON.stringify(pkg.version),
     __GIT_REVISION__: JSON.stringify(GIT_REVISION),
+    __SENTRY_URL__: JSON.stringify(SENTRY_URL || null),
   };
 
   if (mode === "development") {

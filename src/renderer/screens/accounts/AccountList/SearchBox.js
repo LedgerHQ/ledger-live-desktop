@@ -11,6 +11,7 @@ type Props = {
   onTextChange: (evt: SyntheticInputEvent<HTMLInputElement>) => void,
   search?: string,
   placeholder?: *,
+  autoFocus?: boolean,
 };
 
 const SearchInput: ThemedComponent<{}> = styled.input`
@@ -19,6 +20,8 @@ const SearchInput: ThemedComponent<{}> = styled.input`
   outline: none;
   flex-grow: 1;
   font-family: "Inter";
+  font-weight: 500;
+  font-size: 13px;
   cursor: text;
   color: ${p => p.theme.colors.palette.text.shade100};
   &::placeholder {
@@ -35,7 +38,10 @@ const SearchIconContainer: ThemedComponent<{ focused?: boolean }> = styled(Box).
   justify-content: center;
 `;
 
-const SearchBox = forwardRef(function Search({ onTextChange, search, placeholder }: Props, ref) {
+const SearchBox = forwardRef(function Search(
+  { onTextChange, search, placeholder, autoFocus, ...p }: Props,
+  ref,
+) {
   const [focused, setFocused] = useState(false);
   const { t } = useTranslation();
   return (
@@ -44,7 +50,8 @@ const SearchBox = forwardRef(function Search({ onTextChange, search, placeholder
         <SearchIcon size={16} />
       </SearchIconContainer>
       <SearchInput
-        autoFocus
+        {...p}
+        autoFocus={autoFocus}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         placeholder={placeholder || t("common.search")}

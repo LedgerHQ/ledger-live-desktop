@@ -120,7 +120,13 @@ export class StepRecipientFooter extends PureComponent<StepProps> {
 
     return (
       <>
-        <Button isLoading={bridgePending} primary disabled={!canNext} onClick={this.onNext}>
+        <Button
+          id={"send-recipient-continue-button"}
+          isLoading={bridgePending}
+          primary
+          disabled={!canNext}
+          onClick={this.onNext}
+        >
           {t("common.continue")}
         </Button>
       </>

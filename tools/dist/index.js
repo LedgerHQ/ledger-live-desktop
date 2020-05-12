@@ -60,7 +60,7 @@ const buildTasks = args => [
   {
     title: "Compiling assets",
     task: async () => {
-      await exec("yarn", ["-s", "--frozen-lockfile", "build"]);
+      await exec("yarn", ["build"]);
     },
   },
   {
@@ -68,12 +68,13 @@ const buildTasks = args => [
       ? "Bundling and publishing the electron application"
       : "Bundling the electron application",
     task: async () => {
-      const commands = ["-s", "--frozen-lockfile", "dist:internal"];
+      const commands = ["dist:internal"];
       if (args.dir) commands.push("--dir");
       if (args.publish) {
         commands.push("--publish", "always");
       } else {
         commands.push("-c.afterSign='lodash/noop'");
+        commands.push("--publish", "never");
       }
       if (args.n) {
         commands.push("--config");

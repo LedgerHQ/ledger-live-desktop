@@ -15,19 +15,21 @@ import { replaceAccounts } from "~/renderer/actions/accounts";
 import { closeModal } from "~/renderer/actions/modals";
 import Track from "~/renderer/analytics/Track";
 import type { Step } from "~/renderer/components/Stepper";
-import SyncSkipUnderPriority from "~/renderer/components/SyncSkipUnderPriority";
+import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import Modal from "~/renderer/components/Modal";
 import Stepper from "~/renderer/components/Stepper";
 import StepChooseCurrency, { StepChooseCurrencyFooter } from "./steps/StepChooseCurrency";
 import StepConnectDevice from "./steps/StepConnectDevice";
 import StepImport, { StepImportFooter } from "./steps/StepImport";
 import StepFinish, { StepFinishFooter } from "./steps/StepFinish";
+import { blacklistedTokenIdsSelector } from "~/renderer/reducers/settings";
 
 type Props = {
   device: ?Device,
   existingAccounts: Account[],
   closeModal: string => void,
   replaceAccounts: (Account[]) => void,
+  blacklistedTokenIds?: string[],
 };
 
 type StepId = "chooseCurrency" | "connectDevice" | "import" | "finish";
@@ -52,6 +54,7 @@ export type StepProps = {
   setAccountName: (Account, string) => void,
   editedNames: { [_: string]: string },
   setScannedAccounts: ({ scannedAccounts?: Account[], checkedAccountsIds?: string[] }) => void,
+  blacklistedTokenIds?: string[],
 };
 
 type St = Step<StepId, StepProps>;
@@ -111,6 +114,7 @@ type State = {
 const mapStateToProps = createStructuredSelector({
   device: getCurrentDevice,
   existingAccounts: accountsSelector,
+  blacklistedTokenIds: blacklistedTokenIdsSelector,
 });
 
 const mapDispatchToProps = {
@@ -204,7 +208,7 @@ class AddAccounts extends PureComponent<Props, State> {
   };
 
   render() {
-    const { device, existingAccounts } = this.props;
+    const { device, existingAccounts, blacklistedTokenIds } = this.props;
     const {
       stepId,
       currency,
@@ -220,6 +224,7 @@ class AddAccounts extends PureComponent<Props, State> {
       currency,
       device,
       existingAccounts,
+      blacklistedTokenIds,
       scannedAccounts,
       checkedAccountsIds,
       scanStatus,

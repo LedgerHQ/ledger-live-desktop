@@ -1,12 +1,20 @@
 // @flow
 
+// FIXME live-common
+
+export const supportLinkByTokenType = {
+  erc20: "https://support.ledger.com/hc/en-us/articles/115005197845-Manage-ERC20-tokens",
+  trc10: "https://support.ledger.com/hc/en-us/articles/360013062159",
+  trc20: "https://support.ledger.com/hc/en-us/articles/360013062159",
+};
+
 export const urls = {
   liveHome: "https://www.ledger.com/pages/ledger-live",
 
   // Social
   twitter: "https://twitter.com/Ledger",
   github: "https://github.com/LedgerHQ/ledger-live-desktop",
-  reddit: "https://www.reddit.com/r/ledger/",
+  reddit: "https://www.reddit.com/r/ledgerwallet/",
 
   // Campaigns
   promoNanoX:
@@ -14,9 +22,9 @@ export const urls = {
 
   // Ledger support
   faq: "https://support.ledger.com/hc/en-us",
+  syncErrors: "https://support.ledger.com/hc/en-us/articles/360012207759",
   terms: "https://www.ledger.com/pages/terms-of-use-and-disclaimer",
   noDeviceBuyNew: "https://www.ledger.com/",
-  noDeviceTrackOrder: "http://order.ledger.com/",
   noDeviceLearnMore: "https://www.ledger.com/",
   managerHelpRequest: "https://support.ledger.com/hc/en-us/articles/360006523674 ",
   contactSupport: "https://support.ledger.com/hc/en-us/requests/new?ticket_form_id=248165",
@@ -24,7 +32,7 @@ export const urls = {
   recipientAddressInfo: "https://support.ledger.com/hc/en-us/articles/360006433934",
   privacyPolicy: "https://www.ledger.com/pages/privacy-policy",
   troubleshootingUSB: "https://support.ledger.com/hc/en-us/articles/115005165269",
-  managerERC20: "https://support.ledger.com/hc/en-us/articles/115005197845-Manage-ERC20-tokens",
+  troubleshootingCrash: "https://support.ledger.com/hc/en-us/articles/360012598060",
   appSupport: "https://support.ledger.com/hc/en-us/categories/115000811829-Apps",
   migrateAccounts: "https://support.ledger.com/hc/en-us/articles/360025321733",
   githubIssues:
@@ -32,23 +40,10 @@ export const urls = {
   multipleDestinationAddresses: "https://support.ledger.com/hc/en-us/articles/360033801034",
   updateDeviceFirmware: "https://support.ledger.com/hc/en-us/articles/360002731113",
   lostPinOrSeed: "https://support.ledger.com/hc/en-us/articles/360000609933",
-  delegation: "https://www.ledger.com/staking-tezos",
-
-  // Exchanges
-  coinhouse: "https://www.coinhouse.com/r/157530?utm_source=legderlive&utm_medium=referral",
-  changelly: "https://changelly.com/?ref_id=aac789605a01",
-  coinmama: "http://go.coinmama.com/visit/?bta=51801&nci=5343",
-  simplex: "https://partners.simplex.com/?partner=ledger",
-  paybis: "https://aff-tracking.paybis.com/click?pid=22&offer_id=1",
-  luno: "http://luno.go2cloud.org/aff_c?offer_id=4&aff_id=1001&source=ledger",
-  shapeshift: "https://shapeshift.io/#/coins?affiliate=ledger",
-  genesis: "https://genesistrading.com/ledger-live/",
-  kyberSwap: "http://kyber.network/swap?ref=0xE2D8481eeF31CDA994833974FFfEccd576f8D71E",
-  changeNow: "https://changenow.io?link_id=80ab1d8ad846e7",
-  thorSwap:
-    "https://www.thorswap.com/?utm_source=Wallet&utm_medium=ledger&utm_campaign=EmbedLink&utm_content=Link1",
-  coinberry: "https://www.coinberry.com/?utm_source=ledger",
-  btcDirect: "https://btcdirect.eu/en-gb?partnerId=261",
+  maxSpendable: "https://support.ledger.com/hc/en-us/articles/360012960679",
+  stakingTezos: "https://www.ledger.com/staking-tezos",
+  stakingTron: "https://www.ledger.com/staking-tron",
+  stakingCosmos: "http://www.ledger.com/staking-cosmos",
 
   // Errors
   errors: {
@@ -56,7 +51,4 @@ export const urls = {
     WrongDeviceForAccount: "https://support.ledger.com/hc/en-us/articles/360025321733",
     SyncError: "https://support.ledger.com/hc/en-us/articles/360012109220",
   },
-
-  // Currencies status
-  currenciesStatus: "http://resources.live.ledger.app/public_resources/currencies.json",
 };

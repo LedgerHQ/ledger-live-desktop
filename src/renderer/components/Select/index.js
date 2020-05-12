@@ -42,7 +42,9 @@ type Props = {
   autoFocus: boolean,
 };
 
-const Row = styled.div``;
+const Row = styled.div`
+  max-width: 100%;
+`;
 class MenuList extends PureComponent<*, *> {
   state = {
     children: null,
@@ -110,15 +112,23 @@ class MenuList extends PureComponent<*, *> {
 
     return (
       <List
+        className={"select-options-list"}
         ref={this.list}
         width="100%"
+        style={{
+          overflowX: "hidden",
+        }}
         height={minHeight}
         overscanCount={8}
         itemCount={children.length}
         itemSize={rowHeight}
         initialScrollOffset={initialOffset}
       >
-        {({ index, style }) => <Row style={style}>{children[index]}</Row>}
+        {({ index, style }) => (
+          <Row className={"option"} style={style}>
+            {children[index]}
+          </Row>
+        )}
       </List>
     );
   }

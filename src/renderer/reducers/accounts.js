@@ -1,6 +1,6 @@
 // @flow
 
-import { createSelector } from "reselect";
+import { createSelector, createSelectorCreator, defaultMemoize } from "reselect";
 import type { OutputSelector } from "reselect";
 import { handleActions } from "redux-actions";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
@@ -9,12 +9,14 @@ import {
   clearAccount,
   canBeMigrated,
   getAccountCurrency,
+  isUpToDateAccount,
+  withoutToken,
 } from "@ledgerhq/live-common/lib/account";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import logger from "./../../logger/logger";
 import accountModel from "./../../helpers/accountModel";
-import { currenciesStatusSelector, currencyDownStatusLocal } from "./currenciesStatus";
 import type { State } from ".";
+import isEqual from "lodash/isEqual";
 
 export type AccountsState = Account[];
 const state: AccountsState = [];
@@ -60,19 +62,31 @@ const handlers: Object = {
 
   // used to debug performance of redux updates
   DEBUG_TICK: state => state.slice(0),
+
+  BLACKLIST_TOKEN: (state: AccountsState, { payload: tokenId }: { payload: string }) =>
+    state.map(a => withoutToken(a, tokenId)),
 };
 
 // Selectors
 
 export const accountsSelector = (state: { accounts: AccountsState }): Account[] => state.accounts;
 
-export const activeAccountsSelector: OutputSelector<
+// NB some components don't need to refresh every time an account is updated, usually it's only
+// when the balance/name/length/starred of accounts changes.
+const accountHash = (a: AccountLike) =>
+  `${a.type === "Account" ? a.name : ""}-${a.id}${a.starred ? "-*" : ""}-${a.balance.toString()}`;
+
+const shallowAccountsSelectorCreator = createSelectorCreator(defaultMemoize, (a, b) =>
+  isEqual(flattenAccounts(a).map(accountHash), flattenAccounts(b).map(accountHash)),
+);
+export const shallowAccountsSelector: OutputSelector<
   State,
   void,
   Account[],
-> = createSelector(accountsSelector, currenciesStatusSelector, (accounts, currenciesStatus) =>
-  accounts.filter(a => !currencyDownStatusLocal(currenciesStatus, a.currency)),
-);
+> = shallowAccountsSelectorCreator(accountsSelector, a => a);
+
+// FIXME we might reboot this idea later!
+export const activeAccountsSelector = accountsSelector;
 
 export const isUpToDateSelector: OutputSelector<State, void, boolean> = createSelector(
   activeAccountsSelector,
@@ -89,7 +103,7 @@ export const isUpToDateSelector: OutputSelector<State, void, boolean> = createSe
 );
 
 export const hasAccountsSelector: OutputSelector<State, void, boolean> = createSelector(
-  accountsSelector,
+  shallowAccountsSelector,
   accounts => accounts.length > 0,
 );
 
@@ -100,12 +114,14 @@ export const someAccountsNeedMigrationSelector: OutputSelector<
 > = createSelector(accountsSelector, accounts => accounts.some(canBeMigrated));
 
 // TODO: FIX RETURN TYPE
-export const currenciesSelector: OutputSelector<State, void, *> = createSelector(
-  accountsSelector,
-  accounts =>
-    [...new Set(flattenAccounts(accounts).map(a => getAccountCurrency(a)))].sort((a, b) =>
-      a.name.localeCompare(b.name),
-    ),
+export const currenciesSelector: OutputSelector<
+  State,
+  void,
+  *,
+> = createSelector(shallowAccountsSelector, accounts =>
+  [...new Set(flattenAccounts(accounts).map(a => getAccountCurrency(a)))].sort((a, b) =>
+    a.name.localeCompare(b.name),
+  ),
 );
 
 // TODO: FIX RETURN TYPE
@@ -113,7 +129,7 @@ export const cryptoCurrenciesSelector: OutputSelector<
   State,
   void,
   *,
-> = createSelector(accountsSelector, accounts =>
+> = createSelector(shallowAccountsSelector, accounts =>
   [...new Set(accounts.map(a => a.currency))].sort((a, b) => a.name.localeCompare(b.name)),
 );
 
@@ -133,7 +149,9 @@ export const starredAccountsSelector: OutputSelector<
   State,
   void,
   AccountLike[],
-> = createSelector(accountsSelector, accounts => flattenAccounts(accounts).filter(a => a.starred));
+> = createSelector(shallowAccountsSelector, accounts =>
+  flattenAccounts(accounts).filter(a => a.starred),
+);
 
 export const isStarredAccountSelector = (s: *, { accountId }: { accountId: string }): boolean =>
   flattenAccounts(s.accounts).some(a => a.id === accountId && a.starred);
@@ -143,17 +161,6 @@ export const accountNeedsMigrationSelector: OutputSelector<
   { accountId: string },
   boolean,
 > = createSelector(accountSelector, account => (account ? canBeMigrated(account) : false));
-
-const isUpToDateAccount = (a: ?Account) => {
-  if (!a) return true;
-  const { lastSyncDate } = a;
-  const { blockAvgTime } = a.currency;
-  if (!blockAvgTime) return true;
-  const outdated =
-    Date.now() - (lastSyncDate || 0) >
-    blockAvgTime * 1000 + getEnv("SYNC_OUTDATED_CONSIDERED_DELAY");
-  return !outdated;
-};
 
 export const isUpToDateAccountSelector: OutputSelector<
   State,

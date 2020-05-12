@@ -8,7 +8,7 @@ import type { TFunction } from "react-i18next";
 import { hardReset } from "~/renderer/reset";
 import ConfirmModal from "~/renderer/modals/ConfirmModal";
 import ResetFallbackModal from "~/renderer/modals/ResetFallbackModal";
-import SyncSkipUnderPriority from "~/renderer/components/SyncSkipUnderPriority";
+import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import IconTriangleWarning from "~/renderer/icons/TriangleWarning";

@@ -8,18 +8,24 @@ import type { OperationType } from "@ledgerhq/live-common/lib/types";
 import { rgba } from "~/renderer/styles/helpers";
 
 import type { TFunction } from "react-i18next";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import IconClock from "~/renderer/icons/Clock";
 import IconReceive from "~/renderer/icons/Receive";
 import IconDelegate from "~/renderer/icons/Delegate";
 import IconUndelegate from "~/renderer/icons/Undelegate";
+import IconRedelegate from "~/renderer/icons/Redelegate";
 import IconSend from "~/renderer/icons/Send";
 import IconPlus from "~/renderer/icons/Plus";
 import IconEye from "~/renderer/icons/Eye";
 
+import Freeze from "~/renderer/icons/Freeze";
+import Unfreeze from "~/renderer/icons/Unfreeze";
+
 import Box from "~/renderer/components/Box";
 import Tooltip from "~/renderer/components/Tooltip";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import ClaimRewards from "~/renderer/icons/ClaimReward";
+import Vote from "~/renderer/icons/Vote";
 
 const border = p =>
   p.hasFailed
@@ -30,6 +36,19 @@ const border = p =>
         p.type === "IN" ? p.marketColor : rgba(p.theme.colors.palette.text.shade60, 0.2)
       }`;
 
+function inferColor(p) {
+  switch (p.type) {
+    case "IN":
+      return p.marketColor;
+    case "FREEZE":
+      return p.theme.colors.wallet;
+    case "REWARD":
+      return p.theme.colors.gold;
+    default:
+      return p.theme.colors.palette.text.shade60;
+  }
+}
+
 const Container: ThemedComponent<{
   isConfirmed: boolean,
   type: string,
@@ -39,13 +58,9 @@ const Container: ThemedComponent<{
   bg: p.hasFailed
     ? rgba(p.theme.colors.alertRed, 0.05)
     : p.isConfirmed
-    ? rgba(p.type === "IN" ? p.marketColor : p.theme.colors.palette.text.shade60, 0.2)
+    ? rgba(inferColor(p), 0.2)
     : "none",
-  color: p.hasFailed
-    ? p.theme.colors.alertRed
-    : p.type === "IN"
-    ? p.marketColor
-    : p.theme.colors.palette.text.shade60,
+  color: p.hasFailed ? p.theme.colors.alertRed : inferColor(p),
   alignItems: "center",
   justifyContent: "center",
 }))`
@@ -71,15 +86,15 @@ const iconsComponent = {
   OUT: IconSend,
   IN: IconReceive,
   DELEGATE: IconDelegate,
+  REDELEGATE: IconRedelegate,
   UNDELEGATE: IconUndelegate,
   REVEAL: IconEye,
   CREATE: IconPlus,
   NONE: IconSend,
-  // TODO
-  FREEZE: IconSend,
-  UNFREEZE: IconSend,
-  VOTE: IconSend,
-  REWARD: IconReceive,
+  FREEZE: Freeze,
+  UNFREEZE: Unfreeze,
+  VOTE: Vote,
+  REWARD: ClaimRewards,
 };
 
 class ConfirmationCheck extends PureComponent<{

@@ -1,6 +1,7 @@
 /* eslint-disable flowtype/generic-spacing */
 // @flow
 
+import { BigNumber } from "bignumber.js";
 import { map } from "rxjs/operators";
 import type {
   CryptoCurrency,
@@ -17,7 +18,11 @@ import {
   fromTransactionStatusRaw,
   fromSignOperationEventRaw,
 } from "@ledgerhq/live-common/lib/transaction";
-import { toAccountRaw, fromOperationRaw } from "@ledgerhq/live-common/lib/account";
+import {
+  toAccountLikeRaw,
+  toAccountRaw,
+  fromOperationRaw,
+} from "@ledgerhq/live-common/lib/account";
 import { patchAccount } from "@ledgerhq/live-common/lib/reconciliation";
 import { fromScanAccountEventRaw } from "@ledgerhq/live-common/lib/bridge";
 import * as bridgeImpl from "@ledgerhq/live-common/lib/bridge/impl";
@@ -92,6 +97,15 @@ export const getAccountBridge = (
       .pipe(map(raw => fromOperationRaw(raw, account.id)))
       .toPromise();
 
+  const estimateMaxSpendable = ({ account, parentAccount, transaction }) =>
+    command("AccountEstimateMaxSpendable")({
+      account: toAccountLikeRaw(account),
+      parentAccount: parentAccount ? toAccountRaw(parentAccount) : null,
+      transaction: transaction ? toTransactionRaw(transaction) : null,
+    })
+      .pipe(map(raw => BigNumber(raw)))
+      .toPromise();
+
   return {
     createTransaction,
     updateTransaction,
@@ -100,5 +114,6 @@ export const getAccountBridge = (
     sync,
     signOperation,
     broadcast,
+    estimateMaxSpendable,
   };
 };

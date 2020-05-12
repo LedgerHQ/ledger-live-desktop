@@ -11,12 +11,14 @@ import { getAssetsDistribution } from "@ledgerhq/live-common/lib/portfolio";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { calculateCountervalueSelector } from "~/renderer/actions/general";
 
-import DropDown from "~/renderer/components/DropDown";
+import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 
 import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
+import IconAngleUp from "~/renderer/icons/AngleUp";
+
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 
 import { Separator, Item, TextLink, AngleDown, Check } from "./common";
@@ -56,9 +58,9 @@ const AssetCrumb = () => {
   );
 
   const onAccountSelected = useCallback(
-    ({ selectedItem: item }) => {
+    item => {
       if (!item) {
-        return null;
+        return;
       }
 
       const { currency } = item;
@@ -91,24 +93,32 @@ const AssetCrumb = () => {
         <Button onClick={() => history.push("/")}>{t("dashboard.title")}</Button>
       </TextLink>
       <Separator />
-      <DropDown
+      <DropDownSelector
         flex={1}
         offsetTop={0}
         border
         horizontal
         items={processedItems}
-        active={activeItem}
+        value={{
+          label: activeItem ? activeItem.currency.name : "",
+          key: activeItem ? activeItem.currency.id : "",
+        }}
+        controlled
         renderItem={renderItem}
-        onStateChange={onAccountSelected}
+        onChange={onAccountSelected}
       >
-        <TextLink>
-          {activeItem && <CryptoCurrencyIcon size={14} currency={activeItem.currency} />}
-          <Button>{activeItem.currency.name}</Button>
-          <AngleDown>
-            <IconAngleDown size={16} />
-          </AngleDown>
-        </TextLink>
-      </DropDown>
+        {({ isOpen, value }) =>
+          activeItem ? (
+            <TextLink>
+              <CryptoCurrencyIcon size={14} currency={activeItem.currency} />
+              <Button>{activeItem.currency.name}</Button>
+              <AngleDown>
+                {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
+              </AngleDown>
+            </TextLink>
+          ) : null
+        }
+      </DropDownSelector>
     </>
   );
 };

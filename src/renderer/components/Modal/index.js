@@ -59,14 +59,14 @@ const Container = styled.div.attrs(({ state, centered, isOpened }) => ({
     pointerEvents: isOpened ? "auto" : "none",
   },
 }))`
+  background-color: ${p => (p.backdropColor ? "rgba(0, 0, 0, 0.4)" : "rgba(0,0,0,0)")};
+  opacity: 0;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0);
   z-index: 100;
-  opacity: 0;
   padding: 60px 0 60px 0;
   display: flex;
   flex-direction: column;
@@ -112,6 +112,7 @@ type Props = {
   theme: any,
   name?: string, // eslint-disable-line
   onBeforeOpen?: ({ data: * }) => *, // eslint-disable-line
+  backdropColor: ?boolean,
 };
 
 class Modal extends PureComponent<Props> {
@@ -169,13 +170,27 @@ class Modal extends PureComponent<Props> {
     }
   };
 
+  /** combined with tab-index 0 this will allow tab navigation into the modal disabling tab navigation behind it */
+  setFocus = (r: *) => {
+    r && r.focus();
+  };
+
   swallowClick = (e: Event) => {
     e.preventDefault();
     e.stopPropagation();
   };
 
   render() {
-    const { children, render, centered, onClose, data, isOpened, width } = this.props;
+    const {
+      children,
+      render,
+      centered,
+      onClose,
+      data,
+      isOpened,
+      width,
+      backdropColor,
+    } = this.props;
 
     const renderProps = {
       onClose,
@@ -201,8 +216,16 @@ class Modal extends PureComponent<Props> {
               centered={centered}
               isOpened={isOpened}
               onClick={this.handleClickOnBackdrop}
+              backdropColor={backdropColor}
             >
-              <BodyWrapper state={state} width={width} onClick={this.swallowClick}>
+              <BodyWrapper
+                tabIndex="0"
+                ref={this.setFocus}
+                state={state}
+                width={width}
+                onClick={this.swallowClick}
+                id="modal-container"
+              >
                 {render && render(renderProps)}
                 {children}
               </BodyWrapper>

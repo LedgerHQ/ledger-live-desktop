@@ -37,6 +37,7 @@ import React, { useRef, useLayoutEffect, useState, useMemo } from "react";
 import ChartJs from "chart.js";
 import styled from "styled-components";
 import Color from "color";
+import moment from "moment";
 
 import useTheme from "~/renderer/hooks/useTheme";
 import Tooltip from "./Tooltip";
@@ -46,12 +47,12 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 export type Props = {
   data: Data,
+  magnitude: number,
   id?: string,
   height?: number,
   tickXScale: string,
   color?: string,
   hideAxis?: boolean,
-  dateFormat?: string,
   isInteractive?: boolean,
   renderTooltip?: Function,
   renderTickY: (t: number) => string | number,
@@ -67,7 +68,15 @@ const ChartContainer: ThemedComponent<{}> = styled.div.attrs(({ height }) => ({
   position: relative;
 `;
 
-const Chart = ({ height, data, color, renderTickY, renderTooltip, valueKey = "value" }: Props) => {
+const Chart = ({
+  magnitude,
+  height,
+  data,
+  color,
+  renderTickY,
+  renderTooltip,
+  valueKey = "value",
+}: Props) => {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
   const theme = useTheme("colors.palette");
@@ -89,7 +98,9 @@ const Chart = ({ height, data, color, renderTickY, renderTooltip, valueKey = "va
           pointRadius: 0,
           borderWidth: 2,
           data: data.map(d => ({
-            x: new Date(d.date),
+            x: moment(new Date(d.date))
+              .startOf("day")
+              .toDate(),
             y: d[valueKey].toNumber(),
           })),
         },
@@ -148,6 +159,7 @@ const Chart = ({ height, data, color, renderTickY, renderTooltip, valueKey = "va
             },
             ticks: {
               beginAtZero: true,
+              suggestedMax: 10 ** Math.max(magnitude - 4, 1),
               maxTicksLimit: 4,
               fontColor: theme.text.shade60,
               fontFamily: "Inter",
@@ -158,7 +170,7 @@ const Chart = ({ height, data, color, renderTickY, renderTooltip, valueKey = "va
         ],
       },
     }),
-    [renderTickY, theme],
+    [renderTickY, theme, magnitude],
   );
 
   useLayoutEffect(() => {

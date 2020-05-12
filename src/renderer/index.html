@@ -73,10 +73,12 @@
       animation: loaded-anim 0.7s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
     }
 
-    #logo {
+    #loading-logo {
       animation: logo-anim 1.8s infinite;
       height: 100%;
       width: 100%;
+      user-select: none;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -85,7 +87,7 @@
   <div id="react-root"></div>
   <div id="loader-container">
     <div id="loader">
-      <img id="logo" />
+      <img id="loading-logo" />
     </div>
   </div>
   <div id="modals"></div>

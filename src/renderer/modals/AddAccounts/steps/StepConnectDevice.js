@@ -5,8 +5,15 @@ import React, { useEffect } from "react";
 import { prepareCurrency } from "~/renderer/bridge/cache";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import DeviceAction from "~/renderer/components/DeviceAction";
-import { action } from "~/renderer/components/DeviceAction/actions/app";
+import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
+import { command } from "~/renderer/commands";
 import type { StepProps } from "..";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
+import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+
+const connectAppExec = command("connectApp");
+
+const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectAppExec);
 
 const StepConnectDevice = ({ currency, device, transitionTo }: StepProps) => {
   invariant(currency, "No crypto asset given");
