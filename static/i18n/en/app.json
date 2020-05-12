@@ -855,7 +855,32 @@
       "delegate": "Delegate",
       "undelegate": "Undelegate",
       "redelegate": "Redelegate",
-      "reward": "Collect rewards"
+      "reward": "Collect rewards",
+      "flow": {
+        "title": "Delegate assets",
+        "steps": {
+          "starter": {},
+          "validator": {
+            "title": "Validators"
+          },
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "Delegation sent",
+              "text": "Delegation transaction broadcasted successfully. You should earn your first rewards soon depending on the validator.",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+          }
+        }
+      }
     }
   },
   "delegation": {

@@ -27,6 +27,8 @@ import MODAL_VOTE_TRON from "./VoteTron";
 import MODAL_VOTE_TRON_INFO from "./VoteTron/Info";
 import MODAL_BLACKLIST_TOKEN from "./BlacklistToken";
 
+import MODAL_COSMOS_DELEGATE from "~/renderer/families/cosmos/DelegationFlowModal";
+
 const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_EXPORT_OPERATIONS,
   MODAL_CONFIRM,
@@ -53,6 +55,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_VOTE_TRON,
   MODAL_VOTE_TRON_INFO,
   MODAL_BLACKLIST_TOKEN,
+  MODAL_COSMOS_DELEGATE,
 };
 
 export default modals;

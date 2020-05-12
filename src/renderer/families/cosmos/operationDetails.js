@@ -52,7 +52,7 @@ const redirectAddress = (currency: Currency, address: string) => () => {
 };
 
 /** @TODO move this in common */
-const formatDelegationsInfo = (
+export const formatDelegationsInfo = (
   delegations: CosmosDelegationInfo[],
   validators: CosmosValidatorItem[],
 ): {
