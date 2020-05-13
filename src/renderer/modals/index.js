@@ -1,7 +1,7 @@
 // @flow
 
 import MODAL_COSMOS_DELEGATE from "../families/cosmos/DelegationFlowModal";
-import MODAL_COSMOS_REWARDS_INFO from "../families/cosmos/EarnRewardsInfoModal";
+import MODAL_COSMOS_REWARDS_INFO from "../families/cosmos/DelegationFlowModal/Info";
 import MODAL_DELEGATE from "../families/tezos/DelegateFlowModal";
 import MODAL_TRON_REWARDS_INFO from "../families/tron/EarnRewardsInfoModal";
 import MODAL_EXPORT_OPERATIONS from "./ExportOperations";

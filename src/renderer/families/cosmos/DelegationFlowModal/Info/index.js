@@ -15,13 +15,13 @@ type Props = {
   parentAccount: ?Account,
 };
 
-export default function TronEarnRewardsInfoModal({ name, account, parentAccount }: Props) {
+export default function CosmosEarnRewardsInfoModal({ name, account, parentAccount }: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const onNext = useCallback(() => {
     dispatch(closeModal(name));
     dispatch(
-      openModal("MODAL_FREEZE", {
+      openModal("MODAL_COSMOS_DELEGATE", {
         parentAccount,
         account,
       }),
