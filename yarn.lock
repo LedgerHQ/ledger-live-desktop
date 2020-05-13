@@ -1398,6 +1398,16 @@
     node-hid "^1.2.0"
     usb-detection "^4.9.0"
 
+"@ledgerhq/hw-transport-node-speculos@^5.15.0":
+  version "5.15.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-speculos/-/hw-transport-node-speculos-5.15.0.tgz#df1d782b0ace14beaa66cd6d6dd2f1fa83e5f40d"
+  integrity sha512-7m4LLofrJHpr1cPLUqKqjyQkBOss+e+JWzAdQAQCUPn1IyQyaJf87h3DsbQuqu3cAU0umMy0GlXoNFh4oED+Iw==
+  dependencies:
+    "@ledgerhq/errors" "^5.15.0"
+    "@ledgerhq/hw-transport" "^5.15.0"
+    "@ledgerhq/logs" "^5.15.0"
+    rxjs "^6.5.5"
+
 "@ledgerhq/hw-transport@5.15.0", "@ledgerhq/hw-transport@^5.15.0":
   version "5.15.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-5.15.0.tgz#01dc22adb156061728dbb937df2f310c761d06b9"
@@ -1418,10 +1428,10 @@
     node-pre-gyp "^0.14.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^12.20.0":
-  version "12.20.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.20.0.tgz#3dab17c83fd57a4e2b4f33bfd43cd77b3636f4fc"
-  integrity sha512-4pZp/JWNvnM+eWvr4UrdPR77IFBaPNaUWYPHZHISAm7tjWsZLrKAG6qT/48aLq2/9uWAoAec4NqhvHxvwBZ6fQ==
+"@ledgerhq/live-common@^12.22.0":
+  version "12.22.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.22.0.tgz#ca8ea3f2c7c419bb0c05c5665baae957ec0b8445"
+  integrity sha512-9oBCdjdWsPfOy5dKmqKxcg9X6fJwU9tXYS2eWTGJZIsz13j/Tx0SnC6dnode+MTj7PGEgrQ3YUyHfxuw0wKucg==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "5.15.0"
@@ -1433,6 +1443,7 @@
     "@ledgerhq/hw-app-xrp" "5.15.0"
     "@ledgerhq/hw-transport" "5.15.0"
     "@ledgerhq/hw-transport-mocker" "^5.15.0"
+    "@ledgerhq/hw-transport-node-speculos" "^5.15.0"
     "@ledgerhq/logs" "5.15.0"
     async "^3.2.0"
     axios "0.19.0"
