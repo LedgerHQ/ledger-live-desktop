@@ -7,7 +7,7 @@ import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 
 import { openModal, closeModal } from "~/renderer/actions/modals";
 import EarnRewardsInfoModal from "~/renderer/components/EarnRewardsInfoModal";
-import WarnBox from "~/renderer/components/WarnBox";
+import InfoBox from "~/renderer/components/InfoBox";
 
 type Props = {
   name?: string,
@@ -28,6 +28,8 @@ export default function TronEarnRewardsInfoModal({ name, account, parentAccount 
     );
   }, [parentAccount, account, dispatch, name]);
 
+  const onLearnMore = useCallback(() => {}, []);
+
   return (
     <EarnRewardsInfoModal
       name={name}
@@ -39,7 +41,9 @@ export default function TronEarnRewardsInfoModal({ name, account, parentAccount 
         t("cosmos.delegation.flow.steps.starter.bullet.2"),
       ]}
       additional={
-        <WarnBox>{t("cosmos.delegation.flow.steps.starter.warning.description")}</WarnBox>
+        <InfoBox onLearnMore={onLearnMore}>
+          {t("cosmos.delegation.flow.steps.starter.warning.description")}
+        </InfoBox>
       }
     />
   );
