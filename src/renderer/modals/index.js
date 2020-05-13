@@ -1,6 +1,9 @@
 // @flow
 
-import MODAL_DELEGATE from "~/renderer/families/tezos/DelegateFlowModal";
+import MODAL_COSMOS_DELEGATE from "../families/cosmos/DelegationFlowModal";
+import MODAL_COSMOS_REWARDS_INFO from "../families/cosmos/EarnRewardsInfoModal";
+import MODAL_DELEGATE from "../families/tezos/DelegateFlowModal";
+import MODAL_TRON_REWARDS_INFO from "../families/tron/EarnRewardsInfoModal";
 import MODAL_EXPORT_OPERATIONS from "./ExportOperations";
 import MODAL_CONFIRM from "./ConfirmModal";
 import MODAL_MANAGE_TRON from "./ManageTron";
@@ -22,12 +25,9 @@ import MODAL_RELEASE_NOTES from "./ReleaseNotes";
 import MODAL_CLAIM_REWARDS from "./ClaimRewards";
 import MODAL_FREEZE from "./Freeze";
 import MODAL_UNFREEZE from "./Unfreeze";
-import MODAL_REWARDS_INFO from "./EarnRewardsInfoModal";
 import MODAL_VOTE_TRON from "./VoteTron";
 import MODAL_VOTE_TRON_INFO from "./VoteTron/Info";
 import MODAL_BLACKLIST_TOKEN from "./BlacklistToken";
-
-import MODAL_COSMOS_DELEGATE from "~/renderer/families/cosmos/DelegationFlowModal";
 
 const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_EXPORT_OPERATIONS,
@@ -51,11 +51,12 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_CLAIM_REWARDS,
   MODAL_FREEZE,
   MODAL_UNFREEZE,
-  MODAL_REWARDS_INFO,
+  MODAL_TRON_REWARDS_INFO,
   MODAL_VOTE_TRON,
   MODAL_VOTE_TRON_INFO,
   MODAL_BLACKLIST_TOKEN,
   MODAL_COSMOS_DELEGATE,
+  MODAL_COSMOS_REWARDS_INFO,
 };
 
 export default modals;
