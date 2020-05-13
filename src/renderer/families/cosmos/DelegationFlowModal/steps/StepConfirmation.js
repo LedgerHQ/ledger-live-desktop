@@ -79,6 +79,7 @@ export function StepConfirmationFooter({
       ? optimisticOperation.subOperations[0]
       : optimisticOperation
     : null;
+
   return (
     <Box horizontal alignItems="right">
       <Button ml={2} onClick={onClose}>

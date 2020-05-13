@@ -1,12 +1,14 @@
 // @flow
 import invariant from "invariant";
-import React from "react";
+import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import type { StepProps } from "../types";
-// import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
+
+import ValidatorsField from "../fields/ValidatorsField";
 
 export default function StepDelegation({
   account,
@@ -18,20 +20,30 @@ export default function StepDelegation({
   t,
 }: StepProps) {
   invariant(account && transaction && transaction.validators, "account and transaction required");
-  // const bridge = getAccountBridge(account, parentAccount);
+  const bridge = getAccountBridge(account, parentAccount);
 
-  // const updateDelegation = useCallback(
-  //   updater => {
-  //     onUpdateTransaction(transaction =>
-  //       bridge.updateTransaction(transaction, { validators: updater(transaction.validators) }),
-  //     );
-  //   },
-  //   [bridge, onUpdateTransaction],
-  // );
+  const updateDelegation = useCallback(
+    updater => {
+      onUpdateTransaction(transaction =>
+        bridge.updateTransaction(transaction, {
+          validators: updater(transaction.validators || []),
+        }),
+      );
+    },
+    [bridge, onUpdateTransaction],
+  );
 
   return (
     <Box flow={1}>
       <TrackPage category="Delegation Flow" name="Step 1" />
+      <ValidatorsField
+        account={account}
+        delegations={transaction.validators || []}
+        bridgePending={bridgePending}
+        onChangeDelegations={updateDelegation}
+        status={status}
+        t={t}
+      />
     </Box>
   );
 }
