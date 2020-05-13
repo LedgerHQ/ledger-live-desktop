@@ -41,6 +41,18 @@ const tasks = new Listr(
         }
       },
     },
+    {
+      title: "Run tsc",
+      task: async () => {
+        try {
+          const { stdout } = await execa("yarn", ["tsc"]);
+          return stdout;
+        } catch (error) {
+          process.stderr.write(error.message);
+          throw new Error("flow test failed");
+        }
+      },
+    },
   ],
   { concurrent: true, exitOnError: false },
 );

@@ -7,6 +7,7 @@ import type { TFunction } from "react-i18next";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/types";
 import { compose } from "redux";
 import { withTranslation } from "react-i18next";
+// $FlowFixMe
 import AccountDistribution from "~/renderer/components/AccountDistribution";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";

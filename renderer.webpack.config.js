@@ -27,6 +27,22 @@ const babelConfig = {
       },
     ],
   ],
+  overrides: [
+    {
+      test: ["src/**/*.ts", "src/**/*.tsx"],
+      presets: [
+        [
+          "@babel/preset-env",
+          {
+            targets: {
+              node: "current",
+            },
+          },
+        ],
+        "@babel/preset-typescript",
+      ],
+    },
+  ],
 };
 
 module.exports = {
@@ -62,7 +78,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/i,
+        test: /\.(j|t)sx?$/,
         loader: "babel-loader",
         exclude: /node_modules/,
         options: babelConfig,
@@ -91,5 +107,6 @@ module.exports = {
     alias: {
       "~": path.resolve(__dirname, "src"),
     },
+    extensions: [".js", ".ts", ".tsx"],
   },
 };
