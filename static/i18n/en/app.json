@@ -867,7 +867,7 @@
               "Delegate securely with your Ledger device"
             ],
             "warning": {
-              "description": "Delegate ATOM asset can implies some losses if the chosen delegator doesn’t act rightfully on the network. "
+              "description": "Delegate ATOM asset can imply some losses if the chosen delegator doesn’t act rightfully on the network. "
             }
           },
           "validator": {
