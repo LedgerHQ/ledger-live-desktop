@@ -100,7 +100,7 @@ const Delegation = ({ account }: Props) => {
   const onEarnRewards = useCallback(
     () =>
       dispatch(
-        openModal("MODAL_REWARDS_INFO", {
+        openModal("MODAL_TRON_REWARDS_INFO", {
           account,
         }),
       ),
