@@ -1,6 +1,7 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
@@ -27,6 +28,7 @@ import IconRedelegate from "~/renderer/icons/Redelegate";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
 import CheckCircle from "~/renderer/icons/CheckCircle";
 import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
+import { openModal } from "~/renderer/actions/modals";
 
 const Wrapper: ThemedComponent<*> = styled.div`
   display: flex;
@@ -103,7 +105,28 @@ type Props = {
   status: CosmosDelegationStatus,
 };
 
-const Row = ({ validator, address, amount, pendingRewards, unit, status }: Props) => {
+export default function Row({ validator, address, amount, pendingRewards, unit, status }: Props) {
+  const dispatch = useDispatch();
+
+  const onChangeItem = useCallback(
+    ({ key }) => {
+      switch (key) {
+        case "REDELEGATE":
+          dispatch(openModal("MODAL_COSMOS_REDELEGATE"));
+          break;
+        case "UNDELEGATE":
+          dispatch(openModal("MODAL_COSMOS_UNDELEGATE"));
+          break;
+        case "REWARD":
+          dispatch(openModal("MODAL_COSMOS_REWAED"));
+          break;
+        default:
+          break;
+      }
+    },
+    [dispatch],
+  );
+
   return (
     <Wrapper>
       <Column strong>
@@ -127,13 +150,7 @@ const Row = ({ validator, address, amount, pendingRewards, unit, status }: Props
         <FormattedVal color="palette.text.shade80" val={pendingRewards} unit={unit} showCode />
       </Column>
       <Column>
-        <DropDown
-          items={dropDownItems}
-          renderItem={ManageDropDownItem}
-          onChange={() => {
-            /** @TODO redirect to selected action */
-          }}
-        >
+        <DropDown items={dropDownItems} renderItem={ManageDropDownItem} onChange={onChangeItem}>
           {({ isOpen, value }) => (
             <Box flex horizontal alignItems="center">
               <Trans i18nKey="common.manage" />
@@ -146,6 +163,4 @@ const Row = ({ validator, address, amount, pendingRewards, unit, status }: Props
       </Column>
     </Wrapper>
   );
-};
-
-export default Row;
+}

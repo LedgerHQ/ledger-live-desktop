@@ -2,6 +2,7 @@
 
 import MODAL_COSMOS_DELEGATE from "../families/cosmos/DelegationFlowModal";
 import MODAL_COSMOS_REWARDS_INFO from "../families/cosmos/DelegationFlowModal/Info";
+import MODAL_COSMOS_UNDELEGATE from "../families/cosmos/UndelegationFlowModal";
 import MODAL_DELEGATE from "../families/tezos/DelegateFlowModal";
 import MODAL_TRON_REWARDS_INFO from "../families/tron/EarnRewardsInfoModal";
 import MODAL_EXPORT_OPERATIONS from "./ExportOperations";
@@ -57,6 +58,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_BLACKLIST_TOKEN,
   MODAL_COSMOS_DELEGATE,
   MODAL_COSMOS_REWARDS_INFO,
+  MODAL_COSMOS_UNDELEGATE,
 };
 
 export default modals;
