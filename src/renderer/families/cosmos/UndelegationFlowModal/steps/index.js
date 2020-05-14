@@ -2,8 +2,8 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
-import StepAmount from "./Amount";
-import StepConfirmation from "./Confirmation";
+import StepAmount, { StepAmountFooter } from "./Amount";
+import StepConfirmation, { StepConfirmationFooter } from "./Confirmation";
 import type { StepProps, St } from "../types";
 
 export function useSteps(): St[] {
@@ -16,7 +16,7 @@ export function useSteps(): St[] {
         label: t("cosmos.undelegation.flow.steps.amount.title"),
         component: StepAmount,
         noScroll: true,
-        // footer: StepDelegationFooter,
+        footer: StepAmountFooter,
       },
       {
         id: "device",
@@ -28,7 +28,7 @@ export function useSteps(): St[] {
         id: "confirmation",
         label: t("cosmos.delegation.flow.steps.confirmation.title"),
         component: StepConfirmation,
-        // footer: StepConfirmationFooter,
+        footer: StepConfirmationFooter,
       },
     ],
     [t],

@@ -12,7 +12,6 @@ export type StepProps = {
   transitionTo: (address: string) => void,
   device: ?Device,
   account: ?Account,
-  parentAccount: ?Account,
   onRetry: () => void,
   onClose: () => void,
   openModal: (key: string, config?: any) => void,
