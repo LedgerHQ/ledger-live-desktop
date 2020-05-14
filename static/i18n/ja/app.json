@@ -302,6 +302,9 @@
       "noOperationOnLastAccount": "<1><0>{{accountName}}</0> </1>のアカウントを受け取る前に、新しいアカウントを追加することはできません",
       "noAccountToCreate": "作成する <1><0>{{currencyName}}</0></1> アカウントが見つかりませんでした"
     },
+    "supportLinks": {
+      "segwit_or_native_segwit": "Segwit or Native Segwit?"
+    },
     "cta": {
       "addMore": "さらに追加",
       "add": "アカウントを追加",
