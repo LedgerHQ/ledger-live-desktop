@@ -9,10 +9,10 @@ import IconExternalLink from "~/renderer/icons/ExternalLink";
 import Label from "./Label";
 import { rgba } from "~/renderer/styles/helpers";
 
-const Wrapper: ThemedComponent<{}> = styled(Label).attrs(() => ({
+const Wrapper: ThemedComponent<{}> = styled(Label).attrs(props => ({
   ff: "Inter|SemiBold",
   color: "wallet",
-  fontSize: 4,
+  fontSize: props.fontSize,
   alignItems: "center",
 }))`
   display: flex;
@@ -23,12 +23,18 @@ const Wrapper: ThemedComponent<{}> = styled(Label).attrs(() => ({
   }
 `;
 
-type Props = { onClick: ?() => void, label?: React$Node, children?: React$Node, style?: * };
+type Props = {
+  onClick: ?() => void,
+  label?: React$Node,
+  children?: React$Node,
+  style?: *,
+  fontSize?: number,
+};
 
 // can add more dynamic options if needed
-export function LinkWithExternalIcon({ onClick, label, children, style }: Props) {
+export function LinkWithExternalIcon({ onClick, label, children, style, fontSize }: Props) {
   return (
-    <Wrapper onClick={onClick} style={style}>
+    <Wrapper onClick={onClick} style={style} fontSize={fontSize || 4}>
       <span>{label || children}</span>
       <Box ml={1}>
         <IconExternalLink size={12} />
