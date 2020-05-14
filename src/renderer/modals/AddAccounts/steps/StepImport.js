@@ -243,7 +243,7 @@ class StepImport extends PureComponent<StepProps> {
       <>
         <TrackPage category="AddAccounts" name="Step3" />
         <Box mt={-4}>
-          {sections.map(({ id, selectable, defaultSelected, data }, i) => (
+          {sections.map(({ id, selectable, defaultSelected, data, supportLink }, i) => (
             <SectionAccounts
               currency={currency}
               defaultSelected={defaultSelected}
@@ -253,6 +253,7 @@ class StepImport extends PureComponent<StepProps> {
               accounts={data}
               autoFocusFirstInput={selectable && i === 0}
               hideAmount={id === "creatable"}
+              supportLink={supportLink}
               checkedIds={!selectable ? undefined : checkedAccountsIds}
               onToggleAccount={!selectable ? undefined : this.handleToggleAccount}
               setAccountName={!selectable ? undefined : setAccountName}

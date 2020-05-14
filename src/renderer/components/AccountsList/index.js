@@ -5,8 +5,10 @@ import { withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import type { Account, CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import Box from "~/renderer/components/Box";
+import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import FakeLink from "~/renderer/components/FakeLink";
 import { SpoilerIcon } from "~/renderer/components/Spoiler";
+import { openURL } from "~/renderer/linking";
 import AccountRow from "./AccountRow";
 
 class AccountsList extends Component<
@@ -24,6 +26,7 @@ class AccountsList extends Component<
     autoFocusFirstInput?: boolean,
     collapsible?: boolean,
     hideAmount?: boolean,
+    supportLink?: { id: *, url: string },
     t: TFunction,
   },
   {
@@ -67,6 +70,7 @@ class AccountsList extends Component<
       autoFocusFirstInput,
       collapsible,
       hideAmount,
+      supportLink,
       t,
     } = this.props;
     const { collapsed } = this.state;
@@ -76,7 +80,7 @@ class AccountsList extends Component<
     return (
       <Box flow={3} mt={4}>
         {(title || withToggleAll) && (
-          <Box horizontal alignItems="center">
+          <Box horizontal alignItems="center" flow={2}>
             {title && (
               <Box
                 horizontal
@@ -91,6 +95,13 @@ class AccountsList extends Component<
                 {title}
               </Box>
             )}
+            {supportLink ? (
+              <LinkWithExternalIcon
+                fontSize={2}
+                onClick={() => openURL(supportLink.url)}
+                label={t("addAccounts.supportLinks." + supportLink.id)}
+              />
+            ) : null}
             {withToggleAll && (
               <FakeLink
                 ml="auto"
