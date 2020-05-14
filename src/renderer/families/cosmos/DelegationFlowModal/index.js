@@ -19,13 +19,6 @@ class DelegationModal extends PureComponent<{ name: string }, State> {
 
   handleStepChange = (stepId: StepId) => this.setState({ stepId });
 
-  handleReset = () =>
-    this.setState({
-      stepId: "castDelegations",
-    });
-
-  handleStepChange = (stepId: StepId) => this.setState({ stepId });
-
   render() {
     const { stepId } = this.state;
     const { name } = this.props;

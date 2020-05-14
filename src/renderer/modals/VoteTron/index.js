@@ -19,13 +19,6 @@ class VoteModal extends PureComponent<{ name: string }, State> {
 
   handleStepChange = (stepId: StepId) => this.setState({ stepId });
 
-  handleReset = () =>
-    this.setState({
-      stepId: "castVotes",
-    });
-
-  handleStepChange = (stepId: StepId) => this.setState({ stepId });
-
   render() {
     const { stepId } = this.state;
     const { name } = this.props;
