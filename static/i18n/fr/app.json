@@ -302,6 +302,9 @@
       "noOperationOnLastAccount": "Impossible d’ajouter un nouveau compte avant d’avoir reçu sur votre compte <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> à créer n’a été trouvé."
     },
+    "supportLinks": {
+      "segwit_or_native_segwit": "Segwit or Native Segwit?"
+    },
     "cta": {
       "addMore": "Ajouter davantage",
       "add": "Ajouter un compte",
