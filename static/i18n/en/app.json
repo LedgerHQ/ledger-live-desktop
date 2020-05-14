@@ -904,7 +904,9 @@
             "compound": "Compound",
             "claim": "Claim",
             "compoundOrClaim": "Compound or claim",
-            "compoundInfo": "You earned {{amount}} by delegation assets, they will be claimed now and automatically redelegated to the same validator",
+            "compoundDescription": "NEEDS COMPOUND DESC TEXT",
+            "claimDescription": "NEEDS CLAIM DESC TEXT",
+            "compoundInfo": "You earned <0>{{amount}}</0> by delegation assets, they will be claimed now and automatically redelegated to the same validator",
             "selectLabel": "Select a delegation"
           },
           "connectDevice": {

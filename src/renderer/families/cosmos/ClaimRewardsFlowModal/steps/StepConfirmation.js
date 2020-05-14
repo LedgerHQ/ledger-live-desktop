@@ -33,6 +33,7 @@ function StepConfirmation({
   theme,
   device,
   signed,
+  transaction,
 }: StepProps & { theme: * }) {
   if (optimisticOperation) {
     return (

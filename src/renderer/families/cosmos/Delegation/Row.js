@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
@@ -20,11 +20,6 @@ import DropDown, { DropDownItem } from "~/renderer/components/DropDownSelector";
 
 import Box from "~/renderer/components/Box/Box";
 import ChevronRight from "~/renderer/icons/ChevronRight";
-
-import IconDelegate from "~/renderer/icons/Delegate";
-import IconUndelegate from "~/renderer/icons/Undelegate";
-import IconRedelegate from "~/renderer/icons/Redelegate";
-import ClaimRewards from "~/renderer/icons/ClaimReward";
 import CheckCircle from "~/renderer/icons/CheckCircle";
 import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
 
@@ -50,27 +45,6 @@ const Divider: ThemedComponent<*> = styled.div`
   background-color: ${p => p.theme.colors.palette.divider};
 `;
 
-const dropDownItems = [
-  {
-    key: "MODAL_COSMOS_REDELEGATE",
-    label: <Trans i18nKey="cosmos.delegation.redelegate" />,
-  },
-  {
-    key: "MODAL_COSMOS_UNDELEGATE",
-    label: <Trans i18nKey="cosmos.delegation.undelegate" />,
-  },
-  {
-    key: "MODAL_COSMOS_CLAIM_REWARDS",
-    label: <Trans i18nKey="cosmos.delegation.reward" />,
-  },
-];
-
-const iconsComponent = {
-  MODAL_COSMOS_REDELEGATE: IconRedelegate,
-  MODAL_COSMOS_UNDELEGATE: IconUndelegate,
-  MODAL_COSMOS_CLAIM_REWARDS: ClaimRewards,
-};
-
 const ManageDropDownItem = ({
   item,
   isActive,
@@ -78,14 +52,11 @@ const ManageDropDownItem = ({
   item: { key: string, label: string },
   isActive: boolean,
 }) => {
-  const Icon = iconsComponent[item.key];
   return (
     <>
-      {item.key === "CLAIM_REWARDS" && <Divider />}
+      {item.key === "MODAL_COSMOS_CLAIM_REWARDS" && <Divider />}
       <DropDownItem isActive={isActive}>
-        <Box horizontal alignItems="center">
-          <Box pr={2}>{Icon && <Icon size={12} />}</Box>
-
+        <Box horizontal alignItems="center" justifyContent="center">
           {item.label}
         </Box>
       </DropDownItem>
@@ -120,6 +91,28 @@ const Row = ({
       onManageAction(address, action.key);
     },
     [onManageAction, address],
+  );
+
+  const dropDownItems = useMemo(
+    () => [
+      {
+        key: "MODAL_COSMOS_REDELEGATE",
+        label: <Trans i18nKey="cosmos.delegation.redelegate" />,
+      },
+      {
+        key: "MODAL_COSMOS_UNDELEGATE",
+        label: <Trans i18nKey="cosmos.delegation.undelegate" />,
+      },
+      ...(pendingRewards.gt(0)
+        ? [
+            {
+              key: "MODAL_COSMOS_CLAIM_REWARDS",
+              label: <Trans i18nKey="cosmos.delegation.reward" />,
+            },
+          ]
+        : []),
+    ],
+    [pendingRewards],
   );
 
   return (

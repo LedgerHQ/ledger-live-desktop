@@ -113,11 +113,16 @@ const Body = ({
 
     invariant(account && account.cosmosResources, "cosmos: account and cosmos resources required");
 
-    const validators = account.cosmosResources.delegations.filter(
-      d => d.validatorAddress === validatorAddress,
-    );
-
-    // const { cosmosResources } = account;
+    // preselect validator either one from params or the first one available on the list
+    const validators = account.cosmosResources.delegations
+      .filter(d =>
+        validatorAddress ? d.validatorAddress === validatorAddress : d.pendingRewards.gt(0),
+      )
+      .slice(0, 1)
+      .map(({ validatorAddress, pendingRewards }) => ({
+        address: validatorAddress,
+        amount: pendingRewards,
+      }));
 
     const bridge = getAccountBridge(account, undefined);
 
