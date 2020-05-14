@@ -105,6 +105,26 @@ const Delegation = ({ account }: Props) => {
     );
   }, [account, dispatch]);
 
+  const onClaimRewards = useCallback(() => {
+    dispatch(
+      openModal("MODAL_COSMOS_CLAIM_REWARDS", {
+        account,
+      }),
+    );
+  }, [account, dispatch]);
+
+  const onRedirect = useCallback(
+    (validatorAddress: string, modalName: string) => {
+      dispatch(
+        openModal(modalName, {
+          account,
+          validatorAddress,
+        }),
+      );
+    },
+    [account, dispatch],
+  );
+
   const hasDelegations = delegations.length > 0;
 
   const hasRewards = _pendingRewardsBalance.gt(0);
@@ -133,20 +153,7 @@ const Delegation = ({ account }: Props) => {
               </Button>
             ) : null}
             <ToolTip content={!hasRewards ? <Trans i18nKey="cosmos.delegation.noRewards" /> : null}>
-              <Button
-                disabled={!hasRewards}
-                primary
-                small
-                onClick={() => {
-                  /** @TODO redirect to claim rewards flow */
-                  //  dispatch(
-                  //    openModal("MODAL_CLAIM_REWARDS", {
-                  //      account,
-                  //      reward: pendingRewardsBalance,
-                  //    }),
-                  //  );
-                }}
-              >
+              <Button disabled={!hasRewards} primary small onClick={onClaimRewards}>
                 <Box horizontal flow={1} alignItems="center">
                   <ClaimRewards size={12} />
                   <Box>
@@ -178,6 +185,7 @@ const Delegation = ({ account }: Props) => {
                 pendingRewards={pendingRewards}
                 unit={unit}
                 status={status}
+                onManageAction={onRedirect}
               />
             ),
           )}

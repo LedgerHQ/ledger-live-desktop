@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
@@ -52,24 +52,23 @@ const Divider: ThemedComponent<*> = styled.div`
 
 const dropDownItems = [
   {
-    key: "REDELEGATE",
+    key: "MODAL_COSMOS_REDELEGATE",
     label: <Trans i18nKey="cosmos.delegation.redelegate" />,
   },
   {
-    key: "UNDELEGATE",
+    key: "MODAL_COSMOS_UNDELEGATE",
     label: <Trans i18nKey="cosmos.delegation.undelegate" />,
   },
   {
-    key: "REWARD",
+    key: "MODAL_COSMOS_CLAIM_REWARDS",
     label: <Trans i18nKey="cosmos.delegation.reward" />,
   },
 ];
 
 const iconsComponent = {
-  DELEGATE: IconDelegate,
-  REDELEGATE: IconRedelegate,
-  UNDELEGATE: IconUndelegate,
-  REWARD: ClaimRewards,
+  MODAL_COSMOS_REDELEGATE: IconRedelegate,
+  MODAL_COSMOS_UNDELEGATE: IconUndelegate,
+  MODAL_COSMOS_CLAIM_REWARDS: ClaimRewards,
 };
 
 const ManageDropDownItem = ({
@@ -82,7 +81,7 @@ const ManageDropDownItem = ({
   const Icon = iconsComponent[item.key];
   return (
     <>
-      {item.key === "REWARD" && <Divider />}
+      {item.key === "CLAIM_REWARDS" && <Divider />}
       <DropDownItem isActive={isActive}>
         <Box horizontal alignItems="center">
           <Box pr={2}>{Icon && <Icon size={12} />}</Box>
@@ -101,9 +100,28 @@ type Props = {
   pendingRewards: BigNumber,
   unit: Unit,
   status: CosmosDelegationStatus,
+  onManageAction: (
+    address: string,
+    action: "MODAL_COSMOS_REDELEGATE" | "MODAL_COSMOS_UNDELEGATE" | "MODAL_COSMOS_CLAIM_REWARDS",
+  ) => void,
 };
 
-const Row = ({ validator, address, amount, pendingRewards, unit, status }: Props) => {
+const Row = ({
+  validator,
+  address,
+  amount,
+  pendingRewards,
+  unit,
+  status,
+  onManageAction,
+}: Props) => {
+  const onSelect = useCallback(
+    action => {
+      onManageAction(address, action.key);
+    },
+    [onManageAction, address],
+  );
+
   return (
     <Wrapper>
       <Column strong>
@@ -127,13 +145,7 @@ const Row = ({ validator, address, amount, pendingRewards, unit, status }: Props
         <FormattedVal color="palette.text.shade80" val={pendingRewards} unit={unit} showCode />
       </Column>
       <Column>
-        <DropDown
-          items={dropDownItems}
-          renderItem={ManageDropDownItem}
-          onChange={() => {
-            /** @TODO redirect to selected action */
-          }}
-        >
+        <DropDown items={dropDownItems} renderItem={ManageDropDownItem} onChange={onSelect}>
           {({ isOpen, value }) => (
             <Box flex horizontal alignItems="center">
               <Trans i18nKey="common.manage" />
