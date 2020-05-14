@@ -302,6 +302,9 @@
       "noOperationOnLastAccount": "Nem tudsz új számlát hozzáadni mielőtt fogadnál a(z) <1><0>{{accountName}}</0></1> számládon",
       "noAccountToCreate": "Nem található létrehozható <1><0>{{currencyName}}</0></1> számla"
     },
+    "supportLinks": {
+      "segwit_or_native_segwit": "Segwit or Native Segwit?"
+    },
     "cta": {
       "addMore": "Több hozzáadása",
       "add": "Számla hozzáadása",
