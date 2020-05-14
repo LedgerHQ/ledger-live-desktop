@@ -104,7 +104,6 @@ type Props = {
 };
 
 const Row = ({ validator, address, amount, pendingRewards, unit, status }: Props) => {
-  console.log(validator);
   return (
     <Wrapper>
       <Column strong>
