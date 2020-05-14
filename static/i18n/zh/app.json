@@ -302,6 +302,9 @@
       "noOperationOnLastAccount": "您的 <1><0>{{accountName}}</0></1> 账户为空，无法添加新账户",
       "noAccountToCreate": "未找到要创建的 <1><0>{{currencyName}}</0></1> 账户"
     },
+    "supportLinks": {
+      "segwit_or_native_segwit": "Segwit or Native Segwit?"
+    },
     "cta": {
       "addMore": "添加更多",
       "add": "添加账户",
