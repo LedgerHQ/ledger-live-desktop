@@ -891,6 +891,22 @@
           }
         }
       }
+    },
+    "undelegation": {
+      "flow": {
+        "title": "Undelegate assets",
+        "steps": {
+          "amount": {
+            "title": "Amount"
+          },
+          "device": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation"
+          }
+        }
+      }
     }
   },
   "delegation": {
