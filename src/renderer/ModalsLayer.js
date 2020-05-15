@@ -22,7 +22,7 @@ const BackDrop: ThemedComponent<{ state: string }> = styled.div.attrs(({ state }
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.65);
   z-index: 100;
   opacity: 0;
   transition: opacity 200ms cubic-bezier(0.3, 1, 0.5, 0.8);
