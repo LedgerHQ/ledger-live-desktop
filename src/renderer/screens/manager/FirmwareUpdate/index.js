@@ -7,7 +7,7 @@ import type { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/li
 import { command } from "~/renderer/commands";
 import type { Device } from "~/renderer/reducers/devices";
 import DisclaimerModal from "~/renderer/modals/DisclaimerModal";
-import UpdateModal from "~/renderer/modals/UpdateFirmwareModal";
+import UpdateModal, { hasResetStep } from "~/renderer/modals/UpdateFirmwareModal";
 import type { StepId } from "~/renderer/modals/UpdateFirmwareModal";
 import lte from "semver/functions/lte";
 import Text from "~/renderer/components/Text";
@@ -35,7 +35,7 @@ type State = {
 const initialStepId = ({ deviceInfo, device }): StepId =>
   deviceInfo.isOSU
     ? "updateMCU"
-    : getDeviceModel(device.modelId).id === "blue"
+    : hasResetStep(deviceInfo, device.modelId)
     ? "resetDevice"
     : "idCheck";
 
@@ -144,6 +144,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
               onClose={this.handleCloseModal}
             />
             <UpdateModal
+              withResetStep={hasResetStep(deviceInfo, device.modelId)}
               status={modal}
               stepId={stepId}
               onClose={this.handleCloseModal}
