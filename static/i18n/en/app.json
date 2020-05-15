@@ -927,6 +927,44 @@
           }
         }
       }
+    },
+    "redelegation": {
+      "flow": {
+        "title": "Redelegate assets",
+        "steps": {
+          "starter": {
+            "title": "Redelegation",
+            "description": "Redelegate assets from one validator to another. Redelegating allows your stake to continuously generate rewards.",
+            "warning": "Once redelegated, the ATOM can’t be redelegated for a <0>21 days period</0>. You can only have <0>7 pending redelegations</0> at the same time.",
+            "howDelegationWorks": "How delegation works?"
+          },
+          "validators": {
+            "title": "Validators",
+            "currentDelegation": "Current delegation",
+            "newDelegation": "New delegation",
+            "warning": "You will have to wait <0>21 days</0> to redelegate ATOM from the redelegated validator",
+            "selectInfo": "Redelegate assets from one validator to another. Redelegating allows your stake to continuously generate rewards.",
+            "searchPlaceholder": "Search by name or address",
+            "redelegationAmount": "Redelegation amount"
+          },
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "You have successfully redelegated your assets",
+              "text": "NEED TEXT HERE",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+          }
+        }
+      }
     }
   },
   "delegation": {

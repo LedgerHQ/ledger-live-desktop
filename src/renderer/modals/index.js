@@ -29,6 +29,7 @@ import MODAL_BLACKLIST_TOKEN from "./BlacklistToken";
 import MODAL_COSMOS_DELEGATE from "../families/cosmos/DelegationFlowModal";
 import MODAL_COSMOS_REWARDS_INFO from "../families/cosmos/DelegationFlowModal/Info";
 import MODAL_COSMOS_CLAIM_REWARDS from "../families/cosmos/ClaimRewardsFlowModal";
+import MODAL_COSMOS_REDELEGATE from "../families/cosmos/RedelegationFlowModal";
 
 const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_EXPORT_OPERATIONS,
@@ -59,6 +60,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_COSMOS_DELEGATE,
   MODAL_COSMOS_REWARDS_INFO,
   MODAL_COSMOS_CLAIM_REWARDS,
+  MODAL_COSMOS_REDELEGATE,
 };
 
 export default modals;
