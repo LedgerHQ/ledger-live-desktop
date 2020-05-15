@@ -1,6 +1,6 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -25,6 +25,8 @@ export default function StepAmount({
 }: StepProps) {
   const { t } = useTranslation();
 
+  const [query, setQuery] = useState("");
+
   invariant(account && transaction && transaction.validators, "account and transaction required");
 
   const { validators } = useCosmosPreloadData();
@@ -34,10 +36,10 @@ export default function StepAmount({
   const unit = useMemo(() => getAccountUnit(account), [account]);
   const delegations = useMemo(
     () =>
-      formatDelegations(rawDelegations, validators).map(val => {
+      formatDelegations(rawDelegations, validators).map(d => {
         return {
-          ...val,
-          amount: formatCurrencyUnit(unit, val.amount, {
+          ...d,
+          amount: formatCurrencyUnit(unit, d.amount, {
             disableRounding: true,
             alwaysShowSign: false,
             showCode: true,
@@ -47,34 +49,43 @@ export default function StepAmount({
     [rawDelegations, unit, validators],
   );
 
-  // const bridge = getAccountBridge(account);
+  const options = useMemo(
+    () =>
+      delegations.filter(
+        // [TODO] better query test
+        ({ validator }) => !query || !validator || new RegExp(query, "gi").test(validator.name),
+      ),
+    [query, delegations],
+  );
 
-  // const updateDelegation = useCallback(
-  //   updater => {
-  //     onUpdateTransaction(transaction =>
-  //       bridge.updateTransaction(transaction, {
-  //         validators: updater(transaction.validators || []),
-  //       }),
-  //     );
-  //   },
-  //   [bridge, onUpdateTransaction],
-  // );
+  const value = useMemo(
+    () => delegations.find(({ address }) => address === transaction.validators[0].address),
+    [delegations, transaction],
+  );
 
-  const onChange = useCallback(val => {
-    console.log(val);
-    // onUpdateTransaction(tx => {
-    //   bridge.updateTransaction(tx, {
-    //     validators: tx.validators
-    //   })
-    // })
-  }, []);
+  const bridge = getAccountBridge(account);
+
+  const onChange = useCallback(
+    ({ validator }) => {
+      onUpdateTransaction(tx =>
+        bridge.updateTransaction(tx, {
+          ...tx,
+          // validators: tx.validators.filter(v => v.address !== validator.validatorAddress),
+        }),
+      );
+    },
+    [bridge, onUpdateTransaction],
+  );
 
   return (
     <Box flow={1}>
       <TrackPage category="Undelegation Flow" name="Step 1" />
       <Label>{t("send.steps.details.amount")}</Label>
       <Select
-        options={delegations}
+        value={value}
+        options={options}
+        inputValue={query}
+        onInputChange={setQuery}
         renderOption={OptionRow}
         renderValue={OptionRow}
         onChange={onChange}
