@@ -6,7 +6,6 @@ import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
 
 import type {
@@ -29,10 +28,9 @@ import Row from "./Row";
 
 import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
-import { useDiscreetMode } from "~/renderer/components/Discreet";
 
 /** @TODO move this in common */
-const formatDelegations = (
+export const formatDelegations = (
   delegations: CosmosDelegation[],
   validators: CosmosValidatorItem[],
 ): {
@@ -77,15 +75,6 @@ const Delegation = ({ account }: Props) => {
   invariant(cosmosResources, "cosmos account expected");
   const { delegations, pendingRewardsBalance: _pendingRewardsBalance } = cosmosResources;
 
-  const discreet = useDiscreetMode();
-
-  const pendingRewardsBalance = formatCurrencyUnit(unit, _pendingRewardsBalance, {
-    disableRounding: true,
-    alwaysShowSign: false,
-    showCode: true,
-    discreet,
-  });
-
   const formattedDelegations = formatDelegations(delegations, validators);
 
   const onEarnRewards = useCallback(() => {
@@ -104,6 +93,26 @@ const Delegation = ({ account }: Props) => {
       }),
     );
   }, [account, dispatch]);
+
+  const onClaimRewards = useCallback(() => {
+    dispatch(
+      openModal("MODAL_COSMOS_CLAIM_REWARDS", {
+        account,
+      }),
+    );
+  }, [account, dispatch]);
+
+  const onRedirect = useCallback(
+    (validatorAddress: string, modalName: string) => {
+      dispatch(
+        openModal(modalName, {
+          account,
+          validatorAddress,
+        }),
+      );
+    },
+    [account, dispatch],
+  );
 
   const hasDelegations = delegations.length > 0;
 
@@ -133,31 +142,11 @@ const Delegation = ({ account }: Props) => {
               </Button>
             ) : null}
             <ToolTip content={!hasRewards ? <Trans i18nKey="cosmos.delegation.noRewards" /> : null}>
-              <Button
-                disabled={!hasRewards}
-                primary
-                small
-                onClick={() => {
-                  /** @TODO redirect to claim rewards flow */
-                  //  dispatch(
-                  //    openModal("MODAL_CLAIM_REWARDS", {
-                  //      account,
-                  //      reward: pendingRewardsBalance,
-                  //    }),
-                  //  );
-                }}
-              >
+              <Button disabled={!hasRewards} primary small onClick={onClaimRewards}>
                 <Box horizontal flow={1} alignItems="center">
                   <ClaimRewards size={12} />
                   <Box>
-                    <Trans
-                      i18nKey={
-                        hasRewards
-                          ? "cosmos.delegation.claimAvailableRewards"
-                          : "cosmos.delegation.claimRewards"
-                      }
-                      values={{ amount: pendingRewardsBalance }}
-                    />
+                    <Trans i18nKey="cosmos.delegation.claimRewards" />
                   </Box>
                 </Box>
               </Button>
@@ -178,6 +167,7 @@ const Delegation = ({ account }: Props) => {
                 pendingRewards={pendingRewards}
                 unit={unit}
                 status={status}
+                onManageAction={onRedirect}
               />
             ),
           )}

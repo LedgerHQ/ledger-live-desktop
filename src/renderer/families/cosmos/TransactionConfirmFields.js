@@ -76,43 +76,60 @@ const Pre = ({
           </AddressText>
         </TransactionConfirmField>
       )}
-
-      {formatedValidators && formatedValidators.length > 0 && (
-        <Box vertical justifyContent="space-between" mb={2}>
-          <TransactionConfirmField label={`Validators (${formatedValidators.length})`} />
-
-          {formatedValidators
-            .map(({ amount, ...delegation }) => ({
-              ...delegation,
-              amount: formatCurrencyUnit(unit, BigNumber(amount), {
+      {transaction.mode === "claimReward" || transaction.mode === "claimRewardCompound" ? (
+        <>
+          <TransactionConfirmField label="Validator">
+            <AddressText ff="Inter|SemiBold">{formatedValidators[0].address}</AddressText>
+          </TransactionConfirmField>
+          <TransactionConfirmField label="Reward amount">
+            <AddressText ff="Inter|SemiBold">
+              {formatCurrencyUnit(unit, formatedValidators[0].amount, {
                 disableRounding: false,
                 alwaysShowSign: false,
                 showCode: true,
-              }),
-            }))
-            .map(({ amount, address, validator }, i) => (
-              <OpDetailsData key={address + i}>
-                <OpDetailsVoteData>
-                  <Box>
-                    <Text>
-                      <Trans
-                        i18nKey="operationDetails.extra.votesAddress"
-                        values={{
-                          votes: amount,
-                          name: validator ? validator.name : address,
-                        }}
-                      >
-                        <Text ff="Inter|SemiBold">{""}</Text>
-                        {""}
-                        <Text ff="Inter|SemiBold">{""}</Text>
-                      </Trans>
-                    </Text>
-                  </Box>
-                  <Address>{address}</Address>
-                </OpDetailsVoteData>
-              </OpDetailsData>
-            ))}
-        </Box>
+              })}
+            </AddressText>
+          </TransactionConfirmField>
+        </>
+      ) : (
+        formatedValidators &&
+        formatedValidators.length > 0 && (
+          <Box vertical justifyContent="space-between" mb={2}>
+            <TransactionConfirmField label={`Validators (${formatedValidators.length})`} />
+
+            {formatedValidators
+              .map(({ amount, ...delegation }) => ({
+                ...delegation,
+                amount: formatCurrencyUnit(unit, BigNumber(amount), {
+                  disableRounding: false,
+                  alwaysShowSign: false,
+                  showCode: true,
+                }),
+              }))
+              .map(({ amount, address, validator }, i) => (
+                <OpDetailsData key={address + i}>
+                  <OpDetailsVoteData>
+                    <Box>
+                      <Text>
+                        <Trans
+                          i18nKey="operationDetails.extra.votesAddress"
+                          values={{
+                            votes: amount,
+                            name: validator ? validator.name : address,
+                          }}
+                        >
+                          <Text ff="Inter|SemiBold">{""}</Text>
+                          {""}
+                          <Text ff="Inter|SemiBold">{""}</Text>
+                        </Trans>
+                      </Text>
+                    </Box>
+                    <Address>{address}</Address>
+                  </OpDetailsVoteData>
+                </OpDetailsData>
+              ))}
+          </Box>
+        )
       )}
     </>
   );
