@@ -32,16 +32,10 @@ import ClaimRewards from "~/renderer/icons/ClaimReward";
 import { useDiscreetMode } from "~/renderer/components/Discreet";
 
 /** @TODO move this in common */
-const formatDelegations = (
+export const formatDelegations = (
   delegations: CosmosDelegation[],
   validators: CosmosValidatorItem[],
-): {
-  validator: ?CosmosValidatorItem,
-  address: string,
-  pendingRewards: BigNumber,
-  amount: BigNumber,
-  status: CosmosDelegationStatus,
-}[] => {
+): FormattedDelegation[] => {
   return delegations.map((d, i, arr) => ({
     validator: validators.find(v => v.validatorAddress === d.validatorAddress),
     address: d.validatorAddress,
@@ -49,6 +43,14 @@ const formatDelegations = (
     pendingRewards: d.pendingRewards,
     status: d.status,
   }));
+};
+
+export type FormattedDelegation = {
+  validator: ?CosmosValidatorItem,
+  address: string,
+  pendingRewards: BigNumber,
+  amount: BigNumber,
+  status: CosmosDelegationStatus,
 };
 
 type Props = {
