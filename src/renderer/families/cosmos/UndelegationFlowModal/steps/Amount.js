@@ -1,6 +1,6 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useEffect, useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -22,6 +22,7 @@ export default function StepAmount({
   transaction,
   bridgePending,
   onUpdateTransaction,
+  validatorAddress,
 }: StepProps) {
   const { t } = useTranslation();
 
@@ -36,16 +37,14 @@ export default function StepAmount({
   const unit = useMemo(() => getAccountUnit(account), [account]);
   const delegations = useMemo(
     () =>
-      formatDelegations(rawDelegations, validators).map(d => {
-        return {
-          ...d,
-          amount: formatCurrencyUnit(unit, d.amount, {
-            disableRounding: true,
-            alwaysShowSign: false,
-            showCode: true,
-          }),
-        };
-      }),
+      formatDelegations(rawDelegations, validators).map(d => ({
+        ...d,
+        amount: formatCurrencyUnit(unit, d.amount, {
+          disableRounding: true,
+          alwaysShowSign: false,
+          showCode: true,
+        }),
+      })),
     [rawDelegations, unit, validators],
   );
 
@@ -60,38 +59,60 @@ export default function StepAmount({
 
   const value = useMemo(
     () => delegations.find(({ address }) => address === transaction.validators[0].address),
-    [delegations, transaction],
+    [delegations, transaction, validatorAddress],
   );
 
   const bridge = getAccountBridge(account);
 
-  const onChangeValidator = useCallback(
-    ({ validator }) => {
+  const updateTxByValidatorAddress = useCallback(
+    (address: string) => {
       onUpdateTransaction(tx =>
         bridge.updateTransaction(tx, {
           ...tx,
           validators: tx.validators
-            ? tx.validators.sort(v => (v.address === validator.validatorAddress ? -1 : 1))
+            ? tx.validators.sort(v => (v.address === address ? -1 : 1))
             : tx.validators,
         }),
       );
     },
-    [bridge, onUpdateTransaction],
+    [onUpdateTransaction, bridge],
   );
+
+  const onChangeValidator = useCallback(
+    ({ validator }) => {
+      updateTxByValidatorAddress(validator.validatorAddress);
+    },
+    [updateTxByValidatorAddress],
+  );
+
+  const count = useRef(0);
+  useEffect(() => {
+    if (count.current !== 0) {
+      return;
+    }
+    updateTxByValidatorAddress(validatorAddress);
+    count.current = count.current + 1;
+  }, [updateTxByValidatorAddress, validatorAddress]);
 
   return (
     <Box flow={1}>
       <TrackPage category="Undelegation Flow" name="Step 1" />
-      <Label>{t("cosmos.undelegation.flow.steps.amount.fields.validator")}</Label>
-      <Select
-        value={value}
-        options={options}
-        inputValue={query}
-        onInputChange={setQuery}
-        renderOption={OptionRow}
-        renderValue={OptionRow}
-        onChange={onChangeValidator}
-      />
+      <Box>
+        <Label>{t("cosmos.undelegation.flow.steps.amount.fields.validator")}</Label>
+        <Select
+          value={value}
+          options={options}
+          inputValue={query}
+          onInputChange={setQuery}
+          renderOption={OptionRow}
+          renderValue={OptionRow}
+          onChange={onChangeValidator}
+        />
+      </Box>
+
+      <Box>
+        <Label>{t("cosmos.undelegation.flow.steps.amount.fields.amount")}</Label>
+      </Box>
     </Box>
   );
 }

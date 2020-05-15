@@ -35,6 +35,7 @@ export default function UndelegationModal({ name }: Props) {
           name={name}
           onClose={onClose}
           onChangeStepId={onChange}
+          validatorAddress={data.validatorAddress}
         />
       )}
     />

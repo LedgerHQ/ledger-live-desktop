@@ -24,9 +24,16 @@ type Props = {
   onClose: () => void,
   onChangeStepId: StepId => void,
   name: string,
+  validatorAddress: string,
 };
 
-export default function Body({ account: accountProp, stepId, onChangeStepId, name }: Props) {
+export default function Body({
+  account: accountProp,
+  stepId,
+  onChangeStepId,
+  name,
+  validatorAddress,
+}: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const device = useSelector(getCurrentDevice);
@@ -119,6 +126,7 @@ export default function Body({ account: accountProp, stepId, onChangeStepId, nam
     onOperationBroadcasted: handleOperationBroadcasted,
     onTransactionError: handleTransactionError,
     bridgePending,
+    validatorAddress,
   };
 
   return (

@@ -899,7 +899,8 @@
           "amount": {
             "title": "Amount",
             "fields": {
-              "validator": "Validator"
+              "validator": "Validator",
+              "amount": "Amount to undelegate"
             }
           },
           "device": {
