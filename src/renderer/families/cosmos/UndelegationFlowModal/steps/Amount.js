@@ -65,12 +65,14 @@ export default function StepAmount({
 
   const bridge = getAccountBridge(account);
 
-  const onChange = useCallback(
+  const onChangeValidator = useCallback(
     ({ validator }) => {
       onUpdateTransaction(tx =>
         bridge.updateTransaction(tx, {
           ...tx,
-          // validators: tx.validators.filter(v => v.address !== validator.validatorAddress),
+          validators: tx.validators
+            ? tx.validators.sort(v => (v.address === validator.validatorAddress ? -1 : 1))
+            : tx.validators,
         }),
       );
     },
@@ -80,7 +82,7 @@ export default function StepAmount({
   return (
     <Box flow={1}>
       <TrackPage category="Undelegation Flow" name="Step 1" />
-      <Label>{t("send.steps.details.amount")}</Label>
+      <Label>{t("cosmos.undelegation.flow.steps.amount.fields.validator")}</Label>
       <Select
         value={value}
         options={options}
@@ -88,7 +90,7 @@ export default function StepAmount({
         onInputChange={setQuery}
         renderOption={OptionRow}
         renderValue={OptionRow}
-        onChange={onChange}
+        onChange={onChangeValidator}
       />
     </Box>
   );

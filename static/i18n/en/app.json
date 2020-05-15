@@ -897,7 +897,10 @@
         "title": "Undelegate assets",
         "steps": {
           "amount": {
-            "title": "Amount"
+            "title": "Amount",
+            "fields": {
+              "validator": "Validator"
+            }
           },
           "device": {
             "title": "Device"
