@@ -13,6 +13,7 @@ import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Label from "~/renderer/components/Label";
 import Select from "~/renderer/components/Select";
 import Text from "~/renderer/components/Text";
+import useEffectOnce from "~/renderer/hooks/useEffectOnce";
 import type { StepProps } from "../types";
 import { formatDelegations } from "../../Delegation";
 import type { FormattedDelegation } from "../../Delegation";
@@ -59,7 +60,7 @@ export default function StepAmount({
 
   const value = useMemo(
     () => delegations.find(({ address }) => address === transaction.validators[0].address),
-    [delegations, transaction, validatorAddress],
+    [delegations, transaction],
   );
 
   const bridge = getAccountBridge(account);
@@ -85,14 +86,9 @@ export default function StepAmount({
     [updateTxByValidatorAddress],
   );
 
-  const count = useRef(0);
-  useEffect(() => {
-    if (count.current !== 0) {
-      return;
-    }
+  useEffectOnce(() => {
     updateTxByValidatorAddress(validatorAddress);
-    count.current = count.current + 1;
-  }, [updateTxByValidatorAddress, validatorAddress]);
+  });
 
   return (
     <Box flow={1}>
