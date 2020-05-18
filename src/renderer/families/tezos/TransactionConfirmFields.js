@@ -3,28 +3,21 @@
 import invariant from "invariant";
 import React, { useCallback } from "react";
 import { useBaker } from "@ledgerhq/live-common/lib/families/tezos/bakers";
-import type { AccountLike, Account, Transaction } from "@ledgerhq/live-common/lib/types";
 import { shortAddressPreview, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 import { openURL } from "~/renderer/linking";
 import TransactionConfirmField from "~/renderer/components/TransactionConfirm/TransactionConfirmField";
 import Text from "~/renderer/components/Text";
+import type { FieldComponentProps } from "~/renderer/components/TransactionConfirm";
 
-const addressStyle = {
-  wordBreak: "break-all",
-  textAlign: "right",
-  maxWidth: "50%",
-};
-
-const Pre = ({
+const TezosDelegateValidator = ({
   account,
   parentAccount,
   transaction,
-}: {
-  account: AccountLike,
-  parentAccount: ?Account,
-  transaction: Transaction,
-}) => {
+  field,
+}: FieldComponentProps) => {
+  invariant(transaction.family === "tezos", "tezos transaction");
+
   const mainAccount = getMainAccount(account, parentAccount);
   const baker = useBaker(transaction.recipient);
   const explorerView = getDefaultExplorerView(mainAccount.currency);
@@ -33,58 +26,20 @@ const Pre = ({
     if (bakerURL) openURL(bakerURL);
   }, [bakerURL]);
 
-  invariant(transaction.family === "tezos", "tezos transaction");
-
-  const isDelegateOperation = transaction.mode === "delegate";
-
   return (
-    <>
-      <TransactionConfirmField label="Source">
-        <Text
-          style={addressStyle}
-          ml={1}
-          ff="Inter|Medium"
-          color="palette.text.shade80"
-          fontSize={3}
-        >
-          {account.type === "ChildAccount" ? account.address : mainAccount.freshAddress}{" "}
-        </Text>
-      </TransactionConfirmField>
-      {isDelegateOperation ? (
-        <>
-          <TransactionConfirmField label="Validator">
-            <Text
-              onClick={openBaker}
-              color="palette.primary.main"
-              ml={1}
-              ff="Inter|Medium"
-              fontSize={3}
-            >
-              {baker ? baker.name : shortAddressPreview(transaction.recipient)}
-            </Text>
-          </TransactionConfirmField>
-          <TransactionConfirmField label="Delegate">
-            <Text
-              style={addressStyle}
-              ml={1}
-              ff="Inter|Medium"
-              color="palette.text.shade80"
-              fontSize={3}
-            >
-              {transaction.recipient}
-            </Text>
-          </TransactionConfirmField>
-        </>
-      ) : null}
-    </>
+    <TransactionConfirmField label={field.label}>
+      <Text onClick={openBaker} color="palette.primary.main" ml={1} ff="Inter|Medium" fontSize={3}>
+        {baker ? baker.name : shortAddressPreview(transaction.recipient)}
+      </Text>
+    </TransactionConfirmField>
   );
 };
 
-const Post = ({ transaction }: { transaction: Transaction }) => {
+const TezosStorageLimit = ({ transaction, field }: FieldComponentProps) => {
   invariant(transaction.family === "tezos", "tezos transaction");
 
   return (
-    <TransactionConfirmField label="Storage Limit">
+    <TransactionConfirmField label={field.label}>
       <Text ff="Inter|Medium" color="palette.text.shade80" fontSize={3}>
         {(transaction.storageLimit || "").toString()}
       </Text>
@@ -92,7 +47,11 @@ const Post = ({ transaction }: { transaction: Transaction }) => {
   );
 };
 
+const fieldComponents = {
+  "tezos.delegateValidator": TezosDelegateValidator,
+  "tezos.storageLimit": TezosStorageLimit,
+};
+
 export default {
-  pre: Pre,
-  post: Post,
+  fieldComponents,
 };

@@ -948,10 +948,6 @@
             "redelegationAmount": "Redelegation amount"
           },
           "connectDevice": {
-            "title": "Device"
-          },
-          "confirmation": {
-            "title": "Confirmation",
             "label": "Confirmation",
             "success": {
               "title": "You have successfully redelegated your assets",
@@ -962,6 +958,34 @@
               "title": "Broadcasting transaction..."
             },
             "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+          }
+        }
+      }
+    },
+    "undelegation": {
+      "flow": {
+        "title": "Undelegate assets",
+        "steps": {
+          "amount": {
+            "title": "Amount",
+            "fields": {
+              "validator": "Validator",
+              "amount": "Amount to undelegate"
+            }
+          },
+          "device": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "success": {
+              "title": "You have successfully undelegated your assets.",
+              "description": "🚨 NEED THIS TEXT HERE 🚨",
+              "cta": "View details"
+            },
+            "error": {
+              "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+            }
           }
         }
       }
