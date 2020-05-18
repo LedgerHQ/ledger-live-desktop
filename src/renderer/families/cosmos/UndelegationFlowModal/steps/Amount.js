@@ -16,51 +16,49 @@ export default function StepAmount({
   transaction,
   bridgePending,
   onUpdateTransaction,
+  status,
   validatorAddress,
 }: StepProps) {
   invariant(account && transaction && transaction.validators, "account and transaction required");
 
   const bridge = getAccountBridge(account);
 
-  const onChangeValidator = useCallback(
-    ({ address, amount }: FormattedDelegation) => {
+  const updateValidator = useCallback(
+    validatorFields => {
       onUpdateTransaction(tx =>
         bridge.updateTransaction(tx, {
           ...tx,
-          validators: [
-            {
-              address,
-              amount,
-            },
-          ],
+          validators: [{ ...tx.validators[0], ...validatorFields }],
         }),
       );
     },
     [onUpdateTransaction, bridge],
   );
 
+  const onChangeValidator = useCallback(
+    ({ address, rawAmount }: FormattedDelegation & { rawAmount: BigNumber }) => {
+      updateValidator({ address, amount: rawAmount });
+    },
+    [updateValidator],
+  );
+
   const onChangeAmount = useCallback(
     (amount: BigNumber) => {
-      onUpdateTransaction(tx =>
-        bridge.updateTransaction(tx, {
-          ...tx,
-          validators: [
-            {
-              ...tx.validators[0],
-              amount,
-            },
-          ],
-        }),
-      );
+      updateValidator({ amount });
     },
-    [onUpdateTransaction, bridge],
+    [updateValidator],
   );
 
   return (
     <Box flow={1}>
       <TrackPage category="Undelegation Flow" name="Step 1" />
       <ValidatorField account={account} transaction={transaction} onChange={onChangeValidator} />
-      <AmountField account={account} onChange={onChangeAmount} />
+      <AmountField
+        account={account}
+        transaction={transaction}
+        status={status}
+        onChange={onChangeAmount}
+      />
     </Box>
   );
 }

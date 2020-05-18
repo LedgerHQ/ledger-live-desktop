@@ -49,6 +49,7 @@ export default function Body({
     setTransaction,
     updateTransaction,
     bridgePending,
+    status,
   } = useBridgeTransaction(() => {
     invariant(accountProp.cosmosResources, "cosmos: account and cosmos resources required");
     const delegations = accountProp.cosmosResources.delegations || [];
@@ -60,9 +61,9 @@ export default function Body({
       validators: delegations
         .filter(d => d.validatorAddress === validatorAddress)
         .slice(0, 1)
-        .map(({ validatorAddress, pendingRewards }) => ({
+        .map(({ validatorAddress, amount }) => ({
           address: validatorAddress,
-          amount: pendingRewards,
+          amount,
         })),
       /** @TODO remove this once the bridge handles it */
       recipient: accountProp.freshAddress,

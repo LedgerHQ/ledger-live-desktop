@@ -41,6 +41,7 @@ export default function ValidatorField({ account, transaction, onChange }: Props
           alwaysShowSign: false,
           showCode: true,
         }),
+        rawAmount: d.amount,
       })),
     [rawDelegations, unit, validators],
   );
@@ -53,6 +54,8 @@ export default function ValidatorField({ account, transaction, onChange }: Props
       ),
     [query, delegations],
   );
+
+  console.log(options);
 
   const value = useMemo(
     () => delegations.find(({ address }) => address === transaction.validators[0].address),
