@@ -55,15 +55,19 @@ export default function Body({
     const bridge = getAccountBridge(accountProp, undefined);
 
     const initTx = bridge.createTransaction(accountProp);
-    const transaction = bridge.updateTransaction(initTx, {
+    const newTx = {
       mode: "undelegation",
-      validators: delegations.map(({ validatorAddress, amount }) => ({
-        address: validatorAddress,
-        amount,
-      })),
+      validators: delegations
+        .filter(d => d.validatorAddress === validatorAddress)
+        .slice(0, 1)
+        .map(({ validatorAddress, pendingRewards }) => ({
+          address: validatorAddress,
+          amount: pendingRewards,
+        })),
       /** @TODO remove this once the bridge handles it */
       recipient: accountProp.freshAddress,
-    });
+    };
+    const transaction = bridge.updateTransaction(initTx, newTx);
 
     return { account: accountProp, transaction };
   });
@@ -126,7 +130,6 @@ export default function Body({
     onOperationBroadcasted: handleOperationBroadcasted,
     onTransactionError: handleTransactionError,
     bridgePending,
-    validatorAddress,
   };
 
   return (
