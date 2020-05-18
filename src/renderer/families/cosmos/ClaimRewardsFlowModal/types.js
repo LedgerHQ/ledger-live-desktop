@@ -1,31 +1,34 @@
 // @flow
+import type { TFunction } from "react-i18next";
 import type { Device } from "~/renderer/reducers/devices";
 import type { Step } from "~/renderer/components/Stepper";
+
 import type { Account, TransactionStatus, Operation } from "@ledgerhq/live-common/lib/types";
+
 import type { Transaction } from "@ledgerhq/live-common/lib/families/cosmos/types";
 
-export type StepId = "amount" | "device" | "confirmation";
+export type StepId = "claimRewards" | "connectDevice" | "confirmation";
 
 export type StepProps = {
-  transitionTo: (address: string) => void,
+  t: TFunction,
+  transitionTo: string => void,
   device: ?Device,
   account: ?Account,
-  parentAccount: typeof undefined,
-  onRetry: () => void,
+  parentAccount: ?Account,
+  onRetry: void => void,
   onClose: () => void,
   openModal: (key: string, config?: any) => void,
-  optimisticOperation: any,
-  error: any,
+  optimisticOperation: *,
+  error: *,
   signed: boolean,
   transaction: ?Transaction,
   status: TransactionStatus,
-  onChangeTransaction: (tx: Transaction) => void,
-  onUpdateTransaction: ((tx: Transaction) => Transaction) => void,
-  onTransactionError: (error: Error) => void,
-  onOperationBroadcasted: (operation: Operation) => void,
-  setSigned: (signed: boolean) => void,
+  onChangeTransaction: Transaction => void,
+  onUpdateTransaction: ((Transaction) => Transaction) => void,
+  onTransactionError: Error => void,
+  onOperationBroadcasted: Operation => void,
+  setSigned: boolean => void,
   bridgePending: boolean,
-  validatorAddress: string,
 };
 
 export type St = Step<StepId, StepProps>;

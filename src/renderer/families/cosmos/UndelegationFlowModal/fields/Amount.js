@@ -1,6 +1,5 @@
 // @flow
 import React, { useMemo } from "react";
-import { BigNumber as BN } from "bignumber.js";
 import type { BigNumber } from "bignumber.js";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -29,10 +28,8 @@ export default function AmountField({
   const { t } = useTranslation();
   const unit = getAccountUnit(account);
 
-  const { spendableBalance } = account;
-
+  invariant(transaction.validators, "cosmos: validators is required");
   const newValidator = transaction.validators[0];
-  invariant(transaction.validators[0], "cosmos: validator is required");
 
   const validator = useMemo(
     () =>

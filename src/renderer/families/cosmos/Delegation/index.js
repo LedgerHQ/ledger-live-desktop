@@ -6,7 +6,6 @@ import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
 
 import type {
@@ -29,13 +28,18 @@ import Row from "./Row";
 
 import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
-import { useDiscreetMode } from "~/renderer/components/Discreet";
 
 /** @TODO move this in common */
 export const formatDelegations = (
   delegations: CosmosDelegation[],
   validators: CosmosValidatorItem[],
-): FormattedDelegation[] => {
+): {
+  validator: ?CosmosValidatorItem,
+  address: string,
+  pendingRewards: BigNumber,
+  amount: BigNumber,
+  status: CosmosDelegationStatus,
+}[] => {
   return delegations.map((d, i, arr) => ({
     validator: validators.find(v => v.validatorAddress === d.validatorAddress),
     address: d.validatorAddress,
@@ -43,14 +47,6 @@ export const formatDelegations = (
     pendingRewards: d.pendingRewards,
     status: d.status,
   }));
-};
-
-export type FormattedDelegation = {
-  validator: ?CosmosValidatorItem,
-  address: string,
-  pendingRewards: BigNumber,
-  amount: BigNumber,
-  status: CosmosDelegationStatus,
 };
 
 type Props = {
@@ -78,15 +74,6 @@ const Delegation = ({ account }: Props) => {
   const { cosmosResources } = account;
   invariant(cosmosResources, "cosmos account expected");
   const { delegations, pendingRewardsBalance: _pendingRewardsBalance } = cosmosResources;
-
-  const discreet = useDiscreetMode();
-
-  const pendingRewardsBalance = formatCurrencyUnit(unit, _pendingRewardsBalance, {
-    disableRounding: true,
-    alwaysShowSign: false,
-    showCode: true,
-    discreet,
-  });
 
   const formattedDelegations = formatDelegations(delegations, validators);
 
@@ -159,14 +146,7 @@ const Delegation = ({ account }: Props) => {
                 <Box horizontal flow={1} alignItems="center">
                   <ClaimRewards size={12} />
                   <Box>
-                    <Trans
-                      i18nKey={
-                        hasRewards
-                          ? "cosmos.delegation.claimAvailableRewards"
-                          : "cosmos.delegation.claimRewards"
-                      }
-                      values={{ amount: pendingRewardsBalance }}
-                    />
+                    <Trans i18nKey="cosmos.delegation.claimRewards" />
                   </Box>
                 </Box>
               </Button>

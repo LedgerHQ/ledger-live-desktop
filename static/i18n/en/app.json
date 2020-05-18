@@ -302,6 +302,9 @@
       "noOperationOnLastAccount": "Can't add a new account before you've received on your <1><0>{{accountName}}</0></1> account",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to create"
     },
+    "supportLinks": {
+      "segwit_or_native_segwit": "Segwit or Native Segwit?"
+    },
     "cta": {
       "addMore": "Add more",
       "add": "Add account",
@@ -882,6 +885,39 @@
             "success": {
               "title": "Delegation sent",
               "text": "Delegation transaction broadcasted successfully. You should earn your first rewards soon depending on the validator.",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+          }
+        }
+      }
+    },
+    "claimRewards": {
+      "flow": {
+        "title": "Claim rewards",
+        "steps": {
+          "claimRewards": {
+            "title": "Rewards",
+            "compound": "Compound",
+            "claim": "Claim",
+            "compoundOrClaim": "Compound or claim",
+            "compoundDescription": "NEEDS COMPOUND DESC TEXT",
+            "claimDescription": "NEEDS CLAIM DESC TEXT",
+            "compoundInfo": "You earned <0>{{amount}}</0> by delegation assets, they will be claimed now and automatically redelegated to the same validator",
+            "selectLabel": "Select a delegation"
+          },
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "Rewards claimed",
+              "text": "Your rewards have been added to your balance",
               "cta": "View details"
             },
             "pending": {

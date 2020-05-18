@@ -1,10 +1,11 @@
 //  @flow
+import semver from "semver";
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import { log } from "@ledgerhq/logs";
 import type { DeviceModelId } from "@ledgerhq/devices";
-import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
+import type { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
 import logger from "~/logger";
 import Modal from "~/renderer/components/Modal";
 import Stepper from "~/renderer/components/Stepper";
@@ -32,6 +33,7 @@ export type StepId = "idCheck" | "updateMCU" | "finish" | "resetDevice";
 type Step = TypedStep<StepId, StepProps>;
 
 type Props = {
+  withResetStep: boolean,
   status: ModalStatus,
   onClose: () => void,
   firmware: ?FirmwareUpdateContext,
@@ -49,9 +51,14 @@ const HookMountUnmount = ({ onMountUnmount }: { onMountUnmount: boolean => void 
   return null;
 };
 
+export function hasResetStep(deviceInfo: DeviceInfo, deviceModelId: DeviceModelId) {
+  return deviceModelId === "blue" && semver.lt(deviceInfo.version, "2.1.1");
+}
+
 const UpdateModal = ({
   stepId,
   deviceModelId,
+  withResetStep,
   error,
   status,
   onClose,
@@ -65,7 +72,7 @@ const UpdateModal = ({
   const { t } = useTranslation();
 
   const createSteps = useCallback(
-    ({ deviceModel }: { deviceModel: DeviceModelId }) => {
+    ({ withResetStep }: { withResetStep: boolean }) => {
       const updateStep = {
         id: "idCheck",
         label: t("manager.modal.identifier"),
@@ -103,17 +110,14 @@ const UpdateModal = ({
       };
 
       let steps = [updateStep, mcuStep, finalStep];
-      if (deviceModel === "blue") steps = [resetStep, ...steps];
+      if (withResetStep) steps = [resetStep, ...steps];
 
       return steps;
     },
     [t],
   );
 
-  const steps = useMemo(() => createSteps({ deviceModel: deviceModelId }), [
-    createSteps,
-    deviceModelId,
-  ]);
+  const steps = useMemo(() => createSteps({ withResetStep }), [createSteps, withResetStep]);
   const stepsId = steps.map(step => step.id);
   const errorSteps = err ? [stepsId.indexOf(stateStepId)] : [];
 

@@ -20,13 +20,13 @@ export function useSteps(): St[] {
       },
       {
         id: "device",
-        label: t("cosmos.delegation.flow.steps.connectDevice.title"),
+        label: t("cosmos.undelegation.flow.steps.device.title"),
         component: GenericStepConnectDevice,
         onBack: ({ transitionTo }: StepProps) => transitionTo("amount"),
       },
       {
         id: "confirmation",
-        label: t("cosmos.delegation.flow.steps.confirmation.title"),
+        label: t("cosmos.undelegation.flow.steps.confirmation.title"),
         component: StepConfirmation,
         footer: StepConfirmationFooter,
       },

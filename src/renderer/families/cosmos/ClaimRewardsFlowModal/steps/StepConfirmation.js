@@ -33,15 +33,16 @@ function StepConfirmation({
   theme,
   device,
   signed,
+  transaction,
 }: StepProps & { theme: * }) {
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Delegation Cosmos" name="Step Confirmed" />
+        <TrackPage category="ClaimRewards Cosmos Flow" name="Step Confirmed" />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
-          title={<Trans i18nKey="cosmos.delegation.flow.steps.confirmation.success.title" />}
-          description={multiline(t("cosmos.delegation.flow.steps.confirmation.success.text"))}
+          title={<Trans i18nKey="cosmos.claimRewards.flow.steps.confirmation.success.title" />}
+          description={multiline(t("cosmos.claimRewards.flow.steps.confirmation.success.text"))}
         />
       </Container>
     );
@@ -50,10 +51,10 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Delegation Cosmos" name="Step Confirmation Error" />
+        <TrackPage category="ClaimRewards Cosmos Flow" name="Step Confirmation Error" />
         {signed ? (
           <BroadcastErrorDisclaimer
-            title={<Trans i18nKey="cosmos.delegation.flow.steps.confirmation.broadcastError" />}
+            title={<Trans i18nKey="cosmos.claimRewards.flow.steps.confirmation.broadcastError" />}
           />
         ) : null}
         <ErrorDisplay error={error} withExportLogs />
@@ -90,7 +91,7 @@ export function StepConfirmationFooter({
         <Button
           primary
           ml={2}
-          event="Vote Flow Step 3 View OpD Clicked"
+          event="ClaimRewards Cosmos Flow Step 3 View OpD Clicked"
           onClick={() => {
             onClose();
             if (account && concernedOperation) {
@@ -102,7 +103,7 @@ export function StepConfirmationFooter({
             }
           }}
         >
-          <Trans i18nKey="cosmos.delegation.flow.steps.confirmation.success.cta" />
+          <Trans i18nKey="cosmos.claimRewards.flow.steps.confirmation.success.cta" />
         </Button>
       ) : error ? (
         <RetryButton primary ml={2} onClick={onRetry} />

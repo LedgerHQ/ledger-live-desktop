@@ -9,10 +9,10 @@ type State = {
 };
 
 const INITIAL_STATE = {
-  stepId: "castVotes",
+  stepId: "claimRewards",
 };
 
-class VoteModal extends PureComponent<{ name: string }, State> {
+class ClaimRewardsModal extends PureComponent<{ name: string }, State> {
   state = INITIAL_STATE;
 
   handleReset = () => this.setState({ ...INITIAL_STATE });
@@ -46,4 +46,4 @@ class VoteModal extends PureComponent<{ name: string }, State> {
   }
 }
 
-export default VoteModal;
+export default ClaimRewardsModal;

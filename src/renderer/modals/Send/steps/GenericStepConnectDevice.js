@@ -18,6 +18,7 @@ import type {
 import { command } from "~/renderer/commands";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { DeviceBlocker } from "~/renderer/components/DeviceAction/DeviceBlocker";
 
 const connectAppExec = command("connectApp");
 
@@ -33,6 +34,7 @@ const Result = ({
   if (!signedOperation) return null;
   return (
     <StepProgress modelId={device.modelId}>
+      <DeviceBlocker />
       <Trans i18nKey="send.steps.confirmation.pending.title" />
     </StepProgress>
   );
