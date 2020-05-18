@@ -907,7 +907,15 @@
             "title": "Device"
           },
           "confirmation": {
-            "title": "Confirmation"
+            "title": "Confirmation",
+            "success": {
+              "title": "You have successfully undelegated your assets.",
+              "description": "🚨 NEED THIS TEXT HERE 🚨",
+              "cta": "View details"
+            },
+            "error": {
+              "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+            }
           }
         }
       }

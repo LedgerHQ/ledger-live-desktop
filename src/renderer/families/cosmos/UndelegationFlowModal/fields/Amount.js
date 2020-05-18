@@ -31,11 +31,6 @@ export default function AmountField({
 
   const { spendableBalance } = account;
 
-  const showOptions = useMemo(() => spendableBalance.gt(BN(4 * 10 ** unit.magnitude)), [
-    spendableBalance,
-    unit,
-  ]);
-
   const newValidator = transaction.validators[0];
   invariant(transaction.validators[0], "cosmos: validator is required");
 
@@ -87,20 +82,18 @@ export default function AmountField({
         onChange={onChange}
         renderLeft={<InputLeft>{unit.code}</InputLeft>}
         renderRight={
-          showOptions && (
-            <InputRight>
-              {options.map(({ label, value }) => (
-                <AmountButton
-                  active={value.eq(newAmount)}
-                  key={label}
-                  error={!!errors.amount}
-                  onClick={() => onChange(value)}
-                >
-                  {label}
-                </AmountButton>
-              ))}
-            </InputRight>
-          )
+          <InputRight>
+            {options.map(({ label, value }) => (
+              <AmountButton
+                active={value.eq(newAmount)}
+                key={label}
+                error={!!errors.amount}
+                onClick={() => onChange(value)}
+              >
+                {label}
+              </AmountButton>
+            ))}
+          </InputRight>
         }
       />
     </Box>
