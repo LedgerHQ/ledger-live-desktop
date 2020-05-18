@@ -71,17 +71,19 @@ export default function AmountField({
     [amount],
   );
 
+  const error = useMemo(() => Object.values(errors || {})[0], [errors]);
+  const warning = useMemo(() => Object.values(warnings || {})[0], [warnings]);
+
   return (
     <Box mt={5}>
       <Label>{t("cosmos.undelegation.flow.steps.amount.fields.amount")}</Label>
       <InputCurrency
         autoFocus={false}
-        // error={errors.amount}
-        // warning={warnings.amount}
+        error={error}
+        warning={warning}
         containerProps={{ grow: true }}
         unit={unit}
         value={newAmount}
-        decimals={0}
         onChange={onChange}
         renderLeft={<InputLeft>{unit.code}</InputLeft>}
         renderRight={
