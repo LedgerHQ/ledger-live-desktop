@@ -17,8 +17,11 @@ import Text from "~/renderer/components/Text";
 import WarnBox from "~/renderer/components/WarnBox";
 import Box from "~/renderer/components/Box";
 
-import { formatDelegationsInfo } from "./operationDetails";
-import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import {
+  useCosmosPreloadData,
+  formatDelegationsInfo,
+} from "@ledgerhq/live-common/lib/families/cosmos/react";
+
 import {
   OpDetailsData,
   OpDetailsVoteData,
