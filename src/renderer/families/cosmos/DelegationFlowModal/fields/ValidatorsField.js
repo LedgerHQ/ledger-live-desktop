@@ -3,17 +3,20 @@ import invariant from "invariant";
 import React, { useCallback, useState, useRef, useEffect, useMemo } from "react";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
-
 import type { TFunction } from "react-i18next";
+
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 import type { Account, TransactionStatus, Unit } from "@ledgerhq/live-common/lib/types";
+import {
+  useCosmosPreloadData,
+  useSortedValidators,
+} from "@ledgerhq/live-common/lib/families/cosmos/react";
 import type {
   CosmosDelegationInfo,
   CosmosValidatorItem,
 } from "@ledgerhq/live-common/lib/families/cosmos/types";
-
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
-import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
+import { formatValue, MAX_VOTES } from "@ledgerhq/live-common/lib/families/cosmos/utils";
 
 import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
@@ -25,71 +28,6 @@ import ValidatorSearchInput, {
 } from "~/renderer/components/Delegation/ValidatorSearchInput";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Text from "~/renderer/components/Text";
-
-/** @TODO move this in common */
-const MAX_VOTES = 5;
-
-/** @TODO move this in common */
-const formatValue = (value: BigNumber, unit: Unit): number =>
-  value
-    .dividedBy(10 ** unit.magnitude)
-    .integerValue(BigNumber.ROUND_FLOOR)
-    .toNumber();
-
-/** @TODO move this in common */
-/** Search filters for validator list */
-const searchFilter = (query?: string) => ({
-  name,
-  address,
-}: {
-  name: ?string,
-  address: string,
-}) => {
-  if (!query) return true;
-  const terms = `${name || ""} ${address}`;
-  return terms.toLowerCase().includes(query.toLowerCase().trim());
-};
-
-/** @TODO move this in common */
-/** Hook to search and sort SR list according to initial votes and query */
-export function useSortedValidators(
-  search: string,
-  validators: CosmosValidatorItem[],
-  delegations: CosmosDelegationInfo[],
-): {
-  validator: CosmosValidatorItem,
-  name: ?string,
-  address: string,
-  rank: number,
-}[] {
-  const { current: initialVotes } = useRef(delegations.map(({ address }) => address));
-
-  const formattedValidators = useMemo(
-    () =>
-      validators.map((validator, rank) => ({
-        validator,
-        name: validator.name,
-        address: validator.validatorAddress,
-        rank: rank + 1,
-      })),
-    [validators],
-  );
-
-  const sortedVotes = useMemo(
-    () =>
-      formattedValidators
-        .filter(({ address }) => initialVotes.includes(address))
-        .concat(formattedValidators.filter(({ address }) => !initialVotes.includes(address))),
-    [formattedValidators, initialVotes],
-  );
-
-  const sr = useMemo(
-    () => (search ? formattedValidators.filter(searchFilter(search)) : sortedVotes),
-    [search, formattedValidators, sortedVotes],
-  );
-
-  return sr;
-}
 
 type Props = {
   t: TFunction,
