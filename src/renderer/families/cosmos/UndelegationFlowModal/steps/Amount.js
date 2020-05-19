@@ -31,7 +31,7 @@ export default function StepAmount({
           validators:
             tx.validators && tx.validators.length > 0
               ? [{ ...tx.validators[0], ...validatorFields }]
-              : [{ ...validatorFields }],
+              : [validatorFields],
         }),
       );
     },
