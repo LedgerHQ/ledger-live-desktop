@@ -1,6 +1,6 @@
 // @flow
-import React, { useState } from "react";
-import { useCosmosFormattedDelegations } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import React from "react";
+import { useCosmosDelegationsQuerySelector } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import type {
   CosmosValidatorItem,
   CosmosDelegationStatus,
@@ -33,29 +33,23 @@ const renderItem = ({
 };
 
 export default function DelegationSelectorField({ account, transaction, t, onChange }: *) {
-  const [search, setSearch] = useState();
-
-  const formattedDelegations = useCosmosFormattedDelegations(account, "claimReward");
-
-  const filteredDelegations = formattedDelegations.filter(({ validator }) => {
-    return !search || !validator || new RegExp(search, "gi").test(validator.name);
-  });
-
-  const selectedValidator = filteredDelegations.find(
-    ({ address }) => address === transaction.validators[0].address,
+  const { query, setQuery, options, value } = useCosmosDelegationsQuerySelector(
+    account,
+    transaction,
+    "claimReward",
   );
 
   return (
     <Box flow={1} mt={5}>
       <Label>{t("cosmos.claimRewards.flow.steps.claimRewards.selectLabel")}</Label>
       <Select
-        value={selectedValidator}
-        options={filteredDelegations}
+        value={value}
+        options={options}
         getOptionValue={({ address }) => address}
         renderValue={renderItem}
         renderOption={renderItem}
-        onInputChange={setSearch}
-        inputValue={search}
+        onInputChange={setQuery}
+        inputValue={query}
         filterOption={false}
         placeholder={t("common.selectAccount")}
         noOptionsMessage={({ inputValue }) =>

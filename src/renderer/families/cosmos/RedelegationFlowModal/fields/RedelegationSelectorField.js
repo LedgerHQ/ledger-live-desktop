@@ -1,22 +1,15 @@
 // @flow
-import React, { useState } from "react";
-
+import React from "react";
+import { useCosmosDelegationsQuerySelector } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import type {
   CosmosValidatorItem,
   CosmosDelegationStatus,
 } from "@ledgerhq/live-common/lib/families/cosmos/types";
-
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
-
 import Box from "~/renderer/components/Box";
-
-import Select from "~/renderer/components/Select";
-import { formatDelegations } from "../../Delegation/index";
-import Text from "~/renderer/components/Text";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Label from "~/renderer/components/Label";
+import Select from "~/renderer/components/Select";
+import Text from "~/renderer/components/Text";
 
 const renderItem = ({
   data: { validator, address, formattedAmount, status },
@@ -40,45 +33,23 @@ const renderItem = ({
 };
 
 export default function RedelegationSelectorField({ account, transaction, t, onChange }: *) {
-  const unit = getAccountUnit(account);
-
-  const [search, setSearch] = useState();
-
-  const { validators } = useCosmosPreloadData();
-
-  const delegations = account.cosmosResources && account.cosmosResources.delegations;
-
-  const formattedDelegations = formatDelegations(delegations, validators).map(
-    ({ amount, ...rest }) => ({
-      ...rest,
-      amount,
-      formattedAmount: formatCurrencyUnit(unit, amount, {
-        disableRounding: true,
-        alwaysShowSign: false,
-        showCode: true,
-      }),
-    }),
-  );
-
-  const filteredDelegations = formattedDelegations.filter(({ validator }) => {
-    return !search || !validator || new RegExp(search, "gi").test(validator.name);
-  });
-
-  const selectedValidator = filteredDelegations.find(
-    ({ address }) => address === transaction.cosmosSourceValidator,
+  const { query, setQuery, options, value } = useCosmosDelegationsQuerySelector(
+    account,
+    transaction,
+    "redelegate",
   );
 
   return (
     <Box flow={1} mb={5}>
       <Label>{t("cosmos.redelegation.flow.steps.validators.currentDelegation")}</Label>
       <Select
-        value={selectedValidator}
-        options={filteredDelegations}
+        value={value}
+        options={options}
         getOptionValue={({ address }) => address}
         renderValue={renderItem}
         renderOption={renderItem}
-        onInputChange={setSearch}
-        inputValue={search}
+        onInputChange={setQuery}
+        inputValue={query}
         filterOption={false}
         placeholder={t("common.selectAccount")}
         noOptionsMessage={({ inputValue }) =>

@@ -1,7 +1,7 @@
 // @flow
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { useCosmosFormattedDelegations } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import { useCosmosDelegationsQuerySelector } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import type { CosmosFormattedDelegation } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/cosmos/types";
 import type { Account } from "@ledgerhq/live-common/lib/types";
@@ -19,30 +19,10 @@ type Props = {
 
 export default function ValidatorField({ account, transaction, onChange }: Props) {
   const { t } = useTranslation();
-
-  const [query, setQuery] = useState("");
-
-  const delegations = useCosmosFormattedDelegations(account, "undelegate");
-
-  const options = useMemo(
-    () =>
-      delegations.filter(
-        // [TODO] better query test
-        ({ validator }) => !query || !validator || new RegExp(query, "gi").test(validator.name),
-      ),
-    [query, delegations],
-  );
-
-  console.log(options);
-
-  const selectedValidator = useMemo(() => transaction.validators && transaction.validators[0], [
+  const { query, setQuery, options, value } = useCosmosDelegationsQuerySelector(
+    account,
     transaction,
-  ]);
-
-  const value = useMemo(
-    () =>
-      selectedValidator && delegations.find(({ address }) => address === selectedValidator.address),
-    [delegations, selectedValidator],
+    "undelegate",
   );
 
   return (
@@ -62,10 +42,10 @@ export default function ValidatorField({ account, transaction, onChange }: Props
 }
 
 type OptionRowProps = {
-  data: CosmosFormattedDelegation & { formattedAmount: string },
+  data: CosmosFormattedDelegation,
 };
 
-function OptionRow({ data: { address, validator, formattedAmount } }: OptionRowProps, i) {
+function OptionRow({ data: { address, validator, formattedAmount } }: OptionRowProps) {
   return (
     <Box key={address} horizontal alignItems="center" justifyContent="space-between">
       <Box horizontal alignItems="center">
