@@ -1,5 +1,4 @@
 // @flow
-import invariant from "invariant";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
@@ -32,12 +31,11 @@ export default function ValidatorField({ account, transaction, onChange }: Props
     () =>
       formattedDelegations.map(d => ({
         ...d,
-        amount: formatCurrencyUnit(unit, d.amount, {
+        formattedAmount: formatCurrencyUnit(unit, d.amount, {
           disableRounding: true,
           alwaysShowSign: false,
           showCode: true,
         }),
-        rawAmount: d.amount,
       })),
     [formattedDelegations, unit],
   );
@@ -51,9 +49,14 @@ export default function ValidatorField({ account, transaction, onChange }: Props
     [query, delegations],
   );
 
+  const selectedValidator = useMemo(() => transaction.validators && transaction.validators[0], [
+    transaction,
+  ]);
+
   const value = useMemo(
-    () => delegations.find(({ address }) => address === transaction.validators[0].address),
-    [delegations, transaction],
+    () =>
+      selectedValidator && delegations.find(({ address }) => address === selectedValidator.address),
+    [delegations, selectedValidator],
   );
 
   return (
@@ -73,17 +76,17 @@ export default function ValidatorField({ account, transaction, onChange }: Props
 }
 
 type OptionRowProps = {
-  data: CosmosFormattedDelegation,
+  data: CosmosFormattedDelegation & { formattedAmount: string },
 };
 
-function OptionRow({ data: { address, validator, amount } }: OptionRowProps, i) {
+function OptionRow({ data: { address, validator, formattedAmount } }: OptionRowProps, i) {
   return (
     <Box key={address} horizontal alignItems="center" justifyContent="space-between">
       <Box horizontal alignItems="center">
         <FirstLetterIcon label={validator?.name ?? address} mr={2} />
         <Text ff="Inter|Medium">{validator?.name ?? address}</Text>
       </Box>
-      <Text ff="Inter|Regular">{amount}</Text>
+      <Text ff="Inter|Regular">{formattedAmount}</Text>
     </Box>
   );
 }

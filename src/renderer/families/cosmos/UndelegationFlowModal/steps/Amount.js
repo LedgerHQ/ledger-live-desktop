@@ -1,7 +1,7 @@
 // @flow
-import type { BigNumber } from "bignumber.js";
+import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import type { CosmosFormattedDelegation } from "@ledgerhq/live-common/lib/families/cosmos/react";
@@ -28,7 +28,10 @@ export default function StepAmount({
       onUpdateTransaction(tx =>
         bridge.updateTransaction(tx, {
           ...tx,
-          validators: [{ ...tx.validators[0], ...validatorFields }],
+          validators:
+            tx.validators && tx.validators.length > 0
+              ? [{ ...tx.validators[0], ...validatorFields }]
+              : [validatorFields],
         }),
       );
     },
@@ -36,8 +39,8 @@ export default function StepAmount({
   );
 
   const onChangeValidator = useCallback(
-    ({ address, rawAmount }: CosmosFormattedDelegation & { rawAmount: BigNumber }) => {
-      updateValidator({ address, amount: rawAmount });
+    ({ address, amount }: CosmosFormattedDelegation) => {
+      updateValidator({ address, amount });
     },
     [updateValidator],
   );
@@ -49,13 +52,20 @@ export default function StepAmount({
     [updateValidator],
   );
 
+  const validator = useMemo(() => transaction.validators && transaction.validators[0], [
+    transaction,
+  ]);
+
+  const amount = useMemo(() => (validator ? validator.amount : BigNumber(0)), [validator]);
+
   return (
     <Box flow={1}>
       <TrackPage category="Undelegation Flow" name="Step 1" />
       <ValidatorField account={account} transaction={transaction} onChange={onChangeValidator} />
       <AmountField
+        amount={amount}
+        validator={validator}
         account={account}
-        transaction={transaction}
         status={status}
         onChange={onChangeAmount}
       />

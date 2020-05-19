@@ -859,6 +859,8 @@
       "undelegate": "Undelegate",
       "redelegate": "Redelegate",
       "reward": "Collect rewards",
+      "votingPower": "Voting power: {{amount}}%",
+      "estYield": "est. yield",
       "flow": {
         "title": "Delegate assets",
         "steps": {
@@ -918,6 +920,44 @@
             "success": {
               "title": "Rewards claimed",
               "text": "Your rewards have been added to your balance",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+          }
+        }
+      }
+    },
+    "redelegation": {
+      "flow": {
+        "title": "Redelegate assets",
+        "steps": {
+          "starter": {
+            "title": "Redelegation",
+            "description": "Redelegate assets from one validator to another. Redelegating allows your stake to continuously generate rewards.",
+            "warning": "Once redelegated, the ATOM can’t be redelegated for a <0>21 days period</0>. You can only have <0>7 pending redelegations</0> at the same time.",
+            "howDelegationWorks": "How delegation works?"
+          },
+          "validators": {
+            "title": "Validators",
+            "currentDelegation": "Current delegation",
+            "newDelegation": "New delegation",
+            "chooseValidator": "Choose a validator",
+            "warning": "You will have to wait <0>21 days</0> to redelegate ATOM from the redelegated validator",
+            "selectInfo": "Redelegate assets from one validator to another. Redelegating allows your stake to continuously generate rewards.",
+            "searchPlaceholder": "Search by name or address",
+            "redelegationAmount": "Redelegation amount"
+          },
+          "device": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "success": {
+              "title": "You have successfully redelegated your assets",
+              "text": "NEED TEXT HERE",
               "cta": "View details"
             },
             "pending": {
@@ -1487,7 +1527,11 @@
       "claimReward": "Please confirm the operation on your device to claim your rewards",
       "freeze": "Please confirm the operation on your device to freeze assets",
       "unfreeze": "Please confirm the operation on your device to unfreeze your assets",
-      "vote": "Please confirm the operation on your device to cast your votes"
+      "vote": "Please confirm the operation on your device to cast your votes",
+      "delegate": "You have successfully delegated your assets. Please confirm the operation on your device to cast your votes",
+      "undelegate": "Please confirm the operation on your device to undelegate",
+      "redelegate": "You have successfully redelegated your assets. Please confirm the operation on your device to cast your votes",
+      "claimRewardCompound": "Please confirm the operation on your device to coumpound your rewards."
     },
     "recipientWording": {
       "send": "recipient",

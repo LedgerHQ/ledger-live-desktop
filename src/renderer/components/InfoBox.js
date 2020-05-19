@@ -10,7 +10,7 @@ import { FakeLink } from "./Link";
 
 type Props = {
   children: React$Node,
-  onLearnMore: () => void,
+  onLearnMore?: () => void,
 };
 
 export default function InfoBox({ children: description, onLearnMore }: Props) {
@@ -23,11 +23,13 @@ export default function InfoBox({ children: description, onLearnMore }: Props) {
           {description}
         </Text>
       </Box>
-      <Box>
-        <Text ff="Inter|SemiBold" fontSize={3}>
-          <FakeLink onClick={onLearnMore}>{t("common.learnMore")}</FakeLink>
-        </Text>
-      </Box>
+      {onLearnMore && (
+        <Box>
+          <Text ff="Inter|SemiBold" fontSize={3}>
+            <FakeLink onClick={onLearnMore}>{t("common.learnMore")}</FakeLink>
+          </Text>
+        </Box>
+      )}
     </Container>
   );
 }

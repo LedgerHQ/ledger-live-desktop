@@ -1,7 +1,6 @@
 // @flow
 import invariant from "invariant";
 import React, { useCallback, useState, useRef, useEffect, useMemo } from "react";
-import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 
@@ -16,16 +15,16 @@ import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 
-import { languageSelector } from "~/renderer/reducers/settings";
 import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
-import Trophy from "~/renderer/icons/Trophy";
 import ValidatorRow, { IconContainer } from "~/renderer/components/Delegation/ValidatorRow";
 import ValidatorListHeader from "~/renderer/components/Delegation/ValidatorListHeader";
 import ScrollLoadingList from "~/renderer/components/ScrollLoadingList";
 import ValidatorSearchInput, {
   NoResultPlaceholder,
 } from "~/renderer/components/Delegation/ValidatorSearchInput";
+import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
+import Text from "~/renderer/components/Text";
 
 /** @TODO move this in common */
 const MAX_VOTES = 5;
@@ -117,8 +116,6 @@ const ValidatorField = ({
 
   const unit = getAccountUnit(account);
 
-  const language = useSelector(languageSelector);
-
   const { validators } = useCosmosPreloadData();
   const SR = useSortedValidators(search, validators, delegations);
 
@@ -186,17 +183,27 @@ const ValidatorField = ({
           validator={{ ...validator, address }}
           icon={
             <IconContainer isSR>
-              <Trophy size={16} />
+              <FirstLetterIcon label={validator.name || validator.address} />
             </IconContainer>
           }
           title={`${rank}. ${validator.name || validator.address}`}
           subtitle={
             <Trans
-              i18nKey="vote.steps.castDelegations.totalDelegations"
-              values={{ total: validator.votingPower.toLocaleString(language) }}
-            >
-              <b></b>
-            </Trans>
+              i18nKey="cosmos.delegation.votingPower"
+              values={{ amount: (validator.votingPower * 1e2).toFixed(2) }}
+            />
+          }
+          sideInfo={
+            <Box pr={1}>
+              <Text textAlign="center" ff="Inter|SemiBold" fontSize={2}>
+                {validator.estimatedYearlyRewardsRate
+                  ? (validator.estimatedYearlyRewardsRate * 1e2).toFixed(2)
+                  : "N/A"}
+              </Text>
+              <Text textAlign="center" fontSize={1}>
+                <Trans i18nKey="cosmos.delegation.estYield" />
+              </Text>
+            </Box>
           }
           value={item && item.amount ? formatValue(item.amount, unit) : 0}
           onUpdateVote={onUpdateDelegation}
@@ -209,7 +216,6 @@ const ValidatorField = ({
     },
     [
       delegations,
-      language,
       onUpdateDelegation,
       onExternalLink,
       delegationsSelected,

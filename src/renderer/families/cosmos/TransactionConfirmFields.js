@@ -1,7 +1,7 @@
 // @flow
 
 import invariant from "invariant";
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
@@ -46,7 +46,7 @@ const AddressText = styled(Text).attrs(() => ({
   max-width: 50%;
 `;
 
-const Pre = ({
+const CosmosValidatorsField = ({
   account,
   parentAccount,
   transaction,
@@ -61,106 +61,99 @@ const Pre = ({
 
   const unit = getAccountUnit(mainAccount);
 
-  const { validators, cosmosSourceValidator } = transaction;
+  const { validators } = transaction;
   const { validators: cosmosValidators } = useCosmosPreloadData();
 
   const formatedValidators = formatDelegationsInfo(validators || [], cosmosValidators);
 
-  return (
+  return transaction.mode === "claimReward" || transaction.mode === "claimRewardCompound" ? (
     <>
-      {cosmosSourceValidator && (
-        <TransactionConfirmField label="Resource">
-          <AddressText ff="Inter|SemiBold">
-            {cosmosSourceValidator.slice(0, 1).toUpperCase() +
-              cosmosSourceValidator.slice(1).toLowerCase()}
-          </AddressText>
-        </TransactionConfirmField>
-      )}
-      {transaction.mode === "claimReward" || transaction.mode === "claimRewardCompound" ? (
-        <>
-          <TransactionConfirmField label="Validator">
-            <AddressText ff="Inter|SemiBold">{formatedValidators[0].address}</AddressText>
-          </TransactionConfirmField>
-          <TransactionConfirmField label="Reward amount">
-            <AddressText ff="Inter|SemiBold">
-              {formatCurrencyUnit(unit, formatedValidators[0].amount, {
-                disableRounding: false,
-                alwaysShowSign: false,
-                showCode: true,
-              })}
-            </AddressText>
-          </TransactionConfirmField>
-        </>
-      ) : (
-        formatedValidators &&
-        formatedValidators.length > 0 && (
-          <Box vertical justifyContent="space-between" mb={2}>
-            <TransactionConfirmField label={`Validators (${formatedValidators.length})`} />
-
-            {formatedValidators
-              .map(({ amount, ...delegation }) => ({
-                ...delegation,
-                amount: formatCurrencyUnit(unit, BigNumber(amount), {
-                  disableRounding: false,
-                  alwaysShowSign: false,
-                  showCode: true,
-                }),
-              }))
-              .map(({ amount, address, validator }, i) => (
-                <OpDetailsData key={address + i}>
-                  <OpDetailsVoteData>
-                    <Box>
-                      <Text>
-                        <Trans
-                          i18nKey="operationDetails.extra.votesAddress"
-                          values={{
-                            votes: amount,
-                            name: validator ? validator.name : address,
-                          }}
-                        >
-                          <Text ff="Inter|SemiBold">{""}</Text>
-                          {""}
-                          <Text ff="Inter|SemiBold">{""}</Text>
-                        </Trans>
-                      </Text>
-                    </Box>
-                    <Address>{address}</Address>
-                  </OpDetailsVoteData>
-                </OpDetailsData>
-              ))}
-          </Box>
-        )
-      )}
+      <TransactionConfirmField label="Validator">
+        <AddressText ff="Inter|SemiBold">{formatedValidators[0].address}</AddressText>
+      </TransactionConfirmField>
+      <TransactionConfirmField label="Reward amount">
+        <AddressText ff="Inter|SemiBold">
+          {formatCurrencyUnit(unit, formatedValidators[0].amount, {
+            disableRounding: false,
+            alwaysShowSign: false,
+            showCode: true,
+          })}
+        </AddressText>
+      </TransactionConfirmField>
     </>
+  ) : (
+    formatedValidators && formatedValidators.length > 0 && (
+      <Box vertical justifyContent="space-between" mb={2}>
+        <TransactionConfirmField label={`Validators (${formatedValidators.length})`} />
+
+        {formatedValidators
+          .map(({ amount, ...delegation }) => ({
+            ...delegation,
+            amount: formatCurrencyUnit(unit, BigNumber(amount), {
+              disableRounding: false,
+              alwaysShowSign: false,
+              showCode: true,
+            }),
+          }))
+          .map(({ amount, address, validator }, i) => (
+            <OpDetailsData key={address + i}>
+              <OpDetailsVoteData>
+                <Box>
+                  <Text>
+                    <Trans
+                      i18nKey="operationDetails.extra.votesAddress"
+                      values={{
+                        votes: amount,
+                        name: validator ? validator.name : address,
+                      }}
+                    >
+                      <Text ff="Inter|SemiBold">{""}</Text>
+                      {""}
+                      <Text ff="Inter|SemiBold">{""}</Text>
+                    </Trans>
+                  </Text>
+                </Box>
+                <Address>{address}</Address>
+              </OpDetailsVoteData>
+            </OpDetailsData>
+          ))}
+      </Box>
+    )
   );
 };
 
-const Post = ({
-  transaction,
+const CosmosSourceValidatorField = ({
   account,
   parentAccount,
+  transaction,
 }: {
   account: AccountLike,
   parentAccount: ?Account,
   transaction: Transaction,
 }) => {
   invariant(transaction.family === "cosmos", "cosmos transaction");
-  const mainAccount = getMainAccount(account, parentAccount);
 
-  invariant(transaction.family === "cosmos", "cosmos transaction");
-
-  const from = mainAccount.freshAddress;
-
-  const { mode } = transaction;
+  const { cosmosSourceValidator } = transaction;
+  const { validators: cosmosValidators } = useCosmosPreloadData();
+  const formattedValidator = useMemo(
+    () => cosmosValidators.find(v => v.validatorAddress === cosmosSourceValidator),
+    [cosmosValidators, cosmosSourceValidator],
+  );
 
   return (
-    <>
-      {mode !== "send" ? (
-        <TransactionConfirmField label="From Address">
-          <AddressText>{from}</AddressText>
-        </TransactionConfirmField>
-      ) : null}
-    </>
+    cosmosSourceValidator && (
+      <TransactionConfirmField label="From">
+        <Box alignContent="flex-end" vertical>
+          <Text ff="Inter|Medium" fontSize={4}>
+            {formattedValidator && formattedValidator.name}
+          </Text>
+          <AddressText ff="Inter|Regular" fontSize={3}>
+            {cosmosSourceValidator.slice(0, 1).toUpperCase() +
+              cosmosSourceValidator.slice(1).toLowerCase()}
+          </AddressText>
+        </Box>
+      </TransactionConfirmField>
+    )
   );
 };
 
@@ -175,6 +168,10 @@ const Warning = ({
 
   switch (transaction.mode) {
     case "delegate":
+    case "undelegate":
+    case "redelegate":
+    case "claimReward":
+    case "claimRewardCompound":
       return null;
     default:
       return (
@@ -195,9 +192,13 @@ const Title = ({ transaction }: { transaction: Transaction }) => {
   );
 };
 
+const fieldComponents = {
+  "cosmos.cosmosSourceValidator": CosmosSourceValidatorField,
+  "cosmos.validators": CosmosValidatorsField,
+};
+
 export default {
-  pre: Pre,
-  post: Post,
+  fieldComponents,
   warning: Warning,
   title: Title,
   disableFees: () => true,
