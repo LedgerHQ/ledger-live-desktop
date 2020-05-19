@@ -61,7 +61,7 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
       );
     } else {
       dispatch(
-        openModal("MODAL_REWARDS_INFO", {
+        openModal("MODAL_TRON_REWARDS_INFO", {
           parentAccount,
           account,
         }),

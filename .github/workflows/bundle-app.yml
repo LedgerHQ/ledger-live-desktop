@@ -1,14 +1,22 @@
 name: bundle app
-on: [pull_request]
+on:
+  pull_request:
+    branches:
+      - "*"
+  push:
+    branches:
+      - develop
+      - master
 
 jobs:
   bundle-macos:
     runs-on: macos-latest
     steps:
-      - uses: ledgerhq/actions/check-member@v1.0.0
+      - uses: ledgerhq/actions/check-member@v1.1.0
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
+        if: github.event_name == 'pull_request'
       - uses: actions/checkout@v1
       - uses: actions/setup-node@master
         with:
@@ -23,8 +31,13 @@ jobs:
         id: version
       - uses: ledgerhq/actions/get-pr-number@v1.0.0
         id: pr
-      - name: make local version
+        if: github.event_name == 'pull_request'
+      - name: make local version (pr)
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
+        if: github.event_name == 'pull_request'
+      - name: make local version (push)
+        run: yarn version --new-version=${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
+        if: github.event_name == 'push'
       - name: build the app
         run: yarn nightly
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
@@ -42,6 +55,7 @@ jobs:
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
+        if: github.event_name == 'pull_request'
       - uses: actions/checkout@v1
       - uses: actions/setup-node@master
         with:
@@ -67,8 +81,13 @@ jobs:
         id: version
       - uses: ledgerhq/actions/get-pr-number@v1.0.0
         id: pr
-      - name: make local version
+        if: github.event_name == 'pull_request'
+      - name: make local version (pr)
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
+        if: github.event_name == 'pull_request'
+      - name: make local version (push)
+        run: yarn version --new-version=${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
+        if: github.event_name == 'push'
       - name: build the app
         run: yarn nightly
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
@@ -81,10 +100,11 @@ jobs:
   bundle-windows:
     runs-on: windows-latest
     steps:
-      - uses: ledgerhq/actions/check-member@v1.0.0
+      - uses: ledgerhq/actions/check-member@v1.1.0
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
+        if: github.event_name == 'pull_request'
       - uses: actions/checkout@v1
       - uses: actions/setup-node@master
         with:
@@ -107,15 +127,20 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
-      - uses: ledgerhq/actions/get-package-infos@v1.0.0
+      - uses: ledgerhq/actions/get-package-infos@v1.1.0
         id: version
-      - uses: ledgerhq/actions/get-pr-number@v1.0.0
+      - uses: ledgerhq/actions/get-pr-number@v1.1.0
         id: pr
-      - name: make local version
+        if: github.event_name == 'pull_request'
+      - name: make local version (pr)
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
+        if: github.event_name == 'pull_request'
+      - name: make local version (push)
+        run: yarn version --new-version=${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
+        if: github.event_name == 'push'
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.0.0
+      - uses: ledgerhq/actions/get-package-infos@v1.1.0
         id: post-version
       - name: upload windows
         uses: actions/upload-artifact@v1

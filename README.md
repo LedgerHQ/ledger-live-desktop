@@ -1,4 +1,4 @@
-# Ledger Live (desktop) [![CircleCI](https://circleci.com/gh/LedgerHQ/ledger-live-desktop.svg?style=svg)](https://circleci.com/gh/LedgerHQ/ledger-live-desktop) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/ledger-wallet/localized.svg)](https://crowdin.com/project/ledger-wallet)
+# Ledger Live (desktop) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/ledger-wallet/localized.svg)](https://crowdin.com/project/ledger-wallet)
 
 - Related: [ledger-live-mobile](https://github.com/ledgerhq/ledger-live-mobile)
 - Backed by: [ledger-live-common](https://github.com/ledgerhq/ledger-live-common)

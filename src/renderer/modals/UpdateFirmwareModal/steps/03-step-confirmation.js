@@ -56,7 +56,7 @@ const StepConfirmation = ({ error }: StepProps) => {
 export const StepConfirmFooter = ({ onCloseModal }: StepProps) => {
   const { t } = useTranslation();
   return (
-    <Button primary onClick={onCloseModal}>
+    <Button id={"firmware-update-completed-close-button"} primary onClick={onCloseModal}>
       {t("common.close")}
     </Button>
   );

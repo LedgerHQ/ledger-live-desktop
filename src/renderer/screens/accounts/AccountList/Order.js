@@ -9,10 +9,11 @@ import { saveSettings } from "~/renderer/actions/settings";
 import Track from "~/renderer/analytics/Track";
 import BoldToggle from "~/renderer/components/BoldToggle";
 import Box from "~/renderer/components/Box";
-import DropDown, { DropDownItem } from "~/renderer/components/DropDown";
-import type { DropDownItemType } from "~/renderer/components/DropDown";
+import DropDownSelector, { DropDownItem } from "~/renderer/components/DropDownSelector";
+import type { DropDownItemType } from "~/renderer/components/DropDownSelector";
 import Text from "~/renderer/components/Text";
 import IconAngleDown from "~/renderer/icons/AngleDown";
+import IconAngleUp from "~/renderer/icons/AngleUp";
 import { getOrderAccounts } from "~/renderer/reducers/settings";
 
 const items = ["balance|desc", "balance|asc", "name|asc", "name|desc"].map(key => ({
@@ -41,38 +42,47 @@ const Order = ({ orderAccounts, saveSettings, refreshAccountsOrdering }: Props) 
   const value = items.find(item => item.key === orderAccounts);
 
   return (
-    <DropDown
-      flow={1}
-      offsetTop={2}
-      horizontal
+    <DropDownSelector
       items={items}
       renderItem={renderItem}
       onChange={onChange}
+      controlled
       value={value}
     >
-      <Track onUpdate event="ChangeSort" orderAccounts={orderAccounts} />
-      <Text ff="Inter|SemiBold" fontSize={4}>
-        <Trans i18nKey="common.sortBy" />
-      </Text>
-      <Box alignItems="center" color="wallet" ff="Inter|SemiBold" flow={1} fontSize={4} horizontal>
-        <Text color="wallet">
-          <Trans i18nKey={`accounts.order.${orderAccounts}`} />
-        </Text>
-        <IconAngleDown size={16} />
-      </Box>
-    </DropDown>
+      {({ isOpen, value }) =>
+        value ? (
+          <Box horizontal flow={1}>
+            <Track onUpdate event="ChangeSort" orderAccounts={orderAccounts} />
+            <Text ff="Inter|SemiBold" fontSize={4}>
+              <Trans i18nKey="common.sortBy" />
+            </Text>
+            <Box
+              alignItems="center"
+              color="wallet"
+              ff="Inter|SemiBold"
+              flow={1}
+              fontSize={4}
+              horizontal
+            >
+              <Text color="wallet">
+                <Trans i18nKey={`accounts.order.${value.key}`} />
+              </Text>
+              {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
+            </Box>
+          </Box>
+        ) : null
+      }
+    </DropDownSelector>
   );
 };
 
 type ItemProps = {
   item: DropDownItemType,
-  isHighlighted: boolean,
   isActive: boolean,
 };
 
 const OrderItem: React$ComponentType<ItemProps> = React.memo(function OrderItem({
   item,
-  isHighlighted,
   isActive,
 }: ItemProps) {
   return (
@@ -80,7 +90,6 @@ const OrderItem: React$ComponentType<ItemProps> = React.memo(function OrderItem(
       alignItems="center"
       justifyContent="flex-start"
       horizontal
-      isHighlighted={isHighlighted}
       isActive={isActive}
       flow={2}
     >

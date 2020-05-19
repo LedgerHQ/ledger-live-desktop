@@ -93,7 +93,7 @@ const StepStarter = ({ transitionTo, t, openedWithAccount }: StepProps) => {
             onClick={() => openURL(urls.stakingTezos)}
           />
         </Box>
-        <Button onClick={onClick} primary>
+        <Button id={"delegate-starter-continue-button"} onClick={onClick} primary>
           <Trans i18nKey="delegation.flow.steps.starter.button.cta" />
         </Button>
       </Box>

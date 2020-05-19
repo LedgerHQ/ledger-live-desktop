@@ -82,7 +82,13 @@ export class StepAmountFooter extends PureComponent<StepProps> {
     return (
       <>
         <AccountFooter parentAccount={parentAccount} account={account} status={status} />
-        <Button isLoading={bridgePending} primary disabled={!canNext} onClick={this.onNext}>
+        <Button
+          id={"send-amount-continue-button"}
+          isLoading={bridgePending}
+          primary
+          disabled={!canNext}
+          onClick={this.onNext}
+        >
           <Trans i18nKey="common.continue" />
         </Button>
       </>

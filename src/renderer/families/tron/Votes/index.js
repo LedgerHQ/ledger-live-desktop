@@ -100,7 +100,7 @@ const Delegation = ({ account }: Props) => {
   const onEarnRewards = useCallback(
     () =>
       dispatch(
-        openModal("MODAL_REWARDS_INFO", {
+        openModal("MODAL_TRON_REWARDS_INFO", {
           account,
         }),
       ),
@@ -132,8 +132,9 @@ const Delegation = ({ account }: Props) => {
         >
           <Trans i18nKey="tron.voting.header" />
         </Text>
-        {tronPower > 0 && (formattedVotes.length > 0 || canClaimRewards) ? (
-          <Box horizontal>
+
+        <Box horizontal>
+          {tronPower > 0 && formattedVotes.length > 0 ? (
             <Button small primary onClick={onDelegate} mr={2}>
               <Box horizontal flow={1} alignItems="center">
                 <Vote size={12} />
@@ -148,6 +149,8 @@ const Delegation = ({ account }: Props) => {
                 </Box>
               </Box>
             </Button>
+          ) : null}
+          {formattedVotes.length > 0 || canClaimRewards ? (
             <ToolTip
               content={
                 !canClaimRewards ? (
@@ -190,8 +193,8 @@ const Delegation = ({ account }: Props) => {
                 </Box>
               </Button>
             </ToolTip>
-          </Box>
-        ) : null}
+          ) : null}
+        </Box>
       </Box>
       {tronPower > 0 && formattedVotes.length > 0 ? (
         <Card p={0} mt={24} mb={6}>

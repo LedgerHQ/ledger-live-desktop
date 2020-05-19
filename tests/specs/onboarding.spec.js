@@ -5,6 +5,7 @@ import GenuinePage from "../po/genuine.page";
 import PasswordPage from "../po/password.page";
 import AnalyticsPage from "../po/analytics.page";
 import PortfolioPage from "../po/portfolio.page";
+import LockscreenPage from "../po/lockscreen.page";
 import data from "../data/onboarding/";
 import { deviceInfo155, mockListAppsResult } from "@ledgerhq/live-common/lib/apps/mock";
 
@@ -18,16 +19,18 @@ describe("When I launch the app for the first time", () => {
   let passwordPage;
   let analyticsPage;
   let portfolioPage;
+  let lockscreenPage;
   let mockDeviceEvent;
 
   beforeAll(() => {
-    app = applicationProxy({ MOCK: true });
+    app = applicationProxy({ MOCK: true, DISABLE_MOCK_POINTER_EVENTS: true });
     onboardingPage = new OnboardingPage(app);
     modalPage = new ModalPage(app);
     genuinePage = new GenuinePage(app);
     passwordPage = new PasswordPage(app);
     analyticsPage = new AnalyticsPage(app);
     portfolioPage = new PortfolioPage(app);
+    lockscreenPage = new LockscreenPage(app);
     mockDeviceEvent = getMockDeviceEvent(app);
 
     return app.start();
@@ -253,7 +256,10 @@ describe("When I launch the app for the first time", () => {
         it("should perform a genuine check - and fail", async () => {
           expect(await modalPage.title.getText()).toBe(data.genuine.modalTitle);
           await app.client.pause(2000); // FIXME wait until the spinner is visible?
-          await mockDeviceEvent({ type: "error", error: { name: "GenuineCheckFailed" } });
+          await mockDeviceEvent(
+            { type: "error", error: { name: "GenuineCheckFailed" } },
+            { type: "complete" },
+          );
           await app.client.pause(2000);
           expect(await app.client.element("#error-GenuineCheckFailed").isVisible()).toBe(true);
           await modalPage.closeButton.click();
@@ -413,22 +419,82 @@ describe("When I launch the app for the first time", () => {
         expect(await onboardingPage.redditButton.isVisible()).toBe(true);
       });
     });
+  });
 
-    describe("When opening the app", () => {
-      it("should display the terms of use modal", async () => {
-        await onboardingPage.open();
-        expect(await modalPage.isVisible()).toBe(true);
-        expect(await modalPage.termsCheckbox.isVisible()).toBe(true);
+  describe("When the app is opened", () => {
+    it("should display the terms of use modal", async () => {
+      await onboardingPage.open();
+      expect(await modalPage.isVisible()).toBe(true);
+      expect(await modalPage.termsCheckbox.isVisible()).toBe(true);
+    });
+
+    it("should close the modal after accepting the terms of use", async () => {
+      await modalPage.termsCheckbox.click();
+      await modalPage.confirmButton.click();
+      expect(await modalPage.isVisible(true)).toBe(false);
+    });
+
+    it("should display the portfolio", async () => {
+      expect(await portfolioPage.isVisible()).toBe(true);
+    });
+
+    it("should display the lock icon", async () => {
+      expect(await portfolioPage.topbarLockButton.isVisible()).toBe(true);
+    });
+
+    describe("When I lock the app", () => {
+      it("should display lock screen", async () => {
+        await portfolioPage.topbarLockButton.click();
+        expect(await portfolioPage.isVisible(true)).toBe(false);
+        expect(await lockscreenPage.isVisible()).toBe(true);
+        expect(await lockscreenPage.logo.isVisible()).toBe(true);
+        // FIXME: LL-2410
+        // expect(await lockscreenPage.pageTitle.getText()).toBe(data.lock.title);
+        // expect(await lockscreenPage.pageDescription.getText()).toBe(data.lock.description);
+        expect(await lockscreenPage.passwordInput.isVisible()).toBe(true);
+        expect(await lockscreenPage.revealButton.isVisible()).toBe(true);
+        expect(await lockscreenPage.loginButton.isVisible()).toBe(true);
+        expect(await lockscreenPage.forgottenButton.isVisible()).toBe(true);
       });
 
-      it("should close the modal after accepting the terms of use", async () => {
-        await modalPage.termsCheckbox.click();
-        await modalPage.confirmButton.click();
-        expect(await modalPage.isVisible(true)).toBe(false);
+      describe("When I click on reveal button", () => {
+        it("should reveal the password input value", async () => {
+          await lockscreenPage.revealButton.click();
+          expect(await lockscreenPage.passwordInput.getAttribute("type")).toBe("text");
+        });
       });
 
-      it("should display the portfolio", async () => {
-        expect(await portfolioPage.isVisible()).toBe(true);
+      describe("When I click on forgotten password button", () => {
+        it("should open a modal and ask to reset the app", async () => {
+          await lockscreenPage.forgottenButton.click();
+          expect(await modalPage.isVisible()).toBe(true);
+          expect(await modalPage.title.getText()).toBe(data.lockscreen.reset.title);
+          expect(await modalPage.closeButton.isVisible()).toBe(true);
+          expect(await modalPage.cancelButton.isVisible()).toBe(true);
+          expect(await modalPage.confirmButton.isVisible()).toBe(true);
+          await modalPage.closeButton.click();
+          expect(await modalPage.isVisible(true)).toBe(false);
+        });
+      });
+    });
+
+    describe("When I unlock the app", () => {
+      describe("and password is incorrect", () => {
+        it("should warn about password mismatch", async () => {
+          await lockscreenPage.passwordInput.addValue(`${data.password.bad}\uE007`);
+          expect(await lockscreenPage.inputError.getText()).toBe(
+            "The password you entered is incorrect",
+          );
+        });
+      });
+
+      describe("and password is correct", () => {
+        it("should back to the portfolio", async () => {
+          await lockscreenPage.passwordInput.setValue(data.password.new);
+          await lockscreenPage.loginButton.click();
+          expect(await lockscreenPage.isVisible(true)).toBe(false);
+          expect(await portfolioPage.isVisible()).toBe(true);
+        });
       });
     });
   });

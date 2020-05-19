@@ -5,11 +5,11 @@ import Dashboard from "~/renderer/screens/manager/Dashboard";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import { command } from "~/renderer/commands";
-import { mockedAppExec } from "~/renderer/components/DebugMock";
+import { mockedEventEmitter } from "~/renderer/components/DebugMock";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 
 const connectManagerExec = command("connectManager");
-const action = createAction(getEnv("MOCK") ? mockedAppExec : connectManagerExec);
+const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectManagerExec);
 
 const Manager = () => {
   const [result, setResult] = useState(null);

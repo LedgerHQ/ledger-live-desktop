@@ -1,14 +1,11 @@
 // @flow
 
 import React from "react";
-import Tippy from "@tippy.js/react";
+import Tippy from "@tippyjs/react";
+
 import styled from "styled-components";
 import get from "lodash/get";
-import { followCursor as followCursorPlugin } from "tippy.js";
-
-import "tippy.js/dist/tippy.css";
-import "tippy.js/animations/shift-toward.css";
-import "tippy.js/dist/svg-arrow.css";
+import { followCursor as followCursorPlugin, roundArrow } from "tippy.js";
 
 import useTheme from "~/renderer/hooks/useTheme";
 
@@ -41,9 +38,6 @@ export const defaultTippyOptions = {
   plugins: [followCursorPlugin],
 };
 
-const Arrow = bg =>
-  `<svg viewBox="0 0 24 8"><path fill=${bg} d="M5 8l5.5-5.6c.8-.8 2-.8 2.8 0L19 8" /></svg>`;
-
 type Props = {
   tooltipBg?: string,
   children?: React$Node,
@@ -64,7 +58,7 @@ const ToolTip = ({
   children,
   content,
   delay,
-  enabled,
+  enabled = true,
   disableWrapper = false,
   placement = "top",
   arrow = true,
@@ -80,9 +74,9 @@ const ToolTip = ({
       {...defaultTippyOptions}
       content={<ContentContainer bg={bg}>{content}</ContentContainer>}
       delay={[delay, 0]}
-      arrow={content && arrow ? Arrow(bg) : null}
+      arrow={arrow ? roundArrow : false}
       followCursor={followCursor}
-      enabled={!!content && enabled}
+      disabled={!(!!content && enabled)}
       placement={placement}
       flip={flip}
       hideOnClick={hideOnClick}

@@ -36,7 +36,11 @@ const scanAccounts = ({ currency, deviceId, syncConfig }) =>
   }).pipe(map(fromScanAccountEventRaw));
 
 export const getCurrencyBridge = (currency: CryptoCurrency): CurrencyBridge => ({
-  preload: () => bridgeImpl.getCurrencyBridge(currency).preload(),
+  preload: async () => {
+    const value = await command("CurrencyPreload")({ currencyId: currency.id }).toPromise();
+    bridgeImpl.getCurrencyBridge(currency).hydrate(value);
+    return value;
+  },
 
   hydrate: value => bridgeImpl.getCurrencyBridge(currency).hydrate(value),
 

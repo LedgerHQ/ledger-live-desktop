@@ -14,6 +14,7 @@ import IconClock from "~/renderer/icons/Clock";
 import IconReceive from "~/renderer/icons/Receive";
 import IconDelegate from "~/renderer/icons/Delegate";
 import IconUndelegate from "~/renderer/icons/Undelegate";
+import IconRedelegate from "~/renderer/icons/Redelegate";
 import IconSend from "~/renderer/icons/Send";
 import IconPlus from "~/renderer/icons/Plus";
 import IconEye from "~/renderer/icons/Eye";
@@ -85,6 +86,7 @@ const iconsComponent = {
   OUT: IconSend,
   IN: IconReceive,
   DELEGATE: IconDelegate,
+  REDELEGATE: IconRedelegate,
   UNDELEGATE: IconUndelegate,
   REVEAL: IconEye,
   CREATE: IconPlus,

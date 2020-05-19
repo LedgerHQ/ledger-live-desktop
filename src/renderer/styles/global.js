@@ -25,6 +25,14 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: ${radii[1]}px;
   }
 
+  .tippy-box {
+    background-color: transparent;
+  }
+
+  .tippy-box[data-theme~='ledger'] > .tippy-svg-arrow {
+    fill: ${p => p.theme.colors.palette.text.shade100};
+  }
+
   .tippy-tooltip.ledger-theme .tippy-svg-arrow {
     fill: ${p => p.theme.colors.palette.text.shade100};
   }

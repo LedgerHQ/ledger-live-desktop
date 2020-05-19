@@ -6,7 +6,7 @@ import styled, { withTheme } from "styled-components";
 import { Trans } from "react-i18next";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import { multiline } from "~/renderer/styles/helpers";
-import { openModal, closeModal } from "~/renderer/actions/modals";
+import { openModal } from "~/renderer/actions/modals";
 import { urls } from "~/config/urls";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
@@ -95,6 +95,7 @@ export const StepConfirmationFooter = ({
   onRetry,
   optimisticOperation,
   error,
+  closeModal,
 }: StepProps) => {
   const dispatch = useDispatch();
   const concernedOperation = optimisticOperation
@@ -113,9 +114,10 @@ export const StepConfirmationFooter = ({
       {concernedOperation ? (
         <Button
           ml={2}
+          id={"delegate-confirmation-details-button"}
           event="Delegation Flow Step 4 View OpD Clicked"
           onClick={() => {
-            dispatch(closeModal());
+            closeModal();
             if (account && concernedOperation) {
               dispatch(
                 openModal("MODAL_OPERATION_DETAILS", {

@@ -46,6 +46,7 @@
     "dismiss": "Dismiss",
     "information": "Information",
     "search": "Search...",
+    "manage": "Manage",
     "lockScreen": {
       "title": "Bienvenido de nuevo",
       "subTitle": null,
@@ -70,6 +71,7 @@
       "CREATE": "Created",
       "REVEAL": "Revealed",
       "DELEGATE": "Delegated",
+      "REDELEGATE": "Redelegated",
       "UNDELEGATE": "Undelegated",
       "VOTE": "Voted",
       "FREEZE": "Frozen",
@@ -140,10 +142,14 @@
     "frozenAssets": "Frozen assets",
     "bandwidth": "Bandwidth",
     "energy": "Energy",
+    "delegatedAssets": "Delegated assets",
+    "undelegating": "Undelegating",
     "availableBalanceTooltip": "This amount can be sent anytime.",
     "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
     "bandwidthTooltip": "Freeze assets to gain bandwidth",
-    "energyTooltip": "Freeze assets to gain energy"
+    "energyTooltip": "Freeze assets to gain energy",
+    "delegatedAssetsTooltip": "These are your currently delegated assets",
+    "undelegatingTooltip": "These are your assets currently being undelegated"
   },
   "accounts": {
     "title": "Cuentas",
@@ -214,31 +220,6 @@
         "help": "Help"
       }
     }
-  },
-  "partners": {
-    "title": "Comprar crypto",
-    "desc": "Prueba algunos de los servicios que hemos seleccionado",
-    "visitWebsite": "Visita la página web",
-    "btcdirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot.",
-    "changelly": "Changelly es un conocido cambiador instantáneo de criptoactivos que cotiza más de 100 monedas y tokens.",
-    "changenow": "ChangeNOW is one of the leading custody-free instant exchange services.",
-    "coinberry": "Coinberry es la plataforma de criptomonedas que disfruta de mayor confianza al ofrecer una seguridad superior a la de los bancos, una interfaz de usuario de primera clase y financiación y retirada sin comisión. Preinscríbete para obtener un acceso rápido a nuestra plataforma si no eres ciudadano canadiense.",
-    "coinhouse": "Coinhouse es una plataforma de confianza para individuos e inversores institucionales que buscan analizar, comprar, vender y guardar criptoactivos con seguridad.",
-    "coinmama": "Coinmama es un servicio financiero que permite comprar criptoactivos de forma segura, rápida y divertida en cualquier parte del mundo.",
-    "crypto": "Crypto.com is the best place to buy, sell, track and pay with crypto.",
-    "genesis": "Genesis es una empresa comercial institucional que ofrece liquidez y préstamos en monedas digitales, incluidas bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin y XRP.",
-    "kyberswap": "Plataforma rápida, sencilla y segura de canje de tokens. Alimentada por el protocolo de liquidez en cadena de Kyber Network.",
-    "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum.",
-    "paybis": "Paybis.com is one of the most trusted cryptocurrency brokers worldwide since 2014, customer satisfaction - 4.7/5 via Trustpilot. Visa/Master cards, Bank Transfers, Skrill/Neteller accepted. 24/7 online customer support.",
-    "shapeshift": "ShapeShift es un marketplace en línea donde los usuarios pueden comprar y vender criptoactivos. Es una forma rápida y segura para que cualquiera compre o venda activos digitales, sin tediosos procesos de inscripción, sin riesgos de contraparte y sin fricciones.",
-    "simplex": "Simplex es una institución financiera con licencia en la UE que ofrece una solución de pago antifraude con tarjeta de crédito.",
-    "swft": "SWFT Blockchain is a worldwide cross-blockchain transfer protocol and payment network, enabling simpler, faster and safer swaps between over 200 cryptocurrencies and free crypto payments to anyone anywhere",
-    "taxtoken": "Software de base fiscal y costes de criptomonedas automatizado para ciudadanos de EE.UU.",
-    "thorswap": "ThorSwap es una plataforma para el intercambio de criptoactivos de forma instantánea, segura y fiable, utilizando tecnologías descentralizadas para intercambios atómicos. Es la forma más fácil de comenzar a negociar, sin registro ni procesos KYC para operaciones con pequeñas cantidades.",
-    "bitpanda": "Bitpanda es el principal agente minorista en Europa de intercambio para la compra y venta de Bitcoin, Ethereum, IOTA y muchas otras. Deposita monedas utilizando tu tarjeta de crédito, Transferencia SOFORT, NETELLER y otras opciones.",
-    "exmo": "Fundada en 2013 y con sede en Londres, Kiev, Barcelona y Moscú, EXMO es la casa de bolsa número uno en Europa del Este y una de las bolsas mundiales de volumen y liquidez más grandes del mundo.",
-    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure and intuitive platform to buy and sell Bitcoin, Litecoin, Ethereum, XRP and other digital assets. Other key features include advanced trading, free deposits, and an institutional-grade custody solution via Ledger Vault.",
-    "voyager": "Love your Crypto Journey with Voyager. A licensed crypto broker with commission-free trading of 20+ cryptocurrencies."
   },
   "genuinecheck": {
     "modal": {
@@ -372,7 +353,17 @@
       "unfreezeAmount": "Unfreeze amount",
       "address": "Address",
       "votes": "Votes ({{number}})",
-      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>"
+      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
+      "validators": "Validators",
+      "delegated": "Delegated ({{amount}})",
+      "redelegated": "Redelegated ({{amount}})",
+      "redelegatedFrom": "Redelegated from",
+      "redelegatedTo": "Redelegated to",
+      "undelegated": "Undelegated ({{amount}})",
+      "undelegatedFrom": "Undelegated from",
+      "undelegatedAmount": "Undelegated amount",
+      "rewardFrom": "Reward from",
+      "rewardAmount": "Amount collected"
     }
   },
   "operationList": {
@@ -615,7 +606,7 @@
         "title": "Confirmation",
         "success": {
           "title": "",
-          "text": "Your assets have been unfrozen successfully. Your Bandwidth points will be decreased and your votes will be canceled.",
+          "text": "Your assets have been unfrozen successfully. Your {{resource}} points will be decreased and your votes will be canceled.",
           "continue": "Continue"
         },
         "pending": {
@@ -849,6 +840,24 @@
       }
     }
   },
+  "cosmos": {
+    "delegation": {
+      "emptyState": {
+        "description": "Delegate your assets to one or more validators to start earning rewards.",
+        "info": "How Delegating works",
+        "delegation": "Earn rewards"
+      },
+      "claimRewards": "Claim rewards",
+      "claimAvailableRewards": "Claim {{amount}}",
+      "header": "Delegations",
+      "Amount": "Amount",
+      "noRewards": "No rewards available",
+      "delegate": "Delegate",
+      "undelegate": "Undelegate",
+      "redelegate": "Redelegate",
+      "reward": "Collect rewards"
+    }
+  },
   "delegation": {
     "title": "Earn rewards",
     "header": "Delegation",
@@ -858,6 +867,9 @@
     "transactionID": "Transaction ID",
     "value": "Value",
     "amount": "Amount",
+    "delegated": "Delegated",
+    "rewards": "Rewards",
+    "distribution": "Distribution",
     "duration": "Duration",
     "durationJustStarted": "Just started",
     "durationDays": "{{count}} day",
@@ -866,6 +878,7 @@
     "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
     "earnRewards": "Earn rewards",
     "overdelegated": "Overdelegated",
+    "status": "Status",
     "flow": {
       "steps": {
         "starter": {
