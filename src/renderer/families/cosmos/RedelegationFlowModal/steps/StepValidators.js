@@ -1,12 +1,15 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
+import styled from "styled-components";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 
 import type { StepProps } from "../types";
 
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
@@ -16,6 +19,21 @@ import StepRecipientSeparator from "~/renderer/components/StepRecipientSeparator
 import ValidatorField from "../fields/ValidatorField";
 import InfoBox from "~/renderer/components/InfoBox";
 import { AmountField } from "~/renderer/families/cosmos/UndelegationFlowModal/fields/index";
+
+const Container: ThemedComponent<*> = styled(Box).attrs(p => ({
+  flow: 1,
+  relative: true,
+  mr: -p.theme.overflow.trackSize,
+}))`
+  min-height: 330px;
+  max-height: calc(100% - ${p => p.theme.space[6]}px);
+  padding-bottom: 20px;
+  margin-bottom: -${p => p.theme.space[6]}px;
+  overflow-y: ${p => (p.isOpen ? "hidden" : "scroll")};
+  > * + * {
+    margin-top: 0px;
+  }
+`;
 
 export default function StepValidators({
   account,
@@ -104,8 +122,10 @@ export default function StepValidators({
     selectedValidator,
   ]);
 
+  const [validatorOpen, setValidatorOpen] = useState(false);
+
   return (
-    <Box flow={1} relative>
+    <Container isOpen={validatorOpen}>
       <TrackPage category="Redelegation Flow" name="Step 1" />
       <RedelegationSelectorField
         transaction={transaction}
@@ -119,22 +139,31 @@ export default function StepValidators({
         account={account}
         t={t}
         onChange={updateDestinationValidator}
+        onOpenChange={setValidatorOpen}
+        isOpen={validatorOpen}
       />
-      {selectedValidator && (
-        <AmountField
-          amount={amount}
-          validator={sourceValidator}
-          account={account}
-          status={status}
-          onChange={onChangeAmount}
-        />
+      {!validatorOpen && (
+        <>
+          {selectedValidator && (
+            <Box mb={2}>
+              <AmountField
+                amount={amount}
+                validator={sourceValidator}
+                account={account}
+                status={status}
+                onChange={onChangeAmount}
+              />
+            </Box>
+          )}
+
+          <InfoBox>
+            <Trans i18nKey="cosmos.redelegation.flow.steps.validators.warning">
+              <b></b>
+            </Trans>
+          </InfoBox>
+        </>
       )}
-      <InfoBox>
-        <Trans i18nKey="cosmos.redelegation.flow.steps.validators.warning">
-          <b></b>
-        </Trans>
-      </InfoBox>
-    </Box>
+    </Container>
   );
 }
 

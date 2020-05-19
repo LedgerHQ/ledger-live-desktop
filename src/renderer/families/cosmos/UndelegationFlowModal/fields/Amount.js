@@ -12,7 +12,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 type Props = {
   amount: BigNumber,
-  validator: ?{ amount: BigNumber },
+  validator: *,
   account: Account,
   status: TransactionStatus,
   onChange: (amount: BigNumber) => void,
@@ -28,7 +28,10 @@ export default function AmountField({
   const { t } = useTranslation();
   const unit = getAccountUnit(account);
 
-  const initialAmount = useMemo(() => (validator ? validator.amount : BigNumber(0)), [validator]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const initialAmount = useMemo(() => (validator ? validator.amount : BigNumber(0)), [
+    validator.address,
+  ]);
 
   const options = useMemo(
     () => [

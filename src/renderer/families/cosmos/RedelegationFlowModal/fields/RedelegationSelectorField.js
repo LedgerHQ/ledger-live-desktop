@@ -51,7 +51,7 @@ export default function RedelegationSelectorField({
   );
 
   return (
-    <Box flow={1} mb={5}>
+    <Box flow={1} pb={3}>
       <Label>{t("cosmos.redelegation.flow.steps.validators.currentDelegation")}</Label>
       <Select
         value={value}

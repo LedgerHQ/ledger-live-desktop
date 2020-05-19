@@ -45,17 +45,27 @@ const ValidatorsSection = styled(Box)`
   background-color: ${p => p.theme.colors.palette.background.paper};
   opacity: ${p => (p.isOpen ? 1 : 0)};
   pointer-events: ${p => (p.isOpen ? "auto" : "none")};
-  transition: all 200ms ease-in-out;
+  z-index: 10;
+  margin-top: 0px;
+  padding-bottom: ${p => p.theme.space[6]}px;
 `;
 
-export default function ValidatorField({ account, transaction, t, onChange }: *) {
+export default function ValidatorField({
+  account,
+  transaction,
+  t,
+  onChange,
+  onOpenChange,
+  isOpen,
+}: *) {
   const { validators } = useCosmosPreloadData();
 
-  const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
 
-  const open = useCallback(() => setIsOpen(true), [setIsOpen]);
-  const close = useCallback(() => setIsOpen(false), [setIsOpen]);
+  const open = useCallback(() => {
+    onOpenChange(true);
+  }, [onOpenChange]);
+  const close = useCallback(() => onOpenChange(false), [onOpenChange]);
   const onSearch = useCallback(evt => setSearch(evt.target.value), [setSearch]);
 
   const sortedValidators = useSortedValidators(search, validators, []);
@@ -128,7 +138,7 @@ export default function ValidatorField({ account, transaction, t, onChange }: *)
   );
 
   return (
-    <Box flow={1} mt={5} mb={2}>
+    <Box flow={1} pb={1}>
       <Label>{t("cosmos.redelegation.flow.steps.validators.newDelegation")}</Label>
       <SelectButton onClick={open}>
         <Box flex="1" horizontal alignItems="center" justifyContent="space-between">
@@ -158,14 +168,16 @@ export default function ValidatorField({ account, transaction, t, onChange }: *)
             />
           </Text>
         </Box>
-        <ScrollLoadingList
-          data={sortedValidators}
-          style={{ flex: "1 0 240px" }}
-          renderItem={renderItem}
-          noResultPlaceholder={
-            validators.length <= 0 && search && <NoResultPlaceholder search={search} />
-          }
-        />
+        {isOpen && (
+          <ScrollLoadingList
+            data={sortedValidators}
+            style={{ flex: "1 0 240px" }}
+            renderItem={renderItem}
+            noResultPlaceholder={
+              validators.length <= 0 && search && <NoResultPlaceholder search={search} />
+            }
+          />
+        )}
       </ValidatorsSection>
     </Box>
   );
