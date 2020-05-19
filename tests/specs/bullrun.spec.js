@@ -4,23 +4,28 @@ import ModalPage from "../po/modal.page";
 import GenuinePage from "../po/genuine.page";
 import PasswordPage from "../po/password.page";
 import AnalyticsPage from "../po/analytics.page";
-import PortfolioPage from "../po/portfolio.page";
+// import PortfolioPage from "../po/portfolio.page";
 import data from "../data/onboarding/";
 import {
   deviceInfo155 as deviceInfo,
   mockListAppsResult,
 } from "@ledgerhq/live-common/lib/apps/mock";
+import { toMatchImageSnapshot } from "jest-image-snapshot";
+import { delay } from "@ledgerhq/live-common/lib/promise";
+
+expect.extend({ toMatchImageSnapshot });
 
 jest.setTimeout(600000);
 
 describe("Bullrun", () => {
   let app;
+  let image;
   let onboardingPage;
   let modalPage;
   let genuinePage;
   let passwordPage;
   let analyticsPage;
-  let portfolioPage;
+  // let portfolioPage;
   let mockDeviceEvent;
 
   beforeAll(async () => {
@@ -30,9 +35,8 @@ describe("Bullrun", () => {
     genuinePage = new GenuinePage(app);
     passwordPage = new PasswordPage(app);
     analyticsPage = new AnalyticsPage(app);
-    portfolioPage = new PortfolioPage(app);
+    // portfolioPage = new PortfolioPage(app);
     mockDeviceEvent = getMockDeviceEvent(app);
-
     return app.start();
   });
 
@@ -63,8 +67,26 @@ describe("Bullrun", () => {
   it("go through onboarding", async () => {
     await app.client.waitForVisible("#onboarding-get-started-button", 20000);
     await onboardingPage.getStarted();
+    await delay(1000);
+    image = await app.browserWindow.capturePage();
+    expect(image).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-get-started",
+      allowSizeMismatch: true,
+    });
     await onboardingPage.selectConfiguration("new");
+    await delay(1000);
+    image = await app.browserWindow.capturePage();
+    expect(image).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-screen-new",
+      allowSizeMismatch: true,
+    });
     await onboardingPage.selectDevice("nanox");
+    await delay(1000);
+    image = await app.browserWindow.capturePage();
+    expect(image).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-screen-nano-x",
+      allowSizeMismatch: true,
+    });
     await onboardingPage.continue();
     await onboardingPage.continue();
     await onboardingPage.continue();
