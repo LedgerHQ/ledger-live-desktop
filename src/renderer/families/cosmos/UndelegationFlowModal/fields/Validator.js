@@ -1,8 +1,6 @@
 // @flow
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { useCosmosFormattedDelegations } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import type { CosmosFormattedDelegation } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/cosmos/types";
@@ -24,21 +22,7 @@ export default function ValidatorField({ account, transaction, onChange }: Props
 
   const [query, setQuery] = useState("");
 
-  const unit = useMemo(() => getAccountUnit(account), [account]);
-  const formattedDelegations = useCosmosFormattedDelegations(account);
-
-  const delegations = useMemo(
-    () =>
-      formattedDelegations.map(d => ({
-        ...d,
-        formattedAmount: formatCurrencyUnit(unit, d.amount, {
-          disableRounding: true,
-          alwaysShowSign: false,
-          showCode: true,
-        }),
-      })),
-    [formattedDelegations, unit],
-  );
+  const delegations = useCosmosFormattedDelegations(account, "undelegate");
 
   const options = useMemo(
     () =>
@@ -48,6 +32,8 @@ export default function ValidatorField({ account, transaction, onChange }: Props
       ),
     [query, delegations],
   );
+
+  console.log(options);
 
   const selectedValidator = useMemo(() => transaction.validators && transaction.validators[0], [
     transaction,

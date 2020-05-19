@@ -1,21 +1,15 @@
 // @flow
 import React, { useState } from "react";
-
+import { useCosmosFormattedDelegations } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import type {
   CosmosValidatorItem,
   CosmosDelegationStatus,
 } from "@ledgerhq/live-common/lib/families/cosmos/types";
-
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import { useCosmosFormattedDelegations } from "@ledgerhq/live-common/lib/families/cosmos/react";
-
 import Box from "~/renderer/components/Box";
-
-import Select from "~/renderer/components/Select";
-import Text from "~/renderer/components/Text";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Label from "~/renderer/components/Label";
+import Select from "~/renderer/components/Select";
+import Text from "~/renderer/components/Text";
 
 const renderItem = ({
   data: { validator, address, reward, status },
@@ -39,23 +33,9 @@ const renderItem = ({
 };
 
 export default function DelegationSelectorField({ account, transaction, t, onChange }: *) {
-  const unit = getAccountUnit(account);
-
   const [search, setSearch] = useState();
 
-  const fDelegations = useCosmosFormattedDelegations();
-
-  const formattedDelegations = fDelegations(account)
-    .filter(({ pendingRewards }) => pendingRewards.gt(0))
-    .map(({ pendingRewards, ...rest }) => ({
-      ...rest,
-      pendingRewards,
-      reward: formatCurrencyUnit(unit, pendingRewards, {
-        disableRounding: true,
-        alwaysShowSign: false,
-        showCode: true,
-      }),
-    }));
+  const formattedDelegations = useCosmosFormattedDelegations(account, "claimReward");
 
   const filteredDelegations = formattedDelegations.filter(({ validator }) => {
     return !search || !validator || new RegExp(search, "gi").test(validator.name);
