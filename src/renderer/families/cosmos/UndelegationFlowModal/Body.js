@@ -57,7 +57,7 @@ export default function Body({
 
     const initTx = bridge.createTransaction(accountProp);
     const newTx = {
-      mode: "undelegation",
+      mode: "undelegate",
       validators: delegations
         .filter(d => d.validatorAddress === validatorAddress)
         .slice(0, 1)

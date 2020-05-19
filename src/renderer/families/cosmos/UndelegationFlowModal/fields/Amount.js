@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { BigNumber } from "bignumber.js";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -28,10 +28,15 @@ export default function AmountField({
   const { t } = useTranslation();
   const unit = getAccountUnit(account);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const initialAmount = useMemo(() => (validator ? validator.amount : BigNumber(0)), [
-    validator.address,
-  ]);
+  const [currentValidator, setCurrentValidator] = useState(validator);
+  const [initialAmount, setInitialAmount] = useState(validator ? validator.amount : BigNumber(0));
+
+  useEffect(() => {
+    if (validator && validator.address !== currentValidator.address) {
+      setCurrentValidator(validator);
+      setInitialAmount(validator.amount);
+    }
+  }, [validator, currentValidator]);
 
   const options = useMemo(
     () => [
