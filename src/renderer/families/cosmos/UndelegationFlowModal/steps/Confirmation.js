@@ -24,6 +24,8 @@ export default function StepConfirmation({
 }: StepProps) {
   const { t } = useTranslation();
 
+  console.log(transaction, account);
+
   if (optimisticOperation) {
     return (
       <Container>

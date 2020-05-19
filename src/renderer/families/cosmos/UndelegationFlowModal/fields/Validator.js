@@ -18,7 +18,7 @@ import type { FormattedDelegation } from "../../Delegation";
 type Props = {
   account: Account,
   transaction: Transaction,
-  onChange: (delegaiton: FormattedDelegation) => void,
+  onChange: (delegation: FormattedDelegation) => void,
 };
 
 export default function ValidatorField({ account, transaction, onChange }: Props) {
@@ -36,12 +36,11 @@ export default function ValidatorField({ account, transaction, onChange }: Props
     () =>
       formatDelegations(rawDelegations, validators).map(d => ({
         ...d,
-        amount: formatCurrencyUnit(unit, d.amount, {
+        formattedAmount: formatCurrencyUnit(unit, d.amount, {
           disableRounding: true,
           alwaysShowSign: false,
           showCode: true,
         }),
-        rawAmount: d.amount,
       })),
     [rawDelegations, unit, validators],
   );
@@ -55,11 +54,14 @@ export default function ValidatorField({ account, transaction, onChange }: Props
     [query, delegations],
   );
 
-  console.log(options);
+  const selectedValidator = useMemo(() => transaction.validators && transaction.validators[0], [
+    transaction,
+  ]);
 
   const value = useMemo(
-    () => delegations.find(({ address }) => address === transaction.validators[0].address),
-    [delegations, transaction],
+    () =>
+      selectedValidator && delegations.find(({ address }) => address === selectedValidator.address),
+    [delegations, selectedValidator],
   );
 
   return (
@@ -79,17 +81,17 @@ export default function ValidatorField({ account, transaction, onChange }: Props
 }
 
 type OptionRowProps = {
-  data: FormattedDelegation,
+  data: FormattedDelegation & { formattedAmount: string },
 };
 
-function OptionRow({ data: { address, validator, amount } }: OptionRowProps, i) {
+function OptionRow({ data: { address, validator, formattedAmount } }: OptionRowProps, i) {
   return (
     <Box key={address} horizontal alignItems="center" justifyContent="space-between">
       <Box horizontal alignItems="center">
         <FirstLetterIcon label={validator?.name ?? address} mr={2} />
         <Text ff="Inter|Medium">{validator?.name ?? address}</Text>
       </Box>
-      <Text ff="Inter|Regular">{amount}</Text>
+      <Text ff="Inter|Regular">{formattedAmount}</Text>
     </Box>
   );
 }

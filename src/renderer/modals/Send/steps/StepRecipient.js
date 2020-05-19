@@ -1,7 +1,6 @@
 // @flow
 
 import React, { PureComponent } from "react";
-import styled from "styled-components";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -11,35 +10,13 @@ import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAle
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import Label from "~/renderer/components/Label";
 import SelectAccount from "~/renderer/components/SelectAccount";
-import IconArrowDown from "~/renderer/icons/ArrowDown";
 
 import SendRecipientFields, { getFields } from "../SendRecipientFields";
 import RecipientField from "../fields/RecipientField";
 
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { StepProps } from "../types";
 
-const Separator: ThemedComponent<{}> = styled.div`
-  display: flex;
-  align-items: center;
-  & > div {
-    flex: 1;
-    height: 1px;
-    background: ${p => p.theme.colors.palette.divider};
-    & :nth-of-type(2) {
-      color: ${p => p.theme.colors.palette.primary.main};
-      flex: unset;
-      display: flex;
-      align-items: center;
-      height: 36px;
-      width: 36px;
-      border-radius: 36px;
-      background: transparent;
-      justify-content: center;
-      border: 1px solid ${p => p.theme.colors.palette.divider};
-    }
-  }
-`;
+import StepRecipientSeparator from "~/renderer/components/StepRecipientSeparator";
 
 const StepRecipient = ({
   t,
@@ -71,13 +48,7 @@ const StepRecipient = ({
           value={account}
         />
       </Box>
-      <Separator>
-        <div />
-        <div>
-          <IconArrowDown size={16} />
-        </div>
-        <div />
-      </Separator>
+      <StepRecipientSeparator />
       {account && transaction && mainAccount && (
         <>
           <RecipientField

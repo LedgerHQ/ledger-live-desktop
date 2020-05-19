@@ -19,12 +19,12 @@ import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Label from "~/renderer/components/Label";
 
 const renderItem = ({
-  data: { validator, address, reward, status },
+  data: { validator, address, formattedAmount, status },
 }: {
   data: {
     validator: ?CosmosValidatorItem,
     address: string,
-    reward: string,
+    formattedAmount: string,
     status: CosmosDelegationStatus,
   },
 }) => {
@@ -34,12 +34,12 @@ const renderItem = ({
         <FirstLetterIcon label={validator ? validator.name : address} mr={2} />
         <Text ff="Inter|Medium">{validator ? validator.name : address}</Text>
       </Box>
-      <Text ff="Inter|Regular">{reward}</Text>
+      <Text ff="Inter|Regular">{formattedAmount}</Text>
     </Box>
   );
 };
 
-export default function DelegationSelectorField({ account, transaction, t, onChange }: *) {
+export default function RedelegationSelectorField({ account, transaction, t, onChange }: *) {
   const unit = getAccountUnit(account);
 
   const [search, setSearch] = useState();
@@ -48,29 +48,29 @@ export default function DelegationSelectorField({ account, transaction, t, onCha
 
   const delegations = account.cosmosResources && account.cosmosResources.delegations;
 
-  const formattedDelegations = formatDelegations(delegations, validators)
-    .filter(({ pendingRewards }) => pendingRewards.gt(0))
-    .map(({ pendingRewards, ...rest }) => ({
+  const formattedDelegations = formatDelegations(delegations, validators).map(
+    ({ amount, ...rest }) => ({
       ...rest,
-      pendingRewards,
-      reward: formatCurrencyUnit(unit, pendingRewards, {
+      amount,
+      formattedAmount: formatCurrencyUnit(unit, amount, {
         disableRounding: true,
         alwaysShowSign: false,
         showCode: true,
       }),
-    }));
+    }),
+  );
 
   const filteredDelegations = formattedDelegations.filter(({ validator }) => {
     return !search || !validator || new RegExp(search, "gi").test(validator.name);
   });
 
   const selectedValidator = filteredDelegations.find(
-    ({ address }) => address === transaction.validators[0].address,
+    ({ address }) => address === transaction.cosmosSourceValidator,
   );
 
   return (
-    <Box flow={1} mt={5}>
-      <Label>{t("cosmos.claimRewards.flow.steps.claimRewards.selectLabel")}</Label>
+    <Box flow={1} mb={5}>
+      <Label>{t("cosmos.redelegation.flow.steps.validators.currentDelegation")}</Label>
       <Select
         value={selectedValidator}
         options={filteredDelegations}

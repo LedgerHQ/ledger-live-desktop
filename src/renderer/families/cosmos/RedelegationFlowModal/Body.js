@@ -71,7 +71,7 @@ const steps: Array<St> = [
   },
   {
     id: "connectDevice",
-    label: <Trans i18nKey="cosmos.redelegation.flow.steps.connectDevice.title" />,
+    label: <Trans i18nKey="cosmos.redelegation.flow.steps.device.title" />,
     component: GenericStepConnectDevice,
     onBack: ({ transitionTo }: StepProps) => transitionTo("castRedelegations"),
   },
