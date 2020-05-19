@@ -4,10 +4,10 @@ import invariant from "invariant";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import type { CosmosFormattedDelegation } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-import type { FormattedDelegation } from "../../Delegation";
 import { ValidatorField, AmountField } from "../fields";
 import type { StepProps } from "../types";
 
@@ -36,7 +36,7 @@ export default function StepAmount({
   );
 
   const onChangeValidator = useCallback(
-    ({ address, rawAmount }: FormattedDelegation & { rawAmount: BigNumber }) => {
+    ({ address, rawAmount }: CosmosFormattedDelegation & { rawAmount: BigNumber }) => {
       updateValidator({ address, amount: rawAmount });
     },
     [updateValidator],

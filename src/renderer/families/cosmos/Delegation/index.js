@@ -6,14 +6,7 @@ import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
-
-import type {
-  CosmosDelegation,
-  CosmosValidatorItem,
-  CosmosDelegationStatus,
-} from "@ledgerhq/live-common/lib/families/cosmos/types";
-import type { BigNumber } from "bignumber.js";
+import { useCosmosFormattedDelegations } from "@ledgerhq/live-common/lib/families/cosmos/react";
 
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
@@ -28,26 +21,6 @@ import Row from "./Row";
 
 import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
-
-/** @TODO move this in common */
-export const formatDelegations = (
-  delegations: CosmosDelegation[],
-  validators: CosmosValidatorItem[],
-): {
-  validator: ?CosmosValidatorItem,
-  address: string,
-  pendingRewards: BigNumber,
-  amount: BigNumber,
-  status: CosmosDelegationStatus,
-}[] => {
-  return delegations.map((d, i, arr) => ({
-    validator: validators.find(v => v.validatorAddress === d.validatorAddress),
-    address: d.validatorAddress,
-    amount: d.amount,
-    pendingRewards: d.pendingRewards,
-    status: d.status,
-  }));
-};
 
 type Props = {
   account: Account,
@@ -69,13 +42,11 @@ const Delegation = ({ account }: Props) => {
 
   const unit = getAccountUnit(account);
 
-  const { validators } = useCosmosPreloadData();
-
   const { cosmosResources } = account;
   invariant(cosmosResources, "cosmos account expected");
   const { delegations, pendingRewardsBalance: _pendingRewardsBalance } = cosmosResources;
 
-  const formattedDelegations = formatDelegations(delegations, validators);
+  const formattedDelegations = useCosmosFormattedDelegations(account);
 
   const onEarnRewards = useCallback(() => {
     /** @TODO redirect to the cosmos info modal */

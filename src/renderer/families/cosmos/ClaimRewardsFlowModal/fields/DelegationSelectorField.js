@@ -8,12 +8,11 @@ import type {
 
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import { useCosmosFormattedDelegations } from "@ledgerhq/live-common/lib/families/cosmos/react";
 
 import Box from "~/renderer/components/Box";
 
 import Select from "~/renderer/components/Select";
-import { formatDelegations } from "../../Delegation/index";
 import Text from "~/renderer/components/Text";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 
@@ -43,11 +42,9 @@ export default function DelegationSelectorField({ account, transaction, t, onCha
 
   const [search, setSearch] = useState();
 
-  const { validators } = useCosmosPreloadData();
+  const fDelegations = useCosmosFormattedDelegations();
 
-  const delegations = account.cosmosResources && account.cosmosResources.delegations;
-
-  const formattedDelegations = formatDelegations(delegations, validators)
+  const formattedDelegations = fDelegations(account)
     .filter(({ pendingRewards }) => pendingRewards.gt(0))
     .map(({ pendingRewards, ...rest }) => ({
       ...rest,

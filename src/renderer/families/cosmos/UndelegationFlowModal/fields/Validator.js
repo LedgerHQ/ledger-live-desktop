@@ -4,7 +4,8 @@ import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import { useCosmosFormattedDelegations } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import type { CosmosFormattedDelegation } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/cosmos/types";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
@@ -12,13 +13,11 @@ import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
 import Select from "~/renderer/components/Select";
 import Text from "~/renderer/components/Text";
-import { formatDelegations } from "../../Delegation";
-import type { FormattedDelegation } from "../../Delegation";
 
 type Props = {
   account: Account,
   transaction: Transaction,
-  onChange: (delegaiton: FormattedDelegation) => void,
+  onChange: (delegaiton: CosmosFormattedDelegation) => void,
 };
 
 export default function ValidatorField({ account, transaction, onChange }: Props) {
@@ -27,14 +26,11 @@ export default function ValidatorField({ account, transaction, onChange }: Props
   const [query, setQuery] = useState("");
 
   const unit = useMemo(() => getAccountUnit(account), [account]);
-  const { validators } = useCosmosPreloadData();
-
-  const rawDelegations = account.cosmosResources && account.cosmosResources.delegations;
-  invariant(rawDelegations, "delegations is required");
+  const formattedDelegations = useCosmosFormattedDelegations(account);
 
   const delegations = useMemo(
     () =>
-      formatDelegations(rawDelegations, validators).map(d => ({
+      formattedDelegations.map(d => ({
         ...d,
         amount: formatCurrencyUnit(unit, d.amount, {
           disableRounding: true,
@@ -43,7 +39,7 @@ export default function ValidatorField({ account, transaction, onChange }: Props
         }),
         rawAmount: d.amount,
       })),
-    [rawDelegations, unit, validators],
+    [formattedDelegations, unit],
   );
 
   const options = useMemo(
@@ -54,8 +50,6 @@ export default function ValidatorField({ account, transaction, onChange }: Props
       ),
     [query, delegations],
   );
-
-  console.log(options);
 
   const value = useMemo(
     () => delegations.find(({ address }) => address === transaction.validators[0].address),
@@ -79,7 +73,7 @@ export default function ValidatorField({ account, transaction, onChange }: Props
 }
 
 type OptionRowProps = {
-  data: FormattedDelegation,
+  data: CosmosFormattedDelegation,
 };
 
 function OptionRow({ data: { address, validator, amount } }: OptionRowProps, i) {
