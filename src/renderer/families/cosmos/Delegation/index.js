@@ -6,7 +6,7 @@ import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { useCosmosFormattedDelegations } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import { useCosmosMappedDelegations } from "@ledgerhq/live-common/lib/families/cosmos/react";
 
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
@@ -46,7 +46,7 @@ const Delegation = ({ account }: Props) => {
   invariant(cosmosResources, "cosmos account expected");
   const { delegations, pendingRewardsBalance: _pendingRewardsBalance } = cosmosResources;
 
-  const formattedDelegations = useCosmosFormattedDelegations(account);
+  const mappedDelegations = useCosmosMappedDelegations(account);
 
   const onEarnRewards = useCallback(() => {
     /** @TODO redirect to the cosmos info modal */
@@ -128,20 +128,17 @@ const Delegation = ({ account }: Props) => {
       {hasDelegations ? (
         <Card p={0} mt={24} mb={6}>
           <Header />
-          {formattedDelegations.map(
-            ({ validator, address, amount, pendingRewards, status }, index) => (
-              <Row
-                key={index}
-                validator={validator}
-                address={address}
-                amount={amount}
-                pendingRewards={pendingRewards}
-                unit={unit}
-                status={status}
-                onManageAction={onRedirect}
-              />
-            ),
-          )}
+          {mappedDelegations.map(({ validator, amount, pendingRewards, status }, index) => (
+            <Row
+              key={index}
+              validator={validator}
+              amount={amount}
+              pendingRewards={pendingRewards}
+              unit={unit}
+              status={status}
+              onManageAction={onRedirect}
+            />
+          ))}
         </Card>
       ) : (
         <Wrapper horizontal>

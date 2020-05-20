@@ -4,7 +4,7 @@ import invariant from "invariant";
 import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import type { CosmosFormattedDelegation } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import type { CosmosMappedDelegation } from "@ledgerhq/live-common/lib/families/cosmos/types";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -39,8 +39,8 @@ export default function StepAmount({
   );
 
   const onChangeValidator = useCallback(
-    ({ address, amount }: CosmosFormattedDelegation) => {
-      updateValidator({ address, amount });
+    ({ validatorAddress, amount }: CosmosMappedDelegation) => {
+      updateValidator({ address: validatorAddress, amount });
     },
     [updateValidator],
   );

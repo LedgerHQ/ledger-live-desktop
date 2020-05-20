@@ -65,8 +65,7 @@ const ManageDropDownItem = ({
 };
 
 type Props = {
-  validator: ?CosmosValidatorItem,
-  address: string,
+  validator: CosmosValidatorItem,
   amount: BigNumber,
   pendingRewards: BigNumber,
   unit: Unit,
@@ -77,20 +76,12 @@ type Props = {
   ) => void,
 };
 
-const Row = ({
-  validator,
-  address,
-  amount,
-  pendingRewards,
-  unit,
-  status,
-  onManageAction,
-}: Props) => {
+const Row = ({ validator, amount, pendingRewards, unit, status, onManageAction }: Props) => {
   const onSelect = useCallback(
     action => {
-      onManageAction(address, action.key);
+      onManageAction(validator.validatorAddress, action.key);
     },
-    [onManageAction, address],
+    [onManageAction, validator.validatorAddress],
   );
 
   const dropDownItems = useMemo(
@@ -118,7 +109,7 @@ const Row = ({
   return (
     <Wrapper>
       <Column strong>
-        <Ellipsis>{validator ? validator.name : address}</Ellipsis>
+        <Ellipsis>{validator ? validator.name : validator.validatorAddress}</Ellipsis>
       </Column>
       <Column>
         {status === "bonded" ? (

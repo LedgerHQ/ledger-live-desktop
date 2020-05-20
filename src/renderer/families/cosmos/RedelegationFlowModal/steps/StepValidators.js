@@ -37,7 +37,7 @@ export default function StepValidators({
   );
 
   const updateSourceValidator = useCallback(
-    ({ address: cosmosSourceValidator }) =>
+    ({ validatorAddress: cosmosSourceValidator }) =>
       updateRedelegation({
         ...transaction,
         cosmosSourceValidator,

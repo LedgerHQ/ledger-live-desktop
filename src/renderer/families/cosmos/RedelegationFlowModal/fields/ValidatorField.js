@@ -2,7 +2,10 @@
 import React, { useState, useCallback, useMemo } from "react";
 import styled from "styled-components";
 
-import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import {
+  useCosmosPreloadData,
+  useSortedValidators,
+} from "@ledgerhq/live-common/lib/families/cosmos/react";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 
 import { openURL } from "~/renderer/linking";
@@ -17,7 +20,6 @@ import ValidatorSearchInput, {
 import ScrollLoadingList from "~/renderer/components/ScrollLoadingList";
 import ValidatorRow, { IconContainer } from "~/renderer/components/Delegation/ValidatorRow";
 import { Trans } from "react-i18next";
-import { useSortedValidators } from "../../DelegationFlowModal/fields/ValidatorsField";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Text from "~/renderer/components/Text";
 

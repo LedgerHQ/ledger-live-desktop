@@ -12,7 +12,10 @@ import {
   useCosmosPreloadData,
   useSortedValidators,
 } from "@ledgerhq/live-common/lib/families/cosmos/react";
-import type { CosmosDelegationInfo } from "@ledgerhq/live-common/lib/families/cosmos/types";
+import type {
+  CosmosDelegationInfo,
+  CosmosMappedValidator,
+} from "@ledgerhq/live-common/lib/families/cosmos/types";
 import { formatValue, MAX_VOTES } from "@ledgerhq/live-common/lib/families/cosmos/utils";
 
 import { openURL } from "~/renderer/linking";
@@ -65,6 +68,7 @@ const ValidatorField = ({
 
   const onUpdateDelegation = useCallback(
     (address, value) => {
+      console.warn(address, value);
       const raw = value ? parseInt(value.replace(/[^0-9]/g, ""), 10) : 0;
 
       const amount =
@@ -110,18 +114,18 @@ const ValidatorField = ({
   }, []);
 
   const renderItem = useCallback(
-    ({ validator, rank, address }, i) => {
+    ({ validator, rank }: CosmosMappedValidator, i) => {
       const item = delegations.find(v => v.address === validator.validatorAddress);
       return (
         <ValidatorRow
-          key={`SR_${validator.address}_${i}`}
-          validator={{ ...validator, address }}
+          key={`SR_${validator.validatorAddress}_${i}`}
+          validator={{ ...validator, address: validator.validatorAddress }}
           icon={
             <IconContainer isSR>
-              <FirstLetterIcon label={validator.name || validator.address} />
+              <FirstLetterIcon label={validator.name || validator.validatorAddress} />
             </IconContainer>
           }
-          title={`${rank}. ${validator.name || validator.address}`}
+          title={`${rank}. ${validator.name || validator.validatorAddress}`}
           subtitle={
             <Trans
               i18nKey="cosmos.delegation.votingPower"
@@ -131,6 +135,7 @@ const ValidatorField = ({
           sideInfo={
             <Box pr={1}>
               <Text textAlign="center" ff="Inter|SemiBold" fontSize={2}>
+                {/* $FlowFixMe */}
                 {validator.estimatedYearlyRewardsRate
                   ? (validator.estimatedYearlyRewardsRate * 1e2).toFixed(2)
                   : "N/A"}

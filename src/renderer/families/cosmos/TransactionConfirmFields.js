@@ -17,10 +17,8 @@ import Text from "~/renderer/components/Text";
 import WarnBox from "~/renderer/components/WarnBox";
 import Box from "~/renderer/components/Box";
 
-import {
-  useCosmosPreloadData,
-  formatDelegationsInfo,
-} from "@ledgerhq/live-common/lib/families/cosmos/react";
+import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import { mapDelegationInfo } from "@ledgerhq/live-common/lib/families/cosmos/utils";
 
 import {
   OpDetailsData,
@@ -67,29 +65,25 @@ const CosmosValidatorsField = ({
   const { validators } = transaction;
   const { validators: cosmosValidators } = useCosmosPreloadData();
 
-  const formatedValidators = formatDelegationsInfo(validators || [], cosmosValidators);
+  const mappedValidators = mapDelegationInfo(validators || [], cosmosValidators, unit);
 
   return transaction.mode === "claimReward" || transaction.mode === "claimRewardCompound" ? (
     <>
       <TransactionConfirmField label="Validator">
-        <AddressText ff="Inter|SemiBold">{formatedValidators[0].address}</AddressText>
+        <AddressText ff="Inter|SemiBold">
+          {mappedValidators[0].validator.validatorAddress}
+        </AddressText>
       </TransactionConfirmField>
       <TransactionConfirmField label="Reward amount">
-        <AddressText ff="Inter|SemiBold">
-          {formatCurrencyUnit(unit, formatedValidators[0].amount, {
-            disableRounding: false,
-            alwaysShowSign: false,
-            showCode: true,
-          })}
-        </AddressText>
+        <AddressText ff="Inter|SemiBold">{mappedValidators[0].formattedAmount}</AddressText>
       </TransactionConfirmField>
     </>
   ) : (
-    formatedValidators && formatedValidators.length > 0 && (
+    mappedValidators && mappedValidators.length > 0 && (
       <Box vertical justifyContent="space-between" mb={2}>
-        <TransactionConfirmField label={`Validators (${formatedValidators.length})`} />
+        <TransactionConfirmField label={`Validators (${mappedValidators.length})`} />
 
-        {formatedValidators
+        {mappedValidators
           .map(({ amount, ...delegation }) => ({
             ...delegation,
             amount: formatCurrencyUnit(unit, BigNumber(amount), {
@@ -98,8 +92,8 @@ const CosmosValidatorsField = ({
               showCode: true,
             }),
           }))
-          .map(({ amount, address, validator }, i) => (
-            <OpDetailsData key={address + i}>
+          .map(({ amount, validator: { name, validatorAddress } }, i) => (
+            <OpDetailsData key={validatorAddress + i}>
               <OpDetailsVoteData>
                 <Box>
                   <Text>
@@ -107,7 +101,7 @@ const CosmosValidatorsField = ({
                       i18nKey="operationDetails.extra.votesAddress"
                       values={{
                         votes: amount,
-                        name: validator ? validator.name : address,
+                        name: name || validatorAddress,
                       }}
                     >
                       <Text ff="Inter|SemiBold">{""}</Text>
@@ -116,7 +110,7 @@ const CosmosValidatorsField = ({
                     </Trans>
                   </Text>
                 </Box>
-                <Address>{address}</Address>
+                <Address>{validatorAddress}</Address>
               </OpDetailsVoteData>
             </OpDetailsData>
           ))}

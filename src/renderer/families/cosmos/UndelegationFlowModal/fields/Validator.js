@@ -2,8 +2,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useCosmosDelegationsQuerySelector } from "@ledgerhq/live-common/lib/families/cosmos/react";
-import type { CosmosFormattedDelegation } from "@ledgerhq/live-common/lib/families/cosmos/react";
-import type { Transaction } from "@ledgerhq/live-common/lib/families/cosmos/types";
+import type {
+  Transaction,
+  CosmosMappedDelegation,
+} from "@ledgerhq/live-common/lib/families/cosmos/types";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Box from "~/renderer/components/Box";
@@ -14,7 +16,7 @@ import Text from "~/renderer/components/Text";
 type Props = {
   account: Account,
   transaction: Transaction,
-  onChange: (delegaiton: CosmosFormattedDelegation) => void,
+  onChange: (delegaiton: CosmosMappedDelegation) => void,
 };
 
 export default function ValidatorField({ account, transaction, onChange }: Props) {
@@ -41,15 +43,15 @@ export default function ValidatorField({ account, transaction, onChange }: Props
 }
 
 type OptionRowProps = {
-  data: CosmosFormattedDelegation,
+  data: CosmosMappedDelegation,
 };
 
-function OptionRow({ data: { address, validator, formattedAmount } }: OptionRowProps) {
+function OptionRow({ data: { validatorAddress, validator, formattedAmount } }: OptionRowProps) {
   return (
-    <Box key={address} horizontal alignItems="center" justifyContent="space-between">
+    <Box key={validatorAddress} horizontal alignItems="center" justifyContent="space-between">
       <Box horizontal alignItems="center">
-        <FirstLetterIcon label={validator?.name ?? address} mr={2} />
-        <Text ff="Inter|Medium">{validator?.name ?? address}</Text>
+        <FirstLetterIcon label={validator.name || validatorAddress} mr={2} />
+        <Text ff="Inter|Medium">{validator.name || validatorAddress}</Text>
       </Box>
       <Text ff="Inter|Regular">{formattedAmount}</Text>
     </Box>

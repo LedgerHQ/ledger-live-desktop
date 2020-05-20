@@ -11,7 +11,7 @@ import type {
   CosmosDelegationInfo,
   CosmosValidatorItem,
 } from "@ledgerhq/live-common/lib/families/cosmos/types";
-import { formatDelegationsInfo } from "@ledgerhq/live-common/lib/families/cosmos/utils";
+import { mapDelegationInfo } from "@ledgerhq/live-common/lib/families/cosmos/utils";
 import type { Currency, Unit, Operation, Account } from "@ledgerhq/live-common/lib/types";
 
 import { openURL } from "~/renderer/linking";
@@ -66,10 +66,10 @@ export const OperationDetailsDelegation = ({
   isTransactionField,
   cosmosValidators,
 }: OperationDetailsDelegationProps) => {
-  const formattedDelegations = useMemo(() => formatDelegationsInfo(delegations, cosmosValidators), [
-    delegations,
-    cosmosValidators,
-  ]);
+  const mappedDelegationInfo = useMemo(
+    () => mapDelegationInfo(delegations, cosmosValidators, unit),
+    [delegations, cosmosValidators, unit],
+  );
 
   return (
     <Box>
@@ -79,38 +79,30 @@ export const OperationDetailsDelegation = ({
         </OpDetailsTitle>
       )}
 
-      {formattedDelegations
-        .map(({ amount, ...delegation }) => ({
-          ...delegation,
-          amount: formatCurrencyUnit(unit, BigNumber(amount), {
-            disableRounding: false,
-            alwaysShowSign: false,
-            showCode: true,
-            discreet,
-          }),
-        }))
-        .map(({ amount, address, validator }, i) => (
-          <OpDetailsData key={address + i}>
-            <OpDetailsVoteData>
-              <Box>
-                <Text>
-                  <Trans
-                    i18nKey="operationDetails.extra.votesAddress"
-                    values={{
-                      votes: amount,
-                      name: validator ? validator.name : address,
-                    }}
-                  >
-                    <Text ff="Inter|SemiBold">{""}</Text>
-                    {""}
-                    <Text ff="Inter|SemiBold">{""}</Text>
-                  </Trans>
-                </Text>
-              </Box>
-              <Address onClick={redirectAddress(currency, address)}>{address}</Address>
-            </OpDetailsVoteData>
-          </OpDetailsData>
-        ))}
+      {mappedDelegationInfo.map(({ amount, validator: { name, validatorAddress } }, i) => (
+        <OpDetailsData key={validatorAddress + i}>
+          <OpDetailsVoteData>
+            <Box>
+              <Text>
+                <Trans
+                  i18nKey="operationDetails.extra.votesAddress"
+                  values={{
+                    votes: amount,
+                    name: name || validatorAddress,
+                  }}
+                >
+                  <Text ff="Inter|SemiBold">{""}</Text>
+                  {""}
+                  <Text ff="Inter|SemiBold">{""}</Text>
+                </Trans>
+              </Text>
+            </Box>
+            <Address onClick={redirectAddress(currency, validatorAddress)}>
+              {validatorAddress}
+            </Address>
+          </OpDetailsVoteData>
+        </OpDetailsData>
+      ))}
     </Box>
   );
 };
