@@ -36,7 +36,6 @@ export default function RedelegationSelectorField({ account, transaction, t, onC
   const { query, setQuery, options, value } = useCosmosDelegationsQuerySelector(
     account,
     transaction,
-    "redelegate",
   );
 
   return (

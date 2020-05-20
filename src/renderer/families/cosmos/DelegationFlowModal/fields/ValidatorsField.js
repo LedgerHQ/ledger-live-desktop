@@ -1,21 +1,18 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback, useState, useRef, useEffect, useMemo } from "react";
+import React, { useCallback, useState, useRef, useEffect } from "react";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import type { TFunction } from "react-i18next";
 
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
-import type { Account, TransactionStatus, Unit } from "@ledgerhq/live-common/lib/types";
+import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import {
   useCosmosPreloadData,
   useSortedValidators,
 } from "@ledgerhq/live-common/lib/families/cosmos/react";
-import type {
-  CosmosDelegationInfo,
-  CosmosValidatorItem,
-} from "@ledgerhq/live-common/lib/families/cosmos/types";
+import type { CosmosDelegationInfo } from "@ledgerhq/live-common/lib/families/cosmos/types";
 import { formatValue, MAX_VOTES } from "@ledgerhq/live-common/lib/families/cosmos/utils";
 
 import { openURL } from "~/renderer/linking";

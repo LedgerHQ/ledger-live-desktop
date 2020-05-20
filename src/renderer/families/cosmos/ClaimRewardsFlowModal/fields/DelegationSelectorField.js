@@ -36,7 +36,6 @@ export default function DelegationSelectorField({ account, transaction, t, onCha
   const { query, setQuery, options, value } = useCosmosDelegationsQuerySelector(
     account,
     transaction,
-    "claimReward",
   );
 
   return (

@@ -22,7 +22,6 @@ export default function ValidatorField({ account, transaction, onChange }: Props
   const { query, setQuery, options, value } = useCosmosDelegationsQuerySelector(
     account,
     transaction,
-    "undelegate",
   );
 
   return (
