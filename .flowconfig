@@ -20,6 +20,7 @@ module.system.node.resolve_dirname=./src
 module.system.node.resolve_dirname=node_modules
 module.name_mapper='^~' ->'<PROJECT_ROOT>/src'
 munge_underscores=true
+esproposal.optional_chaining=enable
 
 [strict]
 
