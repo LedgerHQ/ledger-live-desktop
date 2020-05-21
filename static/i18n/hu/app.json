@@ -859,6 +859,8 @@
       "undelegate": "Undelegate",
       "redelegate": "Redelegate",
       "reward": "Collect rewards",
+      "votingPower": "Voting power: {{amount}}%",
+      "estYield": "est. yield",
       "flow": {
         "title": "Delegate assets",
         "steps": {
@@ -924,6 +926,72 @@
               "title": "Broadcasting transaction..."
             },
             "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+          }
+        }
+      }
+    },
+    "redelegation": {
+      "flow": {
+        "title": "Redelegate assets",
+        "steps": {
+          "starter": {
+            "title": "Redelegation",
+            "description": "Redelegate assets from one validator to another. Redelegating allows your stake to continuously generate rewards.",
+            "warning": "Once redelegated, the ATOM can’t be redelegated for a <0>21 days period</0>. You can only have <0>7 pending redelegations</0> at the same time.",
+            "howDelegationWorks": "How delegation works?"
+          },
+          "validators": {
+            "title": "Validators",
+            "currentDelegation": "Current delegation",
+            "newDelegation": "New delegation",
+            "chooseValidator": "Choose a validator",
+            "warning": "You will have to wait <0>21 days</0> to redelegate ATOM from the redelegated validator",
+            "selectInfo": "Redelegate assets from one validator to another. Redelegating allows your stake to continuously generate rewards.",
+            "searchPlaceholder": "Search by name or address",
+            "redelegationAmount": "Redelegation amount"
+          },
+          "device": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "success": {
+              "title": "You have successfully redelegated your assets",
+              "text": "NEED TEXT HERE",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+          }
+        }
+      }
+    },
+    "undelegation": {
+      "flow": {
+        "title": "Undelegate assets",
+        "steps": {
+          "amount": {
+            "title": "Amount",
+            "fields": {
+              "validator": "Validator",
+              "amount": "Amount to undelegate"
+            }
+          },
+          "device": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "success": {
+              "title": "You have successfully undelegated your assets.",
+              "description": "🚨 NEED THIS TEXT HERE 🚨",
+              "cta": "View details"
+            },
+            "error": {
+              "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+            }
           }
         }
       }
@@ -1459,7 +1527,11 @@
       "claimReward": "Kérlek, erősítsd meg a műveletet az eszközödön a jutalmaid begyűjtéséhez",
       "freeze": "Kérlek, erősítsd meg a műveletet az eszközödön az eszközök befagyasztásához",
       "unfreeze": "Kérlek, erősítsd meg a műveletet az eszközödön az eszközök kiolvasztásához",
-      "vote": "Kérlek, erősítsd meg a műveletet az eszközödön a szavazataid leadásához"
+      "vote": "Kérlek, erősítsd meg a műveletet az eszközödön a szavazataid leadásához",
+      "delegate": "You have successfully delegated your assets. Please confirm the operation on your device to cast your votes",
+      "undelegate": "Please confirm the operation on your device to undelegate",
+      "redelegate": "You have successfully redelegated your assets. Please confirm the operation on your device to cast your votes",
+      "claimRewardCompound": "Please confirm the operation on your device to coumpound your rewards."
     },
     "recipientWording": {
       "send": "fogadó",
