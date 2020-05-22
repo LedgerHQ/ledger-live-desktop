@@ -123,10 +123,10 @@ const Row = ({ validator, amount, pendingRewards, unit, status, onManageAction }
         )}
       </Column>
       <Column>
-        <FormattedVal color="palette.text.shade80" val={amount} unit={unit} showCode />
+        <FormattedVal color="palette.text.shade80" val={amount} unit={unit} />
       </Column>
       <Column>
-        <FormattedVal color="palette.text.shade80" val={pendingRewards} unit={unit} showCode />
+        <FormattedVal color="palette.text.shade80" val={pendingRewards} unit={unit} />
       </Column>
       <Column>
         <DropDown items={dropDownItems} renderItem={ManageDropDownItem} onChange={onSelect}>

@@ -115,7 +115,7 @@
     "tooltip": "Star account"
   },
   "account": {
-    "lastOperations": "Last operations",
+    "lastOperations": "Latest operations",
     "contractAddress": "Contract:",
     "openInExplorer": "Open in explorer",
     "emptyState": {
@@ -148,8 +148,8 @@
     "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
     "bandwidthTooltip": "Freeze assets to gain bandwidth",
     "energyTooltip": "Freeze assets to gain energy",
-    "delegatedAssetsTooltip": "These are your currently delegated assets",
-    "undelegatingTooltip": "These are your assets currently being undelegated"
+    "delegatedAssetsTooltip": "Delegated assets are used in the Cosmos voting process. This represents your total number of votes.",
+    "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
   },
   "accounts": {
     "title": "Accounts",
@@ -193,7 +193,7 @@
       "desc": "Add accounts to manage more crypto assets",
       "createAccount": "Add account"
     },
-    "recentActivity": "Last operations",
+    "recentActivity": "Latest operations",
     "totalBalance": "Total balance"
   },
   "currentAddress": {
@@ -334,7 +334,7 @@
     "confirmed": "Confirmed",
     "failed": "Failed",
     "notConfirmed": "Not confirmed",
-    "fees": "Fees",
+    "fees": "Fee",
     "noFees": "No fee",
     "from": "From",
     "to": "To",
@@ -630,14 +630,14 @@
         "totalVotes": "Total votes: {{total}}",
         "selected": "Selected: {{total}}",
         "maxSelected": "Max selected: {{total}}",
-        "allVotesAreUsed": "All votes are used",
-        "maxUsed": "Max votes: {{total}}",
+        "allVotesAreUsed": "All assets are distributed",
+        "maxUsed": "Insufficient assets",
         "superRepresentatives": "Super Representatives (SR)",
         "candidates": "Candidates",
         "estYield": "est. yield",
         "srInfo": "SR or Candidates?",
         "validators": "Validators ({{total}})",
-        "votes": "Votes available: {{total}}",
+        "votes": "Assets available: {{total}}",
         "noResults": "No validators found for \"<0>{{search}}</0>\"."
       },
       "connectDevice": {
@@ -852,7 +852,7 @@
       },
       "claimRewards": "Claim rewards",
       "claimAvailableRewards": "Claim {{amount}}",
-      "header": "Delegations",
+      "header": "Delegation(s)",
       "Amount": "Amount",
       "noRewards": "No rewards available",
       "delegate": "Delegate",
@@ -885,8 +885,8 @@
             "title": "Confirmation",
             "label": "Confirmation",
             "success": {
-              "title": "Delegation sent",
-              "text": "Delegation transaction broadcasted successfully. You should earn your first rewards soon depending on the validator.",
+              "title": "You have successfully delegated your assets",
+              "text": "Your account balance will update once the blockchain has confirmed the transaction.",
               "cta": "View details"
             },
             "pending": {
@@ -904,11 +904,12 @@
           "claimRewards": {
             "title": "Rewards",
             "compound": "Compound",
-            "claim": "Claim",
-            "compoundOrClaim": "Compound or claim",
-            "compoundDescription": "NEEDS COMPOUND DESC TEXT",
-            "claimDescription": "NEEDS CLAIM DESC TEXT",
-            "compoundInfo": "You earned <0>{{amount}}</0> by delegation assets, they will be claimed now and automatically redelegated to the same validator",
+            "claim": "Cash in",
+            "compoundOrClaim": "Compound or cash in",
+            "compoundDescription": "--!NEED TEXT HERE!--",
+            "claimDescription": "--!NEED TEXT HERE!--",
+            "compoundInfo": "You earned <0>{{amount}}</0> By clicking Continue, they will be claimed now and automatically delegated to the same validator",
+            "claimInfo": "You earned <0>{{amount}}</0> by delegating assets, they will be claimed now and added to your available balance",
             "selectLabel": "Select a delegation"
           },
           "connectDevice": {
@@ -918,8 +919,10 @@
             "title": "Confirmation",
             "label": "Confirmation",
             "success": {
-              "title": "Rewards claimed",
-              "text": "Your rewards have been added to your balance",
+              "title": "Rewards cashed in successfully",
+              "titleCompound": "Rewards compounded successfully",
+              "text": "Your rewards have been added to your available balance",
+              "textCompound": "Your rewards <0>{{amount}}</0> have been automatically redelegated to <0>{{validator}}</0>",
               "cta": "View details"
             },
             "pending": {
@@ -937,7 +940,7 @@
           "starter": {
             "title": "Redelegation",
             "description": "Redelegate assets from one validator to another. Redelegating allows your stake to continuously generate rewards.",
-            "warning": "Once redelegated, the ATOM can’t be redelegated for a <0>21 days period</0>. You can only have <0>7 pending redelegations</0> at the same time.",
+            "warning": "You can not redelegate amounts that are still in the <0>21-day timelock</0>. You can have a maximum of <0>7 pending redelegations</0>.",
             "howDelegationWorks": "How delegation works?"
           },
           "validators": {
@@ -957,7 +960,7 @@
             "title": "Confirmation",
             "success": {
               "title": "You have successfully redelegated your assets",
-              "text": "NEED TEXT HERE",
+              "text": "--!NEED TEXT HERE!--",
               "cta": "View details"
             },
             "pending": {
@@ -974,6 +977,8 @@
         "steps": {
           "amount": {
             "title": "Amount",
+            "subtitle": "The undelegation process takes <0>21 days</0> to finalize.",
+            "warning": "Rewards will be immediately cashed in. The undelegated amount will be in the available balance after the <0>21-day timelock</0>.",
             "fields": {
               "validator": "Validator",
               "amount": "Amount to undelegate"
@@ -986,7 +991,7 @@
             "title": "Confirmation",
             "success": {
               "title": "You have successfully undelegated your assets.",
-              "description": "🚨 NEED THIS TEXT HERE 🚨",
+              "description": "<0>{{amount}}</0> have been undelegated from <0>{{validator}}</0>",
               "cta": "View details"
             },
             "error": {
@@ -1528,10 +1533,10 @@
       "freeze": "Please confirm the operation on your device to freeze assets",
       "unfreeze": "Please confirm the operation on your device to unfreeze your assets",
       "vote": "Please confirm the operation on your device to cast your votes",
-      "delegate": "You have successfully delegated your assets. Please confirm the operation on your device to cast your votes",
+      "delegate": "Please confirm the operation on your device to delegate your assets",
       "undelegate": "Please confirm the operation on your device to undelegate",
-      "redelegate": "You have successfully redelegated your assets. Please confirm the operation on your device to cast your votes",
-      "claimRewardCompound": "Please confirm the operation on your device to coumpound your rewards."
+      "redelegate": "Please confirm the operation on your device to redelegate",
+      "claimRewardCompound": "Please confirm the operation on your device to compound your rewards"
     },
     "recipientWording": {
       "send": "recipient",

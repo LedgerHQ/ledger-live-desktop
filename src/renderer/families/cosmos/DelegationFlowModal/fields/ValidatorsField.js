@@ -1,5 +1,6 @@
 // @flow
 import invariant from "invariant";
+import styled from "styled-components";
 import React, { useCallback, useState, useRef, useEffect } from "react";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
@@ -26,8 +27,55 @@ import ScrollLoadingList from "~/renderer/components/ScrollLoadingList";
 import ValidatorSearchInput, {
   NoResultPlaceholder,
 } from "~/renderer/components/Delegation/ValidatorSearchInput";
+import InputCurrency from "~/renderer/components/InputCurrency";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Text from "~/renderer/components/Text";
+
+const InputRight = styled(Box).attrs(() => ({
+  ff: "Inter|Medium",
+  color: "palette.text.shade60",
+  fontSize: 4,
+  justifyContent: "center",
+  horizontal: true,
+}))`
+  opacity: 0;
+  pointer-events: none;
+  padding: ${p => p.theme.space[2]}px;
+  > * {
+    color: white !important;
+  }
+`;
+
+const InputBox = styled(Box).attrs(() => ({
+  horizontal: true,
+  alignItems: "center",
+}))`
+  position: relative;
+  flex-basis: 155px;
+  height: 32px;
+  &:focus ${InputRight}, &:focus-within ${InputRight} {
+    opacity: 1;
+    pointer-events: auto;
+  }
+`;
+
+const MaxButton = styled.button`
+  background-color: ${p => p.theme.colors.palette.primary.main};
+  color: ${p => p.theme.colors.palette.primary.contrastText}!important;
+  border: none;
+  border-radius: 4px;
+  padding: 0px ${p => p.theme.space[2]}px;
+  margin: 0 2.5px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 200ms ease-out;
+  &:hover {
+    filter: contrast(2);
+  }
+`;
 
 type Props = {
   t: TFunction,
@@ -57,34 +105,25 @@ const ValidatorField = ({
   const { validators } = useCosmosPreloadData();
   const SR = useSortedValidators(search, validators, delegations);
 
-  const delegationsAvailable = formatValue(
-    cosmosResources.delegatedBalance.plus(account.spendableBalance),
-    unit,
-  );
-  const delegationsUsed = delegations.reduce((sum, v) => sum + formatValue(v.amount, unit), 0);
+  const delegationsAvailable = cosmosResources.delegatedBalance.plus(account.spendableBalance);
+  const delegationsUsed = delegations.reduce((sum, v) => sum.plus(v.amount), BigNumber(0));
   const delegationsSelected = delegations.length;
 
-  const max = Math.max(0, delegationsAvailable - delegationsUsed);
+  const max = delegationsAvailable.minus(delegationsUsed);
 
   const onUpdateDelegation = useCallback(
     (address, value) => {
-      console.warn(address, value);
-      const raw = value ? parseInt(value.replace(/[^0-9]/g, ""), 10) : 0;
-
-      const amount =
-        raw <= 0 || delegationsSelected > MAX_VOTES
-          ? BigNumber(0)
-          : BigNumber(raw).multipliedBy(10 ** unit.magnitude);
+      const amount = delegationsSelected > MAX_VOTES ? BigNumber(0) : BigNumber(value);
 
       onChangeDelegations(existing => {
         const update = existing.filter(v => v.address !== address);
-        if (amount > 0) {
+        if (amount.gt(0)) {
           update.push({ address, amount });
         }
         return update;
       });
     },
-    [onChangeDelegations, delegationsSelected, unit.magnitude],
+    [onChangeDelegations, delegationsSelected],
   );
 
   const containerRef = useRef();
@@ -102,7 +141,7 @@ const ValidatorField = ({
 
   const onSearch = useCallback(evt => setSearch(evt.target.value), [setSearch]);
 
-  const notEnoughDelegations = delegationsUsed > delegationsAvailable;
+  const notEnoughDelegations = delegationsUsed.gt(delegationsAvailable);
 
   /** auto focus first input on mount */
   useEffect(() => {
@@ -116,6 +155,12 @@ const ValidatorField = ({
   const renderItem = useCallback(
     ({ validator, rank }: CosmosMappedValidator, i) => {
       const item = delegations.find(v => v.address === validator.validatorAddress);
+
+      const onChange = value => onUpdateDelegation(validator.validatorAddress, value);
+
+      const onMax = () =>
+        onUpdateDelegation(validator.validatorAddress, item ? item.amount.plus(max) : max);
+
       return (
         <ValidatorRow
           key={`SR_${validator.validatorAddress}_${i}`}
@@ -145,12 +190,29 @@ const ValidatorField = ({
               </Text>
             </Box>
           }
-          value={item && item.amount ? formatValue(item.amount, unit) : 0}
-          onUpdateVote={onUpdateDelegation}
+          value={item && item.amount}
           onExternalLink={onExternalLink}
-          disabled={!item && delegationsSelected >= MAX_VOTES}
           notEnoughVotes={notEnoughDelegations}
           maxAvailable={max}
+          Input={
+            <InputBox active={item && item.amount}>
+              <InputCurrency
+                autoFocus={true}
+                containerProps={{ grow: true }}
+                unit={unit}
+                disabled={!item && delegationsSelected >= MAX_VOTES}
+                value={item && item.amount}
+                onChange={onChange}
+                renderRight={
+                  <InputRight>
+                    <MaxButton onClick={onMax}>
+                      <Trans i18nKey="vote.steps.castVotes.max" />
+                    </MaxButton>
+                  </InputRight>
+                }
+              />
+            </InputBox>
+          }
         />
       );
     },
@@ -172,7 +234,7 @@ const ValidatorField = ({
       <ValidatorListHeader
         votesSelected={delegationsSelected}
         votesAvailable={delegationsAvailable}
-        max={max}
+        max={formatValue(max, unit)}
         maxVotes={MAX_VOTES}
         totalValidators={SR.length}
         notEnoughVotes={notEnoughDelegations}
