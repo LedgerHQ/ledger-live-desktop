@@ -103,7 +103,7 @@ export default function ValidatorField({
       return (
         <ValidatorRow
           key={`SR_${validator.address}_${i}`}
-          validator={{ ...validator, address }}
+          validator={{ ...validator, address: address || validator.validatorAddress }}
           icon={
             <IconContainer isSR>
               <FirstLetterIcon label={validator.name || validator.address} />

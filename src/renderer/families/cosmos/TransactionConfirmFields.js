@@ -90,8 +90,8 @@ const CosmosDelegateValidatorsField = ({
               showCode: true,
             }),
           }))
-          .map(({ amount, validator: { name, address } }, i) => (
-            <OpDetailsData key={address + i}>
+          .map(({ amount, validator: { name, validatorAddress } }, i) => (
+            <OpDetailsData key={validatorAddress + i}>
               <OpDetailsVoteData>
                 <Box>
                   <Text>
@@ -99,7 +99,7 @@ const CosmosDelegateValidatorsField = ({
                       i18nKey="operationDetails.extra.votesAddress"
                       values={{
                         votes: amount,
-                        name: name || address,
+                        name: name || validatorAddress,
                       }}
                     >
                       <Text ff="Inter|SemiBold">{""}</Text>
@@ -108,7 +108,7 @@ const CosmosDelegateValidatorsField = ({
                     </Trans>
                   </Text>
                 </Box>
-                <AddressText>{address}</AddressText>
+                <AddressText>{validatorAddress}</AddressText>
               </OpDetailsVoteData>
             </OpDetailsData>
           ))}

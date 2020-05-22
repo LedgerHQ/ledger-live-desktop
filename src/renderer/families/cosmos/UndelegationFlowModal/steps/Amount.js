@@ -4,6 +4,7 @@ import invariant from "invariant";
 import React, { useCallback, useMemo } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import type { StepProps } from "../types";
 import type { CosmosMappedDelegation } from "@ledgerhq/live-common/lib/families/cosmos/types";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";

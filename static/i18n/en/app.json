@@ -960,7 +960,7 @@
             "title": "Confirmation",
             "success": {
               "title": "You have successfully redelegated your assets",
-              "text": "--!NEED TEXT HERE!--",
+              "text": "The delegation will update once the blockchain has confirmed the transaction",
               "cta": "View details"
             },
             "pending": {

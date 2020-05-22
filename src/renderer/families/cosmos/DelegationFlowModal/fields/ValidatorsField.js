@@ -51,7 +51,7 @@ const InputBox = styled(Box).attrs(() => ({
   alignItems: "center",
 }))`
   position: relative;
-  flex-basis: 155px;
+  flex-basis: 160px;
   height: 32px;
   &:focus ${InputRight}, &:focus-within ${InputRight} {
     opacity: 1;
