@@ -3,6 +3,7 @@
 import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
+import moment from "moment";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { BigNumber } from "bignumber.js";
@@ -22,6 +23,8 @@ import Box from "~/renderer/components/Box/Box";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import CheckCircle from "~/renderer/icons/CheckCircle";
 import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
+import ToolTip from "~/renderer/components/Tooltip";
+import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 
 const Wrapper: ThemedComponent<*> = styled.div`
   display: flex;
@@ -64,7 +67,7 @@ const ManageDropDownItem = ({
   );
 };
 
-type Props = {
+type RowProps = {
   validator: CosmosValidatorItem,
   amount: BigNumber,
   pendingRewards: BigNumber,
@@ -76,7 +79,14 @@ type Props = {
   ) => void,
 };
 
-const Row = ({ validator, amount, pendingRewards, unit, status, onManageAction }: Props) => {
+export const Row = ({
+  validator,
+  amount,
+  pendingRewards,
+  unit,
+  status,
+  onManageAction,
+}: RowProps) => {
   const onSelect = useCallback(
     action => {
       onManageAction(validator.validatorAddress, action.key);
@@ -109,16 +119,23 @@ const Row = ({ validator, amount, pendingRewards, unit, status, onManageAction }
   return (
     <Wrapper>
       <Column strong>
+        <Box mr={2}>
+          <FirstLetterIcon label={validator ? validator.name : validator.validatorAddress} />
+        </Box>
         <Ellipsis>{validator ? validator.name : validator.validatorAddress}</Ellipsis>
       </Column>
       <Column>
         {status === "bonded" ? (
           <Box color="positiveGreen" pl={2}>
-            <CheckCircle size={14} />
+            <ToolTip content={<Trans i18nKey="cosmos.delegation.activeTooltip" />}>
+              <CheckCircle size={14} />
+            </ToolTip>
           </Box>
         ) : (
           <Box color="alertRed" pl={2}>
-            <ExclamationCircleThin size={14} />
+            <ToolTip content={<Trans i18nKey="cosmos.delegation.inactiveTooltip" />}>
+              <ExclamationCircleThin size={14} />
+            </ToolTip>
           </Box>
         )}
       </Column>
@@ -144,4 +161,43 @@ const Row = ({ validator, amount, pendingRewards, unit, status, onManageAction }
   );
 };
 
-export default Row;
+type UnbondingRowProps = {
+  validator: ?CosmosValidatorItem,
+  amount: BigNumber,
+  address: string,
+  completionDate: Date,
+  unit: Unit,
+};
+
+export const UnbondingRow = ({
+  validator,
+  amount,
+  address,
+  completionDate,
+  unit,
+}: UnbondingRowProps) => {
+  const date = useMemo(() => (completionDate ? moment(completionDate).fromNow() : "N/A"), [
+    completionDate,
+  ]);
+  return (
+    <Wrapper>
+      <Column strong>
+        <Box mr={2}>
+          <FirstLetterIcon label={validator ? validator.name : address} />
+        </Box>
+        <Ellipsis>{validator ? validator.name : address}</Ellipsis>
+      </Column>
+      <Column>
+        <Box color="alertRed" pl={2}>
+          <ToolTip content={<Trans i18nKey="cosmos.delegation.inactiveTooltip" />}>
+            <ExclamationCircleThin size={14} />
+          </ToolTip>
+        </Box>
+      </Column>
+      <Column>
+        <FormattedVal color="palette.text.shade80" val={amount} unit={unit} />
+      </Column>
+      <Column>{date}</Column>
+    </Wrapper>
+  );
+};

@@ -30,7 +30,7 @@ export const TableLine: ThemedComponent<{}> = styled(Box).attrs(() => ({
   }
 `;
 
-const Header = () => (
+export const Header = () => (
   <Wrapper>
     <TableLine>
       <Trans i18nKey="delegation.validator" />
@@ -48,4 +48,19 @@ const Header = () => (
   </Wrapper>
 );
 
-export default Header;
+export const UnbondingHeader = () => (
+  <Wrapper>
+    <TableLine>
+      <Trans i18nKey="delegation.validator" />
+    </TableLine>
+    <TableLine>
+      <Trans i18nKey="delegation.status" />
+    </TableLine>
+    <TableLine>
+      <Trans i18nKey="delegation.delegated" />
+    </TableLine>
+    <TableLine>
+      <Trans i18nKey="delegation.completionDate" />
+    </TableLine>
+  </Wrapper>
+);

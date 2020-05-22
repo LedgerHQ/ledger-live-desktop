@@ -79,7 +79,7 @@ export const OperationDetailsDelegation = ({
         </OpDetailsTitle>
       )}
 
-      {mappedDelegationInfo.map(({ amount, validator: { name, validatorAddress } }, i) => (
+      {mappedDelegationInfo.map(({ formattedAmount, validator: { name, validatorAddress } }, i) => (
         <OpDetailsData key={validatorAddress + i}>
           <OpDetailsVoteData>
             <Box>
@@ -87,7 +87,7 @@ export const OperationDetailsDelegation = ({
                 <Trans
                   i18nKey="operationDetails.extra.votesAddress"
                   values={{
-                    votes: amount,
+                    votes: formattedAmount,
                     name: name || validatorAddress,
                   }}
                 >

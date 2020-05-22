@@ -861,6 +861,8 @@
       "reward": "Collect rewards",
       "votingPower": "Voting power: {{amount}}%",
       "estYield": "est. yield",
+      "activeTooltip": "This validator is active and generates rewards",
+      "inactiveTooltip": "This validator is inactive and doesn't generate rewards",
       "flow": {
         "title": "Delegate assets",
         "steps": {
@@ -972,6 +974,7 @@
       }
     },
     "undelegation": {
+      "header": "Undelegation(s)",
       "flow": {
         "title": "Undelegate assets",
         "steps": {
@@ -1012,6 +1015,7 @@
     "value": "Value",
     "amount": "Amount",
     "delegated": "Delegated",
+    "completionDate": "Completion date",
     "rewards": "Rewards",
     "distribution": "Distribution",
     "duration": "Duration",

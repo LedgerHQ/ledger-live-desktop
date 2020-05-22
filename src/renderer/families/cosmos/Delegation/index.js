@@ -6,7 +6,10 @@ import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { useCosmosMappedDelegations } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import {
+  useCosmosMappedDelegations,
+  useCosmosPreloadData,
+} from "@ledgerhq/live-common/lib/families/cosmos/react";
 
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
@@ -16,8 +19,8 @@ import Button from "~/renderer/components/Button";
 import Box, { Card } from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import IconChartLine from "~/renderer/icons/ChartLine";
-import Header from "./Header";
-import Row from "./Row";
+import { Header, UnbondingHeader } from "./Header";
+import { Row, UnbondingRow } from "./Row";
 
 import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
@@ -44,9 +47,25 @@ const Delegation = ({ account }: Props) => {
 
   const { cosmosResources } = account;
   invariant(cosmosResources, "cosmos account expected");
-  const { delegations, pendingRewardsBalance: _pendingRewardsBalance } = cosmosResources;
+  const {
+    delegations,
+    pendingRewardsBalance: _pendingRewardsBalance,
+    /** $FlowFixMe */
+    unbondings,
+  } = cosmosResources;
 
   const mappedDelegations = useCosmosMappedDelegations(account);
+
+  const { validators } = useCosmosPreloadData();
+
+  /** @TODO move this to common with a useCosmosMappedUnbondings */
+  const mappedUnbondings =
+    unbondings &&
+    unbondings.map(({ validatorAddress, ...unbonding }) => ({
+      ...unbonding,
+      address: validatorAddress,
+      validator: validators.find(v => v.validatorAddress === validatorAddress),
+    }));
 
   const onEarnRewards = useCallback(() => {
     /** @TODO redirect to the cosmos info modal */
@@ -86,6 +105,8 @@ const Delegation = ({ account }: Props) => {
   );
 
   const hasDelegations = delegations.length > 0;
+
+  const hasUnbondings = unbondings && unbondings.length > 0;
 
   const hasRewards = _pendingRewardsBalance.gt(0);
 
@@ -168,6 +189,33 @@ const Delegation = ({ account }: Props) => {
           </Box>
         </Wrapper>
       )}
+      {hasUnbondings ? (
+        <>
+          <Box horizontal alignItems="center" justifyContent="space-between">
+            <Text
+              ff="Inter|Medium"
+              fontSize={6}
+              color="palette.text.shade100"
+              data-e2e="title_Delegation"
+            >
+              <Trans i18nKey="cosmos.undelegation.header" />
+            </Text>
+          </Box>
+          <Card p={0} mt={24} mb={6}>
+            <UnbondingHeader />
+            {mappedUnbondings.map(({ validator, address, amount, completionDate }, index) => (
+              <UnbondingRow
+                key={index}
+                validator={validator}
+                address={address}
+                amount={amount}
+                completionDate={completionDate}
+                unit={unit}
+              />
+            ))}
+          </Card>
+        </>
+      ) : null}
     </>
   );
 };
