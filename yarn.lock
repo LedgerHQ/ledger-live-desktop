@@ -1307,10 +1307,10 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-5.15.0.tgz#e5d5b5ad48fc07f6308b78b065242e158bc044a2"
   integrity sha512-ZlLhR7qaChPgEbvcqOptRepWGm8VhhwOM6kC1gx3WErutbtaOjUX8lLA4ButWFU2f+xTl2rS/5c86wC7qGqGXQ==
 
-"@ledgerhq/hw-app-btc@^5.15.1":
-  version "5.15.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-5.15.1.tgz#6e9f31f581b6899b1496e11a91d38134260bc958"
-  integrity sha512-0+2wZEJ3Ud6N5Vr++qTfIImee8HjoHC1hZB98MkCeNGG6zizESbcXL9RJI88gV2fk3b9o1HUd86po1P7QvEpcQ==
+"@ledgerhq/hw-app-btc@^5.15.2":
+  version "5.15.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-5.15.2.tgz#a1c8b5a16915c92d4d21ad5e2962b0310c4473e8"
+  integrity sha512-mpjANAFEtFfvb9BwiijDZOAEWlON/G6ieORNpJ4GM2u7Lanlo39IANo3K68ootGnS15QdfAdZw34SzdzLfIIYg==
   dependencies:
     "@ledgerhq/hw-transport" "^5.15.0"
     bip32-path "^0.4.2"
@@ -1398,10 +1398,10 @@
     node-hid "^1.2.0"
     usb-detection "^4.9.0"
 
-"@ledgerhq/hw-transport-node-speculos@^5.15.0":
-  version "5.15.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-speculos/-/hw-transport-node-speculos-5.15.0.tgz#df1d782b0ace14beaa66cd6d6dd2f1fa83e5f40d"
-  integrity sha512-7m4LLofrJHpr1cPLUqKqjyQkBOss+e+JWzAdQAQCUPn1IyQyaJf87h3DsbQuqu3cAU0umMy0GlXoNFh4oED+Iw==
+"@ledgerhq/hw-transport-node-speculos@^5.15.3":
+  version "5.15.3"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-speculos/-/hw-transport-node-speculos-5.15.3.tgz#108ef55db006d3cc027a66c0c94ab45579fd26aa"
+  integrity sha512-6FiMMUWwWSFnj9yX3BjGD1kgnr+wKA7t2ZwUFyA+4IPf3gGIGDuiBiFViKPjqmQDsRUZgjsaqRLabpq2umsh4Q==
   dependencies:
     "@ledgerhq/errors" "^5.15.0"
     "@ledgerhq/hw-transport" "^5.15.0"
@@ -1428,22 +1428,22 @@
     node-pre-gyp "^0.14.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^12.22.0":
-  version "12.22.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.22.0.tgz#ca8ea3f2c7c419bb0c05c5665baae957ec0b8445"
-  integrity sha512-9oBCdjdWsPfOy5dKmqKxcg9X6fJwU9tXYS2eWTGJZIsz13j/Tx0SnC6dnode+MTj7PGEgrQ3YUyHfxuw0wKucg==
+"@ledgerhq/live-common@^12.23.2":
+  version "12.23.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-12.23.2.tgz#ca55ac4d5520405b22c31f52f550b24e67737755"
+  integrity sha512-5EzHVIiYAO9iexACGvCxpQUShplUlAop+nSANU1BqS2fQax5lYgY/I+nbp2ijWUQOIAVOaRJcSEt4CE1f1uVQA==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "5.15.0"
     "@ledgerhq/errors" "5.15.0"
-    "@ledgerhq/hw-app-btc" "^5.15.1"
+    "@ledgerhq/hw-app-btc" "^5.15.2"
     "@ledgerhq/hw-app-eth" "5.15.0"
     "@ledgerhq/hw-app-str" "^5.15.0"
     "@ledgerhq/hw-app-trx" "5.15.0"
     "@ledgerhq/hw-app-xrp" "5.15.0"
     "@ledgerhq/hw-transport" "5.15.0"
     "@ledgerhq/hw-transport-mocker" "^5.15.0"
-    "@ledgerhq/hw-transport-node-speculos" "^5.15.0"
+    "@ledgerhq/hw-transport-node-speculos" "^5.15.3"
     "@ledgerhq/logs" "5.15.0"
     async "^3.2.0"
     axios "0.19.0"

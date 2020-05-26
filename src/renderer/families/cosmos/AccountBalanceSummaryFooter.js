@@ -76,10 +76,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
     discreet,
   };
 
-  const spendableBalance = formatCurrencyUnit(unit, _spendableBalance, {
-    ...formatConfig,
-    showCode: true,
-  });
+  const spendableBalance = formatCurrencyUnit(unit, _spendableBalance, formatConfig);
 
   const delegatedBalance = formatCurrencyUnit(unit, _delegatedBalance, formatConfig);
 

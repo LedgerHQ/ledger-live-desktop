@@ -169,6 +169,7 @@ type ValidatorRowProps = {
   maxAvailable?: number,
   notEnoughVotes?: boolean,
   onClick?: (*) => void,
+  Input?: React$Node,
   onUpdateVote?: (string, string) => void,
   onExternalLink: (address: string) => void,
   style?: *,
@@ -182,6 +183,7 @@ const ValidatorRow = ({
   sideInfo,
   value,
   disabled,
+  Input,
   onUpdateVote,
   onExternalLink,
   maxAvailable = 0,
@@ -221,6 +223,37 @@ const ValidatorRow = ({
 
   const itemExists = typeof value === "number";
 
+  const InputComponent =
+    Input ||
+    (onUpdateVote ? (
+      <InputBox active={!!value}>
+        <VoteInput
+          // $FlowFixMe
+          ref={inputRef}
+          placeholder="0"
+          type="text"
+          maxLength="12"
+          notEnoughVotes={itemExists && notEnoughVotes}
+          value={itemExists ? String(value) : "0"}
+          disabled={disabled}
+          onFocus={onFocus}
+          onChange={onChange}
+        />
+        {!maxAvailable || disabled ? null : (
+          <RightFloating>
+            <Button
+              onClick={onMax}
+              style={{ fontSize: "10px", padding: "0 8px", height: 22 }}
+              primary
+              small
+            >
+              <Trans i18nKey="vote.steps.castVotes.max" />
+            </Button>
+          </RightFloating>
+        )}
+      </InputBox>
+    ) : null);
+
   return (
     <Row style={style} disabled={!value && disabled} active={!!value} onClick={onRowClick}>
       {icon}
@@ -234,34 +267,7 @@ const ValidatorRow = ({
         <SubTitle>{subtitle}</SubTitle>
       </InfoContainer>
       <SideInfo>{sideInfo}</SideInfo>
-      {onUpdateVote && (
-        <InputBox active={!!value}>
-          <VoteInput
-            // $FlowFixMe
-            ref={inputRef}
-            placeholder="0"
-            type="text"
-            maxLength="12"
-            notEnoughVotes={itemExists && notEnoughVotes}
-            value={itemExists ? String(value) : "0"}
-            disabled={disabled}
-            onFocus={onFocus}
-            onChange={onChange}
-          />
-          {!maxAvailable || disabled ? null : (
-            <RightFloating>
-              <Button
-                onClick={onMax}
-                style={{ fontSize: "10px", padding: "0 8px", height: 22 }}
-                primary
-                small
-              >
-                <Trans i18nKey="vote.steps.castVotes.max" />
-              </Button>
-            </RightFloating>
-          )}
-        </InputBox>
-      )}
+      {InputComponent}
     </Row>
   );
 };

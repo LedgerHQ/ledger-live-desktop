@@ -69,7 +69,9 @@ export default function StepClaimRewards({
       {amount && (
         <Text fontSize={4} ff="Inter|Medium" textAlign="center">
           <Trans
-            i18nKey="cosmos.claimRewards.flow.steps.claimRewards.compoundInfo"
+            i18nKey={`cosmos.claimRewards.flow.steps.claimRewards.${
+              transaction.mode === "claimReward" ? "claimInfo" : "compoundInfo"
+            }`}
             values={{ amount }}
           >
             <b></b>

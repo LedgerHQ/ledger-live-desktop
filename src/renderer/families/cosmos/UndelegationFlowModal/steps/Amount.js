@@ -2,14 +2,16 @@
 import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
 import React, { useCallback, useMemo } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import type { StepProps } from "../types";
 import type { CosmosMappedDelegation } from "@ledgerhq/live-common/lib/families/cosmos/types";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import { ValidatorField, AmountField } from "../fields";
-import type { StepProps } from "../types";
+import Text from "~/renderer/components/Text";
+import InfoBox from "~/renderer/components/InfoBox";
 
 export default function StepAmount({
   account,
@@ -61,6 +63,13 @@ export default function StepAmount({
   return (
     <Box flow={1}>
       <TrackPage category="Undelegation Flow" name="Step 1" />
+      <Box horizontal justifyContent="center" mb={2}>
+        <Text ff="Inter|Medium" fontSize={4}>
+          <Trans i18nKey="cosmos.undelegation.flow.steps.amount.subtitle">
+            <b></b>
+          </Trans>
+        </Text>
+      </Box>
       <ValidatorField account={account} transaction={transaction} onChange={onChangeValidator} />
       <AmountField
         amount={amount}
@@ -69,6 +78,13 @@ export default function StepAmount({
         status={status}
         onChange={onChangeAmount}
       />
+      <Box mt={2}>
+        <InfoBox>
+          <Trans i18nKey="cosmos.undelegation.flow.steps.amount.warning">
+            <b></b>
+          </Trans>
+        </InfoBox>
+      </Box>
     </Box>
   );
 }

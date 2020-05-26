@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { BigNumber } from "bignumber.js";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -12,7 +12,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 type Props = {
   amount: BigNumber,
-  validator: ?{ amount: BigNumber },
+  validator: *,
   account: Account,
   status: TransactionStatus,
   onChange: (amount: BigNumber) => void,
@@ -28,7 +28,15 @@ export default function AmountField({
   const { t } = useTranslation();
   const unit = getAccountUnit(account);
 
-  const initialAmount = useMemo(() => (validator ? validator.amount : BigNumber(0)), [validator]);
+  const [currentValidator, setCurrentValidator] = useState(validator);
+  const [initialAmount, setInitialAmount] = useState(validator ? validator.amount : BigNumber(0));
+
+  useEffect(() => {
+    if (validator && validator.address !== currentValidator.address) {
+      setCurrentValidator(validator);
+      setInitialAmount(validator.amount);
+    }
+  }, [validator, currentValidator]);
 
   const options = useMemo(
     () => [

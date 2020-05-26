@@ -15,7 +15,7 @@ const FirstLetterIcon: ThemedComponent<{ label: string }> = styled.div.attrs(p =
   height: 24px;
   border-radius: 4px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 13px;
   line-height: 24px;
   text-align: center;

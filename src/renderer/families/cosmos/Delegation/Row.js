@@ -3,10 +3,13 @@
 import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
+import moment from "moment";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import type { Unit } from "@ledgerhq/live-common/lib/types";
-import type { CosmosMappedDelegation } from "@ledgerhq/live-common/lib/families/cosmos/types";
+import type {
+  CosmosMappedDelegation,
+  CosmosMappedUnbonding,
+} from "@ledgerhq/live-common/lib/families/cosmos/types";
 
 import Ellipsis from "~/renderer/components/Ellipsis";
 
@@ -17,6 +20,8 @@ import Box from "~/renderer/components/Box/Box";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import CheckCircle from "~/renderer/icons/CheckCircle";
 import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
+import ToolTip from "~/renderer/components/Tooltip";
+import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 
 const Wrapper: ThemedComponent<*> = styled.div`
   display: flex;
@@ -67,7 +72,7 @@ type Props = {
   ) => void,
 };
 
-const Row = ({
+export function Row({
   delegation: {
     amount,
     validatorAddress,
@@ -77,7 +82,7 @@ const Row = ({
     validator,
   },
   onManageAction,
-}: Props) => {
+}: Props) {
   const onSelect = useCallback(
     action => {
       onManageAction(validatorAddress, action.key);
@@ -106,20 +111,28 @@ const Row = ({
     ],
     [pendingRewards],
   );
+  const name = validator?.name ?? validatorAddress;
 
   return (
     <Wrapper>
       <Column strong>
-        <Ellipsis>{validator?.name ?? validatorAddress}</Ellipsis>
+        <Box mr={2}>
+          <FirstLetterIcon label={name} />
+        </Box>
+        <Ellipsis>{name}</Ellipsis>
       </Column>
       <Column>
         {status === "bonded" ? (
           <Box color="positiveGreen" pl={2}>
-            <CheckCircle size={14} />
+            <ToolTip content={<Trans i18nKey="cosmos.delegation.activeTooltip" />}>
+              <CheckCircle size={14} />
+            </ToolTip>
           </Box>
         ) : (
           <Box color="alertRed" pl={2}>
-            <ExclamationCircleThin size={14} />
+            <ToolTip content={<Trans i18nKey="cosmos.delegation.inactiveTooltip" />}>
+              <ExclamationCircleThin size={14} />
+            </ToolTip>
           </Box>
         )}
       </Column>
@@ -139,6 +152,36 @@ const Row = ({
       </Column>
     </Wrapper>
   );
+}
+
+type UnbondingRowProps = {
+  delegation: CosmosMappedUnbonding,
 };
 
-export default Row;
+export function UnbondingRow({
+  delegation: { validator, formattedAmount, validatorAddress, completionDate },
+}: UnbondingRowProps) {
+  const date = useMemo(() => (completionDate ? moment(completionDate).fromNow() : "N/A"), [
+    completionDate,
+  ]);
+  const name = validator?.name ?? validatorAddress;
+  return (
+    <Wrapper>
+      <Column strong>
+        <Box mr={2}>
+          <FirstLetterIcon label={name} />
+        </Box>
+        <Ellipsis>{name}</Ellipsis>
+      </Column>
+      <Column>
+        <Box color="alertRed" pl={2}>
+          <ToolTip content={<Trans i18nKey="cosmos.delegation.inactiveTooltip" />}>
+            <ExclamationCircleThin size={14} />
+          </ToolTip>
+        </Box>
+      </Column>
+      <Column>{formattedAmount}</Column>
+      <Column>{date}</Column>
+    </Wrapper>
+  );
+}
