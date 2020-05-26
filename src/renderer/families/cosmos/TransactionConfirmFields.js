@@ -4,13 +4,11 @@ import invariant from "invariant";
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
-import { BigNumber } from "bignumber.js";
 
 import type { AccountLike, Account, Transaction } from "@ledgerhq/live-common/lib/types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 import TransactionConfirmField from "~/renderer/components/TransactionConfirm/TransactionConfirmField";
 import Text from "~/renderer/components/Text";
@@ -70,9 +68,7 @@ const CosmosValidatorsField = ({
   return transaction.mode === "claimReward" || transaction.mode === "claimRewardCompound" ? (
     <>
       <TransactionConfirmField label="Validator">
-        <AddressText ff="Inter|SemiBold">
-          {mappedValidators[0].validator.validatorAddress}
-        </AddressText>
+        <AddressText ff="Inter|SemiBold">{mappedValidators[0].address}</AddressText>
       </TransactionConfirmField>
       <TransactionConfirmField label="Reward amount">
         <AddressText ff="Inter|SemiBold">{mappedValidators[0].formattedAmount}</AddressText>
@@ -83,37 +79,28 @@ const CosmosValidatorsField = ({
       <Box vertical justifyContent="space-between" mb={2}>
         <TransactionConfirmField label={`Validators (${mappedValidators.length})`} />
 
-        {mappedValidators
-          .map(({ amount, ...delegation }) => ({
-            ...delegation,
-            amount: formatCurrencyUnit(unit, BigNumber(amount), {
-              disableRounding: false,
-              alwaysShowSign: false,
-              showCode: true,
-            }),
-          }))
-          .map(({ amount, validator: { name, validatorAddress } }, i) => (
-            <OpDetailsData key={validatorAddress + i}>
-              <OpDetailsVoteData>
-                <Box>
-                  <Text>
-                    <Trans
-                      i18nKey="operationDetails.extra.votesAddress"
-                      values={{
-                        votes: amount,
-                        name: name || validatorAddress,
-                      }}
-                    >
-                      <Text ff="Inter|SemiBold">{""}</Text>
-                      {""}
-                      <Text ff="Inter|SemiBold">{""}</Text>
-                    </Trans>
-                  </Text>
-                </Box>
-                <Address>{validatorAddress}</Address>
-              </OpDetailsVoteData>
-            </OpDetailsData>
-          ))}
+        {mappedValidators.map(({ address, formattedAmount, validator }, i) => (
+          <OpDetailsData key={address + i}>
+            <OpDetailsVoteData>
+              <Box>
+                <Text>
+                  <Trans
+                    i18nKey="operationDetails.extra.votesAddress"
+                    values={{
+                      votes: formattedAmount,
+                      name: validator?.name ?? address,
+                    }}
+                  >
+                    <Text ff="Inter|SemiBold">{""}</Text>
+                    {""}
+                    <Text ff="Inter|SemiBold">{""}</Text>
+                  </Trans>
+                </Text>
+              </Box>
+              <Address>{address}</Address>
+            </OpDetailsVoteData>
+          </OpDetailsData>
+        ))}
       </Box>
     )
   );

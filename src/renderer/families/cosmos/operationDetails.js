@@ -79,8 +79,8 @@ export const OperationDetailsDelegation = ({
         </OpDetailsTitle>
       )}
 
-      {mappedDelegationInfo.map(({ amount, validator: { name, validatorAddress } }, i) => (
-        <OpDetailsData key={validatorAddress + i}>
+      {mappedDelegationInfo.map(({ amount, validator, address }, i) => (
+        <OpDetailsData key={address + i}>
           <OpDetailsVoteData>
             <Box>
               <Text>
@@ -88,7 +88,7 @@ export const OperationDetailsDelegation = ({
                   i18nKey="operationDetails.extra.votesAddress"
                   values={{
                     votes: amount,
-                    name: name || validatorAddress,
+                    name: validator?.name ?? address,
                   }}
                 >
                   <Text ff="Inter|SemiBold">{""}</Text>
@@ -97,9 +97,7 @@ export const OperationDetailsDelegation = ({
                 </Trans>
               </Text>
             </Box>
-            <Address onClick={redirectAddress(currency, validatorAddress)}>
-              {validatorAddress}
-            </Address>
+            <Address onClick={redirectAddress(currency, address)}>{address}</Address>
           </OpDetailsVoteData>
         </OpDetailsData>
       ))}

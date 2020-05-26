@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { useCosmosMappedDelegations } from "@ledgerhq/live-common/lib/families/cosmos/react";
 
 import { urls } from "~/config/urls";
@@ -39,8 +38,6 @@ const Wrapper = styled(Box).attrs(() => ({
 
 const Delegation = ({ account }: Props) => {
   const dispatch = useDispatch();
-
-  const unit = getAccountUnit(account);
 
   const { cosmosResources } = account;
   invariant(cosmosResources, "cosmos account expected");
@@ -128,16 +125,8 @@ const Delegation = ({ account }: Props) => {
       {hasDelegations ? (
         <Card p={0} mt={24} mb={6}>
           <Header />
-          {mappedDelegations.map(({ validator, amount, pendingRewards, status }, index) => (
-            <Row
-              key={index}
-              validator={validator}
-              amount={amount}
-              pendingRewards={pendingRewards}
-              unit={unit}
-              status={status}
-              onManageAction={onRedirect}
-            />
+          {mappedDelegations.map((delegation, index) => (
+            <Row key={index} delegation={delegation} onManageAction={onRedirect} />
           ))}
         </Card>
       ) : (

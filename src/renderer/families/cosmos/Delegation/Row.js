@@ -5,14 +5,9 @@ import styled from "styled-components";
 import { Trans } from "react-i18next";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import type { BigNumber } from "bignumber.js";
 import type { Unit } from "@ledgerhq/live-common/lib/types";
-import type {
-  CosmosValidatorItem,
-  CosmosDelegationStatus,
-} from "@ledgerhq/live-common/lib/families/cosmos/types";
+import type { CosmosMappedDelegation } from "@ledgerhq/live-common/lib/families/cosmos/types";
 
-import FormattedVal from "~/renderer/components/FormattedVal";
 import Ellipsis from "~/renderer/components/Ellipsis";
 
 import { TableLine } from "./Header";
@@ -65,23 +60,29 @@ const ManageDropDownItem = ({
 };
 
 type Props = {
-  validator: CosmosValidatorItem,
-  amount: BigNumber,
-  pendingRewards: BigNumber,
-  unit: Unit,
-  status: CosmosDelegationStatus,
+  delegation: CosmosMappedDelegation,
   onManageAction: (
     address: string,
     action: "MODAL_COSMOS_REDELEGATE" | "MODAL_COSMOS_UNDELEGATE" | "MODAL_COSMOS_CLAIM_REWARDS",
   ) => void,
 };
 
-const Row = ({ validator, amount, pendingRewards, unit, status, onManageAction }: Props) => {
+const Row = ({
+  delegation: {
+    amount,
+    validatorAddress,
+    formattedAmount,
+    pendingRewards,
+    formattedPendingRewards,
+    validator,
+  },
+  onManageAction,
+}: Props) => {
   const onSelect = useCallback(
     action => {
-      onManageAction(validator.validatorAddress, action.key);
+      onManageAction(validatorAddress, action.key);
     },
-    [onManageAction, validator.validatorAddress],
+    [onManageAction, validatorAddress],
   );
 
   const dropDownItems = useMemo(
@@ -109,7 +110,7 @@ const Row = ({ validator, amount, pendingRewards, unit, status, onManageAction }
   return (
     <Wrapper>
       <Column strong>
-        <Ellipsis>{validator ? validator.name : validator.validatorAddress}</Ellipsis>
+        <Ellipsis>{validator?.name ?? validatorAddress}</Ellipsis>
       </Column>
       <Column>
         {status === "bonded" ? (
@@ -122,12 +123,8 @@ const Row = ({ validator, amount, pendingRewards, unit, status, onManageAction }
           </Box>
         )}
       </Column>
-      <Column>
-        <FormattedVal color="palette.text.shade80" val={amount} unit={unit} showCode />
-      </Column>
-      <Column>
-        <FormattedVal color="palette.text.shade80" val={pendingRewards} unit={unit} showCode />
-      </Column>
+      <Column>{formattedAmount}</Column>
+      <Column>{formattedPendingRewards}</Column>
       <Column>
         <DropDown items={dropDownItems} renderItem={ManageDropDownItem} onChange={onSelect}>
           {({ isOpen, value }) => (

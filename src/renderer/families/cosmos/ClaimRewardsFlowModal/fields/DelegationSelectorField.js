@@ -9,19 +9,16 @@ import Select from "~/renderer/components/Select";
 import Text from "~/renderer/components/Text";
 
 const renderItem = ({
-  data: {
-    validator: { name, validatorAddress },
-    formattedPendingRewards,
-    status,
-  },
+  data: { validatorAddress, validator, formattedPendingRewards, status },
 }: {
   data: CosmosMappedDelegation,
 }) => {
+  const name = validator?.name ?? validatorAddress;
   return (
     <Box key={validatorAddress} horizontal alignItems="center" justifyContent="space-between">
       <Box horizontal alignItems="center">
-        <FirstLetterIcon label={name || validatorAddress} mr={2} />
-        <Text ff="Inter|Medium">{name || validatorAddress}</Text>
+        <FirstLetterIcon label={name} mr={2} />
+        <Text ff="Inter|Medium">{name}</Text>
       </Box>
       <Text ff="Inter|Regular">{formattedPendingRewards}</Text>
     </Box>
