@@ -80,6 +80,7 @@ export function Row({
     pendingRewards,
     formattedPendingRewards,
     validator,
+    status,
   },
   onManageAction,
 }: Props) {
