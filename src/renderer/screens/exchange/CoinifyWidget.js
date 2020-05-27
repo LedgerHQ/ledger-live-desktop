@@ -81,17 +81,13 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
     if (!account) return;
 
     function onMessage(e) {
-      console.log(e);
       if (!e.isTrusted || e.origin !== coinifyConfig.host || !e.data) return;
-      console.log(e.data);
       const { type, event, context } = e.data;
       if (type !== "event") return;
       switch (event) {
         case "trade.receive-account-changed":
           if (context.address === account.freshAddress) {
-            console.log("OK");
             setAwaitingConfirmation(true);
-            // onVerifyAddress(context.address);
           } else {
             // Address mismatch, potential attack
           }

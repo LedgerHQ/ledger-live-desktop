@@ -159,7 +159,8 @@
       "tab": "Buy",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
-      "continue": "Continue"
+      "continue": "Continue",
+      "addAccount": "Add account"
     },
     "sell": {
       "tab": "Sell"

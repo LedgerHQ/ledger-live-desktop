@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import ExchangeDollar from "~/renderer/icons/ExchangeDollar";
 import { rgba } from "~/renderer/styles/helpers";
@@ -11,9 +11,12 @@ import { SelectAccount } from "~/renderer/components/SelectAccount";
 import Label from "~/renderer/components/Label";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Button from "~/renderer/components/Button";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import type { Account } from "@ledgerhq/live-common/lib/types/account";
+import FakeLink from "~/renderer/components/FakeLink";
+import PlusIcon from "~/renderer/icons/Plus"
+import { openModal } from "~/renderer/actions/modals";
 
 const Container = styled.div`
   width: 365px;
@@ -52,6 +55,12 @@ type Props = {
   selectAccount: (account: Account) => null,
 };
 
+const AccountSelectorLabel = styled(Label)`
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+`
+
 const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
   const { t } = useTranslation();
   const allAccounts = useSelector(accountsSelector);
@@ -59,21 +68,37 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
   const currencies = useCoinifyCurrencies();
   const [state, setState] = useState(() => {
     const defaultCurrency = currencies.length ? currencies[0] : null;
-    const accountsForDefaultCurrency = getAccountsForCurrency(defaultCurrency, allAccounts);
-    const defaultAccount = accountsForDefaultCurrency.length ? accountsForDefaultCurrency[0] : null;
 
     return {
       currency: defaultCurrency,
-      account: defaultAccount,
+      account: null,
     };
   });
+
+  // this effect make sure to set the bottom select to a newly created account
+  useEffect(() => {
+    setState((oldState) => {
+      const accountsForDefaultCurrency = getAccountsForCurrency(state.currency, allAccounts);
+      const defaultAccount = accountsForDefaultCurrency.length ? accountsForDefaultCurrency[0] : null;
+
+      return {
+        ...oldState,
+        account: defaultAccount,
+      };
+    })
+  }, [allAccounts])
+
+  const dispatch = useDispatch()
 
   const accounts = useMemo(
     () => (state.currency ? getAccountsForCurrency(state.currency, allAccounts) : []),
     [state.currency, allAccounts],
   );
 
-  console.log(currencies);
+  const openAddAccounts = useCallback(() => {
+    dispatch(openModal("MODAL_ADD_ACCOUNTS"));
+  }, [dispatch]);
+
   return (
     <Container>
       <IconContainer>
@@ -98,7 +123,15 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
           />
         </FormContent>
         <FormContent>
-          <Label>{t("exchange.buy.selectAccount")}</Label>
+          <AccountSelectorLabel>
+            <span>{t("exchange.buy.selectAccount")}</span>
+            <FakeLink fontSize={3} ff="Inter|SemiBold" onClick={openAddAccounts}>
+              <PlusIcon size={10} />
+              <Text style={{ marginLeft: 4 }}>
+                {t("exchange.buy.addAccount")}
+              </Text>
+            </FakeLink>
+          </AccountSelectorLabel>
           <SelectAccount
             accounts={accounts}
             isDisabled={accounts.length === 0}

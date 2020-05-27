@@ -1,6 +1,6 @@
 // @flow
 
-export const supportedCurrenciesIds = ["bitcoin", "ethereum", "bitcoin_cash", "dash", "stellar"];
+export const supportedCurrenciesIds = ["bitcoin", "ethereum", "bitcoin_cash", "dash"];
 
 const config = {
   developpement: {
