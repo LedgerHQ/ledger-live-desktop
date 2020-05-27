@@ -15,17 +15,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import type { Account } from "@ledgerhq/live-common/lib/types/account";
 import FakeLink from "~/renderer/components/FakeLink";
-import PlusIcon from "~/renderer/icons/Plus"
+import PlusIcon from "~/renderer/icons/Plus";
 import { openModal } from "~/renderer/actions/modals";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const Container = styled.div`
+const Container: ThemedComponent<{}> = styled.div`
   width: 365px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const IconContainer = styled.div`
+const IconContainer: ThemedComponent<{}> = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,17 +37,17 @@ const IconContainer = styled.div`
   margin-bottom: 32px;
 `;
 
-const ConfirmButton = styled(Button)`
+const ConfirmButton: ThemedComponent<{}> = styled(Button)`
   width: 100%;
   display: flex;
   justify-content: center;
 `;
 
-const FormContainer = styled.div`
+const FormContainer: ThemedComponent<{}> = styled.div`
   width: 100%;
   margin-top: 8px;
 `;
-const FormContent = styled.div`
+const FormContent: ThemedComponent<{}> = styled.div`
   margin-top: 24px;
   width: 100%;
 `;
@@ -59,7 +60,7 @@ const AccountSelectorLabel = styled(Label)`
   display: flex;
   flex: 1;
   justify-content: space-between;
-`
+`;
 
 const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
   const { t } = useTranslation();
@@ -77,18 +78,20 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
 
   // this effect make sure to set the bottom select to a newly created account
   useEffect(() => {
-    setState((oldState) => {
+    setState(oldState => {
       const accountsForDefaultCurrency = getAccountsForCurrency(state.currency, allAccounts);
-      const defaultAccount = accountsForDefaultCurrency.length ? accountsForDefaultCurrency[0] : null;
+      const defaultAccount = accountsForDefaultCurrency.length
+        ? accountsForDefaultCurrency[0]
+        : null;
 
       return {
         ...oldState,
         account: defaultAccount,
       };
-    })
-  }, [allAccounts])
+    });
+  }, [allAccounts]);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const accounts = useMemo(
     () => (state.currency ? getAccountsForCurrency(state.currency, allAccounts) : []),
@@ -127,9 +130,7 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
             <span>{t("exchange.buy.selectAccount")}</span>
             <FakeLink fontSize={3} ff="Inter|SemiBold" onClick={openAddAccounts}>
               <PlusIcon size={10} />
-              <Text style={{ marginLeft: 4 }}>
-                {t("exchange.buy.addAccount")}
-              </Text>
+              <Text style={{ marginLeft: 4 }}>{t("exchange.buy.addAccount")}</Text>
             </FakeLink>
           </AccountSelectorLabel>
           <SelectAccount

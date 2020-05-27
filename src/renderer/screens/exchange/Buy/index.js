@@ -4,9 +4,12 @@ import React, { useState, useCallback } from "react";
 import SelectAccountAndCurrency from "./SelectAccountAndCurrency";
 import styled from "styled-components";
 import CoinifyWidget from "../CoinifyWidget";
-import DeviceVerify from "../DeviceVerify";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { openModal } from "~/renderer/actions/modals";
+import type { Account } from "@ledgerhq/live-common/lib/types/account";
+import { useDispatch } from "react-redux";
 
-const BuyContainer = styled.div`
+const BuyContainer: ThemedComponent<{}> = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,44 +19,32 @@ const BuyContainer = styled.div`
 const Buy = () => {
   const [state, setState] = useState({
     account: null,
-    firstDeviceCheck: null,
   });
 
-  const { account, firstDeviceCheck } = state;
+  const { account } = state;
+
+  const dispatch = useDispatch()
 
   const selectAccount = useCallback((account: Account) => {
-    setState(oldState => ({
-      ...oldState,
-      account,
-    }));
-  }, []);
+    dispatch(openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", { account, onResult: confirmAccount }));
+  }, [dispatch]);
 
   const reset = useCallback(() => {
     setState({
       account: null,
-      firstDeviceCheck: null,
     });
   }, []);
 
   const confirmAccount = useCallback((account: Account) => {
     setState(oldState => ({
       ...oldState,
-      firstDeviceCheck: true,
+      account,
     }));
   }, []);
 
   return (
     <BuyContainer>
-      {account && firstDeviceCheck === null ? (
-        <DeviceVerify
-          account={state.account}
-          onResult={() => {
-            confirmAccount();
-          }}
-          onCancel={reset}
-        />
-      ) : null}
-      {account && firstDeviceCheck ? (
+      {account ? (
         <CoinifyWidget account={account} mode="buy" onReset={reset} />
       ) : (
         <SelectAccountAndCurrency selectAccount={selectAccount} />

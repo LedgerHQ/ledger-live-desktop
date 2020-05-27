@@ -10,26 +10,27 @@ import { useTranslation } from "react-i18next";
 import Reset from "~/renderer/icons/Reset";
 import type { Account } from "@ledgerhq/live-common/lib/types/account";
 import DeviceVerify from "~/renderer/screens/exchange/DeviceVerify";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const WidgetContainer = styled.div`
+const WidgetContainer: ThemedComponent<{}> = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
   height: 100%;
 `;
 
-const IconContainer = styled.div`
+const IconContainer: ThemedComponent<{}> = styled.div`
   margin-right: 4px;
 `;
 
-const CustomIframe = styled.iframe`
+const CustomIframe: ThemedComponent<{}> = styled.iframe`
   border: none;
   width: 100%;
   flex: 1;
   transition: opacity 200ms ease-out;
 `;
 
-const WidgetFooter = styled.div`
+const WidgetFooter: ThemedComponent<{}> = styled.div`
   height: 45px;
   border-top: 1px solid ${p => p.theme.colors.palette.divider};
   display: flex;
@@ -57,7 +58,7 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
     primaryColor: colors.wallet,
     partnerId: coinifyConfig.partnerId,
     cryptoCurrencies: account ? account.currency.ticker : null,
-    address: account ? account.freshAddress: null,
+    address: account ? account.freshAddress : null,
     targetPage: mode,
     addressConfirmation: true,
   };
@@ -98,7 +99,7 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
     window.addEventListener("message", onMessage, false);
     return () => window.removeEventListener("message", onMessage, false);
   }, [account, url]);
-//         sandbox="allow-scripts allow-same-origin allow-forms"
+  //         sandbox="allow-scripts allow-same-origin allow-forms"
   return (
     <WidgetContainer>
       <CustomIframe

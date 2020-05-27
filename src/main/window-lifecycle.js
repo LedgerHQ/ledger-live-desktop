@@ -95,12 +95,12 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
     mainWindow = null;
   });
 
-  mainWindow.webContents.on('new-window', (event, url) => {
+  mainWindow.webContents.on("new-window", (event, url) => {
     const parsedUrl = new URL(url);
 
     if (parsedUrl.protocol === "https:" || parsedUrl.protocol === "http:") {
       event.preventDefault();
-      shell.openExternal(url)
+      shell.openExternal(url);
     }
   });
 

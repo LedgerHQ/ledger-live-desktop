@@ -20,6 +20,7 @@ type Props = {
   data: ?{
     account: AccountLike,
     parentAccount: ?Account,
+    onResult: any => null,
   },
 };
 
@@ -34,7 +35,7 @@ const Root = ({ data, onClose }: Props) => {
         action={action}
         request={{ account: mainAccount, tokenCurrency }}
         onResult={res => {
-          onResult(res);
+          onResult(account, res);
           onClose();
         }}
       />
@@ -46,16 +47,10 @@ const BuyCrypto = () => {
   return (
     <Modal
       name="MODAL_EXCHANGE_CRYPTO_DEVICE"
-      preventBackdropClick
       centered
       render={({ data, onClose }) => (
         <ModalBody
-          onClose={() => {
-            onClose();
-            if (data.onCancel) {
-              data.onCancel();
-            }
-          }}
+          onClose={onClose}
           title="Connect your device"
           render={() => <Root data={data} onClose={onClose} />}
         />
