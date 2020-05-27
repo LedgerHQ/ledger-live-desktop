@@ -19,6 +19,7 @@ setSupportedCurrencies([
   "tezos",
   "komodo",
   "pivx",
+  "cosmos",
   "zencash",
   "vertcoin",
   "peercoin",
