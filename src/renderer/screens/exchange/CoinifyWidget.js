@@ -39,9 +39,9 @@ const WidgetFooter = styled.div`
 `;
 
 type Props = {
-  account: Account,
+  account?: Account,
   mode: string,
-  onReset: () => void,
+  onReset?: () => void,
 };
 
 const CoinifyWidget = ({ account, mode, onReset }: Props) => {
@@ -56,8 +56,8 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
     //    fontColor: colors.darkBlue,
     primaryColor: colors.wallet,
     partnerId: coinifyConfig.partnerId,
-    cryptoCurrencies: account.currency.ticker,
-    address: account.freshAddress,
+    cryptoCurrencies: account ? account.currency.ticker : null,
+    address: account ? account.freshAddress: null,
     targetPage: mode,
     addressConfirmation: true,
   };
@@ -68,6 +68,11 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
 
   if (mode === "sell") {
     widgetConfig.transferInMedia = "blockchain";
+  }
+
+  if (mode === "trade-history") {
+    widgetConfig.transferOutMedia = "";
+    widgetConfig.transferInMedia = "";
   }
 
   const url = `${coinifyConfig.url}?${querystring.stringify(widgetConfig)}`;
@@ -104,7 +109,7 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
         src={url}
         ref={widgetRef}
         style={{ opacity: widgetLoaded ? 1 : 0 }}
-        onLoad={() => setWidgetLoaded(true)}
+        onLoad={() => setTimeout(() => setWidgetLoaded(true), 500)}
         allow="camera"
       />
       {isAwaitingConfirmation && account ? (

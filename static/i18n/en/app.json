@@ -155,7 +155,7 @@
     "title": "Buy crypto",
     "reset": "Reset flow",
     "buy": {
-      "title": "Buy crypto from your account",
+      "title": "Buy crypto via our partner",
       "tab": "Buy",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
