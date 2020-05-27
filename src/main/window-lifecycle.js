@@ -1,6 +1,6 @@
 // @flow
 import "./setup";
-import { BrowserWindow, screen } from "electron";
+import { BrowserWindow, screen, shell } from "electron";
 import path from "path";
 import icon from "../../build/icons/icon.png";
 
@@ -92,6 +92,11 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
 
   mainWindow.on("closed", () => {
     mainWindow = null;
+  });
+
+  mainWindow.webContents.on('new-window', (event, url) => {
+    event.preventDefault();
+    shell.openExternal(url)
   });
 
   return mainWindow;

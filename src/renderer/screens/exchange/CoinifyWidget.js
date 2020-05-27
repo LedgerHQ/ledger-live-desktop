@@ -97,7 +97,7 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
     window.addEventListener("message", onMessage, false);
     return () => window.removeEventListener("message", onMessage, false);
   }, [account, url]);
-
+//         sandbox="allow-scripts allow-same-origin allow-forms"
   return (
     <WidgetContainer>
       <CustomIframe
