@@ -2,6 +2,7 @@
 // @flow
 import { BigNumber } from "bignumber.js";
 import React, { useMemo } from "react";
+import type { ComponentType } from "react";
 import { Trans } from "react-i18next";
 import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
@@ -272,7 +273,7 @@ const DelegateAmountCell = ({ operation, currency, unit }: Props) => {
       ? operation.extra.validators.reduce((sum, { amount }) => sum.plus(amount), BigNumber(0))
       : BigNumber(0);
 
-  if (amount.isZero()) return;
+  if (amount.isZero()) return null;
 
   const formattedAmount = formatCurrencyUnit(unit, amount, {
     disableRounding: false,
@@ -334,7 +335,7 @@ const UndelegateAmountCell = ({ operation, currency, unit }: Props) => {
   ) : null;
 };
 
-const amountCell = {
+const amountCell: { [key: string]: ComponentType<any> } = {
   DELEGATE: DelegateAmountCell,
   REDELEGATE: RedelegateAmountCell,
   UNDELEGATE: UndelegateAmountCell,
