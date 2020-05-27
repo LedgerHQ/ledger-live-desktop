@@ -3,6 +3,7 @@ import "./setup";
 import { BrowserWindow, screen, shell } from "electron";
 import path from "path";
 import icon from "../../build/icons/icon.png";
+import { URL } from "url";
 
 const intFromEnv = (key: string, def: number): number => {
   const v = process.env[key];
@@ -95,8 +96,12 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
   });
 
   mainWindow.webContents.on('new-window', (event, url) => {
-    event.preventDefault();
-    shell.openExternal(url)
+    const parsedUrl = new URL(url);
+
+    if (parsedUrl.protocol === "https:" || parsedUrl.protocol === "http:") {
+      event.preventDefault();
+      shell.openExternal(url)
+    }
   });
 
   return mainWindow;
