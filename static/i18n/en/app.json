@@ -151,6 +151,23 @@
     "delegatedAssetsTooltip": "These are your currently delegated assets",
     "undelegatingTooltip": "These are your assets currently being undelegated"
   },
+  "exchange": {
+    "title": "Buy crypto",
+    "reset": "Reset flow",
+    "buy": {
+      "title": "Buy crypto from your account",
+      "tab": "Buy",
+      "selectCrypto": "Choose a crypto asset",
+      "selectAccount": "Choose an account",
+      "continue": "Continue"
+    },
+    "sell": {
+      "tab": "Sell"
+    },
+    "history": {
+      "tab": "History"
+    }
+  },
   "accounts": {
     "title": "Accounts",
     "noResultFound": "No accounts found.",
