@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import styled from "styled-components";
 import useTheme from "~/renderer/hooks/useTheme";
 import { getConfig } from "~/renderer/screens/exchange/config";
@@ -9,8 +9,9 @@ import FakeLink from "~/renderer/components/FakeLink";
 import { useTranslation } from "react-i18next";
 import Reset from "~/renderer/icons/Reset";
 import type { Account } from "@ledgerhq/live-common/lib/types/account";
-import DeviceVerify from "~/renderer/screens/exchange/DeviceVerify";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { openModal } from "~/renderer/actions/modals";
+import { useDispatch } from "react-redux";
 
 const WidgetContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -39,6 +40,17 @@ const WidgetFooter: ThemedComponent<{}> = styled.div`
   color: ${p => p.theme.colors.palette.primary.main};
 `;
 
+type CoinifyWidgetConfig = {
+  primaryColor?: string,
+  partnerId: number,
+  cryptoCurrencies?: string | null,
+  address?: string | null,
+  targetPage: string,
+  addressConfirmation?: boolean,
+  transferOutMedia?: string,
+  transferInMedia?: string,
+};
+
 type Props = {
   account?: Account,
   mode: string,
@@ -47,13 +59,12 @@ type Props = {
 
 const CoinifyWidget = ({ account, mode, onReset }: Props) => {
   const [widgetLoaded, setWidgetLoaded] = useState(false);
-  const [isAwaitingConfirmation, setAwaitingConfirmation] = useState(false);
   const colors = useTheme("colors");
   const { t } = useTranslation();
-  const widgetRef = useRef(null);
+  const widgetRef: { current: null | HTMLIFrameElement } = useRef(null);
 
   const coinifyConfig = getConfig("developpement");
-  const widgetConfig = {
+  const widgetConfig: CoinifyWidgetConfig = {
     //    fontColor: colors.darkBlue,
     primaryColor: colors.wallet,
     partnerId: coinifyConfig.partnerId,
@@ -78,6 +89,39 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
 
   const url = `${coinifyConfig.url}?${querystring.stringify(widgetConfig)}`;
 
+  const handleOnResult = useCallback(() => {
+    if (account && widgetRef.current) {
+      widgetRef.current.contentWindow.postMessage(
+        {
+          type: "event",
+          event: "trade.receive-account-confirmed",
+          context: {
+            address: account.freshAddress,
+            status: "accepted",
+          },
+        },
+        coinifyConfig.host,
+      );
+    }
+  }, [coinifyConfig.host, account]);
+
+  const handleOnCancel = useCallback(() => {
+    if (account && widgetRef.current) {
+      widgetRef.current.contentWindow.postMessage(
+        {
+          type: "event",
+          event: "trade.receive-account-confirmed",
+          context: {
+            address: account.freshAddress,
+            status: "rejected",
+          },
+        },
+        coinifyConfig.host,
+      );
+    }
+  }, [coinifyConfig.host, account]);
+
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!account) return;
 
@@ -88,7 +132,14 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
       switch (event) {
         case "trade.receive-account-changed":
           if (context.address === account.freshAddress) {
-            setAwaitingConfirmation(true);
+            dispatch(
+              openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", {
+                account,
+                onResult: handleOnResult,
+                onCancel: handleOnCancel,
+                verifyAddress: true,
+              }),
+            );
           } else {
             // Address mismatch, potential attack
           }
@@ -98,7 +149,7 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
 
     window.addEventListener("message", onMessage, false);
     return () => window.removeEventListener("message", onMessage, false);
-  }, [account, url]);
+  }, [account, url, coinifyConfig.host, dispatch, handleOnCancel, handleOnResult]);
   //         sandbox="allow-scripts allow-same-origin allow-forms"
   return (
     <WidgetContainer>
@@ -109,36 +160,6 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
         onLoad={() => setTimeout(() => setWidgetLoaded(true), 500)}
         allow="camera"
       />
-      {isAwaitingConfirmation && account ? (
-        <DeviceVerify
-          account={account}
-          onResult={() => {
-            setAwaitingConfirmation(false);
-            widgetRef.current.contentWindow.postMessage(
-              {
-                type: "event",
-                event: "trade.receive-account-confirmed",
-                context: {
-                  address: account.freshAddress,
-                  status: "accepted",
-                },
-              },
-              coinifyConfig.host,
-            );
-          }}
-          onCancel={() => {
-            setAwaitingConfirmation(false);
-            widgetRef.current.contentWindow.postMessage({
-              type: "event",
-              event: "trade.receive-account-confirmed",
-              context: {
-                address: account.freshAddress,
-                status: "rejected",
-              },
-            });
-          }}
-        />
-      ) : null}
       {onReset ? (
         <WidgetFooter>
           <IconContainer>

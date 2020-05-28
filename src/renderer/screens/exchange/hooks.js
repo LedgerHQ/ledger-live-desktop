@@ -7,7 +7,7 @@ import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies/s
 
 import { supportedCurrenciesIds } from "./config";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
-import type { Currency } from "@ledgerhq/live-common/lib/types/currencies";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 import type { Account } from "@ledgerhq/live-common/lib/types/account";
 
 export const useCoinifyCurrencies = () => {
@@ -22,6 +22,8 @@ export const useCoinifyCurrencies = () => {
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
 
   // cherry picking only those available in coinify
+
+  /** $FlowFixMe */
   const supportedCryptoCurrencies = sortedCryptoCurrencies.filter(currency =>
     supportedCurrenciesIds.includes(currency.id),
   );
@@ -29,7 +31,10 @@ export const useCoinifyCurrencies = () => {
   return supportedCryptoCurrencies;
 };
 
-export const getAccountsForCurrency = (currency: Currency, allAccounts: Account[]): Account[] => {
+export const getAccountsForCurrency = (
+  currency: CryptoCurrency | TokenCurrency,
+  allAccounts: Account[],
+): Account[] => {
   return allAccounts.filter(
     account =>
       (account.type === "TokenAccount" ? account.token.id : account.currency.id) === currency.id,

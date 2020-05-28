@@ -154,6 +154,7 @@
   "exchange": {
     "title": "Buy crypto",
     "reset": "Reset flow",
+    "verifyAddress": "Please confirm on your device that the displayed address match the one on your device's screen",
     "buy": {
       "title": "Buy crypto via our partner",
       "tab": "Buy",

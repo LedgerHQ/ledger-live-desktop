@@ -13,7 +13,7 @@ import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Button from "~/renderer/components/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { accountsSelector } from "~/renderer/reducers/accounts";
-import type { Account } from "@ledgerhq/live-common/lib/types/account";
+import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types/account";
 import FakeLink from "~/renderer/components/FakeLink";
 import PlusIcon from "~/renderer/icons/Plus";
 import { openModal } from "~/renderer/actions/modals";
@@ -53,7 +53,7 @@ const FormContent: ThemedComponent<{}> = styled.div`
 `;
 
 type Props = {
-  selectAccount: (account: Account) => null,
+  selectAccount: (account: Account | TokenAccount) => undefined,
 };
 
 const AccountSelectorLabel = styled(Label)`
@@ -89,7 +89,7 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
         account: defaultAccount,
       };
     });
-  }, [allAccounts]);
+  }, [allAccounts, state.currency]);
 
   const dispatch = useDispatch();
 
@@ -148,7 +148,11 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
         <FormContent>
           <ConfirmButton
             primary
-            onClick={() => selectAccount(state.account)}
+            onClick={() => {
+              if (state.account) {
+                selectAccount(state.account);
+              }
+            }}
             disabled={!state.account}
           >
             {t("exchange.buy.continue")}

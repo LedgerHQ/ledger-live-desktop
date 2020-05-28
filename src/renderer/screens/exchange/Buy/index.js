@@ -6,7 +6,7 @@ import styled from "styled-components";
 import CoinifyWidget from "../CoinifyWidget";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openModal } from "~/renderer/actions/modals";
-import type { Account } from "@ledgerhq/live-common/lib/types/account";
+import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types/account";
 import { useDispatch } from "react-redux";
 
 const BuyContainer: ThemedComponent<{}> = styled.div`
@@ -23,11 +23,7 @@ const Buy = () => {
 
   const { account } = state;
 
-  const dispatch = useDispatch()
-
-  const selectAccount = useCallback((account: Account) => {
-    dispatch(openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", { account, onResult: confirmAccount }));
-  }, [dispatch]);
+  const dispatch = useDispatch();
 
   const reset = useCallback(() => {
     setState({
@@ -35,12 +31,19 @@ const Buy = () => {
     });
   }, []);
 
-  const confirmAccount = useCallback((account: Account) => {
+  const confirmAccount = useCallback((confirmedAccount: Account) => {
     setState(oldState => ({
       ...oldState,
-      account,
+      account: confirmedAccount,
     }));
   }, []);
+
+  const selectAccount = useCallback(
+    (account: Account | TokenAccount) => {
+      dispatch(openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", { account, onResult: confirmAccount }));
+    },
+    [dispatch, confirmAccount],
+  );
 
   return (
     <BuyContainer>
