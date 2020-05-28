@@ -219,6 +219,7 @@ const UnfreezeAmountCell = ({ operation, currency, unit }: Props) => {
 };
 
 const VoteAmountCell = ({ operation, currency, unit }: Props) => {
+  const discreet = useDiscreetMode();
   const amount =
     operation.extra && operation.extra.votes
       ? operation.extra.votes.reduce((sum, { voteCount }) => sum + voteCount, 0)
@@ -226,7 +227,12 @@ const VoteAmountCell = ({ operation, currency, unit }: Props) => {
 
   return amount > 0 ? (
     <Text ff="Inter|SemiBold" fontSize={4}>
-      <Trans i18nKey={"operationDetails.extra.votes"} values={{ number: amount }} />
+      <Trans
+        i18nKey={"operationDetails.extra.votes"}
+        values={{
+          number: !discreet ? amount : "***",
+        }}
+      />
     </Text>
   ) : null;
 };
