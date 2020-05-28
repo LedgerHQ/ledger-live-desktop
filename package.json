@@ -29,7 +29,8 @@
     "release": "node ./tools/dist --publish",
     "ci": "node ./tools/ci.js",
     "test": "jest src",
-    "spectron": "jest tests/specs/bullrun.spec.js"
+    "spectron": "jest tests/specs/bullrun.spec.js",
+    "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)"
   },
   "engines": {
     "node": ">=12"
@@ -164,7 +165,7 @@
     "hasha": "^5.2.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^25.1.0",
-    "jest-image-snapshot": "^2.12.0",
+    "jest-image-snapshot": "^4.0.0",
     "listr": "^0.14.3",
     "listr-verbose-renderer": "^0.6.0",
     "prettier": "^1.19.1",
