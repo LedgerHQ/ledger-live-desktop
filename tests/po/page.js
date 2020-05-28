@@ -56,7 +56,7 @@ export default class Page {
   }
 
   get drawerBuycryptoButton() {
-    return this.app.client.element("#drawer-partners-button");
+    return this.app.client.element("#drawer-exchange-button");
   }
 
   get topbarDiscreetButton() {
