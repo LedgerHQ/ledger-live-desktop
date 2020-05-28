@@ -1,7 +1,9 @@
 // @flow
 
+import invariant from "invariant";
 import React, { useState, useMemo, useCallback, useEffect } from "react";
 import styled from "styled-components";
+import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import ExchangeDollar from "~/renderer/icons/ExchangeDollar";
 import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
@@ -13,7 +15,7 @@ import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Button from "~/renderer/components/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { accountsSelector } from "~/renderer/reducers/accounts";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types/account";
+import type { Account, CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import FakeLink from "~/renderer/components/FakeLink";
 import PlusIcon from "~/renderer/icons/Plus";
 import { openModal } from "~/renderer/actions/modals";
@@ -53,7 +55,12 @@ const FormContent: ThemedComponent<{}> = styled.div`
 `;
 
 type Props = {
-  selectAccount: (account: Account | TokenAccount) => undefined,
+  selectAccount: (account: Account) => void,
+};
+
+type State = {
+  currency: ?(CryptoCurrency | TokenCurrency),
+  account: ?Account,
 };
 
 const AccountSelectorLabel = styled(Label)`
@@ -67,7 +74,7 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
   const allAccounts = useSelector(accountsSelector);
 
   const currencies = useCoinifyCurrencies();
-  const [state, setState] = useState(() => {
+  const [{ currency, account }, setState] = useState<State>(() => {
     const defaultCurrency = currencies.length ? currencies[0] : null;
 
     return {
@@ -78,8 +85,9 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
 
   // this effect make sure to set the bottom select to a newly created account
   useEffect(() => {
+    if (!currency) return;
     setState(oldState => {
-      const accountsForDefaultCurrency = getAccountsForCurrency(state.currency, allAccounts);
+      const accountsForDefaultCurrency = getAccountsForCurrency(currency, allAccounts);
       const defaultAccount = accountsForDefaultCurrency.length
         ? accountsForDefaultCurrency[0]
         : null;
@@ -89,18 +97,18 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
         account: defaultAccount,
       };
     });
-  }, [allAccounts, state.currency]);
+  }, [allAccounts, currency]);
 
   const dispatch = useDispatch();
 
-  const accounts = useMemo(
-    () => (state.currency ? getAccountsForCurrency(state.currency, allAccounts) : []),
-    [state.currency, allAccounts],
-  );
+  const accounts = useMemo(() => (currency ? getAccountsForCurrency(currency, allAccounts) : []), [
+    currency,
+    allAccounts,
+  ]);
 
   const openAddAccounts = useCallback(() => {
-    dispatch(openModal("MODAL_ADD_ACCOUNTS"));
-  }, [dispatch]);
+    dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
+  }, [dispatch, currency]);
 
   return (
     <Container>
@@ -115,14 +123,17 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
           <Label>{t("exchange.buy.selectCrypto")}</Label>
           <SelectCurrency
             onChange={currency => {
-              const accountsForSelectedcurrency = getAccountsForCurrency(currency, allAccounts);
+              invariant(!currency || currency.type !== "FiatCurrency", "not a fiat currency");
+              const accountsForSelectedcurrency = currency
+                ? getAccountsForCurrency(currency, allAccounts)
+                : [];
               setState({
                 currency,
                 account: accountsForSelectedcurrency.length ? accountsForSelectedcurrency[0] : null,
               });
             }}
             currencies={currencies}
-            value={state.currency}
+            value={currency || undefined}
           />
         </FormContent>
         <FormContent>
@@ -136,24 +147,24 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
           <SelectAccount
             accounts={accounts}
             isDisabled={accounts.length === 0}
-            onChange={acc => {
+            onChange={(account, tokenAccount) => {
               setState(oldState => ({
                 ...oldState,
-                account: acc,
+                account: account ? getMainAccount(account, tokenAccount) : null, // supporting tokenAccount would need to change this!
               }));
             }}
-            value={state.account}
+            value={account}
           />
         </FormContent>
         <FormContent>
           <ConfirmButton
             primary
             onClick={() => {
-              if (state.account) {
-                selectAccount(state.account);
+              if (account) {
+                selectAccount(account);
               }
             }}
-            disabled={!state.account}
+            disabled={!account}
           >
             {t("exchange.buy.continue")}
           </ConfirmButton>

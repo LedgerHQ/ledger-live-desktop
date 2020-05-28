@@ -63,7 +63,7 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
   const { t } = useTranslation();
   const widgetRef: { current: null | HTMLIFrameElement } = useRef(null);
 
-  const coinifyConfig = getConfig("developpement");
+  const coinifyConfig = getConfig();
   const widgetConfig: CoinifyWidgetConfig = {
     //    fontColor: colors.darkBlue,
     primaryColor: colors.wallet,

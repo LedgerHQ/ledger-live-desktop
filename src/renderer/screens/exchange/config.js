@@ -1,9 +1,15 @@
 // @flow
 
-export const supportedCurrenciesIds: string[] = ["bitcoin", "ethereum", "bitcoin_cash", "dash"];
+export const supportedCurrenciesIds = ["bitcoin", "ethereum", "bitcoin_cash", "dash"];
+
+type Config = {
+  host: string,
+  url: string,
+  partnerId: number,
+};
 
 const config = {
-  developpement: {
+  sandbox: {
     host: "https://trade-ui.sandbox.coinify.com",
     url: "https://trade-ui.sandbox.coinify.com/widget",
     partnerId: 104,
@@ -15,4 +21,5 @@ const config = {
   },
 };
 
-export const getConfig = (env: string) => config[env];
+export const getConfig = (): Config =>
+  process.env.COINIFY_SANDBOX ? config.sandbox : config.production;
