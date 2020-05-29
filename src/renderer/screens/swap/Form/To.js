@@ -110,7 +110,7 @@ const SwapInputGroup = ({
           rowHeight={47}
           isDisabled={c =>
             (c.type === "CryptoCurrency" || c.type === "TokenCurrency") &&
-            currenciesStatus[c.id] !== "noApp"
+            currenciesStatus[c.id] === "noApp"
           }
         />
       </Box>

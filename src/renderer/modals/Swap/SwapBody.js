@@ -7,7 +7,7 @@ import StepSummary, { StepSummaryFooter } from "~/renderer/modals/Swap/steps/Ste
 import StepDevice from "~/renderer/modals/Swap/steps/StepDevice";
 import StepFinished, { StepFinishedFooter } from "~/renderer/modals/Swap/steps/StepFinished";
 import Breadcrumb from "~/renderer/components/Stepper/Breadcrumb";
-import Text from "~/renderer/components/Text";
+import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import { useDispatch } from "react-redux";
 import { updateAccount } from "~/renderer/actions/accounts";
 import styled from "styled-components";
@@ -44,7 +44,6 @@ const SwapBody = ({
   const onDeviceInteraction = useCallback(
     async result => {
       const { operation, status } = result;
-      debugger;
       let account = swap.exchange.fromAccount;
       account = {
         ...account,
@@ -74,6 +73,8 @@ const SwapBody = ({
     { label: <Trans i18nKey={"swap.modal.steps.finished.title"} /> },
   ];
 
+  const errorSteps = error ? [1] : [];
+
   return (
     <ModalBody
       onClose={onClose}
@@ -83,9 +84,12 @@ const SwapBody = ({
           <Breadcrumb
             mb={40}
             currentStep={["summary", "device", "finished"].indexOf(activeStep)}
+            stepsErrors={errorSteps}
             items={items}
           />
-          {activeStep === "summary" ? (
+          {error ? (
+            <ErrorDisplay error={error} withExportLogs />
+          ) : activeStep === "summary" ? (
             <StepSummary
               swap={swap}
               checkedDisclaimer={checkedDisclaimer}

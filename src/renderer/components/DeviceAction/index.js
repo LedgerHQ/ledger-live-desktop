@@ -11,6 +11,8 @@ import type { DeviceModelId } from "@ledgerhq/devices";
 import type { Device } from "~/renderer/reducers/devices";
 import AutoRepair from "~/renderer/components/AutoRepair";
 import TransactionConfirm from "~/renderer/components/TransactionConfirm";
+import Box from "~/renderer/components/Box";
+import Text from "~/renderer/components/Text";
 import useTheme from "~/renderer/hooks/useTheme";
 import {
   renderAllowManager,
@@ -23,6 +25,7 @@ import {
   renderRequestQuitApp,
   renderRequiresAppInstallation,
   renderWarningOutdated,
+  renderVerifyUnwrapped,
 } from "./rendering";
 
 type OwnProps<R, H, P> = {
@@ -94,6 +97,8 @@ const DeviceAction = <R, H, P>({
     displayUpgradeWarning,
     passWarning,
     initSwapRequested,
+    initSwapError,
+    initSwapResult,
   } = hookState;
 
   const type = useTheme("colors.palette.type");
@@ -127,8 +132,24 @@ const DeviceAction = <R, H, P>({
     return renderAllowManager({ modelId, type, wording });
   }
 
-  if (initSwapRequested) {
-    return <div>{"Some UI for swap confirm requested"}</div>;
+  // FIXME move out of here, this shouldn't be here.
+  if (initSwapRequested && !initSwapResult && !initSwapError) {
+    return (
+      <>
+        {renderVerifyUnwrapped({ modelId: device.modelId, type })}
+        <Box alignItems={"center"}>
+          <Text
+            mt={40}
+            textAlign="center"
+            ff="Inter|SemiBold"
+            color="palette.text.shade100"
+            fontSize={5}
+          >
+            <span style={{ marginRight: 10 }}>{"Confirm SWAP transaction"}</span>
+          </Text>
+        </Box>
+      </>
+    );
   }
 
   if (allowOpeningRequestedWording || requestOpenApp) {

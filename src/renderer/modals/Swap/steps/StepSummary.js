@@ -30,9 +30,6 @@ import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 import FakeLink from "~/renderer/components/FakeLink";
-import CountdownTimer from "~/renderer/components/CountdownTimer";
-import { CountdownTimerWrapper } from "../SwapBody";
-import IconClock from "~/renderer/icons/Clock";
 
 const IconWrapper = styled(Box)`
   background: ${colors.pillActiveBackground};
@@ -134,7 +131,7 @@ const StepSummary = ({
           </Box>
         </FakeLink>
       </Box>
-      <Box mt={6} horizontal alignItems="flex-start" onClick={onSwitchAccept}>
+      <Box mt={6} horizontal alignItems={"center"} onClick={onSwitchAccept}>
         <CheckBox onClick={onSwitchAccept} isChecked={checkedDisclaimer} />
         <Text
           ff="Inter|Regular"
@@ -172,27 +169,20 @@ export const StepSummaryFooter = ({
   onClose: any,
   disabled: boolean,
 }) => (
-  <>
-    <Box flex={1} alignItems={"flex-start"}>
-      <Tooltip content={"Lorem ipsum dolor sit amet ¯_(ツ)_/¯"}>
-        <CountdownTimerWrapper>
-          <IconClock size={14} />
-          <Text ml={2} ff="Inter|SemiBold" fontSize={3} color="palette.text.shade100">
-            <CountdownTimer
-              end={new Date().getTime() + 1200000}
-              callback={() => console.log("asdas")}
-            />
-          </Text>
-        </CountdownTimerWrapper>
-      </Tooltip>
-    </Box>
+  <Box horizontal flex={1} justifyContent={"flex-end"} alignItems={"center"}>
     <Button onClick={onClose} secondary data-e2e="modal_buttonClose_swap">
       <Trans i18nKey="common.close" />
     </Button>
-    <Button onClick={onContinue} disabled={disabled} primary data-e2e="modal_buttonContinue_swap">
+    <Button
+      ml={1}
+      onClick={onContinue}
+      disabled={disabled}
+      primary
+      data-e2e="modal_buttonContinue_swap"
+    >
       <Trans i18nKey="common.confirm" />
     </Button>
-  </>
+  </Box>
 );
 
 export default StepSummary;

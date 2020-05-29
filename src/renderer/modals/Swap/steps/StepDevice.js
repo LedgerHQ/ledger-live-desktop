@@ -3,9 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { command } from "~/renderer/commands";
-import { toExchangeRaw } from "@ledgerhq/live-common/lib/swap/serialization";
-import Text from "~/renderer/components/Text";
-import Box from "~/renderer/components/Box";
 import { useBroadcast } from "~/renderer/hooks/useBroadcast";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
@@ -62,40 +59,38 @@ const StepDevice = ({
         if (initSwapError) {
           onError(initSwapError);
         } else {
-          debugger;
           setSwapData(initSwapResult);
         }
       }}
     />
   ) : (
-    <div>{"WADUS"}</div>
-    // <DeviceAction
-    //   action={action}
-    //   request={{
-    //     tokenCurrency,
-    //     parentAccount,
-    //     account,
-    //     transaction: swapData.transaction,
-    //     status,
-    //   }}
-    //   Result={Result}
-    //   onResult={({ signedOperation, transactionSignError }) => {
-    //     const { swapId } = swapData;
-    //     if (signedOperation) {
-    //       broadcast(signedOperation).then(
-    //         operation => {
-    //           onContinue({
-    //             operation,
-    //             status: { swapId },
-    //           });
-    //         },
-    //         error => {
-    //           onError(error);
-    //         },
-    //       );
-    //     }
-    //   }}
-    // />
+    <DeviceAction
+      action={action}
+      request={{
+        tokenCurrency,
+        parentAccount,
+        account,
+        transaction: swapData.transaction,
+        status,
+      }}
+      Result={Result}
+      onResult={({ signedOperation, transactionSignError }) => {
+        const { swapId } = swapData;
+        if (signedOperation) {
+          broadcast(signedOperation).then(
+            operation => {
+              onContinue({
+                operation,
+                status: { swapId },
+              });
+            },
+            error => {
+              onError(error);
+            },
+          );
+        }
+      }}
+    />
   );
 };
 

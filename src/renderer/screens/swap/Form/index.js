@@ -50,7 +50,6 @@ const Footer: ThemedComponent<{}> = styled(Box)`
   padding: 20px;
 `;
 
-
 const isSameCurrencyFilter = currency => a => {
   const accountCurrency = getAccountCurrency(a);
   return (
@@ -143,12 +142,13 @@ const Form = ({
   }, [state, exchange, fromAccount, toAccount, fromAmount]);
 
   // Re-fetch rates (if needed) every 2 minutes.
-  // useInterval(() => {
-  //   const now = new Date();
-  //   if (ratesTimestamp && now - ratesTimestamp > ratesExpirationThreshold) {
-  //     dispatch({ type: "expireRates" });
-  //   }
-  // }, 1000);
+  // TODO Update the modal if it's open, the rates will expire otherwise
+  useInterval(() => {
+    const now = new Date();
+    if (ratesTimestamp && now - ratesTimestamp > ratesExpirationThreshold) {
+      dispatch({ type: "expireRates" });
+    }
+  }, 1000);
 
   if (!fromAccount) return null;
 
@@ -183,7 +183,9 @@ const Form = ({
               fromCurrency={fromCurrency}
               rate={magnitudeAwareRate}
               currencies={selectableCurrencies.filter(c => c !== fromCurrency)}
-              onCurrencyChange={c => patchExchange({ toCurrency: c })}
+              onCurrencyChange={toCurrency =>
+                dispatch({ type: "setToCurrency", payload: { toCurrency } })
+              }
               onAccountChange={a => patchExchange({ toAccount: a })}
               validAccounts={validTo}
             />

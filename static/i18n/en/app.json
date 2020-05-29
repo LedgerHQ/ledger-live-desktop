@@ -161,7 +161,7 @@
       },
       "addAccount": "Add Account",
       "openManager": "Open Manager",
-      "helpCTA": "What isg Swap?",
+      "helpCTA": "What is Swap?",
       "noAccounts": "You don't have {{currencyName}} accounts",
       "noApp": "You don't have the {{currencyName}} app installed"
     },
@@ -2136,6 +2136,10 @@
     "PasswordIncorrect": {
       "title": "The password entered is incorrect",
       "description": "Please try again"
+    },
+    "SwapGenericAPIError":{
+      "title": "Something went wrong confirming the swap",
+      "description": "Generic lorem ipsum dolor sit amet message to tell the user the swap failed"
     },
     "TimeoutError": {
       "title": "Oops, a timeout occurred",

@@ -22,7 +22,7 @@ import moment from "moment";
 const Label = styled(Text).attrs(() => ({
   fontSize: 2,
   color: "palette.text.shade100",
-  ff: "Inter|Bold",
+  ff: "Inter|SemiBold",
 }))`
   text-transform: uppercase;
 `;
@@ -105,7 +105,7 @@ const SwapOperationDetailsBody = ({
       render={() => (
         <Box>
           <IconWrapper>
-            <IconSwap size={19} />
+            <IconSwap size={27} />
           </IconWrapper>
           <Box my={4} mb={48} alignItems="center">
             <Box selectable>
@@ -168,7 +168,9 @@ const SwapOperationDetailsBody = ({
                 <Trans i18nKey="swap.operationDetailsModal.from" />
               </Label>
               <Box horizontal alignItems={"center"}>
-                <CryptoCurrencyIcon size={16} currency={fromCurrency} />
+                <Box mr={1}>
+                  <CryptoCurrencyIcon size={16} currency={fromCurrency} />
+                </Box>
                 <Value>{getAccountName(fromAccount)}</Value>
               </Box>
             </Box>
@@ -177,7 +179,13 @@ const SwapOperationDetailsBody = ({
                 <Trans i18nKey="swap.operationDetailsModal.initialAmount" />
               </Label>
               <Value>
-                <FormattedVal unit={fromUnit} val={fromAmount} disableRounding />
+                <FormattedVal
+                  unit={fromUnit}
+                  showCode
+                  val={fromAmount}
+                  disableRounding
+                  color={"palette.text.shade50"}
+                />
               </Value>
             </Box>
           </Row>
@@ -187,7 +195,9 @@ const SwapOperationDetailsBody = ({
                 <Trans i18nKey="swap.operationDetailsModal.to" />
               </Label>
               <Box horizontal alignItems={"center"}>
-                <CryptoCurrencyIcon size={16} currency={toCurrency} />
+                <Box mr={1}>
+                  <CryptoCurrencyIcon size={16} currency={toCurrency} />
+                </Box>
                 <Value>{getAccountName(toAccount)}</Value>
               </Box>
             </Box>
@@ -196,7 +206,14 @@ const SwapOperationDetailsBody = ({
                 <Trans i18nKey="swap.operationDetailsModal.creditedAmount" />
               </Label>
               <Value>
-                <FormattedVal unit={toUnit} showCode val={toAmount} fotSize={6} disableRounding />
+                <FormattedVal
+                  unit={toUnit}
+                  showCode
+                  val={toAmount}
+                  fotSize={6}
+                  disableRounding
+                  color={"palette.text.shade50"}
+                />
               </Value>
             </Box>
           </Row>
@@ -204,7 +221,7 @@ const SwapOperationDetailsBody = ({
       )}
       renderFooter={() => (
         <Box alignItems={"flex-end"}>
-          <Button primary onClick={() => null}>
+          <Button primary onClick={onClose}>
             <Text>{"Close"}</Text>
           </Button>
         </Box>
