@@ -87,6 +87,7 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
   // this effect make sure to set the bottom select to a newly created account
   useEffect(() => {
     if (!currency) return;
+    if (account && account.currency === currency) return; // already of the current currency
     setState(oldState => {
       const accountsForDefaultCurrency = getAccountsForCurrency(currency, allAccounts);
       const defaultAccount = accountsForDefaultCurrency.length
@@ -98,7 +99,7 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
         account: defaultAccount,
       };
     });
-  }, [allAccounts, currency]);
+  }, [allAccounts, account, currency]);
 
   const dispatch = useDispatch();
 
