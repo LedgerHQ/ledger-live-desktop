@@ -1,3 +1,9 @@
+import {
+  deviceInfo155 as deviceInfo,
+  mockListAppsResult,
+} from "@ledgerhq/live-common/lib/apps/mock";
+import { toMatchImageSnapshot } from "jest-image-snapshot";
+import { delay } from "@ledgerhq/live-common/lib/promise";
 import { applicationProxy, getMockDeviceEvent, restoreUserData } from "../applicationProxy";
 import OnboardingPage from "../po/onboarding.page";
 import ModalPage from "../po/modal.page";
@@ -6,12 +12,6 @@ import PasswordPage from "../po/password.page";
 import AnalyticsPage from "../po/analytics.page";
 // import PortfolioPage from "../po/portfolio.page";
 import data from "../data/onboarding/";
-import {
-  deviceInfo155 as deviceInfo,
-  mockListAppsResult,
-} from "@ledgerhq/live-common/lib/apps/mock";
-import { toMatchImageSnapshot } from "jest-image-snapshot";
-import { delay } from "@ledgerhq/live-common/lib/promise";
 
 expect.extend({ toMatchImageSnapshot });
 
@@ -29,7 +29,11 @@ describe("Bullrun", () => {
   let mockDeviceEvent;
 
   beforeAll(async () => {
-    app = await applicationProxy({ MOCK: true, DISABLE_MOCK_POINTER_EVENTS: true });
+    app = await applicationProxy({
+      MOCK: true,
+      DISABLE_MOCK_POINTER_EVENTS: true,
+      HIDE_DEBUG_MOCK: true,
+    });
     onboardingPage = new OnboardingPage(app);
     modalPage = new ModalPage(app);
     genuinePage = new GenuinePage(app);
@@ -70,22 +74,19 @@ describe("Bullrun", () => {
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
-      customSnapshotIdentifier: "onboarding-get-started",
-      allowSizeMismatch: true,
+      customSnapshotIdentifier: "onboarding-1-get-started",
     });
     await onboardingPage.selectConfiguration("new");
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
-      customSnapshotIdentifier: "onboarding-screen-new",
-      allowSizeMismatch: true,
+      customSnapshotIdentifier: "onboarding-2-screen-new",
     });
     await onboardingPage.selectDevice("nanox");
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
-      customSnapshotIdentifier: "onboarding-screen-nano-x",
-      allowSizeMismatch: true,
+      customSnapshotIdentifier: "onboarding-3-screen-nano-x",
     });
     await onboardingPage.continue();
     await onboardingPage.continue();
@@ -176,19 +177,64 @@ describe("Bullrun", () => {
 
   it("firmware update flow", async () => {
     await app.client.waitForExist("#manager-update-firmware-button", 100000);
+    await delay(1000);
+    image = await app.browserWindow.capturePage();
+    expect(image).toMatchImageSnapshot({
+      customSnapshotIdentifier: "firmware-update-0-manager-page",
+    });
     $("#manager-update-firmware-button").click();
     await app.client.waitForExist("#firmware-update-disclaimer-modal-seed-ready-checkbox");
+    await delay(1000);
+    image = await app.browserWindow.capturePage();
+    expect(image).toMatchImageSnapshot({
+      customSnapshotIdentifier: "firmware-update-1-disclaimer-modal",
+    });
     $("#firmware-update-disclaimer-modal-seed-ready-checkbox").click();
+    await delay(1000);
+    image = await app.browserWindow.capturePage();
+    expect(image).toMatchImageSnapshot({
+      customSnapshotIdentifier: "firmware-update-2-disclaimer-modal-checkbox",
+    });
     $("#firmware-update-disclaimer-modal-continue-button").click();
+    await delay(1000);
+    image = await app.browserWindow.capturePage();
+    expect(image).toMatchImageSnapshot({
+      customSnapshotIdentifier: "firmware-update-3-disclaimer-modal-continue-1",
+    });
     $("#firmware-update-disclaimer-modal-continue-button").click();
+    await delay(1000);
+    image = await app.browserWindow.capturePage();
+    expect(image).toMatchImageSnapshot({
+      customSnapshotIdentifier: "firmware-update-4-disclaimer-modal-continue-2",
+    });
     await mockDeviceEvent({}, { type: "complete" }); // .complete() install full firmware -> flash mcu
     await app.client.waitForExist("#firmware-update-flash-mcu-title");
+    await delay(1000);
+    image = await app.browserWindow.capturePage();
+    expect(image).toMatchImageSnapshot({
+      customSnapshotIdentifier: "firmware-update-5-flash-mcu-start",
+    });
     await mockDeviceEvent({}, { type: "complete" }); // .complete() flash mcu -> completed
     await app.client.waitForExist("#firmware-update-completed-close-button");
+    await delay(1000);
+    image = await app.browserWindow.capturePage();
+    expect(image).toMatchImageSnapshot({
+      customSnapshotIdentifier: "firmware-update-6-flash-mcu-done",
+    });
     $("#firmware-update-completed-close-button").click();
+    await delay(1000);
+    image = await app.browserWindow.capturePage();
+    expect(image).toMatchImageSnapshot({
+      customSnapshotIdentifier: "firmware-update-7-close-modal",
+    });
     await $("#drawer-dashboard-button").click();
-    expect(true).toBeTruthy();
+    await delay(1000);
+    image = await app.browserWindow.capturePage();
+    expect(image).toMatchImageSnapshot({
+      customSnapshotIdentifier: "firmware-update-8-back-to-dashboard",
+    });
   });
+
   describe("add accounts flow", () => {
     // Add accounts for all currencies with special flows (delegate, vote, etc)
     const currencies = ["dogecoin", "ethereum", "xrp", "ethereum_classic", "tezos"];
