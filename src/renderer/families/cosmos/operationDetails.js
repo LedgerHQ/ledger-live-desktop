@@ -299,7 +299,7 @@ const DelegateAmountCell = ({ operation, currency, unit }: Props) => {
       ? operation.extra.validators.reduce((sum, { amount }) => sum.plus(amount), BigNumber(0))
       : BigNumber(0);
 
-  if (amount.isZero()) return;
+  if (amount.isZero()) return null;
 
   const formattedAmount = formatCurrencyUnit(unit, amount, {
     disableRounding: false,
