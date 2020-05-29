@@ -4,7 +4,7 @@ import invariant from "invariant";
 import React, { useState, useMemo, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
-import ExchangeDollar from "~/renderer/icons/ExchangeDollar";
+import Exchange from "~/renderer/icons/Exchange";
 import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
 import { useTranslation } from "react-i18next";
@@ -32,6 +32,7 @@ const IconContainer: ThemedComponent<{}> = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  color: ${p => p.theme.colors.palette.primary.main};
   background-color: ${p => rgba(p.theme.colors.palette.primary.main, 0.2)};
   width: 56px;
   height: 56px;
@@ -113,7 +114,7 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
   return (
     <Container>
       <IconContainer>
-        <ExchangeDollar size={24} />
+        <Exchange size={24} />
       </IconContainer>
       <Text ff="Inter|SemiBold" fontSize={5} color="palette.text.shade100">
         {t("exchange.buy.title")}

@@ -7,7 +7,12 @@ import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import Tooltip from "~/renderer/components/Tooltip";
-import { isAccountEmpty, canSend, getMainAccount } from "@ledgerhq/live-common/lib/account";
+import {
+  isAccountEmpty,
+  canSend,
+  getMainAccount,
+  getAccountCurrency,
+} from "@ledgerhq/live-common/lib/account";
 import type { TFunction } from "react-i18next";
 import { rgba } from "~/renderer/styles/helpers";
 import { openModal } from "~/renderer/actions/modals";
@@ -15,9 +20,11 @@ import IconAccountSettings from "~/renderer/icons/AccountSettings";
 import perFamily from "~/renderer/generated/AccountHeaderActions";
 import Box, { Tabbable } from "~/renderer/components/Box";
 import Star from "~/renderer/components/Stars/Star";
-import { ReceiveActionDefault, SendActionDefault } from "./AccountActionsDefault";
+import { ReceiveActionDefault, SendActionDefault, BuyActionDefault } from "./AccountActionsDefault";
 import perFamilyAccountActions from "~/renderer/generated/accountActions";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { isCurrencySupported } from "~/renderer/screens/exchange/config";
+import { useHistory } from "react-router-dom";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
   alignItems: "center",
@@ -58,6 +65,9 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const decorators = perFamilyAccountActions[mainAccount.currency.family];
   const SendAction = (decorators && decorators.SendAction) || SendActionDefault;
   const ReceiveAction = (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
+  const currency = getAccountCurrency(account);
+  const availableOnExchange = isCurrencySupported(currency);
+  const history = useHistory();
 
   const onSend = useCallback(() => {
     openModal("MODAL_SEND", { parentAccount, account });
@@ -66,6 +76,10 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const onReceive = useCallback(() => {
     openModal("MODAL_RECEIVE", { parentAccount, account });
   }, [parentAccount, account, openModal]);
+
+  const onBuy = useCallback(() => {
+    history.push("/exchange");
+  }, [history]);
 
   return (
     <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
@@ -77,6 +91,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
           ) : null}
 
           <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
+          {availableOnExchange ? <BuyActionDefault currency={currency} onClick={onBuy} /> : null}
         </>
       ) : null}
       <Tooltip content={t("stars.tooltip")}>
