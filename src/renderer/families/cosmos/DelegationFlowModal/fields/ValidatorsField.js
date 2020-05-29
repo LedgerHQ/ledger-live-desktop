@@ -13,7 +13,9 @@ import {
   useCosmosPreloadData,
   useSortedValidators,
 } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import { mapDelegations } from "@ledgerhq/live-common/lib/families/cosmos/utils";
 import type {
+  CosmosDelegation,
   CosmosDelegationInfo,
   CosmosMappedValidator,
 } from "@ledgerhq/live-common/lib/families/cosmos/types";
@@ -83,19 +85,10 @@ const MaxButton = styled.button`
 export const formatValue = (value: BigNumber, unit: *): number =>
   value.dividedBy(10 ** unit.magnitude).toNumber();
 
-const MinError = (amount: number) => ({
-  name: "MinimumAmountError",
-  amount,
-});
-
-const MaxError = (amount: number) => ({
-  name: "MaximumAmountError",
-  amount,
-});
-
 type Props = {
   t: TFunction,
-  delegations: CosmosDelegationInfo[],
+  validators: CosmosDelegationInfo[],
+  delegations: CosmosDelegation[],
   account: Account,
   status: TransactionStatus,
   onChangeDelegations: (updater: (CosmosDelegationInfo[]) => CosmosDelegationInfo[]) => void,
@@ -109,6 +102,7 @@ const ValidatorField = ({
   status,
   bridgePending,
   delegations,
+  validators,
 }: Props) => {
   invariant(account, "cosmos account required");
 
@@ -117,14 +111,14 @@ const ValidatorField = ({
   invariant(cosmosResources && delegations, "cosmos transaction required");
 
   const unit = getAccountUnit(account);
-  const [initialDelegations] = useState(delegations);
 
-  const { validators } = useCosmosPreloadData();
-  const SR = useSortedValidators(search, validators, delegations);
+  const { validators: cosmosValidators } = useCosmosPreloadData();
+  const SR = useSortedValidators(search, cosmosValidators, []);
+  const currentDelegations = mapDelegations(delegations, cosmosValidators, unit);
 
   const delegationsAvailable = cosmosResources.delegatedBalance.plus(account.spendableBalance);
-  const delegationsUsed = delegations.reduce((sum, v) => sum.plus(v.amount), BigNumber(0));
-  const delegationsSelected = delegations.length;
+  const delegationsUsed = validators.reduce((sum, v) => sum.plus(v.amount), BigNumber(0));
+  const delegationsSelected = validators.length;
 
   const max = delegationsAvailable.minus(delegationsUsed);
 
@@ -171,26 +165,17 @@ const ValidatorField = ({
 
   const renderItem = useCallback(
     ({ validator, rank }: CosmosMappedValidator, i) => {
-      const item = delegations.find(v => v.address === validator.validatorAddress);
-      const initialItem = initialDelegations.find(v => v.address === validator.validatorAddress);
+      const item = validators.find(v => v.address === validator.validatorAddress);
+      const d = currentDelegations.find(v => v.validatorAddress === validator.validatorAddress);
 
       const onChange = value => onUpdateDelegation(validator.validatorAddress, value);
 
       const onMax = () =>
         onUpdateDelegation(validator.validatorAddress, item ? item.amount.plus(max) : max);
 
-      console.log(item && item.amount);
+      const maxError = item && item.amount && max.lt(0);
 
-      const maxError =
-        item && item.amount && max.lt(0)
-          ? MaxError(formatValue(item.amount.plus(max), unit))
-          : null;
-      const minError =
-        initialItem && (!item || item.amount.lt(initialItem.amount))
-          ? MinError(formatValue(initialItem.amount, unit))
-          : null;
-
-      const error = maxError || minError;
+      const error = maxError;
 
       return (
         <ValidatorRow
@@ -203,17 +188,21 @@ const ValidatorField = ({
           }
           title={`${rank}. ${validator.name || validator.validatorAddress}`}
           subtitle={
-            <Trans
-              i18nKey="cosmos.delegation.votingPower"
-              values={{ amount: (validator.votingPower * 1e2).toFixed(2) }}
-            />
+            d ? (
+              <Trans
+                i18nKey="cosmos.delegation.currentDelegation"
+                values={{ amount: d.formattedAmount }}
+              >
+                <b></b>
+              </Trans>
+            ) : null
           }
           sideInfo={
             <Box pr={1}>
               <Text textAlign="center" ff="Inter|SemiBold" fontSize={2}>
                 {/* $FlowFixMe */}
                 {validator.estimatedYearlyRewardsRate
-                  ? (validator.estimatedYearlyRewardsRate * 1e2).toFixed(2)
+                  ? `${(validator.estimatedYearlyRewardsRate * 1e2).toFixed(2)} %`
                   : "N/A"}
               </Text>
               <Text textAlign="center" fontSize={1}>
@@ -249,15 +238,7 @@ const ValidatorField = ({
         />
       );
     },
-    [
-      initialDelegations,
-      delegations,
-      onUpdateDelegation,
-      onExternalLink,
-      notEnoughDelegations,
-      max,
-      unit,
-    ],
+    [validators, onUpdateDelegation, onExternalLink, notEnoughDelegations, max, unit],
   );
 
   if (!status) return null;

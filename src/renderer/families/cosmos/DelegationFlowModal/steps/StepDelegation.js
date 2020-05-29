@@ -22,6 +22,10 @@ export default function StepDelegation({
   invariant(account && transaction && transaction.validators, "account and transaction required");
   const bridge = getAccountBridge(account, parentAccount);
 
+  const { cosmosResources } = account;
+
+  const delegations = cosmosResources.delegations || [];
+
   const updateDelegation = useCallback(
     updater => {
       onUpdateTransaction(transaction =>
@@ -38,7 +42,8 @@ export default function StepDelegation({
       <TrackPage category="Delegation Flow" name="Step 1" />
       <ValidatorsField
         account={account}
-        delegations={transaction.validators || []}
+        validators={transaction.validators || []}
+        delegations={delegations}
         bridgePending={bridgePending}
         onChangeDelegations={updateDelegation}
         status={status}

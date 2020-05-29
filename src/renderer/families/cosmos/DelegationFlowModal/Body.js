@@ -112,20 +112,13 @@ const Body = ({
 
     invariant(account && account.cosmosResources, "cosmos: account and cosmos resources required");
 
-    const { cosmosResources } = account;
-
-    const delegations = cosmosResources.delegations || [];
-
     const bridge = getAccountBridge(account, undefined);
 
     const t = bridge.createTransaction(account);
 
     const transaction = bridge.updateTransaction(t, {
       mode: "delegate",
-      validators: delegations.map(({ validatorAddress, amount }) => ({
-        address: validatorAddress,
-        amount,
-      })),
+      validators: [],
       /** @TODO remove this once the bridge handles it */
       recipient: account.freshAddress,
     });
@@ -177,7 +170,7 @@ const Body = ({
     steps,
     errorSteps: [],
     disabledSteps: [],
-    hideBreadcrumb: !!error,
+    hideBreadcrumb: !!error && stepId !== "castDelegations",
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,

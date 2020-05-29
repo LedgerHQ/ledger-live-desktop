@@ -856,16 +856,16 @@
       "header": "Delegation(s)",
       "Amount": "Amount",
       "noRewards": "No rewards available",
-      "delegate": "Delegate",
+      "delegate": "Delegate more",
       "undelegate": "Undelegate",
       "redelegate": "Redelegate",
       "reward": "Collect rewards",
-      "votingPower": "Voting power: {{amount}}%",
+      "currentDelegation": "Delegation: <0>{{amount}}</0>",
       "estYield": "est. yield",
       "activeTooltip": "This validator is active and generates rewards",
       "inactiveTooltip": "This validator is inactive and doesn't generate rewards",
       "flow": {
-        "title": "Delegate assets",
+        "title": "Delegate more assets",
         "steps": {
           "starter": {
             "description": "Delegate your ATOM to earn rewards while keeping full security  and control on your assets.",
@@ -1971,12 +1971,6 @@
     },
     "StellarMemoRecommended": {
       "title": "When sending to this recipient, a memo may be required"
-    },
-    "MinimumAmountError": {
-      "title": "Min: {{amount}}"
-    },
-    "MaximumAmountError": {
-      "title": "Max: {{amount}}"
     }
   }
 }
