@@ -18,6 +18,7 @@ import IconRedelegate from "~/renderer/icons/Redelegate";
 import IconSend from "~/renderer/icons/Send";
 import IconPlus from "~/renderer/icons/Plus";
 import IconEye from "~/renderer/icons/Eye";
+import IconFees from "~/renderer/icons/Fees";
 
 import Freeze from "~/renderer/icons/Freeze";
 import Unfreeze from "~/renderer/icons/Unfreeze";
@@ -95,6 +96,7 @@ const iconsComponent = {
   UNFREEZE: Unfreeze,
   VOTE: Vote,
   REWARD: ClaimRewards,
+  FEES: IconFees,
 };
 
 class ConfirmationCheck extends PureComponent<{

@@ -64,7 +64,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
   const { spendableBalance: _spendableBalance, cosmosResources } = account;
   const {
     delegatedBalance: _delegatedBalance,
-    unboundingBalance: _unboundingBalance,
+    unbondingBalance: _unbondingBalance,
   } = cosmosResources;
 
   const unit = getAccountUnit(account);
@@ -80,7 +80,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
 
   const delegatedBalance = formatCurrencyUnit(unit, _delegatedBalance, formatConfig);
 
-  const unboundingBalance = formatCurrencyUnit(unit, _unboundingBalance, formatConfig);
+  const unbondingBalance = formatCurrencyUnit(unit, _unbondingBalance, formatConfig);
 
   return (
     <Wrapper>
@@ -120,7 +120,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
           </TitleWrapper>
         </ToolTip>
         <AmountValue>
-          <Discreet>{+unboundingBalance || "–"}</Discreet>
+          <Discreet>{+unbondingBalance || "–"}</Discreet>
         </AmountValue>
       </BalanceDetail>
     </Wrapper>

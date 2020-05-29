@@ -20,7 +20,7 @@ const Row: ThemedComponent<{ active: boolean, disabled: boolean }> = styled(Box)
   border-radius: 4px;
   border: 1px solid transparent;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   border-color: ${p =>
     p.active ? p.theme.colors.palette.primary.main : p.theme.colors.palette.divider};
   ${p =>

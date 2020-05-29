@@ -69,11 +69,6 @@ export function StepStarterFooter({
   transaction,
 }: StepProps) {
   invariant(account, "account required");
-  const { errors } = status;
-  const hasErrors = Object.keys(errors).length;
-  const canNext = !bridgePending && !hasErrors;
-
-  // @TODO add in the support popover info
   return (
     <>
       <LinkWithExternalIcon
@@ -84,7 +79,7 @@ export function StepStarterFooter({
         <Button mr={1} secondary onClick={onClose}>
           <Trans i18nKey="common.cancel" />
         </Button>
-        <Button disabled={!canNext} primary onClick={() => transitionTo("validators")}>
+        <Button primary onClick={() => transitionTo("validators")}>
           <Trans i18nKey="common.continue" />
         </Button>
       </Box>

@@ -62,7 +62,6 @@ const Delegation = ({ account }: Props) => {
   const mappedUnbondings = mapUnbondings(unbondings, validators, unit);
 
   const onEarnRewards = useCallback(() => {
-    /** @TODO redirect to the cosmos info modal */
     dispatch(
       openModal("MODAL_COSMOS_REWARDS_INFO", {
         account,

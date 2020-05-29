@@ -17,7 +17,6 @@ import type {
   CosmosDelegationInfo,
   CosmosMappedValidator,
 } from "@ledgerhq/live-common/lib/families/cosmos/types";
-import { formatValue, MAX_VOTES } from "@ledgerhq/live-common/lib/families/cosmos/utils";
 
 import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
@@ -57,6 +56,10 @@ const InputBox = styled(Box).attrs(() => ({
     opacity: 1;
     pointer-events: auto;
   }
+  #input-error {
+    font-size: 10px;
+    padding-bottom: 4px;
+  }
 `;
 
 const MaxButton = styled.button`
@@ -76,6 +79,19 @@ const MaxButton = styled.button`
     filter: contrast(2);
   }
 `;
+
+export const formatValue = (value: BigNumber, unit: *): number =>
+  value.dividedBy(10 ** unit.magnitude).toNumber();
+
+const MinError = (amount: number) => ({
+  name: "MinimumAmountError",
+  amount,
+});
+
+const MaxError = (amount: number) => ({
+  name: "MaximumAmountError",
+  amount,
+});
 
 type Props = {
   t: TFunction,
@@ -101,6 +117,7 @@ const ValidatorField = ({
   invariant(cosmosResources && delegations, "cosmos transaction required");
 
   const unit = getAccountUnit(account);
+  const [initialDelegations] = useState(delegations);
 
   const { validators } = useCosmosPreloadData();
   const SR = useSortedValidators(search, validators, delegations);
@@ -113,7 +130,7 @@ const ValidatorField = ({
 
   const onUpdateDelegation = useCallback(
     (address, value) => {
-      const amount = delegationsSelected > MAX_VOTES ? BigNumber(0) : BigNumber(value);
+      const amount = BigNumber(value);
 
       onChangeDelegations(existing => {
         const update = existing.filter(v => v.address !== address);
@@ -123,7 +140,7 @@ const ValidatorField = ({
         return update;
       });
     },
-    [onChangeDelegations, delegationsSelected],
+    [onChangeDelegations],
   );
 
   const containerRef = useRef();
@@ -155,11 +172,25 @@ const ValidatorField = ({
   const renderItem = useCallback(
     ({ validator, rank }: CosmosMappedValidator, i) => {
       const item = delegations.find(v => v.address === validator.validatorAddress);
+      const initialItem = initialDelegations.find(v => v.address === validator.validatorAddress);
 
       const onChange = value => onUpdateDelegation(validator.validatorAddress, value);
 
       const onMax = () =>
         onUpdateDelegation(validator.validatorAddress, item ? item.amount.plus(max) : max);
+
+      console.log(item && item.amount);
+
+      const maxError =
+        item && item.amount && max.lt(0)
+          ? MaxError(formatValue(item.amount.plus(max), unit))
+          : null;
+      const minError =
+        initialItem && (!item || item.amount.lt(initialItem.amount))
+          ? MinError(formatValue(initialItem.amount, unit))
+          : null;
+
+      const error = maxError || minError;
 
       return (
         <ValidatorRow
@@ -197,17 +228,19 @@ const ValidatorField = ({
           Input={
             <InputBox active={item && item.amount}>
               <InputCurrency
-                autoFocus={true}
-                containerProps={{ grow: true }}
+                containerProps={{ grow: true, style: { height: 32, zIndex: 10 } }}
                 unit={unit}
-                disabled={!item && delegationsSelected >= MAX_VOTES}
+                error={error}
+                disabled={!item && max.lte(0)}
                 value={item && item.amount}
                 onChange={onChange}
                 renderRight={
                   <InputRight>
-                    <MaxButton onClick={onMax}>
-                      <Trans i18nKey="vote.steps.castVotes.max" />
-                    </MaxButton>
+                    {max.gt(0) && (
+                      <MaxButton onClick={onMax}>
+                        <Trans i18nKey="vote.steps.castVotes.max" />
+                      </MaxButton>
+                    )}
                   </InputRight>
                 }
               />
@@ -217,10 +250,10 @@ const ValidatorField = ({
       );
     },
     [
+      initialDelegations,
       delegations,
       onUpdateDelegation,
       onExternalLink,
-      delegationsSelected,
       notEnoughDelegations,
       max,
       unit,
@@ -235,7 +268,7 @@ const ValidatorField = ({
         votesSelected={delegationsSelected}
         votesAvailable={delegationsAvailable}
         max={formatValue(max, unit)}
-        maxVotes={MAX_VOTES}
+        maxVotes={Infinity}
         totalValidators={SR.length}
         notEnoughVotes={notEnoughDelegations}
       />

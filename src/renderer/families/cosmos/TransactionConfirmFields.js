@@ -79,7 +79,7 @@ const CosmosDelegateValidatorsField = ({
     mappedValidators.length > 0 && (
       <Box vertical justifyContent="space-between" mb={2}>
         <TransactionConfirmField label={field.label} />
-        {mappedValidators.map(({ amount, validator, address }, i) => (
+        {mappedValidators.map(({ formattedAmount, validator, address }, i) => (
           <OpDetailsData key={address + i}>
             <OpDetailsVoteData>
               <Box>
@@ -87,7 +87,7 @@ const CosmosDelegateValidatorsField = ({
                   <Trans
                     i18nKey="operationDetails.extra.votesAddress"
                     values={{
-                      votes: amount,
+                      votes: formattedAmount,
                       name: validator?.name ?? address,
                     }}
                   >

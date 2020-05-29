@@ -76,7 +76,8 @@
       "VOTE": "Voted",
       "FREEZE": "Frozen",
       "UNFREEZE": "Unfrozen",
-      "REWARD": "Claimed reward"
+      "REWARD": "Claimed reward",
+      "FEES": "Fees"
     }
   },
   "byteSize": {
@@ -1970,6 +1971,12 @@
     },
     "StellarMemoRecommended": {
       "title": "When sending to this recipient, a memo may be required"
+    },
+    "MinimumAmountError": {
+      "title": "Min: {{amount}}"
+    },
+    "MaximumAmountError": {
+      "title": "Max: {{amount}}"
     }
   }
 }
