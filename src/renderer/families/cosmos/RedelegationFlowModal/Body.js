@@ -180,7 +180,7 @@ const Body = ({
     steps,
     errorSteps: [],
     disabledSteps: [],
-    hideBreadcrumb: !!error,
+    hideBreadcrumb: !!error && stepId !== "validators",
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,

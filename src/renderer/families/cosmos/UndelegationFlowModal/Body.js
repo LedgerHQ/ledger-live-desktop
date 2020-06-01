@@ -117,7 +117,7 @@ export default function Body({
     steps,
     errorSteps: [],
     disabledSteps: [],
-    hideBreadcrumb: !!error,
+    hideBreadcrumb: !!error && stepId !== "amount",
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import {
   useCosmosPreloadData,
   useSortedValidators,
+  useCosmosMappedDelegations,
 } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 
@@ -69,6 +70,12 @@ export default function ValidatorField({
   const onSearch = useCallback(evt => setSearch(evt.target.value), [setSearch]);
 
   const sortedValidators = useSortedValidators(search, validators, []);
+  const fromValidatorAddress = transaction.cosmosSourceValidator;
+  const sortedFilteredValidators = sortedValidators.filter(
+    v => v.validator.validatorAddress !== fromValidatorAddress,
+  );
+
+  const mappedDelegations = useCosmosMappedDelegations(account);
 
   const selectedValidator = useMemo(
     () =>
@@ -100,21 +107,26 @@ export default function ValidatorField({
 
   const renderItem = useCallback(
     ({ validator, rank, address }, i) => {
+      const d = mappedDelegations.find(d => d.validatorAddress === validator.validatorAddress);
       return (
         <ValidatorRow
           key={`SR_${validator.address}_${i}`}
           validator={{ ...validator, address: address || validator.validatorAddress }}
           icon={
             <IconContainer isSR>
-              <FirstLetterIcon label={validator.name || validator.address} />
+              <FirstLetterIcon label={validator.name || validator.validatorAddress} />
             </IconContainer>
           }
           title={`${rank}. ${validator.name || validator.address}`}
           subtitle={
-            <Trans
-              i18nKey="cosmos.delegation.votingPower"
-              values={{ amount: (validator.votingPower * 1e2).toFixed(2) }}
-            />
+            d ? (
+              <Trans
+                i18nKey="cosmos.delegation.currentDelegation"
+                values={{ amount: d.formattedAmount }}
+              >
+                <b></b>
+              </Trans>
+            ) : null
           }
           sideInfo={
             <Box pr={1}>
@@ -134,7 +146,7 @@ export default function ValidatorField({
         />
       );
     },
-    [onExternalLink, onSelect],
+    [onExternalLink, onSelect, mappedDelegations],
   );
 
   return (
@@ -170,7 +182,7 @@ export default function ValidatorField({
         </Box>
         {isOpen && (
           <ScrollLoadingList
-            data={sortedValidators}
+            data={sortedFilteredValidators}
             style={{ flex: "1 0 240px" }}
             renderItem={renderItem}
             noResultPlaceholder={

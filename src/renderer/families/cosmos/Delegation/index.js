@@ -25,6 +25,7 @@ import { Row, UnbondingRow } from "./Row";
 
 import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
+import InfoCircle from "~/renderer/icons/InfoCircle";
 
 type Props = {
   account: Account,
@@ -176,15 +177,15 @@ const Delegation = ({ account }: Props) => {
       )}
       {hasUnbondings ? (
         <>
-          <Box horizontal alignItems="center" justifyContent="space-between">
-            <Text
-              ff="Inter|Medium"
-              fontSize={6}
-              color="palette.text.shade100"
-              data-e2e="title_Delegation"
-            >
-              <Trans i18nKey="cosmos.undelegation.header" />
-            </Text>
+          <Box horizontal alignItems="center" color="palette.text.shade100">
+            <ToolTip content={<Trans i18nKey="cosmos.undelegation.headerTooltip" />}>
+              <Text ff="Inter|Medium" fontSize={6} data-e2e="title_Undelegation">
+                <Trans i18nKey="cosmos.undelegation.header" />
+              </Text>
+              <Box ml={2} horizontal alignItems="center">
+                <InfoCircle />
+              </Box>
+            </ToolTip>
           </Box>
           <Card p={0} mt={24} mb={6}>
             <UnbondingHeader />

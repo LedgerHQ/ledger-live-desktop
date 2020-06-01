@@ -182,7 +182,7 @@ const Body = ({
     steps,
     errorSteps: [],
     disabledSteps: [],
-    hideBreadcrumb: !!error,
+    hideBreadcrumb: !!error && stepId !== "claimRewards",
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,

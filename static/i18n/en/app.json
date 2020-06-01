@@ -847,8 +847,8 @@
   "cosmos": {
     "delegation": {
       "emptyState": {
-        "description": "Delegate your assets to one or more validators to start earning rewards.",
-        "info": "How Delegating works",
+        "description": "You can earn ATOM rewards by delegating your assets.",
+        "info": "How Delegation works",
         "delegation": "Earn rewards"
       },
       "claimRewards": "Claim rewards",
@@ -859,8 +859,8 @@
       "delegate": "Delegate more",
       "undelegate": "Undelegate",
       "redelegate": "Redelegate",
-      "reward": "Collect rewards",
-      "currentDelegation": "Delegation: <0>{{amount}}</0>",
+      "reward": "Claim rewards",
+      "currentDelegation": "Delegated: <0>{{amount}}</0>",
       "estYield": "est. yield",
       "activeTooltip": "This validator is active and generates rewards",
       "inactiveTooltip": "This validator is inactive and doesn't generate rewards",
@@ -868,18 +868,19 @@
         "title": "Delegate more assets",
         "steps": {
           "starter": {
-            "description": "Delegate your ATOM to earn rewards while keeping full security  and control on your assets.",
+            "description": "You may earn rewards by delegating your ATOM to a validator.",
             "bullet": [
-              "Delegated assets stay yours",
-              "You’ll have to wait for 21 days to complete an undelegation",
-              "Delegate securely with your Ledger device"
+              "You keep ownership of delegated assets",
+              "Delegate using your Ledger device",
+              "The undelegation process takes 21 days to finalize."
             ],
             "warning": {
-              "description": "Delegate ATOM asset can imply some losses if the chosen delegator doesn’t act rightfully on the network. "
+              "description": "Choose you validator wisely.  Part of your delegated assets may be destroyed if the validator does not behave appropriately."
             }
           },
           "validator": {
-            "title": "Validators"
+            "title": "Validators",
+            "feesInfo": "Selected amounts are fees included"
           },
           "connectDevice": {
             "title": "Device"
@@ -909,10 +910,10 @@
             "compound": "Compound",
             "claim": "Cash in",
             "compoundOrClaim": "Compound or cash in",
-            "compoundDescription": "--!NEED TEXT HERE!--",
-            "claimDescription": "--!NEED TEXT HERE!--",
-            "compoundInfo": "You earned <0>{{amount}}</0> By clicking Continue, they will be claimed now and automatically delegated to the same validator",
-            "claimInfo": "You earned <0>{{amount}}</0> by delegating assets, they will be claimed now and added to your available balance",
+            "compoundDescription": "Rewards will be added to delegated amount",
+            "claimDescription": "Rewards will be added to the available balance",
+            "compoundInfo": "You earned <0>{{amount}}</0>. By clicking Continue, they will be claimed now and automatically delegated to the same validator.",
+            "claimInfo": "You earned <0>{{amount}}</0> from the validator below.. By clicking Continue, they will be claimed now and automatically added to the available balance.",
             "selectLabel": "Select a delegation"
           },
           "connectDevice": {
@@ -925,7 +926,7 @@
               "title": "Rewards cashed in successfully",
               "titleCompound": "Rewards compounded successfully",
               "text": "Your rewards have been added to your available balance",
-              "textCompound": "Your rewards <0>{{amount}}</0> have been automatically redelegated to <0>{{validator}}</0>",
+              "textCompound": "Your rewards <0>{{amount}}</0> have been automatically delegated to <0>{{validator}}</0>",
               "cta": "View details"
             },
             "pending": {
@@ -942,8 +943,8 @@
         "steps": {
           "starter": {
             "title": "Redelegation",
-            "description": "Redelegate assets from one validator to another. Redelegating allows your stake to continuously generate rewards.",
-            "warning": "You can not redelegate amounts that are still in the <0>21-day timelock</0>. You can have a maximum of <0>7 pending redelegations</0>.",
+            "description": "Use redelegation to easily change from one validator to another. But if you change your mind again, you will have to wait because redelegation triggers a 21-day timelock.",
+            "warning": "Choose you validator wisely.  Part of your delegated assets may be destroyed if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
             "howDelegationWorks": "How delegation works?"
           },
           "validators": {
@@ -963,7 +964,7 @@
             "title": "Confirmation",
             "success": {
               "title": "You have successfully redelegated your assets",
-              "text": "The delegation will update once the blockchain has confirmed the transaction",
+              "text": "The redelegation will update once the blockchain has confirmed the transaction",
               "cta": "View details"
             },
             "pending": {
@@ -976,6 +977,7 @@
     },
     "undelegation": {
       "header": "Undelegation(s)",
+      "headerTooltip": "Available after the 21-day timelock",
       "flow": {
         "title": "Undelegate assets",
         "steps": {

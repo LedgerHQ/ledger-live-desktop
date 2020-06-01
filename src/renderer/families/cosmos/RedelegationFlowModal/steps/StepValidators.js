@@ -145,7 +145,7 @@ export default function StepValidators({
       {!validatorOpen && (
         <>
           {selectedValidator && (
-            <Box mb={2}>
+            <Box mb={4}>
               <AmountField
                 amount={amount}
                 validator={sourceValidator}
