@@ -116,11 +116,10 @@ const ValidatorField = ({
   const SR = useSortedValidators(search, cosmosValidators, []);
   const currentDelegations = mapDelegations(delegations, cosmosValidators, unit);
 
-  const delegationsAvailable = cosmosResources.delegatedBalance.plus(account.spendableBalance);
+  const delegationsAvailable = account.spendableBalance;
   const delegationsUsed = validators.reduce((sum, v) => sum.plus(v.amount), BigNumber(0));
   const delegationsSelected = validators.length;
-
-  const max = delegationsAvailable.minus(delegationsUsed);
+  const max = account.spendableBalance.minus(delegationsUsed);
 
   const onUpdateDelegation = useCallback(
     (address, value) => {
@@ -238,7 +237,15 @@ const ValidatorField = ({
         />
       );
     },
-    [validators, onUpdateDelegation, onExternalLink, notEnoughDelegations, max, unit],
+    [
+      validators,
+      onUpdateDelegation,
+      onExternalLink,
+      notEnoughDelegations,
+      max,
+      unit,
+      currentDelegations,
+    ],
   );
 
   if (!status) return null;

@@ -24,6 +24,8 @@ export default function StepDelegation({
 
   const { cosmosResources } = account;
 
+  invariant(cosmosResources, "cosmosResources required");
+
   const delegations = cosmosResources.delegations || [];
 
   const updateDelegation = useCallback(
@@ -66,7 +68,6 @@ export function StepDelegationFooter({
   const { errors } = status;
   const hasErrors = Object.keys(errors).length;
   const canNext = !bridgePending && !hasErrors;
-
   // @TODO add in the support popover info
   return (
     <>
