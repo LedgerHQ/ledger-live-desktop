@@ -1,4 +1,4 @@
-import { applicationProxy, getMockDeviceEvent } from "../applicationProxy";
+import { applicationProxy, removeUserData, getMockDeviceEvent } from "../applicationProxy";
 import OnboardingPage from "../po/onboarding.page";
 import ModalPage from "../po/modal.page";
 import GenuinePage from "../po/genuine.page";
@@ -37,7 +37,7 @@ describe("When I launch the app for the first time", () => {
   });
 
   afterAll(() => {
-    return app.stop();
+    return app.stop().then(() => removeUserData());
   });
 
   it("opens a window", () => {
