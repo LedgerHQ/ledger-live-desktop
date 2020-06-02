@@ -43,6 +43,14 @@ const Row: ThemedComponent<{ active: boolean, disabled: boolean }> = styled(Box)
           }
         `
       : ""}
+  ${p =>
+    p.onClick
+      ? `
+          &:hover {
+            border-color: ${p.theme.colors.palette.primary.main};
+          }
+  `
+      : ""}
 `;
 
 export const IconContainer: ThemedComponent<*> = styled.div`
@@ -102,6 +110,8 @@ const SubTitle = styled(Box).attrs(() => ({
   color: ${p => p.theme.colors.palette.text.shade60};
 `;
 
+const SideInfo = styled(Box)``;
+
 const RightFloating = styled.div`
   position: absolute;
   right: 0;
@@ -153,12 +163,15 @@ type ValidatorRowProps = {
   icon: React$Node,
   title: React$Node,
   subtitle: React$Node,
+  sideInfo?: React$Node,
   value?: number,
   disabled?: boolean,
-  maxAvailable: number,
-  notEnoughVotes: boolean,
-  onUpdateVote: (string, string) => void,
+  maxAvailable?: number,
+  notEnoughVotes?: boolean,
+  onClick?: (*) => void,
+  onUpdateVote?: (string, string) => void,
   onExternalLink: (address: string) => void,
+  style?: *,
 };
 
 const ValidatorRow = ({
@@ -166,42 +179,50 @@ const ValidatorRow = ({
   icon,
   title,
   subtitle,
+  sideInfo,
   value,
   disabled,
   onUpdateVote,
   onExternalLink,
-  maxAvailable,
+  maxAvailable = 0,
   notEnoughVotes,
+  onClick = () => {},
+  style,
 }: ValidatorRowProps) => {
   const inputRef = useRef();
-  const onTitleClick = useCallback(() => {
-    onExternalLink(validator.address);
-  }, [validator, onExternalLink]);
+  const onTitleClick = useCallback(
+    e => {
+      e.stopPropagation();
+      onExternalLink(validator.address);
+    },
+    [validator, onExternalLink],
+  );
   const onFocus = useCallback(() => {
     inputRef.current && inputRef.current.select();
   }, []);
 
   const onChange = useCallback(
     e => {
-      onUpdateVote(validator.address, e.target.value);
+      onUpdateVote && onUpdateVote(validator.address, e.target.value);
     },
     [validator, onUpdateVote],
   );
   const onMax = useCallback(() => {
-    onUpdateVote(validator.address, String(maxAvailable + (value || 0)));
+    onUpdateVote && onUpdateVote(validator.address, String(maxAvailable + (value || 0)));
   }, [validator, onUpdateVote, maxAvailable, value]);
 
   /** focus input on row click */
-  const onClick = useCallback(() => {
+  const onRowClick = useCallback(() => {
     if (inputRef && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [inputRef]);
+    onClick(validator);
+  }, [inputRef, onClick, validator]);
 
   const itemExists = typeof value === "number";
 
   return (
-    <Row disabled={!value && disabled} active={!!value} onClick={onClick}>
+    <Row style={style} disabled={!value && disabled} active={!!value} onClick={onRowClick}>
       {icon}
       <InfoContainer>
         <Title onClick={onTitleClick}>
@@ -211,34 +232,36 @@ const ValidatorRow = ({
           </IconContainer>
         </Title>
         <SubTitle>{subtitle}</SubTitle>
-        {/** @TODO add estimated yield here */}
       </InfoContainer>
-      <InputBox active={!!value}>
-        <VoteInput
-          // $FlowFixMe
-          ref={inputRef}
-          placeholder="0"
-          type="text"
-          maxLength="12"
-          notEnoughVotes={itemExists && notEnoughVotes}
-          value={itemExists ? String(value) : "0"}
-          disabled={disabled}
-          onFocus={onFocus}
-          onChange={onChange}
-        />
-        {!maxAvailable || disabled ? null : (
-          <RightFloating>
-            <Button
-              onClick={onMax}
-              style={{ fontSize: "10px", padding: "0 8px", height: 22 }}
-              primary
-              small
-            >
-              <Trans i18nKey="vote.steps.castVotes.max" />
-            </Button>
-          </RightFloating>
-        )}
-      </InputBox>
+      <SideInfo>{sideInfo}</SideInfo>
+      {onUpdateVote && (
+        <InputBox active={!!value}>
+          <VoteInput
+            // $FlowFixMe
+            ref={inputRef}
+            placeholder="0"
+            type="text"
+            maxLength="12"
+            notEnoughVotes={itemExists && notEnoughVotes}
+            value={itemExists ? String(value) : "0"}
+            disabled={disabled}
+            onFocus={onFocus}
+            onChange={onChange}
+          />
+          {!maxAvailable || disabled ? null : (
+            <RightFloating>
+              <Button
+                onClick={onMax}
+                style={{ fontSize: "10px", padding: "0 8px", height: 22 }}
+                primary
+                small
+              >
+                <Trans i18nKey="vote.steps.castVotes.max" />
+              </Button>
+            </RightFloating>
+          )}
+        </InputBox>
+      )}
     </Row>
   );
 };

@@ -95,6 +95,7 @@ const iconsComponent = {
   UNFREEZE: Unfreeze,
   VOTE: Vote,
   REWARD: ClaimRewards,
+  FEES: IconSend, // FIXME
 };
 
 class ConfirmationCheck extends PureComponent<{

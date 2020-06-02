@@ -12,7 +12,7 @@ jobs:
   type-checking:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@master
         with:
           node-version: 12.x
@@ -26,4 +26,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: run headless tests
-        uses: ledgerhq/actions/run-headless@v1.1.0
+        uses: ledgerhq/actions/run-headless@v1.2.0
+      - name: upload diffs
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v1
+        with:
+          name: "diff_output"
+          path: tests/specs/__image_snapshots__/__diff_output__

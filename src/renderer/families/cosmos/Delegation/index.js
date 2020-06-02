@@ -29,17 +29,19 @@ import Row from "./Row";
 import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
 
-/** @TODO move this in common */
-export const formatDelegations = (
-  delegations: CosmosDelegation[],
-  validators: CosmosValidatorItem[],
-): {
+export type FormattedDelegation = {
   validator: ?CosmosValidatorItem,
   address: string,
   pendingRewards: BigNumber,
   amount: BigNumber,
   status: CosmosDelegationStatus,
-}[] => {
+};
+
+/** @TODO move this in common */
+export const formatDelegations = (
+  delegations: CosmosDelegation[],
+  validators: CosmosValidatorItem[],
+): FormattedDelegation[] => {
   return delegations.map((d, i, arr) => ({
     validator: validators.find(v => v.validatorAddress === d.validatorAddress),
     address: d.validatorAddress,

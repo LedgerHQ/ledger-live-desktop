@@ -12,12 +12,12 @@ jobs:
   bundle-macos:
     runs-on: macos-latest
     steps:
-      - uses: ledgerhq/actions/check-member@v1.1.0
+      - uses: ledgerhq/actions/check-member@v1.2.0
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
         if: github.event_name == 'pull_request'
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@master
         with:
           node-version: 12.x
@@ -56,7 +56,7 @@ jobs:
           username: ${{ github.actor }}
           ban: ledgerlive
         if: github.event_name == 'pull_request'
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@master
         with:
           node-version: 12.x
@@ -100,12 +100,12 @@ jobs:
   bundle-windows:
     runs-on: windows-latest
     steps:
-      - uses: ledgerhq/actions/check-member@v1.1.0
+      - uses: ledgerhq/actions/check-member@v1.2.0
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
         if: github.event_name == 'pull_request'
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@master
         with:
           node-version: 12.x
@@ -127,9 +127,9 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
-      - uses: ledgerhq/actions/get-package-infos@v1.1.0
+      - uses: ledgerhq/actions/get-package-infos@v1.2.0
         id: version
-      - uses: ledgerhq/actions/get-pr-number@v1.1.0
+      - uses: ledgerhq/actions/get-pr-number@v1.2.0
         id: pr
         if: github.event_name == 'pull_request'
       - name: make local version (pr)
@@ -140,7 +140,7 @@ jobs:
         if: github.event_name == 'push'
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.1.0
+      - uses: ledgerhq/actions/get-package-infos@v1.2.0
         id: post-version
       - name: upload windows
         uses: actions/upload-artifact@v1
