@@ -10,17 +10,6 @@ import Breadcrumb from "~/renderer/components/Stepper/Breadcrumb";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import { useDispatch } from "react-redux";
 import { updateAccount } from "~/renderer/actions/accounts";
-import styled from "styled-components";
-
-export const CountdownTimerWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 4px 12px;
-  border: 1px solid ${p => p.theme.colors.palette.text.shade50};
-  border-radius: 24px;
-  color: ${p => p.theme.colors.palette.text.shade50};
-`;
 
 type SwapSteps = "summary" | "device" | "finished";
 const SwapBody = ({

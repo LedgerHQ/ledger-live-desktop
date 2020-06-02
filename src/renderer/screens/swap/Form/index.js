@@ -1,6 +1,7 @@
 // @flow
 
-import React, { useCallback, useEffect, useMemo, useReducer } from "react";
+import React, { useState, useCallback, useEffect, useMemo, useReducer } from "react";
+import { BigNumber } from "bignumber.js";
 import uniq from "lodash/uniq";
 import { connect, useDispatch } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -38,10 +39,11 @@ import Tooltip from "~/renderer/components/Tooltip";
 import IconExclamationCircle from "~/renderer/icons/ExclamationCircle";
 import IconArrowRight from "~/renderer/icons/ArrowRight";
 import { colors } from "~/renderer/styles/theme";
-import { openModal } from "~/renderer/actions/modals";
+import { openModal, setDataModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import type { CurrencyStatus } from "@ledgerhq/live-common/lib/swap/logic";
 import useInterval from "~/renderer/hooks/useInterval";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
 const Footer: ThemedComponent<{}> = styled(Box)`
   align-items: center;
@@ -69,7 +71,7 @@ const Form = ({
   selectableCurrencies: Currency[],
   installedApps: InstalledItem[],
 }) => {
-  const ratesExpirationThreshold = 120000; // FIXME
+  const ratesExpirationThreshold = 110000; // FIXME, move to live-common (not fully 2min to have some margin)
   const { t } = useTranslation();
   const reduxDispatch = useDispatch();
   const currenciesStatus = useMemo(
@@ -86,12 +88,22 @@ const Form = ({
       (c.type === "TokenCurrency" || c.type === "CryptoCurrency") &&
       currenciesStatus[c.id] === "ok",
   );
+
   const [state, dispatch] = useReducer(reducer, { okCurrencies }, initState);
   const patchExchange = useCallback(payload => dispatch({ type: "patchExchange", payload }), [
     dispatch,
   ]);
-  const { swap, fromCurrency, toCurrency, ratesTimestamp, ratesExpired, error } = state;
+  const {
+    swap,
+    fromCurrency,
+    toCurrency,
+    useAllAmount,
+    ratesTimestamp,
+    ratesExpired,
+    error,
+  } = state;
   const { exchange, exchangeRate } = swap;
+  console.log({ state });
   const { fromAccount, toAccount, fromAmount } = exchange;
 
   const onStartSwap = useCallback(() => reduxDispatch(openModal("MODAL_SWAP", { swap })), [
@@ -112,11 +124,14 @@ const Form = ({
   const { magnitudeAwareRate } = exchangeRate || {};
 
   useEffect(() => {
-    patchExchange({
-      fromAccount:
-        flattenAccounts(validFrom).find(a => getAccountCurrency(a) === fromCurrency) || null,
+    dispatch({
+      type: "setFromAccount",
+      payload: {
+        fromAccount:
+          flattenAccounts(validFrom).find(a => getAccountCurrency(a) === fromCurrency) || null,
+      },
     });
-  }, [fromCurrency, patchExchange, validFrom]);
+  }, [fromCurrency, patchExchange, validFrom, dispatch]);
 
   useEffect(() => patchExchange({ toAccount: validTo[0] || null }), [patchExchange, validTo]);
 
@@ -141,14 +156,38 @@ const Form = ({
     };
   }, [state, exchange, fromAccount, toAccount, fromAmount]);
 
-  // Re-fetch rates (if needed) every 2 minutes.
-  // TODO Update the modal if it's open, the rates will expire otherwise
+  // Not to be confused with the useAllAmount flag for a regular transaction.
+  // We need this because the providers require an exact amount to lock a rate.
+  const toggleUseAllAmount = useCallback(() => {
+    let ignore = false;
+    async function getEstimatedMaxSpendable() {
+      const newUseAllAmount = !useAllAmount;
+      if (newUseAllAmount) {
+        const bridge = await getAccountBridge(fromAccount);
+        const fromAmount = await bridge.estimateMaxSpendable({ account: fromAccount });
+        dispatch({ type: "setFromAmount", payload: { fromAmount, useAllAmount: true } });
+      } else {
+        dispatch({ type: "setFromAmount", payload: { fromAmount: BigNumber(0) } });
+      }
+    }
+    if (!ignore) {
+      getEstimatedMaxSpendable();
+    }
+    return () => {
+      ignore = true;
+    };
+  }, [fromAccount, useAllAmount]);
+
+  // Re-fetch rates (if needed) every `ratesExpirationThreshold` seconds.
+  // This updated the modal if it's already open.
   useInterval(() => {
     const now = new Date();
     if (ratesTimestamp && now - ratesTimestamp > ratesExpirationThreshold) {
       dispatch({ type: "expireRates" });
+    } else {
+      reduxDispatch(setDataModal("MODAL_SWAP", { swap }));
     }
-  }, 1000);
+  }, 5000);
 
   if (!fromAccount) return null;
 
@@ -166,12 +205,13 @@ const Form = ({
             onCurrencyChange={fromCurrency =>
               dispatch({ type: "setFromCurrency", payload: { fromCurrency } })
             }
-            useAllAmount={false}
-            onAccountChange={a => patchExchange({ fromAccount: a })}
+            onAccountChange={a => dispatch({ type: "setFromAccount", payload: { fromAccount: a } })}
             onAmountChange={fromAmount =>
               dispatch({ type: "setFromAmount", payload: { fromAmount } })
             }
             validAccounts={validFrom}
+            useAllAmount={useAllAmount}
+            onToggleUseAllAmount={toggleUseAllAmount}
           />
           <ArrowSeparator Icon={IconArrowRight} />
           {toCurrency && fromCurrency ? (

@@ -36,7 +36,7 @@ const From = ({
   onCurrencyChange,
   onAccountChange,
   onAmountChange,
-  onUseAllAmountToggle,
+  onToggleUseAllAmount,
   useAllAmount,
   isLoading,
   error,
@@ -50,7 +50,7 @@ const From = ({
   onCurrencyChange: (?Currency) => void,
   onAccountChange: (?AccountLike) => void,
   onAmountChange: BigNumber => void,
-  onUseAllAmountToggle?: () => void,
+  onToggleUseAllAmount?: () => void,
   useAllAmount?: boolean,
   isLoading?: boolean,
   error: ?Error,
@@ -116,11 +116,11 @@ const From = ({
               ff="Inter|Medium"
               fontSize={10}
               style={{ paddingRight: 5 }}
-              onClick={onUseAllAmountToggle}
+              onClick={onToggleUseAllAmount}
             >
               <Trans i18nKey="send.steps.details.useMax" />
             </Text>
-            <Switch small isChecked={!!useAllAmount} onChange={onUseAllAmountToggle} />
+            <Switch small isChecked={!!useAllAmount} onChange={onToggleUseAllAmount} />
           </Box>
         </Box>
         {unit ? (

@@ -106,7 +106,7 @@ class InputCurrency extends PureComponent<Props, State> {
       this.setState({
         rawValue: "",
         displayValue:
-          !nextProps.value || nextProps.value.isZero()
+          !nextProps.value || nextProps.value.isNaN() || nextProps.value.isZero()
             ? ""
             : format(nextProps.unit, nextProps.value, {
                 locale,
