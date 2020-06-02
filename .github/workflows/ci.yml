@@ -27,8 +27,10 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: run headless tests
         uses: ledgerhq/actions/run-headless@v1.2.0
+      - name: git status
+        run: git status
+        if: failure()
       - name: upload diffs
-        if: ${{ failure() }}
         uses: actions/upload-artifact@v1
         with:
           name: "diff_output"
