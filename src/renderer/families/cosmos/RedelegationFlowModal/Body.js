@@ -27,6 +27,7 @@ import { closeModal, openModal } from "~/renderer/actions/modals";
 import Stepper from "~/renderer/components/Stepper";
 import StepStarter, { StepStarterFooter } from "./steps/StepStarter";
 import StepValidators, { StepValidatorsFooter } from "./steps/StepValidators";
+import StepDestinationValidators from "./steps/StepDestinationValidators";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
@@ -56,13 +57,6 @@ type Props = OwnProps & StateProps;
 
 const steps: Array<St> = [
   {
-    id: "starter",
-    label: <Trans i18nKey="cosmos.redelegation.flow.steps.starter.title" />,
-    component: StepStarter,
-    noScroll: true,
-    footer: StepStarterFooter,
-  },
-  {
     id: "validators",
     label: <Trans i18nKey="cosmos.redelegation.flow.steps.validators.title" />,
     component: StepValidators,
@@ -80,6 +74,22 @@ const steps: Array<St> = [
     label: <Trans i18nKey="cosmos.redelegation.flow.steps.confirmation.title" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
+  },
+  {
+    id: "destinationValidators",
+    label: <Trans i18nKey="cosmos.redelegation.flow.steps.validators.title" />,
+    component: StepDestinationValidators,
+    noScroll: true,
+    excludeFromBreadcrumb: true,
+    onBack: ({ transitionTo }: StepProps) => transitionTo("validators"),
+  },
+  {
+    id: "starter",
+    label: <Trans i18nKey="cosmos.redelegation.flow.steps.starter.title" />,
+    component: StepStarter,
+    noScroll: true,
+    excludeFromBreadcrumb: true,
+    footer: StepStarterFooter,
   },
 ];
 
@@ -178,7 +188,7 @@ const Body = ({
     steps,
     errorSteps: [],
     disabledSteps: [],
-    hideBreadcrumb: !!error,
+    hideBreadcrumb: !!error || ["starter", "destinationValidators"].includes(stepId),
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,

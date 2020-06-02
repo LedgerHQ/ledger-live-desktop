@@ -27,6 +27,8 @@ export const TableLine: ThemedComponent<{}> = styled(Box).attrs(() => ({
   &:last-child {
     justify-content: flex-end;
     flex: 0.5;
+    text-align: right;
+    white-space: nowrap;
   }
 `;
 

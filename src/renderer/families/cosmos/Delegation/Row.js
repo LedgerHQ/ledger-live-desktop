@@ -13,8 +13,6 @@ import type {
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { canRedelegate, canUndelegate } from "@ledgerhq/live-common/lib/families/cosmos/react";
 
-import Ellipsis from "~/renderer/components/Ellipsis";
-
 import { TableLine } from "./Header";
 import DropDown, { DropDownItem } from "~/renderer/components/DropDownSelector";
 
@@ -38,6 +36,14 @@ const Column: ThemedComponent<{ clickable?: boolean }> = styled(TableLine).attrs
   fontSize: 3,
 }))`
   cursor: ${p => (p.clickable ? "pointer" : "cursor")};
+`;
+
+const Ellipsis: ThemedComponent<{}> = styled.div`
+  flex: 1;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const Divider: ThemedComponent<*> = styled.div`

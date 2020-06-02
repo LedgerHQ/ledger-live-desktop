@@ -31,7 +31,6 @@ import ValidatorSearchInput, {
 import InputCurrency from "~/renderer/components/InputCurrency";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Text from "~/renderer/components/Text";
-import InfoCircle from "~/renderer/icons/InfoCircle";
 
 const InputRight = styled(Box).attrs(() => ({
   ff: "Inter|Medium",

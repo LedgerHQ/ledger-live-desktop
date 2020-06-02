@@ -1,6 +1,6 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
@@ -11,15 +11,34 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
+import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
+
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import RedelegationSelectorField from "../fields/RedelegationSelectorField";
 import StepRecipientSeparator from "~/renderer/components/StepRecipientSeparator";
-import ValidatorField from "../fields/ValidatorField";
 import InfoBox from "~/renderer/components/InfoBox";
 import { AmountField } from "~/renderer/families/cosmos/UndelegationFlowModal/fields/index";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
+
+import Label from "~/renderer/components/Label";
+import ChevronRight from "~/renderer/icons/ChevronRight";
+import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
+import Text from "~/renderer/components/Text";
+
+const SelectButton = styled(Button)`
+  border-radius: 4px;
+  border: 1px solid ${p => p.theme.colors.palette.divider};
+  height: 48px;
+  width: 100%;
+  padding-right: ${p => p.theme.space[3]}px;
+  padding-left: ${p => p.theme.space[3]}px;
+  &:hover {
+    background-color: transparent;
+    border-color: ${p => p.theme.colors.palette.text.shade30};
+  }
+`;
 
 const Container: ThemedComponent<*> = styled(Box).attrs(p => ({
   flow: 1,
@@ -45,6 +64,7 @@ export default function StepValidators({
   error,
   bridgePending,
   t,
+  transitionTo,
 }: StepProps) {
   invariant(account && account.cosmosResources && transaction, "account and transaction required");
   const bridge = getAccountBridge(account, parentAccount);
@@ -70,23 +90,6 @@ export default function StepValidators({
                 },
               ]
             : [],
-      }),
-    [updateRedelegation, transaction],
-  );
-
-  const updateDestinationValidator = useCallback(
-    ({ address }) =>
-      updateRedelegation({
-        ...transaction,
-        validators: [
-          {
-            address,
-            amount:
-              transaction.validators && transaction.validators[0]
-                ? transaction.validators[0].amount || BigNumber(0)
-                : BigNumber(0),
-          },
-        ],
       }),
     [updateRedelegation, transaction],
   );
@@ -124,10 +127,24 @@ export default function StepValidators({
     selectedValidator,
   ]);
 
-  const [validatorOpen, setValidatorOpen] = useState(false);
+  const { validators } = useCosmosPreloadData();
+
+  const selectedValidatorData = useMemo(
+    () =>
+      transaction.validators && transaction.validators[0]
+        ? validators.find(
+            ({ validatorAddress }) => validatorAddress === transaction.validators[0].address,
+          )
+        : null,
+    [transaction, validators],
+  );
+
+  const open = useCallback(() => {
+    transitionTo("destinationValidators");
+  }, [transitionTo]);
 
   return (
-    <Container isOpen={validatorOpen}>
+    <Container>
       <TrackPage category="Redelegation Flow" name="Step 1" />
       {error && <ErrorBanner error={error} />}
       <RedelegationSelectorField
@@ -137,35 +154,45 @@ export default function StepValidators({
         onChange={updateSourceValidator}
       />
       <StepRecipientSeparator />
-      <ValidatorField
-        transaction={transaction}
-        account={account}
-        t={t}
-        onChange={updateDestinationValidator}
-        onOpenChange={setValidatorOpen}
-        isOpen={validatorOpen}
-      />
-      {!validatorOpen && (
-        <>
-          {selectedValidator && (
-            <Box mb={4}>
-              <AmountField
-                amount={amount}
-                validator={sourceValidator}
-                account={account}
-                status={status}
-                onChange={onChangeAmount}
-              />
-            </Box>
-          )}
 
-          <InfoBox>
-            <Trans i18nKey="cosmos.redelegation.flow.steps.validators.warning">
-              <b></b>
-            </Trans>
-          </InfoBox>
-        </>
+      <Box py={4}>
+        <Label>{t("cosmos.redelegation.flow.steps.validators.newDelegation")}</Label>
+        <SelectButton onClick={open}>
+          <Box flex="1" horizontal alignItems="center" justifyContent="space-between">
+            {selectedValidatorData ? (
+              <Box horizontal alignItems="center">
+                <FirstLetterIcon
+                  label={selectedValidatorData.name || selectedValidatorData.validatorAddress}
+                  mr={2}
+                />
+                <Text ff="Inter|Medium">
+                  {selectedValidatorData.name || selectedValidatorData.validatorAddress}
+                </Text>
+              </Box>
+            ) : (
+              t("cosmos.redelegation.flow.steps.validators.chooseValidator")
+            )}
+            <ChevronRight size={16} />
+          </Box>
+        </SelectButton>
+      </Box>
+      {selectedValidatorData && (
+        <Box mb={4}>
+          <AmountField
+            amount={amount}
+            validator={sourceValidator}
+            account={account}
+            status={status}
+            onChange={onChangeAmount}
+          />
+        </Box>
       )}
+
+      <InfoBox>
+        <Trans i18nKey="cosmos.redelegation.flow.steps.validators.warning">
+          <b></b>
+        </Trans>
+      </InfoBox>
     </Container>
   );
 }
