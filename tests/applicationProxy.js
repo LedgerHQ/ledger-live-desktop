@@ -19,7 +19,6 @@ export function applicationProxy(envVar, userData = null) {
 
   if (userData !== null) {
     const jsonFile = path.resolve("tests/setups/", `${userData}.json`);
-    console.log(`${userDataPath}/app.json`);
     fs.copyFileSync(jsonFile, `${userDataPath}/app.json`);
   }
 
