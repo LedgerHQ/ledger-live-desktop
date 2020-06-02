@@ -15,7 +15,7 @@ import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/
 
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
-import Button from "~/renderer/components/Button";
+import Button, { Base } from "~/renderer/components/Button";
 import RedelegationSelectorField from "../fields/RedelegationSelectorField";
 import StepRecipientSeparator from "~/renderer/components/StepRecipientSeparator";
 import InfoBox from "~/renderer/components/InfoBox";
@@ -27,7 +27,7 @@ import ChevronRight from "~/renderer/icons/ChevronRight";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Text from "~/renderer/components/Text";
 
-const SelectButton = styled(Button)`
+const SelectButton = styled(Base)`
   border-radius: 4px;
   border: 1px solid ${p => p.theme.colors.palette.divider};
   height: 48px;
@@ -170,14 +170,18 @@ export default function StepValidators({
                 </Text>
               </Box>
             ) : (
-              t("cosmos.redelegation.flow.steps.validators.chooseValidator")
+              <Text ff="Inter|Medium">
+                {t("cosmos.redelegation.flow.steps.validators.chooseValidator")}
+              </Text>
             )}
-            <ChevronRight size={16} />
+            <Box color="palette.text.shade20">
+              <ChevronRight size={16} color="palette.divider" />
+            </Box>
           </Box>
         </SelectButton>
       </Box>
       {selectedValidatorData && (
-        <Box mb={4}>
+        <Box pb={4}>
           <AmountField
             amount={amount}
             validator={sourceValidator}

@@ -41,7 +41,7 @@ const InputRight = styled(Box).attrs(() => ({
 }))`
   opacity: 0;
   pointer-events: none;
-  padding: ${p => p.theme.space[2]}px;
+  padding: 5px ${p => p.theme.space[2]}px;
   > * {
     color: white !important;
   }
@@ -71,7 +71,7 @@ const MaxButton = styled.button`
   border-radius: 4px;
   padding: 0px ${p => p.theme.space[2]}px;
   margin: 0 2.5px;
-  font-size: 12px;
+  font-size: 10px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -27,7 +27,7 @@ export default function ValidatorField({ account, transaction, onChange }: Props
   );
 
   return (
-    <Box>
+    <Box mb={4}>
       <Label>{t("cosmos.undelegation.flow.steps.amount.fields.validator")}</Label>
       <Select
         value={value}

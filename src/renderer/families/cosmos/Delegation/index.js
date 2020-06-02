@@ -25,6 +25,7 @@ import { Row, UnbondingRow } from "./Row";
 
 import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
+import DelegateIcon from "~/renderer/icons/Delegate";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 
 type Props = {
@@ -120,7 +121,7 @@ const Delegation = ({ account }: Props) => {
             {hasDelegations ? (
               <Button mr={2} primary small onClick={onDelegate}>
                 <Box horizontal flow={1} alignItems="center">
-                  <ClaimRewards size={12} />
+                  <DelegateIcon size={12} />
                   <Box>
                     <Trans i18nKey="cosmos.delegation.delegate" />
                   </Box>

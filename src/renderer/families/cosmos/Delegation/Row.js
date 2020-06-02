@@ -22,6 +22,7 @@ import CheckCircle from "~/renderer/icons/CheckCircle";
 import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
 import ToolTip from "~/renderer/components/Tooltip";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
+import Text from "~/renderer/components/Text";
 
 const Wrapper: ThemedComponent<*> = styled.div`
   display: flex;
@@ -65,7 +66,7 @@ const ManageDropDownItem = ({
       {item.key === "MODAL_COSMOS_CLAIM_REWARDS" && <Divider />}
       <DropDownItem isActive={isActive}>
         <Box horizontal alignItems="center" justifyContent="center">
-          {item.label}
+          <Text ff="Inter|SemiBold">{item.label}</Text>
         </Box>
       </DropDownItem>
     </>
