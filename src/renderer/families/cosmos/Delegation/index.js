@@ -144,7 +144,12 @@ const Delegation = ({ account }: Props) => {
         <Card p={0} mt={24} mb={6}>
           <Header />
           {mappedDelegations.map((delegation, index) => (
-            <Row key={index} delegation={delegation} onManageAction={onRedirect} />
+            <Row
+              key={index}
+              account={account}
+              delegation={delegation}
+              onManageAction={onRedirect}
+            />
           ))}
         </Card>
       ) : (

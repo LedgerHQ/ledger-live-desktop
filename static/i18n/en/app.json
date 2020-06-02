@@ -23,6 +23,7 @@
     "selectExchange": "Select an exchange",
     "selectExchangeNoOption": "No exchange matching \"{{exchangeName}}\"",
     "selectExchangeNoOptionAtAll": "No exchange found",
+    "selectValidatorNoOption": "No validator matching \"{{accountName}}\"",
     "sortBy": "Sort by",
     "save": "Save",
     "lock": "Lock",

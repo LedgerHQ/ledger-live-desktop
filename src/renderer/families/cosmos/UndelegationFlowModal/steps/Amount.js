@@ -12,6 +12,7 @@ import Button from "~/renderer/components/Button";
 import { ValidatorField, AmountField } from "../fields";
 import Text from "~/renderer/components/Text";
 import InfoBox from "~/renderer/components/InfoBox";
+import ErrorBanner from "~/renderer/components/ErrorBanner";
 
 export default function StepAmount({
   account,
@@ -19,6 +20,7 @@ export default function StepAmount({
   bridgePending,
   onUpdateTransaction,
   status,
+  error,
   validatorAddress,
 }: StepProps) {
   invariant(account && transaction && transaction.validators, "account and transaction required");
@@ -63,6 +65,7 @@ export default function StepAmount({
   return (
     <Box flow={1}>
       <TrackPage category="Undelegation Flow" name="Step 1" />
+      {error && <ErrorBanner error={error} />}
       <Box horizontal justifyContent="center" mb={2}>
         <Text ff="Inter|Medium" fontSize={4}>
           <Trans i18nKey="cosmos.undelegation.flow.steps.amount.subtitle">

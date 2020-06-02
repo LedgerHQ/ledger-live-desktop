@@ -16,6 +16,7 @@ import ModeSelectorField from "../fields/ModeSelectorField";
 import Text from "~/renderer/components/Text";
 
 import DelegationSelectorField from "../fields/DelegationSelectorField";
+import ErrorBanner from "~/renderer/components/ErrorBanner";
 
 export default function StepClaimRewards({
   account,
@@ -24,6 +25,8 @@ export default function StepClaimRewards({
   transaction,
   status,
   bridgePending,
+  warning,
+  error,
   t,
 }: StepProps) {
   invariant(account && account.cosmosResources && transaction, "account and transaction required");
@@ -65,6 +68,8 @@ export default function StepClaimRewards({
   return (
     <Box flow={1}>
       <TrackPage category="ClaimRewards Flow" name="Step 1" />
+      {warning ? <ErrorBanner error={warning} warning /> : null}
+      {error ? <ErrorBanner error={error} /> : null}
       <ModeSelectorField mode={transaction.mode} onChange={onChangeMode} />
       {amount && (
         <Text fontSize={4} ff="Inter|Medium" textAlign="center">

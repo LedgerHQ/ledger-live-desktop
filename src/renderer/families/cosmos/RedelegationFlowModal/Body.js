@@ -129,8 +129,6 @@ const Body = ({
       mode: "redelegate",
       validators: [],
       cosmosSourceValidator: validatorAddress,
-      /** @TODO remove this once the bridge handles it */
-      recipient: account.freshAddress,
     });
 
     return { account, parentAccount: undefined, transaction };
@@ -180,7 +178,7 @@ const Body = ({
     steps,
     errorSteps: [],
     disabledSteps: [],
-    hideBreadcrumb: !!error && stepId !== "validators",
+    hideBreadcrumb: !!error,
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,

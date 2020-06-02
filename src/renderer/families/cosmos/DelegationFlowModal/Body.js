@@ -119,8 +119,6 @@ const Body = ({
     const transaction = bridge.updateTransaction(t, {
       mode: "delegate",
       validators: [],
-      /** @TODO remove this once the bridge handles it */
-      recipient: account.freshAddress,
     });
 
     return { account, parentAccount: undefined, transaction };
@@ -170,7 +168,7 @@ const Body = ({
     steps,
     errorSteps: [],
     disabledSteps: [],
-    hideBreadcrumb: !!error && stepId !== "castDelegations",
+    hideBreadcrumb: !!error,
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,

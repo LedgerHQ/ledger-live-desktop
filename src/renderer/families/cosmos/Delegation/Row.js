@@ -10,6 +10,8 @@ import type {
   CosmosMappedDelegation,
   CosmosMappedUnbonding,
 } from "@ledgerhq/live-common/lib/families/cosmos/types";
+import type { Account } from "@ledgerhq/live-common/lib/types";
+import { canRedelegate, canUndelegate } from "@ledgerhq/live-common/lib/families/cosmos/react";
 
 import Ellipsis from "~/renderer/components/Ellipsis";
 
@@ -65,6 +67,7 @@ const ManageDropDownItem = ({
 };
 
 type Props = {
+  account: Account,
   delegation: CosmosMappedDelegation,
   onManageAction: (
     address: string,
@@ -73,6 +76,7 @@ type Props = {
 };
 
 export function Row({
+  account,
   delegation: {
     amount,
     validatorAddress,
@@ -82,6 +86,7 @@ export function Row({
     validator,
     status,
   },
+  delegation,
   onManageAction,
 }: Props) {
   const onSelect = useCallback(
@@ -91,16 +96,27 @@ export function Row({
     [onManageAction, validatorAddress],
   );
 
+  const _canUndelegate = canUndelegate(account);
+  const _canRedelegate = canRedelegate(account, delegation);
+
   const dropDownItems = useMemo(
     () => [
-      {
-        key: "MODAL_COSMOS_REDELEGATE",
-        label: <Trans i18nKey="cosmos.delegation.redelegate" />,
-      },
-      {
-        key: "MODAL_COSMOS_UNDELEGATE",
-        label: <Trans i18nKey="cosmos.delegation.undelegate" />,
-      },
+      ...(_canRedelegate
+        ? [
+            {
+              key: "MODAL_COSMOS_REDELEGATE",
+              label: <Trans i18nKey="cosmos.delegation.redelegate" />,
+            },
+          ]
+        : []),
+      ...(_canUndelegate
+        ? [
+            {
+              key: "MODAL_COSMOS_UNDELEGATE",
+              label: <Trans i18nKey="cosmos.delegation.undelegate" />,
+            },
+          ]
+        : []),
       ...(pendingRewards.gt(0)
         ? [
             {
@@ -110,7 +126,7 @@ export function Row({
           ]
         : []),
     ],
-    [pendingRewards],
+    [pendingRewards, _canRedelegate, _canUndelegate],
   );
   const name = validator?.name ?? validatorAddress;
 

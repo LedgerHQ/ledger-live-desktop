@@ -19,6 +19,7 @@ import StepRecipientSeparator from "~/renderer/components/StepRecipientSeparator
 import ValidatorField from "../fields/ValidatorField";
 import InfoBox from "~/renderer/components/InfoBox";
 import { AmountField } from "~/renderer/families/cosmos/UndelegationFlowModal/fields/index";
+import ErrorBanner from "~/renderer/components/ErrorBanner";
 
 const Container: ThemedComponent<*> = styled(Box).attrs(p => ({
   flow: 1,
@@ -41,6 +42,7 @@ export default function StepValidators({
   onUpdateTransaction,
   transaction,
   status,
+  error,
   bridgePending,
   t,
 }: StepProps) {
@@ -127,6 +129,7 @@ export default function StepValidators({
   return (
     <Container isOpen={validatorOpen}>
       <TrackPage category="Redelegation Flow" name="Step 1" />
+      {error && <ErrorBanner error={error} />}
       <RedelegationSelectorField
         transaction={transaction}
         account={account}

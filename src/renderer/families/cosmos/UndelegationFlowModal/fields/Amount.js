@@ -64,7 +64,7 @@ export default function AmountField({
   const warning = useMemo(() => Object.values(warnings || {})[0], [warnings]);
 
   return (
-    <Box mt={5}>
+    <Box mt={5} mb={2}>
       <Label>{t("cosmos.undelegation.flow.steps.amount.fields.amount")}</Label>
       <InputCurrency
         autoFocus={false}

@@ -65,8 +65,6 @@ export default function Body({
           address: validatorAddress,
           amount,
         })),
-      /** @TODO remove this once the bridge handles it */
-      recipient: accountProp.freshAddress,
     };
     const transaction = bridge.updateTransaction(initTx, newTx);
 
@@ -117,7 +115,7 @@ export default function Body({
     steps,
     errorSteps: [],
     disabledSteps: [],
-    hideBreadcrumb: !!error && stepId !== "amount",
+    hideBreadcrumb: !!error,
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,

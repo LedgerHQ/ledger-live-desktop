@@ -11,6 +11,7 @@ import Button from "~/renderer/components/Button";
 import ValidatorsField from "../fields/ValidatorsField";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import Text from "~/renderer/components/Text";
+import ErrorBanner from "~/renderer/components/ErrorBanner";
 
 export default function StepDelegation({
   account,
@@ -19,6 +20,7 @@ export default function StepDelegation({
   transaction,
   status,
   bridgePending,
+  error,
   t,
 }: StepProps) {
   invariant(account && transaction && transaction.validators, "account and transaction required");
@@ -44,7 +46,7 @@ export default function StepDelegation({
   return (
     <Box flow={1}>
       <TrackPage category="Delegation Flow" name="Step 1" />
-
+      {error && <ErrorBanner error={error} />}
       <ValidatorsField
         account={account}
         validators={transaction.validators || []}

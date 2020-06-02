@@ -45,7 +45,7 @@ export default function DelegationSelectorField({ account, transaction, t, onCha
         filterOption={({ data }) => data.pendingRewards.gt(0)}
         placeholder={t("common.selectAccount")}
         noOptionsMessage={({ inputValue }) =>
-          t("common.selectAccountNoOption", { accountName: inputValue })
+          t("common.selectValidatorNoOption", { accountName: inputValue })
         }
         onChange={onChange}
       />
