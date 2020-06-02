@@ -27,13 +27,9 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: run headless tests
         uses: ledgerhq/actions/run-headless@v1.2.0
-      - name: ls files
-        run: |
-          cd tests/specs/__image_snapshots__
-          ls -la
-        if: failure()
       - name: upload diffs
         uses: actions/upload-artifact@v1
+        if: failure()
         with:
           name: "diff_output"
           path: tests/specs/__image_snapshots__/__diff_output__
