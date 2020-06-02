@@ -27,8 +27,10 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: run headless tests
         uses: ledgerhq/actions/run-headless@v1.2.0
-      - name: git status
-        run: git status
+      - name: ls files
+        run: |
+          cd tests/specs/__image_snapshots__
+          ls -la
         if: failure()
       - name: upload diffs
         uses: actions/upload-artifact@v1
