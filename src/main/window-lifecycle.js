@@ -3,7 +3,6 @@ import "./setup";
 import { BrowserWindow, screen, shell } from "electron";
 import path from "path";
 import { delay } from "@ledgerhq/live-common/lib/promise";
-import icon from "../../build/icons/icon.png";
 import { URL } from "url";
 
 const intFromEnv = (key: string, def: number): number => {
@@ -49,11 +48,11 @@ const getWindowPosition = (width, height, display = screen.getPrimaryDisplay()) 
 };
 
 const defaultWindowOptions = {
-  icon,
+  icon: path.join(__dirname, "/build/icons/icon.png"),
   backgroundColor: "#fff",
   webPreferences: {
     blinkFeatures: "OverlayScrollbars",
-    devTools: DEV_TOOLS,
+    devTools: __DEV__ || DEV_TOOLS,
     experimentalFeatures: true,
     nodeIntegration: true,
   },
@@ -105,7 +104,7 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
 
   loadWindow();
 
-  if (DEV_TOOLS) {
+  if (__DEV__ || DEV_TOOLS) {
     mainWindow.webContents.openDevTools();
   }
 
