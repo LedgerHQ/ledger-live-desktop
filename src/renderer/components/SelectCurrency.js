@@ -4,20 +4,17 @@ import React, { useCallback, useMemo, useState, memo } from "react";
 import { useTranslation } from "react-i18next";
 import Fuse from "fuse.js";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
-import {
-  useCurrenciesByMarketcap,
-  listSupportedCurrencies,
-} from "@ledgerhq/live-common/lib/currencies";
+import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
 import useEnv from "~/renderer/hooks/useEnv";
 import type { Option } from "~/renderer/components/Select";
 import Select from "~/renderer/components/Select";
 import Box from "~/renderer/components/Box";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 
-type Props = {
-  onChange: (?Currency) => void,
-  currencies?: Currency[],
-  value?: Currency,
+type Props<C: Currency> = {
+  onChange: (?C) => void,
+  currencies: C[],
+  value?: C,
   placeholder?: string,
   autoFocus?: boolean,
   minWidth?: number,
@@ -27,7 +24,7 @@ type Props = {
 const getOptionValue = c => c.id;
 
 // TODO: I removed the {...props} that was passed to Select. We might need to check out it doesnt break other stuff
-const SelectCurrency = ({
+const SelectCurrency = <C: Currency>({
   onChange,
   value,
   placeholder,
@@ -35,13 +32,10 @@ const SelectCurrency = ({
   autoFocus,
   minWidth,
   width,
-}: Props) => {
+}: Props<C>) => {
   const { t } = useTranslation();
   const devMode = useEnv("MANAGER_DEV_MODE");
-  let c =
-    currencies ||
-    // $FlowFixMe
-    (listSupportedCurrencies(): Currency[]);
+  let c = currencies;
   if (!devMode) {
     c = c.filter(c => c.type !== "CryptoCurrency" || !c.isTestnetFor);
   }
@@ -100,4 +94,4 @@ const renderOption = ({ data: currency }: Option) => (
   </Box>
 );
 
-export default memo<Props>(SelectCurrency);
+export default memo<Props<*>>(SelectCurrency);

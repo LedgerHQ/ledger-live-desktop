@@ -331,7 +331,7 @@ describe("Bullrun", () => {
     await $("#topbar-discreet-button").click();
 
     await $("#drawer-dashboard-button").click();
-    await $("#drawer-partners-button").click();
+    await $("#drawer-exchange-button").click();
 
     // Open settings and navigate all tabs
     await $("#topbar-settings-button").click();

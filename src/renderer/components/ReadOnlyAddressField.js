@@ -16,10 +16,14 @@ const Address = styled(Box).attrs(() => ({
   py: 3,
   relative: true,
 }))`
+  border: ${p => `1px solid ${p.theme.colors.palette.divider}`};
+  ${p =>
+    p.allowCopy
+      ? `border-right: none;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  border: ${p => `1px solid ${p.theme.colors.palette.divider}`};
-  border-right: none;
+`
+      : ""}
   cursor: text;
   user-select: text;
   text-align: center;
@@ -64,9 +68,10 @@ const CopyBtn = styled(Box).attrs(() => ({
 
 type Props = {
   address: string,
+  allowCopy?: boolean,
 };
 
-function ReadOnlyAddressField({ address }: Props) {
+function ReadOnlyAddressField({ address, allowCopy = true }: Props) {
   const [copyFeedback, setCopyFeedback] = useState(false);
   const [clibboardChanged, setClipboardChanged] = useState(false);
 
@@ -99,7 +104,7 @@ function ReadOnlyAddressField({ address }: Props) {
         </ClipboardSuspicious>
       ) : null}
       <Box horizontal alignItems="stretch">
-        <Address>
+        <Address allowCopy={allowCopy}>
           {!copyFeedback ? null : (
             <CopyFeedback>
               <Trans i18nKey="common.addressCopied" />
@@ -107,9 +112,11 @@ function ReadOnlyAddressField({ address }: Props) {
           )}
           {address}
         </Address>
-        <CopyBtn onClick={onCopy}>
-          <IconCopy size={16} />
-        </CopyBtn>
+        {allowCopy ? (
+          <CopyBtn onClick={onCopy}>
+            <IconCopy size={16} />
+          </CopyBtn>
+        ) : null}
       </Box>
     </Box>
   );

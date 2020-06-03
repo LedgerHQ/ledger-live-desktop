@@ -12,7 +12,7 @@ import Dashboard from "~/renderer/screens/dashboard";
 import Settings from "~/renderer/screens/settings";
 import Accounts from "~/renderer/screens/accounts";
 import Manager from "~/renderer/screens/manager";
-import Partners from "~/renderer/screens/partners";
+import Exchange from "~/renderer/screens/exchange";
 import Account from "~/renderer/screens/account";
 import Asset from "~/renderer/screens/asset";
 import Box from "~/renderer/components/Box/Box";
@@ -95,7 +95,7 @@ const Default = () => {
                       <Route path="/settings" render={props => <Settings {...props} />} />
                       <Route path="/accounts" render={props => <Accounts {...props} />} />
                       <Route path="/manager" render={props => <Manager {...props} />} />
-                      <Route path="/partners" render={props => <Partners {...props} />} />
+                      <Route path="/exchange" render={props => <Exchange {...props} />} />
                       <Route
                         path="/account/:parentId/:id"
                         render={props => <Account {...props} />}
