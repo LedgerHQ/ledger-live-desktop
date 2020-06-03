@@ -172,7 +172,8 @@ class Modal extends PureComponent<Props> {
 
   /** combined with tab-index 0 this will allow tab navigation into the modal disabling tab navigation behind it */
   setFocus = (r: *) => {
-    r && r.focus();
+    /** only pull focus if focus is out of modal ie: no input autofocused in modal */
+    r && !r.contains(document.activeElement) && r.focus();
   };
 
   swallowClick = (e: Event) => {
