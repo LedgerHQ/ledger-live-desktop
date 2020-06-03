@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback, useState } from "react";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import Text from "~/renderer/components/Text";
 import { ReplaySubject } from "rxjs";
@@ -9,6 +9,12 @@ import { deserializeError } from "@ledgerhq/errors";
 import { deviceInfo155, mockListAppsResult } from "@ledgerhq/live-common/lib/apps/mock";
 import useInterval from "~/renderer/hooks/useInterval";
 import Box from "~/renderer/components/Box";
+
+const MockedGlobalStyle = createGlobalStyle`
+  * {
+    caret-color: transparent !important;
+  }
+`;
 
 const Item: ThemedComponent<{}> = styled(Text)`
   padding: 2px 13px;
@@ -299,4 +305,8 @@ const DebugMock = () => {
   );
 };
 
-export default getEnv("MOCK") && !process.env.HIDE_DEBUG_MOCK ? DebugMock : () => null;
+export default getEnv("MOCK") && process.env.HIDE_DEBUG_MOCK
+  ? MockedGlobalStyle
+  : getEnv("MOCK")
+  ? DebugMock
+  : () => null;
