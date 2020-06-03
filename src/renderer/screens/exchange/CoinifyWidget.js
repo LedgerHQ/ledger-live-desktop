@@ -12,6 +12,8 @@ import type { Account } from "@ledgerhq/live-common/lib/types/account";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openModal } from "~/renderer/actions/modals";
 import { useDispatch } from "react-redux";
+import Track from "~/renderer/analytics/Track";
+import { track } from "~/renderer/analytics/segment";
 
 const WidgetContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -87,6 +89,18 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
     widgetConfig.transferInMedia = "";
   }
 
+  useEffect(() => {
+    if (mode === "buy" && account) {
+      track("Coinify Start Buy Widget", { currencyName: account.currency.name });
+    }
+    if (mode === "sell" && account) {
+      track("Coinify Start Sell Widget", { currencyName: account.currency.name });
+    }
+    if (mode === "trade-history") {
+      track("Coinify Start History Widget");
+    }
+  }, [account, mode]);
+
   const url = `${coinifyConfig.url}?${querystring.stringify(widgetConfig)}`;
 
   const handleOnResult = useCallback(() => {
@@ -102,6 +116,7 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
         },
         coinifyConfig.host,
       );
+      track("Coinify Confirm Buy End", { currencyName: account.currency.name });
     }
   }, [coinifyConfig.host, account]);
 
@@ -140,9 +155,15 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
                 verifyAddress: true,
               }),
             );
+            if (account) {
+              track("Coinify Confirm Buy Start", { currencyName: account.currency.name });
+            }
           } else {
             // Address mismatch, potential attack
           }
+          break;
+        case "trade.trade-placed":
+          track("Coinify Widget Event Trade Placed", { currencyName: account.currency.name });
           break;
       }
     }
@@ -153,6 +174,7 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
   //         sandbox="allow-scripts allow-same-origin allow-forms"
   return (
     <WidgetContainer>
+      <Track event="Coinify Start Widget" onMount widgetMode={mode} />
       <CustomIframe
         src={url}
         ref={widgetRef}

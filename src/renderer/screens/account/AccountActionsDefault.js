@@ -37,7 +37,13 @@ export const BuyActionDefault = ({
   onClick: () => void,
   currency: Currency,
 }) => (
-  <Button small primary onClick={onClick}>
+  <Button
+    small
+    primary
+    onClick={onClick}
+    event="Buy Crypto Account Button"
+    eventProperties={{ currencyName: currency.name }}
+  >
     <Box horizontal flow={1} alignItems="center">
       <IconExchange size={12} />
       <Box>

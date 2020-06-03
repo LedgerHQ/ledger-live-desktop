@@ -8,6 +8,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openModal } from "~/renderer/actions/modals";
 import type { Account } from "@ledgerhq/live-common/lib/types/account";
 import { useDispatch } from "react-redux";
+import TrackPage from "~/renderer/analytics/TrackPage";
 
 const BuyContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -47,6 +48,7 @@ const Buy = () => {
 
   return (
     <BuyContainer>
+      <TrackPage category="Buy Crypto" />
       {account ? (
         <CoinifyWidget account={account} mode="buy" onReset={reset} />
       ) : (

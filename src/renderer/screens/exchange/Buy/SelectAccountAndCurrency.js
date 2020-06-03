@@ -20,6 +20,8 @@ import FakeLink from "~/renderer/components/FakeLink";
 import PlusIcon from "~/renderer/icons/Plus";
 import { openModal } from "~/renderer/actions/modals";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
+import { track } from "~/renderer/analytics/segment";
 
 const Container: ThemedComponent<{}> = styled.div`
   width: 365px;
@@ -163,6 +165,10 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
             primary
             onClick={() => {
               if (account) {
+                track("Buy Crypto Continue Button", {
+                  currencyName: account.currency.name,
+                  isEmpty: isAccountEmpty(account),
+                });
                 selectAccount(account);
               }
             }}
