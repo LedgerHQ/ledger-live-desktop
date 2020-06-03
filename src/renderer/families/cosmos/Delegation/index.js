@@ -46,7 +46,7 @@ const Wrapper = styled(Box).attrs(() => ({
 const Delegation = ({ account }: Props) => {
   const dispatch = useDispatch();
 
-  const { cosmosResources } = account;
+  const { cosmosResources, spendableBalance } = account;
   invariant(cosmosResources, "cosmos account expected");
   const {
     delegations,
@@ -119,7 +119,7 @@ const Delegation = ({ account }: Props) => {
         {hasDelegations || hasRewards ? (
           <Box horizontal>
             {hasDelegations ? (
-              <Button mr={2} primary small onClick={onDelegate}>
+              <Button mr={2} disabled={spendableBalance.lte(0)} primary small onClick={onDelegate}>
                 <Box horizontal flow={1} alignItems="center">
                   <DelegateIcon size={12} />
                   <Box>
