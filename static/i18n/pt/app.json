@@ -123,7 +123,8 @@
       "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
       "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
-        "receiveFunds": "Receive"
+        "receiveFunds": "Receive",
+        "buy": "Buy"
       }
     },
     "settings": {
@@ -151,6 +152,30 @@
     "delegatedAssetsTooltip": "These are your currently delegated assets",
     "undelegatingTooltip": "These are your assets currently being undelegated"
   },
+  "exchange": {
+    "title": "Buy crypto",
+    "reset": "Reset flow",
+    "banner": {
+      "title": "Buy crypto via our partner",
+      "description": "Purchase crypto assets via Coinify and receive your coins directly in your Ledger account",
+      "CTA": "Buy now"
+    },
+    "verifyAddress": "Please confirm on your device that the displayed address match the one on your device's screen",
+    "buy": {
+      "title": "Buy crypto via our partner",
+      "tab": "Buy",
+      "selectCrypto": "Choose a crypto asset",
+      "selectAccount": "Choose an account",
+      "continue": "Continue",
+      "addAccount": "Add account"
+    },
+    "sell": {
+      "tab": "Sell"
+    },
+    "history": {
+      "tab": "History"
+    }
+  },
   "accounts": {
     "title": "Accounts",
     "noResultFound": "No accounts found.",
@@ -174,6 +199,7 @@
       "star": "Star",
       "receive": "Receive",
       "send": "Send",
+      "buy": "Buy",
       "edit": "Edit account",
       "hideToken": "Hide token"
     }
@@ -658,6 +684,10 @@
         "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
+  },
+  "buy": {
+    "title": "Buy",
+    "titleCrypto": "Buy {{currency}}"
   },
   "receive": {
     "title": "Receive",
