@@ -1906,7 +1906,7 @@
     },
     "SyncError": {
       "title": "Szinkronizálási hiba",
-      "description": "Valami hiba történt a blokklánc szinkronizálásával kapcsolatban.  Kérlek, próbáld meg újra, vagy vedd fel velünk a kapcsolatot."
+      "description": "Some accounts could not be synchronized."
     },
     "TronNoFrozenForBandwidth": {
       "title": "Nincsenek kiolvasztható eszközök",
