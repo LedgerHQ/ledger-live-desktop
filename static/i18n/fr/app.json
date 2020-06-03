@@ -123,7 +123,8 @@
       "desc": "Assurez-vous que l’application <1><0>{{managerAppName}}</0></1> est installée et commencez à recevoir.",
       "descToken": "Assurez-vous que l'application <1><0>{{managerAppName}}</0></1> soit installée pour recevoir des <3><0>{{ticker}}</0></3> et des tokens<5><0>{{tokenList}}</0></5>",
       "buttons": {
-        "receiveFunds": "Recevoir"
+        "receiveFunds": "Recevoir",
+        "buy": "Buy"
       }
     },
     "settings": {
@@ -151,6 +152,30 @@
     "delegatedAssetsTooltip": "These are your currently delegated assets",
     "undelegatingTooltip": "These are your assets currently being undelegated"
   },
+  "exchange": {
+    "title": "Buy crypto",
+    "reset": "Reset flow",
+    "banner": {
+      "title": "Buy crypto via our partner",
+      "description": "Purchase crypto assets via Coinify and receive your coins directly in your Ledger account",
+      "CTA": "Buy now"
+    },
+    "verifyAddress": "Please confirm on your device that the displayed address match the one on your device's screen",
+    "buy": {
+      "title": "Buy crypto via our partner",
+      "tab": "Buy",
+      "selectCrypto": "Choose a crypto asset",
+      "selectAccount": "Choose an account",
+      "continue": "Continue",
+      "addAccount": "Add account"
+    },
+    "sell": {
+      "tab": "Sell"
+    },
+    "history": {
+      "tab": "History"
+    }
+  },
   "accounts": {
     "title": "Comptes",
     "noResultFound": "Aucun compte trouvé.",
@@ -174,6 +199,7 @@
       "star": "Favori",
       "receive": "Recevoir",
       "send": "Envoyer",
+      "buy": "Buy",
       "edit": "Modifier le compte",
       "hideToken": "Masquer le token"
     }
@@ -658,6 +684,10 @@
         "broadcastError": "Votre transaction a peut-être échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée avant de réessayer."
       }
     }
+  },
+  "buy": {
+    "title": "Buy",
+    "titleCrypto": "Buy {{currency}}"
   },
   "receive": {
     "title": "Recevoir",
