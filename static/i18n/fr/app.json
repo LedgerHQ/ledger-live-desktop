@@ -1906,7 +1906,7 @@
     },
     "SyncError": {
       "title": "Erreur de synchronisation",
-      "description": "Un problème est survenu avec la synchronisation de la blockchain. Veuillez réessayer ou nous contacter."
+      "description": "Some accounts could not be synchronized."
     },
     "TronNoFrozenForBandwidth": {
       "title": "Aucun actif à dégeler",
