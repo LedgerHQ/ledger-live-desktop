@@ -299,4 +299,4 @@ const DebugMock = () => {
   );
 };
 
-export default getEnv("MOCK") ? DebugMock : () => null;
+export default getEnv("MOCK") && !process.env.HIDE_DEBUG_MOCK ? DebugMock : () => null;

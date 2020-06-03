@@ -2,7 +2,7 @@
   "name": "ledger-live-desktop",
   "productName": "Ledger Live",
   "description": "Ledger Live - Desktop",
-  "version": "2.4.0-nightly.20200525T2202",
+  "version": "2.4.1",
   "author": "Ledger Live Team <team-live@ledger.fr>",
   "repository": "https://github.com/LedgerHQ/ledger-live-desktop",
   "license": "MIT",
@@ -29,7 +29,8 @@
     "release": "node ./tools/dist --publish",
     "ci": "node ./tools/ci.js",
     "test": "jest src",
-    "spectron": "jest tests/specs/bullrun.spec.js"
+    "spectron": "jest tests/specs/bullrun.spec.js",
+    "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)"
   },
   "engines": {
     "node": ">=12"
@@ -41,7 +42,7 @@
     "@ledgerhq/errors": "^5.15.0",
     "@ledgerhq/hw-transport": "^5.15.0",
     "@ledgerhq/hw-transport-http": "^5.15.0",
-    "@ledgerhq/hw-transport-node-hid-singleton": "^5.15.0",
+    "@ledgerhq/hw-transport-node-hid-singleton": "^5.16.0",
     "@ledgerhq/ledger-core": "6.4.2",
     "@ledgerhq/live-common": "^12.27.2",
     "@ledgerhq/logs": "^5.15.0",
@@ -164,7 +165,7 @@
     "hasha": "^5.2.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^25.1.0",
-    "jest-image-snapshot": "^2.12.0",
+    "jest-image-snapshot": "^4.0.0",
     "listr": "^0.14.3",
     "listr-verbose-renderer": "^0.6.0",
     "prettier": "^1.19.1",
