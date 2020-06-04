@@ -14,6 +14,8 @@ jobs:
           node-version: 12.x
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
+      - name: set beta name
+        uses: ./.github/actions/change-product-name
       - name: build the app
         run: yarn nightly
       - uses: ledgerhq/actions/get-package-infos@v1.2.0
@@ -43,6 +45,8 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
+      - name: set beta name
+        uses: ./.github/actions/change-product-name
       - name: build the app
         run: yarn nightly
       - uses: ledgerhq/actions/get-package-infos@v1.2.0
@@ -73,6 +77,8 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
+      - name: set beta name
+        uses: ./.github/actions/change-product-name
       - name: build the app
         run: yarn nightly
       - uses: ledgerhq/actions/get-package-infos@v1.2.0
