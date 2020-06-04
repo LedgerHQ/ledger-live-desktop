@@ -29,6 +29,8 @@ jobs:
         run: yarn --ignore-scripts --frozen-lockfile
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: version
+      - name: set beta name
+        uses: ./.github/actions/change-product-name
       - uses: ledgerhq/actions/get-pr-number@v1.0.0
         id: pr
         if: github.event_name == 'pull_request'
@@ -79,6 +81,8 @@ jobs:
         run: yarn --ignore-scripts --frozen-lockfile
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: version
+      - name: set beta name
+        uses: ./.github/actions/change-product-name
       - uses: ledgerhq/actions/get-pr-number@v1.0.0
         id: pr
         if: github.event_name == 'pull_request'
@@ -129,6 +133,8 @@ jobs:
         run: yarn --ignore-scripts --frozen-lockfile
       - uses: ledgerhq/actions/get-package-infos@v1.2.0
         id: version
+      - name: set beta name
+        uses: ./.github/actions/change-product-name
       - uses: ledgerhq/actions/get-pr-number@v1.2.0
         id: pr
         if: github.event_name == 'pull_request'

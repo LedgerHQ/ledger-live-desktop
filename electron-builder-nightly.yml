@@ -1,7 +1,7 @@
 appId: com.ledger.live
 
 protocols:
-  name: Ledger Live Beta
+  name: Ledger Live
   schemes:
     - ledgerhq
 
