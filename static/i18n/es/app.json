@@ -123,7 +123,8 @@
       "desc": "Asegúrate de que la aplicación <1><0>{{managerAppName}}</0></1> está instalada y empieza a recibir.",
       "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
-        "receiveFunds": "Recibir"
+        "receiveFunds": "Recibir",
+        "buy": "Buy"
       }
     },
     "settings": {
@@ -151,6 +152,30 @@
     "delegatedAssetsTooltip": "These are your currently delegated assets",
     "undelegatingTooltip": "These are your assets currently being undelegated"
   },
+  "exchange": {
+    "title": "Buy crypto",
+    "reset": "Reset flow",
+    "banner": {
+      "title": "Buy crypto via our partner",
+      "description": "Purchase crypto assets via Coinify and receive your coins directly in your Ledger account",
+      "CTA": "Buy now"
+    },
+    "verifyAddress": "Please confirm on your device that the displayed address match the one on your device's screen",
+    "buy": {
+      "title": "Buy crypto via our partner",
+      "tab": "Buy",
+      "selectCrypto": "Choose a crypto asset",
+      "selectAccount": "Choose an account",
+      "continue": "Continue",
+      "addAccount": "Add account"
+    },
+    "sell": {
+      "tab": "Sell"
+    },
+    "history": {
+      "tab": "History"
+    }
+  },
   "accounts": {
     "title": "Cuentas",
     "noResultFound": "No se encontraron cuentas.",
@@ -174,6 +199,7 @@
       "star": "Star",
       "receive": "Recibir",
       "send": "Enviar",
+      "buy": "Buy",
       "edit": "Edit account",
       "hideToken": "Hide token"
     }
@@ -301,6 +327,9 @@
     "createNewAccount": {
       "noOperationOnLastAccount": "No puedes añadir una nueva cuenta antes de recibir en tu <1><0>{{accountName}}</0></1> cuenta",
       "noAccountToCreate": "No se ha encontrado ninguna cuenta <1><0>{{currencyName}}</0></1> para crear."
+    },
+    "supportLinks": {
+      "segwit_or_native_segwit": "Segwit or Native Segwit?"
     },
     "cta": {
       "addMore": "Añadir más",
@@ -656,6 +685,10 @@
       }
     }
   },
+  "buy": {
+    "title": "Buy",
+    "titleCrypto": "Buy {{currency}}"
+  },
   "receive": {
     "title": "Recibir",
     "successTitle": "Address shared securely",
@@ -855,7 +888,143 @@
       "delegate": "Delegate",
       "undelegate": "Undelegate",
       "redelegate": "Redelegate",
-      "reward": "Collect rewards"
+      "reward": "Collect rewards",
+      "votingPower": "Voting power: {{amount}}%",
+      "estYield": "est. yield",
+      "flow": {
+        "title": "Delegate assets",
+        "steps": {
+          "starter": {
+            "description": "Delegate your ATOM to earn rewards while keeping full security  and control on your assets.",
+            "bullet": [
+              "Delegated assets stay yours",
+              "You’ll have to wait for 21 days to complete an undelegation",
+              "Delegate securely with your Ledger device"
+            ],
+            "warning": {
+              "description": "Delegate ATOM asset can imply some losses if the chosen delegator doesn’t act rightfully on the network. "
+            }
+          },
+          "validator": {
+            "title": "Validators"
+          },
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "Delegation sent",
+              "text": "Delegation transaction broadcasted successfully. You should earn your first rewards soon depending on the validator.",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+          }
+        }
+      }
+    },
+    "claimRewards": {
+      "flow": {
+        "title": "Claim rewards",
+        "steps": {
+          "claimRewards": {
+            "title": "Rewards",
+            "compound": "Compound",
+            "claim": "Claim",
+            "compoundOrClaim": "Compound or claim",
+            "compoundDescription": "NEEDS COMPOUND DESC TEXT",
+            "claimDescription": "NEEDS CLAIM DESC TEXT",
+            "compoundInfo": "You earned <0>{{amount}}</0> by delegation assets, they will be claimed now and automatically redelegated to the same validator",
+            "selectLabel": "Select a delegation"
+          },
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "Rewards claimed",
+              "text": "Your rewards have been added to your balance",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+          }
+        }
+      }
+    },
+    "redelegation": {
+      "flow": {
+        "title": "Redelegate assets",
+        "steps": {
+          "starter": {
+            "title": "Redelegation",
+            "description": "Redelegate assets from one validator to another. Redelegating allows your stake to continuously generate rewards.",
+            "warning": "Once redelegated, the ATOM can’t be redelegated for a <0>21 days period</0>. You can only have <0>7 pending redelegations</0> at the same time.",
+            "howDelegationWorks": "How delegation works?"
+          },
+          "validators": {
+            "title": "Validators",
+            "currentDelegation": "Current delegation",
+            "newDelegation": "New delegation",
+            "chooseValidator": "Choose a validator",
+            "warning": "You will have to wait <0>21 days</0> to redelegate ATOM from the redelegated validator",
+            "selectInfo": "Redelegate assets from one validator to another. Redelegating allows your stake to continuously generate rewards.",
+            "searchPlaceholder": "Search by name or address",
+            "redelegationAmount": "Redelegation amount"
+          },
+          "device": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "success": {
+              "title": "You have successfully redelegated your assets",
+              "text": "NEED TEXT HERE",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+          }
+        }
+      }
+    },
+    "undelegation": {
+      "flow": {
+        "title": "Undelegate assets",
+        "steps": {
+          "amount": {
+            "title": "Amount",
+            "fields": {
+              "validator": "Validator",
+              "amount": "Amount to undelegate"
+            }
+          },
+          "device": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "success": {
+              "title": "You have successfully undelegated your assets.",
+              "description": "🚨 NEED THIS TEXT HERE 🚨",
+              "cta": "View details"
+            },
+            "error": {
+              "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+            }
+          }
+        }
+      }
     }
   },
   "delegation": {
@@ -1388,7 +1557,11 @@
       "claimReward": "Please confirm the operation on your device to claim your rewards",
       "freeze": "Please confirm the operation on your device to freeze assets",
       "unfreeze": "Please confirm the operation on your device to unfreeze your assets",
-      "vote": "Please confirm the operation on your device to cast your votes"
+      "vote": "Please confirm the operation on your device to cast your votes",
+      "delegate": "You have successfully delegated your assets. Please confirm the operation on your device to cast your votes",
+      "undelegate": "Please confirm the operation on your device to undelegate",
+      "redelegate": "You have successfully redelegated your assets. Please confirm the operation on your device to cast your votes",
+      "claimRewardCompound": "Please confirm the operation on your device to coumpound your rewards."
     },
     "recipientWording": {
       "send": "recipient",
@@ -1733,7 +1906,7 @@
     },
     "SyncError": {
       "title": "Synchronization error",
-      "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
+      "description": "Some accounts could not be synchronized."
     },
     "TronNoFrozenForBandwidth": {
       "title": "No assets to unfreeze",
