@@ -452,8 +452,8 @@
         "later": "Plus tard"
       },
       "updatable": {
-        "title": "Mises à jours disponibles",
-        "progressTitle": "{{number}} mises à jours d'applications",
+        "title": "Mises à jour disponibles",
+        "progressTitle": "{{number}} mises à jour d'applications",
         "progressWarning": "Ne pas quitter le Manager pendant la mise à jour.",
         "progress": "Mise à jour..."
       },
