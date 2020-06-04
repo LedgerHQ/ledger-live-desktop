@@ -11,8 +11,10 @@ import useInterval from "~/renderer/hooks/useInterval";
 import Box from "~/renderer/components/Box";
 
 const MockedGlobalStyle = createGlobalStyle`
-  * {
+  *, :before, :after {
     caret-color: transparent !important;
+    transition-property: none !important;
+    animation: none !important;
   }
 `;
 
