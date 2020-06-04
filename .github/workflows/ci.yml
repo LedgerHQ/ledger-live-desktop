@@ -28,8 +28,8 @@ jobs:
       - name: run headless tests
         uses: ledgerhq/actions/run-headless@v1.2.0
       - name: upload diffs
-        if: ${{ failure() }}
         uses: actions/upload-artifact@v1
+        if: failure()
         with:
           name: "diff_output"
           path: tests/specs/__image_snapshots__/__diff_output__

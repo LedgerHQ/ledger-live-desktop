@@ -1,8 +1,9 @@
 // @flow
 import "./setup";
-import { BrowserWindow, screen } from "electron";
+import { BrowserWindow, screen, shell } from "electron";
 import path from "path";
 import icon from "../../build/icons/icon.png";
+import { URL } from "url";
 
 const intFromEnv = (key: string, def: number): number => {
   const v = process.env[key];
@@ -92,6 +93,15 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
 
   mainWindow.on("closed", () => {
     mainWindow = null;
+  });
+
+  mainWindow.webContents.on("new-window", (event, url) => {
+    const parsedUrl = new URL(url);
+
+    if (parsedUrl.protocol === "https:" || parsedUrl.protocol === "http:") {
+      event.preventDefault();
+      shell.openExternal(url);
+    }
   });
 
   return mainWindow;

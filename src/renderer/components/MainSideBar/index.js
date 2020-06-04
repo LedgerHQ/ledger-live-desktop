@@ -204,7 +204,7 @@ const MainSideBar = () => {
   }, [push]);
 
   const handleClickExchange = useCallback(() => {
-    push("/partners");
+    push("/exchange");
   }, [push]);
 
   const maybeRedirectToAccounts = useCallback(() => {
@@ -288,12 +288,12 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
-                id={"partners"}
+                id={"exchange"}
                 label={t("sidebar.exchange")}
                 icon={IconExchange}
                 iconActiveColor="wallet"
                 onClick={handleClickExchange}
-                isActive={location.pathname === "/partners"}
+                isActive={location.pathname === "/exchange"}
                 collapsed={secondAnim}
               />
               <Space of={30} />

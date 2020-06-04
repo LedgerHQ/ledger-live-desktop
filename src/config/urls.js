@@ -49,5 +49,6 @@ export const urls = {
   errors: {
     CantOpenDevice: "https://support.ledger.com/hc/en-us/articles/115005165269",
     WrongDeviceForAccount: "https://support.ledger.com/hc/en-us/articles/360025321733",
+    SyncError: "https://support.ledger.com/hc/en-us/articles/360012109220",
   },
 };

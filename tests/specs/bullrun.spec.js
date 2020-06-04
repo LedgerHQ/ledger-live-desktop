@@ -4,7 +4,7 @@ import {
 } from "@ledgerhq/live-common/lib/apps/mock";
 import { toMatchImageSnapshot } from "jest-image-snapshot";
 import { delay } from "@ledgerhq/live-common/lib/promise";
-import { applicationProxy, getMockDeviceEvent, restoreUserData } from "../applicationProxy";
+import { applicationProxy, removeUserData, getMockDeviceEvent } from "../applicationProxy";
 import OnboardingPage from "../po/onboarding.page";
 import ModalPage from "../po/modal.page";
 import GenuinePage from "../po/genuine.page";
@@ -45,8 +45,7 @@ describe("Bullrun", () => {
   });
 
   afterAll(async () => {
-    await restoreUserData();
-    return app.stop();
+    return app.stop().then(() => removeUserData());
   });
 
   const $ = selector => app.client.element(selector);
@@ -332,7 +331,7 @@ describe("Bullrun", () => {
     await $("#topbar-discreet-button").click();
 
     await $("#drawer-dashboard-button").click();
-    await $("#drawer-partners-button").click();
+    await $("#drawer-exchange-button").click();
 
     // Open settings and navigate all tabs
     await $("#topbar-settings-button").click();

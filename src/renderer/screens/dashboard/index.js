@@ -21,6 +21,7 @@ import AssetDistribution from "~/renderer/components/AssetDistribution";
 import DelegationBanner from "~/renderer/families/tezos/Delegation/DelegationBanner";
 import MigrationBanner from "~/renderer/modals/MigrateAccounts/Banner";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
+import ExchangeBanner from "~/renderer/screens/exchange/ExchangeBanner";
 import { saveSettings } from "~/renderer/actions/settings";
 import { connect, useSelector } from "react-redux";
 import uniq from "lodash/uniq";
@@ -75,6 +76,7 @@ const DashboardPage = ({ saveSettings }: Props) => {
         <UpdateBanner />
         <MigrationBanner />
         <DelegationBanner />
+        <ExchangeBanner />
       </TopBannerContainer>
       <RefreshAccountsOrdering onMount />
       <TrackPage
