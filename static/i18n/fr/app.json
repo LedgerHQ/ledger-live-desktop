@@ -46,7 +46,7 @@
     "dismiss": "Ignorer",
     "information": "Informations",
     "search": "Rechercher ...",
-    "manage": "Manage",
+    "manage": "Gérer",
     "lockScreen": {
       "title": "Bienvenue",
       "subTitle": null,
@@ -71,7 +71,7 @@
       "CREATE": "Créée",
       "REVEAL": "Révélée",
       "DELEGATE": "Déléguée",
-      "REDELEGATE": "Redelegated",
+      "REDELEGATE": "Redélégué",
       "UNDELEGATE": "Interrompue",
       "VOTE": "Voté",
       "FREEZE": "Gelé",
@@ -124,7 +124,7 @@
       "descToken": "Assurez-vous que l'application <1><0>{{managerAppName}}</0></1> soit installée pour recevoir des <3><0>{{ticker}}</0></3> et des tokens<5><0>{{tokenList}}</0></5>",
       "buttons": {
         "receiveFunds": "Recevoir",
-        "buy": "Buy"
+        "buy": "Acheter"
       }
     },
     "settings": {
@@ -143,37 +143,37 @@
     "frozenAssets": "Actifs gelés",
     "bandwidth": "Bandwidth",
     "energy": "Energy",
-    "delegatedAssets": "Delegated assets",
-    "undelegating": "Undelegating",
+    "delegatedAssets": "Actifs délégués",
+    "undelegating": "Interrompre délégation",
     "availableBalanceTooltip": "Ce montant peut être envoyé à tout moment.",
     "frozenAssetsTooltip": "Les actifs gelés sont utilisés dans le processus de vote de Tron. Cela représente votre nombre total de votes.",
     "bandwidthTooltip": "Geler des actifs pour gagner de la bandwidth",
     "energyTooltip": "Geler des actifs pour gagner de l'Energy",
-    "delegatedAssetsTooltip": "These are your currently delegated assets",
-    "undelegatingTooltip": "These are your assets currently being undelegated"
+    "delegatedAssetsTooltip": "Actifs actuellement en cours de délégation",
+    "undelegatingTooltip": "Actifs actuellement en interruption de délégation"
   },
   "exchange": {
-    "title": "Buy crypto",
-    "reset": "Reset flow",
+    "title": "Acheter des cryptos",
+    "reset": "Réinitialiser",
     "banner": {
-      "title": "Buy crypto via our partner",
-      "description": "Purchase crypto assets via Coinify and receive your coins directly in your Ledger account",
-      "CTA": "Buy now"
+      "title": "Acheter des cryptomonnaies via notre partenaire",
+      "description": "Achetez des crypto-actifs via Coinify et recevez les directement dans votre compte Ledger",
+      "CTA": "Acheter maintenant"
     },
-    "verifyAddress": "Please confirm on your device that the displayed address match the one on your device's screen",
+    "verifyAddress": "Veuillez confirmer sur votre appareil que l'adresse affichée correspond à celle affichée ici",
     "buy": {
-      "title": "Buy crypto via our partner",
-      "tab": "Buy",
-      "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "Choose an account",
-      "continue": "Continue",
-      "addAccount": "Add account"
+      "title": "Acheter des cryptomonnaies via notre partenaire",
+      "tab": "Acheter",
+      "selectCrypto": "Choisir un crypto-actif",
+      "selectAccount": "Sélectionner compte",
+      "continue": "Continuer",
+      "addAccount": "Ajouter un compte"
     },
     "sell": {
-      "tab": "Sell"
+      "tab": "Vendre"
     },
     "history": {
-      "tab": "History"
+      "tab": "Historique"
     }
   },
   "accounts": {
@@ -199,7 +199,7 @@
       "star": "Favori",
       "receive": "Recevoir",
       "send": "Envoyer",
-      "buy": "Buy",
+      "buy": "Acheter",
       "edit": "Modifier le compte",
       "hideToken": "Masquer le token"
     }
@@ -329,7 +329,7 @@
       "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> à créer n’a été trouvé."
     },
     "supportLinks": {
-      "segwit_or_native_segwit": "Segwit or Native Segwit?"
+      "segwit_or_native_segwit": "Segwit ou Native Segwit ?"
     },
     "cta": {
       "addMore": "Ajouter davantage",
@@ -383,16 +383,16 @@
       "address": "Adresse",
       "votes": "Votes ({{number}})",
       "votesAddress": "<0>{{votes}}</0> pour <2>{{name}}</2>",
-      "validators": "Validators",
-      "delegated": "Delegated ({{amount}})",
-      "redelegated": "Redelegated ({{amount}})",
-      "redelegatedFrom": "Redelegated from",
-      "redelegatedTo": "Redelegated to",
-      "undelegated": "Undelegated ({{amount}})",
-      "undelegatedFrom": "Undelegated from",
-      "undelegatedAmount": "Undelegated amount",
-      "rewardFrom": "Reward from",
-      "rewardAmount": "Amount collected"
+      "validators": "Validateurs",
+      "delegated": "Délégué ({{amount}})",
+      "redelegated": "Redélégué ({{amount}})",
+      "redelegatedFrom": "Redélégué de",
+      "redelegatedTo": "Redélégué à",
+      "undelegated": "Délégation terminée ({{amount}})",
+      "undelegatedFrom": "Délégation interrompue pour",
+      "undelegatedAmount": "Montant de délégation interrompue",
+      "rewardFrom": "Récompense de",
+      "rewardAmount": "Montant collecté"
     }
   },
   "operationList": {
@@ -635,7 +635,7 @@
         "title": "Confirmation",
         "success": {
           "title": "",
-          "text": "Your assets have been unfrozen successfully. Your {{resource}} points will be decreased and your votes will be canceled.",
+          "text": "Vos actifs ont été dégelés avec succès. Vos points de {{resource}} seront réduits et vos votes seront annulés.",
           "continue": "Poursuivre"
         },
         "pending": {
@@ -686,8 +686,8 @@
     }
   },
   "buy": {
-    "title": "Buy",
-    "titleCrypto": "Buy {{currency}}"
+    "title": "Acheter",
+    "titleCrypto": "Acheter {{currency}}"
   },
   "receive": {
     "title": "Recevoir",
@@ -876,23 +876,23 @@
   "cosmos": {
     "delegation": {
       "emptyState": {
-        "description": "Delegate your assets to one or more validators to start earning rewards.",
-        "info": "How Delegating works",
-        "delegation": "Earn rewards"
+        "description": "Déléguez vos actifs à un ou plusieurs validateurs pour commencer à obtenir des récompenses.",
+        "info": "Comment fonctionne la délégation",
+        "delegation": "Obtenez des récompenses"
       },
-      "claimRewards": "Claim rewards",
-      "claimAvailableRewards": "Claim {{amount}}",
-      "header": "Delegations",
-      "Amount": "Amount",
-      "noRewards": "No rewards available",
-      "delegate": "Delegate",
-      "undelegate": "Undelegate",
-      "redelegate": "Redelegate",
-      "reward": "Collect rewards",
-      "votingPower": "Voting power: {{amount}}%",
-      "estYield": "est. yield",
+      "claimRewards": "Réclamer les récompenses",
+      "claimAvailableRewards": "Réclamer {{amount}}",
+      "header": "Délégations",
+      "Amount": "Montant",
+      "noRewards": "Aucune récompense disponible",
+      "delegate": "Déléguer",
+      "undelegate": "Interrompre",
+      "redelegate": "Redélégué",
+      "reward": "Collecter les récompenses",
+      "votingPower": "Puissance de vote: {{amount}}%",
+      "estYield": "Rend. est.",
       "flow": {
-        "title": "Delegate assets",
+        "title": "Actifs délégués",
         "steps": {
           "starter": {
             "description": "Delegate your ATOM to earn rewards while keeping full security  and control on your assets.",
@@ -991,36 +991,36 @@
               "cta": "View details"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Diffusion de la transaction..."
             },
-            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+            "broadcastError": "Votre transaction a peut-être échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée avant de réessayer."
           }
         }
       }
     },
     "undelegation": {
       "flow": {
-        "title": "Undelegate assets",
+        "title": "Actifs de délégation interrompue",
         "steps": {
           "amount": {
-            "title": "Amount",
+            "title": "Montant",
             "fields": {
-              "validator": "Validator",
-              "amount": "Amount to undelegate"
+              "validator": "Validateur",
+              "amount": "Montant à interrompre"
             }
           },
           "device": {
-            "title": "Device"
+            "title": "Appareil"
           },
           "confirmation": {
             "title": "Confirmation",
             "success": {
-              "title": "You have successfully undelegated your assets.",
+              "title": "Actifs interrompus avec succès.",
               "description": "🚨 NEED THIS TEXT HERE 🚨",
-              "cta": "View details"
+              "cta": "Voir les détails"
             },
             "error": {
-              "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+              "broadcastError": "Votre transaction a peut-être échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée avant de réessayer."
             }
           }
         }
@@ -1036,9 +1036,9 @@
     "transactionID": "ID de transaction",
     "value": "Valeur",
     "amount": "Montant",
-    "delegated": "Delegated",
-    "rewards": "Rewards",
-    "distribution": "Distribution",
+    "delegated": "Délégué",
+    "rewards": "Récompenses",
+    "distribution": "Répartition",
     "duration": "Durée",
     "durationJustStarted": "A l'instant",
     "durationDays": "{{count}} jour",
@@ -1047,7 +1047,7 @@
     "delegationEarn": "Vous pouvez maintenant obtenir {{name}} récompenses de staking en déléguant votre compte.",
     "earnRewards": "Obtenez des récompenses",
     "overdelegated": "Surdélégué",
-    "status": "Status",
+    "status": "Statut",
     "flow": {
       "steps": {
         "starter": {
@@ -1558,10 +1558,10 @@
       "freeze": "Veuillez confirmer l'opération sur votre appareil pour geler les actifs",
       "unfreeze": "Veuillez confirmer l'opération sur votre appareil pour dégeler les actifs",
       "vote": "Veuillez confirmer l'opération sur votre appareil pour exprimer vos votes",
-      "delegate": "You have successfully delegated your assets. Please confirm the operation on your device to cast your votes",
-      "undelegate": "Please confirm the operation on your device to undelegate",
-      "redelegate": "You have successfully redelegated your assets. Please confirm the operation on your device to cast your votes",
-      "claimRewardCompound": "Please confirm the operation on your device to coumpound your rewards."
+      "delegate": "Vous avez délégué vos actifs avec succès. Veuillez confirmer l'opération sur votre appareil pour voter",
+      "undelegate": "Veuillez confirmer l'opération sur votre appareil pour interrompre la délégation",
+      "redelegate": "Vous avez redélégué vos actifs avec succès. Veuillez confirmer l'opération sur votre appareil pour voter",
+      "claimRewardCompound": "Veuillez confirmer l'opération sur votre appareil pour compound vos récompenses."
     },
     "recipientWording": {
       "send": "destinataire",
@@ -1599,8 +1599,8 @@
       "description": "Quelque chose s’est mal passé. Veuillez essayer à nouveau ou nous contacter."
     },
     "AccountAwaitingSendPendingOperations": {
-      "title": "There is an operation pending for this account.",
-      "description": "Please wait a few minutes and come back."
+      "title": "Il y a une opération en attente pour ce compte.",
+      "description": "Veuillez patienter quelques minutes avant de réessayer."
     },
     "AccountNameRequired": {
       "title": "Un nom de compte est requis.",
@@ -1906,7 +1906,7 @@
     },
     "SyncError": {
       "title": "Erreur de synchronisation",
-      "description": "Some accounts could not be synchronized."
+      "description": "Certains comptes n'ont pas pu être synchronisés."
     },
     "TronNoFrozenForBandwidth": {
       "title": "Aucun actif à dégeler",
