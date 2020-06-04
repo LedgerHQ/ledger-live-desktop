@@ -59,8 +59,11 @@ export default function StepClaimRewards({
     });
 
   const onDelegationChange = useCallback(
-    ({ address, pendingRewards }) => {
-      updateClaimRewards({ ...transaction, validators: [{ address, amount: pendingRewards }] });
+    ({ validatorAddress, pendingRewards }) => {
+      updateClaimRewards({
+        ...transaction,
+        validators: [{ address: validatorAddress, amount: pendingRewards }],
+      });
     },
     [updateClaimRewards, transaction],
   );
