@@ -9,8 +9,10 @@ import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import {
   useCosmosPreloadData,
   useCosmosMappedDelegations,
+  canDelegate,
 } from "@ledgerhq/live-common/lib/families/cosmos/react";
-import { mapUnbondings } from "@ledgerhq/live-common/lib/families/cosmos/utils";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
+import { mapUnbondings, COSMOS_MIN_SAFE } from "@ledgerhq/live-common/lib/families/cosmos/utils";
 
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
@@ -46,7 +48,7 @@ const Wrapper = styled(Box).attrs(() => ({
 const Delegation = ({ account }: Props) => {
   const dispatch = useDispatch();
 
-  const { cosmosResources, spendableBalance } = account;
+  const { cosmosResources } = account;
   invariant(cosmosResources, "cosmos account expected");
   const {
     delegations,
@@ -55,10 +57,13 @@ const Delegation = ({ account }: Props) => {
     unbondings,
   } = cosmosResources;
 
+  const delegationEnabled = canDelegate(account);
+
   const mappedDelegations = useCosmosMappedDelegations(account);
 
   const { validators } = useCosmosPreloadData();
   const unit = getAccountUnit(account);
+  const minSafeAmount = formatCurrencyUnit(unit, COSMOS_MIN_SAFE, { showCode: true });
 
   /** @TODO move this to common with a useCosmosMappedUnbondings */
   const mappedUnbondings = mapUnbondings(unbondings, validators, unit);
@@ -119,14 +124,27 @@ const Delegation = ({ account }: Props) => {
         {hasDelegations || hasRewards ? (
           <Box horizontal>
             {hasDelegations ? (
-              <Button mr={2} disabled={spendableBalance.lte(0)} primary small onClick={onDelegate}>
-                <Box horizontal flow={1} alignItems="center">
-                  <DelegateIcon size={12} />
-                  <Box>
-                    <Trans i18nKey="cosmos.delegation.delegate" />
+              <ToolTip
+                content={
+                  !delegationEnabled ? (
+                    <Trans
+                      i18nKey="cosmos.delegation.minSafeWarning"
+                      values={{
+                        amount: minSafeAmount,
+                      }}
+                    />
+                  ) : null
+                }
+              >
+                <Button mr={2} disabled={!delegationEnabled} primary small onClick={onDelegate}>
+                  <Box horizontal flow={1} alignItems="center">
+                    <DelegateIcon size={12} />
+                    <Box>
+                      <Trans i18nKey="cosmos.delegation.delegate" />
+                    </Box>
                   </Box>
-                </Box>
-              </Button>
+                </Button>
+              </ToolTip>
             ) : null}
             <ToolTip content={!hasRewards ? <Trans i18nKey="cosmos.delegation.noRewards" /> : null}>
               <Button disabled={!hasRewards} primary small onClick={onClaimRewards}>
@@ -170,14 +188,27 @@ const Delegation = ({ account }: Props) => {
             </Box>
           </Box>
           <Box>
-            <Button primary small onClick={onEarnRewards}>
-              <Box horizontal flow={1} alignItems="center">
-                <IconChartLine size={12} />
-                <Box>
-                  <Trans i18nKey="cosmos.delegation.emptyState.delegation" />
+            <ToolTip
+              content={
+                !delegationEnabled ? (
+                  <Trans
+                    i18nKey="cosmos.delegation.minSafeWarning"
+                    values={{
+                      amount: minSafeAmount,
+                    }}
+                  />
+                ) : null
+              }
+            >
+              <Button primary small disabled={!delegationEnabled} onClick={onEarnRewards}>
+                <Box horizontal flow={1} alignItems="center">
+                  <IconChartLine size={12} />
+                  <Box>
+                    <Trans i18nKey="cosmos.delegation.emptyState.delegation" />
+                  </Box>
                 </Box>
-              </Box>
-            </Button>
+              </Button>
+            </ToolTip>
           </Box>
         </Wrapper>
       )}
