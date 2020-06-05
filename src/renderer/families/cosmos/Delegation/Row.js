@@ -11,7 +11,7 @@ import type {
   CosmosMappedUnbonding,
 } from "@ledgerhq/live-common/lib/families/cosmos/types";
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import { canRedelegate, canUndelegate } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import { canRedelegate, canUndelegate } from "@ledgerhq/live-common/lib/families/cosmos/logic";
 
 import { TableLine } from "./Header";
 import DropDown, { DropDownItem } from "~/renderer/components/DropDownSelector";

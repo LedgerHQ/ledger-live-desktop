@@ -9,10 +9,13 @@ import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import {
   useCosmosPreloadData,
   useCosmosMappedDelegations,
-  canDelegate,
 } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import { mapUnbondings, COSMOS_MIN_SAFE } from "@ledgerhq/live-common/lib/families/cosmos/utils";
+import {
+  mapUnbondings,
+  COSMOS_MIN_SAFE,
+  canDelegate,
+} from "@ledgerhq/live-common/lib/families/cosmos/logic";
 
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";

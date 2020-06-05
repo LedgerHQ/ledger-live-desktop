@@ -12,7 +12,7 @@ import type {
   CosmosDelegationInfo,
   CosmosValidatorItem,
 } from "@ledgerhq/live-common/lib/families/cosmos/types";
-import { mapDelegationInfo } from "@ledgerhq/live-common/lib/families/cosmos/utils";
+import { mapDelegationInfo } from "@ledgerhq/live-common/lib/families/cosmos/logic";
 import type { Currency, Unit, Operation, Account } from "@ledgerhq/live-common/lib/types";
 
 import { openURL } from "~/renderer/linking";

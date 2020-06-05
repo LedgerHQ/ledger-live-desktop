@@ -12,10 +12,12 @@ import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types
 import {
   useCosmosPreloadData,
   useSortedValidators,
-  getMaxDelegationAvailable,
 } from "@ledgerhq/live-common/lib/families/cosmos/react";
-import { COSMOS_MAX_DELEGATIONS } from "@ledgerhq/live-common/lib/families/cosmos/utils";
-import { mapDelegations } from "@ledgerhq/live-common/lib/families/cosmos/utils";
+import {
+  COSMOS_MAX_DELEGATIONS,
+  mapDelegations,
+  getMaxDelegationAvailable,
+} from "@ledgerhq/live-common/lib/families/cosmos/logic";
 import type {
   CosmosDelegation,
   CosmosDelegationInfo,

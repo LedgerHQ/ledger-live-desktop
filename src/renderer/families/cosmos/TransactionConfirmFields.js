@@ -16,7 +16,7 @@ import Text from "~/renderer/components/Text";
 import WarnBox from "~/renderer/components/WarnBox";
 import Box from "~/renderer/components/Box";
 import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
-import { mapDelegationInfo } from "@ledgerhq/live-common/lib/families/cosmos/utils";
+import { mapDelegationInfo } from "@ledgerhq/live-common/lib/families/cosmos/logic";
 
 import {
   OpDetailsData,
