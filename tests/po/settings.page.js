@@ -17,6 +17,10 @@ export default class SettingsPage extends Page {
     return this.app.client.element("#setting-general-desc");
   }
 
+  get experimentalContainer() {
+    return this.app.client.element("#settings-experimental-container");
+  }
+
   get experimentalTitle() {
     return this.app.client.element("#settings-experimental_features-title");
   }
@@ -33,6 +37,14 @@ export default class SettingsPage extends Page {
     const visible = reverse
       ? await !this.app.client.waitForVisible("#settings-container", 3000, reverse)
       : await this.app.client.waitForVisible("#settings-container");
+
+    return visible;
+  }
+
+  async experimentalFeatureIsVisible(reverse = false) {
+    const visible = reverse
+      ? await !this.app.client.waitForVisible("#settings-experimental-containe", 3000, reverse)
+      : await this.app.client.waitForVisible("#settings-experimental-containe");
 
     return visible;
   }

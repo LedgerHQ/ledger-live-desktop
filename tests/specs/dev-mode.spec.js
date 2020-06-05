@@ -79,18 +79,20 @@ describe("When user activate developer mode", () => {
   });
 
   describe("when app is opened", () => {
-    it("should display Portfolio", async () => {
+    it("should display portfolio container", async () => {
       expect(await portfolioPage.isVisible()).toBe(true);
     });
 
     it("should display Release note", async () => {
-      expect(await portfolioPage.isVisible()).toBe(true);
       expect(await modalPage.isVisible()).toBe(true);
       await modalPage.releaseNotesContinueButton.click();
     });
 
     it("should display Terms of use", async () => {
       expect(await modalPage.isVisible()).toBe(true);
+    });
+
+    it("should check checkbox and close terms of use modal", async () => {
       await modalPage.termsCheckbox.click();
       expect(await modalPage.isEnabled()).toBe(true);
       await modalPage.confirmButton.click();
@@ -98,11 +100,10 @@ describe("When user activate developer mode", () => {
 
     it("should display Portfolio empty state", async () => {
       expect(await portfolioPage.isVisible()).toBe(true);
-      expect(await portfolioPage.emptyStateTitle.getText()).toBe(PortfolioData.emptyState.title);
-      expect(await portfolioPage.emptyStateDesc.getText()).toBe(
-        PortfolioData.emptyState.description,
-      );
       await app.client.pause(1000);
+    });
+
+    it("screenshot Portfolio empty state", async () => {
       image = await app.browserWindow.capturePage();
       expect(image).toMatchImageSnapshot({
         customSnapshotIdentifier: "portfolio-1-empty-state",
@@ -150,28 +151,37 @@ describe("When user activate developer mode", () => {
     });
     */
 
-    it("shouldn't be able to add bitcoin testnet accounts", async () => {
-      await portfolioPage.drawerPortfolioButton.click();
-      expect(await portfolioPage.isVisible()).toBe(true);
-      await portfolioPage.emptyStateAddAccountButton.click();
-      expect(await modalPage.isVisible()).toBe(true);
-      expect(await modalPage.title.getText()).toBe(AccountsData.addAccounts.title);
-      await app.client.pause(1000);
-      image = await app.browserWindow.capturePage();
-      expect(image).toMatchImageSnapshot({
-        customSnapshotIdentifier: "add-account-1-currency-field-empty",
+    describe("When developer mode is Disabled", () => {
+      it("should go to add account", async () => {
+        await portfolioPage.emptyStateAddAccountButton.click();
+        expect(await modalPage.isVisible()).toBe(true);
+        expect(await modalPage.title.getText()).toBe(AccountsData.addAccounts.title);
       });
-      await modalPage.selectCurrencyInput.setValue("Bitcoin testnet");
-      await app.client.keys("Tab");
-      expect(await modalPage.selectCurrency.getText()).toBe(
-        AccountsData.addAccounts.selectCurrency,
-      );
-      await app.client.pause(1000);
-      image = await app.browserWindow.capturePage();
-      expect(image).toMatchImageSnapshot({
-        customSnapshotIdentifier: "add-account-2-currency-no-result",
+
+      it("screenshot account page", async () => {
+        await app.client.pause(1000);
+        image = await app.browserWindow.capturePage();
+        expect(image).toMatchImageSnapshot({
+          customSnapshotIdentifier: "add-account-1-currency-field-empty",
+        });
       });
-      await modalPage.close();
+
+      it("should search for bitcoin testnet currency", async () => {
+        await modalPage.selectCurrencyInput.setValue("Bitcoin testnet");
+        await app.client.keys("Tab");
+        expect(await modalPage.selectCurrency.getText()).toBe(
+          AccountsData.addAccounts.selectCurrency,
+        );
+      });
+
+      it("shouldn't find bitcoin testnet currency", async () => {
+        await app.client.pause(1000);
+        image = await app.browserWindow.capturePage();
+        expect(image).toMatchImageSnapshot({
+          customSnapshotIdentifier: "add-account-2-currency-no-result",
+        });
+        await modalPage.close();
+      });
     });
   });
 
@@ -183,6 +193,8 @@ describe("When user activate developer mode", () => {
       expect(await settingsPage.generalDescription.getText()).toBe(
         SettingsData.general.description,
       );
+    
+    it("screenshot General settings page", async () => {
       await app.client.pause(1000);
       image = await app.browserWindow.capturePage();
       expect(image).toMatchImageSnapshot({
@@ -192,7 +204,7 @@ describe("When user activate developer mode", () => {
 
     it("should display experimental settings page", async () => {
       await settingsPage.goToSettingsExperimental();
-      await app.client.pause(1000);
+      expect(await settingsPage.experimentalFeatureIsVisible()).toBe(true);
       expect(await settingsPage.experimentalTitle.getText()).toBe(SettingsData.experimental.title);
       expect(await settingsPage.experimentalDescription.getText()).toBe(
         SettingsData.experimental.description,
@@ -207,7 +219,7 @@ describe("When user activate developer mode", () => {
       await app.client.pause(1000);
       image = await app.browserWindow.capturePage();
       expect(image).toMatchImageSnapshot({
-        customSnapshotIdentifier: "settings-3-experimental-devmode-on",
+        customSnapshotIdentifier: "settings-2-experimental-devmode-on",
       });
     });
 
