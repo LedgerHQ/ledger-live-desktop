@@ -26,6 +26,7 @@ import Label from "~/renderer/components/Label";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Text from "~/renderer/components/Text";
+import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 
 const SelectButton = styled(Base)`
   border-radius: 4px;
@@ -215,9 +216,9 @@ export function StepValidatorsFooter({
   const hasErrors = Object.keys(errors).length;
   const canNext = !bridgePending && !hasErrors;
 
-  // @TODO add in the support popover info
   return (
     <>
+      <AccountFooter parentAccount={parentAccount} account={account} status={status} />
       <Box horizontal>
         <Button mr={1} secondary onClick={onClose}>
           <Trans i18nKey="common.cancel" />

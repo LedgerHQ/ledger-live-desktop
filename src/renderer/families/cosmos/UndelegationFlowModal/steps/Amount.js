@@ -13,6 +13,7 @@ import { ValidatorField, AmountField } from "../fields";
 import Text from "~/renderer/components/Text";
 import InfoBox from "~/renderer/components/InfoBox";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
+import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 
 export default function StepAmount({
   account,
@@ -95,8 +96,9 @@ export default function StepAmount({
 export function StepAmountFooter({
   transitionTo,
   account,
+  parentAccount,
   onClose,
-  status: { errors = {} },
+  status,
   bridgePending,
   transaction,
 }: StepProps) {
@@ -104,11 +106,13 @@ export function StepAmountFooter({
 
   invariant(account, "account required");
 
-  const hasErrors = !!Object.keys(errors).length;
+  const { errors } = status;
+  const hasErrors = Object.keys(errors).length;
   const canNext = !bridgePending && !hasErrors;
 
   return (
     <>
+      <AccountFooter parentAccount={parentAccount} account={account} status={status} />
       <Box horizontal>
         <Button mr={1} secondary onClick={onClose}>
           {t("common.cancel")}

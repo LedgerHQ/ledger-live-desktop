@@ -112,8 +112,13 @@ const ValidatorField = ({
 
   const unit = getAccountUnit(account);
 
+  const formattedDelegations = delegations.map(({ validatorAddress, ...d }) => ({
+    ...d,
+    address: validatorAddress,
+  }));
+
   const { validators: cosmosValidators } = useCosmosPreloadData();
-  const SR = useSortedValidators(search, cosmosValidators, []);
+  const SR = useSortedValidators(search, cosmosValidators, formattedDelegations);
   const currentDelegations = mapDelegations(delegations, cosmosValidators, unit);
 
   const delegationsAvailable = account.spendableBalance;

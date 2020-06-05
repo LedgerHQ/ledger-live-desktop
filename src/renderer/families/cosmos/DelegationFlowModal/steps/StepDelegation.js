@@ -12,6 +12,7 @@ import ValidatorsField from "../fields/ValidatorsField";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import Text from "~/renderer/components/Text";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
+import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 
 export default function StepDelegation({
   account,
@@ -73,17 +74,10 @@ export function StepDelegationFooter({
   const { errors } = status;
   const hasErrors = Object.keys(errors).length;
   const canNext = !bridgePending && !hasErrors;
-  // @TODO add in the support popover info
+
   return (
     <>
-      <Box px={2} py={1} color="palette.text.shade60" horizontal alignItems="center">
-        <InfoCircle size={12} />
-        <Box flex="1" mx={2}>
-          <Text ff="Inter|SemiBold" fontSize={3}>
-            <Trans i18nKey="cosmos.delegation.flow.steps.validator.feesInfo" />
-          </Text>
-        </Box>
-      </Box>
+      <AccountFooter parentAccount={parentAccount} account={account} status={status} />
       <Box horizontal>
         <Button mr={1} secondary onClick={onClose}>
           <Trans i18nKey="common.cancel" />

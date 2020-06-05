@@ -17,6 +17,7 @@ import Text from "~/renderer/components/Text";
 
 import DelegationSelectorField from "../fields/DelegationSelectorField";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
+import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 
 export default function StepClaimRewards({
   account,
@@ -111,9 +112,9 @@ export function StepClaimRewardsFooter({
   const hasErrors = Object.keys(errors).length;
   const canNext = !bridgePending && !hasErrors;
 
-  // @TODO add in the support popover info
   return (
     <>
+      <AccountFooter parentAccount={parentAccount} account={account} status={status} />
       <Box horizontal>
         <Button mr={1} secondary onClick={onClose}>
           <Trans i18nKey="common.cancel" />
