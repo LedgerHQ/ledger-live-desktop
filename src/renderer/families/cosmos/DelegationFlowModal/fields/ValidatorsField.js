@@ -12,7 +12,9 @@ import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types
 import {
   useCosmosPreloadData,
   useSortedValidators,
+  getMaxDelegationAvailable,
 } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import { COSMOS_MAX_DELEGATIONS } from "@ledgerhq/live-common/lib/families/cosmos/utils";
 import { mapDelegations } from "@ledgerhq/live-common/lib/families/cosmos/utils";
 import type {
   CosmosDelegation,
@@ -121,10 +123,10 @@ const ValidatorField = ({
   const SR = useSortedValidators(search, cosmosValidators, formattedDelegations);
   const currentDelegations = mapDelegations(delegations, cosmosValidators, unit);
 
-  const delegationsAvailable = account.spendableBalance;
   const delegationsUsed = validators.reduce((sum, v) => sum.plus(v.amount), BigNumber(0));
   const delegationsSelected = validators.length;
-  const max = account.spendableBalance.minus(delegationsUsed);
+
+  const max = getMaxDelegationAvailable(account, delegationsSelected).minus(delegationsUsed);
 
   const onUpdateDelegation = useCallback(
     (address, value) => {
@@ -156,7 +158,7 @@ const ValidatorField = ({
 
   const onSearch = useCallback(evt => setSearch(evt.target.value), [setSearch]);
 
-  const notEnoughDelegations = delegationsUsed.gt(delegationsAvailable);
+  const notEnoughDelegations = max.lt(0);
 
   /** auto focus first input on mount */
   useEffect(() => {
@@ -174,8 +176,12 @@ const ValidatorField = ({
 
       const onChange = value => onUpdateDelegation(validator.validatorAddress, value);
 
+      const currentMax = item
+        ? max
+        : getMaxDelegationAvailable(account, delegationsSelected + 1).minus(delegationsUsed);
+
       const onMax = () =>
-        onUpdateDelegation(validator.validatorAddress, item ? item.amount.plus(max) : max);
+        onUpdateDelegation(validator.validatorAddress, item ? item.amount.plus(max) : currentMax);
 
       const maxError = item && item.amount && max.lt(0);
 
@@ -224,12 +230,12 @@ const ValidatorField = ({
                 containerProps={{ grow: true, style: { height: 32, zIndex: 10 } }}
                 unit={unit}
                 error={error}
-                disabled={!item && max.lte(0)}
+                disabled={!item && currentMax.lte(0)}
                 value={item && item.amount}
                 onChange={onChange}
                 renderRight={
                   <InputRight>
-                    {max.gt(0) && (
+                    {currentMax.gt(0) && (
                       <MaxButton onClick={onMax}>
                         <Trans i18nKey="vote.steps.castVotes.max" />
                       </MaxButton>
@@ -250,8 +256,13 @@ const ValidatorField = ({
       max,
       unit,
       currentDelegations,
+      delegationsSelected,
+      account,
+      delegationsUsed,
     ],
   );
+
+  console.log(max.toNumber(), delegationsUsed.toNumber());
 
   if (!status) return null;
   return (
@@ -259,9 +270,9 @@ const ValidatorField = ({
       <ValidatorSearchInput search={search} onSearch={onSearch} />
       <ValidatorListHeader
         votesSelected={delegationsSelected}
-        votesAvailable={delegationsAvailable}
+        votesAvailable={max}
         max={formatValue(max, unit)}
-        maxVotes={Infinity}
+        maxVotes={COSMOS_MAX_DELEGATIONS}
         totalValidators={SR.length}
         notEnoughVotes={notEnoughDelegations}
       />
