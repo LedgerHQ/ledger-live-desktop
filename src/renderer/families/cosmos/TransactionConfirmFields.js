@@ -54,7 +54,6 @@ const AddressText = styled(Text).attrs(() => ({
   word-break: break-all;
   text-align: right;
   max-width: 50%;
-  text-transform: capitalize;
 `;
 
 const CosmosDelegateValidatorsField = ({
