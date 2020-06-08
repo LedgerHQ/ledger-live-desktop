@@ -15,8 +15,6 @@ jobs:
           ref: refs/pull/${{github.event.issue.number}}/merge
       - uses: actions/checkout@v2
         if: github.event_name == 'pull_request'
-        with:
-          ref: ${{ github.head_ref }}
       - uses: actions/setup-node@master
         with:
           node-version: 12.x
