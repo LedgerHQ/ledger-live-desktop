@@ -27,6 +27,9 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: run headless tests
         uses: ledgerhq/actions/run-headless@v1.5.0
+      - name: exit if no errors
+        if: ${{ success() }}
+        run: exit 0
       - name: upload diffs to imgur
         uses: ledgerhq/actions/upload-images@v1.5.0
         id: imgur
@@ -35,7 +38,6 @@ jobs:
           path: tests/specs/__image_snapshots__/__diff_output__
           clientId: "11eb8a62f4c7927"
       - name: prepare comment body
-        if: ${{ steps.comment.outputs.body != '' }}
         id: comment
         uses: ledgerhq/actions/prepare-comment-body@v1.5.0
         with:
