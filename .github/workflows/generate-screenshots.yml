@@ -15,8 +15,6 @@ jobs:
           ref: refs/pull/${{github.event.issue.number}}/merge
       - uses: actions/checkout@v2
         if: github.event_name == 'pull_request'
-        with:
-          ref: ${{ github.head_ref }}
       - uses: actions/setup-node@master
         with:
           node-version: 12.x
@@ -24,7 +22,7 @@ jobs:
         uses: geertvdc/setup-hub@master
       - name: hub checkout
         env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_TEAM_LIVE }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
         run: |
           hub pr checkout $PR_NUMBER
@@ -47,7 +45,7 @@ jobs:
       - name: update pr
         if: steps.check.outputs.triggered == 'true'
         env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_TEAM_LIVE }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           hub add .
           hub commit -m 'screenshot generated'
