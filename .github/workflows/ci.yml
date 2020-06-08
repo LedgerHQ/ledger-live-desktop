@@ -35,12 +35,13 @@ jobs:
           path: tests/specs/__image_snapshots__/__diff_output__
           clientId: "11eb8a62f4c7927"
       - name: prepare comment body
+        if: ${{ steps.comment.outputs.body != '' }}
         id: comment
         uses: ledgerhq/actions/prepare-comment-body@v1.5.0
         with:
           images: ${{ steps.imgur.outputs.images }}
       - name: comment
-        if: github.event_name == 'pull_request'
+        if: ${{ github.event_name == 'pull_request' && success() }}
         uses: unsplash/comment-on-pr@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
