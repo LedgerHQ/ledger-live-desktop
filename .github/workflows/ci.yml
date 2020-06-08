@@ -12,6 +12,10 @@ jobs:
   type-checking:
     runs-on: ubuntu-latest
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.4.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@master
         with:
@@ -19,17 +23,38 @@ jobs:
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: run headless tests
-        uses: ledgerhq/actions/run-headless@v1.2.0
-      - name: upload diffs
-        uses: actions/upload-artifact@v1
-        if: failure()
+        uses: ledgerhq/actions/run-headless@v1.5.2
+        continue-on-error: true
+      - name: upload diffs to imgur
+        if: ${{ failure() }}
+        uses: ledgerhq/actions/upload-images@v1.5.2
+        id: imgur
         with:
-          name: "diff_output"
-          path: tests/specs/__image_snapshots__/__diff_output__
+          path: ./tests/specs/__image_snapshots__/__diff_output__
+          clientId: "11eb8a62f4c7927"
+      - name: prepare comment body
+        if: ${{ steps.imgur.outputs.images != '' }}
+        id: comment
+        uses: ledgerhq/actions/prepare-comment-body@v1.5.2
+        with:
+          images: ${{ steps.imgur.outputs.images }}
+      - name: comment
+        if: ${{ github.event_name == 'pull_request' && steps.comment.outputs.body != '' }}
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: |
+            ## Diff output
+            ${{ steps.comment.outputs.body }}
+
+            ---
+
+            Use `@github-actions generate` to generate new screenshots for your PR
