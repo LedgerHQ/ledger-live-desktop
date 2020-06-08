@@ -33,7 +33,7 @@ jobs:
         if: ${{ failure() }}
         with:
           path: tests/specs/__image_snapshots__/__diff_output__
-          clientId: ${{ secrets.IMGUR_CLIENT_ID }}
+          clientId: "11eb8a62f4c7927"
       - name: prepare comment body
         id: comment
         uses: ledgerhq/actions/prepare-comment-body@v1.5.0
