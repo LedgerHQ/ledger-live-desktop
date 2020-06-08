@@ -1,6 +1,7 @@
 // @flow
 import invariant from "invariant";
 import React, { useState, useCallback } from "react";
+import { BigNumber } from "bignumber.js";
 import { compose } from "redux";
 import { connect, useDispatch } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
@@ -131,13 +132,17 @@ const Body = ({
 
     invariant(account && account.cosmosResources, "cosmos: account and cosmos resources required");
 
+    const source = account.cosmosResources?.delegations.find(
+      d => d.validatorAddress === validatorAddress,
+    );
+
     const bridge = getAccountBridge(account, undefined);
 
     const t = bridge.createTransaction(account);
 
     const transaction = bridge.updateTransaction(t, {
       mode: "redelegate",
-      validators: [],
+      validators: [{ address: "", amount: source?.amount ?? BigNumber(0) }],
       cosmosSourceValidator: validatorAddress,
     });
 

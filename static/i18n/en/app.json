@@ -2060,6 +2060,9 @@
     "NotEnoughBalanceToDelegate": {
       "title": "Insufficient balance to delegate"
     },
+    "NotEnoughDelegationBalance": {
+      "title": "Insufficient balance to delegate"
+    },
     "NotEnoughBalanceInParentAccount": {
       "title": "Insufficient balance in parent account"
     },

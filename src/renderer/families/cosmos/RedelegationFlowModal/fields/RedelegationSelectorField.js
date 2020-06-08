@@ -59,6 +59,7 @@ export default function RedelegationSelectorField({
         onInputChange={setQuery}
         inputValue={query}
         filterOption={false}
+        isDisabled={options.length <= 1}
         placeholder={t("common.selectAccount")}
         noOptionsMessage={({ inputValue }) =>
           t("common.selectAccountNoOption", { accountName: inputValue })

@@ -135,7 +135,10 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
       );
     }
     case "UNDELEGATE": {
-      const validator = extra?.validators[0];
+      const { validators } = extra;
+      if (!validators || validators.length <= 0) return null;
+
+      const validator = extra.validators[0];
 
       const formattedValidator = cosmosValidators.find(
         v => v.validatorAddress === validator.address,
@@ -170,9 +173,10 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
       );
     }
     case "REDELEGATE": {
-      const validator = extra?.validators[0];
-      const { cosmosSourceValidator } = extra;
-      if (!validator || !cosmosSourceValidator) return null;
+      const { cosmosSourceValidator, validators } = extra;
+      if (!validators || validators.length <= 0 || !cosmosSourceValidator) return null;
+
+      const validator = extra.validators[0];
 
       const formattedValidator = cosmosValidators.find(
         v => v.validatorAddress === validator.address,
@@ -220,8 +224,10 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
       );
     }
     case "REWARD": {
-      const validator = extra?.validators[0];
-      if (!validator) return null;
+      const { validators } = extra;
+      if (!validators || validators.length <= 0) return null;
+
+      const validator = extra.validators[0];
 
       const formattedValidator = cosmosValidators.find(
         v => v.validatorAddress === validator.address,
