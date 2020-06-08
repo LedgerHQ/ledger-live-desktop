@@ -70,6 +70,14 @@ export default function StepValidators({
   invariant(account && account.cosmosResources && transaction, "account and transaction required");
   const bridge = getAccountBridge(account, parentAccount);
 
+  const sourceValidator = useMemo(
+    () =>
+      account.cosmosResources?.delegations.find(
+        d => d.validatorAddress === transaction.cosmosSourceValidator,
+      ),
+    [account, transaction.cosmosSourceValidator],
+  );
+
   const updateRedelegation = useCallback(
     newTransaction => {
       onUpdateTransaction(transaction => bridge.updateTransaction(transaction, newTransaction));
@@ -78,7 +86,10 @@ export default function StepValidators({
   );
 
   const updateSourceValidator = useCallback(
-    ({ validatorAddress: cosmosSourceValidator }) =>
+    ({ validatorAddress: cosmosSourceValidator, ...r }) => {
+      const source = account.cosmosResources?.delegations.find(
+        d => d.validatorAddress === cosmosSourceValidator,
+      );
       updateRedelegation({
         ...transaction,
         cosmosSourceValidator,
@@ -87,12 +98,13 @@ export default function StepValidators({
             ? [
                 {
                   ...transaction.validators[0],
-                  amount: BigNumber(0),
+                  amount: source?.amount ?? BigNumber(0),
                 },
               ]
             : [],
-      }),
-    [updateRedelegation, transaction],
+      });
+    },
+    [updateRedelegation, transaction, account.cosmosResources],
   );
 
   const onChangeAmount = useCallback(
@@ -110,14 +122,6 @@ export default function StepValidators({
             : [],
       }),
     [updateRedelegation, transaction],
-  );
-
-  const sourceValidator = useMemo(
-    () =>
-      account.cosmosResources?.delegations.find(
-        d => d.validatorAddress === transaction.cosmosSourceValidator,
-      ),
-    [account, transaction],
   );
 
   const selectedValidator = useMemo(() => transaction.validators && transaction.validators[0], [

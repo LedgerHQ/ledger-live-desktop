@@ -29,10 +29,11 @@ export default function AmountField({
   const unit = getAccountUnit(account);
 
   const [currentValidator, setCurrentValidator] = useState(validator);
+  const [focused, setFocused] = useState(false);
   const [initialAmount, setInitialAmount] = useState(validator ? validator.amount : BigNumber(0));
 
   useEffect(() => {
-    if (validator && validator.address !== currentValidator.address) {
+    if (validator && validator.validatorAddress !== currentValidator.validatorAddress) {
       setCurrentValidator(validator);
       setInitialAmount(validator.amount);
     }
@@ -60,8 +61,8 @@ export default function AmountField({
     [initialAmount],
   );
 
-  const error = useMemo(() => Object.values(errors || {})[0], [errors]);
-  const warning = useMemo(() => Object.values(warnings || {})[0], [warnings]);
+  const error = useMemo(() => focused && Object.values(errors || {})[0], [focused, errors]);
+  const warning = useMemo(() => focused && Object.values(warnings || {})[0], [focused, warnings]);
 
   return (
     <Box my={2}>
@@ -74,6 +75,7 @@ export default function AmountField({
         unit={unit}
         value={amount}
         onChange={onChange}
+        onChangeFocus={setFocused}
         renderLeft={<InputLeft>{unit.code}</InputLeft>}
         renderRight={
           <InputRight>
