@@ -1602,6 +1602,74 @@
       "title": "The amount of rewards are lower than the estimated fees required to claim them",
       "description": ""
     },
+    "CosmosBroadcastCodeInternal": {
+      "title": "Something went wrong (Error #1)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeTxDecode": {
+      "title": "Something went wrong (Error #2)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeInvalidSequence": {
+      "title": "Invalid sequence",
+      "description": "Please try your operation again"
+    },
+    "CosmosBroadcastCodeUnauthorized": {
+      "title": "Unauthorized signature",
+      "description": "This account is not authorized to sign this transaction"
+    },
+    "CosmosBroadcastCodeInsufficientFunds": {
+      "title": "Insufficient funds",
+      "description": "Make sure the account to debit has enough funds and try again"
+    },
+    "CosmosBroadcastCodeUnknownRequest": {
+      "title": "Something went wrong (Error #6)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeInvalidAddress": {
+      "title": "Invalid address",
+      "description": "Please check the address and try again"
+    },
+    "CosmosBroadcastCodeInvalidPubKey": {
+      "title": "Something went wrong (Error #8)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeUnknownAddress": {
+      "title": "Unknown address",
+      "description": "Please check the address and try again"
+    },
+    "CosmosBroadcastCodeInsufficientCoins": {
+      "title": "Insufficient coins",
+      "description": "Make sure the account to debit has enough funds and try again"
+    },
+    "CosmosBroadcastCodeInvalidCoins": {
+      "title": "Something went wrong (Error #11)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeOutOfGas": {
+      "title": "Something went wrong (Error #12)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeMemoTooLarge": {
+      "title": "The Memo field is too long",
+      "description": "Please reduce the size of the memo text and try again"
+    },
+    "CosmosBroadcastCodeInsufficientFee": {
+      "title": "Something went wrong (Error #14)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeTooManySignatures": {
+      "title": "Something went wrong (Error #15)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeGasOverflow": {
+      "title": "Something went wrong (Error #16)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeNoSignatures": {
+      "title": "Something went wrong (Error #17)",
+      "description": "Please contact Ledger Support"
+    },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
       "description": "This crypto asset is not yet supported. Please contact us."
