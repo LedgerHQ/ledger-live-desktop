@@ -12,7 +12,7 @@ jobs:
   bundle-macos:
     runs-on: macos-latest
     steps:
-      - uses: ledgerhq/actions/check-member@v1.4.0
+      - uses: ledgerhq/actions/check-member@v1.4.1
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
@@ -71,7 +71,7 @@ jobs:
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@2
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -104,7 +104,7 @@ jobs:
   bundle-windows:
     runs-on: windows-latest
     steps:
-      - uses: ledgerhq/actions/check-member@v1.4.0
+      - uses: ledgerhq/actions/check-member@v1.4.1
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
@@ -123,7 +123,7 @@ jobs:
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@2
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -131,11 +131,11 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
-      - uses: ledgerhq/actions/get-package-infos@v1.4.0
+      - uses: ledgerhq/actions/get-package-infos@v1.4.1
         id: version
       - name: set beta name
         uses: ./.github/actions/change-product-name
-      - uses: ledgerhq/actions/get-pr-number@v1.4.0
+      - uses: ledgerhq/actions/get-pr-number@v1.4.1
         id: pr
         if: github.event_name == 'pull_request'
       - name: make local version (pr)
@@ -146,7 +146,7 @@ jobs:
         if: github.event_name == 'push'
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.4.0
+      - uses: ledgerhq/actions/get-package-infos@v1.4.1
         id: post-version
       - name: upload windows
         uses: actions/upload-artifact@v1

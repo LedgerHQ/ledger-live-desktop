@@ -18,7 +18,7 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.4.0
+      - uses: ledgerhq/actions/get-package-infos@v1.4.1
         id: version
       - name: upload macOS app
         uses: actions/upload-artifact@v1
@@ -37,7 +37,7 @@ jobs:
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@2
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -49,7 +49,7 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.4.0
+      - uses: ledgerhq/actions/get-package-infos@v1.4.1
         id: version
       - name: upload linux app
         uses: actions/upload-artifact@v1
@@ -69,7 +69,7 @@ jobs:
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@2
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -81,7 +81,7 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.4.0
+      - uses: ledgerhq/actions/get-package-infos@v1.4.1
         id: version
       - name: upload windows
         uses: actions/upload-artifact@v1
