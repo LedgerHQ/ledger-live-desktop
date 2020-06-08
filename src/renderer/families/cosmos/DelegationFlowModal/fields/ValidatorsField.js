@@ -185,9 +185,10 @@ const ValidatorField = ({
       const onMax = () =>
         onUpdateDelegation(validator.validatorAddress, item ? item.amount.plus(max) : currentMax);
 
-      const maxError = item && item.amount && max.lt(0);
+      const error = item && item.amount && max.lt(0);
 
-      const error = maxError;
+      const disabled =
+        !item && (currentMax.lte(0) || delegationsSelected >= COSMOS_MAX_DELEGATIONS);
 
       return (
         <ValidatorRow
@@ -232,7 +233,7 @@ const ValidatorField = ({
                 containerProps={{ grow: true, style: { height: 32, zIndex: 10 } }}
                 unit={unit}
                 error={error}
-                disabled={!item && currentMax.lte(0)}
+                disabled={disabled}
                 value={item && item.amount}
                 onChange={onChange}
                 renderRight={
@@ -263,8 +264,6 @@ const ValidatorField = ({
       delegationsUsed,
     ],
   );
-
-  console.log(max.toNumber(), delegationsUsed.toNumber());
 
   if (!status) return null;
   return (
