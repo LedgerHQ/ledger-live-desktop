@@ -65,8 +65,6 @@ export default function Body({
           address: validatorAddress,
           amount,
         })),
-      /** @TODO remove this once the bridge handles it */
-      recipient: accountProp.freshAddress,
     };
     const transaction = bridge.updateTransaction(initTx, newTx);
 

@@ -3,17 +3,15 @@
 import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
+import moment from "moment";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import type { BigNumber } from "bignumber.js";
-import type { Unit } from "@ledgerhq/live-common/lib/types";
 import type {
-  CosmosValidatorItem,
-  CosmosDelegationStatus,
+  CosmosMappedDelegation,
+  CosmosMappedUnbonding,
 } from "@ledgerhq/live-common/lib/families/cosmos/types";
-
-import FormattedVal from "~/renderer/components/FormattedVal";
-import Ellipsis from "~/renderer/components/Ellipsis";
+import type { Account } from "@ledgerhq/live-common/lib/types";
+import { canRedelegate, canUndelegate } from "@ledgerhq/live-common/lib/families/cosmos/logic";
 
 import { TableLine } from "./Header";
 import DropDown, { DropDownItem } from "~/renderer/components/DropDownSelector";
@@ -22,6 +20,9 @@ import Box from "~/renderer/components/Box/Box";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import CheckCircle from "~/renderer/icons/CheckCircle";
 import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
+import ToolTip from "~/renderer/components/Tooltip";
+import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
+import Text from "~/renderer/components/Text";
 
 const Wrapper: ThemedComponent<*> = styled.div`
   display: flex;
@@ -36,6 +37,14 @@ const Column: ThemedComponent<{ clickable?: boolean }> = styled(TableLine).attrs
   fontSize: 3,
 }))`
   cursor: ${p => (p.clickable ? "pointer" : "cursor")};
+`;
+
+const Ellipsis: ThemedComponent<{}> = styled.div`
+  flex: 1;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const Divider: ThemedComponent<*> = styled.div`
@@ -57,7 +66,7 @@ const ManageDropDownItem = ({
       {item.key === "MODAL_COSMOS_CLAIM_REWARDS" && <Divider />}
       <DropDownItem isActive={isActive}>
         <Box horizontal alignItems="center" justifyContent="center">
-          {item.label}
+          <Text ff="Inter|SemiBold">{item.label}</Text>
         </Box>
       </DropDownItem>
     </>
@@ -65,44 +74,56 @@ const ManageDropDownItem = ({
 };
 
 type Props = {
-  validator: ?CosmosValidatorItem,
-  address: string,
-  amount: BigNumber,
-  pendingRewards: BigNumber,
-  unit: Unit,
-  status: CosmosDelegationStatus,
+  account: Account,
+  delegation: CosmosMappedDelegation,
   onManageAction: (
     address: string,
     action: "MODAL_COSMOS_REDELEGATE" | "MODAL_COSMOS_UNDELEGATE" | "MODAL_COSMOS_CLAIM_REWARDS",
   ) => void,
 };
 
-const Row = ({
-  validator,
-  address,
-  amount,
-  pendingRewards,
-  unit,
-  status,
+export function Row({
+  account,
+  delegation: {
+    amount,
+    validatorAddress,
+    formattedAmount,
+    pendingRewards,
+    formattedPendingRewards,
+    validator,
+    status,
+  },
+  delegation,
   onManageAction,
-}: Props) => {
+}: Props) {
   const onSelect = useCallback(
     action => {
-      onManageAction(address, action.key);
+      onManageAction(validatorAddress, action.key);
     },
-    [onManageAction, address],
+    [onManageAction, validatorAddress],
   );
+
+  const _canUndelegate = canUndelegate(account);
+  const _canRedelegate = canRedelegate(account, delegation);
 
   const dropDownItems = useMemo(
     () => [
-      {
-        key: "MODAL_COSMOS_REDELEGATE",
-        label: <Trans i18nKey="cosmos.delegation.redelegate" />,
-      },
-      {
-        key: "MODAL_COSMOS_UNDELEGATE",
-        label: <Trans i18nKey="cosmos.delegation.undelegate" />,
-      },
+      ...(_canRedelegate
+        ? [
+            {
+              key: "MODAL_COSMOS_REDELEGATE",
+              label: <Trans i18nKey="cosmos.delegation.redelegate" />,
+            },
+          ]
+        : []),
+      ...(_canUndelegate
+        ? [
+            {
+              key: "MODAL_COSMOS_UNDELEGATE",
+              label: <Trans i18nKey="cosmos.delegation.undelegate" />,
+            },
+          ]
+        : []),
       ...(pendingRewards.gt(0)
         ? [
             {
@@ -112,31 +133,35 @@ const Row = ({
           ]
         : []),
     ],
-    [pendingRewards],
+    [pendingRewards, _canRedelegate, _canUndelegate],
   );
+  const name = validator?.name ?? validatorAddress;
 
   return (
     <Wrapper>
       <Column strong>
-        <Ellipsis>{validator ? validator.name : address}</Ellipsis>
+        <Box mr={2}>
+          <FirstLetterIcon label={name} />
+        </Box>
+        <Ellipsis>{name}</Ellipsis>
       </Column>
       <Column>
         {status === "bonded" ? (
           <Box color="positiveGreen" pl={2}>
-            <CheckCircle size={14} />
+            <ToolTip content={<Trans i18nKey="cosmos.delegation.activeTooltip" />}>
+              <CheckCircle size={14} />
+            </ToolTip>
           </Box>
         ) : (
           <Box color="alertRed" pl={2}>
-            <ExclamationCircleThin size={14} />
+            <ToolTip content={<Trans i18nKey="cosmos.delegation.inactiveTooltip" />}>
+              <ExclamationCircleThin size={14} />
+            </ToolTip>
           </Box>
         )}
       </Column>
-      <Column>
-        <FormattedVal color="palette.text.shade80" val={amount} unit={unit} showCode />
-      </Column>
-      <Column>
-        <FormattedVal color="palette.text.shade80" val={pendingRewards} unit={unit} showCode />
-      </Column>
+      <Column>{formattedAmount}</Column>
+      <Column>{formattedPendingRewards}</Column>
       <Column>
         <DropDown items={dropDownItems} renderItem={ManageDropDownItem} onChange={onSelect}>
           {({ isOpen, value }) => (
@@ -151,6 +176,36 @@ const Row = ({
       </Column>
     </Wrapper>
   );
+}
+
+type UnbondingRowProps = {
+  delegation: CosmosMappedUnbonding,
 };
 
-export default Row;
+export function UnbondingRow({
+  delegation: { validator, formattedAmount, validatorAddress, completionDate },
+}: UnbondingRowProps) {
+  const date = useMemo(() => (completionDate ? moment(completionDate).fromNow() : "N/A"), [
+    completionDate,
+  ]);
+  const name = validator?.name ?? validatorAddress;
+  return (
+    <Wrapper>
+      <Column strong>
+        <Box mr={2}>
+          <FirstLetterIcon label={name} />
+        </Box>
+        <Ellipsis>{name}</Ellipsis>
+      </Column>
+      <Column>
+        <Box color="alertRed" pl={2}>
+          <ToolTip content={<Trans i18nKey="cosmos.delegation.inactiveTooltip" />}>
+            <ExclamationCircleThin size={14} />
+          </ToolTip>
+        </Box>
+      </Column>
+      <Column>{formattedAmount}</Column>
+      <Column>{date}</Column>
+    </Wrapper>
+  );
+}

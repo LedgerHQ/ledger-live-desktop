@@ -7,7 +7,6 @@ import styled, { withTheme } from "styled-components";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { multiline } from "~/renderer/styles/helpers";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import RetryButton from "~/renderer/components/RetryButton";
@@ -16,6 +15,10 @@ import SuccessDisplay from "~/renderer/components/SuccessDisplay";
 import BroadcastErrorDisclaimer from "~/renderer/components/BroadcastErrorDisclaimer";
 
 import type { StepProps } from "../types";
+
+import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(() => ({
   alignItems: "center",
@@ -35,14 +38,44 @@ function StepConfirmation({
   signed,
   transaction,
 }: StepProps & { theme: * }) {
+  const { validators } = useCosmosPreloadData();
+
   if (optimisticOperation) {
+    const unit = account && getAccountUnit(account);
+
+    const validator = transaction && transaction.validators ? transaction.validators[0] : null;
+
+    const v =
+      validator &&
+      validators.find(({ validatorAddress }) => validatorAddress === validator.address);
+
+    const amount =
+      unit && validator && formatCurrencyUnit(unit, validator.amount, { showCode: true });
+
     return (
       <Container>
         <TrackPage category="ClaimRewards Cosmos Flow" name="Step Confirmed" />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
-          title={<Trans i18nKey="cosmos.claimRewards.flow.steps.confirmation.success.title" />}
-          description={multiline(t("cosmos.claimRewards.flow.steps.confirmation.success.text"))}
+          title={
+            <Trans
+              i18nKey={`cosmos.claimRewards.flow.steps.confirmation.success.${
+                transaction?.mode === "claimReward" ? "title" : "titleCompound"
+              }`}
+            />
+          }
+          description={
+            <div>
+              <Trans
+                i18nKey={`cosmos.claimRewards.flow.steps.confirmation.success.${
+                  transaction?.mode === "claimReward" ? "text" : "textCompound"
+                }`}
+                values={{ amount, validator: v && v.name }}
+              >
+                <b></b>
+              </Trans>
+            </div>
+          }
         />
       </Container>
     );

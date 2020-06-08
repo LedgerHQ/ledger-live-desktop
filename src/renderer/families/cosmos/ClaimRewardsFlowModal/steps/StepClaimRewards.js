@@ -16,6 +16,8 @@ import ModeSelectorField from "../fields/ModeSelectorField";
 import Text from "~/renderer/components/Text";
 
 import DelegationSelectorField from "../fields/DelegationSelectorField";
+import ErrorBanner from "~/renderer/components/ErrorBanner";
+import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 
 export default function StepClaimRewards({
   account,
@@ -24,6 +26,8 @@ export default function StepClaimRewards({
   transaction,
   status,
   bridgePending,
+  warning,
+  error,
   t,
 }: StepProps) {
   invariant(account && account.cosmosResources && transaction, "account and transaction required");
@@ -56,8 +60,11 @@ export default function StepClaimRewards({
     });
 
   const onDelegationChange = useCallback(
-    ({ address, pendingRewards }) => {
-      updateClaimRewards({ ...transaction, validators: [{ address, amount: pendingRewards }] });
+    ({ validatorAddress, pendingRewards }) => {
+      updateClaimRewards({
+        ...transaction,
+        validators: [{ address: validatorAddress, amount: pendingRewards }],
+      });
     },
     [updateClaimRewards, transaction],
   );
@@ -65,11 +72,15 @@ export default function StepClaimRewards({
   return (
     <Box flow={1}>
       <TrackPage category="ClaimRewards Flow" name="Step 1" />
+      {warning ? <ErrorBanner error={warning} warning /> : null}
+      {error ? <ErrorBanner error={error} /> : null}
       <ModeSelectorField mode={transaction.mode} onChange={onChangeMode} />
       {amount && (
         <Text fontSize={4} ff="Inter|Medium" textAlign="center">
           <Trans
-            i18nKey="cosmos.claimRewards.flow.steps.claimRewards.compoundInfo"
+            i18nKey={`cosmos.claimRewards.flow.steps.claimRewards.${
+              transaction.mode === "claimReward" ? "claimInfo" : "compoundInfo"
+            }`}
             values={{ amount }}
           >
             <b></b>
@@ -101,9 +112,9 @@ export function StepClaimRewardsFooter({
   const hasErrors = Object.keys(errors).length;
   const canNext = !bridgePending && !hasErrors;
 
-  // @TODO add in the support popover info
   return (
     <>
+      <AccountFooter parentAccount={parentAccount} account={account} status={status} />
       <Box horizontal>
         <Button mr={1} secondary onClick={onClose}>
           <Trans i18nKey="common.cancel" />

@@ -131,8 +131,6 @@ const Body = ({
     const transaction = bridge.updateTransaction(t, {
       mode: "claimReward",
       validators,
-      /** @TODO remove this once the bridge handles it */
-      recipient: account.freshAddress,
     });
 
     return { account, parentAccount: undefined, transaction };
@@ -170,6 +168,7 @@ const Body = ({
   );
 
   const error = transactionError || bridgeError;
+  const warning = status.warnings ? Object.values(status.warnings)[0] : null;
 
   const stepperProps = {
     title: t("cosmos.claimRewards.flow.title"),
@@ -182,11 +181,12 @@ const Body = ({
     steps,
     errorSteps: [],
     disabledSteps: [],
-    hideBreadcrumb: !!error,
+    hideBreadcrumb: !!error || !!warning,
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,
     error,
+    warning,
     status,
     optimisticOperation,
     openModal,

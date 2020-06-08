@@ -64,7 +64,7 @@ export default function AmountField({
   const warning = useMemo(() => Object.values(warnings || {})[0], [warnings]);
 
   return (
-    <Box mt={5}>
+    <Box my={2}>
       <Label>{t("cosmos.undelegation.flow.steps.amount.fields.amount")}</Label>
       <InputCurrency
         autoFocus={false}
@@ -125,7 +125,9 @@ const AmountButton: ThemedComponent<{ error: boolean, active: boolean }> = style
       ? p.theme.colors.palette.primary.main
       : p.theme.colors.palette.action.hover};
   color: ${p =>
-    p.active
+    p.error
+      ? p.theme.colors.alertRed
+      : p.active
       ? p.theme.colors.palette.primary.contrastText
       : p.theme.colors.palette.primary.main}!important;
   border: none;

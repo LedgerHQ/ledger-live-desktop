@@ -21,6 +21,7 @@ setSupportedCurrencies([
   "stratis",
   "komodo",
   "pivx",
+  "cosmos",
   "zencash",
   "vertcoin",
   "peercoin",

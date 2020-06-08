@@ -9,6 +9,10 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 
 import ValidatorsField from "../fields/ValidatorsField";
+import InfoCircle from "~/renderer/icons/InfoCircle";
+import Text from "~/renderer/components/Text";
+import ErrorBanner from "~/renderer/components/ErrorBanner";
+import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 
 export default function StepDelegation({
   account,
@@ -17,10 +21,17 @@ export default function StepDelegation({
   transaction,
   status,
   bridgePending,
+  error,
   t,
 }: StepProps) {
   invariant(account && transaction && transaction.validators, "account and transaction required");
   const bridge = getAccountBridge(account, parentAccount);
+
+  const { cosmosResources } = account;
+
+  invariant(cosmosResources, "cosmosResources required");
+
+  const delegations = cosmosResources.delegations || [];
 
   const updateDelegation = useCallback(
     updater => {
@@ -36,9 +47,11 @@ export default function StepDelegation({
   return (
     <Box flow={1}>
       <TrackPage category="Delegation Flow" name="Step 1" />
+      {error && <ErrorBanner error={error} />}
       <ValidatorsField
         account={account}
-        delegations={transaction.validators || []}
+        validators={transaction.validators || []}
+        delegations={delegations}
         bridgePending={bridgePending}
         onChangeDelegations={updateDelegation}
         status={status}
@@ -62,9 +75,9 @@ export function StepDelegationFooter({
   const hasErrors = Object.keys(errors).length;
   const canNext = !bridgePending && !hasErrors;
 
-  // @TODO add in the support popover info
   return (
     <>
+      <AccountFooter parentAccount={parentAccount} account={account} status={status} />
       <Box horizontal>
         <Button mr={1} secondary onClick={onClose}>
           <Trans i18nKey="common.cancel" />

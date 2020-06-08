@@ -1,21 +1,21 @@
 /* eslint-disable consistent-return */
 // @flow
-import React from "react";
-
-import type { Currency, Unit, Operation, Account } from "@ledgerhq/live-common/lib/types";
+import { BigNumber } from "bignumber.js";
+import React, { useMemo } from "react";
+import type { ComponentType } from "react";
+import { Trans } from "react-i18next";
+import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
+import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
+import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import type {
   CosmosDelegationInfo,
   CosmosValidatorItem,
 } from "@ledgerhq/live-common/lib/families/cosmos/types";
-
-import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
-import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-
-import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import { mapDelegationInfo } from "@ledgerhq/live-common/lib/families/cosmos/logic";
+import type { Currency, Unit, Operation, Account } from "@ledgerhq/live-common/lib/types";
 
 import { openURL } from "~/renderer/linking";
-
 import {
   OpDetailsTitle,
   Address,
@@ -23,12 +23,9 @@ import {
   OpDetailsVoteData,
   B,
 } from "~/renderer/modals/OperationDetails/styledComponents";
-import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box/Box";
-
 import Text from "~/renderer/components/Text";
 import { useDiscreetMode } from "~/renderer/components/Discreet";
-import { BigNumber } from "bignumber.js";
 
 /** @TODO cosmos update this url */
 const helpURL = "https://support.ledger.com/hc/en-us/articles/360013062139";
@@ -51,22 +48,6 @@ const redirectAddress = (currency: Currency, address: string) => () => {
   if (url) openURL(url);
 };
 
-/** @TODO move this in common */
-export const formatDelegationsInfo = (
-  delegations: CosmosDelegationInfo[],
-  validators: CosmosValidatorItem[],
-): {
-  validator: ?CosmosValidatorItem,
-  address: string,
-  amount: BigNumber,
-}[] => {
-  return delegations.map((d, i, arr) => ({
-    validator: validators.find(v => v.validatorAddress === d.address),
-    address: d.address,
-    amount: d.amount,
-  }));
-};
-
 type OperationDetailsDelegationProps = {
   discreet: boolean,
   unit: Unit,
@@ -86,7 +67,10 @@ export const OperationDetailsDelegation = ({
   isTransactionField,
   cosmosValidators,
 }: OperationDetailsDelegationProps) => {
-  const formattedDelegations = formatDelegationsInfo(delegations, cosmosValidators);
+  const mappedDelegationInfo = useMemo(
+    () => mapDelegationInfo(delegations, cosmosValidators, unit),
+    [delegations, cosmosValidators, unit],
+  );
 
   return (
     <Box>
@@ -96,38 +80,28 @@ export const OperationDetailsDelegation = ({
         </OpDetailsTitle>
       )}
 
-      {formattedDelegations
-        .map(({ amount, ...delegation }) => ({
-          ...delegation,
-          amount: formatCurrencyUnit(unit, BigNumber(amount), {
-            disableRounding: false,
-            alwaysShowSign: false,
-            showCode: true,
-            discreet,
-          }),
-        }))
-        .map(({ amount, address, validator }, i) => (
-          <OpDetailsData key={address + i}>
-            <OpDetailsVoteData>
-              <Box>
-                <Text>
-                  <Trans
-                    i18nKey="operationDetails.extra.votesAddress"
-                    values={{
-                      votes: amount,
-                      name: validator ? validator.name : address,
-                    }}
-                  >
-                    <Text ff="Inter|SemiBold">{""}</Text>
-                    {""}
-                    <Text ff="Inter|SemiBold">{""}</Text>
-                  </Trans>
-                </Text>
-              </Box>
-              <Address onClick={redirectAddress(currency, address)}>{address}</Address>
-            </OpDetailsVoteData>
-          </OpDetailsData>
-        ))}
+      {mappedDelegationInfo.map(({ formattedAmount, validator, address }, i) => (
+        <OpDetailsData key={address + i}>
+          <OpDetailsVoteData>
+            <Box>
+              <Text>
+                <Trans
+                  i18nKey="operationDetails.extra.votesAddress"
+                  values={{
+                    votes: formattedAmount,
+                    name: validator?.name ?? address,
+                  }}
+                >
+                  <Text ff="Inter|SemiBold">{""}</Text>
+                  {""}
+                  <Text ff="Inter|SemiBold">{""}</Text>
+                </Trans>
+              </Text>
+            </Box>
+            <Address onClick={redirectAddress(currency, address)}>{address}</Address>
+          </OpDetailsVoteData>
+        </OpDetailsData>
+      ))}
     </Box>
   );
 };
@@ -161,8 +135,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
       );
     }
     case "UNDELEGATE": {
-      const { validator } = extra;
-      if (!validator) return null;
+      const validator = extra?.validators[0];
 
       const formattedValidator = cosmosValidators.find(
         v => v.validatorAddress === validator.address,
@@ -197,7 +170,8 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
       );
     }
     case "REDELEGATE": {
-      const { validator, cosmosSourceValidator } = extra;
+      const validator = extra?.validators[0];
+      const { cosmosSourceValidator } = extra;
       if (!validator || !cosmosSourceValidator) return null;
 
       const formattedValidator = cosmosValidators.find(
@@ -246,7 +220,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
       );
     }
     case "REWARD": {
-      const { validator } = extra;
+      const validator = extra?.validators[0];
       if (!validator) return null;
 
       const formattedValidator = cosmosValidators.find(
@@ -361,7 +335,7 @@ const UndelegateAmountCell = ({ operation, currency, unit }: Props) => {
   ) : null;
 };
 
-const amountCell = {
+const amountCell: { [key: string]: ComponentType<any> } = {
   DELEGATE: DelegateAmountCell,
   REDELEGATE: RedelegateAmountCell,
   UNDELEGATE: UndelegateAmountCell,
