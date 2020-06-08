@@ -26,9 +26,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: run headless tests
-        uses: ledgerhq/actions/run-headless@v1.4.1
+        uses: ledgerhq/actions/run-headless@v1.5.0
       - name: upload diffs to imgur
-        uses: ledgerhq/actions/upload-images@v1.4.1
+        uses: ledgerhq/actions/upload-images@v1.5.0
         id: imgur
         if: ${{ failure() }}
         with:
@@ -36,7 +36,7 @@ jobs:
           clientId: ${{ secrets.IMGUR_CLIENT_ID }}
       - name: prepare comment body
         id: comment
-        uses: ledgerhq/actions/prepare-comment-body@v1.4.1
+        uses: ledgerhq/actions/prepare-comment-body@v1.5.0
         with:
           images: ${{ steps.imgur.outputs.images }}
       - name: comment
