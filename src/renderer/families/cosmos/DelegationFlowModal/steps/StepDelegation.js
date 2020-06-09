@@ -9,8 +9,6 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 
 import ValidatorsField from "../fields/ValidatorsField";
-import InfoCircle from "~/renderer/icons/InfoCircle";
-import Text from "~/renderer/components/Text";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 
