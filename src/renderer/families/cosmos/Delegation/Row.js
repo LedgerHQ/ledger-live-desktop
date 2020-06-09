@@ -37,6 +37,9 @@ const Column: ThemedComponent<{ clickable?: boolean }> = styled(TableLine).attrs
   fontSize: 3,
 }))`
   cursor: ${p => (p.clickable ? "pointer" : "cursor")};
+  &:hover {
+    color: ${p => (p.clickable ? p.theme.colors.palette.primary.main : "initial")};
+  }
 `;
 
 const Ellipsis: ThemedComponent<{}> = styled.div`
@@ -80,6 +83,7 @@ type Props = {
     address: string,
     action: "MODAL_COSMOS_REDELEGATE" | "MODAL_COSMOS_UNDELEGATE" | "MODAL_COSMOS_CLAIM_REWARDS",
   ) => void,
+  onExternalLink: (address: string) => void,
 };
 
 export function Row({
@@ -95,6 +99,7 @@ export function Row({
   },
   delegation,
   onManageAction,
+  onExternalLink,
 }: Props) {
   const onSelect = useCallback(
     action => {
@@ -137,9 +142,14 @@ export function Row({
   );
   const name = validator?.name ?? validatorAddress;
 
+  const onExternalLinkClick = useCallback(() => onExternalLink(validatorAddress), [
+    onExternalLink,
+    validatorAddress,
+  ]);
+
   return (
     <Wrapper>
-      <Column strong>
+      <Column strong clickable onClick={onExternalLinkClick}>
         <Box mr={2}>
           <FirstLetterIcon label={name} />
         </Box>
@@ -180,18 +190,25 @@ export function Row({
 
 type UnbondingRowProps = {
   delegation: CosmosMappedUnbonding,
+  onExternalLink: (address: string) => void,
 };
 
 export function UnbondingRow({
   delegation: { validator, formattedAmount, validatorAddress, completionDate },
+  onExternalLink,
 }: UnbondingRowProps) {
   const date = useMemo(() => (completionDate ? moment(completionDate).fromNow() : "N/A"), [
     completionDate,
   ]);
   const name = validator?.name ?? validatorAddress;
+
+  const onExternalLinkClick = useCallback(() => onExternalLink(validatorAddress), [
+    onExternalLink,
+    validatorAddress,
+  ]);
   return (
     <Wrapper>
-      <Column strong>
+      <Column strong clickable onClick={onExternalLinkClick}>
         <Box mr={2}>
           <FirstLetterIcon label={name} />
         </Box>

@@ -16,6 +16,7 @@ import {
   COSMOS_MIN_SAFE,
   canDelegate,
 } from "@ledgerhq/live-common/lib/families/cosmos/logic";
+import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
@@ -107,6 +108,17 @@ const Delegation = ({ account }: Props) => {
     [account, dispatch],
   );
 
+  const explorerView = getDefaultExplorerView(account.currency);
+
+  const onExternalLink = useCallback(
+    (address: string) => {
+      const URL = explorerView && getAddressExplorer(explorerView, address);
+
+      if (URL) openURL(URL);
+    },
+    [explorerView],
+  );
+
   const hasDelegations = delegations.length > 0;
 
   const hasUnbondings = unbondings && unbondings.length > 0;
@@ -171,6 +183,7 @@ const Delegation = ({ account }: Props) => {
               account={account}
               delegation={delegation}
               onManageAction={onRedirect}
+              onExternalLink={onExternalLink}
             />
           ))}
         </Card>
@@ -230,7 +243,7 @@ const Delegation = ({ account }: Props) => {
           <Card p={0} mt={24} mb={6}>
             <UnbondingHeader />
             {mappedUnbondings.map((delegation, index) => (
-              <UnbondingRow key={index} delegation={delegation} />
+              <UnbondingRow key={index} delegation={delegation} onExternalLink={onExternalLink} />
             ))}
           </Card>
         </>
