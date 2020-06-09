@@ -390,6 +390,7 @@
       "redelegated": "Redelegated ({{amount}})",
       "redelegatedFrom": "Redelegated from",
       "redelegatedTo": "Redelegated to",
+      "redelegatedAmount": "Redelegated amount",
       "undelegated": "Undelegated ({{amount}})",
       "undelegatedFrom": "Undelegated from",
       "undelegatedAmount": "Undelegated amount",
