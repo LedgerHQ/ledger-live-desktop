@@ -31,7 +31,6 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: run headless tests
         uses: ledgerhq/actions/run-headless@v1.5.2
-        continue-on-error: true
       - name: upload diffs to imgur
         if: ${{ failure() }}
         uses: ledgerhq/actions/upload-images@v1.5.2
