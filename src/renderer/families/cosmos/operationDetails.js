@@ -216,7 +216,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
           </OpDetailsData>
           <OpDetailsData>
             <OpDetailsTitle>
-              <Trans i18nKey={"operationDetails.extra.undelegatedAmount"} />
+              <Trans i18nKey={"operationDetails.extra.redelegatedAmount"} />
             </OpDetailsTitle>
             {formattedAmount}
           </OpDetailsData>
