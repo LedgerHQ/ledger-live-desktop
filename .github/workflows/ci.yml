@@ -33,11 +33,10 @@ jobs:
         uses: ledgerhq/actions/run-headless@v1.5.2
       - name: upload diffs to imgur
         if: ${{ failure() }}
-        uses: ledgerhq/actions/upload-images@v1.5.2
+        uses: ./.github/actions/upload-images
         id: imgur
         with:
           path: "./tests/specs/__image_snapshots__/__diff_output__"
-          clientId: "11eb8a62f4c7927"
       - name: prepare comment body
         if: ${{ steps.imgur.outputs.images != '' }}
         id: comment
