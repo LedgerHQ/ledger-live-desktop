@@ -69,6 +69,8 @@ export type SettingsState = {
   hasCompletedOnboarding: boolean,
   counterValue: string,
   preferredDeviceModel: DeviceModelId,
+  hasInstalledApps: boolean,
+  hasOutdatedAppsOrFirmware: boolean,
   language: ?string,
   theme: ?string,
   region: ?string,
@@ -94,7 +96,6 @@ export type SettingsState = {
   sidebarCollapsed: boolean,
   discreetMode: boolean,
   starredAccountIds?: string[],
-  hasInstalledApps: boolean,
   blacklistedTokenIds: string[],
 };
 
@@ -131,6 +132,7 @@ const INITIAL_STATE: SettingsState = {
   sidebarCollapsed: false,
   discreetMode: false,
   hasInstalledApps: true,
+  hasOutdatedAppsOrFirmware: true, // turn back to false post-July-2020
   blacklistedTokenIds: [],
 };
 
@@ -164,13 +166,15 @@ const handlers: Object = {
     }
     return copy;
   },
-  SAVE_SETTINGS: (
-    state: SettingsState,
-    { payload: settings }: { payload: $Shape<SettingsState> },
-  ) => ({
-    ...state,
-    ...settings,
-  }),
+  SAVE_SETTINGS: (state: SettingsState, { payload }: { payload: $Shape<SettingsState> }) => {
+    if (!payload) return state;
+    const changed = Object.keys(payload).some(key => payload[key] !== state[key]);
+    if (!changed) return state;
+    return {
+      ...state,
+      ...payload,
+    };
+  },
   FETCH_SETTINGS: (
     state: SettingsState,
     { payload: settings }: { payload: $Shape<SettingsState> },
@@ -317,6 +321,8 @@ export const autoLockTimeoutSelector = (state: State) => state.settings.autoLock
 export const shareAnalyticsSelector = (state: State) => state.settings.shareAnalytics;
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange;
 export const hasInstalledAppsSelector = (state: State) => state.settings.hasInstalledApps;
+export const hasOutdatedAppsOrFirmwareSelector = (state: State) =>
+  state.settings.hasOutdatedAppsOrFirmware;
 export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;

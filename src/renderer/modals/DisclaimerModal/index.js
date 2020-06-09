@@ -74,22 +74,22 @@ class DisclaimerModal extends PureComponent<Props, State> {
     showUninsWarning: false,
   };
 
-  onClose() {
+  onClose = () => {
     this.setState({
       seedReady: false,
       showUninsWarning: false,
     });
     this.props.onClose();
-  }
+  };
 
   onSeedReady = () => this.setState(state => ({ seedReady: !state.seedReady }));
 
   render(): React$Node {
-    const { status, firmware, onClose, t, goToNextStep } = this.props;
+    const { status, firmware, t, goToNextStep } = this.props;
     const { showUninsWarning } = this.state;
 
     return (
-      <Modal isOpened={status === "disclaimer"} backdropColor centered onClose={onClose}>
+      <Modal isOpened={status === "disclaimer"} backdropColor centered onClose={this.onClose}>
         <ModalBody
           grow
           alignItems="center"

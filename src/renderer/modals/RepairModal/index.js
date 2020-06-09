@@ -111,7 +111,7 @@ const ErrorStep = ({ error }: { error: Error }) => (
 type Props = {
   isOpened?: boolean,
   isDanger?: boolean,
-  title: React$Node,
+  title?: React$Node,
   subTitle?: React$Node,
   desc: React$Node,
   renderIcon?: Function,

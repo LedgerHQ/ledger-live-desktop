@@ -4,7 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import { withTranslation, Trans } from "react-i18next";
 import type { DeviceModelId } from "@ledgerhq/devices";
-import { bootloader } from "~/config/nontranslatables";
+import { bootloader, bootloaderMode } from "@ledgerhq/live-common/lib/deviceWordings";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import Interactions from "~/renderer/icons/device/interactions";
@@ -46,13 +46,23 @@ const FlashMCUNanosLocal = ({ deviceModelId }: Props) => (
     <Box mx={7}>
       <Text ff="Inter|Regular" textAlign="center" color="palette.text.shade80">
         <Bullet>{"2. "}</Bullet>
-        <Trans i18nKey="manager.modal.mcuSecond">
-          {"Press the left button and hold it while you reconnect the USB cable until the "}
-          <Text ff="Inter|SemiBold" color="palette.text.shade100">
-            {bootloader}
-          </Text>
-          {" screen appears"}
-        </Trans>
+        {deviceModelId === "nanoX" ? (
+          <Trans i18nKey="manager.modal.mcuSecondNanoX">
+            {"text"}
+            <Text ff="Inter|SemiBold" color="palette.text.shade100">
+              {bootloaderMode}
+            </Text>
+            {"text"}
+          </Trans>
+        ) : (
+          <Trans i18nKey="manager.modal.mcuSecond">
+            {"text"}
+            <Text ff="Inter|SemiBold" color="palette.text.shade100">
+              {bootloader}
+            </Text>
+            {"text"}
+          </Trans>
+        )}
       </Text>
       <Box mt={5}>
         <Interactions

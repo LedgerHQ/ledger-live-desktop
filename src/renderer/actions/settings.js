@@ -29,6 +29,8 @@ export const setMarketIndicator = (marketIndicator: *) => saveSettings({ marketI
 export const setAutoLockTimeout = (autoLockTimeout: *) => saveSettings({ autoLockTimeout });
 export const setHasInstalledApps = (hasInstalledApps: boolean) =>
   saveSettings({ hasInstalledApps });
+export const setHasOutdatedAppsOrFirmware = (hasOutdatedAppsOrFirmware: boolean) =>
+  saveSettings({ hasOutdatedAppsOrFirmware });
 export const setCounterValue = (counterValue: string) =>
   saveSettings({
     counterValue,
