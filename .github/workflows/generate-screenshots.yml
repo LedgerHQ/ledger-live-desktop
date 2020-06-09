@@ -1,7 +1,5 @@
 name: generate jest screenshots
 on:
-  pull_request:
-    types: [opened]
   issue_comment:
     types: [created]
 
@@ -9,12 +7,19 @@ jobs:
   generate-screenshots:
     runs-on: ubuntu-latest
     steps:
+      - uses: khan/pull-request-comment-trigger@master
+        id: check
+        with:
+          trigger: "@github-actions generate"
+          reaction: rocket
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: exit if not triggered
+        if: steps.check.outputs.triggered != 'true'
+        run: exit 1
       - uses: actions/checkout@v2
-        if: github.event_name == 'issue_comment'
         with:
           ref: refs/pull/${{github.event.issue.number}}/merge
-      - uses: actions/checkout@v2
-        if: github.event_name == 'pull_request'
       - uses: actions/setup-node@master
         with:
           node-version: 12.x
@@ -23,29 +28,20 @@ jobs:
       - name: hub checkout
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
+          PR_NUMBER: ${{ github.event.issue.number }}
         run: |
           hub pr checkout $PR_NUMBER
       - name: setup git user
         run: |
           git config --global user.name "$GITHUB_ACTOR"
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
-      - uses: khan/pull-request-comment-trigger@master
-        id: check
-        with:
-          trigger: "@github-actions generate"
-          reaction: rocket
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: generate new screenshots
-        if: steps.check.outputs.triggered == 'true'
         uses: ledgerhq/actions/run-headless@v1.2.0
         with:
           should-update-screenshots: 1
       - name: update pr
-        if: steps.check.outputs.triggered == 'true'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_TEAM_LIVE }}
         run: |
           hub add .
           hub commit -m 'screenshot generated'
