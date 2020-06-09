@@ -12,7 +12,11 @@ jobs:
   bundle-macos:
     runs-on: macos-latest
     steps:
-      - uses: ledgerhq/actions/check-member@v1.2.0
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.4.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: ledgerhq/actions/check-member@v1.5.2
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
@@ -53,6 +57,10 @@ jobs:
   bundle-linux:
     runs-on: ubuntu-latest
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.4.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: ledgerhq/actions/check-member@v1.0.0
         with:
           username: ${{ github.actor }}
@@ -71,7 +79,7 @@ jobs:
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -101,10 +109,15 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
+
   bundle-windows:
     runs-on: windows-latest
     steps:
-      - uses: ledgerhq/actions/check-member@v1.2.0
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.4.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: ledgerhq/actions/check-member@v1.5.2
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
@@ -123,7 +136,7 @@ jobs:
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -131,11 +144,11 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
-      - uses: ledgerhq/actions/get-package-infos@v1.2.0
+      - uses: ledgerhq/actions/get-package-infos@v1.5.2
         id: version
       - name: set beta name
         uses: ./.github/actions/change-product-name
-      - uses: ledgerhq/actions/get-pr-number@v1.2.0
+      - uses: ledgerhq/actions/get-pr-number@v1.5.2
         id: pr
         if: github.event_name == 'pull_request'
       - name: make local version (pr)
@@ -146,7 +159,7 @@ jobs:
         if: github.event_name == 'push'
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.2.0
+      - uses: ledgerhq/actions/get-package-infos@v1.5.2
         id: post-version
       - name: upload windows
         uses: actions/upload-artifact@v1

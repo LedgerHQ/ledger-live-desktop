@@ -1,43 +1,52 @@
 name: generate jest screenshots
 on:
-  push:
-    branches:
-      - develop
+  pull_request:
+    types: [opened]
+  issue_comment:
+    types: [created]
 
 jobs:
   generate-screenshots:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        if: github.event_name == 'issue_comment'
+        with:
+          ref: refs/pull/${{github.event.issue.number}}/merge
+      - uses: actions/checkout@v2
+        if: github.event_name == 'pull_request'
       - uses: actions/setup-node@master
         with:
           node-version: 12.x
-      - name: get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
+      - name: install hub
+        uses: geertvdc/setup-hub@master
+      - name: hub checkout
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
+        run: |
+          hub pr checkout $PR_NUMBER
+      - name: setup git user
+        run: |
+          git config --global user.name "$GITHUB_ACTOR"
+          git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
+      - uses: khan/pull-request-comment-trigger@master
+        id: check
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: check if PR is not screenshots already
-        uses: ledgerhq/actions/check-pr-screenshots@v1.2.0
+          trigger: "@github-actions generate"
+          reaction: rocket
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: generate new screenshots
+        if: steps.check.outputs.triggered == 'true'
         uses: ledgerhq/actions/run-headless@v1.2.0
         with:
           should-update-screenshots: 1
-      - name: check diff
-        run: git status
-        if: ${{ always() }}
-      - name: create pull request with new screenshots if needed
-        uses: peter-evans/create-pull-request@v2
-        with:
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          title: "[Screenshots] new screenshots for ${{ github.sha }}"
-          body: |
-            Auto generated screenshots for ${{ github.sha }} by ${{ github.actor }}
-          assignees: ${{ github.actor }}
-          reviewers: ${{ github.actor }}
-          branch: new-screenshots-${{ github.sha }}
+      - name: update pr
+        if: steps.check.outputs.triggered == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          hub add .
+          hub commit -m 'screenshot generated'
+          hub push

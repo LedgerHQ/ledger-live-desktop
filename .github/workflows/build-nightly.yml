@@ -8,6 +8,10 @@ jobs:
   nightly-macos:
     runs-on: macos-latest
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.4.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@master
         with:
@@ -18,7 +22,7 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.2.0
+      - uses: ledgerhq/actions/get-package-infos@v1.5.2
         id: version
       - name: upload macOS app
         uses: actions/upload-artifact@v1
@@ -28,6 +32,10 @@ jobs:
   nightly-linux:
     runs-on: ubuntu-latest
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.4.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@master
         with:
@@ -37,7 +45,7 @@ jobs:
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -49,7 +57,7 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.2.0
+      - uses: ledgerhq/actions/get-package-infos@v1.5.2
         id: version
       - name: upload linux app
         uses: actions/upload-artifact@v1
@@ -59,6 +67,10 @@ jobs:
   nightly-windows:
     runs-on: windows-latest
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.4.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@master
         with:
@@ -69,7 +81,7 @@ jobs:
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -81,7 +93,7 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.2.0
+      - uses: ledgerhq/actions/get-package-infos@v1.5.2
         id: version
       - name: upload windows
         uses: actions/upload-artifact@v1
