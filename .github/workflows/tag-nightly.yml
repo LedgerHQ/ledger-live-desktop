@@ -9,6 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
+          persist-credentials: false
           ref: develop
       - name: check if current commit is on tag
         run: |

@@ -16,7 +16,7 @@ jobs:
         uses: styfle/cancel-workflow-action@0.4.0
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: ledgerhq/actions/check-member@v1.5.2
+      - uses: ledgerhq/actions/check-member@v2.0.0
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
@@ -117,7 +117,7 @@ jobs:
         uses: styfle/cancel-workflow-action@0.4.0
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: ledgerhq/actions/check-member@v1.5.2
+      - uses: ledgerhq/actions/check-member@v2.0.0
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
@@ -144,11 +144,11 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
-      - uses: ledgerhq/actions/get-package-infos@v1.5.2
+      - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: set beta name
         uses: ./.github/actions/change-product-name
-      - uses: ledgerhq/actions/get-pr-number@v1.5.2
+      - uses: ledgerhq/actions/get-pr-number@v2.0.0
         id: pr
         if: github.event_name == 'pull_request'
       - name: make local version (pr)
@@ -159,7 +159,7 @@ jobs:
         if: github.event_name == 'push'
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.5.2
+      - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: post-version
       - name: upload windows
         uses: actions/upload-artifact@v1

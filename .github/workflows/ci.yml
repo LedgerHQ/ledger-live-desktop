@@ -30,31 +30,43 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: run headless tests
-        uses: ledgerhq/actions/run-headless@v1.5.2
-        continue-on-error: true
+        uses: ./.github/actions/run-headless
+      - name: check
+        if: always()
+        run: |
+          cd tests/specs/__image_snapshots__
+          ls -la
       - name: upload diffs to imgur
-        if: ${{ failure() }}
-        uses: ledgerhq/actions/upload-images@v1.5.2
+        if: failure()
+        uses: ./.github/actions/upload-images
         id: imgur
         with:
-          path: ./tests/specs/__image_snapshots__/__diff_output__
-          clientId: "11eb8a62f4c7927"
+          path: tests/specs/__image_snapshots__/__diff_output__
       - name: prepare comment body
-        if: ${{ steps.imgur.outputs.images != '' }}
+        if: failure()
         id: comment
-        uses: ledgerhq/actions/prepare-comment-body@v1.5.2
+        uses: ledgerhq/actions/prepare-comment-body@v2.0.0
         with:
           images: ${{ steps.imgur.outputs.images }}
-      - name: comment
-        if: ${{ github.event_name == 'pull_request' && steps.comment.outputs.body != '' }}
-        uses: unsplash/comment-on-pr@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: create markdown file for commenting
+        id: create
+        if: github.event_name == 'pull_request' && failure()
+        run: |
+          mkdir -p artifacts
+          cat > artifacts/message.md <<EOF
+
+          PR to merge $GITHUB_HEAD_REF $GITHUB_SHA -> $GITHUB_BASE_REF
+
+          <details>
+          <summary>Diff output</summary>
+          ${{ steps.comment.outputs.body }}
+          </details>
+
+          EOF
+          echo "::set-output name=artifact::1"
+      - name: Save PR message as artifact
+        if: ${{ steps.create.outputs.artifact == '1' }}
+        uses: actions/upload-artifact@v2
         with:
-          msg: |
-            ## Diff output
-            ${{ steps.comment.outputs.body }}
-
-            ---
-
-            Use `@github-actions generate` to generate new screenshots for your PR
+          name: pr_message
+          path: artifacts
