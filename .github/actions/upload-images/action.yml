@@ -1,0 +1,17 @@
+name: upload-images
+description: uploads images found in a folder to imgur
+author: valpinkman
+inputs:
+  path:
+    description: path to look for images to upload (relative to root of current project)
+    required: true
+outputs:
+  images:
+    description: "string[] of images uploaded to imgur"
+runs:
+  using: node12
+  main: index.js
+
+branding:
+  icon: image
+  color: orange

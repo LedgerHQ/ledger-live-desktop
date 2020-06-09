@@ -9,6 +9,13 @@ jobs:
   generate-screenshots:
     runs-on: ubuntu-latest
     steps:
+      - uses: khan/pull-request-comment-trigger@master
+        id: check
+        with:
+          trigger: "@github-actions generate"
+          reaction: rocket
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
         if: github.event_name == 'issue_comment'
         with:
@@ -30,13 +37,6 @@ jobs:
         run: |
           git config --global user.name "$GITHUB_ACTOR"
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
-      - uses: khan/pull-request-comment-trigger@master
-        id: check
-        with:
-          trigger: "@github-actions generate"
-          reaction: rocket
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: generate new screenshots
         if: steps.check.outputs.triggered == 'true'
         uses: ledgerhq/actions/run-headless@v1.2.0
@@ -45,7 +45,7 @@ jobs:
       - name: update pr
         if: steps.check.outputs.triggered == 'true'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_TEAM_LIVE }}
         run: |
           hub add .
           hub commit -m 'screenshot generated'

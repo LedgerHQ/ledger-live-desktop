@@ -1339,7 +1339,7 @@
   },
   "onboarding": {
     "breadcrumb": {
-      "selectDevice": "Machin selection",
+      "selectDevice": "Device selection",
       "selectPIN": "PIN code",
       "writeSeed": "Recovery phrase",
       "setPassword": "Password lock",

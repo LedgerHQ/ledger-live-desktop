@@ -31,13 +31,16 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: run headless tests
         uses: ledgerhq/actions/run-headless@v1.5.2
-      - name: upload diffs to imgur
+      - name: check
         if: ${{ failure() }}
-        uses: ledgerhq/actions/upload-images@v1.5.2
+        run: |
+          git status
+          ls ./tests/specs/__image_snapshots__
+      - name: upload diffs to imgur
+        uses: ./.github/actions/upload-images
         id: imgur
         with:
           path: "./tests/specs/__image_snapshots__/__diff_output__"
-          clientId: "11eb8a62f4c7927"
       - name: prepare comment body
         if: ${{ steps.imgur.outputs.images != '' }}
         id: comment
