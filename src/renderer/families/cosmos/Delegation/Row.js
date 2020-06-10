@@ -41,9 +41,14 @@ const Column: ThemedComponent<{ clickable?: boolean }> = styled(TableLine).attrs
   fontSize: 3,
 }))`
   cursor: ${p => (p.clickable ? "pointer" : "cursor")};
-  &:hover {
-    color: ${p => (p.clickable ? p.theme.colors.palette.primary.main : "initial")};
-  }
+  ${p =>
+    p.clickable
+      ? `
+    &:hover {
+      color: ${p.theme.colors.palette.primary.main};
+    }
+    `
+      : ``}
 `;
 
 const Ellipsis: ThemedComponent<{}> = styled.div`
