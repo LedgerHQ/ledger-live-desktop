@@ -83,7 +83,7 @@ const AssetDistribution = () => {
   const almostAll = initialRowCount + 3 > totalRowCount;
   const subList = showAll || almostAll ? list : list.slice(0, initialRowCount);
 
-  return (
+  return distribution.list.length ? (
     <>
       <Box horizontal alignItems="center">
         <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
@@ -107,7 +107,7 @@ const AssetDistribution = () => {
         )}
       </Card>
     </>
-  );
+  ) : null;
 };
 
 export default AssetDistribution;
