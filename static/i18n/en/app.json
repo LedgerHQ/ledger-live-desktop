@@ -910,7 +910,7 @@
               "The undelegation process takes 21 days to finalize."
             ],
             "warning": {
-              "description": "Choose you validator wisely.  Part of your delegated assets may be destroyed if the validator does not behave appropriately."
+              "description": "Choose your validator wisely. Part of your delegated assets may be destroyed if the validator does not behave appropriately."
             }
           },
           "validator": {
@@ -979,7 +979,7 @@
           "starter": {
             "title": "Redelegation",
             "description": "Use redelegation to easily change from one validator to another. But if you change your mind again, you will have to wait because redelegation triggers a 21-day timelock.",
-            "warning": "Choose you validator wisely.  Part of your delegated assets may be destroyed if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
+            "warning": "Choose your validator wisely.  Part of your delegated assets may be destroyed if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
             "howDelegationWorks": "How delegation works?"
           },
           "validators": {
