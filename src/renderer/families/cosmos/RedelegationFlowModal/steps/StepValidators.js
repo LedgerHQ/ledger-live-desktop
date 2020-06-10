@@ -161,7 +161,7 @@ export default function StepValidators({
       <StepRecipientSeparator />
 
       <Box py={4}>
-        <Label>{t("cosmos.redelegation.flow.steps.validators.newDelegation")}</Label>
+        <Label mb={5}>{t("cosmos.redelegation.flow.steps.validators.newDelegation")}</Label>
         <SelectButton onClick={open}>
           <Box flex="1" horizontal alignItems="center" justifyContent="space-between">
             {selectedValidatorData ? (
