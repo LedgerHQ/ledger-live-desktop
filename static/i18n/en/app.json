@@ -1606,6 +1606,11 @@
       },
       "whatsMemo": "What is a memo?",
       "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+    },
+    "cosmos": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional",
+      "memoWarningText": "when using a memo, carefully check the information with the recipient"
     }
   },
   "errors": {
