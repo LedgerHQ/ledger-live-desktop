@@ -140,21 +140,26 @@ export default class StepSummary extends PureComponent<StepProps> {
               </Text>
             </Box>
           ) : null}
-          <Separator />
-          <Box horizontal justifyContent="space-between">
-            <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={4}>
-              <Trans i18nKey="send.totalSpent" />
-            </Text>
-            <FormattedVal
-              color={"palette.text.shade80"}
-              disableRounding
-              unit={unit}
-              val={totalSpent}
-              fontSize={4}
-              inline
-              showCode
-            />
-          </Box>
+
+          {!totalSpent.eq(amount) ? (
+            <>
+              <Separator />
+              <Box horizontal justifyContent="space-between">
+                <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={4}>
+                  <Trans i18nKey="send.totalSpent" />
+                </Text>
+                <FormattedVal
+                  color={"palette.text.shade80"}
+                  disableRounding
+                  unit={unit}
+                  val={totalSpent}
+                  fontSize={4}
+                  inline
+                  showCode
+                />
+              </Box>
+            </>
+          ) : null}
         </FromToWrapper>
       </Box>
     );
