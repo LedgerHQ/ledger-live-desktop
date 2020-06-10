@@ -25,18 +25,25 @@ import Stepper from "~/renderer/components/Stepper";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { useSteps } from "./steps";
 
-type Props = {
-  t: TFunction,
+type OwnProps = {|
   account: Account,
   stepId: StepId,
   onClose: () => void,
   onChangeStepId: StepId => void,
-  name: string,
   validatorAddress: string,
+  name: string,
+|};
+
+type StateProps = {|
+  t: TFunction,
+  device: ?Device,
+  accounts: Account[],
   device: ?Device,
   closeModal: string => void,
   openModal: string => void,
-};
+|};
+
+type Props = OwnProps & StateProps;
 
 const mapStateToProps = createStructuredSelector({
   device: getCurrentDevice,
@@ -161,7 +168,7 @@ function Body({
   );
 }
 
-const C: React$ComponentType<Props> = compose(
+const C: React$ComponentType<OwnProps> = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withTranslation(),
 )(Body);

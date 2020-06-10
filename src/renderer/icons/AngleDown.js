@@ -2,7 +2,7 @@
 
 import React from "react";
 
-const AngleDown = ({ size, color = "currentColor" }: { size: number, color: string }) => (
+const AngleDown = ({ size, color = "currentColor" }: { size: number, color?: string }) => (
   <svg viewBox="0 0 16 14" height={size} width={size * 0.875}>
     <path
       fill={color}
