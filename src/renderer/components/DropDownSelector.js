@@ -13,14 +13,19 @@ export const DropDownItem: ThemedComponent<{ isActive: boolean }> = styled(Box).
   ff: p.isActive ? "Inter|SemiBold" : "Inter",
   fontSize: 4,
   px: 3,
-  color: p.isActive ? "palette.text.shade100" : "palette.text.shade80",
-  bg: p.isActive ? "palette.background.default" : "",
+  color: p.disabled
+    ? "palette.text.shade50"
+    : p.isActive
+    ? "palette.text.shade100"
+    : "palette.text.shade80",
+  bg: p.isActive && !p.disabled ? "palette.background.default" : "",
 }))`
   height: 40px;
   white-space: nowrap;
   cursor: pointer;
+  width: 100%;
   &:hover {
-    background-color: ${p => p.theme.colors.palette.background.default};
+    background-color: ${p => !p.disabled && p.theme.colors.palette.background.default};
   }
 `;
 
@@ -46,6 +51,7 @@ const DropContainer: ThemedComponent<{}> = styled.div`
 export type DropDownItemType = {
   key: string,
   label: any,
+  disabled?: boolean,
 };
 
 const OptionContainer = styled.div`
@@ -96,7 +102,7 @@ const DropDownSelector = ({
   const renderOption = useCallback(
     item => {
       return (
-        <OptionContainer key={item.key} onClick={() => setSelectedOption(item)}>
+        <OptionContainer key={item.key} onClick={() => !item.disabled && setSelectedOption(item)}>
           {renderItem({ item, isActive: !!(selectedOption && item.key === selectedOption.key) })}
         </OptionContainer>
       );

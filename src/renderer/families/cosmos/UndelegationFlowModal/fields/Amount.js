@@ -43,15 +43,15 @@ export default function AmountField({
     () => [
       {
         label: "25%",
-        value: initialAmount.multipliedBy(0.25),
+        value: initialAmount.multipliedBy(0.25).integerValue(),
       },
       {
         label: "50%",
-        value: initialAmount.multipliedBy(0.5),
+        value: initialAmount.multipliedBy(0.5).integerValue(),
       },
       {
         label: "75%",
-        value: initialAmount.multipliedBy(0.75),
+        value: initialAmount.multipliedBy(0.75).integerValue(),
       },
       {
         label: "100%",

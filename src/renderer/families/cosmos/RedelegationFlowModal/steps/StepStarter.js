@@ -32,7 +32,7 @@ export default function StepStarter({
 }: StepProps) {
   invariant(account && account.cosmosResources && transaction, "account and transaction required");
   return (
-    <Box flow={4} mx={4}>
+    <Box flow={4}>
       <TrackPage category="Redelegation Flow" name="Step Starter" />
       <Box flow={1} alignItems="center">
         <Box mb={4}>

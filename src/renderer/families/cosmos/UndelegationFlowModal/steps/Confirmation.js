@@ -91,6 +91,7 @@ const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(
 
 export function StepConfirmationFooter({
   account,
+  parentAccount,
   error,
   onClose,
   onRetry,
@@ -99,22 +100,29 @@ export function StepConfirmationFooter({
 }: StepProps) {
   const { t } = useTranslation();
 
+  const concernedOperation = optimisticOperation
+    ? optimisticOperation.subOperations && optimisticOperation.subOperations.length > 0
+      ? optimisticOperation.subOperations[0]
+      : optimisticOperation
+    : null;
+
   const onViewDetails = useCallback(() => {
     onClose();
-    if (account && optimisticOperation) {
+    if (account && concernedOperation) {
       openModal("MODAL_OPERATION_DETAILS", {
-        operationId: optimisticOperation.id,
+        operationId: concernedOperation.id,
         accountId: account.id,
+        parentId: parentAccount && parentAccount.id,
       });
     }
-  }, [onClose, openModal, account, optimisticOperation]);
+  }, [onClose, openModal, account, concernedOperation, parentAccount]);
 
   return (
     <Box horizontal alignItems="right">
       <Button ml={2} onClick={onClose}>
         {t("common.close")}
       </Button>
-      {optimisticOperation ? (
+      {concernedOperation ? (
         // FIXME make a standalone component!
         <Button
           primary

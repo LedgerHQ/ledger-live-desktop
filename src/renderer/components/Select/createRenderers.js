@@ -50,7 +50,7 @@ const STYLES_OVERRIDE = {
   DropdownIndicator: function DropdownIndicator(props: OptionProps) {
     return (
       <components.DropdownIndicator {...props}>
-        <IconAngleDown size={20} />
+        <IconAngleDown size={20} color={props.isDisabled ? "transparent" : "currentcolor"} />
       </components.DropdownIndicator>
     );
   },
