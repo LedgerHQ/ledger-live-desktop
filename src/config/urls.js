@@ -43,7 +43,9 @@ export const urls = {
   maxSpendable: "https://support.ledger.com/hc/en-us/articles/360012960679",
   stakingTezos: "https://www.ledger.com/staking-tezos",
   stakingTron: "https://www.ledger.com/staking-tron",
-  stakingCosmos: "http://www.ledger.com/staking-cosmos",
+  stakingCosmos: "https://www.ledger.com/staking-cosmos",
+  cosmosStakingRewards:
+    "https://support.ledger.com/hc/en-us/articles/360014339340-Earn-Cosmos-staking-rewards",
 
   // Errors
   errors: {

@@ -11,7 +11,11 @@ import type {
   CosmosMappedUnbonding,
 } from "@ledgerhq/live-common/lib/families/cosmos/types";
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import { canRedelegate, canUndelegate } from "@ledgerhq/live-common/lib/families/cosmos/logic";
+import {
+  canRedelegate,
+  canUndelegate,
+  getRedelegationCompletionDate,
+} from "@ledgerhq/live-common/lib/families/cosmos/logic";
 
 import { TableLine } from "./Header";
 import DropDown, { DropDownItem } from "~/renderer/components/DropDownSelector";
@@ -61,17 +65,19 @@ const ManageDropDownItem = ({
   item,
   isActive,
 }: {
-  item: { key: string, label: string },
+  item: { key: string, label: string, disabled: boolean, tooltip: React$Node },
   isActive: boolean,
 }) => {
   return (
     <>
       {item.key === "MODAL_COSMOS_CLAIM_REWARDS" && <Divider />}
-      <DropDownItem isActive={isActive}>
-        <Box horizontal alignItems="center" justifyContent="center">
-          <Text ff="Inter|SemiBold">{item.label}</Text>
-        </Box>
-      </DropDownItem>
+      <ToolTip content={item.tooltip} containerStyle={{ width: "100%" }}>
+        <DropDownItem disabled={item.disabled} isActive={isActive}>
+          <Box horizontal alignItems="center" justifyContent="center">
+            <Text ff="Inter|SemiBold">{item.label}</Text>
+          </Box>
+        </DropDownItem>
+      </ToolTip>
     </>
   );
 };
@@ -111,24 +117,35 @@ export function Row({
   const _canUndelegate = canUndelegate(account);
   const _canRedelegate = canRedelegate(account, delegation);
 
+  const redelegationDate = !_canRedelegate && getRedelegationCompletionDate(account, delegation);
+  const formattedRedelegationDate = redelegationDate ? moment(redelegationDate).fromNow() : "";
+
   const dropDownItems = useMemo(
     () => [
-      ...(_canRedelegate
-        ? [
-            {
-              key: "MODAL_COSMOS_REDELEGATE",
-              label: <Trans i18nKey="cosmos.delegation.redelegate" />,
-            },
-          ]
-        : []),
-      ...(_canUndelegate
-        ? [
-            {
-              key: "MODAL_COSMOS_UNDELEGATE",
-              label: <Trans i18nKey="cosmos.delegation.undelegate" />,
-            },
-          ]
-        : []),
+      {
+        key: "MODAL_COSMOS_REDELEGATE",
+        label: <Trans i18nKey="cosmos.delegation.redelegate" />,
+        disabled: !_canRedelegate,
+        tooltip:
+          !_canRedelegate && formattedRedelegationDate ? (
+            <Trans
+              i18nKey="cosmos.delegation.redelegateDisabledTooltip"
+              values={{ days: formattedRedelegationDate }}
+            >
+              <b></b>
+            </Trans>
+          ) : null,
+      },
+      {
+        key: "MODAL_COSMOS_UNDELEGATE",
+        label: <Trans i18nKey="cosmos.delegation.undelegate" />,
+        disabled: !_canUndelegate,
+        tooltip: !_canUndelegate ? (
+          <Trans i18nKey="cosmos.delegation.undelegateDisabledTooltip">
+            <b></b>
+          </Trans>
+        ) : null,
+      },
       ...(pendingRewards.gt(0)
         ? [
             {
@@ -138,7 +155,7 @@ export function Row({
           ]
         : []),
     ],
-    [pendingRewards, _canRedelegate, _canUndelegate],
+    [pendingRewards, _canRedelegate, _canUndelegate, formattedRedelegationDate],
   );
   const name = validator?.name ?? validatorAddress;
 

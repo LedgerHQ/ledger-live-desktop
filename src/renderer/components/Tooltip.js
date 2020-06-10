@@ -50,6 +50,7 @@ type Props = {
   flip?: boolean,
   hideOnClick?: boolean,
   disableWrapper?: boolean,
+  containerStyle?: *,
 };
 
 const ToolTip = ({
@@ -64,6 +65,7 @@ const ToolTip = ({
   arrow = true,
   flip = true,
   hideOnClick = true,
+  containerStyle,
 }: Props) => {
   const colors = useTheme("colors");
 
@@ -81,7 +83,11 @@ const ToolTip = ({
       flip={flip}
       hideOnClick={hideOnClick}
     >
-      {disableWrapper ? children : <ChildrenContainer>{children}</ChildrenContainer>}
+      {disableWrapper ? (
+        children
+      ) : (
+        <ChildrenContainer style={containerStyle}>{children}</ChildrenContainer>
+      )}
     </Tippy>
   );
 };

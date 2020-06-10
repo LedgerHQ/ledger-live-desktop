@@ -891,6 +891,8 @@
       "delegate": "Delegate more",
       "undelegate": "Undelegate",
       "redelegate": "Redelegate",
+      "redelegateDisabledTooltip": "You can redelegate again <0>{{days}}</0>",
+      "undelegateDisabledTooltip": "You cannot undelegate more than <0>7</0> validators at a time",
       "reward": "Claim rewards",
       "currentDelegation": "Delegated: <0>{{amount}}</0>",
       "estYield": "est. yield",
@@ -1033,9 +1035,7 @@
               "description": "<0>{{amount}}</0> have been undelegated from <0>{{validator}}</0>",
               "cta": "View details"
             },
-            "error": {
-              "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
-            }
+            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
           }
         }
       }
