@@ -20,10 +20,10 @@ jobs:
           MSG_ARTIFACT_NAME: "pr_message"
           # How far back to look for finished runs, in minutes.
           # Set to 10-20 minutes higher than cron's job frequency set above.
-          IGNORE_RUNS_OLDER_THAN: 30
+          IGNORE_RUNS_OLDER_THAN: 45
           # How far back to look for updated pull requests, in minutes.
           # Should be bigger than IGNORE_RUNS_OLDER_THAN by the maximum time a pull request jobs may take
-          IGNORE_PRS_OLDER_THAN: 80
+          IGNORE_PRS_OLDER_THAN: 90
         run: |
           #
           # Strategy:
