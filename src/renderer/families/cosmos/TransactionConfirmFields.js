@@ -202,6 +202,20 @@ const CosmosSourceValidatorField = ({
   );
 };
 
+const CosmosMemoField = ({ account, parentAccount, transaction, field }: FieldComponentProps) => {
+  invariant(transaction.family === "cosmos", "cosmos transaction");
+
+  const { memo } = transaction;
+
+  return (
+    memo && (
+      <TransactionConfirmField label={field.label}>
+        <FieldText>{memo}</FieldText>
+      </TransactionConfirmField>
+    )
+  );
+};
+
 const Warning = ({
   transaction,
   recipientWording,
@@ -238,6 +252,7 @@ const Title = ({ transaction }: { transaction: Transaction }) => {
 };
 
 const fieldComponents = {
+  "cosmos.memo": CosmosMemoField,
   "cosmos.delegateValidators": CosmosDelegateValidatorsField,
   "cosmos.validatorName": CosmosValidatorNameField,
   "cosmos.validatorAmount": CosmosValidatorAmountField,

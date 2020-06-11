@@ -395,7 +395,8 @@
       "undelegatedFrom": "Undelegated from",
       "undelegatedAmount": "Undelegated amount",
       "rewardFrom": "Reward from",
-      "rewardAmount": "Amount collected"
+      "rewardAmount": "Amount collected",
+      "memo": "Memo"
     }
   },
   "operationList": {
