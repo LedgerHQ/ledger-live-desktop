@@ -900,7 +900,7 @@
       "inactiveTooltip": "This validator is inactive and doesn't generate rewards",
       "minSafeWarning": "To safely start delegating you need at least {{amount}}",
       "flow": {
-        "title": "Delegate more assets",
+        "title": "Delegate more",
         "steps": {
           "starter": {
             "description": "You may earn rewards by delegating your ATOM to a validator.",

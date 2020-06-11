@@ -104,6 +104,7 @@ function Body({
   const error = transactionError || bridgeError;
 
   const handleRetry = useCallback(() => {
+    setTransactionError(null);
     onChangeStepId("amount");
   }, [onChangeStepId]);
 
