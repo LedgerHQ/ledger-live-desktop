@@ -57,16 +57,28 @@ jobs:
 
           PR to merge $GITHUB_HEAD_REF $GITHUB_SHA -> $GITHUB_BASE_REF
 
-          <details>
-          <summary>Diff output</summary>
+          ## Diff output
           ${{ steps.comment.outputs.body }}
-          </details>
+
+          Updated screenshots for your PR can be downloaded here:
+          Workflow [$GITHUB_WORKFLOW](https://github.com/LedgerHQ/ledger-live-desktop/actions/runs/$GITHUB_RUN_ID)
 
           EOF
           echo "::set-output name=artifact::1"
-      - name: Save PR message as artifact
-        if: ${{ steps.create.outputs.artifact == '1' }}
+      - name: save PR message as artifact
+        if: steps.create.outputs.artifact == '1' && failure()
         uses: actions/upload-artifact@v2
         with:
           name: pr_message
           path: artifacts
+      - name: generate new screenshots
+        if: failure()
+        uses: ./.github/actions/run-headless
+        with:
+          should-update-screenshots: 1
+      - name: upload new screenshots
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: screenshots
+          path: tests/specs/__image_snapshots__
