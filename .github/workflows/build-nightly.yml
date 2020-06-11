@@ -22,7 +22,7 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.5.2
+      - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: upload macOS app
         uses: actions/upload-artifact@v1
@@ -57,7 +57,7 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.5.2
+      - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: upload linux app
         uses: actions/upload-artifact@v1
@@ -93,7 +93,7 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.5.2
+      - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: upload windows
         uses: actions/upload-artifact@v1

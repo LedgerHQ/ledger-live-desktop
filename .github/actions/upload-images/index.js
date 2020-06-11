@@ -2,18 +2,15 @@ const fetch = require("isomorphic-unfetch");
 const core = require("@actions/core");
 const fs = require("fs");
 const FormData = require("form-data");
+const { resolve } = require("path");
 
 const uploadImage = async () => {
-  const clientId = core.getInput("clientId", { required: true });
   const path = core.getInput("path");
+  const fullPath = resolve(path);
 
-  if (!clientId) {
-    throw new Error("no clientId defined");
-  }
-
-  if (fs.existsSync(path)) {
-    throw new Error("the path provided does not exists");
-  }
+  // if (fs.existsSync(fullPath)) {
+  //   throw new Error("the path provided does not exists");
+  // }
 
   const upload = async file => {
     const body = new FormData();
@@ -24,7 +21,7 @@ const uploadImage = async () => {
       method: "POST",
       headers: {
         Accept: "application/json",
-        Authorization: `Client-ID ${clientId}`,
+        Authorization: `Client-ID 11eb8a62f4c7927`,
       },
       body,
     });
@@ -32,9 +29,9 @@ const uploadImage = async () => {
     return res.json();
   };
 
-  const files = fs.readdirSync(path);
+  const files = fs.readdirSync(fullPath);
   const resultsP = files.map(file => {
-    const img = fs.readFileSync(`${path}/${file}`);
+    const img = fs.readFileSync(`${fullPath}/${file}`);
     return upload(img);
   });
 
