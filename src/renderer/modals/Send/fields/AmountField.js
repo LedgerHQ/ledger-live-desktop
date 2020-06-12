@@ -58,10 +58,12 @@ const AmountField = ({
   const { useAllAmount } = transaction;
   const { amount, errors, warnings } = status;
   let { amount: amountError } = errors;
+  let { amount: amountWarning } = warnings;
 
   // we ignore zero case for displaying field error because field is empty.
   if (amount.eq(0) && (bridgePending || !useAllAmount)) {
     amountError = null;
+    amountWarning = null;
   }
 
   return (
@@ -92,7 +94,7 @@ const AmountField = ({
         disabled={!!useAllAmount}
         account={account}
         validTransactionError={amountError}
-        validTransactionWarning={warnings.amount}
+        validTransactionWarning={amountWarning}
         onChange={onChange}
         value={amount}
         showCountervalue={false}
