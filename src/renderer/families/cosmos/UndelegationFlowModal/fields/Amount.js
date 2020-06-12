@@ -61,7 +61,8 @@ export default function AmountField({
     [initialAmount],
   );
 
-  const error = useMemo(() => focused && Object.values(errors || {})[0], [focused, errors]);
+  const error = errors.amount || errors.redelegation || errors.unbonding;
+
   const warning = useMemo(() => focused && Object.values(warnings || {})[0], [focused, warnings]);
 
   return (
@@ -75,7 +76,7 @@ export default function AmountField({
         unit={unit}
         value={amount}
         onChange={onChange}
-        onChangeFocus={setFocused}
+        onChangeFocus={() => setFocused(true)}
         renderLeft={<InputLeft>{unit.code}</InputLeft>}
         renderRight={
           <InputRight>
