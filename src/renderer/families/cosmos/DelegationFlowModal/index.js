@@ -32,6 +32,7 @@ class DelegationModal extends PureComponent<{ name: string }, State> {
         refocusWhenChange={stepId}
         onHide={this.handleReset}
         preventBackdropClick={isModalLocked}
+        width={550}
         render={({ onClose, data }) => (
           <Body
             stepId={stepId}

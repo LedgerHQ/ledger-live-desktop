@@ -37,7 +37,7 @@ export default function DelegationSelectorField({ account, transaction, t, onCha
       <Select
         value={value}
         options={options}
-        getOptionValue={({ address }) => address}
+        getOptionValue={({ validatorAddress }) => validatorAddress}
         renderValue={renderItem}
         renderOption={renderItem}
         onInputChange={setQuery}

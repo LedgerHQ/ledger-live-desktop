@@ -23,6 +23,7 @@ import type {
   CosmosDelegationInfo,
   CosmosMappedValidator,
 } from "@ledgerhq/live-common/lib/families/cosmos/types";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
@@ -85,9 +86,6 @@ const MaxButton = styled.button`
     filter: contrast(2);
   }
 `;
-
-export const formatValue = (value: BigNumber, unit: *): number =>
-  value.dividedBy(10 ** unit.magnitude).toNumber();
 
 type Props = {
   t: TFunction,
@@ -206,7 +204,7 @@ const ValidatorField = ({
                 i18nKey="cosmos.delegation.currentDelegation"
                 values={{ amount: d.formattedAmount }}
               >
-                <b></b>
+                <b style={{ marginLeft: 5 }}></b>
               </Trans>
             ) : null
           }
@@ -265,6 +263,9 @@ const ValidatorField = ({
     ],
   );
 
+  const formatMax = max.dividedBy(10 ** unit.magnitude).toNumber();
+  const formatMaxText = formatCurrencyUnit(unit, max, { showCode: true });
+
   if (!status) return null;
   return (
     <>
@@ -272,7 +273,8 @@ const ValidatorField = ({
       <ValidatorListHeader
         votesSelected={delegationsSelected}
         votesAvailable={max}
-        max={formatValue(max, unit)}
+        max={formatMax}
+        maxText={formatMaxText}
         maxVotes={COSMOS_MAX_DELEGATIONS}
         totalValidators={SR.length}
         notEnoughVotes={notEnoughDelegations}

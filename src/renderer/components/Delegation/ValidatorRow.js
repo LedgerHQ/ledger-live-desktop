@@ -9,50 +9,6 @@ import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import ExternalLink from "~/renderer/icons/ExternalLink";
 
-const Row: ThemedComponent<{ active: boolean, disabled: boolean }> = styled(Box).attrs(() => ({
-  horizontal: true,
-  flex: "0 0 56px",
-  mb: 2,
-  alignItems: "center",
-  justifyContent: "flex-start",
-  p: 2,
-}))`
-  border-radius: 4px;
-  border: 1px solid transparent;
-  position: relative;
-  overflow: visible;
-  border-color: ${p =>
-    p.active ? p.theme.colors.palette.primary.main : p.theme.colors.palette.divider};
-  ${p =>
-    p.active
-      ? `&:before {
-        content: "";
-        width: 4px;
-        height: 100%;
-        top: 0;
-        left: 0;
-        position: absolute;
-        background-color: ${p.theme.colors.palette.primary.main};
-      }`
-      : ""}
-  ${p =>
-    p.disabled
-      ? css`
-          ${InputBox} {
-            pointer-events: none;
-          }
-        `
-      : ""}
-  ${p =>
-    p.onClick
-      ? `
-          &:hover {
-            border-color: ${p.theme.colors.palette.primary.main};
-          }
-  `
-      : ""}
-`;
-
 export const IconContainer: ThemedComponent<*> = styled.div`
   display: flex;
   align-items: center;
@@ -156,6 +112,54 @@ const VoteInput = styled.input.attrs(() => ({
     color: ${p => p.theme.colors.palette.text.shade40};
     background-color: ${p => p.theme.colors.palette.background.default};
   }
+`;
+
+const Row: ThemedComponent<{ active: boolean, disabled: boolean }> = styled(Box).attrs(() => ({
+  horizontal: true,
+  flex: "0 0 56px",
+  mb: 2,
+  alignItems: "center",
+  justifyContent: "flex-start",
+  p: 2,
+}))`
+  border-radius: 4px;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: visible;
+  border-color: ${p =>
+    p.active ? p.theme.colors.palette.primary.main : p.theme.colors.palette.divider};
+  ${p =>
+    p.active
+      ? `&:before {
+        content: "";
+        width: 4px;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-color: ${p.theme.colors.palette.primary.main};
+      }`
+      : ""}
+  ${p =>
+    p.disabled
+      ? css`
+          ${InputBox} {
+            pointer-events: none;
+          }
+        `
+      : ""}
+  ${p =>
+    p.onClick
+      ? css`
+          &:hover {
+            border-color: ${p.theme.colors.palette.primary.main};
+          }
+          ${IconContainer} {
+            opacity: 1;
+            color: inherit;
+          }
+        `
+      : ""}
 `;
 
 type ValidatorRowProps = {
