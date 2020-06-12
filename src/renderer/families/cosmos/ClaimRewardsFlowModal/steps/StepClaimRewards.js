@@ -72,7 +72,7 @@ export default function StepClaimRewards({
   return (
     <Box flow={1}>
       <TrackPage category="ClaimRewards Flow" name="Step 1" />
-      {warning ? <ErrorBanner error={warning} warning /> : null}
+      {warning && !error ? <ErrorBanner error={warning} warning /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       <ModeSelectorField mode={transaction.mode} onChange={onChangeMode} />
       {amount && (

@@ -168,7 +168,7 @@ const Body = ({
     [account, dispatch],
   );
 
-  const error = transactionError || bridgeError;
+  const error = transactionError || bridgeError || status.errors.amount;
   const warning = status.warnings ? Object.values(status.warnings)[0] : null;
 
   const stepperProps = {

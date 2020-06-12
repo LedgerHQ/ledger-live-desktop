@@ -15,6 +15,7 @@ import type {
 import { mapDelegationInfo } from "@ledgerhq/live-common/lib/families/cosmos/logic";
 import type { Currency, Unit, Operation, Account } from "@ledgerhq/live-common/lib/types";
 
+import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
 import {
   OpDetailsTitle,
@@ -27,18 +28,15 @@ import Box from "~/renderer/components/Box/Box";
 import Text from "~/renderer/components/Text";
 import { useDiscreetMode } from "~/renderer/components/Discreet";
 
-/** @TODO cosmos update this url */
-const helpURL = "https://support.ledger.com/hc/en-us/articles/360013062139";
-
 function getURLFeesInfo(op: Operation): ?string {
   if (op.fee.gt(200000)) {
-    return helpURL;
+    return urls.cosmosStakingRewards;
   }
 }
 
 function getURLWhatIsThis(op: Operation): ?string {
   if (op.type !== "IN" && op.type !== "OUT") {
-    return helpURL;
+    return urls.cosmosStakingRewards;
   }
 }
 
@@ -118,6 +116,8 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
   const discreet = useDiscreetMode();
   const { validators: cosmosValidators } = useCosmosPreloadData();
 
+  let ret = null;
+
   switch (type) {
     case "DELEGATE": {
       const { validators: delegations } = extra;
@@ -151,7 +151,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
         discreet,
       });
 
-      return (
+      ret = (
         <>
           <B />
           <OpDetailsData>
@@ -171,6 +171,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
           </OpDetailsData>
         </>
       );
+      break;
     }
     case "REDELEGATE": {
       const { cosmosSourceValidator, validators } = extra;
@@ -193,7 +194,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
         discreet,
       });
 
-      return (
+      ret = (
         <>
           <B />
           <OpDetailsData>
@@ -222,6 +223,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
           </OpDetailsData>
         </>
       );
+      break;
     }
     case "REWARD": {
       const { validators } = extra;
@@ -240,7 +242,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
         discreet,
       });
 
-      return (
+      ret = (
         <>
           <B />
           <OpDetailsData>
@@ -260,10 +262,28 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
           </OpDetailsData>
         </>
       );
+      break;
     }
     default:
-      return null;
+      break;
   }
+
+  return (
+    <>
+      {ret}
+      {extra.memo && (
+        <>
+          <B />
+          <OpDetailsData>
+            <OpDetailsTitle>
+              <Trans i18nKey={"operationDetails.extra.memo"} />
+            </OpDetailsTitle>
+            {extra.memo}
+          </OpDetailsData>
+        </>
+      )}
+    </>
+  );
 };
 
 type Props = {
