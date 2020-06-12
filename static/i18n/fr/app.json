@@ -658,7 +658,7 @@
         "selected": "Sélectionné: {{total}}",
         "maxSelected": "Max sélectionné: {{total}}",
         "allVotesAreUsed": "Tous les votes sont utilisés",
-        "maxUsed": "Votes maximum : {{total}}",
+        "maxUsed": "Fonds insuffisants",
         "superRepresentatives": "Super Representatives (SR)",
         "candidates": "Candidats",
         "estYield": "Rendement estimé",
