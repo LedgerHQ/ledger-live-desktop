@@ -298,8 +298,8 @@ const DelegateAmountCell = ({ operation, currency, unit }: Props) => {
 const RedelegateAmountCell = ({ operation, currency, unit }: Props) => {
   const discreet = useDiscreetMode();
   const amount =
-    operation.extra && operation.extra.validator
-      ? BigNumber(operation.extra.validator.amount)
+    operation.extra && operation.extra.validators
+      ? BigNumber(operation.extra.validators[0].amount)
       : BigNumber(0);
 
   if (amount.isZero()) return null;
@@ -321,8 +321,8 @@ const RedelegateAmountCell = ({ operation, currency, unit }: Props) => {
 const UndelegateAmountCell = ({ operation, currency, unit }: Props) => {
   const discreet = useDiscreetMode();
   const amount =
-    operation.extra && operation.extra.validator
-      ? BigNumber(operation.extra.validator.amount)
+    operation.extra && operation.extra.validators
+      ? BigNumber(operation.extra.validators[0].amount)
       : BigNumber(0);
 
   if (amount.isZero()) return null;
@@ -342,7 +342,6 @@ const UndelegateAmountCell = ({ operation, currency, unit }: Props) => {
 };
 
 const amountCell: { [key: string]: ComponentType<any> } = {
-  DELEGATE: DelegateAmountCell,
   REDELEGATE: RedelegateAmountCell,
   UNDELEGATE: UndelegateAmountCell,
 };
