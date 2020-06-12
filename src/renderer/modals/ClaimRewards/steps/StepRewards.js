@@ -2,6 +2,7 @@
 import invariant from "invariant";
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 import { Trans } from "react-i18next";
 
@@ -13,6 +14,7 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
+import { localeSelector } from "~/renderer/reducers/settings";
 
 import { BigNumber } from "bignumber.js";
 import InfoCircle from "~/renderer/icons/InfoCircle";
@@ -26,6 +28,7 @@ const IconWrapperCircle = styled(Box)`
 `;
 
 export default function StepRewards({ account, parentAccount, reward }: StepProps) {
+  const locale = useSelector(localeSelector);
   invariant(account, "account is required");
   const mainAccount = getMainAccount(account, parentAccount);
 
@@ -33,6 +36,7 @@ export default function StepRewards({ account, parentAccount, reward }: StepProp
     disableRounding: true,
     alwaysShowSign: false,
     showCode: true,
+    locale,
   });
 
   return (

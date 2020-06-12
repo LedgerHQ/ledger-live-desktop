@@ -3,6 +3,7 @@ import invariant from "invariant";
 import React, { useCallback, useMemo, useState } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 import { BigNumber } from "bignumber.js";
 
@@ -14,6 +15,7 @@ import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types
 import type { Transaction } from "@ledgerhq/live-common/lib/families/tron/types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
+import { localeSelector } from "~/renderer/reducers/settings";
 import Label from "~/renderer/components/Label";
 import Box from "~/renderer/components/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
@@ -90,6 +92,7 @@ const AmountField = ({
   bridgePending,
   t,
 }: Props) => {
+  const locale = useSelector(localeSelector);
   invariant(account && transaction && account.spendableBalance, "account and transaction required");
 
   const bridge = getAccountBridge(account, parentAccount);
@@ -125,8 +128,9 @@ const AmountField = ({
         disableRounding: true,
         showAllDigits: false,
         showCode: true,
+        locale,
       }),
-    [spendableBalance, defaultUnit],
+    [spendableBalance, defaultUnit, locale],
   );
 
   /** show amount ratio buttons only if we can ratio the available assets to 25% or less */

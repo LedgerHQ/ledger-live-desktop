@@ -3,6 +3,7 @@
 import { BigNumber } from "bignumber.js";
 import React, { useMemo } from "react";
 import type { ComponentType } from "react";
+import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
@@ -26,6 +27,7 @@ import {
 import Box from "~/renderer/components/Box/Box";
 import Text from "~/renderer/components/Text";
 import { useDiscreetMode } from "~/renderer/components/Discreet";
+import { localeSelector } from "~/renderer/reducers/settings";
 
 /** @TODO cosmos update this url */
 const helpURL = "https://support.ledger.com/hc/en-us/articles/360013062139";
@@ -116,7 +118,16 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
   const unit = getAccountUnit(account);
   const currency = getAccountCurrency(account);
   const discreet = useDiscreetMode();
+  const locale = useSelector(localeSelector);
   const { validators: cosmosValidators } = useCosmosPreloadData();
+
+  const formatConfig = {
+    disableRounding: true,
+    alwaysShowSign: false,
+    showCode: true,
+    discreet,
+    locale,
+  };
 
   switch (type) {
     case "DELEGATE": {
@@ -144,12 +155,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
         v => v.validatorAddress === validator.address,
       );
 
-      const formattedAmount = formatCurrencyUnit(unit, BigNumber(validator.amount), {
-        disableRounding: true,
-        alwaysShowSign: false,
-        showCode: true,
-        discreet,
-      });
+      const formattedAmount = formatCurrencyUnit(unit, BigNumber(validator.amount), formatConfig);
 
       return (
         <>
@@ -186,12 +192,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
         v => v.validatorAddress === cosmosSourceValidator,
       );
 
-      const formattedAmount = formatCurrencyUnit(unit, BigNumber(validator.amount), {
-        disableRounding: true,
-        alwaysShowSign: false,
-        showCode: true,
-        discreet,
-      });
+      const formattedAmount = formatCurrencyUnit(unit, BigNumber(validator.amount), formatConfig);
 
       return (
         <>
@@ -233,12 +234,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
         v => v.validatorAddress === validator.address,
       );
 
-      const formattedAmount = formatCurrencyUnit(unit, BigNumber(validator.amount), {
-        disableRounding: true,
-        alwaysShowSign: false,
-        showCode: true,
-        discreet,
-      });
+      const formattedAmount = formatCurrencyUnit(unit, BigNumber(validator.amount), formatConfig);
 
       return (
         <>
@@ -272,31 +268,9 @@ type Props = {
   unit: Unit,
 };
 
-const DelegateAmountCell = ({ operation, currency, unit }: Props) => {
-  const discreet = useDiscreetMode();
-  const amount =
-    operation.extra && operation.extra.validators
-      ? operation.extra.validators.reduce((sum, { amount }) => sum.plus(amount), BigNumber(0))
-      : BigNumber(0);
-
-  if (amount.isZero()) return null;
-
-  const formattedAmount = formatCurrencyUnit(unit, amount, {
-    disableRounding: false,
-    alwaysShowSign: false,
-    showCode: false,
-    discreet,
-  });
-
-  return (
-    <Text ff="Inter|SemiBold" fontSize={4}>
-      <Trans i18nKey={"operationDetails.extra.delegated"} values={{ amount: formattedAmount }} />
-    </Text>
-  );
-};
-
 const RedelegateAmountCell = ({ operation, currency, unit }: Props) => {
   const discreet = useDiscreetMode();
+  const locale = useSelector(localeSelector);
   const amount =
     operation.extra && operation.extra.validator
       ? BigNumber(operation.extra.validator.amount)
@@ -309,6 +283,7 @@ const RedelegateAmountCell = ({ operation, currency, unit }: Props) => {
     alwaysShowSign: false,
     showCode: false,
     discreet,
+    locale,
   });
 
   return amount > 0 ? (
@@ -320,6 +295,7 @@ const RedelegateAmountCell = ({ operation, currency, unit }: Props) => {
 
 const UndelegateAmountCell = ({ operation, currency, unit }: Props) => {
   const discreet = useDiscreetMode();
+  const locale = useSelector(localeSelector);
   const amount =
     operation.extra && operation.extra.validator
       ? BigNumber(operation.extra.validator.amount)
@@ -332,6 +308,7 @@ const UndelegateAmountCell = ({ operation, currency, unit }: Props) => {
     alwaysShowSign: false,
     showCode: false,
     discreet,
+    locale,
   });
 
   return amount > 0 ? (
@@ -342,7 +319,6 @@ const UndelegateAmountCell = ({ operation, currency, unit }: Props) => {
 };
 
 const amountCell: { [key: string]: ComponentType<any> } = {
-  DELEGATE: DelegateAmountCell,
   REDELEGATE: RedelegateAmountCell,
   UNDELEGATE: UndelegateAmountCell,
 };

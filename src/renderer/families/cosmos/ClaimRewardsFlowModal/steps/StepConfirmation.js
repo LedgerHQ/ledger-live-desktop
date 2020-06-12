@@ -3,6 +3,11 @@
 import React from "react";
 import { Trans } from "react-i18next";
 import styled, { withTheme } from "styled-components";
+import { useSelector } from "react-redux";
+
+import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -16,9 +21,7 @@ import BroadcastErrorDisclaimer from "~/renderer/components/BroadcastErrorDiscla
 
 import type { StepProps } from "../types";
 
-import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
+import { localeSelector } from "~/renderer/reducers/settings";
 
 const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(() => ({
   alignItems: "center",
@@ -39,6 +42,7 @@ function StepConfirmation({
   transaction,
 }: StepProps & { theme: * }) {
   const { validators } = useCosmosPreloadData();
+  const locale = useSelector(localeSelector);
 
   if (optimisticOperation) {
     const unit = account && getAccountUnit(account);
@@ -50,7 +54,7 @@ function StepConfirmation({
       validators.find(({ validatorAddress }) => validatorAddress === validator.address);
 
     const amount =
-      unit && validator && formatCurrencyUnit(unit, validator.amount, { showCode: true });
+      unit && validator && formatCurrencyUnit(unit, validator.amount, { showCode: true, locale });
 
     return (
       <Container>

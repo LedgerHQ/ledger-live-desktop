@@ -2,12 +2,15 @@
 
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 import { Trans } from "react-i18next";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+
+import { localeSelector } from "~/renderer/reducers/settings";
 
 import Discreet, { useDiscreetMode } from "~/renderer/components/Discreet";
 
@@ -59,6 +62,7 @@ type Props = {
 
 const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
   const discreet = useDiscreetMode();
+  const locale = useSelector(localeSelector);
   if (!account.cosmosResources) return null;
 
   const { spendableBalance: _spendableBalance, cosmosResources } = account;
@@ -74,6 +78,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
     alwaysShowSign: false,
     showCode: false,
     discreet,
+    locale,
   };
 
   const spendableBalance = formatCurrencyUnit(unit, _spendableBalance, formatConfig);

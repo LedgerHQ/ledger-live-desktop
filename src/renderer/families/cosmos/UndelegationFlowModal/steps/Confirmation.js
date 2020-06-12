@@ -1,6 +1,7 @@
 // @flow
 import React, { useCallback } from "react";
 import { useTranslation, Trans } from "react-i18next";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -16,6 +17,7 @@ import type { StepProps } from "../types";
 import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
+import { localeSelector } from "~/renderer/reducers/settings";
 
 export default function StepConfirmation({
   account,
@@ -27,6 +29,7 @@ export default function StepConfirmation({
 }: StepProps) {
   const { t } = useTranslation();
   const { validators } = useCosmosPreloadData();
+  const locale = useSelector(localeSelector);
 
   if (optimisticOperation) {
     const unit = account && getAccountUnit(account);
@@ -38,7 +41,7 @@ export default function StepConfirmation({
       validators.find(({ validatorAddress }) => validatorAddress === validator.address);
 
     const amount =
-      unit && validator && formatCurrencyUnit(unit, validator.amount, { showCode: true });
+      unit && validator && formatCurrencyUnit(unit, validator.amount, { showCode: true, locale });
 
     return (
       <Container>

@@ -2,6 +2,7 @@
 import invariant from "invariant";
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
+import { useSelector } from "react-redux";
 
 import type { StepProps } from "../types";
 
@@ -9,6 +10,7 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
+import { localeSelector } from "~/renderer/reducers/settings";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -30,6 +32,7 @@ export default function StepClaimRewards({
   error,
   t,
 }: StepProps) {
+  const locale = useSelector(localeSelector);
   invariant(account && account.cosmosResources && transaction, "account and transaction required");
   const bridge = getAccountBridge(account, parentAccount);
 
@@ -57,6 +60,7 @@ export default function StepClaimRewards({
       disableRounding: true,
       alwaysShowSign: false,
       showCode: true,
+      locale,
     });
 
   const onDelegationChange = useCallback(
