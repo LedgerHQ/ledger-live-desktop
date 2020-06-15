@@ -256,7 +256,7 @@
   "tokensList": {
     "title": "Tokens",
     "cta": "Ajouter un token",
-    "placeholder": "Pour ajouter des tokens, envoyez-les simplement sur votre adresse Ethereum.",
+    "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
     "link": "En savoir plus",
     "seeTokens": "Afficher les tokens ({{tokenCount}})",
     "hideTokens": "Cacher tokens ({{tokenCount}})",
