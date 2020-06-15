@@ -256,7 +256,7 @@
   "tokensList": {
     "title": "代币",
     "cta": "添加代币",
-    "placeholder": "如要添加代币，您只需将代币发送至您的 Ethereum 地址。",
+    "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
     "link": "了解更多",
     "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "隐藏代币 ({{tokenCount}})",
