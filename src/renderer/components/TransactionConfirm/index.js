@@ -181,7 +181,7 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
         </Info>
       )}
 
-      <Box style={{ width: "100%" }} px={80} mb={20}>
+      <Box style={{ width: "100%" }} px={30} mb={20}>
         {fields.map((field, i) => {
           const MaybeComponent = fieldComponents[field.type];
           if (!MaybeComponent) {

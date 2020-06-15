@@ -18,6 +18,7 @@ type ValidatorListHeaderProps = {
   votesSelected: number,
   votesAvailable: number,
   max: number,
+  maxText?: string,
   maxVotes: number,
   totalValidators: number,
   notEnoughVotes: boolean,
@@ -27,6 +28,7 @@ const ValidatorListHeader = ({
   votesSelected,
   votesAvailable,
   max,
+  maxText,
   maxVotes,
   totalValidators,
   notEnoughVotes,
@@ -48,7 +50,7 @@ const ValidatorListHeader = ({
       <Separator />
       {max > 0 ? (
         <Text fontSize={3} ff="Inter|Medium">
-          <Trans i18nKey="vote.steps.castVotes.votes" values={{ total: max }} />
+          <Trans i18nKey="vote.steps.castVotes.votes" values={{ total: maxText || max }} />
         </Text>
       ) : notEnoughVotes ? (
         <Box horizontal alignItems="center" color="alertRed">

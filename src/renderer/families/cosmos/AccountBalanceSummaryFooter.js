@@ -115,19 +115,21 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
           <Discreet>{+delegatedBalance || "–"}</Discreet>
         </AmountValue>
       </BalanceDetail>
-      <BalanceDetail>
-        <ToolTip content={<Trans i18nKey="account.undelegatingTooltip" />}>
-          <TitleWrapper>
-            <Title>
-              <Trans i18nKey="account.undelegating" />
-            </Title>
-            <InfoCircle size={13} />
-          </TitleWrapper>
-        </ToolTip>
-        <AmountValue>
-          <Discreet>{+unbondingBalance || "–"}</Discreet>
-        </AmountValue>
-      </BalanceDetail>
+      {+unbondingBalance > 0 && (
+        <BalanceDetail>
+          <ToolTip content={<Trans i18nKey="account.undelegatingTooltip" />}>
+            <TitleWrapper>
+              <Title>
+                <Trans i18nKey="account.undelegating" />
+              </Title>
+              <InfoCircle size={13} />
+            </TitleWrapper>
+          </ToolTip>
+          <AmountValue>
+            <Discreet>{+unbondingBalance}</Discreet>
+          </AmountValue>
+        </BalanceDetail>
+      )}
     </Wrapper>
   );
 };

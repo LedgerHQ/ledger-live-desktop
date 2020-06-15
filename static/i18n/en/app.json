@@ -395,7 +395,8 @@
       "undelegatedFrom": "Undelegated from",
       "undelegatedAmount": "Undelegated amount",
       "rewardFrom": "Reward from",
-      "rewardAmount": "Amount collected"
+      "rewardAmount": "Amount collected",
+      "memo": "Memo"
     }
   },
   "operationList": {
@@ -900,7 +901,7 @@
       "inactiveTooltip": "This validator is inactive and doesn't generate rewards",
       "minSafeWarning": "To safely start delegating you need at least {{amount}}",
       "flow": {
-        "title": "Delegate more assets",
+        "title": "Delegate more",
         "steps": {
           "starter": {
             "description": "You may earn rewards by delegating your ATOM to a validator.",
@@ -910,7 +911,7 @@
               "The undelegation process takes 21 days to finalize."
             ],
             "warning": {
-              "description": "Choose you validator wisely.  Part of your delegated assets may be destroyed if the validator does not behave appropriately."
+              "description": "Choose your validator wisely. Part of your delegated assets may be destroyed if the validator does not behave appropriately."
             }
           },
           "validator": {
@@ -979,7 +980,7 @@
           "starter": {
             "title": "Redelegation",
             "description": "Use redelegation to easily change from one validator to another. But if you change your mind again, you will have to wait because redelegation triggers a 21-day timelock.",
-            "warning": "Choose you validator wisely.  Part of your delegated assets may be destroyed if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
+            "warning": "Choose your validator wisely.  Part of your delegated assets may be destroyed if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
             "howDelegationWorks": "How delegation works?"
           },
           "validators": {
@@ -1606,6 +1607,11 @@
       },
       "whatsMemo": "What is a memo?",
       "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+    },
+    "cosmos": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional",
+      "memoWarningText": "when using a memo, carefully check the information with the recipient"
     }
   },
   "errors": {

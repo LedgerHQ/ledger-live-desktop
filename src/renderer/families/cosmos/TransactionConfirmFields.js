@@ -17,6 +17,9 @@ import WarnBox from "~/renderer/components/WarnBox";
 import Box from "~/renderer/components/Box";
 import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import { mapDelegationInfo } from "@ledgerhq/live-common/lib/families/cosmos/logic";
+import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
+
+import { openURL } from "~/renderer/linking";
 
 import {
   OpDetailsData,
@@ -27,7 +30,6 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 const Info: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|SemiBold",
   color: "palette.text.shade100",
-  mt: 6,
   mb: 4,
   px: 5,
 }))`
@@ -54,7 +56,22 @@ const AddressText = styled(Text).attrs(() => ({
   word-break: break-all;
   text-align: right;
   max-width: 50%;
+  ${p =>
+    p.onClick
+      ? `
+      cursor: pointer;
+    &:hover {
+      color: ${p.theme.colors.palette.primary.main};
+    }
+  `
+      : ``}
 `;
+
+const onExternalLink = (account, address) => {
+  const explorerView = getDefaultExplorerView(account.currency);
+  const URL = explorerView && getAddressExplorer(explorerView, address);
+  if (URL) openURL(URL);
+};
 
 const CosmosDelegateValidatorsField = ({
   account,
@@ -96,7 +113,9 @@ const CosmosDelegateValidatorsField = ({
                   </Trans>
                 </Text>
               </Box>
-              <AddressText>{address}</AddressText>
+              <AddressText onClick={() => onExternalLink(mainAccount, address)}>
+                {address}
+              </AddressText>
             </OpDetailsVoteData>
           </OpDetailsData>
         ))}
@@ -112,6 +131,7 @@ const CosmosValidatorNameField = ({
   field,
 }: FieldComponentProps) => {
   invariant(transaction.family === "cosmos", "cosmos transaction");
+  const mainAccount = getMainAccount(account, parentAccount);
 
   const { validators } = transaction;
   const { validators: cosmosValidators } = useCosmosPreloadData();
@@ -132,7 +152,11 @@ const CosmosValidatorNameField = ({
             {formattedValidator.name}
           </Text>
           <br />
-          <AddressText ff="Inter|Regular" fontSize={2}>
+          <AddressText
+            ff="Inter|Regular"
+            fontSize={2}
+            onClick={() => onExternalLink(mainAccount, formattedValidator.validatorAddress)}
+          >
             {formattedValidator.validatorAddress}
           </AddressText>
         </FieldText>
@@ -177,6 +201,7 @@ const CosmosSourceValidatorField = ({
   field,
 }: FieldComponentProps) => {
   invariant(transaction.family === "cosmos", "cosmos transaction");
+  const mainAccount = getMainAccount(account, parentAccount);
 
   const { cosmosSourceValidator } = transaction;
   const { validators: cosmosValidators } = useCosmosPreloadData();
@@ -193,10 +218,28 @@ const CosmosSourceValidatorField = ({
             {formattedValidator.name}
           </Text>
           <br />
-          <AddressText ff="Inter|Regular" fontSize={2}>
+          <AddressText
+            ff="Inter|Regular"
+            fontSize={2}
+            onClick={() => onExternalLink(mainAccount, formattedValidator.validatorAddress)}
+          >
             {formattedValidator.validatorAddress}
           </AddressText>
         </FieldText>
+      </TransactionConfirmField>
+    )
+  );
+};
+
+const CosmosMemoField = ({ account, parentAccount, transaction, field }: FieldComponentProps) => {
+  invariant(transaction.family === "cosmos", "cosmos transaction");
+
+  const { memo } = transaction;
+
+  return (
+    memo && (
+      <TransactionConfirmField label={field.label}>
+        <FieldText>{memo}</FieldText>
       </TransactionConfirmField>
     )
   );
@@ -238,6 +281,7 @@ const Title = ({ transaction }: { transaction: Transaction }) => {
 };
 
 const fieldComponents = {
+  "cosmos.memo": CosmosMemoField,
   "cosmos.delegateValidators": CosmosDelegateValidatorsField,
   "cosmos.validatorName": CosmosValidatorNameField,
   "cosmos.validatorAmount": CosmosValidatorAmountField,
