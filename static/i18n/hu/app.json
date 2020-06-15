@@ -256,7 +256,7 @@
   "tokensList": {
     "title": "Tokenek",
     "cta": "Token hozzáadása",
-    "placeholder": "Tokenek hozzáadásához, egyszerűen küld őket Ethereum címedre.",
+    "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
     "link": "Tudj meg többet",
     "seeTokens": "Tokenek megjelenítése ({{tokenCount}})",
     "hideTokens": "Tokenek elrejtése ({{tokenCount}})",
