@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback } from "react";
 import invariant from "invariant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
@@ -17,6 +17,7 @@ import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box/Box";
 import IconChartLine from "~/renderer/icons/ChartLine";
 import ToolTip from "~/renderer/components/Tooltip";
+import { localeSelector } from "~/renderer/reducers/settings";
 
 const ButtonBase: ThemedComponent<*> = styled(Button)`
   height: 34px;
@@ -32,12 +33,13 @@ type Props = {
 const AccountHeaderActions = ({ account, parentAccount }: Props) => {
   const dispatch = useDispatch();
   const mainAccount = getMainAccount(account, parentAccount);
+  const locale = useSelector(localeSelector);
 
   const { cosmosResources } = mainAccount;
   invariant(cosmosResources, "cosmos account expected");
   const { delegations } = cosmosResources;
   const unit = getAccountUnit(account);
-  const earnRewardEnabled = canDelegate(account);
+  const earnRewardEnabled = canDelegate(mainAccount);
 
   const onClick = useCallback(() => {
     dispatch(
@@ -47,7 +49,7 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
     );
   }, [dispatch, account]);
 
-  const minSafeAmount = formatCurrencyUnit(unit, COSMOS_MIN_SAFE, { showCode: true });
+  const minSafeAmount = formatCurrencyUnit(unit, COSMOS_MIN_SAFE, { showCode: true, locale });
 
   if (parentAccount || delegations.length > 0) return null;
 

@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback } from "react";
 import invariant from "invariant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
@@ -28,6 +28,7 @@ import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import IconChartLine from "~/renderer/icons/ChartLine";
 import { Header, UnbondingHeader } from "./Header";
 import { Row, UnbondingRow } from "./Row";
+import { localeSelector } from "~/renderer/reducers/settings";
 
 import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
@@ -51,6 +52,7 @@ const Wrapper = styled(Box).attrs(() => ({
 
 const Delegation = ({ account }: Props) => {
   const dispatch = useDispatch();
+  const locale = useSelector(localeSelector);
 
   const { cosmosResources } = account;
   invariant(cosmosResources, "cosmos account expected");
@@ -67,7 +69,7 @@ const Delegation = ({ account }: Props) => {
 
   const { validators } = useCosmosPreloadData();
   const unit = getAccountUnit(account);
-  const minSafeAmount = formatCurrencyUnit(unit, COSMOS_MIN_SAFE, { showCode: true });
+  const minSafeAmount = formatCurrencyUnit(unit, COSMOS_MIN_SAFE, { showCode: true, locale });
 
   /** @TODO move this to common with a useCosmosMappedUnbondings */
   const mappedUnbondings = mapUnbondings(unbondings, validators, unit);
