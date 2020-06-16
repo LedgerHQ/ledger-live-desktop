@@ -144,7 +144,7 @@
     "bandwidth": "Bandwidth",
     "energy": "Energy",
     "delegatedAssets": "Actifs délégués",
-    "undelegating": "Interrompre délégation",
+    "undelegating": "Intérruption en cours",
     "availableBalanceTooltip": "Ce montant peut être envoyé à tout moment.",
     "frozenAssetsTooltip": "Les actifs gelés sont utilisés dans le processus de vote de Tron. Cela représente votre nombre total de votes.",
     "bandwidthTooltip": "Geler des actifs pour gagner de la bandwidth",
@@ -384,12 +384,12 @@
       "votes": "Votes ({{number}})",
       "votesAddress": "<0>{{votes}}</0> pour <2>{{name}}</2>",
       "validators": "Validateurs",
-      "delegated": "Délégué ({{amount}})",
-      "redelegated": "Montant ({{amount}})",
+      "delegated": "Délégué",
+      "redelegated": "Transféré",
       "redelegatedFrom": "Transfer de",
       "redelegatedTo": "Transfer à",
       "redelegatedAmount": "Montant transféré",
-      "undelegated": "Délégation terminée ({{amount}})",
+      "undelegated": "Délégation terminée",
       "undelegatedFrom": "Délégation interrompue pour",
       "undelegatedAmount": "Montant de délégation interrompue",
       "rewardFrom": "Récompense de",
@@ -889,6 +889,9 @@
       "delegate": "Déléguer",
       "undelegate": "Interrompre",
       "redelegate": "Changer de validateur",
+      "redelegateDisabledTooltip": "Vous pourrez à nouveau changer de validateur <0>{{days}}</0>",
+      "redelegateMaxDisabledTooltip": "Vous ne pouvez pas avoir plus de <0>7</0> changements de délégation en même temps.",
+      "undelegateDisabledTooltip": "Vous ne pouvez pas avoir plus de <0>7</0> intérruption de délégation en même temps.",
       "reward": "Collecter les récompenses",
       "currentDelegation": "Délegué: <0>{{amount}}</0>",
       "estYield": "Rend. est.",
@@ -953,7 +956,9 @@
             "label": "Confirmation",
             "success": {
               "title": "Récompenses réclamées",
+              "titleCompound": "Récompenses déléguées",
               "text": "Vos récompenses ont été ajoutées à votre solde. Le solde de votre compte sera actualisé dès que la blockchain aura confirmé la transaction.",
+              "textCompound": "Vos récompenses de <0>{{amount}}</0> ont été automatiquement déléguées à <0>{{validator}}</0>",
               "cta": "Voir le détail"
             },
             "pending": {
@@ -1024,7 +1029,7 @@
             "title": "Confirmation",
             "success": {
               "title": "Actifs interrompus avec succès.",
-              "text": "Votre liste de validateurs sera actualisée dès que la blockchain aura confirmé la transaction.",
+              "description": "<0>{{amount}}</0> ont été transférés depuis <0>{{validator}}</0>",
               "cta": "Voir le détail"
             },
             "error": {

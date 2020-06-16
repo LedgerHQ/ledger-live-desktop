@@ -307,9 +307,14 @@ const RedelegateAmountCell = ({ operation, currency, unit }: Props) => {
   });
 
   return amount > 0 ? (
-    <Text ff="Inter|SemiBold" fontSize={4}>
-      <Trans i18nKey={"operationDetails.extra.redelegated"} values={{ amount: formattedAmount }} />
-    </Text>
+    <Box vertical>
+      <Text ff="Inter|SemiBold" fontSize={4}>
+        <Trans i18nKey={"operationDetails.extra.redelegated"} />
+      </Text>
+      <Text ff="Inter|SemiBold" fontSize={4}>
+        ({formattedAmount})
+      </Text>
+    </Box>
   ) : null;
 };
 
@@ -332,9 +337,14 @@ const UndelegateAmountCell = ({ operation, currency, unit }: Props) => {
   });
 
   return amount > 0 ? (
-    <Text ff="Inter|SemiBold" fontSize={4}>
-      <Trans i18nKey={"operationDetails.extra.undelegated"} values={{ amount: formattedAmount }} />
-    </Text>
+    <Box vertical>
+      <Text ff="Inter|SemiBold" fontSize={4}>
+        <Trans i18nKey={"operationDetails.extra.undelegated"} />
+      </Text>
+      <Text ff="Inter|SemiBold" fontSize={4}>
+        ({formattedAmount})
+      </Text>
+    </Box>
   ) : null;
 };
 
