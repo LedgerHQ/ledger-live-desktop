@@ -227,7 +227,7 @@ const ValidatorRow = ({
 
   const itemExists = typeof value === "number";
 
-  const InputComponent =
+  const input =
     Input ||
     (onUpdateVote ? (
       <InputBox active={!!value}>
@@ -271,7 +271,7 @@ const ValidatorRow = ({
         <SubTitle>{subtitle}</SubTitle>
       </InfoContainer>
       <SideInfo>{sideInfo}</SideInfo>
-      {InputComponent}
+      {input}
     </Row>
   );
 };
