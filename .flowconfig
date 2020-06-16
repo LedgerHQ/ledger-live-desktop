@@ -5,7 +5,6 @@
 <PROJECT_ROOT>/node_modules/styled-components/.*
 <PROJECT_ROOT>/node_modules/react-beautiful-dnd
 <PROJECT_ROOT>/node_modules/react-window
-<PROJECT_ROOT>/.yalc
 
 [include]
 

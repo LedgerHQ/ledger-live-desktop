@@ -1,19 +1,22 @@
 // @flow
 import React, { useCallback } from "react";
 import invariant from "invariant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
-
-import type {
-  CosmosDelegation,
-  CosmosValidatorItem,
-  CosmosDelegationStatus,
-} from "@ledgerhq/live-common/lib/families/cosmos/types";
-import type { BigNumber } from "bignumber.js";
+import {
+  useCosmosPreloadData,
+  useCosmosMappedDelegations,
+} from "@ledgerhq/live-common/lib/families/cosmos/react";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
+import {
+  mapUnbondings,
+  COSMOS_MIN_SAFE,
+  canDelegate,
+} from "@ledgerhq/live-common/lib/families/cosmos/logic";
+import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
@@ -23,33 +26,14 @@ import Button from "~/renderer/components/Button";
 import Box, { Card } from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import IconChartLine from "~/renderer/icons/ChartLine";
-import Header from "./Header";
-import Row from "./Row";
+import { Header, UnbondingHeader } from "./Header";
+import { Row, UnbondingRow } from "./Row";
+import { localeSelector } from "~/renderer/reducers/settings";
 
 import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
-
-export type FormattedDelegation = {
-  validator: ?CosmosValidatorItem,
-  address: string,
-  pendingRewards: BigNumber,
-  amount: BigNumber,
-  status: CosmosDelegationStatus,
-};
-
-/** @TODO move this in common */
-export const formatDelegations = (
-  delegations: CosmosDelegation[],
-  validators: CosmosValidatorItem[],
-): FormattedDelegation[] => {
-  return delegations.map((d, i, arr) => ({
-    validator: validators.find(v => v.validatorAddress === d.validatorAddress),
-    address: d.validatorAddress,
-    amount: d.amount,
-    pendingRewards: d.pendingRewards,
-    status: d.status,
-  }));
-};
+import DelegateIcon from "~/renderer/icons/Delegate";
+import InfoCircle from "~/renderer/icons/InfoCircle";
 
 type Props = {
   account: Account,
@@ -68,19 +52,29 @@ const Wrapper = styled(Box).attrs(() => ({
 
 const Delegation = ({ account }: Props) => {
   const dispatch = useDispatch();
-
-  const unit = getAccountUnit(account);
-
-  const { validators } = useCosmosPreloadData();
+  const locale = useSelector(localeSelector);
 
   const { cosmosResources } = account;
   invariant(cosmosResources, "cosmos account expected");
-  const { delegations, pendingRewardsBalance: _pendingRewardsBalance } = cosmosResources;
+  const {
+    delegations,
+    pendingRewardsBalance: _pendingRewardsBalance,
+    /** $FlowFixMe */
+    unbondings,
+  } = cosmosResources;
 
-  const formattedDelegations = formatDelegations(delegations, validators);
+  const delegationEnabled = canDelegate(account);
+
+  const mappedDelegations = useCosmosMappedDelegations(account);
+
+  const { validators } = useCosmosPreloadData();
+  const unit = getAccountUnit(account);
+  const minSafeAmount = formatCurrencyUnit(unit, COSMOS_MIN_SAFE, { showCode: true, locale });
+
+  /** @TODO move this to common with a useCosmosMappedUnbondings */
+  const mappedUnbondings = mapUnbondings(unbondings, validators, unit);
 
   const onEarnRewards = useCallback(() => {
-    /** @TODO redirect to the cosmos info modal */
     dispatch(
       openModal("MODAL_COSMOS_REWARDS_INFO", {
         account,
@@ -116,7 +110,20 @@ const Delegation = ({ account }: Props) => {
     [account, dispatch],
   );
 
+  const explorerView = getDefaultExplorerView(account.currency);
+
+  const onExternalLink = useCallback(
+    (address: string) => {
+      const URL = explorerView && getAddressExplorer(explorerView, address);
+
+      if (URL) openURL(URL);
+    },
+    [explorerView],
+  );
+
   const hasDelegations = delegations.length > 0;
+
+  const hasUnbondings = unbondings && unbondings.length > 0;
 
   const hasRewards = _pendingRewardsBalance.gt(0);
 
@@ -134,14 +141,27 @@ const Delegation = ({ account }: Props) => {
         {hasDelegations || hasRewards ? (
           <Box horizontal>
             {hasDelegations ? (
-              <Button mr={2} primary small onClick={onDelegate}>
-                <Box horizontal flow={1} alignItems="center">
-                  <ClaimRewards size={12} />
-                  <Box>
-                    <Trans i18nKey="cosmos.delegation.delegate" />
+              <ToolTip
+                content={
+                  !delegationEnabled ? (
+                    <Trans
+                      i18nKey="cosmos.delegation.minSafeWarning"
+                      values={{
+                        amount: minSafeAmount,
+                      }}
+                    />
+                  ) : null
+                }
+              >
+                <Button mr={2} disabled={!delegationEnabled} primary small onClick={onDelegate}>
+                  <Box horizontal flow={1} alignItems="center">
+                    <DelegateIcon size={12} />
+                    <Box>
+                      <Trans i18nKey="cosmos.delegation.delegate" />
+                    </Box>
                   </Box>
-                </Box>
-              </Button>
+                </Button>
+              </ToolTip>
             ) : null}
             <ToolTip content={!hasRewards ? <Trans i18nKey="cosmos.delegation.noRewards" /> : null}>
               <Button disabled={!hasRewards} primary small onClick={onClaimRewards}>
@@ -159,20 +179,15 @@ const Delegation = ({ account }: Props) => {
       {hasDelegations ? (
         <Card p={0} mt={24} mb={6}>
           <Header />
-          {formattedDelegations.map(
-            ({ validator, address, amount, pendingRewards, status }, index) => (
-              <Row
-                key={index}
-                validator={validator}
-                address={address}
-                amount={amount}
-                pendingRewards={pendingRewards}
-                unit={unit}
-                status={status}
-                onManageAction={onRedirect}
-              />
-            ),
-          )}
+          {mappedDelegations.map((delegation, index) => (
+            <Row
+              key={index}
+              account={account}
+              delegation={delegation}
+              onManageAction={onRedirect}
+              onExternalLink={onExternalLink}
+            />
+          ))}
         </Card>
       ) : (
         <Wrapper horizontal>
@@ -191,17 +206,50 @@ const Delegation = ({ account }: Props) => {
             </Box>
           </Box>
           <Box>
-            <Button primary small onClick={onEarnRewards}>
-              <Box horizontal flow={1} alignItems="center">
-                <IconChartLine size={12} />
-                <Box>
-                  <Trans i18nKey="cosmos.delegation.emptyState.delegation" />
+            <ToolTip
+              content={
+                !delegationEnabled ? (
+                  <Trans
+                    i18nKey="cosmos.delegation.minSafeWarning"
+                    values={{
+                      amount: minSafeAmount,
+                    }}
+                  />
+                ) : null
+              }
+            >
+              <Button primary small disabled={!delegationEnabled} onClick={onEarnRewards}>
+                <Box horizontal flow={1} alignItems="center">
+                  <IconChartLine size={12} />
+                  <Box>
+                    <Trans i18nKey="cosmos.delegation.emptyState.delegation" />
+                  </Box>
                 </Box>
-              </Box>
-            </Button>
+              </Button>
+            </ToolTip>
           </Box>
         </Wrapper>
       )}
+      {hasUnbondings ? (
+        <>
+          <Box horizontal alignItems="center" color="palette.text.shade100">
+            <ToolTip content={<Trans i18nKey="cosmos.undelegation.headerTooltip" />}>
+              <Text ff="Inter|Medium" fontSize={6} data-e2e="title_Undelegation">
+                <Trans i18nKey="cosmos.undelegation.header" />
+              </Text>
+              <Box ml={2} horizontal alignItems="center">
+                <InfoCircle />
+              </Box>
+            </ToolTip>
+          </Box>
+          <Card p={0} mt={24} mb={6}>
+            <UnbondingHeader />
+            {mappedUnbondings.map((delegation, index) => (
+              <UnbondingRow key={index} delegation={delegation} onExternalLink={onExternalLink} />
+            ))}
+          </Card>
+        </>
+      ) : null}
     </>
   );
 };

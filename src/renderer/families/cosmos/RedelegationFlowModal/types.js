@@ -7,7 +7,12 @@ import type { Account, TransactionStatus, Operation } from "@ledgerhq/live-commo
 
 import type { Transaction } from "@ledgerhq/live-common/lib/families/cosmos/types";
 
-export type StepId = "starter" | "validators" | "connectDevice" | "confirmation";
+export type StepId =
+  | "starter"
+  | "validators"
+  | "destinationValidators"
+  | "connectDevice"
+  | "confirmation";
 
 export type StepProps = {
   t: TFunction,

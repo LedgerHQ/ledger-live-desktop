@@ -73,12 +73,14 @@ export function StepConfirmationFooter({
   openModal,
   onClose,
   optimisticOperation,
+  transaction,
 }: StepProps) {
-  const concernedOperation = optimisticOperation
-    ? optimisticOperation.subOperations && optimisticOperation.subOperations.length > 0
-      ? optimisticOperation.subOperations[0]
-      : optimisticOperation
-    : null;
+  const concernedOperation =
+    transaction?.validators.length === 1 && optimisticOperation
+      ? optimisticOperation.subOperations && optimisticOperation.subOperations.length > 0
+        ? optimisticOperation.subOperations[0]
+        : optimisticOperation
+      : null;
 
   return (
     <Box horizontal alignItems="right">

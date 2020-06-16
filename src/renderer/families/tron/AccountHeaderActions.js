@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 import invariant from "invariant";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import {
@@ -20,6 +20,7 @@ import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { openModal } from "~/renderer/actions/modals";
 import ToolTip from "~/renderer/components/Tooltip";
 import useTheme from "~/renderer/hooks/useTheme";
+import { localeSelector } from "~/renderer/reducers/settings";
 
 const ButtonBase: ThemedComponent<*> = styled(Button)`
   height: 34px;
@@ -39,11 +40,13 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
   const currency = getAccountCurrency(account);
   const mainAccount = getMainAccount(account, parentAccount);
   const minAmount = 10 ** unit.magnitude;
+  const locale = useSelector(localeSelector);
 
   const formattedMinAmount = formatCurrencyUnit(unit, BigNumber(minAmount), {
     disableRounding: true,
     alwaysShowSign: false,
     showCode: true,
+    locale,
   });
 
   const { tronResources, spendableBalance } = mainAccount;

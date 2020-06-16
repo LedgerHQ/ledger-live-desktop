@@ -30,7 +30,7 @@ class ClaimRewardsModal extends PureComponent<{ name: string }, State> {
     const { stepId } = this.state;
     const { name } = this.props;
 
-    const isModalLocked = !["device", "confirmation"].includes(stepId);
+    const isModalLocked = ["device", "confirmation"].includes(stepId);
 
     return (
       <Modal

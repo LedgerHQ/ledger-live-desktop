@@ -92,20 +92,18 @@ export default function StepAmount({
   const bridge = getAccountBridge(account, parentAccount);
 
   const onChange = useCallback(
-    useCallback(
-      (resource: string) =>
-        onChangeTransaction(
-          bridge.updateTransaction(transaction, {
-            resource,
-          }),
-        ),
-      [bridge, transaction, onChangeTransaction],
-    ),
+    (resource: string) =>
+      onChangeTransaction(
+        bridge.updateTransaction(transaction, {
+          resource,
+        }),
+      ),
+    [bridge, transaction, onChangeTransaction],
   );
 
-  const selectBandwidth = useCallback(useCallback(() => onChange("BANDWIDTH"), [onChange]));
+  const selectBandwidth = useCallback(() => onChange("BANDWIDTH"), [onChange]);
 
-  const selectEnergy = useCallback(useCallback(() => onChange("ENERGY"), [onChange]));
+  const selectEnergy = useCallback(() => onChange("ENERGY"), [onChange]);
 
   const {
     unfreezeBandwidth,

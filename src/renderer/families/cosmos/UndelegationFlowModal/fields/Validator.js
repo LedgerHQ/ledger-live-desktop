@@ -1,71 +1,33 @@
 // @flow
-import invariant from "invariant";
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
-import type { Transaction } from "@ledgerhq/live-common/lib/families/cosmos/types";
+import { useCosmosDelegationsQuerySelector } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import type {
+  Transaction,
+  CosmosMappedDelegation,
+} from "@ledgerhq/live-common/lib/families/cosmos/types";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
 import Select from "~/renderer/components/Select";
 import Text from "~/renderer/components/Text";
-import { formatDelegations } from "../../Delegation";
-import type { FormattedDelegation } from "../../Delegation";
 
 type Props = {
   account: Account,
   transaction: Transaction,
-  onChange: (delegation: FormattedDelegation) => void,
+  onChange: (delegaiton: CosmosMappedDelegation) => void,
 };
 
 export default function ValidatorField({ account, transaction, onChange }: Props) {
   const { t } = useTranslation();
-
-  const [query, setQuery] = useState("");
-
-  const unit = useMemo(() => getAccountUnit(account), [account]);
-  const { validators } = useCosmosPreloadData();
-
-  const rawDelegations = account.cosmosResources && account.cosmosResources.delegations;
-  invariant(rawDelegations, "delegations is required");
-
-  const delegations = useMemo(
-    () =>
-      formatDelegations(rawDelegations, validators).map(d => ({
-        ...d,
-        formattedAmount: formatCurrencyUnit(unit, d.amount, {
-          disableRounding: true,
-          alwaysShowSign: false,
-          showCode: true,
-        }),
-      })),
-    [rawDelegations, unit, validators],
-  );
-
-  const options = useMemo(
-    () =>
-      delegations.filter(
-        // [TODO] better query test
-        ({ validator }) => !query || !validator || new RegExp(query, "gi").test(validator.name),
-      ),
-    [query, delegations],
-  );
-
-  const selectedValidator = useMemo(() => transaction.validators && transaction.validators[0], [
+  const { query, setQuery, options, value } = useCosmosDelegationsQuerySelector(
+    account,
     transaction,
-  ]);
-
-  const value = useMemo(
-    () =>
-      selectedValidator && delegations.find(({ address }) => address === selectedValidator.address),
-    [delegations, selectedValidator],
   );
 
   return (
-    <Box>
+    <Box mb={4}>
       <Label>{t("cosmos.undelegation.flow.steps.amount.fields.validator")}</Label>
       <Select
         value={value}
@@ -81,15 +43,16 @@ export default function ValidatorField({ account, transaction, onChange }: Props
 }
 
 type OptionRowProps = {
-  data: FormattedDelegation & { formattedAmount: string },
+  data: CosmosMappedDelegation,
 };
 
-function OptionRow({ data: { address, validator, formattedAmount } }: OptionRowProps, i) {
+function OptionRow({ data: { validatorAddress, validator, formattedAmount } }: OptionRowProps) {
+  const name = validator?.name ?? validatorAddress;
   return (
-    <Box key={address} horizontal alignItems="center" justifyContent="space-between">
+    <Box key={validatorAddress} horizontal alignItems="center" justifyContent="space-between">
       <Box horizontal alignItems="center">
-        <FirstLetterIcon label={validator?.name ?? address} mr={2} />
-        <Text ff="Inter|Medium">{validator?.name ?? address}</Text>
+        <FirstLetterIcon label={name} mr={2} />
+        <Text ff="Inter|Medium">{name}</Text>
       </Box>
       <Text ff="Inter|Regular">{formattedAmount}</Text>
     </Box>

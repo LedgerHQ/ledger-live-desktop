@@ -2,7 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
-
+import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { BigNumber } from "bignumber.js";
@@ -14,6 +14,7 @@ import Box from "~/renderer/components/Box/Box";
 import Text from "~/renderer/components/Text";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import ToolTip from "~/renderer/components/Tooltip";
+import { localeSelector } from "~/renderer/reducers/settings";
 
 const Wrapper: ThemedComponent<*> = styled(Box).attrs(() => ({
   horizontal: true,
@@ -58,6 +59,7 @@ type Props = {
 
 const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
   const discreet = useDiscreetMode();
+  const locale = useSelector(localeSelector);
   if (!account.tronResources) return null;
 
   const formatConfig = {
@@ -65,6 +67,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
     alwaysShowSign: false,
     showCode: true,
     discreet,
+    locale,
   };
 
   const {
