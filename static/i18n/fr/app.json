@@ -1009,6 +1009,7 @@
     },
     "undelegation": {
       "header": "Délégations interrompues",
+      "inactiveTooltip": "Les délégations intérrompues ne génèrent plus de récompenses.",
       "headerTooltip": "Les montants associés seront disponibles apres les 21 jours de délai",
       "flow": {
         "title": "Actifs de délégation interrompue",

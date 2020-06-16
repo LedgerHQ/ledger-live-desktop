@@ -243,7 +243,7 @@ export function UnbondingRow({
       </Column>
       <Column>
         <Box color="alertRed" pl={2}>
-          <ToolTip content={<Trans i18nKey="cosmos.delegation.inactiveTooltip" />}>
+          <ToolTip content={<Trans i18nKey="cosmos.undelegation.inactiveTooltip" />}>
             <ExclamationCircleThin size={14} />
           </ToolTip>
         </Box>
