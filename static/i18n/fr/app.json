@@ -119,7 +119,7 @@
   "account": {
     "lastOperations": "Dernières opérations",
     "contractAddress": "Contrat :",
-    "openInExplorer": "Ouvrir dans l'explorateur de fichiers",
+    "openInExplorer": "Ouvrir dans l'explorateur",
     "emptyState": {
       "title": "Vous n’avez pas encore de crypto-actifs ?",
       "desc": "Assurez-vous que l’application <1><0>{{managerAppName}}</0></1> est installée et commencez à recevoir.",
