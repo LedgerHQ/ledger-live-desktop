@@ -27,6 +27,8 @@ import {
 } from "~/renderer/modals/OperationDetails/styledComponents";
 import Box from "~/renderer/components/Box/Box";
 import Text from "~/renderer/components/Text";
+import FormattedVal from "~/renderer/components/FormattedVal";
+import CounterValue from "~/renderer/components/CounterValue";
 import { useDiscreetMode } from "~/renderer/components/Discreet";
 import { localeSelector } from "~/renderer/reducers/settings";
 
@@ -289,63 +291,63 @@ type Props = {
 };
 
 const RedelegateAmountCell = ({ operation, currency, unit }: Props) => {
-  const discreet = useDiscreetMode();
-  const locale = useSelector(localeSelector);
   const amount =
     operation.extra && operation.extra.validators
       ? BigNumber(operation.extra.validators[0].amount)
       : BigNumber(0);
 
-  if (amount.isZero()) return null;
+  return (
+    !amount.isZero() && (
+      <>
+        <FormattedVal
+          val={amount}
+          unit={unit}
+          showCode
+          fontSize={4}
+          color={"palette.text.shade80"}
+        />
 
-  const formattedAmount = formatCurrencyUnit(unit, amount, {
-    disableRounding: false,
-    alwaysShowSign: false,
-    showCode: false,
-    discreet,
-    locale,
-  });
-
-  return amount > 0 ? (
-    <Box vertical>
-      <Text ff="Inter|SemiBold" fontSize={4}>
-        <Trans i18nKey={"operationDetails.extra.redelegated"} />
-      </Text>
-      <Text ff="Inter|SemiBold" fontSize={4}>
-        ({formattedAmount})
-      </Text>
-    </Box>
-  ) : null;
+        <CounterValue
+          color="palette.text.shade60"
+          fontSize={3}
+          alwaysShowSign={false}
+          date={operation.date}
+          currency={currency}
+          value={amount}
+        />
+      </>
+    )
+  );
 };
 
 const UndelegateAmountCell = ({ operation, currency, unit }: Props) => {
-  const discreet = useDiscreetMode();
-  const locale = useSelector(localeSelector);
   const amount =
     operation.extra && operation.extra.validators
       ? BigNumber(operation.extra.validators[0].amount)
       : BigNumber(0);
 
-  if (amount.isZero()) return null;
+  return (
+    !amount.isZero() && (
+      <>
+        <FormattedVal
+          val={amount}
+          unit={unit}
+          showCode
+          fontSize={4}
+          color={"palette.text.shade80"}
+        />
 
-  const formattedAmount = formatCurrencyUnit(unit, amount, {
-    disableRounding: false,
-    alwaysShowSign: false,
-    showCode: false,
-    discreet,
-    locale,
-  });
-
-  return amount > 0 ? (
-    <Box vertical>
-      <Text ff="Inter|SemiBold" fontSize={4}>
-        <Trans i18nKey={"operationDetails.extra.undelegated"} />
-      </Text>
-      <Text ff="Inter|SemiBold" fontSize={4}>
-        ({formattedAmount})
-      </Text>
-    </Box>
-  ) : null;
+        <CounterValue
+          color="palette.text.shade60"
+          fontSize={3}
+          alwaysShowSign={false}
+          date={operation.date}
+          currency={currency}
+          value={amount}
+        />
+      </>
+    )
+  );
 };
 
 const amountCell: { [key: string]: ComponentType<any> } = {
