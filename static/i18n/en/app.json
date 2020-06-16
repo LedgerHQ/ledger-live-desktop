@@ -893,6 +893,7 @@
       "undelegate": "Undelegate",
       "redelegate": "Redelegate",
       "redelegateDisabledTooltip": "You can redelegate again <0>{{days}}</0>",
+      "redelegateMaxDisabledTooltip": "You cannot redelegate more than <0>7</0> validators at a time",
       "undelegateDisabledTooltip": "You cannot undelegate more than <0>7</0> validators at a time",
       "reward": "Claim rewards",
       "currentDelegation": "Delegated: <0>{{amount}}</0>",

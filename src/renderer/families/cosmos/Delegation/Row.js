@@ -131,15 +131,20 @@ export function Row({
         key: "MODAL_COSMOS_REDELEGATE",
         label: <Trans i18nKey="cosmos.delegation.redelegate" />,
         disabled: !_canRedelegate,
-        tooltip:
-          !_canRedelegate && formattedRedelegationDate ? (
+        tooltip: !_canRedelegate ? (
+          formattedRedelegationDate ? (
             <Trans
               i18nKey="cosmos.delegation.redelegateDisabledTooltip"
               values={{ days: formattedRedelegationDate }}
             >
               <b></b>
             </Trans>
-          ) : null,
+          ) : (
+            <Trans i18nKey="cosmos.delegation.redelegateMaxDisabledTooltip">
+              <b></b>
+            </Trans>
+          )
+        ) : null,
       },
       {
         key: "MODAL_COSMOS_UNDELEGATE",
