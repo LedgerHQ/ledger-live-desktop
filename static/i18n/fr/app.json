@@ -956,7 +956,9 @@
             "label": "Confirmation",
             "success": {
               "title": "Récompenses réclamées",
+              "titleCompound": "Récompenses déléguées",
               "text": "Vos récompenses ont été ajoutées à votre solde. Le solde de votre compte sera actualisé dès que la blockchain aura confirmé la transaction.",
+              "textCompound": "Vos récompenses de <0>{{amount}}</0> ont été automatiquement déléguées à <0>{{validator}}</0>",
               "cta": "Voir le détail"
             },
             "pending": {
@@ -1027,7 +1029,7 @@
             "title": "Confirmation",
             "success": {
               "title": "Actifs interrompus avec succès.",
-              "text": "Votre liste de validateurs sera actualisée dès que la blockchain aura confirmé la transaction.",
+              "description": "<0>{{amount}}</0> ont été transférés depuis <0>{{validator}}</0>",
               "cta": "Voir le détail"
             },
             "error": {
