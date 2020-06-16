@@ -23,7 +23,7 @@
     "selectExchange": "Sélectionner un service d'échange",
     "selectExchangeNoOption": "Aucun service d'échange correspondant à \"{{exchangeName}}\"",
     "selectExchangeNoOptionAtAll": "Aucun service d'échange trouvé",
-    "selectValidatorNoOption": "No validator matching \"{{accountName}}\"",
+    "selectValidatorNoOption": "Aucun validateur correspondant à \"{{accountName}}\"",
     "sortBy": "Trier par",
     "save": "Enregistrer",
     "lock": "Verrouiller",
@@ -78,7 +78,7 @@
       "FREEZE": "Gelé",
       "UNFREEZE": "Dégelé",
       "REWARD": "Récompense réclamée",
-      "FEES": "Fees"
+      "FEES": "Frais"
     }
   },
   "byteSize": {
@@ -117,7 +117,7 @@
     "tooltip": "Ajouter aux favoris"
   },
   "account": {
-    "lastOperations": "Latest operations",
+    "lastOperations": "Dernières opérations",
     "contractAddress": "Contrat :",
     "openInExplorer": "Ouvrir dans l'explorateur de fichiers",
     "emptyState": {
@@ -151,8 +151,8 @@
     "frozenAssetsTooltip": "Les actifs gelés sont utilisés dans le processus de vote de Tron. Cela représente votre nombre total de votes.",
     "bandwidthTooltip": "Geler des actifs pour gagner de la bandwidth",
     "energyTooltip": "Geler des actifs pour gagner de l'Energy",
-    "delegatedAssetsTooltip": "Delegated assets are used in the Cosmos voting process. This represents your total number of votes.",
-    "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
+    "delegatedAssetsTooltip": "Les actifs délégués sont utilisés dans le processus de vote Cosmos. Cela représente votre nombre total de votes.",
+    "undelegatingTooltip": "Les actifs dont la délégation est interrompue sont verrouillés pendant 21 jours avant d'être disponibles."
   },
   "exchange": {
     "title": "Acheter des cryptos",
@@ -221,7 +221,7 @@
       "desc": "Ajouter des comptes pour gérer plus de crypto-actifs",
       "createAccount": "Ajouter un compte"
     },
-    "recentActivity": "Latest operations",
+    "recentActivity": "Dernières opérations",
     "totalBalance": "Solde total"
   },
   "currentAddress": {
@@ -258,7 +258,7 @@
   "tokensList": {
     "title": "Tokens",
     "cta": "Ajouter un token",
-    "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
+    "placeholder": "Pour ajouter des tokens, envoyez-les simplement à votre adresse {{currencyName}}.",
     "link": "En savoir plus",
     "seeTokens": "Afficher les tokens ({{tokenCount}})",
     "hideTokens": "Cacher tokens ({{tokenCount}})",
@@ -362,7 +362,7 @@
     "confirmed": "Confirmée",
     "failed": "Échec",
     "notConfirmed": "Non confirmée",
-    "fees": "Fee",
+    "fees": "Frais",
     "noFees": "Aucun frais",
     "from": "De",
     "to": "Vers",
@@ -388,7 +388,7 @@
       "validators": "Validateurs",
       "redelegatedFrom": "Redélégué de",
       "redelegatedTo": "Redélégué à",
-      "redelegatedAmount": "Redelegated amount",
+      "redelegatedAmount": "Montant redélégué",
       "undelegatedFrom": "Délégation interrompue pour",
       "undelegatedAmount": "Montant de délégation interrompue",
       "rewardFrom": "Récompense de",
@@ -657,14 +657,14 @@
         "totalVotes": "Total des votes: {{total}}",
         "selected": "Sélectionné: {{total}}",
         "maxSelected": "Max sélectionné: {{total}}",
-        "allVotesAreUsed": "All assets are distributed",
-        "maxUsed": "Insufficient assets",
+        "allVotesAreUsed": "Tous les actifs sont distribués",
+        "maxUsed": "Fonds insuffisants",
         "superRepresentatives": "Super Representatives (SR)",
         "candidates": "Candidats",
         "estYield": "Rendement estimé",
         "srInfo": "SR ou Candidats?",
         "validators": "Validateurs ({{total}})",
-        "votes": "Assets available: {{total}}",
+        "votes": "Actifs disponibles: {{total}}",
         "noResults": "Aucun validateur trouvé pour \"<0>{{search}}</0>\"."
       },
       "connectDevice": {
@@ -877,129 +877,129 @@
   "cosmos": {
     "delegation": {
       "emptyState": {
-        "description": "You can earn ATOM rewards by delegating your assets.",
-        "info": "How Delegation works",
+        "description": "Vous pouvez gagner des récompenses ATOM en déléguant vos actifs.",
+        "info": "Comment fonctionne la délégation",
         "delegation": "Obtenez des récompenses"
       },
       "claimRewards": "Réclamer les récompenses",
       "claimAvailableRewards": "Réclamer {{amount}}",
-      "header": "Delegation(s)",
+      "header": "Délégation(s)",
       "Amount": "Montant",
       "noRewards": "Aucune récompense disponible",
-      "delegate": "Delegate more",
+      "delegate": "Déléguer plus",
       "undelegate": "Interrompre",
       "redelegate": "Redélégué",
-      "redelegateDisabledTooltip": "You can redelegate again <0>{{days}}</0>",
-      "redelegateMaxDisabledTooltip": "You cannot redelegate more than <0>7</0> validators at a time",
-      "undelegateDisabledTooltip": "You cannot undelegate more than <0>7</0> validators at a time",
-      "reward": "Claim rewards",
-      "currentDelegation": "Delegated: <0>{{amount}}</0>",
+      "redelegateDisabledTooltip": "Vous pouvez à nouveau redéléguer <0>{{days}}</0>",
+      "redelegateMaxDisabledTooltip": "Vous ne pouvez pas redéléguer plus de <0>7</0> validateurs à la fois",
+      "undelegateDisabledTooltip": "Vous ne pouvez pas interrompre la délégation plus de <0>7</0> validateurs à la fois",
+      "reward": "Réclamer les récompenses",
+      "currentDelegation": "Délégué : <0>{{amount}}</0>",
       "estYield": "Rend. est.",
-      "activeTooltip": "This validator is active and generates rewards",
-      "inactiveTooltip": "This validator is inactive and doesn't generate rewards",
-      "minSafeWarning": "To safely start delegating you need at least {{amount}}",
+      "activeTooltip": "Ce validateur est actif et génère des récompenses",
+      "inactiveTooltip": "Ce validateur est inactif et ne génère pas de récompenses",
+      "minSafeWarning": "Pour commencer à déléguer en toute sécurité, vous avez besoin d'au moins {{amount}}",
       "flow": {
-        "title": "Delegate more",
+        "title": "Déléguer plus",
         "steps": {
           "starter": {
-            "description": "You may earn rewards by delegating your ATOM to a validator.",
+            "description": "Vous pouvez gagner des récompenses en déléguant vos ATOM à un validateur.",
             "bullet": [
-              "You keep ownership of delegated assets",
-              "Delegate using your Ledger device",
-              "The undelegation process takes 21 days to finalize."
+              "Vous gardez la propriété des actifs délégués",
+              "Déléguer avec votre appareil Ledger",
+              "Le processus d'interruption de délégation prend 21 jours pour être finalisé."
             ],
             "warning": {
-              "description": "Choose your validator wisely. Part of your delegated assets may be destroyed if the validator does not behave appropriately."
+              "description": "Choisissez votre validateur judicieusement. Une partie de vos actifs délégués peut être détruite si le validateur ne se comporte pas correctement."
             }
           },
           "validator": {
-            "title": "Validators",
-            "feesInfo": "Selected amounts are fees included"
+            "title": "Validateurs",
+            "feesInfo": "Les montants sélectionnés incluent les frais"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "Appareil"
           },
           "confirmation": {
             "title": "Confirmation",
             "label": "Confirmation",
             "success": {
-              "title": "You have successfully delegated your assets",
-              "text": "Your account balance will update once the blockchain has confirmed the transaction.",
-              "cta": "View details"
+              "title": "Actifs délégués avec succès",
+              "text": "Le solde de votre compte sera actualisé dès que la blockchain aura confirmé la transaction.",
+              "cta": "Voir les détails"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Diffusion de la transaction..."
             },
-            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+            "broadcastError": "Votre transaction a peut-être échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée avant de réessayer."
           }
         }
       }
     },
     "claimRewards": {
       "flow": {
-        "title": "Claim rewards",
+        "title": "Réclamer les récompenses",
         "steps": {
           "claimRewards": {
-            "title": "Rewards",
+            "title": "Récompenses",
             "compound": "Compound",
-            "claim": "Cash in",
-            "compoundOrClaim": "Compound or cash in",
-            "compoundDescription": "Rewards will be added to delegated amount",
-            "claimDescription": "Rewards will be added to the available balance",
-            "compoundInfo": "You earned <0>{{amount}}</0>. By clicking Continue, they will be claimed now and automatically delegated to the same validator.",
-            "claimInfo": "You earned <0>{{amount}}</0> from the validator below. By clicking Continue, they will be claimed now and automatically added to the available balance.",
-            "selectLabel": "Select a delegation"
+            "claim": "Encaisser",
+            "compoundOrClaim": "Compound ou encaisser",
+            "compoundDescription": "Les récompenses seront ajoutées au montant délégué",
+            "claimDescription": "Les récompenses seront ajoutées au solde disponible",
+            "compoundInfo": "Vous avez obtenu <0>{{amount}}</0>. En cliquant sur Continuer, ils seront réclamés maintenant et automatiquement délégués au même validateur.",
+            "claimInfo": "Vous avez obtenu <0>{{amount}}</0> depuis le validateur ci-dessous. En cliquant sur Continuer, ils seront automatiquement ajoutés au solde disponible.",
+            "selectLabel": "Sélectionnez une délégation"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "Appareil"
           },
           "confirmation": {
             "title": "Confirmation",
             "label": "Confirmation",
             "success": {
-              "title": "Rewards cashed in successfully",
-              "titleCompound": "Rewards compounded successfully",
-              "text": "Your rewards have been added to your available balance",
-              "textCompound": "Your rewards <0>{{amount}}</0> have been automatically delegated to <0>{{validator}}</0>",
-              "cta": "View details"
+              "title": "Récompenses encaissées avec succès",
+              "titleCompound": "Compound des récompenses réussi",
+              "text": "Vos récompenses ont été ajoutées au solde disponible",
+              "textCompound": "Vos récompenses <0>{{amount}}</0> ont été automatiquement déléguées à <0>{{validator}}</0>",
+              "cta": "Voir les détails"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Diffusion de la transaction..."
             },
-            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+            "broadcastError": "Votre transaction a peut-être échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée avant de réessayer."
           }
         }
       }
     },
     "redelegation": {
       "flow": {
-        "title": "Redelegate assets",
+        "title": "Actifs redélégués",
         "steps": {
           "starter": {
-            "title": "Redelegation",
-            "description": "Use redelegation to easily change from one validator to another. But if you change your mind again, you will have to wait because redelegation triggers a 21-day timelock.",
-            "warning": "Choose your validator wisely.  Part of your delegated assets may be destroyed if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
-            "howDelegationWorks": "How delegation works?"
+            "title": "Redélégation",
+            "description": "Utilisez la redélégation pour passer facilement d'un validateur à un autre. Si vous changez d'avis, vous devrez attendre puisque la redélégation déclenche un verrouillage de 21 jours.",
+            "warning": "Choisissez votre validateur judicieusement. Une partie de vos actifs délégués peut être détruite si le validateur ne se comporte pas correctement. Vous pouvez avoir un maximum de <0>7 redélégations en attente</0>.",
+            "howDelegationWorks": "Comment fonctionne la délégation?"
           },
           "validators": {
-            "title": "Validators",
-            "currentDelegation": "Current delegation",
-            "newDelegation": "New delegation",
-            "chooseValidator": "Choose a validator",
-            "warning": "You will have to wait <0>21 days</0> to redelegate ATOM from the redelegated validator",
-            "selectInfo": "Redelegate assets from one validator to another. Redelegating allows your stake to continuously generate rewards.",
-            "searchPlaceholder": "Search by name or address",
-            "redelegationAmount": "Redelegation amount"
+            "title": "Validateurs",
+            "currentDelegation": "Délégation en cours",
+            "newDelegation": "Nouvelle délégation",
+            "chooseValidator": "Choisir un validateur",
+            "warning": "Vous devrez attendre <0>21 jours</0> pour redéléguer les ATOM depuis le validateur redélégué",
+            "selectInfo": "Actifs redélégués d'un validateur à un autre. Redéléguer permet à votre mise de générer continuellement des récompenses.",
+            "searchPlaceholder": "Rechercher par nom ou adresse",
+            "redelegationAmount": "Montant de la redélégation"
           },
           "device": {
-            "title": "Device"
+            "title": "Appareil"
           },
           "confirmation": {
             "title": "Confirmation",
             "success": {
-              "title": "You have successfully redelegated your assets",
-              "text": "The redelegation will update once the blockchain has confirmed the transaction",
-              "cta": "View details"
+              "title": "Actifs redélégués avec succès",
+              "text": "La redélégation sera mise à jour une fois que la blockchain aura confirmé la transaction",
+              "cta": "Voir les détails"
             },
             "pending": {
               "title": "Diffusion de la transaction..."
@@ -1010,16 +1010,16 @@
       }
     },
     "undelegation": {
-      "header": "Undelegation(s)",
-      "headerTooltip": "Available after the 21-day timelock",
-      "inactiveTooltip": "Undelegated validators are inactive and dont generate rewards anymore.",
+      "header": "Délégation(s) interrompue(s)",
+      "headerTooltip": "Disponible après le verrouillage de 21 jours",
+      "inactiveTooltip": "Les validateurs pour lesquels la délégation a été interrompue sont inactifs et ne génèrent plus de récompenses.",
       "flow": {
         "title": "Actifs de délégation interrompue",
         "steps": {
           "amount": {
             "title": "Montant",
-            "subtitle": "The undelegation process takes <0>21 days</0> to finalize.",
-            "warning": "Rewards will be immediately cashed in. The undelegated amount will be in the available balance after the <0>21-day timelock</0>.",
+            "subtitle": "Le processus d'interruption de délégation prend <0>21 jours</0> pour être finalisé.",
+            "warning": "Les récompenses seront immédiatement encaissées. Le montant de délégation interrompue sera dans le solde disponible après le <0>verrouillage de 21 jours</0>.",
             "fields": {
               "validator": "Validateur",
               "amount": "Montant à interrompre"
@@ -1032,10 +1032,10 @@
             "title": "Confirmation",
             "success": {
               "title": "Actifs interrompus avec succès.",
-              "description": "<0>{{amount}}</0> have been undelegated from <0>{{validator}}</0>",
+              "description": "<0>{{amount}}</0> ne sont plus délégués au <0>{{validator}}</0>",
               "cta": "Voir les détails"
             },
-            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+            "broadcastError": "Votre transaction a peut-être échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée avant de réessayer."
           }
         }
       }
@@ -1051,7 +1051,7 @@
     "value": "Valeur",
     "amount": "Montant",
     "delegated": "Délégué",
-    "completionDate": "Completion date",
+    "completionDate": "Date de fin de réalisation",
     "rewards": "Récompenses",
     "distribution": "Répartition",
     "duration": "Durée",
@@ -1573,10 +1573,10 @@
       "freeze": "Veuillez confirmer l'opération sur votre appareil pour geler les actifs",
       "unfreeze": "Veuillez confirmer l'opération sur votre appareil pour dégeler les actifs",
       "vote": "Veuillez confirmer l'opération sur votre appareil pour exprimer vos votes",
-      "delegate": "Please confirm the operation on your device to delegate your assets",
+      "delegate": "Veuillez confirmer l'opération sur votre appareil pour déléguer vos actifs",
       "undelegate": "Veuillez confirmer l'opération sur votre appareil pour interrompre la délégation",
-      "redelegate": "Please confirm the operation on your device to redelegate",
-      "claimRewardCompound": "Please confirm the operation on your device to compound your rewards"
+      "redelegate": "Veuillez confirmer l'opération sur votre appareil pour redéléguer",
+      "claimRewardCompound": "Veuillez confirmer l'opération sur votre appareil pour compound vos récompenses"
     },
     "recipientWording": {
       "send": "destinataire",
@@ -1609,8 +1609,8 @@
     },
     "cosmos": {
       "memo": "Memo",
-      "memoPlaceholder": "Optional",
-      "memoWarningText": "when using a memo, carefully check the information with the recipient"
+      "memoPlaceholder": "Facultatif",
+      "memoWarningText": "Lorsque vous utilisez un memo, vérifiez soigneusement les informations avec le destinataire"
     }
   },
   "errors": {
@@ -1631,83 +1631,83 @@
       "description": "Veuillez réessayer ou contacter le Support ({{reason}})"
     },
     "AmountRequired": {
-      "title": "Amount required"
+      "title": "Montant requis"
     },
     "NoAccessToCamera": {
       "title": "Veuillez vous assurer que votre système a une caméra qui n'est pas utilisée par une autre application, et que Ledger Live a la permission de l'utiliser.",
       "description": ""
     },
     "CosmosClaimRewardsFeesWarning": {
-      "title": "The amount of rewards are lower than the estimated fees required to claim them",
+      "title": "Le montant des récompenses est inférieur aux frais estimés requis pour les collecter",
       "description": ""
     },
     "CosmosBroadcastCodeInternal": {
-      "title": "Something went wrong (Error #1)",
-      "description": "Please contact Ledger Support"
+      "title": "Quelque chose s'est mal passé (Erreur #1)",
+      "description": "Veuillez contacter l’assistance Ledger"
     },
     "CosmosBroadcastCodeTxDecode": {
-      "title": "Something went wrong (Error #2)",
-      "description": "Please contact Ledger Support"
+      "title": "Quelque chose s'est mal passé (Erreur #2)",
+      "description": "Veuillez contacter l’assistance Ledger"
     },
     "CosmosBroadcastCodeInvalidSequence": {
-      "title": "Invalid sequence",
-      "description": "Please try your operation again"
+      "title": "Séquence invalide",
+      "description": "Veuillez réessayer votre opération"
     },
     "CosmosBroadcastCodeUnauthorized": {
-      "title": "Unauthorized signature",
-      "description": "This account is not authorized to sign this transaction"
+      "title": "Signature non autorisée",
+      "description": "Ce compte n'est pas autorisé à signer cette transaction"
     },
     "CosmosBroadcastCodeInsufficientFunds": {
-      "title": "Insufficient funds",
-      "description": "Make sure the account to debit has enough funds and try again"
+      "title": "Fonds insuffisants",
+      "description": "Assurez-vous que le compte à débiter ait suffisamment de fonds et réessayez"
     },
     "CosmosBroadcastCodeUnknownRequest": {
-      "title": "Something went wrong (Error #6)",
-      "description": "Please contact Ledger Support"
+      "title": "Quelque chose s'est mal passé (Erreur #6)",
+      "description": "Veuillez contacter l’assistance Ledger"
     },
     "CosmosBroadcastCodeInvalidAddress": {
-      "title": "Invalid address",
-      "description": "Please check the address and try again"
+      "title": "Adresse invalide",
+      "description": "Veuillez vérifier l'adresse et réessayer"
     },
     "CosmosBroadcastCodeInvalidPubKey": {
-      "title": "Something went wrong (Error #8)",
-      "description": "Please contact Ledger Support"
+      "title": "Quelque chose s'est mal passé (Erreur #8)",
+      "description": "Veuillez contacter l’assistance Ledger"
     },
     "CosmosBroadcastCodeUnknownAddress": {
-      "title": "Unknown address",
-      "description": "Please check the address and try again"
+      "title": "Adresse inconnue",
+      "description": "Veuillez vérifier l'adresse et réessayer"
     },
     "CosmosBroadcastCodeInsufficientCoins": {
-      "title": "Insufficient coins",
-      "description": "Make sure the account to debit has enough funds and try again"
+      "title": "Fonds insuffisants",
+      "description": "Assurez-vous que le compte à débiter ait suffisamment de fonds et réessayez"
     },
     "CosmosBroadcastCodeInvalidCoins": {
-      "title": "Something went wrong (Error #11)",
-      "description": "Please contact Ledger Support"
+      "title": "Quelque chose s'est mal passé (Erreur #11)",
+      "description": "Veuillez contacter l’assistance Ledger"
     },
     "CosmosBroadcastCodeOutOfGas": {
-      "title": "Something went wrong (Error #12)",
-      "description": "Please contact Ledger Support"
+      "title": "Quelque chose s'est mal passé (Erreur #12)",
+      "description": "Veuillez contacter l’assistance Ledger"
     },
     "CosmosBroadcastCodeMemoTooLarge": {
-      "title": "The Memo field is too long",
-      "description": "Please reduce the size of the memo text and try again"
+      "title": "Le champ Memo est trop long",
+      "description": "Veuillez réduire la taille du texte du memo et réessayer"
     },
     "CosmosBroadcastCodeInsufficientFee": {
-      "title": "Something went wrong (Error #14)",
-      "description": "Please contact Ledger Support"
+      "title": "Quelque chose s'est mal passé (Erreur #14)",
+      "description": "Veuillez contacter l’assistance Ledger"
     },
     "CosmosBroadcastCodeTooManySignatures": {
-      "title": "Something went wrong (Error #15)",
-      "description": "Please contact Ledger Support"
+      "title": "Quelque chose s'est mal passé (Erreur #15)",
+      "description": "Veuillez contacter l’assistance Ledger"
     },
     "CosmosBroadcastCodeGasOverflow": {
-      "title": "Something went wrong (Error #16)",
-      "description": "Please contact Ledger Support"
+      "title": "Quelque chose s'est mal passé (Erreur #16)",
+      "description": "Veuillez contacter le support Ledger"
     },
     "CosmosBroadcastCodeNoSignatures": {
-      "title": "Something went wrong (Error #17)",
-      "description": "Please contact Ledger Support"
+      "title": "Quelque chose s'est mal passé (Erreur #17)",
+      "description": "Veuillez contacter le support Ledger"
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} n'est pas pris en charge",
@@ -2067,7 +2067,7 @@
       "title": "Solde insuffisant pour déléguer"
     },
     "NotEnoughDelegationBalance": {
-      "title": "Insufficient balance to delegate"
+      "title": "Solde insuffisant pour déléguer"
     },
     "NotEnoughBalanceInParentAccount": {
       "title": "Solde insuffisant dans le compte parent"
