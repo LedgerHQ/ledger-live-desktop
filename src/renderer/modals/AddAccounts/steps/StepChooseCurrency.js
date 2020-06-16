@@ -43,12 +43,19 @@ const TokenTips = memo(function TokenTips({ currency }: { currency: TokenCurrenc
 });
 
 const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
-  const currencies = useMemo(() => listSupportedCurrencies().concat(listTokens()), []);
+  const currencies = useMemo(() => listSupportedCurrencies(), []);
+  const tokens = useMemo(() => listTokens(), []);
   return (
     <>
       {currency ? <CurrencyDownStatusAlert currency={currency} /> : null}
       {/* $FlowFixMe: onChange type is not good */}
-      <SelectCurrency currencies={currencies} autoFocus onChange={setCurrency} value={currency} />
+      <SelectCurrency
+        currencies={currencies}
+        tokens={tokens}
+        autoFocus
+        onChange={setCurrency}
+        value={currency}
+      />
       {currency && currency.type === "TokenCurrency" ? <TokenTips currency={currency} /> : null}
     </>
   );

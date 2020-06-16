@@ -14,6 +14,7 @@ import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 type Props<C: Currency> = {
   onChange: (?C) => void,
   currencies: C[],
+  tokens: C[],
   value?: C,
   placeholder?: string,
   autoFocus?: boolean,
@@ -29,6 +30,7 @@ const SelectCurrency = <C: Currency>({
   value,
   placeholder,
   currencies,
+  tokens,
   autoFocus,
   minWidth,
   width,
@@ -50,8 +52,8 @@ const SelectCurrency = <C: Currency>({
   );
 
   const options = useMemo(
-    () => cryptos.map(c => ({ ...c, value: c, label: c.name, currency: c })),
-    [cryptos],
+    () => cryptos.concat(tokens).map(c => ({ ...c, value: c, label: c.name, currency: c })),
+    [cryptos, tokens],
   );
 
   const fuseOptions = {
@@ -59,12 +61,14 @@ const SelectCurrency = <C: Currency>({
     keys: ["name", "ticker"],
     shouldSort: false,
   };
+
   const manualFilter = useCallback(() => {
     const fuse = new Fuse(options, fuseOptions);
     return searchInputValue.length > 0 ? fuse.search(searchInputValue) : options;
   }, [searchInputValue, options, fuseOptions]);
 
   const filteredOptions = manualFilter();
+
   return (
     <Select
       autoFocus={autoFocus}
