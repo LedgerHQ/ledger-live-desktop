@@ -144,7 +144,7 @@
     "bandwidth": "Bandwidth",
     "energy": "Energy",
     "delegatedAssets": "Actifs délégués",
-    "undelegating": "Interrompre délégation",
+    "undelegating": "Intérruption en cours",
     "availableBalanceTooltip": "Ce montant peut être envoyé à tout moment.",
     "frozenAssetsTooltip": "Les actifs gelés sont utilisés dans le processus de vote de Tron. Cela représente votre nombre total de votes.",
     "bandwidthTooltip": "Geler des actifs pour gagner de la bandwidth",
