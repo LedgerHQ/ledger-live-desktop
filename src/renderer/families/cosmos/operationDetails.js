@@ -236,8 +236,6 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
         v => v.validatorAddress === validator.address,
       );
 
-      const formattedAmount = formatCurrencyUnit(unit, BigNumber(validator.amount), formatConfig);
-
       ret = (
         <>
           <B />
@@ -248,13 +246,6 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
             <Address onClick={redirectAddress(currency, validator.address)}>
               {formattedValidator ? formattedValidator.name : validator.address}
             </Address>
-          </OpDetailsData>
-          <B />
-          <OpDetailsData>
-            <OpDetailsTitle>
-              <Trans i18nKey={"operationDetails.extra.rewardAmount"} />
-            </OpDetailsTitle>
-            {formattedAmount}
           </OpDetailsData>
         </>
       );
