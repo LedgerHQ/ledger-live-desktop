@@ -171,6 +171,14 @@ const Body = ({
   const error = transactionError || bridgeError || status.errors.amount;
   const warning = status.warnings ? Object.values(status.warnings)[0] : null;
 
+  const errorSteps = [];
+
+  if (transactionError) {
+    errorSteps.push(2);
+  } else if (bridgeError) {
+    errorSteps.push(0);
+  }
+
   const stepperProps = {
     title: t("cosmos.claimRewards.flow.title"),
     device,
@@ -180,9 +188,9 @@ const Body = ({
     signed,
     stepId,
     steps,
-    errorSteps: [],
+    errorSteps,
     disabledSteps: [],
-    hideBreadcrumb: !!error || !!warning,
+    hideBreadcrumb: (!!error || !!warning) && ["claimRewards"].includes(stepId),
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,

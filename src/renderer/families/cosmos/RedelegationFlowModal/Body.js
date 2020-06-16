@@ -183,6 +183,14 @@ const Body = ({
 
   const error = transactionError || bridgeError;
 
+  const errorSteps = [];
+
+  if (transactionError) {
+    errorSteps.push(2);
+  } else if (bridgeError) {
+    errorSteps.push(0);
+  }
+
   const stepperProps = {
     title: t("cosmos.redelegation.flow.title"),
     device,
@@ -192,9 +200,11 @@ const Body = ({
     signed,
     stepId,
     steps,
-    errorSteps: [],
+    errorSteps,
     disabledSteps: [],
-    hideBreadcrumb: !!error || ["starter", "destinationValidators"].includes(stepId),
+    hideBreadcrumb:
+      (!!error && ["validators"].includes(stepId)) ||
+      ["starter", "destinationValidators"].includes(stepId),
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,
