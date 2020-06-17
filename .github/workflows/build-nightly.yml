@@ -1,8 +1,7 @@
 name: nightly build
 on:
-  push:
-    tags:
-      - "*nightly*"
+  schedule:
+    - cron: "0 22 * * 1-5"
 
 jobs:
   nightly-macos:
