@@ -900,7 +900,7 @@
       "estYield": "est. yield",
       "activeTooltip": "This validator is active and generates rewards",
       "inactiveTooltip": "This validator is inactive and doesn't generate rewards",
-      "minSafeWarning": "To safely start delegating you need at least {{amount}}",
+      "minSafeWarning": "Not enough funds",
       "flow": {
         "title": "Delegate more",
         "steps": {
