@@ -37,7 +37,7 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: Get short SHA
         id: slug
-        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+        run: echo "::set-output name=sha8::${GITHUB_SHA:0:7}"
       - name: make local version
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
       - name: build the app
@@ -89,7 +89,7 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: Get short SHA
         id: slug
-        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+        run: echo "::set-output name=sha8::${GITHUB_SHA:0:7}"
       - name: make local version
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
       - name: build the app
@@ -142,7 +142,7 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: Get short SHA
         id: slug
-        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+        run: echo "::set-output name=sha8::$(git rev-parse --short HEAD)"
       - name: make local version
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
       - name: build the app
