@@ -35,15 +35,11 @@ jobs:
         id: version
       - name: set beta name
         uses: ./.github/actions/change-product-name
-      - uses: ledgerhq/actions/get-pr-number@v1.0.0
-        id: pr
-        if: github.event_name == 'pull_request'
-      - name: make local version (pr)
-        run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
-        if: github.event_name == 'pull_request'
-      - name: make local version (push)
-        run: yarn version --new-version=${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
-        if: github.event_name == 'push'
+      - name: Get short SHA
+        id: slug
+        run: echo "::set-output name=sha8::${GITHUB_SHA:0:7}"
+      - name: make local version
+        run: yarn version --new-version=${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
       - name: build the app
         run: yarn nightly
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
@@ -91,15 +87,11 @@ jobs:
         id: version
       - name: set beta name
         uses: ./.github/actions/change-product-name
-      - uses: ledgerhq/actions/get-pr-number@v1.0.0
-        id: pr
-        if: github.event_name == 'pull_request'
-      - name: make local version (pr)
-        run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
-        if: github.event_name == 'pull_request'
-      - name: make local version (push)
-        run: yarn version --new-version=${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
-        if: github.event_name == 'push'
+      - name: Get short SHA
+        id: slug
+        run: echo "::set-output name=sha8::${GITHUB_SHA:0:7}"
+      - name: make local version
+        run: yarn version --new-version=${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
       - name: build the app
         run: yarn nightly
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
@@ -148,15 +140,11 @@ jobs:
         id: version
       - name: set beta name
         uses: ./.github/actions/change-product-name
-      - uses: ledgerhq/actions/get-pr-number@v2.0.0
-        id: pr
-        if: github.event_name == 'pull_request'
-      - name: make local version (pr)
-        run: yarn version --new-version=${{ steps.version.outputs.clean }}-pr.${{ steps.pr.outputs.pr }}
-        if: github.event_name == 'pull_request'
-      - name: make local version (push)
-        run: yarn version --new-version=${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
-        if: github.event_name == 'push'
+      - name: Get short SHA
+        id: slug
+        run: echo "::set-output name=sha8::$(git rev-parse --short HEAD)"
+      - name: make local version
+        run: yarn version --new-version=${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
       - name: build the app
         run: yarn nightly
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
