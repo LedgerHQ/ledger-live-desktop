@@ -14,6 +14,7 @@ import { openModal } from "~/renderer/actions/modals";
 import { useDispatch } from "react-redux";
 import Track from "~/renderer/analytics/Track";
 import { track } from "~/renderer/analytics/segment";
+import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 
 const WidgetContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -55,23 +56,26 @@ type CoinifyWidgetConfig = {
 
 type Props = {
   account?: Account,
+  parentAccount?: Account,
   mode: string,
   onReset?: () => void,
 };
 
-const CoinifyWidget = ({ account, mode, onReset }: Props) => {
+const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
   const [widgetLoaded, setWidgetLoaded] = useState(false);
   const colors = useTheme("colors");
   const { t } = useTranslation();
   const widgetRef: { current: null | HTMLIFrameElement } = useRef(null);
 
+  const currency = account ? getAccountCurrency(account) : null;
+  const mainAccount = account ? getMainAccount(account, parentAccount) : null;
   const coinifyConfig = getConfig();
   const widgetConfig: CoinifyWidgetConfig = {
     //    fontColor: colors.darkBlue,
     primaryColor: colors.wallet,
     partnerId: coinifyConfig.partnerId,
-    cryptoCurrencies: account ? account.currency.ticker : null,
-    address: account ? account.freshAddress : null,
+    cryptoCurrencies: currency ? currency.ticker : null,
+    address: mainAccount ? mainAccount.freshAddress : null,
     targetPage: mode,
     addressConfirmation: true,
   };
@@ -89,12 +93,14 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
     widgetConfig.transferInMedia = "";
   }
 
+  console.log(widgetConfig);
+
   useEffect(() => {
     if (mode === "buy" && account) {
-      track("Coinify Start Buy Widget", { currencyName: account.currency.name });
+      track("Coinify Start Buy Widget", { currencyName: currency.name });
     }
     if (mode === "sell" && account) {
-      track("Coinify Start Sell Widget", { currencyName: account.currency.name });
+      track("Coinify Start Sell Widget", { currencyName: currency.name });
     }
     if (mode === "trade-history") {
       track("Coinify Start History Widget");
@@ -110,15 +116,15 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
           type: "event",
           event: "trade.receive-account-confirmed",
           context: {
-            address: account.freshAddress,
+            address: mainAccount.freshAddress,
             status: "accepted",
           },
         },
         coinifyConfig.host,
       );
-      track("Coinify Confirm Buy End", { currencyName: account.currency.name });
+      track("Coinify Confirm Buy End", { currencyName: currency.name });
     }
-  }, [coinifyConfig.host, account]);
+  }, [coinifyConfig.host, mainAccount]);
 
   const handleOnCancel = useCallback(() => {
     if (account && widgetRef.current) {
@@ -127,14 +133,14 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
           type: "event",
           event: "trade.receive-account-confirmed",
           context: {
-            address: account.freshAddress,
+            address: mainAccount.freshAddress,
             status: "rejected",
           },
         },
         coinifyConfig.host,
       );
     }
-  }, [coinifyConfig.host, account]);
+  }, [coinifyConfig.host, mainAccount]);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -146,32 +152,33 @@ const CoinifyWidget = ({ account, mode, onReset }: Props) => {
       if (type !== "event") return;
       switch (event) {
         case "trade.receive-account-changed":
-          if (context.address === account.freshAddress) {
+          if (context.address === mainAccount.freshAddress) {
             dispatch(
               openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", {
                 account,
+                parentAccount,
                 onResult: handleOnResult,
                 onCancel: handleOnCancel,
                 verifyAddress: true,
               }),
             );
             if (account) {
-              track("Coinify Confirm Buy Start", { currencyName: account.currency.name });
+              track("Coinify Confirm Buy Start", { currencyName: currency.name });
             }
           } else {
             // Address mismatch, potential attack
           }
           break;
         case "trade.trade-placed":
-          track("Coinify Widget Event Trade Placed", { currencyName: account.currency.name });
+          track("Coinify Widget Event Trade Placed", { currencyName: currency.name });
           break;
       }
     }
 
     window.addEventListener("message", onMessage, false);
     return () => window.removeEventListener("message", onMessage, false);
-  }, [account, url, coinifyConfig.host, dispatch, handleOnCancel, handleOnResult]);
-  //         sandbox="allow-scripts allow-same-origin allow-forms"
+  }, [mainAccount, url, coinifyConfig.host, dispatch, handleOnCancel, handleOnResult]);
+
   return (
     <WidgetContainer>
       <Track event="Coinify Start Widget" onMount widgetMode={mode} />

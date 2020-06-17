@@ -1,15 +1,15 @@
 // @flow
 
 import invariant from "invariant";
-import React, { useState, useMemo, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import Exchange from "~/renderer/icons/Exchange";
 import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
 import { useTranslation } from "react-i18next";
 import { getAccountsForCurrency, useCoinifyCurrencies } from "~/renderer/screens/exchange/hooks";
-import { SelectAccount } from "~/renderer/components/SelectAccount";
+// import { SelectAccount } from "~/renderer/components/SelectAccount";
+import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
 import Label from "~/renderer/components/Label";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Button from "~/renderer/components/Button";
@@ -20,8 +20,9 @@ import FakeLink from "~/renderer/components/FakeLink";
 import PlusIcon from "~/renderer/icons/Plus";
 import { openModal } from "~/renderer/actions/modals";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
 import { track } from "~/renderer/analytics/segment";
+import type { AccountLike } from "@ledgerhq/live-common/lib/types/account";
 
 const Container: ThemedComponent<{}> = styled.div`
   width: 365px;
@@ -63,7 +64,8 @@ type Props = {
 
 type State = {
   currency: ?(CryptoCurrency | TokenCurrency),
-  account: ?Account,
+  account: ?AccountLike,
+  parentAccount: ?Account,
 };
 
 const AccountSelectorLabel = styled(Label)`
@@ -77,20 +79,25 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
   const allAccounts = useSelector(accountsSelector);
 
   const currencies = useCoinifyCurrencies();
-  const [{ currency, account }, setState] = useState<State>(() => {
-    const defaultCurrency = currencies.length ? currencies[0] : null;
+  const [{ currency, account, parentAccount }, setState] = useState<State>(() => {
+    const defaultCurrency = currencies[0];
 
     return {
       currency: defaultCurrency,
       account: null,
+      parentAccount: null,
     };
   });
 
+  const mainCurrency = currency ? (currency.type === "TokenCurrency" ? currency.parentCurrency : currency) : null;
   // this effect make sure to set the bottom select to a newly created account
   useEffect(() => {
-    if (!currency) return;
-    if (account && account.currency === currency) return; // already of the current currency
+    if (!mainCurrency) return;
+    if (currency && account && getAccountCurrency(account).id === currency.id) return; // already of the current currency
     setState(oldState => {
+      if (!currency) {
+        return oldState
+      }
       const accountsForDefaultCurrency = getAccountsForCurrency(currency, allAccounts);
       const defaultAccount = accountsForDefaultCurrency.length
         ? accountsForDefaultCurrency[0]
@@ -101,14 +108,9 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
         account: defaultAccount,
       };
     });
-  }, [allAccounts, account, currency]);
+  }, [allAccounts, account, mainCurrency]);
 
   const dispatch = useDispatch();
-
-  const accounts = useMemo(() => (currency ? getAccountsForCurrency(currency, allAccounts) : []), [
-    currency,
-    allAccounts,
-  ]);
 
   const openAddAccounts = useCallback(() => {
     dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
@@ -149,15 +151,18 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
             </FakeLink>
           </AccountSelectorLabel>
           <SelectAccount
-            accounts={accounts}
-            isDisabled={accounts.length === 0}
-            onChange={(account, tokenAccount) => {
+            accounts={allAccounts}
+            currency={currency}
+            mandatoryTokens
+            onChange={(account, parentAccount) => {
+              console.log(account, parentAccount);
               setState(oldState => ({
                 ...oldState,
-                account: account ? getMainAccount(account, tokenAccount) : null, // supporting tokenAccount would need to change this!
+                account: account,
+                parentAccount: parentAccount,
               }));
             }}
-            value={account}
+            value={parentAccount || account}
           />
         </FormContent>
         <FormContent>
@@ -166,10 +171,10 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
             onClick={() => {
               if (account) {
                 track("Buy Crypto Continue Button", {
-                  currencyName: account.currency.name,
+                  currencyName: getAccountCurrency(account).name,
                   isEmpty: isAccountEmpty(account),
                 });
-                selectAccount(account);
+                selectAccount(account, parentAccount);
               }
             }}
             disabled={!account}

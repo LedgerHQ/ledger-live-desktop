@@ -20,9 +20,10 @@ const BuyContainer: ThemedComponent<{}> = styled.div`
 const Buy = () => {
   const [state, setState] = useState({
     account: null,
+    parentAccount: null,
   });
 
-  const { account } = state;
+  const { account, parentAccount } = state;
 
   const dispatch = useDispatch();
 
@@ -32,16 +33,23 @@ const Buy = () => {
     });
   }, []);
 
-  const confirmAccount = useCallback((confirmedAccount: Account) => {
+  const confirmAccount = useCallback((account: Account, parentAccount: Account) => {
     setState(oldState => ({
       ...oldState,
-      account: confirmedAccount,
+      account: account,
+      parentAccount: parentAccount,
     }));
   }, []);
 
   const selectAccount = useCallback(
-    account => {
-      dispatch(openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", { account, onResult: confirmAccount }));
+    (account, parentAccount) => {
+      dispatch(
+        openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", {
+          account,
+          parentAccount,
+          onResult: confirmAccount,
+        }),
+      );
     },
     [dispatch, confirmAccount],
   );
@@ -50,7 +58,7 @@ const Buy = () => {
     <BuyContainer>
       <TrackPage category="Buy Crypto" />
       {account ? (
-        <CoinifyWidget account={account} mode="buy" onReset={reset} />
+        <CoinifyWidget account={account} parentAccount={parentAccount} mode="buy" onReset={reset} />
       ) : (
         <SelectAccountAndCurrency selectAccount={selectAccount} />
       )}
