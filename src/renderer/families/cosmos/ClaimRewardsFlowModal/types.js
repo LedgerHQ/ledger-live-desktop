@@ -20,6 +20,7 @@ export type StepProps = {
   openModal: (key: string, config?: any) => void,
   optimisticOperation: *,
   error: *,
+  warning: *,
   signed: boolean,
   transaction: ?Transaction,
   status: TransactionStatus,

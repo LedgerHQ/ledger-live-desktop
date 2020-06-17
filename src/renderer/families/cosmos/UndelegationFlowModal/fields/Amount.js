@@ -29,10 +29,11 @@ export default function AmountField({
   const unit = getAccountUnit(account);
 
   const [currentValidator, setCurrentValidator] = useState(validator);
+  const [focused, setFocused] = useState(false);
   const [initialAmount, setInitialAmount] = useState(validator ? validator.amount : BigNumber(0));
 
   useEffect(() => {
-    if (validator && validator.address !== currentValidator.address) {
+    if (validator && validator.validatorAddress !== currentValidator.validatorAddress) {
       setCurrentValidator(validator);
       setInitialAmount(validator.amount);
     }
@@ -42,15 +43,15 @@ export default function AmountField({
     () => [
       {
         label: "25%",
-        value: initialAmount.multipliedBy(0.25),
+        value: initialAmount.multipliedBy(0.25).integerValue(),
       },
       {
         label: "50%",
-        value: initialAmount.multipliedBy(0.5),
+        value: initialAmount.multipliedBy(0.5).integerValue(),
       },
       {
         label: "75%",
-        value: initialAmount.multipliedBy(0.75),
+        value: initialAmount.multipliedBy(0.75).integerValue(),
       },
       {
         label: "100%",
@@ -60,11 +61,12 @@ export default function AmountField({
     [initialAmount],
   );
 
-  const error = useMemo(() => Object.values(errors || {})[0], [errors]);
-  const warning = useMemo(() => Object.values(warnings || {})[0], [warnings]);
+  const error = errors.amount || errors.redelegation || errors.unbonding;
+
+  const warning = useMemo(() => focused && Object.values(warnings || {})[0], [focused, warnings]);
 
   return (
-    <Box mt={5}>
+    <Box my={2}>
       <Label>{t("cosmos.undelegation.flow.steps.amount.fields.amount")}</Label>
       <InputCurrency
         autoFocus={false}
@@ -74,6 +76,7 @@ export default function AmountField({
         unit={unit}
         value={amount}
         onChange={onChange}
+        onChangeFocus={() => setFocused(true)}
         renderLeft={<InputLeft>{unit.code}</InputLeft>}
         renderRight={
           <InputRight>
@@ -125,7 +128,9 @@ const AmountButton: ThemedComponent<{ error: boolean, active: boolean }> = style
       ? p.theme.colors.palette.primary.main
       : p.theme.colors.palette.action.hover};
   color: ${p =>
-    p.active
+    p.error
+      ? p.theme.colors.alertRed
+      : p.active
       ? p.theme.colors.palette.primary.contrastText
       : p.theme.colors.palette.primary.main}!important;
   border: none;

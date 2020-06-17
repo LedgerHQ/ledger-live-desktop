@@ -1,6 +1,7 @@
 // @flow
 import invariant from "invariant";
 import React, { useState, useCallback } from "react";
+import { BigNumber } from "bignumber.js";
 import { compose } from "redux";
 import { connect, useDispatch } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
@@ -27,6 +28,7 @@ import { closeModal, openModal } from "~/renderer/actions/modals";
 import Stepper from "~/renderer/components/Stepper";
 import StepStarter, { StepStarterFooter } from "./steps/StepStarter";
 import StepValidators, { StepValidatorsFooter } from "./steps/StepValidators";
+import StepDestinationValidators from "./steps/StepDestinationValidators";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
@@ -56,13 +58,6 @@ type Props = OwnProps & StateProps;
 
 const steps: Array<St> = [
   {
-    id: "starter",
-    label: <Trans i18nKey="cosmos.redelegation.flow.steps.starter.title" />,
-    component: StepStarter,
-    noScroll: true,
-    footer: StepStarterFooter,
-  },
-  {
     id: "validators",
     label: <Trans i18nKey="cosmos.redelegation.flow.steps.validators.title" />,
     component: StepValidators,
@@ -80,6 +75,22 @@ const steps: Array<St> = [
     label: <Trans i18nKey="cosmos.redelegation.flow.steps.confirmation.title" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
+  },
+  {
+    id: "destinationValidators",
+    label: <Trans i18nKey="cosmos.redelegation.flow.steps.validators.title" />,
+    component: StepDestinationValidators,
+    noScroll: true,
+    excludeFromBreadcrumb: true,
+    onBack: ({ transitionTo }: StepProps) => transitionTo("validators"),
+  },
+  {
+    id: "starter",
+    label: <Trans i18nKey="cosmos.redelegation.flow.steps.starter.title" />,
+    component: StepStarter,
+    noScroll: true,
+    excludeFromBreadcrumb: true,
+    footer: StepStarterFooter,
   },
 ];
 
@@ -121,16 +132,18 @@ const Body = ({
 
     invariant(account && account.cosmosResources, "cosmos: account and cosmos resources required");
 
+    const source = account.cosmosResources?.delegations.find(
+      d => d.validatorAddress === validatorAddress,
+    );
+
     const bridge = getAccountBridge(account, undefined);
 
     const t = bridge.createTransaction(account);
 
     const transaction = bridge.updateTransaction(t, {
       mode: "redelegate",
-      validators: [],
+      validators: [{ address: "", amount: source?.amount ?? BigNumber(0) }],
       cosmosSourceValidator: validatorAddress,
-      /** @TODO remove this once the bridge handles it */
-      recipient: account.freshAddress,
     });
 
     return { account, parentAccount: undefined, transaction };
@@ -143,6 +156,7 @@ const Body = ({
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId]);
 
   const handleRetry = useCallback(() => {
+    setTransactionError(null);
     onChangeStepId("validators");
   }, [onChangeStepId]);
 
@@ -169,6 +183,14 @@ const Body = ({
 
   const error = transactionError || bridgeError;
 
+  const errorSteps = [];
+
+  if (transactionError) {
+    errorSteps.push(2);
+  } else if (bridgeError) {
+    errorSteps.push(0);
+  }
+
   const stepperProps = {
     title: t("cosmos.redelegation.flow.title"),
     device,
@@ -178,9 +200,11 @@ const Body = ({
     signed,
     stepId,
     steps,
-    errorSteps: [],
+    errorSteps,
     disabledSteps: [],
-    hideBreadcrumb: !!error,
+    hideBreadcrumb:
+      (!!error && ["validators"].includes(stepId)) ||
+      ["starter", "destinationValidators"].includes(stepId),
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,

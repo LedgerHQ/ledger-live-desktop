@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback, useMemo } from "react";
 import invariant from "invariant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
@@ -35,6 +35,7 @@ import moment from "moment";
 import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
 import { useDiscreetMode } from "~/renderer/components/Discreet";
+import { localeSelector } from "~/renderer/reducers/settings";
 
 type Props = {
   account: Account,
@@ -53,6 +54,7 @@ const Wrapper = styled(Box).attrs(() => ({
 
 const Delegation = ({ account }: Props) => {
   const dispatch = useDispatch();
+  const locale = useSelector(localeSelector);
 
   const superRepresentatives = useTronSuperRepresentatives();
 
@@ -68,6 +70,7 @@ const Delegation = ({ account }: Props) => {
     disableRounding: true,
     alwaysShowSign: false,
     showCode: true,
+    locale,
   });
 
   const { tronResources, spendableBalance } = account;
@@ -81,6 +84,7 @@ const Delegation = ({ account }: Props) => {
     alwaysShowSign: false,
     showCode: true,
     discreet,
+    locale,
   });
 
   const formattedVotes = formatVotes(votes, superRepresentatives);

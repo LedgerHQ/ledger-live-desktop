@@ -32,7 +32,7 @@ export default function StepStarter({
 }: StepProps) {
   invariant(account && account.cosmosResources && transaction, "account and transaction required");
   return (
-    <Box flow={4} mx={4}>
+    <Box flow={4}>
       <TrackPage category="Redelegation Flow" name="Step Starter" />
       <Box flow={1} alignItems="center">
         <Box mb={4}>
@@ -69,11 +69,6 @@ export function StepStarterFooter({
   transaction,
 }: StepProps) {
   invariant(account, "account required");
-  const { errors } = status;
-  const hasErrors = Object.keys(errors).length;
-  const canNext = !bridgePending && !hasErrors;
-
-  // @TODO add in the support popover info
   return (
     <>
       <LinkWithExternalIcon
@@ -84,7 +79,7 @@ export function StepStarterFooter({
         <Button mr={1} secondary onClick={onClose}>
           <Trans i18nKey="common.cancel" />
         </Button>
-        <Button disabled={!canNext} primary onClick={() => transitionTo("validators")}>
+        <Button primary onClick={() => transitionTo("validators")}>
           <Trans i18nKey="common.continue" />
         </Button>
       </Box>

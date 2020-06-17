@@ -1,14 +1,22 @@
 // @flow
 import invariant from "invariant";
 import React, { useCallback, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { withTranslation } from "react-i18next";
+import { compose } from "redux";
+import { connect, useDispatch } from "react-redux";
+import { createStructuredSelector } from "reselect";
+
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+
+import type { TFunction } from "react-i18next";
 import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
+import type { StepId } from "./types";
+import type { Device } from "~/renderer/reducers/devices";
+
 import logger from "~/logger/logger";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import { closeModal, openModal } from "~/renderer/actions/modals";
@@ -16,27 +24,48 @@ import Track from "~/renderer/analytics/Track";
 import Stepper from "~/renderer/components/Stepper";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { useSteps } from "./steps";
-import type { StepId } from "./types";
 
-type Props = {
+type OwnProps = {|
   account: Account,
   stepId: StepId,
   onClose: () => void,
   onChangeStepId: StepId => void,
-  name: string,
   validatorAddress: string,
+  name: string,
+|};
+
+type StateProps = {|
+  t: TFunction,
+  device: ?Device,
+  accounts: Account[],
+  device: ?Device,
+  closeModal: string => void,
+  openModal: string => void,
+|};
+
+type Props = OwnProps & StateProps;
+
+const mapStateToProps = createStructuredSelector({
+  device: getCurrentDevice,
+});
+
+const mapDispatchToProps = {
+  closeModal,
+  openModal,
 };
 
-export default function Body({
+function Body({
+  t,
   account: accountProp,
   stepId,
   onChangeStepId,
+  closeModal,
+  openModal,
+  device,
   name,
   validatorAddress,
 }: Props) {
-  const { t } = useTranslation();
   const dispatch = useDispatch();
-  const device = useSelector(getCurrentDevice);
 
   const [optimisticOperation, setOptimisticOperation] = useState(null);
   const [transactionError, setTransactionError] = useState(null);
@@ -65,8 +94,6 @@ export default function Body({
           address: validatorAddress,
           amount,
         })),
-      /** @TODO remove this once the bridge handles it */
-      recipient: accountProp.freshAddress,
     };
     const transaction = bridge.updateTransaction(initTx, newTx);
 
@@ -77,14 +104,15 @@ export default function Body({
   const error = transactionError || bridgeError;
 
   const handleRetry = useCallback(() => {
+    setTransactionError(null);
     onChangeStepId("amount");
   }, [onChangeStepId]);
 
   const handleStepChange = useCallback(({ id }) => onChangeStepId(id), [onChangeStepId]);
 
   const handleCloseModal = useCallback(() => {
-    dispatch(closeModal(name));
-  }, [dispatch, name]);
+    closeModal(name);
+  }, [name, closeModal]);
 
   const handleOperationBroadcasted = useCallback(
     (optimisticOperation: Operation) => {
@@ -107,6 +135,14 @@ export default function Body({
     setTransactionError(error);
   }, []);
 
+  const errorSteps = [];
+
+  if (transactionError) {
+    errorSteps.push(2);
+  } else if (bridgeError) {
+    errorSteps.push(0);
+  }
+
   const stepperProps = {
     title: t("cosmos.undelegation.flow.title"),
     device,
@@ -115,9 +151,9 @@ export default function Body({
     signed,
     stepId,
     steps,
-    errorSteps: [],
+    errorSteps,
     disabledSteps: [],
-    hideBreadcrumb: !!error,
+    hideBreadcrumb: !!error && ["amount"].includes(stepId),
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,
@@ -140,3 +176,10 @@ export default function Body({
     </Stepper>
   );
 }
+
+const C: React$ComponentType<OwnProps> = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation(),
+)(Body);
+
+export default C;

@@ -12,6 +12,10 @@ jobs:
   type-checking:
     runs-on: ubuntu-latest
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.4.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@master
         with:
@@ -19,17 +23,62 @@ jobs:
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: run headless tests
-        uses: ledgerhq/actions/run-headless@v1.2.0
-      - name: upload diffs
-        uses: actions/upload-artifact@v1
+        uses: ./.github/actions/run-headless
+      - name: check
+        if: always()
+        run: |
+          cd tests/specs/__image_snapshots__
+          ls -la
+      - name: upload diffs to imgur
+        if: failure()
+        uses: ./.github/actions/upload-images
+        id: imgur
+        with:
+          path: tests/specs/__image_snapshots__/__diff_output__
+      - name: prepare comment body
+        if: failure()
+        id: comment
+        uses: ledgerhq/actions/prepare-comment-body@v2.0.0
+        with:
+          images: ${{ steps.imgur.outputs.images }}
+      - name: create markdown file for commenting
+        id: create
+        if: github.event_name == 'pull_request' && failure()
+        run: |
+          mkdir -p artifacts
+          cat > artifacts/message.md <<EOF
+
+          PR to merge $GITHUB_HEAD_REF $GITHUB_SHA -> $GITHUB_BASE_REF
+
+          ## Diff output
+          ${{ steps.comment.outputs.body }}
+
+          Updated screenshots for your PR can be downloaded here:
+          Workflow [$GITHUB_WORKFLOW](https://github.com/LedgerHQ/ledger-live-desktop/actions/runs/$GITHUB_RUN_ID)
+
+          EOF
+          echo "::set-output name=artifact::1"
+      - name: save PR message as artifact
+        if: steps.create.outputs.artifact == '1' && failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: pr_message
+          path: artifacts
+      - name: generate new screenshots
+        if: failure()
+        uses: ./.github/actions/run-headless
+        with:
+          should-update-screenshots: 1
+      - name: upload new screenshots
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
-          name: "diff_output"
-          path: tests/specs/__image_snapshots__/__diff_output__
+          name: screenshots
+          path: tests/specs/__image_snapshots__

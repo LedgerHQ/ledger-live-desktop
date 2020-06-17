@@ -23,6 +23,7 @@
     "selectExchange": "选择交易所",
     "selectExchangeNoOption": "不存在与 \"{{exchangeName}}\" 匹配的交易",
     "selectExchangeNoOptionAtAll": "未找到交易所",
+    "selectValidatorNoOption": "No validator matching \"{{accountName}}\"",
     "sortBy": "排序方式",
     "save": "保存",
     "lock": "锁定",
@@ -76,7 +77,8 @@
       "VOTE": "Voted",
       "FREEZE": "Frozen",
       "UNFREEZE": "Unfrozen",
-      "REWARD": "Claimed reward"
+      "REWARD": "Claimed reward",
+      "FEES": "Fees"
     }
   },
   "byteSize": {
@@ -115,7 +117,7 @@
     "tooltip": "星标账户"
   },
   "account": {
-    "lastOperations": "近期操作",
+    "lastOperations": "Latest operations",
     "contractAddress": "合同：",
     "openInExplorer": "打开区块链浏览器",
     "emptyState": {
@@ -149,8 +151,8 @@
     "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
     "bandwidthTooltip": "Freeze assets to gain bandwidth",
     "energyTooltip": "Freeze assets to gain energy",
-    "delegatedAssetsTooltip": "These are your currently delegated assets",
-    "undelegatingTooltip": "These are your assets currently being undelegated"
+    "delegatedAssetsTooltip": "Delegated assets are used in the Cosmos voting process. This represents your total number of votes.",
+    "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
   },
   "exchange": {
     "title": "Buy crypto",
@@ -219,7 +221,7 @@
       "desc": "添加更多的加密资产账户",
       "createAccount": "添加账户"
     },
-    "recentActivity": "近期操作",
+    "recentActivity": "Latest operations",
     "totalBalance": "总余额"
   },
   "currentAddress": {
@@ -256,7 +258,7 @@
   "tokensList": {
     "title": "代币",
     "cta": "添加代币",
-    "placeholder": "如要添加代币，您只需将代币发送至您的 Ethereum 地址。",
+    "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
     "link": "了解更多",
     "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "隐藏代币 ({{tokenCount}})",
@@ -360,7 +362,7 @@
     "confirmed": "已确认",
     "failed": "失败",
     "notConfirmed": "未确认",
-    "fees": "费用",
+    "fees": "Fee",
     "noFees": "无费用",
     "from": "自",
     "to": "至",
@@ -384,15 +386,14 @@
       "votes": "Votes ({{number}})",
       "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
       "validators": "Validators",
-      "delegated": "Delegated ({{amount}})",
-      "redelegated": "Redelegated ({{amount}})",
       "redelegatedFrom": "Redelegated from",
       "redelegatedTo": "Redelegated to",
-      "undelegated": "Undelegated ({{amount}})",
+      "redelegatedAmount": "Redelegated amount",
       "undelegatedFrom": "Undelegated from",
       "undelegatedAmount": "Undelegated amount",
       "rewardFrom": "Reward from",
-      "rewardAmount": "Amount collected"
+      "rewardAmount": "Amount collected",
+      "memo": "Memo"
     }
   },
   "operationList": {
@@ -656,14 +657,14 @@
         "totalVotes": "Total votes: {{total}}",
         "selected": "Selected: {{total}}",
         "maxSelected": "Max selected: {{total}}",
-        "allVotesAreUsed": "All votes are used",
-        "maxUsed": "Max votes: {{total}}",
+        "allVotesAreUsed": "All assets are distributed",
+        "maxUsed": "Insufficient assets",
         "superRepresentatives": "Super Representatives (SR)",
         "candidates": "Candidates",
         "estYield": "est. yield",
         "srInfo": "SR or Candidates?",
         "validators": "Validators ({{total}})",
-        "votes": "Votes available: {{total}}",
+        "votes": "Assets available: {{total}}",
         "noResults": "No validators found for \"<0>{{search}}</0>\"."
       },
       "connectDevice": {
@@ -876,37 +877,44 @@
   "cosmos": {
     "delegation": {
       "emptyState": {
-        "description": "Delegate your assets to one or more validators to start earning rewards.",
-        "info": "How Delegating works",
+        "description": "You can earn ATOM rewards by delegating your assets.",
+        "info": "How Delegation works",
         "delegation": "Earn rewards"
       },
       "claimRewards": "Claim rewards",
       "claimAvailableRewards": "Claim {{amount}}",
-      "header": "Delegations",
+      "header": "Delegation(s)",
       "Amount": "Amount",
       "noRewards": "No rewards available",
-      "delegate": "Delegate",
+      "delegate": "Delegate more",
       "undelegate": "Undelegate",
       "redelegate": "Redelegate",
-      "reward": "Collect rewards",
-      "votingPower": "Voting power: {{amount}}%",
+      "redelegateDisabledTooltip": "You can redelegate again <0>{{days}}</0>",
+      "redelegateMaxDisabledTooltip": "You cannot redelegate more than <0>7</0> validators at a time",
+      "undelegateDisabledTooltip": "You cannot undelegate more than <0>7</0> validators at a time",
+      "reward": "Claim rewards",
+      "currentDelegation": "Delegated: <0>{{amount}}</0>",
       "estYield": "est. yield",
+      "activeTooltip": "This validator is active and generates rewards",
+      "inactiveTooltip": "This validator is inactive and doesn't generate rewards",
+      "minSafeWarning": "To safely start delegating you need at least {{amount}}",
       "flow": {
-        "title": "Delegate assets",
+        "title": "Delegate more",
         "steps": {
           "starter": {
-            "description": "Delegate your ATOM to earn rewards while keeping full security  and control on your assets.",
+            "description": "You may earn rewards by delegating your ATOM to a validator.",
             "bullet": [
-              "Delegated assets stay yours",
-              "You’ll have to wait for 21 days to complete an undelegation",
-              "Delegate securely with your Ledger device"
+              "You keep ownership of delegated assets",
+              "Delegate using your Ledger device",
+              "The undelegation process takes 21 days to finalize."
             ],
             "warning": {
-              "description": "Delegate ATOM asset can imply some losses if the chosen delegator doesn’t act rightfully on the network. "
+              "description": "Choose your validator wisely. Part of your delegated assets may be destroyed if the validator does not behave appropriately."
             }
           },
           "validator": {
-            "title": "Validators"
+            "title": "Validators",
+            "feesInfo": "Selected amounts are fees included"
           },
           "connectDevice": {
             "title": "Device"
@@ -915,8 +923,8 @@
             "title": "Confirmation",
             "label": "Confirmation",
             "success": {
-              "title": "Delegation sent",
-              "text": "Delegation transaction broadcasted successfully. You should earn your first rewards soon depending on the validator.",
+              "title": "You have successfully delegated your assets",
+              "text": "Your account balance will update once the blockchain has confirmed the transaction.",
               "cta": "View details"
             },
             "pending": {
@@ -934,11 +942,12 @@
           "claimRewards": {
             "title": "Rewards",
             "compound": "Compound",
-            "claim": "Claim",
-            "compoundOrClaim": "Compound or claim",
-            "compoundDescription": "NEEDS COMPOUND DESC TEXT",
-            "claimDescription": "NEEDS CLAIM DESC TEXT",
-            "compoundInfo": "You earned <0>{{amount}}</0> by delegation assets, they will be claimed now and automatically redelegated to the same validator",
+            "claim": "Cash in",
+            "compoundOrClaim": "Compound or cash in",
+            "compoundDescription": "Rewards will be added to delegated amount",
+            "claimDescription": "Rewards will be added to the available balance",
+            "compoundInfo": "You earned <0>{{amount}}</0>. By clicking Continue, they will be claimed now and automatically delegated to the same validator.",
+            "claimInfo": "You earned <0>{{amount}}</0> from the validator below. By clicking Continue, they will be claimed now and automatically added to the available balance.",
             "selectLabel": "Select a delegation"
           },
           "connectDevice": {
@@ -948,8 +957,10 @@
             "title": "Confirmation",
             "label": "Confirmation",
             "success": {
-              "title": "Rewards claimed",
-              "text": "Your rewards have been added to your balance",
+              "title": "Rewards cashed in successfully",
+              "titleCompound": "Rewards compounded successfully",
+              "text": "Your rewards have been added to your available balance",
+              "textCompound": "Your rewards <0>{{amount}}</0> have been automatically delegated to <0>{{validator}}</0>",
               "cta": "View details"
             },
             "pending": {
@@ -966,8 +977,8 @@
         "steps": {
           "starter": {
             "title": "Redelegation",
-            "description": "Redelegate assets from one validator to another. Redelegating allows your stake to continuously generate rewards.",
-            "warning": "Once redelegated, the ATOM can’t be redelegated for a <0>21 days period</0>. You can only have <0>7 pending redelegations</0> at the same time.",
+            "description": "Use redelegation to easily change from one validator to another. But if you change your mind again, you will have to wait because redelegation triggers a 21-day timelock.",
+            "warning": "Choose your validator wisely.  Part of your delegated assets may be destroyed if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
             "howDelegationWorks": "How delegation works?"
           },
           "validators": {
@@ -987,7 +998,7 @@
             "title": "Confirmation",
             "success": {
               "title": "You have successfully redelegated your assets",
-              "text": "NEED TEXT HERE",
+              "text": "The redelegation will update once the blockchain has confirmed the transaction",
               "cta": "View details"
             },
             "pending": {
@@ -999,11 +1010,16 @@
       }
     },
     "undelegation": {
+      "header": "Undelegation(s)",
+      "headerTooltip": "Available after the 21-day timelock",
+      "inactiveTooltip": "Undelegated validators are inactive and dont generate rewards anymore.",
       "flow": {
         "title": "Undelegate assets",
         "steps": {
           "amount": {
             "title": "Amount",
+            "subtitle": "The undelegation process takes <0>21 days</0> to finalize.",
+            "warning": "Rewards will be immediately cashed in. The undelegated amount will be in the available balance after the <0>21-day timelock</0>.",
             "fields": {
               "validator": "Validator",
               "amount": "Amount to undelegate"
@@ -1016,12 +1032,10 @@
             "title": "Confirmation",
             "success": {
               "title": "You have successfully undelegated your assets.",
-              "description": "🚨 NEED THIS TEXT HERE 🚨",
+              "description": "<0>{{amount}}</0> have been undelegated from <0>{{validator}}</0>",
               "cta": "View details"
             },
-            "error": {
-              "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
-            }
+            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
           }
         }
       }
@@ -1037,6 +1051,7 @@
     "value": "Value",
     "amount": "Amount",
     "delegated": "Delegated",
+    "completionDate": "Completion date",
     "rewards": "Rewards",
     "distribution": "Distribution",
     "duration": "Duration",
@@ -1558,10 +1573,10 @@
       "freeze": "Please confirm the operation on your device to freeze assets",
       "unfreeze": "Please confirm the operation on your device to unfreeze your assets",
       "vote": "Please confirm the operation on your device to cast your votes",
-      "delegate": "You have successfully delegated your assets. Please confirm the operation on your device to cast your votes",
+      "delegate": "Please confirm the operation on your device to delegate your assets",
       "undelegate": "Please confirm the operation on your device to undelegate",
-      "redelegate": "You have successfully redelegated your assets. Please confirm the operation on your device to cast your votes",
-      "claimRewardCompound": "Please confirm the operation on your device to coumpound your rewards."
+      "redelegate": "Please confirm the operation on your device to redelegate",
+      "claimRewardCompound": "Please confirm the operation on your device to compound your rewards"
     },
     "recipientWording": {
       "send": "recipient",
@@ -1591,6 +1606,11 @@
       },
       "whatsMemo": "What is a memo?",
       "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+    },
+    "cosmos": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional",
+      "memoWarningText": "when using a memo, carefully check the information with the recipient"
     }
   },
   "errors": {
@@ -1610,9 +1630,84 @@
       "title": "不支持该账户。",
       "description": "请重试或联系客服 ({{reason}})"
     },
+    "AmountRequired": {
+      "title": "Amount required"
+    },
     "NoAccessToCamera": {
       "title": "请确保您的系统有未被另一个应用程序使用的摄像头，且 LedgerLive 有权使用它。",
       "description": ""
+    },
+    "CosmosClaimRewardsFeesWarning": {
+      "title": "The amount of rewards are lower than the estimated fees required to claim them",
+      "description": ""
+    },
+    "CosmosBroadcastCodeInternal": {
+      "title": "Something went wrong (Error #1)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeTxDecode": {
+      "title": "Something went wrong (Error #2)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeInvalidSequence": {
+      "title": "Invalid sequence",
+      "description": "Please try your operation again"
+    },
+    "CosmosBroadcastCodeUnauthorized": {
+      "title": "Unauthorized signature",
+      "description": "This account is not authorized to sign this transaction"
+    },
+    "CosmosBroadcastCodeInsufficientFunds": {
+      "title": "Insufficient funds",
+      "description": "Make sure the account to debit has enough funds and try again"
+    },
+    "CosmosBroadcastCodeUnknownRequest": {
+      "title": "Something went wrong (Error #6)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeInvalidAddress": {
+      "title": "Invalid address",
+      "description": "Please check the address and try again"
+    },
+    "CosmosBroadcastCodeInvalidPubKey": {
+      "title": "Something went wrong (Error #8)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeUnknownAddress": {
+      "title": "Unknown address",
+      "description": "Please check the address and try again"
+    },
+    "CosmosBroadcastCodeInsufficientCoins": {
+      "title": "Insufficient coins",
+      "description": "Make sure the account to debit has enough funds and try again"
+    },
+    "CosmosBroadcastCodeInvalidCoins": {
+      "title": "Something went wrong (Error #11)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeOutOfGas": {
+      "title": "Something went wrong (Error #12)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeMemoTooLarge": {
+      "title": "The Memo field is too long",
+      "description": "Please reduce the size of the memo text and try again"
+    },
+    "CosmosBroadcastCodeInsufficientFee": {
+      "title": "Something went wrong (Error #14)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeTooManySignatures": {
+      "title": "Something went wrong (Error #15)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeGasOverflow": {
+      "title": "Something went wrong (Error #16)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeNoSignatures": {
+      "title": "Something went wrong (Error #17)",
+      "description": "Please contact Ledger Support"
     },
     "CurrencyNotSupported": {
       "title": "不支持 {{currencyName}}",
@@ -1969,6 +2064,9 @@
       "title": "Invalid XRP Destination tag"
     },
     "NotEnoughBalanceToDelegate": {
+      "title": "Insufficient balance to delegate"
+    },
+    "NotEnoughDelegationBalance": {
       "title": "Insufficient balance to delegate"
     },
     "NotEnoughBalanceInParentAccount": {

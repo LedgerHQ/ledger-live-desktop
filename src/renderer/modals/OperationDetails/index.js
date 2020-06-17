@@ -23,6 +23,8 @@ import {
 import {
   findOperationInAccount,
   getOperationAmountNumber,
+  getOperationConfirmationNumber,
+  getOperationConfirmationDisplayableNumber,
 } from "@ledgerhq/live-common/lib/operation";
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 
@@ -125,7 +127,8 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
   const dispatch = useDispatch();
 
   const mainAccount = getMainAccount(account, parentAccount);
-  const { extra, hash, date, senders, type, fee, recipients } = operation;
+  const { extra, hash, date, senders, type, fee, recipients: _recipients } = operation;
+  const recipients = _recipients.filter(Boolean);
   const { name } = mainAccount;
 
   const currency = getAccountCurrency(account);
@@ -138,7 +141,8 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
     marketIndicator,
     isNegative,
   });
-  const confirmations = operation.blockHeight ? mainAccount.blockHeight - operation.blockHeight : 0;
+  const confirmations = getOperationConfirmationNumber(operation, mainAccount);
+  const confirmationsString = getOperationConfirmationDisplayableNumber(operation, mainAccount);
   const isConfirmed = confirmations >= confirmationsNb;
 
   const specific = byFamiliesOperationDetails[mainAccount.currency.family];
@@ -420,7 +424,9 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                     ? t("operationDetails.confirmed")
                     : t("operationDetails.notConfirmed")}
                 </Box>
-                {hasFailed ? null : <Box>{`(${confirmations})`}</Box>}
+                {hasFailed ? null : (
+                  <Box>{`${confirmationsString ? `(${confirmationsString})` : ``}`}</Box>
+                )}
               </OpDetailsData>
             </Box>
           </Box>
@@ -439,31 +445,34 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
             <OpDetailsTitle>{t("operationDetails.from")}</OpDetailsTitle>
             <DataList lines={uniqueSenders} t={t} />
           </Box>
-          <B />
+
           {recipients.length ? (
-            <Box>
-              <Box horizontal>
-                <OpDetailsTitle>{t("operationDetails.to")}</OpDetailsTitle>
-                {recipients.length > 1 ? (
-                  <Link>
-                    <FakeLink
-                      underline
-                      fontSize={3}
-                      ml={2}
-                      color="palette.text.shade80"
-                      onClick={() => openURL(urls.multipleDestinationAddresses)}
-                      iconFirst
-                    >
-                      <Box mr={1}>
-                        <IconExternalLink size={12} />
-                      </Box>
-                      {t("operationDetails.multipleAddresses")}
-                    </FakeLink>
-                  </Link>
-                ) : null}
+            <>
+              <B />
+              <Box>
+                <Box horizontal>
+                  <OpDetailsTitle>{t("operationDetails.to")}</OpDetailsTitle>
+                  {recipients.length > 1 ? (
+                    <Link>
+                      <FakeLink
+                        underline
+                        fontSize={3}
+                        ml={2}
+                        color="palette.text.shade80"
+                        onClick={() => openURL(urls.multipleDestinationAddresses)}
+                        iconFirst
+                      >
+                        <Box mr={1}>
+                          <IconExternalLink size={12} />
+                        </Box>
+                        {t("operationDetails.multipleAddresses")}
+                      </FakeLink>
+                    </Link>
+                  ) : null}
+                </Box>
+                <DataList lines={recipients} t={t} />
               </Box>
-              <DataList lines={recipients} t={t} />
-            </Box>
+            </>
           ) : null}
           <OpDetailsExtra extra={extra} type={type} account={account} />
         </Box>

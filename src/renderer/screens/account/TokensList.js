@@ -3,7 +3,10 @@
 import React, { PureComponent } from "react";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/types/portfolio";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account/helpers";
-import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
+import {
+  listTokensForCryptoCurrency,
+  listTokenTypesForCryptoCurrency,
+} from "@ledgerhq/live-common/lib/currencies";
 import styled from "styled-components";
 import { Trans, withTranslation } from "react-i18next";
 import { withRouter } from "react-router-dom";
@@ -49,6 +52,7 @@ const EmptyState: ThemedComponent<{}> = styled.div`
   border-radius: 4px;
   display: flex;
   flex-direction: row;
+  align-items: center;
   > :first-child {
     flex: 1;
   }
@@ -99,10 +103,15 @@ class TokensList extends PureComponent<Props> {
 
     if (!isTokenAccount && isEmpty) return null;
 
-    const url =
-      currency && currency.type === "TokenCurrency"
-        ? supportLinkByTokenType[currency.tokenType]
-        : null;
+    let url;
+    let firstToken;
+    if (currency && currency.type !== "TokenCurrency") {
+      const tokens = listTokensForCryptoCurrency(currency);
+      if (tokens && tokens.length > 0) {
+        firstToken = tokens[0];
+        url = supportLinkByTokenType[tokens[0].tokenType];
+      }
+    }
 
     return (
       <Box mb={50}>
@@ -117,13 +126,18 @@ class TokensList extends PureComponent<Props> {
             <Placeholder>
               {url ? (
                 <Text color="palette.text.shade80" ff="Inter|SemiBold" fontSize={4}>
-                  <Trans i18nKey={"tokensList.placeholder"} />{" "}
+                  <Trans
+                    i18nKey={"tokensList.placeholder"}
+                    values={{ currencyName: currency.name }}
+                  />{" "}
                   <LabelWithExternalIcon
                     color="wallet"
                     ff="Inter|SemiBold"
                     onClick={() => {
-                      openURL(url);
-                      track("More info on Manage ERC20 tokens");
+                      if (url) {
+                        openURL(url);
+                        track(`More info on Manage ${firstToken.name} tokens`);
+                      }
                     }}
                     label={t("tokensList.link")}
                   />

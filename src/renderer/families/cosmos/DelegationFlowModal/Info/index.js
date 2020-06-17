@@ -8,6 +8,8 @@ import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { openModal, closeModal } from "~/renderer/actions/modals";
 import EarnRewardsInfoModal from "~/renderer/components/EarnRewardsInfoModal";
 import InfoBox from "~/renderer/components/InfoBox";
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
 
 type Props = {
   name?: string,
@@ -28,7 +30,9 @@ export default function CosmosEarnRewardsInfoModal({ name, account, parentAccoun
     );
   }, [parentAccount, account, dispatch, name]);
 
-  const onLearnMore = useCallback(() => {}, []);
+  const onLearnMore = useCallback(() => {
+    openURL(urls.cosmosStakingRewards);
+  }, []);
 
   return (
     <EarnRewardsInfoModal

@@ -1,4 +1,4 @@
-name: generate jest screenshots
+name: generate screenshots
 on:
   push:
     branches:
@@ -22,9 +22,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: check if PR is not screenshots already
-        uses: ledgerhq/actions/check-pr-screenshots@v1.2.0
+        uses: ledgerhq/actions/check-pr-screenshots@v2.0.0
       - name: generate new screenshots
-        uses: ledgerhq/actions/run-headless@v1.2.0
+        uses: ./.github/actions/run-headless
         with:
           should-update-screenshots: 1
       - name: check diff
@@ -35,9 +35,10 @@ jobs:
         with:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          title: "[Screenshots] new screenshots for ${{ github.sha }}"
+          title: "[Screenshots] $GITHUB_HEAD_REF $GITHUB_SHA -> $GITHUB_BASE_REF"
           body: |
-            Auto generated screenshots for ${{ github.sha }} by ${{ github.actor }}
+            Auto generated screenshots for ${{ github.sha }}
+            by ${{ github.actor }}
           assignees: ${{ github.actor }}
           reviewers: ${{ github.actor }}
           branch: new-screenshots-${{ github.sha }}

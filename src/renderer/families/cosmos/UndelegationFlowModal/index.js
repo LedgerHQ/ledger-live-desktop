@@ -19,7 +19,7 @@ export default function UndelegationModal({ name }: Props) {
     setStepId(id);
   }, []);
 
-  const isModalLocked = !["device", "confirmation"].includes(stepId);
+  const isModalLocked = ["device", "confirmation"].includes(stepId);
 
   return (
     <Modal

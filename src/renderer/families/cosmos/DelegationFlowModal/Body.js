@@ -112,22 +112,13 @@ const Body = ({
 
     invariant(account && account.cosmosResources, "cosmos: account and cosmos resources required");
 
-    const { cosmosResources } = account;
-
-    const delegations = cosmosResources.delegations || [];
-
     const bridge = getAccountBridge(account, undefined);
 
     const t = bridge.createTransaction(account);
 
     const transaction = bridge.updateTransaction(t, {
       mode: "delegate",
-      validators: delegations.map(({ validatorAddress, amount }) => ({
-        address: validatorAddress,
-        amount,
-      })),
-      /** @TODO remove this once the bridge handles it */
-      recipient: account.freshAddress,
+      validators: [],
     });
 
     return { account, parentAccount: undefined, transaction };
@@ -140,6 +131,7 @@ const Body = ({
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId]);
 
   const handleRetry = useCallback(() => {
+    setTransactionError(null);
     onChangeStepId("castDelegations");
   }, [onChangeStepId]);
 
@@ -166,6 +158,14 @@ const Body = ({
 
   const error = transactionError || bridgeError;
 
+  const errorSteps = [];
+
+  if (transactionError) {
+    errorSteps.push(2);
+  } else if (bridgeError) {
+    errorSteps.push(0);
+  }
+
   const stepperProps = {
     title: t("cosmos.delegation.flow.title"),
     device,
@@ -175,9 +175,9 @@ const Body = ({
     signed,
     stepId,
     steps,
-    errorSteps: [],
+    errorSteps,
     disabledSteps: [],
-    hideBreadcrumb: !!error,
+    hideBreadcrumb: !!error && ["castDelegations"].includes(stepId),
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,
