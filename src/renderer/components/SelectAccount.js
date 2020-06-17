@@ -106,7 +106,6 @@ const AccountOption = React.memo(function AccountOption({
           val={account.balance}
           unit={unit}
           showCode
-          disableRounding
         />
       </Box>
     </Box>
