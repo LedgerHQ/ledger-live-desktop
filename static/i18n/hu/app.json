@@ -897,7 +897,7 @@
       "estYield": "est. yield",
       "activeTooltip": "This validator is active and generates rewards",
       "inactiveTooltip": "This validator is inactive and doesn't generate rewards",
-      "minSafeWarning": "To safely start delegating you need at least {{amount}}",
+      "minSafeWarning": "Not enough funds",
       "flow": {
         "title": "Delegate more",
         "steps": {
@@ -1012,7 +1012,7 @@
     "undelegation": {
       "header": "Undelegation(s)",
       "headerTooltip": "Available after the 21-day timelock",
-      "inactiveTooltip": "Undelegated validators are inactive and dont generate rewards anymore.",
+      "inactiveTooltip": "Undelegated validators are inactive and don't generate rewards anymore.",
       "flow": {
         "title": "Undelegate assets",
         "steps": {

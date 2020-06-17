@@ -897,7 +897,7 @@
       "estYield": "Rend. est.",
       "activeTooltip": "Ce validateur est actif et génère des récompenses",
       "inactiveTooltip": "Ce validateur est inactif et ne génère pas de récompenses",
-      "minSafeWarning": "Pour commencer à déléguer en toute sécurité, vous avez besoin d'au moins {{amount}}",
+      "minSafeWarning": "Fonds insuffisants",
       "flow": {
         "title": "Déléguer plus",
         "steps": {
