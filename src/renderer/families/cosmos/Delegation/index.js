@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback } from "react";
 import invariant from "invariant";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
@@ -10,12 +10,7 @@ import {
   useCosmosPreloadData,
   useCosmosMappedDelegations,
 } from "@ledgerhq/live-common/lib/families/cosmos/react";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import {
-  mapUnbondings,
-  COSMOS_MIN_SAFE,
-  canDelegate,
-} from "@ledgerhq/live-common/lib/families/cosmos/logic";
+import { mapUnbondings, canDelegate } from "@ledgerhq/live-common/lib/families/cosmos/logic";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 
 import { urls } from "~/config/urls";
@@ -28,7 +23,6 @@ import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import IconChartLine from "~/renderer/icons/ChartLine";
 import { Header, UnbondingHeader } from "./Header";
 import { Row, UnbondingRow } from "./Row";
-import { localeSelector } from "~/renderer/reducers/settings";
 
 import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
@@ -52,7 +46,6 @@ const Wrapper = styled(Box).attrs(() => ({
 
 const Delegation = ({ account }: Props) => {
   const dispatch = useDispatch();
-  const locale = useSelector(localeSelector);
 
   const { cosmosResources } = account;
   invariant(cosmosResources, "cosmos account expected");
@@ -69,7 +62,6 @@ const Delegation = ({ account }: Props) => {
 
   const { validators } = useCosmosPreloadData();
   const unit = getAccountUnit(account);
-  const minSafeAmount = formatCurrencyUnit(unit, COSMOS_MIN_SAFE, { showCode: true, locale });
 
   /** @TODO move this to common with a useCosmosMappedUnbondings */
   const mappedUnbondings = mapUnbondings(unbondings, validators, unit);
@@ -143,14 +135,7 @@ const Delegation = ({ account }: Props) => {
             {hasDelegations ? (
               <ToolTip
                 content={
-                  !delegationEnabled ? (
-                    <Trans
-                      i18nKey="cosmos.delegation.minSafeWarning"
-                      values={{
-                        amount: minSafeAmount,
-                      }}
-                    />
-                  ) : null
+                  !delegationEnabled ? <Trans i18nKey="cosmos.delegation.minSafeWarning" /> : null
                 }
               >
                 <Button mr={2} disabled={!delegationEnabled} primary small onClick={onDelegate}>
@@ -208,14 +193,7 @@ const Delegation = ({ account }: Props) => {
           <Box>
             <ToolTip
               content={
-                !delegationEnabled ? (
-                  <Trans
-                    i18nKey="cosmos.delegation.minSafeWarning"
-                    values={{
-                      amount: minSafeAmount,
-                    }}
-                  />
-                ) : null
+                !delegationEnabled ? <Trans i18nKey="cosmos.delegation.minSafeWarning" /> : null
               }
             >
               <Button primary small disabled={!delegationEnabled} onClick={onEarnRewards}>

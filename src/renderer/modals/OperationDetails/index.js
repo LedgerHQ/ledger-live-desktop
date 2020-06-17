@@ -23,6 +23,8 @@ import {
 import {
   findOperationInAccount,
   getOperationAmountNumber,
+  getOperationConfirmationNumber,
+  getOperationConfirmationDisplayableNumber,
 } from "@ledgerhq/live-common/lib/operation";
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 
@@ -139,7 +141,8 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
     marketIndicator,
     isNegative,
   });
-  const confirmations = operation.blockHeight ? mainAccount.blockHeight - operation.blockHeight : 0;
+  const confirmations = getOperationConfirmationNumber(operation, mainAccount);
+  const confirmationsString = getOperationConfirmationDisplayableNumber(operation, mainAccount);
   const isConfirmed = confirmations >= confirmationsNb;
 
   const specific = byFamiliesOperationDetails[mainAccount.currency.family];
@@ -421,7 +424,9 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                     ? t("operationDetails.confirmed")
                     : t("operationDetails.notConfirmed")}
                 </Box>
-                {hasFailed ? null : <Box>{`(${confirmations})`}</Box>}
+                {hasFailed ? null : (
+                  <Box>{`${confirmationsString ? `(${confirmationsString})` : ``}`}</Box>
+                )}
               </OpDetailsData>
             </Box>
           </Box>

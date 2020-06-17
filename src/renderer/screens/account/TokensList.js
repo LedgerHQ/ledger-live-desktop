@@ -107,7 +107,7 @@ class TokensList extends PureComponent<Props> {
     let firstToken;
     if (currency && currency.type !== "TokenCurrency") {
       const tokens = listTokensForCryptoCurrency(currency);
-      if (tokens) {
+      if (tokens && tokens.length > 0) {
         firstToken = tokens[0];
         url = supportLinkByTokenType[tokens[0].tokenType];
       }
