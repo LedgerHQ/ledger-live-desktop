@@ -897,7 +897,7 @@
       "estYield": "Rend. est.",
       "activeTooltip": "Ce validateur est actif et génère des récompenses",
       "inactiveTooltip": "Ce validateur est inactif et ne génère pas de récompenses",
-      "minSafeWarning": "Pour commencer à déléguer en toute sécurité, vous avez besoin d'au moins {{amount}}",
+      "minSafeWarning": "Not enough funds",
       "flow": {
         "title": "Déléguer plus",
         "steps": {
@@ -1012,7 +1012,7 @@
     "undelegation": {
       "header": "Délégation(s) interrompue(s)",
       "headerTooltip": "Disponible après le verrouillage de 21 jours",
-      "inactiveTooltip": "Les validateurs pour lesquels la délégation a été interrompue sont inactifs et ne génèrent plus de récompenses.",
+      "inactiveTooltip": "Undelegated validators are inactive and don't generate rewards anymore.",
       "flow": {
         "title": "Actifs de délégation interrompue",
         "steps": {
