@@ -1015,7 +1015,7 @@
     "undelegation": {
       "header": "Undelegation(s)",
       "headerTooltip": "Available after the 21-day timelock",
-      "inactiveTooltip": "Undelegated validators are inactive and dont generate rewards anymore.",
+      "inactiveTooltip": "Undelegated validators are inactive and don't generate rewards anymore.",
       "flow": {
         "title": "Undelegate assets",
         "steps": {
