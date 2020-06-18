@@ -21,6 +21,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { getDeviceAnimation } from "./animations";
 import { DeviceBlocker } from "./DeviceBlocker";
 import ErrorIcon from "~/renderer/components/ErrorIcon";
+import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 import SupportLinkError from "~/renderer/components/SupportLinkError";
 
 const AnimationWrapper: ThemedComponent<{ modelId: DeviceModelId }> = styled.div`
@@ -44,12 +45,12 @@ const Wrapper: ThemedComponent<{}> = styled.div`
   max-width: 100%;
 `;
 
-const Logo = styled.div`
+const Logo: ThemedComponent<{ warning?: boolean }> = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: ${p => p.theme.colors.alertRed};
+  color: ${p => (p.warning ? p.theme.colors.warning : p.theme.colors.alertRed)};
   margin-bottom: 20px;
 `;
 
@@ -146,9 +147,11 @@ export const renderVerifyUnwrapped = ({
 const OpenManagerBtn = ({
   closeAllModal,
   appName,
+  mt = 2,
 }: {
   closeAllModal: () => void,
   appName?: string,
+  mt?: number,
 }) => {
   const history = useHistory();
   const onClick = useCallback(() => {
@@ -156,7 +159,7 @@ const OpenManagerBtn = ({
     closeAllModal();
   }, [history, appName, closeAllModal]);
   return (
-    <Button mt={2} primary onClick={onClick}>
+    <Button mt={mt} primary onClick={onClick}>
       <Trans i18nKey="DeviceAction.openManager" />
     </Button>
   );
@@ -229,6 +232,32 @@ export const renderAllowOpeningApp = ({
         )}
       </Title>
     </Footer>
+  </Wrapper>
+);
+
+export const renderWarningOutdated = ({
+  passWarning,
+  appName,
+}: {
+  passWarning: () => void,
+  appName: string,
+}) => (
+  <Wrapper id={`warning-outdated-app`}>
+    <Logo warning>
+      <IconTriangleWarning size={44} />
+    </Logo>
+    <ErrorTitle>
+      <Trans i18nKey="DeviceAction.outdated" />
+    </ErrorTitle>
+    <ErrorDescription>
+      <Trans i18nKey="DeviceAction.outdatedDesc" values={{ appName }} />
+    </ErrorDescription>
+    <ButtonContainer>
+      <Button secondary onClick={passWarning}>
+        <Trans i18nKey="common.continue" />
+      </Button>
+      <OpenManagerButton ml={4} mt={0} appName={appName} />
+    </ButtonContainer>
   </Wrapper>
 );
 
