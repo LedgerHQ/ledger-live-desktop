@@ -6,7 +6,7 @@ import styled from "styled-components";
 import CoinifyWidget from "../CoinifyWidget";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openModal } from "~/renderer/actions/modals";
-import type { Account } from "@ledgerhq/live-common/lib/types/account";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import { useDispatch } from "react-redux";
 import TrackPage from "~/renderer/analytics/TrackPage";
 
@@ -19,8 +19,8 @@ const BuyContainer: ThemedComponent<{}> = styled.div`
 
 const Buy = () => {
   const [state, setState] = useState({
-    account: null,
-    parentAccount: null,
+    account: undefined,
+    parentAccount: undefined,
   });
 
   const { account, parentAccount } = state;
@@ -29,11 +29,12 @@ const Buy = () => {
 
   const reset = useCallback(() => {
     setState({
-      account: null,
+      account: undefined,
+      parentAccount: undefined,
     });
   }, []);
 
-  const confirmAccount = useCallback((account: Account, parentAccount: Account) => {
+  const confirmAccount = useCallback((account: AccountLike, parentAccount: Account) => {
     setState(oldState => ({
       ...oldState,
       account: account,

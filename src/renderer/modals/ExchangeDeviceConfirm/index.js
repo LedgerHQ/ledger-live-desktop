@@ -137,7 +137,7 @@ const Root = ({ data, onClose }: Props) => {
         setWaitingForDevice(true);
       }
     },
-    [onResult, onClose, account, verifyAddress],
+    [verifyAddress, onResult, account, parentAccount, onClose],
   );
 
   return (

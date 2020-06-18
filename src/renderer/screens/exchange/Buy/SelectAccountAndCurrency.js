@@ -59,7 +59,7 @@ const FormContent: ThemedComponent<{}> = styled.div`
 `;
 
 type Props = {
-  selectAccount: (account: Account) => void,
+  selectAccount: (account: AccountLike, parentAccount: ?Account) => void,
 };
 
 type State = {
@@ -89,14 +89,18 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
     };
   });
 
-  const mainCurrency = currency ? (currency.type === "TokenCurrency" ? currency.parentCurrency : currency) : null;
+  const mainCurrency = currency
+    ? currency.type === "TokenCurrency"
+      ? currency.parentCurrency
+      : currency
+    : null;
   // this effect make sure to set the bottom select to a newly created account
   useEffect(() => {
     if (!mainCurrency) return;
     if (currency && account && getAccountCurrency(account).id === currency.id) return; // already of the current currency
     setState(oldState => {
       if (!currency) {
-        return oldState
+        return oldState;
       }
       const accountsForDefaultCurrency = getAccountsForCurrency(currency, allAccounts);
       const defaultAccount = accountsForDefaultCurrency.length
@@ -108,7 +112,7 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
         account: defaultAccount,
       };
     });
-  }, [allAccounts, account, mainCurrency]);
+  }, [allAccounts, account, mainCurrency, currency]);
 
   const dispatch = useDispatch();
 
@@ -136,6 +140,7 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
               setState({
                 currency,
                 account: accountsForSelectedcurrency.length ? accountsForSelectedcurrency[0] : null,
+                // @morrow: what about parentAccount?
               });
             }}
             currencies={currencies}

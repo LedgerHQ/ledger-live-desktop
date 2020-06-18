@@ -8,7 +8,7 @@ import querystring from "querystring";
 import FakeLink from "~/renderer/components/FakeLink";
 import { useTranslation } from "react-i18next";
 import Reset from "~/renderer/icons/Reset";
-import type { Account } from "@ledgerhq/live-common/lib/types/account";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openModal } from "~/renderer/actions/modals";
 import { useDispatch } from "react-redux";
@@ -55,7 +55,7 @@ type CoinifyWidgetConfig = {
 };
 
 type Props = {
-  account?: Account,
+  account?: AccountLike,
   parentAccount?: Account,
   mode: string,
   onReset?: () => void,
@@ -96,6 +96,7 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
   console.log(widgetConfig);
 
   useEffect(() => {
+    if (!currency) return;
     if (mode === "buy" && account) {
       track("Coinify Start Buy Widget", { currencyName: currency.name });
     }
@@ -105,12 +106,12 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
     if (mode === "trade-history") {
       track("Coinify Start History Widget");
     }
-  }, [account, mode]);
+  }, [account, currency, mode]);
 
   const url = `${coinifyConfig.url}?${querystring.stringify(widgetConfig)}`;
 
   const handleOnResult = useCallback(() => {
-    if (account && widgetRef.current) {
+    if (mainAccount && widgetRef.current) {
       widgetRef.current.contentWindow.postMessage(
         {
           type: "event",
@@ -122,12 +123,14 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
         },
         coinifyConfig.host,
       );
-      track("Coinify Confirm Buy End", { currencyName: currency.name });
+      if (currency) {
+        track("Coinify Confirm Buy End", { currencyName: currency.name });
+      }
     }
-  }, [coinifyConfig.host, mainAccount]);
+  }, [coinifyConfig.host, currency, mainAccount]);
 
   const handleOnCancel = useCallback(() => {
-    if (account && widgetRef.current) {
+    if (mainAccount && widgetRef.current) {
       widgetRef.current.contentWindow.postMessage(
         {
           type: "event",
@@ -152,7 +155,7 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
       if (type !== "event") return;
       switch (event) {
         case "trade.receive-account-changed":
-          if (context.address === mainAccount.freshAddress) {
+          if (mainAccount && context.address === mainAccount.freshAddress) {
             dispatch(
               openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", {
                 account,
@@ -162,7 +165,7 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
                 verifyAddress: true,
               }),
             );
-            if (account) {
+            if (currency) {
               track("Coinify Confirm Buy Start", { currencyName: currency.name });
             }
           } else {
@@ -170,14 +173,26 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
           }
           break;
         case "trade.trade-placed":
-          track("Coinify Widget Event Trade Placed", { currencyName: currency.name });
+          if (currency) {
+            track("Coinify Widget Event Trade Placed", { currencyName: currency.name });
+          }
           break;
       }
     }
 
     window.addEventListener("message", onMessage, false);
     return () => window.removeEventListener("message", onMessage, false);
-  }, [mainAccount, url, coinifyConfig.host, dispatch, handleOnCancel, handleOnResult]);
+  }, [
+    mainAccount,
+    url,
+    coinifyConfig.host,
+    dispatch,
+    handleOnCancel,
+    handleOnResult,
+    account,
+    currency,
+    parentAccount,
+  ]);
 
   return (
     <WidgetContainer>
