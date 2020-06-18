@@ -33,6 +33,8 @@ const NavigationGuard = ({
   useEffect(() => {
     /** Set redux navigation lock status */
     dispatch(setNavigationLock(when));
+    /** force close modal when condition is over */
+    if (!when) setModalVisible(false);
     return () => {
       /** Reset redux navigation lock status */
       dispatch(setNavigationLock(false));
