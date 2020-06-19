@@ -269,7 +269,7 @@ const ValidatorField = ({
   if (!status) return null;
   return (
     <>
-      <ValidatorSearchInput search={search} onSearch={onSearch} />
+      <ValidatorSearchInput id="delegate-search-bar" search={search} onSearch={onSearch} />
       <ValidatorListHeader
         votesSelected={delegationsSelected}
         votesAvailable={max}
@@ -279,7 +279,7 @@ const ValidatorField = ({
         totalValidators={SR.length}
         notEnoughVotes={notEnoughDelegations}
       />
-      <Box ref={containerRef}>
+      <Box ref={containerRef} id="delegate-list">
         <ScrollLoadingList
           data={SR}
           style={{ flex: "1 0 240px" }}

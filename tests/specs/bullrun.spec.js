@@ -67,7 +67,7 @@ describe("Bullrun", () => {
       });
   });
 
-  it("go through onboarding", async () => {
+  it("go through onboarding-1", async () => {
     await app.client.waitForVisible("#onboarding-get-started-button", 20000);
     await onboardingPage.getStarted();
     await delay(1000);
@@ -75,18 +75,24 @@ describe("Bullrun", () => {
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-1-get-started",
     });
+  });
+  it("go through onboarding-2", async () => {
     await onboardingPage.selectConfiguration("new");
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-2-screen-new",
     });
+  });
+  it("go through onboarding-3", async () => {
     await onboardingPage.selectDevice("nanox");
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-3-screen-nano-x",
     });
+  });
+  it("go through onboarding-4", async () => {
     await onboardingPage.continue();
     await onboardingPage.continue();
     await onboardingPage.continue();
@@ -174,13 +180,15 @@ describe("Bullrun", () => {
     expect(true).toBeTruthy();
   });
 
-  it("firmware update flow", async () => {
+  it("firmware update flow-1", async () => {
     await app.client.waitForExist("#manager-update-firmware-button", 100000);
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-0-manager-page",
     });
+  });
+  it("firmware update flow-2", async () => {
     $("#manager-update-firmware-button").click();
     await app.client.waitForExist("#firmware-update-disclaimer-modal-seed-ready-checkbox");
     await delay(1000);
@@ -188,24 +196,32 @@ describe("Bullrun", () => {
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-1-disclaimer-modal",
     });
+  });
+  it("firmware update flow-3", async () => {
     $("#firmware-update-disclaimer-modal-seed-ready-checkbox").click();
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-2-disclaimer-modal-checkbox",
     });
+  });
+  it("firmware update flow-4", async () => {
     $("#firmware-update-disclaimer-modal-continue-button").click();
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-3-disclaimer-modal-continue-1",
     });
+  });
+  it("firmware update flow-5", async () => {
     $("#firmware-update-disclaimer-modal-continue-button").click();
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-4-disclaimer-modal-continue-2",
     });
+  });
+  it("firmware update flow-6", async () => {
     await mockDeviceEvent({}, { type: "complete" }); // .complete() install full firmware -> flash mcu
     await app.client.waitForExist("#firmware-update-flash-mcu-title");
     await delay(1000);
@@ -213,6 +229,8 @@ describe("Bullrun", () => {
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-5-flash-mcu-start",
     });
+  });
+  it("firmware update flow-7", async () => {
     await mockDeviceEvent({}, { type: "complete" }); // .complete() flash mcu -> completed
     await app.client.waitForExist("#firmware-update-completed-close-button");
     await delay(1000);
@@ -220,12 +238,16 @@ describe("Bullrun", () => {
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-6-flash-mcu-done",
     });
+  });
+  it("firmware update flow-8", async () => {
     $("#firmware-update-completed-close-button").click();
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-7-close-modal",
     });
+  });
+  it("firmware update flow-9", async () => {
     await $("#drawer-dashboard-button").click();
     await delay(1000);
     image = await app.browserWindow.capturePage();
@@ -236,7 +258,7 @@ describe("Bullrun", () => {
 
   describe("add accounts flow", () => {
     // Add accounts for all currencies with special flows (delegate, vote, etc)
-    const currencies = ["dogecoin", "ethereum", "xrp", "ethereum_classic", "tezos"];
+    const currencies = ["dogecoin", "ethereum", "xrp", "ethereum_classic", "tezos", "cosmos"];
     for (let i = 0; i < currencies.length; i++) {
       it(`for ${currencies[i]}`, async () => {
         const currency = currencies[i];
@@ -309,8 +331,28 @@ describe("Bullrun", () => {
     expect(true).toBeTruthy();
   });
 
+  it("cosmos delegate flow", async () => {
+    // Cosmos delegate flow
+    await delay(1000);
+    await $("#drawer-accounts-button").click();
+    await $("#accounts-search-input").addValue("cosmos");
+    await app.client.waitForExist(".accounts-account-row-item:first-child");
+    await $(".accounts-account-row-item:first-child").click();
+    await app.client.waitForExist("#account-delegate-button");
+    await $("#account-delegate-button").click();
+    await app.client.waitForExist("#delegate-list input:first-child");
+    await $("#delegate-list input:first-child").addValue("1.5");
+    await delay(1000);
+    await app.client.waitForEnabled("#delegate-continue-button");
+    await $("#delegate-continue-button").click();
+    await mockDeviceEvent({ type: "opened" });
+    await $("#modal-close-button").click();
+    expect(true).toBeTruthy();
+  });
+
   it("tezos delegate flow", async () => {
     // Tezos delegate flow
+    await delay(1000);
     await $("#drawer-accounts-button").click();
     await $("#accounts-search-input").addValue("tezos");
     await app.client.waitForExist(".accounts-account-row-item:first-child");
@@ -318,6 +360,7 @@ describe("Bullrun", () => {
     await app.client.waitForExist("#account-delegate-button");
     await $("#account-delegate-button").click();
     await $("#delegate-starter-continue-button").click();
+    await delay(1000);
     await app.client.waitForEnabled("#delegate-summary-continue-button");
     await $("#delegate-summary-continue-button").click();
     await mockDeviceEvent({ type: "opened" });
