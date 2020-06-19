@@ -63,7 +63,7 @@ export default function EarnRewardsInfoModal({
                       <Check size={16} color={infoColor} />
                       <Text
                         ff="Inter|SemiBold"
-                        style={{ lineHeight: 1.57 }}
+                        style={{ lineHeight: 1.57, flex: 1 }}
                         color="palette.text.shade100"
                         fontSize={13}
                       >
