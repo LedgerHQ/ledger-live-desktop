@@ -39,7 +39,6 @@ export default function EarnRewardsInfoModal({
         <ModalBody
           title={<Trans i18nKey="delegation.earnRewards" />}
           onClose={onClose}
-          noScroll
           render={onClose => (
             <Box flow={4} mx={4}>
               <TrackPage category="Delegation Flow" name="Step Starter" />

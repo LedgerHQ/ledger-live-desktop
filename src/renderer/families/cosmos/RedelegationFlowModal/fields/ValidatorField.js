@@ -1,4 +1,5 @@
 // @flow
+import invariant from "invariant";
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 
@@ -31,11 +32,19 @@ const ValidatorsSection: ThemedComponent<{}> = styled(Box)`
 
 export default function ValidatorField({ account, transaction, t, onChange }: *) {
   const { validators } = useCosmosPreloadData();
+  const { cosmosResources } = account;
+
+  invariant(cosmosResources, "cosmosResources required");
+
+  const formattedDelegations = cosmosResources.delegations.map(({ validatorAddress, ...d }) => ({
+    ...d,
+    address: validatorAddress,
+  }));
 
   const [search, setSearch] = useState("");
   const onSearch = useCallback(evt => setSearch(evt.target.value), [setSearch]);
 
-  const sortedValidators = useSortedValidators(search, validators, []);
+  const sortedValidators = useSortedValidators(search, validators, formattedDelegations);
   const fromValidatorAddress = transaction.cosmosSourceValidator;
   const sortedFilteredValidators = sortedValidators.filter(
     v => v.validator.validatorAddress !== fromValidatorAddress,
