@@ -81,6 +81,7 @@ export default function StepAmount({
         account={account}
         status={status}
         onChange={onChangeAmount}
+        label={<Trans i18nKey="cosmos.undelegation.flow.steps.amount.fields.amount" />}
       />
       <Box mt={2}>
         <InfoBox>

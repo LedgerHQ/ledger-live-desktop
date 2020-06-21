@@ -1,7 +1,6 @@
 // @flow
 import React, { useMemo, useState, useEffect } from "react";
 import { BigNumber } from "bignumber.js";
-import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
@@ -16,6 +15,7 @@ type Props = {
   account: Account,
   status: TransactionStatus,
   onChange: (amount: BigNumber) => void,
+  label: React$Node,
 };
 
 export default function AmountField({
@@ -24,8 +24,8 @@ export default function AmountField({
   account,
   onChange,
   status: { errors, warnings },
+  label,
 }: Props) {
-  const { t } = useTranslation();
   const unit = getAccountUnit(account);
 
   const [currentValidator, setCurrentValidator] = useState(validator);
@@ -67,7 +67,7 @@ export default function AmountField({
 
   return (
     <Box my={2}>
-      <Label>{t("cosmos.undelegation.flow.steps.amount.fields.amount")}</Label>
+      <Label>{label}</Label>
       <InputCurrency
         autoFocus={false}
         error={error}
