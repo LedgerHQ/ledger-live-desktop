@@ -989,7 +989,8 @@
             "warning": "You will have to wait <0>21 days</0> to redelegate ATOM from the redelegated validator",
             "selectInfo": "Redelegate assets from one validator to another. Redelegating allows your stake to continuously generate rewards.",
             "searchPlaceholder": "Search by name or address",
-            "redelegationAmount": "Redelegation amount"
+            "redelegationAmount": "Redelegation amount",
+            "amountLabel": "Amount to redelegate"
           },
           "device": {
             "title": "Device"
