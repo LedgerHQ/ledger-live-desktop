@@ -989,7 +989,8 @@
             "warning": "Vous devrez attendre <0>21 jours</0> pour redéléguer les ATOM depuis le validateur redélégué",
             "selectInfo": "Actifs redélégués d'un validateur à un autre. Redéléguer permet à votre mise de générer continuellement des récompenses.",
             "searchPlaceholder": "Rechercher par nom ou adresse",
-            "redelegationAmount": "Montant de la redélégation"
+            "redelegationAmount": "Montant de la redélégation",
+            "amountLabel": "Amount to redelegate"
           },
           "device": {
             "title": "Appareil"
