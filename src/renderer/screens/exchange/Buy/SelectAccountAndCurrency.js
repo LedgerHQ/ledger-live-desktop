@@ -119,7 +119,7 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
       <IconContainer>
         <Exchange size={24} />
       </IconContainer>
-      <Text ff="Inter|SemiBold" fontSize={5} color="palette.text.shade100">
+      <Text ff="Inter|SemiBold" fontSize={5} color="palette.text.shade100" textAlign="center">
         {t("exchange.buy.title")}
       </Text>
       <FormContainer>
