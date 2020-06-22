@@ -411,7 +411,9 @@
     "unlockDevice": "Old fel az eszközöd",
     "quitApp": "Lépj ki az alkalmazásból az eszközödön",
     "appNotInstalled": "Kérlek, telepítsd a(z) {{appName}} alkalmazást",
-    "openManager": "Eszközkezelő megnyitása"
+    "openManager": "Eszközkezelő megnyitása",
+    "outdated": "App version outdated",
+    "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it."
   },
   "manager": {
     "tabs": {
