@@ -1240,7 +1240,7 @@
     },
     "experimental": {
       "desc": "Try out experimental features and let us know what you think",
-      "disclaimer": "These are experimental features we provide on an "as is" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
+      "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
       "title": "Reset Ledger Live",
@@ -1571,15 +1571,15 @@
     "warning": "Always verify the address displayed your device exactly matches the one given by the {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
-      "send": "Please confirm on your device to finalize the operation", 
-      "claimReward": "Please confirm on your device to finalize the operation", 
-      "freeze": "Please confirm on your device to finalize the operation", 
-      "unfreeze": "Please confirm on your device to finalize the operation", 
-      "vote": "Please confirm on your device to finalize the operation", 
-      "delegate": "Please confirm on your device to finalize the operation", 
-      "undelegate": "Please confirm on your device to finalize the operation", 
-      "redelegate": "Please confirm on your device to finalize the operation", 
-      "claimRewardCompound": "Please confirm on your device to finalize the operation" 
+      "send": "Please confirm on your device to finalize the operation",
+      "claimReward": "Please confirm on your device to finalize the operation",
+      "freeze": "Please confirm on your device to finalize the operation",
+      "unfreeze": "Please confirm on your device to finalize the operation",
+      "vote": "Please confirm on your device to finalize the operation",
+      "delegate": "Please confirm on your device to finalize the operation",
+      "undelegate": "Please confirm on your device to finalize the operation",
+      "redelegate": "Please confirm on your device to finalize the operation",
+      "claimRewardCompound": "Please confirm on your device to finalize the operation"
     },
     "recipientWording": {
       "send": "recipient",
