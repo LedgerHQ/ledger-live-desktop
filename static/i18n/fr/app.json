@@ -411,7 +411,9 @@
     "unlockDevice": "Déverrouillez votre appareil",
     "quitApp": "Quittez l'application sur votre appareil",
     "appNotInstalled": "Veuillez installer l'application {{appName}}",
-    "openManager": "Ouvrir le Manager"
+    "openManager": "Ouvrir le Manager",
+    "outdated": "App version outdated",
+    "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it."
   },
   "manager": {
     "tabs": {
