@@ -17,6 +17,7 @@ import Account from "~/renderer/screens/account";
 import Asset from "~/renderer/screens/asset";
 import Box from "~/renderer/components/Box/Box";
 import ListenDevices from "~/renderer/components/ListenDevices";
+import Notifications from "~/renderer/components/Notifications";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
 import Idler from "~/renderer/components/Idler";
 import IsUnlocked from "~/renderer/components/IsUnlocked";
@@ -104,6 +105,7 @@ const Default = () => {
                       <Route path="/asset/:assetId+" render={props => <Asset {...props} />} />
                     </Switch>
                   </Page>
+                  <Notifications />
                 </Box>
 
                 <LibcoreBusyIndicator />

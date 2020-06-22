@@ -13,6 +13,7 @@ import "tippy.js/dist/svg-arrow.css";
 
 import type { State } from "~/renderer/reducers";
 import StyleProvider from "~/renderer/styles/StyleProvider";
+import NotificationsProvider from "~/renderer/components/Notifications/NotificationsProvider";
 import { UpdaterProvider } from "~/renderer/components/Updater/UpdaterContext";
 import ThrowBlock from "~/renderer/components/ThrowBlock";
 import LiveStyleSheetManager from "~/renderer/styles/LiveStyleSheetManager";
@@ -27,15 +28,17 @@ const App = ({ store }: Props) => (
   <LiveStyleSheetManager>
     <Provider store={store}>
       <StyleProvider selectedPalette="light">
-        <ThrowBlock>
-          <RemoteConfigProvider>
-            <UpdaterProvider>
-              <Router>
-                <Default />
-              </Router>
-            </UpdaterProvider>
-          </RemoteConfigProvider>
-        </ThrowBlock>
+        <NotificationsProvider>
+          <ThrowBlock>
+            <RemoteConfigProvider>
+              <UpdaterProvider>
+                <Router>
+                  <Default />
+                </Router>
+              </UpdaterProvider>
+            </RemoteConfigProvider>
+          </ThrowBlock>
+        </NotificationsProvider>
       </StyleProvider>
     </Provider>
   </LiveStyleSheetManager>
