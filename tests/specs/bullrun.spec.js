@@ -284,88 +284,93 @@ describe("Bullrun", () => {
     }
   });
 
-  it("account migration flow", async () => {
-    // Account migration flow
-    await $("#drawer-dashboard-button").click();
-    await app.client.waitForExist("#modal-migrate-accounts-button");
-    await $("#modal-migrate-accounts-button").click();
-    await $("#migrate-overview-start-button").click();
-    await mockDeviceEvent({ type: "opened" });
-    await app.client.waitForExist("#migrate-currency-continue-button", 20000);
-    await $("#migrate-currency-continue-button").click();
-    await mockDeviceEvent({ type: "opened" });
-    await app.client.waitForExist("#migrate-currency-continue-button", 20000);
-    await $("#migrate-currency-continue-button").click();
-    await $("#migrate-overview-export-button").click();
-    await app.client.pause(2000);
-    await app.client.waitForExist("#export-accounts-done-button");
-    await $("#export-accounts-done-button").click();
-    await $("#migrate-overview-done-button").click();
-    expect(true).toBeTruthy();
-  });
+  describe("account flows", () => {
+    afterEach(async () => {
+      const modalBackDrop = await app.client.isExisting("#modal-backdrop");
+      if (modalBackDrop) await $("#modal-backdrop").click();
+      await delay(1000);
+    });
+    it("account migration flow", async () => {
+      // Account migration flow
+      await $("#drawer-dashboard-button").click();
+      await app.client.waitForExist("#modal-migrate-accounts-button");
+      await $("#modal-migrate-accounts-button").click();
+      await $("#migrate-overview-start-button").click();
+      await mockDeviceEvent({ type: "opened" });
+      await app.client.waitForExist("#migrate-currency-continue-button", 20000);
+      await $("#migrate-currency-continue-button").click();
+      await mockDeviceEvent({ type: "opened" });
+      await app.client.waitForExist("#migrate-currency-continue-button", 20000);
+      await $("#migrate-currency-continue-button").click();
+      await $("#migrate-overview-export-button").click();
+      await app.client.pause(2000);
+      await app.client.waitForExist("#export-accounts-done-button");
+      await $("#export-accounts-done-button").click();
+      await $("#migrate-overview-done-button").click();
+      expect(true).toBeTruthy();
+    });
 
-  it("receive flow", async () => {
-    // Receive flow without device
-    await $("#drawer-receive-button").click();
-    await $("#receive-account-continue-button").click();
-    await mockDeviceEvent({ type: "opened" }, { type: "complete" });
-    await app.client.waitForEnabled("#receive-receive-continue-button", 20000);
-    await $("#receive-receive-continue-button").click();
-    expect(true).toBeTruthy();
-  });
+    it("receive flow", async () => {
+      // Receive flow without device
+      await $("#drawer-receive-button").click();
+      await $("#receive-account-continue-button").click();
+      await mockDeviceEvent({ type: "opened" }, { type: "complete" });
+      await app.client.waitForEnabled("#receive-receive-continue-button", 20000);
+      await $("#receive-receive-continue-button").click();
+      expect(true).toBeTruthy();
+    });
 
-  it("send flow", async () => {
-    // Send flow
-    await $("#drawer-send-button").click();
-    await $("#send-recipient-input").click();
-    await $("#send-recipient-input").addValue("1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA");
-    await app.client.waitForEnabled("#send-recipient-continue-button");
-    await $("#send-recipient-continue-button").click();
-    await $("#send-amount-continue-button").click();
-    await $("#send-summary-continue-button").click();
-    await mockDeviceEvent({ type: "opened" });
-    await app.client.waitForExist("#send-confirmation-opc-button", 60000);
-    await app.client.waitForEnabled("#send-confirmation-opc-button");
-    await $("#send-confirmation-opc-button").click();
-    await $("#modal-close-button").click();
-    expect(true).toBeTruthy();
-  });
+    it("send flow", async () => {
+      // Send flow
+      await $("#drawer-send-button").click();
+      await $("#send-recipient-input").click();
+      await $("#send-recipient-input").addValue("1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA");
+      await app.client.waitForEnabled("#send-recipient-continue-button");
+      await $("#send-recipient-continue-button").click();
+      await $("#send-amount-continue-button").click();
+      await $("#send-summary-continue-button").click();
+      await mockDeviceEvent({ type: "opened" });
+      await app.client.waitForExist("#send-confirmation-opc-button", 60000);
+      await app.client.waitForEnabled("#send-confirmation-opc-button");
+      await $("#send-confirmation-opc-button").click();
+      await $("#modal-close-button").click();
+      expect(true).toBeTruthy();
+    });
 
-  it("cosmos delegate flow", async () => {
-    // Cosmos delegate flow
-    await delay(1000);
-    await $("#drawer-accounts-button").click();
-    await $("#accounts-search-input").addValue("cosmos");
-    await app.client.waitForExist(".accounts-account-row-item:first-child");
-    await $(".accounts-account-row-item:first-child").click();
-    await app.client.waitForExist("#account-delegate-button");
-    await $("#account-delegate-button").click();
-    await app.client.waitForExist("#delegate-list input:first-child");
-    await $("#delegate-list input:first-child").addValue("1.5");
-    await delay(1000);
-    await app.client.waitForEnabled("#delegate-continue-button");
-    await $("#delegate-continue-button").click();
-    await mockDeviceEvent({ type: "opened" });
-    await $("#modal-close-button").click();
-    expect(true).toBeTruthy();
-  });
+    it("cosmos delegate flow", async () => {
+      // Cosmos delegate flow
+      await $("#drawer-accounts-button").click();
+      await $("#accounts-search-input").addValue("cosmos");
+      await app.client.waitForExist(".accounts-account-row-item:first-child");
+      await $(".accounts-account-row-item:first-child").click();
+      await app.client.waitForExist("#account-delegate-button");
+      await $("#account-delegate-button").click();
+      await app.client.waitForExist("#delegate-list input:first-child");
+      await $("#delegate-list input:first-child").addValue("1.5");
+      await delay(1000);
+      await app.client.waitForEnabled("#delegate-continue-button");
+      await $("#delegate-continue-button").click();
+      await mockDeviceEvent({ type: "opened" });
+      await $("#modal-close-button").click();
+      expect(true).toBeTruthy();
+    });
 
-  it("tezos delegate flow", async () => {
-    // Tezos delegate flow
-    await delay(1000);
-    await $("#drawer-accounts-button").click();
-    await $("#accounts-search-input").addValue("tezos");
-    await app.client.waitForExist(".accounts-account-row-item:first-child");
-    await $(".accounts-account-row-item:first-child").click();
-    await app.client.waitForExist("#account-delegate-button");
-    await $("#account-delegate-button").click();
-    await $("#delegate-starter-continue-button").click();
-    await delay(1000);
-    await app.client.waitForEnabled("#delegate-summary-continue-button");
-    await $("#delegate-summary-continue-button").click();
-    await mockDeviceEvent({ type: "opened" });
-    await $("#modal-close-button").click();
-    expect(true).toBeTruthy();
+    it("tezos delegate flow", async () => {
+      // Tezos delegate flow
+      await $("#drawer-accounts-button").click();
+      await $("#accounts-search-input").addValue("tezos");
+      await app.client.waitForExist(".accounts-account-row-item:first-child");
+      await $(".accounts-account-row-item:first-child").click();
+      await app.client.waitForExist("#account-delegate-button");
+      await $("#account-delegate-button").click();
+      await $("#delegate-starter-continue-button").click();
+      await delay(1000);
+      await app.client.waitForEnabled("#delegate-summary-continue-button");
+      await $("#delegate-summary-continue-button").click();
+      await mockDeviceEvent({ type: "opened" });
+      await $("#modal-close-button").click();
+      expect(true).toBeTruthy();
+    });
   });
 
   it("naive discreet mode toggle and assorted screens", async () => {
