@@ -119,6 +119,7 @@ const Body = ({
     const transaction = bridge.updateTransaction(t, {
       mode: "delegate",
       validators: [],
+      recipient: account.freshAddress,
     });
 
     return { account, parentAccount: undefined, transaction };
