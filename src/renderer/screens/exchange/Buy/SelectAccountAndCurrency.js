@@ -9,7 +9,7 @@ import Text from "~/renderer/components/Text";
 import { useTranslation } from "react-i18next";
 import { getAccountsForCurrency, useCoinifyCurrencies } from "~/renderer/screens/exchange/hooks";
 // import { SelectAccount } from "~/renderer/components/SelectAccount";
-import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
+import SelectAccount from "~/renderer/components/PerCurrencySelectAccount";
 import Label from "~/renderer/components/Label";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Button from "~/renderer/components/Button";
@@ -140,7 +140,7 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
               setState({
                 currency,
                 account: accountsForSelectedcurrency.length ? accountsForSelectedcurrency[0] : null,
-                // @morrow: what about parentAccount?
+                parentAccount: null,
               });
             }}
             currencies={currencies}
@@ -155,20 +155,22 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
               <Text style={{ marginLeft: 4 }}>{t("exchange.buy.addAccount")}</Text>
             </FakeLink>
           </AccountSelectorLabel>
-          <SelectAccount
-            accounts={allAccounts}
-            currency={currency}
-            mandatoryTokens
-            onChange={(account, parentAccount) => {
-              console.log(account, parentAccount);
-              setState(oldState => ({
-                ...oldState,
-                account: account,
-                parentAccount: parentAccount,
-              }));
-            }}
-            value={parentAccount || account}
-          />
+          {currency ? (
+            <SelectAccount
+              accounts={allAccounts}
+              currency={currency}
+              mandatoryTokens
+              onChange={(account, parentAccount) => {
+                console.log(account, parentAccount);
+                setState(oldState => ({
+                  ...oldState,
+                  account: account,
+                  parentAccount: parentAccount,
+                }));
+              }}
+              value={parentAccount || account}
+            />
+          ) : null}
         </FormContent>
         <FormContent>
           <ConfirmButton

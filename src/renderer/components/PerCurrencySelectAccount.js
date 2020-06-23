@@ -6,7 +6,7 @@ import {
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
 import type { TFunction } from "react-i18next";
-import type { AccountLike, Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import React, { useCallback, useState, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
@@ -196,7 +196,7 @@ const RawSelectAccount = ({
         }
       }
     },
-    [accountsForCurrency, onChange, currency.id, currency.type],
+    [onChange, currency.id, currency.type],
   );
 
   const manualFilter = useCallback(
