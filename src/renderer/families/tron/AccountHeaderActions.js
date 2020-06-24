@@ -1,6 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
-import invariant from "invariant";
+import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { Trans } from "react-i18next";
@@ -50,11 +49,11 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
   });
 
   const { tronResources, spendableBalance } = mainAccount;
-  invariant(tronResources, "tron account expected");
+  if (!tronResources || parentAccount) return null;
   const tronPower = tronResources.tronPower;
   const earnRewardDisabled = tronPower === 0 && spendableBalance.lt(minAmount);
 
-  const onClick = useCallback(() => {
+  const onClick = () => {
     if (tronPower > 0) {
       dispatch(
         openModal("MODAL_MANAGE_TRON", {
@@ -70,9 +69,7 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
         }),
       );
     }
-  }, [dispatch, tronPower, account, parentAccount]);
-
-  if (parentAccount) return null;
+  };
 
   return (
     <ToolTip

@@ -8,8 +8,14 @@ import Button from "~/renderer/components/Button";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import IconExchange from "~/renderer/icons/Exchange";
 
-export const SendActionDefault = ({ onClick }: { onClick: () => void }) => (
-  <Button small primary onClick={onClick}>
+export const SendActionDefault = ({
+  onClick,
+  disabled,
+}: {
+  onClick: () => void,
+  disabled: boolean,
+}) => (
+  <Button small primary onClick={onClick} disabled={disabled}>
     <Box horizontal flow={1} alignItems="center">
       <IconSend size={12} />
       <Box>

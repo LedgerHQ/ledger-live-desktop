@@ -83,17 +83,21 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
 
   return (
     <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
-      {!isAccountEmpty(account) ? (
-        <>
-          {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}
-          {canSend(account, parentAccount) ? (
-            <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
-          ) : null}
+      <>
+        {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}
+        {canSend(account, parentAccount) ? (
+          <SendAction
+            disabled={isAccountEmpty(account)}
+            account={account}
+            parentAccount={parentAccount}
+            onClick={onSend}
+          />
+        ) : null}
 
-          <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
-          {availableOnExchange ? <BuyActionDefault currency={currency} onClick={onBuy} /> : null}
-        </>
-      ) : null}
+        <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
+        {availableOnExchange ? <BuyActionDefault currency={currency} onClick={onBuy} /> : null}
+      </>
+
       <Tooltip content={t("stars.tooltip")}>
         <Star
           accountId={account.id}

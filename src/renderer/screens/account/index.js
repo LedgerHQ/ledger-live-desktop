@@ -33,7 +33,6 @@ import useTheme from "~/renderer/hooks/useTheme";
 import BalanceSummary from "./BalanceSummary";
 import AccountHeader from "./AccountHeader";
 import AccountHeaderActions from "./AccountHeaderActions";
-import EmptyStateAccount from "./EmptyStateAccount";
 import TokenList from "./TokensList";
 
 const mapStateToProps = (
@@ -110,36 +109,34 @@ const AccountPage = ({
         <AccountHeaderActions account={account} parentAccount={parentAccount} />
       </Box>
 
-      {!isAccountEmpty(account) ? (
-        <>
-          <Box mb={7}>
-            <BalanceSummary
-              mainAccount={mainAccount}
-              account={account}
-              parentAccount={parentAccount}
-              chartColor={color}
-              chartId={`account-chart-${account.id}`}
-              counterValue={counterValue}
-              range={selectedTimeRange}
-              countervalueFirst={countervalueFirst}
-              setCountervalueFirst={setCountervalueFirst}
-            />
-          </Box>
-          {AccountBodyHeader ? (
-            <AccountBodyHeader account={account} parentAccount={parentAccount} />
-          ) : null}
-          {account.type === "Account" ? (
-            <TokenList account={account} range={selectedTimeRange} />
-          ) : null}
+      <>
+        <Box mb={7}>
+          <BalanceSummary
+            mainAccount={mainAccount}
+            account={account}
+            parentAccount={parentAccount}
+            chartColor={color}
+            chartId={`account-chart-${account.id}`}
+            counterValue={counterValue}
+            range={selectedTimeRange}
+            countervalueFirst={countervalueFirst}
+            setCountervalueFirst={setCountervalueFirst}
+          />
+        </Box>
+        {AccountBodyHeader ? (
+          <AccountBodyHeader account={account} parentAccount={parentAccount} />
+        ) : null}
+        {account.type === "Account" ? (
+          <TokenList account={account} range={selectedTimeRange} />
+        ) : null}
+        {!isAccountEmpty(account) && (
           <OperationsList
             account={account}
             parentAccount={parentAccount}
             title={t("account.lastOperations")}
           />
-        </>
-      ) : (
-        <EmptyStateAccount account={account} parentAccount={parentAccount} />
-      )}
+        )}
+      </>
     </Box>
   );
 };

@@ -13,9 +13,10 @@ type Props = {
   account: AccountLike,
   parentAccount: ?Account,
   onClick: () => void,
+  disabled: boolean,
 };
 
-const SendAction = ({ account, parentAccount, onClick }: Props) => {
+const SendAction = ({ account, parentAccount, onClick, disabled }: Props) => {
   const delegation = useDelegation(account);
   const dispatch = useDispatch();
   const sendShouldWarnDelegation = delegation && delegation.sendShouldWarnDelegation;
@@ -35,7 +36,12 @@ const SendAction = ({ account, parentAccount, onClick }: Props) => {
   }, [sendShouldWarnDelegation, dispatch, parentAccount, account, onClick]);
 
   return (
-    <SendActionDefault onClick={onClickDecorated} account={account} parentAccount={parentAccount} />
+    <SendActionDefault
+      onClick={onClickDecorated}
+      account={account}
+      parentAccount={parentAccount}
+      disabled={disabled}
+    />
   );
 };
 
