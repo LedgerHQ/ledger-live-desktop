@@ -138,7 +138,14 @@ const Delegation = ({ account }: Props) => {
                   !delegationEnabled ? <Trans i18nKey="cosmos.delegation.minSafeWarning" /> : null
                 }
               >
-                <Button mr={2} disabled={!delegationEnabled} primary small onClick={onDelegate}>
+                <Button
+                  id={"account-delegate-button"}
+                  mr={2}
+                  disabled={!delegationEnabled}
+                  primary
+                  small
+                  onClick={onDelegate}
+                >
                   <Box horizontal flow={1} alignItems="center">
                     <DelegateIcon size={12} />
                     <Box>
@@ -149,7 +156,13 @@ const Delegation = ({ account }: Props) => {
               </ToolTip>
             ) : null}
             <ToolTip content={!hasRewards ? <Trans i18nKey="cosmos.delegation.noRewards" /> : null}>
-              <Button disabled={!hasRewards} primary small onClick={onClaimRewards}>
+              <Button
+                id={"account-rewards-button"}
+                disabled={!hasRewards}
+                primary
+                small
+                onClick={onClaimRewards}
+              >
                 <Box horizontal flow={1} alignItems="center">
                   <ClaimRewards size={12} />
                   <Box>

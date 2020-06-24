@@ -22,6 +22,7 @@ import {
   renderLoading,
   renderRequestQuitApp,
   renderRequiresAppInstallation,
+  renderWarningOutdated,
 } from "./rendering";
 
 type OwnProps<R, H, P> = {
@@ -71,6 +72,7 @@ const DeviceAction = <R, H, P>({
 }: Props<R, H, P>) => {
   const hookState = action.useHook(reduxDevice, request);
   const {
+    appAndVersion,
     device,
     unresponsive,
     error,
@@ -89,6 +91,8 @@ const DeviceAction = <R, H, P>({
     onRepairModal,
     deviceSignatureRequested,
     deviceStreamingProgress,
+    displayUpgradeWarning,
+    passWarning,
   } = hookState;
 
   const type = useTheme("colors.palette.type");
@@ -99,6 +103,10 @@ const DeviceAction = <R, H, P>({
       dispatch(setPreferredDeviceModel(modelId));
     }
   }, [dispatch, modelId, preferredDeviceModel]);
+
+  if (displayUpgradeWarning && appAndVersion) {
+    return renderWarningOutdated({ appName: appAndVersion.name, passWarning });
+  }
 
   if (repairModalOpened && repairModalOpened.auto) {
     return <AutoRepair onDone={closeRepairModal} />;
@@ -143,7 +151,14 @@ const DeviceAction = <R, H, P>({
   }
 
   if ((!isLoading && !device) || unresponsive) {
-    return renderConnectYourDevice({ modelId, type, unresponsive, device, onRepairModal, onRetry });
+    return renderConnectYourDevice({
+      modelId,
+      type,
+      unresponsive,
+      device,
+      onRepairModal,
+      onRetry,
+    });
   }
 
   if (isLoading) {

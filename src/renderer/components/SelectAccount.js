@@ -101,13 +101,7 @@ const AccountOption = React.memo(function AccountOption({
         </Ellipsis>
       </div>
       <Box>
-        <FormattedVal
-          color="palette.text.shade60"
-          val={account.balance}
-          unit={unit}
-          showCode
-          disableRounding
-        />
+        <FormattedVal color="palette.text.shade60" val={account.balance} unit={unit} showCode />
       </Box>
     </Box>
   );

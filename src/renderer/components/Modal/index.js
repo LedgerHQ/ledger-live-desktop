@@ -213,6 +213,7 @@ class Modal extends PureComponent<Props> {
         {state => {
           return (
             <Container
+              id="modal-backdrop"
               state={state}
               centered={centered}
               isOpened={isOpened}
