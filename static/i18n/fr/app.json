@@ -1438,9 +1438,9 @@
           "nanoX": {
             "step1": "Connectez {{productName}} à votre ordinateur.",
             "step2": "Appuyez sur les deux boutons comme indiqué sur l’écran de votre {{productName}}.",
-            "step3": "Appuyez sur le bouton gauche pour annuler <1><0>{{setUpAsNewDevice}}</0></1>.",
-            "step4": "Appuyez sur le bouton droit pour sélectionner <1><0>{{restoreConfiguration}}</0></1>.",
-            "step5": "Choose a PIN with 4 to 8 digits."
+            "step3": "Press both buttons to select <1><0>{{restoreConfiguration}}</0></1>.",
+            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
             "step1": "Connectez {{productName}} à votre ordinateur.",
