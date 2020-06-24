@@ -44,7 +44,7 @@
     "@ledgerhq/hw-transport-http": "^5.17.0",
     "@ledgerhq/hw-transport-node-hid-singleton": "^5.17.0",
     "@ledgerhq/ledger-core": "6.5.4",
-    "@ledgerhq/live-common": "^12.35.1",
+    "@ledgerhq/live-common": "^12.36.0",
     "@ledgerhq/logs": "^5.17.0",
     "@tippyjs/react": "^4.0.2",
     "@trust/keyto": "^1.0.1",
