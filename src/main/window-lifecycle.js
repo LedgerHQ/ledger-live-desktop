@@ -68,6 +68,8 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
           frame: false,
           titleBarStyle: "hiddenInset",
         }
+      : process.platform === "linux"
+      ? { icon: path.join(__dirname, "/build/icons/icon.png") } // specific for linux icon
       : {}),
     /* eslint-enable indent */
     width,
