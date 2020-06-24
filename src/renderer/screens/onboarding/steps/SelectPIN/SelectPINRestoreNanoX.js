@@ -9,7 +9,7 @@ import IconChevronRight from "~/renderer/icons/ChevronRight";
 import { getDeviceModel } from "@ledgerhq/devices";
 import InvertableImg from "~/renderer/components/InvertableImg";
 import { DisclaimerBox } from "~/renderer/screens/onboarding/steps/SelectPIN";
-import { restoreConfiguration, setUpAsNewDevice } from "@ledgerhq/live-common/lib/deviceWordings";
+import { restoreConfiguration } from "@ledgerhq/live-common/lib/deviceWordings";
 import OptionRow, { IconOptionRow } from "~/renderer/components/OptionRow";
 import { Inner } from "~/renderer/screens/onboarding/sharedComponents";
 import RestoreNanoX from "~/renderer/images/select-pin-nano-x-onb.svg";
@@ -42,7 +42,7 @@ class SelectPINrestoreNanoX extends PureComponent<Props, *> {
             <Trans i18nKey="onboarding.selectPIN.restore.instructions.nanoX.step3">
               {"Press the left button to cancel"}
               <Text ff="Inter|SemiBold" color="palette.text.shade100">
-                {setUpAsNewDevice}
+                {restoreConfiguration}
               </Text>
             </Trans>
           </Box>
@@ -53,12 +53,7 @@ class SelectPINrestoreNanoX extends PureComponent<Props, *> {
         icon: <IconOptionRow>{"4."}</IconOptionRow>,
         desc: (
           <Box style={{ display: "block" }}>
-            <Trans i18nKey="onboarding.selectPIN.restore.instructions.nanoX.step4">
-              {"Press the left button to cancel"}
-              <Text ff="Inter|SemiBold" color="palette.text.shade100">
-                {restoreConfiguration}
-              </Text>
-            </Trans>
+            <Trans i18nKey="onboarding.selectPIN.restore.instructions.nanoX.step4" />
           </Box>
         ),
       },
