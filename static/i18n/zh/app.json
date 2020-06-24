@@ -1438,9 +1438,9 @@
           "nanoX": {
             "step1": "将您的 {{productName}} 连接到您的计算机。",
             "step2": "按照 {{productName}} 屏幕上的说明同时按下两个按钮。",
-            "step3": "按左键取消 <1><0>{{setUpAsNewDevice}}</0></1>。",
-            "step4": "按右键选择<1><0>{{restoreConfiguration}}</0></1>。",
-            "step5": "Choose a PIN with 4 to 8 digits."
+            "step3": "Press both buttons to select <1><0>{{restoreConfiguration}}</0></1>.",
+            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
             "step1": "将 {{productName}} 连接至您的计算机。",
