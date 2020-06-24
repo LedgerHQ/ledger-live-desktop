@@ -11,7 +11,7 @@ import type { DeviceModel } from "@ledgerhq/devices";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import ByteSize from "~/renderer/components/ByteSize";
-import { lighten, rgba } from "~/renderer/styles/helpers";
+import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
 import Tooltip from "~/renderer/components/Tooltip";
 import Card from "~/renderer/components/Box/Card";
