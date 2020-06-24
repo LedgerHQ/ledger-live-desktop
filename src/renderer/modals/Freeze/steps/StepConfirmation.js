@@ -33,10 +33,10 @@ const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(
 
 const TooltipContent = () => (
   <Box style={{ padding: 4 }}>
-    <Text color="palette.primary.contrastText" style={{ marginBottom: 5 }}>
+    <Text style={{ marginBottom: 5 }}>
       <Trans i18nKey="freeze.steps.confirmation.tooltip.title" />
     </Text>
-    <Text color="palette.primary.contrastText">
+    <Text>
       <Trans i18nKey="freeze.steps.confirmation.tooltip.desc" />
     </Text>
   </Box>
