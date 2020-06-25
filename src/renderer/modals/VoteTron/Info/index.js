@@ -2,15 +2,28 @@
 
 import React from "react";
 import Modal from "~/renderer/components/Modal";
-import { AccountProvider } from "./shared";
-import type { Props } from "./shared";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import VoteTronInfoModalBody from "./Body";
 
-export default function VoteTronInfoModal(props: Props) {
+type Props = {
+  name?: string,
+  account: AccountLike,
+  parentAccount: ?Account,
+};
+
+export default function VoteTronInfoModal({ name, account, parentAccount }: Props) {
   return (
-    // FIXME: this makes no sense, remove it and pass it down by props because everyone need it under it
-    <AccountProvider value={props}>
-      <Modal name={props.name} centered render={props => <VoteTronInfoModalBody {...props} />} />
-    </AccountProvider>
+    <Modal
+      name={name}
+      centered
+      render={props => (
+        <VoteTronInfoModalBody
+          {...props}
+          name={name}
+          account={account}
+          parentAccount={parentAccount}
+        />
+      )}
+    />
   );
 }

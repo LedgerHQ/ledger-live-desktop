@@ -204,20 +204,14 @@ const Delegation = ({ account }: Props) => {
             </Box>
           </Box>
           <Box>
-            <ToolTip
-              content={
-                !delegationEnabled ? <Trans i18nKey="cosmos.delegation.minSafeWarning" /> : null
-              }
-            >
-              <Button primary small disabled={!delegationEnabled} onClick={onEarnRewards}>
-                <Box horizontal flow={1} alignItems="center">
-                  <IconChartLine size={12} />
-                  <Box>
-                    <Trans i18nKey="cosmos.delegation.emptyState.delegation" />
-                  </Box>
+            <Button primary small onClick={onEarnRewards}>
+              <Box horizontal flow={1} alignItems="center">
+                <IconChartLine size={12} />
+                <Box>
+                  <Trans i18nKey="cosmos.delegation.emptyState.delegation" />
                 </Box>
-              </Button>
-            </ToolTip>
+              </Box>
+            </Button>
           </Box>
         </Wrapper>
       )}

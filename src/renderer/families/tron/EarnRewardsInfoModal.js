@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 
+import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account";
+
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
 import { openModal, closeModal } from "~/renderer/actions/modals";
@@ -20,16 +22,25 @@ type Props = {
 
 export default function TronEarnRewardsInfoModal({ name, account, parentAccount }: Props) {
   const { t } = useTranslation();
+
+  const unit = getAccountUnit(account);
+  const mainAccount = getMainAccount(account, parentAccount);
+  const minAmount = 10 ** unit.magnitude;
+
+  const { tronResources, spendableBalance } = mainAccount;
+  const tronPower = tronResources?.tronPower ?? 0;
+  const earnRewardDisabled = tronPower === 0 && spendableBalance.lt(minAmount);
+
   const dispatch = useDispatch();
   const onNext = useCallback(() => {
     dispatch(closeModal(name));
     dispatch(
-      openModal("MODAL_FREEZE", {
+      openModal(earnRewardDisabled ? "MODAL_RECEIVE" : "MODAL_FREEZE", {
         parentAccount,
         account,
       }),
     );
-  }, [parentAccount, account, dispatch, name]);
+  }, [parentAccount, account, dispatch, name, earnRewardDisabled]);
 
   return (
     <EarnRewardsInfoModal

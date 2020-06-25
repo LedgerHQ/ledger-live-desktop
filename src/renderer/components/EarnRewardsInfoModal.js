@@ -19,6 +19,7 @@ type Props = {
   bullets: string[],
   additional: React$Node,
   footerLeft?: React$Node,
+  nextLabel?: React$Node,
 };
 
 export default function EarnRewardsInfoModal({
@@ -28,6 +29,7 @@ export default function EarnRewardsInfoModal({
   bullets,
   additional,
   footerLeft,
+  nextLabel,
 }: Props) {
   const infoColor = useTheme("colors.positiveGreen");
 
@@ -83,7 +85,7 @@ export default function EarnRewardsInfoModal({
                 <Trans i18nKey="common.cancel" />
               </Button>
               <Button primary onClick={onNext}>
-                <Trans i18nKey="common.continue" />
+                {nextLabel || <Trans i18nKey="common.continue" />}
               </Button>
             </Box>
           )}

@@ -7,12 +7,15 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import votesImage from "~/renderer/images/votes.svg";
-import { useAccount } from "../shared";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 
-export default function VoteTronInfoModalBodyMain() {
-  const accountContext = useAccount();
-  const account = accountContext && accountContext.account;
-
+export default function VoteTronInfoModalBodyMain({
+  account,
+  parentAccount,
+}: {
+  account: AccountLike,
+  parentAccount: ?Account,
+}) {
   return (
     <Box flow={4} mx={4}>
       <TrackPage category="Voting Flow" name="Step Vote" />

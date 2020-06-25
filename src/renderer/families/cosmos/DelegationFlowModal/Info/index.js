@@ -5,6 +5,9 @@ import { useDispatch } from "react-redux";
 
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 
+import { canDelegate } from "@ledgerhq/live-common/lib/families/cosmos/logic";
+import { getMainAccount } from "@ledgerhq/live-common/lib/account";
+
 import { openModal, closeModal } from "~/renderer/actions/modals";
 import EarnRewardsInfoModal from "~/renderer/components/EarnRewardsInfoModal";
 import InfoBox from "~/renderer/components/InfoBox";
@@ -20,15 +23,20 @@ type Props = {
 export default function CosmosEarnRewardsInfoModal({ name, account, parentAccount }: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+
+  const mainAccount = getMainAccount(account, parentAccount);
+
+  const canContinue = canDelegate(mainAccount);
+
   const onNext = useCallback(() => {
     dispatch(closeModal(name));
     dispatch(
-      openModal("MODAL_COSMOS_DELEGATE", {
+      openModal(canContinue ? "MODAL_COSMOS_DELEGATE" : "MODAL_RECEIVE", {
         parentAccount,
         account,
       }),
     );
-  }, [parentAccount, account, dispatch, name]);
+  }, [parentAccount, account, dispatch, name, canContinue]);
 
   const onLearnMore = useCallback(() => {
     openURL(urls.cosmosStakingRewards);
