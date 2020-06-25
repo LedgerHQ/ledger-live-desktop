@@ -87,14 +87,16 @@ const NavigationGuard = ({
   return (
     <>
       <Prompt when={when} message={handleBlockedNavigation} />
-      <ConfirmModal
-        {...confirmModalProps}
-        analyticsName={analyticsName}
-        isOpened={modalVisible}
-        onCancel={closeModal}
-        onReject={handleConfirmNavigationClick}
-        onConfirm={closeModal}
-      />
+      {when && (
+        <ConfirmModal
+          {...confirmModalProps}
+          analyticsName={analyticsName}
+          isOpened={modalVisible}
+          onCancel={closeModal}
+          onReject={handleConfirmNavigationClick}
+          onConfirm={closeModal}
+        />
+      )}
     </>
   );
 };
