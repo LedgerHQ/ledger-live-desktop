@@ -4,12 +4,13 @@ import React from "react";
 import type { BigNumber } from "bignumber.js";
 import styled from "styled-components";
 
-import type { Unit, ValueChange } from "@ledgerhq/live-common/lib/types";
+import type { Unit, ValueChange, AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { TFunction } from "react-i18next";
 
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import PillsDaysCount from "~/renderer/components/PillsDaysCount";
+import TransactionsPendingConfirmationWarning from "~/renderer/components/TransactionsPendingConfirmationWarning";
 import { PlaceholderLine } from "./Placeholder";
 
 const Sub = styled(Box).attrs(() => ({
@@ -33,6 +34,8 @@ type BalanceTotalProps = {
   isAvailable: boolean,
   totalBalance: BigNumber,
   showCryptoEvenIfNotAvailable?: boolean,
+  account?: AccountLike,
+  withTransactionsPendingConfirmationWarning?: boolean,
 };
 
 type Props = {
@@ -77,23 +80,39 @@ export function BalanceDiff(props: Props) {
 }
 
 export function BalanceTotal(props: BalanceTotalProps) {
-  const { unit, totalBalance, isAvailable, showCryptoEvenIfNotAvailable, children } = props;
+  const {
+    unit,
+    totalBalance,
+    isAvailable,
+    showCryptoEvenIfNotAvailable,
+    children,
+    withTransactionsPendingConfirmationWarning,
+    account,
+  } = props;
   return (
-    <Box {...props} grow shrink>
-      {!isAvailable && !showCryptoEvenIfNotAvailable ? (
-        <PlaceholderLine width={150} />
-      ) : (
-        <FormattedVal
-          animateTicker
-          color="palette.text.shade100"
-          unit={unit}
-          fontSize={8}
-          disableRounding
-          showCode
-          val={totalBalance}
-        />
-      )}
-      {isAvailable && children}
+    <Box horizontal grow shrink>
+      <Box {...props}>
+        <Box horizontal>
+          {!isAvailable && !showCryptoEvenIfNotAvailable ? (
+            <PlaceholderLine width={150} />
+          ) : (
+            <FormattedVal
+              inline
+              animateTicker
+              color="palette.text.shade100"
+              unit={unit}
+              fontSize={8}
+              disableRounding
+              showCode
+              val={totalBalance}
+            />
+          )}
+          {withTransactionsPendingConfirmationWarning ? (
+            <TransactionsPendingConfirmationWarning account={account} />
+          ) : null}
+        </Box>
+        {isAvailable && children}
+      </Box>
     </Box>
   );
 }
@@ -117,7 +136,12 @@ function BalanceInfos(props: BalanceInfoProps) {
   return (
     <Box flow={5}>
       <Box horizontal>
-        <BalanceTotal unit={unit} isAvailable={isAvailable} totalBalance={totalBalance}>
+        <BalanceTotal
+          withTransactionsPendingConfirmationWarning
+          unit={unit}
+          isAvailable={isAvailable}
+          totalBalance={totalBalance}
+        >
           <Sub>{t("dashboard.totalBalance")}</Sub>
         </BalanceTotal>
       </Box>
