@@ -108,7 +108,7 @@ export function BalanceTotal(props: BalanceTotalProps) {
             />
           )}
           {withTransactionsPendingConfirmationWarning ? (
-            <TransactionsPendingConfirmationWarning account={account} />
+            <TransactionsPendingConfirmationWarning maybeAccount={account} />
           ) : null}
         </Box>
         {isAvailable && children}
