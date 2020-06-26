@@ -223,7 +223,7 @@
     },
     "recentActivity": "Latest operations",
     "totalBalance": "Összes egyenleg",
-    "transactionsPendingConfirmation": "Some transactions are currently in the process of confirmation from the blockchain, your balance is not confirmed as of yet."
+    "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
   },
   "currentAddress": {
     "title": "Jelenlegi cím",
