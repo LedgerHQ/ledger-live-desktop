@@ -1,6 +1,7 @@
 export default {
   title: "Bugs and analytics",
-  description: "Share anonymized data to help improve Ledger security products and services",
+  description:
+    "Share anonymized data to help Ledger improve the security of its products and services",
   data: {
     title: "Technical data*",
     text:
@@ -9,7 +10,7 @@ export default {
   },
   share: {
     title: "Analytics",
-    text: "Enable analytics to help Ledger understand how to improve user experience.",
+    text: "Enable analytics to help Ledger improve user experience.",
     modalTitle: "Analytics",
   },
   logs: {
