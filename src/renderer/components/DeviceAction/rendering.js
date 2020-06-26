@@ -280,8 +280,7 @@ export const renderError = ({
       <TranslatedError error={error} />
     </ErrorTitle>
     <ErrorDescription>
-      <TranslatedError error={error} field="description" />
-      <SupportLinkError error={error} />
+      <TranslatedError error={error} field="description" /> <SupportLinkError error={error} />
     </ErrorDescription>
     {list ? (
       <ErrorDescription>

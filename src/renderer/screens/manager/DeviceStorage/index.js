@@ -5,13 +5,13 @@ import styled, { css, keyframes } from "styled-components";
 import { Trans } from "react-i18next";
 import { Transition, TransitionGroup } from "react-transition-group";
 
-import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
+import type { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
 import type { AppsDistribution } from "@ledgerhq/live-common/lib/apps";
 import type { DeviceModel } from "@ledgerhq/devices";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import ByteSize from "~/renderer/components/ByteSize";
-import { rgba } from "~/renderer/styles/helpers";
+import { lighten, rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
 import Tooltip from "~/renderer/components/Tooltip";
 import Card from "~/renderer/components/Box/Card";
@@ -48,6 +48,13 @@ const Separator = styled.div`
   margin: 20px 0px;
   background: ${p => p.theme.colors.palette.background.default};
   width: 100%;
+`;
+
+const HighlightVersion = styled.span`
+  padding: 4px 6px;
+  color: ${p => p.theme.colors.wallet};
+  background: ${p => p.theme.colors.blueTransparentBackground};
+  border-radius: 4px;
 `;
 
 const Info = styled.div`
@@ -220,6 +227,7 @@ type Props = {
   installQueue: string[],
   uninstallQueue: string[],
   jobInProgress: boolean,
+  firmware: ?FirmwareUpdateContext,
 };
 
 const DeviceStorage = ({
@@ -230,6 +238,7 @@ const DeviceStorage = ({
   installQueue,
   uninstallQueue,
   jobInProgress,
+  firmware,
 }: Props) => {
   const shouldWarn = distribution.shouldWarnMemory || isIncomplete;
 
@@ -249,11 +258,19 @@ const DeviceStorage = ({
             </Tooltip>
           </Box>
         </Box>
-        <Text ff="Inter|Regular" color="palette.text.shade40" fontSize={4}>
-          <Trans
-            i18nKey="manager.deviceStorage.firmware"
-            values={{ version: deviceInfo.version }}
-          />
+        <Text ff="Inter|SemiBold" color="palette.text.shade40" fontSize={4}>
+          {firmware ? (
+            <Trans
+              i18nKey="manager.deviceStorage.firmwareAvailable"
+              values={{ version: deviceInfo.version }}
+            />
+          ) : (
+            <Trans
+              i18nKey="manager.deviceStorage.firmwareUpToDate"
+              values={{ version: deviceInfo.version }}
+            />
+          )}{" "}
+          {firmware ? null : <HighlightVersion>{deviceInfo.version}</HighlightVersion>}
         </Text>
         <Separator />
         <Info>

@@ -222,7 +222,8 @@
       "createAccount": "Add account"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "Total balance"
+    "totalBalance": "Total balance",
+    "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
   },
   "currentAddress": {
     "title": "Current address",
@@ -428,7 +429,8 @@
       "installed": "Apps",
       "capacity": "Capacity",
       "used": "Used",
-      "firmware": "Firmware {{version}}",
+      "firmwareAvailable": "Firmware {{version}}",
+      "firmwareUpToDate": "Firmware is up to date:",
       "genuine": "Device is genuine",
       "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
     },
@@ -538,12 +540,13 @@
         "flash": "Preparing your device..."
       },
       "confirmIdentifier": "Verify the identifier",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN to confirm.",
+      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
       "identifier": "Identifier",
       "mcuTitle": "Finalize update",
       "mcuFirst": "Disconnect the USB cable from your device",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Please wait for the update to finish",
+      "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
       "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
       "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "Firmware updated",
