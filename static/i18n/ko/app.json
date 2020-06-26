@@ -222,7 +222,8 @@
       "createAccount": "계정 추가"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "총 잔액"
+    "totalBalance": "총 잔액",
+    "transactionsPendingConfirmation": "Some transactions are currently in the process of confirmation from the blockchain, your balance is not confirmed as of yet."
   },
   "currentAddress": {
     "title": "현재 주소",
