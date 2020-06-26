@@ -222,7 +222,8 @@
       "createAccount": "アカウントを追加"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "合計残高"
+    "totalBalance": "合計残高",
+    "transactionsPendingConfirmation": "Some transactions are currently in the process of confirmation from the blockchain, your balance is not confirmed as of yet."
   },
   "currentAddress": {
     "title": "現在のアドレス",
