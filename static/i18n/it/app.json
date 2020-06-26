@@ -222,7 +222,8 @@
       "createAccount": "Add account"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "Total balance"
+    "totalBalance": "Total balance",
+    "transactionsPendingConfirmation": "Some transactions are currently in the process of confirmation from the blockchain, your balance is not confirmed as of yet."
   },
   "currentAddress": {
     "title": "Current address",
