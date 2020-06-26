@@ -120,6 +120,8 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             </SwapButton>
           )}
           <BalanceTotal
+            account={account}
+            withTransactionsPendingConfirmationWarning
             key={primaryKey}
             style={{
               cursor: isAvailable ? "pointer" : "",
