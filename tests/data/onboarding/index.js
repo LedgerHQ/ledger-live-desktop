@@ -11,13 +11,13 @@ export default {
   welcome: {
     title: "Welcome to Ledger Live",
     description:
-      "Let’s start by choosing how Ledger Live looks to you. You can change this later at any time in your settings.",
+      "Let's start by choosing how Ledger Live looks to you. You can change this again in your settings.",
   },
   getStartedTitle: "Get started with your Ledger device",
   selectDeviceTitle: "Select your device",
-  choosePinTitle: "Choose your PIN code",
-  saveSeedTitle: "Write down your recovery phrase",
-  enterSeedTitle: "Enter your recovery phrase",
+  choosePinTitle: "Choose your PIN",
+  saveSeedTitle: "Write down your Recovery phrase",
+  enterSeedTitle: "Enter your Recovery phrase",
   noDeviceTitle: "Don't have a Ledger device?",
   genuine,
   password,
@@ -25,6 +25,6 @@ export default {
   lockscreen,
   end: {
     title: "Your device is ready!",
-    description: "Install some apps on your device and access the Portfolio",
+    description: "Install apps on your device and access the Portfolio",
   },
 };
