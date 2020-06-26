@@ -222,7 +222,8 @@
       "createAccount": "Számla hozzáadása"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "Összes egyenleg"
+    "totalBalance": "Összes egyenleg",
+    "transactionsPendingConfirmation": "Some transactions are currently in the process of confirmation from the blockchain, your balance is not confirmed as of yet."
   },
   "currentAddress": {
     "title": "Jelenlegi cím",
