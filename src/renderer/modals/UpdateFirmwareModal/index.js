@@ -1,5 +1,4 @@
 //  @flow
-import semver from "semver";
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
@@ -20,10 +19,12 @@ type MaybeError = ?Error;
 
 export type StepProps = {
   firmware: FirmwareUpdateContext,
-  onCloseModal: () => void,
+  appsToBeReinstalled: boolean,
+  onCloseModal: (proceedToAppReinstall?: boolean) => void,
   error: ?Error,
   setError: Error => void,
   deviceModelId: DeviceModelId,
+  deviceInfo: DeviceInfo,
   t: TFunction,
   transitionTo: string => void,
 };
@@ -34,12 +35,14 @@ type Step = TypedStep<StepId, StepProps>;
 
 type Props = {
   withResetStep: boolean,
+  withAppsToReinstall: boolean,
   status: ModalStatus,
-  onClose: () => void,
+  onClose: (proceedToAppReinstall?: boolean) => void,
   firmware: ?FirmwareUpdateContext,
   stepId: StepId,
   error: ?Error,
   deviceModelId: DeviceModelId,
+  deviceInfo: DeviceInfo,
   setFirmwareUpdateOpened: boolean => void,
 };
 
@@ -51,14 +54,11 @@ const HookMountUnmount = ({ onMountUnmount }: { onMountUnmount: boolean => void 
   return null;
 };
 
-export function hasResetStep(deviceInfo: DeviceInfo, deviceModelId: DeviceModelId) {
-  return deviceModelId === "blue" && semver.lt(deviceInfo.version, "2.1.1");
-}
-
 const UpdateModal = ({
   stepId,
   deviceModelId,
   withResetStep,
+  withAppsToReinstall,
   error,
   status,
   onClose,
@@ -111,7 +111,6 @@ const UpdateModal = ({
 
       let steps = [updateStep, mcuStep, finalStep];
       if (withResetStep) steps = [resetStep, ...steps];
-
       return steps;
     },
     [t],
@@ -149,6 +148,7 @@ const UpdateModal = ({
 
   const additionalProps = {
     ...props,
+    appsToBeReinstalled: withAppsToReinstall,
     onCloseModal: onClose,
     setError,
     firmware,
@@ -159,7 +159,7 @@ const UpdateModal = ({
   return (
     <Modal
       width={550}
-      onClose={onClose}
+      onClose={() => onClose()}
       centered
       backdropColor
       onHide={handleReset}

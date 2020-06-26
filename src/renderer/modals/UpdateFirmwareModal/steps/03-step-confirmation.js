@@ -53,12 +53,29 @@ const StepConfirmation = ({ error }: StepProps) => {
   );
 };
 
-export const StepConfirmFooter = ({ onCloseModal }: StepProps) => {
+export const StepConfirmFooter = ({ onCloseModal, error, appsToBeReinstalled }: StepProps) => {
   const { t } = useTranslation();
+  if (error || !appsToBeReinstalled) {
+    return (
+      <Button id="firmware-update-completed-close-button" primary onClick={() => onCloseModal()}>
+        {t("common.close")}
+      </Button>
+    );
+  }
+
   return (
-    <Button id={"firmware-update-completed-close-button"} primary onClick={onCloseModal}>
-      {t("common.close")}
-    </Button>
+    <>
+      <Button id="firmware-update-completed-close-button" onClick={() => onCloseModal()}>
+        {t("common.close")}
+      </Button>
+      <Button
+        id="firmware-update-completed-reinstall-button"
+        primary
+        onClick={() => onCloseModal(true)}
+      >
+        Re-install the apps
+      </Button>
+    </>
   );
 };
 

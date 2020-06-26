@@ -7,7 +7,10 @@ import { Transition } from "react-transition-group";
 import styled from "styled-components";
 
 import { accountsSelector, starredAccountsSelector } from "~/renderer/reducers/accounts";
-import { sidebarCollapsedSelector } from "~/renderer/reducers/settings";
+import {
+  sidebarCollapsedSelector,
+  hasOutdatedAppsOrFirmwareSelector,
+} from "~/renderer/reducers/settings";
 import { isNavigationLocked } from "~/renderer/reducers/application";
 
 import { openModal } from "~/renderer/actions/modals";
@@ -30,6 +33,7 @@ import { SideBarList, SideBarListItem } from "~/renderer/components/SideBar";
 import Box from "~/renderer/components/Box";
 import Space from "~/renderer/components/Space";
 import UpdateDot from "~/renderer/components/Updater/UpdateDot";
+import { Dot } from "~/renderer/components/Dot";
 import Stars from "~/renderer/components/Stars";
 
 import TopGradient from "./TopGradient";
@@ -175,6 +179,7 @@ const MainSideBar = () => {
   /** redux navigation locked state */
   const navigationLocked = useSelector(isNavigationLocked);
   const collapsed = useSelector(sidebarCollapsedSelector);
+  const hasOutdatedAppsOrFirmware = useSelector(hasOutdatedAppsOrFirmwareSelector);
   const noAccounts = useSelector(accountsSelector).length === 0;
   const hasStarredAccounts = useSelector(starredAccountsSelector).length > 0;
 
@@ -285,6 +290,7 @@ const MainSideBar = () => {
                 iconActiveColor="wallet"
                 onClick={handleClickManager}
                 isActive={location.pathname === "/manager"}
+                NotifComponent={hasOutdatedAppsOrFirmware ? <Dot collapsed={collapsed} /> : null}
                 collapsed={secondAnim}
               />
               <SideBarListItem

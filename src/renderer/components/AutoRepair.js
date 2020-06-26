@@ -40,7 +40,6 @@ const AutoRepair = ({ onDone }: Props) => {
       onClose={onDone}
       onReject={onDone}
       repair={noop}
-      title={<Trans i18nKey="settings.repairDevice.title" />}
       desc={<Trans i18nKey="settings.repairDevice.desc" />}
       progress={progress}
       error={error}

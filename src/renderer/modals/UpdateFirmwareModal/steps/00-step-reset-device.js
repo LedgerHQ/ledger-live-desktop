@@ -5,7 +5,12 @@ import styled from "styled-components";
 import { Trans } from "react-i18next";
 import { getDeviceModel } from "@ledgerhq/devices";
 import type { DeviceModelId } from "@ledgerhq/devices";
-import { powerOff, powerOffDevice, bootOptions, recovery } from "~/config/nontranslatables";
+import {
+  powerOff,
+  powerOffDevice,
+  bootOptions,
+  recovery,
+} from "@ledgerhq/live-common/lib/deviceWordings";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
