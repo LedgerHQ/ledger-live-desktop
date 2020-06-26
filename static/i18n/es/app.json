@@ -222,7 +222,8 @@
       "createAccount": "Añadir cuenta"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "Saldo total"
+    "totalBalance": "Saldo total",
+    "transactionsPendingConfirmation": "Some transactions are currently in the process of confirmation from the blockchain, your balance is not confirmed as of yet."
   },
   "currentAddress": {
     "title": "Dirección actual",
