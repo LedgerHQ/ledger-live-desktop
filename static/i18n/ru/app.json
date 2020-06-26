@@ -222,7 +222,8 @@
       "createAccount": "Добавить счет"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "Общий баланс"
+    "totalBalance": "Общий баланс",
+    "transactionsPendingConfirmation": "Some transactions are currently in the process of confirmation from the blockchain, your balance is not confirmed as of yet."
   },
   "currentAddress": {
     "title": "Текущий адрес",
