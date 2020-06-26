@@ -222,7 +222,8 @@
       "createAccount": "Add account"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "Total balance"
+    "totalBalance": "Total balance",
+    "transactionsPendingConfirmation": "Some transactions are currently in the process of confirmation from the blockchain, your balance is not confirmed as of yet."
   },
   "currentAddress": {
     "title": "Current address",
@@ -1440,9 +1441,9 @@
           "nanoX": {
             "step1": "Connect your {{productName}} to your computer.",
             "step2": "Press both buttons as instructed on your {{productName}} screen.",
-            "step3": "Press the left button to cancel <1><0>{{setUpAsNewDevice}}</0></1>.",
-            "step4": "Press the right button to select <1><0>{{restoreConfiguration}}</0></1>.",
-            "step5": "Choose a PIN with 4 to 8 digits."
+            "step3": "Press both buttons to select <1><0>{{restoreConfiguration}}</0></1>.",
+            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
             "step1": "Connect the {{productName}} to your computer.",
