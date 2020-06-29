@@ -882,6 +882,17 @@
       }
     }
   },
+  "bitcoin": {
+    "advanced": "Advanced options",
+    "rbf": "Replace-by-fee (RBF)",
+    "pickUnconfirmedRBF": "allow unconfirmed replaceable transactions",
+    "pickingStrategy": "UTXO picking strategy",
+    "pickingStrategyLabels": {
+      "DEEP_OUTPUTS_FIRST": "Deep outputs first (FIFO)",
+      "OPTIMIZE_SIZE": "Optimize size (minimize fees)",
+      "MERGE_OUTPUTS": "merge outputs"
+    }
+  },
   "cosmos": {
     "delegation": {
       "emptyState": {
