@@ -223,7 +223,7 @@
     },
     "recentActivity": "Dernières opérations",
     "totalBalance": "Solde total",
-    "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
+    "transactionsPendingConfirmation": "Certaines transactions ne sont pas encore confirmées. Elles seront reflétées dans votre solde et utilisables après avoir été confirmées."
   },
   "currentAddress": {
     "title": "Adresse actuelle",
@@ -413,8 +413,8 @@
     "quitApp": "Quittez l'application sur votre appareil",
     "appNotInstalled": "Veuillez installer l'application {{appName}}",
     "openManager": "Ouvrir le Manager",
-    "outdated": "App version outdated",
-    "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it."
+    "outdated": "Version de l'App obsolète",
+    "outdatedDesc": "Une mise à jour importante est disponible pour l'application {{appName}} de votre appareil. Veuillez aller dans le Manager pour la mettre à jour."
   },
   "manager": {
     "tabs": {
@@ -430,7 +430,7 @@
       "capacity": "Capacité",
       "used": "Utilisé",
       "firmwareAvailable": "Firmware {{version}}",
-      "firmwareUpToDate": "Firmware is up to date:",
+      "firmwareUpToDate": "Le firmware est à jour:",
       "genuine": "L'appareil est authentique",
       "incomplete": "Certaines applications n'ont pas été reconnues. Veuillez les désinstaller et les réinstaller."
     },
@@ -540,13 +540,13 @@
         "flash": "Préparation de votre appareil..."
       },
       "confirmIdentifier": "Vérifier l’identifiant",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
+      "confirmIdentifierText": "Vérifiez que l'identifiant sur votre appareil est le même que l'identifiant ci-dessous. Confirmez et saisissez votre code PIN si demandé.",
       "identifier": "Identifiant",
       "mcuTitle": "Finaliser la mise à jour",
       "mcuFirst": "Déconnectez le câble USB de votre appareil",
       "mcuSecond": "Maintenez le bouton gauche enfoncé tout en reconnectant le câble USB jusqu’à ce que l’écran <1><0>{{repairProcessing}}</0></1> apparaisse",
       "mcuPin": "Veuillez attendre la fin de la mise à jour",
-      "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
+      "mcuSecondNanoX": "Maintenez le bouton gauche enfoncé jusqu'à ce que <1><0>{{bootloaderOption}}</0></1> apparaisse. Appuyez sur les deux boutons pour confirmer et reconnecter votre appareil.",
       "mcuBlueFirst": "Appuyez sur le bouton latéral pendant 10 secondes pour éteindre l'appareil. Relâchez le bouton.",
       "mcuBlueSecond": "Appuyez sur et maintenez le bouton pendant au moins 5 secondes jusqu'à ce que les options de boot soient affichées. Sélectionnez Bootloader mode",
       "successTitle": "Firmware mis à jour",
@@ -1441,9 +1441,9 @@
           "nanoX": {
             "step1": "Connectez {{productName}} à votre ordinateur.",
             "step2": "Appuyez sur les deux boutons comme indiqué sur l’écran de votre {{productName}}.",
-            "step3": "Press both buttons to select <1><0>{{restoreConfiguration}}</0></1>.",
-            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
-            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step3": "Appuyez sur les deux boutons pour sélectionner <1><0>{{restoreConfiguration}}</0></1>.",
+            "step4": "Appuyez sur le bouton gauche ou droit pour sélectionner un chiffre. Appuyez sur les deux boutons pour valider.",
+            "step5": "Sélectionnez ✓ pour confirmer votre code PIN. Sélectionnez ⬅ pour effacer un chiffre."
           },
           "blue": {
             "step1": "Connectez {{productName}} à votre ordinateur.",
@@ -1723,7 +1723,7 @@
     },
     "DeviceNotGenuine": {
       "title": "Vraisemblablement non authentique",
-      "description": "Request assistance from Ledger Support"
+      "description": "Demander assistance au support de Ledger"
     },
     "DeviceGenuineSocketEarlyClose": {
       "title": "Désolé, veuillez essayer à nouveau (fermeture pour absence d'authenticité)",
@@ -1735,11 +1735,11 @@
     },
     "DeviceHalted": {
       "title": "Veuillez redémarrer votre appareil Ledger et réessayer",
-      "description": "An unexpected error occurred. Please try again"
+      "description": "Une erreur inattendue s’est produite. Réessaie plus tard"
     },
     "DeviceSocketFail": {
       "title": "Merci de redémarrer votre appareil Ledger et réessayer",
-      "description": "An unexpected error occurred. Please try again. ({{message}})"
+      "description": "Une erreur inattendue s'est produite. Veuillez réessayer. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
       "title": "Désolé, échec de la connexion",
@@ -1751,7 +1751,7 @@
     },
     "DisconnectedDeviceDuringOperation": {
       "title": "Appareil déconnecté",
-      "description": "The connection to the device was lost during an operation. Please try again"
+      "description": "La connexion à l'appareil a été perdue pendant une opération. Veuillez réessayer"
     },
     "EnpointConfig": {
       "title": "Point de terminaison non valide",
@@ -1763,7 +1763,7 @@
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "Mise à jour du firmware ou de l'application requise",
-      "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them"
+      "description": "Veuillez utiliser le Manager pour désinstaller toutes les applications et vérifier si une mise à jour du firmware est disponible avant de les réinstaller"
     },
     "FirmwareNotRecognized": {
       "title": "Le firmware de l'appareil n'est pas reconnu",
@@ -1771,7 +1771,7 @@
     },
     "HardResetFail": {
       "title": "Désolé, réinitialisation impossible",
-      "description": "Please try again or contact Ledger Support if in doubt"
+      "description": "Veuillez réessayer ou contacter l'assistance Ledger en cas de doute"
     },
     "LatestMCUInstalledError": {
       "title": "Désolé, aucune mise à jour disponible",
@@ -1783,7 +1783,7 @@
     },
     "LedgerAPI5xx": {
       "title": "Désolé, essayez à nouveau.",
-      "description": "The server could not handle your request. Please try again later or contact Ledger Support. {{message}}"
+      "description": "Le serveur n'a pas pu traiter votre demande. Veuillez réessayer plus tard ou contacter le support Ledger. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Désolé, les services {{currencyName}} ne sont pas disponibles.",
@@ -1795,38 +1795,38 @@
     },
     "ManagerAppDepInstallRequired": {
       "title": "App {{dependency}} requise",
-      "description": "If the {{dependency}} app is already installed, please reinstall it with the latest version"
+      "description": "Si l'application {{dependency}} est déjà installée, veuillez la réinstaller avec la dernière version"
     },
     "ManagerAppDepUninstallRequired": {
       "title": "Désolé, cette application est requise",
       "description": "Vous devez d'abord désinstaller toutes les applications qui nécessitent l'application {{appName}}"
     },
     "ManagerDeviceLocked": {
-      "title": "Your device is locked",
-      "description": "Please unlock it"
+      "title": "Votre appareil est verrouillé",
+      "description": "Veuillez le déverrouiller"
     },
     "ManagerFirmwareNotEnoughSpace": {
       "title": "Désinstaller toutes les applications de votre appareil",
-      "description": "The private keys to access your crypto assets will stay safe on your device and must be backed up on your Recovery sheet."
+      "description": "Les clés privées pour accéder à vos actifs crypto-actifs resteront en sécurité sur votre appareil et devront être sauvegardées sur votre feuille de récupération."
     },
     "ManagerNotEnoughSpace": {
       "title": "Désolé, espace disponible insuffisant",
-      "description": "Uninstall some apps to free up space. The private keys to access your crypto assets will stay safe on your device."
+      "description": "Désinstallez certaines applications pour libérer de l'espace. Les clés privées pour accéder à vos crypto-actifs resteront en sécurité sur votre appareil."
     },
     "ManagerQuitPage": {
       "install": {
         "title": "Terminer l'installation de l'application en cours ?",
-        "description": "Quitting the Manager will terminate the app installation. Please finish the installation to install the apps in the queue.",
+        "description": "Quitter le Manager mettra fin à l'installation de l'application. Veuillez terminer l'installation pour installer les applications dans la file d'attente.",
         "stay": "Terminer l'installation"
       },
       "uninstall": {
         "title": "Terminer la désinstallation de l'application en cours ?",
-        "description": "Quitting the Manager will terminate the app uninstallations in progress.",
+        "description": "Quitter le Manager mettra fin aux désinstallations des applications.",
         "stay": "Terminer la désinstallation"
       },
       "update": {
         "title": "Terminer les mises à jour d'applications en cours ?",
-        "description": "Quitting the Manager will terminate the app updates in progress.",
+        "description": "Quitter le Manager interrompra les mises à jour d'applications en cours.",
         "stay": "Terminer les mises à jour"
       },
       "quit": "Quitter le Manager"
@@ -1840,81 +1840,81 @@
       "description": "Veuillez vérifier votre connexion internet"
     },
     "NoAddressesFound": {
-      "title": "Sorry, no accounts were found",
-      "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
+      "title": "Désolé, aucun compte n'a été trouvé",
+      "description": "Quelque chose s’est mal passé lors du calcul de l’adresse, veuillez essayer à nouveau ou contacter l’assistance Ledger"
     },
     "NotEnoughBalance": {
       "title": "Désolé, solde insuffisant",
-      "description": "Make sure the account used has enough funds"
+      "description": "Assurez-vous que le compte utilisé a suffisamment de fonds"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "L’adresse du destinataire est inactive. Envoyez au minimum {{minimalAmount}} pour l’activer."
     },
     "NotEnoughGas": {
-      "title": "The ETH balance in the parent account is insufficient for network fees"
+      "title": "Le solde ETH du compte parent est insuffisant pour les frais de réseau"
     },
     "PasswordsDontMatch": {
-      "title": "The Passwords don't match",
+      "title": "Les mots de passe ne correspondent pas",
       "description": "Veuillez essayer à nouveau."
     },
     "PasswordIncorrect": {
-      "title": "The password entered is incorrect",
+      "title": "Le mot de passe saisi est incorrect",
       "description": "Veuillez essayer à nouveau."
     },
     "TimeoutError": {
-      "title": "Oops, a timeout occurred",
-      "description": "It took too long for the server to respond. Please try again"
+      "title": "Désolé, le délai est dépassé",
+      "description": "Le serveur a mis trop de temps à répondre. Veuillez réessayer"
     },
     "TimeoutTagged": {
-      "title": "Oops, a timeout occurred ({{tag}})",
+      "title": "Désolé, le délai est dépassé ({{tag}})",
       "description": "Le serveur a mis trop de temps à répondre"
     },
     "TransportError": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "Une erreur s'est produite. Veuillez reconnecter votre appareil",
       "description": "{{message}}"
     },
     "TransportRaceCondition": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "Une erreur s'est produite. Veuillez reconnecter votre appareil",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "Une erreur s'est produite. Veuillez reconnecter votre appareil",
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
       "title": "Veuillez ouvrir l'application {{appName}}",
-      "description": "Keep the {{appName}} app open while we find your accounts"
+      "description": "Gardez l'application {{appName}} ouverte pendant que nous cherchons vos comptes"
     },
     "UnexpectedBootloader": {
       "title": "Désolé, votre appareil ne devrait pas être en mode Bootloader",
-      "description": "Please restart your device or contact Ledger Support"
+      "description": "Veuillez redémarrer votre appareil ou contacter le support Ledger"
     },
     "UserRefusedAllowManager": {
       "title": "Manager refusé sur l’appareil"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Update cancelled",
+      "title": "Mise à jour annulée",
       "description": "Veuillez essayer à nouveau ou contacter l’assistance Ledger."
     },
     "UserRefusedOnDevice": {
-      "title": "Action rejected",
-      "description": "User rejected the operation on the device"
+      "title": "Action rejetée",
+      "description": "L'utilisateur a rejeté l'opération sur l'appareil"
     },
     "TransactionRefusedOnDevice": {
       "title": "Opération refusée sur l'appareil",
-      "description": "Please retry or contact Ledger Support if in doubt"
+      "description": "Veuillez réessayer ou contacter l'assistance Ledger en cas de doute"
     },
     "UserRefusedAddress": {
       "title": "Adresse de réception rejetée",
-      "description": "Please try again or contact Ledger Support if in doubt"
+      "description": "Veuillez réessayer ou contacter l'assistance Ledger en cas de doute"
     },
     "UpdateYourApp": {
       "title": "Mise à jour de l’application requise",
       "description": "Désinstallez et réinstallez l’application {{managerAppName}} dans le gestionnaire."
     },
     "DeviceOnDashboardExpected": {
-      "title": "Return to the Dashboard",
-      "description": "Please navigate back to the Dashboard on your device"
+      "title": "Retourner au Dashboard",
+      "description": "Veuillez retourner au Dashboard de votre appareil"
     },
     "WebsocketConnectionError": {
       "title": "Désolé, veuillez essayer à nouveau (erreur de connexion)",
@@ -1926,7 +1926,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "Une erreur s'est produite",
-      "description": "Please check that your hardware wallet is set up with the Recovery phrase or passphrase associated to the selected account."
+      "description": "Veuillez vérifier que votre appareil est configuré avec la phrase de récupération ou la passphrase qui appartient au compte sélectionné."
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Mise à jour de l’application requise",
@@ -1939,8 +1939,8 @@
       "title": "L’adresse de réception est identique à l'adresse d'émission"
     },
     "CantOpenDevice": {
-      "title": "Oops, couldn't connect to device",
-      "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
+      "title": "Désolé, connexion à l’appareil impossible",
+      "description": "L'appareil a été détecté mais la connexion a échoué. Veuillez réessayer ou contacter le support Ledger si le problème persiste."
     },
     "ETHAddressNonEIP": {
       "title": "Auto-vérification indisponible : veuillez vérifier attentivement l’adresse.",
@@ -1950,13 +1950,13 @@
       "title": "Ce QR code n’a pu être scanné : cette adresse ne prend pas en charge l’auto-vérification"
     },
     "FeeNotLoaded": {
-      "title": "Couldn't load fee rates. Please set manual fees"
+      "title": "Chargement des taux de frais impossible. Veuillez définir manuellement les frais"
     },
     "FeeRequired": {
       "title": "Des frais sont requis"
     },
     "GasLessThanEstimate": {
-      "title": "This may be too low. Please increase"
+      "title": "Cela pourrait être trop peu. Veuillez augmenter"
     },
     "UnknownMCU": {
       "title": "Version MCU inconnue",
@@ -1966,13 +1966,13 @@
       "title": "Accéder au tableau de bord pour effectuer la mise à jour",
       "description": "",
       "list": {
-        "1": "Disconnect and reconnect the USB cable without pressing any buttons.",
-        "2": "Press both buttons together three times to display the Dashboard.",
+        "1": "Déconnectez et rebranchez le câble USB sans appuyer sur aucun bouton.",
+        "2": "Appuyez sur les deux boutons trois fois pour afficher le Dashboard.",
         "3": "Ouvrez le Gestionnaire et cliquez sur Mettre à jour."
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive in subaccounts",
+      "title": "Impossible de recevoir sur les sous-comptes",
       "description": "Si vous souhaitez recevoir des fonds, veuillez utiliser le compte parent"
     },
     "UnavailableTezosOriginatedAccountSend": {
@@ -1980,7 +1980,7 @@
       "description": "Suites aux changements récemment introduits par la mise à jour Babylon, cette fonctionnalité sera ajoutée ultérieurement."
     },
     "RecommendUndelegation": {
-      "title": "Please undelegate the account before emptying it"
+      "title": "Veuillez interrompre la délégation du compte avant de le vider"
     },
     "RecommendSubAccountsToEmpty": {
       "title": "Veuillez d'abord vider tous les sous-comptes"
@@ -1990,7 +1990,7 @@
     },
     "BtcUnmatchedApp": {
       "title": "Ce n'est pas la bonne application",
-      "description": "Open the '{{managerAppName}}' app on your device"
+      "description": "Ouvrez l’application « {{managerAppName}} » sur votre appareil"
     },
     "DeviceNameInvalid": {
       "title": "Veuillez choisir un nom d'appareil sans '{{invalidCharacters}}'"
@@ -2004,7 +2004,7 @@
       "description": "Installez d'abord les dernières applications Bitcoin et Ethereum."
     },
     "UserRefusedDeviceNameChange": {
-      "title": "Rename cancelled on device",
+      "title": "Renommage annulé sur l'appareil",
       "description": "Essayez à nouveau et autorisez le renommage sur votre appareil"
     },
     "SyncError": {
@@ -2059,11 +2059,11 @@
     },
     "PairingFailed": {
       "title": "Echec du jumelage",
-      "description": "Please try again or contact Ledger Support if in doubt."
+      "description": "Veuillez réessayer ou contacter l'assistance Ledger en cas de doute."
     },
     "GenuineCheckFailed": {
       "title": "Échec de la vérification d'authenticité",
-      "description": "Something went wrong. Please try again or contact Ledger Support if in doubt."
+      "description": "Une erreur s'est produite. Veuillez réessayer ou contacter l'assistance de Ledger en cas de doute."
     },
     "EthAppPleaseEnableContractData": {
       "title": "Veuillez activer les contract data dans les paramètres de l'application Ethereum"
@@ -2078,16 +2078,16 @@
       "title": "Solde insuffisant pour déléguer"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "Insufficient balance in the parent account"
+      "title": "Solde insuffisant dans le compte parent"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Balance cannot be below {{minimumAmount}}"
+      "title": "Le solde ne peut pas être inférieur à {{minimumAmount}}"
     },
     "WrongAppForCurrency": {
       "title": "Veuillez ouvrir l'application {{expected}}"
     },
     "FeeTooHigh": {
-      "title": "Network fees are above 10% of the amount"
+      "title": "Les frais de réseau représentent plus de 10% du montant"
     },
     "StellarWrongMemoFormat": {
       "title": "Le format du mémo est incorrect"
@@ -2096,7 +2096,7 @@
       "title": "Veuillez désactiver le multisign pour envoyer {{currencyName}}"
     },
     "StellarMemoRecommended": {
-      "title": "A memo may be required when sending to this recipient"
+      "title": "Un mémo peut être requis lors de l'envoi à ce destinataire"
     }
   }
 }
