@@ -132,7 +132,7 @@ const INITIAL_STATE: SettingsState = {
   sidebarCollapsed: false,
   discreetMode: false,
   hasInstalledApps: true,
-  hasOutdatedAppsOrFirmware: true, // turn back to false post-July-2020
+  hasOutdatedAppsOrFirmware: false,
   blacklistedTokenIds: [],
 };
 
