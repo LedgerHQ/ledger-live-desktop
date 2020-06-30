@@ -16,10 +16,10 @@ type Props = {
 
 const animIndeterminate = keyframes`
   0% {
-  }
-  50% {
+    transform: rotate(0deg);
   }
   100% {
+    transform: rotate(360deg);
   }
 `;
 
@@ -28,7 +28,7 @@ const InnerCircle = styled.circle`
   ${p =>
     p.progress === 0
       ? css`
-          animation: ${animIndeterminate} 3s cubic-bezier(0.61, 0.01, 0.39, 1.03) infinite;
+          animation: ${animIndeterminate} 1s linear infinite;
         `
       : css`
           transition: stroke-dashoffset 0.35s;
@@ -57,17 +57,16 @@ const ProgressCircle = ({ size, progress }: Props) => {
   const radius = size / 2;
   const normalizedRadius = radius - STROKE_WIDTH / 2;
   const circumference = normalizedRadius * 2 * Math.PI;
-  const strokeDashoffset = circumference - progress * circumference;
+  const percent = Math.floor(progress * 100);
+  const strokeDashoffset = progress
+    ? circumference - progress * circumference
+    : 0.9 * circumference;
 
   return (
     <Container size={size}>
       <TextContainer>
-        <Text
-          ff="Inter|SemiBold"
-          color={progress === 0 ? "palette.text.shade80" : "wallet"}
-          fontSize={4}
-        >
-          {`${Math.floor(progress * 100)}%`}
+        <Text ff="Inter|SemiBold" color="wallet" fontSize={4}>
+          {percent ? `${percent}%` : ""}
         </Text>
       </TextContainer>
       <svg height={size} width={size}>
