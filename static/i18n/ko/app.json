@@ -222,7 +222,8 @@
       "createAccount": "계정 추가"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "총 잔액"
+    "totalBalance": "총 잔액",
+    "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
   },
   "currentAddress": {
     "title": "현재 주소",
@@ -428,7 +429,8 @@
       "installed": "Apps",
       "capacity": "Capacity",
       "used": "Used",
-      "firmware": "Firmware {{version}}",
+      "firmwareAvailable": "Firmware {{version}}",
+      "firmwareUpToDate": "Firmware is up to date:",
       "genuine": "Device is genuine",
       "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
     },
@@ -538,12 +540,13 @@
         "flash": "Preparing your device..."
       },
       "confirmIdentifier": "식별자 확인",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN to confirm.",
+      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
       "identifier": "식별자",
       "mcuTitle": "Finalize update",
       "mcuFirst": "장치에서 USB 케이블 분리",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Please wait for the update to finish",
+      "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
       "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
       "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "펌웨어 업데이트됨",
@@ -877,6 +880,17 @@
           }
         }
       }
+    }
+  },
+  "bitcoin": {
+    "advanced": "Advanced options",
+    "rbf": "Replace-by-fee (RBF)",
+    "pickUnconfirmedRBF": "allow unconfirmed replaceable transactions",
+    "pickingStrategy": "UTXO picking strategy",
+    "pickingStrategyLabels": {
+      "DEEP_OUTPUTS_FIRST": "Deep outputs first (FIFO)",
+      "OPTIMIZE_SIZE": "Optimize size (minimize fees)",
+      "MERGE_OUTPUTS": "merge outputs"
     }
   },
   "cosmos": {
@@ -1438,9 +1452,9 @@
           "nanoX": {
             "step1": "{{productName}}을(를) 컴퓨터에 연결합니다.",
             "step2": "{{productName}} 화면의 지시에 따라 두 개의 버튼을 동시에 누릅니다.",
-            "step3": "Press the left button to cancel <1><0>{{setUpAsNewDevice}}</0></1>.",
-            "step4": "Press the right button to select <1><0>{{restoreConfiguration}}</0></1>.",
-            "step5": "Choose a PIN with 4 to 8 digits."
+            "step3": "Press both buttons to select <1><0>{{restoreConfiguration}}</0></1>.",
+            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
             "step1": "{{productName}}을(를) 컴퓨터에 연결합니다.",

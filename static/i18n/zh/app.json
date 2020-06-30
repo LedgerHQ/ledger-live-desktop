@@ -222,7 +222,8 @@
       "createAccount": "添加账户"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "总余额"
+    "totalBalance": "总余额",
+    "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
   },
   "currentAddress": {
     "title": "当前地址",
@@ -428,7 +429,8 @@
       "installed": "Apps",
       "capacity": "Capacity",
       "used": "Used",
-      "firmware": "Firmware {{version}}",
+      "firmwareAvailable": "Firmware {{version}}",
+      "firmwareUpToDate": "Firmware is up to date:",
       "genuine": "Device is genuine",
       "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
     },
@@ -538,12 +540,13 @@
         "flash": "正在准备您的设备..."
       },
       "confirmIdentifier": "验证标识符",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN to confirm.",
+      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
       "identifier": "标识符",
       "mcuTitle": "完成更新",
       "mcuFirst": "从设备上断开 USB 数据线连接",
       "mcuSecond": "按下左键并同时重新连接 USB 数据线直到屏幕出现 <1><0>{{repairProcessing}}</0></1>",
       "mcuPin": "Please wait for the update to finish",
+      "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
       "mcuBlueFirst": "持续按住设备侧面按钮10秒后，当设备关闭后，请松开按钮。",
       "mcuBlueSecond": "持续按住设备侧面按钮5秒至设备显示 Boot Options ，请轻击 Bootloader Mode 。",
       "successTitle": "固件已更新",
@@ -877,6 +880,17 @@
           }
         }
       }
+    }
+  },
+  "bitcoin": {
+    "advanced": "Advanced options",
+    "rbf": "Replace-by-fee (RBF)",
+    "pickUnconfirmedRBF": "allow unconfirmed replaceable transactions",
+    "pickingStrategy": "UTXO picking strategy",
+    "pickingStrategyLabels": {
+      "DEEP_OUTPUTS_FIRST": "Deep outputs first (FIFO)",
+      "OPTIMIZE_SIZE": "Optimize size (minimize fees)",
+      "MERGE_OUTPUTS": "merge outputs"
     }
   },
   "cosmos": {
@@ -1438,9 +1452,9 @@
           "nanoX": {
             "step1": "将您的 {{productName}} 连接到您的计算机。",
             "step2": "按照 {{productName}} 屏幕上的说明同时按下两个按钮。",
-            "step3": "按左键取消 <1><0>{{setUpAsNewDevice}}</0></1>。",
-            "step4": "按右键选择<1><0>{{restoreConfiguration}}</0></1>。",
-            "step5": "Choose a PIN with 4 to 8 digits."
+            "step3": "Press both buttons to select <1><0>{{restoreConfiguration}}</0></1>.",
+            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
             "step1": "将 {{productName}} 连接至您的计算机。",

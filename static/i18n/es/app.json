@@ -222,7 +222,8 @@
       "createAccount": "Añadir cuenta"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "Saldo total"
+    "totalBalance": "Saldo total",
+    "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
   },
   "currentAddress": {
     "title": "Dirección actual",
@@ -428,7 +429,8 @@
       "installed": "Apps",
       "capacity": "Capacity",
       "used": "Used",
-      "firmware": "Firmware {{version}}",
+      "firmwareAvailable": "Firmware {{version}}",
+      "firmwareUpToDate": "Firmware is up to date:",
       "genuine": "Device is genuine",
       "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
     },
@@ -538,12 +540,13 @@
         "flash": "Preparando tu dispositivo..."
       },
       "confirmIdentifier": "Comprobar el identificador",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN to confirm.",
+      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
       "identifier": "Identificador",
       "mcuTitle": "Finalizar actualización",
       "mcuFirst": "Desconecta el cable USB de tu dispositivo.",
       "mcuSecond": "Pulsa el botón izquierdo y mantenlo pulsado mientras conectas de nuevo el cable USB hasta que aparezca la pantalla de <1><0>{{repairProcessing}}</0></1>",
       "mcuPin": "Please wait for the update to finish",
+      "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
       "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
       "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "Firmware actualizado",
@@ -877,6 +880,17 @@
           }
         }
       }
+    }
+  },
+  "bitcoin": {
+    "advanced": "Advanced options",
+    "rbf": "Replace-by-fee (RBF)",
+    "pickUnconfirmedRBF": "allow unconfirmed replaceable transactions",
+    "pickingStrategy": "UTXO picking strategy",
+    "pickingStrategyLabels": {
+      "DEEP_OUTPUTS_FIRST": "Deep outputs first (FIFO)",
+      "OPTIMIZE_SIZE": "Optimize size (minimize fees)",
+      "MERGE_OUTPUTS": "merge outputs"
     }
   },
   "cosmos": {
@@ -1438,9 +1452,9 @@
           "nanoX": {
             "step1": "Conecta tu {{productName}} a tu ordenador.",
             "step2": "Pulsa ambos botones a la vez según lo indicado en la pantalla de tu {{productName}}.",
-            "step3": "Pulsa el botón izquierdo para cancelar <1><0>{{setUpAsNewDevice}}</0></1>.",
-            "step4": "Pulsa el botón derecho para seleccionar <1><0>{{restoreConfiguration}}</0></1>.",
-            "step5": "Choose a PIN with 4 to 8 digits."
+            "step3": "Press both buttons to select <1><0>{{restoreConfiguration}}</0></1>.",
+            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
             "step1": "Conecta el {{productName}} a tu ordenador.",

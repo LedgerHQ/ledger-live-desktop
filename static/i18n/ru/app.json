@@ -222,7 +222,8 @@
       "createAccount": "Добавить счет"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "Общий баланс"
+    "totalBalance": "Общий баланс",
+    "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
   },
   "currentAddress": {
     "title": "Текущий адрес",
@@ -428,7 +429,8 @@
       "installed": "Apps",
       "capacity": "Capacity",
       "used": "Used",
-      "firmware": "Firmware {{version}}",
+      "firmwareAvailable": "Firmware {{version}}",
+      "firmwareUpToDate": "Firmware is up to date:",
       "genuine": "Device is genuine",
       "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
     },
@@ -538,12 +540,13 @@
         "flash": "Подготовка вашего устройства..."
       },
       "confirmIdentifier": "Проверить идентификатор",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN to confirm.",
+      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
       "identifier": "Идентификатор",
       "mcuTitle": "Завершить обновление",
       "mcuFirst": "Отсоедините USB-кабель от устройства.",
       "mcuSecond": "Нажмите и удерживайте левую кнопку во время повторного подключения USB-кабеля до тех пор пока не появится на экране <0>{{repairProcessing}}</0></1>",
       "mcuPin": "Please wait for the update to finish",
+      "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
       "mcuBlueFirst": "Нажмите и удерживайте боковую кнопку в течение 10 секунд, чтобы отключить устройство. Затем отпустите кнопку.",
       "mcuBlueSecond": "Нажмите и удерживайте кнопку не менее 5 секунд до тех пор, пока не будут показаны варианты загрузки. Выберите режим Bootloader",
       "successTitle": "Встроенное ПО обновлено",
@@ -877,6 +880,17 @@
           }
         }
       }
+    }
+  },
+  "bitcoin": {
+    "advanced": "Advanced options",
+    "rbf": "Replace-by-fee (RBF)",
+    "pickUnconfirmedRBF": "allow unconfirmed replaceable transactions",
+    "pickingStrategy": "UTXO picking strategy",
+    "pickingStrategyLabels": {
+      "DEEP_OUTPUTS_FIRST": "Deep outputs first (FIFO)",
+      "OPTIMIZE_SIZE": "Optimize size (minimize fees)",
+      "MERGE_OUTPUTS": "merge outputs"
     }
   },
   "cosmos": {
@@ -1438,9 +1452,9 @@
           "nanoX": {
             "step1": "Подключите {{productName}} к компьютеру.",
             "step2": "Нажмите одновременно обе кнопки, как указано на экране {{productName}}.",
-            "step3": "Нажмите левую кнопку, чтобы отменить <1><0>{{setUpAsNewDevice}}</0></1>.",
-            "step4": "Нажмите правой кнопкой, чтобы выбрать <1><0>{{restoreConfiguration}}</0></1>.",
-            "step5": "Choose a PIN with 4 to 8 digits."
+            "step3": "Press both buttons to select <1><0>{{restoreConfiguration}}</0></1>.",
+            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
             "step1": "Подключите {{productName}} к компьютеру.",
