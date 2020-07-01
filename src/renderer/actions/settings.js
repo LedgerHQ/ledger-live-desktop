@@ -5,8 +5,8 @@ import type { DeviceModelId } from "@ledgerhq/devices";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/types/portfolio";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 
-import { setEnvOnAllThreads } from "./../../helpers/env";
-import type { SettingsState as Settings } from "./../reducers/settings";
+import { setEnvOnAllThreads } from "~/helpers/env";
+import type { SettingsState as Settings, DeviceModelInfo } from "~/renderer/reducers/settings";
 import { refreshAccountsOrdering } from "~/renderer/actions/general";
 
 export type SaveSettings = ($Shape<Settings>) => { type: string, payload: $Shape<Settings> };
@@ -29,8 +29,7 @@ export const setMarketIndicator = (marketIndicator: *) => saveSettings({ marketI
 export const setAutoLockTimeout = (autoLockTimeout: *) => saveSettings({ autoLockTimeout });
 export const setHasInstalledApps = (hasInstalledApps: boolean) =>
   saveSettings({ hasInstalledApps });
-export const setHasOutdatedAppsOrFirmware = (hasOutdatedAppsOrFirmware: boolean) =>
-  saveSettings({ hasOutdatedAppsOrFirmware });
+
 export const setCounterValue = (counterValue: string) =>
   saveSettings({
     counterValue,
@@ -88,3 +87,8 @@ export const dismissBanner = (bannerKey: string) => ({
 
 export const setPreferredDeviceModel = (preferredDeviceModel: DeviceModelId) =>
   saveSettings({ preferredDeviceModel });
+
+export const setLastSeenDeviceInfo = (dmi: DeviceModelInfo) => ({
+  type: "LAST_SEEN_DEVICE_INFO",
+  payload: dmi,
+});

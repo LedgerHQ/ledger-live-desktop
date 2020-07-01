@@ -22,7 +22,7 @@ import type { StepProps } from "../..";
 import GenuineCheckModal from "./GenuineCheckModal";
 import GenuineCheckErrorPage from "./GenuineCheckErrorPage";
 import { useDispatch, useSelector } from "react-redux";
-import { setHasInstalledApps } from "~/renderer/actions/settings";
+import { setHasInstalledApps, setLastSeenDeviceInfo } from "~/renderer/actions/settings";
 import { hasCompletedOnboardingSelector } from "~/renderer/reducers/settings";
 
 const CardTitle = styled(Box).attrs(() => ({
@@ -82,6 +82,20 @@ const GenuineCheck = (props: StepProps) => {
       if (!hasCompletedOnboarding && (!result || !result.installed.length)) {
         dispatch(setHasInstalledApps(false));
       }
+
+      if (result) {
+        const { deviceModelId: modelId, deviceInfo, installed } = result;
+        dispatch(
+          setLastSeenDeviceInfo({
+            modelId,
+            deviceInfo,
+            apps: installed.length ? installed.map(({ name, version }) => ({ name, version })) : [],
+          }),
+        );
+      }
+
+      console.log("result", result);
+
       updateGenuineCheck({
         isDeviceGenuine: true,
       });

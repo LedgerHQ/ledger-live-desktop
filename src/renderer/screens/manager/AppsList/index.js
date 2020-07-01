@@ -15,6 +15,7 @@ import { useAppsRunner } from "@ledgerhq/live-common/lib/apps/react";
 
 import NavigationGuard from "~/renderer/components/NavigationGuard";
 import Quit from "~/renderer/icons/Quit";
+import type { Device } from "~/renderer/reducers/devices";
 
 import AppList from "./AppsList";
 import DeviceStorage from "../DeviceStorage/index";
@@ -23,7 +24,7 @@ import AppDepsInstallModal from "./AppDepsInstallModal";
 import AppDepsUnInstallModal from "./AppDepsUnInstallModal";
 
 import ErrorModal from "~/renderer/modals/ErrorModal/index";
-import { setHasInstalledApps, setHasOutdatedAppsOrFirmware } from "~/renderer/actions/settings";
+import { setHasInstalledApps, setLastSeenDeviceInfo } from "~/renderer/actions/settings";
 import { useDispatch, useSelector } from "react-redux";
 import { hasInstalledAppsSelector } from "~/renderer/reducers/settings";
 
@@ -47,6 +48,7 @@ const QuitIconWrapper = styled.div`
 `;
 
 type Props = {
+  device: Device,
   firmware: ?FirmwareUpdateContext,
   deviceInfo: DeviceInfo,
   result: ListAppsResult,
@@ -56,7 +58,16 @@ type Props = {
   appsToRestore?: string[],
 };
 
-const AppsList = ({ firmware, deviceInfo, result, exec, t, render, appsToRestore }: Props) => {
+const AppsList = ({
+  firmware,
+  deviceInfo,
+  result,
+  exec,
+  t,
+  render,
+  appsToRestore,
+  device,
+}: Props) => {
   const [state, dispatch] = useAppsRunner(result, exec, appsToRestore);
   const [appInstallDep, setAppInstallDep] = useState(undefined);
   const [appUninstallDep, setAppUninstallDep] = useState(undefined);
@@ -96,10 +107,17 @@ const AppsList = ({ firmware, deviceInfo, result, exec, t, render, appsToRestore
     }
   }, [state.installed.length, reduxDispatch, hasInstalledApps]);
 
-  const hasOutdatedAppsOrFirmware = !!firmware || state.installed.some(a => !a.updated);
+  // Save last seen device
   useEffect(() => {
-    reduxDispatch(setHasOutdatedAppsOrFirmware(hasOutdatedAppsOrFirmware));
-  }, [reduxDispatch, hasOutdatedAppsOrFirmware]);
+    const dmi = {
+      modelId: device.modelId,
+      deviceInfo,
+      apps: state.installed.length
+        ? state.installed.map(({ name, version }) => ({ name, version }))
+        : [],
+    };
+    reduxDispatch(setLastSeenDeviceInfo(dmi));
+  }, [device, state.installed, deviceInfo, reduxDispatch]);
 
   const disableFirmwareUpdate = state.installQueue.length > 0 || state.uninstallQueue.length > 0;
 

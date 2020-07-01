@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import type { Action } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { setPreferredDeviceModel } from "~/renderer/actions/settings";
-import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
+import { preferredDeviceModelSelector, lastSeenDeviceSelector } from "~/renderer/reducers/settings";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { Device } from "~/renderer/reducers/devices";
 import AutoRepair from "~/renderer/components/AutoRepair";
