@@ -193,6 +193,7 @@ export default function StepValidators({
             account={account}
             status={status}
             onChange={onChangeAmount}
+            label={t("cosmos.redelegation.flow.steps.validators.amountLabel")}
           />
         </Box>
       )}

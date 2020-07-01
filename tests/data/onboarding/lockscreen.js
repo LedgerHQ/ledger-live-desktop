@@ -4,4 +4,5 @@ export default {
   reset: {
     title: "Reset Ledger Live",
   },
+  incorrectPassword: "The password entered is incorrect",
 };

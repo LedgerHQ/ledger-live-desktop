@@ -17,14 +17,23 @@ type Props = {
   device: Device,
   deviceInfo: DeviceInfo,
   result: ?ListAppsResult,
-  onReset: () => void,
+  onReset: (?(string[])) => void,
+  appsToRestore: string[],
 };
 
-const Dashboard = ({ device, deviceInfo, result, onReset }: Props) => {
+const Dashboard = ({ device, deviceInfo, result, onReset, appsToRestore }: Props) => {
   const { t } = useTranslation();
   const currentDevice = useSelector(getCurrentDevice);
   const [firmwareUpdateOpened, setFirmwareUpdateOpened] = useState(false);
   const hasDisconnectedDuringFU = useRef(false);
+  const [firmware, setFirmware] = useState(null);
+  const [firmwareError, setFirmwareError] = useState(null);
+
+  useEffect(() => {
+    command("getLatestFirmwareForDevice")(deviceInfo)
+      .toPromise()
+      .then(setFirmware, setFirmwareError);
+  }, [deviceInfo]);
 
   // on disconnect, go back to connect
   useEffect(() => {
@@ -70,15 +79,21 @@ const Dashboard = ({ device, deviceInfo, result, onReset }: Props) => {
         <AppsList
           device={device}
           deviceInfo={deviceInfo}
+          firmware={firmware}
           result={result}
+          appsToRestore={appsToRestore}
           exec={exec}
-          render={disableFirmwareUpdate => (
+          render={({ disableFirmwareUpdate, installed }) => (
             <FirmwareUpdate
               t={t}
               device={device}
               deviceInfo={deviceInfo}
+              firmware={firmware}
+              error={firmwareError}
               setFirmwareUpdateOpened={setFirmwareUpdateOpened}
               disableFirmwareUpdate={disableFirmwareUpdate}
+              installed={installed}
+              onReset={onReset}
             />
           )}
         />
@@ -87,7 +102,10 @@ const Dashboard = ({ device, deviceInfo, result, onReset }: Props) => {
           t={t}
           device={device}
           deviceInfo={deviceInfo}
+          firmware={firmware}
+          error={firmwareError}
           setFirmwareUpdateOpened={setFirmwareUpdateOpened}
+          onReset={onReset}
         />
       )}
     </Box>

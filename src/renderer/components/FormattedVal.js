@@ -58,6 +58,7 @@ type OwnProps = {
   prefix?: string,
   ellipsis?: boolean,
   suffix?: string,
+  showAllDigits?: boolean,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -89,6 +90,7 @@ function FormattedVal(props: Props) {
     prefix,
     suffix,
     discreet,
+    showAllDigits,
     ...p
   } = props;
   let { val } = props;
@@ -119,6 +121,7 @@ function FormattedVal(props: Props) {
       locale,
       subMagnitude,
       discreet,
+      showAllDigits,
     });
   }
 

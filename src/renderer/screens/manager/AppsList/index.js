@@ -3,8 +3,8 @@ import React, { memo, useState, useCallback, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
-import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
-import type { ListAppsResult, Exec } from "@ledgerhq/live-common/lib/apps/types";
+import type { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
+import type { ListAppsResult, Exec, InstalledItem } from "@ledgerhq/live-common/lib/apps/types";
 import {
   predictOptimisticState,
   reducer,
@@ -23,7 +23,7 @@ import AppDepsInstallModal from "./AppDepsInstallModal";
 import AppDepsUnInstallModal from "./AppDepsUnInstallModal";
 
 import ErrorModal from "~/renderer/modals/ErrorModal/index";
-import { setHasInstalledApps } from "~/renderer/actions/settings";
+import { setHasInstalledApps, setHasOutdatedAppsOrFirmware } from "~/renderer/actions/settings";
 import { useDispatch, useSelector } from "react-redux";
 import { hasInstalledAppsSelector } from "~/renderer/reducers/settings";
 
@@ -47,15 +47,17 @@ const QuitIconWrapper = styled.div`
 `;
 
 type Props = {
+  firmware: ?FirmwareUpdateContext,
   deviceInfo: DeviceInfo,
   result: ListAppsResult,
   exec: Exec,
   t: TFunction,
-  render?: boolean => React$Node,
+  render?: ({ disableFirmwareUpdate: boolean, installed: InstalledItem[] }) => React$Node,
+  appsToRestore?: string[],
 };
 
-const AppsList = ({ deviceInfo, result, exec, t, render }: Props) => {
-  const [state, dispatch] = useAppsRunner(result, exec);
+const AppsList = ({ firmware, deviceInfo, result, exec, t, render, appsToRestore }: Props) => {
+  const [state, dispatch] = useAppsRunner(result, exec, appsToRestore);
   const [appInstallDep, setAppInstallDep] = useState(undefined);
   const [appUninstallDep, setAppUninstallDep] = useState(undefined);
   const isIncomplete = isIncompleteState(state);
@@ -94,11 +96,16 @@ const AppsList = ({ deviceInfo, result, exec, t, render }: Props) => {
     }
   }, [state.installed.length, reduxDispatch, hasInstalledApps]);
 
+  const hasOutdatedAppsOrFirmware = !!firmware || state.installed.some(a => !a.updated);
+  useEffect(() => {
+    reduxDispatch(setHasOutdatedAppsOrFirmware(hasOutdatedAppsOrFirmware));
+  }, [reduxDispatch, hasOutdatedAppsOrFirmware]);
+
   const disableFirmwareUpdate = state.installQueue.length > 0 || state.uninstallQueue.length > 0;
 
   return (
     <>
-      {render ? render(disableFirmwareUpdate) : null}
+      {render ? render({ disableFirmwareUpdate, installed: state.installed }) : null}
       <Container>
         {currentError && (
           <ErrorModal isOpened={!!currentError} error={currentError.error} onClose={onCloseError} />
@@ -127,6 +134,7 @@ const AppsList = ({ deviceInfo, result, exec, t, render }: Props) => {
           deviceModel={state.deviceModel}
           deviceInfo={deviceInfo}
           isIncomplete={isIncomplete}
+          firmware={firmware}
         />
         <AppList
           deviceInfo={deviceInfo}

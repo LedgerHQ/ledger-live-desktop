@@ -482,9 +482,7 @@ describe("When I launch the app for the first time", () => {
       describe("and password is incorrect", () => {
         it("should warn about password mismatch", async () => {
           await lockscreenPage.passwordInput.addValue(`${data.password.bad}\uE007`);
-          expect(await lockscreenPage.inputError.getText()).toBe(
-            "The password you entered is incorrect",
-          );
+          expect(await lockscreenPage.inputError.getText()).toBe(data.lockscreen.incorrectPassword);
         });
       });
 
