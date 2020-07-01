@@ -31,10 +31,11 @@ type BodyProps = {
   progress: number,
   deviceModelId: DeviceModelId,
   firmware: FirmwareUpdateContext,
+  initialDelayPhase: boolean,
 };
 
-const Body = ({ installing, progress, firmware, deviceModelId }: BodyProps) => {
-  return installing || !firmware.shouldFlashMCU ? (
+const Body = ({ installing, progress, firmware, deviceModelId, initialDelayPhase }: BodyProps) => {
+  return installing || !firmware.shouldFlashMCU || initialDelayPhase ? (
     <Installing installing={installing} progress={progress} />
   ) : (
     <FlashMCU deviceModelId={deviceModelId} />
@@ -44,13 +45,20 @@ const Body = ({ installing, progress, firmware, deviceModelId }: BodyProps) => {
 type MaybeString = ?string;
 type Props = StepProps;
 
+const DELAY_PHASE = 5000;
+
 const StepFlashMcu = ({ firmware, deviceModelId, setError, transitionTo }: Props) => {
   const { t } = useTranslation();
   const [installing, setInstalling] = useState<MaybeString>(null);
+  const [initialDelayPhase, setInitialDelayPhase] = useState(true);
   const [progress, setProgress] = useState(0);
 
   // didMount
   useEffect(() => {
+    setTimeout(() => {
+      setInitialDelayPhase(false);
+    }, DELAY_PHASE);
+
     const sub = (getEnv("MOCK")
       ? mockedEventEmitter()
       : command("firmwareMain")(firmware)
@@ -87,6 +95,7 @@ const StepFlashMcu = ({ firmware, deviceModelId, setError, transitionTo }: Props
         firmware={firmware}
         installing={installing}
         progress={progress}
+        initialDelayPhase={initialDelayPhase}
       />
     </Container>
   );

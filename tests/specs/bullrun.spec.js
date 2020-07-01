@@ -205,14 +205,6 @@ describe("Bullrun", () => {
       customSnapshotIdentifier: "firmware-update-2-disclaimer-modal-checkbox",
     });
   });
-  it("firmware update flow-4", async () => {
-    $("#firmware-update-disclaimer-modal-continue-button").click();
-    await delay(1000);
-    image = await app.browserWindow.capturePage();
-    expect(image).toMatchImageSnapshot({
-      customSnapshotIdentifier: "firmware-update-3-disclaimer-modal-continue-1",
-    });
-  });
   it("firmware update flow-5", async () => {
     $("#firmware-update-disclaimer-modal-continue-button").click();
     await delay(1000);
@@ -233,7 +225,7 @@ describe("Bullrun", () => {
   it("firmware update flow-7", async () => {
     await mockDeviceEvent({}, { type: "complete" }); // .complete() flash mcu -> completed
     await app.client.waitForExist("#firmware-update-completed-close-button");
-    await delay(1000);
+    await delay(6000); // wait initial delay of the ui
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-6-flash-mcu-done",
