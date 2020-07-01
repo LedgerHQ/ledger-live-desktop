@@ -45,7 +45,7 @@ const Body = ({ installing, progress, firmware, deviceModelId, initialDelayPhase
 type MaybeString = ?string;
 type Props = StepProps;
 
-const DELAY_PHASE = 5000;
+const DELAY_PHASE = 10000;
 
 const StepFlashMcu = ({ firmware, deviceModelId, setError, transitionTo }: Props) => {
   const { t } = useTranslation();
