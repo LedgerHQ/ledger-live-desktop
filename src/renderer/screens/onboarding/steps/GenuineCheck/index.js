@@ -89,12 +89,10 @@ const GenuineCheck = (props: StepProps) => {
           setLastSeenDeviceInfo({
             modelId,
             deviceInfo,
-            apps: installed.length ? installed.map(({ name, version }) => ({ name, version })) : [],
+            apps: installed.map(({ name, version }) => ({ name, version })),
           }),
         );
       }
-
-      console.log("result", result);
 
       updateGenuineCheck({
         isDeviceGenuine: true,

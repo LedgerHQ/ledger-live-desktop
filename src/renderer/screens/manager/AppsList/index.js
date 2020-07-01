@@ -112,9 +112,7 @@ const AppsList = ({
     const dmi = {
       modelId: device.modelId,
       deviceInfo,
-      apps: state.installed.length
-        ? state.installed.map(({ name, version }) => ({ name, version }))
-        : [],
+      apps: state.installed.map(({ name, version }) => ({ name, version })),
     };
     reduxDispatch(setLastSeenDeviceInfo(dmi));
   }, [device, state.installed, deviceInfo, reduxDispatch]);

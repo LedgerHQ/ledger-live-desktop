@@ -23,16 +23,14 @@ async function hasOudatedApps({ deviceInfo, modelId, apps }: DeviceModelInfo): P
     device_version: deviceVersion.id,
   });
 
-  const outdated = apps.map(app => {
+  return apps.some(app => {
     const currApp = compatibleAppVersionsList.find(e => e.name === app.name);
     return currApp && semver.gt(currApp.version, app.version);
   });
-
-  return outdated.some(Boolean);
 }
 
 function useShouldDisplayBlueDot(dmi: ?DeviceModelInfo): boolean {
-  const [display, setDisplay] = useState(false);
+  const [display, setDisplay] = useState(!dmi);
 
   useEffect(() => {
     let cancelled = false;
@@ -45,17 +43,9 @@ function useShouldDisplayBlueDot(dmi: ?DeviceModelInfo): boolean {
       return cancel;
     }
 
-    const { deviceInfo, modelId, apps } = dmi;
+    const { deviceInfo } = dmi;
 
-    if (!deviceInfo || !modelId) {
-      setDisplay(true);
-      return cancel;
-    }
-
-    Promise.all([
-      manager.getLatestFirmwareForDevice(deviceInfo),
-      hasOudatedApps({ deviceInfo, modelId, apps }),
-    ])
+    Promise.all([manager.getLatestFirmwareForDevice(deviceInfo), hasOudatedApps(dmi)])
       .then(([fw, outdatedApp]) => {
         if (cancelled) return;
 
@@ -64,7 +54,7 @@ function useShouldDisplayBlueDot(dmi: ?DeviceModelInfo): boolean {
           return;
         }
 
-        setDisplay(false);
+        setDisplay(Boolean(fw || outdatedApp));
       })
       .catch(err => {
         console.log(err);
