@@ -523,10 +523,7 @@
       "latest": "Доступно встроенное ПО версии {{version}}.",
       "prepareSeed": "Ensure your 24-word Recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
       "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
-      "downloadingUpdateDesc": "Please wait for the update installer to be downloaded",
-      "appsAutoUninstallTitle": "All applications will be uninstalled from your device",
-      "appsAutoUninstallBullet1": "<0><0>Don't worry</0></0>, this does not affect your crypto assets",
-      "appsAutoUninstallBullet2": "You will be able to reinstall them all after the update"
+      "downloadingUpdateDesc": "Please wait for the update installer to be downloaded"
     },
     "modal": {
       "steps": {
