@@ -523,10 +523,7 @@
       "latest": "La version {{version}} du firmware est disponible.",
       "prepareSeed": "Assurez-vous que votre phrase de récupération de 24 mots est écrite sur votre feuille de récupération et accessible, par précaution.",
       "disclaimerTitle": "Vous êtes sur le point d’installer la <1>version {{version}}</1> du firmware.",
-      "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour",
-      "appsAutoUninstallTitle": "Toutes les applications seront désinstallées de votre appareil",
-      "appsAutoUninstallBullet1": "<0><0>Pas d'inquiétudes</0></0>, cela n'affecte pas vos actifs crypto",
-      "appsAutoUninstallBullet2": "Vous pourrez les réinstaller après la mise à jour"
+      "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour"
     },
     "modal": {
       "steps": {
