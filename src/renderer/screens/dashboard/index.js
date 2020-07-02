@@ -68,10 +68,11 @@ const DashboardPage = ({ saveSettings }: Props) => {
     item => saveSettings({ selectedTimeRange: item.key }),
     [saveSettings],
   );
+  const showCarousel = hasInstalledApps && totalAccounts > 0;
 
   return (
     <>
-      <Carousel />
+      {showCarousel ? <Carousel /> : null}
       <TopBannerContainer>
         <UpdateBanner />
         <MigrationBanner />
