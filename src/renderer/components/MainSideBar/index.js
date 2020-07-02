@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { Transition } from "react-transition-group";
 import styled from "styled-components";
+import { useManagerBlueDot } from "@ledgerhq/live-common/lib/manager/hooks";
 
 import { accountsSelector, starredAccountsSelector } from "~/renderer/reducers/accounts";
 import { sidebarCollapsedSelector, lastSeenDeviceSelector } from "~/renderer/reducers/settings";
 import { isNavigationLocked } from "~/renderer/reducers/application";
-import useShouldDisplayBlueDot from "~/renderer/hooks/useShouldDisplayBlueDot";
 
 import { openModal } from "~/renderer/actions/modals";
 import { setSidebarCollapsed } from "~/renderer/actions/settings";
@@ -180,7 +180,7 @@ const MainSideBar = () => {
   const lastSeenDevice = useSelector(lastSeenDeviceSelector);
   const noAccounts = useSelector(accountsSelector).length === 0;
   const hasStarredAccounts = useSelector(starredAccountsSelector).length > 0;
-  const displayBlueDot = useShouldDisplayBlueDot(lastSeenDevice);
+  const displayBlueDot = useManagerBlueDot(lastSeenDevice);
 
   const handleCollapse = useCallback(() => {
     dispatch(setSidebarCollapsed(!collapsed));

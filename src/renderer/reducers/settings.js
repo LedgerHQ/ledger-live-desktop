@@ -10,18 +10,12 @@ import {
 } from "@ledgerhq/live-common/lib/currencies";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { CryptoCurrency, Currency } from "@ledgerhq/live-common/lib/types";
-import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
+import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getLanguages } from "~/config/languages";
 import type { State } from ".";
 import { osLangAndRegionSelector } from "~/renderer/reducers/application";
 import { listSupportedFiats } from "@ledgerhq/live-common/lib/data/fiat";
-
-export type DeviceModelInfo = {
-  modelId: DeviceModelId,
-  deviceInfo: DeviceInfo,
-  apps: Array<{ name: string, version: string }>,
-};
 
 export type CurrencySettings = {
   confirmationsNb: number,
