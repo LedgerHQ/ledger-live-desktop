@@ -4,9 +4,10 @@ import type { Dispatch } from "redux";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/types/portfolio";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
+import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 
 import { setEnvOnAllThreads } from "~/helpers/env";
-import type { SettingsState as Settings, DeviceModelInfo } from "~/renderer/reducers/settings";
+import type { SettingsState as Settings } from "~/renderer/reducers/settings";
 import { refreshAccountsOrdering } from "~/renderer/actions/general";
 
 export type SaveSettings = ($Shape<Settings>) => { type: string, payload: $Shape<Settings> };
