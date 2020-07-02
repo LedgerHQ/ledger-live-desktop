@@ -8,7 +8,7 @@ import DeviceAction from "~/renderer/components/DeviceAction";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import { createAction as initSwapCreateAction } from "@ledgerhq/live-common/lib/hw/actions/initSwap";
 import { Trans } from "react-i18next";
-import type { SignedOperation } from "@ledgerhq/live-common/lib/types";
+import type { SignedOperation, Transaction } from "@ledgerhq/live-common/lib/types";
 import type { Device } from "~/renderer/reducers/devices";
 import StepProgress from "~/renderer/components/StepProgress";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
@@ -35,10 +35,12 @@ const Result = ({
 
 const StepDevice = ({
   swap,
+  transaction,
   onContinue,
   onError,
 }: {
   swap: { exchange: Exchange, exchangeRate: ExchangeRate },
+  transaction: Transaction,
   onContinue: any,
   onError: any,
 }) => {
@@ -54,7 +56,7 @@ const StepDevice = ({
   return !swapData ? (
     <DeviceAction
       action={action2}
-      request={{ exchange, exchangeRate, device }}
+      request={{ exchange, exchangeRate, transaction, device }}
       onResult={({ initSwapResult, initSwapError, ...rest }) => {
         if (initSwapError) {
           onError(initSwapError);

@@ -21,6 +21,7 @@ import type {
   SwapOperation,
   SwapState,
 } from "@ledgerhq/live-common/lib/swap/types";
+import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import Button from "~/renderer/components/Button";
 import IconWallet from "~/renderer/icons/Wallet";
 import IconArrowDown from "~/renderer/icons/ArrowDown";
@@ -43,15 +44,18 @@ const IconWrapper = styled(Box)`
 
 const StepSummary = ({
   swap,
+  transaction,
   checkedDisclaimer,
   onSwitchAccept,
 }: {
   swap: { exchange: Exchange, exchangeRate: ExchangeRate },
+  transaction: Transaction,
   checkedDisclaimer: boolean,
   onSwitchAccept: () => any,
 }) => {
   const { exchange, exchangeRate } = swap;
-  const { fromAccount, toAccount, fromAmount } = exchange;
+  const { fromAccount, toAccount } = exchange;
+  const fromAmount = transaction.amount;
   if (!fromAccount || !toAccount || !fromAmount) return null;
 
   const fromCurrency = getAccountCurrency(fromAccount);

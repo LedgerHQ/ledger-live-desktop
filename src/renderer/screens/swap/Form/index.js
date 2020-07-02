@@ -1,6 +1,8 @@
 // @flow
 
-import React, { useState, useCallback, useEffect, useMemo, useReducer } from "react";
+import React, { useCallback, useEffect, useMemo, useReducer } from "react";
+import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+
 import { BigNumber } from "bignumber.js";
 import uniq from "lodash/uniq";
 import { connect, useDispatch } from "react-redux";
@@ -22,6 +24,7 @@ import {
   initState,
   reducer,
 } from "@ledgerhq/live-common/lib/swap/logic";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { flattenAccounts, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import type { InstalledItem } from "@ledgerhq/live-common/lib/apps";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -39,11 +42,9 @@ import Tooltip from "~/renderer/components/Tooltip";
 import IconExclamationCircle from "~/renderer/icons/ExclamationCircle";
 import IconArrowRight from "~/renderer/icons/ArrowRight";
 import { colors } from "~/renderer/styles/theme";
-import { openModal, setDataModal } from "~/renderer/actions/modals";
+import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import type { CurrencyStatus } from "@ledgerhq/live-common/lib/swap/logic";
-import useInterval from "~/renderer/hooks/useInterval";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
 const Footer: ThemedComponent<{}> = styled(Box)`
   align-items: center;
@@ -93,8 +94,10 @@ const Form = ({
   const patchExchange = useCallback(payload => dispatch({ type: "patchExchange", payload }), [
     dispatch,
   ]);
+
   const {
     swap,
+    fromAmount,
     fromCurrency,
     toCurrency,
     useAllAmount,
@@ -103,13 +106,12 @@ const Form = ({
     error,
   } = state;
   const { exchange, exchangeRate } = swap;
-  console.log({ state });
-  const { fromAccount, toAccount, fromAmount } = exchange;
+  const { fromAccount, toAccount } = exchange;
+  const { setTransaction, setAccount, transaction } = useBridgeTransaction();
 
-  const onStartSwap = useCallback(() => reduxDispatch(openModal("MODAL_SWAP", { swap })), [
-    swap,
-    reduxDispatch,
-  ]);
+  const onStartSwap = useCallback(() => {
+    reduxDispatch(openModal("MODAL_SWAP", { swap, transaction }));
+  }, [reduxDispatch, swap, transaction]);
 
   const validFrom = useMemo(() => accounts.filter(isSameCurrencyFilter(fromCurrency)), [
     accounts,
@@ -123,6 +125,15 @@ const Form = ({
 
   const { magnitudeAwareRate } = exchangeRate || {};
 
+  useEffect(() => setAccount(fromAccount), [fromAccount, setAccount]);
+  useEffect(() => {
+    if (!fromAccount || !transaction) return;
+    if (transaction.amount && !transaction.amount.eq(fromAmount)) {
+      const bridge = getAccountBridge(fromAccount); // TODO token support
+      setTransaction(bridge.updateTransaction(transaction, { amount: fromAmount }));
+    }
+  }, [fromAccount, fromAmount, setAccount, setTransaction, transaction]);
+
   useEffect(() => {
     dispatch({
       type: "setFromAccount",
@@ -134,12 +145,14 @@ const Form = ({
   }, [fromCurrency, patchExchange, validFrom, dispatch]);
 
   useEffect(() => patchExchange({ toAccount: validTo[0] || null }), [patchExchange, validTo]);
+  const _canRequestRates = useMemo(() => canRequestRates(state), [state]);
 
   useEffect(() => {
     let ignore = false;
     async function getRates() {
       try {
-        const rates = await getExchangeRates(exchange);
+        if (!transaction) return;
+        const rates = await getExchangeRates(exchange, transaction);
         if (ignore) return;
         dispatch({ type: "setRate", payload: { rate: rates[0] } });
       } catch (error) {
@@ -147,14 +160,14 @@ const Form = ({
         dispatch({ type: "setError", payload: { error } });
       }
     }
-    if (!ignore && canRequestRates(state)) {
+    if (!ignore && !exchangeRate && _canRequestRates) {
       getRates();
     }
 
     return () => {
       ignore = true;
     };
-  }, [state, exchange, fromAccount, toAccount, fromAmount]);
+  }, [_canRequestRates, exchange, exchangeRate, transaction]);
 
   // Not to be confused with the useAllAmount flag for a regular transaction.
   // We need this because the providers require an exact amount to lock a rate.
@@ -180,14 +193,14 @@ const Form = ({
 
   // Re-fetch rates (if needed) every `ratesExpirationThreshold` seconds.
   // This updated the modal if it's already open.
-  useInterval(() => {
-    const now = new Date();
-    if (ratesTimestamp && now - ratesTimestamp > ratesExpirationThreshold) {
-      dispatch({ type: "expireRates" });
-    } else {
-      reduxDispatch(setDataModal("MODAL_SWAP", { swap }));
-    }
-  }, 5000);
+  // useInterval(() => {
+  //   const now = new Date();
+  //   if (ratesTimestamp && now - ratesTimestamp > ratesExpirationThreshold) {
+  //     dispatch({ type: "expireRates" });
+  //   } else {
+  //     reduxDispatch(setDataModal("MODAL_SWAP", { swap }));
+  //   }
+  // }, 5000);
 
   if (!fromAccount) return null;
 

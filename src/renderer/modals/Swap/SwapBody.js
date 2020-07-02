@@ -14,9 +14,11 @@ import { updateAccount } from "~/renderer/actions/accounts";
 type SwapSteps = "summary" | "device" | "finished";
 const SwapBody = ({
   swap,
+  transaction,
   onClose,
 }: {
   swap: { exchange: Exchange, exchangeRate: ExchangeRate },
+  transaction: any, // FIXME
   onClose: any,
 }) => {
   const { exchange, exchangeRate } = swap;
@@ -81,11 +83,17 @@ const SwapBody = ({
           ) : activeStep === "summary" ? (
             <StepSummary
               swap={swap}
+              transaction={transaction}
               checkedDisclaimer={checkedDisclaimer}
               onSwitchAccept={onSwitchAccept}
             />
           ) : activeStep === "device" ? (
-            <StepDevice swap={swap} onContinue={onDeviceInteraction} onError={setError} />
+            <StepDevice
+              swap={swap}
+              transaction={transaction}
+              onContinue={onDeviceInteraction}
+              onError={setError}
+            />
           ) : swapId ? (
             <StepFinished swapId={swapId} />
           ) : null}

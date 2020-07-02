@@ -9,7 +9,9 @@ const Swap = () => {
     <Modal
       name="MODAL_SWAP"
       centered
-      render={({ data, onClose }) => <SwapBody swap={data.swap} onClose={onClose} />}
+      render={({ data, onClose }) => (
+        <SwapBody swap={data.swap} transaction={data.transaction} onClose={onClose} />
+      )}
     />
   );
 };
