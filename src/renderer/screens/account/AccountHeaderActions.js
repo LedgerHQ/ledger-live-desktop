@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import { isCurrencySwapSupported } from "@ledgerhq/live-common/lib/swap";
 import Tooltip from "~/renderer/components/Tooltip";
 import {
   isAccountEmpty,
@@ -26,6 +27,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useHistory } from "react-router-dom";
 import IconExchange from "~/renderer/icons/Exchange";
+import IconSwap from "~/renderer/icons/Swap";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
@@ -70,12 +72,23 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const SendAction = (decorators && decorators.SendAction) || SendActionDefault;
   const ReceiveAction = (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
   const currency = getAccountCurrency(account);
+  const availableOnSwap = isCurrencySwapSupported(currency);
   const availableOnExchange = isCurrencySupported(currency);
   const history = useHistory();
 
   const onBuy = useCallback(() => {
     history.push({
       pathname: "/exchange",
+      state: {
+        defaultCurrency: currency,
+        defaultAccount: mainAccount,
+      },
+    });
+  }, [currency, history, mainAccount]);
+
+  const onSwap = useCallback(() => {
+    history.push({
+      pathname: "/swap",
       state: {
         defaultCurrency: currency,
         defaultAccount: mainAccount,
@@ -94,6 +107,18 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
             eventProperties: { currencyName: currency.name },
             icon: IconExchange,
             label: <Trans i18nKey="buy.titleCrypto" values={{ currency: currency.name }} />,
+          },
+        ]
+      : []),
+    ...(availableOnSwap
+      ? [
+          {
+            key: "Swap",
+            onClick: onSwap,
+            event: "Swap Crypto Account Button",
+            eventProperties: { currencyName: currency.name },
+            icon: IconSwap,
+            label: <Trans i18nKey="swap.titleCrypto" values={{ currency: currency.name }} />,
           },
         ]
       : []),
