@@ -47,6 +47,13 @@ export const urls = {
   cosmosStakingRewards:
     "https://support.ledger.com/hc/en-us/articles/360014339340-Earn-Cosmos-staking-rewards",
 
+  // Banners
+  banners: {
+    backupPack:
+      "https://shop.ledger.com/products/ledger-backup-pack?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop=banner_desktop",
+    ledgerAcademy:
+      "https://www.ledger.com/academy/?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop",
+  },
   // Errors
   errors: {
     CantOpenDevice: "https://support.ledger.com/hc/en-us/articles/115005165269",
