@@ -262,12 +262,12 @@ export default ConnectedAccountSettingRenderBody;
 
 export const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   flow: 2,
-  justify: "space-between",
   horizontal: true,
   mb: 3,
   pb: 4,
 }))`
   border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
+  justify-content: space-between;
 `;
 
 export const OptionRowDesc: ThemedComponent<{}> = styled(Box).attrs(() => ({
