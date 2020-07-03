@@ -523,10 +523,7 @@
       "latest": "{{version}} Szoftververzió elérhető",
       "prepareSeed": "Ensure your 24-word Recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
       "disclaimerTitle": "Telepíteni készülsz a <1>szoftververziót {{version}}</1>.",
-      "downloadingUpdateDesc": "Please wait for the update installer to be downloaded",
-      "appsAutoUninstallTitle": "Minden alkalmazás törölve lesz az eszközödről",
-      "appsAutoUninstallBullet1": "<0><0>Ne aggódj</0></0>, ez nem érinti a rajta található kriptókat",
-      "appsAutoUninstallBullet2": "Frissítés után újra fogod tudni telepíteni őket"
+      "downloadingUpdateDesc": "Please wait for the update installer to be downloaded"
     },
     "modal": {
       "steps": {
