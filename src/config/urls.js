@@ -29,7 +29,7 @@ export const urls = {
   managerHelpRequest: "https://support.ledger.com/hc/en-us/articles/360006523674 ",
   contactSupport: "https://support.ledger.com/hc/en-us/requests/new?ticket_form_id=248165",
   feesMoreInfo: "https://support.ledger.com/hc/en-us/articles/360006535873",
-  recipientAddressInfo: "https://support.ledger.com/hc/en-us/articles/360006433934",
+  recipientAddressInfo: "https://support.ledger.com/hc/en-us/articles/360006444193",
   privacyPolicy: "https://www.ledger.com/pages/privacy-policy",
   troubleshootingUSB: "https://support.ledger.com/hc/en-us/articles/115005165269",
   troubleshootingCrash: "https://support.ledger.com/hc/en-us/articles/360012598060",
