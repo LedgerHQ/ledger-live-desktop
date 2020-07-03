@@ -10,6 +10,7 @@ import {
 } from "@ledgerhq/live-common/lib/currencies";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { CryptoCurrency, Currency } from "@ledgerhq/live-common/lib/types";
+import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getLanguages } from "~/config/languages";
 import type { State } from ".";
@@ -70,7 +71,7 @@ export type SettingsState = {
   counterValue: string,
   preferredDeviceModel: DeviceModelId,
   hasInstalledApps: boolean,
-  hasOutdatedAppsOrFirmware: boolean,
+  lastSeenDevice: ?DeviceModelInfo,
   language: ?string,
   theme: ?string,
   region: ?string,
@@ -109,7 +110,6 @@ const defaultsForCurrency: Currency => CurrencySettings = crypto => {
 const INITIAL_STATE: SettingsState = {
   hasCompletedOnboarding: false,
   counterValue: "USD",
-  preferredDeviceModel: "nanoS",
   language: null,
   theme: null,
   region: null,
@@ -131,8 +131,9 @@ const INITIAL_STATE: SettingsState = {
   hideEmptyTokenAccounts: getEnv("HIDE_EMPTY_TOKEN_ACCOUNTS"),
   sidebarCollapsed: false,
   discreetMode: false,
+  preferredDeviceModel: "nanoS",
   hasInstalledApps: true,
-  hasOutdatedAppsOrFirmware: false,
+  lastSeenDevice: null,
   blacklistedTokenIds: [],
 };
 
@@ -209,6 +210,13 @@ const handlers: Object = {
       blacklistedTokenIds: [...ids, tokenId],
     };
   },
+  LAST_SEEN_DEVICE_INFO: (
+    state: SettingsState,
+    { payload: dmi }: { payload: DeviceModelInfo },
+  ) => ({
+    ...state,
+    lastSeenDevice: dmi,
+  }),
   // used to debug performance of redux updates
   DEBUG_TICK: state => ({ ...state }),
 };
@@ -321,8 +329,6 @@ export const autoLockTimeoutSelector = (state: State) => state.settings.autoLock
 export const shareAnalyticsSelector = (state: State) => state.settings.shareAnalytics;
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange;
 export const hasInstalledAppsSelector = (state: State) => state.settings.hasInstalledApps;
-export const hasOutdatedAppsOrFirmwareSelector = (state: State) =>
-  state.settings.hasOutdatedAppsOrFirmware;
 export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;
@@ -337,6 +343,8 @@ export const dismissedBannerSelectorLoaded = (bannerKey: string) => (state: Stat
 
 export const hideEmptyTokenAccountsSelector = (state: State) =>
   state.settings.hideEmptyTokenAccounts;
+
+export const lastSeenDeviceSelector = (state: State) => state.settings.lastSeenDevice;
 
 export const exportSettingsSelector: OutputSelector<State, void, *> = createSelector(
   counterValueCurrencySelector,
