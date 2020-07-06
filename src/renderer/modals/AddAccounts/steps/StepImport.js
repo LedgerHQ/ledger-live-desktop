@@ -141,6 +141,8 @@ class StepImport extends PureComponent<StepProps> {
                 checkedAccountsIds: onlyNewAccounts
                   ? hasAlreadyBeenImported
                     ? []
+                    : checkedAccountsIds.length > 0
+                    ? checkedAccountsIds
                     : [account.id]
                   : !hasAlreadyBeenImported && !isNewAccount
                   ? uniq([...checkedAccountsIds, account.id])
