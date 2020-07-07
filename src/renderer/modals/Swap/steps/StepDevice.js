@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { command } from "~/renderer/commands";
@@ -12,6 +12,7 @@ import type { SignedOperation, Transaction } from "@ledgerhq/live-common/lib/typ
 import type { Device } from "~/renderer/reducers/devices";
 import StepProgress from "~/renderer/components/StepProgress";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
+import { delay } from "@ledgerhq/live-common/lib/promise";
 const connectAppExec = command("connectApp");
 const initSwapExec = command("initSwap");
 
@@ -50,8 +51,7 @@ const StepDevice = ({
 
   const broadcast = useBroadcast({ account, parentAccount });
   const [swapData, setSwapData] = useState(false);
-
-  const tokenCurrency = account && account.type === "TokenAccount" && account.token;
+  const tokenCurrency = account && account.type === "TokenAccount" ? account.token : null;
 
   return !swapData ? (
     <DeviceAction
@@ -74,6 +74,7 @@ const StepDevice = ({
         account,
         transaction: swapData.transaction,
         status,
+        appName: "Exchange", // TODO move to live-common maybe
       }}
       Result={Result}
       onResult={({ signedOperation, transactionSignError }) => {

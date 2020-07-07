@@ -13,12 +13,7 @@ type MaybeProviders = ?(AvailableProvider[]);
 const Swap = () => {
   const [providers, setProviders] = useState<MaybeProviders>();
   const [showLandingPage, setShowLandingPage] = useState(true);
-  const [installedApps, setInstalledApps] = useState([
-    { name: "Bitcoin", updated: true },
-    { name: "Litecoin", updated: true },
-    { name: "Ethereum", updated: true },
-    { name: "Tron", updated: true },
-  ]); // TODO Use real listApps when speculos supports it/we have swap on manager
+  const [installedApps, setInstalledApps] = useState();
 
   useEffect(() => {
     async function fetchProviders() {
@@ -37,9 +32,7 @@ const Swap = () => {
     [setInstalledApps],
   );
 
-  const showInstallSwap = installedApps && !installedApps.some(a => a.name === "Bitcoin");
-  // ↑ FIXME Use swap once we have swap app for real
-
+  const showInstallSwap = installedApps && !installedApps.some(a => a.name === "Exchange");
   const onContinue = useCallback(() => {
     setShowLandingPage(false);
   }, [setShowLandingPage]);
