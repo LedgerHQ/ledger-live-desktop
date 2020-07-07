@@ -7,7 +7,7 @@ import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import { isAccountBalanceUnconfirmed } from "@ledgerhq/live-common/lib/account";
 import { accountsSelector } from "./../reducers/accounts";
 import IconClock from "~/renderer/icons/Clock";
-import ToolTip from "~/renderer/components/ToolTip";
+import ToolTip from "~/renderer/components/Tooltip";
 import Box from "~/renderer/components/Box";
 
 const TransactionsPendingConfirmationWarning = ({
