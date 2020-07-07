@@ -34,11 +34,8 @@ jobs:
         uses: peter-evans/create-pull-request@v2
         with:
           committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          title: "[Screenshots] $GITHUB_HEAD_REF $GITHUB_SHA -> $GITHUB_BASE_REF"
+          title: "[Screenshots] for develop"
           body: |
             Auto generated screenshots for ${{ github.sha }}
             by ${{ github.actor }}
-          assignees: ${{ github.actor }}
-          reviewers: ${{ github.actor }}
-          branch: new-screenshots-${{ github.sha }}
+          branch: screenshots-for-develop
