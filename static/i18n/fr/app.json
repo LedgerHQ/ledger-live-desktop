@@ -449,7 +449,7 @@
       "installed": "Apps",
       "capacity": "Capacité",
       "used": "Utilisé",
-      "firmwareAvailable": "Firmware {{version}}",
+      "firmwareAvailable": "Firmware is outdated:",
       "firmwareUpToDate": "Le firmware est à jour:",
       "genuine": "L'appareil est authentique",
       "incomplete": "Certaines applications n'ont pas été reconnues. Veuillez les désinstaller et les réinstaller."
@@ -541,6 +541,8 @@
       "update": "Mettre à jour",
       "updateBtn": "Mettre à jour",
       "latest": "La version {{version}} du firmware est disponible.",
+      "contactSupport": "Contact support",
+      "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
       "prepareSeed": "Assurez-vous que votre phrase de récupération de 24 mots est écrite sur votre feuille de récupération et accessible, par précaution.",
       "disclaimerTitle": "Vous êtes sur le point d’installer la <1>version {{version}}</1> du firmware.",
       "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour"
