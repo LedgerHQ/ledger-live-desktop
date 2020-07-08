@@ -136,7 +136,7 @@ const StepSummary = ({
         </FakeLink>
       </Box>
       <Box mt={6} horizontal alignItems={"center"} onClick={onSwitchAccept}>
-        <CheckBox onClick={onSwitchAccept} isChecked={checkedDisclaimer} />
+        <CheckBox onChange={onSwitchAccept} isChecked={checkedDisclaimer} />
         <Text
           ff="Inter|Regular"
           fontSize={3}

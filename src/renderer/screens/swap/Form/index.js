@@ -215,9 +215,12 @@ const Form = ({
             currency={fromCurrency}
             error={error}
             currencies={selectableCurrencies}
-            onCurrencyChange={fromCurrency =>
-              dispatch({ type: "setFromCurrency", payload: { fromCurrency } })
-            }
+            onCurrencyChange={_fromCurrency => {
+              // FIXME this doesnt work with tokens
+              if (fromCurrency.id !== _fromCurrency.id) {
+                dispatch({ type: "setFromCurrency", payload: { fromCurrency: _fromCurrency } });
+              }
+            }}
             onAccountChange={a => dispatch({ type: "setFromAccount", payload: { fromAccount: a } })}
             onAmountChange={fromAmount =>
               dispatch({ type: "setFromAmount", payload: { fromAmount } })

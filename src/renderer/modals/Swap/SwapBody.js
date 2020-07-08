@@ -36,6 +36,7 @@ const SwapBody = ({
     async result => {
       const { operation, status } = result;
       let account = swap.exchange.fromAccount;
+
       account = {
         ...account,
         swapHistory: [
@@ -46,8 +47,8 @@ const SwapBody = ({
             operationId: operation.id,
             swapId: status.swapId,
             receiverAccountId: exchange.toAccount.id,
-            fromAmount: exchange.fromAmount,
-            toAmount: exchange.fromAmount.times(exchangeRate.magnitudeAwareRate),
+            fromAmount: transaction.amount,
+            toAmount: transaction.amount.times(exchangeRate.magnitudeAwareRate),
           },
         ],
       };

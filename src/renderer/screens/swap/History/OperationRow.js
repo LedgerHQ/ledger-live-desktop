@@ -29,6 +29,7 @@ const getStatusColor = (status, theme) => {
       finished: theme.colors.positiveGreen,
       new: theme.colors.gray,
       failed: theme.colors.alertRed,
+      cancelled: theme.colors.alertRed,
     }[status] || theme.colors.palette.shade50
   );
 };
@@ -78,9 +79,11 @@ const Row: ThemedComponent<{}> = styled(Box)`
 const OperationRow = ({
   mappedSwapOperation,
   openSwapOperationDetailsModal,
+  date,
 }: {
   mappedSwapOperation: MappedSwapOperation,
   openSwapOperationDetailsModal: MappedSwapOperation => void,
+  date: Date,
 }) => {
   const {
     fromAccount,
@@ -122,6 +125,8 @@ const OperationRow = ({
           {provider}
         </Text>
         <Text ff={"Inter|Regular"} color={"palette.text.shade50"} fontSize={3}>
+          {moment(date).format("LL")}
+          {" - "}
           {moment(operation.date).format("HH:mm")}
         </Text>
       </Box>

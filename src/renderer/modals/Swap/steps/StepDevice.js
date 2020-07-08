@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { command } from "~/renderer/commands";
@@ -12,7 +12,6 @@ import type { SignedOperation, Transaction } from "@ledgerhq/live-common/lib/typ
 import type { Device } from "~/renderer/reducers/devices";
 import StepProgress from "~/renderer/components/StepProgress";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
-import { delay } from "@ledgerhq/live-common/lib/promise";
 const connectAppExec = command("connectApp");
 const initSwapExec = command("initSwap");
 
@@ -50,10 +49,30 @@ const StepDevice = ({
   const { fromAccount: account, fromParentAccount: parentAccount } = exchange;
 
   const broadcast = useBroadcast({ account, parentAccount });
-  const [swapData, setSwapData] = useState(false);
+  const [swapData, setSwapData] = useState(null);
+  const [signedOperation, setSignedOperation] = useState(false);
   const tokenCurrency = account && account.type === "TokenAccount" ? account.token : null;
 
-  return !swapData ? (
+  useEffect(() => {
+    if (swapData && signedOperation) {
+      const { swapId } = swapData;
+      broadcast(signedOperation).then(
+        operation => {
+          onContinue({
+            operation,
+            status: { swapId },
+          });
+        },
+        error => {
+          onError(error);
+        },
+      );
+    }
+  }, [broadcast, onContinue, onError, signedOperation, swapData]);
+
+  return signedOperation ? (
+    <div>{"Broadcasting operation"}</div>
+  ) : !swapData ? (
     <DeviceAction
       action={action2}
       request={{ exchange, exchangeRate, transaction, device }}
@@ -78,19 +97,10 @@ const StepDevice = ({
       }}
       Result={Result}
       onResult={({ signedOperation, transactionSignError }) => {
-        const { swapId } = swapData;
-        if (signedOperation) {
-          broadcast(signedOperation).then(
-            operation => {
-              onContinue({
-                operation,
-                status: { swapId },
-              });
-            },
-            error => {
-              onError(error);
-            },
-          );
+        if (transactionSignError) {
+          onError(transactionSignError);
+        } else {
+          setSignedOperation(signedOperation);
         }
       }}
     />

@@ -65,6 +65,7 @@ export const urls = {
       "https://shop.ledger.com/products/ledger-backup-pack?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop",
     ledgerAcademy:
       "https://www.ledger.com/academy/?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop",
+  },
   // FIXME where do we maintain these urls
   swap: {
     providers: {
