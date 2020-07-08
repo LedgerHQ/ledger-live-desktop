@@ -62,12 +62,16 @@ const Bullets = styled.div`
   justify-content: center;
   & > div {
     cursor: pointer;
-    border-radius: 6px;
-    height: 6px;
-    width: 6px;
-    background: rgba(255, 255, 255, 0.3);
-    margin: 0 5px;
-    &:nth-child(${p => p.index + 1}) {
+    & > span {
+      display: block;
+      border-radius: 6px;
+      height: 6px;
+      width: 6px;
+      background: rgba(255, 255, 255, 0.3);
+    }
+    padding: 15px 5px;
+    margin-bottom: -15px;
+    &:nth-child(${p => p.index + 1}) > span {
       background: #ffffff;
     }
   }
@@ -183,7 +187,9 @@ const Carousel = ({
           ) : (
             <Bullets index={index}>
               {slides.map((_, i) => (
-                <div key={i} onClick={() => onChooseSlide(i)} />
+                <div key={i} onClick={() => onChooseSlide(i)}>
+                  <span />
+                </div>
               ))}
             </Bullets>
           )}
