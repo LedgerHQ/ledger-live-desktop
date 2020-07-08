@@ -213,7 +213,27 @@
   },
   "banners": {
     "migrate": "Ledger Live számlák frissítése lehetséges",
-    "genericTerminatedCrypto": "{{coinName}} többé nem támogatott"
+    "genericTerminatedCrypto": "{{coinName}} többé nem támogatott",
+    "ledgerAcademy": {
+      "title": "Ledger Academy",
+      "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
+      "cta": "Start learning"
+    },
+    "stakeCosmos": {
+      "title": "Staking with COSMOS",
+      "description": "Delegate your ATOM coins through the account page and earn rewards today",
+      "cta": "Stake Cosmos now"
+    },
+    "buyCrypto": {
+      "title": "Buy Crypto",
+      "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
+      "cta": "Buy now"
+    },
+    "backupPack": {
+      "title": "Back-up pack",
+      "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
+      "cta": "Buy back-up pack"
+    }
   },
   "dashboard": {
     "title": "Portfólio",
@@ -429,7 +449,7 @@
       "installed": "Alkalmazások",
       "capacity": "Kapacitás",
       "used": "Felhasznált",
-      "firmwareAvailable": "Firmware {{version}}",
+      "firmwareAvailable": "Firmware is outdated:",
       "firmwareUpToDate": "Firmware is up to date:",
       "genuine": "Az eszköz eredeti",
       "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
@@ -521,6 +541,8 @@
       "update": "Szoftverfrissítés",
       "updateBtn": "Szoftver frissítése",
       "latest": "{{version}} Szoftververzió elérhető",
+      "contactSupport": "Contact support",
+      "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
       "prepareSeed": "Ensure your 24-word Recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
       "disclaimerTitle": "Telepíteni készülsz a <1>szoftververziót {{version}}</1>.",
       "downloadingUpdateDesc": "Please wait for the update installer to be downloaded"

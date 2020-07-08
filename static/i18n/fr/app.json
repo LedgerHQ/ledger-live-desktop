@@ -213,7 +213,27 @@
   },
   "banners": {
     "migrate": "Mise à jour des comptes Ledger Live disponible",
-    "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge"
+    "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge",
+    "ledgerAcademy": {
+      "title": "Ledger Academy",
+      "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
+      "cta": "Start learning"
+    },
+    "stakeCosmos": {
+      "title": "Staking with COSMOS",
+      "description": "Delegate your ATOM coins through the account page and earn rewards today",
+      "cta": "Stake Cosmos now"
+    },
+    "buyCrypto": {
+      "title": "Buy Crypto",
+      "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
+      "cta": "Buy now"
+    },
+    "backupPack": {
+      "title": "Back-up pack",
+      "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
+      "cta": "Buy back-up pack"
+    }
   },
   "dashboard": {
     "title": "Portfolio",
@@ -429,7 +449,7 @@
       "installed": "Apps",
       "capacity": "Capacité",
       "used": "Utilisé",
-      "firmwareAvailable": "Firmware {{version}}",
+      "firmwareAvailable": "Firmware is outdated:",
       "firmwareUpToDate": "Le firmware est à jour:",
       "genuine": "L'appareil est authentique",
       "incomplete": "Certaines applications n'ont pas été reconnues. Veuillez les désinstaller et les réinstaller."
@@ -521,6 +541,8 @@
       "update": "Mettre à jour",
       "updateBtn": "Mettre à jour",
       "latest": "La version {{version}} du firmware est disponible.",
+      "contactSupport": "Contact support",
+      "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
       "prepareSeed": "Assurez-vous que votre phrase de récupération de 24 mots est écrite sur votre feuille de récupération et accessible, par précaution.",
       "disclaimerTitle": "Vous êtes sur le point d’installer la <1>version {{version}}</1> du firmware.",
       "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour"
