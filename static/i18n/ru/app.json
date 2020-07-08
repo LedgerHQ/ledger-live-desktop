@@ -449,7 +449,7 @@
       "installed": "Apps",
       "capacity": "Capacity",
       "used": "Used",
-      "firmwareAvailable": "Firmware {{version}}",
+      "firmwareAvailable": "Firmware is outdated:",
       "firmwareUpToDate": "Firmware is up to date:",
       "genuine": "Device is genuine",
       "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
@@ -541,6 +541,8 @@
       "update": "Firmware update",
       "updateBtn": "Update firmware",
       "latest": "Доступно встроенное ПО версии {{version}}.",
+      "contactSupport": "Contact support",
+      "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
       "prepareSeed": "Ensure your 24-word Recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
       "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
       "downloadingUpdateDesc": "Please wait for the update installer to be downloaded"
