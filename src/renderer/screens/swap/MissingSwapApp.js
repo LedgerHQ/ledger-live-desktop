@@ -18,12 +18,7 @@ const MissingSwapApp = () => {
   // FIXME replace with swap app icon once we have it in the manager
   return (
     <Card p={89} alignItems="center">
-      <Image
-        alt="Swap app icon"
-        resource={manager.getIconUrl("https://api.ledgerwallet.com/update/assets/icons/bitcoin")}
-        width={60}
-        height={60}
-      />
+      <Image alt="Swap app icon" resource={manager.getIconUrl("exchange")} width={60} height={60} />
       <Text color="palette.text.shade100" mb={1} mt={3} ff="Inter|SemiBold" fontSize={5}>
         <Trans i18nKey={"swap.missingApp.title"} />
       </Text>
