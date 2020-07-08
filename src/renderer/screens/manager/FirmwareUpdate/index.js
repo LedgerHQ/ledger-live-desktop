@@ -2,10 +2,15 @@
 
 import React, { PureComponent } from "react";
 import { Trans } from "react-i18next";
-import { getDeviceModel } from "@ledgerhq/devices";
+
+import type { ModalStatus } from "./types";
 import type { InstalledItem } from "@ledgerhq/live-common/lib/apps/types";
+
+import { getDeviceModel } from "@ledgerhq/devices";
 import manager from "@ledgerhq/live-common/lib/manager";
+
 import type { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
+
 import type { Device } from "~/renderer/reducers/devices";
 import DisclaimerModal from "~/renderer/modals/DisclaimerModal";
 import UpdateModal from "~/renderer/modals/UpdateFirmwareModal";
@@ -14,8 +19,10 @@ import Text from "~/renderer/components/Text";
 import getCleanVersion from "~/renderer/screens/manager/FirmwareUpdate/getCleanVersion";
 import IconInfoCircle from "~/renderer/icons/InfoCircle";
 import Box from "~/renderer/components/Box";
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
+import Button from "~/renderer/components/Button";
 import UpdateFirmwareButton from "./UpdateFirmwareButton";
-import type { ModalStatus } from "./types";
 
 type Props = {
   deviceInfo: DeviceInfo,
@@ -26,6 +33,7 @@ type Props = {
   onReset: (string[]) => void,
   firmware: ?FirmwareUpdateContext,
   error: ?Error,
+  isIncomplete?: boolean,
 };
 
 type State = {
@@ -88,9 +96,39 @@ class FirmwareUpdate extends PureComponent<Props, State> {
       stepId = "finish"; // need to display the final step with error
     }
 
-    if (!firmware) return null;
-
     const deviceSpecs = getDeviceModel(device.modelId);
+
+    const isDeprecated = manager.firmwareUnsupported(device.modelId, deviceInfo);
+
+    if (!firmware) {
+      if (!isDeprecated) return null;
+
+      return (
+        <Box
+          py={2}
+          px={4}
+          bg="blueTransparentBackground"
+          horizontal
+          alignItems="center"
+          justifyContent="space-between"
+          borderRadius={1}
+        >
+          <Box flex="1" mr={4}>
+            <Text ff="Inter|SemiBold" fontSize={4} color="palette.primary.main">
+              <Trans i18nKey="manager.firmware.deprecated" />
+            </Text>
+          </Box>
+          <Button
+            primary
+            onClick={() => {
+              openURL(urls.contactSupport);
+            }}
+          >
+            <Trans i18nKey="manager.firmware.contactSupport" />
+          </Button>
+        </Box>
+      );
+    }
 
     return (
       <Box
