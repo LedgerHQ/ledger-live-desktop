@@ -74,6 +74,7 @@ const StepDevice = ({
     <div>{"Broadcasting operation"}</div>
   ) : !swapData ? (
     <DeviceAction
+      key={"initSwap"}
       action={action2}
       request={{ exchange, exchangeRate, transaction, device }}
       onResult={({ initSwapResult, initSwapError, ...rest }) => {
@@ -86,6 +87,7 @@ const StepDevice = ({
     />
   ) : (
     <DeviceAction
+      key={"send"}
       action={action}
       request={{
         tokenCurrency,
