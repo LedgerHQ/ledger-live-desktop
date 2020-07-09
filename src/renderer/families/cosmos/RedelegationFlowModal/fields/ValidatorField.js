@@ -10,6 +10,7 @@ import {
   useSortedValidators,
   useCosmosMappedDelegations,
 } from "@ledgerhq/live-common/lib/families/cosmos/react";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 
 import { openURL } from "~/renderer/linking";
@@ -35,6 +36,8 @@ export default function ValidatorField({ account, transaction, t, onChange }: *)
   const { cosmosResources } = account;
 
   invariant(cosmosResources, "cosmosResources required");
+
+  const unit = getAccountUnit(account);
 
   const formattedDelegations = cosmosResources.delegations.map(({ validatorAddress, ...d }) => ({
     ...d,
@@ -107,10 +110,11 @@ export default function ValidatorField({ account, transaction, t, onChange }: *)
           onExternalLink={onExternalLink}
           onClick={onSelect}
           style={{ cursor: "pointer" }}
+          unit={unit}
         />
       );
     },
-    [onExternalLink, onSelect, mappedDelegations],
+    [onExternalLink, onSelect, mappedDelegations, unit],
   );
 
   return (

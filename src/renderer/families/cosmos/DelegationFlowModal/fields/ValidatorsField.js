@@ -1,6 +1,5 @@
 // @flow
 import invariant from "invariant";
-import styled from "styled-components";
 import React, { useCallback, useState, useRef, useEffect } from "react";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
@@ -33,59 +32,8 @@ import ScrollLoadingList from "~/renderer/components/ScrollLoadingList";
 import ValidatorSearchInput, {
   NoResultPlaceholder,
 } from "~/renderer/components/Delegation/ValidatorSearchInput";
-import InputCurrency from "~/renderer/components/InputCurrency";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Text from "~/renderer/components/Text";
-
-const InputRight = styled(Box).attrs(() => ({
-  ff: "Inter|Medium",
-  color: "palette.text.shade60",
-  fontSize: 4,
-  justifyContent: "center",
-  horizontal: true,
-}))`
-  opacity: 0;
-  pointer-events: none;
-  padding: 5px ${p => p.theme.space[2]}px;
-  > * {
-    color: white !important;
-  }
-`;
-
-const InputBox = styled(Box).attrs(() => ({
-  horizontal: true,
-  alignItems: "center",
-}))`
-  position: relative;
-  flex-basis: 160px;
-  height: 32px;
-  &:focus ${InputRight}, &:focus-within ${InputRight} {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  #input-error {
-    font-size: 10px;
-    padding-bottom: 4px;
-  }
-`;
-
-const MaxButton = styled.button`
-  background-color: ${p => p.theme.colors.palette.primary.main};
-  color: ${p => p.theme.colors.palette.primary.contrastText}!important;
-  border: none;
-  border-radius: 4px;
-  padding: 0px ${p => p.theme.space[2]}px;
-  margin: 0 2.5px;
-  font-size: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 200ms ease-out;
-  &:hover {
-    filter: contrast(2);
-  }
-`;
 
 type Props = {
   t: TFunction,
@@ -174,16 +122,12 @@ const ValidatorField = ({
       const item = validators.find(v => v.address === validator.validatorAddress);
       const d = currentDelegations.find(v => v.validatorAddress === validator.validatorAddress);
 
-      const onChange = value => onUpdateDelegation(validator.validatorAddress, value);
-
       const currentMax = item
         ? max
         : getMaxDelegationAvailable(account, delegationsSelected + 1).minus(delegationsUsed);
 
       const onMax = () =>
         onUpdateDelegation(validator.validatorAddress, item ? item.amount.plus(max) : currentMax);
-
-      const error = item && item.amount && max.lt(0);
 
       const disabled =
         !item && (currentMax.lte(0) || delegationsSelected >= COSMOS_MAX_DELEGATIONS);
@@ -223,29 +167,13 @@ const ValidatorField = ({
           }
           value={item && item.amount}
           onExternalLink={onExternalLink}
-          notEnoughVotes={notEnoughDelegations}
+          notEnoughVotes={item && item.amount && max.lt(0)}
           maxAvailable={max}
-          Input={
-            <InputBox active={item && item.amount}>
-              <InputCurrency
-                containerProps={{ grow: true, style: { height: 32, zIndex: 10 } }}
-                unit={unit}
-                error={error}
-                disabled={disabled}
-                value={item && item.amount}
-                onChange={onChange}
-                renderRight={
-                  <InputRight>
-                    {currentMax.gt(0) && (
-                      <MaxButton onClick={onMax}>
-                        <Trans i18nKey="vote.steps.castVotes.max" />
-                      </MaxButton>
-                    )}
-                  </InputRight>
-                }
-              />
-            </InputBox>
-          }
+          unit={unit}
+          onUpdateVote={onUpdateDelegation}
+          onMax={onMax}
+          shouldRenderMax={currentMax.gt(0)}
+          disabled={disabled}
         />
       );
     },
@@ -253,7 +181,6 @@ const ValidatorField = ({
       validators,
       onUpdateDelegation,
       onExternalLink,
-      notEnoughDelegations,
       max,
       unit,
       currentDelegations,
