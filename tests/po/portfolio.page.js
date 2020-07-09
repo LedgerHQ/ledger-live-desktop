@@ -6,11 +6,11 @@ export default class PortfolioPage extends Page {
   }
 
   get emptyStateTitle() {
-    return this.app.client.element("#empty-state-add-account-title");
+    return this.app.client.element("#portfolio-empty-state-add-account-title");
   }
 
   get emptyStateDesc() {
-    return this.app.client.element("#empty-state-account-desc");
+    return this.app.client.element("#portfolio-empty-state-account-desc");
   }
 
   get emptyStateAddAccountButton() {
@@ -26,15 +26,15 @@ export default class PortfolioPage extends Page {
   }
 
   get assetDistributionTitle() {
-    return this.app.client.element("#asset-distribution-title");
+    return this.app.client.element("#dashboard-asset-distribution-title");
   }
 
   get assetDistribution() {
-    return this.app.client.element("#assets-distribution-list");
+    return this.app.client.element("#dashboard-assets-distribution-list");
   }
 
   get lastOperationsTitle() {
-    return this.app.client.element("#portfolio-last-ops-title");
+    return this.app.client.element("#dashboard-last-ops-title");
   }
 
   get operationsHistoryList() {

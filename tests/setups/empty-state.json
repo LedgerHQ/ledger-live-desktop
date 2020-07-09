@@ -1,1 +1,40 @@
-{"data":{"settings":{"hasCompletedOnboarding":true,"counterValue":"EUR","preferredDeviceModel":"nanoS","language":"en","theme":"dusk","region":null,"orderAccounts":"balance|desc","countervalueFirst":false,"autoLockTimeout":10,"selectedTimeRange":"month","marketIndicator":"western","currenciesSettings":{},"pairExchanges":{},"developerMode":false,"loaded":true,"shareAnalytics":true,"sentryLogs":true,"lastUsedVersion":"2.4.1","dismissedBanners":[],"accountsViewMode":"list","showAccountsHelperBanner":true,"hideEmptyTokenAccounts":false,"sidebarCollapsed":false,"discreetMode":false,"hasInstalledApps":true,"blacklistedTokenIds":[],"starredAccountIds":[],"hasPassword":false},"user":{"id":"08cf3393-c5eb-4ea7-92de-0deea22e3971"},"accounts":[]}}
+{
+    "data": {
+        "settings": {
+            "hasCompletedOnboarding": true,
+            "counterValue": "EUR",
+            "preferredDeviceModel": "nanoS",
+            "language": "en",
+            "theme": "dusk",
+            "region": null,
+            "orderAccounts": "balance|desc",
+            "countervalueFirst": false,
+            "autoLockTimeout": 10,
+            "selectedTimeRange": "month",
+            "marketIndicator": "western",
+            "currenciesSettings": {},
+            "pairExchanges": {
+              "BTC_EUR": "KRKN"
+          },
+            "developerMode": false,
+            "loaded": true,
+            "shareAnalytics": true,
+            "sentryLogs": true,
+            "lastUsedVersion": "2.4.1",
+            "dismissedBanners": [],
+            "accountsViewMode": "list",
+            "showAccountsHelperBanner": true,
+            "hideEmptyTokenAccounts": false,
+            "sidebarCollapsed": false,
+            "discreetMode": false,
+            "hasInstalledApps": true,
+            "blacklistedTokenIds": [],
+            "starredAccountIds": [],
+            "hasPassword": false
+        },
+        "user": {
+            "id": "08cf3393-c5eb-4ea7-92de-0deea22e3971"
+        },
+        "accounts": []
+    }
+}

@@ -41,38 +41,6 @@ export default class ModalPage extends Page {
     return this.app.client.element("#add-account-success");
   }
 
-  get selectCurrencyInput() {
-    return this.app.client.element("#select-currency input");
-  }
-
-  get currencyBadge() {
-    return this.app.client.element("#currency-badge");
-  }
-
-  get selectCurrency() {
-    return this.app.client.element("#select-currency");
-  }
-
-  get selectCurrencyInput() {
-    return this.app.client.element("#select-currency input");
-  }
-
-  get currencyBadge() {
-    return this.app.client.element("#currency-badge");
-  }
-
-  get modalAddAccountsButton() {
-    return this.app.client.element("#add-accounts-import-add-button");
-  }
-
-  get modalAddAccountFinishCloseButton() {
-    return this.app.client.element("#add-accounts-finish-close-button");
-  }
-
-  get addAccountsSuccess() {
-    return this.app.client.element("#add-account-success");
-  }
-
   get continueButton() {
     return this.app.client.element("#modal-continue-button");
   }
@@ -105,12 +73,17 @@ export default class ModalPage extends Page {
     return visible;
   }
 
-  async isEnabled(reverse = false) {
+  async confirmButtonIsEnabled(reverse = false) {
     const enabled = reverse
       ? await !this.app.client.waitForEnabled("#modal-confirm-button", 3000, reverse)
       : await this.app.client.waitForEnabled("#modal-confirm-button");
 
     return enabled;
+  }
+
+  async addAccountButtonIsEnabled() {
+    await this.app.client.waitForExist("#add-accounts-import-add-button", 10000);
+    await this.app.client.waitForEnabled("#add-accounts-import-add-button", 10000);
   }
 
   close() {

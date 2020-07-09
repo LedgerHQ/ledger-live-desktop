@@ -85,14 +85,14 @@ const AssetDistribution = () => {
 
   return distribution.list.length ? (
     <>
-      <Box horizontal alignItems="center" id="asset-distribution-title">
+      <Box horizontal alignItems="center" id="dashboard-asset-distribution-title">
         <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
           <Trans i18nKey="distribution.header" values={{ count: distribution.list.length }} />
         </Text>
       </Box>
       <Card p={0} mt={24}>
         <Header />
-        <div ref={cardRef} id="assets-distribution-list">
+        <div ref={cardRef} id="dashboard-assets-distribution-list">
           {subList.map(item => (
             <Row key={item.currency.id} item={item} isVisible={isVisible} />
           ))}

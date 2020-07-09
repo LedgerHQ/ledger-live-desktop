@@ -38,7 +38,7 @@ const EmptyStateAccounts = ({ theme }: { theme: any }) => {
           ff="Inter|SemiBold"
           color="palette.text.shade100"
           fontSize={5}
-          id="empty-state-add-account-title"
+          id="portfolio-empty-state-add-account-title"
         >
           {t("emptyState.accounts.title")}
         </Text>
@@ -49,7 +49,7 @@ const EmptyStateAccounts = ({ theme }: { theme: any }) => {
             textAlign="center"
             fontSize={4}
             style={{ maxWidth: 440 }}
-            id="empty-state-account-desc"
+            id="portfolio-empty-state-account-desc"
           >
             {t("emptyState.accounts.desc")}
           </Text>

@@ -43,8 +43,8 @@ export default class SettingsPage extends Page {
 
   async experimentalFeatureIsVisible(reverse = false) {
     const visible = reverse
-      ? await !this.app.client.waitForVisible("#settings-experimental-containe", 3000, reverse)
-      : await this.app.client.waitForVisible("#settings-experimental-containe");
+      ? await !this.app.client.waitForVisible("#settings-experimental-container", 3000, reverse)
+      : await this.app.client.waitForVisible("#settings-experimental-container");
 
     return visible;
   }

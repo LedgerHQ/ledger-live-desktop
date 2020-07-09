@@ -115,7 +115,7 @@ export class OperationsList extends PureComponent<Props, State> {
             color="palette.text.shade100"
             ff="Inter|Medium"
             fontSize={6}
-            id="portfolio-last-ops-title"
+            id="dashboard-last-ops-title"
           >
             {title}
           </Text>

@@ -94,7 +94,7 @@ describe("When user activate developer mode", () => {
 
     it("should check checkbox and close terms of use modal", async () => {
       await modalPage.termsCheckbox.click();
-      expect(await modalPage.isEnabled()).toBe(true);
+      expect(await modalPage.confirmButtonIsEnabled()).toBe(true);
       await modalPage.confirmButton.click();
     });
 
@@ -109,83 +109,47 @@ describe("When user activate developer mode", () => {
         customSnapshotIdentifier: "portfolio-1-empty-state",
       });
     });
+  });
 
     // it("shouldn't display experimental flag", async () => {
     //   expect(await portfolioPage.drawerExperimental.waitForVisible(500, true)).toBe(true);
     // });
 
-    /*    it("shouldn't be able to find testnet apps in the manager", async () => {
-      await portfolioPage.emptyStateManagerButton.click();
-      await mockDeviceEvent(
-        {
-          type: "listingApps",
-          deviceInfo,
-        },
-        {
-          type: "result",
-          result: mockListAppsResult(
-            "Bitcoin, Bitcoin Testnet, Ethereum, Stellar, Tezos",
-            "Bitcoin, Ethereum",
-            deviceInfo,
-          ),
-        },
-        { type: "complete" },
-      );
-      expect(await managerPage.isVisible()).toBe(true);
-      await managerPage.appsListContainer.waitForDisplayed();
-      expect(await managerPage.appsListContainer.isVisible()).toBe(true);
-      expect(await managerPage.managerAppsSearchInput.getAttribute("placeholder")).toBe(
-        ManagerData.searchInputPlaceholder,
-      );
+  describe("When developer mode is Disabled", () => {
+    it("should go to add account", async () => {
+      await portfolioPage.emptyStateAddAccountButton.click();
+      expect(await modalPage.isVisible()).toBe(true);
+      expect(await modalPage.title.getText()).toBe(AccountsData.addAccounts.title);
+    });
+
+    it("screenshot add account modal empty currency", async () => {
       await app.client.pause(1000);
       image = await app.browserWindow.capturePage();
       expect(image).toMatchImageSnapshot({
-        customSnapshotIdentifier: "manager-1-apps-list",
+        customSnapshotIdentifier: "add-account-1-currency-field-empty",
       });
-      await managerPage.managerAppsSearchInput.setValue("bitcoin testnet");
+    });
+
+    it("should search for bitcoin testnet currency", async () => {
+      await modalPage.selectCurrencyInput.setValue("Bitcoin testnet");
+      await app.client.keys("Tab");
+      expect(await modalPage.selectCurrency.getText()).toBe(
+        AccountsData.addAccounts.selectCurrency,
+      );
+    });
+
+    it("shouldn't find bitcoin testnet currency", async () => {
       await app.client.pause(1000);
       image = await app.browserWindow.capturePage();
       expect(image).toMatchImageSnapshot({
-        customSnapshotIdentifier: "manager-2-search-result",
+        customSnapshotIdentifier: "add-account-2-currency-no-result",
       });
+      await modalPage.close();
     });
-    */
-
-    describe("When developer mode is Disabled", () => {
-      it("should go to add account", async () => {
-        await portfolioPage.emptyStateAddAccountButton.click();
-        expect(await modalPage.isVisible()).toBe(true);
-        expect(await modalPage.title.getText()).toBe(AccountsData.addAccounts.title);
-      });
-
-      it("screenshot account page", async () => {
-        await app.client.pause(1000);
-        image = await app.browserWindow.capturePage();
-        expect(image).toMatchImageSnapshot({
-          customSnapshotIdentifier: "add-account-1-currency-field-empty",
-        });
-      });
-
-      it("should search for bitcoin testnet currency", async () => {
-        await modalPage.selectCurrencyInput.setValue("Bitcoin testnet");
-        await app.client.keys("Tab");
-        expect(await modalPage.selectCurrency.getText()).toBe(
-          AccountsData.addAccounts.selectCurrency,
-        );
-      });
-
-      it("shouldn't find bitcoin testnet currency", async () => {
-        await app.client.pause(1000);
-        image = await app.browserWindow.capturePage();
-        expect(image).toMatchImageSnapshot({
-          customSnapshotIdentifier: "add-account-2-currency-no-result",
-        });
-        await modalPage.close();
-      });
-    });
+    // TODO: Verify that bitcoin testnet app is not available in Manager
   });
 
-  describe("When user go to Settings -> Experimental features", () => {
+  describe("When user enable developer mode", () => {
     it("should display general settings page", async () => {
       await settingsPage.goToSettings();
       expect(await settingsPage.isVisible()).toBe(true);
@@ -193,7 +157,8 @@ describe("When user activate developer mode", () => {
       expect(await settingsPage.generalDescription.getText()).toBe(
         SettingsData.general.description,
       );
-    
+    });
+
     it("screenshot General settings page", async () => {
       await app.client.pause(1000);
       image = await app.browserWindow.capturePage();
@@ -210,12 +175,15 @@ describe("When user activate developer mode", () => {
         SettingsData.experimental.description,
       );
     });
-  });
 
-  describe("When user enable Developer mode", () => {
     it("should display experimental flag", async () => {
       await settingsPage.enableDevMode();
       expect(await portfolioPage.drawerExperimental.isVisible()).toBe(true);
+    });
+  });
+
+  describe("When Developer mode is enabled", () => {
+    it("screenshot experimental devmode on", async () => {
       await app.client.pause(1000);
       image = await app.browserWindow.capturePage();
       expect(image).toMatchImageSnapshot({
@@ -223,72 +191,61 @@ describe("When user activate developer mode", () => {
       });
     });
 
-    it("should be able to find bitcoin testnet app in Manager", async () => {
-      await portfolioPage.drawerManagerButton.click();
-      await mockDeviceEvent(
-        {
-          type: "listingApps",
-          deviceInfo,
-        },
-        {
-          type: "result",
-          result: mockListAppsResult(
-            "Bitcoin, Bitcoin Testnet, Ethereum, Stellar, Tezos",
-            "Bitcoin, Ethereum",
-            deviceInfo,
-          ),
-        },
-        { type: "complete" },
-      );
-      expect(await managerPage.isVisible()).toBe(true);
-      expect(await managerPage.appsListContainer.isVisible()).toBe(true);
-      expect(await managerPage.managerAppsSearchInput.getAttribute("placeholder")).toBe(
-        ManagerData.searchInputPlaceholder,
-      );
-      await managerPage.managerAppsSearchInput.setValue("bitcoin testnet");
-      expect(await managerPage.managerAppName.getText()).toBe("Bitcoin Testnet");
-    });
+    // TODO: Verify that bitcoin testnet app is available in Manager
 
-    // TODO: install app from manager
-
-    it("should find bitcoin testnet in add account", async () => {
+    it("should go to portfolio", async () => {
       await portfolioPage.drawerPortfolioButton.click();
       expect(await portfolioPage.isVisible()).toBe(true);
+    });
+
+    it("should open add account modal", async () => {
       await portfolioPage.emptyStateAddAccountButton.click();
       expect(await modalPage.isVisible()).toBe(true);
       expect(await modalPage.title.getText()).toBe(AccountsData.addAccounts.title);
+    });
 
+    it("should find bitcoin testnet currency", async () => {
       await modalPage.selectCurrencyInput.setValue("Bitcoin testnet");
       await app.client.keys("Enter");
+      expect(await modalPage.currencyBadge.getText()).toBe("Bitcoin Testnet");
+    });
+
+    it("screenshot add-account select currency", async () => {
       await app.client.pause(1000);
       image = await app.browserWindow.capturePage();
       expect(image).toMatchImageSnapshot({
         customSnapshotIdentifier: "add-account-3-currency-selected",
       });
-      expect(await modalPage.currencyBadge.getText()).toBe("Bitcoin Testnet");
     });
+  });
 
-    it("should add bitcoin testnet accounts", async () => {
+  describe("When user add bitcoin testnet accounts", () => {
+    it("should scan bitcoin testnet accounts", async () => {
       await modalPage.continue();
       await mockDeviceEvent({ type: "opened" });
-      await modalPage.modalAddAccountsButton.waitForEnabled(10000);
+      await modalPage.addAccountButtonIsEnabled();
       await app.client.pause(1000);
       image = await app.browserWindow.capturePage();
       expect(image).toMatchImageSnapshot({
         customSnapshotIdentifier: "add-account-4-scan-accounts",
       });
+    });
+
+    it("should add bitcoin testnet accounts to portfolio", async () => {
       await modalPage.modalAddAccountsButton.click();
-      expect(await modalPage.addAccountsSuccess.getText()).toBe(AccountsData.addAccount.success);
+      expect(await modalPage.addAccountsSuccess.getText()).toBe(AccountsData.addAccounts.success);
+    });
+
+    it("screenshot add account success modal", async () => {
       await app.client.pause(1500);
       image = await app.browserWindow.capturePage();
       expect(image).toMatchImageSnapshot({
         customSnapshotIdentifier: "add-account-5-success",
       });
-      await modalPage.modalAddAccountFinishCloseButton.click();
     });
 
     it("should display portfolio with new accounts", async () => {
-      await app.client.pause(1000);
+      await modalPage.modalAddAccountFinishCloseButton.click();
       expect(await portfolioPage.dashboardGraph.isVisible()).toBe(true);
       expect(await portfolioPage.assetDistribution.isVisible()).toBe(true);
       expect(await portfolioPage.operationsHistoryList.isVisible()).toBe(true);
