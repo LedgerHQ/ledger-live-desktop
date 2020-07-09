@@ -38,7 +38,8 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   horizontal: true,
   py: 1,
   px: 2,
-  bg: "palette.text.shade10",
+  bg: "palette.action.hover",
+  color: "palette.primary.main",
 }))`
   border-radius: 4px;
   align-items: center;

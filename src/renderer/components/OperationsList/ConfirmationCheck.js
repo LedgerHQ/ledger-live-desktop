@@ -19,6 +19,7 @@ import IconSend from "~/renderer/icons/Send";
 import IconPlus from "~/renderer/icons/Plus";
 import IconEye from "~/renderer/icons/Eye";
 import IconFees from "~/renderer/icons/Fees";
+import IconTrash from "~/renderer/icons/Trash";
 
 import Freeze from "~/renderer/icons/Freeze";
 import Unfreeze from "~/renderer/icons/Unfreeze";
@@ -97,6 +98,10 @@ const iconsComponent = {
   VOTE: Vote,
   REWARD: ClaimRewards,
   FEES: IconFees,
+  /** @TODO replace this with correct icons */
+  OPT_IN: IconPlus,
+  OPT_OUT: IconTrash,
+  CLOSE_ACCOUNT: IconTrash,
 };
 
 class ConfirmationCheck extends PureComponent<{

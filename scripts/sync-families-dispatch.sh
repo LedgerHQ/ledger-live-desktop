@@ -13,7 +13,8 @@ SendAmountFields.js \
 SendRecipientFields.js \
 SendWarning.js \
 ReceiveWarning.js \
-AccountBalanceSummaryFooter.js
+AccountBalanceSummaryFooter.js \
+TokenList.js
 "
 
 cd ../src/renderer

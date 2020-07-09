@@ -28,6 +28,8 @@ import { track } from "~/renderer/analytics/segment";
 import AccountContextMenu from "~/renderer/components/ContextMenu/AccountContextMenu";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
+import perFamilyTokenList from "~/renderer/generated/TokenList";
+
 type OwnProps = {
   account: Account,
   range: PortfolioRange,
@@ -94,10 +96,11 @@ class TokensList extends PureComponent<Props> {
   };
 
   render() {
-    const { account, t, range } = this.props;
+    const { account, t, range, openModal } = this.props;
     if (!account.subAccounts) return null;
     const subAccounts = listSubAccounts(account);
     const { currency } = account;
+    const family = currency.family;
     const isTokenAccount = listTokenTypesForCryptoCurrency(currency).length > 0;
     const isEmpty = subAccounts.length === 0;
 
@@ -109,27 +112,47 @@ class TokensList extends PureComponent<Props> {
       const tokens = listTokensForCryptoCurrency(currency);
       if (tokens && tokens.length > 0) {
         firstToken = tokens[0];
-        url = supportLinkByTokenType[tokens[0].tokenType];
+        url = supportLinkByTokenType[firstToken.tokenType];
       }
     }
+
+    const specific = perFamilyTokenList[family];
+    const hasSpecificTokenWording = specific?.hasSpecificTokenWording;
+    const ReceiveButtonComponent = specific?.ReceiveButton ?? ReceiveButton;
+
+    const titleLabel = t(
+      hasSpecificTokenWording ? `tokensList.${family}.title` : "tokensList.title",
+    );
+    const placeholderLabel = t(
+      hasSpecificTokenWording ? `tokensList.${family}.placeholder` : "tokensList.placeholder",
+      {
+        currencyName: currency.name,
+      },
+    );
+
+    const linkLabel = t(hasSpecificTokenWording ? `tokensList.${family}.link` : "tokensList.link");
 
     return (
       <Box mb={50}>
         <Wrapper>
           <Text color="palette.text.shade100" mb={2} ff="Inter|Medium" fontSize={6}>
-            {isTokenAccount ? t("tokensList.title") : t("subAccounts.title")}
+            {isTokenAccount ? titleLabel : t("subAccounts.title")}
           </Text>
-          {!isEmpty && isTokenAccount && <ReceiveButton onClick={this.onReceiveClick} />}
+          {!isEmpty && isTokenAccount && (
+            <ReceiveButtonComponent
+              onClick={this.onReceiveClick}
+              account={account}
+              openModal={openModal}
+            />
+          )}
         </Wrapper>
         {isEmpty && (
           <EmptyState>
             <Placeholder>
               {url ? (
                 <Text color="palette.text.shade80" ff="Inter|SemiBold" fontSize={4}>
-                  <Trans
-                    i18nKey={"tokensList.placeholder"}
-                    values={{ currencyName: currency.name }}
-                  />{" "}
+                  {placeholderLabel}
+                  &nbsp;
                   <LabelWithExternalIcon
                     color="wallet"
                     ff="Inter|SemiBold"
@@ -139,12 +162,16 @@ class TokensList extends PureComponent<Props> {
                         track(`More info on Manage ${firstToken.name} tokens`);
                       }
                     }}
-                    label={t("tokensList.link")}
+                    label={linkLabel}
                   />
                 </Text>
               ) : null}
             </Placeholder>
-            <ReceiveButton onClick={this.onReceiveClick} />
+            <ReceiveButtonComponent
+              onClick={this.onReceiveClick}
+              account={account}
+              openModal={openModal}
+            />
           </EmptyState>
         )}
         {subAccounts.map((token, index) => (

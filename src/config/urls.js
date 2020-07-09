@@ -6,6 +6,8 @@ export const supportLinkByTokenType = {
   erc20: "https://support.ledger.com/hc/en-us/articles/115005197845-Manage-ERC20-tokens",
   trc10: "https://support.ledger.com/hc/en-us/articles/360013062159",
   trc20: "https://support.ledger.com/hc/en-us/articles/360013062159",
+  /** @TODO replace this url */
+  asa: "https://support.ledger.com/hc/en-us/articles/3600130621589",
 };
 
 export const urls = {
@@ -46,6 +48,8 @@ export const urls = {
   stakingCosmos: "https://www.ledger.com/staking-cosmos",
   cosmosStakingRewards:
     "https://support.ledger.com/hc/en-us/articles/360014339340-Earn-Cosmos-staking-rewards",
+  algorandStakingRewards:
+    "https://support.ledger.com/hc/en-us/articles/360014339340-Earn-Algorand-staking-rewards",
 
   // Banners
   banners: {

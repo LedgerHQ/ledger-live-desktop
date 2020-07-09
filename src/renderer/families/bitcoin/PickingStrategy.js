@@ -22,7 +22,6 @@ const options = keys.map(value => ({
   value,
   label: <Trans i18nKey={`bitcoin.pickingStrategyLabels.${value}`} />,
 }));
-console.log(options);
 
 export const PickingStrategy = ({ transaction, account, onChange, status }: Props) => {
   const bridge = getAccountBridge(account);
