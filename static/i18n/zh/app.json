@@ -206,6 +206,33 @@
       "hideToken": "Hide token"
     }
   },
+  "help": {
+    "title": "Help & Support",
+    "gettingStarted": {
+      "title": "Getting Started",
+      "desc": "Start here"
+    },
+    "helpCenter": {
+      "title": "Help center",
+      "desc": "Common problems"
+    },
+    "ledgerAcademy": {
+      "title": "Ledger Academy",
+      "desc": "Crypto 101"
+    },
+    "facebook": {
+      "title": "Facebook",
+      "desc": "Like our page"
+    },
+    "twitter": {
+      "title": "Twitter",
+      "desc": "Follow us"
+    },
+    "github": {
+      "title": "Github",
+      "desc": "Review our code"
+    }
+  },
   "blacklistToken": {
     "title": "Hide token",
     "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can show them again using <3>Settings</3>",
@@ -1177,6 +1204,7 @@
   "settings": {
     "title": "设置",
     "discreet": "Toggle discreet mode",
+    "helpButton": "Help",
     "tabs": {
       "display": "通用",
       "cryptoAssets": "加密资产",
