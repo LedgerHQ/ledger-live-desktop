@@ -10,6 +10,8 @@ import Breadcrumb from "~/renderer/components/Stepper/Breadcrumb";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import { useDispatch } from "react-redux";
 import { updateAccount } from "~/renderer/actions/accounts";
+import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
+import addToSwapHistory from "@ledgerhq/live-common/lib/swap/addToSwapHistory";
 
 type SwapSteps = "summary" | "device" | "finished";
 const SwapBody = ({
@@ -21,7 +23,6 @@ const SwapBody = ({
   transaction: any, // FIXME
   onClose: any,
 }) => {
-  const { exchange, exchangeRate } = swap;
   const [checkedDisclaimer, setCheckedDisclaimer] = useState(false);
   const [activeStep, setActiveStep] = useState<SwapSteps>("summary");
   const [error, setError] = useState(null);
@@ -34,29 +35,19 @@ const SwapBody = ({
 
   const onDeviceInteraction = useCallback(
     async result => {
-      const { operation, status } = result;
+      const { operation, swapId } = result;
       let account = swap.exchange.fromAccount;
 
-      account = {
-        ...account,
-        swapHistory: [
-          ...(account.swapHistory || []),
-          {
-            status: "new",
-            provider: exchangeRate.provider,
-            operationId: operation.id,
-            swapId: status.swapId,
-            receiverAccountId: exchange.toAccount.id,
-            fromAmount: transaction.amount,
-            toAmount: transaction.amount.times(exchangeRate.magnitudeAwareRate),
-          },
-        ],
-      };
+      account = addPendingOperation(
+        addToSwapHistory(account, operation, transaction, swap, swapId),
+        operation,
+      );
+      console.log({ accountAfterPendingOperation: account });
       dispatch(updateAccount(account));
-      setSwapId(status.swapId);
+      setSwapId(swapId);
       setActiveStep("finished");
     },
-    [dispatch, exchange, exchangeRate, swap, setActiveStep],
+    [swap, transaction, dispatch],
   );
 
   const items = [
@@ -96,7 +87,7 @@ const SwapBody = ({
               onError={setError}
             />
           ) : swapId ? (
-            <StepFinished swapId={swapId} />
+            <StepFinished swapId={swapId} provider={swap.exchangeRate.provider} />
           ) : null}
         </>
       )}

@@ -5,6 +5,8 @@ import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { command } from "~/renderer/commands";
 import { useBroadcast } from "~/renderer/hooks/useBroadcast";
 import DeviceAction from "~/renderer/components/DeviceAction";
+import Box from "~/renderer/components/Box";
+import BigSpinner from "~/renderer/components/BigSpinner";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import { createAction as initSwapCreateAction } from "@ledgerhq/live-common/lib/hw/actions/initSwap";
 import { Trans } from "react-i18next";
@@ -60,7 +62,7 @@ const StepDevice = ({
         operation => {
           onContinue({
             operation,
-            status: { swapId },
+            swapId,
           });
         },
         error => {
@@ -71,7 +73,9 @@ const StepDevice = ({
   }, [broadcast, onContinue, onError, signedOperation, swapData]);
 
   return signedOperation ? (
-    <div>{"Broadcasting operation"}</div>
+    <Box alignItems={"center"} justifyContent={"center"} p={20}>
+      <BigSpinner size={40} />
+    </Box>
   ) : !swapData ? (
     <DeviceAction
       key={"initSwap"}

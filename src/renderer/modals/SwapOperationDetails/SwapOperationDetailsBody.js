@@ -77,21 +77,7 @@ const SwapOperationDetailsBody = ({
     fromAmount,
     toAmount,
   } = mappedSwapOperation;
-  /*
-  {
-  fromAccount: AccountLike,
-  fromParentAccount?: Account,
-  toAccount: AccountLike,
-  toParentAccount?: Account,
 
-  operation: Operation,
-  provider: string,
-  swapId: string,
-  status: string,
-  fromAmount: BigNumber,
-  toAmount: BigNumber
-}
- */
   const fromUnit = getAccountUnit(fromAccount);
   const fromCurrency = getAccountCurrency(fromAccount);
   const toUnit = getAccountUnit(toAccount);
@@ -145,7 +131,9 @@ const SwapOperationDetailsBody = ({
               <Label>
                 <Trans i18nKey="swap.operationDetailsModal.txid" />
               </Label>
-              <Value>{swapId}</Value>
+              <Box selectable>
+                <Value>{swapId}</Value>
+              </Box>
             </Box>
           </Row>
           <Row>

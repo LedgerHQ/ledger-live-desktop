@@ -23,7 +23,7 @@ const Pill = styled(Text)`
   background: ${p => p.theme.colors.palette.text.shade10};
   padding: 0 8px;
 `;
-const StepFinished = ({ swapId }: { swapId: string }) => (
+const StepFinished = ({ swapId, provider }: { swapId: string, provider: string }) => (
   <Box alignItems="center">
     <IconWrapper>
       <IconSwap size={18} />
@@ -40,7 +40,7 @@ const StepFinished = ({ swapId }: { swapId: string }) => (
       </Pill>
     </Box>
     <Text p={20} textAlign="center" color="palette.text.shade50" ff="Inter|Regular" fontSize={4}>
-      <Trans i18nKey={`swap.modal.steps.finished.description`} />
+      <Trans i18nKey={`swap.modal.steps.finished.description`} values={{ provider }} />
     </Text>
   </Box>
 );
