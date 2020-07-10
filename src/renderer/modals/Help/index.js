@@ -9,7 +9,7 @@ import IconHelp from "~/renderer/icons/Help";
 import IconGithub from "~/renderer/icons/Github";
 import IconTwitter from "~/renderer/icons/Twitter";
 import IconFacebook from "~/renderer/icons/Facebook";
-import IconShield from "~/renderer/icons/Shield2";
+import IconBook from "~/renderer/icons/Book";
 import IconNano from "~/renderer/icons/Nano";
 
 import { openURL } from "~/renderer/linking";
@@ -115,7 +115,7 @@ const HelpModal = () => {
                   url={
                     "https://www.ledger.com/academy/?utm_source=ledger_live&utm_medium=self_referral&utm_content=help_desktop"
                   }
-                  Icon={IconShield}
+                  Icon={IconBook}
                 />
               </RowContainer>
               <RowContainer>
