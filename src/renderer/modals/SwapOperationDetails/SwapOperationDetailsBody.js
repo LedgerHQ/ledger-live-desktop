@@ -89,7 +89,7 @@ const SwapOperationDetailsBody = ({
       onClose={onClose}
       title={<Trans i18nKey="swap.operationDetailsModal.title" />}
       render={() => (
-        <Box>
+        <Box p={1}>
           <IconWrapper>
             <IconSwap size={27} />
           </IconWrapper>
@@ -105,7 +105,7 @@ const SwapOperationDetailsBody = ({
                 disableRounding
               />
             </Box>
-            <Box my={12}>
+            <Box my={12} color={"palette.text.shade50"}>
               <IconArrowDown size={16} />
             </Box>
             <Box selectable>

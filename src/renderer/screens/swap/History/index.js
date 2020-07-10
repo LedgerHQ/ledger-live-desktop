@@ -11,6 +11,7 @@ import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
+import moment from "moment";
 
 const History = () => {
   const accounts = useSelector(shallowAccountsSelector);
@@ -43,19 +44,30 @@ const History = () => {
   );
 
   return (
-    <Card>
+    <>
       {mappedSwapOperations && mappedSwapOperations.length ? (
-        mappedSwapOperations.map(section =>
+        mappedSwapOperations.map(section => (
           // Sections?
-          section.data.map(mappedSwapOperation => (
-            <OperationRow
-              key={mappedSwapOperation.swapId}
-              date={section.day}
-              mappedSwapOperation={mappedSwapOperation}
-              openSwapOperationDetailsModal={openSwapOperationDetailsModal}
-            />
-          )),
-        )
+          <>
+            <Box mb={2} mt={4} ff="Inter|SemiBold" fontSize={4} color="palette.text.shade60">
+              {moment(section.day).calendar(null, {
+                sameDay: "LL – [Today]",
+                lastDay: "LL – [Yesterday]",
+                lastWeek: "LL",
+                sameElse: "LL",
+              })}
+            </Box>
+            <Card key={section.day.toString()}>
+              {section.data.map(mappedSwapOperation => (
+                <OperationRow
+                  key={mappedSwapOperation.swapId}
+                  mappedSwapOperation={mappedSwapOperation}
+                  openSwapOperationDetailsModal={openSwapOperationDetailsModal}
+                />
+              ))}
+            </Card>
+          </>
+        ))
       ) : (
         <Box p={150} alignItems={"center"} justifyContent={"center"}>
           <Text mb={1} ff="Inter|SemiBold" fontSize={16} color="palette.text.shade100">
@@ -66,7 +78,7 @@ const History = () => {
           </Text>
         </Box>
       )}
-    </Card>
+    </>
   );
 };
 

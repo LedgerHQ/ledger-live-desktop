@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
+import Ellipsis from "~/renderer/components/Ellipsis";
 import IconArrowRight from "~/renderer/icons/ArrowRight";
 import IconSwap from "~/renderer/icons/Swap";
 
@@ -60,6 +61,19 @@ const WrapperClock: ThemedComponent<{}> = styled(Box).attrs(() => ({
 `;
 
 const Row: ThemedComponent<{}> = styled(Box)`
+  border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
+  height: 68px;
+  opacity: ${p => (p.isOptimistic ? 0.5 : 1)};
+  cursor: pointer;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    background: ${p => rgba(p.theme.colors.wallet, 0.04)};
+  }
+
   padding: 24px;
   & > *:nth-child(2) {
     flex: 10%;
@@ -117,7 +131,7 @@ const OperationRow = ({
       </Tooltip>
       <Box ml={24}>
         <Text
-          ff={"Inter|Regular"}
+          ff={"Inter|SemiBold"}
           color={"palette.text.shade100"}
           style={{ textTransform: "capitalize" }}
           fontSize={3}
@@ -125,25 +139,31 @@ const OperationRow = ({
           {provider}
         </Text>
         <Text ff={"Inter|Regular"} color={"palette.text.shade50"} fontSize={3}>
-          {moment(date).format("LL")}
-          {" - "}
           {moment(operation.date).format("HH:mm")}
         </Text>
       </Box>
       <Box horizontal mx={20}>
-        <CryptoCurrencyIcon size={16} currency={fromCurrency} />
-        <Text ml={1} ff={"Inter|Regular"} color={"palette.text.shade100"} fontSize={4}>
-          {getAccountName(fromAccount)}
-        </Text>
+        <Box alignItems="center" justifyContent="center">
+          <CryptoCurrencyIcon size={16} currency={fromCurrency} />
+        </Box>
+        <Tooltip delay={1200} content={getAccountName(fromAccount)}>
+          <Ellipsis ff="Inter|SemiBold" ml={1} color="palette.text.shade100" fontSize={3}>
+            {getAccountName(fromAccount)}
+          </Ellipsis>
+        </Tooltip>
       </Box>
       <Box color={"palette.text.shade30"}>
         <IconArrowRight size={16} />
       </Box>
-      <Box horizontal ml={20}>
-        <CryptoCurrencyIcon size={16} currency={toCurrency} />
-        <Text ml={1} ff={"Inter|Regular"} color={"palette.text.shade100"} fontSize={4}>
-          {getAccountName(toAccount)}
-        </Text>
+      <Box horizontal mx={20}>
+        <Box alignItems="center" justifyContent="center">
+          <CryptoCurrencyIcon size={16} currency={toCurrency} />
+        </Box>
+        <Tooltip delay={1200} content={getAccountName(toAccount)}>
+          <Ellipsis ff="Inter|SemiBold" ml={1} color="palette.text.shade100" fontSize={3}>
+            {getAccountName(toAccount)}
+          </Ellipsis>
+        </Tooltip>
       </Box>
       <Box alignItems={"flex-end"} ml={20}>
         <Text ff={"Inter|SemiBold"} fontSize={4}>
@@ -151,7 +171,7 @@ const OperationRow = ({
         </Text>
         <Text ff={"Inter|SemiBold"} fontSize={3}>
           <FormattedVal
-            color="palette.text.shade50"
+            color="palette.text.shade60"
             alwaysShowSign
             val={fromAmount.times(-1)}
             unit={getAccountUnit(fromAccount)}

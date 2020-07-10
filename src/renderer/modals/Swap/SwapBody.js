@@ -34,15 +34,13 @@ const SwapBody = ({
   ]);
 
   const onDeviceInteraction = useCallback(
-    async result => {
+    result => {
       const { operation, swapId } = result;
       let account = swap.exchange.fromAccount;
-
-      account = addPendingOperation(
-        addToSwapHistory(account, operation, transaction, swap, swapId),
-        operation,
-      );
-      console.log({ accountAfterPendingOperation: account });
+      if (!account) return;
+      // NB it wasn't working with chained calls :shrug:
+      account = addPendingOperation(account, operation);
+      account = addToSwapHistory(account, operation, transaction, swap, swapId);
       dispatch(updateAccount(account));
       setSwapId(swapId);
       setActiveStep("finished");
