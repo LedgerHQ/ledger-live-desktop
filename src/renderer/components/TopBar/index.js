@@ -114,7 +114,6 @@ const TopBar = () => {
             <Box justifyContent="center">
               <Bar />
             </Box>
-            {/*  */}
             <Tooltip content={t("settings.helpButton")} placement="bottom">
               <ItemContainer
                 id="topbar-help-button"
