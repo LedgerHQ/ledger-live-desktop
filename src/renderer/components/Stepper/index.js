@@ -37,6 +37,7 @@ type Props<T, StepProps> = {
   error?: ?Error,
   signed?: boolean,
   children?: React$Node,
+  params?: any,
 };
 
 const Stepper = <T, StepProps>({

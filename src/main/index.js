@@ -1,4 +1,5 @@
 // @flow
+import { delay } from "@ledgerhq/live-common/lib/promise";
 import "./setup";
 import { app, Menu, ipcMain } from "electron";
 import menu from "./menu";
@@ -111,6 +112,18 @@ app.on("ready", async () => {
       db.setKey("windowParams", `${window.name}.positions`, { x, y });
     }, 300),
   );
+
+  app.on("open-url", (event, url) => {
+    event.preventDefault();
+    const w = getMainWindow();
+
+    if (w) {
+      show(w);
+      if ("send" in w.webContents) {
+        w.webContents.send("deep-linking", url);
+      }
+    }
+  });
 
   await clearSessionCache(window.webContents.session);
 });

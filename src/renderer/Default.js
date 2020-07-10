@@ -5,7 +5,6 @@ import { Route, Switch, useLocation } from "react-router-dom";
 
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
 import CounterValues from "~/renderer/countervalues";
-
 import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
 import Track from "~/renderer/analytics/Track";
 import Dashboard from "~/renderer/screens/dashboard";
@@ -34,8 +33,8 @@ import ContextMenuWrapper from "~/renderer/components/ContextMenu/ContextMenuWra
 import DebugUpdater from "~/renderer/components/Updater/DebugUpdater";
 import Page from "~/renderer/components/Page";
 import AnalyticsConsole from "~/renderer/components/AnalyticsConsole";
-import ModalsLayer from "./ModalsLayer";
 import DebugMock from "~/renderer/components/DebugMock";
+import ModalsLayer from "./ModalsLayer";
 
 const reloadApp = event => {
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {
