@@ -209,16 +209,16 @@
   "help": {
     "title": "Help & Support",
     "gettingStarted": {
-      "title": "Getting Started",
+      "title": "Getting started",
       "desc": "Start here"
     },
     "helpCenter": {
-      "title": "Help center",
-      "desc": "Common problems"
+      "title": "Ledger Support",
+      "desc": "Get help"
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
-      "desc": "Crypto 101"
+      "desc": "Crypto & Security 101"
     },
     "facebook": {
       "title": "Facebook",
