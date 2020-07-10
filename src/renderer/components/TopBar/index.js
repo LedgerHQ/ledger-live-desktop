@@ -114,9 +114,14 @@ const TopBar = () => {
             <Box justifyContent="center">
               <Bar />
             </Box>
-            <Tooltip content={t("settings.title")} placement="bottom">
-              <ItemContainer id="topbar-settings-button" isInteractive onClick={navigateToSettings}>
-                <IconSettings size={16} />
+            {/*  */}
+            <Tooltip content={t("settings.helpButton")} placement="bottom">
+              <ItemContainer
+                id="topbar-help-button"
+                isInteractive
+                onClick={() => dispatch(openModal("MODAL_HELP"))}
+              >
+                <IconHelp size={16} />
               </ItemContainer>
             </Tooltip>
             {hasPassword && (
@@ -139,13 +144,9 @@ const TopBar = () => {
             <Box justifyContent="center">
               <Bar />
             </Box>
-            <Tooltip content={t("settings.helpButton")} placement="bottom">
-              <ItemContainer
-                id="topbar-help-button"
-                isInteractive
-                onClick={() => dispatch(openModal("MODAL_HELP"))}
-              >
-                <IconHelp size={16} />
+            <Tooltip content={t("settings.title")} placement="bottom">
+              <ItemContainer id="topbar-settings-button" isInteractive onClick={navigateToSettings}>
+                <IconSettings size={16} />
               </ItemContainer>
             </Tooltip>
           </Box>
