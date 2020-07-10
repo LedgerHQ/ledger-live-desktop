@@ -2,7 +2,7 @@
 
 import React from "react";
 
-const Shield2 = ({ size, color = "currentColor" }: { size: number, color?: string }) => (
+const Book = ({ size, color = "currentColor" }: { size: number, color?: string }) => (
   <svg viewBox="0 0 16 16" height={size} width={size}>
       <path
         fill={color} 
@@ -14,4 +14,4 @@ const Shield2 = ({ size, color = "currentColor" }: { size: number, color?: strin
 
 );
 
-export default Shield2;
+export default Book;
