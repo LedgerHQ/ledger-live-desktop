@@ -165,6 +165,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
         />
 
         <DisclaimerModal
+          modelId={device.modelId}
           firmware={firmware}
           deviceInfo={deviceInfo}
           status={modal}

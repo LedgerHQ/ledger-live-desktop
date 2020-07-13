@@ -38,7 +38,11 @@ export const urls = {
   githubIssues:
     "https://github.com/LedgerHQ/ledger-live-desktop/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Acomments-desc",
   multipleDestinationAddresses: "https://support.ledger.com/hc/en-us/articles/360033801034",
-  updateDeviceFirmware: "https://support.ledger.com/hc/en-us/articles/360002731113",
+  updateDeviceFirmware: {
+    nanoS: "https://support.ledger.com/hc/en-us/articles/360002731113",
+    nanoX: "https://support.ledger.com/hc/en-us/articles/360013349800",
+    blue: "https://support.ledger.com/hc/en-us/articles/360005885733",
+  },
   lostPinOrSeed: "https://support.ledger.com/hc/en-us/articles/360000609933",
   maxSpendable: "https://support.ledger.com/hc/en-us/articles/360012960679",
   stakingTezos: "https://www.ledger.com/staking-tezos",
