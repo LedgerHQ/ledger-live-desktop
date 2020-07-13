@@ -1,23 +1,21 @@
 // @flow
-
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-
 // icons
 import IconHelp from "~/renderer/icons/Help";
 import IconGithub from "~/renderer/icons/Github";
 import IconTwitter from "~/renderer/icons/Twitter";
+import { connect } from "react-redux";
 import IconFacebook from "~/renderer/icons/Facebook";
-import IconShield from "~/renderer/icons/Shield2";
+import IconBook from "~/renderer/icons/Book";
 import IconNano from "~/renderer/icons/Nano";
-
 import { openURL } from "~/renderer/linking";
 import Text from "~/renderer/components/Text";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Modal from "~/renderer/components/Modal";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
-
+import { closeModal } from "~/renderer/actions/modals";
 const LinkCardContainer = styled.a`
   border: 1px solid ${p => p.theme.colors.palette.text.shade30};
   border-radius: 4px;
@@ -28,21 +26,17 @@ const LinkCardContainer = styled.a`
   padding: 12px;
   cursor: pointer;
   text-decoration: none;
-
   &:hover {
     filter: brightness(85%);
   }
-
   &:active {
     filter: brightness(60%);
   }
 `;
-
 const IconContainer = styled.div`
   margin-bottom: 32px;
   color: ${p => p.theme.colors.palette.primary.main};
 `;
-
 const LinkCard = ({
   Icon,
   title,
@@ -68,25 +62,27 @@ const LinkCard = ({
     </LinkCardContainer>
   );
 };
-
 const GridContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: -8px;
 `;
-
 const RowContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex: 1;
 `;
-
-const HelpModal = () => {
+const mapDispatchToProps = {
+  closeModal,
+};
+type Props = { closeModal: string => void };
+const HelpModal = ({ closeModal }: Props) => {
   const { t } = useTranslation();
-
+  const onClose = useCallback(() => closeModal("MODAL_HELP"), [closeModal]);
   return (
     <Modal name="MODAL_HELP" centered>
       <ModalBody
+        onClose={onClose}
         title={t("help.title")}
         render={() => (
           <>
@@ -115,7 +111,7 @@ const HelpModal = () => {
                   url={
                     "https://www.ledger.com/academy/?utm_source=ledger_live&utm_medium=self_referral&utm_content=help_desktop"
                   }
-                  Icon={IconShield}
+                  Icon={IconBook}
                 />
               </RowContainer>
               <RowContainer>
@@ -145,5 +141,5 @@ const HelpModal = () => {
     </Modal>
   );
 };
-
-export default HelpModal;
+const C: React$ComponentType<Props> = connect(null, mapDispatchToProps)(HelpModal);
+export default C;
