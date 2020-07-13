@@ -209,16 +209,16 @@
   "help": {
     "title": "Help & Support",
     "gettingStarted": {
-      "title": "Getting Started",
+      "title": "Getting started",
       "desc": "Start here"
     },
     "helpCenter": {
-      "title": "Help center",
-      "desc": "Common problems"
+      "title": "Ledger Support",
+      "desc": "Get help"
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
-      "desc": "Crypto 101"
+      "desc": "Learn crypto"
     },
     "facebook": {
       "title": "Facebook",
@@ -962,7 +962,7 @@
       "estYield": "Rend. est.",
       "activeTooltip": "Les montants délégués génèrent des récompenses",
       "inactiveTooltip": "Les montants dont la délégation est interrompue ne génèrent plus de récompenses",
-      "minSafeWarning": "Pour commencer à déléguer en toute sécurité, vous avez besoin d'au moins {{amount}}",
+      "minSafeWarning": "Not enough funds",
       "flow": {
         "title": "Déléguer",
         "steps": {
