@@ -5,12 +5,16 @@ import invariant from "invariant";
 import { withContextMenuContext } from "./ContextMenuWrapper";
 import type { ContextMenuItemType } from "./ContextMenuWrapper";
 
+import { track } from "~/renderer/analytics/segment";
+
 const DISABLE_CONTEXT_MENU = Boolean(process.env.DISABLE_CONTEXT_MENU);
 
 type Props = {
   children?: React$Node,
   leftClick?: boolean,
   items: ContextMenuItemType[],
+  event?: string,
+  eventProperties?: *,
   context: {
     showContextMenu: (event: MouseEvent, items: ContextMenuItemType[]) => void,
   },
@@ -47,10 +51,13 @@ class ContextMenuItem extends PureComponent<Props, State> {
     }
   }
 
-  showContextMenu = (event: MouseEvent) => {
-    this.props.context.showContextMenu(event, this.props.items);
-    event.preventDefault();
-    event.stopPropagation();
+  showContextMenu = (e: MouseEvent) => {
+    if (this.props.event) {
+      track(this.props.event, this.props.eventProperties);
+    }
+    this.props.context.showContextMenu(e, this.props.items);
+    e.preventDefault();
+    e.stopPropagation();
   };
 
   ref: *;

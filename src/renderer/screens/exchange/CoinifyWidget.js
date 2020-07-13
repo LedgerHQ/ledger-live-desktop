@@ -12,7 +12,6 @@ import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/accou
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openModal } from "~/renderer/actions/modals";
 import { useDispatch } from "react-redux";
-import Track from "~/renderer/analytics/Track";
 import { track } from "~/renderer/analytics/segment";
 import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 
@@ -196,7 +195,6 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
 
   return (
     <WidgetContainer>
-      <Track event="Coinify Start Widget" onMount widgetMode={mode} />
       <CustomIframe
         src={url}
         ref={widgetRef}

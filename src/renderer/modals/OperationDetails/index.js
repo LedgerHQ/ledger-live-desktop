@@ -205,6 +205,11 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
       onBack={parentOperation ? () => openOperation("goBack", parentOperation) : undefined}
       render={() => (
         <Box flow={3}>
+          <TrackPage
+            category={location.pathname !== "/" ? "Account" : "Portfolio"}
+            name="Operation Details"
+            currencyName={currency.name}
+          />
           <Box alignItems="center" mt={1}>
             <ConfirmationCheck
               marketColor={marketColor}

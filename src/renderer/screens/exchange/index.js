@@ -1,7 +1,6 @@
 // @flow
 import React, { useState } from "react";
 import styled from "styled-components";
-import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import TabBar from "~/renderer/components/TabBar";
@@ -32,7 +31,6 @@ const Exchange = () => {
 
   return (
     <Container pb={6} selectable>
-      <TrackPage category="Exchange" />
       <Box ff="Inter|SemiBold" fontSize={7} color="palette.text.shade100" id="exchange-title">
         {t("exchange.title")}
       </Box>

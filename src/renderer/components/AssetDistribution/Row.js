@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { BigNumber } from "bignumber.js";
@@ -92,8 +92,12 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
   const color = getCurrencyColor(currency, theme.colors.palette.background.paper);
   const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2);
   const icon = <CryptoCurrencyIcon currency={currency} size={16} />;
+  const onClick = useCallback(() => {
+    history.push(`/asset/${currency.id}`);
+  }, [currency, history]);
+
   return (
-    <Wrapper onClick={() => history.push(`/asset/${currency.id}`)}>
+    <Wrapper onClick={onClick}>
       <Asset>
         {icon}
         <Tooltip delay={1200} content={currency.name}>
