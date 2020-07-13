@@ -1,6 +1,7 @@
 // @flow
 
 import React, { PureComponent } from "react";
+import type { DeviceModelId } from "@ledgerhq/devices";
 import { Trans, withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import styled from "styled-components";
@@ -30,6 +31,7 @@ type Props = {
   },
   goToNextStep: () => void,
   onClose: () => void,
+  modelId: DeviceModelId,
 };
 
 type State = *;
@@ -54,7 +56,9 @@ class DisclaimerModal extends PureComponent<Props, State> {
   onSeedReady = () => this.setState(state => ({ seedReady: !state.seedReady }));
 
   render(): React$Node {
-    const { status, firmware, t, goToNextStep } = this.props;
+    const { status, firmware, modelId, t, goToNextStep } = this.props;
+
+    const supportURL = urls.updateDeviceFirmware[modelId] || "";
 
     return (
       <Modal isOpened={status === "disclaimer"} backdropColor centered onClose={this.onClose}>
@@ -80,7 +84,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
                   </Text>
                 </Trans>
               </Text>
-              <FakeLink onClick={() => openURL(urls.updateDeviceFirmware)}>
+              <FakeLink onClick={() => openURL(supportURL)}>
                 <Text ff="Inter|SemiBold" fontSize={4} style={{ textDecoration: "underline" }}>
                   {t("manager.firmware.followTheGuide")}
                 </Text>
