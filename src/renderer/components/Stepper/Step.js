@@ -19,7 +19,7 @@ const Wrapper: ThemedComponent<{ status: Status }> = styled(Box).attrs((p: { sta
     ? "palette.primary.main"
     : p.status === "error"
     ? "alertRed"
-    : "palette.text.shade20",
+    : "palette.text.shade40",
   grow: true,
   justifyContent: "center",
   relative: true,
@@ -35,7 +35,7 @@ const StepNumber = styled(Box).attrs(p => ({
   justifyContent: "center",
   color: ["active", "valid", "error"].includes(p.status)
     ? "palette.primary.contrastText"
-    : "palette.text.shade20",
+    : "palette.text.shade30",
   bg: ["active", "valid"].includes(p.status)
     ? "palette.primary.main"
     : p.status === "error"
@@ -50,7 +50,7 @@ const StepNumber = styled(Box).attrs(p => ({
         ? p.theme.colors.palette.primary.main
         : p.status === "error"
         ? p.theme.colors.alertRed
-        : p.theme.colors.palette.text.shade20};
+        : p.theme.colors.palette.text.shade30};
   font-size: 10px;
   height: ${RADIUS}px;
   line-height: 10px;
@@ -58,9 +58,9 @@ const StepNumber = styled(Box).attrs(p => ({
   width: ${RADIUS}px;
 `;
 
-const Label = styled(Box).attrs(() => ({
+const Label = styled(Box).attrs(p => ({
   fontSize: 3,
-  ff: "Inter|Bold",
+  ff: p.status === "active" ? "Inter|SemiBold" : "Inter|Medium",
   px: 2,
 }))`
   line-height: 1.2;
