@@ -79,10 +79,26 @@ function useDeeplink() {
           if (!currency) return;
 
           const c = findCurrencyByTicker(currency.toUpperCase());
-          if (!c || c.type === "FiatCurrency") return;
+          if (!c || c.type === "FiatCurrency") {
+            dispatch(
+              openModal(modal, {
+                recipient,
+              }),
+            );
+            return;
+          }
 
           const found = getAccountsOrSubAccountsByCurrency(c, accounts || []);
-          if (!found.length) return;
+          if (!found.length) {
+            dispatch(
+              openModal(modal, {
+                recipient,
+                amount: amount ? parseCurrencyUnit(c.units[0], amount) : undefined,
+              }),
+            );
+
+            return;
+          }
 
           const [chosen] = found;
           dispatch(closeAllModal());

@@ -17,7 +17,6 @@ import { UpdaterProvider } from "~/renderer/components/Updater/UpdaterContext";
 import ThrowBlock from "~/renderer/components/ThrowBlock";
 import LiveStyleSheetManager from "~/renderer/styles/LiveStyleSheetManager";
 import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
-import useDeeplink from "~/renderer/hooks/useDeeplinking";
 import Default from "./Default";
 
 type Props = {
@@ -25,8 +24,6 @@ type Props = {
 };
 
 const App = ({ store }: Props) => {
-  useDeeplink();
-
   return (
     <LiveStyleSheetManager>
       <Provider store={store}>

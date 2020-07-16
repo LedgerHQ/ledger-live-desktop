@@ -1,5 +1,4 @@
 // @flow
-import { delay } from "@ledgerhq/live-common/lib/promise";
 import "./setup";
 import { app, Menu, ipcMain } from "electron";
 import menu from "./menu";

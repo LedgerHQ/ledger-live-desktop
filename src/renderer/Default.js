@@ -34,6 +34,7 @@ import DebugUpdater from "~/renderer/components/Updater/DebugUpdater";
 import Page from "~/renderer/components/Page";
 import AnalyticsConsole from "~/renderer/components/AnalyticsConsole";
 import DebugMock from "~/renderer/components/DebugMock";
+import useDeeplink from "~/renderer/hooks/useDeeplinking";
 import ModalsLayer from "./ModalsLayer";
 
 const reloadApp = event => {
@@ -45,6 +46,8 @@ const reloadApp = event => {
 const Default = () => {
   const location = useLocation();
   const ref: React$ElementRef<any> = useRef();
+
+  useDeeplink();
 
   useEffect(() => {
     window.addEventListener("keydown", reloadApp);
