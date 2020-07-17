@@ -4,87 +4,87 @@ export default class OnboardingPage extends Page {
   /**  elements **/
 
   get darkButton() {
-    return this.app.client.element("#dark");
+    return this.app.client.$("#dark");
   }
 
   get duskButton() {
-    return this.app.client.element("#dusk");
+    return this.app.client.$("#dusk");
   }
 
   get lightButton() {
-    return this.app.client.element("#light");
+    return this.app.client.$("#light");
   }
 
   get getStartedButton() {
-    return this.app.client.element("#onboarding-get-started-button");
+    return this.app.client.$("#onboarding-get-started-button");
   }
 
   get newDeviceButton() {
-    return this.app.client.element("#onboarding-newdevice-button");
+    return this.app.client.$("#onboarding-newdevice-button");
   }
 
   get restoreDeviceButton() {
-    return this.app.client.element("#onboarding-restoredevice-button");
+    return this.app.client.$("#onboarding-restoredevice-button");
   }
 
   get initializedDeviceButton() {
-    return this.app.client.element("#onboarding-initializeddevice-button");
+    return this.app.client.$("#onboarding-initializeddevice-button");
   }
 
   get noDeviceButton() {
-    return this.app.client.element("#onboarding-nodevice-button");
+    return this.app.client.$("#onboarding-nodevice-button");
   }
 
   get buyNewButton() {
-    return this.app.client.element("#onboarding-buynew-button");
+    return this.app.client.$("#onboarding-buynew-button");
   }
 
   get learnMoreButton() {
-    return this.app.client.element("#onboarding-learnmore-button");
+    return this.app.client.$("#onboarding-learnmore-button");
   }
 
   get nanoX() {
-    return this.app.client.element("#onboarding-select-nanox");
+    return this.app.client.$("#onboarding-select-nanox");
   }
 
   get nanoS() {
-    return this.app.client.element("#onboarding-select-nanos");
+    return this.app.client.$("#onboarding-select-nanos");
   }
 
   get blue() {
-    return this.app.client.element("#onboarding-select-blue");
+    return this.app.client.$("#onboarding-select-blue");
   }
 
   get continueButton() {
-    return this.app.client.element("#onboarding-continue-button");
+    return this.app.client.$("#onboarding-continue-button");
   }
 
   get skipButton() {
-    return this.app.client.element("#onboarding-skip-button");
+    return this.app.client.$("#onboarding-skip-button");
   }
 
   get backButton() {
-    return this.app.client.element("#onboarding-back-button");
+    return this.app.client.$("#onboarding-back-button");
   }
 
   get contactUsButton() {
-    return this.app.client.element("#onboarding-contactus-button");
+    return this.app.client.$("#onboarding-contactus-button");
   }
 
   get openButton() {
-    return this.app.client.element("#onboarding-open-button");
+    return this.app.client.$("#onboarding-open-button");
   }
 
   get twitterButton() {
-    return this.app.client.element("#onboarding-twitter-button");
+    return this.app.client.$("#onboarding-twitter-button");
   }
 
   get githubButton() {
-    return this.app.client.element("#onboarding-github-button");
+    return this.app.client.$("#onboarding-github-button");
   }
 
   get redditButton() {
-    return this.app.client.element("#onboarding-reddit-button");
+    return this.app.client.$("#onboarding-reddit-button");
   }
 
   /** methods **/
@@ -106,53 +106,64 @@ export default class OnboardingPage extends Page {
   }
 
   async getStarted() {
-    await this.getStartedButton.click();
+    const elem = await this.getStartedButton;
+    return elem.click();
   }
 
   async selectConfiguration(menu) {
+    let elem;
     switch (menu) {
       case "new":
-        await this.newDeviceButton.click();
+        elem = await this.newDeviceButton;
         break;
       case "restore":
-        await this.restoreDeviceButton.click();
+        elem = await this.restoreDeviceButton;
         break;
       case "initialized":
-        await this.initializedDeviceButton.click();
+        elem = await this.initializedDeviceButton;
         break;
       case "nodevice":
-        await this.noDeviceButton.click();
+        elem = await this.noDeviceButton;
         break;
     }
+
+    return elem.click();
   }
 
   async selectDevice(device) {
+    let elem;
     switch (device) {
       case "nanox":
-        await this.nanoX.click();
+        elem = await this.nanoX;
         break;
       case "nanos":
-        await this.nanoS.click();
+        elem = await this.nanoS;
         break;
       case "blue":
-        await this.blue.click();
+        elem = await this.blue;
         break;
     }
+
+    return elem.click();
   }
 
-  continue() {
-    return this.continueButton.click().then(this.app.client.waitUntilWindowLoaded());
+  async continue() {
+    const elem = await this.continueButton;
+    return elem.click().then(this.app.client.waitUntilWindowLoaded());
   }
 
-  back() {
-    return this.backButton.click().then(this.app.client.waitUntilWindowLoaded());
+  async back() {
+    const elem = await this.backButton;
+    return elem.click().then(this.app.client.waitUntilWindowLoaded());
   }
 
-  open() {
-    return this.openButton.click().then(this.app.client.waitUntilWindowLoaded());
+  async open() {
+    const elem = await this.openButton;
+    return elem.click().then(this.app.client.waitUntilWindowLoaded());
   }
 
-  isVisible() {
-    return this.app.client.waitForVisible("#onboarding-container");
+  async isVisible() {
+    const elem = await this.app.client.$("#onboarding-container");
+    return elem.waitForDisplayed();
   }
 }

@@ -41,6 +41,7 @@ describe("Bullrun", () => {
     analyticsPage = new AnalyticsPage(app);
     // portfolioPage = new PortfolioPage(app);
     mockDeviceEvent = getMockDeviceEvent(app);
+
     return app.start();
   });
 
@@ -48,27 +49,22 @@ describe("Bullrun", () => {
     return app.stop().then(() => removeUserData());
   });
 
-  const $ = selector => app.client.element(selector);
+  const $ = selector => app.client.$(selector);
 
-  it("opens a window", () => {
-    return app.client
-      .waitUntilWindowLoaded()
-      .getWindowCount()
-      .then(count => expect(count).toBe(1))
-      .browserWindow.isMinimized()
-      .then(minimized => expect(minimized).toBe(false))
-      .browserWindow.isVisible()
-      .then(visible => expect(visible).toBe(true))
-      .browserWindow.isFocused()
-      .then(focused => expect(focused).toBe(true))
-      .getTitle()
-      .then(title => {
-        expect(title).toBe(data.appTitle);
-      });
+  it("opens a window", async () => {
+    await app.client.waitUntilWindowLoaded();
+    await app.client.getWindowCount().then(count => expect(count).toBe(1));
+    await app.client.browserWindow.isMinimized().then(minimized => expect(minimized).toBe(false));
+    await app.client.browserWindow.isVisible().then(visible => expect(visible).toBe(true));
+    await app.client.browserWindow.isFocused().then(focused => expect(focused).toBe(true));
+    await app.client.getTitle().then(title => {
+      expect(title).toBe(data.appTitle);
+    });
   });
 
   it("go through onboarding-1", async () => {
-    await app.client.waitForVisible("#onboarding-get-started-button", 20000);
+    const elem = await $("#onboarding-get-started-button");
+    await elem.waitForDisplayed({ timeout: 20000 });
     await onboardingPage.getStarted();
     await delay(1000);
     image = await app.browserWindow.capturePage();
@@ -76,6 +72,7 @@ describe("Bullrun", () => {
       customSnapshotIdentifier: "onboarding-1-get-started",
     });
   });
+
   it("go through onboarding-2", async () => {
     await onboardingPage.selectConfiguration("new");
     await delay(1000);
@@ -99,7 +96,7 @@ describe("Bullrun", () => {
     await genuinePage.checkPin(true);
     await genuinePage.checkSeed(true);
     await genuinePage.check();
-    await modalPage.closeButton.click();
+    await modalPage.close();
     await onboardingPage.back();
     await onboardingPage.back();
     await onboardingPage.back();
@@ -112,7 +109,7 @@ describe("Bullrun", () => {
     await genuinePage.checkPin(true);
     await genuinePage.checkSeed(true);
     await genuinePage.check();
-    await modalPage.closeButton.click();
+    await modalPage.close();
     await onboardingPage.back();
     await onboardingPage.back();
     await onboardingPage.back();
@@ -142,30 +139,38 @@ describe("Bullrun", () => {
       { type: "complete" },
     );
     await app.client.pause(2000);
-    await app.client.waitForVisible("#onboarding-continue-button");
+    const onboardingContinueButton = await $("#onboarding-continue-button");
+    await onboardingContinueButton.waitForDisplayed();
     await onboardingPage.continue();
     await passwordPage.skip();
-    await analyticsPage.dataFakeLink.click();
+    const analyticsDataFakeLinkElem = await analyticsPage.dataFakeLink;
+    await analyticsDataFakeLinkElem.click();
     await modalPage.close();
-    await analyticsPage.shareFakeLink.click();
+    const analyticsShareFakeLinkElem = await analyticsPage.shareFakeLink;
+    await analyticsShareFakeLinkElem.click();
     await modalPage.close();
-    await analyticsPage.shareSwitch.click();
-    await analyticsPage.shareSwitch.click();
-    await analyticsPage.logsSwitch.click();
-    await analyticsPage.logsSwitch.click();
+    const analyticsShareSwitch = await analyticsPage.shareSwitch;
+    await analyticsShareSwitch.click();
+    await analyticsShareSwitch.click();
+    const analyticsLogsSwitch = await analyticsPage.logsSwitch;
+    await analyticsLogsSwitch.click();
+    await analyticsLogsSwitch.click();
     await onboardingPage.continue();
     await onboardingPage.open();
-    await modalPage.isVisible();
-    await modalPage.termsCheckbox.click();
-    await app.client.waitForEnabled("#modal-confirm-button");
-    await modalPage.confirmButton.click();
+    await modalPage.isDisplayed();
+    const modalTermsCheckbox = await modalPage.termsCheckbox;
+    await modalTermsCheckbox.click();
+    const modalConfirmButton = await $("#modal-confirm-button");
+    await modalConfirmButton.waitForEnabled();
+    await modalPage.confirm();
 
     expect(true).toBeTruthy();
   });
 
   it("access manager", async () => {
     // Access manager and go through firmware update
-    await $("#drawer-manager-button").click();
+    const elem = await $("#drawer-manager-button");
+    await elem.click();
     await mockDeviceEvent(
       {
         type: "listingApps",
@@ -181,66 +186,82 @@ describe("Bullrun", () => {
   });
 
   it("firmware update flow-1", async () => {
-    await app.client.waitForExist("#manager-update-firmware-button", 100000);
+    const elem = await $("#manager-update-firmware-button");
+    await elem.waitForExist({ timeout: 100000 });
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-0-manager-page",
     });
   });
+
   it("firmware update flow-2", async () => {
-    $("#manager-update-firmware-button").click();
-    await app.client.waitForExist("#firmware-update-disclaimer-modal-seed-ready-checkbox");
+    const button = await $("#manager-update-firmware-button");
+    await button.click();
+    const elem = await $("#firmware-update-disclaimer-modal-seed-ready-checkbox");
+    await elem.waitForExist();
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-1-disclaimer-modal",
     });
   });
+
   it("firmware update flow-3", async () => {
-    $("#firmware-update-disclaimer-modal-seed-ready-checkbox").click();
+    const elem = await $("#firmware-update-disclaimer-modal-seed-ready-checkbox");
+    await elem.click();
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-2-disclaimer-modal-checkbox",
     });
   });
+
   it("firmware update flow-5", async () => {
-    $("#firmware-update-disclaimer-modal-continue-button").click();
+    const elem = await $("#firmware-update-disclaimer-modal-continue-button");
+    await elem.click();
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-4-disclaimer-modal-continue-2",
     });
   });
+
   it("firmware update flow-6", async () => {
     await mockDeviceEvent({}, { type: "complete" }); // .complete() install full firmware -> flash mcu
-    await app.client.waitForExist("#firmware-update-flash-mcu-title");
+    const elem = await $("#firmware-update-flash-mcu-title");
+    await elem.waitForExist();
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-5-flash-mcu-start",
     });
   });
+
   it("firmware update flow-7", async () => {
     await mockDeviceEvent({}, { type: "complete" }); // .complete() flash mcu -> completed
-    await app.client.waitForExist("#firmware-update-completed-close-button");
+    const elem = await $("#firmware-update-completed-close-button");
+    await elem.waitForExist();
     await delay(6000); // wait initial delay of the ui
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-6-flash-mcu-done",
     });
   });
+
   it("firmware update flow-8", async () => {
-    $("#firmware-update-completed-close-button").click();
+    const elem = await $("#firmware-update-completed-close-button");
+    await elem.click();
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-7-close-modal",
     });
   });
+
   it("firmware update flow-9", async () => {
-    await $("#drawer-dashboard-button").click();
+    const elem = await $("#drawer-dashboard-button");
+    await elem.click();
     await delay(1000);
     image = await app.browserWindow.capturePage();
     expect(image).toMatchImageSnapshot({
@@ -257,19 +278,26 @@ describe("Bullrun", () => {
         const addAccountId = !i
           ? "#accounts-empty-state-add-account-button"
           : "#accounts-add-account-button";
-        await app.client.waitForExist(addAccountId);
-        await $(addAccountId).click();
-        await $("#modal-container .select__control").click();
-        await $("#modal-container .select__control input").addValue(currency);
-        await $(".select-options-list .option:first-child").click();
-        await $("#modal-continue-button").click();
+        const elemAddAccountId = await $(addAccountId);
+        await elemAddAccountId.waitForExist();
+        await elemAddAccountId.click();
+        const elemSelectControl = await $("#modal-container .select__control");
+        await elemSelectControl.click();
+        const elemSelectControlInput = await $("#modal-container .select__control input");
+        await elemSelectControlInput.addValue(currency);
+        const elemFirstOption = await $(".select-options-list .option:first-child");
+        await elemFirstOption.click();
+        const elemContinueButton = await $("#modal-continue-button");
+        await elemContinueButton.click();
         await mockDeviceEvent({ type: "opened" });
-        await app.client.waitForExist("#add-accounts-import-add-button", 20000);
-        await app.client.waitForEnabled("#add-accounts-import-add-button", 20000);
-        await $("#add-accounts-import-add-button").click();
-        await $("#modal-close-button").click();
+        const elemImportAddButton = await $("#add-accounts-import-add-button");
+        await elemImportAddButton.waitForExist({ timeout: 20000 });
+        await elemImportAddButton.waitForEnabled({ timeout: 20000 });
+        await elemImportAddButton.click();
+        await modalPage.close();
         if (!i) {
-          await $("#drawer-accounts-button").click();
+          const elemDrawerAccountsButton = await $("#drawer-accounts-button");
+          await elemDrawerAccountsButton.click();
         }
         expect(true).toBeTruthy();
       });
@@ -278,110 +306,149 @@ describe("Bullrun", () => {
 
   describe("account flows", () => {
     afterEach(async () => {
-      const modalBackDrop = await app.client.isExisting("#modal-backdrop");
-      if (modalBackDrop) await $("#modal-backdrop").click();
+      const modalBackDrop = await $("#modal-backdrop");
+      await modalBackDrop.isExisting();
+      if (modalBackDrop) await modalBackDrop.click();
       await delay(1000);
     });
+
     it("account migration flow", async () => {
       // Account migration flow
-      await $("#drawer-dashboard-button").click();
-      await app.client.waitForExist("#modal-migrate-accounts-button");
-      await $("#modal-migrate-accounts-button").click();
-      await $("#migrate-overview-start-button").click();
+      const drawerDashboardButton = await $("#drawer-dashboard-button");
+      await drawerDashboardButton.click();
+      const migrateAccountsButton = await $("#modal-migrate-accounts-button");
+      await migrateAccountsButton.waitForExist();
+      await migrateAccountsButton.click();
+      const migrateOverViewStartButton = await $("#migrate-overview-start-button");
+      await migrateOverViewStartButton.click();
       await mockDeviceEvent({ type: "opened" });
-      await app.client.waitForExist("#migrate-currency-continue-button", 20000);
-      await $("#migrate-currency-continue-button").click();
+      const migrateCurrencyContinueButton = await $("#migrate-currency-continue-button", 20000);
+      await migrateCurrencyContinueButton.waitForExist({ timeout: 2000 });
+      await migrateCurrencyContinueButton.click();
       await mockDeviceEvent({ type: "opened" });
-      await app.client.waitForExist("#migrate-currency-continue-button", 20000);
-      await $("#migrate-currency-continue-button").click();
-      await $("#migrate-overview-export-button").click();
+      await migrateCurrencyContinueButton.waitForExist({ timeout: 2000 });
+      await migrateCurrencyContinueButton.click();
+      const migrateOverviewExportButton = await $("#migrate-overview-export-button");
+      await migrateOverviewExportButton.click();
       await app.client.pause(2000);
-      await app.client.waitForExist("#export-accounts-done-button");
-      await $("#export-accounts-done-button").click();
-      await $("#migrate-overview-done-button").click();
+      const exportAccountsDoneButton = await $("#export-accounts-done-button");
+      await exportAccountsDoneButton.waitForExist();
+      await exportAccountsDoneButton.click();
+      const migrateOverviewDoneButton = await $("#migrate-overview-done-button");
+      await migrateOverviewDoneButton.click();
       expect(true).toBeTruthy();
     });
 
     it("receive flow", async () => {
       // Receive flow without device
-      await $("#drawer-receive-button").click();
-      await $("#receive-account-continue-button").click();
+      const drawerReceiveButton = await $("#drawer-receive-button");
+      await drawerReceiveButton.click();
+      const receiveAccountContinueButton = $("#receive-account-continue-button");
+      await receiveAccountContinueButton.click();
       await mockDeviceEvent({ type: "opened" }, { type: "complete" });
-      await app.client.waitForEnabled("#receive-receive-continue-button", 20000);
-      await $("#receive-receive-continue-button").click();
+      const receiveReceiveContinueButton = await $("#receive-receive-continue-button");
+      await receiveReceiveContinueButton.waitForEnabled({ timeout: 2000 });
+      await receiveReceiveContinueButton.click();
       expect(true).toBeTruthy();
     });
 
     it("send flow", async () => {
       // Send flow
-      await $("#drawer-send-button").click();
-      await $("#send-recipient-input").click();
-      await $("#send-recipient-input").addValue("1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA");
-      await app.client.waitForEnabled("#send-recipient-continue-button");
-      await $("#send-recipient-continue-button").click();
-      await $("#send-amount-continue-button").click();
-      await $("#send-summary-continue-button").click();
+      const sendButton = await $("#drawer-send-button");
+      await sendButton.click();
+      const recipientInput = await $("#send-recipient-input");
+      await recipientInput.click();
+      await recipientInput.addValue("1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA");
+      const recipientContinueButton = await $("#send-recipient-continue-button");
+      await recipientContinueButton.waitForEnabled();
+      await recipientContinueButton.click();
+      const amountContinueButton = await $("#send-amount-continue-button");
+      await amountContinueButton.click();
+      const summaryContinueButton = await $("#send-summary-continue-button");
+      await summaryContinueButton.click();
       await mockDeviceEvent({ type: "opened" });
-      await app.client.waitForExist("#send-confirmation-opc-button", 60000);
-      await app.client.waitForEnabled("#send-confirmation-opc-button");
-      await $("#send-confirmation-opc-button").click();
-      await $("#modal-close-button").click();
+      const confirmationOPCButton = await $("#send-confirmation-opc-button");
+      await confirmationOPCButton.waitForExist({ timeout: 60000 });
+      await confirmationOPCButton.waitForEnabled();
+      await confirmationOPCButton.click();
+      await modalPage.close();
       expect(true).toBeTruthy();
     });
 
     it("cosmos delegate flow", async () => {
       // Cosmos delegate flow
-      await $("#drawer-accounts-button").click();
-      await $("#accounts-search-input").addValue("cosmos");
-      await app.client.waitForExist(".accounts-account-row-item:first-child");
-      await $(".accounts-account-row-item:first-child").click();
-      await app.client.waitForExist("#account-delegate-button");
-      await $("#account-delegate-button").click();
-      await app.client.waitForExist("#delegate-list input:first-child");
-      await $("#delegate-list input:first-child").addValue("1.5");
+      const accountsButton = await $("#drawer-accounts-button");
+      const searchInput = await $("#accounts-search-input");
+      await accountsButton.click();
+      await searchInput.addValue("cosmos");
+      const firstAccountRowItme = await $(".accounts-account-row-item:first-child");
+      await firstAccountRowItme.waitForExist();
+      await firstAccountRowItme.click();
+      const delegateButton = await $("#account-delegate-button");
+      await delegateButton.waitForExist();
+      await delegateButton.click();
+      const delegateListFirstInput = await $("#delegate-list input:first-child");
+      await delegateListFirstInput.waitForExist();
+      await delegateListFirstInput.addValue("1.5");
       await delay(1000);
-      await app.client.waitForEnabled("#delegate-continue-button");
-      await $("#delegate-continue-button").click();
+      const delegateContinueButton = await $("#delegate-continue-button");
+      await delegateContinueButton.waitForEnabled();
+      await delegateContinueButton.click();
       await mockDeviceEvent({ type: "opened" });
-      await $("#modal-close-button").click();
+      await modalPage.close();
       expect(true).toBeTruthy();
     });
 
     it("tezos delegate flow", async () => {
-      // Tezos delegate flow
-      await $("#drawer-accounts-button").click();
-      await $("#accounts-search-input").addValue("tezos");
-      await app.client.waitForExist(".accounts-account-row-item:first-child");
-      await $(".accounts-account-row-item:first-child").click();
-      await app.client.waitForExist("#account-delegate-button");
-      await $("#account-delegate-button").click();
-      await $("#delegate-starter-continue-button").click();
+      // Tezos delegate flow'
+      const accountsButton = await $("#drawer-accounts-button");
+      await accountsButton.click();
+      const searchInput = await $("#accounts-search-input");
+      await searchInput.addValue("tezos");
+      const accountRowFirstItem = await $(".accounts-account-row-item:first-child");
+      await accountRowFirstItem.waitForExist();
+      await accountRowFirstItem.click();
+      const delegatebutton = await $("#account-delegate-button");
+      await delegatebutton.waitForExist();
+      await delegatebutton.click();
+      const starterContinueButton = await $("#delegate-starter-continue-button");
+      await starterContinueButton.click();
       await delay(1000);
-      await app.client.waitForEnabled("#delegate-summary-continue-button");
-      await $("#delegate-summary-continue-button").click();
+      const summaryContinueButton = await $("#delegate-summary-continue-button");
+      await summaryContinueButton.waitForEnabled();
+      await summaryContinueButton.click();
       await mockDeviceEvent({ type: "opened" });
-      await $("#modal-close-button").click();
+      await modalPage.close();
       expect(true).toBeTruthy();
     });
   });
 
   it("naive discreet mode toggle and assorted screens", async () => {
     // Toggle discreet mode twice
-    await $("#topbar-discreet-button").click();
-    await $("#topbar-discreet-button").click();
+    const discreetButton = await $("#topbar-discreet-button");
+    await discreetButton.click();
+    await discreetButton.click();
 
-    await $("#drawer-dashboard-button").click();
-    await $("#drawer-exchange-button").click();
+    const dashboardButton = await $("#drawer-dashboard-button");
+    await dashboardButton.click();
+    const exchangeButton = await $("#drawer-exchange-button");
+    await exchangeButton.click();
 
     // Open settings and navigate all tabs
-    await $("#topbar-settings-button").click();
+    const settingsButton = await $("#topbar-settings-button");
+    await settingsButton.click();
 
     // Open settings and navigate all tabs
-    await $("#settings-currencies-tab").click();
-    await $("#settings-accounts-tab").click();
-    await $("#settings-about-tab").click();
-    await $("#settings-help-tab").click();
-    await $("#settings-experimental-tab").click();
+    const currenciesTab = await $("#settings-currencies-tab");
+    await currenciesTab.click();
+    const accountsTab = await $("#settings-accounts-tab");
+    await accountsTab.click();
+    const aboutTab = await $("#settings-about-tab");
+    await aboutTab.click();
+    const helpTab = await $("#settings-help-tab");
+    await helpTab.click();
+    const experimentalTab = await $("#settings-experimental-tab");
+    await experimentalTab.click();
 
     expect(1).toEqual(1);
   });

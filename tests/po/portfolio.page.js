@@ -2,13 +2,14 @@ import Page from "./page";
 
 export default class PortfolioPage extends Page {
   get portfolioContainer() {
-    return this.app.client.element("#portfolio-container");
+    return this.app.client.$("#portfolio-container");
   }
 
   async isVisible(reverse = false) {
+    const elem = await this.app.client.$("#portfolio-container");
     const visible = reverse
-      ? await !this.app.client.waitForVisible("#portfolio-container", 3000, reverse)
-      : await this.app.client.waitForVisible("#portfolio-container");
+      ? await !elem.waitForDisplayed({ timeout: 3000, reverse })
+      : await elem.waitForDisplayed();
 
     return visible;
   }

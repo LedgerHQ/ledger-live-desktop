@@ -23,7 +23,7 @@ describe("When I launch the app for the first time", () => {
       .then(count => expect(count).toBe(1))
       .browserWindow.isMinimized()
       .then(minimized => expect(minimized).toBe(false))
-      .browserWindow.isVisible()
+      .browserWindow.isDisplayed()
       .then(visible => expect(visible).toBe(true))
       .browserWindow.isFocused()
       .then(focused => expect(focused).toBe(true))
