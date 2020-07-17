@@ -206,6 +206,33 @@
       "hideToken": "Hide token"
     }
   },
+  "help": {
+    "title": "Help & Support",
+    "gettingStarted": {
+      "title": "Getting started",
+      "desc": "Start here"
+    },
+    "helpCenter": {
+      "title": "Ledger Support",
+      "desc": "Get help"
+    },
+    "ledgerAcademy": {
+      "title": "Ledger Academy",
+      "desc": "Learn crypto"
+    },
+    "facebook": {
+      "title": "Facebook",
+      "desc": "Like our page"
+    },
+    "twitter": {
+      "title": "Twitter",
+      "desc": "Follow us"
+    },
+    "github": {
+      "title": "Github",
+      "desc": "Review our code"
+    }
+  },
   "blacklistToken": {
     "title": "Hide token",
     "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can show them again using <3>Settings</3>",
@@ -935,7 +962,7 @@
       "estYield": "est. yield",
       "activeTooltip": "Delegated amounts generate rewards",
       "inactiveTooltip": "Undelegated amounts do not generate rewards",
-      "minSafeWarning": "To safely start delegating you need at least {{amount}}",
+      "minSafeWarning": "Not enough funds",
       "flow": {
         "title": "Delegate",
         "steps": {
@@ -1177,6 +1204,7 @@
   "settings": {
     "title": "设置",
     "discreet": "Toggle discreet mode",
+    "helpButton": "Help",
     "tabs": {
       "display": "通用",
       "cryptoAssets": "加密资产",
