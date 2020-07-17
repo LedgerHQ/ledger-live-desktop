@@ -207,30 +207,30 @@
     }
   },
   "help": {
-    "title": "Help & Support",
+    "title": "Aide & Assistance",
     "gettingStarted": {
-      "title": "Getting started",
-      "desc": "Start here"
+      "title": "Commencer",
+      "desc": "Commencer ici"
     },
     "helpCenter": {
-      "title": "Ledger Support",
-      "desc": "Get help"
+      "title": "Assistance Ledger",
+      "desc": "Obtenir de l’aide"
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
-      "desc": "Learn crypto"
+      "desc": "Comprendre les cryptos"
     },
     "facebook": {
       "title": "Facebook",
-      "desc": "Like our page"
+      "desc": "Likez notre page"
     },
     "twitter": {
       "title": "Twitter",
-      "desc": "Follow us"
+      "desc": "Nous suivre"
     },
     "github": {
       "title": "Github",
-      "desc": "Review our code"
+      "desc": "Examinez notre code"
     }
   },
   "blacklistToken": {
@@ -243,23 +243,23 @@
     "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge",
     "ledgerAcademy": {
       "title": "Ledger Academy",
-      "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
-      "cta": "Start learning"
+      "description": "Tout ce que vous devez savoir sur la blockchain, la sécurité, la cryptomonnaie et votre appareil Ledger",
+      "cta": "Commencer à apprendre"
     },
     "stakeCosmos": {
-      "title": "Staking with COSMOS",
-      "description": "Delegate your ATOM coins through the account page and earn rewards today",
-      "cta": "Stake Cosmos now"
+      "title": "Staking avec COSMOS",
+      "description": "Déléguez vos ATOM via la page du compte et obtenez des récompenses aujourd'hui",
+      "cta": "Stakez du Cosmos maintenant"
     },
     "buyCrypto": {
-      "title": "Buy Crypto",
-      "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
-      "cta": "Buy now"
+      "title": "Acheter des crypto-monnaies",
+      "description": "Achetez des crypto-actifs via notre partenaire et recevez les directement dans votre compte Ledger",
+      "cta": "Acheter maintenant"
     },
     "backupPack": {
       "title": "Back-up pack",
-      "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
-      "cta": "Buy back-up pack"
+      "description": "Gérez vos actifs en toute sécurité avec un Nano X et un Nano S à un prix réduit",
+      "cta": "Acheter un back-up pack"
     }
   },
   "dashboard": {
@@ -476,7 +476,7 @@
       "installed": "Apps",
       "capacity": "Capacité",
       "used": "Utilisé",
-      "firmwareAvailable": "Firmware is outdated:",
+      "firmwareAvailable": "Le Firmware est obsolète:",
       "firmwareUpToDate": "Le firmware est à jour:",
       "genuine": "L'appareil est authentique",
       "incomplete": "Certaines applications n'ont pas été reconnues. Veuillez les désinstaller et les réinstaller."
@@ -568,8 +568,8 @@
       "update": "Mettre à jour",
       "updateBtn": "Mettre à jour",
       "latest": "La version {{version}} du firmware est disponible.",
-      "contactSupport": "Contact support",
-      "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
+      "contactSupport": "Contactez l'assistance",
+      "deprecated": "La version du firmware de l'appareil est trop ancienne pour être mise à jour. Contactez le support Ledger pour un remplacement.",
       "prepareSeed": "Assurez-vous que votre phrase de récupération de 24 mots est écrite sur votre feuille de récupération et accessible, par précaution.",
       "disclaimerTitle": "Vous êtes sur le point d’installer la <1>version {{version}}</1> du firmware.",
       "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour"
@@ -929,14 +929,14 @@
     }
   },
   "bitcoin": {
-    "advanced": "Advanced options",
+    "advanced": "Options avancées",
     "rbf": "Replace-by-fee (RBF)",
     "pickUnconfirmedRBF": "autoriser les transactions remplaçables non confirmées",
-    "pickingStrategy": "UTXO picking strategy",
+    "pickingStrategy": "Stratégie de sélection UTXO",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "Deep outputs first (FIFO)",
-      "OPTIMIZE_SIZE": "Optimize size (minimize fees)",
-      "MERGE_OUTPUTS": "merge outputs"
+      "DEEP_OUTPUTS_FIRST": "First In First Out (FIFO)",
+      "OPTIMIZE_SIZE": "Optimiser la taille (minimiser les frais)",
+      "MERGE_OUTPUTS": "Fusionner les sorties"
     }
   },
   "cosmos": {
@@ -962,7 +962,7 @@
       "estYield": "Rend. est.",
       "activeTooltip": "Les montants délégués génèrent des récompenses",
       "inactiveTooltip": "Les montants dont la délégation est interrompue ne génèrent plus de récompenses",
-      "minSafeWarning": "Not enough funds",
+      "minSafeWarning": "Fonds insuffisants",
       "flow": {
         "title": "Déléguer",
         "steps": {
@@ -1204,7 +1204,7 @@
   "settings": {
     "title": "Paramètres",
     "discreet": "Basculer en mode discret",
-    "helpButton": "Help",
+    "helpButton": "Aide",
     "tabs": {
       "display": "Général",
       "cryptoAssets": "Crypto-actifs",
