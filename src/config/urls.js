@@ -69,7 +69,7 @@ export const urls = {
   // FIXME where do we maintain these urls
   swap: {
     providers: {
-      changelly: "asd",
+      changelly: "#",
     },
   },
   // Errors
