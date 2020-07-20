@@ -5,7 +5,7 @@
             "counterValue": "EUR",
             "preferredDeviceModel": "nanoS",
             "language": "en",
-            "theme": "dusk",
+            "theme": "light",
             "region": null,
             "orderAccounts": "balance|desc",
             "countervalueFirst": false,
