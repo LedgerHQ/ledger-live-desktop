@@ -15,24 +15,27 @@ import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 const ParentCryptoCurrencyIconWrapper: ThemedComponent<{
   doubleIcon?: boolean,
   bigger?: boolean,
+  flat?: boolean,
 }> = styled.div`
   ${p =>
-    p.doubleIcon
-      ? ""
+    p.doubleIcon && !p.flat
+      ? `
+        padding-right: 10px;
+        > :nth-child(2) {
+            position: absolute;
+            bottom: -8px;
+            left: 8px;
+            border: 2px solid transparent;
+        }
+      `
       : `
-  display: flex;
-  align-items: center;`}
+    display: flex;
+    align-items: center;
+  `}
   position: relative;
   line-height: ${p => (p.bigger ? "18px" : "18px")};
-  font-size: ${p => (p.bigger ? "12px" : "12px")};
+  font-size: 12px;
   max-height: 25px;
-  padding-right: 10px;
-  > :nth-child(2) {
-    position: absolute;
-    bottom: -8px;
-    left: 8px;
-    border: 2px solid transparent;
-  }
 `;
 const TooltipWrapper = styled.div`
   display: flex;
@@ -57,13 +60,20 @@ type Props = {
   withTooltip?: boolean,
   bigger?: boolean,
   inactive?: boolean,
+  flat?: boolean,
 };
 
-const ParentCryptoCurrencyIcon = ({ currency, withTooltip, bigger, inactive }: Props) => {
+const ParentCryptoCurrencyIcon = ({
+  currency,
+  withTooltip,
+  bigger,
+  inactive,
+  flat = false,
+}: Props) => {
   const parent = currency.type === "TokenCurrency" ? currency.parentCurrency : null;
 
   const content = (
-    <ParentCryptoCurrencyIconWrapper doubleIcon={!!parent} bigger={bigger}>
+    <ParentCryptoCurrencyIconWrapper doubleIcon={!!parent} bigger={bigger} flat={flat}>
       {parent && (
         <CryptoCurrencyIcon inactive={inactive} currency={parent} size={bigger ? 20 : 16} />
       )}

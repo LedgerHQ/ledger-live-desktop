@@ -115,7 +115,7 @@ type Props = {
   data: {
     account: AccountLike,
     parentAccount: ?Account,
-    onResult: (AccountLike, any) => null,
+    onResult: (AccountLike, ?Account, any) => null,
     verifyAddress?: boolean,
   },
 };
@@ -131,13 +131,13 @@ const Root = ({ data, onClose }: Props) => {
   const handleResult = useCallback(
     (res: any) => {
       if (!verifyAddress) {
-        onResult(account, res);
+        onResult(account, parentAccount, res);
         onClose();
       } else {
         setWaitingForDevice(true);
       }
     },
-    [onResult, onClose, account, verifyAddress],
+    [verifyAddress, onResult, account, parentAccount, onClose],
   );
 
   return (

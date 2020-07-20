@@ -54,7 +54,10 @@ type Props = {
   result: ListAppsResult,
   exec: Exec,
   t: TFunction,
-  render?: ({ disableFirmwareUpdate: boolean, installed: InstalledItem[] }) => React$Node,
+  render?: ({
+    disableFirmwareUpdate: boolean,
+    installed: InstalledItem[],
+  }) => React$Node,
   appsToRestore?: string[],
 };
 

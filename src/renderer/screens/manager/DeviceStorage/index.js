@@ -5,6 +5,8 @@ import styled, { css, keyframes } from "styled-components";
 import { Trans } from "react-i18next";
 import { Transition, TransitionGroup } from "react-transition-group";
 
+import manager from "@ledgerhq/live-common/lib/manager";
+
 import type { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
 import type { AppsDistribution } from "@ledgerhq/live-common/lib/apps";
 import type { DeviceModel } from "@ledgerhq/devices";
@@ -242,6 +244,8 @@ const DeviceStorage = ({
 }: Props) => {
   const shouldWarn = distribution.shouldWarnMemory || isIncomplete;
 
+  const firmwareOutdated = manager.firmwareUnsupported(deviceModel.id, deviceInfo) || firmware;
+
   return (
     <Card p={20} mb={4} horizontal>
       <Box position="relative" flex="0 0 140px" mr={20}>
@@ -259,7 +263,7 @@ const DeviceStorage = ({
           </Box>
         </Box>
         <Text ff="Inter|SemiBold" color="palette.text.shade40" fontSize={4}>
-          {firmware ? (
+          {firmwareOutdated ? (
             <Trans
               i18nKey="manager.deviceStorage.firmwareAvailable"
               values={{ version: deviceInfo.version }}
@@ -270,7 +274,7 @@ const DeviceStorage = ({
               values={{ version: deviceInfo.version }}
             />
           )}{" "}
-          {firmware ? null : <HighlightVersion>{deviceInfo.version}</HighlightVersion>}
+          {<HighlightVersion>{deviceInfo.version}</HighlightVersion>}
         </Text>
         <Separator />
         <Info>

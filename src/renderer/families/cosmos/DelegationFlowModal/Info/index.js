@@ -7,9 +7,10 @@ import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 
 import { openModal, closeModal } from "~/renderer/actions/modals";
 import EarnRewardsInfoModal from "~/renderer/components/EarnRewardsInfoModal";
-import InfoBox from "~/renderer/components/InfoBox";
+import WarnBox from "~/renderer/components/WarnBox";
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
+import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 
 type Props = {
   name?: string,
@@ -45,10 +46,9 @@ export default function CosmosEarnRewardsInfoModal({ name, account, parentAccoun
         t("cosmos.delegation.flow.steps.starter.bullet.2"),
       ]}
       additional={
-        <InfoBox onLearnMore={onLearnMore}>
-          {t("cosmos.delegation.flow.steps.starter.warning.description")}
-        </InfoBox>
+        <WarnBox>{t("cosmos.delegation.flow.steps.starter.warning.description")}</WarnBox>
       }
+      footerLeft={<LinkWithExternalIcon label={t("delegation.howItWorks")} onClick={onLearnMore} />}
     />
   );
 }
