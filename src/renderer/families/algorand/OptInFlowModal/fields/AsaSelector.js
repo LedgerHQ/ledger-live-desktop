@@ -21,7 +21,6 @@ const renderItem = ({
   data: TokenCurrency,
   isDisabled: boolean,
 }) => {
-  console.log(data);
   return (
     <Box
       key={id}
