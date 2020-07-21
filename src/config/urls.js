@@ -66,10 +66,13 @@ export const urls = {
     ledgerAcademy:
       "https://www.ledger.com/academy/?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop",
   },
-  // FIXME where do we maintain these urls
   swap: {
+    info: "https://www.ledger.com/swap",
     providers: {
-      changelly: "#",
+      changelly: {
+        main: "https://changelly.com/",
+        tos: "https://changelly.com/terms-of-use",
+      },
     },
   },
   // Errors

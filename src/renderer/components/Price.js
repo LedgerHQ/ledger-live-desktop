@@ -27,6 +27,7 @@ type OwnProps = {
   to?: Currency,
   withActivityCurrencyColor?: boolean,
   withActivityColor?: string,
+  withIcon?: boolean,
   withEquality?: boolean,
   date?: Date,
   color?: string,
@@ -65,6 +66,7 @@ const Price = ({
   fontSize,
   iconSize,
   showAllDigits = true,
+  withIcon = true,
 }: Props) => {
   const bgColor = useTheme("colors.palette.background.paper");
   if (!counterValue || counterValue.isZero()) return placeholder || null;
@@ -81,7 +83,7 @@ const Price = ({
 
   return (
     <PriceWrapper color={color} fontSize={fontSize}>
-      <IconActivity size={iconSize || 12} style={{ color: activityColor, marginRight: 4 }} />
+      {withIcon? <IconActivity size={iconSize || 12} style={{ color: activityColor, marginRight: 4 }} /> : null}
       {!withEquality ? null : (
         <>
           <CurrencyUnitValue value={value} unit={effectiveUnit} showCode />

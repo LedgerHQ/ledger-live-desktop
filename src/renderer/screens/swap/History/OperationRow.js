@@ -24,7 +24,7 @@ import Tooltip from "~/renderer/components/Tooltip";
 import IconClock from "~/renderer/icons/Clock";
 import { openModal } from "~/renderer/actions/modals";
 
-const getStatusColor = (status, theme) => {
+export const getStatusColor = (status, theme) => {
   return (
     {
       finished: theme.colors.positiveGreen,
@@ -63,7 +63,7 @@ const WrapperClock: ThemedComponent<{}> = styled(Box).attrs(() => ({
 const Row: ThemedComponent<{}> = styled(Box)`
   border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
   height: 68px;
-  opacity: ${p => (p.isOptimistic ? 0.5 : 1)};
+  opacity: ${p => (p.isOptimistic || !p.toExists ? 0.5 : 1)};
   cursor: pointer;
 
   &:last-child {
@@ -108,12 +108,14 @@ const OperationRow = ({
     swapId,
     operation,
     status,
+    toExists,
   } = mappedSwapOperation;
   const fromCurrency = getAccountCurrency(fromAccount);
   const toCurrency = getAccountCurrency(toAccount);
 
   return (
     <Row
+      toExists={toExists}
       horizontal
       key={swapId}
       alignItems={"center"}
@@ -122,7 +124,7 @@ const OperationRow = ({
       <Tooltip content={status}>
         <Status status={status}>
           <IconSwap size={12} />
-          {status === "confirming" ? (
+          {status.includes("ing") ? (
             <WrapperClock>
               <IconClock size={10} />
             </WrapperClock>

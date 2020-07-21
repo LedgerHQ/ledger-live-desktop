@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useEffect, useMemo, useReducer } from "react";
+import React, { useState, useCallback, useEffect, useMemo, useReducer } from "react";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
 import { BigNumber } from "bignumber.js";
@@ -14,6 +14,7 @@ import type { AccountLike, Currency } from "@ledgerhq/live-common/lib/types";
 import getExchangeRates from "@ledgerhq/live-common/lib/swap/getExchangeRates";
 import ArrowSeparator from "~/renderer/components/ArrowSeparator";
 import { findTokenById } from "@ledgerhq/live-common/lib/data/tokens";
+import useInterval from "~/renderer/hooks/useInterval";
 import {
   findCryptoCurrencyById,
   isCurrencySupported,
@@ -45,6 +46,7 @@ import { colors } from "~/renderer/styles/theme";
 import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import type { CurrencyStatus } from "@ledgerhq/live-common/lib/swap/logic";
+import { urls } from "~/config/urls";
 
 const Footer: ThemedComponent<{}> = styled(Box)`
   align-items: center;
@@ -72,7 +74,7 @@ const Form = ({
   selectableCurrencies: Currency[],
   installedApps: InstalledItem[],
 }) => {
-  const ratesExpirationThreshold = 110000; // FIXME, move to live-common (not fully 2min to have some margin)
+  const ratesExpirationThreshold = 100000;
   const { t } = useTranslation();
   const reduxDispatch = useDispatch();
   const currenciesStatus = useMemo(
@@ -91,6 +93,7 @@ const Form = ({
   );
 
   const [state, dispatch] = useReducer(reducer, { okCurrencies }, initState);
+  const [ratesTimestamp, setRatesTimestamp] = useState(null); // Move back to the live-common one
   const patchExchange = useCallback(payload => dispatch({ type: "patchExchange", payload }), [
     dispatch,
   ]);
@@ -101,9 +104,7 @@ const Form = ({
     fromCurrency,
     toCurrency,
     useAllAmount,
-    ratesTimestamp,
-    ratesExpired,
-    error,
+    /* ratesTimestamp, */ error,
   } = state;
   const { exchange, exchangeRate } = swap;
   const { fromAccount, toAccount } = exchange;
@@ -155,6 +156,7 @@ const Form = ({
         const rates = await getExchangeRates(exchange, transaction);
         if (ignore) return;
         dispatch({ type: "setRate", payload: { rate: rates[0] } });
+        setRatesTimestamp(new Date());
       } catch (error) {
         if (ignore) return;
         dispatch({ type: "setError", payload: { error } });
@@ -192,15 +194,14 @@ const Form = ({
   }, [fromAccount, useAllAmount]);
 
   // Re-fetch rates (if needed) every `ratesExpirationThreshold` seconds.
-  // This updated the modal if it's already open.
-  // useInterval(() => {
-  //   const now = new Date();
-  //   if (ratesTimestamp && now - ratesTimestamp > ratesExpirationThreshold) {
-  //     dispatch({ type: "expireRates" });
-  //   } else {
-  //     reduxDispatch(setDataModal("MODAL_SWAP", { swap }));
-  //   }
-  // }, 5000);
+  useInterval(() => {
+    const now = new Date();
+    console.log({ ratesTimestamp, ratesExpirationThreshold });
+    if (ratesTimestamp && now - ratesTimestamp > ratesExpirationThreshold) {
+      dispatch({ type: "expireRates", payload: {} });
+      console.log("expiring rates");
+    }
+  }, 5000);
 
   if (!fromAccount) return null;
 
@@ -252,7 +253,7 @@ const Form = ({
             color="wallet"
             ff="Inter|SemiBold"
             onClick={() => {
-              openURL("");
+              openURL(urls.swap.info);
               track("More info on swap");
             }}
             label={t("swap.form.helpCTA")}

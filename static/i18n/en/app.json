@@ -131,7 +131,6 @@
     },
     "landing": {
       "title": "Swap your assets",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet mi quam. Etiam semper justo et augue dignissim placerat non at risus.",
       "continue": "Continue",
       "link": "More about Swap",
       "sorry": "Swap feature is not available in your country"
@@ -143,6 +142,11 @@
     },
     "history": {
       "title": "Lorem ipsum dolor sit amet"
+    },
+    "kyc": {
+      "title": "Welcome to Swap",
+      "subtitle": "Exchange crypto assets directly from your Ledger device. This service is not available in the US and a few other countries",
+      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures"
     },
     "form": {
       "from": {
@@ -162,6 +166,7 @@
       "addAccount": "Add Account",
       "openManager": "Open Manager",
       "helpCTA": "What is Swap?",
+      "bubble": "We use a fixed rate, this is the exact amount you will receive",
       "noAccounts": "You don't have {{currencyName}} accounts",
       "noApp": "You don't have the {{currencyName}} app installed"
     },
@@ -182,8 +187,6 @@
           },
           "details": {
             "provider": "Provider",
-            "estimatedArrival": "Estimated arrival",
-            "estimatedArrivalRight": "15:00 min",
             "address": "Address"
           }
         },
@@ -193,6 +196,8 @@
         "finished": {
           "title": "Pending operation",
           "swap": "Your Swap ID:",
+          "seeDetails": "See details",
+          "disclaimer": "Save your Swap ID number outside Ledger Live",
           "description": "Swap operation is being broadcasted to {{provider}}, that will treat it before sending you the requested funds. To see the status of your operation, click on “See details”, or go the history tab of the swap page"
         }
       },
@@ -2139,7 +2144,7 @@
     },
     "SwapGenericAPIError":{
       "title": "Something went wrong confirming the swap",
-      "description": "Generic lorem ipsum dolor sit amet message to tell the user the swap failed"
+      "description": "It is likely the exchange rate has expired. Please try again"
     },
     "TimeoutError": {
       "title": "Oops, a timeout occurred",

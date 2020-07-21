@@ -71,6 +71,7 @@ export type SettingsState = {
   counterValue: string,
   preferredDeviceModel: DeviceModelId,
   hasInstalledApps: boolean,
+  hasAcceptedSwapKYC: boolean,
   lastSeenDevice: ?DeviceModelInfo,
   language: ?string,
   theme: ?string,
@@ -136,6 +137,7 @@ const INITIAL_STATE: SettingsState = {
   preferredDeviceModel: "nanoS",
   hasInstalledApps: true,
   carouselVisibility: 0,
+  hasAcceptedSwapKYC: false,
   lastSeenDevice: null,
   blacklistedTokenIds: [],
   deepLinkUrl: null,
@@ -340,6 +342,7 @@ export const shareAnalyticsSelector = (state: State) => state.settings.shareAnal
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange;
 export const hasInstalledAppsSelector = (state: State) => state.settings.hasInstalledApps;
 export const carouselVisibilitySelector = (state: State) => state.settings.carouselVisibility;
+export const hasAcceptedSwapKYCSelector = (state: State) => state.settings.hasAcceptedSwapKYC;
 export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;

@@ -12,10 +12,11 @@ import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import moment from "moment";
+import Spinner from "~/renderer/components/Spinner";
 
 const History = () => {
   const accounts = useSelector(shallowAccountsSelector);
-  const [mappedSwapOperations, setMappedSwapOperations] = useState([]);
+  const [mappedSwapOperations, setMappedSwapOperations] = useState(null);
   const dispatch = useDispatch();
   const accountsRef = useRef(accounts);
 
@@ -45,38 +46,50 @@ const History = () => {
 
   return (
     <>
-      {mappedSwapOperations && mappedSwapOperations.length ? (
-        mappedSwapOperations.map(section => (
-          // Sections?
-          <>
-            <Box mb={2} mt={4} ff="Inter|SemiBold" fontSize={4} color="palette.text.shade60">
-              {moment(section.day).calendar(null, {
-                sameDay: "LL – [Today]",
-                lastDay: "LL – [Yesterday]",
-                lastWeek: "LL",
-                sameElse: "LL",
-              })}
-            </Box>
-            <Card key={section.day.toString()}>
-              {section.data.map(mappedSwapOperation => (
-                <OperationRow
-                  key={mappedSwapOperation.swapId}
-                  mappedSwapOperation={mappedSwapOperation}
-                  openSwapOperationDetailsModal={openSwapOperationDetailsModal}
-                />
-              ))}
-            </Card>
-          </>
-        ))
+      {mappedSwapOperations ? (
+        mappedSwapOperations.length ? (
+          mappedSwapOperations.map(section => (
+            // Sections?
+            <>
+              <Box mb={2} mt={4} ff="Inter|SemiBold" fontSize={4} color="palette.text.shade60">
+                {moment(section.day).calendar(null, {
+                  sameDay: "LL – [Today]",
+                  lastDay: "LL – [Yesterday]",
+                  lastWeek: "LL",
+                  sameElse: "LL",
+                })}
+              </Box>
+              <Card key={section.day.toString()}>
+                {section.data.map(mappedSwapOperation => (
+                  <OperationRow
+                    key={mappedSwapOperation.swapId}
+                    mappedSwapOperation={mappedSwapOperation}
+                    openSwapOperationDetailsModal={openSwapOperationDetailsModal}
+                  />
+                ))}
+              </Card>
+            </>
+          ))
+        ) : (
+          <Box p={150} alignItems={"center"} justifyContent={"center"}>
+            <Text mb={1} ff="Inter|SemiBold" fontSize={16} color="palette.text.shade100">
+              {"No History"}
+            </Text>
+            <Text ff="Inter|Regular" fontSize={12} color="palette.text.shade50">
+              {"You don’t have any history swap"}
+            </Text>
+          </Box>
+        )
       ) : (
-        <Box p={150} alignItems={"center"} justifyContent={"center"}>
-          <Text mb={1} ff="Inter|SemiBold" fontSize={16} color="palette.text.shade100">
-            {"No History"}
-          </Text>
-          <Text ff="Inter|Regular" fontSize={12} color="palette.text.shade50">
-            {"You don’t have any history swap"}
-          </Text>
-        </Box>
+        <Card
+          px={80}
+          py={53}
+          alignItems={"center"}
+          justifyContent={"center"}
+          style={{ minHeight: 438 }}
+        >
+          <Spinner size={40} />
+        </Card>
       )}
     </>
   );

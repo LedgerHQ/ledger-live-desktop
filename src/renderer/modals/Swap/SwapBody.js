@@ -9,7 +9,7 @@ import StepFinished, { StepFinishedFooter } from "~/renderer/modals/Swap/steps/S
 import Breadcrumb from "~/renderer/components/Stepper/Breadcrumb";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import { useDispatch } from "react-redux";
-import { updateAccount } from "~/renderer/actions/accounts";
+import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import addToSwapHistory from "@ledgerhq/live-common/lib/swap/addToSwapHistory";
 
@@ -27,7 +27,7 @@ const SwapBody = ({
   const [activeStep, setActiveStep] = useState<SwapSteps>("summary");
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const [swapId, setSwapId] = useState(null);
+  const [result, setResult] = useState();
   const onAcceptTOS = useCallback(() => setActiveStep("device"), [setActiveStep]);
   const onSwitchAccept = useCallback(() => setCheckedDisclaimer(!checkedDisclaimer), [
     checkedDisclaimer,
@@ -36,13 +36,17 @@ const SwapBody = ({
   const onDeviceInteraction = useCallback(
     result => {
       const { operation, swapId } = result;
-      let account = swap.exchange.fromAccount;
+      const account = swap.exchange.fromAccount;
       if (!account) return;
-      // NB it wasn't working with chained calls :shrug:
-      account = addPendingOperation(account, operation);
-      account = addToSwapHistory(account, operation, transaction, swap, swapId);
-      dispatch(updateAccount(account));
-      setSwapId(swapId);
+      dispatch(
+        updateAccountWithUpdater(account.id, account =>
+          addPendingOperation(
+            addToSwapHistory(account, operation, transaction, swap, swapId),
+            operation,
+          ),
+        ),
+      );
+      setResult(result);
       setActiveStep("finished");
     },
     [swap, transaction, dispatch],
@@ -84,8 +88,8 @@ const SwapBody = ({
               onContinue={onDeviceInteraction}
               onError={setError}
             />
-          ) : swapId ? (
-            <StepFinished swapId={swapId} provider={swap.exchangeRate.provider} />
+          ) : result && result.swapId ? (
+            <StepFinished swapId={result.swapId} provider={swap.exchangeRate.provider} />
           ) : null}
         </>
       )}
@@ -96,9 +100,9 @@ const SwapBody = ({
             onClose={onClose}
             disabled={!checkedDisclaimer}
           />
-        ) : (
-          <StepFinishedFooter onClose={onClose} />
-        )
+        ) : result && swap ? (
+          <StepFinishedFooter result={result} swap={swap} onClose={onClose} />
+        ) : null
       }
     />
   );

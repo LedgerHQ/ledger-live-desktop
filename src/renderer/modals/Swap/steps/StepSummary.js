@@ -64,6 +64,7 @@ const StepSummary = ({
   const toUnit = getAccountUnit(toAccount);
 
   const toAmount = fromAmount.times(exchangeRate.magnitudeAwareRate);
+  const { main, tos } = urls.swap.providers[exchangeRate.provider];
 
   return (
     <Box mx={2}>
@@ -125,7 +126,7 @@ const StepSummary = ({
           fontSize={3}
           ml={2}
           color="palette.primary.main"
-          onClick={() => openURL(urls.swap.providers[exchangeRate.provider])}
+          onClick={() => openURL(main)}
           iconFirst
           style={{ textTransform: "capitalize" }}
         >
@@ -149,7 +150,10 @@ const StepSummary = ({
             fontSize={3}
             ml={2}
             color="palette.primary.main"
-            onClick={() => openURL(urls.swap.providers[exchangeRate.provider])}
+            onClick={e => {
+              e.preventDefault();
+              openURL(tos);
+            }}
             iconFirst
             style={{ textTransform: "capitalize", display: "inline-flex" }}
           >

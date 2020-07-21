@@ -17,7 +17,10 @@ import styled from "styled-components";
 import IconSwap from "~/renderer/icons/Swap";
 import IconArrowDown from "~/renderer/icons/ArrowDown";
 import { rgba } from "~/renderer/styles/helpers";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import moment from "moment";
+import { getStatusColor } from "~/renderer/screens/swap/history/OperationRow";
+import IconClock from "~/renderer/icons/Clock";
 
 const Label = styled(Text).attrs(() => ({
   fontSize: 2,
@@ -48,16 +51,30 @@ const Row = styled(Box).attrs(() => ({
   }
 `;
 
-const IconWrapper = styled.div`
-  border-radius: 50%;
+const Status: ThemedComponent<{}> = styled.div`
   height: 66px;
   width: 66px;
-  background: ${p => rgba(p.theme.colors.positiveGreen, 0.1)};
-  color: ${p => p.theme.colors.positiveGreen};
   display: flex;
+  position: relative;
   align-items: center;
-  align-self: center;
   justify-content: center;
+  align-self: center;
+  border-radius: 50%;
+  background: ${p => rgba(getStatusColor(p.status, p.theme), 0.2)};
+  & > * {
+    color: ${p => getStatusColor(p.status, p.theme)};
+  }
+`;
+
+const WrapperClock: ThemedComponent<{}> = styled(Box).attrs(() => ({
+  bg: "palette.background.paper",
+  color: "palette.text.shade60",
+}))`
+  border-radius: 50%;
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  padding: 1px;
 `;
 
 const SwapOperationDetailsBody = ({
@@ -90,9 +107,14 @@ const SwapOperationDetailsBody = ({
       title={<Trans i18nKey="swap.operationDetailsModal.title" />}
       render={() => (
         <Box p={1}>
-          <IconWrapper>
+          <Status status={status}>
             <IconSwap size={27} />
-          </IconWrapper>
+            {status !== "confirming" ? (
+              <WrapperClock>
+                <IconClock size={16} />
+              </WrapperClock>
+            ) : null}
+          </Status>
           <Box my={4} mb={48} alignItems="center">
             <Box selectable>
               <FormattedVal

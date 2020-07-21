@@ -11,6 +11,7 @@ import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Text from "~/renderer/components/Text";
+import ToolTip from "~/renderer/components/ToolTip";
 import Price from "~/renderer/components/Price";
 import IconPlusSmall from "~/renderer/icons/PlusSmall";
 import { openModal } from "~/renderer/actions/modals";
@@ -18,6 +19,9 @@ import { useDispatch } from "react-redux";
 import { CurrencyOptionRow } from "~/renderer/screens/swap/Form";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/swap/logic";
+import InfoCircle from "~/renderer/icons/InfoCircle";
+import IconLock from "~/renderer/icons/Lock";
+import useTheme from "~/renderer/hooks/useTheme";
 
 const InputRight = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
@@ -92,6 +96,8 @@ const SwapInputGroup = ({
     (currency.type === "TokenCurrency" &&
       validAccounts.find(a => getAccountCurrency(a).id === currency.parentCurrency));
 
+  const lockColor = useTheme("colors.palette.text.shade50");
+
   return (
     <Box flex={1} flow={1} mb={3} ml={23}>
       <Text mb={15} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={5}>
@@ -145,7 +151,19 @@ const SwapInputGroup = ({
       <Box>
         <Label mb={4} mt={25}>
           <Trans i18nKey={`swap.form.to.amount`} />
+          <ToolTip
+            content={
+              <Box style={{ maxWidth: 200 }}>
+                <Trans i18nKey={"swap.form.bubble"} />
+              </Box>
+            }
+          >
+            <Box ml={1}>
+              <InfoCircle size={12} />
+            </Box>
+          </ToolTip>
         </Label>
+
         {unit ? (
           <>
             <InputCurrency
@@ -158,9 +176,13 @@ const SwapInputGroup = ({
               onChange={() => undefined}
             />
             {rate ? (
-              <Box mt={1}>
+              <Box horizontal mt={1} alignItems={"center"}>
+                <Box mr={1}>
+                  <IconLock size={10} color={lockColor} />
+                </Box>
                 <Price
                   withEquality
+                  withIcon={false}
                   from={fromCurrency}
                   to={currency}
                   rate={rate}
