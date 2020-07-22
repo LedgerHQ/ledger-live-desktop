@@ -105,7 +105,7 @@ const Slides = styled.div`
 const Carousel = ({
   withArrows = false,
   controls = true,
-  speed = 5000,
+  speed = 6000,
   type = "slide",
   slides: _slides,
 }: {
@@ -157,7 +157,7 @@ const Carousel = ({
     <CarouselWrapper onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       {slides.length > 1 ? (
         <ProgressBarWrapper>
-          <TimeBasedProgressBar onComplete={onNext} duration={5000} paused={paused} />
+          <TimeBasedProgressBar onComplete={onNext} duration={speed} paused={paused} />
         </ProgressBarWrapper>
       ) : null}
       <Slides>
