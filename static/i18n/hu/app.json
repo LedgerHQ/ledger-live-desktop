@@ -1162,7 +1162,7 @@
           "title": "Válassz hitelesítőt",
           "description": "Választhatsz hitelesítőt a becsült jutalom mértékének összehasonlításával",
           "customValidator": "Egyedi érvényesítő",
-          "providedBy": "A hozam mértéke biztosított általa: <1><0>MyTezosBaker</0></1>"
+          "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
         },
         "custom": {
           "title": "Egyedi megerősítő",
