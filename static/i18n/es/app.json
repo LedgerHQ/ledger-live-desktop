@@ -503,8 +503,7 @@
       "installSuccess": {
         "title": "App installed successfully. You can now add your {{app}} accounts",
         "title_plural": "Apps installed successfully. You can now add your accounts",
-        "manageAccount": "Manage my accounts",
-        "later": "Do it later"
+        "manageAccount": "Manage my accounts"
       },
       "updatable": {
         "title": "Updates available",
