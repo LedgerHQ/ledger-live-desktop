@@ -503,8 +503,7 @@
       "installSuccess": {
         "title": "Application installée avec succès. Vous pouvez maintenant ajouter vos comptes {{app}}",
         "title_plural": "Applications installée avec succès. Vous pouvez maintenant ajouter vos comptes {{app}}",
-        "manageAccount": "Gérer mes comptes",
-        "later": "Plus tard"
+        "manageAccount": "Gérer mes comptes"
       },
       "updatable": {
         "title": "Mises à jour disponibles",
@@ -1162,7 +1161,7 @@
           "title": "Sélectionner un validateur",
           "description": "Vous pouvez sélectionner un validateur en comparant les taux de rendement estimés",
           "customValidator": "Validateur personnalisé",
-          "providedBy": "Taux de rendements fournis par <1><0>{{name}}</0></1>"
+          "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
         },
         "custom": {
           "title": "Validateur personnalisé",
