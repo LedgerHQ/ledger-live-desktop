@@ -503,8 +503,7 @@
       "installSuccess": {
         "title": "App installed successfully. You can now add your {{app}} accounts",
         "title_plural": "Apps installed successfully. You can now add your accounts",
-        "manageAccount": "Számláim kezelése",
-        "later": "Későbbre halasztás"
+        "manageAccount": "Számláim kezelése"
       },
       "updatable": {
         "title": "Frissítések elérhetők",
@@ -1162,7 +1161,7 @@
           "title": "Válassz hitelesítőt",
           "description": "Választhatsz hitelesítőt a becsült jutalom mértékének összehasonlításával",
           "customValidator": "Egyedi érvényesítő",
-          "providedBy": "A hozam mértéke biztosított általa: <1><0>{{name}}</0></1>"
+          "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
         },
         "custom": {
           "title": "Egyedi megerősítő",
