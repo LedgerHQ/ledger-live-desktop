@@ -78,7 +78,7 @@ const KYC = () => {
         <Disclaimer ff="Inter|Regular">
           <Trans i18nKey={"swap.kyc.disclaimer"} />
         </Disclaimer>
-        <Button primary onClick={onAcceptSwapKYC}>
+        <Button disabled={!isChecked} primary onClick={onAcceptSwapKYC}>
           <Trans i18nKey="common.continue" />
         </Button>
       </Footer>
