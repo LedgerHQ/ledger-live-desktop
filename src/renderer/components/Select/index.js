@@ -40,6 +40,7 @@ type Props = {
   width: number,
   minWidth: number,
   autoFocus: boolean,
+  virtual: boolean,
 };
 
 const Row = styled.div`
@@ -190,6 +191,7 @@ class Select extends PureComponent<Props> {
       minWidth,
       small,
       theme,
+      virtual = true,
       ...props
     } = this.props;
 
@@ -204,10 +206,16 @@ class Select extends PureComponent<Props> {
         maxMenuHeight={rowHeight * 4.5}
         classNamePrefix="select"
         options={options}
-        components={{
-          MenuList,
-          ...createRenderers({ renderOption, renderValue }),
-        }}
+        components={
+          virtual
+            ? {
+                MenuList,
+                ...createRenderers({ renderOption, renderValue }),
+              }
+            : {
+                ...createRenderers({ renderOption, renderValue }),
+              }
+        }
         styles={createStyles(theme, { width, minWidth, small, isRight, isLeft })}
         placeholder={placeholder}
         isDisabled={isDisabled}

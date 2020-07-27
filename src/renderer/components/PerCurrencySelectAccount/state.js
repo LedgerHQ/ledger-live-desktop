@@ -1,0 +1,130 @@
+// @flow
+
+import { useState, useCallback, useMemo } from "react";
+import type { Account, SubAccount } from "@ledgerhq/live-common/lib/types/account";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
+import { BigNumber } from "bignumber.js";
+
+type CryptoOrTokenCurrency = TokenCurrency | CryptoCurrency;
+
+const generateTokenAccount = (account: Account, currency: TokenCurrency): SubAccount => ({
+  type: "TokenAccount",
+  id: account.id + "+" + currency.contractAddress,
+  parentId: account.id,
+  token: currency,
+  balance: BigNumber(0),
+  operationsCount: 0,
+  creationDate: new Date(),
+  operations: [],
+  pendingOperations: [],
+  starred: false,
+});
+
+export type AccountTuple = {
+  account: ?Account,
+  subAccount: ?SubAccount,
+};
+
+function getAccountTuplesForCurrency(
+  currency: CryptoOrTokenCurrency,
+  allAccounts: Account[],
+): AccountTuple[] {
+  if (currency.type === "TokenCurrency") {
+    return allAccounts
+      .filter(account => account.currency.id === currency.parentCurrency.id)
+      .map(account => ({
+        account,
+        subAccount:
+          (account.subAccounts &&
+            account.subAccounts.find(
+              (subAcc: SubAccount) =>
+                subAcc.type === "TokenAccount" && subAcc.token.id === currency.id,
+            )) ||
+          generateTokenAccount(account, currency),
+      }));
+  }
+  return allAccounts
+    .filter(account => account.currency.id === currency.id)
+    .map(account => ({
+      account,
+      subAccount: null,
+    }));
+}
+
+const getIdsFromTuple = (accountTuple: AccountTuple) => ({
+  accountId: accountTuple.account ? accountTuple.account.id : null,
+  subAccountId: accountTuple.subAccount ? accountTuple.subAccount.id : null,
+});
+
+export function useCurrencyAccountSelect(
+  allCurrencies: CryptoOrTokenCurrency[],
+  allAccounts: Account[],
+) {
+  const [state, setState] = useState(() => {
+    const defaultCurrency = allCurrencies[0];
+    const availableAccounts = getAccountTuplesForCurrency(defaultCurrency, allAccounts);
+    const { accountId } = availableAccounts.length
+      ? getIdsFromTuple(availableAccounts[0])
+      : { accountId: null };
+
+    return {
+      currency: defaultCurrency,
+      accountId,
+    };
+  });
+
+  const { currency, accountId } = state;
+
+  const setCurrency = useCallback(
+    (currency: ?CryptoOrTokenCurrency) => {
+      if (currency) {
+        const availableAccounts = getAccountTuplesForCurrency(currency, allAccounts);
+        const { accountId } = availableAccounts.length
+          ? getIdsFromTuple(availableAccounts[0])
+          : { accountId: null };
+
+        return setState(currState => ({
+          ...currState,
+          currency,
+          accountId,
+        }));
+      }
+      return setState(currState => ({
+        ...currState,
+        currency,
+        accountId: null,
+      }));
+    },
+    [allAccounts],
+  );
+
+  const setAccount = useCallback((account: ?Account, subAccount: ?SubAccount) => {
+    setState(currState => ({
+      ...currState,
+      accountId: account ? account.id : null,
+    }));
+  }, []);
+
+  const availableAccounts = useMemo(
+    () => (currency ? getAccountTuplesForCurrency(currency, allAccounts) : []),
+    [currency, allAccounts],
+  );
+
+  const { account, subAccount } = useMemo(() => {
+    return (
+      availableAccounts.find(tuple => (tuple.account ? tuple.account.id === accountId : false)) || {
+        account: null,
+        subAccount: null,
+      }
+    );
+  }, [availableAccounts, accountId]);
+
+  return {
+    availableAccounts,
+    currency,
+    account,
+    subAccount,
+    setAccount,
+    setCurrency,
+  };
+}
