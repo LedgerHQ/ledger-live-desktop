@@ -5,11 +5,12 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 
 import { BigNumber } from "bignumber.js";
 import uniq from "lodash/uniq";
-import { connect, useDispatch } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Trans, useTranslation, withTranslation } from "react-i18next";
 import Card from "~/renderer/components/Box/Card";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
+import { modalsStateSelector } from "~/renderer/reducers/modals";
 import type { AccountLike, Currency } from "@ledgerhq/live-common/lib/types";
 import getExchangeRates from "@ledgerhq/live-common/lib/swap/getExchangeRates";
 import ArrowSeparator from "~/renderer/components/ArrowSeparator";
@@ -76,6 +77,7 @@ const Form = ({
 }) => {
   const ratesExpirationThreshold = 100000;
   const { t } = useTranslation();
+  const modalsState = useSelector(modalsStateSelector);
   const reduxDispatch = useDispatch();
   const currenciesStatus = useMemo(
     () =>
@@ -193,13 +195,17 @@ const Form = ({
     };
   }, [fromAccount, useAllAmount]);
 
+  useEffect(() => {
+    if (modalsState.MODAL_SWAP && !modalsState.MODAL_SWAP.isOpened) {
+      dispatch({ type: "expireRates", payload: {} });
+    }
+  }, [modalsState]);
+
   // Re-fetch rates (if needed) every `ratesExpirationThreshold` seconds.
   useInterval(() => {
     const now = new Date();
-    console.log({ ratesTimestamp, ratesExpirationThreshold });
     if (ratesTimestamp && now - ratesTimestamp > ratesExpirationThreshold) {
       dispatch({ type: "expireRates", payload: {} });
-      console.log("expiring rates");
     }
   }, 5000);
 
