@@ -4,7 +4,7 @@ import { Trans } from "react-i18next";
 import { ModalBody } from "~/renderer/components/Modal";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
 import StepSummary, { StepSummaryFooter } from "~/renderer/modals/Swap/steps/StepSummary";
-import StepDevice from "~/renderer/modals/Swap/steps/StepDevice";
+import StepDevice, { StepDeviceFooter} from "~/renderer/modals/Swap/steps/StepDevice";
 import StepFinished, { StepFinishedFooter } from "~/renderer/modals/Swap/steps/StepFinished";
 import Breadcrumb from "~/renderer/components/Stepper/Breadcrumb";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
@@ -18,17 +18,20 @@ const SwapBody = ({
   swap,
   transaction,
   onClose,
+  onStepChange,
+  activeStep,
 }: {
   swap: { exchange: Exchange, exchangeRate: ExchangeRate },
   transaction: any, // FIXME
   onClose: any,
+  onStepChange: SwapSteps => void,
+  activeStep: SwapSteps,
 }) => {
   const [checkedDisclaimer, setCheckedDisclaimer] = useState(false);
-  const [activeStep, setActiveStep] = useState<SwapSteps>("summary");
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const [result, setResult] = useState();
-  const onAcceptTOS = useCallback(() => setActiveStep("device"), [setActiveStep]);
+  const onAcceptTOS = useCallback(() => onStepChange("device"), [onStepChange]);
   const onSwitchAccept = useCallback(() => setCheckedDisclaimer(!checkedDisclaimer), [
     checkedDisclaimer,
   ]);
@@ -47,9 +50,9 @@ const SwapBody = ({
         ),
       );
       setResult(result);
-      setActiveStep("finished");
+      onStepChange("finished");
     },
-    [swap, transaction, dispatch],
+    [swap, dispatch, onStepChange, transaction],
   );
 
   const items = [
@@ -62,7 +65,7 @@ const SwapBody = ({
 
   return (
     <ModalBody
-      onClose={onClose}
+      onClose={activeStep === "device" && !error ? undefined : onClose}
       title={<Trans i18nKey="swap.modal.title" />}
       render={() => (
         <>
@@ -102,6 +105,8 @@ const SwapBody = ({
           />
         ) : result && swap ? (
           <StepFinishedFooter result={result} swap={swap} onClose={onClose} />
+        ) : error ? (
+          <StepDeviceFooter onClose={onClose} />
         ) : null
       }
     />

@@ -14,6 +14,7 @@ import type { SignedOperation, Transaction } from "@ledgerhq/live-common/lib/typ
 import type { Device } from "~/renderer/reducers/devices";
 import StepProgress from "~/renderer/components/StepProgress";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
+import Button from "~/renderer/components/Button";
 const connectAppExec = command("connectApp");
 const initSwapExec = command("initSwap");
 
@@ -110,6 +111,16 @@ const StepDevice = ({
         }
       }}
     />
+  );
+};
+
+export const StepDeviceFooter = ({ onClose }: { onClose: any }) => {
+  return (
+    <Box horizontal alignItems={"flex-end"}>
+      <Button onClick={onClose} primary>
+        <Trans i18nKey="common.close" />
+      </Button>
+    </Box>
   );
 };
 
