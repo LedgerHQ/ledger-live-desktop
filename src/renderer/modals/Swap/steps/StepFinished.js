@@ -32,6 +32,7 @@ const Disclaimer = styled(Box)`
 `;
 
 const Pill = styled(Text)`
+  user-select: text;
   border-radius: 4px;
   background: ${p => p.theme.colors.palette.text.shade10};
   padding: 0 8px;
