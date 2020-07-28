@@ -21,17 +21,31 @@ const MODAL_HEADER_STYLE = {
   minHeight: 66,
 };
 
+const TitleContainer = styled(Box).attrs(() => ({
+  vertical: true,
+}))`
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+`;
+
 const ModalTitle = styled(Box).attrs(() => ({
   color: "palette.text.shade100",
   ff: "Inter|Medium",
   fontSize: 6,
 }))`
-  position: absolute;
-  left: 0;
-  right: 0;
   text-align: center;
   line-height: 1;
-  pointer-events: none;
+`;
+
+const ModalSubTitle = styled(Box).attrs(() => ({
+  color: "palette.text.shade50",
+  ff: "Inter|Regular",
+  fontSize: 3,
+}))`
+  text-align: center;
+  line-height: 2;
 `;
 
 const ModalHeaderAction = styled(Tabbable).attrs(() => ({
@@ -81,10 +95,12 @@ const ModalHeaderAction = styled(Tabbable).attrs(() => ({
 
 const ModalHeader = ({
   children,
+  subTitle,
   onBack,
   onClose,
 }: {
   children: any,
+  subTitle?: React$Node,
   onBack?: void => void,
   onClose?: void => void,
 }) => {
@@ -101,7 +117,11 @@ const ModalHeader = ({
       ) : (
         <div />
       )}
-      <ModalTitle id="modal-title">{children}</ModalTitle>
+      <TitleContainer>
+        {subTitle && <ModalSubTitle id="modal-subtitle">{subTitle}</ModalSubTitle>}
+        <ModalTitle id="modal-title">{children}</ModalTitle>
+      </TitleContainer>
+
       {onClose ? (
         <ModalHeaderAction
           right
