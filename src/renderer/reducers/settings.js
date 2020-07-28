@@ -98,6 +98,7 @@ export type SettingsState = {
   discreetMode: boolean,
   starredAccountIds?: string[],
   blacklistedTokenIds: string[],
+  deepLinkUrl: ?string,
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -135,6 +136,7 @@ const INITIAL_STATE: SettingsState = {
   hasInstalledApps: true,
   lastSeenDevice: null,
   blacklistedTokenIds: [],
+  deepLinkUrl: null,
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -217,6 +219,10 @@ const handlers: Object = {
     ...state,
     lastSeenDevice: dmi,
   }),
+  SET_DEEPLINK_URL: (state: SettingsState, { payload: deepLinkUrl }) => ({
+    ...state,
+    deepLinkUrl,
+  }),
   // used to debug performance of redux updates
   DEBUG_TICK: state => ({ ...state }),
 };
@@ -230,6 +236,8 @@ export const settingsExportSelector = storeSelector;
 export const discreetModeSelector = (state: State): boolean => state.settings.discreetMode === true;
 
 export const getCounterValueCode = (state: State) => state.settings.counterValue;
+
+export const deepLinkUrlSelector = (state: State) => state.settings.deepLinkUrl;
 
 export const counterValueCurrencyLocalSelector = (state: SettingsState): Currency =>
   findCurrencyByTicker(state.counterValue) || getFiatCurrencyByTicker("USD");

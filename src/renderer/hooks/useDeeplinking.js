@@ -1,6 +1,6 @@
 // @flow
 import { ipcRenderer } from "electron";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
 import querystring from "query-string";
@@ -8,6 +8,8 @@ import { findCurrencyByTicker, parseCurrencyUnit } from "@ledgerhq/live-common/l
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { openModal, closeAllModal } from "~/renderer/actions/modals";
+import { deepLinkUrlSelector, areSettingsLoaded } from "~/renderer/reducers/settings";
+import { setDeepLinkUrl } from "~/renderer/actions/settings";
 
 const getAccountsOrSubAccountsByCurrency = (currency, accounts) => {
   const predicateFn = account => getAccountCurrency(account).id === currency.id;
@@ -28,21 +30,25 @@ const getAccountsOrSubAccountsByCurrency = (currency, accounts) => {
   return accounts.filter(predicateFn);
 };
 
-function useDeeplink() {
+function useDeepLinkHandler() {
   const dispatch = useDispatch();
   const accounts = useSelector(accountsSelector);
   const location = useLocation();
   const history = useHistory();
 
-  useEffect(() => {
-    const navigate = (url: string) => {
+  const navigate = useCallback(
+    (url: string) => {
       if (url !== location.pathname) {
         history.push(url);
       }
-    };
+    },
+    [history, location],
+  );
 
-    const handler = (event: any, deeplink: string) => {
+  const handler = useCallback(
+    (event: any, deeplink: string) => {
       const [, path] = deeplink.split("ledgerlive://");
+
       const { url, query } = querystring.parseUrl(path);
 
       switch (url) {
@@ -129,13 +135,34 @@ function useDeeplink() {
           navigate("/");
           break;
       }
-    };
+    },
+    [accounts, dispatch, navigate],
+  );
 
+  useEffect(() => {
     // subscribe to deep-linking event
     ipcRenderer.on("deep-linking", handler);
 
     return () => ipcRenderer.removeListener("deep-linking", handler);
-  }, [location, history, accounts, dispatch]);
+  }, [handler]);
+
+  return {
+    handler,
+  };
+}
+
+function useDeeplink() {
+  const dispatch = useDispatch();
+  const openingDeepLink = useSelector(deepLinkUrlSelector);
+  const loaded = useSelector(areSettingsLoaded);
+  const { handler } = useDeepLinkHandler();
+
+  useEffect(() => {
+    if (openingDeepLink && loaded) {
+      handler(null, openingDeepLink);
+      dispatch(setDeepLinkUrl(null));
+    }
+  }, [loaded, openingDeepLink, dispatch, handler]);
 }
 
 export default useDeeplink;

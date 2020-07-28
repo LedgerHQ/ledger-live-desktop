@@ -2,7 +2,12 @@
 import "./setup";
 import { app, Menu, ipcMain } from "electron";
 import menu from "./menu";
-import { createMainWindow, getMainWindow, loadWindow } from "./window-lifecycle";
+import {
+  createMainWindow,
+  getMainWindow,
+  getMainWindowAsync,
+  loadWindow,
+} from "./window-lifecycle";
 import "./internal-lifecycle";
 import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import db from "./db";
@@ -32,6 +37,41 @@ app.on("activate", () => {
   const w = getMainWindow();
   if (w) {
     w.focus();
+  }
+});
+
+app.on("will-finish-launching", () => {
+  // macOS deepLink
+  app.on("open-url", (event, url) => {
+    event.preventDefault();
+    getMainWindowAsync()
+      .then(w => {
+        if (w) {
+          show(w);
+          if ("send" in w.webContents) {
+            w.webContents.send("deep-linking", url);
+          }
+        }
+      })
+      .catch(err => console.log(err));
+  });
+
+  if (process.platform === "win32") {
+    // windows deepLink
+    process.argv.forEach(arg => {
+      if (/ledgerlive:\/\//.test(arg)) {
+        getMainWindowAsync()
+          .then(w => {
+            if (w) {
+              show(w);
+              if ("send" in w.webContents) {
+                w.webContents.send("deep-linking", arg);
+              }
+            }
+          })
+          .catch(err => console.log(err));
+      }
+    });
   }
 });
 
@@ -100,7 +140,10 @@ app.on("ready", async () => {
     "resize",
     debounce(() => {
       const [width, height] = window.getSize();
-      db.setKey("windowParams", `${window.name}.dimensions`, { width, height });
+      db.setKey("windowParams", `${window.name}.dimensions`, {
+        width,
+        height,
+      });
     }, 300),
   );
 
@@ -111,18 +154,6 @@ app.on("ready", async () => {
       db.setKey("windowParams", `${window.name}.positions`, { x, y });
     }, 300),
   );
-
-  app.on("open-url", (event, url) => {
-    event.preventDefault();
-    const w = getMainWindow();
-
-    if (w) {
-      show(w);
-      if ("send" in w.webContents) {
-        w.webContents.send("deep-linking", url);
-      }
-    }
-  });
 
   await clearSessionCache(window.webContents.session);
 });

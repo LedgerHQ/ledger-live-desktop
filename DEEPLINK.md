@@ -26,5 +26,5 @@ _Every route is preceded by the protocol_
 **### Examples**
 
 `ledgerlive://portfolio` => to access the dashboard
-`ledgerlive://accounts?currency=mana` => to access the first decentraland mana account  
+`ledgerlive://account?currency=mana` => to access the first decentraland mana account  
 `ledgerlive://send?currency=btc&amount=0.001&recipient=adress` => open the send modal with profiled inputs
