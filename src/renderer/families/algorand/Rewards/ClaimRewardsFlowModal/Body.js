@@ -117,7 +117,7 @@ const Body = ({
     const t = bridge.createTransaction(account);
 
     const transaction = bridge.updateTransaction(t, {
-      mode: "claimRewards",
+      mode: "claimReward",
       /** @TODO remove this once its handled by the bridge */
       recipient: account.freshAddress,
     });
