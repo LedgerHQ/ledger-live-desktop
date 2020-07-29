@@ -24,6 +24,7 @@ export const setSelectedTimeRange = (selectedTimeRange: PortfolioRange) =>
   saveSettings({ selectedTimeRange });
 export const setDeveloperMode = (developerMode: boolean) => saveSettings({ developerMode });
 export const setDiscreetMode = (discreetMode: boolean) => saveSettings({ discreetMode });
+export const setHideCarousel = (hideCarousel: boolean) => saveSettings({ hideCarousel });
 export const setSentryLogs = (sentryLogs: boolean) => saveSettings({ sentryLogs });
 export const setShareAnalytics = (shareAnalytics: boolean) => saveSettings({ shareAnalytics });
 export const setMarketIndicator = (marketIndicator: *) => saveSettings({ marketIndicator });

@@ -1244,7 +1244,9 @@
       "region": "Region",
       "regionDesc": "Choose your region to set the time zone of Ledger Live.",
       "stock": "Regional market indicator",
-      "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red."
+      "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
+      "hideCarousel": "Hide the carousel",
+      "hideCarouselDesc": "Choose whether you want to see relevants links to new features and products."
     },
     "currencies": {
       "desc": "Change settings for each of your crypto assets",

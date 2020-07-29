@@ -22,6 +22,7 @@ import PasswordButton from "./PasswordButton";
 import PasswordAutoLockSelect from "./PasswordAutoLockSelect";
 import SentryLogsButton from "./SentryLogsButton";
 import ShareAnalyticsButton from "./ShareAnalyticsButton";
+import HideCarousel from "./HideCarousel";
 import { hasPasswordSelector } from "~/renderer/reducers/application";
 
 const SectionGeneral = () => {
@@ -83,6 +84,12 @@ const SectionGeneral = () => {
         </Row>
         <Row title={t("settings.profile.analytics")} desc={t("settings.profile.analyticsDesc")}>
           <ShareAnalyticsButton />
+        </Row>
+        <Row
+          title={t("settings.display.hideCarousel")}
+          desc={t("settings.display.hideCarouselDesc")}
+        >
+          <HideCarousel />
         </Row>
       </Body>
     </Section>

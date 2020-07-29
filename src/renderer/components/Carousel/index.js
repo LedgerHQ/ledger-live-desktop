@@ -12,6 +12,7 @@ import { getTransitions, getDefaultSlides } from "~/renderer/components/Carousel
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { hasDismissedCarouselSelector } from "~/renderer/reducers/application";
 import { setDismissedCarousel } from "~/renderer/actions/application";
+import { hideCarouselSelector } from "~/renderer/reducers/settings";
 
 const CarouselWrapper: ThemedComponent<{}> = styled(Card)`
   position: relative;
@@ -117,6 +118,7 @@ const Carousel = ({
 }) => {
   const slides = _slides || getDefaultSlides();
   const [index, setIndex] = useState(0);
+  const hidden = useSelector(hideCarouselSelector);
   const [paused, setPaused] = useState(false);
   const [reverse, setReverse] = useState(false);
   const transitions = useTransition(index, p => p, getTransitions(type, reverse));
@@ -146,7 +148,7 @@ const Carousel = ({
     dispatch(setDismissedCarousel(true));
   }, [dispatch]);
 
-  if (!slides.length || dismissedCarousel) {
+  if (!slides.length || dismissedCarousel || hidden) {
     // No slides or dismissed, no problem
     return null;
   }
