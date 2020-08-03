@@ -5,6 +5,7 @@ import { Trans } from "react-i18next";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 
 import { listTokensForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
+import { extractTokenId } from "@ledgerhq/live-common/lib/families/algorand/tokens";
 
 import Box from "~/renderer/components/Box";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
@@ -14,13 +15,14 @@ import ToolTip from "~/renderer/components/Tooltip";
 import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
 
 const renderItem = ({
-  data: { id, name, ticker },
+  data: { id, name },
   isDisabled,
   data,
 }: {
   data: TokenCurrency,
   isDisabled: boolean,
 }) => {
+  const tokenId = extractTokenId(id);
   return (
     <Box
       key={id}
@@ -37,7 +39,7 @@ const renderItem = ({
         />
         <Text ff="Inter|Medium">{name}</Text>
         <Text fontSize={3} color="palette.text.shade40">
-          - ID {ticker}
+          - ID {tokenId}
         </Text>
       </Box>
       {isDisabled && (
