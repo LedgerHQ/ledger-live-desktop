@@ -1630,7 +1630,7 @@
   },
   "TransactionConfirm": {
     "title": "Veuillez confirmer l'opération sur votre appareil pour la finaliser",
-    "warning": "Toujours vérifier que l'adresse affichée sur votre appareil correspond exactement à celle donnée par le {{recipientWording}}",
+    "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
       "send": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
