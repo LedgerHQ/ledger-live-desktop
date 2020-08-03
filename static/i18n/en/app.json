@@ -741,7 +741,8 @@
   },
   "buy": {
     "title": "Buy",
-    "titleCrypto": "Buy {{currency}}"
+    "titleCrypto": "Buy {{currency}}",
+    "buyCTA": "Buy {{currencyTicker}}"
   },
   "receive": {
     "title": "Receive",
