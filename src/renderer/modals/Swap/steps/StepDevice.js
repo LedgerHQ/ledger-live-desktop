@@ -99,7 +99,6 @@ const StepDevice = ({
         parentAccount,
         account,
         transaction: swapData.transaction,
-        status,
         appName: "Exchange", // TODO move to live-common maybe
       }}
       Result={Result}

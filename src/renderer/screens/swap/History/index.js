@@ -1,5 +1,6 @@
 // @flow
 
+import { remote, ipcRenderer } from "electron";
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "~/renderer/components/Box/Card";
@@ -7,18 +8,74 @@ import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import OperationRow from "~/renderer/screens/swap/History/OperationRow";
 import getCompleteSwapHistory from "@ledgerhq/live-common/lib/swap/getCompleteSwapHistory";
 import updateAccountSwapStatus from "@ledgerhq/live-common/lib/swap/updateAccountSwapStatus";
+import { mappedSwapOperationsToCSV } from "@ledgerhq/live-common/lib/swap/csvExport";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
+import { FakeLink } from "~/renderer/components/Link";
 import moment from "moment";
 import Spinner from "~/renderer/components/Spinner";
+import styled from "styled-components";
+import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
+
+const ExportOperationsWrapper = styled(Box)`
+  color: ${p => p.theme.colors.palette.primary.main};
+  align-items: center;
+  margin-top: -40px;
+  z-index: 10;
+`;
+
+const exportOperations = async (
+  path: { canceled: boolean, filePath: string },
+  csv: string,
+  callback?: () => void,
+) => {
+  try {
+    const res = await ipcRenderer.invoke("export-operations", path, csv);
+    if (res && callback) {
+      callback();
+    }
+  } catch (error) {}
+};
 
 const History = () => {
   const accounts = useSelector(shallowAccountsSelector);
+  const [exporting, setExporting] = useState(false);
   const [mappedSwapOperations, setMappedSwapOperations] = useState(null);
   const dispatch = useDispatch();
   const accountsRef = useRef(accounts);
+
+  const onExportOperations = useCallback(() => {
+    async function asyncExport() {
+      const path = await remote.dialog.showSaveDialog({
+        title: "Exported swap history",
+        defaultPath: `ledgerlive-swap-history-${moment().format("YYYY.MM.DD")}.csv`,
+        filters: [
+          {
+            name: "All Files",
+            extensions: ["csv"],
+          },
+        ],
+      });
+
+      if (path && mappedSwapOperations) {
+        debugger;
+        exportOperations(path, mappedSwapOperationsToCSV(mappedSwapOperations), () =>
+          setExporting(false),
+        );
+      }
+    }
+    if (!exporting) {
+      asyncExport()
+        .catch(e => {
+          console.log({ e });
+        })
+        .then(() => {
+          setExporting(false);
+        });
+    }
+  }, [exporting, mappedSwapOperations]);
 
   useEffect(() => {
     accountsRef.current = accounts;
@@ -46,6 +103,16 @@ const History = () => {
 
   return (
     <>
+      <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
+        <ExportOperationsWrapper horizontal>
+          <IconDownloadCloud size={16} />
+          <Text ml={1} ff="Inter|Regular" fontSize={3}>
+            <FakeLink onClick={exporting ? undefined : onExportOperations}>
+              {exporting ? "Exporting..." : "Export operations"}
+            </FakeLink>
+          </Text>
+        </ExportOperationsWrapper>
+      </Box>
       {mappedSwapOperations ? (
         mappedSwapOperations.length ? (
           mappedSwapOperations.map(section => (
