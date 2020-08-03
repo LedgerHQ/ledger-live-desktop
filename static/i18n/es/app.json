@@ -1630,7 +1630,7 @@
   },
   "TransactionConfirm": {
     "title": "Please confirm the operation on your device to finalize it",
-    "warning": "Always verify the address displayed your device exactly matches the one given by the {{recipientWording}}",
+    "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
       "send": "Please confirm on your device to finalize the operation",
