@@ -43,7 +43,12 @@ const Currencies = () => {
   return !currency ? null : (
     <Section key={currency.id}>
       <TrackPage category="Settings" name="Currencies" currencyId={currency.id} />
-      <Track onUpdate event="Crypto asset settings dropdown" currencyName={currency.name} />
+      <Track
+        onUpdate
+        event="Crypto asset settings dropdown"
+        currencyName={currency.name}
+        opened={sectionVisible}
+      />
       <Header
         icon={<IconCurrencies size={16} />}
         title={t("settings.tabs.currencies")}
