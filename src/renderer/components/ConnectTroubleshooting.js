@@ -24,7 +24,7 @@ const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
   max-width: 550px;
 `;
 
-const ConnectTroubleshooting = ({ appearsAfterDelay = 25000, onRepair }: Props) => {
+const ConnectTroubleshooting = ({ appearsAfterDelay = 15000, onRepair }: Props) => {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const timeout = setTimeout(() => setVisible(true), appearsAfterDelay);
