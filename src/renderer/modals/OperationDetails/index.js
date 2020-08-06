@@ -200,7 +200,8 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
 
   return (
     <ModalBody
-      title={t("operationDetails.title")}
+      title={t(`operation.type.${operation.type}`)}
+      subTitle={t("operationDetails.title")}
       onClose={onClose}
       onBack={parentOperation ? () => openOperation("goBack", parentOperation) : undefined}
       render={() => (
