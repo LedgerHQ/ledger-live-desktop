@@ -561,7 +561,7 @@
     "firmware": {
       "updateLater": "Annuler",
       "seedReady": "J'ai ma phrase de récupération",
-      "dontHaveSeed": "Vous n'avez pas votre phrase de récupération",
+      "dontHaveSeed": "Don't have your Recovery phrase? ",
       "followTheGuide": "Suivez notre guide de mise à jour étape par étape",
       "removeApps": "Désinstaller toutes les apps avant de mettre à jour",
       "update": "Mettre à jour",
@@ -741,7 +741,8 @@
   },
   "buy": {
     "title": "Acheter",
-    "titleCrypto": "Acheter {{currency}}"
+    "titleCrypto": "Acheter {{currency}}",
+    "buyCTA": "Buy {{currencyTicker}}"
   },
   "receive": {
     "title": "Recevoir",
@@ -1315,7 +1316,7 @@
     },
     "hardResetModal": {
       "title": "Réinitialiser Ledger Live",
-      "desc": "Supprimer toutes les données Ledger Live stockées sur votre ordinateur, y compris vos comptes, historiques de transactions et paramètres. Les clés privées donnant accès à vos crypto-actifs sont conservées en toute sécurité sur votre appareil Ledger et votre fiche de récupération."
+      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your Recovery phrase."
     },
     "softResetModal": {
       "title": "Vider le cache",
