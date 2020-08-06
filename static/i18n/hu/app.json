@@ -1200,6 +1200,13 @@
   "asset": {
     "notice": "Összefoglaló minden {{currency}} számláról"
   },
+  "carousel": {
+    "hidden": {
+      "close": "Confirm",
+      "undo": "Show again",
+      "disclaimer": "This banner will not show up again until there is a new announcement"
+    }
+  },
   "settings": {
     "title": "Beállítások",
     "discreet": "Váltás diszkrét módra",
@@ -1244,7 +1251,9 @@
       "region": "Régió",
       "regionDesc": "Choose your region to set the time zone of Ledger Live.",
       "stock": "Regionális piaci mutató",
-      "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red."
+      "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
+      "carouselVisibility": "Carousel visibility",
+      "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
       "desc": "Módisítsd a beállításokat minden egyes kriptovalutához",
