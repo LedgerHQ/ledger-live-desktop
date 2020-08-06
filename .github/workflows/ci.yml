@@ -60,8 +60,7 @@ jobs:
           ## Diff output
           ${{ steps.comment.outputs.body }}
 
-          Updated screenshots for your PR can be downloaded here:
-          Workflow [$GITHUB_WORKFLOW](https://github.com/LedgerHQ/ledger-live-desktop/actions/runs/$GITHUB_RUN_ID)
+          **Please download attached [snapshots.zip](https://github.com/LedgerHQ/ledger-live-desktop/actions/runs/$GITHUB_RUN_ID), extract it in `tests/specs/__image_snapshots__` folder and update your PR with it**
 
           EOF
           echo "::set-output name=artifact::1"
