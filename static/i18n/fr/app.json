@@ -1200,6 +1200,13 @@
   "asset": {
     "notice": "Résumé de tous les comptes {{currency}}"
   },
+  "carousel": {
+    "hidden": {
+      "close": "Confirm",
+      "undo": "Show again",
+      "disclaimer": "This banner will not show up again until there is a new announcement"
+    }
+  },
   "settings": {
     "title": "Paramètres",
     "discreet": "Basculer en mode discret",
@@ -1244,7 +1251,9 @@
       "region": "Région",
       "regionDesc": "Choisissez votre région pour définir le fuseau horaire de Ledger Live.",
       "stock": "Indicateur de marché régional",
-      "stockDesc": "Choisissez Western pour afficher les hausses du marché en bleu ou Eastern pour les afficher en rouge."
+      "stockDesc": "Choisissez Western pour afficher les hausses du marché en bleu ou Eastern pour les afficher en rouge.",
+      "carouselVisibility": "Carousel visibility",
+      "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
       "desc": "Modifier les paramètres pour chacun de vos crypto-actifs",
