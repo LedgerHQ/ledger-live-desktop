@@ -103,6 +103,7 @@ export function BalanceTotal(props: BalanceTotalProps) {
               unit={unit}
               fontSize={8}
               disableRounding
+              showAllDigits
               showCode
               val={totalBalance}
             />
