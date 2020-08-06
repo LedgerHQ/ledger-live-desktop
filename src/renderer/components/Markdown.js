@@ -141,6 +141,7 @@ export default class Markdown extends PureComponent<Props> {
     if (this.parent) {
       const links: NodeList<HTMLElement> = this.parent.querySelectorAll("a");
       links.forEach(link => {
+        link.style.cursor = "pointer";
         link.addEventListener("click", (e: MouseEvent) => {
           e.preventDefault();
           // $FlowFixMe

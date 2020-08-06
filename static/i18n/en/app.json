@@ -561,7 +561,7 @@
     "firmware": {
       "updateLater": "Cancel",
       "seedReady": "I have my Recovery phrase",
-      "dontHaveSeed": "You don't have your Recovery phrase",
+      "dontHaveSeed": "Don't have your Recovery phrase? ",
       "followTheGuide": "Follow our step by step update guide",
       "removeApps": "Uninstall all apps before updating",
       "update": "Firmware update",
