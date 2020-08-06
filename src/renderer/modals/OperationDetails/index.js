@@ -65,6 +65,7 @@ import {
   B,
   TextEllipsis,
   Separator,
+  HashContainer,
 } from "./styledComponents";
 
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
@@ -440,7 +441,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
           <Box>
             <OpDetailsTitle>{t("operationDetails.identifier")}</OpDetailsTitle>
             <OpDetailsData>
-              <Ellipsis canSelect>{hash}</Ellipsis>
+              <HashContainer>{hash}</HashContainer>
               <GradientHover>
                 <CopyWithFeedback text={hash} />
               </GradientHover>
