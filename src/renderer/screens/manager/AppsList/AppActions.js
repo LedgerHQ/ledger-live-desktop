@@ -19,6 +19,7 @@ import Text from "~/renderer/components/Text";
 import Tooltip from "~/renderer/components/Tooltip";
 import Button from "~/renderer/components/Button";
 import Progress from "~/renderer/screens/manager/AppsList/Progress";
+import Box from "~/renderer/components/Box/Box";
 
 import { colors } from "~/renderer/styles/theme";
 
@@ -151,16 +152,19 @@ const AppActions: React$ComponentType<Props> = React.memo(
                     fontSize={3}
                     disabled={!canAddAccount}
                     onClick={onAddAccount}
+                    justifyContent="center"
                     event="Manager AddAccount Click"
                     eventProperties={{
                       appName: name,
                       appVersion: app.version,
                     }}
                   >
-                    <AccountAdd size={16} />
-                    <Text style={{ marginLeft: 8 }}>
-                      <Trans i18nKey="manager.applist.item.addAccount" />
-                    </Text>
+                    <Box horizontal alignContent="center" justifyContent="center">
+                      <AccountAdd size={16} />
+                      <Text style={{ marginLeft: 8 }}>
+                        <Trans i18nKey="manager.applist.item.addAccount" />
+                      </Text>
+                    </Box>
                   </Button>
                 </Tooltip>
               ) : (
@@ -183,17 +187,19 @@ const AppActions: React$ComponentType<Props> = React.memo(
                       appVersion: app.version,
                     }}
                   >
-                    <LinkIcon size={16} />
-                    <Text ff="Inter" style={{ marginLeft: 8 }}>
-                      <Trans i18nKey="manager.applist.item.learnMore" />
-                    </Text>
+                    <Box horizontal alignContent="center" justifyContent="center">
+                      <LinkIcon size={16} />
+                      <Text ff="Inter" style={{ marginLeft: 8 }}>
+                        <Trans i18nKey="manager.applist.item.learnMore" />
+                      </Text>
+                    </Box>
                   </Button>
                 </Tooltip>
               )
             ) : null}
             {appStoreView && installed && (
               <SuccessInstall>
-                <IconCheck size={16} />
+                <IconCheck size={20} />
                 <Text ff="Inter|SemiBold" fontSize={4}>
                   <Trans i18nKey="manager.applist.item.installed" />
                 </Text>
