@@ -96,6 +96,7 @@ export type SettingsState = {
   hideEmptyTokenAccounts: boolean,
   sidebarCollapsed: boolean,
   discreetMode: boolean,
+  carouselVisibility: number,
   starredAccountIds?: string[],
   blacklistedTokenIds: string[],
   deepLinkUrl: ?string,
@@ -134,6 +135,7 @@ const INITIAL_STATE: SettingsState = {
   discreetMode: false,
   preferredDeviceModel: "nanoS",
   hasInstalledApps: true,
+  carouselVisibility: 0,
   lastSeenDevice: null,
   blacklistedTokenIds: [],
   deepLinkUrl: null,
@@ -337,6 +339,7 @@ export const autoLockTimeoutSelector = (state: State) => state.settings.autoLock
 export const shareAnalyticsSelector = (state: State) => state.settings.shareAnalytics;
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange;
 export const hasInstalledAppsSelector = (state: State) => state.settings.hasInstalledApps;
+export const carouselVisibilitySelector = (state: State) => state.settings.carouselVisibility;
 export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;

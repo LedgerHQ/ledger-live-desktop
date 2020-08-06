@@ -5,54 +5,66 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useTransition, animated } from "react-spring";
 import IconArrowRight from "~/renderer/icons/ArrowRight";
-import { Card } from "~/renderer/components/Box";
+import Box, { Card } from "~/renderer/components/Box";
+import Text from "~/renderer/components/Text";
+import Button from "~/renderer/components/Button";
 import TimeBasedProgressBar from "~/renderer/components/Carousel/TimeBasedProgressBar";
 import IconCross from "~/renderer/icons/Cross";
 import { getTransitions, getDefaultSlides } from "~/renderer/components/Carousel/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { hasDismissedCarouselSelector } from "~/renderer/reducers/application";
-import { setDismissedCarousel } from "~/renderer/actions/application";
+import { setCarouselVisibility } from "~/renderer/actions/settings";
+import { carouselVisibilitySelector } from "~/renderer/reducers/settings";
+import { Trans } from "react-i18next";
 
 const CarouselWrapper: ThemedComponent<{}> = styled(Card)`
   position: relative;
-  height: 169px;
+  height: 100px;
   margin: 20px 0;
 `;
 
 const Close = styled.div`
   position: absolute;
-  color: rgba(255, 255, 255, 0.3);
+  color: ${p => p.theme.colors.palette.text.shade30};
   top: 16px;
   right: 16px;
   cursor: pointer;
   &:hover {
-    color: #ffffff;
+    color: ${p => p.theme.colors.palette.text.shade100};
   }
 `;
 
 const Previous = styled.div`
   position: absolute;
-  color: ${p => p.theme.colors.palette.text.shade100};
+  color: ${p => p.theme.colors.palette.text.shade30};
   bottom: 16px;
   right: 42px;
   cursor: pointer;
   transform: rotate(180deg);
+  &:hover {
+    color: ${p => p.theme.colors.palette.text.shade100};
+  }
 `;
 
 const Next = styled.div`
   position: absolute;
-  color: ${p => p.theme.colors.palette.text.shade100};
+  color: ${p => p.theme.colors.palette.text.shade30};
   bottom: 11px;
   right: 16px;
   cursor: pointer;
+  &:hover {
+    color: ${p => p.theme.colors.palette.text.shade100};
+  }
 `;
 
+// NB left here because it handles the transitions
 const ProgressBarWrapper = styled.div`
   position: absolute;
   bottom: 0;
   z-index: 100;
   width: 100%;
+  display: none;
 `;
+
 const Bullets = styled.div`
   position: absolute;
   bottom: 16px;
@@ -67,23 +79,34 @@ const Bullets = styled.div`
       border-radius: 6px;
       height: 6px;
       width: 6px;
-      background: rgba(255, 255, 255, 0.3);
+      background: ${p => p.theme.colors.palette.text.shade40};
     }
     padding: 15px 5px;
     margin-bottom: -15px;
     &:nth-child(${p => p.index + 1}) > span {
-      background: #ffffff;
+      background: ${p => p.theme.colors.palette.text.shade80};
     }
   }
 `;
 
+const Disclaimer: ThemedComponent<{}> = styled(Card)`
+  padding: 40px;
+  height: 100px;
+  margin: 20px 0;
+  background: ${p => p.theme.colors.palette.background.paper};
+  text-align: center;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+`;
+
 const Slides = styled.div`
   width: 100%;
-  height: 169px;
+  height: 100px;
   border-radius: 4px;
   perspective: 1000px;
   overflow: hidden;
-  background: #32415e;
+  background: ${p => p.theme.colors.palette.background.paper};
 
   & > div {
     transform-origin: center right;
@@ -102,10 +125,39 @@ const Slides = styled.div`
   }
 `;
 
+export const Label: ThemedComponent<{}> = styled(Text)`
+  color: ${p => p.theme.colors.palette.text.shade100};
+  margin-bottom: 8px;
+  max-width: 404px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+`;
+
+export const IllustrationWrapper: ThemedComponent<{}> = styled.div`
+  width: 257px;
+  height: 100%;
+  pointer-events: none;
+  position: relative;
+  right: 0;
+  align-self: flex-end;
+  transform: scale(0.7) translateY(-40px);
+`;
+
+export const Wrapper: ThemedComponent<{}> = styled.div`
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+`;
+
+export const CAROUSEL_NONCE: number = 3;
+
 const Carousel = ({
-  withArrows = false,
+  withArrows = true,
   controls = true,
-  speed = 5000,
+  speed = 6000,
   type = "slide",
   slides: _slides,
 }: {
@@ -117,13 +169,13 @@ const Carousel = ({
 }) => {
   const slides = _slides || getDefaultSlides();
   const [index, setIndex] = useState(0);
+  const hidden = useSelector(carouselVisibilitySelector);
   const [paused, setPaused] = useState(false);
+  const [wantToDismiss, setWantToDismiss] = useState(false);
   const [reverse, setReverse] = useState(false);
   const transitions = useTransition(index, p => p, getTransitions(type, reverse));
 
   const dispatch = useDispatch();
-  const dismissedCarousel = useSelector(hasDismissedCarouselSelector);
-
   const onChooseSlide = useCallback(
     newIndex => {
       setReverse(index > newIndex);
@@ -143,21 +195,41 @@ const Carousel = ({
   }, [index, slides.length]);
 
   const onDismiss = useCallback(() => {
-    dispatch(setDismissedCarousel(true));
-  }, [dispatch]);
+    setWantToDismiss(true);
+  }, []);
 
-  if (!slides.length || dismissedCarousel) {
+  const onUndo = useCallback(() => {
+    setWantToDismiss(false);
+  }, []);
+
+  const close = useCallback(() => dispatch(setCarouselVisibility(CAROUSEL_NONCE)), [dispatch]);
+
+  if (!slides.length || hidden >= CAROUSEL_NONCE) {
     // No slides or dismissed, no problem
     return null;
   }
 
   const showControls = controls && slides.length > 1;
 
-  return (
+  return wantToDismiss ? (
+    <Disclaimer>
+      <Text ff="Inter|Regular" fontSize={4} color="palette.text.shade80">
+        <Trans i18nKey="carousel.hidden.disclaimer" />
+      </Text>
+      <Box horizontal mt={3}>
+        <Button mr={1} small primary onClick={close}>
+          <Trans i18nKey="carousel.hidden.close" />
+        </Button>
+        <Button ml={1} small secondary outlineGrey onClick={onUndo}>
+          <Trans i18nKey="carousel.hidden.undo" />
+        </Button>
+      </Box>
+    </Disclaimer>
+  ) : (
     <CarouselWrapper onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       {slides.length > 1 ? (
         <ProgressBarWrapper>
-          <TimeBasedProgressBar onComplete={onNext} duration={5000} paused={paused} />
+          <TimeBasedProgressBar onComplete={onNext} duration={speed} paused={paused} />
         </ProgressBarWrapper>
       ) : null}
       <Slides>

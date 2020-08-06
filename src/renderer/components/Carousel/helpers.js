@@ -43,8 +43,8 @@ export const getTransitions = (transition: "slide" | "flip", reverse: boolean = 
 
 export const getDefaultSlides = () => {
   return [
-    { id: "ledgerAcademy", Component: LedgerAcademyBanner },
     { id: "backupPackBanner", Component: BackupPackBanner },
+    { id: "ledgerAcademy", Component: LedgerAcademyBanner },
     { id: "stakeCosmos", Component: StakeCosmosBanner },
     { id: "buyCrypto", Component: BuyCryptoBanner },
   ];
