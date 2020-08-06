@@ -6,6 +6,8 @@ import styled from "styled-components";
 
 import type { Unit, ValueChange, AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { TFunction } from "react-i18next";
+import { useSelector } from "react-redux";
+import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -89,6 +91,9 @@ export function BalanceTotal(props: BalanceTotalProps) {
     withTransactionsPendingConfirmationWarning,
     account,
   } = props;
+  const counterValueCurrency = useSelector(counterValueCurrencySelector);
+  const showAllDigits = counterValueCurrency.type === "FiatCurrency";
+
   return (
     <Box horizontal grow shrink>
       <Box {...props}>
@@ -103,7 +108,7 @@ export function BalanceTotal(props: BalanceTotalProps) {
               unit={unit}
               fontSize={8}
               disableRounding
-              showAllDigits
+              showAllDigits={showAllDigits}
               showCode
               val={totalBalance}
             />
