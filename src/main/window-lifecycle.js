@@ -2,6 +2,7 @@
 import "./setup";
 import { BrowserWindow, screen, shell } from "electron";
 import path from "path";
+import { delay } from "@ledgerhq/live-common/lib/promise";
 import icon from "../../build/icons/icon.png";
 import { URL } from "url";
 
@@ -22,6 +23,21 @@ let mainWindow = null;
 let theme;
 
 export const getMainWindow = () => mainWindow;
+
+export const getMainWindowAsync = async (maxTries: number = 5) => {
+  if (maxTries <= 0) {
+    throw new Error("could not get the mainWindow");
+  }
+
+  const w = getMainWindow();
+
+  if (!w) {
+    await delay(2000);
+    return getMainWindowAsync(maxTries - 1);
+  }
+
+  return w;
+};
 
 const getWindowPosition = (width, height, display = screen.getPrimaryDisplay()) => {
   const { bounds } = display;

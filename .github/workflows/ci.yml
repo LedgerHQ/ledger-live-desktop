@@ -17,7 +17,7 @@ jobs:
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@master
+      - uses: actions/setup-node@main
         with:
           node-version: 12.x
       - name: get yarn cache

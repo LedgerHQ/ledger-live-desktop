@@ -175,8 +175,8 @@ const UpdateModal = ({
           steps={steps}
           errorSteps={errorSteps}
           deviceModelId={deviceModelId}
-          // $FlowFixMe fucking spread
           {...additionalProps}
+          onClose={() => onClose()}
         >
           <HookMountUnmount onMountUnmount={setFirmwareUpdateOpened} />
         </Stepper>

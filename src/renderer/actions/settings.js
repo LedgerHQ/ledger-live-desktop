@@ -93,3 +93,8 @@ export const setLastSeenDeviceInfo = (dmi: DeviceModelInfo) => ({
   type: "LAST_SEEN_DEVICE_INFO",
   payload: dmi,
 });
+
+export const setDeepLinkUrl = (url: ?string) => ({
+  type: "SET_DEEPLINK_URL",
+  payload: url,
+});

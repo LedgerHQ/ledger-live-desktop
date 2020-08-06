@@ -24,6 +24,8 @@ const StepAmount = ({
   error,
   status,
   bridgePending,
+  maybeAmount,
+  onResetMaybeAmount,
 }: StepProps) => {
   if (!status) return null;
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
@@ -50,6 +52,8 @@ const StepAmount = ({
             onChangeTransaction={onChangeTransaction}
             bridgePending={bridgePending}
             t={t}
+            initValue={maybeAmount}
+            resetInitValue={onResetMaybeAmount}
           />
           <SendAmountFields
             account={mainAccount}
