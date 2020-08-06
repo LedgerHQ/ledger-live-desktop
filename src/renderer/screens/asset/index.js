@@ -25,6 +25,7 @@ import { flattenSortAccountsEnforceHideEmptyTokenSelector } from "~/renderer/act
 import AssetHeader from "./AssetHeader";
 import type { Currency } from "@ledgerhq/live-common/lib/types/currencies";
 import { Redirect } from "react-router";
+import TrackPage from "~/renderer/analytics/TrackPage";
 
 type Props = {
   match: {
@@ -79,6 +80,7 @@ class AssetPage extends PureComponent<Props, State> {
 
     return (
       <Box>
+        <TrackPage category="Potfolio" name="Asset allocation" currencyName={currency.name} />
         <Box mb={24}>
           <AssetHeader account={accounts[0]} parentAccount={parentAccount} />
         </Box>

@@ -8,43 +8,16 @@ import { Trans } from "react-i18next";
 import { useSpring, animated } from "react-spring";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import Button from "~/renderer/components/Button";
-import { rgba } from "~/renderer/styles/helpers";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { useHistory } from "react-router-dom";
 import { openModal } from "~/renderer/actions/modals";
+import { Wrapper, Label, IllustrationWrapper } from "~/renderer/components/Carousel";
 
 // Assets
 import coin from "./images/coin.png";
 import coin2 from "./images/coin2.png";
 import coin3 from "./images/coin3.png";
 import bg from "./images/bg.png";
-
-const IllustrationWrapper = styled.div`
-  width: 257px;
-  height: 100%;
-  pointer-events: none;
-  position: relative;
-  right: 0;
-  align-self: flex-end;
-`;
-
-const Wrapper: ThemedComponent<{}> = styled.div`
-  width: 100%;
-  height: 169px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: row;
-`;
-
-const Label = styled(Text)`
-  color: ${p => rgba(p.theme.colors.white, 0.5)};
-  margin-bottom: 8px;
-  max-width: 404px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-`;
 
 const Layer = styled(animated.div)`
   background-image: url(${p => p.image});
@@ -113,23 +86,19 @@ const StakeCosmos = () => {
 
   const ref = useRef(null);
   return (
-    <Wrapper ref={ref} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
+    <Wrapper ref={ref} onClick={onClick} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
       <Box flex={1} p={24}>
         <Label ff="Inter|SemiBold" fontSize={2}>
           <Trans i18nKey={"banners.stakeCosmos.title"} />
         </Label>
-        <Text style={{ marginBottom: 16 }} ff="Inter|Medium" color="white" fontSize={4}>
+        <Text
+          style={{ marginBottom: 16 }}
+          ff="Inter|Medium"
+          color="palette.text.shade50"
+          fontSize={4}
+        >
           <Trans i18nKey={"banners.stakeCosmos.description"} />
         </Text>
-        <Box horizontal>
-          <Button primary onClick={onClick} alignItems={"center"}>
-            <Box alignItems={"center"} horizontal>
-              <Text style={{ marginRight: 8 }}>
-                <Trans i18nKey={"banners.stakeCosmos.cta"} />
-              </Text>
-            </Box>
-          </Button>
-        </Box>
       </Box>
       <IllustrationWrapper>
         <Layer style={transBg} image={bg} width={233} height={193} />

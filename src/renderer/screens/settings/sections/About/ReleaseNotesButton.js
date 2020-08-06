@@ -21,7 +21,7 @@ const ReleaseNotesButton = () => {
   );
 
   return (
-    <Button small primary onClick={onClick}>
+    <Button event="Version details" small primary onClick={onClick}>
       {t("settings.help.releaseNotesBtn")}
     </Button>
   );

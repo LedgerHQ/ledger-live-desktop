@@ -165,6 +165,7 @@ class ExportOperations extends PureComponent<Props, State> {
                 disabled={!success && !checkedIds.length}
                 data-e2e="continue_button"
                 onClick={this.handleButtonClick}
+                event={!success ? "Operation history" : undefined}
                 primary
               >
                 {success ? (

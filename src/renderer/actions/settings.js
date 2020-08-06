@@ -24,6 +24,8 @@ export const setSelectedTimeRange = (selectedTimeRange: PortfolioRange) =>
   saveSettings({ selectedTimeRange });
 export const setDeveloperMode = (developerMode: boolean) => saveSettings({ developerMode });
 export const setDiscreetMode = (discreetMode: boolean) => saveSettings({ discreetMode });
+export const setCarouselVisibility = (carouselVisibility: number) =>
+  saveSettings({ carouselVisibility });
 export const setSentryLogs = (sentryLogs: boolean) => saveSettings({ sentryLogs });
 export const setShareAnalytics = (shareAnalytics: boolean) => saveSettings({ shareAnalytics });
 export const setMarketIndicator = (marketIndicator: *) => saveSettings({ marketIndicator });
@@ -92,4 +94,9 @@ export const setPreferredDeviceModel = (preferredDeviceModel: DeviceModelId) =>
 export const setLastSeenDeviceInfo = (dmi: DeviceModelInfo) => ({
   type: "LAST_SEEN_DEVICE_INFO",
   payload: dmi,
+});
+
+export const setDeepLinkUrl = (url: ?string) => ({
+  type: "SET_DEEPLINK_URL",
+  payload: url,
 });

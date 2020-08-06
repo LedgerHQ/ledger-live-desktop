@@ -43,7 +43,11 @@ export const urls = {
     nanoX: "https://support.ledger.com/hc/en-us/articles/360013349800",
     blue: "https://support.ledger.com/hc/en-us/articles/360005885733",
   },
-  lostPinOrSeed: "https://support.ledger.com/hc/en-us/articles/360000609933",
+  lostPinOrSeed: {
+    nanoS: "https://support.ledger.com/hc/en-us/articles/360000609933",
+    nanoX: "https://support.ledger.com/hc/en-us/articles/360019097794",
+    blue: "https://support.ledger.com/hc/en-us/articles/360000609933",
+  },
   maxSpendable: "https://support.ledger.com/hc/en-us/articles/360012960679",
   stakingTezos: "https://www.ledger.com/staking-tezos",
   stakingTron: "https://www.ledger.com/staking-tron",
@@ -54,7 +58,7 @@ export const urls = {
   // Banners
   banners: {
     backupPack:
-      "https://shop.ledger.com/products/ledger-backup-pack?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop=banner_desktop",
+      "https://shop.ledger.com/products/ledger-backup-pack?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop",
     ledgerAcademy:
       "https://www.ledger.com/academy/?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop",
   },

@@ -9,6 +9,8 @@ import Button from "~/renderer/components/Button";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import SpendableBanner from "~/renderer/components/SpendableBanner";
+import BuyButton from "~/renderer/components/BuyButton";
+import { NotEnoughGas } from "@ledgerhq/errors";
 
 import AccountFooter from "../AccountFooter";
 import SendAmountFields from "../SendAmountFields";
@@ -24,6 +26,8 @@ const StepAmount = ({
   error,
   status,
   bridgePending,
+  maybeAmount,
+  onResetMaybeAmount,
 }: StepProps) => {
   if (!status) return null;
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
@@ -50,6 +54,8 @@ const StepAmount = ({
             onChangeTransaction={onChangeTransaction}
             bridgePending={bridgePending}
             t={t}
+            initValue={maybeAmount}
+            resetInitValue={onResetMaybeAmount}
           />
           <SendAmountFields
             account={mainAccount}
@@ -78,10 +84,13 @@ export class StepAmountFooter extends PureComponent<StepProps> {
     const isTerminated = mainAccount.currency.terminated;
     const hasErrors = Object.keys(errors).length;
     const canNext = !bridgePending && !hasErrors && !isTerminated;
-
+    const { gasPrice } = errors;
     return (
       <>
         <AccountFooter parentAccount={parentAccount} account={account} status={status} />
+        {gasPrice && gasPrice instanceof NotEnoughGas ? (
+          <BuyButton currency={mainAccount.currency} />
+        ) : null}
         <Button
           id={"send-amount-continue-button"}
           isLoading={bridgePending}

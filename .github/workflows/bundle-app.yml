@@ -22,7 +22,7 @@ jobs:
           ban: ledgerlive
         if: github.event_name == 'pull_request'
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@master
+      - uses: actions/setup-node@main
         with:
           node-version: 12.x
       - name: set git user
@@ -63,7 +63,7 @@ jobs:
           ban: ledgerlive
         if: github.event_name == 'pull_request'
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@master
+      - uses: actions/setup-node@main
         with:
           node-version: 12.x
       - name: set git user
@@ -115,7 +115,7 @@ jobs:
           ban: ledgerlive
         if: github.event_name == 'pull_request'
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@master
+      - uses: actions/setup-node@main
         with:
           node-version: 12.x
       - uses: actions/setup-python@v1

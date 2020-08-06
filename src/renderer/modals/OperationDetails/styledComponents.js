@@ -36,6 +36,7 @@ export const Address: ThemedComponent<{}> = styled(Text)`
 
 export const GradientHover: ThemedComponent<{}> = styled(Box).attrs(() => ({
   alignItem: "center",
+  justifyContent: "center",
   color: "wallet",
 }))`
   background: ${p => p.theme.colors.palette.background.paper};
@@ -107,4 +108,9 @@ export const OpDetailsVoteData: ThemedComponent<{}> = styled.blockquote`
   ${Address} {
     cursor: pointer;
   }
+`;
+
+export const HashContainer: ThemedComponent<{}> = styled.div`
+  word-break: break-all;
+  user-select: text;
 `;

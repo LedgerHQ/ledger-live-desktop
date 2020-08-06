@@ -7,7 +7,7 @@ import { NotEnoughBalance } from "@ledgerhq/errors";
 import { log } from "@ledgerhq/logs";
 import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
 import i18n from "i18next";
-import { remote, webFrame } from "electron";
+import { remote, webFrame, ipcRenderer } from "electron";
 import { render } from "react-dom";
 import moment from "moment";
 import { reload, getKey } from "~/renderer/storage";
@@ -28,7 +28,7 @@ import dbMiddleware from "~/renderer/middlewares/db";
 import createStore from "~/renderer/createStore";
 import events from "~/renderer/events";
 import { setAccounts } from "~/renderer/actions/accounts";
-import { fetchSettings, saveSettings } from "~/renderer/actions/settings";
+import { fetchSettings, saveSettings, setDeepLinkUrl } from "~/renderer/actions/settings";
 import { lock, setOSDarkMode } from "~/renderer/actions/application";
 
 import {
@@ -60,6 +60,10 @@ async function init() {
   });
 
   const store = createStore({ dbMiddleware });
+
+  ipcRenderer.once("deep-linking", (event, url) => {
+    store.dispatch(setDeepLinkUrl(url));
+  });
 
   const initialSettings = await getKey("app", "settings", {});
 

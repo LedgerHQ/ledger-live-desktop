@@ -65,6 +65,7 @@ import {
   B,
   TextEllipsis,
   Separator,
+  HashContainer,
 } from "./styledComponents";
 
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
@@ -200,11 +201,17 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
 
   return (
     <ModalBody
-      title={t("operationDetails.title")}
+      title={t(`operation.type.${operation.type}`)}
+      subTitle={t("operationDetails.title")}
       onClose={onClose}
       onBack={parentOperation ? () => openOperation("goBack", parentOperation) : undefined}
       render={() => (
         <Box flow={3}>
+          <TrackPage
+            category={location.pathname !== "/" ? "Account" : "Portfolio"}
+            name="Operation Details"
+            currencyName={currency.name}
+          />
           <Box alignItems="center" mt={1}>
             <ConfirmationCheck
               marketColor={marketColor}
@@ -434,7 +441,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
           <Box>
             <OpDetailsTitle>{t("operationDetails.identifier")}</OpDetailsTitle>
             <OpDetailsData>
-              <Ellipsis canSelect>{hash}</Ellipsis>
+              <HashContainer>{hash}</HashContainer>
               <GradientHover>
                 <CopyWithFeedback text={hash} />
               </GradientHover>

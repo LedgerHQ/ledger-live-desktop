@@ -1,6 +1,7 @@
 // @flow
 
 import React, { useCallback, useEffect, useState } from "react";
+import { BigNumber } from "bignumber.js";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import type { TFunction } from "react-i18next";
@@ -35,6 +36,8 @@ type OwnProps = {|
     account: ?AccountLike,
     parentAccount: ?Account,
     startWithWarning?: boolean,
+    recipient?: string,
+    amount?: BigNumber,
   },
 |};
 
@@ -123,6 +126,18 @@ const Body = ({
 }: Props) => {
   const openedFromAccount = !!params.account;
   const [steps] = useState(createSteps);
+
+  // initial values might coming from deeplink
+  const [maybeAmount, setMaybeAmount] = useState(() => params.amount || null);
+  const [maybeRecipient, setMaybeRecipient] = useState(() => params.recipient || null);
+
+  const onResetMaybeAmount = useCallback(() => {
+    setMaybeAmount(null);
+  }, [setMaybeAmount]);
+
+  const onResetMaybeRecipient = useCallback(() => {
+    setMaybeRecipient(null);
+  }, [setMaybeRecipient]);
 
   const {
     transaction,
@@ -226,6 +241,10 @@ const Body = ({
     onStepChange: handleStepChange,
     onOperationBroadcasted: handleOperationBroadcasted,
     onTransactionError: handleTransactionError,
+    maybeAmount,
+    onResetMaybeAmount,
+    maybeRecipient,
+    onResetMaybeRecipient,
   };
 
   if (!status) return null;

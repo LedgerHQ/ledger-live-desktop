@@ -7,41 +7,13 @@ import { useSpring, animated } from "react-spring";
 import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import Button from "~/renderer/components/Button";
-import { rgba } from "~/renderer/styles/helpers";
-import IconExternalLink from "~/renderer/icons/ExternalLink";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { urls } from "~/config/urls";
+import { Wrapper, Label, IllustrationWrapper } from "~/renderer/components/Carousel";
 
 // Assets
 import nanos from "./images/nanos.png";
 import nanox from "./images/nanox.png";
 import bg from "./images/bg.png";
-
-const IllustrationWrapper = styled.div`
-  width: 257px;
-  height: 100%;
-  pointer-events: none;
-  position: relative;
-  right: 0;
-  align-self: flex-end;
-`;
-
-const Wrapper: ThemedComponent<{}> = styled.div`
-  width: 100%;
-  height: 169px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: row;
-`;
-
-const Label = styled(Text)`
-  color: ${p => rgba(p.theme.colors.white, 0.5)};
-  margin-bottom: 8px;
-  max-width: 404px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-`;
 
 const Layer = styled(animated.div)`
   background-image: url(${p => p.image});
@@ -96,24 +68,19 @@ const BackupPack = () => {
 
   const ref = useRef(null);
   return (
-    <Wrapper ref={ref} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
+    <Wrapper onClick={onClick} ref={ref} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
       <Box flex={1} p={24}>
         <Label ff="Inter|SemiBold" fontSize={2}>
           <Trans i18nKey={"banners.backupPack.title"} />
         </Label>
-        <Text style={{ marginBottom: 16 }} ff="Inter|Medium" color="white" fontSize={4}>
+        <Text
+          style={{ marginBottom: 16 }}
+          ff="Inter|Medium"
+          color="palette.text.shade50"
+          fontSize={4}
+        >
           <Trans i18nKey={"banners.backupPack.description"} />
         </Text>
-        <Box horizontal>
-          <Button primary onClick={onClick} alignItems={"center"}>
-            <Box alignItems={"center"} horizontal>
-              <Text style={{ marginRight: 8 }}>
-                <Trans i18nKey={"banners.backupPack.cta"} />
-              </Text>
-              <IconExternalLink size={16} />
-            </Box>
-          </Button>
-        </Box>
       </Box>
       <IllustrationWrapper>
         <Layer style={transBg} image={bg} width={239} height={276} />

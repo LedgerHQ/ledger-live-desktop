@@ -35,10 +35,19 @@ const DisplayOptions = ({ onModeChange, onRangeChange, mode, range }: Props) => 
     <Box ml={4} mr={4}>
       <AccountsOrder />
     </Box>
-    <ToggleButton mr={1} onClick={() => onModeChange("list")} active={mode === "list"}>
+    <ToggleButton
+      event="Account view table"
+      mr={1}
+      onClick={() => onModeChange("list")}
+      active={mode === "list"}
+    >
       <ListIcon />
     </ToggleButton>
-    <ToggleButton onClick={() => onModeChange("card")} active={mode === "card"}>
+    <ToggleButton
+      event="Account view mosaic"
+      onClick={() => onModeChange("card")}
+      active={mode === "card"}
+    >
       <GridIcon />
     </ToggleButton>
   </>

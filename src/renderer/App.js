@@ -23,22 +23,24 @@ type Props = {
   store: Store<State, *>,
 };
 
-const App = ({ store }: Props) => (
-  <LiveStyleSheetManager>
-    <Provider store={store}>
-      <StyleProvider selectedPalette="light">
-        <ThrowBlock>
-          <RemoteConfigProvider>
-            <UpdaterProvider>
-              <Router>
-                <Default />
-              </Router>
-            </UpdaterProvider>
-          </RemoteConfigProvider>
-        </ThrowBlock>
-      </StyleProvider>
-    </Provider>
-  </LiveStyleSheetManager>
-);
+const App = ({ store }: Props) => {
+  return (
+    <LiveStyleSheetManager>
+      <Provider store={store}>
+        <StyleProvider selectedPalette="light">
+          <ThrowBlock>
+            <RemoteConfigProvider>
+              <UpdaterProvider>
+                <Router>
+                  <Default />
+                </Router>
+              </UpdaterProvider>
+            </RemoteConfigProvider>
+          </ThrowBlock>
+        </StyleProvider>
+      </Provider>
+    </LiveStyleSheetManager>
+  );
+};
 
 export default hot(App);
