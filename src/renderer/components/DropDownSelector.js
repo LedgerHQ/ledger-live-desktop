@@ -10,14 +10,14 @@ import Box from "~/renderer/components/Box";
 export const DropDownItem: ThemedComponent<{ isActive: boolean }> = styled(Box).attrs(p => ({
   borderRadius: 1,
   justifyContent: "center",
-  ff: p.isActive ? "Inter|SemiBold" : "Inter",
+  ff: "Inter|SemiBold",
   fontSize: 4,
   px: 3,
   color: p.disabled
     ? "palette.text.shade50"
     : p.isActive
     ? "palette.text.shade100"
-    : "palette.text.shade80",
+    : "palette.text.shade60",
   bg: p.isActive && !p.disabled ? "palette.background.default" : "",
 }))`
   height: 40px;
