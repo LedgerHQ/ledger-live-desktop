@@ -207,7 +207,7 @@ const StepReceiveFunds = ({
   return (
     <>
       <Box px={2}>
-        <TrackPage category="Receive Flow" name="Step 4" />
+        <TrackPage category="Receive Flow" name="Step 3" />
         {verifyAddressError ? (
           <ErrorDisplay error={verifyAddressError} onRetry={onVerify} />
         ) : isAddressVerified === true ? (
@@ -225,7 +225,7 @@ const StepReceiveFunds = ({
               }
             >
               <Box flow={4} pt={4} horizontal justifyContent="center">
-                <Button outlineGrey onClick={onVerify}>
+                <Button event="Page Receive Step 3 re-verify" outlineGrey onClick={onVerify}>
                   <Trans i18nKey="common.reverify" />
                 </Button>
                 <Button id={"receive-receive-continue-button"} primary onClick={onClose}>

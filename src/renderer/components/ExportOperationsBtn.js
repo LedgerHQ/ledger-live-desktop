@@ -34,7 +34,13 @@ class ExportOperationsBtn extends Component<{
     if (!accounts.length && !primary) return null;
 
     return primary ? (
-      <Button small primary event="ExportLogs" disabled={!accounts.length} onClick={this.openModal}>
+      <Button
+        small
+        primary
+        event="ExportAccountOperations"
+        disabled={!accounts.length}
+        onClick={this.openModal}
+      >
         {t("exportOperationsModal.cta")}
       </Button>
     ) : (

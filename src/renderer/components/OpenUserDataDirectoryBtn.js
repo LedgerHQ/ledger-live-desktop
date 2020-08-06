@@ -22,7 +22,7 @@ const OpenUserDataDirectoryBtn = ({
   }, []);
 
   return (
-    <Button primary small onClick={handleOpenUserDataDirectory} {...props}>
+    <Button event="View user data" primary small onClick={handleOpenUserDataDirectory} {...props}>
       {title || t("settings.openUserDataDirectory.btn")}
     </Button>
   );
