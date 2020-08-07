@@ -64,7 +64,7 @@ const SectionHelp = () => {
           title={t("settings.repairDevice.title")}
           desc={t("settings.repairDevice.descSettings")}
         >
-          <RepairDeviceButton buttonProps={{ small: true }} />
+          <RepairDeviceButton buttonProps={{ small: true, primary: true }} />
         </Row>
       </Body>
     </Section>
