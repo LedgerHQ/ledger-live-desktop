@@ -27,7 +27,6 @@ const T: ThemedComponent<{ color?: string, inline?: boolean }> = styled(Box).att
   horizontal: true,
   color: p.color,
 }))`
-  line-height: 1.2;
   white-space: pre;
   text-overflow: ellipsis;
   display: ${p => (p.inline ? "inline-block" : "block")};

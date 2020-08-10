@@ -10,6 +10,7 @@ import type { RenderProps } from ".";
 
 type Props = {
   title?: React$Node,
+  subTitle?: React$Node,
   onBack?: void => void,
   onClose?: void => void,
   render?: (?RenderProps) => any,
@@ -35,6 +36,7 @@ class ModalBody extends PureComponent<Props> {
       onBack,
       onClose,
       title,
+      subTitle,
       render,
       renderFooter,
       renderProps,
@@ -47,7 +49,7 @@ class ModalBody extends PureComponent<Props> {
 
     return (
       <>
-        <ModalHeader onBack={onBack} onClose={onClose}>
+        <ModalHeader subTitle={subTitle} onBack={onBack} onClose={onClose}>
           {title || null}
         </ModalHeader>
         <ModalContent ref={this._content} noScroll={noScroll}>

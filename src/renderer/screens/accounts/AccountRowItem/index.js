@@ -26,6 +26,7 @@ import Star from "~/renderer/components/Stars/Star";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { hideEmptyTokenAccountsSelector } from "~/renderer/reducers/settings";
+import Button from "~/renderer/components/Button";
 
 const Row: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
@@ -80,7 +81,6 @@ const TokenBarIndicator: ThemedComponent<{}> = styled.div`
   border-left: 1px solid ${p => p.theme.colors.palette.divider};
   z-index: 2;
   margin-left: 9px;
-  padding-left: 5px;
   position: absolute;
   left: 0;
   height: 100%;
@@ -89,7 +89,7 @@ const TokenBarIndicator: ThemedComponent<{}> = styled.div`
   }
 `;
 
-const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled.div`
+const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled(Button)`
   margin: 15px -20px -16px;
   display: flex;
   color: ${p => p.theme.colors.wallet};
@@ -100,9 +100,13 @@ const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled.d
   border-radius: 0px 0px 4px 4px;
   height: 32px;
   text-align: center;
+  padding: 0;
 
   &:hover ${Text} {
     text-decoration: underline;
+  }
+  &:hover {
+    background-color: initial;
   }
 
   > :nth-child(2) {
@@ -271,14 +275,21 @@ class AccountRowItem extends PureComponent<Props, State> {
             </TokenContentWrapper>
           ) : null}
           {showTokensIndicator && !disabled && tokens && (
-            <TokenShowMoreIndicator expanded={expanded} onClick={this.toggleAccordion}>
-              <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
-                <Trans
-                  i18nKey={translationMap[expanded ? "hide" : "see"]}
-                  values={{ tokenCount: tokens.length }}
-                />
-              </Text>
-              <IconAngleDown size={16} />
+            <TokenShowMoreIndicator
+              expanded={expanded}
+              event="Account view tokens expand"
+              eventProperties={{ currencyName: currency.name }}
+              onClick={this.toggleAccordion}
+            >
+              <Box horizontal alignContent="center" justifyContent="center">
+                <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
+                  <Trans
+                    i18nKey={translationMap[expanded ? "hide" : "see"]}
+                    values={{ tokenCount: tokens.length }}
+                  />
+                </Text>
+                <IconAngleDown size={16} />
+              </Box>
             </TokenShowMoreIndicator>
           )}
         </Row>

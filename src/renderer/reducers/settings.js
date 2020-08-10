@@ -96,8 +96,10 @@ export type SettingsState = {
   hideEmptyTokenAccounts: boolean,
   sidebarCollapsed: boolean,
   discreetMode: boolean,
+  carouselVisibility: number,
   starredAccountIds?: string[],
   blacklistedTokenIds: string[],
+  deepLinkUrl: ?string,
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -133,8 +135,10 @@ const INITIAL_STATE: SettingsState = {
   discreetMode: false,
   preferredDeviceModel: "nanoS",
   hasInstalledApps: true,
+  carouselVisibility: 0,
   lastSeenDevice: null,
   blacklistedTokenIds: [],
+  deepLinkUrl: null,
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -217,6 +221,10 @@ const handlers: Object = {
     ...state,
     lastSeenDevice: dmi,
   }),
+  SET_DEEPLINK_URL: (state: SettingsState, { payload: deepLinkUrl }) => ({
+    ...state,
+    deepLinkUrl,
+  }),
   // used to debug performance of redux updates
   DEBUG_TICK: state => ({ ...state }),
 };
@@ -230,6 +238,8 @@ export const settingsExportSelector = storeSelector;
 export const discreetModeSelector = (state: State): boolean => state.settings.discreetMode === true;
 
 export const getCounterValueCode = (state: State) => state.settings.counterValue;
+
+export const deepLinkUrlSelector = (state: State) => state.settings.deepLinkUrl;
 
 export const counterValueCurrencyLocalSelector = (state: SettingsState): Currency =>
   findCurrencyByTicker(state.counterValue) || getFiatCurrencyByTicker("USD");
@@ -329,6 +339,7 @@ export const autoLockTimeoutSelector = (state: State) => state.settings.autoLock
 export const shareAnalyticsSelector = (state: State) => state.settings.shareAnalytics;
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange;
 export const hasInstalledAppsSelector = (state: State) => state.settings.hasInstalledApps;
+export const carouselVisibilitySelector = (state: State) => state.settings.carouselVisibility;
 export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;

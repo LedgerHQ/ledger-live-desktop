@@ -1,21 +1,19 @@
 // @flow
 
-import invariant from "invariant";
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import Exchange from "~/renderer/icons/Exchange";
 import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
 import { useTranslation } from "react-i18next";
-import { getAccountsForCurrency, useCoinifyCurrencies } from "~/renderer/screens/exchange/hooks";
-// import { SelectAccount } from "~/renderer/components/SelectAccount";
-import SelectAccount from "~/renderer/components/PerCurrencySelectAccount";
+import { useCoinifyCurrencies } from "~/renderer/screens/exchange/hooks";
+import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
 import Label from "~/renderer/components/Label";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Button from "~/renderer/components/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { accountsSelector } from "~/renderer/reducers/accounts";
-import type { Account, CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import type { Account } from "@ledgerhq/live-common/lib/types";
 import FakeLink from "~/renderer/components/FakeLink";
 import PlusIcon from "~/renderer/icons/Plus";
 import { openModal } from "~/renderer/actions/modals";
@@ -23,6 +21,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
 import { track } from "~/renderer/analytics/segment";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types/account";
+import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 
 const Container: ThemedComponent<{}> = styled.div`
   width: 365px;
@@ -60,12 +59,7 @@ const FormContent: ThemedComponent<{}> = styled.div`
 
 type Props = {
   selectAccount: (account: AccountLike, parentAccount: ?Account) => void,
-};
-
-type State = {
-  currency: ?(CryptoCurrency | TokenCurrency),
-  account: ?AccountLike,
-  parentAccount: ?Account,
+  defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
 };
 
 const AccountSelectorLabel = styled(Label)`
@@ -74,45 +68,19 @@ const AccountSelectorLabel = styled(Label)`
   justify-content: space-between;
 `;
 
-const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
+const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency }: Props) => {
   const { t } = useTranslation();
+  const allCurrencies = useCoinifyCurrencies();
   const allAccounts = useSelector(accountsSelector);
 
-  const currencies = useCoinifyCurrencies();
-  const [{ currency, account, parentAccount }, setState] = useState<State>(() => {
-    const defaultCurrency = currencies[0];
-
-    return {
-      currency: defaultCurrency,
-      account: null,
-      parentAccount: null,
-    };
-  });
-
-  const mainCurrency = currency
-    ? currency.type === "TokenCurrency"
-      ? currency.parentCurrency
-      : currency
-    : null;
-  // this effect make sure to set the bottom select to a newly created account
-  useEffect(() => {
-    if (!mainCurrency) return;
-    if (currency && account && getAccountCurrency(account).id === currency.id) return; // already of the current currency
-    setState(oldState => {
-      if (!currency) {
-        return oldState;
-      }
-      const accountsForDefaultCurrency = getAccountsForCurrency(currency, allAccounts);
-      const defaultAccount = accountsForDefaultCurrency.length
-        ? accountsForDefaultCurrency[0]
-        : null;
-
-      return {
-        ...oldState,
-        account: defaultAccount,
-      };
-    });
-  }, [allAccounts, account, mainCurrency, currency]);
+  const {
+    availableAccounts,
+    currency,
+    account,
+    subAccount,
+    setAccount,
+    setCurrency,
+  } = useCurrencyAccountSelect(allCurrencies, allAccounts);
 
   const dispatch = useDispatch();
 
@@ -131,21 +99,7 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
       <FormContainer>
         <FormContent>
           <Label>{t("exchange.buy.selectCrypto")}</Label>
-          <SelectCurrency
-            onChange={currency => {
-              invariant(!currency || currency.type !== "FiatCurrency", "not a fiat currency");
-              const accountsForSelectedcurrency = currency
-                ? getAccountsForCurrency(currency, allAccounts)
-                : [];
-              setState({
-                currency,
-                account: accountsForSelectedcurrency.length ? accountsForSelectedcurrency[0] : null,
-                parentAccount: null,
-              });
-            }}
-            currencies={currencies}
-            value={currency || undefined}
-          />
+          <SelectCurrency onChange={setCurrency} currencies={allCurrencies} value={currency} />
         </FormContent>
         <FormContent>
           <AccountSelectorLabel>
@@ -157,18 +111,9 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
           </AccountSelectorLabel>
           {currency ? (
             <SelectAccount
-              accounts={allAccounts}
-              currency={currency}
-              mandatoryTokens
-              onChange={(account, parentAccount) => {
-                console.log(account, parentAccount);
-                setState(oldState => ({
-                  ...oldState,
-                  account: account,
-                  parentAccount: parentAccount,
-                }));
-              }}
-              value={parentAccount || account}
+              accounts={availableAccounts}
+              value={{ account, subAccount }}
+              onChange={setAccount}
             />
           ) : null}
         </FormContent>
@@ -181,7 +126,11 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
                   currencyName: getAccountCurrency(account).name,
                   isEmpty: isAccountEmpty(account),
                 });
-                selectAccount(account, parentAccount);
+                if (subAccount) {
+                  selectAccount(subAccount, account);
+                } else {
+                  selectAccount(account);
+                }
               }
             }}
             disabled={!account}

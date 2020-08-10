@@ -29,6 +29,8 @@ const StepRecipient = ({
   error,
   status,
   bridgePending,
+  maybeRecipient,
+  onResetMaybeRecipient,
 }: StepProps) => {
   if (!status) return null;
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
@@ -59,6 +61,8 @@ const StepRecipient = ({
             onChangeTransaction={onChangeTransaction}
             bridgePending={bridgePending}
             t={t}
+            initValue={maybeRecipient}
+            resetInitValue={onResetMaybeRecipient}
           />
           <SendRecipientFields
             account={mainAccount}

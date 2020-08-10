@@ -115,7 +115,11 @@ type Props = {
   backdropColor: ?boolean,
 };
 
-class Modal extends PureComponent<Props> {
+class Modal extends PureComponent<Props, { directlyClickedBackdrop: boolean }> {
+  state = {
+    directlyClickedBackdrop: false,
+  };
+
   componentDidMount() {
     document.addEventListener("keyup", this.handleKeyup);
     document.addEventListener("keydown", this.preventFocusEscape);
@@ -165,10 +169,14 @@ class Modal extends PureComponent<Props> {
 
   handleClickOnBackdrop = () => {
     const { preventBackdropClick, onClose } = this.props;
-    if (!preventBackdropClick && onClose) {
+    const { directlyClickedBackdrop } = this.state;
+    if (directlyClickedBackdrop && !preventBackdropClick && onClose) {
       onClose();
     }
   };
+
+  onDirectMouseDown = () => this.setState({ directlyClickedBackdrop: true });
+  onIndirectMouseDown = () => this.setState({ directlyClickedBackdrop: false });
 
   /** combined with tab-index 0 this will allow tab navigation into the modal disabling tab navigation behind it */
   setFocus = (r: *) => {
@@ -217,6 +225,7 @@ class Modal extends PureComponent<Props> {
               state={state}
               centered={centered}
               isOpened={isOpened}
+              onMouseDown={this.onDirectMouseDown}
               onClick={this.handleClickOnBackdrop}
               backdropColor={backdropColor}
             >
@@ -226,6 +235,10 @@ class Modal extends PureComponent<Props> {
                 state={state}
                 width={width}
                 onClick={this.swallowClick}
+                onMouseDown={e => {
+                  this.onIndirectMouseDown();
+                  e.stopPropagation();
+                }}
                 id="modal-container"
               >
                 {render && render(renderProps)}

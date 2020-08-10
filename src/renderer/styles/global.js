@@ -56,7 +56,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .select__placeholder {
-    color ${p => p.theme.colors.palette.divider} !important;
+    color ${p => p.theme.colors.palette.text.shade40} !important;
   }
 
   ::selection {

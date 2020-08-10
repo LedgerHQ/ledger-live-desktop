@@ -53,7 +53,12 @@ export const StepFinishFooter = ({ onGoStep1, onCloseModal }: StepProps) => {
         <Button id={"add-accounts-finish-close-button"} onClick={onCloseModal}>
           {t("common.close")}
         </Button>
-        <Button id={"add-accounts-finish-add-more-button"} primary onClick={onGoStep1}>
+        <Button
+          event="Page AddAccounts Step 4 AddMore"
+          id={"add-accounts-finish-add-more-button"}
+          primary
+          onClick={onGoStep1}
+        >
           {t("addAccounts.cta.addMore")}
         </Button>
       </Box>

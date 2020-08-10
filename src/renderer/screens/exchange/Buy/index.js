@@ -9,6 +9,7 @@ import { openModal } from "~/renderer/actions/modals";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import { useDispatch } from "react-redux";
 import TrackPage from "~/renderer/analytics/TrackPage";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 
 const BuyContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -17,7 +18,11 @@ const BuyContainer: ThemedComponent<{}> = styled.div`
   flex: 1;
 `;
 
-const Buy = () => {
+type Props = {
+  defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
+};
+
+const Buy = ({ defaultCurrency }: Props) => {
   const [state, setState] = useState({
     account: undefined,
     parentAccount: undefined,
@@ -61,7 +66,7 @@ const Buy = () => {
       {account ? (
         <CoinifyWidget account={account} parentAccount={parentAccount} mode="buy" onReset={reset} />
       ) : (
-        <SelectAccountAndCurrency selectAccount={selectAccount} />
+        <SelectAccountAndCurrency selectAccount={selectAccount} defaultCurrency={defaultCurrency} />
       )}
     </BuyContainer>
   );

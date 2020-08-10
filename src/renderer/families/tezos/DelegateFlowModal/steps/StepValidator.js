@@ -90,7 +90,7 @@ const StepValidator = ({
     [account, onChangeTransaction, parentAccount, transaction, transitionTo],
   );
   const openPartner = useCallback(() => {
-    openURL("https://mytezosbaker.com/");
+    openURL("https://baking-bad.org/");
   }, []);
 
   return (
@@ -131,13 +131,16 @@ const StepValidator = ({
         </Button>
         <Box mt={5}>
           <Text ff="Inter|Medium" fontSize={2} color="palette.text.shade40">
-            <Trans i18nKey="delegation.flow.steps.validator.providedBy">
+            <Trans
+              i18nKey="delegation.flow.steps.validator.providedBy"
+              values={{ name: "Baking Bad" }}
+            >
               {"Yield rates provided by"}
               <Text
                 onClick={openPartner}
                 style={{ cursor: "pointer", textDecoration: "underline" }}
               >
-                {"MyTezosBaker"}
+                {"Baking Bad"}
               </Text>
             </Trans>
           </Text>
