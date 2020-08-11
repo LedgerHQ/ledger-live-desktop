@@ -5,6 +5,7 @@ import type { TFunction } from "react-i18next";
 import { log } from "@ledgerhq/logs";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
+import type { Device } from "~/renderer/reducers/devices";
 import logger from "~/logger";
 import Modal from "~/renderer/components/Modal";
 import Stepper from "~/renderer/components/Stepper";
@@ -23,6 +24,7 @@ export type StepProps = {
   onCloseModal: (proceedToAppReinstall?: boolean) => void,
   error: ?Error,
   setError: Error => void,
+  device: Device,
   deviceModelId: DeviceModelId,
   deviceInfo: DeviceInfo,
   t: TFunction,
@@ -77,7 +79,6 @@ const UpdateModal = ({
         id: "idCheck",
         label: t("manager.modal.identifier"),
         component: StepFullFirmwareInstall,
-        footer: null,
         onBack: null,
         hideFooter: true,
       };
@@ -95,7 +96,6 @@ const UpdateModal = ({
         id: "updateMCU",
         label: t("manager.modal.steps.updateMCU"),
         component: StepFlashMcu,
-        footer: null,
         onBack: null,
         hideFooter: true,
       };
@@ -168,6 +168,7 @@ const UpdateModal = ({
       preventBackdropClick={!["finish", "resetDevice"].includes(stepId) && !error}
       render={() => (
         <Stepper
+          {...additionalProps}
           key={nonce}
           onStepChange={handleStepChange}
           title={t("manager.firmware.update")}
@@ -175,7 +176,6 @@ const UpdateModal = ({
           steps={steps}
           errorSteps={errorSteps}
           deviceModelId={deviceModelId}
-          {...additionalProps}
           onClose={() => onClose()}
         >
           <HookMountUnmount onMountUnmount={setFirmwareUpdateOpened} />
