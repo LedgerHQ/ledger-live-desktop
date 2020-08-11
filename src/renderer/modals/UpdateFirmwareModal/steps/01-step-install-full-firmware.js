@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import manager from "@ledgerhq/live-common/lib/manager";
 import type { FirmwareUpdateContext, DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
-import type { Device } from "~/renderer/reducers/devices";
 import { command } from "~/renderer/commands";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -107,10 +106,7 @@ const Body = ({
   );
 };
 
-type Props = StepProps & {
-  device: Device,
-  deviceModelId: DeviceModelId,
-};
+type Props = StepProps;
 
 const StepFullFirmwareInstall = ({
   firmware,
