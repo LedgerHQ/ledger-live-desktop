@@ -64,6 +64,7 @@ const FormContent: ThemedComponent<{}> = styled.div`
 type Props = {
   selectAccount: (account: AccountLike, parentAccount: ?Account) => void,
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
+  defaultAccount?: ?Account,
 };
 
 const AccountSelectorLabel = styled(Label)`
@@ -72,7 +73,7 @@ const AccountSelectorLabel = styled(Label)`
   justify-content: space-between;
 `;
 
-const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency }: Props) => {
+const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccount }: Props) => {
   const { t } = useTranslation();
   const allCurrencies = useCoinifyCurrencies();
   const allAccounts = useSelector(accountsSelector);
@@ -84,7 +85,7 @@ const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency }: Props) => 
     subAccount,
     setAccount,
     setCurrency,
-  } = useCurrencyAccountSelect(allCurrencies, allAccounts);
+  } = useCurrencyAccountSelect({ allCurrencies, allAccounts, defaultCurrency, defaultAccount });
 
   const dispatch = useDispatch();
 

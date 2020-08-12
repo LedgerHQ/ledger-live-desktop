@@ -43,19 +43,28 @@ const getIdsFromTuple = (accountTuple: AccountTuple) => ({
   subAccountId: accountTuple.subAccount ? accountTuple.subAccount.id : null,
 });
 
-export function useCurrencyAccountSelect(
+export function useCurrencyAccountSelect({
+  allCurrencies,
+  allAccounts,
+  defaultCurrency,
+  defaultAccount,
+}: {
   allCurrencies: CryptoOrTokenCurrency[],
   allAccounts: Account[],
-) {
+  defaultCurrency: ?CryptoOrTokenCurrency,
+  defaultAccount: ?Account,
+}) {
   const [state, setState] = useState(() => {
-    const defaultCurrency = allCurrencies[0];
-    const availableAccounts = getAccountTuplesForCurrency(defaultCurrency, allAccounts);
-    const { accountId } = availableAccounts.length
+    const currency = defaultCurrency || allCurrencies[0];
+    const availableAccounts = getAccountTuplesForCurrency(currency, allAccounts);
+    const { accountId } = defaultAccount
+      ? { accountId: defaultAccount.id }
+      : availableAccounts.length
       ? getIdsFromTuple(availableAccounts[0])
       : { accountId: null };
 
     return {
-      currency: defaultCurrency,
+      currency,
       accountId,
     };
   });
