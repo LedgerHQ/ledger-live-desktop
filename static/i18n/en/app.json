@@ -1796,6 +1796,9 @@
       "title": "Account not supported.",
       "description": "Please retry or contact Support ({{reason}})"
     },
+    "AlgorandASANotOptInInRecipient": {
+      "title": "Recipient account has not opted in the selected ASA."
+    },
     "AmountRequired": {
       "title": "Amount required"
     },
