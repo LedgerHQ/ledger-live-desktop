@@ -1140,8 +1140,8 @@
             "label": "Confirmation",
             "success": {
               "title": "{{token}} asset successfully added",
-              "text": "--! TO BE FILLED !--",
-              "cta": "Go to my ASA (Asset)"
+              "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
+              "cta": "View details"
             },
             "pending": {
               "title": "Broadcasting transaction..."
@@ -1153,7 +1153,7 @@
     },
     "claimRewards": {
       "header": "Rewards",
-      "tooltip": "Rewards bla bla",
+      "tooltip": "Algorand rewards are distributed regularly and are claimed automatically when you do a transaction.",
       "cta": "Claim rewards",
       "rewardsDisabledTooltip": "You don’t have any rewards.  Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
       "flow": {
@@ -1185,8 +1185,8 @@
             "label": "Confirmation",
             "success": {
               "title": "Rewards successfully claimed!",
-              "text": "--! TO BE FILLED !--",
-              "cta": "Go to my account"
+              "text": "Your rewards were added to your available balance",
+              "cta": "View details"
             },
             "pending": {
               "title": "Broadcasting transaction..."

@@ -18,6 +18,7 @@ import InfoBox from "~/renderer/components/InfoBox";
 import Text from "~/renderer/components/Text";
 import ClaimRewardsIllu from "~/renderer/images/claim-rewards.svg";
 import Image from "~/renderer/components/Image";
+import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 
 export default function StepInfo({
   account,
@@ -89,6 +90,7 @@ export function StepInfoFooter({
 
   return (
     <>
+      <AccountFooter parentAccount={parentAccount} account={account} status={status} />
       <Box horizontal>
         <Button mr={1} secondary onClick={onClose}>
           <Trans i18nKey="common.cancel" />

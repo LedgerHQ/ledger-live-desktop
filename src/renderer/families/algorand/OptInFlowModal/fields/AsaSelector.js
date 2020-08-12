@@ -44,7 +44,7 @@ const renderItem = ({
       </Box>
       {isDisabled && (
         <ToolTip content={<Trans i18nKey="algorand.optIn.flow.steps.assets.disabledTooltip" />}>
-          <Box color="alertRed">
+          <Box color="warning">
             <ExclamationCircleThin size={16} />
           </Box>
         </ToolTip>

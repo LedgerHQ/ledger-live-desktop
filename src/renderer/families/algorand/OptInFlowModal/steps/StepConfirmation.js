@@ -55,7 +55,10 @@ function StepConfirmation({
           }
           description={
             <div>
-              <Trans i18nKey={`algorand.optIn.flow.steps.confirmation.success.text`}>
+              <Trans
+                i18nKey={`algorand.optIn.flow.steps.confirmation.success.text`}
+                values={{ token: token.name }}
+              >
                 <b></b>
               </Trans>
             </div>
