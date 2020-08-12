@@ -15,11 +15,17 @@ import type { Device } from "~/renderer/reducers/devices";
 import StepProgress from "~/renderer/components/StepProgress";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
 import Button from "~/renderer/components/Button";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
+
+import { mockedEventEmitter } from "~/renderer/components/DebugMock";
 const connectAppExec = command("connectApp");
 const initSwapExec = command("initSwap");
 
-const action = createAction(connectAppExec);
-const action2 = initSwapCreateAction(connectAppExec, initSwapExec);
+const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectAppExec);
+const action2 = initSwapCreateAction(
+  getEnv("MOCK") ? mockedEventEmitter : connectAppExec,
+  getEnv("MOCK") ? mockedEventEmitter : initSwapExec,
+);
 
 const Result = ({
   signedOperation,

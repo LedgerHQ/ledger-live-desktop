@@ -1,21 +1,27 @@
 // @flow
 
+import React, { useCallback } from "react";
 import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
 import { Trans } from "react-i18next";
-import SelectAccount from "~/renderer/components/SelectAccount";
+import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
 import InputCurrency from "~/renderer/components/InputCurrency";
-import React from "react";
-import type { AccountLike, Currency } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  AccountLike,
+  CryptoCurrency,
+  TokenCurrency,
+  Currency,
+} from "@ledgerhq/live-common/lib/types";
 import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Text from "~/renderer/components/Text";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import type { Option } from "~/renderer/components/Select";
 import Switch from "~/renderer/components/Switch";
 import { CurrencyOptionRow } from "~/renderer/screens/swap/Form/index";
 import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/swap/logic";
+import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 
 const InputRight = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
@@ -28,38 +34,73 @@ const InputRight = styled(Box).attrs(() => ({
 
 const From = ({
   currencies,
-  validAccounts,
-  currency,
-  account,
+  currency: defaultCurrency,
+  account: defaultAccount,
   currenciesStatus,
+  validAccounts,
   amount,
-  onCurrencyChange,
-  onAccountChange,
-  onAmountChange,
-  onToggleUseAllAmount,
   useAllAmount,
   isLoading,
   error,
+  onAccountChange,
+  onToggleUseAllAmount,
+  onAmountChange,
+  onCurrencyChange,
 }: {
-  currencies: Currency[],
-  currency: ?Currency,
-  account: AccountLike,
+  currencies: (CryptoCurrency | TokenCurrency)[],
+  currency: ?(CryptoCurrency | TokenCurrency),
+  account: ?Account,
   currenciesStatus: CurrenciesStatus,
-  validAccounts: AccountLike[],
+  validAccounts: Account[],
   amount: BigNumber,
   onCurrencyChange: (?Currency) => void,
-  onAccountChange: (?AccountLike) => void,
+  onAccountChange: (AccountLike, ?Account) => void,
   onAmountChange: BigNumber => void,
   onToggleUseAllAmount?: () => void,
   useAllAmount?: boolean,
   isLoading?: boolean,
   error: ?Error,
 }) => {
+  const {
+    availableAccounts,
+    currency,
+    account,
+    subAccount,
+    setCurrency,
+    setAccount,
+  } = useCurrencyAccountSelect({
+    allCurrencies: currencies,
+    allAccounts: validAccounts,
+    defaultCurrency,
+    defaultAccount,
+  });
   const unit = currency && currency.units[0];
   const renderOptionOverride = ({ data: currency }: Option) => {
     const status = currenciesStatus[currency.id];
     return <CurrencyOptionRow circle currency={currency} status={status} />;
   };
+
+  // NB this feels like I'm doing the work twice, but ¯\_(ツ)_/¯
+  const onCurrencySelected = useCallback(
+    currency => {
+      if (!currency) return;
+      setCurrency(currency);
+      onCurrencyChange(currency);
+    },
+    [onCurrencyChange, setCurrency],
+  );
+
+  const onAccountSelected = useCallback(
+    (account, subAccount) => {
+      if (!account) return;
+      const toAccount = subAccount || account;
+      const toParentAccount = subAccount ? account : null;
+      // TODO Ideally we would maintain the account/parentAccount paradigm instead of account/subAccount
+      setAccount(account, subAccount);
+      onAccountChange(toAccount, toParentAccount);
+    },
+    [onAccountChange, setAccount],
+  );
 
   if (!currency) return null; // FIXME, likely need to account for no valid swap combinations
 
@@ -77,7 +118,7 @@ const From = ({
           renderOptionOverride={renderOptionOverride}
           currencies={currencies}
           autoFocus={true}
-          onChange={onCurrencyChange}
+          onChange={onCurrencySelected}
           value={currency}
           isDisabled={c =>
             (c.type === "CryptoCurrency" || c.type === "TokenCurrency") &&
@@ -90,19 +131,9 @@ const From = ({
           <Trans i18nKey={`swap.form.from.account`} />
         </Label>
         <SelectAccount
-          enforceHideEmptySubAccounts
-          withSubAccounts
-          filter={a => {
-            const accountCurrency = getAccountCurrency(a);
-            return (
-              currency === accountCurrency ||
-              (currency.type === "TokenCurrency" && currency === accountCurrency)
-            );
-          }}
-          autoFocus={true}
-          onChange={onAccountChange}
-          value={account}
-          accounts={validAccounts}
+          accounts={availableAccounts}
+          value={{ account, subAccount }}
+          onChange={onAccountSelected}
         />
       </Box>
       <Box style={{ minHeight: 120 }}>

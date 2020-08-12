@@ -11,7 +11,12 @@ import { Trans, useTranslation, withTranslation } from "react-i18next";
 import Card from "~/renderer/components/Box/Card";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { modalsStateSelector } from "~/renderer/reducers/modals";
-import type { AccountLike, Currency } from "@ledgerhq/live-common/lib/types";
+import type {
+  CryptoCurrency,
+  TokenCurrency,
+  Account,
+  Currency,
+} from "@ledgerhq/live-common/lib/types";
 import getExchangeRates from "@ledgerhq/live-common/lib/swap/getExchangeRates";
 import ArrowSeparator from "~/renderer/components/ArrowSeparator";
 import { findTokenById } from "@ledgerhq/live-common/lib/data/tokens";
@@ -27,7 +32,11 @@ import {
   reducer,
 } from "@ledgerhq/live-common/lib/swap/logic";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { flattenAccounts, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+import {
+  accountWithMandatoryTokens,
+  getAccountCurrency,
+  getMainAccount,
+} from "@ledgerhq/live-common/lib/account";
 import type { InstalledItem } from "@ledgerhq/live-common/lib/apps";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
@@ -70,9 +79,9 @@ const Form = ({
   selectableCurrencies,
   installedApps,
 }: {
-  accounts: AccountLike[],
+  accounts: Account[],
   onContinue: any,
-  selectableCurrencies: Currency[],
+  selectableCurrencies: (CryptoCurrency | TokenCurrency)[],
   installedApps: InstalledItem[],
 }) => {
   const ratesExpirationThreshold = 100000;
@@ -95,6 +104,7 @@ const Form = ({
   );
 
   const [state, dispatch] = useReducer(reducer, { okCurrencies }, initState);
+  useEffect(() => console.log({ state }), [state]);
   const [ratesTimestamp, setRatesTimestamp] = useState(null); // Move back to the live-common one
   const patchExchange = useCallback(payload => dispatch({ type: "patchExchange", payload }), [
     dispatch,
@@ -109,7 +119,7 @@ const Form = ({
     /* ratesTimestamp, */ error,
   } = state;
   const { exchange, exchangeRate } = swap;
-  const { fromAccount, toAccount } = exchange;
+  const { fromAccount, fromParentAccount, toAccount, toParentAccount } = exchange;
   const { setTransaction, setAccount, transaction } = useBridgeTransaction();
 
   const onStartSwap = useCallback(() => {
@@ -121,33 +131,83 @@ const Form = ({
     fromCurrency,
   ]);
 
-  const validTo = useMemo(() => accounts.filter(isSameCurrencyFilter(toCurrency)), [
-    accounts,
-    toCurrency,
-  ]);
+  const validTo = useMemo(
+    () =>
+      accounts.filter(
+        isSameCurrencyFilter(
+          toCurrency && toCurrency.type === "TokenCurrency"
+            ? toCurrency.parentCurrency
+            : toCurrency,
+        ),
+      ),
+    [accounts, toCurrency],
+  );
 
   const { magnitudeAwareRate } = exchangeRate || {};
 
-  useEffect(() => setAccount(fromAccount), [fromAccount, setAccount]);
+  useEffect(() => setAccount(fromAccount, fromParentAccount), [
+    fromAccount,
+    fromParentAccount,
+    setAccount,
+  ]);
+
   useEffect(() => {
     if (!fromAccount || !transaction) return;
     if (transaction.amount && !transaction.amount.eq(fromAmount)) {
-      const bridge = getAccountBridge(fromAccount); // TODO token support
-      setTransaction(bridge.updateTransaction(transaction, { amount: fromAmount }));
+      const bridge = getAccountBridge(fromAccount, fromParentAccount);
+      setTransaction(
+        bridge.updateTransaction(transaction, {
+          amount: fromAmount,
+          subAccountId: fromParentAccount ? fromAccount.id : null,
+        }),
+      );
     }
-  }, [fromAccount, fromAmount, setAccount, setTransaction, transaction]);
+  }, [fromAccount, fromAmount, fromParentAccount, setAccount, setTransaction, transaction]);
 
   useEffect(() => {
+    let fromAccount;
+    let fromParentAccount;
+
+    if (fromCurrency && fromCurrency.type === "TokenCurrency") {
+      fromParentAccount = validFrom[0];
+      fromAccount = accountWithMandatoryTokens(fromParentAccount, [fromCurrency]).subAccounts?.find(
+        isSameCurrencyFilter(fromCurrency),
+      );
+    } else {
+      fromAccount = validFrom[0];
+    }
+
     dispatch({
-      type: "setFromAccount",
+      type: "setToAccount",
       payload: {
-        fromAccount:
-          flattenAccounts(validFrom).find(a => getAccountCurrency(a) === fromCurrency) || null,
+        fromAccount,
+        fromParentAccount,
       },
     });
-  }, [fromCurrency, patchExchange, validFrom, dispatch]);
+  }, [fromCurrency, validFrom]);
 
-  useEffect(() => patchExchange({ toAccount: validTo[0] || null }), [patchExchange, validTo]);
+  useEffect(() => {
+    let toAccount;
+    let toParentAccount;
+
+    if (toCurrency && toCurrency.type === "TokenCurrency") {
+      toParentAccount = validTo[0];
+      toAccount = accountWithMandatoryTokens(toParentAccount, [toCurrency]).subAccounts?.find(
+        isSameCurrencyFilter(toCurrency),
+      );
+    } else {
+      toAccount = validTo[0];
+    }
+
+    dispatch({
+      type: "setToAccount",
+      payload: {
+        toAccount,
+        toParentAccount,
+      },
+    });
+  }, [fromCurrency, toCurrency, validTo]);
+
   const _canRequestRates = useMemo(() => canRequestRates(state), [state]);
 
   useEffect(() => {
@@ -217,16 +277,13 @@ const Form = ({
         <Box horizontal p={32}>
           <From
             currenciesStatus={currenciesStatus}
-            account={fromAccount}
+            account={fromAccount ? getMainAccount(fromAccount, fromParentAccount) : null}
             amount={fromAmount}
             currency={fromCurrency}
             error={error}
             currencies={selectableCurrencies}
-            onCurrencyChange={_fromCurrency => {
-              // FIXME this doesnt work with tokens
-              if (fromCurrency.id !== _fromCurrency.id) {
-                dispatch({ type: "setFromCurrency", payload: { fromCurrency: _fromCurrency } });
-              }
+            onCurrencyChange={fromCurrency => {
+              dispatch({ type: "setFromCurrency", payload: { fromCurrency } });
             }}
             onAccountChange={a => dispatch({ type: "setFromAccount", payload: { fromAccount: a } })}
             onAmountChange={fromAmount =>
@@ -239,8 +296,9 @@ const Form = ({
           <ArrowSeparator Icon={IconArrowRight} />
           {toCurrency && fromCurrency ? (
             <To
+              key={toCurrency.id}
               currenciesStatus={currenciesStatus}
-              account={toAccount}
+              account={toAccount ? getMainAccount(toAccount, toParentAccount) : null}
               amount={fromAmount ? fromAmount.times(magnitudeAwareRate) : null}
               currency={toCurrency}
               fromCurrency={fromCurrency}
@@ -249,12 +307,16 @@ const Form = ({
               onCurrencyChange={toCurrency =>
                 dispatch({ type: "setToCurrency", payload: { toCurrency } })
               }
-              onAccountChange={a => patchExchange({ toAccount: a })}
+              onAccountChange={(toAccount, toParentAccount) =>
+                patchExchange({ toAccount, toParentAccount })
+              }
               validAccounts={validTo}
             />
           ) : null}
         </Box>
         <Footer horizontal>
+        <div>{fromAccount && fromAccount.balance.toString()}</div>
+        <div>{toAccount && toAccount.balance.toString()}</div>
           <LabelWithExternalIcon
             color="wallet"
             ff="Inter|SemiBold"

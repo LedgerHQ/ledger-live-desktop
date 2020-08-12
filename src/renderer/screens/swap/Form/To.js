@@ -3,10 +3,15 @@
 import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
 import { Trans } from "react-i18next";
-import SelectAccount from "~/renderer/components/SelectAccount";
+import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import React, { useCallback } from "react";
-import type { AccountLike, Currency } from "@ledgerhq/live-common/lib/types";
+import type {
+  AccountLike,
+  Account,
+  CryptoCurrency,
+  TokenCurrency,
+} from "@ledgerhq/live-common/lib/types";
 import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
@@ -17,11 +22,11 @@ import IconPlusSmall from "~/renderer/icons/PlusSmall";
 import { openModal } from "~/renderer/actions/modals";
 import { useDispatch } from "react-redux";
 import { CurrencyOptionRow } from "~/renderer/screens/swap/Form";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/swap/logic";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import IconLock from "~/renderer/icons/Lock";
 import useTheme from "~/renderer/hooks/useTheme";
+import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 
 const InputRight = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
@@ -48,29 +53,43 @@ const AddAccount = styled.div`
 
 const SwapInputGroup = ({
   currencies,
-  validAccounts,
-  currency,
+  currency: defaultCurrency,
   fromCurrency,
-  account,
+  account: defaultAccount,
   currenciesStatus,
+  validAccounts,
   amount,
-  onCurrencyChange,
-  onAccountChange,
   rate,
   error,
+  onAccountChange,
+  onCurrencyChange,
 }: {
-  currencies: Currency[],
-  currency: Currency,
-  fromCurrency: Currency,
-  account: ?AccountLike,
+  currencies: (CryptoCurrency | TokenCurrency)[],
+  currency: CryptoCurrency | TokenCurrency,
+  fromCurrency: CryptoCurrency | TokenCurrency,
+  account: ?Account,
   currenciesStatus: CurrenciesStatus,
-  validAccounts: AccountLike[],
+  validAccounts: Account[],
   amount: ?BigNumber,
-  onCurrencyChange: (?Currency) => void,
-  onAccountChange: (?AccountLike) => void,
   rate?: BigNumber,
   error?: Error,
+  onAccountChange: (AccountLike, ?Account) => void,
+  onCurrencyChange: (CryptoCurrency | TokenCurrency) => void,
 }) => {
+  const {
+    availableAccounts,
+    currency,
+    account,
+    subAccount,
+    setCurrency,
+    setAccount,
+  } = useCurrencyAccountSelect({
+    allCurrencies: currencies,
+    allAccounts: validAccounts,
+    defaultCurrency,
+    defaultAccount,
+  });
+
   const unit = currency && currency.units[0];
   const renderOptionOverride = ({ data: currency }: any) => {
     // NB ignore the custom rendering for no-accounts here since we show the add account CTA
@@ -91,12 +110,33 @@ const SwapInputGroup = ({
     dispatch,
   ]);
 
-  const hasMaybeValidAccounts =
-    (validAccounts && validAccounts.length > 0) ||
-    (currency.type === "TokenCurrency" &&
-      validAccounts.find(a => getAccountCurrency(a).id === currency.parentCurrency));
+  const hasMaybeValidAccounts = validAccounts && validAccounts.length > 0;
 
   const lockColor = useTheme("colors.palette.text.shade50");
+
+  // NB this feels like I'm doing the work twice, but ¯\_(ツ)_/¯
+  const onCurrencySelected = useCallback(
+    currency => {
+      if (!currency) return;
+      setCurrency(currency);
+      onCurrencyChange(currency);
+    },
+    [onCurrencyChange, setCurrency],
+  );
+
+  const onAccountSelected = useCallback(
+    (account, subAccount) => {
+      if (!account) return;
+      const toAccount = subAccount || account;
+      const toParentAccount = subAccount ? account : null;
+      // TODO Ideally we would maintain the account/parentAccount paradigm instead of account/subAccount
+      setAccount(account, subAccount);
+      onAccountChange(toAccount, toParentAccount);
+    },
+    [onAccountChange, setAccount],
+  );
+
+  if (!currency) return null;
 
   return (
     <Box flex={1} flow={1} mb={3} ml={23}>
@@ -111,7 +151,7 @@ const SwapInputGroup = ({
           renderOptionOverride={renderOptionOverride}
           currencies={currencies}
           autoFocus={true}
-          onChange={onCurrencyChange}
+          onChange={onCurrencySelected}
           value={currency}
           rowHeight={47}
           isDisabled={c =>
@@ -126,18 +166,9 @@ const SwapInputGroup = ({
         </Label>
         {hasMaybeValidAccounts ? (
           <SelectAccount
-            withSubAccounts
-            filter={a => {
-              const accountCurrency = getAccountCurrency(a);
-              return (
-                currency === accountCurrency ||
-                (currency.type === "TokenCurrency" && currency === accountCurrency)
-              );
-            }}
-            autoFocus={true}
-            onChange={onAccountChange}
-            value={account}
-            accounts={validAccounts}
+            accounts={availableAccounts}
+            value={{ account, subAccount }}
+            onChange={onAccountSelected}
           />
         ) : (
           <AddAccount onClick={addAccount}>

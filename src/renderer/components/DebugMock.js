@@ -68,8 +68,8 @@ const helpfulEvents = [
     event: {
       type: "result",
       result: mockListAppsResult(
+        "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar",
         "Bitcoin,Tron,Litecoin,Ethereum",
-        "Bitcoin,Tron,Litecoin",
         deviceInfo155,
       ),
     },
@@ -87,6 +87,30 @@ const helpfulEvents = [
   { name: "complete", event: { type: "complete" } },
 ];
 
+const swapEvents = [
+  {
+    name: "result without Exchange",
+    event: {
+      type: "result",
+      result: mockListAppsResult(
+        "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar",
+        "Bitcoin,Tron,Litecoin,Ethereum",
+        deviceInfo155,
+      ),
+    },
+  },
+  {
+    name: "result with Exchange",
+    event: {
+      type: "result",
+      result: mockListAppsResult(
+        "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar,Exchange",
+        "Bitcoin,Tron,Litecoin,Ethereum,Exchange",
+        deviceInfo155,
+      ),
+    },
+  },
+];
 if (getEnv("MOCK")) {
   window.mock = {
     events: {
@@ -173,6 +197,7 @@ const DebugMock = () => {
   const [nonce, setNonce] = useState(0);
   const [expanded, setExpanded] = useState(true);
   const [expandedQueue, setExpandedQueue] = useState(true);
+  const [expandedSwap, setExpandedSwap] = useState(false);
   const [expandedQuick, setExpandedQuick] = useState(false);
   const [expandedHistory, setExpandedHistory] = useState(true);
 
@@ -183,18 +208,12 @@ const DebugMock = () => {
   }, 2000);
 
   const toggleExpanded = useCallback(() => setExpanded(!expanded), [expanded, setExpanded]);
-  const toggleExpandedQueue = useCallback(() => setExpandedQueue(!expandedQueue), [
-    expandedQueue,
-    setExpandedQueue,
-  ]);
-  const toggleExpandedQuick = useCallback(() => setExpandedQuick(!expandedQuick), [
-    expandedQuick,
-    setExpandedQuick,
-  ]);
+  const toggleExpandedQueue = useCallback(() => setExpandedQueue(!expandedQueue), [expandedQueue]);
+  const toggleExpandedQuick = useCallback(() => setExpandedQuick(!expandedQuick), [expandedQuick]);
   const toggleExpandedHistory = useCallback(() => setExpandedHistory(!expandedHistory), [
     expandedHistory,
-    setExpandedHistory,
   ]);
+  const toggleExpandedSwap = useCallback(() => setExpandedSwap(!expandedSwap), [expandedSwap]);
 
   const queueEvent = useCallback(
     event => {
@@ -276,6 +295,7 @@ const DebugMock = () => {
                 : null}
             </Box>
           ) : null}
+          {/* Events here are supposed to be generic and not for a specific flow */}
           <Box vertical>
             <Text
               color="palette.text.shade100"
@@ -288,6 +308,31 @@ const DebugMock = () => {
             </Text>
             {expandedQuick
               ? helpfulEvents.map(({ name, event }, i) => (
+                  <Text
+                    style={{ marginLeft: 10 }}
+                    ff="Inter|Regular"
+                    color="palette.text.shade100"
+                    fontSize={3}
+                    key={i}
+                    onClick={() => queueEvent(event)}
+                  >
+                    {name}
+                  </Text>
+                ))
+              : null}
+          </Box>
+          <Box vertical>
+            <Text
+              color="palette.text.shade100"
+              ff="Inter|SemiBold"
+              fontSize={3}
+              onClick={toggleExpandedSwap}
+            >
+              {"swap "}
+              {expandedSwap ? "[ - ]" : "[ + ]"}
+            </Text>
+            {expandedSwap
+              ? swapEvents.map(({ name, event }, i) => (
                   <Text
                     style={{ marginLeft: 10 }}
                     ff="Inter|Regular"

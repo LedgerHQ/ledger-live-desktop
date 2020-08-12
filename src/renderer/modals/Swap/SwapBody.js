@@ -4,13 +4,13 @@ import { Trans } from "react-i18next";
 import { ModalBody } from "~/renderer/components/Modal";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
 import StepSummary, { StepSummaryFooter } from "~/renderer/modals/Swap/steps/StepSummary";
-import StepDevice, { StepDeviceFooter} from "~/renderer/modals/Swap/steps/StepDevice";
+import StepDevice, { StepDeviceFooter } from "~/renderer/modals/Swap/steps/StepDevice";
 import StepFinished, { StepFinishedFooter } from "~/renderer/modals/Swap/steps/StepFinished";
 import Breadcrumb from "~/renderer/components/Stepper/Breadcrumb";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import { useDispatch } from "react-redux";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
-import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
+import { addPendingOperation, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import addToSwapHistory from "@ledgerhq/live-common/lib/swap/addToSwapHistory";
 
 type SwapSteps = "summary" | "device" | "finished";
@@ -27,6 +27,8 @@ const SwapBody = ({
   onStepChange: SwapSteps => void,
   activeStep: SwapSteps,
 }) => {
+  const { exchange } = swap;
+  const { fromAccount, fromParentAccount } = exchange;
   const [checkedDisclaimer, setCheckedDisclaimer] = useState(false);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
@@ -39,12 +41,19 @@ const SwapBody = ({
   const onDeviceInteraction = useCallback(
     result => {
       const { operation, swapId } = result;
-      const account = swap.exchange.fromAccount;
-      if (!account) return;
+      const mainAccount = getMainAccount(fromAccount, fromParentAccount);
+
+      if (!mainAccount) return;
       dispatch(
-        updateAccountWithUpdater(account.id, account =>
+        updateAccountWithUpdater(mainAccount.id, account =>
           addPendingOperation(
-            addToSwapHistory(account, operation, transaction, swap, swapId),
+            addToSwapHistory({
+              account,
+              operation,
+              transaction,
+              swap,
+              swapId,
+            }),
             operation,
           ),
         ),
@@ -52,7 +61,7 @@ const SwapBody = ({
       setResult(result);
       onStepChange("finished");
     },
-    [swap, dispatch, onStepChange, transaction],
+    [dispatch, fromAccount, fromParentAccount, onStepChange, swap, transaction],
   );
 
   const items = [
