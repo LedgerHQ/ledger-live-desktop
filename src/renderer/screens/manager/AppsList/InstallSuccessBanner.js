@@ -130,9 +130,6 @@ const InstallSuccessBanner = ({ state, isIncomplete, dispatch, addAccount, disab
                 <Button primary inverted onClick={onAddAccount} mr={1}>
                   <Trans i18nKey="manager.applist.installSuccess.manageAccount" />
                 </Button>
-                <Button onClick={onClose} color="palette.primary.contrastText">
-                  <Trans i18nKey="manager.applist.installSuccess.later" />
-                </Button>
               </Box>
             </Box>
             <LogoContainer>

@@ -2,12 +2,17 @@
 import React, { useRef, useCallback, memo } from "react";
 import { Trans } from "react-i18next";
 import styled, { css } from "styled-components";
+import { BigNumber } from "bignumber.js";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import Button from "~/renderer/components/Button";
+import type { Unit } from "@ledgerhq/live-common/lib/types";
+
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import ExternalLink from "~/renderer/icons/ExternalLink";
+
+import InputCurrency from "~/renderer/components/InputCurrency";
+import { colors } from "~/renderer/styles/theme";
 
 export const IconContainer: ThemedComponent<*> = styled.div`
   display: flex;
@@ -68,12 +73,19 @@ const SubTitle = styled(Box).attrs(() => ({
 
 const SideInfo = styled(Box)``;
 
-const RightFloating = styled.div`
-  position: absolute;
-  right: 0;
-  padding: 8px;
-  pointer-events none;
+const InputRight = styled(Box).attrs(() => ({
+  ff: "Inter|Medium",
+  color: "palette.text.shade60",
+  fontSize: 4,
+  justifyContent: "center",
+  horizontal: true,
+}))`
   opacity: 0;
+  pointer-events: none;
+  padding: 5px ${p => p.theme.space[2]}px;
+  > * {
+    color: white !important;
+  }
 `;
 
 const InputBox = styled(Box).attrs(() => ({
@@ -81,36 +93,33 @@ const InputBox = styled(Box).attrs(() => ({
   alignItems: "center",
 }))`
   position: relative;
-  flex-basis: 150px;
+  flex-basis: 160px;
   height: 32px;
-  &:focus > ${RightFloating}, &:focus-within > ${RightFloating} {
+  &:focus ${InputRight}, &:focus-within ${InputRight} {
     opacity: 1;
     pointer-events: auto;
   }
+  #input-error {
+    font-size: 10px;
+    padding-bottom: 4px;
+  }
 `;
 
-const VoteInput = styled.input.attrs(() => ({
-  type: "text",
-  step: 1,
-  min: 0,
-  pattern: "[0-9]",
-  placeholder: 0,
-}))`
-  cursor: pointer;
-  flex: 1;
-  text-align: left;
-  font-size: 13px;
-  font-weight: 600;
-  height: 100%;
-  padding: 0 8px;
-  background-color: rgba(0, 0, 0, 0);
-  border: 1px solid transparent;
+const MaxButton = styled.button`
+  background-color: ${p => p.theme.colors.palette.primary.main};
+  color: ${p => p.theme.colors.palette.primary.contrastText}!important;
+  border: none;
   border-radius: 4px;
-  border-color: ${p => (p.notEnoughVotes ? p.theme.colors.pearl : p.theme.colors.palette.divider)};
-  &:disabled {
-    cursor: disabled;
-    color: ${p => p.theme.colors.palette.text.shade40};
-    background-color: ${p => p.theme.colors.palette.background.default};
+  padding: 0px ${p => p.theme.space[2]}px;
+  margin: 0 2.5px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 200ms ease-out;
+  &:hover {
+    filter: contrast(2);
   }
 `;
 
@@ -173,10 +182,12 @@ type ValidatorRowProps = {
   maxAvailable?: number,
   notEnoughVotes?: boolean,
   onClick?: (*) => void,
-  Input?: React$Node,
   onUpdateVote?: (string, string) => void,
   onExternalLink: (address: string) => void,
   style?: *,
+  unit: Unit,
+  onMax?: () => void,
+  shouldRenderMax?: boolean,
 };
 
 const ValidatorRow = ({
@@ -187,13 +198,15 @@ const ValidatorRow = ({
   sideInfo,
   value,
   disabled,
-  Input,
   onUpdateVote,
   onExternalLink,
   maxAvailable = 0,
   notEnoughVotes,
   onClick = () => {},
   style,
+  unit,
+  onMax,
+  shouldRenderMax,
 }: ValidatorRowProps) => {
   const inputRef = useRef();
   const onTitleClick = useCallback(
@@ -203,18 +216,15 @@ const ValidatorRow = ({
     },
     [validator, onExternalLink],
   );
-  const onFocus = useCallback(() => {
-    inputRef.current && inputRef.current.select();
-  }, []);
 
   const onChange = useCallback(
     e => {
-      onUpdateVote && onUpdateVote(validator.address, e.target.value);
+      onUpdateVote && onUpdateVote(validator.address, e);
     },
     [validator, onUpdateVote],
   );
-  const onMax = useCallback(() => {
-    onUpdateVote && onUpdateVote(validator.address, String(maxAvailable + (value || 0)));
+  const onMaxHandler = useCallback(() => {
+    onUpdateVote && onUpdateVote(validator.address, BigNumber(value || 0).plus(maxAvailable));
   }, [validator, onUpdateVote, maxAvailable, value]);
 
   /** focus input on row click */
@@ -227,36 +237,30 @@ const ValidatorRow = ({
 
   const itemExists = typeof value === "number";
 
-  const input =
-    Input ||
-    (onUpdateVote ? (
-      <InputBox active={!!value}>
-        <VoteInput
-          // $FlowFixMe
-          ref={inputRef}
-          placeholder="0"
-          type="text"
-          maxLength="12"
-          notEnoughVotes={itemExists && notEnoughVotes}
-          value={itemExists ? String(value) : "0"}
-          disabled={disabled}
-          onFocus={onFocus}
-          onChange={onChange}
-        />
-        {!maxAvailable || disabled ? null : (
-          <RightFloating>
-            <Button
-              onClick={onMax}
-              style={{ fontSize: "10px", padding: "0 8px", height: 22 }}
-              primary
-              small
-            >
-              <Trans i18nKey="vote.steps.castVotes.max" />
-            </Button>
-          </RightFloating>
-        )}
-      </InputBox>
-    ) : null);
+  const input = onUpdateVote && (
+    <InputBox active={!!value}>
+      <InputCurrency
+        containerProps={{
+          grow: true,
+          style: { height: 32, zIndex: 10, borderColor: colors.lightFog },
+        }}
+        unit={unit}
+        error={itemExists && notEnoughVotes}
+        disabled={disabled}
+        value={BigNumber(value)}
+        onChange={onChange}
+        renderRight={
+          <InputRight>
+            {shouldRenderMax && (
+              <MaxButton onClick={onMax || onMaxHandler}>
+                <Trans i18nKey="vote.steps.castVotes.max" />
+              </MaxButton>
+            )}
+          </InputRight>
+        }
+      />
+    </InputBox>
+  );
 
   return (
     <Row style={style} disabled={!value && disabled} active={!!value} onClick={onRowClick}>

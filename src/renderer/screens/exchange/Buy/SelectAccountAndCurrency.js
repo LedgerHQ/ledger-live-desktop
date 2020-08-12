@@ -1,27 +1,31 @@
 // @flow
 
-import invariant from "invariant";
-import React, { useState, useMemo, useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import Exchange from "~/renderer/icons/Exchange";
 import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
 import { useTranslation } from "react-i18next";
-import { getAccountsForCurrency, useCoinifyCurrencies } from "~/renderer/screens/exchange/hooks";
-import { SelectAccount } from "~/renderer/components/SelectAccount";
+import { useCoinifyCurrencies } from "~/renderer/screens/exchange/hooks";
+import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
 import Label from "~/renderer/components/Label";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Button from "~/renderer/components/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { accountsSelector } from "~/renderer/reducers/accounts";
-import type { Account, CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  AccountLike,
+  CryptoCurrency,
+  TokenCurrency,
+} from "@ledgerhq/live-common/lib/types";
 import FakeLink from "~/renderer/components/FakeLink";
 import PlusIcon from "~/renderer/icons/Plus";
 import { openModal } from "~/renderer/actions/modals";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
 import { track } from "~/renderer/analytics/segment";
+import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 
 const Container: ThemedComponent<{}> = styled.div`
   width: 365px;
@@ -58,12 +62,8 @@ const FormContent: ThemedComponent<{}> = styled.div`
 `;
 
 type Props = {
-  selectAccount: (account: Account) => void,
-};
-
-type State = {
-  currency: ?(CryptoCurrency | TokenCurrency),
-  account: ?Account,
+  selectAccount: (account: AccountLike, parentAccount: ?Account) => void,
+  defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
 };
 
 const AccountSelectorLabel = styled(Label)`
@@ -72,43 +72,21 @@ const AccountSelectorLabel = styled(Label)`
   justify-content: space-between;
 `;
 
-const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
+const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency }: Props) => {
   const { t } = useTranslation();
+  const allCurrencies = useCoinifyCurrencies();
   const allAccounts = useSelector(accountsSelector);
 
-  const currencies = useCoinifyCurrencies();
-  const [{ currency, account }, setState] = useState<State>(() => {
-    const defaultCurrency = currencies.length ? currencies[0] : null;
-
-    return {
-      currency: defaultCurrency,
-      account: null,
-    };
-  });
-
-  // this effect make sure to set the bottom select to a newly created account
-  useEffect(() => {
-    if (!currency) return;
-    if (account && account.currency === currency) return; // already of the current currency
-    setState(oldState => {
-      const accountsForDefaultCurrency = getAccountsForCurrency(currency, allAccounts);
-      const defaultAccount = accountsForDefaultCurrency.length
-        ? accountsForDefaultCurrency[0]
-        : null;
-
-      return {
-        ...oldState,
-        account: defaultAccount,
-      };
-    });
-  }, [allAccounts, account, currency]);
+  const {
+    availableAccounts,
+    currency,
+    account,
+    subAccount,
+    setAccount,
+    setCurrency,
+  } = useCurrencyAccountSelect(allCurrencies, allAccounts);
 
   const dispatch = useDispatch();
-
-  const accounts = useMemo(() => (currency ? getAccountsForCurrency(currency, allAccounts) : []), [
-    currency,
-    allAccounts,
-  ]);
 
   const openAddAccounts = useCallback(() => {
     dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
@@ -125,20 +103,7 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
       <FormContainer>
         <FormContent>
           <Label>{t("exchange.buy.selectCrypto")}</Label>
-          <SelectCurrency
-            onChange={currency => {
-              invariant(!currency || currency.type !== "FiatCurrency", "not a fiat currency");
-              const accountsForSelectedcurrency = currency
-                ? getAccountsForCurrency(currency, allAccounts)
-                : [];
-              setState({
-                currency,
-                account: accountsForSelectedcurrency.length ? accountsForSelectedcurrency[0] : null,
-              });
-            }}
-            currencies={currencies}
-            value={currency || undefined}
-          />
+          <SelectCurrency onChange={setCurrency} currencies={allCurrencies} value={currency} />
         </FormContent>
         <FormContent>
           <AccountSelectorLabel>
@@ -148,17 +113,13 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
               <Text style={{ marginLeft: 4 }}>{t("exchange.buy.addAccount")}</Text>
             </FakeLink>
           </AccountSelectorLabel>
-          <SelectAccount
-            accounts={accounts}
-            isDisabled={accounts.length === 0}
-            onChange={(account, tokenAccount) => {
-              setState(oldState => ({
-                ...oldState,
-                account: account ? getMainAccount(account, tokenAccount) : null, // supporting tokenAccount would need to change this!
-              }));
-            }}
-            value={account}
-          />
+          {currency ? (
+            <SelectAccount
+              accounts={availableAccounts}
+              value={{ account, subAccount }}
+              onChange={setAccount}
+            />
+          ) : null}
         </FormContent>
         <FormContent>
           <ConfirmButton
@@ -166,10 +127,14 @@ const SelectAccountAndCurrency = ({ selectAccount }: Props) => {
             onClick={() => {
               if (account) {
                 track("Buy Crypto Continue Button", {
-                  currencyName: account.currency.name,
+                  currencyName: getAccountCurrency(account).name,
                   isEmpty: isAccountEmpty(account),
                 });
-                selectAccount(account);
+                if (subAccount) {
+                  selectAccount(subAccount, account);
+                } else {
+                  selectAccount(account);
+                }
               }
             }}
             disabled={!account}

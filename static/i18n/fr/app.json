@@ -206,6 +206,33 @@
       "hideToken": "Masquer le token"
     }
   },
+  "help": {
+    "title": "Aide & Assistance",
+    "gettingStarted": {
+      "title": "Commencer",
+      "desc": "Commencer ici"
+    },
+    "helpCenter": {
+      "title": "Assistance Ledger",
+      "desc": "Obtenir de l’aide"
+    },
+    "ledgerAcademy": {
+      "title": "Ledger Academy",
+      "desc": "Comprendre les cryptos"
+    },
+    "facebook": {
+      "title": "Facebook",
+      "desc": "Likez notre page"
+    },
+    "twitter": {
+      "title": "Twitter",
+      "desc": "Nous suivre"
+    },
+    "github": {
+      "title": "Github",
+      "desc": "Examinez notre code"
+    }
+  },
   "blacklistToken": {
     "title": "Masquer le token",
     "desc": "Cette action masquera tous les comptes <1><0>{{tokenName}}</0></1>, vous pouvez restaurer leur visibilité à tout moment dans les <3>Paramètres</3>",
@@ -216,23 +243,23 @@
     "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge",
     "ledgerAcademy": {
       "title": "Ledger Academy",
-      "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
-      "cta": "Start learning"
+      "description": "Tout ce que vous devez savoir sur la blockchain, la sécurité, la cryptomonnaie et votre appareil Ledger",
+      "cta": "Commencer à apprendre"
     },
     "stakeCosmos": {
-      "title": "Staking with COSMOS",
-      "description": "Delegate your ATOM coins through the account page and earn rewards today",
-      "cta": "Stake Cosmos now"
+      "title": "Staking avec COSMOS",
+      "description": "Déléguez vos ATOM via la page du compte et obtenez des récompenses aujourd'hui",
+      "cta": "Stakez du Cosmos maintenant"
     },
     "buyCrypto": {
-      "title": "Buy Crypto",
-      "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
-      "cta": "Buy now"
+      "title": "Acheter des crypto-monnaies",
+      "description": "Achetez des crypto-actifs via notre partenaire et recevez les directement dans votre compte Ledger",
+      "cta": "Acheter maintenant"
     },
     "backupPack": {
       "title": "Back-up pack",
-      "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
-      "cta": "Buy back-up pack"
+      "description": "Gérez vos actifs en toute sécurité avec un Nano X et un Nano S à un prix réduit",
+      "cta": "Acheter un back-up pack"
     }
   },
   "dashboard": {
@@ -449,7 +476,7 @@
       "installed": "Apps",
       "capacity": "Capacité",
       "used": "Utilisé",
-      "firmwareAvailable": "Firmware is outdated:",
+      "firmwareAvailable": "Le Firmware est obsolète:",
       "firmwareUpToDate": "Le firmware est à jour:",
       "genuine": "L'appareil est authentique",
       "incomplete": "Certaines applications n'ont pas été reconnues. Veuillez les désinstaller et les réinstaller."
@@ -476,8 +503,7 @@
       "installSuccess": {
         "title": "Application installée avec succès. Vous pouvez maintenant ajouter vos comptes {{app}}",
         "title_plural": "Applications installée avec succès. Vous pouvez maintenant ajouter vos comptes {{app}}",
-        "manageAccount": "Gérer mes comptes",
-        "later": "Plus tard"
+        "manageAccount": "Gérer mes comptes"
       },
       "updatable": {
         "title": "Mises à jour disponibles",
@@ -535,14 +561,14 @@
     "firmware": {
       "updateLater": "Annuler",
       "seedReady": "J'ai ma phrase de récupération",
-      "dontHaveSeed": "Vous n'avez pas votre phrase de récupération",
+      "dontHaveSeed": "Don't have your Recovery phrase? ",
       "followTheGuide": "Suivez notre guide de mise à jour étape par étape",
       "removeApps": "Désinstaller toutes les apps avant de mettre à jour",
       "update": "Mettre à jour",
       "updateBtn": "Mettre à jour",
       "latest": "La version {{version}} du firmware est disponible.",
-      "contactSupport": "Contact support",
-      "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
+      "contactSupport": "Contactez l'assistance",
+      "deprecated": "La version du firmware de l'appareil est trop ancienne pour être mise à jour. Contactez le support Ledger pour un remplacement.",
       "prepareSeed": "Assurez-vous que votre phrase de récupération de 24 mots est écrite sur votre feuille de récupération et accessible, par précaution.",
       "disclaimerTitle": "Vous êtes sur le point d’installer la <1>version {{version}}</1> du firmware.",
       "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour"
@@ -715,7 +741,8 @@
   },
   "buy": {
     "title": "Acheter",
-    "titleCrypto": "Acheter {{currency}}"
+    "titleCrypto": "Acheter {{currency}}",
+    "buyCTA": "Buy {{currencyTicker}}"
   },
   "receive": {
     "title": "Recevoir",
@@ -902,14 +929,14 @@
     }
   },
   "bitcoin": {
-    "advanced": "Advanced options",
+    "advanced": "Options avancées",
     "rbf": "Replace-by-fee (RBF)",
     "pickUnconfirmedRBF": "autoriser les transactions remplaçables non confirmées",
-    "pickingStrategy": "UTXO picking strategy",
+    "pickingStrategy": "Stratégie de sélection UTXO",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "Deep outputs first (FIFO)",
-      "OPTIMIZE_SIZE": "Optimize size (minimize fees)",
-      "MERGE_OUTPUTS": "merge outputs"
+      "DEEP_OUTPUTS_FIRST": "First In First Out (FIFO)",
+      "OPTIMIZE_SIZE": "Optimiser la taille (minimiser les frais)",
+      "MERGE_OUTPUTS": "Fusionner les sorties"
     }
   },
   "cosmos": {
@@ -935,7 +962,7 @@
       "estYield": "Rend. est.",
       "activeTooltip": "Les montants délégués génèrent des récompenses",
       "inactiveTooltip": "Les montants dont la délégation est interrompue ne génèrent plus de récompenses",
-      "minSafeWarning": "Pour commencer à déléguer en toute sécurité, vous avez besoin d'au moins {{amount}}",
+      "minSafeWarning": "Fonds insuffisants",
       "flow": {
         "title": "Déléguer",
         "steps": {
@@ -1135,7 +1162,7 @@
           "title": "Sélectionner un validateur",
           "description": "Vous pouvez sélectionner un validateur en comparant les taux de rendement estimés",
           "customValidator": "Validateur personnalisé",
-          "providedBy": "Taux de rendements fournis par <1><0>MyTezosBaker</0></1>"
+          "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
         },
         "custom": {
           "title": "Validateur personnalisé",
@@ -1174,9 +1201,17 @@
   "asset": {
     "notice": "Résumé de tous les comptes {{currency}}"
   },
+  "carousel": {
+    "hidden": {
+      "close": "Confirm",
+      "undo": "Show again",
+      "disclaimer": "This banner will not show up again until there is a new announcement"
+    }
+  },
   "settings": {
     "title": "Paramètres",
     "discreet": "Basculer en mode discret",
+    "helpButton": "Aide",
     "tabs": {
       "display": "Général",
       "cryptoAssets": "Crypto-actifs",
@@ -1217,7 +1252,9 @@
       "region": "Région",
       "regionDesc": "Choisissez votre région pour définir le fuseau horaire de Ledger Live.",
       "stock": "Indicateur de marché régional",
-      "stockDesc": "Choisissez Western pour afficher les hausses du marché en bleu ou Eastern pour les afficher en rouge."
+      "stockDesc": "Choisissez Western pour afficher les hausses du marché en bleu ou Eastern pour les afficher en rouge.",
+      "carouselVisibility": "Carousel visibility",
+      "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
       "desc": "Modifier les paramètres pour chacun de vos crypto-actifs",
@@ -1279,7 +1316,7 @@
     },
     "hardResetModal": {
       "title": "Réinitialiser Ledger Live",
-      "desc": "Supprimer toutes les données Ledger Live stockées sur votre ordinateur, y compris vos comptes, historiques de transactions et paramètres. Les clés privées donnant accès à vos crypto-actifs sont conservées en toute sécurité sur votre appareil Ledger et votre fiche de récupération."
+      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your Recovery phrase."
     },
     "softResetModal": {
       "title": "Vider le cache",
@@ -1603,7 +1640,7 @@
   },
   "TransactionConfirm": {
     "title": "Veuillez confirmer l'opération sur votre appareil pour la finaliser",
-    "warning": "Toujours vérifier que l'adresse affichée sur votre appareil correspond exactement à celle donnée par le {{recipientWording}}",
+    "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
       "send": "Veuillez confirmer sur votre appareil pour finaliser l'opération",

@@ -244,7 +244,7 @@ const DeviceStorage = ({
 }: Props) => {
   const shouldWarn = distribution.shouldWarnMemory || isIncomplete;
 
-  const firmwareOutdated = manager.firmwareUnsupported(deviceModel.id, deviceInfo) || !firmware;
+  const firmwareOutdated = manager.firmwareUnsupported(deviceModel.id, deviceInfo) || firmware;
 
   return (
     <Card p={20} mb={4} horizontal>

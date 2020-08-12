@@ -206,6 +206,33 @@
       "hideToken": "Hide token"
     }
   },
+  "help": {
+    "title": "Help & Support",
+    "gettingStarted": {
+      "title": "Getting started",
+      "desc": "Start here"
+    },
+    "helpCenter": {
+      "title": "Ledger Support",
+      "desc": "Get help"
+    },
+    "ledgerAcademy": {
+      "title": "Ledger Academy",
+      "desc": "Learn crypto"
+    },
+    "facebook": {
+      "title": "Facebook",
+      "desc": "Like our page"
+    },
+    "twitter": {
+      "title": "Twitter",
+      "desc": "Follow us"
+    },
+    "github": {
+      "title": "Github",
+      "desc": "Review our code"
+    }
+  },
   "blacklistToken": {
     "title": "Hide token",
     "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can show them again using <3>Settings</3>",
@@ -476,8 +503,7 @@
       "installSuccess": {
         "title": "App installed successfully. You can now add your {{app}} accounts",
         "title_plural": "Apps installed successfully. You can now add your accounts",
-        "manageAccount": "Manage my accounts",
-        "later": "Do it later"
+        "manageAccount": "Manage my accounts"
       },
       "updatable": {
         "title": "Updates available",
@@ -535,7 +561,7 @@
     "firmware": {
       "updateLater": "Cancel",
       "seedReady": "I have my Recovery phrase",
-      "dontHaveSeed": "You don't have your Recovery phrase",
+      "dontHaveSeed": "Don't have your Recovery phrase? ",
       "followTheGuide": "Follow our step by step update guide",
       "removeApps": "Uninstall all apps before updating",
       "update": "Firmware update",
@@ -715,7 +741,8 @@
   },
   "buy": {
     "title": "Buy",
-    "titleCrypto": "Buy {{currency}}"
+    "titleCrypto": "Buy {{currency}}",
+    "buyCTA": "Buy {{currencyTicker}}"
   },
   "receive": {
     "title": "受信",
@@ -935,7 +962,7 @@
       "estYield": "est. yield",
       "activeTooltip": "Delegated amounts generate rewards",
       "inactiveTooltip": "Undelegated amounts do not generate rewards",
-      "minSafeWarning": "To safely start delegating you need at least {{amount}}",
+      "minSafeWarning": "Not enough funds",
       "flow": {
         "title": "Delegate",
         "steps": {
@@ -1135,7 +1162,7 @@
           "title": "Select validator",
           "description": "You can select a validator by comparing the estimated reward rates",
           "customValidator": "Custom validator",
-          "providedBy": "Yield rates provided by <1><0>MyTezosBaker</0></1>"
+          "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
         },
         "custom": {
           "title": "Custom validator",
@@ -1174,9 +1201,17 @@
   "asset": {
     "notice": "Summary of all {{currency}} accounts"
   },
+  "carousel": {
+    "hidden": {
+      "close": "Confirm",
+      "undo": "Show again",
+      "disclaimer": "This banner will not show up again until there is a new announcement"
+    }
+  },
   "settings": {
     "title": "設定",
     "discreet": "Toggle discreet mode",
+    "helpButton": "Help",
     "tabs": {
       "display": "一般",
       "cryptoAssets": "Crypto assets",
@@ -1217,7 +1252,9 @@
       "region": "地域",
       "regionDesc": "Choose your region to set the time zone of Ledger Live.",
       "stock": "地域市場インジケータ",
-      "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red."
+      "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
+      "carouselVisibility": "Carousel visibility",
+      "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
       "desc": "Change settings for each of your crypto assets",
@@ -1279,7 +1316,7 @@
     },
     "hardResetModal": {
       "title": "Ledger Liveをリセット",
-      "desc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings? The private keys to access your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your Recovery phrase."
     },
     "softResetModal": {
       "title": "キャッシュを削除",
@@ -1603,7 +1640,7 @@
   },
   "TransactionConfirm": {
     "title": "Please confirm the operation on your device to finalize it",
-    "warning": "Always verify the address displayed your device exactly matches the one given by the {{recipientWording}}",
+    "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
       "send": "Please confirm on your device to finalize the operation",

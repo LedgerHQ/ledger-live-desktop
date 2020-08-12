@@ -2,7 +2,14 @@
 
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 
-export const supportedCurrenciesIds = ["bitcoin", "ethereum", "bitcoin_cash", "dash"];
+export const supportedCurrenciesIds = [
+  "bitcoin",
+  "ethereum",
+  "bitcoin_cash",
+  "dash",
+  "stellar",
+  "ethereum/erc20/usd_tether__erc20_",
+];
 
 export const isCurrencySupported = (currency: TokenCurrency | CryptoCurrency) =>
   supportedCurrenciesIds.includes(currency.id);

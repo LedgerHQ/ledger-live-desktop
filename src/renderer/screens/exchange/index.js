@@ -1,8 +1,8 @@
 // @flow
 import React, { useState } from "react";
 import styled from "styled-components";
-import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
+import { useLocation } from "react-router-dom";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import TabBar from "~/renderer/components/TabBar";
 import Card from "~/renderer/components/Box/Card";
@@ -18,27 +18,28 @@ const Container: ThemedComponent<{ selectable: boolean, pb: number }> = styled(B
 const tabs = [
   {
     title: "exchange.buy.tab",
-    component: <Buy />,
+    component: Buy,
   },
   {
     title: "exchange.history.tab",
-    component: <History />,
+    component: History,
   },
 ];
 
 const Exchange = () => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const location = useLocation();
   const { t } = useTranslation();
+  const Component = tabs[activeTabIndex].component;
 
   return (
     <Container pb={6} selectable>
-      <TrackPage category="Exchange" />
       <Box ff="Inter|SemiBold" fontSize={7} color="palette.text.shade100" id="exchange-title">
         {t("exchange.title")}
       </Box>
       <TabBar tabs={tabs.map(tab => t(tab.title))} onIndexChange={setActiveTabIndex} />
       <Card grow style={{ overflow: "hidden" }}>
-        {tabs[activeTabIndex].component}
+        <Component {...location?.state} />
       </Card>
     </Container>
   );

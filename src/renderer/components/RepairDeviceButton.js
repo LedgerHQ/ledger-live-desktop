@@ -91,7 +91,7 @@ const RepairDeviceButton = ({ onRepair, buttonProps }: Props) => {
 
   return (
     <>
-      <Button {...buttonProps} primary onClick={open} event="RepairDeviceButton">
+      <Button {...buttonProps} onClick={open} event="RepairDeviceButton">
         {t("settings.repairDevice.button")}
       </Button>
       <RepairModal

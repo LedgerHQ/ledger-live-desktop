@@ -9,6 +9,7 @@ import {
   useSortedSr,
   SR_MAX_VOTES,
 } from "@ledgerhq/live-common/lib/families/tron/react";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import type { Vote } from "@ledgerhq/live-common/lib/families/tron/types";
@@ -50,9 +51,11 @@ const AmountField = ({ t, account, onChangeVotes, status, bridgePending, votes }
   const votesSelected = votes.length;
   const max = Math.max(0, votesAvailable - votesUsed);
 
+  const unit = getAccountUnit(account);
+
   const onUpdateVote = useCallback(
     (address, value) => {
-      const raw = value ? parseInt(value.replace(/[^0-9]/g, ""), 10) : 0;
+      const raw = value ? parseInt(value.toString(), 10) : 0;
       const voteCount = raw <= 0 || votesSelected > SR_MAX_VOTES ? 0 : raw;
       onChangeVotes(existing => {
         const update = existing.filter(v => v.address !== address);
@@ -95,6 +98,7 @@ const AmountField = ({ t, account, onChangeVotes, status, bridgePending, votes }
   const renderItem = useCallback(
     ({ sr, rank, isSR }, i) => {
       const item = votes.find(v => v.address === sr.address);
+      const disabled = !item && votesSelected >= SR_MAX_VOTES;
       return (
         <ValidatorRow
           key={`SR_${sr.address}_${i}`}
@@ -116,13 +120,25 @@ const AmountField = ({ t, account, onChangeVotes, status, bridgePending, votes }
           value={item && item.voteCount}
           onUpdateVote={onUpdateVote}
           onExternalLink={onExternalLink}
-          disabled={!item && votesSelected >= SR_MAX_VOTES}
+          disabled={disabled}
           notEnoughVotes={notEnoughVotes}
           maxAvailable={maxAvailable}
+          // dont allow for decimals
+          unit={{ ...unit, magnitude: 0 }}
+          shouldRenderMax={maxAvailable > 0 && !disabled}
         />
       );
     },
-    [votes, language, onUpdateVote, onExternalLink, notEnoughVotes, maxAvailable, votesSelected],
+    [
+      votes,
+      language,
+      onUpdateVote,
+      onExternalLink,
+      notEnoughVotes,
+      maxAvailable,
+      votesSelected,
+      unit,
+    ],
   );
 
   if (!status) return null;

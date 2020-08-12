@@ -41,6 +41,10 @@ export default (
     paddingLeft: 15,
     color: theme.colors.palette.text.shade100,
   }),
+  singleValue: (styles: Object) => ({
+    ...styles,
+    overflow: "visible",
+  }),
   input: (styles: Object) => ({
     ...styles,
     color: theme.colors.palette.text.shade80,

@@ -1,6 +1,7 @@
 // @flow
 
 import type { TFunction } from "react-i18next";
+import { BigNumber } from "bignumber.js";
 import type {
   Account,
   AccountLike,
@@ -34,6 +35,10 @@ export type StepProps = {
   onRetry: void => void,
   setSigned: boolean => void,
   signed: boolean,
+  maybeRecipient?: string,
+  onResetMaybeRecipient: () => void,
+  maybeAmount?: BigNumber,
+  onResetMaybeAmount: () => void,
 };
 
 export type St = Step<StepId, StepProps>;

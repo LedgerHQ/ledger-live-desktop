@@ -9,6 +9,8 @@ import { supportedCurrenciesIds } from "./config";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 import type { Account } from "@ledgerhq/live-common/lib/types/account";
+import { useSelector } from "react-redux";
+import { blacklistedTokenIdsSelector } from "~/renderer/reducers/settings";
 
 export const useCoinifyCurrencies = () => {
   const devMode = useEnv("MANAGER_DEV_MODE");
@@ -21,11 +23,13 @@ export const useCoinifyCurrencies = () => {
   // sorting them by marketcap
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
 
+  const blacklistedTokenIds = useSelector(blacklistedTokenIdsSelector);
   // cherry picking only those available in coinify
 
   /** $FlowFixMe */
-  const supportedCryptoCurrencies = sortedCryptoCurrencies.filter(currency =>
-    supportedCurrenciesIds.includes(currency.id),
+  const supportedCryptoCurrencies = sortedCryptoCurrencies.filter(
+    currency =>
+      supportedCurrenciesIds.includes(currency.id) && !blacklistedTokenIds.includes(currency.id),
   );
 
   return supportedCryptoCurrencies;

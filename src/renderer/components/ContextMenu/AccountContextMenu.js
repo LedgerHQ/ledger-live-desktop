@@ -107,9 +107,16 @@ class AccountContextMenu extends PureComponent<Props> {
   };
 
   render() {
-    const { leftClick, children } = this.props;
+    const { leftClick, children, account } = this.props;
+    const currency = getAccountCurrency(account);
+
     return (
-      <ContextMenuItem leftClick={leftClick} items={this.getContextMenuItems()}>
+      <ContextMenuItem
+        event={account.type === "Account" ? "Account right click" : "Token right click"}
+        eventProperties={{ currencyName: currency.name }}
+        leftClick={leftClick}
+        items={this.getContextMenuItems()}
+      >
         {children}
       </ContextMenuItem>
     );
