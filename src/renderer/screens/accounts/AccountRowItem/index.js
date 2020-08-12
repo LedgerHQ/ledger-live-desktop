@@ -14,7 +14,7 @@ import Box from "~/renderer/components/Box";
 import AccountContextMenu from "~/renderer/components/ContextMenu/AccountContextMenu";
 import Text from "~/renderer/components/Text";
 import TokenRow from "~/renderer/components/TokenRow";
-import IconAngleDown from "~/renderer/icons/AngleDown";
+import AngleDown from "~/renderer/icons/AngleDown";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import { matchesSearch } from "../AccountList";
@@ -114,6 +114,13 @@ const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled(B
     margin-left: 8px;
     transform: rotate(${p => (p.expanded ? "180deg" : "0deg")});
   }
+`;
+
+const IconAngleDown = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: ${p => (p.expanded ? "rotate(180deg)" : "rotate(0deg)")};
 `;
 
 type Props = {
@@ -296,7 +303,9 @@ class AccountRowItem extends PureComponent<Props, State> {
                     values={{ tokenCount: tokens.length }}
                   />
                 </Text>
-                <IconAngleDown size={16} />
+                <IconAngleDown expanded={expanded}>
+                  <AngleDown size={16} />
+                </IconAngleDown>
               </Box>
             </TokenShowMoreIndicator>
           )}
