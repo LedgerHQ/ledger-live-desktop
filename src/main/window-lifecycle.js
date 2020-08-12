@@ -77,16 +77,12 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
     ...defaultWindowOptions,
     x: windowPosition.x,
     y: windowPosition.y,
-    /* eslint-disable indent */
     ...(process.platform === "darwin"
       ? {
           frame: false,
           titleBarStyle: "hiddenInset",
         }
-      : process.platform === "linux"
-      ? { icon: path.join(__dirname, "/build/icons/icon.png") } // specific for linux icon
       : {}),
-    /* eslint-enable indent */
     width,
     height,
     minWidth: MIN_WIDTH,
