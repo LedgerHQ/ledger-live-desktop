@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import type { OperationType } from "@ledgerhq/live-common/lib/types";
 
-import { rgba } from "~/renderer/styles/helpers";
+import { rgba, mix } from "~/renderer/styles/helpers";
 
 import type { TFunction } from "react-i18next";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -51,17 +51,17 @@ function inferColor(p) {
   }
 }
 
-const Container: ThemedComponent<{
+export const Container: ThemedComponent<{
   isConfirmed: boolean,
   type: string,
   marketColor: string,
   hasFailed?: boolean,
 }> = styled(Box).attrs(p => ({
   bg: p.hasFailed
-    ? rgba(p.theme.colors.alertRed, 0.05)
+    ? mix(p.theme.colors.alertRed, p.theme.colors.palette.background.paper, 0.95)
     : p.isConfirmed
-    ? rgba(inferColor(p), 0.2)
-    : "none",
+    ? mix(inferColor(p), p.theme.colors.palette.background.paper, 0.8)
+    : p.theme.colors.palette.background.paper,
   color: p.hasFailed ? p.theme.colors.alertRed : inferColor(p),
   alignItems: "center",
   justifyContent: "center",

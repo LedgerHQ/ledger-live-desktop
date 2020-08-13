@@ -67,6 +67,8 @@ import {
   Separator,
   HashContainer,
 } from "./styledComponents";
+import Tooltip from "~/renderer/components/Chart2/Tooltip";
+import ToolTip from "~/renderer/components/Tooltip";
 
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const marketIndicator = marketIndicatorSelector(state);
@@ -147,6 +149,13 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
   const isConfirmed = confirmations >= confirmationsNb;
 
   const specific = byFamiliesOperationDetails[mainAccount.currency.family];
+
+  const IconElement =
+    specific && specific.confirmationCell ? specific.confirmationCell[operation.type] : null;
+
+  const AmountTooltip =
+    specific && specific.amountTooltip ? specific.amountTooltip[operation.type] : null;
+
   const urlWhatIsThis =
     specific && specific.getURLWhatIsThis && specific.getURLWhatIsThis(operation);
   const urlFeesInfo = specific && specific.getURLFeesInfo && specific.getURLFeesInfo(operation);
@@ -213,17 +222,33 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
             currencyName={currency.name}
           />
           <Box alignItems="center" mt={1}>
-            <ConfirmationCheck
-              marketColor={marketColor}
-              isConfirmed={isConfirmed}
-              hasFailed={hasFailed}
-              style={{
-                transform: "scale(1.5)",
-              }}
-              t={t}
-              type={type}
-              withTooltip={false}
-            />
+            {IconElement ? (
+              <IconElement
+                operation={operation}
+                marketColor={marketColor}
+                isConfirmed={isConfirmed}
+                hasFailed={hasFailed}
+                style={{
+                  transform: "scale(1.5)",
+                  paddingLeft: 0,
+                }}
+                t={t}
+                type={type}
+                withTooltip={false}
+              />
+            ) : (
+              <ConfirmationCheck
+                marketColor={marketColor}
+                isConfirmed={isConfirmed}
+                hasFailed={hasFailed}
+                t={t}
+                style={{
+                  transform: "scale(1.5)",
+                }}
+                type={type}
+                withTooltip={false}
+              />
+            )}
           </Box>
           <Box my={4} alignItems="center">
             {!amount.isZero() && (
@@ -234,15 +259,23 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                       <Trans i18nKey="operationDetails.failed" />
                     </Box>
                   ) : (
-                    <FormattedVal
-                      color={amount.isNegative() ? "palette.text.shade80" : undefined}
-                      unit={unit}
-                      alwaysShowSign
-                      showCode
-                      val={amount}
-                      fontSize={7}
-                      disableRounding
-                    />
+                    <ToolTip
+                      content={
+                        AmountTooltip ? (
+                          <AmountTooltip operation={operation} amount={amount} unit={unit} />
+                        ) : null
+                      }
+                    >
+                      <FormattedVal
+                        color={amount.isNegative() ? "palette.text.shade80" : undefined}
+                        unit={unit}
+                        alwaysShowSign
+                        showCode
+                        val={amount}
+                        fontSize={7}
+                        disableRounding
+                      />
+                    </ToolTip>
                   )}
                 </Box>
                 <Box mt={1} selectable>
@@ -361,7 +394,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
           </Box>
           <B />
           <Box horizontal flow={2}>
-            {isNegative && (
+            {(isNegative || fee) && (
               <Box flex={1}>
                 <Box horizontal>
                   <OpDetailsTitle>{t("operationDetails.fees")}</OpDetailsTitle>

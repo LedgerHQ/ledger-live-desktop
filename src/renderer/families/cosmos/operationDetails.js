@@ -341,7 +341,7 @@ const UndelegateAmountCell = ({ operation, currency, unit }: Props) => {
   );
 };
 
-const amountCell: { [key: string]: ComponentType<any> } = {
+const amountCellExtra: { [key: string]: ComponentType<any> } = {
   REDELEGATE: RedelegateAmountCell,
   UNDELEGATE: UndelegateAmountCell,
 };
@@ -350,5 +350,5 @@ export default {
   getURLFeesInfo,
   getURLWhatIsThis,
   OperationDetailsExtra,
-  amountCell,
+  amountCellExtra,
 };

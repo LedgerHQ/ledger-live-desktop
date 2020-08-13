@@ -459,7 +459,9 @@
       "undelegatedAmount": "Undelegated amount",
       "rewardFrom": "Reward from",
       "rewardAmount": "Amount collected",
-      "memo": "Memo"
+      "memo": "Memo",
+      "assetId": "Asset ID",
+      "rewards": "Earned rewards"
     }
   },
   "operationList": {
@@ -1122,6 +1124,9 @@
     }
   },
   "algorand": {
+    "operationHasRewards": "Rewards earned",
+    "operationEarnedRewards": "You earned <0>{{amount}}</0> rewards.",
+    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
     "optIn": {
       "flow": {
         "title": "Add ASA (Asset)",

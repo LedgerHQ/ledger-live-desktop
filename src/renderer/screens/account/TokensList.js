@@ -46,6 +46,7 @@ const Wrapper: ThemedComponent<{}> = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
+  padding-right: ${p => p.theme.space[4]}px;
 `;
 
 const EmptyState: ThemedComponent<{}> = styled.div`
