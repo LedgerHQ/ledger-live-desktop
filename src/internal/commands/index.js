@@ -3,7 +3,6 @@ import firmwarePrepare from "./firmwarePrepare";
 import firmwareMain from "./firmwareMain";
 import firmwareRepair from "./firmwareRepair";
 import flushDevice from "./flushDevice";
-import getAddress from "./getAddress";
 import getDeviceInfo from "./getDeviceInfo";
 import getLatestFirmwareForDevice from "./getLatestFirmwareForDevice";
 import libcoreGetVersion from "./libcoreGetVersion";
@@ -26,7 +25,6 @@ export const commandsById = {
   firmwareMain,
   firmwareRepair,
   flushDevice,
-  getAddress,
   getDeviceInfo,
   getLatestFirmwareForDevice,
   libcoreGetVersion,

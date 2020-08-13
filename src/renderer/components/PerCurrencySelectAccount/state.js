@@ -2,23 +2,10 @@
 
 import { useState, useCallback, useMemo } from "react";
 import type { Account, SubAccount } from "@ledgerhq/live-common/lib/types/account";
+import { makeEmptyTokenAccount } from "@ledgerhq/live-common/lib/account";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
-import { BigNumber } from "bignumber.js";
 
 type CryptoOrTokenCurrency = TokenCurrency | CryptoCurrency;
-
-const generateTokenAccount = (account: Account, currency: TokenCurrency): SubAccount => ({
-  type: "TokenAccount",
-  id: account.id + "+" + currency.contractAddress,
-  parentId: account.id,
-  token: currency,
-  balance: BigNumber(0),
-  operationsCount: 0,
-  creationDate: new Date(),
-  operations: [],
-  pendingOperations: [],
-  starred: false,
-});
 
 export type AccountTuple = {
   account: ?Account,
@@ -40,7 +27,7 @@ function getAccountTuplesForCurrency(
               (subAcc: SubAccount) =>
                 subAcc.type === "TokenAccount" && subAcc.token.id === currency.id,
             )) ||
-          generateTokenAccount(account, currency),
+          makeEmptyTokenAccount(account, currency),
       }));
   }
   return allAccounts

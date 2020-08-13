@@ -2,11 +2,11 @@
 
 import invariant from "invariant";
 import React, { useEffect, useRef, useCallback, useState } from "react";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount, getAccountName } from "@ledgerhq/live-common/lib/account";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import { command } from "~/renderer/commands";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
-import { DisconnectedDevice, WrongDeviceForAccount } from "@ledgerhq/errors";
+import { DisconnectedDevice } from "@ledgerhq/errors";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import useTheme from "~/renderer/hooks/useTheme";
@@ -165,18 +165,12 @@ const StepReceiveFunds = ({
         if (!device) {
           throw new DisconnectedDevice();
         }
-        const { address } = await command("getAddress")({
-          derivationMode: mainAccount.derivationMode,
-          currencyId: mainAccount.currency.id,
-          devicePath: device.path,
-          path: mainAccount.freshAddressPath,
-          verify: true,
-        }).toPromise();
-        if (address !== mainAccount.freshAddress) {
-          throw new WrongDeviceForAccount(`WrongDeviceForAccount ${mainAccount.name}`, {
-            accountName: mainAccount.name,
-          });
-        }
+        await getAccountBridge(mainAccount)
+          .receive(mainAccount, {
+            deviceId: device.path,
+            verify: true,
+          })
+          .toPromise();
         onChangeAddressVerified(true);
         transitionTo("receive");
       }
