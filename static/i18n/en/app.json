@@ -1753,7 +1753,8 @@
       "send": "recipient",
       "delegate": "validator",
       "undelegate": "validator",
-      "claimReward": "delegation rewards recipient"
+      "claimReward": "rewards recipient",
+      "optIn": "recipient"
     },
     "votes": "Votes ({{count}})"
   },

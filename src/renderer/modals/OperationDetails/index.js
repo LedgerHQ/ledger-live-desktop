@@ -300,6 +300,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                     ? "operationDetails.tokenOperations"
                     : "operationDetails.subAccountOperations",
                 )}
+                &nbsp;
                 <LabelInfoTooltip
                   text={t(
                     isToken
@@ -328,6 +329,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                         parentAccount={account}
                         onOperationClick={() => openOperation("subOperation", op, operation)}
                         t={t}
+                        withAddress={false}
                       />
                       {i < subOperations.length - 1 && <B />}
                     </div>
