@@ -7,7 +7,7 @@ export const supportLinkByTokenType = {
   trc10: "https://support.ledger.com/hc/en-us/articles/360013062159",
   trc20: "https://support.ledger.com/hc/en-us/articles/360013062159",
   /** @TODO replace this url */
-  asa: "https://support.ledger.com/hc/en-us/articles/3600130621589",
+  asa: " https://support.ledger.com/hc/en-us/articles/360015896040",
 };
 
 export const urls = {
