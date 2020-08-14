@@ -89,7 +89,7 @@ export class StepAmountFooter extends PureComponent<StepProps> {
       <>
         <AccountFooter parentAccount={parentAccount} account={account} status={status} />
         {gasPrice && gasPrice instanceof NotEnoughGas ? (
-          <BuyButton currency={mainAccount.currency} />
+          <BuyButton currency={mainAccount.currency} account={mainAccount} />
         ) : null}
         <Button
           id={"send-amount-continue-button"}
