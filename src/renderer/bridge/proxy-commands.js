@@ -52,6 +52,19 @@ const cmdCurrencyScanAccounts = (o: {
     .pipe(map(toScanAccountEventRaw));
 };
 
+const cmdAccountReceive = (o: {
+  account: AccountRaw,
+  arg: {
+    deviceId: string,
+    subAccountId?: string,
+    verify?: boolean,
+  },
+}): Observable<{ address: string, path: string }> => {
+  const account = fromAccountRaw(o.account);
+  const bridge = bridgeImpl.getAccountBridge(account, null);
+  return bridge.receive(account, o.arg);
+};
+
 const cmdAccountSync = (o: {
   account: AccountRaw,
   syncConfig: SyncConfig,
@@ -125,6 +138,7 @@ const cmdAccountEstimateMaxSpendable = (o: {
 export const commands = {
   CurrencyPreload: cmdCurrencyPreload,
   AccountSync: cmdAccountSync,
+  AccountReceive: cmdAccountReceive,
   AccountGetTransactionStatus: cmdAccountGetTransactionStatus,
   AccountPrepareTransaction: cmdAccountPrepareTransaction,
   AccountSignOperation: cmdAccountSignOperation,
