@@ -70,11 +70,11 @@ class ConfirmationCell extends PureComponent<Props> {
     // $FlowFixMe
     const specific = currency.family ? perFamilyOperationDetails[currency.family] : null;
 
-    const Element =
+    const SpecificConfirmationCell =
       specific && specific.confirmationCell ? specific.confirmationCell[operation.type] : null;
 
-    return Element ? (
-      <Element
+    return SpecificConfirmationCell ? (
+      <SpecificConfirmationCell
         operation={operation}
         type={operation.type}
         isConfirmed={isConfirmed}
