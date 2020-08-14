@@ -262,7 +262,7 @@ const AmountTooltip = ({
 
   const reward = operation.extra.rewards ? operation.extra.rewards : BigNumber(0);
   const initialAmount = amount.minus(reward);
-  return !discreet && reward.gt(0) ? (
+  return reward.gt(0) ? (
     <Trans
       i18nKey="algorand.operationDetailsAmountBreakDown"
       values={{

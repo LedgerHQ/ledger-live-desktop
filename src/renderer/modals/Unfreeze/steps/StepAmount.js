@@ -21,7 +21,6 @@ import Clock from "~/renderer/icons/Clock";
 
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 
-/** @TODO move this to common */
 import { getUnfreezeData } from "../Body";
 
 const Description = styled(Text).attrs(({ isPill }) => ({

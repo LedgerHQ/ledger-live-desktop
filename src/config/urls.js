@@ -6,7 +6,6 @@ export const supportLinkByTokenType = {
   erc20: "https://support.ledger.com/hc/en-us/articles/115005197845-Manage-ERC20-tokens",
   trc10: "https://support.ledger.com/hc/en-us/articles/360013062159",
   trc20: "https://support.ledger.com/hc/en-us/articles/360013062159",
-  /** @TODO replace this url */
   asa: " https://support.ledger.com/hc/en-us/articles/360015896040",
 };
 

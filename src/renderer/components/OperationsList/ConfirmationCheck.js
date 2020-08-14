@@ -98,7 +98,6 @@ const iconsComponent = {
   VOTE: Vote,
   REWARD: ClaimRewards,
   FEES: IconFees,
-  /** @TODO replace this with correct icons */
   OPT_IN: IconPlus,
   OPT_OUT: IconTrash,
   CLOSE_ACCOUNT: IconTrash,

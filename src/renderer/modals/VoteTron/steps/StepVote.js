@@ -60,7 +60,6 @@ export function StepVoteFooter({
   const hasErrors = Object.keys(errors).length;
   const canNext = !bridgePending && !hasErrors;
 
-  // @TODO add in the support popover info
   return (
     <>
       <SRInfoPopover color="palette.primary.main" />

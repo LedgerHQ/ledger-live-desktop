@@ -118,8 +118,6 @@ const Body = ({
 
     const transaction = bridge.updateTransaction(t, {
       mode: "claimReward",
-      /** @TODO remove this once its handled by the bridge */
-      recipient: account.freshAddress,
     });
 
     return { account, parentAccount: undefined, transaction };

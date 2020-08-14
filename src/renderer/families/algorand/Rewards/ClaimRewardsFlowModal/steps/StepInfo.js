@@ -43,8 +43,6 @@ export default function StepInfo({
   const { rewards } = algorandResources || {};
 
   const formattedRewards = formatCurrencyUnit(unit, rewards, {
-    disableRounding: true,
-    alwaysShowSign: false,
     showCode: true,
     locale,
   });

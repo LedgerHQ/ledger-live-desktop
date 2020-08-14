@@ -102,20 +102,16 @@ class TokensList extends PureComponent<Props> {
     const subAccounts = listSubAccounts(account);
     const { currency } = account;
     const family = currency.family;
-    const isTokenAccount = listTokenTypesForCryptoCurrency(currency).length > 0;
+    const tokenTypes = listTokenTypesForCryptoCurrency(currency);
+    const isTokenAccount = tokenTypes.length > 0;
     const isEmpty = subAccounts.length === 0;
 
     if (!isTokenAccount && isEmpty) return null;
 
-    let url;
-    let firstToken;
-    if (currency && currency.type !== "TokenCurrency") {
-      const tokens = listTokensForCryptoCurrency(currency);
-      if (tokens && tokens.length > 0) {
-        firstToken = tokens[0];
-        url = supportLinkByTokenType[firstToken.tokenType];
-      }
-    }
+    const url =
+      currency && currency.type !== "TokenCurrency" && tokenTypes && tokenTypes.length > 0
+        ? supportLinkByTokenType[tokenTypes[0]]
+        : null;
 
     const specific = perFamilyTokenList[family];
     const hasSpecificTokenWording = specific?.hasSpecificTokenWording;
@@ -160,7 +156,7 @@ class TokensList extends PureComponent<Props> {
                     onClick={() => {
                       if (url) {
                         openURL(url);
-                        track(`More info on Manage ${firstToken.name} tokens`);
+                        track(`More info on Manage ${tokenTypes[0]} tokens`);
                       }
                     }}
                     label={linkLabel}
