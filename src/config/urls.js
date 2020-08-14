@@ -56,8 +56,7 @@ export const urls = {
   stakingCosmos: "https://www.ledger.com/staking-cosmos",
   cosmosStakingRewards:
     "https://support.ledger.com/hc/en-us/articles/360014339340-Earn-Cosmos-staking-rewards",
-  algorandStakingRewards:
-    "https://support.ledger.com/hc/en-us/articles/360014339340-Earn-Algorand-staking-rewards",
+  algorandStakingRewards: "https://support.ledger.com/hc/en-us/articles/360015897740",
 
   // Banners
   banners: {
