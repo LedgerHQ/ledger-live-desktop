@@ -16,6 +16,8 @@ import StepProgress from "~/renderer/components/StepProgress";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
 import Button from "~/renderer/components/Button";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
+import { toExchangeRaw } from "@ledgerhq/live-common/lib/swap/serialization";
+import { toTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 
 import { mockedEventEmitter } from "~/renderer/components/DebugMock";
 const connectAppExec = command("connectApp");
@@ -87,7 +89,12 @@ const StepDevice = ({
     <DeviceAction
       key={"initSwap"}
       action={action2}
-      request={{ exchange, exchangeRate, transaction, device }}
+      request={{
+        exchange: toExchangeRaw(exchange),
+        exchangeRate,
+        transaction: toTransactionRaw(transaction),
+        device,
+      }}
       onResult={({ initSwapResult, initSwapError, ...rest }) => {
         if (initSwapError) {
           onError(initSwapError);

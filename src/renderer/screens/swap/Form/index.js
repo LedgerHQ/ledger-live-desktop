@@ -315,8 +315,8 @@ const Form = ({
           ) : null}
         </Box>
         <Footer horizontal>
-        <div>{fromAccount && fromAccount.balance.toString()}</div>
-        <div>{toAccount && toAccount.balance.toString()}</div>
+          <div>{fromAccount && fromAccount.balance.toString()}</div>
+          <div>{toAccount && toAccount.balance.toString()}</div>
           <LabelWithExternalIcon
             color="wallet"
             ff="Inter|SemiBold"

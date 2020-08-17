@@ -25,8 +25,13 @@ const cmd = ({
   transaction,
   deviceId,
 }: Input): Observable<SwapRequestEvent> => {
-  const deserializedExchange = fromExchangeRaw(exchange);
-  const deserializedTransaction = fromTransactionRaw(transaction);
-  return from(initSwap(deserializedExchange, exchangeRate, deserializedTransaction, deviceId));
+  return from(
+    initSwap({
+      exchange: fromExchangeRaw(exchange),
+      exchangeRate,
+      transaction: fromTransactionRaw(transaction),
+      deviceId,
+    }),
+  );
 };
 export default cmd;
