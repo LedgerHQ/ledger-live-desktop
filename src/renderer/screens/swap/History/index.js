@@ -60,7 +60,6 @@ const History = () => {
       });
 
       if (path && mappedSwapOperations) {
-        debugger;
         exportOperations(path, mappedSwapOperationsToCSV(mappedSwapOperations), () =>
           setExporting(false),
         );

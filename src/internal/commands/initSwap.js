@@ -16,7 +16,7 @@ type Input = {
   exchange: ExchangeRaw,
   exchangeRate: ExchangeRate,
   transaction: TransactionRaw,
-  deviceId: any,
+  deviceId: string,
 };
 
 const cmd = ({

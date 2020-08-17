@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { command } from "~/renderer/commands";
@@ -11,7 +11,7 @@ import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import { createAction as initSwapCreateAction } from "@ledgerhq/live-common/lib/hw/actions/initSwap";
 import { Trans } from "react-i18next";
 import type { SignedOperation, Transaction } from "@ledgerhq/live-common/lib/types";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import StepProgress from "~/renderer/components/StepProgress";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
 import Button from "~/renderer/components/Button";
@@ -56,6 +56,7 @@ const StepDevice = ({
   onError: any,
 }) => {
   const device = useSelector(getCurrentDevice);
+  const deviceRef = useRef(device);
   const { exchange, exchangeRate } = swap;
   const { fromAccount: account, fromParentAccount: parentAccount } = exchange;
 
@@ -93,7 +94,7 @@ const StepDevice = ({
         exchange: toExchangeRaw(exchange),
         exchangeRate,
         transaction: toTransactionRaw(transaction),
-        device,
+        device: deviceRef,
       }}
       onResult={({ initSwapResult, initSwapError, ...rest }) => {
         if (initSwapError) {
@@ -112,7 +113,7 @@ const StepDevice = ({
         parentAccount,
         account,
         transaction: swapData.transaction,
-        appName: "Exchange", // TODO move to live-common maybe
+        appName: "Exchange",
       }}
       Result={Result}
       onResult={({ signedOperation, transactionSignError }) => {
