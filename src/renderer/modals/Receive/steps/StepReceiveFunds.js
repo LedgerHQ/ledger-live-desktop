@@ -167,7 +167,7 @@ const StepReceiveFunds = ({
         }
         await getAccountBridge(mainAccount)
           .receive(mainAccount, {
-            deviceId: device.path,
+            deviceId: device.deviceId,
             verify: true,
           })
           .toPromise();
