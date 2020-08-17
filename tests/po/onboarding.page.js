@@ -162,7 +162,7 @@ export default class OnboardingPage extends Page {
     return elem.click().then(this.app.client.waitUntilWindowLoaded());
   }
 
-  async isVisible() {
+  async isDisplayed() {
     const elem = await this.app.client.$("#onboarding-container");
     return elem.waitForDisplayed();
   }

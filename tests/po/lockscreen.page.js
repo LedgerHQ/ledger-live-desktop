@@ -21,7 +21,7 @@ export default class LockscreenPage extends Page {
     return this.app.client.$("#lockscreen-forgotten-button");
   }
 
-  async isVisible(reverse = false) {
+  async isDisplayed(reverse = false) {
     const elem = await this.app.client.$("#lockscreen-container");
     const visible = reverse
       ? await !elem.waitForDisplayed({ timeout: 3000, reverse })

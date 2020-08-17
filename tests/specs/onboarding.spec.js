@@ -1,44 +1,20 @@
-import { applicationProxy, removeUserData, getMockDeviceEvent } from "../applicationProxy";
-import OnboardingPage from "../po/onboarding.page";
-import ModalPage from "../po/modal.page";
-import GenuinePage from "../po/genuine.page";
-import PasswordPage from "../po/password.page";
-import AnalyticsPage from "../po/analytics.page";
-import PortfolioPage from "../po/portfolio.page";
-import LockscreenPage from "../po/lockscreen.page";
+import initialize, {
+  app,
+  deviceInfo,
+  mockListAppsResult,
+  mockDeviceEvent,
+  onboardingPage,
+  modalPage,
+  genuinePage,
+  passwordPage,
+  analyticsPage,
+  portfolioPage,
+  lockscreenPage,
+} from "../common.js";
 import data from "../data/onboarding/";
-import { deviceInfo155, mockListAppsResult } from "@ledgerhq/live-common/lib/apps/mock";
-
-jest.setTimeout(60000);
 
 describe("When I launch the app for the first time", () => {
-  let app;
-  let onboardingPage;
-  let modalPage;
-  let genuinePage;
-  let passwordPage;
-  let analyticsPage;
-  let portfolioPage;
-  let lockscreenPage;
-  let mockDeviceEvent;
-
-  beforeAll(() => {
-    app = applicationProxy({ MOCK: true, DISABLE_MOCK_POINTER_EVENTS: true });
-    onboardingPage = new OnboardingPage(app);
-    modalPage = new ModalPage(app);
-    genuinePage = new GenuinePage(app);
-    passwordPage = new PasswordPage(app);
-    analyticsPage = new AnalyticsPage(app);
-    portfolioPage = new PortfolioPage(app);
-    lockscreenPage = new LockscreenPage(app);
-    mockDeviceEvent = getMockDeviceEvent(app);
-
-    return app.start();
-  });
-
-  afterAll(() => {
-    return app.stop().then(() => removeUserData());
-  });
+  initialize();
 
   it("opens a window", () => {
     return app.client
@@ -47,7 +23,7 @@ describe("When I launch the app for the first time", () => {
       .then(count => expect(count).toBe(1))
       .browserWindow.isMinimized()
       .then(minimized => expect(minimized).toBe(false))
-      .browserWindow.isDisplayed()
+      .browserWindow.isVisible()
       .then(visible => expect(visible).toBe(true))
       .browserWindow.isFocused()
       .then(focused => expect(focused).toBe(true))
@@ -278,10 +254,10 @@ describe("When I launch the app for the first time", () => {
           expect(await modalPage.title.getText()).toBe(data.genuine.modalTitle);
           await app.client.pause(2000); // FIXME wait until the spinner is visible?
           await mockDeviceEvent(
-            { type: "listingApps", deviceInfo: deviceInfo155 },
+            { type: "listingApps", deviceInfo },
             {
               type: "result",
-              result: mockListAppsResult("Bitcoin", "", deviceInfo155),
+              result: mockListAppsResult("Bitcoin", "", deviceInfo),
             },
           );
           await app.client.pause(2000);
