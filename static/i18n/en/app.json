@@ -264,6 +264,10 @@
       "title": "Back-up pack",
       "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
       "cta": "Buy back-up pack"
+    },
+    "stakeAlgorand": {
+      "title": "Staking with ALGORAND",
+      "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
     }
   },
   "dashboard": {
