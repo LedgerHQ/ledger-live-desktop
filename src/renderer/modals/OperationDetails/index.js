@@ -67,7 +67,6 @@ import {
   Separator,
   HashContainer,
 } from "./styledComponents";
-import Tooltip from "~/renderer/components/Chart2/Tooltip";
 import ToolTip from "~/renderer/components/Tooltip";
 
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {

@@ -3,10 +3,7 @@
 import React, { PureComponent } from "react";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/types/portfolio";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account/helpers";
-import {
-  listTokensForCryptoCurrency,
-  listTokenTypesForCryptoCurrency,
-} from "@ledgerhq/live-common/lib/currencies";
+import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
 import styled from "styled-components";
 import { Trans, withTranslation } from "react-i18next";
 import { withRouter } from "react-router-dom";

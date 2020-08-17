@@ -30,16 +30,15 @@ function StepConfirmation({
   t,
   optimisticOperation,
   error,
-  theme,
   device,
   signed,
   transaction,
-}: StepProps & { theme: * }) {
-  const options = listTokensForCryptoCurrency(account.currency);
-  const token = useMemo(() => options.find(({ id }) => id === transaction.assetId), [
-    options,
-    transaction,
-  ]);
+}: StepProps) {
+  const options = account && listTokensForCryptoCurrency(account.currency);
+  const token = useMemo(
+    () => transaction && options && options.find(({ id }) => id === transaction.assetId),
+    [options, transaction],
+  );
 
   if (optimisticOperation) {
     return (
@@ -50,14 +49,14 @@ function StepConfirmation({
           title={
             <Trans
               i18nKey={`algorand.optIn.flow.steps.confirmation.success.title`}
-              values={{ token: token.name }}
+              values={{ token: token?.name }}
             />
           }
           description={
             <div>
               <Trans
                 i18nKey={`algorand.optIn.flow.steps.confirmation.success.text`}
-                values={{ token: token.name }}
+                values={{ token: token?.name }}
               >
                 <b></b>
               </Trans>
