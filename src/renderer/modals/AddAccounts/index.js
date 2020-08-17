@@ -8,7 +8,7 @@ import { createStructuredSelector } from "reselect";
 import type { CryptoCurrency, TokenCurrency, Account } from "@ledgerhq/live-common/lib/types";
 import { addAccounts } from "@ledgerhq/live-common/lib/account";
 import logger from "~/logger";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { replaceAccounts } from "~/renderer/actions/accounts";

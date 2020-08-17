@@ -7,12 +7,12 @@ import getDeviceInfo from "@ledgerhq/live-common/lib/hw/getDeviceInfo";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 
 type Input = {
-  devicePath: string,
+  deviceId: string,
 };
 
 type Result = DeviceInfo;
 
-const cmd = ({ devicePath }: Input): Observable<Result> =>
-  withDevice(devicePath)(transport => from(getDeviceInfo(transport)));
+const cmd = ({ deviceId }: Input): Observable<Result> =>
+  withDevice(deviceId)(transport => from(getDeviceInfo(transport)));
 
 export default cmd;

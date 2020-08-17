@@ -14,9 +14,9 @@ const ListenDevices = () => {
         ({ device, deviceModel, type }) => {
           if (device) {
             const stateDevice = {
-              path: device.path,
+              deviceId: device.path,
               modelId: deviceModel ? deviceModel.id : "nanoS",
-              type: "hid",
+              wired: true,
             };
 
             if (type === "add") {

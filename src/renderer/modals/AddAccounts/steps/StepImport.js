@@ -105,9 +105,6 @@ class StepImport extends PureComponent<StepProps> {
     try {
       const bridge = getCurrencyBridge(mainCurrency);
 
-      // TODO: use the real device
-      const devicePath = device.path;
-
       // will be set to false if an existing account is found
       let onlyNewAccounts = true;
 
@@ -120,7 +117,7 @@ class StepImport extends PureComponent<StepProps> {
 
       this.scanSubscription = concat(
         from(prepareCurrency(mainCurrency)).pipe(ignoreElements()),
-        bridge.scanAccounts({ currency: mainCurrency, deviceId: devicePath, syncConfig }),
+        bridge.scanAccounts({ currency: mainCurrency, deviceId: device.deviceId, syncConfig }),
       )
         .pipe(
           filter(e => e.type === "discovered"),

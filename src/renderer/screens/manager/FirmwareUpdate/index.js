@@ -11,7 +11,7 @@ import manager from "@ledgerhq/live-common/lib/manager";
 
 import type { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
 
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import DisclaimerModal from "~/renderer/modals/DisclaimerModal";
 import UpdateModal from "~/renderer/modals/UpdateFirmwareModal";
 import type { StepId } from "~/renderer/modals/UpdateFirmwareModal";

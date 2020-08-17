@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Trans } from "react-i18next";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import StepProgress from "~/renderer/components/StepProgress";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";

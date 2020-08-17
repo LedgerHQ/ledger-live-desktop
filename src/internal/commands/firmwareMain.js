@@ -8,7 +8,7 @@ type Input = FirmwareUpdateContext;
 
 type Result = { progress: number, installing: ?string };
 
-// devicePath='' HACK to not depend on a devicePath because it's dynamic
+// deviceId='' HACK to not depend on a deviceId because it's dynamic
 const cmd = (firmware: Input): Observable<Result> => main("", firmware);
 
 export default cmd;

@@ -5,7 +5,7 @@ import type { TFunction } from "react-i18next";
 import { log } from "@ledgerhq/logs";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import logger from "~/logger";
 import Modal from "~/renderer/components/Modal";
 import Stepper from "~/renderer/components/Stepper";

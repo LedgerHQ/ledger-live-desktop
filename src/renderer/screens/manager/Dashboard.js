@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { ListAppsResult } from "@ledgerhq/live-common/lib/apps/types";
 import { distribute, initState } from "@ledgerhq/live-common/lib/apps/logic";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import AppsList from "./AppsList";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
@@ -55,7 +55,7 @@ const Dashboard = ({ device, deviceInfo, result, onReset, appsToRestore }: Props
 
   const exec = useCallback(
     (appOp, targetId, app) =>
-      command("appOpExec")({ appOp, targetId, app, devicePath: device.path }),
+      command("appOpExec")({ appOp, targetId, app, deviceId: device.deviceId }),
     [device],
   );
 
