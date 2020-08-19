@@ -1816,7 +1816,7 @@
       "title": "Please ensure your system has a camera, that it is not in use by another application and that Ledger Live has permission to use it.",
       "description": ""
     },
-    "CosmosClaimRewardsFeesWarning": {
+    "ClaimRewardsFeesWarning": {
       "title": "The rewards are smaller than the estimated fees to claim them",
       "description": ""
     },
