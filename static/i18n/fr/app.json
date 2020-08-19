@@ -561,7 +561,7 @@
     "firmware": {
       "updateLater": "Annuler",
       "seedReady": "J'ai ma phrase de récupération",
-      "dontHaveSeed": "Don't have your Recovery phrase? ",
+      "dontHaveSeed": "Vous n'avez pas votre phrase de récupération ?",
       "followTheGuide": "Suivez notre guide de mise à jour étape par étape",
       "removeApps": "Désinstaller toutes les apps avant de mettre à jour",
       "update": "Mettre à jour",
@@ -742,7 +742,7 @@
   "buy": {
     "title": "Acheter",
     "titleCrypto": "Acheter {{currency}}",
-    "buyCTA": "Buy {{currencyTicker}}"
+    "buyCTA": "Acheter {{currencyTicker}}"
   },
   "receive": {
     "title": "Recevoir",
@@ -1162,7 +1162,7 @@
           "title": "Sélectionner un validateur",
           "description": "Vous pouvez sélectionner un validateur en comparant les taux de rendement estimés",
           "customValidator": "Validateur personnalisé",
-          "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
+          "providedBy": "Taux de rendements fournis par <1><0>{{name}}</0></1>"
         },
         "custom": {
           "title": "Validateur personnalisé",
@@ -1203,7 +1203,7 @@
   },
   "carousel": {
     "hidden": {
-      "close": "Confirm",
+      "close": "Confirmer",
       "undo": "Show again",
       "disclaimer": "This banner will not show up again until there is a new announcement"
     }
