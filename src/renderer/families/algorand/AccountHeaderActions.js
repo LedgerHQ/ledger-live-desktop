@@ -6,6 +6,7 @@ import { Trans } from "react-i18next";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
 
 import { openModal } from "~/renderer/actions/modals";
 import Button from "~/renderer/components/Button";
@@ -27,6 +28,8 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
   const dispatch = useDispatch();
 
   const balance = account.balance;
+  const unit = getAccountUnit(account);
+  const minRewardsBalance = 10 ** unit.magnitude;
 
   const onClick = useCallback(() => {
     dispatch(
@@ -36,7 +39,7 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
     );
   }, [dispatch, account]);
 
-  if (parentAccount || balance.gt(0)) return null;
+  if (parentAccount || balance.gt(minRewardsBalance)) return null;
 
   return (
     <ButtonBase primary onClick={onClick}>
