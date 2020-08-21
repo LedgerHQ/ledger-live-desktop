@@ -322,8 +322,8 @@
     "countTooltip": "1 Token",
     "countTooltip_plural": "{{count}} Tokens",
     "algorand": {
-      "title": "ASA (Assets)",
-      "cta": "Add ASA",
+      "title": "ASA (Actifs)",
+      "cta": "Ajouter ASA",
       "placeholder": "You can add assets to your {{currencyName}} account.",
       "link": "How assets (ASA) works?",
       "seeTokens": "Show ASA ({{tokenCount}})",
