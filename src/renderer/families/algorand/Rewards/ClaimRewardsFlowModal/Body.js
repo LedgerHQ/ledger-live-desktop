@@ -25,7 +25,7 @@ import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 
 import Stepper from "~/renderer/components/Stepper";
-import StepClaimRewards, { StepClaimRewardsFooter } from "./steps/StepClaimRewards";
+import StepInfo, { StepInfoFooter } from "./steps/StepInfo";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
@@ -37,7 +37,6 @@ type OwnProps = {|
   params: {
     account: Account,
     parentAccount: ?Account,
-    validatorAddress: ?string,
   },
   name: string,
 |};
@@ -55,21 +54,21 @@ type Props = OwnProps & StateProps;
 
 const steps: Array<St> = [
   {
-    id: "claimRewards",
-    label: <Trans i18nKey="cosmos.claimRewards.flow.steps.claimRewards.title" />,
-    component: StepClaimRewards,
+    id: "info",
+    label: <Trans i18nKey="algorand.claimRewards.flow.steps.info.title" />,
+    component: StepInfo,
     noScroll: true,
-    footer: StepClaimRewardsFooter,
+    footer: StepInfoFooter,
   },
   {
     id: "connectDevice",
-    label: <Trans i18nKey="cosmos.claimRewards.flow.steps.connectDevice.title" />,
+    label: <Trans i18nKey="algorand.claimRewards.flow.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
-    onBack: ({ transitionTo }: StepProps) => transitionTo("claimRewardss"),
+    onBack: ({ transitionTo }: StepProps) => transitionTo("assets"),
   },
   {
     id: "confirmation",
-    label: <Trans i18nKey="cosmos.claimRewards.flow.steps.confirmation.title" />,
+    label: <Trans i18nKey="algorand.claimRewards.flow.steps.confirmation.title" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
   },
@@ -109,20 +108,9 @@ const Body = ({
     bridgeError,
     bridgePending,
   } = useBridgeTransaction(() => {
-    const { account, validatorAddress } = params;
+    const { account } = params;
 
-    invariant(account && account.cosmosResources, "cosmos: account and cosmos resources required");
-
-    // preselect validator either one from params or the first one available on the list
-    const validators = account.cosmosResources.delegations
-      .filter(d =>
-        validatorAddress ? d.validatorAddress === validatorAddress : d.pendingRewards.gt(0),
-      )
-      .slice(0, 1)
-      .map(({ validatorAddress, pendingRewards }) => ({
-        address: validatorAddress,
-        amount: pendingRewards,
-      }));
+    invariant(account, "algorand: account required");
 
     const bridge = getAccountBridge(account, undefined);
 
@@ -130,7 +118,6 @@ const Body = ({
 
     const transaction = bridge.updateTransaction(t, {
       mode: "claimReward",
-      validators,
     });
 
     return { account, parentAccount: undefined, transaction };
@@ -144,7 +131,7 @@ const Body = ({
 
   const handleRetry = useCallback(() => {
     setTransactionError(null);
-    onChangeStepId("claimRewards");
+    onChangeStepId("connectDevice");
   }, [onChangeStepId]);
 
   const handleTransactionError = useCallback((error: Error) => {
@@ -180,7 +167,7 @@ const Body = ({
   }
 
   const stepperProps = {
-    title: t("cosmos.claimRewards.flow.title"),
+    title: t("algorand.claimRewards.flow.title"),
     device,
     account,
     parentAccount,
@@ -190,7 +177,7 @@ const Body = ({
     steps,
     errorSteps,
     disabledSteps: [],
-    hideBreadcrumb: (!!error || !!warning) && ["claimRewards"].includes(stepId),
+    hideBreadcrumb: !!error || !!warning,
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,

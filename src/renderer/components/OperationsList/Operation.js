@@ -44,12 +44,14 @@ type Props = {
   onOperationClick: (operation: Operation, account: AccountLike, parentAccount?: Account) => void,
   t: TFunction,
   withAccount: boolean,
+  withAddress: boolean,
   text?: string,
 };
 
 class OperationComponent extends PureComponent<Props> {
   static defaultProps = {
     withAccount: false,
+    withAddress: true,
   };
 
   onOperationClick = () => {
@@ -58,7 +60,7 @@ class OperationComponent extends PureComponent<Props> {
   };
 
   render() {
-    const { account, parentAccount, t, operation, withAccount, text } = this.props;
+    const { account, parentAccount, t, operation, withAccount, text, withAddress } = this.props;
     const isOptimistic = operation.blockHeight === null;
     const currency = getAccountCurrency(account);
     const unit = getAccountUnit(account);
@@ -73,7 +75,7 @@ class OperationComponent extends PureComponent<Props> {
         />
         <DateCell text={text} operation={operation} t={t} />
         {withAccount && <AccountCell accountName={getAccountName(account)} currency={currency} />}
-        <AddressCell operation={operation} />
+        {withAddress ? <AddressCell operation={operation} /> : <Box flex="1" />}
         <AmountCell operation={operation} currency={currency} unit={unit} />
       </OperationRow>
     );

@@ -22,6 +22,11 @@ export const lighten = (c: string, a: number) =>
     .lighten(a)
     .toString();
 
+export const mix = (c: string, b: string, a: number) =>
+  Color(c)
+    .mix(Color(b), a)
+    .toString();
+
 export const ff = (v: string) => {
   const [font, type = "Regular"] = v.split("|");
   const { style, weight } = fontFamilies[font][type];

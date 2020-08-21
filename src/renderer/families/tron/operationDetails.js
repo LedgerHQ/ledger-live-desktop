@@ -237,7 +237,7 @@ const VoteAmountCell = ({ operation, currency, unit }: Props) => {
   ) : null;
 };
 
-const amountCell = {
+const amountCellExtra = {
   FREEZE: FreezeAmountCell,
   UNFREEZE: UnfreezeAmountCell,
   VOTE: VoteAmountCell,
@@ -247,5 +247,5 @@ export default {
   getURLFeesInfo,
   getURLWhatIsThis,
   OperationDetailsExtra,
-  amountCell,
+  amountCellExtra,
 };

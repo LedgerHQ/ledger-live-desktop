@@ -4,7 +4,7 @@ import styled, { withTheme } from "styled-components";
 import { getCryptoCurrencyIcon } from "@ledgerhq/live-common/lib/react";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
-import { rgba } from "~/renderer/styles/helpers";
+import { mix } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 type Props = {
@@ -28,7 +28,7 @@ export const TokenIcon: ThemedComponent<{
   font-family: "Inter";
   font-weight: bold;
   color: ${p => p.color};
-  background-color: ${p => rgba(p.color, 0.1)};
+  background-color: ${p => mix(p.color, p.theme.colors.palette.background.default, 0.9)};
   border-radius: 4px;
   display: flex;
   overflow: hidden;

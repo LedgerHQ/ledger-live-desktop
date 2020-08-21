@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import type { OperationType } from "@ledgerhq/live-common/lib/types";
 
-import { rgba } from "~/renderer/styles/helpers";
+import { rgba, mix } from "~/renderer/styles/helpers";
 
 import type { TFunction } from "react-i18next";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -19,6 +19,7 @@ import IconSend from "~/renderer/icons/Send";
 import IconPlus from "~/renderer/icons/Plus";
 import IconEye from "~/renderer/icons/Eye";
 import IconFees from "~/renderer/icons/Fees";
+import IconTrash from "~/renderer/icons/Trash";
 
 import Freeze from "~/renderer/icons/Freeze";
 import Unfreeze from "~/renderer/icons/Unfreeze";
@@ -50,17 +51,17 @@ function inferColor(p) {
   }
 }
 
-const Container: ThemedComponent<{
+export const Container: ThemedComponent<{
   isConfirmed: boolean,
   type: string,
   marketColor: string,
   hasFailed?: boolean,
 }> = styled(Box).attrs(p => ({
   bg: p.hasFailed
-    ? rgba(p.theme.colors.alertRed, 0.05)
+    ? mix(p.theme.colors.alertRed, p.theme.colors.palette.background.paper, 0.95)
     : p.isConfirmed
-    ? rgba(inferColor(p), 0.2)
-    : "none",
+    ? mix(inferColor(p), p.theme.colors.palette.background.paper, 0.8)
+    : p.theme.colors.palette.background.paper,
   color: p.hasFailed ? p.theme.colors.alertRed : inferColor(p),
   alignItems: "center",
   justifyContent: "center",
@@ -97,6 +98,9 @@ const iconsComponent = {
   VOTE: Vote,
   REWARD: ClaimRewards,
   FEES: IconFees,
+  OPT_IN: IconPlus,
+  OPT_OUT: IconTrash,
+  CLOSE_ACCOUNT: IconTrash,
 };
 
 class ConfirmationCheck extends PureComponent<{
