@@ -1137,7 +1137,7 @@
         "steps": {
           "assets": {
             "title": "ASA (Actif)",
-            "info": "Adding an asset requires sending a transaction with a minimum transaction fee. This will appear on your transaction history",
+            "info": "L'ajout d'un actif nécessite l'envoi d'une transaction avec des frais minimaux. Cela apparaîtra sur votre historique de transactions",
             "selectLabel": "Choisir un ASA (Actif)",
             "disabledTooltip": "Vous avez déjà cet ASA (Actif) dans votre compte Algorand"
           },
