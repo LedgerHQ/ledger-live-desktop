@@ -1,23 +1,23 @@
 // @flow
-import React, { PureComponent } from "react";
+import React, { useCallback } from "react";
+import styled from "styled-components";
+import { Trans } from "react-i18next";
 import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/bitcoin/types";
-import {
-  getUTXOStatus,
-  isChangeOutput,
-} from "@ledgerhq/live-common/lib/families/bitcoin/transaction";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import Text from "~/renderer/components/Text";
-import Checkbox from "~/renderer/components/CheckBox";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
-import { PickUnconfirmedRBF } from "./PickUnconfirmedRBF";
+import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
 import { PickingStrategy } from "./PickingStrategy";
-import { RBF } from "./RBF";
+import { CoinControlRow } from "./CoinControlRow";
+import BigNumber from "bignumber.js";
 
 type Props = {
   isOpened?: boolean,
@@ -25,194 +25,152 @@ type Props = {
   account: Account,
   transaction: Transaction,
   onChange: Transaction => void,
+  updateTransaction: (updater: any) => void,
   status: TransactionStatus,
 };
 
-class CoinControlModal extends PureComponent<Props, *> {
-  render() {
-    const { isOpened, onClose, account, transaction, onChange, status } = this.props;
-    if (!account.bitcoinResources) return null;
-    const { bitcoinResources } = account;
-    const { utxoStrategy } = transaction;
-    const bridge = getAccountBridge(account);
-    const errorKeys = Object.keys(status.errors);
-    const error = errorKeys.length ? status.errors[errorKeys[0]] : null;
-    return (
-      <Modal width={700} isOpened={isOpened} centered onClose={onClose}>
-        <TrackPage category="Modal" name="BitcoinCoinControl" />
-        <ModalBody
-          width={700}
-          title={"Bitcoin Coin Controls"}
-          onClose={onClose}
-          render={() => (
-            <Box flow={2}>
-              {error ? <ErrorBanner error={error} /> : null}
+const Separator = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: ${p => p.theme.colors.palette.text.shade10};
+  margin: 20px 0;
+`;
 
-              <PickingStrategy
-                transaction={transaction}
-                account={account}
-                onChange={onChange}
-                status={status}
-              />
+const CoinControlModal = ({
+  isOpened,
+  onClose,
+  account,
+  transaction,
+  onChange,
+  status,
+  updateTransaction,
+}: Props) => {
+  const onClickLink = useCallback(() => openURL(urls.coinControl), []);
 
-              <PickUnconfirmedRBF
-                transaction={transaction}
-                account={account}
-                onChange={onChange}
-                status={status}
-              />
+  if (!account.bitcoinResources) return null;
+  const { bitcoinResources } = account;
+  const { utxoStrategy } = transaction;
+  const bridge = getAccountBridge(account);
+  const errorKeys = Object.keys(status.errors);
+  const error = errorKeys.length ? status.errors[errorKeys[0]] : null;
 
-              {/* will be moved back in "advanced" */}
-              <RBF
-                transaction={transaction}
-                account={account}
-                onChange={onChange}
-                status={status}
-              />
+  const returning = (status.txOutputs || []).find(tx => !!tx.path);
 
-              <Box
-                flow={2}
-                mt={4}
-                pt={4}
-                style={{ borderTop: "1px solid #aaaaaa33", minHeight: 200 }}
-              >
-                {bitcoinResources.utxos.map(utxo => {
-                  const s = getUTXOStatus(utxo, utxoStrategy);
-                  const input = (status.txInputs || []).find(
-                    input =>
-                      input.previousOutputIndex === utxo.outputIndex &&
-                      input.previousTxHash === utxo.hash,
-                  );
-                  const inputIndex = (status.txInputs || []).indexOf(input);
-                  const disabled = (s.reason || "") === "pickUnconfirmedRBF";
-                  const onClick = () => {
-                    if (disabled) return;
-                    const patch = {
-                      utxoStrategy: {
-                        ...utxoStrategy,
-                        excludeUTXOs: !s.excluded
-                          ? utxoStrategy.excludeUTXOs.concat({
-                              hash: utxo.hash,
-                              outputIndex: utxo.outputIndex,
-                            })
-                          : utxoStrategy.excludeUTXOs.filter(
-                              e => e.hash !== utxo.hash || e.outputIndex !== utxo.outputIndex,
-                            ),
-                      },
-                    };
-                    // TODO use the function version of updateTransaction (as part of the hook)
-                    onChange(bridge.updateTransaction(transaction, patch));
-                  };
-                  return (
-                    // TODO make this a component for better performance
-                    <Box
-                      style={{ width: 600, opacity: disabled ? 0.5 : 1 }}
-                      flow={2}
-                      horizontal
-                      alignItems="center"
-                      key={utxo.hash + "@" + utxo.outputIndex}
-                      onClick={onClick}
-                    >
-                      <Checkbox isChecked={!s.excluded} onChange={onClick} />
-                      <Box style={{ width: "10%" }}>
-                        {input ? (
-                          <Text ff="Inter|Bold" fontSize={2} color="wallet">
-                            INPUT #{inputIndex}
-                          </Text>
-                        ) : null}
-                      </Box>
-                      <Box style={{ width: "30%" }}>
-                        <FormattedVal
-                          disableRounding
-                          val={utxo.value}
-                          unit={account.unit}
-                          showCode
-                          fontSize={4}
-                          color="palette.text.shade100"
-                        />
-                        <Text
-                          ff="Inter|Regular"
-                          fontSize={2}
-                          color={(utxo.blockHeight || 0) < 1 ? "alertRed" : "palette.text.shade80"}
-                        >
-                          {utxo.blockHeight
-                            ? account.blockHeight - utxo.blockHeight + " confirmations"
-                            : utxo.rbf
-                            ? "replaceable"
-                            : "pending"}
-                        </Text>
-                      </Box>
-                      <Box>
-                        <Text color="palette.text.shade100" ff="Inter|SemiBold" fontSize={2}>
-                          {utxo.address}
-                        </Text>
-                        <Text
-                          style={{ whiteSpace: "nowrap" }}
-                          color="palette.text.shade100"
-                          ff="Inter|Regular"
-                          fontSize={1}
-                        >
-                          #{utxo.outputIndex} of {utxo.hash}
-                        </Text>
-                      </Box>
-                    </Box>
-                  );
-                })}
+  return (
+    <Modal width={700} isOpened={isOpened} centered onClose={onClose}>
+      <TrackPage category="Modal" name="BitcoinCoinControl" />
+      <ModalBody
+        width={700}
+        title={<Trans i18nKey="bitcoin.modalTitle" />}
+        onClose={onClose}
+        render={() => (
+          <Box flow={2}>
+            {error ? <ErrorBanner error={error} /> : null}
+
+            <PickingStrategy
+              transaction={transaction}
+              account={account}
+              onChange={onChange}
+              status={status}
+            />
+
+            <Separator />
+
+            <Box mt={0} mb={4} horizontal alignItem="center" justifyContent="space-between">
+              <Text color="palette.text.shade50" ff="Inter|Regular" fontSize={13}>
+                <Trans i18nKey="bitcoin.selected" />
+              </Text>
+              <Box horizontal alignItem="center">
+                <Text
+                  color="palette.text.shade50"
+                  ff="Inter|Medium"
+                  fontSize={13}
+                  style={{
+                    paddingRight: 5,
+                  }}
+                >
+                  <Trans i18nKey="bitcoin.amount" />
+                </Text>
+                <Text ff="Inter|Medium" fontSize={13}>
+                  <FormattedVal
+                    disableRounding
+                    val={status.totalSpent}
+                    unit={account.unit}
+                    showCode
+                    fontSize={4}
+                    color="palette.text.shade100"
+                  />
+                </Text>
               </Box>
             </Box>
-          )}
-          renderFooter={() => (
-            <>
-              {error ? null : (
-                <Box flow={4} alignItems="center" horizontal>
-                  <Box>
-                    <Text ff="Inter|Regular" fontSize={2}>
-                      to spend
-                    </Text>
+
+            <Box flow={2}>
+              {bitcoinResources.utxos.map(utxo => (
+                <CoinControlRow
+                  key={utxo.hash}
+                  utxoStrategy={utxoStrategy}
+                  utxo={utxo}
+                  updateTransaction={updateTransaction}
+                  bridge={bridge}
+                  status={status}
+                  account={account}
+                />
+              ))}
+            </Box>
+          </Box>
+        )}
+        renderFooter={() => (
+          <>
+            {error ? null : (
+              <Box flow={4} alignItems="center" horizontal style={{ flexBasis: "50%" }}>
+                <Box grow>
+                  <Box horizontal alignItems="center" mb={2}>
+                    <Box style={{ flexBasis: "40%" }}>
+                      <Text ff="Inter|Medium" fontSize={3} color="palette.text.shade50">
+                        <Trans i18nKey="bitcoin.toSpend" />
+                      </Text>
+                    </Box>
                     <FormattedVal
                       disableRounding
                       val={status.totalSpent}
                       unit={account.unit}
                       showCode
                       fontSize={4}
-                      color="wallet"
+                      ff="Inter|SemiBold"
+                      color="palette.text.shade100"
                     />
                   </Box>
-
-                  <Box grow>
-                    {(status.txOutputs || []).map((output, i) => (
-                      <Box key={i} horizontal flow={2} alignItems="center">
-                        <FormattedVal
-                          disableRounding
-                          val={output.value}
-                          unit={account.unit}
-                          showCode
-                          fontSize={4}
-                          color="palette.text.shade100"
-                        />
-                        {output.path ? (
-                          <Text ff="Inter|SemiBold" fontSize={2}>
-                            {isChangeOutput(output) ? "change" : ""} on {output.path}
-                          </Text>
-                        ) : null}
-                        <Text ff="Inter|Regular" fontSize={2}>
-                          {output.address}
-                        </Text>
-                      </Box>
-                    ))}
+                  <Box horizontal alignItems="center">
+                    <Box style={{ flexBasis: "40%" }}>
+                      <Text ff="Inter|Medium" fontSize={3} color="palette.text.shade50">
+                        <Trans i18nKey="bitcoin.toReturn" />
+                      </Text>
+                    </Box>
+                    <FormattedVal
+                      disableRounding
+                      val={returning ? returning.value : BigNumber(0)}
+                      unit={account.unit}
+                      showCode
+                      fontSize={4}
+                      ff="Inter|SemiBold"
+                      color="palette.text.shade100"
+                    />
                   </Box>
                 </Box>
-              )}
-              <Box grow />
-              <Button primary onClick={onClose}>
-                Done
-              </Button>
-            </>
-          )}
-        />
-      </Modal>
-    );
-  }
-}
+              </Box>
+            )}
+            <Box grow />
+            <LinkWithExternalIcon onClick={onClickLink}>
+              <Trans i18nKey="bitcoin.whatIs" />
+            </LinkWithExternalIcon>
+            <Button primary onClick={onClose}>
+              <Trans i18nKey="common.done" />
+            </Button>
+          </>
+        )}
+      />
+    </Modal>
+  );
+};
 
 export default CoinControlModal;

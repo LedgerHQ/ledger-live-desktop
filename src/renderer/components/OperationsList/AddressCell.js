@@ -6,7 +6,7 @@ import type { Operation } from "@ledgerhq/live-common/lib/types";
 import Box from "~/renderer/components/Box";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const Address = ({ value }: { value: string }) => {
+export const Address = ({ value }: { value: string }) => {
   if (!value) {
     return <Box />;
   }
@@ -19,6 +19,25 @@ const Address = ({ value }: { value: string }) => {
 
   return (
     <Box horizontal color="palette.text.shade80" ff="Inter" fontSize={3}>
+      <Left>{left}</Left>
+      <Right>{right}</Right>
+    </Box>
+  );
+};
+
+export const SplitAddress = ({ value }: { value: string }) => {
+  if (!value) {
+    return <Box />;
+  }
+
+  const third = Math.round(value.length / 3);
+
+  // FIXME why not using CSS for this? meaning we might be able to have a left & right which both take 50% & play with overflow & text-align
+  const left = value.slice(0, third);
+  const right = value.slice(third, value.length);
+
+  return (
+    <Box horizontal>
       <Left>{left}</Left>
       <Right>{right}</Right>
     </Box>
@@ -45,8 +64,8 @@ const Right: ThemedComponent<{}> = styled.div`
   letter-spacing: 0px;
 `;
 
-const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
-  px: 4,
+export const Cell: ThemedComponent<{ px?: number }> = styled(Box).attrs(p => ({
+  px: p.px === 0 ? p.px : p.px || 4,
   horizontal: true,
   alignItems: "center",
 }))`

@@ -3,29 +3,60 @@
 import invariant from "invariant";
 import React, { useState, useCallback } from "react";
 import { Trans, withTranslation } from "react-i18next";
+import styled from "styled-components";
 import type { Account, Transaction, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import Box from "~/renderer/components/Box";
+import Text from "~/renderer/components/Text";
 import GenericContainer from "~/renderer/components/FeesContainer";
 import Spoiler from "~/renderer/components/Spoiler";
 import Button from "~/renderer/components/Button";
-import KeyboardContent from "~/renderer/components/KeyboardContent";
 import CoinControlModal from "./CoinControlModal";
 import { FeesField } from "./FeesField";
 import { PickUnconfirmedRBF } from "./PickUnconfirmedRBF";
+import { RBF } from "./RBF";
+import useBitcoinPickingStrategy from "./useBitcoinPickingStrategy";
 
 type Props = {
   account: Account,
   transaction: Transaction,
   onChange: Transaction => void,
   status: TransactionStatus,
+  bridgePending: boolean,
+  updateTransaction: (updater: any) => void,
 };
 
-const Fields = ({ transaction, account, onChange, status }: Props) => {
+const Separator = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: ${p => p.theme.colors.palette.text.shade10};
+  margin: 20px 0;
+`;
+
+const InputBox = styled(Box)`
+  margin-top: 0;
+  & > * > * {
+    margin-bottom: 12px;
+  }
+`;
+
+const Fields = ({
+  transaction,
+  account,
+  onChange,
+  status,
+  bridgePending,
+  updateTransaction,
+}: Props) => {
   invariant(transaction.family === "bitcoin", "FeeField: bitcoin family expected");
+
+  const { errors } = status;
+  const hasErrors = Object.keys(errors).length;
 
   const [coinControlOpened, setCoinControlOpened] = useState(false);
   const onCoinControlOpen = useCallback(() => setCoinControlOpened(true), []);
   const onCoinControlClose = useCallback(() => setCoinControlOpened(false), []);
+  const { item } = useBitcoinPickingStrategy(transaction.utxoStrategy.strategy);
+  const canNext = !bridgePending && !hasErrors;
 
   return (
     <GenericContainer>
@@ -33,19 +64,31 @@ const Fields = ({ transaction, account, onChange, status }: Props) => {
       <Box mt={4} flow={2}>
         <Spoiler textTransform title={<Trans i18nKey="bitcoin.advanced" />}>
           <Box horizontal alignItems="center">
+            <Box>
+              <Text ff="Inter|Regular" fontSize={12} color="palette.text.shade50">
+                <Trans i18nKey="bitcoin.strategy" />
+              </Text>
+              <Text ff="Inter|Regular" fontSize={13} color="palette.text.shade100">
+                {item ? item.label : null}
+              </Text>
+            </Box>
+            <Box grow />
+            <Box horizontal alignItems="center">
+              <Button secondary onClick={onCoinControlOpen} disabled={!canNext}>
+                <Trans i18nKey="bitcoin.coincontrol" />
+              </Button>
+            </Box>
+          </Box>
+          <Separator />
+          <InputBox>
             <PickUnconfirmedRBF
               transaction={transaction}
               account={account}
               onChange={onChange}
               status={status}
             />
-            <Box grow />
-            <KeyboardContent sequence="coincontrol">
-              <Box horizontal alignItems="center">
-                <Button onClick={onCoinControlOpen}>Coin Control</Button>
-              </Box>
-            </KeyboardContent>
-          </Box>
+            <RBF transaction={transaction} account={account} onChange={onChange} status={status} />
+          </InputBox>
           <CoinControlModal
             transaction={transaction}
             account={account}
@@ -53,6 +96,7 @@ const Fields = ({ transaction, account, onChange, status }: Props) => {
             status={status}
             isOpened={coinControlOpened}
             onClose={onCoinControlClose}
+            updateTransaction={updateTransaction}
           />
         </Spoiler>
       </Box>

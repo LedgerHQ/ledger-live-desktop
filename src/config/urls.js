@@ -36,6 +36,7 @@ export const urls = {
   troubleshootingCrash: "https://support.ledger.com/hc/en-us/articles/360012598060",
   appSupport: "https://support.ledger.com/hc/en-us/categories/115000811829-Apps",
   migrateAccounts: "https://support.ledger.com/hc/en-us/articles/360025321733",
+  coinControl: "https://support.ledger.com/hc/en-us/articles/360015996580",
   githubIssues:
     "https://github.com/LedgerHQ/ledger-live-desktop/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Acomments-desc",
   multipleDestinationAddresses: "https://support.ledger.com/hc/en-us/articles/360033801034",

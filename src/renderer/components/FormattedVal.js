@@ -22,11 +22,13 @@ import Ellipsis from "~/renderer/components/Ellipsis";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const T: ThemedComponent<{ color?: string, inline?: boolean }> = styled(Box).attrs(p => ({
-  ff: "Inter|Medium",
-  horizontal: true,
-  color: p.color,
-}))`
+const T: ThemedComponent<{ color?: string, inline?: boolean, ff?: string }> = styled(Box).attrs(
+  p => ({
+    ff: p.ff || "Inter|Medium",
+    horizontal: true,
+    color: p.color,
+  }),
+)`
   white-space: pre;
   text-overflow: ellipsis;
   display: ${p => (p.inline ? "inline-block" : "block")};

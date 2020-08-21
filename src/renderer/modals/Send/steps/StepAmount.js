@@ -28,6 +28,7 @@ const StepAmount = ({
   bridgePending,
   maybeAmount,
   onResetMaybeAmount,
+  updateTransaction,
 }: StepProps) => {
   if (!status) return null;
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
@@ -62,6 +63,8 @@ const StepAmount = ({
             status={status}
             transaction={transaction}
             onChange={onChangeTransaction}
+            bridgePending={bridgePending}
+            updateTransaction={updateTransaction}
           />
         </Fragment>
       )}
