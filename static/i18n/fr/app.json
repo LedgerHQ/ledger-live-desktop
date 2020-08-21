@@ -24,7 +24,7 @@
     "selectExchangeNoOption": "Aucun service d'échange correspondant à \"{{exchangeName}}\"",
     "selectExchangeNoOptionAtAll": "Aucun service d'échange trouvé",
     "selectValidatorNoOption": "Aucun validateur correspondant à \"{{accountName}}\"",
-    "selectNoResults": "No results found matching \"{{query}}\"",
+    "selectNoResults": "Aucun résultat trouvé pour \"{{query}}\"",
     "sortBy": "Trier par",
     "save": "Enregistrer",
     "lock": "Verrouiller",
@@ -80,9 +80,9 @@
       "UNFREEZE": "Dégelé",
       "REWARD": "Récompense réclamée",
       "FEES": "Frais",
-      "OPT_IN": "Opt in",
-      "OPT_OUT": "Opt out",
-      "CLOSE_ACCOUNT": "Close account"
+      "OPT_IN": "Activer",
+      "OPT_OUT": "Désactiver",
+      "CLOSE_ACCOUNT": "Fermer le compte"
     }
   },
   "byteSize": {
@@ -325,9 +325,9 @@
       "title": "ASA (Actifs)",
       "cta": "Ajouter ASA",
       "placeholder": "You can add assets to your {{currencyName}} account.",
-      "link": "How assets (ASA) works?",
-      "seeTokens": "Show ASA ({{tokenCount}})",
-      "hideTokens": "Hide ASA ({{tokenCount}})",
+      "link": "Comment fonctionnent les actifs (ASA) ?",
+      "seeTokens": "Afficher ASA ({{tokenCount}})",
+      "hideTokens": "Masquer ASA ({{tokenCount}})",
       "tooltip": "ASA from",
       "countTooltip": "1 ASA",
       "countTooltip_plural": "{{count}} ASA"
@@ -465,7 +465,7 @@
       "rewardAmount": "Montant collecté",
       "memo": "Memo",
       "assetId": "Actif ID",
-      "rewards": "Earned rewards"
+      "rewards": "Récompenses réclamées"
     }
   },
   "operationList": {
@@ -1128,32 +1128,32 @@
     }
   },
   "algorand": {
-    "operationHasRewards": "Rewards earned",
+    "operationHasRewards": "Récompenses réclamées",
     "operationEarnedRewards": "You earned <0>{{amount}}</0> rewards.",
     "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
     "optIn": {
       "flow": {
-        "title": "Add ASA (Asset)",
+        "title": "Ajouter ASA (Actif)",
         "steps": {
           "assets": {
-            "title": "ASA (Asset)",
+            "title": "ASA (Actif)",
             "info": "Adding an asset requires sending a transaction with a minimum transaction fee. This will appear on your transaction history",
-            "selectLabel": "Choose an ASA (Asset)",
+            "selectLabel": "Choisir un ASA (Actif)",
             "disabledTooltip": "You already have this ASA (asset) in your Algorand account"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "Appareil"
           },
           "confirmation": {
             "title": "Confirmation",
             "label": "Confirmation",
             "success": {
-              "title": "{{token}} asset successfully added",
+              "title": "{{token}} actif ajouté avec succès",
               "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
-              "cta": "View details"
+              "cta": "Voir les détails"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Diffusion de la transaction..."
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -1161,10 +1161,10 @@
       }
     },
     "claimRewards": {
-      "header": "Rewards",
+      "header": "Récompenses",
       "tooltip": "Algorand rewards are distributed regularly and are claimed automatically when you do a transaction.",
       "cta": "Claim rewards",
-      "rewardsDisabledTooltip": "You don’t have any rewards. \u2028Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
+      "rewardsDisabledTooltip": "Vous n'avez aucune récompense. \nLes récompenses Algorand sont réclamées automatiquement lorsque vous effectuez une transaction. Recevez des ALGO pour commencer à obtenir des récompenses.",
       "flow": {
         "title": "Claim rewards",
         "steps": {
