@@ -266,8 +266,8 @@
       "cta": "Acheter un back-up pack"
     },
     "stakeAlgorand": {
-      "title": "Staking with ALGORAND",
-      "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
+      "title": "Staking avec ALGORAND",
+      "description": "Profiter au mieux de vos ALGO. Ajoutez simplement des fonds à vos comptes et gagnez des récompenses dès aujourd'hui."
     }
   },
   "dashboard": {
@@ -324,11 +324,11 @@
     "algorand": {
       "title": "ASA (Actifs)",
       "cta": "Ajouter ASA",
-      "placeholder": "You can add assets to your {{currencyName}} account.",
+      "placeholder": "Vous pouvez ajouter des actifs à votre compte {{currencyName}}.",
       "link": "Comment fonctionnent les actifs (ASA) ?",
       "seeTokens": "Afficher ASA ({{tokenCount}})",
       "hideTokens": "Masquer ASA ({{tokenCount}})",
-      "tooltip": "ASA from",
+      "tooltip": "ASA de",
       "countTooltip": "1 ASA",
       "countTooltip_plural": "{{count}} ASA"
     }
@@ -1129,7 +1129,7 @@
   },
   "algorand": {
     "operationHasRewards": "Récompenses réclamées",
-    "operationEarnedRewards": "You earned <0>{{amount}}</0> rewards.",
+    "operationEarnedRewards": "Vous avez gagné <0>{{amount}}</0> récompenses.",
     "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
     "optIn": {
       "flow": {
@@ -1155,52 +1155,52 @@
             "pending": {
               "title": "Diffusion de la transaction..."
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
           }
         }
       }
     },
     "claimRewards": {
       "header": "Récompenses",
-      "tooltip": "Algorand rewards are distributed regularly and are claimed automatically when you do a transaction.",
-      "cta": "Claim rewards",
+      "tooltip": "Les récompenses Algorand sont distribuées régulièrement et sont réclamées automatiquement lorsque vous effectuez une transaction.",
+      "cta": "Réclamer les récompenses",
       "rewardsDisabledTooltip": "Vous n'avez aucune récompense. \nLes récompenses Algorand sont réclamées automatiquement lorsque vous effectuez une transaction. Recevez des ALGO pour commencer à obtenir des récompenses.",
       "flow": {
-        "title": "Claim rewards",
+        "title": "Réclamer les récompenses",
         "steps": {
           "starter": {
-            "title": "Earn rewards",
-            "description": "Receive Algorand rewards simply for holding Algorand control of your assets.",
+            "title": "Obtenez des récompenses",
+            "description": "Recevez des récompenses en tenant des ALGO dans votre porte-feuille.",
             "bullet": {
-              "delegate": "A minimum balance of 1 algo is required to receive rewards.",
-              "access": "Increase the account’s balance to increase rewards.",
-              "ledger": "Perform a transaction to or from the account to claim rewards."
+              "delegate": "Un solde minimum de 1 ALGO est requis pour recevoir des récompenses.",
+              "access": "Augmentez le solde du compte pour augmenter les récompenses.",
+              "ledger": "Effectuez une transaction vers ou depuis le compte pour réclamer des récompenses."
             },
-            "learnMore": "How Algorand rewards work?",
+            "learnMore": "Comment fonctionnent les récompenses Algorand?",
             "button": {
-              "cta": "Receive Algo"
+              "cta": "Recevoir Algo"
             }
           },
           "info": {
-            "title": "Rewards",
-            "description": "Congratulations! You earned {{amount}}. Click on Continue to claim your rewards",
-            "info": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees."
+            "title": "Récompenses",
+            "description": "Félicitations ! Vous avez gagné {{amount}}. Cliquez sur Continuer pour réclamer vos récompenses",
+            "info": "Vous serez invité à générer une transaction vide sur votre compte. Celle-ci ajoutera vos récompenses actuelles à votre solde à un coût de transaction minimal."
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "Appareil"
           },
           "confirmation": {
             "title": "Confirmation",
             "label": "Confirmation",
             "success": {
               "title": "Récompenses collectées avec succès !",
-              "text": "Your rewards were added to your available balance",
-              "cta": "View details"
+              "text": "Vos récompenses ont été ajoutées au solde disponible",
+              "cta": "Voir les détails"
             },
             "pending": {
               "title": "Transaction en cours de diffusion..."
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
           }
         }
       }
@@ -1416,7 +1416,7 @@
     },
     "hardResetModal": {
       "title": "Réinitialiser Ledger Live",
-      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your Recovery phrase."
+      "desc": "Réinitialiser Ledger Live pour effacer tous les paramètres et les comptes de votre ordinateur. Vous pouvez ensuite choisir votre mot de passe et rajouter vos comptes avec votre Ledger. Les clés privées donnant accès à vos crypto-actifs restent sécurisées sur votre appareil Ledger et sont associées à votre phrase de récupération."
     },
     "softResetModal": {
       "title": "Vider le cache",
@@ -1740,7 +1740,7 @@
   },
   "TransactionConfirm": {
     "title": "Veuillez confirmer l'opération sur votre appareil pour la finaliser",
-    "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
+    "warning": "Toujours vérifier que l'adresse affichée sur votre appareil correspond exactement à celle donnée par le {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
       "send": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
