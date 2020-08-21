@@ -1130,7 +1130,7 @@
   "algorand": {
     "operationHasRewards": "Récompenses réclamées",
     "operationEarnedRewards": "Vous avez gagné <0>{{amount}}</0> récompenses.",
-    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
+    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> récompenses obtenues)",
     "optIn": {
       "flow": {
         "title": "Ajouter ASA (Actif)",
@@ -1139,7 +1139,7 @@
             "title": "ASA (Actif)",
             "info": "Adding an asset requires sending a transaction with a minimum transaction fee. This will appear on your transaction history",
             "selectLabel": "Choisir un ASA (Actif)",
-            "disabledTooltip": "You already have this ASA (asset) in your Algorand account"
+            "disabledTooltip": "Vous avez déjà cet ASA (Actif) dans votre compte Algorand"
           },
           "connectDevice": {
             "title": "Appareil"
@@ -1149,7 +1149,7 @@
             "label": "Confirmation",
             "success": {
               "title": "{{token}} actif ajouté avec succès",
-              "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
+              "text": "Vous pouvez maintenant recevoir et envoyer des actifs <0>{{token}}</0> sur votre compte Algorand.",
               "cta": "Voir les détails"
             },
             "pending": {
