@@ -24,6 +24,7 @@
     "selectExchangeNoOption": "Биржа, совпадающая с \"{{exchangeName}}\", отсутствует",
     "selectExchangeNoOptionAtAll": "Биржа не найдена",
     "selectValidatorNoOption": "No validator matching \"{{accountName}}\"",
+    "selectNoResults": "No results found matching \"{{query}}\"",
     "sortBy": "Сортировать по",
     "save": "Сохранить",
     "lock": "Заблокировать экран",
@@ -78,7 +79,10 @@
       "FREEZE": "Frozen",
       "UNFREEZE": "Unfrozen",
       "REWARD": "Claimed reward",
-      "FEES": "Fees"
+      "FEES": "Fees",
+      "OPT_IN": "Opt in",
+      "OPT_OUT": "Opt out",
+      "CLOSE_ACCOUNT": "Close account"
     }
   },
   "byteSize": {
@@ -260,6 +264,10 @@
       "title": "Back-up pack",
       "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
       "cta": "Buy back-up pack"
+    },
+    "stakeAlgorand": {
+      "title": "Staking with ALGORAND",
+      "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
     }
   },
   "dashboard": {
@@ -312,7 +320,18 @@
     "hideTokens": "Скрыть токены ({{tokenCount}})",
     "tooltip": "Токен от",
     "countTooltip": "1 token",
-    "countTooltip_plural": "{{count}} tokens"
+    "countTooltip_plural": "{{count}} tokens",
+    "algorand": {
+      "title": "ASA (Assets)",
+      "cta": "Add ASA",
+      "placeholder": "You can add assets to your {{currencyName}} account.",
+      "link": "How assets (ASA) works?",
+      "seeTokens": "Show ASA ({{tokenCount}})",
+      "hideTokens": "Hide ASA ({{tokenCount}})",
+      "tooltip": "ASA from",
+      "countTooltip": "1 ASA",
+      "countTooltip_plural": "{{count}} ASA"
+    }
   },
   "subAccounts": {
     "title": "Subaccounts",
@@ -444,7 +463,9 @@
       "undelegatedAmount": "Undelegated amount",
       "rewardFrom": "Reward from",
       "rewardAmount": "Amount collected",
-      "memo": "Memo"
+      "memo": "Memo",
+      "assetId": "Asset ID",
+      "rewards": "Earned rewards"
     }
   },
   "operationList": {
@@ -1106,6 +1127,85 @@
       }
     }
   },
+  "algorand": {
+    "operationHasRewards": "Rewards earned",
+    "operationEarnedRewards": "You earned <0>{{amount}}</0> rewards.",
+    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
+    "optIn": {
+      "flow": {
+        "title": "Add ASA (Asset)",
+        "steps": {
+          "assets": {
+            "title": "ASA (Asset)",
+            "info": "Adding an asset requires sending a transaction with a minimum transaction fee. This will appear on your transaction history",
+            "selectLabel": "Choose an ASA (Asset)",
+            "disabledTooltip": "You already have this ASA (asset) in your Algorand account"
+          },
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "{{token}} asset successfully added",
+              "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          }
+        }
+      }
+    },
+    "claimRewards": {
+      "header": "Rewards",
+      "tooltip": "Algorand rewards are distributed regularly and are claimed automatically when you do a transaction.",
+      "cta": "Claim rewards",
+      "rewardsDisabledTooltip": "You don’t have any rewards. \u2028Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
+      "flow": {
+        "title": "Claim rewards",
+        "steps": {
+          "starter": {
+            "title": "Earn rewards",
+            "description": "Receive Algorand rewards simply for holding Algorand control of your assets.",
+            "bullet": {
+              "delegate": "A minimum balance of 1 algo is required to receive rewards.",
+              "access": "Increase the account’s balance to increase rewards.",
+              "ledger": "Perform a transaction to or from the account to claim rewards."
+            },
+            "learnMore": "How Algorand rewards work?",
+            "button": {
+              "cta": "Receive Algo"
+            }
+          },
+          "info": {
+            "title": "Rewards",
+            "description": "Congratulations! You earned {{amount}}. Click on Continue to claim your rewards",
+            "info": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees."
+          },
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "Rewards successfully claimed!",
+              "text": "Your rewards were added to your available balance",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          }
+        }
+      }
+    }
+  },
   "delegation": {
     "title": "Earn rewards",
     "header": "Delegation",
@@ -1657,7 +1757,8 @@
       "send": "recipient",
       "delegate": "validator",
       "undelegate": "validator",
-      "claimReward": "delegation rewards recipient"
+      "claimReward": "rewards recipient",
+      "optIn": "recipient"
     },
     "votes": "Votes ({{count}})"
   },
@@ -1705,6 +1806,9 @@
       "title": "Аккаунт не поддерживается.",
       "description": "Повторите попытку или свяжитесь со службой поддержки ({{reason}})"
     },
+    "AlgorandASANotOptInInRecipient": {
+      "title": "Recipient account has not opted in the selected ASA."
+    },
     "AmountRequired": {
       "title": "Amount required"
     },
@@ -1712,7 +1816,7 @@
       "title": "Please ensure your system has a camera, that it is not in use by another application and that Ledger Live has permission to use it.",
       "description": ""
     },
-    "CosmosClaimRewardsFeesWarning": {
+    "ClaimRewardsFeesWarning": {
       "title": "The rewards are smaller than the estimated fees to claim them",
       "description": ""
     },
