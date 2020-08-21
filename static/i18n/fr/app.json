@@ -464,7 +464,7 @@
       "rewardFrom": "Récompense de",
       "rewardAmount": "Montant collecté",
       "memo": "Memo",
-      "assetId": "Asset ID",
+      "assetId": "Actif ID",
       "rewards": "Earned rewards"
     }
   },
@@ -1193,12 +1193,12 @@
             "title": "Confirmation",
             "label": "Confirmation",
             "success": {
-              "title": "Rewards successfully claimed!",
+              "title": "Récompenses collectées avec succès !",
               "text": "Your rewards were added to your available balance",
               "cta": "View details"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Transaction en cours de diffusion..."
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -1304,8 +1304,8 @@
   "carousel": {
     "hidden": {
       "close": "Confirmer",
-      "undo": "Show again",
-      "disclaimer": "This banner will not show up again until there is a new announcement"
+      "undo": "Afficher à nouveau",
+      "disclaimer": "Cette bannière ne s'affichera plus tant qu'il n'y aura pas de nouvelles annonces"
     }
   },
   "settings": {
@@ -1353,8 +1353,8 @@
       "regionDesc": "Choisissez votre région pour définir le fuseau horaire de Ledger Live.",
       "stock": "Indicateur de marché régional",
       "stockDesc": "Choisissez Western pour afficher les hausses du marché en bleu ou Eastern pour les afficher en rouge.",
-      "carouselVisibility": "Carousel visibility",
-      "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
+      "carouselVisibility": "Visibilité du carrousel",
+      "carouselVisibilityDesc": "Activer le carrousel sur la page Portfolio"
     },
     "currencies": {
       "desc": "Modifier les paramètres pour chacun de vos crypto-actifs",
@@ -1757,8 +1757,8 @@
       "send": "destinataire",
       "delegate": "validateur",
       "undelegate": "validateur",
-      "claimReward": "rewards recipient",
-      "optIn": "recipient"
+      "claimReward": "destinataire des récompenses",
+      "optIn": "destinataire"
     },
     "votes": "Votes ({{count}})"
   },
@@ -1807,7 +1807,7 @@
       "description": "Veuillez réessayer ou contacter le Support ({{reason}})"
     },
     "AlgorandASANotOptInInRecipient": {
-      "title": "Recipient account has not opted in the selected ASA."
+      "title": "Le compte destinataire n'a pas activé l'ASA sélectionnée."
     },
     "AmountRequired": {
       "title": "Montant requis"
@@ -1817,7 +1817,7 @@
       "description": ""
     },
     "ClaimRewardsFeesWarning": {
-      "title": "The rewards are smaller than the estimated fees to claim them",
+      "title": "Les récompenses sont plus petites que les frais estimés pour les collecter",
       "description": ""
     },
     "CosmosBroadcastCodeInternal": {
