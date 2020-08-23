@@ -24,6 +24,7 @@
     "selectExchangeNoOption": "Aucun service d'échange correspondant à \"{{exchangeName}}\"",
     "selectExchangeNoOptionAtAll": "Aucun service d'échange trouvé",
     "selectValidatorNoOption": "Aucun validateur correspondant à \"{{accountName}}\"",
+    "selectNoResults": "Aucun résultat trouvé pour \"{{query}}\"",
     "sortBy": "Trier par",
     "save": "Enregistrer",
     "lock": "Verrouiller",
@@ -78,7 +79,10 @@
       "FREEZE": "Gelé",
       "UNFREEZE": "Dégelé",
       "REWARD": "Récompense réclamée",
-      "FEES": "Frais"
+      "FEES": "Frais",
+      "OPT_IN": "Activer",
+      "OPT_OUT": "Désactiver",
+      "CLOSE_ACCOUNT": "Fermer le compte"
     }
   },
   "byteSize": {
@@ -260,6 +264,10 @@
       "title": "Back-up pack",
       "description": "Gérez vos actifs en toute sécurité avec un Nano X et un Nano S à un prix réduit",
       "cta": "Acheter un back-up pack"
+    },
+    "stakeAlgorand": {
+      "title": "Staking avec ALGORAND",
+      "description": "Profiter au mieux de vos ALGO. Ajoutez simplement des fonds à vos comptes et gagnez des récompenses dès aujourd'hui."
     }
   },
   "dashboard": {
@@ -312,7 +320,18 @@
     "hideTokens": "Cacher tokens ({{tokenCount}})",
     "tooltip": "Token de",
     "countTooltip": "1 Token",
-    "countTooltip_plural": "{{count}} Tokens"
+    "countTooltip_plural": "{{count}} Tokens",
+    "algorand": {
+      "title": "ASA (Actifs)",
+      "cta": "Ajouter ASA",
+      "placeholder": "Vous pouvez ajouter des actifs à votre compte {{currencyName}}.",
+      "link": "Comment fonctionnent les actifs (ASA) ?",
+      "seeTokens": "Afficher ASA ({{tokenCount}})",
+      "hideTokens": "Masquer ASA ({{tokenCount}})",
+      "tooltip": "ASA de",
+      "countTooltip": "1 ASA",
+      "countTooltip_plural": "{{count}} ASA"
+    }
   },
   "subAccounts": {
     "title": "Sous-comptes",
@@ -444,7 +463,9 @@
       "undelegatedAmount": "Montant de délégation interrompue",
       "rewardFrom": "Récompense de",
       "rewardAmount": "Montant collecté",
-      "memo": "Memo"
+      "memo": "Memo",
+      "assetId": "Actif ID",
+      "rewards": "Récompenses réclamées"
     }
   },
   "operationList": {
@@ -561,7 +582,7 @@
     "firmware": {
       "updateLater": "Annuler",
       "seedReady": "J'ai ma phrase de récupération",
-      "dontHaveSeed": "Don't have your Recovery phrase? ",
+      "dontHaveSeed": "Vous n'avez pas votre phrase de récupération ?",
       "followTheGuide": "Suivez notre guide de mise à jour étape par étape",
       "removeApps": "Désinstaller toutes les apps avant de mettre à jour",
       "update": "Mettre à jour",
@@ -742,7 +763,7 @@
   "buy": {
     "title": "Acheter",
     "titleCrypto": "Acheter {{currency}}",
-    "buyCTA": "Buy {{currencyTicker}}"
+    "buyCTA": "Acheter {{currencyTicker}}"
   },
   "receive": {
     "title": "Recevoir",
@@ -1106,6 +1127,85 @@
       }
     }
   },
+  "algorand": {
+    "operationHasRewards": "Récompenses réclamées",
+    "operationEarnedRewards": "Vous avez gagné <0>{{amount}}</0> récompenses.",
+    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> récompenses obtenues)",
+    "optIn": {
+      "flow": {
+        "title": "Ajouter ASA (Actif)",
+        "steps": {
+          "assets": {
+            "title": "ASA (Actif)",
+            "info": "L'ajout d'un actif nécessite l'envoi d'une transaction avec des frais minimaux. Cela apparaîtra sur votre historique de transactions",
+            "selectLabel": "Choisir un ASA (Actif)",
+            "disabledTooltip": "Vous avez déjà cet ASA (Actif) dans votre compte Algorand"
+          },
+          "connectDevice": {
+            "title": "Appareil"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "{{token}} actif ajouté avec succès",
+              "text": "Vous pouvez maintenant recevoir et envoyer des actifs <0>{{token}}</0> sur votre compte Algorand.",
+              "cta": "Voir les détails"
+            },
+            "pending": {
+              "title": "Diffusion de la transaction..."
+            },
+            "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+          }
+        }
+      }
+    },
+    "claimRewards": {
+      "header": "Récompenses",
+      "tooltip": "Les récompenses Algorand sont distribuées régulièrement et sont réclamées automatiquement lorsque vous effectuez une transaction.",
+      "cta": "Réclamer les récompenses",
+      "rewardsDisabledTooltip": "Vous n'avez aucune récompense. \nLes récompenses Algorand sont réclamées automatiquement lorsque vous effectuez une transaction. Recevez des ALGO pour commencer à obtenir des récompenses.",
+      "flow": {
+        "title": "Réclamer les récompenses",
+        "steps": {
+          "starter": {
+            "title": "Obtenez des récompenses",
+            "description": "Recevez des récompenses en tenant des ALGO dans votre porte-feuille.",
+            "bullet": {
+              "delegate": "Un solde minimum de 1 ALGO est requis pour recevoir des récompenses.",
+              "access": "Augmentez le solde du compte pour augmenter les récompenses.",
+              "ledger": "Effectuez une transaction vers ou depuis le compte pour réclamer des récompenses."
+            },
+            "learnMore": "Comment fonctionnent les récompenses Algorand?",
+            "button": {
+              "cta": "Recevoir Algo"
+            }
+          },
+          "info": {
+            "title": "Récompenses",
+            "description": "Félicitations ! Vous avez gagné {{amount}}. Cliquez sur Continuer pour réclamer vos récompenses",
+            "info": "Vous serez invité à générer une transaction vide sur votre compte. Celle-ci ajoutera vos récompenses actuelles à votre solde à un coût de transaction minimal."
+          },
+          "connectDevice": {
+            "title": "Appareil"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "Récompenses collectées avec succès !",
+              "text": "Vos récompenses ont été ajoutées au solde disponible",
+              "cta": "Voir les détails"
+            },
+            "pending": {
+              "title": "Transaction en cours de diffusion..."
+            },
+            "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+          }
+        }
+      }
+    }
+  },
   "delegation": {
     "title": "Obtenez des récompenses",
     "header": "Délégation",
@@ -1162,7 +1262,7 @@
           "title": "Sélectionner un validateur",
           "description": "Vous pouvez sélectionner un validateur en comparant les taux de rendement estimés",
           "customValidator": "Validateur personnalisé",
-          "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
+          "providedBy": "Taux de rendements fournis par <1><0>{{name}}</0></1>"
         },
         "custom": {
           "title": "Validateur personnalisé",
@@ -1203,9 +1303,9 @@
   },
   "carousel": {
     "hidden": {
-      "close": "Confirm",
-      "undo": "Show again",
-      "disclaimer": "This banner will not show up again until there is a new announcement"
+      "close": "Confirmer",
+      "undo": "Afficher à nouveau",
+      "disclaimer": "Cette bannière ne s'affichera plus tant qu'il n'y aura pas de nouvelles annonces"
     }
   },
   "settings": {
@@ -1253,8 +1353,8 @@
       "regionDesc": "Choisissez votre région pour définir le fuseau horaire de Ledger Live.",
       "stock": "Indicateur de marché régional",
       "stockDesc": "Choisissez Western pour afficher les hausses du marché en bleu ou Eastern pour les afficher en rouge.",
-      "carouselVisibility": "Carousel visibility",
-      "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
+      "carouselVisibility": "Visibilité du carrousel",
+      "carouselVisibilityDesc": "Activer le carrousel sur la page Portfolio"
     },
     "currencies": {
       "desc": "Modifier les paramètres pour chacun de vos crypto-actifs",
@@ -1316,7 +1416,7 @@
     },
     "hardResetModal": {
       "title": "Réinitialiser Ledger Live",
-      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your Recovery phrase."
+      "desc": "Réinitialiser Ledger Live pour effacer tous les paramètres et les comptes de votre ordinateur. Vous pouvez ensuite choisir votre mot de passe et rajouter vos comptes avec votre Ledger. Les clés privées donnant accès à vos crypto-actifs restent sécurisées sur votre appareil Ledger et sont associées à votre phrase de récupération."
     },
     "softResetModal": {
       "title": "Vider le cache",
@@ -1640,7 +1740,7 @@
   },
   "TransactionConfirm": {
     "title": "Veuillez confirmer l'opération sur votre appareil pour la finaliser",
-    "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
+    "warning": "Toujours vérifier que l'adresse affichée sur votre appareil correspond exactement à celle donnée par le {{recipientWording}}",
     "warningWording": {},
     "titleWording": {
       "send": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
@@ -1657,7 +1757,8 @@
       "send": "destinataire",
       "delegate": "validateur",
       "undelegate": "validateur",
-      "claimReward": "récompense de délégation"
+      "claimReward": "destinataire des récompenses",
+      "optIn": "destinataire"
     },
     "votes": "Votes ({{count}})"
   },
@@ -1705,6 +1806,9 @@
       "title": "Compte non pris en charge.",
       "description": "Veuillez réessayer ou contacter le Support ({{reason}})"
     },
+    "AlgorandASANotOptInInRecipient": {
+      "title": "Le compte destinataire n'a pas activé l'ASA sélectionnée."
+    },
     "AmountRequired": {
       "title": "Montant requis"
     },
@@ -1712,7 +1816,7 @@
       "title": "Veuillez vous assurer que votre système a une caméra qui n'est pas utilisée par une autre application, et que Ledger Live a la permission de l'utiliser.",
       "description": ""
     },
-    "CosmosClaimRewardsFeesWarning": {
+    "ClaimRewardsFeesWarning": {
       "title": "Les récompenses sont plus petites que les frais estimés pour les collecter",
       "description": ""
     },
