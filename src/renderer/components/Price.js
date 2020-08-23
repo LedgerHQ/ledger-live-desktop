@@ -41,7 +41,7 @@ type Props = OwnProps & {
 };
 
 const PriceWrapper = styled(Box).attrs(() => ({
-  ff: "Inter",
+  ff: "Inter|Medium",
   horizontal: true,
 }))`
   line-height: 1.2;

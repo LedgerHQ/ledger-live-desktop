@@ -118,7 +118,7 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
       <Distribution>
         {!!distribution && (
           <>
-            <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
+            <Text ff="Inter|Medium" color="palette.text.shade100" fontSize={3}>
               {`${percentage}%`}
             </Text>
             <Bar progress={isVisible ? percentage : "0"} progressColor={color} />
