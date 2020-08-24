@@ -14,6 +14,7 @@ import Tooltip from "~/renderer/components/Tooltip";
 import IconDots from "~/renderer/icons/Dots";
 import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
 import IconSend from "~/renderer/icons/Send";
+import IconQrCode from "~/renderer/icons/QrCode";
 import { hideEmptyTokenAccountsSelector } from "~/renderer/reducers/settings";
 import { openModal } from "~/renderer/actions/modals";
 import { setHideEmptyTokenAccounts } from "~/renderer/actions/settings";
@@ -71,7 +72,7 @@ const OptionsButton = () => {
     {
       key: "exportAccounts",
       label: t("accounts.optionsMenu.exportToMobile"),
-      icon: <IconSend size={16} />,
+      icon: <IconQrCode size={16} />,
       onClick: () => onOpenModal("MODAL_EXPORT_ACCOUNTS"),
     },
     {

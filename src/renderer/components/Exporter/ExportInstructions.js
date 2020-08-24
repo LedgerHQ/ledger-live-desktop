@@ -7,7 +7,7 @@ import Text from "~/renderer/components/Text";
 import BulletRow from "~/renderer/components/BulletRow";
 
 const BulletRowIcon = styled(Box).attrs(() => ({
-  ff: "Inter|Regular",
+  ff: "Inter|SemiBold",
   fontSize: 10,
   textAlign: "center",
   color: "wallet",
@@ -33,7 +33,7 @@ const Plus = styled(Box).attrs(() => ({
   background-color: rgba(100, 144, 241, 0.2);
   border-radius: 4px;
   height: 14px;
-  line-height: 14px;
+  line-height: 12px;
   width: 14px;
   padding: 0;
 `;
@@ -90,7 +90,7 @@ const stepsImportMobile = [
 
 const ExportInstructions = () => (
   <>
-    <Box shrink style={{ width: 330, fontSize: 13, marginTop: 20 }}>
+    <Box shrink style={{ fontSize: 13, margin: 15 }}>
       <Text ff="Inter|SemiBold" color="palette.text.shade100">
         <Trans i18nKey="settings.export.modal.listTitle" />
       </Text>
