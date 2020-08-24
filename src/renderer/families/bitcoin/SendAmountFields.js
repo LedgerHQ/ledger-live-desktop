@@ -81,13 +81,13 @@ const Fields = ({
           </Box>
           <Separator />
           <InputBox>
+            <RBF transaction={transaction} account={account} onChange={onChange} status={status} />
             <PickUnconfirmedRBF
               transaction={transaction}
               account={account}
               onChange={onChange}
               status={status}
             />
-            <RBF transaction={transaction} account={account} onChange={onChange} status={status} />
           </InputBox>
           <CoinControlModal
             transaction={transaction}

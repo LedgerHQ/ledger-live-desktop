@@ -163,7 +163,7 @@ const CoinControlModal = ({
             <LinkWithExternalIcon onClick={onClickLink}>
               <Trans i18nKey="bitcoin.whatIs" />
             </LinkWithExternalIcon>
-            <Button primary onClick={onClose}>
+            <Button primary onClick={onClose} style={{ marginLeft: 20 }}>
               <Trans i18nKey="common.done" />
             </Button>
           </>

@@ -955,24 +955,24 @@
     "coin": "COIN",
     "toSpend": "Coins to spend",
     "toReturn": "Change to return",
-    "modalTitle": "Select coins",
+    "modalTitle": "Coin control",
     "coincontrol": "Coin control",
     "advanced": "Advanced options",
     "whatIs": "What is coin selection?",
-    "rbf": "Allow transaction to be replaceable-by-fees (RBF)",
+    "rbf": "Allow replacing the transaction to accelerate it (Replace-By-Fee)",
     "strategy": "Coin selection strategy",
     "selected": "Coins selected for strategy",
     "amount": "Amount to send:",
     "replaceable": "replaceable",
-    "cannotSelect": "Cannot select coins from replaceable, unconfirmed transactions",
+    "cannotSelect": "You cannot select coins from unconfirmed, replaceable transactions.",
     "pending": "pending",
     "notEnoughCoins": "You have not selected enough coins to meet the amount to send",
-    "pickUnconfirmedRBF": "Include coins from unconfirmed replaceable transactions",
+    "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions",
     "pickingStrategy": "UTXO picking strategy",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "Deep outputs first (FIFO)",
-      "OPTIMIZE_SIZE": "Optimize size (minimize fees)",
-      "MERGE_OUTPUTS": "merge outputs"
+      "DEEP_OUTPUTS_FIRST": "Oldest coins first (FIFO)",
+      "OPTIMIZE_SIZE": "Minimize fees (optimize size)",
+      "MERGE_OUTPUTS": "Minimize future fees (merge coins)"
     }
   },
   "cosmos": {
