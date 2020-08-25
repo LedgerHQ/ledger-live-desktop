@@ -172,17 +172,16 @@ describe("Bullrun", () => {
   });
 
   it("firmware update flow-5", async () => {
-    const elem = await $("#firmware-update-disclaimer-modal-continue-button");
-    await elem.click();
+    await $("#firmware-update-disclaimer-modal-continue-button").click();
+    const elem = await $("#firmware-update-download-mcu-title");
+    await elem.waitForDisplayed();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "firmware-update-4-disclaimer-modal-continue-2",
+      customSnapshotIdentifier: "firmware-update-4-download-mcu-modal",
     });
   });
 
   it("firmware update flow-6", async () => {
     await mockDeviceEvent({}, { type: "complete" }); // .complete() install full firmware -> flash mcu
-    const elem = await $("#firmware-update-flash-mcu-title");
-    await elem.waitForDisplayed();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-5-flash-mcu-start",
     });

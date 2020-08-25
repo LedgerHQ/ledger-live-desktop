@@ -155,7 +155,7 @@ const StepFullFirmwareInstall = ({
 
   return (
     <Container>
-      <Title>
+      <Title id={"firmware-update-download-mcu-title"}>
         {!displayedOnDevice
           ? t("manager.modal.steps.downloadingUpdate")
           : t("manager.modal.confirmIdentifier")}
