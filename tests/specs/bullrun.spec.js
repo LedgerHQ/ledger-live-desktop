@@ -318,8 +318,8 @@ describe("Bullrun", () => {
     it("cosmos delegate flow", async () => {
       // Cosmos delegate flow
       const accountsButton = await $("#drawer-accounts-button");
-      const searchInput = await $("#accounts-search-input");
       await accountsButton.click();
+      const searchInput = await $("#accounts-search-input");
       await searchInput.addValue("cosmos");
       const firstAccountRowItme = await $(".accounts-account-row-item:first-child");
       await firstAccountRowItme.waitForDisplayed();
