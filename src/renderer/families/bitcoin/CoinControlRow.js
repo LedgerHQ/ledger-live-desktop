@@ -55,12 +55,11 @@ export const CoinControlRow = ({
   updateTransaction,
   bridge,
 }: CoinControlRowProps) => {
-  console.log({ utxoStrategy, utxo });
   const s = getUTXOStatus(utxo, utxoStrategy);
   const input = (status.txInputs || []).find(
     input => input.previousOutputIndex === utxo.outputIndex && input.previousTxHash === utxo.hash,
   );
-  const inputIndex = (status.txInputs || []).indexOf(input);
+
   const disabled = (s.reason || "") === "pickUnconfirmedRBF";
   const onClick = () => {
     if (disabled) return;
@@ -97,8 +96,7 @@ export const CoinControlRow = ({
       <Box style={{ flexBasis: "10%" }}>
         {input && !disabled ? (
           <Text ff="Inter|Bold" fontSize={2} color="wallet" style={{ lineHeight: "10px" }}>
-            <Trans i18nKey="bitcoin.coin" />
-            &nbsp;{inputIndex}
+            <Trans i18nKey="bitcoin.inputSelected" />
           </Text>
         ) : null}
       </Box>

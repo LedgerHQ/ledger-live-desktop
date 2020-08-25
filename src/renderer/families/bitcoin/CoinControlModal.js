@@ -36,6 +36,11 @@ const Separator = styled.div`
   margin: 20px 0;
 `;
 
+const Sticky = styled(Box)`
+  position: sticky;
+  top: -10px;
+`;
+
 const CoinControlModal = ({
   isOpened,
   onClose,
@@ -52,6 +57,7 @@ const CoinControlModal = ({
   const { utxoStrategy } = transaction;
   const bridge = getAccountBridge(account);
   const errorKeys = Object.keys(status.errors);
+
   const error = errorKeys.length ? status.errors[errorKeys[0]] : null;
 
   const returning = (status.txOutputs || []).find(tx => !!tx.path);
@@ -65,8 +71,6 @@ const CoinControlModal = ({
         onClose={onClose}
         render={() => (
           <Box flow={2}>
-            {error ? <ErrorBanner error={error} /> : null}
-
             <PickingStrategy
               transaction={transaction}
               account={account}
@@ -75,7 +79,7 @@ const CoinControlModal = ({
             />
 
             <Separator />
-
+            <Sticky>{error ? <ErrorBanner error={error} /> : null}</Sticky>
             <Box mt={0} mb={4} horizontal alignItem="center" justifyContent="space-between">
               <Text color="palette.text.shade50" ff="Inter|Regular" fontSize={13}>
                 <Trans i18nKey="bitcoin.selected" />
@@ -121,15 +125,19 @@ const CoinControlModal = ({
         )}
         renderFooter={() => (
           <>
-            {error ? null : (
-              <Box flow={4} alignItems="center" horizontal style={{ flexBasis: "50%" }}>
-                <Box grow>
-                  <Box horizontal alignItems="center" mb={2}>
-                    <Box style={{ flexBasis: "40%" }}>
-                      <Text ff="Inter|Medium" fontSize={3} color="palette.text.shade50">
-                        <Trans i18nKey="bitcoin.toSpend" />
-                      </Text>
-                    </Box>
+            <Box flow={4} alignItems="center" horizontal style={{ flexBasis: "50%" }}>
+              <Box grow>
+                <Box horizontal alignItems="center" mb={2}>
+                  <Box style={{ flexBasis: "40%" }}>
+                    <Text ff="Inter|Medium" fontSize={3} color="palette.text.shade50">
+                      <Trans i18nKey="bitcoin.toSpend" />
+                    </Text>
+                  </Box>
+                  {error ? (
+                    <Text fontSize={4} ff="Inter|SemiBold" color="palette.text.shade100">
+                      -
+                    </Text>
+                  ) : (
                     <FormattedVal
                       disableRounding
                       val={status.totalSpent}
@@ -139,13 +147,19 @@ const CoinControlModal = ({
                       ff="Inter|SemiBold"
                       color="palette.text.shade100"
                     />
+                  )}
+                </Box>
+                <Box horizontal alignItems="center">
+                  <Box style={{ flexBasis: "40%" }}>
+                    <Text ff="Inter|Medium" fontSize={3} color="palette.text.shade50">
+                      <Trans i18nKey="bitcoin.toReturn" />
+                    </Text>
                   </Box>
-                  <Box horizontal alignItems="center">
-                    <Box style={{ flexBasis: "40%" }}>
-                      <Text ff="Inter|Medium" fontSize={3} color="palette.text.shade50">
-                        <Trans i18nKey="bitcoin.toReturn" />
-                      </Text>
-                    </Box>
+                  {error ? (
+                    <Text fontSize={4} ff="Inter|SemiBold" color="palette.text.shade100">
+                      -
+                    </Text>
+                  ) : (
                     <FormattedVal
                       disableRounding
                       val={returning ? returning.value : BigNumber(0)}
@@ -155,10 +169,10 @@ const CoinControlModal = ({
                       ff="Inter|SemiBold"
                       color="palette.text.shade100"
                     />
-                  </Box>
+                  )}
                 </Box>
               </Box>
-            )}
+            </Box>
             <Box grow />
             <LinkWithExternalIcon onClick={onClickLink}>
               <Trans i18nKey="bitcoin.whatIs" />

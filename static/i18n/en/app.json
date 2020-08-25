@@ -952,12 +952,13 @@
     }
   },
   "bitcoin": {
-    "coin": "COIN",
+    "inputSelected": "SELECTED",
     "toSpend": "Coins to spend",
     "toReturn": "Change to return",
     "modalTitle": "Coin control",
     "coincontrol": "Coin control",
     "advanced": "Advanced options",
+    "ctaDisabled": "You must first enter an amount.",
     "whatIs": "What is coin selection?",
     "rbf": "Allow replacing the transaction to accelerate it (Replace-By-Fee)",
     "strategy": "Coin selection strategy",
