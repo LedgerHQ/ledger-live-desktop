@@ -147,7 +147,7 @@ describe("Bullrun", () => {
 
   it("firmware update flow-1", async () => {
     const elem = await $("#manager-update-firmware-button");
-    await elem.waitForExist({ timeout: 100000 });
+    await elem.waitForDisplayed();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-0-manager-page",
     });
@@ -157,7 +157,7 @@ describe("Bullrun", () => {
     const button = await $("#manager-update-firmware-button");
     await button.click();
     const elem = await $("#firmware-update-disclaimer-modal-seed-ready-checkbox");
-    await elem.waitForExist();
+    await elem.waitForDisplayed();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-1-disclaimer-modal",
     });
@@ -182,7 +182,7 @@ describe("Bullrun", () => {
   it("firmware update flow-6", async () => {
     await mockDeviceEvent({}, { type: "complete" }); // .complete() install full firmware -> flash mcu
     const elem = await $("#firmware-update-flash-mcu-title");
-    await elem.waitForExist();
+    await elem.waitForDisplayed();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-5-flash-mcu-start",
     });
@@ -191,7 +191,7 @@ describe("Bullrun", () => {
   it("firmware update flow-7", async () => {
     await mockDeviceEvent({}, { type: "complete" }); // .complete() flash mcu -> completed
     const elem = await $("#firmware-update-completed-close-button");
-    await elem.waitForExist();
+    await elem.waitForDisplayed();
     expect(await app.client.screenshot(6000)).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-6-flash-mcu-done",
     });
@@ -223,7 +223,7 @@ describe("Bullrun", () => {
           ? "#accounts-empty-state-add-account-button"
           : "#accounts-add-account-button";
         const elemAddAccountId = await $(addAccountId);
-        await elemAddAccountId.waitForExist();
+        await elemAddAccountId.waitForDisplayed();
         await elemAddAccountId.click();
         const elemSelectControl = await $("#modal-container .select__control");
         await elemSelectControl.click();
@@ -235,8 +235,8 @@ describe("Bullrun", () => {
         await elemContinueButton.click();
         await mockDeviceEvent({ type: "opened" });
         const elemImportAddButton = await $("#add-accounts-import-add-button");
-        await elemImportAddButton.waitForExist({ timeout: 20000 });
-        await elemImportAddButton.waitForEnabled({ timeout: 20000 });
+        await elemImportAddButton.waitForDisplayed();
+        await elemImportAddButton.waitForEnabled();
         await elemImportAddButton.click();
         await modalPage.close();
         if (!i) {
