@@ -183,6 +183,8 @@ describe("Bullrun", () => {
 
   it("firmware update flow-6", async () => {
     await mockDeviceEvent({}, { type: "complete" }); // .complete() install full firmware -> flash mcu
+    const elem = await $("#firmware-update-flash-mcu-title");
+    await elem.waitForDisplayed();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-5-flash-mcu-start",
     });
