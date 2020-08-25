@@ -172,7 +172,8 @@ describe("Bullrun", () => {
   });
 
   it("firmware update flow-5", async () => {
-    await $("#firmware-update-disclaimer-modal-continue-button").click();
+    const continueButton = await $("#firmware-update-disclaimer-modal-continue-button");
+    await continueButton.click();
     const elem = await $("#firmware-update-download-mcu-title");
     await elem.waitForDisplayed();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
