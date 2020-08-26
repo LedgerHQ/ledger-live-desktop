@@ -70,6 +70,12 @@ const STYLES_OVERRIDE = {
       </components.ClearIndicator>
     );
   },
+  Placeholder: function Input(props: OptionProps) {
+    const { selectProps } = props;
+    const { isSearchable, menuIsOpen } = selectProps;
+
+    return menuIsOpen && isSearchable ? null : <components.Placeholder {...props} />;
+  },
   Input: function Input(props: OptionProps) {
     const { t } = useTranslation();
     const { selectProps } = props;
