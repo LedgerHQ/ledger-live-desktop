@@ -90,7 +90,7 @@ const stepsImportMobile = [
 
 const ExportInstructions = () => (
   <>
-    <Box noScroll shrink style={{ fontSize: 13, margin: 15 }}>
+    <Box shrink style={{ fontSize: 13, margin: 15 }}>
       <Text ff="Inter|SemiBold" color="palette.text.shade100">
         <Trans i18nKey="settings.export.modal.listTitle" />
       </Text>
