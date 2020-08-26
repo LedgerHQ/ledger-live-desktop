@@ -24,9 +24,9 @@ const FirstLetterIcon: ThemedComponent<{ label: string }> = styled.div.attrs(p =
   font-size: 13px;
   line-height: 24px;
   text-align: center;
+  color: ${p => p.theme.colors.palette.text.shade80};
   ${color};
   ${margin};
-  color: ${p => p.theme.colors.palette.text.shade80};
   overflow: hidden;
   &::after {
     content: "${p => p.content}";

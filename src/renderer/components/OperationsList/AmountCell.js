@@ -20,6 +20,7 @@ const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
   text-align: right;
   justify-content: center;
   height: 32px;
+  min-width: 150px;
 `;
 
 type Props = {
@@ -37,7 +38,10 @@ class AmountCell extends PureComponent<Props> {
     // $FlowFixMe
     const specific = currency.family ? perFamilyOperationDetails[currency.family] : null;
 
-    const Element = specific && specific.amountCell ? specific.amountCell[operation.type] : null;
+    const Element =
+      specific && specific.amountCellExtra ? specific.amountCellExtra[operation.type] : null;
+    const AmountElement =
+      specific && specific.amountCell ? specific.amountCell[operation.type] : null;
 
     return (
       <>
@@ -48,23 +52,34 @@ class AmountCell extends PureComponent<Props> {
         )}
         {!amount.isZero() && (
           <Cell>
-            <FormattedVal
-              val={amount}
-              unit={unit}
-              showCode
-              fontSize={4}
-              alwaysShowSign
-              color={amount.isNegative() ? "palette.text.shade80" : undefined}
-            />
+            {AmountElement ? (
+              <AmountElement
+                amount={amount}
+                operation={operation}
+                unit={unit}
+                currency={currency}
+              />
+            ) : (
+              <>
+                <FormattedVal
+                  val={amount}
+                  unit={unit}
+                  showCode
+                  fontSize={4}
+                  alwaysShowSign
+                  color={amount.isNegative() ? "palette.text.shade80" : undefined}
+                />
 
-            <CounterValue
-              color="palette.text.shade60"
-              fontSize={3}
-              alwaysShowSign
-              date={operation.date}
-              currency={currency}
-              value={amount}
-            />
+                <CounterValue
+                  color="palette.text.shade60"
+                  fontSize={3}
+                  alwaysShowSign
+                  date={operation.date}
+                  currency={currency}
+                  value={amount}
+                />
+              </>
+            )}
           </Cell>
         )}
       </>

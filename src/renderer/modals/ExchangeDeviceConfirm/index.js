@@ -1,6 +1,7 @@
 // @flow
 import React, { useCallback, useEffect, useState } from "react";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getAccountName, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
@@ -9,7 +10,6 @@ import Modal from "~/renderer/components/Modal";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import Box from "~/renderer/components/Box";
 import { command } from "~/renderer/commands";
-import { WrongDeviceForAccount } from "@ledgerhq/errors";
 import { useSelector } from "react-redux";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import Text from "~/renderer/components/Text";
@@ -64,18 +64,13 @@ const VerifyOnDevice = ({ mainAccount, onAddressVerified, device }: VerifyOnDevi
           onAddressVerified(true);
         }, 3000);
       } else {
-        const { address } = await command("getAddress")({
-          derivationMode: mainAccount.derivationMode,
-          currencyId: mainAccount.currency.id,
-          devicePath: device.path,
-          path: mainAccount.freshAddressPath,
-          verify: true,
-        }).toPromise();
-        if (address !== mainAccount.freshAddress) {
-          throw new WrongDeviceForAccount(`WrongDeviceForAccount ${mainAccount.name}`, {
-            accountName: mainAccount.name,
-          });
-        }
+        await getAccountBridge(mainAccount)
+          .receive(mainAccount, {
+            deviceId: device.path,
+            verify: true,
+          })
+          .toPromise();
+
         onAddressVerified(true);
       }
     } catch (err) {

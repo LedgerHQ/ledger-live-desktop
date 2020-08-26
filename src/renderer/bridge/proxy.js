@@ -57,6 +57,12 @@ export const getAccountBridge = (
       syncConfig,
     }).pipe(map(raw => account => patchAccount(account, raw)));
 
+  const receive = (account, arg) =>
+    command("AccountReceive")({
+      account: toAccountRaw(account),
+      arg,
+    });
+
   const createTransaction = a =>
     bridgeImpl.getAccountBridge(account, parentAccount).createTransaction(a);
 
@@ -116,6 +122,7 @@ export const getAccountBridge = (
     getTransactionStatus,
     prepareTransaction,
     sync,
+    receive,
     signOperation,
     broadcast,
     estimateMaxSpendable,

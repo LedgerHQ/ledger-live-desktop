@@ -2,6 +2,8 @@
 
 import React, { PureComponent } from "react";
 import { Trans } from "react-i18next";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import styled from "styled-components";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account/helpers";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
@@ -12,7 +14,7 @@ import Box from "~/renderer/components/Box";
 import AccountContextMenu from "~/renderer/components/ContextMenu/AccountContextMenu";
 import Text from "~/renderer/components/Text";
 import TokenRow from "~/renderer/components/TokenRow";
-import IconAngleDown from "~/renderer/icons/AngleDown";
+import AngleDown from "~/renderer/icons/AngleDown";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import { matchesSearch } from "../AccountList";
@@ -21,12 +23,11 @@ import Balance from "./Balance";
 import Countervalue from "./Countervalue";
 import Delta from "./Delta";
 import Header from "./Header";
-
 import Star from "~/renderer/components/Stars/Star";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
 import { hideEmptyTokenAccountsSelector } from "~/renderer/reducers/settings";
 import Button from "~/renderer/components/Button";
+
+import perFamilyTokenList from "~/renderer/generated/TokenList";
 
 const Row: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
@@ -113,6 +114,13 @@ const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled(B
     margin-left: 8px;
     transform: rotate(${p => (p.expanded ? "180deg" : "0deg")});
   }
+`;
+
+const IconAngleDown = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: ${p => (p.expanded ? "rotate(180deg)" : "rotate(0deg)")};
 `;
 
 type Props = {
@@ -215,10 +223,17 @@ class AccountRowItem extends PureComponent<Props, State> {
 
     const showTokensIndicator = tokens && tokens.length > 0 && !hidden;
 
+    const specific = perFamilyTokenList[mainAccount.currency.family];
+    const hasSpecificTokenWording = specific?.hasSpecificTokenWording;
+
     const translationMap = isToken
       ? {
-          see: "tokensList.seeTokens",
-          hide: "tokensList.hideTokens",
+          see: hasSpecificTokenWording
+            ? `tokensList.${mainAccount.currency.family}.seeTokens`
+            : `tokensList.seeTokens`,
+          hide: hasSpecificTokenWording
+            ? `tokensList.${mainAccount.currency.family}.hideTokens`
+            : `tokensList.hideTokens`,
         }
       : {
           see: "subAccounts.seeSubAccounts",
@@ -288,7 +303,9 @@ class AccountRowItem extends PureComponent<Props, State> {
                     values={{ tokenCount: tokens.length }}
                   />
                 </Text>
-                <IconAngleDown size={16} />
+                <IconAngleDown expanded={expanded}>
+                  <AngleDown size={16} />
+                </IconAngleDown>
               </Box>
             </TokenShowMoreIndicator>
           )}
@@ -301,8 +318,5 @@ const mapStateToProps = createStructuredSelector({
   hideEmptyTokenAccounts: hideEmptyTokenAccountsSelector,
 });
 
-const ConnectedAccountRowItem: React$ComponentType<{}> = connect(
-  mapStateToProps,
-  null,
-)(AccountRowItem);
+const ConnectedAccountRowItem: React$ComponentType<{}> = connect(mapStateToProps)(AccountRowItem);
 export default ConnectedAccountRowItem;

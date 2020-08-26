@@ -30,4 +30,5 @@ setSupportedCurrencies([
   "stealthcoin",
   "bitcoin_testnet",
   "ethereum_ropsten",
+  "algorand",
 ]);

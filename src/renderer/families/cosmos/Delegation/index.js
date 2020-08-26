@@ -63,7 +63,6 @@ const Delegation = ({ account }: Props) => {
   const { validators } = useCosmosPreloadData();
   const unit = getAccountUnit(account);
 
-  /** @TODO move this to common with a useCosmosMappedUnbondings */
   const mappedUnbondings = mapUnbondings(unbondings, validators, unit);
 
   const onEarnRewards = useCallback(() => {

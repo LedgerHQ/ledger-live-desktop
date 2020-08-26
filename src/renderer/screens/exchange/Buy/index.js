@@ -20,9 +20,10 @@ const BuyContainer: ThemedComponent<{}> = styled.div`
 
 type Props = {
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
+  defaultAccount?: ?Account,
 };
 
-const Buy = ({ defaultCurrency }: Props) => {
+const Buy = ({ defaultCurrency, defaultAccount }: Props) => {
   const [state, setState] = useState({
     account: undefined,
     parentAccount: undefined,
@@ -66,7 +67,11 @@ const Buy = ({ defaultCurrency }: Props) => {
       {account ? (
         <CoinifyWidget account={account} parentAccount={parentAccount} mode="buy" onReset={reset} />
       ) : (
-        <SelectAccountAndCurrency selectAccount={selectAccount} defaultCurrency={defaultCurrency} />
+        <SelectAccountAndCurrency
+          selectAccount={selectAccount}
+          defaultCurrency={defaultCurrency}
+          defaultAccount={defaultAccount}
+        />
       )}
     </BuyContainer>
   );

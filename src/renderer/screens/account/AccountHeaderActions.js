@@ -78,8 +78,14 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   }, [parentAccount, account, openModal]);
 
   const onBuy = useCallback(() => {
-    history.push("/exchange");
-  }, [history]);
+    history.push({
+      pathname: "/exchange",
+      state: {
+        defaultCurrency: currency,
+        defaultAccount: mainAccount,
+      },
+    });
+  }, [currency, history, mainAccount]);
 
   return (
     <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>

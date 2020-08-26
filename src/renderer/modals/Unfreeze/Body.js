@@ -29,7 +29,6 @@ import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepCo
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
 
-/** @TODO move this to common */
 export const getUnfreezeData = (
   account: Account,
 ): {

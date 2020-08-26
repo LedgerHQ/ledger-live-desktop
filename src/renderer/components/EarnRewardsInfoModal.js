@@ -15,6 +15,7 @@ import Modal, { ModalBody } from "./Modal";
 type Props = {
   name?: string,
   onNext: () => void,
+  nextLabel?: React$Node,
   description: string,
   bullets: string[],
   additional: React$Node,
@@ -24,6 +25,7 @@ type Props = {
 export default function EarnRewardsInfoModal({
   name,
   onNext,
+  nextLabel,
   description,
   bullets,
   additional,
@@ -83,7 +85,7 @@ export default function EarnRewardsInfoModal({
                 <Trans i18nKey="common.cancel" />
               </Button>
               <Button primary onClick={onNext}>
-                <Trans i18nKey="common.continue" />
+                {nextLabel || <Trans i18nKey="common.continue" />}
               </Button>
             </Box>
           )}

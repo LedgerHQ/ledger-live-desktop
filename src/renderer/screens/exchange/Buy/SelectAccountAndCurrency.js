@@ -13,14 +13,18 @@ import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Button from "~/renderer/components/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { accountsSelector } from "~/renderer/reducers/accounts";
-import type { Account } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  AccountLike,
+  CryptoCurrency,
+  TokenCurrency,
+} from "@ledgerhq/live-common/lib/types";
 import FakeLink from "~/renderer/components/FakeLink";
 import PlusIcon from "~/renderer/icons/Plus";
 import { openModal } from "~/renderer/actions/modals";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
 import { track } from "~/renderer/analytics/segment";
-import type { AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 
 const Container: ThemedComponent<{}> = styled.div`
@@ -60,6 +64,7 @@ const FormContent: ThemedComponent<{}> = styled.div`
 type Props = {
   selectAccount: (account: AccountLike, parentAccount: ?Account) => void,
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
+  defaultAccount?: ?Account,
 };
 
 const AccountSelectorLabel = styled(Label)`
@@ -68,7 +73,7 @@ const AccountSelectorLabel = styled(Label)`
   justify-content: space-between;
 `;
 
-const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency }: Props) => {
+const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccount }: Props) => {
   const { t } = useTranslation();
   const allCurrencies = useCoinifyCurrencies();
   const allAccounts = useSelector(accountsSelector);
@@ -80,7 +85,7 @@ const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency }: Props) => 
     subAccount,
     setAccount,
     setCurrency,
-  } = useCurrencyAccountSelect(allCurrencies, allAccounts);
+  } = useCurrencyAccountSelect({ allCurrencies, allAccounts, defaultCurrency, defaultAccount });
 
   const dispatch = useDispatch();
 

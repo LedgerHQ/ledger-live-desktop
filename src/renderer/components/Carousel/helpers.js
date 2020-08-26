@@ -3,6 +3,7 @@ import LedgerAcademyBanner from "~/renderer/components/Carousel/banners/LedgerAc
 import BackupPackBanner from "~/renderer/components/Carousel/banners/BackupPack";
 import StakeCosmosBanner from "~/renderer/components/Carousel/banners/StakeCosmos";
 import BuyCryptoBanner from "~/renderer/components/Carousel/banners/BuyCrypto";
+import StakeAlgorandBanner from "~/renderer/components/Carousel/banners/StakeAlgorand";
 
 export const getTransitions = (transition: "slide" | "flip", reverse: boolean = false) => {
   const mult = reverse ? -1 : 1;
@@ -47,5 +48,6 @@ export const getDefaultSlides = () => {
     { id: "ledgerAcademy", Component: LedgerAcademyBanner },
     { id: "stakeCosmos", Component: StakeCosmosBanner },
     { id: "buyCrypto", Component: BuyCryptoBanner },
+    { id: "stakeAlgorand", Component: StakeAlgorandBanner },
   ];
 };

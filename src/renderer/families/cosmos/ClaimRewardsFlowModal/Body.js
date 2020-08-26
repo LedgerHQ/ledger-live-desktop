@@ -65,7 +65,7 @@ const steps: Array<St> = [
     id: "connectDevice",
     label: <Trans i18nKey="cosmos.claimRewards.flow.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
-    onBack: ({ transitionTo }: StepProps) => transitionTo("castClaimRewardss"),
+    onBack: ({ transitionTo }: StepProps) => transitionTo("claimRewardss"),
   },
   {
     id: "confirmation",
