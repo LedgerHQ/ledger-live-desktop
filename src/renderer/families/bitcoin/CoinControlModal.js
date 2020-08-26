@@ -38,7 +38,8 @@ const Separator = styled.div`
 
 const Sticky = styled(Box)`
   position: sticky;
-  top: -10px;
+  top: -20px;
+  z-index: 1;
 `;
 
 const CoinControlModal = ({
@@ -120,24 +121,31 @@ const CoinControlModal = ({
                   account={account}
                 />
               ))}
+              {bitcoinResources.utxos.map(utxo => (
+                <CoinControlRow
+                  key={utxo.hash}
+                  utxoStrategy={utxoStrategy}
+                  utxo={utxo}
+                  updateTransaction={updateTransaction}
+                  bridge={bridge}
+                  status={status}
+                  account={account}
+                />
+              ))}
             </Box>
           </Box>
         )}
         renderFooter={() => (
           <>
-            <Box flow={4} alignItems="center" horizontal style={{ flexBasis: "50%" }}>
-              <Box grow>
-                <Box horizontal alignItems="center" mb={2}>
-                  <Box style={{ flexBasis: "40%" }}>
-                    <Text ff="Inter|Medium" fontSize={3} color="palette.text.shade50">
-                      <Trans i18nKey="bitcoin.toSpend" />
-                    </Text>
-                  </Box>
-                  {error ? (
-                    <Text fontSize={4} ff="Inter|SemiBold" color="palette.text.shade100">
-                      -
-                    </Text>
-                  ) : (
+            {error ? null : (
+              <Box flow={4} alignItems="center" horizontal style={{ flexBasis: "50%" }}>
+                <Box grow>
+                  <Box horizontal alignItems="center" mb={2}>
+                    <Box style={{ flexBasis: "40%" }}>
+                      <Text ff="Inter|Medium" fontSize={3} color="palette.text.shade50">
+                        <Trans i18nKey="bitcoin.toSpend" />
+                      </Text>
+                    </Box>
                     <FormattedVal
                       disableRounding
                       val={status.totalSpent}
@@ -147,19 +155,13 @@ const CoinControlModal = ({
                       ff="Inter|SemiBold"
                       color="palette.text.shade100"
                     />
-                  )}
-                </Box>
-                <Box horizontal alignItems="center">
-                  <Box style={{ flexBasis: "40%" }}>
-                    <Text ff="Inter|Medium" fontSize={3} color="palette.text.shade50">
-                      <Trans i18nKey="bitcoin.toReturn" />
-                    </Text>
                   </Box>
-                  {error ? (
-                    <Text fontSize={4} ff="Inter|SemiBold" color="palette.text.shade100">
-                      -
-                    </Text>
-                  ) : (
+                  <Box horizontal alignItems="center">
+                    <Box style={{ flexBasis: "40%" }}>
+                      <Text ff="Inter|Medium" fontSize={3} color="palette.text.shade50">
+                        <Trans i18nKey="bitcoin.toReturn" />
+                      </Text>
+                    </Box>
                     <FormattedVal
                       disableRounding
                       val={returning ? returning.value : BigNumber(0)}
@@ -169,15 +171,15 @@ const CoinControlModal = ({
                       ff="Inter|SemiBold"
                       color="palette.text.shade100"
                     />
-                  )}
+                  </Box>
                 </Box>
               </Box>
-            </Box>
+            )}
             <Box grow />
             <LinkWithExternalIcon onClick={onClickLink}>
               <Trans i18nKey="bitcoin.whatIs" />
             </LinkWithExternalIcon>
-            <Button primary onClick={onClose} style={{ marginLeft: 20 }}>
+            <Button primary onClick={onClose}>
               <Trans i18nKey="common.done" />
             </Button>
           </>
