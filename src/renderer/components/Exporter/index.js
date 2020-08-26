@@ -17,7 +17,7 @@ type Props = OwnProps & {
 const Exporter = ({ accounts }: Props) => (
   <Box justifyContent="center" alignItems="center">
     <Box flow={2}>
-      <QRCodeExporter accounts={accounts} size={200} />
+      <QRCodeExporter accounts={accounts} size={208} />
     </Box>
     <ExportInstructions />
   </Box>
