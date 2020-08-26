@@ -8,6 +8,7 @@ import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import OperationRow from "~/renderer/screens/swap/History/OperationRow";
 import getCompleteSwapHistory from "@ledgerhq/live-common/lib/swap/getCompleteSwapHistory";
 import updateAccountSwapStatus from "@ledgerhq/live-common/lib/swap/updateAccountSwapStatus";
+import { flattenAccounts } from "@ledgerhq/live-common/lib/account";
 import { mappedSwapOperationsToCSV } from "@ledgerhq/live-common/lib/swap/csvExport";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import { openModal } from "~/renderer/actions/modals";
@@ -82,7 +83,7 @@ const History = () => {
 
   useEffect(() => {
     (async function asyncGetCompleteSwapHistory() {
-      setMappedSwapOperations(await getCompleteSwapHistory(accounts));
+      setMappedSwapOperations(await getCompleteSwapHistory(flattenAccounts(accounts)));
     })();
   }, [accounts]);
 
