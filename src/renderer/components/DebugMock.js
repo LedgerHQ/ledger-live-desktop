@@ -105,7 +105,29 @@ const swapEvents = [
       type: "result",
       result: mockListAppsResult(
         "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar,Exchange",
-        "Bitcoin,Tron,Litecoin,Ethereum,Exchange",
+        "Exchange,Tron,Bitcoin,Ethereum",
+        deviceInfo155,
+      ),
+    },
+  },
+  {
+    name: "result with only Exchange",
+    event: {
+      type: "result",
+      result: mockListAppsResult(
+        "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar,Exchange",
+        "Exchange",
+        deviceInfo155,
+      ),
+    },
+  },
+  {
+    name: "result with only Exchange+BTC",
+    event: {
+      type: "result",
+      result: mockListAppsResult(
+        "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar,Exchange",
+        "Exchange,Bitcoin",
         deviceInfo155,
       ),
     },

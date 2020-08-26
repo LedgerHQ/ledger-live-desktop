@@ -65,8 +65,8 @@ const SwapInputGroup = ({
   onCurrencyChange,
 }: {
   currencies: (CryptoCurrency | TokenCurrency)[],
-  currency: CryptoCurrency | TokenCurrency,
-  fromCurrency: CryptoCurrency | TokenCurrency,
+  currency: ?(CryptoCurrency | TokenCurrency),
+  fromCurrency: ?(CryptoCurrency | TokenCurrency),
   account: ?Account,
   currenciesStatus: CurrenciesStatus,
   validAccounts: Account[],
@@ -135,8 +135,6 @@ const SwapInputGroup = ({
     },
     [onAccountChange, setAccount],
   );
-
-  if (!currency) return null;
 
   return (
     <Box flex={1} flow={1} mb={3} ml={23}>

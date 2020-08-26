@@ -269,8 +269,6 @@ const Form = ({
     }
   }, 5000);
 
-  if (!fromAccount) return null;
-
   return (
     <>
       <Card flow={1}>
@@ -294,29 +292,24 @@ const Form = ({
             onToggleUseAllAmount={toggleUseAllAmount}
           />
           <ArrowSeparator Icon={IconArrowRight} />
-          {toCurrency && fromCurrency ? (
-            <To
-              key={toCurrency.id}
-              currenciesStatus={currenciesStatus}
-              account={toAccount ? getMainAccount(toAccount, toParentAccount) : null}
-              amount={fromAmount ? fromAmount.times(magnitudeAwareRate) : null}
-              currency={toCurrency}
-              fromCurrency={fromCurrency}
-              rate={magnitudeAwareRate}
-              currencies={selectableCurrencies.filter(c => c !== fromCurrency)}
-              onCurrencyChange={toCurrency =>
-                dispatch({ type: "setToCurrency", payload: { toCurrency } })
-              }
-              onAccountChange={(toAccount, toParentAccount) =>
-                patchExchange({ toAccount, toParentAccount })
-              }
-              validAccounts={validTo}
-            />
-          ) : null}
+          <To
+            currenciesStatus={currenciesStatus}
+            account={toAccount ? getMainAccount(toAccount, toParentAccount) : null}
+            amount={fromAmount ? fromAmount.times(magnitudeAwareRate) : null}
+            currency={toCurrency}
+            fromCurrency={fromCurrency}
+            rate={magnitudeAwareRate}
+            currencies={selectableCurrencies.filter(c => c !== fromCurrency)}
+            onCurrencyChange={toCurrency =>
+              dispatch({ type: "setToCurrency", payload: { toCurrency } })
+            }
+            onAccountChange={(toAccount, toParentAccount) =>
+              patchExchange({ toAccount, toParentAccount })
+            }
+            validAccounts={validTo}
+          />
         </Box>
         <Footer horizontal>
-          <div>{fromAccount && fromAccount.balance.toString()}</div>
-          <div>{toAccount && toAccount.balance.toString()}</div>
           <LabelWithExternalIcon
             color="wallet"
             ff="Inter|SemiBold"

@@ -102,8 +102,6 @@ const From = ({
     [onAccountChange, setAccount],
   );
 
-  if (!currency) return null; // FIXME, likely need to account for no valid swap combinations
-
   return (
     <Box flex={1} flow={1} mb={3} ml={0} mr={23}>
       <Text mb={15} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={5}>
