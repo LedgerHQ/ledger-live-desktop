@@ -187,7 +187,7 @@ const Form = ({
   }, [fromCurrency, validFrom]);
 
   useEffect(() => {
-    let toAccount;
+    let toAccount = validTo[0];
     let toParentAccount;
 
     if (toCurrency && toCurrency.type === "TokenCurrency") {
@@ -195,8 +195,8 @@ const Form = ({
       toAccount = accountWithMandatoryTokens(toParentAccount, [toCurrency]).subAccounts?.find(
         isSameCurrencyFilter(toCurrency),
       );
-    } else {
-      toAccount = validTo[0];
+    } else if (toCurrency && fromCurrency && toCurrency.id !== fromCurrency.id) {
+      return;
     }
 
     dispatch({
