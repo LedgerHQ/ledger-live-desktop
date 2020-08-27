@@ -325,7 +325,7 @@
       "title": "ASA (Actifs)",
       "cta": "Ajouter ASA",
       "placeholder": "Vous pouvez ajouter des actifs à votre compte {{currencyName}}.",
-      "link": "Comment fonctionnent les actifs (ASA) ?",
+      "link": "Comment fonctionnent les ASA ?",
       "seeTokens": "Afficher ASA ({{tokenCount}})",
       "hideTokens": "Masquer ASA ({{tokenCount}})",
       "tooltip": "ASA de",
@@ -1176,7 +1176,7 @@
               "access": "Augmentez le solde du compte pour augmenter les récompenses.",
               "ledger": "Effectuez une transaction vers ou depuis le compte pour réclamer des récompenses."
             },
-            "learnMore": "Comment fonctionnent les récompenses Algorand?",
+            "learnMore": "Comment fonctionne Algorand ?",
             "button": {
               "cta": "Recevoir Algo"
             }
