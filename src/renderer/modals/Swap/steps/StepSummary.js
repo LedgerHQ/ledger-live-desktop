@@ -10,17 +10,11 @@ import {
   getAccountName,
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
-import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
+import FormattedVal from "~/renderer/components/FormattedVal";
 import ArrowSeparator from "~/renderer/components/ArrowSeparator";
 import CheckBox from "~/renderer/components/CheckBox";
-import Tooltip from "~/renderer/components/Tooltip";
 import React from "react";
-import type {
-  Exchange,
-  ExchangeRate,
-  SwapOperation,
-  SwapState,
-} from "@ledgerhq/live-common/lib/swap/types";
+import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import Button from "~/renderer/components/Button";
 import IconWallet from "~/renderer/icons/Wallet";
@@ -87,8 +81,14 @@ const StepSummary = ({
           <Text mb={1} ff="Inter|Regular" color="palette.text.shade30" fontSize={4}>
             <Trans i18nKey="swap.modal.steps.summary.toExchange" />
           </Text>
-          <Text ff="Inter|Regular" color="palette.text.shade100" fontSize={4}>
-            <CurrencyUnitValue value={fromAmount} unit={fromUnit} showCode />
+          <Text ff="Inter|Regular" fontSize={4}>
+            <FormattedVal
+              disableRounding
+              color="palette.text.shade100"
+              val={fromAmount}
+              unit={fromUnit}
+              showCode
+            />
           </Text>
         </Box>
       </Box>
@@ -112,8 +112,14 @@ const StepSummary = ({
           <Text mb={1} ff="Inter|Regular" color="palette.text.shade30" fontSize={4}>
             <Trans i18nKey="swap.modal.steps.summary.toReceive" />
           </Text>
-          <Text ff="Inter|Regular" color="palette.text.shade100" fontSize={4}>
-            <CurrencyUnitValue value={toAmount} unit={toUnit} showCode />
+          <Text ff="Inter|Regular" fontSize={4}>
+            <FormattedVal
+              disableRounding
+              color="palette.text.shade100"
+              val={toAmount}
+              unit={toUnit}
+              showCode
+            />
           </Text>
         </Box>
       </Box>
