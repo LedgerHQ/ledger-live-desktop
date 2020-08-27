@@ -6,6 +6,7 @@ import Label from "~/renderer/components/Label";
 import { Trans } from "react-i18next";
 import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
 import InputCurrency from "~/renderer/components/InputCurrency";
+import CounterValue from "~/renderer/components/CounterValue";
 import type {
   Account,
   AccountLike,
@@ -30,6 +31,17 @@ const InputRight = styled(Box).attrs(() => ({
   justifyContent: "center",
 }))`
   padding-right: 10px;
+`;
+
+const CountervalueWrapper = styled(Box).attrs(() => ({
+  ff: "Inter|Regular",
+  color: "palette.text.shade60",
+  fontSize: 2,
+  justifyContent: "center",
+  alignItems: "center",
+  horizontal: true,
+}))`
+  line-height: 1.2em;
 `;
 
 const From = ({
@@ -153,16 +165,34 @@ const From = ({
           </Box>
         </Box>
         {unit ? (
-          <InputCurrency
-            error={amount && amount.gt(0) && error}
-            loading={isLoading}
-            key={unit.code}
-            defaultUnit={unit}
-            value={isLoading ? "" : amount}
-            disabled={useAllAmount}
-            onChange={onAmountChange}
-            renderRight={<InputRight>{unit.code}</InputRight>}
-          />
+          <>
+            <InputCurrency
+              error={amount?.gt(0) && error}
+              loading={isLoading}
+              key={unit.code}
+              defaultUnit={unit}
+              value={isLoading ? "" : amount}
+              disabled={useAllAmount}
+              onChange={onAmountChange}
+              renderRight={<InputRight>{unit.code}</InputRight>}
+            />
+            {currency && amount?.gt(0) && !error ? (
+              <CountervalueWrapper mt={1}>
+                <Box style={{ marginRight: 4 }}>
+                  <Text>{"≈"}</Text>
+                </Box>
+                <CounterValue
+                  currency={currency}
+                  value={amount}
+                  disableRounding
+                  color="palette.text.shade60"
+                  fontSize={2}
+                  showCode
+                  alwaysShowSign={false}
+                />
+              </CountervalueWrapper>
+            ) : null}
+          </>
         ) : null}
       </Box>
     </Box>
