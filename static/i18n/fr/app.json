@@ -150,7 +150,7 @@
     "bandwidth": "Bandwidth",
     "energy": "Energy",
     "delegatedAssets": "Actifs délégués",
-    "undelegating": "Interrompre délégation",
+    "undelegating": "Délégation interrompu",
     "availableBalanceTooltip": "Ce montant est disponible.",
     "frozenAssetsTooltip": "Les actifs gelés sont utilisés dans le processus de vote de Tron. Cela représente votre nombre total de votes.",
     "bandwidthTooltip": "Geler des actifs pour gagner de la bandwidth",
@@ -325,7 +325,7 @@
       "title": "ASA (Actifs)",
       "cta": "Ajouter ASA",
       "placeholder": "Vous pouvez ajouter des actifs à votre compte {{currencyName}}.",
-      "link": "Comment fonctionnent les actifs (ASA) ?",
+      "link": "Comment fonctionnent les ASA ?",
       "seeTokens": "Afficher ASA ({{tokenCount}})",
       "hideTokens": "Masquer ASA ({{tokenCount}})",
       "tooltip": "ASA de",
@@ -974,7 +974,7 @@
       "noRewards": "Aucune récompense disponible",
       "delegate": "Ajouter",
       "undelegate": "Interrompre",
-      "redelegate": "Redélégué",
+      "redelegate": "Redéléguer",
       "redelegateDisabledTooltip": "Vous pouvez à nouveau redéléguer <0>{{days}}</0>",
       "redelegateMaxDisabledTooltip": "Vous ne pouvez pas redéléguer plus de <0>7</0> validateurs à la fois",
       "undelegateDisabledTooltip": "Vous ne pouvez pas interrompre la délégation plus de <0>7</0> validateurs à la fois",
@@ -1176,7 +1176,7 @@
               "access": "Augmentez le solde du compte pour augmenter les récompenses.",
               "ledger": "Effectuez une transaction vers ou depuis le compte pour réclamer des récompenses."
             },
-            "learnMore": "Comment fonctionnent les récompenses Algorand?",
+            "learnMore": "Comment fonctionne Algorand ?",
             "button": {
               "cta": "Recevoir Algo"
             }
