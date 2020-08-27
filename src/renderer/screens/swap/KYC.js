@@ -75,7 +75,7 @@ const KYC = () => {
       </Subtitle>
       <Footer>
         <CheckBox id={"swap-landing-kyc-tos"} isChecked={isChecked} onChange={setIsChecked} />
-        <Disclaimer ff="Inter|Regular">
+        <Disclaimer ff="Inter|Regular" onClick={() => setIsChecked(!isChecked)}>
           <Trans i18nKey={"swap.kyc.disclaimer"} />
         </Disclaimer>
         <Button disabled={!isChecked} primary onClick={onAcceptSwapKYC}>

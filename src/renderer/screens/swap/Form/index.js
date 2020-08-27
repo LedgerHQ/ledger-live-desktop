@@ -274,6 +274,7 @@ const Form = ({
       <Card flow={1}>
         <Box horizontal p={32}>
           <From
+            key={fromCurrency?.id || "from"}
             currenciesStatus={currenciesStatus}
             account={fromAccount ? getMainAccount(fromAccount, fromParentAccount) : null}
             amount={fromAmount}
@@ -293,6 +294,7 @@ const Form = ({
           />
           <ArrowSeparator Icon={IconArrowRight} />
           <To
+            key={toCurrency?.id || "to"}
             currenciesStatus={currenciesStatus}
             account={toAccount ? getMainAccount(toAccount, toParentAccount) : null}
             amount={fromAmount ? fromAmount.times(magnitudeAwareRate) : null}
