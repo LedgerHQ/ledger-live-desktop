@@ -1,5 +1,5 @@
 // @flow
-import React, { useRef, useEffect, useState } from "react";
+import React, { useMemo, useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { command } from "~/renderer/commands";
@@ -82,6 +82,16 @@ const StepDevice = ({
     }
   }, [broadcast, onContinue, onError, signedOperation, swapData]);
 
+  const request = useMemo(
+    () => ({
+      exchange: toExchangeRaw(exchange),
+      exchangeRate,
+      transaction: toTransactionRaw(transaction),
+      device: deviceRef,
+    }),
+    [exchange, exchangeRate, transaction],
+  );
+
   return signedOperation ? (
     <Box alignItems={"center"} justifyContent={"center"} p={20}>
       <BigSpinner size={40} />
@@ -90,12 +100,7 @@ const StepDevice = ({
     <DeviceAction
       key={"initSwap"}
       action={action2}
-      request={{
-        exchange: toExchangeRaw(exchange),
-        exchangeRate,
-        transaction: toTransactionRaw(transaction),
-        device: deviceRef,
-      }}
+      request={request}
       onResult={({ initSwapResult, initSwapError, ...rest }) => {
         if (initSwapError) {
           onError(initSwapError);
