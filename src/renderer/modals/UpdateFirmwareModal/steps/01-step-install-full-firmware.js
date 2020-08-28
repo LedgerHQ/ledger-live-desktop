@@ -90,7 +90,10 @@ const Body = ({
           {t("manager.modal.identifier")}
         </Text>
         <Identifier>
-          {firmware.osu && manager.formatHashName(firmware.osu.hash, deviceModelId, deviceInfo)}
+          {firmware.osu &&
+            manager
+              .formatHashName(firmware.osu.hash, deviceModelId, deviceInfo)
+              .map(hash => <span key={hash}>{hash}</span>)}
         </Identifier>
       </Box>
       <Box mt={isBlue ? 4 : null}>
