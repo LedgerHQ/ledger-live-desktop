@@ -195,7 +195,12 @@ const Form = ({
       toAccount = accountWithMandatoryTokens(toParentAccount, [toCurrency]).subAccounts?.find(
         isSameCurrencyFilter(toCurrency),
       );
-    } else if (toCurrency && fromCurrency && toCurrency.id !== fromCurrency.id) {
+    } else if (
+      toCurrency &&
+      fromCurrency &&
+      toCurrency.id !== fromCurrency.id &&
+      exchange.toAccount
+    ) {
       return;
     }
 
@@ -206,7 +211,7 @@ const Form = ({
         toParentAccount,
       },
     });
-  }, [fromCurrency, toCurrency, validTo]);
+  }, [exchange.toAccount, fromCurrency, toCurrency, validTo]);
 
   const _canRequestRates = useMemo(() => canRequestRates(state), [state]);
 
