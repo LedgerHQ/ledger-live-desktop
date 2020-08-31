@@ -93,7 +93,7 @@ const Body = ({
           {firmware.osu &&
             manager
               .formatHashName(firmware.osu.hash, deviceModelId, deviceInfo)
-              .map(hash => <span key={hash}>{hash}</span>)}
+              .map((hash, i) => <span key={`${i}-${hash}`}>{hash}</span>)}
         </Identifier>
       </Box>
       <Box mt={isBlue ? 4 : null}>
