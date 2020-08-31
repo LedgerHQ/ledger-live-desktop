@@ -83,7 +83,6 @@ function useDeepLinkHandler() {
             url === "send" ? "MODAL_SEND" : url === "receive" ? "MODAL_RECEIVE" : "MODAL_DELEGATE";
           const { currency, recipient, amount } = query;
           if (!currency || typeof currency !== "string") return;
-          if (typeof amount !== "string") return;
 
           const c = findCurrencyByTicker(currency.toUpperCase());
           if (!c || c.type === "FiatCurrency") {
@@ -100,7 +99,10 @@ function useDeepLinkHandler() {
             dispatch(
               openModal(modal, {
                 recipient,
-                amount: amount ? parseCurrencyUnit(c.units[0], amount) : undefined,
+                amount:
+                  amount && typeof amount === "string"
+                    ? parseCurrencyUnit(c.units[0], amount)
+                    : undefined,
               }),
             );
 
