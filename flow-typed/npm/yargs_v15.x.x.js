@@ -1,5 +1,5 @@
-// flow-typed signature: e816f75861395753781b5f425303d3f6
-// flow-typed version: 29612d40b5/yargs_v15.x.x/flow_>=v0.118.x
+// flow-typed signature: f37d03f0feabf1757f268028793ee1c4
+// flow-typed version: 0c5d2ee298/yargs_v15.x.x/flow_>=v0.118.x
 
 declare module "yargs" {
   declare type Argv = {
@@ -263,6 +263,7 @@ declare module "yargs" {
     showCompletionScript(): this;
 
     showHelp(consoleLevel?: "error" | "warn" | "log"): this;
+    showHelp(printCallback: (usageData: string) => void): this;
 
     showHelpOnFail(enable: boolean, message?: string): this;
 

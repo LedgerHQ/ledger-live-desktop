@@ -58,7 +58,7 @@ function useDeepLinkHandler() {
 
         case "account": {
           const { currency } = query;
-          if (!currency) return;
+          if (!currency || typeof currency !== "string") return;
 
           const c = findCurrencyByTicker(currency.toUpperCase());
           if (!c || c.type === "FiatCurrency") return;
@@ -82,7 +82,8 @@ function useDeepLinkHandler() {
           const modal =
             url === "send" ? "MODAL_SEND" : url === "receive" ? "MODAL_RECEIVE" : "MODAL_DELEGATE";
           const { currency, recipient, amount } = query;
-          if (!currency) return;
+          if (!currency || typeof currency !== "string") return;
+          if (typeof amount !== "string") return;
 
           const c = findCurrencyByTicker(currency.toUpperCase());
           if (!c || c.type === "FiatCurrency") {
