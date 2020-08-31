@@ -6,7 +6,7 @@ import { Trans } from "react-i18next";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
 
 import { openModal } from "~/renderer/actions/modals";
 import Button from "~/renderer/components/Button";
