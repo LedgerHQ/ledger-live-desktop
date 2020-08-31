@@ -165,53 +165,48 @@ const Form = ({
   }, [fromAccount, fromAmount, fromParentAccount, setAccount, setTransaction, transaction]);
 
   useEffect(() => {
-    let fromAccount;
+    let _fromAccount = validFrom[0];
     let fromParentAccount;
 
-    if (fromCurrency && fromCurrency.type === "TokenCurrency") {
+    if (fromCurrency && fromAccount) {
+      return;
+    } else if (fromCurrency && fromCurrency.type === "TokenCurrency") {
       fromParentAccount = validFrom[0];
-      fromAccount = accountWithMandatoryTokens(fromParentAccount, [fromCurrency]).subAccounts?.find(
-        isSameCurrencyFilter(fromCurrency),
-      );
-    } else {
-      fromAccount = validFrom[0];
+      _fromAccount = accountWithMandatoryTokens(fromParentAccount, [
+        fromCurrency,
+      ]).subAccounts?.find(isSameCurrencyFilter(fromCurrency));
     }
 
     dispatch({
-      type: "setToAccount",
+      type: "setFromAccount",
       payload: {
-        fromAccount,
+        fromAccount: _fromAccount,
         fromParentAccount,
       },
     });
-  }, [fromCurrency, validFrom]);
+  }, [fromAccount, fromCurrency, validFrom]);
 
   useEffect(() => {
-    let toAccount = validTo[0];
+    let _toAccount = validTo[0];
     let toParentAccount;
 
-    if (toCurrency && toCurrency.type === "TokenCurrency") {
+    if (toCurrency && fromCurrency && toCurrency.id !== fromCurrency.id && toAccount) {
+      return;
+    } else if (toCurrency && toCurrency.type === "TokenCurrency") {
       toParentAccount = validTo[0];
-      toAccount = accountWithMandatoryTokens(toParentAccount, [toCurrency]).subAccounts?.find(
+      _toAccount = accountWithMandatoryTokens(toParentAccount, [toCurrency]).subAccounts?.find(
         isSameCurrencyFilter(toCurrency),
       );
-    } else if (
-      toCurrency &&
-      fromCurrency &&
-      toCurrency.id !== fromCurrency.id &&
-      exchange.toAccount
-    ) {
-      return;
     }
 
     dispatch({
       type: "setToAccount",
       payload: {
-        toAccount,
+        toAccount: _toAccount,
         toParentAccount,
       },
     });
-  }, [exchange.toAccount, fromCurrency, toCurrency, validTo]);
+  }, [toAccount, fromCurrency, toCurrency, validTo]);
 
   const _canRequestRates = useMemo(() => canRequestRates(state), [state]);
 
