@@ -121,17 +121,6 @@ const CoinControlModal = ({
                   account={account}
                 />
               ))}
-              {bitcoinResources.utxos.map(utxo => (
-                <CoinControlRow
-                  key={utxo.hash}
-                  utxoStrategy={utxoStrategy}
-                  utxo={utxo}
-                  updateTransaction={updateTransaction}
-                  bridge={bridge}
-                  status={status}
-                  account={account}
-                />
-              ))}
             </Box>
           </Box>
         )}
