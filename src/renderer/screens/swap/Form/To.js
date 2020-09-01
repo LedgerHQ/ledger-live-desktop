@@ -88,6 +88,7 @@ const SwapInputGroup = ({
     allAccounts: validAccounts,
     defaultCurrency,
     defaultAccount,
+    fallbackToFirst: false,
   });
 
   const unit = currency && currency.units[0];
@@ -162,8 +163,9 @@ const SwapInputGroup = ({
         <Label mb={4} mt={25}>
           <Trans i18nKey={`swap.form.to.account`} />
         </Label>
-        {hasMaybeValidAccounts ? (
+        {hasMaybeValidAccounts || !currency ? (
           <SelectAccount
+            isDisabled={!currency}
             accounts={availableAccounts}
             value={{ account, subAccount }}
             onChange={onAccountSelected}

@@ -48,14 +48,19 @@ export function useCurrencyAccountSelect({
   allAccounts,
   defaultCurrency,
   defaultAccount,
+  fallbackToFirst = true,
 }: {
   allCurrencies: CryptoOrTokenCurrency[],
   allAccounts: Account[],
   defaultCurrency: ?CryptoOrTokenCurrency,
   defaultAccount: ?Account,
+  fallbackToFirst?: boolean,
 }) {
   const [state, setState] = useState(() => {
-    const currency = defaultCurrency || allCurrencies[0];
+    const currency = defaultCurrency || null;
+    if (!currency) {
+      return { currency: null, accountId: null };
+    }
     const availableAccounts = getAccountTuplesForCurrency(currency, allAccounts);
     const { accountId } = defaultAccount
       ? { accountId: defaultAccount.id }

@@ -141,6 +141,7 @@ const From = ({
           <Trans i18nKey={`swap.form.from.account`} />
         </Label>
         <SelectAccount
+          isDisabled={!currency}
           accounts={availableAccounts}
           value={{ account, subAccount }}
           onChange={onAccountSelected}
