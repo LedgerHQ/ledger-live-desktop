@@ -35,7 +35,6 @@ import EmptyStateAccounts from "~/renderer/screens/dashboard/EmptyStateAccounts"
 // This forces only one visible top banner at a time
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   z-index: 19;
-  margin-bottom: 16px;
 
   & > *:not(:first-child) {
     display: none;
@@ -72,11 +71,11 @@ const DashboardPage = ({ saveSettings }: Props) => {
 
   return (
     <>
-      {showCarousel ? <Carousel /> : null}
       <TopBannerContainer>
         <UpdateBanner />
         <MigrationBanner />
       </TopBannerContainer>
+      {showCarousel ? <Carousel /> : null}
       <RefreshAccountsOrdering onMount />
       <TrackPage
         category="Portfolio"
