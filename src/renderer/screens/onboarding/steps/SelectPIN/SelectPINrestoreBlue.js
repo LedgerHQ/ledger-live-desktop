@@ -32,6 +32,7 @@ const SelectPINrestoreBlue = ({ t }: Props) => {
         <Box style={{ display: "block" }}>
           <Trans i18nKey="onboarding.selectPIN.restore.instructions.blue.step2">
             {"Tap on"}
+            {/* $FlowFixMe */}
             <Text ff="Inter|SemiBold" color="palette.text.shade100">
               {{ restoreConfiguration }}
             </Text>

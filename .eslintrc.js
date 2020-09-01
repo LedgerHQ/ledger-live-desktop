@@ -22,6 +22,7 @@ module.exports = {
     __APP_VERSION__: "readonly",
     __GIT_REVISION__: "readonly",
     __static: "readonly",
+    $: "readonly",
   },
   parserOptions: {
     ecmaFeatures: {

@@ -28,6 +28,7 @@ const Body = ({ onClose, token }: { onClose: () => void, token: TokenCurrency })
           >
             <Trans i18nKey="blacklistToken.desc" parent="div" values={{ tokenName: token.name }}>
               {"This action will hide all "}
+              {/* $FlowFixMe */}
               <Text ff="Inter|SemiBold" color="palette.text.shade100">
                 {{ tokenName: token.name }}
               </Text>

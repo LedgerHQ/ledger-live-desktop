@@ -35,8 +35,7 @@ type OwnProps = {
   parentAccount: ?Account,
 };
 
-type Props = {
-  ...OwnProps,
+type Props = OwnProps & {
   t: TFunction,
   history: *,
   openModal: Function,

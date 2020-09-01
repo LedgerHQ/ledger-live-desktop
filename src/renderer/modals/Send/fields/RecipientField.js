@@ -61,6 +61,7 @@ const RecipientField = ({
       <Label>
         <span>{label || t("send.steps.details.recipientAddress")}</span>
       </Label>
+      {/* $FlowFixMe */}
       <RecipientAddress
         placeholder={t("RecipientField.placeholder", { currencyName: account.currency.name })}
         autoFocus={autoFocus}
