@@ -110,15 +110,19 @@ export const CoinControlRow = ({
           color="palette.text.shade100"
           ff="Inter|SemiBold"
         />
-        <Text ff="Inter|Medium" fontSize={3} color={"palette.text.shade50"}>
-          {utxo.blockHeight ? (
-            account.blockHeight - utxo.blockHeight + " confirmations"
-          ) : utxo.rbf ? (
+        {utxo.blockHeight ? (
+          <Text ff="Inter|Medium" fontSize={3} color={"palette.text.shade50"}>
+            {account.blockHeight - utxo.blockHeight + " confirmations"}
+          </Text>
+        ) : utxo.rbf ? (
+          <Text ff="Inter|Medium" fontSize={3} color={"alertRed"}>
             <Trans i18nKey="bitcoin.replaceable" />
-          ) : (
+          </Text>
+        ) : (
+          <Text ff="Inter|Medium" fontSize={3} color={"alertRed"}>
             <Trans i18nKey="bitcoin.pending" />
-          )}
-        </Text>
+          </Text>
+        )}
       </Box>
       <Box style={{ flex: 1 }}>
         <Text color="palette.text.shade100" ff="Inter|SemiBold" fontSize={4}>
