@@ -126,6 +126,7 @@ const InitCardContainer: ThemedComponent<{}> = styled(Box).attrs(() => ({
   horizontal: true,
   borderRadius: "4px",
 }))`
+  position: relative;
   align-items: center;
   border: 1px solid ${p => p.theme.colors.palette.divider};
   width: 530px;

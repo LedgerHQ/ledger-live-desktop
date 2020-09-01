@@ -38,10 +38,12 @@ class WriteSeedBlue extends PureComponent<Props, *> {
           <Box style={{ display: "block" }}>
             <Trans i18nKey="onboarding.writeSeed.initialize.blue.step2">
               {"Tap"}
+              {/* $FlowFixMe */}
               <Text ff="Inter|SemiBold" color="palette.text.shade100">
                 {{ seedNext }}
               </Text>
               {"to move to the next words. Repeat the process until the"}
+              {/* $FlowFixMe */}
               <Text ff="Inter|SemiBold" color="palette.text.shade100">
                 {{ seedConfirmation }}
               </Text>
