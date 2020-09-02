@@ -137,6 +137,7 @@
     "settings": {
       "title": "Edit account",
       "advancedLogs": "Advanced logs",
+      "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
       "accountName": {
         "title": "Account name",
         "desc": "Description of the account"
@@ -1165,7 +1166,7 @@
       "header": "Rewards",
       "tooltip": "Algorand rewards are distributed regularly and are claimed automatically when you do a transaction.",
       "cta": "Claim rewards",
-      "rewardsDisabledTooltip": "You don’t have any rewards.  Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
+      "rewardsDisabledTooltip": "You don’t have any rewards. Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
       "flow": {
         "title": "Claim rewards",
         "steps": {

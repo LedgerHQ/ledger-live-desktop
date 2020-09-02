@@ -56,6 +56,7 @@ export const urls = {
   cosmosStakingRewards:
     "https://support.ledger.com/hc/en-us/articles/360014339340-Earn-Cosmos-staking-rewards",
   algorandStakingRewards: "https://support.ledger.com/hc/en-us/articles/360015897740",
+  xpubLearnMore: "https://support.ledger.com/hc/en-us/articles/360011069619",
 
   // Banners
   banners: {
