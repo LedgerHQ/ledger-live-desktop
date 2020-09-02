@@ -48,6 +48,7 @@
     "dismiss": "Dismiss",
     "information": "Information",
     "search": "Search...",
+    "searchWithoutEllipsis": "Search",
     "manage": "Manage",
     "lockScreen": {
       "title": "다시 돌아오신 것을 환영합니다.",
