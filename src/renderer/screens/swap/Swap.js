@@ -10,7 +10,7 @@ import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
 
 type MaybeProviders = ?(AvailableProvider[]);
 
-const Swap = () => {
+const Swap = ({ setShowRateChanged }: { setShowRateChanged: boolean => void }) => {
   const [providers, setProviders] = useState<MaybeProviders>();
   const [showLandingPage, setShowLandingPage] = useState(true);
   const [installedApps, setInstalledApps] = useState();
@@ -44,7 +44,11 @@ const Swap = () => {
   ) : showInstallSwap ? (
     <MissingSwapApp />
   ) : (
-    <Form providers={providers} installedApps={installedApps} />
+    <Form
+      providers={providers}
+      installedApps={installedApps}
+      setShowRateChanged={setShowRateChanged}
+    />
   );
 };
 

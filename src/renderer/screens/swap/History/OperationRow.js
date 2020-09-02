@@ -8,8 +8,7 @@ import {
   getAccountUnit,
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
-import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
@@ -22,7 +21,6 @@ import { rgba } from "~/renderer/styles/helpers";
 import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/swap/types";
 import Tooltip from "~/renderer/components/Tooltip";
 import IconClock from "~/renderer/icons/Clock";
-import { openModal } from "~/renderer/actions/modals";
 
 export const getStatusColor = (status, theme) => {
   return (

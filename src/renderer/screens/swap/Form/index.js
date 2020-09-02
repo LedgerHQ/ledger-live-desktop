@@ -78,14 +78,17 @@ const Form = ({
   accounts,
   selectableCurrencies,
   installedApps,
+  setShowRateChanged,
 }: {
   accounts: Account[],
   onContinue: any,
   selectableCurrencies: (CryptoCurrency | TokenCurrency)[],
   installedApps: InstalledItem[],
+  setShowRateChanged: boolean => void,
 }) => {
   const ratesExpirationThreshold = 100000;
   const { t } = useTranslation();
+
   const modalsState = useSelector(modalsStateSelector);
   const reduxDispatch = useDispatch();
   const currenciesStatus = useMemo(
@@ -104,8 +107,8 @@ const Form = ({
   );
 
   const [state, dispatch] = useReducer(reducer, { okCurrencies }, initState);
-  useEffect(() => console.log({ state }), [state]);
   const [ratesTimestamp, setRatesTimestamp] = useState(null); // Move back to the live-common one
+
   const patchExchange = useCallback(payload => dispatch({ type: "patchExchange", payload }), [
     dispatch,
   ]);
@@ -258,8 +261,9 @@ const Form = ({
   useEffect(() => {
     if (modalsState.MODAL_SWAP && !modalsState.MODAL_SWAP.isOpened) {
       dispatch({ type: "expireRates", payload: {} });
+      setShowRateChanged(true);
     }
-  }, [modalsState]);
+  }, [modalsState, setShowRateChanged]);
 
   // Re-fetch rates (if needed) every `ratesExpirationThreshold` seconds.
   useInterval(() => {
@@ -285,9 +289,10 @@ const Form = ({
               dispatch({ type: "setFromCurrency", payload: { fromCurrency } });
             }}
             onAccountChange={a => dispatch({ type: "setFromAccount", payload: { fromAccount: a } })}
-            onAmountChange={fromAmount =>
-              dispatch({ type: "setFromAmount", payload: { fromAmount } })
-            }
+            onAmountChange={fromAmount => {
+              setShowRateChanged(false);
+              dispatch({ type: "setFromAmount", payload: { fromAmount } });
+            }}
             validAccounts={validFrom}
             useAllAmount={useAllAmount}
             onToggleUseAllAmount={toggleUseAllAmount}

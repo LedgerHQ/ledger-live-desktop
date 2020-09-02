@@ -168,7 +168,8 @@
       "helpCTA": "What is Swap?",
       "bubble": "We use a fixed rate, this is the exact amount you will receive",
       "noAccounts": "You don't have {{currencyName}} accounts",
-      "noApp": "You don't have the {{currencyName}} app installed"
+      "noApp": "You don't have the {{currencyName}} app installed",
+      "warning": "The swap provider has changed its rates since your last session"
     },
     "modal": {
       "title": "Swap",

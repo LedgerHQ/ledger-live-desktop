@@ -11,7 +11,7 @@ const Swap = () => {
     <Modal
       name="MODAL_SWAP"
       centered
-      // preventBackdropClick={isModalLocked}
+      preventBackdropClick={isModalLocked}
       render={({ data, onClose }) => (
         <SwapBody
           swap={data.swap}

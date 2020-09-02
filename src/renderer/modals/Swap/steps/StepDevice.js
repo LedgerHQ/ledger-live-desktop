@@ -6,6 +6,7 @@ import { command } from "~/renderer/commands";
 import { useBroadcast } from "~/renderer/hooks/useBroadcast";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import Box from "~/renderer/components/Box";
+import RetryButton from "~/renderer/components/RetryButton";
 import BigSpinner from "~/renderer/components/BigSpinner";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import { createAction as initSwapCreateAction } from "@ledgerhq/live-common/lib/hw/actions/initSwap";
@@ -135,9 +136,10 @@ const StepDevice = ({
 export const StepDeviceFooter = ({ onClose }: { onClose: any }) => {
   return (
     <Box horizontal alignItems={"flex-end"}>
-      <Button onClick={onClose} primary>
+      <Button onClick={onClose} secondary mr={2}>
         <Trans i18nKey="common.close" />
       </Button>
+      <RetryButton id={"swap-retry-button"} primary onClick={onClose} />
     </Box>
   );
 };
