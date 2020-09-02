@@ -32,10 +32,10 @@ const SwapOrSwapHistory = () => {
   }, []);
 
   return (
-    <Box color="warning">
+    <Box>
       <TrackPage category="Swap" />
       {showRateChangedNotice ? (
-        <RatesChangeNoticeWrapper flow={4}>
+        <RatesChangeNoticeWrapper color="warning" flow={4}>
           <ExclamationCircleThin size={16} />
           <Box ml={2} flex={1} alignItems={"flex-start"}>
             <Text ff="Inter|Regular" textAlign="center" fontSize={4}>

@@ -138,14 +138,14 @@ const History = () => {
             </>
           ))
         ) : (
-          <Box p={150} alignItems={"center"} justifyContent={"center"}>
+          <Card p={150} alignItems={"center"} justifyContent={"center"}>
             <Text mb={1} ff="Inter|SemiBold" fontSize={16} color="palette.text.shade100">
               {"No History"}
             </Text>
             <Text ff="Inter|Regular" fontSize={12} color="palette.text.shade50">
               {"You don’t have any history swap"}
             </Text>
-          </Box>
+          </Card>
         )
       ) : (
         <Card
