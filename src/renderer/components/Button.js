@@ -251,6 +251,7 @@ const LoadingWrapper = styled.div`
 
 const ChildrenWrapper = styled.div`
   opacity: ${p => (p.isLoading ? 0 : 1)};
+  flex-shrink: 1;
 `;
 
 export const Base: ThemedComponent<*> = styled.button.attrs(p => ({

@@ -60,6 +60,7 @@ const OptionContainer = styled.div`
 
 const ButtonContainer = styled.div`
   cursor: pointer;
+  flex-shrink: 1;
 `;
 
 type Props = {
@@ -111,23 +112,21 @@ const DropDownSelector = ({
   );
 
   return (
-    <div>
-      <Tippy
-        visible={isOpen}
-        onClickOutside={() => setOpen(false)}
-        onShow={() => setOpen(true)}
-        onHide={() => setOpen(false)}
-        animation="shift-away"
-        placement="bottom-start"
-        interactive
-        arrow={false}
-        content={<DropContainer border>{items.map(renderOption)}</DropContainer>}
-      >
-        <ButtonContainer onClick={() => setOpen(!isOpen)}>
-          {children({ isOpen, value: selectedOption })}
-        </ButtonContainer>
-      </Tippy>
-    </div>
+    <Tippy
+      visible={isOpen}
+      onClickOutside={() => setOpen(false)}
+      onShow={() => setOpen(true)}
+      onHide={() => setOpen(false)}
+      animation="shift-away"
+      placement="bottom-start"
+      interactive
+      arrow={false}
+      content={<DropContainer border>{items.map(renderOption)}</DropContainer>}
+    >
+      <ButtonContainer onClick={() => setOpen(!isOpen)}>
+        {children({ isOpen, value: selectedOption })}
+      </ButtonContainer>
+    </Tippy>
   );
 };
 
