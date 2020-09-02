@@ -48,6 +48,7 @@
     "dismiss": "Dismiss",
     "information": "Information",
     "search": "Search...",
+    "searchWithoutEllipsis": "Search",
     "manage": "Manage",
     "lockScreen": {
       "title": "С возвращением",
