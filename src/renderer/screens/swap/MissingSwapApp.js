@@ -12,10 +12,9 @@ import { useHistory } from "react-router-dom";
 const MissingSwapApp = () => {
   const { push } = useHistory();
   const openManager = useCallback(() => {
-    push("/manager");
+    push("manager?q=exchange");
   }, [push]);
 
-  // FIXME replace with swap app icon once we have it in the manager
   return (
     <Card p={89} alignItems="center">
       <Image alt="Swap app icon" resource={manager.getIconUrl("exchange")} width={60} height={60} />
