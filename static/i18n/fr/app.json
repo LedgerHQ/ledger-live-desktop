@@ -48,6 +48,7 @@
     "dismiss": "Ignorer",
     "information": "Informations",
     "search": "Rechercher ...",
+    "searchWithoutEllipsis": "Search",
     "manage": "Gérer",
     "lockScreen": {
       "title": "Bienvenue",
