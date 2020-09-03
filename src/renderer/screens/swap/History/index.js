@@ -16,7 +16,7 @@ import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import { FakeLink } from "~/renderer/components/Link";
 import moment from "moment";
-import Spinner from "~/renderer/components/Spinner";
+import BigSpinner from "~/renderer/components/BigSpinner";
 import styled from "styled-components";
 import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
 
@@ -155,7 +155,7 @@ const History = () => {
           justifyContent={"center"}
           style={{ minHeight: 438 }}
         >
-          <Spinner size={40} />
+          <BigSpinner size={50} />
         </Card>
       )}
     </>
