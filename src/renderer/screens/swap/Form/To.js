@@ -15,6 +15,7 @@ import type {
 import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
+import Input from "~/renderer/components/Input";
 import Text from "~/renderer/components/Text";
 import ToolTip from "~/renderer/components/ToolTip";
 import Price from "~/renderer/components/Price";
@@ -223,7 +224,9 @@ const SwapInputGroup = ({
               </Box>
             ) : null}
           </>
-        ) : null}
+        ) : (
+          <Input disabled />
+        )}
       </Box>
     </Box>
   );

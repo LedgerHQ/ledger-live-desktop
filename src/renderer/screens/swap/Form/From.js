@@ -17,6 +17,7 @@ import type {
 import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
+import Input from "~/renderer/components/Input";
 import Text from "~/renderer/components/Text";
 import type { Option } from "~/renderer/components/Select";
 import Switch from "~/renderer/components/Switch";
@@ -194,7 +195,9 @@ const From = ({
               </CountervalueWrapper>
             ) : null}
           </>
-        ) : null}
+        ) : (
+          <Input disabled />
+        )}
       </Box>
     </Box>
   );
