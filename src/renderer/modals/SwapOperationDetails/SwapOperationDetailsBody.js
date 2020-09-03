@@ -4,6 +4,7 @@ import { Trans } from "react-i18next";
 import { ModalBody } from "~/renderer/components/Modal";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
+import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
 import Text from "~/renderer/components/Text";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -21,6 +22,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import moment from "moment";
 import { getStatusColor } from "~/renderer/screens/swap/history/OperationRow";
 import IconClock from "~/renderer/icons/Clock";
+import { GradientHover } from "~/renderer/modals/OperationDetails/styledComponents";
 
 const Label = styled(Text).attrs(() => ({
   fontSize: 2,
@@ -75,6 +77,32 @@ const WrapperClock: ThemedComponent<{}> = styled(Box).attrs(() => ({
   bottom: -4px;
   right: -4px;
   padding: 1px;
+`;
+
+const SwapIdWrapper: ThemedComponent<{}> = styled(Box).attrs(p => ({
+  ff: "Inter",
+  color: p.color || "palette.text.shade80",
+  fontSize: 4,
+  relative: true,
+}))`
+  width: 100%;
+
+  ${GradientHover} {
+    display: none;
+  }
+
+  &:hover ${GradientHover} {
+    display: flex;
+    & > * {
+      cursor: pointer;
+    }
+  }
+
+  &:hover ${Value} {
+    color: ${p => p.theme.colors.palette.text.shade100};
+    font-weight: 400;
+  }
+}
 `;
 
 const SwapOperationDetailsBody = ({
@@ -153,9 +181,12 @@ const SwapOperationDetailsBody = ({
               <Label>
                 <Trans i18nKey="swap.operationDetailsModal.txid" />
               </Label>
-              <Box selectable>
+              <SwapIdWrapper selectable>
                 <Value>{swapId}</Value>
-              </Box>
+                <GradientHover>
+                  <CopyWithFeedback text={swapId} />
+                </GradientHover>
+              </SwapIdWrapper>
             </Box>
           </Row>
           <Row>

@@ -208,7 +208,7 @@
     "operationDetailsModal": {
       "title": "Operation details",
       "provider": "Provider",
-      "txid": "Transaction ID",
+      "txid": "Swap ID",
       "status": "Status",
       "date": "Date",
       "from": "From",

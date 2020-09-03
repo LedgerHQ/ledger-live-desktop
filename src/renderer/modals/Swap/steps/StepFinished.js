@@ -3,6 +3,7 @@ import React, { useCallback } from "react";
 import type { Operation } from "@ledgerhq/live-common/lib/types/operation";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
 import Box from "~/renderer/components/Box";
+import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
 import IconSwap from "~/renderer/icons/Swap";
 import { Trans } from "react-i18next";
 import Text from "~/renderer/components/Text";
@@ -13,6 +14,8 @@ import { openModal } from "~/renderer/actions/modals";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import useTheme from "~/renderer/hooks/useTheme";
 import { useDispatch } from "react-redux";
+import { GradientHover } from "~/renderer/modals/OperationDetails/styledComponents";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 const IconWrapper = styled(Box)`
   background: ${colors.pillActiveBackground};
@@ -37,6 +40,31 @@ const Pill = styled(Text)`
   background: ${p => p.theme.colors.palette.text.shade10};
   padding: 0 8px;
 `;
+
+const SwapIdWrapper: ThemedComponent<{}> = styled(Box).attrs(p => ({
+  ff: "Inter",
+  color: p.color || "palette.text.shade80",
+  fontSize: 4,
+  relative: true,
+}))`
+
+  ${GradientHover} {
+    display: none;
+  }
+
+  &:hover ${GradientHover} {
+    display: flex;
+    & > * {
+      cursor: pointer;
+    }
+  }
+
+  &:hover ${Pill} {
+    color: ${p => p.theme.colors.palette.text.shade100};
+  }
+}
+`;
+
 const StepFinished = ({ swapId, provider }: { swapId: string, provider: string }) => (
   <Box alignItems="center">
     <IconWrapper>
@@ -49,9 +77,14 @@ const StepFinished = ({ swapId, provider }: { swapId: string, provider: string }
       <Text color="palette.text.shade50" ff="Inter|Regular" fontSize={14}>
         <Trans i18nKey={`swap.modal.steps.finished.swap`} />
       </Text>
-      <Pill ml={2} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={14}>
-        {swapId}
-      </Pill>
+      <SwapIdWrapper>
+        <Pill ml={2} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={14}>
+          {swapId}
+        </Pill>
+        <GradientHover>
+          <CopyWithFeedback text={swapId} />
+        </GradientHover>
+      </SwapIdWrapper>
     </Box>
     <Text p={20} textAlign="center" color="palette.text.shade50" ff="Inter|Regular" fontSize={4}>
       <Trans i18nKey={`swap.modal.steps.finished.description`} values={{ provider }} />
