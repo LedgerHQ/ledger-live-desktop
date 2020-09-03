@@ -7,10 +7,9 @@ import { useSelector } from "react-redux";
 import { hasAcceptedSwapKYCSelector } from "~/renderer/reducers/settings";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
-import WorldMap from "~/renderer/icons/WorldMap";
 import Card from "~/renderer/components/Box/Card";
 import KYC from "~/renderer/screens/swap/KYC";
-import Spinner from "~/renderer/components/Spinner";
+import BigSpinner from "~/renderer/components/BigSpinner";
 import IconExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
 import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
 
@@ -19,10 +18,6 @@ const Body = styled(Box)`
   align-self: center;
   text-align: center;
   position: relative;
-`;
-
-const Illustration = styled.div`
-  margin-bottom: 24px;
 `;
 
 const Content = styled.div`
@@ -61,9 +56,6 @@ const Landing = ({
       style={{ minHeight: 438 }}
     >
       <Body>
-        <Illustration>
-          <WorldMap />
-        </Illustration>
         <Content>
           {providers && !providers.length ? (
             <Box
@@ -78,7 +70,7 @@ const Landing = ({
               </Text>
             </Box>
           ) : (
-            <Spinner size={40} />
+            <BigSpinner size={50} />
           )}
         </Content>
       </Body>
