@@ -6,10 +6,26 @@ import type { Operation } from "@ledgerhq/live-common/lib/types";
 import Box from "~/renderer/components/Box";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-export const Address = ({ value }: { value: string }) => {
+export const SplitAddress = ({
+  value,
+  color,
+  ff,
+  fontSize,
+}: {
+  value: string,
+  color?: string,
+  ff?: string,
+  fontSize?: number,
+}) => {
   if (!value) {
     return <Box />;
   }
+
+  const boxProps = {
+    color,
+    ff,
+    fontSize,
+  };
 
   const third = Math.round(value.length / 3);
 
@@ -18,31 +34,16 @@ export const Address = ({ value }: { value: string }) => {
   const right = value.slice(third, value.length);
 
   return (
-    <Box horizontal color="palette.text.shade80" ff="Inter" fontSize={3}>
+    <Box horizontal {...boxProps}>
       <Left>{left}</Left>
       <Right>{right}</Right>
     </Box>
   );
 };
 
-export const SplitAddress = ({ value }: { value: string }) => {
-  if (!value) {
-    return <Box />;
-  }
-
-  const third = Math.round(value.length / 3);
-
-  // FIXME why not using CSS for this? meaning we might be able to have a left & right which both take 50% & play with overflow & text-align
-  const left = value.slice(0, third);
-  const right = value.slice(third, value.length);
-
-  return (
-    <Box horizontal>
-      <Left>{left}</Left>
-      <Right>{right}</Right>
-    </Box>
-  );
-};
+export const Address = ({ value }: { value: string }) => (
+  <SplitAddress value={value} color="palette.text.shade80" ff="Inter" fontSize={3} />
+);
 
 const Left: ThemedComponent<{}> = styled.div`
   overflow: hidden;
