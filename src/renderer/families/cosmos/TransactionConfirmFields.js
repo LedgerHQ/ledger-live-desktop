@@ -90,38 +90,35 @@ const CosmosDelegateValidatorsField = ({
 
   const mappedValidators = mapDelegationInfo(validators || [], cosmosValidators, unit);
 
-  return (
-    mappedValidators &&
-    mappedValidators.length > 0 && (
-      <Box vertical justifyContent="space-between" mb={2}>
-        <TransactionConfirmField label={field.label} />
-        {mappedValidators.map(({ formattedAmount, validator, address }, i) => (
-          <OpDetailsData key={address + i}>
-            <OpDetailsVoteData>
-              <Box>
-                <Text>
-                  <Trans
-                    i18nKey="operationDetails.extra.votesAddress"
-                    values={{
-                      votes: formattedAmount,
-                      name: validator?.name ?? address,
-                    }}
-                  >
-                    <Text ff="Inter|SemiBold">{""}</Text>
-                    {""}
-                    <Text ff="Inter|SemiBold">{""}</Text>
-                  </Trans>
-                </Text>
-              </Box>
-              <AddressText onClick={() => onExternalLink(mainAccount, address)}>
-                {address}
-              </AddressText>
-            </OpDetailsVoteData>
-          </OpDetailsData>
-        ))}
-      </Box>
-    )
-  );
+  return mappedValidators && mappedValidators.length > 0 ? (
+    <Box vertical justifyContent="space-between" mb={2}>
+      <TransactionConfirmField label={field.label} />
+      {mappedValidators.map(({ formattedAmount, validator, address }, i) => (
+        <OpDetailsData key={address + i}>
+          <OpDetailsVoteData>
+            <Box>
+              <Text>
+                <Trans
+                  i18nKey="operationDetails.extra.votesAddress"
+                  values={{
+                    votes: formattedAmount,
+                    name: validator?.name ?? address,
+                  }}
+                >
+                  <Text ff="Inter|SemiBold">{""}</Text>
+                  {""}
+                  <Text ff="Inter|SemiBold">{""}</Text>
+                </Trans>
+              </Text>
+            </Box>
+            <AddressText onClick={() => onExternalLink(mainAccount, address)}>
+              {address}
+            </AddressText>
+          </OpDetailsVoteData>
+        </OpDetailsData>
+      ))}
+    </Box>
+  ) : null;
 };
 
 const CosmosValidatorNameField = ({
@@ -136,33 +133,30 @@ const CosmosValidatorNameField = ({
   const { validators } = transaction;
   const { validators: cosmosValidators } = useCosmosPreloadData();
 
+  const address = validators && validators.length > 0 ? validators[0].address : null;
+
   const formattedValidator = useMemo(
-    () =>
-      validators && validators.length > 0
-        ? cosmosValidators.find(v => v.validatorAddress === validators[0].address)
-        : null,
+    () => (address ? cosmosValidators.find(v => v.validatorAddress === address) : null),
     [cosmosValidators, validators],
   );
 
-  return (
-    formattedValidator && (
-      <TransactionConfirmField label={field.label}>
-        <FieldText>
-          <Text ff="Inter|Medium" fontSize={4}>
-            {formattedValidator.name}
-          </Text>
-          <br />
-          <AddressText
-            ff="Inter|Regular"
-            fontSize={2}
-            onClick={() => onExternalLink(mainAccount, formattedValidator.validatorAddress)}
-          >
-            {formattedValidator.validatorAddress}
-          </AddressText>
-        </FieldText>
-      </TransactionConfirmField>
-    )
-  );
+  return address ? (
+    <TransactionConfirmField label={field.label}>
+      <FieldText>
+        <Text ff="Inter|Medium" fontSize={4}>
+          {formattedValidator && formattedValidator.name}
+        </Text>
+        <br />
+        <AddressText
+          ff="Inter|Regular"
+          fontSize={2}
+          onClick={() => onExternalLink(mainAccount, address)}
+        >
+          {address}
+        </AddressText>
+      </FieldText>
+    </TransactionConfirmField>
+  ) : null;
 };
 
 const CosmosValidatorAmountField = ({
@@ -210,25 +204,23 @@ const CosmosSourceValidatorField = ({
     [cosmosValidators, cosmosSourceValidator],
   );
 
-  return (
-    formattedValidator && (
-      <TransactionConfirmField label={field.label}>
-        <FieldText>
-          <Text ff="Inter|Medium" fontSize={4}>
-            {formattedValidator.name}
-          </Text>
-          <br />
-          <AddressText
-            ff="Inter|Regular"
-            fontSize={2}
-            onClick={() => onExternalLink(mainAccount, formattedValidator.validatorAddress)}
-          >
-            {formattedValidator.validatorAddress}
-          </AddressText>
-        </FieldText>
-      </TransactionConfirmField>
-    )
-  );
+  return formattedValidator ? (
+    <TransactionConfirmField label={field.label}>
+      <FieldText>
+        <Text ff="Inter|Medium" fontSize={4}>
+          {formattedValidator.name}
+        </Text>
+        <br />
+        <AddressText
+          ff="Inter|Regular"
+          fontSize={2}
+          onClick={() => onExternalLink(mainAccount, formattedValidator.validatorAddress)}
+        >
+          {formattedValidator.validatorAddress}
+        </AddressText>
+      </FieldText>
+    </TransactionConfirmField>
+  ) : null;
 };
 
 const CosmosMemoField = ({ account, parentAccount, transaction, field }: FieldComponentProps) => {
@@ -236,13 +228,11 @@ const CosmosMemoField = ({ account, parentAccount, transaction, field }: FieldCo
 
   const { memo } = transaction;
 
-  return (
-    memo && (
-      <TransactionConfirmField label={field.label}>
-        <FieldText>{memo}</FieldText>
-      </TransactionConfirmField>
-    )
-  );
+  return memo ? (
+    <TransactionConfirmField label={field.label}>
+      <FieldText>{memo}</FieldText>
+    </TransactionConfirmField>
+  ) : null;
 };
 
 const Warning = ({
