@@ -3,7 +3,18 @@
 import { handleActions } from "redux-actions";
 import { getSystemLocale } from "~/helpers/systemLocale";
 import { getLanguages } from "~/config/languages";
+import { createSelector } from "reselect";
+import type { OutputSelector } from "reselect";
 import type { LangAndRegion } from "~/renderer/reducers/settings";
+import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
+import type { TokenCurrency, CryptoCurrency } from "@ledgerhq/live-common/lib/types";
+import type { State } from ".";
+import uniq from "lodash/uniq";
+import { findTokenById } from "@ledgerhq/live-common/lib/data/tokens";
+import {
+  findCryptoCurrencyById,
+  isCurrencySupported,
+} from "@ledgerhq/live-common/lib/data/cryptocurrencies";
 
 export type ApplicationState = {
   isLocked?: boolean,
@@ -12,6 +23,7 @@ export type ApplicationState = {
   osDarkMode?: boolean,
   osLanguage?: LangAndRegion,
   navigationLocked?: boolean,
+  swapProviders?: AvailableProvider[],
 };
 
 const { language, region } = getSystemLocale();
@@ -25,6 +37,7 @@ const state: ApplicationState = {
     region: osLangSupported ? region : "US",
     useSystem: true,
   },
+  swapProviders: undefined,
   hasPassword: false,
   dismissedCarousel: false,
 };
@@ -52,6 +65,28 @@ export const osDarkModeSelector = (state: Object) => state.application.osDarkMod
 export const osLangAndRegionSelector = (state: Object) => state.application.osLanguage;
 
 export const isNavigationLocked = (state: Object) => state.application.navigationLocked;
+
+export const swapProvidersSelector = (state: Object) => state.application.swapProviders;
+
+export const swapSupportedCurrenciesSelector: OutputSelector<
+  State,
+  { accountId: string },
+  (TokenCurrency | CryptoCurrency)[],
+> = createSelector(swapProvidersSelector, swapProviders => {
+  if (!swapProviders) return [];
+
+  const allIds = uniq(
+    swapProviders.reduce((ac, { supportedCurrencies }) => [...ac, ...supportedCurrencies], []),
+  );
+
+  const tokenCurrencies = allIds.map(findTokenById).filter(Boolean);
+  const cryptoCurrencies = allIds
+    .map(findCryptoCurrencyById)
+    .filter(Boolean)
+    .filter(isCurrencySupported);
+
+  return [...cryptoCurrencies, ...tokenCurrencies];
+});
 
 // Exporting reducer
 

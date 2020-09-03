@@ -303,6 +303,7 @@
       "star": "Star",
       "receive": "Receive",
       "send": "Send",
+      "swap": "Swap",
       "buy": "Buy",
       "edit": "Edit account",
       "hideToken": "Hide token"

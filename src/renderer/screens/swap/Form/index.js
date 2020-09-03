@@ -4,10 +4,8 @@ import React, { useState, useCallback, useEffect, useMemo, useReducer } from "re
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
 import { BigNumber } from "bignumber.js";
-import uniq from "lodash/uniq";
-import { connect, useSelector, useDispatch } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { Trans, useTranslation, withTranslation } from "react-i18next";
+import { useSelector, useDispatch } from "react-redux";
+import { Trans, useTranslation } from "react-i18next";
 import Card from "~/renderer/components/Box/Card";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { modalsStateSelector } from "~/renderer/reducers/modals";
@@ -19,12 +17,8 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import getExchangeRates from "@ledgerhq/live-common/lib/swap/getExchangeRates";
 import ArrowSeparator from "~/renderer/components/ArrowSeparator";
-import { findTokenById } from "@ledgerhq/live-common/lib/data/tokens";
+import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/application";
 import useInterval from "~/renderer/hooks/useInterval";
-import {
-  findCryptoCurrencyById,
-  isCurrencySupported,
-} from "@ledgerhq/live-common/lib/data/cryptocurrencies";
 import {
   canRequestRates,
   getCurrenciesWithStatus,
@@ -74,22 +68,21 @@ const isSameCurrencyFilter = currency => a => {
   );
 };
 
-const Form = ({
-  accounts,
-  selectableCurrencies,
-  installedApps,
-  setShowRateChanged,
-}: {
-  accounts: Account[],
-  onContinue: any,
-  selectableCurrencies: (CryptoCurrency | TokenCurrency)[],
+type Props = {
   installedApps: InstalledItem[],
+  defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
+  defaultAccount?: ?Account,
   setShowRateChanged: boolean => void,
-}) => {
+};
+
+const Form = ({ installedApps, setShowRateChanged, defaultCurrency, defaultAccount }: Props) => {
   const ratesExpirationThreshold = 100000;
   const { t } = useTranslation();
 
+  const accounts = useSelector(shallowAccountsSelector);
+  const selectableCurrencies = useSelector(swapSupportedCurrenciesSelector);
   const modalsState = useSelector(modalsStateSelector);
+
   const reduxDispatch = useDispatch();
   const currenciesStatus = useMemo(
     () =>
@@ -106,7 +99,11 @@ const Form = ({
       currenciesStatus[c.id] === "ok",
   );
 
-  const [state, dispatch] = useReducer(reducer, { okCurrencies }, initState);
+  const [state, dispatch] = useReducer(
+    reducer,
+    { okCurrencies, defaultCurrency, defaultAccount },
+    initState,
+  );
   const [ratesTimestamp, setRatesTimestamp] = useState(null); // Move back to the live-common one
 
   const patchExchange = useCallback(payload => dispatch({ type: "patchExchange", payload }), [
@@ -386,27 +383,4 @@ export const CurrencyOptionRow = ({
   );
 };
 
-const selectableCurrenciesSelector = (state, props) => {
-  const { providers } = props;
-  const allIds = uniq(
-    providers.reduce(
-      // FIXME remove this livepeer support
-      (ac, { supportedCurrencies }) => [...ac, ...supportedCurrencies, "ethereum/erc20/livepeer"],
-      [],
-    ),
-  );
-
-  const tokenCurrencies = allIds.map(findTokenById).filter(Boolean);
-  const cryptoCurrencies = allIds
-    .map(findCryptoCurrencyById)
-    .filter(Boolean)
-    .filter(isCurrencySupported);
-  return [...cryptoCurrencies, ...tokenCurrencies];
-};
-
-const mapStateToProps = createStructuredSelector({
-  accounts: shallowAccountsSelector,
-  selectableCurrencies: selectableCurrenciesSelector,
-});
-
-export default withTranslation()(connect(mapStateToProps)(Form));
+export default Form;

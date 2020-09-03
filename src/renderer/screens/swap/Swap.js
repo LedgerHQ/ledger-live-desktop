@@ -1,27 +1,34 @@
 // @flow
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getProviders } from "@ledgerhq/live-common/lib/swap";
+import { swapProvidersSelector } from "~/renderer/reducers/application";
+import type { CryptoCurrency, TokenCurrency, Account } from "@ledgerhq/live-common/lib/types";
 import Landing from "~/renderer/screens/swap/Landing";
 import Form from "~/renderer/screens/swap/Form";
 import Connect from "~/renderer/screens/swap/Connect";
 import MissingSwapApp from "~/renderer/screens/swap/MissingSwapApp";
-import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
+import { setSwapProviders } from "~/renderer/actions/application";
 
-type MaybeProviders = ?(AvailableProvider[]);
+type Props = {
+  defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
+  defaultAccount?: ?Account,
+  setShowRateChanged: boolean => void,
+};
 
-const Swap = ({ setShowRateChanged }: { setShowRateChanged: boolean => void }) => {
-  const [providers, setProviders] = useState<MaybeProviders>();
+const Swap = ({ setShowRateChanged, defaultCurrency, defaultAccount }: Props) => {
+  const providers = useSelector(swapProvidersSelector);
   const [showLandingPage, setShowLandingPage] = useState(true);
   const [installedApps, setInstalledApps] = useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    async function fetchProviders() {
-      const providers = await getProviders();
-      setProviders(providers);
+    if (providers === undefined) {
+      // NB We only fetch in case the init.js fetch failed and we have nothing.
+      getProviders().then(providers => dispatch(setSwapProviders(providers)));
     }
-    fetchProviders();
-  }, [setProviders]);
+  }, [dispatch, providers]);
 
   const onSetResult = useCallback(
     data => {
@@ -48,6 +55,8 @@ const Swap = ({ setShowRateChanged }: { setShowRateChanged: boolean => void }) =
       providers={providers}
       installedApps={installedApps}
       setShowRateChanged={setShowRateChanged}
+      defaultCurrency={defaultCurrency}
+      defaultAccount={defaultAccount}
     />
   );
 };

@@ -72,8 +72,8 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const SendAction = (decorators && decorators.SendAction) || SendActionDefault;
   const ReceiveAction = (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
   const currency = getAccountCurrency(account);
-  const availableOnSwap = isCurrencySwapSupported(currency);
   const availableOnExchange = isCurrencySupported(currency);
+  const availableOnSwap = isCurrencySwapSupported(currency);
   const history = useHistory();
 
   const onBuy = useCallback(() => {

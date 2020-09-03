@@ -21,9 +21,6 @@ const Body = styled(Box)`
 `;
 
 const Content = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,7 +54,9 @@ const Landing = ({
     >
       <Body>
         <Content>
-          {providers && !providers.length ? (
+          {providers === undefined ? (
+            <BigSpinner size={50} />
+          ) : (
             <Box
               style={{ maxWidth: 256 }}
               mt={32}
@@ -69,8 +68,6 @@ const Landing = ({
                 <Trans i18nKey="swap.landing.sorry" />
               </Text>
             </Box>
-          ) : (
-            <BigSpinner size={50} />
           )}
         </Content>
       </Body>

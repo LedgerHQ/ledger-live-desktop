@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import Transport from "@ledgerhq/hw-transport";
 import { NotEnoughBalance } from "@ledgerhq/errors";
 import { log } from "@ledgerhq/logs";
+import { getProviders } from "@ledgerhq/live-common/lib/swap";
 import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
 import i18n from "i18next";
 import { remote, webFrame, ipcRenderer } from "electron";
@@ -29,7 +30,7 @@ import createStore from "~/renderer/createStore";
 import events from "~/renderer/events";
 import { setAccounts } from "~/renderer/actions/accounts";
 import { fetchSettings, saveSettings, setDeepLinkUrl } from "~/renderer/actions/settings";
-import { lock, setOSDarkMode } from "~/renderer/actions/application";
+import { lock, setSwapProviders, setOSDarkMode } from "~/renderer/actions/application";
 
 import {
   languageSelector,
@@ -86,6 +87,8 @@ async function init() {
   sentry(() => sentryLogsSelector(store.getState()));
 
   const isMainWindow = remote.getCurrentWindow().name === "MainWindow";
+
+  getProviders().then(providers => store.dispatch(setSwapProviders(providers)));
 
   let accounts = await getKey("app", "accounts", []);
   if (accounts) {

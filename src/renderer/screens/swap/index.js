@@ -1,6 +1,7 @@
 // @flow
 
 import React, { useCallback, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { StickyTabBar } from "~/renderer/screens/manager/AppsList/AppsList";
 import TabBar from "~/renderer/components/TabBar";
 import Swap from "~/renderer/screens/swap/Swap";
@@ -25,6 +26,8 @@ const RatesChangeNoticeWrapper = styled(Box).attrs(() => ({
 
 const SwapOrSwapHistory = () => {
   const [tabIndex, setTabIndex] = useState(0);
+  const location = useLocation();
+
   const [showRateChangedNotice, setShowRateChanged] = useState(false);
   const onIndexChange = useCallback(index => {
     setTabIndex(index);
@@ -59,7 +62,11 @@ const SwapOrSwapHistory = () => {
       <StickyTabBar>
         <TabBar tabs={["swap.tabs.exchange", "swap.tabs.history"]} onIndexChange={onIndexChange} />
       </StickyTabBar>
-      {tabIndex === 0 ? <Swap setShowRateChanged={setShowRateChanged} /> : <History />}
+      {tabIndex === 0 ? (
+        <Swap {...location?.state} setShowRateChanged={setShowRateChanged} />
+      ) : (
+        <History />
+      )}
     </Box>
   );
 };
