@@ -244,7 +244,11 @@ const Form = ({
       const newUseAllAmount = !useAllAmount;
       if (newUseAllAmount) {
         const bridge = await getAccountBridge(fromAccount);
-        const fromAmount = await bridge.estimateMaxSpendable({ account: fromAccount });
+        const fromAmount = await bridge.estimateMaxSpendable({
+          account: fromAccount,
+          parentAccount: fromParentAccount,
+          transaction,
+        });
         dispatch({ type: "setFromAmount", payload: { fromAmount, useAllAmount: true } });
       } else {
         dispatch({ type: "setFromAmount", payload: { fromAmount: BigNumber(0) } });
@@ -256,7 +260,7 @@ const Form = ({
     return () => {
       ignore = true;
     };
-  }, [fromAccount, useAllAmount]);
+  }, [fromAccount, fromParentAccount, transaction, useAllAmount]);
 
   useEffect(() => {
     if (modalsState.MODAL_SWAP && !modalsState.MODAL_SWAP.isOpened) {
