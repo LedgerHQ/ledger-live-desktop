@@ -153,8 +153,6 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
 
     const account = this.getAccount(data);
 
-    console.log({ account });
-
     const usefulData = {
       xpub: account.xpub || undefined,
       index: account.index,
