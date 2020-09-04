@@ -19,14 +19,14 @@ type Props = {
 export const RBF = ({ transaction, account, onChange, status }: Props) => {
   const bridge = getAccountBridge(account);
   return (
-    <Box flow={2} horizontal alignItems="center">
+    <Box flow={2} horizontal alignItems="center" justifyContent="space-between">
+      <Text color="palette.text.shade50" ff="Inter|Medium" fontSize={12}>
+        <Trans i18nKey="bitcoin.rbf" />
+      </Text>
       <Switch
         isChecked={transaction.rbf}
         onChange={rbf => onChange(bridge.updateTransaction(transaction, { rbf }))}
       />
-      <Text color="palette.text.shade50" ff="Inter|Medium" fontSize={12}>
-        <Trans i18nKey="bitcoin.rbf" />
-      </Text>
     </Box>
   );
 };

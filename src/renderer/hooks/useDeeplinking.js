@@ -116,7 +116,10 @@ function useDeepLinkHandler() {
               openModal(modal, {
                 account: chosen,
                 recipient,
-                amount: amount ? parseCurrencyUnit(c.units[0], amount) : undefined,
+                amount:
+                  amount && typeof amount === "string"
+                    ? parseCurrencyUnit(c.units[0], amount)
+                    : undefined,
               }),
             );
           } else {
@@ -125,7 +128,10 @@ function useDeepLinkHandler() {
                 account: chosen,
                 parentAccount: accounts.find(acc => acc.id === chosen.parentId),
                 recipient,
-                amount: amount ? parseCurrencyUnit(c.units[0], amount) : undefined,
+                amount:
+                  amount && typeof amount === "string"
+                    ? parseCurrencyUnit(c.units[0], amount)
+                    : undefined,
               }),
             );
           }

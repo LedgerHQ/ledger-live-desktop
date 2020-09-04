@@ -19,20 +19,21 @@ type Props = {
 export const PickUnconfirmedRBF = ({ transaction, account, onChange, status }: Props) => {
   const bridge = getAccountBridge(account);
   return (
-    <Box flow={2} horizontal alignItems="center">
+    <Box flow={2} horizontal alignItems="center" justifyContent="space-between">
+      <Text color="palette.text.shade50" ff="Inter|Medium" fontSize={12}>
+        <Trans i18nKey="bitcoin.pickUnconfirmedRBF" />
+      </Text>
       <Switch
         isChecked={transaction.utxoStrategy.pickUnconfirmedRBF}
-        onChange={pickUnconfirmedRBF =>
+        onChange={pickUnconfirmedRBF => {
+          console.log({ pickUnconfirmedRBF });
           onChange(
             bridge.updateTransaction(transaction, {
               utxoStrategy: { ...transaction.utxoStrategy, pickUnconfirmedRBF },
             }),
-          )
-        }
+          );
+        }}
       />
-      <Text color="palette.text.shade50" ff="Inter|Medium" fontSize={12}>
-        <Trans i18nKey="bitcoin.pickUnconfirmedRBF" />
-      </Text>
     </Box>
   );
 };
