@@ -17,8 +17,6 @@ import StepProgress from "~/renderer/components/StepProgress";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
 import Button from "~/renderer/components/Button";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { toExchangeRaw } from "@ledgerhq/live-common/lib/swap/serialization";
-import { toTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 
 import { mockedEventEmitter } from "~/renderer/components/DebugMock";
 const connectAppExec = command("connectApp");
@@ -85,9 +83,9 @@ const StepDevice = ({
 
   const request = useMemo(
     () => ({
-      exchange: toExchangeRaw(exchange),
+      exchange,
       exchangeRate,
-      transaction: toTransactionRaw(transaction),
+      transaction,
       device: deviceRef,
     }),
     [exchange, exchangeRate, transaction],

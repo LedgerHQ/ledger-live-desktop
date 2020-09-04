@@ -3,18 +3,18 @@
 import type { Observable } from "rxjs";
 import { from } from "rxjs";
 import type {
-  ExchangeRate,
+  ExchangeRateRaw,
   ExchangeRaw,
   SwapRequestEvent,
 } from "@ledgerhq/live-common/lib/swap/types";
 import type { TransactionRaw } from "@ledgerhq/live-common/lib/types";
 import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
-import { fromExchangeRaw } from "@ledgerhq/live-common/lib/swap/serialization";
+import { fromExchangeRaw, fromExchangeRateRaw } from "@ledgerhq/live-common/lib/swap/serialization";
 import initSwap from "@ledgerhq/live-common/lib/swap/initSwap";
 
 type Input = {
   exchange: ExchangeRaw,
-  exchangeRate: ExchangeRate,
+  exchangeRate: ExchangeRateRaw,
   transaction: TransactionRaw,
   deviceId: string,
 };
@@ -28,7 +28,7 @@ const cmd = ({
   return from(
     initSwap({
       exchange: fromExchangeRaw(exchange),
-      exchangeRate,
+      exchangeRate: fromExchangeRateRaw(exchangeRate),
       transaction: fromTransactionRaw(transaction),
       deviceId,
     }),
