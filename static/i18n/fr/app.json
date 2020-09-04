@@ -137,6 +137,7 @@
     "settings": {
       "title": "Modifier le compte",
       "advancedLogs": "Logs détaillés",
+      "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
       "accountName": {
         "title": "Nom du compte",
         "desc": "Description du compte"
@@ -951,14 +952,28 @@
     }
   },
   "bitcoin": {
+    "inputSelected": "SELECTED",
+    "toSpend": "Coins to spend",
+    "toReturn": "Change to return",
+    "modalTitle": "Coin control",
+    "coincontrol": "Coin control",
     "advanced": "Options avancées",
-    "rbf": "Replace-by-fee (RBF)",
-    "pickUnconfirmedRBF": "autoriser les transactions remplaçables non confirmées",
+    "ctaDisabled": "You must first enter an amount.",
+    "whatIs": "What is coin selection?",
+    "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
+    "strategy": "Coin selection strategy",
+    "selected": "Coins selected for strategy",
+    "amount": "Amount to send:",
+    "replaceable": "replaceable",
+    "cannotSelect": "You cannot select coins from unconfirmed, replaceable transactions.",
+    "pending": "pending",
+    "notEnoughCoins": "You have not selected enough coins to meet the amount to send.",
+    "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions.",
     "pickingStrategy": "Stratégie de sélection UTXO",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "First In First Out (FIFO)",
-      "OPTIMIZE_SIZE": "Optimiser la taille (minimiser les frais)",
-      "MERGE_OUTPUTS": "Fusionner les sorties"
+      "DEEP_OUTPUTS_FIRST": "Oldest coins first (FIFO)",
+      "OPTIMIZE_SIZE": "Minimize fees (optimize size)",
+      "MERGE_OUTPUTS": "Minimize future fees (merge coins)"
     }
   },
   "cosmos": {
@@ -1165,7 +1180,7 @@
       "header": "Récompenses",
       "tooltip": "Les récompenses Algorand sont distribuées régulièrement et sont réclamées automatiquement lorsque vous effectuez une transaction.",
       "cta": "Réclamer les récompenses",
-      "rewardsDisabledTooltip": "Vous n'avez aucune récompense. \nLes récompenses Algorand sont réclamées automatiquement lorsque vous effectuez une transaction. Recevez des ALGO pour commencer à obtenir des récompenses.",
+      "rewardsDisabledTooltip": "You don’t have any rewards. Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
       "flow": {
         "title": "Réclamer les récompenses",
         "steps": {
