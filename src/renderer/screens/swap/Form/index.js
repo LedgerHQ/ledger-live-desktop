@@ -72,10 +72,9 @@ type Props = {
   installedApps: InstalledItem[],
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
   defaultAccount?: ?Account,
-  setShowRateChanged: boolean => void,
 };
 
-const Form = ({ installedApps, setShowRateChanged, defaultCurrency, defaultAccount }: Props) => {
+const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
   const ratesExpirationThreshold = 100000;
   const { t } = useTranslation();
 
@@ -262,9 +261,8 @@ const Form = ({ installedApps, setShowRateChanged, defaultCurrency, defaultAccou
   useEffect(() => {
     if (modalsState.MODAL_SWAP && !modalsState.MODAL_SWAP.isOpened) {
       dispatch({ type: "expireRates", payload: {} });
-      setShowRateChanged(true);
     }
-  }, [modalsState, setShowRateChanged]);
+  }, [modalsState]);
 
   // Re-fetch rates (if needed) every `ratesExpirationThreshold` seconds.
   useInterval(() => {
@@ -291,7 +289,6 @@ const Form = ({ installedApps, setShowRateChanged, defaultCurrency, defaultAccou
             }}
             onAccountChange={a => dispatch({ type: "setFromAccount", payload: { fromAccount: a } })}
             onAmountChange={fromAmount => {
-              setShowRateChanged(false);
               dispatch({ type: "setFromAmount", payload: { fromAmount } });
             }}
             validAccounts={validFrom}

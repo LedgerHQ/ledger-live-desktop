@@ -14,10 +14,9 @@ import { setSwapProviders } from "~/renderer/actions/application";
 type Props = {
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
   defaultAccount?: ?Account,
-  setShowRateChanged: boolean => void,
 };
 
-const Swap = ({ setShowRateChanged, defaultCurrency, defaultAccount }: Props) => {
+const Swap = ({ defaultCurrency, defaultAccount }: Props) => {
   const providers = useSelector(swapProvidersSelector);
   const [showLandingPage, setShowLandingPage] = useState(true);
   const [installedApps, setInstalledApps] = useState();
@@ -54,7 +53,6 @@ const Swap = ({ setShowRateChanged, defaultCurrency, defaultAccount }: Props) =>
     <Form
       providers={providers}
       installedApps={installedApps}
-      setShowRateChanged={setShowRateChanged}
       defaultCurrency={defaultCurrency}
       defaultAccount={defaultAccount}
     />
