@@ -89,7 +89,6 @@ const SwapInputGroup = ({
     allAccounts: validAccounts,
     defaultCurrency,
     defaultAccount,
-    fallbackToFirst: false,
   });
 
   const unit = currency && currency.units[0];

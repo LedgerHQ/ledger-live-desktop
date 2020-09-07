@@ -48,13 +48,11 @@ export function useCurrencyAccountSelect({
   allAccounts,
   defaultCurrency,
   defaultAccount,
-  fallbackToFirst = true,
 }: {
   allCurrencies: CryptoOrTokenCurrency[],
   allAccounts: Account[],
   defaultCurrency: ?CryptoOrTokenCurrency,
   defaultAccount: ?Account,
-  fallbackToFirst?: boolean,
 }) {
   const [state, setState] = useState(() => {
     const currency = defaultCurrency || null;
