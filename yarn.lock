@@ -1465,10 +1465,10 @@
     "@ledgerhq/errors" "^5.22.0"
     events "^3.2.0"
 
-"@ledgerhq/ledger-core@6.8.8":
-  version "6.8.8"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-6.8.8.tgz#2441e224e9a3ff37102e3452c1fd1b5c4bffb595"
-  integrity sha512-vkcshR3LecAUR06MhOHNr5Lps/Q4yUY2mts1nNl9Ddg5jSyqiqJ8plOZgmiT8cY5pKJdLyQYep1jqe8ABgCiOw==
+"@ledgerhq/ledger-core@6.8.10":
+  version "6.8.10"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-6.8.10.tgz#6a91407be8629cd4b05799253dd1746838e5e004"
+  integrity sha512-dX8Dymffr3ml/0wr+Ons0TFOl80QYKargjXXkUhhhuKnQvY+zb6ZyV+atVRuI5chgYeUwvYJAeLjBPvrNugvvw==
   dependencies:
     bindings "1.5.0"
     nan "^2.14.1"
