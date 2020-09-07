@@ -8,7 +8,7 @@ import type { CryptoCurrency, TokenCurrency, Account } from "@ledgerhq/live-comm
 import Landing from "~/renderer/screens/swap/Landing";
 import Form from "~/renderer/screens/swap/Form";
 import Connect from "~/renderer/screens/swap/Connect";
-import MissingSwapApp from "~/renderer/screens/swap/MissingSwapApp";
+import MissingOrOutdatedSwapApp from "~/renderer/screens/swap/MissingOrOutdatedSwapApp";
 import { setSwapProviders } from "~/renderer/actions/application";
 
 type Props = {
@@ -37,8 +37,8 @@ const Swap = ({ defaultCurrency, defaultAccount }: Props) => {
     },
     [setInstalledApps],
   );
+  const exchangeApp = installedApps?.find(a => a.name === "Exchange");
 
-  const showInstallSwap = installedApps && !installedApps.some(a => a.name === "Exchange");
   const onContinue = useCallback(() => {
     setShowLandingPage(false);
   }, [setShowLandingPage]);
@@ -47,8 +47,10 @@ const Swap = ({ defaultCurrency, defaultAccount }: Props) => {
     <Landing providers={providers} onContinue={onContinue} />
   ) : !installedApps ? (
     <Connect setResult={onSetResult} />
-  ) : showInstallSwap ? (
-    <MissingSwapApp />
+  ) : !exchangeApp ? (
+    <MissingOrOutdatedSwapApp />
+  ) : exchangeApp.outdated ? (
+    <MissingOrOutdatedSwapApp outdated />
   ) : (
     <Form
       providers={providers}

@@ -140,8 +140,10 @@
       "subtitle": "Go to manager and install Exchange app to swap assets",
       "cta": "Go to manager"
     },
-    "history": {
-      "title": "Lorem ipsum dolor sit amet"
+    "outdatedApp": {
+      "title": "Please update the Exchange app on your device",
+      "subtitle": "Go to manager and update Exchange app to swap assets",
+      "cta": "Go to manager"
     },
     "kyc": {
       "title": "Welcome to Swap",
@@ -169,6 +171,7 @@
       "bubble": "We use a fixed rate, this is the exact amount you will receive",
       "noAccounts": "You don't have {{currencyName}} accounts",
       "noApp": "You don't have the {{currencyName}} app installed",
+      "outdatedApp": "{{currencyName}} app needs to be updated",
       "warning": "The swap provider has changed its rates since your last session"
     },
     "modal": {
