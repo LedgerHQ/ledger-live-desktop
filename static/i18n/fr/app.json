@@ -48,7 +48,7 @@
     "dismiss": "Ignorer",
     "information": "Informations",
     "search": "Rechercher ...",
-    "searchWithoutEllipsis": "Search",
+    "searchWithoutEllipsis": "Rechercher",
     "manage": "Gérer",
     "lockScreen": {
       "title": "Bienvenue",
@@ -952,28 +952,28 @@
     }
   },
   "bitcoin": {
-    "inputSelected": "SELECTED",
+    "inputSelected": "SÉLECTIONNÉ",
     "toSpend": "Coins to spend",
     "toReturn": "Change to return",
     "modalTitle": "Coin control",
     "coincontrol": "Coin control",
     "advanced": "Options avancées",
     "ctaDisabled": "You must first enter an amount.",
-    "whatIs": "What is coin selection?",
-    "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
-    "strategy": "Coin selection strategy",
-    "selected": "Coins selected for strategy",
-    "amount": "Amount to send:",
-    "replaceable": "replaceable",
-    "cannotSelect": "You cannot select coins from unconfirmed, replaceable transactions.",
-    "pending": "pending",
-    "notEnoughCoins": "You have not selected enough coins to meet the amount to send.",
-    "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions.",
+    "whatIs": "Qu'est-ce que la sélection de coin?",
+    "rbf": "Permettre la transaction d'être remplaçable (Replace-By-Fee).",
+    "strategy": "Selection de la coin stratégie",
+    "selected": "Coins selectionnés pour la stratégie",
+    "amount": "Montant à envoyer :",
+    "replaceable": "remplaçable",
+    "cannotSelect": "Vous ne pouvez pas sélectionner des coins parmi des transactions non confirmées et remplaçables.",
+    "pending": "En attente",
+    "notEnoughCoins": "Vous n'avez pas selectionné assez de coins pour transférer le montant voulu.",
+    "pickUnconfirmedRBF": "Inclure les coins des opérations non confirmées et remplaçables.",
     "pickingStrategy": "Stratégie de sélection UTXO",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "Oldest coins first (FIFO)",
-      "OPTIMIZE_SIZE": "Minimize fees (optimize size)",
-      "MERGE_OUTPUTS": "Minimize future fees (merge coins)"
+      "DEEP_OUTPUTS_FIRST": "Premier entré premier sorti (FIFO)",
+      "OPTIMIZE_SIZE": "Réduire les frais (optimiser la taille)",
+      "MERGE_OUTPUTS": "Réduire les futurs frais (fusion des coins)"
     }
   },
   "cosmos": {
@@ -1180,7 +1180,7 @@
       "header": "Récompenses",
       "tooltip": "Les récompenses Algorand sont distribuées régulièrement et sont réclamées automatiquement lorsque vous effectuez une transaction.",
       "cta": "Réclamer les récompenses",
-      "rewardsDisabledTooltip": "You don’t have any rewards. Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
+      "rewardsDisabledTooltip": "Vous n'avez aucune récompense. \nLes récompenses Algorand sont réclamées automatiquement lorsque vous effectuez une transaction. Recevez des ALGO pour commencer à obtenir des récompenses.",
       "flow": {
         "title": "Réclamer les récompenses",
         "steps": {
