@@ -5,7 +5,7 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 
 import { BigNumber } from "bignumber.js";
 import { useSelector, useDispatch } from "react-redux";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import Card from "~/renderer/components/Box/Card";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { modalsStateSelector } from "~/renderer/reducers/modals";
@@ -18,7 +18,6 @@ import type {
 import getExchangeRates from "@ledgerhq/live-common/lib/swap/getExchangeRates";
 import ArrowSeparator from "~/renderer/components/ArrowSeparator";
 import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/application";
-import useInterval from "~/renderer/hooks/useInterval";
 import {
   canRequestRates,
   getCurrenciesWithStatus,
@@ -32,16 +31,11 @@ import {
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account";
 import type { InstalledItem } from "@ledgerhq/live-common/lib/apps";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import styled from "styled-components";
 import Box from "~/renderer/components/Box";
-import Button from "~/renderer/components/Button";
-import { openURL } from "~/renderer/linking";
 
-import { track } from "~/renderer/analytics/segment";
-import LabelWithExternalIcon from "~/renderer/components/LabelWithExternalIcon";
 import From from "~/renderer/screens/swap/Form/From";
 import To from "~/renderer/screens/swap/Form/To";
+import Footer from "~/renderer/screens/swap/Form/Footer";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import Tooltip from "~/renderer/components/Tooltip";
 import IconExclamationCircle from "~/renderer/icons/ExclamationCircle";
@@ -50,14 +44,6 @@ import { colors } from "~/renderer/styles/theme";
 import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import type { CurrencyStatus } from "@ledgerhq/live-common/lib/swap/logic";
-import { urls } from "~/config/urls";
-
-const Footer: ThemedComponent<{}> = styled(Box)`
-  align-items: center;
-  border-top: 1px solid ${p => p.theme.colors.palette.divider};
-  justify-content: space-between;
-  padding: 20px;
-`;
 
 const isSameCurrencyFilter = currency => a => {
   const accountCurrency = getAccountCurrency(a);
@@ -75,9 +61,6 @@ type Props = {
 };
 
 const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
-  const ratesExpirationThreshold = 100000;
-  const { t } = useTranslation();
-
   const accounts = useSelector(shallowAccountsSelector);
   const selectableCurrencies = useSelector(swapSupportedCurrenciesSelector);
   const modalsState = useSelector(modalsStateSelector);
@@ -117,13 +100,19 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
     useAllAmount,
     /* ratesTimestamp, */ error,
   } = state;
+  const ratesExpirationThreshold = 60000;
   const { exchange, exchangeRate } = swap;
+  const [isTimerVisible, setTimerVisibility] = useState(true);
   const { fromAccount, fromParentAccount, toAccount, toParentAccount } = exchange;
   const { setTransaction, setAccount, transaction } = useBridgeTransaction();
-
+  const ratesExpiration = useMemo(
+    () => (ratesTimestamp ? new Date(ratesTimestamp.getTime() + ratesExpirationThreshold) : null),
+    [ratesTimestamp],
+  );
   const onStartSwap = useCallback(() => {
-    reduxDispatch(openModal("MODAL_SWAP", { swap, transaction }));
-  }, [reduxDispatch, swap, transaction]);
+    setTimerVisibility(false);
+    reduxDispatch(openModal("MODAL_SWAP", { swap, transaction, ratesExpiration }));
+  }, [ratesExpiration, reduxDispatch, swap, transaction]);
 
   const validFrom = useMemo(() => accounts.filter(isSameCurrencyFilter(fromCurrency)), [
     accounts,
@@ -258,19 +247,18 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
     };
   }, [fromAccount, fromParentAccount, transaction, useAllAmount]);
 
-  useEffect(() => {
-    if (modalsState.MODAL_SWAP && !modalsState.MODAL_SWAP.isOpened) {
+  const expireRates = useCallback(() => {
+    if (!modalsState.MODAL_SWAP || !modalsState.MODAL_SWAP.isOpened) {
+      // NB Modal is closed, show the timer for the Form component again.
+      setTimerVisibility(true);
+      // NB Don't expire the rates if the modal is open, we freeze on modal flow launch.
       dispatch({ type: "expireRates", payload: {} });
     }
   }, [modalsState]);
 
-  // Re-fetch rates (if needed) every `ratesExpirationThreshold` seconds.
-  useInterval(() => {
-    const now = new Date();
-    if (ratesTimestamp && now - ratesTimestamp > ratesExpirationThreshold) {
-      dispatch({ type: "expireRates", payload: {} });
-    }
-  }, 5000);
+  useEffect(() => {
+    expireRates();
+  }, [expireRates, modalsState]);
 
   return (
     <>
@@ -314,20 +302,12 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
             validAccounts={validTo}
           />
         </Box>
-        <Footer horizontal>
-          <LabelWithExternalIcon
-            color="wallet"
-            ff="Inter|SemiBold"
-            onClick={() => {
-              openURL(urls.swap.info);
-              track("More info on swap");
-            }}
-            label={t("swap.form.helpCTA")}
-          />
-          <Button onClick={onStartSwap} primary disabled={!exchangeRate}>
-            {"Exchange"}
-          </Button>
-        </Footer>
+        <Footer
+          onExpireRates={expireRates}
+          onStartSwap={onStartSwap}
+          canContinue={exchangeRate}
+          ratesExpiration={isTimerVisible ? ratesExpiration : null}
+        />
       </Card>
     </>
   );

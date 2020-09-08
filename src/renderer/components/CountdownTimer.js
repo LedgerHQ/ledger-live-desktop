@@ -1,18 +1,19 @@
 // @flow
 import React, { useState } from "react";
 import useInterval from "~/renderer/hooks/useInterval";
+import Text from "~/renderer/components/Text";
 import moment from "moment";
 
 const CountdownTimer = ({
   end,
-  format = "HH:mm:ss",
+  format = "mm:ss",
   callback,
 }: {
   end: Date,
   format?: string,
   callback: Function,
 }) => {
-  const [timeLeft, setTimeLeft] = useState("");
+  const [timeLeft, setTimeLeft] = useState(moment.utc(end - new Date()).format(format));
   const [finished, setFinished] = useState(false);
 
   useInterval(() => {
@@ -21,14 +22,20 @@ const CountdownTimer = ({
     }
 
     const seconds = end - new Date();
-    setTimeLeft(moment.utc(seconds).format(format));
-    if (seconds <= 0 && callback) {
+
+    if (seconds <= 1 && callback) {
       setFinished(true);
       callback();
+    } else {
+      setTimeLeft(moment.utc(seconds).format(format));
     }
-  }, 1000); // NB maybe generalize to show in minutes/milliseconds
+  }, 1000);
 
-  return <span>{timeLeft}</span>;
+  return (
+    <Text ff="Inter|SemiBold" fontSize={3} color={"palette.text.shade100"}>
+      {timeLeft}
+    </Text>
+  );
 };
 
 export default CountdownTimer;

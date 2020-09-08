@@ -165,6 +165,7 @@
         "currency": "Asset type",
         "addAccountCTA": "Add new account"
       },
+      "exchange": "Exchange",
       "addAccount": "Add Account",
       "openManager": "Open Manager",
       "helpCTA": "What is Swap?",
@@ -185,6 +186,7 @@
           "toExchange": "Amount send",
           "toReceive": "Amount receive",
           "provider": "Provider",
+          "terms":"Terms & Conditions",
           "disclaimer": {
             "header": "Details",
             "description": "\"By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by Changelly's"

@@ -20,12 +20,14 @@ const SwapBody = ({
   onClose,
   onStepChange,
   activeStep,
+  ratesExpiration,
 }: {
   swap: { exchange: Exchange, exchangeRate: ExchangeRate },
   transaction: any, // FIXME
   onClose: any,
   onStepChange: SwapSteps => void,
   activeStep: SwapSteps,
+  ratesExpiration: Date,
 }) => {
   const { exchange } = swap;
   const { fromAccount, fromParentAccount } = exchange;
@@ -106,16 +108,18 @@ const SwapBody = ({
         </>
       )}
       renderFooter={() =>
-        activeStep === "summary" ? (
+        error ? (
+          <StepDeviceFooter onClose={onClose} />
+        ) : activeStep === "summary" ? (
           <StepSummaryFooter
+            setError={setError}
             onContinue={onAcceptTOS}
             onClose={onClose}
             disabled={!checkedDisclaimer}
+            ratesExpiration={ratesExpiration}
           />
         ) : result && swap ? (
           <StepFinishedFooter result={result} swap={swap} onClose={onClose} />
-        ) : error ? (
-          <StepDeviceFooter onClose={onClose} />
         ) : null
       }
     />

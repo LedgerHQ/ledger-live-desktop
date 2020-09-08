@@ -5,6 +5,7 @@ import { Trans } from "react-i18next";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Card from "~/renderer/components/Box/Card";
+import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import swapIllustration from "~/renderer/images/swap.png";
 import CheckBox from "~/renderer/components/CheckBox";
@@ -65,14 +66,16 @@ const KYC = () => {
   const dispatch = useDispatch();
   const onAcceptSwapKYC = useCallback(() => dispatch(setHasAcceptedSwapKYC(true)), [dispatch]);
   return (
-    <Card pt={53}>
-      <Illustration />
-      <Title ff="Inter|SemiBold">
-        <Trans i18nKey={"swap.kyc.title"} />
-      </Title>
-      <Subtitle ff="Inter|Medium">
-        <Trans i18nKey={"swap.kyc.subtitle"} />
-      </Subtitle>
+    <Card flex={1} pt={53} justifyContent={"space-between"}>
+      <Box flex={1} justifyContent={"center"}>
+        <Illustration />
+        <Title ff="Inter|SemiBold">
+          <Trans i18nKey={"swap.kyc.title"} />
+        </Title>
+        <Subtitle ff="Inter|Medium">
+          <Trans i18nKey={"swap.kyc.subtitle"} />
+        </Subtitle>
+      </Box>
       <Footer>
         <CheckBox id={"swap-landing-kyc-tos"} isChecked={isChecked} onChange={setIsChecked} />
         <Disclaimer ff="Inter|Regular" onClick={() => setIsChecked(!isChecked)}>

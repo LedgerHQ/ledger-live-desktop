@@ -15,6 +15,7 @@ import ArrowSeparator from "~/renderer/components/ArrowSeparator";
 import CheckBox from "~/renderer/components/CheckBox";
 import React from "react";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
+import { SwapGenericAPIError } from "@ledgerhq/live-common/lib/errors";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import Button from "~/renderer/components/Button";
 import IconWallet from "~/renderer/icons/Wallet";
@@ -25,6 +26,9 @@ import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 import FakeLink from "~/renderer/components/FakeLink";
+import { CountdownTimerWrapper } from "~/renderer/screens/swap/Form/Footer";
+import IconClock from "~/renderer/icons/Clock";
+import CountdownTimer from "~/renderer/components/CountdownTimer";
 
 const IconWrapper = styled(Box)`
   background: ${colors.pillActiveBackground};
@@ -34,6 +38,12 @@ const IconWrapper = styled(Box)`
   border-radius: 16px;
   align-items: center;
   justify-content: center;
+`;
+
+const ProviderWrapper = styled(Box)`
+  background: ${p => p.theme.colors.palette.text.shade10};
+  padding: 6px 12px;
+  border-radius: 4px;
 `;
 
 const StepSummary = ({
@@ -123,7 +133,7 @@ const StepSummary = ({
           </Text>
         </Box>
       </Box>
-      <Box horizontal justifyContent={"space-between"} mt={20}>
+      <ProviderWrapper horizontal justifyContent={"space-between"} mt={20}>
         <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
           <Trans i18nKey="swap.modal.steps.summary.details.provider" />
         </Text>
@@ -141,7 +151,7 @@ const StepSummary = ({
             <IconExternalLink size={12} />
           </Box>
         </FakeLink>
-      </Box>
+      </ProviderWrapper>
       <Box mt={6} horizontal alignItems={"center"} onClick={onSwitchAccept}>
         <CheckBox onChange={onSwitchAccept} isChecked={checkedDisclaimer} />
         <Text
@@ -163,7 +173,7 @@ const StepSummary = ({
             iconFirst
             style={{ textTransform: "capitalize", display: "inline-flex" }}
           >
-            {"Terms & Conditions"}
+            <Trans i18nKey="swap.modal.steps.summary.terms" />
             <Box ml={1}>
               <IconExternalLink size={12} />
             </Box>
@@ -178,24 +188,40 @@ export const StepSummaryFooter = ({
   onContinue,
   onClose,
   disabled,
+  ratesExpiration,
+  setError,
 }: {
   onContinue: any,
   onClose: any,
   disabled: boolean,
+  ratesExpiration: Date,
+  setError: Error => void,
 }) => (
   <Box horizontal flex={1} justifyContent={"flex-end"} alignItems={"center"}>
-    <Button onClick={onClose} secondary data-e2e="modal_buttonClose_swap">
-      <Trans i18nKey="common.close" />
-    </Button>
-    <Button
-      ml={1}
-      onClick={onContinue}
-      disabled={disabled}
-      primary
-      data-e2e="modal_buttonContinue_swap"
-    >
-      <Trans i18nKey="common.confirm" />
-    </Button>
+    <CountdownTimerWrapper horizontal>
+      <Box mr={1}>
+        <IconClock size={14} />
+      </Box>
+      <CountdownTimer
+        key={`rates-${ratesExpiration.getTime()}`}
+        end={ratesExpiration}
+        callback={() => setError(new SwapGenericAPIError())}
+      />
+    </CountdownTimerWrapper>
+    <Box horizontal flex={1} justifyContent={"flex-end"}>
+      <Button onClick={onClose} secondary data-e2e="modal_buttonClose_swap">
+        <Trans i18nKey="common.close" />
+      </Button>
+      <Button
+        ml={1}
+        onClick={onContinue}
+        disabled={disabled}
+        primary
+        data-e2e="modal_buttonContinue_swap"
+      >
+        <Trans i18nKey="common.confirm" />
+      </Button>
+    </Box>
   </Box>
 );
 

@@ -16,6 +16,7 @@ const Swap = () => {
         <SwapBody
           swap={data.swap}
           transaction={data.transaction}
+          ratesExpiration={data.ratesExpiration}
           onStepChange={setStepId}
           activeStep={stepId}
           onClose={onClose}
