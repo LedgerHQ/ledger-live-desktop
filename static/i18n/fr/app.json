@@ -48,6 +48,7 @@
     "dismiss": "Ignorer",
     "information": "Informations",
     "search": "Rechercher ...",
+    "searchWithoutEllipsis": "Rechercher",
     "manage": "Gérer",
     "lockScreen": {
       "title": "Bienvenue",
@@ -136,6 +137,7 @@
     "settings": {
       "title": "Modifier le compte",
       "advancedLogs": "Logs détaillés",
+      "advancedTips": "Votre xpub est une donnée sensible. Utilisez-la avec prudence, en particulier lorsque vous la divulguez à des tiers.",
       "accountName": {
         "title": "Nom du compte",
         "desc": "Description du compte"
@@ -950,14 +952,28 @@
     }
   },
   "bitcoin": {
+    "inputSelected": "SÉLECTIONNÉ",
+    "toSpend": "Coins à dépenser",
+    "toReturn": "Coin à rendre",
+    "modalTitle": "Coin control",
+    "coincontrol": "Coin control",
     "advanced": "Options avancées",
-    "rbf": "Replace-by-fee (RBF)",
-    "pickUnconfirmedRBF": "autoriser les transactions remplaçables non confirmées",
+    "ctaDisabled": "Vous devez d'abord saisir un montant.",
+    "whatIs": "Qu'est-ce que la sélection de coin?",
+    "rbf": "Permettre la transaction d'être remplaçable (Replace-By-Fee).",
+    "strategy": "Selection de la coin stratégie",
+    "selected": "Coins selectionnés pour la stratégie",
+    "amount": "Montant à envoyer :",
+    "replaceable": "remplaçable",
+    "cannotSelect": "Vous ne pouvez pas sélectionner des coins parmi des transactions non confirmées et remplaçables.",
+    "pending": "En attente",
+    "notEnoughCoins": "Vous n'avez pas selectionné assez de coins pour transférer le montant voulu.",
+    "pickUnconfirmedRBF": "Inclure les coins des opérations non confirmées et remplaçables.",
     "pickingStrategy": "Stratégie de sélection UTXO",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "First In First Out (FIFO)",
-      "OPTIMIZE_SIZE": "Optimiser la taille (minimiser les frais)",
-      "MERGE_OUTPUTS": "Fusionner les sorties"
+      "DEEP_OUTPUTS_FIRST": "Premier entré premier sorti (FIFO)",
+      "OPTIMIZE_SIZE": "Réduire les frais (optimiser la taille)",
+      "MERGE_OUTPUTS": "Réduire les futurs frais (fusion des coins)"
     }
   },
   "cosmos": {
