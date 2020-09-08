@@ -13,7 +13,7 @@ const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectManager
 
 const Connect = ({ setResult }: { setResult: () => void }) => {
   return (
-    <Card p={89} alignItems="center">
+    <Card flex={1} p={89} alignItems="center">
       <DeviceAction onResult={setResult} action={action} request={null} />
     </Card>
   );

@@ -16,7 +16,7 @@ const MissingOrOutdatedSwapApp = ({ outdated = false }: { outdated?: boolean }) 
   }, [push]);
   const key = outdated ? "outdatedApp" : "missingApp";
   return (
-    <Card p={89} alignItems="center">
+    <Card flex={1} p={89} alignItems="center" justifyContent="center">
       <Image alt="Swap app icon" resource={manager.getIconUrl("exchange")} width={60} height={60} />
       <Text color="palette.text.shade100" mb={1} mt={3} ff="Inter|SemiBold" fontSize={5}>
         <Trans i18nKey={`swap.${key}.title`} />

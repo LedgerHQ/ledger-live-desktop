@@ -138,7 +138,7 @@ const History = () => {
             </>
           ))
         ) : (
-          <Card p={150} alignItems={"center"} justifyContent={"center"}>
+          <Card flex={1} p={150} alignItems={"center"} justifyContent={"center"}>
             <Text mb={1} ff="Inter|SemiBold" fontSize={16} color="palette.text.shade100">
               {"No History"}
             </Text>
@@ -149,6 +149,7 @@ const History = () => {
         )
       ) : (
         <Card
+          flex={1}
           px={80}
           py={53}
           alignItems={"center"}

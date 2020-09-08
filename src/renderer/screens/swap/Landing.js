@@ -45,13 +45,7 @@ const Landing = ({
   return showKYC ? (
     <KYC />
   ) : (
-    <Card
-      px={80}
-      py={53}
-      alignItems={"center"}
-      justifyContent={"center"}
-      style={{ minHeight: 438 }}
-    >
+    <Card px={80} py={53} alignItems={"center"} justifyContent={"center"} flex={1}>
       <Body>
         <Content>
           {providers === undefined ? (

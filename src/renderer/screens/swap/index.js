@@ -2,7 +2,6 @@
 
 import React, { useCallback, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { StickyTabBar } from "~/renderer/screens/manager/AppsList/AppsList";
 import TabBar from "~/renderer/components/TabBar";
 import Swap from "~/renderer/screens/swap/Swap";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -19,7 +18,7 @@ const SwapOrSwapHistory = () => {
   }, []);
 
   return (
-    <Box>
+    <Box flex={1} pb={6}>
       <TrackPage category="Swap" />
       <Box horizontal>
         <Box
@@ -32,10 +31,7 @@ const SwapOrSwapHistory = () => {
           <Trans i18nKey="swap.title" />
         </Box>
       </Box>
-
-      <StickyTabBar>
-        <TabBar tabs={["swap.tabs.exchange", "swap.tabs.history"]} onIndexChange={onIndexChange} />
-      </StickyTabBar>
+      <TabBar tabs={["swap.tabs.exchange", "swap.tabs.history"]} onIndexChange={onIndexChange} />
       {tabIndex === 0 ? <Swap {...location?.state} /> : <History />}
     </Box>
   );
