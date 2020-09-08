@@ -79,6 +79,6 @@ export async function softReset({ cleanAccountsCache }: *) {
 }
 
 export async function openUserDataFolderAndQuit() {
-  shell.openItem(resolveUserDataDirectory());
+  shell.showItemInFolder(resolveUserDataDirectory());
   remote.app.quit();
 }

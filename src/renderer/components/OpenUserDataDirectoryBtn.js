@@ -18,7 +18,7 @@ const OpenUserDataDirectoryBtn = ({
   const handleOpenUserDataDirectory = useCallback(() => {
     const userDataDirectory = resolveUserDataDirectory();
     logger.log(`Opening user data directory: ${userDataDirectory}`);
-    shell.openItem(userDataDirectory);
+    shell.showItemInFolder(userDataDirectory);
   }, []);
 
   return (
