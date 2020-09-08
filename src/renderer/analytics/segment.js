@@ -1,6 +1,6 @@
 // @flow
 
-import uuid from "uuid/v4";
+import { v4 as uuid } from "uuid";
 import invariant from "invariant";
 import { ReplaySubject } from "rxjs";
 import logger from "~/logger";

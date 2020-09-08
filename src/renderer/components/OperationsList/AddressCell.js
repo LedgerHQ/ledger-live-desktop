@@ -6,10 +6,26 @@ import type { Operation } from "@ledgerhq/live-common/lib/types";
 import Box from "~/renderer/components/Box";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const Address = ({ value }: { value: string }) => {
+export const SplitAddress = ({
+  value,
+  color,
+  ff,
+  fontSize,
+}: {
+  value: string,
+  color?: string,
+  ff?: string,
+  fontSize?: number,
+}) => {
   if (!value) {
     return <Box />;
   }
+
+  const boxProps = {
+    color,
+    ff,
+    fontSize,
+  };
 
   const third = Math.round(value.length / 3);
 
@@ -18,12 +34,16 @@ const Address = ({ value }: { value: string }) => {
   const right = value.slice(third, value.length);
 
   return (
-    <Box horizontal color="palette.text.shade80" ff="Inter" fontSize={3}>
+    <Box horizontal {...boxProps}>
       <Left>{left}</Left>
       <Right>{right}</Right>
     </Box>
   );
 };
+
+export const Address = ({ value }: { value: string }) => (
+  <SplitAddress value={value} color="palette.text.shade80" ff="Inter" fontSize={3} />
+);
 
 const Left: ThemedComponent<{}> = styled.div`
   overflow: hidden;
@@ -45,8 +65,8 @@ const Right: ThemedComponent<{}> = styled.div`
   letter-spacing: 0px;
 `;
 
-const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
-  px: 4,
+export const Cell: ThemedComponent<{ px?: number }> = styled(Box).attrs(p => ({
+  px: p.px === 0 ? p.px : p.px || 4,
   horizontal: true,
   alignItems: "center",
 }))`

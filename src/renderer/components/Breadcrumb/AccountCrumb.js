@@ -136,7 +136,7 @@ const AccountCrumb = () => {
         {({ isOpen, value }) =>
           value ? (
             <Box flex={1} shrink={!!parentId} horizontal>
-              <TextLink {...{ shrink: !parentId }}>
+              <TextLink shrink>
                 {currency && <CryptoCurrencyIcon size={14} currency={currency} />}
                 <Button onClick={openActiveAccount}>
                   <Ellipsis>{value.label}</Ellipsis>

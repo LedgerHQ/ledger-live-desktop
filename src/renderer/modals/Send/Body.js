@@ -142,6 +142,7 @@ const Body = ({
   const {
     transaction,
     setTransaction,
+    updateTransaction,
     account,
     parentAccount,
     setAccount,
@@ -245,6 +246,7 @@ const Body = ({
     onResetMaybeAmount,
     maybeRecipient,
     onResetMaybeRecipient,
+    updateTransaction,
   };
 
   if (!status) return null;

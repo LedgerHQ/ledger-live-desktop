@@ -110,10 +110,10 @@ const InstallSuccessBanner = ({ state, isIncomplete, dispatch, addAccount, disab
             py={3}
             position="relative"
           >
-            <IconContainer style={{ zIndex: 10 }} onClick={onClose}>
+            <IconContainer onClick={onClose}>
               <IconCross size={16} />
             </IconContainer>
-            <Box style={{ zIndex: 10 }} flex={1} justifyContent="space-between">
+            <Box flex={1} justifyContent="space-between">
               <Box mb={3}>
                 <Text ff="Inter|SemiBold" fontSize={6} color="palette.primary.contrastText">
                   {installedSupportedApps.length === 1 ? (

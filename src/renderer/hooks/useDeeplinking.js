@@ -58,7 +58,7 @@ function useDeepLinkHandler() {
 
         case "account": {
           const { currency } = query;
-          if (!currency) return;
+          if (!currency || typeof currency !== "string") return;
 
           const c = findCurrencyByTicker(currency.toUpperCase());
           if (!c || c.type === "FiatCurrency") return;
@@ -82,7 +82,7 @@ function useDeepLinkHandler() {
           const modal =
             url === "send" ? "MODAL_SEND" : url === "receive" ? "MODAL_RECEIVE" : "MODAL_DELEGATE";
           const { currency, recipient, amount } = query;
-          if (!currency) return;
+          if (!currency || typeof currency !== "string") return;
 
           const c = findCurrencyByTicker(currency.toUpperCase());
           if (!c || c.type === "FiatCurrency") {
@@ -99,7 +99,10 @@ function useDeepLinkHandler() {
             dispatch(
               openModal(modal, {
                 recipient,
-                amount: amount ? parseCurrencyUnit(c.units[0], amount) : undefined,
+                amount:
+                  amount && typeof amount === "string"
+                    ? parseCurrencyUnit(c.units[0], amount)
+                    : undefined,
               }),
             );
 
@@ -113,7 +116,10 @@ function useDeepLinkHandler() {
               openModal(modal, {
                 account: chosen,
                 recipient,
-                amount: amount ? parseCurrencyUnit(c.units[0], amount) : undefined,
+                amount:
+                  amount && typeof amount === "string"
+                    ? parseCurrencyUnit(c.units[0], amount)
+                    : undefined,
               }),
             );
           } else {
@@ -122,7 +128,10 @@ function useDeepLinkHandler() {
                 account: chosen,
                 parentAccount: accounts.find(acc => acc.id === chosen.parentId),
                 recipient,
-                amount: amount ? parseCurrencyUnit(c.units[0], amount) : undefined,
+                amount:
+                  amount && typeof amount === "string"
+                    ? parseCurrencyUnit(c.units[0], amount)
+                    : undefined,
               }),
             );
           }

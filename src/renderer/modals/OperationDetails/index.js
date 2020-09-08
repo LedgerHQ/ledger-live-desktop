@@ -374,7 +374,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
             <Box flex={1}>
               <OpDetailsTitle>{t("operationDetails.account")}</OpDetailsTitle>
               <OpDetailsData horizontal>
-                <TextEllipsis style={parentAccount ? { maxWidth: "50%", flexShrink: 0 } : null}>
+                <TextEllipsis style={parentAccount ? { maxWidth: "50%", flexShrink: 0 } : {}}>
                   <Link onClick={goToMainAccount}>{name}</Link>
                 </TextEllipsis>
 

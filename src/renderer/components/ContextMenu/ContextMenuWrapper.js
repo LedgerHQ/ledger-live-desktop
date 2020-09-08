@@ -88,9 +88,9 @@ class ContextMenuWrapper extends PureComponent<Props, State> {
     window.addEventListener("click", this.hideContextMenu, true);
   };
 
-  hideContextMenu = (evt: PointerEvent) => {
-    const srcElement = evt.srcElement;
-    if (srcElement && srcElement.parentElement && srcElement.parentElement === this.containerRef) {
+  hideContextMenu = (evt?: PointerEvent) => {
+    // NB Allow opening the context menu on a different target if already open.
+    if (evt?.srcElement?.parentElement === this.containerRef) {
       return;
     }
 
@@ -104,7 +104,13 @@ class ContextMenuWrapper extends PureComponent<Props, State> {
     const { dontTranslateLabel, callback, label, Icon } = item;
 
     return (
-      <ContextMenuItemContainer key={index} onClick={callback}>
+      <ContextMenuItemContainer
+        key={index}
+        onClick={e => {
+          callback(e);
+          this.hideContextMenu();
+        }}
+      >
         {Icon && (
           <Box pr={2} color="palette.text.shade60">
             <Icon size={16} />

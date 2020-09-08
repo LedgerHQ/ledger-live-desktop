@@ -9,6 +9,7 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import Select from "~/renderer/components/Select";
+import useBitcoinPickingStrategy from "./useBitcoinPickingStrategy";
 
 type Props = {
   account: Account,
@@ -17,20 +18,16 @@ type Props = {
   status: TransactionStatus,
 };
 
-const keys = Object.keys(bitcoinPickingStrategy);
-const options = keys.map(value => ({
-  value,
-  label: <Trans i18nKey={`bitcoin.pickingStrategyLabels.${value}`} />,
-}));
-
 export const PickingStrategy = ({ transaction, account, onChange, status }: Props) => {
   const bridge = getAccountBridge(account);
-  const item = options.find(
-    o => bitcoinPickingStrategy[o.value] === transaction.utxoStrategy.strategy,
-  );
+
+  const { item, options } = useBitcoinPickingStrategy(transaction.utxoStrategy.strategy);
 
   return (
-    <Box flow={2} horizontal alignItems="center">
+    <Box flow={2} horizontal alignItems="center" justifyContent="space-between">
+      <Text color="palette.text.shade50" ff="Inter|Regular" fontSize={13}>
+        <Trans i18nKey="bitcoin.strategy" />
+      </Text>
       <Select
         width={300}
         options={options}
@@ -46,9 +43,6 @@ export const PickingStrategy = ({ transaction, account, onChange, status }: Prop
           )
         }
       />
-      <Text color="palette.text.shade50" ff="Inter|Medium" fontSize={12}>
-        <Trans i18nKey="bitcoin.pickingStrategy" />
-      </Text>
     </Box>
   );
 };

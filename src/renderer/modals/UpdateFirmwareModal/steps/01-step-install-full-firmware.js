@@ -90,7 +90,10 @@ const Body = ({
           {t("manager.modal.identifier")}
         </Text>
         <Identifier>
-          {firmware.osu && manager.formatHashName(firmware.osu.hash, deviceModelId, deviceInfo)}
+          {firmware.osu &&
+            manager
+              .formatHashName(firmware.osu.hash, deviceModelId, deviceInfo)
+              .map((hash, i) => <span key={`${i}-${hash}`}>{hash}</span>)}
         </Identifier>
       </Box>
       <Box mt={isBlue ? 4 : null}>
@@ -155,7 +158,7 @@ const StepFullFirmwareInstall = ({
 
   return (
     <Container>
-      <Title>
+      <Title id={"firmware-update-download-mcu-title"}>
         {!displayedOnDevice
           ? t("manager.modal.steps.downloadingUpdate")
           : t("manager.modal.confirmIdentifier")}

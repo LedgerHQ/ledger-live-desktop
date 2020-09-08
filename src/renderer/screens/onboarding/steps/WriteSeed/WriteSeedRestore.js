@@ -40,6 +40,7 @@ class WriteSeedRestore extends PureComponent<Props, *> {
           <Box style={{ display: "block" }}>
             <Trans i18nKey="onboarding.writeSeed.restore.nano.step2">
               {"Select the first letters of"}
+              {/* $FlowFixMe */}
               <Text ff="Inter|SemiBold" color="palette.text.shade100">
                 {{ seedWord1 }}
               </Text>
@@ -55,6 +56,7 @@ class WriteSeedRestore extends PureComponent<Props, *> {
           <Box style={{ display: "block" }}>
             <Trans i18nKey="onboarding.writeSeed.restore.nano.step3">
               {"Select"}
+              {/* $FlowFixMe */}
               <Text ff="Inter|SemiBold" color="palette.text.shade100">
                 {{ seedWord1 }}
               </Text>

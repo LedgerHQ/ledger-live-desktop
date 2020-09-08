@@ -1,44 +1,20 @@
-import { applicationProxy, removeUserData, getMockDeviceEvent } from "../applicationProxy";
-import OnboardingPage from "../po/onboarding.page";
-import ModalPage from "../po/modal.page";
-import GenuinePage from "../po/genuine.page";
-import PasswordPage from "../po/password.page";
-import AnalyticsPage from "../po/analytics.page";
-import PortfolioPage from "../po/portfolio.page";
-import LockscreenPage from "../po/lockscreen.page";
+import initialize, {
+  app,
+  deviceInfo,
+  mockListAppsResult,
+  mockDeviceEvent,
+  onboardingPage,
+  modalPage,
+  genuinePage,
+  passwordPage,
+  analyticsPage,
+  portfolioPage,
+  lockscreenPage,
+} from "../common.js";
 import data from "../data/onboarding/";
-import { deviceInfo155, mockListAppsResult } from "@ledgerhq/live-common/lib/apps/mock";
-
-jest.setTimeout(60000);
 
 describe("When I launch the app for the first time", () => {
-  let app;
-  let onboardingPage;
-  let modalPage;
-  let genuinePage;
-  let passwordPage;
-  let analyticsPage;
-  let portfolioPage;
-  let lockscreenPage;
-  let mockDeviceEvent;
-
-  beforeAll(() => {
-    app = applicationProxy({ MOCK: true, DISABLE_MOCK_POINTER_EVENTS: true });
-    onboardingPage = new OnboardingPage(app);
-    modalPage = new ModalPage(app);
-    genuinePage = new GenuinePage(app);
-    passwordPage = new PasswordPage(app);
-    analyticsPage = new AnalyticsPage(app);
-    portfolioPage = new PortfolioPage(app);
-    lockscreenPage = new LockscreenPage(app);
-    mockDeviceEvent = getMockDeviceEvent(app);
-
-    return app.start();
-  });
-
-  afterAll(() => {
-    return app.stop().then(() => removeUserData());
-  });
+  initialize();
 
   it("opens a window", () => {
     return app.client
@@ -59,20 +35,20 @@ describe("When I launch the app for the first time", () => {
 
   describe("When the app starts", () => {
     it("should load and display an animated logo", async () => {
-      await app.client.waitForVisible("#loading-logo");
-      expect(await onboardingPage.loadingLogo.isVisible()).toBe(true);
+      await app.client.waitForDisplayed("#loading-logo");
+      expect(await onboardingPage.loadingLogo.isDisplayed()).toBe(true);
     });
 
     it("should end loading and animated logo is hidden", async () => {
-      await app.client.waitForVisible("#loading-logo", 5000, true);
-      expect(await onboardingPage.loadingLogo.isVisible()).toBe(false);
+      await app.client.waitForDisplayed("#loading-logo", 5000, true);
+      expect(await onboardingPage.loadingLogo.isDisplayed()).toBe(false);
     });
   });
 
   describe("When it displays the welcome page", () => {
     it("should propose to change the theme", async () => {
-      expect(await onboardingPage.isVisible()).toBe(true);
-      expect(await onboardingPage.logo.isVisible()).toBe(true);
+      expect(await onboardingPage.isDisplayed()).toBe(true);
+      expect(await onboardingPage.logo.isDisplayed()).toBe(true);
       expect(await onboardingPage.pageTitle.getText()).toBe(data.welcome.title);
       expect(await onboardingPage.pageDescription.getText()).toBe(data.welcome.description);
     });
@@ -98,21 +74,21 @@ describe("When I launch the app for the first time", () => {
   describe("When I start the onboarding", () => {
     it("should display different options", async () => {
       await onboardingPage.getStarted();
-      expect(await onboardingPage.logo.isVisible()).toBe(true);
+      expect(await onboardingPage.logo.isDisplayed()).toBe(true);
       expect(await onboardingPage.pageTitle.getText()).toBe(data.getStartedTitle);
-      expect(await onboardingPage.newDeviceButton.isVisible()).toBe(true);
-      expect(await onboardingPage.restoreDeviceButton.isVisible()).toBe(true);
-      expect(await onboardingPage.initializedDeviceButton.isVisible()).toBe(true);
-      expect(await onboardingPage.noDeviceButton.isVisible()).toBe(true);
+      expect(await onboardingPage.newDeviceButton.isDisplayed()).toBe(true);
+      expect(await onboardingPage.restoreDeviceButton.isDisplayed()).toBe(true);
+      expect(await onboardingPage.initializedDeviceButton.isDisplayed()).toBe(true);
+      expect(await onboardingPage.noDeviceButton.isDisplayed()).toBe(true);
     });
 
     describe("When I start 'Setup new device' flow", () => {
       it("should allow to setup new device (nanoX)", async () => {
         await onboardingPage.selectConfiguration("new");
         expect(await onboardingPage.pageTitle.getText()).toBe(data.selectDeviceTitle);
-        expect(await onboardingPage.nanoX.isVisible()).toBe(true);
-        expect(await onboardingPage.nanoS.isVisible()).toBe(true);
-        expect(await onboardingPage.blue.isVisible()).toBe(true);
+        expect(await onboardingPage.nanoX.isDisplayed()).toBe(true);
+        expect(await onboardingPage.nanoS.isDisplayed()).toBe(true);
+        expect(await onboardingPage.blue.isDisplayed()).toBe(true);
         await onboardingPage.selectDevice("nanox");
         await onboardingPage.continue();
       });
@@ -133,7 +109,7 @@ describe("When I launch the app for the first time", () => {
       });
 
       it("should display a modal to perform a genuine check", async () => {
-        expect(await modalPage.isVisible()).toBe(true);
+        expect(await modalPage.isDisplayed()).toBe(true);
         expect(await modalPage.title.getText()).toBe(data.genuine.modalTitle);
         await modalPage.closeButton.click();
       });
@@ -154,9 +130,9 @@ describe("When I launch the app for the first time", () => {
       it("should allow to restore a device (blue)", async () => {
         await onboardingPage.selectConfiguration("restore");
         expect(await onboardingPage.pageTitle.getText()).toBe(data.selectDeviceTitle);
-        expect(await onboardingPage.nanoX.isVisible()).toBe(true);
-        expect(await onboardingPage.nanoS.isVisible()).toBe(true);
-        expect(await onboardingPage.blue.isVisible()).toBe(true);
+        expect(await onboardingPage.nanoX.isDisplayed()).toBe(true);
+        expect(await onboardingPage.nanoS.isDisplayed()).toBe(true);
+        expect(await onboardingPage.blue.isDisplayed()).toBe(true);
         await onboardingPage.selectDevice("blue");
         await onboardingPage.continue();
       });
@@ -177,10 +153,10 @@ describe("When I launch the app for the first time", () => {
       });
 
       it("should display a modal to perform a genuine check", async () => {
-        expect(await modalPage.isVisible()).toBe(true);
+        expect(await modalPage.isDisplayed()).toBe(true);
         expect(await modalPage.title.getText()).toBe(data.genuine.modalTitle);
         await modalPage.closeButton.click();
-        expect(await modalPage.isVisible(true)).toBe(false);
+        expect(await modalPage.isDisplayed(true)).toBe(false);
       });
 
       it("should be able to browse to previous steps", async () => {
@@ -199,8 +175,8 @@ describe("When I launch the app for the first time", () => {
       it("should display a menu", async () => {
         await onboardingPage.selectConfiguration("nodevice");
         expect(await onboardingPage.pageTitle.getText()).toBe(data.noDeviceTitle);
-        expect(await onboardingPage.buyNewButton.isVisible()).toBe(true);
-        expect(await onboardingPage.learnMoreButton.isVisible()).toBe(true);
+        expect(await onboardingPage.buyNewButton.isDisplayed()).toBe(true);
+        expect(await onboardingPage.learnMoreButton.isDisplayed()).toBe(true);
       });
 
       it("should be able to browse to previous steps", async () => {
@@ -213,9 +189,9 @@ describe("When I launch the app for the first time", () => {
       it("should allow to use an initialized device (nanoS)", async () => {
         await onboardingPage.selectConfiguration("initialized");
         expect(await onboardingPage.pageTitle.getText()).toBe(data.selectDeviceTitle);
-        expect(await onboardingPage.nanoX.isVisible()).toBe(true);
-        expect(await onboardingPage.nanoS.isVisible()).toBe(true);
-        expect(await onboardingPage.blue.isVisible()).toBe(true);
+        expect(await onboardingPage.nanoX.isDisplayed()).toBe(true);
+        expect(await onboardingPage.nanoS.isDisplayed()).toBe(true);
+        expect(await onboardingPage.blue.isDisplayed()).toBe(true);
         await onboardingPage.selectDevice("nanos");
         await onboardingPage.continue();
       });
@@ -228,7 +204,7 @@ describe("When I launch the app for the first time", () => {
           expect(await onboardingPage.pageDescription.getText()).toBe(
             data.genuine.pinError.description,
           );
-          expect(await onboardingPage.contactUsButton.isVisible()).toBe(true);
+          expect(await onboardingPage.contactUsButton.isDisplayed()).toBe(true);
           await onboardingPage.back();
         });
 
@@ -239,7 +215,7 @@ describe("When I launch the app for the first time", () => {
           expect(await onboardingPage.pageDescription.getText()).toBe(
             data.genuine.seedError.description,
           );
-          expect(await onboardingPage.contactUsButton.isVisible()).toBe(true);
+          expect(await onboardingPage.contactUsButton.isDisplayed()).toBe(true);
           await onboardingPage.back();
         });
       });
@@ -250,7 +226,7 @@ describe("When I launch the app for the first time", () => {
           await genuinePage.checkPin(true);
           await genuinePage.checkSeed(true);
           await genuinePage.check();
-          expect(await modalPage.isVisible()).toBe(true);
+          expect(await modalPage.isDisplayed()).toBe(true);
         });
 
         it("should perform a genuine check - and fail", async () => {
@@ -261,7 +237,7 @@ describe("When I launch the app for the first time", () => {
             { type: "complete" },
           );
           await app.client.pause(2000);
-          expect(await app.client.element("#error-GenuineCheckFailed").isVisible()).toBe(true);
+          expect(await app.client.element("#error-GenuineCheckFailed").isDisplayed()).toBe(true);
           await modalPage.closeButton.click();
           await app.client.pause(2000);
         });
@@ -271,24 +247,24 @@ describe("When I launch the app for the first time", () => {
           await genuinePage.checkPin(true);
           await genuinePage.checkSeed(true);
           await genuinePage.check();
-          expect(await modalPage.isVisible()).toBe(true);
+          expect(await modalPage.isDisplayed()).toBe(true);
         });
 
         it("should perform a genuine check - and pass", async () => {
           expect(await modalPage.title.getText()).toBe(data.genuine.modalTitle);
           await app.client.pause(2000); // FIXME wait until the spinner is visible?
           await mockDeviceEvent(
-            { type: "listingApps", deviceInfo: deviceInfo155 },
+            { type: "listingApps", deviceInfo },
             {
               type: "result",
-              result: mockListAppsResult("Bitcoin", "", deviceInfo155),
+              result: mockListAppsResult("Bitcoin", "", deviceInfo),
             },
           );
           await app.client.pause(2000);
         });
 
         it("on success, should close the modal and change button into label", async () => {
-          expect(await modalPage.isVisible(true)).toBe(false);
+          expect(await modalPage.isDisplayed(true)).toBe(false);
           expect(await genuinePage.checkLabel.getText()).toBe(data.genuine.checkLabel);
         });
       });
@@ -329,7 +305,7 @@ describe("When I launch the app for the first time", () => {
     describe("When it displays 'Bugs and Analytics' form", () => {
       it("should ask to send analytics data", async () => {
         await passwordPage.continue(true);
-        expect(await analyticsPage.isVisible()).toBe(true);
+        expect(await analyticsPage.isDisplayed()).toBe(true);
         expect(await onboardingPage.pageTitle.getText()).toBe(data.analytics.title);
         expect(await onboardingPage.pageDescription.getText()).toBe(data.analytics.description);
       });
@@ -343,15 +319,15 @@ describe("When I launch the app for the first time", () => {
 
         it("should display a modal when clicking on learn more", async () => {
           await analyticsPage.dataFakeLink.click();
-          expect(await modalPage.isVisible()).toBe(true);
+          expect(await modalPage.isDisplayed()).toBe(true);
           expect(await modalPage.title.getText()).toBe(data.analytics.data.modalTitle);
           await modalPage.close();
-          expect(await modalPage.isVisible(true)).toBe(false);
+          expect(await modalPage.isDisplayed(true)).toBe(false);
         });
 
         it("should display a switch selected and unabled", async () => {
-          expect(await analyticsPage.dataSwitch.isVisible()).toBe(true);
-          expect(await analyticsPage.dataSwitchInput.isVisible()).toBe(false);
+          expect(await analyticsPage.dataSwitch.isDisplayed()).toBe(true);
+          expect(await analyticsPage.dataSwitchInput.isDisplayed()).toBe(false);
           expect(await analyticsPage.dataSwitchInput.isEnabled()).toBe(false);
           expect(await analyticsPage.dataSwitchInput.isSelected()).toBe(true);
         });
@@ -366,15 +342,15 @@ describe("When I launch the app for the first time", () => {
 
         it("should display a modal when clicking on learn more", async () => {
           await analyticsPage.shareFakeLink.click();
-          expect(await modalPage.isVisible()).toBe(true);
+          expect(await modalPage.isDisplayed()).toBe(true);
           expect(await modalPage.title.getText()).toBe(data.analytics.share.modalTitle);
           await modalPage.close();
-          expect(await modalPage.isVisible(true)).toBe(false);
+          expect(await modalPage.isDisplayed(true)).toBe(false);
         });
 
         it("should display a switch selected and enabled", async () => {
-          expect(await analyticsPage.shareSwitch.isVisible()).toBe(true);
-          expect(await analyticsPage.shareSwitchInput.isVisible()).toBe(false);
+          expect(await analyticsPage.shareSwitch.isDisplayed()).toBe(true);
+          expect(await analyticsPage.shareSwitchInput.isDisplayed()).toBe(false);
           expect(await analyticsPage.shareSwitchInput.isSelected()).toBe(true);
         });
 
@@ -393,8 +369,8 @@ describe("When I launch the app for the first time", () => {
         });
 
         it("should display a switch selected and enabled", async () => {
-          expect(await analyticsPage.logsSwitch.isVisible()).toBe(true);
-          expect(await analyticsPage.logsSwitchInput.isVisible()).toBe(false);
+          expect(await analyticsPage.logsSwitch.isDisplayed()).toBe(true);
+          expect(await analyticsPage.logsSwitchInput.isDisplayed()).toBe(false);
           expect(await analyticsPage.logsSwitchInput.isSelected()).toBe(true);
         });
 
@@ -410,13 +386,13 @@ describe("When I launch the app for the first time", () => {
     describe("When the onboarding is finished", () => {
       it("should display the success page", async () => {
         await onboardingPage.continue();
-        expect(await onboardingPage.logo.isVisible()).toBe(true);
+        expect(await onboardingPage.logo.isDisplayed()).toBe(true);
         expect(await onboardingPage.pageTitle.getText()).toBe(data.end.title);
         expect(await onboardingPage.pageDescription.getText()).toBe(data.end.description);
-        expect(await onboardingPage.openButton.isVisible()).toBe(true);
-        expect(await onboardingPage.twitterButton.isVisible()).toBe(true);
-        expect(await onboardingPage.githubButton.isVisible()).toBe(true);
-        expect(await onboardingPage.redditButton.isVisible()).toBe(true);
+        expect(await onboardingPage.openButton.isDisplayed()).toBe(true);
+        expect(await onboardingPage.twitterButton.isDisplayed()).toBe(true);
+        expect(await onboardingPage.githubButton.isDisplayed()).toBe(true);
+        expect(await onboardingPage.redditButton.isDisplayed()).toBe(true);
       });
     });
   });
@@ -424,37 +400,37 @@ describe("When I launch the app for the first time", () => {
   describe("When the app is opened", () => {
     it("should display the terms of use modal", async () => {
       await onboardingPage.open();
-      expect(await modalPage.isVisible()).toBe(true);
-      expect(await modalPage.termsCheckbox.isVisible()).toBe(true);
+      expect(await modalPage.isDisplayed()).toBe(true);
+      expect(await modalPage.termsCheckbox.isDisplayed()).toBe(true);
     });
 
     it("should close the modal after accepting the terms of use", async () => {
       await modalPage.termsCheckbox.click();
       await modalPage.confirmButton.click();
-      expect(await modalPage.isVisible(true)).toBe(false);
+      expect(await modalPage.isDisplayed(true)).toBe(false);
     });
 
     it("should display the portfolio", async () => {
-      expect(await portfolioPage.isVisible()).toBe(true);
+      expect(await portfolioPage.isDisplayed()).toBe(true);
     });
 
     it("should display the lock icon", async () => {
-      expect(await portfolioPage.topbarLockButton.isVisible()).toBe(true);
+      expect(await portfolioPage.topbarLockButton.isDisplayed()).toBe(true);
     });
 
     describe("When I lock the app", () => {
       it("should display lock screen", async () => {
         await portfolioPage.topbarLockButton.click();
-        expect(await portfolioPage.isVisible(true)).toBe(false);
-        expect(await lockscreenPage.isVisible()).toBe(true);
-        expect(await lockscreenPage.logo.isVisible()).toBe(true);
+        expect(await portfolioPage.isDisplayed(true)).toBe(false);
+        expect(await lockscreenPage.isDisplayed()).toBe(true);
+        expect(await lockscreenPage.logo.isDisplayed()).toBe(true);
         // FIXME: LL-2410
         // expect(await lockscreenPage.pageTitle.getText()).toBe(data.lock.title);
         // expect(await lockscreenPage.pageDescription.getText()).toBe(data.lock.description);
-        expect(await lockscreenPage.passwordInput.isVisible()).toBe(true);
-        expect(await lockscreenPage.revealButton.isVisible()).toBe(true);
-        expect(await lockscreenPage.loginButton.isVisible()).toBe(true);
-        expect(await lockscreenPage.forgottenButton.isVisible()).toBe(true);
+        expect(await lockscreenPage.passwordInput.isDisplayed()).toBe(true);
+        expect(await lockscreenPage.revealButton.isDisplayed()).toBe(true);
+        expect(await lockscreenPage.loginButton.isDisplayed()).toBe(true);
+        expect(await lockscreenPage.forgottenButton.isDisplayed()).toBe(true);
       });
 
       describe("When I click on reveal button", () => {
@@ -467,13 +443,13 @@ describe("When I launch the app for the first time", () => {
       describe("When I click on forgotten password button", () => {
         it("should open a modal and ask to reset the app", async () => {
           await lockscreenPage.forgottenButton.click();
-          expect(await modalPage.isVisible()).toBe(true);
+          expect(await modalPage.isDisplayed()).toBe(true);
           expect(await modalPage.title.getText()).toBe(data.lockscreen.reset.title);
-          expect(await modalPage.closeButton.isVisible()).toBe(true);
-          expect(await modalPage.cancelButton.isVisible()).toBe(true);
-          expect(await modalPage.confirmButton.isVisible()).toBe(true);
+          expect(await modalPage.closeButton.isDisplayed()).toBe(true);
+          expect(await modalPage.cancelButton.isDisplayed()).toBe(true);
+          expect(await modalPage.confirmButton.isDisplayed()).toBe(true);
           await modalPage.closeButton.click();
-          expect(await modalPage.isVisible(true)).toBe(false);
+          expect(await modalPage.isDisplayed(true)).toBe(false);
         });
       });
     });
@@ -490,8 +466,8 @@ describe("When I launch the app for the first time", () => {
         it("should back to the portfolio", async () => {
           await lockscreenPage.passwordInput.setValue(data.password.new);
           await lockscreenPage.loginButton.click();
-          expect(await lockscreenPage.isVisible(true)).toBe(false);
-          expect(await portfolioPage.isVisible()).toBe(true);
+          expect(await lockscreenPage.isDisplayed(true)).toBe(false);
+          expect(await portfolioPage.isDisplayed()).toBe(true);
         });
       });
     });

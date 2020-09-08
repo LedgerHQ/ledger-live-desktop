@@ -9,6 +9,7 @@ type Props = {
   transaction: Transaction,
   status: TransactionStatus,
   onChange: Transaction => void,
+  updateTransaction: (updater: any) => void,
 };
 
 const AmountRelatedField = (props: Props) => {

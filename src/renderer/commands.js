@@ -1,7 +1,7 @@
 // @flow
 import { ipcRenderer } from "electron";
 import type { Commands, CommandFn } from "~/internal/commands";
-import uuidv4 from "uuid/v4";
+import { v4 as uuidv4 } from "uuid";
 import { Observable } from "rxjs";
 import logger from "~/logger";
 import { deserializeError } from "@ledgerhq/errors";

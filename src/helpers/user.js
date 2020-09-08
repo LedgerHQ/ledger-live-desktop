@@ -1,6 +1,6 @@
 // @flow
 
-import uuid from "uuid/v4";
+import { v4 as uuid } from "uuid";
 import Prando from "prando";
 import get from "lodash/get";
 

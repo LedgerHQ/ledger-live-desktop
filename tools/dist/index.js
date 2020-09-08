@@ -167,10 +167,10 @@ const runTasks = (getTasks, args) => {
 
 yargs
   .usage("Usage: $0 <command> [options]")
-  .command({
-    command: ["build", "$0"],
-    desc: "bundles the electron app",
-    builder: yargs =>
+  .command(
+    ["build", "$0"],
+    "bundles the electron app",
+    yargs =>
       yargs
         .option("dir", {
           type: "boolean",
@@ -188,13 +188,14 @@ yargs
           type: "boolean",
           describe: "Publish the created artifacts on GitHub as a draft release",
         }),
-    handler: args => runTasks(mainTask, args),
-  })
-  .command({
-    command: "check",
-    desc: "Run health checks",
-    handler: args => runTasks(healthChecksTasks, args),
-  })
+    args => runTasks(mainTask, args),
+  )
+  .command(
+    "check",
+    "Run health checks",
+    () => {},
+    args => runTasks(healthChecksTasks, args),
+  )
   .option("verbose", {
     alias: "v",
     type: "boolean",
