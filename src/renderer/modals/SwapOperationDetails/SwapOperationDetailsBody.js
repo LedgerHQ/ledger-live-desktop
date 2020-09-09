@@ -1,25 +1,30 @@
 // @flow
-import React from "react";
+import React, { useCallback } from "react";
+import moment from "moment";
 import { Trans } from "react-i18next";
-import { ModalBody } from "~/renderer/components/Modal";
-import Box from "~/renderer/components/Box";
-import Button from "~/renderer/components/Button";
-import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
-import Text from "~/renderer/components/Text";
-import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
-import FormattedVal from "~/renderer/components/FormattedVal";
+import { useSelector } from "react-redux";
 import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/swap/types";
 import {
   getAccountUnit,
   getAccountCurrency,
   getAccountName,
+  getMainAccount,
 } from "@ledgerhq/live-common/lib/account";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { ModalBody } from "~/renderer/components/Modal";
+import Box from "~/renderer/components/Box";
+import Link from "~/renderer/components/Link";
+import Button from "~/renderer/components/Button";
+import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
+import Text from "~/renderer/components/Text";
+import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
+import FormattedVal from "~/renderer/components/FormattedVal";
+import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import IconSwap from "~/renderer/icons/Swap";
 import IconArrowDown from "~/renderer/icons/ArrowDown";
 import { rgba } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import moment from "moment";
 import { getStatusColor } from "~/renderer/screens/swap/history/OperationRow";
 import IconClock from "~/renderer/icons/Clock";
 import { GradientHover } from "~/renderer/modals/OperationDetails/styledComponents";
@@ -38,6 +43,9 @@ const Value = styled(Text).attrs(() => ({
   ff: "Inter|Regular",
 }))`
   margin-top: 2px;
+  & ${Link}:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Row = styled(Box).attrs(() => ({
@@ -123,11 +131,26 @@ const SwapOperationDetailsBody = ({
     toAmount,
   } = mappedSwapOperation;
 
+  const history = useHistory();
   const fromUnit = getAccountUnit(fromAccount);
   const fromCurrency = getAccountCurrency(fromAccount);
   const toUnit = getAccountUnit(toAccount);
   const toCurrency = getAccountCurrency(toAccount);
+  const accounts = useSelector(shallowAccountsSelector);
   const normalisedFromAmount = fromAmount.times(-1);
+
+  const openAccount = useCallback(
+    account => {
+      const parentAccount =
+        account.type !== "Account" ? accounts.find(a => a.id === account.parentId) : null;
+      const mainAccount = getMainAccount(account, parentAccount);
+
+      const url = `/account/${mainAccount.id}/${parentAccount ? account.id : ""}`;
+      history.push(url);
+      onClose();
+    },
+    [accounts, history, onClose],
+  );
 
   return (
     <ModalBody
@@ -212,7 +235,11 @@ const SwapOperationDetailsBody = ({
                 <Box mr={1}>
                   <CryptoCurrencyIcon size={16} currency={fromCurrency} />
                 </Box>
-                <Value>{getAccountName(fromAccount)}</Value>
+                <Value>
+                  <Link onClick={() => openAccount(fromAccount)}>
+                    {getAccountName(fromAccount)}
+                  </Link>
+                </Value>
               </Box>
             </Box>
             <Box>
@@ -239,7 +266,9 @@ const SwapOperationDetailsBody = ({
                 <Box mr={1}>
                   <CryptoCurrencyIcon size={16} currency={toCurrency} />
                 </Box>
-                <Value>{getAccountName(toAccount)}</Value>
+                <Value>
+                  <Link onClick={() => openAccount(toAccount)}>{getAccountName(toAccount)}</Link>
+                </Value>
               </Box>
             </Box>
             <Box>
