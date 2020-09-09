@@ -90,8 +90,10 @@ const History = () => {
   useEffect(() => {
     (async function asyncUpdateAccountSwapStatus() {
       if (!accountsRef.current) return;
-      const newAccounts = await Promise.all(accountsRef.current.map(updateAccountSwapStatus));
-      newAccounts.forEach(account => dispatch(updateAccountWithUpdater(account.id, a => account)));
+      const updatedAccounts = await Promise.all(accountsRef.current.map(updateAccountSwapStatus));
+      updatedAccounts.filter(Boolean).forEach(account => {
+        dispatch(updateAccountWithUpdater(account.id, a => account));
+      });
     })();
   }, [dispatch]);
 
