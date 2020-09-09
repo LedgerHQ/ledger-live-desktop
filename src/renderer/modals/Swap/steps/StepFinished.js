@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import type { Operation } from "@ledgerhq/live-common/lib/types/operation";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
 import Box from "~/renderer/components/Box";
@@ -65,45 +65,59 @@ const SwapIdWrapper: ThemedComponent<{}> = styled(Box).attrs(p => ({
 }
 `;
 
-const StepFinished = ({ swapId, provider }: { swapId: string, provider: string }) => (
-  <Box alignItems="center">
-    <IconWrapper>
-      <IconSwap size={18} />
-    </IconWrapper>
-    <Text mt={16} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={5}>
-      <Trans i18nKey={`swap.modal.steps.finished.title`} />
-    </Text>
-    <Box mt={16} horizontal alignItems="center">
-      <Text color="palette.text.shade50" ff="Inter|Regular" fontSize={14}>
-        <Trans i18nKey={`swap.modal.steps.finished.swap`} />
+const StepFinished = ({
+  swapId,
+  provider,
+  setLocked,
+}: {
+  swapId: string,
+  provider: string,
+  setLocked: boolean => void,
+}) => {
+  useEffect(() => {
+    setLocked(false);
+  }, [setLocked]);
+
+  return (
+    <Box alignItems="center">
+      <IconWrapper>
+        <IconSwap size={18} />
+      </IconWrapper>
+      <Text mt={16} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={5}>
+        <Trans i18nKey={`swap.modal.steps.finished.title`} />
       </Text>
-      <SwapIdWrapper>
-        <Pill ml={2} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={14}>
-          {swapId}
-        </Pill>
-        <GradientHover>
-          <CopyWithFeedback text={swapId} />
-        </GradientHover>
-      </SwapIdWrapper>
+      <Box mt={16} horizontal alignItems="center">
+        <Text color="palette.text.shade50" ff="Inter|Regular" fontSize={14}>
+          <Trans i18nKey={`swap.modal.steps.finished.swap`} />
+        </Text>
+        <SwapIdWrapper>
+          <Pill ml={2} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={14}>
+            {swapId}
+          </Pill>
+          <GradientHover>
+            <CopyWithFeedback text={swapId} />
+          </GradientHover>
+        </SwapIdWrapper>
+      </Box>
+      <Text p={20} textAlign="center" color="palette.text.shade50" ff="Inter|Regular" fontSize={4}>
+        <Trans i18nKey={`swap.modal.steps.finished.description`} values={{ provider }} />
+      </Text>
+      <Disclaimer horizontal p={2} mt={3}>
+        <InfoCircle size={17} color={useTheme("colors.palette.primary.main")} />
+        <Text
+          textAlign={"left"}
+          flex={1}
+          ml={2}
+          color="palette.primary.main"
+          ff="Inter|Regular"
+          fontSize={4}
+        >
+          <Trans i18nKey={`swap.modal.steps.finished.disclaimer`} />
+        </Text>
+      </Disclaimer>
     </Box>
-    <Text p={20} textAlign="center" color="palette.text.shade50" ff="Inter|Regular" fontSize={4}>
-      <Trans i18nKey={`swap.modal.steps.finished.description`} values={{ provider }} />
-    </Text>
-    <Disclaimer horizontal p={2} mt={3}>
-      <InfoCircle size={17} color={useTheme("colors.palette.primary.main")} />
-      <Text
-        textAlign={"left"}
-        flex={1}
-        ml={2}
-        color="palette.primary.main"
-        ff="Inter|Regular"
-        fontSize={4}
-      >
-        <Trans i18nKey={`swap.modal.steps.finished.disclaimer`} />
-      </Text>
-    </Disclaimer>
-  </Box>
-);
+  );
+};
 
 export const StepFinishedFooter = ({
   result,

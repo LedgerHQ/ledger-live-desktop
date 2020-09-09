@@ -48,11 +48,13 @@ const StepDevice = ({
   transaction,
   onContinue,
   onError,
+  setLocked,
 }: {
   swap: { exchange: Exchange, exchangeRate: ExchangeRate },
   transaction: Transaction,
   onContinue: any,
   onError: any,
+  setLocked: boolean => void,
 }) => {
   const device = useSelector(getCurrentDevice);
   const deviceRef = useRef(device);
@@ -65,21 +67,26 @@ const StepDevice = ({
   const tokenCurrency = account && account.type === "TokenAccount" ? account.token : null;
 
   useEffect(() => {
-    if (swapData && signedOperation) {
-      const { swapId } = swapData;
-      broadcast(signedOperation).then(
-        operation => {
-          onContinue({
-            operation,
-            swapId,
-          });
-        },
-        error => {
-          onError(error);
-        },
-      );
+    if (swapData) {
+      setLocked(true);
+      if (signedOperation) {
+        const { swapId } = swapData;
+        broadcast(signedOperation).then(
+          operation => {
+            onContinue({
+              operation,
+              swapId,
+            });
+          },
+          error => {
+            onError(error);
+          },
+        );
+      }
+    } else {
+      setLocked(false);
     }
-  }, [broadcast, onContinue, onError, signedOperation, swapData]);
+  }, [broadcast, onContinue, onError, setLocked, signedOperation, swapData]);
 
   const request = useMemo(
     () => ({

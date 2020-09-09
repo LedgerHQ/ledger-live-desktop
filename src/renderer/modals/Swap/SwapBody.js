@@ -32,6 +32,7 @@ const SwapBody = ({
   const { exchange } = swap;
   const { fromAccount, fromParentAccount } = exchange;
   const [checkedDisclaimer, setCheckedDisclaimer] = useState(false);
+  const [locked, setLocked] = useState(false);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const [result, setResult] = useState();
@@ -76,7 +77,7 @@ const SwapBody = ({
 
   return (
     <ModalBody
-      onClose={activeStep === "device" && !error ? undefined : onClose}
+      onClose={locked && !error ? undefined : onClose}
       title={<Trans i18nKey="swap.modal.title" />}
       render={() => (
         <>
@@ -98,12 +99,17 @@ const SwapBody = ({
           ) : activeStep === "device" ? (
             <StepDevice
               swap={swap}
+              setLocked={setLocked}
               transaction={transaction}
               onContinue={onDeviceInteraction}
               onError={setError}
             />
           ) : result && result.swapId ? (
-            <StepFinished swapId={result.swapId} provider={swap.exchangeRate.provider} />
+            <StepFinished
+              setLocked={setLocked}
+              swapId={result.swapId}
+              provider={swap.exchangeRate.provider}
+            />
           ) : null}
         </>
       )}
