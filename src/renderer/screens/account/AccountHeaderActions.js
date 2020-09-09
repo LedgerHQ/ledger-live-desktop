@@ -3,7 +3,7 @@
 import React, { useCallback } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { withTranslation } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import Tooltip from "~/renderer/components/Tooltip";
@@ -20,11 +20,15 @@ import IconAccountSettings from "~/renderer/icons/AccountSettings";
 import perFamily from "~/renderer/generated/AccountHeaderActions";
 import Box, { Tabbable } from "~/renderer/components/Box";
 import Star from "~/renderer/components/Stars/Star";
-import { ReceiveActionDefault, SendActionDefault, BuyActionDefault } from "./AccountActionsDefault";
+import { ReceiveActionDefault, SendActionDefault } from "./AccountActionsDefault";
 import perFamilyAccountActions from "~/renderer/generated/accountActions";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useHistory } from "react-router-dom";
+import IconExchange from "~/renderer/icons/Exchange";
+import DropDownSelector from "~/renderer/components/DropDownSelector";
+import Button from "~/renderer/components/Button";
+import Text from "~/renderer/components/Text";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
   alignItems: "center",
@@ -69,14 +73,6 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const availableOnExchange = isCurrencySupported(currency);
   const history = useHistory();
 
-  const onSend = useCallback(() => {
-    openModal("MODAL_SEND", { parentAccount, account });
-  }, [parentAccount, account, openModal]);
-
-  const onReceive = useCallback(() => {
-    openModal("MODAL_RECEIVE", { parentAccount, account });
-  }, [parentAccount, account, openModal]);
-
   const onBuy = useCallback(() => {
     history.push({
       pathname: "/exchange",
@@ -86,6 +82,47 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
       },
     });
   }, [currency, history, mainAccount]);
+
+  // List of available exchange actions
+  const actions = [
+    ...(availableOnExchange
+      ? [
+          {
+            key: "Buy",
+            onClick: onBuy,
+            event: "Buy Crypto Account Button",
+            eventProperties: { currencyName: currency.name },
+            icon: IconExchange,
+            label: <Trans i18nKey="buy.titleCrypto" values={{ currency: currency.name }} />,
+          },
+        ]
+      : []),
+  ];
+
+  const onSend = useCallback(() => {
+    openModal("MODAL_SEND", { parentAccount, account });
+  }, [parentAccount, account, openModal]);
+
+  const onReceive = useCallback(() => {
+    openModal("MODAL_RECEIVE", { parentAccount, account });
+  }, [parentAccount, account, openModal]);
+
+  const renderItem = useCallback(
+    ({ item: { key, label, onClick, event, eventProperties, icon }, isActive }) => {
+      const Icon = icon;
+      return (
+        <Button onClick={onClick} event={event} eventProperties={eventProperties}>
+          <Box horizontal flow={1} alignItems="center">
+            {Icon && <Icon size={14} />}
+            <Box>
+              <Text ff="Inter|SemiBold">{label}</Text>
+            </Box>
+          </Box>
+        </Button>
+      );
+    },
+    [],
+  );
 
   return (
     <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
@@ -97,7 +134,27 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
           ) : null}
 
           <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
-          {availableOnExchange ? <BuyActionDefault currency={currency} onClick={onBuy} /> : null}
+          {actions && actions.length > 0 && (
+            <>
+              <DropDownSelector
+                border
+                horizontal
+                items={actions}
+                renderItem={renderItem}
+                controlled
+              >
+                {({ isOpen, value }) => (
+                  <Button small primary>
+                    <Box horizontal flow={1} alignItems="center">
+                      <Box>
+                        <Trans i18nKey="common.exchange" values={{ currency: currency.name }} />
+                      </Box>
+                    </Box>
+                  </Button>
+                )}
+              </DropDownSelector>
+            </>
+          )}
         </>
       ) : null}
       <Tooltip content={t("stars.tooltip")}>

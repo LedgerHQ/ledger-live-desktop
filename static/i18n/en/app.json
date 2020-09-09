@@ -65,7 +65,8 @@
       "error": "Synchronization error",
       "refresh": "Refresh",
       "ago": "Synchronized {{time}}"
-    }
+    },
+    "exchange": "Exchange"
   },
   "operation": {
     "type": {
