@@ -61,14 +61,9 @@ const Placeholder = ({ query, addAccount, dispatch, installed, apps }: Props) =>
       <Image alt="" resource={manager.getIconUrl(parent.icon)} width={40} height={40} />
       <Box mt={2} ff="Inter|Regular" fontSize={5} color="palette.text.shade100">
         <Trans
-          i18nKey={
-            parentInstalled
-              ? "manager.applist.item.useAppForToken"
-              : "manager.applist.item.noAppNeededForToken"
-          }
+          i18nKey="manager.applist.item.useAppForToken"
           values={{
-            appName: parent.name,
-            tokenName: `${found.name} (${found.ticker})`,
+            tokenType: found.tokenType.toUpperCase(),
           }}
         />
       </Box>
