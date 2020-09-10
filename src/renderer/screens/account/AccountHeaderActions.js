@@ -134,27 +134,19 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
           ) : null}
 
           <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
-          {actions && actions.length > 0 && (
-            <>
-              <DropDownSelector
-                border
-                horizontal
-                items={actions}
-                renderItem={renderItem}
-                controlled
-              >
-                {({ isOpen, value }) => (
-                  <Button small primary>
-                    <Box horizontal flow={1} alignItems="center">
-                      <Box>
-                        <Trans i18nKey="common.exchange" values={{ currency: currency.name }} />
-                      </Box>
+          {actions && actions.length > 0 ? (
+            <DropDownSelector border horizontal items={actions} renderItem={renderItem} controlled>
+              {({ isOpen, value }) => (
+                <Button small primary>
+                  <Box horizontal flow={1} alignItems="center">
+                    <Box>
+                      <Trans i18nKey="common.exchange" values={{ currency: currency.name }} />
                     </Box>
-                  </Button>
-                )}
-              </DropDownSelector>
-            </>
-          )}
+                  </Box>
+                </Button>
+              )}
+            </DropDownSelector>
+          ) : null}
         </>
       ) : null}
       <Tooltip content={t("stars.tooltip")}>
