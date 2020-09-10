@@ -25,7 +25,7 @@ import IconSwap from "~/renderer/icons/Swap";
 import IconArrowDown from "~/renderer/icons/ArrowDown";
 import { rgba } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { getStatusColor } from "~/renderer/screens/swap/history/OperationRow";
+import { getStatusColor } from "~/renderer/screens/swap/History/OperationRow";
 import IconClock from "~/renderer/icons/Clock";
 import { GradientHover } from "~/renderer/modals/OperationDetails/styledComponents";
 

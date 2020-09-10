@@ -17,7 +17,7 @@ import styled from "styled-components";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Input from "~/renderer/components/Input";
 import Text from "~/renderer/components/Text";
-import ToolTip from "~/renderer/components/ToolTip";
+import ToolTip from "~/renderer/components/Tooltip";
 import Price from "~/renderer/components/Price";
 import IconPlusSmall from "~/renderer/icons/PlusSmall";
 import { openModal } from "~/renderer/actions/modals";
