@@ -6,6 +6,7 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 import { BigNumber } from "bignumber.js";
 import { useSelector, useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
+import { getAbandonSeedAddress } from "@ledgerhq/live-common/lib/data/abandonseed";
 import Card from "~/renderer/components/Box/Card";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { modalsStateSelector } from "~/renderer/reducers/modals";
@@ -104,7 +105,7 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
   const { exchange, exchangeRate } = swap;
   const [isTimerVisible, setTimerVisibility] = useState(true);
   const { fromAccount, fromParentAccount, toAccount, toParentAccount } = exchange;
-  const { setTransaction, setAccount, transaction } = useBridgeTransaction();
+  const { status, setTransaction, setAccount, transaction } = useBridgeTransaction();
   const ratesExpiration = useMemo(
     () => (ratesTimestamp ? new Date(ratesTimestamp.getTime() + ratesExpirationThreshold) : null),
     [ratesTimestamp],
@@ -143,10 +144,14 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
     if (!fromAccount || !transaction) return;
     if (transaction.amount && !transaction.amount.eq(fromAmount)) {
       const bridge = getAccountBridge(fromAccount, fromParentAccount);
+      const mainAccount = getMainAccount(fromAccount, fromParentAccount);
+      const currency = getAccountCurrency(mainAccount);
+
       setTransaction(
         bridge.updateTransaction(transaction, {
           amount: fromAmount,
           subAccountId: fromParentAccount ? fromAccount.id : null,
+          recipient: getAbandonSeedAddress(currency.id),
         }),
       );
     }
@@ -265,6 +270,7 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
       <Card flow={1}>
         <Box horizontal p={32}>
           <From
+            status={status}
             key={fromCurrency?.id || "from"}
             currenciesStatus={currenciesStatus}
             account={fromAccount ? getMainAccount(fromAccount, fromParentAccount) : null}

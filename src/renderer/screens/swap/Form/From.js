@@ -13,6 +13,7 @@ import type {
   CryptoCurrency,
   TokenCurrency,
   Currency,
+  TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
 import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
@@ -55,6 +56,7 @@ const From = ({
   useAllAmount,
   isLoading,
   error,
+  status,
   onAccountChange,
   onToggleUseAllAmount,
   onAmountChange,
@@ -66,13 +68,14 @@ const From = ({
   currenciesStatus: CurrenciesStatus,
   validAccounts: Account[],
   amount: BigNumber,
+  useAllAmount?: boolean,
+  isLoading?: boolean,
+  error: ?Error,
+  status: TransactionStatus,
   onCurrencyChange: (?Currency) => void,
   onAccountChange: (AccountLike, ?Account) => void,
   onAmountChange: BigNumber => void,
   onToggleUseAllAmount?: () => void,
-  useAllAmount?: boolean,
-  isLoading?: boolean,
-  error: ?Error,
 }) => {
   const {
     availableAccounts,
@@ -87,6 +90,7 @@ const From = ({
     defaultCurrency,
     defaultAccount,
   });
+
   const unit = currency && currency.units[0];
   const renderOptionOverride = ({ data: currency }: Option) => {
     const status = currenciesStatus[currency.id];
@@ -114,6 +118,9 @@ const From = ({
     },
     [onAccountChange, setAccount],
   );
+
+  const { amount: maybeAmountError } = status.errors;
+  const amountError = amount.gt(0) && (error || maybeAmountError);
 
   return (
     <Box flex={1} flow={1} mb={3} ml={0} mr={23}>
@@ -169,7 +176,7 @@ const From = ({
         {unit ? (
           <>
             <InputCurrency
-              error={amount?.gt(0) && error}
+              error={amountError}
               loading={isLoading}
               key={unit.code}
               defaultUnit={unit}
@@ -178,7 +185,7 @@ const From = ({
               onChange={onAmountChange}
               renderRight={<InputRight>{unit.code}</InputRight>}
             />
-            {currency && amount?.gt(0) && !error ? (
+            {currency && !amountError ? (
               <CountervalueWrapper mt={1}>
                 <Box style={{ marginRight: 4 }}>
                   <Text>{"≈"}</Text>
