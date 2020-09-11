@@ -959,7 +959,7 @@
     "coincontrol": "Coin control",
     "advanced": "Options avancées",
     "ctaDisabled": "Vous devez d'abord saisir un montant.",
-    "whatIs": "Qu'est-ce que la sélection de coin?",
+    "whatIs": "En savoir plus",
     "rbf": "Permettre la transaction d'être remplaçable (Replace-By-Fee).",
     "strategy": "Selection de la coin stratégie",
     "selected": "Coins selectionnés pour la stratégie",
