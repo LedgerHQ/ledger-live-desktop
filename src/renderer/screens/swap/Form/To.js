@@ -206,7 +206,7 @@ const SwapInputGroup = ({
               renderRight={<InputRight>{unit.code}</InputRight>}
               onChange={() => undefined}
             />
-            {rate ? (
+            {rate && fromCurrency && currency ? (
               <Box horizontal mt={1} alignItems={"center"}>
                 <Box mr={1}>
                   <IconLock size={10} color={lockColor} />

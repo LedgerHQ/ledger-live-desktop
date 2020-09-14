@@ -80,6 +80,4 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_SWAP_OPERATION_DETAILS,
 };
 
-export const registeredModalNames: string[] = Object.keys(modals);
-
 export default modals;

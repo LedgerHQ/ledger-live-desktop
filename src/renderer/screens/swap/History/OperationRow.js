@@ -22,7 +22,7 @@ import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/swap/types";
 import Tooltip from "~/renderer/components/Tooltip";
 import IconClock from "~/renderer/icons/Clock";
 
-export const getStatusColor = (status, theme) => {
+export const getStatusColor = (status: string, theme: any) => {
   return (
     {
       finished: theme.colors.positiveGreen,
@@ -91,11 +91,9 @@ const Row: ThemedComponent<{}> = styled(Box)`
 const OperationRow = ({
   mappedSwapOperation,
   openSwapOperationDetailsModal,
-  date,
 }: {
   mappedSwapOperation: MappedSwapOperation,
   openSwapOperationDetailsModal: MappedSwapOperation => void,
-  date: Date,
 }) => {
   const {
     fromAccount,

@@ -84,6 +84,7 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
 
   const [state, dispatch] = useReducer(
     reducer,
+    // $FlowFixMe Update type for SwapState
     { okCurrencies, defaultCurrency, defaultAccount },
     initState,
   );
@@ -229,7 +230,6 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
   // Not to be confused with the useAllAmount flag for a regular transaction.
   // We need this because the providers require an exact amount to lock a rate.
   const toggleUseAllAmount = useCallback(() => {
-    let ignore = false;
     async function getEstimatedMaxSpendable() {
       const newUseAllAmount = !useAllAmount;
       if (newUseAllAmount) {
@@ -244,12 +244,7 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
         dispatch({ type: "setFromAmount", payload: { fromAmount: BigNumber(0) } });
       }
     }
-    if (!ignore) {
-      getEstimatedMaxSpendable();
-    }
-    return () => {
-      ignore = true;
-    };
+    getEstimatedMaxSpendable();
   }, [fromAccount, fromParentAccount, transaction, useAllAmount]);
 
   const expireRates = useCallback(() => {

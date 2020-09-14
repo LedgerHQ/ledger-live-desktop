@@ -38,7 +38,7 @@ const Footer = ({
   onStartSwap,
 }: {
   onExpireRates: () => void,
-  ratesExpiration: Date,
+  ratesExpiration?: ?Date,
   canContinue: boolean,
   onStartSwap: () => void,
 }) => {
