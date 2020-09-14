@@ -157,7 +157,7 @@ In order to accommodate advanced Users' requests and to build new features and f
 
 ## Transaction details
 
-**Do not trust. Verify.** Software integrity, especially when connected to the Internet, is very hard to verify. Ledger's security model relies on trusted display.This is why the verification of the information on your Ledger Device is paramount. Before you approve an operation, you must always double check that the information displayed on your mobile or desktop screen is correct and matches the information displayed on your Ledger Device. Upon sending Crypto Assets, you are solely responsible for verifying that the recipient address, amount and fees are correct and that they are the same on both your computer or mobile and on your Ledger Device's screen. You also acknowledge that using unverified addresses to receive Crypto Assets comes at your own risk.
+**Do not trust. Verify.** Software integrity, especially when connected to the Internet, is very hard to verify. Ledger's security model relies on trusted display. This is why the verification of the information on your Ledger Device is paramount. Before you approve an operation, you must always double check that the information displayed on your mobile or desktop screen is correct and matches the information displayed on your Ledger Device. Upon sending Crypto Assets, you are solely responsible for verifying that the recipient address, amount and fees are correct and that they are the same on both your computer or mobile and on your Ledger Device's screen. You also acknowledge that using unverified addresses to receive Crypto Assets comes at your own risk.
 
 ## Third Party Services and Materials
 
