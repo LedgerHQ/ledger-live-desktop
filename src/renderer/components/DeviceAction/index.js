@@ -10,8 +10,6 @@ import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import AutoRepair from "~/renderer/components/AutoRepair";
 import TransactionConfirm from "~/renderer/components/TransactionConfirm";
-import Box from "~/renderer/components/Box";
-import Text from "~/renderer/components/Text";
 import useTheme from "~/renderer/hooks/useTheme";
 import {
   renderAllowManager,
@@ -24,7 +22,7 @@ import {
   renderRequestQuitApp,
   renderRequiresAppInstallation,
   renderWarningOutdated,
-  renderVerifyUnwrapped,
+  renderSwapDeviceConfirmation,
 } from "./rendering";
 
 type OwnProps<R, H, P> = {
@@ -131,24 +129,8 @@ const DeviceAction = <R, H, P>({
     return renderAllowManager({ modelId, type, wording });
   }
 
-  // FIXME move out of here, this shouldn't be here.
   if (initSwapRequested && !initSwapResult && !initSwapError) {
-    return (
-      <>
-        {renderVerifyUnwrapped({ modelId: device.modelId, type })}
-        <Box alignItems={"center"}>
-          <Text
-            mt={40}
-            textAlign="center"
-            ff="Inter|SemiBold"
-            color="palette.text.shade100"
-            fontSize={5}
-          >
-            <span style={{ marginRight: 10 }}>{"Confirm SWAP transaction"}</span>
-          </Text>
-        </Box>
-      </>
-    );
+    return renderSwapDeviceConfirmation({ modelId, type });
   }
 
   if (allowOpeningRequestedWording || requestOpenApp) {

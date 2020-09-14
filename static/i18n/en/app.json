@@ -586,7 +586,10 @@
     "appNotInstalled": "Please install the {{appName}} app",
     "openManager": "Open Manager",
     "outdated": "App version outdated",
-    "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it."
+    "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
+    "swap":{
+      "confirm": "Confirm SWAP transaction"
+    }
   },
   "manager": {
     "tabs": {
