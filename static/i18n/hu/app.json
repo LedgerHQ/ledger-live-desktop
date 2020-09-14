@@ -555,10 +555,9 @@
         "learnMore": "Tudj meg többet",
         "learnMoreTooltip": "Tudj meg többet a(z) {{appName}} alkalmazásról",
         "removeTooltip": "{{appName}} törlése",
-        "useAppForToken": "A(z) {{tokenName}} tokenek a(z) {{appName}} alkalmazással kezelhetők",
-        "noAppNeededForToken": "{{appName}} telepítése a(z) {{tokenName}} tokenhez",
-        "tokenAppDisclaimer": "{{tokenName}} egy {{tokenType}} token, mely a(z) {{appName}} alkalmazást használja. {{tokenName}} kezeléséhez, <1>telepítsd a(z) {{appName}} alkalmazást </1> és küld a tokeneket a(z) <3> {{appName}} számládra </3>",
-        "tokenAppDisclaimerInstalled": "{{tokenName}} egy {{tokenType}} token, mely a(z) {{appName}} alkalmazást használja. A(z) {{tokenName}} kezeléséhez, <1>nyisd meg a(z) {{appName}} alkalmazást </1> és küld a tokeneket a(z) <3> {{appName}} számládra </3>",
+        "useAppForToken": "Looking to manage {{tokenType}} tokens?",
+        "tokenAppDisclaimer": "To manage {{tokenName}} {{tokenType}} tokens, <1>install the {{appName}} app</1> and please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
+        "tokenAppDisclaimerInstalled": "To manage <1>{{tokenName}} {{tokenType}} tokens</1>, please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
         "goToAccounts": "Irány a számlákhoz",
         "intallParentApp": "{{appName}} alkalmazás telepítése"
       },
