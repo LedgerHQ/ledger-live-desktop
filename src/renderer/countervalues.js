@@ -3,7 +3,10 @@
 import type { OutputSelector } from "reselect";
 import { createSelector } from "reselect";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { implementCountervalues, getCountervalues } from "@ledgerhq/live-common/lib/countervalues-old";
+import {
+  implementCountervalues,
+  getCountervalues,
+} from "@ledgerhq/live-common/lib/countervalues-old";
 import uniq from "lodash/uniq";
 import logger from "~/logger";
 import { setExchangePairsAction } from "~/renderer/actions/settings";

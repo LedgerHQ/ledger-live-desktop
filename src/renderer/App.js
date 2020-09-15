@@ -17,6 +17,7 @@ import { UpdaterProvider } from "~/renderer/components/Updater/UpdaterContext";
 import ThrowBlock from "~/renderer/components/ThrowBlock";
 import LiveStyleSheetManager from "~/renderer/styles/LiveStyleSheetManager";
 import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
+import CountervaluesProvider from "~/renderer/components/CountervaluesProvider";
 import Default from "./Default";
 
 type Props = {
@@ -31,9 +32,11 @@ const App = ({ store }: Props) => {
           <ThrowBlock>
             <RemoteConfigProvider>
               <UpdaterProvider>
-                <Router>
-                  <Default />
-                </Router>
+                <CountervaluesProvider>
+                  <Router>
+                    <Default />
+                  </Router>
+                </CountervaluesProvider>
               </UpdaterProvider>
             </RemoteConfigProvider>
           </ThrowBlock>

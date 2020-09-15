@@ -1,19 +1,16 @@
 // @flow
 
 import type { BigNumber } from "bignumber.js";
-import React, { PureComponent } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
-
 import {
   counterValueCurrencySelector,
   exchangeSettingsForPairSelector,
   intermediaryCurrency,
 } from "~/renderer/reducers/settings";
 import CounterValues from "~/renderer/countervalues";
-
 import FormattedVal from "~/renderer/components/FormattedVal";
-
 import type { State } from "~/renderer/reducers";
 
 type OwnProps = {
@@ -71,42 +68,34 @@ const mapStateToProps = (state: State, props: OwnProps) => {
   };
 };
 
-class CounterValue extends PureComponent<Props> {
-  static defaultProps = {
-    alwaysShowSign: true, // FIXME this shouldn't be true by default
-  };
-
-  render() {
-    const {
-      value,
-      counterValueCurrency,
-      date,
-      alwaysShowSign,
-      placeholder,
-      prefix,
-      suffix,
-      ...props
-    } = this.props;
-
-    if (!value) {
-      return placeholder || null;
-    }
-
-    return (
-      <>
-        {prefix || null}
-        <FormattedVal
-          {...props}
-          val={value}
-          unit={counterValueCurrency.units[0]}
-          showCode
-          alwaysShowSign={alwaysShowSign}
-        />
-        {suffix || null}
-      </>
-    );
+function CounterValue({
+  value,
+  counterValueCurrency,
+  date,
+  alwaysShowSign,
+  placeholder,
+  prefix,
+  suffix,
+  ...props
+}: Props) {
+  if (!value) {
+    return placeholder || null;
   }
+
+  console.log("!!!", props);
+  return (
+    <>
+      {prefix || null}
+      <FormattedVal
+        {...props}
+        val={value}
+        unit={counterValueCurrency.units[0]}
+        showCode
+        alwaysShowSign={alwaysShowSign || true}
+      />
+      {suffix || null}
+    </>
+  );
 }
 
-const ConnectedCounterValue: React$ComponentType<OwnProps> = connect(mapStateToProps)(CounterValue);
-export default ConnectedCounterValue;
+export default connect(mapStateToProps)(CounterValue);
