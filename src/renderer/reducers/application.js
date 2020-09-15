@@ -79,7 +79,10 @@ export const swapSupportedCurrenciesSelector: OutputSelector<
     swapProviders.reduce((ac, { supportedCurrencies }) => [...ac, ...supportedCurrencies], []),
   );
 
-  const tokenCurrencies = allIds.map(findTokenById).filter(Boolean);
+  const tokenCurrencies = allIds
+    .map(findTokenById)
+    .filter(Boolean)
+    .filter(t => !t.delisted);
   const cryptoCurrencies = allIds
     .map(findCryptoCurrencyById)
     .filter(Boolean)
