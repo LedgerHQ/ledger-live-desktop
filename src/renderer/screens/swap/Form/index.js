@@ -88,21 +88,13 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
     { okCurrencies, defaultCurrency, defaultAccount },
     initState,
   );
-  const [ratesTimestamp, setRatesTimestamp] = useState(null); // Move back to the live-common one
-
   const patchExchange = useCallback(payload => dispatch({ type: "patchExchange", payload }), [
     dispatch,
   ]);
 
-  const {
-    swap,
-    fromAmount,
-    fromCurrency,
-    toCurrency,
-    useAllAmount,
-    /* ratesTimestamp, */ error,
-  } = state;
+  const { swap, fromAmount, fromCurrency, toCurrency, useAllAmount, ratesTimestamp, error } = state;
   const ratesExpirationThreshold = 60000;
+
   const { exchange, exchangeRate } = swap;
   const [isTimerVisible, setTimerVisibility] = useState(true);
   const { fromAccount, fromParentAccount, toAccount, toParentAccount } = exchange;
@@ -212,7 +204,6 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
         const rates = await getExchangeRates(exchange, transaction);
         if (ignore) return;
         dispatch({ type: "setRate", payload: { rate: rates[0] } });
-        setRatesTimestamp(new Date());
       } catch (error) {
         if (ignore) return;
         dispatch({ type: "setError", payload: { error } });
