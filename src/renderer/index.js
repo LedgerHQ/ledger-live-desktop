@@ -1,3 +1,3 @@
-require('@babel/polyfill')
-require('../env')
-require('./init')
+// @flow
+import "~/env";
+import "~/renderer/init";

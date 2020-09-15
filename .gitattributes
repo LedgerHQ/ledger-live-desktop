@@ -1,0 +1,3 @@
+*.js text eol=lf
+*.pem text eol=lf
+* text=auto eol=lf

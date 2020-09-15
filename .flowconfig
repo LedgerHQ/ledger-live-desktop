@@ -2,14 +2,10 @@
 <PROJECT_ROOT>/node_modules/bcryptjs/src/bower.json
 <PROJECT_ROOT>/node_modules/config-chain/test/broken.json
 <PROJECT_ROOT>/node_modules/npm/node_modules/config-chain/test/broken.json
-<PROJECT_ROOT>/node_modules/react-window
+<PROJECT_ROOT>/node_modules/styled-components/.*
 <PROJECT_ROOT>/node_modules/react-beautiful-dnd
-
-[untyped]
-.*/node_modules/react-select
-<PROJECT_ROOT>/node_modules/qrloop/lib/Buffer.js*
-<PROJECT_ROOT>/node_modules/@ledgerhq/live-common/lib/partners/icons/react/*
-<PROJECT_ROOT>/node_modules/@ledgerhq/live-common/lib/partners/react.jsarn
+<PROJECT_ROOT>/node_modules/react-window
+<PROJECT_ROOT>/.yalc
 
 [include]
 
@@ -20,8 +16,16 @@ flow-defs
 [lints]
 
 [options]
-module.system.node.resolve_dirname=node_modules
 module.system.node.resolve_dirname=./src
+module.system.node.resolve_dirname=node_modules
+module.name_mapper='^~' ->'<PROJECT_ROOT>/src'
 munge_underscores=true
+esproposal.optional_chaining=enable
 
 [strict]
+
+[untyped]
+.*/node_modules/react-select
+<PROJECT_ROOT>/node_modules/qrloop/lib/Buffer.js*
+<PROJECT_ROOT>/node_modules/@ledgerhq/live-common/lib/partners/icons/react/*
+<PROJECT_ROOT>/node_modules/@ledgerhq/live-common/lib/partners/react.jsarn

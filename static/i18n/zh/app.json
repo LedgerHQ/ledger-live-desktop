@@ -4,9 +4,8 @@
     "labelNo": "取消",
     "never": "从不",
     "apply": "应用",
-    "done": "Done",
+    "done": "已完成",
     "confirm": "确认",
-    "connecting": "Connecting..",
     "cancel": "取消",
     "getSupport": "获取支持",
     "delete": "删除",
@@ -24,28 +23,33 @@
     "selectExchange": "选择交易所",
     "selectExchangeNoOption": "不存在与 \"{{exchangeName}}\" 匹配的交易",
     "selectExchangeNoOptionAtAll": "未找到交易所",
+    "selectValidatorNoOption": "No validator matching \"{{accountName}}\"",
+    "selectNoResults": "No results found matching \"{{query}}\"",
     "sortBy": "排序方式",
-    "search": "搜索",
     "save": "保存",
     "lock": "锁定",
     "showMore": "显示更多",
-    "max": "最大值",
     "back": "返回",
     "reset": "重置",
     "retry": "重试",
     "range": "Range",
     "stop": "停止",
-    "updateNow": "Update now",
+    "updateNow": "立即更新",
     "close": "关闭",
     "eastern": "东方",
     "western": "西方",
     "reverify": "重新验证",
     "verify": "验证",
     "copy": "复制",
-    "copyAddress": "复制",
     "copied": "已复制",
     "addressCopied": "地址已复制",
-    "experimentalFeature": "EXPERIMENTAL FEATURE ACTIVE",
+    "addressCopiedSuspicious": "Mismatch between the copied address and the one in the clipboard.",
+    "experimentalFeature": "Experimental",
+    "dismiss": "Dismiss",
+    "information": "Information",
+    "search": "Search...",
+    "searchWithoutEllipsis": "Search",
+    "manage": "Manage",
     "lockScreen": {
       "title": "欢迎回来",
       "subTitle": null,
@@ -57,7 +61,7 @@
       "syncing": "正在同步...+",
       "upToDate": "已同步",
       "outdated": "暂停",
-      "needsMigration": "Click to update account",
+      "needsMigration": "点击更新账户",
       "error": "同步错误",
       "refresh": "刷新",
       "ago": "已同步 {{time}}"
@@ -66,203 +70,312 @@
   "operation": {
     "type": {
       "IN": "已收到",
-      "OUT": "已发送"
+      "OUT": "已发送",
+      "CREATE": "Created",
+      "REVEAL": "Revealed",
+      "DELEGATE": "Delegated",
+      "REDELEGATE": "Redelegated",
+      "UNDELEGATE": "Undelegated",
+      "VOTE": "Voted",
+      "FREEZE": "Frozen",
+      "UNFREEZE": "Unfrozen",
+      "REWARD": "Claimed reward",
+      "FEES": "Fees",
+      "OPT_IN": "Opt in",
+      "OPT_OUT": "Opt out",
+      "CLOSE_ACCOUNT": "Close account"
     }
   },
+  "byteSize": {
+    "bytes": "{{size}} bytes",
+    "kbUnit": "{{size}} Kb",
+    "mbUnit": "{{size}} Mb"
+  },
   "time": {
-    "day": "日度",
-    "week": "周度",
-    "month": "月度",
-    "year": "年度",
     "minute": "分",
-    "second": "秒",
+    "minute_plural": "Minutes",
     "hour": "时",
-    "since": {
-      "day": "昨天",
-      "week": "上周",
-      "month": "上个月",
-      "year": "去年"
+    "hour_plural": "Hours",
+    "range": {
+      "week": "1W",
+      "month": "1M",
+      "year": "1Y"
     }
   },
   "fees": {
-    "slow": "Slow",
-    "fast": "Fast"
+    "custom": "Custom",
+    "fast": "高速",
+    "high": "High",
+    "low": "Low",
+    "slow": "低速",
+    "standard": "Standard"
   },
   "sidebar": {
     "menu": "菜单",
-    "stars": "Starred accounts",
-    "accounts": "Accounts",
+    "stars": "星标账户",
+    "accounts": "账户",
     "manager": "管理器",
-    "exchange": "购买加密资产",
-    "developer": "开发工具",
-    "newUpdate": {
-      "title": "New Update",
-      "description": "Your accounts have been moved to a new dedicated page!"
-    }
+    "exchange": "购买加密资产"
   },
   "stars": {
-    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
-    "tooltip": "Star account"
+    "placeholder": "您在 <1><0>账户</0></1> 页面上的星标账户将在这里显示！",
+    "tooltip": "星标账户"
   },
   "account": {
-    "lastOperations": "近期操作",
-    "contractAddress": "Contract:",
-    "openInExplorer": "Open in explorer",
+    "lastOperations": "Latest operations",
+    "contractAddress": "合同：",
+    "openInExplorer": "打开区块链浏览器",
     "emptyState": {
       "title": "还没有加密资产？",
       "desc": "请确认已安装 <1> <0>{{managerAppName}}</0> </1> 应用程序后开始接收",
+      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
-        "receiveFunds": "接收"
+        "receiveFunds": "接收",
+        "buy": "Buy"
       }
     },
     "settings": {
       "title": "编辑账户",
       "advancedLogs": "高级日志",
+      "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
       "accountName": {
         "title": "账户名称",
-        "desc": "账户描述"
+        "desc": "Description of the account"
       },
       "unit": {
         "title": "单位",
-        "desc": "选择要显示的单位"
-      },
-      "endpointConfig": {
-        "title": "节点",
-        "desc": "要使用的 API 节点"
+        "desc": "Choose the unit to be used"
       }
+    },
+    "availableBalance": "Available balance",
+    "frozenAssets": "Frozen assets",
+    "bandwidth": "Bandwidth",
+    "energy": "Energy",
+    "delegatedAssets": "Delegated assets",
+    "undelegating": "Undelegating",
+    "availableBalanceTooltip": "This amount is disposable.",
+    "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
+    "bandwidthTooltip": "Freeze assets to gain bandwidth",
+    "energyTooltip": "Freeze assets to gain energy",
+    "delegatedAssetsTooltip": "Delegated assets are used in the Cosmos voting process. This represents your total number of votes.",
+    "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
+  },
+  "exchange": {
+    "title": "Buy crypto",
+    "reset": "Reset flow",
+    "banner": {
+      "title": "Buy crypto via our partner",
+      "description": "Purchase crypto assets via Coinify and receive your coins directly in your Ledger account",
+      "CTA": "Buy now"
+    },
+    "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
+    "buy": {
+      "title": "Buy crypto via our partner",
+      "tab": "Buy",
+      "selectCrypto": "Choose a crypto asset",
+      "selectAccount": "Choose an account",
+      "continue": "Continue",
+      "addAccount": "Add account"
+    },
+    "sell": {
+      "tab": "Sell"
+    },
+    "history": {
+      "tab": "History"
     }
   },
   "accounts": {
-    "title": "Accounts",
-    "noResultFound": "No accounts found.",
+    "title": "账户",
+    "noResultFound": "未找到账户。",
     "order": {
-      "name|asc": "Name A-Z",
-      "name|desc": "Name Z-A",
-      "balance|asc": "Lowest Balance",
-      "balance|desc": "Highest Balance"
+      "name|asc": "按A到Z的顺序命名",
+      "name|desc": "按Z到A的顺序命名",
+      "balance|asc": "最低余额",
+      "balance|desc": "最高余额"
     },
     "range": {
-      "week": "Week",
-      "month": "Month",
-      "year": "Year"
+      "week": "周度",
+      "month": "月度",
+      "year": "年度"
+    },
+    "optionsMenu": {
+      "title": "Options",
+      "exportOperations": "Export operation history",
+      "exportToMobile": "Export to mobile"
     },
     "contextMenu": {
-      "star": "Star",
-      "receive": "Receive",
-      "send": "Send",
-      "edit": "Edit Account"
+      "star": "星标",
+      "receive": "接收",
+      "send": "发送",
+      "buy": "Buy",
+      "edit": "Edit account",
+      "hideToken": "Hide token"
     }
   },
+  "help": {
+    "title": "Help & Support",
+    "gettingStarted": {
+      "title": "Getting started",
+      "desc": "Start here"
+    },
+    "helpCenter": {
+      "title": "Ledger Support",
+      "desc": "Get help"
+    },
+    "ledgerAcademy": {
+      "title": "Ledger Academy",
+      "desc": "Learn crypto"
+    },
+    "facebook": {
+      "title": "Facebook",
+      "desc": "Like our page"
+    },
+    "twitter": {
+      "title": "Twitter",
+      "desc": "Follow us"
+    },
+    "github": {
+      "title": "Github",
+      "desc": "Review our code"
+    }
+  },
+  "blacklistToken": {
+    "title": "Hide token",
+    "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can show them again using <3>Settings</3>",
+    "hideCTA": "Hide token"
+  },
   "banners": {
-    "promoteMobile": "享受 Ledger Live 体验，现已推出移动版本，尽在 {{productName}}",
-    "migrate": "Ledger Live accounts update available",
-    "genericTerminatedCrypto": "不再支持 {{coinName}}"
+    "migrate": "Ledger Live 账户可更新",
+    "genericTerminatedCrypto": "不再支持 {{coinName}}",
+    "ledgerAcademy": {
+      "title": "Ledger Academy",
+      "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
+      "cta": "Start learning"
+    },
+    "stakeCosmos": {
+      "title": "Staking with COSMOS",
+      "description": "Delegate your ATOM coins through the account page and earn rewards today",
+      "cta": "Stake Cosmos now"
+    },
+    "buyCrypto": {
+      "title": "Buy Crypto",
+      "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
+      "cta": "Buy now"
+    },
+    "backupPack": {
+      "title": "Back-up pack",
+      "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
+      "cta": "Buy back-up pack"
+    },
+    "stakeAlgorand": {
+      "title": "Staking with ALGORAND",
+      "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
+    }
   },
   "dashboard": {
     "title": "账户概览",
     "emptyAccountTile": {
-      "desc": "添加更多的加密资产账户",
+      "desc": "Add accounts to manage other crypto assets",
       "createAccount": "添加账户"
     },
-    "accounts": {
-      "title": "账户 ({{count}})"
-    },
-    "greeting": {
-      "morning": "早上好",
-      "evening": "晚上好",
-      "afternoon": "下午好"
-    },
-    "summary": "以下是您的账户概览",
-    "summary_plural": "以下是您 {{count}} 个账户的概览",
-    "recentActivity": "近期操作",
-    "totalBalance": "总余额"
+    "recentActivity": "Latest operations",
+    "totalBalance": "总余额",
+    "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
   },
   "currentAddress": {
     "title": "当前地址",
-    "for": "Address for <1><0>{{name}}</0></1>",
-    "messageIfUnverified": "请验证您设备上显示的 {{currencyName}} 地址与您的 Ledger Live 上显示的地址是否匹配",
-    "messageIfAccepted": "地址已确认，如果您采用复制/粘贴或扫描二维码方式，则请重新验证。",
-    "messageIfSkipped": "尚未在您的 Ledger 设备上确认您的 {{currencyName}} 地址。请验证以确保最优安全性。"
-  },
-  "deviceConnect": {
-    "dashboard": "导航至您设备上的<1>仪表板</1>",
-    "step1": "连接并解锁您的 <1>Ledger 设备</1>",
-    "step2": "Open the <1><0>{{managerAppName}}</0></1> app on your device",
-    "step3": "在您的设备上允许 <1>Ledger Manager</1>"
+    "for": "<1><0>{{name}}</0></1>地址",
+    "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
+    "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security."
   },
   "emptyState": {
-    "sidebar": {
-      "text": "单击此按钮添加账户至资产组合"
-    },
     "dashboard": {
-      "title": "安装应用程序或添加账户",
-      "desc": "打开 Manager 以安装应用程序，如果您的 Ledger 设备已安装应用程序，请添加相应账户",
+      "title": "Install apps on your device",
+      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
       "buttons": {
-        "addAccount": "添加账户",
-        "installApp": "打开管理器"
+        "installApp": "Go to Manager",
+        "help": "Help"
+      }
+    },
+    "accounts": {
+      "title": "Add an account to get started",
+      "desc": "Add an account to start managing your crypto assets. You must have the app for your crypto asset installed on your device.",
+      "buttons": {
+        "addAccount": "Add account",
+        "installApp": "Go to Manager to install apps",
+        "help": "Help"
       }
     }
-  },
-  "partners": {
-    "title": "购买加密资产",
-    "desc": "尝试我们为您精选的服务",
-    "visitWebsite": "访问网站",
-    "btcdirect": "欧洲领先的加密货币代理商，轻松便捷的加密货币交易过程。免费注册，接收您的货币，仅需几分钟！我们的 Trustpilot 用户评分高达 8.7",
-    "changelly": "Changelly 是一个备受欢迎的即时加密资产交易所，上线了 100 多种币和代币。",
-    "changenow": "ChangeNOW 是领先的免托管费的即时交易服务商之一",
-    "coinberry": "Coinberry 是加拿大备受信赖的加密资产交易平台，其安全性甚至超过银行，用户界面十分出色，存取与提现均为免费。如果您不是加拿大公民，请预注册以便尽早使用我们的平台。",
-    "coinhouse": "Coinhouse 是一个值得信赖的平台，为个人和机构投资者寻求分析、收购、出售和安全存储加密资产。",
-    "coinmama": "Coinmama 是一家金融服务机构，让您在世界各地都能快速、安全和愉快地购买数字资产。",
-    "genesis": "Genesis 是一家机构交易公司，提供数字货币流动性和借贷服务，支持比特币、比特币现金、以太坊、以太坊经典、莱特币和瑞波币。",
-    "kyberswap": "快捷、简单、安全的代币交易平台，由 Kyber Network 的链上流动性协议提供支持。",
-    "luno": "Luno 让购买、存储比特币和以太坊等加密货币和了解相关知识变得安全而简单。",
-    "paybis": "通过 PayBis 可安全轻松地使用信用卡购买比特币，该服务已遍及美国、加拿大、德国、俄罗斯和沙特阿拉伯。",
-    "shapeshift": "ShapeShift 是一个在线市场，用户可在此购买和销售数字资产，可快速且安全地在世界各地买卖数字资产，既没有冗长的注册过程，也没有交易对手风险，更不会产生摩擦。",
-    "simplex": "Simplex 是一家欧盟许可的金融机构，提供无欺诈的信用卡支付解决方案。",
-    "taxtoken": "为美国公民打造的自动化加密货币税费和成本基础软件。",
-    "thorswap": "ThorSwap 是一个即时、安全和公平的加密资产市场，由分散原子交换技术提供动力。操作简单便捷，小额交易无需注册或 KYC，是开启交易的理想之选。",
-    "bitpanda": "Bitpanda 是欧洲领先的比特币、以太币、IOTA 等加密货币的交易零售代理商。可使用信用卡、SOFORT-Transfer、NETELLER 或其他方式进行存款。",
-    "exmo": "EXMO 成立于 2013 年，总部位于伦敦、基辅、巴塞罗那和莫斯科，是东欧排名第一的交易所，也是全球交易量和流动性最大的交易所之一。",
-    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure and intuitive platform to buy and sell Bitcoin, Litecoin, Ethereum, XRP and other digital assets. Other key features include advanced trading, free deposits, and an institutional-grade custody solution via Ledger Vault."
   },
   "genuinecheck": {
     "modal": {
       "title": "正版查验"
     },
-    "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
+    "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
   },
   "tokensList": {
-    "title": "Tokens",
-    "cta": "Add token",
-    "placeholder": "To add tokens, simply send them to your Ethereum address.",
-    "link": "Learn more",
-    "seeTokens": "See tokens ({{tokenCount}})",
-    "hideTokens": "Hide tokens ({{tokenCount}})",
-    "tooltip": "Token from"
+    "title": "代币",
+    "cta": "添加代币",
+    "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
+    "link": "了解更多",
+    "seeTokens": "Show tokens ({{tokenCount}})",
+    "hideTokens": "隐藏代币 ({{tokenCount}})",
+    "tooltip": "代币来自",
+    "countTooltip": "1 token",
+    "countTooltip_plural": "{{count}} tokens",
+    "algorand": {
+      "title": "ASA (Assets)",
+      "cta": "Add ASA",
+      "placeholder": "You can add assets to your {{currencyName}} account.",
+      "link": "How assets (ASA) works?",
+      "seeTokens": "Show ASA ({{tokenCount}})",
+      "hideTokens": "Hide ASA ({{tokenCount}})",
+      "tooltip": "ASA from",
+      "countTooltip": "1 ASA",
+      "countTooltip_plural": "{{count}} ASA"
+    }
+  },
+  "subAccounts": {
+    "title": "Subaccounts",
+    "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
+    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
+    "countTooltip": "1 subaccount",
+    "countTooltip_plural": "{{count}} subaccounts"
   },
   "migrateAccounts": {
     "overview": {
-      "title": "Ledger Live accounts update",
-      "done": "Ledger Live accounts update completed",
-      "description": "New features in Ledger Live requires an update of your accounts.",
-      "currency": "1 {{currency}} account needs to be updated:",
-      "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
-      "footer": "You need your Ledger Device to complete the update",
-      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
-      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below"
-    },
-    "connectDevice": {
-      "title": "{{currencyName}} update",
-      "description": ""
+      "title": "Ledger Live 账户可更新",
+      "successTitle": "Accounts updated successfully",
+      "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
+      "successDesc": "Your {{assets}} account is now updated and ready to use",
+      "mobileTitle": "Export accounts to mobile",
+      "mobileDesc": "Click the button below to export your updated accounts to the Ledger Live mobile app.",
+      "mobileCTA": "Export to mobile",
+      "description": "New features in Ledger Live require an update of your accounts.",
+      "currency": "1 {{currency}} 账户需要更新：",
+      "currency_plural": "{{count}} {{currency}} 账户需要更新：",
+      "footer": "您需要您的 Ledger 设备来完成更新",
+      "pendingDevices": "无法更新 1 个账户。请连接与以下的账户相关的设备",
+      "pendingDevices_plural": "无法更新 {{totalMigratableAccounts}} 账户。请连接与以下账户相关的设备",
+      "doItLaterBtn": "Do it later"
     },
     "progress": {
-      "title": "{{currencyName}} update in progress...",
-      "description": "Please wait while your accounts are updated",
-      "finished": "{{currencyName}} update completed"
+      "finished": {
+        "title": "{{currencyName}} update completed",
+        "description": ""
+      },
+      "scanning": {
+        "title": "{{currencyName}} update in progress...",
+        "description": "Please wait for your accounts to be updated"
+      },
+      "finished-empty": {
+        "title": "{{currencyName}} update incomplete",
+        "description": "No {{currencyName}} accounts to update"
+      }
     },
     "cta": {
-      "startUpdate": "Start update",
-      "nextCurrency": "Continue with {{currency}} update"
+      "startUpdate": "开始更新",
+      "nextCurrency": "继续 {{currency}} 更新"
     }
   },
   "addAccounts": {
@@ -273,25 +386,21 @@
       "import": "账户",
       "finish": "确认"
     },
-    "connectDevice": {
-      "desc": "按照以下步骤，添加 <1><0>{{currencyName}}</0></1> 账户"
-    },
-    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
+    "tokensTip": "{{token}} ({{ticker}}) 是一个 {{tokenType}} 代币。您可以直接在 {{currency}} 账户上接收代币。",
     "accountToImportSubtitle_plural": "添加现有账户",
     "selectAll": "全选 ({{count}})",
     "unselectAll": "取消全选 ({{count}})",
-    "newAccount": "新建账户",
-    "legacyAccount": "{{accountName}} (legacy)",
-    "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
-    "unsplitAccount": "{{accountName}} (unsplit)",
     "noAccountToImport": "没有要添加的现有 {{currencyName}} 账户",
-    "success": "已成功添加账户",
-    "success_plural": "已成功添加账户",
-    "successDescription": "添加更多账户或返回至资产组合",
-    "successDescription_plural": "添加更多账户或返回至资产组合",
+    "success": "Account added successfully",
+    "success_plural": "Accounts added successfully",
+    "successDescription": "Add other accounts or return to Portfolio",
+    "successDescription_plural": "Add other accounts or return to Portfolio",
     "createNewAccount": {
-      "noOperationOnLastAccount": "您的 <1><0>{{accountName}}</0></1> 账户为空，无法添加新账户",
-      "noAccountToCreate": "未找到要创建的 <1><0>{{currencyName}}</0></1> 账户"
+      "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
+      "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created"
+    },
+    "supportLinks": {
+      "segwit_or_native_segwit": "Segwit or Native Segwit?"
     },
     "cta": {
       "addMore": "添加更多",
@@ -300,28 +409,29 @@
     },
     "sections": {
       "importable": {
-        "title": "Add existing account"
+        "title": "添加现有账户"
       },
       "creatable": {
-        "title": "Add new account"
+        "title": "添加新账户"
       },
       "imported": {
-        "title": "Accounts already in portfolio ({{count}})"
+        "title": "账户已位于 ({{count}}) 资产组合中"
       },
       "migrate": {
-        "title": "Accounts to update"
+        "title": "待更新账户"
       }
     }
   },
   "operationDetails": {
+    "whatIsThis": "What is this operation?",
     "title": "操作详情",
     "account": "账户",
     "date": "日期",
     "status": "状态",
     "confirmed": "已确认",
-    "failed": "Failed",
+    "failed": "失败",
     "notConfirmed": "未确认",
-    "fees": "费用",
+    "fees": "Fee",
     "noFees": "无费用",
     "from": "自",
     "to": "至",
@@ -329,111 +439,355 @@
     "viewOperation": "在区块链浏览器中查看",
     "showMore": "显示更多 {{recipients}}",
     "showLess": "显示更少",
-    "tokenOperations": "Token operations",
-    "tokenTooltip": "This operation is related to the following token operations",
-    "internalOperations": "Internal operations",
-    "internalOpTooltip": "This operation has internal operations",
-    "details": "{{ currency }} details"
+    "tokenOperations": "代币操作",
+    "subAccountOperations": "Subaccount operations",
+    "tokenTooltip": "此操作与下列代币操作相关",
+    "subAccountTooltip": "This operation is related to the following subaccount operations",
+    "internalOperations": "内部操作",
+    "internalOpTooltip": "此操作存在内部操作",
+    "details": "{{ currency }} 详细信息",
+    "multipleAddresses": "Why multiple addresses?",
+    "extra": {
+      "resource": "Resource",
+      "frozenAmount": "Frozen amount",
+      "unfreezeAmount": "Unfreeze amount",
+      "address": "Address",
+      "votes": "Votes ({{number}})",
+      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
+      "validators": "Validators",
+      "delegated": "Delegated",
+      "redelegated": "Redelegated",
+      "redelegatedFrom": "Redelegated from",
+      "redelegatedTo": "Redelegated to",
+      "redelegatedAmount": "Redelegated amount",
+      "undelegated": "Undelegated",
+      "undelegatedFrom": "Undelegated from",
+      "undelegatedAmount": "Undelegated amount",
+      "rewardFrom": "Reward from",
+      "rewardAmount": "Amount collected",
+      "memo": "Memo",
+      "assetId": "Asset ID",
+      "rewards": "Earned rewards"
+    }
   },
   "operationList": {
     "noMoreOperations": "以上"
   },
+  "DeviceAction": {
+    "allowAppPermission": "Open the {{wording}} app on your device",
+    "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
+    "allowManagerPermission": "{{wording}} on your device",
+    "loading": "Loading...",
+    "connectAndUnlockDevice": "Connect and unlock your device",
+    "unlockDevice": "Unlock your device",
+    "quitApp": "Quit the application on your device",
+    "appNotInstalled": "Please install the {{appName}} app",
+    "openManager": "Open Manager",
+    "outdated": "App version outdated",
+    "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it."
+  },
   "manager": {
-    "yourDeviceIsGenuine": "您的设备为正版",
+    "tabs": {
+      "appCatalog": "App catalog",
+      "appCatalogSearch": "Search app in catalog...",
+      "appsOnDevice": "Apps installed",
+      "appOnDeviceSearch": "Search installed apps..."
+    },
+    "deviceStorage": {
+      "freeSpace": "<0>{{space}}</0> free",
+      "noFreeSpace": "No storage left",
+      "installed": "Apps",
+      "capacity": "Capacity",
+      "used": "Used",
+      "firmwareAvailable": "Firmware is outdated:",
+      "firmwareUpToDate": "Firmware is up to date:",
+      "genuine": "Device is genuine",
+      "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
+    },
+    "applist": {
+      "placeholder": "No match for the search with the selected filters",
+      "placeholderNoAppsInstalled": "No apps installed on your device",
+      "placeholderGoToCatalog": "Go to the App catalog to install apps",
+      "noResultsFound": "No results found",
+      "noResultsDesc": "Please verify the spelling and try again",
+      "filter": {
+        "title": "Show",
+        "all": "All",
+        "supported": "Supported in Live",
+        "installed": "Installed",
+        "not_installed": "Not installed"
+      },
+      "sort": {
+        "title": "Sort",
+        "name_asc": "Name A-Z",
+        "name_desc": "Name Z-A",
+        "marketcap_desc": "Market cap"
+      },
+      "installSuccess": {
+        "title": "App installed successfully. You can now add your {{app}} accounts",
+        "title_plural": "Apps installed successfully. You can now add your accounts",
+        "manageAccount": "Manage my accounts"
+      },
+      "updatable": {
+        "title": "Updates available",
+        "progressTitle": "{{number}} App updates",
+        "progressWarning": "Do not quit Manager during update.",
+        "progress": "Updating all..."
+      },
+      "item": {
+        "version": "Version {{version}}",
+        "installing": "Installing...",
+        "uninstalling": "Uninstalling...",
+        "updating": "Updating...",
+        "scheduled": "Queued",
+        "update": "Update available",
+        "updateAll": "Update all",
+        "updateAllOutOfMemory": "Not enough storage. Please uninstall some apps",
+        "install": "Install",
+        "installed": "Installed",
+        "updated": "Updated",
+        "uninstall": "Uninstall",
+        "notEnoughSpace": "Not enough storage",
+        "supported": "Ledger Live supported",
+        "addAccount": "Add account",
+        "addAccountTooltip": "Add {{appName}} account",
+        "addAccountWarn": "Please wait for the app updates to finish",
+        "learnMore": "Learn more",
+        "learnMoreTooltip": "Learn more about {{appName}}",
+        "removeTooltip": "Uninstall {{appName}}",
+        "useAppForToken": "{{tokenName}} tokens can be managed using the {{appName}} app",
+        "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
+        "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>",
+        "tokenAppDisclaimerInstalled": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>open the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>",
+        "goToAccounts": "Go to accounts",
+        "intallParentApp": "Install {{appName}} app"
+      },
+      "uninstall": {
+        "title": "Uninstall all",
+        "subtitle": "Uninstall all apps?",
+        "description": "Don't worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog."
+      }
+    },
     "apps": {
-      "install": "安装",
-      "all": "应用程序目录",
-      "installing": "正在安装 {{app}}...",
-      "uninstalling": "正在卸载 {{app}}...",
-      "installSuccess": "{{app}} was successfully installed",
-      "unsupportedSuccess": "Learn how to use {{app}}",
-      "uninstallSuccess": "{{app}} 已卸载",
-      "supportedCurrency": "{{app}} is now installed on your {{device}}.",
-      "supportedCurrencyNeedAccount": "{{app}} is now installed on your {{device}}. You need to add a {{currency}} account in order to receive and manage assets.",
-      "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
-      "help": "检查您的设备，查看已安装了哪些应用程序",
-      "installed": "App installed",
-      "uninstalled": "App uninstalled",
-      "addAccount": "Add {{name}} account"
+      "dependencyInstall": {
+        "title": "{{dependency}} app is required",
+        "description": "The {{dependency}} app will also be installed because the {{app}} app needs it.",
+        "confirm": "Install apps"
+      },
+      "dependencyUninstall": {
+        "title": " Uninstall {{app}} and its related apps?",
+        "showAll": "Show apps to uninstall",
+        "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled as well.",
+        "confirm": "Uninstall {{app}} and other apps"
+      }
     },
     "firmware": {
-      "installed": "固件版本 {{version}}",
-      "update": "更新",
+      "updateLater": "Cancel",
+      "seedReady": "I have my Recovery phrase",
+      "dontHaveSeed": "Don't have your Recovery phrase? ",
+      "followTheGuide": "Follow our step by step update guide",
+      "removeApps": "Uninstall all apps before updating",
+      "update": "Firmware update",
+      "updateBtn": "Update firmware",
       "latest": "固件版本 {{version}} 已可用",
-      "disclaimerTitle": "您即将安装<1><0>固件版本 {{version}}</0></1>。",
-      "disclaimerAppDelete": "请卸载设备上所有应用程序，此操作不会影响您的加密资产。",
-      "disclaimerAppReinstall": "为谨慎起见，请安全保存您的恢复短语列表。",
-      "downloadingUpdateDesc": "请等待更新安装程序下载"
+      "contactSupport": "Contact support",
+      "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
+      "prepareSeed": "Ensure your 24-word Recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
+      "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
+      "downloadingUpdateDesc": "Please wait for the update installer to be downloaded"
     },
     "modal": {
       "steps": {
         "downloadingUpdate": "正在下载更新",
         "updateMCU": "固件更新",
-        "reset": "Prepare device",
+        "reset": "准备设备",
         "osu": "OSU 安装中...",
         "flash-mcu": "MCU 更新中...",
         "flash-bootloader": "启动加载器更新中...",
         "firmware": "正在更新固件...",
-        "flash": "Preparing your device..."
+        "flash": "正在准备您的设备..."
       },
       "confirmIdentifier": "验证标识符",
-      "confirmIdentifierText": "验证以确保设备上的标识符与以下标识符相同。按右键并输入您的 PIN 码以确认。",
+      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
       "identifier": "标识符",
       "mcuTitle": "完成更新",
       "mcuFirst": "从设备上断开 USB 数据线连接",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
-      "mcuPin": "正在更新，请您耐心等待",
-      "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
-      "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
+      "mcuSecond": "按下左键并同时重新连接 USB 数据线直到屏幕出现 <1><0>{{repairProcessing}}</0></1>",
+      "mcuPin": "Please wait for the update to finish",
+      "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
+      "mcuBlueFirst": "持续按住设备侧面按钮10秒后，当设备关闭后，请松开按钮。",
+      "mcuBlueSecond": "持续按住设备侧面按钮5秒至设备显示 Boot Options ，请轻击 Bootloader Mode 。",
       "successTitle": "固件已更新",
       "successText": "请在设备上重新安装应用程序",
-      "resetTitle": "Prepare Device",
       "resetSteps": {
-        "first": "1. Reset your device",
-        "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
-        "turnOn": "Press the button on the device to turn it on.",
-        "falsePin": "Enter three wrong PIN codes to reset the device.",
-        "turnOff": "Press and hold the side button until {{action}} is displayed.",
-        "confirmTurnOff": "Tap {{action}} to confirm.",
-        "second": "2. Boot in {{mode}} mode",
-        "boot": "Press and hold the side button until {{option}} is displayed",
-        "recoveryMode": "Tap {{mode}} Mode. Wait until the dashboard appears.",
-        "third": "3. Uninstall all apps",
-        "openLive": "Open the Manager in Ledger Live.",
-        "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
-        "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secured on your Recovery sheet."
+        "first": "1. 重置您的设备",
+        "connect": "通过 USB 数据线，连接 {{deviceName}} 到您的计算机。",
+        "turnOn": "按设备上的按钮以启动设备。",
+        "falsePin": "Enter three wrong PINs to reset the device.",
+        "turnOff": "持续按住设备侧面按钮，直至 {{action}} 显示。",
+        "confirmTurnOff": "点击 {{action}} 确认。",
+        "second": "2. 在 {{mode}} 模式下启动",
+        "boot": "持续按住设备侧面按钮，直至 {{option}} 显示。",
+        "recoveryMode": "轻击 {{mode}} 模式。请稍后，直至仪表板出现。",
+        "third": "3. 卸载所有应用",
+        "openLive": "在 LedgerLive 中打开管理器。",
+        "uninstall": "点击 {{deviceName}} 的灰色回收站图标，这将为安装固件释放空间。",
+        "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secure on your Recovery sheet."
       }
-    },
-    "title": "管理器",
-    "subtitle": "在设备上安装或卸载应用程序",
-    "device": {
-      "title": "连接设备",
-      "desc": "按照以下步骤打开管理器",
-      "cta": "连接我的设备"
     }
+  },
+  "claimReward": {
+    "title": "Claim rewards",
+    "steps": {
+      "rewards": {
+        "title": "Rewards",
+        "description": "Congratulations! You earned <1>{{amount}}</1> by voting for validators.",
+        "info": "Rewards can be claimed once every 24 hours."
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "success": {
+          "title": "Rewards claimed",
+          "text": "Your rewards were added to your available balance.",
+          "cta": "View details",
+          "done": "Done"
+        },
+        "pending": {
+          "title": "Claiming your rewards..."
+        },
+        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+      }
+    }
+  },
+  "freeze": {
+    "title": "Freeze assets",
+    "steps": {
+      "amount": {
+        "title": "Amount",
+        "resourceInfo": "Bandwidth or Energy?",
+        "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
+        "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
+        "amountLabel": "Amount to freeze",
+        "available": "Available: {{amountAvailable}}",
+        "info": "Frozen assets cannot be sent for 3 days."
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "tooltip": {
+          "title": "Transaction is awaiting validation",
+          "desc": "You have to wait a minute before being able to vote"
+        },
+        "title": "Confirmation",
+        "success": {
+          "title": "",
+          "textNRG": "You will start earning Energy once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+          "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+          "votePending": "Vote in {{time}}",
+          "vote": "Vote",
+          "later": "Vote later"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+      }
+    }
+  },
+  "unfreeze": {
+    "title": "Unfreeze assets",
+    "steps": {
+      "amount": {
+        "title": "Unfreeze",
+        "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "success": {
+          "title": "",
+          "text": "Your assets were unfrozen successfully. Your {{resource}} points will be decreased, and your votes will be cancelled.",
+          "continue": "Continue"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+      }
+    }
+  },
+  "vote": {
+    "title": "Cast votes",
+    "titleExisting": "Manage votes",
+    "steps": {
+      "castVotes": {
+        "max": "MAX",
+        "title": "Vote",
+        "search": "Search by name or address...",
+        "totalVotes": "Total votes: {{total}}",
+        "selected": "Selected: {{total}}",
+        "maxSelected": "Max selected: {{total}}",
+        "allVotesAreUsed": "All assets are distributed",
+        "maxUsed": "Insufficient assets",
+        "superRepresentatives": "Super Representatives (SR)",
+        "candidates": "Candidates",
+        "estYield": "est. yield",
+        "srInfo": "SR or Candidates?",
+        "validators": "Validators ({{total}})",
+        "votes": "Available assets: {{total}}",
+        "noResults": "No validator found for \"<0>{{search}}</0>\"."
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "success": {
+          "title": "Your votes were cast successfully.",
+          "text": "",
+          "howVotingWorks": "How voting works?",
+          "done": "Done",
+          "cta": "View details"
+        },
+        "pending": {
+          "title": "Freezing your assets..."
+        },
+        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+      }
+    }
+  },
+  "buy": {
+    "title": "Buy",
+    "titleCrypto": "Buy {{currency}}",
+    "buyCTA": "Buy {{currencyTicker}}"
   },
   "receive": {
     "title": "接收",
+    "successTitle": "Address shared securely",
     "steps": {
       "chooseAccount": {
         "title": "账户",
         "label": "信贷账户",
-        "parentAccount": "1. Select {{currencyName}} account",
-        "token": "2. Select a token"
+        "parentAccount": "1. 选择 {{currencyName}} 账户",
+        "token": "2. 选择代币"
       },
       "connectDevice": {
         "title": "设备",
-        "withoutDevice": "您还没有 Ledger 设备？",
-        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
-      },
-      "confirmAddress": {
-        "title": "验证",
-        "action": "验证设备上的地址",
-        "text": "请验证您设备上显示的 {{currencyName}} 地址与您的 Ledger Live 上显示的地址是否匹配",
-        "support": "联系我们"
+        "withoutDevice": "您还没有 Ledger 设备？"
       },
       "receiveFunds": {
         "title": "接收"
+      },
+      "warning": {
+        "tezos": {
+          "text": "The amount received on a delegated account will be added to the total staked amount. Choose another account if you want to avoid this."
+        }
       }
     }
   },
@@ -441,44 +795,59 @@
     "title": "发送",
     "totalSpent": "总借额",
     "steps": {
-      "amount": {
-        "title": "详情",
-        "selectAccountDebit": "付币账户",
-        "recipientAddress": "收件人地址",
-        "amount": "金额",
-        "fees": "网络费用",
-        "useMax": "Max",
-        "advancedOptions": "高级选项",
-        "useRBF": "使用费用替代法交易",
-        "message": "留言 (140)",
-        "rippleTag": "标签",
-        "ethereumGasLimit": "Gas 上限",
-        "unitPerByte": "{{unit}} 每字节",
-        "highFeeModal": {
-          "title": "High fees",
-          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
-        }
+      "recipient": {
+        "title": "Recipient"
       },
-      "connectDevice": {
-        "title": "设备"
+      "amount": {
+        "title": "Amount",
+        "banner": "Maximum spendable amount is"
+      },
+      "summary": {
+        "title": "Summary"
+      },
+      "device": {
+        "title": "Device"
+      },
+      "details": {
+        "from": "From",
+        "to": "To",
+        "selectAccountDebit": "Account to debit",
+        "recipientAddress": "Recipient address",
+        "amount": "Amount",
+        "fees": "Network fees",
+        "useMax": "Send Max",
+        "rippleTag": "Tag",
+        "rippleTagPlaceholder": "Optional",
+        "ethereumGasLimit": "Gas limit",
+        "ethereumGasPrice": "Gas price",
+        "unitPerByte": "{{unit}} per byte"
       },
       "verification": {
-        "title": "验证",
-        "warning": "请验证您设备上的所有交易详情",
-        "body": "确认您设备上的交易以进行发送"
+        "streaming": {
+          "accurate": "Loading... ({{percentage}})",
+          "inaccurate": "Loading..."
+        }
       },
       "confirmation": {
         "title": "确认",
         "success": {
           "title": "交易已发送",
-          "text": "区块链确认交易后，将会立即更新您的账户余额",
+          "text": "Your account balance will be updated when the blockchain confirms the transaction",
           "cta": "查看详情"
         },
         "pending": {
           "title": "正在传送交易信息…"
         },
-        "broadcastError": "您的交易可能失败。请在几分钟后查看并确保您的交易没有通过后，然后再试一次。"
+        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+      },
+      "warning": {
+        "tezos": {
+          "text": "The amount to be sent will be deducted from the balance of your delegated account."
+        }
       }
+    },
+    "footer": {
+      "estimatedFees": "Network fees"
     }
   },
   "releaseNotes": {
@@ -486,26 +855,488 @@
     "version": "Ledger Live {{versionNb}}"
   },
   "distribution": {
-    "asset": "Asset",
-    "price": "Price",
-    "distribution": "Distribution",
+    "asset": "资产",
+    "price": "价格",
+    "distribution": "Allocation",
+    "amount": "金额",
+    "value": "价值",
+    "showAll": "显示全部",
+    "showLess": "隐藏显示",
+    "header": "Asset allocation ({{count}})"
+  },
+  "accountDistribution": {
+    "account": "Account",
+    "distribution": "Allocation",
     "amount": "Amount",
     "value": "Value",
-    "showAll": "Show all",
-    "showLess": "Show less",
-    "header": "Asset distribution ({{count}})"
+    "header": "Account allocation ({{count}})"
+  },
+  "tron": {
+    "voting": {
+      "emptyState": {
+        "description": "You can now earn rewards by freezing and voting.",
+        "info": "How voting works",
+        "votesDesc": "Cast your votes for one or more representatives to start earning staking rewards.",
+        "vote": "Cast votes",
+        "voteExisting": "Manage votes"
+      },
+      "manageTP": "Manage assets",
+      "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
+      "claimRewards": "Claim rewards",
+      "nextRewardsDate": "Rewards can be claimed {{date}}",
+      "claimAvailableRewards": "Claim {{amount}}",
+      "title": "Claim rewards",
+      "header": "Votes",
+      "Amount": "Amount",
+      "percentageTP": "% of votes cast",
+      "noRewards": "No rewards available",
+      "remainingVotes": {
+        "title": "You still have {{amount}} votes remaining",
+        "description": "You can cast your remaining votes to earn more rewards",
+        "button": "Vote now"
+      },
+      "flow": {
+        "steps": {
+          "starter": {
+            "title": "Earn staking rewards",
+            "description": "Freeze TRX to earn rewards and still keep full security and control of your assets.",
+            "bullet": {
+              "delegate": "Delegated assets stay yours.",
+              "access": "You can unfreeze your assets after 3 days.",
+              "ledger": "Freeze and vote securely with your Ledger device."
+            },
+            "help": "How voting works",
+            "button": {
+              "cta": "Continue"
+            },
+            "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your super representative."
+          }
+        }
+      }
+    },
+    "manage": {
+      "title": "Manage assets",
+      "freeze": {
+        "title": "Freeze",
+        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also be able to vote for Super Representatives."
+      },
+      "unfreeze": {
+        "title": "Unfreeze",
+        "description": "Unfreeze TRX to have them back in your available balance. You will no longer earn rewards."
+      },
+      "vote": {
+        "title": "Vote",
+        "description": "Cast votes for Super Representatives to earn rewards.",
+        "steps": {
+          "vote": {
+            "title": "Cast votes",
+            "description": "Vote for one or more Super Representatives to start earning rewards.",
+            "footer": {
+              "doNotShowAgain": "Don't show again",
+              "next": "Cast Votes"
+            },
+            "info": {
+              "message": "SR or Candidates?",
+              "superRepresentative": {
+                "title": "Super Representatives (SR)",
+                "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+              },
+              "candidates": {
+                "title": "Candidates",
+                "description": "127 individuals elected through voting by the entire token holder community. Votes are updated once every 6 hours."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "bitcoin": {
+    "inputSelected": "SELECTED",
+    "toSpend": "Coins to spend",
+    "toReturn": "Change to return",
+    "modalTitle": "Coin control",
+    "coincontrol": "Coin control",
+    "advanced": "Advanced options",
+    "ctaDisabled": "You must first enter an amount.",
+    "whatIs": "What is coin selection?",
+    "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
+    "strategy": "Coin selection strategy",
+    "selected": "Coins selected for strategy",
+    "amount": "Amount to send:",
+    "replaceable": "replaceable",
+    "cannotSelect": "You cannot select coins from unconfirmed, replaceable transactions.",
+    "pending": "pending",
+    "notEnoughCoins": "You have not selected enough coins to meet the amount to send.",
+    "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions.",
+    "pickingStrategy": "UTXO picking strategy",
+    "pickingStrategyLabels": {
+      "DEEP_OUTPUTS_FIRST": "Oldest coins first (FIFO)",
+      "OPTIMIZE_SIZE": "Minimize fees (optimize size)",
+      "MERGE_OUTPUTS": "Minimize future fees (merge coins)"
+    }
+  },
+  "cosmos": {
+    "delegation": {
+      "emptyState": {
+        "description": "You can earn ATOM rewards by delegating your assets.",
+        "info": "How Delegation works",
+        "delegation": "Earn rewards"
+      },
+      "claimRewards": "Claim rewards",
+      "claimAvailableRewards": "Claim {{amount}}",
+      "header": "Delegation(s)",
+      "Amount": "Amount",
+      "noRewards": "No rewards available",
+      "delegate": "Add",
+      "undelegate": "Undelegate",
+      "redelegate": "Redelegate",
+      "redelegateDisabledTooltip": "You can redelegate again <0>{{days}}</0>",
+      "redelegateMaxDisabledTooltip": "You cannot redelegate more than <0>7</0> validators at a time",
+      "undelegateDisabledTooltip": "You cannot undelegate more than <0>7</0> validators at a time",
+      "reward": "Claim rewards",
+      "currentDelegation": "Delegated: <0>{{amount}}</0>",
+      "estYield": "est. yield",
+      "activeTooltip": "Delegated amounts generate rewards",
+      "inactiveTooltip": "Undelegated amounts do not generate rewards",
+      "minSafeWarning": "Not enough funds",
+      "flow": {
+        "title": "Delegate",
+        "steps": {
+          "starter": {
+            "description": "You may earn rewards by delegating your ATOM assets to a validator.",
+            "bullet": [
+              "You keep ownership of delegated assets",
+              "Delegate using your Ledger device",
+              "Assets will be available 21 days after undelegation"
+            ],
+            "warning": {
+              "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+            }
+          },
+          "validator": {
+            "title": "Validators",
+            "feesInfo": "Selected amounts are fees included"
+          },
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "You have successfully delegated your assets",
+              "text": "Your account balance will be updated when the blockchain confirms the transaction.",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          }
+        }
+      }
+    },
+    "claimRewards": {
+      "flow": {
+        "title": "Claim rewards",
+        "steps": {
+          "claimRewards": {
+            "title": "Rewards",
+            "compound": "Compound",
+            "claim": "Cash in",
+            "compoundOrClaim": "Compound or cash in",
+            "compoundDescription": "Rewards will be added to delegated amount",
+            "claimDescription": "Rewards will be added to the available balance",
+            "compoundInfo": "You earned <0>{{amount}}</0>. By clicking Continue, they will be claimed now and automatically delegated to the same validator.",
+            "claimInfo": "You earned <0>{{amount}}</0> from the validator below. By clicking Continue, they will be claimed now and automatically added to the available balance.",
+            "selectLabel": "Select a delegation"
+          },
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "Rewards cashed in successfully",
+              "titleCompound": "Rewards compounded successfully",
+              "text": "Your rewards were added to your available balance",
+              "textCompound": "Your rewards <0>{{amount}}</0> were automatically delegated to <0>{{validator}}</0>",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          }
+        }
+      }
+    },
+    "redelegation": {
+      "flow": {
+        "title": "Redelegate assets",
+        "steps": {
+          "starter": {
+            "title": "Redelegation",
+            "description": "Use redelegation to easily change from one validator to another. But if you change your mind again, you will then have to wait because redelegation triggers a 21-day timelock.",
+            "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
+            "howDelegationWorks": "How delegation works?"
+          },
+          "validators": {
+            "title": "Validators",
+            "currentDelegation": "Current delegation",
+            "newDelegation": "New delegation",
+            "chooseValidator": "Choose a validator",
+            "warning": "You will have to wait <0>21 days</0> to redelegate from the new validator, if you change your mind again",
+            "selectInfo": "Redelegate assets from one validator to another. When redelegating, your assets continue to generate rewards non-stop.",
+            "searchPlaceholder": "Search by name or address",
+            "redelegationAmount": "Redelegation amount"
+          },
+          "device": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "success": {
+              "title": "You have successfully redelegated your assets",
+              "text": "The redelegation will update once the blockchain has confirmed the transaction",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          }
+        }
+      }
+    },
+    "undelegation": {
+      "header": "Undelegation(s)",
+      "headerTooltip": "Available after the 21-day timelock",
+      "inactiveTooltip": "Undelegated amounts do not generate rewards.",
+      "flow": {
+        "title": "Undelegate assets",
+        "steps": {
+          "amount": {
+            "title": "Amount",
+            "subtitle": "The undelegation process takes <0>21 days</0> to finalize.",
+            "warning": "Rewards will be immediately cashed in. The undelegated amount will be back in the available balance after the <0>21-day timelock</0>.",
+            "fields": {
+              "validator": "Validator",
+              "amount": "Amount to undelegate"
+            }
+          },
+          "device": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "success": {
+              "title": "You have successfully undelegated your assets.",
+              "description": "<0>{{amount}}</0> were undelegated from <0>{{validator}}</0>",
+              "cta": "View details"
+            },
+            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          }
+        }
+      }
+    }
+  },
+  "algorand": {
+    "operationHasRewards": "Rewards earned",
+    "operationEarnedRewards": "You earned <0>{{amount}}</0> rewards.",
+    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
+    "optIn": {
+      "flow": {
+        "title": "Add ASA (Asset)",
+        "steps": {
+          "assets": {
+            "title": "ASA (Asset)",
+            "info": "Adding an asset requires sending a transaction with a minimum transaction fee. This will appear on your transaction history",
+            "selectLabel": "Choose an ASA (Asset)",
+            "disabledTooltip": "You already have this ASA (asset) in your Algorand account"
+          },
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "{{token}} asset successfully added",
+              "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          }
+        }
+      }
+    },
+    "claimRewards": {
+      "header": "Rewards",
+      "tooltip": "Algorand rewards are distributed regularly and are claimed automatically when you do a transaction.",
+      "cta": "Claim rewards",
+      "rewardsDisabledTooltip": "You don’t have any rewards. Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
+      "flow": {
+        "title": "Claim rewards",
+        "steps": {
+          "starter": {
+            "title": "Earn rewards",
+            "description": "Receive Algorand rewards simply for holding Algorand control of your assets.",
+            "bullet": {
+              "delegate": "A minimum balance of 1 algo is required to receive rewards.",
+              "access": "Increase the account’s balance to increase rewards.",
+              "ledger": "Perform a transaction to or from the account to claim rewards."
+            },
+            "learnMore": "How Algorand rewards work?",
+            "button": {
+              "cta": "Receive Algo"
+            }
+          },
+          "info": {
+            "title": "Rewards",
+            "description": "Congratulations! You earned {{amount}}. Click on Continue to claim your rewards",
+            "info": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees."
+          },
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "Rewards successfully claimed!",
+              "text": "Your rewards were added to your available balance",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          }
+        }
+      }
+    }
+  },
+  "delegation": {
+    "title": "Earn rewards",
+    "header": "Delegation",
+    "validator": "Validator",
+    "yield": "Est. Yield",
+    "address": "Address",
+    "transactionID": "Transaction ID",
+    "value": "Value",
+    "amount": "Amount",
+    "delegated": "Delegated",
+    "completionDate": "Completion date",
+    "rewards": "Rewards",
+    "distribution": "Distribution",
+    "duration": "Duration",
+    "durationJustStarted": "Just started",
+    "durationDays": "{{count}} day",
+    "durationDays_plural": "{{count}} days",
+    "howItWorks": "How delegation works",
+    "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
+    "earnRewards": "Earn rewards",
+    "overdelegated": "Overdelegated",
+    "status": "Status",
+    "flow": {
+      "steps": {
+        "starter": {
+          "title": "Earn staking rewards",
+          "description": "Delegate your Tezos account to a third-party validator to earn staking rewards and still keep full security and control of your assets",
+          "bullet": {
+            "delegate": "Delegated accounts stay yours.",
+            "access": "You can access your assets at any time.",
+            "ledger": "Delegate securely with your Ledger device."
+          },
+          "button": {
+            "cta": "Delegate to earn rewards"
+          }
+        },
+        "account": {
+          "title": "Delegate account",
+          "label": "Account",
+          "toDelegate": "Account to delegate"
+        },
+        "summary": {
+          "title": "Delegate account",
+          "label": "Summary",
+          "toDelegate": "Account to delegate",
+          "toUndelegate": "Account to undelegate",
+          "validator": "Validator",
+          "select": "Select",
+          "yield": "Est. Yield {{amount}}",
+          "randomly": "Randomly chosen validator",
+          "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your validator."
+        },
+        "validator": {
+          "title": "Select validator",
+          "description": "You can select a validator by comparing the estimated reward rates",
+          "customValidator": "Custom validator",
+          "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
+        },
+        "custom": {
+          "title": "Custom validator",
+          "text": "Please enter the address of the custom validator to delegate your account to.",
+          "button": "Use validator"
+        },
+        "undelegate": {
+          "title": "Undelegate account"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "Confirmation",
+          "success": {
+            "title": "Delegation sent",
+            "titleUndelegated": "End delegation",
+            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within around 40 days, depending on the validator.",
+            "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
+          },
+          "pending": {
+            "title": "Broadcasting transaction..."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    },
+    "banner": {
+      "title": "Earn rewards",
+      "text": "You can earn Tezos staking rewards by delegating your account"
+    },
+    "contextMenu": {
+      "topUp": "Receive more",
+      "redelegate": "Change validator",
+      "stopDelegation": "End delegation"
+    }
+  },
+  "asset": {
+    "notice": "Summary of all {{currency}} accounts"
+  },
+  "carousel": {
+    "hidden": {
+      "close": "Confirm",
+      "undo": "Show again",
+      "disclaimer": "This banner will not show up again until there is a new announcement"
+    }
   },
   "settings": {
     "title": "设置",
+    "discreet": "Toggle discreet mode",
+    "helpButton": "Help",
     "tabs": {
       "display": "通用",
-      "cryptoAssets": "Crypto assets",
-      "currencies": "Crypto assets",
-      "rates": "Rates",
+      "cryptoAssets": "加密资产",
+      "currencies": "加密资产",
+      "rates": "汇率",
       "help": "帮助",
       "about": "关于",
-      "experimental": "Experimental features",
-      "accounts": "Accounts"
+      "experimental": "实验功能",
+      "accounts": "账户"
     },
     "export": {
       "accounts": {
@@ -515,8 +1346,7 @@
       },
       "operations": {
         "title": "操作历史",
-        "desc": "在您的计算机上保存帐户操作的 CSV 文件。",
-        "button": "保存"
+        "desc": "在您的计算机上保存帐户操作的 CSV 文件。"
       },
       "modal": {
         "button": "完成",
@@ -531,53 +1361,55 @@
       "desc": "配置 Ledger Live 常规设置。",
       "language": "显示语言",
       "languageDesc": "设置 Ledger Live 中显示的语言。",
+      "theme": "Theme",
+      "themeDesc": "Select the theme.",
       "counterValue": "对价",
       "counterValueDesc": "选择在余额和操作旁显示的货币币种。",
-      "exchange": "汇率提供商",
-      "exchangeDesc": "提供比特币兑 {{fiat}} 的汇率，以估算您的加密资产的价值 (crypto asset → BTC → {{fiat}}) 。",
       "region": "地区",
-      "regionDesc": "选择您所在的地区，以用于设置 Ledger Live 的时区。",
+      "regionDesc": "Choose your region to set the time zone of Ledger Live.",
       "stock": "地区市场指示器",
-      "stockDesc": "选择西方即以蓝色显示市场价值的增长。选择东方即以红色显示市场价值的增长。"
+      "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
+      "carouselVisibility": "Carousel visibility",
+      "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
-      "desc": "Change settings for each of your crypto assets",
-      "select": "Select a crypto asset to edit its settings.",
-      "exchange": "汇率提供商 ({{ticker}} → BTC)",
-      "exchangeDesc": "选择 {{currencyName}} 兑比特币汇率的提供商，以估算您的加密资产的价值 ({{ticker}} → BTC → {{fiat}}) 。",
+      "desc": "更改您每个加密资产账户的设置",
+      "placeholder": "No settings for this asset",
+      "select": "选择一种加密资产，并编辑设置。",
       "confirmationsNb": "确认数量",
       "confirmationsNbDesc": "设置要标记为已确认的交易的网络确认数量。"
     },
     "rates": {
-      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
-      "fromTo": "{{from}} to {{to}}",
-      "cryptoToFiat": "Crypto to fiat",
-      "cryptoToCrypto": "Crypto to Crypto",
-      "rate": "Rate",
-      "last": "Last {{days}} days",
-      "price": "Price",
-      "exchange": "Rate provider"
+      "desc": "Here are all the rates that are used to calculate countervalues.\nChoose which rate providers are used for each rate.",
+      "fromTo": "{{from}} 至 {{to}}",
+      "noCounterValue": "We have no data for this trading pair",
+      "cryptoToFiat": "加密货币换作法定货币",
+      "cryptoToCrypto": "加密货币换作加密货币",
+      "rate": "汇率",
+      "last": "最近 {{days}} 天",
+      "price": "价格",
+      "exchange": "汇率提供商"
     },
     "profile": {
       "password": "密码锁",
-      "passwordDesc": "设置密码，防止存储在您的计算机上的 Ledger Live 数据受到未经授权的访问，包括账户名、余额、交易和公开地址等。",
+      "passwordDesc": "Set a password to secure the Ledger Live data on your computer, including account names, balances, transactions and public addresses.",
       "passwordAutoLock": "自动锁定",
-      "passwordAutoLockDesc": "无活动状态下自动锁定 Ledger Live。",
+      "passwordAutoLockDesc": "Automatically lock Ledger Live when inactive.",
       "changePassword": "更改密码",
       "softResetTitle": "清除缓存",
       "softResetDesc": "清除 Ledger Live 缓存，以强制与区块链重新同步。",
       "softReset": "清除",
       "hardResetTitle": "重置 Ledger Live",
-      "hardResetDesc": "清除计算机上存储的所有 Ledger Live 数据，包括您的账户、交易历史记录和设置。",
+      "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction histories and settings.",
       "hardReset": "重置",
       "developerMode": "开发者模式",
       "developerModeDesc": "在 Manager 中显示开发者和测试网应用程序。",
       "analytics": "分析",
-      "analyticsDesc": "启用分析可以帮助 Ledger 提升用户体验。分析包括点击量、页面访问量、重定向、操作（发送、接收、锁定等）、页末滚动、应用程序安装或卸载和版本信息、 Ledger Live 应用程序版本信息、账户数量、加密资产和操作数、会话时长、Ledger 设备类型和固件版本。",
+      "analyticsDesc": "Enable analytics to help Ledger improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc), end of page scrolls, (un)installing and app version, number of accounts, crypto assets and operations, session durations, the Ledger device type and firmware.",
       "reportErrors": "缺陷报告",
-      "reportErrorsDesc": "自动发送报告，帮助 Ledger 修复缺陷。",
+      "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
       "launchOnboarding": "设备设置",
-      "launchOnboardingDesc": "设为新设备或恢复 Ledger 设备。保留账户和设置信息。"
+      "launchOnboardingDesc": "Set up a new device or restore an existing device. Accounts and settings are kept."
     },
     "about": {
       "desc": "应用程序信息、条款与条件和隐私政策。"
@@ -586,24 +1418,25 @@
       "desc": "了解更多 Ledger Live 相关信息或获取帮助。",
       "version": "版本",
       "releaseNotesBtn": "详情",
+      "termsBtn": "Read",
       "faq": "Ledger 支持人员",
-      "faqDesc": "使用 Ledger Live 和您的硬件钱包时遇到问题？请随时联系我们。",
+      "faqDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
       "terms": "使用条款",
       "termsDesc": "使用 Ledger Live 即表示您已接受我们的使用条款。",
       "privacy": "隐私政策",
-      "privacyDesc": "请参考我们的隐私政策了解我们收集哪些个人数据、收集原因以及使用方式。"
+      "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use them."
     },
     "experimental": {
-      "desc": "Try out experimental features and let us know what you think",
-      "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
+      "desc": "请尝试实验功能并让告知您的意见。",
+      "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
       "title": "重置 Ledger Live",
-      "desc": "是否清除计算机上存储的所有 Ledger Live 数据（包括您的账户、交易历史记录和设置）？用于访问加密资产的密钥仍安全存储在您的 Ledger 设备和恢复短语列表上。"
+      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your Recovery phrase."
     },
     "softResetModal": {
       "title": "清除缓存",
-      "desc": "清除缓存会强制网络重新同步。您的设置和账户信息将会保留。用于访问加密资产的密钥仍安全存储在您的 Ledger 设备和恢复短语列表上。"
+      "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys to access to your crypto assets remain secure on your Ledger device and Recovery sheet."
     },
     "resetFallbackModal": {
       "title": "需要用户操作",
@@ -615,28 +1448,32 @@
     },
     "removeAccountModal": {
       "title": "删除账户",
-      "desc": "这不会影响您的加密资产。您可以随时重新添加账户。"
+      "desc": "This will not affect your crypto assets. Existing accounts can always be added again."
     },
     "openUserDataDirectory": {
       "title": "查看用户数据",
-      "desc": "查看存储在您的计算机上的用户数据，包括您的账户、缓存和设置。",
+      "desc": "View the user data stored on your computer, including your accounts, caches and settings.",
       "btn": "查看"
     },
     "repairDevice": {
       "title": "修复您的 Ledger 设备",
-      "descSettings": "如果 Ledger 设备在固件更新期间卡顿，则可使用此工具恢复您的设备。",
+      "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
       "desc": "请选择您的 Ledger 设备状态。",
       "button": "修复"
     },
     "exportLogs": {
       "title": "保存日志",
-      "desc": "故障排除可能需要导出 Ledger Live 日志记录。",
+      "desc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
       "btn": "保存"
     },
     "accounts": {
       "hideEmptyTokens": {
-        "title": "Hide empty token accounts",
-        "desc": "Hide token accounts with zero balance on the Accounts page."
+        "title": "隐藏空代币帐户",
+        "desc": "在账户页面隐藏零余额的代币账户。"
+      },
+      "tokenBlacklist": {
+        "title": "Hidden tokens",
+        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'"
       }
     }
   },
@@ -658,8 +1495,8 @@
     },
     "setPassword": {
       "title": "密码锁",
-      "subTitle": "设置密码",
-      "desc": "确保记住您的密码。如丢失密码，则需要重置 Ledger Live 和重新添加账户。"
+      "subTitle": "Set the password",
+      "desc": "Keep your password safe. Losing it means resetting Ledger Live and adding the accounts again."
     },
     "disablePassword": {
       "title": "禁用密码锁",
@@ -672,58 +1509,63 @@
     "checking": "正在检查更新...",
     "checkSuccess": "更新安装已就绪",
     "quitAndInstall": "立即安装",
+    "updateAvailable": "Ledger Live {{version}} is available for update",
     "error": "更新时出错。请重新下载",
-    "reDownload": "重新下载"
+    "reDownload": "重新下载",
+    "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
+    "downloadNow": "Download now"
   },
   "crash": {
-    "oops": "糟糕，出错了",
-    "uselessText": "您可以重启 Ledger Live 再试一次。如果问题仍然存在，请导出您的记录并联系 Ledger 支持人员。",
+    "title": "Something went wrong",
+    "description": "Please check our support articles for possible solutions. If the problem persists, save the logs using the button below and provide them to Ledger Support.",
+    "troubleshooting": "Click here for possible solutions",
     "restart": "重启",
-    "support": "联系客服",
-    "github": "GitHub"
-  },
-  "disclaimerModal": {
-    "title": "安全交易",
-    "desc_1": "发送和接收加密资产之前，请务必了解相关知识，以便做出知情决策。加密资产并不稳定，价格也可能上下起伏。请认真评估您的交易目标和您愿意承担的财务风险。",
-    "desc_2": "请注意，Ledger 不提供财务、税务或法律建议。您应自行做出这些决定，或咨询可靠的专家。",
-    "cta": "明白了"
+    "logs": "Save logs",
+    "dataFolder": "View user data"
   },
   "exportOperationsModal": {
     "title": "操作历史",
     "desc": "选择需保存操作历史的帐户",
-    "descSuccess": "您操作历史的 CSV 文件已被成功保存在所选文件夹下",
-    "titleSuccess": "操作历史保存成功",
+    "descSuccess": "The CSV file of your operation history was saved successfully in the selected folder",
+    "titleSuccess": "Operation history saved successfully",
     "cta": "保存",
     "ctaSuccess": "完成",
     "noAccounts": "暂无可导出的账户",
-    "selectedAccounts": "要包括的账户",
-    "selectedAccounts_plural": "要包括的帐户 ({{count}})"
+    "selectedAccounts": "Accounts to be included",
+    "selectedAccounts_plural": "Accounts to be included ({{count}})"
   },
   "language": {
     "system": "使用系统语言"
   },
+  "theme": {
+    "system": "Select the system theme",
+    "light": "Light",
+    "dusk": "Dusk",
+    "dark": "Dark"
+  },
   "onboarding": {
     "breadcrumb": {
       "selectDevice": "设备选择",
-      "selectPIN": "PIN 码",
+      "selectPIN": "PIN",
       "writeSeed": "恢复短语",
       "setPassword": "密码锁",
       "analytics": "错误和分析"
     },
     "start": {
       "title": "欢迎使用 Ledger Live",
+      "themeDesc": "Let's start by choosing how Ledger Live looks to you.\nYou can change this again in your settings.",
       "startBtn": "入门指南"
     },
     "init": {
       "title": "开始使用您的 Ledger 设备",
       "newDevice": {
-        "title": "初始化为新设备"
+        "title": "Set up as new device"
       },
       "restoreDevice": {
-        "title": "通过恢复短语恢复设备配置"
+        "title": "Restore device from Recovery phrase"
       },
       "initializedDevice": {
-        "title": "使用已初始化设备"
+        "title": "Skip device setup"
       }
     },
     "noDevice": {
@@ -731,105 +1573,104 @@
       "buyNew": {
         "title": "购买 Ledger 设备"
       },
-      "trackOrder": {
-        "title": "跟踪您的订单"
-      },
       "learnMore": {
         "title": "了解 Ledger"
       }
     },
     "selectDevice": {
       "title": "选择您的设备",
-      "usbOnly": "usb only",
-      "usbOnlyTooltip": "Ledger Live desktop currently does not support Bluetooth"
+      "usbOnly": "USB only",
+      "usbOnlyTooltip": "Legger Live 桌面应用目前不支持蓝牙功能"
     },
     "selectPIN": {
       "disclaimer": {
-        "note1": "请您务必自己选择您的 PIN 码。",
+        "note1": "Always choose your own PIN.",
         "note2": "使用 8 位数密码以确保最佳安全性。",
-        "note3": "请勿使用自带 PIN 码或附有恢复短语的设备。"
+        "note3": "Never use a device with a pre-installed PIN or Recovery phrase."
       },
       "initialize": {
-        "title": "选择您的 PIN 码",
+        "title": "Choose your PIN",
         "instructions": {
           "nano": {
-            "step1": "将 {{productName}} 连接至您的电脑，同时按下两个按钮后开始。",
-            "step2": "Press the right button to select <1><0>{{configureAsNewDevice}}?</0></1>.",
-            "step3": "按左键或右键选择数字，同时按下两个按钮进行确认。",
-            "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
+            "step1": "Connect the {{productName}} to your computer.",
+            "step2": "Press the left or right button to navigate through the on-screen instructions.",
+            "step3": "Press both buttons to select <1><0>{{configureAsNewDevice }}</0></1>.",
+            "step4": "Press the left or right button to select a digit. Press both buttons together to confirm.",
+            "step5": "Select ✓ to confirm your PIN. Select ⬅ to erase a digit."
           },
           "nanoX": {
             "step1": "将 {{productName}} 连接至您的计算机。",
-            "step2": "Press both buttons to choose <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step2": "Press both buttons together to confirm <1><0>{{setUpAsNewDevice}}</0></1>.",
             "step3": "按下左键或右键选择数字。",
-            "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
+            "step4": "Select ✓ to confirm your PIN. Select ⬅ to erase a digit."
           },
           "blue": {
             "step1": "将 {{productName}} 连接至您的计算机。",
-            "step2": "Tap on <1><0>{{configureAsNewDevice}}</0></1>.",
-            "step3": "选择 4 到 8 位数的 PIN 码。"
+            "step2": "点击<1><0>{{configureAsNewDevice}}</0></1>。",
+            "step3": "Choose a PIN with 4 to 8 digits."
           }
         }
       },
       "restore": {
-        "title": "选择您的 PIN 码",
+        "title": "Choose your PIN",
         "instructions": {
           "nano": {
-            "step1": "将 {{productName}} 连接至您的电脑，同时按下两个按钮后开始。",
-            "step2": "Press the left button to cancel <1><0>{{configureAsNewDevice}}?</0></1>. Then press the right button to select <3><0>{{restoreConfiguration}}?</0></3>.",
-            "step3": "按左键或右键选择数字，同时按下两个按钮进行确认。",
-            "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
+            "step1": "Connect the {{productName}} to your computer.",
+            "step2": "Press the left or right button to navigate through the on-screen instructions.",
+            "step3": "Press both buttons to select <1><0>{{restoreConfiguration}}</0></1>.",
+            "step4": "Press the left or right button to select a digit. Press both buttons together to confirm.",
+            "step5": "Select ✓ to confirm your PIN. Select ⬅ to erase a digit."
           },
           "nanoX": {
             "step1": "将您的 {{productName}} 连接到您的计算机。",
             "step2": "按照 {{productName}} 屏幕上的说明同时按下两个按钮。",
-            "step3": "Press the left button to cancel <1><0>{{setUpAsNewDevice}}</0></1>.",
-            "step4": "Press the right button to select <1><0>{{restoreConfiguration}}</0></1>.",
-            "step5": "选择长度为 4 到 8 位的 PIN 码。"
+            "step3": "Press both buttons to select <1><0>{{restoreConfiguration}}</0></1>.",
+            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
             "step1": "将 {{productName}} 连接至您的计算机。",
-            "step2": "Tap on <1><0>{{restoreConfiguration}}</0></1>.",
-            "step3": "选择 4 到 8 位数的 PIN 码。"
+            "step2": "轻击<1><0>{{restoreConfiguration}}</0></1>。",
+            "step3": "Choose a PIN with 4 to 8 digits."
           }
         }
       }
     },
     "writeSeed": {
       "initialize": {
-        "title": "保存您的恢复短语",
-        "desc": "您的设备将显示一组 24 词恢复短语来备份您的私钥",
+        "title": "Write down your Recovery phrase",
+        "desc": "Your 24-word Recovery phrase is the <1>only backup</1> of all your private keys.",
         "nano": {
-          "step1": "Write <1><0>{{seedWord1}}</0></1> in position 1 on a blank Recovery sheet.",
-          "step2": "按下右键以继续，直至 24 个助记词输入完成。",
-          "step3": "请确认您的恢复短语：选择并同时按下两个按钮验证每个助记词。"
+          "step1": "在空白恢复短语列表上的位置 1 记下<1><0>{{seedWord1}}</0></1>。",
+          "step2": "Press the right button and continue to write down all 24 words.",
+          "step3": "Confirm each word of your Recovery phrase: select it then confirm it by pressing both buttons together."
         },
         "blue": {
-          "step1": "在空白恢复短语列表中按顺序记下每个助记词。",
-          "step2": "Tap <1><0>{{seedNext}}</0></1> and write down all words until the <3><0>{{seedConfirmation}}</0></3> screen appears.",
-          "step3": "键入每个助记词，以确认您的恢复短语。"
+          "step1": "Write down each word on a blank Recovery sheet in the exact order.",
+          "step2": "点击<1><0>{{seedNext}}</0></1>，输入所有助记词直至屏幕上出现<3><0>{{seedConfirmation}}</0></3>。",
+          "step3": "Enter each word to confirm your Recovery phrase."
         }
       },
       "restore": {
-        "title": "输入您的恢复短语",
-        "desc": "输入您在恢复短语列表上中记下的恢复短语助记词。",
+        "title": "Enter your Recovery phrase",
+        "desc": "Enter the Recovery phrase using your Recovery sheet.",
         "nano": {
-          "step1": "选择您的恢复短语的长度。",
-          "step2": "Enter the first letters of <1><0>{{seedWord1}}</0></1> until suggested words appear.",
-          "step3": "Choose <1><0>{{seedWord1}}</0></1> from the suggested words by pressing both buttons.",
-          "step4": "重复该过程，直至完成最后一个助记词。"
+          "step1": "Choose the length of your Recovery phrase.",
+          "step2": "Enter the first letters of <1><0>{{seedWord1}}</0></1> until the suggestions appear.",
+          "step3": "Choose <1><0>{{seedWord1}}</0></1> from the suggested words by pressing both buttons together.",
+          "step4": "Repeat the process for all words."
         },
         "blue": {
-          "step1": "选择您的恢复短语的长度。",
-          "step2": "输入您恢复短语中的第一个助记词，显示该助记词后点击该词。",
-          "step3": "重复该过程，直至完成最后一个助记词。"
+          "step1": "Select the length of your Recovery phrase.",
+          "step2": "Type the first word of your Recovery phrase. Tap the word when it appears.",
+          "step3": "Repeat the process for all words."
         }
       },
       "disclaimer": {
-        "note1": "请仔细将您的 24 词恢复短语保存在安全的地方。",
-        "note2": "确保不要将您的恢复短语告知任何人。",
-        "note3": "Ledger 不会保留您恢复短语的任何备份。",
-        "note4": "请勿使用自带 PIN 码或附有恢复短语的设备。"
+        "note1": "Anyone who has your Recovery phrase also has your crypto assets.",
+        "note2": "Never use a device with a pre-installed PIN or Recovery phrase.",
+        "note3": "Store your Recovery phrase in a safe place, out of sight.",
+        "note4": "Ledger does not store your private keys, nor ever asks for them."
       }
     },
     "genuineCheck": {
@@ -837,10 +1678,10 @@
       "descGeneric": "继续之前，请完成安全检查表",
       "descRestore": "开始之前请确认：",
       "step1": {
-        "title": "您是否自行选择了您的 PIN 码？"
+        "title": "Did you choose your own PIN?"
       },
       "step2": {
-        "title": "您是否已自行保存您的恢复短语？"
+        "title": "Did you save your own Recovery phrase?"
       },
       "step3": {
         "title": "您的 Ledger 设备是否为正版？"
@@ -852,37 +1693,35 @@
       },
       "errorPage": {
         "title": {
-          "pinFailed": "没有选择您自己的 PIN 码？",
-          "recoveryPhraseFailed": "您是否已自行保存您的恢复短语？",
-          "isGenuineFail": "糟糕，您的设备似乎不是正版…"
+          "pinFailed": "Did you choose your own PIN?",
+          "recoveryPhraseFailed": "Did you save your own Recovery phrase?"
         },
         "desc": {
-          "pinFailed": "请勿使用自带 PIN 码的设备。若有任何疑问，请随时联系我们。",
-          "recoveryPhraseFailed": "保存只显示在您的设备上的恢复短语，且勿告知他人。如有疑问，请联系我们。",
-          "isGenuineFail": "您的设备未通过连接到 Ledger 安全服务器所需的真伪测试。请联系 Ledger 客服以获取帮助。"
+          "pinFailed": "Never use a device with a pre-installed PIN. Please contact Ledger Support if in doubt.",
+          "recoveryPhraseFailed": "Save the Recovery phrase only if it is displayed on your device, to you alone. Please contact Ledger Support if in doubt."
         }
       }
     },
     "setPassword": {
       "title": "密码锁（可选）",
-      "desc": "设置密码，防止您计算机上的 Ledger Live 数据受到未经授权的访问，包括账户名、交易和公开地址等。",
+      "desc": "Set a password to secure the Ledger Live data on your computer, including account names, balances, transactions and public addresses",
       "disclaimer": {
-        "note1": "确保记住您的密码。勿告知他人。",
-        "note2": "如丢失密码，则需要重置 Ledger Live 和重新添加账户。",
+        "note1": "Keep your password safe. Do not share it.",
+        "note2": "Losing your password means resetting Ledger Live and adding the accounts again.",
         "note3": "重置 Ledger Live 不会影响您的加密资产。"
       }
     },
     "analytics": {
       "title": "缺陷和分析",
-      "desc": "共享匿名数据，帮助改进 Ledger 安全产品和服务",
+      "desc": "Share anonymized data to help Ledger improve the security of its products and services",
       "shareAnalytics": {
         "title": "分析",
-        "desc": "启用分析，帮助 Ledger 改进用户体验。",
+        "desc": "Enable analytics to help Ledger improve user experience.",
         "mandatoryContextual": {
           "item1": "点击数",
           "item2": "应用内页面访问数",
           "item3": "重定向到网页",
-          "item4": "操作：发送、接收、锁定等",
+          "item4": "Actions: send, receive, lock, etc",
           "item5": "页末滚动",
           "item6": "应用程序安装或卸载及版本信息",
           "item7": "账户数量、加密资产种类数量和操作数量",
@@ -904,70 +1743,192 @@
           "item2": "Ledger Live 版本、语言和地区",
           "item3": "OS 版本、语言和地区"
         }
-      },
-      "terms": {
-        "title": "条款 *",
-        "desc": "若继续，则表明您已阅读并同意<1>使用条款</1>和<3>隐私政策</3>。"
       }
     },
     "finish": {
       "title": "您的设备已准备就绪！",
-      "desc": "在您的设备上安装一些应用程序，并访问资产组合",
+      "desc": "Install apps on your device and access the Portfolio",
       "openAppButton": "打开 Ledger Live"
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having a hard time connecting your device?"
+    "desc": "无法连接您的设备？"
+  },
+  "TransactionConfirm": {
+    "title": "Please confirm the operation on your device to finalize it",
+    "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
+    "warningWording": {},
+    "titleWording": {
+      "send": "Please confirm on your device to finalize the operation",
+      "claimReward": "Please confirm on your device to finalize the operation",
+      "freeze": "Please confirm on your device to finalize the operation",
+      "unfreeze": "Please confirm on your device to finalize the operation",
+      "vote": "Please confirm on your device to finalize the operation",
+      "delegate": "Please confirm on your device to finalize the operation",
+      "undelegate": "Please confirm on your device to finalize the operation",
+      "redelegate": "Please confirm on your device to finalize the operation",
+      "claimRewardCompound": "Please confirm on your device to finalize the operation"
+    },
+    "recipientWording": {
+      "send": "recipient",
+      "delegate": "validator",
+      "undelegate": "validator",
+      "claimReward": "rewards recipient",
+      "optIn": "recipient"
+    },
+    "votes": "Votes ({{count}})"
+  },
+  "RecipientField": {
+    "placeholder": "Enter {{currencyName}} address"
+  },
+  "Terms": {
+    "title": "Terms of Use",
+    "read": "Read the Terms of Use",
+    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
+  },
+  "families": {
+    "stellar": {
+      "memo": "Memo",
+      "memoType": {
+        "MEMO_TEXT": "Memo Text",
+        "NO_MEMO": "No Memo",
+        "MEMO_ID": "Memo ID",
+        "MEMO_HASH": "Memo Hash",
+        "MEMO_RETURN": "Memo Return"
+      },
+      "whatsMemo": "What is a memo?",
+      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+    },
+    "cosmos": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional",
+      "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    }
   },
   "errors": {
     "generic": {
       "title": "{{message}}",
-      "description": "出错了。请重试或联系我们。"
+      "description": "Something went wrong. Please retry or contact Ledger Support."
+    },
+    "AccountAwaitingSendPendingOperations": {
+      "title": "There is a pending operation for this account.",
+      "description": "Wait for the operation to go through."
     },
     "AccountNameRequired": {
       "title": "账户名为必填",
-      "description": "请提供账户名"
+      "description": "Please enter an account name"
     },
     "AccountNotSupported": {
-      "title": "Account not supported.",
-      "description": "Please retry or contact Support ({{reason}})"
+      "title": "不支持该账户。",
+      "description": "请重试或联系客服 ({{reason}})"
     },
-    "BtcUnmatchedApp": {
-      "title": "应用程序错误",
-      "description": "打开您的设备上的‘{{managerAppName}}’应用程序"
+    "AlgorandASANotOptInInRecipient": {
+      "title": "Recipient account has not opted in the selected ASA."
+    },
+    "AmountRequired": {
+      "title": "Amount required"
     },
     "NoAccessToCamera": {
-      "title": "Please ensure your system has a camera, that it's not in use by another application and that Ledger Live has permission to use it.",
+      "title": "Please ensure your system has a camera, that it is not in use by another application and that Ledger Live has permission to use it.",
       "description": ""
     },
+    "ClaimRewardsFeesWarning": {
+      "title": "The rewards are smaller than the estimated fees to claim them",
+      "description": ""
+    },
+    "CosmosBroadcastCodeInternal": {
+      "title": "Something went wrong (Error #1)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeTxDecode": {
+      "title": "Something went wrong (Error #2)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeInvalidSequence": {
+      "title": "Invalid sequence",
+      "description": "Please try the operation again"
+    },
+    "CosmosBroadcastCodeUnauthorized": {
+      "title": "Unauthorized signature",
+      "description": "This account is not authorized to sign this transaction"
+    },
+    "CosmosBroadcastCodeInsufficientFunds": {
+      "title": "Insufficient funds",
+      "description": "Make sure the account used has enough funds and try again"
+    },
+    "CosmosBroadcastCodeUnknownRequest": {
+      "title": "Something went wrong (Error #6)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeInvalidAddress": {
+      "title": "Invalid address",
+      "description": "Please check the address and try again"
+    },
+    "CosmosBroadcastCodeInvalidPubKey": {
+      "title": "Something went wrong (Error #8)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeUnknownAddress": {
+      "title": "Unknown address",
+      "description": "Please check the address and try again"
+    },
+    "CosmosBroadcastCodeInsufficientCoins": {
+      "title": "Insufficient coins",
+      "description": "Make sure the account used has enough funds and try again"
+    },
+    "CosmosBroadcastCodeInvalidCoins": {
+      "title": "Something went wrong (Error #11)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeOutOfGas": {
+      "title": "Something went wrong (Error #12)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeMemoTooLarge": {
+      "title": "The Memo field is too long",
+      "description": "Please reduce the size of the memo text and try again"
+    },
+    "CosmosBroadcastCodeInsufficientFee": {
+      "title": "Something went wrong (Error #14)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeTooManySignatures": {
+      "title": "Something went wrong (Error #15)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeGasOverflow": {
+      "title": "Something went wrong (Error #16)",
+      "description": "Please contact Ledger Support"
+    },
+    "CosmosBroadcastCodeNoSignatures": {
+      "title": "Something went wrong (Error #17)",
+      "description": "Please contact Ledger Support"
+    },
     "CurrencyNotSupported": {
-      "title": "{{currencyName}} is not supported",
-      "description": "This crypto asset is not yet supported. Please contact us."
+      "title": "不支持 {{currencyName}}",
+      "description": "This crypto asset is not yet supported. Please contact Ledger Support."
     },
     "DeviceNotGenuine": {
       "title": "可能不是正版",
-      "description": "请求 Ledger 客服帮助"
+      "description": "Request assistance from Ledger Support"
     },
     "DeviceGenuineSocketEarlyClose": {
       "title": "对不起，请重试 （正版-结束）",
       "description": null
     },
     "DeviceInOSUExpected": {
-      "title": "Sorry, update failed",
-      "description": "Please retry or contact Ledger Support"
+      "title": "抱歉，更新失败",
+      "description": "请重试或联系 Ledger 客服。"
     },
     "DeviceHalted": {
-      "title": "Please restart your Ledger device and retry",
-      "description": "An unexpected error occurred, so please try again"
+      "title": "请重新启动您的 Ledger 设备并重试",
+      "description": "An unexpected error occurred. Please try again"
     },
     "DeviceSocketFail": {
-      "description": "请重试"
+      "title": "Please restart your Ledger device and retry",
+      "description": "An unexpected error occurred. Please try again. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "抱歉，连接失败",
-      "description": "请重试"
-    },
-    "DeviceSocketNoHandler": {
       "title": "抱歉，连接失败",
       "description": "请重试"
     },
@@ -976,8 +1937,8 @@
       "description": "请重试"
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Oops, device disconnected",
-      "description": "The connection to the device was lost during an operation, please try again"
+      "title": "糟糕，设备断开连接",
+      "description": "The connection to the device was lost during an operation. Please try again"
     },
     "EnpointConfig": {
       "title": "端点无效",
@@ -988,51 +1949,74 @@
       "description": "尝试设置自定义费用 (status: {{status}})"
     },
     "FirmwareOrAppUpdateRequired": {
-      "title": "Firmware or app update required",
-      "description": "Please use the Manager to uninstall all apps and check if a firmware update is available before reinstalling them"
+      "title": "固件或应用程序需更新",
+      "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them"
+    },
+    "FirmwareNotRecognized": {
+      "title": "Device firmware is not recognized",
+      "description": "Please contact Ledger Support"
     },
     "HardResetFail": {
       "title": "糟糕，无法重置",
-      "description": "请重试，如有疑问，请随时联系我们"
+      "description": "Please try again or contact Ledger Support if in doubt"
     },
     "LatestMCUInstalledError": {
       "title": "糟糕，没有更新",
       "description": "无需尝试更新设备的微控制器。如果您的设备出现问题，请联系 Ledger 客服。"
     },
     "LedgerAPI4xx": {
+      "title": "{{message}}",
       "description": "请检查您的连接后重试，或联系 Ledger 客服。"
     },
     "LedgerAPI5xx": {
       "title": "抱歉，请重试。",
-      "description": "服务器无法处理您的请求。请稍后再试，或联系Ledger客服。 {{message}}"
+      "description": "The server could not handle your request. Please try again later or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "抱歉，{{currencyName}} 服务不可用",
       "description": "请重试或联系 Ledger 客服"
     },
-    "ManagerAPIsFail": {
-      "title": "抱歉，Manager 服务暂不可用",
-      "description": "请检查网络状态"
-    },
     "ManagerAppAlreadyInstalled": {
       "title": "抱歉，该应用已安装",
       "description": "检查您的设备，查看已安装了哪些应用程序"
     },
-    "ManagerAppRelyOnBTC": {
-      "title": "需要安装比特币和以太币应用程序",
-      "description": "首先，请安装最新的比特币和以太币应用程序"
+    "ManagerAppDepInstallRequired": {
+      "title": "{{dependency}} app required",
+      "description": "If the {{dependency}} app is already installed, please reinstall it with the latest version"
+    },
+    "ManagerAppDepUninstallRequired": {
+      "title": "Sorry, this app is required",
+      "description": "You must first uninstall all apps that require the {{appName}} app"
     },
     "ManagerDeviceLocked": {
-      "title": "请解锁您的设备",
-      "description": "您的设备已锁定，请解锁"
+      "title": "Your device is locked",
+      "description": "Please unlock it"
     },
     "ManagerFirmwareNotEnoughSpace": {
-      "title": "Uninstall all apps from your device",
-      "description": "The private keys providing access to your crypto assets will stay safe on your device and should be backed up on your recovery sheet."
+      "title": "请卸载您设备上的所有应用程序",
+      "description": "The private keys to access your crypto assets will stay safe on your device and must be backed up on your Recovery sheet."
     },
     "ManagerNotEnoughSpace": {
       "title": "抱歉，剩余存储空间不足",
-      "description": "Uninstall some apps to make space. The private keys providing access to your crypto assets will stay safe on your device."
+      "description": "Uninstall some apps to free up space. The private keys to access your crypto assets will stay safe on your device."
+    },
+    "ManagerQuitPage": {
+      "install": {
+        "title": "Finish app installation in progress?",
+        "description": "Quitting the Manager will terminate the app installation. Please finish the installation to install the apps in the queue.",
+        "stay": "Finish install"
+      },
+      "uninstall": {
+        "title": "Finish app uninstallation in progress?",
+        "description": "Quitting the Manager will terminate the app uninstallations in progress.",
+        "stay": "Finish uninstalling"
+      },
+      "update": {
+        "title": "Finish app updates in progress?",
+        "description": "Quitting the Manager will terminate the app updates in progress.",
+        "stay": "Finish updates"
+      },
+      "quit": "Quit Manager"
     },
     "ManagerUninstallBTCDep": {
       "title": "抱歉，需要安装此应用程序",
@@ -1043,93 +2027,97 @@
       "description": "请检查您的网络连接"
     },
     "NoAddressesFound": {
-      "title": "抱歉，未找到账户",
-      "description": "地址计算出错，请重试或联系 Ledger 客服"
+      "title": "Sorry, no accounts were found",
+      "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
     },
     "NotEnoughBalance": {
       "title": "糟糕，余额不足",
-      "description": "确保借记账户有足够余额"
+      "description": "Make sure the account used has enough funds"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "收件人地址无效。请至少发送 {{minimalAmount}} 次进行激活"
     },
     "NotEnoughGas": {
-      "title": "ETH balance in parent account insufficient for network fees"
+      "title": "The ETH balance in the parent account is insufficient for network fees"
     },
     "PasswordsDontMatch": {
-      "title": "密码不匹配",
+      "title": "The Passwords don't match",
       "description": "请再试一次"
     },
     "PasswordIncorrect": {
-      "title": "您输入的密码有误",
+      "title": "The password entered is incorrect",
       "description": "请再试一次"
     },
-    "SelectExchangesLoadError": {
-      "title": "无法加载",
-      "description": "请稍后再试"
-    },
     "TimeoutError": {
-      "title": "糟糕，已超时",
-      "description": "服务器响应时间过长，请重试"
+      "title": "Oops, a timeout occurred",
+      "description": "It took too long for the server to respond. Please try again"
     },
     "TimeoutTagged": {
-      "title": "糟糕，已超时 ({{tag}})",
+      "title": "Oops, a timeout occurred ({{tag}})",
       "description": "服务器响应时间过长"
     },
     "TransportError": {
-      "title": "出错了。请重新连接您的设备",
+      "title": "Something went wrong. Please reconnect your device",
+      "description": "{{message}}"
+    },
+    "TransportRaceCondition": {
+      "title": "Something went wrong. Please reconnect your device",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "出错了。请重新连接您的设备",
+      "title": "Something went wrong. Please reconnect your device",
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
       "title": "请打开 {{appName}} 应用",
-      "description": "在我们寻找您的帐户时，请您保持 {{appName}} 应用程序打开"
+      "description": "Keep the {{appName}} app open while we find your accounts"
     },
     "UnexpectedBootloader": {
       "title": "抱歉，您的设备无法进入启动加载程序模式",
-      "description": "请重启您的设备或联系我们"
+      "description": "Please restart your device or contact Ledger Support"
     },
     "UserRefusedAllowManager": {
-      "title": "Manager 在设备上被拒绝"
+      "title": "Manager denied on device"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "更新已取消",
+      "title": "Update cancelled",
       "description": "请重试或联系 Ledger 支持人员"
     },
     "UserRefusedOnDevice": {
-      "title": "设备上的交易被拒绝",
-      "description": "请重试，如有疑问，请随时联系 Ledger 客服"
+      "title": "Action rejected",
+      "description": "User rejected the operation on the device"
+    },
+    "TransactionRefusedOnDevice": {
+      "title": "Operation denied on device",
+      "description": "Please retry or contact Ledger Support if in doubt"
     },
     "UserRefusedAddress": {
       "title": "接收地址被拒",
-      "description": "请重试，如有疑问，请随时联系 Ledger 客服"
+      "description": "Please try again or contact Ledger Support if in doubt"
     },
     "UpdateYourApp": {
       "title": "需要更新应用程序",
       "description": "在管理器中卸载并重新安装 {{managerAppName}} 应用程序"
     },
     "DeviceOnDashboardExpected": {
-      "title": "返回到仪表板",
-      "description": "请回到您设备上的仪表板"
+      "title": "Return to the Dashboard",
+      "description": "Please navigate back to the Dashboard on your device"
     },
     "WebsocketConnectionError": {
-      "title": "抱歉，请重试（WebSocket 错误）",
+      "title": "Sorry, try again (connection error)",
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "抱歉，请重试 （WebSocket 错误）",
+      "title": "Sorry, try again (connection closed)",
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "“{{accountName}}”的设备或密码短语错误",
-      "description": "请使用所选账户的设备或密码短语"
+      "title": "Something went wrong",
+      "description": "Please check that your hardware wallet is set up with the Recovery phrase or passphrase associated to the selected account."
     },
     "DeviceAppVerifyNotSupported": {
       "title": "应用程序待更新",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "description": "请在管理器中卸载并重新安装 {{managerAppName}} 应用程序"
     },
     "InvalidAddress": {
       "title": "此 {{currencyName}} 地址无效"
@@ -1138,8 +2126,8 @@
       "title": "收币人地址与发币人地址相同"
     },
     "CantOpenDevice": {
-      "title": "糟糕，无法连接到设备",
-      "description": "已检测到设备，但连接失败。请重试，如果问题持续，请联系我们。"
+      "title": "Oops, couldn't connect to device",
+      "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
     },
     "ETHAddressNonEIP": {
       "title": "自动验证不可用：请仔细验证地址",
@@ -1149,14 +2137,153 @@
       "title": "无法扫描此二维码：此地址不支持自动验证"
     },
     "FeeNotLoaded": {
-      "title": "无法加载费率，请手动设置手续费"
+      "title": "Couldn't load fee rates. Please set manual fees"
     },
     "FeeRequired": {
       "title": "交易手续费为必填项"
     },
+    "GasLessThanEstimate": {
+      "title": "This may be too low. Please increase"
+    },
     "UnknownMCU": {
       "title": "MCU 版本未知",
       "description": "请联系 Ledger 客服"
+    },
+    "MCUNotGenuineToDashboard": {
+      "title": "Access dashboard to update",
+      "description": "",
+      "list": {
+        "1": "Disconnect and reconnect the USB cable without pressing any buttons.",
+        "2": "Press both buttons together three times to display the Dashboard.",
+        "3": "Open the Manager and click Update firmware."
+      }
+    },
+    "UnavailableTezosOriginatedAccountReceive": {
+      "title": "Cannot receive in subaccounts",
+      "description": "If you want to receive funds, please use the parent account"
+    },
+    "UnavailableTezosOriginatedAccountSend": {
+      "title": "Cannot send from subaccounts yet",
+      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+    },
+    "RecommendUndelegation": {
+      "title": "Please undelegate the account before emptying it"
+    },
+    "RecommendSubAccountsToEmpty": {
+      "title": "Please empty all subaccounts first"
+    },
+    "NotSupportedLegacyAddress": {
+      "title": "This legacy address format is no longer supported"
+    },
+    "BtcUnmatchedApp": {
+      "title": "That's the wrong app",
+      "description": "Open the '{{managerAppName}}' app on your device"
+    },
+    "DeviceNameInvalid": {
+      "title": "Please choose a device name without '{{invalidCharacters}}'"
+    },
+    "LedgerAPIErrorWithMessage": {
+      "title": "{{message}}",
+      "description": "Please retry or contact Ledger Support."
+    },
+    "ManagerAppRelyOnBTC": {
+      "title": "Bitcoin and Ethereum apps required",
+      "description": "Install the latest Bitcoin and Ethereum apps first."
+    },
+    "UserRefusedDeviceNameChange": {
+      "title": "Rename cancelled on device",
+      "description": "Try again and allow renaming on your device"
+    },
+    "SyncError": {
+      "title": "Synchronization error",
+      "description": "Some accounts could not be synchronized."
+    },
+    "TronNoFrozenForBandwidth": {
+      "title": "No assets to unfreeze",
+      "description": "You do not have assets to unfreeze associated to Bandwidth"
+    },
+    "TronNoFrozenForEnergy": {
+      "title": "No assets to unfreeze",
+      "description": "You do not have assets to unfreeze associated to Energy"
+    },
+    "TronUnfreezeNotExpired": {
+      "title": "Unfreeze is not available yet",
+      "description": "You need to wait 3 days after your last Freeze operation"
+    },
+    "TronVoteRequired": {
+      "title": "At least 1 vote is needed"
+    },
+    "TronInvalidVoteCount": {
+      "title": "Vote format is incorrect",
+      "description": "You can only vote using round numbers"
+    },
+    "TronRewardNotAvailable": {
+      "title": "Reward is not claimable yet",
+      "description": "You need to wait 24 hours between claims"
+    },
+    "TronNoReward": {
+      "title": "There is no reward to claim"
+    },
+    "TronInvalidFreezeAmount": {
+      "title": "Amount to freeze cannot be lower than 1"
+    },
+    "TronSendTrc20ToNewAccountForbidden": {
+      "title": "Sending TRC20 to a new account won't activate it",
+      "description": "The recipient account must be activated prior to sending TRC20 to it. Send either TRX or TRC10 to an account to activate it."
+    },
+    "TronUnexpectedFees": {
+      "title": "Additional fees may be applied"
+    },
+    "TronNotEnoughTronPower": {
+      "title": "Not enough votes available"
+    },
+    "TronTransactionExpired": {
+      "title": "Transaction has expired",
+      "description": "Signature must be applied within 30 seconds. Please try again."
+    },
+    "TronNotEnoughEnergy": {
+      "title": "Not enough Energy to send this token"
+    },
+    "PairingFailed": {
+      "title": "Pairing unsuccessful",
+      "description": "Please try again or contact Ledger Support if in doubt."
+    },
+    "GenuineCheckFailed": {
+      "title": "Genuine check failed",
+      "description": "Something went wrong. Please try again or contact Ledger Support if in doubt."
+    },
+    "EthAppPleaseEnableContractData": {
+      "title": "Please enable contract data in the Ethereum app settings"
+    },
+    "InvalidXRPTag": {
+      "title": "Invalid XRP Destination tag"
+    },
+    "NotEnoughBalanceToDelegate": {
+      "title": "Insufficient balance to delegate"
+    },
+    "NotEnoughDelegationBalance": {
+      "title": "Insufficient balance to delegate"
+    },
+    "NotEnoughBalanceInParentAccount": {
+      "title": "Insufficient balance in the parent account"
+    },
+    "NotEnoughSpendableBalance": {
+      "title": "Balance cannot be below {{minimumAmount}}"
+    },
+    "WrongAppForCurrency": {
+      "title": "Please open the {{expected}} app"
+    },
+    "FeeTooHigh": {
+      "title": "Network fees are above 10% of the amount"
+    },
+    "StellarWrongMemoFormat": {
+      "title": "Memo format is wrong"
+    },
+    "SourceHasMultiSign": {
+      "title": "Please disable multisign to send {{currencyName}}"
+    },
+    "StellarMemoRecommended": {
+      "title": "A memo may be required when sending to this recipient"
     }
   }
 }

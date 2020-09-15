@@ -1,182 +1,201 @@
 // @flow
 
-import 'helpers/live-common-setup'
-import 'helpers/live-common-setup-renderer'
-import 'helpers/experimental'
+import React from "react";
+import { connect } from "react-redux";
+import Transport from "@ledgerhq/hw-transport";
+import { NotEnoughBalance } from "@ledgerhq/errors";
+import { log } from "@ledgerhq/logs";
+import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
+import i18n from "i18next";
+import { remote, webFrame, ipcRenderer } from "electron";
+import { render } from "react-dom";
+import moment from "moment";
+import { reload, getKey } from "~/renderer/storage";
 
-import logger from 'logger'
-import LoggerTransport from 'logger/logger-transport-renderer'
-import React from 'react'
-import { remote, webFrame } from 'electron'
-import { render } from 'react-dom'
-import createHistory from 'history/createHashHistory'
-import moment from 'moment'
-import { runMigrations } from 'migrations'
+import "~/renderer/styles/global";
+import "~/renderer/live-common-setup";
+import "~/renderer/experimental";
+import "~/renderer/i18n/init";
 
-import createStore from 'renderer/createStore'
-import events from 'renderer/events'
-import { DEBUG_TICK_REDUX } from 'config/constants'
+import logger, { enableDebugLogger } from "~/logger";
+import LoggerTransport from "~/logger/logger-transport-renderer";
+import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from "~/config/global-tab";
+import sentry from "~/sentry/browser";
+import { setEnvOnAllThreads } from "~/helpers/env";
+import { command } from "~/renderer/commands";
+import Countervalues from "~/renderer/countervalues";
+import dbMiddleware from "~/renderer/middlewares/db";
+import createStore from "~/renderer/createStore";
+import events from "~/renderer/events";
+import { setAccounts } from "~/renderer/actions/accounts";
+import { fetchSettings, saveSettings, setDeepLinkUrl } from "~/renderer/actions/settings";
+import { lock, setOSDarkMode } from "~/renderer/actions/application";
 
-import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from 'config/global-tab'
-
-import { fetchAccounts } from 'actions/accounts'
-import { fetchSettings } from 'actions/settings'
-import { lock } from 'reducers/application'
 import {
   languageSelector,
   sentryLogsSelector,
   hideEmptyTokenAccountsSelector,
-} from 'reducers/settings'
-import { commandsById } from 'commands'
-import libcoreGetVersion from 'commands/libcoreGetVersion'
+} from "~/renderer/reducers/settings";
 
-import resolveUserDataDirectory from 'helpers/resolveUserDataDirectory'
-import db from 'helpers/db'
-import dbMiddleware from 'middlewares/db'
-import CounterValues from 'helpers/countervalues'
-import { setEnvOnAllThreads } from 'helpers/env'
+import ReactRoot from "~/renderer/ReactRoot";
+import AppError from "~/renderer/AppError";
 
-import { decodeAccountsModel, encodeAccountsModel } from 'reducers/accounts'
+logger.add(new LoggerTransport());
 
-import sentry from 'sentry/browser'
-import App from 'components/App'
-import AppError from 'components/AppError'
+if (process.env.NODE_ENV !== "production" || process.env.DEV_TOOLS) {
+  enableDebugLogger();
+}
 
-import 'styles/global'
+const rootNode = document.getElementById("react-root");
 
-logger.add(new LoggerTransport())
-
-const rootNode = document.getElementById('app')
-const userDataDirectory = resolveUserDataDirectory()
-
-const TAB_KEY = 9
-
-db.init(userDataDirectory)
+const TAB_KEY = 9;
 
 async function init() {
-  await runMigrations()
-  db.init(userDataDirectory)
-  db.registerTransform('app', 'accounts', { get: decodeAccountsModel, set: encodeAccountsModel })
+  checkLibs({
+    NotEnoughBalance,
+    React,
+    log,
+    Transport,
+    connect,
+  });
 
-  const history = createHistory()
-  const store = createStore({ history, dbMiddleware })
+  const store = createStore({ dbMiddleware });
 
-  const settings = await db.getKey('app', 'settings')
-  store.dispatch(fetchSettings(settings))
+  ipcRenderer.once("deep-linking", (event, url) => {
+    store.dispatch(setDeepLinkUrl(url));
+  });
 
-  const countervaluesData = await db.getKey('app', 'countervalues')
+  const initialSettings = await getKey("app", "settings", {});
+
+  store.dispatch(fetchSettings(initialSettings));
+
+  const countervaluesData = await getKey("app", "countervalues");
   if (countervaluesData) {
-    store.dispatch(CounterValues.importAction(countervaluesData))
+    store.dispatch(Countervalues.importAction(countervaluesData));
   }
 
-  const state = store.getState()
-  const language = languageSelector(state)
-  moment.locale(language)
+  const state = store.getState();
+  const language = languageSelector(state);
+  moment.locale(language);
+  i18n.changeLanguage(language);
 
-  const hideEmptyTokenAccounts = hideEmptyTokenAccountsSelector(state)
-  setEnvOnAllThreads('HIDE_EMPTY_TOKEN_ACCOUNTS', hideEmptyTokenAccounts)
+  const hideEmptyTokenAccounts = hideEmptyTokenAccountsSelector(state);
+  setEnvOnAllThreads("HIDE_EMPTY_TOKEN_ACCOUNTS", hideEmptyTokenAccounts);
 
-  sentry(() => sentryLogsSelector(store.getState()))
+  // TODO: DON'T FORGET SENTRY
+  sentry(() => sentryLogsSelector(store.getState()));
 
-  // FIXME IMO init() really should only be for window. any other case is a hack!
-  const isMainWindow = remote.getCurrentWindow().name === 'MainWindow'
+  const isMainWindow = remote.getCurrentWindow().name === "MainWindow";
 
-  const isAccountsDecrypted = await db.hasBeenDecrypted('app', 'accounts')
-  if (!isAccountsDecrypted) {
-    store.dispatch(lock())
+  let accounts = await getKey("app", "accounts", []);
+  if (accounts) {
+    const { starredAccountIds: ids } = state.settings;
+    if (ids && ids.length) {
+      // NB old settings.starredAccountIds migration, eventually we could drop it
+      await store.dispatch(saveSettings({ starredAccountIds: undefined }));
+      accounts = accounts.map(a => {
+        const starred = ids.includes(a.id);
+        const subAccounts = a.subAccounts
+          ? a.subAccounts.map(sa => (ids.includes(sa.id) ? { ...sa, starred: true } : sa))
+          : a.subAccounts;
+        return { ...a, starred, subAccounts };
+      });
+    }
+    await store.dispatch(setAccounts(accounts));
   } else {
-    await store.dispatch(fetchAccounts())
+    store.dispatch(lock());
   }
 
-  if (DEBUG_TICK_REDUX) {
-    setInterval(() => store.dispatch({ type: 'DEBUG_TICK' }), DEBUG_TICK_REDUX)
-  }
+  r(<ReactRoot store={store} language={language} />);
 
-  r(<App store={store} history={history} language={language} />)
-
-  // Only init events on MainWindow
   if (isMainWindow) {
-    webFrame.setVisualZoomLevelLimits(1, 1)
+    webFrame.setVisualZoomLevelLimits(1, 1);
 
-    events({ store })
+    const matcher = window.matchMedia("(prefers-color-scheme: dark)");
+    const updateOSTheme = () => store.dispatch(setOSDarkMode(matcher.matches));
+    matcher.addListener(updateOSTheme);
 
-    const libcoreVersion = await libcoreGetVersion.send().toPromise()
-    logger.log('libcore', libcoreVersion)
+    events({ store });
 
-    window.addEventListener('keydown', (e: SyntheticKeyboardEvent<any>) => {
+    const libcoreVersion = await command("libcoreGetVersion")().toPromise();
+    logger.log("libcore", libcoreVersion);
+
+    window.addEventListener("keydown", (e: SyntheticKeyboardEvent<any>) => {
       if (e.which === TAB_KEY) {
-        if (!isGlobalTabEnabled()) enableGlobalTab()
-        logger.onTabKey(document.activeElement)
+        if (!isGlobalTabEnabled()) enableGlobalTab();
+        logger.onTabKey(document.activeElement);
       }
-    })
+    });
 
-    window.addEventListener('click', () => {
-      if (isGlobalTabEnabled()) disableGlobalTab()
-    })
+    window.addEventListener("click", () => {
+      if (isGlobalTabEnabled()) disableGlobalTab();
+    });
+
+    window.addEventListener("beforeunload", async () => {
+      // This event is triggered when we reload the app, we want it to forget what it knows
+      reload();
+    });
   }
-  document.addEventListener(
-    'dragover',
-    (event: Event) => {
-      event.preventDefault()
-      return false
-    },
-    false,
-  )
 
   document.addEventListener(
-    'drop',
+    "dragover",
     (event: Event) => {
-      event.preventDefault()
-      return false
+      event.preventDefault();
+      return false;
     },
     false,
-  )
+  );
+
+  document.addEventListener(
+    "drop",
+    (event: Event) => {
+      event.preventDefault();
+      return false;
+    },
+    false,
+  );
 
   if (document.body) {
-    const classes = document.body.classList
-    let timer = 0
-    window.addEventListener('resize', () => {
+    const classes = document.body.classList;
+    let timer = 0;
+    window.addEventListener("resize", () => {
       if (timer) {
-        clearTimeout(timer)
-        timer = null
-      } else classes.add('stop-all-transition')
+        clearTimeout(timer);
+        timer = null;
+      } else classes.add("stop-all-transition");
 
       timer = setTimeout(() => {
-        classes.remove('stop-all-transition')
-        timer = null
-      }, 100)
-    })
+        classes.remove("stop-all-transition");
+        timer = null;
+      }, 500);
+    });
   }
 
   // expose stuff in Windows for DEBUG purpose
-
   window.ledger = {
-    commands: commandsById,
     store,
-    db,
-  }
+  };
 }
 
 function r(Comp) {
   if (rootNode) {
-    render(Comp, rootNode)
+    render(Comp, rootNode);
   }
 }
 
 init()
   .catch(e => {
-    logger.critical(e)
-    r(<AppError error={e} language="en" />)
+    logger.critical(e);
+    r(<AppError error={e} language="en" />);
   })
   .catch(error => {
-    // catch the catch! (e.g. react fails to render)
-    const pre = document.createElement('pre')
+    const pre = document.createElement("pre");
     pre.innerHTML = `Ledger Live crashed. Please contact Ledger support.
-${String(error)}
-${String((error && error.stack) || 'no stacktrace')}`
+  ${String(error)}
+  ${String((error && error.stack) || "no stacktrace")}`;
     if (document.body) {
-      document.body.style.padding = '50px'
-      document.body.innerHTML = ''
-      document.body.appendChild(pre)
+      document.body.style.padding = "50px";
+      document.body.innerHTML = "";
+      document.body.appendChild(pre);
     }
-  })
+  });

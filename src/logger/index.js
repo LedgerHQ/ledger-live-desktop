@@ -1,6 +1,3 @@
-const logger =
-  process.env.STORYBOOK_ENV || process.env.NODE_ENV === 'test'
-    ? require('./logger-storybook')
-    : require('./logger')
+const logger = require("./logger");
 
-module.exports = logger
+module.exports = logger;

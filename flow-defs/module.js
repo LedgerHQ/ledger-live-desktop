@@ -1,7 +1,7 @@
-/* eslint-disable */
+// @flow
 
 declare var module: {
   hot: {
-    accept(path: string, callback: () => void): void,
+    accept: (path: string, callback: () => void) => void,
   },
 }
