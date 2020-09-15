@@ -1,7 +1,7 @@
 // @flow
 
 import { combineReducers } from "redux";
-import type { CounterValuesState } from "@ledgerhq/live-common/lib/countervalues/types";
+import type { CounterValuesState } from "@ledgerhq/live-common/lib/countervalues-old/types";
 
 import CounterValues from "../countervalues";
 import accounts from "./accounts";

@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import LRU from "lru-cache";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
-import type { Exchange } from "@ledgerhq/live-common/lib/countervalues/types";
+import type { Exchange } from "@ledgerhq/live-common/lib/countervalues-old/types";
 import logger from "~/logger";
 import Track from "~/renderer/analytics/Track";
 import CounterValues from "~/renderer/countervalues";
