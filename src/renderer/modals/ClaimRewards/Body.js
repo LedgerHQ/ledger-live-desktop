@@ -57,7 +57,6 @@ const steps: Array<St> = [
     id: "rewards",
     label: <Trans i18nKey="claimReward.steps.rewards.title" />,
     component: StepRewards,
-    noScroll: true,
     footer: StepRewardsFooter,
   },
   {
