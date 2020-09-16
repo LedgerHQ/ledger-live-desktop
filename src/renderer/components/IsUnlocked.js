@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -123,6 +123,25 @@ const IsUnlocked = ({ children }: Props) => {
       setIsHardResetting(false);
     }
   }, []);
+
+  useEffect(() => {
+    let subscribed = false;
+    const onKeyDown = () => {
+      const input = document.getElementById("lockscreen-password-input");
+      if (input) {
+        input.focus();
+      }
+    };
+    if (isLocked) {
+      subscribed = true;
+      window.addEventListener("keydown", onKeyDown);
+    }
+    return () => {
+      if (subscribed) {
+        window.removeEventListener("keydown", onKeyDown);
+      }
+    };
+  }, [isLocked]);
 
   if (isLocked) {
     return (
