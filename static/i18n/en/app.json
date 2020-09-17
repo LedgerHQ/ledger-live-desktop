@@ -130,6 +130,12 @@
       "exchange": "Exchange",
       "history": "History"
     },
+    "history": {
+      "empty": {
+        "title": "No History",
+        "description": "You don’t have any swap history."
+      }
+    },
     "landing": {
       "title": "Swap your assets",
       "continue": "Continue",
@@ -586,7 +592,8 @@
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
     "swap":{
-      "confirm": "Please confirm on your device to finalize the operation"
+      "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
+      "confirm": "Confirm Swap transaction"
     }
   },
   "manager": {
