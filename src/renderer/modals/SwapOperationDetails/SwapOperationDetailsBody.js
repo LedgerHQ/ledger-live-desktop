@@ -160,7 +160,7 @@ const SwapOperationDetailsBody = ({
         <Box p={1}>
           <Status status={status}>
             <IconSwap size={27} />
-            {status !== "confirming" ? (
+            {status.includes("ing") ? (
               <WrapperClock>
                 <IconClock size={16} />
               </WrapperClock>
