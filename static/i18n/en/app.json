@@ -137,43 +137,42 @@
     },
     "missingApp": {
       "title": "Please install the Exchange app on your device",
-      "subtitle": "Go to manager and install Exchange app to swap assets",
+      "subtitle": "Go to manager and install Exchange app to swap assets.",
       "cta": "Go to manager"
     },
     "outdatedApp": {
       "title": "Please update the Exchange app on your device",
-      "subtitle": "Go to manager and update Exchange app to swap assets",
+      "subtitle": "Go to manager and update Exchange app to swap assets.",
       "cta": "Go to manager"
     },
     "kyc": {
       "title": "Welcome to Swap",
-      "subtitle": "Exchange crypto assets directly from your Ledger device. This service is not available in the US and a few other countries",
-      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures"
+      "subtitle": "Exchange crypto assets directly from your Ledger device. This service is not available in the US and a few other countries.",
+      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
     },
     "form": {
       "from": {
         "title": "From",
         "account": "Account",
-        "amount": "Amount to swap",
-        "currency": "Asset type",
+        "amount": "Amount to send",
+        "currency": "Crypto asset",
         "balance": "Balance: {{balance}}"
       },
       "to": {
         "title":  "To",
-        "account": "Parent account",
-        "amount": "I will receive",
-        "currency": "Asset type",
+        "account": "Account",
+        "amount": "Amount to receive",
+        "currency": "Crypto asset",
         "addAccountCTA": "Add new account"
       },
       "exchange": "Exchange",
       "addAccount": "Add Account",
       "openManager": "Open Manager",
       "helpCTA": "What is Swap?",
-      "bubble": "We use a fixed rate, this is the exact amount you will receive",
+      "bubble": "We use a fixed rate, this is the exact amount you will receive.",
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
-      "noApp": "You don't have the {{currencyName}} app installed",
-      "outdatedApp": "{{currencyName}} app needs to be updated",
-      "warning": "The swap provider has changed its rates since your last session"
+      "noApp": "{{currencyName}} app not installed.",
+      "outdatedApp": "{{currencyName}} app update available."
     },
     "modal": {
       "title": "Swap",
@@ -183,13 +182,13 @@
           "title": "Summary",
           "from": "From",
           "to": "To",
-          "toExchange": "Amount send",
-          "toReceive": "Amount receive",
+          "toExchange": "Amount to send",
+          "toReceive": "Amount to receive",
           "provider": "Provider",
-          "terms":"Terms & Conditions",
+          "terms":"Terms & Conditions.",
           "disclaimer": {
             "header": "Details",
-            "description": "\"By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by Changelly's"
+            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by Changelly's"
           },
           "details": {
             "provider": "Provider",
@@ -200,15 +199,13 @@
           "title": "Device"
         },
         "finished": {
-          "title": "Pending operation",
+          "title": "Pending",
           "swap": "Your Swap ID:",
           "seeDetails": "See details",
           "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0>{{provider}}</0> later",
           "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets"
         }
-      },
-
-      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet mi quam. Etiam semper justo et augue dignissim placerat non at risus."
+      }
     },
     "operationDetailsModal": {
       "title": "Operation details",
@@ -218,8 +215,8 @@
       "date": "Date",
       "from": "From",
       "to": "To",
-      "initialAmount": "Initial Amount",
-      "creditedAmount": "Credited Amount"
+      "initialAmount": "Amount sent",
+      "creditedAmount": "Amount received"
     }
   },
   "account": {
@@ -588,7 +585,7 @@
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
     "swap":{
-      "confirm": "Confirm SWAP transaction"
+      "confirm": "Please confirm on your device to finalize the operation"
     }
   },
   "manager": {
@@ -2153,8 +2150,8 @@
       "description": "Please try again"
     },
     "SwapGenericAPIError":{
-      "title": "Something went wrong confirming the swap",
-      "description": "It is likely the exchange rate has expired. Please try again"
+      "title": "Exchange rate expired",
+      "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
     },
     "TimeoutError": {
       "title": "Oops, a timeout occurred",
