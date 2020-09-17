@@ -88,6 +88,7 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
     { okCurrencies, defaultCurrency, defaultAccount },
     initState,
   );
+
   const patchExchange = useCallback(payload => dispatch({ type: "patchExchange", payload }), [
     dispatch,
   ]);
@@ -99,19 +100,21 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
   const [isTimerVisible, setTimerVisibility] = useState(true);
   const { fromAccount, fromParentAccount, toAccount, toParentAccount } = exchange;
   const { status, setTransaction, setAccount, transaction } = useBridgeTransaction();
+
   const ratesExpiration = useMemo(
     () => (ratesTimestamp ? new Date(ratesTimestamp.getTime() + ratesExpirationThreshold) : null),
     [ratesTimestamp],
   );
+
   const onStartSwap = useCallback(() => {
     setTimerVisibility(false);
     reduxDispatch(openModal("MODAL_SWAP", { swap, transaction, ratesExpiration }));
   }, [ratesExpiration, reduxDispatch, swap, transaction]);
 
-  const validFrom = useMemo(() => accounts.filter(isSameCurrencyFilter(fromCurrency)), [
-    accounts,
-    fromCurrency,
-  ]);
+  const validFrom = useMemo(
+    () => accounts.filter(a => isSameCurrencyFilter(fromCurrency)(a) && a.balance.gt(0)),
+    [accounts, fromCurrency],
+  );
 
   const validTo = useMemo(
     () =>
@@ -224,7 +227,7 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
     async function getEstimatedMaxSpendable() {
       const newUseAllAmount = !useAllAmount;
       if (newUseAllAmount) {
-        const bridge = await getAccountBridge(fromAccount);
+        const bridge = getAccountBridge(fromAccount, fromParentAccount);
         const fromAmount = await bridge.estimateMaxSpendable({
           account: fromAccount,
           parentAccount: fromParentAccount,
@@ -267,7 +270,9 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
             onCurrencyChange={fromCurrency => {
               dispatch({ type: "setFromCurrency", payload: { fromCurrency } });
             }}
-            onAccountChange={a => dispatch({ type: "setFromAccount", payload: { fromAccount: a } })}
+            onAccountChange={(fromAccount, fromParentAccount) =>
+              dispatch({ type: "setFromAccount", payload: { fromAccount, fromParentAccount } })
+            }
             onAmountChange={fromAmount => {
               dispatch({ type: "setFromAmount", payload: { fromAmount } });
             }}

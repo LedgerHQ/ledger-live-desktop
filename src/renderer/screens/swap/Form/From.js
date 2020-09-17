@@ -89,6 +89,7 @@ const From = ({
     allAccounts: validAccounts,
     defaultCurrency,
     defaultAccount,
+    hideEmpty: true,
   });
 
   const unit = currency && currency.units[0];
@@ -110,11 +111,11 @@ const From = ({
   const onAccountSelected = useCallback(
     (account, subAccount) => {
       if (!account) return;
-      const toAccount = subAccount || account;
-      const toParentAccount = subAccount ? account : null;
-      // TODO Ideally we would maintain the account/parentAccount paradigm instead of account/subAccount
+      const fromAccount = subAccount || account;
+      const fromParentAccount = subAccount ? account : null;
+
       setAccount(account, subAccount);
-      onAccountChange(toAccount, toParentAccount);
+      onAccountChange(fromAccount, fromParentAccount);
     },
     [onAccountChange, setAccount],
   );
