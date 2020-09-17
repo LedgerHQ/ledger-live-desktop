@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "~/renderer/components/Box";
 import { Trans, withTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -37,9 +37,13 @@ const Landing = ({
   onContinue: any,
 }) => {
   const hasAcceptedSwapKYC = useSelector(hasAcceptedSwapKYCSelector);
-  if (providers && providers.length && hasAcceptedSwapKYC) {
-    onContinue();
-  }
+
+  useEffect(() => {
+    if (providers && providers.length && hasAcceptedSwapKYC) {
+      onContinue();
+    }
+  }, [hasAcceptedSwapKYC, onContinue, providers]);
+
   const showKYC = providers && !hasAcceptedSwapKYC;
 
   return showKYC ? (
