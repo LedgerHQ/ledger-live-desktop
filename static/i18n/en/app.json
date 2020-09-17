@@ -125,6 +125,7 @@
   },
   "swap": {
     "title": "Swap",
+    "titleCrypto": "Swap {{currency}}",
     "tabs": {
       "exchange": "Exchange",
       "history": "History"

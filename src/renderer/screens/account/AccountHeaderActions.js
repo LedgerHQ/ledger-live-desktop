@@ -2,11 +2,11 @@
 
 import React, { useCallback } from "react";
 import { compose } from "redux";
-import { connect } from "react-redux";
+import { useSelector, connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import { isCurrencySwapSupported } from "@ledgerhq/live-common/lib/swap";
+import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/application";
 import Tooltip from "~/renderer/components/Tooltip";
 import {
   isAccountEmpty,
@@ -73,7 +73,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const ReceiveAction = (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
   const currency = getAccountCurrency(account);
   const availableOnExchange = isCurrencySupported(currency);
-  const availableOnSwap = isCurrencySwapSupported(currency);
+  const availableOnSwap = useSelector(swapSupportedCurrenciesSelector);
   const history = useHistory();
 
   const onBuy = useCallback(() => {
@@ -110,7 +110,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
           },
         ]
       : []),
-    ...(availableOnSwap
+    ...(availableOnSwap.includes(currency)
       ? [
           {
             key: "Swap",

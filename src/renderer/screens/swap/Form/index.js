@@ -85,7 +85,12 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
   const [state, dispatch] = useReducer(
     reducer,
     // $FlowFixMe Update type for SwapState
-    { okCurrencies, defaultCurrency, defaultAccount },
+    {
+      okCurrencies,
+      defaultCurrency:
+        defaultCurrency && okCurrencies.includes(defaultCurrency) ? defaultCurrency : undefined,
+      defaultAccount: defaultAccount?.balance.gt(0) ? defaultAccount : undefined,
+    },
     initState,
   );
 

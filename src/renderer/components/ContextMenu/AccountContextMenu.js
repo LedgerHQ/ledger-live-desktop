@@ -86,7 +86,7 @@ class AccountContextMenu extends PureComponent<Props> {
       });
     }
 
-    const availableOnSwap = swapSupportedCurrencies.find(({ id }) => id === currency.id);
+    const availableOnSwap = swapSupportedCurrencies.includes(currency);
     if (availableOnSwap) {
       items.push({
         label: "accounts.contextMenu.swap",
