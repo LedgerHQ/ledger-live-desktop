@@ -5,7 +5,7 @@ import Label from "~/renderer/components/Label";
 import { Trans } from "react-i18next";
 import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
 import InputCurrency from "~/renderer/components/InputCurrency";
-import React, { useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import type {
   AccountLike,
   Account,
@@ -92,18 +92,21 @@ const SwapInputGroup = ({
   });
 
   const unit = currency && currency.units[0];
-  const renderOptionOverride = ({ data: currency }: any) => {
-    // NB ignore the custom rendering for no-accounts here since we show the add account CTA
-    const status = currenciesStatus[currency.id];
+  const renderOptionOverride = useCallback(
+    ({ data: currency }: any) => {
+      // NB ignore the custom rendering for no-accounts here since we show the add account CTA
+      const status = currenciesStatus[currency.id];
 
-    return (
-      <CurrencyOptionRow
-        circle
-        currency={currency}
-        status={status === "noAccounts" ? "ok" : status}
-      />
-    );
-  };
+      return (
+        <CurrencyOptionRow
+          circle
+          currency={currency}
+          status={status === "noAccounts" ? "ok" : status}
+        />
+      );
+    },
+    [currenciesStatus],
+  );
 
   const dispatch = useDispatch();
   const addAccount = useCallback(() => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency })), [
@@ -115,26 +118,27 @@ const SwapInputGroup = ({
 
   const lockColor = useTheme("colors.palette.text.shade50");
 
-  // NB this feels like I'm doing the work twice, but ¯\_(ツ)_/¯
-  const onCurrencySelected = useCallback(
-    currency => {
-      if (!currency) return;
-      setCurrency(currency);
+  useEffect(() => {
+    if (currency && currency?.id !== defaultCurrency?.id) {
       onCurrencyChange(currency);
-    },
-    [onCurrencyChange, setCurrency],
-  );
+    }
+  }, [currency, defaultCurrency, onCurrencyChange]);
 
-  const onAccountSelected = useCallback(
-    (account, subAccount) => {
-      if (!account) return;
+  useEffect(() => {
+    if (account?.id !== defaultAccount?.id) {
       const toAccount = subAccount || account;
       const toParentAccount = subAccount ? account : null;
-      // TODO Ideally we would maintain the account/parentAccount paradigm instead of account/subAccount
-      setAccount(account, subAccount);
-      onAccountChange(toAccount, toParentAccount);
-    },
-    [onAccountChange, setAccount],
+      if (toAccount && toAccount?.id !== defaultAccount?.id) {
+        onAccountChange(toAccount, toParentAccount);
+      }
+    }
+  }, [account, subAccount, currency, defaultAccount, onAccountChange]);
+
+  const isCurrencySelectorDisabled = useCallback(
+    c =>
+      c.type === "CryptoCurrency" ||
+      (c.type === "TokenCurrency" && ["noApp", "outdatedApp"].includes(currenciesStatus[c.id])),
+    [currenciesStatus],
   );
 
   return (
@@ -150,13 +154,10 @@ const SwapInputGroup = ({
           renderOptionOverride={renderOptionOverride}
           currencies={currencies}
           autoFocus={true}
-          onChange={onCurrencySelected}
+          onChange={setCurrency}
           value={currency}
           rowHeight={47}
-          isDisabled={c =>
-            (c.type === "CryptoCurrency" || c.type === "TokenCurrency") &&
-            ["noApp", "outdatedApp"].includes(currenciesStatus[c.id])
-          }
+          isDisabled={isCurrencySelectorDisabled}
         />
       </Box>
       <Box>
@@ -168,7 +169,7 @@ const SwapInputGroup = ({
             isDisabled={!currency}
             accounts={availableAccounts}
             value={{ account, subAccount }}
-            onChange={onAccountSelected}
+            onChange={setAccount}
           />
         ) : (
           <AddAccount onClick={addAccount}>

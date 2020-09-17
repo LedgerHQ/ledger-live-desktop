@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
 import { Trans } from "react-i18next";
@@ -24,6 +24,7 @@ import type { Option } from "~/renderer/components/Select";
 import Switch from "~/renderer/components/Switch";
 import { CurrencyOptionRow } from "~/renderer/screens/swap/Form/index";
 import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/swap/logic";
+import { AmountRequired } from "@ledgerhq/errors";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 
 const InputRight = styled(Box).attrs(() => ({
@@ -93,35 +94,40 @@ const From = ({
   });
 
   const unit = currency && currency.units[0];
-  const renderOptionOverride = ({ data: currency }: Option) => {
-    const status = currenciesStatus[currency.id];
-    return <CurrencyOptionRow circle currency={currency} status={status} />;
-  };
-
-  // NB this feels like I'm doing the work twice, but ¯\_(ツ)_/¯
-  const onCurrencySelected = useCallback(
-    currency => {
-      if (!currency) return;
-      setCurrency(currency);
-      onCurrencyChange(currency);
+  const renderOptionOverride = useCallback(
+    ({ data: currency }: Option) => {
+      const status = currenciesStatus[currency.id];
+      return <CurrencyOptionRow circle currency={currency} status={status} />;
     },
-    [onCurrencyChange, setCurrency],
+    [currenciesStatus],
   );
 
-  const onAccountSelected = useCallback(
-    (account, subAccount) => {
-      if (!account) return;
+  const isCurrencySelectorDisabled = useCallback(
+    c =>
+      c.type === "CryptoCurrency" ||
+      (c.type === "TokenCurrency" && currenciesStatus[c.id] !== "ok"),
+    [currenciesStatus],
+  );
+
+  useEffect(() => {
+    if (currency?.id !== defaultCurrency?.id) {
+      onCurrencyChange(currency);
+    }
+  }, [currency, defaultCurrency, onCurrencyChange]);
+
+  useEffect(() => {
+    if (account?.id !== defaultAccount?.id) {
       const fromAccount = subAccount || account;
       const fromParentAccount = subAccount ? account : null;
-
-      setAccount(account, subAccount);
-      onAccountChange(fromAccount, fromParentAccount);
-    },
-    [onAccountChange, setAccount],
-  );
+      if (fromAccount && fromAccount?.id !== defaultAccount?.id) {
+        onAccountChange(fromAccount, fromParentAccount);
+      }
+    }
+  }, [account, subAccount, currency, defaultAccount, onAccountChange]);
 
   const { amount: maybeAmountError } = status.errors;
   const amountError = amount.gt(0) && (error || maybeAmountError);
+  const hideError = useAllAmount && amountError && amountError instanceof AmountRequired;
 
   return (
     <Box flex={1} flow={1} mb={3} ml={0} mr={23}>
@@ -137,12 +143,8 @@ const From = ({
           renderOptionOverride={renderOptionOverride}
           currencies={currencies}
           autoFocus={true}
-          onChange={onCurrencySelected}
-          value={currency}
-          isDisabled={c =>
-            (c.type === "CryptoCurrency" || c.type === "TokenCurrency") &&
-            currenciesStatus[c.id] !== "ok"
-          }
+          onChange={setCurrency}
+          isDisabled={isCurrencySelectorDisabled}
         />
       </Box>
       <Box>
@@ -153,7 +155,7 @@ const From = ({
           isDisabled={!currency}
           accounts={availableAccounts}
           value={{ account, subAccount }}
-          onChange={onAccountSelected}
+          onChange={setAccount}
         />
       </Box>
       <Box style={{ minHeight: 120 }}>
@@ -177,7 +179,7 @@ const From = ({
         {unit ? (
           <>
             <InputCurrency
-              error={!useAllAmount && amountError}
+              error={!hideError && amountError}
               loading={isLoading}
               key={unit.code}
               defaultUnit={unit}

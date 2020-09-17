@@ -259,6 +259,11 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
     expireRates();
   }, [expireRates, modalsState]);
 
+  const validToCurrencies = useMemo(() => selectableCurrencies.filter(c => c !== fromCurrency), [
+    fromCurrency,
+    selectableCurrencies,
+  ]);
+
   return (
     <>
       <Card flow={1}>
@@ -294,7 +299,7 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
             currency={toCurrency}
             fromCurrency={fromCurrency}
             rate={magnitudeAwareRate}
-            currencies={selectableCurrencies.filter(c => c !== fromCurrency)}
+            currencies={validToCurrencies}
             onCurrencyChange={toCurrency =>
               dispatch({ type: "setToCurrency", payload: { toCurrency } })
             }
