@@ -68,6 +68,7 @@ export const urls = {
   },
   swap: {
     info: "https://www.ledger.com/swap",
+    learnMore: "https://www.ledger.com/swap",
     providers: {
       changelly: {
         main: "https://changelly.com/",
