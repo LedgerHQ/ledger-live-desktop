@@ -88,7 +88,7 @@ const SwapBody = ({
             items={items}
           />
           {error ? (
-            <ErrorDisplay error={error} withExportLogs />
+            <ErrorDisplay error={error} />
           ) : activeStep === "summary" ? (
             <StepSummary
               swap={swap}
