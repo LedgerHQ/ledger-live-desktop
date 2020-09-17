@@ -125,7 +125,12 @@ const SwapBody = ({
             ratesExpiration={ratesExpiration}
           />
         ) : result && swap ? (
-          <StepFinishedFooter result={result} swap={swap} onClose={onClose} />
+          <StepFinishedFooter
+            transaction={transaction}
+            result={result}
+            swap={swap}
+            onClose={onClose}
+          />
         ) : null
       }
     />

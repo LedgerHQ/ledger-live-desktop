@@ -177,7 +177,7 @@ const From = ({
         {unit ? (
           <>
             <InputCurrency
-              error={amountError}
+              error={!useAllAmount && amountError}
               loading={isLoading}
               key={unit.code}
               defaultUnit={unit}
