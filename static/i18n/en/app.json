@@ -170,7 +170,7 @@
       "openManager": "Open Manager",
       "helpCTA": "What is Swap?",
       "bubble": "We use a fixed rate, this is the exact amount you will receive",
-      "noAccounts": "You don't have {{currencyName}} accounts",
+      "noAccounts": "You don't have {{currencyName}} accounts with balance",
       "noApp": "You don't have the {{currencyName}} app installed",
       "outdatedApp": "{{currencyName}} app needs to be updated",
       "warning": "The swap provider has changed its rates since your last session"
@@ -203,8 +203,8 @@
           "title": "Pending operation",
           "swap": "Your Swap ID:",
           "seeDetails": "See details",
-          "disclaimer": "Save your Swap ID number outside Ledger Live",
-          "description": "Swap operation is being broadcasted to {{provider}}, that will treat it before sending you the requested funds. To see the status of your operation, click on “See details”, or go the history tab of the swap page"
+          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0>{{provider}}</0> later",
+          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets"
         }
       },
 

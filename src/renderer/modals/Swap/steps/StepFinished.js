@@ -32,6 +32,14 @@ const Disclaimer = styled(Box)`
   border-radius: 4px;
   align-items: center;
   width: 100%;
+
+  > ${Text} {
+    text-align: left;
+    flex: 1;
+    > span {
+      text-transform: capitalize;
+    }
+  }
 `;
 
 const Pill = styled(Text)`
@@ -100,19 +108,20 @@ const StepFinished = ({
         </SwapIdWrapper>
       </Box>
       <Text p={20} textAlign="center" color="palette.text.shade50" ff="Inter|Regular" fontSize={4}>
-        <Trans i18nKey={`swap.modal.steps.finished.description`} values={{ provider }} />
+        <Trans i18nKey={`swap.modal.steps.finished.description`} />
       </Text>
       <Disclaimer horizontal p={2} mt={3}>
         <InfoCircle size={17} color={useTheme("colors.palette.primary.main")} />
         <Text
           textAlign={"left"}
-          flex={1}
           ml={2}
           color="palette.primary.main"
           ff="Inter|Regular"
           fontSize={4}
         >
-          <Trans i18nKey={`swap.modal.steps.finished.disclaimer`} />
+          <Trans i18nKey={`swap.modal.steps.finished.disclaimer`} values={{ provider }}>
+            <span>{provider}</span>
+          </Trans>
         </Text>
       </Disclaimer>
     </Box>
@@ -123,10 +132,12 @@ export const StepFinishedFooter = ({
   result,
   swap,
   onClose,
+  transaction,
 }: {
   result: { swapId: string, operation: Operation },
   swap: { exchange: Exchange, exchangeRate: ExchangeRate },
   onClose: any,
+  transaction: any,
 }) => {
   const { operation } = result;
   const { fromAccount, fromParentAccount } = swap.exchange;
