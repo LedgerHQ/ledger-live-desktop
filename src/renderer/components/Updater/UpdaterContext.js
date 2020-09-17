@@ -109,10 +109,13 @@ class Provider extends Component<UpdaterProviderProps, UpdaterProviderState> {
   }
 }
 
-export const withUpdaterContext = (ComponentToDecorate: React$ComponentType<*>) => (props: *) => (
-  <UpdaterContext.Consumer>
-    {context => <ComponentToDecorate {...props} context={context} />}
-  </UpdaterContext.Consumer>
-);
+export const withUpdaterContext = (ComponentToDecorate: React$ComponentType<*>) => {
+  const WrappedUpdater = (props: *) => (
+    <UpdaterContext.Consumer>
+      {context => <ComponentToDecorate {...props} context={context} />}
+    </UpdaterContext.Consumer>
+  );
+  return WrappedUpdater;
+};
 
 export const UpdaterProvider = Provider;
