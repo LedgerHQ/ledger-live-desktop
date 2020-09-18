@@ -1,16 +1,20 @@
 // @flow
 
 import { remote, ipcRenderer } from "electron";
-import React, { useRef, useEffect, useState, useCallback } from "react";
+import React, { useMemo, useEffect, useState, useCallback } from "react";
+import { Trans } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "~/renderer/components/Box/Card";
-import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
+import { accountsSelector } from "~/renderer/reducers/accounts";
 import OperationRow from "~/renderer/screens/swap/History/OperationRow";
+import { operationStatusList } from "@ledgerhq/live-common/lib/swap";
 import getCompleteSwapHistory from "@ledgerhq/live-common/lib/swap/getCompleteSwapHistory";
 import updateAccountSwapStatus from "@ledgerhq/live-common/lib/swap/updateAccountSwapStatus";
+import type { SwapHistorySection } from "@ledgerhq/live-common/lib/swap/types";
 import { flattenAccounts } from "@ledgerhq/live-common/lib/account";
 import { mappedSwapOperationsToCSV } from "@ledgerhq/live-common/lib/swap/csvExport";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
+import useInterval from "~/renderer/hooks/useInterval";
 import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
@@ -41,11 +45,10 @@ const exportOperations = async (
 };
 
 const History = () => {
-  const accounts = useSelector(shallowAccountsSelector);
+  const accounts = useSelector(accountsSelector);
   const [exporting, setExporting] = useState(false);
-  const [mappedSwapOperations, setMappedSwapOperations] = useState(null);
+  const [mappedSwapOperations, setMappedSwapOperations] = useState<?(SwapHistorySection[])>(null);
   const dispatch = useDispatch();
-  const accountsRef = useRef(accounts);
 
   const onExportOperations = useCallback(() => {
     async function asyncExport() {
@@ -78,24 +81,47 @@ const History = () => {
   }, [exporting, mappedSwapOperations]);
 
   useEffect(() => {
-    accountsRef.current = accounts;
-  }, [accounts]);
-
-  useEffect(() => {
     (async function asyncGetCompleteSwapHistory() {
-      setMappedSwapOperations(await getCompleteSwapHistory(flattenAccounts(accounts)));
+      if (!accounts) return;
+      const sections = await getCompleteSwapHistory(flattenAccounts(accounts));
+      setMappedSwapOperations(sections);
     })();
   }, [accounts]);
 
-  useEffect(() => {
-    (async function asyncUpdateAccountSwapStatus() {
-      if (!accountsRef.current) return;
-      const updatedAccounts = await Promise.all(accountsRef.current.map(updateAccountSwapStatus));
-      updatedAccounts.filter(Boolean).forEach(account => {
-        dispatch(updateAccountWithUpdater(account.id, a => account));
-      });
-    })();
-  }, [dispatch]);
+  const updateSwapStatus = useCallback(() => {
+    let cancelled = false;
+    async function fetchUpdatedSwapStatus() {
+      const updatedAccounts = await Promise.all(accounts.map(updateAccountSwapStatus));
+      if (!cancelled) {
+        updatedAccounts.filter(Boolean).forEach(account => {
+          dispatch(updateAccountWithUpdater(account.id, a => account));
+        });
+      }
+    }
+
+    fetchUpdatedSwapStatus();
+    return () => (cancelled = true);
+  }, [accounts, dispatch]);
+
+  const hasPendingSwapOperations = useMemo(() => {
+    if (mappedSwapOperations) {
+      for (const section of mappedSwapOperations) {
+        for (const swapOperation of section.data) {
+          if (operationStatusList.pending.includes(swapOperation.status)) {
+            return true;
+          }
+        }
+      }
+    }
+    console.log("no more pending");
+    return false;
+  }, [mappedSwapOperations]);
+
+  useInterval(() => {
+    if (hasPendingSwapOperations) {
+      updateSwapStatus();
+    }
+  }, 10000);
 
   const openSwapOperationDetailsModal = useCallback(
     mappedSwapOperation =>
@@ -118,8 +144,7 @@ const History = () => {
       {mappedSwapOperations ? (
         mappedSwapOperations.length ? (
           mappedSwapOperations.map(section => (
-            // Sections?
-            <>
+            <div key={section.day.toString()}>
               <Box mb={2} mt={4} ff="Inter|SemiBold" fontSize={4} color="palette.text.shade60">
                 {moment(section.day).calendar(null, {
                   sameDay: "LL – [Today]",
@@ -128,7 +153,7 @@ const History = () => {
                   sameElse: "LL",
                 })}
               </Box>
-              <Card key={section.day.toString()}>
+              <Card>
                 {section.data.map(mappedSwapOperation => (
                   <OperationRow
                     key={mappedSwapOperation.swapId}
@@ -137,15 +162,15 @@ const History = () => {
                   />
                 ))}
               </Card>
-            </>
+            </div>
           ))
         ) : (
           <Card flex={1} p={150} alignItems={"center"} justifyContent={"center"}>
             <Text mb={1} ff="Inter|SemiBold" fontSize={16} color="palette.text.shade100">
-              {"No History"}
+              <Trans i18nKey={"swap.history.empty.title"} />
             </Text>
             <Text ff="Inter|Regular" fontSize={12} color="palette.text.shade50">
-              {"You don’t have any history swap"}
+              <Trans i18nKey={"swap.history.empty.description"} />
             </Text>
           </Card>
         )
