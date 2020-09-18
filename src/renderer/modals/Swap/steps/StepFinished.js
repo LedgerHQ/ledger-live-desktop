@@ -92,7 +92,7 @@ const StepFinished = ({
         <IconSwap size={18} />
       </IconWrapper>
       <Text mt={16} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={5}>
-        <Trans i18nKey={`swap.modal.steps.finished.title`} />
+        <Trans i18nKey={`swap.modal.steps.finished.subtitle`} />
       </Text>
       <Box mt={16} horizontal alignItems="center">
         <Text color="palette.text.shade50" ff="Inter|Regular" fontSize={14}>
