@@ -19,18 +19,20 @@ import IconSwap from "~/renderer/icons/Swap";
 import moment from "moment";
 import { rgba } from "~/renderer/styles/helpers";
 import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/swap/types";
+import { operationStatusList } from "@ledgerhq/live-common/lib/swap";
 import Tooltip from "~/renderer/components/Tooltip";
 import IconClock from "~/renderer/icons/Clock";
 
 export const getStatusColor = (status: string, theme: any) => {
-  return (
-    {
-      finished: theme.colors.positiveGreen,
-      new: theme.colors.gray,
-      failed: theme.colors.alertRed,
-      cancelled: theme.colors.alertRed,
-    }[status] || theme.colors.palette.shade50
-  );
+  if (operationStatusList.pending.includes(status)) {
+    return theme.colors.gray;
+  } else if (operationStatusList.finishedOK.includes(status)) {
+    return theme.colors.positiveGreen;
+  } else if (operationStatusList.finishedKO.includes(status)) {
+    return theme.colors.alertRed;
+  } else {
+    return theme.colors.palette.shade50;
+  }
 };
 
 const Status: ThemedComponent<{}> = styled.div`
@@ -120,7 +122,7 @@ const OperationRow = ({
       <Tooltip content={status}>
         <Status status={status}>
           <IconSwap size={12} />
-          {status.includes("ing") ? (
+          {operationStatusList.pending.includes(status) ? (
             <WrapperClock>
               <IconClock size={10} />
             </WrapperClock>

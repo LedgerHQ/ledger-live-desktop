@@ -10,6 +10,7 @@ import {
   getAccountName,
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account";
+import { operationStatusList } from "@ledgerhq/live-common/lib/swap";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { ModalBody } from "~/renderer/components/Modal";
@@ -160,7 +161,7 @@ const SwapOperationDetailsBody = ({
         <Box p={1}>
           <Status status={status}>
             <IconSwap size={27} />
-            {status.includes("ing") ? (
+            {operationStatusList.pending.includes(status) ? (
               <WrapperClock>
                 <IconClock size={16} />
               </WrapperClock>
