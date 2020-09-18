@@ -136,8 +136,8 @@ const SwapInputGroup = ({
 
   const isCurrencySelectorDisabled = useCallback(
     c =>
-      c.type === "CryptoCurrency" ||
-      (c.type === "TokenCurrency" && ["noApp", "outdatedApp"].includes(currenciesStatus[c.id])),
+      (c.type === "CryptoCurrency" || c.type === "TokenCurrency") &&
+      ["noApp", "outdatedApp"].includes(currenciesStatus[c.id]),
     [currenciesStatus],
   );
 

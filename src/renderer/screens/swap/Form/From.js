@@ -104,13 +104,13 @@ const From = ({
 
   const isCurrencySelectorDisabled = useCallback(
     c =>
-      c.type === "CryptoCurrency" ||
-      (c.type === "TokenCurrency" && currenciesStatus[c.id] !== "ok"),
+      (c.type === "CryptoCurrency" || c.type === "TokenCurrency") &&
+      currenciesStatus[c.id] !== "ok",
     [currenciesStatus],
   );
 
   useEffect(() => {
-    if (currency?.id !== defaultCurrency?.id) {
+    if (currency && currency?.id !== defaultCurrency?.id) {
       onCurrencyChange(currency);
     }
   }, [currency, defaultCurrency, onCurrencyChange]);
@@ -142,6 +142,7 @@ const From = ({
           rowHeight={47}
           renderOptionOverride={renderOptionOverride}
           currencies={currencies}
+          value={currency}
           autoFocus={true}
           onChange={setCurrency}
           isDisabled={isCurrencySelectorDisabled}
