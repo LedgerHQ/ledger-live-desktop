@@ -4,7 +4,12 @@ import React, { useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProviders } from "@ledgerhq/live-common/lib/swap";
 import { swapProvidersSelector } from "~/renderer/reducers/application";
-import type { CryptoCurrency, TokenCurrency, Account } from "@ledgerhq/live-common/lib/types";
+import type {
+  CryptoCurrency,
+  TokenCurrency,
+  Account,
+  AccountLike,
+} from "@ledgerhq/live-common/lib/types";
 import Landing from "~/renderer/screens/swap/Landing";
 import Form from "~/renderer/screens/swap/Form";
 import Connect from "~/renderer/screens/swap/Connect";
@@ -13,10 +18,11 @@ import { setSwapProviders } from "~/renderer/actions/application";
 
 type Props = {
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
-  defaultAccount?: ?Account,
+  defaultAccount?: ?AccountLike,
+  defaultParentAccount?: ?Account,
 };
 
-const Swap = ({ defaultCurrency, defaultAccount }: Props) => {
+const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount }: Props) => {
   const providers = useSelector(swapProvidersSelector);
   const [showLandingPage, setShowLandingPage] = useState(true);
   const [installedApps, setInstalledApps] = useState();
@@ -57,6 +63,7 @@ const Swap = ({ defaultCurrency, defaultAccount }: Props) => {
       installedApps={installedApps}
       defaultCurrency={defaultCurrency}
       defaultAccount={defaultAccount}
+      defaultParentAccount={defaultParentAccount}
     />
   );
 };

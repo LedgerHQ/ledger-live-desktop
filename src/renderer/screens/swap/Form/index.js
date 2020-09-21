@@ -14,6 +14,7 @@ import type {
   CryptoCurrency,
   TokenCurrency,
   Account,
+  AccountLike,
   Currency,
 } from "@ledgerhq/live-common/lib/types";
 import getExchangeRates from "@ledgerhq/live-common/lib/swap/getExchangeRates";
@@ -45,10 +46,11 @@ import type { CurrencyStatus } from "@ledgerhq/live-common/lib/swap/logic";
 type Props = {
   installedApps: InstalledItem[],
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
-  defaultAccount?: ?Account,
+  defaultAccount?: ?AccountLike,
+  defaultParentAccount?: ?Account,
 };
 
-const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
+const Form = ({ installedApps, defaultCurrency, defaultAccount, defaultParentAccount }: Props) => {
   const accounts = useSelector(shallowAccountsSelector);
   const selectableCurrencies = useSelector(swapSupportedCurrenciesSelector);
   const modalsState = useSelector(modalsStateSelector);
@@ -77,6 +79,7 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
       defaultCurrency:
         defaultCurrency && okCurrencies.includes(defaultCurrency) ? defaultCurrency : undefined,
       defaultAccount: defaultAccount?.balance.gt(0) ? defaultAccount : undefined,
+      defaultParentAccount: defaultParentAccount || undefined,
     },
     initState,
   );

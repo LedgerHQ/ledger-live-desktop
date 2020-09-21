@@ -91,10 +91,11 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
       pathname: "/swap",
       state: {
         defaultCurrency: currency,
-        defaultAccount: mainAccount,
+        defaultAccount: account,
+        defaultParentAccount: parentAccount,
       },
     });
-  }, [currency, history, mainAccount]);
+  }, [currency, history, account, parentAccount]);
 
   // List of available exchange actions
   const actions = [

@@ -24,7 +24,7 @@ import { refreshAccountsOrdering } from "~/renderer/actions/general";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
-import { getMainAccount, getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 
 type OwnProps = {
   account: AccountLike,
@@ -96,7 +96,8 @@ class AccountContextMenu extends PureComponent<Props> {
             pathname: "/swap",
             state: {
               defaultCurrency: currency,
-              defaultAccount: getMainAccount(account, parentAccount),
+              defaultAccount: account,
+              defaultParentAccount: parentAccount,
             },
           }),
       });
