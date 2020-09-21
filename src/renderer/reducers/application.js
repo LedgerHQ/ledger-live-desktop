@@ -8,6 +8,7 @@ import type { OutputSelector } from "reselect";
 import type { LangAndRegion } from "~/renderer/reducers/settings";
 import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
 import type { TokenCurrency, CryptoCurrency } from "@ledgerhq/live-common/lib/types";
+import { isCurrencySwapSupported } from "@ledgerhq/live-common/lib/swap";
 import type { State } from ".";
 import uniq from "lodash/uniq";
 import { findTokenById } from "@ledgerhq/live-common/lib/data/tokens";
@@ -88,7 +89,7 @@ export const swapSupportedCurrenciesSelector: OutputSelector<
     .filter(Boolean)
     .filter(isCurrencySupported);
 
-  return [...cryptoCurrencies, ...tokenCurrencies];
+  return [...cryptoCurrencies, ...tokenCurrencies].filter(isCurrencySwapSupported);
 });
 
 // Exporting reducer
