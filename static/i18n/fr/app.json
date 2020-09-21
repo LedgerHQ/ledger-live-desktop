@@ -328,7 +328,7 @@
       "title": "ASA (Actifs)",
       "cta": "Ajouter ASA",
       "placeholder": "Vous pouvez ajouter des actifs à votre compte {{currencyName}}.",
-      "link": "Comment fonctionnent les ASA ?",
+      "link": "How Assets (ASA) works?",
       "seeTokens": "Afficher ASA ({{tokenCount}})",
       "hideTokens": "Masquer ASA ({{tokenCount}})",
       "tooltip": "ASA de",
@@ -1153,9 +1153,9 @@
         "steps": {
           "assets": {
             "title": "ASA (Actif)",
-            "info": "L'ajout d'un actif nécessite l'envoi d'une transaction avec des frais minimaux. Cela apparaîtra sur votre historique de transactions",
+            "info": "Adding an asset requires sending a transaction with minimum fees. This will appear on your transaction history",
             "selectLabel": "Choisir un ASA (Actif)",
-            "disabledTooltip": "Vous avez déjà cet ASA (Actif) dans votre compte Algorand"
+            "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
           },
           "connectDevice": {
             "title": "Appareil"
@@ -1188,7 +1188,7 @@
             "title": "Obtenez des récompenses",
             "description": "Recevez des récompenses en tenant des ALGO dans votre porte-feuille.",
             "bullet": {
-              "delegate": "Un solde minimum de 1 ALGO est requis pour recevoir des récompenses.",
+              "delegate": "A minimum balance of 1 ALGO is required to receive rewards.",
               "access": "Augmentez le solde du compte pour augmenter les récompenses.",
               "ledger": "Effectuez une transaction vers ou depuis le compte pour réclamer des récompenses."
             },
