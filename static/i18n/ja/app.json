@@ -328,7 +328,7 @@
       "title": "ASA (Assets)",
       "cta": "Add ASA",
       "placeholder": "You can add assets to your {{currencyName}} account.",
-      "link": "How assets (ASA) works?",
+      "link": "How Assets (ASA) works?",
       "seeTokens": "Show ASA ({{tokenCount}})",
       "hideTokens": "Hide ASA ({{tokenCount}})",
       "tooltip": "ASA from",
@@ -1153,9 +1153,9 @@
         "steps": {
           "assets": {
             "title": "ASA (Asset)",
-            "info": "Adding an asset requires sending a transaction with a minimum transaction fee. This will appear on your transaction history",
+            "info": "Adding an asset requires sending a transaction with minimum fees. This will appear on your transaction history",
             "selectLabel": "Choose an ASA (Asset)",
-            "disabledTooltip": "You already have this ASA (asset) in your Algorand account"
+            "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
           },
           "connectDevice": {
             "title": "Device"
@@ -1188,7 +1188,7 @@
             "title": "Earn rewards",
             "description": "Receive Algorand rewards simply for holding Algorand control of your assets.",
             "bullet": {
-              "delegate": "A minimum balance of 1 algo is required to receive rewards.",
+              "delegate": "A minimum balance of 1 ALGO is required to receive rewards.",
               "access": "Increase the account’s balance to increase rewards.",
               "ledger": "Perform a transaction to or from the account to claim rewards."
             },
