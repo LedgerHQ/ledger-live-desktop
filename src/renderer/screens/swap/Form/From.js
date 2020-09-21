@@ -126,8 +126,7 @@ const From = ({
     }
   }, [account, subAccount, currency, defaultAccount, onAccountChange]);
 
-  const { amount: maybeAmountError } = status.errors;
-  const amountError = amount.gt(0) && (error || maybeAmountError);
+  const amountError = amount.gt(0) && (error || status.errors?.gasPrice || status.errors?.amount);
   const hideError = useAllAmount && amountError && amountError instanceof AmountRequired;
 
   return (

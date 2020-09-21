@@ -193,6 +193,7 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount, defaultParentAcc
     selectableCurrencies,
   ]);
 
+  const hasErrors = useMemo(() => Object.keys(status?.errors || {}).length > 0, [status]);
   return (
     <>
       <Card flow={1}>
@@ -239,7 +240,7 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount, defaultParentAcc
         <Footer
           onExpireRates={expireRates}
           onStartSwap={onStartSwap}
-          canContinue={exchangeRate}
+          canContinue={exchangeRate && !hasErrors}
           ratesExpiration={isTimerVisible ? ratesExpiration : null}
         />
       </Card>

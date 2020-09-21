@@ -76,7 +76,7 @@ const StepSummary = ({
         <IconWrapper mr={2}>
           <IconWallet size={14} />
         </IconWrapper>
-        <Box>
+        <Box flex={1} mr={20}>
           <Text mb={1} ff="Inter|Regular" color="palette.text.shade30" fontSize={4}>
             <Trans i18nKey="swap.modal.steps.summary.from" />
           </Text>
@@ -103,11 +103,11 @@ const StepSummary = ({
         </Box>
       </Box>
       <ArrowSeparator horizontal Icon={IconArrowDown} />
-      <Box alignItems={"center"} horizontal mt={2}>
+      <Box alignItems={"center"} horizontal mt={2} flow={1}>
         <IconWrapper mr={2}>
           <IconWallet size={14} />
         </IconWrapper>
-        <Box>
+        <Box flex={1} mr={20}>
           <Text mb={1} ff="Inter|Regular" color="palette.text.shade30" fontSize={4}>
             <Trans i18nKey="swap.modal.steps.summary.to" />
           </Text>
