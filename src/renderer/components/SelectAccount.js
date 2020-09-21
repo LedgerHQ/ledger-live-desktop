@@ -14,6 +14,7 @@ import React, { useCallback, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { createFilter } from "react-select";
+import { createStructuredSelector } from "reselect";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -21,8 +22,8 @@ import Select from "~/renderer/components/Select";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import Ellipsis from "~/renderer/components/Ellipsis";
 
-const mapStateToProps = (state, { accounts }) => ({
-  accounts: accounts || shallowAccountsSelector(state),
+const mapStateToProps = createStructuredSelector({
+  accounts: shallowAccountsSelector,
 });
 
 const Tick = styled.div`
@@ -58,9 +59,7 @@ const defaultFilter = createFilter({
   },
 });
 const filterOption = o => (candidate, input) => {
-  const { filter } = o;
-  const passesFilter = c => !filter || filter(c);
-  const selfMatches = defaultFilter(candidate, input) && passesFilter(candidate.data);
+  const selfMatches = defaultFilter(candidate, input);
   if (selfMatches) return [selfMatches, true];
 
   if (candidate.data.type === "Account" && o.withSubAccounts) {
@@ -70,7 +69,7 @@ const filterOption = o => (candidate, input) => {
     if (subAccounts) {
       for (let i = 0; i < subAccounts.length; i++) {
         const ta = subAccounts[i];
-        if (passesFilter(ta) && defaultFilter({ value: ta.id, data: ta }, input)) {
+        if (defaultFilter({ value: ta.id, data: ta }, input)) {
           return [true, false];
         }
       }
@@ -83,12 +82,10 @@ const AccountOption = React.memo(function AccountOption({
   account,
   isValue,
   disabled,
-  hideAmount,
 }: {
   account: AccountLike,
   isValue?: boolean,
   disabled?: boolean,
-  hideAmount?: boolean,
 }) {
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
@@ -103,38 +100,25 @@ const AccountOption = React.memo(function AccountOption({
           {name}
         </Ellipsis>
       </div>
-      {!hideAmount ? (
-        <Box>
-          <FormattedVal
-            color="palette.text.shade60"
-            val={account.balance}
-            unit={unit}
-            showCode
-            disableRounding
-          />
-        </Box>
-      ) : null}
+      <Box>
+        <FormattedVal color="palette.text.shade60" val={account.balance} unit={unit} showCode />
+      </Box>
     </Box>
   );
 });
 
-const renderValue = hideAmount => ({ data }: { data: Option }) =>
-  data.account ? <AccountOption hideAmount={hideAmount} account={data.account} isValue /> : null;
+const renderValue = ({ data }: { data: Option }) =>
+  data.account ? <AccountOption account={data.account} isValue /> : null;
 
-const renderOption = hideAmount => ({ data }: { data: Option }) =>
-  data.account ? (
-    <AccountOption hideAmount={hideAmount} account={data.account} disabled={!data.matched} />
-  ) : null;
+const renderOption = ({ data }: { data: Option }) =>
+  data.account ? <AccountOption account={data.account} disabled={!data.matched} /> : null;
 
 type OwnProps = {
-  hideBalance?: boolean,
   withSubAccounts?: boolean,
   enforceHideEmptySubAccounts?: boolean,
-  enhance?: Account => Account,
-  filter?: AccountLike => boolean,
+  filter?: Account => boolean,
   onChange: (account: ?AccountLike, tokenAccount: ?Account) => void,
   value: ?AccountLike,
-  hideAmount?: boolean,
 };
 
 type Props = OwnProps & {
@@ -148,17 +132,15 @@ const RawSelectAccount = ({
   withSubAccounts,
   enforceHideEmptySubAccounts,
   filter,
-  hideAmount,
-  enhance,
   t,
   ...props
 }: Props & { t: TFunction }) => {
   const [searchInputValue, setSearchInputValue] = useState("");
-  const mappedAccounts = enhance ? accounts.map(enhance) : accounts;
 
+  const filtered: Account[] = filter ? accounts.filter(filter) : accounts;
   const all = withSubAccounts
-    ? flattenAccounts(mappedAccounts, { enforceHideEmptySubAccounts })
-    : mappedAccounts;
+    ? flattenAccounts(filtered, { enforceHideEmptySubAccounts })
+    : filtered;
 
   const selectedOption = value
     ? {
@@ -172,21 +154,20 @@ const RawSelectAccount = ({
       } else {
         const { account } = option;
         const parentAccount =
-          account.type !== "Account" ? mappedAccounts.find(a => a.id === account.parentId) : null;
+          account.type !== "Account" ? accounts.find(a => a.id === account.parentId) : null;
         onChange(account, parentAccount);
       }
     },
-    [mappedAccounts, onChange],
+    [accounts, onChange],
   );
 
   const manualFilter = useCallback(
     () =>
       all.reduce((result, option) => {
-        const [display, match] = filterOption({
-          withSubAccounts,
-          enforceHideEmptySubAccounts,
-          filter,
-        })({ data: option }, searchInputValue);
+        const [display, match] = filterOption({ withSubAccounts, enforceHideEmptySubAccounts })(
+          { data: option },
+          searchInputValue,
+        );
 
         if (display) {
           result.push({
@@ -196,7 +177,7 @@ const RawSelectAccount = ({
         }
         return result;
       }, []),
-    [filter, searchInputValue, all, withSubAccounts, enforceHideEmptySubAccounts],
+    [searchInputValue, all, withSubAccounts, enforceHideEmptySubAccounts],
   );
 
   const structuredResults = manualFilter();
@@ -206,8 +187,8 @@ const RawSelectAccount = ({
       value={selectedOption}
       options={structuredResults}
       getOptionValue={getOptionValue}
-      renderValue={renderValue(hideAmount)}
-      renderOption={renderOption(hideAmount)}
+      renderValue={renderValue}
+      renderOption={renderOption}
       onInputChange={v => setSearchInputValue(v)}
       inputValue={searchInputValue}
       filterOption={false}
