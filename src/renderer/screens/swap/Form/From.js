@@ -26,6 +26,8 @@ import { CurrencyOptionRow } from "~/renderer/screens/swap/Form/index";
 import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/swap/logic";
 import { AmountRequired } from "@ledgerhq/errors";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
+import { useSelector } from "react-redux";
+import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 
 const InputRight = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
@@ -52,7 +54,6 @@ const From = ({
   currency: defaultCurrency,
   account: defaultAccount,
   currenciesStatus,
-  validAccounts,
   amount,
   useAllAmount,
   isLoading,
@@ -67,7 +68,6 @@ const From = ({
   currency: ?(CryptoCurrency | TokenCurrency),
   account: ?Account,
   currenciesStatus: CurrenciesStatus,
-  validAccounts: Account[],
   amount: BigNumber,
   useAllAmount?: boolean,
   isLoading?: boolean,
@@ -78,6 +78,7 @@ const From = ({
   onAmountChange: BigNumber => void,
   onToggleUseAllAmount?: () => void,
 }) => {
+  const accounts = useSelector(shallowAccountsSelector);
   const {
     availableAccounts,
     currency,
@@ -86,8 +87,8 @@ const From = ({
     setCurrency,
     setAccount,
   } = useCurrencyAccountSelect({
+    allAccounts: accounts,
     allCurrencies: currencies,
-    allAccounts: validAccounts,
     defaultCurrency,
     defaultAccount,
     hideEmpty: true,

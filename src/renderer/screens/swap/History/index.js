@@ -113,7 +113,6 @@ const History = () => {
         }
       }
     }
-    console.log("no more pending");
     return false;
   }, [mappedSwapOperations]);
 

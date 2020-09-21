@@ -26,11 +26,7 @@ import {
   reducer,
 } from "@ledgerhq/live-common/lib/swap/logic";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import {
-  accountWithMandatoryTokens,
-  getAccountCurrency,
-  getMainAccount,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import type { InstalledItem } from "@ledgerhq/live-common/lib/apps";
 import Box from "~/renderer/components/Box";
 
@@ -45,15 +41,6 @@ import { colors } from "~/renderer/styles/theme";
 import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import type { CurrencyStatus } from "@ledgerhq/live-common/lib/swap/logic";
-
-const isSameCurrencyFilter = currency => a => {
-  const accountCurrency = getAccountCurrency(a);
-  return (
-    currency &&
-    (currency === accountCurrency ||
-      (currency.type === "TokenCurrency" && currency.parentCurrency === accountCurrency))
-  );
-};
 
 type Props = {
   installedApps: InstalledItem[],
@@ -116,23 +103,6 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
     reduxDispatch(openModal("MODAL_SWAP", { swap, transaction, ratesExpiration }));
   }, [ratesExpiration, reduxDispatch, swap, transaction]);
 
-  const validFrom = useMemo(
-    () => accounts.filter(a => isSameCurrencyFilter(fromCurrency)(a) && a.balance.gt(0)),
-    [accounts, fromCurrency],
-  );
-
-  const validTo = useMemo(
-    () =>
-      accounts.filter(
-        isSameCurrencyFilter(
-          toCurrency && toCurrency.type === "TokenCurrency"
-            ? toCurrency.parentCurrency
-            : toCurrency,
-        ),
-      ),
-    [accounts, toCurrency],
-  );
-
   const { magnitudeAwareRate } = exchangeRate || {};
 
   useEffect(() => setAccount(fromAccount, fromParentAccount), [
@@ -157,50 +127,6 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
       );
     }
   }, [fromAccount, fromAmount, fromParentAccount, setAccount, setTransaction, transaction]);
-
-  useEffect(() => {
-    let _fromAccount = validFrom[0];
-    let fromParentAccount;
-
-    if (fromCurrency && fromAccount) {
-      return;
-    } else if (fromCurrency && fromCurrency.type === "TokenCurrency") {
-      fromParentAccount = validFrom[0];
-      _fromAccount = accountWithMandatoryTokens(fromParentAccount, [
-        fromCurrency,
-      ]).subAccounts?.find(isSameCurrencyFilter(fromCurrency));
-    }
-
-    dispatch({
-      type: "setFromAccount",
-      payload: {
-        fromAccount: _fromAccount,
-        fromParentAccount,
-      },
-    });
-  }, [fromAccount, fromCurrency, validFrom]);
-
-  useEffect(() => {
-    let _toAccount = validTo[0];
-    let toParentAccount;
-
-    if (toCurrency && fromCurrency && toCurrency.id !== fromCurrency.id && toAccount) {
-      return;
-    } else if (toCurrency && toCurrency.type === "TokenCurrency") {
-      toParentAccount = validTo[0];
-      _toAccount = accountWithMandatoryTokens(toParentAccount, [toCurrency]).subAccounts?.find(
-        isSameCurrencyFilter(toCurrency),
-      );
-    }
-
-    dispatch({
-      type: "setToAccount",
-      payload: {
-        toAccount: _toAccount,
-        toParentAccount,
-      },
-    });
-  }, [toAccount, fromCurrency, toCurrency, validTo]);
 
   const _canRequestRates = useMemo(() => canRequestRates(state), [state]);
 
@@ -286,7 +212,6 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
             onAmountChange={fromAmount => {
               dispatch({ type: "setFromAmount", payload: { fromAmount } });
             }}
-            validAccounts={validFrom}
             useAllAmount={useAllAmount}
             onToggleUseAllAmount={toggleUseAllAmount}
           />
@@ -306,7 +231,6 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount }: Props) => {
             onAccountChange={(toAccount, toParentAccount) =>
               patchExchange({ toAccount, toParentAccount })
             }
-            validAccounts={validTo}
           />
         </Box>
         <Footer

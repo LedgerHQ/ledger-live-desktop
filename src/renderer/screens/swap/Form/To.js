@@ -21,13 +21,14 @@ import ToolTip from "~/renderer/components/Tooltip";
 import Price from "~/renderer/components/Price";
 import IconPlusSmall from "~/renderer/icons/PlusSmall";
 import { openModal } from "~/renderer/actions/modals";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { CurrencyOptionRow } from "~/renderer/screens/swap/Form";
 import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/swap/logic";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import IconLock from "~/renderer/icons/Lock";
 import useTheme from "~/renderer/hooks/useTheme";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
+import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 
 const InputRight = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
@@ -58,7 +59,6 @@ const SwapInputGroup = ({
   fromCurrency,
   account: defaultAccount,
   currenciesStatus,
-  validAccounts,
   amount,
   rate,
   error,
@@ -70,13 +70,13 @@ const SwapInputGroup = ({
   fromCurrency: ?(CryptoCurrency | TokenCurrency),
   account: ?Account,
   currenciesStatus: CurrenciesStatus,
-  validAccounts: Account[],
   amount: ?BigNumber,
   rate?: BigNumber,
   error?: Error,
   onAccountChange: (AccountLike, ?Account) => void,
   onCurrencyChange: (CryptoCurrency | TokenCurrency) => void,
 }) => {
+  const accounts = useSelector(shallowAccountsSelector);
   const {
     availableAccounts,
     currency,
@@ -86,7 +86,7 @@ const SwapInputGroup = ({
     setAccount,
   } = useCurrencyAccountSelect({
     allCurrencies: currencies,
-    allAccounts: validAccounts,
+    allAccounts: accounts,
     defaultCurrency,
     defaultAccount,
   });
@@ -114,7 +114,7 @@ const SwapInputGroup = ({
     dispatch,
   ]);
 
-  const hasMaybeValidAccounts = validAccounts && validAccounts.length > 0;
+  const hasMaybeValidAccounts = availableAccounts && availableAccounts.length > 0;
 
   const lockColor = useTheme("colors.palette.text.shade50");
 

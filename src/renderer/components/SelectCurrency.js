@@ -67,11 +67,15 @@ const SelectCurrency = <C: Currency>({
     [isDisabled, cryptos],
   );
 
-  const fuseOptions = {
-    threshold: 0.1,
-    keys: ["name", "ticker"],
-    shouldSort: false,
-  };
+  const fuseOptions = useMemo(
+    () => ({
+      threshold: 0.1,
+      keys: ["name", "ticker"],
+      shouldSort: false,
+    }),
+    [],
+  );
+
   const manualFilter = useCallback(() => {
     const fuse = new Fuse(options, fuseOptions);
     return searchInputValue.length > 0 ? fuse.search(searchInputValue) : options;
