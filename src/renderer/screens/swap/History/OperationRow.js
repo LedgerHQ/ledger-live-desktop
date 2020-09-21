@@ -119,7 +119,7 @@ const OperationRow = ({
       alignItems={"center"}
       onClick={() => openSwapOperationDetailsModal(mappedSwapOperation)}
     >
-      <Tooltip content={<span style={{ textTransform: "capitalize" }}>status</span>}>
+      <Tooltip content={<span style={{ textTransform: "capitalize" }}>{status}</span>}>
         <Status status={status}>
           <IconSwap size={12} />
           {operationStatusList.pending.includes(status) ? (
