@@ -195,7 +195,7 @@
           "terms":"Terms & Conditions",
           "disclaimer": {
             "header": "Details",
-            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by Changelly's <1>Terms & Conditions</1>."
+            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by Changelly's"
           },
           "details": {
             "provider": "Provider",
