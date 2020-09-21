@@ -16,6 +16,7 @@ import styled from "styled-components";
 import { ModalBody } from "~/renderer/components/Modal";
 import Box from "~/renderer/components/Box";
 import Link from "~/renderer/components/Link";
+import Ellipsis from "~/renderer/components/Ellipsis";
 import Button from "~/renderer/components/Button";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
 import Text from "~/renderer/components/Text";
@@ -38,12 +39,13 @@ const Label = styled(Text).attrs(() => ({
   text-transform: uppercase;
 `;
 
-const Value = styled(Text).attrs(() => ({
+const Value = styled(Box).attrs(() => ({
   fontSize: 4,
   color: "palette.text.shade50",
   ff: "Inter|Regular",
 }))`
   margin-top: 2px;
+  flex: 1;
   & ${Link}:hover {
     text-decoration: underline;
   }
@@ -59,6 +61,7 @@ const Row = styled(Box).attrs(() => ({
   & > * {
     flex: 50%;
     align-items: flex-start;
+    overflow: hidden;
   }
 `;
 
@@ -232,16 +235,18 @@ const SwapOperationDetailsBody = ({
               <Label>
                 <Trans i18nKey="swap.operationDetailsModal.from" />
               </Label>
-              <Box horizontal alignItems={"center"}>
-                <Box mr={1}>
+              <Value horizontal alignItems={"center"} style={{ width: "100%" }}>
+                <Box mr={1} alignItems={"center"}>
                   <CryptoCurrencyIcon size={16} currency={fromCurrency} />
                 </Box>
-                <Value>
-                  <Link onClick={() => openAccount(fromAccount)}>
-                    {getAccountName(fromAccount)}
-                  </Link>
-                </Value>
-              </Box>
+                <Box flex={1}>
+                  <Ellipsis>
+                    <Link onClick={() => openAccount(fromAccount)}>
+                      {getAccountName(fromAccount)}
+                    </Link>
+                  </Ellipsis>
+                </Box>
+              </Value>
             </Box>
             <Box>
               <Label>
@@ -263,14 +268,16 @@ const SwapOperationDetailsBody = ({
               <Label>
                 <Trans i18nKey="swap.operationDetailsModal.to" />
               </Label>
-              <Box horizontal alignItems={"center"}>
-                <Box mr={1}>
+              <Value horizontal alignItems={"center"} style={{ width: "100%" }}>
+                <Box mr={1} alignItems={"center"}>
                   <CryptoCurrencyIcon size={16} currency={toCurrency} />
                 </Box>
-                <Value>
-                  <Link onClick={() => openAccount(toAccount)}>{getAccountName(toAccount)}</Link>
-                </Value>
-              </Box>
+                <Box flex={1}>
+                  <Ellipsis>
+                    <Link onClick={() => openAccount(toAccount)}>{getAccountName(toAccount)}</Link>
+                  </Ellipsis>
+                </Box>
+              </Value>
             </Box>
             <Box>
               <Label>
