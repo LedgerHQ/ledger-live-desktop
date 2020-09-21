@@ -190,12 +190,10 @@ const From = ({
               onChange={onAmountChange}
               renderRight={<InputRight>{unit.code}</InputRight>}
             />
-            {currency && !amountError ? (
+            {currency && amount?.gt(0) && !amountError ? (
               <CountervalueWrapper mt={1}>
-                <Box style={{ marginRight: 4 }}>
-                  <Text>{"≈"}</Text>
-                </Box>
                 <CounterValue
+                  prefix={<Text mr={1}>{"≈"}</Text>}
                   currency={currency}
                   value={amount}
                   disableRounding
