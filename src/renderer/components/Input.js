@@ -250,7 +250,9 @@ const Input = React.forwardRef(function Input(
           </ErrorDisplay>
         ) : warning ? (
           <WarningDisplay id="input-warning">
-            <TranslatedError error={warning} />
+            <Ellipsis>
+              <TranslatedError error={warning} />
+            </Ellipsis>
           </WarningDisplay>
         ) : null}
         {loading && !isFocus ? (
