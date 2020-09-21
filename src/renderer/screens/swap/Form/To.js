@@ -29,6 +29,7 @@ import IconLock from "~/renderer/icons/Lock";
 import useTheme from "~/renderer/hooks/useTheme";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 
 const InputRight = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
@@ -90,6 +91,15 @@ const SwapInputGroup = ({
     defaultCurrency,
     defaultAccount,
   });
+
+  useEffect(() => {
+    if (!account && currency) {
+      const maybeAccount = accounts.find(a => getAccountCurrency(a).id === currency.id);
+      if (maybeAccount) {
+        setAccount(maybeAccount);
+      }
+    }
+  }, [account, accounts, currency, setAccount]);
 
   const unit = currency && currency.units[0];
   const renderOptionOverride = useCallback(
