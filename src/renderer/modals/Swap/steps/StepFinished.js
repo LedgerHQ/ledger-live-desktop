@@ -132,23 +132,27 @@ export const StepFinishedFooter = ({
   result,
   swap,
   onClose,
-  transaction,
 }: {
   result: { swapId: string, operation: Operation },
   swap: { exchange: Exchange, exchangeRate: ExchangeRate },
   onClose: any,
-  transaction: any,
 }) => {
   const { operation } = result;
   const { fromAccount, fromParentAccount } = swap.exchange;
   const dispatch = useDispatch();
 
   const onViewOperationDetails = useCallback(() => {
+    const concernedOperation = operation
+      ? operation.subOperations && operation.subOperations.length > 0
+        ? operation.subOperations[0]
+        : operation
+      : null;
+
     onClose();
-    if (fromAccount && operation) {
+    if (fromAccount && concernedOperation) {
       dispatch(
         openModal("MODAL_OPERATION_DETAILS", {
-          operationId: operation.id,
+          operationId: concernedOperation.id,
           accountId: fromAccount.id,
           parentId: fromParentAccount && fromParentAccount.id,
         }),
