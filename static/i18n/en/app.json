@@ -192,10 +192,10 @@
           "toExchange": "Amount to send",
           "toReceive": "Amount to receive",
           "provider": "Provider",
-          "terms":"Terms & Conditions.",
+          "terms":"Terms & Conditions",
           "disclaimer": {
             "header": "Details",
-            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by Changelly's"
+            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by Changelly's <1>Terms & Conditions</1>."
           },
           "details": {
             "provider": "Provider",
@@ -207,11 +207,11 @@
         },
         "finished": {
           "title": "Pending",
-          "subttile": "Pending operation:",
+          "subtitle": "Pending operation",
           "swap": "Your Swap ID:",
           "seeDetails": "See details",
-          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0>{{provider}}</0> later",
-          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets"
+          "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from <0>{{provider}}</0> later.",
+          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets."
         }
       }
     },
@@ -224,7 +224,7 @@
       "from": "From",
       "to": "To",
       "initialAmount": "Amount sent",
-      "creditedAmount": "Amount received"
+      "creditedAmount": "Amount to receive"
     }
   },
   "account": {

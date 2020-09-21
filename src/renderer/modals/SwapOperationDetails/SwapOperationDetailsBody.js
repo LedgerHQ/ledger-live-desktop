@@ -221,7 +221,7 @@ const SwapOperationDetailsBody = ({
               <Label>
                 <Trans i18nKey="swap.operationDetailsModal.status" />
               </Label>
-              <Value>{status}</Value>
+              <Value style={{ textTransform: "capitalize" }}>{status}</Value>
             </Box>
             <Box>
               <Label>

@@ -164,7 +164,7 @@ const StepSummary = ({
           <FakeLink
             underline
             fontSize={3}
-            ml={2}
+            ml={1}
             color="palette.primary.main"
             onClick={e => {
               e.preventDefault();
@@ -178,6 +178,7 @@ const StepSummary = ({
               <IconExternalLink size={12} />
             </Box>
           </FakeLink>
+          {"."}
         </Text>
       </Box>
     </Box>
