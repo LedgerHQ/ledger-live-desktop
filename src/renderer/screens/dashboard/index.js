@@ -89,7 +89,6 @@ const DashboardPage = ({ saveSettings }: Props) => {
         ) : totalAccounts > 0 ? (
           <>
             <BalanceSummary
-              t={t}
               counterValue={counterValue}
               chartId="dashboard-chart"
               chartColor={colors.wallet}
