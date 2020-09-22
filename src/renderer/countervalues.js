@@ -46,6 +46,13 @@ export const pairsSelector: OutputSelector<*, *, *> = createSelector(
   },
 );
 
+export const trackingPairsSelector = createSelector(
+  currenciesSelector,
+  counterValueCurrencySelector,
+  (currencies, counterValueCurrency) =>
+    currencies.map(c => ({ from: c, to: counterValueCurrency })),
+);
+
 const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
   // TODO hook to net info of Electron ? retrieving network should trigger a poll
 
