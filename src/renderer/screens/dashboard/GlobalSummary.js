@@ -2,7 +2,7 @@
 
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { portfolioSelector } from "~/renderer/actions/portfolio";
+import { portfolioSelector, usePortfolio } from "~/renderer/actions/portfolio";
 import { BigNumber } from "bignumber.js";
 import moment from "moment";
 import { formatShort } from "@ledgerhq/live-common/lib/currencies";
@@ -12,7 +12,7 @@ import Chart from "~/renderer/components/Chart2";
 import Box, { Card } from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import PlaceholderChart from "~/renderer/components/PlaceholderChart";
-import { discreetModeSelector } from "~/renderer/reducers/settings";
+import { discreetModeSelector, counterValueCurrencySelector } from "~/renderer/reducers/settings";
 import BalanceInfos from "~/renderer/components/BalanceInfos";
 
 type Props = {
@@ -50,7 +50,10 @@ export default function PortfolioBalanceSummary({
   selectedTimeRange,
   handleChangeSelectedTime,
 }: Props) {
-  const portfolio = useSelector(state => portfolioSelector(state, { accounts, range }));
+  const portfolio1 = useSelector(state => portfolioSelector(state, { accounts, range }));
+  const portfolio = usePortfolio();
+  console.log("!!!", portfolio1, portfolio);
+
   const discreetMode = useSelector(discreetModeSelector);
 
   const renderTickY = useCallback(

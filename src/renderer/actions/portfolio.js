@@ -1,4 +1,7 @@
 // @flow
+import { BigNumber } from "bignumber.js";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
 import {
   getBalanceHistoryWithCountervalue,
   getCurrencyPortfolio,
@@ -12,7 +15,9 @@ import type {
   AccountLike,
 } from "@ledgerhq/live-common/lib/types";
 import { flattenAccounts, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
-
+import { useCountervaluesState } from "@ledgerhq/live-common/lib/countervalues/react";
+import { calculate } from "@ledgerhq/live-common/lib/countervalues/logic";
+import { selectedTimeRangeSelector } from "~/renderer/reducers/settings";
 import CounterValues from "../countervalues";
 
 import {
@@ -82,6 +87,29 @@ export const portfolioSelector = (
     });
   });
 };
+
+export function usePortfolio() {
+  const to = useSelector(counterValueCurrencySelector);
+  const accounts = useSelector(accountsSelector);
+  const range = useSelector(selectedTimeRangeSelector);
+  const state = useCountervaluesState();
+
+  return useMemo(
+    () =>
+      getPortfolio(accounts, range, (from, value, date) => {
+        const countervalue = calculate(state, {
+          value,
+          from,
+          to,
+          disableRounding: true,
+          date,
+        });
+
+        return typeof countervalue !== "undefined" ? BigNumber(countervalue) : countervalue;
+      }),
+    [accounts, range, state, to],
+  );
+}
 
 export const currencyPortfolioSelector = (
   state: State,
