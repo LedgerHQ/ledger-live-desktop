@@ -91,6 +91,14 @@ export const experimentalFeatures: Feature[] = [
       "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device.",
     minValue: 1,
   },
+  {
+    type: "toggle",
+    name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
+    valueOn: "ethereum",
+    valueOff: "",
+    title: "Experimental Ethereum rework",
+    description: "Switch to the JavaScript re-implementation of Ethereum",
+  },
 ];
 
 const lsKey = "experimentalFlags";
