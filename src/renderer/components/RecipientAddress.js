@@ -104,7 +104,13 @@ class RecipientAddress extends PureComponent<Props, State> {
     const preOnChange = text => onChange((text && text.replace(/\s/g, "")) || "");
     return (
       <Box relative justifyContent="center">
-        <Input {...rest} value={value} onChange={preOnChange} renderRight={renderRight} />
+        <Input
+          {...rest}
+          spellCheck="false"
+          value={value}
+          onChange={preOnChange}
+          renderRight={renderRight}
+        />
       </Box>
     );
   }
