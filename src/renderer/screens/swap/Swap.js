@@ -55,7 +55,7 @@ const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount }: Props) 
     <Connect setResult={onSetResult} />
   ) : !exchangeApp ? (
     <MissingOrOutdatedSwapApp />
-  ) : exchangeApp.outdated ? (
+  ) : !exchangeApp.updated ? (
     <MissingOrOutdatedSwapApp outdated />
   ) : (
     <Form
