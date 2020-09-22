@@ -7,10 +7,13 @@ import styled from "styled-components";
 import Card from "~/renderer/components/Box/Card";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
+import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import swapIllustration from "~/renderer/images/swap.png";
 import CheckBox from "~/renderer/components/CheckBox";
 import Button from "~/renderer/components/Button";
 import { setHasAcceptedSwapKYC } from "~/renderer/actions/settings";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
 
 const Title = styled(Text)`
   align-items: center;
@@ -31,7 +34,6 @@ const Subtitle = styled(Text)`
   font-size: 13px;
   line-height: 19px;
   padding: 0 100px;
-  margin-bottom: 44px;
   color: ${p => p.theme.colors.palette.text.shade50};
 `;
 
@@ -65,6 +67,7 @@ const KYC = () => {
   const [isChecked, setIsChecked] = useState(false);
   const dispatch = useDispatch();
   const onAcceptSwapKYC = useCallback(() => dispatch(setHasAcceptedSwapKYC(true)), [dispatch]);
+
   return (
     <Card flex={1} pt={53} justifyContent={"space-between"}>
       <Box flex={1} justifyContent={"center"}>
@@ -75,6 +78,15 @@ const KYC = () => {
         <Subtitle ff="Inter|Medium">
           <Trans i18nKey={"swap.kyc.subtitle"} />
         </Subtitle>
+        <Box alignSelf={"center"} mb={44} mt={2}>
+          <LinkWithExternalIcon
+            ff="Inter|Regular"
+            fontSize={3}
+            onClick={() => openURL(urls.swap.info)}
+          >
+            <Trans i18nKey="swap.whatIsSwap" />
+          </LinkWithExternalIcon>
+        </Box>
       </Box>
       <Footer>
         <CheckBox id={"swap-landing-kyc-tos"} isChecked={isChecked} onChange={setIsChecked} />

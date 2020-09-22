@@ -126,6 +126,7 @@
   "swap": {
     "title": "Swap",
     "titleCrypto": "Swap {{currency}}",
+    "whatIsSwap": "What is Swap",
     "tabs": {
       "exchange": "Exchange",
       "history": "History"
