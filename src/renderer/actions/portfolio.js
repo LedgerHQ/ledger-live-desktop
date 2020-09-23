@@ -8,7 +8,6 @@ import {
   getPortfolio,
 } from "@ledgerhq/live-common/lib/portfolio";
 import type {
-  Account,
   CryptoCurrency,
   PortfolioRange,
   TokenCurrency,
@@ -59,34 +58,33 @@ export const balanceHistoryWithCountervalueSelector = (
   );
 };
 
-export const portfolioSelector = (
-  state: State,
-  {
-    accounts,
-    range,
-  }: {
-    accounts: Account[],
-    range: PortfolioRange,
-  },
-) => {
-  const counterValueCurrency = counterValueCurrencySelector(state);
-  return getPortfolio(accounts, range, (currency, value, date) => {
-    const intermediary = intermediaryCurrency(currency, counterValueCurrency);
-    const toExchange = exchangeSettingsForPairSelector(state, {
-      from: intermediary,
-      to: counterValueCurrency,
-    });
-    return CounterValues.calculateWithIntermediarySelector(state, {
-      value,
-      date,
-      from: currency,
-      fromExchange: exchangeSettingsForPairSelector(state, { from: currency, to: intermediary }),
-      intermediary,
-      toExchange,
-      to: counterValueCurrency,
-    });
-  });
-};
+export function useBalanceHistoryWithCountervalue({
+  account,
+  range,
+}: {
+  account: AccountLike,
+  range: PortfolioRange,
+}) {
+  const from = getAccountCurrency(account);
+  const to = useSelector(counterValueCurrencySelector);
+  const state = useCountervaluesState();
+
+  return useMemo(
+    () =>
+      getBalanceHistoryWithCountervalue(account, range, (_, value, date) => {
+        const countervalue = calculate(state, {
+          value,
+          from,
+          to,
+          disableRounding: true,
+          date,
+        });
+
+        return typeof countervalue !== "undefined" ? BigNumber(countervalue) : countervalue;
+      }),
+    [account, from, to, range, state],
+  );
+}
 
 export function usePortfolio() {
   const to = useSelector(counterValueCurrencySelector);
