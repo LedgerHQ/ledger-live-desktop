@@ -2,8 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { balanceHistoryWithCountervalueSelector } from "~/renderer/actions/portfolio";
+import { useBalanceHistoryWithCountervalue } from "~/renderer/actions/portfolio";
 import type { Account, TokenAccount, PortfolioRange } from "@ledgerhq/live-common/lib/types";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
@@ -22,10 +21,11 @@ type Props = {
   range: PortfolioRange,
 };
 
-const Body = ({ account, range }: Props) => {
-  const { history, countervalueAvailable, countervalueChange } = useSelector(state =>
-    balanceHistoryWithCountervalueSelector(state, { account, range }),
-  );
+function Body({ account, range }: Props) {
+  const { history, countervalueAvailable, countervalueChange } = useBalanceHistoryWithCountervalue({
+    account,
+    range,
+  });
   const bgColor = useTheme("colors.palette.background.paper");
   const currency = getAccountCurrency(account);
 
@@ -63,7 +63,7 @@ const Body = ({ account, range }: Props) => {
       />
     </Box>
   );
-};
+}
 
 const MemoedBody: React$ComponentType<Props> = React.memo(Body);
 

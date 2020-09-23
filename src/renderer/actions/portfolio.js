@@ -27,37 +27,6 @@ import {
 import { accountsSelector } from "./../reducers/accounts";
 import type { State } from "./../reducers";
 
-export const balanceHistoryWithCountervalueSelector = (
-  state: State,
-  {
-    account,
-    range,
-  }: {
-    account: AccountLike,
-    range: PortfolioRange,
-  },
-) => {
-  const counterValueCurrency = counterValueCurrencySelector(state);
-  const currency = getAccountCurrency(account);
-  const intermediary = intermediaryCurrency(currency, counterValueCurrency);
-  const exchange = exchangeSettingsForPairSelector(state, { from: currency, to: intermediary });
-  const toExchange = exchangeSettingsForPairSelector(state, {
-    from: intermediary,
-    to: counterValueCurrency,
-  });
-  return getBalanceHistoryWithCountervalue(account, range, (_, value, date) =>
-    CounterValues.calculateWithIntermediarySelector(state, {
-      value,
-      date,
-      from: currency,
-      fromExchange: exchange,
-      intermediary,
-      toExchange,
-      to: counterValueCurrency,
-    }),
-  );
-};
-
 export function useBalanceHistoryWithCountervalue({
   account,
   range,
