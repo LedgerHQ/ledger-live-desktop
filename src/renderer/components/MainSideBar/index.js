@@ -12,7 +12,7 @@ import { sidebarCollapsedSelector, lastSeenDeviceSelector } from "~/renderer/red
 import { isNavigationLocked } from "~/renderer/reducers/application";
 
 import { openModal } from "~/renderer/actions/modals";
-import { setSidebarCollapsed } from "~/renderer/actions/settings";
+import { setFirstTimeLend, setSidebarCollapsed } from "~/renderer/actions/settings";
 
 import useExperimental from "~/renderer/hooks/useExperimental";
 
@@ -25,6 +25,7 @@ import IconReceive from "~/renderer/icons/Receive";
 import IconSend from "~/renderer/icons/Send";
 import IconExchange from "~/renderer/icons/Exchange";
 import IconChevron from "~/renderer/icons/ChevronRight";
+import IconRedelegate from "~/renderer/icons/Redelegate";
 import IconExperimental from "~/renderer/icons/Experimental";
 
 import { SideBarList, SideBarListItem } from "~/renderer/components/SideBar";
@@ -181,6 +182,7 @@ const MainSideBar = () => {
   const noAccounts = useSelector(accountsSelector).length === 0;
   const hasStarredAccounts = useSelector(starredAccountsSelector).length > 0;
   const displayBlueDot = useManagerBlueDot(lastSeenDevice);
+  const firstTimeLend = useSelector(state => state.settings.firstTimeLend);
 
   const handleCollapse = useCallback(() => {
     dispatch(setSidebarCollapsed(!collapsed));
@@ -210,6 +212,13 @@ const MainSideBar = () => {
   const handleClickExchange = useCallback(() => {
     push("/exchange");
   }, [push]);
+
+  const handleClickLend = useCallback(() => {
+    if (firstTimeLend) {
+      dispatch(setFirstTimeLend());
+    }
+    push("/lend");
+  }, [push, firstTimeLend, dispatch]);
 
   const maybeRedirectToAccounts = useCallback(() => {
     return location.pathname === "/manager" && push("/accounts");
@@ -301,6 +310,18 @@ const MainSideBar = () => {
                 isActive={location.pathname === "/exchange"}
                 collapsed={secondAnim}
               />
+              {process.env.COMPOUND === "1" ? (
+                <SideBarListItem
+                  id={"lend"}
+                  label={t("sidebar.lend")}
+                  icon={IconRedelegate}
+                  iconActiveColor="wallet"
+                  onClick={handleClickLend}
+                  isActive={location.pathname === "/lend"}
+                  collapsed={secondAnim}
+                  NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
+                />
+              ) : null}
               <Space of={30} />
             </SideBarList>
             <Space grow of={30} />

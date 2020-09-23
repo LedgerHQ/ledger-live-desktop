@@ -100,6 +100,7 @@ export type SettingsState = {
   starredAccountIds?: string[],
   blacklistedTokenIds: string[],
   deepLinkUrl: ?string,
+  firstTimeLend: boolean,
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -139,6 +140,7 @@ const INITIAL_STATE: SettingsState = {
   lastSeenDevice: null,
   blacklistedTokenIds: [],
   deepLinkUrl: null,
+  firstTimeLend: false,
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -224,6 +226,10 @@ const handlers: Object = {
   SET_DEEPLINK_URL: (state: SettingsState, { payload: deepLinkUrl }) => ({
     ...state,
     deepLinkUrl,
+  }),
+  SET_FIRST_TIME_LEND: (state: SettingsState) => ({
+    ...state,
+    firstTimeLend: false,
   }),
   // used to debug performance of redux updates
   DEBUG_TICK: state => ({ ...state }),

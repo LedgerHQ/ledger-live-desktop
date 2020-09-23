@@ -6,14 +6,6 @@ import { Trans } from "react-i18next";
 import { Base } from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 
-const Tabs: ThemedComponent<*> = styled.div`
-  height: ${p => p.theme.sizes.topBarHeight}px;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  align-items: flex-end;
-`;
-
 const Tab = styled(Base)`
   padding: 0 16px 4px 16px;
   border-radius: 0;
@@ -27,27 +19,40 @@ const Tab = styled(Base)`
   }
 `;
 
-const TabIndicator = styled.span.attrs(({ currentRef = {} }) => ({
+const TabIndicator = styled.span.attrs(({ currentRef = {}, index, short }) => ({
   style: {
-    width: `${currentRef.clientWidth - 32}px`,
+    width: `${currentRef.clientWidth - (short && index === 0 ? 16 : 32)}px`,
     transform: `translateX(${currentRef.offsetLeft}px)`,
   },
 }))`
   height: 3px;
   position: absolute;
   bottom: 0;
-  left: 16px;
+  left: ${p => (p.short && p.index === 0 ? 0 : "16px")};
   background-color: ${p => p.theme.colors.palette.primary.main};
   transition: all 0.3s ease-in-out;
+`;
+
+const Tabs: ThemedComponent<{ short: boolean }> = styled.div`
+  height: ${p => p.theme.sizes.topBarHeight}px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: flex-end;
+
+  ${Tab}:first-child {
+    ${p => (p.short ? "padding-left: 0;" : "")}
+  }
 `;
 
 type Props = {
   tabs: string[],
   onIndexChange: number => void,
   defaultIndex?: number,
+  short?: boolean,
 };
 
-const TabBar = ({ tabs, onIndexChange, defaultIndex = 0 }: Props) => {
+const TabBar = ({ tabs, onIndexChange, defaultIndex = 0, short = false }: Props) => {
   const tabRefs = useRef([]);
   const [index, setIndex] = useState(defaultIndex);
 
@@ -70,7 +75,7 @@ const TabBar = ({ tabs, onIndexChange, defaultIndex = 0 }: Props) => {
   };
 
   return (
-    <Tabs>
+    <Tabs short={short}>
       {tabs.map((tab, i) => (
         <Tab
           ref={setTabRef(i)}
@@ -84,7 +89,9 @@ const TabBar = ({ tabs, onIndexChange, defaultIndex = 0 }: Props) => {
           </Text>
         </Tab>
       ))}
-      {mounted && tabRefs.current[index] && <TabIndicator currentRef={tabRefs.current[index]} />}
+      {mounted && tabRefs.current[index] && (
+        <TabIndicator short={short} index={index} currentRef={tabRefs.current[index]} />
+      )}
     </Tabs>
   );
 };

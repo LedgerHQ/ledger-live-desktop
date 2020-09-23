@@ -94,7 +94,7 @@ export const experimentalFeatures: Feature[] = [
   {
     type: "toggle",
     name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
-    valueOn: "",
+    valueOn: "ethereum",
     valueOff: "",
     title: "Experimental JavaScript Bridge for Ethereum",
     description: "Changing this value will switch to the js implementation of Ethereum",

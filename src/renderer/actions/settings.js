@@ -100,3 +100,7 @@ export const setDeepLinkUrl = (url: ?string) => ({
   type: "SET_DEEPLINK_URL",
   payload: url,
 });
+
+export const setFirstTimeLend = () => ({
+  type: "SET_FIRST_TIME_LEND",
+});

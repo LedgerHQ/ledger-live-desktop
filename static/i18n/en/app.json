@@ -116,7 +116,8 @@
     "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "Manager",
-    "exchange": "Buy crypto"
+    "exchange": "Buy crypto",
+    "lend": "Lend crypto"
   },
   "stars": {
     "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
@@ -183,6 +184,37 @@
     },
     "history": {
       "tab": "History"
+    }
+  },
+  "lend": {
+    "title": "Lend crypto",
+    "description": "Supply your assets to the protocol and start earning interest today.",
+    "tabs": {
+      "dashboard": "Dashboard",
+      "closed": "Closed loans",
+      "history": "History"
+    },
+    "assets": "Assets",
+    "active": "Active accounts",
+    "emptyState": {
+      "title": "Lending",
+      "description": "You can lend assets directly from your Ethereum accounts and earn passive revenue.",
+      "cta": "How does lending on Compound work?"
+    },
+    "headers": {
+      "active": {
+        "accounts": "Accounts",
+        "amountSupplied": "Amount supplied",
+        "accruedInterests": "Accrued interests",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "closed": {
+        "assetLended": "Asset lended",
+        "amountRedeemed": "Amount redeemed",
+        "interestsEarned": "Interests earned",
+        "date": "Date"
+      }
     }
   },
   "accounts": {
