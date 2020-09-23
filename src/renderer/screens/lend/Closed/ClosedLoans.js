@@ -7,7 +7,6 @@ import type {
 } from "@ledgerhq/live-common/lib/compound/types";
 import { useTranslation } from "react-i18next";
 import { getAccountName } from "@ledgerhq/live-common/lib/account";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Box from "~/renderer/components/Box";
 import Card from "~/renderer/components/Box/Card";
 import Text from "~/renderer/components/Text";

@@ -197,9 +197,16 @@
     "assets": "Assets",
     "active": "Active accounts",
     "emptyState": {
-      "title": "Lending",
-      "description": "You can lend assets directly from your Ethereum accounts and earn passive revenue.",
-      "cta": "How does lending on Compound work?"
+      "active": {
+        "title": "Lending",
+        "description": "You can lend assets directly from your Ethereum accounts and earn passive revenue.",
+        "cta": "How does lending on Compound work?"
+      },
+      "closed": {
+        "title": "Closed loans",
+        "description": "View all your withdrawn loans and the interest you have earned.",
+        "cta": "Lend now"
+      }
     },
     "headers": {
       "active": {

@@ -21,15 +21,15 @@ const EmptyState = () => {
   return (
     <Container>
       <Text ff="Inter|SemiBold" fontSize={14} color="palette.text.shade100">
-        {t("lend.emptyState.title")}
+        {t("lend.emptyState.active.title")}
       </Text>
       <Box mt={1}>
         <Text ff="Inter|Medium" fontSize={4} color="palette.text.shade50">
-          {t("lend.emptyState.description")}
+          {t("lend.emptyState.active.description")}
         </Text>
       </Box>
       <Box mt={2}>
-        <LinkWithExternal onClick={() => {}} label={t("lend.emptyState.cta")} />
+        <LinkWithExternal onClick={() => {}} label={t("lend.emptyState.active.cta")} />
       </Box>
     </Container>
   );
