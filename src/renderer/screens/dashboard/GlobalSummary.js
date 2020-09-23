@@ -2,21 +2,20 @@
 
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { portfolioSelector, usePortfolio } from "~/renderer/actions/portfolio";
+import { usePortfolio } from "~/renderer/actions/portfolio";
 import { BigNumber } from "bignumber.js";
 import moment from "moment";
 import { formatShort } from "@ledgerhq/live-common/lib/currencies";
-import type { Account, Currency, PortfolioRange } from "@ledgerhq/live-common/lib/types";
+import type { Currency, PortfolioRange } from "@ledgerhq/live-common/lib/types";
 
 import Chart from "~/renderer/components/Chart2";
 import Box, { Card } from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import PlaceholderChart from "~/renderer/components/PlaceholderChart";
-import { discreetModeSelector, counterValueCurrencySelector } from "~/renderer/reducers/settings";
+import { discreetModeSelector } from "~/renderer/reducers/settings";
 import BalanceInfos from "~/renderer/components/BalanceInfos";
 
 type Props = {
-  accounts: Account[],
   counterValue: Currency,
   chartColor: string,
   chartId: string,
@@ -42,7 +41,6 @@ const Tooltip = ({ counterValue, d }: *) => (
 );
 
 export default function PortfolioBalanceSummary({
-  accounts,
   range,
   chartColor,
   chartId,
@@ -50,10 +48,7 @@ export default function PortfolioBalanceSummary({
   selectedTimeRange,
   handleChangeSelectedTime,
 }: Props) {
-  const portfolio1 = useSelector(state => portfolioSelector(state, { accounts, range }));
   const portfolio = usePortfolio();
-  console.log("!!!", portfolio1, portfolio);
-
   const discreetMode = useSelector(discreetModeSelector);
 
   const renderTickY = useCallback(
