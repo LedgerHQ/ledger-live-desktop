@@ -1,44 +1,18 @@
 // @flow
-import { BigNumber } from "bignumber.js";
-import React, { useState, useRef, useLayoutEffect, useMemo } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useRef, useLayoutEffect } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
-import { getAssetsDistribution } from "@ledgerhq/live-common/lib/portfolio";
-import type { Currency } from "@ledgerhq/live-common/lib/types";
-import { useCountervaluesState } from "@ledgerhq/live-common/lib/countervalues/react";
-import { calculate } from "@ledgerhq/live-common/lib/countervalues/logic";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import Card from "~/renderer/components/Box/Card";
 import IconAngleDown from "~/renderer/icons/AngleDown";
-import { accountsSelector } from "~/renderer/reducers/accounts";
-import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 import Row from "./Row";
 import Header from "./Header";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { useDistribution } from "~/renderer/actions/general";
 
 export default function AssetDistribution() {
-  const accounts = useSelector(accountsSelector);
-  const to = useSelector(counterValueCurrencySelector);
-  const state = useCountervaluesState();
-  const distribution = useMemo(() => {
-    function calc(from: Currency, value: number): ?BigNumber {
-      const countervalue = calculate(state, {
-        value,
-        from,
-        to,
-        disableRounding: true,
-      });
-      return typeof countervalue !== "undefined" ? BigNumber(countervalue) : countervalue;
-    }
-
-    return getAssetsDistribution(accounts, calc, {
-      minShowFirst: 6,
-      maxShowFirst: 6,
-      showFirstThreshold: 0.95,
-    });
-  }, [accounts, state, to]);
+  const distribution = useDistribution();
 
   const cardRef = useRef(null);
   const [showAll, setShowAll] = useState(false);

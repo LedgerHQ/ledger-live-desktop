@@ -1,6 +1,7 @@
 // @flow
-
-import type { BigNumber } from "bignumber.js";
+import { BigNumber } from "bignumber.js";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
 import type { OutputSelector } from "reselect";
 import { createSelector } from "reselect";
 import type { Currency, AccountLikeArray, Account } from "@ledgerhq/live-common/lib/types";
@@ -10,18 +11,44 @@ import {
   flattenSortAccounts,
   sortAccountsComparatorFromOrder,
 } from "@ledgerhq/live-common/lib/account";
-
+import { getAssetsDistribution } from "@ledgerhq/live-common/lib/portfolio";
+import { useCountervaluesState } from "@ledgerhq/live-common/lib/countervalues/react";
+import { calculate } from "@ledgerhq/live-common/lib/countervalues/logic";
 import CounterValues from "../countervalues";
+import type { State } from "~/renderer/reducers";
+import { accountsSelector, activeAccountsSelector } from "~/renderer/reducers/accounts";
+import { osDarkModeSelector } from "~/renderer/reducers/application";
 import {
   intermediaryCurrency,
   exchangeSettingsForPairSelector,
   getOrderAccounts,
   counterValueCurrencySelector,
   userThemeSelector,
-} from "./../reducers/settings";
-import { accountsSelector, activeAccountsSelector } from "./../reducers/accounts";
-import type { State } from "./../reducers";
-import { osDarkModeSelector } from "~/renderer/reducers/application";
+} from "~/renderer/reducers/settings";
+
+export function useDistribution() {
+  const accounts = useSelector(accountsSelector);
+  const to = useSelector(counterValueCurrencySelector);
+  const state = useCountervaluesState();
+
+  return useMemo(() => {
+    function calc(from: Currency, value: number): ?BigNumber {
+      const countervalue = calculate(state, {
+        value,
+        from,
+        to,
+        disableRounding: true,
+      });
+      return typeof countervalue !== "undefined" ? BigNumber(countervalue) : countervalue;
+    }
+
+    return getAssetsDistribution(accounts, calc, {
+      minShowFirst: 6,
+      maxShowFirst: 6,
+      showFirstThreshold: 0.95,
+    });
+  }, [accounts, state, to]);
+}
 
 export const calculateCountervalueSelector = (state: State) => {
   const counterValueCurrency = counterValueCurrencySelector(state);
