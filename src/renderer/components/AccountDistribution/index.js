@@ -1,44 +1,52 @@
 // @flow
-
-import React, { useLayoutEffect, useRef, useState } from "react";
-import { connect } from "react-redux";
+import React, { useLayoutEffect, useRef, useState, useMemo } from "react";
+import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
+import { useCountervaluesState } from "@ledgerhq/live-common/lib/countervalues/react";
+import { calculate } from "@ledgerhq/live-common/lib/countervalues/logic";
 import Text from "~/renderer/components/Text";
 import Card from "~/renderer/components/Box/Card";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+import type { Account } from "@ledgerhq/live-common/lib/types";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 import Box from "~/renderer/components/Box";
 import Header from "./Header";
 import Row from "./Row";
-import type { AccountDistributionItem } from "./Row";
-import { calculateCountervalueSelector } from "~/renderer/actions/general";
 
 type Props = {
-  accountDistribution: AccountDistributionItem[],
+  accounts: Account[],
 };
 
-const mapStateToProps = (state, props) => {
-  const { accounts } = props;
+export default function AccountDistribution({ accounts }: Props) {
+  const to = useSelector(counterValueCurrencySelector);
+  const state = useCountervaluesState();
   const total = accounts.reduce((total, a) => total.plus(a.balance), BigNumber(0));
+  const accountDistribution = useMemo(
+    () =>
+      accounts
+        .map(a => {
+          const from = getAccountCurrency(a);
+          return {
+            account: a,
+            currency: from,
+            distribution: a.balance.div(total).toFixed(2),
+            amount: a.balance,
+            countervalue: calculate(state, {
+              value: a.balance,
+              from,
+              to,
+              disableRounding: true,
+            }),
+          };
+        })
+        .sort((a, b) => b.distribution - a.distribution),
+    [accounts, state, to, total],
+  );
 
-  return {
-    accountDistribution: accounts
-      .map(a => ({
-        account: a,
-        currency: getAccountCurrency(a),
-        distribution: a.balance.div(total).toFixed(2),
-        amount: a.balance,
-        countervalue: calculateCountervalueSelector(state)(getAccountCurrency(a), a.balance),
-      }))
-      .sort((a, b) => b.distribution - a.distribution),
-    counterValueCurrency: counterValueCurrencySelector,
-  };
-};
-
-const AccountDistribution = ({ accountDistribution }: Props) => {
   const cardRef = useRef(null);
   const [isVisible, setVisible] = useState(false);
+
   useLayoutEffect(() => {
     const scrollArea = document.getElementById("scroll-area");
     if (!cardRef.current) {
@@ -82,9 +90,4 @@ const AccountDistribution = ({ accountDistribution }: Props) => {
       </Card>
     </>
   );
-};
-
-const ConnectedAccountDistribution: React$ComponentType<{}> = connect(mapStateToProps)(
-  AccountDistribution,
-);
-export default ConnectedAccountDistribution;
+}
