@@ -1,4 +1,5 @@
 // @flow
+import MODAL_WEBSOCKET_BRIDGE from "./WebSocketBridge";
 import MODAL_DELEGATE from "../families/tezos/DelegateFlowModal";
 import MODAL_TRON_REWARDS_INFO from "../families/tron/EarnRewardsInfoModal";
 import MODAL_EXPORT_OPERATIONS from "./ExportOperations";
@@ -41,6 +42,7 @@ import MODAL_ALGORAND_CLAIM_REWARDS from "../families/algorand/Rewards/ClaimRewa
 import MODAL_ALGORAND_EARN_REWARDS_INFO from "../families/algorand/Rewards/EarnRewardsInfoModal";
 
 const modals: { [_: string]: React$ComponentType<any> } = {
+  MODAL_WEBSOCKET_BRIDGE,
   MODAL_EXPORT_OPERATIONS,
   MODAL_CONFIRM,
   MODAL_MANAGE_TRON,
