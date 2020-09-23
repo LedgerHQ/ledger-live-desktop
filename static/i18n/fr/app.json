@@ -66,7 +66,7 @@
       "refresh": "Actualiser",
       "ago": "Synchronisé {{time}}"
     },
-    "exchange": "Exchange"
+    "exchange": "Échange"
   },
   "operation": {
     "type": {
@@ -328,7 +328,7 @@
       "title": "ASA (Actifs)",
       "cta": "Ajouter ASA",
       "placeholder": "Vous pouvez ajouter des actifs à votre compte {{currencyName}}.",
-      "link": "How Assets (ASA) works?",
+      "link": "Comment fonctionnent les ASA ?",
       "seeTokens": "Afficher ASA ({{tokenCount}})",
       "hideTokens": "Masquer ASA ({{tokenCount}})",
       "tooltip": "ASA de",
@@ -556,9 +556,9 @@
         "learnMore": "En savoir plus",
         "learnMoreTooltip": "En savoir plus sur {{appName}}",
         "removeTooltip": "Désinstaller {{appName}}",
-        "useAppForToken": "Looking to manage {{tokenType}} tokens?",
-        "tokenAppDisclaimer": "To manage {{tokenName}} {{tokenType}} tokens, <1>install the {{appName}} app</1> and please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
-        "tokenAppDisclaimerInstalled": "To manage <1>{{tokenName}} {{tokenType}} tokens</1>, please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
+        "useAppForToken": "Vous cherchez à gérer des tokens {{tokenType}} ?",
+        "tokenAppDisclaimer": "Pour gérer les jetons {{tokenName}} {{tokenType}} , <1>installez l'application {{appName}} </1> et vérifiez que vous avez bien la <1> version {{tokenType}} </1> avant d'en envoyer <3>à votre compte {{appName}} </3>.",
+        "tokenAppDisclaimerInstalled": "Pour gérer <1>les tokens {{tokenName}} {{tokenType}} </1>, vérifiez que vous avez bien la <1> version {{tokenType}} </1> avant d'en envoyer <3>à votre compte {{appName}} </3>.",
         "goToAccounts": "Accéder aux comptes",
         "intallParentApp": "Installer l'application {{appName}}"
       },
@@ -1153,9 +1153,9 @@
         "steps": {
           "assets": {
             "title": "ASA (Actif)",
-            "info": "Adding an asset requires sending a transaction with minimum fees. This will appear on your transaction history",
+            "info": "L'ajout d'un actif nécessite l'émission d'une transaction. Cela apparaîtra sur votre historique de transactions",
             "selectLabel": "Choisir un ASA (Actif)",
-            "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
+            "disabledTooltip": "Vous avez déjà cet ASA (Actif) dans votre compte Algorand"
           },
           "connectDevice": {
             "title": "Appareil"
@@ -1188,7 +1188,7 @@
             "title": "Obtenez des récompenses",
             "description": "Recevez des récompenses en tenant des ALGO dans votre porte-feuille.",
             "bullet": {
-              "delegate": "A minimum balance of 1 ALGO is required to receive rewards.",
+              "delegate": "Un solde de 1 ALGO est requis pour recevoir des récompenses.",
               "access": "Augmentez le solde du compte pour augmenter les récompenses.",
               "ledger": "Effectuez une transaction vers ou depuis le compte pour réclamer des récompenses."
             },
