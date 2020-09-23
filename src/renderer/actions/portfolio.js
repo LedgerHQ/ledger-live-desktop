@@ -17,15 +17,9 @@ import { flattenAccounts, getAccountCurrency } from "@ledgerhq/live-common/lib/a
 import { useCountervaluesState } from "@ledgerhq/live-common/lib/countervalues/react";
 import { calculate } from "@ledgerhq/live-common/lib/countervalues/logic";
 import { selectedTimeRangeSelector } from "~/renderer/reducers/settings";
-import CounterValues from "../countervalues";
 
-import {
-  exchangeSettingsForPairSelector,
-  counterValueCurrencySelector,
-  intermediaryCurrency,
-} from "./../reducers/settings";
+import { counterValueCurrencySelector } from "./../reducers/settings";
 import { accountsSelector } from "./../reducers/accounts";
-import type { State } from "./../reducers";
 
 export function useBalanceHistoryWithCountervalue({
   account,
@@ -78,34 +72,31 @@ export function usePortfolio() {
   );
 }
 
-export const currencyPortfolioSelector = (
-  state: State,
-  {
-    currency,
-    range,
-  }: {
-    currency: CryptoCurrency | TokenCurrency,
-    range: PortfolioRange,
-  },
-) => {
-  const accounts = flattenAccounts(accountsSelector(state)).filter(
-    a => getAccountCurrency(a) === currency,
+export function useCurrencyPortfolio({
+  currency,
+  range,
+}: {
+  currency: CryptoCurrency | TokenCurrency,
+  range: PortfolioRange,
+}) {
+  const rawAccounts = useSelector(accountsSelector);
+  const accounts = flattenAccounts(rawAccounts);
+  const to = useSelector(counterValueCurrencySelector);
+  const state = useCountervaluesState();
+
+  return useMemo(
+    () =>
+      getCurrencyPortfolio(accounts, range, (from, value, date) => {
+        const countervalue = calculate(state, {
+          value,
+          from,
+          to,
+          disableRounding: true,
+          date,
+        });
+
+        return typeof countervalue !== "undefined" ? BigNumber(countervalue) : countervalue;
+      }),
+    [accounts, range, state, to],
   );
-  const counterValueCurrency = counterValueCurrencySelector(state);
-  return getCurrencyPortfolio(accounts, range, (currency, value, date) => {
-    const intermediary = intermediaryCurrency(currency, counterValueCurrency);
-    const toExchange = exchangeSettingsForPairSelector(state, {
-      from: intermediary,
-      to: counterValueCurrency,
-    });
-    return CounterValues.calculateWithIntermediarySelector(state, {
-      value,
-      date,
-      from: currency,
-      fromExchange: exchangeSettingsForPairSelector(state, { from: currency, to: intermediary }),
-      intermediary,
-      toExchange,
-      to: counterValueCurrency,
-    });
-  });
-};
+}

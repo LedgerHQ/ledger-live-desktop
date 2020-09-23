@@ -14,7 +14,7 @@ import Chart from "~/renderer/components/Chart2";
 import Box, { Card } from "~/renderer/components/Box";
 import moment from "moment";
 import FormattedVal from "~/renderer/components/FormattedVal";
-import { currencyPortfolioSelector } from "~/renderer/actions/portfolio";
+import { useCurrencyPortfolio } from "~/renderer/actions/portfolio";
 import AssetBalanceSummaryHeader from "./AssetBalanceSummaryHeader";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
 
@@ -37,10 +37,14 @@ export default function BalanceSummary({
   chartId,
   currency,
 }: Props) {
-  const { history, countervalueAvailable, countervalueChange, cryptoChange } = useSelector(state =>
-    currencyPortfolioSelector(state, { currency, range }),
-  );
+  const {
+    history,
+    countervalueAvailable,
+    countervalueChange,
+    cryptoChange,
+  } = useCurrencyPortfolio({ currency, range });
   const discreetMode = useSelector(discreetModeSelector);
+
   const mapValueCounterValue = useCallback((d: any) => d.countervalue.toNumber(), []);
   const mapValueCryptoValue = useCallback((d: any) => d.value.toNumber(), []);
 
