@@ -64,8 +64,14 @@ export default function RequestAmount({
         onChange(val.gt(max) ? max : val);
       } else if (changedField === "right") {
         const leftVal = BigNumber(
-          calculate(state, { from: rightCurrency, to: currency, value: val.toNumber() }) ?? 0,
+          calculate(state, {
+            from: currency,
+            to: rightCurrency,
+            value: val.toNumber(),
+            reverse: true,
+          }) ?? 0,
         );
+        console.log("!!!", leftVal.toNumber());
         onChange(leftVal.gt(max) ? max : leftVal);
       }
     },
