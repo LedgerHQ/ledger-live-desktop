@@ -65,7 +65,8 @@
       "error": "Erreur de synchronisation",
       "refresh": "Actualiser",
       "ago": "Synchronisé {{time}}"
-    }
+    },
+    "exchange": "Échange"
   },
   "operation": {
     "type": {
@@ -555,10 +556,9 @@
         "learnMore": "En savoir plus",
         "learnMoreTooltip": "En savoir plus sur {{appName}}",
         "removeTooltip": "Désinstaller {{appName}}",
-        "useAppForToken": "{{tokenName}} tokens peuvent être gérés en utilisant l'application {{appName}}",
-        "noAppNeededForToken": "Installer l'application {{appName}} pour {{tokenName}}",
-        "tokenAppDisclaimer": "{{tokenName}} est un token {{tokenType}} utilisant l'application {{appName}}. Pour gérer {{tokenName}}, <1>installer l'application </1> {{appName}} et envoyer les tokens <3> sur votre compte {{appName}} </3>",
-        "tokenAppDisclaimerInstalled": "{{tokenName}} est un token {{tokenType}} utilisant l'application {{appName}} . Pour gérer {{tokenName}}, <1>ouvrez l'application {{appName}} </1> et envoyez les tokens <3>sur votre compte {{appName}} </3>",
+        "useAppForToken": "Vous cherchez à gérer des tokens {{tokenType}} ?",
+        "tokenAppDisclaimer": "Pour gérer les jetons {{tokenName}} {{tokenType}} , <1>installez l'application {{appName}} </1> et vérifiez que vous avez bien la <1> version {{tokenType}} </1> avant d'en envoyer <3>à votre compte {{appName}} </3>.",
+        "tokenAppDisclaimerInstalled": "Pour gérer <1>les tokens {{tokenName}} {{tokenType}} </1>, vérifiez que vous avez bien la <1> version {{tokenType}} </1> avant d'en envoyer <3>à votre compte {{appName}} </3>.",
         "goToAccounts": "Accéder aux comptes",
         "intallParentApp": "Installer l'application {{appName}}"
       },
@@ -959,7 +959,7 @@
     "coincontrol": "Coin control",
     "advanced": "Options avancées",
     "ctaDisabled": "Vous devez d'abord saisir un montant.",
-    "whatIs": "Qu'est-ce que la sélection de coin?",
+    "whatIs": "En savoir plus",
     "rbf": "Permettre la transaction d'être remplaçable (Replace-By-Fee).",
     "strategy": "Selection de la coin stratégie",
     "selected": "Coins selectionnés pour la stratégie",
@@ -1153,7 +1153,7 @@
         "steps": {
           "assets": {
             "title": "ASA (Actif)",
-            "info": "L'ajout d'un actif nécessite l'envoi d'une transaction avec des frais minimaux. Cela apparaîtra sur votre historique de transactions",
+            "info": "L'ajout d'un actif nécessite l'émission d'une transaction. Cela apparaîtra sur votre historique de transactions",
             "selectLabel": "Choisir un ASA (Actif)",
             "disabledTooltip": "Vous avez déjà cet ASA (Actif) dans votre compte Algorand"
           },
@@ -1188,7 +1188,7 @@
             "title": "Obtenez des récompenses",
             "description": "Recevez des récompenses en tenant des ALGO dans votre porte-feuille.",
             "bullet": {
-              "delegate": "Un solde minimum de 1 ALGO est requis pour recevoir des récompenses.",
+              "delegate": "Un solde de 1 ALGO est requis pour recevoir des récompenses.",
               "access": "Augmentez le solde du compte pour augmenter les récompenses.",
               "ledger": "Effectuez une transaction vers ou depuis le compte pour réclamer des récompenses."
             },
