@@ -238,6 +238,14 @@
         "title": "Withdraw",
         "description": "Withdraw your gains at any time from your Ledger wallet. "
       }
+    },
+    "info": {
+      "terms": {
+        "title": "Lend Crypto",
+        "subtitle": "Lend assets on the Compound Protocol",
+        "description": "Compound Protocol allows you to lend and borrow assets on the blockchain. You can lend assets and earn interests directly from Ledger Live.",
+        "switchLabel": "I have read, understand and accept the <0>terms and conditions</0>"
+      }
     }
   },
   "accounts": {

@@ -157,7 +157,7 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
               <Box>
                 <ManageButton
                   disabled={!canEnable}
-                  onClick={() => onSelectAction("MODAL_LEND_ENABLE", onClose)}
+                  onClick={() => onSelectAction("MODAL_LEND_TERMS", onClose)}
                 >
                   <IconWrapper>
                     <Plus size={16} />

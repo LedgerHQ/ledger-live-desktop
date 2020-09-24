@@ -124,10 +124,22 @@ const fadeInGrowX = keyframes`
     }
 `;
 
+const fadeInUp = keyframes`
+    0% {
+      opacity: 0;
+      transform: translateY(66%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  `;
+
 const animations = {
   fadeIn: props => css`${fadeIn} ${animationLength} ${easings.outQuadratic} forwards`,
   fadeOut: props => css`${fadeOut} ${animationLength} ${easings.outQuadratic} forwards`,
   fadeInGrowX: props => css`${fadeInGrowX} 0.6s ${easings.outQuadratic} forwards`,
+  fadeInUp: props => css`${fadeInUp} ${animationLength} ${easings.outQuadratic} forwards`,
 };
 
 const overflow = {

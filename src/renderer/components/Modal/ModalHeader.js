@@ -18,7 +18,6 @@ const MODAL_HEADER_STYLE = {
   padding: 10,
   position: "relative",
   flexDirection: "row",
-  minHeight: 66,
 };
 
 const TitleContainer = styled(Box).attrs(() => ({
@@ -98,15 +97,17 @@ const ModalHeader = ({
   subTitle,
   onBack,
   onClose,
+  style = {},
 }: {
   children: any,
   subTitle?: React$Node,
   onBack?: void => void,
   onClose?: void => void,
+  style?: *,
 }) => {
   const { t } = useTranslation();
   return (
-    <div style={MODAL_HEADER_STYLE}>
+    <div style={{ ...MODAL_HEADER_STYLE, ...style }}>
       {onBack ? (
         <ModalHeaderAction onClick={onBack} id="modal-back-button">
           <IconAngleLeft size={12} />
@@ -117,11 +118,12 @@ const ModalHeader = ({
       ) : (
         <div />
       )}
-      <TitleContainer>
-        {subTitle && <ModalSubTitle id="modal-subtitle">{subTitle}</ModalSubTitle>}
-        <ModalTitle id="modal-title">{children}</ModalTitle>
-      </TitleContainer>
-
+      {children || subTitle ? (
+        <TitleContainer>
+          {subTitle && <ModalSubTitle id="modal-subtitle">{subTitle}</ModalSubTitle>}
+          <ModalTitle id="modal-title">{children}</ModalTitle>
+        </TitleContainer>
+      ) : null}
       {onClose ? (
         <ModalHeaderAction
           right
