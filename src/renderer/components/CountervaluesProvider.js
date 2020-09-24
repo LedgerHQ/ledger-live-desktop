@@ -6,11 +6,12 @@ import { trackingPairsSelector } from "~/renderer/countervalues";
 
 export default function CountervaluesProvider({ children }: { children: React$Node }) {
   // TODO retrieve initialCountervalues from storage
-  const trackingPairs = useSelector(trackingPairsSelector);
+  const pairs = useSelector(trackingPairsSelector);
+  const reversePairs = pairs.map(p => ({ from: p.to, to: p.from }));
   return (
     <Countervalues
       initialCountervalues={undefined}
-      userSettings={{ trackingPairs, autofillGaps: true }}
+      userSettings={{ trackingPairs: [...pairs, ...reversePairs], autofillGaps: true }}
     >
       {children}
     </Countervalues>
