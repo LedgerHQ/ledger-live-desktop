@@ -1,7 +1,7 @@
 // @flow
 import { BigNumber } from "bignumber.js";
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
+import { useMemo, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import type { OutputSelector } from "reselect";
 import { createSelector } from "reselect";
 import type { Currency, AccountLikeArray, Account } from "@ledgerhq/live-common/lib/types";
@@ -28,11 +28,23 @@ import {
 
 export function useDistribution() {
   const accounts = useSelector(accountsSelector);
+  const calc = useCalculateCountervalueCallback();
+
+  return useMemo(() => {
+    return getAssetsDistribution(accounts, calc, {
+      minShowFirst: 6,
+      maxShowFirst: 6,
+      showFirstThreshold: 0.95,
+    });
+  }, [accounts, calc]);
+}
+
+export function useCalculateCountervalueCallback() {
   const to = useSelector(counterValueCurrencySelector);
   const state = useCountervaluesState();
 
-  return useMemo(() => {
-    function calc(from: Currency, value: BigNumber): ?BigNumber {
+  return useCallback(
+    (from: Currency, value: BigNumber): ?BigNumber => {
       const countervalue = calculate(state, {
         value: value.toNumber(),
         from,
@@ -40,16 +52,12 @@ export function useDistribution() {
         disableRounding: true,
       });
       return typeof countervalue !== "undefined" ? BigNumber(countervalue) : countervalue;
-    }
-
-    return getAssetsDistribution(accounts, calc, {
-      minShowFirst: 6,
-      maxShowFirst: 6,
-      showFirstThreshold: 0.95,
-    });
-  }, [accounts, state, to]);
+    },
+    [to, state],
+  );
 }
 
+// TODO remove
 export const calculateCountervalueSelector = (state: State) => {
   const counterValueCurrency = counterValueCurrencySelector(state);
   return (currency: Currency, value: BigNumber): ?BigNumber => {
@@ -74,17 +82,33 @@ export const calculateCountervalueSelector = (state: State) => {
   };
 };
 
+// TODO remove
 export const sortAccountsComparatorSelector: OutputSelector<State, void, *> = createSelector(
   getOrderAccounts,
   calculateCountervalueSelector,
   sortAccountsComparatorFromOrder,
 );
 
+export function useSortAccountsComparator() {
+  const accounts = useSelector(getOrderAccounts);
+  const calc = useCalculateCountervalueCallback();
+
+  return sortAccountsComparatorFromOrder(accounts, calc);
+}
+
+// TODO remove
 const nestedSortAccountsSelector = createSelector(
   accountsSelector,
   sortAccountsComparatorSelector,
   nestedSortAccounts,
 );
+
+export function useNestedSortAccounts() {
+  const accounts = useSelector(accountsSelector);
+  const comparator = useSortAccountsComparator();
+
+  return useMemo(() => nestedSortAccounts(accounts, comparator), [accounts, comparator]);
+}
 
 export const flattenSortAccountsEnforceHideEmptyTokenSelector: OutputSelector<
   State,
@@ -112,12 +136,25 @@ export const delegatableAccountsSelector: OutputSelector<
   accounts.filter(acc => acc.currency.family === "tezos" && !isAccountDelegating(acc)),
 );
 
+// TODO remove
 export const refreshAccountsOrdering = () => (dispatch: *, getState: *) => {
   dispatch({
     type: "DB:SET_ACCOUNTS",
     payload: nestedSortAccountsSelector(getState()),
   });
 };
+
+export function useRefreshAccountsOrdering() {
+  const payload = useNestedSortAccounts();
+  const dispatch = useDispatch();
+
+  return useCallback(() => {
+    dispatch({
+      type: "DB:SET_ACCOUNTS",
+      payload,
+    });
+  }, [dispatch, payload]);
+}
 
 export const themeSelector: OutputSelector<State, void, string> = createSelector(
   osDarkModeSelector,
