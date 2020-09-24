@@ -40,7 +40,7 @@ export default function CounterValue({
   const countervalue = useCalculate({
     from: currency,
     to: counterValueCurrency,
-    value,
+    value: value.toNumber(),
     disableRounding: true,
   });
 

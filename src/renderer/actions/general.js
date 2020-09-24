@@ -32,9 +32,9 @@ export function useDistribution() {
   const state = useCountervaluesState();
 
   return useMemo(() => {
-    function calc(from: Currency, value: number): ?BigNumber {
+    function calc(from: Currency, value: BigNumber): ?BigNumber {
       const countervalue = calculate(state, {
-        value,
+        value: value.toNumber(),
         from,
         to,
         disableRounding: true,

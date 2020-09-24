@@ -59,7 +59,7 @@ export function usePortfolio() {
     () =>
       getPortfolio(accounts, range, (from, value, date) => {
         const countervalue = calculate(state, {
-          value,
+          value: value.toNumber(),
           from,
           to,
           disableRounding: true,
@@ -88,7 +88,7 @@ export function useCurrencyPortfolio({
     () =>
       getCurrencyPortfolio(accounts, range, (from, value, date) => {
         const countervalue = calculate(state, {
-          value,
+          value: value.toNumber(),
           from,
           to,
           disableRounding: true,

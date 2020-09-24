@@ -71,7 +71,6 @@ export default function RequestAmount({
             reverse: true,
           }) ?? 0,
         );
-        console.log("!!!", leftVal.toNumber());
         onChange(leftVal.gt(max) ? max : leftVal);
       }
     },

@@ -29,7 +29,6 @@ export type AccountDistributionItem = {
   distribution: number, // % of the total (normalized in 0-1)
   amount: BigNumber,
   currency: CryptoCurrency | TokenCurrency,
-  countervalue: BigNumber, // countervalue of the amount that was calculated based of the rate provided
 };
 
 type Props = {

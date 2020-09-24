@@ -43,13 +43,13 @@ export default function Price({
   iconSize,
 }: Props) {
   const effectiveUnit = unit || from.units[0];
-  const value = new BigNumber(10 ** effectiveUnit.magnitude);
+  const value = BigNumber(10 ** effectiveUnit.magnitude);
   const rawCounterValueCurrency = useSelector(counterValueCurrencySelector);
   const counterValueCurrency = to || rawCounterValueCurrency;
   const rawCounterValue = useCalculate({
     from,
     to: counterValueCurrency,
-    value,
+    value: value.toNumber(),
     disableRounding: true,
   });
   const counterValue =
