@@ -94,7 +94,7 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount, defaultParentAcc
   const { exchange, exchangeRate } = swap;
   const [isTimerVisible, setTimerVisibility] = useState(true);
   const { fromAccount, fromParentAccount, toAccount, toParentAccount } = exchange;
-  const { status, setTransaction, setAccount, transaction } = useBridgeTransaction();
+  const { status, setTransaction, setAccount, transaction, bridgePending } = useBridgeTransaction();
 
   const ratesExpiration = useMemo(
     () => (ratesTimestamp ? new Date(ratesTimestamp.getTime() + ratesExpirationThreshold) : null),
@@ -193,7 +193,8 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount, defaultParentAcc
     selectableCurrencies,
   ]);
 
-  const hasErrors = useMemo(() => Object.keys(status?.errors || {}).length > 0, [status]);
+  const hasErrors = Object.keys(status.errors).length;
+  const canContinue = !bridgePending && !hasErrors && exchangeRate;
   return (
     <>
       <Card flow={1}>
@@ -240,7 +241,7 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount, defaultParentAcc
         <Footer
           onExpireRates={expireRates}
           onStartSwap={onStartSwap}
-          canContinue={exchangeRate && !hasErrors}
+          canContinue={canContinue}
           ratesExpiration={isTimerVisible ? ratesExpiration : null}
         />
       </Card>
