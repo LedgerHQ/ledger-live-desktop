@@ -5,13 +5,12 @@ import { Countervalues } from "@ledgerhq/live-common/lib/countervalues/react";
 import { trackingPairsSelector } from "~/renderer/countervalues";
 
 export default function CountervaluesProvider({ children }: { children: React$Node }) {
-  // TODO retrieve initialCountervalues from storage
-  const pairs = useSelector(trackingPairsSelector);
-  const reversePairs = pairs.map(p => ({ from: p.to, to: p.from }));
+  const trackingPairs = useSelector(trackingPairsSelector);
   return (
     <Countervalues
+      // TODO retrieve initialCountervalues from storage
       initialCountervalues={undefined}
-      userSettings={{ trackingPairs: [...pairs, ...reversePairs], autofillGaps: true }}
+      userSettings={{ trackingPairs, autofillGaps: true }}
     >
       {children}
     </Countervalues>
