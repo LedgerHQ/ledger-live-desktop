@@ -57,7 +57,6 @@ const steps: Array<St> = [
     id: "info",
     label: <Trans i18nKey="algorand.claimRewards.flow.steps.info.title" />,
     component: StepInfo,
-    noScroll: true,
     footer: StepInfoFooter,
   },
   {

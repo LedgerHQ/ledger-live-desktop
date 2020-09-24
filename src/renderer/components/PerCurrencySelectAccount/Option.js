@@ -10,6 +10,7 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import Ellipsis from "~/renderer/components/Ellipsis";
+import Box from "~/renderer/components/Box";
 import useTheme from "~/renderer/hooks/useTheme";
 import ParentCryptoCurrencyIcon from "~/renderer/components/ParentCryptoCurrencyIcon";
 import type { Account, AccountLike, SubAccount } from "@ledgerhq/live-common/lib/types/account";
@@ -45,6 +46,7 @@ const NestingIndicator: ThemedComponent<{}> = styled.div`
 const Left: ThemedComponent<{}> = styled.div`
   display: flex;
   flex-direction: row;
+  flex: 1;
 `;
 
 const Right: ThemedComponent<{}> = styled.div`
@@ -88,9 +90,11 @@ function AccountRow({
             />
           )}
         </IconContainer>
-        <Ellipsis ff="Inter|SemiBold" fontSize={4}>
-          {getAccountName(account)}
-        </Ellipsis>
+        <Box flex={1}>
+          <Ellipsis ff="Inter|SemiBold" fontSize={4}>
+            {getAccountName(account)}
+          </Ellipsis>
+        </Box>
       </Left>
       <Right>
         <FormattedVal
@@ -98,7 +102,6 @@ function AccountRow({
           val={account.balance}
           unit={getAccountUnit(account)}
           showCode
-          disableRounding
         />
       </Right>
     </AccountRowContainer>
