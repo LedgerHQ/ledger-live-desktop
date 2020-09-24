@@ -86,12 +86,6 @@ const nestedSortAccountsSelector = createSelector(
   nestedSortAccounts,
 );
 
-export const flattenSortAccountsSelector: OutputSelector<
-  State,
-  void,
-  AccountLikeArray,
-> = createSelector(accountsSelector, sortAccountsComparatorSelector, flattenSortAccounts);
-
 export const flattenSortAccountsEnforceHideEmptyTokenSelector: OutputSelector<
   State,
   void,
