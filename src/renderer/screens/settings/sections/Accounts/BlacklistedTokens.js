@@ -8,7 +8,7 @@ import IconBan from "~/renderer/icons/Ban";
 import Text from "~/renderer/components/Text";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { findTokenById } from "@ledgerhq/live-common/lib/data/tokens";
+import { findTokenById } from "@ledgerhq/live-common/lib/currencies";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import Box from "~/renderer/components/Box";
 import styled from "styled-components";
