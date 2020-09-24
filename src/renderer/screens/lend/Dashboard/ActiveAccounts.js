@@ -1,8 +1,9 @@
 // @flow
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { getAccountName } from "@ledgerhq/live-common/lib/account";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -16,6 +17,8 @@ import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import ToolTip from "~/renderer/components/Tooltip";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import Pill from "./Pill";
+
+import { openModal } from "~/renderer/actions/modals";
 
 const Header = styled(Box)`
   border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
@@ -94,6 +97,7 @@ const Row = ({ summary }: RowProps) => {
   const { account, parentAccount, totalSupplied, accruedInterests } = summary;
   const { token } = account;
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const name = getAccountName(account);
 
   // START HACK
@@ -107,6 +111,10 @@ const Row = ({ summary }: RowProps) => {
       rand === 0 ? "ENABLING" : rand === 1 ? "TO_SUPPLY" : rand === 2 ? "SUPPLYING" : "SUPPLIED";
     setStatus(s);
   }, []);
+
+  const openManageModal = useCallback(() => {
+    dispatch(openModal("MODAL_LEND_MANAGE", { ...summary }));
+  }, [dispatch, openModal, summary]);
 
   // END HACK
 
@@ -170,7 +178,7 @@ const Row = ({ summary }: RowProps) => {
         </Ellipsis>
       </Amount>
       <Status>{status ? <Pill type={status} /> : null}</Status>
-      <Action>
+      <Action onClick={openManageModal}>
         <Box flex horizontal alignItems="center">
           <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade50">
             {t("common.manage")}

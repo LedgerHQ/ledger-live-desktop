@@ -38,6 +38,9 @@ import MODAL_ALGORAND_OPT_IN from "../families/algorand/OptInFlowModal";
 import MODAL_ALGORAND_CLAIM_REWARDS from "../families/algorand/Rewards/ClaimRewardsFlowModal";
 import MODAL_ALGORAND_EARN_REWARDS_INFO from "../families/algorand/Rewards/EarnRewardsInfoModal";
 
+// Lending
+import MODAL_LEND_MANAGE from "../screens/lend/modals/ManageLend";
+
 const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_EXPORT_OPERATIONS,
   MODAL_CONFIRM,
@@ -74,6 +77,8 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_ALGORAND_CLAIM_REWARDS,
   MODAL_ALGORAND_EARN_REWARDS_INFO,
   MODAL_HELP,
+  // Lending
+  MODAL_LEND_MANAGE,
 };
 
 export default modals;

@@ -29,6 +29,7 @@ import IconExchange from "~/renderer/icons/Exchange";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
+import Redelegate from "~/renderer/icons/Redelegate";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
   alignItems: "center",
@@ -71,6 +72,9 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const ReceiveAction = (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
   const currency = getAccountCurrency(account);
   const availableOnExchange = isCurrencySupported(currency);
+  // @TODO adjust condition of available for lending
+  const availableOnLending = true;
+
   const history = useHistory();
 
   const onBuy = useCallback(() => {
@@ -81,6 +85,10 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
         defaultAccount: mainAccount,
       },
     });
+  }, [currency, history, mainAccount]);
+
+  const onLend = useCallback(() => {
+    openModal("MODAL_LEND_MANAGE", { account, parentAccount });
   }, [currency, history, mainAccount]);
 
   // List of available exchange actions
@@ -94,6 +102,18 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
             eventProperties: { currencyName: currency.name },
             icon: IconExchange,
             label: <Trans i18nKey="buy.titleCrypto" values={{ currency: currency.name }} />,
+          },
+        ]
+      : []),
+    ...(availableOnExchange
+      ? [
+          {
+            key: "Lend",
+            onClick: onLend,
+            event: "Lend Crypto Account Button",
+            eventProperties: { currencyName: currency.name },
+            icon: Redelegate,
+            label: <Trans i18nKey="lend.manage.cta" />,
           },
         ]
       : []),

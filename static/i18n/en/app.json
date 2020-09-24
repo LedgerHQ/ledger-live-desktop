@@ -222,6 +222,22 @@
         "interestsEarned": "Interests earned",
         "date": "Date"
       }
+    },
+    "manage": {
+      "cta": "Manage lending",
+      "title": "Lend asset",
+      "enable": {
+        "title": "Enable",
+        "description": "Allow the protocol to process future loans."
+      },
+      "supply": {
+        "title": "Supply",
+        "description": "Select the amount of assets you want to lend to the protocol."
+      },
+      "withdraw": {
+        "title": "Withdraw",
+        "description": "Withdraw your gains at any time from your Ledger wallet. "
+      }
     }
   },
   "accounts": {
