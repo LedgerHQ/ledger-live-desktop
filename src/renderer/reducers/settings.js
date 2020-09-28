@@ -50,10 +50,6 @@ export const currencySettingsDefaults = (c: Currency): ConfirmationDefaults => {
 const bitcoin = getCryptoCurrencyById("bitcoin");
 const ethereum = getCryptoCurrencyById("ethereum");
 export const possibleIntermediaries = [bitcoin, ethereum];
-export const intermediaryCurrency = (from: Currency, _to: Currency) => {
-  if (from === ethereum || (from && from.type === "TokenCurrency")) return ethereum;
-  return bitcoin;
-};
 
 export const timeRangeDaysByKey = {
   week: 7,
