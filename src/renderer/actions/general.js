@@ -1,6 +1,6 @@
 // @flow
 import { BigNumber } from "bignumber.js";
-import { useMemo, useCallback } from "react";
+import { useMemo, useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { OutputSelector } from "reselect";
 import { createSelector } from "reselect";
@@ -147,13 +147,24 @@ export const refreshAccountsOrdering = () => (dispatch: *, getState: *) => {
 export function useRefreshAccountsOrdering() {
   const payload = useNestedSortAccounts();
   const dispatch = useDispatch();
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
-  return useCallback(() => {
+  // workaround for not reflecting the latest payload when calling refresh right after updating accounts
+  useEffect(() => {
+    if (!isRefreshing) {
+      return;
+    }
+
     dispatch({
       type: "DB:SET_ACCOUNTS",
       payload,
     });
-  }, [dispatch, payload]);
+    setIsRefreshing(false);
+  }, [isRefreshing, dispatch, payload]);
+
+  return useCallback(() => {
+    setIsRefreshing(true);
+  }, []);
 }
 
 export const themeSelector: OutputSelector<State, void, string> = createSelector(

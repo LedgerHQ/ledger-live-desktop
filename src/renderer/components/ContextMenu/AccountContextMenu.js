@@ -1,9 +1,9 @@
 // @flow
-
-import React, { PureComponent } from "react";
-import { openModal } from "~/renderer/actions/modals";
+import React, { useMemo } from "react";
+import { useDispatch } from "react-redux";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
-import { connect } from "react-redux";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
+import { openModal } from "~/renderer/actions/modals";
 import IconReceive from "~/renderer/icons/Receive";
 import IconSend from "~/renderer/icons/Send";
 import IconStar from "~/renderer/icons/Star";
@@ -12,57 +12,42 @@ import IconBan from "~/renderer/icons/Ban";
 import IconAccountSettings from "~/renderer/icons/AccountSettings";
 import ContextMenuItem from "./ContextMenuItem";
 import { toggleStarAction } from "~/renderer/actions/accounts";
-import { refreshAccountsOrdering } from "~/renderer/actions/general";
-import { withRouter } from "react-router-dom";
-import { compose } from "redux";
+import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
+import { useHistory } from "react-router-dom";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 
-type OwnProps = {
+type Props = {
   account: AccountLike,
   parentAccount?: ?Account,
   leftClick?: boolean,
   children: any,
-};
-
-type Props = {
-  ...OwnProps,
   withStar?: boolean,
-  openModal: Function,
-  history: *,
-  toggleStarAction: Function,
-  refreshAccountsOrdering: Function,
 };
 
-const mapDispatchToProps = {
-  openModal,
-  toggleStarAction,
-  refreshAccountsOrdering,
-};
+export default function AccountContextMenu({
+  leftClick,
+  children,
+  account,
+  parentAccount,
+  withStar,
+}: Props) {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const refreshAccountsOrdering = useRefreshAccountsOrdering();
 
-class AccountContextMenu extends PureComponent<Props> {
-  getContextMenuItems = () => {
-    const {
-      openModal,
-      account,
-      parentAccount,
-      withStar,
-      toggleStarAction,
-      refreshAccountsOrdering,
-      history,
-    } = this.props;
+  const menuItems = useMemo(() => {
     const currency = getAccountCurrency(account);
 
     const items = [
       {
         label: "accounts.contextMenu.send",
         Icon: IconSend,
-        callback: () => openModal("MODAL_SEND", { account, parentAccount }),
+        callback: () => dispatch(openModal("MODAL_SEND", { account, parentAccount })),
       },
       {
         label: "accounts.contextMenu.receive",
         Icon: IconReceive,
-        callback: () => openModal("MODAL_RECEIVE", { account, parentAccount }),
+        callback: () => dispatch(openModal("MODAL_RECEIVE", { account, parentAccount })),
       },
     ];
 
@@ -81,7 +66,9 @@ class AccountContextMenu extends PureComponent<Props> {
         label: "accounts.contextMenu.star",
         Icon: IconStar,
         callback: () => {
-          toggleStarAction(account.id, account.type !== "Account" ? account.parentId : undefined);
+          dispatch(
+            toggleStarAction(account.id, account.type !== "Account" ? account.parentId : undefined),
+          );
           refreshAccountsOrdering();
         },
       });
@@ -91,7 +78,7 @@ class AccountContextMenu extends PureComponent<Props> {
       items.push({
         label: "accounts.contextMenu.edit",
         Icon: IconAccountSettings,
-        callback: () => openModal("MODAL_SETTINGS_ACCOUNT", { account }),
+        callback: () => dispatch(openModal("MODAL_SETTINGS_ACCOUNT", { account })),
       });
     }
 
@@ -99,33 +86,23 @@ class AccountContextMenu extends PureComponent<Props> {
       items.push({
         label: "accounts.contextMenu.hideToken",
         Icon: IconBan,
-        callback: () => openModal("MODAL_BLACKLIST_TOKEN", { token: account.token }),
+        callback: () => dispatch(openModal("MODAL_BLACKLIST_TOKEN", { token: account.token })),
       });
     }
 
     return items;
-  };
+  }, [account, history, parentAccount, withStar, dispatch, refreshAccountsOrdering]);
 
-  render() {
-    const { leftClick, children, account } = this.props;
-    const currency = getAccountCurrency(account);
+  const currency = getAccountCurrency(account);
 
-    return (
-      <ContextMenuItem
-        event={account.type === "Account" ? "Account right click" : "Token right click"}
-        eventProperties={{ currencyName: currency.name }}
-        leftClick={leftClick}
-        items={this.getContextMenuItems()}
-      >
-        {children}
-      </ContextMenuItem>
-    );
-  }
+  return (
+    <ContextMenuItem
+      event={account.type === "Account" ? "Account right click" : "Token right click"}
+      eventProperties={{ currencyName: currency.name }}
+      leftClick={leftClick}
+      items={menuItems}
+    >
+      {children}
+    </ContextMenuItem>
+  );
 }
-
-const ConnectedAccountContextMenu: React$ComponentType<OwnProps> = compose(
-  connect(null, mapDispatchToProps),
-  withRouter,
-)(AccountContextMenu);
-
-export default ConnectedAccountContextMenu;
