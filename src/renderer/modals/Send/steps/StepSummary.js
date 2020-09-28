@@ -63,6 +63,9 @@ export default class StepSummary extends PureComponent<StepProps> {
     const feesUnit = getAccountUnit(mainAccount);
     const unit = getAccountUnit(account);
 
+    // $FlowFixMe
+    const memo = transaction.memo;
+
     return (
       <Box flow={4} mx={40}>
         <TrackPage category="Send Flow" name="Step Summary" />
@@ -104,6 +107,16 @@ export default class StepSummary extends PureComponent<StepProps> {
             </Box>
           </Box>
           <Separator />
+          {memo && (
+            <Box horizontal justifyContent="space-between" mb={2}>
+              <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={4}>
+                <Trans i18nKey="operationDetails.extra.memo" />
+              </Text>
+              <Text ff="Inter|Medium" fontSize={4}>
+                {memo}
+              </Text>
+            </Box>
+          )}
           <Box horizontal justifyContent="space-between" mb={2}>
             <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={4}>
               <Trans i18nKey="send.steps.details.amount" />

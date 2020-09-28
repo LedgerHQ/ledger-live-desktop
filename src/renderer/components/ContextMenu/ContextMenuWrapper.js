@@ -9,13 +9,14 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 // $FlowFixMe
 export const ContextMenuContext = React.createContext({});
 
-export const withContextMenuContext = (ComponentToDecorate: React$ComponentType<*>) => (
-  props: *,
-) => (
-  <ContextMenuContext.Consumer>
-    {context => <ComponentToDecorate {...props} context={context} />}
-  </ContextMenuContext.Consumer>
-);
+export const withContextMenuContext = (ComponentToDecorate: React$ComponentType<*>) => {
+  const WrappedContextMenu = (props: *) => (
+    <ContextMenuContext.Consumer>
+      {context => <ComponentToDecorate {...props} context={context} />}
+    </ContextMenuContext.Consumer>
+  );
+  return WrappedContextMenu;
+};
 
 export type ContextMenuItemType = {
   label: string,
