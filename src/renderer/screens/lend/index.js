@@ -11,6 +11,7 @@ import TabBar from "~/renderer/components/TabBar";
 
 import Dashboard from "./Dashboard";
 import Closed from "./Closed";
+import History from "./History";
 
 const tabs = [
   {
@@ -23,7 +24,7 @@ const tabs = [
   },
   {
     title: "lend.tabs.history",
-    component: () => <div>history</div>,
+    component: History,
   },
 ];
 

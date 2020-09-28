@@ -207,6 +207,11 @@
         "title": "Closed loans",
         "description": "View all your withdrawn loans and the interest you have earned.",
         "cta": "Lend now"
+      },
+      "history": {
+        "title": "History",
+        "description": "View the history of all your loan transactions.",
+        "cta": "Lend now"
       }
     },
     "headers": {

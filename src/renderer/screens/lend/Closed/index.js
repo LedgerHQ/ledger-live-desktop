@@ -1,11 +1,12 @@
 // @flow
 import React from "react";
+import { useTranslation } from "react-i18next";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 import { makeClosedHistoryForAccounts } from "@ledgerhq/live-common/lib/compound/logic";
 import type { AccountLikeArray } from "@ledgerhq/live-common/lib/types";
 import Box from "~/renderer/components/Box";
+import EmptyState from "../EmptyState";
 import ClosedLoans from "./ClosedLoans";
-import EmptyState from "./EmptyState";
 
 type Props = {
   accounts: AccountLikeArray,
@@ -14,8 +15,22 @@ type Props = {
 
 const Closed = ({ accounts, summaries }: Props) => {
   const closedLoans = makeClosedHistoryForAccounts(summaries);
+  const { t } = useTranslation();
 
-  return <Box>{closedLoans.length > 0 ? <ClosedLoans loans={closedLoans} /> : <EmptyState />}</Box>;
+  return (
+    <Box>
+      {closedLoans.length > 0 ? (
+        <ClosedLoans loans={closedLoans} />
+      ) : (
+        <EmptyState
+          title={t("lend.emptyState.closed.title")}
+          description={t("lend.emptyState.closed.description")}
+          buttonLabel={t("lend.emptyState.closed.cta")}
+          onClick={() => {}}
+        />
+      )}
+    </Box>
+  );
 };
 
 export default Closed;
