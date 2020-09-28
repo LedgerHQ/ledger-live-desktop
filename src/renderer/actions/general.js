@@ -4,7 +4,7 @@ import { useMemo, useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { OutputSelector } from "reselect";
 import { createSelector } from "reselect";
-import type { Currency, AccountLikeArray, Account } from "@ledgerhq/live-common/lib/types";
+import type { Currency, Account } from "@ledgerhq/live-common/lib/types";
 import { isAccountDelegating } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import {
   nestedSortAccounts,
@@ -14,13 +14,10 @@ import {
 import { getAssetsDistribution } from "@ledgerhq/live-common/lib/portfolio";
 import { useCountervaluesState } from "@ledgerhq/live-common/lib/countervalues/react";
 import { calculate } from "@ledgerhq/live-common/lib/countervalues/logic";
-import CounterValues from "../countervalues";
 import type { State } from "~/renderer/reducers";
 import { accountsSelector, activeAccountsSelector } from "~/renderer/reducers/accounts";
 import { osDarkModeSelector } from "~/renderer/reducers/application";
 import {
-  intermediaryCurrency,
-  exchangeSettingsForPairSelector,
   getOrderAccounts,
   counterValueCurrencySelector,
   userThemeSelector,
@@ -57,38 +54,6 @@ export function useCalculateCountervalueCallback() {
   );
 }
 
-// TODO remove
-export const calculateCountervalueSelector = (state: State) => {
-  const counterValueCurrency = counterValueCurrencySelector(state);
-  return (currency: Currency, value: BigNumber): ?BigNumber => {
-    const intermediary = intermediaryCurrency(currency, counterValueCurrency);
-    const fromExchange = exchangeSettingsForPairSelector(state, {
-      from: currency,
-      to: intermediary,
-    });
-    const toExchange = exchangeSettingsForPairSelector(state, {
-      from: intermediary,
-      to: counterValueCurrency,
-    });
-    return CounterValues.calculateWithIntermediarySelector(state, {
-      from: currency,
-      fromExchange,
-      intermediary,
-      toExchange,
-      to: counterValueCurrency,
-      value,
-      disableRounding: true,
-    });
-  };
-};
-
-// TODO remove
-export const sortAccountsComparatorSelector: OutputSelector<State, void, *> = createSelector(
-  getOrderAccounts,
-  calculateCountervalueSelector,
-  sortAccountsComparatorFromOrder,
-);
-
 export function useSortAccountsComparator() {
   const accounts = useSelector(getOrderAccounts);
   const calc = useCalculateCountervalueCallback();
@@ -102,15 +67,6 @@ export function useNestedSortAccounts() {
 
   return useMemo(() => nestedSortAccounts(accounts, comparator), [accounts, comparator]);
 }
-
-// TODO remove
-export const flattenSortAccountsEnforceHideEmptyTokenSelector: OutputSelector<
-  State,
-  void,
-  AccountLikeArray,
-> = createSelector(accountsSelector, sortAccountsComparatorSelector, (accounts, comparator) =>
-  flattenSortAccounts(accounts, comparator, { enforceHideEmptySubAccounts: true }),
-);
 
 export function useFlattenSortAccountsEnforceHideEmptyToken() {
   const accounts = useSelector(accountsSelector);
