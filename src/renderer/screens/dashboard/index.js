@@ -4,18 +4,15 @@ import Box from "~/renderer/components/Box";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import BalanceSummary from "./GlobalSummary";
 import { colors } from "~/renderer/styles/theme";
-
 import {
   counterValueCurrencySelector,
   hasInstalledAppsSelector,
   selectedTimeRangeSelector,
 } from "~/renderer/reducers/settings";
-
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import RefreshAccountsOrdering from "~/renderer/components/RefreshAccountsOrdering";
 import OperationsList from "~/renderer/components/OperationsList";
 import Carousel from "~/renderer/components/Carousel";
 import AssetDistribution from "~/renderer/components/AssetDistribution";
@@ -27,6 +24,7 @@ import uniq from "lodash/uniq";
 import { useHistory } from "react-router-dom";
 import EmptyStateInstalledApps from "~/renderer/screens/dashboard/EmptyStateInstalledApps";
 import EmptyStateAccounts from "~/renderer/screens/dashboard/EmptyStateAccounts";
+import { useRefreshAccountsOrderingEffect } from "~/renderer/actions/general";
 
 // This forces only one visible top banner at a time
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
@@ -58,6 +56,8 @@ export default function DashboardPage() {
   );
   const showCarousel = hasInstalledApps && totalAccounts > 0;
 
+  useRefreshAccountsOrderingEffect({ onMount: true });
+
   return (
     <>
       <TopBannerContainer>
@@ -65,7 +65,6 @@ export default function DashboardPage() {
         <MigrationBanner />
       </TopBannerContainer>
       {showCarousel ? <Carousel /> : null}
-      <RefreshAccountsOrdering onMount />
       <TrackPage
         category="Portfolio"
         totalAccounts={totalAccounts}
