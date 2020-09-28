@@ -82,6 +82,7 @@ export const calculateCountervalueSelector = (state: State) => {
   };
 };
 
+// TODO remove
 export const sortAccountsComparatorSelector: OutputSelector<State, void, *> = createSelector(
   getOrderAccounts,
   calculateCountervalueSelector,
@@ -102,6 +103,7 @@ export function useNestedSortAccounts() {
   return useMemo(() => nestedSortAccounts(accounts, comparator), [accounts, comparator]);
 }
 
+// TODO remove
 export const flattenSortAccountsEnforceHideEmptyTokenSelector: OutputSelector<
   State,
   void,
@@ -110,15 +112,25 @@ export const flattenSortAccountsEnforceHideEmptyTokenSelector: OutputSelector<
   flattenSortAccounts(accounts, comparator, { enforceHideEmptySubAccounts: true }),
 );
 
-export const haveUndelegatedAccountsSelector: OutputSelector<
-  State,
-  void,
-  boolean,
-> = createSelector(flattenSortAccountsEnforceHideEmptyTokenSelector, accounts =>
-  accounts.some(
-    acc => acc.currency && acc.currency.family === "tezos" && !isAccountDelegating(acc),
-  ),
-);
+export function useFlattenSortAccountsEnforceHideEmptyToken() {
+  const accounts = useSelector(accountsSelector);
+  const comparator = useSortAccountsComparator();
+  return useMemo(
+    () => flattenSortAccounts(accounts, comparator, { enforceHideEmptySubAccounts: true }),
+    [accounts, comparator],
+  );
+}
+
+export function useHaveUndelegatedAccountsSelector() {
+  const accounts = useFlattenSortAccountsEnforceHideEmptyToken();
+  return useMemo(
+    () =>
+      accounts.some(
+        acc => acc.currency && acc.currency.family === "tezos" && !isAccountDelegating(acc),
+      ),
+    [accounts],
+  );
+}
 
 export const delegatableAccountsSelector: OutputSelector<
   State,

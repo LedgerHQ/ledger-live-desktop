@@ -1,7 +1,6 @@
 // @flow
-
-import React, { Component } from "react";
-import { Trans } from "react-i18next";
+import React, { useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import {
   getAccountCurrency,
   getAccountName,
@@ -13,9 +12,7 @@ import type {
   PortfolioRange,
   TokenAccount,
 } from "@ledgerhq/live-common/lib/types";
-
 import Text from "~/renderer/components/Text";
-
 import { GenericBox } from "../index";
 import SearchBox from "./SearchBox";
 import DisplayOptions from "./DisplayOptions";
@@ -25,15 +22,72 @@ import ListBody from "./ListBody";
 type Props = {
   accounts: (Account | TokenAccount)[],
   mode: *,
-  onModeChange: (*) => void,
-  onRangeChange: PortfolioRange => void,
   onAccountClick: (Account | TokenAccount, ?Account) => void,
   range: PortfolioRange,
 };
 
-type State = {
-  search: string,
-};
+export default function AccountList({ accounts, range, onAccountClick, mode }: Props) {
+  const { t } = useTranslation();
+  const [search, setSearch] = useState("");
+
+  const lookupParentAccount = useCallback(
+    (id: string): ?Account => {
+      for (const a of accounts) {
+        if (a.type === "Account" && a.id === id) {
+          return a;
+        }
+      }
+      return null;
+    },
+    [accounts],
+  );
+
+  const onTextChange = useCallback((evt: SyntheticInputEvent<HTMLInputElement>) => {
+    setSearch(evt.target.value);
+  }, []);
+  const Body = BodyByMode[mode];
+
+  const visibleAccounts = [];
+  const hiddenAccounts = [];
+  for (let i = 0; i < accounts.length; i++) {
+    const account = accounts[i];
+    if (matchesSearch(search, account, mode === "list")) {
+      visibleAccounts.push(account);
+    } else {
+      hiddenAccounts.push(account);
+    }
+  }
+
+  return (
+    <div style={{ paddingBottom: 70 }}>
+      <GenericBox horizontal p={0} alignItems="center">
+        <SearchBox
+          id={"accounts-search-input"}
+          autoFocus
+          onTextChange={onTextChange}
+          search={search}
+        />
+        <DisplayOptions />
+      </GenericBox>
+      {visibleAccounts.length === 0 ? (
+        <Text style={{ display: "block", padding: 60, textAlign: "center" }}>
+          {t("accounts.noResultFound")}
+        </Text>
+      ) : null}
+      <Body
+        horizontal
+        data-e2e="dashboard_AccountList"
+        range={range}
+        search={search}
+        visibleAccounts={visibleAccounts}
+        hiddenAccounts={hiddenAccounts}
+        showNewAccount={!search}
+        onAccountClick={onAccountClick}
+        lookupParentAccount={lookupParentAccount}
+      />
+    </div>
+  );
+}
 
 const BodyByMode = {
   card: GridBody,
@@ -61,77 +115,3 @@ export const matchesSearch = (
 
   return match.toLowerCase().includes(search.toLowerCase()) || subMatch;
 };
-
-class AccountList extends Component<Props, State> {
-  state = {
-    search: "",
-  };
-
-  lookupParentAccount = (id: string): ?Account => {
-    for (const a of this.props.accounts) {
-      if (a.type === "Account" && a.id === id) {
-        return a;
-      }
-    }
-    return null;
-  };
-
-  onTextChange = (evt: SyntheticInputEvent<HTMLInputElement>) =>
-    this.setState({
-      search: evt.target.value,
-    });
-
-  render() {
-    const { accounts, range, onAccountClick, onModeChange, onRangeChange, mode } = this.props;
-    const { search } = this.state;
-    const Body = BodyByMode[mode];
-
-    const visibleAccounts = [];
-    const hiddenAccounts = [];
-    for (let i = 0; i < accounts.length; i++) {
-      const account = accounts[i];
-      if (matchesSearch(search, account, mode === "list")) {
-        visibleAccounts.push(account);
-      } else {
-        hiddenAccounts.push(account);
-      }
-    }
-
-    return (
-      <div style={{ paddingBottom: 70 }}>
-        <GenericBox horizontal p={0} alignItems="center">
-          <SearchBox
-            id={"accounts-search-input"}
-            autoFocus
-            onTextChange={this.onTextChange}
-            search={search}
-          />
-          <DisplayOptions
-            onModeChange={onModeChange}
-            onRangeChange={onRangeChange}
-            mode={mode}
-            range={range}
-          />
-        </GenericBox>
-        {visibleAccounts.length === 0 ? (
-          <Text style={{ display: "block", padding: 60, textAlign: "center" }}>
-            <Trans i18nKey="accounts.noResultFound" />
-          </Text>
-        ) : null}
-        <Body
-          horizontal
-          data-e2e="dashboard_AccountList"
-          range={range}
-          search={search}
-          visibleAccounts={visibleAccounts}
-          hiddenAccounts={hiddenAccounts}
-          showNewAccount={!search}
-          onAccountClick={onAccountClick}
-          lookupParentAccount={this.lookupParentAccount}
-        />
-      </div>
-    );
-  }
-}
-
-export default AccountList;

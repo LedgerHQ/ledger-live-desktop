@@ -4,7 +4,7 @@ import { Trans } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { dismissBanner } from "~/renderer/actions/settings";
-import { haveUndelegatedAccountsSelector } from "~/renderer/actions/general";
+import { useHaveUndelegatedAccountsSelector } from "~/renderer/actions/general";
 import { dismissedBannerSelectorLoaded } from "~/renderer/reducers/settings";
 import { openModal } from "~/renderer/actions/modals";
 import Box, { Card } from "~/renderer/components/Box";
@@ -43,7 +43,7 @@ const LogoContainer = styled(Box).attrs(() => ({
 const DelegationBanner = () => {
   const dispatch = useDispatch();
   const isDismissed = useSelector(dismissedBannerSelectorLoaded("DELEGATION_BANNER"));
-  const hasUndelegated = useSelector(haveUndelegatedAccountsSelector);
+  const hasUndelegated = useHaveUndelegatedAccountsSelector();
 
   const closeBanner = useCallback(() => dispatch(dismissBanner("DELEGATION_BANNER")), [dispatch]);
 
