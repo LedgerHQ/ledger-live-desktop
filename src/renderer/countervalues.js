@@ -7,6 +7,7 @@ import {
   implementCountervalues,
   getCountervalues,
 } from "@ledgerhq/live-common/lib/countervalues-old";
+import type { Currency } from "@ledgerhq/live-common/lib/types";
 import uniq from "lodash/uniq";
 import logger from "~/logger";
 import { setExchangePairsAction } from "~/renderer/actions/settings";
@@ -46,7 +47,11 @@ export const pairsSelector: OutputSelector<*, *, *> = createSelector(
   },
 );
 
-export const trackingPairsSelector = createSelector(
+export const trackingPairsSelector: OutputSelector<
+  any,
+  {},
+  Currency[],
+> = createSelector(
   currenciesSelector,
   counterValueCurrencySelector,
   (currencies, counterValueCurrency) =>
