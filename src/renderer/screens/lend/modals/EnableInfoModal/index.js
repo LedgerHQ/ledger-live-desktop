@@ -55,7 +55,13 @@ export default function LendTermsModal({ name, account, parentAccount, currency,
 
   const onFinish = useCallback(() => {
     onClose();
-    dispatch(openModal("MODAL_LEND_ENABLE_SELECT_ACCOUNT", { ...rest, currency }));
+    dispatch(
+      openModal("MODAL_LEND_SELECT_ACCOUNT", {
+        ...rest,
+        currency,
+        nextStep: "MODAL_LEND_ENABLE_FLOW",
+      }),
+    );
   }, [onClose, dispatch, rest, currency]);
 
   const onTermsLinkClick = useCallback(() => {

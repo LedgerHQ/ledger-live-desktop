@@ -3,8 +3,13 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch, connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+
+import {
+  getAccountCurrency,
+  getAccountUnit,
+  getAccountName,
+} from "@ledgerhq/live-common/lib/account";
 
 import type { AccountLike, CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
@@ -12,19 +17,63 @@ import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/
 import { openModal, closeModal } from "~/renderer/actions/modals";
 import Box from "~/renderer/components/Box";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
-import { RawSelectAccount } from "~/renderer/components/SelectAccount";
 import { subAccountByCurrencyOrderedSelector } from "~/renderer/reducers/accounts";
 import Button from "~/renderer/components/Button";
 import Label from "~/renderer/components/Label";
+import Select from "~/renderer/components/Select";
+import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
+import Ellipsis from "~/renderer/components/Ellipsis";
+import FormattedVal from "~/renderer/components/FormattedVal";
+
+function AccountOption({
+  account,
+  isValue,
+  disabled,
+}: {
+  account: AccountLike,
+  isValue?: boolean,
+  disabled?: boolean,
+}) {
+  const currency = getAccountCurrency(account);
+  const unit = getAccountUnit(account);
+  const name = getAccountName(account);
+
+  // @TODO show enable or not enabled ticker once info is available on account data
+
+  return (
+    <Box grow horizontal alignItems="center" flow={2} style={{ opacity: disabled ? 0.2 : 1 }}>
+      <CryptoCurrencyIcon currency={currency} size={16} />
+      <div style={{ flex: 1 }}>
+        <Ellipsis ff="Inter|SemiBold" fontSize={4}>
+          {name}
+        </Ellipsis>
+      </div>
+      <Box>
+        <FormattedVal color="palette.text.shade60" val={account.balance} unit={unit} showCode />
+      </Box>
+    </Box>
+  );
+}
+
+const renderValue = ({ data }: { data: AccountLike }) =>
+  data ? <AccountOption account={data} isValue /> : null;
+
+const renderOption = ({ data }: { data: AccountLike }) => {
+  console.warn(data);
+  return data ? <AccountOption account={data} /> : null;
+};
+
+const getOptionValue = option => option && option.id;
 
 type Props = {
   name?: string,
   currency: CryptoCurrency | TokenCurrency,
   accounts: AccountLike[],
+  nextStep: string,
   ...
 } & CompoundAccountSummary;
 
-const SelectAccountStepModal = ({ name, currency, accounts, ...rest }: Props) => {
+const SelectAccountStepModal = ({ name, currency, accounts, nextStep, ...rest }: Props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -36,11 +85,12 @@ const SelectAccountStepModal = ({ name, currency, accounts, ...rest }: Props) =>
 
   const onNext = useCallback(() => {
     onClose();
-    // dispatch(openModal(name, { account }));
-  }, [dispatch, account, onClose]);
+    dispatch(openModal(nextStep, { ...rest, account }));
+  }, [onClose, dispatch, nextStep, rest, account]);
 
   const onChangeAccount = useCallback(
     a => {
+      console.log(a);
       setAccount(a);
     },
     [setAccount],
@@ -62,13 +112,19 @@ const SelectAccountStepModal = ({ name, currency, accounts, ...rest }: Props) =>
           render={() => (
             <Box flow={1}>
               <Label>{t("lend.enable.steps.selectAccount.selectLabel")}</Label>
-              <RawSelectAccount
-                // $FlowFixMe
-                accounts={accounts}
-                autoFocus={true}
-                onChange={onChangeAccount}
+              <Select
                 value={account}
-                t={t}
+                options={accounts}
+                getOptionValue={getOptionValue}
+                renderValue={renderValue}
+                renderOption={renderOption}
+                filterOption={false}
+                isSearchable={false}
+                placeholder={t("common.selectAccount")}
+                noOptionsMessage={({ inputValue }) =>
+                  t("common.selectAccountNoOption", { accountName: inputValue })
+                }
+                onChange={onChangeAccount}
               />
             </Box>
           )}
