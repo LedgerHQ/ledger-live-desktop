@@ -42,6 +42,7 @@ import MODAL_ALGORAND_EARN_REWARDS_INFO from "../families/algorand/Rewards/EarnR
 import MODAL_LEND_MANAGE from "../screens/lend/modals/ManageLend";
 import MODAL_LEND_ENABLE_INFO from "../screens/lend/modals/EnableInfoModal";
 import MODAL_LEND_SELECT_ACCOUNT from "../screens/lend/modals/SelectAccountStep";
+import MODAL_LEND_ENABLE_FLOW from "../screens/lend/modals/EnableFlow";
 
 const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_EXPORT_OPERATIONS,
@@ -82,6 +83,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   // Lending
   MODAL_LEND_MANAGE,
   MODAL_LEND_ENABLE_INFO,
+  MODAL_LEND_ENABLE_FLOW,
   MODAL_LEND_SELECT_ACCOUNT,
 };
 

@@ -1,9 +1,14 @@
 // @flow
 
 import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import Modal from "~/renderer/components/Modal";
 import Body from "./Body";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+
 import type { StepId } from "./types";
+import { accountSelector } from "~/renderer/reducers/accounts";
 type State = {
   stepId: StepId,
 };
@@ -12,7 +17,9 @@ const INITIAL_STATE = {
   stepId: "amount",
 };
 
-class UnfreezeModal extends PureComponent<{ name: string }, State> {
+type Props = { name: string, account: AccountLike, parentAccount: Account };
+
+class EnableFlowModal extends PureComponent<Props, State> {
   state = INITIAL_STATE;
 
   handleReset = () => this.setState({ ...INITIAL_STATE });
@@ -28,7 +35,7 @@ class UnfreezeModal extends PureComponent<{ name: string }, State> {
 
   render() {
     const { stepId } = this.state;
-    const { name } = this.props;
+    const { name, account, parentAccount } = this.props;
 
     const isModalLocked = ["connectDevice", "confirmation"].includes(stepId);
 
@@ -45,7 +52,7 @@ class UnfreezeModal extends PureComponent<{ name: string }, State> {
             name={name}
             onClose={onClose}
             onChangeStepId={this.handleStepChange}
-            params={data || {}}
+            params={{ account, parentAccount }}
           />
         )}
       />
@@ -53,4 +60,10 @@ class UnfreezeModal extends PureComponent<{ name: string }, State> {
   }
 }
 
-export default UnfreezeModal;
+const mapStateToProps = createStructuredSelector({
+  parentAccount: accountSelector,
+});
+
+const m: React$ComponentType<Props> = connect(mapStateToProps)(EnableFlowModal);
+
+export default m;

@@ -39,12 +39,12 @@ function StepConfirmation({
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Unfreeze Flow" name="Step Confirmed" />
+        <TrackPage category="Lending Enable Flow" name="Step Confirmed" />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
-          title={<Trans i18nKey="unfreeze.steps.confirmation.success.title" />}
+          title={<Trans i18nKey="lend.enable.steps.confirmation.success.title" />}
           description={multiline(
-            t("unfreeze.steps.confirmation.success.text", {
+            t("lend.enable.steps.confirmation.success.text", {
               resource: transaction && transaction.resource && transaction.resource.toLowerCase(),
             }),
           )}
@@ -56,10 +56,10 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Unfreeze Flow" name="Step Confirmation Error" />
+        <TrackPage category="Lending Enable Flow" name="Step Confirmation Error" />
         {signed ? (
           <BroadcastErrorDisclaimer
-            title={<Trans i18nKey="unfreeze.steps.confirmation.broadcastError" />}
+            title={<Trans i18nKey="lend.enable.steps.confirmation.broadcastError" />}
           />
         ) : null}
         <ErrorDisplay error={error} withExportLogs />
@@ -80,8 +80,8 @@ export function StepConfirmationFooter({
   return error ? (
     <RetryButton ml={2} primary onClick={onRetry} />
   ) : (
-    <Button ml={2} event="Unfreeze Flow Step 3 View OpD Clicked" onClick={onClose} primary>
-      <Trans i18nKey="unfreeze.steps.confirmation.success.continue" />
+    <Button ml={2} event="Lending Enable Flow 3 View OpD Clicked" onClick={onClose} primary>
+      <Trans i18nKey="lend.enable.steps.confirmation.success.continue" />
     </Button>
   );
 }
