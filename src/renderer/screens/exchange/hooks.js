@@ -6,7 +6,7 @@ import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies/s
 import { supportedCurrenciesIds } from "./config";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
-import type { Account } from "@ledgerhq/live-common/lib/types/account";
+import type { AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import { useSelector } from "react-redux";
 import { blacklistedTokenIdsSelector } from "~/renderer/reducers/settings";
 
@@ -35,8 +35,8 @@ export const useCoinifyCurrencies = () => {
 
 export const getAccountsForCurrency = (
   currency: CryptoCurrency | TokenCurrency,
-  allAccounts: Account[],
-): Account[] => {
+  allAccounts: AccountLike[],
+): AccountLike[] => {
   return allAccounts.filter(
     account =>
       (account.type === "TokenAccount" ? account.token.id : account.currency.id) === currency.id,

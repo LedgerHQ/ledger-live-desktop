@@ -3,7 +3,12 @@
 import { createSelector, createSelectorCreator, defaultMemoize } from "reselect";
 import type { OutputSelector } from "reselect";
 import { handleActions } from "redux-actions";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  AccountLike,
+  CryptoCurrency,
+  TokenCurrency,
+} from "@ledgerhq/live-common/lib/types";
 import {
   flattenAccounts,
   clearAccount,
@@ -84,6 +89,23 @@ export const shallowAccountsSelector: OutputSelector<
   void,
   Account[],
 > = shallowAccountsSelectorCreator(accountsSelector, a => a);
+
+export const subAccountByCurrencyOrderedSelector: OutputSelector<
+  State,
+  { currency: CryptoCurrency | TokenCurrency },
+  AccountLike[],
+> = createSelector(
+  accountsSelector,
+  (_, { currency }: { currency: CryptoCurrency | TokenCurrency }) => currency,
+  (accounts, currency) =>
+    flattenAccounts(accounts)
+      .filter(
+        account =>
+          (account.type === "TokenAccount" ? account.token.id : account.currency.id) ===
+          currency.id,
+      )
+      .sort((a, b) => (a.balance.gt(b.balance) ? -1 : a.balance.eq(b.balance) ? 0 : 1)),
+);
 
 // FIXME we might reboot this idea later!
 export const activeAccountsSelector = accountsSelector;

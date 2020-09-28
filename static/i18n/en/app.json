@@ -240,6 +240,19 @@
         "description": "Withdraw your gains at any time from your Ledger wallet. "
       }
     },
+    "enable": {
+      "title": "Enable account",
+      "steps": {
+        "selectAccount": {
+          "title": "Select account",
+          "selectLabel": "Account to lend",
+          "cta": "Enable"
+        },
+        "selectAmount": {
+          "title": "Amount"
+        }
+      }
+    },
     "info": {
       "terms": {
         "title": "Lend Crypto",

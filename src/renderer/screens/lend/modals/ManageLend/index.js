@@ -1,15 +1,14 @@
 // @flow
 
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 import { Trans } from "react-i18next";
-import { BigNumber } from "bignumber.js";
-
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
+
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 
 import { openModal } from "~/renderer/actions/modals";
 import Box from "~/renderer/components/Box";
@@ -18,8 +17,6 @@ import Plus from "~/renderer/icons/Plus";
 import ArrowRight from "~/renderer/icons/ArrowRight";
 import Minus from "~/renderer/icons/Minus";
 import Text from "~/renderer/components/Text";
-import moment from "moment";
-import Clock from "~/renderer/icons/Clock";
 
 const IconWrapper = styled.div`
   width: 32px;
@@ -95,24 +92,6 @@ const Description = styled(Text).attrs(({ isPill }) => ({
       : ""}
 `;
 
-const TimerWrapper = styled(Box).attrs(() => ({
-  horizontal: true,
-  alignItems: "center",
-  ff: "Inter|Medium",
-  fontSize: 3,
-  color: "palette.text.shade50",
-  bg: "palette.action.active",
-  borderRadius: 4,
-  p: 1,
-  ml: 4,
-}))`
-  align-self: center;
-
-  ${Description} {
-    margin-left: 5px;
-  }
-`;
-
 type Props = {
   name?: string,
   account: AccountLike,
@@ -123,6 +102,8 @@ type Props = {
 const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
   const dispatch = useDispatch();
 
+  const currency = getAccountCurrency(account);
+
   const onSelectAction = useCallback(
     (name, onClose) => {
       onClose();
@@ -130,10 +111,11 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
         openModal(name, {
           parentAccount,
           account,
+          currency,
         }),
       );
     },
-    [dispatch, account, parentAccount],
+    [dispatch, account, parentAccount, currency],
   );
 
   // @TODO add in enable/disable conditions for lending

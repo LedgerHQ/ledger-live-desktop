@@ -10,8 +10,6 @@ import ActiveAccounts from "./ActiveAccounts";
 const Dashboard = ({ summaries }: { summaries: CompoundAccountSummary[] }) => {
   const { t } = useTranslation();
 
-  console.log(summaries);
-
   return (
     <Box>
       <Text ff="Inter|SemiBold" color="palette.text.shade100">

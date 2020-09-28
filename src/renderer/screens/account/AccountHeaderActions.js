@@ -88,8 +88,8 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   }, [currency, history, mainAccount]);
 
   const onLend = useCallback(() => {
-    openModal("MODAL_LEND_MANAGE", { account, parentAccount });
-  }, [currency, history, mainAccount]);
+    openModal("MODAL_LEND_MANAGE", { account, parentAccount, currencyId: currency.id });
+  }, [openModal, account, parentAccount, currency.id]);
 
   // List of available exchange actions
   const actions = [

@@ -125,7 +125,7 @@ type Props = OwnProps & {
   accounts: Account[],
 };
 
-const RawSelectAccount = ({
+export const RawSelectAccount = ({
   accounts,
   onChange,
   value,

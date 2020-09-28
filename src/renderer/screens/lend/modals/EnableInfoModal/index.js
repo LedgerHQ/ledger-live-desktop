@@ -5,7 +5,12 @@ import styled from "styled-components";
 
 import { useDispatch } from "react-redux";
 
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  AccountLike,
+  CryptoCurrency,
+  TokenCurrency,
+} from "@ledgerhq/live-common/lib/types";
 
 import LendingTermsIllu from "~/renderer/images/lending-terms.svg";
 import LendingTermsIllu1 from "~/renderer/images/lending-illu-1.svg";
@@ -15,7 +20,7 @@ import LendingInfoIllu1 from "~/renderer/images/lending-info-1.svg";
 import LendingInfoIllu2 from "~/renderer/images/lending-info-2.svg";
 import LendingInfoIllu3 from "~/renderer/images/lending-info-3.svg";
 
-import { closeModal } from "~/renderer/actions/modals";
+import { closeModal, openModal } from "~/renderer/actions/modals";
 import { openURL } from "~/renderer/linking";
 
 import Text from "~/renderer/components/Text";
@@ -29,10 +34,11 @@ type Props = {
   name?: string,
   account: AccountLike,
   parentAccount: ?Account,
+  currency: CryptoCurrency | TokenCurrency,
   ...
 };
 
-export default function LendTermsModal({ name, account, parentAccount, ...rest }: Props) {
+export default function LendTermsModal({ name, account, parentAccount, currency, ...rest }: Props) {
   const dispatch = useDispatch();
   const isAcceptedTerms = isAcceptedLendingTerms();
 
@@ -49,7 +55,8 @@ export default function LendTermsModal({ name, account, parentAccount, ...rest }
 
   const onFinish = useCallback(() => {
     onClose();
-  }, [onClose]);
+    dispatch(openModal("MODAL_LEND_ENABLE_SELECT_ACCOUNT", { ...rest, currency }));
+  }, [onClose, dispatch, rest, currency]);
 
   const onTermsLinkClick = useCallback(() => {
     // @TODO replace this URL with the correct one
