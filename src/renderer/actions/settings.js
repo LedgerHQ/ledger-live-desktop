@@ -42,15 +42,6 @@ export const setCounterValue = (counterValue: string) =>
 export const setLanguage = (language: ?string) => saveSettings({ language });
 export const setTheme = (theme: ?string) => saveSettings({ theme });
 export const setRegion = (region: ?string) => saveSettings({ region });
-// TODO remove
-export const setHideEmptyTokenAccounts = (hideEmptyTokenAccounts: boolean) => async (
-  dispatch: *,
-) => {
-  if (setEnvOnAllThreads("HIDE_EMPTY_TOKEN_ACCOUNTS", hideEmptyTokenAccounts)) {
-    dispatch(saveSettings({ hideEmptyTokenAccounts }));
-    dispatch(refreshAccountsOrdering());
-  }
-};
 
 export function useHideEmptyTokenAccounts() {
   const dispatch = useDispatch();

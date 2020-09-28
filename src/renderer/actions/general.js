@@ -82,7 +82,6 @@ export const calculateCountervalueSelector = (state: State) => {
   };
 };
 
-// TODO remove
 export const sortAccountsComparatorSelector: OutputSelector<State, void, *> = createSelector(
   getOrderAccounts,
   calculateCountervalueSelector,
@@ -95,13 +94,6 @@ export function useSortAccountsComparator() {
 
   return sortAccountsComparatorFromOrder(accounts, calc);
 }
-
-// TODO remove
-const nestedSortAccountsSelector = createSelector(
-  accountsSelector,
-  sortAccountsComparatorSelector,
-  nestedSortAccounts,
-);
 
 export function useNestedSortAccounts() {
   const accounts = useSelector(accountsSelector);
@@ -135,14 +127,6 @@ export const delegatableAccountsSelector: OutputSelector<
 > = createSelector(activeAccountsSelector, accounts =>
   accounts.filter(acc => acc.currency.family === "tezos" && !isAccountDelegating(acc)),
 );
-
-// TODO remove
-export const refreshAccountsOrdering = () => (dispatch: *, getState: *) => {
-  dispatch({
-    type: "DB:SET_ACCOUNTS",
-    payload: nestedSortAccountsSelector(getState()),
-  });
-};
 
 export function useRefreshAccountsOrdering() {
   const payload = useNestedSortAccounts();
