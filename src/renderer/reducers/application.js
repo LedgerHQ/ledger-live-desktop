@@ -11,11 +11,8 @@ import type { TokenCurrency, CryptoCurrency } from "@ledgerhq/live-common/lib/ty
 import { isCurrencySwapSupported } from "@ledgerhq/live-common/lib/swap";
 import type { State } from ".";
 import uniq from "lodash/uniq";
-import { findTokenById } from "@ledgerhq/live-common/lib/data/tokens";
-import {
-  findCryptoCurrencyById,
-  isCurrencySupported,
-} from "@ledgerhq/live-common/lib/data/cryptocurrencies";
+import { isCurrencySupported } from "@ledgerhq/live-common/lib/currencies";
+import { findCryptoCurrencyById, findTokenById } from "@ledgerhq/cryptoassets";
 
 export type ApplicationState = {
   isLocked?: boolean,
