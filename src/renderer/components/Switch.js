@@ -50,8 +50,7 @@ type Props = {
   small?: boolean,
 };
 
-function Switch(props: Props) {
-  const { isChecked, onChange, small, disabled, ...p } = props;
+export default function Switch({ isChecked, onChange = noop, small, disabled, ...p }: Props) {
   return (
     <Base
       {...p}
@@ -59,21 +58,17 @@ function Switch(props: Props) {
       disabled={disabled}
       small={small}
       isChecked={isChecked}
-      onClick={() => onChange && onChange(!isChecked)}
+      onClick={() => onChange(!isChecked)}
       className="switch"
     >
       <input
         type="checkbox"
         disabled={disabled || null}
-        {...(isChecked ? { checked: true } : {})}
+        checked={isChecked}
+        readOnly
+        value={isChecked}
       />
       <Ball small={small} isChecked={isChecked} />
     </Base>
   );
 }
-
-Switch.defaultProps = {
-  onChange: noop,
-};
-
-export default Switch;

@@ -3,10 +3,7 @@
 import type { OutputSelector } from "reselect";
 import { createSelector } from "reselect";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import {
-  implementCountervalues,
-  getCountervalues,
-} from "@ledgerhq/live-common/lib/countervalues-old";
+import { implementCountervalues } from "@ledgerhq/live-common/lib/countervalues-old";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import uniq from "lodash/uniq";
 import logger from "~/logger";
@@ -86,7 +83,3 @@ implementCountervalues({
   setExchangePairsAction,
   addExtraPollingHooks,
 });
-
-const CounterValues = getCountervalues();
-
-export default CounterValues;

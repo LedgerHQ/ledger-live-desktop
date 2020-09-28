@@ -12,7 +12,6 @@ import { setEnvUnsafe, getEnv } from "@ledgerhq/live-common/lib/env";
 import { retry } from "@ledgerhq/live-common/lib/promise";
 import TransportNodeHidSingleton from "@ledgerhq/hw-transport-node-hid-singleton";
 import TransportHttp from "@ledgerhq/hw-transport-http";
-import { implementCountervalues } from "@ledgerhq/live-common/lib/countervalues-old";
 import { DisconnectedDevice } from "@ledgerhq/errors";
 
 /* eslint-disable guard-for-in */
@@ -39,12 +38,6 @@ addAccessHook(() => {
     busy = false;
     refreshBusyUIState();
   };
-});
-
-implementCountervalues({
-  storeSelector: state => state.countervalues,
-  pairsSelector: () => [],
-  setExchangePairsAction: () => {},
 });
 
 setErrorRemapping(e => {
