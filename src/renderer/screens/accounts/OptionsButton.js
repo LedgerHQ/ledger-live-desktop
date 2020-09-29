@@ -13,7 +13,6 @@ import Switch from "~/renderer/components/Switch";
 import Tooltip from "~/renderer/components/Tooltip";
 import IconDots from "~/renderer/icons/Dots";
 import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
-import IconSend from "~/renderer/icons/Send";
 import IconQrCode from "~/renderer/icons/QrCode";
 import { hideEmptyTokenAccountsSelector } from "~/renderer/reducers/settings";
 import { openModal } from "~/renderer/actions/modals";
