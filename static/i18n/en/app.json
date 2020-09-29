@@ -280,6 +280,16 @@
           "description": "You can withdraw at any time your loan principal and interests, in its entirety or partially, directly from your Ledger wallet."
         }
       }
+    },
+    "supply": {
+      "title": "Supply assets",
+      "steps": {
+        "amount": {
+          "selectedAccount": "Selected account",
+          "amountToSupply": "Amount to supply",
+          "available": "Available balance"
+        }
+      }
     }
   },
   "accounts": {

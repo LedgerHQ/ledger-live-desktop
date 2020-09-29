@@ -4,7 +4,6 @@ import { compose } from "redux";
 import { connect, useDispatch } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import { createStructuredSelector } from "reselect";
-import { BigNumber } from "bignumber.js";
 
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
@@ -12,7 +11,7 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
-import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
+import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
 import type { TFunction } from "react-i18next";
 import type { Device } from "~/renderer/reducers/devices";
 import type { StepId, StepProps, St } from "./types";
@@ -24,56 +23,19 @@ import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 
 import Stepper from "~/renderer/components/Stepper";
-import StepAmount from "./steps/StepAmount";
+import StepAmount, { StepAmountFooter } from "./steps/StepAmount";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
-
-export const getUnfreezeData = (
-  account: Account,
-): {
-  unfreezeBandwidth: BigNumber,
-  unfreezeEnergy: BigNumber,
-  canUnfreezeBandwidth: boolean,
-  canUnfreezeEnergy: boolean,
-  bandwidthExpiredAt: Date,
-  energyExpiredAt: Date,
-} => {
-  const { tronResources } = account;
-  const {
-    frozen: { bandwidth, energy },
-  } = tronResources || {};
-
-  /** ! expiredAt should always be set with the amount if not this will disable the field by default ! */
-  const { amount: bandwidthAmount, expiredAt: bandwidthExpiredAt } = bandwidth || {};
-  const _bandwidthExpiredAt = +new Date(bandwidthExpiredAt);
-
-  const { amount: energyAmount, expiredAt: energyExpiredAt } = energy || {};
-  const _energyExpiredAt = +new Date(energyExpiredAt);
-
-  const unfreezeBandwidth = BigNumber(bandwidthAmount || 0);
-  const canUnfreezeBandwidth = unfreezeBandwidth.gt(0) && Date.now() > _bandwidthExpiredAt;
-
-  const unfreezeEnergy = BigNumber(energyAmount || 0);
-  const canUnfreezeEnergy = unfreezeEnergy.gt(0) && Date.now() > _energyExpiredAt;
-
-  return {
-    unfreezeBandwidth,
-    unfreezeEnergy,
-    canUnfreezeBandwidth,
-    canUnfreezeEnergy,
-    bandwidthExpiredAt,
-    energyExpiredAt,
-  };
-};
 
 type OwnProps = {|
   stepId: StepId,
   onClose: () => void,
   onChangeStepId: StepId => void,
   params: {
-    account: AccountLike,
+    account: Account,
     parentAccount: ?Account,
+    reward: number,
   },
   name: string,
 |};
@@ -92,20 +54,20 @@ type Props = OwnProps & StateProps;
 const steps: Array<St> = [
   {
     id: "amount",
-    label: <Trans i18nKey="lend.enable.steps.amount.title" />,
+    label: <Trans i18nKey="unfreeze.steps.amount.title" />,
     component: StepAmount,
     noScroll: true,
-    // footer: StepAmountFooter,
+    footer: StepAmountFooter,
   },
   {
     id: "connectDevice",
-    label: <Trans i18nKey="lend.enable.steps.connectDevice.title" />,
+    label: <Trans i18nKey="unfreeze.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
     onBack: ({ transitionTo }: StepProps) => transitionTo("amount"),
   },
   {
     id: "confirmation",
-    label: <Trans i18nKey="lend.enable.steps.confirmation.title" />,
+    label: <Trans i18nKey="unfreeze.steps.confirmation.title" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
   },
@@ -135,8 +97,6 @@ const Body = ({
   const [signed, setSigned] = useState(false);
   const dispatch = useDispatch();
 
-  console.log(params);
-
   const {
     transaction,
     setTransaction,
@@ -147,14 +107,11 @@ const Body = ({
     bridgePending,
   } = useBridgeTransaction(() => {
     const { account, parentAccount } = params;
-
     const bridge = getAccountBridge(account, parentAccount);
-
     const t = bridge.createTransaction(account);
 
     const transaction = bridge.updateTransaction(t, {
-      // @TODO define tx format
-      mode: "enable",
+      mode: "supply", // TODO: FIX WITH NEW MODES
     });
 
     return { account, parentAccount, transaction };
@@ -199,7 +156,7 @@ const Body = ({
     transactionError || bridgeError || (statusError instanceof Error ? statusError : null);
 
   const stepperProps = {
-    title: t("lend.enable.title"),
+    title: t("lend.supply.title"),
     device,
     account,
     parentAccount,
@@ -213,7 +170,6 @@ const Body = ({
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,
-    // reward: params.reward,
     error,
     status,
     optimisticOperation,
@@ -229,7 +185,7 @@ const Body = ({
   return (
     <Stepper {...stepperProps}>
       <SyncSkipUnderPriority priority={100} />
-      <Track onUnmount event="CloseModalLendingEnable" />
+      <Track onUnmount event="CloseModalUnfreeze" />
     </Stepper>
   );
 };

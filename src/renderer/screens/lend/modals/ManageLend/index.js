@@ -105,13 +105,14 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
   const currency = getAccountCurrency(account);
 
   const onSelectAction = useCallback(
-    (name, onClose) => {
+    (name: string, onClose: () => void, nextStep?: string) => {
       onClose();
       dispatch(
         openModal(name, {
           parentAccount,
           account,
           currency,
+          nextStep,
         }),
       );
     },
@@ -155,7 +156,9 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
                 </ManageButton>
                 <ManageButton
                   disabled={!canSupply}
-                  onClick={() => onSelectAction("MODAL_LEND_SUPPLY", onClose)}
+                  onClick={() =>
+                    onSelectAction("MODAL_LEND_SELECT_ACCOUNT", onClose, "MODAL_LEND_SUPPLY")
+                  }
                 >
                   <IconWrapper>
                     <ArrowRight size={16} />

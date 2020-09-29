@@ -25,7 +25,7 @@ import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import FormattedVal from "~/renderer/components/FormattedVal";
 
-function AccountOption({
+export function AccountOption({
   account,
   isValue,
   disabled,
@@ -55,15 +55,15 @@ function AccountOption({
   );
 }
 
-const renderValue = ({ data }: { data: AccountLike }) =>
+export const renderValue = ({ data }: { data: AccountLike }) =>
   data ? <AccountOption account={data} isValue /> : null;
 
-const renderOption = ({ data }: { data: AccountLike }) => {
+export const renderOption = ({ data }: { data: AccountLike }) => {
   console.warn(data);
   return data ? <AccountOption account={data} /> : null;
 };
 
-const getOptionValue = option => option && option.id;
+export const getOptionValue = (option?: { id: string }) => option && option.id;
 
 type Props = {
   name?: string,

@@ -30,7 +30,7 @@ const tabs = [
 
 const Lend = () => {
   const { t } = useTranslation();
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
   const accounts = useSelector(flattenSortAccountsSelector);
   const summaries = useCompoundSummaries(accounts);
 
@@ -51,12 +51,10 @@ const Lend = () => {
       <TabBar tabs={tabs.map(tab => t(tab.title))} onIndexChange={setActiveTabIndex} short />
 
       <Box mt={4}>
-        <Component summaries={summaries} />
+        <Component accounts={accounts} summaries={summaries} />
       </Box>
     </Box>
   );
 };
 
 export default Lend;
-
-// @flow
