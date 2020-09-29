@@ -13,12 +13,14 @@ type Props = {
 const OnboardingOrElse = ({ children }: Props) => {
   const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
   const onboardingRelaunched = useSelector(onboardingRelaunchedSelector);
+  const showOnboarding = !hasCompletedOnboarding || onboardingRelaunched;
 
-  if (!hasCompletedOnboarding || onboardingRelaunched) {
-    return <Onboarding />;
-  }
-
-  return children;
+  return (
+    <>
+      {showOnboarding ? <Onboarding /> : null}
+      {children}
+    </>
+  );
 };
 
 const ConnectedOnboardingOrElse: React$ComponentType<Props> = memo(OnboardingOrElse);
