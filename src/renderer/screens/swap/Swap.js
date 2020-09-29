@@ -3,6 +3,7 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProviders } from "@ledgerhq/live-common/lib/swap";
+import { SwapNoAvailableProviders } from "@ledgerhq/live-common/lib/errors";
 import { swapProvidersSelector } from "~/renderer/reducers/application";
 import type {
   CryptoCurrency,
@@ -24,16 +25,23 @@ type Props = {
 
 const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount }: Props) => {
   const providers = useSelector(swapProvidersSelector);
+  const [error, setProvidersError] = useState();
   const [showLandingPage, setShowLandingPage] = useState(true);
   const [installedApps, setInstalledApps] = useState();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (providers === undefined) {
+    if (providers === undefined && !error) {
       // NB We only fetch in case the init.js fetch failed and we have nothing.
-      getProviders().then(providers => dispatch(setSwapProviders(providers)));
+      getProviders().then(maybeProviders => {
+        if (maybeProviders instanceof SwapNoAvailableProviders) {
+          setProvidersError(maybeProviders);
+        } else {
+          dispatch(setSwapProviders(providers));
+        }
+      });
     }
-  }, [dispatch, providers]);
+  }, [dispatch, error, providers]);
 
   const onSetResult = useCallback(
     data => {
@@ -50,7 +58,7 @@ const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount }: Props) 
   }, [setShowLandingPage]);
 
   return showLandingPage ? (
-    <Landing providers={providers} onContinue={onContinue} />
+    <Landing providers={error ? [] : providers} onContinue={onContinue} />
   ) : !installedApps ? (
     <Connect setResult={onSetResult} />
   ) : !exchangeApp ? (

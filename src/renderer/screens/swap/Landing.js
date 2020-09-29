@@ -2,6 +2,7 @@
 
 import React, { useEffect } from "react";
 import Box from "~/renderer/components/Box";
+import WorldMap from "~/renderer/icons/WorldMap";
 import { Trans, withTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { hasAcceptedSwapKYCSelector } from "~/renderer/reducers/settings";
@@ -21,12 +22,17 @@ const Body = styled(Box)`
 `;
 
 const Content = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  > ${Box} {
+    position: absolute;
+  }
 `;
 
 const Landing = ({
@@ -55,17 +61,20 @@ const Landing = ({
           {providers === undefined ? (
             <BigSpinner size={50} />
           ) : (
-            <Box
-              style={{ maxWidth: 256 }}
-              mt={32}
-              alignItems={"center"}
-              color="palette.text.shade50"
-            >
-              <IconExclamationCircleThin size={40} />
-              <Text mt={3} ff="Inter|SemiBold" fontSize={6} color="palette.text.shade100">
-                <Trans i18nKey="swap.landing.sorry" />
-              </Text>
-            </Box>
+            <>
+              <WorldMap />
+              <Box
+                style={{ maxWidth: 256 }}
+                mt={32}
+                alignItems={"center"}
+                color="palette.text.shade50"
+              >
+                <IconExclamationCircleThin size={40} />
+                <Text mt={3} ff="Inter|SemiBold" fontSize={6} color="palette.text.shade100">
+                  <Trans i18nKey="swap.landing.sorry" />
+                </Text>
+              </Box>
+            </>
           )}
         </Content>
       </Body>
