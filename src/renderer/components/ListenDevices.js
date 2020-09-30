@@ -11,19 +11,20 @@ const ListenDevices = () => {
     function syncDevices() {
       const devices = {};
       sub = command("listenDevices")().subscribe(
-        ({ device, deviceModel, type }) => {
+        ({ device, deviceModel, type, descriptor }) => {
           if (device) {
+            const deviceId = descriptor || "";
             const stateDevice = {
-              path: device.path,
+              deviceId,
               modelId: deviceModel ? deviceModel.id : "nanoS",
-              type: "hid",
+              wired: true,
             };
 
             if (type === "add") {
-              devices[device.path] = true;
+              devices[deviceId] = true;
               dispatch(addDevice(stateDevice));
             } else if (type === "remove") {
-              delete device[device.path];
+              delete devices[deviceId];
               dispatch(removeDevice(stateDevice));
             }
           }

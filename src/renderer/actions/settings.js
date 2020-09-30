@@ -23,6 +23,8 @@ export const setAccountsViewMode = (accountsViewMode: *) => saveSettings({ accou
 export const setSelectedTimeRange = (selectedTimeRange: PortfolioRange) =>
   saveSettings({ selectedTimeRange });
 export const setDeveloperMode = (developerMode: boolean) => saveSettings({ developerMode });
+export const setHasAcceptedSwapKYC = (hasAcceptedSwapKYC: boolean) =>
+  saveSettings({ hasAcceptedSwapKYC });
 export const setDiscreetMode = (discreetMode: boolean) => saveSettings({ discreetMode });
 export const setCarouselVisibility = (carouselVisibility: number) =>
   saveSettings({ carouselVisibility });

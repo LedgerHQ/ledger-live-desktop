@@ -76,7 +76,7 @@ class StepCurrency extends PureComponent<StepProps> {
     };
 
     this.scanSubscription = getCurrencyBridge(currency)
-      .scanAccounts({ currency, deviceId: device.path, syncConfig })
+      .scanAccounts({ currency, deviceId: device.deviceId, syncConfig })
       .pipe(
         filter(e => e.type === "discovered"),
         map(({ account }) => {

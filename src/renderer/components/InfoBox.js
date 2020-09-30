@@ -11,25 +11,28 @@ import { FakeLink } from "./Link";
 type Props = {
   children: React$Node,
   onLearnMore?: () => void,
+  horizontal?: boolean,
 };
 
-export default function InfoBox({ children: description, onLearnMore }: Props) {
+export default function InfoBox({ children: description, onLearnMore, horizontal = true }: Props) {
   const { t } = useTranslation();
   return (
     <Container>
-      <InfoCircle size={12} />
-      <Box flex="1" margin={2}>
-        <Text ff="Inter|SemiBold" fontSize={3}>
-          {description}
-        </Text>
-      </Box>
-      {onLearnMore && (
-        <Box>
-          <Text ff="Inter|SemiBold" fontSize={3}>
-            <FakeLink onClick={onLearnMore}>{t("common.learnMore")}</FakeLink>
+      <InfoCircle size={16} />
+      <Box flex="1" margin={2} ml={16} horizontal={horizontal}>
+        <Box flex="1">
+          <Text ff="Inter|Regular" fontSize={3}>
+            {description}
           </Text>
         </Box>
-      )}
+        {onLearnMore && (
+          <Box>
+            <Text ff="Inter|SemiBold" fontSize={3}>
+              <FakeLink onClick={onLearnMore}>{t("common.learnMore")}</FakeLink>
+            </Text>
+          </Box>
+        )}
+      </Box>
     </Container>
   );
 }

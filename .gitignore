@@ -116,3 +116,5 @@ dist
 src/renderer/generated/
 tests/specs/__image_snapshots__/__diff_output__
 tests/tmp
+.yalc
+yalc.lock

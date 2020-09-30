@@ -67,7 +67,11 @@ const helpfulEvents = [
     name: "result",
     event: {
       type: "result",
-      result: mockListAppsResult("Bitcoin", "Bitcoin", deviceInfo155),
+      result: mockListAppsResult(
+        "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar",
+        "Bitcoin,Tron,Litecoin,Ethereum",
+        deviceInfo155,
+      ),
     },
   },
   {
@@ -83,6 +87,52 @@ const helpfulEvents = [
   { name: "complete", event: { type: "complete" } },
 ];
 
+const swapEvents = [
+  {
+    name: "result without Exchange",
+    event: {
+      type: "result",
+      result: mockListAppsResult(
+        "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar",
+        "Bitcoin,Tron,Litecoin,Ethereum",
+        deviceInfo155,
+      ),
+    },
+  },
+  {
+    name: "result with Exchange",
+    event: {
+      type: "result",
+      result: mockListAppsResult(
+        "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar,Exchange",
+        "Exchange,Tron,Bitcoin,Ethereum",
+        deviceInfo155,
+      ),
+    },
+  },
+  {
+    name: "result with only Exchange",
+    event: {
+      type: "result",
+      result: mockListAppsResult(
+        "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar,Exchange",
+        "Exchange",
+        deviceInfo155,
+      ),
+    },
+  },
+  {
+    name: "result with only Exchange+BTC",
+    event: {
+      type: "result",
+      result: mockListAppsResult(
+        "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar,Exchange",
+        "Exchange,Bitcoin",
+        deviceInfo155,
+      ),
+    },
+  },
+];
 if (getEnv("MOCK")) {
   window.mock = {
     events: {
@@ -169,6 +219,7 @@ const DebugMock = () => {
   const [nonce, setNonce] = useState(0);
   const [expanded, setExpanded] = useState(true);
   const [expandedQueue, setExpandedQueue] = useState(true);
+  const [expandedSwap, setExpandedSwap] = useState(false);
   const [expandedQuick, setExpandedQuick] = useState(false);
   const [expandedHistory, setExpandedHistory] = useState(true);
 
@@ -179,18 +230,12 @@ const DebugMock = () => {
   }, 2000);
 
   const toggleExpanded = useCallback(() => setExpanded(!expanded), [expanded, setExpanded]);
-  const toggleExpandedQueue = useCallback(() => setExpandedQueue(!expandedQueue), [
-    expandedQueue,
-    setExpandedQueue,
-  ]);
-  const toggleExpandedQuick = useCallback(() => setExpandedQuick(!expandedQuick), [
-    expandedQuick,
-    setExpandedQuick,
-  ]);
+  const toggleExpandedQueue = useCallback(() => setExpandedQueue(!expandedQueue), [expandedQueue]);
+  const toggleExpandedQuick = useCallback(() => setExpandedQuick(!expandedQuick), [expandedQuick]);
   const toggleExpandedHistory = useCallback(() => setExpandedHistory(!expandedHistory), [
     expandedHistory,
-    setExpandedHistory,
   ]);
+  const toggleExpandedSwap = useCallback(() => setExpandedSwap(!expandedSwap), [expandedSwap]);
 
   const queueEvent = useCallback(
     event => {
@@ -214,7 +259,6 @@ const DebugMock = () => {
         <Item
           id={nonce}
           color="palette.text.shade100"
-          mb={3}
           ff="Inter|Medium"
           fontSize={3}
           onClick={toggleExpanded}
@@ -228,7 +272,6 @@ const DebugMock = () => {
             <Box vertical>
               <Text
                 color="palette.text.shade100"
-                mb={3}
                 ff="Inter|SemiBold"
                 fontSize={3}
                 onClick={toggleExpandedQueue}
@@ -258,7 +301,6 @@ const DebugMock = () => {
             <Box vertical>
               <Text
                 color="palette.text.shade100"
-                mb={3}
                 ff="Inter|SemiBold"
                 fontSize={3}
                 onClick={toggleExpandedHistory}
@@ -275,10 +317,10 @@ const DebugMock = () => {
                 : null}
             </Box>
           ) : null}
+          {/* Events here are supposed to be generic and not for a specific flow */}
           <Box vertical>
             <Text
               color="palette.text.shade100"
-              mb={3}
               ff="Inter|SemiBold"
               fontSize={3}
               onClick={toggleExpandedQuick}
@@ -288,6 +330,31 @@ const DebugMock = () => {
             </Text>
             {expandedQuick
               ? helpfulEvents.map(({ name, event }, i) => (
+                  <Text
+                    style={{ marginLeft: 10 }}
+                    ff="Inter|Regular"
+                    color="palette.text.shade100"
+                    fontSize={3}
+                    key={i}
+                    onClick={() => queueEvent(event)}
+                  >
+                    {name}
+                  </Text>
+                ))
+              : null}
+          </Box>
+          <Box vertical>
+            <Text
+              color="palette.text.shade100"
+              ff="Inter|SemiBold"
+              fontSize={3}
+              onClick={toggleExpandedSwap}
+            >
+              {"swap "}
+              {expandedSwap ? "[ - ]" : "[ + ]"}
+            </Text>
+            {expandedSwap
+              ? swapEvents.map(({ name, event }, i) => (
                   <Text
                     style={{ marginLeft: 10 }}
                     ff="Inter|Regular"

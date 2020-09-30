@@ -1,6 +1,6 @@
 // @flow
 import type { TFunction } from "react-i18next";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import type { Step } from "~/renderer/components/Stepper";
 import type { BigNumber } from "bignumber.js";
 

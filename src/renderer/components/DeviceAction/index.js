@@ -3,12 +3,11 @@ import React, { useEffect, Component } from "react";
 import { createStructuredSelector } from "reselect";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
-import type { Action } from "@ledgerhq/live-common/lib/hw/actions/types";
+import type { Device, Action } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { setPreferredDeviceModel } from "~/renderer/actions/settings";
 import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
 import type { DeviceModelId } from "@ledgerhq/devices";
-import type { Device } from "~/renderer/reducers/devices";
 import AutoRepair from "~/renderer/components/AutoRepair";
 import TransactionConfirm from "~/renderer/components/TransactionConfirm";
 import useTheme from "~/renderer/hooks/useTheme";
@@ -23,6 +22,7 @@ import {
   renderRequestQuitApp,
   renderRequiresAppInstallation,
   renderWarningOutdated,
+  renderSwapDeviceConfirmation,
 } from "./rendering";
 
 type OwnProps<R, H, P> = {
@@ -93,6 +93,9 @@ const DeviceAction = <R, H, P>({
     deviceStreamingProgress,
     displayUpgradeWarning,
     passWarning,
+    initSwapRequested,
+    initSwapError,
+    initSwapResult,
   } = hookState;
 
   const type = useTheme("colors.palette.type");
@@ -124,6 +127,10 @@ const DeviceAction = <R, H, P>({
   if (allowManagerRequestedWording) {
     const wording = allowManagerRequestedWording;
     return renderAllowManager({ modelId, type, wording });
+  }
+
+  if (initSwapRequested && !initSwapResult && !initSwapError) {
+    return renderSwapDeviceConfirmation({ modelId, type });
   }
 
   if (allowOpeningRequestedWording || requestOpenApp) {

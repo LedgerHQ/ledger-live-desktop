@@ -20,6 +20,7 @@ import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/render
 import useTheme from "~/renderer/hooks/useTheme";
 import { Separator } from "~/renderer/components/Breadcrumb/common";
 import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 
 const connectAppExec = command("connectApp");
 
@@ -50,7 +51,7 @@ const Receive1ShareAddress = ({ name, address }: { name: string, address: string
 type VerifyOnDeviceProps = {
   mainAccount: Account,
   onAddressVerified: (status: boolean, err?: any) => void,
-  device: any,
+  device: ?Device,
 };
 
 const VerifyOnDevice = ({ mainAccount, onAddressVerified, device }: VerifyOnDeviceProps) => {
@@ -58,6 +59,7 @@ const VerifyOnDevice = ({ mainAccount, onAddressVerified, device }: VerifyOnDevi
   const address = mainAccount.freshAddress;
 
   const confirmAddress = useCallback(async () => {
+    if (!device) return null;
     try {
       if (getEnv("MOCK")) {
         setTimeout(() => {
@@ -66,7 +68,7 @@ const VerifyOnDevice = ({ mainAccount, onAddressVerified, device }: VerifyOnDevi
       } else {
         await getAccountBridge(mainAccount)
           .receive(mainAccount, {
-            deviceId: device.path,
+            deviceId: device.deviceId,
             verify: true,
           })
           .toPromise();
@@ -76,7 +78,7 @@ const VerifyOnDevice = ({ mainAccount, onAddressVerified, device }: VerifyOnDevi
     } catch (err) {
       onAddressVerified(false, err);
     }
-  }, [mainAccount, onAddressVerified, device.path]);
+  }, [device, onAddressVerified, mainAccount]);
 
   useEffect(() => {
     confirmAddress();
@@ -84,7 +86,7 @@ const VerifyOnDevice = ({ mainAccount, onAddressVerified, device }: VerifyOnDevi
 
   const type = useTheme("colors.palette.type");
 
-  return (
+  return device ? (
     <>
       <Receive1ShareAddress name={name} address={address} />
       <Separator />
@@ -102,7 +104,7 @@ const VerifyOnDevice = ({ mainAccount, onAddressVerified, device }: VerifyOnDevi
       </Box>
       {renderVerifyUnwrapped({ modelId: device.modelId, type })}
     </>
-  );
+  ) : null;
 };
 
 type Props = {
