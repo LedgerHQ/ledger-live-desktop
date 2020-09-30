@@ -9,6 +9,7 @@ import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
 import useTheme from "~/renderer/hooks/useTheme";
+import BadgeLabel from "~/renderer/components/BadgeLabel";
 
 type Props = {
   name?: string,
@@ -72,9 +73,7 @@ export default function TutorialModal({
                 <IllustrationContainer>{step.illustration}</IllustrationContainer>
               </IllustrationSection>
               <Box alignItems="center" px={6} mt={6} minHeight={150}>
-                <Box py={1} px={2} mb={2} borderRadius={4} bg="blueTransparentBackground">
-                  <BadgeLabel>{step.title}</BadgeLabel>
-                </Box>
+                <BadgeLabel>{step.title}</BadgeLabel>
 
                 <Text ff="Inter|SemiBold" fontSize={4} textAlign="center">
                   {step.subtitle}
@@ -123,12 +122,4 @@ const IllustrationContainer = styled.div`
   align-items: flex-end;
   justify-content: center;
   flex-direction: row;
-`;
-
-const BadgeLabel = styled(Text).attrs(() => ({
-  ff: "Inter|Bold",
-  fontSize: 2,
-  color: "wallet",
-}))`
-  text-transform: uppercase;
 `;

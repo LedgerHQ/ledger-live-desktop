@@ -5,19 +5,19 @@ import type { Step } from "~/renderer/components/Stepper";
 
 import type {
   Account,
+  AccountLike,
   TransactionStatus,
   Operation,
-  Transaction,
 } from "@ledgerhq/live-common/lib/types";
-
+import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
 export type StepId = "amount" | "connectDevice" | "confirmation";
 
 export type StepProps = {
   t: TFunction,
   transitionTo: string => void,
   device: ?Device,
-  account: ?Account,
-  parentAccount: ?Account,
+  account: AccountLike,
+  parentAccount: Account,
   onRetry: void => void,
   onClose: () => void,
   openModal: (key: string, config?: any) => void,

@@ -73,7 +73,7 @@ type OwnProps = {|
   onChangeStepId: StepId => void,
   params: {
     account: AccountLike,
-    parentAccount: ?Account,
+    parentAccount: Account,
   },
   name: string,
 |};
@@ -94,8 +94,7 @@ const steps: Array<St> = [
     id: "amount",
     label: <Trans i18nKey="lend.enable.steps.amount.title" />,
     component: StepAmount,
-    noScroll: true,
-    // footer: StepAmountFooter,
+    footer: StepAmountFooter,
   },
   {
     id: "connectDevice",
@@ -127,15 +126,13 @@ const Body = ({
   closeModal,
   openModal,
   onChangeStepId,
-  params,
   name,
+  params,
 }: Props) => {
   const [optimisticOperation, setOptimisticOperation] = useState(null);
   const [transactionError, setTransactionError] = useState(null);
   const [signed, setSigned] = useState(false);
   const dispatch = useDispatch();
-
-  console.log(params);
 
   const {
     transaction,
@@ -153,8 +150,10 @@ const Body = ({
     const t = bridge.createTransaction(account);
 
     const transaction = bridge.updateTransaction(t, {
-      // @TODO define tx format
-      mode: "enable",
+      mode: "erc20.approve",
+      amount: null, // @TODO handle null to Infinity in live-common bridge
+      gasPrice: null,
+      userGasLimit: null,
     });
 
     return { account, parentAccount, transaction };
@@ -213,7 +212,6 @@ const Body = ({
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,
-    // reward: params.reward,
     error,
     status,
     optimisticOperation,

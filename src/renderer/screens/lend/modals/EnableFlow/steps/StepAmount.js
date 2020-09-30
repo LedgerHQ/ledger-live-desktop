@@ -1,19 +1,43 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-
+import { BigNumber } from "bignumber.js";
 import { Trans } from "react-i18next";
+import { useSelector } from "react-redux";
+import { localeSelector } from "~/renderer/reducers/settings";
 
 import type { StepProps } from "../types";
-
+import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 
 import ErrorBanner from "~/renderer/components/ErrorBanner";
+import BadgeLabel from "~/renderer/components/BadgeLabel";
+import Text from "~/renderer/components/Text";
+import Spoiler from "~/renderer/components/Spoiler";
+import Label from "~/renderer/components/Label";
+import InputCurrency from "~/renderer/components/InputCurrency";
+import Switch from "~/renderer/components/Switch";
+import GasPriceField from "~/renderer/families/ethereum/GasPriceField";
+import GasLimitField from "~/renderer/families/ethereum/GasLimitField";
+import ToolTip from "~/renderer/components/Tooltip";
+import InfoCircle from "~/renderer/icons/InfoCircle";
+
+const InputRight = styled(Box).attrs(() => ({
+  ff: "Inter|Medium",
+  color: "palette.text.shade60",
+  fontSize: 4,
+  justifyContent: "center",
+  alignItems: "center",
+  horizontal: true,
+}))`
+  padding: ${p => p.theme.space[2]}px;
+`;
 
 export default function StepAmount({
   account,
@@ -26,24 +50,111 @@ export default function StepAmount({
   t,
 }: StepProps) {
   invariant(account && transaction, "account and transaction required");
+  const { amount } = transaction;
+  const [noLimit, setNoLimit] = useState(!amount);
+  const locale = useSelector(localeSelector);
 
-  // const bridge = getAccountBridge(account, parentAccount);
+  const name = account?.name || parentAccount?.name;
+  const currency = getAccountCurrency(account);
+  const unit = getAccountUnit(account);
 
-  //  const onChange = useCallback(
-  //    (resource: string) =>
-  //      onChangeTransaction(
-  //        bridge.updateTransaction(transaction, {
-  //          resource,
-  //        }),
-  //      ),
-  //    [bridge, transaction, onChangeTransaction],
-  //  );
+  const formattedAmount =
+    amount &&
+    formatCurrencyUnit(unit, amount, {
+      locale,
+      showAllDigits: false,
+      disableRounding: true,
+      showCode: true,
+    });
+
+  const bridge = getAccountBridge(account, parentAccount);
+
+  const onChangeAmount = useCallback(
+    (amount?: BigNumber) =>
+      onChangeTransaction(
+        bridge.updateTransaction(transaction, {
+          amount,
+        }),
+      ),
+    [bridge, transaction, onChangeTransaction],
+  );
+
+  const updateNoLimit = useCallback(
+    (value: boolean) => {
+      setNoLimit(value);
+      onChangeAmount(value ? null : BigNumber(0));
+    },
+    [onChangeAmount],
+  );
 
   return (
     <Box flow={1}>
       <TrackPage category="Lending Enable Flow" name="Step 1" />
       {error ? <ErrorBanner error={error} /> : null}
-      <Box vertical></Box>
+      <Box vertical>
+        <Box px={4} mb={4}>
+          <Text ff="Inter|Medium" fontSize={4} flex={1}>
+            <Trans
+              i18nKey="lend.enable.steps.amount.summary"
+              values={{
+                contractName: t("lend.enable.steps.amount.contractName", {
+                  currencyName: currency.name,
+                }),
+                accountName: name,
+                amount: amount
+                  ? t("lend.enable.steps.amount.limit", { amount: formattedAmount })
+                  : t("lend.enable.steps.amount.noLimit", { assetName: currency.name }),
+              }}
+            >
+              <BadgeLabel />
+            </Trans>
+          </Text>
+        </Box>
+        <Spoiler textTransform title={<Trans i18nKey="lend.enable.steps.amount.advanced" />}>
+          <Box vertical alignItems="stretch">
+            <Box my={4}>
+              <Box horizontal justifyContent="space-between" mb={2}>
+                <ToolTip content={<Trans i18nKey="lend.enable.steps.amount.amountLabelTooltip" />}>
+                  <Label>
+                    <Trans i18nKey="lend.enable.steps.amount.amountLabel" />
+                    &nbsp;
+                    <InfoCircle size={14} />
+                  </Label>
+                </ToolTip>
+
+                <Switch isChecked={noLimit} onChange={updateNoLimit} />
+              </Box>
+              <InputCurrency
+                disabled={noLimit}
+                autoFocus={false}
+                error={error}
+                containerProps={{ grow: true }}
+                unit={unit}
+                value={amount}
+                onChange={onChangeAmount}
+                placeholder={noLimit ? "No limit" : null}
+                renderRight={<InputRight>{unit.code}</InputRight>}
+              />
+            </Box>
+            <Box my={2}>
+              <GasPriceField
+                account={parentAccount}
+                transaction={transaction}
+                onChange={onChangeTransaction}
+                status={status}
+              />
+            </Box>
+            <Box my={2}>
+              <GasLimitField
+                account={parentAccount}
+                transaction={transaction}
+                onChange={onChangeTransaction}
+                status={status}
+              />
+            </Box>
+          </Box>
+        </Spoiler>
+      </Box>
     </Box>
   );
 }
@@ -64,9 +175,6 @@ export function StepAmountFooter({
 
   return (
     <Box horizontal>
-      <Button mr={1} secondary onClick={onClose}>
-        <Trans i18nKey="common.cancel" />
-      </Button>
       <Button disabled={!canNext} primary onClick={() => transitionTo("connectDevice")}>
         <Trans i18nKey="common.continue" />
       </Button>

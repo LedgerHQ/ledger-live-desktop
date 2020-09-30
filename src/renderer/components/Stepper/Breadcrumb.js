@@ -10,6 +10,12 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import Step from "./Step";
 
+const Container: ThemedComponent<{}> = styled(Box)`
+  position: sticky;
+  top: -20px;
+  z-index: 2;
+`;
+
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs(() => ({
   horizontal: true,
   alignItems: "center",
@@ -84,52 +90,54 @@ class Breadcrumb extends PureComponent<Props> {
     const start = 100 / itemsLength / 2;
 
     return (
-      <Box {...props} relative>
-        <Wrapper>
-          {items
-            .filter(i => !i.excludeFromBreadcrumb)
-            .map((item, i) => {
-              let status = "next";
+      <Container>
+        <Box {...props} bg="palette.background.paper" relative>
+          <Wrapper>
+            {items
+              .filter(i => !i.excludeFromBreadcrumb)
+              .map((item, i) => {
+                let status = "next";
 
-              const stepIndex = parseInt(currentStep, 10);
+                const stepIndex = parseInt(currentStep, 10);
 
-              if (i === stepIndex) {
-                status = "active";
-              }
+                if (i === stepIndex) {
+                  status = "active";
+                }
 
-              if (i < stepIndex) {
-                status = "valid";
-              }
+                if (i < stepIndex) {
+                  status = "valid";
+                }
 
-              if (stepsErrors.includes(i)) {
-                status = "error";
-              }
+                if (stepsErrors.includes(i)) {
+                  status = "error";
+                }
 
-              if (stepsDisabled.includes(i)) {
-                status = "disable";
-              }
+                if (stepsDisabled.includes(i)) {
+                  status = "disable";
+                }
 
-              return (
-                <Step key={i} status={status} number={i + 1}>
-                  {item.label}
-                </Step>
-              );
-            })}
-        </Wrapper>
-        <Bar
-          end={start}
-          start={start}
-          disabled={
-            stepsDisabled.length > 0
-              ? [
-                  stepsDisabled[0] === 0 ? 0 : indexToPercent(stepsDisabled[0] + 1, itemsLength),
-                  indexToPercent(stepsDisabled[stepsDisabled.length - 1], itemsLength),
-                ]
-              : null
-          }
-          current={!currentStep ? 100 : indexToPercent(currentStep, itemsLength)}
-        />
-      </Box>
+                return (
+                  <Step key={i} status={status} number={i + 1}>
+                    {item.label}
+                  </Step>
+                );
+              })}
+          </Wrapper>
+          <Bar
+            end={start}
+            start={start}
+            disabled={
+              stepsDisabled.length > 0
+                ? [
+                    stepsDisabled[0] === 0 ? 0 : indexToPercent(stepsDisabled[0] + 1, itemsLength),
+                    indexToPercent(stepsDisabled[stepsDisabled.length - 1], itemsLength),
+                  ]
+                : null
+            }
+            current={!currentStep ? 100 : indexToPercent(currentStep, itemsLength)}
+          />
+        </Box>
+      </Container>
     );
   }
 }

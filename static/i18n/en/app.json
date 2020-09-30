@@ -253,8 +253,32 @@
           "selectLabel": "Account to lend",
           "cta": "Enable"
         },
-        "selectAmount": {
-          "title": "Amount"
+        "amount": {
+          "title": "Amount",
+          "summary": "I grant access to <0>{{contractName}}</0> smart contract on my account <0>{{accountName}}</0> for a <0>{{amount}}</0> amount",
+          "limit": "limited {{amount}}",
+          "noLimit": "no limit {{assetName}}",
+          "contractName": "Compound {{currencyName}}",
+          "advanced": "Advanced",
+          "amountLabel": "Amount to enable",
+          "amountLabelTooltip": "<!--- NEED TEXT HERE ---!>"
+        },
+        "connectDevice": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "success": {
+            "title": "The transaction is being processed",
+            "text": "Please be patient, the transaction is being processed, once the transaction is confirmed you will be able to issue loans on the Compound protocol",
+            "done": "Close",
+            "cta": "View details",
+            "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
+          },
+          "pending": {
+            "title": "Enabling your assets..."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
         }
       }
     },
