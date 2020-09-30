@@ -41,6 +41,7 @@ type Props = {
   minWidth: number,
   autoFocus: boolean,
   virtual: boolean,
+  rowHeight: number,
 };
 
 const Row = styled.div`
@@ -91,12 +92,11 @@ class MenuList extends PureComponent<*, *> {
       options,
       maxHeight,
       getValue,
-      selectProps: { noOptionsMessage, small },
+      selectProps: { noOptionsMessage, rowHeight },
     } = this.props;
     const { children } = this.state;
     if (!children) return null;
     const [value] = getValue();
-    const rowHeight = small ? 34 : 40;
     const initialOffset = options.indexOf(value) * rowHeight;
     const minHeight = Math.min(...[maxHeight, rowHeight * children.length]);
 
@@ -192,11 +192,11 @@ class Select extends PureComponent<Props> {
       small,
       theme,
       virtual = true,
+      rowHeight = small ? 34 : 40,
       ...props
     } = this.props;
 
     const Comp = async ? AsyncReactSelect : ReactSelect;
-    const rowHeight = small ? 34 : 40;
 
     return (
       <Comp
@@ -228,7 +228,7 @@ class Select extends PureComponent<Props> {
         captureMenuScroll={false}
         menuShouldBlockScroll
         menuPortalTarget={document.body}
-        small={small}
+        rowHeight={rowHeight}
         onChange={this.handleChange}
       />
     );

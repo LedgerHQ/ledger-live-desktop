@@ -70,11 +70,11 @@ export default (
     backgroundColor: isFocused ? theme.colors.palette.background.default : null,
     // NB hover doesn't trigger isFocused since we disabled the onMouseMove/onMouseOver
     ":hover:not(:active)": {
-      backgroundColor: theme.colors.palette.background.default,
-      color: theme.colors.palette.text.shade100,
+      backgroundColor: !isDisabled ? theme.colors.palette.background.default : null,
+      color: !isDisabled ? theme.colors.palette.text.shade100 : null,
     },
     ":hover:active": {
-      color: theme.colors.palette.text.shade100,
+      color: !isDisabled ? theme.colors.palette.text.shade100 : null,
     },
     ":active": {
       ...styles[":active"],

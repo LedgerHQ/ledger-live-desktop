@@ -26,6 +26,7 @@ import IconSend from "~/renderer/icons/Send";
 import IconExchange from "~/renderer/icons/Exchange";
 import IconChevron from "~/renderer/icons/ChevronRight";
 import IconExperimental from "~/renderer/icons/Experimental";
+import IconSwap from "~/renderer/icons/Swap";
 
 import { SideBarList, SideBarListItem } from "~/renderer/components/SideBar";
 import Box from "~/renderer/components/Box";
@@ -211,6 +212,10 @@ const MainSideBar = () => {
     push("/exchange");
   }, [push]);
 
+  const handleClickSwap = useCallback(() => {
+    push("/swap");
+  }, [push]);
+
   const maybeRedirectToAccounts = useCallback(() => {
     return location.pathname === "/manager" && push("/accounts");
   }, [location.pathname, push]);
@@ -299,6 +304,16 @@ const MainSideBar = () => {
                 iconActiveColor="wallet"
                 onClick={handleClickExchange}
                 isActive={location.pathname === "/exchange"}
+                collapsed={secondAnim}
+              />
+              <SideBarListItem
+                id={"swap"}
+                label={t("sidebar.swap")}
+                icon={IconSwap}
+                iconActiveColor="wallet"
+                onClick={handleClickSwap}
+                disabled={noAccounts || navigationLocked}
+                isActive={location.pathname === "/swap"}
                 collapsed={secondAnim}
               />
               <Space of={30} />

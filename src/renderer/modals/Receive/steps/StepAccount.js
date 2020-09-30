@@ -8,7 +8,11 @@ import type {
   TokenCurrency,
   CryptoCurrency,
 } from "@ledgerhq/live-common/lib/types";
-import { getMainAccount, getReceiveFlowError } from "@ledgerhq/live-common/lib/account";
+import {
+  getAccountCurrency,
+  getMainAccount,
+  getReceiveFlowError,
+} from "@ledgerhq/live-common/lib/account";
 import { listTokensForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
@@ -44,7 +48,7 @@ const TokenParentSelection = ({
   onChangeAccount: OnChangeAccount,
   mainAccount: Account,
 }) => {
-  const filterAccountSelect = useCallback(account => account.currency === mainAccount.currency, [
+  const filterAccountSelect = useCallback(a => getAccountCurrency(a) === mainAccount.currency, [
     mainAccount,
   ]);
   return (

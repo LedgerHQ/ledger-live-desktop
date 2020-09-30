@@ -1,13 +1,15 @@
 // @flow
 import React, { useMemo } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
+import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/application";
 import { openModal } from "~/renderer/actions/modals";
 import IconReceive from "~/renderer/icons/Receive";
 import IconSend from "~/renderer/icons/Send";
 import IconStar from "~/renderer/icons/Star";
 import IconBuy from "~/renderer/icons/Exchange";
+import IconSwap from "~/renderer/icons/Swap";
 import IconBan from "~/renderer/icons/Ban";
 import IconAccountSettings from "~/renderer/icons/AccountSettings";
 import ContextMenuItem from "./ContextMenuItem";
@@ -34,6 +36,7 @@ export default function AccountContextMenu({
   const history = useHistory();
   const dispatch = useDispatch();
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
+  const swapSupportedCurrencies = useSelector(swapSupportedCurrenciesSelector);
 
   const menuItems = useMemo(() => {
     const currency = getAccountCurrency(account);
@@ -58,6 +61,23 @@ export default function AccountContextMenu({
         label: "accounts.contextMenu.buy",
         Icon: IconBuy,
         callback: () => history.push("/exchange"),
+      });
+    }
+
+    const availableOnSwap = swapSupportedCurrencies.includes(currency);
+    if (availableOnSwap) {
+      items.push({
+        label: "accounts.contextMenu.swap",
+        Icon: IconSwap,
+        callback: () =>
+          history.push({
+            pathname: "/swap",
+            state: {
+              defaultCurrency: currency,
+              defaultAccount: account,
+              defaultParentAccount: parentAccount,
+            },
+          }),
       });
     }
 
@@ -91,7 +111,15 @@ export default function AccountContextMenu({
     }
 
     return items;
-  }, [account, history, parentAccount, withStar, dispatch, refreshAccountsOrdering]);
+  }, [
+    account,
+    history,
+    parentAccount,
+    withStar,
+    dispatch,
+    refreshAccountsOrdering,
+    swapSupportedCurrencies,
+  ]);
 
   const currency = getAccountCurrency(account);
 

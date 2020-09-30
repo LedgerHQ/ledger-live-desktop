@@ -8,6 +8,7 @@ import { Transition, TransitionGroup } from "react-transition-group";
 import manager from "@ledgerhq/live-common/lib/manager";
 
 import type { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
+import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import type { AppsDistribution } from "@ledgerhq/live-common/lib/apps";
 import type { DeviceModel } from "@ledgerhq/devices";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -181,6 +182,14 @@ const TooltipContent = ({
   </TooltipContentWrapper>
 );
 
+// FIXME move to live-common
+const appDataColors = {
+  Exchange: "#39D2F3",
+};
+
+const getAppStorageBarColor = ({ name, currency }: { currency: ?CryptoCurrency, name: string }) =>
+  name in appDataColors ? appDataColors[name] : currency?.color;
+
 export const StorageBar = ({
   distribution,
   deviceModel,
@@ -205,7 +214,7 @@ export const StorageBar = ({
               <StorageBarItem
                 state={state}
                 installing={installQueue.includes(name) || uninstallQueue.includes(name)}
-                color={currency && currency.color}
+                color={getAppStorageBarColor({ name, currency })}
                 ratio={blocks / (distribution.totalBlocks - distribution.osBlocks)}
               >
                 <Tooltip

@@ -15,6 +15,7 @@ export type AccountTuple = {
 function getAccountTuplesForCurrency(
   currency: CryptoOrTokenCurrency,
   allAccounts: Account[],
+  hideEmpty: ?boolean,
 ): AccountTuple[] {
   if (currency.type === "TokenCurrency") {
     return allAccounts
@@ -28,14 +29,16 @@ function getAccountTuplesForCurrency(
                 subAcc.type === "TokenAccount" && subAcc.token.id === currency.id,
             )) ||
           makeEmptyTokenAccount(account, currency),
-      }));
+      }))
+      .filter(a => (hideEmpty ? a.subAccount?.balance.gt(0) : true));
   }
   return allAccounts
     .filter(account => account.currency.id === currency.id)
     .map(account => ({
       account,
       subAccount: null,
-    }));
+    }))
+    .filter(a => (hideEmpty ? a.account?.balance.gt(0) : true));
 }
 
 const getIdsFromTuple = (accountTuple: AccountTuple) => ({
@@ -48,15 +51,20 @@ export function useCurrencyAccountSelect({
   allAccounts,
   defaultCurrency,
   defaultAccount,
+  hideEmpty,
 }: {
   allCurrencies: CryptoOrTokenCurrency[],
   allAccounts: Account[],
   defaultCurrency: ?CryptoOrTokenCurrency,
   defaultAccount: ?Account,
+  hideEmpty?: ?boolean,
 }) {
   const [state, setState] = useState(() => {
-    const currency = defaultCurrency || allCurrencies[0];
-    const availableAccounts = getAccountTuplesForCurrency(currency, allAccounts);
+    const currency = defaultCurrency || null;
+    if (!currency) {
+      return { currency: null, accountId: null };
+    }
+    const availableAccounts = getAccountTuplesForCurrency(currency, allAccounts, hideEmpty);
     const { accountId } = defaultAccount
       ? { accountId: defaultAccount.id }
       : availableAccounts.length
@@ -74,7 +82,7 @@ export function useCurrencyAccountSelect({
   const setCurrency = useCallback(
     (currency: ?CryptoOrTokenCurrency) => {
       if (currency) {
-        const availableAccounts = getAccountTuplesForCurrency(currency, allAccounts);
+        const availableAccounts = getAccountTuplesForCurrency(currency, allAccounts, hideEmpty);
         const { accountId } = availableAccounts.length
           ? getIdsFromTuple(availableAccounts[0])
           : { accountId: null };
@@ -91,7 +99,7 @@ export function useCurrencyAccountSelect({
         accountId: null,
       }));
     },
-    [allAccounts],
+    [allAccounts, hideEmpty],
   );
 
   const setAccount = useCallback((account: ?Account, subAccount: ?SubAccount) => {
@@ -102,8 +110,8 @@ export function useCurrencyAccountSelect({
   }, []);
 
   const availableAccounts = useMemo(
-    () => (currency ? getAccountTuplesForCurrency(currency, allAccounts) : []),
-    [currency, allAccounts],
+    () => (currency ? getAccountTuplesForCurrency(currency, allAccounts, hideEmpty) : []),
+    [currency, allAccounts, hideEmpty],
   );
 
   const { account, subAccount } = useMemo(() => {

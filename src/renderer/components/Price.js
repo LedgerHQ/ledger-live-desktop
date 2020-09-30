@@ -17,10 +17,13 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 type Props = {
   unit?: Unit,
+  rate?: BigNumber,
+  showAllDigits?: boolean,
   from: Currency,
   to?: Currency,
   withActivityCurrencyColor?: boolean,
   withActivityColor?: string,
+  withIcon?: boolean,
   withEquality?: boolean,
   date?: Date,
   color?: string,
@@ -41,6 +44,8 @@ export default function Price({
   color,
   fontSize,
   iconSize,
+  showAllDigits = true,
+  withIcon = true,
 }: Props) {
   const effectiveUnit = unit || from.units[0];
   const value = BigNumber(10 ** effectiveUnit.magnitude);
@@ -66,11 +71,13 @@ export default function Price({
       : undefined
     : getCurrencyColor(from, bgColor);
 
-  const subMagnitude = counterValue.lt(1) ? 1 : 0;
+  const subMagnitude = counterValue.lt(1) || showAllDigits ? 1 : 0;
 
   return (
     <PriceWrapper color={color} fontSize={fontSize}>
-      <IconActivity size={iconSize || 12} style={{ color: activityColor, marginRight: 4 }} />
+      {withIcon ? (
+        <IconActivity size={iconSize || 12} style={{ color: activityColor, marginRight: 4 }} />
+      ) : null}
       {!withEquality ? null : (
         <>
           <CurrencyUnitValue value={value} unit={effectiveUnit} showCode />
