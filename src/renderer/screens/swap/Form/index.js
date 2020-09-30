@@ -6,7 +6,6 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 import { BigNumber } from "bignumber.js";
 import { useSelector, useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
-import { getAbandonSeedAddress } from "@ledgerhq/cryptoassets";
 import Card from "~/renderer/components/Box/Card";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { modalsStateSelector } from "~/renderer/reducers/modals";
@@ -18,6 +17,7 @@ import type {
   Currency,
 } from "@ledgerhq/live-common/lib/types";
 import getExchangeRates from "@ledgerhq/live-common/lib/swap/getExchangeRates";
+import { getAbandonSeedAddress } from "@ledgerhq/live-common/lib/currencies";
 import ArrowSeparator from "~/renderer/components/ArrowSeparator";
 import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/settings";
 import {
