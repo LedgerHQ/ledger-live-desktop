@@ -165,6 +165,14 @@ export const accountSelector: OutputSelector<
   (accounts, accountId) => accounts.find(a => a.id === accountId),
 );
 
+export const getAccountById: OutputSelector<
+  State,
+  {},
+  (id: string) => ?Account,
+> = createSelector(accountsSelector, accounts => (accountId: string) =>
+  accounts.find(a => a.id === accountId),
+);
+
 export const migratableAccountsSelector = (s: *): Account[] => s.accounts.filter(canBeMigrated);
 
 export const starredAccountsSelector: OutputSelector<

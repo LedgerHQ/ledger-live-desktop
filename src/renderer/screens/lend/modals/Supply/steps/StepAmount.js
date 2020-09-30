@@ -1,12 +1,16 @@
 // @flow
 
 import invariant from "invariant";
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import styled from "styled-components";
 
+import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -21,6 +25,7 @@ import useMaxSpendable from "~/renderer/hooks/useMaxSpendable";
 import GasPriceField from "~/renderer/families/ethereum/GasPriceField";
 import GasLimitField from "~/renderer/families/ethereum/GasLimitField";
 import { renderValue, renderOption, getOptionValue } from "../../SelectAccountStep";
+import { subAccountByCurrencyOrderedSelector } from "~/renderer/reducers/accounts";
 
 import type { StepProps } from "../types";
 
@@ -75,25 +80,37 @@ const AmountButton: ThemedComponent<{ error: boolean, active: boolean }> = style
   }
 `;
 
-export default function StepAmount({
-  amount,
-  onChange,
-  onChangeAccount,
+function StepAmount({
   account,
-  accounts,
   parentAccount,
+  onChangeAccount,
   onChangeTransaction,
   transaction,
   status,
   error,
   bridgePending,
   t,
-}: StepProps) {
+  accounts,
+}: StepProps & { accounts: AccountLike[] }) {
   invariant(account && transaction, "account and transaction required");
   const [focused, setFocused] = useState(false);
+  const bridge = getAccountBridge(account, parentAccount);
   const unit = getAccountUnit(account);
   const { warnings } = status;
+  const { amount } = transaction;
   const maxSpendable = useMaxSpendable({ account, parentAccount, transaction });
+
+  const onChangeAmount = useCallback(
+    (a?: BigNumber) => {
+      console.log({ a });
+      onChangeTransaction(
+        bridge.updateTransaction(transaction, {
+          amount: a,
+        }),
+      );
+    },
+    [bridge, transaction, onChangeTransaction],
+  );
 
   const warning = useMemo(() => focused && Object.values(warnings || {})[0], [focused, warnings]);
 
@@ -101,26 +118,26 @@ export default function StepAmount({
     () => [
       {
         label: "25%",
-        value: BigNumber(0),
+        value: maxSpendable.multipliedBy(0.25),
       },
       {
         label: "50%",
-        value: BigNumber(0),
+        value: maxSpendable.multipliedBy(0.5),
       },
       {
         label: "75%",
-        value: BigNumber(0),
+        value: maxSpendable.multipliedBy(0.75),
       },
       {
         label: "100%",
-        value: BigNumber(0),
+        value: maxSpendable,
       },
     ],
-    [],
+    [maxSpendable],
   );
 
   return (
-    <Box flow={1}>
+    <Box flow={2}>
       <TrackPage category="Lending Supply Flow" name="Step 1" />
       {error ? <ErrorBanner error={error} /> : null}
       <Box flow={1}>
@@ -161,12 +178,12 @@ export default function StepAmount({
         </Box>
         <InputCurrency
           autoFocus={false}
-          // error={error}
-          // warning={warning}
+          error={error}
+          warning={warning}
           containerProps={{ grow: true }}
           unit={unit}
           value={amount}
-          onChange={onChange}
+          onChange={onChangeAmount}
           onChangeFocus={() => setFocused(true)}
           renderLeft={<InputLeft>{unit.code}</InputLeft>}
           renderRight={
@@ -176,7 +193,7 @@ export default function StepAmount({
                   active={value.eq(amount)}
                   key={label}
                   error={undefined}
-                  onClick={() => onChange(value)}
+                  onClick={() => onChangeAmount(value)}
                 >
                   {label}
                 </AmountButton>
@@ -188,26 +205,37 @@ export default function StepAmount({
       <Box mt={5}>
         <Spoiler textTransform title={t("account.settings.advancedLogs")}>
           {parentAccount && transaction ? (
-            <>
+            <Box my={4}>
               <GasPriceField
-                onChange={() => {}}
+                // $FlowFixMe B*tch
+                onChange={onChangeTransaction}
                 account={parentAccount}
                 transaction={transaction}
                 status={status}
               />
-              <GasLimitField
-                onChange={() => {}}
-                account={parentAccount}
-                transaction={transaction}
-                status={status}
-              />
-            </>
+              <Box mt={3}>
+                <GasLimitField
+                  onChange={onChangeTransaction}
+                  account={parentAccount}
+                  transaction={transaction}
+                  status={status}
+                />
+              </Box>
+            </Box>
           ) : null}
         </Spoiler>
       </Box>
     </Box>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  accounts: subAccountByCurrencyOrderedSelector,
+});
+
+const m: React$ComponentType<StepProps> = connect(mapStateToProps)(StepAmount);
+
+export default m;
 
 export function StepAmountFooter({
   transitionTo,
@@ -219,16 +247,16 @@ export function StepAmountFooter({
   transaction,
 }: StepProps) {
   invariant(account, "account required");
-  const { errors } = status;
-  const hasErrors = Object.keys(errors).length;
-  const canNext = !bridgePending && !hasErrors;
+  // const { errors } = status;
+  // const hasErrors = Object.keys(errors).length;
+  // const canNext = !bridgePending && !hasErrors;
 
   return (
     <Box horizontal>
       <Button mr={1} secondary onClick={onClose}>
         <Trans i18nKey="common.cancel" />
       </Button>
-      <Button disabled={!canNext} primary onClick={() => transitionTo("connectDevice")}>
+      <Button primary onClick={() => transitionTo("connectDevice")}>
         <Trans i18nKey="common.continue" />
       </Button>
     </Box>

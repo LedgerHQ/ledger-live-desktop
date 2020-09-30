@@ -1,6 +1,7 @@
 // @flow
 
 import React, { useCallback, useState } from "react";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import Modal from "~/renderer/components/Modal";
 import Body from "./Body";
 import type { StepId } from "./types";
@@ -13,7 +14,11 @@ const INITIAL_STATE = {
   stepId: "amount",
 };
 
-const SupplyModal = () => {
+type Props = {
+  currency: CryptoCurrency | TokenCurrency,
+};
+
+const SupplyModal = (props: Props) => {
   const [state, setState] = useState<State>(INITIAL_STATE);
   const { stepId } = state;
 
@@ -30,6 +35,7 @@ const SupplyModal = () => {
 
   return (
     <Modal
+      {...props}
       name="MODAL_LEND_SUPPLY"
       centered
       refocusWhenChange={stepId}

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { listCurrentRates } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 import { useCompoundSummaries } from "./useCompoundSummaries";
 import { flattenSortAccountsSelector } from "~/renderer/actions/general";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -35,6 +36,10 @@ const Lend = () => {
   const summaries = useCompoundSummaries(accounts);
 
   const Component = tabs[activeTabIndex].component;
+
+  const rates = listCurrentRates();
+
+  console.log({ rates });
 
   return (
     <Box>

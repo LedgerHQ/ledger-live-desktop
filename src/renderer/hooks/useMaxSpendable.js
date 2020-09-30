@@ -1,6 +1,7 @@
 // @flow
 
 import { useEffect, useState } from "react";
+import { BigNumber } from "bignumber.js";
 import type { Account, AccountLike, Transaction } from "@ledgerhq/live-common/lib/types";
 import { useDebounce } from "@ledgerhq/live-common/lib/hooks/useDebounce";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -11,7 +12,7 @@ type Args = {
   transaction: Transaction,
 };
 
-const useMaxSpendable = ({ account, parentAccount, transaction }: Args) => {
+const useMaxSpendable = ({ account, parentAccount, transaction }: Args): BigNumber => {
   const [maxSpendable, setMaxSpendable] = useState(null);
 
   const debounceTransaction = useDebounce(transaction, 500);
@@ -35,7 +36,7 @@ const useMaxSpendable = ({ account, parentAccount, transaction }: Args) => {
     };
   }, [account, parentAccount, debounceTransaction]);
 
-  return maxSpendable;
+  return BigNumber(maxSpendable);
 };
 
 export default useMaxSpendable;

@@ -4,7 +4,6 @@ import { compose } from "redux";
 import { connect, useDispatch } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import { createStructuredSelector } from "reselect";
-import { BigNumber } from "bignumber.js";
 
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
@@ -28,44 +27,6 @@ import StepAmount, { StepAmountFooter } from "./steps/StepAmount";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
-
-export const getUnfreezeData = (
-  account: Account,
-): {
-  unfreezeBandwidth: BigNumber,
-  unfreezeEnergy: BigNumber,
-  canUnfreezeBandwidth: boolean,
-  canUnfreezeEnergy: boolean,
-  bandwidthExpiredAt: Date,
-  energyExpiredAt: Date,
-} => {
-  const { tronResources } = account;
-  const {
-    frozen: { bandwidth, energy },
-  } = tronResources || {};
-
-  /** ! expiredAt should always be set with the amount if not this will disable the field by default ! */
-  const { amount: bandwidthAmount, expiredAt: bandwidthExpiredAt } = bandwidth || {};
-  const _bandwidthExpiredAt = +new Date(bandwidthExpiredAt);
-
-  const { amount: energyAmount, expiredAt: energyExpiredAt } = energy || {};
-  const _energyExpiredAt = +new Date(energyExpiredAt);
-
-  const unfreezeBandwidth = BigNumber(bandwidthAmount || 0);
-  const canUnfreezeBandwidth = unfreezeBandwidth.gt(0) && Date.now() > _bandwidthExpiredAt;
-
-  const unfreezeEnergy = BigNumber(energyAmount || 0);
-  const canUnfreezeEnergy = unfreezeEnergy.gt(0) && Date.now() > _energyExpiredAt;
-
-  return {
-    unfreezeBandwidth,
-    unfreezeEnergy,
-    canUnfreezeBandwidth,
-    canUnfreezeEnergy,
-    bandwidthExpiredAt,
-    energyExpiredAt,
-  };
-};
 
 type OwnProps = {|
   stepId: StepId,
@@ -127,6 +88,7 @@ const Body = ({
   openModal,
   onChangeStepId,
   name,
+  // $FlowFixMe
   params,
 }: Props) => {
   const [optimisticOperation, setOptimisticOperation] = useState(null);

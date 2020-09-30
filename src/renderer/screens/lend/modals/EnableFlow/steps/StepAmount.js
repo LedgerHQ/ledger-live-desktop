@@ -140,6 +140,7 @@ export default function StepAmount({
               <GasPriceField
                 account={parentAccount}
                 transaction={transaction}
+                // $FlowFixMe
                 onChange={onChangeTransaction}
                 status={status}
               />

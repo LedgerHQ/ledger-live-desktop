@@ -309,9 +309,16 @@
       "title": "Supply assets",
       "steps": {
         "amount": {
+          "title": "Amount",
           "selectedAccount": "Selected account",
           "amountToSupply": "Amount to supply",
           "available": "Available balance"
+        },
+        "device": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation"
         }
       }
     }

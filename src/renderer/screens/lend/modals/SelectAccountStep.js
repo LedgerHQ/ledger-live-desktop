@@ -88,11 +88,12 @@ const SelectAccountStepModal = ({ name, currency, accounts, nextStep, ...rest }:
     dispatch(
       openModal(nextStep, {
         ...rest,
+        currency,
         account,
         accountId: account.parentId ? account.parentId : null,
       }),
     );
-  }, [onClose, dispatch, nextStep, rest, account]);
+  }, [onClose, dispatch, nextStep, rest, currency, account]);
 
   const onChangeAccount = useCallback(
     a => {
