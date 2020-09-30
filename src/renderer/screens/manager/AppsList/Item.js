@@ -1,8 +1,7 @@
 // @flow
 import React, { useMemo, memo, useCallback } from "react";
 import { useNotEnoughMemoryToInstall } from "@ledgerhq/live-common/lib/apps/react";
-import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
-import { isCurrencySupported } from "@ledgerhq/live-common/lib/data/cryptocurrencies";
+import { getCryptoCurrencyById, isCurrencySupported } from "@ledgerhq/live-common/lib/currencies";
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { State, Action, InstalledItem } from "@ledgerhq/live-common/lib/apps/types";
 

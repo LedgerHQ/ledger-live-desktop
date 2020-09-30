@@ -5,7 +5,6 @@ import "./implement-libcore";
 import { throwError } from "rxjs";
 import usbDetect from "usb-detection";
 import throttle from "lodash/throttle";
-import "@ledgerhq/live-common/lib/load/tokens/ethereum/erc20";
 import { registerTransportModule } from "@ledgerhq/live-common/lib/hw";
 import { addAccessHook, setErrorRemapping } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 import { setEnvUnsafe, getEnv } from "@ledgerhq/live-common/lib/env";

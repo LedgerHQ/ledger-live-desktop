@@ -6,6 +6,7 @@ import type { OutputSelector, InputSelector as Selector } from "reselect";
 import {
   findCurrencyByTicker,
   getCryptoCurrencyById,
+  listSupportedFiats,
   getFiatCurrencyByTicker,
 } from "@ledgerhq/live-common/lib/currencies";
 import type { DeviceModelId } from "@ledgerhq/devices";
@@ -15,7 +16,6 @@ import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getLanguages } from "~/config/languages";
 import type { State } from ".";
 import { osLangAndRegionSelector } from "~/renderer/reducers/application";
-import { listSupportedFiats } from "@ledgerhq/live-common/lib/data/fiat";
 
 export type CurrencySettings = {
   confirmationsNb: number,

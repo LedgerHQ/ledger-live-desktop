@@ -1,8 +1,6 @@
 // @flow
-
-import { listCryptoCurrencies } from "@ledgerhq/live-common/lib/data/cryptocurrencies";
 import { useMemo } from "react";
-import { listTokens } from "@ledgerhq/live-common/lib/data/tokens";
+import { listCryptoCurrencies, listTokens } from "@ledgerhq/live-common/lib/currencies";
 import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies/sortByMarketcap";
 
 import { supportedCurrenciesIds } from "./config";
