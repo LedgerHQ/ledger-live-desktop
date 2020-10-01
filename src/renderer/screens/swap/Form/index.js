@@ -19,7 +19,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import getExchangeRates from "@ledgerhq/live-common/lib/swap/getExchangeRates";
 import ArrowSeparator from "~/renderer/components/ArrowSeparator";
-import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/application";
+import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/settings";
 import {
   canRequestRates,
   getCurrenciesWithStatus,
