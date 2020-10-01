@@ -378,6 +378,10 @@
     "stakeAlgorand": {
       "title": "Staking with ALGORAND",
       "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
+    },
+    "swap": {
+      "title": "Swap crypto",
+      "description": "Exchange one crypto for another directly and securely from Ledger Live through our partner."
     }
   },
   "dashboard": {
@@ -590,7 +594,7 @@
     "unlockDevice": "Unlock your device",
     "quitApp": "Quit the application on your device",
     "appNotInstalled": "Please install the {{appName}} app",
-    "openMaopenManagernager": "Open Manager",
+    "openManager": "Open Manager",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
     "swap": {
