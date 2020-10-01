@@ -318,7 +318,15 @@
           "title": "Device"
         },
         "confirmation": {
-          "title": "Confirmation"
+          "title": "Confirmation",
+          "success": {
+            "title": "Account supplied",
+            "text": "Once the transaction is confirmed you will be able to issue loans on the Compound protocol",
+            "done": "Close",
+            "cta": "View details",
+            "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
         }
       }
     }

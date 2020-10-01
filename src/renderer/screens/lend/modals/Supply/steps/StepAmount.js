@@ -138,7 +138,7 @@ function StepAmount({
 
   return (
     <Box flow={2}>
-      <TrackPage category="Lending Supply Flow" name="Step 1" />
+      <TrackPage category="Lending Supply Flow" name="Step Amount" />
       {error ? <ErrorBanner error={error} /> : null}
       <Box flow={1}>
         <Label>{t("lend.supply.steps.amount.selectedAccount")}</Label>
