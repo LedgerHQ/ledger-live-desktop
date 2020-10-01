@@ -72,8 +72,8 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const ReceiveAction = (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
   const currency = getAccountCurrency(account);
   const availableOnExchange = isCurrencySupported(currency);
-  // @TODO adjust condition of available for lending
-  const availableOnLending = true;
+  // @TODO adjust condition of availability for lending
+  const availableOnCompound = false;
 
   const history = useHistory();
 
@@ -88,8 +88,8 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   }, [currency, history, mainAccount]);
 
   const onLend = useCallback(() => {
-    openModal("MODAL_LEND_MANAGE", { account, parentAccount, currencyId: currency.id });
-  }, [openModal, account, parentAccount, currency.id]);
+    openModal("MODAL_LEND_MANAGE", { account, parentAccount, currency: currency });
+  }, [openModal, account, parentAccount, currency]);
 
   // List of available exchange actions
   const actions = [
@@ -105,7 +105,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
           },
         ]
       : []),
-    ...(availableOnExchange
+    ...(availableOnCompound
       ? [
           {
             key: "Lend",
