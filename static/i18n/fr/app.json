@@ -378,6 +378,10 @@
     "stakeAlgorand": {
       "title": "Staking avec ALGORAND",
       "description": "Profiter au mieux de vos ALGO. Ajoutez simplement des fonds à vos comptes et gagnez des récompenses dès aujourd'hui."
+    },
+    "swap": {
+      "title": "Swap crypto",
+      "description": "Exchange one crypto for another directly and securely from Ledger Live through our partner."
     }
   },
   "dashboard": {
