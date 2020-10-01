@@ -98,7 +98,7 @@ const AmountField = ({
   const bridge = getAccountBridge(account, parentAccount);
 
   const defaultUnit = getAccountUnit(account);
-  //@TODO replace this with withdrawable balance data
+  // @TODO replace this with withdrawable balance data
   const { spendableBalance } = account;
 
   const [ratio, setRatio] = useState();

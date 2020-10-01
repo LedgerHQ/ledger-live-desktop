@@ -2,8 +2,7 @@
 
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
-import styled from "styled-components";
-
+import styled, { withTheme } from "styled-components";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -123,4 +122,4 @@ export function StepConfirmationFooter({
   );
 }
 
-export default StepConfirmation;
+export default withTheme(StepConfirmation);
