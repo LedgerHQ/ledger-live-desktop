@@ -9,6 +9,7 @@ import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { setEnvOnAllThreads } from "~/helpers/env";
 import type { SettingsState as Settings } from "~/renderer/reducers/settings";
 import { refreshAccountsOrdering } from "~/renderer/actions/general";
+import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
 
 export type SaveSettings = ($Shape<Settings>) => { type: string, payload: $Shape<Settings> };
 
@@ -101,4 +102,9 @@ export const setLastSeenDeviceInfo = (dmi: DeviceModelInfo) => ({
 export const setDeepLinkUrl = (url: ?string) => ({
   type: "SET_DEEPLINK_URL",
   payload: url,
+});
+
+export const setSwapProviders = (swapProviders?: AvailableProvider[]) => ({
+  type: "SETTINGS_SET_SWAP_PROVIDERS",
+  swapProviders,
 });

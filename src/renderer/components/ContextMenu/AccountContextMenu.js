@@ -18,7 +18,7 @@ import IconBan from "~/renderer/icons/Ban";
 import IconAccountSettings from "~/renderer/icons/AccountSettings";
 import ContextMenuItem from "./ContextMenuItem";
 import { toggleStarAction } from "~/renderer/actions/accounts";
-import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/application";
+import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/settings";
 import { createStructuredSelector } from "reselect";
 import { refreshAccountsOrdering } from "~/renderer/actions/general";
 import { withRouter } from "react-router-dom";

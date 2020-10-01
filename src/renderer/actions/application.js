@@ -19,6 +19,3 @@ export const setOSDarkMode = createAction("APPLICATION_SET_DATA", osDarkMode => 
 export const setNavigationLock = createAction("APPLICATION_SET_DATA", navigationLocked => ({
   navigationLocked,
 }));
-export const setSwapProviders = createAction("APPLICATION_SET_DATA", swapProviders => ({
-  swapProviders,
-}));
