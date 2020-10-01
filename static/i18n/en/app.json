@@ -282,6 +282,33 @@
         }
       }
     },
+    "withdraw": {
+      "title": "Withdraw asset",
+      "steps": {
+        "amount": {
+          "title": "Amount",
+          "advanced": "Advanced",
+          "amountLabel": "Amount to withdraw",
+          "available": "Available balance: <0>{{amountAvailable}}</0>"
+        },
+        "connectDevice": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "success": {
+            "title": "Assets withdrawn",
+            "text": "Once the transaction is confirmed you will be able to issue loans on the Compound protocol",
+            "done": "Close",
+            "cta": "View details"
+          },
+          "pending": {
+            "title": "Withdrawing your assets..."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    },
     "info": {
       "terms": {
         "title": "Lend Crypto",

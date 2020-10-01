@@ -174,7 +174,7 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
                 </ManageButton>
                 <ManageButton
                   disabled={!canWithdraw}
-                  onClick={() => onSelectAction("MODAL_LEND_WITHDRAW", onClose)}
+                  onClick={() => onSelectAction("MODAL_LEND_WITHDRAW_FLOW", onClose)}
                 >
                   <IconWrapper>
                     <Minus size={16} />
