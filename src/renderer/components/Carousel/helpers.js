@@ -45,9 +45,9 @@ export const getTransitions = (transition: "slide" | "flip", reverse: boolean = 
 
 export const getDefaultSlides = () => {
   return [
-    { id: "swap", Component: SwapBanner },
     { id: "backupPackBanner", Component: BackupPackBanner },
     { id: "ledgerAcademy", Component: LedgerAcademyBanner },
+    { id: "swap", Component: SwapBanner },
     { id: "stakeCosmos", Component: StakeCosmosBanner },
     { id: "buyCrypto", Component: BuyCryptoBanner },
     { id: "stakeAlgorand", Component: StakeAlgorandBanner },
