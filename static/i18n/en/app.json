@@ -233,8 +233,8 @@
       "cta": "Manage lending",
       "title": "Lend asset",
       "enable": {
-        "title": "Enable",
-        "description": "Allow the protocol to process future loans."
+        "reenableLabel": "Re enable",
+        "info": "You have enabled <0>{{amount}}</0> on this account"
       },
       "supply": {
         "title": "Supply",

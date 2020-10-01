@@ -1,22 +1,25 @@
 // @flow
 
 import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import { Trans } from "react-i18next";
 
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type { Account, SubAccount } from "@ledgerhq/live-common/lib/types";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+import { localeSelector } from "~/renderer/reducers/settings";
+
+import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 import { openModal } from "~/renderer/actions/modals";
 import Box from "~/renderer/components/Box";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
-import Plus from "~/renderer/icons/Plus";
 import ArrowRight from "~/renderer/icons/ArrowRight";
 import Minus from "~/renderer/icons/Minus";
 import Text from "~/renderer/components/Text";
+import InfoBox from "~/renderer/components/InfoBox";
 
 const IconWrapper = styled.div`
   width: 32px;
@@ -94,7 +97,7 @@ const Description = styled(Text).attrs(({ isPill }) => ({
 
 type Props = {
   name?: string,
-  account: AccountLike,
+  account: SubAccount,
   parentAccount: ?Account,
   ...
 } & CompoundAccountSummary;
@@ -110,6 +113,7 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
       dispatch(
         openModal(name, {
           parentAccount,
+          accountId: parentAccount?.id && account.parentId,
           account,
           currency,
           nextStep,
@@ -118,6 +122,20 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
     },
     [dispatch, account, parentAccount, currency],
   );
+  console.log(parentAccount);
+  // @TODO get the correct enabled amount
+  const enabledAmount = account.balance;
+  const locale = useSelector(localeSelector);
+  const unit = getAccountUnit(account);
+
+  const formattedEnabledAmount =
+    enabledAmount &&
+    formatCurrencyUnit(unit, enabledAmount, {
+      locale,
+      showAllDigits: false,
+      disableRounding: true,
+      showCode: true,
+    });
 
   // @TODO add in enable/disable conditions for lending
   const canEnable = true;
@@ -138,22 +156,22 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
           render={() => (
             <>
               <Box>
-                <ManageButton
-                  disabled={!canEnable}
-                  onClick={() => onSelectAction("MODAL_LEND_ENABLE_INFO", onClose)}
-                >
-                  <IconWrapper>
-                    <Plus size={16} />
-                  </IconWrapper>
-                  <InfoWrapper>
-                    <Title>
-                      <Trans i18nKey="lend.manage.enable.title" />
-                    </Title>
-                    <Description>
-                      <Trans i18nKey="lend.manage.enable.description" />
-                    </Description>
-                  </InfoWrapper>
-                </ManageButton>
+                {canEnable && (
+                  <Box mb={2}>
+                    <InfoBox
+                      onLearnMore={() => onSelectAction("MODAL_LEND_ENABLE_FLOW", onClose)}
+                      learnMoreLabel={<Trans i18nKey="lend.manage.enable.reenableLabel" />}
+                    >
+                      <Trans
+                        i18nKey="lend.manage.enable.info"
+                        values={{ amount: formattedEnabledAmount }}
+                      >
+                        <b></b>
+                      </Trans>
+                    </InfoBox>
+                  </Box>
+                )}
+
                 <ManageButton
                   disabled={!canSupply}
                   onClick={() =>
