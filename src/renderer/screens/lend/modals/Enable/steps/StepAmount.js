@@ -50,8 +50,7 @@ export default function StepAmount({
   t,
 }: StepProps) {
   invariant(account && transaction, "account and transaction required");
-  const { amount } = transaction;
-  const [noLimit, setNoLimit] = useState(!amount);
+  const { amount, useAllAmount } = transaction;
   const locale = useSelector(localeSelector);
 
   const name = account?.name || parentAccount?.name;
@@ -80,11 +79,14 @@ export default function StepAmount({
   );
 
   const updateNoLimit = useCallback(
-    (value: boolean) => {
-      setNoLimit(value);
-      onChangeAmount(value ? null : BigNumber(0));
-    },
-    [onChangeAmount],
+    (useAllAmount: boolean) =>
+      onChangeTransaction(
+        bridge.updateTransaction(transaction, {
+          amount: useAllAmount ? null : BigNumber(0),
+          useAllAmount,
+        }),
+      ),
+    [bridge, transaction, onChangeTransaction],
   );
 
   return (
@@ -122,17 +124,17 @@ export default function StepAmount({
                   </Label>
                 </ToolTip>
 
-                <Switch isChecked={noLimit} onChange={updateNoLimit} />
+                <Switch isChecked={!!useAllAmount} onChange={updateNoLimit} />
               </Box>
               <InputCurrency
-                disabled={noLimit}
+                disabled={!!useAllAmount}
                 autoFocus={false}
                 error={error}
                 containerProps={{ grow: true }}
                 unit={unit}
                 value={amount}
                 onChange={onChangeAmount}
-                placeholder={noLimit ? "No limit" : null}
+                placeholder={useAllAmount ? "No limit" : null}
                 renderRight={<InputRight>{unit.code}</InputRight>}
               />
             </Box>

@@ -112,8 +112,10 @@ const Body = ({
     const t = bridge.createTransaction(account);
 
     const transaction = bridge.updateTransaction(t, {
+      // @TOD0 handle address of tokenAccountId and recipient in common bridge
       mode: "erc20.approve",
-      amount: null, // @TODO handle null to Infinity in live-common bridge
+      useAllAmount: true,
+      amount: null,
       gasPrice: null,
       userGasLimit: null,
     });
