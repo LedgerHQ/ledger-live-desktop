@@ -27,6 +27,7 @@ import IconExchange from "~/renderer/icons/Exchange";
 import IconChevron from "~/renderer/icons/ChevronRight";
 import IconRedelegate from "~/renderer/icons/Redelegate";
 import IconExperimental from "~/renderer/icons/Experimental";
+import IconSwap from "~/renderer/icons/Swap";
 
 import { SideBarList, SideBarListItem } from "~/renderer/components/SideBar";
 import Box from "~/renderer/components/Box";
@@ -220,6 +221,10 @@ const MainSideBar = () => {
     push("/lend");
   }, [push, firstTimeLend, dispatch]);
 
+  const handleClickSwap = useCallback(() => {
+    push("/swap");
+  }, [push]);
+
   const maybeRedirectToAccounts = useCallback(() => {
     return location.pathname === "/manager" && push("/accounts");
   }, [location.pathname, push]);
@@ -322,6 +327,16 @@ const MainSideBar = () => {
                   NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
                 />
               ) : null}
+              <SideBarListItem
+                id={"swap"}
+                label={t("sidebar.swap")}
+                icon={IconSwap}
+                iconActiveColor="wallet"
+                onClick={handleClickSwap}
+                disabled={noAccounts || navigationLocked}
+                isActive={location.pathname === "/swap"}
+                collapsed={secondAnim}
+              />
               <Space of={30} />
             </SideBarList>
             <Space grow of={30} />

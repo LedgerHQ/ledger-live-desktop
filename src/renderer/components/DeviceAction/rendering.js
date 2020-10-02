@@ -7,7 +7,7 @@ import styled from "styled-components";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { WrongDeviceForAccount } from "@ledgerhq/errors";
 import type { DeviceModelId } from "@ledgerhq/devices";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { closeAllModal } from "~/renderer/actions/modals";
 import Animation from "~/renderer/animations";
 import Button from "~/renderer/components/Button";
@@ -15,6 +15,7 @@ import TranslatedError from "~/renderer/components/TranslatedError";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import BigSpinner from "~/renderer/components/BigSpinner";
+import InfoBox from "~/renderer/components/InfoBox";
 import ConnectTroubleshooting from "~/renderer/components/ConnectTroubleshooting";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -23,6 +24,8 @@ import { DeviceBlocker } from "./DeviceBlocker";
 import ErrorIcon from "~/renderer/components/ErrorIcon";
 import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 import SupportLinkError from "~/renderer/components/SupportLinkError";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
 
 const AnimationWrapper: ThemedComponent<{ modelId: DeviceModelId }> = styled.div`
   width: 600px;
@@ -361,6 +364,26 @@ export const renderConnectYourDevice = ({
       ) : null}
     </Footer>
   </Wrapper>
+);
+
+export const renderSwapDeviceConfirmation = ({
+  modelId,
+  type,
+}: {
+  modelId: DeviceModelId,
+  type: "light" | "dark",
+}) => (
+  <>
+    <InfoBox onLearnMore={() => openURL(urls.swap.learnMore)} horizontal={false}>
+      <Trans i18nKey="DeviceAction.swap.notice" />
+    </InfoBox>
+    {renderVerifyUnwrapped({ modelId, type })}
+    <Box alignItems={"center"}>
+      <Text textAlign="center" ff="Inter|SemiBold" color="palette.text.shade100" fontSize={5}>
+        <Trans i18nKey="DeviceAction.swap.confirm" />
+      </Text>
+    </Box>
+  </>
 );
 
 export const renderLoading = ({

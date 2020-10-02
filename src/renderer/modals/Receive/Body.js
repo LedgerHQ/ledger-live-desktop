@@ -8,7 +8,7 @@ import { createStructuredSelector } from "reselect";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import Track from "~/renderer/analytics/Track";
 import type { Account, TokenCurrency, AccountLike } from "@ledgerhq/live-common/lib/types";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { closeModal } from "~/renderer/actions/modals";

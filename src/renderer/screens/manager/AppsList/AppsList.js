@@ -26,9 +26,10 @@ import { openModal } from "~/renderer/actions/modals";
 import debounce from "lodash/debounce";
 import InstallSuccessBanner from "./InstallSuccessBanner";
 import SearchBox from "../../accounts/AccountList/SearchBox";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 // sticky top bar with extra width to cover card boxshadow underneath
-const StickyTabBar = styled.div`
+export const StickyTabBar: ThemedComponent<{}> = styled.div`
   position: sticky;
   background-color: ${p => p.theme.colors.palette.background.default};
   top: -${p => p.theme.space[3]}px;

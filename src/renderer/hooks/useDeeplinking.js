@@ -3,7 +3,6 @@ import { ipcRenderer } from "electron";
 import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
-import querystring from "query-string";
 import { findCurrencyByTicker, parseCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { accountsSelector } from "~/renderer/reducers/accounts";
@@ -30,7 +29,7 @@ const getAccountsOrSubAccountsByCurrency = (currency, accounts) => {
   return accounts.filter(predicateFn);
 };
 
-function useDeepLinkHandler() {
+export function useDeepLinkHandler() {
   const dispatch = useDispatch();
   const accounts = useSelector(accountsSelector);
   const location = useLocation();
@@ -47,9 +46,12 @@ function useDeepLinkHandler() {
 
   const handler = useCallback(
     (event: any, deeplink: string) => {
-      const [, path] = deeplink.split("ledgerlive://");
+      const { pathname, searchParams } = new URL(deeplink);
+      const query = Object.fromEntries(searchParams);
 
-      const { url, query } = querystring.parseUrl(path);
+      const matcher = /^\/+/;
+
+      const url = pathname.replace(matcher, "");
 
       switch (url) {
         case "accounts":

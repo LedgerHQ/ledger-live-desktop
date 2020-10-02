@@ -45,6 +45,11 @@ const SpinnerWrapper: ThemedComponent<{}> = styled.div`
   border: 2px solid ${p => p.theme.colors.palette.background.paper};
 `;
 
+/**
+ * Nb Not to be confused with CryptoCurrencyIcon which also has a circle
+ * mode. Not worth refactoring since this one brings the spinner/check-mark
+ * and CryptoCurrencyIcon is used in the selects.
+ */
 export function CurrencyCircleIcon({
   currency,
   size,

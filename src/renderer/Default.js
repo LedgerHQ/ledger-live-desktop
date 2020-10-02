@@ -37,6 +37,7 @@ import AnalyticsConsole from "~/renderer/components/AnalyticsConsole";
 import DebugMock from "~/renderer/components/DebugMock";
 import useDeeplink from "~/renderer/hooks/useDeeplinking";
 import ModalsLayer from "./ModalsLayer";
+import Swap from "~/renderer/screens/swap";
 
 const reloadApp = event => {
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {
@@ -107,6 +108,7 @@ const Default = () => {
                       />
                       <Route path="/account/:id" render={props => <Account {...props} />} />
                       <Route path="/asset/:assetId+" render={props => <Asset {...props} />} />
+                      <Route path="/swap" render={props => <Swap {...props} />} />
                     </Switch>
                   </Page>
                 </Box>

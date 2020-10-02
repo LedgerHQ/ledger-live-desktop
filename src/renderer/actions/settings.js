@@ -9,6 +9,7 @@ import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { setEnvOnAllThreads } from "~/helpers/env";
 import type { SettingsState as Settings } from "~/renderer/reducers/settings";
 import { refreshAccountsOrdering } from "~/renderer/actions/general";
+import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
 
 export type SaveSettings = ($Shape<Settings>) => { type: string, payload: $Shape<Settings> };
 
@@ -23,6 +24,8 @@ export const setAccountsViewMode = (accountsViewMode: *) => saveSettings({ accou
 export const setSelectedTimeRange = (selectedTimeRange: PortfolioRange) =>
   saveSettings({ selectedTimeRange });
 export const setDeveloperMode = (developerMode: boolean) => saveSettings({ developerMode });
+export const setHasAcceptedSwapKYC = (hasAcceptedSwapKYC: boolean) =>
+  saveSettings({ hasAcceptedSwapKYC });
 export const setDiscreetMode = (discreetMode: boolean) => saveSettings({ discreetMode });
 export const setCarouselVisibility = (carouselVisibility: number) =>
   saveSettings({ carouselVisibility });
@@ -103,4 +106,9 @@ export const setDeepLinkUrl = (url: ?string) => ({
 
 export const setFirstTimeLend = () => ({
   type: "SET_FIRST_TIME_LEND",
+});
+
+export const setSwapProviders = (swapProviders?: AvailableProvider[]) => ({
+  type: "SETTINGS_SET_SWAP_PROVIDERS",
+  swapProviders,
 });

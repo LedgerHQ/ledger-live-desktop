@@ -14,7 +14,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import { getDeviceTransactionConfig } from "@ledgerhq/live-common/lib/transaction";
 import type { DeviceTransactionField } from "@ledgerhq/live-common/lib/transaction";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import transactionConfirmFieldsPerFamily from "~/renderer/generated/TransactionConfirmFields";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
