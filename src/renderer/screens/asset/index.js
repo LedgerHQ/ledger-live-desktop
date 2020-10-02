@@ -75,7 +75,6 @@ export default function AssetPage({ match }: Props) {
         unit={unit}
         counterValue={counterValue}
         accounts={accounts}
-        chartId={`asset-chart-${match.params.assetId}`}
       />
       <Box mt={40}>
         <AccountDistribution accounts={accounts} />

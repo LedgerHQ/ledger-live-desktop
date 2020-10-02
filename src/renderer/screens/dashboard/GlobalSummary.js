@@ -83,15 +83,12 @@ export default function PortfolioBalanceSummary({
       >
         {portfolio.balanceAvailable ? (
           <Chart
-            onlyUpdateIfLastPointChanges
-            id={chartId}
             magnitude={counterValue.units[0].magnitude}
             color={chartColor}
             data={portfolio.balanceHistory}
             height={250}
             tickXScale={range}
             renderTickY={discreetMode ? () => "" : renderTickY}
-            isInteractive
             renderTooltip={renderTooltip}
           />
         ) : (

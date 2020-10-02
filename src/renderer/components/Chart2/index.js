@@ -48,15 +48,12 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 export type Props = {
   data: Data,
   magnitude: number,
-  id?: string,
   height?: number,
   tickXScale: string,
   color?: string,
   hideAxis?: boolean,
-  isInteractive?: boolean,
   renderTooltip?: Function,
   renderTickY: (t: number) => string | number,
-  onlyUpdateIfLastPointChanges?: boolean,
   valueKey?: string,
 };
 
@@ -68,7 +65,7 @@ const ChartContainer: ThemedComponent<{}> = styled.div.attrs(({ height }) => ({
   position: relative;
 `;
 
-const Chart = ({
+export default function Chart({
   magnitude,
   height,
   data,
@@ -77,7 +74,7 @@ const Chart = ({
   renderTickY,
   renderTooltip,
   valueKey = "value",
-}: Props) => {
+}: Props) {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
   const theme = useTheme("colors.palette");
@@ -211,6 +208,4 @@ const Chart = ({
       ) : null}
     </ChartContainer>
   );
-};
-
-export default Chart;
+}

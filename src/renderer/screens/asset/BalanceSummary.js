@@ -21,7 +21,6 @@ import { discreetModeSelector } from "~/renderer/reducers/settings";
 type Props = {
   counterValue: Currency,
   chartColor: string,
-  chartId: string,
   currency: CryptoCurrency | TokenCurrency,
   unit: Unit,
   range: PortfolioRange,
@@ -34,7 +33,6 @@ export default function BalanceSummary({
   countervalueFirst,
   range,
   chartColor,
-  chartId,
   currency,
 }: Props) {
   const {
@@ -106,8 +104,6 @@ export default function BalanceSummary({
 
       <Box px={5} ff="Inter" fontSize={4} color="palette.text.shade80" pt={6}>
         <Chart
-          key={chartId}
-          id={chartId}
           magnitude={chartMagnitude}
           color={chartColor}
           data={history}

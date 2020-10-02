@@ -24,7 +24,6 @@ import perFamilyAccountBalanceSummaryFooter from "~/renderer/generated/AccountBa
 type Props = {
   counterValue: Currency,
   chartColor: string,
-  chartId: string,
   account: Account | TokenAccount,
   parentAccount: ?Account,
   range: PortfolioRange,
@@ -39,7 +38,6 @@ export default function AccountBalanceSummary({
   countervalueFirst,
   range,
   chartColor,
-  chartId,
   setCountervalueFirst,
   mainAccount,
 }: Props) {
@@ -116,7 +114,6 @@ export default function AccountBalanceSummary({
 
       <Box px={5} ff="Inter" fontSize={4} color="palette.text.shade80" pt={5}>
         <Chart
-          id={chartId}
           magnitude={chartMagnitude}
           color={chartColor}
           data={history}
@@ -130,7 +127,6 @@ export default function AccountBalanceSummary({
               ? renderTickYCounterValue
               : renderTickYCryptoValue
           }
-          isInteractive
           renderTooltip={renderTooltip}
         />
       </Box>
