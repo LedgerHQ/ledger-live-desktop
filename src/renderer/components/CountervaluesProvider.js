@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import {
   Countervalues,
-  useCountervaluesExport,
+  useCountervaluesState,
 } from "@ledgerhq/live-common/lib/countervalues/react";
 import { inferTrackingPairForAccounts } from "@ledgerhq/live-common/lib/countervalues/logic";
 import { setKey, getKey } from "~/renderer/storage";
@@ -33,11 +33,11 @@ export default function CountervaluesProvider({ children }: { children: React$No
 }
 
 function CountervaluesPersist({ children }: { children: React$Node }) {
-  const rawState = useCountervaluesExport();
+  const state = useCountervaluesState();
 
   useEffect(() => {
-    setKey("app", "countervalues", rawState);
-  }, [rawState]);
+    setKey("app", "countervalues", state);
+  }, [state]);
 
   return children;
 }
