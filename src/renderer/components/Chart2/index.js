@@ -73,6 +73,7 @@ const Chart = ({
   height,
   data,
   color,
+  tickXScale,
   renderTickY,
   renderTooltip,
   valueKey = "value",
@@ -98,15 +99,18 @@ const Chart = ({
           pointRadius: 0,
           borderWidth: 2,
           data: data.map(d => ({
-            x: moment(new Date(d.date))
-              .startOf("day")
-              .toDate(),
+            x:
+              tickXScale === "week"
+                ? new Date(d.date)
+                : moment(new Date(d.date))
+                    .startOf("day")
+                    .toDate(),
             y: d[valueKey].toNumber(),
           })),
         },
       ],
     }),
-    [color, data, valueKey],
+    [color, data, valueKey, tickXScale],
   );
 
   const generateOptions = useMemo(
@@ -141,7 +145,7 @@ const Chart = ({
               minRotation: 0,
             },
             time: {
-              minUnit: "day",
+              minUnit: tickXScale === "week" ? "hour" : "day",
               displayFormats: {
                 quarter: "MMM YYYY",
               },
@@ -170,7 +174,7 @@ const Chart = ({
         ],
       },
     }),
-    [renderTickY, theme, magnitude],
+    [renderTickY, theme, magnitude, tickXScale],
   );
 
   useLayoutEffect(() => {
