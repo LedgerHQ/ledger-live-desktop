@@ -2404,8 +2404,11 @@
     "StellarMemoRecommended": {
       "title": "A memo may be required when sending to this recipient"
     },
-    "SwapExchangeRateOutOfBounds": {
-      "title": "Amount must be between {{unit}} {{minAmountFrom}} and {{unit}} {{maxAmountFrom}}"
+    "SwapExchangeRateAmountTooLow": {
+      "title": "Amount must be at least {{unit}} {{minAmountFrom}}"
+    },
+    "SwapExchangeRateAmountTooHigh": {
+        "title": "Amount must be less than {{unit}} {{maxAmountFrom}}"
     }
   }
 }
