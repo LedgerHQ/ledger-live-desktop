@@ -133,8 +133,8 @@
     },
     "history": {
       "empty": {
-        "title": "Pas d'historique",
-        "description": "Vous n'avez pas d'historique de swap."
+        "title": "Your previous swaps will appear here",
+        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
       }
     },
     "landing": {
@@ -2404,8 +2404,11 @@
     "StellarMemoRecommended": {
       "title": "Un mémo peut être requis lors de l'envoi à ce destinataire"
     },
-    "SwapExchangeRateOutOfBounds": {
-      "title": "Le montant doit être compris entre {{unit}} {{minAmountFrom}} et {{unit}} {{maxAmountFrom}}"
+    "SwapExchangeRateAmountTooLow": {
+      "title": "Amount must be at least {{unit}} {{minAmountFrom}}"
+    },
+    "SwapExchangeRateAmountTooHigh": {
+      "title": "Amount must be less than {{unit}} {{maxAmountFrom}}"
     }
   }
 }
