@@ -133,8 +133,8 @@
     },
     "history": {
       "empty": {
-        "title": "No History",
-        "description": "You don’t have any swap history."
+        "title": "Your previous swaps will appear here",
+        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
       }
     },
     "landing": {
