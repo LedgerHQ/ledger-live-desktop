@@ -1,7 +1,9 @@
 // @flow
-import React from "react";
+import React, { memo } from "react";
 
-const NoAccountsImage = ({ size = 250 }: { size: number }) => (
+type Props = { size?: number };
+
+const NoAccountsImage = ({ size = 250 }: Props) => (
   <svg
     width={size}
     height={size}
@@ -489,4 +491,4 @@ const NoAccountsImage = ({ size = 250 }: { size: number }) => (
   </svg>
 );
 
-export default NoAccountsImage;
+export default memo<Props>(NoAccountsImage);
