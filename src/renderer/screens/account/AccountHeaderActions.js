@@ -6,7 +6,7 @@ import { useSelector, connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/application";
+import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/settings";
 import Tooltip from "~/renderer/components/Tooltip";
 import {
   isAccountEmpty,
@@ -31,6 +31,8 @@ import IconSwap from "~/renderer/icons/Swap";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
+import IconAngleDown from "~/renderer/icons/AngleDown";
+import IconAngleUp from "~/renderer/icons/AngleUp";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
   alignItems: "center",
@@ -168,6 +170,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
                     <Box>
                       <Trans i18nKey="common.exchange" values={{ currency: currency.name }} />
                     </Box>
+                    {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
                   </Box>
                 </Button>
               )}

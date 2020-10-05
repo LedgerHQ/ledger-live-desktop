@@ -1,85 +1,104 @@
 // @flow
 
-import React, { useEffect } from "react";
-import Box from "~/renderer/components/Box";
-import WorldMap from "~/renderer/icons/WorldMap";
-import { Trans, withTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { hasAcceptedSwapKYCSelector } from "~/renderer/reducers/settings";
-import Text from "~/renderer/components/Text";
+import React, { useCallback, useState } from "react";
+import { Trans } from "react-i18next";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Card from "~/renderer/components/Box/Card";
-import KYC from "~/renderer/screens/swap/KYC";
-import BigSpinner from "~/renderer/components/BigSpinner";
-import IconExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
-import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
+import Box from "~/renderer/components/Box";
+import Text from "~/renderer/components/Text";
+import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
+import swapIllustration from "~/renderer/images/swap.png";
+import CheckBox from "~/renderer/components/CheckBox";
+import Button from "~/renderer/components/Button";
+import { setHasAcceptedSwapKYC } from "~/renderer/actions/settings";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
 
-const Body = styled(Box)`
+const Title = styled(Text)`
   align-items: center;
   align-self: center;
   text-align: center;
-  position: relative;
+
+  font-size: 18px;
+  line-height: 22px;
+  color: ${p => p.theme.colors.palette.text.shade100};
+  margin-bottom: 10px;
 `;
 
-const Content = styled.div`
-  position: relative;
-  display: flex;
+const Subtitle = styled(Text)`
   align-items: center;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  align-self: center;
+  text-align: center;
 
-  > ${Box} {
-    position: absolute;
-  }
+  font-size: 13px;
+  line-height: 19px;
+  padding: 0 100px;
+  color: ${p => p.theme.colors.palette.text.shade50};
 `;
 
-const Landing = ({
-  providers,
-  onContinue,
-}: {
-  providers?: Array<AvailableProvider>,
-  onContinue: any,
-}) => {
-  const hasAcceptedSwapKYC = useSelector(hasAcceptedSwapKYCSelector);
+const Disclaimer = styled(Text)`
+  flex: 1;
+  margin-left: 14px;
+  margin-right: 40px;
+  font-size: 12px;
+  line-height: 18px;
+  color: ${p => p.theme.colors.palette.text.shade50};
+`;
 
-  useEffect(() => {
-    if (providers && providers.length && hasAcceptedSwapKYC) {
-      onContinue();
-    }
-  }, [hasAcceptedSwapKYC, onContinue, providers]);
+const Illustration = styled.div`
+  margin-bottom: 24px;
+  width: 248px;
+  height: 132px;
+  background: url(${swapIllustration});
+  background-size: contain;
+  align-self: center;
+`;
 
-  const showKYC = providers && !hasAcceptedSwapKYC;
+const Footer = styled.div`
+  border-top: 1px solid ${p => p.theme.colors.palette.divider};
+  flex-direction: row;
+  align-items: center;
+  display: flex;
+  padding: 24px;
+`;
 
-  return showKYC ? (
-    <KYC />
-  ) : (
-    <Card px={80} py={53} alignItems={"center"} justifyContent={"center"} flex={1}>
-      <Body>
-        <Content>
-          {providers === undefined ? (
-            <BigSpinner size={50} />
-          ) : (
-            <>
-              <WorldMap />
-              <Box
-                style={{ maxWidth: 256 }}
-                mt={32}
-                alignItems={"center"}
-                color="palette.text.shade50"
-              >
-                <IconExclamationCircleThin size={40} />
-                <Text mt={3} ff="Inter|SemiBold" fontSize={6} color="palette.text.shade100">
-                  <Trans i18nKey="swap.landing.sorry" />
-                </Text>
-              </Box>
-            </>
-          )}
-        </Content>
-      </Body>
+const KYC = () => {
+  const [isChecked, setIsChecked] = useState(false);
+  const dispatch = useDispatch();
+  const onAcceptSwapKYC = useCallback(() => dispatch(setHasAcceptedSwapKYC(true)), [dispatch]);
+
+  return (
+    <Card flex={1} pt={53} justifyContent={"space-between"}>
+      <Box flex={1} justifyContent={"center"}>
+        <Illustration />
+        <Title ff="Inter|SemiBold">
+          <Trans i18nKey={"swap.kyc.title"} />
+        </Title>
+        <Subtitle ff="Inter|Medium">
+          <Trans i18nKey={"swap.kyc.subtitle"} />
+        </Subtitle>
+        <Box alignSelf={"center"} mb={44} mt={2}>
+          <LinkWithExternalIcon
+            ff="Inter|Regular"
+            fontSize={3}
+            onClick={() => openURL(urls.swap.info)}
+          >
+            <Trans i18nKey="swap.whatIsSwap" />
+          </LinkWithExternalIcon>
+        </Box>
+      </Box>
+      <Footer>
+        <CheckBox id={"swap-landing-kyc-tos"} isChecked={isChecked} onChange={setIsChecked} />
+        <Disclaimer ff="Inter|Regular" onClick={() => setIsChecked(!isChecked)}>
+          <Trans i18nKey={"swap.kyc.disclaimer"} />
+        </Disclaimer>
+        <Button disabled={!isChecked} primary onClick={onAcceptSwapKYC}>
+          <Trans i18nKey="common.continue" />
+        </Button>
+      </Footer>
     </Card>
   );
 };
 
-export default withTranslation()(Landing);
+export default KYC;

@@ -8,14 +8,19 @@ import {
   getCryptoCurrencyById,
   listSupportedFiats,
   getFiatCurrencyByTicker,
+  isCurrencySupported,
 } from "@ledgerhq/live-common/lib/currencies";
 import type { DeviceModelId } from "@ledgerhq/devices";
-import type { CryptoCurrency, Currency } from "@ledgerhq/live-common/lib/types";
+import type { CryptoCurrency, Currency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getLanguages } from "~/config/languages";
 import type { State } from ".";
 import { osLangAndRegionSelector } from "~/renderer/reducers/application";
+import { isCurrencySwapSupported } from "@ledgerhq/live-common/lib/swap";
+import uniq from "lodash/uniq";
+import { findCryptoCurrencyById, findTokenById } from "@ledgerhq/cryptoassets";
+import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
 
 export type CurrencySettings = {
   confirmationsNb: number,
@@ -97,6 +102,7 @@ export type SettingsState = {
   starredAccountIds?: string[],
   blacklistedTokenIds: string[],
   deepLinkUrl: ?string,
+  swapProviders?: AvailableProvider[],
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -137,6 +143,7 @@ const INITIAL_STATE: SettingsState = {
   lastSeenDevice: null,
   blacklistedTokenIds: [],
   deepLinkUrl: null,
+  swapProviders: [],
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -222,6 +229,10 @@ const handlers: Object = {
   SET_DEEPLINK_URL: (state: SettingsState, { payload: deepLinkUrl }) => ({
     ...state,
     deepLinkUrl,
+  }),
+  SETTINGS_SET_SWAP_PROVIDERS: (state: SettingsState, { swapProviders }) => ({
+    ...state,
+    swapProviders,
   }),
   // used to debug performance of redux updates
   DEBUG_TICK: state => ({ ...state }),
@@ -355,6 +366,31 @@ export const hideEmptyTokenAccountsSelector = (state: State) =>
   state.settings.hideEmptyTokenAccounts;
 
 export const lastSeenDeviceSelector = (state: State) => state.settings.lastSeenDevice;
+
+export const swapProvidersSelector = (state: Object) => state.settings.swapProviders;
+
+export const swapSupportedCurrenciesSelector: OutputSelector<
+  State,
+  { accountId: string },
+  (TokenCurrency | CryptoCurrency)[],
+> = createSelector(swapProvidersSelector, swapProviders => {
+  if (!swapProviders) return [];
+
+  const allIds = uniq(
+    swapProviders.reduce((ac, { supportedCurrencies }) => [...ac, ...supportedCurrencies], []),
+  );
+
+  const tokenCurrencies = allIds
+    .map(findTokenById)
+    .filter(Boolean)
+    .filter(t => !t.delisted);
+  const cryptoCurrencies = allIds
+    .map(findCryptoCurrencyById)
+    .filter(Boolean)
+    .filter(isCurrencySupported);
+
+  return [...cryptoCurrencies, ...tokenCurrencies].filter(isCurrencySwapSupported);
+});
 
 export const exportSettingsSelector: OutputSelector<State, void, *> = createSelector(
   counterValueCurrencySelector,

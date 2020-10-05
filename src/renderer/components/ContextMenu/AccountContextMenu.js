@@ -1,9 +1,9 @@
 // @flow
 import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
-import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/application";
 import { openModal } from "~/renderer/actions/modals";
 import IconReceive from "~/renderer/icons/Receive";
 import IconSend from "~/renderer/icons/Send";
@@ -15,7 +15,7 @@ import IconAccountSettings from "~/renderer/icons/AccountSettings";
 import ContextMenuItem from "./ContextMenuItem";
 import { toggleStarAction } from "~/renderer/actions/accounts";
 import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
-import { useHistory } from "react-router-dom";
+import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/settings";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 
 type Props = {

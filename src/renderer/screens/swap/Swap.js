@@ -1,21 +1,23 @@
 // @flow
 
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useMemo, useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProviders } from "@ledgerhq/live-common/lib/swap";
 import { SwapNoAvailableProviders } from "@ledgerhq/live-common/lib/errors";
-import { swapProvidersSelector } from "~/renderer/reducers/application";
 import type {
   CryptoCurrency,
   TokenCurrency,
   Account,
   AccountLike,
 } from "@ledgerhq/live-common/lib/types";
+import { hasAcceptedSwapKYCSelector, swapProvidersSelector } from "~/renderer/reducers/settings";
+import { setSwapProviders } from "~/renderer/actions/settings";
 import Landing from "~/renderer/screens/swap/Landing";
+import Loading from "~/renderer/screens/swap/Loading";
+import NotAvailable from "~/renderer/screens/swap/NotAvailable";
 import Form from "~/renderer/screens/swap/Form";
 import Connect from "~/renderer/screens/swap/Connect";
 import MissingOrOutdatedSwapApp from "~/renderer/screens/swap/MissingOrOutdatedSwapApp";
-import { setSwapProviders } from "~/renderer/actions/application";
 
 type Props = {
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
@@ -25,23 +27,24 @@ type Props = {
 
 const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount }: Props) => {
   const providers = useSelector(swapProvidersSelector);
-  const [error, setProvidersError] = useState();
-  const [showLandingPage, setShowLandingPage] = useState(true);
+  const hasAcceptedSwapKYC = useSelector(hasAcceptedSwapKYCSelector);
+
+  const [hasUpToDateProviders, setHasUpToDateProviders] = useState(false);
   const [installedApps, setInstalledApps] = useState();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (providers === undefined && !error) {
-      // NB We only fetch in case the init.js fetch failed and we have nothing.
+    if (hasAcceptedSwapKYC) {
       getProviders().then(maybeProviders => {
-        if (maybeProviders instanceof SwapNoAvailableProviders) {
-          setProvidersError(maybeProviders);
-        } else {
-          dispatch(setSwapProviders(providers));
-        }
+        dispatch(
+          setSwapProviders(
+            maybeProviders instanceof SwapNoAvailableProviders ? [] : maybeProviders,
+          ),
+        );
+        setHasUpToDateProviders(true);
       });
     }
-  }, [dispatch, error, providers]);
+  }, [dispatch, hasAcceptedSwapKYC]);
 
   const onSetResult = useCallback(
     data => {
@@ -51,14 +54,17 @@ const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount }: Props) 
     },
     [setInstalledApps],
   );
-  const exchangeApp = installedApps?.find(a => a.name === "Exchange");
 
-  const onContinue = useCallback(() => {
-    setShowLandingPage(false);
-  }, [setShowLandingPage]);
+  const exchangeApp = useMemo(() => installedApps?.find(a => a.name === "Exchange"), [
+    installedApps,
+  ]);
 
-  return showLandingPage ? (
-    <Landing providers={error ? [] : providers} onContinue={onContinue} />
+  return !hasAcceptedSwapKYC ? (
+    <Landing />
+  ) : !hasUpToDateProviders ? (
+    <Loading />
+  ) : !providers?.length ? (
+    <NotAvailable />
   ) : !installedApps ? (
     <Connect setResult={onSetResult} />
   ) : !exchangeApp ? (

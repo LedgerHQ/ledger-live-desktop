@@ -116,11 +116,117 @@
     "stars": "Comptes favoris",
     "accounts": "Comptes",
     "manager": "Manager",
+    "swap": "Swap",
     "exchange": "Acheter des cryptos"
   },
   "stars": {
     "placeholder": "Les comptes que vous placez en favoris dans la page <1><0>Comptes</0></1> apparaitront ici !",
     "tooltip": "Ajouter aux favoris"
+  },
+  "swap": {
+    "title": "Swap",
+    "titleCrypto": "Échanger {{currency}}",
+    "whatIsSwap": "Qu'est-ce que le swap",
+    "tabs": {
+      "exchange": "Échanger",
+      "history": "Historique"
+    },
+    "history": {
+      "empty": {
+        "title": "Pas d'historique",
+        "description": "Vous n'avez pas d'historique de swap."
+      }
+    },
+    "landing": {
+      "title": "Échanger vos actifs",
+      "continue": "Continuer",
+      "link": "En savoir plus sur le swap",
+      "sorry": "Le Swap n'est pas disponible dans votre pays"
+    },
+    "missingApp": {
+      "title": "Veuillez installer l'application Exchange sur votre appareil",
+      "subtitle": "Allez dans le Manager et installez l'application Exchange pour échanger des actifs.",
+      "cta": "Aller au Manager"
+    },
+    "outdatedApp": {
+      "title": "Veuillez mettre à jour l'application Exchange sur votre appareil",
+      "subtitle": "Allez dans le Manager et mettez à jour l'application Exchange pour échanger des actifs.",
+      "cta": "Aller au Manager"
+    },
+    "kyc": {
+      "title": "Bienvenue dans le Swap",
+      "subtitle": "Échangez des crypto-actifs directement à partir de votre appareil Ledger. Ce service n'est pas disponible aux États-Unis et dans quelques autres pays.",
+      "disclaimer": "En continuant, vous acceptez que vos données de localisation soient partagées avec des fournisseurs de services tiers afin qu'ils se conforment à leurs procédures AML/KYC."
+    },
+    "form": {
+      "from": {
+        "title": "De",
+        "account": "Compte",
+        "amount": "Montant à envoyer",
+        "currency": "Crypto-actif",
+        "balance": "Solde : {{balance}}"
+      },
+      "to": {
+        "title": "Vers",
+        "account": "Compte",
+        "amount": "Montant à recevoir",
+        "currency": "Crypto-actif",
+        "addAccountCTA": "Ajouter un nouveau compte"
+      },
+      "exchange": "Échanger",
+      "addAccount": "Ajouter un compte",
+      "openManager": "Ouvrir le Manager",
+      "helpCTA": "Qu'est-ce que le Swap ?",
+      "bubble": "Nous utilisons un taux fixe, c'est le montant exact que vous allez recevoir.",
+      "noAccounts": "Vous n'avez pas de compte {{currencyName}} avec un solde",
+      "noApp": "L'application {{currencyName}} n'est pas installée.",
+      "outdatedApp": "Mise à jour de l'application {{currencyName}} disponible."
+    },
+    "modal": {
+      "title": "Swap",
+      "tos": "Termes et conditions",
+      "steps": {
+        "summary": {
+          "title": "Résumé",
+          "from": "De",
+          "to": "Vers",
+          "toExchange": "Montant à envoyer",
+          "toReceive": "Montant à recevoir",
+          "provider": "Fournisseur",
+          "terms": "Termes et conditions",
+          "disclaimer": {
+            "header": "Détails",
+            "description": "En cliquant sur \"Confirmer\", je reconnais et j'accepte que ce service soit exclusivement régi par Changelly"
+          },
+          "details": {
+            "provider": "Fournisseur",
+            "address": "Adresse"
+          }
+        },
+        "device": {
+          "title": "Appareil"
+        },
+        "finished": {
+          "title": "En attente",
+          "subtitle": "Opération en attente",
+          "swap": "Votre ID de Swap :",
+          "seeDetails": "Voir les détails",
+          "disclaimer": "Veuillez prendre note de votre numéro d'identification du Swap au cas où vous auriez besoin d'aide de <0>{{provider}}</0> plus tard.",
+          "description": "Votre opération de Swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos crypto-actifs échangés."
+        }
+      }
+    },
+    "operationDetailsModal": {
+      "title": "Détails de l'opération",
+      "provider": "Fournisseur",
+      "txid": "Swap ID",
+      "status": "Statut",
+      "date": "Date",
+      "from": "De",
+      "to": "Vers",
+      "initialAmount": "Montant envoyé",
+      "creditedAmount": "Montant à recevoir"
+    }
   },
   "account": {
     "lastOperations": "Dernières opérations",
@@ -208,6 +314,7 @@
       "star": "Favori",
       "receive": "Recevoir",
       "send": "Envoyer",
+      "swap": "Swap",
       "buy": "Acheter",
       "edit": "Modifier le compte",
       "hideToken": "Masquer le token"
@@ -271,6 +378,10 @@
     "stakeAlgorand": {
       "title": "Staking avec ALGORAND",
       "description": "Profiter au mieux de vos ALGO. Ajoutez simplement des fonds à vos comptes et gagnez des récompenses dès aujourd'hui."
+    },
+    "swap": {
+      "title": "Échanger des cryptos",
+      "description": "Échangez une cryptomonnaie contre une autre directement et en toute sécurité depuis Ledger Live via notre partenaire."
     }
   },
   "dashboard": {
@@ -485,7 +596,11 @@
     "appNotInstalled": "Veuillez installer l'application {{appName}}",
     "openManager": "Ouvrir le Manager",
     "outdated": "Version de l'App obsolète",
-    "outdatedDesc": "Une mise à jour importante est disponible pour l'application {{appName}} de votre appareil. Veuillez aller dans le Manager pour la mettre à jour."
+    "outdatedDesc": "Une mise à jour importante est disponible pour l'application {{appName}} de votre appareil. Veuillez aller dans le Manager pour la mettre à jour.",
+    "swap": {
+      "notice": "Vérifiez les détails du Swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
+      "confirm": "Confirmer la transaction de swap"
+    }
   },
   "manager": {
     "tabs": {
@@ -2048,6 +2163,10 @@
       "title": "Le mot de passe saisi est incorrect",
       "description": "Veuillez essayer à nouveau."
     },
+    "SwapGenericAPIError": {
+      "title": "Le taux de change a expiré",
+      "description": "Vous devez confirmer l'échange avant que le minuteur ne s'épuise. Le taux de change affiché reste valide pendant 60 secondes."
+    },
     "TimeoutError": {
       "title": "Désolé, le délai est dépassé",
       "description": "Le serveur a mis trop de temps à répondre. Veuillez réessayer"
@@ -2284,6 +2403,9 @@
     },
     "StellarMemoRecommended": {
       "title": "Un mémo peut être requis lors de l'envoi à ce destinataire"
+    },
+    "SwapExchangeRateOutOfBounds": {
+      "title": "Le montant doit être compris entre {{unit}} {{minAmountFrom}} et {{unit}} {{maxAmountFrom}}"
     }
   }
 }
