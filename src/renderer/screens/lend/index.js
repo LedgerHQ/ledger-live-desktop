@@ -39,8 +39,6 @@ const Lend = () => {
 
   const rates = listCurrentRates();
 
-  console.log({ rates });
-
   return (
     <Box>
       <TrackPage category="Lend" />
@@ -56,7 +54,7 @@ const Lend = () => {
       <TabBar tabs={tabs.map(tab => t(tab.title))} onIndexChange={setActiveTabIndex} short />
 
       <Box mt={4}>
-        <Component accounts={accounts} summaries={summaries} />
+        <Component accounts={accounts} summaries={summaries} rates={rates} />
       </Box>
     </Box>
   );

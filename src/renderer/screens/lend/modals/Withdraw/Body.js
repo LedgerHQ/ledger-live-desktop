@@ -7,6 +7,7 @@ import { createStructuredSelector } from "reselect";
 import { BigNumber } from "bignumber.js";
 
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
@@ -14,7 +15,6 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 import type { TFunction } from "react-i18next";
-import type { Device } from "~/renderer/reducers/devices";
 import type { StepId, StepProps, St } from "./types";
 
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";

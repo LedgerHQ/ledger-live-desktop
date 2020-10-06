@@ -70,10 +70,11 @@ type Props = {
   currency: CryptoCurrency | TokenCurrency,
   accounts: AccountLike[],
   nextStep: string,
+  cta: React$Node,
   ...
 } & CompoundAccountSummary;
 
-const SelectAccountStepModal = ({ name, currency, accounts, nextStep, ...rest }: Props) => {
+const SelectAccountStepModal = ({ name, currency, accounts, nextStep, cta, ...rest }: Props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -138,7 +139,7 @@ const SelectAccountStepModal = ({ name, currency, accounts, nextStep, ...rest }:
             <Box horizontal flex="1 1 0%">
               <Box grow />
               <Button primary disabled={!account} onClick={onNext}>
-                {t("lend.enable.steps.selectAccount.cta")}
+                {cta}
               </Button>
             </Box>
           )}

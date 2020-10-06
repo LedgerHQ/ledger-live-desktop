@@ -17,8 +17,7 @@ import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
-
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { getAccountById } from "~/renderer/reducers/accounts";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
@@ -117,7 +116,8 @@ const Body = ({
     const t = bridge.createTransaction(account);
 
     const transaction = bridge.updateTransaction(t, {
-      mode: "compound.mint",
+      mode: "compound.supply",
+      subAccountId: account.id,
     });
 
     return { account, parentAccount, transaction };
@@ -158,7 +158,6 @@ const Body = ({
     (nextAccount: AccountLike) => {
       if (account !== nextAccount && nextAccount.type === "TokenAccount") {
         const nextParentAccount = getAccount(nextAccount.parentId);
-        console.log({ nextParentAccount });
         setAccount(nextAccount, nextParentAccount);
       }
     },

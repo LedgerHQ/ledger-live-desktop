@@ -303,6 +303,7 @@
     },
     "assets": "Assets",
     "active": "Active accounts",
+    "lendAsset": "Lend asset",
     "emptyState": {
       "active": {
         "title": "Lending",
@@ -333,6 +334,13 @@
         "amountRedeemed": "Amount redeemed",
         "interestsEarned": "Interests earned",
         "date": "Date"
+      },
+      "rates": {
+        "allAssets": "All assets",
+        "totalBalance": "Total balance",
+        "grossSupply": "Gross supply",
+        "currentAPY": "Current APY",
+        "actions": "Actions"
       }
     },
     "manage": {

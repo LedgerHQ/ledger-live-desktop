@@ -102,7 +102,6 @@ function StepAmount({
 
   const onChangeAmount = useCallback(
     (a?: BigNumber) => {
-      console.log({ a });
       onChangeTransaction(
         bridge.updateTransaction(transaction, {
           amount: a,

@@ -16,7 +16,7 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import ToolTip from "~/renderer/components/Tooltip";
 import ChevronRight from "~/renderer/icons/ChevronRight";
-import Pill from "./Pill";
+import { StatusPill } from "./Pill";
 
 import { openModal } from "~/renderer/actions/modals";
 
@@ -114,7 +114,7 @@ const Row = ({ summary }: RowProps) => {
 
   const openManageModal = useCallback(() => {
     dispatch(openModal("MODAL_LEND_MANAGE", { ...summary }));
-  }, [dispatch, openModal, summary]);
+  }, [dispatch, summary]);
 
   // END HACK
 
@@ -177,7 +177,7 @@ const Row = ({ summary }: RowProps) => {
           />
         </Ellipsis>
       </Amount>
-      <Status>{status ? <Pill type={status} /> : null}</Status>
+      <Status>{status ? <StatusPill type={status} /> : null}</Status>
       <Action onClick={openManageModal}>
         <Box flex horizontal alignItems="center">
           <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade50">

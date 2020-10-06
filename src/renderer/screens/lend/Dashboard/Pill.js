@@ -30,19 +30,35 @@ const Wrapper: ThemedComponent<{}> = styled(Box)`
   border-radius: 64px;
 `;
 
+const Pill = ({
+  children,
+  background = "blueTransparentBackground",
+  color = "wallet",
+}: {
+  children: React$Node,
+  background?: string,
+  color?: string,
+}) => {
+  return (
+    <Wrapper backgroundColor={background}>
+      <Text ff="Inter|Bold" color={color} fontSize={2}>
+        {children}
+      </Text>
+    </Wrapper>
+  );
+};
+
 type Props = {
   type: OpenedLoanStatus,
 };
 
-const Pill = ({ type }: Props) => {
+export const StatusPill = ({ type }: Props) => {
   const { background, text } = colorMap[type];
 
   return (
-    <Wrapper backgroundColor={background}>
-      <Text ff="Inter|Bold" color={text} fontSize={2}>
-        {type.toUpperCase()}
-      </Text>
-    </Wrapper>
+    <Pill background={background} color={text}>
+      {type.toUpperCase()}
+    </Pill>
   );
 };
 

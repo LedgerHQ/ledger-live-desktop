@@ -60,6 +60,7 @@ export default function LendTermsModal({ name, account, parentAccount, currency,
         ...rest,
         currency,
         nextStep: "MODAL_LEND_ENABLE_FLOW",
+        cta: t("lend.enable.steps.selectAccount.cta"),
       }),
     );
   }, [onClose, dispatch, rest, currency]);

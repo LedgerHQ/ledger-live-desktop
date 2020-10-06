@@ -3,9 +3,10 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic";
 
-import type { Account, SubAccount } from "@ledgerhq/live-common/lib/types";
+import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 
 import { localeSelector } from "~/renderer/reducers/settings";
@@ -97,18 +98,18 @@ const Description = styled(Text).attrs(({ isPill }) => ({
 
 type Props = {
   name?: string,
-  account: SubAccount,
+  account: TokenAccount,
   parentAccount: ?Account,
   ...
 } & CompoundAccountSummary;
 
 const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
   const dispatch = useDispatch();
-
+  const { t } = useTranslation();
   const currency = getAccountCurrency(account);
 
   const onSelectAction = useCallback(
-    (name: string, onClose: () => void, nextStep?: string) => {
+    (name: string, onClose: () => void, nextStep?: string, cta?: string) => {
       onClose();
       dispatch(
         openModal(name, {
@@ -117,12 +118,13 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
           account,
           currency,
           nextStep,
+          cta,
         }),
       );
     },
     [dispatch, account, parentAccount, currency],
   );
-  console.log(parentAccount);
+
   // @TODO get the correct enabled amount
   const enabledAmount = account.balance;
   const locale = useSelector(localeSelector);
@@ -138,9 +140,8 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
     });
 
   // @TODO add in enable/disable conditions for lending
+  const { canSupply, canWithdraw } = getAccountCapabilities(account);
   const canEnable = true;
-  const canSupply = true;
-  const canWithdraw = true;
 
   return (
     <Modal
@@ -159,7 +160,14 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
                 {canEnable && (
                   <Box mb={2}>
                     <InfoBox
-                      onLearnMore={() => onSelectAction("MODAL_LEND_ENABLE_FLOW", onClose)}
+                      onLearnMore={() =>
+                        onSelectAction(
+                          "MODAL_LEND_ENABLE_FLOW",
+                          onClose,
+                          undefined,
+                          t("lend.enable.steps.selectAccount.cta"),
+                        )
+                      }
                       learnMoreLabel={<Trans i18nKey="lend.manage.enable.reenableLabel" />}
                     >
                       <Trans
@@ -175,7 +183,12 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
                 <ManageButton
                   disabled={!canSupply}
                   onClick={() =>
-                    onSelectAction("MODAL_LEND_SELECT_ACCOUNT", onClose, "MODAL_LEND_SUPPLY")
+                    onSelectAction(
+                      "MODAL_LEND_SELECT_ACCOUNT",
+                      onClose,
+                      "MODAL_LEND_SUPPLY",
+                      t("common.continue"),
+                    )
                   }
                 >
                   <IconWrapper>
