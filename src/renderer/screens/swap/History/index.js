@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Card from "~/renderer/components/Box/Card";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import OperationRow from "~/renderer/screens/swap/History/OperationRow";
+import TrackPage from "~/renderer/analytics/TrackPage";
 import { operationStatusList } from "@ledgerhq/live-common/lib/swap";
 import getCompleteSwapHistory from "@ledgerhq/live-common/lib/swap/getCompleteSwapHistory";
 import updateAccountSwapStatus from "@ledgerhq/live-common/lib/swap/updateAccountSwapStatus";
@@ -130,6 +131,7 @@ const History = () => {
 
   return (
     <>
+      <TrackPage category="Swap" name="History" />
       <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
         <ExportOperationsWrapper horizontal>
           <IconDownloadCloud size={16} />

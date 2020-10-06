@@ -6,8 +6,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-import Image from "~/renderer/components/Image";
-import NoAccounts from "~/renderer/images/no-accounts.svg";
+import NoAccounts from "./NoAccountsImage";
 import Text from "~/renderer/components/Text";
 import LinkHelp from "~/renderer/components/LinkHelp";
 import { openURL } from "~/renderer/linking";
@@ -32,7 +31,7 @@ const EmptyStateAccounts = ({ theme }: { theme: any }) => {
 
   return (
     <Box alignItems="center" pb={8} style={{ margin: "auto" }}>
-      <Image alt="emptyState accounts logo" resource={NoAccounts} width="250" />
+      <NoAccounts size={250} />
       <Box mt={5} alignItems="center">
         <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={5}>
           {t("emptyState.accounts.title")}

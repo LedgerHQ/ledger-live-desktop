@@ -4,6 +4,7 @@ import React from "react";
 import Box from "~/renderer/components/Box";
 import WorldMap from "~/renderer/icons/WorldMap";
 import { Trans, withTranslation } from "react-i18next";
+import TrackPage from "~/renderer/analytics/TrackPage";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
 import Card from "~/renderer/components/Box/Card";
@@ -32,6 +33,7 @@ const Content = styled.div`
 
 const NotAvailable = () => (
   <Card px={80} py={53} alignItems={"center"} justifyContent={"center"} flex={1}>
+    <TrackPage category="Swap" name="NotAvailable" />
     <Body>
       <Content>
         <>
