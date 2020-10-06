@@ -67,24 +67,3 @@ export function useTrackingPairs() {
     countervalue,
   ]);
 }
-
-// TODO countervalue
-// const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
-//   // TODO hook to net info of Electron ? retrieving network should trigger a poll
-
-//   // provide a basic mecanism to stop polling when you leave the tab
-//   // & immediately poll when you come back.
-//   function onWindowBlur() {
-//     cancelPoll();
-//   }
-//   function onWindowFocus() {
-//     schedulePoll(1000);
-//   }
-//   window.addEventListener("blur", onWindowBlur);
-//   window.addEventListener("focus", onWindowFocus);
-
-//   return () => {
-//     window.removeEventListener("blur", onWindowBlur);
-//     window.removeEventListener("focus", onWindowFocus);
-//   };
-// };
