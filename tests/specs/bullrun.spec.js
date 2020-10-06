@@ -39,6 +39,7 @@ describe("Bullrun", () => {
 
   it("go through onboarding-2", async () => {
     await onboardingPage.selectConfiguration("new");
+    await elem.waitForDisplayed({ timeout: 1000 });
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-2-screen-new",
     });
