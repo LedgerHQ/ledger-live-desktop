@@ -2,6 +2,7 @@
 
 import React, { useCallback, useState } from "react";
 import { Trans } from "react-i18next";
+import TrackPage from "~/renderer/analytics/TrackPage";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Card from "~/renderer/components/Box/Card";
@@ -70,6 +71,7 @@ const KYC = () => {
 
   return (
     <Card flex={1} pt={53} justifyContent={"space-between"}>
+      <TrackPage category="Swap" name="KYC Landing" />
       <Box flex={1} justifyContent={"center"}>
         <Illustration />
         <Title ff="Inter|SemiBold">
@@ -93,7 +95,7 @@ const KYC = () => {
         <Disclaimer ff="Inter|Regular" onClick={() => setIsChecked(!isChecked)}>
           <Trans i18nKey={"swap.kyc.disclaimer"} />
         </Disclaimer>
-        <Button disabled={!isChecked} primary onClick={onAcceptSwapKYC}>
+        <Button disabled={!isChecked} primary onClick={onAcceptSwapKYC} event={"SwapAcceptKYC"}>
           <Trans i18nKey="common.continue" />
         </Button>
       </Footer>

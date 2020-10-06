@@ -2,6 +2,7 @@
 
 import React from "react";
 import Box from "~/renderer/components/Box";
+import TrackPage from "~/renderer/analytics/TrackPage";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import Card from "~/renderer/components/Box/Card";
@@ -26,6 +27,7 @@ const Content = styled.div`
 
 const Loading = () => (
   <Card px={80} py={53} alignItems={"center"} justifyContent={"center"} flex={1}>
+    <TrackPage category="Swap" name="LoadingProviders" />
     <Body>
       <Content>
         <BigSpinner size={50} />

@@ -4,6 +4,7 @@ import React, { useState, useCallback, useEffect, useMemo, useReducer } from "re
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
 import { BigNumber } from "bignumber.js";
+import TrackPage from "~/renderer/analytics/TrackPage";
 import { useSelector, useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import Card from "~/renderer/components/Box/Card";
@@ -197,6 +198,7 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount, defaultParentAcc
   const canContinue = !bridgePending && !hasErrors && exchangeRate;
   return (
     <>
+      <TrackPage category="Swap" name="Form" />
       <Card flow={1}>
         <Box horizontal p={32}>
           <From
