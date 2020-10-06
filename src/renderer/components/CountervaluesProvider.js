@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import {
   Countervalues,
   useCountervaluesState,
+  useCountervaluesPolling,
 } from "@ledgerhq/live-common/lib/countervalues/react";
 import { inferTrackingPairForAccounts } from "@ledgerhq/live-common/lib/countervalues/logic";
 import { setKey, getKey } from "~/renderer/storage";
@@ -27,19 +28,35 @@ export default function CountervaluesProvider({ children }: { children: React$No
       initialCountervalues={initialCountervalues}
       userSettings={{ trackingPairs, autofillGaps: true }}
     >
-      <CountervaluesPersist>{children}</CountervaluesPersist>
+      <CountervaluesManager>{children}</CountervaluesManager>
     </Countervalues>
   );
 }
 
-function CountervaluesPersist({ children }: { children: React$Node }) {
-  const state = useCountervaluesState();
+function CountervaluesManager({ children }: { children: React$Node }) {
+  useCacheManager();
+  usePollingManager();
 
+  return children;
+}
+
+function useCacheManager() {
+  const state = useCountervaluesState();
   useEffect(() => {
     setKey("app", "countervalues", state);
   }, [state]);
+}
 
-  return children;
+function usePollingManager() {
+  const { start, stop } = useCountervaluesPolling();
+  useEffect(() => {
+    window.addEventListener("blur", stop);
+    window.addEventListener("focus", start);
+    return () => {
+      window.removeEventListener("blur", stop);
+      window.removeEventListener("focus", start);
+    };
+  }, [start, stop]);
 }
 
 export function useTrackingPairs() {
