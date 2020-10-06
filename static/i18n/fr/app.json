@@ -133,8 +133,8 @@
     },
     "history": {
       "empty": {
-        "title": "Your previous swaps will appear here",
-        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        "title": "Vos précédents échanges apparaîtront ici",
+        "description": "Vous n'avez pas effectué d'échanges ou Ledger Live a été réinitialisé entre-temps."
       }
     },
     "landing": {
@@ -2405,10 +2405,10 @@
       "title": "Un mémo peut être requis lors de l'envoi à ce destinataire"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{unit}} {{minAmountFrom}}"
+      "title": "Le montant doit être supérieur à {{unit}} {{minAmountFrom}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be less than {{unit}} {{maxAmountFrom}}"
+      "title": "Le montant doit être inférieur à {{unit}} {{maxAmountFrom}}"
     }
   }
 }
