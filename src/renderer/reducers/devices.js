@@ -2,12 +2,7 @@
 
 import { handleActions } from "redux-actions";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import type { DeviceModelId } from "@ledgerhq/devices";
-
-export type Device = {
-  path: string,
-  modelId: DeviceModelId,
-};
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 
 export type DevicesState = {
   currentDevice: ?Device,
@@ -30,14 +25,16 @@ const handlers: Object = {
     setCurrentDevice({
       ...state,
       devices: [...state.devices, device].filter(
-        (v, i, s) => s.findIndex(t => t.path === v.path) === i,
+        (v, i, s) => s.findIndex(t => t.deviceId === v.deviceId) === i,
       ),
     }),
   REMOVE_DEVICE: (state: DevicesState, { payload: device }: { payload: Device }) => ({
     ...state,
     currentDevice:
-      state.currentDevice && state.currentDevice.path === device.path ? null : state.currentDevice,
-    devices: state.devices.filter(d => d.path !== device.path),
+      state.currentDevice && state.currentDevice.deviceId === device.deviceId
+        ? null
+        : state.currentDevice,
+    devices: state.devices.filter(d => d.deviceId !== device.deviceId),
   }),
   SET_CURRENT_DEVICE: (state: DevicesState, { payload: currentDevice }: { payload: Device }) => ({
     ...state,
@@ -48,7 +45,7 @@ const handlers: Object = {
 export function getCurrentDevice(state: { devices: DevicesState }) {
   if (getEnv("DEVICE_PROXY_URL") || getEnv("MOCK")) {
     // bypass the listen devices (we should remove modelId here by instead get it at open time if needed)
-    return { path: "", modelId: "nanoS" };
+    return { deviceId: "", wired: true, modelId: "nanoS" };
   }
   return state.devices.currentDevice;
 }
@@ -56,7 +53,7 @@ export function getCurrentDevice(state: { devices: DevicesState }) {
 export function getDevices(state: { devices: DevicesState }) {
   if (getEnv("DEVICE_PROXY_URL")) {
     // bypass the listen devices
-    return [{ path: "", modelId: "nanoS" }];
+    return [{ deviceId: "", wired: true, modelId: "nanoS" }];
   }
   return state.devices.devices;
 }

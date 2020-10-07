@@ -62,14 +62,15 @@ const CoinControlModal = ({
   const error = errorKeys.length ? status.errors[errorKeys[0]] : null;
 
   const returning = (status.txOutputs || []).find(tx => !!tx.path);
+  const maybeOnClose = error ? undefined : onClose;
 
   return (
-    <Modal width={700} isOpened={isOpened} centered onClose={onClose}>
+    <Modal width={700} isOpened={isOpened} centered onClose={maybeOnClose}>
       <TrackPage category="Modal" name="BitcoinCoinControl" />
       <ModalBody
         width={700}
         title={<Trans i18nKey="bitcoin.modalTitle" />}
-        onClose={onClose}
+        onClose={maybeOnClose}
         render={() => (
           <Box flow={2}>
             <PickingStrategy
@@ -168,7 +169,7 @@ const CoinControlModal = ({
             <LinkWithExternalIcon onClick={onClickLink}>
               <Trans i18nKey="bitcoin.whatIs" />
             </LinkWithExternalIcon>
-            <Button primary onClick={onClose}>
+            <Button primary onClick={onClose} disabled={!!error}>
               <Trans i18nKey="common.done" />
             </Button>
           </>

@@ -116,11 +116,117 @@
     "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "Manager",
+    "swap": "Swap",
     "exchange": "Buy crypto"
   },
   "stars": {
     "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
     "tooltip": "Star account"
+  },
+  "swap": {
+    "title": "Swap",
+    "titleCrypto": "Swap {{currency}}",
+    "whatIsSwap": "What is Swap",
+    "tabs": {
+      "exchange": "Exchange",
+      "history": "History"
+    },
+    "history": {
+      "empty": {
+        "title": "Your previous swaps will appear here",
+        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+      }
+    },
+    "landing": {
+      "title": "Swap your assets",
+      "continue": "Continue",
+      "link": "More about Swap",
+      "sorry": "Swap feature is not available in your country"
+    },
+    "missingApp": {
+      "title": "Please install the Exchange app on your device",
+      "subtitle": "Go to manager and install Exchange app to swap assets.",
+      "cta": "Go to manager"
+    },
+    "outdatedApp": {
+      "title": "Please update the Exchange app on your device",
+      "subtitle": "Go to manager and update Exchange app to swap assets.",
+      "cta": "Go to manager"
+    },
+    "kyc": {
+      "title": "Welcome to Swap",
+      "subtitle": "Exchange crypto assets directly from your Ledger device. This service is not available in the US and a few other countries.",
+      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+    },
+    "form": {
+      "from": {
+        "title": "From",
+        "account": "Account",
+        "amount": "Amount to send",
+        "currency": "Crypto asset",
+        "balance": "Balance: {{balance}}"
+      },
+      "to": {
+        "title":  "To",
+        "account": "Account",
+        "amount": "Amount to receive",
+        "currency": "Crypto asset",
+        "addAccountCTA": "Add new account"
+      },
+      "exchange": "Exchange",
+      "addAccount": "Add Account",
+      "openManager": "Open Manager",
+      "helpCTA": "What is Swap?",
+      "bubble": "We use a fixed rate, this is the exact amount you will receive.",
+      "noAccounts": "You don't have {{currencyName}} accounts with balance",
+      "noApp": "{{currencyName}} app not installed.",
+      "outdatedApp": "{{currencyName}} app update available."
+    },
+    "modal": {
+      "title": "Swap",
+      "tos": "Terms & Conditions",
+      "steps":{
+        "summary": {
+          "title": "Summary",
+          "from": "From",
+          "to": "To",
+          "toExchange": "Amount to send",
+          "toReceive": "Amount to receive",
+          "provider": "Provider",
+          "terms":"Terms & Conditions",
+          "disclaimer": {
+            "header": "Details",
+            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by Changelly's"
+          },
+          "details": {
+            "provider": "Provider",
+            "address": "Address"
+          }
+        },
+        "device": {
+          "title": "Device"
+        },
+        "finished": {
+          "title": "Pending",
+          "subtitle": "Pending operation",
+          "swap": "Your Swap ID:",
+          "seeDetails": "See details",
+          "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from <0>{{provider}}</0> later.",
+          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets."
+        }
+      }
+    },
+    "operationDetailsModal": {
+      "title": "Operation details",
+      "provider": "Provider",
+      "txid": "Swap ID",
+      "status": "Status",
+      "date": "Date",
+      "from": "From",
+      "to": "To",
+      "initialAmount": "Amount sent",
+      "creditedAmount": "Amount to receive"
+    }
   },
   "account": {
     "lastOperations": "Latest operations",
@@ -208,6 +314,7 @@
       "star": "Star",
       "receive": "Receive",
       "send": "Send",
+      "swap": "Swap",
       "buy": "Buy",
       "edit": "Edit account",
       "hideToken": "Hide token"
@@ -271,6 +378,10 @@
     "stakeAlgorand": {
       "title": "Staking with ALGORAND",
       "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
+    },
+    "swap": {
+      "title": "Swap crypto",
+      "description": "Exchange one crypto for another directly and securely from Ledger Live through our partner."
     }
   },
   "dashboard": {
@@ -485,7 +596,11 @@
     "appNotInstalled": "Please install the {{appName}} app",
     "openManager": "Open Manager",
     "outdated": "App version outdated",
-    "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it."
+    "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
+    "swap":{
+      "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
+      "confirm": "Confirm Swap transaction"
+    }
   },
   "manager": {
     "tabs": {
@@ -2048,6 +2163,10 @@
       "title": "The password entered is incorrect",
       "description": "Please try again"
     },
+    "SwapGenericAPIError":{
+      "title": "Exchange rate expired",
+      "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
+    },
     "TimeoutError": {
       "title": "Oops, a timeout occurred",
       "description": "It took too long for the server to respond. Please try again"
@@ -2284,6 +2403,12 @@
     },
     "StellarMemoRecommended": {
       "title": "A memo may be required when sending to this recipient"
+    },
+    "SwapExchangeRateAmountTooLow": {
+      "title": "Amount must be at least {{unit}} {{minAmountFrom}}"
+    },
+    "SwapExchangeRateAmountTooHigh": {
+        "title": "Amount must be less than {{unit}} {{maxAmountFrom}}"
     }
   }
 }

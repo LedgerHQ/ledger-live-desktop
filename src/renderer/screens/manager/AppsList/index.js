@@ -15,7 +15,7 @@ import { useAppsRunner } from "@ledgerhq/live-common/lib/apps/react";
 
 import NavigationGuard from "~/renderer/components/NavigationGuard";
 import Quit from "~/renderer/icons/Quit";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 
 import AppList from "./AppsList";
 import DeviceStorage from "../DeviceStorage/index";

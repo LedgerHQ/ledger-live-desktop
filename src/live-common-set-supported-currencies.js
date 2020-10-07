@@ -1,5 +1,5 @@
 // @flow
-import { setSupportedCurrencies } from "@ledgerhq/live-common/lib/data/cryptocurrencies";
+import { setSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 
 setSupportedCurrencies([
   "bitcoin",

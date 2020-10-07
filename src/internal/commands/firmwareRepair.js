@@ -9,7 +9,7 @@ type Input = {
 
 type Result = { progress: number };
 
-// devicePath='' HACK to not depend on a devicePath because it's dynamic
+// deviceId='' HACK to not depend on a deviceId because it's dynamic
 const cmd = ({ version }: Input): Observable<Result> => repair("", version);
 
 export default cmd;
