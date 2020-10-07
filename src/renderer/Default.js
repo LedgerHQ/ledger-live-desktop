@@ -2,11 +2,11 @@
 
 import React, { useEffect, useRef } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
+import TrackAppStart from "~/renderer/components/TrackAppStart";
 
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
 import CounterValues from "~/renderer/countervalues";
 import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
-import Track from "~/renderer/analytics/Track";
 import Dashboard from "~/renderer/screens/dashboard";
 import Settings from "~/renderer/screens/settings";
 import Accounts from "~/renderer/screens/accounts";
@@ -67,7 +67,7 @@ const Default = () => {
       <TriggerAppReady />
       <ListenDevices />
       <ExportLogsButton hookToShortcut />
-      <Track mandatory onMount event="App Starts" />
+      <TrackAppStart />
       <Idler />
       {process.platform === "darwin" ? <AppRegionDrag /> : null}
 
