@@ -18,6 +18,7 @@ type CoinControlRowProps = {
   utxoStrategy: any,
   status: any,
   account: Account,
+  totalExcludedUTXOS: number,
   updateTransaction: (updater: any) => void,
   bridge: any,
 };
@@ -52,6 +53,7 @@ export const CoinControlRow = ({
   utxoStrategy,
   status,
   account,
+  totalExcludedUTXOS,
   updateTransaction,
   bridge,
 }: CoinControlRowProps) => {
@@ -60,7 +62,10 @@ export const CoinControlRow = ({
     input => input.previousOutputIndex === utxo.outputIndex && input.previousTxHash === utxo.hash,
   );
 
-  const disabled = (s.reason || "") === "pickUnconfirmedRBF";
+  const unconfirmed = (s.reason || "") === "pickUnconfirmedRBF";
+  const last = !s.excluded && totalExcludedUTXOS + 1 === account.bitcoinResources?.utxos.length;
+  const disabled = unconfirmed || last;
+
   const onClick = () => {
     if (disabled) return;
     const patch = {
@@ -79,16 +84,14 @@ export const CoinControlRow = ({
     updateTransaction(t => bridge.updateTransaction(t, patch));
   };
   return (
-    <Container
-      disabled={disabled}
-      flow={2}
-      horizontal
-      alignItems="center"
-      onClick={disabled ? undefined : onClick}
-    >
-      {disabled ? (
-        <Tooltip content={<Trans i18nKey="bitcoin.cannotSelect" />}>
+    <Container disabled={unconfirmed} flow={2} horizontal alignItems="center" onClick={onClick}>
+      {unconfirmed ? (
+        <Tooltip content={<Trans i18nKey={"bitcoin.cannotSelect.unconfirmed"} />}>
           <InfoCircle size={16} />
+        </Tooltip>
+      ) : last ? (
+        <Tooltip content={<Trans i18nKey={"bitcoin.cannotSelect.last"} />}>
+          <Checkbox isChecked disabled />
         </Tooltip>
       ) : (
         <Checkbox isChecked={!s.excluded} onChange={onClick} />
