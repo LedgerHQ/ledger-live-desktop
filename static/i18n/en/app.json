@@ -167,7 +167,7 @@
         "balance": "Balance: {{balance}}"
       },
       "to": {
-        "title":  "To",
+        "title": "To",
         "account": "Account",
         "amount": "Amount to receive",
         "currency": "Crypto asset",
@@ -185,7 +185,7 @@
     "modal": {
       "title": "Swap",
       "tos": "Terms & Conditions",
-      "steps":{
+      "steps": {
         "summary": {
           "title": "Summary",
           "from": "From",
@@ -193,7 +193,7 @@
           "toExchange": "Amount to send",
           "toReceive": "Amount to receive",
           "provider": "Provider",
-          "terms":"Terms & Conditions",
+          "terms": "Terms & Conditions",
           "disclaimer": {
             "header": "Details",
             "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by Changelly's"
@@ -517,7 +517,9 @@
     "cta": {
       "addMore": "Add more",
       "add": "Add account",
-      "add_plural": "Add accounts"
+      "add_plural": "Add accounts",
+      "addAccountName": "Add {{currencyName}} account",
+      "receive": "Receive"
     },
     "sections": {
       "importable": {
@@ -597,7 +599,7 @@
     "openManager": "Open Manager",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
-    "swap":{
+    "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction"
     }
@@ -2163,7 +2165,7 @@
       "title": "The password entered is incorrect",
       "description": "Please try again"
     },
-    "SwapGenericAPIError":{
+    "SwapGenericAPIError": {
       "title": "Exchange rate expired",
       "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
     },
@@ -2408,7 +2410,7 @@
       "title": "Amount must be at least {{unit}} {{minAmountFrom}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-        "title": "Amount must be less than {{unit}} {{maxAmountFrom}}"
+      "title": "Amount must be less than {{unit}} {{maxAmountFrom}}"
     }
   }
 }
