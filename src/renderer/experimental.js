@@ -55,12 +55,6 @@ export const experimentalFeatures: Feature[] = [
   },
   {
     type: "toggle",
-    name: "EXPERIMENTAL_DEVICE_FLOW",
-    title: "Experimental device flow",
-    description: "Automatically asks an Open App device permission in device flows",
-  },
-  {
-    type: "toggle",
     name: "EXPERIMENTAL_EXPLORERS",
     title: "Experimental Explorers API",
     description:
