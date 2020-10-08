@@ -14,26 +14,18 @@ import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 
 type Props = {
   autoFocus?: boolean,
-  // left value (always the one which is returned)
+  // crypto value (always the one which is returned)
   value: BigNumber,
-
   disabled?: boolean,
-
   validTransactionError?: ?Error,
   validTransactionWarning?: ?Error,
-
-  // max left value
-  max?: BigNumber,
-
   // change handler
   onChange: BigNumber => void,
-
-  // used to determine the left input unit
+  // used to determine the crypto input unit
   account: AccountLike,
 };
 
 export default function RequestAmount({
-  max = BigNumber(Infinity),
   onChange,
   autoFocus,
   disabled,
@@ -42,43 +34,33 @@ export default function RequestAmount({
   validTransactionError,
   validTransactionWarning,
 }: Props) {
-  // used to determine the right input unit
-  // retrieved via selector (take the chosen countervalue unit)
-  const rightCurrency = useSelector(counterValueCurrencySelector);
+  const fiatCurrency = useSelector(counterValueCurrencySelector);
   const currency = getAccountCurrency(account);
-  // used to calculate the opposite field value (right & left)
-  const rightCountervalue = useCalculate({
+  const fiatCountervalue = useCalculate({
     from: currency,
-    to: rightCurrency,
+    to: fiatCurrency,
     value: value.toNumber(),
     disableRounding: true,
   });
-  const right = BigNumber(rightCountervalue ?? 0);
-  const rightUnit = rightCurrency.units[0];
+  const fiatVal = BigNumber(fiatCountervalue ?? 0);
+  const fiatUnit = fiatCurrency.units[0];
   const defaultUnit = getAccountUnit(account);
   const state = useCountervaluesState();
 
-  const handleChangeAmount = useCallback(
-    (changedField: string) => (val: BigNumber) => {
-      if (changedField === "left") {
-        onChange(val.gt(max) ? max : val);
-      } else if (changedField === "right") {
-        const leftVal = BigNumber(
-          calculate(state, {
-            from: currency,
-            to: rightCurrency,
-            value: val.toNumber(),
-            reverse: true,
-          }) ?? 0,
-        );
-        onChange(leftVal.gt(max) ? max : leftVal);
-      }
+  const onChangeFiat = useCallback(
+    val => {
+      const cryptoVal = BigNumber(
+        calculate(state, {
+          from: currency,
+          to: fiatCurrency,
+          value: val.toNumber(),
+          reverse: true,
+        }) ?? 0,
+      );
+      onChange(cryptoVal);
     },
-    [onChange, max, currency, rightCurrency, state],
+    [onChange, state, currency, fiatCurrency],
   );
-
-  const onLeftChange = handleChangeAmount("left");
-  const onRightChange = handleChangeAmount("right");
 
   return (
     <Box horizontal flow={5} alignItems="center">
@@ -91,7 +73,7 @@ export default function RequestAmount({
           containerProps={{ grow: true }}
           defaultUnit={defaultUnit}
           value={value}
-          onChange={onLeftChange}
+          onChange={onChange}
           renderRight={<InputRight>{defaultUnit.code}</InputRight>}
         />
         <InputCenter>
@@ -100,10 +82,10 @@ export default function RequestAmount({
         <InputCurrency
           disabled={disabled}
           containerProps={{ grow: true }}
-          defaultUnit={rightUnit}
-          value={right}
-          onChange={onRightChange}
-          renderRight={<InputRight>{rightUnit.code}</InputRight>}
+          defaultUnit={fiatUnit}
+          value={fiatVal}
+          onChange={onChangeFiat}
+          renderRight={<InputRight>{fiatUnit.code}</InputRight>}
           showAllDigits
           subMagnitude={3}
         />
