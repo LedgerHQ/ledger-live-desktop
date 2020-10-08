@@ -4,6 +4,7 @@ import { Trans } from "react-i18next";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import IconCart from "~/renderer/icons/Cart";
+import IconBook from "~/renderer/icons/Book";
 import IconInfoCircle from "~/renderer/icons/InfoCircle";
 import Box from "~/renderer/components/Box";
 import GrowScroll from "~/renderer/components/GrowScroll";
@@ -26,7 +27,7 @@ class NoDevice extends PureComponent<StepProps, *> {
         icon: <IconCart size={20} />,
         title: t("onboarding.noDevice.buyNew.title"),
         onClick: () => {
-          openURL(urls.noDeviceBuyNew);
+          openURL(urls.noDevice.buyNew);
         },
       },
       {
@@ -34,7 +35,15 @@ class NoDevice extends PureComponent<StepProps, *> {
         icon: <IconInfoCircle size={20} />,
         title: t("onboarding.noDevice.learnMore.title"),
         onClick: () => {
-          openURL(urls.noDeviceLearnMore);
+          openURL(urls.noDevice.learnMore);
+        },
+      },
+      {
+        key: "learnMoreCrypto",
+        icon: <IconBook size={20} />,
+        title: t("onboarding.noDevice.learnMoreCrypto.title"),
+        onClick: () => {
+          openURL(urls.noDevice.learnMoreCrypto);
         },
       },
     ];
