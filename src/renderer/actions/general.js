@@ -48,7 +48,7 @@ export function useCalculateCountervalueCallback() {
         to,
         disableRounding: true,
       });
-      return typeof countervalue !== "undefined" ? BigNumber(countervalue) : countervalue;
+      return typeof countervalue === "number" ? BigNumber(countervalue) : countervalue;
     },
     [to, state],
   );
