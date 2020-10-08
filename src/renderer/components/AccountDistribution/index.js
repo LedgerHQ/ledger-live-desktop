@@ -1,6 +1,6 @@
 // @flow
 import React, { useLayoutEffect, useRef, useState, useMemo } from "react";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import Text from "~/renderer/components/Text";
 import Card from "~/renderer/components/Box/Card";
@@ -15,6 +15,7 @@ type Props = {
 };
 
 export default function AccountDistribution({ accounts }: Props) {
+  const { t } = useTranslation();
   const total = accounts.reduce((total, a) => total.plus(a.balance), BigNumber(0));
   const accountDistribution = useMemo(
     () =>
@@ -24,7 +25,7 @@ export default function AccountDistribution({ accounts }: Props) {
           return {
             account: a,
             currency: from,
-            distribution: a.balance.div(total).toFixed(2),
+            distribution: a.balance.div(total).toNumber(),
             amount: a.balance,
           };
         })
@@ -60,11 +61,7 @@ export default function AccountDistribution({ accounts }: Props) {
     <>
       <Box horizontal alignItems="center">
         <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
-          <Trans
-            i18nKey="accountDistribution.header"
-            values={{ count: accountDistribution.length }}
-            count={accountDistribution.length}
-          />
+          {t("accountDistribution.header", { count: accountDistribution.length })}
         </Text>
       </Box>
 
