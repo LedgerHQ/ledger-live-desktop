@@ -1690,6 +1690,9 @@
       },
       "learnMore": {
         "title": "Conoce Ledger"
+      },
+      "learnMoreCrypto": {
+        "title": "Learn about crypto"
       }
     },
     "selectDevice": {
