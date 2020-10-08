@@ -35,23 +35,23 @@ export default function RequestAmount({
   validTransactionWarning,
 }: Props) {
   const fiatCurrency = useSelector(counterValueCurrencySelector);
-  const currency = getAccountCurrency(account);
+  const cryptoCurrency = getAccountCurrency(account);
   const fiatCountervalue = useCalculate({
-    from: currency,
+    from: cryptoCurrency,
     to: fiatCurrency,
     value: value.toNumber(),
     disableRounding: true,
   });
   const fiatVal = BigNumber(fiatCountervalue ?? 0);
   const fiatUnit = fiatCurrency.units[0];
-  const defaultUnit = getAccountUnit(account);
+  const cryptoUnit = getAccountUnit(account);
   const state = useCountervaluesState();
 
-  const onChangeFiat = useCallback(
+  const onChangeFiatAmount = useCallback(
     val => {
       const cryptoVal = BigNumber(
         calculate(state, {
-          from: currency,
+          from: cryptoCurrency,
           to: fiatCurrency,
           value: val.toNumber(),
           reverse: true,
@@ -59,7 +59,7 @@ export default function RequestAmount({
       );
       onChange(cryptoVal);
     },
-    [onChange, state, currency, fiatCurrency],
+    [onChange, state, cryptoCurrency, fiatCurrency],
   );
 
   return (
@@ -71,10 +71,10 @@ export default function RequestAmount({
           error={validTransactionError}
           warning={validTransactionWarning}
           containerProps={{ grow: true }}
-          defaultUnit={defaultUnit}
+          defaultUnit={cryptoUnit}
           value={value}
           onChange={onChange}
-          renderRight={<InputRight>{defaultUnit.code}</InputRight>}
+          renderRight={<InputRight>{cryptoUnit.code}</InputRight>}
         />
         <InputCenter>
           <IconTransfer />
@@ -84,7 +84,7 @@ export default function RequestAmount({
           containerProps={{ grow: true }}
           defaultUnit={fiatUnit}
           value={fiatVal}
-          onChange={onChangeFiat}
+          onChange={onChangeFiatAmount}
           renderRight={<InputRight>{fiatUnit.code}</InputRight>}
           showAllDigits
           subMagnitude={3}
