@@ -36,14 +36,14 @@ export function useBalanceHistoryWithCountervalue({
     () =>
       getBalanceHistoryWithCountervalue(account, range, (_, value, date) => {
         const countervalue = calculate(state, {
-          value,
+          value: value.toNumber(),
           from,
           to,
           disableRounding: true,
           date,
         });
 
-        return typeof countervalue !== "undefined" ? BigNumber(countervalue) : countervalue;
+        return typeof countervalue === "number" ? BigNumber(countervalue) : countervalue;
       }),
     [account, from, to, range, state],
   );
@@ -66,7 +66,7 @@ export function usePortfolio() {
           date,
         });
 
-        return typeof countervalue !== "undefined" ? BigNumber(countervalue) : countervalue;
+        return typeof countervalue === "number" ? BigNumber(countervalue) : countervalue;
       }),
     [accounts, range, state, to],
   );
@@ -80,7 +80,7 @@ export function useCurrencyPortfolio({
   range: PortfolioRange,
 }) {
   const rawAccounts = useSelector(accountsSelector);
-  const accounts = flattenAccounts(rawAccounts);
+  const accounts = flattenAccounts(rawAccounts).filter(a => getAccountCurrency(a) === currency);
   const to = useSelector(counterValueCurrencySelector);
   const state = useCountervaluesState();
 
@@ -95,7 +95,7 @@ export function useCurrencyPortfolio({
           date,
         });
 
-        return typeof countervalue !== "undefined" ? BigNumber(countervalue) : countervalue;
+        return typeof countervalue === "number" ? BigNumber(countervalue) : countervalue;
       }),
     [accounts, range, state, to],
   );
