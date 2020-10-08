@@ -1690,6 +1690,9 @@
       },
       "learnMore": {
         "title": "了解 Ledger"
+      },
+      "learnMoreCrypto": {
+        "title": "Learn about crypto"
       }
     },
     "selectDevice": {
