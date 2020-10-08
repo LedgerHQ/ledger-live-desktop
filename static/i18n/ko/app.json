@@ -1624,11 +1624,11 @@
     "checking": "업데이트 확인 중...",
     "checkSuccess": "업데이트 설치 준비 완료",
     "quitAndInstall": "지금 설치",
-    "updateAvailable": "Ledger Live {{version}} is available for update",
+    "updateAvailable": "Update to Ledger Live version {{version}} is available",
     "error": "업데이트 중 오류가 발생했습니다. 다시 다운로드하십시오.",
     "reDownload": "다시 다운로드",
     "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
-    "downloadNow": "Download now"
+    "downloadNow": "Download update"
   },
   "crash": {
     "title": "Something went wrong",
