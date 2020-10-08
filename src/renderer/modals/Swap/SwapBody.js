@@ -12,6 +12,8 @@ import { useDispatch } from "react-redux";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import { addPendingOperation, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import addToSwapHistory from "@ledgerhq/live-common/lib/swap/addToSwapHistory";
+import TrackPage from "~/renderer/analytics/TrackPage";
+import Track from "~/renderer/analytics/Track";
 
 type SwapSteps = "summary" | "device" | "finished";
 const SwapBody = ({
@@ -81,6 +83,7 @@ const SwapBody = ({
       title={<Trans i18nKey="swap.modal.title" />}
       render={() => (
         <>
+          <TrackPage category="Swap" name={`ModalStep-${activeStep}`} />
           <Breadcrumb
             mb={40}
             currentStep={["summary", "device", "finished"].indexOf(activeStep)}
@@ -88,7 +91,10 @@ const SwapBody = ({
             items={items}
           />
           {error ? (
-            <ErrorDisplay error={error} />
+            <>
+              <Track onUpdate event={`SwapModalError-${error.name}`} />
+              <ErrorDisplay error={error} />
+            </>
           ) : activeStep === "summary" ? (
             <StepSummary
               swap={swap}
