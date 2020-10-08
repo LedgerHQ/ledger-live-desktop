@@ -1624,11 +1624,11 @@
     "checking": "Comprobando actualización...",
     "checkSuccess": "Actualización lista para instalarse",
     "quitAndInstall": "Instalar ahora",
-    "updateAvailable": "Ledger Live {{version}} is available for update",
+    "updateAvailable": "Update to Ledger Live version {{version}} is available",
     "error": "Error durante la actualización. Por favor, descárgala de nuevo",
     "reDownload": "Descargar de nuevo",
     "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
-    "downloadNow": "Download now"
+    "downloadNow": "Download update"
   },
   "crash": {
     "title": "Something went wrong",
