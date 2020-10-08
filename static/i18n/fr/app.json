@@ -1624,11 +1624,11 @@
     "checking": "Vérification de la mise à jour...",
     "checkSuccess": "La mise à jour est prête à être installée",
     "quitAndInstall": "Installer maintenant",
-    "updateAvailable": "La mise à jour {{version}} de Ledger Live est disponible",
+    "updateAvailable": "Update to Ledger Live version {{version}} is available",
     "error": "Erreur lors de la mise à jour. Veuillez télécharger à nouveau",
     "reDownload": "Télécharger à nouveau",
     "nightlyWarning": "Cette version ne peut pas être mise à jour automatiquement, veuillez installer la dernière version manuellement",
-    "downloadNow": "Télécharger Maintenant"
+    "downloadNow": "Download update"
   },
   "crash": {
     "title": "Une erreur s'est produite",
