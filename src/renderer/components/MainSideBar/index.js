@@ -297,16 +297,6 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
-                id={"manager"}
-                label={t("sidebar.manager")}
-                icon={IconManager}
-                iconActiveColor="wallet"
-                onClick={handleClickManager}
-                isActive={location.pathname === "/manager"}
-                NotifComponent={displayBlueDot ? <Dot collapsed={collapsed} /> : null}
-                collapsed={secondAnim}
-              />
-              <SideBarListItem
                 id={"exchange"}
                 label={t("sidebar.exchange")}
                 icon={IconExchange}
@@ -335,6 +325,16 @@ const MainSideBar = () => {
                 onClick={handleClickSwap}
                 disabled={noAccounts || navigationLocked}
                 isActive={location.pathname === "/swap"}
+                collapsed={secondAnim}
+              />
+              <SideBarListItem
+                id={"manager"}
+                label={t("sidebar.manager")}
+                icon={IconManager}
+                iconActiveColor="wallet"
+                onClick={handleClickManager}
+                isActive={location.pathname === "/manager"}
+                NotifComponent={displayBlueDot ? <Dot collapsed={collapsed} /> : null}
                 collapsed={secondAnim}
               />
               <Space of={30} />

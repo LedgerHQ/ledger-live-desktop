@@ -133,8 +133,8 @@
     },
     "history": {
       "empty": {
-        "title": "No History",
-        "description": "You don’t have any swap history."
+        "title": "Your previous swaps will appear here",
+        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
       }
     },
     "landing": {
@@ -378,6 +378,10 @@
     "stakeAlgorand": {
       "title": "Staking with ALGORAND",
       "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
+    },
+    "swap": {
+      "title": "Swap crypto",
+      "description": "Exchange one crypto for another from Ledger Live with our partner."
     }
   },
   "dashboard": {
@@ -590,7 +594,7 @@
     "unlockDevice": "Unlock your device",
     "quitApp": "Quit the application on your device",
     "appNotInstalled": "Please install the {{appName}} app",
-    "openMaopenManagernager": "Open Manager",
+    "openManager": "Open Manager",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
     "swap": {
@@ -2400,8 +2404,11 @@
     "StellarMemoRecommended": {
       "title": "A memo may be required when sending to this recipient"
     },
-    "SwapExchangeRateOutOfBounds": {
-      "title": "Amount must be between {{unit}} {{minAmountFrom}} and {{unit}} {{maxAmountFrom}}"
+    "SwapExchangeRateAmountTooLow": {
+      "title": "Amount must be at least {{unit}} {{minAmountFrom}}"
+    },
+    "SwapExchangeRateAmountTooHigh": {
+      "title": "Amount must be less than {{unit}} {{maxAmountFrom}}"
     }
   }
 }
