@@ -4,8 +4,13 @@ import React, { memo, useMemo, useCallback } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { listSupportedCurrencies, listTokens } from "@ledgerhq/live-common/lib/currencies";
-import { flattenAccounts, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
-import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+import type {
+  CryptoCurrency,
+  TokenCurrency,
+  Account,
+  SubAccount,
+} from "@ledgerhq/live-common/lib/types";
 import { supportLinkByTokenType } from "~/config/urls";
 import { colors } from "~/renderer/styles/theme";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -57,6 +62,30 @@ const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
   );
 };
 
+function findFirstTokenAccount(
+  token: TokenCurrency,
+  parentCurrency: CryptoCurrency,
+  accounts: Account[],
+): ?{ account?: SubAccount, parentAccount: Account } {
+  for (const parentAccount of accounts) {
+    const parentC = getAccountCurrency(parentAccount);
+    if (parentAccount.subAccounts && parentAccount.subAccounts.length > 0) {
+      for (const account of parentAccount.subAccounts) {
+        const c = getAccountCurrency(account);
+        if (c.id === token.id) {
+          // if token currency matches subAccount return couple account/parentAccount
+          return { account, parentAccount };
+        }
+      }
+    }
+    if (parentC.id === parentCurrency.id) {
+      // if no token currency matches but parent matches return parentAccount
+      return { parentAccount };
+    }
+  }
+  return null; // else return nothing
+}
+
 export const StepChooseCurrencyFooter = ({
   transitionTo,
   currency,
@@ -66,7 +95,6 @@ export const StepChooseCurrencyFooter = ({
 }: StepProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const flatAccounts = flattenAccounts(existingAccounts);
   const isToken = currency && currency.type === "TokenCurrency";
 
   // $FlowFixMe
@@ -75,21 +103,12 @@ export const StepChooseCurrencyFooter = ({
   // $FlowFixMe
   const parentCurrency = isToken && currency.parentCurrency;
 
-  const parentTokenAccount =
-    isToken &&
-    parentCurrency &&
-    flatAccounts.find(acc => {
-      const c = getAccountCurrency(acc);
-      return c.id === parentCurrency.id;
-    });
+  // $FlowFixMe
+  const accountData = isToken && findFirstTokenAccount(currency, parentCurrency, existingAccounts);
 
-  const tokenAccount =
-    isToken &&
-    flatAccounts.find(acc => {
-      const c = getAccountCurrency(acc);
-      // $FlowFixMe
-      return c.id === currency.id;
-    });
+  const parentTokenAccount = accountData ? accountData.parentAccount : null;
+
+  const tokenAccount = accountData ? accountData.account : null;
 
   // specific cta in case of token accounts
   const onTokenCta = useCallback(() => {
