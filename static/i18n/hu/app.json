@@ -1624,11 +1624,11 @@
     "checking": "Frissítés ellenőrzése...",
     "checkSuccess": "A frissítés készen áll a telepítésre",
     "quitAndInstall": "Telepítés most",
-    "updateAvailable": "Ledger Live {{version}} frissítés elérhető",
+    "updateAvailable": "Update to Ledger Live version {{version}} is available",
     "error": "Hiba történt a frissítés során. Kérlek, töltsd le újra",
     "reDownload": "Letöltés újra",
     "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
-    "downloadNow": "Letöltés most"
+    "downloadNow": "Download update"
   },
   "crash": {
     "title": "Valami hiba történt",
