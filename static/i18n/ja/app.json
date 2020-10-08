@@ -1624,11 +1624,11 @@
     "checking": "アップデートの確認しています...",
     "checkSuccess": "アップデートをインストールする準備ができました",
     "quitAndInstall": "今すぐインストールする",
-    "updateAvailable": "Ledger Live {{version}} is available for update",
+    "updateAvailable": "Update to Ledger Live version {{version}} is available",
     "error": "更新中のエラー。再度ダウンロードしてください",
     "reDownload": "再度ダウンロードする",
     "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
-    "downloadNow": "Download now"
+    "downloadNow": "Download update"
   },
   "crash": {
     "title": "Something went wrong",
