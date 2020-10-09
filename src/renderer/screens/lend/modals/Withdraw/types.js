@@ -5,7 +5,7 @@ import type { Step } from "~/renderer/components/Stepper";
 
 import type {
   Account,
-  AccountLike,
+  TokenAccount,
   TransactionStatus,
   Operation,
 } from "@ledgerhq/live-common/lib/types";
@@ -16,7 +16,7 @@ export type StepProps = {
   t: TFunction,
   transitionTo: string => void,
   device: ?Device,
-  account: AccountLike,
+  account: TokenAccount,
   parentAccount: Account,
   onRetry: void => void,
   onClose: () => void,

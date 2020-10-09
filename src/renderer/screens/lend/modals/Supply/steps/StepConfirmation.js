@@ -113,7 +113,7 @@ export function StepConfirmationFooter({
           }}
           primary
         >
-          {t("lend.supply.steps.confirmation.cta")}
+          {t("lend.supply.steps.confirmation.success.cta")}
         </Button>
       ) : error ? (
         <RetryButton ml={2} primary onClick={onRetry} />

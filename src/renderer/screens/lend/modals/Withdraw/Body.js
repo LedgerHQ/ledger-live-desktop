@@ -4,7 +4,7 @@ import { compose } from "redux";
 import { connect, useDispatch } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import { createStructuredSelector } from "reselect";
-import { BigNumber } from "bignumber.js";
+import type { TFunction } from "react-i18next";
 
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
@@ -12,60 +12,18 @@ import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
-import type { TFunction } from "react-i18next";
-import type { StepId, StepProps, St } from "./types";
 
+import logger from "~/logger/logger";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
-
 import Track from "~/renderer/analytics/Track";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { closeModal, openModal } from "~/renderer/actions/modals";
-
 import Stepper from "~/renderer/components/Stepper";
 import StepAmount, { StepAmountFooter } from "./steps/StepAmount";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
-import logger from "~/logger/logger";
-
-export const getUnfreezeData = (
-  account: Account,
-): {
-  unfreezeBandwidth: BigNumber,
-  unfreezeEnergy: BigNumber,
-  canUnfreezeBandwidth: boolean,
-  canUnfreezeEnergy: boolean,
-  bandwidthExpiredAt: Date,
-  energyExpiredAt: Date,
-} => {
-  const { tronResources } = account;
-  const {
-    frozen: { bandwidth, energy },
-  } = tronResources || {};
-
-  /** ! expiredAt should always be set with the amount if not this will disable the field by default ! */
-  const { amount: bandwidthAmount, expiredAt: bandwidthExpiredAt } = bandwidth || {};
-  const _bandwidthExpiredAt = +new Date(bandwidthExpiredAt);
-
-  const { amount: energyAmount, expiredAt: energyExpiredAt } = energy || {};
-  const _energyExpiredAt = +new Date(energyExpiredAt);
-
-  const unfreezeBandwidth = BigNumber(bandwidthAmount || 0);
-  const canUnfreezeBandwidth = unfreezeBandwidth.gt(0) && Date.now() > _bandwidthExpiredAt;
-
-  const unfreezeEnergy = BigNumber(energyAmount || 0);
-  const canUnfreezeEnergy = unfreezeEnergy.gt(0) && Date.now() > _energyExpiredAt;
-
-  return {
-    unfreezeBandwidth,
-    unfreezeEnergy,
-    canUnfreezeBandwidth,
-    canUnfreezeEnergy,
-    bandwidthExpiredAt,
-    energyExpiredAt,
-  };
-};
+import type { StepId, StepProps, St } from "./types";
 
 type OwnProps = {|
   stepId: StepId,
@@ -127,6 +85,7 @@ const Body = ({
   openModal,
   onChangeStepId,
   name,
+  // $FlowFixMe
   params,
 }: Props) => {
   const [optimisticOperation, setOptimisticOperation] = useState(null);
@@ -146,14 +105,12 @@ const Body = ({
     const { account, parentAccount } = params;
 
     const bridge = getAccountBridge(account, parentAccount);
-
     const t = bridge.createTransaction(account);
 
     const transaction = bridge.updateTransaction(t, {
-      mode: "compound.redeem",
-      amount: null, // @TODO set this to 100% of available balance by default
-      gasPrice: null,
-      userGasLimit: null,
+      mode: "compound.withdraw",
+      useAllAmount: true,
+      subAccountId: account.id,
     });
 
     return { account, parentAccount, transaction };

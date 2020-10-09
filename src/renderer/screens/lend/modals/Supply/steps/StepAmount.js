@@ -16,12 +16,11 @@ import InputCurrency from "~/renderer/components/InputCurrency";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-import ErrorBanner from "~/renderer/components/ErrorBanner";
+// import ErrorBanner from "~/renderer/components/ErrorBanner";
 import Select from "~/renderer/components/Select";
 import Label from "~/renderer/components/Label";
 import Spoiler from "~/renderer/components/Spoiler";
 import FormattedVal from "~/renderer/components/FormattedVal";
-import useMaxSpendable from "~/renderer/hooks/useMaxSpendable";
 import GasPriceField from "~/renderer/families/ethereum/GasPriceField";
 import GasLimitField from "~/renderer/families/ethereum/GasLimitField";
 import { renderValue, renderOption, getOptionValue } from "../../SelectAccountStep";
@@ -98,7 +97,6 @@ function StepAmount({
   const unit = getAccountUnit(account);
   const { warnings } = status;
   const { amount } = transaction;
-  const maxSpendable = useMaxSpendable({ account, parentAccount, transaction });
 
   const onChangeAmount = useCallback(
     (a?: BigNumber) => {
@@ -117,28 +115,28 @@ function StepAmount({
     () => [
       {
         label: "25%",
-        value: maxSpendable.multipliedBy(0.25),
+        value: account.spendableBalance.multipliedBy(0.25),
       },
       {
         label: "50%",
-        value: maxSpendable.multipliedBy(0.5),
+        value: account.spendableBalance.multipliedBy(0.5),
       },
       {
         label: "75%",
-        value: maxSpendable.multipliedBy(0.75),
+        value: account.spendableBalance.multipliedBy(0.75),
       },
       {
         label: "100%",
-        value: maxSpendable,
+        value: account.spendableBalance,
       },
     ],
-    [maxSpendable],
+    [account.spendableBalance],
   );
 
   return (
     <Box flow={2}>
       <TrackPage category="Lending Supply Flow" name="Step Amount" />
-      {error ? <ErrorBanner error={error} /> : null}
+      {/* {error && focused ? <ErrorBanner error={error} /> : null} */}
       <Box flow={1}>
         <Label>{t("lend.supply.steps.amount.selectedAccount")}</Label>
         <Select
@@ -159,7 +157,7 @@ function StepAmount({
       <Box vertical mt={5}>
         <Box horizontal style={{ justifyContent: "space-between" }}>
           <Label>{t("lend.supply.steps.amount.amountToSupply")}</Label>
-          {maxSpendable ? (
+          {account.spendableBalance.gt(0) ? (
             <Box horizontal>
               <Label style={{ paddingLeft: 8 }}>{t("lend.supply.steps.amount.available")}</Label>
               <Label style={{ paddingLeft: 4 }}>~</Label>
@@ -167,7 +165,7 @@ function StepAmount({
                 <FormattedVal
                   style={{ width: "auto" }}
                   color="palette.text.shade100"
-                  val={maxSpendable}
+                  val={account.spendableBalance}
                   unit={unit}
                   showCode
                 />

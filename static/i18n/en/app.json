@@ -403,7 +403,9 @@
           "title": "Amount",
           "advanced": "Advanced",
           "amountLabel": "Amount to withdraw",
-          "available": "Available balance: <0>{{amountAvailable}}</0>"
+          "available": "Available balance: <0>{{amountAvailable}}</0>",
+          "withdrawAll": "Withdraw all",
+          "placeholder": "Widthdraw all"
         },
         "connectDevice": {
           "title": "Device"
@@ -2589,7 +2591,7 @@
       "title": "Amount must be at least {{unit}} {{minAmountFrom}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-        "title": "Amount must be less than {{unit}} {{maxAmountFrom}}"
+      "title": "Amount must be less than {{unit}} {{maxAmountFrom}}"
     }
   }
 }

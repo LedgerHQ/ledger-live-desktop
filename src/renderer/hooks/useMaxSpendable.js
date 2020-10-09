@@ -27,6 +27,7 @@ const useMaxSpendable = ({ account, parentAccount, transaction }: Args): BigNumb
         transaction: debounceTransaction,
       })
       .then(estimate => {
+        console.log({ estimate: estimate.toString() });
         if (cancelled) return;
         setMaxSpendable(estimate);
       });

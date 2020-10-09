@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import type { OpenedLoanStatus } from "@ledgerhq/live-common/lib/compound/types";
+import type { CompoundAccountStatus } from "@ledgerhq/live-common/lib/compound/types";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
@@ -49,10 +49,11 @@ const Pill = ({
 };
 
 type Props = {
-  type: OpenedLoanStatus,
+  type: CompoundAccountStatus,
 };
 
 export const StatusPill = ({ type }: Props) => {
+  if (!type) return;
   const { background, text } = colorMap[type];
 
   return (

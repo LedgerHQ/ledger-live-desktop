@@ -124,7 +124,7 @@ const Row = ({ summary }: RowProps) => {
         <CryptoCurrencyIcon currency={token} size={32} />
         <RowAccount>
           <Ellipsis fontSize={10} color="palette.text.shade50">
-            <Text ff="Inter|SemiBold">{parentAccount.name}</Text>
+            <Text ff="Inter|SemiBold">{parentAccount?.name}</Text>
           </Ellipsis>
           <ToolTip content={name} delay={1200}>
             <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={14}>

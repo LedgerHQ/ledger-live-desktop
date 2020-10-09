@@ -1,81 +1,40 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
 import { BigNumber } from "bignumber.js";
 
+import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import type { TFunction } from "react-i18next";
-import type { Account, AccountLike, TransactionStatus } from "@ledgerhq/live-common/lib/types";
+import type { Account, TokenAccount, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import { localeSelector } from "~/renderer/reducers/settings";
 import Label from "~/renderer/components/Label";
 import Box from "~/renderer/components/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import Text from "~/renderer/components/Text";
+import Switch from "~/renderer/components/Switch";
 
 const InputRight = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
   color: "palette.text.shade60",
   fontSize: 4,
-  justifyContent: "center",
+  alignItems: "center",
   horizontal: true,
 }))`
   padding: ${p => p.theme.space[2]}px;
 `;
 
-const InputLeft = styled(Box).attrs(() => ({
-  ff: "Inter|Medium",
-  color: "palette.text.shade60",
-  fontSize: 4,
-  justifyContent: "center",
-  horizontal: true,
-  pl: 3,
-}))``;
-
-const AmountButton: ThemedComponent<{ error: boolean, active: boolean }> = styled.button.attrs(
-  () => ({
-    type: "button",
-  }),
-)`
-  background-color: ${p =>
-    p.error
-      ? p.theme.colors.lightRed
-      : p.active
-      ? p.theme.colors.palette.primary.main
-      : p.theme.colors.palette.action.hover};
-  color: ${p =>
-    p.active
-      ? p.theme.colors.palette.primary.contrastText
-      : p.theme.colors.palette.primary.main}!important;
-  border: none;
-  border-radius: 4px;
-  padding: 0px ${p => p.theme.space[2]}px;
-  margin: 0 2.5px;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 200ms ease-out;
-  &:hover {
-    filter: contrast(2);
-  }
-`;
-
-const getDecimalPart = (value: BigNumber, magnitude: number) =>
-  value.minus(value.modulo(10 ** magnitude));
-
 type Props = {
   t: TFunction,
-  account: ?AccountLike,
+  account: ?TokenAccount,
   parentAccount: ?Account,
   transaction: ?Transaction,
   status: TransactionStatus,
@@ -98,67 +57,44 @@ const AmountField = ({
   const bridge = getAccountBridge(account, parentAccount);
 
   const defaultUnit = getAccountUnit(account);
-  // @TODO replace this with withdrawable balance data
-  const { spendableBalance } = account;
-
-  const [ratio, setRatio] = useState();
+  const capabilities = makeCompoundSummaryForAccount(account, parentAccount);
 
   const onChange = useCallback(
     (value: BigNumber) => {
-      setRatio();
       onChangeTransaction(
         bridge.updateTransaction(transaction, {
-          amount: getDecimalPart(value, defaultUnit.magnitude),
+          useAllAmount: false,
+          amount: value,
         }),
       );
     },
-    [bridge, transaction, onChangeTransaction, defaultUnit],
+    [bridge, transaction, onChangeTransaction],
   );
 
-  const onSelectRatio = useCallback(
-    (label, value) => {
-      onChange(value);
-      setRatio(label);
+  const onChangeSendMax = useCallback(
+    (useAllAmount: boolean) => {
+      onChangeTransaction(
+        bridge.updateTransaction(transaction, { useAllAmount, amount: BigNumber(0) }),
+      );
     },
-    [setRatio, onChange],
+    [bridge, transaction, onChangeTransaction],
   );
 
   const amountAvailable = useMemo(
     () =>
-      formatCurrencyUnit(defaultUnit, getDecimalPart(spendableBalance, defaultUnit.magnitude), {
-        disableRounding: true,
+      formatCurrencyUnit(defaultUnit, capabilities?.totalSupplied, {
+        disableRounding: false,
         showAllDigits: false,
         showCode: true,
         locale,
       }),
-    [spendableBalance, defaultUnit, locale],
-  );
-
-  const amountButtons = useMemo(
-    () => [
-      {
-        label: "25%",
-        value: spendableBalance.multipliedBy(0.25),
-      },
-      {
-        label: "50%",
-        value: spendableBalance.multipliedBy(0.5),
-      },
-      {
-        label: "75%",
-        value: spendableBalance.multipliedBy(0.75),
-      },
-      {
-        label: "100%",
-        value: spendableBalance,
-      },
-    ],
-    [spendableBalance],
+    [capabilities?.totalSupplied, defaultUnit, locale],
   );
 
   if (!status) return null;
   const { amount, errors, warnings } = status;
   let { amount: amountError } = errors;
+  const { useAllAmount, amount: txAmount } = transaction;
 
   // we ignore zero case for displaying field error because field is empty.
   if (amount.eq(0)) {
@@ -166,41 +102,41 @@ const AmountField = ({
   }
 
   return (
-    <Box vertical flow={1}>
+    <Box flow={1}>
       <Label>
-        <Text>
-          <Trans i18nKey="lend.withdraw.steps.amount.amountLabel" />
-        </Text>
-        <Text style={{ flex: 1 }} textAlign="right">
+        <Text style={{ flex: 1 }} textAlign="left">
           <Trans i18nKey="lend.withdraw.steps.amount.available" values={{ amountAvailable }}>
             <b></b>
           </Trans>
         </Text>
+
+        {typeof useAllAmount === "boolean" ? (
+          <Box horizontal alignItems="center">
+            <Text
+              color="palette.text.shade40"
+              ff="Inter|Medium"
+              fontSize={10}
+              style={{ paddingRight: 5 }}
+              onClick={() => onChangeSendMax(!useAllAmount)}
+            >
+              <Trans i18nKey="lend.withdraw.steps.amount.withdrawAll" />
+            </Text>
+            <Switch small isChecked={useAllAmount} onChange={onChangeSendMax} />
+          </Box>
+        ) : null}
       </Label>
       <InputCurrency
+        disabled={!!useAllAmount}
         autoFocus={false}
         error={amountError}
         warning={warnings.amount}
         containerProps={{ grow: true }}
         defaultUnit={defaultUnit}
-        value={amount}
+        value={txAmount}
         decimals={0}
         onChange={onChange}
-        renderLeft={<InputLeft>{defaultUnit.code}</InputLeft>}
-        renderRight={
-          <InputRight>
-            {amountButtons.map(({ label, value }, key) => (
-              <AmountButton
-                active={ratio === label}
-                key={key}
-                error={!!amountError}
-                onClick={() => onSelectRatio(label, value)}
-              >
-                {label}
-              </AmountButton>
-            ))}
-          </InputRight>
-        }
+        placeholder={useAllAmount ? t("lend.withdraw.steps.amount.placeholder") : null}
+        renderRight={<InputRight>{defaultUnit.code}</InputRight>}
       />
     </Box>
   );

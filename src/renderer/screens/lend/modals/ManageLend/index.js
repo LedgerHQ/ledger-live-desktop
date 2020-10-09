@@ -125,10 +125,12 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
     [dispatch, account, parentAccount, currency],
   );
 
-  // @TODO get the correct enabled amount
-  const enabledAmount = account.balance;
   const locale = useSelector(localeSelector);
   const unit = getAccountUnit(account);
+
+  const capabilities = getAccountCapabilities(account);
+  if (!capabilities) return;
+  const { canSupply, canSupplyMax, canWithdraw, enabledAmount } = capabilities;
 
   const formattedEnabledAmount =
     enabledAmount &&
@@ -138,10 +140,6 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
       disableRounding: true,
       showCode: true,
     });
-
-  // @TODO add in enable/disable conditions for lending
-  const { canSupply, canWithdraw } = getAccountCapabilities(account);
-  const canEnable = true;
 
   return (
     <Modal
@@ -157,7 +155,7 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
           render={() => (
             <>
               <Box>
-                {canEnable && (
+                {!canSupplyMax && (
                   <Box mb={2}>
                     <InfoBox
                       onLearnMore={() =>

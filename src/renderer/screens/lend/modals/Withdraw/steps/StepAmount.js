@@ -1,13 +1,9 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback } from "react";
-import styled from "styled-components";
-import { BigNumber } from "bignumber.js";
+import React from "react";
 import { Trans } from "react-i18next";
 
 import type { StepProps } from "../types";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
@@ -15,22 +11,9 @@ import Button from "~/renderer/components/Button";
 
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import Spoiler from "~/renderer/components/Spoiler";
-import Label from "~/renderer/components/Label";
-import InputCurrency from "~/renderer/components/InputCurrency";
 import GasPriceField from "~/renderer/families/ethereum/GasPriceField";
 import GasLimitField from "~/renderer/families/ethereum/GasLimitField";
 import AmountField from "../fields/AmountField";
-
-const InputRight = styled(Box).attrs(() => ({
-  ff: "Inter|Medium",
-  color: "palette.text.shade60",
-  fontSize: 4,
-  justifyContent: "center",
-  alignItems: "center",
-  horizontal: true,
-}))`
-  padding: ${p => p.theme.space[2]}px;
-`;
 
 export default function StepAmount({
   account,
@@ -43,21 +26,6 @@ export default function StepAmount({
   t,
 }: StepProps) {
   invariant(account && transaction, "account and transaction required");
-  const { amount } = transaction;
-
-  const unit = getAccountUnit(account);
-
-  const bridge = getAccountBridge(account, parentAccount);
-
-  const onChangeAmount = useCallback(
-    (amount?: BigNumber) =>
-      onChangeTransaction(
-        bridge.updateTransaction(transaction, {
-          amount,
-        }),
-      ),
-    [bridge, transaction, onChangeTransaction],
-  );
 
   return (
     <Box flow={1}>
@@ -75,25 +43,26 @@ export default function StepAmount({
             t={t}
           />
         </Box>
-        <Box my={2}>
-          <GasPriceField
-            account={parentAccount}
-            transaction={transaction}
-            onChange={onChangeTransaction}
-            status={status}
-          />
-        </Box>
         <Spoiler textTransform title={<Trans i18nKey="lend.withdraw.steps.amount.advanced" />}>
-          <Box vertical alignItems="stretch">
-            <Box mt={2}>
-              <GasLimitField
+          {parentAccount && transaction ? (
+            <Box my={4}>
+              <GasPriceField
+                // $FlowFixMe wen TypeScript
+                onChange={onChangeTransaction}
                 account={parentAccount}
                 transaction={transaction}
-                onChange={onChangeTransaction}
                 status={status}
               />
+              <Box mt={3}>
+                <GasLimitField
+                  onChange={onChangeTransaction}
+                  account={parentAccount}
+                  transaction={transaction}
+                  status={status}
+                />
+              </Box>
             </Box>
-          </Box>
+          ) : null}
         </Spoiler>
       </Box>
     </Box>

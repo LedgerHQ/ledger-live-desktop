@@ -5,15 +5,16 @@ import { connect, useDispatch } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
 
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 import type { TFunction } from "react-i18next";
-import type { Device } from "~/renderer/reducers/devices";
 import type { StepId, StepProps, St } from "./types";
 
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
@@ -106,13 +107,13 @@ const Body = ({
     bridgePending,
   } = useBridgeTransaction(() => {
     const { account, parentAccount } = params;
-
     const bridge = getAccountBridge(account, parentAccount);
+    const ctoken = findCompoundToken(account.token);
 
     const t = bridge.createTransaction(account);
 
     const transaction = bridge.updateTransaction(t, {
-      // @TOD0 handle address of tokenAccountId and recipient in common bridge
+      recipient: ctoken?.contractAddress || "",
       mode: "erc20.approve",
       useAllAmount: true,
       amount: null,

@@ -1,23 +1,29 @@
 // @flow
 import { useState, useEffect } from "react";
-import type { AccountLike } from "@ledgerhq/live-common/lib/types";
+import type { AccountLikeArray } from "@ledgerhq/live-common/lib/types";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
-import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
 import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
+import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
 
-const makeSummaries = (accounts: AccountLike[]) =>
-  accounts.reduce((summaries, account) => {
-    if (account.type !== "TokenAccount") return summaries;
-    if (!findCompoundToken(account.token)) return summaries;
+import { isCompoundTokenSupported } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 
-    const parentAccount = accounts.find(acc => acc.id === account.parentId);
-    if (!parentAccount || parentAccount.type !== "Account") return summaries;
+const makeSummaries = (accounts: AccountLikeArray): CompoundAccountSummary[] =>
+  accounts
+    .map(acc => {
+      if (acc.type !== "TokenAccount") return;
+      const ctoken = findCompoundToken(acc.token);
+      if (!ctoken) return;
 
-    const summary = makeCompoundSummaryForAccount(account, parentAccount);
-    return summaries.concat(summary);
-  }, []);
+      if (!isCompoundTokenSupported(ctoken)) return;
 
-export function useCompoundSummaries(accounts: AccountLike[]): CompoundAccountSummary[] {
+      const parentAccount = accounts.find(a => a.id === acc.parentId);
+      if (!parentAccount || parentAccount.type !== "Account") return;
+      const summary = makeCompoundSummaryForAccount(acc, parentAccount);
+      return summary;
+    })
+    .filter(Boolean);
+
+export function useCompoundSummaries(accounts: AccountLikeArray): CompoundAccountSummary[] {
   const [summaries, setSummaries] = useState(() => {
     return makeSummaries(accounts);
   });

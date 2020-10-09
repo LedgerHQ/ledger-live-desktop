@@ -1,6 +1,6 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { BigNumber } from "bignumber.js";
 import { Trans } from "react-i18next";
