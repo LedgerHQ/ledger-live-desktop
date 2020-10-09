@@ -3,10 +3,8 @@ import { BigNumber } from "bignumber.js";
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
-import { useCalculate, useCountervaluesState } from "@ledgerhq/live-common/lib/countervalues/react";
-import { calculate } from "@ledgerhq/live-common/lib/countervalues/logic";
+import { useRequestAmount } from "@ledgerhq/live-common/lib/countervalues/react";
 import Box from "~/renderer/components/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import IconTransfer from "~/renderer/icons/Transfer";
@@ -29,37 +27,24 @@ export default function RequestAmount({
   onChange,
   autoFocus,
   disabled,
-  value,
+  value: cryptoAmount,
   account,
   validTransactionError,
   validTransactionWarning,
 }: Props) {
   const fiatCurrency = useSelector(counterValueCurrencySelector);
-  const cryptoCurrency = getAccountCurrency(account);
-  const fiatCountervalue = useCalculate({
-    from: cryptoCurrency,
-    to: fiatCurrency,
-    value: value.toNumber(),
-    disableRounding: true,
+  const { cryptoUnit, fiatVal, fiatUnit, calculateCryptoAmount } = useRequestAmount({
+    account,
+    fiatCurrency,
+    cryptoAmount,
   });
-  const fiatVal = BigNumber(fiatCountervalue ?? 0);
-  const fiatUnit = fiatCurrency.units[0];
-  const cryptoUnit = getAccountUnit(account);
-  const state = useCountervaluesState();
 
   const onChangeFiatAmount = useCallback(
-    val => {
-      const cryptoVal = BigNumber(
-        calculate(state, {
-          from: cryptoCurrency,
-          to: fiatCurrency,
-          value: val.toNumber(),
-          reverse: true,
-        }) ?? 0,
-      );
-      onChange(cryptoVal);
+    (fiatAmount: BigNumber) => {
+      const amount = calculateCryptoAmount(fiatAmount);
+      onChange(amount);
     },
-    [onChange, state, cryptoCurrency, fiatCurrency],
+    [onChange, calculateCryptoAmount],
   );
 
   return (
@@ -72,7 +57,7 @@ export default function RequestAmount({
           warning={validTransactionWarning}
           containerProps={{ grow: true }}
           defaultUnit={cryptoUnit}
-          value={value}
+          value={cryptoAmount}
           onChange={onChange}
           renderRight={<InputRight>{cryptoUnit.code}</InputRight>}
         />

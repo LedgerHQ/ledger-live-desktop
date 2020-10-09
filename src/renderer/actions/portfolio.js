@@ -15,7 +15,7 @@ import { selectedTimeRangeSelector } from "~/renderer/reducers/settings";
 import { counterValueCurrencySelector } from "./../reducers/settings";
 import { accountsSelector } from "./../reducers/accounts";
 
-// provide redux states via custom hooks
+// provide redux states via custom hook wrapper
 
 export function useBalanceHistoryWithCountervalue({
   account,

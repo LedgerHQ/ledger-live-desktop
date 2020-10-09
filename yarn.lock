@@ -1521,10 +1521,10 @@
     node-pre-gyp "^0.15.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@15.3.0-countervalues.0":
-  version "15.3.0-countervalues.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-15.3.0-countervalues.0.tgz#09c149c04c175d4a7b543e1f46cdc784419248b1"
-  integrity sha512-KdAnlz98pnaTQMOydxyIPN1K7LjVJVxP7UHUkoEUJDgg9AyefJaEBLUKEde5Ih8C8BEfsfhdhpjDVtvTLOIJ+w==
+"@ledgerhq/live-common@15.3.0-countervalues.1":
+  version "15.3.0-countervalues.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-15.3.0-countervalues.1.tgz#bde4acfcd914b8c169032f13d97ed57e9672fa0b"
+  integrity sha512-9kUaXna5bRQmZea5cC0fi2SQ6bMGTXtpvzYUUDtojGqifOsD5JuzJGMZCOUNKwC+faO5FC7DMD10CyiJIjE9Ag==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/cryptoassets" "5.26.0"
