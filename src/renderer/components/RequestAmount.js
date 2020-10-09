@@ -4,7 +4,7 @@ import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
-import { useRequestAmount } from "@ledgerhq/live-common/lib/countervalues/react";
+import { useSendAmount } from "@ledgerhq/live-common/lib/countervalues/react";
 import Box from "~/renderer/components/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import IconTransfer from "~/renderer/icons/Transfer";
@@ -33,7 +33,7 @@ export default function RequestAmount({
   validTransactionWarning,
 }: Props) {
   const fiatCurrency = useSelector(counterValueCurrencySelector);
-  const { cryptoUnit, fiatVal, fiatUnit, calculateCryptoAmount } = useRequestAmount({
+  const { cryptoUnit, fiatAmount, fiatUnit, calculateCryptoAmount } = useSendAmount({
     account,
     fiatCurrency,
     cryptoAmount,
@@ -68,7 +68,7 @@ export default function RequestAmount({
           disabled={disabled}
           containerProps={{ grow: true }}
           defaultUnit={fiatUnit}
-          value={fiatVal}
+          value={fiatAmount}
           onChange={onChangeFiatAmount}
           renderRight={<InputRight>{fiatUnit.code}</InputRight>}
           showAllDigits
