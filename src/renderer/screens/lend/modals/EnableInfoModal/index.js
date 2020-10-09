@@ -42,7 +42,6 @@ export default function LendTermsModal({ name, account, parentAccount, currency,
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isAcceptedTerms = isAcceptedLendingTerms();
-  const { t } = useTranslation();
 
   const [accepted, setAccepted] = useState(isAcceptedTerms);
   const onSwitchAccept = useCallback(() => setAccepted(!accepted), [accepted]);

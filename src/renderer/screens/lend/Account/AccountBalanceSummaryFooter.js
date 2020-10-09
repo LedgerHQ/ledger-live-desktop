@@ -66,10 +66,11 @@ const AccountBalanceSummaryFooter = ({ account, parentAccount, countervalue, cTo
   const locale = useSelector(localeSelector);
   if (!account.compoundBalance) return null;
 
-  const { accruedInterests, totalSupplied, allTimeEarned } = makeCompoundSummaryForAccount(
-    account,
-    parentAccount,
-  );
+  const summary = makeCompoundSummaryForAccount(account, parentAccount);
+
+  if (!summary) return null;
+
+  const { accruedInterests, totalSupplied, allTimeEarned } = summary;
 
   const formatConfig = {
     disableRounding: true,

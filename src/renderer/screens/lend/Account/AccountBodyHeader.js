@@ -5,12 +5,13 @@ import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { TokenAccount, Account } from "@ledgerhq/live-common/lib/types";
 
-import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
+import {
+  getAccountCapabilities,
+  makeCompoundSummaryForAccount,
+} from "@ledgerhq/live-common/lib/compound/logic";
 import { getAccountUnit, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
-// import { urls } from "~/config/urls";
-// import { openURL } from "~/renderer/linking";
 import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
@@ -57,27 +58,7 @@ const Loans = ({ account, parentAccount }: Props) => {
     [discreet, locale],
   );
 
-  const { opened, closed } = makeCompoundSummaryForAccount(account, parentAccount);
-
-  // @TODO check if correct data is shown
-  // Open Loan Data
-  // {
-  //   startingDate: operation.date,
-  //   amountSupplied: operation.value,
-  //   openRate: BigNumber(operation.extra.rate),
-  //   compoundValue: BigNumber(operation.extra.compoundValue),
-  // }
-
-  // Closed loan data
-  // {
-  //   amountSupplied: amountToClose,
-  //   openRate: closingOperation.openRate,
-  //   closeRate: BigNumber(operation.extra.rate),
-  //   endDate: operation.date,
-  //   startingDate: closingOperation.startingDate,
-  //   compoundValue: BigNumber(operation.extra.compoundValue),
-  // }
-
+  const summary = makeCompoundSummaryForAccount(account, parentAccount);
   const lendingDisabled = false;
 
   const onLending = useCallback(() => {
@@ -86,22 +67,26 @@ const Loans = ({ account, parentAccount }: Props) => {
 
   const formattedClosedLoans = useMemo(
     () =>
-      closed.map(({ endDate, amountSupplied, compoundValue }) => ({
-        amountRedeemed: formatCurrencyUnit(unit, amountSupplied, formatConfig),
-        interestEarned: formatCurrencyUnit(unit, compoundValue, formatConfig),
-        date: moment(endDate).format(),
-      })),
-    [closed, formatConfig, unit],
+      summary
+        ? summary.closed.map(({ endDate, amountSupplied, interestsEarned }) => ({
+            amountRedeemed: formatCurrencyUnit(unit, amountSupplied, formatConfig),
+            interestEarned: formatCurrencyUnit(unit, interestsEarned, formatConfig),
+            date: moment(endDate).format(),
+          }))
+        : [],
+    [summary, formatConfig, unit],
   );
 
   const formattedOpenLoans = useMemo(
     () =>
-      opened.map(({ startingDate, amountSupplied, compoundValue }) => ({
-        amountRedeemed: formatCurrencyUnit(unit, amountSupplied, formatConfig),
-        interestEarned: formatCurrencyUnit(unit, compoundValue, formatConfig),
-        date: moment(startingDate).fromNow(),
-      })),
-    [formatConfig, opened, unit],
+      summary
+        ? summary.opened.map(({ startingDate, amountSupplied, interestsEarned }) => ({
+            amountRedeemed: formatCurrencyUnit(unit, amountSupplied, formatConfig),
+            interestEarned: formatCurrencyUnit(unit, interestsEarned, formatConfig),
+            date: moment(startingDate).fromNow(),
+          }))
+        : [],
+    [formatConfig, summary, unit],
   );
 
   return (
@@ -181,8 +166,10 @@ const Loans = ({ account, parentAccount }: Props) => {
 };
 
 const AccountBodyHeader = ({ account, parentAccount }: Props) => {
-  // @TODO check this condition for compound
-  if (!account.compoundValue || account.spendableBalance.isZero()) return null;
+  const capabilities = getAccountCapabilities(account);
+  if (!capabilities) return null;
+  const { canSupply, canWithdraw } = capabilities;
+  if (canSupply || canWithdraw) return null;
 
   return <Loans account={account} parentAccount={parentAccount} />;
 };

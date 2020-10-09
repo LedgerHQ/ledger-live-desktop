@@ -53,7 +53,7 @@ type Props = {
 };
 
 export const StatusPill = ({ type }: Props) => {
-  if (!type) return;
+  if (!type) return null;
   const { background, text } = colorMap[type];
 
   return (

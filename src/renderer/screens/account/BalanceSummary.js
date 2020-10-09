@@ -155,7 +155,7 @@ class AccountBalanceSummary extends PureComponent<Props> {
             discreetMode={discreetMode}
           />
         )}
-        {isCompoundEnabled && (
+        {isCompoundEnabled && account.type === "TokenAccount" && parentAccount && (
           <AccountLendingFooter
             account={account}
             parentAccount={parentAccount}

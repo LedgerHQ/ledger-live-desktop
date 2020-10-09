@@ -129,7 +129,7 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
   const unit = getAccountUnit(account);
 
   const capabilities = getAccountCapabilities(account);
-  if (!capabilities) return;
+  if (!capabilities) return null;
   const { canSupply, canSupplyMax, canWithdraw, enabledAmount } = capabilities;
 
   const formattedEnabledAmount =

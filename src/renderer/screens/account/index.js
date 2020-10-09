@@ -132,7 +132,7 @@ const AccountPage = ({
           {AccountBodyHeader ? (
             <AccountBodyHeader account={account} parentAccount={parentAccount} />
           ) : null}
-          {isCompoundEnabled ? (
+          {isCompoundEnabled && account.type === "TokenAccount" && parentAccount ? (
             <CompoundBodyHeader account={account} parentAccount={parentAccount} />
           ) : null}
           {account.type === "Account" ? (
