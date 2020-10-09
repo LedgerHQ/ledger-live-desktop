@@ -146,7 +146,6 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
               color="palette.text.shade100"
               fontSize={3}
               showCode
-              alwaysShowSign={false}
             />
           ) : (
             <Text ff="Inter" color="palette.text.shade100" fontSize={3}>

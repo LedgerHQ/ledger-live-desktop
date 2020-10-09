@@ -280,6 +280,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                 <Box mt={1} selectable>
                   {hasFailed ? null : (
                     <CounterValue
+                      alwaysShowSign
                       color="palette.text.shade60"
                       fontSize={5}
                       date={date}
@@ -435,7 +436,6 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                           fontSize={3}
                           currency={mainAccount.currency}
                           value={fee}
-                          alwaysShowSign={false}
                           subMagnitude={1}
                           prefix={
                             <Box mr={1} color="palette.text.shade60" style={{ lineHeight: 1.2 }}>

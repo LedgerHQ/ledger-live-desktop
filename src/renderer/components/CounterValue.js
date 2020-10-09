@@ -30,7 +30,7 @@ export default function CounterValue({
   value,
   date,
   currency,
-  alwaysShowSign,
+  alwaysShowSign = false,
   placeholder,
   prefix,
   suffix,
@@ -57,7 +57,7 @@ export default function CounterValue({
         currency={currency}
         unit={counterValueCurrency.units[0]}
         showCode
-        alwaysShowSign={alwaysShowSign || true}
+        alwaysShowSign={alwaysShowSign}
       />
       {suffix || null}
     </>

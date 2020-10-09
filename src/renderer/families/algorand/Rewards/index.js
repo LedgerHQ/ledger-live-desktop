@@ -65,7 +65,6 @@ const RewardsSection = ({ account }: Props) => {
           <CounterValue
             color="palette.text.shade60"
             fontSize={3}
-            alwaysShowSign={false}
             currency={currency}
             value={rewards}
             placeholder={"-"}

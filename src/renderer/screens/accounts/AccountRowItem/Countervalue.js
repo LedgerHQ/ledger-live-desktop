@@ -29,7 +29,6 @@ export default function Countervalue({ account, range, currency }: Props) {
           currency={currency}
           value={balanceEnd}
           animateTicker={false}
-          alwaysShowSign={false}
           showCode
           fontSize={3}
           color="palette.text.shade80"

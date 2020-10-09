@@ -37,7 +37,6 @@ function Body({ account, range }: Props) {
             currency={currency}
             value={history[history.length - 1].value}
             animateTicker={false}
-            alwaysShowSign={false}
             showCode
             fontSize={3}
             placeholder={<Placeholder />}
