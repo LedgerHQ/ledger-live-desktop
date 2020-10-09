@@ -304,6 +304,24 @@
     "assets": "Assets",
     "active": "Active accounts",
     "lendAsset": "Lend asset",
+    "account": {
+      "amountSupplied": "Amount supplied",
+      "amountSuppliedTooltip": "--! NEED TEXT HERE !--",
+      "currencyAPY": "Currency APY",
+      "currencyAPYTooltip": "--! NEED TEXT HERE !--",
+      "accruedInterests": "Accrued interests",
+      "accruedInterestsTooltip": "--! NEED TEXT HERE !--",
+      "interestEarned": "Interest earned",
+      "interestEarnedTooltip": "--! NEED TEXT HERE !--",
+      "openLoans": "Open loans",
+      "closedLoans": "Closed loans",
+      "amountRedeemed": "Amount redeemed",
+      "amountRedeemedTooltip": "--! NEED TEXT HERE !--",
+      "date": "Date",
+      "info": "You can lend assets directly from your {{currency}} account and earn passive revenue",
+      "howCompoundWorks": "How does lending on Compound work?",
+      "lend": "Lend {{currency}}"
+    },
     "emptyState": {
       "active": {
         "title": "Lending",

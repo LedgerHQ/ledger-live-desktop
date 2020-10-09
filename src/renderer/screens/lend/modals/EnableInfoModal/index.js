@@ -39,6 +39,7 @@ type Props = {
 };
 
 export default function LendTermsModal({ name, account, parentAccount, currency, ...rest }: Props) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const isAcceptedTerms = isAcceptedLendingTerms();
   const { t } = useTranslation();

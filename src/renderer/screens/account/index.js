@@ -8,6 +8,7 @@ import type { TFunction } from "react-i18next";
 import { Redirect } from "react-router";
 import type { Currency, AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
+import { isCompoundAvailable } from "@ledgerhq/live-common/lib/compound/logic";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import {
@@ -35,6 +36,7 @@ import AccountHeader from "./AccountHeader";
 import AccountHeaderActions from "./AccountHeaderActions";
 import EmptyStateAccount from "./EmptyStateAccount";
 import TokenList from "./TokensList";
+import CompoundBodyHeader from "~/renderer/screens/lend/Account/AccountBodyHeader";
 
 const mapStateToProps = (
   state,
@@ -93,6 +95,7 @@ const AccountPage = ({
     return <Redirect to="/accounts" />;
   }
 
+  const isCompoundEnabled = isCompoundAvailable && isCompoundAvailable(account);
   const currency = getAccountCurrency(account);
   const color = getCurrencyColor(currency, bgColor);
 
@@ -123,10 +126,14 @@ const AccountPage = ({
               range={selectedTimeRange}
               countervalueFirst={countervalueFirst}
               setCountervalueFirst={setCountervalueFirst}
+              isCompoundEnabled={isCompoundEnabled}
             />
           </Box>
           {AccountBodyHeader ? (
             <AccountBodyHeader account={account} parentAccount={parentAccount} />
+          ) : null}
+          {isCompoundEnabled ? (
+            <CompoundBodyHeader account={account} parentAccount={parentAccount} />
           ) : null}
           {account.type === "Account" ? (
             <TokenList account={account} range={selectedTimeRange} />
