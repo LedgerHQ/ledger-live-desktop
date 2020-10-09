@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback, useState } from "react";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 import { useDispatch } from "react-redux";
@@ -39,6 +39,7 @@ type Props = {
 };
 
 export default function LendTermsModal({ name, account, parentAccount, currency, ...rest }: Props) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const isAcceptedTerms = isAcceptedLendingTerms();
 
@@ -63,7 +64,7 @@ export default function LendTermsModal({ name, account, parentAccount, currency,
         cta: t("lend.enable.steps.selectAccount.cta"),
       }),
     );
-  }, [onClose, dispatch, rest, currency]);
+  }, [onClose, dispatch, rest, currency, t]);
 
   const onTermsLinkClick = useCallback(() => {
     // @TODO replace this URL with the correct one

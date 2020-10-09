@@ -21,6 +21,8 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import AccountBalanceSummaryHeader from "./AccountBalanceSummaryHeader";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
 
+import AccountLendingFooter from "~/renderer/screens/lend/Account/AccountBalanceSummaryFooter";
+
 import perFamilyAccountBalanceSummaryFooter from "~/renderer/generated/AccountBalanceSummaryFooter";
 
 type OwnProps = {
@@ -33,6 +35,7 @@ type OwnProps = {
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,
   mainAccount: ?Account,
+  isCompoundEnabled?: boolean,
 };
 
 type Props = {
@@ -82,6 +85,7 @@ class AccountBalanceSummary extends PureComponent<Props> {
   render() {
     const {
       account,
+      parentAccount,
       balanceHistoryWithCountervalue: {
         history,
         countervalueAvailable,
@@ -96,6 +100,7 @@ class AccountBalanceSummary extends PureComponent<Props> {
       setCountervalueFirst,
       discreetMode,
       mainAccount,
+      isCompoundEnabled,
     } = this.props;
     const displayCountervalue = countervalueFirst && countervalueAvailable;
 
@@ -148,6 +153,15 @@ class AccountBalanceSummary extends PureComponent<Props> {
             account={account}
             counterValue={counterValue}
             discreetMode={discreetMode}
+          />
+        )}
+        {isCompoundEnabled && (
+          <AccountLendingFooter
+            account={account}
+            parentAccount={parentAccount}
+            counterValue={counterValue}
+            discreetMode={discreetMode}
+            cToken={isCompoundEnabled}
           />
         )}
       </Card>
