@@ -29,13 +29,20 @@ const Text = styled(Box).attrs(() => ({
 
 const StepFinish = ({ currency, checkedAccountsIds }: StepProps) => {
   const { t } = useTranslation();
+
+  const currencyName = currency
+    ? currency.type === "TokenCurrency"
+      ? currency.parentCurrency.name
+      : currency.name
+    : undefined;
+
   return (
     <Box alignItems="center" py={6}>
       <RefreshAccountsOrdering onMount onUnmount />
       {/* onMount because if we already have the countervalues we want to sort it straightaway
           onUnmount because if not, it is useful to trigger a second refresh to ensure it get sorted */}
 
-      <TrackPage category="AddAccounts" name="Step4" />
+      <TrackPage category="AddAccounts" name="Step4" currencyName={currencyName} />
       {currency ? <CurrencyCircleIcon currency={currency} size={50} showCheckmark /> : null}
       <Title>{t("addAccounts.success", { count: checkedAccountsIds.length })}</Title>
       <Text>{t("addAccounts.successDescription", { count: checkedAccountsIds.length })}</Text>
