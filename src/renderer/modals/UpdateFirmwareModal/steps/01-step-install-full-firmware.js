@@ -10,6 +10,7 @@ import type { FirmwareUpdateContext, DeviceInfo } from "@ledgerhq/live-common/li
 import { command } from "~/renderer/commands";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import TrackPage from "~/renderer/analytics/TrackPage";
+import Track from "~/renderer/analytics/Track";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import ProgressCircle from "~/renderer/components/ProgressCircle";
@@ -82,6 +83,7 @@ const Body = ({
 
   return (
     <>
+      <Track event={"FirmwareUpdateConfirmIdentifierDisplayed"} onMount />
       <Text ff="Inter|Regular" textAlign="center" color="palette.text.shade80">
         {t("manager.modal.confirmIdentifierText")}
       </Text>
