@@ -5,12 +5,12 @@ import { Trans } from "react-i18next";
 import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/bitcoin/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { getUTXOStatus } from "@ledgerhq/live-common/lib/families/bitcoin/transaction";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import Text from "~/renderer/components/Text";
-import ErrorBanner from "~/renderer/components/ErrorBanner";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import { urls } from "~/config/urls";
@@ -36,12 +36,6 @@ const Separator = styled.div`
   margin: 20px 0;
 `;
 
-const Sticky = styled(Box)`
-  position: sticky;
-  top: -20px;
-  z-index: 1;
-`;
-
 const CoinControlModal = ({
   isOpened,
   onClose,
@@ -56,21 +50,23 @@ const CoinControlModal = ({
   if (!account.bitcoinResources) return null;
   const { bitcoinResources } = account;
   const { utxoStrategy } = transaction;
+  const totalExcludedUTXOS = account.bitcoinResources?.utxos
+    .map(u => getUTXOStatus(u, utxoStrategy))
+    .filter(({ excluded }) => excluded).length;
   const bridge = getAccountBridge(account);
   const errorKeys = Object.keys(status.errors);
 
   const error = errorKeys.length ? status.errors[errorKeys[0]] : null;
 
   const returning = (status.txOutputs || []).find(tx => !!tx.path);
-  const maybeOnClose = error ? undefined : onClose;
 
   return (
-    <Modal width={700} isOpened={isOpened} centered onClose={maybeOnClose}>
+    <Modal width={700} isOpened={isOpened} centered onClose={onClose}>
       <TrackPage category="Modal" name="BitcoinCoinControl" />
       <ModalBody
         width={700}
         title={<Trans i18nKey="bitcoin.modalTitle" />}
-        onClose={maybeOnClose}
+        onClose={onClose}
         render={() => (
           <Box flow={2}>
             <PickingStrategy
@@ -81,7 +77,6 @@ const CoinControlModal = ({
             />
 
             <Separator />
-            <Sticky>{error ? <ErrorBanner error={error} /> : null}</Sticky>
             <Box mt={0} mb={4} horizontal alignItem="center" justifyContent="space-between">
               <Text color="palette.text.shade50" ff="Inter|Regular" fontSize={13}>
                 <Trans i18nKey="bitcoin.selected" />
@@ -115,6 +110,7 @@ const CoinControlModal = ({
                 <CoinControlRow
                   key={utxo.hash}
                   utxoStrategy={utxoStrategy}
+                  totalExcludedUTXOS={totalExcludedUTXOS}
                   utxo={utxo}
                   updateTransaction={updateTransaction}
                   bridge={bridge}
@@ -169,7 +165,7 @@ const CoinControlModal = ({
             <LinkWithExternalIcon onClick={onClickLink}>
               <Trans i18nKey="bitcoin.whatIs" />
             </LinkWithExternalIcon>
-            <Button primary onClick={onClose} disabled={!!error}>
+            <Button primary onClick={onClose}>
               <Trans i18nKey="common.done" />
             </Button>
           </>

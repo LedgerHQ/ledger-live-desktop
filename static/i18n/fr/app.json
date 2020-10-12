@@ -381,7 +381,7 @@
     },
     "swap": {
       "title": "Échanger des cryptos",
-      "description": "Échangez une cryptomonnaie contre une autre directement et en toute sécurité depuis Ledger Live via notre partenaire."
+      "description": "Exchange one crypto for another from Ledger Live with our partner."
     }
   },
   "dashboard": {
@@ -605,7 +605,7 @@
   "manager": {
     "tabs": {
       "appCatalog": "Catalogue d'applications",
-      "appCatalogSearch": "Rechercher une application dans le catalogue...",
+      "appCatalogSearch": "Rechercher une application...",
       "appsOnDevice": "Applications installées",
       "appOnDeviceSearch": "Rechercher les applications installées..."
     },
