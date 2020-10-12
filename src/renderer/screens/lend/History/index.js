@@ -5,7 +5,11 @@ import { useTranslation } from "react-i18next";
 import Box from "~/renderer/components/Box";
 import EmptyState from "../EmptyState";
 
-const History = () => {
+type Props = {
+  navigateToCompoundDashboard: () => void,
+};
+
+const History = ({ navigateToCompoundDashboard }: Props) => {
   const { t } = useTranslation();
   return (
     <Box>
@@ -13,7 +17,7 @@ const History = () => {
         title={t("lend.emptyState.history.title")}
         description={t("lend.emptyState.history.description")}
         buttonLabel={t("lend.emptyState.history.cta")}
-        onClick={() => {}}
+        onClick={navigateToCompoundDashboard}
       />
     </Box>
   );

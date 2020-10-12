@@ -49,23 +49,31 @@ type Props = {
   tabs: string[],
   onIndexChange: number => void,
   defaultIndex?: number,
+  index?: number,
   short?: boolean,
 };
 
-const TabBar = ({ tabs, onIndexChange, defaultIndex = 0, short = false }: Props) => {
+const TabBar = ({
+  tabs,
+  onIndexChange,
+  defaultIndex = 0,
+  short = false,
+  index: propsIndex,
+}: Props) => {
   const tabRefs = useRef([]);
   const [index, setIndex] = useState(defaultIndex);
-
   const [mounted, setMounted] = useState(false);
+
+  const i = !isNaN(propsIndex) && propsIndex !== undefined ? propsIndex : index;
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const updateIndex = useCallback(
-    i => {
-      setIndex(i);
-      onIndexChange(i);
+    j => {
+      setIndex(j);
+      onIndexChange(j);
     },
     [setIndex, onIndexChange],
   );
@@ -76,21 +84,21 @@ const TabBar = ({ tabs, onIndexChange, defaultIndex = 0, short = false }: Props)
 
   return (
     <Tabs short={short}>
-      {tabs.map((tab, i) => (
+      {tabs.map((tab, j) => (
         <Tab
-          ref={setTabRef(i)}
-          key={`TAB_${i}_${tab}`}
-          active={i === index}
-          tabIndex={i}
-          onClick={() => updateIndex(i)}
+          ref={setTabRef(j)}
+          key={`TAB_${j}_${tab}`}
+          active={j === i}
+          tabIndex={j}
+          onClick={() => updateIndex(j)}
         >
           <Text ff="Inter|SemiBold" fontSize={5}>
             <Trans i18nKey={tab} />
           </Text>
         </Tab>
       ))}
-      {mounted && tabRefs.current[index] && (
-        <TabIndicator short={short} index={index} currentRef={tabRefs.current[index]} />
+      {mounted && tabRefs.current[i] && (
+        <TabIndicator short={short} index={i} currentRef={tabRefs.current[i]} />
       )}
     </Tabs>
   );

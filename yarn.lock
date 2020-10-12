@@ -1521,10 +1521,10 @@
     node-pre-gyp "^0.15.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@15.2.0-ethjs.0":
-  version "15.2.0-ethjs.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-15.2.0-ethjs.0.tgz#7bfdf373cb7881999361dab3d3fba5dedf877722"
-  integrity sha512-Zrti8cYkZZB4GZfD7UmKx1/74kr8JwB2IYL6OLJ+mO8B7A0TTfITwXRmyddviJ0eu5teYAhlR3XUjb9ESjGv+w==
+"@ledgerhq/live-common@ethjs":
+  version "15.3.0-ethjs.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-15.3.0-ethjs.0.tgz#05fa65f5b940443cd46a332c2696e4db6e2caadb"
+  integrity sha512-C3ihINAcoWrYkQhPdvmk9PD2wP8k6wJpbccT6qVZpccHq8N6KCd7xGAQS5u8Tpd5SqDSFL62ZQ6NG4TRDDImDA==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/cryptoassets" "5.26.0"
@@ -1545,6 +1545,7 @@
     bignumber.js "^9.0.1"
     bip32-path "^0.4.2"
     blake2b "^2.1.3"
+    bs58 "^4.0.1"
     bs58check "^2.1.2"
     cashaddrjs "^0.3.12"
     crypto-js "^4.0.0"
@@ -3531,7 +3532,7 @@ browserslist@^4.12.0, browserslist@^4.8.5:
     escalade "^3.0.1"
     node-releases "^1.1.58"
 
-bs58@^4.0.0:
+bs58@^4.0.0, bs58@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/bs58/-/bs58-4.0.1.tgz#be161e76c354f6f788ae4071f63f34e8c4f0a42a"
   integrity sha1-vhYedsNU9veIrkBx9j806MTwpCo=

@@ -11,9 +11,10 @@ import ClosedLoans from "./ClosedLoans";
 type Props = {
   accounts: AccountLikeArray,
   summaries: CompoundAccountSummary[],
+  navigateToCompoundDashboard: () => void,
 };
 
-const Closed = ({ accounts, summaries }: Props) => {
+const Closed = ({ accounts, summaries, navigateToCompoundDashboard }: Props) => {
   const closedLoans = makeClosedHistoryForAccounts(summaries);
   const { t } = useTranslation();
 
@@ -26,7 +27,7 @@ const Closed = ({ accounts, summaries }: Props) => {
           title={t("lend.emptyState.closed.title")}
           description={t("lend.emptyState.closed.description")}
           buttonLabel={t("lend.emptyState.closed.cta")}
-          onClick={() => {}}
+          onClick={navigateToCompoundDashboard}
         />
       )}
     </Box>

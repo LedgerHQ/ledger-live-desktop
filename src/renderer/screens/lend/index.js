@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { listCurrentRates } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
@@ -39,6 +39,8 @@ const Lend = () => {
 
   const rates = listCurrentRates();
 
+  const navigateToCompoundDashboard = useCallback(() => setActiveTabIndex(0), [setActiveTabIndex]);
+
   return (
     <Box>
       <TrackPage category="Lend" />
@@ -51,10 +53,20 @@ const Lend = () => {
         </Box>
       </Box>
 
-      <TabBar tabs={tabs.map(tab => t(tab.title))} onIndexChange={setActiveTabIndex} short />
+      <TabBar
+        index={activeTabIndex}
+        tabs={tabs.map(tab => t(tab.title))}
+        onIndexChange={setActiveTabIndex}
+        short
+      />
 
       <Box mt={4}>
-        <Component accounts={accounts} summaries={summaries} rates={rates} />
+        <Component
+          accounts={accounts}
+          summaries={summaries}
+          rates={rates}
+          navigateToCompoundDashboard={navigateToCompoundDashboard}
+        />
       </Box>
     </Box>
   );

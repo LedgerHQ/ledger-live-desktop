@@ -82,7 +82,7 @@ export default function StepAmount({
     (useAllAmount: boolean) =>
       onChangeTransaction(
         bridge.updateTransaction(transaction, {
-          amount: useAllAmount ? null : BigNumber(0),
+          amount: BigNumber(0),
           useAllAmount,
         }),
       ),

@@ -116,7 +116,6 @@ const Body = ({
       recipient: ctoken?.contractAddress || "",
       mode: "erc20.approve",
       useAllAmount: true,
-      amount: null,
       gasPrice: null,
       userGasLimit: null,
     });

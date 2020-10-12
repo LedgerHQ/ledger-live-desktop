@@ -7,7 +7,8 @@ import { Trans } from "react-i18next";
 import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import Discreet, { useDiscreetMode } from "~/renderer/components/Discreet";
+import { listCurrentRates } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
+import { useDiscreetMode } from "~/renderer/components/Discreet";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { Account, TokenAccount, TokenCurrency } from "@ledgerhq/live-common/lib/types";
@@ -73,7 +74,7 @@ const AccountBalanceSummaryFooter = ({ account, parentAccount, countervalue, cto
   const { accruedInterests, totalSupplied, allTimeEarned } = summary;
 
   const formatConfig = {
-    disableRounding: true,
+    disableRounding: false,
     alwaysShowSign: false,
     showCode: true,
     discreet,
@@ -85,7 +86,9 @@ const AccountBalanceSummaryFooter = ({ account, parentAccount, countervalue, cto
   const formattedAccruedInterests = formatCurrencyUnit(unit, accruedInterests, formatConfig);
   const formattedTotalSupplied = formatCurrencyUnit(unit, totalSupplied, formatConfig);
   const formattedAllTimeEarned = formatCurrencyUnit(unit, allTimeEarned, formatConfig);
-  // @TODO Fill in the currency APY
+  const rates = listCurrentRates();
+
+  const rate = rates.find(r => r.ctoken.id === ctoken.id);
 
   return (
     <Wrapper>
@@ -109,7 +112,7 @@ const AccountBalanceSummaryFooter = ({ account, parentAccount, countervalue, cto
             <InfoCircle size={13} />
           </TitleWrapper>
         </ToolTip>
-        <Discreet>{`${"–"}`}</Discreet>
+        <AmountValue>{rate?.supplyAPY || "-"}</AmountValue>
       </BalanceDetail>
       <BalanceDetail>
         <ToolTip content={<Trans i18nKey="lend.account.accruedInterestsTooltip" />}>

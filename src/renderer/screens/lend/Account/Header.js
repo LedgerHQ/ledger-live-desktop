@@ -29,10 +29,10 @@ export const TableLine: ThemedComponent<{}> = styled(Text).attrs(() => ({
   }
 `;
 
-const Header = () => (
+const Header = ({ type }: { type: "open" | "close" }) => (
   <Wrapper>
     <TableLine>
-      <Trans i18nKey="lend.account.amountRedeemed" />
+      <Trans i18nKey={`lend.account.${type === "close" ? "amountRedeemed" : "amountSupplied"}`} />
     </TableLine>
     <TableLine>
       <Trans i18nKey="lend.account.interestEarned" />

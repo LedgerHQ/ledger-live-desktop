@@ -154,6 +154,14 @@ const Body = ({
   const error =
     transactionError || bridgeError || (statusError instanceof Error ? statusError : null);
 
+  const errorSteps = [];
+
+  if (transactionError) {
+    errorSteps.push(2);
+  } else if (error) {
+    errorSteps.push(0);
+  }
+
   const stepperProps = {
     title: t("lend.withdraw.title"),
     device,
@@ -163,9 +171,9 @@ const Body = ({
     signed,
     stepId,
     steps,
-    errorSteps: [],
+    errorSteps,
     disabledSteps: [],
-    hideBreadcrumb: !!error,
+    hideBreadcrumb: false,
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,

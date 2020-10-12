@@ -1,11 +1,12 @@
 // @flow
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { getAccountName } from "@ledgerhq/live-common/lib/account";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
+import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Box from "~/renderer/components/Box";
 import Card from "~/renderer/components/Box/Card";
@@ -99,18 +100,7 @@ const Row = ({ summary }: RowProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const name = getAccountName(account);
-
-  // START HACK
-  // TODO: Remove this when we have a working implementation
-  // of statuses in live-commmon
-  const [status, setStatus] = useState("");
-
-  useEffect(() => {
-    const rand = Math.round(Math.random() * 4);
-    const s =
-      rand === 0 ? "ENABLING" : rand === 1 ? "TO_SUPPLY" : rand === 2 ? "SUPPLYING" : "SUPPLIED";
-    setStatus(s);
-  }, []);
+  const capabilities = getAccountCapabilities(account);
 
   const openManageModal = useCallback(() => {
     dispatch(openModal("MODAL_LEND_MANAGE", { ...summary }));
@@ -177,7 +167,7 @@ const Row = ({ summary }: RowProps) => {
           />
         </Ellipsis>
       </Amount>
-      <Status>{status ? <StatusPill type={status} /> : null}</Status>
+      <Status>{capabilities?.status ? <StatusPill type={capabilities.status} /> : null}</Status>
       <Action onClick={openManageModal}>
         <Box flex horizontal alignItems="center">
           <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade50">

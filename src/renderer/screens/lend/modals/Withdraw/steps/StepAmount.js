@@ -9,7 +9,6 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 
-import ErrorBanner from "~/renderer/components/ErrorBanner";
 import Spoiler from "~/renderer/components/Spoiler";
 import GasPriceField from "~/renderer/families/ethereum/GasPriceField";
 import GasLimitField from "~/renderer/families/ethereum/GasLimitField";
@@ -30,7 +29,6 @@ export default function StepAmount({
   return (
     <Box flow={1}>
       <TrackPage category="Lending Withdraw Flow" name="Step 1" />
-      {error ? <ErrorBanner error={error} /> : null}
       <Box vertical>
         <Box my={4}>
           <AmountField

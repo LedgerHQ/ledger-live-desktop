@@ -106,7 +106,11 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
   const openManageModal = useCallback(() => {
     const account = accounts.find(a => a.type === "TokenAccount" && a.token.id === token.id);
     const parentAccount = accounts.find(a => a.parentId === a.id);
-    dispatch(openModal("MODAL_LEND_MANAGE", { account, parentAccount }));
+    if (!account) {
+      dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency: token }));
+    } else {
+      dispatch(openModal("MODAL_LEND_ENABLE_INFO", { account, parentAccount, currency: token }));
+    }
   }, [dispatch, accounts, token]);
 
   const grossSupply = useMemo((): string => {

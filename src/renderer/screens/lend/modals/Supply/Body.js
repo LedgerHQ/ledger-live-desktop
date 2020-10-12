@@ -118,6 +118,7 @@ const Body = ({
     const transaction = bridge.updateTransaction(t, {
       mode: "compound.supply",
       subAccountId: account.id,
+      amount: account.spendableBalance,
     });
 
     return { account, parentAccount, transaction };
@@ -171,6 +172,16 @@ const Body = ({
   const error =
     transactionError || bridgeError || (statusError instanceof Error ? statusError : null);
 
+  const errorSteps = [];
+
+  console.log({ bridgeError, statusError });
+
+  if (transactionError) {
+    errorSteps.push(2);
+  } else if (error) {
+    errorSteps.push(0);
+  }
+
   const stepperProps = {
     title: t("lend.supply.title"),
     device,
@@ -181,9 +192,9 @@ const Body = ({
     signed,
     stepId,
     steps,
-    errorSteps: [],
+    errorSteps,
     disabledSteps: [],
-    hideBreadcrumb: !!error,
+    hideBreadcrumb: false,
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,

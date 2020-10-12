@@ -5,10 +5,7 @@ import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { TokenAccount, Account } from "@ledgerhq/live-common/lib/types";
 
-import {
-  getAccountCapabilities,
-  makeCompoundSummaryForAccount,
-} from "@ledgerhq/live-common/lib/compound/logic";
+import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
 import { getAccountUnit, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
@@ -49,7 +46,7 @@ const Loans = ({ account, parentAccount }: Props) => {
 
   const formatConfig = useMemo(
     () => ({
-      disableRounding: true,
+      disableRounding: false,
       alwaysShowSign: false,
       showCode: true,
       discreet,
@@ -69,7 +66,11 @@ const Loans = ({ account, parentAccount }: Props) => {
     () =>
       summary
         ? summary.closed.map(({ endDate, amountSupplied, interestsEarned }) => ({
-            amountRedeemed: formatCurrencyUnit(unit, amountSupplied, formatConfig),
+            amountRedeemed: formatCurrencyUnit(
+              unit,
+              amountSupplied.plus(interestsEarned),
+              formatConfig,
+            ),
             interestEarned: formatCurrencyUnit(unit, interestsEarned, formatConfig),
             date: moment(endDate).format(),
           }))
@@ -103,7 +104,7 @@ const Loans = ({ account, parentAccount }: Props) => {
       </Box>
       {formattedOpenLoans.length > 0 ? (
         <Card p={0} mt={24} mb={6}>
-          <Header />
+          <Header type="open" />
           {formattedOpenLoans.map(({ amountRedeemed, interestEarned, date }, index) => (
             <Row
               key={index}
@@ -149,7 +150,7 @@ const Loans = ({ account, parentAccount }: Props) => {
             </Text>
           </Box>
           <Card p={0} mt={24} mb={6}>
-            <Header />
+            <Header type="close" />
             {formattedClosedLoans.map(({ amountRedeemed, interestEarned, date }, index) => (
               <Row
                 key={index}
@@ -166,10 +167,7 @@ const Loans = ({ account, parentAccount }: Props) => {
 };
 
 const AccountBodyHeader = ({ account, parentAccount }: Props) => {
-  const capabilities = getAccountCapabilities(account);
-  if (!capabilities) return null;
-  const { canSupply, canWithdraw } = capabilities;
-  if (canSupply || canWithdraw) return null;
+  if (account.balance.isZero()) return null;
 
   return <Loans account={account} parentAccount={parentAccount} />;
 };

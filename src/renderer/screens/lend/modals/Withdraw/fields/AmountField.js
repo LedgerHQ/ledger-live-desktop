@@ -74,32 +74,30 @@ const AmountField = ({
   const onChangeSendMax = useCallback(
     (useAllAmount: boolean) => {
       onChangeTransaction(
-        bridge.updateTransaction(transaction, { useAllAmount, amount: BigNumber(0) }),
+        bridge.updateTransaction(transaction, {
+          useAllAmount,
+          amount: useAllAmount ? BigNumber(0) : capabilities?.totalSupplied || BigNumber(0),
+        }),
       );
     },
-    [bridge, transaction, onChangeTransaction],
+    [bridge, transaction, onChangeTransaction, capabilities],
   );
 
   const amountAvailable = useMemo(
     () =>
       formatCurrencyUnit(defaultUnit, capabilities?.totalSupplied, {
-        disableRounding: false,
+        disableRounding: true,
         showAllDigits: false,
         showCode: true,
         locale,
       }),
-    [capabilities?.totalSupplied, defaultUnit, locale],
+    [capabilities, defaultUnit, locale],
   );
 
   if (!status) return null;
-  const { amount, errors, warnings } = status;
-  let { amount: amountError } = errors;
+  const { errors, warnings } = status;
+  const { amount } = errors;
   const { useAllAmount, amount: txAmount } = transaction;
-
-  // we ignore zero case for displaying field error because field is empty.
-  if (amount.eq(0)) {
-    amountError = null;
-  }
 
   return (
     <Box flow={1}>
@@ -128,12 +126,11 @@ const AmountField = ({
       <InputCurrency
         disabled={!!useAllAmount}
         autoFocus={false}
-        error={amountError}
+        error={amount}
         warning={warnings.amount}
         containerProps={{ grow: true }}
         defaultUnit={defaultUnit}
         value={txAmount}
-        decimals={0}
         onChange={onChange}
         placeholder={useAllAmount ? t("lend.withdraw.steps.amount.placeholder") : null}
         renderRight={<InputRight>{defaultUnit.code}</InputRight>}
