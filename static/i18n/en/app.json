@@ -301,7 +301,12 @@
       "addAccount": "Add account"
     },
     "sell": {
-      "tab": "Sell"
+      "title": "Sell crypto via our partner",
+      "tab": "Sell",
+      "selectCrypto": "Choose a crypto asset",
+      "selectAccount": "Choose an account",
+      "continue": "Continue",
+      "addAccount": "Add account"
     },
     "history": {
       "tab": "History"
