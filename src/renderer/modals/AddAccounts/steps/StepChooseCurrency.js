@@ -60,6 +60,7 @@ export const StepChooseCurrencyFooter = ({ transitionTo, currency }: StepProps) 
     currency && currency.type === "TokenCurrency"
       ? supportLinkByTokenType[currency.tokenType]
       : null;
+
   return (
     <>
       <TrackPage category="AddAccounts" name="Step1" />

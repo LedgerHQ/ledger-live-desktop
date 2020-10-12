@@ -2,6 +2,7 @@
 
 import React, { useCallback, useMemo, useState, memo } from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import Fuse from "fuse.js";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
@@ -10,6 +11,7 @@ import type { Option } from "~/renderer/components/Select";
 import Select from "~/renderer/components/Select";
 import Box from "~/renderer/components/Box";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
+import Text from "./Text";
 
 type Props<C: Currency> = {
   onChange: (?C) => void,
@@ -103,12 +105,30 @@ const SelectCurrency = <C: Currency>({
   );
 };
 
+const CurrencyLabel = styled(Text).attrs(() => ({
+  color: "palette.text.shade60",
+  ff: "Inter|SemiBold",
+  fontSize: 2,
+}))`
+  padding: 0 6px;
+  height: 24px;
+  line-height: 24px;
+  border-color: currentColor;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  text-align: center;
+  flex: 0 0 auto;
+  box-sizing: content-box;
+`;
+
 const renderOption = ({ data: currency }: Option) => (
   <Box grow horizontal alignItems="center" flow={2}>
     <CryptoCurrencyIcon circle currency={currency} size={26} />
     <Box grow ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
       {`${currency.name} (${currency.ticker})`}
     </Box>
+    {currency.parentCurrency ? <CurrencyLabel>{currency.parentCurrency.name}</CurrencyLabel> : null}
   </Box>
 );
 
