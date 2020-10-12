@@ -101,6 +101,9 @@ const iconsComponent = {
   OPT_IN: IconPlus,
   OPT_OUT: IconTrash,
   CLOSE_ACCOUNT: IconTrash,
+  REDEEM: "",
+  SUPPLY: "",
+  APPROVE: "",
 };
 
 class ConfirmationCheck extends PureComponent<{

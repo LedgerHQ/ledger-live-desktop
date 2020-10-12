@@ -58,10 +58,10 @@ type Props = {
   account: TokenAccount,
   parentAccount: Account,
   countervalue: any,
-  cToken: TokenCurrency,
+  ctoken: TokenCurrency,
 };
 
-const AccountBalanceSummaryFooter = ({ account, parentAccount, countervalue, cToken }: Props) => {
+const AccountBalanceSummaryFooter = ({ account, parentAccount, countervalue, ctoken }: Props) => {
   const discreet = useDiscreetMode();
   const locale = useSelector(localeSelector);
   if (!account.compoundBalance) return null;

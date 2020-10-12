@@ -8,7 +8,8 @@ import type { TFunction } from "react-i18next";
 import { Redirect } from "react-router";
 import type { Currency, AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
-import { isCompoundAvailable } from "@ledgerhq/live-common/lib/compound/logic";
+import { isCompoundTokenSupported } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
+import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import {
@@ -95,7 +96,9 @@ const AccountPage = ({
     return <Redirect to="/accounts" />;
   }
 
-  const isCompoundEnabled = isCompoundAvailable && isCompoundAvailable(account);
+  const ctoken = account.type === "TokenAccount" && findCompoundToken(account.token);
+  const isCompoundEnabled = ctoken && isCompoundTokenSupported(ctoken);
+
   const currency = getAccountCurrency(account);
   const color = getCurrencyColor(currency, bgColor);
 
@@ -127,6 +130,7 @@ const AccountPage = ({
               countervalueFirst={countervalueFirst}
               setCountervalueFirst={setCountervalueFirst}
               isCompoundEnabled={isCompoundEnabled}
+              ctoken={ctoken}
             />
           </Box>
           {AccountBodyHeader ? (

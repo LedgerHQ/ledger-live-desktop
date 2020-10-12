@@ -13,6 +13,7 @@ import type {
   TokenAccount,
   PortfolioRange,
   AccountPortfolio,
+  TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import Chart from "~/renderer/components/Chart2";
@@ -36,6 +37,7 @@ type OwnProps = {
   setCountervalueFirst: boolean => void,
   mainAccount: ?Account,
   isCompoundEnabled?: boolean,
+  ctoken: ?TokenCurrency,
 };
 
 type Props = {
@@ -101,6 +103,7 @@ class AccountBalanceSummary extends PureComponent<Props> {
       discreetMode,
       mainAccount,
       isCompoundEnabled,
+      ctoken,
     } = this.props;
     const displayCountervalue = countervalueFirst && countervalueAvailable;
 
@@ -155,13 +158,13 @@ class AccountBalanceSummary extends PureComponent<Props> {
             discreetMode={discreetMode}
           />
         )}
-        {isCompoundEnabled && account.type === "TokenAccount" && parentAccount && (
+        {isCompoundEnabled && account.type === "TokenAccount" && parentAccount && ctoken && (
           <AccountLendingFooter
             account={account}
             parentAccount={parentAccount}
-            counterValue={counterValue}
+            countervalue={counterValue}
             discreetMode={discreetMode}
-            cToken={isCompoundEnabled}
+            ctoken={ctoken}
           />
         )}
       </Card>
