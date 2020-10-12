@@ -4,13 +4,8 @@ import React, { memo, useMemo, useCallback } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { listSupportedCurrencies, listTokens } from "@ledgerhq/live-common/lib/currencies";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
-import type {
-  CryptoCurrency,
-  TokenCurrency,
-  Account,
-  SubAccount,
-} from "@ledgerhq/live-common/lib/types";
+import { findTokenAccountByCurrency } from "@ledgerhq/live-common/lib/account";
+import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { supportLinkByTokenType } from "~/config/urls";
 import { colors } from "~/renderer/styles/theme";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -62,30 +57,6 @@ const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
   );
 };
 
-function findFirstTokenAccount(
-  token: TokenCurrency,
-  parentCurrency: CryptoCurrency,
-  accounts: Account[],
-): ?{ account?: SubAccount, parentAccount: Account } {
-  for (const parentAccount of accounts) {
-    const parentC = getAccountCurrency(parentAccount);
-    if (parentAccount.subAccounts && parentAccount.subAccounts.length > 0) {
-      for (const account of parentAccount.subAccounts) {
-        const c = getAccountCurrency(account);
-        if (c.id === token.id) {
-          // if token currency matches subAccount return couple account/parentAccount
-          return { account, parentAccount };
-        }
-      }
-    }
-    if (parentC.id === parentCurrency.id) {
-      // if no token currency matches but parent matches return parentAccount
-      return { parentAccount };
-    }
-  }
-  return null; // else return nothing
-}
-
 export const StepChooseCurrencyFooter = ({
   transitionTo,
   currency,
@@ -104,7 +75,7 @@ export const StepChooseCurrencyFooter = ({
   const parentCurrency = isToken && currency.parentCurrency;
 
   // $FlowFixMe
-  const accountData = isToken && findFirstTokenAccount(currency, parentCurrency, existingAccounts);
+  const accountData = isToken && findTokenAccountByCurrency(currency, existingAccounts);
 
   const parentTokenAccount = accountData ? accountData.parentAccount : null;
 
