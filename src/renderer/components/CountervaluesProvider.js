@@ -3,8 +3,8 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import {
   Countervalues,
-  useCountervaluesState,
   useCountervaluesPolling,
+  useStoreUpdater,
 } from "@ledgerhq/live-common/lib/countervalues/react";
 import { inferTrackingPairForAccounts } from "@ledgerhq/live-common/lib/countervalues/logic";
 import { setKey, getKey } from "~/renderer/storage";
@@ -13,38 +13,30 @@ import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 
 export default function CountervaluesProvider({ children }: { children: React$Node }) {
   const trackingPairs = useTrackingPairs();
-  const [initialCountervalues, setInitialCuntervalues] = useState();
+  const [savedState, setSavedState] = useState();
 
   useEffect(() => {
-    async function getInitialCountervalues() {
+    async function getSavedState() {
       const values = await getKey("app", "countervalues");
-      setInitialCuntervalues(values);
+      setSavedState(values);
     }
-    getInitialCountervalues();
+    getSavedState();
   }, []);
 
   return (
-    <Countervalues
-      initialCountervalues={initialCountervalues}
-      userSettings={{ trackingPairs, autofillGaps: true }}
-    >
+    <Countervalues userSettings={{ trackingPairs, autofillGaps: true }} savedState={savedState}>
       <CountervaluesManager>{children}</CountervaluesManager>
     </Countervalues>
   );
 }
 
 function CountervaluesManager({ children }: { children: React$Node }) {
-  useCacheManager();
+  useStoreUpdater(rawState => {
+    setKey("app", "countervalues", rawState);
+  });
   usePollingManager();
 
   return children;
-}
-
-function useCacheManager() {
-  const state = useCountervaluesState();
-  useEffect(() => {
-    setKey("app", "countervalues", state);
-  }, [state]);
 }
 
 function usePollingManager() {
