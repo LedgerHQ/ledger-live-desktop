@@ -117,7 +117,9 @@ const ModalHeader = ({
             {t("common.back")}
           </Text>
         </ModalHeaderAction>
-      ) : null}
+      ) : (
+        <div />
+      )}
       {children || subTitle ? (
         <TitleContainer>
           {subTitle && <ModalSubTitle id="modal-subtitle">{subTitle}</ModalSubTitle>}
@@ -128,7 +130,9 @@ const ModalHeader = ({
         <ModalHeaderAction right onClick={onClose} id="modal-close-button">
           <IconCross size={16} />
         </ModalHeaderAction>
-      ) : null}
+      ) : (
+        <div />
+      )}
     </Container>
   );
 };
