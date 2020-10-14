@@ -25,8 +25,14 @@ export const urls = {
   faq: "https://support.ledger.com/hc/en-us",
   syncErrors: "https://support.ledger.com/hc/en-us/articles/360012207759",
   terms: "https://www.ledger.com/pages/terms-of-use-and-disclaimer",
-  noDeviceBuyNew: "https://www.ledger.com/",
-  noDeviceLearnMore: "https://www.ledger.com/",
+  noDevice: {
+    buyNew:
+      "https://shop.ledger.com/pages/hardware-wallets-comparison?utm_source=ledger_live&utm_medium=self_referral&utm_content=onboarding",
+    learnMore:
+      "https://www.ledger.com?utm_source=ledger_live&utm_medium=self_referral&utm_content=onboarding",
+    learnMoreCrypto:
+      "https://www.ledger.com/academy?utm_source=ledger_live&utm_medium=self_referral&utm_content=onboarding",
+  },
   managerHelpRequest: "https://support.ledger.com/hc/en-us/articles/360006523674 ",
   contactSupport: "https://support.ledger.com/hc/en-us/requests/new?ticket_form_id=248165",
   feesMoreInfo: "https://support.ledger.com/hc/en-us/articles/360006535873",

@@ -25,9 +25,15 @@ const StepConnectDevice = ({ currency, device, transitionTo }: StepProps) => {
     }
   }, [currency]);
 
+  const currencyName = currency
+    ? currency.type === "TokenCurrency"
+      ? currency.parentCurrency.name
+      : currency.name
+    : undefined;
+
   return (
     <>
-      <TrackPage category="AddAccounts" name="Step2" />
+      <TrackPage category="AddAccounts" name="Step2" currencyName={currencyName} />
       <DeviceAction
         action={action}
         request={{

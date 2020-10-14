@@ -51,15 +51,13 @@ const Fields = ({
 }: Props) => {
   invariant(transaction.family === "bitcoin", "FeeField: bitcoin family expected");
 
-  const { errors } = status;
-  const hasErrors = Object.keys(errors).length;
   const bridge = getAccountBridge(account);
 
   const [coinControlOpened, setCoinControlOpened] = useState(false);
   const onCoinControlOpen = useCallback(() => setCoinControlOpened(true), []);
   const onCoinControlClose = useCallback(() => setCoinControlOpened(false), []);
   const { item } = useBitcoinPickingStrategy(transaction.utxoStrategy.strategy);
-  const canNext = !bridgePending && !hasErrors;
+  const canNext = account.bitcoinResources?.utxos?.length;
 
   /* TODO: How do we set default RBF to be true ? (@gre)
    * Meanwhile, using this trick (please don't kill me)

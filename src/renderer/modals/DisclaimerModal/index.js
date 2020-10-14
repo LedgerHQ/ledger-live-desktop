@@ -8,6 +8,7 @@ import styled from "styled-components";
 import type { FinalFirmware, OsuFirmware } from "@ledgerhq/live-common/lib/types/manager";
 import { urls } from "~/config/urls";
 import TrackPage from "~/renderer/analytics/TrackPage";
+import Track from "~/renderer/analytics/Track";
 import { openURL } from "~/renderer/linking";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
 import Text from "~/renderer/components/Text";
@@ -57,6 +58,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
 
   render(): React$Node {
     const { status, firmware, modelId, t, goToNextStep } = this.props;
+    const { seedReady } = this.state;
 
     const supportURL = urls.updateDeviceFirmware[modelId] || "";
     const dontHaveSeedURL = urls.lostPinOrSeed[modelId] || "";
@@ -72,6 +74,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
           render={() => (
             <Box alignItems="center">
               <TrackPage category="Manager" name="DisclaimerModal" />
+              <Track onUpdate event="FirmwareUpdateSeedDisclaimerChecked" checked={seedReady} />
               <Text ff="Inter|Regular" fontSize={4} color="palette.text.shade80" textAlign="center">
                 <Trans
                   i18nKey="manager.firmware.disclaimerTitle"
