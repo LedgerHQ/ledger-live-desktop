@@ -90,8 +90,9 @@ export const experimentalFeatures: Feature[] = [
     name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
     valueOn: "ethereum",
     valueOff: "",
-    title: "Experimental Ethereum rework",
-    description: "Switch to the JavaScript re-implementation of Ethereum",
+    title: "Experimental Ethereum implementation",
+    description:
+      "Switch to a new JavaScript implementation of Ethereum. This should improve performance and fix a few bugs, as well as display token operations as fee operations instead of send transactions.",
   },
 ];
 
