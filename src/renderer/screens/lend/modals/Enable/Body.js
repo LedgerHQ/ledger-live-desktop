@@ -118,6 +118,7 @@ const Body = ({
       useAllAmount: true,
       gasPrice: null,
       userGasLimit: null,
+      subAccountId: account.id,
     });
 
     return { account, parentAccount, transaction };

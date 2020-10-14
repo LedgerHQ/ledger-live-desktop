@@ -33,8 +33,6 @@ const History = ({ navigateToCompoundDashboard, accounts }: Props) => {
   const { t } = useTranslation();
   const history = useCompoundHistory(accounts);
 
-  console.log({ history });
-
   return (
     <Box>
       {history.length ? (
