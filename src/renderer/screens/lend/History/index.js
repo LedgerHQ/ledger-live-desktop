@@ -17,7 +17,6 @@ const useCompoundHistory = (accounts: AccountLikeArray): AccountLikeArray => {
     () =>
       accounts.map(acc => {
         const operations = acc.operations.filter(filterOps);
-        console.log(operations);
         return {
           ...acc,
           operations,
