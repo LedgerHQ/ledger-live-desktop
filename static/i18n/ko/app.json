@@ -517,7 +517,9 @@
     "cta": {
       "addMore": "더 추가하기",
       "add": "계정 추가",
-      "add_plural": "계정 추가"
+      "add_plural": "계정 추가",
+      "addAccountName": "Add {{currencyName}} account",
+      "receive": "Receive"
     },
     "sections": {
       "importable": {
