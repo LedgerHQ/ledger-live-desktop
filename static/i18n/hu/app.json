@@ -517,7 +517,9 @@
     "cta": {
       "addMore": "Több hozzáadása",
       "add": "Számla hozzáadása",
-      "add_plural": "Számlák hozzáadása"
+      "add_plural": "Számlák hozzáadása",
+      "addAccountName": "Add {{currencyName}} account",
+      "receive": "Receive"
     },
     "sections": {
       "importable": {
