@@ -9,6 +9,7 @@ import type { CurrentRate } from "@ledgerhq/live-common/lib/families/ethereum/mo
 import { formatShort } from "@ledgerhq/live-common/lib/currencies";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { flattenSortAccountsSelector } from "~/renderer/actions/general";
+import { isAcceptedLendingTerms } from "~/renderer/terms";
 import Box from "~/renderer/components/Box";
 import Card from "~/renderer/components/Box/Card";
 import Text from "~/renderer/components/Text";
@@ -16,7 +17,6 @@ import Button from "~/renderer/components/Button";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import ToolTip from "~/renderer/components/Tooltip";
-// import CounterValue from "~/renderer/components/CounterValue";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import { openModal } from "~/renderer/actions/modals";
 import Pill from "./Pill";
@@ -108,10 +108,20 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
     const parentAccount = accounts.find(a => a.parentId === a.id);
     if (!account) {
       dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency: token }));
+    } else if (isAcceptedLendingTerms()) {
+      dispatch(
+        openModal("MODAL_LEND_SELECT_ACCOUNT", {
+          account,
+          parentAccount,
+          currency: token,
+          nextStep: "MODAL_LEND_ENABLE_FLOW",
+          cta: t("lend.enable.steps.selectAccount.cta"),
+        }),
+      );
     } else {
       dispatch(openModal("MODAL_LEND_ENABLE_INFO", { account, parentAccount, currency: token }));
     }
-  }, [dispatch, accounts, token]);
+  }, [dispatch, accounts, token, t]);
 
   const grossSupply = useMemo((): string => {
     return formatShort(token.units[0], totalSupply);

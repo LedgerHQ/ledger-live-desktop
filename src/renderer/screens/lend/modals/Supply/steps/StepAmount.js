@@ -16,7 +16,6 @@ import InputCurrency from "~/renderer/components/InputCurrency";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-// import ErrorBanner from "~/renderer/components/ErrorBanner";
 import Select from "~/renderer/components/Select";
 import Label from "~/renderer/components/Label";
 import Spoiler from "~/renderer/components/Spoiler";
@@ -136,7 +135,6 @@ function StepAmount({
   return (
     <Box flow={2}>
       <TrackPage category="Lending Supply Flow" name="Step Amount" />
-      {/* {error && focused ? <ErrorBanner error={error} /> : null} */}
       <Box flow={1}>
         <Label>{t("lend.supply.steps.amount.selectedAccount")}</Label>
         <Select
