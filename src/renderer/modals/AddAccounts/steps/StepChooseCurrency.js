@@ -1,9 +1,10 @@
 // @flow
 
-import React, { memo, useMemo } from "react";
+import React, { memo, useMemo, useCallback } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { listSupportedCurrencies, listTokens } from "@ledgerhq/live-common/lib/currencies";
+import { findTokenAccountByCurrency } from "@ledgerhq/live-common/lib/account";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { supportLinkByTokenType } from "~/config/urls";
 import { colors } from "~/renderer/styles/theme";
@@ -17,6 +18,8 @@ import CurrencyBadge from "~/renderer/components/CurrencyBadge";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import type { StepProps } from "..";
+import { useDispatch } from "react-redux";
+import { openModal } from "~/renderer/actions/modals";
 
 const TokenTipsContainer = styled(Box)`
   background: ${colors.pillActiveBackground};
@@ -54,25 +57,87 @@ const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
   );
 };
 
-export const StepChooseCurrencyFooter = ({ transitionTo, currency }: StepProps) => {
+export const StepChooseCurrencyFooter = ({
+  transitionTo,
+  currency,
+  existingAccounts,
+  onCloseModal,
+  setCurrency,
+}: StepProps) => {
   const { t } = useTranslation();
-  const url =
-    currency && currency.type === "TokenCurrency"
-      ? supportLinkByTokenType[currency.tokenType]
-      : null;
+  const dispatch = useDispatch();
+  const isToken = currency && currency.type === "TokenCurrency";
+
+  // $FlowFixMe
+  const url = isToken ? supportLinkByTokenType[currency.tokenType] : null;
+
+  // $FlowFixMe
+  const parentCurrency = isToken && currency.parentCurrency;
+
+  // $FlowFixMe
+  const accountData = isToken && findTokenAccountByCurrency(currency, existingAccounts);
+
+  const parentTokenAccount = accountData ? accountData.parentAccount : null;
+
+  const tokenAccount = accountData ? accountData.account : null;
+
+  // specific cta in case of token accounts
+  const onTokenCta = useCallback(() => {
+    if (parentTokenAccount) {
+      onCloseModal();
+      dispatch(
+        openModal(
+          "MODAL_RECEIVE",
+          tokenAccount // if already has token receive directly to it
+            ? {
+                account: tokenAccount,
+                parentAccount: parentTokenAccount,
+              }
+            : {
+                account: parentTokenAccount, // else receive to parent account
+              },
+        ),
+      );
+    } else if (parentCurrency) {
+      // set parentCurrency in already opened add account flow and continue
+      setCurrency(parentCurrency);
+      transitionTo("connectDevice");
+    }
+  }, [
+    parentTokenAccount,
+    parentCurrency,
+    onCloseModal,
+    dispatch,
+    setCurrency,
+    tokenAccount,
+    transitionTo,
+  ]);
+
   return (
     <>
       <TrackPage category="AddAccounts" name="Step1" />
       {currency && <CurrencyBadge mr="auto" currency={currency} />}
-      {currency && currency.type === "TokenCurrency" ? (
-        url ? (
-          <ExternalLinkButton
-            primary
-            event="More info on Manage ERC20 tokens"
-            url={url}
-            label={t("common.learnMore")}
-          />
-        ) : null
+      {isToken ? (
+        <Box horizontal>
+          {url ? (
+            <ExternalLinkButton
+              primary
+              event="More info on Manage ERC20 tokens"
+              url={url}
+              label={t("common.learnMore")}
+            />
+          ) : null}
+
+          {parentCurrency ? (
+            <Button ml={2} primary onClick={onTokenCta} id="modal-token-continue-button">
+              {parentTokenAccount
+                ? t("addAccounts.cta.receive")
+                : t("addAccounts.cta.addAccountName", {
+                    currencyName: parentCurrency.name,
+                  })}
+            </Button>
+          ) : null}
+        </Box>
       ) : (
         <Button
           primary

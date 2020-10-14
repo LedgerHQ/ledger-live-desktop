@@ -238,7 +238,7 @@ class StepImport extends PureComponent<StepProps> {
 
     return (
       <>
-        <TrackPage category="AddAccounts" name="Step3" />
+        <TrackPage category="AddAccounts" name="Step3" currencyName={currencyName} />
         <Box mt={-4}>
           {sections.map(({ id, selectable, defaultSelected, data, supportLink }, i) => (
             <SectionAccounts

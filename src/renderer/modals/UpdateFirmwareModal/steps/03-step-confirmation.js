@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { log } from "@ledgerhq/logs";
 import TrackPage from "~/renderer/analytics/TrackPage";
+import Track from "~/renderer/analytics/Track";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
@@ -65,6 +66,7 @@ export const StepConfirmFooter = ({ onCloseModal, error, appsToBeReinstalled }: 
 
   return (
     <>
+      <Track event={"FirmwareUpdatedClose"} onUnmount />
       <Button id="firmware-update-completed-close-button" onClick={() => onCloseModal()}>
         {t("common.close")}
       </Button>
