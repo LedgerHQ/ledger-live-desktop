@@ -34,14 +34,16 @@ const Pill = ({
   children,
   background = "blueTransparentBackground",
   color = "wallet",
+  fontSize = 2,
 }: {
   children: React$Node,
   background?: string,
   color?: string,
+  fontSize?: number,
 }) => {
   return (
     <Wrapper backgroundColor={background}>
-      <Text ff="Inter|Bold" color={color} fontSize={2}>
+      <Text ff="Inter|Bold" color={color} fontSize={fontSize}>
         {children}
       </Text>
     </Wrapper>

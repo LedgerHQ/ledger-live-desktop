@@ -167,7 +167,7 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
         </Ellipsis>
       </Amount>
       <Amount style={{ alignItems: "center" }}>
-        <Pill>{supplyAPY}</Pill>
+        <Pill fontSize={4}>{supplyAPY}</Pill>
       </Amount>
       <Action>
         <CompactButton fontSize={3} primary onClick={openManageModal}>
