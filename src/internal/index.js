@@ -80,7 +80,7 @@ process.on("message", m => {
       const currency = getCryptoCurrencyById(currencyId);
       const data = serialized && JSON.parse(serialized);
       log("hydrateCurrencyData", `hydrate currency ${currency.id}`);
-      getCurrencyBridge(currency).hydrate(data);
+      getCurrencyBridge(currency).hydrate(data, currency);
       break;
     }
 
@@ -93,7 +93,7 @@ process.on("message", m => {
         const currency = getCryptoCurrencyById(currencyId);
         const serialized = hydratedPerCurrency[currencyId];
         const data = serialized && JSON.parse(serialized);
-        getCurrencyBridge(currency).hydrate(data);
+        getCurrencyBridge(currency).hydrate(data, currency);
       });
 
       break;
