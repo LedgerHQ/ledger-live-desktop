@@ -49,7 +49,7 @@ const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
   const currencies = useMemo(() => listSupportedCurrencies().concat(listTokens()), []);
   return (
     <>
-      {currency ? <CurrencyDownStatusAlert currency={currency} /> : null}
+      {currency ? <CurrencyDownStatusAlert currencies={[currency]} /> : null}
       {/* $FlowFixMe: onChange type is not good */}
       <SelectCurrency currencies={currencies} autoFocus onChange={setCurrency} value={currency} />
       {currency && currency.type === "TokenCurrency" ? <TokenTips currency={currency} /> : null}

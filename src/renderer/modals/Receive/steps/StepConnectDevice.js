@@ -28,7 +28,7 @@ export default function StepConnectDevice({
   const tokenCurrency = (account && account.type === "TokenAccount" && account.token) || token;
   return (
     <>
-      {mainAccount ? <CurrencyDownStatusAlert currency={mainAccount.currency} /> : null}
+      {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       <DeviceAction
         action={action}
         request={{ account: mainAccount, tokenCurrency }}
