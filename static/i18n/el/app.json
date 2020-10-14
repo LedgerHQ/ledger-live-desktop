@@ -517,7 +517,9 @@
     "cta": {
       "addMore": "Add more",
       "add": "Add account",
-      "add_plural": "Add accounts"
+      "add_plural": "Add accounts",
+      "addAccountName": "Add {{currencyName}} account",
+      "receive": "Receive"
     },
     "sections": {
       "importable": {
