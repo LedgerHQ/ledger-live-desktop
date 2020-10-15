@@ -27,6 +27,8 @@ import GasPriceField from "~/renderer/families/ethereum/GasPriceField";
 import GasLimitField from "~/renderer/families/ethereum/GasLimitField";
 import ToolTip from "~/renderer/components/Tooltip";
 import InfoCircle from "~/renderer/icons/InfoCircle";
+import AccountFooter from "~/renderer/modals/Send/AccountFooter";
+import SpendableBanner from "~/renderer/components/SpendableBanner";
 
 const InputRight = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
@@ -94,7 +96,12 @@ export default function StepAmount({
       <TrackPage category="Lending Enable Flow" name="Step 1" />
       {error ? <ErrorBanner error={error} /> : null}
       <Box vertical>
-        <Box px={4} mb={4}>
+        <SpendableBanner
+          account={account}
+          parentAccount={parentAccount}
+          transaction={transaction}
+        />
+        <Box px={4} mt={4} mb={4}>
           <Text ff="Inter|Medium" fontSize={4} flex={1}>
             <Trans
               i18nKey="lend.enable.steps.amount.summary"
@@ -103,12 +110,13 @@ export default function StepAmount({
                   currencyName: currency.name,
                 }),
                 accountName: name,
-                amount: amount
-                  ? t("lend.enable.steps.amount.limit", { amount: formattedAmount })
-                  : t("lend.enable.steps.amount.noLimit", { assetName: currency.name }),
+                amount:
+                  amount && amount.gt(0)
+                    ? t("lend.enable.steps.amount.limit", { amount: formattedAmount })
+                    : t("lend.enable.steps.amount.noLimit", { assetName: currency.name }),
               }}
             >
-              <BadgeLabel />
+              <BadgeLabel uppercase={false} />
             </Trans>
           </Text>
         </Box>
@@ -177,10 +185,11 @@ export function StepAmountFooter({
   const canNext = !bridgePending && !hasErrors;
 
   return (
-    <Box horizontal>
+    <>
+      <AccountFooter parentAccount={parentAccount} account={account} status={status} />
       <Button disabled={!canNext} primary onClick={() => transitionTo("connectDevice")}>
         <Trans i18nKey="common.continue" />
       </Button>
-    </Box>
+    </>
   );
 }

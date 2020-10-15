@@ -7,6 +7,7 @@ import Text from "./Text";
 
 type Props = {
   children?: React$Node,
+  uppercase?: boolean,
 };
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
@@ -19,18 +20,18 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   display: inline-block;
 `;
 
-const TextContainer: ThemedComponent<{}> = styled(Text).attrs(() => ({
+const TextContainer: ThemedComponent<{ uppercase: boolean }> = styled(Text).attrs(() => ({
   ff: "Inter|Bold",
   fontSize: 2,
   color: "wallet",
 }))`
-  text-transform: uppercase;
+  text-transform: ${p => (p.uppercase ? "uppercase" : "initial")};
 `;
 
-const BadgeLabel = ({ children }: Props) =>
+const BadgeLabel = ({ children, uppercase = true }: Props) =>
   children ? (
     <Container>
-      <TextContainer>{children}</TextContainer>
+      <TextContainer uppercase={uppercase}>{children}</TextContainer>
     </Container>
   ) : null;
 

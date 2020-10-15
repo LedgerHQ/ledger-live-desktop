@@ -26,6 +26,8 @@ import { renderValue, renderOption, getOptionValue } from "../../SelectAccountSt
 import { subAccountByCurrencyOrderedSelector } from "~/renderer/reducers/accounts";
 
 import type { StepProps } from "../types";
+import AccountFooter from "~/renderer/modals/Send/AccountFooter";
+import SpendableBanner from "~/renderer/components/SpendableBanner";
 
 const InputLeft = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
@@ -135,7 +137,14 @@ function StepAmount({
   return (
     <Box flow={2}>
       <TrackPage category="Lending Supply Flow" name="Step Amount" />
-      <Box flow={1}>
+      {account && (
+        <SpendableBanner
+          account={account}
+          parentAccount={parentAccount}
+          transaction={transaction}
+        />
+      )}
+      <Box mt={4} flow={1}>
         <Label>{t("lend.supply.steps.amount.selectedAccount")}</Label>
         <Select
           value={account}
@@ -247,13 +256,16 @@ export function StepAmountFooter({
   // const canNext = !bridgePending && !hasErrors;
 
   return (
-    <Box horizontal>
-      <Button mr={1} secondary onClick={onClose}>
-        <Trans i18nKey="common.cancel" />
-      </Button>
-      <Button primary onClick={() => transitionTo("connectDevice")}>
-        <Trans i18nKey="common.continue" />
-      </Button>
-    </Box>
+    <>
+      <AccountFooter parentAccount={parentAccount} account={account} status={status} />
+      <Box horizontal>
+        <Button mr={1} secondary onClick={onClose}>
+          <Trans i18nKey="common.cancel" />
+        </Button>
+        <Button primary onClick={() => transitionTo("connectDevice")}>
+          <Trans i18nKey="common.continue" />
+        </Button>
+      </Box>
+    </>
   );
 }
