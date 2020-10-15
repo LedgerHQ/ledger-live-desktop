@@ -386,7 +386,8 @@
         "selectAccount": {
           "title": "Select account",
           "selectLabel": "Account to lend",
-          "cta": "Enable"
+          "cta": "Enable",
+          "alreadyEnabled": "This account is already enabled"
         },
         "amount": {
           "title": "Amount",
