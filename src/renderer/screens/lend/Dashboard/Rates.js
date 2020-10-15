@@ -139,7 +139,7 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
   return (
     <RowContent>
       <Box>
-        <CryptoCurrencyIcon currency={token} size={32} />
+        <CryptoCurrencyIcon circle currency={token} size={32} />
         <RowAccount>
           <ToolTip content={token.name} delay={1200}>
             <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={14}>
