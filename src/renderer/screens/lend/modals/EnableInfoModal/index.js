@@ -35,10 +35,20 @@ type Props = {
   account: AccountLike,
   parentAccount: ?Account,
   currency: CryptoCurrency | TokenCurrency,
+  onlyTerms?: boolean,
+  onClose?: () => void,
   ...
 };
 
-export default function LendTermsModal({ name, account, parentAccount, currency, ...rest }: Props) {
+export default function LendTermsModal({
+  name,
+  account,
+  parentAccount,
+  currency,
+  onlyTerms,
+  onClose,
+  ...rest
+}: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isAcceptedTerms = isAcceptedLendingTerms();
@@ -46,16 +56,17 @@ export default function LendTermsModal({ name, account, parentAccount, currency,
   const [accepted, setAccepted] = useState(isAcceptedTerms);
   const onSwitchAccept = useCallback(() => setAccepted(!accepted), [accepted]);
 
-  const onClose = useCallback(() => {
+  const handleOnClose = useCallback(() => {
     dispatch(closeModal(name));
   }, [name, dispatch]);
 
   const acceptTerms = useCallback(() => {
     acceptLendingTerms();
-  }, []);
+    onlyTerms && handleOnClose();
+  }, [onlyTerms, handleOnClose]);
 
   const onFinish = useCallback(() => {
-    onClose();
+    handleOnClose();
     dispatch(
       openModal("MODAL_LEND_SELECT_ACCOUNT", {
         ...rest,
@@ -64,7 +75,7 @@ export default function LendTermsModal({ name, account, parentAccount, currency,
         cta: t("lend.enable.steps.selectAccount.cta"),
       }),
     );
-  }, [onClose, dispatch, rest, currency, t]);
+  }, [handleOnClose, dispatch, rest, currency, t]);
 
   const onTermsLinkClick = useCallback(() => {
     // @TODO replace this URL with the correct one
@@ -79,6 +90,7 @@ export default function LendTermsModal({ name, account, parentAccount, currency,
       parentAccount={parentAccount}
       category="Lending Flow"
       trackName="Step Terms and Conditions"
+      onClose={onClose}
       steps={[
         ...(isAcceptedTerms
           ? []
