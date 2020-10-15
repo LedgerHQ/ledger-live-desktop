@@ -180,14 +180,7 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
 
                 <ManageButton
                   disabled={!canSupply}
-                  onClick={() =>
-                    onSelectAction(
-                      "MODAL_LEND_SELECT_ACCOUNT",
-                      onClose,
-                      "MODAL_LEND_SUPPLY",
-                      t("common.continue"),
-                    )
-                  }
+                  onClick={() => onSelectAction("MODAL_LEND_SUPPLY", onClose)}
                 >
                   <IconWrapper>
                     <ArrowRight size={16} />
