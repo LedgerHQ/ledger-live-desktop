@@ -34,11 +34,12 @@ const Header = styled(Box)`
   }
 
   > *:nth-child(4) {
+    flex-basis: 15%;
     text-align: center;
   }
 
   > *:last-child {
-    flex-basis: 10%;
+    flex-basis: 20%;
     text-align: right;
   }
 `;
@@ -79,12 +80,12 @@ const Amount = styled(Box)`
 `;
 
 const Status = styled(Box)`
-  flex-basis: 25%;
+  flex-basis: 15%;
   justify-content: center;
 `;
 
 const Action: ThemedComponent<{}> = styled.div`
-  flex-basis: 10%;
+  flex-basis: 20%;
   justify-content: flex-end;
   cursor: pointer;
   color: ${p => p.theme.colors.palette.text.shade50};
