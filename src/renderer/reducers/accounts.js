@@ -95,18 +95,24 @@ export const shallowAccountsSelector: OutputSelector<
 export const subAccountByCurrencyOrderedSelector: OutputSelector<
   State,
   { currency: CryptoCurrency | TokenCurrency },
-  AccountLike[],
+  (AccountLike & { parentAccount?: Account })[],
 > = createSelector(
   accountsSelector,
   (_, { currency }: { currency: CryptoCurrency | TokenCurrency }) => currency,
-  (accounts, currency) =>
-    flattenAccounts(accounts)
+  (accounts, currency) => {
+    const flatAccounts = flattenAccounts(accounts);
+    return flatAccounts
       .filter(
         account =>
           (account.type === "TokenAccount" ? account.token.id : account.currency.id) ===
           currency.id,
       )
-      .sort((a, b) => (a.balance.gt(b.balance) ? -1 : a.balance.eq(b.balance) ? 0 : 1)),
+      .map(a => ({
+        ...a,
+        ...(a.parentId ? { parentAccount: flatAccounts.find(fa => fa.id === a.parentId) } : {}),
+      }))
+      .sort((a, b) => (a.balance.gt(b.balance) ? -1 : a.balance.eq(b.balance) ? 0 : 1));
+  },
 );
 
 // FIXME we might reboot this idea later!

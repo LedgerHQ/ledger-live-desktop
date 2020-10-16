@@ -147,7 +147,7 @@ function StepAmount({
       <Box mt={4} flow={1}>
         <Label>{t("lend.supply.steps.amount.selectedAccount")}</Label>
         <Select
-          value={account}
+          value={{ ...account, parentAccount }}
           options={accounts}
           getOptionValue={getOptionValue}
           renderValue={renderValue}

@@ -71,12 +71,14 @@ export default function StepAmount({
   const bridge = getAccountBridge(account, parentAccount);
 
   const onChangeAmount = useCallback(
-    (amount?: BigNumber) =>
+    (amount?: BigNumber) => {
+      console.log(transaction);
       onChangeTransaction(
         bridge.updateTransaction(transaction, {
           amount,
         }),
-      ),
+      );
+    },
     [bridge, transaction, onChangeTransaction],
   );
 

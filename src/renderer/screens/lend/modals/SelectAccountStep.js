@@ -23,7 +23,7 @@ import { BigNumber } from "bignumber.js";
 import { openModal, closeModal } from "~/renderer/actions/modals";
 import Box from "~/renderer/components/Box";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
-import { subAccountByCurrencyOrderedSelector, getAccountById } from "~/renderer/reducers/accounts";
+import { subAccountByCurrencyOrderedSelector } from "~/renderer/reducers/accounts";
 import Button from "~/renderer/components/Button";
 import Label from "~/renderer/components/Label";
 import Select from "~/renderer/components/Select";
@@ -56,8 +56,8 @@ export function AccountOption({
 }) {
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
-  const name = getAccountName(account);
-  const { capabilities } = account;
+  const { capabilities, parentAccount } = account;
+  const name = getAccountName(parentAccount || account);
   const isEnabled =
     capabilities &&
     ((capabilities.enabledAmount && capabilities.enabledAmount.gt(0)) ||
@@ -109,19 +109,10 @@ type Props = {
   accounts: AccountLike[],
   nextStep: string,
   cta: React$Node,
-  getAccount: (id: string) => ?AccountLike,
   ...
 };
 
-const SelectAccountStepModal = ({
-  name,
-  currency,
-  accounts,
-  nextStep,
-  cta,
-  getAccount,
-  ...rest
-}: Props) => {
+const SelectAccountStepModal = ({ name, currency, accounts, nextStep, cta, ...rest }: Props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -146,10 +137,7 @@ const SelectAccountStepModal = ({
       capabilities &&
       ((capabilities.enabledAmount && capabilities.enabledAmount.gt(0)) ||
         capabilities.enabledAmountIsUnlimited);
-    const parentAccount =
-      account.parentId && typeof account.parentId === "string"
-        ? getAccount(account.parentId)
-        : null;
+    const parentAccount = account.parentAccount;
     onClose();
     dispatch(
       openModal(isEnabled ? "MODAL_LEND_SUPPLY" : nextStep, {
@@ -160,7 +148,7 @@ const SelectAccountStepModal = ({
         parentAccount,
       }),
     );
-  }, [onClose, account, getAccount, dispatch, nextStep, rest, currency]);
+  }, [onClose, account, dispatch, nextStep, rest, currency]);
 
   const onChangeAccount = useCallback(
     a => {
@@ -217,7 +205,6 @@ const SelectAccountStepModal = ({
 
 const mapStateToProps = createStructuredSelector({
   accounts: subAccountByCurrencyOrderedSelector,
-  getAccount: getAccountById,
 });
 
 const m: React$ComponentType<Props> = connect(mapStateToProps)(SelectAccountStepModal);
