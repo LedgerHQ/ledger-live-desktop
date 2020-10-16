@@ -68,14 +68,17 @@ export default function LendTermsModal({
   const onFinish = useCallback(() => {
     handleOnClose();
     dispatch(
-      openModal("MODAL_LEND_SELECT_ACCOUNT", {
+      openModal(account ? "MODAL_LEND_ENABLE_FLOW" : "MODAL_LEND_SELECT_ACCOUNT", {
         ...rest,
+        account,
+        parentAccount,
+        accountId: parentAccount ? parentAccount.id : null,
         currency,
         nextStep: "MODAL_LEND_ENABLE_FLOW",
         cta: t("lend.enable.steps.selectAccount.cta"),
       }),
     );
-  }, [handleOnClose, dispatch, rest, currency, t]);
+  }, [handleOnClose, dispatch, rest, currency, t, account, parentAccount]);
 
   const onTermsLinkClick = useCallback(() => {
     // @TODO replace this URL with the correct one
@@ -140,7 +143,13 @@ export default function LendTermsModal({
               <TitleSpacer />
             </Trans>
           ),
-          subtitle: <Trans i18nKey="lend.info.steps.1.subtitle" />,
+          subtitle: (
+            <>
+              <Trans i18nKey="lend.info.steps.1.subtitle" />
+              <br />
+              <Trans i18nKey="lend.info.steps.1.subtitle2" />
+            </>
+          ),
           description: <Trans i18nKey="lend.info.steps.1.description" />,
           previousDisabled: true,
         },

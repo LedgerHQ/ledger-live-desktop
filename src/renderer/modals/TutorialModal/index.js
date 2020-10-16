@@ -10,6 +10,7 @@ import Box from "~/renderer/components/Box";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
 import useTheme from "~/renderer/hooks/useTheme";
 import BadgeLabel from "~/renderer/components/BadgeLabel";
+import Color from "color";
 
 type Props = {
   name?: string,
@@ -37,8 +38,8 @@ export default function TutorialModal({
   steps,
   ...rest
 }: Props) {
-  const bg = useTheme("colors.lightFog");
-  const bgColor = illuBgColor || bg;
+  const bg = useTheme("colors.palette.background.default");
+  const bgColor = Color(illuBgColor || bg).darken(0.06);
 
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -70,14 +71,16 @@ export default function TutorialModal({
             <Box flow={4}>
               <TrackPage category={category} name={trackName} />
               <IllustrationSection>
-                <IllustrationContainer>{step.illustration}</IllustrationContainer>
+                <IllustrationContainer bgColor={bgColor}>{step.illustration}</IllustrationContainer>
               </IllustrationSection>
-              <Box alignItems="center" px={6} mt={6} minHeight={150}>
+              <Box alignItems="center" px={6} mt={6} mb={-4} minHeight={150}>
                 <BadgeLabel>{step.title}</BadgeLabel>
+                <Box my={2}>
+                  <Text ff="Inter|SemiBold" fontSize={4} textAlign="center">
+                    {step.subtitle}
+                  </Text>
+                </Box>
 
-                <Text ff="Inter|SemiBold" fontSize={4} textAlign="center">
-                  {step.subtitle}
-                </Text>
                 <Text ff="Inter|Regular" fontSize={3} textAlign="center">
                   {step.description}
                 </Text>
@@ -117,7 +120,7 @@ const IllustrationContainer = styled.div`
   height: calc(100% + ${p => p.theme.space[6]}px);
   top: -${p => p.theme.space[4]}px;
   left: -${p => p.theme.space[4]}px;
-  background-color: ${p => p.theme.colors.lightFog};
+  background-color: ${p => p.bgColor};
   display: flex;
   align-items: flex-end;
   justify-content: center;

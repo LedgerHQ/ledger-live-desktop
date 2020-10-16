@@ -457,7 +457,8 @@
       "steps": {
         "title": "Step <0>{{step}} / {{total}}</0>",
         "1": {
-          "subtitle": "Enabling an account allows the protocol to process future loans",
+          "subtitle": "Enabling an account allows the protocol to",
+          "subtitle2": "process future loans",
           "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Enabling an account gives permission to the protocol to process future loans."
         },
         "2": {

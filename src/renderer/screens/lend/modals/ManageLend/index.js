@@ -130,16 +130,25 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
 
   const capabilities = getAccountCapabilities(account);
   if (!capabilities) return null;
-  const { canSupply, canSupplyMax, canWithdraw, enabledAmount } = capabilities;
+  const {
+    canSupply,
+    canSupplyMax,
+    canWithdraw,
+    enabledAmount,
+    enabledAmountIsUnlimited,
+  } = capabilities;
 
-  const formattedEnabledAmount =
-    enabledAmount &&
-    formatCurrencyUnit(unit, enabledAmount, {
-      locale,
-      showAllDigits: false,
-      disableRounding: true,
-      showCode: true,
-    });
+  console.log(capabilities);
+
+  const formattedEnabledAmount = enabledAmountIsUnlimited
+    ? t("lend.enable.steps.amount.noLimit", { assetName: currency.name })
+    : enabledAmount &&
+      formatCurrencyUnit(unit, enabledAmount, {
+        locale,
+        showAllDigits: false,
+        disableRounding: true,
+        showCode: true,
+      });
 
   return (
     <Modal

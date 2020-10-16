@@ -11,7 +11,6 @@ type Props = {
 };
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
-  py: 1,
   px: 2,
   my: 1,
   borderRadius: 4,
