@@ -11,7 +11,6 @@ import { accountsSelector, starredAccountsSelector } from "~/renderer/reducers/a
 import { sidebarCollapsedSelector, lastSeenDeviceSelector } from "~/renderer/reducers/settings";
 import { isNavigationLocked } from "~/renderer/reducers/application";
 
-import { openModal } from "~/renderer/actions/modals";
 import { setFirstTimeLend, setSidebarCollapsed } from "~/renderer/actions/settings";
 
 import useExperimental from "~/renderer/hooks/useExperimental";
@@ -21,8 +20,6 @@ import { darken, rgba } from "~/renderer/styles/helpers";
 import IconManager from "~/renderer/icons/Manager";
 import IconWallet from "~/renderer/icons/Wallet";
 import IconPortfolio from "~/renderer/icons/Portfolio";
-import IconReceive from "~/renderer/icons/Receive";
-import IconSend from "~/renderer/icons/Send";
 import IconExchange from "~/renderer/icons/Exchange";
 import IconChevron from "~/renderer/icons/ChevronRight";
 import IconRedelegate from "~/renderer/icons/Redelegate";
@@ -225,20 +222,6 @@ const MainSideBar = () => {
     push("/swap");
   }, [push]);
 
-  const maybeRedirectToAccounts = useCallback(() => {
-    return location.pathname === "/manager" && push("/accounts");
-  }, [location.pathname, push]);
-
-  const handleOpenSendModal = useCallback(() => {
-    maybeRedirectToAccounts();
-    dispatch(openModal("MODAL_SEND"));
-  }, [dispatch, maybeRedirectToAccounts]);
-
-  const handleOpenReceiveModal = useCallback(() => {
-    maybeRedirectToAccounts();
-    dispatch(openModal("MODAL_RECEIVE"));
-  }, [dispatch, maybeRedirectToAccounts]);
-
   return (
     <Transition
       in={!collapsed}
@@ -276,24 +259,6 @@ const MainSideBar = () => {
                 isActive={location.pathname === "/accounts"}
                 onClick={handleClickAccounts}
                 disabled={noAccounts}
-                collapsed={secondAnim}
-              />
-              <SideBarListItem
-                id={"send"}
-                label={t("send.title")}
-                icon={IconSend}
-                iconActiveColor="wallet"
-                onClick={handleOpenSendModal}
-                disabled={noAccounts || navigationLocked}
-                collapsed={secondAnim}
-              />
-              <SideBarListItem
-                id={"receive"}
-                label={t("receive.title")}
-                icon={IconReceive}
-                iconActiveColor="wallet"
-                onClick={handleOpenReceiveModal}
-                disabled={noAccounts || navigationLocked}
                 collapsed={secondAnim}
               />
               <SideBarListItem
