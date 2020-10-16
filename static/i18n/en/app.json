@@ -307,6 +307,11 @@
     "assets": "Assets",
     "active": "Active accounts",
     "lendAsset": "Lend asset",
+    "highFeesModal": {
+      "title": "High fees on Ethereum",
+      "description": "Due to congestion on the Ethereum network, you may experience high fees when issuing transactions.",
+      "cta": "Got it"
+    },
     "account": {
       "amountSupplied": "Amount supplied",
       "amountSuppliedTooltip": "--! NEED TEXT HERE !--",

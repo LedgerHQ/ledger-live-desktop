@@ -14,6 +14,7 @@ import {
   getMainAccount,
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account";
+import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
 import type { TFunction } from "react-i18next";
 import { rgba } from "~/renderer/styles/helpers";
 import { openModal } from "~/renderer/actions/modals";
@@ -66,9 +67,16 @@ type OwnProps = {
 type Props = OwnProps & {
   t: TFunction,
   openModal: Function,
+  isCompoundEnabled?: boolean,
 };
 
-const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) => {
+const AccountHeaderActions = ({
+  account,
+  parentAccount,
+  openModal,
+  t,
+  isCompoundEnabled,
+}: Props) => {
   const mainAccount = getMainAccount(account, parentAccount);
   const PerFamily = perFamily[mainAccount.currency.family];
   const decorators = perFamilyAccountActions[mainAccount.currency.family];
@@ -77,7 +85,8 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const currency = getAccountCurrency(account);
   const availableOnExchange = isCurrencySupported(currency);
   // @TODO adjust condition of availability for lending
-  const availableOnCompound = false;
+  const summary = makeCompoundSummaryForAccount(account, parentAccount);
+  const availableOnCompound = !!summary;
 
   const availableOnSwap = useSelector(swapSupportedCurrenciesSelector);
   const history = useHistory();

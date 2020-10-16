@@ -48,6 +48,8 @@ import MODAL_LEND_SELECT_ACCOUNT from "../screens/lend/modals/SelectAccountStep"
 import MODAL_LEND_ENABLE_FLOW from "../screens/lend/modals/Enable";
 import MODAL_LEND_WITHDRAW_FLOW from "../screens/lend/modals/Withdraw";
 
+import MODAL_LEND_HIGH_FEES from "../screens/lend/modals/HighFeesModal";
+
 const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_EXPORT_OPERATIONS,
   MODAL_CONFIRM,
@@ -91,6 +93,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_LEND_SELECT_ACCOUNT,
   MODAL_LEND_SUPPLY,
   MODAL_LEND_WITHDRAW_FLOW,
+  MODAL_LEND_HIGH_FEES,
   MODAL_SWAP,
   MODAL_SWAP_OPERATION_DETAILS,
 };

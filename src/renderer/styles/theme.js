@@ -68,6 +68,7 @@ const colors = {
   blueTransparentBackground: "rgba(100, 144, 241, 0.15)",
   pillActiveBackground: "rgba(100, 144, 241, 0.1)",
   lightRed: "rgba(234, 46, 73, 0.1)",
+  lightWarning: "rgba(245, 127, 23, 0.1)",
   white: "#ffffff",
   experimentalBlue: "#165edb",
   marketUp_eastern: "#ea2e49",

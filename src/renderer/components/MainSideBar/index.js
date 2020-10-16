@@ -22,7 +22,7 @@ import IconWallet from "~/renderer/icons/Wallet";
 import IconPortfolio from "~/renderer/icons/Portfolio";
 import IconExchange from "~/renderer/icons/Exchange";
 import IconChevron from "~/renderer/icons/ChevronRight";
-import IconRedelegate from "~/renderer/icons/Redelegate";
+import IconLending from "~/renderer/icons/Lending";
 import IconExperimental from "~/renderer/icons/Experimental";
 import IconSwap from "~/renderer/icons/Swap";
 
@@ -35,6 +35,7 @@ import Stars from "~/renderer/components/Stars";
 
 import TopGradient from "./TopGradient";
 import Hide from "./Hide";
+import BadgeLabel from "../BadgeLabel";
 
 const MAIN_SIDEBAR_WIDTH = 230;
 
@@ -270,18 +271,6 @@ const MainSideBar = () => {
                 isActive={location.pathname === "/exchange"}
                 collapsed={secondAnim}
               />
-              {process.env.COMPOUND === "1" ? (
-                <SideBarListItem
-                  id={"lend"}
-                  label={t("sidebar.lend")}
-                  icon={IconRedelegate}
-                  iconActiveColor="wallet"
-                  onClick={handleClickLend}
-                  isActive={location.pathname === "/lend"}
-                  collapsed={secondAnim}
-                  NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
-                />
-              ) : null}
               <SideBarListItem
                 id={"swap"}
                 label={t("sidebar.swap")}
@@ -292,6 +281,18 @@ const MainSideBar = () => {
                 isActive={location.pathname === "/swap"}
                 collapsed={secondAnim}
               />
+              {process.env.COMPOUND === "1" ? (
+                <SideBarListItem
+                  id={"lend"}
+                  label={t("sidebar.lend")}
+                  icon={IconLending}
+                  iconActiveColor="wallet"
+                  onClick={handleClickLend}
+                  isActive={location.pathname === "/lend"}
+                  collapsed={secondAnim}
+                  NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
+                />
+              ) : null}
               <SideBarListItem
                 id={"manager"}
                 label={t("sidebar.manager")}

@@ -64,7 +64,7 @@ export default function StepAmount({
     formatCurrencyUnit(unit, amount, {
       locale,
       showAllDigits: false,
-      disableRounding: true,
+      disableRounding: false,
       showCode: true,
     });
 

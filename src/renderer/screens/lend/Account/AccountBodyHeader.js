@@ -59,7 +59,11 @@ const Loans = ({ account, parentAccount }: Props) => {
   const lendingDisabled = false;
 
   const onLending = useCallback(() => {
-    dispatch(openModal("MODAL_LEND_ENABLE_INFO", { account, parentAccount, currency }));
+    dispatch(
+      openModal("MODAL_LEND_HIGH_FEES", {
+        nextModal: ["MODAL_LEND_ENABLE_INFO", { account, parentAccount, currency }],
+      }),
+    );
   }, [dispatch, account, parentAccount, currency]);
 
   const formattedClosedLoans = useMemo(
