@@ -85,7 +85,8 @@ const AccountHeaderActions = ({
   const currency = getAccountCurrency(account);
   const availableOnExchange = isCurrencySupported(currency);
   // @TODO adjust condition of availability for lending
-  const summary = makeCompoundSummaryForAccount(account, parentAccount);
+  const summary =
+    account.type === "TopenAccount" && makeCompoundSummaryForAccount(account, parentAccount);
   const availableOnCompound = !!summary;
 
   const availableOnSwap = useSelector(swapSupportedCurrenciesSelector);
