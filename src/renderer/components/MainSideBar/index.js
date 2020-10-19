@@ -11,6 +11,7 @@ import { accountsSelector, starredAccountsSelector } from "~/renderer/reducers/a
 import { sidebarCollapsedSelector, lastSeenDeviceSelector } from "~/renderer/reducers/settings";
 import { isNavigationLocked } from "~/renderer/reducers/application";
 
+import { openModal } from "~/renderer/actions/modals";
 import { setFirstTimeLend, setSidebarCollapsed } from "~/renderer/actions/settings";
 
 import useExperimental from "~/renderer/hooks/useExperimental";
@@ -20,6 +21,8 @@ import { darken, rgba } from "~/renderer/styles/helpers";
 import IconManager from "~/renderer/icons/Manager";
 import IconWallet from "~/renderer/icons/Wallet";
 import IconPortfolio from "~/renderer/icons/Portfolio";
+import IconReceive from "~/renderer/icons/Receive";
+import IconSend from "~/renderer/icons/Send";
 import IconExchange from "~/renderer/icons/Exchange";
 import IconChevron from "~/renderer/icons/ChevronRight";
 import IconLending from "~/renderer/icons/Lending";
@@ -35,7 +38,6 @@ import Stars from "~/renderer/components/Stars";
 
 import TopGradient from "./TopGradient";
 import Hide from "./Hide";
-import BadgeLabel from "../BadgeLabel";
 
 const MAIN_SIDEBAR_WIDTH = 230;
 
@@ -223,6 +225,20 @@ const MainSideBar = () => {
     push("/swap");
   }, [push]);
 
+  const maybeRedirectToAccounts = useCallback(() => {
+    return location.pathname === "/manager" && push("/accounts");
+  }, [location.pathname, push]);
+
+  const handleOpenSendModal = useCallback(() => {
+    maybeRedirectToAccounts();
+    dispatch(openModal("MODAL_SEND"));
+  }, [dispatch, maybeRedirectToAccounts]);
+
+  const handleOpenReceiveModal = useCallback(() => {
+    maybeRedirectToAccounts();
+    dispatch(openModal("MODAL_RECEIVE"));
+  }, [dispatch, maybeRedirectToAccounts]);
+
   return (
     <Transition
       in={!collapsed}
@@ -263,6 +279,24 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"send"}
+                label={t("send.title")}
+                icon={IconSend}
+                iconActiveColor="wallet"
+                onClick={handleOpenSendModal}
+                disabled={noAccounts || navigationLocked}
+                collapsed={secondAnim}
+              />
+              <SideBarListItem
+                id={"receive"}
+                label={t("receive.title")}
+                icon={IconReceive}
+                iconActiveColor="wallet"
+                onClick={handleOpenReceiveModal}
+                disabled={noAccounts || navigationLocked}
+                collapsed={secondAnim}
+              />
+              <SideBarListItem
                 id={"exchange"}
                 label={t("sidebar.exchange")}
                 icon={IconExchange}
@@ -293,6 +327,7 @@ const MainSideBar = () => {
                   NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
                 />
               ) : null}
+
               <SideBarListItem
                 id={"manager"}
                 label={t("sidebar.manager")}
