@@ -28,6 +28,7 @@ import { AmountRequired } from "@ledgerhq/errors";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 import { useSelector } from "react-redux";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
+import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 
 const InputRight = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
@@ -134,6 +135,7 @@ const From = ({
       <Text mb={15} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={5}>
         <Trans i18nKey={`swap.form.from.title`} />
       </Text>
+      {currency ? <CurrencyDownStatusAlert currencies={[currency]} /> : null}
       <Box>
         <Label mb={4}>
           <Trans i18nKey={`swap.form.from.currency`} />

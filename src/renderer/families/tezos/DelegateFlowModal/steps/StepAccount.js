@@ -32,7 +32,7 @@ const StepAccount = ({
   return (
     <Box flow={4}>
       <TrackPage category="Delegation Flow" name="Step Account" />
-      {mainAccount ? <CurrencyDownStatusAlert currency={mainAccount.currency} /> : null}
+      {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       <Box flow={1}>
         <Label>{t("delegation.flow.steps.account.toDelegate")}</Label>
