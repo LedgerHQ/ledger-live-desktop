@@ -56,7 +56,7 @@ export function useUserSettings() {
   const countervalue = useSelector(counterValueCurrencySelector);
   return useMemo(
     () => ({
-      trackingPaires: inferTrackingPairForAccounts(accounts, countervalue),
+      trackingPairs: inferTrackingPairForAccounts(accounts, countervalue),
       autofillGaps: true,
     }),
     [accounts, countervalue],
