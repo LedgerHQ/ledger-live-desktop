@@ -1,19 +1,17 @@
 // @flow
-
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { usePortfolio } from "~/renderer/actions/portfolio";
 import { BigNumber } from "bignumber.js";
 import moment from "moment";
 import { formatShort } from "@ledgerhq/live-common/lib/currencies";
-import type { Currency, PortfolioRange } from "@ledgerhq/live-common/lib/types";
-
+import type { Currency, PortfolioRange, BalanceHistoryData } from "@ledgerhq/live-common/lib/types";
 import Chart from "~/renderer/components/Chart2";
 import Box, { Card } from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import PlaceholderChart from "~/renderer/components/PlaceholderChart";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
 import BalanceInfos from "~/renderer/components/BalanceInfos";
+import { usePortfolio } from "~/renderer/actions/portfolio";
 
 type Props = {
   counterValue: Currency,
@@ -23,22 +21,6 @@ type Props = {
   selectedTimeRange: string,
   handleChangeSelectedTime: any => void,
 };
-
-const Tooltip = ({ counterValue, d }: *) => (
-  <>
-    <FormattedVal
-      alwaysShowSign={false}
-      fontSize={5}
-      color="palette.text.shade100"
-      showCode
-      unit={counterValue.units[0]}
-      val={d.value}
-    />
-    <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
-      {moment(d.date).format("LL")}
-    </Box>
-  </>
-);
 
 export default function PortfolioBalanceSummary({
   range,
@@ -56,9 +38,10 @@ export default function PortfolioBalanceSummary({
     [counterValue],
   );
 
-  const renderTooltip = useCallback((d: any) => <Tooltip d={d} counterValue={counterValue} />, [
-    counterValue,
-  ]);
+  const renderTooltip = useCallback(
+    (data: BalanceHistoryData) => <Tooltip data={data} counterValue={counterValue} range={range} />,
+    [counterValue],
+  );
 
   return (
     <Card p={0} py={5}>
@@ -96,5 +79,36 @@ export default function PortfolioBalanceSummary({
         )}
       </Box>
     </Card>
+  );
+}
+
+function Tooltip({
+  data,
+  counterValue,
+  range,
+}: {
+  data: BalanceHistoryData,
+  counterValue: Currency,
+  range: PortfolioRange,
+}) {
+  return (
+    <>
+      <FormattedVal
+        alwaysShowSign={false}
+        fontSize={5}
+        color="palette.text.shade100"
+        showCode
+        unit={counterValue.units[0]}
+        val={data.value}
+      />
+      <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
+        {moment(data.date).format("LL")}
+      </Box>
+      {range === "week" ? (
+        <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
+          {moment(data.date).format("LT")}
+        </Box>
+      ) : null}
+    </>
   );
 }
