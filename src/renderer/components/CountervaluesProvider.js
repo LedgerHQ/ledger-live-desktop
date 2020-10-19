@@ -12,7 +12,7 @@ import { accountsSelector } from "~/renderer/reducers/accounts";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 
 export default function CountervaluesProvider({ children }: { children: React$Node }) {
-  const trackingPairs = useTrackingPairs();
+  const userSettings = useUserSettings();
   const [savedState, setSavedState] = useState();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function CountervaluesProvider({ children }: { children: React$No
   }, []);
 
   return (
-    <Countervalues userSettings={{ trackingPairs, autofillGaps: true }} savedState={savedState}>
+    <Countervalues userSettings={userSettings} savedState={savedState}>
       <CountervaluesManager>{children}</CountervaluesManager>
     </Countervalues>
   );
@@ -51,11 +51,14 @@ function usePollingManager() {
   }, [start, stop]);
 }
 
-export function useTrackingPairs() {
+export function useUserSettings() {
   const accounts = useSelector(accountsSelector);
   const countervalue = useSelector(counterValueCurrencySelector);
-  return useMemo(() => inferTrackingPairForAccounts(accounts, countervalue), [
-    accounts,
-    countervalue,
-  ]);
+  return useMemo(
+    () => ({
+      trackingPaires: inferTrackingPairForAccounts(accounts, countervalue),
+      autofillGaps: true,
+    }),
+    [accounts, countervalue],
+  );
 }
