@@ -48,13 +48,13 @@ export default function Price({
   withIcon = true,
 }: Props) {
   const effectiveUnit = unit || from.units[0];
-  const value = BigNumber(10 ** effectiveUnit.magnitude);
+  const valueNum = 10 ** effectiveUnit.magnitude;
   const rawCounterValueCurrency = useSelector(counterValueCurrencySelector);
   const counterValueCurrency = to || rawCounterValueCurrency;
   const rawCounterValue = useCalculate({
     from,
     to: counterValueCurrency,
-    value: value.toNumber(),
+    value: valueNum,
     disableRounding: true,
   });
   const counterValue =
@@ -80,7 +80,7 @@ export default function Price({
       ) : null}
       {!withEquality ? null : (
         <>
-          <CurrencyUnitValue value={value} unit={effectiveUnit} showCode />
+          <CurrencyUnitValue value={BigNumber(valueNum)} unit={effectiveUnit} showCode />
           {" = "}
         </>
       )}
