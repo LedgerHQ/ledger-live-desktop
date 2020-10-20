@@ -91,10 +91,10 @@ const AccountName = styled(Ellipsis)`
   }
 
   :hover {
-    border-color: ${p => p.theme.colors.palette.text.shade30};
+    border-color: ${p => (p.contentEditable ? p.theme.colors.palette.text.shade30 : "transparent")};
 
     + svg {
-      display: inline;
+      display: ${p => (p.contentEditable ? "inline" : "none")};
     }
   }
   :focus {
@@ -218,7 +218,7 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
         <AccountNameBox horizontal alignItems="center" flow={2}>
           <AccountName
             color="palette.text.shade100"
-            contentEditable="true"
+            contentEditable={account.type === "Account"}
             suppressContentEditableWarning={true}
             ff="Inter|SemiBold"
             fontSize={7}
