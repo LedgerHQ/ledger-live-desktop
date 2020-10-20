@@ -12,11 +12,12 @@ export const supportLinkByTokenType = {
 export const urls = {
   liveHome: "https://www.ledger.com/pages/ledger-live",
 
-  // Social
-  twitter: "https://twitter.com/Ledger",
-  github: "https://github.com/LedgerHQ/ledger-live-desktop",
-  reddit: "https://www.reddit.com/r/ledgerwallet/",
-
+  social: {
+    twitter: "https://twitter.com/Ledger",
+    github: "https://github.com/LedgerHQ/ledger-live-desktop",
+    reddit: "https://www.reddit.com/r/ledgerwallet/",
+    facebook: "https://www.facebook.com/Ledger/",
+  },
   // Campaigns
   promoNanoX:
     "https://www.ledger.com/pages/ledger-nano-x#utm_source=Ledger%20Live%20Desktop%20App&utm_medium=Ledger%20Live&utm_campaign=Ledger%20Live%20Desktop%20-%20Banner%20LNX",
@@ -71,6 +72,15 @@ export const urls = {
       "https://shop.ledger.com/products/ledger-backup-pack?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop",
     ledgerAcademy:
       "https://www.ledger.com/academy/?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop",
+  },
+  helpModal: {
+    gettingStarted:
+      "https://www.ledger.com/start?utm_source=ledger_live&utm_medium=self_referral&utm_content=help_desktop",
+    helpCenter:
+      "https://support.ledger.com/hc/en-us?utm_source=ledger_live&utm_medium=self_referral&utm_content=help_desktop",
+    ledgerAcademy:
+      "https://www.ledger.com/academy/?utm_source=ledger_live&utm_medium=self_referral&utm_content=help_desktop",
+    status: "https://status.ledger.com",
   },
   swap: {
     info: "https://www.ledger.com/swap",
