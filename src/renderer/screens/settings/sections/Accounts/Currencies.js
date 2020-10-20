@@ -37,9 +37,7 @@ export default function Currencies() {
         title={t("settings.tabs.currencies")}
         desc={t("settings.currencies.desc")}
         style={{ cursor: "pointer" }}
-      />
-      <Body>
-        <Row desc={t("settings.currencies.select")}>
+        renderRight={
           <SelectCurrency
             small
             minWidth={200}
@@ -48,7 +46,9 @@ export default function Currencies() {
             onChange={handleChangeCurrency}
             currencies={currencies}
           />
-        </Row>
+        }
+      />
+      <Body>
         <CurrencyRows currency={currency} />
       </Body>
     </Section>
