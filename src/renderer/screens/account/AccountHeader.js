@@ -3,7 +3,7 @@
 import React, { useCallback, useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -127,24 +127,20 @@ const IconButton: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).att
   }
 `;
 
-const mapDispatchToProps = {
-  updateAccount,
-};
-
 type Props = {
   account: AccountLike,
   parentAccount: ?Account,
-  updateAccount: Function,
 };
 
 const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHeader({
   account,
   parentAccount,
-  updateAccount,
 }: Props) {
+  const dispatch = useDispatch();
+
   const [editingName, setEditingName] = useState(false);
 
-  const nameEl = useRef(null);
+  const nameEl: React$ElementRef<any> = useRef();
 
   const currency = getAccountCurrency(account);
   const mainAccount = getMainAccount(account, parentAccount);
@@ -159,10 +155,15 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
     if (!nameEl.current.innerText) {
       return;
     }
-    updateAccount({
+
+    // casting issue.
+
+    const updatedAccount: any = {
       ...account,
       name: nameEl.current.innerText,
-    });
+    };
+
+    dispatch(updateAccount((updatedAccount: Account)));
   };
 
   const submitNameChangeOnNewLine = evt => {
@@ -262,4 +263,4 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
   );
 });
 
-export default connect(null, mapDispatchToProps)(AccountHeader);
+export default AccountHeader;
