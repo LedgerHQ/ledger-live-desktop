@@ -102,6 +102,9 @@ const AccountName = styled(Ellipsis)`
     background: #fff;
     width: 250px;
 
+    white-space: nowrap;
+    overflow: hidden;
+
     + svg {
       display: none;
     }
@@ -240,6 +243,7 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
               document.execCommand("insertHTML", false, text);
             }}
             onKeyPress={submitNameChangeOnNewLine}
+            disableEllipsis={editingName}
             innerRef={nameEl}
           />
           <IconPen size={14} />

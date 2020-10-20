@@ -15,13 +15,22 @@ const Ellipsis = ({
   children,
   canSelect,
   innerRef,
+  disableEllipsis,
   ...p
 }: {
   children: any,
   canSelect?: boolean,
   innerRef?: Function,
+  disableEllipsis?: boolean,
 }) => (
-  <Text {...p} ref={innerRef} style={{ ...innerStyle, userSelect: canSelect ? "text" : "none" }}>
+  <Text
+    {...p}
+    ref={innerRef}
+    style={{
+      ...(!disableEllipsis ? innerStyle : {}),
+      userSelect: canSelect ? "text" : "none",
+    }}
+  >
     {children}
   </Text>
 );
