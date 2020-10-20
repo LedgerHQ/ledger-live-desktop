@@ -16,7 +16,7 @@ const useCompoundHistory = (accounts: AccountLikeArray): AccountLikeArray => {
   const history = useMemo(
     () =>
       accounts.map(acc => {
-        const operations = acc.operations.filter(filterOps);
+        const operations = acc.operations.concat(acc.pendingOperations).filter(filterOps);
         return {
           ...acc,
           operations,

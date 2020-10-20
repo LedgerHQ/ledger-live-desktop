@@ -28,7 +28,7 @@ export default function InfoBox({
       <InfoCircle size={16} />
       <Box flex="1" margin={2} ml={16} horizontal={horizontal} alignItems="center">
         <Box flex="1" style={{ wordBreak: "break-all" }}>
-          <Text ff="Inter|Regular" fontSize={3}>
+          <Text ff="Inter|Regular" fontSize={3} style={{ wordBreak: "break-word" }}>
             {description}
           </Text>
         </Box>

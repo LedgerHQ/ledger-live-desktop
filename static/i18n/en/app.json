@@ -373,8 +373,17 @@
       "cta": "Manage lending",
       "title": "Lend asset",
       "enable": {
-        "reenableLabel": "Re enable",
-        "info": "You have enabled <0>{{amount}}</0> on this account"
+        "approve": "Approve",
+        "approveLess": "Approve less",
+        "approveMore": "Approve more",
+        "viewDetails": "View details",
+        "info": "You can supply <0>{{amount}}</0> out of the <1>{{enabled}} {{assetName}}</1> initially enabled.",
+        "infoNoLimit": "You have supplied <0>{{supplied}}</0> out of a no limit approved account.",
+        "notSupplied": "You have approved <0>{{enabled}}</0> on this account.",
+        "notSuppliedNoLimit": "You have approved this account by an unlimited amount.",
+        "enabling": "The approval transaction allowing you to lend is pending",
+        "notEnabled": "Before lending assets to the Compound protocol, you need to approve your account.",
+        "notEnoughApproved": "You don't have enough balance approved to supply assets."
       },
       "supply": {
         "title": "Supply",

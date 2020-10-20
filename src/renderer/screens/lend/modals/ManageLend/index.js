@@ -4,10 +4,14 @@ import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
+import { BigNumber } from "bignumber.js";
 import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic";
 
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
-import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
+import type { Account, TokenAccount, Unit, TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import type {
+  CompoundAccountSummary,
+  CompoundAccountStatus,
+} from "@ledgerhq/live-common/lib/compound/types";
 
 import { localeSelector } from "~/renderer/reducers/settings";
 
@@ -103,7 +107,7 @@ type Props = {
   ...
 } & CompoundAccountSummary;
 
-const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
+const ManageModal = ({ name, account, parentAccount, totalSupplied, status, ...rest }: Props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const currency = getAccountCurrency(account);
@@ -130,25 +134,8 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
 
   const capabilities = getAccountCapabilities(account);
   if (!capabilities) return null;
-  const {
-    canSupply,
-    canSupplyMax,
-    canWithdraw,
-    enabledAmount,
-    enabledAmountIsUnlimited,
-  } = capabilities;
-
-  console.log(capabilities);
-
-  const formattedEnabledAmount = enabledAmountIsUnlimited
-    ? t("lend.enable.steps.amount.noLimit", { assetName: currency.name })
-    : enabledAmount &&
-      formatCurrencyUnit(unit, enabledAmount, {
-        locale,
-        showAllDigits: false,
-        disableRounding: true,
-        showCode: true,
-      });
+  if (currency.type !== "TokenCurrency") return null;
+  const { canSupply, canWithdraw } = capabilities;
 
   return (
     <Modal
@@ -164,31 +151,23 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
           render={() => (
             <>
               <Box>
-                {!canSupplyMax && (
-                  <Box mb={2}>
-                    <InfoBox
-                      onLearnMore={() =>
-                        onSelectAction(
-                          "MODAL_LEND_ENABLE_FLOW",
-                          onClose,
-                          undefined,
-                          t("lend.enable.steps.selectAccount.cta"),
-                        )
-                      }
-                      learnMoreLabel={<Trans i18nKey="lend.manage.enable.reenableLabel" />}
-                    >
-                      <Trans
-                        i18nKey="lend.manage.enable.info"
-                        values={{ amount: formattedEnabledAmount }}
-                      >
-                        <b></b>
-                      </Trans>
-                    </InfoBox>
-                  </Box>
-                )}
+                <Box mb={2}>
+                  <Banner
+                    onClose={onClose}
+                    onSelectAction={onSelectAction}
+                    unit={unit}
+                    currency={currency}
+                    locale={locale}
+                    t={t}
+                    capabilities={capabilities}
+                    totalSupplied={totalSupplied}
+                    account={account}
+                    parentAccount={parentAccount}
+                  />
+                </Box>
 
                 <ManageButton
-                  disabled={!canSupply}
+                  disabled={!canSupply || status === "ENABLING"}
                   onClick={() => onSelectAction("MODAL_LEND_SUPPLY", onClose)}
                 >
                   <IconWrapper>
@@ -204,7 +183,7 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
                   </InfoWrapper>
                 </ManageButton>
                 <ManageButton
-                  disabled={!canWithdraw}
+                  disabled={!canWithdraw || status === "ENABLING"}
                   onClick={() => onSelectAction("MODAL_LEND_WITHDRAW_FLOW", onClose)}
                 >
                   <IconWrapper>
@@ -226,6 +205,124 @@ const ManageModal = ({ name, account, parentAccount, ...rest }: Props) => {
         />
       )}
     />
+  );
+};
+
+const Banner = ({
+  capabilities,
+  locale,
+  onClose,
+  t,
+  onSelectAction,
+  unit,
+  totalSupplied,
+  currency,
+  account,
+  parentAccount,
+}: {
+  capabilities: {
+    canSupply: boolean,
+    canSupplyMax: Boolean,
+    enabledAmount: BigNumber,
+    enabledAmountIsUnlimited: boolean,
+    canSupplyMax: boolean,
+    status: CompoundAccountStatus,
+  },
+  locale: string,
+  unit: Unit,
+  currency: TokenCurrency,
+  onSelectAction: (name: string, onClose: () => void, nextStep?: string, cta?: string) => void,
+  onClose: () => void,
+  t: any,
+  totalSupplied: BigNumber,
+  account: TokenAccount,
+  parentAccount: ?Account,
+}) => {
+  const dispatch = useDispatch();
+  const { enabledAmount, enabledAmountIsUnlimited, status, canSupplyMax } = capabilities;
+
+  const label =
+    enabledAmountIsUnlimited && totalSupplied.eq(0) ? (
+      <Trans i18nKey="lend.manage.enable.approveLess" />
+    ) : !canSupplyMax ? (
+      <Trans i18nKey="lend.manage.enable.approveMore" />
+    ) : status === "ENABLING" ? (
+      <Trans i18nKey="lend.manage.enable.viewDetails" />
+    ) : (
+      <Trans i18nKey="lend.manage.enable.approve" />
+    );
+
+  const text =
+    enabledAmount.gt(0) && enabledAmountIsUnlimited ? (
+      <Trans
+        i18nKey="lend.manage.enable.infoNoLimit"
+        values={{
+          supplied: formatCurrencyUnit(unit, totalSupplied, {
+            locale,
+            showAllDigits: false,
+            disableRounding: false,
+            showCode: true,
+          }),
+        }}
+      >
+        <b></b>
+      </Trans>
+    ) : enabledAmount.gt(0) ? (
+      <Trans
+        i18nKey="lend.manage.enable.info"
+        values={{
+          amount:
+            enabledAmount &&
+            formatCurrencyUnit(unit, enabledAmount, {
+              locale,
+              showAllDigits: false,
+              disableRounding: true,
+              showCode: true,
+            }),
+          assetName: currency.ticker,
+        }}
+      >
+        <b></b>
+      </Trans>
+    ) : enabledAmountIsUnlimited && totalSupplied.eq(0) ? (
+      <Trans i18nKey="lend.manage.enable.notSuppliedNoLimit" />
+    ) : enabledAmount.gt(0) && totalSupplied.eq(0) ? (
+      <Trans i18nKey="lend.manage.enable.notEnabled" />
+    ) : !canSupplyMax ? (
+      <Trans i18nKey="lend.manage.enable.notEnoughApproved" />
+    ) : status === "ENABLING" ? (
+      <Trans i18nKey="lend.manage.enable.enabling" />
+    ) : status === null ? (
+      <Trans i18nKey="lend.manage.enable.notEnabled" />
+    ) : (
+      <div />
+    );
+
+  const action = useCallback(() => {
+    if (status === "ENABLING") {
+      const op = account.pendingOperations.find(o => o.extra?.approving);
+      if (!op) return;
+      return dispatch(
+        openModal("MODAL_OPERATION_DETAILS", {
+          operationId: op.id,
+          accountId: account.id,
+          parentId: parentAccount?.id,
+        }),
+      );
+    }
+
+    return onSelectAction(
+      "MODAL_LEND_ENABLE_FLOW",
+      onClose,
+      undefined,
+      t("lend.enable.steps.selectAccount.cta"),
+    );
+  }, [status, onClose, onSelectAction, t, dispatch, account, parentAccount]);
+
+  return (
+    <InfoBox onLearnMore={action} learnMoreLabel={label}>
+      {text}
+    </InfoBox>
   );
 };
 

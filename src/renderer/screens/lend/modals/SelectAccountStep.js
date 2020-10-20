@@ -12,6 +12,7 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 
 import type {
+  Account,
   AccountLike,
   TokenAccount,
   CryptoCurrency,
@@ -49,6 +50,7 @@ export function AccountOption({
   disabled,
 }: {
   account: TokenAccount & {
+    parentAccount: ?Account,
     capabilities: ?Capabilities,
   },
   isValue?: boolean,
@@ -89,6 +91,7 @@ export const renderValue = ({
   data,
 }: {
   data: TokenAccount & {
+    parentAccount: ?Account,
     capabilities: ?Capabilities,
   },
 }) => (data ? <AccountOption account={data} isValue /> : null);
@@ -97,6 +100,7 @@ export const renderOption = ({
   data,
 }: {
   data: TokenAccount & {
+    parentAccount: ?Account,
     capabilities: ?Capabilities,
   },
 }) => (data ? <AccountOption account={data} /> : null);
@@ -106,7 +110,7 @@ export const getOptionValue = (option?: { id: string }) => option && option.id;
 type Props = {
   name?: string,
   currency: CryptoCurrency | TokenCurrency,
-  accounts: AccountLike[],
+  accounts: Array<AccountLike & { parentAccount: ?Account }>,
   nextStep: string,
   cta: React$Node,
   ...
@@ -120,6 +124,7 @@ const SelectAccountStepModal = ({ name, currency, accounts, nextStep, cta, ...re
     () =>
       accounts.map(a => ({
         ...a,
+        // $FlowFixMe
         capabilities: a.type === "TokenAccount" && getAccountCapabilities(a),
       })),
     [accounts],
@@ -137,6 +142,7 @@ const SelectAccountStepModal = ({ name, currency, accounts, nextStep, cta, ...re
       capabilities &&
       ((capabilities.enabledAmount && capabilities.enabledAmount.gt(0)) ||
         capabilities.enabledAmountIsUnlimited);
+    // $FlowFixMe
     const parentAccount = account.parentAccount;
     onClose();
     dispatch(

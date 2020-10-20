@@ -4,9 +4,10 @@ import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { getAccountName } from "@ledgerhq/live-common/lib/account";
+import { getAccountCurrency, getAccountName } from "@ledgerhq/live-common/lib/account";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic";
+
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Box from "~/renderer/components/Box";
 import Card from "~/renderer/components/Box/Card";
@@ -101,6 +102,7 @@ const Row = ({ summary }: RowProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const name = getAccountName(account);
+  const currency = getAccountCurrency(account);
   const capabilities = getAccountCapabilities(account);
 
   const openManageModal = useCallback(() => {
@@ -115,11 +117,11 @@ const Row = ({ summary }: RowProps) => {
         <CryptoCurrencyIcon currency={token} size={32} />
         <RowAccount>
           <Ellipsis fontSize={10} color="palette.text.shade50">
-            <Text ff="Inter|SemiBold">{parentAccount?.name}</Text>
+            <Text ff="Inter|SemiBold">{parentAccount?.name || name}</Text>
           </Ellipsis>
           <ToolTip content={name} delay={1200}>
             <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={14}>
-              {name}
+              {currency.ticker}
             </Ellipsis>
           </ToolTip>
         </RowAccount>
