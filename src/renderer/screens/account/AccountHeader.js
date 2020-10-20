@@ -156,7 +156,7 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
       return;
     }
 
-    // casting issue.
+    // $FlowFixMe
 
     const updatedAccount: any = {
       ...account,
