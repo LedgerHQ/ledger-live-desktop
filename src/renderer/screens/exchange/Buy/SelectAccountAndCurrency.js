@@ -26,6 +26,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
 import { track } from "~/renderer/analytics/segment";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
+import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 
 const Container: ThemedComponent<{}> = styled.div`
   width: 365px;
@@ -102,6 +103,7 @@ const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccou
         {t("exchange.buy.title")}
       </Text>
       <FormContainer>
+        {currency ? <CurrencyDownStatusAlert currencies={[currency]} /> : null}
         <FormContent>
           <Label>{t("exchange.buy.selectCrypto")}</Label>
           <SelectCurrency onChange={setCurrency} currencies={allCurrencies} value={currency} />

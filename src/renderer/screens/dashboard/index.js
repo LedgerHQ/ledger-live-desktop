@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback, useMemo } from "react";
 import Box from "~/renderer/components/Box";
-import { accountsSelector } from "~/renderer/reducers/accounts";
+import { accountsSelector, currenciesSelector } from "~/renderer/reducers/accounts";
 import BalanceSummary from "./GlobalSummary";
 import { colors } from "~/renderer/styles/theme";
 import {
@@ -25,6 +25,7 @@ import { useHistory } from "react-router-dom";
 import EmptyStateInstalledApps from "~/renderer/screens/dashboard/EmptyStateInstalledApps";
 import EmptyStateAccounts from "~/renderer/screens/dashboard/EmptyStateAccounts";
 import { useRefreshAccountsOrderingEffect } from "~/renderer/actions/general";
+import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 
 // This forces only one visible top banner at a time
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
@@ -39,6 +40,7 @@ export default function DashboardPage() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const accounts = useSelector(accountsSelector);
+  const currencies = useSelector(currenciesSelector);
   const history = useHistory();
   const counterValue = useSelector(counterValueCurrencySelector);
   const selectedTimeRange = useSelector(selectedTimeRangeSelector);
@@ -63,6 +65,7 @@ export default function DashboardPage() {
       <TopBannerContainer>
         <UpdateBanner />
         <MigrationBanner />
+        <CurrencyDownStatusAlert currencies={currencies} />
       </TopBannerContainer>
       {showCarousel ? <Carousel /> : null}
       <TrackPage

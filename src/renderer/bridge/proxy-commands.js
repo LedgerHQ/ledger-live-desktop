@@ -33,8 +33,10 @@ import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 import { toScanAccountEventRaw } from "@ledgerhq/live-common/lib/bridge";
 import * as bridgeImpl from "@ledgerhq/live-common/lib/bridge/impl";
 
-const cmdCurrencyPreload = ({ currencyId }: { currencyId: string }): Observable<mixed> =>
-  from(bridgeImpl.getCurrencyBridge(getCryptoCurrencyById(currencyId)).preload());
+const cmdCurrencyPreload = ({ currencyId }: { currencyId: string }): Observable<mixed> => {
+  const currency = getCryptoCurrencyById(currencyId);
+  return from(bridgeImpl.getCurrencyBridge(currency).preload(currency));
+};
 
 const cmdCurrencyScanAccounts = (o: {
   currencyId: string,
