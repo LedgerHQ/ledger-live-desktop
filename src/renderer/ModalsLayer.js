@@ -34,7 +34,7 @@ const ModalsLayer = ({ visibleModals }: *) => {
   );
   filteredModals.forEach(
     ({ name, MODAL_SHOW_ONCE }) =>
-      MODAL_SHOW_ONCE && global.sessionStorage.setItem(name, +new Date()),
+      MODAL_SHOW_ONCE && global.sessionStorage.setItem(name, Date.now()),
   );
   return (
     <Transition

@@ -1,5 +1,6 @@
 // @flow
 import React from "react";
+import toPairs from "lodash/toPairs";
 import { Trans } from "react-i18next";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 
@@ -13,10 +14,11 @@ type OperationDetailsExtraProps = {
 };
 
 const OperationDetailsExtra = ({ extra, type }: OperationDetailsExtraProps) => {
-  // $FlowFixMe somehting wrong with .map
+  const entries = toPairs(extra);
+  // $FlowFixMe
   return (type === "REDEEM" || type === "SUPPLY"
-    ? Object.entries(extra).filter(([key]) => !["compoundValue", "rate"].includes(key))
-    : Object.entries(extra)
+    ? entries.filter(([key]) => !["compoundValue", "rate"].includes(key))
+    : entries
   ).map(([key, value]) => (
     <Box key={key}>
       <OpDetailsTitle>

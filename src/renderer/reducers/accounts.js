@@ -6,6 +6,7 @@ import { handleActions } from "redux-actions";
 import type {
   Account,
   AccountLike,
+  TokenAccount,
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
@@ -95,7 +96,7 @@ export const shallowAccountsSelector: OutputSelector<
 export const subAccountByCurrencyOrderedSelector: OutputSelector<
   State,
   { currency: CryptoCurrency | TokenCurrency },
-  (AccountLike & { parentAccount?: Account })[],
+  Array<{ parentAccount: ?Account, account: AccountLike }>,
 > = createSelector(
   accountsSelector,
   (_, { currency }: { currency: CryptoCurrency | TokenCurrency }) => currency,
@@ -107,11 +108,20 @@ export const subAccountByCurrencyOrderedSelector: OutputSelector<
           (account.type === "TokenAccount" ? account.token.id : account.currency.id) ===
           currency.id,
       )
-      .map(a => ({
-        ...a,
-        ...(a.parentId ? { parentAccount: flatAccounts.find(fa => fa.id === a.parentId) } : {}),
+      .map(account => ({
+        account,
+        parentAccount:
+          account.type === "TokenAccount" && account.parentId
+            ? accounts.find(fa => fa.type === "Account" && fa.id === account.parentId)
+            : {},
       }))
-      .sort((a, b) => (a.balance.gt(b.balance) ? -1 : a.balance.eq(b.balance) ? 0 : 1));
+      .sort((a, b) =>
+        a.account.balance.gt(b.account.balance)
+          ? -1
+          : a.account.balance.eq(b.account.balance)
+          ? 0
+          : 1,
+      );
   },
 );
 

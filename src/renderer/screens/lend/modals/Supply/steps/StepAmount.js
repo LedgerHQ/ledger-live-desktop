@@ -10,7 +10,7 @@ import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import styled from "styled-components";
 
-import type { AccountLike } from "@ledgerhq/live-common/lib/types";
+import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -90,8 +90,8 @@ function StepAmount({
   error,
   bridgePending,
   t,
-  accounts,
-}: StepProps & { accounts: AccountLike[] }) {
+  collection,
+}: StepProps & { collection: Array<{ account: TokenAccount, parentAccount: ?Account }> }) {
   invariant(account && transaction, "account and transaction required");
   const [focused, setFocused] = useState(false);
   const bridge = getAccountBridge(account, parentAccount);
@@ -147,8 +147,8 @@ function StepAmount({
       <Box mt={4} flow={1}>
         <Label>{t("lend.supply.steps.amount.selectedAccount")}</Label>
         <Select
-          value={{ ...account, parentAccount }}
-          options={accounts}
+          value={{ account, parentAccount }}
+          options={collection}
           getOptionValue={getOptionValue}
           renderValue={renderValue}
           renderOption={renderOption}
@@ -234,7 +234,7 @@ function StepAmount({
 }
 
 const mapStateToProps = createStructuredSelector({
-  accounts: subAccountByCurrencyOrderedSelector,
+  collection: subAccountByCurrencyOrderedSelector,
 });
 
 const m: React$ComponentType<StepProps> = connect(mapStateToProps)(StepAmount);

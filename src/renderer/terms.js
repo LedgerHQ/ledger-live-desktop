@@ -7,7 +7,7 @@ const rawURL = "https://raw.githubusercontent.com/LedgerHQ/ledger-live-desktop/m
 export const url = "https://github.com/LedgerHQ/ledger-live-desktop/blob/master/TERMS.md";
 
 const currentTermsRequired = "2019-12-04";
-const currentLendingTermsRequired = "2019-12-04";
+const currentLendingTermsRequired = "2020-11-10";
 
 export function isAcceptedTerms() {
   return global.localStorage.getItem("acceptedTermsVersion") === currentTermsRequired;

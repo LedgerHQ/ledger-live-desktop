@@ -72,7 +72,6 @@ export default function StepAmount({
 
   const onChangeAmount = useCallback(
     (amount?: BigNumber) => {
-      console.log(transaction);
       onChangeTransaction(
         bridge.updateTransaction(transaction, {
           amount,

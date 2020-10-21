@@ -109,8 +109,6 @@ const Row = ({ summary }: RowProps) => {
     dispatch(openModal("MODAL_LEND_MANAGE", { ...summary }));
   }, [dispatch, summary]);
 
-  // END HACK
-
   return (
     <RowContent>
       <Box>

@@ -13,7 +13,7 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 import type {
   Account,
   Operation,
-  AccountLike,
+  TokenAccount,
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
@@ -156,13 +156,12 @@ const Body = ({
   );
 
   const handleChangeAccount = useCallback(
-    (nextAccount: AccountLike) => {
-      if (account !== nextAccount && nextAccount.type === "TokenAccount") {
-        const nextParentAccount = getAccount(nextAccount.parentId);
-        setAccount(nextAccount, nextParentAccount);
+    (nextAccount: { account: TokenAccount, parentAccount: ?Account }) => {
+      if (account !== nextAccount.account && nextAccount.account.type === "TokenAccount") {
+        setAccount(nextAccount.account, nextAccount.parentAccount);
       }
     },
-    [account, setAccount, getAccount],
+    [account, setAccount],
   );
 
   const statusError = useMemo(() => status.errors && Object.values(status.errors)[0], [
@@ -173,8 +172,6 @@ const Body = ({
     transactionError || bridgeError || (statusError instanceof Error ? statusError : null);
 
   const errorSteps = [];
-
-  console.log({ bridgeError, statusError });
 
   if (transactionError) {
     errorSteps.push(2);

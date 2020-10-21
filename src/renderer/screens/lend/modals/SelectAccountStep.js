@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useState, useMemo } from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch, connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { useTranslation, Trans } from "react-i18next";
@@ -18,8 +18,6 @@ import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
-import type { CompoundAccountStatus } from "@ledgerhq/live-common/lib/compound/types";
-import { BigNumber } from "bignumber.js";
 
 import { openModal, closeModal } from "~/renderer/actions/modals";
 import Box from "~/renderer/components/Box";
@@ -35,30 +33,20 @@ import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic
 import ToolTip from "~/renderer/components/Tooltip";
 import ExclamationCircle from "~/renderer/icons/ExclamationCircle";
 
-type Capabilities = {
-  enabledAmount: BigNumber,
-  enabledAmountIsUnlimited: boolean,
-  canSupply: boolean,
-  canSupplyMax: boolean,
-  canWithdraw: boolean,
-  status: CompoundAccountStatus,
-};
-
 export function AccountOption({
   account,
+  parentAccount,
   isValue,
   disabled,
 }: {
-  account: TokenAccount & {
-    parentAccount: ?Account,
-    capabilities: ?Capabilities,
-  },
+  account: TokenAccount,
+  parentAccount: ?Account,
   isValue?: boolean,
   disabled?: boolean,
 }) {
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
-  const { capabilities, parentAccount } = account;
+  const capabilities = getAccountCapabilities(account);
   const name = getAccountName(parentAccount || account);
   const isEnabled =
     capabilities &&
@@ -90,27 +78,28 @@ export function AccountOption({
 export const renderValue = ({
   data,
 }: {
-  data: TokenAccount & {
+  data: {
+    account: TokenAccount,
     parentAccount: ?Account,
-    capabilities: ?Capabilities,
   },
-}) => (data ? <AccountOption account={data} isValue /> : null);
+}) =>
+  data ? <AccountOption account={data.account} parentAccount={data.parentAccount} isValue /> : null;
 
 export const renderOption = ({
   data,
 }: {
-  data: TokenAccount & {
+  data: {
+    account: TokenAccount,
     parentAccount: ?Account,
-    capabilities: ?Capabilities,
   },
-}) => (data ? <AccountOption account={data} /> : null);
+}) => (data ? <AccountOption account={data.account} parentAccount={data.parentAccount} /> : null);
 
-export const getOptionValue = (option?: { id: string }) => option && option.id;
+export const getOptionValue = (option?: { account: TokenAccount }) => option?.account?.id;
 
 type Props = {
   name?: string,
   currency: CryptoCurrency | TokenCurrency,
-  accounts: Array<AccountLike & { parentAccount: ?Account }>,
+  accounts: Array<{ parentAccount: ?Account, account: AccountLike }>,
   nextStep: string,
   cta: React$Node,
   ...
@@ -120,37 +109,27 @@ const SelectAccountStepModal = ({ name, currency, accounts, nextStep, cta, ...re
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const formattedAccounts = useMemo(
-    () =>
-      accounts.map(a => ({
-        ...a,
-        // $FlowFixMe
-        capabilities: a.type === "TokenAccount" && getAccountCapabilities(a),
-      })),
-    [accounts],
-  );
-
-  const [account, setAccount] = useState(formattedAccounts[0]);
+  const [account, setAccount] = useState(accounts[0]);
 
   const onClose = useCallback(() => {
     dispatch(closeModal(name));
   }, [name, dispatch]);
 
   const onNext = useCallback(() => {
-    const { capabilities } = account;
+    const { account: innerAccount, parentAccount } = account;
+    if (innerAccount.type !== "TokenAccount") return;
+    const capabilities = getAccountCapabilities(innerAccount);
     const isEnabled =
       capabilities &&
       ((capabilities.enabledAmount && capabilities.enabledAmount.gt(0)) ||
         capabilities.enabledAmountIsUnlimited);
-    // $FlowFixMe
-    const parentAccount = account.parentAccount;
     onClose();
     dispatch(
       openModal(isEnabled ? "MODAL_LEND_SUPPLY" : nextStep, {
         ...rest,
         currency,
-        account,
-        accountId: account.parentId ? account.parentId : null,
+        account: innerAccount,
+        accountId: innerAccount.parentId ? innerAccount.parentId : null,
         parentAccount,
       }),
     );
@@ -181,7 +160,7 @@ const SelectAccountStepModal = ({ name, currency, accounts, nextStep, cta, ...re
               <Label>{t("lend.enable.steps.selectAccount.selectLabel")}</Label>
               <Select
                 value={account}
-                options={formattedAccounts}
+                options={accounts}
                 getOptionValue={getOptionValue}
                 renderValue={renderValue}
                 renderOption={renderOption}
