@@ -13,7 +13,6 @@ import Spoiler from "~/renderer/components/Spoiler";
 import GasPriceField from "~/renderer/families/ethereum/GasPriceField";
 import GasLimitField from "~/renderer/families/ethereum/GasLimitField";
 import AmountField from "../fields/AmountField";
-import SpendableBanner from "~/renderer/components/SpendableBanner";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 
 export default function StepAmount({
@@ -32,11 +31,6 @@ export default function StepAmount({
     <Box flow={1}>
       <TrackPage category="Lending Withdraw Flow" name="Step 1" />
       <Box vertical>
-        <SpendableBanner
-          account={account}
-          parentAccount={parentAccount}
-          transaction={transaction}
-        />
         <Box mt={4} my={4}>
           <AmountField
             account={account}

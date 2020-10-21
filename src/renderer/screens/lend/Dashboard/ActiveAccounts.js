@@ -16,6 +16,7 @@ import Ellipsis from "~/renderer/components/Ellipsis";
 import CounterValue from "~/renderer/components/CounterValue";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
+import InfoCircle from "~/renderer/icons/InfoCircle";
 import ToolTip from "~/renderer/components/Tooltip";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import { StatusPill } from "./Pill";
@@ -24,9 +25,11 @@ import { openModal } from "~/renderer/actions/modals";
 
 const Header = styled(Box)`
   border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
+  align-items: center;
 
   > * {
     flex-basis: 25%;
+    align-items: center;
   }
 
   > *:nth-child(2),
@@ -36,7 +39,7 @@ const Header = styled(Box)`
 
   > *:nth-child(4) {
     flex-basis: 15%;
-    text-align: center;
+    justify-content: center;
   }
 
   > *:last-child {
@@ -92,6 +95,10 @@ const Action: ThemedComponent<{}> = styled.div`
   color: ${p => p.theme.colors.palette.text.shade50};
 `;
 
+const IconWrapper = styled.div`
+  margin-left: 4px;
+`;
+
 type RowProps = {
   summary: CompoundAccountSummary,
 };
@@ -119,7 +126,7 @@ const Row = ({ summary }: RowProps) => {
           </Ellipsis>
           <ToolTip content={name} delay={1200}>
             <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={14}>
-              {currency.ticker}
+              {currency.name}
             </Ellipsis>
           </ToolTip>
         </RowAccount>
@@ -196,15 +203,30 @@ const ActiveAccounts = ({ summaries }: Props) => {
         <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
           {t("lend.headers.active.accounts")}
         </Text>
-        <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
-          {t("lend.headers.active.amountSupplied")}
-        </Text>
-        <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
-          {t("lend.headers.active.accruedInterests")}
-        </Text>
-        <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
-          {t("lend.headers.active.status")}
-        </Text>
+        <ToolTip content={t("lend.headers.active.amountSuppliedTooltip")}>
+          <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
+            {t("lend.headers.active.amountSupplied")}
+          </Text>
+          <IconWrapper>
+            <InfoCircle size={11} />
+          </IconWrapper>
+        </ToolTip>
+        <ToolTip content={t("lend.headers.active.accruedInterestsTooltip")}>
+          <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
+            {t("lend.headers.active.accruedInterests")}
+          </Text>
+          <IconWrapper>
+            <InfoCircle size={11} />
+          </IconWrapper>
+        </ToolTip>
+        <ToolTip content={t("lend.headers.active.statusTooltip")}>
+          <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
+            {t("lend.headers.active.status")}
+          </Text>
+          <IconWrapper>
+            <InfoCircle size={11} />
+          </IconWrapper>
+        </ToolTip>
         <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
           {t("lend.headers.active.actions")}
         </Text>

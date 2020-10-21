@@ -35,7 +35,6 @@ const IconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: ${p => p.theme.space[2]}px;
 `;
 
 const ManageButton = styled.button`
@@ -48,7 +47,7 @@ const ManageButton = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
 
   &:hover {
     border: 1px solid ${p => p.theme.colors.palette.primary.main};
@@ -253,7 +252,7 @@ const Banner = ({
     );
 
   const text =
-    enabledAmount.gt(0) && enabledAmountIsUnlimited ? (
+    enabledAmountIsUnlimited && totalSupplied.gt(0) ? (
       <Trans
         i18nKey="lend.manage.enable.infoNoLimit"
         values={{
@@ -267,6 +266,8 @@ const Banner = ({
       >
         <b></b>
       </Trans>
+    ) : enabledAmountIsUnlimited && totalSupplied.eq(0) ? (
+      <Trans i18nKey="lend.manage.enable.notSuppliedNoLimit" />
     ) : enabledAmount.gt(0) ? (
       <Trans
         i18nKey="lend.manage.enable.info"
@@ -284,8 +285,6 @@ const Banner = ({
       >
         <b></b>
       </Trans>
-    ) : enabledAmountIsUnlimited && totalSupplied.eq(0) ? (
-      <Trans i18nKey="lend.manage.enable.notSuppliedNoLimit" />
     ) : enabledAmount.gt(0) && totalSupplied.eq(0) ? (
       <Trans i18nKey="lend.manage.enable.notEnabled" />
     ) : !canSupplyMax ? (

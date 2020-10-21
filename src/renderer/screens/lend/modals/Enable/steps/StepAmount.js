@@ -28,7 +28,6 @@ import GasLimitField from "~/renderer/families/ethereum/GasLimitField";
 import ToolTip from "~/renderer/components/Tooltip";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
-import SpendableBanner from "~/renderer/components/SpendableBanner";
 
 const InputRight = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
@@ -97,11 +96,6 @@ export default function StepAmount({
       <TrackPage category="Lending Enable Flow" name="Step 1" />
       {error ? <ErrorBanner error={error} /> : null}
       <Box vertical>
-        <SpendableBanner
-          account={account}
-          parentAccount={parentAccount}
-          transaction={transaction}
-        />
         <Box px={4} mt={4} mb={4}>
           <Text ff="Inter|Medium" fontSize={4} flex={1}>
             <Trans
@@ -117,7 +111,10 @@ export default function StepAmount({
                     : t("lend.enable.steps.amount.noLimit", { assetName: currency.name }),
               }}
             >
-              <BadgeLabel uppercase={false} />
+              <BadgeLabel
+                uppercase={false}
+                innerStyle={{ display: "inline-flex", padding: "5px 10px" }}
+              />
             </Trans>
           </Text>
         </Box>

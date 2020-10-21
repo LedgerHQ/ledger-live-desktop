@@ -105,7 +105,14 @@ type Props = {
   ...
 };
 
-const SelectAccountStepModal = ({ name, currency, accounts, nextStep, cta, ...rest }: Props) => {
+const SelectAccountStepModal = ({
+  name,
+  currency,
+  accounts,
+  nextStep,
+  cta = <Trans i18nKey="common.continue" />,
+  ...rest
+}: Props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 

@@ -18,14 +18,17 @@ import Ellipsis from "~/renderer/components/Ellipsis";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import ToolTip from "~/renderer/components/Tooltip";
 import FormattedVal from "~/renderer/components/FormattedVal";
+import InfoCircle from "~/renderer/icons/InfoCircle";
 import { openModal } from "~/renderer/actions/modals";
 import Pill from "./Pill";
 
 const Header = styled(Box)`
   border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
+  align-items: center;
 
   > * {
     flex-basis: 20%;
+    align-items: center;
   }
 
   > *:first-child {
@@ -98,6 +101,10 @@ const CompactButton = styled(Button)`
   height: auto;
 `;
 
+const IconWrapper = styled.div`
+  margin-left: 4px;
+`;
+
 const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray }) => {
   const { token, totalSupply, supplyAPY } = data;
   const { t } = useTranslation();
@@ -115,13 +122,12 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
           parentAccount,
           currency: token,
           nextStep: "MODAL_LEND_ENABLE_FLOW",
-          cta: t("lend.enable.steps.selectAccount.cta"),
         }),
       );
     } else {
       dispatch(openModal("MODAL_LEND_ENABLE_INFO", { account, parentAccount, currency: token }));
     }
-  }, [dispatch, accounts, token, t]);
+  }, [dispatch, accounts, token]);
 
   const grossSupply = useMemo((): string => {
     return formatShort(token.units[0], totalSupply);
@@ -143,7 +149,7 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
         <RowAccount>
           <ToolTip content={token.name} delay={1200}>
             <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={14}>
-              {token.ticker}
+              {token.name}
             </Ellipsis>
           </ToolTip>
         </RowAccount>
@@ -161,7 +167,6 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
         </Ellipsis>
       </Amount>
       <Amount>
-        {/* TODO: Rework when countervalues api is merged */}
         <Ellipsis fontSize={4} ff="Inter|SemiBold" color="palette.text.shade100">
           {grossSupply}
         </Ellipsis>
@@ -187,15 +192,30 @@ const Rates = ({ rates }: { rates: CurrentRate[] }) => {
         <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
           {t("lend.headers.rates.allAssets")}
         </Text>
-        <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
-          {t("lend.headers.rates.totalBalance")}
-        </Text>
-        <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
-          {t("lend.headers.rates.grossSupply")}
-        </Text>
-        <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
-          {t("lend.headers.rates.currentAPY")}
-        </Text>
+        <ToolTip content={t("lend.headers.rates.totalBalanceTooltip")}>
+          <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
+            {t("lend.headers.rates.totalBalance")}
+          </Text>
+          <IconWrapper>
+            <InfoCircle size={11} />
+          </IconWrapper>
+        </ToolTip>
+        <ToolTip content={t("lend.headers.rates.grossSupplyTooltip")}>
+          <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
+            {t("lend.headers.rates.grossSupply")}
+          </Text>
+          <IconWrapper>
+            <InfoCircle size={11} />
+          </IconWrapper>
+        </ToolTip>
+        <ToolTip content={t("lend.headers.rates.currentAPYTooltip")}>
+          <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
+            {t("lend.headers.rates.currentAPY")}
+          </Text>
+          <IconWrapper>
+            <InfoCircle size={11} />
+          </IconWrapper>
+        </ToolTip>
         <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
           {t("lend.headers.rates.actions")}
         </Text>

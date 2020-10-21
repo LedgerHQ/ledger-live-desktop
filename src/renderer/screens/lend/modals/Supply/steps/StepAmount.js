@@ -27,7 +27,6 @@ import { subAccountByCurrencyOrderedSelector } from "~/renderer/reducers/account
 
 import type { StepProps } from "../types";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
-import SpendableBanner from "~/renderer/components/SpendableBanner";
 
 const InputLeft = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
@@ -137,13 +136,6 @@ function StepAmount({
   return (
     <Box flow={2}>
       <TrackPage category="Lending Supply Flow" name="Step Amount" />
-      {account && (
-        <SpendableBanner
-          account={account}
-          parentAccount={parentAccount}
-          transaction={transaction}
-        />
-      )}
       <Box mt={4} flow={1}>
         <Label>{t("lend.supply.steps.amount.selectedAccount")}</Label>
         <Select

@@ -314,11 +314,11 @@
     },
     "account": {
       "amountSupplied": "Amount supplied",
-      "amountSuppliedTooltip": "--! NEED TEXT HERE !--",
+      "amountSuppliedTooltip": "Amount lent to the network",
       "currencyAPY": "Currency APY",
-      "currencyAPYTooltip": "--! NEED TEXT HERE !--",
+      "currencyAPYTooltip": "Actual return rate of a supply by the end of the year if the deposit is continuously compounded.",
       "accruedInterests": "Accrued interests",
-      "accruedInterestsTooltip": "--! NEED TEXT HERE !--",
+      "accruedInterestsTooltip": "Interest being generated",
       "interestEarned": "Interest earned",
       "interestEarnedTooltip": "--! NEED TEXT HERE !--",
       "openLoans": "Open loans",
@@ -351,9 +351,16 @@
       "active": {
         "accounts": "Accounts",
         "amountSupplied": "Amount supplied",
+        "amountSuppliedTooltip": "Amount lent to the network",
         "accruedInterests": "Accrued interests",
+        "accruedInterestsTooltip": "Interest being generated",
         "status": "Status",
+        "statusTooltip": "Current account status",
         "actions": "Actions"
+      },
+      "status": {
+        "enablingTooltip": "Your transaction is broadcasting",
+        "toSupplyTooltip": "You can now supply your assets"
       },
       "closed": {
         "assetLended": "Asset lended",
@@ -364,8 +371,11 @@
       "rates": {
         "allAssets": "All assets",
         "totalBalance": "Total balance",
+        "totalBalanceTooltip": "Total balance of all the accounts excluding the amount supplied.",
         "grossSupply": "Gross supply",
+        "grossSupplyTooltip": "Total amount of supplies from all the users",
         "currentAPY": "Current APY",
+        "currentAPYTooltip": "Actual return rate of a supply by the end of the year if the deposit is continuously compounded.",
         "actions": "Actions"
       }
     },

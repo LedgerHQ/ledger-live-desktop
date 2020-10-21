@@ -8,6 +8,7 @@ import Text from "./Text";
 type Props = {
   children?: React$Node,
   uppercase?: boolean,
+  innerStyle?: any,
 };
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
@@ -27,9 +28,9 @@ const TextContainer: ThemedComponent<{ uppercase: boolean }> = styled(Text).attr
   text-transform: ${p => (p.uppercase ? "uppercase" : "initial")};
 `;
 
-const BadgeLabel = ({ children, uppercase = true }: Props) =>
+const BadgeLabel = ({ children, uppercase = true, innerStyle = {} }: Props) =>
   children ? (
-    <Container>
+    <Container style={innerStyle ? { ...innerStyle } : {}}>
       <TextContainer uppercase={uppercase}>{children}</TextContainer>
     </Container>
   ) : null;

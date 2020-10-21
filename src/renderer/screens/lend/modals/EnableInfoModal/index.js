@@ -75,7 +75,7 @@ export default function LendTermsModal({
         accountId: parentAccount ? parentAccount.id : null,
         currency,
         nextStep: "MODAL_LEND_ENABLE_FLOW",
-        cta: t("lend.enable.steps.selectAccount.cta"),
+        cta: t("common.continue"),
       }),
     );
   }, [handleOnClose, dispatch, rest, currency, t, account, parentAccount]);
