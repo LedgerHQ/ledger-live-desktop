@@ -1,5 +1,4 @@
 // @flow
-
 import React, { PureComponent } from "react";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
@@ -17,7 +16,7 @@ import Box from "~/renderer/components/Box";
 import Space from "~/renderer/components/Space";
 import Button from "~/renderer/components/Button";
 import ConfirmModal from "~/renderer/modals/ConfirmModal";
-import { IconWrapperCircle } from "./ResetButton";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 const printError = (error: mixed) => {
   const print = [];
@@ -188,3 +187,12 @@ const ErrContainer = styled.pre`
 `;
 
 export default withTranslation()(RenderError);
+
+export const IconWrapperCircle: ThemedComponent<{}> = styled(Box)`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #ea2e4919;
+  align-items: center;
+  justify-content: center;
+`;
