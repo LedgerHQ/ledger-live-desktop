@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback, useMemo } from "react";
 import Box from "~/renderer/components/Box";
-import { accountsSelector } from "~/renderer/reducers/accounts";
+import { accountsSelector, currenciesSelector } from "~/renderer/reducers/accounts";
 import BalanceSummary from "./GlobalSummary";
 import { colors } from "~/renderer/styles/theme";
 
@@ -31,6 +31,7 @@ import { useHistory } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import EmptyStateInstalledApps from "~/renderer/screens/dashboard/EmptyStateInstalledApps";
 import EmptyStateAccounts from "~/renderer/screens/dashboard/EmptyStateAccounts";
+import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 
 // This forces only one visible top banner at a time
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
@@ -52,6 +53,7 @@ type Props = {
 const DashboardPage = ({ saveSettings }: Props) => {
   const { t } = useTranslation();
   const accounts = useSelector(accountsSelector);
+  const currencies = useSelector(currenciesSelector);
   const history = useHistory();
   const counterValue = useSelector(counterValueCurrencySelector);
   const selectedTimeRange = useSelector(selectedTimeRangeSelector);
@@ -74,6 +76,7 @@ const DashboardPage = ({ saveSettings }: Props) => {
       <TopBannerContainer>
         <UpdateBanner />
         <MigrationBanner />
+        <CurrencyDownStatusAlert currencies={currencies} />
       </TopBannerContainer>
       {showCarousel ? <Carousel /> : null}
       <RefreshAccountsOrdering onMount />

@@ -2181,6 +2181,10 @@
     "AmountRequired": {
       "title": "Amount required"
     },
+    "BitcoinCashHardforkOct2020Warning": {
+      "title": "",
+      "description": "Bitcoin Cash is currently undergoing a hard fork without replay protection. We will temporarily interrupt the Bitcoin Cash service until the network has stabilized."
+    },
     "NoAccessToCamera": {
       "title": "Please ensure your system has a camera, that it is not in use by another application and that Ledger Live has permission to use it.",
       "description": ""

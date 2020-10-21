@@ -1,6 +1,7 @@
 // @flow
 
 import type { Account } from "@ledgerhq/live-common/lib/types";
+import { implicitMigration } from "@ledgerhq/live-common/lib/migrations/accounts";
 import { getKey } from "~/renderer/storage";
 
 export const replaceAccounts = (payload: Account[]) => ({
@@ -24,7 +25,7 @@ export const setAccounts = (payload: Account[]) => ({
 });
 
 export const fetchAccounts = () => async (dispatch: *) => {
-  const accounts = await getKey("app", "accounts", []);
+  const accounts = implicitMigration(await getKey("app", "accounts", []));
   return dispatch({
     type: "SET_ACCOUNTS",
     payload: accounts,
