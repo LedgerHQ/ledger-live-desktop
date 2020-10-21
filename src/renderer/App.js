@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useEffect } from "react";
 import { hot } from "react-hot-loader/root";
 import { Provider } from "react-redux";
 import type { Store } from "redux";
@@ -19,11 +19,22 @@ import LiveStyleSheetManager from "~/renderer/styles/LiveStyleSheetManager";
 import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
 import Default from "./Default";
 
+const reloadApp = event => {
+  if ((event.ctrlKey || event.metaKey) && event.key === "r") {
+    window.api.reloadRenderer();
+  }
+};
+
 type Props = {
   store: Store<State, *>,
 };
 
 const App = ({ store }: Props) => {
+  useEffect(() => {
+    window.addEventListener("keydown", reloadApp);
+    return () => window.removeEventListener("keydown", reloadApp);
+  }, []);
+
   return (
     <LiveStyleSheetManager>
       <Provider store={store}>
