@@ -4,6 +4,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Transport from "@ledgerhq/hw-transport";
 import { NotEnoughBalance } from "@ledgerhq/errors";
+import { implicitMigration } from "@ledgerhq/live-common/lib/migrations/accounts";
 import { log } from "@ledgerhq/logs";
 import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
 import i18n from "i18next";
@@ -28,7 +29,7 @@ import dbMiddleware from "~/renderer/middlewares/db";
 import createStore from "~/renderer/createStore";
 import events from "~/renderer/events";
 import { setAccounts } from "~/renderer/actions/accounts";
-import { fetchSettings, saveSettings, setDeepLinkUrl } from "~/renderer/actions/settings";
+import { fetchSettings, setDeepLinkUrl } from "~/renderer/actions/settings";
 import { lock, setOSDarkMode } from "~/renderer/actions/application";
 
 import {
@@ -89,18 +90,7 @@ async function init() {
 
   let accounts = await getKey("app", "accounts", []);
   if (accounts) {
-    const { starredAccountIds: ids } = state.settings;
-    if (ids && ids.length) {
-      // NB old settings.starredAccountIds migration, eventually we could drop it
-      await store.dispatch(saveSettings({ starredAccountIds: undefined }));
-      accounts = accounts.map(a => {
-        const starred = ids.includes(a.id);
-        const subAccounts = a.subAccounts
-          ? a.subAccounts.map(sa => (ids.includes(sa.id) ? { ...sa, starred: true } : sa))
-          : a.subAccounts;
-        return { ...a, starred, subAccounts };
-      });
-    }
+    accounts = implicitMigration(accounts);
     await store.dispatch(setAccounts(accounts));
   } else {
     store.dispatch(lock());

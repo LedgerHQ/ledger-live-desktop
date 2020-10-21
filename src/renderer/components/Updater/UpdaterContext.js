@@ -56,6 +56,7 @@ class Provider extends Component<UpdaterProviderProps, UpdaterProviderState> {
       status: "idle",
       downloadProgress: 0,
       error: null,
+      version: process.env.DEBUG_UPDATE ? "1.2.3" : undefined,
     };
   }
 

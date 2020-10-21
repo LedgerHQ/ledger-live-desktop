@@ -30,6 +30,7 @@ import useTheme from "~/renderer/hooks/useTheme";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 
 const InputRight = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
@@ -156,6 +157,7 @@ const SwapInputGroup = ({
       <Text mb={15} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={5}>
         <Trans i18nKey={`swap.form.to.title`} />
       </Text>
+      {currency ? <CurrencyDownStatusAlert currencies={[currency]} /> : null}
       <Box>
         <Label mb={4}>
           <Trans i18nKey={`swap.form.to.currency`} />

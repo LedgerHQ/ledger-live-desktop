@@ -36,7 +36,7 @@ const StepAmount = ({
   return (
     <Box flow={4}>
       <TrackPage category="Send Flow" name="Step Amount" />
-      {mainAccount ? <CurrencyDownStatusAlert currency={mainAccount.currency} /> : null}
+      {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       {account && transaction && mainAccount && (
         <Fragment key={account.id}>

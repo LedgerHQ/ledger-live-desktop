@@ -102,7 +102,7 @@ export default function StepAccount({
   return (
     <Box flow={1}>
       <TrackPage category="Receive Flow" name="Step 1" />
-      {mainAccount ? <CurrencyDownStatusAlert currency={mainAccount.currency} /> : null}
+      {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       {receiveTokenMode && mainAccount ? (
         <TokenParentSelection mainAccount={mainAccount} onChangeAccount={onChangeAccount} />

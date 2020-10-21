@@ -55,12 +55,6 @@ export const experimentalFeatures: Feature[] = [
   },
   {
     type: "toggle",
-    name: "EXPERIMENTAL_DEVICE_FLOW",
-    title: "Experimental device flow",
-    description: "Automatically asks an Open App device permission in device flows",
-  },
-  {
-    type: "toggle",
     name: "EXPERIMENTAL_EXPLORERS",
     title: "Experimental Explorers API",
     description:
@@ -90,6 +84,15 @@ export const experimentalFeatures: Feature[] = [
     description:
       "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device.",
     minValue: 1,
+  },
+  {
+    type: "toggle",
+    name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
+    valueOn: "ethereum",
+    valueOff: "",
+    title: "Experimental Ethereum implementation",
+    description:
+      "Switch to a new JavaScript implementation of Ethereum. This should improve performance and fix a few bugs, as well as display token operations as fee operations instead of send transactions.",
   },
 ];
 

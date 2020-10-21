@@ -96,6 +96,7 @@ const DeviceAction = <R, H, P>({
     initSwapRequested,
     initSwapError,
     initSwapResult,
+    allowOpeningGranted,
   } = hookState;
 
   const type = useTheme("colors.palette.type");
@@ -168,7 +169,7 @@ const DeviceAction = <R, H, P>({
     });
   }
 
-  if (isLoading) {
+  if (isLoading || (allowOpeningGranted && !appAndVersion)) {
     return renderLoading({ modelId });
   }
 
