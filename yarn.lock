@@ -1364,10 +1364,10 @@
   dependencies:
     commander "^2.20.0"
 
-"@ledgerhq/cryptoassets@5.27.1", "@ledgerhq/cryptoassets@^5.27.1":
-  version "5.27.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-5.27.1.tgz#9bc2e822fb8ab954b81d6eb1fb2401fb0529c6f9"
-  integrity sha512-DGKTjJ/+rMBk+Hk+Pyr9PH5DVbPtpBoMsxxdLYvgdZ7HgEIOOxNFA4GK2QcWhadkaNApAzYqATIXGbR6NRjlyA==
+"@ledgerhq/cryptoassets@5.27.2", "@ledgerhq/cryptoassets@^5.27.2":
+  version "5.27.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-5.27.2.tgz#8f6cfc9cd0ac90b6389f73ca7d5126b663b0dd93"
+  integrity sha512-3AMzLPpqK7ldVGwNzggPpgRB3ZhhhLz+FB+bQQSCBzk1knBR1JZmuw1i9cG6W+28vQsQkQUTWpH6nXKTjhwbRg==
   dependencies:
     invariant "2"
 
@@ -1412,12 +1412,12 @@
     semver "^7.3.2"
     sha.js "2"
 
-"@ledgerhq/hw-app-eth@5.27.1":
-  version "5.27.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-5.27.1.tgz#c442a643fd3032c02b8ca946b8bd185e155bc600"
-  integrity sha512-mR3NsHBQ5DKCutWZP00IrhRlYpOjgLbBVYM3NKr0P3q0LrcmYRpTp0JM3B3OSZF/6j4HwZDWVp2E/2GIksqZ8Q==
+"@ledgerhq/hw-app-eth@5.27.2":
+  version "5.27.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-5.27.2.tgz#65a2ed613a69340e0cd69c942147455ec513d006"
+  integrity sha512-llNdrE894cCN8j6yxJEUniciyLVcLmu5N0UmIJLOObztG+5rOF4bX54h4SreTWK+E10Z0CzHSeyE5Lz/tVcqqQ==
   dependencies:
-    "@ledgerhq/cryptoassets" "^5.27.1"
+    "@ledgerhq/cryptoassets" "^5.27.2"
     "@ledgerhq/errors" "^5.26.0"
     "@ledgerhq/hw-transport" "^5.26.0"
     bignumber.js "^9.0.1"
@@ -1523,17 +1523,17 @@
     node-pre-gyp "^0.15.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^15.4.1":
-  version "15.4.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-15.4.1.tgz#5a08832164e4e9b7012e2dbe931fa3fe8e617a46"
-  integrity sha512-CEL7ckljgqp+FERJVABSp6R9+Ln1tItsGNJhwsTJuSeY7wvLfJidz2yNqpwOY4aCVZcd+C5HeS6S8eIL5lIV/g==
+"@ledgerhq/live-common@^15.5.0-ethjs.0":
+  version "15.5.0-ethjs.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-15.5.0-ethjs.0.tgz#7331c554d9c3b757d9544ff0b64ea3bf88a02e0e"
+  integrity sha512-rUsbh05v+YnCsYNi7yO6gHv6HmdinqBmNMQFKnfGHbcyfURoemCCiP83+PI3ALnOv3YSdX0b1Nj84Y1HSpmqCA==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
-    "@ledgerhq/cryptoassets" "5.27.1"
+    "@ledgerhq/cryptoassets" "5.27.2"
     "@ledgerhq/devices" "5.26.0"
     "@ledgerhq/errors" "5.26.0"
     "@ledgerhq/hw-app-btc" "^5.26.0"
-    "@ledgerhq/hw-app-eth" "5.27.1"
+    "@ledgerhq/hw-app-eth" "5.27.2"
     "@ledgerhq/hw-app-str" "^5.26.0"
     "@ledgerhq/hw-app-trx" "5.26.0"
     "@ledgerhq/hw-app-xrp" "5.26.0"
