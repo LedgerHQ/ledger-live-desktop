@@ -890,7 +890,9 @@
         "title": "Cuenta",
         "label": "Cuenta para abonos",
         "parentAccount": "1. Select {{currencyName}} account",
-        "token": "2. Select a token"
+        "token": "2. Select a token",
+        "verifyTokenType": "Please verify that {{token}} is an {{tokenType}} token. Any other crypto asset sent to an {{currency}} account may be lost.",
+        "warningTokenType": "Please only send {{ticker}} or {{tokenType}} tokens to an {{currency}} account. Any other crypto assets may be lost."
       },
       "connectDevice": {
         "title": "Dispositivo",
