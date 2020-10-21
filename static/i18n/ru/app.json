@@ -890,7 +890,9 @@
         "title": "Счет",
         "label": "Счет для зачисления средств",
         "parentAccount": "1. Выберите аккаунт {{currencyName}}",
-        "token": "2. Выберите токен"
+        "token": "2. Выберите токен",
+        "verifyTokenType": "Please verify that <bold>{{token}}</bold> is an <bold>{{tokenType}}</bold> token. Any other crypto asset sent to an {{currency}} account may be lost.",
+        "warningTokenType": "Please only send <bold>{{ticker}}</bold> or <bold>{{tokenType}}</bold> tokens to an {{currency}} account. Any other crypto assets may be lost."
       },
       "connectDevice": {
         "title": "Устройство",

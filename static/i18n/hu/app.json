@@ -890,7 +890,9 @@
         "title": "Számla",
         "label": "Jóváírandó számla",
         "parentAccount": "1. Válassz ki egy {{currencyName}} számlát",
-        "token": "2. Válassz egy tokent"
+        "token": "2. Válassz egy tokent",
+        "verifyTokenType": "Please verify that <bold>{{token}}</bold> is an <bold>{{tokenType}}</bold> token. Any other crypto asset sent to an {{currency}} account may be lost.",
+        "warningTokenType": "Please only send <bold>{{ticker}}</bold> or <bold>{{tokenType}}</bold> tokens to an {{currency}} account. Any other crypto assets may be lost."
       },
       "connectDevice": {
         "title": "Eszköz",
