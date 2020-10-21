@@ -11,7 +11,6 @@ import {
   SettingsSection as Section,
   SettingsSectionHeader as Header,
   SettingsSectionBody as Body,
-  SettingsSectionRow as Row,
 } from "../../SettingsSection";
 import CurrencyRows from "./CurrencyRows";
 import Track from "~/renderer/analytics/Track";
