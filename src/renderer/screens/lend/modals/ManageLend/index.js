@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";
-import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic";
+import { getAccountCapabilities, getEnablingOp } from "@ledgerhq/live-common/lib/compound/logic";
 
 import type { Account, TokenAccount, Unit, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import type {
@@ -299,7 +299,7 @@ const Banner = ({
 
   const action = useCallback(() => {
     if (status === "ENABLING") {
-      const op = account.pendingOperations.find(o => o.extra?.approving);
+      const op = getEnablingOp(account);
       if (!op) return;
       return dispatch(
         openModal("MODAL_OPERATION_DETAILS", {

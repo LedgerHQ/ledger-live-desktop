@@ -1,7 +1,7 @@
 // @flow
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import type { AccountLikeArray, Operation } from "@ledgerhq/live-common/lib/types";
+import type { AccountLikeArray, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 import Box from "~/renderer/components/Box";
 import OperationsList from "~/renderer/components/OperationsList";
 import EmptyState from "../EmptyState";
@@ -11,31 +11,16 @@ type Props = {
   accounts: AccountLikeArray,
 };
 
-const useCompoundHistory = (accounts: AccountLikeArray): AccountLikeArray => {
-  const filterOps = (op: Operation): boolean => ["REDEEM", "SUPPLY"].includes(op.type);
-  const history = useMemo(
-    () =>
-      accounts.map(acc => {
-        const operations = acc.operations.concat(acc.pendingOperations).filter(filterOps);
-        return {
-          ...acc,
-          operations,
-        };
-      }),
-    [accounts],
-  );
-
-  return history;
-};
-
 const History = ({ navigateToCompoundDashboard, accounts }: Props) => {
   const { t } = useTranslation();
-  const history = useCompoundHistory(accounts);
+
+  const filterOperation = (op: Operation, acc: AccountLike) =>
+    ["REDEEM", "SUPPLY"].includes(op.type);
 
   return (
     <Box>
       {history.length ? (
-        <OperationsList accounts={history} />
+        <OperationsList accounts={accounts} filterOperation={filterOperation} />
       ) : (
         <EmptyState
           title={t("lend.emptyState.history.title")}

@@ -315,19 +315,16 @@ const MainSideBar = () => {
                 isActive={location.pathname === "/swap"}
                 collapsed={secondAnim}
               />
-              {process.env.COMPOUND === "1" ? (
-                <SideBarListItem
-                  id={"lend"}
-                  label={t("sidebar.lend")}
-                  icon={IconLending}
-                  iconActiveColor="wallet"
-                  onClick={handleClickLend}
-                  isActive={location.pathname === "/lend"}
-                  collapsed={secondAnim}
-                  NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
-                />
-              ) : null}
-
+              <SideBarListItem
+                id={"lend"}
+                label={t("sidebar.lend")}
+                icon={IconLending}
+                iconActiveColor="wallet"
+                onClick={handleClickLend}
+                isActive={location.pathname === "/lend"}
+                collapsed={secondAnim}
+                NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
+              />
               <SideBarListItem
                 id={"manager"}
                 label={t("sidebar.manager")}
