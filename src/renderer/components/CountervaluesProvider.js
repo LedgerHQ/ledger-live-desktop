@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import {
   Countervalues,
   useCountervaluesPolling,
-  useStoreUpdater,
+  useCountervaluesExport,
 } from "@ledgerhq/live-common/lib/countervalues/react";
 import { inferTrackingPairForAccounts } from "@ledgerhq/live-common/lib/countervalues/logic";
 import { setKey, getKey } from "~/renderer/storage";
@@ -31,12 +31,18 @@ export default function CountervaluesProvider({ children }: { children: React$No
 }
 
 function CountervaluesManager({ children }: { children: React$Node }) {
-  useStoreUpdater(rawState => {
-    setKey("app", "countervalues", rawState);
-  });
+  useCacheManager();
   usePollingManager();
 
   return children;
+}
+
+function useCacheManager() {
+  const rawState = useCountervaluesExport();
+  useEffect(() => {
+    if (!Object.keys(rawState.status).length) return;
+    setKey("app", "countervalues", rawState);
+  }, [rawState]);
 }
 
 function usePollingManager() {
