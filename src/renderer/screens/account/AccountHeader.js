@@ -102,6 +102,7 @@ const AccountName = styled.input`
 
   :hover {
     border-color: ${p => (!p.disabled ? p.theme.colors.palette.text.shade30 : "transparent")};
+    cursor: text;
 
     + svg {
       display: ${p => (!p.disabled ? "inline" : "none")};
