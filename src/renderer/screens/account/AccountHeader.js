@@ -1,7 +1,9 @@
 // @flow
 
-import React, { useCallback, useState, useRef, useEffect } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import styled from "styled-components";
+import { fontSize, color } from "styled-system";
+import fontFamily from "~/renderer/styles/styled/fontFamily";
 import { Trans } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -18,7 +20,6 @@ import {
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
 import Box, { Tabbable } from "~/renderer/components/Box";
-import Ellipsis from "~/renderer/components/Ellipsis";
 import Text from "~/renderer/components/Text";
 import ExternalLink from "~/renderer/icons/ExternalLink";
 import { openURL } from "~/renderer/linking";
@@ -79,31 +80,38 @@ const AccountNameBox = styled(Box)`
   left: -11px;
 `;
 
-const AccountName = styled(Ellipsis)`
+const AccountName = styled.input`
+  ${fontFamily}
+  ${fontSize}
+  ${color}
+
   border: 1px solid;
   border-color: transparent;
   border-radius: 4px;
   padding: 1px 9px 2px;
-  max-width: 250px !important;
+  max-width: 190px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  background-color: transparent;
 
   + svg {
     display: none;
   }
 
   :hover {
-    border-color: ${p => (p.contentEditable ? p.theme.colors.palette.text.shade30 : "transparent")};
+    border-color: ${p => (!p.disabled ? p.theme.colors.palette.text.shade30 : "transparent")};
 
     + svg {
-      display: ${p => (p.contentEditable ? "inline" : "none")};
+      display: ${p => (!p.disabled ? "inline" : "none")};
     }
   }
+
   :focus {
     border-color: ${p => p.theme.colors.wallet};
     background: #fff;
     width: 250px;
-
-    white-space: nowrap;
-    overflow: hidden;
 
     + svg {
       display: none;
@@ -141,9 +149,8 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
 }: Props) {
   const dispatch = useDispatch();
 
+  const [name, setName] = useState(getAccountName(account));
   const [editingName, setEditingName] = useState(false);
-
-  const nameEl: React$ElementRef<any> = useRef();
 
   const currency = getAccountCurrency(account);
   const mainAccount = getMainAccount(account, parentAccount);
@@ -155,27 +162,19 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
       : null;
 
   const submitNameChange = () => {
-    if (!nameEl.current.innerText) {
-      return;
+    if (account.type === "Account") {
+      const updatedAccount: Account = {
+        ...account,
+        name,
+      };
+
+      dispatch(updateAccount(updatedAccount));
     }
-
-    // $FlowFixMe
-
-    const updatedAccount: any = {
-      ...account,
-      name: nameEl.current.innerText,
-    };
-
-    dispatch(updateAccount((updatedAccount: Account)));
   };
 
-  const submitNameChangeOnNewLine = evt => {
-    const keyCode = evt.keyCode || evt.which;
-
-    if (keyCode === 13) {
-      evt.returnValue = false;
-      if (evt.preventDefault) evt.preventDefault();
-      evt.target.blur();
+  const submitNameChangeOnEnter = e => {
+    if (e.key === "Enter") {
+      e.target.blur();
       submitNameChange();
     }
   };
@@ -189,8 +188,8 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
   }, [contract]);
 
   useEffect(() => {
-    if (nameEl.current && !editingName) {
-      nameEl.current.innerText = getAccountName(account);
+    if (!editingName) {
+      setName(getAccountName(account));
     }
   }, [editingName, account]);
 
@@ -221,8 +220,7 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
         <AccountNameBox horizontal alignItems="center" flow={2}>
           <AccountName
             color="palette.text.shade100"
-            contentEditable={account.type === "Account"}
-            suppressContentEditableWarning={true}
+            disabled={account.type !== "Account"}
             ff="Inter|SemiBold"
             fontSize={7}
             onFocus={() => {
@@ -237,14 +235,10 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
                 window.getSelection().removeAllRanges();
               });
             }}
-            onPaste={evt => {
-              evt.preventDefault();
-              const text = evt.clipboardData.getData("text/plain");
-              document.execCommand("insertHTML", false, text);
-            }}
-            onKeyPress={submitNameChangeOnNewLine}
+            onKeyPress={submitNameChangeOnEnter}
+            onChange={e => setName(e.target.value)}
             disableEllipsis={editingName}
-            innerRef={nameEl}
+            value={name}
           />
           <IconPen size={14} />
           {editingName && (
