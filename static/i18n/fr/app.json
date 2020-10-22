@@ -326,6 +326,7 @@
       "title": "Commencer",
       "desc": "Commencer ici"
     },
+    "status": "Ledger status",
     "helpCenter": {
       "title": "Assistance Ledger",
       "desc": "Obtenir de l’aide"
