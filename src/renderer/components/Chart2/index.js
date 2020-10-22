@@ -171,7 +171,7 @@ export default function Chart({
         ],
       },
     }),
-    [renderTickY, theme, magnitude, tickXScale],
+    [renderTickY, theme, magnitude],
   );
 
   useLayoutEffect(() => {
