@@ -54,7 +54,6 @@
     "bignumber.js": "^9.0.0",
     "chart.js": "^2.9.3",
     "color": "^3.1.2",
-    "d3": "^5.16.0",
     "dotenv": "^8.2.0",
     "electron-context-menu": "^2.3.0",
     "ethereumjs-tx": "^2.1.1",

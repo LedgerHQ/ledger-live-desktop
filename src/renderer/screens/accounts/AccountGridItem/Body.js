@@ -9,7 +9,7 @@ import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import CounterValue from "~/renderer/components/CounterValue";
-import Chart from "~/renderer/components/Chart2Preview";
+import Chart from "~/renderer/components/ChartPreview";
 import useTheme from "~/renderer/hooks/useTheme";
 
 const Placeholder = styled.div`

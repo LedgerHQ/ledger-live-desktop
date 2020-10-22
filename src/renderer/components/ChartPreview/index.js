@@ -33,53 +33,25 @@
  *
  */
 
-import React, { useRef, useLayoutEffect, useState, useMemo } from "react";
+import React, { useRef, useLayoutEffect, useMemo } from "react";
 import ChartJs from "chart.js";
-import styled from "styled-components";
 import Color from "color";
-import moment from "moment";
 
 import useTheme from "~/renderer/hooks/useTheme";
-import Tooltip from "./Tooltip";
 
 import type { Data } from "./types";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 export type Props = {
   data: Data,
-  magnitude: number,
-  height?: number,
-  tickXScale: string,
+  height: number,
   color?: string,
-  hideAxis?: boolean,
-  renderTooltip?: Function,
-  renderTickY: (t: number) => string | number,
   valueKey?: string,
 };
 
-const ChartContainer: ThemedComponent<{}> = styled.div.attrs(({ height }) => ({
-  style: {
-    height,
-  },
-}))`
-  position: relative;
-`;
-
-export default function Chart({
-  magnitude,
-  height,
-  data,
-  color,
-  tickXScale,
-  renderTickY,
-  renderTooltip,
-  valueKey = "value",
-}: Props) {
+export default function Chart({ height, data, color, valueKey = "value" }: Props) {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
   const theme = useTheme("colors.palette");
-  const [tooltip, setTooltip] = useState();
-  const valueKeyRef = useRef(valueKey);
 
   const generatedData = useMemo(
     () => ({
@@ -96,32 +68,30 @@ export default function Chart({
           pointRadius: 0,
           borderWidth: 2,
           data: data.map(d => ({
-            x:
-              tickXScale === "week"
-                ? new Date(d.date)
-                : moment(new Date(d.date))
-                    .startOf("day")
-                    .toDate(),
+            x: new Date(d.date),
             y: d[valueKey].toNumber(),
           })),
         },
       ],
     }),
-    [color, data, valueKey, tickXScale],
+    [color, data, valueKey],
   );
 
   const generateOptions = useMemo(
     () => ({
-      animation: {
-        duration: 0,
-      },
-      responsive: true,
+      responsive: false,
       maintainAspectRatio: false,
       tooltips: {
         enabled: false,
-        intersect: false,
-        mode: "index",
-        custom: tooltip => setTooltip(tooltip),
+      },
+      layout: {
+        padding: {
+          top: 4,
+          bottom: 4,
+        },
+      },
+      animation: {
+        duration: 0,
       },
       legend: {
         display: false,
@@ -129,6 +99,7 @@ export default function Chart({
       scales: {
         xAxes: [
           {
+            display: false,
             type: "time",
             gridLines: {
               display: false,
@@ -138,19 +109,12 @@ export default function Chart({
               fontColor: theme.text.shade60,
               fontFamily: "Inter",
               maxTicksLimit: 7,
-              maxRotation: 0,
-              minRotation: 0,
-            },
-            time: {
-              minUnit: "day",
-              displayFormats: {
-                quarter: "MMM YYYY",
-              },
             },
           },
         ],
         yAxes: [
           {
+            display: false,
             gridLines: {
               color: theme.text.shade10,
               borderDash: [5, 5],
@@ -160,31 +124,19 @@ export default function Chart({
             },
             ticks: {
               beginAtZero: true,
-              suggestedMax: 10 ** Math.max(magnitude - 4, 1),
-              maxTicksLimit: 4,
-              fontColor: theme.text.shade60,
-              fontFamily: "Inter",
-              padding: 10,
-              callback: value => renderTickY(value),
             },
           },
         ],
       },
     }),
-    [renderTickY, theme, magnitude],
+    [theme.text.shade10, theme.text.shade60],
   );
 
   useLayoutEffect(() => {
     if (chartRef.current) {
-      let shouldAnimate = false;
-      if (valueKeyRef.current !== valueKey) {
-        valueKeyRef.current = valueKey;
-        shouldAnimate = true;
-      }
-
-      chartRef.current.data.datasets[0].data = generatedData.datasets[0].data;
+      chartRef.current.data = generatedData;
       chartRef.current.options = generateOptions;
-      chartRef.current.update(shouldAnimate ? 500 : 0);
+      chartRef.current.update(0);
     } else {
       chartRef.current = new ChartJs(canvasRef.current, {
         type: "line",
@@ -192,20 +144,14 @@ export default function Chart({
         options: generateOptions,
       });
     }
-  }, [generateOptions, generatedData, valueKey]);
+  }, [generateOptions, generatedData]);
 
   return (
-    <ChartContainer height={height}>
-      <canvas ref={canvasRef} />
-      {tooltip ? (
-        <Tooltip
-          tooltip={tooltip}
-          theme={theme}
-          renderTooltip={renderTooltip}
-          color={color}
-          data={data}
-        />
-      ) : null}
-    </ChartContainer>
+    <canvas
+      ref={canvasRef}
+      style={{
+        height,
+      }}
+    />
   );
 }

@@ -19,7 +19,6 @@
  *
  *    <Chart
  *      data={data}
- *      isInteractive     // Handle mouse events, display tooltip etc.
  *      color="#5f8ced"   // Main color for line, gradient, etc.
  *      height={300}      // Fix height. Width is responsive to container.
  *    />
@@ -34,207 +33,179 @@
  *
  */
 
-import React, { Component } from "react";
-import * as d3 from "d3";
-import noop from "lodash/noop";
-import last from "lodash/last";
-import styled, { withTheme } from "styled-components";
-import debounce from "lodash/debounce";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import refreshNodes from "./refreshNodes";
-import refreshDraw from "./refreshDraw";
-import handleMouseEvents from "./handleMouseEvents";
-import { enrichData, generateColors, generateMargins, observeResize } from "./helpers";
+import React, { useRef, useLayoutEffect, useState, useMemo } from "react";
+import ChartJs from "chart.js";
+import styled from "styled-components";
+import Color from "color";
+import moment from "moment";
+
+import useTheme from "~/renderer/hooks/useTheme";
+import Tooltip from "./Tooltip";
 
 import type { Data } from "./types";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 export type Props = {
   data: Data,
-  id?: string,
+  magnitude: number,
   height?: number,
   tickXScale: string,
   color?: string,
   hideAxis?: boolean,
-  dateFormat?: string,
-  isInteractive?: boolean,
   renderTooltip?: Function,
   renderTickY: (t: number) => string | number,
-  mapValue: (*) => number,
-  onlyUpdateIfLastPointChanges?: boolean,
-  theme: any,
+  valueKey?: string,
 };
 
-class Chart extends Component<Props> {
-  static defaultProps = {
-    color: "#000",
-    dateFormat: "%Y-%m-%d",
-    height: 400,
-    hideAxis: false,
-    id: "chart",
-    isInteractive: true,
-    tickXScale: "month",
-    renderTickY: (t: *) => t,
-    mapValue: (d: *) => d.value.toNumber(),
-  };
-
-  componentDidMount() {
-    const { width } = this._ruler.getBoundingClientRect();
-    this._width = width;
-    this.createChart();
-    if (this.props.isInteractive) {
-      this.subResize = observeResize(this._ruler, width => {
-        if (width !== this._width) {
-          this._width = width;
-          this.refreshChart(this.props);
-        }
-      });
-    }
-  }
-
-  shouldComponentUpdate(nextProps: Props) {
-    const lastPointChanges =
-      nextProps.mapValue(last(nextProps.data)) !== this.props.mapValue(last(this.props.data));
-    return (
-      lastPointChanges ||
-      nextProps.id !== this.props.id ||
-      nextProps.height !== this.props.height ||
-      nextProps.tickXScale !== this.props.tickXScale ||
-      nextProps.color !== this.props.color ||
-      nextProps.hideAxis !== this.props.hideAxis ||
-      nextProps.dateFormat !== this.props.dateFormat ||
-      nextProps.isInteractive !== this.props.isInteractive ||
-      nextProps.data.length !== this.props.data.length ||
-      (nextProps.onlyUpdateIfLastPointChanges ? false : nextProps.data !== this.props.data)
-    );
-  }
-
-  componentDidUpdate(prevProps: Props) {
-    this.refreshChart(prevProps);
-  }
-
-  componentWillUnmount() {
-    if (this.subResize) this.subResize();
-  }
-
-  subResize: *;
-  _ruler: any;
-  _node: any;
-  _width: number;
-  refreshChart: Function;
-
-  createChart() {
-    const ctx = {
-      NODES: {},
-      INVALIDATED: {},
-      MARGINS: {},
-      COLORS: {},
-      DATA: [],
-      WIDTH: 0,
-      HEIGHT: 0,
-      x: noop,
-      y: noop,
-    };
-
-    let firstRender = true;
-
-    // Keep reference to mouse handler to allow destroy when refresh
-    let mouseHandler = null;
-
-    const refreshToolTip = debounce(() => {
-      const { props } = this;
-      const { isInteractive, renderTooltip, theme } = props;
-
-      // Reference to last tooltip, to prevent un-necessary re-render
-      let lastDisplayedTooltip = null;
-
-      // Mouse handler
-      mouseHandler && mouseHandler.remove(); // eslint-disable-line no-unused-expressions
-      if (isInteractive) {
-        mouseHandler = handleMouseEvents({
-          ctx,
-          theme,
-          shouldTooltipUpdate: d => d !== lastDisplayedTooltip,
-          onTooltipUpdate: d => (lastDisplayedTooltip = d),
-          renderTooltip,
-          mapValue: props.mapValue,
-        });
-      }
-    }, 200);
-
-    this.refreshChart = prevProps => {
-      const { _node: node, props } = this;
-      const { data: raw, color, height, hideAxis, mapValue, theme } = props;
-
-      ctx.DATA = enrichData(raw);
-
-      // Detect what needs to be updated
-      ctx.INVALIDATED = {
-        color: firstRender || (prevProps && color !== prevProps.color),
-        margin: firstRender || (prevProps && hideAxis !== prevProps.hideAxis),
-      };
-      firstRender = false;
-
-      // Reset color if needed
-      if (ctx.INVALIDATED.color) {
-        ctx.COLORS = generateColors(theme, color);
-      }
-
-      // Reset margins if needed
-      if (ctx.INVALIDATED.margin) {
-        ctx.MARGINS = generateMargins(hideAxis);
-      }
-
-      // Derived draw variables
-      ctx.HEIGHT = Math.max(0, (height || 0) - ctx.MARGINS.top - ctx.MARGINS.bottom);
-      ctx.WIDTH = Math.max(0, this._width - ctx.MARGINS.left - ctx.MARGINS.right);
-
-      const [min, max] = d3.extent(ctx.DATA, mapValue);
-
-      // Scales and areas
-      const x = d3
-        .scaleTime()
-        .range([0, ctx.WIDTH])
-        .domain(d3.extent(ctx.DATA, d => d.parsedDate));
-      const y = d3
-        .scaleLinear()
-        .range([ctx.HEIGHT, 0])
-        .domain([0.8 * min, max]);
-      ctx.x = x;
-      ctx.y = y;
-
-      // Add/remove nodes depending on props
-      refreshNodes(theme, { ctx, node, props });
-
-      // Redraw
-      refreshDraw(theme, { ctx, props });
-
-      // Refreshing tooltip
-      refreshToolTip();
-    };
-
-    this.refreshChart();
-  }
-
-  render() {
-    const { height, hideAxis } = this.props;
-    return (
-      <Ruler height={height} hideAxis={hideAxis} ref={n => (this._ruler = n)}>
-        <div
-          style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
-          ref={n => (this._node = n)}
-        />
-      </Ruler>
-    );
-  }
-}
-
-const Ruler: ThemedComponent<{ height?: number }> = styled.div.attrs(({ height }) => ({
+const ChartContainer: ThemedComponent<{}> = styled.div.attrs(({ height }) => ({
   style: {
     height,
   },
 }))`
   position: relative;
-  width: 100%;
 `;
 
-export default withTheme(Chart);
+export default function Chart({
+  magnitude,
+  height,
+  data,
+  color,
+  tickXScale,
+  renderTickY,
+  renderTooltip,
+  valueKey = "value",
+}: Props) {
+  const canvasRef = useRef(null);
+  const chartRef = useRef(null);
+  const theme = useTheme("colors.palette");
+  const [tooltip, setTooltip] = useState();
+  const valueKeyRef = useRef(valueKey);
+
+  const generatedData = useMemo(
+    () => ({
+      datasets: [
+        {
+          label: "all accounts",
+          borderColor: color,
+          backgroundColor: ({ chart }) => {
+            const gradient = chart.ctx.createLinearGradient(0, 0, 0, chart.height / 1.2);
+            gradient.addColorStop(0, Color(color).alpha(0.4));
+            gradient.addColorStop(1, Color(color).alpha(0.0));
+            return gradient;
+          },
+          pointRadius: 0,
+          borderWidth: 2,
+          data: data.map(d => ({
+            x:
+              tickXScale === "week"
+                ? new Date(d.date)
+                : moment(new Date(d.date))
+                    .startOf("day")
+                    .toDate(),
+            y: d[valueKey].toNumber(),
+          })),
+        },
+      ],
+    }),
+    [color, data, valueKey, tickXScale],
+  );
+
+  const generateOptions = useMemo(
+    () => ({
+      animation: {
+        duration: 0,
+      },
+      responsive: true,
+      maintainAspectRatio: false,
+      tooltips: {
+        enabled: false,
+        intersect: false,
+        mode: "index",
+        custom: tooltip => setTooltip(tooltip),
+      },
+      legend: {
+        display: false,
+      },
+      scales: {
+        xAxes: [
+          {
+            type: "time",
+            gridLines: {
+              display: false,
+              color: theme.text.shade10,
+            },
+            ticks: {
+              fontColor: theme.text.shade60,
+              fontFamily: "Inter",
+              maxTicksLimit: 7,
+              maxRotation: 0,
+              minRotation: 0,
+            },
+            time: {
+              minUnit: "day",
+              displayFormats: {
+                quarter: "MMM YYYY",
+              },
+            },
+          },
+        ],
+        yAxes: [
+          {
+            gridLines: {
+              color: theme.text.shade10,
+              borderDash: [5, 5],
+              drawTicks: false,
+              drawBorder: false,
+              zeroLineColor: theme.text.shade10,
+            },
+            ticks: {
+              beginAtZero: true,
+              suggestedMax: 10 ** Math.max(magnitude - 4, 1),
+              maxTicksLimit: 4,
+              fontColor: theme.text.shade60,
+              fontFamily: "Inter",
+              padding: 10,
+              callback: value => renderTickY(value),
+            },
+          },
+        ],
+      },
+    }),
+    [renderTickY, theme, magnitude],
+  );
+
+  useLayoutEffect(() => {
+    if (chartRef.current) {
+      let shouldAnimate = false;
+      if (valueKeyRef.current !== valueKey) {
+        valueKeyRef.current = valueKey;
+        shouldAnimate = true;
+      }
+
+      chartRef.current.data.datasets[0].data = generatedData.datasets[0].data;
+      chartRef.current.options = generateOptions;
+      chartRef.current.update(shouldAnimate ? 500 : 0);
+    } else {
+      chartRef.current = new ChartJs(canvasRef.current, {
+        type: "line",
+        data: generatedData,
+        options: generateOptions,
+      });
+    }
+  }, [generateOptions, generatedData, valueKey]);
+
+  return (
+    <ChartContainer height={height}>
+      <canvas ref={canvasRef} />
+      {tooltip ? (
+        <Tooltip
+          tooltip={tooltip}
+          theme={theme}
+          renderTooltip={renderTooltip}
+          color={color}
+          data={data}
+        />
+      ) : null}
+    </ChartContainer>
+  );
+}

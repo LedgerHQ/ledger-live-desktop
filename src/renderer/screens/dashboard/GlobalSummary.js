@@ -5,7 +5,7 @@ import { BigNumber } from "bignumber.js";
 import moment from "moment";
 import { formatShort } from "@ledgerhq/live-common/lib/currencies";
 import type { Currency, PortfolioRange, BalanceHistoryData } from "@ledgerhq/live-common/lib/types";
-import Chart from "~/renderer/components/Chart2";
+import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import PlaceholderChart from "~/renderer/components/PlaceholderChart";
@@ -75,7 +75,12 @@ export default function PortfolioBalanceSummary({
             renderTooltip={renderTooltip}
           />
         ) : (
-          <PlaceholderChart chartId={chartId} data={portfolio.balanceHistory} tickXScale={range} />
+          <PlaceholderChart
+            magnitude={counterValue.units[0].magnitude}
+            chartId={chartId}
+            data={portfolio.balanceHistory}
+            tickXScale={range}
+          />
         )}
       </Box>
     </Card>

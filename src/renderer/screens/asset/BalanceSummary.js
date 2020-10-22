@@ -10,7 +10,7 @@ import type {
   TokenCurrency,
   Unit,
 } from "@ledgerhq/live-common/lib/types";
-import Chart from "~/renderer/components/Chart2";
+import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
 import moment from "moment";
 import FormattedVal from "~/renderer/components/FormattedVal";
