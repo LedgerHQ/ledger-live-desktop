@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Trans } from "react-i18next";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import DeviceAction from "~/renderer/components/DeviceAction";
@@ -24,12 +24,18 @@ import { DeviceBlocker } from "~/renderer/components/DeviceAction/DeviceBlocker"
 import { createAction as initSellCreateAction } from "@ledgerhq/live-common/lib/hw/actions/initSell";
 import { toAccountRaw } from "@ledgerhq/live-common/lib/account/serialization";
 import { toTransactionStatusRaw } from "@ledgerhq/live-common/lib/transaction/status";
+import Box from "~/renderer/components/Box";
+import BigSpinner from "~/renderer/components/BigSpinner";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 
 const checkSignatureAndPrepare = command("checkSignatureAndPrepare");
 const connectAppExec = command("connectApp");
 const initSellExec = command("getTransactionId");
 
 const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectAppExec);
+
+const onError = err => console.log(err);
 
 const Result = ({
   signedOperation,
@@ -70,6 +76,8 @@ export default function StepConnectDevice({
 }) {
   const broadcast = useBroadcast({ account, parentAccount });
   const tokenCurrency = account && account.type === "TokenAccount" && account.token;
+  const [swapData, setSwapData] = useState(null);
+  const [signedOperation, setSignedOperation] = useState(false);
 
   const action2 = useMemo(
     () =>
@@ -96,43 +104,68 @@ export default function StepConnectDevice({
     [setTransactionId],
   );
 
-  // ({ exchange, exchangeRate, transaction, deviceId }) =>
-  //         initSwapExec({
-  //           exchange: toExchangeRaw(exchange),
-  //           exchangeRate: toExchangeRateRaw(exchangeRate),
-  //           transaction: toTransactionRaw(transaction),
-  //           deviceId,
-  //         })
-
   if (!transaction || !account) return null;
+
+  if (signedOperation) {
+    console.log({ signedOperation });
+    return (
+      <Box alignItems={"center"} justifyContent={"center"} p={20}>
+        <BigSpinner size={40} />
+      </Box>
+    );
+  }
+
+  if (!swapData) {
+    return (
+      <DeviceAction
+        action={action2}
+        request={{
+          tokenCurrency,
+          parentAccount,
+          account,
+          transaction,
+          status,
+        }}
+        Result={Result}
+        onResult={({ initSwapResult, initSwapError, ...rest }) => {
+          console.log({ initSwapResult });
+          if (initSwapError) {
+            onError(initSwapError);
+          } else {
+            setSwapData(initSwapResult);
+          }
+        }}
+      />
+    );
+  }
+
+  console.log({ swapData, transaction, account, parentAccount });
+
+  const bridge = getAccountBridge(account, parentAccount);
+
+  bridge
+    .getTransactionStatus(getMainAccount(account, parentAccount), swapData.transaction)
+    .then(status => {
+      console.log("STATUS: ", status);
+    });
 
   return (
     <DeviceAction
-      action={action2}
+      key={"send"}
+      action={action}
       request={{
         tokenCurrency,
         parentAccount,
         account,
-        transaction,
-        status,
+        transaction: swapData.transaction,
+        appName: "Exchange",
       }}
       Result={Result}
       onResult={({ signedOperation, transactionSignError }) => {
-        if (signedOperation) {
-          setSigned(true);
-          broadcast(signedOperation).then(
-            operation => {
-              onOperationBroadcasted(operation);
-              transitionTo("confirmation");
-            },
-            error => {
-              onTransactionError(error);
-              transitionTo("confirmation");
-            },
-          );
-        } else if (transactionSignError) {
-          onTransactionError(transactionSignError);
-          transitionTo("confirmation");
+        if (transactionSignError) {
+          onError(transactionSignError);
+        } else {
+          setSignedOperation(signedOperation);
         }
       }}
     />

@@ -240,7 +240,8 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
         case "trade.trade-prepared":
           if (mode === "sell") {
             initSellFlow({
-              amount: parseCurrencyUnit(currency.units[0], context.baseAmount.toString()),
+              amount: parseCurrencyUnit(currency.units[0], "0.001"
+              ),
               recipient: context.transferIn.details.refundAccount,
             });
           }
