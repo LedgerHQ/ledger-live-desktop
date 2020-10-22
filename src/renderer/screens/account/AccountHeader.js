@@ -89,7 +89,7 @@ const AccountName = styled.input`
   border-color: transparent;
   border-radius: 4px;
   padding: 1px 9px 2px;
-  max-width: 190px !important;
+  max-width: 250px !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -110,6 +110,7 @@ const AccountName = styled.input`
   }
 
   :focus {
+    max-width: 190px !important;
     border-color: ${p => p.theme.colors.wallet};
     background: #fff;
     width: 250px;
