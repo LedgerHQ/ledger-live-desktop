@@ -354,6 +354,10 @@
     "hideCTA": "Token elrejtése"
   },
   "banners": {
+    "cleanCache": {
+      "title": "Modification of experimental settings require a clear cache",
+      "cta": "Clear cache"
+    },
     "migrate": "Ledger Live számlák frissítése lehetséges",
     "genericTerminatedCrypto": "{{coinName}} többé nem támogatott",
     "ledgerAcademy": {
