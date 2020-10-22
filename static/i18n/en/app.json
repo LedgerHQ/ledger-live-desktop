@@ -883,7 +883,10 @@
   "buy": {
     "title": "Buy",
     "titleCrypto": "Buy {{currency}}",
-    "buyCTA": "Buy {{currencyTicker}}"
+    "buyCTA": "Buy {{currencyTicker}}",
+    "withoutDevice": "Don't have your device?",
+    "connectWithoutDevice": "It's better to use your device for optimal security.",
+    "skipConnect": "Continue without device"
   },
   "receive": {
     "title": "Receive",

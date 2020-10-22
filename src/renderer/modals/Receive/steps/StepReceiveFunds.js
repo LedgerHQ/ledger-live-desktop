@@ -20,7 +20,7 @@ import ReadOnlyAddressField from "~/renderer/components/ReadOnlyAddressField";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import LinkShowQRCode from "~/renderer/components/LinkShowQRCode";
 import SuccessDisplay from "~/renderer/components/SuccessDisplay";
-import IconShield from "~/renderer/icons/Shield";
+import Receive2NoDevice from "~/renderer/components/Receive2NoDevice";
 import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/rendering";
 import type { StepProps } from "../Body";
 import Modal from "~/renderer/components/Modal";
@@ -67,34 +67,6 @@ const Receive1ShareAddress = ({
         <LinkShowQRCode onClick={showQRCodeModal} address={address} />
       </Box>
       <ReadOnlyAddressField address={address} />
-    </>
-  );
-};
-
-const Receive2NoDevice = ({ onVerify, name }: { onVerify: () => void, name: string }) => {
-  return (
-    <>
-      <Box horizontal flow={2} mt={2} alignItems="center">
-        <Box color="alertRed">
-          <IconShield height={32} width={28} />
-        </Box>
-        <Text fontSize={12} color="alertRed" ff="Inter" style={{ flexShrink: "unset" }}>
-          <span style={{ marginRight: 10 }}>
-            <Trans i18nKey="currentAddress.messageIfSkipped" values={{ name }} />
-          </span>
-          <LinkWithExternalIcon
-            style={{ display: "inline-flex" }}
-            onClick={() => openURL(urls.recipientAddressInfo)}
-            label={<Trans i18nKey="common.learnMore" />}
-          />
-        </Text>
-      </Box>
-
-      <Box pt={4} horizontal justifyContent="center">
-        <Button primary onClick={onVerify}>
-          <Trans i18nKey="common.verify" />
-        </Button>
-      </Box>
     </>
   );
 };
