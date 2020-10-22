@@ -354,6 +354,10 @@
     "hideCTA": "Masquer le token"
   },
   "banners": {
+    "cleanCache": {
+      "title": "Modification of experimental settings require a clear cache",
+      "cta": "Clear cache"
+    },
     "migrate": "Mise à jour des comptes Ledger Live disponible",
     "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge",
     "ledgerAcademy": {
