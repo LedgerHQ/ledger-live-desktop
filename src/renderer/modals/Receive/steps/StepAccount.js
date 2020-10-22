@@ -122,7 +122,7 @@ export default function StepAccount({
           onChangeToken={onChangeToken}
         />
       ) : null}
-      {account && !receiveTokenMode && tokenTypes.length && (
+      {account && !receiveTokenMode && tokenTypes.length ? (
         <div>
           <TokenTips
             textKey={`receive.steps.chooseAccount.${
@@ -144,7 +144,7 @@ export default function StepAccount({
             learnMoreLink={supportLinkByTokenType[tokenTypes[0]]}
           />
         </div>
-      )}
+      ) : null}
     </Box>
   );
 }
