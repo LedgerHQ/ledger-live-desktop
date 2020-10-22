@@ -1,11 +1,12 @@
 // @flow
 import React, { useCallback } from "react";
 import styled from "styled-components";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 // icons
 import IconHelp from "~/renderer/icons/Help";
 import IconGithub from "~/renderer/icons/Github";
 import IconTwitter from "~/renderer/icons/Twitter";
+import IconActivity from "~/renderer/icons/Activity";
 import { connect } from "react-redux";
 import IconFacebook from "~/renderer/icons/Facebook";
 import IconBook from "~/renderer/icons/Book";
@@ -14,8 +15,12 @@ import { openURL } from "~/renderer/linking";
 import Text from "~/renderer/components/Text";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Modal from "~/renderer/components/Modal";
+import FakeLink from "~/renderer/components/FakeLink";
+import Box from "~/renderer/components/Box";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import { closeModal } from "~/renderer/actions/modals";
+import { urls } from "~/config/urls";
+
 const LinkCardContainer = styled.a`
   border: 1px solid ${p => p.theme.colors.palette.text.shade30};
   border-radius: 4px;
@@ -32,6 +37,16 @@ const LinkCardContainer = styled.a`
   &:active {
     filter: brightness(60%);
   }
+`;
+const Circle = styled(Box)`
+  height: 28px;
+  width: 28px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 50%;
+  background-color: ${p => p.theme.colors.pillActiveBackground};
+  color: ${p => p.theme.colors.palette.primary.main};
 `;
 const IconContainer = styled.div`
   margin-bottom: 32px;
@@ -84,6 +99,18 @@ const HelpModal = ({ closeModal }: Props) => {
       <ModalBody
         onClose={onClose}
         title={t("help.title")}
+        renderFooter={() => (
+          <Box flex={1} horizontal justifyContent="center" alignItems="center" color="wallet">
+            <Circle>
+              <IconActivity size={14} />
+            </Circle>
+            <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8 }}>
+              <FakeLink onClick={() => openURL(urls.helpModal.status)}>
+                <Trans i18nKey="help.status" />
+              </FakeLink>
+            </Text>
+          </Box>
+        )}
         render={() => (
           <>
             <TrackPage category="Modal" name="Help" />
@@ -92,25 +119,19 @@ const HelpModal = ({ closeModal }: Props) => {
                 <LinkCard
                   title={t("help.gettingStarted.title")}
                   desc={t("help.gettingStarted.desc")}
-                  url={
-                    "https://www.ledger.com/start?utm_source=ledger_live&utm_medium=self_referral&utm_content=help_desktop"
-                  }
+                  url={urls.helpModal.gettingStarted}
                   Icon={IconNano}
                 />
                 <LinkCard
                   title={t("help.helpCenter.title")}
                   desc={t("help.helpCenter.desc")}
-                  url={
-                    "https://support.ledger.com/hc/en-us?utm_source=ledger_live&utm_medium=self_referral&utm_content=help_desktop"
-                  }
+                  url={urls.helpModal.helpCenter}
                   Icon={IconHelp}
                 />
                 <LinkCard
                   title={t("help.ledgerAcademy.title")}
                   desc={t("help.ledgerAcademy.desc")}
-                  url={
-                    "https://www.ledger.com/academy/?utm_source=ledger_live&utm_medium=self_referral&utm_content=help_desktop"
-                  }
+                  url={urls.helpModal.ledgerAcademy}
                   Icon={IconBook}
                 />
               </RowContainer>
@@ -118,19 +139,19 @@ const HelpModal = ({ closeModal }: Props) => {
                 <LinkCard
                   title={t("help.facebook.title")}
                   desc={t("help.facebook.desc")}
-                  url={"https://www.facebook.com/Ledger/"}
+                  url={urls.social.facebook}
                   Icon={IconFacebook}
                 />
                 <LinkCard
                   title={t("help.twitter.title")}
                   desc={t("help.twitter.desc")}
-                  url={"https://twitter.com/ledger"}
+                  url={urls.social.twitter}
                   Icon={IconTwitter}
                 />
                 <LinkCard
                   title={t("help.github.title")}
                   desc={t("help.github.desc")}
-                  url={"https://github.com/LedgerHQ"}
+                  url={urls.social.github}
                   Icon={IconGithub}
                 />
               </RowContainer>
