@@ -208,7 +208,6 @@ const Body = ({
   }
 
   const error = transactionError || bridgeError;
-  console.log("BODY: ", params)
 
   const stepperProps = {
     title: stepId === "warning" ? t("common.information") : t("send.title"),

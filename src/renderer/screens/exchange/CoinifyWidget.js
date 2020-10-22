@@ -167,7 +167,7 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
 
   const setTransactionId = useCallback(txId => {
     return new Promise(resolve => {
-      console.log("setTransactionId CALLED")
+      console.log("setTransactionId CALLED with txId: ", txId);
       const onReply = e => {
         if (!e.isTrusted || e.origin !== coinifyConfig.host || !e.data) return;
         const { type, event, context } = e.data;
@@ -240,7 +240,8 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
         case "trade.trade-prepared":
           if (mode === "sell") {
             initSellFlow({
-              amount: parseCurrencyUnit(currency.units[0], context.baseAmount.toString()),
+              amount: parseCurrencyUnit(currency.units[0], "0.001"
+              ),
               recipient: context.transferIn.details.refundAccount,
             });
           }
