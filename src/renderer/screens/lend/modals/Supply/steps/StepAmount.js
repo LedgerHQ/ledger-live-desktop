@@ -198,7 +198,7 @@ function StepAmount({
           }
         />
       </Box>
-      <Box mt={5}>
+      <Box mt={6}>
         <Spoiler textTransform title={t("account.settings.advancedLogs")}>
           {parentAccount && transaction ? (
             <Box my={4}>
