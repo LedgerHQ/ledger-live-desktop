@@ -354,6 +354,10 @@
     "hideCTA": "Hide token"
   },
   "banners": {
+    "cleanCache": {
+      "title": "Modification of experimental settings require a clear cache",
+      "cta": "Clear cache"
+    },
     "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "{{coinName}}은(는) 더 이상 지원되지 않습니다.",
     "ledgerAcademy": {
