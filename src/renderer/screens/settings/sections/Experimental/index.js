@@ -1,9 +1,10 @@
 // @flow
 
-import React from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { isEnvDefault } from "@ledgerhq/live-common/lib/env";
 import { experimentalFeatures, isReadOnlyEnv } from "~/renderer/experimental";
+import { useDispatch } from "react-redux";
 import { setEnvOnAllThreads } from "~/helpers/env";
 import type { Feature } from "~/renderer/experimental";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -11,6 +12,7 @@ import useEnv from "~/renderer/hooks/useEnv";
 import Disclaimer from "~/renderer/components/Disclaimer";
 import IconAtom from "~/renderer/icons/Atom";
 import IconSensitiveOperationShield from "~/renderer/icons/SensitiveOperationShield";
+import { setShowClearCacheBanner } from "~/renderer/actions/settings";
 import {
   SettingsSection as Section,
   SettingsSectionHeader as Header,
@@ -25,11 +27,26 @@ const experimentalTypesMap = {
   integer: ExperimentalInteger,
 };
 
-const ExperimentalFeatureRow = ({ feature }: { feature: Feature }) => {
-  const { type, ...rest } = feature;
+const ExperimentalFeatureRow = ({
+  feature,
+  onDirtyChange,
+}: {
+  feature: Feature,
+  onDirtyChange: () => void,
+}) => {
+  const { type, dirty, ...rest } = feature;
   const Children = experimentalTypesMap[feature.type];
   const envValue = useEnv(feature.name);
   const isDefault = isEnvDefault(feature.name);
+  const onChange = useCallback(
+    (name, value) => {
+      if (dirty) {
+        onDirtyChange();
+      }
+      setEnvOnAllThreads(name, value);
+    },
+    [dirty, onDirtyChange],
+  );
 
   return Children ? (
     <Row title={feature.title} desc={feature.description}>
@@ -40,7 +57,7 @@ const ExperimentalFeatureRow = ({ feature }: { feature: Feature }) => {
         readOnly={isReadOnlyEnv(feature.name)}
         // $FlowFixMe
         isDefault={isDefault}
-        onChange={setEnvOnAllThreads}
+        onChange={onChange}
         {...rest}
       />
     </Row>
@@ -49,6 +66,17 @@ const ExperimentalFeatureRow = ({ feature }: { feature: Feature }) => {
 
 const SectionExperimental = () => {
   const { t } = useTranslation();
+  const [needsCleanCache, setNeedsCleanCache] = useState(false);
+  const dispatch = useDispatch();
+  const onDirtyChange = useCallback(() => setNeedsCleanCache(true), []);
+
+  useEffect(() => {
+    return () => {
+      if (needsCleanCache) {
+        dispatch(setShowClearCacheBanner(true));
+      }
+    };
+  }, [dispatch, needsCleanCache]);
 
   return (
     <Section data-e2e="experimental_section_title">
@@ -69,7 +97,11 @@ const SectionExperimental = () => {
         {experimentalFeatures.map(feature =>
           !feature.shadow || (feature.shadow && !isEnvDefault(feature.name)) ? (
             // $FlowFixMe
-            <ExperimentalFeatureRow key={feature.name} feature={feature} />
+            <ExperimentalFeatureRow
+              key={feature.name}
+              feature={feature}
+              onDirtyChange={onDirtyChange}
+            />
           ) : null,
         )}
       </Body>
