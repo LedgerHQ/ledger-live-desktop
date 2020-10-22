@@ -49,7 +49,7 @@ const TokenTips = function TokenTips({
                 shell.openExternal(learnMoreLink);
               }}
             >
-              Learn More
+              <Trans i18nKey="common.learnMore" />
             </LearnMore>
           </>
         )}
