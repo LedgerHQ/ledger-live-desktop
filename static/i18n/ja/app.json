@@ -890,9 +890,7 @@
         "title": "アカウント",
         "label": "入金アカウント",
         "parentAccount": "1. Select {{currencyName}} account",
-        "token": "2. Select a token",
-        "verifyTokenType": "Please verify that <bold>{{token}}</bold> is an <bold>{{tokenType}}</bold> token. Any other crypto asset sent to an {{currency}} account may be lost.",
-        "warningTokenType": "Please only send <bold>{{ticker}}</bold> or <bold>{{tokenType}}</bold> tokens to an {{currency}} account. Any other crypto assets may be lost."
+        "token": "2. Select a token"
       },
       "connectDevice": {
         "title": "機器",

@@ -8,7 +8,7 @@ import Text from "~/renderer/components/Text";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Trans } from "react-i18next";
-import { shell } from "electron";
+import { openURL } from "~/renderer/linking";
 
 const TokenTipsContainer: ThemedComponent<{}> = styled(Box)`
   background: ${colors.pillActiveBackground};
@@ -20,10 +20,12 @@ const TokenTipsContainer: ThemedComponent<{}> = styled(Box)`
 const Strong: ThemedComponent<{}> = styled.span`
   font-weight: 700;
 `;
-const LearnMore: ThemedComponent<{}> = styled.a`
+const LearnMore: ThemedComponent<{}> = styled.button`
   font-weight: 500;
   text-decoration: underline;
   cursor: pointer;
+  border: none;
+  background: none;
 `;
 
 const TokenTips = function TokenTips({
@@ -39,14 +41,15 @@ const TokenTips = function TokenTips({
     <TokenTipsContainer mt={4} horizontal alignItems="center">
       <InfoCircle size={16} color={colors.wallet} />
       <Text style={{ flex: 1, marginLeft: 20 }} ff="Inter|Regular" fontSize={4}>
-        <Trans i18nKey={textKey} values={textData} components={{ bold: <Strong /> }} />
+        <Trans i18nKey={textKey} values={textData}>
+          <b></b>
+        </Trans>
         {learnMoreLink && (
           <>
             <span>&nbsp;</span>
             <LearnMore
-              href={learnMoreLink}
               onClick={() => {
-                shell.openExternal(learnMoreLink);
+                openURL(learnMoreLink);
               }}
             >
               <Trans i18nKey="common.learnMore" />

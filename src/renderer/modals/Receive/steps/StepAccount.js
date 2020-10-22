@@ -122,28 +122,25 @@ export default function StepAccount({
           onChangeToken={onChangeToken}
         />
       ) : null}
-      {account && !receiveTokenMode && tokenTypes.length && account && account.type === "Account" && (
+      {account && !receiveTokenMode && tokenTypes.length && (
         <div>
           <TokenTips
-            textKey="receive.steps.chooseAccount.warningTokenType"
-            textData={{
-              ticker: account.currency.ticker,
-              tokenType: tokenTypes.map(tt => tt.toUpperCase()).join("/"),
-              currency: account.currency.name,
-            }}
-            learnMoreLink={supportLinkByTokenType[tokenTypes[0]]}
-          />
-        </div>
-      )}
-      {account && !receiveTokenMode && tokenTypes.length && account.type === "TokenAccount" && (
-        <div>
-          <TokenTips
-            textKey="receive.steps.chooseAccount.verifyTokenType"
-            textData={{
-              token: account.token.name,
-              tokenType: tokenTypes.map(tt => tt.toUpperCase()).join("/"),
-              currency: mainAccount && mainAccount.currency.name,
-            }}
+            textKey={`receive.steps.chooseAccount.${
+              account.type === "TokenAccount" ? "verifyTokenType" : "warningTokenType"
+            }`}
+            textData={
+              account.type === "TokenAccount"
+                ? {
+                    token: account.token.name,
+                    tokenType: tokenTypes.map(tt => tt.toUpperCase()).join("/"),
+                    currency: mainAccount && mainAccount.currency.name,
+                  }
+                : {
+                    ticker: account.currency.ticker,
+                    tokenType: tokenTypes.map(tt => tt.toUpperCase()).join("/"),
+                    currency: account.currency.name,
+                  }
+            }
             learnMoreLink={supportLinkByTokenType[tokenTypes[0]]}
           />
         </div>

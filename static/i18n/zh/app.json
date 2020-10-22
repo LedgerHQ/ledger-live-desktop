@@ -890,9 +890,7 @@
         "title": "账户",
         "label": "信贷账户",
         "parentAccount": "1. 选择 {{currencyName}} 账户",
-        "token": "2. 选择代币",
-        "verifyTokenType": "Please verify that <bold>{{token}}</bold> is an <bold>{{tokenType}}</bold> token. Any other crypto asset sent to an {{currency}} account may be lost.",
-        "warningTokenType": "Please only send <bold>{{ticker}}</bold> or <bold>{{tokenType}}</bold> tokens to an {{currency}} account. Any other crypto assets may be lost."
+        "token": "2. 选择代币"
       },
       "connectDevice": {
         "title": "设备",
