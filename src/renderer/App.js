@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { hot } from "react-hot-loader/root";
 import { Provider } from "react-redux";
 import type { Store } from "redux";
@@ -30,16 +30,28 @@ type Props = {
 };
 
 const App = ({ store }: Props) => {
+  const [reloadEnabled, setReloadEnabled] = useState(true);
+
   useEffect(() => {
-    window.addEventListener("keydown", reloadApp);
+    window.addEventListener("keydown", e => {
+      if (reloadEnabled) {
+        reloadApp(e);
+      }
+    });
     return () => window.removeEventListener("keydown", reloadApp);
-  }, []);
+  }, [reloadEnabled]);
 
   return (
     <LiveStyleSheetManager>
       <Provider store={store}>
         <StyleProvider selectedPalette="light">
-          <ThrowBlock>
+          <ThrowBlock
+            onError={() => {
+              if (!__DEV__) {
+                setReloadEnabled(false);
+              }
+            }}
+          >
             <RemoteConfigProvider>
               <UpdaterProvider>
                 <Router>
