@@ -84,6 +84,7 @@ function StepAmount({
   parentAccount,
   onChangeAccount,
   onChangeTransaction,
+  onUpdateTransaction,
   transaction,
   status,
   error,
@@ -100,13 +101,13 @@ function StepAmount({
 
   const onChangeAmount = useCallback(
     (a?: BigNumber) => {
-      onChangeTransaction(
-        bridge.updateTransaction(transaction, {
+      onUpdateTransaction(tx =>
+        bridge.updateTransaction(tx, {
           amount: a,
         }),
       );
     },
-    [bridge, transaction, onChangeTransaction],
+    [bridge, onUpdateTransaction],
   );
 
   const warning = useMemo(() => focused && Object.values(warnings || {})[0], [focused, warnings]);
