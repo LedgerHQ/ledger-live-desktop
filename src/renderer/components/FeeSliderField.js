@@ -1,16 +1,13 @@
 // @flow
 
-import React, { useMemo, useCallback } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { BigNumber } from "bignumber.js";
 import { Trans } from "react-i18next";
 import type { Unit } from "@ledgerhq/live-common/lib/types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import {
-  inferDynamicRange,
-  reverseRangeIndex,
-  projectRangeIndex,
-} from "@ledgerhq/live-common/lib/range";
+import type { Range } from "@ledgerhq/live-common/lib/range";
+import { reverseRangeIndex, projectRangeIndex } from "@ledgerhq/live-common/lib/range";
 import IconExclamationCircle from "~/renderer/icons/ExclamationCircle";
 import Box from "./Box";
 import Text from "./Text";
@@ -20,6 +17,7 @@ import GenericContainer from "./FeesContainer";
 import TranslatedError from "./TranslatedError";
 
 type Props = {
+  range: Range,
   value: BigNumber,
   onChange: BigNumber => void,
   unit: Unit,
@@ -47,15 +45,16 @@ const Holder = styled.div`
 `;
 
 export function useDynamicRange({
+  range,
   value,
   defaultValue,
   onChange,
 }: {
+  range: Range,
   value: BigNumber,
   defaultValue: BigNumber,
   onChange: BigNumber => void,
 }) {
-  const range = useMemo(() => inferDynamicRange(defaultValue), [defaultValue]);
   const index = reverseRangeIndex(range, value);
   const setValueIndex = useCallback((i: number) => onChange(projectRangeIndex(range, i)), [
     range,
@@ -65,8 +64,9 @@ export function useDynamicRange({
   return { range, index, constraintValue, setValueIndex };
 }
 
-const FeeSliderField = ({ value, onChange, unit, error, defaultValue }: Props) => {
-  const { range, index, constraintValue, setValueIndex } = useDynamicRange({
+const FeeSliderField = ({ range, value, onChange, unit, error, defaultValue }: Props) => {
+  const { index, constraintValue, setValueIndex } = useDynamicRange({
+    range,
     value,
     defaultValue,
     onChange,
