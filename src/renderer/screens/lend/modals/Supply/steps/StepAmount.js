@@ -209,6 +209,7 @@ function StepAmount({
                 account={parentAccount}
                 transaction={transaction}
                 status={status}
+                displayError={false}
               />
               <Box mt={3}>
                 <GasLimitField

@@ -21,7 +21,7 @@ type Props = {
   value: BigNumber,
   onChange: BigNumber => void,
   unit: Unit,
-  error: Error,
+  error: ?Error,
   defaultValue: BigNumber,
 };
 
