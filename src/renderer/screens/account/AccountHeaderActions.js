@@ -153,7 +153,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   );
 
   return (
-    <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
+    <Box horizontal alignItems="center" justifyContent="flex-end" flow={2} mt={15}>
       {!isAccountEmpty(account) ? (
         <>
           {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}
