@@ -150,13 +150,16 @@ const INITIAL_STATE: SettingsState = {
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
 
-export const supportedCountervalues = [...listSupportedFiats(), ...possibleIntermediaries].map<any>(
-  currency => ({
+export const supportedCountervalues: { value: string, label: string, currency: Currency }[] = [
+  ...listSupportedFiats(),
+  ...possibleIntermediaries,
+]
+  .map(currency => ({
     value: currency.ticker,
     label: `${currency.name} - ${currency.ticker}`,
     currency,
-  }),
-);
+  }))
+  .sort((a, b) => (a.currency.name < b.currency.name ? -1 : 1));
 
 const handlers: Object = {
   SETTINGS_SET_PAIRS: (
