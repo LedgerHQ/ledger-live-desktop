@@ -1,15 +1,13 @@
 // @flow
-import React, { useState, useEffect, useMemo } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
 import {
   Countervalues,
   useCountervaluesPolling,
   useCountervaluesExport,
 } from "@ledgerhq/live-common/lib/countervalues/react";
-import { inferTrackingPairForAccounts } from "@ledgerhq/live-common/lib/countervalues/logic";
+import type { CounterValuesStateRaw } from "@ledgerhq/live-common/lib/countervalues/types";
 import { setKey, getKey } from "~/renderer/storage";
-import { accountsSelector } from "~/renderer/reducers/accounts";
-import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
+import { useUserSettings, useTrackingPairIds } from "../actions/general";
 
 export default function CountervaluesProvider({ children }: { children: React$Node }) {
   const userSettings = useUserSettings();
@@ -38,11 +36,16 @@ function CountervaluesManager({ children }: { children: React$Node }) {
 }
 
 function useCacheManager() {
-  const rawState = useCountervaluesExport();
+  const { status, ...state } = useCountervaluesExport();
+  const trackingPairs = useTrackingPairIds();
   useEffect(() => {
-    if (!Object.keys(rawState.status).length) return;
-    setKey("app", "countervalues", rawState);
-  }, [rawState]);
+    if (!Object.keys(status).length) return;
+    const newState = Object.entries(state).reduce(
+      (prev, [key, val]) => (trackingPairs.includes(key) ? { ...prev, [key]: val } : prev),
+      {},
+    );
+    setKey("app", "countervalues", { ...newState, state });
+  }, [state, trackingPairs, status]);
 }
 
 function usePollingManager() {
@@ -55,16 +58,4 @@ function usePollingManager() {
       window.removeEventListener("focus", start);
     };
   }, [start, stop]);
-}
-
-export function useUserSettings() {
-  const accounts = useSelector(accountsSelector);
-  const countervalue = useSelector(counterValueCurrencySelector);
-  return useMemo(
-    () => ({
-      trackingPairs: inferTrackingPairForAccounts(accounts, countervalue),
-      autofillGaps: true,
-    }),
-    [accounts, countervalue],
-  );
 }

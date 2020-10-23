@@ -197,7 +197,7 @@ export default function Chart({
   return (
     <ChartContainer height={height}>
       <canvas ref={canvasRef} />
-      {tooltip ? (
+      {tooltip && renderTooltip ? (
         <Tooltip
           tooltip={tooltip}
           theme={theme}

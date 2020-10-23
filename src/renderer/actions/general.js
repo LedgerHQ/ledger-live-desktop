@@ -14,6 +14,8 @@ import {
   useDistribution as useDistributionCommon,
   useCalculateCountervalueCallback as useCalculateCountervalueCallbackCommon,
 } from "@ledgerhq/live-common/lib/countervalues/react";
+import { inferTrackingPairForAccounts } from "@ledgerhq/live-common/lib/countervalues/logic";
+import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
 import type { State } from "~/renderer/reducers";
 import { accountsSelector, activeAccountsSelector } from "~/renderer/reducers/accounts";
 import { osDarkModeSelector } from "~/renderer/reducers/application";
@@ -128,3 +130,28 @@ export const themeSelector: OutputSelector<State, void, string> = createSelector
   userThemeSelector,
   (osDark, theme) => theme || (osDark ? "dark" : "light"),
 );
+
+export function useUserSettings() {
+  const trackingPairs = useTrackingPairs();
+  return useMemo(
+    () => ({
+      trackingPairs,
+      autofillGaps: true,
+    }),
+    [trackingPairs],
+  );
+}
+
+export function useTrackingPairIds(): string[] {
+  const trackingPairs = useTrackingPairs();
+  return useMemo(() => trackingPairs.map(p => pairId(p)), [trackingPairs]);
+}
+
+export function useTrackingPairs() {
+  const accounts = useSelector(accountsSelector);
+  const countervalue = useSelector(counterValueCurrencySelector);
+  return useMemo(() => inferTrackingPairForAccounts(accounts, countervalue), [
+    accounts,
+    countervalue,
+  ]);
+}
