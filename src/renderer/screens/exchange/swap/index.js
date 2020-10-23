@@ -3,11 +3,11 @@
 import React, { useCallback, useState } from "react";
 import { useLocation } from "react-router-dom";
 import TabBar from "~/renderer/components/TabBar";
-import Swap from "~/renderer/screens/swap/Swap";
+import Swap from "~/renderer/screens/exchange/swap/Swap";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import { Trans } from "react-i18next";
-import History from "~/renderer/screens/swap/History";
+import History from "~/renderer/screens/exchange/swap/History";
 
 const SwapOrSwapHistory = () => {
   const [tabIndex, setTabIndex] = useState(0);

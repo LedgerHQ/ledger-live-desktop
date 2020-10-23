@@ -3,14 +3,14 @@ import React, { useCallback } from "react";
 import moment from "moment";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
-import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/swap/types";
+import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import {
   getAccountUnit,
   getAccountCurrency,
   getAccountName,
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account";
-import { operationStatusList } from "@ledgerhq/live-common/lib/swap";
+import { operationStatusList } from "@ledgerhq/live-common/lib/exchange/swap";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { ModalBody } from "~/renderer/components/Modal";
@@ -27,7 +27,7 @@ import IconSwap from "~/renderer/icons/Swap";
 import IconArrowDown from "~/renderer/icons/ArrowDown";
 import { rgba } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { getStatusColor } from "~/renderer/screens/swap/History/OperationRow";
+import { getStatusColor } from "~/renderer/screens/exchange/swap/History/OperationRow";
 import IconClock from "~/renderer/icons/Clock";
 import { GradientHover } from "~/renderer/modals/OperationDetails/styledComponents";
 

@@ -2,7 +2,7 @@
 import React, { useCallback, useState } from "react";
 import { Trans } from "react-i18next";
 import { ModalBody } from "~/renderer/components/Modal";
-import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
+import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import StepSummary, { StepSummaryFooter } from "~/renderer/modals/Swap/steps/StepSummary";
 import StepDevice, { StepDeviceFooter } from "~/renderer/modals/Swap/steps/StepDevice";
 import StepFinished, { StepFinishedFooter } from "~/renderer/modals/Swap/steps/StepFinished";
@@ -11,7 +11,7 @@ import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import { useDispatch } from "react-redux";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import { addPendingOperation, getMainAccount } from "@ledgerhq/live-common/lib/account";
-import addToSwapHistory from "@ledgerhq/live-common/lib/swap/addToSwapHistory";
+import addToSwapHistory from "@ledgerhq/live-common/lib/exchange/swap/addToSwapHistory";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Track from "~/renderer/analytics/Track";
 

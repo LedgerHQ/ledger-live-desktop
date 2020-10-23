@@ -14,7 +14,7 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import ArrowSeparator from "~/renderer/components/ArrowSeparator";
 import CheckBox from "~/renderer/components/CheckBox";
 import React from "react";
-import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
+import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { SwapGenericAPIError } from "@ledgerhq/live-common/lib/errors";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import Button from "~/renderer/components/Button";
@@ -26,7 +26,7 @@ import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 import FakeLink from "~/renderer/components/FakeLink";
-import { CountdownTimerWrapper } from "~/renderer/screens/swap/Form/Footer";
+import { CountdownTimerWrapper } from "~/renderer/screens/exchange/swap/Form/Footer";
 import IconClock from "~/renderer/icons/Clock";
 import CountdownTimer from "~/renderer/components/CountdownTimer";
 

@@ -80,7 +80,6 @@ const createSteps = (): St[] => [
     excludeFromBreadcrumb: true,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
-
   },
 ];
 
@@ -135,10 +134,11 @@ const Body = ({
   } = useBridgeTransaction(() => {
     const parentAccount = params && params.parentAccount;
     const account = (params && params.account) || accounts[0];
+    const mainAccount = getMainAccount(account, parentAccount);
 
     const bridge = getAccountBridge(account, parentAccount);
 
-    const t = bridge.createTransaction(account);
+    const t = bridge.createTransaction(mainAccount);
 
     const transaction = bridge.updateTransaction(t, {
       amount: params.amount,

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import Exchange from "~/renderer/icons/Exchange";
 import { rgba } from "~/renderer/styles/helpers";
@@ -11,8 +11,7 @@ import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
 import Label from "~/renderer/components/Label";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Button from "~/renderer/components/Button";
-import { useSelector, useDispatch } from "react-redux";
-import { accountsSelector } from "~/renderer/reducers/accounts";
+import { useDispatch } from "react-redux";
 import type {
   Account,
   AccountLike,
@@ -26,11 +25,9 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
 import { track } from "~/renderer/analytics/segment";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
-import Box from "~/renderer/components/Box";
 import type { Option } from "~/renderer/components/Select";
-import { CurrencyOptionRow } from "~/renderer/screens/swap/Form";
-import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/swap/logic";
-import { getCurrenciesWithStatus } from "@ledgerhq/live-common/lib/swap/logic";
+import { CurrencyOptionRow } from "~/renderer/screens/exchange/swap/Form";
+import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 
 const Container: ThemedComponent<{}> = styled.div`
   width: 365px;
@@ -68,6 +65,7 @@ const FormContent: ThemedComponent<{}> = styled.div`
 
 type Props = {
   selectAccount: (account: AccountLike, parentAccount: ?Account) => void,
+  allAccounts: Account[],
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
   defaultAccount?: ?Account,
   currenciesStatus: CurrenciesStatus,
@@ -79,7 +77,13 @@ const AccountSelectorLabel = styled(Label)`
   justify-content: space-between;
 `;
 
-const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccount, currenciesStatus, allAccounts }: Props) => {
+const SelectAccountAndCurrency = ({
+  selectAccount,
+  defaultCurrency,
+  defaultAccount,
+  currenciesStatus,
+  allAccounts,
+}: Props) => {
   const { t } = useTranslation();
   const allCurrencies = useCoinifyCurrencies();
 

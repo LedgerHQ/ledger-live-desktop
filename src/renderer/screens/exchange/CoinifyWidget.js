@@ -53,17 +53,19 @@ type CoinifyWidgetConfig = {
   transferConfirmation?: boolean,
   transferOutMedia?: string,
   transferInMedia?: string,
+  confirmMessages?: boolean,
 };
 
 type Props = {
   account?: AccountLike,
-  parentAccount?: Account,
+  parentAccount?: ?Account,
   mode: string,
   onReset?: () => void,
 };
 
 const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
   const [widgetLoaded, setWidgetLoaded] = useState(false);
+  const dispatch = useDispatch();
   const colors = useTheme("colors");
   const { t } = useTranslation();
   const widgetRef: { current: null | HTMLIFrameElement } = useRef(null);
@@ -147,7 +149,7 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
         }
       }
     }
-  }, [coinifyConfig.host, currency, mainAccount]);
+  }, [coinifyConfig.host, currency, mainAccount, mode]);
 
   const handleOnCancel = useCallback(() => {
     if (mainAccount && widgetRef.current) {
@@ -165,43 +167,50 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
     }
   }, [coinifyConfig.host, mainAccount]);
 
-  const setTransactionId = useCallback(txId => {
-    return new Promise(resolve => {
-      console.log("setTransactionId CALLED with txId: ", txId);
-      const onReply = e => {
-        if (!e.isTrusted || e.origin !== coinifyConfig.host || !e.data) return;
-        const { type, event, context } = e.data;
-        console.log(e.data);
+  const setTransactionId = useCallback(
+    txId => {
+      return new Promise(resolve => {
+        console.log("setTransactionId CALLED with txId: ", txId);
+        const onReply = e => {
+          if (!e.isTrusted || e.origin !== coinifyConfig.host || !e.data) return;
+          const { type, event, context } = e.data;
+          console.log(e.data);
 
-        if (type === "event" && event === "trade.trade-created") {
-          resolve(context);
-        }
-      };
-      window.addEventListener("message", onReply, { once: true });
-      widgetRef.current.contentWindow.postMessage(
-        {
-          type: "event",
-          event: "settings.partner-context-changed",
-          context: {
-            partnerContext: {
-              nonce: txId,
+          if (type === "event" && event === "trade.trade-created") {
+            resolve(context);
+          }
+        };
+        window.addEventListener("message", onReply, { once: true });
+        if (widgetRef.current?.contentWindow) {
+          widgetRef.current.contentWindow.postMessage(
+            {
+              type: "event",
+              event: "settings.partner-context-changed",
+              context: {
+                partnerContext: {
+                  nonce: txId,
+                },
+              },
             },
-          },
-        },
-        coinifyConfig.host,
-      );
-      widgetRef.current.contentWindow.postMessage(
-        {
-          type: "event",
-          event: "trade.confirm-trade-prepared",
-          context: {
-            confirmed: true,
-          },
-        },
-        coinifyConfig.host,
-      );
-    });
-  }, []);
+            coinifyConfig.host,
+          );
+        }
+        if (widgetRef.current?.contentWindow) {
+          widgetRef.current.contentWindow.postMessage(
+            {
+              type: "event",
+              event: "trade.confirm-trade-prepared",
+              context: {
+                confirmed: true,
+              },
+            },
+            coinifyConfig.host,
+          );
+        }
+      });
+    },
+    [coinifyConfig],
+  );
 
   const initSellFlow = useCallback(
     ({ amount, recipient }) => {
@@ -218,10 +227,9 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
         }),
       );
     },
-    [account, parentAccount, handleOnResult, handleOnCancel],
+    [dispatch, account, parentAccount, handleOnResult, setTransactionId, handleOnCancel],
   );
 
-  const dispatch = useDispatch();
   useEffect(() => {
     if (!account) return;
 
@@ -238,10 +246,9 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
           }
           break;
         case "trade.trade-prepared":
-          if (mode === "sell") {
+          if (mode === "sell" && currency) {
             initSellFlow({
-              amount: parseCurrencyUnit(currency.units[0], "0.001"
-              ),
+              amount: parseCurrencyUnit(currency.units[0], "0.001"),
               recipient: context.transferIn.details.refundAccount,
             });
           }
@@ -275,14 +282,15 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
     window.addEventListener("message", onMessage, false);
     return () => window.removeEventListener("message", onMessage, false);
   }, [
-    mainAccount,
-    url,
-    coinifyConfig.host,
+    account,
+    coinifyConfig,
+    currency,
     dispatch,
     handleOnCancel,
     handleOnResult,
-    account,
-    currency,
+    initSellFlow,
+    mainAccount,
+    mode,
     parentAccount,
   ]);
 

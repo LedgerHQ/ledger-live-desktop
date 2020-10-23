@@ -6,7 +6,6 @@ import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import StepProgress from "~/renderer/components/StepProgress";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
-import { useBroadcast } from "~/renderer/hooks/useBroadcast";
 import { toTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 
 import type {
@@ -22,7 +21,7 @@ import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { mockedEventEmitter } from "~/renderer/components/DebugMock";
 import { DeviceBlocker } from "~/renderer/components/DeviceAction/DeviceBlocker";
 import { createAction as initSellCreateAction } from "@ledgerhq/live-common/lib/hw/actions/initSell";
-import { toAccountRaw } from "@ledgerhq/live-common/lib/account/serialization";
+import { toAccountRaw, toAccountLikeRaw } from "@ledgerhq/live-common/lib/account/serialization";
 import { toTransactionStatusRaw } from "@ledgerhq/live-common/lib/transaction/status";
 import Box from "~/renderer/components/Box";
 import BigSpinner from "~/renderer/components/BigSpinner";
@@ -72,11 +71,10 @@ export default function StepConnectDevice({
   onTransactionError: Error => void,
   onOperationBroadcasted: Operation => void,
   setSigned: boolean => void,
-  setTransactionId: string => void,
+  setTransactionId: string => Promise<any>,
 }) {
-  const broadcast = useBroadcast({ account, parentAccount });
   const tokenCurrency = account && account.type === "TokenAccount" && account.token;
-  const [swapData, setSwapData] = useState(null);
+  const [sellData, setSellData] = useState(null);
   const [signedOperation, setSignedOperation] = useState(false);
 
   const action2 = useMemo(
@@ -89,14 +87,24 @@ export default function StepConnectDevice({
               initSellExec({
                 deviceId,
               }),
-        ({ deviceId, transaction, binaryPayload, receiver, payloadSignature, account, status }) =>
+        ({
+          deviceId,
+          transaction,
+          binaryPayload,
+          receiver,
+          payloadSignature,
+          account,
+          parentAccount,
+          status,
+        }) =>
           checkSignatureAndPrepare({
             deviceId,
             transaction: toTransactionRaw(transaction),
             binaryPayload,
             receiver,
             payloadSignature,
-            account: toAccountRaw(account),
+            account: toAccountLikeRaw(account),
+            parentAccount: parentAccount ? toAccountRaw(parentAccount) : undefined,
             status: toTransactionStatusRaw(status),
           }),
         setTransactionId,
@@ -115,7 +123,7 @@ export default function StepConnectDevice({
     );
   }
 
-  if (!swapData) {
+  if (!sellData) {
     return (
       <DeviceAction
         action={action2}
@@ -127,24 +135,24 @@ export default function StepConnectDevice({
           status,
         }}
         Result={Result}
-        onResult={({ initSwapResult, initSwapError, ...rest }) => {
-          console.log({ initSwapResult });
-          if (initSwapError) {
-            onError(initSwapError);
+        onResult={({ initSellResult, initSellError, ...rest }) => {
+          console.log({ initSellResult });
+          if (initSellError) {
+            onError(initSellError);
           } else {
-            setSwapData(initSwapResult);
+            setSellData(initSellResult);
           }
         }}
       />
     );
   }
 
-  console.log({ swapData, transaction, account, parentAccount });
+  console.log({ sellData, transaction, account, parentAccount });
 
   const bridge = getAccountBridge(account, parentAccount);
 
   bridge
-    .getTransactionStatus(getMainAccount(account, parentAccount), swapData.transaction)
+    .getTransactionStatus(getMainAccount(account, parentAccount), sellData.transaction)
     .then(status => {
       console.log("STATUS: ", status);
     });
@@ -157,7 +165,7 @@ export default function StepConnectDevice({
         tokenCurrency,
         parentAccount,
         account,
-        transaction: swapData.transaction,
+        transaction: sellData.transaction,
         appName: "Exchange",
       }}
       Result={Result}

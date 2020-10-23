@@ -2,21 +2,20 @@
 
 import React, { useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProviders } from "@ledgerhq/live-common/lib/swap";
+import { getProviders } from "@ledgerhq/live-common/lib/exchange/swap";
 import { swapProvidersSelector } from "~/renderer/reducers/settings";
 import type { CryptoCurrency, TokenCurrency, Account } from "@ledgerhq/live-common/lib/types";
-import Form from "~/renderer/screens/swap/Form";
-import Connect from "~/renderer/screens/swap/Connect";
-import MissingOrOutdatedSwapApp from "~/renderer/screens/swap/MissingOrOutdatedSwapApp";
-import { setSwapProviders } from "~/renderer/actions/application";
-import Sell from "./Sell"
+import Connect from "~/renderer/screens/exchange/swap/Connect";
+import MissingOrOutdatedSwapApp from "~/renderer/screens/exchange/swap/MissingOrOutdatedSwapApp";
+import { setSwapProviders } from "~/renderer/actions/settings";
+import Sell from "./Sell";
 
 type Props = {
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
   defaultAccount?: ?Account,
 };
 
-export default ({ defaultCurrency, defaultAccount }: Props) => {
+const MaybeSell = ({ defaultCurrency, defaultAccount }: Props) => {
   const providers = useSelector(swapProvidersSelector);
   const [installedApps, setInstalledApps] = useState();
   const dispatch = useDispatch();
@@ -53,3 +52,5 @@ export default ({ defaultCurrency, defaultAccount }: Props) => {
     />
   );
 };
+
+export default MaybeSell;

@@ -17,10 +17,10 @@ import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getLanguages } from "~/config/languages";
 import type { State } from ".";
 import { osLangAndRegionSelector } from "~/renderer/reducers/application";
-import { isCurrencySwapSupported } from "@ledgerhq/live-common/lib/swap";
+import { isCurrencyExchangeSupported } from "@ledgerhq/live-common/lib/exchange";
 import uniq from "lodash/uniq";
 import { findCryptoCurrencyById, findTokenById } from "@ledgerhq/cryptoassets";
-import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
+import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
 
 export type CurrencySettings = {
   confirmationsNb: number,
@@ -403,7 +403,7 @@ export const swapSupportedCurrenciesSelector: OutputSelector<
     .filter(Boolean)
     .filter(isCurrencySupported);
 
-  return [...cryptoCurrencies, ...tokenCurrencies].filter(isCurrencySwapSupported);
+  return [...cryptoCurrencies, ...tokenCurrencies].filter(isCurrencyExchangeSupported);
 });
 
 export const exportSettingsSelector: OutputSelector<State, void, *> = createSelector(

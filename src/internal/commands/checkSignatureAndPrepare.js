@@ -2,16 +2,28 @@
 
 import type { Observable } from "rxjs";
 import { from } from "rxjs";
-import type { SwapRequestEvent } from "@ledgerhq/live-common/lib/swap/types";
-import type { TransactionRaw } from "@ledgerhq/live-common/lib/types";
+import type { SellRequestEvent } from "@ledgerhq/live-common/lib/exchange/sell/types";
+import type {
+  AccountRaw,
+  AccountRawLike,
+  TransactionStatusRaw,
+  TransactionRaw,
+} from "@ledgerhq/live-common/lib/types";
 import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
-import checkSignatureAndPrepare from "@ledgerhq/live-common/lib/sell/checkSignatureAndPrepare";
+import checkSignatureAndPrepare from "@ledgerhq/live-common/lib/exchange/sell/checkSignatureAndPrepare";
 import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
-import { fromAccountRaw } from "@ledgerhq/live-common/lib/account/serialization";
+import {
+  fromAccountRaw,
+  fromAccountLikeRaw,
+} from "@ledgerhq/live-common/lib/account/serialization";
 import { fromTransactionStatusRaw } from "@ledgerhq/live-common/lib/transaction/status";
-
 type Input = {
+  parentAccount: ?AccountRaw,
+  account: AccountRawLike,
   transaction: TransactionRaw,
+  status: TransactionStatusRaw,
+  binaryPayload: string,
+  payloadSignature: string,
   deviceId: string,
 };
 
@@ -19,20 +31,20 @@ const cmd = ({
   deviceId,
   transaction,
   binaryPayload,
-  receiver,
   payloadSignature,
   account,
+  parentAccount,
   status,
-}: Input): Observable<string> => {
+}: Input): Observable<SellRequestEvent> => {
   return withDevice(deviceId)(transport =>
     from(
       checkSignatureAndPrepare(transport, {
-        transaction: fromTransactionRaw(transaction),
         binaryPayload,
-        receiver,
-        payloadSignature,
-        account: fromAccountRaw(account),
+        account: fromAccountLikeRaw(account),
+        parentAccount: parentAccount ? fromAccountRaw(parentAccount) : undefined,
         status: fromTransactionStatusRaw(status),
+        payloadSignature,
+        transaction: fromTransactionRaw(transaction),
       }),
     ),
   );

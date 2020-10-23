@@ -3,16 +3,16 @@
 import React, { useState, useCallback, useMemo } from "react";
 import SelectAccountAndCurrency from "./SelectAccountAndCurrency";
 import styled from "styled-components";
-import CoinifyWidget from "../CoinifyWidget";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
-import { useDispatch, useSelector } from "react-redux";
-import TrackPage from "~/renderer/analytics/TrackPage";
+import { useSelector } from "react-redux";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
-import { getCurrenciesWithStatus } from "@ledgerhq/live-common/lib/swap/logic";
+import { getCurrenciesWithStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import TrackPage from "~/renderer/analytics/TrackPage";
 import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/settings";
-
-import { accountsSelector } from "~/renderer/reducers/accounts";
+import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
+import CoinifyWidget from "../CoinifyWidget";
+import type { InstalledItem } from "@ledgerhq/live-common/lib/apps";
 
 const SellContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -24,6 +24,7 @@ const SellContainer: ThemedComponent<{}> = styled.div`
 type Props = {
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
   defaultAccount?: ?Account,
+  installedApps: InstalledItem[],
 };
 
 const Sell = ({ defaultCurrency, defaultAccount, installedApps }: Props) => {
@@ -32,7 +33,7 @@ const Sell = ({ defaultCurrency, defaultAccount, installedApps }: Props) => {
     parentAccount: undefined,
   });
 
-  const accounts = useSelector(accountsSelector);
+  const accounts = useSelector(shallowAccountsSelector);
 
   const selectableCurrencies = useSelector(swapSupportedCurrenciesSelector);
 
@@ -48,8 +49,6 @@ const Sell = ({ defaultCurrency, defaultAccount, installedApps }: Props) => {
 
   const { account, parentAccount } = state;
 
-  const dispatch = useDispatch();
-
   const reset = useCallback(() => {
     setState({
       account: undefined,
@@ -57,7 +56,7 @@ const Sell = ({ defaultCurrency, defaultAccount, installedApps }: Props) => {
     });
   }, []);
 
-  const confirmAccount = useCallback((account: AccountLike, parentAccount: Account) => {
+  const confirmAccount = useCallback((account: AccountLike, parentAccount: ?Account) => {
     setState(oldState => ({
       ...oldState,
       account: account,
@@ -75,16 +74,21 @@ const Sell = ({ defaultCurrency, defaultAccount, installedApps }: Props) => {
       //           onResult: confirmAccount,
       //         }),
       //       );
-      confirmAccount(account, parentAccount)
+      confirmAccount(account, parentAccount);
     },
-    [dispatch, confirmAccount],
+    [confirmAccount],
   );
 
   return (
     <SellContainer>
       <TrackPage category="Sell Crypto" />
       {account ? (
-        <CoinifyWidget account={account} parentAccount={parentAccount} mode="sell" onReset={reset} />
+        <CoinifyWidget
+          account={account}
+          parentAccount={parentAccount}
+          mode="sell"
+          onReset={reset}
+        />
       ) : (
         <SelectAccountAndCurrency
           selectAccount={selectAccount}

@@ -63,7 +63,7 @@ export default class StepSummary extends PureComponent<StepProps> {
     const feesUnit = getAccountUnit(mainAccount);
     const unit = getAccountUnit(account);
 
-    console.log(status)
+    console.log(status);
     return (
       <Box flow={4} mx={40}>
         <TrackPage category="Send Flow" name="Step Summary" />
