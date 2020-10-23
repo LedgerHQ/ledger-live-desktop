@@ -88,7 +88,7 @@ const BackupPack = () => {
           <Trans i18nKey={"banners.sell.description"} />
         </Text>
       </Box>
-      <IllustrationWrapper>
+      <IllustrationWrapper scale={1}>
         <Layer style={transBg} image={bg} width={scale * 457} height={scale * 401} />
         <Layer style={transSell1} image={sell1} width={scale * 233} height={scale * 228} />
         <Layer style={transSell2} image={sell2} width={scale * 26} height={scale * 32} />
