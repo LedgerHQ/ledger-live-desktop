@@ -519,6 +519,11 @@
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
         }
       }
+    },
+    "noEthAccount": {
+      "title": "Please create an ETH account",
+      "description": "<0>{{ asset }}({{ ticker }})</0> is an Ethereum ERC-20 token. To lend {{ ticker }}, install the Ethereum app and create an Ethereum account",
+      "cta": "Add account"
     }
   },
   "accounts": {

@@ -1523,10 +1523,10 @@
     node-pre-gyp "^0.15.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@15.5.0-ethjs.3":
-  version "15.5.0-ethjs.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-15.5.0-ethjs.3.tgz#0e60e6eeb1c26f02249cdafa536bf1a86a7be4a3"
-  integrity sha512-jQz/PS04olhUw6Y2ln9F9UQ7/ibUUMx24jnl0RVLKmEm6Yn2kFxne4HmCLt7S3aIjsfOUneQdJaJh2vP/99Rlg==
+"@ledgerhq/live-common@15.5.0-ethjs.5":
+  version "15.5.0-ethjs.5"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-15.5.0-ethjs.5.tgz#24892fa0cfe8cbe2187a8e90dae99dcb1e99004f"
+  integrity sha512-2H5Y4s+NaYyFIKyrWaiX2i1VoSClQAAqqwqhl9MJqf2C5gMzwom8BLKmoFbY/eHzUbgmNhSwfzAOXoWhZ5Qx5Q==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/cryptoassets" "5.27.2"

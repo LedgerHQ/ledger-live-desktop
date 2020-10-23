@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import type { AccountLikeArray } from "@ledgerhq/live-common/lib/types";
 import type { CurrentRate } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
-import { formatShort } from "@ledgerhq/live-common/lib/currencies";
+import { getCryptoCurrencyById, formatShort } from "@ledgerhq/live-common/lib/currencies";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { flattenSortAccountsSelector } from "~/renderer/actions/general";
 import { isAcceptedLendingTerms } from "~/renderer/terms";
@@ -109,12 +109,16 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
   const { token, totalSupply, supplyAPY } = data;
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const eth = getCryptoCurrencyById("ethereum");
 
   const openManageModal = useCallback(() => {
     const account = accounts.find(a => a.type === "TokenAccount" && a.token.id === token.id);
-    const parentAccount = accounts.find(a => a.parentId === a.id);
-    if (!account) {
-      dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency: token }));
+    const parentAccount = accounts.find(a => account?.parentId === a.id);
+    const ethAccount = accounts.find(a => a.type === "Account" && a.currency.id === eth.id);
+    if (!account && ethAccount) {
+      dispatch(openModal("MODAL_RECEIVE", { currency: token, account: ethAccount }));
+    } else if (!ethAccount) {
+      dispatch(openModal("MODAL_LEND_NO_ETHEREUM_ACCOUNT"));
     } else if (isAcceptedLendingTerms()) {
       dispatch(
         openModal("MODAL_LEND_SELECT_ACCOUNT", {
@@ -127,7 +131,7 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
     } else {
       dispatch(openModal("MODAL_LEND_ENABLE_INFO", { account, parentAccount, currency: token }));
     }
-  }, [dispatch, accounts, token]);
+  }, [dispatch, accounts, token, eth]);
 
   const grossSupply = useMemo((): string => {
     return formatShort(token.units[0], totalSupply);
