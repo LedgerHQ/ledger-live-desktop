@@ -1,14 +1,16 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { listCurrentRates } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
-import { useCompoundSummaries } from "./useCompoundSummaries";
+import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 import { flattenSortAccountsSelector } from "~/renderer/actions/general";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import TabBar from "~/renderer/components/TabBar";
+import { prepareCurrency } from "~/renderer/bridge/cache";
+import { useCompoundSummaries } from "./useCompoundSummaries";
 
 import Dashboard from "./Dashboard";
 import Closed from "./Closed";
@@ -34,10 +36,16 @@ const Lend = () => {
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
   const accounts = useSelector(flattenSortAccountsSelector);
   const summaries = useCompoundSummaries(accounts);
+  const [rates, setRates] = useState(() => listCurrentRates());
 
   const Component = tabs[activeTabIndex].component;
 
-  const rates = listCurrentRates();
+  useEffect(() => {
+    prepareCurrency(getCryptoCurrencyById("ethereum")).then(() => {
+      const newRates = listCurrentRates();
+      setRates(newRates);
+    });
+  }, []);
 
   const navigateToCompoundDashboard = useCallback(() => setActiveTabIndex(0), [setActiveTabIndex]);
 
