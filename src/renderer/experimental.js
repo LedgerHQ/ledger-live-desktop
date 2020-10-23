@@ -9,6 +9,7 @@ export type FeatureCommon = {
   title: string,
   description: string,
   shadow?: boolean,
+  dirty?: boolean, // NB Will trigger a clear cache if changed
 };
 
 export type FeatureToggle =
@@ -76,6 +77,7 @@ export const experimentalFeatures: Feature[] = [
       "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts.",
     minValue: 20,
     maxValue: 999,
+    dirty: true,
   },
   {
     type: "integer",

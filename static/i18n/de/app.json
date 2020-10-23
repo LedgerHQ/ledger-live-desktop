@@ -517,7 +517,9 @@
     "cta": {
       "addMore": "Add more",
       "add": "Add account",
-      "add_plural": "Add accounts"
+      "add_plural": "Add accounts",
+      "addAccountName": "Add {{currencyName}} account",
+      "receive": "Receive"
     },
     "sections": {
       "importable": {
@@ -1073,14 +1075,17 @@
     "modalTitle": "Coin control",
     "coincontrol": "Coin control",
     "advanced": "Advanced options",
-    "ctaDisabled": "You must first enter an amount.",
+    "ctaDisabled": "This account has no UTXO",
     "whatIs": "What is coin selection?",
     "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
     "strategy": "Coin selection strategy",
     "selected": "Coins selected for strategy",
     "amount": "Amount to send:",
     "replaceable": "replaceable",
-    "cannotSelect": "You cannot select coins from unconfirmed, replaceable transactions.",
+    "cannotSelect": {
+      "unconfirmed": "You cannot select coins from unconfirmed, replaceable transactions.",
+      "last": "You need at least one selected"
+    },
     "pending": "pending",
     "notEnoughCoins": "You have not selected enough coins to meet the amount to send.",
     "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions.",
@@ -1678,6 +1683,9 @@
       },
       "learnMore": {
         "title": "Learn about Ledger"
+      },
+      "learnMoreCrypto": {
+        "title": "Learn about crypto"
       }
     },
     "selectDevice": {
@@ -1930,6 +1938,10 @@
     },
     "AmountRequired": {
       "title": "Amount required"
+    },
+    "BitcoinCashHardforkOct2020Warning": {
+      "title": "",
+      "description": "Bitcoin Cash is currently undergoing a hard fork without replay protection. We will temporarily interrupt the Bitcoin Cash service until the network has stabilized."
     },
     "NoAccessToCamera": {
       "title": "Please ensure your system has a camera, that it is not in use by another application and that Ledger Live has permission to use it.",

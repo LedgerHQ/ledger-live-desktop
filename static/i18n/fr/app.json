@@ -84,7 +84,7 @@
       "FEES": "Frais",
       "OPT_IN": "Activer",
       "OPT_OUT": "Désactiver",
-      "CLOSE_ACCOUNT": "Fermer le compte"
+      "CLOSE_ACCOUNT": "Fermer"
     }
   },
   "byteSize": {
@@ -381,7 +381,7 @@
     },
     "swap": {
       "title": "Échanger des cryptos",
-      "description": "Exchange one crypto for another from Ledger Live with our partner."
+      "description": "Échangez une cryptomonnaie contre une autre sur Ledger Live avec notre partenaire."
     }
   },
   "dashboard": {
@@ -517,7 +517,9 @@
     "cta": {
       "addMore": "Ajouter davantage",
       "add": "Ajouter un compte",
-      "add_plural": "Ajouter des comptes"
+      "add_plural": "Ajouter des comptes",
+      "addAccountName": "Ajouter un compte {{currencyName}}",
+      "receive": "Recevoir"
     },
     "sections": {
       "importable": {
@@ -1073,14 +1075,17 @@
     "modalTitle": "Coin control",
     "coincontrol": "Coin control",
     "advanced": "Options avancées",
-    "ctaDisabled": "Vous devez d'abord saisir un montant.",
+    "ctaDisabled": "Ce compte ne contient pas de UTXO",
     "whatIs": "En savoir plus",
     "rbf": "Permettre la transaction d'être remplaçable (Replace-By-Fee).",
     "strategy": "Selection de la coin stratégie",
     "selected": "Coins selectionnés pour la stratégie",
     "amount": "Montant à envoyer :",
     "replaceable": "remplaçable",
-    "cannotSelect": "Vous ne pouvez pas sélectionner des coins parmi des transactions non confirmées et remplaçables.",
+    "cannotSelect": {
+      "unconfirmed": "Vous ne pouvez pas sélectionner des coins parmi des transactions non confirmées et remplaçables.",
+      "last": "Il en faut au moins un de séléctionner"
+    },
     "pending": "En attente",
     "notEnoughCoins": "Vous n'avez pas selectionné assez de coins pour transférer le montant voulu.",
     "pickUnconfirmedRBF": "Inclure les coins des opérations non confirmées et remplaçables.",
@@ -1624,11 +1629,11 @@
     "checking": "Vérification de la mise à jour...",
     "checkSuccess": "La mise à jour est prête à être installée",
     "quitAndInstall": "Installer maintenant",
-    "updateAvailable": "La mise à jour {{version}} de Ledger Live est disponible",
+    "updateAvailable": "Mise à jour vers la version Ledger Live {{version}} est disponible",
     "error": "Erreur lors de la mise à jour. Veuillez télécharger à nouveau",
     "reDownload": "Télécharger à nouveau",
     "nightlyWarning": "Cette version ne peut pas être mise à jour automatiquement, veuillez installer la dernière version manuellement",
-    "downloadNow": "Télécharger Maintenant"
+    "downloadNow": "Téléchargez la mise à jour"
   },
   "crash": {
     "title": "Une erreur s'est produite",
@@ -1690,6 +1695,9 @@
       },
       "learnMore": {
         "title": "En savoir plus sur Ledger"
+      },
+      "learnMoreCrypto": {
+        "title": "En savoir plus sur la crypto"
       }
     },
     "selectDevice": {
@@ -1942,6 +1950,10 @@
     },
     "AmountRequired": {
       "title": "Montant requis"
+    },
+    "BitcoinCashHardforkOct2020Warning": {
+      "title": "",
+      "description": "Bitcoin Cash subit actuellement un hard fork sans protection contre les attaques replay. Nous allons interrompre temporairement le service jusqu'à ce que le réseau se stabilise."
     },
     "NoAccessToCamera": {
       "title": "Veuillez vous assurer que votre système a une caméra qui n'est pas utilisée par une autre application, et que Ledger Live a la permission de l'utiliser.",
