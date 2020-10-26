@@ -179,7 +179,12 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
         <Pill fontSize={4}>{supplyAPY}</Pill>
       </Amount>
       <Action>
-        <CompactButton fontSize={3} primary onClick={openManageModal}>
+        <CompactButton
+          disabled={!totalBalance || totalBalance.lte(0)}
+          fontSize={3}
+          primary
+          onClick={openManageModal}
+        >
           {t("lend.lendAsset")}
         </CompactButton>
       </Action>
