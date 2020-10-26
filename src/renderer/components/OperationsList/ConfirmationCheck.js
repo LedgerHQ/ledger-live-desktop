@@ -101,6 +101,10 @@ const iconsComponent = {
   OPT_IN: IconPlus,
   OPT_OUT: IconTrash,
   CLOSE_ACCOUNT: IconTrash,
+  // TODO: add correct icons
+  REDEEM: IconSend,
+  SUPPLY: IconSend,
+  APPROVE: IconSend,
 };
 
 class ConfirmationCheck extends PureComponent<{
