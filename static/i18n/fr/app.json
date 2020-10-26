@@ -897,7 +897,9 @@
         "title": "Compte",
         "label": "Compte à créditer",
         "parentAccount": "1. Sélectionnez le compte {{currencyName}}",
-        "token": "2. Sélectionnez un token"
+        "token": "2. Sélectionnez un token",
+        "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
       },
       "connectDevice": {
         "title": "Appareil",
