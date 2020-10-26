@@ -31,18 +31,20 @@ import Ellipsis from "~/renderer/components/Ellipsis";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic";
 import ToolTip from "~/renderer/components/Tooltip";
-import ExclamationCircle from "~/renderer/icons/ExclamationCircle";
+import CheckCircle from "~/renderer/icons/CheckCircle";
 
 export function AccountOption({
   account,
   parentAccount,
   isValue,
   disabled,
+  displayBadge = true,
 }: {
   account: TokenAccount,
   parentAccount: ?Account,
   isValue?: boolean,
   disabled?: boolean,
+  displayBadge?: boolean,
 }) {
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
@@ -64,13 +66,15 @@ export function AccountOption({
       <Box>
         <FormattedVal color="palette.text.shade60" val={account.balance} unit={unit} showCode />
       </Box>
-      <Box color="warning" style={{ width: 16 }}>
-        {!isEnabled && (
-          <ToolTip content={<Trans i18nKey="lend.enable.steps.selectAccount.notEnabled" />}>
-            <ExclamationCircle size={16} />
-          </ToolTip>
-        )}
-      </Box>
+      {displayBadge ? (
+        <Box color="positiveGreen" style={{ width: 16 }}>
+          {isEnabled && (
+            <ToolTip content={<Trans i18nKey="lend.enable.steps.selectAccount.alreadyEnabled" />}>
+              <CheckCircle size={16} />
+            </ToolTip>
+          )}
+        </Box>
+      ) : null}
     </Box>
   );
 }
@@ -85,6 +89,23 @@ export const renderValue = ({
 }) =>
   data ? <AccountOption account={data.account} parentAccount={data.parentAccount} isValue /> : null;
 
+export const renderValueNoBadge = ({
+  data,
+}: {
+  data: {
+    account: TokenAccount,
+    parentAccount: ?Account,
+  },
+}) =>
+  data ? (
+    <AccountOption
+      account={data.account}
+      parentAccount={data.parentAccount}
+      isValue
+      displayBadge={false}
+    />
+  ) : null;
+
 export const renderOption = ({
   data,
 }: {
@@ -93,6 +114,18 @@ export const renderOption = ({
     parentAccount: ?Account,
   },
 }) => (data ? <AccountOption account={data.account} parentAccount={data.parentAccount} /> : null);
+
+export const renderOptionNoBadge = ({
+  data,
+}: {
+  data: {
+    account: TokenAccount,
+    parentAccount: ?Account,
+  },
+}) =>
+  data ? (
+    <AccountOption account={data.account} parentAccount={data.parentAccount} displayBadge={false} />
+  ) : null;
 
 export const getOptionValue = (option?: { account: TokenAccount }) => option?.account?.id;
 

@@ -22,7 +22,11 @@ import Spoiler from "~/renderer/components/Spoiler";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import GasPriceField from "~/renderer/families/ethereum/GasPriceField";
 import GasLimitField from "~/renderer/families/ethereum/GasLimitField";
-import { renderValue, renderOption, getOptionValue } from "../../SelectAccountStep";
+import {
+  renderValueNoBadge as renderValue,
+  renderOptionNoBadge as renderOption,
+  getOptionValue,
+} from "../../SelectAccountStep";
 import { subAccountByCurrencyOrderedSelector } from "~/renderer/reducers/accounts";
 
 import type { StepProps } from "../types";

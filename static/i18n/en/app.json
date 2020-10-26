@@ -411,7 +411,7 @@
           "title": "Select account",
           "selectLabel": "Account to lend from",
           "cta": "Approve",
-          "alreadyEnabled": "This account is already enabled",
+          "alreadyEnabled": "This account is approved",
           "notEnabled": "You need to pay fees to approve this account"
         },
         "amount": {
@@ -452,7 +452,8 @@
           "amountLabel": "Amount to withdraw",
           "available": "Available balance: <0>{{amountAvailable}}</0>",
           "withdrawAll": "Withdraw Max",
-          "placeholder": "Withdraw Max"
+          "placeholder": "Withdraw Max",
+          "maxWithdrawble": "Maximum amount to withdraw is"
         },
         "connectDevice": {
           "title": "Device"
