@@ -20,6 +20,7 @@ import OperationsList from "~/renderer/components/OperationsList";
 import Carousel from "~/renderer/components/Carousel";
 import AssetDistribution from "~/renderer/components/AssetDistribution";
 import MigrationBanner from "~/renderer/modals/MigrateAccounts/Banner";
+import ClearCacheBanner from "~/renderer/components/ClearCacheBanner";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 import { saveSettings } from "~/renderer/actions/settings";
 import { connect, useSelector } from "react-redux";
@@ -76,6 +77,7 @@ const DashboardPage = ({ saveSettings }: Props) => {
       <TopBannerContainer>
         <UpdateBanner />
         <MigrationBanner />
+        <ClearCacheBanner />
         <CurrencyDownStatusAlert currencies={currencies} />
       </TopBannerContainer>
       {showCarousel ? <Carousel /> : null}

@@ -108,6 +108,7 @@ export type SettingsState = {
   deepLinkUrl: ?string,
   firstTimeLend: boolean,
   swapProviders?: AvailableProvider[],
+  showClearCacheBanner: boolean,
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -150,6 +151,7 @@ const INITIAL_STATE: SettingsState = {
   deepLinkUrl: null,
   firstTimeLend: false,
   swapProviders: [],
+  showClearCacheBanner: false,
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -378,6 +380,8 @@ export const hideEmptyTokenAccountsSelector = (state: State) =>
 export const lastSeenDeviceSelector = (state: State) => state.settings.lastSeenDevice;
 
 export const swapProvidersSelector = (state: Object) => state.settings.swapProviders;
+
+export const showClearCacheBannerSelector = (state: Object) => state.settings.showClearCacheBanner;
 
 export const swapSupportedCurrenciesSelector: OutputSelector<
   State,

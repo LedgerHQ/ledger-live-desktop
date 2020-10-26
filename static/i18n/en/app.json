@@ -561,6 +561,7 @@
       "title": "Getting started",
       "desc": "Start here"
     },
+    "status": "Ledger status",
     "helpCenter": {
       "title": "Ledger Support",
       "desc": "Get help"
@@ -588,6 +589,10 @@
     "hideCTA": "Hide token"
   },
   "banners": {
+    "cleanCache": {
+      "title":"Modification of experimental settings require a clear cache",
+      "cta":"Clear cache"
+    },
     "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
     "ledgerAcademy": {
@@ -1127,7 +1132,9 @@
         "title": "Account",
         "label": "Account to credit",
         "parentAccount": "1. Select {{currencyName}} account",
-        "token": "2. Select a token"
+        "token": "2. Select a token",
+        "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
       },
       "connectDevice": {
         "title": "Device",
