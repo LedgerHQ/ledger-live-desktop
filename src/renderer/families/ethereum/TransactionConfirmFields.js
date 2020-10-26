@@ -21,7 +21,11 @@ const Warning = ({
     case "compound.withdraw":
     case "compound.supply":
     case "erc20.approve":
-      return null;
+      return (
+        <WarnBox>
+          <Trans i18nKey="TransactionConfirm.secureContract" />
+        </WarnBox>
+      );
     default:
       return (
         <WarnBox>

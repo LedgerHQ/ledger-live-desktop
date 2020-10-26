@@ -513,7 +513,7 @@
           "title": "Confirmation",
           "success": {
             "title": "Deposit sent successfully",
-            "text": "Once the transaction is confirmed you will be able to issue loans on the Compound protocol",
+            "text": "You will start earning interest once the network has confirmed the deposit.",
             "done": "Close",
             "cta": "View details",
             "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
@@ -2124,6 +2124,7 @@
   "TransactionConfirm": {
     "title": "Please confirm the operation on your device to finalize it",
     "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
+    "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
     "warningWording": {},
     "titleWording": {
       "send": "Please confirm on your device to finalize the operation",
