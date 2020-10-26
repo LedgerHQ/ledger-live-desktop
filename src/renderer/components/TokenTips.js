@@ -17,9 +17,6 @@ const TokenTipsContainer: ThemedComponent<{}> = styled(Box)`
   padding: 16px;
 `;
 
-const Strong: ThemedComponent<{}> = styled.span`
-  font-weight: 700;
-`;
 const LearnMore: ThemedComponent<{}> = styled.button`
   font-weight: 500;
   text-decoration: underline;
