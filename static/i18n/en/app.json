@@ -123,6 +123,17 @@
     "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
     "tooltip": "Star account"
   },
+  "bridge": {
+    "modalTitle": "Open Device Bridge",
+    "openHeader": "Expose your Device accounts through WebSocket",
+    "openDescription": "Opening a bridge exposes all of your accounts to third party applications.",
+    "openedHeader": "{{appName}} bridge opened",
+    "openedDescription": "You can now access your {{appName}} account on third party web application through WebSocket.",
+    "completeHeader": "Bridge session completed",
+    "completeDescription": "The websocket bridge is now closed.",
+    "openButton": "Open",
+    "disconnectButton": "Disconnect"
+  },
   "swap": {
     "title": "Swap",
     "titleCrypto": "Swap {{currency}}",

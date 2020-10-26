@@ -126,7 +126,7 @@ const SectionExperimental = () => {
             />
           ) : null,
         )}
-        <EthereumBridgeRow />
+        {__DEV__ ? <EthereumBridgeRow /> : null}
       </Body>
     </Section>
   );

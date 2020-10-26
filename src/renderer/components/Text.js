@@ -1,7 +1,7 @@
 // @flow
 
 import styled from "styled-components";
-import { fontSize, fontWeight, textAlign, color, space } from "styled-system";
+import { fontSize, fontWeight, textAlign, color, space, lineHeight } from "styled-system";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import fontFamily from "~/renderer/styles/styled/fontFamily";
 
@@ -12,7 +12,7 @@ const Text: ThemedComponent<{
   color?: string,
   fontWeight?: string,
   mt?: number,
-  mb?: number,
+  mb?: number | string,
   align?: "DEPRECATED: USE textAlign INSTEAD",
 }> = styled.span`
   ${fontFamily};
@@ -21,6 +21,7 @@ const Text: ThemedComponent<{
   ${color};
   ${fontWeight};
   ${space};
+  ${lineHeight};
 `;
 
 export default Text;

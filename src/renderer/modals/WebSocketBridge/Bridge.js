@@ -13,7 +13,7 @@ import { command } from "~/renderer/commands";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import SuccessDisplay from "~/renderer/components/SuccessDisplay";
-import StepProgress from "~/renderer/components/StepProgress";
+import InfoDisplay from "~/renderer/components/InfoDisplay";
 import { mockedEventEmitter } from "~/renderer/components/DebugMock";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 
@@ -66,7 +66,7 @@ const Bridge = ({
   onClose: () => void,
 }) => {
   const { t } = useTranslation();
-  const [state, setState] = useState({ status: "device" });
+  const [state, setState] = useState({ status: "intro" });
 
   const onResult = useCallback(
     result => {
@@ -89,12 +89,19 @@ const Bridge = ({
   return (
     <ModalBody
       onClose={onClose}
-      title={t("modals.bridge.title")}
+      title={t("bridge.modalTitle")}
       render={() => (
-        <Box relative style={{ height: 500 }} px={5} pb={8}>
+        <Box relative px={5}>
           <TrackPage category="Modal" name="Bridge" origin={origin} />
 
-          {state.status === "device" ? (
+          {state.status === "intro" ? (
+            <Container>
+              <InfoDisplay
+                title={t("bridge.openHeader")}
+                description={t("bridge.openDescription")}
+              />
+            </Container>
+          ) : state.status === "device" ? (
             <DeviceAction
               action={action}
               request={{ appName: appName || "Ethereum" }}
@@ -102,9 +109,12 @@ const Bridge = ({
             />
           ) : state.status === "init" ? (
             <>
-              <StepProgress modelId={state.result.device.modelId}>
-                Bridge connection established.
-              </StepProgress>
+              <Container>
+                <SuccessDisplay
+                  title={t("bridge.openedHeader", { appName })}
+                  description={t("bridge.openedDescription", { appName })}
+                />
+              </Container>
               <Connected origin={origin} onError={onError} onComplete={onComplete} />
             </>
           ) : state.status === "error" ? (
@@ -113,18 +123,33 @@ const Bridge = ({
             </Container>
           ) : (
             <Container>
-              <SuccessDisplay title={"Bridge connection terminated."} />
+              <SuccessDisplay
+                title={t("bridge.completeHeader", { appName })}
+                description={t("bridge.completeDescription", { appName })}
+              />
             </Container>
           )}
         </Box>
       )}
-      renderFooter={() => (
-        <Box horizontal justifyContent="flex-end">
-          <Button onClick={onClose} primary>
-            {t("common.close")}
-          </Button>
-        </Box>
-      )}
+      renderFooter={() =>
+        ["intro", "init"].includes(state.status) ? (
+          <Box horizontal justifyContent="flex-end">
+            <Button
+              onClick={() => {
+                if (state.status === "intro") {
+                  setState({ status: "device" });
+                }
+                if (state.status === "init") {
+                  onComplete();
+                }
+              }}
+              primary
+            >
+              {state.status === "intro" ? t("bridge.openButton") : t("bridge.disconnectButton")}
+            </Button>
+          </Box>
+        ) : null
+      }
     />
   );
 };
