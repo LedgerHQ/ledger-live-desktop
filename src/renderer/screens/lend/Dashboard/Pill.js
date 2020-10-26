@@ -13,7 +13,7 @@ const colorMap = {
     background: "palette.text.shade10",
     text: "palette.text.shade80",
   },
-  TO_SUPPLY: {
+  INACTIVE: {
     background: "blueTransparentBackground",
     text: "wallet",
   },
@@ -21,7 +21,7 @@ const colorMap = {
     background: "wallet",
     text: "white",
   },
-  SUPPLIED: {
+  EARNING: {
     background: "wallet",
     text: "white",
   },
@@ -61,7 +61,7 @@ export const StatusPill = ({ type }: Props) => {
   if (!type) return null;
   const { background, text } = colorMap[type];
 
-  const Wrapper = type === "ENABLING" || type === "TO_SUPPLY" ? ToolTip : null;
+  const Wrapper = type === "ENABLING" || type === "INACTIVE" ? ToolTip : null;
 
   return Wrapper ? (
     <Wrapper

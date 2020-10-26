@@ -78,7 +78,7 @@
       "DELEGATE": "Delegated",
       "REDELEGATE": "Redelegated",
       "UNDELEGATE": "Undelegated",
-      "SUPPLY": "Supplied",
+      "SUPPLY": "Deposited",
       "REDEEM": "Withdrawn",
       "APPROVE": "Enabled",
       "VOTE": "Voted",
@@ -248,7 +248,7 @@
     },
     "settings": {
       "title": "Edit account",
-      "advancedLogs": "Advanced logs",
+      "advancedLogs": "Advanced",
       "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
       "accountName": {
         "title": "Account name",
@@ -298,15 +298,15 @@
   },
   "lend": {
     "title": "Lend crypto",
-    "description": "Supply your assets to the protocol and start earning interest today.",
+    "description": "Deposit your crypto on the Compound protocol to start earning interest.",
     "tabs": {
       "dashboard": "Dashboard",
       "closed": "Closed loans",
       "history": "History"
     },
-    "assets": "Assets",
-    "active": "Active accounts",
-    "lendAsset": "Lend asset",
+    "assets": "Assets to lend",
+    "active": "Approved accounts",
+    "lendAsset": "Deposit",
     "highFeesModal": {
       "title": "High fees on Ethereum",
       "description": "Due to congestion on the Ethereum network, you may experience high fees when issuing transactions.",
@@ -326,7 +326,7 @@
       "amountRedeemed": "Amount redeemed",
       "amountRedeemedTooltip": "--! NEED TEXT HERE !--",
       "date": "Date",
-      "info": "You can lend assets directly from your {{currency}} account and earn passive revenue",
+      "info": "You can lend assets directly from your {{currency}} account and earn passive revenue.",
       "howCompoundWorks": "How does lending on Compound work?",
       "lend": "Lend {{currency}}"
     },
@@ -337,8 +337,8 @@
         "cta": "How does lending on Compound work?"
       },
       "closed": {
-        "title": "Closed loans",
-        "description": "View all your withdrawn loans and the interest you have earned.",
+        "title": "Your closed loans swaps will appear here",
+        "description": "You have not made any loans yet.",
         "cta": "Lend now"
       },
       "history": {
@@ -349,10 +349,10 @@
     },
     "headers": {
       "active": {
-        "accounts": "Accounts",
-        "amountSupplied": "Amount supplied",
+        "accounts": "Account",
+        "amountSupplied": "Current loan",
         "amountSuppliedTooltip": "Amount lent to the network",
-        "accruedInterests": "Accrued interests",
+        "accruedInterests": "Interest earned",
         "accruedInterestsTooltip": "Interest being generated",
         "status": "Status",
         "statusTooltip": "Current account status",
@@ -364,16 +364,16 @@
       },
       "closed": {
         "assetLended": "Asset lended",
-        "amountRedeemed": "Amount redeemed",
-        "interestsEarned": "Interests earned",
+        "amountRedeemed": "Withdrawal amount",
+        "interestsEarned": "Interest earned",
         "date": "Date"
       },
       "rates": {
-        "allAssets": "All assets",
-        "totalBalance": "Total balance",
+        "allAssets": "Asset",
+        "totalBalance": "Available balance",
         "totalBalanceTooltip": "Total balance of all the accounts excluding the amount supplied.",
         "grossSupply": "Gross supply",
-        "grossSupplyTooltip": "Total amount of supplies from all the users",
+        "grossSupplyTooltip": "Total amount of assets deposited on the network",
         "currentAPY": "Current APY",
         "currentAPYTooltip": "Actual return rate of a supply by the end of the year if the deposit is continuously compounded.",
         "actions": "Actions"
@@ -381,7 +381,7 @@
     },
     "manage": {
       "cta": "Manage lending",
-      "title": "Lend asset",
+      "title": "Manage loan",
       "enable": {
         "approve": "Approve",
         "approveLess": "Approve less",
@@ -396,12 +396,12 @@
         "notEnoughApproved": "You don't have enough balance approved to supply assets."
       },
       "supply": {
-        "title": "Supply",
-        "description": "Select the amount of assets you want to lend to the protocol."
+        "title": "Deposit",
+        "description": "Enter the amount of assets to lend to the protocol."
       },
       "withdraw": {
         "title": "Withdraw",
-        "description": "Withdraw your gains at any time from your Ledger wallet. "
+        "description": "Withdraw assets from the protocol to your Ledger account."
       }
     },
     "enable": {
@@ -409,8 +409,8 @@
       "steps": {
         "selectAccount": {
           "title": "Select account",
-          "selectLabel": "Account to lend",
-          "cta": "Enable",
+          "selectLabel": "Account to lend from",
+          "cta": "Approve",
           "alreadyEnabled": "This account is already enabled"
         },
         "amount": {
@@ -421,7 +421,7 @@
           "contractName": "Compound {{currencyName}}",
           "advanced": "Advanced",
           "amountLabel": "Amount to enable",
-          "amountLabelTooltip": "<!--- NEED TEXT HERE ---!>"
+          "amountLabelTooltip": "This limits the amount available to the smart contract."
         },
         "connectDevice": {
           "title": "Device"
@@ -429,8 +429,8 @@
         "confirmation": {
           "title": "Confirmation",
           "success": {
-            "title": "The transaction is being processed",
-            "text": "Please be patient, the transaction is being processed, once the transaction is confirmed you will be able to issue loans on the Compound protocol",
+            "title": "Operation sent successfully",
+            "text": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
             "done": "Close",
             "cta": "View details",
             "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
@@ -443,15 +443,15 @@
       }
     },
     "withdraw": {
-      "title": "Withdraw asset",
+      "title": "Withdraw assets",
       "steps": {
         "amount": {
           "title": "Amount",
           "advanced": "Advanced",
           "amountLabel": "Amount to withdraw",
           "available": "Available balance: <0>{{amountAvailable}}</0>",
-          "withdrawAll": "Withdraw all",
-          "placeholder": "Widthdraw all"
+          "withdrawAll": "Withdraw Max",
+          "placeholder": "Withdraw Max"
         },
         "connectDevice": {
           "title": "Device"
@@ -459,8 +459,8 @@
         "confirmation": {
           "title": "Confirmation",
           "success": {
-            "title": "Assets withdrawn",
-            "text": "Once the transaction is confirmed you will be able to issue loans on the Compound protocol",
+            "title": "Withdrawal sent successfully",
+            "text": "Your assets will be available once the network has confirmed the withdrawal.",
             "done": "Close",
             "cta": "View details"
           },
@@ -474,34 +474,34 @@
     "info": {
       "terms": {
         "title": "Lend Crypto",
-        "subtitle": "Lend assets on the Compound Protocol",
-        "description": "Compound Protocol allows you to lend and borrow assets on the blockchain. You can lend assets and earn interests directly from Ledger Live.",
-        "switchLabel": "I have read, understand and accept the <0>terms and conditions</0>"
+        "subtitle": "Lend assets on the Compound protocol",
+        "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
+        "switchLabel": "I have read, understand and accept the <0>Terms & Conditions.</0>"
       },
       "steps": {
         "title": "Step <0>{{step}} / {{total}}</0>",
         "1": {
-          "subtitle": "Enabling an account allows the protocol to",
-          "subtitle2": "process future loans",
-          "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Enabling an account gives permission to the protocol to process future loans."
+          "subtitle": "Approve an account to allow the protocol to",
+          "subtitle2": "process future loans.",
+          "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Approving an account gives permission to the protocol to process future loans."
         },
         "2": {
           "subtitle": "Supply assets to earn interest",
-          "description": "After an account is enabled, you can select the amount of assets you want to lend and issue a transaction to the protocol. Interests accrue immediately after the transaction is confirmed."
+          "description": "Once an account is approved, you can select the amount of assets you want to lend and issue a transaction to the protocol. Interests accrue immediately after the transaction is confirmed."
         },
         "3": {
-          "subtitle": "Withdraw your gains whenever you feel like it",
-          "description": "You can withdraw at any time your loan principal and interests, in its entirety or partially, directly from your Ledger wallet."
+          "subtitle": "Withdraw assets at any time",
+          "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account."
         }
       }
     },
     "supply": {
-      "title": "Supply assets",
+      "title": "Deposit assets",
       "steps": {
         "amount": {
           "title": "Amount",
           "selectedAccount": "Selected account",
-          "amountToSupply": "Amount to supply",
+          "amountToSupply": "Amount to deposit",
           "available": "Available balance"
         },
         "device": {
@@ -510,7 +510,7 @@
         "confirmation": {
           "title": "Confirmation",
           "success": {
-            "title": "Account supplied",
+            "title": "Deposit sent successfully",
             "text": "Once the transaction is confirmed you will be able to issue loans on the Compound protocol",
             "done": "Close",
             "cta": "View details",

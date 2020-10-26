@@ -102,7 +102,7 @@ export default function StepAmount({
               i18nKey="lend.enable.steps.amount.summary"
               values={{
                 contractName: t("lend.enable.steps.amount.contractName", {
-                  currencyName: currency.name,
+                  currencyName: currency.ticker,
                 }),
                 accountName: name,
                 amount:
