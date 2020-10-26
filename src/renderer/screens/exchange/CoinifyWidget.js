@@ -14,7 +14,6 @@ import { openModal } from "~/renderer/actions/modals";
 import { useDispatch } from "react-redux";
 import { track } from "~/renderer/analytics/segment";
 import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
-import { parseCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 const WidgetContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -63,6 +62,7 @@ type Props = {
   onReset?: () => void,
 };
 
+let tradeId = null;
 const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
   const [widgetLoaded, setWidgetLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -97,8 +97,6 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
     widgetConfig.transferInMedia = "";
   }
 
-  console.log(widgetConfig);
-
   useEffect(() => {
     if (!currency) return;
     if (mode === "buy" && account) {
@@ -115,8 +113,10 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
   const url = `${coinifyConfig.url}?${querystring.stringify(widgetConfig)}`;
 
   const handleOnResult = useCallback(() => {
-    if (mainAccount && widgetRef.current) {
-      if (mode === "buy") {
+    console.log("ON RESULT ", mode, tradeId);
+
+    if (widgetRef.current) {
+      if (mainAccount && mode === "buy") {
         widgetRef.current.contentWindow.postMessage(
           {
             type: "event",
@@ -132,14 +132,15 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
           track("Coinify Confirm Buy End", { currencyName: currency.name });
         }
       }
-      if (mode === "sell") {
+      if (tradeId && mode === "sell") {
         widgetRef.current.contentWindow.postMessage(
           {
             type: "event",
-            event: "trade.receive-account-confirmed",
+            event: "trade.confirm-trade-created",
             context: {
-              address: mainAccount.freshAddress,
-              status: "accepted",
+              confirmed: true,
+              transferInitiated: true,
+              tradeId,
             },
           },
           coinifyConfig.host,
@@ -152,29 +153,41 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
   }, [coinifyConfig.host, currency, mainAccount, mode]);
 
   const handleOnCancel = useCallback(() => {
-    if (mainAccount && widgetRef.current) {
-      widgetRef.current.contentWindow.postMessage(
-        {
-          type: "event",
-          event: "trade.receive-account-confirmed",
-          context: {
-            address: mainAccount.freshAddress,
-            status: "rejected",
+    if (widgetRef.current) {
+      if (mode === "buy" && mainAccount) {
+        widgetRef.current.contentWindow.postMessage(
+          {
+            type: "event",
+            event: "trade.receive-account-confirmed",
+            context: {
+              address: mainAccount.freshAddress,
+              status: "rejected",
+            },
           },
-        },
-        coinifyConfig.host,
-      );
+          coinifyConfig.host,
+        );
+      }
+      if (mode === "sell") {
+        widgetRef.current.contentWindow.postMessage(
+          {
+            type: "event",
+            event: "trade.confirm-trade-created",
+            context: {
+              confirmed: false,
+            },
+          },
+          coinifyConfig.host,
+        );
+      }
     }
   }, [coinifyConfig.host, mainAccount]);
 
   const setTransactionId = useCallback(
     txId => {
       return new Promise(resolve => {
-        console.log("setTransactionId CALLED with txId: ", txId);
         const onReply = e => {
           if (!e.isTrusted || e.origin !== coinifyConfig.host || !e.data) return;
           const { type, event, context } = e.data;
-          console.log(e.data);
 
           if (type === "event" && event === "trade.trade-created") {
             resolve(context);
@@ -212,23 +225,17 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
     [coinifyConfig],
   );
 
-  const initSellFlow = useCallback(
-    ({ amount, recipient }) => {
-      dispatch(
-        openModal("MODAL_SELL_CRYPTO_DEVICE", {
-          account,
-          parentAccount,
-          amount,
-          recipient,
-          onResult: handleOnResult,
-          onChangeTransactionId: setTransactionId,
-          onCancel: handleOnCancel,
-          verifyAddress: true,
-        }),
-      );
-    },
-    [dispatch, account, parentAccount, handleOnResult, setTransactionId, handleOnCancel],
-  );
+  const initSellFlow = useCallback(() => {
+    dispatch(
+      openModal("MODAL_SELL_CRYPTO_DEVICE", {
+        account,
+        parentAccount,
+        getCoinifyContext: setTransactionId,
+        onResult: handleOnResult,
+        onCancel: handleOnCancel,
+      }),
+    );
+  }, [dispatch, account, parentAccount, handleOnResult, setTransactionId, handleOnCancel]);
 
   useEffect(() => {
     if (!account) return;
@@ -242,15 +249,13 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
       switch (event) {
         case "trade.trade-created":
           if (mode === "sell") {
-            console.log(e.data);
+//            setTradeId(context.id);
+            tradeId = context.id
           }
           break;
         case "trade.trade-prepared":
           if (mode === "sell" && currency) {
-            initSellFlow({
-              amount: parseCurrencyUnit(currency.units[0], "0.001"),
-              recipient: context.transferIn.details.refundAccount,
-            });
+            initSellFlow();
           }
           break;
         case "trade.receive-account-changed":
