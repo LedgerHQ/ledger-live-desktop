@@ -411,7 +411,8 @@
           "title": "Select account",
           "selectLabel": "Account to lend from",
           "cta": "Approve",
-          "alreadyEnabled": "This account is already enabled"
+          "alreadyEnabled": "This account is already enabled",
+          "notEnabled": "You need to pay fees to approve this account"
         },
         "amount": {
           "title": "Amount",

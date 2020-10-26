@@ -65,8 +65,8 @@ export function AccountOption({
         <FormattedVal color="palette.text.shade60" val={account.balance} unit={unit} showCode />
       </Box>
       <Box color="warning" style={{ width: 16 }}>
-        {isEnabled && (
-          <ToolTip content={<Trans i18nKey="lend.enable.steps.selectAccount.alreadyEnabled" />}>
+        {!isEnabled && (
+          <ToolTip content={<Trans i18nKey="lend.enable.steps.selectAccount.notEnabled" />}>
             <ExclamationCircle size={16} />
           </ToolTip>
         )}
