@@ -328,7 +328,7 @@
       "date": "Date",
       "info": "You can lend assets directly from your {{currency}} account and earn passive revenue.",
       "howCompoundWorks": "How does lending on Compound work?",
-      "lend": "Lend {{currency}}"
+      "lend": "Deposit {{currency}}"
     },
     "emptyState": {
       "active": {
@@ -339,12 +339,12 @@
       "closed": {
         "title": "Your closed loans swaps will appear here",
         "description": "You have not made any loans yet.",
-        "cta": "Lend now"
+        "cta": "Deposit"
       },
       "history": {
         "title": "History",
         "description": "View the history of all your loan transactions.",
-        "cta": "Lend now"
+        "cta": "Deposit"
       }
     },
     "headers": {

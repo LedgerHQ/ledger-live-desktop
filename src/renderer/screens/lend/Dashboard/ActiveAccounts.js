@@ -116,6 +116,8 @@ const Row = ({ summary }: RowProps) => {
     dispatch(openModal("MODAL_LEND_MANAGE", { ...summary }));
   }, [dispatch, summary]);
 
+  if (!summary) return null;
+
   return (
     <RowContent>
       <Box>
