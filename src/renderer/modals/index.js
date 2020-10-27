@@ -40,6 +40,17 @@ import MODAL_ALGORAND_OPT_IN from "../families/algorand/OptInFlowModal";
 import MODAL_ALGORAND_CLAIM_REWARDS from "../families/algorand/Rewards/ClaimRewardsFlowModal";
 import MODAL_ALGORAND_EARN_REWARDS_INFO from "../families/algorand/Rewards/EarnRewardsInfoModal";
 
+// Lending
+import MODAL_LEND_MANAGE from "../screens/lend/modals/ManageLend";
+import MODAL_LEND_ENABLE_INFO from "../screens/lend/modals/EnableInfoModal";
+import MODAL_LEND_SUPPLY from "../screens/lend/modals/Supply";
+import MODAL_LEND_SELECT_ACCOUNT from "../screens/lend/modals/SelectAccountStep";
+import MODAL_LEND_ENABLE_FLOW from "../screens/lend/modals/Enable";
+import MODAL_LEND_WITHDRAW_FLOW from "../screens/lend/modals/Withdraw";
+import MODAL_LEND_NO_ETHEREUM_ACCOUNT from "../screens/lend/modals/NoEthereumAccount";
+
+import MODAL_LEND_HIGH_FEES from "../screens/lend/modals/HighFeesModal";
+
 const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_EXPORT_OPERATIONS,
   MODAL_CONFIRM,
@@ -76,6 +87,15 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_ALGORAND_CLAIM_REWARDS,
   MODAL_ALGORAND_EARN_REWARDS_INFO,
   MODAL_HELP,
+  // Lending
+  MODAL_LEND_MANAGE,
+  MODAL_LEND_ENABLE_INFO,
+  MODAL_LEND_ENABLE_FLOW,
+  MODAL_LEND_SELECT_ACCOUNT,
+  MODAL_LEND_SUPPLY,
+  MODAL_LEND_WITHDRAW_FLOW,
+  MODAL_LEND_HIGH_FEES,
+  MODAL_LEND_NO_ETHEREUM_ACCOUNT,
   MODAL_SWAP,
   MODAL_SWAP_OPERATION_DETAILS,
 };

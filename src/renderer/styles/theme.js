@@ -68,6 +68,7 @@ const colors = {
   blueTransparentBackground: "rgba(100, 144, 241, 0.15)",
   pillActiveBackground: "rgba(100, 144, 241, 0.1)",
   lightRed: "rgba(234, 46, 73, 0.1)",
+  lightWarning: "rgba(245, 127, 23, 0.1)",
   white: "#ffffff",
   experimentalBlue: "#165edb",
   marketUp_eastern: "#ea2e49",
@@ -124,10 +125,22 @@ const fadeInGrowX = keyframes`
     }
 `;
 
+const fadeInUp = keyframes`
+    0% {
+      opacity: 0;
+      transform: translateY(66%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  `;
+
 const animations = {
   fadeIn: props => css`${fadeIn} ${animationLength} ${easings.outQuadratic} forwards`,
   fadeOut: props => css`${fadeOut} ${animationLength} ${easings.outQuadratic} forwards`,
   fadeInGrowX: props => css`${fadeInGrowX} 0.6s ${easings.outQuadratic} forwards`,
+  fadeInUp: props => css`${fadeInUp} ${animationLength} ${easings.outQuadratic} forwards`,
 };
 
 const overflow = {

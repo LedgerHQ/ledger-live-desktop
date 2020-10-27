@@ -3,7 +3,8 @@ import { useMemo, useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { OutputSelector } from "reselect";
 import { createSelector } from "reselect";
-import type { Account } from "@ledgerhq/live-common/lib/types";
+import type { Currency, AccountLikeArray, Account } from "@ledgerhq/live-common/lib/types";
+import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
 import { isAccountDelegating } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import {
   nestedSortAccounts,

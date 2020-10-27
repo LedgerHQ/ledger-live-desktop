@@ -11,6 +11,7 @@ import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
 import Account from "~/renderer/screens/account";
 import Asset from "~/renderer/screens/asset";
+import Lend from "~/renderer/screens/lend";
 import Box from "~/renderer/components/Box/Box";
 import ListenDevices from "~/renderer/components/ListenDevices";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
@@ -95,8 +96,12 @@ export default function Default() {
                     <Route path="/settings" render={props => <Settings {...props} />} />
                     <Route path="/accounts" render={props => <Accounts {...props} />} />
                     <Route path="/manager" render={props => <Manager {...props} />} />
+                    <Route path="/lend" render={props => <Lend {...props} />} />
                     <Route path="/exchange" render={props => <Exchange {...props} />} />
-                    <Route path="/account/:parentId/:id" render={props => <Account {...props} />} />
+                    <Route
+                      path="/account/:parentId/:id"
+                      render={props => <Account {...props} />}
+                    />
                     <Route path="/account/:id" render={props => <Account {...props} />} />
                     <Route path="/asset/:assetId+" render={props => <Asset {...props} />} />
                     <Route path="/swap" render={props => <Swap {...props} />} />

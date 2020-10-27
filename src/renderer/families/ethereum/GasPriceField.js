@@ -6,18 +6,20 @@ import invariant from "invariant";
 import type { Account, Transaction, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import FeeSliderField from "~/renderer/components/FeeSliderField";
+import { inferDynamicRange } from "@ledgerhq/live-common/lib/range";
 
 type Props = {
   account: Account,
   transaction: Transaction,
   status: TransactionStatus,
   onChange: Transaction => void,
+  displayError?: boolean,
 };
 
-const fallbackGasPrice = BigNumber(10e9);
+const fallbackGasPrice = inferDynamicRange(BigNumber(10e9));
 let lastNetworkGasPrice; // local cache of last value to prevent extra blinks
 
-const FeesField = ({ onChange, account, transaction, status }: Props) => {
+const FeesField = ({ onChange, account, transaction, status, displayError = true }: Props) => {
   invariant(transaction.family === "ethereum", "FeeField: ethereum family expected");
 
   const bridge = getAccountBridge(account);
@@ -33,17 +35,18 @@ const FeesField = ({ onChange, account, transaction, status }: Props) => {
   if (!lastNetworkGasPrice && networkGasPrice) {
     lastNetworkGasPrice = networkGasPrice;
   }
-  const defaultGasPrice = networkGasPrice || lastNetworkGasPrice || fallbackGasPrice;
-  const gasPrice = transaction.gasPrice || defaultGasPrice;
+  const range = networkGasPrice || lastNetworkGasPrice || fallbackGasPrice;
+  const gasPrice = transaction.gasPrice || range.initial;
   const { units } = account.currency;
 
   return (
     <FeeSliderField
-      defaultValue={defaultGasPrice}
+      range={range}
+      defaultValue={range.initial}
       value={gasPrice}
       onChange={onGasPriceChange}
       unit={units.length > 1 ? units[1] : units[0]}
-      error={status.errors.gasPrice}
+      error={displayError ? status.errors.gasPrice : null}
     />
   );
 };

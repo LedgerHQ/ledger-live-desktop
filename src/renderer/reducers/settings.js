@@ -102,6 +102,7 @@ export type SettingsState = {
   starredAccountIds?: string[],
   blacklistedTokenIds: string[],
   deepLinkUrl: ?string,
+  firstTimeLend: boolean,
   swapProviders?: AvailableProvider[],
   showClearCacheBanner: boolean,
 };
@@ -144,6 +145,7 @@ const INITIAL_STATE: SettingsState = {
   lastSeenDevice: null,
   blacklistedTokenIds: [],
   deepLinkUrl: null,
+  firstTimeLend: false,
   swapProviders: [],
   showClearCacheBanner: false,
 };
@@ -234,6 +236,10 @@ const handlers: Object = {
   SET_DEEPLINK_URL: (state: SettingsState, { payload: deepLinkUrl }) => ({
     ...state,
     deepLinkUrl,
+  }),
+  SET_FIRST_TIME_LEND: (state: SettingsState) => ({
+    ...state,
+    firstTimeLend: false,
   }),
   SETTINGS_SET_SWAP_PROVIDERS: (state: SettingsState, { swapProviders }) => ({
     ...state,

@@ -11,6 +11,7 @@ import type {
   Account,
   TokenAccount,
   PortfolioRange,
+  TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import Chart from "~/renderer/components/Chart";
@@ -18,6 +19,8 @@ import Box, { Card } from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import AccountBalanceSummaryHeader from "./AccountBalanceSummaryHeader";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
+
+import AccountLendingFooter from "~/renderer/screens/lend/Account/AccountBalanceSummaryFooter";
 
 import perFamilyAccountBalanceSummaryFooter from "~/renderer/generated/AccountBalanceSummaryFooter";
 
@@ -30,6 +33,8 @@ type Props = {
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,
   mainAccount: ?Account,
+  isCompoundEnabled?: boolean,
+  ctoken: ?TokenCurrency,
 };
 
 export default function AccountBalanceSummary({
@@ -40,6 +45,9 @@ export default function AccountBalanceSummary({
   chartColor,
   setCountervalueFirst,
   mainAccount,
+  isCompoundEnabled,
+  parentAccount,
+  ctoken,
 }: Props) {
   const {
     history,
@@ -135,6 +143,15 @@ export default function AccountBalanceSummary({
           account={account}
           counterValue={counterValue}
           discreetMode={discreetMode}
+        />
+      )}
+      {isCompoundEnabled && account.type === "TokenAccount" && parentAccount && ctoken && (
+        <AccountLendingFooter
+          account={account}
+          parentAccount={parentAccount}
+          countervalue={counterValue}
+          discreetMode={discreetMode}
+          ctoken={ctoken}
         />
       )}
     </Card>
