@@ -26,7 +26,7 @@ const InfoDisplay = ({ title, description }: { title: string, description: strin
         textAlign="center"
         color="palette.text.shade100"
         lineHeight="22px"
-        mb="8px"
+        mb="16px"
       >
         {title}
       </Text>
