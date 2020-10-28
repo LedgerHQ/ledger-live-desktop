@@ -513,19 +513,19 @@
           "title": "Confirmation",
           "success": {
             "title": "Transaction émise avec succès",
-            "text": "You will start earning interest once the network has confirmed the deposit.",
-            "done": "Close",
-            "cta": "View details",
-            "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
+            "text": "Vous commencerez à percevoir des intérêts une fois que le réseau aura confirmé le dépôt.",
+            "done": "Fermer",
+            "cta": "Voir les détails",
+            "info": "Les transactions peuvent prendre un certain temps avant d'être affichées dans un explorateur et être confirmées."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
         }
       }
     },
     "noEthAccount": {
-      "title": "Please create an ETH account",
-      "description": "<0>{{ asset }}({{ ticker }})</0> is an Ethereum ERC-20 token. To lend {{ ticker }}, install the Ethereum app and create an Ethereum account",
-      "cta": "Add account"
+      "title": "Veuillez créer un compte ETH",
+      "description": "<0>{{ asset }}({{ ticker }})</0> est un token Ethereum ERC-20. Pour prêter {{ ticker }}, installez l'application Ethereum et créez un compte Ethereum",
+      "cta": "Ajouter un compte"
     }
   },
   "accounts": {
@@ -563,7 +563,7 @@
       "title": "Commencer",
       "desc": "Commencer ici"
     },
-    "status": "Ledger status",
+    "status": "Statut Ledger",
     "helpCenter": {
       "title": "Assistance Ledger",
       "desc": "Obtenir de l’aide"
@@ -592,8 +592,8 @@
   },
   "banners": {
     "cleanCache": {
-      "title": "Modification of experimental settings require a clear cache",
-      "cta": "Clear cache"
+      "title": "La modification des paramètres expérimentaux nécessite de vider le cache",
+      "cta": "Vider le cache"
     },
     "migrate": "Mise à jour des comptes Ledger Live disponible",
     "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge",
@@ -1135,8 +1135,8 @@
         "label": "Compte à créditer",
         "parentAccount": "1. Sélectionnez le compte {{currencyName}}",
         "token": "2. Sélectionnez un token",
-        "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
-        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
+        "verifyTokenType": "Veuillez vérifier que <0>{{token}}</0> est un token <0>{{tokenType}}</0>. Tout autre actif envoyé à un compte {{currency}} peut être perdu.",
+        "warningTokenType": "Veuillez envoyer uniquement des tokens <0>{{ticker}}</0> ou <0>{{tokenType}}</0> à un compte {{currency}}. Tout autre actif de cryptomonnaies peut être perdu."
       },
       "connectDevice": {
         "title": "Appareil",
@@ -2124,7 +2124,7 @@
   "TransactionConfirm": {
     "title": "Veuillez confirmer l'opération sur votre appareil pour la finaliser",
     "warning": "Toujours vérifier que l'adresse affichée sur votre appareil correspond exactement à celle donnée par le {{recipientWording}}",
-    "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
+    "secureContract": "Vérifiez les details du prêt sur votre appreil avant de l'envoyer. L'addresse est fournie de maniére sécurisée afin que vous n'ayez pas à la vérifier.",
     "warningWording": {},
     "titleWording": {
       "send": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
