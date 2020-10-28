@@ -3,7 +3,7 @@ import React, { useCallback, useMemo, useState } from "react";
 import type { Account, AccountLike, SignedOperation } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { getAccountName, getMainAccount } from "@ledgerhq/live-common/lib/account";
+import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import Modal from "~/renderer/components/Modal";
@@ -22,6 +22,8 @@ import { createAction as initSellCreateAction } from "@ledgerhq/live-common/lib/
 import { toTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 import { toAccountLikeRaw, toAccountRaw } from "@ledgerhq/live-common/lib/account/serialization";
 import { toTransactionStatusRaw } from "@ledgerhq/live-common/lib/transaction/status";
+import { renderError } from "~/renderer/components/DeviceAction/rendering";
+import { useBroadcast } from "~/renderer/hooks/useBroadcast";
 
 const checkSignatureAndPrepare = command("checkSignatureAndPrepare");
 const connectAppExec = command("connectApp");
@@ -35,6 +37,7 @@ type Props = {
     account: AccountLike,
     parentAccount: ?Account,
     onResult: (AccountLike, ?Account, any) => null,
+    onCancel: () => null,
     verifyAddress?: boolean,
     getCoinifyContext: string => Promise<any>,
   },
@@ -66,6 +69,8 @@ const Root = ({ data, onClose }: Props) => {
   const [error, setError] = useState(null);
   const [signedOperation, setSignedOperation] = useState(null);
 
+  const broadcast = useBroadcast({ account, parentAccount });
+
   const handleTransactionId = useCallback(
     async (nonce: string) => {
       const mainAccount = getMainAccount(account, parentAccount);
@@ -86,8 +91,6 @@ const Root = ({ data, onClose }: Props) => {
       if (s.errors && s.errors.amount) {
         setError(s.errors.amount);
       }
-
-      console.log({ transaction: t3, status: s });
 
       return {
         binaryPayload: coinifyContext.providerSig.payload,
@@ -135,11 +138,11 @@ const Root = ({ data, onClose }: Props) => {
   );
 
   if (error) {
-    console.log(error);
-
     return (
       <Box alignItems={"center"} justifyContent={"center"} p={20}>
-        error
+        {renderError({
+          error,
+        })}
       </Box>
     );
   }
@@ -198,8 +201,10 @@ const Root = ({ data, onClose }: Props) => {
           setError(transactionSignError);
         } else {
           setSignedOperation(signedOperation);
-          onResult();
-          onClose();
+          broadcast(signedOperation).then(() => {
+            onResult();
+            onClose();
+          });
         }
       }}
     />
@@ -220,14 +225,7 @@ const SellCrypto = () => {
             onClose();
           }}
           title="Connect your device"
-          render={() =>
-            data ? (
-              <Root
-                data={data}
-                onClose={onClose}
-              />
-            ) : null
-          }
+          render={() => (data ? <Root data={data} onClose={onClose} /> : null)}
         />
       )}
     />

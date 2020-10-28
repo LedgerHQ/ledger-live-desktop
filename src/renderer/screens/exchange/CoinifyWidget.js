@@ -180,7 +180,7 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
         );
       }
     }
-  }, [coinifyConfig.host, mainAccount]);
+  }, [coinifyConfig.host, mainAccount, mode]);
 
   const setTransactionId = useCallback(
     txId => {
@@ -249,8 +249,8 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
       switch (event) {
         case "trade.trade-created":
           if (mode === "sell") {
-//            setTradeId(context.id);
-            tradeId = context.id
+            //            setTradeId(context.id);
+            tradeId = context.id;
           }
           break;
         case "trade.trade-prepared":

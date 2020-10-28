@@ -2,7 +2,7 @@
 
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 
-export const supportedCurrenciesIds = [
+export const supportedBuyCurrenciesIds = [
   "bitcoin",
   "ethereum",
   "bitcoin_cash",
@@ -11,8 +11,17 @@ export const supportedCurrenciesIds = [
   "ethereum/erc20/usd_tether__erc20_",
 ];
 
-export const isCurrencySupported = (currency: TokenCurrency | CryptoCurrency) =>
-  supportedCurrenciesIds.includes(currency.id);
+export const supportedSellCurrenciesIds = ["bitcoin"];
+
+export const isCurrencySupported = (
+  mode: "BUY" | "SELL",
+  currency: TokenCurrency | CryptoCurrency,
+) => {
+  if (mode === "BUY") {
+    return supportedBuyCurrenciesIds.includes(currency.id);
+  }
+  return supportedSellCurrenciesIds.includes(currency.id);
+}
 
 type Config = {
   host: string,

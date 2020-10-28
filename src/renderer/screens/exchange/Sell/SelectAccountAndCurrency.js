@@ -85,7 +85,7 @@ const SelectAccountAndCurrency = ({
   allAccounts,
 }: Props) => {
   const { t } = useTranslation();
-  const allCurrencies = useCoinifyCurrencies();
+  const allCurrencies = useCoinifyCurrencies("SELL");
 
   const {
     availableAccounts,
