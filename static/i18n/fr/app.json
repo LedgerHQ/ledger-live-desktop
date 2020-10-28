@@ -409,23 +409,23 @@
       "steps": {
         "selectAccount": {
           "title": "Sélectionnez un compte",
-          "selectLabel": "Account to lend from",
-          "cta": "Approve",
-          "alreadyEnabled": "This account is approved",
-          "notEnabled": "You need to pay fees to approve this account"
+          "selectLabel": "Compte de prêt",
+          "cta": "Activer",
+          "alreadyEnabled": "Ce compte est activé",
+          "notEnabled": "Vous devez payer des frais pour activer ce compte"
         },
         "amount": {
-          "title": "Amount",
-          "summary": "I grant access to <0>{{contractName}}</0> smart contract on my account <0>{{accountName}}</0> for a <0>{{amount}}</0> amount",
-          "limit": "limited {{amount}}",
-          "noLimit": "no limit {{assetName}}",
+          "title": "Montant",
+          "summary": "J'accorde l'accès au contrat <0>{{contractName}}</0> sur mon compte <0>{{accountName}}</0> pour un montant de <0>{{amount}}</0>",
+          "limit": "limite : {{amount}}",
+          "noLimit": "sans limte {{assetName}}",
           "contractName": "Compound {{currencyName}}",
-          "advanced": "Advanced",
-          "amountLabel": "Amount to enable",
-          "amountLabelTooltip": "This limits the amount available to the smart contract."
+          "advanced": "Avancé",
+          "amountLabel": "Montant à activer",
+          "amountLabelTooltip": "Cela limite le montant disponible à prêter."
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Appareil"
         },
         "confirmation": {
           "title": "Confirmation",
