@@ -305,34 +305,34 @@
       "history": "Historique"
     },
     "assets": "Actifs à prêter",
-    "active": "Approved accounts",
-    "lendAsset": "Deposit",
+    "active": "Comptes actifs",
+    "lendAsset": "Dépôt",
     "highFeesModal": {
-      "title": "High fees on Ethereum",
-      "description": "Due to congestion on the Ethereum network, you may experience high fees when issuing transactions.",
-      "cta": "Got it"
+      "title": "Frais élevés sur Ethereum",
+      "description": "En raison de la congestion du réseau Ethereum, il se peut que vous ayez à payer des frais élevés lors de l'émission de transactions.",
+      "cta": "Compris"
     },
     "account": {
-      "amountSupplied": "Amount supplied",
-      "amountSuppliedTooltip": "Amount lent to the network",
-      "currencyAPY": "Currency APY",
-      "currencyAPYTooltip": "Actual return rate of a supply by the end of the year if the deposit is continuously compounded.",
-      "accruedInterests": "Accrued interests",
-      "accruedInterestsTooltip": "Interest being generated",
-      "interestEarned": "Interest earned",
+      "amountSupplied": "Montant déposé",
+      "amountSuppliedTooltip": "Montant prêté au réseau",
+      "currencyAPY": "APY de la devise",
+      "currencyAPYTooltip": "Taux réel de retour d'ici la fin de l'année si les intérêts sont cumulés.",
+      "accruedInterests": "Intérêts accumulés",
+      "accruedInterestsTooltip": "Intérêts générés",
+      "interestEarned": "Intérêts gagnés",
       "interestEarnedTooltip": "--! NEED TEXT HERE !--",
-      "openLoans": "Open loans",
-      "closedLoans": "Closed loans",
-      "amountRedeemed": "Amount redeemed",
+      "openLoans": "Prêts ouverts",
+      "closedLoans": "Prêts clôturés",
+      "amountRedeemed": "Montant réclamé",
       "amountRedeemedTooltip": "--! NEED TEXT HERE !--",
       "date": "Date",
       "info": "You can lend assets directly from your {{currency}} account and earn passive revenue.",
-      "howCompoundWorks": "How does lending on Compound work?",
-      "lend": "Lend {{currency}}"
+      "howCompoundWorks": "Comment fonctionne Compound ?",
+      "lend": "Prêter {{currency}}"
     },
     "emptyState": {
       "active": {
-        "title": "Lending",
+        "title": "Prêt",
         "description": "You can lend assets directly from your Ethereum accounts and earn passive revenue.",
         "cta": "How does lending on Compound work?"
       },
