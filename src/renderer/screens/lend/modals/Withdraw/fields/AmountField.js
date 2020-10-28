@@ -83,16 +83,16 @@ const AmountField = ({
     [bridge, transaction, onChangeTransaction, capabilities],
   );
 
-  const amountAvailable = useMemo(
-    () =>
-      formatCurrencyUnit(defaultUnit, capabilities?.totalSupplied, {
-        disableRounding: true,
-        showAllDigits: false,
-        showCode: true,
-        locale,
-      }),
-    [capabilities, defaultUnit, locale],
-  );
+  const amountToWithdraw = useMemo(() => {
+    if (!capabilities) return BigNumber(0);
+    const amount = transaction.useAllAmount ? capabilities.totalSupplied : transaction.amount;
+    return formatCurrencyUnit(defaultUnit, amount, {
+      disableRounding: true,
+      showAllDigits: false,
+      showCode: true,
+      locale,
+    });
+  }, [capabilities, defaultUnit, locale, transaction]);
 
   if (!status) return null;
   const { errors, warnings } = status;
@@ -103,7 +103,10 @@ const AmountField = ({
     <Box flow={1}>
       <Label>
         <Text style={{ flex: 1 }} textAlign="left">
-          <Trans i18nKey="lend.withdraw.steps.amount.available" values={{ amountAvailable }}>
+          <Trans
+            i18nKey="lend.withdraw.steps.amount.amountToWithdraw"
+            values={{ amount: amountToWithdraw }}
+          >
             <b></b>
           </Trans>
         </Text>
