@@ -100,4 +100,5 @@ export const urls = {
     BitcoinCashHardforkOct2020Warning:
       "https://www.ledger.com/bitcoin-cash-fork-15-november-2020-what-it-means-for-you",
   },
+  compound: "https://support.ledger.com/hc/en-us/articles/360017215099",
 };

@@ -33,7 +33,7 @@ const WithdrawableBanner = ({ account, parentAccount }: Props) => {
   const { t } = useTranslation();
 
   const onClickHelp = useCallback(() => {
-    openURL(urls.maxSpendable);
+    openURL(urls.compound);
   }, []);
 
   const accountUnit = getAccountUnit(account);
