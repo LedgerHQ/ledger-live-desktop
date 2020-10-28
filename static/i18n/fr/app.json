@@ -11,7 +11,7 @@
     "delete": "Supprimer",
     "launch": "Lancer",
     "continue": "Continuer",
-    "previous": "Previous",
+    "previous": "Précédent",
     "learnMore": "En savoir plus",
     "help": "Aide",
     "skipThisStep": "Ignorer cette étape",
@@ -78,9 +78,9 @@
       "DELEGATE": "Déléguée",
       "REDELEGATE": "Redélégué",
       "UNDELEGATE": "Interrompue",
-      "SUPPLY": "Deposited",
-      "REDEEM": "Withdrawn",
-      "APPROVE": "Enabled",
+      "SUPPLY": "Déposé",
+      "REDEEM": "Retiré",
+      "APPROVE": "Actif",
       "VOTE": "Voté",
       "FREEZE": "Gelé",
       "UNFREEZE": "Dégelé",
@@ -122,7 +122,7 @@
     "manager": "Manager",
     "exchange": "Acheter des cryptos",
     "swap": "Swap",
-    "lend": "Lend crypto"
+    "lend": "Prêter des cryptos"
   },
   "stars": {
     "placeholder": "Les comptes que vous placez en favoris dans la page <1><0>Comptes</0></1> apparaitront ici !",
@@ -248,7 +248,7 @@
     },
     "settings": {
       "title": "Modifier le compte",
-      "advancedLogs": "Advanced",
+      "advancedLogs": "Avancé",
       "advancedTips": "Votre xpub est une donnée sensible. Utilisez-la avec prudence, en particulier lorsque vous la divulguez à des tiers.",
       "accountName": {
         "title": "Nom du compte",
@@ -297,14 +297,14 @@
     }
   },
   "lend": {
-    "title": "Lend crypto",
-    "description": "Deposit your crypto on the Compound protocol to start earning interest.",
+    "title": "Prêter des cryptos",
+    "description": "Déposez vos actifs sur le protocole Compound pour commencer à obtenir des intérêts.",
     "tabs": {
-      "dashboard": "Dashboard",
-      "closed": "Closed loans",
-      "history": "History"
+      "dashboard": "Tableau de bord",
+      "closed": "Emprunts clôturés",
+      "history": "Historique"
     },
-    "assets": "Assets to lend",
+    "assets": "Actifs à prêter",
     "active": "Approved accounts",
     "lendAsset": "Deposit",
     "highFeesModal": {
