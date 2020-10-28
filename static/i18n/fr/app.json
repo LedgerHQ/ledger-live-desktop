@@ -326,7 +326,7 @@
       "amountRedeemed": "Montant réclamé",
       "amountRedeemedTooltip": "--! NEED TEXT HERE !--",
       "date": "Date",
-      "info": "You can lend assets directly from your {{currency}} account and earn passive revenue.",
+      "info": "Vous pouvez prêter des actifs directement de vos comptes {{currency}} et obtenir des revenus passifs.",
       "howCompoundWorks": "Comment fonctionne Compound ?",
       "lend": "Prêter {{currency}}"
     },
@@ -337,13 +337,13 @@
         "cta": "Comment fonctionne Compound ?"
       },
       "closed": {
-        "title": "Your closed loans swaps will appear here",
+        "title": "Vos prêts fermés apparaîtront ici",
         "description": "Vous n’avez pas encore fait de prêts.",
         "cta": "Prêter maintenant"
       },
       "history": {
         "title": "Historique",
-        "description": "View the history of all your loan transactions.",
+        "description": "Visualisez l'historique de toutes vos opérations de prêt.",
         "cta": "Prêter maintenant"
       }
     },
@@ -353,14 +353,14 @@
         "amountSupplied": "Prêt actuel",
         "amountSuppliedTooltip": "Montant prêté au réseau",
         "accruedInterests": "Intérêts obtenus",
-        "accruedInterestsTooltip": "Interest being generated",
+        "accruedInterestsTooltip": "Intérêts générés",
         "status": "Statut",
-        "statusTooltip": "Current account status",
+        "statusTooltip": "Statut actuel du compte",
         "actions": "Actions"
       },
       "status": {
-        "enablingTooltip": "Your transaction is broadcasting",
-        "toSupplyTooltip": "You can now supply your assets"
+        "enablingTooltip": "Votre transaction est en train d'être diffusée",
+        "toSupplyTooltip": "Vous pouvez maintenant prêter vos actifs"
       },
       "closed": {
         "assetLended": "Actif prêté",
@@ -371,8 +371,8 @@
       "rates": {
         "allAssets": "Actif",
         "totalBalance": "Solde disponible",
-        "totalBalanceTooltip": "Total balance of all the accounts excluding the amount supplied.",
-        "grossSupply": "Gross supply",
+        "totalBalanceTooltip": "Solde total de tous les comptes en excluant le montant prêté.",
+        "grossSupply": "Valeur du marché",
         "grossSupplyTooltip": "Total amount of assets deposited on the network",
         "currentAPY": "APY actuel",
         "currentAPYTooltip": "Actual return rate of a supply by the end of the year if the deposit is continuously compounded.",
