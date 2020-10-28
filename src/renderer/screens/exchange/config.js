@@ -21,7 +21,7 @@ export const isCurrencySupported = (
     return supportedBuyCurrenciesIds.includes(currency.id);
   }
   return supportedSellCurrenciesIds.includes(currency.id);
-}
+};
 
 type Config = {
   host: string,

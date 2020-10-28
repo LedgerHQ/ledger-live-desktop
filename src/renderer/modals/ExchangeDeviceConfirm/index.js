@@ -108,7 +108,7 @@ const VerifyOnDevice = ({ mainAccount, onAddressVerified, device }: VerifyOnDevi
 };
 
 type Props = {
-  onClose: () => null,
+  onClose: () => void,
   data: {
     account: AccountLike,
     parentAccount: ?Account,

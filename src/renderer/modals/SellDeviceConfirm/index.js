@@ -32,11 +32,11 @@ const initSellExec = command("getTransactionId");
 const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectAppExec);
 
 type Props = {
-  onClose: () => null,
+  onClose: () => void,
   data: {
     account: AccountLike,
     parentAccount: ?Account,
-    onResult: (AccountLike, ?Account, any) => null,
+    onResult: () => null,
     onCancel: () => null,
     verifyAddress?: boolean,
     getCoinifyContext: string => Promise<any>,
@@ -116,7 +116,6 @@ const Root = ({ data, onClose }: Props) => {
           deviceId,
           transaction,
           binaryPayload,
-          receiver,
           payloadSignature,
           account,
           parentAccount,
@@ -126,7 +125,6 @@ const Root = ({ data, onClose }: Props) => {
             deviceId,
             transaction: toTransactionRaw(transaction),
             binaryPayload,
-            receiver,
             payloadSignature,
             account: toAccountLikeRaw(account),
             parentAccount: parentAccount ? toAccountRaw(parentAccount) : undefined,

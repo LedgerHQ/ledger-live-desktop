@@ -42,11 +42,11 @@ const BackupPack = () => {
   });
 
   // Generate the interpolator functions for each slide
-  const transBg = getTransform(-20, 100, 30 + 40, 100);
-  const transSell1 = getTransform(38, 40, 18 + 40, 40);
-  const transSell2 = getTransform(80, 25, 15 + 40, 25);
-  const transSell3 = getTransform(100, 30, 38 + 40, 30);
-  const transSell4 = getTransform(105, 20, 25 + 40, 20);
+  const transBg = getTransform(0, 100, 30 + 40, 100);
+  const transSell1 = getTransform(58, 40, 18 + 40, 40);
+  const transSell2 = getTransform(100, 25, 15 + 40, 25);
+  const transSell3 = getTransform(120, 30, 38 + 40, 30);
+  const transSell4 = getTransform(125, 20, 25 + 40, 20);
 
   // React to the user mouse movement inside the banner for parallax effect
   const onMouseMove = e => {
@@ -60,8 +60,12 @@ const BackupPack = () => {
   const onMouseLeave = () => set({ xy: [0, 0] });
 
   const onClick = useCallback(() => {
-    // waiting for Hugo
-    // history.push("/exchange");
+    history.push({
+      pathname: "/exchange",
+      state: {
+        tab: 1,
+      },
+    });
   }, [history]);
 
   // After initial slide-in animation, set the offset to zero

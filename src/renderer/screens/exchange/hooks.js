@@ -24,7 +24,8 @@ export const useCoinifyCurrencies = (mode: "BUY" | "SELL") => {
   const blacklistedTokenIds = useSelector(blacklistedTokenIdsSelector);
   // cherry picking only those available in coinify
 
-  const supportedCurrenciesIds = mode === "BUY" ? supportedBuyCurrenciesIds : supportedSellCurrenciesIds;
+  const supportedCurrenciesIds =
+    mode === "BUY" ? supportedBuyCurrenciesIds : supportedSellCurrenciesIds;
   /** $FlowFixMe */
   const supportedCryptoCurrencies = sortedCryptoCurrencies.filter(
     currency =>

@@ -64,21 +64,6 @@ const Sell = ({ defaultCurrency, defaultAccount, installedApps }: Props) => {
     }));
   }, []);
 
-  const selectAccount = useCallback(
-    (account, parentAccount) => {
-      // hook here for the pre validation
-      //       dispatch(
-      //         openModal("MODAL_SELL_CRYPTO_DEVICE", {
-      //           account,
-      //           parentAccount,
-      //           onResult: confirmAccount,
-      //         }),
-      //       );
-      confirmAccount(account, parentAccount);
-    },
-    [confirmAccount],
-  );
-
   return (
     <SellContainer>
       <TrackPage category="Sell Crypto" />
@@ -91,7 +76,7 @@ const Sell = ({ defaultCurrency, defaultAccount, installedApps }: Props) => {
         />
       ) : (
         <SelectAccountAndCurrency
-          selectAccount={selectAccount}
+          selectAccount={confirmAccount}
           defaultCurrency={defaultCurrency}
           defaultAccount={defaultAccount}
           currenciesStatus={currenciesStatus}

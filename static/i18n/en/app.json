@@ -120,7 +120,7 @@
     "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "Manager",
-    "exchange": "Buy",
+    "exchange": "Buy/Sell crypto",
     "swap": "Swap",
     "lend": "Lend"
   },
@@ -567,6 +567,7 @@
       "send": "Send",
       "swap": "Swap",
       "buy": "Buy",
+      "sell": "Sell",
       "edit": "Edit account",
       "hideToken": "Hide token"
     }
@@ -1148,6 +1149,11 @@
     "title": "Buy",
     "titleCrypto": "Buy {{currency}}",
     "buyCTA": "Buy {{currencyTicker}}"
+  },
+  "sell": {
+    "title": "Sell",
+    "titleCrypto": "Sell {{currency}}",
+    "buyCTA": "Sell {{currencyTicker}}"
   },
   "receive": {
     "title": "Receive",
