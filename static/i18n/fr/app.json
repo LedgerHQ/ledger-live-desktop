@@ -333,28 +333,28 @@
     "emptyState": {
       "active": {
         "title": "Prêt",
-        "description": "You can lend assets directly from your Ethereum accounts and earn passive revenue.",
-        "cta": "How does lending on Compound work?"
+        "description": "Vous pouvez prêter des actifs directement de vos comptes Ethereum et obtenir des revenus passifs.",
+        "cta": "Comment fonctionne Compound ?"
       },
       "closed": {
         "title": "Your closed loans swaps will appear here",
-        "description": "You have not made any loans yet.",
-        "cta": "Lend now"
+        "description": "Vous n’avez pas encore fait de prêts.",
+        "cta": "Prêter maintenant"
       },
       "history": {
-        "title": "History",
+        "title": "Historique",
         "description": "View the history of all your loan transactions.",
-        "cta": "Lend now"
+        "cta": "Prêter maintenant"
       }
     },
     "headers": {
       "active": {
-        "accounts": "Account",
-        "amountSupplied": "Current loan",
-        "amountSuppliedTooltip": "Amount lent to the network",
-        "accruedInterests": "Interest earned",
+        "accounts": "Compte",
+        "amountSupplied": "Prêt actuel",
+        "amountSuppliedTooltip": "Montant prêté au réseau",
+        "accruedInterests": "Intérêts obtenus",
         "accruedInterestsTooltip": "Interest being generated",
-        "status": "Status",
+        "status": "Statut",
         "statusTooltip": "Current account status",
         "actions": "Actions"
       },
@@ -363,52 +363,52 @@
         "toSupplyTooltip": "You can now supply your assets"
       },
       "closed": {
-        "assetLended": "Asset lended",
-        "amountRedeemed": "Withdrawal amount",
-        "interestsEarned": "Interest earned",
+        "assetLended": "Actif prêté",
+        "amountRedeemed": "Montant du retrait",
+        "interestsEarned": "Intérêts obtenus",
         "date": "Date"
       },
       "rates": {
-        "allAssets": "Asset",
-        "totalBalance": "Available balance",
+        "allAssets": "Actif",
+        "totalBalance": "Solde disponible",
         "totalBalanceTooltip": "Total balance of all the accounts excluding the amount supplied.",
         "grossSupply": "Gross supply",
         "grossSupplyTooltip": "Total amount of assets deposited on the network",
-        "currentAPY": "Current APY",
+        "currentAPY": "APY actuel",
         "currentAPYTooltip": "Actual return rate of a supply by the end of the year if the deposit is continuously compounded.",
         "actions": "Actions"
       }
     },
     "manage": {
-      "cta": "Manage lending",
-      "title": "Manage loan",
+      "cta": "Gérer les prêts",
+      "title": "Gérer le prêt",
       "enable": {
-        "approve": "Approve",
-        "approveLess": "Approve less",
-        "approveMore": "Approve more",
-        "viewDetails": "View details",
+        "approve": "Activer",
+        "approveLess": "Activer moins",
+        "approveMore": "Activer plus",
+        "viewDetails": "Voir les détails",
         "info": "You can supply <0>{{amount}}</0> out of the <1>{{enabled}} {{assetName}}</1> initially enabled.",
         "infoNoLimit": "You have supplied <0>{{supplied}}</0> out of a no limit approved account.",
         "notSupplied": "You have approved <0>{{enabled}}</0> on this account.",
-        "notSuppliedNoLimit": "You have approved this account by an unlimited amount.",
-        "enabling": "The approval transaction allowing you to lend is pending",
-        "notEnabled": "Before lending assets to the Compound protocol, you need to approve your account.",
-        "notEnoughApproved": "You don't have enough balance approved to supply assets."
+        "notSuppliedNoLimit": "Vous avez approuvé ce compte pour un montant illimité.",
+        "enabling": "La transaction d'activation vous permettant de prêter est en attente",
+        "notEnabled": "Avant de prêter des actifs au protocole Compound, vous devez activer votre compte.",
+        "notEnoughApproved": "Vous n'avez pas assez de solde approuvé pour prêter des actifs."
       },
       "supply": {
-        "title": "Deposit",
-        "description": "Enter the amount of assets to lend to the protocol."
+        "title": "Dépôt",
+        "description": "Entrez le montant d'actifs à prêter au protocole."
       },
       "withdraw": {
-        "title": "Withdraw",
-        "description": "Withdraw assets from the protocol to your Ledger account."
+        "title": "Retrait",
+        "description": "Retirer des actifs du protocole vers votre compte Ledger."
       }
     },
     "enable": {
-      "title": "Enable account",
+      "title": "Activer mon compte",
       "steps": {
         "selectAccount": {
-          "title": "Select account",
+          "title": "Sélectionnez un compte",
           "selectLabel": "Account to lend from",
           "cta": "Approve",
           "alreadyEnabled": "This account is approved",
