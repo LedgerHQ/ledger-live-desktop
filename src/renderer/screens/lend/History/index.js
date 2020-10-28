@@ -26,7 +26,12 @@ const History = ({ navigateToCompoundDashboard, accounts }: Props) => {
   return (
     <Box>
       {history.length ? (
-        <OperationsList accounts={accounts} filterOperation={filterOperation} />
+        <OperationsList
+          accounts={accounts}
+          withSubAccounts
+          withAccount
+          filterOperation={filterOperation}
+        />
       ) : (
         <EmptyState
           title={t("lend.emptyState.history.title")}
