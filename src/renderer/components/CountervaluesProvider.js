@@ -5,9 +5,8 @@ import {
   useCountervaluesPolling,
   useCountervaluesExport,
 } from "@ledgerhq/live-common/lib/countervalues/react";
-import { isEnvDefault, getEnvDefault } from "@ledgerhq/live-common/lib/env";
+import type { CounterValuesStateRaw } from "@ledgerhq/live-common/lib/countervalues/types";
 import { setKey, getKey } from "~/renderer/storage";
-import { setEnvOnAllThreads } from "~/helpers/env";
 import { useUserSettings, useTrackingPairIds } from "../actions/general";
 
 export default function CountervaluesProvider({ children }: { children: React$Node }) {
@@ -32,18 +31,8 @@ export default function CountervaluesProvider({ children }: { children: React$No
 function CountervaluesManager({ children }: { children: React$Node }) {
   useCacheManager();
   usePollingManager();
-  useLegacyFlagHandler();
 
   return children;
-}
-
-function useLegacyFlagHandler() {
-  useEffect(() => {
-    const key = "LEDGER_COUNTERVALUES_API";
-    if (isEnvDefault(key)) return;
-    const val = getEnvDefault(key);
-    setEnvOnAllThreads(key, val);
-  }, []);
 }
 
 function useCacheManager() {
