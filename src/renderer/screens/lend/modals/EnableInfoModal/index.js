@@ -121,6 +121,7 @@ export default function LendTermsModal({
                     <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
                       <Trans i18nKey="lend.info.terms.switchLabel">
                         <FakeLink onClick={onTermsLinkClick}></FakeLink>
+                        <Text onClick={onSwitchAccept} />
                       </Trans>
                     </Text>
                   </Box>
