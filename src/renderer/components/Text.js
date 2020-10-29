@@ -14,6 +14,7 @@ const Text: ThemedComponent<{
   mt?: number,
   mb?: number | string,
   align?: "DEPRECATED: USE textAlign INSTEAD",
+  lineHeight?: string,
 }> = styled.span`
   ${fontFamily};
   ${fontSize};

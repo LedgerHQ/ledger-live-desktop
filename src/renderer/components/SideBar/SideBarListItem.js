@@ -57,8 +57,10 @@ class SideBarListItem extends PureComponent<Props> {
           {!!Icon && <Icon size={16} />}
           <Box grow shrink>
             <Hide visible={!collapsed}>
-              {renderedLabel}
-              {!!desc && desc(this.props)}
+              <Box horizontal justifyContent="space-between" alignItems="center">
+                {renderedLabel}
+                {!!desc && desc(this.props)}
+              </Box>
             </Hide>
           </Box>
           {NotifComponent}

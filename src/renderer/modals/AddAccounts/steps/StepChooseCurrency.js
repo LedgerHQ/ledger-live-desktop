@@ -8,7 +8,6 @@ import { supportLinkByTokenType } from "~/config/urls";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Button from "~/renderer/components/Button";
-import ExternalLinkButton from "~/renderer/components/ExternalLinkButton";
 import Box from "~/renderer/components/Box";
 import CurrencyBadge from "~/renderer/components/CurrencyBadge";
 import TokenTips from "~/renderer/components/TokenTips";
@@ -19,6 +18,10 @@ import { openModal } from "~/renderer/actions/modals";
 
 const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
   const currencies = useMemo(() => listSupportedCurrencies().concat(listTokens()), []);
+  const isToken = currency && currency.type === "TokenCurrency";
+  // $FlowFixMe
+  const url = isToken ? supportLinkByTokenType[currency.tokenType] : null;
+
   return (
     <>
       {currency ? <CurrencyDownStatusAlert currencies={[currency]} /> : null}
@@ -33,6 +36,7 @@ const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
             tokenType: currency.tokenType.toUpperCase(),
             currency: currency.parentCurrency.name,
           }}
+          learnMoreLink={url}
         />
       ) : null}
     </>
@@ -49,9 +53,6 @@ export const StepChooseCurrencyFooter = ({
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isToken = currency && currency.type === "TokenCurrency";
-
-  // $FlowFixMe
-  const url = isToken ? supportLinkByTokenType[currency.tokenType] : null;
 
   // $FlowFixMe
   const parentCurrency = isToken && currency.parentCurrency;
@@ -101,15 +102,6 @@ export const StepChooseCurrencyFooter = ({
       {currency && <CurrencyBadge mr="auto" currency={currency} />}
       {isToken ? (
         <Box horizontal>
-          {url ? (
-            <ExternalLinkButton
-              primary
-              event="More info on Manage ERC20 tokens"
-              url={url}
-              label={t("common.learnMore")}
-            />
-          ) : null}
-
           {parentCurrency ? (
             <Button ml={2} primary onClick={onTokenCta} id="modal-token-continue-button">
               {parentTokenAccount

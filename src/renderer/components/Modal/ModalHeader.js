@@ -3,6 +3,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
@@ -10,16 +11,6 @@ import Tabbable from "~/renderer/components/Box/Tabbable";
 
 import IconCross from "~/renderer/icons/Cross";
 import IconAngleLeft from "~/renderer/icons/AngleLeft";
-
-const MODAL_HEADER_STYLE = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  padding: 10,
-  position: "relative",
-  flexDirection: "row",
-  minHeight: 66,
-};
 
 const TitleContainer = styled(Box).attrs(() => ({
   vertical: true,
@@ -93,20 +84,32 @@ const ModalHeaderAction = styled(Tabbable).attrs(() => ({
       : ""}
 `;
 
+const Container: ThemedComponent<{ hasTitle: boolean }> = styled(Box).attrs(() => ({
+  horizontal: true,
+  alignItems: "center",
+  justifyContent: "space-between",
+  p: 2,
+  relative: true,
+}))`
+  min-height: ${p => (p.hasTitle ? 66 : 0)}px;
+`;
+
 const ModalHeader = ({
   children,
   subTitle,
   onBack,
   onClose,
+  style = {},
 }: {
   children: any,
   subTitle?: React$Node,
   onBack?: void => void,
   onClose?: void => void,
+  style?: *,
 }) => {
   const { t } = useTranslation();
   return (
-    <div style={MODAL_HEADER_STYLE}>
+    <Container hasTitle={Boolean(children || subTitle)} style={style}>
       {onBack ? (
         <ModalHeaderAction onClick={onBack} id="modal-back-button">
           <IconAngleLeft size={12} />
@@ -117,24 +120,20 @@ const ModalHeader = ({
       ) : (
         <div />
       )}
-      <TitleContainer>
-        {subTitle && <ModalSubTitle id="modal-subtitle">{subTitle}</ModalSubTitle>}
-        <ModalTitle id="modal-title">{children}</ModalTitle>
-      </TitleContainer>
-
+      {children || subTitle ? (
+        <TitleContainer>
+          {subTitle && <ModalSubTitle id="modal-subtitle">{subTitle}</ModalSubTitle>}
+          <ModalTitle id="modal-title">{children}</ModalTitle>
+        </TitleContainer>
+      ) : null}
       {onClose ? (
-        <ModalHeaderAction
-          right
-          color="palette.text.shade40"
-          onClick={onClose}
-          id="modal-close-button"
-        >
+        <ModalHeaderAction right onClick={onClose} id="modal-close-button">
           <IconCross size={16} />
         </ModalHeaderAction>
       ) : (
         <div />
       )}
-    </div>
+    </Container>
   );
 };
 
