@@ -1506,10 +1506,10 @@
     node-pre-gyp "^0.15.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^15.7.0":
-  version "15.7.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-15.7.0.tgz#3c7c4b6877bcf690c706f7efa5afb42dd53b3c59"
-  integrity sha512-rJZdrvu6sUFC5xQtDB2ND3bntzygakVBIhc8rm7G64P7waTD9px5rzcX/bWKKYXgGO739Lxonq0v2LfIq9rWAA==
+"@ledgerhq/live-common@^15.7.1":
+  version "15.7.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-15.7.1.tgz#3f83025055597267fba3e0e603a3ac9ed22cfc93"
+  integrity sha512-JK57+RNasyNCWDmVw+NBCpQFgGLCopqHAtVJloLS7wbQ9asAHzb1zn9SbiwBSzeXSMFenYC+RegkwXXQJXuT7g==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/cryptoassets" "5.28.0"
