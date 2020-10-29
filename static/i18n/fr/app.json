@@ -2546,7 +2546,7 @@
       "title": "Veuillez interrompre la délégation du compte avant de le vider"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Veuillez d'abord vider tous les sous-comptes"
+      "title": "Videz d'abord tous les sous-comptes"
     },
     "NotSupportedLegacyAddress": {
       "title": "Ce format d'adresse legacy n'est plus pris en charge"
