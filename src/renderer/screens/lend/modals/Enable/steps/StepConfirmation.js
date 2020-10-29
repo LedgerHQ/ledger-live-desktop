@@ -6,6 +6,7 @@ import styled, { withTheme } from "styled-components";
 
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
+import { urls } from "~/config/urls";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { multiline } from "~/renderer/styles/helpers";
 import Box from "~/renderer/components/Box";
@@ -13,10 +14,10 @@ import Button from "~/renderer/components/Button";
 import RetryButton from "~/renderer/components/RetryButton";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import BroadcastErrorDisclaimer from "~/renderer/components/BroadcastErrorDisclaimer";
-
-import type { StepProps } from "../types";
+import { openURL } from "~/renderer/linking";
 import Update from "~/renderer/icons/UpdateCircle";
 import InfoBox from "~/renderer/components/InfoBox";
+import type { StepProps } from "../types";
 
 const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(() => ({
   alignItems: "center",
@@ -67,7 +68,7 @@ function StepConfirmation({
   signed,
 }: StepProps & { theme: * }) {
   const onLearnMore = useCallback(() => {
-    // @TODO redirect to support page
+    openURL(urls.approvedOperation);
   }, []);
 
   if (optimisticOperation) {

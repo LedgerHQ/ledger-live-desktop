@@ -11,7 +11,7 @@ import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
-
+import { urls } from "~/config/urls";
 import LendingTermsIllu from "~/renderer/images/lending-terms.svg";
 import LendingTermsIllu1 from "~/renderer/images/lending-illu-1.svg";
 import LendingTermsIllu2 from "~/renderer/images/lending-illu-2.svg";
@@ -81,8 +81,7 @@ export default function LendTermsModal({
   }, [handleOnClose, dispatch, rest, currency, t, account, parentAccount]);
 
   const onTermsLinkClick = useCallback(() => {
-    // @TODO replace this URL with the correct one
-    openURL("https://ledger.com");
+    openURL(urls.compoundTnC);
   }, []);
 
   return (
