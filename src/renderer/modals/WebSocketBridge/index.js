@@ -8,6 +8,7 @@ const BridgeModal = () => (
   <Modal
     name="MODAL_WEBSOCKET_BRIDGE"
     centered
+    preventBackdropClick
     render={({ data, onClose }) => <Bridge {...data} onClose={onClose} />}
   />
 );

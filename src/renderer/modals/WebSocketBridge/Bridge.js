@@ -88,7 +88,7 @@ const Bridge = ({
 
   return (
     <ModalBody
-      onClose={onClose}
+      onClose={!["init", "device"].includes(state.status) ? onClose : undefined}
       title={t("bridge.modalTitle")}
       render={() => (
         <Box relative px={5}>
