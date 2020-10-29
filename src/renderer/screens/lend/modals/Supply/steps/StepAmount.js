@@ -16,21 +16,15 @@ import InputCurrency from "~/renderer/components/InputCurrency";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-import Select from "~/renderer/components/Select";
 import Label from "~/renderer/components/Label";
 import Spoiler from "~/renderer/components/Spoiler";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import GasPriceField from "~/renderer/families/ethereum/GasPriceField";
 import GasLimitField from "~/renderer/families/ethereum/GasLimitField";
-import {
-  renderValueNoBadge as renderValue,
-  renderOptionNoBadge as renderOption,
-  getOptionValue,
-} from "../../SelectAccountStep";
 import { subAccountByCurrencyOrderedSelector } from "~/renderer/reducers/accounts";
-
-import type { StepProps } from "../types";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
+import type { StepProps } from "../types";
+import SupplyBanner from "../../../SupplyBanner";
 
 const InputLeft = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
@@ -141,24 +135,10 @@ function StepAmount({
   return (
     <Box flow={2}>
       <TrackPage category="Lending Supply Flow" name="Step Amount" />
-      <Box mt={4} flow={1}>
-        <Label>{t("lend.supply.steps.amount.selectedAccount")}</Label>
-        <Select
-          value={{ account, parentAccount }}
-          options={collection}
-          getOptionValue={getOptionValue}
-          renderValue={renderValue}
-          renderOption={renderOption}
-          filterOption={false}
-          isSearchable={false}
-          placeholder={t("common.selectAccount")}
-          noOptionsMessage={({ inputValue }) =>
-            t("common.selectAccountNoOption", { accountName: inputValue })
-          }
-          onChange={onChangeAccount}
-        />
-      </Box>
-      <Box vertical mt={5}>
+      {account && account.type === "TokenAccount" && transaction ? (
+        <SupplyBanner account={account} parentAccount={parentAccount} />
+      ) : null}
+      <Box vertical mt={4}>
         <Box horizontal style={{ justifyContent: "space-between" }}>
           <Label>{t("lend.supply.steps.amount.amountToSupply")}</Label>
           {account.spendableBalance.gt(0) ? (

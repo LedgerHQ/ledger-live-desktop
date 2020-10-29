@@ -6,7 +6,6 @@ import { handleActions } from "redux-actions";
 import type {
   Account,
   AccountLike,
-  TokenAccount,
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";

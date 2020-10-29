@@ -504,7 +504,8 @@
           "title": "Amount",
           "selectedAccount": "Selected account",
           "amountToSupply": "Amount to deposit",
-          "available": "Available balance"
+          "available": "Available balance",
+          "maxSupply": "Maximum amount to lend is"
         },
         "device": {
           "title": "Device"
