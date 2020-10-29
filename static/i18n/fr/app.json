@@ -11,6 +11,7 @@
     "delete": "Supprimer",
     "launch": "Lancer",
     "continue": "Continuer",
+    "previous": "Précédent",
     "learnMore": "En savoir plus",
     "help": "Aide",
     "skipThisStep": "Ignorer cette étape",
@@ -77,6 +78,9 @@
       "DELEGATE": "Déléguée",
       "REDELEGATE": "Redélégué",
       "UNDELEGATE": "Interrompue",
+      "SUPPLY": "Déposé",
+      "REDEEM": "Retiré",
+      "APPROVE": "Actif",
       "VOTE": "Voté",
       "FREEZE": "Gelé",
       "UNFREEZE": "Dégelé",
@@ -116,8 +120,9 @@
     "stars": "Comptes favoris",
     "accounts": "Comptes",
     "manager": "Manager",
+    "exchange": "Acheter des cryptos",
     "swap": "Swap",
-    "exchange": "Acheter des cryptos"
+    "lend": "Prêter des cryptos"
   },
   "stars": {
     "placeholder": "Les comptes que vous placez en favoris dans la page <1><0>Comptes</0></1> apparaitront ici !",
@@ -243,7 +248,7 @@
     },
     "settings": {
       "title": "Modifier le compte",
-      "advancedLogs": "Logs détaillés",
+      "advancedLogs": "Avancé",
       "advancedTips": "Votre xpub est une donnée sensible. Utilisez-la avec prudence, en particulier lorsque vous la divulguez à des tiers.",
       "accountName": {
         "title": "Nom du compte",
@@ -291,6 +296,238 @@
       "tab": "Historique"
     }
   },
+  "lend": {
+    "title": "Prêter des cryptos",
+    "description": "Déposez vos actifs sur le protocole Compound pour commencer à obtenir des intérêts.",
+    "tabs": {
+      "dashboard": "Tableau de bord",
+      "closed": "Emprunts clôturés",
+      "history": "Historique"
+    },
+    "assets": "Actifs à prêter",
+    "active": "Comptes actifs",
+    "lendAsset": "Dépôt",
+    "highFeesModal": {
+      "title": "Frais élevés sur Ethereum",
+      "description": "En raison de la congestion du réseau Ethereum, il se peut que vous ayez à payer des frais élevés lors de l'émission de transactions.",
+      "cta": "Compris"
+    },
+    "account": {
+      "amountSupplied": "Montant déposé",
+      "amountSuppliedTooltip": "Montant prêté au réseau",
+      "currencyAPY": "APY de la devise",
+      "currencyAPYTooltip": "Taux réel de retour d'ici la fin de l'année si les intérêts sont cumulés.",
+      "accruedInterests": "Intérêts accumulés",
+      "accruedInterestsTooltip": "Intérêts générés",
+      "interestEarned": "Intérêts gagnés",
+      "interestEarnedTooltip": "--! NEED TEXT HERE !--",
+      "openLoans": "Prêts ouverts",
+      "closedLoans": "Prêts clôturés",
+      "amountRedeemed": "Montant réclamé",
+      "amountRedeemedTooltip": "--! NEED TEXT HERE !--",
+      "date": "Date",
+      "info": "Vous pouvez prêter des actifs directement de vos comptes {{currency}} et obtenir des revenus passifs.",
+      "howCompoundWorks": "Comment fonctionne Compound ?",
+      "lend": "Prêter {{currency}}"
+    },
+    "emptyState": {
+      "active": {
+        "title": "Prêt",
+        "description": "Vous pouvez prêter des actifs directement de vos comptes Ethereum et obtenir des revenus passifs.",
+        "cta": "Comment fonctionne Compound ?"
+      },
+      "closed": {
+        "title": "Vos prêts fermés apparaîtront ici",
+        "description": "Vous n’avez pas encore fait de prêts.",
+        "cta": "Prêter maintenant"
+      },
+      "history": {
+        "title": "Historique",
+        "description": "Visualisez l'historique de toutes vos opérations de prêt.",
+        "cta": "Prêter maintenant"
+      }
+    },
+    "headers": {
+      "active": {
+        "accounts": "Compte",
+        "amountSupplied": "Prêt actuel",
+        "amountSuppliedTooltip": "Montant prêté au réseau",
+        "accruedInterests": "Intérêts obtenus",
+        "accruedInterestsTooltip": "Intérêts générés",
+        "status": "Statut",
+        "statusTooltip": "Statut actuel du compte",
+        "actions": "Actions"
+      },
+      "status": {
+        "enablingTooltip": "Votre transaction est en train d'être diffusée",
+        "toSupplyTooltip": "Vous pouvez maintenant prêter vos actifs"
+      },
+      "closed": {
+        "assetLended": "Actif prêté",
+        "amountRedeemed": "Montant du retrait",
+        "interestsEarned": "Intérêts obtenus",
+        "date": "Date"
+      },
+      "rates": {
+        "allAssets": "Actif",
+        "totalBalance": "Solde disponible",
+        "totalBalanceTooltip": "Solde total de tous les comptes en excluant le montant prêté.",
+        "grossSupply": "Valeur du marché",
+        "grossSupplyTooltip": "Montant total des actifs déposés sur le réseau",
+        "currentAPY": "APY actuel",
+        "currentAPYTooltip": "Taux réel annuel d'intérêt si ceux-ci sont cumulés continuellement.",
+        "actions": "Actions"
+      }
+    },
+    "manage": {
+      "cta": "Gérer les prêts",
+      "title": "Gérer le prêt",
+      "enable": {
+        "approve": "Activer",
+        "approveLess": "Activer moins",
+        "approveMore": "Activer plus",
+        "viewDetails": "Voir les détails",
+        "info": "Vous pouvez prêter <0>{{amount}}</0> sur <1>{{enabled}} {{assetName}}</1> initialement activé.",
+        "infoNoLimit": "Vous avez prété <0>{{supplied}}</0> à partir d'un compte sans limite.",
+        "notSupplied": "Vous avez activé <0>{{enabled}}</0> sur ce compte.",
+        "notSuppliedNoLimit": "Vous avez approuvé ce compte pour un montant illimité.",
+        "enabling": "La transaction d'activation vous permettant de prêter est en attente",
+        "notEnabled": "Avant de prêter des actifs au protocole Compound, vous devez activer votre compte.",
+        "notEnoughApproved": "Vous n'avez pas assez de solde approuvé pour prêter des actifs."
+      },
+      "supply": {
+        "title": "Dépôt",
+        "description": "Entrez le montant d'actifs à prêter au protocole."
+      },
+      "withdraw": {
+        "title": "Retrait",
+        "description": "Retirer des actifs du protocole vers votre compte Ledger."
+      }
+    },
+    "enable": {
+      "title": "Activer mon compte",
+      "steps": {
+        "selectAccount": {
+          "title": "Sélectionnez un compte",
+          "selectLabel": "Compte de prêt",
+          "cta": "Activer",
+          "alreadyEnabled": "Ce compte est activé",
+          "notEnabled": "Vous devez payer des frais pour activer ce compte"
+        },
+        "amount": {
+          "title": "Montant",
+          "summary": "J'accorde l'accès au contrat <0>{{contractName}}</0> sur mon compte <0>{{accountName}}</0> pour un montant de <0>{{amount}}</0>",
+          "limit": "limite : {{amount}}",
+          "noLimit": "sans limte {{assetName}}",
+          "contractName": "Compound {{currencyName}}",
+          "advanced": "Avancé",
+          "amountLabel": "Montant à activer",
+          "amountLabelTooltip": "Cela limite le montant disponible à prêter."
+        },
+        "connectDevice": {
+          "title": "Appareil"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "success": {
+            "title": "Transaction émise avec succès",
+            "text": "L'activation a été envoyée au réseau pour confirmation. Vous pourrez émettre des prêts une fois qu'elle aura été confirmée.",
+            "done": "Fermer",
+            "cta": "Voir les détails",
+            "info": "Les transactions peuvent prendre un certain temps avant d'être affichées dans un explorer et être confirmées."
+          },
+          "pending": {
+            "title": "Activation de vos actifs..."
+          },
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+        }
+      }
+    },
+    "withdraw": {
+      "title": "Retirer des actifs",
+      "steps": {
+        "amount": {
+          "title": "Montant",
+          "advanced": "Avancé",
+          "amountLabel": "Montant à retirer",
+          "available": "Solde disponible: <0>{{amountAvailable}}</0>",
+          "withdrawAll": "Retirer Max",
+          "placeholder": "Retirer Max",
+          "maxWithdrawble": "Le montant maximum à retirer est"
+        },
+        "connectDevice": {
+          "title": "Appareil"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "success": {
+            "title": "Demande de retrait envoyée avec succès",
+            "text": "Vos actifs seront disponibles une fois que le réseau aura confirmé le retrait.",
+            "done": "Fermer",
+            "cta": "Voir les détails"
+          },
+          "pending": {
+            "title": "Retrait de vos actifs en cours..."
+          },
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+        }
+      }
+    },
+    "info": {
+      "terms": {
+        "title": "Prêter de la crypto",
+        "subtitle": "Prêtez des actifs sur le protocole Compound",
+        "description": "Le protocole Compound vous permet de prêter et d'emprunter des actifs sur le réseau Ethereum. Vous pouvez prêter des actifs et gagner des intérêts directement à partir de votre compte Ledger.",
+        "switchLabel": "J'ai lu, compris et j'accepte les <0>Conditions Générales.</0>"
+      },
+      "steps": {
+        "title": "Étape <0>{{step}} / {{total}}</0>",
+        "1": {
+          "subtitle": "Activer un compte pour permettre au protocol de",
+          "subtitle2": "traiter vos futurs prêts.",
+          "description": "Vous devez autoriser le contrat intelligent de Compound à transférer jusqu'à un certain montant d'actifs au protocole. L'activation d'un compte donne le droit au protocole de traiter les futurs prêts."
+        },
+        "2": {
+          "subtitle": "Prêter des actifs pour obtenir des interêts",
+          "description": "Une fois qu'un compte est approuvé, vous pouvez sélectionner le montant d'actifs que vous souhaitez prêter et émettre une transaction. Les intérêts sont accumulés immédiatement après la confirmation de la transaction."
+        },
+        "3": {
+          "subtitle": "Retirer des actifs à tout moment",
+          "description": "Vous pouvez retirer vos actifs et les intérets perçus a tout moment depuis votre compte Ledger."
+        }
+      }
+    },
+    "supply": {
+      "title": "Déposer des actifs",
+      "steps": {
+        "amount": {
+          "title": "Montant",
+          "selectedAccount": "Compte sélectionné",
+          "amountToSupply": "Montant à déposer",
+          "available": "Solde disponible"
+        },
+        "device": {
+          "title": "Appareil"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "success": {
+            "title": "Transaction émise avec succès",
+            "text": "Vous commencerez à percevoir des intérêts une fois que le réseau aura confirmé le dépôt.",
+            "done": "Fermer",
+            "cta": "Voir les détails",
+            "info": "Les transactions peuvent prendre un certain temps avant d'être affichées dans un explorateur et être confirmées."
+          },
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+        }
+      }
+    },
+    "noEthAccount": {
+      "title": "Veuillez créer un compte ETH",
+      "description": "<0>{{ asset }}({{ ticker }})</0> est un token Ethereum ERC-20. Pour prêter {{ ticker }}, installez l'application Ethereum et créez un compte Ethereum",
+      "cta": "Ajouter un compte"
+    }
+  },
   "accounts": {
     "title": "Comptes",
     "noResultFound": "Aucun compte trouvé.",
@@ -326,6 +563,7 @@
       "title": "Commencer",
       "desc": "Commencer ici"
     },
+    "status": "Statut Ledger",
     "helpCenter": {
       "title": "Assistance Ledger",
       "desc": "Obtenir de l’aide"
@@ -353,6 +591,10 @@
     "hideCTA": "Masquer le token"
   },
   "banners": {
+    "cleanCache": {
+      "title": "La modification des paramètres expérimentaux nécessite de vider le cache",
+      "cta": "Vider le cache"
+    },
     "migrate": "Mise à jour des comptes Ledger Live disponible",
     "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge",
     "ledgerAcademy": {
@@ -892,7 +1134,9 @@
         "title": "Compte",
         "label": "Compte à créditer",
         "parentAccount": "1. Sélectionnez le compte {{currencyName}}",
-        "token": "2. Sélectionnez un token"
+        "token": "2. Sélectionnez un token",
+        "verifyTokenType": "Veuillez vérifier que <0>{{token}}</0> est un token <0>{{tokenType}}</0>. Tout autre actif envoyé à un compte {{currency}} peut être perdu.",
+        "warningTokenType": "Veuillez envoyer uniquement des tokens <0>{{ticker}}</0> ou <0>{{tokenType}}</0> à un compte {{currency}}. Tout autre actif de cryptomonnaies peut être perdu."
       },
       "connectDevice": {
         "title": "Appareil",
@@ -1880,6 +2124,7 @@
   "TransactionConfirm": {
     "title": "Veuillez confirmer l'opération sur votre appareil pour la finaliser",
     "warning": "Toujours vérifier que l'adresse affichée sur votre appareil correspond exactement à celle donnée par le {{recipientWording}}",
+    "secureContract": "Vérifiez les details du prêt sur votre appreil avant de l'envoyer. L'addresse est fournie de maniére sécurisée afin que vous n'ayez pas à la vérifier.",
     "warningWording": {},
     "titleWording": {
       "send": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
@@ -2301,7 +2546,7 @@
       "title": "Veuillez interrompre la délégation du compte avant de le vider"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Veuillez d'abord vider tous les sous-comptes"
+      "title": "Videz d'abord tous les sous-comptes"
     },
     "NotSupportedLegacyAddress": {
       "title": "Ce format d'adresse legacy n'est plus pris en charge"
