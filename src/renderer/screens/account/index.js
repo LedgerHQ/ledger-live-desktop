@@ -8,6 +8,8 @@ import type { TFunction } from "react-i18next";
 import { Redirect } from "react-router";
 import type { Currency, AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
+import { isCompoundTokenSupported } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
+import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import {
@@ -35,6 +37,7 @@ import AccountHeader from "./AccountHeader";
 import AccountHeaderActions from "./AccountHeaderActions";
 import EmptyStateAccount from "./EmptyStateAccount";
 import TokenList from "./TokensList";
+import CompoundBodyHeader from "~/renderer/screens/lend/Account/AccountBodyHeader";
 
 const mapStateToProps = (
   state,
@@ -93,6 +96,9 @@ const AccountPage = ({
     return <Redirect to="/accounts" />;
   }
 
+  const ctoken = account.type === "TokenAccount" && findCompoundToken(account.token);
+  const isCompoundEnabled = ctoken && isCompoundTokenSupported(ctoken);
+
   const currency = getAccountCurrency(account);
   const color = getCurrencyColor(currency, bgColor);
 
@@ -123,10 +129,15 @@ const AccountPage = ({
               range={selectedTimeRange}
               countervalueFirst={countervalueFirst}
               setCountervalueFirst={setCountervalueFirst}
+              isCompoundEnabled={isCompoundEnabled}
+              ctoken={ctoken}
             />
           </Box>
           {AccountBodyHeader ? (
             <AccountBodyHeader account={account} parentAccount={parentAccount} />
+          ) : null}
+          {isCompoundEnabled && account.type === "TokenAccount" && parentAccount ? (
+            <CompoundBodyHeader account={account} parentAccount={parentAccount} />
           ) : null}
           {account.type === "Account" ? (
             <TokenList account={account} range={selectedTimeRange} />

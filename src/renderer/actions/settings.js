@@ -106,6 +106,10 @@ export const setDeepLinkUrl = (url: ?string) => ({
   payload: url,
 });
 
+export const setFirstTimeLend = () => ({
+  type: "SET_FIRST_TIME_LEND",
+});
+
 export const setSwapProviders = (swapProviders?: AvailableProvider[]) => ({
   type: "SETTINGS_SET_SWAP_PROVIDERS",
   swapProviders,
