@@ -12,7 +12,7 @@ import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import type { TFunction } from "react-i18next";
 import type { Account, TokenAccount, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
-\
+
 import Label from "~/renderer/components/Label";
 import Box from "~/renderer/components/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
