@@ -450,7 +450,7 @@
           "title": "Amount",
           "advanced": "Advanced",
           "amountLabel": "Amount to withdraw",
-          "amountToWithdraw": "Amount to withdraw: <0>{{amount}}</0>",
+          "amountToWithdraw": "Amount to withdraw",
           "withdrawAll": "Withdraw Max",
           "placeholder": "Withdraw Max",
           "maxWithdrawble": "Maximum amount to withdraw is"
