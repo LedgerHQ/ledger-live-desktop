@@ -120,9 +120,9 @@
     "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "Manager",
-    "exchange": "Buy crypto",
+    "exchange": "Buy",
     "swap": "Swap",
-    "lend": "Lend crypto"
+    "lend": "Lend"
   },
   "stars": {
     "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
