@@ -33,6 +33,7 @@ type OwnProps = {|
     parentAccount: ?Account,
     startWithWarning?: boolean,
     receiveTokenMode?: boolean,
+    mode?: string,
   },
 |};
 
@@ -54,6 +55,7 @@ export type StepProps = {
   transitionTo: string => void,
   device: ?Device,
   account: ?AccountLike,
+  mode?: string,
   parentAccount: ?Account,
   token: ?TokenCurrency,
   receiveTokenMode: boolean,
@@ -180,6 +182,7 @@ const Body = ({
     device,
     account,
     parentAccount,
+    mode: params.mode,
     stepId,
     steps,
     errorSteps,

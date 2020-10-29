@@ -223,6 +223,7 @@ const Body = ({ onChangeStepId, onClose, stepId, params }: Props) => {
     stepId,
     openedWithAccount: Boolean(params && params.account),
     steps,
+    mode: params.mode,
     errorSteps,
     device,
     openedFromAccount,

@@ -38,10 +38,16 @@ export default function StepConnectDevice({
   );
 }
 
-export function StepConnectDeviceFooter({ t, transitionTo, onSkipConfirm, device }: StepProps) {
+export function StepConnectDeviceFooter({
+  t,
+  transitionTo,
+  onSkipConfirm,
+  device,
+  mode,
+}: StepProps) {
   return (
     <Box horizontal flow={2}>
-      <TrackPage category="Receive Flow" name="Step 2" />
+      <TrackPage category={`Receive Flow${mode ? ` (${mode})` : ""}`} name="Step 2" />
       <Button
         event="Receive Flow Without Device Clicked"
         id={"receive-connect-device-skip-device-button"}

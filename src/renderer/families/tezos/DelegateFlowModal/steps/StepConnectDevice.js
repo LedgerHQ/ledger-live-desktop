@@ -13,10 +13,14 @@ export default function StepConnectDevice({
   onOperationBroadcasted,
   onTransactionError,
   setSigned,
+  mode,
 }: StepProps) {
   return (
     <>
-      <TrackPage category="Delegation Flow" name="Step ConnectDevice" />
+      <TrackPage
+        category={`Delegation Flow${mode ? ` (${mode})` : ""}`}
+        name="Step ConnectDevice"
+      />
       <GenericStepConnectDevice
         account={account}
         parentAccount={parentAccount}

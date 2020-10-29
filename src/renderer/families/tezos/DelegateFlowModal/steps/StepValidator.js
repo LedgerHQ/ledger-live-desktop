@@ -74,6 +74,7 @@ const StepValidator = ({
   transaction,
   transitionTo,
   onChangeTransaction,
+  mode,
 }: StepProps) => {
   invariant(account, "account is required");
   const contentRef = useRef();
@@ -95,7 +96,7 @@ const StepValidator = ({
 
   return (
     <Box flow={4} mx={20}>
-      <TrackPage category="Delegation Flow" name="Step Validator" />
+      <TrackPage category={`Delegation Flow${mode ? ` (${mode})` : ""}`} name="Step Validator" />
       <Box>
         <Text ff="Inter|Regular" color="palette.text.shade80" fontSize={4} textAlign="center">
           <Trans i18nKey="delegation.flow.steps.validator.description" />

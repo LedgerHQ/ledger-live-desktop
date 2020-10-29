@@ -23,6 +23,7 @@ const StepAccount = ({
   onChangeAccount,
   error,
   status,
+  mode,
 }: StepProps) => {
   const { t } = useTranslation();
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
@@ -31,7 +32,7 @@ const StepAccount = ({
   if (!status) return null;
   return (
     <Box flow={4}>
-      <TrackPage category="Delegation Flow" name="Step Account" />
+      <TrackPage category={`Delegation Flow${mode ? ` (${mode})` : ""}`} name="Step Account" />
       {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       <Box flow={1}>

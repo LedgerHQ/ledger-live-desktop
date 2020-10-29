@@ -28,7 +28,7 @@ const Row = styled(Box).attrs(p => ({
   }
 `;
 
-const StepStarter = ({ transitionTo, t, openedWithAccount }: StepProps) => {
+const StepStarter = ({ transitionTo, t, openedWithAccount, mode }: StepProps) => {
   const onClick = useCallback(() => {
     if (openedWithAccount) transitionTo("summary");
     else transitionTo("account");
@@ -36,7 +36,7 @@ const StepStarter = ({ transitionTo, t, openedWithAccount }: StepProps) => {
 
   return (
     <Box flow={4} mx={4}>
-      <TrackPage category="Delegation Flow" name="Step Starter" />
+      <TrackPage category={`Delegation Flow${mode ? ` (${mode})` : ""}`} name="Step Starter" />
       <Box flow={1} alignItems="center">
         <Box mb={4}>
           <CoinWallet size={120} />

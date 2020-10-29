@@ -51,7 +51,7 @@ const Placeholder = styled(Box)`
   height: 14px;
 `;
 
-const StepSummary = ({ account, transaction, transitionTo, isRandomChoice }: StepProps) => {
+const StepSummary = ({ account, transaction, transitionTo, isRandomChoice, mode }: StepProps) => {
   invariant(
     account && transaction && transaction.family === "tezos",
     "step summary requires account and transaction settled",
@@ -65,7 +65,7 @@ const StepSummary = ({ account, transaction, transitionTo, isRandomChoice }: Ste
 
   return (
     <Box flow={4} mx={40}>
-      <TrackPage category="Delegation Flow" name="Step Summary" />
+      <TrackPage category={`Delegation Flow${mode ? ` (${mode})` : ""}`} name="Step Summary" />
 
       <DelegationContainer
         undelegation={transaction.mode === "undelegate"}
