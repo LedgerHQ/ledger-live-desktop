@@ -25,7 +25,7 @@ export const TableLine: ThemedComponent<{}> = styled(Text).attrs(() => ({
   box-sizing: border-box;
   justify-content: flex-start;
   &:last-child {
-    flex: 0.5;
+    flex: 0.75;
   }
 `;
 
