@@ -1,6 +1,7 @@
 // @flow
 import React from "react";
 import { useTranslation } from "react-i18next";
+import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 import type { AccountLikeArray, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
 import { isCompoundTokenSupported } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
@@ -11,9 +12,10 @@ import EmptyState from "../EmptyState";
 type Props = {
   navigateToCompoundDashboard: () => void,
   accounts: AccountLikeArray,
+  summaries: CompoundAccountSummary[],
 };
 
-const History = ({ navigateToCompoundDashboard, accounts }: Props) => {
+const History = ({ navigateToCompoundDashboard, accounts, summaries }: Props) => {
   const { t } = useTranslation();
 
   const filterOperation = (op: Operation, acc: AccountLike) => {
@@ -25,7 +27,7 @@ const History = ({ navigateToCompoundDashboard, accounts }: Props) => {
 
   return (
     <Box>
-      {history.length ? (
+      {summaries.length ? (
         <OperationsList accounts={accounts} filterOperation={filterOperation} />
       ) : (
         <EmptyState
