@@ -90,9 +90,9 @@ export const experimentalFeatures: Feature[] = [
   {
     type: "toggle",
     name: "EXPERIMENTAL_QUIT_APP",
-    title: "Experimental Auto Quit App",
+    title: "Quit apps automatically",
     description:
-      "Automatically quit the running device application when another one is required in a device flow to have a seamless experience with the Open App permission",
+      "Enabling this setting will automatically quit an application on your device when another one needs to be opened. This will make switching between apps more seamless.",
   },
 ];
 
