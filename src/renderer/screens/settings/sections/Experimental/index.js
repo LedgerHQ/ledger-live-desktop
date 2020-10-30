@@ -7,9 +7,11 @@ import { experimentalFeatures, isReadOnlyEnv } from "~/renderer/experimental";
 import { useDispatch } from "react-redux";
 import { setEnvOnAllThreads } from "~/helpers/env";
 import type { Feature } from "~/renderer/experimental";
+import { openModal } from "~/renderer/actions/modals";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import useEnv from "~/renderer/hooks/useEnv";
 import Disclaimer from "~/renderer/components/Disclaimer";
+import Button from "~/renderer/components/Button";
 import IconAtom from "~/renderer/icons/Atom";
 import IconSensitiveOperationShield from "~/renderer/icons/SensitiveOperationShield";
 import { setShowClearCacheBanner } from "~/renderer/actions/settings";
@@ -64,6 +66,26 @@ const ExperimentalFeatureRow = ({
   ) : null;
 };
 
+const EthereumBridgeRow = () => {
+  const dispatch = useDispatch();
+
+  return (
+    <Row title="Open Ethereum WebSocket Bridge" desc="open a websocket bridge for web escape hatch">
+      <Button
+        onClick={() => {
+          dispatch(
+            openModal("MODAL_WEBSOCKET_BRIDGE", {
+              appName: "Ethereum",
+            }),
+          );
+        }}
+      >
+        Open
+      </Button>
+    </Row>
+  );
+};
+
 const SectionExperimental = () => {
   const { t } = useTranslation();
   const [needsCleanCache, setNeedsCleanCache] = useState(false);
@@ -104,6 +126,7 @@ const SectionExperimental = () => {
             />
           ) : null,
         )}
+        {__DEV__ ? <EthereumBridgeRow /> : null}
       </Body>
     </Section>
   );

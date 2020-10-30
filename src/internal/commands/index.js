@@ -17,6 +17,7 @@ import testCrash from "./testCrash";
 import testInterval from "./testInterval";
 import appOpExec from "./appOpExec";
 import initSwap from "./initSwap";
+import websocketBridge from "./websocketBridge";
 import { commands as bridgeProxyCommands } from "~/renderer/bridge/proxy-commands";
 
 export const commandsById = {
@@ -39,6 +40,7 @@ export const commandsById = {
   initSwap,
   testCrash,
   testInterval,
+  websocketBridge,
 };
 
 export type Commands = typeof commandsById;
