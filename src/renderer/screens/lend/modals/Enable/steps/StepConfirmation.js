@@ -3,10 +3,10 @@
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import styled, { withTheme } from "styled-components";
-
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { urls } from "~/config/urls";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { multiline } from "~/renderer/styles/helpers";
 import Box from "~/renderer/components/Box";
@@ -71,10 +71,12 @@ function StepConfirmation({
     openURL(urls.approvedOperation);
   }, []);
 
+  const currency = getAccountCurrency(account);
+
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Lending Enable Flow" name="Step Confirmed" />
+        <TrackPage category="Lend Approve" name="Step 3 Success" eventProperties={{ currency }} />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <IconContainer>
           <Update size={24} />
@@ -93,7 +95,7 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Lending Enable Flow" name="Step Confirmation Error" />
+        <TrackPage category="Lend Approve" name="Step 3 Fail" eventProperties={{ currency }} />
         {signed ? (
           <BroadcastErrorDisclaimer
             title={<Trans i18nKey="lend.enable.steps.confirmation.broadcastError" />}

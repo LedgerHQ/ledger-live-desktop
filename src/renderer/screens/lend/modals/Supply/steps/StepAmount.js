@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { getAccountUnit, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import styled from "styled-components";
 
@@ -93,6 +93,7 @@ function StepAmount({
   invariant(account && transaction, "account and transaction required");
   const [focused, setFocused] = useState(false);
   const bridge = getAccountBridge(account, parentAccount);
+  const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
   const { warnings } = status;
   const { amount } = transaction;
@@ -134,7 +135,7 @@ function StepAmount({
 
   return (
     <Box flow={2}>
-      <TrackPage category="Lending Supply Flow" name="Step Amount" />
+      <TrackPage category="Lend Supply" name="Step 1" eventProperties={{ currency }} />
       {account && account.type === "TokenAccount" && transaction ? (
         <SupplyBanner account={account} parentAccount={parentAccount} />
       ) : null}

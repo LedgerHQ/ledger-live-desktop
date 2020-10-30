@@ -6,6 +6,7 @@ import styled, { withTheme } from "styled-components";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { multiline } from "~/renderer/styles/helpers";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -35,6 +36,7 @@ function StepConfirmation({
   device,
   signed,
 }: StepProps & { theme: * }) {
+  const currency = account ? getAccountCurrency(account) : {};
   const onLearnMore = useCallback(() => {
     // @TODO redirect to support page
   }, []);
@@ -42,7 +44,7 @@ function StepConfirmation({
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Lending Supply Flow" name="Step Confirmed" />
+        <TrackPage category="Lend Supply" name="Step 3 Success" eventProperties={{ currency }} />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={t("lend.supply.steps.confirmation.success.title")}
@@ -60,7 +62,7 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Lending Supply Flow" name="Step Confirmation Error" />
+        <TrackPage category="Lend Supply" name="Step 3 Fail" eventProperties={{ currency }} />
         {signed ? (
           <BroadcastErrorDisclaimer
             title={<Trans i18nKey="lend.enable.steps.confirmation.broadcastError" />}

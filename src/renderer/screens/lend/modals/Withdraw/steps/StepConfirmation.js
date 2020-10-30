@@ -39,7 +39,7 @@ function StepConfirmation({
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Lending Withdraw Flow" name="Step Confirmed" />
+        <TrackPage category="Lend Withdraw" name="Step 3 Success" />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={<Trans i18nKey="lend.withdraw.steps.confirmation.success.title" />}
@@ -52,7 +52,7 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Lending Withdraw Flow" name="Step Confirmation Error" />
+        <TrackPage category="Lend Withdraw" name="Step 3 Fail" />
         {signed ? (
           <BroadcastErrorDisclaimer
             title={<Trans i18nKey="lend.withdraw.steps.confirmation.broadcastError" />}
