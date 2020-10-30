@@ -128,6 +128,17 @@
     "placeholder": "Számlák melyeket csillaggal látsz el a <1><0>Számlák</0></1> oldalon innentől itt fognak megjelenni!",
     "tooltip": "Számla csillagozása"
   },
+  "bridge": {
+    "modalTitle": "Open Device Bridge",
+    "openHeader": "Expose your Device accounts through WebSocket",
+    "openDescription": "Opening a bridge exposes all of your accounts to third party applications.",
+    "openedHeader": "{{appName}} bridge opened",
+    "openedDescription": "You can now access your {{appName}} account on third party web application through WebSocket.",
+    "completeHeader": "Bridge session completed",
+    "completeDescription": "The websocket bridge is now closed.",
+    "openButton": "Open",
+    "disconnectButton": "Disconnect"
+  },
   "swap": {
     "title": "Swap",
     "titleCrypto": "Swap {{currency}}",
