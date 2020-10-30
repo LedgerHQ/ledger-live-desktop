@@ -1801,7 +1801,18 @@
     "unlockingBalance": "Unlocking balance",
     "unlockingTooltip": "Unbonded value stays locked during 28 days before being available for withdrawal.",
     "unlockedBalance": "Unlocked balance",
-    "unlockedTooltip": "After 28 days of unbonding period, value is available for withdrawal."
+    "unlockedTooltip": "After 28 days of unbonding period, value is available for withdrawal.",
+    "nomination": {
+      "header": "Nominations",
+      "totalStake": "Total Stake",
+      "share": "Stake Share (%)",
+      "active": "Active",
+      "activeTooltip": "This validator has been elected and is collecting rewards with some of your bonded funds.",
+      "inactive": "Inactive",
+      "inactiveTooltip": "This validator has been elected and is not collecting rewards with your stake.",
+      "waiting": "Waiting",
+      "waitingTooltip": "This validator has not been elected."
+    }
   },
   "delegation": {
     "title": "Earn rewards",
