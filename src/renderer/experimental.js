@@ -87,6 +87,13 @@ export const experimentalFeatures: Feature[] = [
       "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device.",
     minValue: 1,
   },
+  {
+    type: "toggle",
+    name: "EXPERIMENTAL_QUIT_APP",
+    title: "Quit apps automatically",
+    description:
+      "Enabling this setting will automatically quit an application on your device when another one needs to be opened. This will make switching between apps more seamless.",
+  },
 ];
 
 const lsKey = "experimentalFlags";
