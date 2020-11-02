@@ -6,13 +6,13 @@ import styled, { css } from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import { getAccountCapabilities, getEnablingOp } from "@ledgerhq/live-common/lib/compound/logic";
-
 import type { Account, TokenAccount, Unit, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import type {
   CompoundAccountSummary,
   CompoundAccountStatus,
 } from "@ledgerhq/live-common/lib/compound/types";
 
+import TrackPage from "~/renderer/analytics/TrackPage";
 import { localeSelector } from "~/renderer/reducers/settings";
 
 import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
@@ -149,6 +149,7 @@ const ManageModal = ({ name, account, parentAccount, totalSupplied, status, ...r
           noScroll
           render={() => (
             <>
+              <TrackPage category="Lend" name="Manage" eventProperties={{ currency }} />
               <Box>
                 <Box mb={2}>
                   <Banner

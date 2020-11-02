@@ -44,7 +44,7 @@ function StepConfirmation({
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Lend Supply" name="Step 3 Success" eventProperties={{ currency }} />
+        <TrackPage category="Lend" name="Supply Step 3 Success" eventProperties={{ currency }} />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={t("lend.supply.steps.confirmation.success.title")}
@@ -62,7 +62,7 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Lend Supply" name="Step 3 Fail" eventProperties={{ currency }} />
+        <TrackPage category="Lend" name="Supply Step 3 Fail" eventProperties={{ currency }} />
         {signed ? (
           <BroadcastErrorDisclaimer
             title={<Trans i18nKey="lend.enable.steps.confirmation.broadcastError" />}
@@ -102,7 +102,7 @@ export function StepConfirmationFooter({
         <Button
           ml={2}
           id={"lend-confirmation-opc-button"}
-          event="Lending Flow Step 4 View OpD Clicked"
+          event="Lend Deposit Completed"
           onClick={() => {
             onClose();
             if (account && concernedOperation) {

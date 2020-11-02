@@ -3,7 +3,6 @@ import invariant from "invariant";
 import React from "react";
 import { Trans } from "react-i18next";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
-
 import type { StepProps } from "../types";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
@@ -32,7 +31,7 @@ export default function StepAmount({
 
   return (
     <Box flow={1}>
-      <TrackPage category="Lend Withdraw" name="Step 1" eventProperties={{ currency }} />
+      <TrackPage category="Lend" name="Withdraw Step 1" eventProperties={{ currency }} />
       <Box vertical>
         {account && transaction ? (
           <WithdrawableBanner account={account} parentAccount={parentAccount} />

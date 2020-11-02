@@ -146,6 +146,14 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
     }, BigNumber(0));
   }, [token.id, accounts]);
 
+  const event = useMemo(() => {
+    const ethAccount = accounts.find(a => a.type === "Account" && a.currency.id === eth.id);
+    return {
+      name: !ethAccount ? "Lend Deposit NoAccount" : "Lend Deposit",
+      eventProperties: !ethAccount ? {} : { currency: token },
+    };
+  }, [accounts, token, eth]);
+
   return (
     <RowContent>
       <Box>
@@ -184,6 +192,8 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
           fontSize={3}
           primary
           onClick={openManageModal}
+          event={event.name}
+          eventProperties={event.eventProperties}
         >
           {t("lend.lendAsset")}
         </CompactButton>
