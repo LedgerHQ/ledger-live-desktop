@@ -33,12 +33,14 @@ const App = ({ store }: Props) => {
   const [reloadEnabled, setReloadEnabled] = useState(true);
 
   useEffect(() => {
-    window.addEventListener("keydown", e => {
+    const reload = e => {
       if (reloadEnabled) {
         reloadApp(e);
       }
-    });
-    return () => window.removeEventListener("keydown", reloadApp);
+    };
+
+    window.addEventListener("keydown", reload);
+    return () => window.removeEventListener("keydown", reload);
   }, [reloadEnabled]);
 
   return (
