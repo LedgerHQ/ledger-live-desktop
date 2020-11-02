@@ -5,7 +5,6 @@ import {
   useCountervaluesPolling,
   useCountervaluesExport,
 } from "@ledgerhq/live-common/lib/countervalues/react";
-import type { CounterValuesStateRaw } from "@ledgerhq/live-common/lib/countervalues/types";
 import { setKey, getKey } from "~/renderer/storage";
 import { useUserSettings, useTrackingPairIds } from "../actions/general";
 
@@ -44,7 +43,7 @@ function useCacheManager() {
       (prev, [key, val]) => (trackingPairs.includes(key) ? { ...prev, [key]: val } : prev),
       {},
     );
-    setKey("app", "countervalues", { ...newState, state });
+    setKey("app", "countervalues", { ...newState, status });
   }, [state, trackingPairs, status]);
 }
 
