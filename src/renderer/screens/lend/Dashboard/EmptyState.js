@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
@@ -7,6 +7,9 @@ import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import LinkWithExternal from "~/renderer/components/LinkWithExternalIcon";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
 
 const Container: ThemedComponent<*> = styled(Box).attrs(() => ({
   py: 2,
@@ -18,6 +21,7 @@ const Container: ThemedComponent<*> = styled(Box).attrs(() => ({
 
 const EmptyState = () => {
   const { t } = useTranslation();
+  const onSupportLinkClick = useCallback(() => openURL(urls.compound), []);
   return (
     <Container>
       <Text ff="Inter|SemiBold" fontSize={14} color="palette.text.shade100">
@@ -29,7 +33,7 @@ const EmptyState = () => {
         </Text>
       </Box>
       <Box mt={2}>
-        <LinkWithExternal onClick={() => {}} label={t("lend.emptyState.active.cta")} />
+        <LinkWithExternal onClick={onSupportLinkClick} label={t("lend.emptyState.active.cta")} />
       </Box>
     </Container>
   );
