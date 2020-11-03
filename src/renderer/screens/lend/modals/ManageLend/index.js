@@ -242,10 +242,8 @@ const Banner = ({
   const { enabledAmount, enabledAmountIsUnlimited, status, canSupplyMax } = capabilities;
 
   const label =
-    enabledAmountIsUnlimited && totalSupplied.eq(0) ? (
-      <Trans i18nKey="lend.manage.enable.approveLess" />
-    ) : !canSupplyMax ? (
-      <Trans i18nKey="lend.manage.enable.approveMore" />
+    (enabledAmountIsUnlimited && totalSupplied.eq(0)) || !canSupplyMax ? (
+      <Trans i18nKey="lend.manage.enable.manageLimit" />
     ) : status === "ENABLING" ? (
       <Trans i18nKey="lend.manage.enable.viewDetails" />
     ) : (
@@ -255,9 +253,9 @@ const Banner = ({
   const text =
     enabledAmountIsUnlimited && totalSupplied.gt(0) ? (
       <Trans
-        i18nKey="lend.manage.enable.infoNoLimit"
+        i18nKey="lend.manage.enable.info"
         values={{
-          supplied: formatCurrencyUnit(unit, totalSupplied, {
+          amount: formatCurrencyUnit(unit, totalSupplied, {
             locale,
             showAllDigits: false,
             disableRounding: false,
