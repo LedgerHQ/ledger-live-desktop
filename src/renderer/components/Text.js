@@ -12,7 +12,7 @@ const Text: ThemedComponent<{
   color?: string,
   fontWeight?: string,
   mt?: number,
-  mb?: number,
+  mb?: number | string,
   align?: "DEPRECATED: USE textAlign INSTEAD",
   lineHeight?: string,
 }> = styled.span`

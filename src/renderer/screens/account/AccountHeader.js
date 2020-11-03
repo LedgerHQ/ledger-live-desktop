@@ -112,7 +112,7 @@ const AccountName = styled.input`
   :focus {
     max-width: 190px !important;
     border-color: ${p => p.theme.colors.wallet};
-    background: #fff;
+    background: ${p => (p.theme.colors.palette.type === "light" ? "#fff" : "none")};
     width: 250px;
 
     + svg {
