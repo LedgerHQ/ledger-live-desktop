@@ -17,6 +17,9 @@ import SuccessDisplay from "~/renderer/components/SuccessDisplay";
 import InfoBox from "~/renderer/components/InfoBox";
 import type { StepProps } from "../types";
 
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
+
 const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(() => ({
   alignItems: "center",
   grow: true,
@@ -38,7 +41,7 @@ function StepConfirmation({
 }: StepProps & { theme: * }) {
   const currency = account ? getAccountCurrency(account) : {};
   const onLearnMore = useCallback(() => {
-    // @TODO redirect to support page
+    openURL(urls.approvedOperation);
   }, []);
 
   if (optimisticOperation) {

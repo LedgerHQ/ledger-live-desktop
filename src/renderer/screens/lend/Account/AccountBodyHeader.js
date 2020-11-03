@@ -16,6 +16,9 @@ import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import Header from "./Header";
 import { RowOpened, RowClosed } from "./Row";
 
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
+
 type Props = {
   account: TokenAccount,
   parentAccount: Account,
@@ -47,6 +50,8 @@ const Loans = ({ account, parentAccount }: Props) => {
     );
   }, [dispatch, account, parentAccount, currency]);
 
+  const openSupportLink = useCallback(() => openURL(urls.compound), []);
+
   return (
     <>
       <Box horizontal alignItems="center" justifyContent="space-between">
@@ -77,10 +82,7 @@ const Loans = ({ account, parentAccount }: Props) => {
             <Box mt={2}>
               <LinkWithExternalIcon
                 label={<Trans i18nKey="lend.account.howCompoundWorks" />}
-                onClick={() => {
-                  // @TODO replace with correct support URL
-                  // openURL(urls.compound);
-                }}
+                onClick={openSupportLink}
               />
             </Box>
           </Box>

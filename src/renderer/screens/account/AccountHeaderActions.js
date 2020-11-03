@@ -84,7 +84,7 @@ const AccountHeaderActions = ({
   const ReceiveAction = (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
   const currency = getAccountCurrency(account);
   const availableOnExchange = isCurrencySupported(currency);
-  // @TODO adjust condition of availability for lending
+
   const summary =
     account.type === "TokenAccount" && makeCompoundSummaryForAccount(account, parentAccount);
   const availableOnCompound = !!summary;
