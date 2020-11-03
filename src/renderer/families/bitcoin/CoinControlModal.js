@@ -50,7 +50,7 @@ const CoinControlModal = ({
   if (!account.bitcoinResources) return null;
   const { bitcoinResources } = account;
   const { utxoStrategy } = transaction;
-  const totalExcludedUTXOS = account.bitcoinResources?.utxos
+  const totalExcludedUTXOS = account.bitcoinResources.utxos
     .map(u => getUTXOStatus(u, utxoStrategy))
     .filter(({ excluded }) => excluded).length;
   const bridge = getAccountBridge(account);
