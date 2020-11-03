@@ -183,9 +183,7 @@ const Row = ({ summary }: RowProps) => {
           />
         </Ellipsis>
       </Amount>
-      <Status>
-        {capabilities && capabilities.status ? <StatusPill type={capabilities.status} /> : null}
-      </Status>
+      <Status>{capabilities?.status ? <StatusPill type={capabilities.status} /> : null}</Status>
       <Action onClick={openManageModal}>
         <Box flex horizontal alignItems="center">
           <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade50">

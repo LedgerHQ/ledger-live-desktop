@@ -112,11 +112,8 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
   const eth = getCryptoCurrencyById("ethereum");
 
   const openManageModal = useCallback(() => {
-    // $FlowFixMe no
     const account = accounts.find(a => a.type === "TokenAccount" && a.token.id === token.id);
-    // $FlowFixMe fucking
     const parentAccount = accounts.find(a => account?.parentId === a.id);
-    // $FlowFixMe clue
     const ethAccount = accounts.find(a => a.type === "Account" && a.currency.id === eth.id);
     if (!account && ethAccount) {
       dispatch(openModal("MODAL_RECEIVE", { currency: token, account: ethAccount }));
@@ -141,7 +138,6 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
   }, [token, totalSupply]);
 
   const totalBalance = useMemo(() => {
-    // $FlowFixMe
     return accounts.reduce((total, account) => {
       if (account.type !== "TokenAccount") return total;
       if (account.token.id !== token.id) return total;
@@ -151,7 +147,6 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
   }, [token.id, accounts]);
 
   const event = useMemo(() => {
-    // $FlowFixMe
     const ethAccount = accounts.find(a => a.type === "Account" && a.currency.id === eth.id);
     return {
       name: !ethAccount ? "Lend Deposit NoAccount" : "Lend Deposit",

@@ -55,11 +55,9 @@ const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount }: Props) 
     [setInstalledApps],
   );
 
-  const exchangeApp = useMemo(
-    () =>
-      installedApps && installedApps.length ? installedApps.find(a => a.name === "Exchange") : "",
-    [installedApps],
-  );
+  const exchangeApp = useMemo(() => installedApps?.find(a => a.name === "Exchange"), [
+    installedApps,
+  ]);
 
   return !hasAcceptedSwapKYC ? (
     <Landing />
