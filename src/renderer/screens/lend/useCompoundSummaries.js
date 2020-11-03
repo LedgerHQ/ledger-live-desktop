@@ -9,6 +9,7 @@ import { isCompoundTokenSupported } from "@ledgerhq/live-common/lib/families/eth
 import { accountsSelector } from "~/renderer/reducers/accounts";
 
 const makeSummaries = (accounts: AccountLikeArray): CompoundAccountSummary[] =>
+  // $FlowFixMe
   accounts
     .map(acc => {
       if (acc.type !== "TokenAccount") return;
@@ -17,6 +18,7 @@ const makeSummaries = (accounts: AccountLikeArray): CompoundAccountSummary[] =>
 
       if (!isCompoundTokenSupported(ctoken)) return;
 
+      // $FlowFixMe
       const parentAccount = accounts.find(a => a.id === acc.parentId);
       if (!parentAccount || parentAccount.type !== "Account") return;
       const summary = makeCompoundSummaryForAccount(acc, parentAccount);

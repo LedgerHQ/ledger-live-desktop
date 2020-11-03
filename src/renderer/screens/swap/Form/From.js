@@ -191,7 +191,7 @@ const From = ({
               onChange={onAmountChange}
               renderRight={<InputRight>{unit.code}</InputRight>}
             />
-            {currency && amount?.gt(0) && !amountError ? (
+            {currency && amount && amount.gt(0) && !amountError ? (
               <CountervalueWrapper mt={1}>
                 <CounterValue
                   prefix={<Text mr={1}>{"≈"}</Text>}

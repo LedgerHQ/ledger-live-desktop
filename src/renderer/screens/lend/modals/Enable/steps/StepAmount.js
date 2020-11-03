@@ -8,7 +8,11 @@ import { useSelector } from "react-redux";
 import { localeSelector } from "~/renderer/reducers/settings";
 
 import type { StepProps } from "../types";
-import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import {
+  getAccountCurrency,
+  getAccountUnit,
+  getAccountName,
+} from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
@@ -54,7 +58,7 @@ export default function StepAmount({
   const { amount, useAllAmount } = transaction;
   const locale = useSelector(localeSelector);
 
-  const name = account?.name || parentAccount?.name;
+  const name = getAccountName(account);
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
 

@@ -74,12 +74,11 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount, defaultParentAcc
 
   const [state, dispatch] = useReducer(
     reducer,
-    // $FlowFixMe Update type for SwapState
     {
       okCurrencies,
       defaultCurrency:
         defaultCurrency && okCurrencies.includes(defaultCurrency) ? defaultCurrency : undefined,
-      defaultAccount: defaultAccount?.balance.gt(0) ? defaultAccount : undefined,
+      defaultAccount: defaultAccount && defaultAccount.balance.gt(0) ? defaultAccount : undefined,
       defaultParentAccount: defaultParentAccount || undefined,
     },
     initState,
@@ -195,7 +194,7 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount, defaultParentAcc
   ]);
 
   const hasErrors = Object.keys(status.errors).length;
-  const canContinue = !bridgePending && !hasErrors && exchangeRate;
+  const canContinue = !!(!bridgePending && !hasErrors && exchangeRate);
   return (
     <>
       <TrackPage category="Swap" name="Form" />
