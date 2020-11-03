@@ -211,30 +211,36 @@ const ActiveAccounts = ({ summaries }: Props) => {
         <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
           {t("lend.headers.active.accounts")}
         </Text>
-        <ToolTip content={t("lend.headers.active.amountSuppliedTooltip")}>
+        <Box horizontal>
           <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
             {t("lend.headers.active.amountSupplied")}
           </Text>
-          <IconWrapper>
-            <InfoCircle size={11} />
-          </IconWrapper>
-        </ToolTip>
-        <ToolTip content={t("lend.headers.active.accruedInterestsTooltip")}>
+          <ToolTip content={t("lend.headers.active.amountSuppliedTooltip")}>
+            <IconWrapper>
+              <InfoCircle size={11} />
+            </IconWrapper>
+          </ToolTip>
+        </Box>
+        <Box horizontal>
           <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
             {t("lend.headers.active.accruedInterests")}
           </Text>
-          <IconWrapper>
-            <InfoCircle size={11} />
-          </IconWrapper>
-        </ToolTip>
-        <ToolTip content={t("lend.headers.active.statusTooltip")}>
+          <ToolTip content={t("lend.headers.active.accruedInterestsTooltip")}>
+            <IconWrapper>
+              <InfoCircle size={11} />
+            </IconWrapper>
+          </ToolTip>
+        </Box>
+        <Box horizontal>
           <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
             {t("lend.headers.active.status")}
           </Text>
-          <IconWrapper>
-            <InfoCircle size={11} />
-          </IconWrapper>
-        </ToolTip>
+          <ToolTip content={t("lend.headers.active.statusTooltip")}>
+            <IconWrapper>
+              <InfoCircle size={11} />
+            </IconWrapper>
+          </ToolTip>
+        </Box>
         <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
           {t("lend.headers.active.actions")}
         </Text>
