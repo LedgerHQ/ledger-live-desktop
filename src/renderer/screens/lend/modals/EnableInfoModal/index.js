@@ -35,7 +35,6 @@ type Props = {
   account: AccountLike,
   parentAccount: ?Account,
   currency: CryptoCurrency | TokenCurrency,
-  onlyTerms?: boolean,
   onClose?: () => void,
   ...
 };
@@ -45,7 +44,6 @@ export default function LendTermsModal({
   account,
   parentAccount,
   currency,
-  onlyTerms,
   onClose,
   ...rest
 }: Props) {
@@ -62,22 +60,22 @@ export default function LendTermsModal({
 
   const acceptTerms = useCallback(() => {
     acceptLendingTerms();
-    onlyTerms && handleOnClose();
-  }, [onlyTerms, handleOnClose]);
+  }, []);
 
   const onFinish = useCallback(() => {
     handleOnClose();
-    dispatch(
-      openModal(account ? "MODAL_LEND_ENABLE_FLOW" : "MODAL_LEND_SELECT_ACCOUNT", {
-        ...rest,
-        account,
-        parentAccount,
-        accountId: parentAccount ? parentAccount.id : null,
-        currency,
-        nextStep: "MODAL_LEND_ENABLE_FLOW",
-        cta: t("common.continue"),
-      }),
-    );
+    if (currency)
+      dispatch(
+        openModal(account ? "MODAL_LEND_ENABLE_FLOW" : "MODAL_LEND_SELECT_ACCOUNT", {
+          ...rest,
+          account,
+          parentAccount,
+          accountId: parentAccount ? parentAccount.id : null,
+          currency,
+          nextStep: "MODAL_LEND_ENABLE_FLOW",
+          cta: t("common.continue"),
+        }),
+      );
   }, [handleOnClose, dispatch, rest, currency, t, account, parentAccount]);
 
   const onTermsLinkClick = useCallback(() => {

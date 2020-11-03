@@ -35,9 +35,7 @@ const Dashboard = ({
   // if user has not accepted terms of lending show terms modal
   useEffect(() => {
     !isAcceptedTerms
-      ? dispatch(
-          openModal("MODAL_LEND_ENABLE_INFO", { onlyTerms: true, onClose: onCloseTermsModal }),
-        )
+      ? dispatch(openModal("MODAL_LEND_ENABLE_INFO", { onClose: onCloseTermsModal }))
       : dispatch(openModal("MODAL_LEND_HIGH_FEES", { MODAL_SHOW_ONCE: true }));
   }, [dispatch, isAcceptedTerms, onCloseTermsModal]);
 
