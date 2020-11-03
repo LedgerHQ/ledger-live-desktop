@@ -21,6 +21,7 @@ const SwapBody = ({
   transaction,
   onClose,
   onStepChange,
+  onCompleteSwap,
   activeStep,
   ratesExpiration,
 }: {
@@ -28,6 +29,7 @@ const SwapBody = ({
   transaction: any, // FIXME
   onClose: any,
   onStepChange: SwapSteps => void,
+  onCompleteSwap: () => void,
   activeStep: SwapSteps,
   ratesExpiration: Date,
 }) => {
@@ -65,8 +67,9 @@ const SwapBody = ({
       );
       setResult(result);
       onStepChange("finished");
+      onCompleteSwap();
     },
-    [dispatch, fromAccount, fromParentAccount, onStepChange, swap, transaction],
+    [dispatch, fromAccount, fromParentAccount, onCompleteSwap, onStepChange, swap, transaction],
   );
 
   const items = [
