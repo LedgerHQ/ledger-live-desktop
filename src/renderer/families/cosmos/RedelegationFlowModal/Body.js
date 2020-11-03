@@ -132,7 +132,7 @@ const Body = ({
 
     invariant(account && account.cosmosResources, "cosmos: account and cosmos resources required");
 
-    const source = account.cosmosResources.delegations.find(
+    const source = account.cosmosResources?.delegations.find(
       d => d.validatorAddress === validatorAddress,
     );
 

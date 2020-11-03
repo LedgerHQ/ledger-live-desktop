@@ -72,11 +72,9 @@ export default function StepValidators({
 
   const sourceValidator = useMemo(
     () =>
-      account.cosmosResources && account.cosmosResources.delegations
-        ? account.cosmosResources.delegations.find(
-            d => d.validatorAddress === transaction.cosmosSourceValidator,
-          )
-        : "",
+      account.cosmosResources?.delegations.find(
+        d => d.validatorAddress === transaction.cosmosSourceValidator,
+      ),
     [account, transaction.cosmosSourceValidator],
   );
 
@@ -89,12 +87,9 @@ export default function StepValidators({
 
   const updateSourceValidator = useCallback(
     ({ validatorAddress: cosmosSourceValidator, ...r }) => {
-      const source =
-        account.cosmosResources && account.cosmosResources.delegations
-          ? account.cosmosResources.delegations.find(
-              d => d.validatorAddress === cosmosSourceValidator,
-            )
-          : null;
+      const source = account.cosmosResources?.delegations.find(
+        d => d.validatorAddress === cosmosSourceValidator,
+      );
       updateRedelegation({
         ...transaction,
         cosmosSourceValidator,

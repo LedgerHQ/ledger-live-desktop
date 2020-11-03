@@ -30,7 +30,7 @@ function getAccountTuplesForCurrency(
             )) ||
           makeEmptyTokenAccount(account, currency),
       }))
-      .filter(a => (hideEmpty ? a.subAccount && a.subAccount.balance.gt(0) : true));
+      .filter(a => (hideEmpty ? a.subAccount?.balance.gt(0) : true));
   }
   return allAccounts
     .filter(account => account.currency.id === currency.id)
@@ -38,7 +38,7 @@ function getAccountTuplesForCurrency(
       account,
       subAccount: null,
     }))
-    .filter(a => (hideEmpty ? a.account && a.account.balance.gt(0) : true));
+    .filter(a => (hideEmpty ? a.account?.balance.gt(0) : true));
 }
 
 const getIdsFromTuple = (accountTuple: AccountTuple) => ({
