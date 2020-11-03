@@ -118,7 +118,7 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
     if (!account && ethAccount) {
       dispatch(openModal("MODAL_RECEIVE", { currency: token, account: ethAccount }));
     } else if (!ethAccount) {
-      dispatch(openModal("MODAL_LEND_NO_ETHEREUM_ACCOUNT"));
+      dispatch(openModal("MODAL_LEND_NO_ETHEREUM_ACCOUNT", { currency: token }));
     } else if (isAcceptedLendingTerms()) {
       dispatch(
         openModal("MODAL_LEND_SELECT_ACCOUNT", {
@@ -188,7 +188,6 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
       </Amount>
       <Action>
         <CompactButton
-          disabled={!totalBalance || totalBalance.lte(0)}
           fontSize={3}
           primary
           onClick={openManageModal}
