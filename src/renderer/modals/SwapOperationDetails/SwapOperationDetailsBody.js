@@ -150,7 +150,7 @@ const SwapOperationDetailsBody = ({
       const mainAccount = getMainAccount(account, parentAccount);
 
       const url = `/account/${mainAccount.id}/${parentAccount ? account.id : ""}`;
-      history.push(url);
+      history.push({ pathname: url, state: { source: "swap operation details" } });
       onClose();
     },
     [accounts, history, onClose],

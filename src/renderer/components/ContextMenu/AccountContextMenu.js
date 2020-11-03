@@ -82,7 +82,8 @@ class AccountContextMenu extends PureComponent<Props> {
       items.push({
         label: "accounts.contextMenu.buy",
         Icon: IconBuy,
-        callback: () => history.push("/exchange"),
+        callback: () =>
+          history.push({ pathname: "/exchange", state: { source: "account context menu" } }),
       });
     }
 
@@ -98,6 +99,7 @@ class AccountContextMenu extends PureComponent<Props> {
               defaultCurrency: currency,
               defaultAccount: account,
               defaultParentAccount: parentAccount,
+              source: "account context menu",
             },
           }),
       });

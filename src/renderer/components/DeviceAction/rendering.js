@@ -158,7 +158,10 @@ const OpenManagerBtn = ({
 }) => {
   const history = useHistory();
   const onClick = useCallback(() => {
-    history.push(`manager${appName ? `?q=${appName}` : ""}`);
+    history.push({
+      pathname: `manager${appName ? `?q=${appName}` : ""}`,
+      state: { source: "device action open manager button" },
+    });
     closeAllModal();
   }, [history, appName, closeAllModal]);
   return (

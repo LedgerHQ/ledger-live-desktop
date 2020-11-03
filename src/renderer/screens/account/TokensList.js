@@ -85,7 +85,10 @@ const ReceiveButton = (props: { onClick: () => void }) => (
 
 class TokensList extends PureComponent<Props> {
   onAccountClick = (account: AccountLike, parentAccount: Account) => {
-    this.props.history.push(`/account/${parentAccount.id}/${account.id}`);
+    this.props.history.push({
+      pathname: `/account/${parentAccount.id}/${account.id}`,
+      state: { source: "tokens list" },
+    });
   };
 
   onReceiveClick = () => {

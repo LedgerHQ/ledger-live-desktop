@@ -190,10 +190,10 @@ const MainSideBar = () => {
   }, [dispatch, collapsed]);
 
   const push = useCallback(
-    (to: string) => {
-      if (location.pathname === to) return;
+    (pathname: string) => {
+      if (location.pathname === pathname) return;
 
-      history.push(to);
+      history.push({ pathname, state: { source: "sidebar" } });
     },
     [history, location.pathname],
   );

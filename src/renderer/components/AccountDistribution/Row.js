@@ -104,11 +104,13 @@ const Row = ({ item: { currency, amount, distribution, account }, isVisible }: P
   const history = useHistory();
   const onAccountClick = useCallback(
     account => {
-      history.push(
-        account.type !== "Account"
-          ? `/account/${account.parentId}/${account.id}`
-          : `/account/${account.id}`,
-      );
+      history.push({
+        pathname:
+          account.type !== "Account"
+            ? `/account/${account.parentId}/${account.id}`
+            : `/account/${account.id}`,
+        state: { source: "account allocation" },
+      });
     },
     [history],
   );

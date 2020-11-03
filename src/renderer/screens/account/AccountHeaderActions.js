@@ -98,6 +98,7 @@ const AccountHeaderActions = ({
       state: {
         defaultCurrency: currency,
         defaultAccount: mainAccount,
+        source: "account header actions",
       },
     });
   }, [currency, history, mainAccount]);
@@ -113,6 +114,7 @@ const AccountHeaderActions = ({
         defaultCurrency: currency,
         defaultAccount: account,
         defaultParentAccount: parentAccount,
+        source: "account header actions",
       },
     });
   }, [currency, history, account, parentAccount]);

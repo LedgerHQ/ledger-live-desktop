@@ -81,7 +81,7 @@ const Settings = ({ history, location, match }: Props) => {
     (item: Item) => {
       const url = `${match.url}/${item.key}`;
       if (location.pathname !== url) {
-        history.push(url);
+        history.push({ pathname: url, state: { source: "settings tab" } });
       }
     },
     [match, history, location],
