@@ -40,7 +40,11 @@ function StepConfirmation({
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Lend" name="Withdraw Step 3 Success" eventProperties={{ currency }} />
+        <TrackPage
+          category="Lend"
+          name="Withdraw Step 3 Success"
+          eventProperties={{ currencyName: currency.name }}
+        />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={<Trans i18nKey="lend.withdraw.steps.confirmation.success.title" />}
@@ -53,7 +57,11 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Lend" name="Withdraw Step 3 Fail" eventProperties={{ currency }} />
+        <TrackPage
+          category="Lend"
+          name="Withdraw Step 3 Fail"
+          eventProperties={{ currencyName: currency.name }}
+        />
         {signed ? (
           <BroadcastErrorDisclaimer
             title={<Trans i18nKey="lend.withdraw.steps.confirmation.broadcastError" />}

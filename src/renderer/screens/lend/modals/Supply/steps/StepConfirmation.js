@@ -47,7 +47,11 @@ function StepConfirmation({
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Lend" name="Supply Step 3 Success" eventProperties={{ currency }} />
+        <TrackPage
+          category="Lend"
+          name="Supply Step 3 Success"
+          eventProperties={{ currencyName: currency.name }}
+        />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={t("lend.supply.steps.confirmation.success.title")}
@@ -65,7 +69,11 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Lend" name="Supply Step 3 Fail" eventProperties={{ currency }} />
+        <TrackPage
+          category="Lend"
+          name="Supply Step 3 Fail"
+          eventProperties={{ currencyName: currency.name }}
+        />
         {signed ? (
           <BroadcastErrorDisclaimer
             title={<Trans i18nKey="lend.enable.steps.confirmation.broadcastError" />}
@@ -101,7 +109,6 @@ export function StepConfirmationFooter({
         {t("lend.supply.steps.confirmation.success.done")}
       </Button>
       {concernedOperation ? (
-        // FIXME make a standalone component!
         <Button
           ml={2}
           id={"lend-confirmation-opc-button"}

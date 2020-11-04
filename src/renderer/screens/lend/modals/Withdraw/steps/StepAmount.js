@@ -31,7 +31,11 @@ export default function StepAmount({
 
   return (
     <Box flow={1}>
-      <TrackPage category="Lend" name="Withdraw Step 1" eventProperties={{ currency }} />
+      <TrackPage
+        category="Lend"
+        name="Withdraw Step 1"
+        eventProperties={{ currencyName: currency.name }}
+      />
       <Box vertical>
         {account && transaction ? (
           <WithdrawableBanner account={account} parentAccount={parentAccount} />

@@ -214,7 +214,7 @@ const Body = ({
   return (
     <Stepper {...stepperProps}>
       <SyncSkipUnderPriority priority={100} />
-      <Track onUnmount event="CloseModalUnfreeze" />
+      <Track onUnmount event="CloseModalLendingSupply" />
     </Stepper>
   );
 };

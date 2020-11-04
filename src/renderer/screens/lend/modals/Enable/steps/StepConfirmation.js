@@ -76,7 +76,11 @@ function StepConfirmation({
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Lend" name="Approve Step 3 Success" eventProperties={{ currency }} />
+        <TrackPage
+          category="Lend"
+          name="Approve Step 3 Success"
+          eventProperties={{ currencyName: currency.name }}
+        />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <IconContainer>
           <Update size={24} />

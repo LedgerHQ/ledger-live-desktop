@@ -93,7 +93,11 @@ export default function StepAmount({
 
   return (
     <Box flow={1}>
-      <TrackPage category="Lend" name="Approve Step 1" eventProperties={{ currency }} />
+      <TrackPage
+        category="Lend"
+        name="Approve Step 1"
+        eventProperties={{ currencyName: currency.name }}
+      />
       {error ? <ErrorBanner error={error} /> : null}
       <Box vertical>
         <Box px={4} mt={4} mb={4}>

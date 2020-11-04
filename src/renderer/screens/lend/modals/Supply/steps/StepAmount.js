@@ -115,7 +115,11 @@ function StepAmount({
 
   return (
     <Box flow={2}>
-      <TrackPage category="Lend" name="Supply Step 1" eventProperties={{ currency }} />
+      <TrackPage
+        category="Lend"
+        name="Supply Step 1"
+        eventProperties={{ currencyName: currency.name }}
+      />
       {account && account.type === "TokenAccount" && transaction ? (
         <SupplyBanner account={account} parentAccount={parentAccount} />
       ) : null}

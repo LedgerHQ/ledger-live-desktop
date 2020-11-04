@@ -22,7 +22,8 @@ import LendingInfoIllu3 from "~/renderer/images/lending-info-3.svg";
 
 import { closeModal, openModal } from "~/renderer/actions/modals";
 import { openURL } from "~/renderer/linking";
-
+import TrackPage from "~/renderer/analytics/TrackPage";
+import { track } from "~/renderer/analytics/segment";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import CheckBox from "~/renderer/components/CheckBox";
@@ -63,6 +64,7 @@ export default function LendTermsModal({
   }, []);
 
   const onFinish = useCallback(() => {
+    track("Lend Edu Complete");
     handleOnClose();
     if (currency)
       dispatch(
@@ -129,6 +131,7 @@ export default function LendTermsModal({
         {
           illustration: (
             <>
+              <TrackPage category="Lend" name="Edu Step 1" />
               <LendingTermsImg overlay />
               <LendingTermsImg1 />
               <LendingTermsImg2 />
@@ -154,6 +157,7 @@ export default function LendTermsModal({
         {
           illustration: (
             <>
+              <TrackPage category="Lend" name="Edu Step 2" />
               <LendingTermsImg overlay />
               <LendingTermsImg1 />
               <LendingTermsImg2 />
@@ -172,6 +176,7 @@ export default function LendTermsModal({
         {
           illustration: (
             <>
+              <TrackPage category="Lend" name="Edu Step 3" />
               <LendingTermsImg overlay />
               <LendingTermsImg1 />
               <LendingTermsImg2 />

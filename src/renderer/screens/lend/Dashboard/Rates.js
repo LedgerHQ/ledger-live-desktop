@@ -150,7 +150,7 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
     const ethAccount = accounts.find(a => a.type === "Account" && a.currency.id === eth.id);
     return {
       name: !ethAccount ? "Lend Deposit NoAccount" : "Lend Deposit",
-      eventProperties: !ethAccount ? {} : { currency: token },
+      eventProperties: !ethAccount ? {} : { currencyName: token.name },
     };
   }, [accounts, token, eth]);
 
