@@ -152,7 +152,7 @@ export const Wrapper: ThemedComponent<{}> = styled.div`
   cursor: pointer;
 `;
 
-export const CAROUSEL_NONCE: number = 3;
+export const CAROUSEL_NONCE: number = 4;
 
 const Carousel = ({
   withArrows = true,
