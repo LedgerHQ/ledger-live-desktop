@@ -80,7 +80,7 @@
       "UNDELEGATE": "Interrompue",
       "SUPPLY": "Déposé",
       "REDEEM": "Retiré",
-      "APPROVE": "Actif",
+      "APPROVE": "Approved",
       "VOTE": "Voté",
       "FREEZE": "Gelé",
       "UNFREEZE": "Dégelé",
@@ -120,9 +120,9 @@
     "stars": "Comptes favoris",
     "accounts": "Comptes",
     "manager": "Manager",
-    "exchange": "Acheter des cryptos",
+    "exchange": "Buy",
     "swap": "Swap",
-    "lend": "Prêter des cryptos"
+    "lend": "Lend"
   },
   "stars": {
     "placeholder": "Les comptes que vous placez en favoris dans la page <1><0>Comptes</0></1> apparaitront ici !",
@@ -324,38 +324,37 @@
       "cta": "Compris"
     },
     "account": {
-      "amountSupplied": "Montant déposé",
+      "amountSupplied": "Amount deposited",
       "amountSuppliedTooltip": "Montant prêté au réseau",
       "currencyAPY": "APY de la devise",
-      "currencyAPYTooltip": "Taux réel de retour d'ici la fin de l'année si les intérêts sont cumulés.",
-      "accruedInterests": "Intérêts accumulés",
-      "accruedInterestsTooltip": "Intérêts générés",
+      "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
+      "accruedInterests": "Accrued interest",
+      "accruedInterestsTooltip": "Interest generated on your lent assets",
       "interestEarned": "Intérêts gagnés",
-      "interestEarnedTooltip": "--! NEED TEXT HERE !--",
+      "interestEarnedTooltip": "Interest you have earned after withdrawal",
       "openLoans": "Prêts ouverts",
       "closedLoans": "Prêts clôturés",
-      "amountRedeemed": "Montant réclamé",
-      "amountRedeemedTooltip": "--! NEED TEXT HERE !--",
+      "amountRedeemed": "Amount withdrawn",
       "date": "Date",
-      "info": "Vous pouvez prêter des actifs directement de vos comptes {{currency}} et obtenir des revenus passifs.",
+      "info": "You can lend assets directly from your {{currency}} account and earn interest.",
       "howCompoundWorks": "Comment fonctionne Compound ?",
-      "lend": "Prêter {{currency}}"
+      "lend": "Deposit {{currency}}"
     },
     "emptyState": {
       "active": {
         "title": "Prêt",
-        "description": "Vous pouvez prêter des actifs directement de vos comptes Ethereum et obtenir des revenus passifs.",
+        "description": "You can lend assets directly from your Ethereum accounts and earn interest.",
         "cta": "Comment fonctionne Compound ?"
       },
       "closed": {
-        "title": "Vos prêts fermés apparaîtront ici",
+        "title": "Your closed loans will appear here",
         "description": "Vous n’avez pas encore fait de prêts.",
-        "cta": "Prêter maintenant"
+        "cta": "Deposit"
       },
       "history": {
         "title": "Historique",
         "description": "Visualisez l'historique de toutes vos opérations de prêt.",
-        "cta": "Prêter maintenant"
+        "cta": "Deposit"
       }
     },
     "headers": {
@@ -363,8 +362,8 @@
         "accounts": "Compte",
         "amountSupplied": "Prêt actuel",
         "amountSuppliedTooltip": "Montant prêté au réseau",
-        "accruedInterests": "Intérêts obtenus",
-        "accruedInterestsTooltip": "Intérêts générés",
+        "accruedInterests": "Accrued interest",
+        "accruedInterestsTooltip": "Interest generated on your lent assets",
         "status": "Statut",
         "statusTooltip": "Statut actuel du compte",
         "actions": "Actions"
@@ -374,7 +373,7 @@
         "toSupplyTooltip": "Vous pouvez maintenant prêter vos actifs"
       },
       "closed": {
-        "assetLended": "Actif prêté",
+        "assetLended": "Asset",
         "amountRedeemed": "Montant du retrait",
         "interestsEarned": "Intérêts obtenus",
         "date": "Date"
@@ -382,11 +381,11 @@
       "rates": {
         "allAssets": "Actif",
         "totalBalance": "Solde disponible",
-        "totalBalanceTooltip": "Solde total de tous les comptes en excluant le montant prêté.",
+        "totalBalanceTooltip": "Total balance of your accounts excluding the amount deposited",
         "grossSupply": "Valeur du marché",
-        "grossSupplyTooltip": "Montant total des actifs déposés sur le réseau",
+        "grossSupplyTooltip": "Total amount of assets deposited on the protocol",
         "currentAPY": "APY actuel",
-        "currentAPYTooltip": "Taux réel annuel d'intérêt si ceux-ci sont cumulés continuellement.",
+        "currentAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
         "actions": "Actions"
       }
     },
@@ -395,16 +394,14 @@
       "title": "Gérer le prêt",
       "enable": {
         "approve": "Activer",
-        "approveLess": "Activer moins",
-        "approveMore": "Activer plus",
+        "manageLimit": "Manage limit",
         "viewDetails": "Voir les détails",
-        "info": "Vous pouvez prêter <0>{{amount}}</0> sur <1>{{enabled}} {{assetName}}</1> initialement activé.",
-        "infoNoLimit": "Vous avez prété <0>{{supplied}}</0> à partir d'un compte sans limite.",
-        "notSupplied": "Vous avez activé <0>{{enabled}}</0> sur ce compte.",
-        "notSuppliedNoLimit": "Vous avez approuvé ce compte pour un montant illimité.",
-        "enabling": "La transaction d'activation vous permettant de prêter est en attente",
-        "notEnabled": "Avant de prêter des actifs au protocole Compound, vous devez activer votre compte.",
-        "notEnoughApproved": "Vous n'avez pas assez de solde approuvé pour prêter des actifs."
+        "info": "You have deposited <0>{{amount}}</0> from this account.",
+        "notSupplied": "You can now deposit from this account.",
+        "notSuppliedNoLimit": "You can deposit assets from this account.",
+        "enabling": "You can deposit assets once the account approval is confirmed.",
+        "notEnabled": "You must approve your account before you can lend assets.",
+        "notEnoughApproved": "You must increase the limit approved on your account to lend."
       },
       "supply": {
         "title": "Dépôt",
@@ -416,7 +413,7 @@
       }
     },
     "enable": {
-      "title": "Activer mon compte",
+      "title": "Approve account",
       "steps": {
         "selectAccount": {
           "title": "Sélectionnez un compte",
@@ -432,7 +429,7 @@
           "noLimit": "sans limte {{assetName}}",
           "contractName": "Compound {{currencyName}}",
           "advanced": "Avancé",
-          "amountLabel": "Montant à activer",
+          "amountLabel": "Amount to approve",
           "amountLabelTooltip": "Cela limite le montant disponible à prêter."
         },
         "connectDevice": {
@@ -461,7 +458,7 @@
           "title": "Montant",
           "advanced": "Avancé",
           "amountLabel": "Montant à retirer",
-          "available": "Solde disponible: <0>{{amountAvailable}}</0>",
+          "amountToWithdraw": "Amount to withdraw",
           "withdrawAll": "Retirer Max",
           "placeholder": "Retirer Max",
           "maxWithdrawble": "Le montant maximum à retirer est"
@@ -489,7 +486,7 @@
         "title": "Prêter de la crypto",
         "subtitle": "Prêtez des actifs sur le protocole Compound",
         "description": "Le protocole Compound vous permet de prêter et d'emprunter des actifs sur le réseau Ethereum. Vous pouvez prêter des actifs et gagner des intérêts directement à partir de votre compte Ledger.",
-        "switchLabel": "J'ai lu, compris et j'accepte les <0>Conditions Générales.</0>"
+        "switchLabel": "<1>I have read and agree with the </1><0>Terms of Use</0><1>.</1>"
       },
       "steps": {
         "title": "Étape <0>{{step}} / {{total}}</0>",
@@ -515,7 +512,8 @@
           "title": "Montant",
           "selectedAccount": "Compte sélectionné",
           "amountToSupply": "Montant à déposer",
-          "available": "Solde disponible"
+          "available": "Solde disponible",
+          "maxSupply": "Maximum amount to lend is"
         },
         "device": {
           "title": "Appareil"
