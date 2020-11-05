@@ -2218,6 +2218,9 @@
       "title": "The rewards are smaller than the estimated fees to claim them",
       "description": ""
     },
+    "CompoundLowerAllowanceOfActiveAccountError": {
+      "title": "Minimum of {{minimumAmount}} required."
+    },
     "CosmosBroadcastCodeInternal": {
       "title": "Something went wrong (Error #1)",
       "description": "Please contact Ledger Support"
