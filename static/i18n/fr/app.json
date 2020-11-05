@@ -607,6 +607,7 @@
       "cta": "Vider le cache"
     },
     "migrate": "Mise à jour des comptes Ledger Live disponible",
+    "ongoingScams": "There are ongoing phishing scams on our userbase, please be careful and never share your recovery phrase.",
     "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge",
     "ledgerAcademy": {
       "title": "Ledger Academy",
