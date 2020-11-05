@@ -95,7 +95,7 @@ const TopBanner = ({ content, status = "", dismissable = false, bannerId }: Prop
       {message}
       <RightContainer>{right}</RightContainer>
       {dismissable && (
-        <CloseContainer onClick={onDismiss}>
+        <CloseContainer id={`dismiss-${bannerId || ""}-banner`} onClick={onDismiss}>
           <IconCross size={14} />
         </CloseContainer>
       )}
