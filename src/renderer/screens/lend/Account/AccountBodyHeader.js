@@ -5,7 +5,10 @@ import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { TokenAccount, Account } from "@ledgerhq/live-common/lib/types";
 
-import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
+import {
+  makeCompoundSummaryForAccount,
+  getAccountCapabilities,
+} from "@ledgerhq/live-common/lib/compound/logic";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 
 import { openModal } from "~/renderer/actions/modals";
@@ -40,15 +43,21 @@ const Loans = ({ account, parentAccount }: Props) => {
   const currency = getAccountCurrency(account);
 
   const summary = makeCompoundSummaryForAccount(account, parentAccount);
+  const capabilities = getAccountCapabilities(account);
   const lendingDisabled = false;
 
   const onLending = useCallback(() => {
+    const modal =
+      capabilities && capabilities.enabledAmount.gt(0)
+        ? "MODAL_LEND_SUPPLY"
+        : "MODAL_LEND_ENABLE_INFO";
+    const nextModal = [modal, { account, parentAccount, currency }];
     dispatch(
       openModal("MODAL_LEND_HIGH_FEES", {
-        nextModal: ["MODAL_LEND_ENABLE_INFO", { account, parentAccount, currency }],
+        nextModal,
       }),
     );
-  }, [dispatch, account, parentAccount, currency]);
+  }, [dispatch, account, parentAccount, currency, capabilities]);
 
   const openSupportLink = useCallback(() => openURL(urls.compound), []);
 
