@@ -10,6 +10,7 @@ import { Transition } from "react-transition-group";
 
 import { closeModal } from "~/renderer/actions/modals";
 import { isModalOpened, getModalData } from "~/renderer/reducers/modals";
+import Snow, { isSnowTime } from "~/renderer/extra/Snow";
 
 export { default as ModalBody } from "./ModalBody";
 
@@ -229,6 +230,7 @@ class Modal extends PureComponent<Props, { directlyClickedBackdrop: boolean }> {
               onClick={this.handleClickOnBackdrop}
               backdropColor={backdropColor}
             >
+              {isSnowTime() ? <Snow numFlakes={100} /> : null}
               <BodyWrapper
                 tabIndex="0"
                 ref={this.setFocus}
