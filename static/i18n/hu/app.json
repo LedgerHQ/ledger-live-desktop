@@ -607,6 +607,7 @@
       "cta": "Clear cache"
     },
     "migrate": "Ledger Live számlák frissítése lehetséges",
+    "ongoingScams": "There are ongoing phishing scams on our userbase, please be careful and never share your recovery phrase.",
     "genericTerminatedCrypto": "{{coinName}} többé nem támogatott",
     "ledgerAcademy": {
       "title": "Ledger Academy",
