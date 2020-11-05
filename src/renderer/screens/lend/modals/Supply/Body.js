@@ -9,6 +9,7 @@ import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
+import { getSupplyMax } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import type {
   Account,
@@ -92,6 +93,7 @@ const Body = ({
   closeModal,
   openModal,
   onChangeStepId,
+  // $FlowFixMe
   params,
   name,
   getAccount,
@@ -116,10 +118,12 @@ const Body = ({
     const bridge = getAccountBridge(account, parentAccount);
     const t = bridge.createTransaction(account);
 
+    const supplyMax = getSupplyMax(account);
+
     const transaction = bridge.updateTransaction(t, {
       mode: "compound.supply",
       subAccountId: account.id,
-      amount: account.spendableBalance,
+      amount: supplyMax,
     });
 
     return { account, parentAccount, transaction };
