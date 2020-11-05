@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { getAccountCurrency, getAccountName } from "@ledgerhq/live-common/lib/account";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic";
-
+import { useHistory } from "react-router-dom";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Box from "~/renderer/components/Box";
 import Card from "~/renderer/components/Box/Card";
@@ -108,6 +108,7 @@ const Row = ({ summary }: RowProps) => {
   const { token } = account;
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const history = useHistory();
   const name = getAccountName(account);
   const currency = getAccountCurrency(account);
   const capabilities = getAccountCapabilities(account);
@@ -116,9 +117,16 @@ const Row = ({ summary }: RowProps) => {
     dispatch(openModal("MODAL_LEND_MANAGE", { ...summary }));
   }, [dispatch, summary]);
 
+  const openAccountPage = useCallback(() => {
+    if (!parentAccount || !account) return;
+    history.push(`/account/${parentAccount.id}/${account.id}`);
+  }, [history, parentAccount, account]);
+
+  if (!summary) return null;
+
   return (
     <RowContent>
-      <Box>
+      <Box onClick={openAccountPage}>
         <CryptoCurrencyIcon currency={token} size={32} />
         <RowAccount>
           <Ellipsis fontSize={10} color="palette.text.shade50">
@@ -203,30 +211,36 @@ const ActiveAccounts = ({ summaries }: Props) => {
         <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
           {t("lend.headers.active.accounts")}
         </Text>
-        <ToolTip content={t("lend.headers.active.amountSuppliedTooltip")}>
+        <Box horizontal>
           <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
             {t("lend.headers.active.amountSupplied")}
           </Text>
-          <IconWrapper>
-            <InfoCircle size={11} />
-          </IconWrapper>
-        </ToolTip>
-        <ToolTip content={t("lend.headers.active.accruedInterestsTooltip")}>
+          <ToolTip content={t("lend.headers.active.amountSuppliedTooltip")}>
+            <IconWrapper>
+              <InfoCircle size={11} />
+            </IconWrapper>
+          </ToolTip>
+        </Box>
+        <Box horizontal>
           <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
             {t("lend.headers.active.accruedInterests")}
           </Text>
-          <IconWrapper>
-            <InfoCircle size={11} />
-          </IconWrapper>
-        </ToolTip>
-        <ToolTip content={t("lend.headers.active.statusTooltip")}>
+          <ToolTip content={t("lend.headers.active.accruedInterestsTooltip")}>
+            <IconWrapper>
+              <InfoCircle size={11} />
+            </IconWrapper>
+          </ToolTip>
+        </Box>
+        <Box horizontal>
           <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
             {t("lend.headers.active.status")}
           </Text>
-          <IconWrapper>
-            <InfoCircle size={11} />
-          </IconWrapper>
-        </ToolTip>
+          <ToolTip content={t("lend.headers.active.statusTooltip")}>
+            <IconWrapper>
+              <InfoCircle size={11} />
+            </IconWrapper>
+          </ToolTip>
+        </Box>
         <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
           {t("lend.headers.active.actions")}
         </Text>

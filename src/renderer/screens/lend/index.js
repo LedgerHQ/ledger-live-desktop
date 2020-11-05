@@ -56,9 +56,6 @@ const Lend = () => {
         <Box grow ff="Inter|SemiBold" fontSize={7} color="palette.text.shade100" id="lend-title">
           {t("lend.title")}
         </Box>
-        <Box mt={2} grow ff="Inter|Medium" fontSize={3} color="palette.text.shade50" id="lend-desc">
-          {t("lend.description")}
-        </Box>
       </Box>
 
       <TabBar

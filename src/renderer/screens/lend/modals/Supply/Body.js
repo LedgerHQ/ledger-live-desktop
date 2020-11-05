@@ -145,16 +145,16 @@ const Body = ({
 
   const handleOperationBroadcasted = useCallback(
     (optimisticOperation: Operation) => {
-      if (!account) return;
+      if (!account || !parentAccount) return;
       dispatch(
-        updateAccountWithUpdater(account.id, account =>
+        updateAccountWithUpdater(parentAccount.id, account =>
           addPendingOperation(account, optimisticOperation),
         ),
       );
       setOptimisticOperation(optimisticOperation);
       setTransactionError(null);
     },
-    [account, dispatch],
+    [account, parentAccount, dispatch],
   );
 
   const handleChangeAccount = useCallback(
@@ -214,7 +214,7 @@ const Body = ({
   return (
     <Stepper {...stepperProps}>
       <SyncSkipUnderPriority priority={100} />
-      <Track onUnmount event="CloseModalUnfreeze" />
+      <Track onUnmount event="CloseModalLendingSupply" />
     </Stepper>
   );
 };

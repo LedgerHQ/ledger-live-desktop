@@ -3,8 +3,8 @@
 import React from "react";
 import { Trans } from "react-i18next";
 import styled, { withTheme } from "styled-components";
-
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { multiline } from "~/renderer/styles/helpers";
@@ -36,10 +36,15 @@ function StepConfirmation({
   device,
   signed,
 }: StepProps & { theme: * }) {
+  const currency = getAccountCurrency(account);
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Lending Withdraw Flow" name="Step Confirmed" />
+        <TrackPage
+          category="Lend"
+          name="Withdraw Step 3 Success"
+          eventProperties={{ currencyName: currency.name }}
+        />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={<Trans i18nKey="lend.withdraw.steps.confirmation.success.title" />}
@@ -52,7 +57,11 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Lending Withdraw Flow" name="Step Confirmation Error" />
+        <TrackPage
+          category="Lend"
+          name="Withdraw Step 3 Fail"
+          eventProperties={{ currencyName: currency.name }}
+        />
         {signed ? (
           <BroadcastErrorDisclaimer
             title={<Trans i18nKey="lend.withdraw.steps.confirmation.broadcastError" />}

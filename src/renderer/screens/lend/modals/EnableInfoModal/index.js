@@ -11,7 +11,7 @@ import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
-
+import { urls } from "~/config/urls";
 import LendingTermsIllu from "~/renderer/images/lending-terms.svg";
 import LendingTermsIllu1 from "~/renderer/images/lending-illu-1.svg";
 import LendingTermsIllu2 from "~/renderer/images/lending-illu-2.svg";
@@ -22,7 +22,8 @@ import LendingInfoIllu3 from "~/renderer/images/lending-info-3.svg";
 
 import { closeModal, openModal } from "~/renderer/actions/modals";
 import { openURL } from "~/renderer/linking";
-
+import TrackPage from "~/renderer/analytics/TrackPage";
+import { track } from "~/renderer/analytics/segment";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import CheckBox from "~/renderer/components/CheckBox";
@@ -35,7 +36,6 @@ type Props = {
   account: AccountLike,
   parentAccount: ?Account,
   currency: CryptoCurrency | TokenCurrency,
-  onlyTerms?: boolean,
   onClose?: () => void,
   ...
 };
@@ -45,7 +45,6 @@ export default function LendTermsModal({
   account,
   parentAccount,
   currency,
-  onlyTerms,
   onClose,
   ...rest
 }: Props) {
@@ -62,27 +61,27 @@ export default function LendTermsModal({
 
   const acceptTerms = useCallback(() => {
     acceptLendingTerms();
-    onlyTerms && handleOnClose();
-  }, [onlyTerms, handleOnClose]);
+  }, []);
 
   const onFinish = useCallback(() => {
+    track("Lend Edu Complete");
     handleOnClose();
-    dispatch(
-      openModal(account ? "MODAL_LEND_ENABLE_FLOW" : "MODAL_LEND_SELECT_ACCOUNT", {
-        ...rest,
-        account,
-        parentAccount,
-        accountId: parentAccount ? parentAccount.id : null,
-        currency,
-        nextStep: "MODAL_LEND_ENABLE_FLOW",
-        cta: t("common.continue"),
-      }),
-    );
+    if (currency)
+      dispatch(
+        openModal(account ? "MODAL_LEND_ENABLE_FLOW" : "MODAL_LEND_SELECT_ACCOUNT", {
+          ...rest,
+          account,
+          parentAccount,
+          accountId: parentAccount ? parentAccount.id : null,
+          currency,
+          nextStep: "MODAL_LEND_ENABLE_FLOW",
+          cta: t("common.continue"),
+        }),
+      );
   }, [handleOnClose, dispatch, rest, currency, t, account, parentAccount]);
 
   const onTermsLinkClick = useCallback(() => {
-    // @TODO replace this URL with the correct one
-    openURL("https://ledger.com");
+    openURL(urls.compoundTnC);
   }, []);
 
   return (
@@ -121,6 +120,7 @@ export default function LendTermsModal({
                     <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
                       <Trans i18nKey="lend.info.terms.switchLabel">
                         <FakeLink onClick={onTermsLinkClick}></FakeLink>
+                        <Text onClick={onSwitchAccept} />
                       </Trans>
                     </Text>
                   </Box>
@@ -131,6 +131,7 @@ export default function LendTermsModal({
         {
           illustration: (
             <>
+              <TrackPage category="Lend" name="Edu Step 1" />
               <LendingTermsImg overlay />
               <LendingTermsImg1 />
               <LendingTermsImg2 />
@@ -156,6 +157,7 @@ export default function LendTermsModal({
         {
           illustration: (
             <>
+              <TrackPage category="Lend" name="Edu Step 2" />
               <LendingTermsImg overlay />
               <LendingTermsImg1 />
               <LendingTermsImg2 />
@@ -174,6 +176,7 @@ export default function LendTermsModal({
         {
           illustration: (
             <>
+              <TrackPage category="Lend" name="Edu Step 3" />
               <LendingTermsImg overlay />
               <LendingTermsImg1 />
               <LendingTermsImg2 />

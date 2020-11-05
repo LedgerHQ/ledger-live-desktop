@@ -5,12 +5,14 @@ import { connect, useDispatch } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import type { TFunction } from "react-i18next";
+import { BigNumber } from "bignumber.js";
 
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
+import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 
@@ -107,9 +109,12 @@ const Body = ({
     const bridge = getAccountBridge(account, parentAccount);
     const t = bridge.createTransaction(account);
 
+    const summary = makeCompoundSummaryForAccount(account);
+
     const transaction = bridge.updateTransaction(t, {
       mode: "compound.withdraw",
-      useAllAmount: true,
+      useAllAmount: false,
+      amount: summary ? summary.totalSupplied : BigNumber(0),
       subAccountId: account.id,
     });
 
@@ -135,16 +140,16 @@ const Body = ({
 
   const handleOperationBroadcasted = useCallback(
     (optimisticOperation: Operation) => {
-      if (!account) return;
+      if (!account || !parentAccount) return;
       dispatch(
-        updateAccountWithUpdater(account.id, account =>
+        updateAccountWithUpdater(parentAccount.id, account =>
           addPendingOperation(account, optimisticOperation),
         ),
       );
       setOptimisticOperation(optimisticOperation);
       setTransactionError(null);
     },
-    [account, dispatch],
+    [account, parentAccount, dispatch],
   );
 
   const statusError = useMemo(() => status.errors && Object.values(status.errors)[0], [
