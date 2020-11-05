@@ -20,6 +20,8 @@ import IconPlus from "~/renderer/icons/Plus";
 import IconEye from "~/renderer/icons/Eye";
 import IconFees from "~/renderer/icons/Fees";
 import IconTrash from "~/renderer/icons/Trash";
+import IconSupply from "~/renderer/icons/Supply";
+import IconWithdraw from "~/renderer/icons/Withdraw";
 
 import Freeze from "~/renderer/icons/Freeze";
 import Unfreeze from "~/renderer/icons/Unfreeze";
@@ -101,10 +103,9 @@ const iconsComponent = {
   OPT_IN: IconPlus,
   OPT_OUT: IconTrash,
   CLOSE_ACCOUNT: IconTrash,
-  // TODO: add correct icons
-  REDEEM: IconSend,
-  SUPPLY: IconSend,
-  APPROVE: IconSend,
+  REDEEM: IconWithdraw,
+  SUPPLY: IconSupply,
+  APPROVE: IconPlus,
 };
 
 class ConfirmationCheck extends PureComponent<{
