@@ -1,3 +1,4 @@
+/* eslint jest/expect-expect: 0 */
 import initialize, {
   app,
   deviceInfo,
@@ -11,6 +12,16 @@ import initialize, {
   // portfolioPage,
 } from "../common.js";
 import data from "../data/onboarding/";
+
+// When called like `yarn jest spectron -no-screenshots` we will skip the screenshot checks.
+const testScreenshots = process.argv[process.argv.length - 1] !== "-no-screenshots";
+const matchScreenAgainstSnapshot = async (customSnapshotIdentifier, countdown = 500) => {
+  if (testScreenshots) {
+    expect(await app.client.screenshot(countdown)).toMatchImageSnapshot({
+      customSnapshotIdentifier,
+    });
+  }
+};
 
 describe("Bullrun", () => {
   initialize();
@@ -32,23 +43,17 @@ describe("Bullrun", () => {
     const elem = await $("#onboarding-get-started-button");
     await elem.waitForDisplayed({ timeout: 20000 });
     await onboardingPage.getStarted();
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "onboarding-1-get-started",
-    });
+    await matchScreenAgainstSnapshot("onboarding-1-get-started");
   });
 
   it("go through onboarding-2", async () => {
     await onboardingPage.selectConfiguration("new");
     await app.client.pause(500);
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "onboarding-2-screen-new",
-    });
+    await matchScreenAgainstSnapshot("onboarding-2-screen-new");
   });
   it("go through onboarding-3", async () => {
     await onboardingPage.selectDevice("nanox");
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "onboarding-3-screen-nano-x",
-    });
+    await matchScreenAgainstSnapshot("onboarding-3-screen-nano-x");
   });
   it("go through onboarding-4", async () => {
     await onboardingPage.continue();
@@ -149,9 +154,7 @@ describe("Bullrun", () => {
   it("firmware update flow-1", async () => {
     const elem = await $("#manager-update-firmware-button");
     await elem.waitForDisplayed();
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "firmware-update-0-manager-page",
-    });
+    await matchScreenAgainstSnapshot("firmware-update-0-manager-page");
   });
 
   it("firmware update flow-2", async () => {
@@ -159,17 +162,13 @@ describe("Bullrun", () => {
     await button.click();
     const elem = await $("#firmware-update-disclaimer-modal-seed-ready-checkbox");
     await elem.waitForDisplayed();
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "firmware-update-1-disclaimer-modal",
-    });
+    await matchScreenAgainstSnapshot("firmware-update-1-disclaimer-modal");
   });
 
   it("firmware update flow-3", async () => {
     const elem = await $("#firmware-update-disclaimer-modal-seed-ready-checkbox");
     await elem.click();
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "firmware-update-2-disclaimer-modal-checkbox",
-    });
+    await matchScreenAgainstSnapshot("firmware-update-2-disclaimer-modal-checkbox");
   });
 
   it("firmware update flow-5", async () => {
@@ -177,43 +176,33 @@ describe("Bullrun", () => {
     await continueButton.click();
     const elem = await $("#firmware-update-download-mcu-title");
     await elem.waitForDisplayed();
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "firmware-update-4-download-mcu-modal",
-    });
+    await matchScreenAgainstSnapshot("firmware-update-4-download-mcu-modal");
   });
 
   it("firmware update flow-6", async () => {
     await mockDeviceEvent({}, { type: "complete" }); // .complete() install full firmware -> flash mcu
     const elem = await $("#firmware-update-flash-mcu-title");
     await elem.waitForDisplayed();
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "firmware-update-5-flash-mcu-start",
-    });
+    await matchScreenAgainstSnapshot("firmware-update-5-flash-mcu-start");
   });
 
   it("firmware update flow-7", async () => {
     await mockDeviceEvent({}, { type: "complete" }); // .complete() flash mcu -> completed
     const elem = await $("#firmware-update-completed-close-button");
     await elem.waitForDisplayed();
-    expect(await app.client.screenshot(6000)).toMatchImageSnapshot({
-      customSnapshotIdentifier: "firmware-update-6-flash-mcu-done",
-    });
+    await matchScreenAgainstSnapshot("firmware-update-6-flash-mcu-done", 6000);
   });
 
   it("firmware update flow-8", async () => {
     const elem = await $("#firmware-update-completed-close-button");
     await elem.click();
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "firmware-update-7-close-modal",
-    });
+    await matchScreenAgainstSnapshot("firmware-update-7-close-modal");
   });
 
   it("firmware update flow-9", async () => {
     const elem = await $("#drawer-dashboard-button");
     await elem.click();
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "firmware-update-8-back-to-dashboard",
-    });
+    await matchScreenAgainstSnapshot("firmware-update-8-back-to-dashboard");
   });
 
   describe("add accounts flow", () => {
@@ -251,35 +240,36 @@ describe("Bullrun", () => {
     }
   });
 
-  describe("account flows", () => {
-    it("account migration flow", async () => {
-      // Account migration flow
-      const drawerDashboardButton = await $("#drawer-dashboard-button");
-      await drawerDashboardButton.click();
-      const migrateAccountsButton = await $("#modal-migrate-accounts-button");
-      await migrateAccountsButton.waitForDisplayed();
-      await migrateAccountsButton.click();
-      const migrateOverViewStartButton = await $("#migrate-overview-start-button");
-      await migrateOverViewStartButton.waitForDisplayed();
-      await migrateOverViewStartButton.click();
-      await mockDeviceEvent({ type: "opened" });
-      const migrateCurrencyContinueButton = await $("#migrate-currency-continue-button");
-      await migrateCurrencyContinueButton.waitForDisplayed();
-      await migrateCurrencyContinueButton.click();
-      await mockDeviceEvent({ type: "opened" });
-      await migrateCurrencyContinueButton.waitForDisplayed();
-      await migrateCurrencyContinueButton.click();
-      const migrateOverviewExportButton = await $("#migrate-overview-export-button");
-      await migrateOverviewExportButton.waitForDisplayed();
-      await migrateOverviewExportButton.click();
-      const exportAccountsDoneButton = await $("#export-accounts-done-button");
-      await exportAccountsDoneButton.waitForDisplayed();
-      await exportAccountsDoneButton.click();
-      const migrateOverviewDoneButton = await $("#migrate-overview-done-button");
-      await migrateOverviewDoneButton.click();
-      expect(await modalPage.isDisplayed(true)).toBe(false);
-    });
+  it("naive discreet mode toggle and assorted screens", async () => {
+    // Toggle discreet mode twice
+    const discreetButton = await $("#topbar-discreet-button");
+    await discreetButton.click();
+    await discreetButton.click();
 
+    const dashboardButton = await $("#drawer-dashboard-button");
+    await dashboardButton.click();
+    const exchangeButton = await $("#drawer-exchange-button");
+    await exchangeButton.click();
+
+    // Open settings and navigate all tabs
+    const settingsButton = await $("#topbar-settings-button");
+    await settingsButton.click();
+
+    // Open settings and navigate all tabs
+    const currenciesTab = await $("#settings-currencies-tab");
+    await currenciesTab.click();
+    const accountsTab = await $("#settings-accounts-tab");
+    await accountsTab.click();
+    const aboutTab = await $("#settings-about-tab");
+    await aboutTab.click();
+    const helpTab = await $("#settings-help-tab");
+    await helpTab.click();
+    const experimentalTab = await $("#settings-experimental-tab");
+    await experimentalTab.click();
+    expect(await modalPage.isDisplayed(true)).toBe(false);
+  });
+
+  describe("account flows", () => {
     it("receive flow", async () => {
       // Receive flow without device
       const drawerReceiveButton = await $("#drawer-receive-button");
@@ -364,34 +354,5 @@ describe("Bullrun", () => {
       await modalPage.close();
       expect(await modalPage.isDisplayed(true)).toBe(false);
     });
-  });
-
-  it("naive discreet mode toggle and assorted screens", async () => {
-    // Toggle discreet mode twice
-    const discreetButton = await $("#topbar-discreet-button");
-    await discreetButton.click();
-    await discreetButton.click();
-
-    const dashboardButton = await $("#drawer-dashboard-button");
-    await dashboardButton.click();
-    const exchangeButton = await $("#drawer-exchange-button");
-    await exchangeButton.click();
-
-    // Open settings and navigate all tabs
-    const settingsButton = await $("#topbar-settings-button");
-    await settingsButton.click();
-
-    // Open settings and navigate all tabs
-    const currenciesTab = await $("#settings-currencies-tab");
-    await currenciesTab.click();
-    const accountsTab = await $("#settings-accounts-tab");
-    await accountsTab.click();
-    const aboutTab = await $("#settings-about-tab");
-    await aboutTab.click();
-    const helpTab = await $("#settings-help-tab");
-    await helpTab.click();
-    const experimentalTab = await $("#settings-experimental-tab");
-    await experimentalTab.click();
-    expect(await modalPage.isDisplayed(true)).toBe(false);
   });
 });
