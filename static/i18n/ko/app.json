@@ -80,7 +80,7 @@
       "UNDELEGATE": "Undelegated",
       "SUPPLY": "Deposited",
       "REDEEM": "Withdrawn",
-      "APPROVE": "Enabled",
+      "APPROVE": "Approved",
       "VOTE": "Voted",
       "FREEZE": "Frozen",
       "UNFREEZE": "Unfrozen",
@@ -120,13 +120,24 @@
     "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "관리자",
-    "exchange": "암호화 자산 구입",
+    "exchange": "Buy",
     "swap": "Swap",
-    "lend": "Lend crypto"
+    "lend": "Lend"
   },
   "stars": {
     "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
     "tooltip": "Star account"
+  },
+  "bridge": {
+    "modalTitle": "Open Device Bridge",
+    "openHeader": "Expose your Device accounts through WebSocket",
+    "openDescription": "Opening a bridge exposes all of your accounts to third party applications.",
+    "openedHeader": "{{appName}} bridge opened",
+    "openedDescription": "You can now access your {{appName}} account on third party web application through WebSocket.",
+    "completeHeader": "Bridge session completed",
+    "completeDescription": "The websocket bridge is now closed.",
+    "openButton": "Open",
+    "disconnectButton": "Disconnect"
   },
   "swap": {
     "title": "Swap",
@@ -313,38 +324,37 @@
       "cta": "Got it"
     },
     "account": {
-      "amountSupplied": "Amount supplied",
+      "amountSupplied": "Amount deposited",
       "amountSuppliedTooltip": "Amount lent to the network",
       "currencyAPY": "Currency APY",
-      "currencyAPYTooltip": "Actual return rate of a supply by the end of the year if the deposit is continuously compounded.",
-      "accruedInterests": "Accrued interests",
-      "accruedInterestsTooltip": "Interest being generated",
+      "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
+      "accruedInterests": "Accrued interest",
+      "accruedInterestsTooltip": "Interest generated on your lent assets",
       "interestEarned": "Interest earned",
-      "interestEarnedTooltip": "--! NEED TEXT HERE !--",
+      "interestEarnedTooltip": "Interest you have earned after withdrawal",
       "openLoans": "Open loans",
       "closedLoans": "Closed loans",
-      "amountRedeemed": "Amount redeemed",
-      "amountRedeemedTooltip": "--! NEED TEXT HERE !--",
+      "amountRedeemed": "Amount withdrawn",
       "date": "Date",
-      "info": "You can lend assets directly from your {{currency}} account and earn passive revenue.",
+      "info": "You can lend assets directly from your {{currency}} account and earn interest.",
       "howCompoundWorks": "How does lending on Compound work?",
-      "lend": "Lend {{currency}}"
+      "lend": "Deposit {{currency}}"
     },
     "emptyState": {
       "active": {
         "title": "Lending",
-        "description": "You can lend assets directly from your Ethereum accounts and earn passive revenue.",
+        "description": "You can lend assets directly from your Ethereum accounts and earn interest.",
         "cta": "How does lending on Compound work?"
       },
       "closed": {
-        "title": "Your closed loans swaps will appear here",
+        "title": "Your closed loans will appear here",
         "description": "You have not made any loans yet.",
-        "cta": "Lend now"
+        "cta": "Deposit"
       },
       "history": {
         "title": "History",
         "description": "View the history of all your loan transactions.",
-        "cta": "Lend now"
+        "cta": "Deposit"
       }
     },
     "headers": {
@@ -352,8 +362,8 @@
         "accounts": "Account",
         "amountSupplied": "Current loan",
         "amountSuppliedTooltip": "Amount lent to the network",
-        "accruedInterests": "Interest earned",
-        "accruedInterestsTooltip": "Interest being generated",
+        "accruedInterests": "Accrued interest",
+        "accruedInterestsTooltip": "Interest generated on your lent assets",
         "status": "Status",
         "statusTooltip": "Current account status",
         "actions": "Actions"
@@ -363,7 +373,7 @@
         "toSupplyTooltip": "You can now supply your assets"
       },
       "closed": {
-        "assetLended": "Asset lended",
+        "assetLended": "Asset",
         "amountRedeemed": "Withdrawal amount",
         "interestsEarned": "Interest earned",
         "date": "Date"
@@ -371,11 +381,11 @@
       "rates": {
         "allAssets": "Asset",
         "totalBalance": "Available balance",
-        "totalBalanceTooltip": "Total balance of all the accounts excluding the amount supplied.",
+        "totalBalanceTooltip": "Total balance of your accounts excluding the amount deposited",
         "grossSupply": "Gross supply",
-        "grossSupplyTooltip": "Total amount of assets deposited on the network",
+        "grossSupplyTooltip": "Total amount of assets deposited on the protocol",
         "currentAPY": "Current APY",
-        "currentAPYTooltip": "Actual return rate of a supply by the end of the year if the deposit is continuously compounded.",
+        "currentAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
         "actions": "Actions"
       }
     },
@@ -384,16 +394,14 @@
       "title": "Manage loan",
       "enable": {
         "approve": "Approve",
-        "approveLess": "Approve less",
-        "approveMore": "Approve more",
+        "manageLimit": "Manage limit",
         "viewDetails": "View details",
-        "info": "You can supply <0>{{amount}}</0> out of the <1>{{enabled}} {{assetName}}</1> initially enabled.",
-        "infoNoLimit": "You have supplied <0>{{supplied}}</0> out of a no limit approved account.",
-        "notSupplied": "You have approved <0>{{enabled}}</0> on this account.",
-        "notSuppliedNoLimit": "You have approved this account by an unlimited amount.",
-        "enabling": "The approval transaction allowing you to lend is pending",
-        "notEnabled": "Before lending assets to the Compound protocol, you need to approve your account.",
-        "notEnoughApproved": "You don't have enough balance approved to supply assets."
+        "info": "You have deposited <0>{{amount}}</0> from this account.",
+        "notSupplied": "You can now deposit from this account.",
+        "notSuppliedNoLimit": "You can deposit assets from this account.",
+        "enabling": "You can deposit assets once the account approval is confirmed.",
+        "notEnabled": "You must approve your account before you can lend assets.",
+        "notEnoughApproved": "You must increase the limit approved on your account to lend."
       },
       "supply": {
         "title": "Deposit",
@@ -405,7 +413,7 @@
       }
     },
     "enable": {
-      "title": "Enable account",
+      "title": "Approve account",
       "steps": {
         "selectAccount": {
           "title": "Select account",
@@ -421,7 +429,7 @@
           "noLimit": "no limit {{assetName}}",
           "contractName": "Compound {{currencyName}}",
           "advanced": "Advanced",
-          "amountLabel": "Amount to enable",
+          "amountLabel": "Amount to approve",
           "amountLabelTooltip": "This limits the amount available to the smart contract."
         },
         "connectDevice": {
@@ -450,7 +458,7 @@
           "title": "Amount",
           "advanced": "Advanced",
           "amountLabel": "Amount to withdraw",
-          "available": "Available balance: <0>{{amountAvailable}}</0>",
+          "amountToWithdraw": "Amount to withdraw",
           "withdrawAll": "Withdraw Max",
           "placeholder": "Withdraw Max",
           "maxWithdrawble": "Maximum amount to withdraw is"
@@ -478,7 +486,7 @@
         "title": "Lend Crypto",
         "subtitle": "Lend assets on the Compound protocol",
         "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
-        "switchLabel": "I have read, understand and accept the <0>Terms & Conditions.</0>"
+        "switchLabel": "<1>I have read and agree with the </1><0>Terms of Use</0><1>.</1>"
       },
       "steps": {
         "title": "Step <0>{{step}} / {{total}}</0>",
@@ -504,7 +512,8 @@
           "title": "Amount",
           "selectedAccount": "Selected account",
           "amountToSupply": "Amount to deposit",
-          "available": "Available balance"
+          "available": "Available balance",
+          "maxSupply": "Maximum amount to lend is"
         },
         "device": {
           "title": "Device"
@@ -596,6 +605,7 @@
       "cta": "Clear cache"
     },
     "migrate": "Ledger Live accounts update available",
+    "ongoingScams": "There are ongoing phishing scams on our userbase, please be careful and never share your recovery phrase.",
     "genericTerminatedCrypto": "{{coinName}}은(는) 더 이상 지원되지 않습니다.",
     "ledgerAcademy": {
       "title": "Ledger Academy",
