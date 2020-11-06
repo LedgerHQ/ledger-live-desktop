@@ -1,11 +1,10 @@
 import fs from "fs";
-import electronPath from "electron";
 import path from "path";
 import rimraf from "rimraf";
 import { Application } from "spectron";
 
 Application.prototype.startChromeDriver = function() {
-  return {
+  this.chromeDriver = {
     start: () => {
       return Promise.resolve();
     },
@@ -17,11 +16,13 @@ Application.prototype.startChromeDriver = function() {
     },
     getLogs: () => {},
   };
+  return this.chromeDriver.start();
 };
 
-const userDataPath = `${__dirname}/tmp/${Math.random()
+const userDataPathKey = Math.random()
   .toString(36)
-  .substring(2, 5)}`;
+  .substring(2, 5);
+const userDataPath = path.join(__dirname, "tmp", userDataPathKey);
 
 export const removeUserData = () => {
   if (fs.existsSync(`${userDataPath}`)) {
@@ -37,20 +38,8 @@ export function applicationProxy(envVar, userData = null) {
     fs.copyFileSync(jsonFile, `${userDataPath}/app.json`);
   }
 
-  const bundlePath = path.join(process.cwd(), "/.webpack/main.bundle.js");
-
   return new Application({
-    path: electronPath,
-    args: [bundlePath],
-    chromeDriverArgs: [
-      "--disable-extensions",
-      "--disable-dev-shm-usage",
-      "--no-sandbox",
-      "--lang=en",
-      `--user-data-dir=${userDataPath}`,
-    ],
-    env: envVar,
-    // webdriverLogPath: path.join(__dirname, "wd.log"),
+    path: require("electron"), // just to make spectron happy since we override everything below
     webdriverOptions: {
       capabilities: {
         "goog:chromeOptions": {
@@ -66,13 +55,13 @@ export function applicationProxy(envVar, userData = null) {
             "--disable-dev-shm-usage",
             "--no-sandbox",
             "--lang=en",
-            "--user-data-dir=/app/tests/tmp/0zl",
+            `--user-data-dir=/app/tests/tmp/${userDataPathKey}`,
           ],
           debuggerAddress: undefined,
           windowTypes: ["app", "webview"],
         },
       },
-    }
+    },
   });
 }
 

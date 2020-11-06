@@ -19,7 +19,7 @@
     "install-flow-typed": "flow-typed install -s",
     "preinstall-deps": "rimraf node_modules/paralleljs/package.json",
     "install-deps": "electron-builder install-app-deps",
-    "prepublish": "bash ./scripts/sync-families-dispatch.sh",
+    "prepublishOnly": "bash ./scripts/sync-families-dispatch.sh",
     "postinstall": "node ./scripts/post-install.js",
     "dist:internal": "cross-env NODE_ENV=production DEBUG=electron-builder electron-builder",
     "dist": "node ./tools/dist",

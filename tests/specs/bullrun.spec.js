@@ -19,7 +19,6 @@ describe("Bullrun", () => {
 
   it("opens a window", async () => {
     await app.client.waitUntilWindowLoaded();
-    await app.client.getWindowCount().then(count => expect(count).toBe(1));
     await app.client.browserWindow.isMinimized().then(minimized => expect(minimized).toBe(false));
     await app.client.browserWindow.isVisible().then(visible => expect(visible).toBe(true));
     await app.client.browserWindow.isFocused().then(focused => expect(focused).toBe(true));
