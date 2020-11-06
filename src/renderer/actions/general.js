@@ -3,14 +3,14 @@ import { useMemo, useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { OutputSelector } from "reselect";
 import { createSelector } from "reselect";
-import type { Currency, AccountLikeArray, Account } from "@ledgerhq/live-common/lib/types";
-import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
+import type { Account } from "@ledgerhq/live-common/lib/types";
 import { isAccountDelegating } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import {
   nestedSortAccounts,
   flattenSortAccounts,
   sortAccountsComparatorFromOrder,
 } from "@ledgerhq/live-common/lib/account";
+import type { FlattenAccountsOptions } from "@ledgerhq/live-common/lib/account";
 import {
   useDistribution as useDistributionCommon,
   useCalculateCountervalueCallback as useCalculateCountervalueCallbackCommon,
@@ -53,17 +53,18 @@ export function useNestedSortAccounts() {
   return useMemo(() => nestedSortAccounts(accounts, comparator), [accounts, comparator]);
 }
 
-export function useFlattenSortAccountsEnforceHideEmptyToken() {
+export function useFlattenSortAccounts(options?: FlattenAccountsOptions) {
   const accounts = useSelector(accountsSelector);
   const comparator = useSortAccountsComparator();
-  return useMemo(
-    () => flattenSortAccounts(accounts, comparator, { enforceHideEmptySubAccounts: true }),
-    [accounts, comparator],
-  );
+  return useMemo(() => flattenSortAccounts(accounts, comparator, options), [
+    accounts,
+    comparator,
+    options,
+  ]);
 }
 
-export function useHaveUndelegatedAccountsSelector() {
-  const accounts = useFlattenSortAccountsEnforceHideEmptyToken();
+export function useHaveUndelegatedAccounts() {
+  const accounts = useFlattenSortAccounts({ enforceHideEmptySubAccounts: true });
   return useMemo(
     () =>
       accounts.some(

@@ -8,7 +8,7 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import { Redirect } from "react-router";
 import { TopBannerContainer } from "~/renderer/screens/dashboard";
-import { useFlattenSortAccountsEnforceHideEmptyToken } from "~/renderer/actions/general";
+import { useFlattenSortAccounts } from "~/renderer/actions/general";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { accountsViewModeSelector, selectedTimeRangeSelector } from "~/renderer/reducers/settings";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -21,7 +21,7 @@ export default function AccountsPage() {
   const mode = useSelector(accountsViewModeSelector);
   const range = useSelector(selectedTimeRangeSelector);
   const rawAccounts = useSelector(accountsSelector);
-  const flattenedAccounts = useFlattenSortAccountsEnforceHideEmptyToken();
+  const flattenedAccounts = useFlattenSortAccounts({ enforceHideEmptySubAccounts: true });
   const accounts = mode === "card" ? flattenedAccounts : rawAccounts;
 
   const history = useHistory();

@@ -84,9 +84,9 @@ export function useSoftReset() {
     await delay(500);
     log("clear-cache", "cleanCache()");
     await cleanCache();
+    wipe();
     await resetLibcore();
     log("clear-cache", "reload()");
-    wipe();
     reload();
   }, [dispatch, wipe]);
 }

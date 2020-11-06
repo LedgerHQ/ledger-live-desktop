@@ -18,7 +18,7 @@ import {
   countervalueFirstSelector,
   selectedTimeRangeSelector,
 } from "~/renderer/reducers/settings";
-import { useFlattenSortAccountsEnforceHideEmptyToken } from "~/renderer/actions/general";
+import { useFlattenSortAccounts } from "~/renderer/actions/general";
 import AssetHeader from "./AssetHeader";
 import TrackPage from "~/renderer/analytics/TrackPage";
 
@@ -42,7 +42,7 @@ export default function AssetPage({ match }: Props) {
   const countervalueFirst = useSelector(countervalueFirstSelector);
   const allAccounts = useSelector(accountsSelector);
   const history = useHistory();
-  const accounts = useFlattenSortAccountsEnforceHideEmptyToken().filter(
+  const accounts = useFlattenSortAccounts({ enforceHideEmptySubAccounts: true }).filter(
     a => getAccountCurrency(a).id === match.params.assetId,
   );
 
