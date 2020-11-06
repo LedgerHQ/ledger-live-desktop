@@ -7,7 +7,7 @@ describe("When I launch the app for the first time", () => {
   let app;
 
   beforeAll(() => {
-    app = applicationProxy({ MOCK: true, DISABLE_MOCK_POINTER_EVENTS: true }, "btcFamily");
+    app = applicationProxy("btcFamily", { MOCK: true, DISABLE_MOCK_POINTER_EVENTS: true });
 
     return app.start();
   });

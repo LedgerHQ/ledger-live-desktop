@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import rimraf from "rimraf";
 import { Application } from "spectron";
+import _ from "lodash";
 
 Application.prototype.startChromeDriver = function() {
   this.chromeDriver = {
@@ -30,8 +31,18 @@ export const removeUserData = () => {
   }
 };
 
-export function applicationProxy(envVar, userData = null) {
+export function applicationProxy(userData = null, env = {}) {
   fs.mkdirSync(userDataPath, { recursive: true });
+
+  env = Object.assign(
+    {
+      MOCK: true,
+      DISABLE_MOCK_POINTER_EVENTS: true,
+      HIDE_DEBUG_MOCK: true,
+      DISABLE_DEV_TOOLS: true,
+    },
+    env,
+  );
 
   if (userData !== null) {
     const jsonFile = path.resolve("tests/setups/", `${userData}.json`);
@@ -47,16 +58,12 @@ export function applicationProxy(envVar, userData = null) {
           args: [
             "spectron-path=/node_modules/electron/dist/electron",
             "spectron-arg0=/app/.webpack/main.bundle.js",
-            "spectron-env-MOCK=true",
-            "spectron-env-DISABLE_MOCK_POINTER_EVENTS=true",
-            "spectron-env-HIDE_DEBUG_MOCK=true",
-            "spectron-env-DISABLE_DEV_TOOLS=true",
             "--disable-extensions",
             "--disable-dev-shm-usage",
             "--no-sandbox",
             "--lang=en",
             `--user-data-dir=/app/tests/tmp/${userDataPathKey}`,
-          ],
+          ].concat(_.map(env, (value, key) => `spectron-env-${key}=${value.toString()}`)),
           debuggerAddress: undefined,
           windowTypes: ["app", "webview"],
         },
