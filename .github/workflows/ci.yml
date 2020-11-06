@@ -64,13 +64,4 @@ jobs:
           ## Diff output
           ${{ steps.comment.outputs.body }}
 
-          **Please download attached [snapshots.zip](https://github.com/LedgerHQ/ledger-live-desktop/actions/runs/$GITHUB_RUN_ID), extract it in `tests/specs/__image_snapshots__` folder and update your PR with it**
-
           EOF
-          echo "::set-output name=artifact::1"
-      - name: save PR message as artifact
-        if: steps.create.outputs.artifact == '1' && failure()
-        uses: actions/upload-artifact@v2
-        with:
-          name: pr_message
-          path: artifacts
