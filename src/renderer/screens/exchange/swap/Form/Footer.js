@@ -68,7 +68,13 @@ const Footer = ({
             />
           </CountdownTimerWrapper>
         ) : null}
-        <Button onClick={onStartSwap} primary event="SwapFormOpenModal" disabled={!canContinue}>
+        <Button
+          id="swap-form-continue-button"
+          onClick={onStartSwap}
+          primary
+          event="SwapFormOpenModal"
+          disabled={!canContinue}
+        >
           <Trans i18nKey={"swap.form.exchange"} />
         </Button>
       </Box>
