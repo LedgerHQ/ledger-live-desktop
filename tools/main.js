@@ -45,7 +45,7 @@ const buildMainEnv = (mode, config, argv) => {
   };
 
   if (mode === "development") {
-    env.INDEX_URL = JSON.stringify(`http://localhost:${argv.port}/webpack/index.html`);
+    env.INDEX_URL = JSON.stringify(`http://host.docker.internal:${argv.port}/webpack/index.html`);
   }
 
   return env;

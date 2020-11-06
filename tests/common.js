@@ -42,7 +42,11 @@ export default function initialize() {
     lockscreenPage = new LockscreenPage(app);
     mockDeviceEvent = getMockDeviceEvent(app);
 
-    await app.start();
+    try {
+      await app.start();
+    } catch (e) {
+      console.log("app start error", e);
+    }
 
     app.client.addCommand("screenshot", function(countdown = 500) {
       this.pause(countdown);
