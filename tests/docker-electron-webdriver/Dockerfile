@@ -38,16 +38,40 @@ RUN apt-get -qqy install \
 # Chromedriver dependencies
 #=====
 RUN apt-get -qqy install \
-  libnss3-dev libgconf-2-4 fuse libgtk2.0-0 libgtk-3-0 libasound2
+  libnss3-dev libgconf-2-4 fuse libgtk2.0-0 libgtk-3-0 libasound2 \
+  libudev-dev \
+  libusb-1.0-0 \
+  libusb-1.0-0-dev \
+  lib32z1 \
+  lib32ncurses5 \
+  rpm \
+  fakeroot \
+  dpkg \
+  libdbus-1-dev \
+  libx11-dev \
+  libavahi-compat-libdnssd-dev \
+  g++ \
+  gcc-multilib \
+  g++-multilib \
+  libgtk-3-dev \
+  libxtst6 \
+  libxss1 \
+  libnss3
 
 RUN rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
-ADD entrypoint.sh /entrypoint.sh
+ADD tests/docker-electron-webdriver/entrypoint.sh /entrypoint.sh
 RUN chmod 777 /entrypoint.sh
 
 RUN npm install electron-chromedriver@9.0.0
 RUN npm install electron@9.2.0
 RUN npm install spectron@11.1.0
+
+COPY package.json /app/package.json
+COPY scripts /app/scripts
+COPY yarn.lock /app/yarn.lock
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash
+RUN cd /app && yarn --frozen-lockfile
 
 #==============================
 # Generating the VNC password as node

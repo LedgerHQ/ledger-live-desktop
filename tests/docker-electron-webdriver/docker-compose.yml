@@ -2,13 +2,15 @@ version: "3.8"
 services:
   electron:
     build:
-      context: .
+      context: ../..
+      dockerfile: tests/docker-electron-webdriver/Dockerfile
     volumes:
       - /dev/shm:/dev/shm
-      - ../..:/app # Your app will be available in the /app dir in the container
+      - ../../.webpack:/app/.webpack
+      - ../../tests:/app/tests
     environment:
       SCREEN_WIDTH: 1024
-      SCREEN_HEIGHT: 768
+      SCREEN_HEIGHT: 788
       CHROMEDRIVER_OPTS: "--url-base=/"
       # Other configuration options here
     ports:
