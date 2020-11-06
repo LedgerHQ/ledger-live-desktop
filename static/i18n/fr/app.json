@@ -2219,7 +2219,7 @@
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
-      "title": "Vous ne pouvez pas reduire le montant activé avec un prêt actif."
+      "title": "Vous ne pouvez pas réduire le montant activé avec un prêt actif."
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Quelque chose s'est mal passé (Erreur #1)",
