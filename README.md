@@ -97,7 +97,7 @@ In a terminal you need to have webpack dev server running
 yarn start
 ```
 
-In an other terminal you need to launch the webdriver/electron container. Since Docker is intelligent it launches fast if nothing changed in `package.json` and `yarn.lock`. We need to build `node_modules` in the container for packages with native dependencies to work.
+In an other terminal you need to launch the webdriver/electron container. Since Docker is intelligent it launches fast if nothing changed in `package.json` and `yarn.lock`. We need to build `node_modules` in the container for packages with native dependencies to work. So remember to stop and re run this command when packages are updated.
 ```bash
 docker-compose up --build
 ```
