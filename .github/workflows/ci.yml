@@ -33,10 +33,12 @@ jobs:
         run: yarn --frozen-lockfile
       - name: run code checks
         run: yarn ci
+      - name: check build
+        run: sudo yarn build
       - name: start electron webdriver
         run: cd tests/docker-electron-webdriver && docker-compose up -d
-      - name: run spectron on a build
-        run: sudo yarn build && yarn spectron
+      - name: run spectron
+        run: yarn spectron
       - name: check
         if: always()
         run: |
@@ -67,3 +69,9 @@ jobs:
           ${{ steps.comment.outputs.body }}
 
           EOF
+      - name: save PR message as artifact
+        if: steps.create.outputs.artifact == '1' && failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: pr_message
+          path: artifacts
