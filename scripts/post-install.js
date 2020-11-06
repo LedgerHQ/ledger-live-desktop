@@ -2,6 +2,7 @@ const chalk = require("chalk");
 const hasha = require("hasha");
 const execa = require("execa");
 const fs = require("fs");
+const child_process = require("child_process");
 
 console.log("running");
 
@@ -42,6 +43,11 @@ async function main() {
     } catch (error) {
       console.log(chalk.red("rebuilding error"));
     }
+  }
+
+  // when running inside the test electron container, there is no src.
+  if (fs.existsSync("src")) {
+    child_process.exec("bash ./scripts/sync-families-dispatch.sh");
   }
 }
 
