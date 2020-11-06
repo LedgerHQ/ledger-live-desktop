@@ -153,7 +153,11 @@ const StepSummary = ({
         </FakeLink>
       </ProviderWrapper>
       <Box mt={6} horizontal alignItems={"center"} onClick={onSwitchAccept}>
-        <CheckBox onChange={onSwitchAccept} isChecked={checkedDisclaimer} />
+        <CheckBox
+          id="swap-modal-summary-provider-tos-checkbox"
+          onChange={onSwitchAccept}
+          isChecked={checkedDisclaimer}
+        />
         <Text
           ff="Inter|Regular"
           fontSize={3}
@@ -218,6 +222,7 @@ export const StepSummaryFooter = ({
         onClick={onContinue}
         disabled={disabled}
         primary
+        id="swap-modal-summary-continue-button"
         data-e2e="modal_buttonContinue_swap"
       >
         <Trans i18nKey="common.confirm" />

@@ -378,7 +378,7 @@ export const renderSwapDeviceConfirmation = ({
       <Trans i18nKey="DeviceAction.swap.notice" />
     </InfoBox>
     {renderVerifyUnwrapped({ modelId, type })}
-    <Box alignItems={"center"}>
+    <Box id="swap-modal-device-confirm" alignItems={"center"}>
       <Text textAlign="center" ff="Inter|SemiBold" color="palette.text.shade100" fontSize={5}>
         <Trans i18nKey="DeviceAction.swap.confirm" />
       </Text>

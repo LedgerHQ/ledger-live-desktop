@@ -163,6 +163,7 @@ const SwapInputGroup = ({
           <Trans i18nKey={`swap.form.to.currency`} />
         </Label>
         <SelectCurrency
+          id="swap-form-to-currency"
           renderOptionOverride={renderOptionOverride}
           currencies={currencies}
           autoFocus={true}
@@ -178,6 +179,7 @@ const SwapInputGroup = ({
         </Label>
         {hasMaybeValidAccounts || !currency ? (
           <SelectAccount
+            id="swap-form-to-account"
             isDisabled={!currency}
             accounts={availableAccounts}
             value={{ account, subAccount }}
