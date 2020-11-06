@@ -41,14 +41,24 @@ export const Header = () => (
       <Trans i18nKey="delegation.status" />
     </TableLine>
     <TableLine>
+      <Trans i18nKey="polkadot.nomination.commission" />
+    </TableLine>
+    <TableLine>
       <Trans i18nKey="polkadot.nomination.totalStake" />
     </TableLine>
     <TableLine>
       <Trans i18nKey="delegation.value" />
     </TableLine>
+  </Wrapper>
+);
+
+export const UnbondingHeader = () => (
+  <Wrapper>
     <TableLine>
-      <Trans i18nKey="polkadot.nomination.share" />
+      <Trans i18nKey="delegation.value" />
     </TableLine>
-    {/* <TableLine /> */}
+    <TableLine>
+      <Trans i18nKey="delegation.completionDate" />
+    </TableLine>
   </Wrapper>
 );

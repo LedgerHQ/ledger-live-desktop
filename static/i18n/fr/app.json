@@ -102,7 +102,9 @@
       "BOND": "Lié",
       "UNBOND": "Délié",
       "SLASH": "Sabrage",
-      "WITHDRAW_UNBONDED": "Retrait de fonds délié"
+      "WITHDRAW_UNBONDED": "Retrait",
+      "NOMINATE": "Nomination",
+      "CHILL": "Fin de nomination"
     }
   },
   "byteSize": {
@@ -1797,11 +1799,28 @@
   },
   "polkadot": {
     "lockedBalance": "Actifs liés au staking",
-    "lockedTooltip": "Les actifs liés peut être utilisé pour obtenir des récompenses en nommant des validateurs.",
+    "lockedTooltip": "Les actifs liés peut être utilisé pour obtenir des récompenses en nominant des validateurs.",
     "unlockingBalance": "Actifs en cours de débloquage",
     "unlockingTooltip": "Les actifs déliés restent verrouillés pendant 28 jours avant d'être disponibles.",
     "unlockedBalance": "Actifs déliés",
-    "unlockedTooltip": "Les actifs déliés peuvent être retirés après une période de 28 jours."
+    "unlockedTooltip": "Les actifs déliés peuvent être retirés après une période de 28 jours.",
+    "nomination": {
+      "emptyState": {
+        "description": "Vous pouvez gagner des récompenses DOT en liant vos actifs et en nommant des validateurs.",
+        "info": "Comment fonctionne la nomination"
+      },
+      "header": "Nominations",
+      "update": "Changer les validateurs",
+      "nominate": "Nominer",
+      "chill": "Arrêter la nomination",
+      "totalStake": "Participation totale",
+      "commission": "Commission",
+      "active": "Actif",
+      "activeTooltip": "Ce validateur a été élu et collecte des récompenses grâce à une partie de vos actifs liés.",
+      "inactive": "Inactif",
+      "inactiveTooltip": "Ce validateur a été élu mais ne collecte aucune récompense grâce à vos actifs liés.",
+      "waiting": "En attente",
+      "waitingTooltip": "Ce validateur n'a pas été élu."
   },
   "delegation": {
     "title": "Obtenez des récompenses",

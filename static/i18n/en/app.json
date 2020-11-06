@@ -102,7 +102,9 @@
       "BOND": "Bond",
       "UNBOND": "Unbond",
       "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Unbonded Withdrawal"
+      "WITHDRAW_UNBONDED": "Unbonded Withdrawal",
+      "NOMINATE": "Nomination",
+      "CHILL": "Chill"
     }
   },
   "byteSize": {
@@ -1797,17 +1799,24 @@
   },
   "polkadot": {
     "lockedBalance": "Locked balance",
-    "lockedTooltip": "Bonded value can be used to nominate validators and earn rewards.",
+    "lockedTooltip": "Bonded assets can be used to nominate validators and earn rewards.",
     "unlockingBalance": "Unlocking balance",
-    "unlockingTooltip": "Unbonded value stays locked during 28 days before being available for withdrawal.",
+    "unlockingTooltip": "Unbonded assets stay locked during 28 days before being available for withdrawal.",
     "unlockedBalance": "Unlocked balance",
-    "unlockedTooltip": "After 28 days of unbonding period, value is available for withdrawal.",
+    "unlockedTooltip": "After 28 days of unbonding period, assets can be withdrawn.",
     "nomination": {
+      "emptyState": {
+        "description": "You can earn DOT rewards by bonding your assets and nominating validators.",
+        "info": "How nomination works"
+      },
       "header": "Nominations",
+      "update": "Change validators",
+      "nominate": "Nominate",
+      "chill": "Stop nominating",
       "totalStake": "Total Stake",
-      "share": "Stake Share (%)",
+      "commission": "Commission",
       "active": "Active",
-      "activeTooltip": "This validator has been elected and is collecting rewards with some of your bonded funds.",
+      "activeTooltip": "This validator has been elected and is collecting rewards with some of your bonded assets.",
       "inactive": "Inactive",
       "inactiveTooltip": "This validator has been elected and is not collecting rewards with your stake.",
       "waiting": "Waiting",
