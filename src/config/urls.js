@@ -94,6 +94,8 @@ export const urls = {
     "https://www.ledger.com/staking-tron?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=tron",
   stakingCosmos:
     "https://www.ledger.com/staking-cosmos?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=cosmos",
+  stakingPolkadot:
+    "https://www.ledger.com/staking-polkadot?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=polkadot",
   cosmosStakingRewards:
     "https://support.ledger.com/hc/en-us/articles/360014339340-Earn-Cosmos-staking-rewards,?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=cosmos",
   algorandStakingRewards:

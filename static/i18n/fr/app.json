@@ -1820,7 +1820,194 @@
       "inactive": "Inactif",
       "inactiveTooltip": "Ce validateur a été élu mais ne collecte aucune récompense grâce à vos actifs liés.",
       "waiting": "En attente",
-      "waitingTooltip": "Ce validateur n'a pas été élu."
+      "waitingTooltip": "Ce validateur n'a pas été élu.",
+      "elected": "Élu",
+      "nominatorsCount": "{{nominatorsCount}} nominateurs",
+      "oversubscribed": "Sursouscrit ({{nominatorsCount}})",
+      "controllerNeededWarning": "Vous devez être contrôleur d'un compte de réserve",
+      "flow": {
+        "title": "Nominer des validateurs",
+        "steps": {
+          "starter": {
+            "description": "Vous pouvez obtenir des récompenses en liant vos DOT puis en nommant des validateurs.",
+            "bullet": [
+              "Vous gardez la propriété des actifs liés",
+              "Nominez avec votre appareil Ledger",
+              "Les actifs seront disponibles 28 jours après avoir délié vos actifs."
+            ],
+            "help": "Comment fonctionne la nomination",
+            "termsAndPrivacy": "Choisissez vos validateurs judicieusement: Une partie de vos actifs liés peut être perdue si un validateur ne se comporte pas correctement."
+          },
+          "validator": {
+            "title": "Validateurs"
+          },
+          "connectDevice": {
+            "title": "Appareil"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "Nomination effectuée avec succès",
+              "text": "Le solde de votre compte sera actualisé dès que la blockchain aura confirmé la transaction.",
+              "cta": "Voir les détails"
+            },
+            "pending": {
+              "title": "Diffusion de la transaction..."
+            },
+            "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+          }
+        }
+      }
+    },
+    "unlockings": {
+      "header": "Actifs en cours de débloquage",
+      "headerTooltip": "Disponibles après le verrouillage de 28 jours",
+      "inactiveTooltip": "Les montants déliés ne génèrent pas de récompenses.",
+      "withdrawUnbonded": "Retirer actifs débloqués",
+      "withdrawTooltip": "Récupére l'intégralité des actifs débloqués",
+      "noUnlockedWarning": "Aucun actif débloqués à récupérer pour l'instant.",
+      "rebond": "Lier à nouveau"
+    },
+    "manage": {
+      "title": "Gérer les actifs",
+      "bond": {
+        "title": "Lier",
+        "description": "Verrouillez les actifs pour participer à la nomination de validateurs et gagner des récompenses."
+      },
+      "unbond": {
+        "title": "Délier",
+        "description": "Déverrouillez vos DOT pour les retrouver dans votre solde disponible. Vous ne gagnerez plus de récompenses grâce à ces actifs."
+      },
+      "nominate": {
+        "title": "Nominate",
+        "description": "Choississez jusqu'à 16 validateurs à élire et générer des récompenses."
+      }
+    },
+    "bond": {
+      "title": "Lier des actifs",
+      "steps": {
+        "amount": {
+          "title": "Montant",
+          "amountLabel": "Montant à lier",
+          "available": "Disponible: {{amountAvailable}}",
+          "info": "Les actifs liés peuvent être libérés après une période de 28 jours."
+        },
+        "connectDevice": {
+          "title": "Appareil"
+        },
+        "confirmation": {
+          "tooltip": {
+            "title": "Transaction en attente de validation",
+            "desc": "Vous devez attendre une minute avant de pouvoir voter"
+          },
+          "title": "Confirmation",
+          "success": {
+            "title": "",
+            "text": "Vous pourrez nominer des validateurs une fois que le réseau aura confirmé votre transaction.",
+            "votePending": "Nominer dans {{time}}",
+            "vote": "Nominer",
+            "later": "Nominer plus tard"
+          },
+          "pending": {
+            "title": "Liaison de vos actifs..."
+          },
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+        }
+      }
+    },
+    "rebond": {
+      "title": "Lier à nouveau des actifs",
+      "steps": {
+        "amount": {
+          "title": "Montant",
+          "amountLabel": "Montant à relier",
+          "unlocking": "En débloquage: {{amountUnlocking}}",
+          "info": "Les actifs reliés seront immédiatement ajoutée à la balance bloquée et sera part d'enjeu pour l'ère prochaine."
+        },
+        "connectDevice": {
+          "title": "Appareil"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "Confirmation",
+          "success": {
+            "title": "Actifs reliés avec succès",
+            "text": "Ces actifs participeront dès l'ère prochaine.",
+            "cta": "Voir le détail"
+          },
+          "pending": {
+            "title": "Reliaison de vos actifs..."
+          },
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+        }
+      }
+    },
+    "unbond": {
+      "title": "Délier des actifs",
+      "steps": {
+        "amount": {
+          "title": "Montant",
+          "amountLabel": "Montant à délier",
+          "unlocking": "Débloquable: {{amountUnlockable}}",
+          "info": "Les actifs déliés spourront être récupérés après une période de 28 jours."
+         },
+        "connectDevice": {
+          "title": "Appareil"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "Confirmation",
+          "success": {
+            "title": "Actifs déliés avec succès",
+            "text": "Ces actifs pourront être récupérés dans 28 jours.",
+            "cta": "Voir le détail"
+          },
+          "pending": {
+            "title": "Déliaison de vos actifs..."
+          },
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+        }
+      }
+    },
+    "simpleOperation": {
+      "modes": {
+        "withdrawUnbonded": {
+          "title": "Récupérer actifs",
+          "description": "Après une période de 28 jours vous pouvez récupérer vos actifs déliés.",
+          "info": "Vous récupérerez l'intégralité des actifs déliés dans votre solde disponible."
+
+        },
+        "chill": {
+          "title": "Arrêter de nominer",
+          "description": "Vous pouvez stopper la nomination de tous vos validateurs, et ce pour la prochaine ère.",
+          "info": "Cependant, vos actifs liés resteront intacts et seront verrouillés pendant 28 jours si vous souhaitez les délier."
+        }
+      },
+      "flow": {
+        "steps": {
+          "info": {
+            "title": "Info"
+          },
+          "connectDevice": {
+            "title": "Appareil"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "Transaction diffusée avec succès",
+              "text": "Vous pourrez retrouver cette opération dans votre historique.",
+              "cta": "Voir les détails"
+            },
+            "pending": {
+              "title": "Diffusion de la transaction..."
+            },
+            "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+          }
+        }
+      }
+    }
   },
   "delegation": {
     "title": "Obtenez des récompenses",
@@ -2626,14 +2813,16 @@
       "delegate": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
       "undelegate": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
       "redelegate": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
-      "claimRewardCompound": "Veuillez confirmer sur votre appareil pour finaliser l'opération"
+      "claimRewardCompound": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "nominate": "Veuillez confirmer sur votre appareil pour finaliser l'opération"
     },
     "recipientWording": {
       "send": "destinataire",
       "delegate": "validateur",
       "undelegate": "validateur",
       "claimReward": "destinataire des récompenses",
-      "optIn": "destinataire"
+      "optIn": "destinataire",
+      "nominate": "validateur"
     },
     "votes": "Votes ({{count}})"
   },
@@ -3186,6 +3375,9 @@
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Le montant doit être inférieur à {{unit}} {{maxAmountFrom}}"
+    },
+    "PolkadotLowBondedBalance": {
+      "title": "Tous les actifs débloquables seront déliés si il reste < 1 DOT"
     }
   }
 }

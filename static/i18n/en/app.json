@@ -1820,7 +1820,193 @@
       "inactive": "Inactive",
       "inactiveTooltip": "This validator has been elected and is not collecting rewards with your stake.",
       "waiting": "Waiting",
-      "waitingTooltip": "This validator has not been elected."
+      "waitingTooltip": "This validator has not been elected.",
+      "elected": "Elected",
+      "nominatorsCount": "{{nominatorsCount}} nominators",
+      "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
+      "controllerNeededWarning": "You must have a controller account",
+      "flow": {
+        "title": "Nominate",
+        "steps": {
+          "starter": {
+            "description": "You may earn rewards by bonding your DOT assets and nominating validators.",
+            "bullet": [
+              "You keep ownership of bonded assets",
+              "Nominate using your Ledger device",
+              "Assets will be available 28 days after unbonding"
+            ],
+            "help": "How nomination works",
+            "termsAndPrivacy": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
+          },
+          "validator": {
+            "title": "Validators"
+          },
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "You have successfully nominated validators",
+              "text": "Your account balance will be updated when the blockchain confirms the transaction.",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          }
+        }
+      }
+    },
+    "unlockings": {
+      "header": "Unlockings",
+      "headerTooltip": "Available after the 28-day timelock",
+      "inactiveTooltip": "Unbonded amounts do not generate rewards.",
+      "withdrawUnbonded": "Withdraw Unbonded",
+      "withdrawTooltip": "Transfers back unlocked balance",
+      "noUnlockedWarning": "No unlocked balance to withdraw yet.",
+      "rebond": "Rebond"
+    },
+    "manage": {
+      "title": "Manage assets",
+      "bond": {
+        "title": "Bond",
+        "description": "Lock assets bonded for staking and start earning rewards after nominating validators."
+      },
+      "unbond": {
+        "title": "Unbond",
+        "description": "Unlock DOT to have them back in your available balance. You will no longer earn rewards for those assets."
+      },
+      "nominate": {
+        "title": "Nominate",
+        "description": "Choose up to 16 validators to be elected to start earning rewards."
+      }
+    },
+    "bond": {
+      "title": "Bond assets",
+      "steps": {
+        "amount": {
+          "title": "Amount",
+          "amountLabel": "Amount to bond",
+          "available": "Available: {{amountAvailable}}",
+          "info": "After unbonding, assets can be withdrawn after a 28-day timelock period."
+        },
+        "connectDevice": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "tooltip": {
+            "title": "Transaction is awaiting validation",
+            "desc": "You have to wait a minute before being able to vote"
+          },
+          "title": "Confirmation",
+          "success": {
+            "title": "",
+            "text": "You will will be able to nominate validators once the network has confirmed your transaction.",
+            "votePending": "Nominate in {{time}}",
+            "vote": "Nominate",
+            "later": "Nominate later"
+          },
+          "pending": {
+            "title": "Bonding your assets..."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    },
+    "rebond": {
+      "title": "Rebond assets",
+      "steps": {
+        "amount": {
+          "title": "Amount",
+          "amountLabel": "Amount to rebond",
+          "unlocking": "Unlocking: {{amountUnlocking}}",
+          "info": "Rebonded assets will be immediately added to bonded balance and will participate in staking for next era."
+        },
+        "connectDevice": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "Confirmation",
+          "success": {
+            "title": "Assets successfully rebonded.",
+            "text": "Newly bonded assets will be active for next era.",
+            "cta": "View details"
+          },
+          "pending": {
+            "title": "Rebonding your assets..."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    },
+    "unbond": {
+      "title": "Unbond assets",
+      "steps": {
+        "amount": {
+          "title": "Amount",
+          "amountLabel": "Amount to unbond",
+          "unlockable": "Unlockable: {{amountUnlockable}}",
+          "info": "Unbonded assets can be withdrawn after a 28-day timelock period."
+        },
+        "connectDevice": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "Confirmation",
+          "success": {
+            "title": "Assets successfully unbonded",
+            "text": "Unbonded assets can be withdrawn in 28-days.",
+            "cta": "View details"
+          },
+          "pending": {
+            "title": "Unbonding your assets..."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    },
+    "simpleOperation": {
+      "modes": {
+        "withdrawUnbonded": {
+          "title": "Withdraw unbonded",
+          "description": "After a 28-day timelock you can withdraw unbonded assets.",
+          "info": "You will fully get back your unbonded assets as available balance."
+
+        },
+        "chill": {
+          "title": "Chill",
+          "description": "You can stop nominating all your validators for next era.",
+          "info": "Bonded assets will stay untouched and will be locked for a 28-day timelock period if unbonded."
+        }
+      },
+      "flow": {
+        "steps": {
+          "info": {
+            "title": "Info"
+          },
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "label": "Confirmation",
+            "success": {
+              "title": "Transaction successfully sent !",
+              "text": "You will see your operation in history soon.",
+              "cta": "View details"
+            },
+            "pending": {
+              "title": "Broadcasting transaction..."
+            },
+            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          }
+        }
+      }
     }
   },
   "delegation": {
@@ -2627,14 +2813,16 @@
       "delegate": "Please confirm on your device to finalize the operation",
       "undelegate": "Please confirm on your device to finalize the operation",
       "redelegate": "Please confirm on your device to finalize the operation",
-      "claimRewardCompound": "Please confirm on your device to finalize the operation"
+      "claimRewardCompound": "Please confirm on your device to finalize the operation",
+      "nominate": "Please confirm on your device to finalize the operation"
     },
     "recipientWording": {
       "send": "recipient",
       "delegate": "validator",
       "undelegate": "validator",
       "claimReward": "rewards recipient",
-      "optIn": "recipient"
+      "optIn": "recipient",
+      "nominate": "validator"
     },
     "votes": "Votes ({{count}})"
   },
@@ -3187,6 +3375,9 @@
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Amount must be less than {{unit}} {{maxAmountFrom}}"
+    },
+    "PolkadotLowBondedBalance": {
+      "title": "All unlockable assets will be unbonded if remaining < 1 DOT"
     }
   }
 }
