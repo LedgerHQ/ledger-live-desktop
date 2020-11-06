@@ -9,6 +9,7 @@ export type FeatureCommon = {
   title: string,
   description: string,
   shadow?: boolean,
+  dirty?: boolean, // NB Will trigger a clear cache if changed
 };
 
 export type FeatureToggle =
@@ -76,6 +77,7 @@ export const experimentalFeatures: Feature[] = [
       "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts.",
     minValue: 20,
     maxValue: 999,
+    dirty: true,
   },
   {
     type: "integer",
@@ -87,12 +89,10 @@ export const experimentalFeatures: Feature[] = [
   },
   {
     type: "toggle",
-    name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
-    valueOn: "ethereum",
-    valueOff: "",
-    title: "Experimental Ethereum implementation",
+    name: "EXPERIMENTAL_QUIT_APP",
+    title: "Quit apps automatically",
     description:
-      "Switch to a new JavaScript implementation of Ethereum. This should improve performance and fix a few bugs, as well as display token operations as fee operations instead of send transactions.",
+      "Enabling this setting will automatically quit an application on your device when another one needs to be opened. This will make switching between apps more seamless.",
   },
 ];
 

@@ -14,6 +14,7 @@ import {
   getMainAccount,
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account";
+import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
 import type { TFunction } from "react-i18next";
 import { rgba } from "~/renderer/styles/helpers";
 import { openModal } from "~/renderer/actions/modals";
@@ -31,6 +32,7 @@ import IconSwap from "~/renderer/icons/Swap";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
+import Graph from "~/renderer/icons/Graph";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 
@@ -65,9 +67,16 @@ type OwnProps = {
 type Props = OwnProps & {
   t: TFunction,
   openModal: Function,
+  isCompoundEnabled?: boolean,
 };
 
-const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) => {
+const AccountHeaderActions = ({
+  account,
+  parentAccount,
+  openModal,
+  t,
+  isCompoundEnabled,
+}: Props) => {
   const mainAccount = getMainAccount(account, parentAccount);
   const PerFamily = perFamily[mainAccount.currency.family];
   const decorators = perFamilyAccountActions[mainAccount.currency.family];
@@ -75,6 +84,11 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const ReceiveAction = (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
   const currency = getAccountCurrency(account);
   const availableOnExchange = isCurrencySupported(currency);
+
+  const summary =
+    account.type === "TokenAccount" && makeCompoundSummaryForAccount(account, parentAccount);
+  const availableOnCompound = !!summary;
+
   const availableOnSwap = useSelector(swapSupportedCurrenciesSelector);
   const history = useHistory();
 
@@ -87,6 +101,12 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
       },
     });
   }, [currency, history, mainAccount]);
+
+  const onLend = useCallback(() => {
+    openModal("MODAL_LEND_MANAGE", {
+      ...summary,
+    });
+  }, [openModal, summary]);
 
   const onSwap = useCallback(() => {
     history.push({
@@ -110,6 +130,18 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
             eventProperties: { currencyName: currency.name },
             icon: IconExchange,
             label: <Trans i18nKey="buy.titleCrypto" values={{ currency: currency.name }} />,
+          },
+        ]
+      : []),
+    ...(availableOnCompound
+      ? [
+          {
+            key: "Lend",
+            onClick: onLend,
+            event: "Lend Crypto Account Button",
+            eventProperties: { currencyName: currency.name },
+            icon: Graph,
+            label: <Trans i18nKey="lend.manage.cta" />,
           },
         ]
       : []),
@@ -153,7 +185,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   );
 
   return (
-    <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
+    <Box horizontal alignItems="center" justifyContent="flex-end" flow={2} mt={15}>
       {!isAccountEmpty(account) ? (
         <>
           {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}

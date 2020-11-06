@@ -13,6 +13,7 @@ import type {
   TokenAccount,
   PortfolioRange,
   AccountPortfolio,
+  TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import Chart from "~/renderer/components/Chart2";
@@ -20,6 +21,8 @@ import Box, { Card } from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import AccountBalanceSummaryHeader from "./AccountBalanceSummaryHeader";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
+
+import AccountLendingFooter from "~/renderer/screens/lend/Account/AccountBalanceSummaryFooter";
 
 import perFamilyAccountBalanceSummaryFooter from "~/renderer/generated/AccountBalanceSummaryFooter";
 
@@ -33,6 +36,8 @@ type OwnProps = {
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,
   mainAccount: ?Account,
+  isCompoundEnabled?: boolean,
+  ctoken: ?TokenCurrency,
 };
 
 type Props = {
@@ -82,6 +87,7 @@ class AccountBalanceSummary extends PureComponent<Props> {
   render() {
     const {
       account,
+      parentAccount,
       balanceHistoryWithCountervalue: {
         history,
         countervalueAvailable,
@@ -96,6 +102,8 @@ class AccountBalanceSummary extends PureComponent<Props> {
       setCountervalueFirst,
       discreetMode,
       mainAccount,
+      isCompoundEnabled,
+      ctoken,
     } = this.props;
     const displayCountervalue = countervalueFirst && countervalueAvailable;
 
@@ -148,6 +156,15 @@ class AccountBalanceSummary extends PureComponent<Props> {
             account={account}
             counterValue={counterValue}
             discreetMode={discreetMode}
+          />
+        )}
+        {isCompoundEnabled && account.type === "TokenAccount" && parentAccount && ctoken && (
+          <AccountLendingFooter
+            account={account}
+            parentAccount={parentAccount}
+            countervalue={counterValue}
+            discreetMode={discreetMode}
+            ctoken={ctoken}
           />
         )}
       </Card>

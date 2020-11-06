@@ -59,7 +59,7 @@ const defaultWindowOptions = {
 };
 
 export const loadWindow = async () => {
-  const url = __DEV__ ? INDEX_URL : `file://${__dirname}/index.html`;
+  const url = __DEV__ ? INDEX_URL : path.join("file://", __dirname, "index.html");
   if (mainWindow) {
     await mainWindow.loadURL(`${url}?theme=${theme}`);
   }
@@ -100,7 +100,7 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
 
   loadWindow();
 
-  if (__DEV__ || DEV_TOOLS) {
+  if ((__DEV__ || DEV_TOOLS) && !process.env.DISABLE_DEV_TOOLS) {
     mainWindow.webContents.openDevTools();
   }
 

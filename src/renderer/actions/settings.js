@@ -44,6 +44,8 @@ export const setCounterValue = (counterValue: string) =>
 export const setLanguage = (language: ?string) => saveSettings({ language });
 export const setTheme = (theme: ?string) => saveSettings({ theme });
 export const setRegion = (region: ?string) => saveSettings({ region });
+export const setShowClearCacheBanner = (showClearCacheBanner: boolean) =>
+  saveSettings({ showClearCacheBanner });
 export const setHideEmptyTokenAccounts = (hideEmptyTokenAccounts: boolean) => async (
   dispatch: *,
 ) => {
@@ -102,6 +104,10 @@ export const setLastSeenDeviceInfo = (dmi: DeviceModelInfo) => ({
 export const setDeepLinkUrl = (url: ?string) => ({
   type: "SET_DEEPLINK_URL",
   payload: url,
+});
+
+export const setFirstTimeLend = () => ({
+  type: "SET_FIRST_TIME_LEND",
 });
 
 export const setSwapProviders = (swapProviders?: AvailableProvider[]) => ({

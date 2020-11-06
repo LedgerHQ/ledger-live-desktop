@@ -37,19 +37,19 @@ const socialMedia = [
   // FIXME it should just be vdom in place
   {
     key: "twitter",
-    url: urls.twitter,
+    url: urls.social.twitter,
     icon: <IconSocialTwitter size={24} />,
     onClick: url => openURL(url),
   },
   {
     key: "github",
-    url: urls.github,
+    url: urls.social.github,
     icon: <IconSocialGithub size={24} />,
     onClick: url => openURL(url),
   },
   {
     key: "reddit",
-    url: urls.reddit,
+    url: urls.social.reddit,
     icon: <IconSocialReddit size={24} />,
     onClick: url => openURL(url),
   },

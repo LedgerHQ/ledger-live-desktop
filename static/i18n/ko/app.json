@@ -11,6 +11,7 @@
     "delete": "삭제",
     "launch": "시작",
     "continue": "계속",
+    "previous": "Previous",
     "learnMore": "더 알아보기",
     "help": "도움말",
     "skipThisStep": "이 단계 건너뛰기",
@@ -77,6 +78,9 @@
       "DELEGATE": "Delegated",
       "REDELEGATE": "Redelegated",
       "UNDELEGATE": "Undelegated",
+      "SUPPLY": "Deposited",
+      "REDEEM": "Withdrawn",
+      "APPROVE": "Approved",
       "VOTE": "Voted",
       "FREEZE": "Frozen",
       "UNFREEZE": "Unfrozen",
@@ -116,12 +120,24 @@
     "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "관리자",
+    "exchange": "Buy",
     "swap": "Swap",
-    "exchange": "암호화 자산 구입"
+    "lend": "Lend"
   },
   "stars": {
     "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
     "tooltip": "Star account"
+  },
+  "bridge": {
+    "modalTitle": "Open Device Bridge",
+    "openHeader": "Expose your Device accounts through WebSocket",
+    "openDescription": "Opening a bridge exposes all of your accounts to third party applications.",
+    "openedHeader": "{{appName}} bridge opened",
+    "openedDescription": "You can now access your {{appName}} account on third party web application through WebSocket.",
+    "completeHeader": "Bridge session completed",
+    "completeDescription": "The websocket bridge is now closed.",
+    "openButton": "Open",
+    "disconnectButton": "Disconnect"
   },
   "swap": {
     "title": "Swap",
@@ -243,7 +259,7 @@
     },
     "settings": {
       "title": "계정 수정",
-      "advancedLogs": "고급 로그",
+      "advancedLogs": "Advanced",
       "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
       "accountName": {
         "title": "계정 이름",
@@ -291,6 +307,236 @@
       "tab": "History"
     }
   },
+  "lend": {
+    "title": "Lend crypto",
+    "description": "Deposit your crypto on the Compound protocol to start earning interest.",
+    "tabs": {
+      "dashboard": "Dashboard",
+      "closed": "Closed loans",
+      "history": "History"
+    },
+    "assets": "Assets to lend",
+    "active": "Approved accounts",
+    "lendAsset": "Deposit",
+    "highFeesModal": {
+      "title": "High fees on Ethereum",
+      "description": "Due to congestion on the Ethereum network, you may experience high fees when issuing transactions.",
+      "cta": "Got it"
+    },
+    "account": {
+      "amountSupplied": "Amount deposited",
+      "amountSuppliedTooltip": "Amount lent to the network",
+      "currencyAPY": "Currency APY",
+      "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
+      "accruedInterests": "Accrued interest",
+      "accruedInterestsTooltip": "Interest generated on your lent assets",
+      "interestEarned": "Interest earned",
+      "interestEarnedTooltip": "Interest you have earned after withdrawal",
+      "openLoans": "Open loans",
+      "closedLoans": "Closed loans",
+      "amountRedeemed": "Amount withdrawn",
+      "date": "Date",
+      "info": "You can lend assets directly from your {{currency}} account and earn interest.",
+      "howCompoundWorks": "How does lending on Compound work?",
+      "lend": "Deposit {{currency}}"
+    },
+    "emptyState": {
+      "active": {
+        "title": "Lending",
+        "description": "You can lend assets directly from your Ethereum accounts and earn interest.",
+        "cta": "How does lending on Compound work?"
+      },
+      "closed": {
+        "title": "Your closed loans will appear here",
+        "description": "You have not made any loans yet.",
+        "cta": "Deposit"
+      },
+      "history": {
+        "title": "History",
+        "description": "View the history of all your loan transactions.",
+        "cta": "Deposit"
+      }
+    },
+    "headers": {
+      "active": {
+        "accounts": "Account",
+        "amountSupplied": "Current loan",
+        "amountSuppliedTooltip": "Amount lent to the network",
+        "accruedInterests": "Accrued interest",
+        "accruedInterestsTooltip": "Interest generated on your lent assets",
+        "status": "Status",
+        "statusTooltip": "Current account status",
+        "actions": "Actions"
+      },
+      "status": {
+        "enablingTooltip": "Your transaction is broadcasting",
+        "toSupplyTooltip": "You can now supply your assets"
+      },
+      "closed": {
+        "assetLended": "Asset",
+        "amountRedeemed": "Withdrawal amount",
+        "interestsEarned": "Interest earned",
+        "date": "Date"
+      },
+      "rates": {
+        "allAssets": "Asset",
+        "totalBalance": "Available balance",
+        "totalBalanceTooltip": "Total balance of your accounts excluding the amount deposited",
+        "grossSupply": "Gross supply",
+        "grossSupplyTooltip": "Total amount of assets deposited on the protocol",
+        "currentAPY": "Current APY",
+        "currentAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
+        "actions": "Actions"
+      }
+    },
+    "manage": {
+      "cta": "Manage lending",
+      "title": "Manage loan",
+      "enable": {
+        "approve": "Approve",
+        "manageLimit": "Manage limit",
+        "viewDetails": "View details",
+        "info": "You have deposited <0>{{amount}}</0> from this account.",
+        "notSupplied": "You can now deposit from this account.",
+        "notSuppliedNoLimit": "You can deposit assets from this account.",
+        "enabling": "You can deposit assets once the account approval is confirmed.",
+        "notEnabled": "You must approve your account before you can lend assets.",
+        "notEnoughApproved": "You must increase the limit approved on your account to lend."
+      },
+      "supply": {
+        "title": "Deposit",
+        "description": "Enter the amount of assets to lend to the protocol."
+      },
+      "withdraw": {
+        "title": "Withdraw",
+        "description": "Withdraw assets from the protocol to your Ledger account."
+      }
+    },
+    "enable": {
+      "title": "Approve account",
+      "steps": {
+        "selectAccount": {
+          "title": "Select account",
+          "selectLabel": "Account to lend from",
+          "cta": "Approve",
+          "alreadyEnabled": "This account is approved",
+          "notEnabled": "You need to pay fees to approve this account"
+        },
+        "amount": {
+          "title": "Amount",
+          "summary": "I grant access to <0>{{contractName}}</0> smart contract on my account <0>{{accountName}}</0> for a <0>{{amount}}</0> amount",
+          "limit": "limited {{amount}}",
+          "noLimit": "no limit {{assetName}}",
+          "contractName": "Compound {{currencyName}}",
+          "advanced": "Advanced",
+          "amountLabel": "Amount to approve",
+          "amountLabelTooltip": "This limits the amount available to the smart contract."
+        },
+        "connectDevice": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "success": {
+            "title": "Operation sent successfully",
+            "text": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
+            "done": "Close",
+            "cta": "View details",
+            "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
+          },
+          "pending": {
+            "title": "Enabling your assets..."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    },
+    "withdraw": {
+      "title": "Withdraw assets",
+      "steps": {
+        "amount": {
+          "title": "Amount",
+          "advanced": "Advanced",
+          "amountLabel": "Amount to withdraw",
+          "amountToWithdraw": "Amount to withdraw",
+          "withdrawAll": "Withdraw Max",
+          "placeholder": "Withdraw Max",
+          "maxWithdrawble": "Maximum amount to withdraw is"
+        },
+        "connectDevice": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "success": {
+            "title": "Withdrawal sent successfully",
+            "text": "Your assets will be available once the network has confirmed the withdrawal.",
+            "done": "Close",
+            "cta": "View details"
+          },
+          "pending": {
+            "title": "Withdrawing your assets..."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    },
+    "info": {
+      "terms": {
+        "title": "Lend Crypto",
+        "subtitle": "Lend assets on the Compound protocol",
+        "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
+        "switchLabel": "<1>I have read and agree with the </1><0>Terms of Use</0><1>.</1>"
+      },
+      "steps": {
+        "title": "Step <0>{{step}} / {{total}}</0>",
+        "1": {
+          "subtitle": "Approve an account to allow the protocol to",
+          "subtitle2": "process future loans.",
+          "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Approving an account gives permission to the protocol to process future loans."
+        },
+        "2": {
+          "subtitle": "Supply assets to earn interest",
+          "description": "Once an account is approved, you can select the amount of assets you want to lend and issue a transaction to the protocol. Interests accrue immediately after the transaction is confirmed."
+        },
+        "3": {
+          "subtitle": "Withdraw assets at any time",
+          "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account."
+        }
+      }
+    },
+    "supply": {
+      "title": "Deposit assets",
+      "steps": {
+        "amount": {
+          "title": "Amount",
+          "selectedAccount": "Selected account",
+          "amountToSupply": "Amount to deposit",
+          "available": "Available balance",
+          "maxSupply": "Maximum amount to lend is"
+        },
+        "device": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "success": {
+            "title": "Deposit sent successfully",
+            "text": "You will start earning interest once the network has confirmed the deposit.",
+            "done": "Close",
+            "cta": "View details",
+            "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    },
+    "noEthAccount": {
+      "title": "Please create an ETH account",
+      "description": "<0>{{ asset }}({{ ticker }})</0> is an Ethereum ERC-20 token. To lend {{ ticker }}, install the Ethereum app and create an Ethereum account",
+      "cta": "Add account"
+    }
+  },
   "accounts": {
     "title": "Accounts",
     "noResultFound": "No accounts found.",
@@ -326,6 +572,7 @@
       "title": "Getting started",
       "desc": "Start here"
     },
+    "status": "Ledger status",
     "helpCenter": {
       "title": "Ledger Support",
       "desc": "Get help"
@@ -353,7 +600,12 @@
     "hideCTA": "Hide token"
   },
   "banners": {
+    "cleanCache": {
+      "title": "Modification of experimental settings require a clear cache",
+      "cta": "Clear cache"
+    },
     "migrate": "Ledger Live accounts update available",
+    "ongoingScams": "There are ongoing phishing scams on our userbase, please be careful and never share your recovery phrase.",
     "genericTerminatedCrypto": "{{coinName}}은(는) 더 이상 지원되지 않습니다.",
     "ledgerAcademy": {
       "title": "Ledger Academy",
@@ -892,7 +1144,9 @@
         "title": "계정",
         "label": "입금할 계정",
         "parentAccount": "1. Select {{currencyName}} account",
-        "token": "2. Select a token"
+        "token": "2. Select a token",
+        "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
       },
       "connectDevice": {
         "title": "장치",
@@ -1880,6 +2134,7 @@
   "TransactionConfirm": {
     "title": "Please confirm the operation on your device to finalize it",
     "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
+    "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
     "warningWording": {},
     "titleWording": {
       "send": "Please confirm on your device to finalize the operation",
@@ -1962,6 +2217,9 @@
     "ClaimRewardsFeesWarning": {
       "title": "The rewards are smaller than the estimated fees to claim them",
       "description": ""
+    },
+    "CompoundLowerAllowanceOfActiveAccountError": {
+      "title": "You cannot reduce the amount approved while having an active deposit."
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Something went wrong (Error #1)",

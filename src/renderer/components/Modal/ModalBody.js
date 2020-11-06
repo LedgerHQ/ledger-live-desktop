@@ -11,6 +11,7 @@ import type { RenderProps } from ".";
 type Props = {
   title?: React$Node,
   subTitle?: React$Node,
+  headerStyle?: *,
   onBack?: void => void,
   onClose?: void => void,
   render?: (?RenderProps) => any,
@@ -37,6 +38,7 @@ class ModalBody extends PureComponent<Props> {
       onClose,
       title,
       subTitle,
+      headerStyle,
       render,
       renderFooter,
       renderProps,
@@ -46,10 +48,9 @@ class ModalBody extends PureComponent<Props> {
 
     // For `renderFooter` returning falsy values, we need to resolve first.
     const renderedFooter = renderFooter && renderFooter(renderProps);
-
     return (
       <>
-        <ModalHeader subTitle={subTitle} onBack={onBack} onClose={onClose}>
+        <ModalHeader subTitle={subTitle} onBack={onBack} onClose={onClose} style={headerStyle}>
           {title || null}
         </ModalHeader>
         <ModalContent ref={this._content} noScroll={noScroll}>

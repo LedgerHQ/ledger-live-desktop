@@ -14,6 +14,7 @@ import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
 import Account from "~/renderer/screens/account";
 import Asset from "~/renderer/screens/asset";
+import Lend from "~/renderer/screens/lend";
 import Box from "~/renderer/components/Box/Box";
 import ListenDevices from "~/renderer/components/ListenDevices";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
@@ -38,22 +39,10 @@ import useDeeplink from "~/renderer/hooks/useDeeplinking";
 import ModalsLayer from "./ModalsLayer";
 import Swap from "~/renderer/screens/swap";
 
-const reloadApp = event => {
-  if ((event.ctrlKey || event.metaKey) && event.key === "r") {
-    window.api.reloadRenderer();
-  }
-};
-
 const Default = () => {
   const location = useLocation();
   const ref: React$ElementRef<any> = useRef();
-
   useDeeplink();
-
-  useEffect(() => {
-    window.addEventListener("keydown", reloadApp);
-    return () => window.removeEventListener("keydown", reloadApp);
-  }, []);
 
   // every time location changes, scroll back up
   useEffect(() => {
@@ -99,6 +88,7 @@ const Default = () => {
                       <Route path="/settings" render={props => <Settings {...props} />} />
                       <Route path="/accounts" render={props => <Accounts {...props} />} />
                       <Route path="/manager" render={props => <Manager {...props} />} />
+                      <Route path="/lend" render={props => <Lend {...props} />} />
                       <Route path="/exchange" render={props => <Exchange {...props} />} />
                       <Route
                         path="/account/:parentId/:id"

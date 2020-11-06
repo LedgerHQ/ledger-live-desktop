@@ -4,6 +4,7 @@ import type { BigNumber } from "bignumber.js";
 import type { OutputSelector } from "reselect";
 import { createSelector } from "reselect";
 import type { Currency, AccountLikeArray, Account } from "@ledgerhq/live-common/lib/types";
+import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
 import { isAccountDelegating } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import {
   nestedSortAccounts,
@@ -64,6 +65,14 @@ export const flattenSortAccountsSelector: OutputSelector<
   void,
   AccountLikeArray,
 > = createSelector(accountsSelector, sortAccountsComparatorSelector, flattenSortAccounts);
+
+export const flattenSortAccountsCompoundOnlySelector: OutputSelector<
+  State,
+  void,
+  AccountLikeArray,
+> = createSelector(flattenSortAccountsSelector, accounts =>
+  accounts.filter(acc => (accounts.type === "TokenAccount" ? !!findCompoundToken(acc) : false)),
+);
 
 export const flattenSortAccountsEnforceHideEmptyTokenSelector: OutputSelector<
   State,
