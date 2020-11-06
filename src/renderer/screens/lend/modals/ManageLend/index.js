@@ -6,13 +6,13 @@ import styled, { css } from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import { getAccountCapabilities, getEnablingOp } from "@ledgerhq/live-common/lib/compound/logic";
-
 import type { Account, TokenAccount, Unit, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import type {
   CompoundAccountSummary,
   CompoundAccountStatus,
 } from "@ledgerhq/live-common/lib/compound/types";
 
+import TrackPage from "~/renderer/analytics/TrackPage";
 import { localeSelector } from "~/renderer/reducers/settings";
 
 import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
@@ -149,6 +149,7 @@ const ManageModal = ({ name, account, parentAccount, totalSupplied, status, ...r
           noScroll
           render={() => (
             <>
+              <TrackPage category="Lend" name="Manage" eventProperties={{ currency }} />
               <Box>
                 <Box mb={2}>
                   <Banner
@@ -241,10 +242,8 @@ const Banner = ({
   const { enabledAmount, enabledAmountIsUnlimited, status, canSupplyMax } = capabilities;
 
   const label =
-    enabledAmountIsUnlimited && totalSupplied.eq(0) ? (
-      <Trans i18nKey="lend.manage.enable.approveLess" />
-    ) : !canSupplyMax ? (
-      <Trans i18nKey="lend.manage.enable.approveMore" />
+    (enabledAmountIsUnlimited && totalSupplied.eq(0)) || !canSupplyMax ? (
+      <Trans i18nKey="lend.manage.enable.manageLimit" />
     ) : status === "ENABLING" ? (
       <Trans i18nKey="lend.manage.enable.viewDetails" />
     ) : (
@@ -254,9 +253,9 @@ const Banner = ({
   const text =
     enabledAmountIsUnlimited && totalSupplied.gt(0) ? (
       <Trans
-        i18nKey="lend.manage.enable.infoNoLimit"
+        i18nKey="lend.manage.enable.info"
         values={{
-          supplied: formatCurrencyUnit(unit, totalSupplied, {
+          amount: formatCurrencyUnit(unit, totalSupplied, {
             locale,
             showAllDigits: false,
             disableRounding: false,

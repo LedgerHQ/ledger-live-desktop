@@ -5,6 +5,7 @@ import RenderError from "./RenderError";
 
 type Props = {
   children: any,
+  onError?: Function,
 };
 
 type State = {
@@ -19,6 +20,9 @@ class ThrowBlock extends PureComponent<Props, State> {
   componentDidCatch(error: Error) {
     logger.critical(error);
     this.setState({ error });
+    if (this.props.onError) {
+      this.props.onError(error);
+    }
   }
 
   render() {

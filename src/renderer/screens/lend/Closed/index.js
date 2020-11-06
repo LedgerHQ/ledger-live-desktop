@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 import { makeClosedHistoryForAccounts } from "@ledgerhq/live-common/lib/compound/logic";
 import type { AccountLikeArray } from "@ledgerhq/live-common/lib/types";
+import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import EmptyState from "../EmptyState";
 import ClosedLoans from "./ClosedLoans";
@@ -20,6 +21,7 @@ const Closed = ({ accounts, summaries, navigateToCompoundDashboard }: Props) => 
 
   return (
     <Box>
+      <TrackPage category="Lend" name="Closed Positions" />
       {closedLoans.length > 0 ? (
         <ClosedLoans loans={closedLoans} />
       ) : (

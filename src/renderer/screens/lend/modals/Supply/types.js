@@ -6,6 +6,7 @@ import type { Step } from "~/renderer/components/Stepper";
 import type {
   Account,
   AccountLike,
+  TokenAccount,
   TransactionStatus,
   Operation,
   CryptoCurrency,
@@ -20,7 +21,7 @@ export type StepProps = {
   t: TFunction,
   transitionTo: string => void,
   device: ?Device,
-  account: ?Account,
+  account: ?TokenAccount,
   accounts: ?(AccountLike[]),
   currency: CryptoCurrency | TokenCurrency,
   parentAccount: ?Account,

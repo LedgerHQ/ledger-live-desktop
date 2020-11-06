@@ -6,6 +6,7 @@ import styled, { withTheme } from "styled-components";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { multiline } from "~/renderer/styles/helpers";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -15,6 +16,9 @@ import BroadcastErrorDisclaimer from "~/renderer/components/BroadcastErrorDiscla
 import SuccessDisplay from "~/renderer/components/SuccessDisplay";
 import InfoBox from "~/renderer/components/InfoBox";
 import type { StepProps } from "../types";
+
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
 
 const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(() => ({
   alignItems: "center",
@@ -35,14 +39,19 @@ function StepConfirmation({
   device,
   signed,
 }: StepProps & { theme: * }) {
+  const currency = account ? getAccountCurrency(account) : {};
   const onLearnMore = useCallback(() => {
-    // @TODO redirect to support page
+    openURL(urls.approvedOperation);
   }, []);
 
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Lending Supply Flow" name="Step Confirmed" />
+        <TrackPage
+          category="Lend"
+          name="Supply Step 3 Success"
+          eventProperties={{ currencyName: currency.name }}
+        />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={t("lend.supply.steps.confirmation.success.title")}
@@ -60,7 +69,11 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Lending Supply Flow" name="Step Confirmation Error" />
+        <TrackPage
+          category="Lend"
+          name="Supply Step 3 Fail"
+          eventProperties={{ currencyName: currency.name }}
+        />
         {signed ? (
           <BroadcastErrorDisclaimer
             title={<Trans i18nKey="lend.enable.steps.confirmation.broadcastError" />}
@@ -96,11 +109,10 @@ export function StepConfirmationFooter({
         {t("lend.supply.steps.confirmation.success.done")}
       </Button>
       {concernedOperation ? (
-        // FIXME make a standalone component!
         <Button
           ml={2}
           id={"lend-confirmation-opc-button"}
-          event="Lending Flow Step 4 View OpD Clicked"
+          event="Lend Deposit Completed"
           onClick={() => {
             onClose();
             if (account && concernedOperation) {

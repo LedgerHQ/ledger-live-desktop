@@ -64,7 +64,12 @@ export function AccountOption({
         </Ellipsis>
       </div>
       <Box>
-        <FormattedVal color="palette.text.shade60" val={account.balance} unit={unit} showCode />
+        <FormattedVal
+          color="palette.text.shade60"
+          val={account.spendableBalance}
+          unit={unit}
+          showCode
+        />
       </Box>
       {displayBadge ? (
         <Box color="positiveGreen" style={{ width: 16 }}>

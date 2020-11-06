@@ -72,6 +72,7 @@ export const urls = {
       "https://shop.ledger.com/products/ledger-backup-pack?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop",
     ledgerAcademy:
       "https://www.ledger.com/academy/?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop",
+    ongoingScams: "https://www.ledger.com/ongoing-phishing-campaigns",
   },
   helpModal: {
     gettingStarted:
@@ -100,4 +101,8 @@ export const urls = {
     BitcoinCashHardforkOct2020Warning:
       "https://www.ledger.com/bitcoin-cash-fork-15-november-2020-what-it-means-for-you",
   },
+  compound: "https://support.ledger.com/hc/en-us/articles/360017215099",
+  compoundTnC: "https://shop.ledger.com/pages/ledger-live-terms-of-use",
+  approvedOperation:
+    "https://support.ledger.com/hc/en-us/articles/115005307809-Track-your-transaction",
 };

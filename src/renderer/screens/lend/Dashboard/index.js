@@ -1,12 +1,11 @@
 // @flow
 import React, { useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 import type { CurrentRate } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
+import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import EmptyState from "./EmptyState";
@@ -36,14 +35,13 @@ const Dashboard = ({
   // if user has not accepted terms of lending show terms modal
   useEffect(() => {
     !isAcceptedTerms
-      ? dispatch(
-          openModal("MODAL_LEND_ENABLE_INFO", { onlyTerms: true, onClose: onCloseTermsModal }),
-        )
+      ? dispatch(openModal("MODAL_LEND_ENABLE_INFO", { onClose: onCloseTermsModal }))
       : dispatch(openModal("MODAL_LEND_HIGH_FEES", { MODAL_SHOW_ONCE: true }));
   }, [dispatch, isAcceptedTerms, onCloseTermsModal]);
 
   return (
     <Box>
+      <TrackPage category="Lend" name="Dashboard" />
       <Text ff="Inter|SemiBold" color="palette.text.shade100">
         {t("lend.assets")}
       </Text>

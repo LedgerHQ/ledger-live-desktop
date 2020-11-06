@@ -54,12 +54,14 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
       if (!v) throw new Error(`can't parse semver ${version}`);
       const notes = data.filter(
         d =>
+          semver.valid(d.tag_name) &&
           semver.gte(
             d.tag_name,
             v.prerelease.length
               ? `${v.major}.${v.minor}.${v.patch}-${v.prerelease[0]}`
               : `${v.major}.${v.minor}.0`,
-          ) && semver.lte(d.tag_name, version),
+          ) &&
+          semver.lte(d.tag_name, version),
       );
       this.setState({ notes });
     } catch (error) {

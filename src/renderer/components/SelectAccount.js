@@ -91,6 +91,11 @@ const AccountOption = React.memo(function AccountOption({
   const unit = getAccountUnit(account);
   const name = getAccountName(account);
   const nested = ["TokenAccount", "ChildAccount"].includes(account.type);
+  const balance =
+    account.type !== "ChildAccount" && account.spendableBalance
+      ? account.spendableBalance
+      : account.balance;
+
   return (
     <Box grow horizontal alignItems="center" flow={2} style={{ opacity: disabled ? 0.2 : 1 }}>
       {!isValue && nested ? tokenTick : null}
@@ -101,7 +106,7 @@ const AccountOption = React.memo(function AccountOption({
         </Ellipsis>
       </div>
       <Box>
-        <FormattedVal color="palette.text.shade60" val={account.balance} unit={unit} showCode />
+        <FormattedVal color="palette.text.shade60" val={balance} unit={unit} showCode />
       </Box>
     </Box>
   );
