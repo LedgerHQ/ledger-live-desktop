@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  electron:
+    build:
+      context: .
+    volumes:
+      - /dev/shm:/dev/shm
+      - ../..:/app # Your app will be available in the /app dir in the container
+    environment:
+      SCREEN_WIDTH: 1024
+      SCREEN_HEIGHT: 768
+      CHROMEDRIVER_OPTS: "--url-base=/"
+      # Other configuration options here
+    ports:
+      - "9515:9515" # Chromedriver port, host:container
+      - "5900:5900" # VNC server port, host:container
