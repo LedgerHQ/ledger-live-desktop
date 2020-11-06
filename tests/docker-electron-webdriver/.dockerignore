@@ -1,6 +1,0 @@
-*../../*
-
-!../../package.json
-!../../yarn.lock
-!../../scripts
-!../../tests

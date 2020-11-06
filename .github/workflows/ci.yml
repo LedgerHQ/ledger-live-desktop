@@ -29,6 +29,8 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+      - name: install dependencies
+        run: yarn --frozen-lockfile
       - name: run code checks
         run: yarn ci
       - name: start electron webdriver
