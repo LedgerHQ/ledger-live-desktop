@@ -293,21 +293,21 @@ const Nomination = ({ account }: Props) => {
                     </Box>
                   </Box>
                 </Button>
-                <Button
-                  id={"account-rebond-button"}
-                  disabled={!hasUnlockingBalance}
-                  primary
-                  small
-                  onClick={onRebond}
-                >
-                  <Box horizontal flow={1} alignItems="center">
-                    <FreezeIcon size={12} />
-                    <Box>
-                      <Trans i18nKey="polkadot.unlockings.rebond" />
-                    </Box>
-                  </Box>
-                </Button>
               </ToolTip>
+              <Button
+                id={"account-rebond-button"}
+                disabled={!hasUnlockingBalance}
+                primary
+                small
+                onClick={onRebond}
+              >
+                <Box horizontal flow={1} alignItems="center">
+                  <FreezeIcon size={12} />
+                  <Box>
+                    <Trans i18nKey="polkadot.unlockings.rebond" />
+                  </Box>
+                </Box>
+              </Button>
             </Box>
           </Box>
           <Card p={0} mt={24} mb={6}>

@@ -110,6 +110,8 @@ const iconsComponent = {
   UNBOND: Unfreeze,
   WITHDRAW_UNBONDED: ClaimRewards,
   SLASH: IconTrash,
+  NOMINATE: Vote,
+  CHILL: IconUndelegate,
 };
 
 class ConfirmationCheck extends PureComponent<{
