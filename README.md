@@ -102,7 +102,7 @@ In an other terminal you need to launch the webdriver/electron container. Since 
 cd tests/docker-electron-webdriver/ && docker-compose up --build
 ```
 
-You can point VNCViewer to `localhost::5900` to check what is happening in the container.
+You can point VNCViewer to `localhost::5900` to check what is happening in the container. `secret` is the password.
 Then you can launch tests.
 ```bash
 yarn spectron
