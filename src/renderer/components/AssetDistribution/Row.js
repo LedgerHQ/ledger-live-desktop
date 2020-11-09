@@ -108,7 +108,7 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
       </Asset>
       <PriceSection>
         {distribution ? (
-          <Price from={currency} color="palette.text.shade80" fontSize={3} />
+          <Price from={currency} color="palette.text.shade80" fontSize={3} showAllDigits={false} />
         ) : (
           <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
             {"-"}
