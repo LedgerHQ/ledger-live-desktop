@@ -142,7 +142,6 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
             <CounterValue
               currency={currency}
               value={amount}
-              disableRounding
               color="palette.text.shade100"
               fontSize={3}
               showCode
