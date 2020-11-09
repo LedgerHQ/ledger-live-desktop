@@ -99,7 +99,7 @@ yarn start
 
 In an other terminal you need to launch the webdriver/electron container. Since Docker is intelligent it launches fast if nothing changed in `package.json` and `yarn.lock`. We need to build `node_modules` in the container for packages with native dependencies to work. So remember to stop and re run this command when packages are updated.
 ```bash
-docker-compose up --build
+cd tests/docker-electron-webdriver/ && docker-compose up --build
 ```
 
 You can point VNCViewer to `localhost::5900` to check what is happening in the container.
