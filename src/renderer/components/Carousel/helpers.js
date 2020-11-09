@@ -5,6 +5,7 @@ import BuyCryptoBanner from "~/renderer/components/Carousel/banners/BuyCrypto";
 import StakeAlgorandBanner from "~/renderer/components/Carousel/banners/StakeAlgorand";
 import SwapBanner from "~/renderer/components/Carousel/banners/Swap";
 import SellBanner from "~/renderer/components/Carousel/banners/Sell";
+import StakeCosmosBanner from "~/renderer/components/Carousel/banners/StakeCosmos";
 
 export const getTransitions = (transition: "slide" | "flip", reverse: boolean = false) => {
   const mult = reverse ? -1 : 1;
@@ -46,6 +47,7 @@ export const getTransitions = (transition: "slide" | "flip", reverse: boolean = 
 export const getDefaultSlides = () => {
   return [
     { id: "swap", Component: SwapBanner },
+    { id: "stakeCosmos", Component: StakeCosmosBanner },
     { id: "buy", Component: BuyCryptoBanner },
     { id: "sell", Component: SellBanner },
     { id: "backupPackBanner", Component: BackupPackBanner },
