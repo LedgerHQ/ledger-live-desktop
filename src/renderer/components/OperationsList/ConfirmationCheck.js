@@ -106,8 +106,6 @@ const iconsComponent = {
   REDEEM: IconWithdraw,
   SUPPLY: IconSupply,
   APPROVE: IconPlus,
-  REDEEM: IconSend,
-  SUPPLY: IconSend,
 };
 
 class ConfirmationCheck extends PureComponent<{
