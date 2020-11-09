@@ -253,8 +253,8 @@ describe("Bullrun", () => {
   describe("account flows", () => {
     it("account migration flow", async () => {
       // Account migration flow
-      const drawerDashboardButton = await $("#drawer-dashboard-button");
-      await drawerDashboardButton.click();
+      const drawerAccountsButton = await $("#drawer-accounts-button");
+      await drawerAccountsButton.click();
       const migrateAccountsButton = await $("#modal-migrate-accounts-button");
       await migrateAccountsButton.waitForDisplayed();
       await migrateAccountsButton.click();
@@ -313,6 +313,7 @@ describe("Bullrun", () => {
       await confirmationOPCButton.waitForDisplayed({ timeout: 10000 });
       await confirmationOPCButton.waitForEnabled();
       await confirmationOPCButton.click();
+      await modalPage.isDisplayed();
       await modalPage.close();
       expect(await modalPage.isDisplayed(true)).toBe(false);
     });
