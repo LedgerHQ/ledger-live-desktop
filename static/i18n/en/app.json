@@ -245,6 +245,114 @@
       "creditedAmount": "Amount to receive"
     }
   },
+  "fullNode": {
+    "status": "Status",
+    "connect": "Connect",
+    "disconnect": "Disconnect",
+    "checkNodeSettings": "Verify node settings",
+    "edit": "Edit",
+    "modal": {
+      "title": "Connect Bitcoin full node",
+      "disconnectTitle": "Disconnect full node",
+      "steps": {
+        "landing": {
+          "title": "Node",
+          "header": "Start your full node. Don’t trust, verify.",
+          "description": "A Bitcoin full node validates all transactions and blocks, allowing you to use Bitcoin in a trustless way while contributing to the Bitcoin network.",
+          "list": {
+            "item1":"Set up Bitcoin Core on a device with sufficient resources.",
+            "item2":"Wait for your node to fully synchronize.",
+            "item3":"Make note of your RPC credentials, IP address and port number."
+          },
+          "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
+        },
+        "node": {
+          "title": "Node",
+          "connectionSteps": {
+            "notConnected": {
+              "header": "Enter your node parameters",
+              "disclaimer": "Your full node must be fully synchronized before connecting Ledger Live.",
+              "fields": {
+                "nodeURL": {
+                  "title": "Node URL",
+                  "placeholder": "127.0.0.1:8332"
+                },
+                "rpcCredentials": {
+                  "title": "RPC Credentials",
+                  "usernamePlaceholder": "Username",
+                  "passwordPlaceholder": "Password"
+                },
+                "tls": {
+                  "title": "Use TLS",
+                  "tooltip": "Lorem ipsum dolor sit amet"
+                }
+              }
+            },
+            "connecting": {
+              "header": "Testing node connection",
+              "description": "Please wait while we check if your full node is responding."
+            },
+            "success": {
+              "header": "Full node connection successful",
+              "description": "You can now configure your full node to scan for your accounts on the blockchain."
+            },
+            "failure": {
+              "header": "Could not reach full node",
+              "description": "Please ensure your node is fully synchronized and verify its connection settings."
+            }
+          }
+        },
+        "device": {
+          "title": "Device",
+          "connectionSteps": {
+            "pending": {
+              "header": "Getting accounts from device",
+              "description": "Please wait while the accounts to scan are added to the node configuration file."
+            },
+            "success": {
+              "header": "Accounts added to node configuration",
+              "description": "A configuration file was saved to the user data folder. It enables Ledger SatStack to connect to your full node and let it scan for your accounts on the blockchain.",
+              "cta": "View user data"
+            }
+          }
+        },
+        "accounts": {
+          "title": "Accounts",
+          "existing": "Existing accounts to scan",
+          "toScan": "Accounts to scan",
+          "toScanDescription": "Accounts to scan for each address type",
+          "toScanTooltip": "Increase only if you have 10+ BTC accounts.  Initial scan will be slower. "
+        },
+        "satstack": {
+          "title": "SatStack",
+          "connectionSteps": {
+            "notConnected": {
+              "header": "Download and run Ledger SatStack",
+              "description": "Ledger SatStack is a small application enabling Ledger Live to talk to your full node. Please download and run it before you continue.",
+              "disclaimer":"SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
+              "cta": "Download SatStack"
+            },
+            "connecting": {
+              "header": "Connecting to SatStack",
+              "description": "Please wait while we check if Ledger SatStack is running."
+            },
+            "success": {
+              "header": "Account scan in progress...",
+              "description": "We will let you know once your full node is done scanning, so you can add your accounts. Any Bitcoin accounts previously added through Ledger’s explorers were removed."
+            },
+            "failure": {
+              "header": "Could not reach SatStack",
+              "description": "Please verify that SatStack is running on this computer before you retry"
+            }
+          }
+        },
+        "disconnect": {
+          "title": "Disconnect full node",
+          "cta": "Disconnect full node"
+        }
+      }
+    }
+  },
   "account": {
     "lastOperations": "Latest operations",
     "contractAddress": "Contract:",
@@ -1869,7 +1977,12 @@
       "tokenBlacklist": {
         "title": "Hidden tokens",
         "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
-        "count": "{{val}} tokens"
+        "count": "{{count}} token",
+        "count_plural": "{{count}} tokens"
+      },
+      "fullNode": {
+        "title": "Connect Bitcoin full node",
+        "desc": "Set up your Bitcoin full node to synchronize and send transactions without trusting Ledger’s explorers."
       }
     }
   },

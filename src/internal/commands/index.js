@@ -20,6 +20,7 @@ import initSwap from "./initSwap";
 import websocketBridge from "./websocketBridge";
 import checkSignatureAndPrepare from "./checkSignatureAndPrepare";
 import getTransactionId from "./getTransactionId";
+import scanDescriptors from "./scanDescriptors";
 import { commands as bridgeProxyCommands } from "~/renderer/bridge/proxy-commands";
 
 export const commandsById = {
@@ -45,6 +46,7 @@ export const commandsById = {
   testCrash,
   testInterval,
   websocketBridge,
+  scanDescriptors,
 };
 
 export type Commands = typeof commandsById;

@@ -6,7 +6,7 @@ import contextMenu from "electron-context-menu";
 import logger, { enableDebugLogger } from "../logger";
 import LoggerTransport from "~/logger/logger-transport-main";
 import LoggerTransportFirmware from "~/logger/logger-transport-firmware";
-import { fsWriteFile } from "~/helpers/fs";
+import { fsWriteFile, fsReadFile, fsUnlink } from "~/helpers/fs";
 import osName from "~/helpers/osName";
 import updater from "./updater";
 
@@ -45,6 +45,38 @@ ipcMain.handle(
     return false;
   },
 );
+
+ipcMain.handle("generate-lss-config", async (event, filePath, data: string): Promise<boolean> => {
+  try {
+    if (filePath && data) {
+      await fsWriteFile(filePath, data);
+      return true;
+    }
+  } catch (error) {}
+
+  return false;
+});
+
+ipcMain.handle("delete-lss-config", async (event, filePath): Promise<boolean> => {
+  try {
+    if (filePath) {
+      await fsUnlink(filePath);
+      return true;
+    }
+  } catch (error) {}
+
+  return false;
+});
+
+ipcMain.handle("load-lss-config", async (event, filePath): Promise<?string> => {
+  try {
+    if (filePath) {
+      return await fsReadFile(filePath, "utf8");
+    }
+  } catch (error) {}
+
+  return undefined;
+});
 
 process.setMaxListeners(0);
 

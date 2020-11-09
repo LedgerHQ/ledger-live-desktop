@@ -6,9 +6,9 @@ import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/ty
 import { cryptoCurrenciesSelector } from "~/renderer/reducers/accounts";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
+import Box from "~/renderer/components/Box";
 import IconCurrencies from "~/renderer/icons/Currencies";
 import {
-  SettingsSection as Section,
   SettingsSectionHeader as Header,
   SettingsSectionBody as Body,
 } from "../../SettingsSection";
@@ -28,7 +28,7 @@ export default function Currencies() {
   );
 
   return !currency ? null : (
-    <Section key={currency.id}>
+    <Box key={currency.id}>
       <TrackPage category="Settings" name="Currencies" currencyId={currency.id} />
       <Track onUpdate event="Crypto asset settings dropdown" currencyName={currency.name} />
       <Header
@@ -50,6 +50,6 @@ export default function Currencies() {
       <Body>
         <CurrencyRows currency={currency} />
       </Body>
-    </Section>
+    </Box>
   );
 }

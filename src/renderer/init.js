@@ -28,6 +28,7 @@ import dbMiddleware from "~/renderer/middlewares/db";
 import createStore from "~/renderer/createStore";
 import events from "~/renderer/events";
 import { setAccounts } from "~/renderer/actions/accounts";
+import { loadLSS } from "~/renderer/modals/FullNode/helpers";
 import { fetchSettings, setDeepLinkUrl } from "~/renderer/actions/settings";
 import { lock, setOSDarkMode } from "~/renderer/actions/application";
 
@@ -73,6 +74,8 @@ async function init() {
   const language = languageSelector(state);
   moment.locale(language);
   i18n.changeLanguage(language);
+
+  await loadLSS(); // Set env handled inside
 
   const hideEmptyTokenAccounts = hideEmptyTokenAccountsSelector(state);
   setEnvOnAllThreads("HIDE_EMPTY_TOKEN_ACCOUNTS", hideEmptyTokenAccounts);
