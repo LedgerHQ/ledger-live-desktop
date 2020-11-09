@@ -40,7 +40,7 @@ export function applicationProxy(userData = null, env = {}) {
       DISABLE_MOCK_POINTER_EVENTS: true,
       HIDE_DEBUG_MOCK: true,
       DISABLE_DEV_TOOLS: true,
-      NODE_ENV: "test",
+      SPECTRON_RUN: true,
     },
     env,
   );
