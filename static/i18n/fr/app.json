@@ -635,6 +635,14 @@
     "swap": {
       "title": "Échanger des cryptos",
       "description": "Échangez une cryptomonnaie contre une autre sur Ledger Live avec notre partenaire."
+    },
+    "lending": {
+      "title": "Lend Crypto",
+      "description": "Lend stablecoins to the Compound protocol and earn interests today"
+    },
+    "blackfriday": {
+      "title": "BLACK FRIDAY ",
+      "description": "Enjoy 40% off Ledger hardware wallets with the promo code BLACKFRIDAY20"
     }
   },
   "dashboard": {
