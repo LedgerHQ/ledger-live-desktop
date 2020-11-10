@@ -27,7 +27,7 @@ export type StepProps = {
   device: ?Device,
   account: ?AccountLike,
   parentAccount: ?Account,
-  mode?: string,
+  eventType?: string,
   transaction: ?Transaction,
   status: TransactionStatus,
   bridgePending: boolean,

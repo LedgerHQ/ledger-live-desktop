@@ -13,12 +13,12 @@ export default function StepConnectDevice({
   onOperationBroadcasted,
   onTransactionError,
   setSigned,
-  mode,
+  eventType,
 }: StepProps) {
   return (
     <>
       <TrackPage
-        category={`Delegation Flow${mode ? ` (${mode})` : ""}`}
+        category={`Delegation Flow${eventType ? ` (${eventType})` : ""}`}
         name="Step ConnectDevice"
       />
       <GenericStepConnectDevice
