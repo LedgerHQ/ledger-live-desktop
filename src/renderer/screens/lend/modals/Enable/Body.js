@@ -16,7 +16,7 @@ import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 import type { TFunction } from "react-i18next";
 import type { StepId, StepProps, St } from "./types";
-
+import TrackPage from "~/renderer/analytics/TrackPage";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 
 import Track from "~/renderer/analytics/Track";
@@ -60,7 +60,12 @@ const steps: Array<St> = [
   },
   {
     id: "connectDevice",
-    label: <Trans i18nKey="lend.enable.steps.connectDevice.title" />,
+    label: (
+      <>
+        <TrackPage category="Lend" name="Approve Step 2" />
+        <Trans i18nKey="lend.enable.steps.connectDevice.title" />
+      </>
+    ),
     component: GenericStepConnectDevice,
     onBack: ({ transitionTo }: StepProps) => transitionTo("amount"),
   },
