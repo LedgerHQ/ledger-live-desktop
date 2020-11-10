@@ -68,6 +68,7 @@ export const urls = {
 
   // Banners
   banners: {
+    blackfriday: "https://shop.ledger.com/pages/black-friday",
     backupPack:
       "https://shop.ledger.com/products/ledger-backup-pack?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop",
     ledgerAcademy:
