@@ -396,7 +396,7 @@
         "approve": "Approve",
         "manageLimit": "Manage limit",
         "viewDetails": "View details",
-        "info": "You can deposit up to <0>{{amount}}</0> from this account.",
+        "info": "You have approved <0>{{amount}}</0> on this account.",
         "notSupplied": "You can now deposit from this account.",
         "notSuppliedNoLimit": "You can deposit assets from this account.",
         "enabling": "You can deposit assets once the account approval is confirmed.",
