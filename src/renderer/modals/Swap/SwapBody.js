@@ -124,6 +124,7 @@ const SwapBody = ({
           <StepDeviceFooter onClose={onClose} />
         ) : activeStep === "summary" ? (
           <StepSummaryFooter
+            provider={swap.exchangeRate.provider}
             setError={setError}
             onContinue={onAcceptTOS}
             onClose={onClose}
