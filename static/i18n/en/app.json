@@ -1019,7 +1019,10 @@
       "rewardAmount": "Amount collected",
       "memo": "Memo",
       "assetId": "Asset ID",
-      "rewards": "Earned rewards"
+      "rewards": "Earned rewards",
+      "bondedAmount": "Bonded Amount",
+      "unbondedAmount": "Unbonded Amount",
+      "palletMethod": "Method"
     }
   },
   "operationList": {
@@ -2814,7 +2817,12 @@
       "undelegate": "Please confirm on your device to finalize the operation",
       "redelegate": "Please confirm on your device to finalize the operation",
       "claimRewardCompound": "Please confirm on your device to finalize the operation",
-      "nominate": "Please confirm on your device to finalize the operation"
+      "nominate": "Please confirm on your device to finalize the operation",
+      "chill": "Please confirm on your device to finalize the operation",
+      "bond": "Please confirm on your device to finalize the operation",
+      "unbond": "Please confirm on your device to finalize the operation",
+      "rebond": "Please confirm on your device to finalize the operation",
+      "withdrawUnbonded": "Please confirm on your device to finalize the operation"
     },
     "recipientWording": {
       "send": "recipient",

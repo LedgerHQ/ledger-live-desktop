@@ -7,7 +7,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import type { Unit } from "@ledgerhq/live-common/lib/types";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import { PolkadotValidator } from "@ledgerhq/live-common/lib/families/polkadot/types";
+import type { PolkadotValidator } from "@ledgerhq/live-common/lib/families/polkadot/types";
 
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";

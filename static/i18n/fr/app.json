@@ -1019,7 +1019,10 @@
       "rewardAmount": "Montant collecté",
       "memo": "Memo",
       "assetId": "Actif ID",
-      "rewards": "Récompenses réclamées"
+      "rewards": "Récompenses réclamées",
+      "bondedAmount": "Montant lié",
+      "unbondedAmount": "Montant délié",
+      "palletMethod": "Méthode"
     }
   },
   "operationList": {
@@ -1923,7 +1926,7 @@
           "title": "Montant",
           "amountLabel": "Montant à relier",
           "unlocking": "En débloquage: {{amountUnlocking}}",
-          "info": "Les actifs reliés seront immédiatement ajoutée à la balance bloquée et sera part d'enjeu pour l'ère prochaine."
+          "info": "Les actifs reliés seront immédiatement ajoutés à la balance bloquée et seront part d'enjeu pour l'ère prochaine."
         },
         "connectDevice": {
           "title": "Appareil"
@@ -1949,8 +1952,8 @@
         "amount": {
           "title": "Montant",
           "amountLabel": "Montant à délier",
-          "unlocking": "Débloquable: {{amountUnlockable}}",
-          "info": "Les actifs déliés spourront être récupérés après une période de 28 jours."
+          "unlockable": "Débloquable: {{amountUnlockable}}",
+          "info": "Les actifs déliés pourront être récupérés après une période de 28 jours."
          },
         "connectDevice": {
           "title": "Appareil"
@@ -2814,7 +2817,12 @@
       "undelegate": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
       "redelegate": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
       "claimRewardCompound": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
-      "nominate": "Veuillez confirmer sur votre appareil pour finaliser l'opération"
+      "nominate": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "chill": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "bond": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "unbond": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "rebond": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "withdrawUnbonded": "Veuillez confirmer sur votre appareil pour finaliser l'opération"
     },
     "recipientWording": {
       "send": "destinataire",
