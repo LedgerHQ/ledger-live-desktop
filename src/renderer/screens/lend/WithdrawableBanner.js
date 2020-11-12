@@ -33,7 +33,7 @@ const WithdrawableBanner = ({ account, parentAccount }: Props) => {
   const { t } = useTranslation();
 
   const onClickHelp = useCallback(() => {
-    openURL(urls.maxSpendable);
+    openURL(urls.compound);
   }, []);
 
   const accountUnit = getAccountUnit(account);
@@ -42,7 +42,6 @@ const WithdrawableBanner = ({ account, parentAccount }: Props) => {
   if (!summary) return null;
 
   const { totalSupplied } = summary;
-  console.log(summary);
 
   return (
     <Container>

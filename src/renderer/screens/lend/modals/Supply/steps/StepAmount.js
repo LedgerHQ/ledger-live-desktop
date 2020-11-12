@@ -6,31 +6,25 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import styled from "styled-components";
-
+import { getAccountUnit, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { useSupplyMax, useSupplyMaxChoiceButtons } from "@ledgerhq/live-common/lib/compound/react";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-import Select from "~/renderer/components/Select";
 import Label from "~/renderer/components/Label";
 import Spoiler from "~/renderer/components/Spoiler";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import GasPriceField from "~/renderer/families/ethereum/GasPriceField";
 import GasLimitField from "~/renderer/families/ethereum/GasLimitField";
-import {
-  renderValueNoBadge as renderValue,
-  renderOptionNoBadge as renderOption,
-  getOptionValue,
-} from "../../SelectAccountStep";
 import { subAccountByCurrencyOrderedSelector } from "~/renderer/reducers/accounts";
-
-import type { StepProps } from "../types";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
+import type { StepProps } from "../types";
+import SupplyBanner from "../../../SupplyBanner";
 
 const InputLeft = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
@@ -99,9 +93,12 @@ function StepAmount({
   invariant(account && transaction, "account and transaction required");
   const [focused, setFocused] = useState(false);
   const bridge = getAccountBridge(account, parentAccount);
+  const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
   const { warnings } = status;
   const { amount } = transaction;
+  const supplyMax = useSupplyMax(account);
+  const options = useSupplyMaxChoiceButtons(supplyMax);
 
   const onChangeAmount = useCallback(
     (a?: BigNumber) => {
@@ -116,52 +113,20 @@ function StepAmount({
 
   const warning = useMemo(() => focused && Object.values(warnings || {})[0], [focused, warnings]);
 
-  const options = useMemo(
-    () => [
-      {
-        label: "25%",
-        value: account.spendableBalance.multipliedBy(0.25),
-      },
-      {
-        label: "50%",
-        value: account.spendableBalance.multipliedBy(0.5),
-      },
-      {
-        label: "75%",
-        value: account.spendableBalance.multipliedBy(0.75),
-      },
-      {
-        label: "100%",
-        value: account.spendableBalance,
-      },
-    ],
-    [account.spendableBalance],
-  );
-
   return (
     <Box flow={2}>
-      <TrackPage category="Lending Supply Flow" name="Step Amount" />
-      <Box mt={4} flow={1}>
-        <Label>{t("lend.supply.steps.amount.selectedAccount")}</Label>
-        <Select
-          value={{ account, parentAccount }}
-          options={collection}
-          getOptionValue={getOptionValue}
-          renderValue={renderValue}
-          renderOption={renderOption}
-          filterOption={false}
-          isSearchable={false}
-          placeholder={t("common.selectAccount")}
-          noOptionsMessage={({ inputValue }) =>
-            t("common.selectAccountNoOption", { accountName: inputValue })
-          }
-          onChange={onChangeAccount}
-        />
-      </Box>
-      <Box vertical mt={5}>
+      <TrackPage
+        category="Lend"
+        name="Supply Step 1"
+        eventProperties={{ currencyName: currency.name }}
+      />
+      {account && account.type === "TokenAccount" && transaction ? (
+        <SupplyBanner account={account} parentAccount={parentAccount} />
+      ) : null}
+      <Box vertical mt={4}>
         <Box horizontal style={{ justifyContent: "space-between" }}>
           <Label>{t("lend.supply.steps.amount.amountToSupply")}</Label>
-          {account.spendableBalance.gt(0) ? (
+          {supplyMax.gt(0) ? (
             <Box horizontal>
               <Label style={{ paddingLeft: 8 }}>{t("lend.supply.steps.amount.available")}</Label>
               <Label style={{ paddingLeft: 4 }}>~</Label>
@@ -169,7 +134,7 @@ function StepAmount({
                 <FormattedVal
                   style={{ width: "auto" }}
                   color="palette.text.shade100"
-                  val={account.spendableBalance}
+                  val={supplyMax}
                   unit={unit}
                   showCode
                 />

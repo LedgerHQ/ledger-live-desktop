@@ -100,7 +100,7 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
 
   loadWindow();
 
-  if (__DEV__ || DEV_TOOLS) {
+  if ((__DEV__ || DEV_TOOLS) && !process.env.DISABLE_DEV_TOOLS) {
     mainWindow.webContents.openDevTools();
   }
 

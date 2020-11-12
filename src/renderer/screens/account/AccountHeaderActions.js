@@ -32,7 +32,7 @@ import IconSwap from "~/renderer/icons/Swap";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
-import Redelegate from "~/renderer/icons/Redelegate";
+import Graph from "~/renderer/icons/Graph";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 
@@ -84,7 +84,7 @@ const AccountHeaderActions = ({
   const ReceiveAction = (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
   const currency = getAccountCurrency(account);
   const availableOnExchange = isCurrencySupported(currency);
-  // @TODO adjust condition of availability for lending
+
   const summary =
     account.type === "TokenAccount" && makeCompoundSummaryForAccount(account, parentAccount);
   const availableOnCompound = !!summary;
@@ -104,8 +104,10 @@ const AccountHeaderActions = ({
   }, [currency, history, mainAccount]);
 
   const onLend = useCallback(() => {
-    openModal("MODAL_LEND_MANAGE", { account, parentAccount, currency: currency });
-  }, [openModal, account, parentAccount, currency]);
+    openModal("MODAL_LEND_MANAGE", {
+      ...summary,
+    });
+  }, [openModal, summary]);
 
   const onSwap = useCallback(() => {
     history.push({
@@ -140,7 +142,7 @@ const AccountHeaderActions = ({
             onClick: onLend,
             event: "Lend Crypto Account Button",
             eventProperties: { currencyName: currency.name },
-            icon: Redelegate,
+            icon: Graph,
             label: <Trans i18nKey="lend.manage.cta" />,
           },
         ]

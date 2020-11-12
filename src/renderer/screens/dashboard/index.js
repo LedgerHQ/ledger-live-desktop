@@ -22,6 +22,7 @@ import AssetDistribution from "~/renderer/components/AssetDistribution";
 import MigrationBanner from "~/renderer/modals/MigrateAccounts/Banner";
 import ClearCacheBanner from "~/renderer/components/ClearCacheBanner";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
+import OngoingScams from "~/renderer/components/banners/OngoingScams";
 import { saveSettings } from "~/renderer/actions/settings";
 import { connect, useSelector } from "react-redux";
 import uniq from "lodash/uniq";
@@ -79,6 +80,7 @@ const DashboardPage = ({ saveSettings }: Props) => {
   return (
     <>
       <TopBannerContainer>
+        <OngoingScams />
         <UpdateBanner />
         <MigrationBanner />
         <ClearCacheBanner />

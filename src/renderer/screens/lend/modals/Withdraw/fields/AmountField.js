@@ -1,21 +1,18 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 
 import { BigNumber } from "bignumber.js";
 
 import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import type { TFunction } from "react-i18next";
 import type { Account, TokenAccount, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
 
-import { localeSelector } from "~/renderer/reducers/settings";
 import Label from "~/renderer/components/Label";
 import Box from "~/renderer/components/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
@@ -51,7 +48,6 @@ const AmountField = ({
   bridgePending,
   t,
 }: Props) => {
-  const locale = useSelector(localeSelector);
   invariant(account && transaction && account.spendableBalance, "account and transaction required");
 
   const bridge = getAccountBridge(account, parentAccount);
@@ -83,17 +79,6 @@ const AmountField = ({
     [bridge, transaction, onChangeTransaction, capabilities],
   );
 
-  const amountAvailable = useMemo(
-    () =>
-      formatCurrencyUnit(defaultUnit, capabilities?.totalSupplied, {
-        disableRounding: true,
-        showAllDigits: false,
-        showCode: true,
-        locale,
-      }),
-    [capabilities, defaultUnit, locale],
-  );
-
   if (!status) return null;
   const { errors, warnings } = status;
   const { amount } = errors;
@@ -103,7 +88,7 @@ const AmountField = ({
     <Box flow={1}>
       <Label>
         <Text style={{ flex: 1 }} textAlign="left">
-          <Trans i18nKey="lend.withdraw.steps.amount.available" values={{ amountAvailable }}>
+          <Trans i18nKey="lend.withdraw.steps.amount.amountToWithdraw">
             <b></b>
           </Trans>
         </Text>

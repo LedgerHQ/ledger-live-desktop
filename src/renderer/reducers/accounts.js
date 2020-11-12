@@ -101,26 +101,28 @@ export const subAccountByCurrencyOrderedSelector: OutputSelector<
   (_, { currency }: { currency: CryptoCurrency | TokenCurrency }) => currency,
   (accounts, currency) => {
     const flatAccounts = flattenAccounts(accounts);
-    return flatAccounts
-      .filter(
-        account =>
-          (account.type === "TokenAccount" ? account.token.id : account.currency.id) ===
-          currency.id,
-      )
-      .map(account => ({
-        account,
-        parentAccount:
-          account.type === "TokenAccount" && account.parentId
-            ? accounts.find(fa => fa.type === "Account" && fa.id === account.parentId)
-            : {},
-      }))
-      .sort((a, b) =>
-        a.account.balance.gt(b.account.balance)
-          ? -1
-          : a.account.balance.eq(b.account.balance)
-          ? 0
-          : 1,
-      );
+    return currency
+      ? flatAccounts
+          .filter(
+            account =>
+              (account.type === "TokenAccount" ? account.token.id : account.currency.id) ===
+              currency.id,
+          )
+          .map(account => ({
+            account,
+            parentAccount:
+              account.type === "TokenAccount" && account.parentId
+                ? accounts.find(fa => fa.type === "Account" && fa.id === account.parentId)
+                : {},
+          }))
+          .sort((a, b) =>
+            a.account.balance.gt(b.account.balance)
+              ? -1
+              : a.account.balance.eq(b.account.balance)
+              ? 0
+              : 1,
+          )
+      : [];
   },
 );
 

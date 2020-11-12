@@ -31,6 +31,7 @@ export default function initialize() {
       MOCK: true,
       DISABLE_MOCK_POINTER_EVENTS: true,
       HIDE_DEBUG_MOCK: true,
+      DISABLE_DEV_TOOLS: true,
     });
     onboardingPage = new OnboardingPage(app);
     modalPage = new ModalPage(app);

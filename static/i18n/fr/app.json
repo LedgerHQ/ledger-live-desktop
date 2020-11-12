@@ -80,11 +80,11 @@
       "UNDELEGATE": "Interrompue",
       "SUPPLY": "Déposé",
       "REDEEM": "Retiré",
-      "APPROVE": "Actif",
+      "APPROVE": "Approuvé",
       "VOTE": "Voté",
       "FREEZE": "Gelé",
       "UNFREEZE": "Dégelé",
-      "REWARD": "Récompense réclamée",
+      "REWARD": "Récompense",
       "FEES": "Frais",
       "OPT_IN": "Activer",
       "OPT_OUT": "Désactiver",
@@ -120,13 +120,24 @@
     "stars": "Comptes favoris",
     "accounts": "Comptes",
     "manager": "Manager",
-    "exchange": "Acheter des cryptos",
+    "exchange": "Acheter",
     "swap": "Swap",
-    "lend": "Prêter des cryptos"
+    "lend": "Lend"
   },
   "stars": {
     "placeholder": "Les comptes que vous placez en favoris dans la page <1><0>Comptes</0></1> apparaitront ici !",
     "tooltip": "Ajouter aux favoris"
+  },
+  "bridge": {
+    "modalTitle": "Ouvrir pont de connexion",
+    "openHeader": "Exposer les comptes de votre appareil via WebSocket",
+    "openDescription": "Ouvrir un pont de connexion expose vos comptes à des applications tierces.",
+    "openedHeader": "{{appName}} pont de connexion ouvert",
+    "openedDescription": "Vous pouvez maintenant accéder à votre compte {{appName}} sur une application web tierce via WebSocket.",
+    "completeHeader": "Session terminée",
+    "completeDescription": "Le pont de connexion websocket est maintenant fermé.",
+    "openButton": "Ouvrir",
+    "disconnectButton": "Déconnecter"
   },
   "swap": {
     "title": "Swap",
@@ -201,7 +212,8 @@
           "terms": "Termes et conditions",
           "disclaimer": {
             "header": "Détails",
-            "description": "En cliquant sur \"Confirmer\", je reconnais et j'accepte que ce service soit exclusivement régi par Changelly"
+            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s",
+            "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
           },
           "details": {
             "provider": "Fournisseur",
@@ -316,35 +328,34 @@
       "amountSupplied": "Montant déposé",
       "amountSuppliedTooltip": "Montant prêté au réseau",
       "currencyAPY": "APY de la devise",
-      "currencyAPYTooltip": "Taux réel de retour d'ici la fin de l'année si les intérêts sont cumulés.",
-      "accruedInterests": "Intérêts accumulés",
-      "accruedInterestsTooltip": "Intérêts générés",
+      "currencyAPYTooltip": "Taux de retour annuel d'un dépôt continuellement composé",
+      "accruedInterests": "Intérêt accumulé",
+      "accruedInterestsTooltip": "Intérêt généré sur vos actifs prêtés",
       "interestEarned": "Intérêts gagnés",
-      "interestEarnedTooltip": "--! NEED TEXT HERE !--",
+      "interestEarnedTooltip": "Intérêt que vous avez obtenu après le retrait",
       "openLoans": "Prêts ouverts",
       "closedLoans": "Prêts clôturés",
-      "amountRedeemed": "Montant réclamé",
-      "amountRedeemedTooltip": "--! NEED TEXT HERE !--",
+      "amountRedeemed": "Montant retiré",
       "date": "Date",
-      "info": "Vous pouvez prêter des actifs directement de vos comptes {{currency}} et obtenir des revenus passifs.",
+      "info": "Vous pouvez prêter des actifs directement depuis votre compte {{currency}} et obtenir des intérêts.",
       "howCompoundWorks": "Comment fonctionne Compound ?",
-      "lend": "Prêter {{currency}}"
+      "lend": "Dépôt {{currency}}"
     },
     "emptyState": {
       "active": {
         "title": "Prêt",
-        "description": "Vous pouvez prêter des actifs directement de vos comptes Ethereum et obtenir des revenus passifs.",
+        "description": "Vous pouvez prêter des actifs directement depuis vos comptes Ethereum et obtenir des intérêts.",
         "cta": "Comment fonctionne Compound ?"
       },
       "closed": {
-        "title": "Vos prêts fermés apparaîtront ici",
+        "title": "Vos prêts clôturés apparaîtront ici",
         "description": "Vous n’avez pas encore fait de prêts.",
-        "cta": "Prêter maintenant"
+        "cta": "Dépôt"
       },
       "history": {
         "title": "Historique",
         "description": "Visualisez l'historique de toutes vos opérations de prêt.",
-        "cta": "Prêter maintenant"
+        "cta": "Dépôt"
       }
     },
     "headers": {
@@ -352,8 +363,8 @@
         "accounts": "Compte",
         "amountSupplied": "Prêt actuel",
         "amountSuppliedTooltip": "Montant prêté au réseau",
-        "accruedInterests": "Intérêts obtenus",
-        "accruedInterestsTooltip": "Intérêts générés",
+        "accruedInterests": "Intérêt accumulé",
+        "accruedInterestsTooltip": "Intérêt généré sur vos actifs prêtés",
         "status": "Statut",
         "statusTooltip": "Statut actuel du compte",
         "actions": "Actions"
@@ -363,7 +374,7 @@
         "toSupplyTooltip": "Vous pouvez maintenant prêter vos actifs"
       },
       "closed": {
-        "assetLended": "Actif prêté",
+        "assetLended": "Actif",
         "amountRedeemed": "Montant du retrait",
         "interestsEarned": "Intérêts obtenus",
         "date": "Date"
@@ -371,11 +382,11 @@
       "rates": {
         "allAssets": "Actif",
         "totalBalance": "Solde disponible",
-        "totalBalanceTooltip": "Solde total de tous les comptes en excluant le montant prêté.",
+        "totalBalanceTooltip": "Solde total de vos comptes hors montant déposé",
         "grossSupply": "Valeur du marché",
-        "grossSupplyTooltip": "Montant total des actifs déposés sur le réseau",
+        "grossSupplyTooltip": "Montant total des actifs déposés sur le protocole",
         "currentAPY": "APY actuel",
-        "currentAPYTooltip": "Taux réel annuel d'intérêt si ceux-ci sont cumulés continuellement.",
+        "currentAPYTooltip": "Taux de retour annuel d'un dépôt continuellement composé",
         "actions": "Actions"
       }
     },
@@ -384,16 +395,14 @@
       "title": "Gérer le prêt",
       "enable": {
         "approve": "Activer",
-        "approveLess": "Activer moins",
-        "approveMore": "Activer plus",
+        "manageLimit": "Gérer la limite",
         "viewDetails": "Voir les détails",
-        "info": "Vous pouvez prêter <0>{{amount}}</0> sur <1>{{enabled}} {{assetName}}</1> initialement activé.",
-        "infoNoLimit": "Vous avez prété <0>{{supplied}}</0> à partir d'un compte sans limite.",
-        "notSupplied": "Vous avez activé <0>{{enabled}}</0> sur ce compte.",
-        "notSuppliedNoLimit": "Vous avez approuvé ce compte pour un montant illimité.",
-        "enabling": "La transaction d'activation vous permettant de prêter est en attente",
-        "notEnabled": "Avant de prêter des actifs au protocole Compound, vous devez activer votre compte.",
-        "notEnoughApproved": "Vous n'avez pas assez de solde approuvé pour prêter des actifs."
+        "info": "Vous avez déposé <0>{{amount}}</0> depuis ce compte.",
+        "notSupplied": "Vous pouvez maintenant effectuer un dépôt à partir de ce compte.",
+        "notSuppliedNoLimit": "Vous pouvez déposer des actifs depuis ce compte.",
+        "enabling": "Vous pouvez déposer des actifs une fois que l'approbation du compte est confirmée.",
+        "notEnabled": "Vous devez approuver votre compte avant de pouvoir prêter des actifs.",
+        "notEnoughApproved": "Vous devez augmenter la limite approuvée sur votre compte pour prêter."
       },
       "supply": {
         "title": "Dépôt",
@@ -405,7 +414,7 @@
       }
     },
     "enable": {
-      "title": "Activer mon compte",
+      "title": "Approuver le compte",
       "steps": {
         "selectAccount": {
           "title": "Sélectionnez un compte",
@@ -421,7 +430,7 @@
           "noLimit": "sans limte {{assetName}}",
           "contractName": "Compound {{currencyName}}",
           "advanced": "Avancé",
-          "amountLabel": "Montant à activer",
+          "amountLabel": "Montant à approuver",
           "amountLabelTooltip": "Cela limite le montant disponible à prêter."
         },
         "connectDevice": {
@@ -450,7 +459,7 @@
           "title": "Montant",
           "advanced": "Avancé",
           "amountLabel": "Montant à retirer",
-          "available": "Solde disponible: <0>{{amountAvailable}}</0>",
+          "amountToWithdraw": "Montant à retirer",
           "withdrawAll": "Retirer Max",
           "placeholder": "Retirer Max",
           "maxWithdrawble": "Le montant maximum à retirer est"
@@ -478,7 +487,7 @@
         "title": "Prêter de la crypto",
         "subtitle": "Prêtez des actifs sur le protocole Compound",
         "description": "Le protocole Compound vous permet de prêter et d'emprunter des actifs sur le réseau Ethereum. Vous pouvez prêter des actifs et gagner des intérêts directement à partir de votre compte Ledger.",
-        "switchLabel": "J'ai lu, compris et j'accepte les <0>Conditions Générales.</0>"
+        "switchLabel": "<1>J’ai lu et j’accepte les </1><0>Conditions d’utilisation</0><1>.</1>"
       },
       "steps": {
         "title": "Étape <0>{{step}} / {{total}}</0>",
@@ -504,7 +513,8 @@
           "title": "Montant",
           "selectedAccount": "Compte sélectionné",
           "amountToSupply": "Montant à déposer",
-          "available": "Solde disponible"
+          "available": "Solde disponible",
+          "maxSupply": "Le montant maximum de prêt est"
         },
         "device": {
           "title": "Appareil"
@@ -596,6 +606,7 @@
       "cta": "Vider le cache"
     },
     "migrate": "Mise à jour des comptes Ledger Live disponible",
+    "ongoingScams": "Des escroqueries d'hameçonnage sont en cours sur notre base d'utilisateurs, soyez prudent et ne partagez jamais votre phrase de récupération.",
     "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge",
     "ledgerAcademy": {
       "title": "Ledger Academy",
@@ -2207,6 +2218,9 @@
     "ClaimRewardsFeesWarning": {
       "title": "Les récompenses sont plus petites que les frais estimés pour les collecter",
       "description": ""
+    },
+    "CompoundLowerAllowanceOfActiveAccountError": {
+      "title": "Vous ne pouvez pas réduire le montant activé avec un prêt actif."
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Quelque chose s'est mal passé (Erreur #1)",

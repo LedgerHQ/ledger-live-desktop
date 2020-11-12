@@ -144,16 +144,16 @@ const Body = ({
 
   const handleOperationBroadcasted = useCallback(
     (optimisticOperation: Operation) => {
-      if (!account) return;
+      if (!account || !parentAccount) return;
       dispatch(
-        updateAccountWithUpdater(account.id, account =>
+        updateAccountWithUpdater(parentAccount.id, account =>
           addPendingOperation(account, optimisticOperation),
         ),
       );
       setOptimisticOperation(optimisticOperation);
       setTransactionError(null);
     },
-    [account, dispatch],
+    [account, parentAccount, dispatch],
   );
 
   const statusError = useMemo(() => status.errors && Object.values(status.errors)[0], [

@@ -118,7 +118,7 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
     if (!account && ethAccount) {
       dispatch(openModal("MODAL_RECEIVE", { currency: token, account: ethAccount }));
     } else if (!ethAccount) {
-      dispatch(openModal("MODAL_LEND_NO_ETHEREUM_ACCOUNT"));
+      dispatch(openModal("MODAL_LEND_NO_ETHEREUM_ACCOUNT", { currency: token }));
     } else if (isAcceptedLendingTerms()) {
       dispatch(
         openModal("MODAL_LEND_SELECT_ACCOUNT", {
@@ -145,6 +145,14 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
       return total.plus(account.spendableBalance);
     }, BigNumber(0));
   }, [token.id, accounts]);
+
+  const event = useMemo(() => {
+    const ethAccount = accounts.find(a => a.type === "Account" && a.currency.id === eth.id);
+    return {
+      name: !ethAccount ? "Lend Deposit NoAccount" : "Lend Deposit",
+      eventProperties: !ethAccount ? {} : { currencyName: token.name },
+    };
+  }, [accounts, token, eth]);
 
   return (
     <RowContent>
@@ -180,10 +188,11 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
       </Amount>
       <Action>
         <CompactButton
-          disabled={!totalBalance || totalBalance.lte(0)}
           fontSize={3}
           primary
           onClick={openManageModal}
+          event={event.name}
+          eventProperties={event.eventProperties}
         >
           {t("lend.lendAsset")}
         </CompactButton>
@@ -201,30 +210,36 @@ const Rates = ({ rates }: { rates: CurrentRate[] }) => {
         <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
           {t("lend.headers.rates.allAssets")}
         </Text>
-        <ToolTip content={t("lend.headers.rates.totalBalanceTooltip")}>
+        <Box horizontal>
           <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
             {t("lend.headers.rates.totalBalance")}
           </Text>
-          <IconWrapper>
-            <InfoCircle size={11} />
-          </IconWrapper>
-        </ToolTip>
-        <ToolTip content={t("lend.headers.rates.grossSupplyTooltip")}>
+          <ToolTip content={t("lend.headers.rates.totalBalanceTooltip")}>
+            <IconWrapper>
+              <InfoCircle size={11} />
+            </IconWrapper>
+          </ToolTip>
+        </Box>
+        <Box horizontal>
           <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
             {t("lend.headers.rates.grossSupply")}
           </Text>
-          <IconWrapper>
-            <InfoCircle size={11} />
-          </IconWrapper>
-        </ToolTip>
-        <ToolTip content={t("lend.headers.rates.currentAPYTooltip")}>
+          <ToolTip content={t("lend.headers.rates.grossSupplyTooltip")}>
+            <IconWrapper>
+              <InfoCircle size={11} />
+            </IconWrapper>
+          </ToolTip>
+        </Box>
+        <Box horizontal>
           <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
             {t("lend.headers.rates.currentAPY")}
           </Text>
-          <IconWrapper>
-            <InfoCircle size={11} />
-          </IconWrapper>
-        </ToolTip>
+          <ToolTip content={t("lend.headers.rates.currentAPYTooltip")}>
+            <IconWrapper>
+              <InfoCircle size={11} />
+            </IconWrapper>
+          </ToolTip>
+        </Box>
         <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
           {t("lend.headers.rates.actions")}
         </Text>

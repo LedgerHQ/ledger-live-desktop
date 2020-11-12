@@ -39,22 +39,10 @@ import useDeeplink from "~/renderer/hooks/useDeeplinking";
 import ModalsLayer from "./ModalsLayer";
 import Swap from "~/renderer/screens/swap";
 
-const reloadApp = event => {
-  if ((event.ctrlKey || event.metaKey) && event.key === "r") {
-    window.api.reloadRenderer();
-  }
-};
-
 const Default = () => {
   const location = useLocation();
   const ref: React$ElementRef<any> = useRef();
-
   useDeeplink();
-
-  useEffect(() => {
-    window.addEventListener("keydown", reloadApp);
-    return () => window.removeEventListener("keydown", reloadApp);
-  }, []);
 
   // every time location changes, scroll back up
   useEffect(() => {

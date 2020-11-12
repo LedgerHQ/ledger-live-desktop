@@ -59,7 +59,9 @@ export const RowOpened = ({ opened, account }: OpenedProps) => {
     [unit, opened.interestsEarned, formatConfig],
   );
 
-  const date = useMemo(() => moment(opened.startingDate).fromNow(), [opened.startingDate]);
+  const date = useMemo(() => moment(opened.startingDate).format("MMMM Do, YYYY"), [
+    opened.startingDate,
+  ]);
 
   return (
     <Wrapper>
@@ -106,7 +108,7 @@ export const RowClosed = ({ closed, account }: ClosedProps) => {
     [unit, closed, formatConfig],
   );
 
-  const date = useMemo(() => moment(closed.endDate).format(), [closed.endDate]);
+  const date = useMemo(() => moment(closed.endDate).format("MMMM Do, YYYY"), [closed.endDate]);
 
   return (
     <Wrapper>
