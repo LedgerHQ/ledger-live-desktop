@@ -169,6 +169,8 @@ const ManageModal = ({ name, account, parentAccount, totalSupplied, status, ...r
                 <ManageButton
                   disabled={!canSupply || status === "ENABLING"}
                   onClick={() => onSelectAction("MODAL_LEND_SUPPLY", onClose)}
+                  event="Lend Deposit"
+                  eventProperties={{ currency: currency.name }}
                 >
                   <IconWrapper>
                     <ArrowRight size={16} />
@@ -185,6 +187,8 @@ const ManageModal = ({ name, account, parentAccount, totalSupplied, status, ...r
                 <ManageButton
                   disabled={!canWithdraw || status === "ENABLING"}
                   onClick={() => onSelectAction("MODAL_LEND_WITHDRAW_FLOW", onClose)}
+                  event="Lend Withdraw"
+                  eventProperties={{ currency: currency.name }}
                 >
                   <IconWrapper>
                     <Minus size={16} />
