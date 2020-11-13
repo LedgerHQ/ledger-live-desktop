@@ -113,6 +113,27 @@ type OperationDetailsExtraProps = {
 
 const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraProps) => {
   switch (type) {
+    case "OUT":
+    case "IN":
+      return (
+        <>
+          <OperationsDetailsPalletMethod palletMethod={extra.palletMethod} />
+          <Box>
+            <OpDetailsTitle>
+              <Trans i18nKey="operationDetails.extra.transferAmount" />
+            </OpDetailsTitle>
+            <OpDetailsData>
+              <FormattedVal
+                val={BigNumber(extra.transferAmount)}
+                unit={account.unit}
+                showCode
+                fontSize={4}
+                color="palette.text.shade60"
+              />
+            </OpDetailsData>
+          </Box>
+        </>
+      );
     case "NOMINATE": {
       const { validators } = extra;
       if (!validators || !validators.length) return null;
@@ -177,6 +198,33 @@ type Props = {
   unit: Unit,
 };
 
+const TransferAmountCell = ({ operation, currency, unit }: Props) => {
+  const amount = new BigNumber(operation.extra ? operation.extra.transferAmount : 0);
+
+  return (
+    !amount.isZero() && (
+      <>
+        <FormattedVal
+          val={amount}
+          unit={unit}
+          showCode
+          fontSize={4}
+          color={"palette.text.shade80"}
+        />
+
+        <CounterValue
+          color="palette.text.shade60"
+          fontSize={3}
+          alwaysShowSign={false}
+          date={operation.date}
+          currency={currency}
+          value={amount}
+        />
+      </>
+    )
+  );
+};
+
 const BondAmountCell = ({ operation, currency, unit }: Props) => {
   const amount = new BigNumber(operation.extra ? operation.extra.bondedAmount : 0);
 
@@ -232,6 +280,7 @@ const UnbondAmountCell = ({ operation, currency, unit }: Props) => {
 };
 
 const amountCellExtra = {
+  OUT: TransferAmountCell,
   BOND: BondAmountCell,
   UNBOND: UnbondAmountCell,
 };

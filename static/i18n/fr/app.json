@@ -1022,7 +1022,8 @@
       "rewards": "Récompenses réclamées",
       "bondedAmount": "Montant lié",
       "unbondedAmount": "Montant délié",
-      "palletMethod": "Méthode"
+      "palletMethod": "Méthode",
+      "transferAmount": "Montant transféré"
     }
   },
   "operationList": {
