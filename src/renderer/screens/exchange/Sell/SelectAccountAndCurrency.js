@@ -27,6 +27,7 @@ import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelec
 import type { Option } from "~/renderer/components/Select";
 import { CurrencyOptionRow } from "~/renderer/screens/exchange/swap/Form";
 import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
+import TrackPage from "~/renderer/analytics/TrackPage";
 
 const Container: ThemedComponent<{}> = styled.div`
   width: 365px;
@@ -114,6 +115,7 @@ const SelectAccountAndCurrency = ({
 
   return (
     <Container>
+      <TrackPage category="Page" name="Sell Crypto" />
       <IconContainer>
         <Exchange size={24} />
       </IconContainer>

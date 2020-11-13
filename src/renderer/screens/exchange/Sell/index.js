@@ -2,8 +2,8 @@
 
 import React, { useCallback, useState } from "react";
 import type { CryptoCurrency, TokenCurrency, Account } from "@ledgerhq/live-common/lib/types";
-import Connect from "~/renderer/screens/exchange/swap/Connect";
-import MissingOrOutdatedSwapApp from "~/renderer/screens/exchange/swap/MissingOrOutdatedSwapApp";
+import Connect from "./Connect";
+import MissingOrOutdatedSellApp from "./MissingOrOutdatedSellApp";
 import Sell from "./Sell";
 
 type Props = {
@@ -27,9 +27,9 @@ const MaybeSell = ({ defaultCurrency, defaultAccount }: Props) => {
   return !installedApps ? (
     <Connect setResult={onSetResult} />
   ) : !exchangeApp ? (
-    <MissingOrOutdatedSwapApp />
+    <MissingOrOutdatedSellApp />
   ) : exchangeApp.outdated ? (
-    <MissingOrOutdatedSwapApp outdated />
+    <MissingOrOutdatedSellApp outdated />
   ) : (
     <Sell
       installedApps={installedApps}

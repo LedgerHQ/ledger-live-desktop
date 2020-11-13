@@ -13,6 +13,7 @@ import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import CoinifyWidget from "../CoinifyWidget";
 import type { InstalledItem } from "@ledgerhq/live-common/lib/apps";
 import { useCoinifyCurrencies } from "~/renderer/screens/exchange/hooks";
+import { track } from "~/renderer/analytics/segment";
 
 const SellContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -50,6 +51,7 @@ const Sell = ({ defaultCurrency, defaultAccount, installedApps }: Props) => {
   const { account, parentAccount } = state;
 
   const reset = useCallback(() => {
+    track("Page Sell Reset");
     setState({
       account: undefined,
       parentAccount: undefined,

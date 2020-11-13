@@ -10,6 +10,7 @@ import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/accou
 import { useDispatch } from "react-redux";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import { track } from "~/renderer/analytics/segment";
 
 const BuyContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -34,6 +35,7 @@ const Buy = ({ defaultCurrency, defaultAccount }: Props) => {
   const dispatch = useDispatch();
 
   const reset = useCallback(() => {
+    track("Page Buy Reset");
     setState({
       account: undefined,
       parentAccount: undefined,
