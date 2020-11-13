@@ -6,7 +6,6 @@ import Exchange from "~/renderer/icons/Exchange";
 import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
 import { useTranslation } from "react-i18next";
-import { useCoinifyCurrencies } from "~/renderer/screens/exchange/hooks";
 import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
 import Label from "~/renderer/components/Label";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
@@ -69,6 +68,7 @@ type Props = {
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
   defaultAccount?: ?Account,
   currenciesStatus: CurrenciesStatus,
+  selectableCurrencies: (CryptoCurrency | TokenCurrency)[],
 };
 
 const AccountSelectorLabel = styled(Label)`
@@ -82,10 +82,10 @@ const SelectAccountAndCurrency = ({
   defaultCurrency,
   defaultAccount,
   currenciesStatus,
+  selectableCurrencies,
   allAccounts,
 }: Props) => {
   const { t } = useTranslation();
-  const allCurrencies = useCoinifyCurrencies("SELL");
 
   const {
     availableAccounts,
@@ -94,7 +94,12 @@ const SelectAccountAndCurrency = ({
     subAccount,
     setAccount,
     setCurrency,
-  } = useCurrencyAccountSelect({ allCurrencies, allAccounts, defaultCurrency, defaultAccount });
+  } = useCurrencyAccountSelect({
+    allCurrencies: selectableCurrencies,
+    allAccounts,
+    defaultCurrency,
+    defaultAccount,
+  });
 
   const dispatch = useDispatch();
 
@@ -121,7 +126,7 @@ const SelectAccountAndCurrency = ({
           <SelectCurrency
             rowHeight={47}
             renderOptionOverride={renderOptionOverride}
-            currencies={allCurrencies}
+            currencies={selectableCurrencies}
             autoFocus={true}
             onChange={setCurrency}
             value={currency}

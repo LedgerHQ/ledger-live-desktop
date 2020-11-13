@@ -9,10 +9,10 @@ import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/ty
 import { getCurrenciesWithStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/settings";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import CoinifyWidget from "../CoinifyWidget";
 import type { InstalledItem } from "@ledgerhq/live-common/lib/apps";
+import { useCoinifyCurrencies } from "~/renderer/screens/exchange/hooks";
 
 const SellContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ const Sell = ({ defaultCurrency, defaultAccount, installedApps }: Props) => {
 
   const accounts = useSelector(shallowAccountsSelector);
 
-  const selectableCurrencies = useSelector(swapSupportedCurrenciesSelector);
+  const selectableCurrencies = useCoinifyCurrencies("SELL");
 
   const currenciesStatus = useMemo(
     () =>
@@ -81,6 +81,7 @@ const Sell = ({ defaultCurrency, defaultAccount, installedApps }: Props) => {
           defaultAccount={defaultAccount}
           currenciesStatus={currenciesStatus}
           allAccounts={accounts}
+          selectableCurrencies={selectableCurrencies}
         />
       )}
     </SellContainer>
