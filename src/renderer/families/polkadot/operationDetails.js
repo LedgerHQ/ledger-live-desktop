@@ -88,6 +88,40 @@ export const OperationDetailsValidators = ({
   );
 };
 
+type OperationsDetailsRewardFromProps = {
+  validatorStash: string,
+  account: Account,
+  isTransactionField?: boolean,
+};
+
+export const OperationsDetailsRewardFrom = ({
+  validatorStash,
+  account,
+  isTransactionField,
+}: OperationsDetailsRewardFromProps) => {
+  const { currency } = account;
+
+  const { validators: polkadotValidators } = usePolkadotPreloadData();
+
+  const validator = useMemo(() => polkadotValidators.find(v => v.address === validatorStash), [
+    validatorStash,
+    polkadotValidators,
+  ]);
+
+  return (
+    <Box>
+      <OpDetailsTitle>
+        <Trans i18nKey={"operationDetails.extra.rewardFrom"} />
+      </OpDetailsTitle>
+      <OpDetailsData>
+        <Address onClick={redirectAddress(currency, validatorStash)}>
+          {validator ? validator.identity ?? validator.address : validatorStash}
+        </Address>
+      </OpDetailsData>
+    </Box>
+  );
+};
+
 type OperationsDetailsPalletMethodProps = {
   palletMethod: string,
 };
@@ -151,20 +185,22 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
       return (
         <>
           <OperationsDetailsPalletMethod palletMethod={extra.palletMethod} />
-          <Box>
-            <OpDetailsTitle>
-              <Trans i18nKey="operationDetails.extra.bondedAmount" />
-            </OpDetailsTitle>
-            <OpDetailsData>
-              <FormattedVal
-                val={BigNumber(extra.bondedAmount)}
-                unit={account.unit}
-                showCode
-                fontSize={4}
-                color="palette.text.shade60"
-              />
-            </OpDetailsData>
-          </Box>
+          {extra.bondedAmount ? (
+            <Box>
+              <OpDetailsTitle>
+                <Trans i18nKey="operationDetails.extra.bondedAmount" />
+              </OpDetailsTitle>
+              <OpDetailsData>
+                <FormattedVal
+                  val={BigNumber(extra.bondedAmount)}
+                  unit={account.unit}
+                  showCode
+                  fontSize={4}
+                  color="palette.text.shade60"
+                />
+              </OpDetailsData>
+            </Box>
+          ) : null}
         </>
       );
     case "UNBOND":
@@ -185,6 +221,15 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
               />
             </OpDetailsData>
           </Box>
+        </>
+      );
+    case "REWARD":
+      return (
+        <>
+          <OperationsDetailsPalletMethod palletMethod={extra.palletMethod} />
+          {extra.validatorStash ? (
+            <OperationsDetailsRewardFrom validatorStash={extra.validatorStash} account={account} />
+          ) : null}
         </>
       );
     default:
