@@ -8,7 +8,7 @@ const ModalFooter: ThemedComponent<{}> = styled.div`
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid ${p => p.theme.colors.palette.divider};
-  padding: 20px;
+  padding: 15px 20px;
   &:empty {
     display: none;
   }

@@ -22,7 +22,7 @@ import LendingInfoIllu3 from "~/renderer/images/lending-info-3.svg";
 
 import { closeModal, openModal } from "~/renderer/actions/modals";
 import { openURL } from "~/renderer/linking";
-import TrackPage from "~/renderer/analytics/TrackPage";
+import Track from "~/renderer/analytics/Track";
 import { track } from "~/renderer/analytics/segment";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
@@ -64,7 +64,7 @@ export default function LendTermsModal({
   }, []);
 
   const onFinish = useCallback(() => {
-    track("Lend Edu Complete");
+    track("Lend Edu Complete", {});
     handleOnClose();
     if (currency)
       dispatch(
@@ -131,7 +131,7 @@ export default function LendTermsModal({
         {
           illustration: (
             <>
-              <TrackPage category="Lend" name="Edu Step 1" />
+              <Track event="Lend Edu" properties={{ step: 1 }} onMount />
               <LendingTermsImg overlay />
               <LendingTermsImg1 />
               <LendingTermsImg2 />
@@ -157,7 +157,7 @@ export default function LendTermsModal({
         {
           illustration: (
             <>
-              <TrackPage category="Lend" name="Edu Step 2" />
+              <Track event="Lend Edu" properties={{ step: 2 }} onUpdate />
               <LendingTermsImg overlay />
               <LendingTermsImg1 />
               <LendingTermsImg2 />
@@ -176,7 +176,7 @@ export default function LendTermsModal({
         {
           illustration: (
             <>
-              <TrackPage category="Lend" name="Edu Step 3" />
+              <Track event="Lend Edu" properties={{ step: 3 }} onUpdate />
               <LendingTermsImg overlay />
               <LendingTermsImg1 />
               <LendingTermsImg2 />

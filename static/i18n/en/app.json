@@ -212,7 +212,8 @@
           "terms": "Terms & Conditions",
           "disclaimer": {
             "header": "Details",
-            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by Changelly's"
+            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s",
+            "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
           },
           "details": {
             "provider": "Provider",
@@ -644,6 +645,14 @@
     "swap": {
       "title": "Swap crypto",
       "description": "Exchange one crypto for another from Ledger Live with our partner."
+    },
+    "lending": {
+      "title": "Lend Crypto",
+      "description": "Lend stablecoins to the Compound protocol and earn interests today"
+    },
+    "blackfriday": {
+      "title": "BLACK FRIDAY ",
+      "description": "Enjoy 40% off Ledger hardware wallets with the promo code BLACKFRIDAY20"
     }
   },
   "dashboard": {

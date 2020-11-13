@@ -49,9 +49,16 @@ type Props = {
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
   defaultAccount?: ?AccountLike,
   defaultParentAccount?: ?Account,
+  setTabIndex: number => void,
 };
 
-const Form = ({ installedApps, defaultCurrency, defaultAccount, defaultParentAccount }: Props) => {
+const Form = ({
+  installedApps,
+  defaultCurrency,
+  defaultAccount,
+  defaultParentAccount,
+  setTabIndex,
+}: Props) => {
   const accounts = useSelector(shallowAccountsSelector);
   const selectableCurrencies = useSelector(swapSupportedCurrenciesSelector);
   const modalsState = useSelector(modalsStateSelector);
@@ -102,10 +109,11 @@ const Form = ({ installedApps, defaultCurrency, defaultAccount, defaultParentAcc
     [ratesTimestamp],
   );
 
+  const onCompleteSwap = useCallback(() => setTabIndex(1), [setTabIndex]);
   const onStartSwap = useCallback(() => {
     setTimerVisibility(false);
-    reduxDispatch(openModal("MODAL_SWAP", { swap, transaction, ratesExpiration }));
-  }, [ratesExpiration, reduxDispatch, swap, transaction]);
+    reduxDispatch(openModal("MODAL_SWAP", { swap, transaction, ratesExpiration, onCompleteSwap }));
+  }, [onCompleteSwap, ratesExpiration, reduxDispatch, swap, transaction]);
 
   const { magnitudeAwareRate } = exchangeRate || {};
 

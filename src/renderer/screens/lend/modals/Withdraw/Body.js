@@ -17,6 +17,7 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 
 import logger from "~/logger/logger";
+import TrackPage from "~/renderer/analytics/TrackPage";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import Track from "~/renderer/analytics/Track";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
@@ -58,7 +59,12 @@ const steps: Array<St> = [
   },
   {
     id: "connectDevice",
-    label: <Trans i18nKey="lend.withdraw.steps.connectDevice.title" />,
+    label: (
+      <>
+        <TrackPage category="Lend" name="Withdraw Step 2" />
+        <Trans i18nKey="lend.withdraw.steps.connectDevice.title" />
+      </>
+    ),
     component: GenericStepConnectDevice,
     onBack: ({ transitionTo }: StepProps) => transitionTo("amount"),
   },

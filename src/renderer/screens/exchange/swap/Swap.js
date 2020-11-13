@@ -23,9 +23,10 @@ type Props = {
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
   defaultAccount?: ?AccountLike,
   defaultParentAccount?: ?Account,
+  setTabIndex: number => void,
 };
 
-const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount }: Props) => {
+const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount, setTabIndex }: Props) => {
   const providers = useSelector(swapProvidersSelector);
   const hasAcceptedSwapKYC = useSelector(hasAcceptedSwapKYCSelector);
 
@@ -78,6 +79,7 @@ const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount }: Props) 
       defaultCurrency={defaultCurrency}
       defaultAccount={defaultAccount}
       defaultParentAccount={defaultParentAccount}
+      setTabIndex={setTabIndex}
     />
   );
 };

@@ -212,7 +212,8 @@
           "terms": "Termes et conditions",
           "disclaimer": {
             "header": "Détails",
-            "description": "En cliquant sur \"Confirmer\", je reconnais et j'accepte que ce service soit exclusivement régi par Changelly"
+            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s",
+            "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
           },
           "details": {
             "provider": "Fournisseur",

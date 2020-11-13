@@ -140,7 +140,7 @@ export const IllustrationWrapper: ThemedComponent<{}> = styled.div`
   position: relative;
   right: 0;
   align-self: flex-end;
-  transform: scale(${p => p.scale || "0.7"}) translateY(-40px);
+  transform: scale(${p => p.scale || "0.7"}) translateY(${p => p.translateY || "-40"}px);
 `;
 
 export const Wrapper: ThemedComponent<{}> = styled.div`
@@ -152,7 +152,7 @@ export const Wrapper: ThemedComponent<{}> = styled.div`
   cursor: pointer;
 `;
 
-export const CAROUSEL_NONCE: number = 3;
+export const CAROUSEL_NONCE: number = 4;
 
 const Carousel = ({
   withArrows = true,
@@ -165,9 +165,18 @@ const Carousel = ({
   controls?: boolean,
   speed?: number,
   type?: "slide" | "flip",
-  slides?: [{ id: string, Component: React$ComponentType<{}> }],
+  slides?: [{ id: string, Component: React$ComponentType<{}>, start?: Date, end?: Date }],
 }) => {
-  const slides = _slides || getDefaultSlides();
+  let slides = _slides || getDefaultSlides();
+  slides = slides.filter(slide => {
+    if (slide.start && slide.start > new Date()) {
+      return false;
+    }
+    if (slide.end && slide.end < new Date()) {
+      return false;
+    }
+    return true;
+  });
   const [index, setIndex] = useState(0);
   const hidden = useSelector(carouselVisibilitySelector);
   const [paused, setPaused] = useState(false);
