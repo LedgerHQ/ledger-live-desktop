@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useObservable } from "@ledgerhq/live-common/lib/observable";
 import { statusObservable } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
 import Box from "~/renderer/components/Box";
@@ -11,12 +11,22 @@ import Button from "~/renderer/components/Button";
 import IconCheck from "~/renderer/icons/Check";
 import IconCross from "~/renderer/icons/Cross";
 import { CheckWrapper, CrossWrapper } from "~/renderer/modals/FullNode";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
 
-const SatStack = () => {
+const SatStack = ({
+  satStackDownloaded,
+  setSatStackDownloaded,
+}: {
+  satStackDownloaded: boolean,
+  setSatStackDownloaded: boolean => void,
+}) => {
   const latestStatus = useObservable(statusObservable, { type: "satstack-disconnected" });
   const status = (latestStatus && latestStatus.type) || "";
-  const [satStackDownloaded, setSatStackDownloaded] = useState(false);
-  const onSatStackDownloaded = useCallback(() => setSatStackDownloaded(true), []);
+  const onSatStackDownloaded = useCallback(() => {
+    setSatStackDownloaded(true);
+    openURL(urls.satstacks);
+  }, [setSatStackDownloaded]);
 
   return !satStackDownloaded ? (
     <Box>
@@ -94,6 +104,30 @@ const SatStack = () => {
         <Trans i18nKey="fullNode.modal.steps.satstack.connectionSteps.success.description" />
       </Text>
     </Box>
+  ) : status === "ready" ? (
+    <Box alignItems="center">
+      <CheckWrapper size={50}>
+        <IconCheck size={20} />
+      </CheckWrapper>
+      <Text
+        ff="Inter|SemiBold"
+        textAlign={"center"}
+        mt={32}
+        fontSize={6}
+        color="palette.text.shade100"
+      >
+        {status}
+      </Text>
+      <Text
+        ff="Inter|Regular"
+        mt={2}
+        textAlign={"center"}
+        fontSize={3}
+        color="palette.text.shade50"
+      >
+        {status}
+      </Text>
+    </Box>
   ) : (
     <Box alignItems="center">
       <CrossWrapper size={50}>
@@ -106,7 +140,7 @@ const SatStack = () => {
         fontSize={6}
         color="palette.text.shade100"
       >
-        <Trans i18nKey="fullNode.modal.steps.satstack.connectionSteps.failure.header" />
+        <Trans i18nKey={`fullNode.modal.steps.satstack.connectionSteps.${status}.header`} />
       </Text>
       <Text
         ff="Inter|Regular"
@@ -115,7 +149,7 @@ const SatStack = () => {
         fontSize={3}
         color="palette.text.shade50"
       >
-        <Trans i18nKey="fullNode.modal.steps.satstack.connectionSteps.failure.description" />
+        <Trans i18nKey={`fullNode.modal.steps.satstack.connectionSteps.${status}.description`} />
       </Text>
       <Text
         ff="Inter|Regular"
@@ -130,7 +164,13 @@ const SatStack = () => {
   );
 };
 
-export const StepSatStackFooter = ({ onClose }: { onClose: () => void }) => {
+export const StepSatStackFooter = ({
+  satStackDownloaded,
+  onClose,
+}: {
+  satStackDownloaded: boolean,
+  onClose: () => void,
+}) => {
   const latestStatus = useObservable(statusObservable, { type: "satstack-disconnected" });
   const status = (latestStatus && latestStatus.type) || "";
 
@@ -139,7 +179,7 @@ export const StepSatStackFooter = ({ onClose }: { onClose: () => void }) => {
       <Button mr={3} onClick={onClose}>
         <Trans i18nKey="common.cancel" />
       </Button>
-      <Button primary onClick={onClose} disabled={status !== "ready"}>
+      <Button primary onClick={onClose} disabled={!satStackDownloaded || status !== "ready"}>
         <Trans i18nKey="common.done" />
       </Button>
     </Box>

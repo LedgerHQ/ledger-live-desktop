@@ -30,6 +30,7 @@ const FullNodeBody = ({
 }) => {
   const [errors, setErrors] = useState(null);
   const satStackAlreadyConfigured = getEnv("SATSTACK");
+  const [satStackDownloaded, setSatStackDownloaded] = useState(false);
 
   const [nodeConnectionStatus, setNodeConnectionStatus] = useState<ConnectionStatus>(
     connectionStatus.IDLE,
@@ -125,7 +126,10 @@ const FullNodeBody = ({
               numberOfAccountsToScan={numberOfAccountsToScan}
             />
           ) : activeStep === "satstack" ? (
-            <StepSatStack />
+            <StepSatStack
+              satStackDownloaded={satStackDownloaded}
+              setSatStackDownloaded={setSatStackDownloaded}
+            />
           ) : (
             <StepDisconnect />
           )}
@@ -151,7 +155,7 @@ const FullNodeBody = ({
             scannedDescriptors={scannedDescriptors}
           />
         ) : activeStep === "satstack" ? (
-          <StepSatStackFooter onClose={onClose} />
+          <StepSatStackFooter satStackDownloaded={satStackDownloaded} onClose={onClose} />
         ) : (
           <StepDisconnectFooter onClose={onClose} />
         )
