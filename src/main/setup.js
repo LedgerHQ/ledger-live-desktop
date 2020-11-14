@@ -4,11 +4,14 @@ import "../live-common-setup-base";
 import { ipcMain } from "electron";
 import contextMenu from "electron-context-menu";
 import logger, { enableDebugLogger } from "../logger";
+import { log } from "@ledgerhq/logs";
 import LoggerTransport from "~/logger/logger-transport-main";
 import LoggerTransportFirmware from "~/logger/logger-transport-firmware";
 import { fsWriteFile, fsReadFile, fsUnlink } from "~/helpers/fs";
 import osName from "~/helpers/osName";
 import updater from "./updater";
+import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
+import path from "path";
 
 const loggerTransport = new LoggerTransport();
 const loggerFirmwareTransport = new LoggerTransportFirmware();
@@ -46,34 +49,39 @@ ipcMain.handle(
   },
 );
 
-ipcMain.handle("generate-lss-config", async (event, filePath, data: string): Promise<boolean> => {
-  try {
+const lssFileName = "lss.json";
+
+ipcMain.handle("generate-lss-config", async (event, data: string): Promise<boolean> => {
+  const userDataDirectory = resolveUserDataDirectory();
+  const filePath = path.resolve(userDataDirectory, lssFileName);
+  if (filePath) {
     if (filePath && data) {
       await fsWriteFile(filePath, data);
       return true;
     }
-  } catch (error) {}
+  }
 
   return false;
 });
 
-ipcMain.handle("delete-lss-config", async (event, filePath): Promise<boolean> => {
-  try {
-    if (filePath) {
-      await fsUnlink(filePath);
-      return true;
-    }
-  } catch (error) {}
-
+ipcMain.handle("delete-lss-config", async (event): Promise<boolean> => {
+  const userDataDirectory = resolveUserDataDirectory();
+  const filePath = path.resolve(userDataDirectory, lssFileName);
+  if (filePath) {
+    await fsUnlink(filePath);
+    return true;
+  }
   return false;
 });
 
-ipcMain.handle("load-lss-config", async (event, filePath): Promise<?string> => {
-  try {
-    if (filePath) {
-      return await fsReadFile(filePath, "utf8");
-    }
-  } catch (error) {}
+ipcMain.handle("load-lss-config", async (event): Promise<?string> => {
+  const userDataDirectory = resolveUserDataDirectory();
+  const filePath = path.resolve(userDataDirectory, lssFileName);
+  if (filePath) {
+    const contents = await fsReadFile(filePath, "utf8");
+    log("lss", `loaded lss.json file with length ${contents.length}`);
+    return contents;
+  }
 
   return undefined;
 });

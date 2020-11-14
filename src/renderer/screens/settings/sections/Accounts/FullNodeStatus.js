@@ -8,7 +8,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useObservable } from "@ledgerhq/live-common/lib/observable";
 import styled from "styled-components";
 import { colors } from "~/renderer/styles/theme";
-import { getEnv } from "@ledgerhq/live-common/lib/env";
+import useEnv from "~/renderer/hooks/useEnv";
 
 const Dot: ThemedComponent<{
   color?: string,
@@ -34,7 +34,7 @@ const naiveMapping = {
 const FullNodeStatus = () => {
   const { t } = useTranslation();
   const latestStatus = useObservable(statusObservable, { type: "satstack-disconnected" });
-  const satStackAlreadyConfigured = getEnv("SATSTACK");
+  const satStackAlreadyConfigured = useEnv("SATSTACK");
   if (!satStackAlreadyConfigured) return null;
 
   const status = (latestStatus && latestStatus.type) || "";

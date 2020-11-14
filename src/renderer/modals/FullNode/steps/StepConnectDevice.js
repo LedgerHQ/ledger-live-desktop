@@ -1,15 +1,14 @@
 // @flow
 
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { reduce } from "rxjs/operators";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
-import { shell } from "electron";
-import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import BigSpinner from "~/renderer/components/BigSpinner";
 import Text from "~/renderer/components/Text";
+import OpenUserDataDirectoryBtn from "~/renderer/components/OpenUserDataDirectoryBtn";
 import { Trans } from "react-i18next";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
 import { command } from "~/renderer/commands";
@@ -38,20 +37,23 @@ const StepConnectDevice = ({
 
   useEffect(() => {
     if (device) {
-      const currency = getCryptoCurrencyById("bitcoin");
-      command("scanDescriptors")({
+      const sub = command("scanDescriptors")({
         deviceId: device.deviceId,
-        currency,
+        currencyId: "bitcoin",
         limit: 10,
       })
         // $FlowFixMe I don't know what you want.
         .pipe(reduce((acc, item) => acc.concat({ descriptor: item }), []))
-        .subscribe(descriptors => {
-          setScanStatus(connectionStatus.SUCCESS);
-          setScannedDescriptors(descriptors);
+        .subscribe({
+          next: descriptors => {
+            setScanStatus(connectionStatus.SUCCESS);
+            setScannedDescriptors(descriptors);
+          },
+          error: setError,
         });
+      return () => sub.unsubscribe();
     }
-  }, [device, setScannedDescriptors]);
+  }, [device, setError, setScannedDescriptors]);
 
   return (
     <>
@@ -124,28 +126,21 @@ export const StepDeviceFooter = ({
   onClose: () => void,
   onStepChange: FullNodeSteps => void,
   scannedDescriptors: any,
-}) => {
-  const onOpenUserDataFolder = useCallback(() => {
-    const userDataDirectory = resolveUserDataDirectory();
-    shell.showItemInFolder(userDataDirectory);
-  }, []);
-
-  return (
-    <Box horizontal alignItems={"flex-end"}>
-      {scannedDescriptors ? (
-        <Button onClick={onOpenUserDataFolder} mr={3}>
-          <Trans i18nKey="fullNode.modal.steps.device.connectionSteps.success.cta" />
-        </Button>
-      ) : (
-        <Button onClick={onClose} mr={3}>
-          <Trans i18nKey="common.cancel" />
-        </Button>
-      )}
-      <Button primary onClick={() => onStepChange("satstack")} disabled={!scannedDescriptors}>
-        <Trans i18nKey="common.continue" />
+}) => (
+  <Box horizontal alignItems={"flex-end"}>
+    {scannedDescriptors ? (
+      <OpenUserDataDirectoryBtn outlineGrey mr={2}>
+        <Trans i18nKey="fullNode.modal.steps.device.connectionSteps.success.cta" />
+      </OpenUserDataDirectoryBtn>
+    ) : (
+      <Button onClick={onClose} mr={3}>
+        <Trans i18nKey="common.cancel" />
       </Button>
-    </Box>
-  );
-};
+    )}
+    <Button primary onClick={() => onStepChange("satstack")} disabled={!scannedDescriptors}>
+      <Trans i18nKey="common.continue" />
+    </Button>
+  </Box>
+);
 
 export default StepConnectDevice;

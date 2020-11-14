@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import InfoBox from "~/renderer/components/InfoBox";
+import InputPassword from "~/renderer/components/InputPassword";
 import Input from "~/renderer/components/Input";
 import Label from "~/renderer/components/Label";
 import Switch from "~/renderer/components/Switch";
@@ -36,11 +37,17 @@ export type RPCNodeConfig = {
 const Form = ({
   nodeConfig,
   patchNodeConfig,
+  errors,
 }: {
   nodeConfig?: RPCNodeConfig,
   patchNodeConfig: ({ [$Keys<RPCNodeConfig>]: any }) => void,
+  errors: any,
 }) => {
   const { t } = useTranslation();
+
+  const hostError = errors.find(e => e.field === "host")?.error;
+  const usernameError = errors.find(e => e.field === "username")?.error;
+  const passwordError = errors.find(e => e.field === "password")?.error;
 
   return (
     <Box>
@@ -59,6 +66,7 @@ const Form = ({
             <Trans i18nKey="fullNode.modal.steps.node.connectionSteps.notConnected.fields.nodeURL.title" />
           </Label>
           <Input
+            error={hostError}
             onChange={host => patchNodeConfig({ host })}
             value={nodeConfig?.host}
             placeholder={t(
@@ -73,13 +81,15 @@ const Form = ({
             </Label>
             <InputWrapper horizontal flex={1}>
               <Input
+                error={usernameError}
                 onChange={username => patchNodeConfig({ username })}
                 value={nodeConfig?.username}
                 placeholder={t(
                   "fullNode.modal.steps.node.connectionSteps.notConnected.fields.rpcCredentials.usernamePlaceholder",
                 )}
               />
-              <Input
+              <InputPassword
+                error={passwordError}
                 onChange={password => patchNodeConfig({ password })}
                 value={nodeConfig?.password}
                 placeholder={t(

@@ -6,6 +6,7 @@ import type { RPCNodeConfig } from "@ledgerhq/live-common/lib/families/bitcoin/s
 import { ModalBody } from "~/renderer/components/Modal";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Breadcrumb from "~/renderer/components/Stepper/Breadcrumb";
+import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import StepLanding, { StepLandingFooter } from "./steps/StepLanding";
 import StepNode, { StepNodeFooter } from "./steps/StepNode";
 import StepAccounts, { StepAccountsFooter } from "./steps/StepAccounts";
@@ -14,9 +15,8 @@ import StepSatStack, { StepSatStackFooter } from "./steps/StepSatStack";
 import StepDisconnect, { StepDisconnectFooter } from "./steps/StepDisconnect";
 import type { FullNodeSteps, ConnectionStatus } from "~/renderer/modals/FullNode";
 import { connectionStatus } from "~/renderer/modals/FullNode";
-import { saveLSS } from "./helpers";
-import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { loadLSS } from "~/renderer/modals/FullNode/helpers";
+import useEnv from "~/renderer/hooks/useEnv";
+import { loadLSS, saveLSS } from "~/renderer/storage";
 
 const steps = ["landing", "node", "accounts", "device", "satstack", "disconnect"];
 const FullNodeBody = ({
@@ -29,7 +29,9 @@ const FullNodeBody = ({
   activeStep: FullNodeSteps,
 }) => {
   const [errors, setErrors] = useState(null);
-  const satStackAlreadyConfigured = getEnv("SATSTACK");
+  const [error, setError] = useState(null);
+  const [errorStep, setErrorStep] = useState(null);
+  const satStackAlreadyConfigured = useEnv("SATSTACK");
   const [satStackDownloaded, setSatStackDownloaded] = useState(false);
 
   const [nodeConnectionStatus, setNodeConnectionStatus] = useState<ConnectionStatus>(
@@ -50,11 +52,12 @@ const FullNodeBody = ({
     notls: false,
   });
   const [scannedDescriptors, setScannedDescriptors] = useState();
-  const patchNodeConfig = useCallback((patch: any) => setNodeConfig({ ...nodeConfig, ...patch }), [
-    nodeConfig,
-  ]);
+  const patchNodeConfig = useCallback(
+    (patch: $Shape<RPCNodeConfig>) => setNodeConfig({ ...nodeConfig, ...patch }),
+    [nodeConfig],
+  );
 
-  const errorSteps = errors ? [1] : [];
+  const errorSteps = error && errorStep ? [errorStep] : [];
   const showBreadcrumb = !["landing", "disconnect"].includes(activeStep);
   const stepIndex = steps.indexOf(activeStep) - 1;
 
@@ -62,7 +65,7 @@ const FullNodeBody = ({
 
   const validNodeConfig = useMemo(() => {
     const errors = validateRPCNodeConfig(nodeConfig);
-    // NB All fields are required, why do we need these errors?
+    setErrors(errors);
     return !errors.length;
   }, [nodeConfig]);
 
@@ -70,9 +73,9 @@ const FullNodeBody = ({
     // Prefill the node data for edit?
     async function prefill() {
       if (satStackAlreadyConfigured) {
-        const maybeNodeConfig = await loadLSS();
-        if (maybeNodeConfig && maybeNodeConfig.node) {
-          setNodeConfig(maybeNodeConfig.node);
+        const maybeLSSConfig = await loadLSS();
+        if (maybeLSSConfig && maybeLSSConfig.node) {
+          setNodeConfig(maybeLSSConfig.node);
         }
       }
     }
@@ -81,11 +84,10 @@ const FullNodeBody = ({
 
   useEffect(() => {
     if (scannedDescriptors) {
-      try {
-        saveLSS({ node: { ...nodeConfig }, accounts: scannedDescriptors });
-      } catch (error) {
-        console.log(error);
-      }
+      saveLSS({ node: nodeConfig, accounts: scannedDescriptors }).catch(e => {
+        setError(e);
+        setErrorStep(2);
+      });
     }
   }, [nodeConfig, scannedDescriptors]);
 
@@ -105,10 +107,13 @@ const FullNodeBody = ({
           {showBreadcrumb ? (
             <Breadcrumb mb={40} currentStep={stepIndex} stepsErrors={errorSteps} items={items} />
           ) : null}
-          {activeStep === "landing" ? (
+          {error ? (
+            <ErrorDisplay error={error} withExportLogs />
+          ) : activeStep === "landing" ? (
             <StepLanding />
           ) : activeStep === "node" ? (
             <StepNode
+              errors={errors}
               nodeConfig={nodeConfig}
               setNodeConfig={patchNodeConfig}
               nodeConnectionStatus={nodeConnectionStatus}
@@ -119,7 +124,7 @@ const FullNodeBody = ({
             <StepAccounts setNumberOfAccountsToScan={setNumberOfAccountsToScan} />
           ) : activeStep === "device" ? (
             <StepConnectDevice
-              setError={setErrors}
+              setError={setError}
               onStepChange={onStepChange}
               nodeConfig={nodeConfig}
               setScannedDescriptors={setScannedDescriptors}

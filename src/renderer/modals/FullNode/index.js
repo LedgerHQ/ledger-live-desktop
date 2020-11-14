@@ -6,7 +6,7 @@ import FullNodeBody from "~/renderer/modals/FullNode/FullNodeBody";
 import styled from "styled-components";
 import { rgba } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { getEnv } from "@ledgerhq/live-common/lib/env";
+import useEnv from "~/renderer/hooks/useEnv";
 
 export type FullNodeSteps = "landing" | "node" | "device" | "accounts" | "satstack" | "disconnect";
 export const connectionStatus = Object.freeze({
@@ -44,7 +44,7 @@ export const CrossWrapper: ThemedComponent<{
 `;
 
 const FullNode = () => {
-  const satStackAlreadyConfigured = getEnv("SATSTACK");
+  const satStackAlreadyConfigured = useEnv("SATSTACK");
   const [stepId, setStepId] = useState(satStackAlreadyConfigured ? "node" : "landing");
   const isModalLocked = ["device"].includes(stepId);
 

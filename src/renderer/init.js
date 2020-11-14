@@ -11,7 +11,7 @@ import i18n from "i18next";
 import { remote, webFrame, ipcRenderer } from "electron";
 import { render } from "react-dom";
 import moment from "moment";
-import { reload, getKey } from "~/renderer/storage";
+import { reload, getKey, loadLSS } from "~/renderer/storage";
 
 import "~/renderer/styles/global";
 import "~/renderer/live-common-setup";
@@ -28,7 +28,6 @@ import dbMiddleware from "~/renderer/middlewares/db";
 import createStore from "~/renderer/createStore";
 import events from "~/renderer/events";
 import { setAccounts } from "~/renderer/actions/accounts";
-import { loadLSS } from "~/renderer/modals/FullNode/helpers";
 import { fetchSettings, setDeepLinkUrl } from "~/renderer/actions/settings";
 import { lock, setOSDarkMode } from "~/renderer/actions/application";
 

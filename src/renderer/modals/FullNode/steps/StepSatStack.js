@@ -21,7 +21,7 @@ const SatStack = ({
   satStackDownloaded: boolean,
   setSatStackDownloaded: boolean => void,
 }) => {
-  const latestStatus = useObservable(statusObservable, { type: "satstack-disconnected" });
+  const latestStatus = useObservable(statusObservable);
   const status = (latestStatus && latestStatus.type) || "";
   const onSatStackDownloaded = useCallback(() => {
     setSatStackDownloaded(true);
@@ -171,7 +171,7 @@ export const StepSatStackFooter = ({
   satStackDownloaded: boolean,
   onClose: () => void,
 }) => {
-  const latestStatus = useObservable(statusObservable, { type: "satstack-disconnected" });
+  const latestStatus = useObservable(statusObservable);
   const status = (latestStatus && latestStatus.type) || "";
 
   return (

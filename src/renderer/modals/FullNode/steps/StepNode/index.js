@@ -13,7 +13,7 @@ import type { RPCNodeConfig } from "@ledgerhq/live-common/lib/families/bitcoin/s
 import { checkRPCNodeConfig } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
 import type { FullNodeSteps, ConnectionStatus } from "~/renderer/modals/FullNode";
 import { CheckWrapper, CrossWrapper, connectionStatus } from "~/renderer/modals/FullNode";
-import { getEnv } from "@ledgerhq/live-common/lib/env";
+import useEnv from "~/renderer/hooks/useEnv";
 
 const Node = ({
   nodeConnectionStatus = connectionStatus.IDLE,
@@ -21,12 +21,14 @@ const Node = ({
   setNodeConfig,
   setNodeConnectionStatus,
   onStepChange,
+  errors,
 }: {
   nodeConnectionStatus: ConnectionStatus,
   nodeConfig: RPCNodeConfig,
   setNodeConfig: any => void,
   setNodeConnectionStatus: ConnectionStatus => void,
   onStepChange: FullNodeSteps => void,
+  errors: any,
 }) => {
   useEffect(() => {
     if (nodeConnectionStatus === connectionStatus.PENDING) {
@@ -39,7 +41,7 @@ const Node = ({
   return (
     <Box>
       {nodeConnectionStatus === connectionStatus.IDLE ? (
-        <Form patchNodeConfig={setNodeConfig} nodeConfig={nodeConfig} />
+        <Form patchNodeConfig={setNodeConfig} errors={errors} nodeConfig={nodeConfig} />
       ) : nodeConnectionStatus === connectionStatus.PENDING ? (
         <Box alignItems="center">
           <BigSpinner size={50} />
@@ -128,7 +130,7 @@ export const StepNodeFooter = ({
   nodeConnectionStatus: ConnectionStatus,
   setNodeConnectionStatus: ConnectionStatus => void,
 }) => {
-  const satStackAlreadyConfigured = getEnv("SATSTACK");
+  const satStackAlreadyConfigured = useEnv("SATSTACK");
   const continueEnabled =
     (validNodeConfig &&
       (nodeConnectionStatus === connectionStatus.IDLE ||

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Trans } from "react-i18next";
 import fullnodeIllustration from "~/renderer/images/disconnect.png";
 import Button from "~/renderer/components/Button";
-import { removeLSS } from "~/renderer/modals/FullNode/helpers";
+import { removeLSS } from "~/renderer/storage";
 
 const Illustration = styled.div`
   margin-bottom: 24px;
@@ -26,7 +26,7 @@ export const StepDisconnectFooter = ({ onClose }: { onClose: () => void }) => {
   const onConfirmDisconnect = useCallback(() => {
     removeLSS();
     onClose();
-  }, []);
+  }, [onClose]);
 
   return (
     <Box horizontal alignItems={"flex-end"}>

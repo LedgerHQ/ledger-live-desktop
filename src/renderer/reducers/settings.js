@@ -395,8 +395,6 @@ export const swapProvidersSelector = (state: Object) => state.settings.swapProvi
 
 export const showClearCacheBannerSelector = (state: Object) => state.settings.showClearCacheBanner;
 
-export const fullNodeEnabledSelector = (state: Object) => state.settings.fullNodeEnabled;
-
 export const swapSupportedCurrenciesSelector: OutputSelector<
   State,
   { accountId: string },

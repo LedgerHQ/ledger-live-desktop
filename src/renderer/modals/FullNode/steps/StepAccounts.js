@@ -37,10 +37,15 @@ const Accounts = () => {
   const bitcoinAccounts = accounts.filter(a => getAccountCurrency(a) === currency);
 
   const onUpdateNumberOfAccountsToScan = useCallback(value => {
-    const newNumberOfAccounts = parseInt(value) || 1;
-    if (newNumberOfAccounts < 1000) {
-      setNumberOfAccountsToScan(newNumberOfAccounts);
+    let newNumberOfAccounts = parseInt(value, 10) || 1;
+    if (
+      newNumberOfAccounts < 0 ||
+      Number.isNaN(newNumberOfAccounts) ||
+      !Number.isFinite(newNumberOfAccounts)
+    ) {
+      newNumberOfAccounts = 1;
     }
+    setNumberOfAccountsToScan(newNumberOfAccounts);
   }, []);
 
   return (
@@ -68,6 +73,7 @@ const Accounts = () => {
         <Input
           style={{ width: 40, textAlign: "center" }}
           placeholder="10"
+          maxLength={3}
           onChange={onUpdateNumberOfAccountsToScan}
           value={numberOfAccountsToScan}
         />

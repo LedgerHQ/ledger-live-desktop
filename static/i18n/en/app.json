@@ -2568,6 +2568,10 @@
       "title": "Exchange rate expired",
       "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
     },
+    "SatStackNotReady": {
+      "title": "",
+      "description": ""
+    },
     "TimeoutError": {
       "title": "Oops, a timeout occurred",
       "description": "It took too long for the server to respond. Please try again"
