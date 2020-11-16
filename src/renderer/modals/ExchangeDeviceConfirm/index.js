@@ -18,16 +18,12 @@ import { Trans, useTranslation } from "react-i18next";
 import ReadOnlyAddressField from "~/renderer/components/ReadOnlyAddressField";
 import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/rendering";
 import useTheme from "~/renderer/hooks/useTheme";
-import { openURL } from "~/renderer/linking";
 import { Separator } from "~/renderer/components/Breadcrumb/common";
 import { mockedEventEmitter } from "~/renderer/components/DebugMock";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import Button from "~/renderer/components/Button";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Receive2NoDevice from "~/renderer/components/Receive2NoDevice";
-import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
-import IconShield from "~/renderer/icons/Shield";
-import { urls } from "~/config/urls";
 
 const connectAppExec = command("connectApp");
 
@@ -102,19 +98,23 @@ const VerifyOnDevice = ({
   return device || skipDevice ? (
     <>
       <Receive1ShareAddress name={name} address={address} />
-      <Separator />
-      <Box horizontal alignItems="center" flow={2}>
-        <Text
-          style={{ flexShrink: "unset" }}
-          ff="Inter|SemiBold"
-          color="palette.text.shade100"
-          fontSize={4}
-        >
-          <span style={{ marginRight: 10 }}>
-            <Trans i18nKey="exchange.verifyAddress" />
-          </span>
-        </Text>
-      </Box>
+      {!skipDevice ? (
+        <>
+          <Separator />
+          <Box horizontal alignItems="center" flow={2}>
+            <Text
+              style={{ flexShrink: "unset" }}
+              ff="Inter|SemiBold"
+              color="palette.text.shade100"
+              fontSize={4}
+            >
+              <span style={{ marginRight: 10 }}>
+                <Trans i18nKey="exchange.verifyAddress" />
+              </span>
+            </Text>
+          </Box>
+        </>
+      ) : null}
       {device && renderVerifyUnwrapped({ modelId: device.modelId, type })}
     </>
   ) : null;
@@ -187,34 +187,6 @@ const Root = ({ data, onClose, skipDevice }: Props) => {
   );
 };
 
-const Connect2NoDevice = ({ onSkip }: { onSkip: Function }) => {
-  return (
-    <>
-      <Box horizontal flow={2} mt={2} alignItems="center">
-        <Box color="alertRed">
-          <IconShield height={32} width={28} />
-        </Box>
-        <Text fontSize={12} color="alertRed" ff="Inter" style={{ flexShrink: "unset" }}>
-          <span style={{ marginRight: 10 }}>
-            <Trans i18nKey="buy.connectWithoutDevice" />
-          </span>
-          <LinkWithExternalIcon
-            style={{ display: "inline-flex" }}
-            onClick={() => openURL(urls.recipientAddressInfo)}
-            label={<Trans i18nKey="common.learnMore" />}
-          />
-        </Text>
-      </Box>
-
-      <Box pt={4} horizontal justifyContent="center">
-        <Button primary onClick={onSkip}>
-          <Trans i18nKey="buy.skipConnect" />
-        </Button>
-      </Box>
-    </>
-  );
-};
-
 const StepConnectDeviceFooter = ({ data, onClose, onSkipDevice }: PropsFooter) => {
   const { t } = useTranslation();
   const [skipClicked, setSkipClicked] = useState(false);
@@ -235,9 +207,11 @@ const StepConnectDeviceFooter = ({ data, onClose, onSkipDevice }: PropsFooter) =
         event="Buy Flow Without Device Clicked"
         id={"buy-connect-device-skip-device-button"}
         onClick={() => {
-          setSkipClicked(true);
           if (data.verifyAddress) {
-            onSkipDevice();
+            setSkipClicked(true);
+            onSkipDevice(true);
+          } else {
+            nextStep();
           }
         }}
       >
@@ -246,11 +220,14 @@ const StepConnectDeviceFooter = ({ data, onClose, onSkipDevice }: PropsFooter) =
     </Box>
   ) : (
     <Box alignItems="center" shrink flow={2}>
-      {data.verifyAddress ? (
-        <Receive2NoDevice name={name} onVerify={nextStep} />
-      ) : (
-        <Connect2NoDevice onSkip={nextStep} />
-      )}
+      <Receive2NoDevice
+        name={name}
+        onVerify={() => {
+          setSkipClicked(false);
+          onSkipDevice(false);
+        }}
+        onContinue={nextStep}
+      />
     </Box>
   );
 };
@@ -275,8 +252,8 @@ const BuyCrypto = () => {
               <StepConnectDeviceFooter
                 data={data}
                 onClose={onClose}
-                onSkipDevice={() => {
-                  setSkipDevice(true);
+                onSkipDevice={v => {
+                  setSkipDevice(v);
                 }}
               />
             ) : null

@@ -10,7 +10,16 @@ import Text from "~/renderer/components/Text";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import IconShield from "~/renderer/icons/Shield";
 
-const Receive2NoDevice = ({ onVerify, name }: { onVerify: Function, name: string }) => {
+const Receive2NoDevice = ({
+  onVerify,
+  onContinue,
+  name,
+}: {
+  onVerify: Function,
+  onContinue: Function,
+  name: string,
+}) => {
+  const m = onVerify && onContinue ? 8 : 0;
   return (
     <>
       <Box horizontal flow={2} mt={2} alignItems="center">
@@ -30,9 +39,16 @@ const Receive2NoDevice = ({ onVerify, name }: { onVerify: Function, name: string
       </Box>
 
       <Box pt={4} horizontal justifyContent="center">
-        <Button primary onClick={onVerify}>
-          <Trans i18nKey="common.verify" />
-        </Button>
+        {onVerify ? (
+          <Button mr={m} primary onClick={onVerify}>
+            <Trans i18nKey="common.verify" />
+          </Button>
+        ) : null}
+        {onContinue ? (
+          <Button ml={m} primary onClick={onContinue}>
+            <Trans i18nKey="common.continue" />
+          </Button>
+        ) : null}
       </Box>
     </>
   );
