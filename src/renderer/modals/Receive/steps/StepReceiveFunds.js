@@ -146,6 +146,7 @@ const StepReceiveFunds = ({
   verifyAddressError,
   token,
   onClose,
+  eventType,
 }: StepProps) => {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
   invariant(account && mainAccount, "No account given");
@@ -201,7 +202,7 @@ const StepReceiveFunds = ({
   return (
     <>
       <Box px={2}>
-        <TrackPage category="Receive Flow" name="Step 3" />
+        <TrackPage category={`Receive Flow${eventType ? ` (${eventType})` : ""}`} name="Step 3" />
         {verifyAddressError ? (
           <ErrorDisplay error={verifyAddressError} onRetry={onVerify} />
         ) : isAddressVerified === true ? (

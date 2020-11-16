@@ -73,6 +73,11 @@ export const blacklistToken = (tokenId: string) => ({
   payload: tokenId,
 });
 
+export const swapAcceptProviderTOS = (providerId: string) => ({
+  type: "SWAP_ACCEPT_PROVIDER_TOS",
+  payload: providerId,
+});
+
 export const showToken = (tokenId: string) => ({
   type: "SHOW_TOKEN",
   payload: tokenId,

@@ -50,6 +50,7 @@ const ContextMenu = ({ account, parentAccount }: Props) => {
           openModal("MODAL_RECEIVE", {
             parentAccount,
             account,
+            eventType: "tezos",
             startWithWarning: receiveShouldWarnDelegation,
           }),
         ),
@@ -63,6 +64,7 @@ const ContextMenu = ({ account, parentAccount }: Props) => {
           openModal("MODAL_DELEGATE", {
             parentAccount,
             account,
+            eventType: "redelegate",
             stepId: "summary",
           }),
         ),
@@ -76,6 +78,7 @@ const ContextMenu = ({ account, parentAccount }: Props) => {
           openModal("MODAL_DELEGATE", {
             parentAccount,
             account,
+            eventType: "undelegate",
             mode: "undelegate",
             stepId: "summary",
           }),
