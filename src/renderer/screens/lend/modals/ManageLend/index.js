@@ -250,51 +250,43 @@ const Banner = ({
       <Trans i18nKey="lend.manage.enable.approve" />
     );
 
-  const text =
-    enabledAmountIsUnlimited && totalSupplied.gt(0) ? (
-      <Trans
-        i18nKey="lend.manage.enable.info"
-        values={{
-          amount: formatCurrencyUnit(unit, totalSupplied, {
-            locale,
-            showAllDigits: false,
-            disableRounding: false,
-            showCode: true,
-          }),
-        }}
-      >
-        <b></b>
-      </Trans>
-    ) : enabledAmountIsUnlimited && totalSupplied.eq(0) ? (
-      <Trans i18nKey="lend.manage.enable.notSuppliedNoLimit" />
-    ) : enabledAmount.gt(0) ? (
-      <Trans
-        i18nKey="lend.manage.enable.info"
-        values={{
-          amount:
-            enabledAmount &&
-            formatCurrencyUnit(unit, enabledAmount, {
-              locale,
-              showAllDigits: false,
-              disableRounding: true,
-              showCode: true,
-            }),
-          assetName: currency.ticker,
-        }}
-      >
-        <b></b>
-      </Trans>
-    ) : enabledAmount.gt(0) && totalSupplied.eq(0) ? (
-      <Trans i18nKey="lend.manage.enable.notEnabled" />
-    ) : !canSupplyMax ? (
-      <Trans i18nKey="lend.manage.enable.notEnoughApproved" />
-    ) : status === "ENABLING" ? (
-      <Trans i18nKey="lend.manage.enable.enabling" />
-    ) : status === null ? (
-      <Trans i18nKey="lend.manage.enable.notEnabled" />
-    ) : (
-      <div />
-    );
+  const text = !status ? (
+    <Trans i18nKey="lend.manage.enable.notEnabled" />
+  ) : enabledAmountIsUnlimited ? (
+    <Trans i18nKey="lend.manage.enable.infoNoLimit" />
+  ) : !!status && enabledAmount.gt(0) && canSupplyMax ? (
+    <Trans
+      i18nKey="lend.manage.enable.info"
+      values={{
+        amount: formatCurrencyUnit(unit, enabledAmount, {
+          locale,
+          showAllDigits: false,
+          disableRounding: false,
+          showCode: true,
+        }),
+      }}
+    >
+      <b></b>
+    </Trans>
+  ) : enabledAmount.gt(0) ? (
+    <Trans
+      i18nKey="lend.manage.enable.approvedWithLimit"
+      values={{
+        amount: formatCurrencyUnit(unit, enabledAmount, {
+          locale,
+          showAllDigits: false,
+          disableRounding: false,
+          showCode: true,
+        }),
+      }}
+    >
+      <b></b>
+    </Trans>
+  ) : status === "ENABLING" ? (
+    <Trans i18nKey="lend.manage.enable.enabling" />
+  ) : !!status && !canSupplyMax ? (
+    <Trans i18nKey="lend.manage.enable.notEnoughApproved" />
+  ) : null;
 
   const action = useCallback(() => {
     if (status === "ENABLING") {

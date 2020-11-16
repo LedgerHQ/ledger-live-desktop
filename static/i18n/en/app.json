@@ -396,11 +396,11 @@
         "approve": "Approve",
         "manageLimit": "Manage limit",
         "viewDetails": "View details",
-        "info": "You have approved <0>{{amount}}</0> on this account.",
-        "notSupplied": "You can now deposit from this account.",
-        "notSuppliedNoLimit": "You can deposit assets from this account.",
+        "info": "You have approved <0>{{amount}}</0> on this account. You can reduce the amount at a fee.",
+        "infoNoLimit": "You have fully approved this account. You can reduce the amount at a fee.",
+        "approvedWithLimit": "You have approved <0>{{value}}</0> on this account.",
         "enabling": "You can deposit assets once the account approval is confirmed.",
-        "notEnabled": "You must approve your account before you can lend assets.",
+        "notEnabled": "You need to approve this account before being able to lend assets.",
         "notEnoughApproved": "You must increase the limit approved on your account to lend."
       },
       "supply": {
