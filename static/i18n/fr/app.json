@@ -397,11 +397,11 @@
         "approve": "Activer",
         "manageLimit": "Gérer la limite",
         "viewDetails": "Voir les détails",
-        "info": "You have deposited <0>{{amount}}</0> from this account.",
-        "notSupplied": "Vous pouvez maintenant effectuer un dépôt à partir de ce compte.",
-        "notSuppliedNoLimit": "Vous pouvez déposer des actifs depuis ce compte.",
+        "info": "You have approved <0>{{amount}}</0> on this account. You can reduce the amount at a fee.",
+        "infoNoLimit": "You have fully approved this account. You can reduce the amount at a fee.",
+        "approvedWithLimit": "You have approved <0>{{value}}</0> on this account.",
         "enabling": "Vous pouvez déposer des actifs une fois que l'approbation du compte est confirmée.",
-        "notEnabled": "Vous devez approuver votre compte avant de pouvoir prêter des actifs.",
+        "notEnabled": "You need to approve this account before being able to lend assets.",
         "notEnoughApproved": "Vous devez augmenter la limite approuvée sur votre compte pour prêter."
       },
       "supply": {
