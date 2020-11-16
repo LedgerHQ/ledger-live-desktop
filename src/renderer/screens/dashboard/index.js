@@ -66,7 +66,11 @@ const DashboardPage = ({ saveSettings }: Props) => {
     accounts,
   ]);
 
-  const onAccountClick = useCallback(account => history.push(`/account/${account.id}`), [history]);
+  const onAccountClick = useCallback(
+    account =>
+      history.push({ pathname: `/account/${account.id}`, state: { source: "dashboard page" } }),
+    [history],
+  );
   const handleChangeSelectedTime = useCallback(
     item => saveSettings({ selectedTimeRange: item.key }),
     [saveSettings],

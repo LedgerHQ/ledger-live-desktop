@@ -38,7 +38,7 @@ export function useDeepLinkHandler() {
   const navigate = useCallback(
     (url: string) => {
       if (url !== location.pathname) {
-        history.push(url);
+        history.push({ pathname: url, state: { source: "deeplink" } });
       }
     },
     [history, location],

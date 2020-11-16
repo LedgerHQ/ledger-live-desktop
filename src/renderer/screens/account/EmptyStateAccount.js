@@ -98,7 +98,14 @@ class EmptyStateAccount extends PureComponent<Props, *> {
           </Description>
           <Box horizontal>
             {availableOnExchange ? (
-              <Button mt={5} mr={2} primary onClick={() => history.push("/exchange")}>
+              <Button
+                mt={5}
+                mr={2}
+                primary
+                onClick={() =>
+                  history.push({ pathname: "/exchange", state: { source: "empty state account" } })
+                }
+              >
                 <Box horizontal flow={1} alignItems="center">
                   <IconExchange size={12} />
                   <Box>{t("account.emptyState.buttons.buy")}</Box>
