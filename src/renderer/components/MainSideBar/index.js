@@ -163,7 +163,10 @@ const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
   const { t } = useTranslation();
 
   return isExperimental ? (
-    <Tag id="drawer-experimental-button" to="/settings/experimental">
+    <Tag
+      id="drawer-experimental-button"
+      to={{ pathname: "/settings/experimental", state: { source: "sidebar" } }}
+    >
       <IconExperimental width={16} height={16} />
       <TagText collapsed={collapsed}>{t("common.experimentalFeature")}</TagText>
     </Tag>
