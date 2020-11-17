@@ -76,9 +76,12 @@ const AccountsPage = ({
 
   const onAccountClick = useCallback(
     (account: Account | TokenAccount, parentAccount: ?Account) =>
-      parentAccount
-        ? history.push(`/account/${parentAccount.id}/${account.id}`)
-        : history.push(`/account/${account.id}`),
+      history.push({
+        pathname: parentAccount
+          ? `/account/${parentAccount.id}/${account.id}`
+          : `/account/${account.id}`,
+        state: { source: "accounts page" },
+      }),
     [history],
   );
 

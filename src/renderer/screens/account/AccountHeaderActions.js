@@ -83,12 +83,13 @@ const AccountHeaderActions = ({
   const SendAction = (decorators && decorators.SendAction) || SendActionDefault;
   const ReceiveAction = (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
   const currency = getAccountCurrency(account);
-  const availableOnExchange = isCurrencySupported(currency);
 
   const summary =
     account.type === "TokenAccount" && makeCompoundSummaryForAccount(account, parentAccount);
   const availableOnCompound = !!summary;
 
+  const availableOnBuy = isCurrencySupported("BUY", currency);
+  const availableOnSell = isCurrencySupported("SELL", currency);
   const availableOnSwap = useSelector(swapSupportedCurrenciesSelector);
   const history = useHistory();
 
@@ -98,6 +99,7 @@ const AccountHeaderActions = ({
       state: {
         defaultCurrency: currency,
         defaultAccount: mainAccount,
+        source: "account header actions",
       },
     });
   }, [currency, history, mainAccount]);
@@ -108,6 +110,17 @@ const AccountHeaderActions = ({
     });
   }, [openModal, summary]);
 
+  const onSell = useCallback(() => {
+    history.push({
+      pathname: "/exchange",
+      state: {
+        tab: 1,
+        defaultCurrency: currency,
+        defaultAccount: mainAccount,
+      },
+    });
+  }, [currency, history, mainAccount]);
+
   const onSwap = useCallback(() => {
     history.push({
       pathname: "/swap",
@@ -115,13 +128,14 @@ const AccountHeaderActions = ({
         defaultCurrency: currency,
         defaultAccount: account,
         defaultParentAccount: parentAccount,
+        source: "account header actions",
       },
     });
   }, [currency, history, account, parentAccount]);
 
   // List of available exchange actions
   const actions = [
-    ...(availableOnExchange
+    ...(availableOnBuy
       ? [
           {
             key: "Buy",
@@ -130,6 +144,18 @@ const AccountHeaderActions = ({
             eventProperties: { currencyName: currency.name },
             icon: IconExchange,
             label: <Trans i18nKey="buy.titleCrypto" values={{ currency: currency.name }} />,
+          },
+        ]
+      : []),
+    ...(availableOnSell
+      ? [
+          {
+            key: "Sell",
+            onClick: onSell,
+            event: "Sell Crypto Account Button",
+            eventProperties: { currencyName: currency.name },
+            icon: IconExchange,
+            label: <Trans i18nKey="sell.titleCrypto" values={{ currency: currency.name }} />,
           },
         ]
       : []),

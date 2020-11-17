@@ -93,7 +93,7 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
   const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2);
   const icon = <CryptoCurrencyIcon currency={currency} size={16} />;
   const onClick = useCallback(() => {
-    history.push(`/asset/${currency.id}`);
+    history.push({ pathname: `/asset/${currency.id}`, state: { source: "asset allocation" } });
   }, [currency, history]);
 
   return (

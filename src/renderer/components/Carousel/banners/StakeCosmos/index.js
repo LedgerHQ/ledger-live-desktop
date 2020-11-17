@@ -78,7 +78,10 @@ const StakeCosmos = () => {
       .sort((a, b) => b.balance.minus(a.balance));
 
     if (highestBalanceAccount[0]) {
-      history.push(`/account/${highestBalanceAccount[0].id}`);
+      history.push({
+        pathname: `/account/${highestBalanceAccount[0].id}`,
+        state: { source: "stake cosmos banner" },
+      });
     } else {
       dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
     }

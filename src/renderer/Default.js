@@ -12,6 +12,7 @@ import Settings from "~/renderer/screens/settings";
 import Accounts from "~/renderer/screens/accounts";
 import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
+import Swap from "~/renderer/screens/exchange/swap";
 import Account from "~/renderer/screens/account";
 import Asset from "~/renderer/screens/asset";
 import Lend from "~/renderer/screens/lend";
@@ -37,7 +38,6 @@ import AnalyticsConsole from "~/renderer/components/AnalyticsConsole";
 import DebugMock from "~/renderer/components/DebugMock";
 import useDeeplink from "~/renderer/hooks/useDeeplinking";
 import ModalsLayer from "./ModalsLayer";
-import Swap from "~/renderer/screens/swap";
 
 const Default = () => {
   const location = useLocation();

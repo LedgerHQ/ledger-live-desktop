@@ -31,12 +31,16 @@ const StepCustom = ({
   status,
   onChangeTransaction,
   t,
+  eventType,
 }: StepProps) => {
   invariant(account && transaction, "account & transaction is required");
   const mainAccount = getMainAccount(account, parentAccount);
   return (
     <Box flow={4} mx={40}>
-      <TrackPage category="Delegation Flow" name="Step Custom" />
+      <TrackPage
+        category={`Delegation Flow${eventType ? ` (${eventType})` : ""}`}
+        name="Step Custom"
+      />
       <Box>
         <IconWrapper color="palette.primary.main">
           <UserPlusIcon size={30} />

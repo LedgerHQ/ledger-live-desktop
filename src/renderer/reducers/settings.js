@@ -17,10 +17,10 @@ import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getLanguages } from "~/config/languages";
 import type { State } from ".";
 import { osLangAndRegionSelector } from "~/renderer/reducers/application";
-import { isCurrencySwapSupported } from "@ledgerhq/live-common/lib/swap";
+import { isCurrencyExchangeSupported } from "@ledgerhq/live-common/lib/exchange";
 import uniq from "lodash/uniq";
 import { findCryptoCurrencyById, findTokenById } from "@ledgerhq/cryptoassets";
-import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
+import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
 
 export type CurrencySettings = {
   confirmationsNb: number,
@@ -105,6 +105,7 @@ export type SettingsState = {
   carouselVisibility: number,
   starredAccountIds?: string[],
   blacklistedTokenIds: string[],
+  swapAcceptedProviderIds: string[],
   deepLinkUrl: ?string,
   firstTimeLend: boolean,
   swapProviders?: AvailableProvider[],
@@ -148,6 +149,7 @@ const INITIAL_STATE: SettingsState = {
   hasAcceptedSwapKYC: false,
   lastSeenDevice: null,
   blacklistedTokenIds: [],
+  swapAcceptedProviderIds: [],
   deepLinkUrl: null,
   firstTimeLend: false,
   swapProviders: [],
@@ -225,6 +227,13 @@ const handlers: Object = {
     return {
       ...state,
       blacklistedTokenIds: [...ids, tokenId],
+    };
+  },
+  SWAP_ACCEPT_PROVIDER_TOS: (state: SettingsState, { payload: providerId }) => {
+    const ids = state.swapAcceptedProviderIds;
+    return {
+      ...state,
+      swapAcceptedProviderIds: [...ids, providerId],
     };
   },
   LAST_SEEN_DEVICE_INFO: (
@@ -363,6 +372,8 @@ export const hasInstalledAppsSelector = (state: State) => state.settings.hasInst
 export const carouselVisibilitySelector = (state: State) => state.settings.carouselVisibility;
 export const hasAcceptedSwapKYCSelector = (state: State) => state.settings.hasAcceptedSwapKYC;
 export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
+export const swapAcceptedProviderIdsSelector = (state: State) =>
+  state.settings.swapAcceptedProviderIds;
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;
 
@@ -403,7 +414,7 @@ export const swapSupportedCurrenciesSelector: OutputSelector<
     .filter(Boolean)
     .filter(isCurrencySupported);
 
-  return [...cryptoCurrencies, ...tokenCurrencies].filter(isCurrencySwapSupported);
+  return [...cryptoCurrencies, ...tokenCurrencies].filter(isCurrencyExchangeSupported);
 });
 
 export const exportSettingsSelector: OutputSelector<State, void, *> = createSelector(

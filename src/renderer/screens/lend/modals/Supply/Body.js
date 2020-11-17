@@ -19,6 +19,7 @@ import type {
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import TrackPage from "~/renderer/analytics/TrackPage";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { getAccountById } from "~/renderer/reducers/accounts";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
@@ -64,7 +65,12 @@ const steps: Array<St> = [
   },
   {
     id: "connectDevice",
-    label: <Trans i18nKey="lend.supply.steps.device.title" />,
+    label: (
+      <>
+        <TrackPage category="Lend" name="Supply Step 2" />
+        <Trans i18nKey="lend.supply.steps.device.title" />
+      </>
+    ),
     component: GenericStepConnectDevice,
     onBack: ({ transitionTo }: StepProps) => transitionTo("amount"),
   },

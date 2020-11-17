@@ -1,7 +1,7 @@
 // @flow
 import React, { useEffect, useCallback } from "react";
 import type { Operation } from "@ledgerhq/live-common/lib/types/operation";
-import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
+import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import Box from "~/renderer/components/Box";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
 import IconSwap from "~/renderer/icons/Swap";

@@ -24,7 +24,7 @@ import { refreshAccountsOrdering } from "~/renderer/actions/general";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 
 type OwnProps = {
   account: AccountLike,
@@ -62,6 +62,7 @@ class AccountContextMenu extends PureComponent<Props> {
       swapSupportedCurrencies,
     } = this.props;
     const currency = getAccountCurrency(account);
+    const mainAccount = getMainAccount(account, parentAccount);
 
     const items = [
       {
@@ -76,13 +77,37 @@ class AccountContextMenu extends PureComponent<Props> {
       },
     ];
 
-    const availableOnExchange = isCurrencySupported(currency);
-
-    if (availableOnExchange) {
+    const availableOnBuy = isCurrencySupported("BUY", currency);
+    if (availableOnBuy) {
       items.push({
         label: "accounts.contextMenu.buy",
         Icon: IconBuy,
-        callback: () => history.push("/exchange"),
+        callback: () =>
+          history.push({
+            pathname: "/exchange",
+            state: {
+              defaultCurrency: currency,
+              defaultAccount: mainAccount,
+              source: "account context menu",
+            },
+          }),
+      });
+    }
+
+    const availableOnSell = isCurrencySupported("SELL", currency);
+    if (availableOnSell) {
+      items.push({
+        label: "accounts.contextMenu.sell",
+        Icon: IconBuy,
+        callback: () =>
+          history.push({
+            pathname: "/exchange",
+            state: {
+              tab: 1,
+              defaultCurrency: currency,
+              defaultAccount: mainAccount,
+            },
+          }),
       });
     }
 
@@ -98,6 +123,7 @@ class AccountContextMenu extends PureComponent<Props> {
               defaultCurrency: currency,
               defaultAccount: account,
               defaultParentAccount: parentAccount,
+              source: "account context menu",
             },
           }),
       });

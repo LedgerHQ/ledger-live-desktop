@@ -100,6 +100,7 @@ export default function StepAccount({
   receiveTokenMode,
   onChangeAccount,
   onChangeToken,
+  eventType,
 }: StepProps) {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
   const error = account ? getReceiveFlowError(account, parentAccount) : null;
@@ -107,7 +108,7 @@ export default function StepAccount({
 
   return (
     <Box flow={1}>
-      <TrackPage category="Receive Flow" name="Step 1" />
+      <TrackPage category={`Receive Flow${eventType ? ` (${eventType})` : ""}`} name="Step 1" />
       {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       {receiveTokenMode && mainAccount ? (

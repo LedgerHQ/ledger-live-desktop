@@ -65,7 +65,7 @@ const AssetCrumb = () => {
 
       const { currency } = item;
 
-      history.push(`/asset/${currency.id}`);
+      history.push({ pathname: `/asset/${currency.id}`, state: { source: "asset breadcrumb" } });
     },
     [history],
   );
@@ -90,7 +90,11 @@ const AssetCrumb = () => {
   return (
     <>
       <TextLink>
-        <Button onClick={() => history.push("/")}>{t("dashboard.title")}</Button>
+        <Button
+          onClick={() => history.push({ pathname: "/", state: { source: "asset breadcrumb" } })}
+        >
+          {t("dashboard.title")}
+        </Button>
       </TextLink>
       <Separator />
       <DropDownSelector
