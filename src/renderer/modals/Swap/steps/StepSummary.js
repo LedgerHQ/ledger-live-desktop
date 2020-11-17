@@ -31,6 +31,7 @@ import { CountdownTimerWrapper } from "~/renderer/screens/exchange/swap/Form/Foo
 import IconClock from "~/renderer/icons/Clock";
 import CountdownTimer from "~/renderer/components/CountdownTimer";
 import { swapAcceptProviderTOS } from "~/renderer/actions/settings";
+import type { ExchangeRate, Exchange } from "@ledgerhq/live-common/lib/exchange/swap/types";
 
 const IconWrapper = styled(Box)`
   background: ${colors.pillActiveBackground};

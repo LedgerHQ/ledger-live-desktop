@@ -7,8 +7,8 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import TabBar from "~/renderer/components/TabBar";
 import Card from "~/renderer/components/Box/Card";
 import { useTranslation } from "react-i18next";
-import Buy from "./buy";
-import Sell from "./sell";
+import Buy from "./Buy";
+import Sell from "./Sell";
 import History from "./History";
 
 const Container: ThemedComponent<{ selectable: boolean, pb: number }> = styled(Box)`
