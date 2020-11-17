@@ -120,7 +120,7 @@
     "stars": "Comptes favoris",
     "accounts": "Comptes",
     "manager": "Manager",
-    "exchange": "Acheter",
+    "exchange": "Achat / Vente",
     "swap": "Swap",
     "lend": "Lend"
   },
@@ -212,8 +212,8 @@
           "terms": "Termes et conditions",
           "disclaimer": {
             "header": "Détails",
-            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s",
-            "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
+            "description": "En cliquant sur \"Confirmer\", je reconnais et j'accepte que ce service soit exclusivement régi par <0>{{provider}}</0>",
+            "acceptedDescription": "Ce service est exclusivement régi par <0>{{provider}}</0>"
           },
           "details": {
             "provider": "Fournisseur",
@@ -302,7 +302,12 @@
       "addAccount": "Ajouter un compte"
     },
     "sell": {
-      "tab": "Vendre"
+      "title": "Vendre des cryptomonnaies via notre partenaire",
+      "tab": "Vendre",
+      "selectCrypto": "Choisir un crypto-actif",
+      "selectAccount": "Sélectionner compte",
+      "continue": "Poursuivre",
+      "addAccount": "Ajouter un compte"
     },
     "history": {
       "tab": "Historique"
@@ -397,11 +402,11 @@
         "approve": "Activer",
         "manageLimit": "Gérer la limite",
         "viewDetails": "Voir les détails",
-        "info": "Vous avez déposé <0>{{amount}}</0> depuis ce compte.",
-        "notSupplied": "Vous pouvez maintenant effectuer un dépôt à partir de ce compte.",
-        "notSuppliedNoLimit": "Vous pouvez déposer des actifs depuis ce compte.",
+        "info": "Vous avez approuvé <0>{{amount}}</0> sur ce compte. Vous pouvez réduire le montant moyennant des frais.",
+        "infoNoLimit": "Vous avez entièrement approuvé ce compte. Vous pouvez réduire le montant moyennant des frais.",
+        "approvedWithLimit": "Vous avez approuvé <0>{{value}}</0> sur ce compte.",
         "enabling": "Vous pouvez déposer des actifs une fois que l'approbation du compte est confirmée.",
-        "notEnabled": "Vous devez approuver votre compte avant de pouvoir prêter des actifs.",
+        "notEnabled": "Vous devez approuver ce compte avant de pouvoir prêter des actifs.",
         "notEnoughApproved": "Vous devez augmenter la limite approuvée sur votre compte pour prêter."
       },
       "supply": {
@@ -563,6 +568,7 @@
       "send": "Envoyer",
       "swap": "Swap",
       "buy": "Acheter",
+      "sell": "Vendre",
       "edit": "Modifier le compte",
       "hideToken": "Masquer le token"
     }
@@ -628,6 +634,10 @@
       "description": "Gérez vos actifs en toute sécurité avec un Nano X et un Nano S à un prix réduit",
       "cta": "Acheter un back-up pack"
     },
+    "sell": {
+      "title": "vendre des crypto-monnaies",
+      "description": "Vendez des Bitcoin avec notre partenaire directement depuis Ledger Live"
+    },
     "stakeAlgorand": {
       "title": "Staking avec ALGORAND",
       "description": "Profiter au mieux de vos ALGO. Ajoutez simplement des fonds à vos comptes et gagnez des récompenses dès aujourd'hui."
@@ -635,6 +645,14 @@
     "swap": {
       "title": "Échanger des cryptos",
       "description": "Échangez une cryptomonnaie contre une autre sur Ledger Live avec notre partenaire."
+    },
+    "lending": {
+      "title": "Prêter des crypto",
+      "description": "Prêtez des stablecoins au protocole Compound et obtenez des intérêts"
+    },
+    "blackfriday": {
+      "title": "BLACK FRIDAY ",
+      "description": "Profitez de 40 % de réduction sur les wallets Ledger avec le code promo BLACKFRIDAY20"
     }
   },
   "dashboard": {
@@ -855,6 +873,10 @@
     "swap": {
       "notice": "Vérifiez les détails du Swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
       "confirm": "Confirmer la transaction de swap"
+    },
+    "sell": {
+      "notice": "Vérifiez les détails de la vente sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
+      "confirm": "Confirmer la transaction de vente"
     }
   },
   "manager": {
@@ -1136,6 +1158,11 @@
     "title": "Acheter",
     "titleCrypto": "Acheter {{currency}}",
     "buyCTA": "Acheter {{currencyTicker}}"
+  },
+  "sell": {
+    "title": "Vendre",
+    "titleCrypto": "Vendre {{currency}}",
+    "buyCTA": "Vendre {{currencyTicker}}"
   },
   "receive": {
     "title": "Recevoir",
@@ -2206,10 +2233,6 @@
     },
     "AmountRequired": {
       "title": "Montant requis"
-    },
-    "BitcoinCashHardforkOct2020Warning": {
-      "title": "",
-      "description": "Bitcoin Cash subit actuellement un hard fork sans protection contre les attaques replay. Nous allons interrompre temporairement le service jusqu'à ce que le réseau se stabilise."
     },
     "NoAccessToCamera": {
       "title": "Veuillez vous assurer que votre système a une caméra qui n'est pas utilisée par une autre application, et que Ledger Live a la permission de l'utiliser.",
