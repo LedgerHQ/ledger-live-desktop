@@ -120,7 +120,7 @@
     "stars": "Comptes favoris",
     "accounts": "Comptes",
     "manager": "Manager",
-    "exchange": "Buy / Sell",
+    "exchange": "Achat / Vente",
     "swap": "Swap",
     "lend": "Lend"
   },
@@ -212,8 +212,8 @@
           "terms": "Termes et conditions",
           "disclaimer": {
             "header": "Détails",
-            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s",
-            "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
+            "description": "En cliquant sur \"Confirmer\", je reconnais et j'accepte que ce service soit exclusivement régi par <0>{{provider}}</0>",
+            "acceptedDescription": "Ce service est exclusivement régi par <0>{{provider}}</0>"
           },
           "details": {
             "provider": "Fournisseur",
@@ -302,12 +302,12 @@
       "addAccount": "Ajouter un compte"
     },
     "sell": {
-      "title": "Sell crypto via our partner",
+      "title": "Vendre des cryptomonnaies via notre partenaire",
       "tab": "Vendre",
-      "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "Choose an account",
-      "continue": "Continue",
-      "addAccount": "Add account"
+      "selectCrypto": "Choisir un crypto-actif",
+      "selectAccount": "Sélectionner compte",
+      "continue": "Poursuivre",
+      "addAccount": "Ajouter un compte"
     },
     "history": {
       "tab": "Historique"
@@ -402,11 +402,11 @@
         "approve": "Activer",
         "manageLimit": "Gérer la limite",
         "viewDetails": "Voir les détails",
-        "info": "You have approved <0>{{amount}}</0> on this account. You can reduce the amount at a fee.",
-        "infoNoLimit": "You have fully approved this account. You can reduce the amount at a fee.",
-        "approvedWithLimit": "You have approved <0>{{value}}</0> on this account.",
+        "info": "Vous avez approuvé <0>{{amount}}</0> sur ce compte. Vous pouvez réduire le montant moyennant des frais.",
+        "infoNoLimit": "Vous avez entièrement approuvé ce compte. Vous pouvez réduire le montant moyennant des frais.",
+        "approvedWithLimit": "Vous avez approuvé <0>{{value}}</0> sur ce compte.",
         "enabling": "Vous pouvez déposer des actifs une fois que l'approbation du compte est confirmée.",
-        "notEnabled": "You need to approve this account before being able to lend assets.",
+        "notEnabled": "Vous devez approuver ce compte avant de pouvoir prêter des actifs.",
         "notEnoughApproved": "Vous devez augmenter la limite approuvée sur votre compte pour prêter."
       },
       "supply": {
@@ -568,7 +568,7 @@
       "send": "Envoyer",
       "swap": "Swap",
       "buy": "Acheter",
-      "sell": "Sell",
+      "sell": "Vendre",
       "edit": "Modifier le compte",
       "hideToken": "Masquer le token"
     }
@@ -635,8 +635,8 @@
       "cta": "Acheter un back-up pack"
     },
     "sell": {
-      "title": "sell crypto",
-      "description": "Sell Bitcoin with our partner directly from Ledger Live"
+      "title": "vendre des crypto-monnaies",
+      "description": "Vendez des Bitcoin avec notre partenaire directement depuis Ledger Live"
     },
     "stakeAlgorand": {
       "title": "Staking avec ALGORAND",
@@ -647,12 +647,12 @@
       "description": "Échangez une cryptomonnaie contre une autre sur Ledger Live avec notre partenaire."
     },
     "lending": {
-      "title": "Lend Crypto",
-      "description": "Lend stablecoins to the Compound protocol and earn interests today"
+      "title": "Prêter des crypto",
+      "description": "Prêtez des stablecoins au protocole Compound et obtenez des intérêts"
     },
     "blackfriday": {
       "title": "BLACK FRIDAY ",
-      "description": "Enjoy 40% off Ledger hardware wallets with the promo code BLACKFRIDAY20"
+      "description": "Profitez de 40 % de réduction sur les wallets Ledger avec le code promo BLACKFRIDAY20"
     }
   },
   "dashboard": {
@@ -875,8 +875,8 @@
       "confirm": "Confirmer la transaction de swap"
     },
     "sell": {
-      "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
-      "confirm": "Confirm Sell transaction"
+      "notice": "Vérifiez les détails de la vente sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
+      "confirm": "Confirmer la transaction de vente"
     }
   },
   "manager": {
@@ -1160,9 +1160,9 @@
     "buyCTA": "Acheter {{currencyTicker}}"
   },
   "sell": {
-    "title": "Sell",
-    "titleCrypto": "Sell {{currency}}",
-    "buyCTA": "Sell {{currencyTicker}}"
+    "title": "Vendre",
+    "titleCrypto": "Vendre {{currency}}",
+    "buyCTA": "Vendre {{currencyTicker}}"
   },
   "receive": {
     "title": "Recevoir",
