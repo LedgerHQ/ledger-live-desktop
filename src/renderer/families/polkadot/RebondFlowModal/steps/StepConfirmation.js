@@ -97,7 +97,7 @@ export function StepConfirmationFooter({
             }
           }}
         >
-          <Trans i18nKey="polkadot.rebond.flow.steps.confirmation.success.cta" />
+          <Trans i18nKey="polkadot.rebond.steps.confirmation.success.cta" />
         </Button>
       ) : error ? (
         <RetryButton primary ml={2} onClick={onRetry} />

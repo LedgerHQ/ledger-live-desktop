@@ -1909,8 +1909,8 @@
           "success": {
             "title": "",
             "text": "You will will be able to nominate validators once the network has confirmed your transaction.",
-            "votePending": "Nominate in {{time}}",
-            "vote": "Nominate",
+            "nominatePending": "Nominate in {{time}}",
+            "nominate": "Nominate",
             "later": "Nominate later"
           },
           "pending": {

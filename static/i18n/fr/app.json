@@ -1803,7 +1803,7 @@
   },
   "polkadot": {
     "lockedBalance": "Actifs liés au staking",
-    "lockedTooltip": "Les actifs liés peut être utilisé pour obtenir des récompenses en nominant des validateurs.",
+    "lockedTooltip": "Les actifs liés peuvent être utilisés pour obtenir des récompenses en nominant des validateurs.",
     "unlockingBalance": "Actifs en cours de débloquage",
     "unlockingTooltip": "Les actifs déliés restent verrouillés pendant 28 jours avant d'être disponibles.",
     "unlockedBalance": "Actifs déliés",
@@ -1909,8 +1909,8 @@
           "success": {
             "title": "",
             "text": "Vous pourrez nominer des validateurs une fois que le réseau aura confirmé votre transaction.",
-            "votePending": "Nominer dans {{time}}",
-            "vote": "Nominer",
+            "nominatePending": "Nominer dans {{time}}",
+            "nominate": "Nominer",
             "later": "Nominer plus tard"
           },
           "pending": {
