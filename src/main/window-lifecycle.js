@@ -59,7 +59,10 @@ const defaultWindowOptions = {
 };
 
 export const loadWindow = async () => {
-  const url = __DEV__ ? INDEX_URL : path.join("file://", __dirname, "index.html");
+  let url = __DEV__ ? INDEX_URL : path.join("file://", __dirname, "index.html");
+  if (process.env.SPECTRON_RUN) {
+    url = url.replace("localhost", "host.docker.internal");
+  }
   if (mainWindow) {
     await mainWindow.loadURL(`${url}?theme=${theme}`);
   }

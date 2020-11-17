@@ -29,8 +29,16 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: run headless tests
-        uses: ./.github/actions/run-headless
+      - name: install dependencies
+        run: yarn --frozen-lockfile
+      - name: run code checks
+        run: yarn ci
+      - name: check build
+        run: sudo yarn build
+      - name: start electron webdriver
+        run: cd tests/docker-electron-webdriver && docker-compose up -d
+      - name: run spectron
+        run: yarn spectron
       - name: check
         if: always()
         run: |
@@ -60,24 +68,10 @@ jobs:
           ## Diff output
           ${{ steps.comment.outputs.body }}
 
-          **Please download attached [snapshots.zip](https://github.com/LedgerHQ/ledger-live-desktop/actions/runs/$GITHUB_RUN_ID), extract it in `tests/specs/__image_snapshots__` folder and update your PR with it**
-
           EOF
-          echo "::set-output name=artifact::1"
       - name: save PR message as artifact
         if: steps.create.outputs.artifact == '1' && failure()
         uses: actions/upload-artifact@v2
         with:
           name: pr_message
           path: artifacts
-      - name: generate new screenshots
-        if: failure()
-        uses: ./.github/actions/run-headless
-        with:
-          should-update-screenshots: 1
-      - name: upload new screenshots
-        uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: screenshots
-          path: tests/specs/__image_snapshots__

@@ -27,12 +27,7 @@ jest.setTimeout(600000);
 
 export default function initialize() {
   beforeAll(async () => {
-    app = await applicationProxy({
-      MOCK: true,
-      DISABLE_MOCK_POINTER_EVENTS: true,
-      HIDE_DEBUG_MOCK: true,
-      DISABLE_DEV_TOOLS: true,
-    });
+    app = await applicationProxy();
     onboardingPage = new OnboardingPage(app);
     modalPage = new ModalPage(app);
     genuinePage = new GenuinePage(app);
@@ -42,7 +37,11 @@ export default function initialize() {
     lockscreenPage = new LockscreenPage(app);
     mockDeviceEvent = getMockDeviceEvent(app);
 
-    await app.start();
+    try {
+      await app.start();
+    } catch (e) {
+      console.log("app start error", e);
+    }
 
     app.client.addCommand("screenshot", function(countdown = 500) {
       this.pause(countdown);
