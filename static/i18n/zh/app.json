@@ -120,7 +120,7 @@
     "stars": "星标账户",
     "accounts": "账户",
     "manager": "管理器",
-    "exchange": "Buy",
+    "exchange": "Buy / Sell",
     "swap": "Swap",
     "lend": "Lend"
   },
@@ -302,7 +302,12 @@
       "addAccount": "Add account"
     },
     "sell": {
-      "tab": "Sell"
+      "title": "Sell crypto via our partner",
+      "tab": "Sell",
+      "selectCrypto": "Choose a crypto asset",
+      "selectAccount": "Choose an account",
+      "continue": "Continue",
+      "addAccount": "Add account"
     },
     "history": {
       "tab": "History"
@@ -563,6 +568,7 @@
       "send": "发送",
       "swap": "Swap",
       "buy": "Buy",
+      "sell": "Sell",
       "edit": "Edit account",
       "hideToken": "Hide token"
     }
@@ -627,6 +633,10 @@
       "title": "Back-up pack",
       "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
       "cta": "Buy back-up pack"
+    },
+    "sell": {
+      "title": "sell crypto",
+      "description": "Sell Bitcoin with our partner directly from Ledger Live"
     },
     "stakeAlgorand": {
       "title": "Staking with ALGORAND",
@@ -863,6 +873,10 @@
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction"
+    },
+    "sell": {
+      "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
+      "confirm": "Confirm Sell transaction"
     }
   },
   "manager": {
@@ -1144,6 +1158,11 @@
     "title": "Buy",
     "titleCrypto": "Buy {{currency}}",
     "buyCTA": "Buy {{currencyTicker}}"
+  },
+  "sell": {
+    "title": "Sell",
+    "titleCrypto": "Sell {{currency}}",
+    "buyCTA": "Sell {{currencyTicker}}"
   },
   "receive": {
     "title": "接收",
