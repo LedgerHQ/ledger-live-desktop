@@ -120,7 +120,7 @@
     "stars": "Comptes favoris",
     "accounts": "Comptes",
     "manager": "Manager",
-    "exchange": "Acheter",
+    "exchange": "Buy / Sell",
     "swap": "Swap",
     "lend": "Lend"
   },
@@ -302,7 +302,12 @@
       "addAccount": "Ajouter un compte"
     },
     "sell": {
-      "tab": "Vendre"
+      "title": "Sell crypto via our partner",
+      "tab": "Vendre",
+      "selectCrypto": "Choose a crypto asset",
+      "selectAccount": "Choose an account",
+      "continue": "Continue",
+      "addAccount": "Add account"
     },
     "history": {
       "tab": "Historique"
@@ -563,6 +568,7 @@
       "send": "Envoyer",
       "swap": "Swap",
       "buy": "Acheter",
+      "sell": "Sell",
       "edit": "Modifier le compte",
       "hideToken": "Masquer le token"
     }
@@ -627,6 +633,10 @@
       "title": "Back-up pack",
       "description": "Gérez vos actifs en toute sécurité avec un Nano X et un Nano S à un prix réduit",
       "cta": "Acheter un back-up pack"
+    },
+    "sell": {
+      "title": "sell crypto",
+      "description": "Sell Bitcoin with our partner directly from Ledger Live"
     },
     "stakeAlgorand": {
       "title": "Staking avec ALGORAND",
@@ -863,6 +873,10 @@
     "swap": {
       "notice": "Vérifiez les détails du Swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
       "confirm": "Confirmer la transaction de swap"
+    },
+    "sell": {
+      "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
+      "confirm": "Confirm Sell transaction"
     }
   },
   "manager": {
@@ -1144,6 +1158,11 @@
     "title": "Acheter",
     "titleCrypto": "Acheter {{currency}}",
     "buyCTA": "Acheter {{currencyTicker}}"
+  },
+  "sell": {
+    "title": "Sell",
+    "titleCrypto": "Sell {{currency}}",
+    "buyCTA": "Sell {{currencyTicker}}"
   },
   "receive": {
     "title": "Recevoir",
