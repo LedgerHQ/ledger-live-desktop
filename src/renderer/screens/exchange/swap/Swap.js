@@ -2,7 +2,7 @@
 
 import React, { useMemo, useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProviders } from "@ledgerhq/live-common/lib/swap";
+import { getProviders } from "@ledgerhq/live-common/lib/exchange/swap";
 import { SwapNoAvailableProviders } from "@ledgerhq/live-common/lib/errors";
 import type {
   CryptoCurrency,
@@ -12,12 +12,12 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import { hasAcceptedSwapKYCSelector, swapProvidersSelector } from "~/renderer/reducers/settings";
 import { setSwapProviders } from "~/renderer/actions/settings";
-import Landing from "~/renderer/screens/swap/Landing";
-import Loading from "~/renderer/screens/swap/Loading";
-import NotAvailable from "~/renderer/screens/swap/NotAvailable";
-import Form from "~/renderer/screens/swap/Form";
-import Connect from "~/renderer/screens/swap/Connect";
-import MissingOrOutdatedSwapApp from "~/renderer/screens/swap/MissingOrOutdatedSwapApp";
+import Landing from "~/renderer/screens/exchange/swap/Landing";
+import Loading from "~/renderer/screens/exchange/swap/Loading";
+import NotAvailable from "~/renderer/screens/exchange/swap/NotAvailable";
+import Form from "~/renderer/screens/exchange/swap/Form";
+import Connect from "~/renderer/screens/exchange/swap/Connect";
+import MissingOrOutdatedSwapApp from "~/renderer/screens/exchange/swap/MissingOrOutdatedSwapApp";
 
 type Props = {
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),

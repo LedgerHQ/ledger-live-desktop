@@ -10,7 +10,7 @@ import { setEnvOnAllThreads } from "~/helpers/env";
 import type { SettingsState as Settings } from "~/renderer/reducers/settings";
 import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
 import { hideEmptyTokenAccountsSelector } from "~/renderer/reducers/settings";
-import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
+import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
 
 export type SaveSettings = ($Shape<Settings>) => { type: string, payload: $Shape<Settings> };
 

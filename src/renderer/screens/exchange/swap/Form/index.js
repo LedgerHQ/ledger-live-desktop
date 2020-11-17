@@ -17,7 +17,7 @@ import type {
   AccountLike,
   Currency,
 } from "@ledgerhq/live-common/lib/types";
-import getExchangeRates from "@ledgerhq/live-common/lib/swap/getExchangeRates";
+import getExchangeRates from "@ledgerhq/live-common/lib/exchange/swap/getExchangeRates";
 import { getAbandonSeedAddress } from "@ledgerhq/live-common/lib/currencies";
 import ArrowSeparator from "~/renderer/components/ArrowSeparator";
 import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/settings";
@@ -26,15 +26,15 @@ import {
   getCurrenciesWithStatus,
   initState,
   reducer,
-} from "@ledgerhq/live-common/lib/swap/logic";
+} from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import type { InstalledItem } from "@ledgerhq/live-common/lib/apps";
 import Box from "~/renderer/components/Box";
 
-import From from "~/renderer/screens/swap/Form/From";
-import To from "~/renderer/screens/swap/Form/To";
-import Footer from "~/renderer/screens/swap/Form/Footer";
+import From from "~/renderer/screens/exchange/swap/Form/From";
+import To from "~/renderer/screens/exchange/swap/Form/To";
+import Footer from "~/renderer/screens/exchange/swap/Form/Footer";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import Tooltip from "~/renderer/components/Tooltip";
 import IconExclamationCircle from "~/renderer/icons/ExclamationCircle";
@@ -42,7 +42,7 @@ import IconArrowRight from "~/renderer/icons/ArrowRight";
 import { colors } from "~/renderer/styles/theme";
 import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
-import type { CurrencyStatus } from "@ledgerhq/live-common/lib/swap/logic";
+import type { CurrencyStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 
 type Props = {
   installedApps: InstalledItem[],

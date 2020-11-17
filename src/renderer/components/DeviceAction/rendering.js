@@ -158,7 +158,11 @@ const OpenManagerBtn = ({
 }) => {
   const history = useHistory();
   const onClick = useCallback(() => {
-    history.push(`manager${appName ? `?q=${appName}` : ""}`);
+    history.push({
+      pathname: "manager",
+      search: appName ? `?q=${appName}` : "",
+      state: { source: "device action open manager button" },
+    });
     closeAllModal();
   }, [history, appName, closeAllModal]);
   return (
@@ -381,6 +385,26 @@ export const renderSwapDeviceConfirmation = ({
     <Box alignItems={"center"}>
       <Text textAlign="center" ff="Inter|SemiBold" color="palette.text.shade100" fontSize={5}>
         <Trans i18nKey="DeviceAction.swap.confirm" />
+      </Text>
+    </Box>
+  </>
+);
+
+export const renderSellDeviceConfirmation = ({
+  modelId,
+  type,
+}: {
+  modelId: DeviceModelId,
+  type: "light" | "dark",
+}) => (
+  <>
+    <InfoBox onLearnMore={() => openURL(urls.swap.learnMore)} horizontal={false}>
+      <Trans i18nKey="DeviceAction.sell.notice" />
+    </InfoBox>
+    {renderVerifyUnwrapped({ modelId, type })}
+    <Box alignItems={"center"}>
+      <Text textAlign="center" ff="Inter|SemiBold" color="palette.text.shade100" fontSize={5}>
+        <Trans i18nKey="DeviceAction.sell.confirm" />
       </Text>
     </Box>
   </>

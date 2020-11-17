@@ -17,8 +17,10 @@ const BuyButton = ({ currency, account }: { currency: CryptoCurrency, account: A
     history.push({
       pathname: "/exchange",
       state: {
+        tab: 0,
         defaultCurrency: currency,
         defaultAccount: account,
+        source: "send flow",
       },
     });
   }, [account, currency, dispatch, history]);

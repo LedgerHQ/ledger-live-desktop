@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import { openModal } from "~/renderer/actions/modals";
 import IconReceive from "~/renderer/icons/Receive";
 import IconSend from "~/renderer/icons/Send";
@@ -40,6 +40,7 @@ export default function AccountContextMenu({
 
   const menuItems = useMemo(() => {
     const currency = getAccountCurrency(account);
+    const mainAccount = getMainAccount(account, parentAccount);
 
     const items = [
       {
@@ -54,13 +55,37 @@ export default function AccountContextMenu({
       },
     ];
 
-    const availableOnExchange = isCurrencySupported(currency);
-
-    if (availableOnExchange) {
+    const availableOnBuy = isCurrencySupported("BUY", currency);
+    if (availableOnBuy) {
       items.push({
         label: "accounts.contextMenu.buy",
         Icon: IconBuy,
-        callback: () => history.push("/exchange"),
+        callback: () =>
+          history.push({
+            pathname: "/exchange",
+            state: {
+              defaultCurrency: currency,
+              defaultAccount: mainAccount,
+              source: "account context menu",
+            },
+          }),
+      });
+    }
+
+    const availableOnSell = isCurrencySupported("SELL", currency);
+    if (availableOnSell) {
+      items.push({
+        label: "accounts.contextMenu.sell",
+        Icon: IconBuy,
+        callback: () =>
+          history.push({
+            pathname: "/exchange",
+            state: {
+              tab: 1,
+              defaultCurrency: currency,
+              defaultAccount: mainAccount,
+            },
+          }),
       });
     }
 
@@ -76,6 +101,7 @@ export default function AccountContextMenu({
               defaultCurrency: currency,
               defaultAccount: account,
               defaultParentAccount: parentAccount,
+              source: "account context menu",
             },
           }),
       });

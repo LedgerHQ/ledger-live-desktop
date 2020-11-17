@@ -57,9 +57,13 @@ const Item = ({ account, index, pathname, collapsed }: Props) => {
 
   const onAccountClick = useCallback(() => {
     const parentAccountId = account.type !== "Account" ? account.parentId : undefined;
-    parentAccountId
-      ? history.push(`/account/${parentAccountId}/${account.id}`)
-      : history.push(`/account/${account.id}`);
+
+    history.push({
+      pathname: parentAccountId
+        ? `/account/${parentAccountId}/${account.id}`
+        : `/account/${account.id}`,
+      state: { source: "starred account item" },
+    });
   }, [account, history]);
 
   const unit = getAccountUnit(account);

@@ -194,7 +194,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
   const goToMainAccount = useCallback(() => {
     const url = `/account/${mainAccount.id}`;
     if (location !== url) {
-      history.push(url);
+      history.push({ pathname: url, state: { source: "operation details" } });
     }
     onClose();
   }, [mainAccount, history, onClose, location]);
@@ -202,7 +202,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
   const goToSubAccount = useCallback(() => {
     const url = `/account/${mainAccount.id}/${account.id}`;
     if (location !== url) {
-      history.push(url);
+      history.push({ pathname: url, state: { source: "operation details" } });
     }
     onClose();
   }, [mainAccount, account, history, onClose, location]);

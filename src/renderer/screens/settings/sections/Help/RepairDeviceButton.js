@@ -77,7 +77,7 @@ class RepairDeviceButton extends PureComponent<Props, State> {
       complete: () => {
         if (this.timeout) clearTimeout(this.timeout);
         this.setState({ opened: false, isLoading: false, progress: 0 }, () => {
-          history.push("/manager");
+          history.push({ pathname: "/manager", state: { source: "settings help repair device" } });
         });
         if (onRepair) {
           onRepair(false);
