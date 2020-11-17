@@ -88,6 +88,7 @@ class AccountContextMenu extends PureComponent<Props> {
             state: {
               defaultCurrency: currency,
               defaultAccount: mainAccount,
+              source: "account context menu"
             },
           }),
       });
@@ -122,6 +123,7 @@ class AccountContextMenu extends PureComponent<Props> {
               defaultCurrency: currency,
               defaultAccount: account,
               defaultParentAccount: parentAccount,
+              source: "account context menu",
             },
           }),
       });

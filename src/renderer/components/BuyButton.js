@@ -20,6 +20,7 @@ const BuyButton = ({ currency, account }: { currency: CryptoCurrency, account: A
         tab: 0,
         defaultCurrency: currency,
         defaultAccount: account,
+        source: "send flow",
       },
     });
   }, [account, currency, dispatch, history]);

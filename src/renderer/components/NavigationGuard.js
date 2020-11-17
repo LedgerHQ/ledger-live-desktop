@@ -81,7 +81,11 @@ const NavigationGuard = ({
 
   /** retry redirection once confirmation state changes */
   useEffect(() => {
-    if (confirmedNavigation && lastLocation) history.push(lastLocation.pathname);
+    if (confirmedNavigation && lastLocation)
+      history.push({
+        pathname: lastLocation.pathname,
+        state: { source: "confirmation navigation guard" },
+      });
   }, [confirmedNavigation, lastLocation, history]);
 
   return (

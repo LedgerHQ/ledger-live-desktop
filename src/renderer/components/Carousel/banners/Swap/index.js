@@ -74,6 +74,7 @@ const Swap = () => {
   const onClick = useCallback(() => {
     history.push({
       pathname: "/swap",
+      state: { source: "swap banner" },
     });
   }, [history]);
 

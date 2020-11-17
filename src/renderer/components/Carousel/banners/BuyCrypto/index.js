@@ -67,7 +67,7 @@ const BackupPack = () => {
   }, [set]);
 
   const onClick = useCallback(() => {
-    history.push("/exchange");
+    history.push({ pathname: "/exchange", state: { source: "buy crypto banner" } });
   }, [history]);
 
   const ref = useRef(null);

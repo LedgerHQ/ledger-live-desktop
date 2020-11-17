@@ -78,9 +78,15 @@ const AccountCrumb = () => {
       }
 
       if (parentId) {
-        history.push(`/account/${parentId}/${item.key}`);
+        history.push({
+          pathname: `/account/${parentId}/${item.key}`,
+          state: { source: "account breadcrumb" },
+        });
       } else {
-        history.push(`/account/${item.key}`);
+        history.push({
+          pathname: `/account/${item.key}`,
+          state: { source: "account breadcrumb" },
+        });
       }
     },
     [parentId, history],
@@ -91,11 +97,17 @@ const AccountCrumb = () => {
       e.stopPropagation();
       if (parentId) {
         if (id) {
-          history.push(`/account/${parentId}/${id}`);
+          history.push({
+            pathname: `/account/${parentId}/${id}`,
+            state: { source: "account breadcrumb" },
+          });
         }
       } else {
         if (id) {
-          history.push(`/account/${id}`);
+          history.push({
+            pathname: `/account/${id}`,
+            state: { source: "account breadcrumb" },
+          });
         }
       }
     },
@@ -116,7 +128,16 @@ const AccountCrumb = () => {
   if (!id) {
     return (
       <TextLink>
-        <Button onClick={() => history.push("/accounts/")}>{t("accounts.title")}</Button>
+        <Button
+          onClick={() =>
+            history.push({
+              pathname: "/accounts/",
+              state: { source: "account breadcrumb" },
+            })
+          }
+        >
+          {t("accounts.title")}
+        </Button>
       </TextLink>
     );
   }
