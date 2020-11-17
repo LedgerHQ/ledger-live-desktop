@@ -6,13 +6,11 @@ import Exchange from "~/renderer/icons/Exchange";
 import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
 import { useTranslation } from "react-i18next";
-import { useCoinifyCurrencies } from "~/renderer/screens/exchange/hooks";
 import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
 import Label from "~/renderer/components/Label";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Button from "~/renderer/components/Button";
-import { useSelector, useDispatch } from "react-redux";
-import { accountsSelector } from "~/renderer/reducers/accounts";
+import { useDispatch } from "react-redux";
 import type {
   Account,
   AccountLike,
@@ -26,7 +24,10 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
 import { track } from "~/renderer/analytics/segment";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
-import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
+import type { Option } from "~/renderer/components/Select";
+import { CurrencyOptionRow } from "~/renderer/screens/exchange/swap/Form";
+import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
+import TrackPage from "~/renderer/analytics/TrackPage";
 
 const Container: ThemedComponent<{}> = styled.div`
   width: 365px;
@@ -64,8 +65,11 @@ const FormContent: ThemedComponent<{}> = styled.div`
 
 type Props = {
   selectAccount: (account: AccountLike, parentAccount: ?Account) => void,
+  allAccounts: Account[],
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
   defaultAccount?: ?Account,
+  currenciesStatus: CurrenciesStatus,
+  selectableCurrencies: (CryptoCurrency | TokenCurrency)[],
 };
 
 const AccountSelectorLabel = styled(Label)`
@@ -74,10 +78,15 @@ const AccountSelectorLabel = styled(Label)`
   justify-content: space-between;
 `;
 
-const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccount }: Props) => {
+const SelectAccountAndCurrency = ({
+  selectAccount,
+  defaultCurrency,
+  defaultAccount,
+  currenciesStatus,
+  selectableCurrencies,
+  allAccounts,
+}: Props) => {
   const { t } = useTranslation();
-  const allCurrencies = useCoinifyCurrencies("BUY");
-  const allAccounts = useSelector(accountsSelector);
 
   const {
     availableAccounts,
@@ -86,7 +95,12 @@ const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccou
     subAccount,
     setAccount,
     setCurrency,
-  } = useCurrencyAccountSelect({ allCurrencies, allAccounts, defaultCurrency, defaultAccount });
+  } = useCurrencyAccountSelect({
+    allCurrencies: selectableCurrencies,
+    allAccounts,
+    defaultCurrency,
+    defaultAccount,
+  });
 
   const dispatch = useDispatch();
 
@@ -94,23 +108,39 @@ const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccou
     dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
   }, [dispatch, currency]);
 
+  const renderOptionOverride = ({ data: currency }: Option) => {
+    const status = currenciesStatus[currency.id];
+    return <CurrencyOptionRow circle currency={currency} status={status} />;
+  };
+
   return (
     <Container>
+      <TrackPage category="Page" name="Sell Crypto" />
       <IconContainer>
         <Exchange size={24} />
       </IconContainer>
       <Text ff="Inter|SemiBold" fontSize={5} color="palette.text.shade100" textAlign="center">
-        {t("exchange.buy.title")}
+        {t("exchange.sell.title")}
       </Text>
       <FormContainer>
-        {currency ? <CurrencyDownStatusAlert currencies={[currency]} /> : null}
         <FormContent>
-          <Label>{t("exchange.buy.selectCrypto")}</Label>
-          <SelectCurrency onChange={setCurrency} currencies={allCurrencies} value={currency} />
+          <Label>{t("exchange.sell.selectCrypto")}</Label>
+          <SelectCurrency
+            rowHeight={47}
+            renderOptionOverride={renderOptionOverride}
+            currencies={selectableCurrencies}
+            autoFocus={true}
+            onChange={setCurrency}
+            value={currency}
+            isDisabled={c =>
+              (c.type === "CryptoCurrency" || c.type === "TokenCurrency") &&
+              currenciesStatus[c.id] !== "ok"
+            }
+          />
         </FormContent>
         <FormContent>
           <AccountSelectorLabel>
-            <span>{t("exchange.buy.selectAccount")}</span>
+            <span>{t("exchange.sell.selectAccount")}</span>
             <FakeLink fontSize={3} ff="Inter|SemiBold" onClick={openAddAccounts}>
               <PlusIcon size={10} />
               <Text style={{ marginLeft: 4 }}>{t("exchange.buy.addAccount")}</Text>
@@ -129,7 +159,7 @@ const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccou
             primary
             onClick={() => {
               if (account) {
-                track("Buy Crypto Continue Button", {
+                track("Sell Crypto Continue Button", {
                   currencyName: getAccountCurrency(account).name,
                   isEmpty: isAccountEmpty(account),
                 });
@@ -142,7 +172,7 @@ const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccou
             }}
             disabled={!account}
           >
-            {t("exchange.buy.continue")}
+            {t("exchange.sell.continue")}
           </ConfirmButton>
         </FormContent>
       </FormContainer>

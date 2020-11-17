@@ -390,6 +390,26 @@ export const renderSwapDeviceConfirmation = ({
   </>
 );
 
+export const renderSellDeviceConfirmation = ({
+  modelId,
+  type,
+}: {
+  modelId: DeviceModelId,
+  type: "light" | "dark",
+}) => (
+  <>
+    <InfoBox onLearnMore={() => openURL(urls.swap.learnMore)} horizontal={false}>
+      <Trans i18nKey="DeviceAction.sell.notice" />
+    </InfoBox>
+    {renderVerifyUnwrapped({ modelId, type })}
+    <Box alignItems={"center"}>
+      <Text textAlign="center" ff="Inter|SemiBold" color="palette.text.shade100" fontSize={5}>
+        <Trans i18nKey="DeviceAction.sell.confirm" />
+      </Text>
+    </Box>
+  </>
+);
+
 export const renderLoading = ({
   modelId,
   children,

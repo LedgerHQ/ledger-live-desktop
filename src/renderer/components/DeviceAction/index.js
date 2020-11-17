@@ -23,6 +23,7 @@ import {
   renderRequiresAppInstallation,
   renderWarningOutdated,
   renderSwapDeviceConfirmation,
+  renderSellDeviceConfirmation,
 } from "./rendering";
 
 type OwnProps<R, H, P> = {
@@ -97,6 +98,9 @@ const DeviceAction = <R, H, P>({
     initSwapError,
     initSwapResult,
     allowOpeningGranted,
+    initSellRequested,
+    initSellResult,
+    initSellError,
   } = hookState;
 
   const type = useTheme("colors.palette.type");
@@ -132,6 +136,10 @@ const DeviceAction = <R, H, P>({
 
   if (initSwapRequested && !initSwapResult && !initSwapError) {
     return renderSwapDeviceConfirmation({ modelId, type });
+  }
+
+  if (initSellRequested && !initSellResult && !initSellError) {
+    return renderSellDeviceConfirmation({ modelId, type });
   }
 
   if (allowOpeningRequestedWording || requestOpenApp) {

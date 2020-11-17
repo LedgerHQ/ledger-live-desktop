@@ -14,10 +14,13 @@ import { Trans } from "react-i18next";
 import type { SignedOperation, Transaction } from "@ledgerhq/live-common/lib/types";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import StepProgress from "~/renderer/components/StepProgress";
-import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
+import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import Button from "~/renderer/components/Button";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { toExchangeRaw, toExchangeRateRaw } from "@ledgerhq/live-common/lib/swap/serialization";
+import {
+  toExchangeRaw,
+  toExchangeRateRaw,
+} from "@ledgerhq/live-common/lib/exchange/swap/serialization";
 import { toTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 
 import { mockedEventEmitter } from "~/renderer/components/DebugMock";

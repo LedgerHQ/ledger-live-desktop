@@ -46,7 +46,7 @@ class EmptyStateAccount extends PureComponent<Props, *> {
     const { t, account, parentAccount, openModal, history } = this.props;
     const mainAccount = getMainAccount(account, parentAccount);
     if (!mainAccount) return null;
-    const availableOnExchange = isCurrencySupported(getAccountCurrency(account));
+    const availableOnExchange = isCurrencySupported("BUY", getAccountCurrency(account));
 
     const hasTokens =
       mainAccount.subAccounts &&
