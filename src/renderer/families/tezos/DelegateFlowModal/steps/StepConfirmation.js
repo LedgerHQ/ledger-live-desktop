@@ -37,6 +37,7 @@ const StepConfirmation = ({
   error,
   signed,
   transaction,
+  eventType,
 }: StepProps) => {
   invariant(
     transaction && transaction.family === "tezos",
@@ -48,7 +49,10 @@ const StepConfirmation = ({
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Delegation Flow" name="Step Confirmed" />
+        <TrackPage
+          category={`Delegation Flow${eventType ? ` (${eventType})` : ""}`}
+          name="Step Confirmed"
+        />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={

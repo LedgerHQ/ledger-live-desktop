@@ -76,7 +76,7 @@ const AccountSelectorLabel = styled(Label)`
 
 const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccount }: Props) => {
   const { t } = useTranslation();
-  const allCurrencies = useCoinifyCurrencies();
+  const allCurrencies = useCoinifyCurrencies("BUY");
   const allAccounts = useSelector(accountsSelector);
 
   const {

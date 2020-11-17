@@ -9,7 +9,7 @@ import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { setEnvOnAllThreads } from "~/helpers/env";
 import type { SettingsState as Settings } from "~/renderer/reducers/settings";
 import { refreshAccountsOrdering } from "~/renderer/actions/general";
-import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
+import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
 
 export type SaveSettings = ($Shape<Settings>) => { type: string, payload: $Shape<Settings> };
 
@@ -60,6 +60,11 @@ export const setSidebarCollapsed = (sidebarCollapsed: boolean) =>
 export const blacklistToken = (tokenId: string) => ({
   type: "BLACKLIST_TOKEN",
   payload: tokenId,
+});
+
+export const swapAcceptProviderTOS = (providerId: string) => ({
+  type: "SWAP_ACCEPT_PROVIDER_TOS",
+  payload: providerId,
 });
 
 export const showToken = (tokenId: string) => ({

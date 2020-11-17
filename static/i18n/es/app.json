@@ -120,7 +120,7 @@
     "stars": "Starred accounts",
     "accounts": "Cuentas",
     "manager": "Manager",
-    "exchange": "Buy",
+    "exchange": "Buy / Sell",
     "swap": "Swap",
     "lend": "Lend"
   },
@@ -212,7 +212,8 @@
           "terms": "Terms & Conditions",
           "disclaimer": {
             "header": "Details",
-            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by Changelly's"
+            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s",
+            "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
           },
           "details": {
             "provider": "Provider",
@@ -301,7 +302,12 @@
       "addAccount": "Add account"
     },
     "sell": {
-      "tab": "Sell"
+      "title": "Sell crypto via our partner",
+      "tab": "Sell",
+      "selectCrypto": "Choose a crypto asset",
+      "selectAccount": "Choose an account",
+      "continue": "Continue",
+      "addAccount": "Add account"
     },
     "history": {
       "tab": "History"
@@ -396,11 +402,11 @@
         "approve": "Approve",
         "manageLimit": "Manage limit",
         "viewDetails": "View details",
-        "info": "You have deposited <0>{{amount}}</0> from this account.",
-        "notSupplied": "You can now deposit from this account.",
-        "notSuppliedNoLimit": "You can deposit assets from this account.",
+        "info": "You have approved <0>{{amount}}</0> on this account. You can reduce the amount at a fee.",
+        "infoNoLimit": "You have fully approved this account. You can reduce the amount at a fee.",
+        "approvedWithLimit": "You have approved <0>{{value}}</0> on this account.",
         "enabling": "You can deposit assets once the account approval is confirmed.",
-        "notEnabled": "You must approve your account before you can lend assets.",
+        "notEnabled": "You need to approve this account before being able to lend assets.",
         "notEnoughApproved": "You must increase the limit approved on your account to lend."
       },
       "supply": {
@@ -562,6 +568,7 @@
       "send": "Enviar",
       "swap": "Swap",
       "buy": "Buy",
+      "sell": "Sell",
       "edit": "Edit account",
       "hideToken": "Hide token"
     }
@@ -627,6 +634,10 @@
       "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
       "cta": "Buy back-up pack"
     },
+    "sell": {
+      "title": "sell crypto",
+      "description": "Sell Bitcoin with our partner directly from Ledger Live"
+    },
     "stakeAlgorand": {
       "title": "Staking with ALGORAND",
       "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
@@ -634,6 +645,14 @@
     "swap": {
       "title": "Swap crypto",
       "description": "Exchange one crypto for another from Ledger Live with our partner."
+    },
+    "lending": {
+      "title": "Lend Crypto",
+      "description": "Lend stablecoins to the Compound protocol and earn interests today"
+    },
+    "blackfriday": {
+      "title": "BLACK FRIDAY ",
+      "description": "Enjoy 40% off Ledger hardware wallets with the promo code BLACKFRIDAY20"
     }
   },
   "dashboard": {
@@ -854,6 +873,10 @@
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction"
+    },
+    "sell": {
+      "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
+      "confirm": "Confirm Sell transaction"
     }
   },
   "manager": {
@@ -1135,6 +1158,11 @@
     "title": "Buy",
     "titleCrypto": "Buy {{currency}}",
     "buyCTA": "Buy {{currencyTicker}}"
+  },
+  "sell": {
+    "title": "Sell",
+    "titleCrypto": "Sell {{currency}}",
+    "buyCTA": "Sell {{currencyTicker}}"
   },
   "receive": {
     "title": "Recibir",
@@ -2205,10 +2233,6 @@
     },
     "AmountRequired": {
       "title": "Amount required"
-    },
-    "BitcoinCashHardforkOct2020Warning": {
-      "title": "",
-      "description": "Bitcoin Cash is currently undergoing a hard fork without replay protection. We will temporarily interrupt the Bitcoin Cash service until the network has stabilized."
     },
     "NoAccessToCamera": {
       "title": "Please ensure your system has a camera, that it is not in use by another application and that Ledger Live has permission to use it.",

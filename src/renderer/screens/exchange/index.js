@@ -8,6 +8,7 @@ import TabBar from "~/renderer/components/TabBar";
 import Card from "~/renderer/components/Box/Card";
 import { useTranslation } from "react-i18next";
 import Buy from "./Buy";
+import Sell from "./Sell";
 import History from "./History";
 
 const Container: ThemedComponent<{ selectable: boolean, pb: number }> = styled(Box)`
@@ -21,14 +22,19 @@ const tabs = [
     component: Buy,
   },
   {
+    title: "exchange.sell.tab",
+    component: Sell,
+  },
+  {
     title: "exchange.history.tab",
     component: History,
   },
 ];
 
 const Exchange = () => {
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
   const location = useLocation();
+  const { state } = location;
+  const [activeTabIndex, setActiveTabIndex] = useState(state?.tab || 0);
   const { t } = useTranslation();
   const Component = tabs[activeTabIndex].component;
 
@@ -37,7 +43,11 @@ const Exchange = () => {
       <Box ff="Inter|SemiBold" fontSize={7} color="palette.text.shade100" id="exchange-title">
         {t("exchange.title")}
       </Box>
-      <TabBar tabs={tabs.map(tab => t(tab.title))} onIndexChange={setActiveTabIndex} />
+      <TabBar
+        defaultIndex={activeTabIndex}
+        tabs={tabs.map(tab => t(tab.title))}
+        onIndexChange={setActiveTabIndex}
+      />
       <Card grow style={{ overflow: "hidden" }}>
         <Component {...location?.state} />
       </Card>

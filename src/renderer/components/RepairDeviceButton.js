@@ -78,7 +78,7 @@ const RepairDeviceButton = ({ onRepair, buttonProps }: Props) => {
           setOpened(false);
           setIsLoading(false);
           setProgress(0);
-          history.push("manager");
+          history.push({ pathname: "manager", state: { source: "repair device button" } });
 
           if (onRepair) {
             onRepair(false);

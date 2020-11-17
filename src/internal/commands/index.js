@@ -18,6 +18,8 @@ import testInterval from "./testInterval";
 import appOpExec from "./appOpExec";
 import initSwap from "./initSwap";
 import websocketBridge from "./websocketBridge";
+import checkSignatureAndPrepare from "./checkSignatureAndPrepare";
+import getTransactionId from "./getTransactionId";
 import { commands as bridgeProxyCommands } from "~/renderer/bridge/proxy-commands";
 
 export const commandsById = {
@@ -38,6 +40,8 @@ export const commandsById = {
   ping,
   testApdu,
   initSwap,
+  checkSignatureAndPrepare,
+  getTransactionId,
   testCrash,
   testInterval,
   websocketBridge,

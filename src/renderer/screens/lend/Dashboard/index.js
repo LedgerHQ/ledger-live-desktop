@@ -41,7 +41,7 @@ const Dashboard = ({
 
   return (
     <Box>
-      <TrackPage category="Lend" name="Dashboard" />
+      {isAcceptedTerms ? <TrackPage category="Lend" name="Dashboard" /> : null}
       <Text ff="Inter|SemiBold" color="palette.text.shade100">
         {t("lend.assets")}
       </Text>

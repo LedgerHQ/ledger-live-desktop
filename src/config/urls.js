@@ -68,6 +68,8 @@ export const urls = {
 
   // Banners
   banners: {
+    blackfriday:
+      "https://shop.ledger.com/pages/black-friday?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
     backupPack:
       "https://shop.ledger.com/products/ledger-backup-pack?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop",
     ledgerAcademy:
@@ -98,8 +100,6 @@ export const urls = {
     CantOpenDevice: "https://support.ledger.com/hc/en-us/articles/115005165269",
     WrongDeviceForAccount: "https://support.ledger.com/hc/en-us/articles/360025321733",
     SyncError: "https://support.ledger.com/hc/en-us/articles/360012109220",
-    BitcoinCashHardforkOct2020Warning:
-      "https://www.ledger.com/bitcoin-cash-fork-15-november-2020-what-it-means-for-you",
   },
   compound: "https://support.ledger.com/hc/en-us/articles/360017215099",
   compoundTnC: "https://shop.ledger.com/pages/ledger-live-terms-of-use",

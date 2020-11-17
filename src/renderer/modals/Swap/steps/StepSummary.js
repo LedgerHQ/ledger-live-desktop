@@ -1,5 +1,6 @@
 // @flow
 
+import React, { useCallback } from "react";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { Trans } from "react-i18next";
@@ -10,11 +11,11 @@ import {
   getAccountName,
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
+import { swapAcceptedProviderIdsSelector } from "~/renderer/reducers/settings";
+import { useDispatch, useSelector } from "react-redux";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import ArrowSeparator from "~/renderer/components/ArrowSeparator";
 import CheckBox from "~/renderer/components/CheckBox";
-import React from "react";
-import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
 import { SwapGenericAPIError } from "@ledgerhq/live-common/lib/errors";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import Button from "~/renderer/components/Button";
@@ -26,9 +27,11 @@ import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 import FakeLink from "~/renderer/components/FakeLink";
-import { CountdownTimerWrapper } from "~/renderer/screens/swap/Form/Footer";
+import { CountdownTimerWrapper } from "~/renderer/screens/exchange/swap/Form/Footer";
 import IconClock from "~/renderer/icons/Clock";
 import CountdownTimer from "~/renderer/components/CountdownTimer";
+import { swapAcceptProviderTOS } from "~/renderer/actions/settings";
+import type { ExchangeRate, Exchange } from "@ledgerhq/live-common/lib/exchange/swap/types";
 
 const IconWrapper = styled(Box)`
   background: ${colors.pillActiveBackground};
@@ -46,6 +49,12 @@ const ProviderWrapper = styled(Box)`
   border-radius: 4px;
 `;
 
+const Terms = styled(Text)`
+  > span {
+    text-transform: capitalize;
+  }
+`;
+
 const StepSummary = ({
   swap,
   transaction,
@@ -57,7 +66,10 @@ const StepSummary = ({
   checkedDisclaimer: boolean,
   onSwitchAccept: () => any,
 }) => {
+  const swapAcceptedproviderIds = useSelector(swapAcceptedProviderIdsSelector);
   const { exchange, exchangeRate } = swap;
+  const { provider, magnitudeAwareRate } = exchangeRate;
+  const alreadyAcceptedTerms = swapAcceptedproviderIds.includes(swap.exchangeRate.provider);
   const { fromAccount, toAccount } = exchange;
   const fromAmount = transaction.amount;
   if (!fromAccount || !toAccount || !fromAmount) return null;
@@ -67,8 +79,8 @@ const StepSummary = ({
   const fromUnit = getAccountUnit(fromAccount);
   const toUnit = getAccountUnit(toAccount);
 
-  const toAmount = fromAmount.times(exchangeRate.magnitudeAwareRate);
-  const { main, tos } = urls.swap.providers[exchangeRate.provider];
+  const toAmount = fromAmount.times(magnitudeAwareRate);
+  const { main, tos } = urls.swap.providers[provider];
 
   return (
     <Box mx={2}>
@@ -146,21 +158,32 @@ const StepSummary = ({
           iconFirst
           style={{ textTransform: "capitalize" }}
         >
-          {exchangeRate.provider}
+          {provider}
           <Box ml={1}>
             <IconExternalLink size={12} />
           </Box>
         </FakeLink>
       </ProviderWrapper>
       <Box mt={6} horizontal alignItems={"center"} onClick={onSwitchAccept}>
-        <CheckBox onChange={onSwitchAccept} isChecked={checkedDisclaimer} />
-        <Text
+        {!alreadyAcceptedTerms ? (
+          <CheckBox onChange={onSwitchAccept} isChecked={checkedDisclaimer} />
+        ) : null}
+        <Terms
           ff="Inter|Regular"
           fontSize={3}
           color="palette.text.shade50"
-          style={{ marginLeft: 12, flex: 1 }}
+          style={{ marginLeft: alreadyAcceptedTerms ? 0 : 12, flex: 1 }}
         >
-          <Trans i18nKey="swap.modal.steps.summary.disclaimer.description" />
+          <Trans
+            i18nKey={
+              alreadyAcceptedTerms
+                ? "swap.modal.steps.summary.disclaimer.acceptedDescription"
+                : "swap.modal.steps.summary.disclaimer.description"
+            }
+            values={{ provider }}
+          >
+            <span>{provider}</span>
+          </Trans>
           <FakeLink
             underline
             fontSize={3}
@@ -179,7 +202,7 @@ const StepSummary = ({
             </Box>
           </FakeLink>
           {"."}
-        </Text>
+        </Terms>
       </Box>
     </Box>
   );
@@ -190,40 +213,52 @@ export const StepSummaryFooter = ({
   onClose,
   disabled,
   ratesExpiration,
+  provider,
   setError,
 }: {
   onContinue: any,
   onClose: any,
   disabled: boolean,
   ratesExpiration: Date,
+  provider: string,
   setError: Error => void,
-}) => (
-  <Box horizontal flex={1} justifyContent={"flex-end"} alignItems={"center"}>
-    <CountdownTimerWrapper horizontal>
-      <Box mr={1}>
-        <IconClock size={14} />
+}) => {
+  const dispatch = useDispatch();
+  const swapAcceptedproviderIds = useSelector(swapAcceptedProviderIdsSelector);
+  const alreadyAcceptedTerms = swapAcceptedproviderIds.includes(provider);
+  const onBeforeContinue = useCallback(() => {
+    dispatch(swapAcceptProviderTOS(provider));
+    onContinue();
+  }, [dispatch, onContinue, provider]);
+
+  return (
+    <Box horizontal flex={1} justifyContent={"flex-end"} alignItems={"center"}>
+      <CountdownTimerWrapper horizontal>
+        <Box mr={1}>
+          <IconClock size={14} />
+        </Box>
+        <CountdownTimer
+          key={`rates-${ratesExpiration.getTime()}`}
+          end={ratesExpiration}
+          callback={() => setError(new SwapGenericAPIError())}
+        />
+      </CountdownTimerWrapper>
+      <Box horizontal flex={1} justifyContent={"flex-end"}>
+        <Button onClick={onClose} secondary data-e2e="modal_buttonClose_swap">
+          <Trans i18nKey="common.close" />
+        </Button>
+        <Button
+          ml={1}
+          onClick={onBeforeContinue}
+          disabled={disabled && !alreadyAcceptedTerms}
+          primary
+          data-e2e="modal_buttonContinue_swap"
+        >
+          <Trans i18nKey="common.confirm" />
+        </Button>
       </Box>
-      <CountdownTimer
-        key={`rates-${ratesExpiration.getTime()}`}
-        end={ratesExpiration}
-        callback={() => setError(new SwapGenericAPIError())}
-      />
-    </CountdownTimerWrapper>
-    <Box horizontal flex={1} justifyContent={"flex-end"}>
-      <Button onClick={onClose} secondary data-e2e="modal_buttonClose_swap">
-        <Trans i18nKey="common.close" />
-      </Button>
-      <Button
-        ml={1}
-        onClick={onContinue}
-        disabled={disabled}
-        primary
-        data-e2e="modal_buttonContinue_swap"
-      >
-        <Trans i18nKey="common.confirm" />
-      </Button>
     </Box>
-  </Box>
-);
+  );
+};
 
 export default StepSummary;

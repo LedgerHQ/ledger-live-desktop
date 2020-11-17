@@ -18,8 +18,8 @@ import IconSwap from "~/renderer/icons/Swap";
 
 import moment from "moment";
 import { rgba } from "~/renderer/styles/helpers";
-import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/swap/types";
-import { operationStatusList } from "@ledgerhq/live-common/lib/swap";
+import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import { operationStatusList } from "@ledgerhq/live-common/lib/exchange/swap";
 import Tooltip from "~/renderer/components/Tooltip";
 import IconClock from "~/renderer/icons/Clock";
 
