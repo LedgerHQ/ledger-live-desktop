@@ -1732,7 +1732,6 @@
     "helpButton": "Help",
     "tabs": {
       "display": "通用",
-      "cryptoAssets": "加密资产",
       "currencies": "加密资产",
       "rates": "汇率",
       "help": "帮助",
@@ -1775,22 +1774,10 @@
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
-      "desc": "更改您每个加密资产账户的设置",
+      "desc": "Select a crypto asset to edit its settings.",
       "placeholder": "No settings for this asset",
-      "select": "选择一种加密资产，并编辑设置。",
       "confirmationsNb": "确认数量",
       "confirmationsNbDesc": "设置要标记为已确认的交易的网络确认数量。"
-    },
-    "rates": {
-      "desc": "Here are all the rates that are used to calculate countervalues.\nChoose which rate providers are used for each rate.",
-      "fromTo": "{{from}} 至 {{to}}",
-      "noCounterValue": "We have no data for this trading pair",
-      "cryptoToFiat": "加密货币换作法定货币",
-      "cryptoToCrypto": "加密货币换作加密货币",
-      "rate": "汇率",
-      "last": "最近 {{days}} 天",
-      "price": "价格",
-      "exchange": "汇率提供商"
     },
     "profile": {
       "password": "密码锁",
@@ -1871,11 +1858,7 @@
     "accounts": {
       "hideEmptyTokens": {
         "title": "隐藏空代币帐户",
-        "desc": "在账户页面隐藏零余额的代币账户。"
-      },
-      "tokenBlacklist": {
-        "title": "Hidden tokens",
-        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'"
+        "desc": "Choose the currency shown next to your balance and options."
       }
     }
   },
