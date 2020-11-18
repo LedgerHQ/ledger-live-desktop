@@ -1732,7 +1732,6 @@
     "helpButton": "Help",
     "tabs": {
       "display": "Общие",
-      "cryptoAssets": "Криптоактивы",
       "currencies": "Криптоактивы",
       "rates": "Курсы",
       "help": "Справка",
@@ -1775,22 +1774,10 @@
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
-      "desc": "Изменить настройки для каждого вашего криптоактива",
+      "desc": "Select a crypto asset to edit its settings.",
       "placeholder": "No settings for this asset",
-      "select": "Выберите криптоактив для изменения его настроек.",
       "confirmationsNb": "Количество подтверждений",
       "confirmationsNbDesc": "Задайте количество подтверждений транзакции, выполняемых сетью, необходимое для того, чтобы такая транзакция была отмечена как подтвержденная."
-    },
-    "rates": {
-      "desc": "Here are all the rates that are used to calculate countervalues.\nChoose which rate providers are used for each rate.",
-      "fromTo": "от {from} до {to}",
-      "noCounterValue": "We have no data for this trading pair",
-      "cryptoToFiat": "Крипто в фиат",
-      "cryptoToCrypto": "Крипто в крипто",
-      "rate": "Курс",
-      "last": "За последние {{days}} дней",
-      "price": "Цена",
-      "exchange": "Провайдер курсов"
     },
     "profile": {
       "password": "Блокировка паролем",
@@ -1871,11 +1858,7 @@
     "accounts": {
       "hideEmptyTokens": {
         "title": "Скрыть пустые токен аккаунты",
-        "desc": "Скрыть токены с нулевым балансом на странице счетов."
-      },
-      "tokenBlacklist": {
-        "title": "Hidden tokens",
-        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'"
+        "desc": "Choose the currency shown next to your balance and options."
       }
     }
   },
