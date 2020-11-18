@@ -1,12 +1,10 @@
 // @flow
 import moment from "moment";
-import { connect } from "react-redux";
 import { ipcRenderer, webFrame, remote } from "electron";
 import React, { useState, useCallback } from "react";
-import { createStructuredSelector } from "reselect";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { getAllEnvs } from "@ledgerhq/live-common/lib/env";
-import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import KeyHandler from "react-key-handler";
 import logger from "~/logger";
 import getUser from "~/helpers/user";
@@ -38,12 +36,12 @@ type Props = {|
   hookToShortcut?: boolean,
   title?: React$Node,
   withoutAppData?: boolean,
-  allAccounts: AccountLike[],
 |};
 
 const ExportLogsBtn = ({ hookToShortcut, primary = true, small = true, title, ...rest }: Props) => {
   const { t } = useTranslation();
   const [exporting, setExporting] = useState(false);
+  const accounts = useSelector(accountsSelector);
 
   const exportLogs = useCallback(async () => {
     const resourceUsage = webFrame.getResourceUsage();
@@ -58,7 +56,7 @@ const ExportLogsBtn = ({ hookToShortcut, primary = true, small = true, title, ..
       env: {
         ...getAllEnvs(),
       },
-      accountsIds: rest.allAccounts.map(a => a.id),
+      accountsIds: accounts.map(a => a.id),
     });
     const path = await remote.dialog.showSaveDialog({
       title: "Export logs",
@@ -111,9 +109,4 @@ const ExportLogsBtn = ({ hookToShortcut, primary = true, small = true, title, ..
   );
 };
 
-// $FlowFixMe (?)
-export default connect(
-  createStructuredSelector({
-    allAccounts: accountsSelector,
-  }),
-)(ExportLogsBtn);
+export default ExportLogsBtn;
