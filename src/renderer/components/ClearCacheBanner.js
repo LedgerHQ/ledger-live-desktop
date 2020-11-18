@@ -1,37 +1,29 @@
 // @flow
-
 import React, { useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
 import TopBanner from "~/renderer/components/TopBanner";
 import TriangleWarning from "~/renderer/icons/TriangleWarning";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import { showClearCacheBannerSelector } from "~/renderer/reducers/settings";
 import Spinner from "~/renderer/components/Spinner";
-import { softReset } from "~/renderer/reset";
-import { cleanAccountsCache } from "~/renderer/actions/accounts";
+import { useSoftReset } from "~/renderer/reset";
 import { setShowClearCacheBanner } from "~/renderer/actions/settings";
 
-const Link = styled.span`
-  color: ${p => p.theme.colors.palette.primary.contrastText};
-  text-decoration: underline;
-  cursor: pointer;
-`;
-
-const ClearCacheBanner = () => {
+export default function ClearCacheBanner() {
   const [isLoading, setIsLoading] = useState(false);
   const showClearCacheBanner = useSelector(showClearCacheBannerSelector);
   const dispatch = useDispatch();
+  const softReset = useSoftReset();
   const onClick = useCallback(() => {
     try {
       setIsLoading(true);
-      softReset({ cleanAccountsCache: () => dispatch(cleanAccountsCache()) });
+      softReset();
       dispatch(setShowClearCacheBanner(false));
     } catch (err) {
       setIsLoading(false);
     }
-  }, [dispatch]);
+  }, [dispatch, softReset]);
 
   if (!showClearCacheBanner && !isLoading) return null;
   return (
@@ -49,6 +41,10 @@ const ClearCacheBanner = () => {
       bannerId={"migrate"}
     />
   );
-};
+}
 
-export default ClearCacheBanner;
+const Link = styled.span`
+  color: ${p => p.theme.colors.palette.primary.contrastText};
+  text-decoration: underline;
+  cursor: pointer;
+`;

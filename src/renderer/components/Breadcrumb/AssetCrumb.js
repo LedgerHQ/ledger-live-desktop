@@ -1,42 +1,20 @@
 // @flow
-
 import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
 import { useHistory, useParams } from "react-router-dom";
-
-import { getAssetsDistribution } from "@ledgerhq/live-common/lib/portfolio";
-
-import { accountsSelector } from "~/renderer/reducers/accounts";
-import { calculateCountervalueSelector } from "~/renderer/actions/general";
-
 import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
-
 import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
-
+import { useDistribution } from "~/renderer/actions/general";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
-
 import { Separator, Item, TextLink, AngleDown, Check } from "./common";
 
-const distributionSelector = createSelector(
-  accountsSelector,
-  calculateCountervalueSelector,
-  (acc, calc) =>
-    getAssetsDistribution(acc, calc, {
-      minShowFirst: 6,
-      maxShowFirst: 6,
-      showFirstThreshold: 0.95,
-    }),
-);
-
-const AssetCrumb = () => {
+export default function AssetCrumb() {
   const { t } = useTranslation();
-  const distribution = useSelector(distributionSelector);
+  const distribution = useDistribution();
   const history = useHistory();
   const { assetId } = useParams();
 
@@ -87,6 +65,7 @@ const AssetCrumb = () => {
   ]);
 
   if (!distribution || !distribution.list) return null;
+
   return (
     <>
       <TextLink>
@@ -125,6 +104,4 @@ const AssetCrumb = () => {
       </DropDownSelector>
     </>
   );
-};
-
-export default AssetCrumb;
+}

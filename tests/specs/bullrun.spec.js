@@ -382,8 +382,6 @@ describe("Bullrun", () => {
     await settingsButton.click();
 
     // Open settings and navigate all tabs
-    const currenciesTab = await $("#settings-currencies-tab");
-    await currenciesTab.click();
     const accountsTab = await $("#settings-accounts-tab");
     await accountsTab.click();
     const aboutTab = await $("#settings-about-tab");

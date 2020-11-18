@@ -1,7 +1,8 @@
 // @flow
 
 import React, { PureComponent } from "react";
-import ReactSelect, { components, AsyncReactSelect } from "react-select";
+import ReactSelect, { components } from "react-select";
+import AsyncReactSelect from "react-select/async";
 import { withTranslation } from "react-i18next";
 import { FixedSizeList as List } from "react-window";
 import styled, { withTheme } from "styled-components";

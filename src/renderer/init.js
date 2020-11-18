@@ -24,7 +24,6 @@ import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from "~/config/
 import sentry from "~/sentry/browser";
 import { setEnvOnAllThreads } from "~/helpers/env";
 import { command } from "~/renderer/commands";
-import Countervalues from "~/renderer/countervalues";
 import dbMiddleware from "~/renderer/middlewares/db";
 import createStore from "~/renderer/createStore";
 import events from "~/renderer/events";
@@ -69,11 +68,6 @@ async function init() {
   const initialSettings = await getKey("app", "settings", {});
 
   store.dispatch(fetchSettings(initialSettings));
-
-  const countervaluesData = await getKey("app", "countervalues");
-  if (countervaluesData) {
-    store.dispatch(Countervalues.importAction(countervaluesData));
-  }
 
   const state = store.getState();
   const language = languageSelector(state);

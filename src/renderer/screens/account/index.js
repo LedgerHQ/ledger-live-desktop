@@ -124,7 +124,6 @@ const AccountPage = ({
               account={account}
               parentAccount={parentAccount}
               chartColor={color}
-              chartId={`account-chart-${account.id}`}
               counterValue={counterValue}
               range={selectedTimeRange}
               countervalueFirst={countervalueFirst}

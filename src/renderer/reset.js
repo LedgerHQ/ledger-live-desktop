@@ -1,13 +1,15 @@
 // @flow
-
-import { log } from "@ledgerhq/logs";
 import { ipcRenderer, shell, remote } from "electron";
 import path from "path";
+import { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import rimraf from "rimraf";
-
-import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
+import { log } from "@ledgerhq/logs";
 import { delay } from "@ledgerhq/live-common/lib/promise";
+import { useCountervaluesPolling } from "@ledgerhq/live-common/lib/countervalues/react";
+import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import { resetAll, cleanCache } from "~/renderer/storage";
+import { cleanAccountsCache } from "~/renderer/actions/accounts";
 import { disable as disableDBMiddleware } from "./middlewares/db";
 import { clearBridgeCache } from "./bridge/cache";
 
@@ -52,30 +54,41 @@ function reload() {
     .webContents.reload();
 }
 
-export async function hardReset() {
-  log("clear-cache", "clearBridgeCache()");
-  clearBridgeCache();
-  log("clear-cache", "hardReset()");
-  disableDBMiddleware();
-  resetAll();
-  window.localStorage.clear();
-  await delay(500);
-  await resetLibcore();
-  log("clear-cache", "reload()");
-  reload();
+export function useHardReset() {
+  const { wipe } = useCountervaluesPolling();
+
+  return useCallback(async () => {
+    log("clear-cache", "clearBridgeCache()");
+    clearBridgeCache();
+    log("clear-cache", "hardReset()");
+    disableDBMiddleware();
+    resetAll();
+    window.localStorage.clear();
+    await delay(500);
+    await resetLibcore();
+    log("clear-cache", "reload()");
+    wipe();
+    reload();
+  }, [wipe]);
 }
 
-export async function softReset({ cleanAccountsCache }: *) {
-  log("clear-cache", "clearBridgeCache()");
-  clearBridgeCache();
-  log("clear-cache", "cleanAccountsCache()");
-  cleanAccountsCache();
-  await delay(500);
-  log("clear-cache", "cleanCache()");
-  await cleanCache();
-  await resetLibcore();
-  log("clear-cache", "reload()");
-  reload();
+export function useSoftReset() {
+  const dispatch = useDispatch();
+  const { wipe } = useCountervaluesPolling();
+
+  return useCallback(async () => {
+    log("clear-cache", "clearBridgeCache()");
+    clearBridgeCache();
+    log("clear-cache", "cleanAccountsCache()");
+    dispatch(cleanAccountsCache());
+    await delay(500);
+    log("clear-cache", "cleanCache()");
+    await cleanCache();
+    wipe();
+    await resetLibcore();
+    log("clear-cache", "reload()");
+    reload();
+  }, [dispatch, wipe]);
 }
 
 export async function openUserDataFolderAndQuit() {

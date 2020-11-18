@@ -201,7 +201,6 @@ const From = ({
                   color="palette.text.shade60"
                   fontSize={2}
                   showCode
-                  alwaysShowSign={false}
                 />
               </CountervalueWrapper>
             ) : null}

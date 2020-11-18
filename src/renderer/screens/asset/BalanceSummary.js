@@ -1,7 +1,6 @@
 // @flow
-
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
+import React, { useCallback } from "react";
+import { useSelector } from "react-redux";
 import { BigNumber } from "bignumber.js";
 import { formatShort } from "@ledgerhq/live-common/lib/currencies";
 import type {
@@ -11,133 +10,118 @@ import type {
   TokenCurrency,
   Unit,
 } from "@ledgerhq/live-common/lib/types";
-
-import Chart from "~/renderer/components/Chart2";
+import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
 import moment from "moment";
 import FormattedVal from "~/renderer/components/FormattedVal";
-import { createStructuredSelector } from "reselect";
-import { currencyPortfolioSelector } from "~/renderer/actions/portfolio";
+import { useCurrencyPortfolio } from "~/renderer/actions/portfolio";
 import AssetBalanceSummaryHeader from "./AssetBalanceSummaryHeader";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
 
-type OwnProps = {
+type Props = {
   counterValue: Currency,
   chartColor: string,
-  chartId: string,
   currency: CryptoCurrency | TokenCurrency,
   unit: Unit,
   range: PortfolioRange,
   countervalueFirst: boolean,
 };
 
-type Props = {
-  ...OwnProps,
-  portfolio: *,
-  discreetMode: boolean,
-};
+export default function BalanceSummary({
+  unit,
+  counterValue,
+  countervalueFirst,
+  range,
+  chartColor,
+  currency,
+}: Props) {
+  const {
+    history,
+    countervalueAvailable,
+    countervalueChange,
+    cryptoChange,
+  } = useCurrencyPortfolio({ currency, range });
+  const discreetMode = useSelector(discreetModeSelector);
 
-const mapStateToProps = createStructuredSelector({
-  portfolio: currencyPortfolioSelector,
-  discreetMode: discreetModeSelector,
-});
+  const mapValueCounterValue = useCallback((d: any) => d.countervalue.toNumber(), []);
+  const mapValueCryptoValue = useCallback((d: any) => d.value.toNumber(), []);
 
-class BalanceSummary extends PureComponent<Props> {
-  // $FlowFixMe
-  mapValueCounterValue = (d: any) => d.countervalue.toNumber();
-  mapValueCryptoValue = (d: any) => d.value.toNumber();
-
-  renderTooltip = (d: any) => {
-    const {
-      unit,
-      counterValue,
-      portfolio: { history, countervalueAvailable },
+  const renderTooltip = useCallback(
+    (d: any) => {
+      const displayCountervalue = countervalueFirst && history.countervalueAvailable;
+      const data = [
+        { val: d.value, unit },
+        { val: d.countervalue, unit: counterValue.units[0] },
+      ];
+      if (displayCountervalue) data.reverse();
+      return (
+        <>
+          <FormattedVal fontSize={5} color="palette.text.shade100" showCode {...data[0]} />
+          {countervalueAvailable ? (
+            <FormattedVal fontSize={4} color="warmGrey" showCode {...data[1]} />
+          ) : null}
+          <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
+            {moment(d.date).format("LL")}
+          </Box>
+        </>
+      );
+    },
+    [
+      counterValue.units,
+      countervalueAvailable,
       countervalueFirst,
-    } = this.props;
-
-    const displayCountervalue = countervalueFirst && history.countervalueAvailable;
-    const data = [
-      { val: d.value, unit },
-      { val: d.countervalue, unit: counterValue.units[0] },
-    ];
-    if (displayCountervalue) data.reverse();
-    return (
-      <>
-        <FormattedVal fontSize={5} color="palette.text.shade100" showCode {...data[0]} />
-        {countervalueAvailable ? (
-          <FormattedVal fontSize={4} color="warmGrey" showCode {...data[1]} />
-        ) : null}
-        <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
-          {moment(d.date).format("LL")}
-        </Box>
-      </>
-    );
-  };
-
-  renderTickYCryptoValue = (val: number) => formatShort(this.props.unit, BigNumber(val));
-  renderTickYCounterValue = (val: number) =>
-    formatShort(this.props.counterValue.units[0], BigNumber(val));
-
-  render() {
-    const {
-      range,
-      chartColor,
-      chartId,
-      countervalueFirst,
-      portfolio,
-      counterValue,
-      currency,
+      history.countervalueAvailable,
       unit,
-      discreetMode,
-    } = this.props;
-    const displayCountervalue = countervalueFirst && portfolio.countervalueAvailable;
+    ],
+  );
 
-    const chartMagnitude = displayCountervalue ? counterValue.units[0].magnitude : unit.magnitude;
+  const renderTickYCryptoValue = useCallback((val: number) => formatShort(unit, BigNumber(val)), [
+    unit,
+  ]);
+  const renderTickYCounterValue = useCallback(
+    (val: number) => formatShort(counterValue.units[0], BigNumber(val)),
+    [counterValue.units],
+  );
 
-    return (
-      <Card p={0} py={5}>
-        <Box px={6}>
-          <AssetBalanceSummaryHeader
-            currency={currency}
-            unit={unit}
-            counterValue={counterValue}
-            selectedTimeRange={range}
-            countervalueChange={portfolio.countervalueChange}
-            cryptoChange={portfolio.cryptoChange}
-            last={portfolio.history[portfolio.history.length - 1]}
-            isAvailable={portfolio.countervalueAvailable}
-            countervalueFirst={displayCountervalue}
-          />
-        </Box>
+  const displayCountervalue = countervalueFirst && countervalueAvailable;
+  const chartMagnitude = displayCountervalue ? counterValue.units[0].magnitude : unit.magnitude;
 
-        <Box px={5} ff="Inter" fontSize={4} color="palette.text.shade80" pt={6}>
-          <Chart
-            key={chartId}
-            id={chartId}
-            magnitude={chartMagnitude}
-            color={chartColor}
-            data={portfolio.history}
-            height={200}
-            tickXScale={range}
-            valueKey={displayCountervalue ? "countervalue" : "value"}
-            mapValue={displayCountervalue ? this.mapValueCounterValue : this.mapValueCryptoValue}
-            renderTickY={
-              discreetMode
-                ? () => ""
-                : displayCountervalue
-                ? this.renderTickYCounterValue
-                : this.renderTickYCryptoValue
-            }
-            isInteractive
-            renderTooltip={this.renderTooltip}
-          />
-        </Box>
-      </Card>
-    );
-  }
+  return (
+    <Card p={0} py={5}>
+      <Box px={6}>
+        <AssetBalanceSummaryHeader
+          currency={currency}
+          unit={unit}
+          counterValue={counterValue}
+          selectedTimeRange={range}
+          countervalueChange={countervalueChange}
+          cryptoChange={cryptoChange}
+          last={history[history.length - 1]}
+          isAvailable={countervalueAvailable}
+          countervalueFirst={displayCountervalue}
+        />
+      </Box>
+
+      <Box px={5} ff="Inter" fontSize={4} color="palette.text.shade80" pt={6}>
+        <Chart
+          magnitude={chartMagnitude}
+          color={chartColor}
+          data={history}
+          height={200}
+          tickXScale={range}
+          valueKey={displayCountervalue ? "countervalue" : "value"}
+          mapValue={displayCountervalue ? mapValueCounterValue : mapValueCryptoValue}
+          renderTickY={
+            discreetMode
+              ? () => ""
+              : displayCountervalue
+              ? renderTickYCounterValue
+              : renderTickYCryptoValue
+          }
+          isInteractive
+          renderTooltip={renderTooltip}
+        />
+      </Box>
+    </Card>
+  );
 }
-const ConnectedBalanceSummary: React$ComponentType<OwnProps> = connect(mapStateToProps)(
-  BalanceSummary,
-);
-
-export default ConnectedBalanceSummary;

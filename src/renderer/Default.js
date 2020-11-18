@@ -1,11 +1,8 @@
 // @flow
-
 import React, { useEffect, useRef } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import TrackAppStart from "~/renderer/components/TrackAppStart";
-
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
-import CounterValues from "~/renderer/countervalues";
 import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
 import Dashboard from "~/renderer/screens/dashboard";
 import Settings from "~/renderer/screens/settings";
@@ -39,7 +36,7 @@ import DebugMock from "~/renderer/components/DebugMock";
 import useDeeplink from "~/renderer/hooks/useDeeplinking";
 import ModalsLayer from "./ModalsLayer";
 
-const Default = () => {
+export default function Default() {
   const location = useLocation();
   const ref: React$ElementRef<any> = useRef();
   useDeeplink();
@@ -61,61 +58,54 @@ const Default = () => {
       {process.platform === "darwin" ? <AppRegionDrag /> : null}
 
       <IsUnlocked>
-        <CounterValues.PollingProvider>
-          <BridgeSyncProvider>
-            <ContextMenuWrapper>
-              <ModalsLayer />
-              <OnboardingOrElse>
-                <CheckTermsAccepted />
+        <BridgeSyncProvider>
+          <ContextMenuWrapper>
+            <ModalsLayer />
+            <OnboardingOrElse>
+              <CheckTermsAccepted />
 
-                <IsNewVersion />
+              <IsNewVersion />
 
-                {process.env.DEBUG_UPDATE && <DebugUpdater />}
+              {process.env.DEBUG_UPDATE && <DebugUpdater />}
 
-                <SyncNewAccounts priority={2} />
+              <SyncNewAccounts priority={2} />
 
-                <Box
-                  grow
-                  horizontal
-                  bg="palette.background.default"
-                  color="palette.text.shade60"
-                  style={{ width: "100%", height: "100%" }}
-                >
-                  <MainSideBar />
-                  <Page>
-                    <Switch>
-                      <Route path="/" exact render={props => <Dashboard {...props} />} />
-                      <Route path="/settings" render={props => <Settings {...props} />} />
-                      <Route path="/accounts" render={props => <Accounts {...props} />} />
-                      <Route path="/manager" render={props => <Manager {...props} />} />
-                      <Route path="/lend" render={props => <Lend {...props} />} />
-                      <Route path="/exchange" render={props => <Exchange {...props} />} />
-                      <Route
-                        path="/account/:parentId/:id"
-                        render={props => <Account {...props} />}
-                      />
-                      <Route path="/account/:id" render={props => <Account {...props} />} />
-                      <Route path="/asset/:assetId+" render={props => <Asset {...props} />} />
-                      <Route path="/swap" render={props => <Swap {...props} />} />
-                    </Switch>
-                  </Page>
-                </Box>
+              <Box
+                grow
+                horizontal
+                bg="palette.background.default"
+                color="palette.text.shade60"
+                style={{ width: "100%", height: "100%" }}
+              >
+                <MainSideBar />
+                <Page>
+                  <Switch>
+                    <Route path="/" exact render={props => <Dashboard {...props} />} />
+                    <Route path="/settings" render={props => <Settings {...props} />} />
+                    <Route path="/accounts" render={props => <Accounts {...props} />} />
+                    <Route path="/manager" render={props => <Manager {...props} />} />
+                    <Route path="/lend" render={props => <Lend {...props} />} />
+                    <Route path="/exchange" render={props => <Exchange {...props} />} />
+                    <Route path="/account/:parentId/:id" render={props => <Account {...props} />} />
+                    <Route path="/account/:id" render={props => <Account {...props} />} />
+                    <Route path="/asset/:assetId+" render={props => <Asset {...props} />} />
+                    <Route path="/swap" render={props => <Swap {...props} />} />
+                  </Switch>
+                </Page>
+              </Box>
 
-                <LibcoreBusyIndicator />
-                <DeviceBusyIndicator />
-                <DebugMock />
-                <KeyboardContent sequence="BJBJBJ">
-                  <PerfIndicator />
-                </KeyboardContent>
-              </OnboardingOrElse>
-            </ContextMenuWrapper>
-          </BridgeSyncProvider>
-        </CounterValues.PollingProvider>
+              <LibcoreBusyIndicator />
+              <DeviceBusyIndicator />
+              <DebugMock />
+              <KeyboardContent sequence="BJBJBJ">
+                <PerfIndicator />
+              </KeyboardContent>
+            </OnboardingOrElse>
+          </ContextMenuWrapper>
+        </BridgeSyncProvider>
       </IsUnlocked>
 
       {process.env.ANALYTICS_CONSOLE ? <AnalyticsConsole /> : null}
     </>
   );
-};
-
-export default Default;
+}

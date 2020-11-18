@@ -1,13 +1,13 @@
 // @flow
-
 import React, { useCallback } from "react";
-import { getCurrencyColor } from "~/renderer/getCurrencyColor";
-import { getAccountName } from "@ledgerhq/live-common/lib/account";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types/account";
-import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
+import { useHistory } from "react-router-dom";
 import { BigNumber } from "bignumber.js";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { getAccountName } from "@ledgerhq/live-common/lib/account";
+import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types/account";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
+import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import CounterValue from "~/renderer/components/CounterValue";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import Text from "~/renderer/components/Text";
@@ -19,8 +19,6 @@ import { accountsSelector } from "~/renderer/reducers/accounts";
 import IconDots from "~/renderer/icons/Dots";
 import Bar from "~/renderer/components/AssetDistribution/Bar";
 import ToolTip from "~/renderer/components/Tooltip";
-
-import { useHistory } from "react-router-dom";
 import useTheme from "~/renderer/hooks/useTheme";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
@@ -29,7 +27,6 @@ export type AccountDistributionItem = {
   distribution: number, // % of the total (normalized in 0-1)
   amount: BigNumber,
   currency: CryptoCurrency | TokenCurrency,
-  countervalue: BigNumber, // countervalue of the amount that was calculated based of the rate provided
 };
 
 type Props = {
@@ -37,68 +34,10 @@ type Props = {
   isVisible: boolean,
 };
 
-const Wrapper: ThemedComponent<{}> = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 16px 20px;
-  cursor: pointer;
-
-  > * {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    box-sizing: border-box;
-  }
-
-  &:hover {
-    background: ${p => p.theme.colors.palette.background.default};
-  }
-`;
-
-const AccountWrapper: ThemedComponent<{}> = styled.div`
-  width: 25%;
-  > :first-child {
-    margin-right: 10px;
-  }
-  > :nth-child(2) {
-    flex: 1;
-    align-items: flex-start;
-    margin-right: 8px;
-  }
-`;
-const Distribution: ThemedComponent<{}> = styled.div`
-  width: 25%;
-  text-align: right;
-  > :first-child {
-    margin-right: 11px;
-    width: 40px; //max width for a 99.99% case
-    text-align: right;
-  }
-`;
-const Amount: ThemedComponent<{}> = styled.div`
-  width: 25%;
-  text-align: right;
-  justify-content: flex-end;
-`;
-const Value: ThemedComponent<{}> = styled.div`
-  width: 20%;
-  box-sizing: border-box;
-  padding-left: 8px;
-  text-align: right;
-  justify-content: flex-end;
-`;
-const Dots: ThemedComponent<{}> = styled.div`
-  width: 5%;
-  justify-content: flex-end;
-  cursor: pointer;
-  color: ${p => p.theme.colors.palette.divider};
-  &:hover {
-    color: ${p => p.theme.colors.palette.text.shade60};
-  }
-`;
-
-const Row = ({ item: { currency, amount, distribution, account }, isVisible }: Props) => {
+export default function Row({
+  item: { currency, amount, distribution, account },
+  isVisible,
+}: Props) {
   const accounts = useSelector(accountsSelector);
   const theme = useTheme();
   const history = useHistory();
@@ -170,7 +109,6 @@ const Row = ({ item: { currency, amount, distribution, account }, isVisible }: P
                 color="palette.text.shade100"
                 fontSize={3}
                 showCode
-                alwaysShowSign={false}
               />
             ) : (
               <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
@@ -187,6 +125,65 @@ const Row = ({ item: { currency, amount, distribution, account }, isVisible }: P
       </Wrapper>
     </AccountContextMenu>
   );
-};
+}
 
-export default Row;
+const Wrapper: ThemedComponent<{}> = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+
+  > * {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    box-sizing: border-box;
+  }
+
+  &:hover {
+    background: ${p => p.theme.colors.palette.background.default};
+  }
+`;
+
+const AccountWrapper: ThemedComponent<{}> = styled.div`
+  width: 25%;
+  > :first-child {
+    margin-right: 10px;
+  }
+  > :nth-child(2) {
+    flex: 1;
+    align-items: flex-start;
+    margin-right: 8px;
+  }
+`;
+const Distribution: ThemedComponent<{}> = styled.div`
+  width: 25%;
+  text-align: right;
+  > :first-child {
+    margin-right: 11px;
+    width: 40px; //max width for a 99.99% case
+    text-align: right;
+  }
+`;
+const Amount: ThemedComponent<{}> = styled.div`
+  width: 25%;
+  text-align: right;
+  justify-content: flex-end;
+`;
+const Value: ThemedComponent<{}> = styled.div`
+  width: 20%;
+  box-sizing: border-box;
+  padding-left: 8px;
+  text-align: right;
+  justify-content: flex-end;
+`;
+const Dots: ThemedComponent<{}> = styled.div`
+  width: 5%;
+  justify-content: flex-end;
+  cursor: pointer;
+  color: ${p => p.theme.colors.palette.divider};
+  &:hover {
+    color: ${p => p.theme.colors.palette.text.shade60};
+  }
+`;

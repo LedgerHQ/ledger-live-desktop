@@ -1734,7 +1734,6 @@
       "display": "General",
       "cryptoAssets": "Crypto assets",
       "currencies": "Crypto assets",
-      "rates": "Rates",
       "help": "Help",
       "about": "About",
       "experimental": "Experimental features",
@@ -1781,17 +1780,6 @@
       "confirmationsNb": "Number of confirmations",
       "confirmationsNbDesc": "Set the number of network confirmations for a transaction to be marked as confirmed."
     },
-    "rates": {
-      "desc": "Here are all the rates that are used to calculate countervalues.\nChoose which rate providers are used for each rate.",
-      "fromTo": "{{from}} to {{to}}",
-      "noCounterValue": "We have no data for this trading pair",
-      "cryptoToFiat": "Crypto to fiat",
-      "cryptoToCrypto": "Crypto to Crypto",
-      "rate": "Rate",
-      "last": "Last {{days}} days",
-      "price": "Price",
-      "exchange": "Rate provider"
-    },
     "profile": {
       "password": "Password lock",
       "passwordDesc": "Set a password to secure the Ledger Live data on your computer, including account names, balances, transactions and public addresses.",
@@ -1822,7 +1810,7 @@
       "releaseNotesBtn": "Details",
       "termsBtn": "Read",
       "faq": "Ledger Support",
-      "faqDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
+      "faqDesc": "Get help using Ledger Live and your Ledger hardware wallet.",
       "terms": "Terms of Use",
       "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
       "privacy": "Privacy Policy",

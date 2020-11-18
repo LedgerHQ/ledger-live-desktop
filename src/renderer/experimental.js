@@ -62,14 +62,6 @@ export const experimentalFeatures: Feature[] = [
       "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.",
   },
   {
-    type: "toggle",
-    name: "LEDGER_COUNTERVALUES_API",
-    valueOn: "http://countervalue-service.dev.aws.ledger.fr",
-    valueOff: "https://countervalues.api.live.ledger.com",
-    title: "Experimental Countervalues API",
-    description: "Changing this value may break the countervalues displayed for your accounts.",
-  },
-  {
     type: "integer",
     name: "KEYCHAIN_OBSERVABLE_RANGE",
     title: "Custom gap limit",
