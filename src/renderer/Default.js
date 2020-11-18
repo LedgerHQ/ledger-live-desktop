@@ -88,7 +88,7 @@ export default function Default() {
                     <Route path="/exchange" render={props => <Exchange {...props} />} />
                     <Route path="/account/:parentId/:id" render={props => <Account {...props} />} />
                     <Route path="/account/:id" render={props => <Account {...props} />} />
-                    <Route path="/asset/:assetId+" render={props => <Asset {...props} />} />
+                    <Route path="/asset/:assetId+" render={(props: any) => <Asset {...props} />} />
                     <Route path="/swap" render={props => <Swap {...props} />} />
                   </Switch>
                 </Page>

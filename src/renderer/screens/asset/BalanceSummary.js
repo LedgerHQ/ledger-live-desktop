@@ -46,9 +46,11 @@ export default function BalanceSummary({
   const mapValueCounterValue = useCallback((d: any) => d.countervalue.toNumber(), []);
   const mapValueCryptoValue = useCallback((d: any) => d.value.toNumber(), []);
 
+  const displayCountervalue = countervalueFirst && countervalueAvailable;
+  const chartMagnitude = displayCountervalue ? counterValue.units[0].magnitude : unit.magnitude;
+
   const renderTooltip = useCallback(
     (d: any) => {
-      const displayCountervalue = countervalueFirst && history.countervalueAvailable;
       const data = [
         { val: d.value, unit },
         { val: d.countervalue, unit: counterValue.units[0] },
@@ -66,13 +68,7 @@ export default function BalanceSummary({
         </>
       );
     },
-    [
-      counterValue.units,
-      countervalueAvailable,
-      countervalueFirst,
-      history.countervalueAvailable,
-      unit,
-    ],
+    [counterValue.units, countervalueAvailable, displayCountervalue, unit],
   );
 
   const renderTickYCryptoValue = useCallback((val: number) => formatShort(unit, BigNumber(val)), [
@@ -82,9 +78,6 @@ export default function BalanceSummary({
     (val: number) => formatShort(counterValue.units[0], BigNumber(val)),
     [counterValue.units],
   );
-
-  const displayCountervalue = countervalueFirst && countervalueAvailable;
-  const chartMagnitude = displayCountervalue ? counterValue.units[0].magnitude : unit.magnitude;
 
   return (
     <Card p={0} py={5}>

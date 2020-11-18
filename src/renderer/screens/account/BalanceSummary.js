@@ -9,7 +9,7 @@ import { formatShort } from "@ledgerhq/live-common/lib/currencies";
 import type {
   Currency,
   Account,
-  TokenAccount,
+  AccountLike,
   PortfolioRange,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
@@ -27,7 +27,7 @@ import perFamilyAccountBalanceSummaryFooter from "~/renderer/generated/AccountBa
 type Props = {
   counterValue: Currency,
   chartColor: string,
-  account: Account | TokenAccount,
+  account: AccountLike,
   parentAccount: ?Account,
   range: PortfolioRange,
   countervalueFirst: boolean,

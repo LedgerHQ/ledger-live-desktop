@@ -5,7 +5,7 @@ import { BigNumber } from "bignumber.js";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { getAccountName } from "@ledgerhq/live-common/lib/account";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types/account";
+import type { AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import CounterValue from "~/renderer/components/CounterValue";
@@ -23,7 +23,7 @@ import useTheme from "~/renderer/hooks/useTheme";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 export type AccountDistributionItem = {
-  account: Account | TokenAccount,
+  account: AccountLike,
   distribution: number, // % of the total (normalized in 0-1)
   amount: BigNumber,
   currency: CryptoCurrency | TokenCurrency,

@@ -9,6 +9,7 @@ import {
 import type {
   Account,
   AccountLike,
+  AccountLikeArray,
   PortfolioRange,
   TokenAccount,
 } from "@ledgerhq/live-common/lib/types";
@@ -20,7 +21,7 @@ import GridBody from "./GridBody";
 import ListBody from "./ListBody";
 
 type Props = {
-  accounts: (Account | TokenAccount)[],
+  accounts: AccountLikeArray,
   mode: *,
   onAccountClick: (Account | TokenAccount, ?Account) => void,
   range: PortfolioRange,
