@@ -1732,7 +1732,6 @@
     "helpButton": "Help",
     "tabs": {
       "display": "Általános",
-      "cryptoAssets": "Kriptovaluták",
       "currencies": "Kriptovaluták",
       "rates": "Árak",
       "help": "Segítség",
@@ -1775,22 +1774,10 @@
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
-      "desc": "Módisítsd a beállításokat minden egyes kriptovalutához",
+      "desc": "Select a crypto asset to edit its settings.",
       "placeholder": "Ehhez az eszközhöz nincsenek beállítások",
-      "select": "Válassz egy kriptovalutát a beállításainak módosításához.",
       "confirmationsNb": "Megerősítések száma",
       "confirmationsNbDesc": "Állítsd be, hogy hány megerősített tranzakció szükséges ahhoz, hogy egy tranzakció megerősítettként legyen megjelenítve."
-    },
-    "rates": {
-      "desc": "Itt található az összes ár, amelyet az ellenérték kiszámításához használnak.\nVálaszd ki, hogy melyik ár szolgáltatót használja az egyes kriptókhoz.",
-      "fromTo": "Innen {{from}} ide {{to}}",
-      "noCounterValue": "Nincs adat ehhez a kereskedési párhoz",
-      "cryptoToFiat": "Kripto fiatra",
-      "cryptoToCrypto": "Kripto Kriptóra",
-      "rate": "Eszközpár",
-      "last": "Utolsó {{days}} nap",
-      "price": "Ár",
-      "exchange": "Ár szolgáltató"
     },
     "profile": {
       "password": "Jelszavas védelem",
@@ -1871,11 +1858,7 @@
     "accounts": {
       "hideEmptyTokens": {
         "title": "Üres token számlák elrejtése",
-        "desc": "Nulla egyenleggel rendelkező tokenek elrejtése a Számlák lapon."
-      },
-      "tokenBlacklist": {
-        "title": "Rejtett tokenek",
-        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'"
+        "desc": "Choose the currency shown next to your balance and options."
       }
     }
   },
