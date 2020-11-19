@@ -7,7 +7,7 @@ import { withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
-import type { Currency, ValueChange, Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import type { Currency, ValueChange, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import type { TimeRange } from "~/renderer/reducers/settings";
 import { setSelectedTimeRange } from "~/renderer/actions/settings";
@@ -28,7 +28,7 @@ type OwnProps = {
     countervalue: BigNumber,
   },
   counterValue: Currency,
-  account: Account | TokenAccount,
+  account: AccountLike,
   selectedTimeRange: TimeRange,
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,

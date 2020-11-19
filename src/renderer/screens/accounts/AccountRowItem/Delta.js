@@ -1,13 +1,13 @@
 // @flow
 import React from "react";
-import type { Account, TokenAccount, PortfolioRange } from "@ledgerhq/live-common/lib/types";
+import type { AccountLike, PortfolioRange } from "@ledgerhq/live-common/lib/types";
 import { useBalanceHistoryWithCountervalue } from "~/renderer/actions/portfolio";
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import { PlaceholderLine } from "~/renderer/components/Placeholder";
 
 type Props = {
-  account: Account | TokenAccount,
+  account: AccountLike,
   range: PortfolioRange,
 };
 

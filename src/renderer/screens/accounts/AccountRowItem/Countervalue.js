@@ -2,7 +2,7 @@
 
 import React from "react";
 import type {
-  Account,
+  AccountLike,
   CryptoCurrency,
   TokenCurrency,
   PortfolioRange,
@@ -13,7 +13,7 @@ import CounterValue from "~/renderer/components/CounterValue";
 import { PlaceholderLine } from "~/renderer/components/Placeholder";
 
 type Props = {
-  account: Account,
+  account: AccountLike,
   range: PortfolioRange,
   currency: CryptoCurrency | TokenCurrency,
 };

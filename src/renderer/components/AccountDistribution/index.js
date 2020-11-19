@@ -5,13 +5,13 @@ import { BigNumber } from "bignumber.js";
 import Text from "~/renderer/components/Text";
 import Card from "~/renderer/components/Box/Card";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
-import type { Account } from "@ledgerhq/live-common/lib/types";
+import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import Box from "~/renderer/components/Box";
 import Header from "./Header";
 import Row from "./Row";
 
 type Props = {
-  accounts: Account[],
+  accounts: AccountLike[],
 };
 
 export default function AccountDistribution({ accounts }: Props) {
