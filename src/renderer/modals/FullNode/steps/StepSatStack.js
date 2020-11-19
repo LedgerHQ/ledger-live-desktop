@@ -2,16 +2,18 @@
 import React, { useCallback } from "react";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import BigSpinner from "~/renderer/components/BigSpinner";
 import InfoBox from "~/renderer/components/InfoBox";
 import { Trans } from "react-i18next";
 import Button from "~/renderer/components/Button";
+import BigSpinner from "~/renderer/components/BigSpinner";
+import ProgressCircle from "~/renderer/components/ProgressCircle";
 import IconCheck from "~/renderer/icons/Check";
 import IconCross from "~/renderer/icons/Cross";
 import { CheckWrapper, CrossWrapper } from "~/renderer/modals/FullNode";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import useSatStackStatus from "~/renderer/hooks/useSatStackStatus";
+import type { SatStackStatus } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
 
 const SatStack = ({
   satStackDownloaded,
@@ -20,8 +22,10 @@ const SatStack = ({
   satStackDownloaded: boolean,
   setSatStackDownloaded: boolean => void,
 }) => {
-  const latestStatus = useSatStackStatus();
-  const status = (latestStatus && latestStatus.type) || "";
+  const latestStatus: SatStackStatus = useSatStackStatus() || { type: "initializing" };
+  // $FlowFixMe
+  const { progress, type } = latestStatus;
+
   const onSatStackDownloaded = useCallback(() => {
     setSatStackDownloaded(true);
     openURL(urls.satstacks);
@@ -57,81 +61,17 @@ const SatStack = ({
         </Text>
       </InfoBox>
     </Box>
-  ) : status === "syncing" ? (
-    <Box alignItems="center">
-      <BigSpinner size={50} />
-      <Text
-        ff="Inter|SemiBold"
-        textAlign={"center"}
-        mt={32}
-        fontSize={6}
-        color="palette.text.shade100"
-      >
-        <Trans i18nKey="fullNode.modal.steps.satstack.connectionSteps.syncing.header" />
-      </Text>
-      <Text
-        ff="Inter|Regular"
-        mt={2}
-        textAlign={"center"}
-        fontSize={3}
-        color="palette.text.shade50"
-      >
-        <Trans i18nKey="fullNode.modal.steps.satstack.connectionSteps.syncing.description" />
-      </Text>
-    </Box>
-  ) : status === "scanning" ? (
-    <Box alignItems="center">
-      <CheckWrapper size={50}>
-        <IconCheck size={20} />
-      </CheckWrapper>
-      <Text
-        ff="Inter|SemiBold"
-        textAlign={"center"}
-        mt={32}
-        fontSize={6}
-        color="palette.text.shade100"
-      >
-        <Trans i18nKey="fullNode.modal.steps.satstack.connectionSteps.success.header" />
-      </Text>
-      <Text
-        ff="Inter|Regular"
-        mt={2}
-        textAlign={"center"}
-        fontSize={3}
-        color="palette.text.shade50"
-      >
-        <Trans i18nKey="fullNode.modal.steps.satstack.connectionSteps.success.description" />
-      </Text>
-    </Box>
-  ) : status === "ready" ? (
-    <Box alignItems="center">
-      <CheckWrapper size={50}>
-        <IconCheck size={20} />
-      </CheckWrapper>
-      <Text
-        ff="Inter|SemiBold"
-        textAlign={"center"}
-        mt={32}
-        fontSize={6}
-        color="palette.text.shade100"
-      >
-        {status}
-      </Text>
-      <Text
-        ff="Inter|Regular"
-        mt={2}
-        textAlign={"center"}
-        fontSize={3}
-        color="palette.text.shade50"
-      >
-        {status}
-      </Text>
-    </Box>
   ) : (
     <Box alignItems="center">
-      <CrossWrapper size={50}>
-        <IconCross size={20} />
-      </CrossWrapper>
+      {type === "ready" ? (
+        <CheckWrapper size={50}>
+          <IconCheck size={20} />
+        </CheckWrapper>
+      ) : progress ? (
+        <ProgressCircle size={50} progress={progress || 1} />
+      ) : (
+        <BigSpinner size={50} />
+      )}
       <Text
         ff="Inter|SemiBold"
         textAlign={"center"}
@@ -139,7 +79,7 @@ const SatStack = ({
         fontSize={6}
         color="palette.text.shade100"
       >
-        <Trans i18nKey={`fullNode.modal.steps.satstack.connectionSteps.${status}.header`} />
+        <Trans i18nKey={`fullNode.modal.steps.satstack.connectionSteps.${type}.header`} />
       </Text>
       <Text
         ff="Inter|Regular"
@@ -148,16 +88,7 @@ const SatStack = ({
         fontSize={3}
         color="palette.text.shade50"
       >
-        <Trans i18nKey={`fullNode.modal.steps.satstack.connectionSteps.${status}.description`} />
-      </Text>
-      <Text
-        ff="Inter|Regular"
-        mt={2}
-        textAlign={"center"}
-        fontSize={3}
-        color="palette.text.shade50"
-      >
-        {status}
+        <Trans i18nKey={`fullNode.modal.steps.satstack.connectionSteps.${type}.description`} />
       </Text>
     </Box>
   );
@@ -170,15 +101,15 @@ export const StepSatStackFooter = ({
   satStackDownloaded: boolean,
   onClose: () => void,
 }) => {
-  const latestStatus = useSatStackStatus();
-  const status = (latestStatus && latestStatus.type) || "";
+  const latestStatus: SatStackStatus = useSatStackStatus() || { type: "initializing" };
+  const { type } = latestStatus;
 
   return (
     <Box horizontal alignItems={"flex-end"}>
       <Button mr={3} onClick={onClose}>
         <Trans i18nKey="common.cancel" />
       </Button>
-      <Button primary onClick={onClose} disabled={!satStackDownloaded || status !== "ready"}>
+      <Button primary onClick={onClose} disabled={!satStackDownloaded || type !== "ready"}>
         <Trans i18nKey="common.done" />
       </Button>
     </Box>
