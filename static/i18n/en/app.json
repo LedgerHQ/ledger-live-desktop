@@ -332,18 +332,35 @@
               "disclaimer":"SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
               "cta": "Download SatStack"
             },
-            "connecting": {
-              "header": "Connecting to SatStack",
-              "description": "Please wait while we check if Ledger SatStack is running."
-            },
-            "success": {
-              "header": "Account scan in progress...",
-              "description": "We will let you know once your full node is done scanning, so you can add your accounts. Any Bitcoin accounts previously added through Ledger’s explorers were removed."
-            },
-            "failure": {
+            "satstack-disconnected": {
               "header": "Could not reach SatStack",
-              "description": "Please verify that SatStack is running on this computer before you retry"
+              "description": "Please verify that SatStack is running on this computer before you retry."
+            },
+            "node-disconnected": {
+              "header": "Could not reach full node",
+              "description": "Please verify that your node is reachable and that the connection settings you entered are correct."
+            },
+            "invalid-chain": {
+              "header": "invalid-chain title",
+              "description": "invalid-chain description for tooltip"
+            },
+            "initializing": {
+              "header": "initializing title",
+              "description": "initializing description for tooltip"
+            },
+            "ready": {
+              "header": "Ready",
+              "description": "The full node is fully synced. Your Bitcoin account balances are now correct."
+            },
+            "syncing": {
+              "header": "Node sync in progress…",
+              "description": "Recent transactions may not yet be visible, so Bitcoin account balances may be incorrect. If possible, run your node continuously to keep it in sync."
+            },
+            "scanning": {
+              "header": "Account scan in progress...",
+              "description": "You can add your accounts once the account scan is competed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
             }
+            
           }
         },
         "disconnect": {
