@@ -1732,7 +1732,6 @@
     "helpButton": "Help",
     "tabs": {
       "display": "General",
-      "cryptoAssets": "Crypto assets",
       "currencies": "Crypto assets",
       "help": "Help",
       "about": "About",
@@ -1774,9 +1773,8 @@
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
-      "desc": "Change settings for each of your crypto assets",
+      "desc": "Select a crypto asset to edit its settings.",
       "placeholder": "No settings for this asset",
-      "select": "Select a crypto asset to edit its settings.",
       "confirmationsNb": "Number of confirmations",
       "confirmationsNbDesc": "Set the number of network confirmations for a transaction to be marked as confirmed."
     },
@@ -1859,11 +1857,7 @@
     "accounts": {
       "hideEmptyTokens": {
         "title": "Hide empty token accounts",
-        "desc": "Hide token accounts with zero balance on the Accounts page."
-      },
-      "tokenBlacklist": {
-        "title": "Hidden tokens",
-        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'"
+        "desc": "Choose the currency shown next to your balance and options."
       }
     }
   },

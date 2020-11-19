@@ -1732,7 +1732,6 @@
     "helpButton": "Help",
     "tabs": {
       "display": "一般",
-      "cryptoAssets": "Crypto assets",
       "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "ヘルプ",
@@ -1775,22 +1774,10 @@
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
-      "desc": "Change settings for each of your crypto assets",
+      "desc": "Select a crypto asset to edit its settings.",
       "placeholder": "No settings for this asset",
-      "select": "Select a crypto asset to edit its settings.",
       "confirmationsNb": "確認数",
       "confirmationsNbDesc": "取引を確認済みにするためのネットワーク確認数を設定します。"
-    },
-    "rates": {
-      "desc": "Here are all the rates that are used to calculate countervalues.\nChoose which rate providers are used for each rate.",
-      "fromTo": "{{from}} to {{to}}",
-      "noCounterValue": "We have no data for this trading pair",
-      "cryptoToFiat": "Crypto to fiat",
-      "cryptoToCrypto": "Crypto to Crypto",
-      "rate": "Rate",
-      "last": "Last {{days}} days",
-      "price": "Price",
-      "exchange": "Rate provider"
     },
     "profile": {
       "password": "パスワードロック",
@@ -1871,11 +1858,7 @@
     "accounts": {
       "hideEmptyTokens": {
         "title": "Hide empty token accounts",
-        "desc": "Hide token accounts with zero balance on the Accounts page."
-      },
-      "tokenBlacklist": {
-        "title": "Hidden tokens",
-        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'"
+        "desc": "Choose the currency shown next to your balance and options."
       }
     }
   },

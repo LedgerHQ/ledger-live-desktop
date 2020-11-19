@@ -1732,7 +1732,6 @@
     "helpButton": "Aide",
     "tabs": {
       "display": "Général",
-      "cryptoAssets": "Crypto-actifs",
       "currencies": "Crypto-actifs",
       "rates": "Taux",
       "help": "Aide",
@@ -1775,22 +1774,10 @@
       "carouselVisibilityDesc": "Activer le carrousel sur la page Portfolio"
     },
     "currencies": {
-      "desc": "Modifier les paramètres pour chacun de vos crypto-actifs",
+      "desc": "Select a crypto asset to edit its settings.",
       "placeholder": "Aucun paramètre pour cet actif",
-      "select": "Sélectionnez un crypto-actif pour modifier ses paramètres.",
       "confirmationsNb": "Nombre de confirmations",
       "confirmationsNbDesc": "Définissez le nombre de confirmations réseau pour qu’une transaction soit marquée comme confirmée."
-    },
-    "rates": {
-      "desc": "Voici tous les taux utilisés pour calculer les contrevaleurs.\nChoisissez quels fournisseurs de taux sont utilisés pour chaque taux.",
-      "fromTo": "{{from}} à {{to}}",
-      "noCounterValue": "Aucune donnée disponible pour cette paire de trading",
-      "cryptoToFiat": "Crypto vers fiat",
-      "cryptoToCrypto": "Crypto vers Crypto",
-      "rate": "Taux",
-      "last": "{{days}} derniers jours",
-      "price": "Prix",
-      "exchange": "Fournisseur de taux"
     },
     "profile": {
       "password": "Verrouillage par mot de passe",
@@ -1871,11 +1858,7 @@
     "accounts": {
       "hideEmptyTokens": {
         "title": "Masquer les comptes de tokens vides",
-        "desc": "Masquer les tokens avec un solde à zéro dans la page Comptes."
-      },
-      "tokenBlacklist": {
-        "title": "Tokens masqués",
-        "desc": "Vous pouvez masquer les jetons en vous rendant sur le compte parent, puis en faisant un clic droit sur le jeton et en sélectionnant 'Cacher le jeton'"
+        "desc": "Choose the currency shown next to your balance and options."
       }
     }
   },
