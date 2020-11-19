@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { colors } from "~/renderer/styles/theme";
 import useEnv from "~/renderer/hooks/useEnv";
 import useSatStackStatus from "~/renderer/hooks/useSatStackStatus";
-import type { SatsStackStatus } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
+import type { SatStackStatus } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
 
 const Dot: ThemedComponent<{
   color?: string,
@@ -52,7 +52,7 @@ const getColorsForStatus = status => {
 
 const FullNodeStatus = () => {
   const { t } = useTranslation();
-  const latestStatus: SatsStackStatus = useSatStackStatus() || { type: "initializing" };
+  const latestStatus: SatStackStatus = useSatStackStatus() || { type: "initializing" };
   const satStackAlreadyConfigured = useEnv("SATSTACK");
   if (!satStackAlreadyConfigured) return null;
 

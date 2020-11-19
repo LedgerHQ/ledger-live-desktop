@@ -6,11 +6,11 @@ import memoize from "lodash/memoize";
 import debounce from "lodash/debounce";
 import { setEnvOnAllThreads } from "~/helpers/env";
 import {
-  editSatsStackConfig,
-  stringifySatsStackConfig,
-  parseSatsStackConfig,
+  editSatStackConfig,
+  stringifySatStackConfig,
+  parseSatStackConfig,
 } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
-import type { SatsStackConfig } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
+import type { SatStackConfig } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
 /*
   This file serve as an interface for the RPC binding to the main thread that now manage the config file.
   Because only serialized json can be sent between processes, the transform system now live here.
@@ -76,14 +76,14 @@ export const reload = () => ipcRenderer.invoke("reload");
 
 export const cleanCache = () => ipcRenderer.invoke("cleanCache");
 
-export const saveLSS = async (lssConfig: SatsStackConfig) => {
+export const saveLSS = async (lssConfig: SatStackConfig) => {
   const configStub = {
     node: { host: "", username: "", password: "" },
     accounts: [],
   };
   const maybeExistingConfig = (await loadLSS()) || configStub;
-  const updated = editSatsStackConfig(maybeExistingConfig, lssConfig);
-  await ipcRenderer.invoke("generate-lss-config", stringifySatsStackConfig(updated));
+  const updated = editSatStackConfig(maybeExistingConfig, lssConfig);
+  await ipcRenderer.invoke("generate-lss-config", stringifySatStackConfig(updated));
   setEnvOnAllThreads("SATSTACK", true);
 };
 
@@ -92,10 +92,10 @@ export const removeLSS = async () => {
   setEnvOnAllThreads("SATSTACK", false);
 };
 
-export const loadLSS = async (): Promise<?SatsStackConfig> => {
+export const loadLSS = async (): Promise<?SatStackConfig> => {
   try {
     const satStackConfigRaw = await ipcRenderer.invoke("load-lss-config");
-    const config = parseSatsStackConfig(satStackConfigRaw);
+    const config = parseSatStackConfig(satStackConfigRaw);
     setEnvOnAllThreads("SATSTACK", true);
     return config;
   } catch (e) {
