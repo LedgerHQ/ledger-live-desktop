@@ -1,14 +1,13 @@
 // @flow
 import React from "react";
-import { statusObservable } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
 import { useTranslation } from "react-i18next";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { useObservable } from "@ledgerhq/live-common/lib/observable";
 import styled from "styled-components";
 import { colors } from "~/renderer/styles/theme";
 import useEnv from "~/renderer/hooks/useEnv";
+import useSatStackStatus from "~/renderer/hooks/useSatStackStatus";
 
 const Dot: ThemedComponent<{
   color?: string,
@@ -33,7 +32,7 @@ const naiveMapping = {
 
 const FullNodeStatus = () => {
   const { t } = useTranslation();
-  const latestStatus = useObservable(statusObservable, { type: "satstack-disconnected" });
+  const latestStatus = useSatStackStatus();
   const satStackAlreadyConfigured = useEnv("SATSTACK");
   if (!satStackAlreadyConfigured) return null;
 

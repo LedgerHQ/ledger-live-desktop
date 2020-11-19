@@ -10,10 +10,10 @@ import Form from "./Form";
 import Button from "~/renderer/components/Button";
 import BigSpinner from "~/renderer/components/BigSpinner";
 import type { RPCNodeConfig } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
-import { checkRPCNodeConfig } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
 import type { FullNodeSteps, ConnectionStatus } from "~/renderer/modals/FullNode";
 import { CheckWrapper, CrossWrapper, connectionStatus } from "~/renderer/modals/FullNode";
 import useEnv from "~/renderer/hooks/useEnv";
+import { command } from "~/renderer/commands";
 
 const Node = ({
   nodeConnectionStatus = connectionStatus.IDLE,
@@ -32,9 +32,10 @@ const Node = ({
 }) => {
   useEffect(() => {
     if (nodeConnectionStatus === connectionStatus.PENDING) {
-      checkRPCNodeConfig(nodeConfig)
-        .then(() => setNodeConnectionStatus(connectionStatus.SUCCESS))
-        .catch(() => setNodeConnectionStatus(connectionStatus.FAILURE));
+      command("checkRPCNodeConfig")(nodeConfig).subscribe({
+        complete: () => setNodeConnectionStatus(connectionStatus.SUCCESS),
+        error: () => setNodeConnectionStatus(connectionStatus.FAILURE),
+      });
     }
   }, [nodeConfig, nodeConnectionStatus, setNodeConnectionStatus]);
 

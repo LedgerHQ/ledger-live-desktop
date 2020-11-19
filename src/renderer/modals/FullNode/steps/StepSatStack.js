@@ -1,7 +1,5 @@
 // @flow
 import React, { useCallback } from "react";
-import { useObservable } from "@ledgerhq/live-common/lib/observable";
-import { statusObservable } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import BigSpinner from "~/renderer/components/BigSpinner";
@@ -13,6 +11,7 @@ import IconCross from "~/renderer/icons/Cross";
 import { CheckWrapper, CrossWrapper } from "~/renderer/modals/FullNode";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
+import useSatStackStatus from "~/renderer/hooks/useSatStackStatus";
 
 const SatStack = ({
   satStackDownloaded,
@@ -21,7 +20,7 @@ const SatStack = ({
   satStackDownloaded: boolean,
   setSatStackDownloaded: boolean => void,
 }) => {
-  const latestStatus = useObservable(statusObservable);
+  const latestStatus = useSatStackStatus();
   const status = (latestStatus && latestStatus.type) || "";
   const onSatStackDownloaded = useCallback(() => {
     setSatStackDownloaded(true);
@@ -171,7 +170,7 @@ export const StepSatStackFooter = ({
   satStackDownloaded: boolean,
   onClose: () => void,
 }) => {
-  const latestStatus = useObservable(statusObservable);
+  const latestStatus = useSatStackStatus();
   const status = (latestStatus && latestStatus.type) || "";
 
   return (
