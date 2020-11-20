@@ -345,8 +345,8 @@
               "description": "invalid-chain description for tooltip"
             },
             "initializing": {
-              "header": "initializing title",
-              "description": "initializing description for tooltip"
+              "header": "Loading",
+              "description": ""
             },
             "ready": {
               "header": "Ready",
@@ -900,6 +900,7 @@
       "import": "Accounts",
       "finish": "Confirmation"
     },
+    "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
     "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "Add existing accounts",
     "selectAll": "Select all ({{count}})",

@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useCallback } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import styled from "styled-components";
@@ -10,6 +10,8 @@ import InputPassword from "~/renderer/components/InputPassword";
 import Input from "~/renderer/components/Input";
 import Label from "~/renderer/components/Label";
 import Switch from "~/renderer/components/Switch";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
 
 const FormWrapper = styled(Box)`
   margin-bottom: 32px;
@@ -48,6 +50,9 @@ const Form = ({
   const hostError = errors.find(e => e.field === "host")?.error;
   const usernameError = errors.find(e => e.field === "username")?.error;
   const passwordError = errors.find(e => e.field === "password")?.error;
+  const onLearnMore = useCallback(() => {
+    openURL(urls.satstacks.learnMore);
+  }, []);
 
   return (
     <Box>
@@ -106,12 +111,7 @@ const Form = ({
           </Label>
         </Box>
       </FormWrapper>
-      <InfoBox
-        type="secondary"
-        onLearnMore={() => {
-          /* TODO Implement this */
-        }}
-      >
+      <InfoBox type="secondary" onLearnMore={onLearnMore}>
         <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
           <Trans i18nKey="fullNode.modal.steps.node.connectionSteps.notConnected.disclaimer" />
         </Text>

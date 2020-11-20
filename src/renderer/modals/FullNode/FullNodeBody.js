@@ -131,10 +131,7 @@ const FullNodeBody = ({
               numberOfAccountsToScan={numberOfAccountsToScan}
             />
           ) : activeStep === "satstack" ? (
-            <StepSatStack
-              satStackDownloaded={satStackDownloaded}
-              setSatStackDownloaded={setSatStackDownloaded}
-            />
+            <StepSatStack satStackDownloaded={satStackDownloaded} />
           ) : (
             <StepDisconnect />
           )}
@@ -160,7 +157,11 @@ const FullNodeBody = ({
             scannedDescriptors={scannedDescriptors}
           />
         ) : activeStep === "satstack" ? (
-          <StepSatStackFooter satStackDownloaded={satStackDownloaded} onClose={onClose} />
+          <StepSatStackFooter
+            satStackDownloaded={satStackDownloaded}
+            setSatStackDownloaded={setSatStackDownloaded}
+            onClose={onClose}
+          />
         ) : (
           <StepDisconnectFooter onClose={onClose} />
         )

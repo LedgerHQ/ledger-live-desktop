@@ -5,31 +5,25 @@ import Text from "~/renderer/components/Text";
 import InfoBox from "~/renderer/components/InfoBox";
 import { Trans } from "react-i18next";
 import Button from "~/renderer/components/Button";
-import BigSpinner from "~/renderer/components/BigSpinner";
+import { Rotating } from "~/renderer/components/Spinner";
 import ProgressCircle from "~/renderer/components/ProgressCircle";
 import IconCheck from "~/renderer/icons/Check";
-import IconCross from "~/renderer/icons/Cross";
-import { CheckWrapper, CrossWrapper } from "~/renderer/modals/FullNode";
+import { CheckWrapper } from "~/renderer/modals/FullNode";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import useSatStackStatus from "~/renderer/hooks/useSatStackStatus";
 import type { SatStackStatus } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
 
-const SatStack = ({
-  satStackDownloaded,
-  setSatStackDownloaded,
-}: {
-  satStackDownloaded: boolean,
-  setSatStackDownloaded: boolean => void,
-}) => {
+const SatStack = ({ satStackDownloaded }: { satStackDownloaded: boolean }) => {
   const latestStatus: SatStackStatus = useSatStackStatus() || { type: "initializing" };
   // $FlowFixMe
   const { progress, type } = latestStatus;
-
   const onSatStackDownloaded = useCallback(() => {
-    setSatStackDownloaded(true);
-    openURL(urls.satstacks);
-  }, [setSatStackDownloaded]);
+    openURL(urls.satstacks.download);
+  }, []);
+  const onLearnMore = useCallback(() => {
+    openURL(urls.satstacks.learnMore);
+  }, []);
 
   return !satStackDownloaded ? (
     <Box>
@@ -50,12 +44,7 @@ const SatStack = ({
           <Trans i18nKey="fullNode.modal.steps.satstack.connectionSteps.notConnected.cta" />
         </Button>
       </Box>
-      <InfoBox
-        type="secondary"
-        onLearnMore={() => {
-          /* TODO Implement this */
-        }}
-      >
+      <InfoBox type="secondary" onLearnMore={onLearnMore}>
         <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
           <Trans i18nKey="fullNode.modal.steps.satstack.connectionSteps.notConnected.disclaimer" />
         </Text>
@@ -70,7 +59,9 @@ const SatStack = ({
       ) : progress ? (
         <ProgressCircle size={50} progress={progress || 1} />
       ) : (
-        <BigSpinner size={50} />
+        <Rotating size={50}>
+          <ProgressCircle hideProgress size={50} progress={0.08} />
+        </Rotating>
       )}
       <Text
         ff="Inter|SemiBold"
@@ -96,20 +87,16 @@ const SatStack = ({
 
 export const StepSatStackFooter = ({
   satStackDownloaded,
+  setSatStackDownloaded,
   onClose,
 }: {
   satStackDownloaded: boolean,
+  setSatStackDownloaded: boolean => void,
   onClose: () => void,
 }) => {
-  const latestStatus: SatStackStatus = useSatStackStatus() || { type: "initializing" };
-  const { type } = latestStatus;
-
   return (
     <Box horizontal alignItems={"flex-end"}>
-      <Button mr={3} onClick={onClose}>
-        <Trans i18nKey="common.cancel" />
-      </Button>
-      <Button primary onClick={onClose} disabled={!satStackDownloaded || type !== "ready"}>
+      <Button primary onClick={satStackDownloaded ? onClose : () => setSatStackDownloaded(true)}>
         <Trans i18nKey="common.done" />
       </Button>
     </Box>
