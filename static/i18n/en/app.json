@@ -2581,13 +2581,17 @@
       "title": "The password entered is incorrect",
       "description": "Please try again"
     },
+    "SatStackAccessDown": {
+      "title": "Could not reach full node",
+      "description": "Please verify that SatStack and your node are running. Check the full node setup in the Settings if the problem persists."
+    },
+    "SatStackStillSyncing": {
+      "title": "Node sync in progress...",
+      "description": "Please wait while your node is syncing. Sending is not possible since your Bitcoin account balances may be incorrect."
+    },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",
       "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
-    },
-    "SatStackNotReady": {
-      "title": "",
-      "description": ""
     },
     "TimeoutError": {
       "title": "Oops, a timeout occurred",
