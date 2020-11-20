@@ -2,12 +2,14 @@
 import moment from "moment";
 import { ipcRenderer, webFrame, remote } from "electron";
 import React, { useState, useCallback } from "react";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { getAllEnvs } from "@ledgerhq/live-common/lib/env";
 import KeyHandler from "react-key-handler";
 import logger from "~/logger";
 import getUser from "~/helpers/user";
 import Button from "~/renderer/components/Button";
+import { accountsSelector } from "~/renderer/reducers/accounts";
 
 const saveLogs = async (path: { canceled: boolean, filePath: string }) => {
   await ipcRenderer.invoke("save-logs", path);
@@ -39,6 +41,7 @@ type Props = {|
 const ExportLogsBtn = ({ hookToShortcut, primary = true, small = true, title, ...rest }: Props) => {
   const { t } = useTranslation();
   const [exporting, setExporting] = useState(false);
+  const accounts = useSelector(accountsSelector);
 
   const exportLogs = useCallback(async () => {
     const resourceUsage = webFrame.getResourceUsage();
@@ -53,6 +56,7 @@ const ExportLogsBtn = ({ hookToShortcut, primary = true, small = true, title, ..
       env: {
         ...getAllEnvs(),
       },
+      accountsIds: accounts.map(a => a.id),
     });
     const path = await remote.dialog.showSaveDialog({
       title: "Export logs",
