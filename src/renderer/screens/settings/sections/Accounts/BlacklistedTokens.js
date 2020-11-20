@@ -5,7 +5,7 @@ import {
 } from "~/renderer/screens/settings/SettingsSection";
 import IconBan from "~/renderer/icons/Ban";
 import Text from "~/renderer/components/Text";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { findTokenById } from "@ledgerhq/live-common/lib/currencies";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
@@ -17,11 +17,14 @@ import { showToken } from "~/renderer/actions/settings";
 import { blacklistedTokenIdsSelector } from "~/renderer/reducers/settings";
 import { useBridgeSync } from "@ledgerhq/live-common/lib/bridge/react";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import Track from "~/renderer/analytics/Track";
+import IconAngleDown from "~/renderer/icons/AngleDown";
 
 export default function BlacklistedTokens() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const sync = useBridgeSync();
+  const [sectionVisible, setSectionVisible] = useState(false);
 
   // Trigger a sync on unmounting the block
   useEffect(() => () => sync({ type: "SYNC_ALL_ACCOUNTS", priority: 5 }), [sync]);
@@ -34,7 +37,6 @@ export default function BlacklistedTokens() {
   );
 
   const blacklistedTokenIds = useSelector(blacklistedTokenIdsSelector);
-  console.log('!!!', blacklistedTokenIds)
   const sections = [];
   for (const tokenId of blacklistedTokenIds) {
     const token = findTokenById(tokenId);
@@ -52,42 +54,64 @@ export default function BlacklistedTokens() {
     }
   }
 
+  const toggleCurrencySection = useCallback(() => {
+    setSectionVisible(prevState => !prevState);
+  }, [setSectionVisible]);
+
   return (
     <Section mt={20} style={{ flowDirection: "column" }}>
+      <Track onUpdate event="BlacklistedTokens dropdown" opened={sectionVisible} />
       <Header
         icon={<IconBan />}
         title={t("settings.accounts.tokenBlacklist.title")}
         desc={t("settings.accounts.tokenBlacklist.desc")}
-      />
-      <div>
-        {sections.map(({ parentCurrency, tokens }) => (
-          <Box key={parentCurrency.id}>
-            <BlacklistedTokensSectionHeader>
-              <Text ff="Inter|Bold" fontSize={2} color="palette.text.shade40">
-                {parentCurrency.name}
-              </Text>
-            </BlacklistedTokensSectionHeader>
-            <Body>
-              {tokens.map(token => (
-                <BlacklistedTokenRow key={token.id}>
-                  <CryptoCurrencyIcon currency={token} size={20} />
-                  <Text
-                    style={{ marginLeft: 10, flex: 1 }}
-                    ff="Inter|Medium"
-                    color="palette.text.shade100"
-                    fontSize={3}
-                  >
-                    {token.name}
-                  </Text>
-                  <IconContainer onClick={() => onShowToken(token.id)}>
-                    <IconCross size={16} />
-                  </IconContainer>
-                </BlacklistedTokenRow>
-              ))}
-            </Body>
+        renderRight={
+          <Box horizontal flex alignItems="center">
+            {sections.length && (
+              <Box ff="Inter" fontSize={3} mr={2}>
+                {t("settings.accounts.tokenBlacklist.count", { val: sections.length })}
+              </Box>
+            )}
+            <Show visible={sectionVisible}>
+              <IconAngleDown size={24} />
+            </Show>
           </Box>
-        ))}
-      </div>
+        }
+        onClick={toggleCurrencySection}
+        style={{ cursor: "pointer" }}
+      />
+
+      {sectionVisible && (
+        <div>
+          {sections.map(({ parentCurrency, tokens }) => (
+            <Box key={parentCurrency.id}>
+              <BlacklistedTokensSectionHeader>
+                <Text ff="Inter|Bold" fontSize={2} color="palette.text.shade40">
+                  {parentCurrency.name}
+                </Text>
+              </BlacklistedTokensSectionHeader>
+              <Body>
+                {tokens.map(token => (
+                  <BlacklistedTokenRow key={token.id}>
+                    <CryptoCurrencyIcon currency={token} size={20} />
+                    <Text
+                      style={{ marginLeft: 10, flex: 1 }}
+                      ff="Inter|Medium"
+                      color="palette.text.shade100"
+                      fontSize={3}
+                    >
+                      {token.name}
+                    </Text>
+                    <IconContainer onClick={() => onShowToken(token.id)}>
+                      <IconCross size={16} />
+                    </IconContainer>
+                  </BlacklistedTokenRow>
+                ))}
+              </Body>
+            </Box>
+          ))}
+        </div>
+      )}
     </Section>
   );
 }
@@ -129,4 +153,8 @@ const BlacklistedTokensSectionHeader: ThemedComponent<{}> = styled.div`
   & > * {
     letter-spacing: 0.1em;
   }
+`;
+
+const Show: ThemedComponent<{ visible: boolean }> = styled(Box)`
+  transform: rotate(${p => (p.visible ? 0 : 270)}deg);
 `;

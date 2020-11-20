@@ -1862,7 +1862,8 @@
       },
       "tokenBlacklist": {
         "title": "Hidden tokens",
-        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'."
+        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
+        "count": "{{val}} tokens"
       }
     }
   },
