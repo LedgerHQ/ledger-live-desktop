@@ -64,7 +64,7 @@ const handlers: Object = {
   ): AccountsState => state.filter(acc => acc.id !== account.id),
 
   CLEAN_FULLNODE_DISCONNECT: (state: AccountsState): AccountsState =>
-    state.filter(acc => getAccountCurrency(acc).id !== "bitcoin"),
+    state.filter(acc => acc.currency.id !== "bitcoin"),
 
   CLEAN_ACCOUNTS_CACHE: (state: AccountsState): AccountsState => state.map(clearAccount),
 

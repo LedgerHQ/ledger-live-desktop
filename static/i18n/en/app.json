@@ -334,7 +334,7 @@
             },
             "satstack-disconnected": {
               "header": "Could not reach SatStack",
-              "description": "Please verify that SatStack is running on this computer before you retry."
+              "description": "Please verify that SatStack is running on this computer."
             },
             "node-disconnected": {
               "header": "Could not reach full node",
