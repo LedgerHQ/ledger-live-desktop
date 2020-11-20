@@ -67,9 +67,9 @@ export default function BlacklistedTokens() {
         desc={t("settings.accounts.tokenBlacklist.desc")}
         renderRight={
           <Box horizontal flex alignItems="center">
-            {sections.length && (
+            {blacklistedTokenIds.length && (
               <Box ff="Inter" fontSize={3} mr={2}>
-                {t("settings.accounts.tokenBlacklist.count", { val: sections.length })}
+                {t("settings.accounts.tokenBlacklist.count", { val: blacklistedTokenIds.length })}
               </Box>
             )}
             <Show visible={sectionVisible}>
