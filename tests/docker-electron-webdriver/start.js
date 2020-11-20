@@ -19,7 +19,9 @@ const needBuild = lastBuild !== hashes;
 
 if (needBuild) {
   console.log("needs to rebuild");
-  fs.rmSync(`${path}.lastyarn`, { force: true });
+  try {
+    fs.unlinkSync(`${path}.lastyarn`);
+  } catch {}
   child_process.spawn(
     `cd ${path} && docker-compose up --build ${process.argv.slice(2).join(" ")}`,
     {

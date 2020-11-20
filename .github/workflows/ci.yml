@@ -37,6 +37,12 @@ jobs:
         run: sudo yarn build
       - name: start electron webdriver
         run: yarn start-electron-webdriver -d
+      - uses: nev7n/wait_for_response@v1
+        with:
+          url: 'http://localhost:9515/'
+          responseCode: 404
+          timeout: 600000
+          interval: 1000
       - name: run spectron
         run: yarn spectron
       - name: check
