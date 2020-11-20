@@ -365,7 +365,8 @@
         },
         "disconnect": {
           "title": "Disconnect full node",
-          "cta": "Disconnect full node"
+          "cta": "Disconnect",
+          "description": "Are you sure? Disconnecting the full node will remove all Bitcoin accounts. You can add your accounts again using Ledger’s explorers."
         }
       }
     }
