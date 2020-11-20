@@ -76,7 +76,7 @@ const NoEthereumAccountModal = ({ currency, account, ...rest }: Props) => {
             <Box flow={4}>
               <Box alignItems="center">
                 <AmountUpWrapper>
-                  <TokenCurrencyIcon size={24} />
+                  {TokenCurrencyIcon ? <TokenCurrencyIcon size={24} /> : null}
                 </AmountUpWrapper>
                 <Text ff="Inter|Bold" my={3} fontSize={4} textAlign="center">
                   <Trans
