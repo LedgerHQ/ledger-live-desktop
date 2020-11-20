@@ -36,7 +36,7 @@ jobs:
       - name: check build
         run: sudo yarn build
       - name: start electron webdriver
-        run: cd tests/docker-electron-webdriver && docker-compose up -d
+        run: yarn start-electron-webdriver -d
       - name: run spectron
         run: yarn spectron
       - name: check

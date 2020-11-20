@@ -55,9 +55,9 @@ export function applicationProxy(userData = null, env = {}) {
     webdriverOptions: {
       capabilities: {
         "goog:chromeOptions": {
-          binary: "/node_modules/spectron/lib/launcher.js",
+          binary: "/app/node_modules/spectron/lib/launcher.js",
           args: [
-            "spectron-path=/node_modules/electron/dist/electron",
+            "spectron-path=/app/node_modules/electron/dist/electron",
             "spectron-arg0=/app/.webpack/main.bundle.js",
             "--disable-extensions",
             "--disable-dev-shm-usage",

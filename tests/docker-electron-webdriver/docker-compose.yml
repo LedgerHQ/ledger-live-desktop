@@ -8,6 +8,9 @@ services:
       - /dev/shm:/dev/shm
       - ../../.webpack:/app/.webpack
       - ../../tests:/app/tests
+      - ../../scripts:/app/scripts
+      - ../../package.json:/app/package.json
+      - ../../yarn.lock:/app/yarn.lock
     environment:
       SCREEN_WIDTH: 1024
       SCREEN_HEIGHT: 788
