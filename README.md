@@ -98,7 +98,7 @@ yarn start
 ```
 
 In an other terminal you need to launch the webdriver/electron container. First run will be slow.
-Next ones will be fast unless some changes are made to the container.
+Next ones will be fast unless some changes are made to the container or package.json. You need to kill and re run the command if package.json changed.
 ```bash
 yarn start-electron-webdriver
 ```
