@@ -116,7 +116,9 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
     const parentAccount = accounts.find(a => account?.parentId === a.id);
     const ethAccount = accounts.find(a => a.type === "Account" && a.currency.id === eth.id);
     if (!account && ethAccount) {
-      dispatch(openModal("MODAL_RECEIVE", { currency: token, account: ethAccount }));
+      dispatch(
+        openModal("MODAL_LEND_EMPTY_ACCOUNT_DEPOSIT", { currency: token, account: ethAccount }),
+      );
     } else if (!ethAccount) {
       dispatch(openModal("MODAL_LEND_NO_ETHEREUM_ACCOUNT", { currency: token }));
     } else if (isAcceptedLendingTerms()) {
