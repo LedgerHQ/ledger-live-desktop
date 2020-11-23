@@ -1858,7 +1858,12 @@
     "accounts": {
       "hideEmptyTokens": {
         "title": "隐藏空代币帐户",
-        "desc": "Choose the currency shown next to your balance and options."
+        "desc": "Hide token accounts with zero balance on the Accounts page."
+      },
+      "tokenBlacklist": {
+        "title": "Hidden tokens",
+        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
+        "count": "{{val}} tokens"
       }
     }
   },

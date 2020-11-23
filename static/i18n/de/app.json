@@ -1733,6 +1733,7 @@
     "tabs": {
       "display": "General",
       "currencies": "Crypto assets",
+      "rates": "Rates",
       "help": "Help",
       "about": "About",
       "experimental": "Experimental features",
@@ -1808,7 +1809,7 @@
       "releaseNotesBtn": "Details",
       "termsBtn": "Read",
       "faq": "Ledger Support",
-      "faqDesc": "Get help using Ledger Live and your Ledger hardware wallet.",
+      "faqDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
       "terms": "Terms of Use",
       "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
       "privacy": "Privacy Policy",
@@ -1857,7 +1858,12 @@
     "accounts": {
       "hideEmptyTokens": {
         "title": "Hide empty token accounts",
-        "desc": "Choose the currency shown next to your balance and options."
+        "desc": "Hide token accounts with zero balance on the Accounts page."
+      },
+      "tokenBlacklist": {
+        "title": "Hidden tokens",
+        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
+        "count": "{{val}} tokens"
       }
     }
   },
