@@ -6,6 +6,7 @@ import styled, { css } from "styled-components";
 import { Trans } from "react-i18next";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 
+import { usePolkadotPreloadData } from "@ledgerhq/live-common/lib/families/polkadot/react";
 import { canNominate, canBond, canUnbond } from "@ledgerhq/live-common/lib/families/polkadot/logic";
 
 import { openModal } from "~/renderer/actions/modals";
@@ -15,6 +16,8 @@ import Freeze from "~/renderer/icons/Freeze";
 import Vote from "~/renderer/icons/Vote";
 import Unfreeze from "~/renderer/icons/Unfreeze";
 import Text from "~/renderer/components/Text";
+
+import ElectionStatusWarning from "./ElectionStatusWarning";
 
 const IconWrapper = styled.div`
   width: 32px;
@@ -99,6 +102,8 @@ type Props = {
 const ManageModal = ({ name, account, ...rest }: Props) => {
   const dispatch = useDispatch();
 
+  const { staking } = usePolkadotPreloadData();
+
   const onSelectAction = useCallback(
     (name, onClose) => {
       onClose();
@@ -111,9 +116,11 @@ const ManageModal = ({ name, account, ...rest }: Props) => {
     [dispatch, account],
   );
 
-  const nominationEnabled = canNominate(account);
-  const bondingEnabled = canBond(account);
-  const unbondingEnabled = canUnbond(account);
+  const electionOpen = staking?.electionClosed !== undefined ? !staking?.electionClosed : false;
+
+  const nominationEnabled = !electionOpen && canNominate(account);
+  const bondingEnabled = !electionOpen && canBond(account);
+  const unbondingEnabled = !electionOpen && canUnbond(account);
 
   return (
     <Modal
@@ -129,6 +136,7 @@ const ManageModal = ({ name, account, ...rest }: Props) => {
           render={() => (
             <>
               <Box>
+                {electionOpen ? <ElectionStatusWarning /> : null}
                 <ManageButton
                   disabled={!bondingEnabled}
                   onClick={() => onSelectAction("MODAL_POLKADOT_BOND", onClose)}

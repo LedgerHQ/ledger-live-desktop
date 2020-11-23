@@ -1829,6 +1829,8 @@
       "nominatorsCount": "{{nominatorsCount}} nominateurs",
       "oversubscribed": "Sursouscrit ({{nominatorsCount}})",
       "controllerNeededWarning": "Vous devez être contrôleur d'un compte de réserve",
+      "electionOpen": "L'élection de nouveaux validateurs est en cours. Par conséquent les opérations de Staking sont indisponibles pour une durée pouvant atteindre 15 minutes.",
+      "electionOpenTooltip": "Cette opération est désactivée pendant l'élection des validateurs",
       "flow": {
         "title": "Nominer des validateurs",
         "steps": {

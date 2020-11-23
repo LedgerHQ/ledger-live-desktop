@@ -1,12 +1,13 @@
 // @flow
-import React, { useCallback, useState, useEffect, useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import invariant from "invariant";
 import { useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
+
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import { getValidators } from "@ledgerhq/live-common/lib/families/polkadot/validators";
 import { canNominate } from "@ledgerhq/live-common/lib/families/polkadot/logic";
+import { usePolkadotPreloadData } from "@ledgerhq/live-common/lib/families/polkadot/react";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 
 import { urls } from "~/config/urls";
@@ -24,6 +25,8 @@ import FreezeIcon from "~/renderer/icons/Freeze";
 import ChillIcon from "~/renderer/icons/Undelegate";
 import ReceiveIcon from "~/renderer/icons/Receive";
 import ChartLineIcon from "~/renderer/icons/ChartLine";
+
+import ElectionStatusWarning from "../ElectionStatusWarning";
 
 import { Row, UnbondingRow } from "./Row";
 import { Header, UnbondingHeader } from "./Header";
@@ -46,29 +49,11 @@ const Wrapper = styled(Box).attrs(() => ({
 const Nomination = ({ account }: Props) => {
   const dispatch = useDispatch();
 
-  const [validators, setValidators] = useState([]);
+  const { staking, validators } = usePolkadotPreloadData();
 
   const { polkadotResources } = account;
   invariant(polkadotResources, "polkadot account expected");
-  const {
-    lockedBalance,
-    unlockedBalance,
-    unlockingBalance,
-    nominations,
-    unlockings,
-  } = polkadotResources;
-
-  useEffect(() => {
-    async function fetchValidators() {
-      const validatorsIds = nominations?.map(n => n.address) || [];
-      const validatorsList = await getValidators(validatorsIds);
-      setValidators(validatorsList);
-    }
-
-    if (nominations && nominations?.length !== validators?.length) {
-      fetchValidators();
-    }
-  }, [nominations, validators, setValidators]);
+  const { lockedBalance, unlockedBalance, nominations, unlockings } = polkadotResources;
 
   const mappedNominations = useMemo(() => {
     return nominations?.map(nomination => {
@@ -133,18 +118,21 @@ const Nomination = ({ account }: Props) => {
     [explorerView],
   );
 
-  const nominationEnabled = canNominate(account);
+  const electionOpen = staking?.electionClosed !== undefined ? !staking?.electionClosed : false;
 
   const hasBondedBalance = lockedBalance && lockedBalance.gt(0);
   const hasUnlockedBalance = unlockedBalance && unlockedBalance.gt(0);
-  const hasUnlockingBalance = unlockingBalance && unlockingBalance.gt(0);
 
   const hasNominations = nominations && nominations?.length > 0;
 
   const hasUnlockings = unlockings && unlockings.length > 0;
 
+  const nominateEnabled = !electionOpen && canNominate(account);
+  const withdrawEnabled = !electionOpen && hasUnlockedBalance;
+
   return (
     <>
+      {electionOpen ? <ElectionStatusWarning /> : null}
       <Box horizontal alignItems="center" justifyContent="space-between">
         <Text
           ff="Inter|Medium"
@@ -158,15 +146,21 @@ const Nomination = ({ account }: Props) => {
           <Box horizontal>
             <ToolTip
               content={
-                !nominationEnabled ? (
-                  <Trans i18nKey="polkadot.nomination.controllerNeededWarning" />
+                !nominateEnabled ? (
+                  <Trans
+                    i18nKey={
+                      electionOpen
+                        ? "polkadot.nomination.electionOpenTooltip"
+                        : "polkadot.nomination.controllerNeededWarning"
+                    }
+                  />
                 ) : null
               }
             >
               <Button
                 id={"account-nominate-button"}
                 mr={2}
-                disabled={!nominationEnabled}
+                disabled={!nominateEnabled}
                 primary
                 small
                 onClick={onNominate}
@@ -180,14 +174,34 @@ const Nomination = ({ account }: Props) => {
               </Button>
             </ToolTip>
             {hasNominations ? (
-              <Button id={"account-chill-button"} danger small onClick={onChill}>
-                <Box horizontal flow={1} alignItems="center">
-                  <ChillIcon size={12} />
-                  <Box>
-                    <Trans i18nKey="polkadot.nomination.chill" />
+              <ToolTip
+                content={
+                  !nominateEnabled ? (
+                    <Trans
+                      i18nKey={
+                        electionOpen
+                          ? "polkadot.nomination.electionOpenTooltip"
+                          : "polkadot.nomination.controllerNeededWarning"
+                      }
+                    />
+                  ) : null
+                }
+              >
+                <Button
+                  id={"account-chill-button"}
+                  disabled={!nominateEnabled}
+                  danger
+                  small
+                  onClick={onChill}
+                >
+                  <Box horizontal flow={1} alignItems="center">
+                    <ChillIcon size={12} />
+                    <Box>
+                      <Trans i18nKey="polkadot.nomination.chill" />
+                    </Box>
                   </Box>
-                </Box>
-              </Button>
+                </Button>
+              </ToolTip>
             ) : null}
           </Box>
         ) : null}
@@ -224,15 +238,21 @@ const Nomination = ({ account }: Props) => {
           <Box>
             <ToolTip
               content={
-                !nominationEnabled ? (
-                  <Trans i18nKey="polkadot.nomination.controllerNeededWarning" />
+                !nominateEnabled ? (
+                  <Trans
+                    i18nKey={
+                      electionOpen
+                        ? "polkadot.nomination.electionOpenTooltip"
+                        : "polkadot.nomination.controllerNeededWarning"
+                    }
+                  />
                 ) : null
               }
             >
               <Button
                 primary
                 small
-                disabled={!nominationEnabled}
+                disabled={!nominateEnabled}
                 onClick={hasBondedBalance ? onNominate : onEarnRewards}
               >
                 <Box horizontal flow={1} alignItems="center">
@@ -271,16 +291,22 @@ const Nomination = ({ account }: Props) => {
             <Box horizontal>
               <ToolTip
                 content={
-                  hasUnlockedBalance ? (
+                  withdrawEnabled ? (
                     <Trans i18nKey="polkadot.unlockings.withdrawTooltip" />
                   ) : (
-                    <Trans i18nKey="polkadot.unlockings.noUnlockedWarning" />
+                    <Trans
+                      i18nKey={
+                        electionOpen
+                          ? "polkadot.nomination.electionOpenTooltip"
+                          : "polkadot.unlockings.noUnlockedWarning"
+                      }
+                    />
                   )
                 }
               >
                 <Button
                   id={"account-withdraw-button"}
-                  disabled={!hasUnlockedBalance}
+                  disabled={!withdrawEnabled}
                   mr={2}
                   primary
                   small
@@ -294,20 +320,26 @@ const Nomination = ({ account }: Props) => {
                   </Box>
                 </Button>
               </ToolTip>
-              <Button
-                id={"account-rebond-button"}
-                disabled={!hasUnlockingBalance}
-                primary
-                small
-                onClick={onRebond}
+              <ToolTip
+                content={
+                  electionOpen ? <Trans i18nKey="polkadot.nomination.electionOpenTooltip" /> : null
+                }
               >
-                <Box horizontal flow={1} alignItems="center">
-                  <FreezeIcon size={12} />
-                  <Box>
-                    <Trans i18nKey="polkadot.unlockings.rebond" />
+                <Button
+                  id={"account-rebond-button"}
+                  disabled={electionOpen}
+                  primary
+                  small
+                  onClick={onRebond}
+                >
+                  <Box horizontal flow={1} alignItems="center">
+                    <FreezeIcon size={12} />
+                    <Box>
+                      <Trans i18nKey="polkadot.unlockings.rebond" />
+                    </Box>
                   </Box>
-                </Box>
-              </Button>
+                </Button>
+              </ToolTip>
             </Box>
           </Box>
           <Card p={0} mt={24} mb={6}>
