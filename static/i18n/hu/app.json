@@ -541,6 +541,12 @@
       "title": "Please create an ETH account",
       "description": "<0>{{ asset }}({{ ticker }})</0> is an Ethereum ERC-20 token. To lend {{ ticker }}, install the Ethereum app and create an Ethereum account",
       "cta": "Add account"
+    },
+    "emptyAccountDeposit": {
+      "title": "You don't have any {{ asset }} account.",
+      "description": "In order to deposit funds and lend crypto you need a {{ asset }} account. Please Receive funds on your Ethereum address.",
+      "ctaBuy": "Buy {{ asset }}",
+      "ctaReceive": "Receive {{ asset }}"
     }
   },
   "accounts": {
