@@ -25,9 +25,9 @@ let mockDeviceEvent;
 expect.extend({ toMatchImageSnapshot });
 jest.setTimeout(600000);
 
-export default function initialize() {
+export default function initialize({ userData, env = {} }) {
   beforeAll(async () => {
-    app = await applicationProxy();
+    app = await applicationProxy(userData, env);
     onboardingPage = new OnboardingPage(app);
     modalPage = new ModalPage(app);
     genuinePage = new GenuinePage(app);

@@ -11,6 +11,7 @@ import i18n from "i18next";
 import { remote, webFrame, ipcRenderer } from "electron";
 import { render } from "react-dom";
 import moment from "moment";
+import _ from "lodash";
 import { reload, getKey } from "~/renderer/storage";
 
 import "~/renderer/styles/global";
@@ -58,6 +59,13 @@ async function init() {
     Transport,
     connect,
   });
+
+  if (process.env.SPECTRON_RUN) {
+    const spectronData = await getKey("app", "SPECTRON_RUN", {});
+    _.each(spectronData.localStorage, (value, key) => {
+      global.localStorage.setItem(key, value);
+    });
+  }
 
   const store = createStore({ dbMiddleware });
 
