@@ -39,6 +39,7 @@ export default function initialize({ userData, env = {} }) {
 
     try {
       await app.start();
+      await app.client.waitUntilWindowLoaded();
     } catch (e) {
       console.log("app start error", e);
     }
