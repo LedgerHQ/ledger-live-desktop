@@ -3,6 +3,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { SettingsSectionHeader as Header } from "~/renderer/screens/settings/SettingsSection";
 import IconServer from "~/renderer/icons/Server";
 import Box from "~/renderer/components/Box";

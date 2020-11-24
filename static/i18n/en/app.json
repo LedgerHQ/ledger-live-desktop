@@ -273,18 +273,20 @@
               "header": "Enter your node parameters",
               "disclaimer": "Your full node must be fully synchronized before connecting Ledger Live.",
               "fields": {
-                "nodeURL": {
-                  "title": "Node URL",
+                "nodeHost": {
+                  "title": "Node",
+                  "tooltip": "Some helpful wording for node",
                   "placeholder": "127.0.0.1:8332"
                 },
                 "rpcCredentials": {
                   "title": "RPC Credentials",
+                  "tooltip": "Enter the RPC username and password of your node, found in the bitcoin.conf file.",
                   "usernamePlaceholder": "Username",
                   "passwordPlaceholder": "Password"
                 },
                 "tls": {
                   "title": "Use TLS",
-                  "tooltip": "Lorem ipsum dolor sit amet"
+                  "tooltip": "Enable Transport Layer Security, for example, when using a hosted node solution."
                 }
               }
             },
@@ -2582,6 +2584,18 @@
     "PasswordIncorrect": {
       "title": "The password entered is incorrect",
       "description": "Please try again"
+    },
+    "RPCHostRequired": {
+      "title": "Host is required."
+    },
+    "RPCHostInvalid": {
+      "title": "Enter valid host."
+    },
+    "RPCUserRequired": {
+      "title": "RPC Username is required"
+    },
+    "RPCPassRequired": {
+      "title": "RPC Password is required"
     },
     "SatStackAccessDown": {
       "title": "Could not reach full node",

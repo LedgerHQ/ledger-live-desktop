@@ -46,7 +46,7 @@ const FullNodeBody = ({
 
   const [numberOfAccountsToScan, setNumberOfAccountsToScan] = useState(10);
   const [nodeConfig, setNodeConfig] = useState<RPCNodeConfig>({
-    host: "",
+    host: "127.0.0.1:8332",
     username: "",
     password: "",
     notls: false,

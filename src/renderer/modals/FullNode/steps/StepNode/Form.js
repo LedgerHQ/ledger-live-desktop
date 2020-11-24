@@ -1,17 +1,26 @@
 // @flow
 import React, { useCallback } from "react";
 import { Trans, useTranslation } from "react-i18next";
-
+import {
+  RPCHostRequired,
+  RPCUserRequired,
+  RPCPassRequired,
+} from "@ledgerhq/live-common/lib/errors";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import InfoBox from "~/renderer/components/InfoBox";
 import InputPassword from "~/renderer/components/InputPassword";
 import Input from "~/renderer/components/Input";
+import LabelInfoTooltip from "~/renderer/components/LabelInfoTooltip";
 import Label from "~/renderer/components/Label";
 import Switch from "~/renderer/components/Switch";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
+import useEnv from "~/renderer/hooks/useEnv";
+
+import Tooltip from "~/renderer/components/Tooltip";
+import IconInfoCircle from "~/renderer/icons/InfoCircle";
 
 const FormWrapper = styled(Box)`
   margin-bottom: 32px;
@@ -36,6 +45,13 @@ export type RPCNodeConfig = {
   tls?: boolean,
 };
 
+const maybeError = (errors, field, satStackAlreadyConfigured, ignoredErrorClass) => {
+  const error = errors.find(e => e.field === field)?.error;
+  return error && (satStackAlreadyConfigured || !(error instanceof ignoredErrorClass))
+    ? error
+    : null;
+};
+
 const Form = ({
   nodeConfig,
   patchNodeConfig,
@@ -47,9 +63,11 @@ const Form = ({
 }) => {
   const { t } = useTranslation();
 
-  const hostError = errors.find(e => e.field === "host")?.error;
-  const usernameError = errors.find(e => e.field === "username")?.error;
-  const passwordError = errors.find(e => e.field === "password")?.error;
+  const satStackAlreadyConfigured = useEnv("SATSTACK");
+  const hostError = maybeError(errors, "host", satStackAlreadyConfigured, RPCHostRequired);
+  const usernameError = maybeError(errors, "username", satStackAlreadyConfigured, RPCUserRequired);
+  const passwordError = maybeError(errors, "password", satStackAlreadyConfigured, RPCPassRequired);
+
   const onLearnMore = useCallback(() => {
     openURL(urls.satstacks.learnMore);
   }, []);
@@ -67,23 +85,41 @@ const Form = ({
       </Text>
       <FormWrapper>
         <Box flow={1}>
-          <Label>
-            <Trans i18nKey="fullNode.modal.steps.node.connectionSteps.notConnected.fields.nodeURL.title" />
-          </Label>
+          <Box horizontal alignItems="center">
+            <Label mr={4}>
+              <Trans i18nKey="fullNode.modal.steps.node.connectionSteps.notConnected.fields.nodeHost.title" />
+            </Label>
+            <Tooltip
+              content={
+                <Trans i18nKey="fullNode.modal.steps.node.connectionSteps.notConnected.fields.nodeHost.tooltip" />
+              }
+            >
+              <IconInfoCircle size={12} />
+            </Tooltip>
+          </Box>
           <Input
             error={hostError}
             onChange={host => patchNodeConfig({ host })}
             value={nodeConfig?.host}
             placeholder={t(
-              "fullNode.modal.steps.node.connectionSteps.notConnected.fields.nodeURL.placeholder",
+              "fullNode.modal.steps.node.connectionSteps.notConnected.fields.nodeHost.placeholder",
             )}
           />
         </Box>
         <Box horizontal flex={1} mt={32}>
           <Box flex={1}>
-            <Label>
-              <Trans i18nKey="fullNode.modal.steps.node.connectionSteps.notConnected.fields.rpcCredentials.title" />
-            </Label>
+            <Box horizontal alignItems="center">
+              <Label mr={4}>
+                <Trans i18nKey="fullNode.modal.steps.node.connectionSteps.notConnected.fields.rpcCredentials.title" />
+              </Label>
+              <Tooltip
+                content={
+                  <Trans i18nKey="fullNode.modal.steps.node.connectionSteps.notConnected.fields.rpcCredentials.tooltip" />
+                }
+              >
+                <IconInfoCircle size={12} />
+              </Tooltip>
+            </Box>
             <InputWrapper horizontal flex={1}>
               <Input
                 error={usernameError}
@@ -106,9 +142,18 @@ const Form = ({
         </Box>
         <Box flow={1} mt={32} horizontal>
           <Switch onChange={tls => patchNodeConfig({ tls })} isChecked={!!nodeConfig?.tls} />
-          <Label>
-            <Trans i18nKey="fullNode.modal.steps.node.connectionSteps.notConnected.fields.tls.title" />
-          </Label>
+          <Box horizontal alignItems="center">
+            <Label mr={4}>
+              <Trans i18nKey="fullNode.modal.steps.node.connectionSteps.notConnected.fields.tls.title" />
+            </Label>
+            <Tooltip
+              content={
+                <Trans i18nKey="fullNode.modal.steps.node.connectionSteps.notConnected.fields.tls.tooltip" />
+              }
+            >
+              <IconInfoCircle size={12} />
+            </Tooltip>
+          </Box>
         </Box>
       </FormWrapper>
       <InfoBox type="secondary" onLearnMore={onLearnMore}>
