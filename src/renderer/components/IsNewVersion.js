@@ -14,7 +14,10 @@ const IsNewVersion = () => {
   const currentVersion = __APP_VERSION__;
 
   useEffect(() => {
-    if (gt(currentVersion, lastUsedVersion)) {
+    if (
+      gt(currentVersion, lastUsedVersion) &&
+      (!process.env.SPECTRON_RUN || process.env.SPECTRON_RUN_ALLOW_RELEASE_NOTES)
+    ) {
       dispatch(openModal("MODAL_RELEASE_NOTES", currentVersion));
       dispatch(saveSettings({ lastUsedVersion: currentVersion }));
     }
