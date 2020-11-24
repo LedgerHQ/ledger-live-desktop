@@ -25,7 +25,7 @@ let mockDeviceEvent;
 expect.extend({ toMatchImageSnapshot });
 jest.setTimeout(600000);
 
-export default function initialize(name, { userData, env = {} }) {
+export default function initialize(name, { userData, env = {}, disableStartSnap = false }) {
   beforeAll(async () => {
     app = await applicationProxy(userData, env);
     onboardingPage = new OnboardingPage(app);
@@ -50,10 +50,12 @@ export default function initialize(name, { userData, env = {} }) {
       return this.browserWindow.capturePage();
     });
 
-    await app.client.$("__app__ready__");
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: `__start__${name}`,
-    });
+    if (!disableStartSnap) {
+      await app.client.$("__app__ready__");
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: `__start__${name}`,
+      });
+    }
   });
 
   afterAll(async () => {
