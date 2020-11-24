@@ -7,7 +7,7 @@ import initialize, {
 } from "../common.js";
 
 describe("Firmware Update", () => {
-  initialize({
+  initialize("firmwareupdate", {
     userData: "onboardingcompleted",
   });
 

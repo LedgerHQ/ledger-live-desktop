@@ -5,7 +5,7 @@ import initialize, {
 } from "../common.js";
 
 describe("Settings", () => {
-  initialize({
+  initialize("settings", {
     userData: "onboardingcompleted",
   });
 

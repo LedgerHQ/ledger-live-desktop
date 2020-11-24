@@ -10,10 +10,9 @@ import initialize, {
   analyticsPage,
   // portfolioPage,
 } from "../common.js";
-import data from "../data/onboarding/";
 
 describe("Onboarding", () => {
-  initialize({});
+  initialize("onboarding", {});
 
   const $ = selector => app.client.$(selector);
 

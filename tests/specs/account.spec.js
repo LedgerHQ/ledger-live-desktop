@@ -1,7 +1,7 @@
 import initialize, { app, mockDeviceEvent, modalPage } from "../common.js";
 
 describe("Account", () => {
-  initialize({
+  initialize("account", {
     userData: "onboardingcompleted",
   });
 
