@@ -80,9 +80,6 @@ describe("Account", () => {
       await receiveAccountContinueButton.click();
       await mockDeviceEvent({ type: "opened" }, { type: "complete" });
       const receiveReceiveContinueButton = await $("#receive-receive-continue-button");
-      expect(await app.client.screenshot()).toMatchImageSnapshot({
-        customSnapshotIdentifier: "debug-receive-flow-intermediate",
-      });
       await receiveReceiveContinueButton.waitForDisplayed();
       await receiveReceiveContinueButton.waitForEnabled();
       await receiveReceiveContinueButton.click();
