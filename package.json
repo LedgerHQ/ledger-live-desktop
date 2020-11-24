@@ -43,7 +43,7 @@
     "@ledgerhq/hw-transport-http": "^5.30.0",
     "@ledgerhq/hw-transport-node-hid-singleton": "^5.31.1",
     "@ledgerhq/ledger-core": "6.9.1",
-    "@ledgerhq/live-common": "17.1.0",
+    "@ledgerhq/live-common": "17.1.1",
     "@ledgerhq/logs": "^5.30.0",
     "@tippyjs/react": "^4.2.0",
     "@trust/keyto": "^1.0.1",
@@ -119,7 +119,7 @@
   "devDependencies": {
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
-    "@babel/core": "^7.12.7",
+    "@babel/core": "^7.12.8",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-export-default-from": "^7.12.1",
     "@babel/plugin-proposal-export-namespace-from": "^7.12.1",
