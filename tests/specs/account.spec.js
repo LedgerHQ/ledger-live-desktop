@@ -85,7 +85,7 @@ describe("Account", () => {
       await receiveReceiveContinueButton.waitForEnabled();
       await receiveReceiveContinueButton.click();
       expect(await modalPage.isDisplayed(true)).toBe(false);
-    });
+    }, 10000);
 
     it("send flow", async () => {
       // Send flow
