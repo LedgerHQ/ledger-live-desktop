@@ -1345,10 +1345,10 @@
   dependencies:
     commander "^2.20.0"
 
-"@ledgerhq/cryptoassets@5.32.0", "@ledgerhq/cryptoassets@^5.32.0":
-  version "5.32.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-5.32.0.tgz#043c320c19d5afc873a24b87264f64d9c16ac2e1"
-  integrity sha512-nAi7Y0parblPHUGprHA2hO4+nnPGOcjqEWLLEZj2ZczK+UAUcAIf9UnL0gEvkIPlUJ5SgzNFAZzW5gw3eIhI2A==
+"@ledgerhq/cryptoassets@5.33.0", "@ledgerhq/cryptoassets@^5.33.0":
+  version "5.33.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-5.33.0.tgz#59b6bae8f53e4987ee9b46398d4c63650bf7d322"
+  integrity sha512-8PeHe7rtYEkX4NsSe4aOa0EsV5EZx3iq206s4WCOKOsYoobE3Gh6OXeq5GScET9aR9rEBdkeReo37qskNDTqLQ==
   dependencies:
     invariant "2"
 
@@ -1393,12 +1393,12 @@
     semver "^7.3.2"
     sha.js "2"
 
-"@ledgerhq/hw-app-eth@5.32.1":
-  version "5.32.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-5.32.1.tgz#58d5c27d10b8fc852056f37cb3255bae29423149"
-  integrity sha512-+87UeajBaqRGKLnxKwcCLvaVOJn+ykW14tYsk/pxiyKMywd/HqIUa2Jvjp7Q/0GqkFBzX3BwuJlFy+27mSIikg==
+"@ledgerhq/hw-app-eth@5.33.0":
+  version "5.33.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-5.33.0.tgz#933afe74fcf07f0624b5bea51f5f41e77f3aa1c9"
+  integrity sha512-0GzBlwFDSwMDt3lwUIsdMdAe4XxEXA15dRUNautD/k1fubCbw1vqSIwQcYga299DUCy0+NlHMj8lihQvbtGupw==
   dependencies:
-    "@ledgerhq/cryptoassets" "^5.32.0"
+    "@ledgerhq/cryptoassets" "^5.33.0"
     "@ledgerhq/errors" "^5.30.0"
     "@ledgerhq/hw-transport" "^5.30.0"
     bignumber.js "^9.0.1"
@@ -1504,17 +1504,17 @@
     node-pre-gyp "^0.15.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@17.1.1":
-  version "17.1.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-17.1.1.tgz#0253a3e3c5b7a6a512d7509317721f1ef44fbe29"
-  integrity sha512-q+vluDHiZI1bNiSSfOF++mrnhU+6EsEVDnwQTFFLHrHNyEula9/N5stAXnvts/MWCbtVHA+xf7CpbTs0ToCBvg==
+"@ledgerhq/live-common@17.1.2":
+  version "17.1.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-17.1.2.tgz#454daf6c5b934073e7ace5c41a26696b28c5c44c"
+  integrity sha512-unLjgdU8sFw0i03fORLwujuCnnXvtcI8RvQ84zckzPzKm5qJyHiIS2ApSwaZ7Fk5rwaqg/iFv2qqIQFzdIKQqA==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
-    "@ledgerhq/cryptoassets" "5.32.0"
+    "@ledgerhq/cryptoassets" "5.33.0"
     "@ledgerhq/devices" "5.30.0"
     "@ledgerhq/errors" "5.30.0"
     "@ledgerhq/hw-app-btc" "^5.30.0"
-    "@ledgerhq/hw-app-eth" "5.32.1"
+    "@ledgerhq/hw-app-eth" "5.33.0"
     "@ledgerhq/hw-app-str" "^5.30.0"
     "@ledgerhq/hw-app-trx" "5.30.0"
     "@ledgerhq/hw-app-xrp" "5.30.0"
