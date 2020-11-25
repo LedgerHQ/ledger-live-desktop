@@ -87,15 +87,7 @@ export default function PortfolioBalanceSummary({
   );
 }
 
-function Tooltip({
-  data,
-  counterValue,
-  range,
-}: {
-  data: BalanceHistoryData,
-  counterValue: Currency,
-  range: PortfolioRange,
-}) {
+function Tooltip({ data, counterValue }: { data: BalanceHistoryData, counterValue: Currency }) {
   return (
     <>
       <FormattedVal
@@ -109,11 +101,9 @@ function Tooltip({
       <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
         {moment(data.date).format("LL")}
       </Box>
-      {range === "week" ? (
-        <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
-          {moment(data.date).format("LT")}
-        </Box>
-      ) : null}
+      <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
+        {moment(data.date).format("LT")}
+      </Box>
     </>
   );
 }
