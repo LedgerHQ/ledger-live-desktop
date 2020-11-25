@@ -69,7 +69,7 @@ jobs:
       - name: prepare comment body
         if: always()
         id: comment
-        uses: ledgerhq/actions/prepare-comment-body@v2.0.0
+        uses: machard/actions/prepare-comment-body@fb40d26
         with:
           images: ${{ steps.imgur.outputs.images }}
       - name: post comment
@@ -81,24 +81,18 @@ jobs:
             <details>
               <summary>View</summary>
               <p>
-                ```
-
                 ${{ steps.lint.outputs.content }}
-                
-                ```
               </p>
             </details>
+
             ## Tests outputs
             <details>
               <summary>View</summary>
               <p>
-                ```
-
                 ${{ steps.spectron.outputs.content }}
-                
-                ```
               </p>
             </details>
+
             ## Diff output
             <details>
               <summary>View</summary>
