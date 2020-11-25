@@ -22,6 +22,8 @@ jobs:
           ban: ledgerlive
         if: github.event_name == 'pull_request'
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-node@main
         with:
           node-version: 12.x
