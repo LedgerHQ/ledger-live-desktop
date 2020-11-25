@@ -59,7 +59,7 @@ function CheckBox(props: Props) {
         onChange && onChange(!isChecked);
       }}
     >
-      <input type="checkbox" disabled={disabled || null} checked={isChecked || null} />
+      <input type="checkbox" disabled={disabled || null} defaultChecked={isChecked || false} />
       <Check size={12} />
     </Base>
   );
