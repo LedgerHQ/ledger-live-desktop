@@ -1,6 +1,6 @@
 name: CI
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - "*"
   push:
@@ -76,5 +76,5 @@ jobs:
           message: |
             ${{ steps.create.outputs.comment }}
           allow-repeats: true
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          repo-token-user-login: 'github-actions[bot]'
+          repo-token: ${{ secrets.CI_BOT_TOKEN }}
+          repo-token-user-login: ${{ secrets.CI_BOT_USERNAME }}
