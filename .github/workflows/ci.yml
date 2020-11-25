@@ -47,7 +47,13 @@ jobs:
           timeout: 600000
           interval: 1000
       - name: run spectron
-        run: yarn spectron
+        id: spectron
+        run: |
+          export RESULT="$(yarn spectron)"
+          RESULT="${RESULT//'%'/'%25'}"
+          RESULT="${RESULT//$'\n'/'%0A'}"
+          RESULT="${RESULT//$'\r'/'%0D'}"
+          echo "::set-output name=spectron::$(echo "$RESULT")"
       - name: upload diffs to imgur
         if: failure()
         uses: ./.github/actions/upload-images
@@ -65,6 +71,15 @@ jobs:
         uses: mshick/add-pr-comment@v1
         with:
           message: |
+            ## Tests outputs
+            <details>
+              <summary>View</summary>
+              <p>
+                ```
+                ${{ steps.spectron.outputs.spectron }}
+                ```
+              </p>
+            </details>
             ## Diff output
             ${{ steps.comment.outputs.body }}
           allow-repeats: true

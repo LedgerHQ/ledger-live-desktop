@@ -52,7 +52,7 @@ export function applicationProxy(userData = null, env = {}) {
 
   return new Application({
     path: require("electron"), // just to make spectron happy since we override everything below
-    waitTimeout: 10000,
+    waitTimeout: 15000,
     webdriverOptions: {
       capabilities: {
         "goog:chromeOptions": {
