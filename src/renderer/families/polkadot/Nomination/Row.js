@@ -172,6 +172,7 @@ export function UnbondingRow({
   const date = useMemo(() => (completionDate ? moment(completionDate).fromNow() : "N/A"), [
     completionDate,
   ]);
+  const isUnbonded = useMemo(() => moment(completionDate).isBefore(moment()), [completionDate]);
 
   const unit = getAccountUnit(account);
 
@@ -188,7 +189,18 @@ export function UnbondingRow({
   return (
     <Wrapper>
       <Column>{formattedAmount}</Column>
-      <Column>{date}</Column>
+      <Column>
+        {isUnbonded ? (
+          <Box color="positiveGreen" pl={2} horizontal={true}>
+            <CheckCircle size={14} />
+            <StatusLabel>
+              <Trans i18nKey="polkadot.unlockings.unbonded" />
+            </StatusLabel>
+          </Box>
+        ) : (
+          date
+        )}
+      </Column>
     </Wrapper>
   );
 }

@@ -1873,7 +1873,8 @@
       "withdrawUnbonded": "Withdraw Unbonded",
       "withdrawTooltip": "Transfers back unbonded balance",
       "noUnlockedWarning": "No unbonded balance to withdraw yet.",
-      "rebond": "Rebond"
+      "rebond": "Rebond",
+      "unbonded": "Unbonded"
     },
     "manage": {
       "title": "Manage assets",

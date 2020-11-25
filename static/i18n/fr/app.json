@@ -1873,7 +1873,8 @@
       "withdrawUnbonded": "Retirer actifs débloqués",
       "withdrawTooltip": "Récupére l'intégralité des actifs débloqués",
       "noUnlockedWarning": "Aucun actif débloqués à récupérer pour l'instant.",
-      "rebond": "Lier à nouveau"
+      "rebond": "Lier à nouveau",
+      "unbonded": "Débloqué"
     },
     "manage": {
       "title": "Gérer les actifs",
