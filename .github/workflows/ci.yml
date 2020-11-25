@@ -47,13 +47,12 @@ jobs:
           timeout: 600000
           interval: 1000
       - name: run spectron
+        run: yarn spectron --no-color 2>output.txt
+      - name: Read test output
         id: spectron
-        run: |
-          export RESULT="$(yarn spectron)"
-          RESULT="${RESULT//'%'/'%25'}"
-          RESULT="${RESULT//$'\n'/'%0A'}"
-          RESULT="${RESULT//$'\r'/'%0D'}"
-          echo "::set-output name=spectron::$(echo "$RESULT")"
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./output.txt
       - name: upload diffs to imgur
         uses: ./.github/actions/upload-images
         id: imgur
@@ -74,7 +73,9 @@ jobs:
               <summary>View</summary>
               <p>
                 ```
-                ${{ steps.spectron.outputs.spectron }}
+
+                ${{ steps.spectron.outputs.content }}
+                
                 ```
               </p>
             </details>

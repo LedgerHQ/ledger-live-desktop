@@ -25,6 +25,7 @@ let mockDeviceEvent;
 expect.extend({ toMatchImageSnapshot });
 jest.setTimeout(600000);
 
+// eslint-disable-next-line jest/no-export
 export default function initialize(name, { userData, env = {}, disableStartSnap = false }) {
   beforeAll(async () => {
     app = await applicationProxy(userData, env);
@@ -54,20 +55,23 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
 
       return this.browserWindow.capturePage();
     });
-
-    if (!disableStartSnap) {
-      await app.client.$("__app__ready__");
-      expect(await app.client.screenshot()).toMatchImageSnapshot({
-        customSnapshotIdentifier: `__start__${name}`,
-      });
-    }
   });
 
   afterAll(async () => {
     return app.stop().then(() => removeUserData());
   });
+
+  if (!disableStartSnap) {
+    it("should start in this state", async () => {
+      await app.client.$("__app__ready__");
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: `__start__${name}`,
+      });
+    });
+  }
 }
 
+// eslint-disable-next-line jest/no-export
 export {
   app,
   deviceInfo,
