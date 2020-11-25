@@ -78,14 +78,14 @@ describe("Swap", () => {
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-rates",
     });
+  });
 
+  it("confirm summary step", async () => {
     // Open the modal
     const continueButton = await $("#swap-form-continue-button");
     await continueButton.waitForEnabled();
     await continueButton.click();
-  });
 
-  it("confirm summary step", async () => {
     const summaryProviderCheckbox = await $("#swap-modal-summary-provider-tos-checkbox");
     await summaryProviderCheckbox.waitForDisplayed();
     await summaryProviderCheckbox.click();
@@ -93,13 +93,13 @@ describe("Swap", () => {
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-summary-step",
     });
-
-    const summaryContinueButton = await $("#swap-modal-summary-continue-button");
-    await summaryContinueButton.waitForEnabled();
-    await summaryContinueButton.click();
   });
 
   it("confirm swap on device and broadcast step", async () => {
+    const summaryContinueButton = await $("#swap-modal-summary-continue-button");
+    await summaryContinueButton.waitForEnabled();
+    await summaryContinueButton.click();
+
     await mockDeviceEvent({ type: "opened" }, { type: "complete" });
     // init-swap command (Extra pauses because otherwise the UI will not be visible)
     await mockDeviceEvent({ type: "opened" });
@@ -151,6 +151,11 @@ describe("Swap", () => {
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-end-0",
     });
+  });
+
+  it("should appear in the history", async () => {
+    const finishedStep = await $("#swap-modal-finished-close-button");
+    await finishedStep.waitForDisplayed();
     await finishedStep.click();
     await finishedStep.waitForDisplayed({ reverse: true });
 
