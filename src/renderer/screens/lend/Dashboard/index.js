@@ -29,14 +29,13 @@ const Dashboard = ({
   // handle backdrop closing of modal in context of not accepting terms of lending
   const onCloseTermsModal = useCallback(() => {
     const hasAcceptedTerms = isAcceptedLendingTerms();
-    !hasAcceptedTerms ? history.goBack() : dispatch(openModal("MODAL_LEND_HIGH_FEES"));
-  }, [history, dispatch]);
+    !hasAcceptedTerms && history.goBack();
+  }, [history]);
 
   // if user has not accepted terms of lending show terms modal
   useEffect(() => {
-    !isAcceptedTerms
-      ? dispatch(openModal("MODAL_LEND_ENABLE_INFO", { onClose: onCloseTermsModal }))
-      : dispatch(openModal("MODAL_LEND_HIGH_FEES", { MODAL_SHOW_ONCE: true }));
+    !isAcceptedTerms &&
+      dispatch(openModal("MODAL_LEND_ENABLE_INFO", { onClose: onCloseTermsModal }));
   }, [dispatch, isAcceptedTerms, onCloseTermsModal]);
 
   return (
