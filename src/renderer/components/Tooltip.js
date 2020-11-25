@@ -81,6 +81,7 @@ const ToolTip = ({
       placement={placement}
       flip={flip}
       hideOnClick={hideOnClick}
+      className={`bg-${tooltipBg}`}
     >
       {disableWrapper ? (
         children
