@@ -1,20 +1,13 @@
 import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
-import initialize, {
-  app,
-  mockDeviceEvent,
-  deviceInfo,
-  mockListAppsResult,
-  // portfolioPage,
-} from "../common.js";
+import initialize, { app, mockDeviceEvent, deviceInfo, mockListAppsResult } from "../common.js";
 
 describe("Swap", () => {
   initialize(
     "swap",
     {
       userData: "1AccountBTC1AccountETH",
-      disableStartSnap: true, // TODO : mock CounterValue API
     },
-    { SPECTRON_RUN_DISABLE_COUNTDOWN_TIMERS: true }
+    { SPECTRON_RUN_DISABLE_COUNTDOWN_TIMERS: true },
   );
 
   const $ = selector => app.client.$(selector);
@@ -82,13 +75,9 @@ describe("Swap", () => {
     await toCurrencyFirstOption.click();
     await app.client.pause(1000);
 
-    /*
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-rates",
     });
-    */
-    // TODO: mock CounterValue API
-    expect(true).toBe(true);
 
     // Open the modal
     const continueButton = await $("#swap-form-continue-button");
