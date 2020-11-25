@@ -47,11 +47,6 @@ jobs:
           interval: 1000
       - name: run spectron
         run: yarn spectron
-      - name: check
-        if: always()
-        run: |
-          cd tests/specs/__image_snapshots__
-          ls -la
       - name: upload diffs to imgur
         if: failure()
         uses: ./.github/actions/upload-images
@@ -68,18 +63,18 @@ jobs:
         id: create
         if: github.event_name == 'pull_request' && failure()
         run: |
-          mkdir -p artifacts
-          cat > artifacts/message.md <<EOF
-
-          PR to merge $GITHUB_HEAD_REF $GITHUB_SHA -> $GITHUB_BASE_REF
+          echo '::set-output name=comment::
 
           ## Diff output
           ${{ steps.comment.outputs.body }}
 
-          EOF
-      - name: save PR message as artifact
-        if: steps.create.outputs.artifact == '1' && failure()
-        uses: actions/upload-artifact@v2
+          '
+      - name: post comment
+        if: github.event_name == 'pull_request' && failure()
+        uses: mshick/add-pr-comment@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: pr_message
-          path: artifacts
+          message: |
+            ${{ steps.create.outputs.comment }}
+          allow-repeats: true
