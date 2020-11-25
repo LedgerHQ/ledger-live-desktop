@@ -65,6 +65,8 @@ async function init() {
     _.each(spectronData.localStorage, (value, key) => {
       global.localStorage.setItem(key, value);
     });
+
+    require("~/../tests/mocks/manager");
   }
 
   const store = createStore({ dbMiddleware });
