@@ -76,7 +76,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
   const formatConfig = {
     disableRounding: true,
     alwaysShowSign: false,
-    showCode: false,
+    showCode: true,
     discreet,
     locale,
   };
