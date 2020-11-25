@@ -163,6 +163,7 @@ describe("Swap", () => {
       customSnapshotIdentifier: "swap-end-0",
     });
     await finishedStep.click();
+    await finishedStep.waitForDisplayed({ reverse: true });
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-end-1",

@@ -60,22 +60,13 @@ jobs:
         uses: ledgerhq/actions/prepare-comment-body@v2.0.0
         with:
           images: ${{ steps.imgur.outputs.images }}
-      - name: create markdown file for commenting
-        id: create
-        if: github.event_name == 'pull_request' && failure()
-        run: |
-          echo '::set-output name=comment::
-
-          ## Diff output
-          ${{ steps.comment.outputs.body }}
-
-          '
       - name: post comment
         if: github.event_name == 'pull_request' && failure()
         uses: mshick/add-pr-comment@v1
         with:
           message: |
-            ${{ steps.create.outputs.comment }}
+            ## Diff output
+            ${{ steps.comment.outputs.body }}
           allow-repeats: true
           repo-token: ${{ secrets.CI_BOT_TOKEN }}
           repo-token-user-login: ${{ secrets.CI_BOT_USERNAME }}

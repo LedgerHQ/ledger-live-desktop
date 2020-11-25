@@ -108,6 +108,10 @@ Then you can launch tests.
 ```bash
 yarn spectron
 ```
+or
+```bash
+node_modules/.bin/jest tests/specs/<FILEREGEX>.spec.js
+```
 
 ### Run code quality checks
 
