@@ -35,7 +35,13 @@ jobs:
       - name: install dependencies
         run: yarn --frozen-lockfile
       - name: run code checks
-        run: yarn ci
+        run: yarn ci 2>lint.txt
+      - name: Read lint output
+        id: lint
+        if: always()
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./lint.txt
       - name: check build
         run: sudo yarn build
       - name: start electron webdriver
@@ -50,24 +56,39 @@ jobs:
         run: yarn spectron --no-color 2>output.txt
       - name: Read test output
         id: spectron
+        if: always()
         uses: juliangruber/read-file-action@v1
         with:
           path: ./output.txt
       - name: upload diffs to imgur
+        if: always()
         uses: ./.github/actions/upload-images
         id: imgur
         with:
           path: tests/specs/__image_snapshots__/__diff_output__
       - name: prepare comment body
+        if: always()
         id: comment
         uses: ledgerhq/actions/prepare-comment-body@v2.0.0
         with:
           images: ${{ steps.imgur.outputs.images }}
       - name: post comment
+        if: always()
         if: github.event_name == 'pull_request'
         uses: mshick/add-pr-comment@v1
         with:
           message: |
+            ## Lint outputs
+            <details>
+              <summary>View</summary>
+              <p>
+                ```
+
+                ${{ steps.lint.outputs.content }}
+                
+                ```
+              </p>
+            </details>
             ## Tests outputs
             <details>
               <summary>View</summary>
@@ -80,7 +101,12 @@ jobs:
               </p>
             </details>
             ## Diff output
-            ${{ steps.comment.outputs.body }}
+            <details>
+              <summary>View</summary>
+              <p>
+                ${{ steps.comment.outputs.body }}
+              </p>
+            </details>
           allow-repeats: true
           repo-token: ${{ secrets.CI_BOT_TOKEN }}
           repo-token-user-login: ${{ secrets.CI_BOT_USERNAME }}
