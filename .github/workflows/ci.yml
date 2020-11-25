@@ -55,19 +55,17 @@ jobs:
           RESULT="${RESULT//$'\r'/'%0D'}"
           echo "::set-output name=spectron::$(echo "$RESULT")"
       - name: upload diffs to imgur
-        if: failure()
         uses: ./.github/actions/upload-images
         id: imgur
         with:
           path: tests/specs/__image_snapshots__/__diff_output__
       - name: prepare comment body
-        if: failure()
         id: comment
         uses: ledgerhq/actions/prepare-comment-body@v2.0.0
         with:
           images: ${{ steps.imgur.outputs.images }}
       - name: post comment
-        if: github.event_name == 'pull_request' && failure()
+        if: github.event_name == 'pull_request'
         uses: mshick/add-pr-comment@v1
         with:
           message: |
