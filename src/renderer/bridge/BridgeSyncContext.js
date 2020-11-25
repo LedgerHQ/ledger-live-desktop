@@ -34,6 +34,7 @@ export const BridgeSyncProvider = ({ children }: { children: React$Node }) => {
       onUnusualInternalProcessError();
     }
     logger.critical(error);
+    return error;
   }, []);
 
   return (

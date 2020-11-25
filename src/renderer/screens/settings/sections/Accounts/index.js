@@ -8,6 +8,7 @@ import { SettingsSection as Section, SettingsSectionHeader as Header } from "../
 import HideEmptyTokenAccountsToggle from "./HideEmptyTokenAccountsToggle";
 import SectionExport from "./Export";
 import Currencies from "./Currencies";
+import BlacklistedTokens from "./BlacklistedTokens";
 
 export default function SectionAccounts() {
   const { t } = useTranslation();
@@ -24,6 +25,7 @@ export default function SectionAccounts() {
           desc={t("settings.accounts.hideEmptyTokens.desc")}
           renderRight={<HideEmptyTokenAccountsToggle />}
         />
+        <BlacklistedTokens />
         <Currencies />
       </Section>
     </>

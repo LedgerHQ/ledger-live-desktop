@@ -33,6 +33,10 @@ export const GlobalStyle = createGlobalStyle`
     fill: ${p => p.theme.colors.palette.text.shade100};
   }
 
+  .tippy-box[data-theme~='ledger'].bg-alertRed > .tippy-svg-arrow {
+    fill: ${p => p.theme.colors.alertRed};
+  }
+
   .tippy-tooltip.ledger-theme .tippy-svg-arrow {
     fill: ${p => p.theme.colors.palette.text.shade100};
   }

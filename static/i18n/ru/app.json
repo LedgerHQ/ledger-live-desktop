@@ -541,6 +541,12 @@
       "title": "Please create an ETH account",
       "description": "<0>{{ asset }}({{ ticker }})</0> is an Ethereum ERC-20 token. To lend {{ ticker }}, install the Ethereum app and create an Ethereum account",
       "cta": "Add account"
+    },
+    "emptyAccountDeposit": {
+      "title": "You don't have any {{ asset }} account.",
+      "description": "In order to deposit funds and lend crypto you need a {{ asset }} account. Please Receive funds on your Ethereum address.",
+      "ctaBuy": "Buy {{ asset }}",
+      "ctaReceive": "Receive {{ asset }}"
     }
   },
   "accounts": {
@@ -1858,7 +1864,12 @@
     "accounts": {
       "hideEmptyTokens": {
         "title": "Скрыть пустые токен аккаунты",
-        "desc": "Choose the currency shown next to your balance and options."
+        "desc": "Hide token accounts with zero balance on the Accounts page."
+      },
+      "tokenBlacklist": {
+        "title": "Hidden tokens",
+        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
+        "count": "{{val}} tokens"
       }
     }
   },

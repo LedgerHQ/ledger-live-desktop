@@ -50,6 +50,7 @@ import MODAL_LEND_SELECT_ACCOUNT from "../screens/lend/modals/SelectAccountStep"
 import MODAL_LEND_ENABLE_FLOW from "../screens/lend/modals/Enable";
 import MODAL_LEND_WITHDRAW_FLOW from "../screens/lend/modals/Withdraw";
 import MODAL_LEND_NO_ETHEREUM_ACCOUNT from "../screens/lend/modals/NoEthereumAccount";
+import MODAL_LEND_EMPTY_ACCOUNT_DEPOSIT from "../screens/lend/modals/EmptyAccountDeposit";
 
 import MODAL_LEND_HIGH_FEES from "../screens/lend/modals/HighFeesModal";
 
@@ -100,6 +101,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_LEND_WITHDRAW_FLOW,
   MODAL_LEND_HIGH_FEES,
   MODAL_LEND_NO_ETHEREUM_ACCOUNT,
+  MODAL_LEND_EMPTY_ACCOUNT_DEPOSIT,
   MODAL_SWAP,
   MODAL_SWAP_OPERATION_DETAILS,
 };
