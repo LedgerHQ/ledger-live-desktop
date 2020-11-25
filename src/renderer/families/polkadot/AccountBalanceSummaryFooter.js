@@ -84,9 +84,23 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
 
   const spendableBalance = formatCurrencyUnit(unit, _spendableBalance, formatConfig);
 
-  const lockedBalance = formatCurrencyUnit(unit, _lockedBalance, formatConfig);
+  // NOTE: All balances are including the next one...
+  // So we exclude each other for better understanding and ensure sum of all balances
+  // is equal to the total balance.
 
-  const unlockingBalance = formatCurrencyUnit(unit, _unlockingBalance, formatConfig);
+  // Exclude the unlocking part from the locked balance
+  const lockedBalance = formatCurrencyUnit(
+    unit,
+    _lockedBalance.minus(_unlockingBalance),
+    formatConfig,
+  );
+
+  // Exclude the unlocked part from the locked balance
+  const unlockingBalance = formatCurrencyUnit(
+    unit,
+    _unlockingBalance.minus(_unlockedBalance),
+    formatConfig,
+  );
 
   const unlockedBalance = formatCurrencyUnit(unit, _unlockedBalance, formatConfig);
 
@@ -105,19 +119,21 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
           <Discreet>{spendableBalance}</Discreet>
         </AmountValue>
       </BalanceDetail>
-      <BalanceDetail>
-        <ToolTip content={<Trans i18nKey="polkadot.lockedTooltip" />}>
-          <TitleWrapper>
-            <Title>
-              <Trans i18nKey="polkadot.lockedBalance" />
-            </Title>
-            <InfoCircle size={13} />
-          </TitleWrapper>
-        </ToolTip>
-        <AmountValue>
-          <Discreet>{lockedBalance}</Discreet>
-        </AmountValue>
-      </BalanceDetail>
+      {_lockedBalance.gt(0) && (
+        <BalanceDetail>
+          <ToolTip content={<Trans i18nKey="polkadot.lockedTooltip" />}>
+            <TitleWrapper>
+              <Title>
+                <Trans i18nKey="polkadot.lockedBalance" />
+              </Title>
+              <InfoCircle size={13} />
+            </TitleWrapper>
+          </ToolTip>
+          <AmountValue>
+            <Discreet>{lockedBalance}</Discreet>
+          </AmountValue>
+        </BalanceDetail>
+      )}
       {_unlockingBalance.gt(0) && (
         <BalanceDetail>
           <ToolTip content={<Trans i18nKey="polkadot.unlockingTooltip" />}>

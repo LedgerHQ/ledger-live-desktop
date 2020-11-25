@@ -1802,12 +1802,12 @@
     }
   },
   "polkadot": {
-    "lockedBalance": "Locked balance",
+    "lockedBalance": "Bonded balance",
     "lockedTooltip": "Bonded assets can be used to nominate validators and earn rewards.",
-    "unlockingBalance": "Unlocking balance",
-    "unlockingTooltip": "Unbonded assets stay locked during 28 days before being available for withdrawal.",
-    "unlockedBalance": "Unlocked balance",
-    "unlockedTooltip": "After 28 days of unbonding period, assets can be withdrawn.",
+    "unlockingBalance": "Unbonding balance",
+    "unlockingTooltip": "Unbonding assets stay locked during 28 days before being available for withdrawal.",
+    "unlockedBalance": "Unbonded balance",
+    "unlockedTooltip": "Unbonded assets can now be withdrawn with a transaction.",
     "nomination": {
       "emptyState": {
         "description": "You can earn DOT rewards by bonding your assets and nominating validators.",
@@ -1867,12 +1867,12 @@
       }
     },
     "unlockings": {
-      "header": "Unlockings",
+      "header": "Unbondings",
       "headerTooltip": "Available after the 28-day timelock",
       "inactiveTooltip": "Unbonded amounts do not generate rewards.",
       "withdrawUnbonded": "Withdraw Unbonded",
-      "withdrawTooltip": "Transfers back unlocked balance",
-      "noUnlockedWarning": "No unlocked balance to withdraw yet.",
+      "withdrawTooltip": "Transfers back unbonded balance",
+      "noUnlockedWarning": "No unbonded balance to withdraw yet.",
       "rebond": "Rebond"
     },
     "manage": {

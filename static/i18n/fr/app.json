@@ -1807,7 +1807,7 @@
     "unlockingBalance": "Actifs en cours de débloquage",
     "unlockingTooltip": "Les actifs déliés restent verrouillés pendant 28 jours avant d'être disponibles.",
     "unlockedBalance": "Actifs déliés",
-    "unlockedTooltip": "Les actifs déliés peuvent être retirés après une période de 28 jours.",
+    "unlockedTooltip": "Des actifs déliés peuvent maintenant être récupérés via une transaction.",
     "nomination": {
       "emptyState": {
         "description": "Vous pouvez gagner des récompenses DOT en liant vos actifs et en nommant des validateurs.",
