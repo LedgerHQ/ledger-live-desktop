@@ -25,8 +25,11 @@ const userDataPathKey = Math.random()
   .substring(2, 5);
 const userDataPath = path.join(__dirname, "tmp", userDataPathKey);
 
-export const removeUserData = () => {
+export const removeUserData = dump => {
   if (fs.existsSync(`${userDataPath}`)) {
+    if (dump) {
+      fs.copyFileSync(`${userDataPath}/app.json`, path.join(__dirname, "dump.json"));
+    }
     rimraf.sync(userDataPath);
   }
 };
