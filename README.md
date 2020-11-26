@@ -113,6 +113,8 @@ or
 node_modules/.bin/jest tests/specs/<FILEREGEX>.spec.js
 ```
 
+**Please put the image expectations at the end of the it(...) tests so that it does not break the whole flow if a snapshot breaks**
+
 ### Run code quality checks
 
 ```bash
