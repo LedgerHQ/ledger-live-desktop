@@ -107,6 +107,7 @@
     "source-map-support": "^0.5.19",
     "styled-components": "^5.2.1",
     "styled-system": "^5.1.5",
+    "timemachine": "^0.3.2",
     "tippy.js": "^6.2.7",
     "tree-kill": "^1.2.2",
     "uncontrollable": "^7.1.1",

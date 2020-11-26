@@ -67,6 +67,11 @@ async function init() {
     });
 
     require("~/../tests/mocks/manager");
+
+    const timemachine = require("timemachine");
+    timemachine.config({
+      dateString: "March 14, 2018 13:34:42",
+    });
   }
 
   const store = createStore({ dbMiddleware });
