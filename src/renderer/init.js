@@ -70,10 +70,6 @@ async function init() {
     timemachine.config({
       dateString: "March 14, 2018 13:34:42",
     });
-
-    if (document.body) {
-      document.body.className += " spectron-run";
-    }
   }
 
   const store = createStore({ dbMiddleware });

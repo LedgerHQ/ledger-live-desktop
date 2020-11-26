@@ -50,10 +50,34 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       await sync.waitForDisplayed();
     });
 
-    app.client.addCommand("screenshot", function(countdown = 500) {
+    app.client.addCommand("screenshot", async function(countdown = 500) {
       this.pause(countdown);
 
-      return this.browserWindow.capturePage();
+      const pageRect = await app.client.execute(() => {
+        return {
+          height: document.getElementById("page-scroller")
+            ? document.getElementById("page-scroller").scrollHeight
+            : 0,
+          offsetHeight: document.getElementById("page-scroller")
+            ? document.getElementById("page-scroller").offsetHeight
+            : 0,
+          oWidth: window.innerWidth,
+          oHeight: window.innerHeight,
+        };
+      });
+
+      const height = Math.max(
+        pageRect.oHeight,
+        pageRect.oHeight + pageRect.height - pageRect.offsetHeight,
+      );
+
+      await this.browserWindow.setContentSize(pageRect.oWidth, height);
+
+      const capture = await this.browserWindow.capturePage();
+
+      await this.browserWindow.setContentSize(pageRect.oWidth, pageRect.oHeight);
+
+      return capture;
     });
   });
 
