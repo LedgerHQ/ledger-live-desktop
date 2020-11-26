@@ -68,7 +68,7 @@ async function init() {
 
     const timemachine = require("timemachine");
     timemachine.config({
-      dateString: "March 14, 2018 13:34:42",
+      dateString: require("../../tests/time").default,
     });
 
     if (document.body) {
