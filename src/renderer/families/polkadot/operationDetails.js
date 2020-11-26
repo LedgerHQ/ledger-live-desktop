@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
 // @flow
+import startCase from "lodash/startCase";
 import React, { useMemo } from "react";
 
 import { BigNumber } from "bignumber.js";
@@ -35,6 +36,15 @@ function getURLWhatIsThis(op: Operation): ?string {
   if (op.type !== "IN" && op.type !== "OUT") {
     return helpURL;
   }
+}
+
+function formatPalletMethod(palletMethod: ?string): string {
+  if (!palletMethod) return "";
+
+  return palletMethod
+    .split(".")
+    .map(startCase)
+    .join(" - ");
 }
 
 const redirectAddress = (currency: Currency, address: string) => () => {
@@ -129,14 +139,14 @@ type OperationsDetailsPalletMethodProps = {
 export const OperationsDetailsPalletMethod = ({
   palletMethod,
 }: OperationsDetailsPalletMethodProps) => {
-  return (
+  return palletMethod ? (
     <Box>
       <OpDetailsTitle>
         <Trans i18nKey={"operationDetails.extra.palletMethod"} />
       </OpDetailsTitle>
-      <OpDetailsData>{palletMethod}</OpDetailsData>
+      <OpDetailsData>{formatPalletMethod(palletMethod)}</OpDetailsData>
     </Box>
-  );
+  ) : null;
 };
 
 type OperationDetailsExtraProps = {
