@@ -79,26 +79,32 @@ jobs:
           message: |
             ## Lint outputs
             <details>
-              <summary>View</summary>
-              <p>
-                ${{ steps.lint.outputs.content }}
-              </p>
+            <summary>View</summary>
+            <p>
+            
+            ${{ steps.lint.outputs.content }}
+            
+            </p>
             </details>
 
             ## Tests outputs
             <details>
-              <summary>View</summary>
-              <p>
-                ${{ steps.spectron.outputs.content }}
-              </p>
+            <summary>View</summary>
+            <p>
+            
+            ${{ steps.spectron.outputs.content }}
+            
+            </p>
             </details>
 
             ## Diff output
             <details>
-              <summary>View</summary>
-              <p>
-                ${{ steps.comment.outputs.body }}
-              </p>
+            <summary>View</summary>
+            <p>
+            
+            ${{ steps.comment.outputs.body }}
+            
+            </p>
             </details>
           allow-repeats: true
           repo-token: ${{ secrets.CI_BOT_TOKEN }}

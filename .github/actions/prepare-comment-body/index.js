@@ -7,7 +7,7 @@ const main = async () => {
   let str = "";
   if (imgArr.length) {
     imgArr.map(image => {
-      str += "![](" + image + ")<br/>";
+      str += "![](" + image + ")\n\n";
     });
   }
   core.setOutput("body", str);
