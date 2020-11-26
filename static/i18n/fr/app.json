@@ -1831,7 +1831,9 @@
       "controllerNeededWarning": "Vous devez être contrôleur d'un compte de réserve",
       "electionOpen": "L'élection de nouveaux validateurs est en cours. Par conséquent les opérations de Staking sont indisponibles pour une durée pouvant atteindre 15 minutes.",
       "electionOpenTooltip": "Cette opération est désactivée pendant l'élection des validateurs",
+      "externalControllerTooltip": "Ce compte est contrôlé par un autre compte.",
       "externalControllerUnsupported": "<0>Ce compte est contrôlé par un autre compte ayant l'adresse <0>{{address}}</0>.</0><1>Les opérations de Staking sur un compte de réserve externe n'est pas supporté par Ledger Live. Merci d'utiliser un porte-feuille alternatif tel que Polkadot.js.</1>",
+      "externalStashTooltip": "Ce compte contrôle un autre compte.",
       "externalStashUnsupported": "<0>Ce compte contrôle un autre compte de réserve ayant l'adresse <0>{{address}}</0>.</0><1>Les opérations de Staking sur un compte de réserve externe n'est pas supporté par Ledger Live. Merci d'utiliser un porte-feuille alternatif tel que Polkadot.js.</1>",
       "flow": {
         "title": "Nominer des validateurs",

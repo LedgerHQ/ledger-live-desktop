@@ -7,8 +7,13 @@ import { Trans } from "react-i18next";
 
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import type { Account } from "@ledgerhq/live-common/lib/types";
+import {
+  hasExternalController,
+  hasExternalStash,
+} from "@ledgerhq/live-common/lib/families/polkadot/logic";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import ToolTip from "~/renderer/components/Tooltip";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box/Box";
 import IconChartLine from "~/renderer/icons/ChartLine";
@@ -51,19 +56,38 @@ const AccountHeaderActions = ({ account }: Props) => {
     }
   }, [dispatch, lockedBalance, account]);
 
+  const _hasExternalController = hasExternalController(account);
+  const _hasExternalStash = hasExternalStash(account);
+
+  const manageEnabled = !_hasExternalController && !_hasExternalStash;
+
   return (
-    <ButtonBase primary onClick={onClick}>
-      <Box horizontal flow={1} alignItems="center">
-        {lockedBalance > 0 ? (
-          <CryptoCurrencyIcon overrideColor={contrastText} currency={currency} size={12} />
-        ) : (
-          <IconChartLine size={12} />
-        )}
-        <Box fontSize={3}>
-          <Trans i18nKey={lockedBalance > 0 ? "polkadot.manage.title" : "delegation.title"} />
+    <ToolTip
+      content={
+        !manageEnabled ? (
+          <Trans
+            i18nKey={
+              _hasExternalController
+                ? "polkadot.nomination.externalControllerTooltip"
+                : "polkadot.nomination.externalStashTooltip"
+            }
+          />
+        ) : null
+      }
+    >
+      <ButtonBase primary disabled={!manageEnabled} onClick={onClick}>
+        <Box horizontal flow={1} alignItems="center">
+          {lockedBalance > 0 ? (
+            <CryptoCurrencyIcon overrideColor={contrastText} currency={currency} size={12} />
+          ) : (
+            <IconChartLine size={12} />
+          )}
+          <Box fontSize={3}>
+            <Trans i18nKey={lockedBalance > 0 ? "polkadot.manage.title" : "delegation.title"} />
+          </Box>
         </Box>
-      </Box>
-    </ButtonBase>
+      </ButtonBase>
+    </ToolTip>
   );
 };
 
