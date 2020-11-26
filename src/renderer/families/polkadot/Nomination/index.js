@@ -6,7 +6,11 @@ import { Trans } from "react-i18next";
 import styled from "styled-components";
 
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import { canNominate } from "@ledgerhq/live-common/lib/families/polkadot/logic";
+import {
+  hasExternalController,
+  hasExternalStash,
+  canNominate,
+} from "@ledgerhq/live-common/lib/families/polkadot/logic";
 import { usePolkadotPreloadData } from "@ledgerhq/live-common/lib/families/polkadot/react";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 
@@ -30,6 +34,10 @@ import ElectionStatusWarning from "../ElectionStatusWarning";
 
 import { Row, UnbondingRow } from "./Row";
 import { Header, UnbondingHeader } from "./Header";
+import {
+  ExternalControllerUnsupportedWarning,
+  ExternalStashUnsupportedWarning,
+} from "./UnsupportedWarning";
 
 type Props = {
   account: Account,
@@ -52,7 +60,9 @@ const Nomination = ({ account }: Props) => {
   const { staking, validators } = usePolkadotPreloadData();
 
   const { polkadotResources } = account;
+
   invariant(polkadotResources, "polkadot account expected");
+
   const { lockedBalance, unlockedBalance, nominations, unlockings } = polkadotResources;
 
   const mappedNominations = useMemo(() => {
@@ -108,9 +118,11 @@ const Nomination = ({ account }: Props) => {
   }, [account, dispatch]);
 
   const explorerView = getDefaultExplorerView(account.currency);
-  console.log("explorerView", explorerView);
   const onExternalLink = useCallback(
-    (address: string) => {
+    (address: ?string) => {
+      if (!address) {
+        return;
+      }
       const URL = explorerView && getAddressExplorer(explorerView, address);
 
       if (URL) openURL(URL);
@@ -118,30 +130,59 @@ const Nomination = ({ account }: Props) => {
     [explorerView],
   );
 
+  const onLearnMore = useCallback(() => openURL(urls.stakingPolkadot), []);
+
   const electionOpen = staking?.electionClosed !== undefined ? !staking?.electionClosed : false;
 
   const hasBondedBalance = lockedBalance && lockedBalance.gt(0);
   const hasUnlockedBalance = unlockedBalance && unlockedBalance.gt(0);
-
   const hasNominations = nominations && nominations?.length > 0;
-
   const hasUnlockings = unlockings && unlockings.length > 0;
 
   const nominateEnabled = !electionOpen && canNominate(account);
   const withdrawEnabled = !electionOpen && hasUnlockedBalance;
 
+  const renderTitle = (
+    <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100" data-e2e="title_Nomination">
+      <Trans i18nKey="polkadot.nomination.header" />
+    </Text>
+  );
+
+  if (hasExternalController(account)) {
+    return (
+      <Box flow={4}>
+        <Box horizontal alignItems="center" justifyContent="space-between">
+          {renderTitle}
+        </Box>
+        <ExternalControllerUnsupportedWarning
+          address={polkadotResources?.controller}
+          onExternalLink={onExternalLink}
+          onLearnMore={onLearnMore}
+        />
+      </Box>
+    );
+  }
+
+  if (hasExternalStash(account)) {
+    return (
+      <Box flow={4}>
+        <Box horizontal alignItems="center" justifyContent="space-between">
+          {renderTitle}
+        </Box>
+        <ExternalStashUnsupportedWarning
+          address={polkadotResources?.stash}
+          onExternalLink={onExternalLink}
+          onLearnMore={onLearnMore}
+        />
+      </Box>
+    );
+  }
+
   return (
     <>
       {electionOpen ? <ElectionStatusWarning /> : null}
       <Box horizontal alignItems="center" justifyContent="space-between">
-        <Text
-          ff="Inter|Medium"
-          fontSize={6}
-          color="palette.text.shade100"
-          data-e2e="title_Nomination"
-        >
-          <Trans i18nKey="polkadot.nomination.header" />
-        </Text>
+        {renderTitle}
         {hasNominations ? (
           <Box horizontal>
             <ToolTip
@@ -231,7 +272,7 @@ const Nomination = ({ account }: Props) => {
             <Box mt={2}>
               <LinkWithExternalIcon
                 label={<Trans i18nKey="polkadot.nomination.emptyState.info" />}
-                onClick={() => openURL(urls.stakingPolkadot)}
+                onClick={onLearnMore}
               />
             </Box>
           </Box>

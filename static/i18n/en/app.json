@@ -1831,6 +1831,8 @@
       "controllerNeededWarning": "You must have a controller account",
       "electionOpen": "The election of new validators is currently ongoing. As such staking operations are not available for at most 15 minutes.",
       "electionOpenTooltip": "This operation is disabled during validators election",
+      "externalControllerUnsupported": "<0>This account is controlled by another account with address <0>{{address}}</0>.</0><1>Staking operations on Stash controlled by an external account are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js.</1>",
+      "externalStashUnsupported": "<0>This account controls an external Stash account with address <0>{{address}}</0>.</0><1>Staking operations on external Stash are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js.</1>",
       "flow": {
         "title": "Nominate",
         "steps": {
