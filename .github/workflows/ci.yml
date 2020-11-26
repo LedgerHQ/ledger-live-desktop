@@ -69,7 +69,7 @@ jobs:
       - name: prepare comment body
         if: always()
         id: comment
-        uses: machard/actions/prepare-comment-body@patch-1
+        uses: ./.github/actions/prepare-comment-body
         with:
           images: ${{ steps.imgur.outputs.images }}
       - name: post comment
@@ -100,6 +100,6 @@ jobs:
                 ${{ steps.comment.outputs.body }}
               </p>
             </details>
-          allow-repeats: false
+          allow-repeats: true
           repo-token: ${{ secrets.CI_BOT_TOKEN }}
           repo-token-user-login: ${{ secrets.CI_BOT_USERNAME }}
