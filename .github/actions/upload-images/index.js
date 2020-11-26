@@ -29,7 +29,13 @@ const uploadImage = async () => {
     return res.json();
   };
 
-  const files = fs.readdirSync(fullPath);
+  let files;
+  try {
+    files = fs.readdirSync(fullPath);
+  } catch {
+    return core.setOutput("images", []);
+  }
+
   const resultsP = files.map(file => {
     const img = fs.readFileSync(`${fullPath}/${file}`);
     return upload(img);
