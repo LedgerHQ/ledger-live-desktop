@@ -73,7 +73,7 @@ describe("Swap", () => {
     await toCurrencyInput.addValue("ethereum");
     const toCurrencyFirstOption = await $(".select-options-list .option:first-child");
     await toCurrencyFirstOption.click();
-    await app.client.pause(1000);
+    await app.client.pause(2000);
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-rates",
