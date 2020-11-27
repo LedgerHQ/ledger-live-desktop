@@ -1897,6 +1897,13 @@
     },
     "bond": {
       "title": "Lier des actifs",
+      "rewardDestination": {
+        "label": "Destination des récompenses",
+        "stash": "Stash",
+        "stashDescription": "Les récompenses seront versées sur le compte actuel en tant que balance disponible.",
+        "staked": "Staked",
+        "stakedDescription": "Les récompenses seront versées sur le compte actuel en tant que balance liée au staking."
+      },
       "steps": {
         "amount": {
           "title": "Montant",

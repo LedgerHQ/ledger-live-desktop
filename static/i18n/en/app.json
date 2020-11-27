@@ -1897,6 +1897,13 @@
     },
     "bond": {
       "title": "Bond assets",
+      "rewardDestination": {
+        "label": "Reward Destination",
+        "stash": "Stash",
+        "stashDescription": "The rewards will be transferred to the current account as available balance.",
+        "staked": "Staked",
+        "stakedDescription": "The rewards will be transferred to the current account as bonded balance."
+      },
       "steps": {
         "amount": {
           "title": "Amount",

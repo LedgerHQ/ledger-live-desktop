@@ -1,19 +1,24 @@
 // @flow
 import invariant from "invariant";
-import React from "react";
+import React, { useCallback } from "react";
 
 import { Trans } from "react-i18next";
 
 import type { StepProps } from "../types";
 
+import { isStash } from "@ledgerhq/live-common/lib/families/polkadot/logic";
+
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-import AmountField from "../fields/AmountField";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import Text from "~/renderer/components/Text";
+
+import AmountField from "../fields/AmountField";
+import RewardDestinationField from "../fields/RewardDestinationField";
 
 export default function StepAmount({
   account,
@@ -25,11 +30,30 @@ export default function StepAmount({
   t,
 }: StepProps) {
   invariant(account && transaction, "account and transaction required");
+  const bridge = getAccountBridge(account, parentAccount);
+
+  const { rewardDestination } = transaction;
+
+  const setRewardDestination = useCallback(
+    (rewardDestination: string) => {
+      onChangeTransaction(bridge.updateTransaction(transaction, { rewardDestination }));
+    },
+    [bridge, transaction, onChangeTransaction],
+  );
+
+  // If account is not a stash, it's a fresh bond transaction.
+  const showRewardDestination = !isStash(account);
 
   return (
     <Box flow={1}>
       <SyncSkipUnderPriority priority={100} />
       <TrackPage category="Bond Flow" name="Step 1" />
+      {showRewardDestination ? (
+        <RewardDestinationField
+          rewardDestination={rewardDestination || "Slash"}
+          onChange={setRewardDestination}
+        />
+      ) : null}
       <AmountField
         transaction={transaction}
         account={account}
