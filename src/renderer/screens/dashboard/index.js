@@ -19,7 +19,6 @@ import AssetDistribution from "~/renderer/components/AssetDistribution";
 import MigrationBanner from "~/renderer/modals/MigrateAccounts/Banner";
 import ClearCacheBanner from "~/renderer/components/ClearCacheBanner";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
-import OngoingScams from "~/renderer/components/banners/OngoingScams";
 import { saveSettings } from "~/renderer/actions/settings";
 import { useDispatch, useSelector } from "react-redux";
 import uniq from "lodash/uniq";
