@@ -9,7 +9,6 @@ import HideEmptyTokenAccountsToggle from "./HideEmptyTokenAccountsToggle";
 import SectionExport from "./Export";
 import Currencies from "./Currencies";
 import BlacklistedTokens from "./BlacklistedTokens";
-import FullNode from "~/renderer/screens/settings/sections/Accounts/FullNode";
 
 export default function SectionAccounts() {
   const { t } = useTranslation();
@@ -20,7 +19,6 @@ export default function SectionAccounts() {
         <TrackPage category="Settings" name="Accounts" />
         <Currencies />
         <SectionExport />
-        <FullNode />
         <Header
           icon={<EyeSlash />}
           title={t("settings.accounts.hideEmptyTokens.title")}
