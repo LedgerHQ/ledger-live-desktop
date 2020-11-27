@@ -1,6 +1,6 @@
 name: CI
 on:
-  pull_request:
+  pull_request_target:
     branches:
       - "*"
   push:
@@ -17,6 +17,9 @@ jobs:
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
       - uses: actions/setup-node@main
         with:
           node-version: 12.x

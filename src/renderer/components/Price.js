@@ -46,6 +46,7 @@ export default function Price({
   iconSize,
   showAllDigits = true,
   withIcon = true,
+  rate,
 }: Props) {
   const effectiveUnit = unit || from.units[0];
   const valueNum = 10 ** effectiveUnit.magnitude;
@@ -57,8 +58,12 @@ export default function Price({
     value: valueNum,
     disableRounding: true,
   });
-  const counterValue =
-    typeof rawCounterValue !== "undefined" ? BigNumber(rawCounterValue) : rawCounterValue;
+
+  const counterValue = rate
+    ? rate.times(valueNum) // NB Allow to override the rate for swap
+    : typeof rawCounterValue !== "undefined"
+    ? BigNumber(rawCounterValue)
+    : rawCounterValue;
 
   const bgColor = useTheme("colors.palette.background.paper");
   if (!counterValue || counterValue.isZero()) return placeholder || null;
