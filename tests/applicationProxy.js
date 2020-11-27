@@ -25,8 +25,11 @@ const userDataPathKey = Math.random()
   .substring(2, 5);
 const userDataPath = path.join(__dirname, "tmp", userDataPathKey);
 
-export const removeUserData = () => {
+export const removeUserData = dump => {
   if (fs.existsSync(`${userDataPath}`)) {
+    if (dump) {
+      fs.copyFileSync(`${userDataPath}/app.json`, path.join(__dirname, "dump.json"));
+    }
     rimraf.sync(userDataPath);
   }
 };
@@ -52,12 +55,13 @@ export function applicationProxy(userData = null, env = {}) {
 
   return new Application({
     path: require("electron"), // just to make spectron happy since we override everything below
+    waitTimeout: 15000,
     webdriverOptions: {
       capabilities: {
         "goog:chromeOptions": {
-          binary: "/node_modules/spectron/lib/launcher.js",
+          binary: "/app/node_modules/spectron/lib/launcher.js",
           args: [
-            "spectron-path=/node_modules/electron/dist/electron",
+            "spectron-path=/app/node_modules/electron/dist/electron",
             "spectron-arg0=/app/.webpack/main.bundle.js",
             "--disable-extensions",
             "--disable-dev-shm-usage",

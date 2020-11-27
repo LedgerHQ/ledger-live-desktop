@@ -23,6 +23,7 @@ type Props<C: Currency> = {
   width?: number,
   rowHeight?: number,
   isDisabled?: Currency => boolean,
+  id?: string,
   renderOptionOverride?: (option: Option) => any,
 };
 
@@ -40,6 +41,7 @@ const SelectCurrency = <C: Currency>({
   rowHeight = 47,
   renderOptionOverride,
   isDisabled,
+  id,
 }: Props<C>) => {
   const { t } = useTranslation();
   const devMode = useEnv("MANAGER_DEV_MODE");
@@ -86,6 +88,7 @@ const SelectCurrency = <C: Currency>({
   const filteredOptions = manualFilter();
   return (
     <Select
+      id={id}
       autoFocus={autoFocus}
       value={value}
       options={filteredOptions}

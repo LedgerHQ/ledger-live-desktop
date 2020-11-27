@@ -97,9 +97,10 @@ In a terminal you need to have webpack dev server running
 yarn start
 ```
 
-In an other terminal you need to launch the webdriver/electron container. Since Docker is intelligent it launches fast if nothing changed in `package.json` and `yarn.lock`. We need to build `node_modules` in the container for packages with native dependencies to work. So remember to stop and re run this command when packages are updated.
+In an other terminal you need to launch the webdriver/electron container. First run will be slow.
+Next ones will be fast unless some changes are made to the container or package.json. You need to kill and re run the command if package.json changed.
 ```bash
-cd tests/docker-electron-webdriver/ && docker-compose up --build
+yarn start-electron-webdriver
 ```
 
 You can point VNCViewer to `localhost::5900` to check what is happening in the container. `secret` is the password.
@@ -107,6 +108,12 @@ Then you can launch tests.
 ```bash
 yarn spectron
 ```
+or
+```bash
+node_modules/.bin/jest tests/specs/<FILEREGEX>.spec.js
+```
+
+**Please put the image expectations at the end of the it(...) tests so that it does not break the whole flow if a snapshot breaks**
 
 ### Run code quality checks
 

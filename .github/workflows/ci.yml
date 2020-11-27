@@ -1,6 +1,6 @@
 name: CI
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - "*"
   push:
@@ -35,46 +35,77 @@ jobs:
       - name: install dependencies
         run: yarn --frozen-lockfile
       - name: run code checks
-        run: yarn ci
+        run: yarn ci 2>lint.txt
+      - name: Read lint output
+        id: lint
+        if: always()
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./lint.txt
       - name: check build
         run: sudo yarn build
       - name: start electron webdriver
-        run: cd tests/docker-electron-webdriver && docker-compose up -d
+        run: yarn start-electron-webdriver -d
+      - uses: nev7n/wait_for_response@v1
+        with:
+          url: 'http://localhost:9515/'
+          responseCode: 404
+          timeout: 600000
+          interval: 1000
       - name: run spectron
-        run: yarn spectron
-      - name: check
+        run: yarn spectron --no-color 2>output.txt
+      - name: Read test output
+        id: spectron
         if: always()
-        run: |
-          cd tests/specs/__image_snapshots__
-          ls -la
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./output.txt
       - name: upload diffs to imgur
-        if: failure()
+        if: always()
         uses: ./.github/actions/upload-images
         id: imgur
         with:
           path: tests/specs/__image_snapshots__/__diff_output__
       - name: prepare comment body
-        if: failure()
+        if: always()
         id: comment
-        uses: ledgerhq/actions/prepare-comment-body@v2.0.0
+        uses: ./.github/actions/prepare-comment-body
         with:
           images: ${{ steps.imgur.outputs.images }}
-      - name: create markdown file for commenting
-        id: create
-        if: github.event_name == 'pull_request' && failure()
-        run: |
-          mkdir -p artifacts
-          cat > artifacts/message.md <<EOF
-
-          PR to merge $GITHUB_HEAD_REF $GITHUB_SHA -> $GITHUB_BASE_REF
-
-          ## Diff output
-          ${{ steps.comment.outputs.body }}
-
-          EOF
-      - name: save PR message as artifact
-        if: steps.create.outputs.artifact == '1' && failure()
-        uses: actions/upload-artifact@v2
+      - name: post comment
+        if: github.event_name == 'pull_request' && always()
+        uses: mshick/add-pr-comment@v1
         with:
-          name: pr_message
-          path: artifacts
+          message: |
+            ## Lint outputs
+            <details>
+            <summary>View</summary>
+            <p>
+            
+            ${{ steps.lint.outputs.content }}
+            
+            </p>
+            </details>
+
+            ## Tests outputs
+            <details>
+            <summary>View</summary>
+            <p>
+            
+            ${{ steps.spectron.outputs.content }}
+            
+            </p>
+            </details>
+
+            ## Diff output
+            <details>
+            <summary>View</summary>
+            <p>
+            
+            ${{ steps.comment.outputs.body }}
+            
+            </p>
+            </details>
+          allow-repeats: true
+          repo-token: ${{ secrets.CI_BOT_TOKEN }}
+          repo-token-user-login: ${{ secrets.CI_BOT_USERNAME }}

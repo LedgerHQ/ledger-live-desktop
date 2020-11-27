@@ -92,7 +92,9 @@ export default function ActivityIndicatorInner() {
             </Box>
           </>
         ) : isUpToDate ? (
-          <Trans i18nKey="common.sync.upToDate" />
+          <span id="topbar-synchronized">
+            <Trans i18nKey="common.sync.upToDate" />
+          </span>
         ) : (
           <Trans i18nKey="common.sync.outdated" />
         )}

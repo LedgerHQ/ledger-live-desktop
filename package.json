@@ -28,7 +28,8 @@
     "release": "node ./tools/dist --publish",
     "ci": "node ./tools/ci.js",
     "test": "jest src",
-    "spectron": "jest tests/specs/bullrun.spec.js",
+    "start-electron-webdriver": "node tests/docker-electron-webdriver/start.js",
+    "spectron": "jest tests/specs/*.spec.js",
     "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)"
   },
   "engines": {
@@ -106,6 +107,7 @@
     "source-map-support": "^0.5.19",
     "styled-components": "^5.2.1",
     "styled-system": "^5.1.5",
+    "timemachine": "^0.3.2",
     "tippy.js": "^6.2.7",
     "tree-kill": "^1.2.2",
     "uncontrollable": "^7.1.1",
