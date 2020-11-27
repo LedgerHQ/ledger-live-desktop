@@ -872,7 +872,7 @@
   "DeviceAction": {
     "allowAppPermission": "Open the {{wording}} app on your device",
     "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
-    "allowManagerPermission": "Allow Ledger Manager on your device",
+    "allowManagerPermission": "Allow {{wording}} on your device",
     "loading": "Loading...",
     "connectAndUnlockDevice": "Connect and unlock your device",
     "unlockDevice": "Unlock your device",
