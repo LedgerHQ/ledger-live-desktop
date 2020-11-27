@@ -124,23 +124,8 @@ function StepAmount({
         <SupplyBanner account={account} parentAccount={parentAccount} />
       ) : null}
       <Box vertical mt={4}>
-        <Box horizontal style={{ justifyContent: "space-between" }}>
+        <Box>
           <Label>{t("lend.supply.steps.amount.amountToSupply")}</Label>
-          {supplyMax.gt(0) ? (
-            <Box horizontal>
-              <Label style={{ paddingLeft: 8 }}>{t("lend.supply.steps.amount.available")}</Label>
-              <Label style={{ paddingLeft: 4 }}>~</Label>
-              <Label style={{ paddingLeft: 2 }}>
-                <FormattedVal
-                  style={{ width: "auto" }}
-                  color="palette.text.shade100"
-                  val={supplyMax}
-                  unit={unit}
-                  showCode
-                />
-              </Label>
-            </Box>
-          ) : null}
         </Box>
         <InputCurrency
           autoFocus={false}
