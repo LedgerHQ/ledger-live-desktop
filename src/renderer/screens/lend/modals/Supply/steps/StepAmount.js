@@ -1,7 +1,7 @@
 // @flow
 
 import invariant from "invariant";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Trans } from "react-i18next";
@@ -9,6 +9,7 @@ import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
 import { getAccountUnit, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { useSpoilerForTransaction } from "~/renderer/hooks/useSpoilerForTransaction";
 import { useSupplyMax, useSupplyMaxChoiceButtons } from "@ledgerhq/live-common/lib/compound/react";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -18,6 +19,7 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import Label from "~/renderer/components/Label";
 import Spoiler from "~/renderer/components/Spoiler";
+import ErrorBanner from "~/renderer/components/ErrorBanner";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import GasPriceField from "~/renderer/families/ethereum/GasPriceField";
 import GasLimitField from "~/renderer/families/ethereum/GasLimitField";
@@ -77,6 +79,8 @@ const AmountButton: ThemedComponent<{ error: boolean, active: boolean }> = style
   }
 `;
 
+const spoilerHandlesError = key => key !== "amount";
+
 function StepAmount({
   account,
   parentAccount,
@@ -85,17 +89,15 @@ function StepAmount({
   onUpdateTransaction,
   transaction,
   status,
-  error,
+  bridgeError,
   bridgePending,
   t,
   collection,
 }: StepProps & { collection: Array<{ account: TokenAccount, parentAccount: ?Account }> }) {
   invariant(account && transaction, "account and transaction required");
-  const [focused, setFocused] = useState(false);
   const bridge = getAccountBridge(account, parentAccount);
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
-  const { warnings } = status;
   const { amount } = transaction;
   const supplyMax = useSupplyMax(account);
   const options = useSupplyMaxChoiceButtons(supplyMax);
@@ -111,7 +113,7 @@ function StepAmount({
     [bridge, onUpdateTransaction],
   );
 
-  const warning = useMemo(() => focused && Object.values(warnings || {})[0], [focused, warnings]);
+  const [spoiler, setSpoiler] = useSpoilerForTransaction(status, spoilerHandlesError);
 
   return (
     <Box flow={2}>
@@ -120,6 +122,7 @@ function StepAmount({
         name="Supply Step 1"
         eventProperties={{ currencyName: currency.name }}
       />
+      {bridgeError ? <ErrorBanner error={bridgeError} /> : null}
       {account && account.type === "TokenAccount" && transaction ? (
         <SupplyBanner account={account} parentAccount={parentAccount} />
       ) : null}
@@ -144,13 +147,12 @@ function StepAmount({
         </Box>
         <InputCurrency
           autoFocus={false}
-          error={error}
-          warning={warning}
+          error={status.errors.amount}
+          warning={status.warnings.amount}
           containerProps={{ grow: true }}
           unit={unit}
           value={amount}
           onChange={onChangeAmount}
-          onChangeFocus={() => setFocused(true)}
           renderLeft={<InputLeft>{unit.code}</InputLeft>}
           renderRight={
             <InputRight>
@@ -169,16 +171,19 @@ function StepAmount({
         />
       </Box>
       <Box mt={6}>
-        <Spoiler textTransform title={t("account.settings.advancedLogs")}>
+        <Spoiler
+          opened={spoiler}
+          onOpen={setSpoiler}
+          textTransform
+          title={t("account.settings.advancedLogs")}
+        >
           {parentAccount && transaction ? (
             <Box my={4}>
               <GasPriceField
-                // $FlowFixMe B*tch
                 onChange={onChangeTransaction}
                 account={parentAccount}
                 transaction={transaction}
                 status={status}
-                displayError={false}
               />
               <Box mt={3}>
                 <GasLimitField
@@ -214,9 +219,9 @@ export function StepAmountFooter({
   transaction,
 }: StepProps) {
   invariant(account, "account required");
-  // const { errors } = status;
-  // const hasErrors = Object.keys(errors).length;
-  // const canNext = !bridgePending && !hasErrors;
+  const { errors } = status;
+  const hasErrors = Object.keys(errors).length;
+  const canNext = !bridgePending && !hasErrors;
 
   return (
     <>
@@ -225,7 +230,7 @@ export function StepAmountFooter({
         <Button mr={1} secondary onClick={onClose}>
           <Trans i18nKey="common.cancel" />
         </Button>
-        <Button primary onClick={() => transitionTo("connectDevice")}>
+        <Button disabled={!canNext} primary onClick={() => transitionTo("connectDevice")}>
           <Trans i18nKey="common.continue" />
         </Button>
       </Box>
