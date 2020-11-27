@@ -1909,7 +1909,7 @@
           "title": "Montant",
           "amountLabel": "Montant à lier",
           "maxLabel": "Disponible",
-          "info": "Les actifs liés peuvent être libérés après une période de 28 jours."
+          "info": "Une fois les actifs liés ils peuvent être déliés à n'importe quel moment, mais seront bloqués pendant une période de 28 jours."
         },
         "connectDevice": {
           "title": "Appareil"
@@ -3401,6 +3401,9 @@
     },
     "PolkadotLowBondedBalance": {
       "title": "Tous les actifs débloquables seront déliés si il reste < 1 DOT"
+    },
+    "PolkadotBondAllFundsWarning": {
+      "title": "Vous n'aurez plus de fonds disponibles pour de futures transactions"
     }
   }
 }

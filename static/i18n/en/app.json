@@ -1909,7 +1909,7 @@
           "title": "Amount",
           "amountLabel": "Amount to bond",
           "maxLabel": "Available",
-          "info": "After unbonding, assets can be withdrawn after a 28-day timelock period."
+          "info": "Once assets are bonded they can be unbonded any time, but they will be locked for 28-days."
         },
         "connectDevice": {
           "title": "Device"
@@ -3401,6 +3401,9 @@
     },
     "PolkadotLowBondedBalance": {
       "title": "All unlockable assets will be unbonded if remaining < 1 DOT"
+    },
+    "PolkadotBondAllFundsWarning": {
+      "title": "You will not have available balance for future transactions"
     }
   }
 }
