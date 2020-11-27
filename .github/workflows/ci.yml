@@ -73,7 +73,7 @@ jobs:
         with:
           images: ${{ steps.imgur.outputs.images }}
       - name: post comment
-        if: github.event_name == 'pull_request' && always()
+        if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && always()
         uses: mshick/add-pr-comment@v1
         with:
           message: |
