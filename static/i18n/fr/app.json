@@ -1908,7 +1908,7 @@
         "amount": {
           "title": "Montant",
           "amountLabel": "Montant à lier",
-          "available": "Disponible: {{amountAvailable}}",
+          "maxLabel": "Disponible",
           "info": "Les actifs liés peuvent être libérés après une période de 28 jours."
         },
         "connectDevice": {
@@ -1940,7 +1940,7 @@
         "amount": {
           "title": "Montant",
           "amountLabel": "Montant à relier",
-          "unlocking": "En débloquage: {{amountUnlocking}}",
+          "maxLabel": "En débloquage",
           "info": "Les actifs reliés seront immédiatement ajoutés à la balance bloquée et seront part d'enjeu pour l'ère prochaine."
         },
         "connectDevice": {
@@ -1967,7 +1967,7 @@
         "amount": {
           "title": "Montant",
           "amountLabel": "Montant à délier",
-          "unlockable": "Débloquable: {{amountUnlockable}}",
+          "maxLabel": "Débloquable",
           "info": "Les actifs déliés pourront être récupérés après une période de 28 jours."
          },
         "connectDevice": {

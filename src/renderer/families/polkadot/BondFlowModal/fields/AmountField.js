@@ -1,23 +1,22 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 
 import { BigNumber } from "bignumber.js";
 
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import type { TFunction } from "react-i18next";
 import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/polkadot/types";
 
-import { localeSelector } from "~/renderer/reducers/settings";
+import SpendableAmount from "~/renderer/components/SpendableAmount";
 import Label from "~/renderer/components/Label";
 import Box from "~/renderer/components/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
+import Switch from "~/renderer/components/Switch";
 import Text from "~/renderer/components/Text";
 
 const InputLeft = styled(Box).attrs(() => ({
@@ -28,6 +27,13 @@ const InputLeft = styled(Box).attrs(() => ({
   horizontal: true,
   pl: 3,
 }))``;
+
+const TextSeparator = styled.span`
+  height: 1em;
+  margin: 0 4px;
+  border: 1px solid;
+  border-color: ${p => p.theme.colors.palette.text.shade20};
+`;
 
 type Props = {
   t: TFunction,
@@ -48,13 +54,11 @@ const AmountField = ({
   bridgePending,
   t,
 }: Props) => {
-  const locale = useSelector(localeSelector);
   invariant(account && transaction && account.spendableBalance, "account and transaction required");
 
   const bridge = getAccountBridge(account, parentAccount);
 
   const defaultUnit = getAccountUnit(account);
-  const { spendableBalance } = account;
 
   const onChange = useCallback(
     (value: BigNumber) => {
@@ -67,18 +71,17 @@ const AmountField = ({
     [bridge, transaction, onChangeTransaction],
   );
 
-  const amountAvailable = useMemo(
-    () =>
-      formatCurrencyUnit(defaultUnit, spendableBalance, {
-        disableRounding: true,
-        showAllDigits: false,
-        showCode: true,
-        locale,
-      }),
-    [spendableBalance, defaultUnit, locale],
+  const onChangeUseMax = useCallback(
+    (useAllAmount: boolean) => {
+      onChangeTransaction(
+        bridge.updateTransaction(transaction, { useAllAmount, amount: BigNumber(0) }),
+      );
+    },
+    [bridge, transaction, onChangeTransaction],
   );
 
   if (!status) return null;
+  const { useAllAmount } = transaction;
   const { amount, errors, warnings } = status;
   let { amount: amountError } = errors;
 
@@ -89,16 +92,41 @@ const AmountField = ({
 
   return (
     <Box vertical flow={1}>
-      <Label>
-        <Text>
+      <Box horizontal justifyContent="space-between">
+        <Label>
           <Trans i18nKey="polkadot.bond.steps.amount.amountLabel" />
-        </Text>
-        <Text style={{ flex: 1 }} textAlign="right">
-          <Trans i18nKey="polkadot.bond.steps.amount.available" values={{ amountAvailable }} />
-        </Text>
-      </Label>
+        </Label>
+        {typeof useAllAmount === "boolean" ? (
+          <Box horizontal alignItems="center">
+            <Text color="palette.text.shade40" ff="Inter|Medium" fontSize={13}>
+              <Trans i18nKey="polkadot.bond.steps.amount.maxLabel" />
+              {": "}
+            </Text>
+            <Text color="palette.text.shade40" ff="Inter|Medium" fontSize={13}>
+              <SpendableAmount
+                account={account}
+                parentAccount={parentAccount}
+                transaction={transaction}
+                disableRounding
+              />
+            </Text>
+            <TextSeparator />
+            <Text
+              color="palette.text.shade40"
+              ff="Inter|Medium"
+              fontSize={13}
+              style={{ paddingRight: 5 }}
+              onClick={() => onChangeUseMax(!useAllAmount)}
+            >
+              <Trans i18nKey="send.steps.details.useMax" />
+            </Text>
+            <Switch small isChecked={useAllAmount} onChange={onChangeUseMax} />
+          </Box>
+        ) : null}
+      </Box>
       <InputCurrency
-        autoFocus={false}
+        disabled={!!useAllAmount}
+        autoFocus={true}
         error={amountError}
         warning={warnings.amount}
         containerProps={{ grow: true }}
