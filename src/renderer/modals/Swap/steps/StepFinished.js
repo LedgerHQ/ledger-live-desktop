@@ -162,16 +162,16 @@ export const StepFinishedFooter = ({
 
   return (
     <Box horizontal>
-      <Button onClick={onClose} secondary>
-        <Trans i18nKey="common.close" />
-      </Button>
       <Button
-        primary
-        ml={2}
+        secondary
+        mr={2}
         event="Swap completed - Clicked on operation details CTA"
         onClick={onViewOperationDetails}
       >
         <Trans i18nKey="swap.modal.steps.finished.seeDetails" />
+      </Button>
+      <Button onClick={onClose} primary>
+        <Trans i18nKey="common.close" />
       </Button>
     </Box>
   );
