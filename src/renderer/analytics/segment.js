@@ -10,6 +10,7 @@ import {
   sidebarCollapsedSelector,
   langAndRegionSelector,
   shareAnalyticsSelector,
+  lastSeenDeviceSelector,
 } from "~/renderer/reducers/settings";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import type { State } from "~/renderer/reducers";
@@ -40,7 +41,7 @@ const extraProperties = store => {
   const state: State = store.getState();
   const { language, region } = langAndRegionSelector(state);
   const systemLocale = getSystemLocale();
-  const device = getCurrentDevice(state);
+  const device = getCurrentDevice(state) || lastSeenDeviceSelector(state);
   const deviceInfo = device ? { modelId: device.modelId } : {};
   const sidebarCollapsed = sidebarCollapsedSelector(state);
 
