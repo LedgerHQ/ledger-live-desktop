@@ -75,6 +75,9 @@ export default function AccountBalanceSummary({
           <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
             {moment(d.date).format("LL")}
           </Box>
+          <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
+            {moment(d.date).format("LT")}
+          </Box>
         </>
       );
     },
