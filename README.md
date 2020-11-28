@@ -113,6 +113,10 @@ or
 node_modules/.bin/jest tests/specs/<FILEREGEX>.spec.js
 ```
 
+It's a bit heavy on the memory/cpu when running in parralel so don't hesitate to use the regex way or play with jest cli options.
+
+If you need to create an app.json, run a test that set up what you need and run it with the env var `SPECTRON_DUMP_APP_JSON` set. It will create `tests/dump.json` at the end of the spec.
+
 **Please put the image expectations at the end of the it(...) tests so that it does not break the whole flow if a snapshot breaks**
 
 ### Run code quality checks

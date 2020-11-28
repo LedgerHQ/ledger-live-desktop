@@ -31,7 +31,8 @@ const uploadImage = async () => {
 
   let files;
   try {
-    files = fs.readdirSync(fullPath);
+    files = fs.readdirSync(fullPath, { withFileTypes: true });
+    files = files.filter(f => f.isFile()).map(f => f.name);
   } catch {
     return core.setOutput("images", []);
   }
@@ -42,11 +43,12 @@ const uploadImage = async () => {
   });
 
   const results = await Promise.all(resultsP);
-  const res = results.map(r => {
-    return r.data.link;
+  const res = results.map((r, index) => {
+    return {
+      link: r.data.link,
+      name: files[index].replace("-diff.png", ""),
+    };
   });
-
-  console.log(res);
 
   core.setOutput("images", res);
 };
