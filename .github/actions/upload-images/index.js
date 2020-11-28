@@ -31,7 +31,8 @@ const uploadImage = async () => {
 
   let files;
   try {
-    files = fs.readdirSync(fullPath);
+    files = fs.readdirSync(fullPath, { withFileTypes: true });
+    files = files.filter(f => f.isFile()).map(f => f.name);
   } catch {
     return core.setOutput("images", []);
   }

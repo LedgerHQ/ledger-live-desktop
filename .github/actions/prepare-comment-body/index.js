@@ -12,7 +12,10 @@ const main = async () => {
       str += image.name + "\n\n";
       str += "![](" + image.link + ")\n\n";
     });
-    str += `[Suggested snapshots to update](http://github-action-artifact-link-eh13mcvc0.vercel.app/api?owner=${fullrepo[0]}&repo=${fullrepo[1]}&runId=${runId})`;
+    // from what I understood it's a bit cumbersome to get the artifact url before the workflow finishes
+    // so this is a workaround. the endpoint will redirect to the artifact url.
+    // https://github.com/machard/github-action-artifact-redirect
+    str += `[Suggested snapshots to update](https://github-action-artifact-link.vercel.app/api?owner=${fullrepo[0]}&repo=${fullrepo[1]}&runId=${runId})`;
   }
   core.setOutput("body", str);
 };
