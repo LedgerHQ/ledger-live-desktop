@@ -78,8 +78,8 @@ jobs:
         uses: ./.github/actions/prepare-comment-body
         with:
           images: ${{ steps.imgur.outputs.images }}
-          fullrepo: ${{ env.GITHUB_REPOSITORY }}
-          runId: ${{ env.GITHUB_RUN_ID }}
+          fullrepo: ${GITHUB_REPOSITORY}
+          runId: ${GITHUB_RUN_ID}
       - name: post comment
         if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && always()
         uses: mshick/add-pr-comment@v1
