@@ -42,11 +42,12 @@ const uploadImage = async () => {
   });
 
   const results = await Promise.all(resultsP);
-  const res = results.map(r => {
-    return r.data.link;
+  const res = results.map((r, index) => {
+    return {
+      link: r.data.link,
+      name: files[index].replace("-diff.png", ""),
+    };
   });
-
-  console.log(res);
 
   core.setOutput("images", res);
 };

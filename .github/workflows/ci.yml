@@ -1,6 +1,6 @@
 name: CI
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - "*"
   push:
@@ -66,12 +66,20 @@ jobs:
         id: imgur
         with:
           path: tests/specs/__image_snapshots__/__diff_output__
+      - name: upload ci suggested screenshots
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: ci-suggested-screenshots
+          path: tests/specs/__image_snapshots__/__diff_output__/generated
       - name: prepare comment body
         if: always()
         id: comment
         uses: ./.github/actions/prepare-comment-body
         with:
           images: ${{ steps.imgur.outputs.images }}
+          fullrepo: ${{ env.GITHUB_REPOSITORY }}
+          runId: ${{ env.GITHUB_RUN_ID }}
       - name: post comment
         if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && always()
         uses: mshick/add-pr-comment@v1
