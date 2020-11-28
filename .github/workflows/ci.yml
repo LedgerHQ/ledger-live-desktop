@@ -66,12 +66,14 @@ jobs:
         id: imgur
         with:
           path: tests/specs/__image_snapshots__/__diff_output__
+      - name: clean diff
+        run: rm -f tests/specs/__image_snapshots__/__diff_output__/*.png
       - name: upload ci suggested screenshots
         uses: actions/upload-artifact@v2
         if: always()
         with:
           name: ci-suggested-screenshots
-          path: tests/specs/__image_snapshots__/__diff_output__/generated/
+          path: tests/specs/__image_snapshots__/__diff_output__/
       - name: prepare comment body
         if: always()
         id: comment
