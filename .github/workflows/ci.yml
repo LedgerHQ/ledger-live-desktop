@@ -67,6 +67,7 @@ jobs:
         with:
           path: tests/specs/__image_snapshots__/__diff_output__
       - name: clean diff
+        if: always()
         run: rm -f tests/specs/__image_snapshots__/__diff_output__/*.png
       - name: upload ci suggested screenshots
         uses: actions/upload-artifact@v2
