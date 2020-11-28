@@ -71,7 +71,7 @@ jobs:
         if: always()
         with:
           name: ci-suggested-screenshots
-          path: tests/specs/__image_snapshots__/__diff_output__/generated
+          path: tests/specs/__image_snapshots__/__diff_output__/generated/
       - name: prepare comment body
         if: always()
         id: comment
