@@ -276,7 +276,6 @@
                 "nodeHost": {
                   "title": "Host",
                   "tooltip": "Leave as default if node runs on this computer, or replace the node IP address and port number.",
-                  "placeholder": "127.0.0.1:8332"
                 },
                 "rpcCredentials": {
                   "title": "RPC Credentials",
@@ -2003,7 +2002,7 @@
       },
       "fullNode": {
         "title": "Connect Bitcoin full node",
-        "desc": "Set up your Bitcoin full node to synchronize and send transactions without trusting Ledger’s explorers."
+        "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
       }
     }
   },

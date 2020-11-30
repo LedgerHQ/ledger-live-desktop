@@ -100,9 +100,7 @@ const Form = ({
             error={hostError}
             onChange={host => patchNodeConfig({ host })}
             value={nodeConfig?.host}
-            placeholder={t(
-              "fullNode.modal.steps.node.connectionSteps.notConnected.fields.nodeHost.placeholder",
-            )}
+            placeholder="127.0.0.1:8332"
           />
         </Box>
         <Box horizontal flex={1} mt={32}>
