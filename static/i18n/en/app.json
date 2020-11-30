@@ -274,7 +274,7 @@
               "disclaimer": "Your full node must be fully synchronized before connecting Ledger Live.",
               "fields": {
                 "nodeHost": {
-                  "title": "Node",
+                  "title": "Host",
                   "tooltip": "Leave as default if node runs on this computer, or replace the node IP address and port number.",
                   "placeholder": "127.0.0.1:8332"
                 },
