@@ -9,8 +9,10 @@ on:
       - master
 
 jobs:
-  type-checking:
+  test:
     runs-on: ubuntu-latest
+    outputs:
+      comment: ${{ steps.comment.outputs.body }}
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.4.0
@@ -83,40 +85,17 @@ jobs:
           images: ${{ steps.imgur.outputs.images }}
           fullrepo: ${{ github.repository }}
           runId: ${{ github.run_id }}
+          testoutput: ${{ steps.spectron.outputs.content }}
+          lintoutput: ${{ steps.lint.outputs.content }}
+  post-comment:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
       - name: post comment
-        if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && !cancelled()
-        uses: mshick/add-pr-comment@v1
+        if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && needs.test.status != 'cancelled'
+        uses: mshick/add-pr-comment@v5cd99bf9c186219af43341076f1fe9c09e5a9934
         with:
-          message: |
-            ## Lint outputs
-            <details>
-            <summary>View</summary>
-            <p>
-            
-            ${{ steps.lint.outputs.content }}
-            
-            </p>
-            </details>
-
-            ## Tests outputs
-            <details>
-            <summary>View</summary>
-            <p>
-            
-            ${{ steps.spectron.outputs.content }}
-            
-            </p>
-            </details>
-
-            ## Diff output
-            <details>
-            <summary>View</summary>
-            <p>
-            
-            ${{ steps.comment.outputs.body }}
-            
-            </p>
-            </details>
+          message: ${{ needs.test.output.comment }}
           allow-repeats: true
           repo-token: ${{ secrets.CI_BOT_TOKEN }}
           repo-token-user-login: ${{ secrets.CI_BOT_USERNAME }}
