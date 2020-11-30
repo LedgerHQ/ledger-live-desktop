@@ -18,6 +18,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
+        persist-credentials: false
       - uses: actions/setup-node@main
         with:
           node-version: 12.x
