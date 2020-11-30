@@ -84,6 +84,10 @@ jobs:
           runId: ${{ github.run_id }}
           testoutput: ${{ steps.spectron.outputs.content }}
           lintoutput: ${{ steps.lint.outputs.content }}
+      - name: display comment
+        if: always()
+        id: displaycomment
+        run: echo ${{ steps.comment.outputs.body }}
   post-comment:
     runs-on: ubuntu-latest
     needs: test
