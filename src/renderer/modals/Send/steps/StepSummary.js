@@ -23,6 +23,7 @@ import IconQrCode from "~/renderer/icons/QrCode";
 import IconWallet from "~/renderer/icons/Wallet";
 import { rgba } from "~/renderer/styles/helpers";
 import CounterValue from "~/renderer/components/CounterValue";
+import InfoBox from "~/renderer/components/InfoBox";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { StepProps } from "../types";
@@ -64,6 +65,7 @@ export default class StepSummary extends PureComponent<StepProps> {
     const feesUnit = getAccountUnit(mainAccount);
     const feesCurrency = getAccountCurrency(mainAccount);
     const unit = getAccountUnit(account);
+    const utxoLag = mainAccount.operationsCount >= 50;
 
     // $FlowFixMe
     const memo = transaction.memo;
@@ -71,6 +73,11 @@ export default class StepSummary extends PureComponent<StepProps> {
     return (
       <Box flow={4} mx={40}>
         <TrackPage category="Send Flow" name="Step Summary" />
+        {utxoLag ? (
+          <InfoBox warn>
+            <Trans i18nKey="send.steps.details.utxoLag" />
+          </InfoBox>
+        ) : null}
         <FromToWrapper>
           <Box>
             <Box horizontal alignItems="center">
