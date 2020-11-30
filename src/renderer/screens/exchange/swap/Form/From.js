@@ -141,6 +141,7 @@ const From = ({
           <Trans i18nKey={`swap.form.from.currency`} />
         </Label>
         <SelectCurrency
+          id="swap-form-from-currency"
           rowHeight={47}
           renderOptionOverride={renderOptionOverride}
           currencies={currencies}
@@ -155,6 +156,7 @@ const From = ({
           <Trans i18nKey={`swap.form.from.account`} />
         </Label>
         <SelectAccount
+          id="swap-form-from-account"
           isDisabled={!currency}
           accounts={availableAccounts}
           value={{ account, subAccount }}
@@ -182,6 +184,7 @@ const From = ({
         {unit ? (
           <>
             <InputCurrency
+              id="swap-form-from-amount"
               error={!hideError && amountError}
               loading={isLoading}
               key={unit.code}

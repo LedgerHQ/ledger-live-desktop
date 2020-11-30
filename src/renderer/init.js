@@ -11,6 +11,7 @@ import i18n from "i18next";
 import { remote, webFrame, ipcRenderer } from "electron";
 import { render } from "react-dom";
 import moment from "moment";
+import _ from "lodash";
 import { reload, getKey, loadLSS } from "~/renderer/storage";
 
 import "~/renderer/styles/global";
@@ -58,6 +59,22 @@ async function init() {
     Transport,
     connect,
   });
+
+  if (process.env.SPECTRON_RUN) {
+    const spectronData = await getKey("app", "SPECTRON_RUN", {});
+    _.each(spectronData.localStorage, (value, key) => {
+      global.localStorage.setItem(key, value);
+    });
+
+    const timemachine = require("timemachine");
+    timemachine.config({
+      dateString: require("../../tests/time").default,
+    });
+
+    if (document.body) {
+      document.body.className += " spectron-run";
+    }
+  }
 
   const store = createStore({ dbMiddleware });
 

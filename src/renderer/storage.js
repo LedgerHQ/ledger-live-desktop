@@ -38,9 +38,14 @@ export const getKey = async (ns: string, keyPath: string, defaultValue: any) => 
   return data;
 };
 
+let debounceToUse = debounce;
+if (process.env.SPECTRON_RUN) {
+  // $FlowFixMe
+  debounceToUse = fn => (...args) => setTimeout(() => fn(...args));
+}
 const debouncedSetKey = memoize(
   (ns: string, keyPath: string) =>
-    debounce((value: string) => {
+    debounceToUse((value: string) => {
       const transform = transforms[keyPath];
       ipcRenderer.invoke("setKey", {
         ns,

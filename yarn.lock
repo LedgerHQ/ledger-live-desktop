@@ -12497,6 +12497,11 @@ timed-out@4.0.1, timed-out@^4.0.1:
   resolved "https://registry.yarnpkg.com/timed-out/-/timed-out-4.0.1.tgz#f32eacac5a175bea25d7fab565ab3ed8741ef56f"
   integrity sha1-8y6srFoXW+ol1/q1Zas+2HQe9W8=
 
+timemachine@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/timemachine/-/timemachine-0.3.2.tgz#83c594d0271c3608d5fab13636cd3b7c979ea2c5"
+  integrity sha512-JNKeKZXQJc8UC19JcIq0XziBud+fNNJfatZ57lwk+o1O9mpW2FmzWvRw7FTTOKuN6M0zsjGIlNi0O0QrF5WVRA==
+
 timers-browserify@^2.0.4:
   version "2.0.11"
   resolved "https://registry.yarnpkg.com/timers-browserify/-/timers-browserify-2.0.11.tgz#800b1f3eee272e5bc53ee465a04d0e804c31211f"

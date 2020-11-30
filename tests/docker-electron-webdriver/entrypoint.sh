@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd app && node tests/docker-electron-webdriver/end.js && cd ..
+
 export GEOMETRY="$SCREEN_WIDTH""x""$SCREEN_HEIGHT""x""$SCREEN_DEPTH"
 
 function shutdown {
@@ -13,9 +15,11 @@ fi
 
 rm -f /tmp/.X*lock
 
+cd app && node tests/docker-electron-webdriver/yarn.js && cd ..
+
 DISPLAY=$DISPLAY \
   xvfb-run -a --server-args="-screen 0 $GEOMETRY -ac +extension RANDR" \
-    ./node_modules/electron-chromedriver/chromedriver.js \
+    /app/node_modules/electron-chromedriver/chromedriver.js \
       --port=$CHROMEDRIVER_PORT \
       --whitelisted-ips=$CHROMEDRIVER_WHITELISTED_IPS \
       ${CHROMEDRIVER_OPTS} &
@@ -35,5 +39,7 @@ done
 fluxbox -display $DISPLAY &
 
 x11vnc -forever -usepw -shared -rfbport 5900 -display $DISPLAY &
+
+echo READY
 
 wait $NODE_PID

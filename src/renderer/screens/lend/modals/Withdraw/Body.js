@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback } from "react";
 import { compose } from "redux";
 import { connect, useDispatch } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
@@ -158,18 +158,11 @@ const Body = ({
     [account, parentAccount, dispatch],
   );
 
-  const statusError = useMemo(() => status.errors && Object.values(status.errors)[0], [
-    status.errors,
-  ]);
-
-  const error =
-    transactionError || bridgeError || (statusError instanceof Error ? statusError : null);
-
   const errorSteps = [];
 
   if (transactionError) {
     errorSteps.push(2);
-  } else if (error) {
+  } else if (bridgeError) {
     errorSteps.push(0);
   }
 
@@ -188,7 +181,6 @@ const Body = ({
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,
-    error,
     status,
     optimisticOperation,
     openModal,
@@ -198,6 +190,8 @@ const Body = ({
     onTransactionError: handleTransactionError,
     t,
     bridgePending,
+    bridgeError,
+    transactionError,
   };
 
   return (

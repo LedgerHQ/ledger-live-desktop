@@ -22,12 +22,12 @@ const OngoingScams = () => (
       message: <Trans i18nKey="banners.ongoingScams" />,
       Icon: TriangleWarning,
       right: (
-        <Link id="modal-migrate-accounts-button" onClick={() => openURL(urls.banners.ongoingScams)}>
+        <Link id="modal-ongoing-scams-button" onClick={() => openURL(urls.banners.ongoingScams)}>
           <Trans i18nKey="common.learnMore" />
         </Link>
       ),
     }}
-    bannerId={"ongoingScams"}
+    bannerId={"ongoing-scams"}
   />
 );
 export default OngoingScams;
