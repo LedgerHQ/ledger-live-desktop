@@ -14,10 +14,6 @@ jobs:
     outputs:
       comment: ${{ steps.comment.outputs.body }}
     steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.4.0
-        with:
-          access_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
@@ -97,5 +93,4 @@ jobs:
         with:
           message: ${{ needs.test.output.comment }}
           allow-repeats: true
-          repo-token: ${{ secrets.CI_BOT_TOKEN }}
-          repo-token-user-login: ${{ secrets.CI_BOT_USERNAME }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
