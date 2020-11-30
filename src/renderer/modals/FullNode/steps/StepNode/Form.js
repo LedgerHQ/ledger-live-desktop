@@ -12,7 +12,6 @@ import Text from "~/renderer/components/Text";
 import InfoBox from "~/renderer/components/InfoBox";
 import InputPassword from "~/renderer/components/InputPassword";
 import Input from "~/renderer/components/Input";
-import LabelInfoTooltip from "~/renderer/components/LabelInfoTooltip";
 import Label from "~/renderer/components/Label";
 import Switch from "~/renderer/components/Switch";
 import { openURL } from "~/renderer/linking";
