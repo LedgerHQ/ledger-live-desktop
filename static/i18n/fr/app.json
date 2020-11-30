@@ -2598,11 +2598,11 @@
     },
     "SatStackAccessDown": {
       "title": "Noeud inaccessible",
-      "description": "Please verify that SatStack and your node are running. Check the full node setup in the Settings if the problem persists."
+      "description": "Veuillez vérifier que SatStack et votre noeud sont en cours d'exécution. Vérifiez la configuration du noeud dans les paramètres si le problème persiste."
     },
     "SatStackStillSyncing": {
-      "title": "Node sync in progress...",
-      "description": "Please wait while your node is syncing. Sending is not possible since your Bitcoin account balances may be incorrect."
+      "title": "Synchronisation du noeud en cours...",
+      "description": "Veuillez patienter pendant la synchronisation de votre nœud. L'envoi n'est pas possible car le solde de vos comptes Bitcoin est peut-être incorrecte."
     },
     "SwapGenericAPIError": {
       "title": "Le taux de change a expiré",
