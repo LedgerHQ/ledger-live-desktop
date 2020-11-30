@@ -87,7 +87,7 @@ jobs:
       - name: display comment
         if: always()
         id: displaycomment
-        run: echo ${{ steps.comment.outputs.body }}
+        run: echo "${{ steps.comment.outputs.body }}"
   post-comment:
     runs-on: ubuntu-latest
     needs: test
