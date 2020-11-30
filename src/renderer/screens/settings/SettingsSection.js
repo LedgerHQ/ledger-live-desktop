@@ -29,6 +29,7 @@ const RoundIconContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({
 
 export const SettingsSectionBody: ThemedComponent<{}> = styled(Box)`
   border-top: 1px solid ${p => p.theme.colors.palette.divider};
+  border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
   > * + * {
     position: relative;
     &:after {

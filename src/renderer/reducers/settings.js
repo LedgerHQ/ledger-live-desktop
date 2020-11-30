@@ -106,6 +106,7 @@ export type SettingsState = {
   firstTimeLend: boolean,
   swapProviders?: AvailableProvider[],
   showClearCacheBanner: boolean,
+  fullNodeEnabled: boolean,
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -150,6 +151,7 @@ const INITIAL_STATE: SettingsState = {
   firstTimeLend: false,
   swapProviders: [],
   showClearCacheBanner: false,
+  fullNodeEnabled: false,
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;

@@ -256,7 +256,7 @@ class AccountRowItem extends PureComponent<Props, State> {
               <Header account={account} name={mainAccount.name} />
               <Box flex="12%">
                 <div>
-                  <AccountSyncStatusIndicator accountId={mainAccount.id} />
+                  <AccountSyncStatusIndicator accountId={mainAccount.id} account={account} />
                 </div>
               </Box>
               <Balance unit={unit} balance={account.balance} disableRounding={disableRounding} />

@@ -31,6 +31,7 @@ export const setDiscreetMode = (discreetMode: boolean) => saveSettings({ discree
 export const setCarouselVisibility = (carouselVisibility: number) =>
   saveSettings({ carouselVisibility });
 export const setSentryLogs = (sentryLogs: boolean) => saveSettings({ sentryLogs });
+export const setFullNodeEnabled = (fullNodeEnabled: boolean) => saveSettings({ fullNodeEnabled });
 export const setShareAnalytics = (shareAnalytics: boolean) => saveSettings({ shareAnalytics });
 export const setMarketIndicator = (marketIndicator: *) => saveSettings({ marketIndicator });
 export const setAutoLockTimeout = (autoLockTimeout: *) => saveSettings({ autoLockTimeout });

@@ -87,7 +87,7 @@ export default function RenderError({ error, withoutAppData, children }: Props) 
       </Box>
       <Box horizontal flow={2}>
         <ExportLogsButton primary={false} title={t("crash.logs")} withoutAppData={withoutAppData} />
-        <OpenUserDataDirectoryBtn primary={false} title={t("crash.dataFolder")} />
+        <OpenUserDataDirectoryBtn>{t("crash.dataFolder")}</OpenUserDataDirectoryBtn>
         <Unsafe>
           <Button lighterDanger onClick={handleOpenHardResetModal}>
             {t("common.reset")}

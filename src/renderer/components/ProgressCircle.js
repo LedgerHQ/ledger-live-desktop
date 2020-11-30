@@ -12,6 +12,7 @@ const STROKE_WIDTH = 4;
 type Props = {
   progress: number,
   size: number,
+  hideProgress?: boolean,
 };
 
 const animIndeterminate = keyframes`
@@ -53,7 +54,7 @@ const TextContainer = styled.div`
   justify-content: center;
 `;
 
-const ProgressCircle = ({ size, progress }: Props) => {
+const ProgressCircle = ({ size, progress, hideProgress }: Props) => {
   const radius = size / 2;
   const normalizedRadius = radius - STROKE_WIDTH / 2;
   const circumference = normalizedRadius * 2 * Math.PI;
@@ -66,7 +67,7 @@ const ProgressCircle = ({ size, progress }: Props) => {
     <Container size={size}>
       <TextContainer>
         <Text ff="Inter|SemiBold" color="wallet" fontSize={4}>
-          {percent ? `${percent}%` : ""}
+          {percent && !hideProgress ? `${percent}%` : ""}
         </Text>
       </TextContainer>
       <svg height={size} width={size}>
