@@ -246,35 +246,35 @@
     }
   },
   "fullNode": {
-    "status": "Status",
-    "connect": "Connect",
-    "disconnect": "Disconnect",
-    "checkNodeSettings": "Verify node settings",
-    "edit": "Edit",
+    "status": "Statut",
+    "connect": "Connecter",
+    "disconnect": "Déconnecter",
+    "checkNodeSettings": "Vérifier les paramètres du nœud",
+    "edit": "Éditer",
     "modal": {
-      "title": "Connect Bitcoin full node",
-      "disconnectTitle": "Disconnect full node",
+      "title": "Connecter le nœud Bitcoin",
+      "disconnectTitle": "Déconnecter le noeud",
       "steps": {
         "landing": {
-          "title": "Node",
-          "header": "Start your full node. Don’t trust, verify.",
-          "description": "A Bitcoin full node validates all transactions and blocks, allowing you to use Bitcoin in a trustless way while contributing to the Bitcoin network.",
+          "title": "Noeud",
+          "header": "Démarrez votre nœud. Don’t trust, verify.",
+          "description": "Un nœud Bitcoin valide toutes les transactions et tous les blocs, vous permettant d'utiliser Bitcoin de manière fiable tout en contribuant au réseau Bitcoin.",
           "list": {
-            "item1": "Set up Bitcoin Core on a device with sufficient resources.",
-            "item2": "Wait for your node to fully synchronize.",
-            "item3": "Make note of your RPC credentials, IP address and port number."
+            "item1": "Configurez Bitcoin Core sur un appareil avec des ressources suffisantes.",
+            "item2": "Attendez que votre nœud soit complètement synchronisé.",
+            "item3": "Prenez note de vos identifiants RPC, de votre adresse IP et de votre numéro de port."
           },
-          "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
+          "disclaimer": "Exécuter un nœud nécessite un ordinateur disposant de ressources suffisantes et d'une connexion à une bande passante sans restriction de données."
         },
         "node": {
-          "title": "Node",
+          "title": "Noeud",
           "connectionSteps": {
             "notConnected": {
-              "header": "Enter your node parameters",
-              "disclaimer": "Your full node must be fully synchronized before connecting Ledger Live.",
+              "header": "Entrez les paramètres de votre noeud",
+              "disclaimer": "Votre nœud doit être entièrement synchronisé avant de connecter Ledger Live.",
               "fields": {
                 "nodeHost": {
-                  "title": "Host",
+                  "title": "Hôte",
                   "tooltip": "Leave as default if node runs on this computer, or replace the node IP address and port number.",
                   "placeholder": "127.0.0.1:8332"
                 },
