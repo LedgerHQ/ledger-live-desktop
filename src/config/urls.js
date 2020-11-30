@@ -24,7 +24,7 @@ export const urls = {
     facebook: "https://www.facebook.com/Ledger/",
   },
   satstacks: {
-    download: "https://github.com/ledgerhq/satstack/releases",
+    download: "https://github.com/ledgerhq/satstack/releases/latest",
     learnMore: "https://support.ledger.com/hc/en-us/articles/360017551659",
   },
   // Campaigns
