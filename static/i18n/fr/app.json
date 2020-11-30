@@ -275,87 +275,87 @@
               "fields": {
                 "nodeHost": {
                   "title": "Hôte",
-                  "tooltip": "Leave as default if node runs on this computer, or replace the node IP address and port number.",
+                  "tooltip": "Laisser par défaut si le noeud s'exécute sur cet ordinateur, ou remplacer l'adresse IP et le numéro de port du noeud.",
                   "placeholder": "127.0.0.1:8332"
                 },
                 "rpcCredentials": {
-                  "title": "RPC Credentials",
-                  "tooltip": "Enter the RPC username and password of your node, found in the bitcoin.conf file.",
-                  "usernamePlaceholder": "Username",
-                  "passwordPlaceholder": "Password"
+                  "title": "Certificats RPC",
+                  "tooltip": "Entrez le nom d'utilisateur RPC et le mot de passe de votre nœud, trouvés dans le fichier bitcoin.conf.",
+                  "usernamePlaceholder": "Nom d'utilisateur",
+                  "passwordPlaceholder": "Mot de passe"
                 },
                 "tls": {
-                  "title": "Use TLS",
-                  "tooltip": "Enable Transport Layer Security, for example, when using a hosted node solution."
+                  "title": "Utiliser TLS",
+                  "tooltip": "Activer le Transport Layer Security lorsque vous utilisez une solution de nœud hébergé."
                 }
               }
             },
             "connecting": {
-              "header": "Testing node connection",
-              "description": "Please wait while we check if your full node is responding."
+              "header": "Test de la connexion du noeud",
+              "description": "Veuillez patienter pendant que nous vérifions si votre nœud répond."
             },
             "success": {
-              "header": "Full node connection successful",
-              "description": "You can now configure your full node to scan for your accounts on the blockchain."
+              "header": "Connexion au noeud réussie",
+              "description": "Vous pouvez maintenant configurer votre nœud pour rechercher vos comptes sur la blockchain."
             },
             "failure": {
-              "header": "Could not reach full node",
-              "description": "Please ensure your node is fully synchronized and verify its connection settings."
+              "header": "Noeud inaccessible",
+              "description": "Veuillez vous assurer que votre nœud est entièrement synchronisé et vérifier ses paramètres de connexion."
             }
           }
         },
         "device": {
-          "title": "Device",
+          "title": "Appareil",
           "connectionSteps": {
             "pending": {
-              "header": "Getting accounts from device",
-              "description": "Please wait while the accounts to scan are added to the node configuration file."
+              "header": "Récupération des comptes depuis l'appareil",
+              "description": "Veuillez patienter pendant que les comptes à analyser sont ajoutés au fichier de configuration du noeud."
             },
             "success": {
-              "header": "Accounts added to node configuration",
-              "description": "A configuration file was saved to the user data folder. It enables Ledger SatStack to connect to your full node and let it scan for your accounts on the blockchain.",
-              "cta": "View user data"
+              "header": "Comptes ajoutés à la configuration des nœuds",
+              "description": "Un fichier de configuration a été sauvegardé dans le dossier de données de l'utilisateur. Il permet au Ledger SatStack de se connecter à votre nœud complet et de le laisser rechercher vos comptes sur la blockchain.",
+              "cta": "Voir les données utilisateur"
             }
           }
         },
         "accounts": {
-          "title": "Accounts",
-          "existing": "Existing accounts to scan",
-          "toScan": "Accounts to scan",
-          "toScanDescription": "Accounts to scan for each address type",
-          "toScanTooltip": "Increase only if you have 10+ BTC accounts.  Initial scan will be slower. "
+          "title": "Comptes",
+          "existing": "Comptes existants à analyser",
+          "toScan": "Comptes à analyser",
+          "toScanDescription": "Comptes à analyser pour chaque type d'adresse",
+          "toScanTooltip": "Augmentez seulement si vous avez plus de 10 comptes BTC. L'analyse initiale sera plus lente. "
         },
         "satstack": {
           "title": "SatStack",
           "connectionSteps": {
             "notConnected": {
-              "header": "Download and run Ledger SatStack",
-              "description": "Ledger SatStack is a small application enabling Ledger Live to talk to your full node. Please download and run it before you continue.",
-              "disclaimer": "SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
-              "cta": "Download SatStack"
+              "header": "Téléchargez et exécutez Ledger SatStack",
+              "description": "Ledger SatStack est une application qui permet à Ledger Live de parler à votre nœud. Veuillez le télécharger et l'exécuter avant de continuer.",
+              "disclaimer": "SatStack doit être lancé pour Ledger Live afin de se connecter à votre nœud. Envisagez de le configurer pour le lancer automatiquement lorsque votre ordinateur démarre.",
+              "cta": "Télécharger SatStack"
             },
             "satstack-disconnected": {
-              "header": "Could not reach SatStack",
-              "description": "Please verify that SatStack is running on this computer."
+              "header": "Impossible d'atteindre SatStack",
+              "description": "Veuillez vérifier que SatStack fonctionne sur cet ordinateur."
             },
             "node-disconnected": {
-              "header": "Could not reach full node",
-              "description": "Please verify that your node is reachable and that the connection settings you entered are correct."
+              "header": "Noeud inaccessible",
+              "description": "Veuillez vérifier que votre nœud est joignable et que les paramètres de connexion que vous avez saisis sont corrects."
             },
             "invalid-chain": {
               "header": "invalid-chain title",
               "description": "invalid-chain description for tooltip"
             },
             "initializing": {
-              "header": "Loading",
+              "header": "Chargement",
               "description": ""
             },
             "ready": {
-              "header": "Ready",
-              "description": "The full node is fully synced. Your Bitcoin account balances are now correct."
+              "header": "Prêt",
+              "description": "Le nœud est entièrement synchronisé. Le solde de vos comptes Bitcoin est maintenant correcte."
             },
             "syncing": {
-              "header": "Node sync in progress…",
+              "header": "Synchronisation du noeuds en cours…",
               "description": "Recent transactions may not yet be visible, so Bitcoin account balances may be incorrect. If possible, run your node continuously to keep it in sync."
             },
             "scanning": {
