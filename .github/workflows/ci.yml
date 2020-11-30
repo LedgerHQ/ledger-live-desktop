@@ -92,6 +92,6 @@ jobs:
         if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && needs.test.result != 'cancelled'
         uses: mshick/add-pr-comment@5cd99bf9c186219af43341076f1fe9c09e5a9934
         with:
-          message: ${{ needs.test.output.comment }}
+          message: ${{ needs.test.outputs.comment }}
           allow-repeats: true
           repo-token: ${{ secrets.GITHUB_TOKEN }}
