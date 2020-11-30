@@ -38,14 +38,14 @@ jobs:
       - name: Read lint output
         id: lint
         if: always()
-        uses: juliangruber/read-file-action@v1
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: ./lint.txt
       - name: check build
         run: sudo yarn build
       - name: start electron webdriver
         run: yarn start-electron-webdriver -d
-      - uses: nev7n/wait_for_response@v1
+      - uses: nev7n/wait_for_response@7fef3c1a6e8939d0b09062f14fec50d3c5d15fa1
         with:
           url: 'http://localhost:9515/'
           responseCode: 404
@@ -56,7 +56,7 @@ jobs:
       - name: Read test output
         id: spectron
         if: always()
-        uses: juliangruber/read-file-action@v1
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: ./output.txt
       - name: upload diffs to imgur
