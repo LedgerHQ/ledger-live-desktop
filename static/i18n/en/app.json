@@ -417,7 +417,7 @@
     "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
   },
   "exchange": {
-    "title": "Buy crypto",
+    "title": "Buy and sell crypto",
     "reset": "Reset flow",
     "banner": {
       "title": "Buy crypto via our partner",
