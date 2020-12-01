@@ -36,17 +36,22 @@ export function StepFinishFooter({ onGoStep1, onCloseModal }: StepProps) {
   const { t } = useTranslation();
   return (
     <>
-      <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
-        <Button id={"add-accounts-finish-close-button"} onClick={onCloseModal}>
-          {t("common.close")}
-        </Button>
+      <Box horizontal alignItems="center" justifyContent="space-between" grow>
         <Button
           event="Page AddAccounts Step 4 AddMore"
           id={"add-accounts-finish-add-more-button"}
-          primary
+          outlineGrey
           onClick={onGoStep1}
         >
           {t("addAccounts.cta.addMore")}
+        </Button>
+        <Button
+          event="Page AddAccounts Step 4 AddMore"
+          id={"add-accounts-finish-close-button"}
+          primary
+          onClick={onCloseModal}
+        >
+          {t("common.done")}
         </Button>
       </Box>
     </>
