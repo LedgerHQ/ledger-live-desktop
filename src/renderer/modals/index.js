@@ -25,6 +25,8 @@ import MODAL_HELP from "./Help";
 import MODAL_SWAP from "./Swap";
 import MODAL_SWAP_OPERATION_DETAILS from "./SwapOperationDetails";
 
+import MODAL_FULL_NODE from "./FullNode";
+
 import MODAL_CLAIM_REWARDS from "./ClaimRewards";
 import MODAL_FREEZE from "./Freeze";
 import MODAL_UNFREEZE from "./Unfreeze";
@@ -101,6 +103,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_LEND_EMPTY_ACCOUNT_DEPOSIT,
   MODAL_SWAP,
   MODAL_SWAP_OPERATION_DETAILS,
+  MODAL_FULL_NODE,
 };
 
 export default modals;

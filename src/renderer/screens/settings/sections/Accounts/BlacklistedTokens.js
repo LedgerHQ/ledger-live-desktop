@@ -59,26 +59,26 @@ export default function BlacklistedTokens() {
   }, [setSectionVisible]);
 
   return (
-    <Section mt={20} style={{ flowDirection: "column" }}>
+    <Section style={{ flowDirection: "column" }}>
       <Track onUpdate event="BlacklistedTokens dropdown" opened={sectionVisible} />
       <Header
         icon={<IconBan />}
         title={t("settings.accounts.tokenBlacklist.title")}
         desc={t("settings.accounts.tokenBlacklist.desc")}
         renderRight={
-          <Box horizontal flex alignItems="center">
-            {blacklistedTokenIds.length && (
+          blacklistedTokenIds.length ? (
+            <Box horizontal flex alignItems="center">
               <Box ff="Inter" fontSize={3} mr={2}>
-                {t("settings.accounts.tokenBlacklist.count", { val: blacklistedTokenIds.length })}
+                {t("settings.accounts.tokenBlacklist.count", { count: blacklistedTokenIds.length })}
               </Box>
-            )}
-            <Show visible={sectionVisible}>
-              <IconAngleDown size={24} />
-            </Show>
-          </Box>
+              <Show visible={sectionVisible}>
+                <IconAngleDown size={24} />
+              </Show>
+            </Box>
+          ) : null
         }
         onClick={toggleCurrencySection}
-        style={{ cursor: "pointer" }}
+        style={blacklistedTokenIds.length ? { cursor: "pointer" } : undefined}
       />
 
       {sectionVisible && (

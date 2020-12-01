@@ -12,7 +12,7 @@ import { remote, webFrame, ipcRenderer } from "electron";
 import { render } from "react-dom";
 import moment from "moment";
 import _ from "lodash";
-import { reload, getKey } from "~/renderer/storage";
+import { reload, getKey, loadLSS } from "~/renderer/storage";
 
 import "~/renderer/styles/global";
 import "~/renderer/live-common-setup";
@@ -90,6 +90,8 @@ async function init() {
   const language = languageSelector(state);
   moment.locale(language);
   i18n.changeLanguage(language);
+
+  await loadLSS(); // Set env handled inside
 
   const hideEmptyTokenAccounts = hideEmptyTokenAccountsSelector(state);
   setEnvOnAllThreads("HIDE_EMPTY_TOKEN_ACCOUNTS", hideEmptyTokenAccounts);

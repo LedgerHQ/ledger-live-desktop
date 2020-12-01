@@ -23,6 +23,10 @@ export const urls = {
     reddit: "https://www.reddit.com/r/ledgerwallet/",
     facebook: "https://www.facebook.com/Ledger/",
   },
+  satstacks: {
+    download: "https://github.com/ledgerhq/satstack/releases/latest",
+    learnMore: "https://support.ledger.com/hc/en-us/articles/360017551659",
+  },
   // Campaigns
   promoNanoX:
     "https://www.ledger.com/pages/ledger-nano-x#utm_source=Ledger%20Live%20Desktop%20App&utm_medium=Ledger%20Live&utm_campaign=Ledger%20Live%20Desktop%20-%20Banner%20LNX",

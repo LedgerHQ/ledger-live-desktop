@@ -70,3 +70,6 @@ export const toggleStarAction = (id: string, parentId: ?string) => {
 };
 
 export const cleanAccountsCache = () => ({ type: "DB:CLEAN_ACCOUNTS_CACHE" });
+export const cleanFullNodeDisconnect = () => ({
+  type: "DB:CLEAN_FULLNODE_DISCONNECT",
+});

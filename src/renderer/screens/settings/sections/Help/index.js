@@ -52,7 +52,7 @@ const SectionHelp = () => {
           title={t("settings.openUserDataDirectory.title")}
           desc={t("settings.openUserDataDirectory.desc")}
         >
-          <OpenUserDataDirectoryBtn />
+          <OpenUserDataDirectoryBtn primary small />
         </Row>
         <Row
           title={t("settings.profile.hardResetTitle")}

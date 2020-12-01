@@ -9,17 +9,16 @@ on:
       - master
 
 jobs:
-  type-checking:
+  test:
     runs-on: ubuntu-latest
+    outputs:
+      comment: ${{ steps.comment.outputs.body }}
     steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.4.0
-        with:
-          access_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
+          persist-credentials: false
       - uses: actions/setup-node@main
         with:
           node-version: 12.x
@@ -39,14 +38,14 @@ jobs:
       - name: Read lint output
         id: lint
         if: always()
-        uses: juliangruber/read-file-action@v1
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: ./lint.txt
       - name: check build
         run: sudo yarn build
       - name: start electron webdriver
         run: yarn start-electron-webdriver -d
-      - uses: nev7n/wait_for_response@v1
+      - uses: nev7n/wait_for_response@7fef3c1a6e8939d0b09062f14fec50d3c5d15fa1
         with:
           url: 'http://localhost:9515/'
           responseCode: 404
@@ -57,7 +56,7 @@ jobs:
       - name: Read test output
         id: spectron
         if: always()
-        uses: juliangruber/read-file-action@v1
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: ./output.txt
       - name: upload diffs to imgur
@@ -83,40 +82,22 @@ jobs:
           images: ${{ steps.imgur.outputs.images }}
           fullrepo: ${{ github.repository }}
           runId: ${{ github.run_id }}
+          testoutput: ${{ steps.spectron.outputs.content }}
+          lintoutput: ${{ steps.lint.outputs.content }}
+      - name: display comment
+        if: always()
+        id: displaycomment
+        env:
+          BODY: ${{ steps.comment.outputs.body }}
+        run: echo "$BODY"
+  post-comment:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
       - name: post comment
-        if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && !cancelled()
-        uses: mshick/add-pr-comment@v1
+        if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && needs.test.result != 'cancelled'
+        uses: mshick/add-pr-comment@5cd99bf9c186219af43341076f1fe9c09e5a9934
         with:
-          message: |
-            ## Lint outputs
-            <details>
-            <summary>View</summary>
-            <p>
-            
-            ${{ steps.lint.outputs.content }}
-            
-            </p>
-            </details>
-
-            ## Tests outputs
-            <details>
-            <summary>View</summary>
-            <p>
-            
-            ${{ steps.spectron.outputs.content }}
-            
-            </p>
-            </details>
-
-            ## Diff output
-            <details>
-            <summary>View</summary>
-            <p>
-            
-            ${{ steps.comment.outputs.body }}
-            
-            </p>
-            </details>
+          message: ${{ needs.test.outputs.comment }}
           allow-repeats: true
-          repo-token: ${{ secrets.CI_BOT_TOKEN }}
-          repo-token-user-login: ${{ secrets.CI_BOT_USERNAME }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}

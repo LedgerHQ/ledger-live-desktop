@@ -4,7 +4,13 @@ import { ipcRenderer } from "electron";
 import accountModel from "~/helpers/accountModel";
 import memoize from "lodash/memoize";
 import debounce from "lodash/debounce";
-
+import { setEnvOnAllThreads } from "~/helpers/env";
+import {
+  editSatStackConfig,
+  stringifySatStackConfig,
+  parseSatStackConfig,
+} from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
+import type { SatStackConfig } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
 /*
   This file serve as an interface for the RPC binding to the main thread that now manage the config file.
   Because only serialized json can be sent between processes, the transform system now live here.
@@ -74,3 +80,31 @@ export const resetAll = () => ipcRenderer.invoke("resetAll");
 export const reload = () => ipcRenderer.invoke("reload");
 
 export const cleanCache = () => ipcRenderer.invoke("cleanCache");
+
+export const saveLSS = async (lssConfig: SatStackConfig) => {
+  const configStub = {
+    node: { host: "", username: "", password: "" },
+    accounts: [],
+  };
+  const maybeExistingConfig = (await loadLSS()) || configStub;
+  const updated = editSatStackConfig(maybeExistingConfig, lssConfig);
+  await ipcRenderer.invoke("generate-lss-config", stringifySatStackConfig(updated));
+  setEnvOnAllThreads("SATSTACK", true);
+};
+
+export const removeLSS = async () => {
+  await ipcRenderer.invoke("delete-lss-config");
+  setEnvOnAllThreads("SATSTACK", false);
+};
+
+export const loadLSS = async (): Promise<?SatStackConfig> => {
+  try {
+    const satStackConfigRaw = await ipcRenderer.invoke("load-lss-config");
+    const config = parseSatStackConfig(satStackConfigRaw);
+    setEnvOnAllThreads("SATSTACK", true);
+    return config;
+  } catch (e) {
+    // For instance file no longer exists
+    setEnvOnAllThreads("SATSTACK", false);
+  }
+};
