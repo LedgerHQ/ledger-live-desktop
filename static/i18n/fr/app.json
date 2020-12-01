@@ -275,8 +275,7 @@
               "fields": {
                 "nodeHost": {
                   "title": "Hôte",
-                  "tooltip": "Laisser par défaut si le noeud s'exécute sur cet ordinateur, ou remplacer l'adresse IP et le numéro de port du noeud.",
-                  "placeholder": "127.0.0.1:8332"
+                  "tooltip": "Laisser par défaut si le noeud s'exécute sur cet ordinateur, ou remplacer l'adresse IP et le numéro de port du noeud."
                 },
                 "rpcCredentials": {
                   "title": "Certificats RPC",
@@ -2002,7 +2001,7 @@
       },
       "fullNode": {
         "title": "Connecter le nœud Bitcoin",
-        "desc": "Configurez votre nœud Bitcoin pour synchroniser et envoyer des transactions passer par les explorers de Ledger."
+        "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
       }
     }
   },
