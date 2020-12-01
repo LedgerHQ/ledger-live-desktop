@@ -69,7 +69,6 @@ export default function DashboardPage() {
     <>
       <TopBannerContainer>
         <UpdateBanner />
-        {/* <OngoingScams /> */}
         <MigrationBanner />
         <ClearCacheBanner />
         <CurrencyDownStatusAlert currencies={currencies} />
