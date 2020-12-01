@@ -1,4 +1,9 @@
 {
+  "calendar": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "yesterday": "Yesterday"
+  },
   "common": {
     "labelYes": "Igen",
     "labelNo": "Nem",
@@ -994,7 +999,7 @@
   "DeviceAction": {
     "allowAppPermission": "Nyisd meg a(z) {{wording}} alkalmazást az eszközödön",
     "allowAppPermissionSubtitleToken": "a {{token}} tokenjeid kezeléséhez",
-    "allowManagerPermission": "{{wording}} az eszközödön",
+    "allowManagerPermission": "Allow {{wording}} on your device",
     "loading": "Betöltés...",
     "connectAndUnlockDevice": "Csatlakoztasd, és old fel az eszközöd",
     "unlockDevice": "Old fel az eszközöd",
