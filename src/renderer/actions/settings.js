@@ -1,14 +1,15 @@
 // @flow
-
+import { useCallback } from "react";
 import type { Dispatch } from "redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/types/portfolio";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
-
 import { setEnvOnAllThreads } from "~/helpers/env";
 import type { SettingsState as Settings } from "~/renderer/reducers/settings";
-import { refreshAccountsOrdering } from "~/renderer/actions/general";
+import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
+import { hideEmptyTokenAccountsSelector } from "~/renderer/reducers/settings";
 import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
 
 export type SaveSettings = ($Shape<Settings>) => { type: string, payload: $Shape<Settings> };
@@ -30,6 +31,7 @@ export const setDiscreetMode = (discreetMode: boolean) => saveSettings({ discree
 export const setCarouselVisibility = (carouselVisibility: number) =>
   saveSettings({ carouselVisibility });
 export const setSentryLogs = (sentryLogs: boolean) => saveSettings({ sentryLogs });
+export const setFullNodeEnabled = (fullNodeEnabled: boolean) => saveSettings({ fullNodeEnabled });
 export const setShareAnalytics = (shareAnalytics: boolean) => saveSettings({ shareAnalytics });
 export const setMarketIndicator = (marketIndicator: *) => saveSettings({ marketIndicator });
 export const setAutoLockTimeout = (autoLockTimeout: *) => saveSettings({ autoLockTimeout });
@@ -44,16 +46,26 @@ export const setCounterValue = (counterValue: string) =>
 export const setLanguage = (language: ?string) => saveSettings({ language });
 export const setTheme = (theme: ?string) => saveSettings({ theme });
 export const setRegion = (region: ?string) => saveSettings({ region });
+
+export function useHideEmptyTokenAccounts() {
+  const dispatch = useDispatch();
+  const value = useSelector(hideEmptyTokenAccountsSelector);
+  const refreshAccountsOrdering = useRefreshAccountsOrdering();
+
+  const setter = useCallback(
+    (hideEmptyTokenAccounts: boolean) => {
+      if (setEnvOnAllThreads("HIDE_EMPTY_TOKEN_ACCOUNTS", hideEmptyTokenAccounts)) {
+        dispatch(saveSettings({ hideEmptyTokenAccounts }));
+        refreshAccountsOrdering();
+      }
+    },
+    [dispatch, refreshAccountsOrdering],
+  );
+  return [value, setter];
+}
+
 export const setShowClearCacheBanner = (showClearCacheBanner: boolean) =>
   saveSettings({ showClearCacheBanner });
-export const setHideEmptyTokenAccounts = (hideEmptyTokenAccounts: boolean) => async (
-  dispatch: *,
-) => {
-  if (setEnvOnAllThreads("HIDE_EMPTY_TOKEN_ACCOUNTS", hideEmptyTokenAccounts)) {
-    dispatch(saveSettings({ hideEmptyTokenAccounts }));
-    dispatch(refreshAccountsOrdering());
-  }
-};
 export const setSidebarCollapsed = (sidebarCollapsed: boolean) =>
   saveSettings({ sidebarCollapsed });
 

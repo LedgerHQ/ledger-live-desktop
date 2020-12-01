@@ -18,7 +18,7 @@ const CryptoIconWrapper: ThemedComponent<{
 }> = styled(Box).attrs(p => ({
   alignItems: "center",
   justifyContent: "center",
-  bg: rgba(p.cryptoColor, 0.1),
+  bg: rgba(p.cryptoColor, 0.15),
   color: p.cryptoColor,
 }))`
   border-radius: ${p => p.borderRadius || "50%"};
@@ -89,18 +89,18 @@ export function CurrencyCircleIcon({
 
 function CurrencyBadge({ currency }: { currency: CryptoCurrency | TokenCurrency }) {
   return (
-    <Box horizontal flow={3}>
+    <Box horizontal alignItems={"center"} flow={3}>
       <CurrencyCircleIcon size={40} currency={currency} />
-      <Box>
+      <Box ml={2}>
         <Box
-          ff="Inter|ExtraBold"
-          color="palette.text.shade100"
+          ff="Inter|SemiBold"
+          color="palette.text.shade50"
           fontSize={2}
-          style={{ letterSpacing: 2 }}
+          style={{ letterSpacing: 1 }}
         >
           {currency.ticker}
         </Box>
-        <Box ff="Inter" color="palette.text.shade100" fontSize={5} id="currency-badge">
+        <Box ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4} id="currency-badge">
           {currency.name}
         </Box>
       </Box>

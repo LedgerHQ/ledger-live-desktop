@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback } from "react";
 import { compose } from "redux";
 import { connect, useDispatch } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
@@ -161,12 +161,13 @@ const Body = ({
     [account, parentAccount, dispatch],
   );
 
-  const statusError = useMemo(() => status.errors && Object.values(status.errors)[0], [
-    status.errors,
-  ]);
+  const errorSteps = [];
 
-  const error =
-    transactionError || bridgeError || (statusError instanceof Error ? statusError : null);
+  if (transactionError) {
+    errorSteps.push(2);
+  } else if (bridgeError) {
+    errorSteps.push(0);
+  }
 
   const stepperProps = {
     title: t("lend.enable.title"),
@@ -177,13 +178,11 @@ const Body = ({
     signed,
     stepId,
     steps,
-    errorSteps: [],
+    errorSteps,
     disabledSteps: [],
-    hideBreadcrumb: !!error,
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,
-    error,
     status,
     optimisticOperation,
     openModal,
@@ -193,6 +192,9 @@ const Body = ({
     onTransactionError: handleTransactionError,
     t,
     bridgePending,
+    hideBreadcrumb: !!transactionError,
+    bridgeError,
+    transactionError,
   };
 
   return (

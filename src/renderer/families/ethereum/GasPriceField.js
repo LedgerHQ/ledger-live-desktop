@@ -3,7 +3,8 @@
 import React, { useCallback } from "react";
 import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
-import type { Account, Transaction, TransactionStatus } from "@ledgerhq/live-common/lib/types";
+import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import FeeSliderField from "~/renderer/components/FeeSliderField";
 import { inferDynamicRange } from "@ledgerhq/live-common/lib/range";
@@ -13,13 +14,12 @@ type Props = {
   transaction: Transaction,
   status: TransactionStatus,
   onChange: Transaction => void,
-  displayError?: boolean,
 };
 
 const fallbackGasPrice = inferDynamicRange(BigNumber(10e9));
 let lastNetworkGasPrice; // local cache of last value to prevent extra blinks
 
-const FeesField = ({ onChange, account, transaction, status, displayError = true }: Props) => {
+const FeesField = ({ onChange, account, transaction, status }: Props) => {
   invariant(transaction.family === "ethereum", "FeeField: ethereum family expected");
 
   const bridge = getAccountBridge(account);
@@ -46,7 +46,7 @@ const FeesField = ({ onChange, account, transaction, status, displayError = true
       value={gasPrice}
       onChange={onGasPriceChange}
       unit={units.length > 1 ? units[1] : units[0]}
-      error={displayError ? status.errors.gasPrice : null}
+      error={status.errors.gasPrice}
     />
   );
 };

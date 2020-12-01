@@ -1,17 +1,49 @@
 // @flow
-
 import React, { useCallback } from "react";
 import styled, { keyframes } from "styled-components";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import { useSelector, useDispatch } from "react-redux";
 import { toggleStarAction } from "~/renderer/actions/accounts";
 import { isStarredAccountSelector } from "~/renderer/reducers/accounts";
 import { rgba } from "~/renderer/styles/helpers";
 import starAnim from "~/renderer/images/starAnim.png";
 import starAnim2 from "~/renderer/images/starAnim2.png";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { refreshAccountsOrdering } from "~/renderer/actions/general";
+import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
 import { Transition } from "react-transition-group";
+
+type Props = {
+  accountId: string,
+  parentId?: string,
+  yellow?: boolean,
+};
+
+export default function Star({ accountId, parentId, yellow }: Props) {
+  const isAccountStarred = useSelector(state => isStarredAccountSelector(state, { accountId }));
+  const dispatch = useDispatch();
+  const refreshAccountsOrdering = useRefreshAccountsOrdering();
+
+  const toggleStar = useCallback(
+    e => {
+      e.stopPropagation();
+      dispatch(toggleStarAction(accountId, parentId));
+      refreshAccountsOrdering();
+    },
+    [accountId, refreshAccountsOrdering, parentId, dispatch],
+  );
+  const MaybeButtonWrapper = yellow ? ButtonWrapper : FloatingWrapper;
+
+  return (
+    <MaybeButtonWrapper filled={isAccountStarred}>
+      <StarWrapper onClick={toggleStar}>
+        <Transition in={isAccountStarred} timeout={isAccountStarred ? startBurstTiming : 0}>
+          {className => (
+            <StarIcon yellow={yellow} filled={isAccountStarred} className={className} />
+          )}
+        </Transition>
+      </StarWrapper>
+    </MaybeButtonWrapper>
+  );
+}
 
 const starBust = keyframes`
   from {
@@ -71,62 +103,3 @@ const StarIcon: ThemedComponent<{
       p.theme.colors.palette.type === "dark" ? "brightness(1.3)" : "brightness(0.8)"};
   }
 `;
-
-const mapStateToProps = createStructuredSelector({
-  isAccountStarred: isStarredAccountSelector,
-});
-
-const mapDispatchToProps = {
-  toggleStarAction,
-  refreshAccountsOrdering,
-};
-
-type OwnProps = {
-  accountId: string,
-  parentId?: string,
-  yellow?: boolean,
-};
-
-type Props = {
-  ...OwnProps,
-  isAccountStarred: boolean,
-  toggleStarAction: Function,
-  refreshAccountsOrdering: Function,
-};
-
-const Star = ({
-  accountId,
-  parentId,
-  isAccountStarred,
-  toggleStarAction,
-  yellow,
-  refreshAccountsOrdering,
-}: Props) => {
-  const toggleStar = useCallback(
-    e => {
-      e.stopPropagation();
-      toggleStarAction(accountId, parentId);
-      refreshAccountsOrdering();
-    },
-    [toggleStarAction, accountId, refreshAccountsOrdering, parentId],
-  );
-  const MaybeButtonWrapper = yellow ? ButtonWrapper : FloatingWrapper;
-
-  return (
-    <MaybeButtonWrapper filled={isAccountStarred}>
-      <StarWrapper onClick={toggleStar}>
-        <Transition in={isAccountStarred} timeout={isAccountStarred ? startBurstTiming : 0}>
-          {className => (
-            <StarIcon yellow={yellow} filled={isAccountStarred} className={className} />
-          )}
-        </Transition>
-      </StarWrapper>
-    </MaybeButtonWrapper>
-  );
-};
-
-const ConnectedStar: React$ComponentType<OwnProps> = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Star);
-export default ConnectedStar;

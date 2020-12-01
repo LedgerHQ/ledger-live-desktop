@@ -55,10 +55,6 @@ export const currencySettingsDefaults = (c: Currency): ConfirmationDefaults => {
 const bitcoin = getCryptoCurrencyById("bitcoin");
 const ethereum = getCryptoCurrencyById("ethereum");
 export const possibleIntermediaries = [bitcoin, ethereum];
-export const intermediaryCurrency = (from: Currency, _to: Currency) => {
-  if (from === ethereum || (from && from.type === "TokenCurrency")) return ethereum;
-  return bitcoin;
-};
 
 export const timeRangeDaysByKey = {
   week: 7,
@@ -110,6 +106,7 @@ export type SettingsState = {
   firstTimeLend: boolean,
   swapProviders?: AvailableProvider[],
   showClearCacheBanner: boolean,
+  fullNodeEnabled: boolean,
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -154,17 +151,21 @@ const INITIAL_STATE: SettingsState = {
   firstTimeLend: false,
   swapProviders: [],
   showClearCacheBanner: false,
+  fullNodeEnabled: false,
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
 
-export const supportedCountervalues = [...listSupportedFiats(), ...possibleIntermediaries].map<any>(
-  currency => ({
+export const supportedCountervalues: { value: string, label: string, currency: Currency }[] = [
+  ...listSupportedFiats(),
+  ...possibleIntermediaries,
+]
+  .map(currency => ({
     value: currency.ticker,
     label: `${currency.name} - ${currency.ticker}`,
     currency,
-  }),
-);
+  }))
+  .sort((a, b) => (a.currency.name < b.currency.name ? -1 : 1));
 
 const handlers: Object = {
   SETTINGS_SET_PAIRS: (

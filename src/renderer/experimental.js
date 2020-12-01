@@ -62,14 +62,6 @@ export const experimentalFeatures: Feature[] = [
       "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.",
   },
   {
-    type: "toggle",
-    name: "LEDGER_COUNTERVALUES_API",
-    valueOn: "http://countervalue-service.dev.aws.ledger.fr",
-    valueOff: "https://countervalues.api.live.ledger.com",
-    title: "Experimental Countervalues API",
-    description: "Changing this value may break the countervalues displayed for your accounts.",
-  },
-  {
     type: "integer",
     name: "KEYCHAIN_OBSERVABLE_RANGE",
     title: "Custom gap limit",
@@ -86,13 +78,6 @@ export const experimentalFeatures: Feature[] = [
     description:
       "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device.",
     minValue: 1,
-  },
-  {
-    type: "toggle",
-    name: "EXPERIMENTAL_QUIT_APP",
-    title: "Quit apps automatically",
-    description:
-      "Enabling this setting will automatically quit an application on your device when another one needs to be opened. This will make switching between apps more seamless.",
   },
 ];
 

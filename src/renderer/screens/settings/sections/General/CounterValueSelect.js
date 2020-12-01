@@ -7,7 +7,7 @@ import { counterValueCurrencySelector, supportedCountervalues } from "~/renderer
 import Select from "~/renderer/components/Select";
 import Track from "~/renderer/analytics/Track";
 
-const CounterValueSelect = () => {
+const CounterValueSelect = React.memo<{}>(function CounterValueSelect() {
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const dispatch = useDispatch();
 
@@ -37,6 +37,6 @@ const CounterValueSelect = () => {
       />
     </>
   );
-};
+});
 
 export default CounterValueSelect;

@@ -1,23 +1,83 @@
 // @flow
-
 import { BigNumber } from "bignumber.js";
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
+import React, { useCallback } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import type { Currency, AccountLike } from "@ledgerhq/live-common/lib/types";
-
+import type { AccountLike } from "@ledgerhq/live-common/lib/types";
+import { useSendAmount } from "@ledgerhq/live-common/lib/countervalues/react";
 import Box from "~/renderer/components/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
-import CounterValues from "~/renderer/countervalues";
 import IconTransfer from "~/renderer/icons/Transfer";
-import {
-  counterValueCurrencySelector,
-  exchangeSettingsForPairSelector,
-  intermediaryCurrency,
-} from "~/renderer/reducers/settings";
+import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 
-import type { State } from "~/renderer/reducers";
+type Props = {
+  autoFocus?: boolean,
+  // crypto value (always the one which is returned)
+  value: BigNumber,
+  disabled?: boolean,
+  validTransactionError?: ?Error,
+  validTransactionWarning?: ?Error,
+  // change handler
+  onChange: BigNumber => void,
+  // used to determine the crypto input unit
+  account: AccountLike,
+};
+
+export default function RequestAmount({
+  onChange,
+  autoFocus,
+  disabled,
+  value: cryptoAmount,
+  account,
+  validTransactionError,
+  validTransactionWarning,
+}: Props) {
+  const fiatCurrency = useSelector(counterValueCurrencySelector);
+  const { cryptoUnit, fiatAmount, fiatUnit, calculateCryptoAmount } = useSendAmount({
+    account,
+    fiatCurrency,
+    cryptoAmount,
+  });
+
+  const onChangeFiatAmount = useCallback(
+    (fiatAmount: BigNumber) => {
+      const amount = calculateCryptoAmount(fiatAmount);
+      onChange(amount);
+    },
+    [onChange, calculateCryptoAmount],
+  );
+
+  return (
+    <Box horizontal flow={5} alignItems="center">
+      <Box horizontal grow shrink>
+        <InputCurrency
+          autoFocus={autoFocus}
+          disabled={disabled}
+          error={validTransactionError}
+          warning={validTransactionWarning}
+          containerProps={{ grow: true }}
+          defaultUnit={cryptoUnit}
+          value={cryptoAmount}
+          onChange={onChange}
+          renderRight={<InputRight>{cryptoUnit.code}</InputRight>}
+        />
+        <InputCenter>
+          <IconTransfer />
+        </InputCenter>
+        <InputCurrency
+          disabled={disabled}
+          containerProps={{ grow: true }}
+          defaultUnit={fiatUnit}
+          value={fiatAmount}
+          onChange={onChangeFiatAmount}
+          renderRight={<InputRight>{fiatUnit.code}</InputRight>}
+          showAllDigits
+          subMagnitude={3}
+        />
+      </Box>
+    </Box>
+  );
+}
 
 const InputRight = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
@@ -36,150 +96,3 @@ const InputCenter = styled(Box).attrs(() => ({
   margin-left: 19px;
   margin-right: 19px;
 `;
-
-type OwnProps = {
-  autoFocus?: boolean,
-  // left value (always the one which is returned)
-  value: BigNumber,
-
-  disabled?: boolean,
-
-  validTransactionError?: ?Error,
-  validTransactionWarning?: ?Error,
-
-  // max left value
-  max?: BigNumber,
-
-  // change handler
-  onChange: BigNumber => void,
-
-  // used to determine the left input unit
-  account: AccountLike,
-};
-
-type Props = OwnProps & {
-  // used to determine the right input unit
-  // retrieved via selector (take the chosen countervalue unit)
-  rightCurrency: Currency,
-
-  // used to calculate the opposite field value (right & left)
-  getCounterValue: BigNumber => ?BigNumber,
-  getReverseCounterValue: BigNumber => ?BigNumber,
-};
-
-const mapStateToProps = (state: State, props: OwnProps) => {
-  const { account } = props;
-  const counterValueCurrency = counterValueCurrencySelector(state);
-  const currency = getAccountCurrency(account);
-  const intermediary = intermediaryCurrency(currency, counterValueCurrency);
-  const fromExchange = exchangeSettingsForPairSelector(state, { from: currency, to: intermediary });
-  const toExchange = exchangeSettingsForPairSelector(state, {
-    from: intermediary,
-    to: counterValueCurrency,
-  });
-
-  // FIXME this make the component not working with "Pure". is there a way we can calculate here whatever needs to be?
-  // especially the value comes from props!
-  const getCounterValue = value =>
-    CounterValues.calculateWithIntermediarySelector(state, {
-      from: currency,
-      fromExchange,
-      intermediary,
-      toExchange,
-      to: counterValueCurrency,
-      value,
-      disableRounding: true,
-    });
-  const getReverseCounterValue = value =>
-    CounterValues.reverseWithIntermediarySelector(state, {
-      from: currency,
-      fromExchange,
-      intermediary,
-      toExchange,
-      to: counterValueCurrency,
-      value,
-    });
-
-  return {
-    rightCurrency: counterValueCurrency,
-    getCounterValue,
-    getReverseCounterValue,
-  };
-};
-
-export class RequestAmount extends PureComponent<Props> {
-  static defaultProps = {
-    max: BigNumber(Infinity),
-    validTransaction: true,
-  };
-
-  handleClickMax = () => {
-    const { max, onChange } = this.props;
-    if (isFinite(max)) {
-      onChange(max);
-    }
-  };
-
-  handleChangeAmount = (changedField: string) => (val: BigNumber) => {
-    const { getReverseCounterValue, max, onChange } = this.props;
-    if (changedField === "left") {
-      onChange(val.gt(max) ? max : val);
-    } else if (changedField === "right") {
-      const leftVal = getReverseCounterValue(val) || BigNumber(0);
-      onChange(leftVal.gt(max) ? max : leftVal);
-    }
-  };
-
-  onLeftChange = this.handleChangeAmount("left");
-  onRightChange = this.handleChangeAmount("right");
-
-  render() {
-    const {
-      autoFocus,
-      disabled,
-      value,
-      account,
-      rightCurrency,
-      getCounterValue,
-      validTransactionError,
-      validTransactionWarning,
-    } = this.props;
-    const right = getCounterValue(value) || BigNumber(0);
-    const rightUnit = rightCurrency.units[0];
-    const defaultUnit = getAccountUnit(account);
-    return (
-      <Box horizontal flow={5} alignItems="center">
-        <Box horizontal grow shrink>
-          <InputCurrency
-            autoFocus={autoFocus}
-            disabled={disabled}
-            error={validTransactionError}
-            warning={validTransactionWarning}
-            containerProps={{ grow: true }}
-            defaultUnit={defaultUnit}
-            value={value}
-            onChange={this.onLeftChange}
-            renderRight={<InputRight>{defaultUnit.code}</InputRight>}
-          />
-          <InputCenter>
-            <IconTransfer />
-          </InputCenter>
-          <InputCurrency
-            disabled={disabled}
-            containerProps={{ grow: true }}
-            defaultUnit={rightUnit}
-            value={right}
-            onChange={this.onRightChange}
-            renderRight={<InputRight>{rightUnit.code}</InputRight>}
-            showAllDigits
-            subMagnitude={3}
-          />
-        </Box>
-      </Box>
-    );
-  }
-}
-
-const m: React$ComponentType<OwnProps> = connect(mapStateToProps)(RequestAmount);
-
-export default m;

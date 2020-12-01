@@ -96,8 +96,8 @@ const AccountPage = ({
     return <Redirect to="/accounts" />;
   }
 
-  const ctoken = account.type === "TokenAccount" && findCompoundToken(account.token);
-  const isCompoundEnabled = ctoken && isCompoundTokenSupported(ctoken);
+  const ctoken = account.type === "TokenAccount" ? findCompoundToken(account.token) : null;
+  const isCompoundEnabled = ctoken ? isCompoundTokenSupported(ctoken) : false;
 
   const currency = getAccountCurrency(account);
   const color = getCurrencyColor(currency, bgColor);
@@ -124,7 +124,6 @@ const AccountPage = ({
               account={account}
               parentAccount={parentAccount}
               chartColor={color}
-              chartId={`account-chart-${account.id}`}
               counterValue={counterValue}
               range={selectedTimeRange}
               countervalueFirst={countervalueFirst}

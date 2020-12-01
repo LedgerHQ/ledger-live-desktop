@@ -4,18 +4,15 @@ import Box from "~/renderer/components/Box";
 import { accountsSelector, currenciesSelector } from "~/renderer/reducers/accounts";
 import BalanceSummary from "./GlobalSummary";
 import { colors } from "~/renderer/styles/theme";
-
 import {
   counterValueCurrencySelector,
   hasInstalledAppsSelector,
   selectedTimeRangeSelector,
 } from "~/renderer/reducers/settings";
-
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import RefreshAccountsOrdering from "~/renderer/components/RefreshAccountsOrdering";
 import OperationsList from "~/renderer/components/OperationsList";
 import Carousel from "~/renderer/components/Carousel";
 import AssetDistribution from "~/renderer/components/AssetDistribution";
@@ -24,15 +21,12 @@ import ClearCacheBanner from "~/renderer/components/ClearCacheBanner";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 import OngoingScams from "~/renderer/components/banners/OngoingScams";
 import { saveSettings } from "~/renderer/actions/settings";
-import { connect, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import uniq from "lodash/uniq";
-import type { Currency } from "@ledgerhq/live-common/lib/types/currencies";
-import type { Account } from "@ledgerhq/live-common/lib/types/account";
-import type { TimeRange } from "~/renderer/reducers/settings";
 import { useHistory } from "react-router-dom";
-import { createStructuredSelector } from "reselect";
 import EmptyStateInstalledApps from "~/renderer/screens/dashboard/EmptyStateInstalledApps";
 import EmptyStateAccounts from "~/renderer/screens/dashboard/EmptyStateAccounts";
+import { useRefreshAccountsOrderingEffect } from "~/renderer/actions/general";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 
 // This forces only one visible top banner at a time
@@ -44,16 +38,9 @@ export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   }
 `;
 
-type Props = {
-  accounts: Account[],
-  push: Function,
-  counterValue: Currency,
-  selectedTimeRange: TimeRange,
-  saveSettings: ({ selectedTimeRange: TimeRange }) => *,
-};
-
-const DashboardPage = ({ saveSettings }: Props) => {
+export default function DashboardPage() {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const accounts = useSelector(accountsSelector);
   const currencies = useSelector(currenciesSelector);
   const history = useHistory();
@@ -72,22 +59,23 @@ const DashboardPage = ({ saveSettings }: Props) => {
     [history],
   );
   const handleChangeSelectedTime = useCallback(
-    item => saveSettings({ selectedTimeRange: item.key }),
-    [saveSettings],
+    item => dispatch(saveSettings({ selectedTimeRange: item.key })),
+    [dispatch],
   );
   const showCarousel = hasInstalledApps && totalAccounts > 0;
+
+  useRefreshAccountsOrderingEffect({ onMount: true });
 
   return (
     <>
       <TopBannerContainer>
-        <OngoingScams />
         <UpdateBanner />
+        <OngoingScams />
         <MigrationBanner />
         <ClearCacheBanner />
         <CurrencyDownStatusAlert currencies={currencies} />
       </TopBannerContainer>
       {showCarousel ? <Carousel /> : null}
-      <RefreshAccountsOrdering onMount />
       <TrackPage
         category="Portfolio"
         totalAccounts={totalAccounts}
@@ -100,11 +88,9 @@ const DashboardPage = ({ saveSettings }: Props) => {
         ) : totalAccounts > 0 ? (
           <>
             <BalanceSummary
-              t={t}
               counterValue={counterValue}
               chartId="dashboard-chart"
               chartColor={colors.wallet}
-              accounts={accounts}
               range={selectedTimeRange}
               handleChangeSelectedTime={handleChangeSelectedTime}
               selectedTimeRange={selectedTimeRange}
@@ -126,21 +112,4 @@ const DashboardPage = ({ saveSettings }: Props) => {
       </Box>
     </>
   );
-};
-
-const mapStateToProps = createStructuredSelector({
-  accounts: accountsSelector,
-  counterValue: counterValueCurrencySelector,
-  selectedTimeRange: selectedTimeRangeSelector,
-});
-
-const mapDispatchToProps = {
-  saveSettings,
-};
-
-const ConnectedDashboardPage: React$ComponentType<{}> = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(DashboardPage);
-
-export default ConnectedDashboardPage;
+}

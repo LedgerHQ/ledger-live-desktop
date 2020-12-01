@@ -1,116 +1,48 @@
 // @flow
-import {
-  getBalanceHistoryWithCountervalue,
-  getCurrencyPortfolio,
-  getPortfolio,
-} from "@ledgerhq/live-common/lib/portfolio";
+import { useSelector } from "react-redux";
 import type {
-  Account,
   CryptoCurrency,
   PortfolioRange,
   TokenCurrency,
   AccountLike,
 } from "@ledgerhq/live-common/lib/types";
-import { flattenAccounts, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
-
-import CounterValues from "../countervalues";
-
 import {
-  exchangeSettingsForPairSelector,
-  counterValueCurrencySelector,
-  intermediaryCurrency,
-} from "./../reducers/settings";
+  useBalanceHistoryWithCountervalue as useBalanceHistoryWithCountervalueCommon,
+  usePortfolio as usePortfolioCommon,
+  useCurrencyPortfolio as useCurrencyPortfolioCommon,
+} from "@ledgerhq/live-common/lib/countervalues/react";
+import { selectedTimeRangeSelector } from "~/renderer/reducers/settings";
+import { counterValueCurrencySelector } from "./../reducers/settings";
 import { accountsSelector } from "./../reducers/accounts";
-import type { State } from "./../reducers";
 
-export const balanceHistoryWithCountervalueSelector = (
-  state: State,
-  {
-    account,
-    range,
-  }: {
-    account: AccountLike,
-    range: PortfolioRange,
-  },
-) => {
-  const counterValueCurrency = counterValueCurrencySelector(state);
-  const currency = getAccountCurrency(account);
-  const intermediary = intermediaryCurrency(currency, counterValueCurrency);
-  const exchange = exchangeSettingsForPairSelector(state, { from: currency, to: intermediary });
-  const toExchange = exchangeSettingsForPairSelector(state, {
-    from: intermediary,
-    to: counterValueCurrency,
-  });
-  return getBalanceHistoryWithCountervalue(account, range, (_, value, date) =>
-    CounterValues.calculateWithIntermediarySelector(state, {
-      value,
-      date,
-      from: currency,
-      fromExchange: exchange,
-      intermediary,
-      toExchange,
-      to: counterValueCurrency,
-    }),
-  );
-};
+// provide redux states via custom hook wrapper
 
-export const portfolioSelector = (
-  state: State,
-  {
-    accounts,
-    range,
-  }: {
-    accounts: Account[],
-    range: PortfolioRange,
-  },
-) => {
-  const counterValueCurrency = counterValueCurrencySelector(state);
-  return getPortfolio(accounts, range, (currency, value, date) => {
-    const intermediary = intermediaryCurrency(currency, counterValueCurrency);
-    const toExchange = exchangeSettingsForPairSelector(state, {
-      from: intermediary,
-      to: counterValueCurrency,
-    });
-    return CounterValues.calculateWithIntermediarySelector(state, {
-      value,
-      date,
-      from: currency,
-      fromExchange: exchangeSettingsForPairSelector(state, { from: currency, to: intermediary }),
-      intermediary,
-      toExchange,
-      to: counterValueCurrency,
-    });
-  });
-};
+export function useBalanceHistoryWithCountervalue({
+  account,
+  range,
+}: {
+  account: AccountLike,
+  range: PortfolioRange,
+}) {
+  const to = useSelector(counterValueCurrencySelector);
+  return useBalanceHistoryWithCountervalueCommon({ account, range, to });
+}
 
-export const currencyPortfolioSelector = (
-  state: State,
-  {
-    currency,
-    range,
-  }: {
-    currency: CryptoCurrency | TokenCurrency,
-    range: PortfolioRange,
-  },
-) => {
-  const accounts = flattenAccounts(accountsSelector(state)).filter(
-    a => getAccountCurrency(a) === currency,
-  );
-  const counterValueCurrency = counterValueCurrencySelector(state);
-  return getCurrencyPortfolio(accounts, range, (currency, value, date) => {
-    const intermediary = intermediaryCurrency(currency, counterValueCurrency);
-    const toExchange = exchangeSettingsForPairSelector(state, {
-      from: intermediary,
-      to: counterValueCurrency,
-    });
-    return CounterValues.calculateWithIntermediarySelector(state, {
-      value,
-      date,
-      from: currency,
-      fromExchange: exchangeSettingsForPairSelector(state, { from: currency, to: intermediary }),
-      intermediary,
-      toExchange,
-      to: counterValueCurrency,
-    });
-  });
-};
+export function usePortfolio() {
+  const to = useSelector(counterValueCurrencySelector);
+  const accounts = useSelector(accountsSelector);
+  const range = useSelector(selectedTimeRangeSelector);
+  return usePortfolioCommon({ accounts, range, to });
+}
+
+export function useCurrencyPortfolio({
+  currency,
+  range,
+}: {
+  currency: CryptoCurrency | TokenCurrency,
+  range: PortfolioRange,
+}) {
+  const accounts = useSelector(accountsSelector);
+  const to = useSelector(counterValueCurrencySelector);
+  return useCurrencyPortfolioCommon({ accounts, range, to, currency });
+}

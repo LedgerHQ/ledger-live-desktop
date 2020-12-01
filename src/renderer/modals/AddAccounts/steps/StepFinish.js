@@ -1,5 +1,4 @@
 // @flow
-
 import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -7,28 +6,12 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import { CurrencyCircleIcon } from "~/renderer/components/CurrencyBadge";
-import RefreshAccountsOrdering from "~/renderer/components/RefreshAccountsOrdering";
+import { useRefreshAccountsOrderingEffect } from "~/renderer/actions/general";
 import type { StepProps } from "..";
 
-const Title = styled(Box).attrs(() => ({
-  ff: "Inter",
-  fontSize: 5,
-  mt: 2,
-  color: "palette.text.shade100",
-}))`
-  text-align: center;
-`;
-
-const Text = styled(Box).attrs(() => ({
-  ff: "Inter",
-  fontSize: 4,
-  mt: 2,
-}))`
-  text-align: center;
-`;
-
-const StepFinish = ({ currency, checkedAccountsIds }: StepProps) => {
+export default function StepFinish({ currency, checkedAccountsIds }: StepProps) {
   const { t } = useTranslation();
+  useRefreshAccountsOrderingEffect({ onMount: true, onUnmount: true });
 
   const currencyName = currency
     ? currency.type === "TokenCurrency"
@@ -38,7 +21,6 @@ const StepFinish = ({ currency, checkedAccountsIds }: StepProps) => {
 
   return (
     <Box alignItems="center" py={6}>
-      <RefreshAccountsOrdering onMount onUnmount />
       {/* onMount because if we already have the countervalues we want to sort it straightaway
           onUnmount because if not, it is useful to trigger a second refresh to ensure it get sorted */}
 
@@ -48,11 +30,9 @@ const StepFinish = ({ currency, checkedAccountsIds }: StepProps) => {
       <Text>{t("addAccounts.successDescription", { count: checkedAccountsIds.length })}</Text>
     </Box>
   );
-};
+}
 
-export default StepFinish;
-
-export const StepFinishFooter = ({ onGoStep1, onCloseModal }: StepProps) => {
+export function StepFinishFooter({ onGoStep1, onCloseModal }: StepProps) {
   const { t } = useTranslation();
   return (
     <>
@@ -71,4 +51,21 @@ export const StepFinishFooter = ({ onGoStep1, onCloseModal }: StepProps) => {
       </Box>
     </>
   );
-};
+}
+
+const Title = styled(Box).attrs(() => ({
+  ff: "Inter",
+  fontSize: 5,
+  mt: 2,
+  color: "palette.text.shade100",
+}))`
+  text-align: center;
+`;
+
+const Text = styled(Box).attrs(() => ({
+  ff: "Inter",
+  fontSize: 4,
+  mt: 2,
+}))`
+  text-align: center;
+`;

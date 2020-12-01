@@ -6,7 +6,7 @@ import { BigNumber } from "bignumber.js";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
 import { localeSelector } from "~/renderer/reducers/settings";
-
+import { useSpoilerForTransaction } from "~/renderer/hooks/useSpoilerForTransaction";
 import type { StepProps } from "../types";
 import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -46,7 +46,7 @@ export default function StepAmount({
   onChangeTransaction,
   transaction,
   status,
-  error,
+  bridgeError,
   bridgePending,
   t,
 }: StepProps) {
@@ -91,6 +91,8 @@ export default function StepAmount({
     [bridge, transaction, onChangeTransaction],
   );
 
+  const [spoilerOpened, setSpoilerOpened] = useSpoilerForTransaction(status);
+
   return (
     <Box flow={1}>
       <TrackPage
@@ -98,7 +100,7 @@ export default function StepAmount({
         name="Approve Step 1"
         eventProperties={{ currencyName: currency.name }}
       />
-      {error ? <ErrorBanner error={error} /> : null}
+      {bridgeError ? <ErrorBanner error={bridgeError} /> : null}
       <Box vertical>
         <Box px={4} mt={4} mb={4}>
           <Text ff="Inter|Medium" fontSize={4} flex={1}>
@@ -122,7 +124,12 @@ export default function StepAmount({
             </Trans>
           </Text>
         </Box>
-        <Spoiler textTransform title={<Trans i18nKey="lend.enable.steps.amount.advanced" />}>
+        <Spoiler
+          opened={spoilerOpened}
+          onOpen={setSpoilerOpened}
+          textTransform
+          title={<Trans i18nKey="lend.enable.steps.amount.advanced" />}
+        >
           <Box vertical alignItems="stretch">
             <Box my={4}>
               <Box horizontal justifyContent="space-between" mb={2}>
@@ -139,7 +146,7 @@ export default function StepAmount({
               <InputCurrency
                 disabled={!!useAllAmount}
                 autoFocus={false}
-                error={error}
+                error={status.errors.amount}
                 containerProps={{ grow: true }}
                 unit={unit}
                 value={amount}
@@ -152,7 +159,6 @@ export default function StepAmount({
               <GasPriceField
                 account={parentAccount}
                 transaction={transaction}
-                // $FlowFixMe
                 onChange={onChangeTransaction}
                 status={status}
               />

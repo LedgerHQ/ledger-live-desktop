@@ -5,15 +5,11 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { PasswordIncorrectError } from "@ledgerhq/errors";
 import { setEncryptionKey, isEncryptionKeyCorrect, hasBeenDecrypted } from "~/renderer/storage";
-
 import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
-
-import { hardReset } from "~/renderer/reset";
-
+import { useHardReset } from "~/renderer/reset";
 import { fetchAccounts } from "~/renderer/actions/accounts";
 import { unlock } from "~/renderer/actions/application";
 import { isLocked as isLockedSelector } from "~/renderer/reducers/application";
-
 import Box from "~/renderer/components/Box";
 import InputPassword from "~/renderer/components/InputPassword";
 import LedgerLiveLogo from "~/renderer/components/LedgerLiveLogo";
@@ -24,49 +20,10 @@ import IconArrowRight from "~/renderer/icons/ArrowRight";
 import LedgerLiveImg from "~/renderer/images/ledgerlive-logo.svg";
 import Image from "./Image";
 
-type InputValue = {
-  password: string,
-};
-
-type MaybeError = ?Error;
-
-type Props = {
-  children: any,
-};
-
-export const PageTitle: ThemedComponent<{}> = styled(Box).attrs(() => ({
-  ff: "Inter|Regular",
-  fontSize: 7,
-  color: "palette.text.shade100",
-}))``;
-
-export const LockScreenDesc: ThemedComponent<{}> = styled(Box).attrs(() => ({
-  ff: "Inter|Regular",
-  fontSize: 4,
-  textAlign: "center",
-  color: "palette.text.shade80",
-}))`
-  margin: 10px auto 25px;
-`;
-
-const IconWrapperCircle = styled(Box)`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: #ea2e4919;
-  align-items: center;
-  justify-content: center;
-`;
-
-const HardResetIcon = () => (
-  <IconWrapperCircle color="alertRed">
-    <IconTriangleWarning width={23} height={21} />
-  </IconWrapperCircle>
-);
-
-const IsUnlocked = ({ children }: Props) => {
+export default function IsUnlocked({ children }: { children: any }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const hardReset = useHardReset();
   const [inputValue, setInputValue] = useState<InputValue>({ password: "" });
   const [incorrectPassword, setIncorrectPassword] = useState<MaybeError>(null);
   const [isHardResetting, setIsHardResetting] = useState(false);
@@ -122,7 +79,7 @@ const IsUnlocked = ({ children }: Props) => {
     } catch (error) {
       setIsHardResetting(false);
     }
-  }, []);
+  }, [hardReset]);
 
   useEffect(() => {
     let subscribed = false;
@@ -216,6 +173,40 @@ const IsUnlocked = ({ children }: Props) => {
   }
 
   return children;
+}
+
+type InputValue = {
+  password: string,
 };
 
-export default IsUnlocked;
+type MaybeError = ?Error;
+
+export const PageTitle: ThemedComponent<{}> = styled(Box).attrs(() => ({
+  ff: "Inter|Regular",
+  fontSize: 7,
+  color: "palette.text.shade100",
+}))``;
+
+export const LockScreenDesc: ThemedComponent<{}> = styled(Box).attrs(() => ({
+  ff: "Inter|Regular",
+  fontSize: 4,
+  textAlign: "center",
+  color: "palette.text.shade80",
+}))`
+  margin: 10px auto 25px;
+`;
+
+const IconWrapperCircle = styled(Box)`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #ea2e4919;
+  align-items: center;
+  justify-content: center;
+`;
+
+const HardResetIcon = () => (
+  <IconWrapperCircle color="alertRed">
+    <IconTriangleWarning width={23} height={21} />
+  </IconWrapperCircle>
+);

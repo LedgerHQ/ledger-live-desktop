@@ -301,7 +301,6 @@ const RedelegateAmountCell = ({ operation, currency, unit }: Props) => {
         <CounterValue
           color="palette.text.shade60"
           fontSize={3}
-          alwaysShowSign={false}
           date={operation.date}
           currency={currency}
           value={amount}
@@ -331,7 +330,6 @@ const UndelegateAmountCell = ({ operation, currency, unit }: Props) => {
         <CounterValue
           color="palette.text.shade60"
           fontSize={3}
-          alwaysShowSign={false}
           date={operation.date}
           currency={currency}
           value={amount}
