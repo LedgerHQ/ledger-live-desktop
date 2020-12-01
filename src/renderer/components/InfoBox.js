@@ -53,8 +53,6 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(props => ({
   horizontal: true,
   py: 1,
   px: 2,
-  bg: props.warn ? colors.lightWarning : "palette.action.hover",
-  color: props.warn ? colors.orange : "palette.primary.main",
 }))`
   padding: 16px;
   border-radius: 4px;
@@ -62,9 +60,13 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(props => ({
   background-color: ${p =>
     p.type === "primary"
       ? p.theme.colors.palette.action.hover
+      : p.type === "warning"
+      ? colors.lightWarning
       : p.theme.colors.palette.text.shade10};
   color: ${p =>
     p.type === "primary"
       ? p.theme.colors.palette.primary.main
+      : p.type === "warning"
+      ? colors.orange
       : p.theme.colors.palette.text.shade50};
 `;

@@ -76,7 +76,7 @@ export default class StepSummary extends PureComponent<StepProps> {
       <Box flow={4} mx={40}>
         <TrackPage category="Send Flow" name="Step Summary" />
         {utxoLag ? (
-          <InfoBox warn>
+          <InfoBox type="warning">
             <Trans i18nKey="send.steps.details.utxoLag" />
           </InfoBox>
         ) : null}
