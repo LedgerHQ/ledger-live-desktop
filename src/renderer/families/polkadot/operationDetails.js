@@ -23,6 +23,7 @@ import { usePolkadotPreloadData } from "@ledgerhq/live-common/lib/families/polka
 import Text from "~/renderer/components/Text";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import CounterValue from "~/renderer/components/CounterValue";
+import { useDiscreetMode } from "~/renderer/components/Discreet";
 
 const helpURL = "https://support.ledger.com/hc/en-us/articles/FIXME";
 
@@ -331,10 +332,27 @@ const UnbondAmountCell = ({ operation, currency, unit }: Props) => {
   );
 };
 
+const NominateAmountCell = ({ operation, currency, unit }: Props) => {
+  const discreet = useDiscreetMode();
+  const amount = operation.extra?.validators?.length || 0;
+
+  return amount > 0 ? (
+    <Text ff="Inter|SemiBold" fontSize={4}>
+      <Trans
+        i18nKey={"operationDetails.extra.validatorsCount"}
+        values={{
+          number: !discreet ? amount : "***",
+        }}
+      />
+    </Text>
+  ) : null;
+};
+
 const amountCellExtra = {
   OUT: TransferAmountCell,
   BOND: BondAmountCell,
   UNBOND: UnbondAmountCell,
+  NOMINATE: NominateAmountCell,
 };
 
 export default {
