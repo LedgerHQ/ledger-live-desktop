@@ -275,7 +275,7 @@
               "fields": {
                 "nodeHost": {
                   "title": "Host",
-                  "tooltip": "Leave as default if node runs on this computer, or replace the node IP address and port number.",
+                  "tooltip": "Leave as default if node runs on this computer, or replace the node IP address and port number."
                 },
                 "rpcCredentials": {
                   "title": "RPC Credentials",
