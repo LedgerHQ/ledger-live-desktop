@@ -54,7 +54,7 @@ const redirectAddress = (currency: Currency, address: string) => () => {
   if (url) openURL(url);
 };
 
-type OperationsDetailsValidatorsProps = {
+type OperationDetailsValidatorsProps = {
   validators: string[],
   account: Account,
   isTransactionField?: boolean,
@@ -64,7 +64,7 @@ export const OperationDetailsValidators = ({
   validators,
   account,
   isTransactionField,
-}: OperationsDetailsValidatorsProps) => {
+}: OperationDetailsValidatorsProps) => {
   const { currency } = account;
 
   const { validators: polkadotValidators } = usePolkadotPreloadData();
@@ -99,17 +99,15 @@ export const OperationDetailsValidators = ({
   );
 };
 
-type OperationsDetailsRewardFromProps = {
+type OperationDetailsRewardFromProps = {
   validatorStash: string,
   account: Account,
-  isTransactionField?: boolean,
 };
 
-export const OperationsDetailsRewardFrom = ({
+export const OperationDetailsRewardFrom = ({
   validatorStash,
   account,
-  isTransactionField,
-}: OperationsDetailsRewardFromProps) => {
+}: OperationDetailsRewardFromProps) => {
   const { currency } = account;
 
   const { validators: polkadotValidators } = usePolkadotPreloadData();
@@ -133,13 +131,13 @@ export const OperationsDetailsRewardFrom = ({
   );
 };
 
-type OperationsDetailsPalletMethodProps = {
+type OperationDetailsPalletMethodProps = {
   palletMethod: string,
 };
 
-export const OperationsDetailsPalletMethod = ({
+export const OperationDetailsPalletMethod = ({
   palletMethod,
-}: OperationsDetailsPalletMethodProps) => {
+}: OperationDetailsPalletMethodProps) => {
   return palletMethod ? (
     <Box>
       <OpDetailsTitle>
@@ -162,7 +160,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
     case "IN":
       return (
         <>
-          <OperationsDetailsPalletMethod palletMethod={extra.palletMethod} />
+          <OperationDetailsPalletMethod palletMethod={extra.palletMethod} />
           <Box>
             <OpDetailsTitle>
               <Trans i18nKey="operationDetails.extra.transferAmount" />
@@ -185,7 +183,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
 
       return (
         <>
-          <OperationsDetailsPalletMethod palletMethod={extra.palletMethod} />
+          <OperationDetailsPalletMethod palletMethod={extra.palletMethod} />
           <Box>
             <OperationDetailsValidators validators={validators} account={account} />
           </Box>
@@ -195,7 +193,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
     case "BOND":
       return (
         <>
-          <OperationsDetailsPalletMethod palletMethod={extra.palletMethod} />
+          <OperationDetailsPalletMethod palletMethod={extra.palletMethod} />
           {extra.bondedAmount ? (
             <Box>
               <OpDetailsTitle>
@@ -217,7 +215,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
     case "UNBOND":
       return (
         <>
-          <OperationsDetailsPalletMethod palletMethod={extra.palletMethod} />
+          <OperationDetailsPalletMethod palletMethod={extra.palletMethod} />
           <Box>
             <OpDetailsTitle>
               <Trans i18nKey="operationDetails.extra.unbondedAmount" />
@@ -237,14 +235,14 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
     case "REWARD":
       return (
         <>
-          <OperationsDetailsPalletMethod palletMethod={extra.palletMethod} />
+          <OperationDetailsPalletMethod palletMethod={extra.palletMethod} />
           {extra.validatorStash ? (
-            <OperationsDetailsRewardFrom validatorStash={extra.validatorStash} account={account} />
+            <OperationDetailsRewardFrom validatorStash={extra.validatorStash} account={account} />
           ) : null}
         </>
       );
     default:
-      return <OperationsDetailsPalletMethod palletMethod={extra.palletMethod} />;
+      return <OperationDetailsPalletMethod palletMethod={extra.palletMethod} />;
   }
 };
 
