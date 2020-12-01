@@ -53,19 +53,21 @@ const Separator: ThemedComponent<{}> = styled.div`
   margin: 15px 0;
 `;
 
+const WARN_FROM_UTXO_COUNT = 50;
+
 export default class StepSummary extends PureComponent<StepProps> {
   render() {
     const { account, parentAccount, transaction, status } = this.props;
     if (!account) return null;
     const mainAccount = getMainAccount(account, parentAccount);
     if (!mainAccount || !transaction) return null;
-    const { estimatedFees, amount, totalSpent, warnings } = status;
+    const { estimatedFees, amount, totalSpent, warnings, txInputs } = status;
     const feeTooHigh = warnings.feeTooHigh;
     const currency = getAccountCurrency(account);
     const feesUnit = getAccountUnit(mainAccount);
     const feesCurrency = getAccountCurrency(mainAccount);
     const unit = getAccountUnit(account);
-    const utxoLag = mainAccount.operationsCount >= 50;
+    const utxoLag = txInputs ? txInputs.length >= WARN_FROM_UTXO_COUNT : null;
 
     // $FlowFixMe
     const memo = transaction.memo;
