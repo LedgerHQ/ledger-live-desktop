@@ -1,4 +1,9 @@
 {
+  "calendar": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "yesterday": "Yesterday"
+  },
   "common": {
     "labelYes": "Oui",
     "labelNo": "Non",
@@ -275,8 +280,7 @@
               "fields": {
                 "nodeHost": {
                   "title": "Hôte",
-                  "tooltip": "Laisser par défaut si le noeud s'exécute sur cet ordinateur, ou remplacer l'adresse IP et le numéro de port du noeud.",
-                  "placeholder": "127.0.0.1:8332"
+                  "tooltip": "Laisser par défaut si le noeud s'exécute sur cet ordinateur, ou remplacer l'adresse IP et le numéro de port du noeud."
                 },
                 "rpcCredentials": {
                   "title": "Certificats RPC",
@@ -412,7 +416,7 @@
     "undelegatingTooltip": "Les actifs dont la délégation est interrompue sont verrouillés pendant 21 jours avant d'être disponibles."
   },
   "exchange": {
-    "title": "Acheter des cryptos",
+    "title": "Buy and sell crypto",
     "reset": "Réinitialiser",
     "banner": {
       "title": "Acheter des cryptomonnaies via notre partenaire",
@@ -995,7 +999,7 @@
   "DeviceAction": {
     "allowAppPermission": "Ouvrez l'application {{wording}} sur votre appareil",
     "allowAppPermissionSubtitleToken": "pour gérer vos tokens {{token}}",
-    "allowManagerPermission": "{{wording}} sur votre appareil",
+    "allowManagerPermission": "Allow {{wording}} on your device",
     "loading": "Chargement en cours...",
     "connectAndUnlockDevice": "Connectez et déverrouillez votre appareil",
     "unlockDevice": "Déverrouillez votre appareil",
@@ -2002,7 +2006,7 @@
       },
       "fullNode": {
         "title": "Connecter le nœud Bitcoin",
-        "desc": "Configurez votre nœud Bitcoin pour synchroniser et envoyer des transactions passer par les explorers de Ledger."
+        "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
       }
     }
   },
