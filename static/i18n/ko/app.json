@@ -1,4 +1,9 @@
 {
+  "calendar": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "yesterday": "Yesterday"
+  },
   "common": {
     "labelYes": "예",
     "labelNo": "아니오",
@@ -275,8 +280,7 @@
               "fields": {
                 "nodeHost": {
                   "title": "Host",
-                  "tooltip": "Leave as default if node runs on this computer, or replace the node IP address and port number.",
-                  "placeholder": "127.0.0.1:8332"
+                  "tooltip": "Leave as default if node runs on this computer, or replace the node IP address and port number."
                 },
                 "rpcCredentials": {
                   "title": "RPC Credentials",
@@ -412,7 +416,7 @@
     "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
   },
   "exchange": {
-    "title": "Buy crypto",
+    "title": "Buy and sell crypto",
     "reset": "Reset flow",
     "banner": {
       "title": "Buy crypto via our partner",
@@ -995,7 +999,7 @@
   "DeviceAction": {
     "allowAppPermission": "Open the {{wording}} app on your device",
     "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
-    "allowManagerPermission": "{{wording}} on your device",
+    "allowManagerPermission": "Allow {{wording}} on your device",
     "loading": "Loading...",
     "connectAndUnlockDevice": "Connect and unlock your device",
     "unlockDevice": "Unlock your device",
@@ -2002,7 +2006,7 @@
       },
       "fullNode": {
         "title": "Connect Bitcoin full node",
-        "desc": "Set up your Bitcoin full node to synchronize and send transactions without trusting Ledger’s explorers."
+        "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
       }
     }
   },
