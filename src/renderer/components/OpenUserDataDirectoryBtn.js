@@ -13,7 +13,7 @@ const OpenUserDataDirectoryBtn = (props: $Shape<ButtonProps>) => {
   const handleOpenUserDataDirectory = useCallback(() => {
     const userDataDirectory = resolveUserDataDirectory();
     logger.log(`Opening user data directory: ${userDataDirectory}`);
-    shell.showItemInFolder(userDataDirectory);
+    shell.openPath(userDataDirectory);
   }, []);
 
   return (
