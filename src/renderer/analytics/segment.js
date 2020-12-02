@@ -41,8 +41,14 @@ const extraProperties = store => {
   const state: State = store.getState();
   const { language, region } = langAndRegionSelector(state);
   const systemLocale = getSystemLocale();
-  const device = getCurrentDevice(state) || lastSeenDeviceSelector(state);
-  const deviceInfo = device ? { modelId: device.modelId } : {};
+  const device = lastSeenDeviceSelector(state);
+  const deviceInfo = device
+    ? {
+        modelId: device.modelId,
+        deviceVersion: device.deviceInfo.version,
+        appLength: device.apps.length,
+      }
+    : {};
   const sidebarCollapsed = sidebarCollapsedSelector(state);
 
   return {
