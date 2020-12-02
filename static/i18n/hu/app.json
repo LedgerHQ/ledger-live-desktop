@@ -1346,6 +1346,7 @@
         "title": "Eszköz"
       },
       "details": {
+        "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
         "from": "Innen",
         "to": "Ide",
         "selectAccountDebit": "Használni kívánt számla",
