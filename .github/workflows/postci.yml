@@ -32,6 +32,15 @@ jobs:
         uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: prid.txt
+      - name: display data
+        if: always()
+        id: displaycomment
+        env:
+          BODY: ${{ steps.comment.outputs.body }}
+          PRID: ${{ steps.prid.outputs.body }}
+        run: |
+          echo "$BODY"
+          echo "$PRID"
       - name: post comment
         uses: peter-evans/create-or-update-comment@5221bf4aa615e5c6e95bb142f9673a9c791be2cd
         with:
