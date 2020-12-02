@@ -57,7 +57,7 @@ jobs:
       - name: make local version
         env:
           VERSION: ${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
-        run: yarn version --new-version=$VERSION
+        run: yarn version --new-version="$VERSION"
       - name: build the app
         run: yarn nightly
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
@@ -108,7 +108,7 @@ jobs:
       - name: make local version
         env:
           VERSION: ${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
-        run: yarn version --new-version=$VERSION
+        run: yarn version --new-version="$VERSION"
       - name: build the app
         run: yarn nightly
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
@@ -160,7 +160,7 @@ jobs:
       - name: make local version
         env:
           VERSION: ${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
-        run: yarn version --new-version=$VERSION
+        run: yarn version --new-version="$VERSION"
       - name: build the app
         run: yarn nightly
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
