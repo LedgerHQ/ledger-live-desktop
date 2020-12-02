@@ -1,6 +1,6 @@
 name: CI
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - "*"
   push:
@@ -93,15 +93,12 @@ jobs:
         id: displaycomment
         env:
           BODY: ${{ steps.comment.outputs.body }}
-        run: echo "$BODY"
-  post-comment:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - name: post comment
-        if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && needs.test.result != 'cancelled'
-        uses: mshick/add-pr-comment@5cd99bf9c186219af43341076f1fe9c09e5a9934
+        run: |
+          echo "$BODY"
+          echo "$BODY" > comment.txt
+      - name: upload comment
+        if: github.event_name == 'pull_request' && !cancelled()
+        uses: actions/upload-artifact@v2
         with:
-          message: ${{ needs.test.outputs.comment }}
-          allow-repeats: true
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          name: comment
+          path: comment.txt
