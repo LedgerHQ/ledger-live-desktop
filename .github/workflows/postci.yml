@@ -5,6 +5,7 @@ on:
     branches-ignore: [develop, master]
     types: 
       - completed
+      - requested
 
 jobs:
   post-comment:
