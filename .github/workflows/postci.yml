@@ -9,7 +9,6 @@ on:
 jobs:
   post-comment:
     runs-on: ubuntu-latest
-    needs: test
     steps:
       - name: Download comment
         uses: dawidd6/action-download-artifact@5b72739630efa11b8d81784b89adf5246a5fc475
