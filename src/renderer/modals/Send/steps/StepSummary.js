@@ -23,6 +23,7 @@ import IconQrCode from "~/renderer/icons/QrCode";
 import IconWallet from "~/renderer/icons/Wallet";
 import { rgba } from "~/renderer/styles/helpers";
 import CounterValue from "~/renderer/components/CounterValue";
+import InfoBox from "~/renderer/components/InfoBox";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { StepProps } from "../types";
@@ -52,18 +53,21 @@ const Separator: ThemedComponent<{}> = styled.div`
   margin: 15px 0;
 `;
 
+const WARN_FROM_UTXO_COUNT = 50;
+
 export default class StepSummary extends PureComponent<StepProps> {
   render() {
     const { account, parentAccount, transaction, status } = this.props;
     if (!account) return null;
     const mainAccount = getMainAccount(account, parentAccount);
     if (!mainAccount || !transaction) return null;
-    const { estimatedFees, amount, totalSpent, warnings } = status;
+    const { estimatedFees, amount, totalSpent, warnings, txInputs } = status;
     const feeTooHigh = warnings.feeTooHigh;
     const currency = getAccountCurrency(account);
     const feesUnit = getAccountUnit(mainAccount);
     const feesCurrency = getAccountCurrency(mainAccount);
     const unit = getAccountUnit(account);
+    const utxoLag = txInputs ? txInputs.length >= WARN_FROM_UTXO_COUNT : null;
 
     // $FlowFixMe
     const memo = transaction.memo;
@@ -71,6 +75,11 @@ export default class StepSummary extends PureComponent<StepProps> {
     return (
       <Box flow={4} mx={40}>
         <TrackPage category="Send Flow" name="Step Summary" />
+        {utxoLag ? (
+          <InfoBox type="warning">
+            <Trans i18nKey="send.steps.details.utxoLag" />
+          </InfoBox>
+        ) : null}
         <FromToWrapper>
           <Box>
             <Box horizontal alignItems="center">

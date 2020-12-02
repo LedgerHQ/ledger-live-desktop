@@ -7,6 +7,7 @@ import type { ThemedComponent } from "../styles/StyleProvider";
 import Box from "./Box";
 import Text from "./Text";
 import { FakeLink } from "./Link";
+import { colors } from "~/renderer/styles/theme";
 
 type Props = {
   children: React$Node,
@@ -46,7 +47,7 @@ export default function InfoBox({
   );
 }
 
-const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
+const Container: ThemedComponent<{}> = styled(Box).attrs(props => ({
   horizontal: true,
 }))`
   padding: 16px;
@@ -55,9 +56,13 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   background-color: ${p =>
     p.type === "primary"
       ? p.theme.colors.palette.action.hover
+      : p.type === "warning"
+      ? colors.lightWarning
       : p.theme.colors.palette.text.shade10};
   color: ${p =>
     p.type === "primary"
       ? p.theme.colors.palette.primary.main
+      : p.type === "warning"
+      ? colors.orange
       : p.theme.colors.palette.text.shade50};
 `;
