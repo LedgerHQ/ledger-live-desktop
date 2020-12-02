@@ -97,6 +97,7 @@ jobs:
   post-comment:
     runs-on: ubuntu-latest
     needs: test
+    if: always()
     steps:
       - name: post comment
         uses: mshick/add-pr-comment@5cd99bf9c186219af43341076f1fe9c09e5a9934
