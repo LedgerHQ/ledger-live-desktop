@@ -97,6 +97,7 @@ jobs:
           echo "$BODY"
           echo "$BODY" > comment.txt
       - name: save pr id
+        if: always()
         env:
           PRID: ${{ github.event.pull_request.number }}
         run: echo "$PRID" > prid.txt
