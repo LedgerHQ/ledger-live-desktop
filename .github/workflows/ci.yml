@@ -96,9 +96,19 @@ jobs:
         run: |
           echo "$BODY"
           echo "$BODY" > comment.txt
+      - name: save pr id
+        env:
+          PRID: ${{ github.event.pull_request.number }}
+        run: echo "$PRID" > prid.txt
       - name: upload comment
         if: github.event_name == 'pull_request' && !cancelled()
         uses: actions/upload-artifact@v2
         with:
           name: comment
           path: comment.txt
+      - name: upload prid
+        if: github.event_name == 'pull_request' && !cancelled()
+        uses: actions/upload-artifact@v2
+        with:
+          name: prid
+          path: prid.txt
