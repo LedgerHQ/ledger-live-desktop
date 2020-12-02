@@ -1,0 +1,31 @@
+name: POSTCI
+on:
+  workflow_run:
+    workflows: ["CI"]
+    branches-ignore: [develop, master]
+    types: 
+      - completed
+      - requested
+
+jobs:
+  post-comment:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Download comment
+        uses: dawidd6/action-download-artifact@5b72739630efa11b8d81784b89adf5246a5fc475
+        with:
+          workflow: ci.yml
+          commit: ${{github.event.pull_request.head.sha}}
+          name: comment
+      - name: Read comment
+        id: comment
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
+        with:
+          path: comment.txt
+      - name: post comment
+        uses: mshick/add-pr-comment@5cd99bf9c186219af43341076f1fe9c09e5a9934
+        with:
+          message: ${{ steps.comment.outputs.content }}
+          allow-repeats: true
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
