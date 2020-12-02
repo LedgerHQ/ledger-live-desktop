@@ -14,7 +14,6 @@ type Props = {
   onLearnMore?: () => void,
   learnMoreLabel?: React$Node,
   horizontal?: boolean,
-  warn?: boolean,
   type?: "primary" | "secondary" | "warning" | "security" | "danger" | "success", // TODO implement the styles
 };
 
@@ -23,13 +22,12 @@ export default function InfoBox({
   onLearnMore,
   learnMoreLabel,
   horizontal = true,
-  warn = false,
   type = "primary",
 }: Props) {
   const { t } = useTranslation();
   const label = learnMoreLabel || t("common.learnMore");
   return (
-    <Container warn type={type}>
+    <Container type={type}>
       <InfoCircle size={16} />
       <Box flex="1" ml={16} horizontal={horizontal} alignItems="center">
         <Box flex="1" style={{ wordBreak: "break-all" }}>
@@ -51,8 +49,6 @@ export default function InfoBox({
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(props => ({
   horizontal: true,
-  py: 1,
-  px: 2,
 }))`
   padding: 16px;
   border-radius: 4px;
