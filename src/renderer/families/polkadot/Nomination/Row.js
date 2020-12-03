@@ -76,7 +76,7 @@ export function Row({
   validator,
   onExternalLink,
 }: Props) {
-  const name = validator?.identity ?? address;
+  const name = validator?.identity || address;
   const total = validator?.totalBonded ?? null;
   const commission = validator?.commission ?? null;
   const unit = getAccountUnit(account);
