@@ -86,7 +86,7 @@ const SwapBody = ({
       title={<Trans i18nKey="swap.modal.title" />}
       render={() => (
         <>
-          <TrackPage category="Swap" name={`ModalStep-${activeStep}`} />
+          <TrackPage key={activeStep} category="Swap" name={`ModalStep-${activeStep}`} />
           <Breadcrumb
             mb={40}
             currentStep={["summary", "device", "finished"].indexOf(activeStep)}
@@ -95,7 +95,7 @@ const SwapBody = ({
           />
           {error ? (
             <>
-              <Track onUpdate event={`SwapModalError-${error.name}`} />
+              <Track key={error.name} onMount event={`SwapModalError-${error.name}`} />
               <ErrorDisplay error={error} />
             </>
           ) : activeStep === "summary" ? (
