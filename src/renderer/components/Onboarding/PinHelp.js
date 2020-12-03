@@ -84,19 +84,19 @@ export function PinHelp() {
     <ScrollArea>
       <PinHelpContainer>
         <Text color="palette.text.shade100" ff="Inter|SemiBold" fontSize={22}>
-          {t("onboarding.pinHelp.title")}
+          {t("onboarding.drawers.pinHelp.title")}
         </Text>
         <Text mt="8px" mb="32px" color="palette.text.shade100" ff="Inter|Regular" fontSize={14}>
-          {t("onboarding.pinHelp.intro")}
+          {t("onboarding.drawers.pinHelp.intro")}
         </Text>
-        <Rule type="success">{t("onboarding.pinHelp.rules.1")}</Rule>
-        <Rule type="success">{t("onboarding.pinHelp.rules.2")}</Rule>
-        <Rule type="success">{t("onboarding.pinHelp.rules.3")}</Rule>
-        <Rule type="success">{t("onboarding.pinHelp.rules.4")}</Rule>
-        <Rule type="success">{t("onboarding.pinHelp.rules.5")}</Rule>
-        <Rule type="error">{t("onboarding.pinHelp.rules.6")}</Rule>
-        <Rule type="error">{t("onboarding.pinHelp.rules.7")}</Rule>
-        <Rule type="error">{t("onboarding.pinHelp.rules.8")}</Rule>
+        <Rule type="success">{t("onboarding.drawers.pinHelp.rules.1")}</Rule>
+        <Rule type="success">{t("onboarding.drawers.pinHelp.rules.2")}</Rule>
+        <Rule type="success">{t("onboarding.drawers.pinHelp.rules.3")}</Rule>
+        <Rule type="success">{t("onboarding.drawers.pinHelp.rules.4")}</Rule>
+        <Rule type="success">{t("onboarding.drawers.pinHelp.rules.5")}</Rule>
+        <Rule type="error">{t("onboarding.drawers.pinHelp.rules.6")}</Rule>
+        <Rule type="error">{t("onboarding.drawers.pinHelp.rules.7")}</Rule>
+        <Rule type="error">{t("onboarding.drawers.pinHelp.rules.8")}</Rule>
       </PinHelpContainer>
     </ScrollArea>
   );

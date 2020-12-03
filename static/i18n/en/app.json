@@ -2079,6 +2079,82 @@
     "dark": "Dark"
   },
   "onboarding": {
+    "drawers": {
+      "pinHelp": {
+        "title": "Secure your PIN code",
+        "intro": "During the setup process you choose a PIN code.",
+        "rules": {
+          "1": "Always choose a PIN code by yourself.",
+          "2": "Always enter your PIN code out of sight.",
+          "3": "You can change your PIN code if needed.",
+          "4": "Remember that three wrong PIN code entries in a row will reset the device.",
+          "5": "Never use an easy PIN code like 0000, 123456, or 55555555.",
+          "6": "Never share your PIN code with someone else.",
+          "7": "Never use a PIN code you did not choose yourself.",
+          "8": "Never store your PIN code on a computer or phone."
+        }
+      },
+      "recoveryHelp": {
+        "title1": "How does a recovery phrase work?",
+        "paragraph1": "Your recovery phrase can be seen as a master key which every application on your Ledger device uses to calculate their private keys from.",
+        "paragraph2": "This means that so long as your recovery phrase is the same, the calculation of the private keys will always have the same result.",
+        "link": "More on Recovery phrase operation",
+        "title2": "What happens if I lose/break my Nano?",
+        "paragraph3": "What happens if I lose/break my Nano?",
+        "points": {
+          "1": "Get a new one",
+          "2": "Select “Import recovery phrase on a new device” on your Ledger app",
+          "3": "Enter your recovery phrase"
+        }
+      },
+      "whereToHide": {
+        "title": "Where should I keep my Recovery phrase?",
+        "rules": {
+          "1": "Do not keep your Recovery sheet in a safe at home. ",
+          "2": "A bank vault is much more secure. ",
+          "3": "NEVER enter your code on any computer, smartphone or other internet-connected device.",
+          "4": "NEVER share these 24 words with anyone.",
+          "5": "Ledger will never ask for your recovery phrase"
+        }
+      }
+    },
+    "alerts": {
+      "deviceError": {
+        "title": "Something went wrong, please reconnect device",
+        "descr": "An action was already pending on the your Nano. Please deny or reconnect.",
+        "retry": "Retry"
+      },
+      "genuineCheck": {
+        "title": "Genuine check",
+        "descr": "Please don’t turn off your Nano and allow Ledger",
+        "info": "This step is meant to ensure that your Nano is authentic and was not hacked."
+      },
+      "deviceSuccess": {
+        "title": "All good!",
+        "descr": "Your device is genuine and ready to use with Ledger app",
+        "continue": "Continue"
+      },
+      "deviceError": {
+        "title": "Your Nano’s authenticity couldn’t be verified...",
+        "descr": "We recommend you contact Ledger Support to resolve this issue. ",
+        "contactSupport": "Contact Ledger Support"
+      },
+      "languageIncomplete": {
+        "title": "Get started in {{language}}",
+        "descr": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
+        "gotIt": "Got it"
+      },
+      "beCareful": {
+        "title": "Be careful",
+        "descr": "Make sure you follow instructions on this app at every step of the process.",
+        "gotIt": "Got it"
+      },
+      "useLedgerSeeds": {
+        "title": "We recommend only using Ledger recovery phrases",
+        "descr": "Importing recovery phrases from wallets other than Ledger wallets can cause a risk for your assets. Ledger cannot guarantee security integrity if importing external recovery phrases.",
+        "gotIt": "Got it"
+      }
+    },
     "screens": {
       "welcome": {
         "title": "Welcome to Ledger",
@@ -2235,6 +2311,33 @@
               "prev": "Previous step",
               "help": "Need help"
             }
+          },
+          "quizzSuccess": {
+            "title": "Already a pro!",
+            "paragraph": "You are ready to safely manage your coins. Let’s quickly pair your device before enjoying your app freely.",
+            "buttons": {
+              "next": "Lets plug my Nano",
+              "prev": "Previous step"
+            }
+          },
+          "quizzFail": {
+            "title": "You will soon become a pro...",
+            "paragraph1": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra confortable about your cryptos safety.",
+            "paragraph2": "Only one quick step left!",
+            "buttons": {
+              "next": "Lets plug my Nano",
+              "prev": "Previous step"
+            }
+          },
+          "connectYourDevice": {
+            "plugUSBCable": {
+              "title": "Plug USB cable",
+              "descr": "Plug your cable and enter your PIN Code on your device",
+              "buttons": {
+                "next": "Continue",
+                "prev": "Previous step"
+              }
+            }
           }
         }
       }
@@ -2266,8 +2369,11 @@
       }
     },
     "quizz": {
-      "heading": "Quizz",
+      "heading": "Quiz",
+      "title": "Now game on!",
+      "descr": "Answer 3 simple questions to avoid common misconceptions about your wallet.",
       "buttons": {
+        "start": "Let’s take the quiz",
         "next": "Next question",
         "finish": "Finish quiz"
       },
@@ -2323,20 +2429,6 @@
             }
           }
         }
-      }
-    },
-    "pinHelp": {
-      "title": "Secure your PIN code",
-      "intro": "During the setup process you choose a PIN code.",
-      "rules": {
-        "1": "Always choose a PIN code by yourself.",
-        "2": "Always enter your PIN code out of sight.",
-        "3": "You can change your PIN code if needed.",
-        "4": "Remember that three wrong PIN code entries in a row will reset the device.",
-        "5": "Never use an easy PIN code like 0000, 123456, or 55555555.",
-        "6": "Never share your PIN code with someone else.",
-        "7": "Never use a PIN code you did not choose yourself.",
-        "8": "Never store your PIN code on a computer or phone."
       }
     }
   },

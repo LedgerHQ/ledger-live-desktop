@@ -10,8 +10,8 @@ import successIllu from "../assets/answerSuccess.svg";
 const Illu = styled.div`
   background: url(${({ success }) => (success ? successIllu : failIllu)});
   margin-top: 84px;
-  width: 136px;
-  height: 111px;
+  width: 150px;
+  height: 132px;
 `;
 
 export function Result({ sendEvent, t, meta, state }) {

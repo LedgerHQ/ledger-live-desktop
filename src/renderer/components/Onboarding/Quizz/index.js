@@ -10,18 +10,15 @@ import { Result } from "./screens/Result";
 
 const DURATION = 250;
 
-const QuizzContainer = styled.div`
-  box-sizing: border-box;
-  padding: 0px 67px;
-  width: 680px;
-  height: 480px;
-  background-color: ${p => p.theme.colors.palette.background.default};
-  display: flex;
+const ScreenContainer = styled.div`
+  text-align: center;
   position: relative;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
-  text-align: center;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 0px 67px;
 
   &.screen-appear {
     opacity: 0;
@@ -44,6 +41,15 @@ const QuizzContainer = styled.div`
   &.screen-exit {
     display: none;
   }
+`;
+
+const QuizzContainer = styled.div`
+  box-sizing: border-box;
+  width: 680px;
+  height: 480px;
+  background-color: ${p => p.theme.colors.palette.background.default};
+  display: flex;
+  overflow: hidden;
 `;
 
 const screens = {
@@ -78,10 +84,12 @@ export function Quizz({ actor }: QuizzProps) {
   }
 
   return (
-    <CSSTransition in classNames="screen" timeout={DURATION} key={state.value} appear>
-      <QuizzContainer>
-        <CurrentScreen t={t} sendEvent={sendEvent} meta={meta} state={state} />
-      </QuizzContainer>
-    </CSSTransition>
+    <QuizzContainer>
+      <CSSTransition in classNames="screen" timeout={DURATION} key={state.value} appear>
+        <ScreenContainer>
+          <CurrentScreen t={t} sendEvent={sendEvent} meta={meta} state={state} />
+        </ScreenContainer>
+      </CSSTransition>
+    </QuizzContainer>
   );
 }
