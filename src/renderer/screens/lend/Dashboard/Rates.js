@@ -3,12 +3,12 @@ import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { BigNumber } from "bignumber.js";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import type { AccountLikeArray } from "@ledgerhq/live-common/lib/types";
 import type { CurrentRate } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 import { getCryptoCurrencyById, formatShort } from "@ledgerhq/live-common/lib/currencies";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { flattenSortAccountsSelector } from "~/renderer/actions/general";
+import { useFlattenSortAccounts } from "~/renderer/actions/general";
 import { isAcceptedLendingTerms } from "~/renderer/terms";
 import Box from "~/renderer/components/Box";
 import Card from "~/renderer/components/Box/Card";
@@ -116,7 +116,9 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
     const parentAccount = accounts.find(a => account?.parentId === a.id);
     const ethAccount = accounts.find(a => a.type === "Account" && a.currency.id === eth.id);
     if (!account && ethAccount) {
-      dispatch(openModal("MODAL_RECEIVE", { currency: token, account: ethAccount }));
+      dispatch(
+        openModal("MODAL_LEND_EMPTY_ACCOUNT_DEPOSIT", { currency: token, account: ethAccount }),
+      );
     } else if (!ethAccount) {
       dispatch(openModal("MODAL_LEND_NO_ETHEREUM_ACCOUNT", { currency: token }));
     } else if (isAcceptedLendingTerms()) {
@@ -201,9 +203,9 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
   );
 };
 
-const Rates = ({ rates }: { rates: CurrentRate[] }) => {
+export default function Rates({ rates }: { rates: CurrentRate[] }) {
   const { t } = useTranslation();
-  const accounts = useSelector(flattenSortAccountsSelector);
+  const accounts = useFlattenSortAccounts();
   return (
     <Card>
       <Header px={24} py={16} horizontal flex>
@@ -249,6 +251,4 @@ const Rates = ({ rates }: { rates: CurrentRate[] }) => {
       ))}
     </Card>
   );
-};
-
-export default Rates;
+}

@@ -2,6 +2,10 @@ body {
   font-family: Inter;
 }
 
+.spectron-run canvas {
+  visibility: hidden;
+}
+
 #react-root {
   display: flex;
   flex-direction: column;

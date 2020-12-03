@@ -2,7 +2,7 @@
 
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import Track from "~/renderer/analytics/Track";
@@ -14,9 +14,8 @@ import Tooltip from "~/renderer/components/Tooltip";
 import IconDots from "~/renderer/icons/Dots";
 import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
 import IconSend from "~/renderer/icons/Send";
-import { hideEmptyTokenAccountsSelector } from "~/renderer/reducers/settings";
 import { openModal } from "~/renderer/actions/modals";
-import { setHideEmptyTokenAccounts } from "~/renderer/actions/settings";
+import { useHideEmptyTokenAccounts } from "~/renderer/actions/settings";
 
 import type { DropDownItemType } from "~/renderer/components/DropDownSelector";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -46,16 +45,11 @@ type ItemType = DropDownItemType & {
 
 const OptionsButton = () => {
   const dispatch = useDispatch();
-  const hideEmptyTokenAccounts = useSelector(hideEmptyTokenAccountsSelector);
+  const [hideEmptyTokenAccounts, setHideEmptyTokenAccounts] = useHideEmptyTokenAccounts();
+
   const onOpenModal = useCallback(
     (modal: string) => {
       dispatch(openModal(modal));
-    },
-    [dispatch],
-  );
-  const onSetHideEmptyTokenAccounts = useCallback(
-    (status: boolean) => {
-      dispatch(setHideEmptyTokenAccounts(status));
     },
     [dispatch],
   );
@@ -85,7 +79,7 @@ const OptionsButton = () => {
       onClick: (e: MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        onSetHideEmptyTokenAccounts(!hideEmptyTokenAccounts);
+        setHideEmptyTokenAccounts(!hideEmptyTokenAccounts);
       },
     },
   ];
@@ -107,7 +101,7 @@ const OptionsButton = () => {
                   : "hideEmptyTokenAccountsDisabled"
               }
             />
-            <Switch isChecked={hideEmptyTokenAccounts} onChange={onSetHideEmptyTokenAccounts} />
+            <Switch isChecked={hideEmptyTokenAccounts} onChange={setHideEmptyTokenAccounts} />
           </Box>
         ) : item.icon ? (
           <Box mr={4}>{item.icon}</Box>

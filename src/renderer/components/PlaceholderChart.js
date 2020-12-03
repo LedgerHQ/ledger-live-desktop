@@ -11,6 +11,7 @@ type Props = {
   data: Array<*>,
   tickXScale: PortfolioRange,
   theme: any,
+  magnitude: number,
 };
 
 class PlaceholderChart extends Component<Props> {
@@ -37,6 +38,7 @@ class PlaceholderChart extends Component<Props> {
         height={200}
         tickXScale={tickXScale}
         renderTickY={() => ""}
+        magnitude={this.props.magnitude}
       />
     );
   }

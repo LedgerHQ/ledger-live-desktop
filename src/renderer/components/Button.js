@@ -310,6 +310,7 @@ export type Props = {
   isLoading?: boolean,
   event?: string,
   eventProperties?: Object,
+  mr?: number,
 };
 
 class Button extends PureComponent<

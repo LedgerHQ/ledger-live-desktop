@@ -6,7 +6,7 @@ import StakeAlgorandBanner from "~/renderer/components/Carousel/banners/StakeAlg
 import SwapBanner from "~/renderer/components/Carousel/banners/Swap";
 import SellBanner from "~/renderer/components/Carousel/banners/Sell";
 import LendingBanner from "~/renderer/components/Carousel/banners/Lending";
-// import BlackFridayBanner from "~/renderer/components/Carousel/banners/BlackFriday";
+import BlackFridayBanner from "~/renderer/components/Carousel/banners/BlackFriday";
 
 export const getTransitions = (transition: "slide" | "flip", reverse: boolean = false) => {
   const mult = reverse ? -1 : 1;
@@ -47,6 +47,12 @@ export const getTransitions = (transition: "slide" | "flip", reverse: boolean = 
 
 export const getDefaultSlides = () => {
   return [
+    {
+      id: "blackfriday",
+      Component: BlackFridayBanner,
+      start: new Date("1 Nov 2020 00:01:00 PST"),
+      end: new Date("30 Nov 2020 23:59:00 PST"),
+    },
     { id: "swap", Component: SwapBanner },
     { id: "buy", Component: BuyCryptoBanner },
     { id: "sell", Component: SellBanner },
@@ -54,11 +60,5 @@ export const getDefaultSlides = () => {
     { id: "ledgerAcademy", Component: LedgerAcademyBanner },
     { id: "stakeAlgorand", Component: StakeAlgorandBanner },
     { id: "lending", Component: LendingBanner },
-    /* {
-      id: "blackfriday",
-      Component: BlackFridayBanner,
-      start: new Date("1 Nov 2020 00:01:00 PST"),
-      end: new Date("30 Nov 2020 23:59:00 PST"),
-    }, */
   ];
 };

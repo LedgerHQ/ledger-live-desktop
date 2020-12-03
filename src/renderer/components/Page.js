@@ -133,7 +133,7 @@ const Page = ({ children }: Props) => {
       <TopBar />
       <PageScrollerContainer id="scroll-area">
         <PageScrollTopSeparator isAtUpperBound={isScrollAtUpperBound} />
-        <PageScroller ref={pageScrollerRef}>
+        <PageScroller id="page-scroller" ref={pageScrollerRef}>
           <PageContentContainer>{children}</PageContentContainer>
         </PageScroller>
       </PageScrollerContainer>

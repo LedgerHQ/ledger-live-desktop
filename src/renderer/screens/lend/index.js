@@ -2,10 +2,9 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { listCurrentRates } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
-import { flattenSortAccountsSelector } from "~/renderer/actions/general";
+import { useFlattenSortAccounts } from "~/renderer/actions/general";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import TabBar from "~/renderer/components/TabBar";
@@ -34,7 +33,7 @@ const tabs = [
 const Lend = () => {
   const { t } = useTranslation();
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
-  const accounts = useSelector(flattenSortAccountsSelector);
+  const accounts = useFlattenSortAccounts();
   const summaries = useCompoundSummaries(accounts);
   const [rates, setRates] = useState(() => listCurrentRates());
 

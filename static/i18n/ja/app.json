@@ -1,4 +1,9 @@
 {
+  "calendar": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "yesterday": "Yesterday"
+  },
   "common": {
     "labelYes": "はい",
     "labelNo": "いいえ",
@@ -120,7 +125,7 @@
     "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "マネージャー",
-    "exchange": "Buy",
+    "exchange": "Buy / Sell",
     "swap": "Swap",
     "lend": "Lend"
   },
@@ -245,6 +250,132 @@
       "creditedAmount": "Amount to receive"
     }
   },
+  "fullNode": {
+    "status": "Status",
+    "connect": "Connect",
+    "disconnect": "Disconnect",
+    "checkNodeSettings": "Verify node settings",
+    "edit": "Edit",
+    "modal": {
+      "title": "Connect Bitcoin full node",
+      "disconnectTitle": "Disconnect full node",
+      "steps": {
+        "landing": {
+          "title": "Node",
+          "header": "Start your full node. Don’t trust, verify.",
+          "description": "A Bitcoin full node validates all transactions and blocks, allowing you to use Bitcoin in a trustless way while contributing to the Bitcoin network.",
+          "list": {
+            "item1": "Set up Bitcoin Core on a device with sufficient resources.",
+            "item2": "Wait for your node to fully synchronize.",
+            "item3": "Make note of your RPC credentials, IP address and port number."
+          },
+          "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
+        },
+        "node": {
+          "title": "Node",
+          "connectionSteps": {
+            "notConnected": {
+              "header": "Enter your node parameters",
+              "disclaimer": "Your full node must be fully synchronized before connecting Ledger Live.",
+              "fields": {
+                "nodeHost": {
+                  "title": "Host",
+                  "tooltip": "Leave as default if node runs on this computer, or replace the node IP address and port number."
+                },
+                "rpcCredentials": {
+                  "title": "RPC Credentials",
+                  "tooltip": "Enter the RPC username and password of your node, found in the bitcoin.conf file.",
+                  "usernamePlaceholder": "Username",
+                  "passwordPlaceholder": "Password"
+                },
+                "tls": {
+                  "title": "Use TLS",
+                  "tooltip": "Enable Transport Layer Security, for example, when using a hosted node solution."
+                }
+              }
+            },
+            "connecting": {
+              "header": "Testing node connection",
+              "description": "Please wait while we check if your full node is responding."
+            },
+            "success": {
+              "header": "Full node connection successful",
+              "description": "You can now configure your full node to scan for your accounts on the blockchain."
+            },
+            "failure": {
+              "header": "Could not reach full node",
+              "description": "Please ensure your node is fully synchronized and verify its connection settings."
+            }
+          }
+        },
+        "device": {
+          "title": "Device",
+          "connectionSteps": {
+            "pending": {
+              "header": "Getting accounts from device",
+              "description": "Please wait while the accounts to scan are added to the node configuration file."
+            },
+            "success": {
+              "header": "Accounts added to node configuration",
+              "description": "A configuration file was saved to the user data folder. It enables Ledger SatStack to connect to your full node and let it scan for your accounts on the blockchain.",
+              "cta": "View user data"
+            }
+          }
+        },
+        "accounts": {
+          "title": "Accounts",
+          "existing": "Existing accounts to scan",
+          "toScan": "Accounts to scan",
+          "toScanDescription": "Accounts to scan for each address type",
+          "toScanTooltip": "Increase only if you have 10+ BTC accounts.  Initial scan will be slower. "
+        },
+        "satstack": {
+          "title": "SatStack",
+          "connectionSteps": {
+            "notConnected": {
+              "header": "Download and run Ledger SatStack",
+              "description": "Ledger SatStack is a small application enabling Ledger Live to talk to your full node. Please download and run it before you continue.",
+              "disclaimer": "SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
+              "cta": "Download SatStack"
+            },
+            "satstack-disconnected": {
+              "header": "Could not reach SatStack",
+              "description": "Please verify that SatStack is running on this computer."
+            },
+            "node-disconnected": {
+              "header": "Could not reach full node",
+              "description": "Please verify that your node is reachable and that the connection settings you entered are correct."
+            },
+            "invalid-chain": {
+              "header": "invalid-chain title",
+              "description": "invalid-chain description for tooltip"
+            },
+            "initializing": {
+              "header": "Loading",
+              "description": ""
+            },
+            "ready": {
+              "header": "Ready",
+              "description": "The full node is fully synced. Your Bitcoin account balances are now correct."
+            },
+            "syncing": {
+              "header": "Node sync in progress…",
+              "description": "Recent transactions may not yet be visible, so Bitcoin account balances may be incorrect. If possible, run your node continuously to keep it in sync."
+            },
+            "scanning": {
+              "header": "Account scan in progress...",
+              "description": "You can add your accounts once the account scan is competed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
+            }
+          }
+        },
+        "disconnect": {
+          "title": "Disconnect full node",
+          "cta": "Disconnect",
+          "description": "Are you sure? Disconnecting the full node will remove all Bitcoin accounts. You can add your accounts again using Ledger’s explorers."
+        }
+      }
+    }
+  },
   "account": {
     "lastOperations": "Latest operations",
     "contractAddress": "Contract:",
@@ -285,7 +416,7 @@
     "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
   },
   "exchange": {
-    "title": "Buy crypto",
+    "title": "Buy and sell crypto",
     "reset": "Reset flow",
     "banner": {
       "title": "Buy crypto via our partner",
@@ -302,7 +433,12 @@
       "addAccount": "Add account"
     },
     "sell": {
-      "tab": "Sell"
+      "title": "Sell crypto via our partner",
+      "tab": "Sell",
+      "selectCrypto": "Choose a crypto asset",
+      "selectAccount": "Choose an account",
+      "continue": "Continue",
+      "addAccount": "Add account"
     },
     "history": {
       "tab": "History"
@@ -397,11 +533,11 @@
         "approve": "Approve",
         "manageLimit": "Manage limit",
         "viewDetails": "View details",
-        "info": "You have deposited <0>{{amount}}</0> from this account.",
-        "notSupplied": "You can now deposit from this account.",
-        "notSuppliedNoLimit": "You can deposit assets from this account.",
+        "info": "You have approved <0>{{amount}}</0> on this account. You can reduce the amount at a fee.",
+        "infoNoLimit": "You have fully approved this account. You can reduce the amount at a fee.",
+        "approvedWithLimit": "You have approved <0>{{value}}</0> on this account.",
         "enabling": "You can deposit assets once the account approval is confirmed.",
-        "notEnabled": "You must approve your account before you can lend assets.",
+        "notEnabled": "You need to approve this account before being able to lend assets.",
         "notEnoughApproved": "You must increase the limit approved on your account to lend."
       },
       "supply": {
@@ -536,6 +672,12 @@
       "title": "Please create an ETH account",
       "description": "<0>{{ asset }}({{ ticker }})</0> is an Ethereum ERC-20 token. To lend {{ ticker }}, install the Ethereum app and create an Ethereum account",
       "cta": "Add account"
+    },
+    "emptyAccountDeposit": {
+      "title": "You don't have any {{ asset }} account.",
+      "description": "In order to deposit funds and lend crypto you need a {{ asset }} account. Please Receive funds on your Ethereum address.",
+      "ctaBuy": "Buy {{ asset }}",
+      "ctaReceive": "Receive {{ asset }}"
     }
   },
   "accounts": {
@@ -563,6 +705,7 @@
       "send": "Send",
       "swap": "Swap",
       "buy": "Buy",
+      "sell": "Sell",
       "edit": "Edit account",
       "hideToken": "Hide token"
     }
@@ -628,6 +771,10 @@
       "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
       "cta": "Buy back-up pack"
     },
+    "sell": {
+      "title": "sell crypto",
+      "description": "Sell Bitcoin with our partner directly from Ledger Live"
+    },
     "stakeAlgorand": {
       "title": "Staking with ALGORAND",
       "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
@@ -635,6 +782,14 @@
     "swap": {
       "title": "Swap crypto",
       "description": "Exchange one crypto for another from Ledger Live with our partner."
+    },
+    "lending": {
+      "title": "Lend Crypto",
+      "description": "Lend stablecoins to the Compound protocol and earn interests today"
+    },
+    "blackfriday": {
+      "title": "BLACK FRIDAY ",
+      "description": "Enjoy 40% off Ledger hardware wallets with the promo code BLACKFRIDAY20"
     }
   },
   "dashboard": {
@@ -751,6 +906,7 @@
       "import": "アカウント",
       "finish": "確認"
     },
+    "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
     "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "既存アカウントを追加",
     "selectAll": "すべての({{count}})を選択",
@@ -843,7 +999,7 @@
   "DeviceAction": {
     "allowAppPermission": "Open the {{wording}} app on your device",
     "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
-    "allowManagerPermission": "{{wording}} on your device",
+    "allowManagerPermission": "Allow {{wording}} on your device",
     "loading": "Loading...",
     "connectAndUnlockDevice": "Connect and unlock your device",
     "unlockDevice": "Unlock your device",
@@ -855,6 +1011,10 @@
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction"
+    },
+    "sell": {
+      "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
+      "confirm": "Confirm Sell transaction"
     }
   },
   "manager": {
@@ -1136,6 +1296,11 @@
     "title": "Buy",
     "titleCrypto": "Buy {{currency}}",
     "buyCTA": "Buy {{currencyTicker}}"
+  },
+  "sell": {
+    "title": "Sell",
+    "titleCrypto": "Sell {{currency}}",
+    "buyCTA": "Sell {{currencyTicker}}"
   },
   "receive": {
     "title": "受信",
@@ -1705,7 +1870,6 @@
     "helpButton": "Help",
     "tabs": {
       "display": "一般",
-      "cryptoAssets": "Crypto assets",
       "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "ヘルプ",
@@ -1748,22 +1912,10 @@
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
-      "desc": "Change settings for each of your crypto assets",
+      "desc": "Select a crypto asset to edit its settings.",
       "placeholder": "No settings for this asset",
-      "select": "Select a crypto asset to edit its settings.",
       "confirmationsNb": "確認数",
       "confirmationsNbDesc": "取引を確認済みにするためのネットワーク確認数を設定します。"
-    },
-    "rates": {
-      "desc": "Here are all the rates that are used to calculate countervalues.\nChoose which rate providers are used for each rate.",
-      "fromTo": "{{from}} to {{to}}",
-      "noCounterValue": "We have no data for this trading pair",
-      "cryptoToFiat": "Crypto to fiat",
-      "cryptoToCrypto": "Crypto to Crypto",
-      "rate": "Rate",
-      "last": "Last {{days}} days",
-      "price": "Price",
-      "exchange": "Rate provider"
     },
     "profile": {
       "password": "パスワードロック",
@@ -1848,7 +2000,13 @@
       },
       "tokenBlacklist": {
         "title": "Hidden tokens",
-        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'"
+        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
+        "count": "{{count}} token",
+        "count_plural": "{{count}} tokens"
+      },
+      "fullNode": {
+        "title": "Connect Bitcoin full node",
+        "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
       }
     }
   },
@@ -2207,10 +2365,6 @@
     "AmountRequired": {
       "title": "Amount required"
     },
-    "BitcoinCashHardforkOct2020Warning": {
-      "title": "",
-      "description": "Bitcoin Cash is currently undergoing a hard fork without replay protection. We will temporarily interrupt the Bitcoin Cash service until the network has stabilized."
-    },
     "NoAccessToCamera": {
       "title": "Please ensure your system has a camera, that it is not in use by another application and that Ledger Live has permission to use it.",
       "description": ""
@@ -2433,6 +2587,26 @@
     "PasswordIncorrect": {
       "title": "The password entered is incorrect",
       "description": "再試行してください"
+    },
+    "RPCHostRequired": {
+      "title": "Host is required."
+    },
+    "RPCHostInvalid": {
+      "title": "Enter valid host."
+    },
+    "RPCUserRequired": {
+      "title": "RPC Username is required"
+    },
+    "RPCPassRequired": {
+      "title": "RPC Password is required"
+    },
+    "SatStackAccessDown": {
+      "title": "Could not reach full node",
+      "description": "Please verify that SatStack and your node are running. Check the full node setup in the Settings if the problem persists."
+    },
+    "SatStackStillSyncing": {
+      "title": "Node sync in progress...",
+      "description": "Please wait while your node is syncing. Sending is not possible since your Bitcoin account balances may be incorrect."
     },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",

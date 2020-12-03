@@ -2,15 +2,14 @@
 
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { balanceHistoryWithCountervalueSelector } from "~/renderer/actions/portfolio";
+import { useBalanceHistoryWithCountervalue } from "~/renderer/actions/portfolio";
 import type { Account, TokenAccount, PortfolioRange } from "@ledgerhq/live-common/lib/types";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import CounterValue from "~/renderer/components/CounterValue";
-import Chart from "~/renderer/components/Chart2Preview";
+import Chart from "~/renderer/components/ChartPreview";
 import useTheme from "~/renderer/hooks/useTheme";
 
 const Placeholder = styled.div`
@@ -22,10 +21,11 @@ type Props = {
   range: PortfolioRange,
 };
 
-const Body = ({ account, range }: Props) => {
-  const { history, countervalueAvailable, countervalueChange } = useSelector(state =>
-    balanceHistoryWithCountervalueSelector(state, { account, range }),
-  );
+function Body({ account, range }: Props) {
+  const { history, countervalueAvailable, countervalueChange } = useBalanceHistoryWithCountervalue({
+    account,
+    range,
+  });
   const bgColor = useTheme("colors.palette.background.paper");
   const currency = getAccountCurrency(account);
 
@@ -37,7 +37,6 @@ const Body = ({ account, range }: Props) => {
             currency={currency}
             value={history[history.length - 1].value}
             animateTicker={false}
-            alwaysShowSign={false}
             showCode
             fontSize={3}
             placeholder={<Placeholder />}
@@ -63,7 +62,7 @@ const Body = ({ account, range }: Props) => {
       />
     </Box>
   );
-};
+}
 
 const MemoedBody: React$ComponentType<Props> = React.memo(Body);
 

@@ -166,7 +166,11 @@ const StepSummary = ({
       </ProviderWrapper>
       <Box mt={6} horizontal alignItems={"center"} onClick={onSwitchAccept}>
         {!alreadyAcceptedTerms ? (
-          <CheckBox onChange={onSwitchAccept} isChecked={checkedDisclaimer} />
+          <CheckBox
+            onChange={onSwitchAccept}
+            isChecked={checkedDisclaimer}
+            id="swap-modal-summary-provider-tos-checkbox"
+          />
         ) : null}
         <Terms
           ff="Inter|Regular"
@@ -252,6 +256,7 @@ export const StepSummaryFooter = ({
           onClick={onBeforeContinue}
           disabled={disabled && !alreadyAcceptedTerms}
           primary
+          id="swap-modal-summary-continue-button"
           data-e2e="modal_buttonContinue_swap"
         >
           <Trans i18nKey="common.confirm" />

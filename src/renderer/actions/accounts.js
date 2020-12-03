@@ -1,6 +1,6 @@
 // @flow
 
-import type { Account } from "@ledgerhq/live-common/lib/types";
+import type { Account, SubAccount } from "@ledgerhq/live-common/lib/types";
 import { implicitMigration } from "@ledgerhq/live-common/lib/migrations/accounts";
 import { getKey } from "~/renderer/storage";
 
@@ -48,14 +48,17 @@ export const updateAccount: UpdateAccount = payload => ({
   },
 });
 
-export const toggleStarAction: UpdateAccount = (id, parentId) => {
+export const toggleStarAction = (id: string, parentId: ?string) => {
   return {
     type: "DB:UPDATE_ACCOUNT",
     payload: {
       updater: (account: Account) => {
         if (parentId && account.subAccounts) {
-          const subAccounts = account.subAccounts.map(sa =>
-            sa.id === id ? { ...sa, starred: !sa.starred } : sa,
+          const subAccounts: SubAccount[] = account.subAccounts.map(sa =>
+            sa.id === id
+              ? // $FlowFixMe
+                { ...sa, starred: !sa.starred }
+              : sa,
           );
           return { ...account, subAccounts };
         }
@@ -67,3 +70,6 @@ export const toggleStarAction: UpdateAccount = (id, parentId) => {
 };
 
 export const cleanAccountsCache = () => ({ type: "DB:CLEAN_ACCOUNTS_CACHE" });
+export const cleanFullNodeDisconnect = () => ({
+  type: "DB:CLEAN_FULLNODE_DISCONNECT",
+});

@@ -132,7 +132,6 @@ const Row = ({ account, parentAccount, delegation }: Props) => {
       </Base>
       <Base>
         <CounterValue
-          alwaysShowSign={false}
           ff="Inter|SemiBold"
           color="palette.text.shade80"
           fontSize={3}

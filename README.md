@@ -90,6 +90,35 @@ NO_DEBUG_COUNTERVALUES=1
 
 other envs can be seen in [live-common:src/env.js](https://github.com/LedgerHQ/ledger-live-common/blob/master/src/env.js)
 
+### Run tests
+
+In a terminal you need to have webpack dev server running
+```bash
+yarn start
+```
+
+In an other terminal you need to launch the webdriver/electron container. First run will be slow.
+Next ones will be fast unless some changes are made to the container or package.json. You need to kill and re run the command if package.json changed.
+```bash
+yarn start-electron-webdriver
+```
+
+You can point VNCViewer to `localhost::5900` to check what is happening in the container. `secret` is the password.
+Then you can launch tests.
+```bash
+yarn spectron
+```
+or
+```bash
+node_modules/.bin/jest tests/specs/<FILEREGEX>.spec.js
+```
+
+It's a bit heavy on the memory/cpu when running in parralel so don't hesitate to use the regex way or play with jest cli options.
+
+If you need to create an app.json, run a test that set up what you need and run it with the env var `SPECTRON_DUMP_APP_JSON` set. It will create `tests/dump.json` at the end of the spec.
+
+**Please put the image expectations at the end of the it(...) tests so that it does not break the whole flow if a snapshot breaks**
+
 ### Run code quality checks
 
 ```bash

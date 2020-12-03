@@ -137,7 +137,7 @@ const CosmosValidatorNameField = ({
 
   const formattedValidator = useMemo(
     () => (address ? cosmosValidators.find(v => v.validatorAddress === address) : null),
-    [cosmosValidators, validators],
+    [address, cosmosValidators],
   );
 
   return address ? (

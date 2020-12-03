@@ -12,6 +12,8 @@ export default styled.label.attrs(p => ({
 }))`
   margin-top: ${p => (p.mt ? `${p.mt}px` : "auto")};
   margin-bottom: ${p => (p.mb ? `${p.mb}px` : "auto")};
+  margin-left: ${p => (p.ml ? `${p.ml}px` : "0px")};
+  margin-right: ${p => (p.mr ? `${p.mr}px` : "0px")};
   ${alignItems};
   ${color};
   ${fontSize};

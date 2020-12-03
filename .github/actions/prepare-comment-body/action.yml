@@ -1,0 +1,29 @@
+name:  prepare-comment-body
+description: gets a list of images and return a formatted markdown body for comment
+author: valpinkman
+outputs:
+  body:
+    description: markdown formatted body for comment
+inputs:
+  images:
+    description: array of images to include in body of comment
+    required: true
+  fullrepo:
+    description: full repo name
+    required: true
+  runId:
+    description: runId
+    required: true
+  testoutput:
+    description: testoutput
+    required: true
+  lintoutput:
+    description: lintoutput
+    required: true
+runs:
+  using: node12
+  main: index.js
+
+branding:
+  icon: align-center
+  color: white

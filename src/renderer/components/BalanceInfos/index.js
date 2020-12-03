@@ -1,12 +1,9 @@
 // @flow
-
 import React from "react";
 import type { BigNumber } from "bignumber.js";
 import styled from "styled-components";
-
+import { useTranslation } from "react-i18next";
 import type { Unit, ValueChange, AccountLike } from "@ledgerhq/live-common/lib/types";
-import type { TFunction } from "react-i18next";
-
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import PillsDaysCount from "~/renderer/components/PillsDaysCount";
@@ -25,7 +22,6 @@ type BalanceSinceProps = {
   valueChange: ValueChange,
   totalBalance: BigNumber,
   isAvailable: boolean,
-  t: TFunction,
 };
 
 type BalanceTotalProps = {
@@ -46,13 +42,18 @@ type BalanceInfoProps = Props & {
   handleChangeSelectedTime: any => void,
 };
 
-export function BalanceDiff(props: Props) {
-  const { t, totalBalance, valueChange, since, unit, isAvailable, ...otherProps } = props;
-
+export function BalanceDiff({
+  totalBalance,
+  valueChange,
+  since,
+  unit,
+  isAvailable,
+  ...boxProps
+}: Props) {
   if (!isAvailable) return null;
 
   return (
-    <Box horizontal {...otherProps}>
+    <Box horizontal {...boxProps}>
       <Box horizontal alignItems="center" style={{ lineHeight: 1.2, fontSize: 20 }}>
         {valueChange.percentage && (
           <FormattedVal
@@ -79,19 +80,19 @@ export function BalanceDiff(props: Props) {
   );
 }
 
-export function BalanceTotal(props: BalanceTotalProps) {
-  const {
-    unit,
-    totalBalance,
-    isAvailable,
-    showCryptoEvenIfNotAvailable,
-    children,
-    withTransactionsPendingConfirmationWarning,
-    account,
-  } = props;
+export function BalanceTotal({
+  unit,
+  totalBalance,
+  isAvailable,
+  showCryptoEvenIfNotAvailable,
+  children,
+  withTransactionsPendingConfirmationWarning,
+  account,
+  ...boxProps
+}: BalanceTotalProps) {
   return (
     <Box horizontal grow shrink>
-      <Box {...props}>
+      <Box {...boxProps}>
         <Box horizontal>
           {!isAvailable && !showCryptoEvenIfNotAvailable ? (
             <PlaceholderLine width={150} />
@@ -122,16 +123,15 @@ BalanceTotal.defaultProps = {
   unit: undefined,
 };
 
-function BalanceInfos(props: BalanceInfoProps) {
-  const {
-    t,
-    totalBalance,
-    since,
-    handleChangeSelectedTime,
-    valueChange,
-    isAvailable,
-    unit,
-  } = props;
+export default function BalanceInfos({
+  totalBalance,
+  since,
+  handleChangeSelectedTime,
+  valueChange,
+  isAvailable,
+  unit,
+}: BalanceInfoProps) {
+  const { t } = useTranslation();
 
   return (
     <Box flow={5}>
@@ -147,7 +147,6 @@ function BalanceInfos(props: BalanceInfoProps) {
       </Box>
       <Box horizontal alignItems="center" justifyContent="space-between">
         <BalanceDiff
-          t={t}
           totalBalance={totalBalance}
           valueChange={valueChange}
           since={since}
@@ -159,5 +158,3 @@ function BalanceInfos(props: BalanceInfoProps) {
     </Box>
   );
 }
-
-export default BalanceInfos;

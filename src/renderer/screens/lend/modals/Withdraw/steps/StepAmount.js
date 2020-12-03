@@ -3,11 +3,12 @@ import invariant from "invariant";
 import React from "react";
 import { Trans } from "react-i18next";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+import { useSpoilerForTransaction } from "~/renderer/hooks/useSpoilerForTransaction";
 import type { StepProps } from "../types";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-
+import ErrorBanner from "~/renderer/components/ErrorBanner";
 import Spoiler from "~/renderer/components/Spoiler";
 import GasPriceField from "~/renderer/families/ethereum/GasPriceField";
 import GasLimitField from "~/renderer/families/ethereum/GasLimitField";
@@ -15,19 +16,22 @@ import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 import AmountField from "../fields/AmountField";
 import WithdrawableBanner from "../../../WithdrawableBanner";
 
+const spoilerHandlesError = key => key !== "amount";
+
 export default function StepAmount({
   account,
   parentAccount,
   onChangeTransaction,
   transaction,
   status,
-  error,
+  bridgeError,
   bridgePending,
   t,
 }: StepProps) {
   invariant(account && transaction, "account and transaction required");
 
   const currency = getAccountCurrency(account);
+  const [spoiler, setSpoiler] = useSpoilerForTransaction(status, spoilerHandlesError);
 
   return (
     <Box flow={1}>
@@ -36,6 +40,7 @@ export default function StepAmount({
         name="Withdraw Step 1"
         eventProperties={{ currencyName: currency.name }}
       />
+      {bridgeError ? <ErrorBanner error={bridgeError} /> : null}
       <Box vertical>
         {account && transaction ? (
           <WithdrawableBanner account={account} parentAccount={parentAccount} />
@@ -51,11 +56,15 @@ export default function StepAmount({
             t={t}
           />
         </Box>
-        <Spoiler textTransform title={<Trans i18nKey="lend.withdraw.steps.amount.advanced" />}>
+        <Spoiler
+          opened={spoiler}
+          onOpen={setSpoiler}
+          textTransform
+          title={<Trans i18nKey="lend.withdraw.steps.amount.advanced" />}
+        >
           {parentAccount && transaction ? (
             <Box my={4}>
               <GasPriceField
-                // $FlowFixMe wen TypeScript
                 onChange={onChangeTransaction}
                 account={parentAccount}
                 transaction={transaction}

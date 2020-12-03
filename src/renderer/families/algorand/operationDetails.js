@@ -81,7 +81,6 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
                 fontSize={3}
                 currency={currency}
                 value={extra.rewards}
-                alwaysShowSign={false}
                 subMagnitude={1}
                 prefix={
                   <Box mr={1} color="palette.text.shade60" style={{ lineHeight: 1.2 }}>

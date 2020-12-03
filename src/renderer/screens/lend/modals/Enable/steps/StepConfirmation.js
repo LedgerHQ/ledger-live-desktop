@@ -62,7 +62,7 @@ function StepConfirmation({
   t,
   transaction,
   optimisticOperation,
-  error,
+  transactionError,
   theme,
   device,
   signed,
@@ -96,7 +96,7 @@ function StepConfirmation({
     );
   }
 
-  if (error) {
+  if (transactionError) {
     return (
       <Container shouldSpace={signed}>
         <TrackPage category="Lend" name="Approve Step 3 Fail" eventProperties={{ currency }} />
@@ -105,7 +105,7 @@ function StepConfirmation({
             title={<Trans i18nKey="lend.enable.steps.confirmation.broadcastError" />}
           />
         ) : null}
-        <ErrorDisplay error={error} withExportLogs />
+        <ErrorDisplay error={transactionError} withExportLogs />
       </Container>
     );
   }
@@ -117,7 +117,8 @@ export function StepConfirmationFooter({
   account,
   parentAccount,
   onRetry,
-  error,
+  transactionError,
+  status,
   openModal,
   onClose,
   transitionTo,
@@ -128,7 +129,7 @@ export function StepConfirmationFooter({
       <Button ml={2} event="Lending Flow Step 4 Close Clicked" onClick={onClose} secondary>
         {t("lend.enable.steps.confirmation.success.done")}
       </Button>
-      {error ? <RetryButton ml={2} primary onClick={onRetry} /> : null}
+      {transactionError ? <RetryButton ml={2} primary onClick={onRetry} /> : null}
     </Box>
   );
 }
