@@ -20,7 +20,6 @@ import Button from "~/renderer/components/Button";
 import Label from "~/renderer/components/Label";
 import Spoiler from "~/renderer/components/Spoiler";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
-import FormattedVal from "~/renderer/components/FormattedVal";
 import GasPriceField from "~/renderer/families/ethereum/GasPriceField";
 import GasLimitField from "~/renderer/families/ethereum/GasLimitField";
 import { subAccountByCurrencyOrderedSelector } from "~/renderer/reducers/accounts";
