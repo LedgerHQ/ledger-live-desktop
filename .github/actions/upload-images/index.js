@@ -17,16 +17,24 @@ const uploadImage = async () => {
     body.append("type", "file");
     body.append("image", file);
 
-    const res = await fetch("https://api.imgur.com/3/image", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Client-ID 11eb8a62f4c7927`,
-      },
-      body,
-    });
+    try {
+      const res = await fetch("https://api.imgur.com/3/image", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Client-ID 11eb8a62f4c7927`,
+        },
+        body,
+      });
 
-    return res.json();
+      const link = (await res.json()).data.link;
+      if (!link) {
+        throw new Error("no link");
+      }
+      return link;
+    } catch (e) {
+      return upload(file);
+    }
   };
 
   let files;
@@ -43,9 +51,9 @@ const uploadImage = async () => {
   });
 
   const results = await Promise.all(resultsP);
-  const res = results.map((r, index) => {
+  const res = results.map((link, index) => {
     return {
-      link: r.data.link,
+      link,
       name: files[index].replace("-diff.png", ""),
     };
   });
