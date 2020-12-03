@@ -1010,7 +1010,11 @@
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
-      "confirm": "Confirm Swap transaction"
+      "confirm": "Confirm Swap transaction",
+      "amountSent": "Amount sent",
+      "amountReceived": "Amount received",
+      "fees": "Fees",
+      "provider": "Provider"
     },
     "sell": {
       "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
