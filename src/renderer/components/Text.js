@@ -1,9 +1,26 @@
 // @flow
 
 import styled from "styled-components";
-import { fontSize, fontWeight, textAlign, color, space, lineHeight } from "styled-system";
+import {
+  fontSize,
+  fontWeight,
+  textAlign,
+  color,
+  space,
+  lineHeight,
+  letterSpacing,
+  system,
+} from "styled-system";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import fontFamily from "~/renderer/styles/styled/fontFamily";
+
+const uppercase = system({
+  uppercase: {
+    prop: "uppercase",
+    property: "textTransform",
+    transform: value => (value ? "uppercase" : "none"),
+  },
+});
 
 const Text: ThemedComponent<{
   fontFamily?: string,
@@ -16,13 +33,15 @@ const Text: ThemedComponent<{
   align?: "DEPRECATED: USE textAlign INSTEAD",
   lineHeight?: string,
 }> = styled.span`
+  ${uppercase};
+  ${lineHeight};
   ${fontFamily};
   ${fontSize};
   ${textAlign};
   ${color};
   ${fontWeight};
   ${space};
-  ${lineHeight};
+  ${letterSpacing};
 `;
 
 export default Text;
