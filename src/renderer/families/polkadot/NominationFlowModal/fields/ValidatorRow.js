@@ -140,7 +140,6 @@ type ValidatorRowProps = {
   unit: Unit,
   icon: React$Node,
   title: React$Node,
-  subtitle: React$Node,
   isSelected: boolean,
   disabled?: boolean,
   onClick?: (*) => void,

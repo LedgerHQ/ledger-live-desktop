@@ -1835,41 +1835,7 @@
       "externalControllerTooltip": "Ce compte est contrôlé par un autre compte.",
       "externalControllerUnsupported": "<0>Ce compte est contrôlé par un autre compte ayant l'adresse <0>{{address}}</0>.</0><1>Les opérations de Staking sur un compte de réserve externe n'est pas supporté par Ledger Live. Merci d'utiliser un porte-feuille alternatif tel que Polkadot.js.</1>",
       "externalStashTooltip": "Ce compte contrôle un autre compte.",
-      "externalStashUnsupported": "<0>Ce compte contrôle un autre compte de réserve ayant l'adresse <0>{{address}}</0>.</0><1>Les opérations de Staking sur un compte de réserve externe n'est pas supporté par Ledger Live. Merci d'utiliser un porte-feuille alternatif tel que Polkadot.js.</1>",
-      "flow": {
-        "title": "Nominer des validateurs",
-        "steps": {
-          "starter": {
-            "description": "Vous pouvez obtenir des récompenses en liant vos DOT puis en nommant des validateurs.",
-            "bullet": [
-              "Vous gardez la propriété des actifs liés",
-              "Nominez avec votre appareil Ledger",
-              "Les actifs seront disponibles 28 jours après avoir délié vos actifs."
-            ],
-            "help": "Comment fonctionne la nomination",
-            "termsAndPrivacy": "Choisissez vos validateurs judicieusement: Une partie de vos actifs liés peut être perdue si un validateur ne se comporte pas correctement."
-          },
-          "validator": {
-            "title": "Validateurs"
-          },
-          "connectDevice": {
-            "title": "Appareil"
-          },
-          "confirmation": {
-            "title": "Confirmation",
-            "label": "Confirmation",
-            "success": {
-              "title": "Nomination effectuée avec succès",
-              "text": "Le solde de votre compte sera actualisé dès que la blockchain aura confirmé la transaction.",
-              "cta": "Voir les détails"
-            },
-            "pending": {
-              "title": "Diffusion de la transaction..."
-            },
-            "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
-          }
-        }
-      }
+      "externalStashUnsupported": "<0>Ce compte contrôle un autre compte de réserve ayant l'adresse <0>{{address}}</0>.</0><1>Les opérations de Staking sur un compte de réserve externe n'est pas supporté par Ledger Live. Merci d'utiliser un porte-feuille alternatif tel que Polkadot.js.</1>"
     },
     "unlockings": {
       "header": "Actifs en cours de débloquage",
@@ -1892,8 +1858,32 @@
         "description": "Déverrouillez vos DOT pour les retrouver dans votre solde disponible. Vous ne gagnerez plus de récompenses grâce à ces actifs."
       },
       "nominate": {
-        "title": "Nominate",
+        "title": "Nominer",
         "description": "Choississez jusqu'à 16 validateurs à élire et générer des récompenses."
+      }
+    },
+    "nominate": {
+      "title": "Nominer des validateurs",
+      "steps": {
+        "validators": {
+          "title": "Validateurs"
+        },
+        "connectDevice": {
+          "title": "Appareil"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "Confirmation",
+          "success": {
+            "title": "Nomination effectuée avec succès",
+            "text": "Le solde de votre compte sera actualisé dès que la blockchain aura confirmé la transaction.",
+            "cta": "Voir les détails"
+          },
+          "pending": {
+            "title": "Diffusion de la transaction..."
+          },
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+        }
       }
     },
     "bond": {
@@ -1906,10 +1896,21 @@
         "stakedDescription": "Les récompenses seront versées sur le compte actuel en tant que balance liée au staking."
       },
       "steps": {
+        "starter": {
+          "description": "Vous pouvez obtenir des récompenses en liant vos DOT puis en nommant des validateurs.",
+          "bullet": [
+            "Vous gardez la propriété des actifs liés",
+            "Nominez avec votre appareil Ledger",
+            "Les actifs seront disponibles 28 jours après avoir délié vos actifs."
+          ],
+          "help": "Comment fonctionne la nomination",
+          "termsAndPrivacy": "Choisissez vos validateurs judicieusement: Une partie de vos actifs liés peut être perdue si un validateur ne se comporte pas correctement."
+        },
         "amount": {
           "title": "Montant",
           "amountLabel": "Montant à lier",
-          "maxLabel": "Disponible",
+          "availableLabel": "Disponible",
+          "maxLabel": "Lier Max",
           "info": "Une fois les actifs liés ils peuvent être déliés à n'importe quel moment, mais seront bloqués pendant une période de 28 jours."
         },
         "connectDevice": {
@@ -1941,7 +1942,8 @@
         "amount": {
           "title": "Montant",
           "amountLabel": "Montant à relier",
-          "maxLabel": "En débloquage",
+          "availableLabel": "En débloquage",
+          "maxLabel": "Relier Max",
           "info": "Les actifs reliés seront immédiatement ajoutés à la balance bloquée et seront part d'enjeu pour l'ère prochaine."
         },
         "connectDevice": {
@@ -1968,7 +1970,8 @@
         "amount": {
           "title": "Montant",
           "amountLabel": "Montant à délier",
-          "maxLabel": "Débloquable",
+          "availableLabel": "Débloquable",
+          "maxLabel": "Délier Max",
           "info": "Les actifs déliés pourront être récupérés après une période de 28 jours."
          },
         "connectDevice": {

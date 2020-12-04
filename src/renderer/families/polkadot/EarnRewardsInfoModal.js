@@ -34,16 +34,16 @@ export default function PolkadotEarnRewardsInfoModal({ name, account, parentAcco
     <EarnRewardsInfoModal
       name={name}
       onNext={onNext}
-      description={t("polkadot.nomination.flow.steps.starter.description")}
+      description={t("polkadot.bond.steps.starter.description")}
       bullets={[
-        t("polkadot.nomination.flow.steps.starter.bullet.0"),
-        t("polkadot.nomination.flow.steps.starter.bullet.1"),
-        t("polkadot.nomination.flow.steps.starter.bullet.2"),
+        t("polkadot.bond.steps.starter.bullet.0"),
+        t("polkadot.bond.steps.starter.bullet.1"),
+        t("polkadot.bond.steps.starter.bullet.2"),
       ]}
-      additional={<WarnBox>{t("polkadot.nomination.flow.steps.starter.termsAndPrivacy")}</WarnBox>}
+      additional={<WarnBox>{t("polkadot.bond.steps.starter.termsAndPrivacy")}</WarnBox>}
       footerLeft={
         <LinkWithExternalIcon
-          label={<Trans i18nKey="polkadot.nomination.flow.steps.starter.help" />}
+          label={<Trans i18nKey="polkadot.bond.steps.starter.help" />}
           onClick={() => openURL(urls.stakingPolkadot)}
         />
       }

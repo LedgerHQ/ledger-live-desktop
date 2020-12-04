@@ -117,7 +117,6 @@ const ValidatorField = ({
             </IconContainer>
           }
           title={`${validator.identity || validator.address}`}
-          subtitle={"STATUS HERE?"}
           isSelected={isSelected}
           onExternalLink={onExternalLink}
           onUpdateVote={onUpdateNomination}

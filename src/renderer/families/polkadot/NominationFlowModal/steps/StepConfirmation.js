@@ -40,8 +40,8 @@ function StepConfirmation({
         <TrackPage category="Nomination Polkadot" name="Step Confirmed" />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
-          title={<Trans i18nKey="polkadot.nomination.flow.steps.confirmation.success.title" />}
-          description={multiline(t("polkadot.nomination.flow.steps.confirmation.success.text"))}
+          title={<Trans i18nKey="polkadot.nominate.steps.confirmation.success.title" />}
+          description={multiline(t("polkadot.nominate.steps.confirmation.success.text"))}
         />
       </Container>
     );
@@ -53,7 +53,7 @@ function StepConfirmation({
         <TrackPage category="Nomination Polkadot" name="Step Confirmation Error" />
         {signed ? (
           <BroadcastErrorDisclaimer
-            title={<Trans i18nKey="polkadot.nomination.flow.steps.confirmation.broadcastError" />}
+            title={<Trans i18nKey="polkadot.nominate.steps.confirmation.broadcastError" />}
           />
         ) : null}
         <ErrorDisplay error={error} withExportLogs />
@@ -97,7 +97,7 @@ export function StepConfirmationFooter({
             }
           }}
         >
-          <Trans i18nKey="polkadot.nomination.flow.steps.confirmation.success.cta" />
+          <Trans i18nKey="polkadot.nominate.steps.confirmation.success.cta" />
         </Button>
       ) : error ? (
         <RetryButton primary ml={2} onClick={onRetry} />

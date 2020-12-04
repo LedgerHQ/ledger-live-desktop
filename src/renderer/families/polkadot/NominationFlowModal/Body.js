@@ -55,20 +55,20 @@ type Props = OwnProps & StateProps;
 const steps: Array<St> = [
   {
     id: "castNominations",
-    label: <Trans i18nKey="polkadot.nomination.flow.steps.validator.title" />,
+    label: <Trans i18nKey="polkadot.nominate.steps.validators.title" />,
     component: StepNomination,
     noScroll: true,
     footer: StepNominationFooter,
   },
   {
     id: "connectDevice",
-    label: <Trans i18nKey="polkadot.nomination.flow.steps.connectDevice.title" />,
+    label: <Trans i18nKey="polkadot.nominate.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
     onBack: ({ transitionTo }: StepProps) => transitionTo("castNominations"),
   },
   {
     id: "confirmation",
-    label: <Trans i18nKey="polkadot.nomination.flow.steps.confirmation.title" />,
+    label: <Trans i18nKey="polkadot.nominate.steps.confirmation.title" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
   },
@@ -175,7 +175,7 @@ const Body = ({
   }
 
   const stepperProps = {
-    title: t("polkadot.nomination.flow.title"),
+    title: t("polkadot.nominate.title"),
     device,
     account,
     parentAccount,

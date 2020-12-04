@@ -1835,41 +1835,7 @@
       "externalControllerTooltip": "This account is controlled by another account.",
       "externalControllerUnsupported": "<0>This account is controlled by another account with address <0>{{address}}</0>.</0><1>Staking operations on Stash controlled by an external account are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js.</1>",
       "externalStashTooltip": "This account controls another account.",
-      "externalStashUnsupported": "<0>This account controls an external Stash account with address <0>{{address}}</0>.</0><1>Staking operations on external Stash are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js.</1>",
-      "flow": {
-        "title": "Nominate",
-        "steps": {
-          "starter": {
-            "description": "You may earn rewards by bonding your DOT assets and nominating validators.",
-            "bullet": [
-              "You keep ownership of bonded assets",
-              "Nominate using your Ledger device",
-              "Assets will be available 28 days after unbonding"
-            ],
-            "help": "How nomination works",
-            "termsAndPrivacy": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
-          },
-          "validator": {
-            "title": "Validators"
-          },
-          "connectDevice": {
-            "title": "Device"
-          },
-          "confirmation": {
-            "title": "Confirmation",
-            "label": "Confirmation",
-            "success": {
-              "title": "You have successfully nominated validators",
-              "text": "Your account balance will be updated when the blockchain confirms the transaction.",
-              "cta": "View details"
-            },
-            "pending": {
-              "title": "Broadcasting transaction..."
-            },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
-          }
-        }
-      }
+      "externalStashUnsupported": "<0>This account controls an external Stash account with address <0>{{address}}</0>.</0><1>Staking operations on external Stash are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js.</1>"
     },
     "unlockings": {
       "header": "Unbondings",
@@ -1896,6 +1862,30 @@
         "description": "Choose up to 16 validators to be elected to start earning rewards."
       }
     },
+    "nominate": {
+      "title": "Nominate",
+      "steps": {
+        "validators": {
+          "title": "Validators"
+        },
+        "connectDevice": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "Confirmation",
+          "success": {
+            "title": "You have successfully nominated validators",
+            "text": "Your account balance will be updated when the blockchain confirms the transaction.",
+            "cta": "View details"
+          },
+          "pending": {
+            "title": "Broadcasting transaction..."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    },
     "bond": {
       "title": "Bond assets",
       "rewardDestination": {
@@ -1906,10 +1896,21 @@
         "stakedDescription": "The rewards will be transferred to the current account as bonded balance."
       },
       "steps": {
+        "starter": {
+          "description": "You may earn rewards by bonding your DOT assets and nominating validators.",
+          "bullet": [
+            "You keep ownership of bonded assets",
+            "Nominate using your Ledger device",
+            "Assets will be available 28 days after unbonding"
+          ],
+          "help": "How nomination works",
+          "termsAndPrivacy": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
+        },
         "amount": {
           "title": "Amount",
           "amountLabel": "Amount to bond",
-          "maxLabel": "Available",
+          "availableLabel": "Available",
+          "maxLabel": "Bond Max",
           "info": "Once assets are bonded they can be unbonded any time, but they will be locked for 28-days."
         },
         "connectDevice": {
@@ -1923,7 +1924,7 @@
           "title": "Confirmation",
           "success": {
             "title": "",
-            "text": "You will will be able to nominate validators once the network has confirmed your transaction.",
+            "text": "You will be able to nominate validators once the network has confirmed your transaction.",
             "nominatePending": "Nominate in {{time}}",
             "nominate": "Nominate",
             "later": "Nominate later"
@@ -1941,7 +1942,8 @@
         "amount": {
           "title": "Amount",
           "amountLabel": "Amount to rebond",
-          "maxLabel": "Unlocking",
+          "availableLabel": "Unlocking",
+          "maxLabel": "Rebond Max",
           "info": "Rebonded assets will be immediately added to bonded balance and will participate in staking for next era."
         },
         "connectDevice": {
@@ -1968,7 +1970,8 @@
         "amount": {
           "title": "Amount",
           "amountLabel": "Amount to unbond",
-          "maxLabel": "Unlockable",
+          "availableLabel": "Unlockable",
+          "maxLabel": "Unbond Max",
           "info": "Unbonded assets can be withdrawn after a 28-day timelock period."
         },
         "connectDevice": {
