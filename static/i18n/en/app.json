@@ -366,7 +366,7 @@
               "header": "Account scan in progress...",
               "description": "You can add your accounts once the account scan is competed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
             }
-            
+
           }
         },
         "disconnect": {
@@ -2070,7 +2070,14 @@
     "selectedAccounts_plural": "Accounts to be included ({{count}})"
   },
   "language": {
-    "system": "Use system language"
+    "system": "Use system language",
+    "switcher": {
+      "en": "English",
+      "fr": "French",
+      "ru": "Russian",
+      "es": "Spanish",
+      "zh": "Chinese"
+    }
   },
   "theme": {
     "system": "Select the system theme",

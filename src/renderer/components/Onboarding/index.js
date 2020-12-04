@@ -19,6 +19,7 @@ import { pedagogyMachine } from "~/renderer/components/Onboarding/Pedagogy/state
 
 import styled from "styled-components";
 import { quizzMachine } from "~/renderer/components/Onboarding/Quizz/state";
+import LangSwitcher from "./LangSwitcher";
 
 function LedgerLogo() {
   return (
@@ -41,7 +42,11 @@ const OnboardingLogoContainer = styled.div`
   position: absolute;
   top: 40px;
   left: 40px;
+  right: 40px;
   z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const OnboardingContainer = styled.div`
@@ -144,6 +149,7 @@ export function Onboarding() {
     <React.Fragment>
       <OnboardingLogoContainer>
         <LedgerLogo />
+        {state.value === "welcome" ? <LangSwitcher /> : null}
       </OnboardingLogoContainer>
       <Modal isOpen={!!state.context.modal} onRequestClose={() => sendEvent("CLOSE_MODAL")}>
         {state.context.modal ? <Quizz actor={state.context.modal} /> : null}
