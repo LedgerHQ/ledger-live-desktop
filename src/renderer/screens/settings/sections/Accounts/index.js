@@ -17,7 +17,7 @@ export default function SectionAccounts() {
     <>
       <Section style={{ flowDirection: "column" }}>
         <TrackPage category="Settings" name="Accounts" />
-
+        <Currencies />
         <SectionExport />
         <Header
           icon={<EyeSlash />}
@@ -26,7 +26,6 @@ export default function SectionAccounts() {
           renderRight={<HideEmptyTokenAccountsToggle />}
         />
         <BlacklistedTokens />
-        <Currencies />
       </Section>
     </>
   );

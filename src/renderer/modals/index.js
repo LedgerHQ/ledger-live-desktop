@@ -25,6 +25,8 @@ import MODAL_HELP from "./Help";
 import MODAL_SWAP from "./Swap";
 import MODAL_SWAP_OPERATION_DETAILS from "./SwapOperationDetails";
 
+import MODAL_FULL_NODE from "./FullNode";
+
 import MODAL_CLAIM_REWARDS from "./ClaimRewards";
 import MODAL_FREEZE from "./Freeze";
 import MODAL_UNFREEZE from "./Unfreeze";
@@ -51,8 +53,6 @@ import MODAL_LEND_ENABLE_FLOW from "../screens/lend/modals/Enable";
 import MODAL_LEND_WITHDRAW_FLOW from "../screens/lend/modals/Withdraw";
 import MODAL_LEND_NO_ETHEREUM_ACCOUNT from "../screens/lend/modals/NoEthereumAccount";
 import MODAL_LEND_EMPTY_ACCOUNT_DEPOSIT from "../screens/lend/modals/EmptyAccountDeposit";
-
-import MODAL_LEND_HIGH_FEES from "../screens/lend/modals/HighFeesModal";
 
 const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_WEBSOCKET_BRIDGE,
@@ -99,11 +99,11 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_LEND_SELECT_ACCOUNT,
   MODAL_LEND_SUPPLY,
   MODAL_LEND_WITHDRAW_FLOW,
-  MODAL_LEND_HIGH_FEES,
   MODAL_LEND_NO_ETHEREUM_ACCOUNT,
   MODAL_LEND_EMPTY_ACCOUNT_DEPOSIT,
   MODAL_SWAP,
   MODAL_SWAP_OPERATION_DETAILS,
+  MODAL_FULL_NODE,
 };
 
 export default modals;

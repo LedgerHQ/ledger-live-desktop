@@ -25,9 +25,10 @@ let mockDeviceEvent;
 expect.extend({ toMatchImageSnapshot });
 jest.setTimeout(600000);
 
-export default function initialize() {
+// eslint-disable-next-line jest/no-export
+export default function initialize(name, { userData, env = {}, disableStartSnap = false }) {
   beforeAll(async () => {
-    app = await applicationProxy();
+    app = await applicationProxy(userData, env);
     onboardingPage = new OnboardingPage(app);
     modalPage = new ModalPage(app);
     genuinePage = new GenuinePage(app);
@@ -39,22 +40,63 @@ export default function initialize() {
 
     try {
       await app.start();
+      await app.client.waitUntilWindowLoaded();
     } catch (e) {
       console.log("app start error", e);
     }
 
-    app.client.addCommand("screenshot", function(countdown = 500) {
+    app.client.addCommand("waitForSync", async () => {
+      const sync = await app.client.$("#topbar-synchronized");
+      await sync.waitForDisplayed();
+    });
+
+    app.client.addCommand("screenshot", async function(countdown = 500) {
       this.pause(countdown);
 
-      return this.browserWindow.capturePage();
+      const pageRect = await app.client.execute(() => {
+        return {
+          height: document.getElementById("page-scroller")
+            ? document.getElementById("page-scroller").scrollHeight
+            : 0,
+          offsetHeight: document.getElementById("page-scroller")
+            ? document.getElementById("page-scroller").offsetHeight
+            : 0,
+          oWidth: window.innerWidth,
+          oHeight: window.innerHeight,
+        };
+      });
+
+      const height = Math.max(
+        pageRect.oHeight,
+        pageRect.oHeight + pageRect.height - pageRect.offsetHeight,
+      );
+
+      await this.browserWindow.setContentSize(pageRect.oWidth, height);
+
+      const capture = await this.browserWindow.capturePage();
+
+      await this.browserWindow.setContentSize(pageRect.oWidth, pageRect.oHeight);
+
+      return capture;
     });
   });
 
   afterAll(async () => {
-    return app.stop().then(() => removeUserData());
+    return app.stop().then(() => removeUserData(process.env.SPECTRON_DUMP_APP_JSON));
   });
+
+  if (!disableStartSnap) {
+    it("should start in this state", async () => {
+      await app.client.$("__app__ready__");
+      await app.client.pause(1000);
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: `__start__${name}`,
+      });
+    });
+  }
 }
 
+// eslint-disable-next-line jest/no-export
 export {
   app,
   deviceInfo,

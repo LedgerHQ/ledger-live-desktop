@@ -9,17 +9,16 @@ on:
       - master
 
 jobs:
-  type-checking:
+  test:
     runs-on: ubuntu-latest
+    outputs:
+      comment: ${{ steps.comment.outputs.body }}
     steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.4.0
-        with:
-          access_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
+          persist-credentials: false
       - uses: actions/setup-node@main
         with:
           node-version: 12.x
@@ -35,46 +34,74 @@ jobs:
       - name: install dependencies
         run: yarn --frozen-lockfile
       - name: run code checks
-        run: yarn ci
+        run: yarn ci 2>lint.txt
+      - name: Read lint output
+        id: lint
+        if: always()
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
+        with:
+          path: ./lint.txt
       - name: check build
+        if: always()
         run: sudo yarn build
       - name: start electron webdriver
-        run: cd tests/docker-electron-webdriver && docker-compose up -d
-      - name: run spectron
-        run: yarn spectron
-      - name: check
         if: always()
-        run: |
-          cd tests/specs/__image_snapshots__
-          ls -la
+        run: yarn start-electron-webdriver -d
+      - uses: nev7n/wait_for_response@7fef3c1a6e8939d0b09062f14fec50d3c5d15fa1
+        if: always()
+        with:
+          url: 'http://localhost:9515/'
+          responseCode: 404
+          timeout: 600000
+          interval: 1000
+      - name: run spectron
+        if: always()
+        run: yarn spectron --no-color 2>output.txt
+      - name: Read test output
+        id: spectron
+        if: always()
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
+        with:
+          path: ./output.txt
       - name: upload diffs to imgur
-        if: failure()
+        if: always()
         uses: ./.github/actions/upload-images
         id: imgur
         with:
           path: tests/specs/__image_snapshots__/__diff_output__
+      - name: clean diff
+        if: always()
+        run: rm -f tests/specs/__image_snapshots__/__diff_output__/*.png
+      - name: upload ci suggested screenshots
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: ci-suggested-screenshots
+          path: tests/specs/__image_snapshots__/__diff_output__/
       - name: prepare comment body
-        if: failure()
+        if: always()
         id: comment
-        uses: ledgerhq/actions/prepare-comment-body@v2.0.0
+        uses: ./.github/actions/prepare-comment-body
         with:
           images: ${{ steps.imgur.outputs.images }}
-      - name: create markdown file for commenting
-        id: create
-        if: github.event_name == 'pull_request' && failure()
-        run: |
-          mkdir -p artifacts
-          cat > artifacts/message.md <<EOF
-
-          PR to merge $GITHUB_HEAD_REF $GITHUB_SHA -> $GITHUB_BASE_REF
-
-          ## Diff output
-          ${{ steps.comment.outputs.body }}
-
-          EOF
-      - name: save PR message as artifact
-        if: steps.create.outputs.artifact == '1' && failure()
-        uses: actions/upload-artifact@v2
+          fullrepo: ${{ github.repository }}
+          runId: ${{ github.run_id }}
+          testoutput: ${{ steps.spectron.outputs.content }}
+          lintoutput: ${{ steps.lint.outputs.content }}
+      - name: display comment
+        if: always()
+        id: displaycomment
+        env:
+          BODY: ${{ steps.comment.outputs.body }}
+        run: echo "$BODY"
+  post-comment:
+    runs-on: ubuntu-latest
+    needs: test
+    if: always() && needs.test.result != 'cancelled'
+    steps:
+      - name: post comment
+        uses: mshick/add-pr-comment@5cd99bf9c186219af43341076f1fe9c09e5a9934
         with:
-          name: pr_message
-          path: artifacts
+          message: ${{ needs.test.outputs.comment }}
+          allow-repeats: true
+          repo-token: ${{ secrets.GITHUB_TOKEN }}

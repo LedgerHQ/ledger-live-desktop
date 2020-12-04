@@ -17,7 +17,7 @@ const CountdownTimer = ({
   const [finished, setFinished] = useState(false);
 
   useInterval(() => {
-    if (!end || finished) {
+    if (!end || finished || process.env.SPECTRON_RUN_DISABLE_COUNTDOWN_TIMERS) {
       return;
     }
 

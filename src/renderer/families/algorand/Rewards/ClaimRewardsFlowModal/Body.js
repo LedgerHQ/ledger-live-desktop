@@ -63,7 +63,7 @@ const steps: Array<St> = [
     id: "connectDevice",
     label: <Trans i18nKey="algorand.claimRewards.flow.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
-    onBack: ({ transitionTo }: StepProps) => transitionTo("assets"),
+    onBack: ({ transitionTo }: StepProps) => transitionTo("info"),
   },
   {
     id: "confirmation",

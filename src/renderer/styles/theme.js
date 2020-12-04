@@ -61,7 +61,7 @@ const colors = {
   lightGrey: "#f9f9f9",
   starYellow: "#FFD24A",
   orange: "#ffa726",
-  positiveGreen: "#66be54",
+  positiveGreen: "rgba(102, 190, 84)",
   greenPill: "#41ccb4",
   smoke: "#666666",
   wallet: "#6490f1",

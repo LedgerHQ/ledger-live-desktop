@@ -5,12 +5,15 @@ import { Trans } from "react-i18next";
 import { connect, useDispatch } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { useBridgeSync, useAccountSyncState } from "@ledgerhq/live-common/lib/bridge/react";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 
 import Box from "~/renderer/components/Box";
 import { Rotating } from "~/renderer/components/Spinner";
 import Tooltip from "~/renderer/components/Tooltip";
 import TranslatedError from "~/renderer/components/TranslatedError";
 import IconCheck from "~/renderer/icons/Check";
+import IconSyncServer from "~/renderer/icons/SyncServer";
 import IconPending from "~/renderer/icons/Clock";
 import IconError from "~/renderer/icons/Error";
 import IconLoader from "~/renderer/icons/Loader";
@@ -21,6 +24,7 @@ import {
 } from "~/renderer/reducers/accounts";
 import { colors } from "~/renderer/styles/theme";
 import { openModal } from "~/renderer/actions/modals";
+import useEnv from "~/renderer/hooks/useEnv";
 
 const mapStateToProps = createStructuredSelector({
   isUpToDateAccount: isUpToDateAccountSelector,
@@ -55,13 +59,17 @@ class StatusSynchronizing extends PureComponent<{ onClick: (*) => void }> {
   }
 }
 
-class StatusUpToDate extends PureComponent<{ onClick: (*) => void }> {
+class StatusUpToDate extends PureComponent<{ showSatStackIcon?: boolean, onClick: (*) => void }> {
   render() {
-    const { onClick } = this.props;
+    const { showSatStackIcon, onClick } = this.props;
     return (
       <Tooltip content={<Trans i18nKey="common.sync.upToDate" />}>
         <Box onClick={onClick}>
-          <IconCheck onClick={onClick} color={colors.positiveGreen} size={16} />
+          {showSatStackIcon ? (
+            <IconSyncServer onClick={onClick} color={colors.positiveGreen} size={16} />
+          ) : (
+            <IconCheck onClick={onClick} color={colors.positiveGreen} size={16} />
+          )}
         </Box>
       </Tooltip>
     );
@@ -110,6 +118,7 @@ const StatusNeedsMigration = React.memo<{}>(function StatusNeedsMigration() {
 
 type OwnProps = {
   accountId: string,
+  account: AccountLike,
 };
 
 type Props = OwnProps & {
@@ -117,11 +126,21 @@ type Props = OwnProps & {
   needsMigration: boolean,
 };
 
-const AccountSyncStatusIndicator = ({ accountId, isUpToDateAccount, needsMigration }: Props) => {
+const AccountSyncStatusIndicator = ({
+  accountId,
+  account,
+  isUpToDateAccount,
+  needsMigration,
+}: Props) => {
   const { pending, error } = useAccountSyncState({ accountId });
   const sync = useBridgeSync();
   const [userAction, setUserAction] = useState(false);
   const timeout = useRef(null);
+  const satStackAlreadyConfigured = useEnv("SATSTACK");
+  const currency = getAccountCurrency(account);
+
+  const showSatStackIcon = satStackAlreadyConfigured && currency.id === "bitcoin";
+
   const onClick = useCallback(
     e => {
       e.stopPropagation();
@@ -152,7 +171,7 @@ const AccountSyncStatusIndicator = ({ accountId, isUpToDateAccount, needsMigrati
     return <StatusError onClick={onClick} error={error} />;
   }
   if (isUpToDateAccount) {
-    return <StatusUpToDate onClick={onClick} />;
+    return <StatusUpToDate showSatStackIcon={showSatStackIcon} onClick={onClick} />;
   }
   return <StatusQueued onClick={onClick} />;
 };

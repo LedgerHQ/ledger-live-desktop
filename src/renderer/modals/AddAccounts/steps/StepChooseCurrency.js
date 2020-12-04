@@ -15,9 +15,14 @@ import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAle
 import type { StepProps } from "..";
 import { useDispatch } from "react-redux";
 import { openModal } from "~/renderer/actions/modals";
+import FullNodeStatus from "~/renderer/modals/AddAccounts/FullNodeStatus";
+import useSatStackStatus from "~/renderer/hooks/useSatStackStatus";
+import useEnv from "~/renderer/hooks/useEnv";
+import type { SatStackStatus } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
 
 const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
   const currencies = useMemo(() => listSupportedCurrencies().concat(listTokens()), []);
+
   const isToken = currency && currency.type === "TokenCurrency";
   // $FlowFixMe
   const url = isToken ? supportLinkByTokenType[currency.tokenType] : null;
@@ -27,6 +32,7 @@ const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
       {currency ? <CurrencyDownStatusAlert currencies={[currency]} /> : null}
       {/* $FlowFixMe: onChange type is not good */}
       <SelectCurrency currencies={currencies} autoFocus onChange={setCurrency} value={currency} />
+      <FullNodeStatus currency={currency} />
       {currency && currency.type === "TokenCurrency" ? (
         <TokenTips
           textKey="addAccounts.tokensTip"
@@ -53,6 +59,18 @@ export const StepChooseCurrencyFooter = ({
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isToken = currency && currency.type === "TokenCurrency";
+  const satStackAlreadyConfigured = useEnv("SATSTACK");
+
+  const latestStatus: ?SatStackStatus = useSatStackStatus();
+  const fullNodeNotReady =
+    satStackAlreadyConfigured &&
+    !!(
+      currency &&
+      currency.type === "CryptoCurrency" &&
+      currency.id === "bitcoin" &&
+      latestStatus &&
+      latestStatus.type !== "ready"
+    );
 
   // $FlowFixMe
   const parentCurrency = isToken && currency.parentCurrency;
@@ -115,7 +133,7 @@ export const StepChooseCurrencyFooter = ({
       ) : (
         <Button
           primary
-          disabled={!currency}
+          disabled={!currency || fullNodeNotReady}
           onClick={() => transitionTo("connectDevice")}
           id="modal-continue-button"
         >

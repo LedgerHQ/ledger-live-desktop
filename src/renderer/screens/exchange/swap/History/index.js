@@ -2,7 +2,7 @@
 
 import { remote, ipcRenderer } from "electron";
 import React, { useMemo, useEffect, useState, useCallback } from "react";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "~/renderer/components/Box/Card";
 import { accountsSelector } from "~/renderer/reducers/accounts";
@@ -46,6 +46,7 @@ const exportOperations = async (
 };
 
 const History = () => {
+  const { t } = useTranslation();
   const accounts = useSelector(accountsSelector);
   const [exporting, setExporting] = useState(false);
   const [mappedSwapOperations, setMappedSwapOperations] = useState<?(SwapHistorySection[])>(null);
@@ -148,8 +149,8 @@ const History = () => {
             <div key={section.day.toString()}>
               <Box mb={2} mt={4} ff="Inter|SemiBold" fontSize={4} color="palette.text.shade60">
                 {moment(section.day).calendar(null, {
-                  sameDay: "LL – [Today]",
-                  lastDay: "LL – [Yesterday]",
+                  sameDay: `LL – [${t("calendar.today")}]`,
+                  lastDay: `LL – [${t("calendar.yesterday")}]`,
                   lastWeek: "LL",
                   sameElse: "LL",
                 })}

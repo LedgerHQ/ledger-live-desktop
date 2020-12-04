@@ -17,30 +17,46 @@ const uploadImage = async () => {
     body.append("type", "file");
     body.append("image", file);
 
-    const res = await fetch("https://api.imgur.com/3/image", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Client-ID 11eb8a62f4c7927`,
-      },
-      body,
-    });
+    try {
+      const res = await fetch("https://api.imgur.com/3/image", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Client-ID 11eb8a62f4c7927`,
+        },
+        body,
+      });
 
-    return res.json();
+      const link = (await res.json()).data.link;
+      if (!link) {
+        throw new Error("no link");
+      }
+      return link;
+    } catch (e) {
+      return upload(file);
+    }
   };
 
-  const files = fs.readdirSync(fullPath);
+  let files;
+  try {
+    files = fs.readdirSync(fullPath, { withFileTypes: true });
+    files = files.filter(f => f.isFile()).map(f => f.name);
+  } catch {
+    return core.setOutput("images", []);
+  }
+
   const resultsP = files.map(file => {
     const img = fs.readFileSync(`${fullPath}/${file}`);
     return upload(img);
   });
 
   const results = await Promise.all(resultsP);
-  const res = results.map(r => {
-    return r.data.link;
+  const res = results.map((link, index) => {
+    return {
+      link,
+      name: files[index].replace("-diff.png", ""),
+    };
   });
-
-  console.log(res);
 
   core.setOutput("images", res);
 };

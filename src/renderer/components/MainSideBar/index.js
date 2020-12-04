@@ -35,6 +35,7 @@ import Space from "~/renderer/components/Space";
 import UpdateDot from "~/renderer/components/Updater/UpdateDot";
 import { Dot } from "~/renderer/components/Dot";
 import Stars from "~/renderer/components/Stars";
+import useEnv from "~/renderer/hooks/useEnv";
 
 import TopGradient from "./TopGradient";
 import Hide from "./Hide";
@@ -160,9 +161,11 @@ const SideBar = styled(Box).attrs(() => ({
 
 const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
   const isExperimental = useExperimental();
+  const hasFullNodeConfigured = useEnv("SATSTACK"); // NB remove once full node is not experimental
+
   const { t } = useTranslation();
 
-  return isExperimental ? (
+  return isExperimental || hasFullNodeConfigured ? (
     <Tag
       id="drawer-experimental-button"
       to={{ pathname: "/settings/experimental", state: { source: "sidebar" } }}

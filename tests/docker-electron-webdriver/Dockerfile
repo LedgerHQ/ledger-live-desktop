@@ -6,6 +6,7 @@ ENV SCREEN_WIDTH 1920
 ENV SCREEN_HEIGHT 1080
 ENV SCREEN_DEPTH 24
 ENV DISPLAY :99.0
+ENV TZ America/New_York
 
 USER root
 
@@ -63,15 +64,7 @@ RUN rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 ADD tests/docker-electron-webdriver/entrypoint.sh /entrypoint.sh
 RUN chmod 777 /entrypoint.sh
 
-RUN npm install electron-chromedriver@9.0.0
-RUN npm install electron@9.2.0
-RUN npm install spectron@11.1.0
-
-COPY package.json /app/package.json
-COPY scripts /app/scripts
-COPY yarn.lock /app/yarn.lock
 RUN curl -o- -L https://yarnpkg.com/install.sh | bash
-RUN cd /app && yarn --frozen-lockfile
 
 #==============================
 # Generating the VNC password as node

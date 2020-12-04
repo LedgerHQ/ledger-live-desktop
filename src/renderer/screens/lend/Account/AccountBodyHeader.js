@@ -52,11 +52,7 @@ const Loans = ({ account, parentAccount }: Props) => {
         ? "MODAL_LEND_SUPPLY"
         : "MODAL_LEND_ENABLE_INFO";
     const nextModal = [modal, { account, parentAccount, currency }];
-    dispatch(
-      openModal("MODAL_LEND_HIGH_FEES", {
-        nextModal,
-      }),
-    );
+    dispatch(openModal(...nextModal));
   }, [dispatch, account, parentAccount, currency, capabilities]);
 
   const openSupportLink = useCallback(() => openURL(urls.compound), []);

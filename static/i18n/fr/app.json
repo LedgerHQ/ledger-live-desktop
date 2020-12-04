@@ -1,4 +1,9 @@
 {
+  "calendar": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "yesterday": "Yesterday"
+  },
   "common": {
     "labelYes": "Oui",
     "labelNo": "Non",
@@ -245,6 +250,132 @@
       "creditedAmount": "Montant à recevoir"
     }
   },
+  "fullNode": {
+    "status": "Statut",
+    "connect": "Connecter",
+    "disconnect": "Déconnecter",
+    "checkNodeSettings": "Vérifier les paramètres du nœud",
+    "edit": "Éditer",
+    "modal": {
+      "title": "Connecter le nœud Bitcoin",
+      "disconnectTitle": "Déconnecter le noeud",
+      "steps": {
+        "landing": {
+          "title": "Noeud",
+          "header": "Démarrez votre nœud. Don’t trust, verify.",
+          "description": "Un nœud Bitcoin valide toutes les transactions et tous les blocs, vous permettant d'utiliser Bitcoin de manière fiable tout en contribuant au réseau Bitcoin.",
+          "list": {
+            "item1": "Configurez Bitcoin Core sur un appareil avec des ressources suffisantes.",
+            "item2": "Attendez que votre nœud soit complètement synchronisé.",
+            "item3": "Prenez note de vos identifiants RPC, de votre adresse IP et de votre numéro de port."
+          },
+          "disclaimer": "Exécuter un nœud nécessite un ordinateur disposant de ressources suffisantes et d'une connexion à une bande passante sans restriction de données."
+        },
+        "node": {
+          "title": "Noeud",
+          "connectionSteps": {
+            "notConnected": {
+              "header": "Entrez les paramètres de votre noeud",
+              "disclaimer": "Votre nœud doit être entièrement synchronisé avant de connecter Ledger Live.",
+              "fields": {
+                "nodeHost": {
+                  "title": "Hôte",
+                  "tooltip": "Laisser par défaut si le noeud s'exécute sur cet ordinateur, ou remplacer l'adresse IP et le numéro de port du noeud."
+                },
+                "rpcCredentials": {
+                  "title": "Certificats RPC",
+                  "tooltip": "Entrez le nom d'utilisateur RPC et le mot de passe de votre nœud, trouvés dans le fichier bitcoin.conf.",
+                  "usernamePlaceholder": "Nom d'utilisateur",
+                  "passwordPlaceholder": "Mot de passe"
+                },
+                "tls": {
+                  "title": "Utiliser TLS",
+                  "tooltip": "Activer le Transport Layer Security lorsque vous utilisez une solution de nœud hébergé."
+                }
+              }
+            },
+            "connecting": {
+              "header": "Test de la connexion du noeud",
+              "description": "Veuillez patienter pendant que nous vérifions si votre nœud répond."
+            },
+            "success": {
+              "header": "Connexion au noeud réussie",
+              "description": "Vous pouvez maintenant configurer votre nœud pour rechercher vos comptes sur la blockchain."
+            },
+            "failure": {
+              "header": "Noeud inaccessible",
+              "description": "Veuillez vous assurer que votre nœud est entièrement synchronisé et vérifier ses paramètres de connexion."
+            }
+          }
+        },
+        "device": {
+          "title": "Appareil",
+          "connectionSteps": {
+            "pending": {
+              "header": "Récupération des comptes depuis l'appareil",
+              "description": "Veuillez patienter pendant que les comptes à analyser sont ajoutés au fichier de configuration du noeud."
+            },
+            "success": {
+              "header": "Comptes ajoutés à la configuration des nœuds",
+              "description": "Un fichier de configuration a été sauvegardé dans le dossier de données de l'utilisateur. Il permet au Ledger SatStack de se connecter à votre nœud complet et de le laisser rechercher vos comptes sur la blockchain.",
+              "cta": "Voir les données utilisateur"
+            }
+          }
+        },
+        "accounts": {
+          "title": "Comptes",
+          "existing": "Comptes existants à analyser",
+          "toScan": "Comptes à analyser",
+          "toScanDescription": "Comptes à analyser pour chaque type d'adresse",
+          "toScanTooltip": "Augmentez seulement si vous avez plus de 10 comptes BTC. L'analyse initiale sera plus lente. "
+        },
+        "satstack": {
+          "title": "SatStack",
+          "connectionSteps": {
+            "notConnected": {
+              "header": "Téléchargez et exécutez Ledger SatStack",
+              "description": "Ledger SatStack est une application qui permet à Ledger Live de parler à votre nœud. Veuillez le télécharger et l'exécuter avant de continuer.",
+              "disclaimer": "SatStack doit être lancé pour Ledger Live afin de se connecter à votre nœud. Envisagez de le configurer pour le lancer automatiquement lorsque votre ordinateur démarre.",
+              "cta": "Télécharger SatStack"
+            },
+            "satstack-disconnected": {
+              "header": "Impossible d'atteindre SatStack",
+              "description": "Veuillez vérifier que SatStack fonctionne sur cet ordinateur."
+            },
+            "node-disconnected": {
+              "header": "Noeud inaccessible",
+              "description": "Veuillez vérifier que votre nœud est joignable et que les paramètres de connexion que vous avez saisis sont corrects."
+            },
+            "invalid-chain": {
+              "header": "invalid-chain title",
+              "description": "invalid-chain description for tooltip"
+            },
+            "initializing": {
+              "header": "Chargement",
+              "description": ""
+            },
+            "ready": {
+              "header": "Prêt",
+              "description": "Le nœud est entièrement synchronisé. Le solde de vos comptes Bitcoin est maintenant correct."
+            },
+            "syncing": {
+              "header": "Synchronisation du noeuds en cours…",
+              "description": "Les transactions récentes peuvent ne pas encore être visibles, donc les soldes de comptes Bitcoin peuvent être incorrects. Si possible, exécutez votre nœud en continu pour le garder à jour."
+            },
+            "scanning": {
+              "header": "Analyse du compte en cours...",
+              "description": "Vous pouvez ajouter vos comptes une fois l'analyse du compte effectuée. Tous les comptes Bitcoin précédemment ajoutés par les explorers de Ledger ont été supprimés."
+            }
+          }
+        },
+        "disconnect": {
+          "title": "Déconnecter le noeud",
+          "cta": "Déconnecter",
+          "description": "Êtes-vous sûr ? Déconnecter le nœud supprimera tous les comptes Bitcoin. Vous pouvez à nouveau ajouter vos comptes en utilisant les explorers de Ledger."
+        }
+      }
+    }
+  },
   "account": {
     "lastOperations": "Dernières opérations",
     "contractAddress": "Contrat :",
@@ -285,7 +416,7 @@
     "undelegatingTooltip": "Les actifs dont la délégation est interrompue sont verrouillés pendant 21 jours avant d'être disponibles."
   },
   "exchange": {
-    "title": "Acheter des cryptos",
+    "title": "Buy and sell crypto",
     "reset": "Réinitialiser",
     "banner": {
       "title": "Acheter des cryptomonnaies via notre partenaire",
@@ -543,10 +674,10 @@
       "cta": "Ajouter un compte"
     },
     "emptyAccountDeposit": {
-      "title": "You don't have any {{ asset }} account.",
-      "description": "In order to deposit funds and lend crypto you need a {{ asset }} account. Please Receive funds on your Ethereum address.",
-      "ctaBuy": "Buy {{ asset }}",
-      "ctaReceive": "Receive {{ asset }}"
+      "title": "Vous n'avez aucun compte {{ asset }}.",
+      "description": "Afin de déposer des fonds et de prêter des cryptomonnaies, vous avez besoin d'un compte {{ asset }}. Veuillez recevoir des fonds sur votre adresse Ethereum.",
+      "ctaBuy": "Acheter {{ asset }}",
+      "ctaReceive": "Recevoir {{ asset }}"
     }
   },
   "accounts": {
@@ -775,6 +906,7 @@
       "import": "Comptes",
       "finish": "Confirmation"
     },
+    "fullNodeReadyInfo": "Les comptes seront ajoutés en utilisant votre nœud Bitcoin.",
     "tokensTip": "{{token}} ({{ticker}}) est un token {{tokenType}} . Vous pouvez recevoir des tokens directement sur un compte {{currency}}.",
     "accountToImportSubtitle_plural": "Ajouter des comptes existants",
     "selectAll": "Sélectionner tout ({{count}})",
@@ -867,7 +999,7 @@
   "DeviceAction": {
     "allowAppPermission": "Ouvrez l'application {{wording}} sur votre appareil",
     "allowAppPermissionSubtitleToken": "pour gérer vos tokens {{token}}",
-    "allowManagerPermission": "{{wording}} sur votre appareil",
+    "allowManagerPermission": "Allow {{wording}} on your device",
     "loading": "Chargement en cours...",
     "connectAndUnlockDevice": "Connectez et déverrouillez votre appareil",
     "unlockDevice": "Déverrouillez votre appareil",
@@ -1780,7 +1912,7 @@
       "carouselVisibilityDesc": "Activer le carrousel sur la page Portfolio"
     },
     "currencies": {
-      "desc": "Select a crypto asset to edit its settings.",
+      "desc": "Sélectionnez un crypto-actif pour en modifier les paramètres.",
       "placeholder": "Aucun paramètre pour cet actif",
       "confirmationsNb": "Nombre de confirmations",
       "confirmationsNbDesc": "Définissez le nombre de confirmations réseau pour qu’une transaction soit marquée comme confirmée."
@@ -1864,12 +1996,17 @@
     "accounts": {
       "hideEmptyTokens": {
         "title": "Masquer les comptes de tokens vides",
-        "desc": "Hide token accounts with zero balance on the Accounts page."
+        "desc": "Masquer les tokens avec un solde à zéro dans la page Comptes."
       },
       "tokenBlacklist": {
-        "title": "Hidden tokens",
-        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
-        "count": "{{val}} tokens"
+        "title": "Tokens masqués",
+        "desc": "Vous pouvez masquer les tokens en vous rendant sur le compte parent, puis en faisant un clic droit sur le jeton et en sélectionnant 'Cacher le token'.",
+        "count": "{{count}} token",
+        "count_plural": "{{count}} tokens"
+      },
+      "fullNode": {
+        "title": "Connecter le nœud Bitcoin",
+        "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
       }
     }
   },
@@ -2450,6 +2587,26 @@
     "PasswordIncorrect": {
       "title": "Le mot de passe saisi est incorrect",
       "description": "Veuillez essayer à nouveau."
+    },
+    "RPCHostRequired": {
+      "title": "Hôte requis."
+    },
+    "RPCHostInvalid": {
+      "title": "Saisir un hôte valide."
+    },
+    "RPCUserRequired": {
+      "title": "Nom d'utilisateur RPC requis"
+    },
+    "RPCPassRequired": {
+      "title": "Mot de passe RPC requis"
+    },
+    "SatStackAccessDown": {
+      "title": "Noeud inaccessible",
+      "description": "Veuillez vérifier que SatStack et votre noeud sont en cours d'exécution. Vérifiez la configuration du noeud dans les paramètres si le problème persiste."
+    },
+    "SatStackStillSyncing": {
+      "title": "Synchronisation du noeud en cours...",
+      "description": "Veuillez patienter pendant la synchronisation de votre nœud. L'envoi n'est pas possible car le solde de vos comptes Bitcoin est peut-être incorrecte."
     },
     "SwapGenericAPIError": {
       "title": "Le taux de change a expiré",

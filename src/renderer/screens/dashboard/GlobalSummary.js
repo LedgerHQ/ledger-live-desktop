@@ -40,7 +40,7 @@ export default function PortfolioBalanceSummary({
 
   const renderTooltip = useCallback(
     (data: BalanceHistoryData) => <Tooltip data={data} counterValue={counterValue} range={range} />,
-    [counterValue],
+    [counterValue, range],
   );
 
   return (
