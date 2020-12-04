@@ -1817,7 +1817,7 @@
       "header": "Nominations",
       "update": "Changer les validateurs",
       "nominate": "Nominer",
-      "chill": "Arrêter la nomination",
+      "chill": "Ne plus nominer",
       "totalStake": "Participation totale",
       "commission": "Commission",
       "active": "Actif",
@@ -1841,11 +1841,11 @@
       "header": "Actifs en cours de débloquage",
       "headerTooltip": "Disponibles après le verrouillage de 28 jours",
       "inactiveTooltip": "Les montants déliés ne génèrent pas de récompenses.",
-      "withdrawUnbonded": "Retirer actifs débloqués",
-      "withdrawTooltip": "Récupére l'intégralité des actifs débloqués",
-      "noUnlockedWarning": "Aucun actif débloqués à récupérer pour l'instant.",
+      "withdrawUnbonded": "Retirer actifs déliés",
+      "withdrawTooltip": "Récupére l'intégralité des actifs déliés",
+      "noUnlockedWarning": "Aucun actif délié à récupérer pour l'instant.",
       "rebond": "Lier à nouveau",
-      "unbonded": "Débloqué"
+      "unbonded": "Délié"
     },
     "manage": {
       "title": "Gérer les actifs",
@@ -1857,9 +1857,17 @@
         "title": "Délier",
         "description": "Déverrouillez vos DOT pour les retrouver dans votre solde disponible. Vous ne gagnerez plus de récompenses grâce à ces actifs."
       },
+      "withdrawUnbonded": {
+        "title": "Récupérer actifs déliés",
+        "description": "Transferez vos actifs déliés vers votre solde disponible après une période de vérrouillage de 28 jours."
+      },
       "nominate": {
         "title": "Nominer",
         "description": "Choississez jusqu'à 16 validateurs à élire et générer des récompenses."
+      },
+      "chill": {
+        "title": "Ne plus nominer",
+        "description": "Arrêtez de nominer des validateurs et cessez d'en recevoir des récompenses."
       }
     },
     "nominate": {

@@ -1,6 +1,7 @@
 // @flow
 
 import React, { useCallback } from "react";
+import invariant from "invariant";
 import { useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 import { Trans } from "react-i18next";
@@ -12,9 +13,13 @@ import { canNominate, canBond, canUnbond } from "@ledgerhq/live-common/lib/famil
 import { openModal } from "~/renderer/actions/modals";
 import Box from "~/renderer/components/Box";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
-import Freeze from "~/renderer/icons/Freeze";
-import Vote from "~/renderer/icons/Vote";
-import Unfreeze from "~/renderer/icons/Unfreeze";
+
+import BondIcon from "~/renderer/icons/Plus";
+import UnbondIcon from "~/renderer/icons/Minus";
+import NominateIcon from "~/renderer/icons/Vote";
+import ChillIcon from "~/renderer/icons/Undelegate";
+import WithdrawUnbondedIcon from "~/renderer/icons/Receive";
+
 import Text from "~/renderer/components/Text";
 
 import ElectionStatusWarning from "./ElectionStatusWarning";
@@ -104,12 +109,19 @@ const ManageModal = ({ name, account, ...rest }: Props) => {
 
   const { staking } = usePolkadotPreloadData();
 
+  const { polkadotResources } = account;
+
+  invariant(polkadotResources, "polkadot account expected");
+
+  const { unlockedBalance, nominations } = polkadotResources;
+
   const onSelectAction = useCallback(
-    (name, onClose) => {
+    (onClose, name, params = {}) => {
       onClose();
       dispatch(
         openModal(name, {
           account,
+          ...params,
         }),
       );
     },
@@ -117,10 +129,13 @@ const ManageModal = ({ name, account, ...rest }: Props) => {
   );
 
   const electionOpen = staking?.electionClosed !== undefined ? !staking?.electionClosed : false;
+  const hasUnlockedBalance = unlockedBalance && unlockedBalance.gt(0);
 
   const nominationEnabled = !electionOpen && canNominate(account);
+  const chillEnabled = !electionOpen && canNominate(account) && nominations?.length;
   const bondingEnabled = !electionOpen && canBond(account);
   const unbondingEnabled = !electionOpen && canUnbond(account);
+  const withdrawEnabled = !electionOpen && hasUnlockedBalance;
 
   return (
     <Modal
@@ -139,10 +154,10 @@ const ManageModal = ({ name, account, ...rest }: Props) => {
                 {electionOpen ? <ElectionStatusWarning /> : null}
                 <ManageButton
                   disabled={!bondingEnabled}
-                  onClick={() => onSelectAction("MODAL_POLKADOT_BOND", onClose)}
+                  onClick={() => onSelectAction(onClose, "MODAL_POLKADOT_BOND")}
                 >
                   <IconWrapper>
-                    <Freeze size={16} />
+                    <BondIcon size={16} />
                   </IconWrapper>
                   <InfoWrapper>
                     <Title>
@@ -155,10 +170,10 @@ const ManageModal = ({ name, account, ...rest }: Props) => {
                 </ManageButton>
                 <ManageButton
                   disabled={!unbondingEnabled}
-                  onClick={() => onSelectAction("MODAL_POLKADOT_UNBOND", onClose)}
+                  onClick={() => onSelectAction(onClose, "MODAL_POLKADOT_UNBOND")}
                 >
                   <IconWrapper>
-                    <Unfreeze size={16} />
+                    <UnbondIcon size={16} />
                   </IconWrapper>
                   <InfoWrapper>
                     <Title>
@@ -170,11 +185,31 @@ const ManageModal = ({ name, account, ...rest }: Props) => {
                   </InfoWrapper>
                 </ManageButton>
                 <ManageButton
-                  disabled={!nominationEnabled}
-                  onClick={() => onSelectAction("MODAL_POLKADOT_NOMINATE", onClose)}
+                  disabled={!withdrawEnabled}
+                  onClick={() =>
+                    onSelectAction(onClose, "MODAL_POLKADOT_SIMPLE_OPERATION", {
+                      mode: "withdrawUnbonded",
+                    })
+                  }
                 >
                   <IconWrapper>
-                    <Vote size={16} />
+                    <WithdrawUnbondedIcon size={16} />
+                  </IconWrapper>
+                  <InfoWrapper>
+                    <Title>
+                      <Trans i18nKey="polkadot.manage.withdrawUnbonded.title" />
+                    </Title>
+                    <Description>
+                      <Trans i18nKey="polkadot.manage.withdrawUnbonded.description" />
+                    </Description>
+                  </InfoWrapper>
+                </ManageButton>
+                <ManageButton
+                  disabled={!nominationEnabled}
+                  onClick={() => onSelectAction(onClose, "MODAL_POLKADOT_NOMINATE")}
+                >
+                  <IconWrapper>
+                    <NominateIcon size={16} />
                   </IconWrapper>
                   <InfoWrapper>
                     <Title>
@@ -182,6 +217,26 @@ const ManageModal = ({ name, account, ...rest }: Props) => {
                     </Title>
                     <Description>
                       <Trans i18nKey="polkadot.manage.nominate.description" />
+                    </Description>
+                  </InfoWrapper>
+                </ManageButton>
+                <ManageButton
+                  disabled={!chillEnabled}
+                  onClick={() =>
+                    onSelectAction(onClose, "MODAL_POLKADOT_SIMPLE_OPERATION", {
+                      mode: "chill",
+                    })
+                  }
+                >
+                  <IconWrapper>
+                    <ChillIcon size={16} />
+                  </IconWrapper>
+                  <InfoWrapper>
+                    <Title>
+                      <Trans i18nKey="polkadot.manage.chill.title" />
+                    </Title>
+                    <Description>
+                      <Trans i18nKey="polkadot.manage.chill.description" />
                     </Description>
                   </InfoWrapper>
                 </ManageButton>

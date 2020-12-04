@@ -24,10 +24,11 @@ import Box, { Card } from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import ToolTip from "~/renderer/components/Tooltip";
 import InfoCircle from "~/renderer/icons/InfoCircle";
+
 import NominateIcon from "~/renderer/icons/Vote";
-import FreezeIcon from "~/renderer/icons/Freeze";
+import BondIcon from "~/renderer/icons/Plus";
 import ChillIcon from "~/renderer/icons/Undelegate";
-import ReceiveIcon from "~/renderer/icons/Receive";
+import WithdrawUnbondedIcon from "~/renderer/icons/Receive";
 import ChartLineIcon from "~/renderer/icons/ChartLine";
 
 import ElectionStatusWarning from "../ElectionStatusWarning";
@@ -354,7 +355,7 @@ const Nomination = ({ account }: Props) => {
                   onClick={onWithdrawUnbonded}
                 >
                   <Box horizontal flow={1} alignItems="center">
-                    <ReceiveIcon size={12} />
+                    <WithdrawUnbondedIcon size={12} />
                     <Box>
                       <Trans i18nKey="polkadot.unlockings.withdrawUnbonded" />
                     </Box>
@@ -374,7 +375,7 @@ const Nomination = ({ account }: Props) => {
                   onClick={onRebond}
                 >
                   <Box horizontal flow={1} alignItems="center">
-                    <FreezeIcon size={12} />
+                    <BondIcon size={12} />
                     <Box>
                       <Trans i18nKey="polkadot.unlockings.rebond" />
                     </Box>
