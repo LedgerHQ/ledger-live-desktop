@@ -2214,6 +2214,18 @@
               "help": "Need help"
             }
           },
+          "howToGetStarted": {
+            "title": "The best way to get you started :",
+            "rules": {
+              "1": "Plan 30 minutes and take your time",
+              "2": "Grab a pen",
+              "3": "Stay alone and choose a safe & quiet environment"
+            },
+            "buttons": {
+              "next": "Ok, I’m done!",
+              "prev": "Previous step"
+            }
+          },
           "deviceHowTo": {
             "turnOn": {
               "title": "Turn On",

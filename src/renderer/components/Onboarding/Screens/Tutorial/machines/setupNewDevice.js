@@ -3,7 +3,7 @@ import { setStepperStatus } from "./helpers";
 
 export const setupNewDevice = Machine({
   id: "setupNewDevice",
-  initial: "importRecoveryPhrase",
+  initial: "howToGetStarted",
   context: {
     steps: [
       {
@@ -32,7 +32,7 @@ export const setupNewDevice = Machine({
     drawer: null,
   },
   states: {
-    importRecoveryPhrase: {
+    howToGetStarted: {
       entry: setStepperStatus({
         getStarted: "active",
         pinCode: "inactive",
@@ -59,7 +59,7 @@ export const setupNewDevice = Machine({
           target: "pinCode",
         },
         PREV: {
-          target: "importRecoveryPhrase",
+          target: "howToGetStarted",
         },
       },
     },

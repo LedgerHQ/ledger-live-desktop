@@ -4,7 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
-import recoveryPhrase from "../assets/recoveryPhrase.svg";
+import hourglass from "../assets/hourglass.svg";
 import { Illustration, ContentContainer } from "../shared";
 
 import { useTranslation } from "react-i18next";
@@ -34,7 +34,7 @@ export function HowToGetStarted({ sendEvent }) {
   return (
     <ScreenContainer>
       <ContentContainer>
-        <Illustration height={261} width={320} src={recoveryPhrase} />
+        <Illustration height={326} width={243} src={hourglass} />
         <Text
           mt="32px"
           color="palette.primary.contrastText"
@@ -42,37 +42,19 @@ export function HowToGetStarted({ sendEvent }) {
           fontSize="32px"
           lineHeight="38.73px"
         >
-          {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.title")}
-        </Text>
-        <Text
-          mt="32px"
-          color="palette.primary.contrastText"
-          ff="Inter|SemiBold"
-          fontSize="18px"
-          lineHeight="21.78px"
-        >
-          {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.paragraph1")}
-        </Text>
-        <Text
-          mt="32px"
-          color="palette.primary.contrastText"
-          ff="Inter|SemiBold"
-          fontSize="18px"
-          lineHeight="21.78px"
-        >
-          {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.paragraph2")}
+          {t("onboarding.screens.tutorial.screens.howToGetStarted.title")}
         </Text>
       </ContentContainer>
       <ContentFooter>
         <Button color="palette.primary.contrastText" onClick={() => sendEvent("PREV")}>
           <ArrowLeft />
           <Text ml="9px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
-            {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.buttons.prev")}
+            {t("onboarding.screens.tutorial.screens.howToGetStarted.buttons.prev")}
           </Text>
         </Button>
         <Button inverted primary onClick={() => sendEvent("NEXT")}>
           <Text ff="Inter|Bold" fontSize="12px" lineHeight="18px">
-            {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.buttons.next")}
+            {t("onboarding.screens.tutorial.screens.howToGetStarted.buttons.next")}
           </Text>
         </Button>
       </ContentFooter>

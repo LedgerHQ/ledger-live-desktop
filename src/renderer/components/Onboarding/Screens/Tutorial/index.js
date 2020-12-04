@@ -21,6 +21,7 @@ import { PinHelp } from "~/renderer/components/Onboarding/PinHelp";
 import { HideRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/HideRecoveryPhrase";
 import { WaveContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import { AnimatedWave } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/AnimatedWave";
+import { HowToGetStarted } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/HowToGetStarted";
 
 const TutorialContainer = styled.div`
   height: 100%;
@@ -74,6 +75,10 @@ const ScreenContainer = styled.div`
 `;
 
 const screens = {
+  howToGetStarted: {
+    component: HowToGetStarted,
+    bgTheme: "dark",
+  },
   importRecoveryPhrase: {
     component: ImportYourRecoveryPhrase,
     bgTheme: "dark",
