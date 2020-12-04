@@ -3,9 +3,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { NanoS } from "./assets/NanoS";
-import { NanoX } from "./assets/NanoX";
-import { NanoBlue } from "./assets/NanoBlue";
+import nanoX from "./assets/nanoX.svg";
+import nanoS from "./assets/nanoS.svg";
+import nanoBlue from "./assets/nanoBlue.svg";
 
 import { DeviceSelectorOption } from "./DeviceSelectorOption";
 
@@ -24,6 +24,24 @@ const DeviceSelectContainer = styled.div`
   & > :last-child {
     margin-right: 0px;
   }
+`;
+
+const NanoX = styled.div`
+  background: url(${nanoX}) no-repeat top right;
+  width: 153px;
+  height: 218px;
+`;
+
+const NanoS = styled.div`
+  background: url(${nanoS}) no-repeat top right;
+  width: 149px;
+  height: 221px;
+`;
+
+const NanoBlue = styled.div`
+  width: 191px;
+  height: 221px;
+  background: url(${nanoBlue}) no-repeat top right;
 `;
 
 const devices = [

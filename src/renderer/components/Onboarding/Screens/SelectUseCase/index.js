@@ -5,12 +5,12 @@ import { useTranslation } from "react-i18next";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
 import { UseCaseOption } from "./UseCaseOption";
-import { NanoBox } from "./assets/NanoBox";
-import { ImportRecovery } from "./assets/ImportRecovery";
-import { DeviceConnect } from "./assets/DeviceConnect";
 import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
 import { Separator } from "./Separator";
 import Button from "~/renderer/components/Button";
+import deviceConnect from "./assets/deviceConnect.svg";
+import importRecovery from "./assets/importRecovery.svg";
+import nanoBox from "./assets/nanoBox.svg";
 
 const SelectUseCaseContainer = styled.div`
   width: 100%;
@@ -19,6 +19,24 @@ const SelectUseCaseContainer = styled.div`
   align-items: center;
   flex-direction: column;
   box-sizing: border-box;
+`;
+
+const DeviceConnect = styled.div`
+  background: url(${deviceConnect}) no-repeat top right;
+  width: 224px;
+  height: 180px;
+`;
+
+const ImportRecovery = styled.div`
+  background: url(${importRecovery}) no-repeat top right;
+  width: 224px;
+  height: 180px;
+`;
+
+const NanoBox = styled.div`
+  background: url(${nanoBox}) no-repeat top right;
+  width: 224px;
+  height: 180px;
 `;
 
 const Row = styled.div`

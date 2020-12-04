@@ -2136,12 +2136,12 @@
         "descr": "Please don’t turn off your Nano and allow Ledger",
         "info": "This step is meant to ensure that your Nano is authentic and was not hacked."
       },
-      "deviceSuccess": {
+      "genuineCheckSuccess": {
         "title": "All good!",
         "descr": "Your device is genuine and ready to use with Ledger app",
         "continue": "Continue"
       },
-      "deviceError": {
+      "genuineCheckError": {
         "title": "Your Nano’s authenticity couldn’t be verified...",
         "descr": "We recommend you contact Ledger Support to resolve this issue. ",
         "contactSupport": "Contact Ledger Support"
@@ -2311,7 +2311,7 @@
             }
           },
           "pairMyNano": {
-            "title": "Pair your nano",
+            "title": "Plug your nano",
             "paragraph": "This is the first time you’re setting up your Nano with your smartphone. Let’s quickly pair your device before enjoying your coins on mobile.",
             "buttons": {
               "next": "Let's pair my nano",

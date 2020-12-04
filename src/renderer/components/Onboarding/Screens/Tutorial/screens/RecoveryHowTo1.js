@@ -5,16 +5,12 @@ import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 
-import nanoX from "../assets/nanoX.svg";
 import { useTranslation } from "react-i18next";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
-
-const DevicePlaceholder = styled.div`
-  background: url(${nanoX}) center no-repeat, #ffffff;
-  height: 200px;
-`;
+import { ContentContainer, HeaderContainer } from "../shared";
+import nanoXFlat from "~/renderer/components/Onboarding/Screens/Tutorial/assets/nanoXFlat.svg";
 
 const ScreenContainer = styled.div`
   display: flex;
@@ -24,20 +20,6 @@ const ScreenContainer = styled.div`
   align-items: center;
   padding: 40px 80px;
   box-sizing: border-box;
-`;
-
-const Header = styled.div`
-  margin-bottom: 40px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-`;
-
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 576px;
-  width: 100%;
 `;
 
 const ContentFooter = styled.div`
@@ -136,20 +118,27 @@ const steps = [
   },
 ];
 
+const DevicePlaceholder = styled.div`
+  background: url(${nanoXFlat}) center no-repeat;
+  height: 77px;
+  margin-top: 147px;
+  margin-bottom: 32px;
+`;
+
 export function RecoveryHowTo1({ sendEvent }) {
   const { t } = useTranslation();
 
   return (
     <ScreenContainer>
       <ContentContainer>
-        <Header>
+        <HeaderContainer>
           <Button color="palette.primary.main" onClick={() => sendEvent("HELP")}>
             <Text mr="8px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
               {t("onboarding.screens.tutorial.screens.recoveryHowTo.buttons.help")}
             </Text>
             <InfoCircle size={22} />
           </Button>
-        </Header>
+        </HeaderContainer>
         <DevicePlaceholder />
         <StepList>
           {steps.map(({ titleKey, descrKey }, index) => (
