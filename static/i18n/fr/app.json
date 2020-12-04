@@ -162,7 +162,7 @@
       "title": "Échanger vos actifs",
       "continue": "Continuer",
       "link": "En savoir plus sur le swap",
-      "sorry": "Le Swap n'est pas disponible dans votre pays"
+      "sorry": "Service temporarily unavailable, or not available in your country"
     },
     "missingApp": {
       "title": "Veuillez installer l'application Exchange sur votre appareil",
