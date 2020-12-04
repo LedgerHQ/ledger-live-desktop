@@ -4,24 +4,11 @@ import React from "react";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
+import recoveryPhrase from "../assets/recoveryPhrase.svg";
+import { Illustration, ContentContainer } from "../shared";
 
-import carPlaceholder from "../assets/carPlaceholder.svg";
 import { useTranslation } from "react-i18next";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
-import InfoCircle from "~/renderer/icons/InfoCircle";
-
-const Header = styled.div`
-  margin-bottom: 40px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-`;
-
-const CarPlaceholder = styled.div`
-  background: url(${carPlaceholder}) center no-repeat;
-  height: 200px;
-  mix-blend-mode: multiply;
-`;
 
 const ScreenContainer = styled.div`
   display: flex;
@@ -31,13 +18,7 @@ const ScreenContainer = styled.div`
   align-items: center;
   padding: 40px 80px;
   box-sizing: border-box;
-`;
-
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 576px;
-  width: 100%;
+  position: relative;
 `;
 
 const ContentFooter = styled.div`
@@ -53,15 +34,7 @@ export function ImportYourRecoveryPhrase({ sendEvent }) {
   return (
     <ScreenContainer>
       <ContentContainer>
-        <Header>
-          <Button color="palette.primary.contrastText" onClick={() => sendEvent("HELP")}>
-            <Text mr="8px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
-              {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.buttons.help")}
-            </Text>
-            <InfoCircle size={22} />
-          </Button>
-        </Header>
-        <CarPlaceholder />
+        <Illustration height={261} width={320} src={recoveryPhrase} />
         <Text
           mt="32px"
           color="palette.primary.contrastText"

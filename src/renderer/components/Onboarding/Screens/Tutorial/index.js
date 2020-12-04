@@ -19,6 +19,8 @@ import { PairMyNano } from "~/renderer/components/Onboarding/Screens/Tutorial/sc
 import { SideDrawer } from "~/renderer/components/Onboarding/SideDrawer";
 import { PinHelp } from "~/renderer/components/Onboarding/PinHelp";
 import { HideRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/HideRecoveryPhrase";
+import { WaveContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
+import { AnimatedWave } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/AnimatedWave";
 
 const TutorialContainer = styled.div`
   height: 100%;
@@ -40,6 +42,7 @@ const DURATION = 200;
 const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
   flex: 1;
   background: ${({ bgTheme, theme }) => {
     if (bgTheme === "light") {
@@ -58,6 +61,7 @@ const ScreenContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  position: relative;
 
   &.slide-switch-appear {
     opacity: 0;
@@ -113,6 +117,7 @@ export function Tutorial() {
   const [state, sendEvent] = useMachine(setupNewDevice);
 
   const Screen = screens[state.value].component;
+  const theme = screens[state.value].bgTheme;
 
   return (
     <TutorialContainer>
@@ -126,7 +131,10 @@ export function Tutorial() {
       <LeftContainer>
         <Stepper steps={state.context.steps} />
       </LeftContainer>
-      <RightContainer bgTheme={screens[state.value].bgTheme}>
+      <RightContainer bgTheme={theme}>
+        <WaveContainer>
+          <AnimatedWave height={500} color={theme === "dark" ? "#587ED4" : "#4385F016"} />
+        </WaveContainer>
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="slide-switch">
           <ScreenContainer>
             <Screen sendEvent={sendEvent} context={state.context} />

@@ -4,17 +4,11 @@ import React from "react";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
+import recoveryPhrase from "../assets/recoveryPhrase.svg";
+import { Illustration, ContentContainer } from "../shared";
 
 import { useTranslation } from "react-i18next";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
-import ChevronRight from "~/renderer/icons/ChevronRight";
-import InfoCircle from "~/renderer/icons/InfoCircle";
-import {
-  ContentContainer,
-  HeaderContainer,
-  Illustration,
-} from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
-import nanoPlug from "~/renderer/components/Onboarding/Screens/Tutorial/assets/nanoPlug.svg";
 
 const ScreenContainer = styled.div`
   display: flex;
@@ -24,6 +18,7 @@ const ScreenContainer = styled.div`
   align-items: center;
   padding: 40px 80px;
   box-sizing: border-box;
+  position: relative;
 `;
 
 const ContentFooter = styled.div`
@@ -33,22 +28,13 @@ const ContentFooter = styled.div`
   justify-content: space-between;
 `;
 
-export function PairMyNano({ sendEvent, context }) {
+export function HowToGetStarted({ sendEvent }) {
   const { t } = useTranslation();
-  console.log(context);
 
   return (
     <ScreenContainer>
       <ContentContainer>
-        <HeaderContainer>
-          <Button color="palette.primary.contrastText" onClick={() => sendEvent("HELP")}>
-            <Text mr="8px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
-              {t("onboarding.screens.tutorial.screens.pairMyNano.buttons.help")}
-            </Text>
-            <InfoCircle size={22} />
-          </Button>{" "}
-        </HeaderContainer>
-        <Illustration width={456} height={277} src={nanoPlug} />
+        <Illustration height={261} width={320} src={recoveryPhrase} />
         <Text
           mt="32px"
           color="palette.primary.contrastText"
@@ -56,30 +42,38 @@ export function PairMyNano({ sendEvent, context }) {
           fontSize="32px"
           lineHeight="38.73px"
         >
-          {t("onboarding.screens.tutorial.screens.pairMyNano.title")}
+          {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.title")}
         </Text>
         <Text
-          mt="16px"
+          mt="32px"
           color="palette.primary.contrastText"
           ff="Inter|SemiBold"
           fontSize="18px"
           lineHeight="21.78px"
         >
-          {t("onboarding.screens.tutorial.screens.pairMyNano.paragraph")}
+          {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.paragraph1")}
+        </Text>
+        <Text
+          mt="32px"
+          color="palette.primary.contrastText"
+          ff="Inter|SemiBold"
+          fontSize="18px"
+          lineHeight="21.78px"
+        >
+          {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.paragraph2")}
         </Text>
       </ContentContainer>
       <ContentFooter>
         <Button color="palette.primary.contrastText" onClick={() => sendEvent("PREV")}>
           <ArrowLeft />
           <Text ml="9px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
-            {t("onboarding.screens.tutorial.screens.pairMyNano.buttons.prev")}
+            {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.buttons.prev")}
           </Text>
         </Button>
         <Button inverted primary onClick={() => sendEvent("NEXT")}>
-          <Text mr="12px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
-            {t("onboarding.screens.tutorial.screens.pairMyNano.buttons.next")}
+          <Text ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+            {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.buttons.next")}
           </Text>
-          <ChevronRight size={12} />
         </Button>
       </ContentFooter>
     </ScreenContainer>

@@ -6,25 +6,13 @@ import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import CheckBox from "~/renderer/components/CheckBox";
 
-import carPlaceholder from "../assets/carPlaceholder.svg";
+import pinCode from "../assets/pinCode.svg";
 import { useTranslation } from "react-i18next";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import Box from "~/renderer/components/Box";
 import InfoCircle from "~/renderer/icons/InfoCircle";
-
-const Header = styled.div`
-  margin-bottom: 40px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-`;
-
-const CarPlaceholder = styled.div`
-  background: url(${carPlaceholder}) center no-repeat;
-  height: 200px;
-  mix-blend-mode: multiply;
-`;
+import { HeaderContainer, ContentContainer, Illustration } from "../shared";
 
 const ScreenContainer = styled.div`
   display: flex;
@@ -34,13 +22,6 @@ const ScreenContainer = styled.div`
   align-items: center;
   padding: 40px 80px;
   box-sizing: border-box;
-`;
-
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 576px;
-  width: 100%;
 `;
 
 const ContentFooter = styled.div`
@@ -57,15 +38,15 @@ export function PinCode({ sendEvent, context }) {
   return (
     <ScreenContainer>
       <ContentContainer>
-        <Header>
+        <HeaderContainer>
           <Button color="palette.primary.contrastText" onClick={() => sendEvent("HELP")}>
             <Text mr="8px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
               {t("onboarding.screens.tutorial.screens.pinCode.buttons.help")}
             </Text>
             <InfoCircle size={22} />
           </Button>
-        </Header>
-        <CarPlaceholder />
+        </HeaderContainer>
+        <Illustration width={456} height={277} src={pinCode} />
         <Text
           mt="32px"
           color="palette.primary.contrastText"
