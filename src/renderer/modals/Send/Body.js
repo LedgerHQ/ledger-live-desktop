@@ -247,6 +247,7 @@ const Body = ({
     maybeRecipient,
     onResetMaybeRecipient,
     updateTransaction,
+    showProductTourBack: ["recipient", "warning"].includes(stepId),
   };
 
   if (!status) return null;

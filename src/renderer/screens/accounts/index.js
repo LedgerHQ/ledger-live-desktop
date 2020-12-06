@@ -19,18 +19,27 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import AccountList from "./AccountList";
 import AccountsHeader from "./AccountsHeader";
 import MigrationBanner from "~/renderer/modals/MigrateAccounts/Banner";
+import {
+  useSetContextualOverlayQueue,
+  useActiveFlow,
+} from "~/renderer/components/ProductTour/hooks";
 
 export default function AccountsPage() {
+  useRefreshAccountsOrderingEffect({ onMount: true });
+  useSetContextualOverlayQueue(true, {
+    selector: "#accounts-add-account-button",
+    i18nKey: "productTour.flows.createAccount.overlays.add",
+    conf: { bottom: true, right: true },
+  });
+
+  const history = useHistory();
   const mode = useSelector(accountsViewModeSelector);
   const range = useSelector(selectedTimeRangeSelector);
   const rawAccounts = useSelector(accountsSelector);
   const starredAccounts = useSelector(starredAccountsSelector);
+  const activeFlow = useActiveFlow();
   const flattenedAccounts = useFlattenSortAccounts({ enforceHideEmptySubAccounts: true });
   const accounts = mode === "card" ? flattenedAccounts : rawAccounts;
-
-  const history = useHistory();
-
-  useRefreshAccountsOrderingEffect({ onMount: true });
 
   const onAccountClick = useCallback(
     (account: Account | TokenAccount, parentAccount: ?Account) => {
@@ -43,10 +52,9 @@ export default function AccountsPage() {
     },
     [history],
   );
-
-  if (!accounts.length) {
-    return <Redirect to="/" />;
-  }
+  // if (!accounts.length && activeFlow !== "createAccount") {
+  //   return <Redirect to="/" />;
+  // }
 
   return (
     <Box>

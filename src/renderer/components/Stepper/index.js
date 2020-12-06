@@ -30,6 +30,7 @@ type Props<T, StepProps> = {
   onStepChange: (Step<T, StepProps>) => void,
   steps: Step<T, StepProps>[],
   hideBreadcrumb?: boolean,
+  showProductTourBack?: boolean,
   onClose: void => void,
   disabledSteps?: number[],
   errorSteps?: number[],
@@ -46,6 +47,7 @@ const Stepper = <T, StepProps>({
   onStepChange,
   t,
   hideBreadcrumb,
+  showProductTourBack,
   title,
   onClose,
   disabledSteps,
@@ -97,6 +99,7 @@ const Stepper = <T, StepProps>({
       onBack={onBack && !deviceBlocked ? () => onBack(stepProps) : undefined}
       title={title}
       noScroll={noScroll}
+      showProductTourBack={showProductTourBack}
       render={() => (
         <>
           {hideBreadcrumb ? null : (

@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useContext } from "react";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -9,7 +9,7 @@ import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { command } from "~/renderer/commands";
-
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 import type { StepProps } from "../Body";
 import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
@@ -45,7 +45,10 @@ export function StepConnectDeviceFooter({
   device,
   eventType,
 }: StepProps) {
-  return (
+  const { state } = useContext(ProductTourContext);
+  const disableWithoutDeviceFlow = state.matches({ flow: "ongoing" });
+
+  return !disableWithoutDeviceFlow ? (
     <Box horizontal flow={2}>
       <TrackPage category={`Receive Flow${eventType ? ` (${eventType})` : ""}`} name="Step 2" />
       <Button
@@ -56,5 +59,5 @@ export function StepConnectDeviceFooter({
         {t("receive.steps.connectDevice.withoutDevice")}
       </Button>
     </Box>
-  );
+  ) : null;
 }

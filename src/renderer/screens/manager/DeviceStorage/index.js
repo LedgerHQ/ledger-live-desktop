@@ -267,7 +267,7 @@ const DeviceStorage = ({
   const firmwareOutdated = manager.firmwareUnsupported(deviceModel.id, deviceInfo) || firmware;
 
   return (
-    <Card p={20} mb={4} horizontal>
+    <Card p={20} mb={4} horizontal id={"manager-device-storage"}>
       <Box position="relative" flex="0 0 140px" mr={20}>
         <DeviceIllustration deviceModel={deviceModel} />
       </Box>

@@ -201,6 +201,7 @@ const Body = ({
     onChangeAddressVerified,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,
+    showProductTourBack: ["account", "warning"].includes(stepId),
   };
 
   return (

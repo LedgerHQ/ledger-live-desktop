@@ -155,7 +155,7 @@ const overflow = {
   y: css`
     overflow-x: hidden;
     overflow-y: scroll;
-    will-change: transform;
+    ${"" /* will-change: transform; // NB Commented bc it was breaking productTour overlays */}
     &:hover {
       --track-color: ${p => p.theme.colors.palette.text.shade30};
     }

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useHistory, useLocation } from "react-router-dom";
@@ -18,11 +18,13 @@ import Box from "~/renderer/components/Box";
 import Tooltip from "~/renderer/components/Tooltip";
 import Breadcrumb from "~/renderer/components/Breadcrumb";
 import HelpSideBar from "~/renderer/modals/Help";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 import IconLock from "~/renderer/icons/Lock";
 import IconEye from "~/renderer/icons/Eye";
 import IconHelp from "~/renderer/icons/Question";
 import IconEyeOff from "~/renderer/icons/EyeOff";
 import IconSettings from "~/renderer/icons/Settings";
+import IconArrowLeft from "~/renderer/icons/ArrowLeft";
 
 // TODO: ActivityIndicator
 import ActivityIndicator from "./ActivityIndicator";
@@ -36,6 +38,7 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({}))`
   height: ${p => p.theme.sizes.topBarHeight}px;
   box-sizing: content-box;
   background-color: transparent;
+  ${p => !p.productTourState.matches("idle") && `color:white;`}
 `;
 
 const Inner = styled(Box).attrs(() => ({
@@ -45,7 +48,21 @@ const Inner = styled(Box).attrs(() => ({
   alignItems: "center",
   px: 6,
 }))`
-  height: 100%;
+  height: ${p => p.theme.sizes.topBarHeight}px;
+  ${p =>
+    p.productTourState.matches("flow.landing")
+      ? `background-color:#587ED4;`
+      : p.productTourState.matches("dashboard")
+      ? `background-color:${p.theme.colors.palette.primary.main};`
+      : ""}
+  &:empty {
+    display: none;
+  }
+`;
+
+const MaybeStyledBox = styled(Box)`
+  ${p => (p.inProductTour ? "opacity: 0.5;" : "")}
+  ${p => (p.inProductTour ? "pointer-events: none;" : "")}
 `;
 
 export const SeparatorBar: ThemedComponent<{}> = styled.div`
@@ -89,12 +106,33 @@ const TopBar = () => {
     }
   }, [history, location, dispatch]);
 
+  const { state: productTourState, send } = useContext(ProductTourContext);
+  const { context } = productTourState;
+  const maybeProductTourMessage =
+    productTourState.matches({ flow: "ongoing" }) &&
+    t(`productTour.flows.${context.activeFlow}.ongoing`);
+
   return (
-    <Container color="palette.text.shade80">
-      <Inner bg="palette.background.default">
+    <Container
+      doubleHeight={maybeProductTourMessage}
+      productTourState={productTourState}
+      color="palette.text.shade80"
+    >
+      <Inner productTourState={productTourState} bg={"palette.background.default"}>
         <Box grow horizontal justifyContent="space-between">
+          {productTourState.matches("flow.landing") || productTourState.matches("dashboard") ? (
+            <Box
+              justifyContent={"center"}
+              onClick={() => {
+                send("BACK");
+                history.push("/");
+              }}
+            >
+              <IconArrowLeft size={24} />
+            </Box>
+          ) : null}
           <Breadcrumb />
-          <Box horizontal>
+          <MaybeStyledBox horizontal inProductTour={!productTourState.matches("idle")}>
             {hasAccounts && (
               <>
                 <ActivityIndicator />
@@ -109,7 +147,7 @@ const TopBar = () => {
               <Bar />
             </Box>
             <Tooltip content={t("settings.discreet")} placement="bottom">
-              <ItemContainer id="topbar-discreet-button" isInteractive onClick={handleDiscreet}>
+              <ItemContainer isInteractive onClick={handleDiscreet}>
                 {discreetMode ? <IconEyeOff size={16} /> : <IconEye size={16} />}
               </ItemContainer>
             </Tooltip>
@@ -154,7 +192,7 @@ const TopBar = () => {
                 <IconSettings size={16} />
               </ItemContainer>
             </Tooltip>
-          </Box>
+          </MaybeStyledBox>
         </Box>
       </Inner>
     </Container>

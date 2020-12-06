@@ -4,9 +4,11 @@ import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
 import Dashboard from "~/renderer/screens/manager/Dashboard";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import DeviceAction from "~/renderer/components/DeviceAction";
+import Box from "~/renderer/components/Box";
 import { command } from "~/renderer/commands";
 import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
+import { useSetContextualOverlayQueue } from "~/renderer/components/ProductTour/hooks";
 
 const connectManagerExec = command("connectManager");
 const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectManagerExec);
@@ -20,13 +22,21 @@ const Manager = () => {
   }, []);
   const onResult = useCallback(result => setResult(result), []);
 
+  useSetContextualOverlayQueue(!result, {
+    selector: "#manager-device-action-wrapper",
+    i18nKey: "productTour.flows.install.overlays.connect",
+    conf: { bottom: true },
+  });
+
   return (
     <>
       <SyncSkipUnderPriority priority={999} />
       {result ? (
         <Dashboard {...result} onReset={onReset} appsToRestore={appsToRestore} />
       ) : (
-        <DeviceAction onResult={onResult} action={action} request={null} />
+        <Box id={"manager-device-action-wrapper"} pb={4}>
+          <DeviceAction onResult={onResult} action={action} request={null} />
+        </Box>
       )}
     </>
   );

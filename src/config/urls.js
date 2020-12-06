@@ -155,6 +155,16 @@ export const urls = {
       },
     },
   },
+  productTour: {
+    install:
+      "https://support.ledger.com/hc/en-us/articles/360011454079-What-are-apps-and-accounts-",
+    createAccount:
+      "https://support.ledger.com/hc/en-us/articles/360011454079-What-are-apps-and-accounts-",
+    send: "https://support.ledger.com/hc/en-us/articles/360000617934-Send-crypto-assets",
+    receive: "https://support.ledger.com/hc/en-us/articles/360010418413-Receive-crypto-assets",
+    buy: "https://www.ledger.com/buy-crypto-in-ledger-live",
+    swap: "https://www.ledger.com/swap",
+  },
   // Errors
   errors: {
     CantOpenDevice:

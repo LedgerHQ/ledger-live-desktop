@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, useContext } from "react";
 import styled from "styled-components";
 import useTheme from "~/renderer/hooks/useTheme";
 import { getConfig } from "~/renderer/screens/exchange/config";
@@ -14,6 +14,7 @@ import { openModal } from "~/renderer/actions/modals";
 import { useDispatch } from "react-redux";
 import { track } from "~/renderer/analytics/segment";
 import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 
 const WidgetContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -64,6 +65,9 @@ type Props = {
 
 const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
   const tradeId = useRef(null);
+  const { state: productTourState, send } = useContext(ProductTourContext);
+  const { context } = productTourState;
+
   const [widgetLoaded, setWidgetLoaded] = useState(false);
   const dispatch = useDispatch();
   const colors = useTheme("colors");
@@ -126,6 +130,9 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
           coinifyConfig.host,
         );
         if (currency) {
+          if (context.activeFlow === "buy" && productTourState.matches("flow.ongoing")) {
+            send("COMPLETE_FLOW");
+          }
           track("Coinify Confirm Buy End", { currencyName: currency.name });
         }
       }
@@ -143,11 +150,14 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
           coinifyConfig.host,
         );
         if (currency) {
+          if (context.activeFlow === "sell" && productTourState.matches("flow.ongoing")) {
+            send("COMPLETE_FLOW");
+          }
           track("Coinify Confirm Sell End", { currencyName: currency.name });
         }
       }
     }
-  }, [coinifyConfig.host, currency, mainAccount, mode]);
+  }, [coinifyConfig.host, context.activeFlow, currency, mainAccount, mode, productTourState, send]);
 
   const handleOnCancel = useCallback(() => {
     if (widgetRef.current) {

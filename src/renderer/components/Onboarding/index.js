@@ -6,9 +6,10 @@ import { assign, Machine } from "xstate";
 import { CSSTransition } from "react-transition-group";
 import { Modal } from "~/renderer/components/Onboarding/Modal";
 import { saveSettings } from "~/renderer/actions/settings";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { relaunchOnboarding } from "~/renderer/actions/onboarding";
 import { track } from "~/renderer/analytics/segment";
+import { onboardingRelaunchedSelector } from "~/renderer/reducers/onboarding";
 
 // screens
 import { Welcome } from "~/renderer/components/Onboarding/Screens/Welcome";
@@ -193,14 +194,20 @@ const ScreenContainer = styled.div`
   }
 `;
 
-export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boolean }) {
+export function Onboarding() {
   const dispatch = useDispatch();
   const [imgsLoaded, setImgsLoaded] = useState(false);
 
+  const onboardingRelaunched = useSelector(onboardingRelaunchedSelector);
   const [state, sendEvent, service] = useMachine(onboardingMachine, {
     actions: {
       onboardingCompleted: () => {
-        dispatch(saveSettings({ hasCompletedOnboarding: true }));
+        dispatch(
+          saveSettings({
+            hasCompletedOnboarding: true,
+            ...(onboardingRelaunched ? {} : { hasCompletedProductTour: false }),
+          }),
+        );
         dispatch(relaunchOnboarding(false));
       },
     },

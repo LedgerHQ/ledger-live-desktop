@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useContext } from "react";
 import type { Operation } from "@ledgerhq/live-common/lib/types/operation";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import Box from "~/renderer/components/Box";
@@ -16,6 +16,7 @@ import useTheme from "~/renderer/hooks/useTheme";
 import { useDispatch } from "react-redux";
 import { GradientHover } from "~/renderer/modals/OperationDetails/styledComponents";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 
 const IconWrapper = styled(Box)`
   background: ${colors.pillActiveBackground};
@@ -140,6 +141,8 @@ export const StepFinishedFooter = ({
   const { operation } = result;
   const { fromAccount, fromParentAccount } = swap.exchange;
   const dispatch = useDispatch();
+  const { state: productTourState, send } = useContext(ProductTourContext);
+  const { context } = productTourState;
 
   const onViewOperationDetails = useCallback(() => {
     const concernedOperation = operation
@@ -159,6 +162,15 @@ export const StepFinishedFooter = ({
       );
     }
   }, [dispatch, fromAccount, fromParentAccount, onClose, operation]);
+
+  useEffect(() => {
+    if (context.activeFlow === "swap" && productTourState.matches("flow.ongoing")) {
+      send("COMPLETE_FLOW", {
+        extras: { swapId: result.swapId, congratulationsCallback: onViewOperationDetails },
+      });
+      onClose();
+    }
+  }, [context.activeFlow, onClose, onViewOperationDetails, productTourState, result, send]);
 
   return (
     <Box horizontal>

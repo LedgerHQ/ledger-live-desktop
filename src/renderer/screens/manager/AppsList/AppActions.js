@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useMemo, memo } from "react";
+import React, { useContext, useCallback, useMemo, memo } from "react";
 
 import {
   useAppInstallNeedsDeps,
@@ -21,6 +21,7 @@ import Tooltip from "~/renderer/components/Tooltip";
 import Button from "~/renderer/components/Button";
 import Progress from "~/renderer/screens/manager/AppsList/Progress";
 import Box from "~/renderer/components/Box/Box";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 
 import { colors } from "~/renderer/styles/theme";
 
@@ -87,6 +88,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
   }: Props) => {
     const { name } = app;
     const { installedAvailable, installQueue, uninstallQueue, updateAllQueue } = state;
+    const { state: productTourState } = useContext(ProductTourContext);
 
     // $FlowFixMe
     const canInstall = useMemo(() => manager.canHandleInstall(app), [app]);
@@ -135,7 +137,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
           />
         ) : showActions ? (
           <>
-            {installed ? (
+            {installed && !productTourState.matches("flow") ? (
               isLiveSupported ? (
                 <Tooltip
                   content={

@@ -31,7 +31,7 @@ import { hasInstalledAppsSelector } from "~/renderer/reducers/settings";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  animation: ${p => p.theme.animations.fadeIn};
+  ${"" /* animation: ${p => p.theme.animations.fadeIn}; // Removed because it causes ProductTour overlay to break */}
 `;
 
 const QuitIconWrapper = styled.div`

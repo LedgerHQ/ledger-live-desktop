@@ -151,6 +151,167 @@
     "openButton": "Open",
     "disconnectButton": "Disconnect"
   },
+  "productTour": {
+    "pill": {
+      "beginner": "Beginner",
+      "insider": "Insider",
+      "master": "Master"
+    },
+    "banner": {
+      "welcome": "Welcome to Ledger",
+      "ready": "Ready to get started?",
+      "cta": "Start the tour",
+      "productTour": "Product Tour",
+      "progress": "Only <1>{{remainingSteps}}</1> steps left"
+    },
+    "hero": {
+      "beginner": "First, let’s learn Ledger basics",
+      "insider": "Become a Ledger insider!",
+      "master": "Almost a master...",
+      "completed": "Product tour completed!",
+      "progress": "Only <1>{{remainingSteps}}</1> steps left"
+    },
+    "congratulations": "Congrats!",
+    "completed": "Completed",
+    "completeTour": "Complete tour",
+    "modalUnavailable": {
+      "title": "Locked feature",
+      "subtitle": "You must complete the previous steps to access this one.",
+      "cta": "Got it"
+    },
+    "flows": {
+      "skipFlow": "Skip Tutorial",
+      "install": {
+        "pending": "Install crypto",
+        "ongoing": "Install your first crypto app",
+        "completed": "Crypto installed!",
+        "completedCard": "Crypto installed",
+        "congratulations": "You have installed your first crypto app! You can now create an account.",
+        "overlays": {
+          "sidebar": "Go to the Manager to install apps on your device.",
+          "connect": "Follow the animated instructions to connect your Ledger device.",
+          "storage": "See an overview of your Ledger hardware wallet here.",
+          "catalog": "You can find apps for many popular crypto assets in the App catalog. Let’s install your first app!",
+          "install": "Click the install button to get the Bitcoin app. You need this app to manage your Bitcoin accounts."
+        }
+      },
+      "createAccount": {
+        "pending": "Create account",
+        "ongoing": "",
+        "completed": "Account created!",
+        "completedCard": "Account created",
+        "congratulations": "Your {{currencyName}} account is ready to use. You can now receive your first transaction.",
+        "overlays": {
+          "sidebar": "Go to the Accounts section.",
+          "add": "Click here to add accounts to your portfolio.",
+          "currency": "Select Bitcoin in the dropdown list to add Bitcoin accounts from your device.",
+          "account": "Here’s your new account, feel free to rename it. You can add another account after your first transaction."
+        }
+      },
+      "receive": {
+        "pending": "Receive coins",
+        "ongoing": "",
+        "completed": "Address shared!",
+        "completedCard": "Address shared",
+        "congratulations": "Always verify that the sender uses the address displayed on your device."
+      },
+      "buy": {
+        "pending": "Buy coins",
+        "ongoing": "",
+        "completed": "Crypto bought!",
+        "completedCard": "Crypto bought",
+        "congratulations": "You will receive your {{currencyName}} once the order is processed.",
+        "secondaryCTA": "View details"
+      },
+      "send": {
+        "pending": "Send crypto",
+        "ongoing": "",
+        "completed": "Crypto sent!",
+        "completedCard": "Crypto sent",
+        "congratulations": "Your transaction will be complete once it is confirmed by the network.",
+        "secondaryCTA": "View details"
+      },
+      "swap": {
+        "pending": "Swap crypto",
+        "ongoing": "",
+        "completed": "Crypto swapped!",
+        "completedCard": "Crypto swapped",
+        "congratulations": "You should receive your crypto shortly. Take note of your swap ID: {{swapId}}",
+        "secondaryCTA": "View details"
+      },
+      "customize": {
+        "pending": "Customize app",
+        "ongoing": "",
+        "completed": "Congrats!",
+        "completedCard": "Settings changed",
+        "congratulations": "You now know how to change settings to customize the app.",
+        "secondaryCTA": "View details",
+        "modal": {
+          "theme": {
+            "title":"Theme",
+            "help": "Change the appearance of Ledger Live"
+          },
+          "password": {
+            "title": "Password",
+            "help": "Set a password to prevent unauthorized access. Keep your password safe. Ledger Live needs to be reset if you lose it."
+          },
+          "countervalue": {
+            "title":"Countervalue",
+            "help": "Choose your preferred currency to display as countervalue."
+          }
+        }
+      }
+    },
+    "dismiss": {
+      "disclaimer": "Are you sure you want to skip the product tour?",
+      "close": "Skip",
+      "undo": "Cancel"
+    },
+    "landing": {
+      "cta": "Let's go",
+      "install": {
+        "hero": "Install your first crypto app",
+        "title": "Install your first crypto app to use your Nano with the crypto asset of your choice, like Bitcoin or Ethereum.",
+        "description": "You can uninstall apps without losing your crypto. The private keys providing access to your crypto stay safe on your device.",
+        "learnMore": "Learn more about apps"
+      },
+      "createAccount": {
+        "hero": "Create your first account",
+        "title": "Create an account from the app on your device to start managing your crypto. Your account lets you track your balance in Ledger Live.",
+        "description": "You can have multiple accounts for different purposes, like for savings or for trading.",
+        "learnMore": "Learn more about accounts"
+      },
+      "receive": {
+        "hero": "Receive your first crypto",
+        "title": "Share your public address with the sender to receive crypto. Always verify that the sender uses the address displayed on your device.",
+        "description": "When sending crypto to your Ledger account from a third-party service, closely follow their instructions to prevent mistakes.",
+        "learnMore": "More about receiving crypto"
+      },
+      "buy": {
+        "hero": "Buy crypto with Coinify",
+        "title": "Purchase crypto assets via Coinify and receive your coins directly in your Ledger account. This service is available in selected countries.",
+        "description": "Buying crypto in Ledger Live is easy and you will benefit from the security of your Ledger device once the transaction is complete.",
+        "learnMore": "More about buying crypto"
+      },
+      "send": {
+        "hero": "Send crypto",
+        "title": "You can send crypto assets from your Ledger account to a recipient. Transactions fees are paid to the network for many crypto assets.",
+        "description": "The confirmation speed of a transaction varies. Getting a transaction confirmed fast costs more when there’s high demand on the network.",
+        "learnMore": "More about sending crypto"
+      },
+      "swap": {
+        "hero": "Swap crypto",
+        "title": "You can exchange one crypto for another directly fromt Ledger Live, through our partner Changelly. Service available in selected countries.",
+        "description": "Swapping crypto in Ledger Live takes only 3 easy steps and is fully secured by your Ledger device.",
+        "learnMore": "More about swapping crypto"
+      },
+      "customize": {
+        "hero": "Customize your app",
+        "title": "You can customize the app by changing its appearance, setting a password, and chosing your preferred currency in the settings.",
+        "description": ""
+      }
+    }
+  },
   "swap": {
     "title": "Swap",
     "titleCrypto": "Swap {{currency}}",

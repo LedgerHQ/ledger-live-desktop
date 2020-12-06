@@ -31,7 +31,7 @@ export const getStatusColor = (status: string, theme: any) => {
   } else if (operationStatusList.finishedKO.includes(status)) {
     return theme.colors.alertRed;
   } else {
-    return theme.colors.palette.shade50;
+    return theme.colors.palette.text.shade50;
   }
 };
 

@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useContext, useCallback } from "react";
 import { BigNumber } from "bignumber.js";
 import map from "lodash/map";
 import { Trans } from "react-i18next";
@@ -38,6 +38,7 @@ import { urls } from "~/config/urls";
 import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
 import ExternalLinkButton from "../ExternalLinkButton";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 
 const AnimationWrapper: ThemedComponent<{ modelId: DeviceModelId }> = styled.div`
   width: 600px;
@@ -169,14 +170,17 @@ const OpenManagerBtn = ({
   mt?: number,
 }) => {
   const history = useHistory();
+  const { send } = useContext(ProductTourContext);
   const onClick = useCallback(() => {
     setTrackingSource("device action open manager button");
+    send("EXIT");
     history.push({
       pathname: "manager",
       search: appName ? `?q=${appName}` : "",
     });
     closeAllModal();
-  }, [history, appName, closeAllModal]);
+  }, [history, appName, closeAllModal, send]);
+
   return (
     <Button mt={mt} primary onClick={onClick}>
       <Trans i18nKey="DeviceAction.openManager" />

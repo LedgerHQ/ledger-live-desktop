@@ -8,6 +8,7 @@ import {
   counterValueCurrencySelector,
   hasInstalledAppsSelector,
   selectedTimeRangeSelector,
+  hasCompletedProductTourSelector,
 } from "~/renderer/reducers/settings";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -18,6 +19,7 @@ import Carousel from "~/renderer/components/Carousel";
 import AssetDistribution from "~/renderer/components/AssetDistribution";
 import MigrationBanner from "~/renderer/modals/MigrateAccounts/Banner";
 import ClearCacheBanner from "~/renderer/components/ClearCacheBanner";
+import ProductTourBanner from "~/renderer/components/ProductTour/Banner";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 import { saveSettings } from "~/renderer/actions/settings";
 import { useDispatch, useSelector } from "react-redux";
@@ -42,6 +44,7 @@ export default function DashboardPage() {
   const dispatch = useDispatch();
   const accounts = useSelector(accountsSelector);
   const currencies = useSelector(currenciesSelector);
+  const hasCompletedProductTour = useSelector(hasCompletedProductTourSelector);
   const history = useHistory();
   const counterValue = useSelector(counterValueCurrencySelector);
   const selectedTimeRange = useSelector(selectedTimeRangeSelector);
@@ -75,7 +78,7 @@ export default function DashboardPage() {
         <ClearCacheBanner />
         <CurrencyDownStatusAlert currencies={currencies} />
       </TopBannerContainer>
-      {showCarousel ? <Carousel /> : null}
+      {showCarousel && hasCompletedProductTour ? <Carousel /> : null}
       <TrackPage
         category="Portfolio"
         totalAccounts={totalAccounts}
@@ -83,10 +86,11 @@ export default function DashboardPage() {
         totalCurrencies={totalCurrencies}
       />
       <Box flow={7} id="portfolio-container">
-        {!hasInstalledApps ? (
+        {hasCompletedProductTour && !hasInstalledApps ? (
           <EmptyStateInstalledApps />
-        ) : totalAccounts > 0 ? (
+        ) : !hasCompletedProductTour || totalAccounts > 0 ? (
           <>
+            <ProductTourBanner />
             <BalanceSummary
               counterValue={counterValue}
               chartId="dashboard-chart"

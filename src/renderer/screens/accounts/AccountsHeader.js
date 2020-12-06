@@ -11,14 +11,17 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 
 import OptionsButton from "./OptionsButton";
+import { useOnClearContextualOverlayQueue } from "~/renderer/components/ProductTour/hooks";
 
 const AccountsHeader = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  const onDismissContextualOverlayQueue = useOnClearContextualOverlayQueue();
   const openAddAccounts = useCallback(() => {
     dispatch(openModal("MODAL_ADD_ACCOUNTS"));
-  }, [dispatch]);
+    onDismissContextualOverlayQueue();
+  }, [dispatch, onDismissContextualOverlayQueue]);
 
   return (
     <Box horizontal style={{ paddingBottom: 32 }}>

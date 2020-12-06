@@ -93,15 +93,19 @@ type Props = {
 export function GenuineCheck({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   const { deviceId, device } = context;
-
+  const { localStorage } = window;
   const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
 
   const onResult = useCallback(
     res => {
+      if (res.result.installed?.length) {
+        // NB We already have installed apps, mark the install flow from product tour as done.
+        localStorage.productTourCompletedFlows = '["install"]';
+      }
       sendEvent({ type: "GENUINE_CHECK_SUCCESS", device: res.device });
     },
-    [sendEvent],
+    [localStorage, sendEvent],
   );
 
   return (
