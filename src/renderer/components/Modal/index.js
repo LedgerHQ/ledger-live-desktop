@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from "react";
+import React, { useContext, useCallback, useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -11,6 +11,7 @@ import { Transition } from "react-transition-group";
 import { closeModal } from "~/renderer/actions/modals";
 import { isModalOpened, getModalData } from "~/renderer/reducers/modals";
 import Snow, { isSnowTime } from "~/renderer/extra/Snow";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 
 export { default as ModalBody } from "./ModalBody";
 
@@ -109,40 +110,54 @@ type Props = {
   render?: RenderProps => any,
   data?: any,
   preventBackdropClick?: boolean,
+  showProductTourBack?: boolean,
   width?: number,
   theme: any,
   name?: string, // eslint-disable-line
   onBeforeOpen?: ({ data: * }) => *, // eslint-disable-line
   backdropColor: ?boolean,
+  style?: *,
 };
 
-class Modal extends PureComponent<Props, { directlyClickedBackdrop: boolean }> {
-  state = {
-    directlyClickedBackdrop: false,
-  };
+const Modal = ({
+  isOpened,
+  children,
+  centered,
+  onClose,
+  onHide,
+  render,
+  data,
+  preventBackdropClick: _preventBackdropClick,
+  showProductTourBack,
+  width,
+  theme,
+  name,
+  onBeforeOpen,
+  backdropColor,
+  style,
+}: Props) => {
+  const [directlyClickedBackdrop, setDirectlyClickedBackdrop] = useState(false);
+  const { state, send } = useContext(ProductTourContext);
+  const { context } = state;
+  const shouldBlockModal = state.matches("flow.ongoing") && context.controlledModals.includes(name);
+  const preventBackdropClick = _preventBackdropClick || shouldBlockModal;
 
-  componentDidMount() {
-    document.addEventListener("keyup", this.handleKeyup);
-    document.addEventListener("keydown", this.preventFocusEscape);
-  }
-
-  componentDidUpdate({ isOpened, onHide }: Props) {
-    if (!isOpened && onHide) onHide();
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("keyup", this.handleKeyup);
-    document.removeEventListener("keydown", this.preventFocusEscape);
-  }
-
-  handleKeyup = (e: KeyboardEvent) => {
-    const { onClose, preventBackdropClick } = this.props;
-    if (e.which === 27 && onClose && !preventBackdropClick) {
-      onClose();
+  useEffect(() => {
+    if (isOpened && shouldBlockModal) {
+      send("CONTROL_MODAL");
     }
-  };
+  }, [isOpened, send, shouldBlockModal]);
 
-  preventFocusEscape = (e: KeyboardEvent) => {
+  const handleKeyup = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.which === 27 && onClose && !preventBackdropClick) {
+        onClose();
+      }
+    },
+    [onClose, preventBackdropClick],
+  );
+
+  const preventFocusEscape = useCallback((e: KeyboardEvent) => {
     if (e.key === "Tab") {
       const { target } = e;
       const focusableQuery =
@@ -166,95 +181,94 @@ class Modal extends PureComponent<Props, { directlyClickedBackdrop: boolean }> {
         e.preventDefault();
       }
     }
-  };
+  }, []);
 
-  handleClickOnBackdrop = () => {
-    const { preventBackdropClick, onClose } = this.props;
-    const { directlyClickedBackdrop } = this.state;
+  const handleClickOnBackdrop = useCallback(() => {
     if (directlyClickedBackdrop && !preventBackdropClick && onClose) {
       onClose();
     }
-  };
+  }, [directlyClickedBackdrop, onClose, preventBackdropClick]);
 
-  onDirectMouseDown = () => this.setState({ directlyClickedBackdrop: true });
-  onIndirectMouseDown = () => this.setState({ directlyClickedBackdrop: false });
+  const onDirectMouseDown = useCallback(() => setDirectlyClickedBackdrop(true), []);
+  const onIndirectMouseDown = useCallback(() => setDirectlyClickedBackdrop(false), []);
 
   /** combined with tab-index 0 this will allow tab navigation into the modal disabling tab navigation behind it */
-  setFocus = (r: *) => {
+  const setFocus = useCallback((r: *) => {
     /** only pull focus if focus is out of modal ie: no input autofocused in modal */
     r && !r.contains(document.activeElement) && r.focus();
-  };
+  }, []);
 
-  swallowClick = (e: Event) => {
+  const swallowClick = useCallback((e: Event) => {
     e.preventDefault();
     e.stopPropagation();
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keyup", handleKeyup);
+    document.addEventListener("keydown", preventFocusEscape);
+    return () => {
+      document.removeEventListener("keyup", handleKeyup);
+      document.removeEventListener("keydown", preventFocusEscape);
+    };
+  }, [handleKeyup, preventFocusEscape]);
+
+  useEffect(() => {
+    if (!isOpened && onHide) onHide();
+  }, [isOpened, onHide]);
+
+  const renderProps = {
+    onClose,
+    data,
   };
 
-  render() {
-    const {
-      children,
-      render,
-      centered,
-      onClose,
-      data,
-      isOpened,
-      width,
-      backdropColor,
-    } = this.props;
-
-    const renderProps = {
-      onClose,
-      data,
-    };
-
-    const modal = (
-      <Transition
-        in={isOpened}
-        appear
-        mountOnEnter
-        unmountOnExit
-        timeout={{
-          appear: 100,
-          enter: 100,
-          exit: 200,
-        }}
-      >
-        {state => {
-          return (
-            <Container
-              id="modal-backdrop"
+  const modal = (
+    <Transition
+      in={isOpened}
+      appear
+      mountOnEnter
+      unmountOnExit
+      timeout={{
+        appear: 100,
+        enter: 100,
+        exit: 200,
+      }}
+    >
+      {state => {
+        return (
+          <Container
+            id="modal-backdrop"
+            state={state}
+            centered={centered}
+            isOpened={isOpened}
+            onMouseDown={onDirectMouseDown}
+            onClick={handleClickOnBackdrop}
+            backdropColor={backdropColor}
+          >
+            {isSnowTime() ? <Snow numFlakes={100} /> : null}
+            <BodyWrapper
+              tabIndex="0"
+              ref={setFocus}
               state={state}
-              centered={centered}
-              isOpened={isOpened}
-              onMouseDown={this.onDirectMouseDown}
-              onClick={this.handleClickOnBackdrop}
-              backdropColor={backdropColor}
+              width={width}
+              onClick={swallowClick}
+              onMouseDown={e => {
+                onIndirectMouseDown();
+                e.stopPropagation();
+              }}
+              id="modal-container"
+              style={style}
             >
-              {isSnowTime() ? <Snow numFlakes={100} /> : null}
-              <BodyWrapper
-                tabIndex="0"
-                ref={this.setFocus}
-                state={state}
-                width={width}
-                onClick={this.swallowClick}
-                onMouseDown={e => {
-                  this.onIndirectMouseDown();
-                  e.stopPropagation();
-                }}
-                id="modal-container"
-              >
-                {render && render(renderProps)}
-                {children}
-              </BodyWrapper>
-            </Container>
-          );
-        }}
-      </Transition>
-    );
+              {render && render(renderProps)}
+              {children}
+            </BodyWrapper>
+          </Container>
+        );
+      }}
+    </Transition>
+  );
 
-    return domNode ? createPortal(modal, domNode) : null;
-  }
-}
+  return domNode ? createPortal(modal, domNode) : null;
+};
 
 // $FlowFixMe: define a OwnProps
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);

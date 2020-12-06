@@ -31,7 +31,13 @@ const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
     <>
       {currency ? <CurrencyDownStatusAlert currencies={[currency]} /> : null}
       {/* $FlowFixMe: onChange type is not good */}
-      <SelectCurrency currencies={currencies} autoFocus onChange={setCurrency} value={currency} />
+      <SelectCurrency
+        id={"addAccounts"}
+        currencies={currencies}
+        autoFocus
+        onChange={setCurrency}
+        value={currency}
+      />
       <FullNodeStatus currency={currency} />
       {currency && currency.type === "TokenCurrency" ? (
         <TokenTips

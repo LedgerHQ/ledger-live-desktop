@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useCallback, useRef, memo, useMemo } from "react";
+import React, { useEffect, useState, useCallback, useRef, memo, useMemo, useContext } from "react";
 
 import styled, { keyframes } from "styled-components";
 
@@ -17,6 +17,7 @@ import IconCross from "~/renderer/icons/Cross";
 
 import Button from "~/renderer/components/Button";
 import AccountsIllustration from "~/renderer/icons/AccountsIllustration";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 
 const IconContainer = styled(Box).attrs(() => ({
   horizontal: true,
@@ -95,6 +96,20 @@ const InstallSuccessBanner = ({ state, isIncomplete, dispatch, addAccount, disab
   const onClose = useCallback(() => setHasBeenShown(true), []);
 
   const visible = !hasBeenShown && installedSupportedApps.length > 0;
+
+  const { state: productTourState, send } = useContext(ProductTourContext);
+  const { context } = productTourState;
+
+  useEffect(() => {
+    // NB Leverage the visibility of the InstallSuccessBanner to consider the install product tour flow completed
+    if (
+      installedSupportedApps.length > 0 &&
+      context.activeFlow === "install" &&
+      productTourState.matches({ flow: "ongoing" })
+    ) {
+      send("COMPLETE_FLOW");
+    }
+  });
 
   return (
     <Container ref={cardRef}>

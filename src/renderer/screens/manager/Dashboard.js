@@ -14,7 +14,7 @@ import { command } from "~/renderer/commands";
 import FirmwareUpdate from "./FirmwareUpdate";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-
+import { useSetContextualOverlayQueue } from "~/renderer/components/ProductTour/hooks";
 type Props = {
   device: Device,
   deviceInfo: DeviceInfo,
@@ -24,6 +24,25 @@ type Props = {
 };
 
 const Dashboard = ({ device, deviceInfo, result, onReset, appsToRestore }: Props) => {
+  useSetContextualOverlayQueue(
+    !!device,
+    {
+      selector: "#manager-device-storage",
+      i18nKey: "productTour.flows.install.overlays.storage",
+      conf: { bottom: true, left: true },
+    },
+    {
+      selector: "#appCatalog-body",
+      i18nKey: "productTour.flows.install.overlays.catalog",
+      conf: { top: true, left: true },
+    },
+    {
+      selector: "#managerAppsList-Bitcoin",
+      i18nKey: "productTour.flows.install.overlays.install",
+      conf: { top: true, right: true, disableScroll: true },
+    },
+  );
+
   const { t } = useTranslation();
   const currentDevice = useSelector(getCurrentDevice);
   const [firmwareUpdateOpened, setFirmwareUpdateOpened] = useState(false);

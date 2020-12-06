@@ -1,6 +1,7 @@
 // @flow
 import React, { useEffect, useRef } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
+import ContextualOverlay from "~/renderer/components/ProductTour/ContextualOverlay";
 import TrackAppStart from "~/renderer/components/TrackAppStart";
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
 import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
@@ -117,7 +118,7 @@ export default function Default() {
           </ContextMenuWrapper>
         </BridgeSyncProvider>
       </IsUnlocked>
-
+      <ContextualOverlay />
       {process.env.ANALYTICS_CONSOLE ? <AnalyticsConsole /> : null}
     </>
   );

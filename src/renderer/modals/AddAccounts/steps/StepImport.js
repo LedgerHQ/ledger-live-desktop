@@ -25,7 +25,7 @@ import AccountsList from "~/renderer/components/AccountsList";
 import Spinner from "~/renderer/components/Spinner";
 import Text from "~/renderer/components/Text";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
-
+import QueueContextualOverlay from "~/renderer/components/ProductTour/QueueContextualOverlay";
 import type { StepProps } from "..";
 
 // $FlowFixMe
@@ -109,7 +109,6 @@ class StepImport extends PureComponent<StepProps> {
 
       // will be set to false if an existing account is found
       let onlyNewAccounts = true;
-
       const syncConfig = {
         paginationConfig: {
           operations: 20,
@@ -239,11 +238,19 @@ class StepImport extends PureComponent<StepProps> {
         </Trans>
       ),
     };
-
+    console.log({ scannedAccounts });
     return (
       <>
         <TrackPage category="AddAccounts" name="Step3" currencyName={currencyName} />
         <Box mt={-4}>
+          <QueueContextualOverlay
+            queue={{
+              selector: ".account-row",
+              i18nKey: "productTour.flows.createAccount.overlays.account",
+              conf: { bottom: true, left: true, isDismissable: true },
+            }}
+            condition={scannedAccounts.length}
+          />
           {sections.map(({ id, selectable, defaultSelected, data, supportLink }, i) => (
             <SectionAccounts
               currency={currency}

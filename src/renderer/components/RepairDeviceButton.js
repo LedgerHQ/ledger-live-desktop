@@ -8,6 +8,7 @@ import RepairModal from "~/renderer/modals/RepairModal";
 import { command } from "~/renderer/commands";
 import logger from "~/logger";
 import { useHistory } from "react-router-dom";
+import { useOnExitProductTour } from "~/renderer/components/ProductTour/hooks";
 
 type Props = {
   buttonProps?: *,
@@ -20,6 +21,7 @@ const RepairDeviceButton = ({ onRepair, buttonProps }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [progress, setProgress] = useState(0);
+  const onMaybeExitProductTour = useOnExitProductTour();
 
   const timeout = useRef(null);
   const sub = useRef(null);
@@ -39,7 +41,8 @@ const RepairDeviceButton = ({ onRepair, buttonProps }: Props) => {
   const open = useCallback(() => {
     setError(null);
     setOpened(true);
-  }, [setError, setOpened]);
+    onMaybeExitProductTour();
+  }, [onMaybeExitProductTour]);
 
   const close = useCallback(() => {
     if (sub && sub.current) sub.current.unsubscribe();

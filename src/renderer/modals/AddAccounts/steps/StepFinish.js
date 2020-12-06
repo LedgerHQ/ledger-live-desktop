@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -8,6 +8,7 @@ import Button from "~/renderer/components/Button";
 import { CurrencyCircleIcon } from "~/renderer/components/CurrencyBadge";
 import { useRefreshAccountsOrderingEffect } from "~/renderer/actions/general";
 import type { StepProps } from "..";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 
 export default function StepFinish({ currency, checkedAccountsIds }: StepProps) {
   const { t } = useTranslation();
@@ -32,8 +33,26 @@ export default function StepFinish({ currency, checkedAccountsIds }: StepProps) 
   );
 }
 
-export function StepFinishFooter({ onGoStep1, onCloseModal }: StepProps) {
+export function StepFinishFooter({ currency, onGoStep1, onCloseModal }: StepProps) {
   const { t } = useTranslation();
+
+  const { state: productTourState, send } = useContext(ProductTourContext);
+  const { context } = productTourState;
+
+  const currencyName = currency
+    ? currency.type === "TokenCurrency"
+      ? currency.parentCurrency.name
+      : currency.name
+    : undefined;
+
+  useEffect(() => {
+    // NB Hijack the rendering of this step if needed for the product tour
+    if (context.activeFlow === "createAccount" && productTourState.matches("flow.ongoing")) {
+      send("COMPLETE_FLOW", { extras: { currencyName } });
+      onCloseModal();
+    }
+  }, [context.activeFlow, currencyName, onCloseModal, productTourState, send]);
+
   return (
     <>
       <Box horizontal alignItems="center" justifyContent="space-between" grow>

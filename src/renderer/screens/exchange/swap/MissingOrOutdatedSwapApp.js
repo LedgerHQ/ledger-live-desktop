@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import Card from "~/renderer/components/Box/Card";
 import manager from "@ledgerhq/live-common/lib/manager";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -9,12 +9,19 @@ import Text from "~/renderer/components/Text";
 import { Trans } from "react-i18next";
 import Button from "~/renderer/components/Button";
 import { useHistory } from "react-router-dom";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 
 const MissingOrOutdatedSwapApp = ({ outdated = false }: { outdated?: boolean }) => {
   const { push } = useHistory();
+  const { state, send } = useContext(ProductTourContext);
   const openManager = useCallback(() => {
+    if (state.matches("flow")) {
+      // NB Consider the product tour flow as exited if we navigate away
+      send("EXIT");
+    }
     push("manager?q=exchange");
-  }, [push]);
+  }, [push, send, state]);
+
   const key = outdated ? "outdatedApp" : "missingApp";
   return (
     <Card flex={1} p={89} alignItems="center" justifyContent="center">

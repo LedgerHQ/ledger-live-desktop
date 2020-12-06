@@ -14,6 +14,7 @@ import "tippy.js/dist/svg-arrow.css";
 import type { State } from "~/renderer/reducers";
 import StyleProvider from "~/renderer/styles/StyleProvider";
 import { UpdaterProvider } from "~/renderer/components/Updater/UpdaterContext";
+import { ProductTourProvider } from "~/renderer/components/ProductTour/ProductTourContext";
 import ThrowBlock from "~/renderer/components/ThrowBlock";
 import LiveStyleSheetManager from "~/renderer/styles/LiveStyleSheetManager";
 import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
@@ -59,9 +60,11 @@ const App = ({ store, initialCountervalues }: Props) => {
             <RemoteConfigProvider>
               <UpdaterProvider>
                 <CountervaluesProvider initialState={initialCountervalues}>
-                  <Router>
-                    <Default />
-                  </Router>
+                  <ProductTourProvider>
+                    <Router>
+                      <Default />
+                    </Router>
+                  </ProductTourProvider>
                 </CountervaluesProvider>
               </UpdaterProvider>
             </RemoteConfigProvider>

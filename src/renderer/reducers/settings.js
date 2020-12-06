@@ -70,6 +70,7 @@ export type LangAndRegion = { language: string, region: ?string, useSystem: bool
 export type SettingsState = {
   loaded: boolean, // is the settings loaded from db (it not we don't save them)
   hasCompletedOnboarding: boolean,
+  hasCompletedProductTour: boolean,
   counterValue: string,
   preferredDeviceModel: DeviceModelId,
   hasInstalledApps: boolean,
@@ -119,6 +120,7 @@ const defaultsForCurrency: Currency => CurrencySettings = crypto => {
 
 const INITIAL_STATE: SettingsState = {
   hasCompletedOnboarding: false,
+  hasCompletedProductTour: true,
   counterValue: "USD",
   language: null,
   theme: null,
@@ -395,6 +397,9 @@ export const lastSeenDeviceSelector = (state: State) => state.settings.lastSeenD
 export const swapProvidersSelector = (state: Object) => state.settings.swapProviders;
 
 export const showClearCacheBannerSelector = (state: Object) => state.settings.showClearCacheBanner;
+
+export const hasCompletedProductTourSelector = (state: Object) =>
+  state.settings.hasCompletedProductTour;
 
 export const swapSupportedCurrenciesSelector: OutputSelector<
   State,

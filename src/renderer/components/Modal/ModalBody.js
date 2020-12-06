@@ -20,6 +20,7 @@ type Props = {
   renderProps?: RenderProps,
   noScroll?: boolean,
   refocusWhenChange?: any,
+  showProductTourBack?: boolean,
 };
 
 class ModalBody extends PureComponent<Props> {
@@ -44,13 +45,20 @@ class ModalBody extends PureComponent<Props> {
       renderProps,
       noScroll,
       modalFooterStyle,
+      showProductTourBack,
     } = this.props;
 
     // For `renderFooter` returning falsy values, we need to resolve first.
     const renderedFooter = renderFooter && renderFooter(renderProps);
     return (
       <>
-        <ModalHeader subTitle={subTitle} onBack={onBack} onClose={onClose} style={headerStyle}>
+        <ModalHeader
+          subTitle={subTitle}
+          onBack={onBack}
+          onClose={onClose}
+          showProductTourBack={showProductTourBack}
+          style={headerStyle}
+        >
           {title || null}
         </ModalHeader>
         <ModalContent ref={this._content} noScroll={noScroll}>

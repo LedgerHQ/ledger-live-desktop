@@ -1,7 +1,7 @@
 // @flow
 
 import invariant from "invariant";
-import React, { useEffect, useRef, useCallback, useState } from "react";
+import React, { useEffect, useRef, useCallback, useState, useContext } from "react";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount, getAccountName } from "@ledgerhq/live-common/lib/account";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -28,6 +28,7 @@ import InfoBox from "~/renderer/components/InfoBox";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import QRCode from "~/renderer/components/QRCode";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 
 const Separator = styled.div`
   border-top: 1px solid #99999933;
@@ -170,11 +171,21 @@ const StepReceiveFunds = ({
   const showQRCodeModal = useCallback(() => setModalVisible(true), [setModalVisible]);
 
   // when address need verification we trigger it on device
+  const { state: productTourState, send } = useContext(ProductTourContext);
+  const { context } = productTourState;
+
   useEffect(() => {
     if (isAddressVerified === null) {
       confirmAddress();
+    } else if (
+      isAddressVerified &&
+      context.activeFlow === "receive" &&
+      productTourState.matches("flow.ongoing")
+    ) {
+      send("COMPLETE_FLOW");
+      onClose();
     }
-  }, [isAddressVerified, confirmAddress]);
+  }, [confirmAddress, context.activeFlow, isAddressVerified, onClose, productTourState, send]);
 
   return (
     <>

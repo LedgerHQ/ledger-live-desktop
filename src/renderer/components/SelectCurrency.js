@@ -12,7 +12,11 @@ import Select from "~/renderer/components/Select";
 import Box from "~/renderer/components/Box";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import Text from "./Text";
-
+import {
+  useOnSetContextualOverlayQueue,
+  useOnClearContextualOverlayQueue,
+  useActiveFlow,
+} from "~/renderer/components/ProductTour/hooks";
 type Props<C: Currency> = {
   onChange: (?C) => void,
   currencies: C[],
@@ -44,6 +48,14 @@ const SelectCurrency = <C: Currency>({
   id,
 }: Props<C>) => {
   const { t } = useTranslation();
+  const activeFlow = useActiveFlow();
+  const onClearContextualOverlayQueue = useOnClearContextualOverlayQueue();
+  const onSetAddBitcoinAccountOverlay = useOnSetContextualOverlayQueue({
+    selector: ".select-options-list .select__option:first-child",
+    i18nKey: "productTour.flows.createAccount.overlays.currency",
+    conf: { top: true, disableScroll: true, isModal: true },
+  });
+
   const devMode = useEnv("MANAGER_DEV_MODE");
   let c = currencies;
   if (!devMode) {
@@ -52,7 +64,15 @@ const SelectCurrency = <C: Currency>({
   const [searchInputValue, setSearchInputValue] = useState("");
 
   const cryptos = useCurrenciesByMarketcap(c);
-  const onChangeCallback = useCallback(item => onChange(item ? item.currency : null), [onChange]);
+  const onChangeCallback = useCallback(
+    item => {
+      onChange(item ? item.currency : null);
+      if (activeFlow === "createAccount") {
+        onClearContextualOverlayQueue();
+      }
+    },
+    [activeFlow, onChange, onClearContextualOverlayQueue],
+  );
   const noOptionsMessage = useCallback(
     ({ inputValue }: { inputValue: string }) =>
       t("common.selectCurrencyNoOption", { currencyName: inputValue }),
@@ -86,11 +106,14 @@ const SelectCurrency = <C: Currency>({
   }, [searchInputValue, options, fuseOptions]);
 
   const filteredOptions = manualFilter();
+
   return (
     <Select
       id={id}
       autoFocus={autoFocus}
       value={value}
+      onMenuOpen={activeFlow === "createAccount" ? onSetAddBitcoinAccountOverlay : undefined}
+      onMenuClose={activeFlow === "createAccount" ? onClearContextualOverlayQueue : undefined}
       options={filteredOptions}
       filterOption={false}
       getOptionValue={getOptionValue}

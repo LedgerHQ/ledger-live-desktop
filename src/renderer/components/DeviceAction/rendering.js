@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useContext, useCallback } from "react";
 import map from "lodash/map";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
@@ -34,6 +34,7 @@ import SupportLinkError from "~/renderer/components/SupportLinkError";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 
 const AnimationWrapper: ThemedComponent<{ modelId: DeviceModelId }> = styled.div`
   width: 600px;
@@ -165,14 +166,21 @@ const OpenManagerBtn = ({
   mt?: number,
 }) => {
   const history = useHistory();
+  const { state, send } = useContext(ProductTourContext);
   const onClick = useCallback(() => {
+    if (state.matches("flow")) {
+      // NB Consider the product tour flow as exited if we navigate away
+      send("EXIT");
+    }
+
     history.push({
       pathname: "manager",
       search: appName ? `?q=${appName}` : "",
       state: { source: "device action open manager button" },
     });
     closeAllModal();
-  }, [history, appName, closeAllModal]);
+  }, [state, history, appName, closeAllModal, send]);
+
   return (
     <Button mt={mt} primary onClick={onClick}>
       <Trans i18nKey="DeviceAction.openManager" />

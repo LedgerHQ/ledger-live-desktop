@@ -1,6 +1,8 @@
 // @flow
 
-import React from "react";
+import React, { useCallback, useEffect, useContext } from "react";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
+
 import { Trans } from "react-i18next";
 import styled, { withTheme } from "styled-components";
 
@@ -81,6 +83,43 @@ export function StepConfirmationFooter({
       ? optimisticOperation.subOperations[0]
       : optimisticOperation
     : null;
+
+  const onOpenOperationDetails = useCallback(() => {
+    closeModal();
+    if (account && concernedOperation) {
+      openModal("MODAL_OPERATION_DETAILS", {
+        operationId: concernedOperation.id,
+        accountId: account.id,
+        parentId: parentAccount && parentAccount.id,
+      });
+    }
+  }, [account, closeModal, concernedOperation, openModal, parentAccount]);
+
+  const { state: productTourState, send } = useContext(ProductTourContext);
+  const { context } = productTourState;
+
+  useEffect(() => {
+    if (
+      !error &&
+      concernedOperation &&
+      context.activeFlow === "send" &&
+      productTourState.matches("flow.ongoing")
+    ) {
+      send("COMPLETE_FLOW", {
+        extras: { congratulationsCallback: onOpenOperationDetails },
+      });
+      closeModal();
+    }
+  }, [
+    closeModal,
+    concernedOperation,
+    context.activeFlow,
+    error,
+    onOpenOperationDetails,
+    productTourState,
+    send,
+  ]);
+
   return (
     <>
       {concernedOperation ? (
@@ -89,16 +128,7 @@ export function StepConfirmationFooter({
           ml={2}
           id={"send-confirmation-opc-button"}
           event="Send Flow Step 4 View OpD Clicked"
-          onClick={() => {
-            closeModal();
-            if (account && concernedOperation) {
-              openModal("MODAL_OPERATION_DETAILS", {
-                operationId: concernedOperation.id,
-                accountId: account.id,
-                parentId: parentAccount && parentAccount.id,
-              });
-            }
-          }}
+          onClick={onOpenOperationDetails}
           primary
         >
           {t("send.steps.confirmation.success.cta")}

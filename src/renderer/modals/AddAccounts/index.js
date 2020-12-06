@@ -238,6 +238,7 @@ class AddAccounts extends PureComponent<Props, State> {
       setAccountName: this.handleSetAccountName,
       onGoStep1: this.onGoStep1,
       editedNames,
+      showProductTourBack: stepId === "chooseCurrency",
     };
     const title = <Trans i18nKey="addAccounts.title" />;
 

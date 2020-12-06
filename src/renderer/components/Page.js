@@ -1,12 +1,14 @@
 // @flow
 
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import AngleUp from "~/renderer/icons/AngleUp";
 import HSMStatusBanner from "~/renderer/components/HSMStatusBanner";
 import TopBar from "~/renderer/components/TopBar";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
+import ProductTourOverrideContent from "~/renderer/components/ProductTour";
 
 type Props = {
   children: any,
@@ -93,6 +95,13 @@ const ScrollUpButton = styled.div.attrs(p => ({
 
 const Page = ({ children }: Props) => {
   const pageScrollerRef = useRef(null);
+  const { state: productTourState } = useContext(ProductTourContext);
+  const { context } = productTourState;
+  const shouldOverrideContent =
+    productTourState.matches("dashboard") ||
+    productTourState.matches({ flow: "landing" }) ||
+    (productTourState.matches("flow") && context.overrideContent);
+
   const [isScrollUpButtonVisible, setScrollUpButtonVisibility] = useState(false);
   const [isScrollAtUpperBound, setScrollAtUpperBound] = useState(true);
   const { pathname } = useLocation();
@@ -131,12 +140,16 @@ const Page = ({ children }: Props) => {
     <PageContainer>
       <HSMStatusBanner />
       <TopBar />
-      <PageScrollerContainer id="scroll-area">
-        <PageScrollTopSeparator isAtUpperBound={isScrollAtUpperBound} />
-        <PageScroller id="page-scroller" ref={pageScrollerRef}>
-          <PageContentContainer>{children}</PageContentContainer>
-        </PageScroller>
-      </PageScrollerContainer>
+      {shouldOverrideContent ? (
+        <ProductTourOverrideContent />
+      ) : (
+        <PageScrollerContainer id="scroll-area">
+          <PageScrollTopSeparator isAtUpperBound={isScrollAtUpperBound} />
+          <PageScroller id="page-scroller" ref={pageScrollerRef}>
+            <PageContentContainer>{children}</PageContentContainer>
+          </PageScroller>
+        </PageScrollerContainer>
+      )}
       <ScrollUpButton
         id={"scrollUpButton"}
         isVisible={isScrollUpButtonVisible}

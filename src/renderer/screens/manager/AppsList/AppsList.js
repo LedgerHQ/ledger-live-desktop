@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, memo, useCallback, useEffect, useRef } from "react";
+import React, { useContext, useState, memo, useCallback, useEffect, useRef } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -16,6 +16,8 @@ import Card from "~/renderer/components/Box/Card";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import TabBar from "~/renderer/components/TabBar";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
+import { getCryptoCurrencyById, isCurrencySupported } from "@ledgerhq/live-common/lib/currencies";
 import Item from "./Item";
 import Filter from "./Filter";
 import Sort from "./Sort";
@@ -83,6 +85,7 @@ const AppsList = ({
   const { push } = useHistory();
   const { search } = useLocation();
   const reduxDispatch = useDispatch();
+  const { state: productTourState } = useContext(ProductTourContext);
 
   const inputRef = useRef<any>();
   const [query, setQuery] = useState("");
@@ -119,11 +122,20 @@ const AppsList = ({
     [push, reduxDispatch],
   );
 
-  const { update, device, catalog } = useAppsSections(state, {
+  const { update, device, catalog: rawCatalog } = useAppsSections(state, {
     query,
     appFilter,
     sort,
   });
+
+  // NB filter the catalog to only live supported apps, if in live tour
+  const catalog = productTourState.matches({ flow: "ongoing" })
+    ? rawCatalog.filter(app => {
+        if (!app.currencyId) return false;
+        const currency = getCryptoCurrencyById(app.currencyId);
+        return !!currency && isCurrencySupported(currency);
+      })
+    : rawCatalog;
 
   const displayedAppList = isDeviceTab ? device : catalog;
 
@@ -172,7 +184,7 @@ const AppsList = ({
           />
         </StickyTabBar>
       )}
-      <Card mt={0}>
+      <Card mt={0} id={"appCatalog-body"}>
         {isDeviceTab && !installedApps.length ? (
           <Box py={8}>
             <Text textAlign="center" ff="Inter|SemiBold" fontSize={6}>

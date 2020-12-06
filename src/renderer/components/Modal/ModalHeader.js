@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -11,6 +11,7 @@ import Tabbable from "~/renderer/components/Box/Tabbable";
 
 import IconCross from "~/renderer/icons/Cross";
 import IconAngleLeft from "~/renderer/icons/AngleLeft";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 
 const TitleContainer = styled(Box).attrs(() => ({
   vertical: true,
@@ -22,21 +23,21 @@ const TitleContainer = styled(Box).attrs(() => ({
 `;
 
 const ModalTitle = styled(Box).attrs(() => ({
-  color: "palette.text.shade100",
   ff: "Inter|Medium",
   fontSize: 6,
 }))`
   text-align: center;
   line-height: 1;
+  color: ${p => p.theme.colors.palette.text.shade100};
 `;
 
 const ModalSubTitle = styled(Box).attrs(() => ({
-  color: "palette.text.shade50",
   ff: "Inter|Regular",
   fontSize: 3,
 }))`
   text-align: center;
   line-height: 2;
+  color: ${p => p.theme.colors.palette.text.shade50};
 `;
 
 const ModalHeaderAction = styled(Tabbable).attrs(() => ({
@@ -108,12 +109,15 @@ const ModalHeader = ({
   style?: *,
 }) => {
   const { t } = useTranslation();
+  const { state } = useContext(ProductTourContext);
+  const { context } = state;
+  const { isControlledModal } = context;
   return (
     <Container hasTitle={Boolean(children || subTitle)} style={style}>
       {onBack ? (
         <ModalHeaderAction onClick={onBack} id="modal-back-button">
           <IconAngleLeft size={12} />
-          <Text ff="Inter|Medium" fontSize={4} color="palette.text.shade40">
+          <Text ff="Inter|Medium" fontSize={4} color={"palette.text.shade40"}>
             {t("common.back")}
           </Text>
         </ModalHeaderAction>
@@ -126,7 +130,7 @@ const ModalHeader = ({
           <ModalTitle id="modal-title">{children}</ModalTitle>
         </TitleContainer>
       ) : null}
-      {onClose ? (
+      {onClose && !isControlledModal ? (
         <ModalHeaderAction right onClick={onClose} id="modal-close-button">
           <IconCross size={16} />
         </ModalHeaderAction>

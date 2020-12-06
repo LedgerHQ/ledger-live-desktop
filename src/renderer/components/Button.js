@@ -200,6 +200,18 @@ const buttonStyles: { [_: string]: Style } = {
       border-color: ${darken(p.theme.colors.palette.text.shade60, 0.1)};
     `,
   },
+  outlineWhite: {
+    default: p => `
+      background: transparent;
+      border: 1px solid #ffffff;
+      color: #ffffff;
+      box-shadow: ${p.isFocused ? focusedShadowStyle : ""}
+    `,
+    active: p => `
+      color: ${darken("#ffffff", 0.1)};
+      border-color: ${darken("#ffffff", 0.1)};
+    `,
+  },
   icon: {
     default: () => `
       font-size: ${fontSize[3]}px;
@@ -305,6 +317,7 @@ export type Props = {
   disabled?: boolean,
   outline?: boolean,
   outlineGrey?: boolean,
+  outlineWhite?: boolean,
   onClick?: Function,
   small?: boolean,
   isLoading?: boolean,

@@ -39,7 +39,7 @@ import useEnv from "~/renderer/hooks/useEnv";
 
 import TopGradient from "./TopGradient";
 import Hide from "./Hide";
-
+import { useActiveFlow } from "~/renderer/components/ProductTour/hooks";
 const MAIN_SIDEBAR_WIDTH = 230;
 
 const TagText = styled.div.attrs(p => ({
@@ -190,6 +190,7 @@ const MainSideBar = () => {
   const hasStarredAccounts = useSelector(starredAccountsSelector).length > 0;
   const displayBlueDot = useManagerBlueDot(lastSeenDevice);
   const firstTimeLend = useSelector(state => state.settings.firstTimeLend);
+  const activeFlow = useActiveFlow();
 
   const handleCollapse = useCallback(() => {
     dispatch(setSidebarCollapsed(!collapsed));
@@ -281,7 +282,7 @@ const MainSideBar = () => {
                 iconActiveColor="wallet"
                 isActive={location.pathname === "/accounts"}
                 onClick={handleClickAccounts}
-                disabled={noAccounts}
+                // disabled={noAccounts && activeFlow !== "createAccount"}
                 collapsed={secondAnim}
               />
               <SideBarListItem

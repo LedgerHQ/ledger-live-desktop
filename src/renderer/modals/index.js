@@ -50,6 +50,9 @@ import MODAL_POLKADOT_NOMINATE from "../families/polkadot/NominationFlowModal";
 import MODAL_POLKADOT_BOND from "../families/polkadot/BondFlowModal";
 import MODAL_POLKADOT_UNBOND from "../families/polkadot/UnbondFlowModal";
 import MODAL_POLKADOT_REBOND from "../families/polkadot/RebondFlowModal";
+import MODAL_PRODUCT_TOUR_SUCCESS from "../components/ProductTour/Modal";
+import MODAL_PRODUCT_TOUR_UNAVAILABLE from "../components/ProductTour/ModalUnavailable";
+import MODAL_PRODUCT_TOUR_CUSTOMIZATION from "../components/ProductTour/ModalCustomization";
 
 // Lending
 import MODAL_LEND_MANAGE from "../screens/lend/modals/ManageLend";
@@ -117,6 +120,9 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_SWAP,
   MODAL_SWAP_OPERATION_DETAILS,
   MODAL_FULL_NODE,
+  MODAL_PRODUCT_TOUR_SUCCESS,
+  MODAL_PRODUCT_TOUR_UNAVAILABLE,
+  MODAL_PRODUCT_TOUR_CUSTOMIZATION,
 };
 
 export default modals;

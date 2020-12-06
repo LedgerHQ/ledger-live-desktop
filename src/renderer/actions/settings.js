@@ -66,6 +66,8 @@ export function useHideEmptyTokenAccounts() {
 
 export const setShowClearCacheBanner = (showClearCacheBanner: boolean) =>
   saveSettings({ showClearCacheBanner });
+export const setHasCompletedProductTour = (hasCompletedProductTour: boolean) =>
+  saveSettings({ hasCompletedProductTour });
 export const setSidebarCollapsed = (sidebarCollapsed: boolean) =>
   saveSettings({ sidebarCollapsed });
 
