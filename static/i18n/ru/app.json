@@ -749,7 +749,6 @@
       "cta": "Clear cache"
     },
     "migrate": "Доступно обновление учётных записей Ledger Live",
-    "ongoingScams": "There are ongoing phishing scams on our userbase, please be careful and never share your recovery phrase.",
     "genericTerminatedCrypto": "{{coinName}} больше не поддерживается",
     "ledgerAcademy": {
       "title": "Ledger Academy",
