@@ -110,7 +110,7 @@ export function ValidateTransactions({ t }: ScreenProps) {
   );
 }
 
-export function SetUpNanoWallet({ t }: ScreenProps) {
+export function SetUpNanoWallet({ t, sendEvent }: ScreenProps) {
   return (
     <React.Fragment>
       <Text

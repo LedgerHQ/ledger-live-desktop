@@ -1,7 +1,6 @@
 // @flow
 
 import React from "react";
-import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { Stepper } from "~/renderer/components/Onboarding/Screens/Tutorial/Stepper";
 import { ImportYourRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/ImportYourRecoveryPhrase";
@@ -26,6 +25,8 @@ import { NewRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tuto
 import { GenuineCheck } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/GenuineCheck";
 import { Modal } from "~/renderer/components/Onboarding/Modal";
 import { CarefullyFollowInstructions } from "~/renderer/components/Onboarding/Alerts/CarefullyFollowInstructions";
+import { connectSetupDevice } from "~/renderer/components/Onboarding/Screens/Tutorial/machines/connectSetupDevice";
+import { PreferLedgerRecoverySeed } from "~/renderer/components/Onboarding/Alerts/PreferLedgerRecoverySeed";
 
 const TutorialContainer = styled.div`
   height: 100%;
@@ -129,9 +130,24 @@ const screens = {
   },
 };
 
-export function Tutorial() {
-  const { t } = useTranslation();
-  const [state, sendEvent] = useMachine(setupNewDevice);
+export function ConnectSetUpDevice({ sendEvent }) {
+  return <Tutorial sendEventToParent={sendEvent} machine={connectSetupDevice} />;
+}
+
+export function SetupNewDevice({ sendEvent }) {
+  return <Tutorial sendEventToParent={sendEvent} machine={setupNewDevice} />;
+}
+
+export function UseRecoveryPhrase({ sendEvent }) {
+  return <Tutorial sendEventToParent={sendEvent} machine={useRecoveryPhraseMachine} />;
+}
+
+function Tutorial({ sendEventToParent, machine }) {
+  const [state, sendEvent] = useMachine(machine, {
+    actions: {
+      topLevelPrev: () => sendEventToParent("PREV"),
+    },
+  });
 
   const Screen = screens[state.value].component;
   const theme = screens[state.value].bgTheme;
@@ -142,6 +158,13 @@ export function Tutorial() {
         <CarefullyFollowInstructions
           onClose={() =>
             sendEvent({ type: "SET_ALERT_STATUS", alertId: "beCareful", status: false })
+          }
+        />
+      </Modal>
+      <Modal isOpen={state.context.alerts.preferLedgerSeed}>
+        <PreferLedgerRecoverySeed
+          onClose={() =>
+            sendEvent({ type: "SET_ALERT_STATUS", alertId: "preferLedgerSeed", status: false })
           }
         />
       </Modal>

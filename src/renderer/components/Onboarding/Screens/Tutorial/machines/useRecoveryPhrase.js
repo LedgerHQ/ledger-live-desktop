@@ -26,6 +26,7 @@ export const useRecoveryPhraseMachine = Machine({
     userChosePincodeHimself: false,
     userUnderstandConsequences: false,
     drawer: null,
+    alerts: {},
   },
   states: {
     importRecoveryPhrase: {
@@ -35,9 +36,18 @@ export const useRecoveryPhraseMachine = Machine({
         recoveryPhrase: "inactive",
         pairNano: "inactive",
       }),
+      exit: assign(context => ({
+        ...context,
+        alerts: {
+          preferLedgerSeed: context.alerts.preferLedgerSeed === undefined ? true : context.alerts.preferLedgerSeed,
+        },
+      })),
       on: {
         NEXT: {
           target: "deviceHowTo",
+        },
+        PREV: {
+          actions: ["topLevelPrev"],
         },
       },
     },
@@ -162,18 +172,51 @@ export const useRecoveryPhraseMachine = Machine({
         pairNano: "active",
       }),
       on: {
-        NEXT: {},
+        NEXT: {
+          target: "genuineCheck",
+        },
         PREV: {
           target: "recoveryHowTo2",
         },
       },
     },
+    genuineCheck: {
+      entry: setStepperStatus({
+        getStarted: "success",
+        pinCode: "success",
+        recoveryPhrase: "success",
+        pairNano: "active",
+      }),
+      on: {
+        SET_DEVICE_ID: {
+          actions: assign({
+            deviceId: (_, { deviceId }) => deviceId,
+          }),
+        },
+        NEXT: {
+          cond: context => context.deviceId,
+        },
+        PREV: {
+          target: "pairMyNano",
+        },
+      },
+    },
+
   },
   on: {
     CLOSE_DRAWER: {
       actions: assign({
         drawer: null,
       }),
+    },
+    SET_ALERT_STATUS: {
+      actions: assign((context, { alertId, status }) => ({
+        ...context,
+        alerts: {
+          ...context.alerts,
+          [alertId]: status,
+        },
+      })),
     },
   },
 });

@@ -49,6 +49,9 @@ export const pedagogyMachine = Machine({
         PREV: {
           target: "validateTransactions",
         },
+        DONE: {
+          actions: ["done"],
+        },
       },
     },
   },

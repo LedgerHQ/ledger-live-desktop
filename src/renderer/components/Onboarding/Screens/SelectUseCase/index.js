@@ -117,14 +117,14 @@ export function SelectUseCase({ sendEvent }) {
               title={t("onboarding.screens.selectUseCase.options.2.title")}
               description={t("onboarding.screens.selectUseCase.options.2.description")}
               Illu={DeviceConnect}
-              onClick={() => sendEvent("USE_RECOVERY_PHRASE")}
+              onClick={() => sendEvent("CONNECT_SETUP_DEVICE")}
             />
             <UseCaseOption
               heading={t("onboarding.screens.selectUseCase.options.3.heading")}
               title={t("onboarding.screens.selectUseCase.options.3.title")}
               description={t("onboarding.screens.selectUseCase.options.3.description")}
               Illu={ImportRecovery}
-              onClick={() => sendEvent("CONNECT_SET_UP_DEVICE")}
+              onClick={() => sendEvent("USE_RECOVERY_PHRASE")}
             />
           </RightColumn>
         </Row>

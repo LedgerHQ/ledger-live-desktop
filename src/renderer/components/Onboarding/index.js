@@ -10,7 +10,7 @@ import { Modal } from "~/renderer/components/Onboarding/Modal";
 import { Welcome } from "~/renderer/components/Onboarding/Screens/Welcome";
 import { SelectDevice } from "~/renderer/components/Onboarding/Screens/SelectDevice";
 import { SelectUseCase } from "~/renderer/components/Onboarding/Screens/SelectUseCase";
-import { Tutorial } from "~/renderer/components/Onboarding/Screens/Tutorial";
+import { SetupNewDevice, ConnectSetUpDevice, UseRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial";
 
 // modals
 import { Quizz } from "./Quizz";
@@ -19,7 +19,7 @@ import { pedagogyMachine } from "~/renderer/components/Onboarding/Pedagogy/state
 
 import styled from "styled-components";
 import { quizzMachine } from "~/renderer/components/Onboarding/Quizz/state";
-import LangSwitcher from "./LangSwitcher";
+import { Pedagogy } from "~/renderer/components/Onboarding/Pedagogy";
 
 function LedgerLogo() {
   return (
@@ -85,18 +85,52 @@ const onboardingMachine = Machine({
       on: {
         OPEN_PEDAGOGY_MODAL: {
           actions: assign({
-            modal: () => spawn(quizzMachine),
+            pedagogy: true,
+          }),
+        },
+        CLOSE_PEDAGOGY_MODAL: {
+          actions: assign({
+            pedagogy: close,
           }),
         },
         USE_RECOVERY_PHRASE: {
-          target: "tutorial",
+          target: "useRecoveryPhrase",
+        },
+        SETUP_NEW_DEVICE: {
+          target: "setupNewDevice",
+          actions: assign({
+            pedagogy: false,
+          }),
+        },
+        CONNECT_SETUP_DEVICE: {
+          target: "connectSetupDevice",
         },
         PREV: {
           target: "selectDevice",
         },
       },
     },
-    tutorial: {},
+    setupNewDevice: {
+      on: {
+        PREV: {
+          target: "selectUseCase",
+        },
+      },
+    },
+    connectSetupDevice: {
+      on: {
+        PREV: {
+          target: "selectUseCase",
+        },
+      },
+    },
+    useRecoveryPhrase: {
+      on: {
+        PREV: {
+          target: "selectUseCase",
+        },
+      },
+    },
   },
   on: {
     CLOSE_MODAL: {
@@ -115,7 +149,9 @@ const screens = {
   welcome: Welcome,
   selectDevice: SelectDevice,
   selectUseCase: SelectUseCase,
-  tutorial: Tutorial,
+  setupNewDevice: SetupNewDevice,
+  connectSetupDevice: ConnectSetUpDevice,
+  useRecoveryPhrase: UseRecoveryPhrase,
 };
 
 const DURATION = 200;
@@ -147,8 +183,8 @@ export function Onboarding() {
       <OnboardingLogoContainer>
         <LedgerLogo />
       </OnboardingLogoContainer>
-      <Modal isOpen={!!state.context.modal} onRequestClose={() => sendEvent("CLOSE_MODAL")}>
-        {state.context.modal ? <Quizz actor={state.context.modal} /> : null}
+      <Modal isOpen={state.context.pedagogy} onRequestClose={() => sendEvent("CLOSE_PEDAGOGY_MODAL")}>
+        <Pedagogy onDone={() => sendEvent("SETUP_NEW_DEVICE")} />
       </Modal>
       <OnboardingContainer>
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="page-switch">

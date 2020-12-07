@@ -52,6 +52,9 @@ export const setupNewDevice = Machine({
         NEXT: {
           target: "deviceHowTo",
         },
+        PREV: {
+          actions: ["topLevelPrev"],
+        },
       },
     },
     deviceHowTo: {

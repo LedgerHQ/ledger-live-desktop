@@ -14,7 +14,7 @@ type Props = {
   onClose: () => void,
 };
 
-export function CarefullyFollowInstructions({ onClose }: Props) {
+export function PreferLedgerRecoverySeed({ onClose }: Props) {
   const { t } = useTranslation();
 
   return (
@@ -29,7 +29,7 @@ export function CarefullyFollowInstructions({ onClose }: Props) {
         ff="Inter|SemiBold"
         fontSize="18px"
       >
-        {t("onboarding.alerts.beCareful.title")}
+        {t("onboarding.alerts.useLedgerSeeds.title")}
       </Text>
       <Text
         mt="8px"
@@ -39,7 +39,7 @@ export function CarefullyFollowInstructions({ onClose }: Props) {
         ff="Inter|Regular"
         fontSize="13px"
       >
-        {t("onboarding.alerts.beCareful.descr")}
+        {t("onboarding.alerts.useLedgerSeeds.descr")}
       </Text>
       <Button primary onClick={onClose}>
         <Text
@@ -48,7 +48,7 @@ export function CarefullyFollowInstructions({ onClose }: Props) {
           ff="Inter|Bold"
           fontSize="12px"
         >
-          {t("onboarding.alerts.beCareful.gotIt")}
+          {t("onboarding.alerts.useLedgerSeeds.gotIt")}
         </Text>
       </Button>
     </AlertModalContainer>

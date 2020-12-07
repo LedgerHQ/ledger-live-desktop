@@ -7,7 +7,7 @@ import WtfIsThis from "./assets/WtfIsThis.svg";
 import Text from "~/renderer/components/Text";
 import ChevronLeft from "~/renderer/icons/ChevronLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
-import { useActor } from "@xstate/react";
+import { useMachine } from "@xstate/react";
 import { useTranslation } from "react-i18next";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import {
@@ -17,6 +17,7 @@ import {
   StayOffline,
   ValidateTransactions,
 } from "~/renderer/components/Onboarding/Pedagogy/screens";
+import { pedagogyMachine } from "~/renderer/components/Onboarding/Pedagogy/state";
 
 const PedagogyContainer = styled.div`
   box-sizing: border-box;
@@ -129,10 +130,6 @@ const ScreenContainer = styled.div`
   }
 `;
 
-const TransitionBox = styled(TransitionGroup)`
-  display: flex;
-`;
-
 const screens = {
   accessYourCoins: AccessYourCoins,
   ownYourPrivateKey: OwnYourPrivateKey,
@@ -142,11 +139,15 @@ const screens = {
 };
 
 type PedagogyProps = {
-  actor: any,
+  onDone: () => void,
 };
 
-export function Pedagogy({ actor }: PedagogyProps) {
-  const [state, sendEvent] = useActor(actor);
+export function Pedagogy({ onDone }: PedagogyProps) {
+  const [state, sendEvent] = useMachine(pedagogyMachine, {
+    actions: {
+      done: onDone,
+    },
+  });
   const { t } = useTranslation();
 
   const onKeyPress = useCallback(
