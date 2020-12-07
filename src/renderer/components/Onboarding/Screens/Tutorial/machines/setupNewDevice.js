@@ -31,6 +31,7 @@ export const setupNewDevice = Machine({
     userUnderstandConsequences: false,
     drawer: null,
     deviceId: null,
+    alerts: {},
   },
   states: {
     howToGetStarted: {
@@ -41,6 +42,12 @@ export const setupNewDevice = Machine({
         hideRecoveryPhrase: "inactive",
         pairNano: "inactive",
       }),
+      exit: assign(context => ({
+        ...context,
+        alerts: {
+          beCareful: context.alerts.beCareful === undefined ? true : context.alerts.beCareful,
+        },
+      })),
       on: {
         NEXT: {
           target: "deviceHowTo",
@@ -228,6 +235,15 @@ export const setupNewDevice = Machine({
       actions: assign({
         drawer: null,
       }),
+    },
+    SET_ALERT_STATUS: {
+      actions: assign((context, { alertId, status }) => ({
+        ...context,
+        alerts: {
+          ...context.alerts,
+          [alertId]: status,
+        },
+      })),
     },
   },
 });

@@ -38,6 +38,7 @@ const ScrollHint = styled.div.attrs(({ visible }) => ({
   bottom: 40px;
   right: 40px;
   transition: opacity 150ms ease-out;
+  pointer-events: none;
 
   &:after {
     content: "";

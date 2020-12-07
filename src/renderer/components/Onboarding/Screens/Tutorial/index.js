@@ -24,6 +24,8 @@ import { AnimatedWave } from "~/renderer/components/Onboarding/Screens/Tutorial/
 import { HowToGetStarted } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/HowToGetStarted";
 import { NewRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/NewRecoveryPhrase";
 import { GenuineCheck } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/GenuineCheck";
+import { Modal } from "~/renderer/components/Onboarding/Modal";
+import { CarefullyFollowInstructions } from "~/renderer/components/Onboarding/Alerts/CarefullyFollowInstructions";
 
 const TutorialContainer = styled.div`
   height: 100%;
@@ -136,6 +138,13 @@ export function Tutorial() {
 
   return (
     <TutorialContainer>
+      <Modal isOpen={state.context.alerts.beCareful}>
+        <CarefullyFollowInstructions
+          onClose={() =>
+            sendEvent({ type: "SET_ALERT_STATUS", alertId: "beCareful", status: false })
+          }
+        />
+      </Modal>
       <SideDrawer
         isOpen={!!state.context.drawer}
         onRequestClose={() => sendEvent("CLOSE_DRAWER")}

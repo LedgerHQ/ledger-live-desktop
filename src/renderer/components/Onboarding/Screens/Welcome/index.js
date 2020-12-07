@@ -8,6 +8,7 @@ import Button from "~/renderer/components/Button";
 
 import { Computer } from "./assets/Computer";
 import { Wave } from "./assets/Wave";
+import LangSwitcher from "~/renderer/components/Onboarding/LangSwitcher";
 
 const WelcomeContainer = styled.div`
   height: 100%;
@@ -39,6 +40,13 @@ const WaveContainer = styled.div`
   transform: translateY(50%);
 `;
 
+const TopRightContainer = styled.div`
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  z-index: 1;
+`;
+
 export function Welcome({ sendEvent }) {
   const { t } = useTranslation();
 
@@ -48,6 +56,9 @@ export function Welcome({ sendEvent }) {
 
   return (
     <WelcomeContainer>
+      <TopRightContainer>
+        <LangSwitcher />
+      </TopRightContainer>
       <TopContainer>
         <WaveContainer>
           <Wave />
