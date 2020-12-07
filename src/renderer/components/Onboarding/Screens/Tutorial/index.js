@@ -22,6 +22,8 @@ import { HideRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tut
 import { WaveContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import { AnimatedWave } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/AnimatedWave";
 import { HowToGetStarted } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/HowToGetStarted";
+import { NewRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/NewRecoveryPhrase";
+import { GenuineCheck } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/GenuineCheck";
 
 const TutorialContainer = styled.div`
   height: 100%;
@@ -91,12 +93,20 @@ const screens = {
     component: PinCode,
     bgTheme: "dark",
   },
+  genuineCheck: {
+    component: GenuineCheck,
+    bgTheme: "light",
+  },
   pinCodeHowTo: {
     component: PinCodeHowTo,
     bgTheme: "light",
   },
   existingRecoveryPhrase: {
     component: ExistingRecoveryPhrase,
+    bgTheme: "dark",
+  },
+  newRecoveryPhrase: {
+    component: NewRecoveryPhrase,
     bgTheme: "dark",
   },
   recoveryHowTo1: {

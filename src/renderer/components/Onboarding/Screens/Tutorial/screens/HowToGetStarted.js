@@ -9,6 +9,9 @@ import { Illustration, ContentContainer } from "../shared";
 
 import { useTranslation } from "react-i18next";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
+import Clock from "~/renderer/icons/Clock";
+import Pen from "~/renderer/icons/Pen";
+import Flower from "~/renderer/icons/Flower";
 
 const ScreenContainer = styled.div`
   display: flex;
@@ -28,15 +31,33 @@ const ContentFooter = styled.div`
   justify-content: space-between;
 `;
 
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 8px;
+  align-items: center;
+`;
+
+const IconContainer = styled.div`
+  background-color: #ffffff;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export function HowToGetStarted({ sendEvent }) {
   const { t } = useTranslation();
 
   return (
     <ScreenContainer>
       <ContentContainer>
-        <Illustration height={326} width={243} src={hourglass} />
+        <Illustration width={326} height={243} src={hourglass} />
         <Text
           mt="32px"
+          mb="24px"
           color="palette.primary.contrastText"
           ff="Inter|SemiBold"
           fontSize="32px"
@@ -44,6 +65,48 @@ export function HowToGetStarted({ sendEvent }) {
         >
           {t("onboarding.screens.tutorial.screens.howToGetStarted.title")}
         </Text>
+        <Row>
+          <IconContainer>
+            <Clock size={12} color="#6490F1" />
+          </IconContainer>
+          <Text
+            ml="20px"
+            color="palette.primary.contrastText"
+            ff="Inter|Regular"
+            fontSize="13px"
+            lineHeight="19.5px"
+          >
+            {t("onboarding.screens.tutorial.screens.howToGetStarted.rules.1")}
+          </Text>
+        </Row>
+        <Row>
+          <IconContainer>
+            <Pen size={12} color="#6490F1" />
+          </IconContainer>
+          <Text
+            ml="20px"
+            color="palette.primary.contrastText"
+            ff="Inter|Regular"
+            fontSize="13px"
+            lineHeight="19.5px"
+          >
+            {t("onboarding.screens.tutorial.screens.howToGetStarted.rules.2")}
+          </Text>
+        </Row>
+        <Row>
+          <IconContainer>
+            <Flower size={12} color="#6490F1" />
+          </IconContainer>
+          <Text
+            ml="20px"
+            color="palette.primary.contrastText"
+            ff="Inter|Regular"
+            fontSize="13px"
+            lineHeight="19.5px"
+          >
+            {t("onboarding.screens.tutorial.screens.howToGetStarted.rules.3")}
+          </Text>
+        </Row>
       </ContentContainer>
       <ContentFooter>
         <Button color="palette.primary.contrastText" onClick={() => sendEvent("PREV")}>

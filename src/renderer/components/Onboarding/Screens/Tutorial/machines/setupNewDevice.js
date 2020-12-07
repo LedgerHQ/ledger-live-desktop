@@ -30,6 +30,7 @@ export const setupNewDevice = Machine({
     userChosePincodeHimself: false,
     userUnderstandConsequences: false,
     drawer: null,
+    deviceId: null,
   },
   states: {
     howToGetStarted: {
@@ -101,14 +102,14 @@ export const setupNewDevice = Machine({
       }),
       on: {
         NEXT: {
-          target: "existingRecoveryPhrase",
+          target: "newRecoveryPhrase",
         },
         PREV: {
           target: "pinCode",
         },
       },
     },
-    existingRecoveryPhrase: {
+    newRecoveryPhrase: {
       entry: setStepperStatus({
         getStarted: "success",
         pinCode: "success",
@@ -144,7 +145,7 @@ export const setupNewDevice = Machine({
           target: "recoveryHowTo2",
         },
         PREV: {
-          target: "existingRecoveryPhrase",
+          target: "newRecoveryPhrase",
         },
       },
     },
@@ -191,9 +192,33 @@ export const setupNewDevice = Machine({
         pairNano: "active",
       }),
       on: {
-        NEXT: {},
+        NEXT: {
+          target: "genuineCheck",
+        },
         PREV: {
           target: "hideRecoveryPhrase",
+        },
+      },
+    },
+    genuineCheck: {
+      entry: setStepperStatus({
+        getStarted: "success",
+        pinCode: "success",
+        recoveryPhrase: "success",
+        hideRecoveryPhrase: "success",
+        pairNano: "active",
+      }),
+      on: {
+        SET_DEVICE_ID: {
+          actions: assign({
+            deviceId: (_, { deviceId }) => deviceId,
+          }),
+        },
+        NEXT: {
+          cond: context => context.deviceId,
+        },
+        PREV: {
+          target: "pairMyNano",
         },
       },
     },

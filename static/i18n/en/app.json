@@ -2285,6 +2285,17 @@
               "help": "Need help"
             }
           },
+          "newRecoveryPhrase": {
+            "title": "Recovery phrase",
+            "paragraph1": "Your recovery phrase is a 24 words phrase that protects your private keys.",
+            "paragraph2": "Ledger does not keep a copy of it.",
+            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose of break my Nano.",
+            "buttons": {
+              "next": "Save recovery phrase",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
           "recoveryHowTo": {
             "grabRecovery": {
               "title": "Grab your existing recovery phrase"
@@ -2306,6 +2317,17 @@
             },
             "buttons": {
               "next": "Next step",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
+          "genuineCheck": {
+            "plugUSBCable": {
+              "title": "Plug USB cable",
+              "descr": "Plug your cable and enter your PIN Code on your device"
+            },
+            "buttons": {
+              "next": "Continue",
               "prev": "Previous step",
               "help": "Need help"
             }

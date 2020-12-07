@@ -9,7 +9,6 @@ import { useTranslation } from "react-i18next";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
-
 import { ContentContainer, HeaderContainer } from "../shared";
 import nanoXEnterWord from "~/renderer/components/Onboarding/Screens/Tutorial/assets/nanoXEnterWord.svg";
 
@@ -76,15 +75,17 @@ function Step({ title, descr, index }: StepProps) {
         >
           {title}
         </Text>
-        <Text
-          mt="8px"
-          color="palette.text.shade100"
-          ff="Inter|Regular"
-          fontSize="13px"
-          lineHeight="19.5px"
-        >
-          {descr}
-        </Text>
+        {descr ? (
+          <Text
+            mt="8px"
+            color="palette.text.shade100"
+            ff="Inter|Regular"
+            fontSize="13px"
+            lineHeight="19.5px"
+          >
+            {descr}
+          </Text>
+        ) : null}
       </StepTextContainer>
     </StepContainer>
   );
@@ -109,15 +110,8 @@ const StepList = styled.div`
 
 const steps = [
   {
-    titleKey: "onboarding.screens.tutorial.screens.recoveryHowTo.enterWord.title",
-    descrKey: "onboarding.screens.tutorial.screens.recoveryHowTo.enterWord.descr",
-  },
-  {
-    titleKey: "onboarding.screens.tutorial.screens.recoveryHowTo.validateWord.title",
-    descrKey: "onboarding.screens.tutorial.screens.recoveryHowTo.validateWord.descr",
-  },
-  {
-    titleKey: "onboarding.screens.tutorial.screens.recoveryHowTo.andNext.title",
+    titleKey: "onboarding.screens.tutorial.screens.genuineCheck.plugUSBCable.title",
+    descrKey: "onboarding.screens.tutorial.screens.genuineCheck.plugUSBCable.descr",
   },
 ];
 
@@ -128,7 +122,7 @@ const DevicePlaceholder = styled.div`
   margin-bottom: 32px;
 `;
 
-export function RecoveryHowTo2({ sendEvent }) {
+export function GenuineCheck({ sendEvent, context }) {
   const { t } = useTranslation();
 
   return (
@@ -137,7 +131,7 @@ export function RecoveryHowTo2({ sendEvent }) {
         <HeaderContainer>
           <Button color="palette.primary.main" onClick={() => sendEvent("HELP")}>
             <Text mr="8px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
-              {t("onboarding.screens.tutorial.screens.recoveryHowTo.buttons.help")}
+              {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.help")}
             </Text>
             <InfoCircle size={22} />
           </Button>
@@ -149,7 +143,7 @@ export function RecoveryHowTo2({ sendEvent }) {
               key={index}
               title={t(titleKey)}
               descr={descrKey ? t(descrKey) : undefined}
-              index={index + 1 + 2}
+              index={index + 1}
             />
           ))}
         </StepList>
@@ -158,14 +152,13 @@ export function RecoveryHowTo2({ sendEvent }) {
         <Button color="palette.text.shade30" onClick={() => sendEvent("PREV")}>
           <ArrowLeft />
           <Text ml="9px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
-            {t("onboarding.screens.tutorial.screens.recoveryHowTo.buttons.prev")}
+            {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.prev")}
           </Text>
         </Button>
-        <Button primary onClick={() => sendEvent("NEXT")}>
-          <Text mr="12px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
-            {t("onboarding.screens.tutorial.screens.recoveryHowTo.buttons.next")}
+        <Button primary onClick={() => sendEvent("NEXT")} disabled={!context.deviceId}>
+          <Text ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+            {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.next")}
           </Text>
-          <ChevronRight size={13} />
         </Button>
       </ContentFooter>
     </ScreenContainer>

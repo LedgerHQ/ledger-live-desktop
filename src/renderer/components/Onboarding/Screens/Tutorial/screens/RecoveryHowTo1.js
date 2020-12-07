@@ -10,7 +10,7 @@ import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import { ContentContainer, HeaderContainer } from "../shared";
-import nanoXFlat from "~/renderer/components/Onboarding/Screens/Tutorial/assets/nanoXFlat.svg";
+import nanoXEnterWord from "~/renderer/components/Onboarding/Screens/Tutorial/assets/nanoXEnterWord.svg";
 
 const ScreenContainer = styled.div`
   display: flex;
@@ -119,7 +119,7 @@ const steps = [
 ];
 
 const DevicePlaceholder = styled.div`
-  background: url(${nanoXFlat}) center no-repeat;
+  background: url(${nanoXEnterWord}) center no-repeat;
   height: 77px;
   margin-top: 147px;
   margin-bottom: 32px;

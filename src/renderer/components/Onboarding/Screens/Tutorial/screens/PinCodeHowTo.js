@@ -10,10 +10,10 @@ import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import { HeaderContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
-import nanoXFlat from "~/renderer/components/Onboarding/Screens/Tutorial/assets/nanoXFlat.svg";
+import nanoXPinCode from "~/renderer/components/Onboarding/Screens/Tutorial/assets/nanoXPinCode.svg";
 
 const DevicePlaceholder = styled.div`
-  background: url(${nanoXFlat}) center no-repeat;
+  background: url(${nanoXPinCode}) center no-repeat;
   height: 77px;
   margin-top: 147px;
   margin-bottom: 32px;
