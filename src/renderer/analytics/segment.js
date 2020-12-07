@@ -12,7 +12,6 @@ import {
   shareAnalyticsSelector,
   lastSeenDeviceSelector,
 } from "~/renderer/reducers/settings";
-import { getCurrentDevice } from "~/renderer/reducers/devices";
 import type { State } from "~/renderer/reducers";
 
 // load analytics
@@ -49,6 +48,7 @@ const extraProperties = store => {
         appLength: device.apps.length,
       }
     : {};
+
   const sidebarCollapsed = sidebarCollapsedSelector(state);
 
   return {
@@ -105,31 +105,33 @@ function sendTrack(event, properties: ?Object, storeInstance: *) {
     logger.error("analytics is not available");
     return;
   }
-  analytics.track(
-    event,
-    {
-      ...extraProperties(storeInstance),
-      ...properties,
-    },
-    {
-      context: getContext(storeInstance),
-    },
-  );
+
+  analytics.track(event, properties, {
+    context: getContext(storeInstance),
+  });
   trackSubject.next({ event, properties });
 }
 
 export const track = (event: string, properties: ?Object, mandatory: ?boolean) => {
-  logger.analyticsTrack(event, properties);
+  const fullProperties = {
+    ...extraProperties(storeInstance),
+    ...properties,
+  };
+  logger.analyticsTrack(event, fullProperties);
   if (!storeInstance || (!mandatory && !shareAnalyticsSelector(storeInstance.getState()))) {
     return;
   }
-  sendTrack(event, properties, storeInstance);
+  sendTrack(event, fullProperties, storeInstance);
 };
 
 export const page = (category: string, name: ?string, properties: ?Object) => {
-  logger.analyticsPage(category, name, properties);
+  const fullProperties = {
+    ...extraProperties(storeInstance),
+    ...properties,
+  };
+  logger.analyticsPage(category, name, fullProperties);
   if (!storeInstance || !shareAnalyticsSelector(storeInstance.getState())) {
     return;
   }
-  sendTrack(`Page ${category + (name ? ` ${name}` : "")}`, properties, storeInstance);
+  sendTrack(`Page ${category + (name ? ` ${name}` : "")}`, fullProperties, storeInstance);
 };
