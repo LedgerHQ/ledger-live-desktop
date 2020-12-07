@@ -749,7 +749,6 @@
       "cta": "Vider le cache"
     },
     "migrate": "Mise à jour des comptes Ledger Live disponible",
-    "ongoingScams": "Des escroqueries d'hameçonnage sont en cours sur notre base d'utilisateurs, soyez prudent et ne partagez jamais votre phrase de récupération.",
     "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge",
     "ledgerAcademy": {
       "title": "Ledger Academy",
