@@ -83,7 +83,6 @@ export const quizzMachineGenerator = (id, questions) => {
     },
     states: {
       done: {
-        type: "final",
         entry: choose([
           {
             actions: ["onWin"],
@@ -91,6 +90,9 @@ export const quizzMachineGenerator = (id, questions) => {
           },
           { actions: ["onLose"] },
         ]),
+        always: {
+          target: "question-0",
+        },
       },
     },
   };

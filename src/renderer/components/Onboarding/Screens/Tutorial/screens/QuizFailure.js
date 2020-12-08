@@ -35,7 +35,7 @@ export function QuizFailure({ sendEvent, context }) {
   return (
     <ScreenContainer>
       <ContentContainer>
-        <Illustration width={456} height={277} src={quizFailure} />
+        <Illustration width={285} height={228} src={quizFailure} />
         <Text
           mt="32px"
           color="palette.primary.contrastText"
