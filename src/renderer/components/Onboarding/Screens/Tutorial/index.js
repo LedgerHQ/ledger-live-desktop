@@ -16,7 +16,9 @@ import { RecoveryHowTo2 } from "~/renderer/components/Onboarding/Screens/Tutoria
 import { RecoveryHowTo1 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo1";
 import { PairMyNano } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PairMyNano";
 import { SideDrawer } from "~/renderer/components/Onboarding/SideDrawer";
-import { PinHelp } from "~/renderer/components/Onboarding/PinHelp";
+import { PinHelp } from "~/renderer/components/Onboarding/help/PinHelp";
+import { HideRecoverySeed } from "~/renderer/components/Onboarding/help/HideRecoverySeed";
+import { RecoverySeed } from "~/renderer/components/Onboarding/help/RecoverySeed";
 import { HideRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/HideRecoveryPhrase";
 import { WaveContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import { AnimatedWave } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/AnimatedWave";
@@ -158,7 +160,6 @@ export function UseRecoveryPhrase({ sendEvent, context }) {
 }
 
 function Tutorial({ sendEventToParent, machine, parentContext }) {
-  console.log(parentContext);
   const [state, sendEvent] = useMachine(machine, {
     actions: {
       topLevelPrev: () => sendEventToParent("PREV"),
@@ -195,6 +196,24 @@ function Tutorial({ sendEventToParent, machine, parentContext }) {
         direction="left"
       >
         <PinHelp />
+      </SideDrawer>
+      <SideDrawer
+        isOpen={!!state.context.help.recoveryPhrase}
+        onRequestClose={() =>
+          sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhrase", status: false })
+        }
+        direction="left"
+      >
+        <RecoverySeed />
+      </SideDrawer>
+      <SideDrawer
+        isOpen={!!state.context.help.hideRecoveryPhrase}
+        onRequestClose={() =>
+          sendEvent({ type: "SET_HELP_STATUS", helpId: "hideRecoveryPhrase", status: false })
+        }
+        direction="left"
+      >
+        <HideRecoverySeed />
       </SideDrawer>
       <LeftContainer>
         <Stepper steps={state.context.steps} />

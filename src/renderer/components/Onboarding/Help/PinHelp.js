@@ -13,6 +13,7 @@ const RuleContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 16px;
+  align-items: center;
 `;
 
 const RuleIconContainer = styled.div`

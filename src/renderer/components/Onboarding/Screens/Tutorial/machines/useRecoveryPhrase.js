@@ -76,9 +76,11 @@ export const useRecoveryPhraseMachine = Machine({
         pairNano: "inactive",
       }),
       on: {
-        OPEN_DRAWER: {
+        HELP: {
           actions: assign({
-            drawer: "pinCodeHelp",
+            help: {
+              pinCode: true,
+            },
           }),
         },
         PINCODE_TERMS_CHANGED: {
@@ -103,6 +105,13 @@ export const useRecoveryPhraseMachine = Machine({
         pairNano: "inactive",
       }),
       on: {
+        HELP: {
+          actions: assign({
+            help: {
+              pinCode: true,
+            },
+          }),
+        },
         NEXT: {
           target: "existingRecoveryPhrase",
         },
@@ -119,6 +128,13 @@ export const useRecoveryPhraseMachine = Machine({
         pairNano: "inactive",
       }),
       on: {
+        HELP: {
+          actions: assign({
+            help: {
+              recoveryPhrase: true,
+            },
+          }),
+        },
         RECOVERY_TERMS_CHANGED: {
           actions: assign({
             userUnderstandConsequences: (_, event) => event.value,
@@ -141,6 +157,13 @@ export const useRecoveryPhraseMachine = Machine({
         pairNano: "inactive",
       }),
       on: {
+        HELP: {
+          actions: assign({
+            help: {
+              recoveryPhrase: true,
+            },
+          }),
+        },
         NEXT: {
           target: "recoveryHowTo2",
         },
@@ -157,6 +180,13 @@ export const useRecoveryPhraseMachine = Machine({
         pairNano: "inactive",
       }),
       on: {
+        HELP: {
+          actions: assign({
+            help: {
+              recoveryPhrase: true,
+            },
+          }),
+        },
         NEXT: {
           target: "pairMyNano",
         },

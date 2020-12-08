@@ -101,6 +101,13 @@ export const setupNewDevice = Machine({
         PREV: {
           target: "deviceHowTo",
         },
+        HELP: {
+          actions: assign({
+            help: {
+              pinCode: true,
+            },
+          }),
+        },
       },
     },
     pinCodeHowTo: {
@@ -118,6 +125,13 @@ export const setupNewDevice = Machine({
         PREV: {
           target: "pinCode",
         },
+        HELP: {
+          actions: assign({
+            help: {
+              pinCode: true,
+            },
+          }),
+        },
       },
     },
     newRecoveryPhrase: {
@@ -129,6 +143,13 @@ export const setupNewDevice = Machine({
         pairNano: "inactive",
       }),
       on: {
+        HELP: {
+          actions: assign({
+            help: {
+              recoveryPhrase: true,
+            },
+          }),
+        },
         RECOVERY_TERMS_CHANGED: {
           actions: assign({
             userUnderstandConsequences: (_, event) => event.value,
@@ -152,6 +173,13 @@ export const setupNewDevice = Machine({
         pairNano: "inactive",
       }),
       on: {
+        HELP: {
+          actions: assign({
+            help: {
+              recoveryPhrase: true,
+            },
+          }),
+        },
         NEXT: {
           target: "recoveryHowTo2",
         },
@@ -169,6 +197,13 @@ export const setupNewDevice = Machine({
         pairNano: "inactive",
       }),
       on: {
+        HELP: {
+          actions: assign({
+            help: {
+              recoveryPhrase: true,
+            },
+          }),
+        },
         NEXT: {
           target: "hideRecoveryPhrase",
         },
@@ -186,6 +221,13 @@ export const setupNewDevice = Machine({
         pairNano: "inactive",
       }),
       on: {
+        HELP: {
+          actions: assign({
+            help: {
+              hideRecoveryPhrase: true,
+            },
+          }),
+        },
         NEXT: {
           target: "pairMyNano",
         },
