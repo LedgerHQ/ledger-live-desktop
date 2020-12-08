@@ -10,6 +10,7 @@ export const FakeLink: ThemedComponent<{}> = styled.span`
 
 const Link: ThemedComponent<{}> = styled.a`
   cursor: pointer;
+  color: currentColor;
   text-decoration-skip: ink;
 `;
 

@@ -1,14 +1,16 @@
 // @flow
 
 import React, { useCallback } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
 import Button from "~/renderer/components/Button";
-
+import Link from "~/renderer/components/Link";
+import { openURL } from "~/renderer/linking";
 import { Computer } from "./assets/Computer";
 import { Wave } from "./assets/Wave";
 import LangSwitcher from "~/renderer/components/Onboarding/LangSwitcher";
+import { urls } from "~/config/urls";
 
 const WelcomeContainer = styled.div`
   height: 100%;
@@ -52,6 +54,10 @@ export function Welcome({ sendEvent }) {
 
   const handleNext = useCallback(() => {
     sendEvent("NEXT");
+  }, [sendEvent]);
+
+  const buyNanoX = useCallback(() => {
+    openURL(urls.noDevice.buyNew);
   }, []);
 
   return (
@@ -67,17 +73,24 @@ export function Welcome({ sendEvent }) {
           <Computer />
         </ComputerContainer>
       </TopContainer>
-      <Text mt="160px" mb="4px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize="32px">
+      <Text mt={160} mb="4px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize={32}>
         {t("onboarding.screens.welcome.title")}
       </Text>
-      <Text mb="24px" color="palette.text.shade50" ff="Inter|Regular" fontSize="13px">
+      <Text mb="24px" color="palette.text.shade50" ff="Inter|Regular" fontSize={4}>
         {t("onboarding.screens.welcome.description")}
       </Text>
       <Button onClick={handleNext} primary>
         {t("onboarding.screens.welcome.cta")}
       </Button>
-      <Text mt="8px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize="13px">
-        {t("onboarding.screens.welcome.noDevice")}
+      <Text mt="8px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize={4}>
+        <Trans i18nKey="onboarding.screens.welcome.noDevice">
+          <Text
+            style={{ cursor: "pointer", textDecorationSkip: "ink" }}
+            ff="Inter|SemiBold"
+            color="wallet"
+            onClick={buyNanoX}
+          ></Text>
+        </Trans>
       </Text>
     </WelcomeContainer>
   );
