@@ -23,7 +23,6 @@ import {
 } from "../../SettingsSection";
 import ExperimentalSwitch from "./ExperimentalSwitch";
 import ExperimentalInteger from "./ExperimentalInteger";
-import FullNode from "~/renderer/screens/settings/sections/Accounts/FullNode";
 
 const experimentalTypesMap = {
   toggle: ExperimentalSwitch,
@@ -128,7 +127,6 @@ const SectionExperimental = () => {
           ) : null,
         )}
         {__DEV__ ? <EthereumBridgeRow /> : null}
-        <FullNode />
       </Body>
     </Section>
   );

@@ -9,6 +9,7 @@ import HideEmptyTokenAccountsToggle from "./HideEmptyTokenAccountsToggle";
 import SectionExport from "./Export";
 import Currencies from "./Currencies";
 import BlacklistedTokens from "./BlacklistedTokens";
+import FullNode from "~/renderer/screens/settings/sections/Accounts/FullNode";
 
 export default function SectionAccounts() {
   const { t } = useTranslation();
@@ -25,6 +26,7 @@ export default function SectionAccounts() {
           desc={t("settings.accounts.hideEmptyTokens.desc")}
           renderRight={<HideEmptyTokenAccountsToggle />}
         />
+        <FullNode />
         <BlacklistedTokens />
       </Section>
     </>
