@@ -9,8 +9,8 @@ import { useTranslation } from "react-i18next";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
-import { ContentContainer, HeaderContainer } from "../shared";
-import nanoXEnterWord from "~/renderer/components/Onboarding/Screens/Tutorial/assets/nanoXEnterWord.svg";
+import { ContentContainer, HeaderContainer, Illustration } from "../shared";
+import recoverySheet from "~/renderer/components/Onboarding/Screens/Tutorial/assets/recoverySheet.svg";
 
 const ScreenContainer = styled.div`
   display: flex;
@@ -110,19 +110,16 @@ const StepList = styled.div`
 
 const steps = [
   {
-    titleKey: "onboarding.screens.tutorial.screens.genuineCheck.plugUSBCable.title",
-    descrKey: "onboarding.screens.tutorial.screens.genuineCheck.plugUSBCable.descr",
+    titleKey: "onboarding.screens.tutorial.screens.useRecoverySheet.takeYourRecoverySheet.title",
+    descrKey: "onboarding.screens.tutorial.screens.useRecoverySheet.takeYourRecoverySheet.descr",
+  },
+  {
+    titleKey: "onboarding.screens.tutorial.screens.useRecoverySheet.writeDownWords.title",
+    descrKey: "onboarding.screens.tutorial.screens.useRecoverySheet.writeDownWords.descr",
   },
 ];
 
-const DevicePlaceholder = styled.div`
-  background: url(${nanoXEnterWord}) center no-repeat;
-  height: 77px;
-  margin-top: 147px;
-  margin-bottom: 32px;
-`;
-
-export function GenuineCheck({ sendEvent, context }) {
+export function UseRecoverySheet({ sendEvent }) {
   const { t } = useTranslation();
 
   return (
@@ -131,12 +128,12 @@ export function GenuineCheck({ sendEvent, context }) {
         <HeaderContainer>
           <Button color="palette.primary.main" onClick={() => sendEvent("HELP")}>
             <Text mr="8px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
-              {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.help")}
+              {t("onboarding.screens.tutorial.screens.useRecoverySheet.buttons.help")}
             </Text>
             <InfoCircle size={22} />
           </Button>
         </HeaderContainer>
-        <DevicePlaceholder />
+        <Illustration src={recoverySheet} height={246} width={220} />
         <StepList>
           {steps.map(({ titleKey, descrKey }, index) => (
             <Step
@@ -152,13 +149,14 @@ export function GenuineCheck({ sendEvent, context }) {
         <Button color="palette.text.shade30" onClick={() => sendEvent("PREV")}>
           <ArrowLeft />
           <Text ml="9px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
-            {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.prev")}
+            {t("onboarding.screens.tutorial.screens.useRecoverySheet.buttons.prev")}
           </Text>
         </Button>
-        <Button primary onClick={() => sendEvent("NEXT")} disabled={!context.deviceIsGenuine}>
-          <Text ff="Inter|Bold" fontSize="12px" lineHeight="18px">
-            {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.next")}
+        <Button primary onClick={() => sendEvent("NEXT")}>
+          <Text mr="12px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+            {t("onboarding.screens.tutorial.screens.useRecoverySheet.buttons.next")}
           </Text>
+          <ChevronRight size={13} />
         </Button>
       </ContentFooter>
     </ScreenContainer>

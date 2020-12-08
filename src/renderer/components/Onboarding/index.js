@@ -10,7 +10,11 @@ import { Modal } from "~/renderer/components/Onboarding/Modal";
 import { Welcome } from "~/renderer/components/Onboarding/Screens/Welcome";
 import { SelectDevice } from "~/renderer/components/Onboarding/Screens/SelectDevice";
 import { SelectUseCase } from "~/renderer/components/Onboarding/Screens/SelectUseCase";
-import { SetupNewDevice, ConnectSetUpDevice, UseRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial";
+import {
+  SetupNewDevice,
+  ConnectSetUpDevice,
+  UseRecoveryPhrase,
+} from "~/renderer/components/Onboarding/Screens/Tutorial";
 
 // modals
 import { Quizz } from "./Quizz";
@@ -90,7 +94,7 @@ const onboardingMachine = Machine({
         },
         CLOSE_PEDAGOGY_MODAL: {
           actions: assign({
-            pedagogy: close,
+            pedagogy: false,
           }),
         },
         USE_RECOVERY_PHRASE: {
@@ -130,17 +134,6 @@ const onboardingMachine = Machine({
           target: "selectUseCase",
         },
       },
-    },
-  },
-  on: {
-    CLOSE_MODAL: {
-      cond: context => context.modal,
-      actions: assign(context => {
-        context.modal.stop();
-        return {
-          modal: null,
-        };
-      }),
     },
   },
 });
@@ -183,7 +176,10 @@ export function Onboarding() {
       <OnboardingLogoContainer>
         <LedgerLogo />
       </OnboardingLogoContainer>
-      <Modal isOpen={state.context.pedagogy} onRequestClose={() => sendEvent("CLOSE_PEDAGOGY_MODAL")}>
+      <Modal
+        isOpen={state.context.pedagogy}
+        onRequestClose={() => sendEvent("CLOSE_PEDAGOGY_MODAL")}
+      >
         <Pedagogy onDone={() => sendEvent("SETUP_NEW_DEVICE")} />
       </Modal>
       <OnboardingContainer>

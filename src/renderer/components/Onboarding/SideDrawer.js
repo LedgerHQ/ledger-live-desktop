@@ -28,7 +28,7 @@ const DURATION = 250;
 
 const DrawerBackdrop = styled.div`
   position: absolute;
-  backdrop-filter: saturate(180%) blur(5px);
+  backdrop-filter: saturate(160%) blur(5px);
   top: 0;
   left: 0;
   bottom: 0;
@@ -37,10 +37,10 @@ const DrawerBackdrop = styled.div`
   will-change: opacity;
 
   &.entered {
-    opacity: 0.85;
+    opacity: 0.65;
   }
   &.entering {
-    opacity: 0.85;
+    opacity: 0.65;
     transition: opacity ${DURATION}ms ease-out;
   }
   &.exited {

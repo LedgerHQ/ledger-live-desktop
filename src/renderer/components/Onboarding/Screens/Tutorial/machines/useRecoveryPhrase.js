@@ -27,6 +27,7 @@ export const useRecoveryPhraseMachine = Machine({
     userUnderstandConsequences: false,
     drawer: null,
     alerts: {},
+    help: {},
   },
   states: {
     importRecoveryPhrase: {
@@ -39,7 +40,7 @@ export const useRecoveryPhraseMachine = Machine({
       exit: assign(context => ({
         ...context,
         alerts: {
-          preferLedgerSeed: context.alerts.preferLedgerSeed === undefined ? true : context.alerts.preferLedgerSeed,
+          preferLedgerSeed: context.alerts.preferLedgerSeed === undefined,
         },
       })),
       on: {
@@ -188,9 +189,9 @@ export const useRecoveryPhraseMachine = Machine({
         pairNano: "active",
       }),
       on: {
-        SET_DEVICE_ID: {
+        GENUINE_CHECK_SUCCESS: {
           actions: assign({
-            deviceId: (_, { deviceId }) => deviceId,
+            deviceIsGenuine: true,
           }),
         },
         NEXT: {
@@ -201,20 +202,23 @@ export const useRecoveryPhraseMachine = Machine({
         },
       },
     },
-
   },
   on: {
-    CLOSE_DRAWER: {
-      actions: assign({
-        drawer: null,
-      }),
-    },
     SET_ALERT_STATUS: {
       actions: assign((context, { alertId, status }) => ({
         ...context,
         alerts: {
           ...context.alerts,
           [alertId]: status,
+        },
+      })),
+    },
+    SET_HELP_STATUS: {
+      actions: assign((context, { helpId, status }) => ({
+        ...context,
+        help: {
+          ...context.alerts,
+          [helpId]: status,
         },
       })),
     },

@@ -32,6 +32,7 @@ export const setupNewDevice = Machine({
     drawer: null,
     deviceId: null,
     alerts: {},
+    help: {},
   },
   states: {
     howToGetStarted: {
@@ -45,7 +46,7 @@ export const setupNewDevice = Machine({
       exit: assign(context => ({
         ...context,
         alerts: {
-          beCareful: context.alerts.beCareful === undefined ? true : context.alerts.beCareful,
+          beCareful: context.alerts.beCareful === undefined,
         },
       })),
       on: {
@@ -134,7 +135,7 @@ export const setupNewDevice = Machine({
           }),
         },
         NEXT: {
-          target: "recoveryHowTo1",
+          target: "useRecoverySheet",
           cond: context => context.userUnderstandConsequences,
         },
         PREV: {
@@ -142,7 +143,7 @@ export const setupNewDevice = Machine({
         },
       },
     },
-    recoveryHowTo1: {
+    useRecoverySheet: {
       entry: setStepperStatus({
         getStarted: "success",
         pinCode: "success",
@@ -172,7 +173,7 @@ export const setupNewDevice = Machine({
           target: "hideRecoveryPhrase",
         },
         PREV: {
-          target: "recoveryHowTo1",
+          target: "useRecoverySheet",
         },
       },
     },
@@ -219,13 +220,13 @@ export const setupNewDevice = Machine({
         pairNano: "active",
       }),
       on: {
-        SET_DEVICE_ID: {
+        GENUINE_CHECK_SUCCESS: {
           actions: assign({
-            deviceId: (_, { deviceId }) => deviceId,
+            deviceIsGenuine: true,
           }),
         },
         NEXT: {
-          cond: context => context.deviceId,
+          cond: context => context.deviceIsGenuine,
         },
         PREV: {
           target: "pairMyNano",
@@ -234,17 +235,21 @@ export const setupNewDevice = Machine({
     },
   },
   on: {
-    CLOSE_DRAWER: {
-      actions: assign({
-        drawer: null,
-      }),
-    },
     SET_ALERT_STATUS: {
       actions: assign((context, { alertId, status }) => ({
         ...context,
         alerts: {
           ...context.alerts,
           [alertId]: status,
+        },
+      })),
+    },
+    SET_HELP_STATUS: {
+      actions: assign((context, { helpId, status }) => ({
+        ...context,
+        help: {
+          ...context.alerts,
+          [helpId]: status,
         },
       })),
     },

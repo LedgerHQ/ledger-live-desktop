@@ -2285,6 +2285,21 @@
               "help": "Need help"
             }
           },
+          "useRecoverySheet": {
+            "takeYourRecoverySheet": {
+              "title": "Take your recovery sheet",
+              "descr": "Grab your recovery sheet from your Nano box"
+            },
+            "writeDownWords": {
+              "title": "Write down 24 words",
+              "descr": "Then, press right on your Nano to display Word #2. Repeat for the 24 words. Press left on your Nano to see if you made mistakes."
+            },
+            "buttons": {
+              "next": "Next step",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
           "newRecoveryPhrase": {
             "title": "Recovery phrase",
             "paragraph1": "Your recovery phrase is a 24 words phrase that protects your private keys.",

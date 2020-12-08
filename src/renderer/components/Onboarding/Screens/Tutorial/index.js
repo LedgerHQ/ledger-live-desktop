@@ -27,6 +27,7 @@ import { Modal } from "~/renderer/components/Onboarding/Modal";
 import { CarefullyFollowInstructions } from "~/renderer/components/Onboarding/Alerts/CarefullyFollowInstructions";
 import { connectSetupDevice } from "~/renderer/components/Onboarding/Screens/Tutorial/machines/connectSetupDevice";
 import { PreferLedgerRecoverySeed } from "~/renderer/components/Onboarding/Alerts/PreferLedgerRecoverySeed";
+import { UseRecoverySheet } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/UseRecoverySheet";
 
 const TutorialContainer = styled.div`
   height: 100%;
@@ -124,6 +125,10 @@ const screens = {
     component: HideRecoveryPhrase,
     bgTheme: "dark",
   },
+  useRecoverySheet: {
+    component: UseRecoverySheet,
+    bgTheme: "light",
+  },
   pairMyNano: {
     component: PairMyNano,
     bgTheme: "dark",
@@ -169,8 +174,10 @@ function Tutorial({ sendEventToParent, machine }) {
         />
       </Modal>
       <SideDrawer
-        isOpen={!!state.context.drawer}
-        onRequestClose={() => sendEvent("CLOSE_DRAWER")}
+        isOpen={!!state.context.help.pinCode}
+        onRequestClose={() =>
+          sendEvent({ type: "SET_HELP_STATUS", helpId: "pinCode", status: false })
+        }
         direction="left"
       >
         <PinHelp />

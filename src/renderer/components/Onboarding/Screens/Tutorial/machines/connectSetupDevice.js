@@ -29,6 +29,7 @@ export const connectSetupDevice = Machine({
     ],
     deviceId: null,
     alerts: {},
+    help: {},
   },
   states: {
     pairMyNano: {
@@ -57,9 +58,9 @@ export const connectSetupDevice = Machine({
         pairNano: "active",
       }),
       on: {
-        SET_DEVICE_ID: {
+        GENUINE_CHECK_SUCCESS: {
           actions: assign({
-            deviceId: (_, { deviceId }) => deviceId,
+            deviceIsGenuine: true,
           }),
         },
         NEXT: {
@@ -72,17 +73,21 @@ export const connectSetupDevice = Machine({
     },
   },
   on: {
-    CLOSE_DRAWER: {
-      actions: assign({
-        drawer: null,
-      }),
-    },
     SET_ALERT_STATUS: {
       actions: assign((context, { alertId, status }) => ({
         ...context,
         alerts: {
           ...context.alerts,
           [alertId]: status,
+        },
+      })),
+    },
+    SET_HELP_STATUS: {
+      actions: assign((context, { helpId, status }) => ({
+        ...context,
+        help: {
+          ...context.alerts,
+          [helpId]: status,
         },
       })),
     },

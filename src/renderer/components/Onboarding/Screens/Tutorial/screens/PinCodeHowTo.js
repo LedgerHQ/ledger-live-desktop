@@ -138,7 +138,7 @@ export function PinCodeHowTo({ sendEvent }) {
     <ScreenContainer>
       <ContentContainer>
         <HeaderContainer>
-          <Button color="palette.primary.main" onClick={() => sendEvent("OPEN_DRAWER")}>
+          <Button color="palette.primary.main" onClick={() => sendEvent("HELP")}>
             <Text mr="8px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
               {t("onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.help")}
             </Text>

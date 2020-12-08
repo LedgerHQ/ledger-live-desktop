@@ -18,7 +18,6 @@ export function AnimatedWave({ height, color }) {
       >
         <animate
           repeatCount="indefinite"
-          fill="#454599"
           attributeName="d"
           dur="21s"
           values="
