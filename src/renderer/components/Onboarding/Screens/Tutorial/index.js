@@ -135,22 +135,36 @@ const screens = {
   },
 };
 
-export function ConnectSetUpDevice({ sendEvent }) {
-  return <Tutorial sendEventToParent={sendEvent} machine={connectSetupDevice} />;
+export function ConnectSetUpDevice({ sendEvent, context }) {
+  return (
+    <Tutorial sendEventToParent={sendEvent} machine={connectSetupDevice} parentContext={context} />
+  );
 }
 
-export function SetupNewDevice({ sendEvent }) {
-  return <Tutorial sendEventToParent={sendEvent} machine={setupNewDevice} />;
+export function SetupNewDevice({ sendEvent, context }) {
+  return (
+    <Tutorial sendEventToParent={sendEvent} machine={setupNewDevice} parentContext={context} />
+  );
 }
 
-export function UseRecoveryPhrase({ sendEvent }) {
-  return <Tutorial sendEventToParent={sendEvent} machine={useRecoveryPhraseMachine} />;
+export function UseRecoveryPhrase({ sendEvent, context }) {
+  return (
+    <Tutorial
+      sendEventToParent={sendEvent}
+      machine={useRecoveryPhraseMachine}
+      parentContext={context}
+    />
+  );
 }
 
-function Tutorial({ sendEventToParent, machine }) {
+function Tutorial({ sendEventToParent, machine, parentContext }) {
+  console.log(parentContext);
   const [state, sendEvent] = useMachine(machine, {
     actions: {
       topLevelPrev: () => sendEventToParent("PREV"),
+    },
+    context: {
+      deviceId: parentContext.deviceId,
     },
   });
 
