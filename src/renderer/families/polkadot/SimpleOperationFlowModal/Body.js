@@ -56,19 +56,19 @@ type Props = OwnProps & StateProps;
 const steps: Array<St> = [
   {
     id: "info",
-    label: <Trans i18nKey="polkadot.simpleOperation.flow.steps.info.title" />,
+    label: <Trans i18nKey="polkadot.simpleOperation.steps.info.title" />,
     component: StepInfo,
     footer: StepInfoFooter,
   },
   {
     id: "connectDevice",
-    label: <Trans i18nKey="polkadot.simpleOperation.flow.steps.connectDevice.title" />,
+    label: <Trans i18nKey="polkadot.simpleOperation.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
     onBack: ({ transitionTo }: StepProps) => transitionTo("info"),
   },
   {
     id: "confirmation",
-    label: <Trans i18nKey="polkadot.simpleOperation.flow.steps.confirmation.title" />,
+    label: <Trans i18nKey="polkadot.simpleOperation.steps.confirmation.title" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
   },

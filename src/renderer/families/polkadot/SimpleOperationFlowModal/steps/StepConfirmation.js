@@ -37,15 +37,13 @@ function StepConfirmation({
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Polkadot XXX Flow" name="Step Confirmed" />
+        <TrackPage category="Polkadot SimpleOperationFlow" name="Step Confirmed" />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
-          title={
-            <Trans i18nKey={`polkadot.simpleOperation.flow.steps.confirmation.success.title`} />
-          }
+          title={<Trans i18nKey={`polkadot.simpleOperation.steps.confirmation.success.title`} />}
           description={
             <div>
-              <Trans i18nKey={`polkadot.simpleOperation.flow.steps.confirmation.success.text`}>
+              <Trans i18nKey={`polkadot.simpleOperation.steps.confirmation.success.text`}>
                 <b></b>
               </Trans>
             </div>
@@ -61,9 +59,7 @@ function StepConfirmation({
         <TrackPage category="Polkadot Flow" name="Step Confirmation Error" />
         {signed ? (
           <BroadcastErrorDisclaimer
-            title={
-              <Trans i18nKey="polkadot.simpleOperation.flow.steps.confirmation.broadcastError" />
-            }
+            title={<Trans i18nKey="polkadot.simpleOperation.steps.confirmation.broadcastError" />}
           />
         ) : null}
         <ErrorDisplay error={error} withExportLogs />

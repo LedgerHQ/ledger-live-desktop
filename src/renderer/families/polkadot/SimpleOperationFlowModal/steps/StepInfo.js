@@ -32,7 +32,7 @@ export default function StepInfo({
 
   return (
     <Box flow={1}>
-      <TrackPage category="OptIn Flow" name="Step 1" />
+      <TrackPage category="SimpleOperationFlow Flow" name="Step 1" />
       {warning && !error ? <ErrorBanner error={warning} warning /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       <Box px={5} py={2}>

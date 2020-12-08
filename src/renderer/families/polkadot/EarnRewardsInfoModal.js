@@ -40,7 +40,7 @@ export default function PolkadotEarnRewardsInfoModal({ name, account, parentAcco
         t("polkadot.bond.steps.starter.bullet.1"),
         t("polkadot.bond.steps.starter.bullet.2"),
       ]}
-      additional={<WarnBox>{t("polkadot.bond.steps.starter.termsAndPrivacy")}</WarnBox>}
+      additional={<WarnBox>{t("polkadot.bond.steps.starter.warning")}</WarnBox>}
       footerLeft={
         <LinkWithExternalIcon
           label={<Trans i18nKey="polkadot.bond.steps.starter.help" />}

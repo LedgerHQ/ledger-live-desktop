@@ -1824,8 +1824,8 @@
       "activeTooltip": "Ce validateur a été élu et collecte des récompenses grâce à une partie de vos actifs liés.",
       "inactive": "Inactif",
       "inactiveTooltip": "Ce validateur a été élu mais ne collecte aucune récompense grâce à vos actifs liés.",
-      "waiting": "En attente",
-      "waitingTooltip": "Ce validateur n'a pas été élu.",
+      "waiting": "Non élu",
+      "waitingTooltip": "Ce validateur n'a pas été élu et ne collecte donc aucune récompense.",
       "elected": "Élu",
       "nominatorsCount": "{{nominatorsCount}} nominateurs",
       "oversubscribed": "Sursouscrit ({{nominatorsCount}})",
@@ -1867,7 +1867,7 @@
       },
       "chill": {
         "title": "Ne plus nominer",
-        "description": "Arrêtez de nominer des validateurs et cessez d'en recevoir des récompenses."
+        "description": "Supprimez toutes vos nominationss et cessez de recevoir des récompenses."
       }
     },
     "nominate": {
@@ -1884,7 +1884,7 @@
           "label": "Confirmation",
           "success": {
             "title": "Nomination effectuée avec succès",
-            "text": "Le solde de votre compte sera actualisé dès que la blockchain aura confirmé la transaction.",
+            "text": "Vous toucherez des récompenses quand vos validateurs seront élus et qu'une partie de vos actifs liés leur sera affectée.",
             "cta": "Voir les détails"
           },
           "pending": {
@@ -1898,9 +1898,9 @@
       "title": "Lier des actifs",
       "rewardDestination": {
         "label": "Destination des récompenses",
-        "stash": "Stash",
+        "stash": "Balance disponible",
         "stashDescription": "Les récompenses seront versées sur le compte actuel en tant que balance disponible.",
-        "staked": "Staked",
+        "staked": "Balance liée",
         "stakedDescription": "Les récompenses seront versées sur le compte actuel en tant que balance liée au staking."
       },
       "steps": {
@@ -1912,7 +1912,7 @@
             "Les actifs seront disponibles 28 jours après avoir délié vos actifs."
           ],
           "help": "Comment fonctionne la nomination",
-          "termsAndPrivacy": "Choisissez vos validateurs judicieusement: Une partie de vos actifs liés peut être perdue si un validateur ne se comporte pas correctement."
+          "warning": "Choisissez vos validateurs judicieusement: Une partie de vos actifs liés peut être perdue si un validateur ne se comporte pas correctement."
         },
         "amount": {
           "title": "Montant",
@@ -1952,7 +1952,7 @@
           "amountLabel": "Montant à relier",
           "availableLabel": "En débloquage",
           "maxLabel": "Relier Max",
-          "info": "Les actifs reliés seront immédiatement ajoutés à la balance bloquée et seront part d'enjeu pour l'ère prochaine."
+          "info": "Les actifs reliés seront immédiatement ajoutés à la balance liée au staking."
         },
         "connectDevice": {
           "title": "Appareil"
@@ -1962,7 +1962,7 @@
           "label": "Confirmation",
           "success": {
             "title": "Actifs reliés avec succès",
-            "text": "Ces actifs participeront dès l'ère prochaine.",
+            "text": "Le solde de votre compte sera actualisé dès que le réseau aura confirmé la transaction",
             "cta": "Voir le détail"
           },
           "pending": {
@@ -2009,32 +2009,30 @@
 
         },
         "chill": {
-          "title": "Arrêter de nominer",
-          "description": "Vous pouvez stopper la nomination de tous vos validateurs, et ce pour la prochaine ère.",
-          "info": "Cependant, vos actifs liés resteront intacts et seront verrouillés pendant 28 jours si vous souhaitez les délier."
+          "title": "Ne plus nominer",
+          "description": "Vous pouvez stopper la nomination de tous vos validateurs et arrêter de toucher des récompenses.",
+          "info": "Cependant, vos actifs liés resteront intacts et seront verrouillés pendant 28 jours si vous les déliez."
         }
       },
-      "flow": {
-        "steps": {
-          "info": {
-            "title": "Info"
+      "steps": {
+        "info": {
+          "title": "Info"
+        },
+        "connectDevice": {
+          "title": "Appareil"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "Confirmation",
+          "success": {
+            "title": "Transaction diffusée avec succès",
+            "text": "Vous pourrez retrouver cette opération dans votre historique.",
+            "cta": "Voir les détails"
           },
-          "connectDevice": {
-            "title": "Appareil"
+          "pending": {
+            "title": "Diffusion de la transaction..."
           },
-          "confirmation": {
-            "title": "Confirmation",
-            "label": "Confirmation",
-            "success": {
-              "title": "Transaction diffusée avec succès",
-              "text": "Vous pourrez retrouver cette opération dans votre historique.",
-              "cta": "Voir les détails"
-            },
-            "pending": {
-              "title": "Diffusion de la transaction..."
-            },
-            "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
-          }
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
         }
       }
     }
