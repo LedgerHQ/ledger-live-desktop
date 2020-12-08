@@ -43,10 +43,12 @@ const ValidatorListHeader = ({
       {votesSelected === maxVotes ? (
         <Text fontSize={3} ff="Inter|Medium">
           <Trans i18nKey="vote.steps.castVotes.maxSelected" values={{ total: maxVotes }} />
+          {` / ${maxVotes}`}
         </Text>
       ) : (
         <Text fontSize={3} ff="Inter|Medium">
           <Trans i18nKey="vote.steps.castVotes.selected" values={{ total: votesSelected }} />
+          {` / ${maxVotes}`}
         </Text>
       )}
       {!hideVotes && (
