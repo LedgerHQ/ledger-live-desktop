@@ -2152,8 +2152,8 @@
         "gotIt": "Got it"
       },
       "beCareful": {
-        "title": "Be careful",
-        "descr": "Make sure you follow instructions on this app at every step of the process.",
+        "title": "Please be careful",
+        "descr": "Make sure you follow the instructions on this app at every step of the process.",
         "gotIt": "Got it"
       },
       "useLedgerSeeds": {
@@ -2165,9 +2165,9 @@
     "screens": {
       "welcome": {
         "title": "Welcome to Ledger",
-        "description": "Safely manage your cryptos from your computer.",
+        "description": "Safely manage your crypto from your computer.",
         "cta": "Get started",
-        "noDevice": "No device ? Buy a Ledger Nano X"
+        "noDevice": "No device? Buy a Ledger Nano X"
       },
       "selectDevice": {
         "title": "What's your device?"
@@ -2180,18 +2180,18 @@
         "options": {
           "1": {
             "heading": "First use",
-            "title": "Initialize a new Nano",
+            "title": "Set up a new Nano",
             "description": "Let’s start and set up your device!"
           },
           "2": {
-            "heading": "Device pairing",
+            "heading": "Connect device",
             "title": "Connect your Nano",
-            "description": "Your device is already set-up? Connect it to your app!"
+            "description": "Is your device already setup? Connect it to the app!"
           },
           "3": {
-            "heading": "Restore Device",
-            "title": "Import your recovery phrase in a new device",
-            "description": "Use an already-existing recovery phrase to import your private keys in a new Nano!"
+            "heading": "Restore device",
+            "title": "Restore your recovery phrase on a new device",
+            "description": "Use an existing recovery phrase to restore your private keys on a new Nano!"
           }
         }
       },
@@ -2201,7 +2201,7 @@
           "pinCode": "Pin code",
           "recoveryPhrase": "Recovery phrase",
           "hideRecoveryPhrase": "Hide recovery phrase",
-          "pairNano": "Pair nano"
+          "pairNano": "Connect nano"
         },
         "screens": {
           "importYourRecoveryPhrase": {
@@ -2215,33 +2215,33 @@
             }
           },
           "howToGetStarted": {
-            "title": "The best way to get you started :",
+            "title": "The best way to get you started:",
             "rules": {
-              "1": "Plan 30 minutes and take your time",
-              "2": "Grab a pen",
-              "3": "Stay alone and choose a safe & quiet environment"
+              "1": "Plan 30 minutes and take your time.",
+              "2": "Grab a pen to write with.",
+              "3": "Stay alone, and choose a safe and quiet environment."
             },
             "buttons": {
-              "next": "Ok, I’m done!",
+              "next": "OK, I’m ready!",
               "prev": "Previous step"
             }
           },
           "deviceHowTo": {
             "turnOn": {
-              "title": "Turn On",
-              "descr": "Turn on your device plugging your cable."
+              "title": "Turn on Nano",
+              "descr": "Connect your device to your computer with the USB cable."
             },
             "browse": {
               "title": "Browse",
-              "descr": "Learn how to interact with your device by pressing the button on screen."
+              "descr": "Learn how to interact with your device by reading the on-screen instructions."
             },
             "select": {
-              "title": "Select “Enter your recovery phrase”",
-              "descr": "Press both buttons simultaneously to validate the selecion."
+              "title": "Select “Set up as new device”",
+              "descr": "Press both buttons simultaneously to validate the selection."
             },
             "follow": {
               "title": "Follow instructions",
-              "descr": "Come back to the app to follow  instructions on your PIN code!"
+              "descr": "Come back here to follow instructions on your PIN code."
             },
             "buttons": {
               "next": "Next step",
@@ -2251,8 +2251,8 @@
           },
           "pinCode": {
             "title": "PIN code",
-            "paragraph": "Your PIN code is the first layer of security. It physically secures access to your private key and your Nano. Your PIN code must be 4 to 8 digit long.",
-            "disclaimer": "I understand that I must chose my PIN code myself and keep it private",
+            "paragraph": "Your PIN code is the first layer of security. It physically secures access to your private key and your Nano. Your PIN code must be 4 to 8 digits long.",
+            "disclaimer": "I understand that I must choose my PIN code myself and keep it private.",
             "buttons": {
               "next": "Set up PIN code",
               "prev": "Previous step",
@@ -2261,15 +2261,15 @@
           },
           "pinCodeHowTo": {
             "setUp": {
-              "title": "Set up",
-              "descr": "Press left or right button to select a digit. Press both to validate. Select to confirm your PIN code. Select to erase a digit"
+              "title": "Choose PIN code",
+              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select ✔ to confirm your PIN code. Select ⌫ to erase a digit."
             },
             "confirm": {
-              "title": "Confirm",
-              "descr": "Re-enter PIN code"
+              "title": "Confirm PIN code",
+              "descr": "Enter your PIN code again to confirm it."
             },
             "buttons": {
-              "next": "Re-enter recovery phrase",
+              "next": "Next step",
               "prev": "Previous step",
               "help": "Need help"
             }
@@ -2278,7 +2278,7 @@
             "title": "Enter existing recovery phrase",
             "paragraph1": "Your recovery phrase protects your private keys.",
             "paragraph2": "Ledger does not keep a copy of it.",
-            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose of break my Nano.",
+            "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my coins in case I lose access to my Nano.",
             "buttons": {
               "next": "Enter recovery phrase",
               "prev": "Previous step",
@@ -2302,11 +2302,11 @@
           },
           "newRecoveryPhrase": {
             "title": "Recovery phrase",
-            "paragraph1": "Your recovery phrase is a 24 words phrase that protects your private keys.",
-            "paragraph2": "Ledger does not keep a copy of it.",
-            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose of break my Nano.",
+            "paragraph1": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
+            "paragraph2": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
+            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose or break my Nano.",
             "buttons": {
-              "next": "Save recovery phrase",
+              "next": "Recovery phrase",
               "prev": "Previous step",
               "help": "Need help"
             }
@@ -2349,18 +2349,18 @@
           },
           "hideRecoveryPhrase": {
             "title": "Hide your recovery phrase",
-            "paragraph": "Your Recovery phrase is your last chance to recover your coins, you must keep it in a safe place.",
-            "keepItOffline": "Keep it offline",
-            "neverShowToAnyone": "Never show or share your 24 words to anyone",
+            "paragraph": "Your Recovery phrase is your last chance to access your coins if you cannot use your Nano. You must keep it in a safe place.",
+            "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
+            "neverShowToAnyone": "Never share your 24 words with anyone, not even with Ledger.",
             "buttons": {
-              "next": "Ok, I'm done!",
+              "next": "OK, I'm done!",
               "prev": "Previous step",
               "help": "Need help",
               "learn": "Learn how to hide it"
             }
           },
           "pairMyNano": {
-            "title": "Plug your nano",
+            "title": "Connect your Nano",
             "paragraph": "This is the first time you’re setting up your Nano with your smartphone. Let’s quickly pair your device before enjoying your coins on mobile.",
             "buttons": {
               "next": "Let's pair my nano",
@@ -2403,24 +2403,24 @@
       "screens": {
         "accessYourCoins": {
           "title": "Access your coins",
-          "description": "Your coins are stored in the blockchain. You need a private key to use them and manage them."
+          "description": "Your coins are stored on the blockchain. You need a private key to access and manage them."
         },
         "ownYourPrivateKey": {
           "title": "Own your private key",
-          "description": "Your private key is stored within your Nano and you must be the only one to own it for safety purposes."
+          "description": "Your private key is stored within your Nano. You must be the only one to own it to be in control of your money."
         },
         "stayOffline": {
           "title": "Stay offline",
-          "description": "Your Nano works as a cold storage hardware wallet, it means that your private key is never exposed online, even when using your app. This is what we call \"cold storage\"."
+          "description": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
         },
         "validateTransactions": {
           "title": "Validate transactions",
-          "description": "Ledger app allows you to buy, sell, manage, exchange and earn cryptos while securing your coins. Every transaction on your cryptos will be validated with your Nano."
+          "description": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
         },
         "setUpNanoWallet": {
-          "title": "Let’s set up your Nano Wallet!",
-          "description": "Before using your Nano, let’s set up your Nano security",
-          "CTA": "Let’s do this"
+          "title": "Let’s set up your Nano!",
+          "description": "We'll start by setting up your Nano security.",
+          "CTA": "Let’s do this!"
         }
       }
     },
@@ -2437,13 +2437,13 @@
         "1": {
           "text": "As a Ledger user, my coins are stored:",
           "answers": {
-            "1": "In my Nano wallet",
-            "2": "Still in the blockchain"
+            "1": "On my Nano",
+            "2": "On the blockchain"
           },
           "results": {
             "success": {
               "title": "Congrats!",
-              "text": "Anyone with access to your Recovery sheet can take your crypto assets without knowing the PIN code of your device.\nLedger doesn’t keep a copy of it."
+              "text": "Anyone with access to your Recovery sheet can take your crypto assets without knowing the PIN code of your device.\nLedger does not keep a copy of it."
             },
             "fail": {
               "title": "Incorrect!",
