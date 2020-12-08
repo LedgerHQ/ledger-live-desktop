@@ -2172,7 +2172,7 @@
         "title": "Welcome to Ledger",
         "description": "Safely manage your crypto from your computer.",
         "cta": "Get started",
-        "noDevice": "No device? Buy a Ledger Nano X"
+        "noDevice": "No device? <0>Buy a Ledger Nano X</0>"
       },
       "selectDevice": {
         "title": "What's your device?"
