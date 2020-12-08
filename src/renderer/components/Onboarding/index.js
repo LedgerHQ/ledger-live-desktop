@@ -169,8 +169,6 @@ export function Onboarding() {
 
   const CurrentScreen = screens[state.value];
 
-  console.log(state);
-
   return (
     <React.Fragment>
       <OnboardingLogoContainer>
@@ -185,7 +183,7 @@ export function Onboarding() {
       <OnboardingContainer>
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="page-switch">
           <ScreenContainer>
-            <CurrentScreen sendEvent={sendEvent} />
+            <CurrentScreen sendEvent={sendEvent} context={state.context} />
           </ScreenContainer>
         </CSSTransition>
       </OnboardingContainer>

@@ -46,17 +46,17 @@ const NanoBlue = styled.div`
 
 const devices = [
   {
-    id: "nano-s",
+    id: "nanoS",
     label: "Nano S",
     Illu: NanoS,
   },
   {
-    id: "nano-x",
+    id: "nanoX",
     label: "Nano X",
     Illu: NanoX,
   },
   {
-    id: "nano-blue",
+    id: "blue",
     label: "Blue",
     Illu: NanoBlue,
   },
