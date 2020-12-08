@@ -2106,7 +2106,7 @@
           "8": "Never store your PIN code on a computer or phone."
         }
       },
-      "recoveryHelp": {
+      "recoverySeed": {
         "title1": "How does a recovery phrase work?",
         "paragraph1": "Your recovery phrase can be seen as a master key which every application on your Ledger device uses to calculate their private keys from.",
         "paragraph2": "This means that so long as your recovery phrase is the same, the calculation of the private keys will always have the same result.",
@@ -2121,7 +2121,7 @@
       },
       "whereToHide": {
         "title": "Where should I keep my Recovery phrase?",
-        "rules": {
+        "points": {
           "1": "Do not keep your Recovery sheet in a safe at home. ",
           "2": "A bank vault is much more secure. ",
           "3": "NEVER enter your code on any computer, smartphone or other internet-connected device.",

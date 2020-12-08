@@ -1,8 +1,8 @@
 // @flow
 
 import React from "react";
-import { useMachine, useService } from "@xstate/react";
-import { assign, Machine, spawn } from "xstate";
+import { useMachine } from "@xstate/react";
+import { assign, Machine } from "xstate";
 import { CSSTransition } from "react-transition-group";
 import { Modal } from "~/renderer/components/Onboarding/Modal";
 
@@ -16,13 +16,9 @@ import {
   UseRecoveryPhrase,
 } from "~/renderer/components/Onboarding/Screens/Tutorial";
 
-// modals
-import { Quizz } from "./Quizz";
-
 import { pedagogyMachine } from "~/renderer/components/Onboarding/Pedagogy/state";
 
 import styled from "styled-components";
-import { quizzMachine } from "~/renderer/components/Onboarding/Quizz/state";
 import { Pedagogy } from "~/renderer/components/Onboarding/Pedagogy";
 
 function LedgerLogo() {
@@ -190,12 +186,3 @@ export function Onboarding() {
     </React.Fragment>
   );
 }
-
-//       <Button
-//         onClick={() => setOpen(true)}
-//       >
-//         Open
-//       </Button>
-//       <SideDrawer isOpen={open} onRequestClose={() => setOpen(false)} direction="left">
-//         <PinHelp />
-//       </SideDrawer>
