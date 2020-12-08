@@ -1,12 +1,13 @@
 // @flow
 
-import React, { useEffect, useCallback } from "react";
-import styled, { css } from "styled-components";
-import { useActor } from "@xstate/react";
+import React from "react";
+import styled from "styled-components";
+import { useMachine } from "@xstate/react";
 import { useTranslation } from "react-i18next";
 import { CSSTransition } from "react-transition-group";
 import { Question } from "./screens/Question";
 import { Result } from "./screens/Result";
+import { quizzMachine } from "~/renderer/components/Onboarding/Quizz/state";
 
 const DURATION = 250;
 
@@ -58,7 +59,8 @@ const screens = {
 };
 
 type QuizzProps = {
-  actor: any,
+  onWin: () => void,
+  onLose: () => void,
 };
 
 function mergeMeta(meta) {
@@ -71,8 +73,13 @@ function mergeMeta(meta) {
   }, {});
 }
 
-export function Quizz({ actor }: QuizzProps) {
-  const [state, sendEvent] = useActor(actor);
+export function Quizz({ onWin, onLose }: QuizzProps) {
+  const [state, sendEvent] = useMachine(quizzMachine, {
+    actions: {
+      onWin,
+      onLose,
+    },
+  });
 
   const meta = mergeMeta(state.meta);
   const { t } = useTranslation();

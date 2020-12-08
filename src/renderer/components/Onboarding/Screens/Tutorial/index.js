@@ -30,6 +30,9 @@ import { CarefullyFollowInstructions } from "~/renderer/components/Onboarding/Al
 import { connectSetupDevice } from "~/renderer/components/Onboarding/Screens/Tutorial/machines/connectSetupDevice";
 import { PreferLedgerRecoverySeed } from "~/renderer/components/Onboarding/Alerts/PreferLedgerRecoverySeed";
 import { UseRecoverySheet } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/UseRecoverySheet";
+import { Quizz } from "~/renderer/components/Onboarding/Quizz";
+import { QuizFailure } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/QuizFailure";
+import { QuizSuccess } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/QuizSuccess";
 
 const TutorialContainer = styled.div`
   height: 100%;
@@ -135,6 +138,14 @@ const screens = {
     component: PairMyNano,
     bgTheme: "dark",
   },
+  quizSuccess: {
+    component: QuizSuccess,
+    bgTheme: "dark",
+  },
+  quizFailure: {
+    component: QuizFailure,
+    bgTheme: "dark",
+  },
 };
 
 export function ConnectSetUpDevice({ sendEvent, context }) {
@@ -174,6 +185,9 @@ function Tutorial({ sendEventToParent, machine, parentContext }) {
 
   return (
     <TutorialContainer>
+      <Modal isOpen={state.context.quizzOpen}>
+        <Quizz onWin={() => sendEvent("QUIZ_SUCCESS")} onLose={() => sendEvent("QUIZ_FAILURE")} />
+      </Modal>
       <Modal isOpen={state.context.alerts.beCareful}>
         <CarefullyFollowInstructions
           onClose={() =>

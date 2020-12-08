@@ -1,4 +1,6 @@
-import { assign, createMachine } from "xstate";
+import { assign, createMachine, actions } from "xstate";
+
+const { choose, log } = actions;
 
 const questions = [
   {
@@ -80,7 +82,16 @@ export const quizzMachineGenerator = (id, questions) => {
       results: {},
     },
     states: {
-      done: {},
+      done: {
+        type: "final",
+        entry: choose([
+          {
+            actions: ["onWin"],
+            cond: ({ score }) => score > 2,
+          },
+          { actions: ["onLose"] },
+        ]),
+      },
     },
   };
 

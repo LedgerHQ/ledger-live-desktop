@@ -220,6 +220,9 @@ export const setupNewDevice = Machine({
         hideRecoveryPhrase: "active",
         pairNano: "inactive",
       }),
+      exit: assign({
+        quizzOpen: false,
+      }),
       on: {
         HELP: {
           actions: assign({
@@ -229,10 +232,52 @@ export const setupNewDevice = Machine({
           }),
         },
         NEXT: {
-          target: "pairMyNano",
+          actions: assign({
+            quizzOpen: true,
+          }),
         },
         PREV: {
           target: "recoveryHowTo2",
+        },
+        QUIZ_SUCCESS: {
+          target: "quizSuccess",
+        },
+        QUIZ_FAILURE: {
+          target: "quizFailure",
+        },
+      },
+    },
+    quizSuccess: {
+      entry: setStepperStatus({
+        getStarted: "success",
+        pinCode: "success",
+        recoveryPhrase: "success",
+        hideRecoveryPhrase: "active",
+        pairNano: "inactive",
+      }),
+      on: {
+        NEXT: {
+          target: "pairMyNano",
+        },
+        PREV: {
+          target: "hideRecoveryPhrase",
+        },
+      },
+    },
+    quizFailure: {
+      entry: setStepperStatus({
+        getStarted: "success",
+        pinCode: "success",
+        recoveryPhrase: "success",
+        hideRecoveryPhrase: "active",
+        pairNano: "inactive",
+      }),
+      on: {
+        NEXT: {
+          target: "pairMyNano",
+        },
+        PREV: {
+          target: "hideRecoveryPhrase",
         },
       },
     },
