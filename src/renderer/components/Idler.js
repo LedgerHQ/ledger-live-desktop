@@ -10,6 +10,7 @@ import debounce from "lodash/debounce";
 
 // FIXME drop: the impl is not correct! fn always changes so debounce is regenerated each callback
 const useDebouncedCallback = (fn, delay, options) =>
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useCallback(debounce(fn, delay, options), [fn, delay, options]);
 
 const Idler = () => {

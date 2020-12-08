@@ -73,7 +73,7 @@ const ExportLogsBtn = ({ hookToShortcut, primary = true, small = true, title, ..
     if (path) {
       await saveLogs(path);
     }
-  }, []);
+  }, [accounts]);
 
   const handleExportLogs = useCallback(async () => {
     if (exporting) return;
