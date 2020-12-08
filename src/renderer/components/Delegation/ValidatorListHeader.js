@@ -22,7 +22,7 @@ type ValidatorListHeaderProps = {
   maxVotes: number,
   totalValidators: number,
   notEnoughVotes: boolean,
-  displayVotes?: boolean,
+  hideVotes?: boolean,
 };
 
 const ValidatorListHeader = ({
@@ -33,7 +33,7 @@ const ValidatorListHeader = ({
   maxVotes,
   totalValidators,
   notEnoughVotes,
-  displayVotes = true,
+  hideVotes = false,
 }: ValidatorListHeaderProps) => (
   <Box horizontal alignItems="center" justifyContent="space-between" py={2} px={3}>
     <Text fontSize={3} ff="Inter|Medium">
@@ -49,7 +49,7 @@ const ValidatorListHeader = ({
           <Trans i18nKey="vote.steps.castVotes.selected" values={{ total: votesSelected }} />
         </Text>
       )}
-      {displayVotes && (
+      {!hideVotes && (
         <>
           <Separator />
           {max > 0 ? (
