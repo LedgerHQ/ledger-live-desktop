@@ -2,17 +2,26 @@
 
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
+
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
-
-import { useTranslation } from "react-i18next";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
-import ChevronRight from "~/renderer/icons/ChevronRight";
+// import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import { ContentContainer, HeaderContainer } from "../shared";
-import nanoXEnterWord from "~/renderer/components/Onboarding/Screens/Tutorial/assets/nanoXEnterWord.svg";
+import DeviceAction from "~/renderer/components/DeviceAction";
 
-const ScreenContainer = styled.div`
+import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { command } from "~/renderer/commands";
+
+const connectManagerExec = command("connectManager");
+const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectManagerExec);
+
+const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -29,97 +38,11 @@ const ContentFooter = styled.div`
   justify-content: space-between;
 `;
 
-const StepIndexContainer = styled.div`
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
+const Content = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(100, 144, 241, 0.1);
-  color: #6490f1;
-`;
-
-const StepContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const StepTextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 16px;
   flex: 1;
-`;
-
-type StepProps = {
-  title: string,
-  descr: string,
-  index: number,
-};
-
-function Step({ title, descr, index }: StepProps) {
-  return (
-    <StepContainer>
-      <StepIndexContainer>
-        <Text ff="Inter|Bold" fontSize="10px" lineHeight="12.1px">
-          {index}
-        </Text>
-      </StepIndexContainer>
-      <StepTextContainer>
-        <Text
-          color="palette.text.shade100"
-          ff="Inter|SemiBold"
-          fontSize="16px"
-          lineHeight="19.36px"
-        >
-          {title}
-        </Text>
-        {descr ? (
-          <Text
-            mt="8px"
-            color="palette.text.shade100"
-            ff="Inter|Regular"
-            fontSize="13px"
-            lineHeight="19.5px"
-          >
-            {descr}
-          </Text>
-        ) : null}
-      </StepTextContainer>
-    </StepContainer>
-  );
-}
-
-const StepList = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 32px;
-  & > * {
-    margin: 12px 0px;
-  }
-
-  & > :first-child {
-    margin-top: 0px;
-  }
-
-  & > :last-child {
-    margin-bottom: 0px;
-  }
-`;
-
-const steps = [
-  {
-    titleKey: "onboarding.screens.tutorial.screens.genuineCheck.plugUSBCable.title",
-    descrKey: "onboarding.screens.tutorial.screens.genuineCheck.plugUSBCable.descr",
-  },
-];
-
-const DevicePlaceholder = styled.div`
-  background: url(${nanoXEnterWord}) center no-repeat;
-  height: 77px;
-  margin-top: 147px;
-  margin-bottom: 32px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export function GenuineCheck({ sendEvent, context }) {
@@ -127,36 +50,32 @@ export function GenuineCheck({ sendEvent, context }) {
 
   return (
     <ScreenContainer>
-      <ContentContainer>
+      <ContentContainer style={{ flex: 1 }}>
         <HeaderContainer>
           <Button color="palette.primary.main" onClick={() => sendEvent("HELP")}>
-            <Text mr="8px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+            <Text mr="8px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
               {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.help")}
             </Text>
             <InfoCircle size={22} />
           </Button>
         </HeaderContainer>
-        <DevicePlaceholder />
-        <StepList>
-          {steps.map(({ titleKey, descrKey }, index) => (
-            <Step
-              key={index}
-              title={t(titleKey)}
-              descr={descrKey ? t(descrKey) : undefined}
-              index={index + 1}
-            />
-          ))}
-        </StepList>
+        <Content>
+          <DeviceAction
+            action={action}
+            onResult={res => sendEvent("GENUINE_CHECK_SUCCESS")}
+            request={null}
+          />
+        </Content>
       </ContentContainer>
       <ContentFooter>
         <Button color="palette.text.shade30" onClick={() => sendEvent("PREV")}>
           <ArrowLeft />
-          <Text ml="9px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+          <Text ml="9px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.prev")}
           </Text>
         </Button>
         <Button primary onClick={() => sendEvent("NEXT")} disabled={!context.deviceIsGenuine}>
-          <Text ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+          <Text ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.next")}
           </Text>
         </Button>
