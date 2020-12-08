@@ -33,10 +33,15 @@ const ScrollLoadingList = ({
 }: ScrollLoadingListProps) => {
   const scrollRef = useRef();
   const [scrollOffset, setScrollOffset] = useState(bufferSize);
-
   const handleScroll = useCallback(() => {
     const target = scrollRef && scrollRef.current;
     if (
+      // the offset was off when :
+      // - do a first search with few results and scroll on the bottom of it
+      // - then do one more search but with no result
+      // - and redo a research with a result, no items will be display in the scrollContainer
+      // we don't allow the value 0 to be able to set the offset to prevent this
+      data.length !== 0 &&
       target &&
       // $FlowFixMe
       target.scrollTop + target.offsetHeight >= target.scrollHeight - scrollEndThreshold

@@ -22,6 +22,7 @@ type ValidatorListHeaderProps = {
   maxVotes: number,
   totalValidators: number,
   notEnoughVotes: boolean,
+  displayVotes?: boolean,
 };
 
 const ValidatorListHeader = ({
@@ -32,6 +33,7 @@ const ValidatorListHeader = ({
   maxVotes,
   totalValidators,
   notEnoughVotes,
+  displayVotes = true,
 }: ValidatorListHeaderProps) => (
   <Box horizontal alignItems="center" justifyContent="space-between" py={2} px={3}>
     <Text fontSize={3} ff="Inter|Medium">
@@ -47,29 +49,36 @@ const ValidatorListHeader = ({
           <Trans i18nKey="vote.steps.castVotes.selected" values={{ total: votesSelected }} />
         </Text>
       )}
-      <Separator />
-      {max > 0 ? (
-        <Text fontSize={3} ff="Inter|Medium">
-          <Trans i18nKey="vote.steps.castVotes.votes" values={{ total: maxText || max }} />
-        </Text>
-      ) : notEnoughVotes ? (
-        <Box horizontal alignItems="center" color="alertRed">
-          <ExclamationCircle size={13} />
-          <Box ml={1}>
+      {displayVotes && (
+        <>
+          <Separator />
+          {max > 0 ? (
             <Text fontSize={3} ff="Inter|Medium">
-              <Trans i18nKey="vote.steps.castVotes.maxUsed" values={{ total: votesAvailable }} />
+              <Trans i18nKey="vote.steps.castVotes.votes" values={{ total: maxText || max }} />
             </Text>
-          </Box>
-        </Box>
-      ) : (
-        <Box horizontal alignItems="center" color="positiveGreen">
-          <Check size={13} />
-          <Box ml={1}>
-            <Text fontSize={3} ff="Inter|Medium">
-              <Trans i18nKey="vote.steps.castVotes.allVotesAreUsed" />
-            </Text>
-          </Box>
-        </Box>
+          ) : notEnoughVotes ? (
+            <Box horizontal alignItems="center" color="alertRed">
+              <ExclamationCircle size={13} />
+              <Box ml={1}>
+                <Text fontSize={3} ff="Inter|Medium">
+                  <Trans
+                    i18nKey="vote.steps.castVotes.maxUsed"
+                    values={{ total: votesAvailable }}
+                  />
+                </Text>
+              </Box>
+            </Box>
+          ) : (
+            <Box horizontal alignItems="center" color="positiveGreen">
+              <Check size={13} />
+              <Box ml={1}>
+                <Text fontSize={3} ff="Inter|Medium">
+                  <Trans i18nKey="vote.steps.castVotes.allVotesAreUsed" />
+                </Text>
+              </Box>
+            </Box>
+          )}
+        </>
       )}
     </Box>
   </Box>
