@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
+import type { DeviceModelId } from "@ledgerhq/devices";
 import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
@@ -84,13 +85,14 @@ const Success = ({ device }: *) => {
 type Props = {
   sendEvent: string => void,
   context: {
+    deviceId: DeviceModelId,
     deviceIsGenuine?: boolean,
   },
 };
 
 export function GenuineCheck({ sendEvent, context }: Props) {
   const { t } = useTranslation();
-  const { deviceIsGenuine } = context;
+  const { deviceIsGenuine, deviceId } = context;
   const [device, setDevice] = useState(null);
 
   console.log(context);
@@ -118,7 +120,12 @@ export function GenuineCheck({ sendEvent, context }: Props) {
           {deviceIsGenuine && device ? (
             <Success device={device} />
           ) : (
-            <DeviceAction action={action} onResult={onResult} request={null} />
+            <DeviceAction
+              overridesPreferredDeviceModel={deviceId}
+              action={action}
+              onResult={onResult}
+              request={null}
+            />
           )}
         </Content>
       </ContentContainer>
