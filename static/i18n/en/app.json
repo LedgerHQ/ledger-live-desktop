@@ -74,6 +74,11 @@
     },
     "exchange": "Exchange"
   },
+  "devices": {
+    "nanoS": "Nano S",
+    "nanoX": "Nano X",
+    "blue": "Blue"
+  },
   "operation": {
     "type": {
       "IN": "Received",
@@ -2340,6 +2345,10 @@
             "plugUSBCable": {
               "title": "Plug USB cable",
               "descr": "Plug your cable and enter your PIN Code on your device"
+            },
+            "success": {
+              "title": "All good!",
+              "desc": "Your Ledger {{deviceName}} is genuine and ready to use with Ledger Live"
             },
             "buttons": {
               "next": "Continue",
