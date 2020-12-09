@@ -1835,7 +1835,12 @@
       "externalControllerTooltip": "This account is controlled by another account.",
       "externalControllerUnsupported": "<0>This account is controlled by another account with address <0>{{address}}</0>.</0><1>Staking operations on Stash controlled by an external account are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js.</1>",
       "externalStashTooltip": "This account controls another account.",
-      "externalStashUnsupported": "<0>This account controls an external Stash account with address <0>{{address}}</0>.</0><1>Staking operations on external Stash are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js.</1>"
+      "externalStashUnsupported": "<0>This account controls an external Stash account with address <0>{{address}}</0>.</0><1>Staking operations on external Stash are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js.</1>",
+      "showInactiveNominations": "Show inactive nominations ({{count}})",
+      "hideInactiveNominations": "Hide inactive nominations",
+      "noActiveNominations": "There are no active nominations.",
+      "showAllUnlockings": "Show all unbondings ({{count}})",
+      "hideAllUnlockings": "Hide unbondings"
     },
     "unlockings": {
       "header": "Unbondings",

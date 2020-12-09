@@ -52,7 +52,7 @@ export const Header = () => (
   </Wrapper>
 );
 
-export const UnbondingHeader = () => (
+export const UnlockingHeader = () => (
   <Wrapper>
     <TableLine>
       <Trans i18nKey="delegation.value" />

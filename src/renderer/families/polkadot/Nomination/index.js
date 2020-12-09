@@ -4,6 +4,7 @@ import invariant from "invariant";
 import { useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
+import moment from "moment";
 
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import {
@@ -19,7 +20,7 @@ import { openURL } from "~/renderer/linking";
 import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
-import Box, { Card } from "~/renderer/components/Box";
+import Box from "~/renderer/components/Box";
 
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import ToolTip from "~/renderer/components/Tooltip";
@@ -33,8 +34,10 @@ import ChartLineIcon from "~/renderer/icons/ChartLine";
 
 import ElectionStatusWarning from "../ElectionStatusWarning";
 
-import { Row, UnbondingRow } from "./Row";
-import { Header, UnbondingHeader } from "./Header";
+import { Row, UnlockingRow } from "./Row";
+import { Header, UnlockingHeader } from "./Header";
+import CollapsibleList from "../components/CollapsibleList";
+
 import {
   ExternalControllerUnsupportedWarning,
   ExternalStashUnsupportedWarning,
@@ -55,6 +58,16 @@ const Wrapper = styled(Box).attrs(() => ({
   align-items: center;
 `;
 
+const WarningBox = styled(Box).attrs(() => ({
+  horizontal: true,
+  justifyContent: "space-between",
+  textAlign: "center",
+  alignItems: "center",
+  fontSize: 14,
+}))`
+  padding: 16px 20px;
+`;
+
 const Nomination = ({ account }: Props) => {
   const dispatch = useDispatch();
 
@@ -67,14 +80,40 @@ const Nomination = ({ account }: Props) => {
   const { lockedBalance, unlockedBalance, nominations, unlockings } = polkadotResources;
 
   const mappedNominations = useMemo(() => {
-    return nominations?.map(nomination => {
-      const validator = validators.find(v => v.address === nomination.address);
-      return {
-        nomination,
-        validator,
-      };
-    });
+    const all =
+      nominations?.map(nomination => {
+        const validator = validators.find(v => v.address === nomination.address);
+        return {
+          nomination,
+          validator,
+        };
+      }) || [];
+
+    return all.reduce(
+      (sections, mapped) => {
+        if (mapped.nomination.status === "active") {
+          sections.uncollapsed.push(mapped);
+        } else {
+          sections.collapsed.push(mapped);
+        }
+        return sections;
+      },
+      { uncollapsed: [], collapsed: [] },
+    );
   }, [nominations, validators]);
+
+  const mappedUnlockings = useMemo(() => {
+    const now = moment();
+    const withoutUnlocked =
+      unlockings?.filter(({ completionDate }) => now.isBefore(completionDate)) ?? [];
+
+    const [firstRow, ...otherRows] =
+      unlockedBalance && unlockedBalance.gt(0)
+        ? [{ amount: unlockedBalance, completionDate: now }, ...withoutUnlocked]
+        : withoutUnlocked;
+
+    return { uncollapsed: firstRow ? [firstRow] : [], collapsed: otherRows };
+  }, [unlockings, unlockedBalance]);
 
   const onEarnRewards = useCallback(() => {
     dispatch(
@@ -143,17 +182,71 @@ const Nomination = ({ account }: Props) => {
   const nominateEnabled = !electionOpen && canNominate(account);
   const withdrawEnabled = !electionOpen && hasUnlockedBalance;
 
-  const renderTitle = (
-    <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100" data-e2e="title_Nomination">
-      <Trans i18nKey="polkadot.nomination.header" />
-    </Text>
+  const renderNomination = useCallback(
+    ({ nomination, validator }, index) => (
+      <Row
+        key={index}
+        account={account}
+        nomination={nomination}
+        validator={validator}
+        onExternalLink={onExternalLink}
+      />
+    ),
+    [account, onExternalLink],
+  );
+
+  const renderShowInactiveNominations = useCallback(
+    collapsed => (
+      <Trans
+        i18nKey={
+          collapsed
+            ? "polkadot.nomination.showInactiveNominations"
+            : "polkadot.nomination.hideInactiveNominations"
+        }
+        values={{ count: mappedNominations.collapsed.length }}
+      />
+    ),
+    [mappedNominations],
+  );
+
+  const renderUnlocking = useCallback(
+    (unlocking, index) => <UnlockingRow key={index} account={account} unlocking={unlocking} />,
+    [account],
+  );
+
+  const renderShowAllUnlockings = useCallback(
+    collapsed => (
+      <Trans
+        i18nKey={
+          collapsed
+            ? "polkadot.nomination.showAllUnlockings"
+            : "polkadot.nomination.hideAllUnlockings"
+        }
+        values={{ count: mappedUnlockings.collapsed.length }}
+      />
+    ),
+    [mappedUnlockings],
+  );
+
+  const renderTitle = useCallback(
+    () => (
+      <Text
+        ff="Inter|Medium"
+        fontSize={6}
+        color="palette.text.shade100"
+        data-e2e="title_Nomination"
+      >
+        <Trans i18nKey="polkadot.nomination.header" />
+      </Text>
+    ),
+    [],
   );
 
   if (hasExternalController(account)) {
     return (
       <Box flow={4}>
         <Box horizontal alignItems="center" justifyContent="space-between">
-          {renderTitle}
+          {renderTitle()}
         </Box>
         <ExternalControllerUnsupportedWarning
           address={polkadotResources?.controller}
@@ -168,7 +261,7 @@ const Nomination = ({ account }: Props) => {
     return (
       <Box flow={4}>
         <Box horizontal alignItems="center" justifyContent="space-between">
-          {renderTitle}
+          {renderTitle()}
         </Box>
         <ExternalStashUnsupportedWarning
           address={polkadotResources?.stash}
@@ -183,7 +276,7 @@ const Nomination = ({ account }: Props) => {
     <>
       {electionOpen ? <ElectionStatusWarning /> : null}
       <Box horizontal alignItems="center" justifyContent="space-between">
-        {renderTitle}
+        {renderTitle()}
         {hasNominations ? (
           <Box horizontal>
             <ToolTip
@@ -249,18 +342,23 @@ const Nomination = ({ account }: Props) => {
         ) : null}
       </Box>
       {hasNominations ? (
-        <Card p={0} mt={24} mb={6}>
+        <CollapsibleList
+          collapsedItems={mappedNominations.collapsed}
+          uncollapsedItems={mappedNominations.uncollapsed}
+          renderItem={renderNomination}
+          renderShowMore={renderShowInactiveNominations}
+        >
           <Header />
-          {mappedNominations?.map(({ nomination, validator }, index) => (
-            <Row
-              key={index}
-              account={account}
-              nomination={nomination}
-              validator={validator}
-              onExternalLink={onExternalLink}
-            />
-          ))}
-        </Card>
+          {!mappedNominations.uncollapsed.length && (
+            <WarningBox>
+              <Trans i18nKey="polkadot.nomination.noActiveNominations" />
+              <LinkWithExternalIcon
+                label={<Trans i18nKey="polkadot.nomination.emptyState.info" />}
+                onClick={onLearnMore}
+              />
+            </WarningBox>
+          )}
+        </CollapsibleList>
       ) : (
         <Wrapper horizontal>
           <Box style={{ maxWidth: "65%" }}>
@@ -384,12 +482,14 @@ const Nomination = ({ account }: Props) => {
               </ToolTip>
             </Box>
           </Box>
-          <Card p={0} mt={24} mb={6}>
-            <UnbondingHeader />
-            {(unlockings || []).map((unlocking, index) => (
-              <UnbondingRow key={index} account={account} unlocking={unlocking} />
-            ))}
-          </Card>
+          <CollapsibleList
+            uncollapsedItems={mappedUnlockings.uncollapsed}
+            collapsedItems={mappedUnlockings.collapsed}
+            renderItem={renderUnlocking}
+            renderShowMore={renderShowAllUnlockings}
+          >
+            <UnlockingHeader />
+          </CollapsibleList>
         </>
       ) : null}
     </>

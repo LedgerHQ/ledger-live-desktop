@@ -160,15 +160,15 @@ export function Row({
   );
 }
 
-type UnbondingRowProps = {
+type UnlockingRowProps = {
   account: Account,
   unlocking: PolkadotUnlocking,
 };
 
-export function UnbondingRow({
+export function UnlockingRow({
   account,
   unlocking: { amount, completionDate },
-}: UnbondingRowProps) {
+}: UnlockingRowProps) {
   const date = useMemo(() => (completionDate ? moment(completionDate).fromNow() : "N/A"), [
     completionDate,
   ]);
