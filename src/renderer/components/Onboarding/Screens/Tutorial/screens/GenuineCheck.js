@@ -6,6 +6,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import type { DeviceModelId } from "@ledgerhq/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
@@ -62,7 +63,7 @@ const IconContainer = styled.div`
   height: 48px;
 `;
 
-const Success = ({ device }: *) => {
+const Success = ({ device }: { device: Device }) => {
   const { t } = useTranslation();
   return (
     <SuccessContainer>
@@ -95,7 +96,9 @@ export function GenuineCheck({ sendEvent, context }: Props) {
   const { deviceIsGenuine, deviceId } = context;
   const [device, setDevice] = useState(null);
 
-  console.log(context);
+  const onClickHelp = useCallback(() => sendEvent("HELP"), [sendEvent]);
+  const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
+  const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
 
   const onResult = useCallback(
     res => {
@@ -109,7 +112,7 @@ export function GenuineCheck({ sendEvent, context }: Props) {
     <ScreenContainer>
       <ContentContainer style={{ flex: 1 }}>
         <HeaderContainer>
-          <Button color="palette.primary.main" onClick={() => sendEvent("HELP")}>
+          <Button color="palette.primary.main" onClick={onClickHelp}>
             <Text mr="8px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
               {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.help")}
             </Text>
@@ -130,13 +133,13 @@ export function GenuineCheck({ sendEvent, context }: Props) {
         </Content>
       </ContentContainer>
       <ContentFooter>
-        <Button color="palette.text.shade30" onClick={() => sendEvent("PREV")}>
+        <Button color="palette.text.shade30" onClick={onClickPrev}>
           <ArrowLeft />
           <Text ml="9px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.prev")}
           </Text>
         </Button>
-        <Button primary onClick={() => sendEvent("NEXT")} disabled={!deviceIsGenuine}>
+        <Button primary onClick={onClickNext} disabled={!deviceIsGenuine}>
           <Text ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.next")}
           </Text>

@@ -1,19 +1,22 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import type { DeviceModelId } from "@ledgerhq/devices";
 import styled from "styled-components";
+import Lottie from "react-lottie";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
-
-import { useTranslation } from "react-i18next";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 
 import { ContentContainer, HeaderContainer } from "../shared";
-import nanoXEnterWord from "~/renderer/components/Onboarding/Screens/Tutorial/assets/nanoXEnterWord.svg";
+import NanoSAnim from "../assets/animations/nanoS/confirm-words.json";
+import NanoXAnim from "../assets/animations/nanoX/confirm-words.json";
 
-const ScreenContainer = styled.div`
+const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -55,7 +58,7 @@ const StepTextContainer = styled.div`
 
 type StepProps = {
   title: string,
-  descr: string,
+  descr?: string,
   index: number,
 };
 
@@ -63,28 +66,25 @@ function Step({ title, descr, index }: StepProps) {
   return (
     <StepContainer>
       <StepIndexContainer>
-        <Text ff="Inter|Bold" fontSize="10px" lineHeight="12.1px">
+        <Text ff="Inter|Bold" fontSize={2} lineHeight="12.1px">
           {index}
         </Text>
       </StepIndexContainer>
       <StepTextContainer>
-        <Text
-          color="palette.text.shade100"
-          ff="Inter|SemiBold"
-          fontSize="16px"
-          lineHeight="19.36px"
-        >
+        <Text color="palette.text.shade100" ff="Inter|SemiBold" fontSize={5} lineHeight="19.36px">
           {title}
         </Text>
-        <Text
-          mt="8px"
-          color="palette.text.shade100"
-          ff="Inter|Regular"
-          fontSize="13px"
-          lineHeight="19.5px"
-        >
-          {descr}
-        </Text>
+        {descr ? (
+          <Text
+            mt="8px"
+            color="palette.text.shade100"
+            ff="Inter|Regular"
+            fontSize={4}
+            lineHeight="19.5px"
+          >
+            {descr}
+          </Text>
+        ) : null}
       </StepTextContainer>
     </StepContainer>
   );
@@ -93,7 +93,7 @@ function Step({ title, descr, index }: StepProps) {
 const StepList = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 32px;
+  margin-top: 64px;
   & > * {
     margin: 12px 0px;
   }
@@ -121,48 +121,62 @@ const steps = [
   },
 ];
 
-const DevicePlaceholder = styled.div`
-  background: url(${nanoXEnterWord}) center no-repeat;
-  height: 77px;
-  margin-top: 147px;
-  margin-bottom: 32px;
-`;
+type Props = {
+  sendEvent: (string, *) => void,
+  context: {
+    deviceId: DeviceModelId,
+  },
+};
 
-export function RecoveryHowTo2({ sendEvent }) {
+export function RecoveryHowTo2({ sendEvent, context }: Props) {
   const { t } = useTranslation();
+  const { deviceId } = context;
+
+  const onClickHelp = useCallback(() => sendEvent("HELP"), [sendEvent]);
+  const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
+  const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: deviceId === "nanoX" ? NanoXAnim : NanoSAnim,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   return (
     <ScreenContainer>
-      <ContentContainer>
+      <ContentContainer style={{ marginTop: 94 }}>
         <HeaderContainer>
-          <Button color="palette.primary.main" onClick={() => sendEvent("HELP")}>
-            <Text mr="8px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+          <Button color="palette.primary.main" onClick={onClickHelp}>
+            <Text mr="8px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
               {t("onboarding.screens.tutorial.screens.recoveryHowTo.buttons.help")}
             </Text>
             <InfoCircle size={22} />
           </Button>
         </HeaderContainer>
-        <DevicePlaceholder />
+        <Lottie options={defaultOptions} height={130} />
         <StepList>
-          {steps.map(({ titleKey, descrKey }, index) => (
+          {steps.map((step, index) => (
             <Step
               key={index}
-              title={t(titleKey)}
-              descr={descrKey ? t(descrKey) : undefined}
+              title={t(step.titleKey)}
+              descr={step.descrKey ? t(step.descrKey) : undefined}
               index={index + 1 + 2}
             />
           ))}
         </StepList>
       </ContentContainer>
       <ContentFooter>
-        <Button color="palette.text.shade30" onClick={() => sendEvent("PREV")}>
+        <Button color="palette.text.shade30" onClick={onClickPrev}>
           <ArrowLeft />
-          <Text ml="9px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+          <Text ml="9px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.recoveryHowTo.buttons.prev")}
           </Text>
         </Button>
-        <Button primary onClick={() => sendEvent("NEXT")}>
-          <Text mr="12px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+        <Button primary onClick={onClickNext}>
+          <Text mr="12px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.recoveryHowTo.buttons.next")}
           </Text>
           <ChevronRight size={13} />
