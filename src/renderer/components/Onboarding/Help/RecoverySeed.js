@@ -60,22 +60,58 @@ export function RecoverySeed() {
   return (
     <ScrollArea>
       <PinHelpContainer>
-        <Text color="palette.text.shade100" ff="Inter|SemiBold" fontSize="22px" lineHeight="26.63px">
+        <Text
+          color="palette.text.shade100"
+          ff="Inter|SemiBold"
+          fontSize="22px"
+          lineHeight="26.63px"
+        >
           {t("onboarding.drawers.recoverySeed.title1")}
         </Text>
-        <Text mt="8px" color="palette.text.shade100" ff="Inter|Regular" fontSize="14px" lineHeight="19.5px">
+        <Text
+          mt="8px"
+          color="palette.text.shade100"
+          ff="Inter|Regular"
+          fontSize="14px"
+          lineHeight="19.5px"
+        >
           {t("onboarding.drawers.recoverySeed.paragraph1")}
         </Text>
-        <Text mt="8px" color="palette.text.shade100" ff="Inter|Regular" fontSize="14px" lineHeight="19.5px">
+        <Text
+          mt="8px"
+          color="palette.text.shade100"
+          ff="Inter|Regular"
+          fontSize="14px"
+          lineHeight="19.5px"
+        >
           {t("onboarding.drawers.recoverySeed.paragraph2")}
         </Text>
-        <Text mt="8px" color="palette.text.shade100" ff="Inter|Regular" fontSize="14px" lineHeight="19.5px">
+        <Text
+          mt="8px"
+          color="palette.text.shade100"
+          ff="Inter|Regular"
+          fontSize="14px"
+          lineHeight="19.5px"
+        >
           {t("onboarding.drawers.recoverySeed.link")}
         </Text>
-        <Text mt="40px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize="22px" lineHeight="26.63px">
+        <Text
+          mt="40px"
+          color="palette.text.shade100"
+          ff="Inter|SemiBold"
+          fontSize="22px"
+          lineHeight="26.63px"
+        >
           {t("onboarding.drawers.recoverySeed.title2")}
         </Text>
-        <Text mt="8px" mb="32px" color="palette.text.shade100" ff="Inter|Regular" fontSize="14px" lineHeight="19.5px">
+        <Text
+          mt="8px"
+          mb="32px"
+          color="palette.text.shade100"
+          ff="Inter|Regular"
+          fontSize="14px"
+          lineHeight="19.5px"
+        >
           {t("onboarding.drawers.recoverySeed.paragraph3")}
         </Text>
         <Point>{t("onboarding.drawers.recoverySeed.points.1")}</Point>

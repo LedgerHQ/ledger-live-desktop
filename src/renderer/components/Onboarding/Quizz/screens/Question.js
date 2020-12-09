@@ -23,6 +23,7 @@ const SecurityContainer = styled.div`
   left: 50%;
   bottom: 25%;
   transform: translate(-50%, 50%);
+  pointer-events: none;
 `;
 
 const AnswerButton = styled.div`

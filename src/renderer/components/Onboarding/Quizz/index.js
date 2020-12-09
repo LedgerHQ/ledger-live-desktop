@@ -8,6 +8,7 @@ import { CSSTransition } from "react-transition-group";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Question } from "./screens/Question";
 import { Result } from "./screens/Result";
+import { Intro } from "./screens/Intro";
 import { quizzMachine } from "~/renderer/components/Onboarding/Quizz/state";
 
 const DURATION = 250;
@@ -57,6 +58,7 @@ const QuizzContainer: ThemedComponent<*> = styled.div`
 const screens = {
   question: Question,
   result: Result,
+  intro: Intro,
 };
 
 type QuizzProps = {

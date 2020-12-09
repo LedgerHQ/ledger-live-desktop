@@ -1,6 +1,6 @@
 import { assign, createMachine, actions } from "xstate";
 
-const { choose, log } = actions;
+const { choose } = actions;
 
 const questions = [
   {
@@ -77,11 +77,22 @@ const questions = [
 export const quizzMachineGenerator = (id, questions) => {
   const baseConfig = {
     id,
+    initial: "intro",
     context: {
       score: 0,
       results: {},
     },
     states: {
+      intro: {
+        on: {
+          START: {
+            target: "question-0",
+          },
+        },
+        meta: {
+          UI: "intro",
+        },
+      },
       done: {
         entry: choose([
           {
@@ -101,10 +112,6 @@ export const quizzMachineGenerator = (id, questions) => {
     questions.reduce((config, question, index) => {
       const questionId = `question-${index}`;
       const resultId = `result-${index}`;
-
-      if (index === 0) {
-        config.initial = questionId;
-      }
 
       config.states[questionId] = {
         on: {

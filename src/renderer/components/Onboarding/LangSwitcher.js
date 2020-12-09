@@ -115,10 +115,11 @@ const styleFn = theme => ({
   },
 });
 
-const LangSwitcher = ({ onNext }: { onNext: () => void }) => {
+const LangSwitcher = () => {
   const theme = useTheme();
   const styles = useMemo(() => styleFn(theme), [theme]);
   const { language } = useSelector(langAndRegionSelector);
+  console.log({ language });
   const dispatch = useDispatch();
   const { i18n, t } = useTranslation();
   const [infoModalOpen, setInfoModalOpen] = useState("");
@@ -147,14 +148,11 @@ const LangSwitcher = ({ onNext }: { onNext: () => void }) => {
     [language],
   );
 
+  console.log(currentLanguage);
+
   return (
     <>
-      <Select
-        onChange={changeLanguage}
-        styles={styles}
-        options={options}
-        defaultValue={currentLanguage}
-      />
+      <Select onChange={changeLanguage} value={currentLanguage} styles={styles} options={options} />
       <ConfirmModal
         analyticsName="OnboardingLanguageInfo"
         centered

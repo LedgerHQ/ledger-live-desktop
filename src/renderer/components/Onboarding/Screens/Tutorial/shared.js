@@ -26,7 +26,7 @@ export const Illustration: ThemedComponent<*> = styled.div`
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
   background: url(${({ src }) => src}) no-repeat center;
-  margin: auto;
+  margin: 0 auto;
 `;
 
 export const ContentContainer: ThemedComponent<*> = styled.div`
