@@ -4,7 +4,6 @@ import React from "react";
 import Text from "~/renderer/components/Text";
 import type { TFunction } from "react-i18next";
 import Button from "~/renderer/components/Button";
-import { sendEvent } from "~/renderer/events";
 
 type ScreenProps = {
   t: TFunction,

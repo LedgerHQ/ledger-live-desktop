@@ -142,17 +142,10 @@ const LangSwitcher = ({ onNext }: { onNext: () => void }) => {
     setInfoModalOpen("");
   }, []);
 
-  const handleCloseAnNext = useCallback(() => {
-    setInfoModalOpen("");
-    onNext();
-  }, [onNext]);
-
   const currentLanguage = useMemo(
     () => options.find(({ value }) => value === language) || options[0],
     [language],
   );
-
-  console.log(language);
 
   return (
     <>
@@ -167,7 +160,7 @@ const LangSwitcher = ({ onNext }: { onNext: () => void }) => {
         centered
         isOpened={!!infoModalOpen}
         onClose={onCloseInfoModal}
-        onConfirm={handleCloseAnNext}
+        onConfirm={onCloseInfoModal}
         confirmText={<Trans i18nKey="onboarding.screens.welcome.languageWarning.cta" />}
         title={
           <Trans

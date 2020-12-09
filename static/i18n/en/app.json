@@ -2362,6 +2362,20 @@
               "help": "Need help"
             }
           },
+          "recoveryHowTo3": {
+            "reEnterWord": {
+              "title": "Re-enter Word #1...",
+              "descr": "Scroll through the words until you find the exact Word #1 by pressing right button. Confirm by pressing both buttons."
+            },
+            "repeat": {
+              "title": "... and the next 23!"
+            },
+            "buttons": {
+              "next": "Next step",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
           "genuineCheck": {
             "plugUSBCable": {
               "title": "Connect USB cable",

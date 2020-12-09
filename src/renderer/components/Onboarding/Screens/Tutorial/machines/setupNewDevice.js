@@ -181,14 +181,14 @@ export const setupNewDevice = Machine({
           }),
         },
         NEXT: {
-          target: "recoveryHowTo2",
+          target: "recoveryHowTo3",
         },
         PREV: {
           target: "newRecoveryPhrase",
         },
       },
     },
-    recoveryHowTo2: {
+    recoveryHowTo3: {
       entry: setStepperStatus({
         getStarted: "success",
         pinCode: "success",
@@ -237,7 +237,7 @@ export const setupNewDevice = Machine({
           }),
         },
         PREV: {
-          target: "recoveryHowTo2",
+          target: "recoveryHowTo3",
         },
         QUIZ_SUCCESS: {
           target: "quizSuccess",

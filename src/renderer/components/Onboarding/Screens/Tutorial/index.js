@@ -12,6 +12,7 @@ import { useRecoveryPhraseMachine } from "~/renderer/components/Onboarding/Scree
 import { setupNewDevice } from "~/renderer/components/Onboarding/Screens/Tutorial/machines/setupNewDevice";
 import { CSSTransition } from "react-transition-group";
 import { ExistingRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/ExistingRecoveryPhrase";
+import { RecoveryHowTo3 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo3";
 import { RecoveryHowTo2 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo2";
 import { RecoveryHowTo1 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo1";
 import { PairMyNano } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PairMyNano";
@@ -124,6 +125,10 @@ const screens = {
   },
   recoveryHowTo2: {
     component: RecoveryHowTo2,
+    bgTheme: "light",
+  },
+  recoveryHowTo3: {
+    component: RecoveryHowTo3,
     bgTheme: "light",
   },
   hideRecoveryPhrase: {

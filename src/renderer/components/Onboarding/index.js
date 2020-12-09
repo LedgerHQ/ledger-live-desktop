@@ -5,6 +5,9 @@ import { useMachine } from "@xstate/react";
 import { assign, Machine } from "xstate";
 import { CSSTransition } from "react-transition-group";
 import { Modal } from "~/renderer/components/Onboarding/Modal";
+import { saveSettings } from "~/renderer/actions/settings";
+import { useDispatch } from "react-redux";
+import { relaunchOnboarding } from "~/renderer/actions/onboarding";
 
 // screens
 import { Welcome } from "~/renderer/components/Onboarding/Screens/Welcome";
@@ -173,12 +176,14 @@ const ScreenContainer = styled.div`
   }
 `;
 
-export function Onboarding({ saveSettings, relaunchOnboarding }) {
+export function Onboarding() {
+  const dispatch = useDispatch();
+
   const [state, sendEvent] = useMachine(onboardingMachine, {
     actions: {
       onboardingCompleted: () => {
-        saveSettings({ hasCompletedOnboarding: true });
-        relaunchOnboarding(false);
+        dispatch(saveSettings({ hasCompletedOnboarding: true }));
+        dispatch(relaunchOnboarding(false));
       },
     },
   });
