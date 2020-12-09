@@ -13,8 +13,7 @@ import Button from "~/renderer/components/Button";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import IconCheck from "~/renderer/icons/Check";
-import InfoCircle from "~/renderer/icons/InfoCircle";
-import { ContentContainer, HeaderContainer } from "../shared";
+import { ContentContainer } from "../shared";
 import DeviceAction from "~/renderer/components/DeviceAction";
 
 import { mockedEventEmitter } from "~/renderer/components/DebugMock";
@@ -96,7 +95,6 @@ export function GenuineCheck({ sendEvent, context }: Props) {
   const { deviceIsGenuine, deviceId } = context;
   const [device, setDevice] = useState(null);
 
-  const onClickHelp = useCallback(() => sendEvent("HELP"), [sendEvent]);
   const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
 
@@ -111,14 +109,6 @@ export function GenuineCheck({ sendEvent, context }: Props) {
   return (
     <ScreenContainer>
       <ContentContainer style={{ flex: 1 }}>
-        <HeaderContainer>
-          <Button color="palette.primary.main" onClick={onClickHelp}>
-            <Text mr="8px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
-              {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.help")}
-            </Text>
-            <InfoCircle size={22} />
-          </Button>
-        </HeaderContainer>
         <Content>
           {deviceIsGenuine && device ? (
             <Success device={device} />

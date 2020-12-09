@@ -226,6 +226,7 @@ export const useRecoveryPhraseMachine = Machine({
         },
         NEXT: {
           cond: context => context.deviceId,
+          actions: ["topLevelNext"],
         },
         PREV: {
           target: "pairMyNano",

@@ -13,6 +13,7 @@ import { PinCodeHowTo } from "~/renderer/components/Onboarding/Screens/Tutorial/
 import { useRecoveryPhraseMachine } from "~/renderer/components/Onboarding/Screens/Tutorial/machines/useRecoveryPhrase";
 import { setupNewDevice } from "~/renderer/components/Onboarding/Screens/Tutorial/machines/setupNewDevice";
 import { ExistingRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/ExistingRecoveryPhrase";
+import { RecoveryHowTo3 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo3";
 import { RecoveryHowTo2 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo2";
 import { RecoveryHowTo1 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo1";
 import { PairMyNano } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PairMyNano";
@@ -127,6 +128,10 @@ const screens = {
     component: RecoveryHowTo2,
     bgTheme: "light",
   },
+  recoveryHowTo3: {
+    component: RecoveryHowTo3,
+    bgTheme: "light",
+  },
   hideRecoveryPhrase: {
     component: HideRecoveryPhrase,
     bgTheme: "dark",
@@ -186,6 +191,7 @@ function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) 
   const [state, sendEvent] = useMachine(machine, {
     actions: {
       topLevelPrev: () => sendEventToParent("PREV"),
+      topLevelNext: () => sendEventToParent("NEXT"),
     },
     context: {
       deviceId: parentContext.deviceId,

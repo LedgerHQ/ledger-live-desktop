@@ -109,15 +109,11 @@ const StepList = styled.div`
 
 const steps = [
   {
-    titleKey: "onboarding.screens.tutorial.screens.recoveryHowTo.enterWord.title",
-    descrKey: "onboarding.screens.tutorial.screens.recoveryHowTo.enterWord.descr",
+    titleKey: "onboarding.screens.tutorial.screens.recoveryHowTo3.reEnterWord.title",
+    descrKey: "onboarding.screens.tutorial.screens.recoveryHowTo3.reEnterWord.descr",
   },
   {
-    titleKey: "onboarding.screens.tutorial.screens.recoveryHowTo.validateWord.title",
-    descrKey: "onboarding.screens.tutorial.screens.recoveryHowTo.validateWord.descr",
-  },
-  {
-    titleKey: "onboarding.screens.tutorial.screens.recoveryHowTo.andNext.title",
+    titleKey: "onboarding.screens.tutorial.screens.recoveryHowTo3.repeat.title",
   },
 ];
 
@@ -128,7 +124,7 @@ type Props = {
   },
 };
 
-export function RecoveryHowTo2({ sendEvent, context }: Props) {
+export function RecoveryHowTo3({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   const { deviceId } = context;
 
@@ -151,7 +147,7 @@ export function RecoveryHowTo2({ sendEvent, context }: Props) {
         <HeaderContainer>
           <Button color="palette.primary.main" onClick={onClickHelp}>
             <Text mr="8px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
-              {t("onboarding.screens.tutorial.screens.recoveryHowTo.buttons.help")}
+              {t("onboarding.screens.tutorial.screens.recoveryHowTo3.buttons.help")}
             </Text>
             <InfoCircle size={22} />
           </Button>
@@ -172,12 +168,12 @@ export function RecoveryHowTo2({ sendEvent, context }: Props) {
         <Button color="palette.text.shade30" onClick={onClickPrev}>
           <ArrowLeft />
           <Text ml="9px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
-            {t("onboarding.screens.tutorial.screens.recoveryHowTo.buttons.prev")}
+            {t("onboarding.screens.tutorial.screens.recoveryHowTo3.buttons.prev")}
           </Text>
         </Button>
         <Button primary onClick={onClickNext}>
           <Text mr="12px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
-            {t("onboarding.screens.tutorial.screens.recoveryHowTo.buttons.next")}
+            {t("onboarding.screens.tutorial.screens.recoveryHowTo3.buttons.next")}
           </Text>
           <ChevronRight size={13} />
         </Button>

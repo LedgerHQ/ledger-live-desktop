@@ -11,10 +11,8 @@ const IllustrationContainer = styled.div`
   transition: transform 150ms ease-in-out;
 `;
 
-const UseCaseOptionContainer: ThemedComponent<*> = styled.button`
-  border: none;
-  outline: none;
-  width: 272px;
+const Container = styled.div`
+  width: 100%;
   padding: 24px;
   box-sizing: border-box;
   background-color: #6490f120;
@@ -22,9 +20,18 @@ const UseCaseOptionContainer: ThemedComponent<*> = styled.button`
   position: relative;
   display: flex;
   flex-direction: column;
-  cursor: pointer;
   transition: transform 100ms ease-in-out;
   text-align: left;
+`;
+
+const UseCaseOptionContainer: ThemedComponent<*> = styled.button`
+  border: none;
+  outline: none;
+  width: 272px;
+  box-sizing: border-box;
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
 
   &:hover ${IllustrationContainer} {
     transform: scale(0.95);
@@ -34,7 +41,7 @@ const UseCaseOptionContainer: ThemedComponent<*> = styled.button`
     transform: scale(0.95);
   }
 
-  &:active {
+  &:active ${Container} {
     transform: scale(0.95);
   }
 `;
@@ -50,23 +57,25 @@ type UseCaseOptionProps = {
 export function UseCaseOption({ heading, title, description, Illu, onClick }: UseCaseOptionProps) {
   return (
     <UseCaseOptionContainer onClick={onClick}>
-      <Text
-        mb="8px"
-        color="palette.primary.main"
-        ff="Inter|Bold"
-        fontSize="8px"
-        uppercase
-        letterSpacing="0.2em"
-      >
-        {heading}
-      </Text>
-      <Text mb="8px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize="16px">
-        {title}
-      </Text>
-      <Text mb="8px" color="palette.text.shade100" ff="Inter|Regular" fontSize="13px">
-        {description}
-      </Text>
-      <IllustrationContainer>{Illu}</IllustrationContainer>
+      <Container>
+        <Text
+          mb="8px"
+          color="palette.primary.main"
+          ff="Inter|Bold"
+          fontSize="8px"
+          uppercase
+          letterSpacing="0.2em"
+        >
+          {heading}
+        </Text>
+        <Text mb="8px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize="16px">
+          {title}
+        </Text>
+        <Text mb="8px" color="palette.text.shade100" ff="Inter|Regular" fontSize="13px">
+          {description}
+        </Text>
+        <IllustrationContainer>{Illu}</IllustrationContainer>
+      </Container>
     </UseCaseOptionContainer>
   );
 }

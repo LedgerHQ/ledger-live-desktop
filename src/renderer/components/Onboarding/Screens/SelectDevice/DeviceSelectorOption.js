@@ -15,26 +15,37 @@ const DeviceIllustrationContainer = styled.div`
   display: flex;
 `;
 
-const DeviceSelectOptionContainer: ThemedComponent<*> = styled.button`
+const Container = styled.div`
   border: none;
   outline: none;
-  width: 152px;
-  height: 318px;
+  width: 100%;
+  height: 100%;
   background-color: rgba(100, 144, 241, 0.2);
   border-radius: 4px;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: transform ease-out 100ms;
+  animation: ${p => p.theme.animations.fadeIn};
+`;
+
+const DeviceSelectOptionContainer: ThemedComponent<{}> = styled.button`
+  border: none;
+  outline: none;
+  width: 152px;
+  height: 318px;
+  background-color: transparent;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
 
   &:hover ${DeviceIllustrationContainer} {
     transform: translateX(0px);
   }
 
-  &:active {
+  &:active ${Container} {
     transform: scale(0.95);
   }
 
@@ -52,10 +63,12 @@ type DeviceSelectOptionProps = {
 export function DeviceSelectorOption({ label, Illu, onClick }: DeviceSelectOptionProps) {
   return (
     <DeviceSelectOptionContainer onClick={onClick}>
-      <Text mt={"32px"} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={"22px"}>
-        {label}
-      </Text>
-      <DeviceIllustrationContainer>{Illu}</DeviceIllustrationContainer>
+      <Container>
+        <Text mt={"32px"} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={"22px"}>
+          {label}
+        </Text>
+        <DeviceIllustrationContainer>{Illu}</DeviceIllustrationContainer>
+      </Container>
     </DeviceSelectOptionContainer>
   );
 }

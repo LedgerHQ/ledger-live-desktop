@@ -8,10 +8,8 @@ import Button from "~/renderer/components/Button";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
-import InfoCircle from "~/renderer/icons/InfoCircle";
 import {
   ContentContainer,
-  HeaderContainer,
   Illustration,
 } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import nanoPlug from "~/renderer/components/Onboarding/Screens/Tutorial/assets/nanoPlug.svg";
@@ -40,19 +38,10 @@ type Props = {
 
 export function PairMyNano({ sendEvent, context }: Props) {
   const { t } = useTranslation();
-  console.log(context);
 
   return (
     <ScreenContainer>
       <ContentContainer>
-        <HeaderContainer>
-          <Button color="palette.primary.contrastText" onClick={() => sendEvent("HELP")}>
-            <Text mr="8px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
-              {t("onboarding.screens.tutorial.screens.pairMyNano.buttons.help")}
-            </Text>
-            <InfoCircle size={22} />
-          </Button>{" "}
-        </HeaderContainer>
         <Illustration width={456} height={277} src={nanoPlug} />
         <Text
           mt="32px"

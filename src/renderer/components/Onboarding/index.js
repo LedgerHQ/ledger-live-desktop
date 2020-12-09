@@ -5,6 +5,9 @@ import { useMachine } from "@xstate/react";
 import { assign, Machine } from "xstate";
 import { CSSTransition } from "react-transition-group";
 import { Modal } from "~/renderer/components/Onboarding/Modal";
+import { saveSettings } from "~/renderer/actions/settings";
+import { useDispatch } from "react-redux";
+import { relaunchOnboarding } from "~/renderer/actions/onboarding";
 
 // screens
 import { Welcome } from "~/renderer/components/Onboarding/Screens/Welcome";
@@ -115,12 +118,18 @@ const onboardingMachine = Machine({
         PREV: {
           target: "selectUseCase",
         },
+        NEXT: {
+          target: "onboardingComplete",
+        },
       },
     },
     connectSetupDevice: {
       on: {
         PREV: {
           target: "selectUseCase",
+        },
+        NEXT: {
+          target: "onboardingComplete",
         },
       },
     },
@@ -129,7 +138,14 @@ const onboardingMachine = Machine({
         PREV: {
           target: "selectUseCase",
         },
+        NEXT: {
+          target: "onboardingComplete",
+        },
       },
+    },
+    onboardingComplete: {
+      type: "final",
+      entry: "onboardingCompleted",
     },
   },
 });
@@ -161,7 +177,16 @@ const ScreenContainer = styled.div`
 `;
 
 export function Onboarding() {
-  const [state, sendEvent] = useMachine(onboardingMachine);
+  const dispatch = useDispatch();
+
+  const [state, sendEvent] = useMachine(onboardingMachine, {
+    actions: {
+      onboardingCompleted: () => {
+        dispatch(saveSettings({ hasCompletedOnboarding: true }));
+        dispatch(relaunchOnboarding(false));
+      },
+    },
+  });
 
   const CurrentScreen = screens[state.value];
 
