@@ -7,6 +7,8 @@ import styled from "styled-components";
 import { DeviceSelector } from "./DeviceSelector";
 import Button from "~/renderer/components/Button";
 
+import CheckTermsAccepted from "~/renderer/components/CheckTermsAccepted";
+
 const SelectDeviceContainer = styled.div`
   height: 100%;
   width: 100%;
@@ -31,6 +33,7 @@ export function SelectDevice({ sendEvent }) {
 
   return (
     <SelectDeviceContainer>
+      <CheckTermsAccepted />
       <TopRightContainer>
         <Button small onClick={() => sendEvent("PREV")}>
           Previous
