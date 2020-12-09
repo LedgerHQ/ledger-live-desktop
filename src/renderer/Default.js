@@ -20,7 +20,6 @@ import Idler from "~/renderer/components/Idler";
 import IsUnlocked from "~/renderer/components/IsUnlocked";
 import OnboardingOrElse from "~/renderer/components/OnboardingOrElse";
 import AppRegionDrag from "~/renderer/components/AppRegionDrag";
-import CheckTermsAccepted from "~/renderer/components/CheckTermsAccepted";
 import IsNewVersion from "~/renderer/components/IsNewVersion";
 import LibcoreBusyIndicator from "~/renderer/components/LibcoreBusyIndicator";
 import DeviceBusyIndicator from "~/renderer/components/DeviceBusyIndicator";
@@ -62,8 +61,6 @@ export default function Default() {
           <ContextMenuWrapper>
             <ModalsLayer />
             <OnboardingOrElse>
-              <CheckTermsAccepted />
-
               <IsNewVersion />
 
               {process.env.DEBUG_UPDATE && <DebugUpdater />}
