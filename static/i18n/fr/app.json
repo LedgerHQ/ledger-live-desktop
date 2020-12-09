@@ -1927,13 +1927,13 @@
         "confirmation": {
           "tooltip": {
             "title": "Transaction en attente de validation",
-            "desc": "Vous devez attendre une minute avant de pouvoir voter"
+            "desc": "Vous devez attendre un petit moment avant de pouvoir nominer."
           },
           "title": "Confirmation",
           "success": {
-            "title": "",
-            "text": "Vous pourrez nominer des validateurs une fois que le réseau aura confirmé votre transaction.",
-            "nominatePending": "Nominer dans {{time}}",
+            "title": "Actifs liés avec succès",
+            "text": "Le solde de votre compte sera actualisé dès que le réseau aura confirmé la transaction.",
+            "textNominate": "Vous pourrez nominer des validateurs une fois que le réseau aura confirmé votre transaction.",
             "nominate": "Nominer",
             "later": "Nominer plus tard"
           },

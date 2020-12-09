@@ -1,11 +1,11 @@
 // @flow
 
 import invariant from "invariant";
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import { Trans } from "react-i18next";
 import styled, { withTheme } from "styled-components";
-// import { usePolkadotBondLoading } from "@ledgerhq/live-common/lib/families/tron/react";
-import { useTimer } from "@ledgerhq/live-common/lib/hooks/useTimer";
+import { usePolkadotBondLoading } from "@ledgerhq/live-common/lib/families/polkadot/react";
+import { isFirstBond } from "@ledgerhq/live-common/lib/families/polkadot/logic";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { multiline } from "~/renderer/styles/helpers";
@@ -50,13 +50,19 @@ function StepConfirmation({
   signed,
   transaction,
 }: StepProps & { theme: * }) {
+  const wasFirstBond = useRef(account && isFirstBond(account));
+
   if (optimisticOperation) {
     return (
       <Container>
         <TrackPage category="Bond Flow" name="Step Confirmed" />
         <SuccessDisplay
           title={<Trans i18nKey="polkadot.bond.steps.confirmation.success.title" />}
-          description={multiline(t("polkadot.bond.steps.confirmation.success.text"))}
+          description={multiline(
+            wasFirstBond.current
+              ? t("polkadot.bond.steps.confirmation.success.textNominate")
+              : t("polkadot.bond.steps.confirmation.success.text"),
+          )}
         />
       </Container>
     );
@@ -87,13 +93,11 @@ export function StepConfirmationFooter({
   error,
   openModal,
   onClose,
+  optimisticOperation,
 }: StepProps) {
   invariant(account && account.polkadotResources, "polkadot account required");
-
-  const time = useTimer(60);
-  // TODO: wait for bonding to be effective
-  // const isLoading = usePolkadotBondLoading(account);
-  const isLoading = true;
+  const wasFirstBond = useRef(account && isFirstBond(account));
+  const isLoading = usePolkadotBondLoading(account);
 
   const openNominate = useCallback(() => {
     onClose();
@@ -104,33 +108,47 @@ export function StepConfirmationFooter({
     }
   }, [account, onClose, openModal]);
 
-  return error ? (
-    <RetryButton ml={2} primary onClick={onRetry} />
-  ) : (
+  const goToOperationDetails = useCallback(() => {
+    onClose();
+    if (account && optimisticOperation) {
+      openModal("MODAL_OPERATION_DETAILS", {
+        operationId: optimisticOperation.id,
+        accountId: account.id,
+      });
+    }
+  }, [account, optimisticOperation, onClose, openModal]);
+
+  if (error) {
+    return <RetryButton ml={2} primary onClick={onRetry} />;
+  }
+
+  return wasFirstBond.current ? (
     <Box horizontal alignItems="right">
-      <Button ml={2} event="Bond Flow Step 3 View OpD Clicked" onClick={onClose} secondary>
+      <Button ml={2} onClick={onClose} secondary>
         <Trans i18nKey="polkadot.bond.steps.confirmation.success.later" />
       </Button>
-      {time > 0 && isLoading ? (
-        <ToolTip content={<TooltipContent />}>
-          <Button
-            ml={2}
-            isLoading={isLoading && time === 0}
-            disabled={isLoading}
-            primary
-            onClick={openNominate}
-          >
-            <Trans
-              i18nKey="polkadot.bond.steps.confirmation.success.nominatePending"
-              values={{ time }}
-            />
-          </Button>
-        </ToolTip>
-      ) : (
-        <Button ml={2} primary onClick={openNominate}>
+      <ToolTip content={isLoading ? <TooltipContent /> : null}>
+        <Button ml={2} isLoading={isLoading} disabled={isLoading} primary onClick={openNominate}>
           <Trans i18nKey="polkadot.bond.steps.confirmation.success.nominate" />
         </Button>
-      )}
+      </ToolTip>
+    </Box>
+  ) : (
+    <Box horizontal alignItems="right">
+      <Button id="modal-close-button" ml={2} onClick={onClose}>
+        <Trans i18nKey="common.close" />
+      </Button>
+      {optimisticOperation ? (
+        // FIXME make a standalone component!
+        <Button
+          primary
+          ml={2}
+          event="Bond Flow Step 3 View OpD Clicked"
+          onClick={goToOperationDetails}
+        >
+          <Trans i18nKey="polkadot.unbond.steps.confirmation.success.cta" />
+        </Button>
+      ) : null}
     </Box>
   );
 }

@@ -1927,12 +1927,13 @@
         "confirmation": {
           "tooltip": {
             "title": "Transaction is awaiting validation",
-            "desc": "You have to wait a minute before being able to vote"
+            "desc": "You have to wait a short time before being able to nominate"
           },
           "title": "Confirmation",
           "success": {
-            "title": "",
-            "text": "You will be able to nominate validators once the network has confirmed your transaction.",
+            "title": "Assets successfully bonded",
+            "text": "Your account balance will update once the network has confirmed the transaction.",
+            "textNominate": "You will be able to nominate validators once the network has confirmed your transaction.",
             "nominate": "Nominate",
             "later": "Nominate later"
           },

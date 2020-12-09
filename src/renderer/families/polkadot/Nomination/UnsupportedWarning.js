@@ -8,7 +8,6 @@ import { darken, lighten } from "~/renderer/styles/helpers";
 import WarnBox from "~/renderer/components/WarnBox";
 import Box from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
-import Text from "~/renderer/components/Text";
 
 const Address = styled.span.attrs(() => ({
   color: "wallet",
