@@ -5,6 +5,7 @@ import React, { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { getAllEnvs } from "@ledgerhq/live-common/lib/env";
+import type { Account } from "@ledgerhq/live-common/lib/types";
 import KeyHandler from "react-key-handler";
 import logger from "~/logger";
 import getUser from "~/helpers/user";
@@ -36,12 +37,33 @@ type Props = {|
   hookToShortcut?: boolean,
   title?: React$Node,
   withoutAppData?: boolean,
+  accounts?: Account[],
 |};
 
-const ExportLogsBtn = ({ hookToShortcut, primary = true, small = true, title, ...rest }: Props) => {
+const ExportLogsBtnWrapper = (args: Props) => {
+  if (args.withoutAppData) {
+    return <ExportLogsBtn {...args} />;
+  } else {
+    return <ExportLogsBtnWithAccounts {...args} />;
+  }
+};
+
+const ExportLogsBtnWithAccounts = (args: Props) => {
+  const accounts = useSelector(accountsSelector);
+  return <ExportLogsBtn {...args} accounts={accounts} />;
+};
+
+const ExportLogsBtn = ({
+  hookToShortcut,
+  primary = true,
+  small = true,
+  title,
+  withoutAppData,
+  accounts = [],
+  ...rest
+}: Props) => {
   const { t } = useTranslation();
   const [exporting, setExporting] = useState(false);
-  const accounts = useSelector(accountsSelector);
 
   const exportLogs = useCallback(async () => {
     const resourceUsage = webFrame.getResourceUsage();
@@ -109,4 +131,4 @@ const ExportLogsBtn = ({ hookToShortcut, primary = true, small = true, title, ..
   );
 };
 
-export default ExportLogsBtn;
+export default ExportLogsBtnWrapper;
