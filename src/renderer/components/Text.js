@@ -28,7 +28,7 @@ const Text: ThemedComponent<{
   textAlign?: string,
   color?: string,
   fontWeight?: string,
-  mt?: number,
+  mt?: number | string,
   mb?: number | string,
   align?: "DEPRECATED: USE textAlign INSTEAD",
   lineHeight?: string,

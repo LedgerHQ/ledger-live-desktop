@@ -1,16 +1,18 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import type { DeviceModelId } from "@ledgerhq/devices";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import recoveryPhrase from "../assets/recoveryPhrase.svg";
 import { Illustration, ContentContainer } from "../shared";
 
-import { useTranslation } from "react-i18next";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 
-const ScreenContainer = styled.div`
+const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -28,8 +30,18 @@ const ContentFooter = styled.div`
   justify-content: space-between;
 `;
 
-export function ImportYourRecoveryPhrase({ sendEvent }) {
+type Props = {
+  sendEvent: (string, *) => void,
+  context: {
+    deviceId: DeviceModelId,
+  },
+};
+
+export function ImportYourRecoveryPhrase({ sendEvent }: Props) {
   const { t } = useTranslation();
+
+  const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
+  const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
 
   return (
     <ScreenContainer>
@@ -39,7 +51,7 @@ export function ImportYourRecoveryPhrase({ sendEvent }) {
           mt="32px"
           color="palette.primary.contrastText"
           ff="Inter|SemiBold"
-          fontSize="32px"
+          fontSize={8}
           lineHeight="38.73px"
         >
           {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.title")}
@@ -48,7 +60,7 @@ export function ImportYourRecoveryPhrase({ sendEvent }) {
           mt="32px"
           color="palette.primary.contrastText"
           ff="Inter|SemiBold"
-          fontSize="18px"
+          fontSize={6}
           lineHeight="21.78px"
         >
           {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.paragraph1")}
@@ -57,21 +69,21 @@ export function ImportYourRecoveryPhrase({ sendEvent }) {
           mt="32px"
           color="palette.primary.contrastText"
           ff="Inter|SemiBold"
-          fontSize="18px"
+          fontSize={6}
           lineHeight="21.78px"
         >
           {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.paragraph2")}
         </Text>
       </ContentContainer>
       <ContentFooter>
-        <Button color="palette.primary.contrastText" onClick={() => sendEvent("PREV")}>
+        <Button color="palette.primary.contrastText" onClick={onClickPrev}>
           <ArrowLeft />
-          <Text ml="9px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+          <Text ml="9px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.buttons.prev")}
           </Text>
         </Button>
-        <Button inverted primary onClick={() => sendEvent("NEXT")}>
-          <Text ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+        <Button inverted primary onClick={onClickNext}>
+          <Text ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.buttons.next")}
           </Text>
         </Button>

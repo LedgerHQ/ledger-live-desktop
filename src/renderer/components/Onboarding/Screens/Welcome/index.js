@@ -49,7 +49,11 @@ const TopRightContainer = styled.div`
   z-index: 1;
 `;
 
-export function Welcome({ sendEvent }) {
+type Props = {
+  sendEvent: string => void,
+};
+
+export function Welcome({ sendEvent }: Props) {
   const { t } = useTranslation();
 
   const handleNext = useCallback(() => {
@@ -82,7 +86,7 @@ export function Welcome({ sendEvent }) {
       <Button onClick={handleNext} primary>
         {t("onboarding.screens.welcome.cta")}
       </Button>
-      <Text mt="8px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize={4}>
+      <Text style={{ marginTop: 8 }} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={4}>
         <Trans i18nKey="onboarding.screens.welcome.noDevice">
           <Text
             style={{ cursor: "pointer", textDecorationSkip: "ink" }}
