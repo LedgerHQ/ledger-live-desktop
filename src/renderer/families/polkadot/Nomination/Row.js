@@ -21,8 +21,7 @@ import { TableLine } from "./Header";
 import Box from "~/renderer/components/Box/Box";
 // import ChevronRight from "~/renderer/icons/ChevronRight";
 import CheckCircle from "~/renderer/icons/CheckCircle";
-import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
-import Clock from "~/renderer/icons/Clock";
+import InfoCircle from "~/renderer/icons/InfoCircle";
 import ToolTip from "~/renderer/components/Tooltip";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 // import Text from "~/renderer/components/Text";
@@ -60,7 +59,7 @@ const Ellipsis: ThemedComponent<{}> = styled.div`
 const StatusLabel: ThemedComponent<{}> = styled.div`
   flex: 1;
   display: block;
-  margin-left: 8px;
+  margin-right: 8px;
 `;
 
 type Props = {
@@ -125,30 +124,30 @@ export function Row({
         {status === "active" && (
           <Box color="positiveGreen" pl={2}>
             <ToolTip content={<Trans i18nKey="polkadot.nomination.activeTooltip" />}>
-              <CheckCircle size={14} />
               <StatusLabel>
                 <Trans i18nKey="polkadot.nomination.active" />
               </StatusLabel>
+              <CheckCircle size={14} />
             </ToolTip>
           </Box>
         )}
         {status === "inactive" && (
-          <Box color="alertRed" pl={2}>
+          <Box color="grey" pl={2}>
             <ToolTip content={<Trans i18nKey="polkadot.nomination.inactiveTooltip" />}>
-              <ExclamationCircleThin size={14} />
               <StatusLabel>
                 <Trans i18nKey="polkadot.nomination.inactive" />
               </StatusLabel>
+              <InfoCircle size={14} />
             </ToolTip>
           </Box>
         )}
         {status === "waiting" && (
           <Box color="grey" pl={2}>
             <ToolTip content={<Trans i18nKey="polkadot.nomination.waitingTooltip" />}>
-              <Clock size={14} />
               <StatusLabel>
                 <Trans i18nKey="polkadot.nomination.waiting" />
               </StatusLabel>
+              <InfoCircle size={14} />
             </ToolTip>
           </Box>
         )}
