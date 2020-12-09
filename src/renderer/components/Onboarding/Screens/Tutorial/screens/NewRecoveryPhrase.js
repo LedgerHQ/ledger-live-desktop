@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import CheckBox from "~/renderer/components/CheckBox";
-
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useTranslation } from "react-i18next";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
@@ -18,7 +18,7 @@ import {
 } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import emptyRecoverySheet from "~/renderer/components/Onboarding/Screens/Tutorial/assets/emptyRecoverySheet.svg";
 
-const ScreenContainer = styled.div`
+const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -35,9 +35,17 @@ const ContentFooter = styled.div`
   justify-content: space-between;
 `;
 
-export function NewRecoveryPhrase({ sendEvent, context }) {
+type Props = {
+  sendEvent: (string, *) => void,
+  context: {
+    userUnderstandConsequences: boolean,
+  },
+};
+
+export function NewRecoveryPhrase({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   console.log(context);
+  const { userUnderstandConsequences } = context;
 
   return (
     <ScreenContainer>
@@ -82,13 +90,13 @@ export function NewRecoveryPhrase({ sendEvent, context }) {
         <Box
           horizontal
           onClick={() =>
-            sendEvent("RECOVERY_TERMS_CHANGED", { value: !context.userUnderstandConsequences })
+            sendEvent("RECOVERY_TERMS_CHANGED", { value: !userUnderstandConsequences })
           }
           style={{
             cursor: "pointer",
           }}
         >
-          <CheckBox isChecked={context.userUnderstandConsequences} inverted />
+          <CheckBox isChecked={userUnderstandConsequences} inverted />
           <Text
             color="palette.primary.contrastText"
             ff="Inter|Regular"
@@ -112,7 +120,7 @@ export function NewRecoveryPhrase({ sendEvent, context }) {
         </Button>
         <Button
           inverted
-          disabled={!context.userUnderstandConsequences}
+          disabled={!userUnderstandConsequences}
           primary
           onClick={() => sendEvent("NEXT")}
         >

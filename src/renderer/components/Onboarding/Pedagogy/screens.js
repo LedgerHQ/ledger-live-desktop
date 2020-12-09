@@ -1,13 +1,13 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import Text from "~/renderer/components/Text";
 import type { TFunction } from "react-i18next";
 import Button from "~/renderer/components/Button";
-import { sendEvent } from "~/renderer/events";
 
 type ScreenProps = {
   t: TFunction,
+  sendEvent: string => void,
 };
 
 export function AccessYourCoins({ t }: ScreenProps) {
@@ -111,6 +111,7 @@ export function ValidateTransactions({ t }: ScreenProps) {
 }
 
 export function SetUpNanoWallet({ t, sendEvent }: ScreenProps) {
+  const onClick = useCallback(() => sendEvent("DONE"), [sendEvent]);
   return (
     <React.Fragment>
       <Text
@@ -132,7 +133,7 @@ export function SetUpNanoWallet({ t, sendEvent }: ScreenProps) {
       >
         {t("onboarding.pedagogy.screens.setUpNanoWallet.description")}
       </Text>
-      <Button primary onClick={() => sendEvent("DONE")}>
+      <Button primary onClick={onClick}>
         <Text ff="Inter|SemiBold" fontSize="12px">
           {t("onboarding.pedagogy.screens.setUpNanoWallet.CTA")}
         </Text>

@@ -110,7 +110,7 @@ const DrawerContainer = styled.div`
 type DrawerProps = {
   children?: React$Node,
   isOpen?: boolean,
-  onRequestClose?: () => void,
+  onRequestClose?: (*) => void,
   direction?: "right" | "left",
 };
 
@@ -198,6 +198,7 @@ export function SideDrawer({
         </DrawerContainer>
       )}
     </Transition>,
+    // $FlowFixMe
     document.getElementById("modals"),
   );
 }

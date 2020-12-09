@@ -2,17 +2,17 @@
 
 import React, { useCallback } from "react";
 import { useTranslation, Trans } from "react-i18next";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
 import Button from "~/renderer/components/Button";
-import Link from "~/renderer/components/Link";
 import { openURL } from "~/renderer/linking";
 import { Computer } from "./assets/Computer";
 import { Wave } from "./assets/Wave";
 import LangSwitcher from "~/renderer/components/Onboarding/LangSwitcher";
 import { urls } from "~/config/urls";
 
-const WelcomeContainer = styled.div`
+const WelcomeContainer: ThemedComponent<*> = styled.div`
   height: 100%;
   width: 100%;
   display: flex;

@@ -2,16 +2,16 @@
 
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
-
-import quizSuccess from "../assets/quizSuccess.svg";
-import { useTranslation } from "react-i18next";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
+import quizSuccess from "../assets/quizSuccess.svg";
 import { ContentContainer, Illustration } from "../shared";
 
-const ScreenContainer = styled.div`
+const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -28,7 +28,12 @@ const ContentFooter = styled.div`
   justify-content: space-between;
 `;
 
-export function QuizSuccess({ sendEvent, context }) {
+type Props = {
+  sendEvent: (string, *) => void,
+  context: {},
+};
+
+export function QuizSuccess({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   console.log(context);
 
@@ -63,11 +68,7 @@ export function QuizSuccess({ sendEvent, context }) {
             {t("onboarding.screens.tutorial.screens.quizSuccess.buttons.prev")}
           </Text>
         </Button>
-        <Button
-          inverted
-          primary
-          onClick={() => sendEvent("NEXT")}
-        >
+        <Button inverted primary onClick={() => sendEvent("NEXT")}>
           <Text mr="12px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.quizSuccess.buttons.next")}
           </Text>

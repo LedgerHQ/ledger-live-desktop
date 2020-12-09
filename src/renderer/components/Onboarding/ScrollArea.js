@@ -2,8 +2,9 @@
 
 import React, { useCallback, useState } from "react";
 import styled, { keyframes } from "styled-components";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const ScrollAreaContainer = styled.div`
+const ScrollAreaContainer: ThemedComponent<*> = styled.div`
   height: 100%;
   width: 100%;
   overflow-y: hidden;

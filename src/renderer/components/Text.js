@@ -24,7 +24,7 @@ const uppercase = system({
 
 const Text: ThemedComponent<{
   fontFamily?: string,
-  fontSize?: number,
+  fontSize?: number | string,
   textAlign?: string,
   color?: string,
   fontWeight?: string,

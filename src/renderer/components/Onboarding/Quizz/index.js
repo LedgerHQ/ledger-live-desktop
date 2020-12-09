@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useMachine } from "@xstate/react";
 import { useTranslation } from "react-i18next";
 import { CSSTransition } from "react-transition-group";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Question } from "./screens/Question";
 import { Result } from "./screens/Result";
 import { quizzMachine } from "~/renderer/components/Onboarding/Quizz/state";
@@ -44,7 +45,7 @@ const ScreenContainer = styled.div`
   }
 `;
 
-const QuizzContainer = styled.div`
+const QuizzContainer: ThemedComponent<*> = styled.div`
   box-sizing: border-box;
   width: 680px;
   height: 480px;

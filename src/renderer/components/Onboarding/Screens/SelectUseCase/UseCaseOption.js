@@ -2,6 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 
 const IllustrationContainer = styled.div`
@@ -10,7 +11,7 @@ const IllustrationContainer = styled.div`
   transition: transform 150ms ease-in-out;
 `;
 
-const UseCaseOptionContainer = styled.button`
+const UseCaseOptionContainer: ThemedComponent<*> = styled.button`
   border: none;
   outline: none;
   width: 272px;
@@ -42,7 +43,7 @@ type UseCaseOptionProps = {
   heading: string,
   title: string,
   description: string,
-  Illu: React.Component<any>,
+  Illu: React$Node,
   onClick: () => void,
 };
 
@@ -65,9 +66,7 @@ export function UseCaseOption({ heading, title, description, Illu, onClick }: Us
       <Text mb="8px" color="palette.text.shade100" ff="Inter|Regular" fontSize="13px">
         {description}
       </Text>
-      <IllustrationContainer>
-        <Illu />
-      </IllustrationContainer>
+      <IllustrationContainer>{Illu}</IllustrationContainer>
     </UseCaseOptionContainer>
   );
 }

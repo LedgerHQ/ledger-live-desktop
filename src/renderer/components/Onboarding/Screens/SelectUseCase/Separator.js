@@ -2,9 +2,10 @@
 
 import React from "react";
 import styled from "styled-components";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 
-const SeparatorContainer = styled.div`
+const SeparatorContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: row;
   padding: 50px 0px;

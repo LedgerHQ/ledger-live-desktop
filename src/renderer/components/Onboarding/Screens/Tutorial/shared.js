@@ -1,8 +1,8 @@
 // @flow
-
 import styled from "styled-components";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-export const WaveContainer = styled.div`
+export const WaveContainer: ThemedComponent<*> = styled.div`
   position: absolute;
   left: 0;
   right: 0;
@@ -10,7 +10,7 @@ export const WaveContainer = styled.div`
   height: 500px;
 `;
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer: ThemedComponent<*> = styled.div`
   margin-bottom: 40px;
   display: flex;
   flex-direction: row;
@@ -22,14 +22,14 @@ export const HeaderContainer = styled.div`
   padding: 40px 80px;
 `;
 
-export const Illustration = styled.div`
+export const Illustration: ThemedComponent<*> = styled.div`
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
   background: url(${({ src }) => src}) no-repeat center;
   margin: auto;
 `;
 
-export const ContentContainer = styled.div`
+export const ContentContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 576px;

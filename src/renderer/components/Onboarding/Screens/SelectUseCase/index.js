@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
@@ -74,7 +74,11 @@ const TopRightContainer = styled.div`
   top: 40px;
 `;
 
-export function SelectUseCase({ sendEvent }) {
+type Props = {
+  sendEvent: string => void,
+};
+
+export function SelectUseCase({ sendEvent }: Props) {
   const { t } = useTranslation();
 
   return (
@@ -99,7 +103,7 @@ export function SelectUseCase({ sendEvent }) {
               heading={t("onboarding.screens.selectUseCase.options.1.heading")}
               title={t("onboarding.screens.selectUseCase.options.1.title")}
               description={t("onboarding.screens.selectUseCase.options.1.description")}
-              Illu={NanoBox}
+              Illu={<NanoBox />}
               onClick={() => sendEvent("OPEN_PEDAGOGY_MODAL")}
             />
           </RightColumn>
@@ -116,14 +120,14 @@ export function SelectUseCase({ sendEvent }) {
               heading={t("onboarding.screens.selectUseCase.options.2.heading")}
               title={t("onboarding.screens.selectUseCase.options.2.title")}
               description={t("onboarding.screens.selectUseCase.options.2.description")}
-              Illu={DeviceConnect}
+              Illu={<DeviceConnect />}
               onClick={() => sendEvent("CONNECT_SETUP_DEVICE")}
             />
             <UseCaseOption
               heading={t("onboarding.screens.selectUseCase.options.3.heading")}
               title={t("onboarding.screens.selectUseCase.options.3.title")}
               description={t("onboarding.screens.selectUseCase.options.3.description")}
-              Illu={ImportRecovery}
+              Illu={<ImportRecovery />}
               onClick={() => sendEvent("USE_RECOVERY_PHRASE")}
             />
           </RightColumn>

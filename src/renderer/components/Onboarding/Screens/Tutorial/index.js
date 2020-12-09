@@ -2,15 +2,16 @@
 
 import React from "react";
 import styled from "styled-components";
+import { useMachine } from "@xstate/react";
+import { CSSTransition } from "react-transition-group";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Stepper } from "~/renderer/components/Onboarding/Screens/Tutorial/Stepper";
 import { ImportYourRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/ImportYourRecoveryPhrase";
 import { DeviceHowTo } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/DeviceHowTo";
 import { PinCode } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PinCode";
 import { PinCodeHowTo } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PinCodeHowTo";
-import { useMachine } from "@xstate/react";
 import { useRecoveryPhraseMachine } from "~/renderer/components/Onboarding/Screens/Tutorial/machines/useRecoveryPhrase";
 import { setupNewDevice } from "~/renderer/components/Onboarding/Screens/Tutorial/machines/setupNewDevice";
-import { CSSTransition } from "react-transition-group";
 import { ExistingRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/ExistingRecoveryPhrase";
 import { RecoveryHowTo2 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo2";
 import { RecoveryHowTo1 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo1";
@@ -34,7 +35,7 @@ import { Quizz } from "~/renderer/components/Onboarding/Quizz";
 import { QuizFailure } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/QuizFailure";
 import { QuizSuccess } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/QuizSuccess";
 
-const TutorialContainer = styled.div`
+const TutorialContainer: ThemedComponent<*> = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
@@ -148,19 +149,24 @@ const screens = {
   },
 };
 
-export function ConnectSetUpDevice({ sendEvent, context }) {
+type Props = {
+  sendEvent: ({ type: string, [string]: * } | string, *) => void,
+  context: *,
+};
+
+export function ConnectSetUpDevice({ sendEvent, context }: Props) {
   return (
     <Tutorial sendEventToParent={sendEvent} machine={connectSetupDevice} parentContext={context} />
   );
 }
 
-export function SetupNewDevice({ sendEvent, context }) {
+export function SetupNewDevice({ sendEvent, context }: Props) {
   return (
     <Tutorial sendEventToParent={sendEvent} machine={setupNewDevice} parentContext={context} />
   );
 }
 
-export function UseRecoveryPhrase({ sendEvent, context }) {
+export function UseRecoveryPhrase({ sendEvent, context }: Props) {
   return (
     <Tutorial
       sendEventToParent={sendEvent}
@@ -170,7 +176,13 @@ export function UseRecoveryPhrase({ sendEvent, context }) {
   );
 }
 
-function Tutorial({ sendEventToParent, machine, parentContext }) {
+type TutorialProps = {
+  sendEventToParent: ({ type: string, [string]: * } | string, *) => void,
+  machine: *,
+  parentContext: *,
+};
+
+function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) {
   const [state, sendEvent] = useMachine(machine, {
     actions: {
       topLevelPrev: () => sendEventToParent("PREV"),

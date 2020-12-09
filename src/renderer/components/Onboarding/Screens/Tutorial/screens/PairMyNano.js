@@ -2,10 +2,10 @@
 
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
-
-import { useTranslation } from "react-i18next";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
@@ -16,7 +16,7 @@ import {
 } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import nanoPlug from "~/renderer/components/Onboarding/Screens/Tutorial/assets/nanoPlug.svg";
 
-const ScreenContainer = styled.div`
+const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -33,7 +33,12 @@ const ContentFooter = styled.div`
   justify-content: space-between;
 `;
 
-export function PairMyNano({ sendEvent, context }) {
+type Props = {
+  sendEvent: (string, *) => void,
+  context: {},
+};
+
+export function PairMyNano({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   console.log(context);
 

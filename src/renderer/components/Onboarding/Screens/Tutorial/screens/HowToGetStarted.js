@@ -2,18 +2,18 @@
 
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import hourglass from "../assets/hourglass.svg";
 import { Illustration, ContentContainer } from "../shared";
-
-import { useTranslation } from "react-i18next";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import Clock from "~/renderer/icons/Clock";
 import Pen from "~/renderer/icons/Pen";
 import Flower from "~/renderer/icons/Flower";
 
-const ScreenContainer = styled.div`
+const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -48,7 +48,11 @@ const IconContainer = styled.div`
   align-items: center;
 `;
 
-export function HowToGetStarted({ sendEvent }) {
+type Props = {
+  sendEvent: (string, *) => void,
+};
+
+export function HowToGetStarted({ sendEvent }: Props) {
   const { t } = useTranslation();
 
   return (

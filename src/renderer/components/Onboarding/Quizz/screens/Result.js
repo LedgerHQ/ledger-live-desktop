@@ -2,6 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
+import type { TFunction } from "react-i18next";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import failIllu from "../assets/answerFail.svg";
@@ -14,7 +15,20 @@ const Illu = styled.div`
   height: 132px;
 `;
 
-export function Result({ sendEvent, t, meta, state }) {
+type Props = {
+  sendEvent: string => void,
+  t: TFunction,
+  state: {
+    value: string,
+    context: *,
+  },
+  meta: {
+    text: string,
+    answers: { text: string }[],
+  },
+};
+
+export function Result({ sendEvent, t, meta, state }: Props) {
   const result = state.context.results[state.value];
 
   console.log(result, meta);

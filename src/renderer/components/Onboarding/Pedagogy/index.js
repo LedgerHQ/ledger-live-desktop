@@ -2,6 +2,7 @@
 
 import React, { useEffect, useCallback } from "react";
 import styled, { css } from "styled-components";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Wave } from "~/renderer/components/Onboarding/Pedagogy/assets/Wave";
 import WtfIsThis from "./assets/WtfIsThis.svg";
 import Text from "~/renderer/components/Text";
@@ -9,7 +10,7 @@ import ChevronLeft from "~/renderer/icons/ChevronLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import { useMachine } from "@xstate/react";
 import { useTranslation } from "react-i18next";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import {
   AccessYourCoins,
   OwnYourPrivateKey,
@@ -19,7 +20,7 @@ import {
 } from "~/renderer/components/Onboarding/Pedagogy/screens";
 import { pedagogyMachine } from "~/renderer/components/Onboarding/Pedagogy/state";
 
-const PedagogyContainer = styled.div`
+const PedagogyContainer: ThemedComponent<*> = styled.div`
   box-sizing: border-box;
   padding: 0px 67px;
   width: 680px;

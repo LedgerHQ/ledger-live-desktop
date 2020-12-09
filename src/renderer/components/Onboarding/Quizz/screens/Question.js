@@ -2,6 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
+import type { TFunction } from "react-i18next";
 import WtfIsThis from "~/renderer/components/Onboarding/Quizz/assets/WtfIsThis.svg";
 import { Wave } from "../assets/Wave";
 import Text from "~/renderer/components/Text";
@@ -47,9 +48,18 @@ const AnswerButton = styled.div`
   }
 `;
 
-export function Question({ sendEvent, t, meta }) {
+type Props = {
+  sendEvent: ({ type: string, answerIndex: number }) => void,
+  t: TFunction,
+  meta: {
+    text: string,
+    answers: { text: string }[],
+  },
+};
+
+export function Question({ sendEvent, t, meta }: Props) {
   return (
-    <React.Fragment>
+    <>
       <Text
         mt="72px"
         mb="8px"
@@ -85,6 +95,6 @@ export function Question({ sendEvent, t, meta }) {
         <Wave />
       </WaveContainer>
       <SecurityContainer />
-    </React.Fragment>
+    </>
   );
 }

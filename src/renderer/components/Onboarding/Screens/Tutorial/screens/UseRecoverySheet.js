@@ -2,17 +2,17 @@
 
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
-
-import { useTranslation } from "react-i18next";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import { ContentContainer, HeaderContainer, Illustration } from "../shared";
 import recoverySheet from "~/renderer/components/Onboarding/Screens/Tutorial/assets/recoverySheet.svg";
 
-const ScreenContainer = styled.div`
+const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -54,7 +54,7 @@ const StepTextContainer = styled.div`
 
 type StepProps = {
   title: string,
-  descr: string,
+  descr?: string,
   index: number,
 };
 
@@ -119,7 +119,11 @@ const steps = [
   },
 ];
 
-export function UseRecoverySheet({ sendEvent }) {
+type Props = {
+  sendEvent: (string, *) => void,
+};
+
+export function UseRecoverySheet({ sendEvent }: Props) {
   const { t } = useTranslation();
 
   return (

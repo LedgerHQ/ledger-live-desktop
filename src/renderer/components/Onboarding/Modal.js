@@ -165,7 +165,7 @@ const ModalContainer = styled.div`
 type ModalProps = {
   children?: React$Node,
   isOpen?: boolean,
-  onRequestClose?: () => void,
+  onRequestClose?: (*) => void,
 };
 
 export function Modal({ children, isOpen = false, onRequestClose }: ModalProps) {
@@ -251,6 +251,7 @@ export function Modal({ children, isOpen = false, onRequestClose }: ModalProps) 
         <ModalBackdrop onClick={onRequestClose || undefined} />
       </ModalContainer>
     </CSSTransition>,
+    // $FlowFixMe
     document.getElementById("modals"),
   );
 }

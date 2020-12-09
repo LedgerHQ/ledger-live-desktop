@@ -2,12 +2,14 @@
 
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import Text from "~/renderer/components/Text";
 import styled from "styled-components";
-import { DeviceSelector } from "./DeviceSelector";
+import type { DeviceModelId } from "@ledgerhq/devices";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
+import { DeviceSelector } from "./DeviceSelector";
 
-const SelectDeviceContainer = styled.div`
+const SelectDeviceContainer: ThemedComponent<*> = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
@@ -22,12 +24,19 @@ const TopRightContainer = styled.div`
   top: 40px;
 `;
 
-export function SelectDevice({ sendEvent }) {
+type Props = {
+  sendEvent: ({ type: string, deviceId: DeviceModelId } | string) => void,
+};
+
+export function SelectDevice({ sendEvent }: Props) {
   const { t } = useTranslation();
 
-  const handleDeviceSelect = useCallback((deviceId: string) => {
-    sendEvent({ type: "DEVICE_SELECTED", deviceId });
-  }, []);
+  const handleDeviceSelect = useCallback(
+    (deviceId: DeviceModelId) => {
+      sendEvent({ type: "DEVICE_SELECTED", deviceId });
+    },
+    [sendEvent],
+  );
 
   return (
     <SelectDeviceContainer>

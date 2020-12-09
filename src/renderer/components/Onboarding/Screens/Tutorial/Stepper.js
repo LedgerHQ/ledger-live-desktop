@@ -2,12 +2,13 @@
 
 import React from "react";
 import styled, { css } from "styled-components";
+import { useTranslation } from "react-i18next";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 import IconCheck from "~/renderer/icons/Check";
 import IconDot from "~/renderer/icons/Dot";
-import { useTranslation } from "react-i18next";
 
-const StepperContainer = styled.div`
+const StepperContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -92,14 +93,20 @@ const StepSeparator = styled.div`
   }};
 `;
 
-type StepperProps = {
-  steps: [{ label: string, id: string, status: string, active: boolean }],
+type StepMeta = { label: string, id: string, status: string, active: boolean };
+
+type StepProps = StepMeta & {
+  hasSeparator: boolean,
 };
 
-function Step({ label, status, hasSeparator }) {
+type StepperProps = {
+  steps: StepMeta[],
+};
+
+function Step({ label, status, hasSeparator }: StepProps) {
   console.log(status);
   return (
-    <React.Fragment>
+    <>
       <StepContainer status={status}>
         <StepIconContainer status={status}>
           {status === "success" ? (
@@ -123,7 +130,7 @@ function Step({ label, status, hasSeparator }) {
         </Text>
       </StepContainer>
       {hasSeparator ? <StepSeparator status={status} /> : null}
-    </React.Fragment>
+    </>
   );
 }
 
@@ -135,6 +142,7 @@ export function Stepper({ steps }: StepperProps) {
       {steps.map((step, index) => (
         <Step
           key={step.id}
+          id={step.id}
           label={t(`onboarding.screens.tutorial.steps.${step.id}`)}
           status={step.status}
           active={step.active}

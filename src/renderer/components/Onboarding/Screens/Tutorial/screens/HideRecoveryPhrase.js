@@ -2,10 +2,10 @@
 
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
-
-import { useTranslation } from "react-i18next";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import EyeOff from "~/renderer/icons/EyeOff";
 import CameraOff from "~/renderer/icons/CameraOff";
@@ -13,7 +13,7 @@ import InfoCircle from "~/renderer/icons/InfoCircle";
 import { HeaderContainer, Illustration, ContentContainer } from "../shared";
 import hideSeed from "~/renderer/components/Onboarding/Screens/Tutorial/assets/hideSeed.svg";
 
-const ScreenContainer = styled.div`
+const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -47,7 +47,12 @@ const IconContainer = styled.div`
   align-items: center;
 `;
 
-export function HideRecoveryPhrase({ sendEvent, context }) {
+type Props = {
+  sendEvent: (string, *) => void,
+  context: {},
+};
+
+export function HideRecoveryPhrase({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   console.log(context);
 

@@ -1,15 +1,16 @@
 // @flow
 
 import React from "react";
-import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import type { DeviceModelId } from "@ledgerhq/devices";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import nanoX from "./assets/nanoX.svg";
 import nanoS from "./assets/nanoS.svg";
 import nanoBlue from "./assets/nanoBlue.svg";
 
 import { DeviceSelectorOption } from "./DeviceSelectorOption";
 
-const DeviceSelectContainer = styled.div`
+const DeviceSelectContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: row;
 
@@ -63,16 +64,14 @@ const devices = [
 ];
 
 type DeviceSelectorProps = {
-  onClick: string => void,
+  onClick: DeviceModelId => void,
 };
 
 export function DeviceSelector({ onClick }: DeviceSelectorProps) {
-  const { t } = useTranslation();
-
   return (
     <DeviceSelectContainer>
       {devices.map(({ id, label, Illu }) => (
-        <DeviceSelectorOption key={id} label={label} Illu={Illu} onClick={() => onClick(id)} />
+        <DeviceSelectorOption key={id} label={label} Illu={<Illu />} onClick={() => onClick(id)} />
       ))}
     </DeviceSelectContainer>
   );

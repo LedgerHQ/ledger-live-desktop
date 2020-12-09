@@ -2,6 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 
 const DeviceIllustrationContainer = styled.div`
@@ -14,7 +15,7 @@ const DeviceIllustrationContainer = styled.div`
   display: flex;
 `;
 
-const DeviceSelectOptionContainer = styled.button`
+const DeviceSelectOptionContainer: ThemedComponent<*> = styled.button`
   border: none;
   outline: none;
   width: 152px;
@@ -44,7 +45,7 @@ const DeviceSelectOptionContainer = styled.button`
 
 type DeviceSelectOptionProps = {
   label: string,
-  Illu: React.Component<any>,
+  Illu: React$Node,
   onClick: () => void,
 };
 
@@ -54,9 +55,7 @@ export function DeviceSelectorOption({ label, Illu, onClick }: DeviceSelectOptio
       <Text mt={"32px"} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={"22px"}>
         {label}
       </Text>
-      <DeviceIllustrationContainer>
-        <Illu />
-      </DeviceIllustrationContainer>
+      <DeviceIllustrationContainer>{Illu}</DeviceIllustrationContainer>
     </DeviceSelectOptionContainer>
   );
 }
