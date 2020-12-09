@@ -1,19 +1,20 @@
 // @flow
 
 import React, { useCallback } from "react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import Lottie from "react-lottie";
 import type { DeviceModelId } from "@ledgerhq/devices";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import styled from "styled-components";
+import Lottie from "react-lottie";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
-import { HeaderContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
-import NanoSAnim from "../assets/animations/nanoS/pin-code.json";
-import NanoXAnim from "../assets/animations/nanoX/pin-code.json";
+
+import { ContentContainer, HeaderContainer } from "../shared";
+import NanoSAnim from "../assets/animations/nanoS/recover.json";
+import NanoXAnim from "../assets/animations/nanoX/recover.json";
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
@@ -23,13 +24,6 @@ const ScreenContainer: ThemedComponent<*> = styled.div`
   align-items: center;
   padding: 40px 80px;
   box-sizing: border-box;
-`;
-
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 576px;
-  width: 100%;
 `;
 
 const ContentFooter = styled.div`
@@ -64,7 +58,7 @@ const StepTextContainer = styled.div`
 
 type StepProps = {
   title: string,
-  descr: string,
+  descr?: string,
   index: number,
 };
 
@@ -80,15 +74,17 @@ function Step({ title, descr, index }: StepProps) {
         <Text color="palette.text.shade100" ff="Inter|SemiBold" fontSize={5} lineHeight="19.36px">
           {title}
         </Text>
-        <Text
-          mt="8px"
-          color="palette.text.shade100"
-          ff="Inter|Regular"
-          fontSize={4}
-          lineHeight="19.5px"
-        >
-          {descr}
-        </Text>
+        {descr ? (
+          <Text
+            mt="8px"
+            color="palette.text.shade100"
+            ff="Inter|Regular"
+            fontSize={4}
+            lineHeight="19.5px"
+          >
+            {descr}
+          </Text>
+        ) : null}
       </StepTextContainer>
     </StepContainer>
   );
@@ -113,12 +109,15 @@ const StepList = styled.div`
 
 const steps = [
   {
-    titleKey: "onboarding.screens.tutorial.screens.pinCodeHowTo.setUp.title",
-    descrKey: "onboarding.screens.tutorial.screens.pinCodeHowTo.setUp.descr",
+    titleKey: "onboarding.screens.tutorial.screens.recoveryHowTo.enterWord.title",
+    descrKey: "onboarding.screens.tutorial.screens.recoveryHowTo.enterWord.descr",
   },
   {
-    titleKey: "onboarding.screens.tutorial.screens.pinCodeHowTo.confirm.title",
-    descrKey: "onboarding.screens.tutorial.screens.pinCodeHowTo.confirm.descr",
+    titleKey: "onboarding.screens.tutorial.screens.recoveryHowTo.validateWord.title",
+    descrKey: "onboarding.screens.tutorial.screens.recoveryHowTo.validateWord.descr",
+  },
+  {
+    titleKey: "onboarding.screens.tutorial.screens.recoveryHowTo.andNext.title",
   },
 ];
 
@@ -129,7 +128,7 @@ type Props = {
   },
 };
 
-export function PinCodeHowTo({ sendEvent, context }: Props) {
+export function RecoveryHowTo2({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   const { deviceId } = context;
 
@@ -152,7 +151,7 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
         <HeaderContainer>
           <Button color="palette.primary.main" onClick={onClickHelp}>
             <Text mr="8px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
-              {t("onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.help")}
+              {t("onboarding.screens.tutorial.screens.recoveryHowTo.buttons.help")}
             </Text>
             <InfoCircle size={22} />
           </Button>
@@ -160,7 +159,12 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
         <Lottie options={defaultOptions} height={130} />
         <StepList>
           {steps.map((step, index) => (
-            <Step key={index} title={t(step.titleKey)} descr={t(step.descrKey)} index={index + 1} />
+            <Step
+              key={index}
+              title={t(step.titleKey)}
+              descr={step.descrKey ? t(step.descrKey) : undefined}
+              index={index + 1 + 2}
+            />
           ))}
         </StepList>
       </ContentContainer>
@@ -168,12 +172,12 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
         <Button color="palette.text.shade30" onClick={onClickPrev}>
           <ArrowLeft />
           <Text ml="9px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
-            {t("onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.prev")}
+            {t("onboarding.screens.tutorial.screens.recoveryHowTo.buttons.prev")}
           </Text>
         </Button>
         <Button primary onClick={onClickNext}>
           <Text mr="12px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
-            {t("onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.next")}
+            {t("onboarding.screens.tutorial.screens.recoveryHowTo.buttons.next")}
           </Text>
           <ChevronRight size={13} />
         </Button>

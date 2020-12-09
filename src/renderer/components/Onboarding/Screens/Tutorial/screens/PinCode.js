@@ -1,20 +1,21 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import type { DeviceModelId } from "@ledgerhq/devices";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import CheckBox from "~/renderer/components/CheckBox";
-
-import pinCode from "../assets/pinCode.svg";
-import { useTranslation } from "react-i18next";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import Box from "~/renderer/components/Box";
 import InfoCircle from "~/renderer/icons/InfoCircle";
+import pinCode from "../assets/pinCode.svg";
 import { HeaderContainer, ContentContainer, Illustration } from "../shared";
 
-const ScreenContainer = styled.div`
+const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -31,16 +32,31 @@ const ContentFooter = styled.div`
   justify-content: space-between;
 `;
 
-export function PinCode({ sendEvent, context }) {
+type Props = {
+  sendEvent: (string, *) => void,
+  context: {
+    userChosePincodeHimself: boolean,
+  },
+};
+
+export function PinCode({ sendEvent, context }: Props) {
   const { t } = useTranslation();
-  console.log(context);
+  const { userChosePincodeHimself } = context;
+
+  const onClickHelp = useCallback(() => sendEvent("HELP"), [sendEvent]);
+  const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
+  const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
+  const onClickTermsChange = useCallback(
+    () => sendEvent("PINCODE_TERMS_CHANGED", { value: !userChosePincodeHimself }),
+    [sendEvent, userChosePincodeHimself],
+  );
 
   return (
     <ScreenContainer>
       <ContentContainer>
         <HeaderContainer>
-          <Button color="palette.primary.contrastText" onClick={() => sendEvent("HELP")}>
-            <Text mr="8px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+          <Button color="palette.primary.contrastText" onClick={onClickHelp}>
+            <Text mr="8px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
               {t("onboarding.screens.tutorial.screens.pinCode.buttons.help")}
             </Text>
             <InfoCircle size={22} />
@@ -48,10 +64,10 @@ export function PinCode({ sendEvent, context }) {
         </HeaderContainer>
         <Illustration width={456} height={277} src={pinCode} />
         <Text
-          mt="32px"
+          style={{ marginTop: 32 }}
           color="palette.primary.contrastText"
           ff="Inter|SemiBold"
-          fontSize="32px"
+          fontSize={8}
           lineHeight="38.73px"
         >
           {t("onboarding.screens.tutorial.screens.pinCode.title")}
@@ -61,25 +77,23 @@ export function PinCode({ sendEvent, context }) {
           mb="40px"
           color="palette.primary.contrastText"
           ff="Inter|SemiBold"
-          fontSize="18px"
+          fontSize={6}
           lineHeight="21.78px"
         >
           {t("onboarding.screens.tutorial.screens.pinCode.paragraph")}
         </Text>
         <Box
           horizontal
-          onClick={() =>
-            sendEvent("PINCODE_TERMS_CHANGED", { value: !context.userChosePincodeHimself })
-          }
+          onClick={onClickTermsChange}
           style={{
             cursor: "pointer",
           }}
         >
-          <CheckBox isChecked={context.userChosePincodeHimself} inverted />
+          <CheckBox isChecked={userChosePincodeHimself} inverted />
           <Text
             color="palette.primary.contrastText"
             ff="Inter|Regular"
-            fontSize="13px"
+            fontSize={4}
             lineHeight="19.5px"
             ml="16px"
           >
@@ -88,19 +102,14 @@ export function PinCode({ sendEvent, context }) {
         </Box>
       </ContentContainer>
       <ContentFooter>
-        <Button color="palette.primary.contrastText" onClick={() => sendEvent("PREV")}>
+        <Button color="palette.primary.contrastText" onClick={onClickPrev}>
           <ArrowLeft />
-          <Text ml="9px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+          <Text ml="9px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.pinCode.buttons.prev")}
           </Text>
         </Button>
-        <Button
-          inverted
-          disabled={!context.userChosePincodeHimself}
-          primary
-          onClick={() => sendEvent("NEXT")}
-        >
-          <Text mr="12px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+        <Button inverted disabled={!userChosePincodeHimself} primary onClick={onClickNext}>
+          <Text mr="12px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.pinCode.buttons.next")}
           </Text>
           <ChevronRight size={12} />

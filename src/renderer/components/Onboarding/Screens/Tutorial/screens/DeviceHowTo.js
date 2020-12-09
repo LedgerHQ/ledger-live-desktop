@@ -1,24 +1,20 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import Lottie from "react-lottie";
+import type { DeviceModelId } from "@ledgerhq/devices";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
-
-import nanoXFlat from "../assets/nanoXFlat.svg";
-import { useTranslation } from "react-i18next";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
+import NanoSAnim from "../assets/animations/nanoS/power-on.json";
+import NanoXAnim from "../assets/animations/nanoX/power-on.json";
 import { ContentContainer } from "../shared";
 
-const DevicePlaceholder = styled.div`
-  background: url(${nanoXFlat}) center no-repeat;
-  height: 77px;
-  margin-top: 147px;
-  margin-bottom: 32px;
-`;
-
-const ScreenContainer = styled.div`
+const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -68,24 +64,19 @@ function Step({ title, descr, index }: StepProps) {
   return (
     <StepContainer>
       <StepIndexContainer>
-        <Text ff="Inter|Bold" fontSize="10px" lineHeight="12.1px">
+        <Text ff="Inter|Bold" fontSize={2} lineHeight="12.1px">
           {index}
         </Text>
       </StepIndexContainer>
       <StepTextContainer>
-        <Text
-          color="palette.text.shade100"
-          ff="Inter|SemiBold"
-          fontSize="16px"
-          lineHeight="19.36px"
-        >
+        <Text color="palette.text.shade100" ff="Inter|SemiBold" fontSize={5} lineHeight="19.36px">
           {title}
         </Text>
         <Text
-          mt="8px"
+          style={{ marginTop: 8 }}
           color="palette.text.shade100"
           ff="Inter|Regular"
-          fontSize="13px"
+          fontSize={4}
           lineHeight="19.5px"
         >
           {descr}
@@ -98,7 +89,7 @@ function Step({ title, descr, index }: StepProps) {
 const StepList = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 32px;
+  margin-top: 64px;
   & > * {
     margin: 12px 0px;
   }
@@ -131,13 +122,33 @@ const steps = [
   },
 ];
 
-export function DeviceHowTo({ sendEvent }) {
+type Props = {
+  sendEvent: string => void,
+  context: {
+    deviceId: DeviceModelId,
+  },
+};
+
+export function DeviceHowTo({ sendEvent, context }: Props) {
   const { t } = useTranslation();
+  const { deviceId } = context;
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: deviceId === "nanoX" ? NanoXAnim : NanoSAnim,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+  const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
+  const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
 
   return (
     <ScreenContainer>
-      <ContentContainer>
-        <DevicePlaceholder />
+      <ContentContainer style={{ marginTop: 94 }}>
+        <Lottie options={defaultOptions} height={130} />
         <StepList>
           {steps.map((step, index) => (
             <Step key={index} title={t(step.titleKey)} descr={t(step.descrKey)} index={index + 1} />
@@ -145,18 +156,14 @@ export function DeviceHowTo({ sendEvent }) {
         </StepList>
       </ContentContainer>
       <ContentFooter>
-        <Button
-          id="tutorial-prev-button"
-          color="palette.text.shade30"
-          onClick={() => sendEvent("PREV")}
-        >
+        <Button color="palette.text.shade30" onClick={onClickPrev}>
           <ArrowLeft />
-          <Text ml="9px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+          <Text ml="9px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.deviceHowTo.buttons.prev")}
           </Text>
         </Button>
-        <Button id="tutorial-next-button" primary onClick={() => sendEvent("NEXT")}>
-          <Text mr="12px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
+        <Button primary onClick={onClickNext}>
+          <Text mr="12px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.deviceHowTo.buttons.next")}
           </Text>
           <ChevronRight size={13} />

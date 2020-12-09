@@ -18,7 +18,7 @@ type Props = {
   renderIcon?: Function,
   confirmText?: React$Node,
   cancelText?: React$Node,
-  onReject: Function,
+  onReject?: Function,
   onClose?: Function,
   onConfirm: Function,
   isLoading?: boolean,
@@ -71,7 +71,7 @@ const ConfirmModal = ({
         title={title}
         renderFooter={() => (
           <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
-            {!isLoading && (
+            {!isLoading && onReject && (
               <Button onClick={onReject} id="modal-cancel-button">
                 {realCancelText}
               </Button>
