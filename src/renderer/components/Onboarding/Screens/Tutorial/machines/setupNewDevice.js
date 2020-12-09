@@ -314,6 +314,7 @@ export const setupNewDevice = Machine({
         },
         NEXT: {
           cond: context => context.deviceIsGenuine,
+          actions: ["topLevelNext"],
         },
         PREV: {
           target: "pairMyNano",

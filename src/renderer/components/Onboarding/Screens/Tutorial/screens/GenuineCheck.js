@@ -95,8 +95,6 @@ export function GenuineCheck({ sendEvent, context }: Props) {
   const { deviceIsGenuine, deviceId } = context;
   const [device, setDevice] = useState(null);
 
-  console.log(context);
-
   const onResult = useCallback(
     res => {
       setDevice(res.device);

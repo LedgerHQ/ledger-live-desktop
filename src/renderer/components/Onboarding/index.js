@@ -115,12 +115,18 @@ const onboardingMachine = Machine({
         PREV: {
           target: "selectUseCase",
         },
+        NEXT: {
+          target: "onboardingComplete",
+        },
       },
     },
     connectSetupDevice: {
       on: {
         PREV: {
           target: "selectUseCase",
+        },
+        NEXT: {
+          target: "onboardingComplete",
         },
       },
     },
@@ -129,7 +135,14 @@ const onboardingMachine = Machine({
         PREV: {
           target: "selectUseCase",
         },
+        NEXT: {
+          target: "onboardingComplete",
+        },
       },
+    },
+    onboardingComplete: {
+      type: "final",
+      entry: "onboardingCompleted",
     },
   },
 });
@@ -160,8 +173,15 @@ const ScreenContainer = styled.div`
   }
 `;
 
-export function Onboarding() {
-  const [state, sendEvent] = useMachine(onboardingMachine);
+export function Onboarding({ saveSettings, relaunchOnboarding }) {
+  const [state, sendEvent] = useMachine(onboardingMachine, {
+    actions: {
+      onboardingCompleted: () => {
+        saveSettings({ hasCompletedOnboarding: true });
+        relaunchOnboarding(false);
+      },
+    },
+  });
 
   const CurrentScreen = screens[state.value];
 

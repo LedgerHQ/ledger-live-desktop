@@ -145,13 +145,17 @@ export function DeviceHowTo({ sendEvent }) {
         </StepList>
       </ContentContainer>
       <ContentFooter>
-        <Button color="palette.text.shade30" onClick={() => sendEvent("PREV")}>
+        <Button
+          id="tutorial-prev-button"
+          color="palette.text.shade30"
+          onClick={() => sendEvent("PREV")}
+        >
           <ArrowLeft />
           <Text ml="9px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.deviceHowTo.buttons.prev")}
           </Text>
         </Button>
-        <Button primary onClick={() => sendEvent("NEXT")}>
+        <Button id="tutorial-next-button" primary onClick={() => sendEvent("NEXT")}>
           <Text mr="12px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.deviceHowTo.buttons.next")}
           </Text>

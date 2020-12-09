@@ -174,6 +174,7 @@ function Tutorial({ sendEventToParent, machine, parentContext }) {
   const [state, sendEvent] = useMachine(machine, {
     actions: {
       topLevelPrev: () => sendEventToParent("PREV"),
+      topLevelNext: () => sendEventToParent("NEXT"),
     },
     context: {
       deviceId: parentContext.deviceId,

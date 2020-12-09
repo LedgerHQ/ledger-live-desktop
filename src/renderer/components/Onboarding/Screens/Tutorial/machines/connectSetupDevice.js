@@ -65,6 +65,7 @@ export const connectSetupDevice = Machine({
         },
         NEXT: {
           cond: context => context.deviceId,
+          actions: ["topLevelNext"],
         },
         PREV: {
           target: "pairMyNano",
