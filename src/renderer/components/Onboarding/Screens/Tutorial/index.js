@@ -16,9 +16,9 @@ import { RecoveryHowTo2 } from "~/renderer/components/Onboarding/Screens/Tutoria
 import { RecoveryHowTo1 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo1";
 import { PairMyNano } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PairMyNano";
 import { SideDrawer } from "~/renderer/components/Onboarding/SideDrawer";
-import { PinHelp } from "~/renderer/components/Onboarding/help/PinHelp";
-import { HideRecoverySeed } from "~/renderer/components/Onboarding/help/HideRecoverySeed";
-import { RecoverySeed } from "~/renderer/components/Onboarding/help/RecoverySeed";
+import { PinHelp } from "~/renderer/components/Onboarding/Help/PinHelp";
+import { HideRecoverySeed } from "~/renderer/components/Onboarding/Help/HideRecoverySeed";
+import { RecoverySeed } from "~/renderer/components/Onboarding/Help/RecoverySeed";
 import { HideRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/HideRecoveryPhrase";
 import { WaveContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import { AnimatedWave } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/AnimatedWave";
