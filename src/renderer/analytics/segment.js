@@ -113,25 +113,25 @@ function sendTrack(event, properties: ?Object, storeInstance: *) {
 }
 
 export const track = (event: string, properties: ?Object, mandatory: ?boolean) => {
+  if (!storeInstance || (!mandatory && !shareAnalyticsSelector(storeInstance.getState()))) {
+    return;
+  }
   const fullProperties = {
     ...extraProperties(storeInstance),
     ...properties,
   };
   logger.analyticsTrack(event, fullProperties);
-  if (!storeInstance || (!mandatory && !shareAnalyticsSelector(storeInstance.getState()))) {
-    return;
-  }
   sendTrack(event, fullProperties, storeInstance);
 };
 
 export const page = (category: string, name: ?string, properties: ?Object) => {
+  if (!storeInstance || !shareAnalyticsSelector(storeInstance.getState())) {
+    return;
+  }
   const fullProperties = {
     ...extraProperties(storeInstance),
     ...properties,
   };
   logger.analyticsPage(category, name, fullProperties);
-  if (!storeInstance || !shareAnalyticsSelector(storeInstance.getState())) {
-    return;
-  }
   sendTrack(`Page ${category + (name ? ` ${name}` : "")}`, fullProperties, storeInstance);
 };
