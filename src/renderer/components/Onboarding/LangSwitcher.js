@@ -1,9 +1,29 @@
 // @flow
-import React, { useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import styled from "styled-components";
 import Select from "react-select";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+import { setLanguage } from "~/renderer/actions/settings";
 import useTheme from "~/renderer/hooks/useTheme";
 import { rgba } from "~/renderer/styles/helpers";
+import { langAndRegionSelector } from "~/renderer/reducers/settings";
+import { useDispatch, useSelector } from "react-redux";
+import ConfirmModal from "~/renderer/modals/ConfirmModal";
+import WarningIcon from "~/renderer/icons/TriangleWarning";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+
+import moment from "moment";
+import Box from "../Box/Box";
+
+const IconWrapperCircle: ThemedComponent<{ color?: string }> = styled(Box)`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: ${p => p.theme.colors.wallet};
+  background: ${p => p.theme.colors.blueTransparentBackground};
+  align-items: center;
+  justify-content: center;
+`;
 
 const options = [
   { value: "en", label: <Trans i18nKey="language.switcher.en" /> },
@@ -95,15 +115,75 @@ const styleFn = theme => ({
   },
 });
 
-type Props = {
-  onChange?: (args: { value: string }) => void,
-};
-
-const LangSwitcher = ({ onChange }: Props) => {
+const LangSwitcher = ({ onNext }: { onNext: () => void }) => {
   const theme = useTheme();
   const styles = useMemo(() => styleFn(theme), [theme]);
+  const { language } = useSelector(langAndRegionSelector);
+  const dispatch = useDispatch();
+  const { i18n, t } = useTranslation();
+  const [infoModalOpen, setInfoModalOpen] = useState("");
 
-  return <Select onChange={onChange} styles={styles} options={options} defaultValue={options[0]} />;
+  useEffect(() => {
+    moment.locale(language);
+    i18n.changeLanguage(language);
+  }, [i18n, language]);
+
+  const changeLanguage = useCallback(
+    ({ value }) => {
+      dispatch(setLanguage(value));
+      if (value !== "en") {
+        setInfoModalOpen(value);
+      }
+    },
+    [dispatch],
+  );
+
+  const onCloseInfoModal = useCallback(() => {
+    setInfoModalOpen("");
+  }, []);
+
+  const handleCloseAnNext = useCallback(() => {
+    setInfoModalOpen("");
+    onNext();
+  }, [onNext]);
+
+  const currentLanguage = useMemo(
+    () => options.find(({ value }) => value === language) || options[0],
+    [language],
+  );
+
+  console.log(language);
+
+  return (
+    <>
+      <Select
+        onChange={changeLanguage}
+        styles={styles}
+        options={options}
+        defaultValue={currentLanguage}
+      />
+      <ConfirmModal
+        analyticsName="OnboardingLanguageInfo"
+        centered
+        isOpened={!!infoModalOpen}
+        onClose={onCloseInfoModal}
+        onConfirm={handleCloseAnNext}
+        confirmText={<Trans i18nKey="onboarding.screens.welcome.languageWarning.cta" />}
+        title={
+          <Trans
+            i18nKey="onboarding.screens.welcome.languageWarning.title"
+            values={{ language: t(`language.switcher.${currentLanguage.value}`) }}
+          />
+        }
+        desc={<Trans i18nKey="onboarding.screens.welcome.languageWarning.desc" />}
+        renderIcon={() => (
+          <IconWrapperCircle>
+            <WarningIcon size={24} />
+          </IconWrapperCircle>
+        )}
+      />
+    </>
+  );
 };
 
 export default LangSwitcher;

@@ -67,7 +67,7 @@ export function Welcome({ sendEvent }: Props) {
   return (
     <WelcomeContainer>
       <TopRightContainer>
-        <LangSwitcher />
+        <LangSwitcher onNext={handleNext} />
       </TopRightContainer>
       <TopContainer>
         <WaveContainer>
