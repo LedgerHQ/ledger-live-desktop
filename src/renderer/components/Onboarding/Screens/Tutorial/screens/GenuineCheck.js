@@ -69,10 +69,10 @@ const Success = ({ device }: { device: Device }) => {
       <IconContainer>
         <IconCheck size={18} />
       </IconContainer>
-      <Text mt={3} ff="Inter|SemiBold" fontSize={6}>
+      <Text mt={3} ff="Inter|SemiBold" fontSize={6} color="palette.text.shade100">
         <Trans i18nKey="onboarding.screens.tutorial.screens.genuineCheck.success.title" />
       </Text>
-      <Text mt={2} ff="Inter|Regular" fontSize={4} textAlign="center">
+      <Text mt={2} ff="Inter|Regular" fontSize={4} textAlign="center" color="palette.text.shade100">
         <Trans
           i18nKey="onboarding.screens.tutorial.screens.genuineCheck.success.desc"
           values={{ deviceName: t(`devices.${device.modelId}`) }}
