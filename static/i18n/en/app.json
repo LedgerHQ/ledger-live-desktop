@@ -270,9 +270,9 @@
           "header": "Start your full node. Don’t trust, verify.",
           "description": "A Bitcoin full node validates all transactions and blocks, allowing you to use Bitcoin in a trustless way while contributing to the Bitcoin network.",
           "list": {
-            "item1": "Set up Bitcoin Core on a device with sufficient resources.",
-            "item2": "Wait for your node to fully synchronize.",
-            "item3": "Make note of your RPC credentials, IP address and port number."
+            "item1":"Set up Bitcoin Core on a device with sufficient resources.",
+            "item2":"Wait for your node to fully synchronize.",
+            "item3":"Make note of your RPC credentials, IP address and port number."
           },
           "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
         },
@@ -340,7 +340,7 @@
             "notConnected": {
               "header": "Download and run Ledger SatStack",
               "description": "Ledger SatStack is a small application enabling Ledger Live to talk to your full node. Please download and run it before you continue.",
-              "disclaimer": "SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
+              "disclaimer":"SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
               "cta": "Download SatStack"
             },
             "satstack-disconnected": {
@@ -371,6 +371,7 @@
               "header": "Account scan in progress...",
               "description": "You can add your accounts once the account scan is competed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
             }
+
           }
         },
         "disconnect": {
@@ -2110,7 +2111,7 @@
         "paragraph1": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
         "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
         "link": "More about the Recovery phrase",
-        "title2": "What happens if I lose or break my Nano?",
+        "title2": "What happens if I lose access to my Nano?",
         "paragraph3": "Don't worry and follow these steps:",
         "points": {
           "1": "Get a new hardware wallet.",
@@ -2171,12 +2172,7 @@
         "title": "Welcome to Ledger",
         "description": "Safely manage your crypto from your computer.",
         "cta": "Get started",
-        "noDevice": "No device? <0>Buy a Ledger Nano X</0>",
-        "languageWarning": {
-          "title": "Get started in {{language}}",
-          "desc": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
-          "cta": "Got it"
-        }
+        "noDevice": "No device? <0>Buy a Ledger Nano X</0>"
       },
       "selectDevice": {
         "title": "What's your device?"
@@ -2302,7 +2298,7 @@
           },
           "existingRecoveryPhrase": {
             "title": "Enter your recovery phrase",
-            "paragraph1": "Your recovery phrase is the secret list words that you backed up when you first set up your wallet.",
+            "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
             "paragraph2": "Ledger does not keep a copy of your Recovery phrase.",
             "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my coins in case I lose access to my Nano.",
             "buttons": {
@@ -2314,11 +2310,11 @@
           "useRecoverySheet": {
             "takeYourRecoverySheet": {
               "title": "Take your recovery sheet",
-              "descr": "Grab your recovery sheet from your Nano box"
+              "descr": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
             },
             "writeDownWords": {
-              "title": "Write down 24 words",
-              "descr": "Then, press right on your Nano to display Word #2. Repeat for the 24 words. Press left on your Nano to see if you made mistakes."
+              "title": "Write down all words",
+              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2. Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
             },
             "buttons": {
               "next": "Next step",
@@ -2330,7 +2326,7 @@
             "title": "Recovery phrase",
             "paragraph1": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
             "paragraph2": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
-            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose or break my Nano.",
+            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose access to my Nano.",
             "buttons": {
               "next": "Recovery phrase",
               "prev": "Previous step",
@@ -2355,20 +2351,6 @@
             },
             "andNext": {
               "title": "Repeat for all words!"
-            },
-            "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
-            }
-          },
-          "recoveryHowTo3": {
-            "reEnterWord": {
-              "title": "Re-enter Word #1...",
-              "descr": "Scroll through the words until you find the exact Word #1 by pressing right button. Confirm by pressing both buttons."
-            },
-            "repeat": {
-              "title": "... and the next 23!"
             },
             "buttons": {
               "next": "Next step",
@@ -2488,7 +2470,7 @@
             "success": {
               "title": "Congrats!",
               "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
-            },
+            }, 
             "fail": {
               "title": "Incorrect!",
               "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
@@ -2566,9 +2548,7 @@
   "Terms": {
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
-    "switchLabel": "I have read and agree with the <0>Terms of Use and Privacy Policy</0>",
-    "switchLabelLoss": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose of break my Nano.",
-    "cta": "Enter Ledger app"
+    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
   },
   "families": {
     "stellar": {
