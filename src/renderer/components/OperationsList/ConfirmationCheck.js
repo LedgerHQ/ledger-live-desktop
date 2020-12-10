@@ -112,6 +112,7 @@ const iconsComponent = {
   SLASH: IconTrash,
   NOMINATE: Vote,
   CHILL: IconUndelegate,
+  REWARD_PAYOUT: ClaimRewards,
 };
 
 class ConfirmationCheck extends PureComponent<{

@@ -232,7 +232,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
           </Box>
         </>
       );
-    case "REWARD":
+    case "REWARD_PAYOUT":
       return (
         <>
           <OperationDetailsPalletMethod palletMethod={extra.palletMethod} />

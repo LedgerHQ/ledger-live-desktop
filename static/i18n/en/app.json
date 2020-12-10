@@ -101,6 +101,7 @@
       "CLOSE_ACCOUNT": "Close account",
       "BOND": "Bond",
       "UNBOND": "Unbond",
+      "REWARD_PAYOUT": "Reward",
       "SLASH": "Slash",
       "WITHDRAW_UNBONDED": "Unbonded Withdrawal",
       "NOMINATE": "Nomination",

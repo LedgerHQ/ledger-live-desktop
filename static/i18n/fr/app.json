@@ -101,6 +101,7 @@
       "CLOSE_ACCOUNT": "Fermer",
       "BOND": "Lié",
       "UNBOND": "Délié",
+      "REWARD_PAYOUT": "Récompense",
       "SLASH": "Sabrage",
       "WITHDRAW_UNBONDED": "Retrait",
       "NOMINATE": "Nomination",
