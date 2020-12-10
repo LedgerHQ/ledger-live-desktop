@@ -162,7 +162,7 @@
       "title": "Échanger vos actifs",
       "continue": "Continuer",
       "link": "En savoir plus sur le swap",
-      "sorry": "Le Swap n'est pas disponible dans votre pays"
+      "sorry": "Service temporarily unavailable, or not available in your country"
     },
     "missingApp": {
       "title": "Veuillez installer l'application Exchange sur votre appareil",
@@ -749,7 +749,6 @@
       "cta": "Vider le cache"
     },
     "migrate": "Mise à jour des comptes Ledger Live disponible",
-    "ongoingScams": "Des escroqueries d'hameçonnage sont en cours sur notre base d'utilisateurs, soyez prudent et ne partagez jamais votre phrase de récupération.",
     "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge",
     "ledgerAcademy": {
       "title": "Ledger Academy",
@@ -1346,6 +1345,7 @@
         "title": "Appareil"
       },
       "details": {
+        "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
         "from": "De",
         "to": "Vers",
         "selectAccountDebit": "Compte à débiter",
