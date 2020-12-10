@@ -104,7 +104,6 @@ type StepperProps = {
 };
 
 function Step({ label, status, hasSeparator }: StepProps) {
-  console.log(status);
   return (
     <>
       <StepContainer status={status}>

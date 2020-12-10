@@ -35,7 +35,6 @@ type Props = {
 
 export function QuizFailure({ sendEvent, context }: Props) {
   const { t } = useTranslation();
-  console.log(context);
 
   return (
     <ScreenContainer>

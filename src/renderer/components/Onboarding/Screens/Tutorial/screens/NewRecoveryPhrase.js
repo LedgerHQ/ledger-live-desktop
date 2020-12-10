@@ -44,7 +44,6 @@ type Props = {
 
 export function NewRecoveryPhrase({ sendEvent, context }: Props) {
   const { t } = useTranslation();
-  console.log(context);
   const { userUnderstandConsequences } = context;
 
   return (

@@ -54,7 +54,6 @@ type Props = {
 
 export function HideRecoveryPhrase({ sendEvent, context }: Props) {
   const { t } = useTranslation();
-  console.log(context);
 
   return (
     <ScreenContainer>

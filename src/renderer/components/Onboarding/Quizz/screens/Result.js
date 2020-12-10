@@ -31,7 +31,6 @@ type Props = {
 export function Result({ sendEvent, t, meta, state }: Props) {
   const result = state.context.results[state.value];
 
-  console.log(result, meta);
   const wordings = meta[result];
 
   return (

@@ -113,7 +113,6 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
   const url = `${coinifyConfig.url}?${querystring.stringify(widgetConfig)}`;
 
   const handleOnResult = useCallback(() => {
-    console.log("ON RESULT ", mode, tradeId);
 
     if (widgetRef.current) {
       if (mainAccount && mode === "buy") {
@@ -243,7 +242,6 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
     function onMessage(e) {
       if (!e.isTrusted || e.origin !== coinifyConfig.host || !e.data) return;
       const { type, event, context } = e.data;
-      console.log(e.data);
 
       if (type !== "event") return;
       switch (event) {

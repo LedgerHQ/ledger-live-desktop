@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useMachine } from "@xstate/react";
 import { assign, Machine } from "xstate";
 import { CSSTransition } from "react-transition-group";
@@ -179,7 +179,7 @@ const ScreenContainer = styled.div`
 export function Onboarding() {
   const dispatch = useDispatch();
 
-  const [state, sendEvent] = useMachine(onboardingMachine, {
+  const [state, sendEvent, service] = useMachine(onboardingMachine, {
     actions: {
       onboardingCompleted: () => {
         dispatch(saveSettings({ hasCompletedOnboarding: true }));
@@ -187,6 +187,16 @@ export function Onboarding() {
       },
     },
   });
+
+  useEffect(() => {
+    const subscription = service.subscribe((state) => {
+      if (state.changed) {
+        console.log("SERVICE: ", state.toStrings(), state);
+      }
+    });
+
+    return subscription.unsubscribe;
+  }, [service]);
 
   const CurrentScreen = screens[state.value];
 
