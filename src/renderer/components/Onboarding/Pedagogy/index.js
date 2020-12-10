@@ -4,7 +4,6 @@ import React, { useEffect, useCallback } from "react";
 import styled, { css } from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Wave } from "~/renderer/components/Onboarding/Pedagogy/assets/Wave";
-import WtfIsThis from "./assets/WtfIsThis.svg";
 import Text from "~/renderer/components/Text";
 import ChevronLeft from "~/renderer/icons/ChevronLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
@@ -37,18 +36,8 @@ const WaveContainer = styled.div`
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -40px;
+  bottom: 0px;
   display: flex;
-`;
-
-const SecurityContainer = styled.div`
-  width: 293px;
-  height: 240px;
-  background: url(${WtfIsThis}) center no-repeat;
-  position: absolute;
-  left: 50%;
-  bottom: 25%;
-  transform: translate(-50%, 50%);
 `;
 
 const visibleStyle = css`
@@ -106,7 +95,8 @@ const ScreenContainer = styled.div`
   flex-direction: column;
   text-align: center;
   align-items: center;
-  max-width: 382px;
+  z-index: 1;
+  max-width: 334px;
 
   &.screen-appear {
     opacity: 0;
@@ -187,7 +177,6 @@ export function Pedagogy({ onDone }: PedagogyProps) {
       <WaveContainer>
         <Wave />
       </WaveContainer>
-      <SecurityContainer />
       <CSSTransition in classNames="screen" timeout={DURATION} key={state.value} appear>
         <ScreenContainer>
           <CurrentScreen t={t} sendEvent={sendEvent} />

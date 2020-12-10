@@ -50,6 +50,7 @@ export const pedagogyMachine = Machine({
           target: "validateTransactions",
         },
         DONE: {
+          target: "accessYourCoins",
           actions: ["done"],
         },
       },

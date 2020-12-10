@@ -11,6 +11,9 @@ import { Computer } from "./assets/Computer";
 import { Wave } from "./assets/Wave";
 import LangSwitcher from "~/renderer/components/Onboarding/LangSwitcher";
 import { urls } from "~/config/urls";
+import { WaveContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
+import { AnimatedWave } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/AnimatedWave";
+import useTheme from "~/renderer/hooks/useTheme";
 
 const WelcomeContainer: ThemedComponent<*> = styled.div`
   height: 100%;
@@ -18,12 +21,13 @@ const WelcomeContainer: ThemedComponent<*> = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: relative;
 `;
 
 const TopContainer = styled.div`
   height: 40%;
   width: 100%;
-  background-color: #eff4fe;
+
   position: relative;
 `;
 
@@ -32,14 +36,6 @@ const ComputerContainer = styled.div`
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 50%);
-`;
-
-const WaveContainer = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transform: translateY(50%);
 `;
 
 const TopRightContainer = styled.div`
@@ -55,6 +51,7 @@ type Props = {
 
 export function Welcome({ sendEvent }: Props) {
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const handleNext = useCallback(() => {
     sendEvent("NEXT");
@@ -69,10 +66,10 @@ export function Welcome({ sendEvent }: Props) {
       <TopRightContainer>
         <LangSwitcher />
       </TopRightContainer>
+      <WaveContainer>
+        <AnimatedWave height={600} color={theme === "dark" ? "#587ED4" : "#4385F016"} />
+      </WaveContainer>
       <TopContainer>
-        <WaveContainer>
-          <Wave />
-        </WaveContainer>
         <ComputerContainer>
           <Computer />
         </ComputerContainer>
@@ -93,7 +90,7 @@ export function Welcome({ sendEvent }: Props) {
             ff="Inter|SemiBold"
             color="wallet"
             onClick={buyNanoX}
-          ></Text>
+          />
         </Trans>
       </Text>
     </WelcomeContainer>

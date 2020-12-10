@@ -80,8 +80,7 @@ const StepSeparator = styled.div`
     }
     if (status === "active") {
       return css`
-        background: none;
-        color: ${theme.colors.palette.primary.main};
+        border-left: 1px ${theme.colors.palette.text.shade20} dashed;
       `;
     }
 

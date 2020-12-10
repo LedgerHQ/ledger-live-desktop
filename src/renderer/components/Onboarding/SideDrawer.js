@@ -28,7 +28,6 @@ const DURATION = 250;
 
 const DrawerBackdrop = styled.div`
   position: absolute;
-  backdrop-filter: saturate(160%) blur(5px);
   top: 0;
   left: 0;
   bottom: 0;

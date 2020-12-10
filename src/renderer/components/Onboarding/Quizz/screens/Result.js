@@ -12,7 +12,8 @@ const Illu = styled.div`
   background: url(${({ success }) => (success ? successIllu : failIllu)});
   margin-top: 84px;
   width: 150px;
-  height: 132px;
+  height: ${({ success }) => (success ? 137 : 132)}px;
+
 `;
 
 type Props = {

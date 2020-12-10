@@ -19,5 +19,5 @@ export const AlertModalContainer = styled.div`
   padding: 56px 104px;
   align-items: center;
   text-align: center;
-  background-color: #ffffff;
+  background-color: ${p => p.theme.colors.palette.background.default};
 `;

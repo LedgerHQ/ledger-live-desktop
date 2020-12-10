@@ -4,11 +4,30 @@ import React, { useCallback } from "react";
 import Text from "~/renderer/components/Text";
 import type { TFunction } from "react-i18next";
 import Button from "~/renderer/components/Button";
+import styled from "styled-components";
+import { Illustration } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
+import deviceOnToken from "./assets/deviceOnToken.svg";
+import smartphoneAndCurrencies from "./assets/smartphoneAndCurrencies.svg";
+import accessYourCoins from "./assets/accessYourCoins.svg";
+import fingerprintNano from "./assets/fingerprintNano.svg";
+import keyInABall from "./assets/keyInABall.svg";
 
 type ScreenProps = {
   t: TFunction,
   sendEvent: string => void,
 };
+
+const IllustrationContainer = styled.div`
+  height: 240px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+`;
 
 export function AccessYourCoins({ t }: ScreenProps) {
   return (
@@ -31,6 +50,9 @@ export function AccessYourCoins({ t }: ScreenProps) {
       >
         {t("onboarding.pedagogy.screens.accessYourCoins.description")}
       </Text>
+      <IllustrationContainer>
+        <Illustration height={218} width={443} src={accessYourCoins} />
+      </IllustrationContainer>
     </React.Fragment>
   );
 }
@@ -56,6 +78,9 @@ export function OwnYourPrivateKey({ t }: ScreenProps) {
       >
         {t("onboarding.pedagogy.screens.ownYourPrivateKey.description")}
       </Text>
+      <IllustrationContainer>
+        <Illustration height={165} width={205} src={keyInABall} />
+      </IllustrationContainer>
     </React.Fragment>
   );
 }
@@ -74,6 +99,7 @@ export function StayOffline({ t }: ScreenProps) {
       </Text>
       <Text
         mt="8px"
+        mb="33px"
         color="palette.text.shade100"
         ff="Inter|Regular"
         fontSize="14px"
@@ -81,6 +107,9 @@ export function StayOffline({ t }: ScreenProps) {
       >
         {t("onboarding.pedagogy.screens.stayOffline.description")}
       </Text>
+      <IllustrationContainer>
+        <Illustration height={160} width={443} src={deviceOnToken} />
+      </IllustrationContainer>
     </React.Fragment>
   );
 }
@@ -99,6 +128,7 @@ export function ValidateTransactions({ t }: ScreenProps) {
       </Text>
       <Text
         mt="8px"
+        mb="28px"
         color="palette.text.shade100"
         ff="Inter|Regular"
         fontSize="14px"
@@ -106,6 +136,9 @@ export function ValidateTransactions({ t }: ScreenProps) {
       >
         {t("onboarding.pedagogy.screens.validateTransactions.description")}
       </Text>
+      <IllustrationContainer>
+        <Illustration height={177} width={430} src={smartphoneAndCurrencies} />
+      </IllustrationContainer>
     </React.Fragment>
   );
 }
@@ -138,6 +171,9 @@ export function SetUpNanoWallet({ t, sendEvent }: ScreenProps) {
           {t("onboarding.pedagogy.screens.setUpNanoWallet.CTA")}
         </Text>
       </Button>
+      <IllustrationContainer>
+        <Illustration height={145} width={188} src={fingerprintNano} />
+      </IllustrationContainer>
     </React.Fragment>
   );
 }
