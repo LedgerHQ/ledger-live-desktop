@@ -2171,7 +2171,7 @@
         "title": "Welcome to Ledger",
         "description": "Safely manage your crypto from your computer.",
         "cta": "Get started",
-        "noDevice": "No device? <0>Buy a Ledger Nano X</0>"
+        "noDevice": "No device? <0>Buy a Ledger Nano X</0>",
         "languageWarning": {
           "title": "Get started in {{language}}",
           "desc": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
