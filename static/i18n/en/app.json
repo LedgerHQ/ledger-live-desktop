@@ -270,9 +270,9 @@
           "header": "Start your full node. Don’t trust, verify.",
           "description": "A Bitcoin full node validates all transactions and blocks, allowing you to use Bitcoin in a trustless way while contributing to the Bitcoin network.",
           "list": {
-            "item1":"Set up Bitcoin Core on a device with sufficient resources.",
-            "item2":"Wait for your node to fully synchronize.",
-            "item3":"Make note of your RPC credentials, IP address and port number."
+            "item1": "Set up Bitcoin Core on a device with sufficient resources.",
+            "item2": "Wait for your node to fully synchronize.",
+            "item3": "Make note of your RPC credentials, IP address and port number."
           },
           "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
         },
@@ -340,7 +340,7 @@
             "notConnected": {
               "header": "Download and run Ledger SatStack",
               "description": "Ledger SatStack is a small application enabling Ledger Live to talk to your full node. Please download and run it before you continue.",
-              "disclaimer":"SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
+              "disclaimer": "SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
               "cta": "Download SatStack"
             },
             "satstack-disconnected": {
@@ -371,7 +371,6 @@
               "header": "Account scan in progress...",
               "description": "You can add your accounts once the account scan is competed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
             }
-
           }
         },
         "disconnect": {
@@ -2173,6 +2172,11 @@
         "description": "Safely manage your crypto from your computer.",
         "cta": "Get started",
         "noDevice": "No device? <0>Buy a Ledger Nano X</0>"
+        "languageWarning": {
+          "title": "Get started in {{language}}",
+          "desc": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
+          "cta": "Got it"
+        }
       },
       "selectDevice": {
         "title": "What's your device?"
@@ -2358,6 +2362,20 @@
               "help": "Need help"
             }
           },
+          "recoveryHowTo3": {
+            "reEnterWord": {
+              "title": "Confirm your recovery phrase",
+              "descr": "Scroll through the words until you find Word #1 by pressing the right button. Validate by pressing both buttons."
+            },
+            "repeat": {
+              "title": "Repeat for all words!"
+            },
+            "buttons": {
+              "next": "Next step",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
           "genuineCheck": {
             "plugUSBCable": {
               "title": "Connect USB cable",
@@ -2470,7 +2488,7 @@
             "success": {
               "title": "Congrats!",
               "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
-            }, 
+            },
             "fail": {
               "title": "Incorrect!",
               "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
@@ -2548,7 +2566,9 @@
   "Terms": {
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
-    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
+    "switchLabel": "I have read and agree with the <0>Terms of Use and Privacy Policy</0>",
+    "switchLabelLoss": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose of break my Nano.",
+    "cta": "Enter Ledger app"
   },
   "families": {
     "stellar": {
