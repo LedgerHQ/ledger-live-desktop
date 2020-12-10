@@ -106,6 +106,10 @@ const iconsComponent = {
   REDEEM: IconWithdraw,
   SUPPLY: IconSupply,
   APPROVE: IconPlus,
+  BOND: Freeze,
+  UNBOND: Unfreeze,
+  WITHDRAW_UNBONDED: ClaimRewards,
+  SLASH: IconTrash,
 };
 
 class ConfirmationCheck extends PureComponent<{

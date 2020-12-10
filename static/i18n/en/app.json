@@ -98,7 +98,11 @@
       "FEES": "Fees",
       "OPT_IN": "Opt in",
       "OPT_OUT": "Opt out",
-      "CLOSE_ACCOUNT": "Close account"
+      "CLOSE_ACCOUNT": "Close account",
+      "BOND": "Bond",
+      "UNBOND": "Unbond",
+      "SLASH": "Slash",
+      "WITHDRAW_UNBONDED": "Unbonded Withdrawal"
     }
   },
   "byteSize": {
@@ -1790,6 +1794,14 @@
         }
       }
     }
+  },
+  "polkadot": {
+    "lockedBalance": "Locked balance",
+    "lockedTooltip": "Bonded value can be used to nominate validators and earn rewards.",
+    "unlockingBalance": "Unlocking balance",
+    "unlockingTooltip": "Unbonded value stays locked during 28 days before being available for withdrawal.",
+    "unlockedBalance": "Unlocked balance",
+    "unlockedTooltip": "After 28 days of unbonding period, value is available for withdrawal."
   },
   "delegation": {
     "title": "Earn rewards",
