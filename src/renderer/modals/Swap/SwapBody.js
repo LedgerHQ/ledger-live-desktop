@@ -28,7 +28,7 @@ const SwapBody = ({
   ratesExpiration,
 }: {
   swap: { exchange: Exchange, exchangeRate: ExchangeRate },
-  transaction: Transaction, // FIXME
+  transaction: Transaction,
   status: TransactionStatus,
   onClose: any,
   onStepChange: SwapSteps => void,

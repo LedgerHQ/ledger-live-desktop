@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback } from "react";
-import _ from "lodash";
+import map from "lodash/map";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -402,7 +402,7 @@ export const renderSwapDeviceConfirmation = ({
         <Trans i18nKey="DeviceAction.swap.confirm" />
       </Text>
     </Box>
-    {_.map(
+    {map(
       {
         amountSent: (
           <CurrencyUnitValue
