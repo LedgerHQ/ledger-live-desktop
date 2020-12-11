@@ -209,7 +209,9 @@ class StepImport extends PureComponent<StepProps> {
     const mainCurrency = currency.type === "TokenCurrency" ? currency.parentCurrency : currency;
 
     if (err) {
-      return <ErrorDisplay error={err} withExportLogs />;
+      return (
+        <ErrorDisplay error={err} withExportLogs={err.name !== "SatStackDescriptorNotImported"} />
+      );
     }
 
     const currencyName = mainCurrency ? mainCurrency.name : "";
@@ -305,6 +307,7 @@ export const StepImportFooter = ({
 
   const count = checkedAccountsIds.length;
   const willClose = !willCreateAccount && !willAddAccounts;
+  const isHandledError = err && err.name === "SatStackDescriptorNotImported";
 
   const ctaWording =
     scanStatus === "scanning"
@@ -328,36 +331,38 @@ export const StepImportFooter = ({
   return (
     <>
       <Box grow>{currency && <CurrencyBadge currency={currency} />}</Box>
-      {scanStatus === "error" && (
-        <>
-          <ExternalLinkButton label={t("common.getSupport")} url={urls.syncErrors} />
+      {scanStatus === "error" &&
+        (isHandledError ? (
+          <Button id={"add-accounts-full-node-reconfigure"} primary onClick={goFullNode}>
+            {t("addAccounts.fullNodeConfigure")}
+          </Button>
+        ) : (
+          <>
+            <ExternalLinkButton label={t("common.getSupport")} url={urls.syncErrors} />
 
-          {err && err.name === "SatStackDescriptorNotImported" ? (
-            <Button id={"add-accounts-full-node-reconfigure"} primary onClick={goFullNode}>
-              {t("addAccounts.fullNodeConfigure")}
-            </Button>
-          ) : (
             <RetryButton
               id={"add-accounts-import-retry-button"}
               primary
               onClick={() => setScanStatus("scanning")}
             />
-          )}
-        </>
-      )}
+          </>
+        ))}
       {scanStatus === "scanning" && (
         <Button id={"add-accounts-import-stop-button"} onClick={() => setScanStatus("finished")}>
           {t("common.stop")}
         </Button>
       )}
-      <Button
-        id={"add-accounts-import-add-button"}
-        primary
-        disabled={scanStatus !== "finished"}
-        onClick={onClick}
-      >
-        {ctaWording}
-      </Button>
+
+      {isHandledError ? null : (
+        <Button
+          id={"add-accounts-import-add-button"}
+          primary
+          disabled={scanStatus !== "finished"}
+          onClick={onClick}
+        >
+          {ctaWording}
+        </Button>
+      )}
     </>
   );
 };
