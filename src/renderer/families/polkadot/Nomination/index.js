@@ -11,6 +11,7 @@ import {
   hasExternalController,
   hasExternalStash,
   canNominate,
+  hasPendingBond,
 } from "@ledgerhq/live-common/lib/families/polkadot/logic";
 import { usePolkadotPreloadData } from "@ledgerhq/live-common/lib/families/polkadot/react";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
@@ -178,6 +179,7 @@ const Nomination = ({ account }: Props) => {
   const hasUnlockedBalance = unlockedBalance && unlockedBalance.gt(0);
   const hasNominations = nominations && nominations?.length > 0;
   const hasUnlockings = unlockings && unlockings.length > 0;
+  const hasPendingBondOperation = hasPendingBond(account);
 
   const nominateEnabled = !electionOpen && canNominate(account);
   const withdrawEnabled = !electionOpen && hasUnlockedBalance;
@@ -281,14 +283,8 @@ const Nomination = ({ account }: Props) => {
           <Box horizontal>
             <ToolTip
               content={
-                !nominateEnabled ? (
-                  <Trans
-                    i18nKey={
-                      electionOpen
-                        ? "polkadot.nomination.electionOpenTooltip"
-                        : "polkadot.nomination.controllerNeededWarning"
-                    }
-                  />
+                !nominateEnabled && electionOpen ? (
+                  <Trans i18nKey="polkadot.nomination.electionOpenTooltip" />
                 ) : null
               }
             >
@@ -311,14 +307,8 @@ const Nomination = ({ account }: Props) => {
             {hasNominations ? (
               <ToolTip
                 content={
-                  !nominateEnabled ? (
-                    <Trans
-                      i18nKey={
-                        electionOpen
-                          ? "polkadot.nomination.electionOpenTooltip"
-                          : "polkadot.nomination.controllerNeededWarning"
-                      }
-                    />
+                  !nominateEnabled && electionOpen ? (
+                    <Trans i18nKey="polkadot.nomination.electionOpenTooltip" />
                   ) : null
                 }
               >
@@ -378,21 +368,17 @@ const Nomination = ({ account }: Props) => {
           <Box>
             <ToolTip
               content={
-                !nominateEnabled ? (
-                  <Trans
-                    i18nKey={
-                      electionOpen
-                        ? "polkadot.nomination.electionOpenTooltip"
-                        : "polkadot.nomination.controllerNeededWarning"
-                    }
-                  />
+                !nominateEnabled && electionOpen ? (
+                  <Trans i18nKey="polkadot.nomination.electionOpenTooltip" />
+                ) : !nominateEnabled && hasPendingBondOperation ? (
+                  <Trans i18nKey="polkadot.nomination.hasPendingBondOperation" />
                 ) : null
               }
             >
               <Button
                 primary
                 small
-                disabled={!nominateEnabled}
+                disabled={!nominateEnabled || (!hasBondedBalance && hasPendingBondOperation)}
                 onClick={hasBondedBalance ? onNominate : onEarnRewards}
               >
                 <Box horizontal flow={1} alignItems="center">
@@ -400,7 +386,9 @@ const Nomination = ({ account }: Props) => {
                   <Box>
                     <Trans
                       i18nKey={
-                        hasBondedBalance ? "polkadot.nomination.nominate" : "delegation.title"
+                        hasBondedBalance || hasPendingBondOperation
+                          ? "polkadot.nomination.nominate"
+                          : "delegation.title"
                       }
                     />
                   </Box>

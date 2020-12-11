@@ -1830,7 +1830,7 @@
       "elected": "Élu",
       "nominatorsCount": "{{nominatorsCount}} nominateurs",
       "oversubscribed": "Sursouscrit ({{nominatorsCount}})",
-      "controllerNeededWarning": "Vous devez être contrôleur d'un compte de réserve",
+      "hasPendingBondOperation": "Une liaison d'actifs est en attente de confirmation",
       "electionOpen": "L'élection de nouveaux validateurs est en cours. Par conséquent les opérations de Staking sont indisponibles pour une durée pouvant atteindre 15 minutes.",
       "electionOpenTooltip": "Cette opération est désactivée pendant l'élection des validateurs",
       "externalControllerTooltip": "Ce compte est contrôlé par un autre compte.",

@@ -1830,7 +1830,7 @@
       "elected": "Elected",
       "nominatorsCount": "{{nominatorsCount}} nominators",
       "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
-      "controllerNeededWarning": "You must have a controller account",
+      "hasPendingBondOperation": "A bond operation is still pending confirmation",
       "electionOpen": "The election of new validators is currently ongoing. As such staking operations are not available for at most 15 minutes.",
       "electionOpenTooltip": "This operation is disabled during validators election",
       "externalControllerTooltip": "This account is controlled by another account.",

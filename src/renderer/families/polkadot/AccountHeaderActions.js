@@ -10,6 +10,7 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 import {
   hasExternalController,
   hasExternalStash,
+  hasPendingBond,
 } from "@ledgerhq/live-common/lib/families/polkadot/logic";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -38,10 +39,12 @@ const AccountHeaderActions = ({ account }: Props) => {
 
   const { polkadotResources } = account;
   invariant(polkadotResources, "polkadot account expected");
-  const lockedBalance = polkadotResources.lockedBalance;
+
+  const hasBondedBalance = polkadotResources.lockedBalance && polkadotResources.lockedBalance.gt(0);
+  const hasPendingBondOperation = hasPendingBond(account);
 
   const onClick = useCallback(() => {
-    if (lockedBalance.gt(0)) {
+    if (hasBondedBalance || hasPendingBondOperation) {
       dispatch(
         openModal("MODAL_POLKADOT_MANAGE", {
           account,
@@ -54,12 +57,16 @@ const AccountHeaderActions = ({ account }: Props) => {
         }),
       );
     }
-  }, [dispatch, lockedBalance, account]);
+  }, [dispatch, account, hasBondedBalance, hasPendingBondOperation]);
 
   const _hasExternalController = hasExternalController(account);
   const _hasExternalStash = hasExternalStash(account);
 
-  const manageEnabled = !_hasExternalController && !_hasExternalStash;
+  const manageEnabled = !(
+    _hasExternalController ||
+    _hasExternalStash ||
+    (!hasBondedBalance && hasPendingBondOperation)
+  );
 
   return (
     <ToolTip
@@ -69,7 +76,9 @@ const AccountHeaderActions = ({ account }: Props) => {
             i18nKey={
               _hasExternalController
                 ? "polkadot.nomination.externalControllerTooltip"
-                : "polkadot.nomination.externalStashTooltip"
+                : _hasExternalStash
+                ? "polkadot.nomination.externalStashTooltip"
+                : "polkadot.nomination.hasPendingBondOperation"
             }
           />
         ) : null
@@ -77,13 +86,19 @@ const AccountHeaderActions = ({ account }: Props) => {
     >
       <ButtonBase primary disabled={!manageEnabled} onClick={onClick}>
         <Box horizontal flow={1} alignItems="center">
-          {lockedBalance > 0 ? (
+          {hasBondedBalance ? (
             <CryptoCurrencyIcon overrideColor={contrastText} currency={currency} size={12} />
           ) : (
             <IconChartLine size={12} />
           )}
           <Box fontSize={3}>
-            <Trans i18nKey={lockedBalance > 0 ? "polkadot.manage.title" : "delegation.title"} />
+            <Trans
+              i18nKey={
+                hasBondedBalance || hasPendingBondOperation
+                  ? "polkadot.manage.title"
+                  : "delegation.title"
+              }
+            />
           </Box>
         </Box>
       </ButtonBase>
