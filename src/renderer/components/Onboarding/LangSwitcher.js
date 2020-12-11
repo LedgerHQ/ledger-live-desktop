@@ -43,10 +43,10 @@ const styleFn = theme => ({
       ...provided,
       backgroundColor: theme.colors.transparent,
       borderRadius: 20,
-      borderColor: state.isFocused ? theme.colors.wallet : rgba(theme.colors.dark, 0.1),
+      borderColor: state.isFocused ? theme.colors.palette.primary.main : theme.colors.palette.text.shade10,
       boxShadow: "none",
       ":hover": {
-        borderColor: theme.colors.wallet,
+        borderColor: theme.colors.palette.primary.main,
       },
     };
   },
