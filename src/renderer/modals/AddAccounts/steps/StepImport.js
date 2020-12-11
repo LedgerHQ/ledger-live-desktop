@@ -287,6 +287,7 @@ export const StepImportFooter = ({
   checkedAccountsIds,
   scannedAccounts,
   currency,
+  err,
   t,
 }: StepProps) => {
   const willCreateAccount = checkedAccountsIds.some(id => {
@@ -316,17 +317,26 @@ export const StepImportFooter = ({
         transitionTo("finish");
       };
 
+  const goFullNode = () => {};
+
   return (
     <>
       <Box grow>{currency && <CurrencyBadge currency={currency} />}</Box>
       {scanStatus === "error" && (
         <>
           <ExternalLinkButton label={t("common.getSupport")} url={urls.syncErrors} />
-          <RetryButton
-            id={"add-accounts-import-retry-button"}
-            primary
-            onClick={() => setScanStatus("scanning")}
-          />
+
+          {err && err.name === "SatStackDescriptorNotImported" ? (
+            <Button id={"add-accounts-full-node-reconfigure"} primary onClick={goFullNode}>
+              {t("addAccounts.fullNodeConfigure")}
+            </Button>
+          ) : (
+            <RetryButton
+              id={"add-accounts-import-retry-button"}
+              primary
+              onClick={() => setScanStatus("scanning")}
+            />
+          )}
         </>
       )}
       {scanStatus === "scanning" && (
@@ -334,16 +344,14 @@ export const StepImportFooter = ({
           {t("common.stop")}
         </Button>
       )}
-      {scanStatus !== "error" && (
-        <Button
-          id={"add-accounts-import-add-button"}
-          primary
-          disabled={scanStatus !== "finished"}
-          onClick={onClick}
-        >
-          {ctaWording}
-        </Button>
-      )}
+      <Button
+        id={"add-accounts-import-add-button"}
+        primary
+        disabled={scanStatus !== "finished"}
+        onClick={onClick}
+      >
+        {ctaWording}
+      </Button>
     </>
   );
 };

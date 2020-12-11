@@ -911,6 +911,7 @@
       "finish": "Confirmation"
     },
     "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
+    "fullNodeConfigure": "Configure node",
     "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "Add existing accounts",
     "selectAll": "Select all ({{count}})",
