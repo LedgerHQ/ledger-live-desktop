@@ -1118,8 +1118,8 @@
     },
     "firmware": {
       "updateLater": "Cancel",
-      "seedReady": "I have my Recovery phrase",
-      "dontHaveSeed": "Don't have your Recovery phrase? ",
+      "seedReady": "I have my recovery phrase",
+      "dontHaveSeed": "Don't have your recovery phrase? ",
       "followTheGuide": "Follow our step by step update guide",
       "removeApps": "Uninstall all apps before updating",
       "update": "Firmware update",
@@ -1127,7 +1127,7 @@
       "latest": "Firmware version {{version}} is available",
       "contactSupport": "Contact support",
       "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
-      "prepareSeed": "Ensure your 24-word Recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
+      "prepareSeed": "Ensure your 24-word recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
       "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
       "downloadingUpdateDesc": "Please wait for the update installer to be downloaded"
     },
@@ -1965,7 +1965,7 @@
     },
     "hardResetModal": {
       "title": "Reset Ledger Live",
-      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your Recovery phrase."
+      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your recovery phrase."
     },
     "softResetModal": {
       "title": "Clear cache",
@@ -2109,7 +2109,7 @@
         "title1": "How does a recovery phrase work?",
         "paragraph1": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
         "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
-        "link": "More about the Recovery phrase",
+        "link": "More about the recovery phrase",
         "title2": "What happens if I lose access to my Nano?",
         "paragraph3": "Don't worry and follow these steps:",
         "points": {
@@ -2119,7 +2119,7 @@
         }
       },
       "whereToHide": {
-        "title": "Where should I keep my Recovery phrase?",
+        "title": "Where should I keep my recovery phrase?",
         "points": {
           "1": "NEVER enter it on a computer, smartphone or any other device. Don't take a picture of it.",
           "2": "NEVER share your 24 words with anyone.",
@@ -2303,7 +2303,7 @@
           "existingRecoveryPhrase": {
             "title": "Enter your recovery phrase",
             "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
-            "paragraph2": "Ledger does not keep a copy of your Recovery phrase.",
+            "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
             "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my coins in case I lose access to my Nano.",
             "buttons": {
               "next": "Enter recovery phrase",
@@ -2330,7 +2330,7 @@
             "title": "Recovery phrase",
             "paragraph1": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
             "paragraph2": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
-            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose access to my Nano.",
+            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
             "buttons": {
               "next": "Recovery phrase",
               "prev": "Previous step",
@@ -2343,7 +2343,7 @@
             },
             "selectLength": {
               "title": "Select recovery phrase length",
-              "descr": "Your Recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
+              "descr": "Your recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
             },
             "enterWord": {
               "title": "Enter Word #1...",
@@ -2393,7 +2393,7 @@
           },
           "hideRecoveryPhrase": {
             "title": "Hide your recovery phrase",
-            "paragraph": "Your Recovery phrase is your last chance to access your coins if you cannot use your Nano. You must keep it in a safe place.",
+            "paragraph": "Your recovery phrase is your last chance to access your crypto if you cannot use your Nano. You must keep it in a safe place.",
             "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
             "neverShowToAnyone": "Never share your 24 words with anyone, not even with Ledger.",
             "buttons": {
@@ -2414,9 +2414,9 @@
           },
           "quizzSuccess": {
             "title": "Already a pro!",
-            "paragraph": "You are ready to safely manage your coins. Let’s quickly pair your device before enjoying your app freely.",
+            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
             "buttons": {
-              "next": "Lets plug my Nano",
+              "next": "Next step",
               "prev": "Previous step"
             }
           },
@@ -2446,8 +2446,8 @@
       "heading": "basics",
       "screens": {
         "accessYourCoins": {
-          "title": "Access your coins",
-          "description": "Your coins are stored on the blockchain. You need a private key to access and manage them."
+          "title": "Access your crypto",
+          "description": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
         },
         "ownYourPrivateKey": {
           "title": "Own your private key",
@@ -2504,11 +2504,11 @@
           "results": {
             "success": {
               "title": "Congrats!",
-              "text": "Anyone who knows your Recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
             },
             "fail": {
               "title": "Incorrect!",
-              "text": "Anyone who knows your Recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
             }
           }
         },
@@ -2567,7 +2567,7 @@
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
     "switchLabel": "I have read and agree with the <0>Terms of Use and Privacy Policy</0>",
-    "switchLabelLoss": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose of break my Nano.",
+    "switchLabelLoss": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to Nano.",
     "cta": "Enter Ledger app"
   },
   "families": {
@@ -2924,7 +2924,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "Something went wrong",
-      "description": "Please check that your hardware wallet is set up with the Recovery phrase or passphrase associated to the selected account."
+      "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
     },
     "DeviceAppVerifyNotSupported": {
       "title": "App update required",
