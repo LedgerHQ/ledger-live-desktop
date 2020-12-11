@@ -25,9 +25,8 @@ const main = async () => {
   const imgDiffFailed = !!imgArr.length;
 
   str = `
-## Lint outputs ${lintFailed ? "❌" : " ✅"}
 <details>
-<summary>View</summary>
+<summary><b>Lint outputs ${lintFailed ? "❌" : " ✅"}</b></summary>
 <p>
 
 ${lintoutput}
@@ -35,9 +34,8 @@ ${lintoutput}
 </p>
 </details>
 
-## Tests outputs ${testsFailed ? "❌" : " ✅"}
 <details>
-<summary>View</summary>
+<summary><b>Tests outputs ${testsFailed ? "❌" : " ✅"}</b></summary>
 <p>
 
 ${testoutput}
@@ -45,9 +43,8 @@ ${testoutput}
 </p>
 </details>
 
-## Diff output ${imgDiffFailed ? "❌" : " ✅"}
 <details>
-<summary>View</summary>
+<summary><b>Diff output ${imgDiffFailed ? "❌" : " ✅"}</b></summary>
 <p>
 
 ${str}
