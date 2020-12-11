@@ -8,7 +8,6 @@ import styled from "styled-components";
 import Button from "~/renderer/components/Button";
 import { openURL } from "~/renderer/linking";
 import { Computer } from "./assets/Computer";
-import { Wave } from "./assets/Wave";
 import LangSwitcher from "~/renderer/components/Onboarding/LangSwitcher";
 import { urls } from "~/config/urls";
 import { WaveContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";

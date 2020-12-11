@@ -113,7 +113,6 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
   const url = `${coinifyConfig.url}?${querystring.stringify(widgetConfig)}`;
 
   const handleOnResult = useCallback(() => {
-
     if (widgetRef.current) {
       if (mainAccount && mode === "buy") {
         widgetRef.current.contentWindow.postMessage(

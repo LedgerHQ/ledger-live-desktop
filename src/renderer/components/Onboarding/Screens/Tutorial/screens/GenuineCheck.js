@@ -83,7 +83,7 @@ const Success = ({ device }: { device: Device }) => {
 };
 
 type Props = {
-  sendEvent: string => void,
+  sendEvent: any => void,
   context: {
     deviceId: DeviceModelId,
     device?: Device,

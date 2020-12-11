@@ -190,7 +190,7 @@ export function Onboarding() {
   });
 
   useEffect(() => {
-    const subscription = service.subscribe((state) => {
+    const subscription = service.subscribe(state => {
       if (state.changed) {
         console.log("SERVICE: ", state.toStrings(), state);
       }

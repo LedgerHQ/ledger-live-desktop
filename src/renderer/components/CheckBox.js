@@ -81,7 +81,7 @@ function CheckBox(props: Props) {
       e.stopPropagation();
       onChange && onChange(!isChecked);
     },
-    [onChange],
+    [onChange, isChecked],
   );
 
   return (

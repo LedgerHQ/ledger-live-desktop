@@ -3,7 +3,6 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import type { DeviceModelId } from "@ledgerhq/devices";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";

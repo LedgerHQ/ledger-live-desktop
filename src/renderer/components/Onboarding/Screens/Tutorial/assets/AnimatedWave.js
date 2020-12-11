@@ -1,6 +1,12 @@
+// @flow
 import React from "react";
 
-export function AnimatedWave({ height, color }) {
+type Props = {
+  height: number | string,
+  color: string,
+};
+
+export function AnimatedWave({ height, color }: Props) {
   return (
     <svg width="100%" height={height} fill="none">
       <path

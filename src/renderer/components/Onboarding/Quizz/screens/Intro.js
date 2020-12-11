@@ -7,8 +7,9 @@ import Text from "~/renderer/components/Text";
 import { Illustration } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import gameOn from "../assets/gameOn.svg";
 import Button from "~/renderer/components/Button";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const IntroContainer = styled.div`
+const IntroContainer: ThemedComponent<{}> = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,7 +18,7 @@ const IntroContainer = styled.div`
 `;
 
 type Props = {
-  sendEvent: ({ type: string, answerIndex: number }) => void,
+  sendEvent: ({ type: string, answerIndex: number } | string) => void,
   t: TFunction,
   meta: {
     text: string,
