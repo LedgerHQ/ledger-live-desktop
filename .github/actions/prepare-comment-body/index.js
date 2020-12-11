@@ -20,8 +20,12 @@ const main = async () => {
     str += `[Suggested snapshots to update](https://github-action-artifact-link.vercel.app/api?owner=${fullrepo[0]}&repo=${fullrepo[1]}&runId=${runId})`;
   }
 
+  const lintFailed = (lintoutput || "").indexOf("exit code 255") >= 0;
+  const testsFailed = (testoutput || "").indexOf("FAIL") >= 0;
+  const imgDiffFailed = !!imgArr.length;
+
   str = `
-## Lint outputs
+## Lint outputs ${lintFailed ? "❌" : " ✅"}
 <details>
 <summary>View</summary>
 <p>
@@ -31,7 +35,7 @@ ${lintoutput}
 </p>
 </details>
 
-## Tests outputs
+## Tests outputs ${testsFailed ? "❌" : " ✅"}
 <details>
 <summary>View</summary>
 <p>
@@ -41,7 +45,7 @@ ${testoutput}
 </p>
 </details>
 
-## Diff output
+## Diff output ${imgDiffFailed ? "❌" : " ✅"}
 <details>
 <summary>View</summary>
 <p>
