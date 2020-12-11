@@ -53,7 +53,11 @@ const FullNode = () => {
       centered
       preventBackdropClick
       render={({ data, onClose }) => (
-        <FullNodeBody onStepChange={setStepId} activeStep={stepId} onClose={onClose} />
+        <FullNodeBody
+          onStepChange={setStepId}
+          activeStep={data?.skipNodeSetup ? "accounts" : stepId}
+          onClose={onClose}
+        />
       )}
     />
   );

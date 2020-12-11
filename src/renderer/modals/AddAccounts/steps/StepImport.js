@@ -1,12 +1,14 @@
 // @flow
 
 import React, { useEffect, PureComponent } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 import { concat, from } from "rxjs";
 import { ignoreElements, filter, map } from "rxjs/operators";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { isAccountEmpty, groupAddAccounts } from "@ledgerhq/live-common/lib/account";
+import { openModal } from "~/renderer/actions/modals";
 import { DeviceShouldStayInApp } from "@ledgerhq/errors";
 import { getCurrencyBridge } from "@ledgerhq/live-common/lib/bridge";
 import uniq from "lodash/uniq";
@@ -290,6 +292,7 @@ export const StepImportFooter = ({
   err,
   t,
 }: StepProps) => {
+  const dispatch = useDispatch();
   const willCreateAccount = checkedAccountsIds.some(id => {
     const account = scannedAccounts.find(a => a.id === id);
     return account && isAccountEmpty(account);
@@ -317,7 +320,10 @@ export const StepImportFooter = ({
         transitionTo("finish");
       };
 
-  const goFullNode = () => {};
+  const goFullNode = () => {
+    onCloseModal();
+    dispatch(openModal("MODAL_FULL_NODE", { skipNodeSetup: true }));
+  };
 
   return (
     <>
