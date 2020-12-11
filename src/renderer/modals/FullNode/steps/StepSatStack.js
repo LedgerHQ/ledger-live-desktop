@@ -96,8 +96,13 @@ export const StepSatStackFooter = ({
 }) => {
   return (
     <Box horizontal alignItems={"flex-end"}>
+      {satStackDownloaded ? (
+        <Button secondary mr={2} onClick={() => setSatStackDownloaded(false)}>
+          <Trans i18nKey={"common.back"} />
+        </Button>
+      ) : null}
       <Button primary onClick={satStackDownloaded ? onClose : () => setSatStackDownloaded(true)}>
-        <Trans i18nKey="common.done" />
+        <Trans i18nKey={!satStackDownloaded ? "common.continue" : "common.done"} />
       </Button>
     </Box>
   );

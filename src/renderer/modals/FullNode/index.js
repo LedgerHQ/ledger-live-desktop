@@ -46,13 +46,12 @@ export const CrossWrapper: ThemedComponent<{
 const FullNode = () => {
   const satStackAlreadyConfigured = useEnv("SATSTACK");
   const [stepId, setStepId] = useState(satStackAlreadyConfigured ? "node" : "landing");
-  const isModalLocked = ["device"].includes(stepId);
 
   return (
     <Modal
       name="MODAL_FULL_NODE"
       centered
-      preventBackdropClick={isModalLocked}
+      preventBackdropClick
       render={({ data, onClose }) => (
         <FullNodeBody onStepChange={setStepId} activeStep={stepId} onClose={onClose} />
       )}

@@ -56,7 +56,7 @@ ipcMain.handle("generate-lss-config", async (event, data: string): Promise<boole
   const filePath = path.resolve(userDataDirectory, lssFileName);
   if (filePath) {
     if (filePath && data) {
-      await fsWriteFile(filePath, data);
+      await fsWriteFile(filePath, data, { mode: "640" });
       log("satstack", "wrote to lss.json file");
       return true;
     }

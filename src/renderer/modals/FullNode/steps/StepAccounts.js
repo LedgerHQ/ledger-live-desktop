@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { useSelector } from "react-redux";
@@ -29,24 +29,36 @@ const Row = styled(Box).attrs(() => ({
   border-radius: 4px;
 `;
 
-const Accounts = () => {
-  // FIXME Not using the AccountList componenent because styles differ quite a bit, we should unify.
+const Accounts = ({
+  numberOfAccountsToScan,
+  setNumberOfAccountsToScan,
+}: {
+  numberOfAccountsToScan: ?number,
+  setNumberOfAccountsToScan: (?number) => void,
+}) => {
+  // FIXME Not using the AccountList component because styles differ quite a bit, we should unify.
   const accounts = useSelector(accountsSelector);
-  const [numberOfAccountsToScan, setNumberOfAccountsToScan] = useState(10);
   const currency = getCryptoCurrencyById("bitcoin");
   const bitcoinAccounts = accounts.filter(a => getAccountCurrency(a) === currency);
 
-  const onUpdateNumberOfAccountsToScan = useCallback(value => {
-    let newNumberOfAccounts = parseInt(value, 10) || 1;
-    if (
-      newNumberOfAccounts < 0 ||
-      Number.isNaN(newNumberOfAccounts) ||
-      !Number.isFinite(newNumberOfAccounts)
-    ) {
-      newNumberOfAccounts = 1;
-    }
-    setNumberOfAccountsToScan(newNumberOfAccounts);
-  }, []);
+  const onUpdateNumberOfAccountsToScan = useCallback(
+    value => {
+      if (value) {
+        let newNumberOfAccounts = parseInt(value, 10) || 1;
+        if (
+          newNumberOfAccounts < 0 ||
+          Number.isNaN(newNumberOfAccounts) ||
+          !Number.isFinite(newNumberOfAccounts)
+        ) {
+          newNumberOfAccounts = 1;
+        }
+        setNumberOfAccountsToScan(newNumberOfAccounts);
+      } else {
+        setNumberOfAccountsToScan();
+      }
+    },
+    [setNumberOfAccountsToScan],
+  );
 
   return (
     <Box>
@@ -91,7 +103,7 @@ const Accounts = () => {
           >
             <Trans i18nKey="fullNode.modal.steps.accounts.existing" />
           </Text>
-          <div style={{ maxHeight: 220, marginRight: -10, overflow: "scroll" }}>
+          <>
             {bitcoinAccounts.map(account => (
               <Row key={account.id}>
                 <CryptoCurrencyIcon size={16} currency={account.currency} />
@@ -116,20 +128,26 @@ const Accounts = () => {
                 />
               </Row>
             ))}
-          </div>
+          </>
         </>
       ) : null}
     </Box>
   );
 };
 
-export const StepAccountsFooter = ({ onStepChange }: { onStepChange: FullNodeSteps => void }) => {
+export const StepAccountsFooter = ({
+  numberOfAccountsToScan,
+  onStepChange,
+}: {
+  numberOfAccountsToScan: ?number,
+  onStepChange: FullNodeSteps => void,
+}) => {
   const currency = getCryptoCurrencyById("bitcoin");
   const goToDeviceStep = useCallback(() => onStepChange("device"), [onStepChange]);
   return (
     <>
       <CurrencyBadge mr="auto" currency={currency} />
-      <Button primary onClick={goToDeviceStep}>
+      <Button disabled={!numberOfAccountsToScan} primary onClick={goToDeviceStep}>
         <Trans i18nKey="common.continue" />
       </Button>
     </>
