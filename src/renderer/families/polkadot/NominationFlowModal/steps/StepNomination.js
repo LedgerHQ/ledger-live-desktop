@@ -83,6 +83,7 @@ export function StepNominationFooter({
         <Button
           id="nominate-continue-button"
           disabled={!canNext}
+          isLoading={bridgePending}
           primary
           onClick={() => transitionTo("connectDevice")}
         >

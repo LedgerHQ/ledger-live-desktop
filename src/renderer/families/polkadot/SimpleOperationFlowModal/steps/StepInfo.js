@@ -73,7 +73,12 @@ export function StepInfoFooter({
         <Button mr={1} secondary onClick={onClose}>
           <Trans i18nKey="common.cancel" />
         </Button>
-        <Button disabled={!canNext} primary onClick={() => transitionTo("connectDevice")}>
+        <Button
+          disabled={!canNext}
+          isLoading={bridgePending}
+          primary
+          onClick={() => transitionTo("connectDevice")}
+        >
           <Trans i18nKey="common.continue" />
         </Button>
       </Box>
