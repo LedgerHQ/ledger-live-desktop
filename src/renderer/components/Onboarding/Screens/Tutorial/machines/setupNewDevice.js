@@ -308,12 +308,15 @@ export const setupNewDevice = Machine({
       }),
       on: {
         GENUINE_CHECK_SUCCESS: {
-          actions: assign({
-            deviceIsGenuine: true,
-          }),
+          actions: [
+            assign({
+              device: (context, { device }) => device,
+            }),
+            "fireConfetti",
+          ],
         },
         NEXT: {
-          cond: context => context.deviceIsGenuine,
+          cond: context => context.device,
           actions: ["topLevelNext"],
         },
         PREV: {

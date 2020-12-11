@@ -220,12 +220,15 @@ export const useRecoveryPhraseMachine = Machine({
       }),
       on: {
         GENUINE_CHECK_SUCCESS: {
-          actions: assign({
-            deviceIsGenuine: true,
-          }),
+          actions: [
+            assign({
+              device: (context, { device }) => device,
+            }),
+            "fireConfetti",
+          ],
         },
         NEXT: {
-          cond: context => context.deviceId,
+          cond: context => context.device,
           actions: ["topLevelNext"],
         },
         PREV: {

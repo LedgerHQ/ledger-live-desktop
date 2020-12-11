@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
@@ -86,31 +86,29 @@ type Props = {
   sendEvent: string => void,
   context: {
     deviceId: DeviceModelId,
-    deviceIsGenuine?: boolean,
+    device?: Device,
   },
 };
 
 export function GenuineCheck({ sendEvent, context }: Props) {
   const { t } = useTranslation();
-  const { deviceIsGenuine, deviceId } = context;
-  const [device, setDevice] = useState(null);
+  const { deviceId, device } = context;
 
   const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
 
   const onResult = useCallback(
     res => {
-      setDevice(res.device);
-      sendEvent("GENUINE_CHECK_SUCCESS");
+      sendEvent({ type: "GENUINE_CHECK_SUCCESS", device: res.device });
     },
-    [sendEvent, setDevice],
+    [sendEvent],
   );
 
   return (
     <ScreenContainer>
       <ContentContainer style={{ flex: 1 }}>
         <Content>
-          {deviceIsGenuine && device ? (
+          {device ? (
             <Success device={device} />
           ) : (
             <DeviceAction
@@ -129,7 +127,7 @@ export function GenuineCheck({ sendEvent, context }: Props) {
             {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.prev")}
           </Text>
         </Button>
-        <Button primary onClick={onClickNext} disabled={!deviceIsGenuine}>
+        <Button primary onClick={onClickNext} disabled={!device}>
           <Text ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.next")}
           </Text>

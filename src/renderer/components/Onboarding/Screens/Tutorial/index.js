@@ -35,6 +35,7 @@ import { UseRecoverySheet } from "~/renderer/components/Onboarding/Screens/Tutor
 import { Quizz } from "~/renderer/components/Onboarding/Quizz";
 import { QuizFailure } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/QuizFailure";
 import { QuizSuccess } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/QuizSuccess";
+import { fireConfetti } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/confetti";
 
 const TutorialContainer: ThemedComponent<*> = styled.div`
   height: 100%;
@@ -192,6 +193,7 @@ function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) 
     actions: {
       topLevelPrev: () => sendEventToParent("PREV"),
       topLevelNext: () => sendEventToParent("NEXT"),
+      fireConfetti,
     },
     context: {
       deviceId: parentContext.deviceId,
