@@ -70,7 +70,9 @@ export function Welcome({ sendEvent }: Props) {
       </WaveContainer>
       <TopContainer>
         <ComputerContainer>
-          <Computer />
+          {
+            theme === "light" ? <Computer /> : null
+          }
         </ComputerContainer>
       </TopContainer>
       <Text mt={160} mb="4px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize={32}>
