@@ -188,7 +188,6 @@ export function Onboarding() {
   const dispatch = useDispatch();
 
   const [state, sendEvent, service] = useMachine(onboardingMachine, {
-    devTools: true,
     actions: {
       onboardingCompleted: () => {
         dispatch(saveSettings({ hasCompletedOnboarding: true }));

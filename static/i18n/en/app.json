@@ -2258,7 +2258,29 @@
               "help": "Need help"
             }
           },
-          "pinCode": {
+          "deviceHowTo2": {
+            "turnOn": {
+              "title": "Turn on Nano",
+              "descr": "Connect your device to your computer with the USB cable."
+            },
+            "browse": {
+              "title": "Browse",
+              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+            },
+            "select": {
+              "title": "Select “Enter your recovery phrase”",
+              "descr": "Press both buttons simultaneously to validate the selection."
+            },
+            "follow": {
+              "title": "Follow instructions",
+              "descr": "Come back here to follow instructions on your PIN code."
+            },
+            "buttons": {
+              "next": "Next step",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },          "pinCode": {
             "title": "PIN code",
             "paragraph": "Your PIN code is the first layer of security. It physically secures access to your private key and your Nano. Your PIN code must be 4 to 8 digits long.",
             "disclaimer": "I understand that I must choose my PIN code myself and keep it private.",

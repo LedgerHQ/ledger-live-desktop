@@ -45,14 +45,14 @@ export const useRecoveryPhraseMachine = Machine({
       })),
       on: {
         NEXT: {
-          target: "deviceHowTo",
+          target: "deviceHowTo2",
         },
         PREV: {
           actions: ["topLevelPrev"],
         },
       },
     },
-    deviceHowTo: {
+    deviceHowTo2: {
       entry: setStepperStatus({
         getStarted: "active",
         pinCode: "inactive",
@@ -93,7 +93,7 @@ export const useRecoveryPhraseMachine = Machine({
           cond: context => context.userChosePincodeHimself,
         },
         PREV: {
-          target: "deviceHowTo",
+          target: "deviceHowTo2",
         },
       },
     },

@@ -8,6 +8,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Stepper } from "~/renderer/components/Onboarding/Screens/Tutorial/Stepper";
 import { ImportYourRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/ImportYourRecoveryPhrase";
 import { DeviceHowTo } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/DeviceHowTo";
+import { DeviceHowTo2 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/DeviceHowTo2";
 import { PinCode } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PinCode";
 import { PinCodeHowTo } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PinCodeHowTo";
 import { useRecoveryPhraseMachine } from "~/renderer/components/Onboarding/Screens/Tutorial/machines/useRecoveryPhrase";
@@ -99,6 +100,10 @@ const screens = {
   },
   deviceHowTo: {
     component: DeviceHowTo,
+    bgTheme: "light",
+  },
+  deviceHowTo2: {
+    component: DeviceHowTo2,
     bgTheme: "light",
   },
   pinCode: {

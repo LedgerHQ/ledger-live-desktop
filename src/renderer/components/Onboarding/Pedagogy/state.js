@@ -1,5 +1,4 @@
 import { Machine } from "xstate";
-import { track } from "~/renderer/analytics/segment";
 
 export const pedagogyMachine = Machine({
   id: "pedagogy",
@@ -9,7 +8,6 @@ export const pedagogyMachine = Machine({
   },
   states: {
     accessYourCoins: {
-      entry: () => track("Onboarding - Edu step 1"),
       on: {
         NEXT: {
           target: "ownYourPrivateKey",
@@ -17,7 +15,6 @@ export const pedagogyMachine = Machine({
       },
     },
     ownYourPrivateKey: {
-      entry: () => track("Onboarding - Edu step 2"),
       on: {
         NEXT: {
           target: "stayOffline",
@@ -28,7 +25,6 @@ export const pedagogyMachine = Machine({
       },
     },
     stayOffline: {
-      entry: () => track("Onboarding - Edu step 3"),
       on: {
         NEXT: {
           target: "validateTransactions",
@@ -39,7 +35,6 @@ export const pedagogyMachine = Machine({
       },
     },
     validateTransactions: {
-      entry: () => track("Onboarding - Edu step 4"),
       on: {
         NEXT: {
           target: "setUpNanoWallet",
@@ -50,17 +45,13 @@ export const pedagogyMachine = Machine({
       },
     },
     setUpNanoWallet: {
-      entry: () => track("Onboarding - Edu step 5"),
       on: {
         PREV: {
           target: "validateTransactions",
         },
         DONE: {
           target: "accessYourCoins",
-          actions: [
-            "done",
-            () => track("Onboarding - Edu completed")
-          ],
+          actions: ["done"],
         },
       },
     },
