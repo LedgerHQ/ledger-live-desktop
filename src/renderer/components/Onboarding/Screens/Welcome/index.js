@@ -69,11 +69,7 @@ export function Welcome({ sendEvent }: Props) {
         <AnimatedWave height={600} color={theme === "dark" ? "#587ED4" : "#4385F016"} />
       </WaveContainer>
       <TopContainer>
-        <ComputerContainer>
-          {
-            theme === "light" ? <Computer /> : null
-          }
-        </ComputerContainer>
+        <ComputerContainer>{theme === "light" ? <Computer /> : null}</ComputerContainer>
       </TopContainer>
       <Text mt={160} mb="4px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize={32}>
         {t("onboarding.screens.welcome.title")}
