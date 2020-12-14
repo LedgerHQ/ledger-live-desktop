@@ -121,7 +121,7 @@ const VerifyOnDevice = ({
 };
 
 type Props = {
-  onClose: () => null,
+  onClose: () => void,
   skipDevice: boolean,
   data: {
     account: AccountLike,
