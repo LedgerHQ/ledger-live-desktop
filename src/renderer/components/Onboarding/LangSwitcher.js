@@ -26,11 +26,11 @@ const IconWrapperCircle: ThemedComponent<{ color?: string }> = styled(Box)`
 `;
 
 const options = [
-  { value: "en", label: <Trans i18nKey="language.switcher.en" /> },
-  { value: "fr", label: <Trans i18nKey="language.switcher.fr" /> },
-  { value: "ru", label: <Trans i18nKey="language.switcher.ru" /> },
-  { value: "zh", label: <Trans i18nKey="language.switcher.zh" /> },
-  { value: "es", label: <Trans i18nKey="language.switcher.es" /> },
+  { value: "en", support: "full", label: <Trans i18nKey="language.switcher.en" /> },
+  { value: "fr", support: "full", label: <Trans i18nKey="language.switcher.fr" /> },
+  { value: "ru", support: "partial", label: <Trans i18nKey="language.switcher.ru" /> },
+  { value: "zh", support: "partial", label: <Trans i18nKey="language.switcher.zh" /> },
+  { value: "es", support: "partial", label: <Trans i18nKey="language.switcher.es" /> },
 ];
 
 const styleFn = theme => ({
@@ -121,7 +121,6 @@ const LangSwitcher = () => {
   const theme = useTheme();
   const styles = useMemo(() => styleFn(theme), [theme]);
   const { language } = useSelector(langAndRegionSelector);
-  console.log({ language });
   const dispatch = useDispatch();
   const { i18n, t } = useTranslation();
   const [infoModalOpen, setInfoModalOpen] = useState("");
@@ -132,9 +131,9 @@ const LangSwitcher = () => {
   }, [i18n, language]);
 
   const changeLanguage = useCallback(
-    ({ value }) => {
+    ({ value, support }) => {
       dispatch(setLanguage(value));
-      if (value !== "en") {
+      if (support !== "full") {
         setInfoModalOpen(value);
       }
     },
@@ -149,8 +148,6 @@ const LangSwitcher = () => {
     () => options.find(({ value }) => value === language) || options[0],
     [language],
   );
-
-  console.log(currentLanguage);
 
   return (
     <>
