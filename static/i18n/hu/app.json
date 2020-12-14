@@ -162,7 +162,7 @@
       "title": "Swap your assets",
       "continue": "Continue",
       "link": "More about Swap",
-      "sorry": "Swap feature is not available in your country"
+      "sorry": "Service temporarily unavailable, or not available in your country"
     },
     "missingApp": {
       "title": "Please install the Exchange app on your device",
@@ -749,7 +749,6 @@
       "cta": "Clear cache"
     },
     "migrate": "Ledger Live számlák frissítése lehetséges",
-    "ongoingScams": "There are ongoing phishing scams on our userbase, please be careful and never share your recovery phrase.",
     "genericTerminatedCrypto": "{{coinName}} többé nem támogatott",
     "ledgerAcademy": {
       "title": "Ledger Academy",
@@ -1346,6 +1345,7 @@
         "title": "Eszköz"
       },
       "details": {
+        "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
         "from": "Innen",
         "to": "Ide",
         "selectAccountDebit": "Használni kívánt számla",
