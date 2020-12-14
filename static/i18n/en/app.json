@@ -2195,7 +2195,7 @@
           "2": {
             "heading": "Connect device",
             "title": "Connect your Nano",
-            "description": "Is your device already setup? Connect it to the app!"
+            "description": "Is your device already set up? Connect it to the app!"
           },
           "3": {
             "heading": "Restore device",
@@ -2215,7 +2215,7 @@
         "screens": {
           "importYourRecoveryPhrase": {
             "title": "Restore from recovery phrase",
-            "paragraph1": "Restore your Nano from your recovery phrase to restore, replace or back up your Ledger wallet.",
+            "paragraph1": "Restore your Nano from your recovery phrase to restore, replace or back up your Ledger hardware wallet.",
             "paragraph2": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
             "buttons": {
               "next": "OK, I’m ready!",
@@ -2270,18 +2270,18 @@
           },
           "quizSuccess": {
             "title": "Already a pro!",
-            "paragraph": "You are ready to safely manage your coins. Let’s quickly pair your device before enjoying your app freely.",
+            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
             "buttons": {
-              "next": "Lets plug my Nano",
+              "next": "Next step",
               "prev": "Previous step",
               "help": "Need help"
             }
           },
           "quizFailure": {
             "title": "You will soon become a pro...",
-            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra confortable about your cryptos safety. Only one quick step left!",
+            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety. Only one quick step left!",
             "buttons": {
-              "next": "Lets plug my Nano",
+              "next": "Next step",
               "prev": "Previous step"
             }
           },
@@ -2304,7 +2304,7 @@
             "title": "Enter your recovery phrase",
             "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
             "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
-            "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my coins in case I lose access to my Nano.",
+            "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
             "buttons": {
               "next": "Enter recovery phrase",
               "prev": "Previous step",
@@ -2422,10 +2422,10 @@
           },
           "quizzFail": {
             "title": "You will soon become a pro...",
-            "paragraph1": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra confortable about your cryptos safety.",
+            "paragraph1": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.",
             "paragraph2": "Only one quick step left!",
             "buttons": {
-              "next": "Lets plug my Nano",
+              "next": "Next step",
               "prev": "Previous step"
             }
           },
