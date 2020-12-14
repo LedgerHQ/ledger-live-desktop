@@ -194,7 +194,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
   const goToMainAccount = useCallback(() => {
     const url = `/account/${mainAccount.id}`;
     if (location !== url) {
-      history.push(url);
+      history.push({ pathname: url, state: { source: "operation details" } });
     }
     onClose();
   }, [mainAccount, history, onClose, location]);
@@ -202,7 +202,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
   const goToSubAccount = useCallback(() => {
     const url = `/account/${mainAccount.id}/${account.id}`;
     if (location !== url) {
-      history.push(url);
+      history.push({ pathname: url, state: { source: "operation details" } });
     }
     onClose();
   }, [mainAccount, account, history, onClose, location]);
@@ -280,6 +280,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                 <Box mt={1} selectable>
                   {hasFailed ? null : (
                     <CounterValue
+                      alwaysShowSign
                       color="palette.text.shade60"
                       fontSize={5}
                       date={date}
@@ -435,7 +436,6 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                           fontSize={3}
                           currency={mainAccount.currency}
                           value={fee}
-                          alwaysShowSign={false}
                           subMagnitude={1}
                           prefix={
                             <Box mr={1} color="palette.text.shade60" style={{ lineHeight: 1.2 }}>

@@ -3,7 +3,12 @@
 import { createSelector, createSelectorCreator, defaultMemoize } from "reselect";
 import type { OutputSelector } from "reselect";
 import { handleActions } from "redux-actions";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  AccountLike,
+  CryptoCurrency,
+  TokenCurrency,
+} from "@ledgerhq/live-common/lib/types";
 import {
   flattenAccounts,
   clearAccount,
@@ -58,6 +63,9 @@ const handlers: Object = {
     { payload: account }: { payload: Account },
   ): AccountsState => state.filter(acc => acc.id !== account.id),
 
+  CLEAN_FULLNODE_DISCONNECT: (state: AccountsState): AccountsState =>
+    state.filter(acc => acc.currency.id !== "bitcoin"),
+
   CLEAN_ACCOUNTS_CACHE: (state: AccountsState): AccountsState => state.map(clearAccount),
 
   // used to debug performance of redux updates
@@ -86,6 +94,40 @@ export const shallowAccountsSelector: OutputSelector<
   void,
   Account[],
 > = shallowAccountsSelectorCreator(accountsSelector, a => a);
+
+export const subAccountByCurrencyOrderedSelector: OutputSelector<
+  State,
+  { currency: CryptoCurrency | TokenCurrency },
+  Array<{ parentAccount: ?Account, account: AccountLike }>,
+> = createSelector(
+  accountsSelector,
+  (_, { currency }: { currency: CryptoCurrency | TokenCurrency }) => currency,
+  (accounts, currency) => {
+    const flatAccounts = flattenAccounts(accounts);
+    return currency
+      ? flatAccounts
+          .filter(
+            account =>
+              (account.type === "TokenAccount" ? account.token.id : account.currency.id) ===
+              currency.id,
+          )
+          .map(account => ({
+            account,
+            parentAccount:
+              account.type === "TokenAccount" && account.parentId
+                ? accounts.find(fa => fa.type === "Account" && fa.id === account.parentId)
+                : {},
+          }))
+          .sort((a, b) =>
+            a.account.balance.gt(b.account.balance)
+              ? -1
+              : a.account.balance.eq(b.account.balance)
+              ? 0
+              : 1,
+          )
+      : [];
+  },
+);
 
 // FIXME we might reboot this idea later!
 export const activeAccountsSelector = accountsSelector;
@@ -143,6 +185,14 @@ export const accountSelector: OutputSelector<
   accountsSelector,
   (_, { accountId }: { accountId: string }) => accountId,
   (accounts, accountId) => accounts.find(a => a.id === accountId),
+);
+
+export const getAccountById: OutputSelector<
+  State,
+  {},
+  (id: string) => ?Account,
+> = createSelector(accountsSelector, accounts => (accountId: string) =>
+  accounts.find(a => a.id === accountId),
 );
 
 export const migratableAccountsSelector = (s: *): Account[] => s.accounts.filter(canBeMigrated);

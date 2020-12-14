@@ -93,7 +93,7 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
   const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2);
   const icon = <CryptoCurrencyIcon currency={currency} size={16} />;
   const onClick = useCallback(() => {
-    history.push(`/asset/${currency.id}`);
+    history.push({ pathname: `/asset/${currency.id}`, state: { source: "asset allocation" } });
   }, [currency, history]);
 
   return (
@@ -108,7 +108,7 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
       </Asset>
       <PriceSection>
         {distribution ? (
-          <Price from={currency} color="palette.text.shade80" fontSize={3} />
+          <Price from={currency} color="palette.text.shade80" fontSize={3} showAllDigits={false} />
         ) : (
           <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
             {"-"}
@@ -142,11 +142,9 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
             <CounterValue
               currency={currency}
               value={amount}
-              disableRounding
               color="palette.text.shade100"
               fontSize={3}
               showCode
-              alwaysShowSign={false}
             />
           ) : (
             <Text ff="Inter" color="palette.text.shade100" fontSize={3}>

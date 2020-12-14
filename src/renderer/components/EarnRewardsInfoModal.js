@@ -81,10 +81,10 @@ export default function EarnRewardsInfoModal({
           renderFooter={() => (
             <Box horizontal grow>
               <Box grow>{footerLeft}</Box>
-              <Button secondary onClick={onClose}>
+              <Button ml={2} secondary onClick={onClose}>
                 <Trans i18nKey="common.cancel" />
               </Button>
-              <Button primary onClick={onNext}>
+              <Button ml={2} primary onClick={onNext}>
                 {nextLabel || <Trans i18nKey="common.continue" />}
               </Button>
             </Box>

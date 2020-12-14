@@ -242,11 +242,13 @@ const BuyCrypto = () => {
       centered
       render={({ data, onClose }) => (
         <ModalBody
-          onClose={onClose}
+          onClose={() => {
+            if (data.onCancel) {
+              data.onCancel();
+            }
+            onClose();
+          }}
           title="Connect your device"
-          render={() =>
-            data ? <Root data={data} onClose={onClose} skipDevice={skipDevice} /> : null
-          }
           renderFooter={() =>
             data && !device ? (
               <StepConnectDeviceFooter
@@ -254,6 +256,20 @@ const BuyCrypto = () => {
                 onClose={onClose}
                 onSkipDevice={v => {
                   setSkipDevice(v);
+                }}
+              />
+            ) : null
+          }
+          render={() =>
+            data ? (
+              <Root
+                data={data}
+                skipDevice={skipDevice}
+                onClose={() => {
+                  if (data.onCancel) {
+                    data.onCancel();
+                  }
+                  onClose();
                 }}
               />
             ) : null

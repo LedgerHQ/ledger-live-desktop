@@ -9,6 +9,7 @@ export type FeatureCommon = {
   title: string,
   description: string,
   shadow?: boolean,
+  dirty?: boolean, // NB Will trigger a clear cache if changed
 };
 
 export type FeatureToggle =
@@ -61,14 +62,6 @@ export const experimentalFeatures: Feature[] = [
       "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.",
   },
   {
-    type: "toggle",
-    name: "LEDGER_COUNTERVALUES_API",
-    valueOn: "http://countervalue-service.dev.aws.ledger.fr",
-    valueOff: "https://countervalues.api.live.ledger.com",
-    title: "Experimental Countervalues API",
-    description: "Changing this value may break the countervalues displayed for your accounts.",
-  },
-  {
     type: "integer",
     name: "KEYCHAIN_OBSERVABLE_RANGE",
     title: "Custom gap limit",
@@ -76,6 +69,7 @@ export const experimentalFeatures: Feature[] = [
       "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts.",
     minValue: 20,
     maxValue: 999,
+    dirty: true,
   },
   {
     type: "integer",
@@ -84,15 +78,6 @@ export const experimentalFeatures: Feature[] = [
     description:
       "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device.",
     minValue: 1,
-  },
-  {
-    type: "toggle",
-    name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
-    valueOn: "ethereum",
-    valueOff: "",
-    title: "Experimental Ethereum implementation",
-    description:
-      "Switch to a new JavaScript implementation of Ethereum. This should improve performance and fix a few bugs, as well as display token operations as fee operations instead of send transactions.",
   },
 ];
 

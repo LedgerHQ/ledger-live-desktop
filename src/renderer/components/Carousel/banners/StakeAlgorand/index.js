@@ -80,7 +80,10 @@ const StakeAlgorand = () => {
       .sort((a, b) => b.balance.minus(a.balance));
 
     if (highestBalanceAccount[0]) {
-      history.push(`/account/${highestBalanceAccount[0].id}`);
+      history.push({
+        pathname: `/account/${highestBalanceAccount[0].id}`,
+        state: { source: "stake algorand banner" },
+      });
       dispatch(openModal("MODAL_ALGORAND_CLAIM_REWARDS", { account: highestBalanceAccount[0] }));
     } else {
       dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));

@@ -47,6 +47,7 @@ type Props = {|
     account: ?AccountLike,
     parentAccount: ?Account,
     mode: ?string,
+    eventType?: string,
     stepId: ?StepId,
   },
 |};
@@ -223,6 +224,7 @@ const Body = ({ onChangeStepId, onClose, stepId, params }: Props) => {
     stepId,
     openedWithAccount: Boolean(params && params.account),
     steps,
+    eventType: params.eventType,
     errorSteps,
     device,
     openedFromAccount,

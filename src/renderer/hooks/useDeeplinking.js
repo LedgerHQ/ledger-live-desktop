@@ -38,7 +38,7 @@ export function useDeepLinkHandler() {
   const navigate = useCallback(
     (url: string) => {
       if (url !== location.pathname) {
-        history.push(url);
+        history.push({ pathname: url, state: { source: "deeplink" } });
       }
     },
     [history, location],
@@ -48,10 +48,7 @@ export function useDeepLinkHandler() {
     (event: any, deeplink: string) => {
       const { pathname, searchParams } = new URL(deeplink);
       const query = Object.fromEntries(searchParams);
-
-      const matcher = /^\/+/;
-
-      const url = pathname.replace(matcher, "");
+      const url = pathname.replace(/^\/+/, "");
 
       switch (url) {
         case "accounts":
@@ -75,6 +72,17 @@ export function useDeepLinkHandler() {
             navigate(`/account/${chosen.parentId}/${chosen.id}`);
           }
 
+          break;
+        }
+
+        case "bridge": {
+          const { origin, appName } = query;
+          dispatch(
+            openModal("MODAL_WEBSOCKET_BRIDGE", {
+              origin,
+              appName,
+            }),
+          );
           break;
         }
 

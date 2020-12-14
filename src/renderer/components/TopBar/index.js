@@ -88,7 +88,7 @@ const TopBar = () => {
     }
 
     if (location.pathname !== url) {
-      history.push(url);
+      history.push({ pathname: url, state: { source: "topbar" } });
     }
   }, [history, location, dispatch]);
 

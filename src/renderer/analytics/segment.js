@@ -10,8 +10,8 @@ import {
   sidebarCollapsedSelector,
   langAndRegionSelector,
   shareAnalyticsSelector,
+  lastSeenDeviceSelector,
 } from "~/renderer/reducers/settings";
-import { getCurrentDevice } from "~/renderer/reducers/devices";
 import type { State } from "~/renderer/reducers";
 
 // load analytics
@@ -40,8 +40,15 @@ const extraProperties = store => {
   const state: State = store.getState();
   const { language, region } = langAndRegionSelector(state);
   const systemLocale = getSystemLocale();
-  const device = getCurrentDevice(state);
-  const deviceInfo = device ? { modelId: device.modelId } : {};
+  const device = lastSeenDeviceSelector(state);
+  const deviceInfo = device
+    ? {
+        modelId: device.modelId,
+        deviceVersion: device.deviceInfo.version,
+        appLength: device.apps.length,
+      }
+    : {};
+
   const sidebarCollapsed = sidebarCollapsedSelector(state);
 
   return {
@@ -98,31 +105,33 @@ function sendTrack(event, properties: ?Object, storeInstance: *) {
     logger.error("analytics is not available");
     return;
   }
-  analytics.track(
-    event,
-    {
-      ...extraProperties(storeInstance),
-      ...properties,
-    },
-    {
-      context: getContext(storeInstance),
-    },
-  );
+
+  analytics.track(event, properties, {
+    context: getContext(storeInstance),
+  });
   trackSubject.next({ event, properties });
 }
 
 export const track = (event: string, properties: ?Object, mandatory: ?boolean) => {
-  logger.analyticsTrack(event, properties);
   if (!storeInstance || (!mandatory && !shareAnalyticsSelector(storeInstance.getState()))) {
     return;
   }
-  sendTrack(event, properties, storeInstance);
+  const fullProperties = {
+    ...extraProperties(storeInstance),
+    ...properties,
+  };
+  logger.analyticsTrack(event, fullProperties);
+  sendTrack(event, fullProperties, storeInstance);
 };
 
 export const page = (category: string, name: ?string, properties: ?Object) => {
-  logger.analyticsPage(category, name, properties);
   if (!storeInstance || !shareAnalyticsSelector(storeInstance.getState())) {
     return;
   }
-  sendTrack(`Page ${category + (name ? ` ${name}` : "")}`, properties, storeInstance);
+  const fullProperties = {
+    ...extraProperties(storeInstance),
+    ...properties,
+  };
+  logger.analyticsPage(category, name, fullProperties);
+  sendTrack(`Page ${category + (name ? ` ${name}` : "")}`, fullProperties, storeInstance);
 };

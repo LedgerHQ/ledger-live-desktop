@@ -2,7 +2,7 @@
 import React, { useCallback, useState } from "react";
 import { Trans } from "react-i18next";
 import { ModalBody } from "~/renderer/components/Modal";
-import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
+import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import StepSummary, { StepSummaryFooter } from "~/renderer/modals/Swap/steps/StepSummary";
 import StepDevice, { StepDeviceFooter } from "~/renderer/modals/Swap/steps/StepDevice";
 import StepFinished, { StepFinishedFooter } from "~/renderer/modals/Swap/steps/StepFinished";
@@ -11,7 +11,7 @@ import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import { useDispatch } from "react-redux";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import { addPendingOperation, getMainAccount } from "@ledgerhq/live-common/lib/account";
-import addToSwapHistory from "@ledgerhq/live-common/lib/swap/addToSwapHistory";
+import addToSwapHistory from "@ledgerhq/live-common/lib/exchange/swap/addToSwapHistory";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Track from "~/renderer/analytics/Track";
 
@@ -21,6 +21,7 @@ const SwapBody = ({
   transaction,
   onClose,
   onStepChange,
+  onCompleteSwap,
   activeStep,
   ratesExpiration,
 }: {
@@ -28,6 +29,7 @@ const SwapBody = ({
   transaction: any, // FIXME
   onClose: any,
   onStepChange: SwapSteps => void,
+  onCompleteSwap: () => void,
   activeStep: SwapSteps,
   ratesExpiration: Date,
 }) => {
@@ -65,8 +67,9 @@ const SwapBody = ({
       );
       setResult(result);
       onStepChange("finished");
+      onCompleteSwap();
     },
-    [dispatch, fromAccount, fromParentAccount, onStepChange, swap, transaction],
+    [dispatch, fromAccount, fromParentAccount, onCompleteSwap, onStepChange, swap, transaction],
   );
 
   const items = [
@@ -83,7 +86,7 @@ const SwapBody = ({
       title={<Trans i18nKey="swap.modal.title" />}
       render={() => (
         <>
-          <TrackPage category="Swap" name={`ModalStep-${activeStep}`} />
+          <TrackPage key={activeStep} category="Swap" name={`ModalStep-${activeStep}`} />
           <Breadcrumb
             mb={40}
             currentStep={["summary", "device", "finished"].indexOf(activeStep)}
@@ -92,7 +95,7 @@ const SwapBody = ({
           />
           {error ? (
             <>
-              <Track onUpdate event={`SwapModalError-${error.name}`} />
+              <Track key={error.name} onMount event={`SwapModalError-${error.name}`} />
               <ErrorDisplay error={error} />
             </>
           ) : activeStep === "summary" ? (
@@ -124,6 +127,7 @@ const SwapBody = ({
           <StepDeviceFooter onClose={onClose} />
         ) : activeStep === "summary" ? (
           <StepSummaryFooter
+            provider={swap.exchangeRate.provider}
             setError={setError}
             onContinue={onAcceptTOS}
             onClose={onClose}

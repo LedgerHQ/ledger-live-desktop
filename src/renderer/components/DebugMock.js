@@ -6,6 +6,7 @@ import { getEnv } from "@ledgerhq/live-common/lib/env";
 import Text from "~/renderer/components/Text";
 import { ReplaySubject } from "rxjs";
 import { deserializeError } from "@ledgerhq/errors";
+import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 import { deviceInfo155, mockListAppsResult } from "@ledgerhq/live-common/lib/apps/mock";
 import useInterval from "~/renderer/hooks/useInterval";
 import Box from "~/renderer/components/Box";
@@ -100,6 +101,17 @@ const swapEvents = [
     },
   },
   {
+    name: "result with outdated Exchange",
+    event: {
+      type: "result",
+      result: mockListAppsResult(
+        "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar,Exchange",
+        "Exchange(outdated),Tron,Bitcoin,Ethereum",
+        deviceInfo155,
+      ),
+    },
+  },
+  {
     name: "result with Exchange",
     event: {
       type: "result",
@@ -130,6 +142,51 @@ const swapEvents = [
         "Exchange,Bitcoin",
         deviceInfo155,
       ),
+    },
+  },
+  {
+    name: "init-swap-requested",
+    event: {
+      type: "init-swap-requested",
+    },
+  },
+  {
+    name: "init-swap-error",
+    event: {
+      type: "init-swap-error",
+      error: { name: "SwapGenericAPIError" },
+    },
+  },
+  {
+    name: "init-swap-result",
+    event: {
+      type: "init-swap-result",
+      initSwapResult: {
+        transaction: fromTransactionRaw({
+          family: "bitcoin",
+          recipient: "1Cz2ZXb6Y6AacXJTpo4RBjQMLEmscuxD8e",
+          amount: "1",
+          feePerByte: "1",
+          networkInfo: {
+            family: "bitcoin",
+            feeItems: {
+              items: [
+                { key: "0", speed: "high", feePerByte: "3" },
+                { key: "1", speed: "standard", feePerByte: "2" },
+                { key: "2", speed: "low", feePerByte: "1" },
+              ],
+              defaultFeePerByte: "1",
+            },
+          },
+          rbf: false,
+          utxoStrategy: {
+            strategy: 0,
+            pickUnconfirmedRBF: false,
+            excludeUTXOs: [],
+          },
+        }),
+        swapId: "12345",
+      },
     },
   },
 ];

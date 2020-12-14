@@ -6,6 +6,7 @@ import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 import last from "lodash/last";
+import find from "lodash/find";
 import type { Account, Transaction, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import InputCurrency from "~/renderer/components/InputCurrency";
@@ -63,7 +64,9 @@ export const FeesField = ({ transaction, account, onChange, status }: Props) => 
     [networkInfo],
   );
 
-  const [selectedItem, setSelectedItem] = useState(last(feeItems));
+  const [selectedItem, setSelectedItem] = useState(
+    find(feeItems, { label: "standard" }) || last(feeItems),
+  );
   const selectedValue =
     !feePerByte || selectedItem.label === "custom"
       ? last(feeItems)

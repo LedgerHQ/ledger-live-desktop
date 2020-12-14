@@ -1,10 +1,8 @@
 // @flow
-import React, { useCallback } from "react";
-import { Trans } from "react-i18next";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-
-import { refreshAccountsOrdering } from "~/renderer/actions/general";
+import React, { useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
 import { saveSettings } from "~/renderer/actions/settings";
 import Track from "~/renderer/analytics/Track";
 import BoldToggle from "~/renderer/components/BoldToggle";
@@ -16,28 +14,31 @@ import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import { getOrderAccounts } from "~/renderer/reducers/settings";
 
-const items = ["balance|desc", "balance|asc", "name|asc", "name|desc"].map(key => ({
-  key,
-  label: <Trans i18nKey={`accounts.order.${key}`} />,
-}));
+export default function Order() {
+  const orderAccounts = useSelector(getOrderAccounts);
+  const refreshAccountsOrdering = useRefreshAccountsOrdering();
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
 
-type Props = {
-  orderAccounts: string,
-  refreshAccountsOrdering: () => *,
-  saveSettings: (*) => *,
-};
-
-const Order = ({ orderAccounts, saveSettings, refreshAccountsOrdering }: Props) => {
   const onChange = useCallback(
     o => {
       if (!o) return;
-      saveSettings({ orderAccounts: o.key });
+      dispatch(saveSettings({ orderAccounts: o.key }));
       refreshAccountsOrdering();
     },
-    [saveSettings, refreshAccountsOrdering],
+    [refreshAccountsOrdering, dispatch],
   );
 
   const renderItem = useCallback(props => <OrderItem {...props} />, []);
+
+  const items = useMemo(
+    () =>
+      ["balance|desc", "balance|asc", "name|asc", "name|desc"].map(key => ({
+        key,
+        label: t(`accounts.order.${key}`),
+      })),
+    [t],
+  );
 
   const value = items.find(item => item.key === orderAccounts);
 
@@ -54,7 +55,7 @@ const Order = ({ orderAccounts, saveSettings, refreshAccountsOrdering }: Props) 
           <Box horizontal flow={1}>
             <Track onUpdate event="ChangeSort" orderAccounts={orderAccounts} />
             <Text ff="Inter|SemiBold" fontSize={4}>
-              <Trans i18nKey="common.sortBy" />
+              {t("common.sortBy")}
             </Text>
             <Box
               alignItems="center"
@@ -64,9 +65,7 @@ const Order = ({ orderAccounts, saveSettings, refreshAccountsOrdering }: Props) 
               fontSize={4}
               horizontal
             >
-              <Text color="wallet">
-                <Trans i18nKey={`accounts.order.${value.key}`} />
-              </Text>
+              <Text color="wallet">{t(`accounts.order.${value.key}`)}</Text>
               {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
             </Box>
           </Box>
@@ -74,7 +73,7 @@ const Order = ({ orderAccounts, saveSettings, refreshAccountsOrdering }: Props) 
       }
     </DropDownSelector>
   );
-};
+}
 
 type ItemProps = {
   item: DropDownItemType,
@@ -97,16 +96,3 @@ const OrderItem: React$ComponentType<ItemProps> = React.memo(function OrderItem(
     </DropDownItem>
   );
 });
-
-const mapStateToProps = createStructuredSelector({
-  orderAccounts: getOrderAccounts,
-});
-
-const mapDispatchToProps = {
-  refreshAccountsOrdering,
-  saveSettings,
-};
-
-const ConnectedOrder: React$ComponentType<{}> = connect(mapStateToProps, mapDispatchToProps)(Order);
-
-export default ConnectedOrder;

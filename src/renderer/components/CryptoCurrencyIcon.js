@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import styled, { withTheme } from "styled-components";
-import { getCryptoCurrencyIcon } from "@ledgerhq/live-common/lib/react";
+import { getCryptoCurrencyIcon, getTokenCurrencyIcon } from "@ledgerhq/live-common/lib/react";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { mix } from "~/renderer/styles/helpers";
@@ -60,10 +60,16 @@ const CryptoCurrencyIcon = ({ currency, circle, size, overrideColor, inactive, t
     return null;
   }
   if (currency.type === "TokenCurrency") {
+    const TokenIconCurrency = getTokenCurrencyIcon && getTokenCurrencyIcon(currency);
+
     return (
       <TokenIconWrapper>
         <TokenIcon circle={circle} color={color} size={size}>
-          {currency.ticker[0]}
+          {TokenIconCurrency ? (
+            <TokenIconCurrency size={size * 0.55} color={color} />
+          ) : (
+            currency.ticker[0]
+          )}
         </TokenIcon>
       </TokenIconWrapper>
     );

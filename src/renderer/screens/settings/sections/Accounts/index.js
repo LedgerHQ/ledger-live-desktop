@@ -7,28 +7,26 @@ import EyeSlash from "~/renderer/icons/EyeSlash";
 import { SettingsSection as Section, SettingsSectionHeader as Header } from "../../SettingsSection";
 import HideEmptyTokenAccountsToggle from "./HideEmptyTokenAccountsToggle";
 import SectionExport from "./Export";
-import BlacklistedTokens from "~/renderer/screens/settings/sections/Accounts/BlacklistedTokens";
+import Currencies from "./Currencies";
+import BlacklistedTokens from "./BlacklistedTokens";
 
-const SectionAccounts = () => {
+export default function SectionAccounts() {
   const { t } = useTranslation();
 
   return (
     <>
       <Section style={{ flowDirection: "column" }}>
         <TrackPage category="Settings" name="Accounts" />
-
+        <Currencies />
+        <SectionExport />
         <Header
           icon={<EyeSlash />}
           title={t("settings.accounts.hideEmptyTokens.title")}
           desc={t("settings.accounts.hideEmptyTokens.desc")}
           renderRight={<HideEmptyTokenAccountsToggle />}
         />
-
-        <SectionExport />
+        <BlacklistedTokens />
       </Section>
-      <BlacklistedTokens />
     </>
   );
-};
-
-export default SectionAccounts;
+}

@@ -12,7 +12,7 @@ import { sidebarCollapsedSelector, lastSeenDeviceSelector } from "~/renderer/red
 import { isNavigationLocked } from "~/renderer/reducers/application";
 
 import { openModal } from "~/renderer/actions/modals";
-import { setSidebarCollapsed } from "~/renderer/actions/settings";
+import { setFirstTimeLend, setSidebarCollapsed } from "~/renderer/actions/settings";
 
 import useExperimental from "~/renderer/hooks/useExperimental";
 
@@ -25,6 +25,7 @@ import IconReceive from "~/renderer/icons/Receive";
 import IconSend from "~/renderer/icons/Send";
 import IconExchange from "~/renderer/icons/Exchange";
 import IconChevron from "~/renderer/icons/ChevronRight";
+import IconLending from "~/renderer/icons/Graph";
 import IconExperimental from "~/renderer/icons/Experimental";
 import IconSwap from "~/renderer/icons/Swap";
 
@@ -34,6 +35,7 @@ import Space from "~/renderer/components/Space";
 import UpdateDot from "~/renderer/components/Updater/UpdateDot";
 import { Dot } from "~/renderer/components/Dot";
 import Stars from "~/renderer/components/Stars";
+import useEnv from "~/renderer/hooks/useEnv";
 
 import TopGradient from "./TopGradient";
 import Hide from "./Hide";
@@ -159,10 +161,15 @@ const SideBar = styled(Box).attrs(() => ({
 
 const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
   const isExperimental = useExperimental();
+  const hasFullNodeConfigured = useEnv("SATSTACK"); // NB remove once full node is not experimental
+
   const { t } = useTranslation();
 
-  return isExperimental ? (
-    <Tag id="drawer-experimental-button" to="/settings/experimental">
+  return isExperimental || hasFullNodeConfigured ? (
+    <Tag
+      id="drawer-experimental-button"
+      to={{ pathname: "/settings/experimental", state: { source: "sidebar" } }}
+    >
       <IconExperimental width={16} height={16} />
       <TagText collapsed={collapsed}>{t("common.experimentalFeature")}</TagText>
     </Tag>
@@ -182,16 +189,17 @@ const MainSideBar = () => {
   const noAccounts = useSelector(accountsSelector).length === 0;
   const hasStarredAccounts = useSelector(starredAccountsSelector).length > 0;
   const displayBlueDot = useManagerBlueDot(lastSeenDevice);
+  const firstTimeLend = useSelector(state => state.settings.firstTimeLend);
 
   const handleCollapse = useCallback(() => {
     dispatch(setSidebarCollapsed(!collapsed));
   }, [dispatch, collapsed]);
 
   const push = useCallback(
-    (to: string) => {
-      if (location.pathname === to) return;
+    (pathname: string) => {
+      if (location.pathname === pathname) return;
 
-      history.push(to);
+      history.push({ pathname, state: { source: "sidebar" } });
     },
     [history, location.pathname],
   );
@@ -211,6 +219,13 @@ const MainSideBar = () => {
   const handleClickExchange = useCallback(() => {
     push("/exchange");
   }, [push]);
+
+  const handleClickLend = useCallback(() => {
+    if (firstTimeLend) {
+      dispatch(setFirstTimeLend());
+    }
+    push("/lend");
+  }, [push, firstTimeLend, dispatch]);
 
   const handleClickSwap = useCallback(() => {
     push("/swap");
@@ -305,6 +320,16 @@ const MainSideBar = () => {
                 disabled={noAccounts || navigationLocked}
                 isActive={location.pathname === "/swap"}
                 collapsed={secondAnim}
+              />
+              <SideBarListItem
+                id={"lend"}
+                label={t("sidebar.lend")}
+                icon={IconLending}
+                iconActiveColor="wallet"
+                onClick={handleClickLend}
+                isActive={location.pathname === "/lend"}
+                collapsed={secondAnim}
+                NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
               />
               <SideBarListItem
                 id={"manager"}

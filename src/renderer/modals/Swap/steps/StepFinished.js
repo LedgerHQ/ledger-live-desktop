@@ -1,7 +1,7 @@
 // @flow
 import React, { useEffect, useCallback } from "react";
 import type { Operation } from "@ledgerhq/live-common/lib/types/operation";
-import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/swap/types";
+import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import Box from "~/renderer/components/Box";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
 import IconSwap from "~/renderer/icons/Swap";
@@ -162,16 +162,17 @@ export const StepFinishedFooter = ({
 
   return (
     <Box horizontal>
-      <Button onClick={onClose} secondary>
-        <Trans i18nKey="common.close" />
-      </Button>
       <Button
-        primary
-        ml={2}
+        id="swap-modal-finished-details-button"
+        secondary
+        mr={2}
         event="Swap completed - Clicked on operation details CTA"
         onClick={onViewOperationDetails}
       >
         <Trans i18nKey="swap.modal.steps.finished.seeDetails" />
+      </Button>
+      <Button onClick={onClose} primary id="swap-modal-finished-close-button">
+        <Trans i18nKey="common.close" />
       </Button>
     </Box>
   );

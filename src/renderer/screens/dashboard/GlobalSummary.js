@@ -1,124 +1,109 @@
 // @flow
-
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { portfolioSelector } from "~/renderer/actions/portfolio";
+import React, { useCallback } from "react";
+import { useSelector } from "react-redux";
 import { BigNumber } from "bignumber.js";
 import moment from "moment";
 import { formatShort } from "@ledgerhq/live-common/lib/currencies";
-import type { Currency, PortfolioRange, Portfolio } from "@ledgerhq/live-common/lib/types";
-
-import Chart from "~/renderer/components/Chart2";
+import type { Currency, PortfolioRange, BalanceHistoryData } from "@ledgerhq/live-common/lib/types";
+import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import PlaceholderChart from "~/renderer/components/PlaceholderChart";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
 import BalanceInfos from "~/renderer/components/BalanceInfos";
-import type { TFunction } from "react-i18next";
+import { usePortfolio } from "~/renderer/actions/portfolio";
 
-type OwnProps = {
+type Props = {
   counterValue: Currency,
   chartColor: string,
   chartId: string,
   range: PortfolioRange,
-  t: TFunction,
   selectedTimeRange: string,
   handleChangeSelectedTime: any => void,
 };
 
-type Props = {
-  ...OwnProps,
-  discreetMode: boolean,
-  portfolio: Portfolio,
-};
+export default function PortfolioBalanceSummary({
+  range,
+  chartColor,
+  chartId,
+  counterValue,
+  selectedTimeRange,
+  handleChangeSelectedTime,
+}: Props) {
+  const portfolio = usePortfolio();
+  const discreetMode = useSelector(discreetModeSelector);
 
-const Tooltip = ({ counterValue, d }: *) => (
-  <>
-    <FormattedVal
-      alwaysShowSign={false}
-      fontSize={5}
-      color="palette.text.shade100"
-      showCode
-      unit={counterValue.units[0]}
-      val={d.value}
-    />
-    <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
-      {moment(d.date).format("LL")}
-    </Box>
-  </>
-);
+  const renderTickY = useCallback(
+    (val: number) => formatShort(counterValue.units[0], BigNumber(val)),
+    [counterValue],
+  );
 
-class PortfolioBalanceSummary extends PureComponent<Props> {
-  renderTickY = (val: number) => formatShort(this.props.counterValue.units[0], BigNumber(val));
+  const renderTooltip = useCallback(
+    (data: BalanceHistoryData) => <Tooltip data={data} counterValue={counterValue} range={range} />,
+    [counterValue, range],
+  );
 
-  renderTooltip = (d: any) => <Tooltip d={d} counterValue={this.props.counterValue} />;
+  return (
+    <Card p={0} py={5}>
+      <Box px={6} data-e2e="dashboard_graph">
+        <BalanceInfos
+          unit={counterValue.units[0]}
+          isAvailable={portfolio.balanceAvailable}
+          since={selectedTimeRange}
+          valueChange={portfolio.countervalueChange}
+          totalBalance={portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value}
+          handleChangeSelectedTime={handleChangeSelectedTime}
+        />
+      </Box>
 
-  render() {
-    const {
-      portfolio,
-      range,
-      chartColor,
-      chartId,
-      discreetMode,
-      counterValue,
-      selectedTimeRange,
-      handleChangeSelectedTime,
-      t,
-    } = this.props;
-    return (
-      <Card p={0} py={5}>
-        <Box px={6} data-e2e="dashboard_graph">
-          <BalanceInfos
-            t={t}
-            unit={counterValue.units[0]}
-            isAvailable={portfolio.balanceAvailable}
-            since={selectedTimeRange}
-            valueChange={portfolio.countervalueChange}
-            totalBalance={portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value}
-            handleChangeSelectedTime={handleChangeSelectedTime}
+      <Box
+        px={5}
+        ff="Inter"
+        fontSize={4}
+        color="palette.text.shade80"
+        pt={5}
+        style={{ overflow: "visible" }}
+      >
+        {portfolio.balanceAvailable ? (
+          <Chart
+            magnitude={counterValue.units[0].magnitude}
+            color={chartColor}
+            data={portfolio.balanceHistory}
+            height={250}
+            tickXScale={range}
+            renderTickY={discreetMode ? () => "" : renderTickY}
+            renderTooltip={renderTooltip}
           />
-        </Box>
-
-        <Box
-          px={5}
-          ff="Inter"
-          fontSize={4}
-          color="palette.text.shade80"
-          pt={5}
-          style={{ overflow: "visible" }}
-        >
-          {portfolio.balanceAvailable ? (
-            <Chart
-              onlyUpdateIfLastPointChanges
-              id={chartId}
-              magnitude={counterValue.units[0].magnitude}
-              color={chartColor}
-              data={portfolio.balanceHistory}
-              height={250}
-              tickXScale={range}
-              renderTickY={discreetMode ? () => "" : this.renderTickY}
-              isInteractive
-              renderTooltip={this.renderTooltip}
-            />
-          ) : (
-            <PlaceholderChart
-              chartId={chartId}
-              data={portfolio.balanceHistory}
-              tickXScale={range}
-            />
-          )}
-        </Box>
-      </Card>
-    );
-  }
+        ) : (
+          <PlaceholderChart
+            magnitude={counterValue.units[0].magnitude}
+            chartId={chartId}
+            data={portfolio.balanceHistory}
+            tickXScale={range}
+          />
+        )}
+      </Box>
+    </Card>
+  );
 }
 
-const ConnectedBalanceSummary: React$ComponentType<OwnProps> = connect(
-  createStructuredSelector({
-    portfolio: portfolioSelector,
-    discreetMode: discreetModeSelector,
-  }),
-)(PortfolioBalanceSummary);
-
-export default ConnectedBalanceSummary;
+function Tooltip({ data, counterValue }: { data: BalanceHistoryData, counterValue: Currency }) {
+  return (
+    <>
+      <FormattedVal
+        alwaysShowSign={false}
+        fontSize={5}
+        color="palette.text.shade100"
+        showCode
+        unit={counterValue.units[0]}
+        val={data.value}
+      />
+      <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
+        {moment(data.date).format("LL")}
+      </Box>
+      <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
+        {moment(data.date).format("LT")}
+      </Box>
+    </>
+  );
+}

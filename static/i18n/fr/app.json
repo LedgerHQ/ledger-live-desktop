@@ -1,4 +1,9 @@
 {
+  "calendar": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "yesterday": "Yesterday"
+  },
   "common": {
     "labelYes": "Oui",
     "labelNo": "Non",
@@ -11,6 +16,7 @@
     "delete": "Supprimer",
     "launch": "Lancer",
     "continue": "Continuer",
+    "previous": "Précédent",
     "learnMore": "En savoir plus",
     "help": "Aide",
     "skipThisStep": "Ignorer cette étape",
@@ -77,10 +83,13 @@
       "DELEGATE": "Déléguée",
       "REDELEGATE": "Redélégué",
       "UNDELEGATE": "Interrompue",
+      "SUPPLY": "Déposé",
+      "REDEEM": "Retiré",
+      "APPROVE": "Approuvé",
       "VOTE": "Voté",
       "FREEZE": "Gelé",
       "UNFREEZE": "Dégelé",
-      "REWARD": "Récompense réclamée",
+      "REWARD": "Récompense",
       "FEES": "Frais",
       "OPT_IN": "Activer",
       "OPT_OUT": "Désactiver",
@@ -116,12 +125,24 @@
     "stars": "Comptes favoris",
     "accounts": "Comptes",
     "manager": "Manager",
+    "exchange": "Achat / Vente",
     "swap": "Swap",
-    "exchange": "Acheter des cryptos"
+    "lend": "Lend"
   },
   "stars": {
     "placeholder": "Les comptes que vous placez en favoris dans la page <1><0>Comptes</0></1> apparaitront ici !",
     "tooltip": "Ajouter aux favoris"
+  },
+  "bridge": {
+    "modalTitle": "Ouvrir pont de connexion",
+    "openHeader": "Exposer les comptes de votre appareil via WebSocket",
+    "openDescription": "Ouvrir un pont de connexion expose vos comptes à des applications tierces.",
+    "openedHeader": "{{appName}} pont de connexion ouvert",
+    "openedDescription": "Vous pouvez maintenant accéder à votre compte {{appName}} sur une application web tierce via WebSocket.",
+    "completeHeader": "Session terminée",
+    "completeDescription": "Le pont de connexion websocket est maintenant fermé.",
+    "openButton": "Ouvrir",
+    "disconnectButton": "Déconnecter"
   },
   "swap": {
     "title": "Swap",
@@ -141,7 +162,7 @@
       "title": "Échanger vos actifs",
       "continue": "Continuer",
       "link": "En savoir plus sur le swap",
-      "sorry": "Le Swap n'est pas disponible dans votre pays"
+      "sorry": "Service temporarily unavailable, or not available in your country"
     },
     "missingApp": {
       "title": "Veuillez installer l'application Exchange sur votre appareil",
@@ -196,7 +217,8 @@
           "terms": "Termes et conditions",
           "disclaimer": {
             "header": "Détails",
-            "description": "En cliquant sur \"Confirmer\", je reconnais et j'accepte que ce service soit exclusivement régi par Changelly"
+            "description": "En cliquant sur \"Confirmer\", je reconnais et j'accepte que ce service soit exclusivement régi par <0>{{provider}}</0>",
+            "acceptedDescription": "Ce service est exclusivement régi par <0>{{provider}}</0>"
           },
           "details": {
             "provider": "Fournisseur",
@@ -228,6 +250,132 @@
       "creditedAmount": "Montant à recevoir"
     }
   },
+  "fullNode": {
+    "status": "Statut",
+    "connect": "Connecter",
+    "disconnect": "Déconnecter",
+    "checkNodeSettings": "Vérifier les paramètres du nœud",
+    "edit": "Éditer",
+    "modal": {
+      "title": "Connecter le nœud Bitcoin",
+      "disconnectTitle": "Déconnecter le noeud",
+      "steps": {
+        "landing": {
+          "title": "Noeud",
+          "header": "Démarrez votre nœud. Don’t trust, verify.",
+          "description": "Un nœud Bitcoin valide toutes les transactions et tous les blocs, vous permettant d'utiliser Bitcoin de manière fiable tout en contribuant au réseau Bitcoin.",
+          "list": {
+            "item1": "Configurez Bitcoin Core sur un appareil avec des ressources suffisantes.",
+            "item2": "Attendez que votre nœud soit complètement synchronisé.",
+            "item3": "Prenez note de vos identifiants RPC, de votre adresse IP et de votre numéro de port."
+          },
+          "disclaimer": "Exécuter un nœud nécessite un ordinateur disposant de ressources suffisantes et d'une connexion à une bande passante sans restriction de données."
+        },
+        "node": {
+          "title": "Noeud",
+          "connectionSteps": {
+            "notConnected": {
+              "header": "Entrez les paramètres de votre noeud",
+              "disclaimer": "Votre nœud doit être entièrement synchronisé avant de connecter Ledger Live.",
+              "fields": {
+                "nodeHost": {
+                  "title": "Hôte",
+                  "tooltip": "Laisser par défaut si le noeud s'exécute sur cet ordinateur, ou remplacer l'adresse IP et le numéro de port du noeud."
+                },
+                "rpcCredentials": {
+                  "title": "Certificats RPC",
+                  "tooltip": "Entrez le nom d'utilisateur RPC et le mot de passe de votre nœud, trouvés dans le fichier bitcoin.conf.",
+                  "usernamePlaceholder": "Nom d'utilisateur",
+                  "passwordPlaceholder": "Mot de passe"
+                },
+                "tls": {
+                  "title": "Utiliser TLS",
+                  "tooltip": "Activer le Transport Layer Security lorsque vous utilisez une solution de nœud hébergé."
+                }
+              }
+            },
+            "connecting": {
+              "header": "Test de la connexion du noeud",
+              "description": "Veuillez patienter pendant que nous vérifions si votre nœud répond."
+            },
+            "success": {
+              "header": "Connexion au noeud réussie",
+              "description": "Vous pouvez maintenant configurer votre nœud pour rechercher vos comptes sur la blockchain."
+            },
+            "failure": {
+              "header": "Noeud inaccessible",
+              "description": "Veuillez vous assurer que votre nœud est entièrement synchronisé et vérifier ses paramètres de connexion."
+            }
+          }
+        },
+        "device": {
+          "title": "Appareil",
+          "connectionSteps": {
+            "pending": {
+              "header": "Récupération des comptes depuis l'appareil",
+              "description": "Veuillez patienter pendant que les comptes à analyser sont ajoutés au fichier de configuration du noeud."
+            },
+            "success": {
+              "header": "Comptes ajoutés à la configuration des nœuds",
+              "description": "Un fichier de configuration a été sauvegardé dans le dossier de données de l'utilisateur. Il permet au Ledger SatStack de se connecter à votre nœud complet et de le laisser rechercher vos comptes sur la blockchain.",
+              "cta": "Voir les données utilisateur"
+            }
+          }
+        },
+        "accounts": {
+          "title": "Comptes",
+          "existing": "Comptes existants à analyser",
+          "toScan": "Comptes à analyser",
+          "toScanDescription": "Comptes à analyser pour chaque type d'adresse",
+          "toScanTooltip": "Augmentez seulement si vous avez plus de 10 comptes BTC. L'analyse initiale sera plus lente. "
+        },
+        "satstack": {
+          "title": "SatStack",
+          "connectionSteps": {
+            "notConnected": {
+              "header": "Téléchargez et exécutez Ledger SatStack",
+              "description": "Ledger SatStack est une application qui permet à Ledger Live de parler à votre nœud. Veuillez le télécharger et l'exécuter avant de continuer.",
+              "disclaimer": "SatStack doit être lancé pour Ledger Live afin de se connecter à votre nœud. Envisagez de le configurer pour le lancer automatiquement lorsque votre ordinateur démarre.",
+              "cta": "Télécharger SatStack"
+            },
+            "satstack-disconnected": {
+              "header": "Impossible d'atteindre SatStack",
+              "description": "Veuillez vérifier que SatStack fonctionne sur cet ordinateur."
+            },
+            "node-disconnected": {
+              "header": "Noeud inaccessible",
+              "description": "Veuillez vérifier que votre nœud est joignable et que les paramètres de connexion que vous avez saisis sont corrects."
+            },
+            "invalid-chain": {
+              "header": "invalid-chain title",
+              "description": "invalid-chain description for tooltip"
+            },
+            "initializing": {
+              "header": "Chargement",
+              "description": ""
+            },
+            "ready": {
+              "header": "Prêt",
+              "description": "Le nœud est entièrement synchronisé. Le solde de vos comptes Bitcoin est maintenant correct."
+            },
+            "syncing": {
+              "header": "Synchronisation du noeuds en cours…",
+              "description": "Les transactions récentes peuvent ne pas encore être visibles, donc les soldes de comptes Bitcoin peuvent être incorrects. Si possible, exécutez votre nœud en continu pour le garder à jour."
+            },
+            "scanning": {
+              "header": "Analyse du compte en cours...",
+              "description": "Vous pouvez ajouter vos comptes une fois l'analyse du compte effectuée. Tous les comptes Bitcoin précédemment ajoutés par les explorers de Ledger ont été supprimés."
+            }
+          }
+        },
+        "disconnect": {
+          "title": "Déconnecter le noeud",
+          "cta": "Déconnecter",
+          "description": "Êtes-vous sûr ? Déconnecter le nœud supprimera tous les comptes Bitcoin. Vous pouvez à nouveau ajouter vos comptes en utilisant les explorers de Ledger."
+        }
+      }
+    }
+  },
   "account": {
     "lastOperations": "Dernières opérations",
     "contractAddress": "Contrat :",
@@ -243,7 +391,7 @@
     },
     "settings": {
       "title": "Modifier le compte",
-      "advancedLogs": "Logs détaillés",
+      "advancedLogs": "Avancé",
       "advancedTips": "Votre xpub est une donnée sensible. Utilisez-la avec prudence, en particulier lorsque vous la divulguez à des tiers.",
       "accountName": {
         "title": "Nom du compte",
@@ -268,7 +416,7 @@
     "undelegatingTooltip": "Les actifs dont la délégation est interrompue sont verrouillés pendant 21 jours avant d'être disponibles."
   },
   "exchange": {
-    "title": "Acheter des cryptos",
+    "title": "Buy and sell crypto",
     "reset": "Réinitialiser",
     "banner": {
       "title": "Acheter des cryptomonnaies via notre partenaire",
@@ -285,10 +433,251 @@
       "addAccount": "Ajouter un compte"
     },
     "sell": {
-      "tab": "Vendre"
+      "title": "Vendre des cryptomonnaies via notre partenaire",
+      "tab": "Vendre",
+      "selectCrypto": "Choisir un crypto-actif",
+      "selectAccount": "Sélectionner compte",
+      "continue": "Poursuivre",
+      "addAccount": "Ajouter un compte"
     },
     "history": {
       "tab": "Historique"
+    }
+  },
+  "lend": {
+    "title": "Prêter des cryptos",
+    "description": "Déposez vos actifs sur le protocole Compound pour commencer à obtenir des intérêts.",
+    "tabs": {
+      "dashboard": "Tableau de bord",
+      "closed": "Emprunts clôturés",
+      "history": "Historique"
+    },
+    "assets": "Actifs à prêter",
+    "active": "Comptes actifs",
+    "lendAsset": "Dépôt",
+    "highFeesModal": {
+      "title": "Frais élevés sur Ethereum",
+      "description": "En raison de la congestion du réseau Ethereum, il se peut que vous ayez à payer des frais élevés lors de l'émission de transactions.",
+      "cta": "Compris"
+    },
+    "account": {
+      "amountSupplied": "Montant déposé",
+      "amountSuppliedTooltip": "Montant prêté au réseau",
+      "currencyAPY": "APY de la devise",
+      "currencyAPYTooltip": "Taux de retour annuel d'un dépôt continuellement composé",
+      "accruedInterests": "Intérêt accumulé",
+      "accruedInterestsTooltip": "Intérêt généré sur vos actifs prêtés",
+      "interestEarned": "Intérêts gagnés",
+      "interestEarnedTooltip": "Intérêt que vous avez obtenu après le retrait",
+      "openLoans": "Prêts ouverts",
+      "closedLoans": "Prêts clôturés",
+      "amountRedeemed": "Montant retiré",
+      "date": "Date",
+      "info": "Vous pouvez prêter des actifs directement depuis votre compte {{currency}} et obtenir des intérêts.",
+      "howCompoundWorks": "Comment fonctionne Compound ?",
+      "lend": "Dépôt {{currency}}"
+    },
+    "emptyState": {
+      "active": {
+        "title": "Prêt",
+        "description": "Vous pouvez prêter des actifs directement depuis vos comptes Ethereum et obtenir des intérêts.",
+        "cta": "Comment fonctionne Compound ?"
+      },
+      "closed": {
+        "title": "Vos prêts clôturés apparaîtront ici",
+        "description": "Vous n’avez pas encore fait de prêts.",
+        "cta": "Dépôt"
+      },
+      "history": {
+        "title": "Historique",
+        "description": "Visualisez l'historique de toutes vos opérations de prêt.",
+        "cta": "Dépôt"
+      }
+    },
+    "headers": {
+      "active": {
+        "accounts": "Compte",
+        "amountSupplied": "Prêt actuel",
+        "amountSuppliedTooltip": "Montant prêté au réseau",
+        "accruedInterests": "Intérêt accumulé",
+        "accruedInterestsTooltip": "Intérêt généré sur vos actifs prêtés",
+        "status": "Statut",
+        "statusTooltip": "Statut actuel du compte",
+        "actions": "Actions"
+      },
+      "status": {
+        "enablingTooltip": "Votre transaction est en train d'être diffusée",
+        "toSupplyTooltip": "Vous pouvez maintenant prêter vos actifs"
+      },
+      "closed": {
+        "assetLended": "Actif",
+        "amountRedeemed": "Montant du retrait",
+        "interestsEarned": "Intérêts obtenus",
+        "date": "Date"
+      },
+      "rates": {
+        "allAssets": "Actif",
+        "totalBalance": "Solde disponible",
+        "totalBalanceTooltip": "Solde total de vos comptes hors montant déposé",
+        "grossSupply": "Valeur du marché",
+        "grossSupplyTooltip": "Montant total des actifs déposés sur le protocole",
+        "currentAPY": "APY actuel",
+        "currentAPYTooltip": "Taux de retour annuel d'un dépôt continuellement composé",
+        "actions": "Actions"
+      }
+    },
+    "manage": {
+      "cta": "Gérer les prêts",
+      "title": "Gérer le prêt",
+      "enable": {
+        "approve": "Activer",
+        "manageLimit": "Gérer la limite",
+        "viewDetails": "Voir les détails",
+        "info": "Vous avez approuvé <0>{{amount}}</0> sur ce compte. Vous pouvez réduire le montant moyennant des frais.",
+        "infoNoLimit": "Vous avez entièrement approuvé ce compte. Vous pouvez réduire le montant moyennant des frais.",
+        "approvedWithLimit": "Vous avez approuvé <0>{{value}}</0> sur ce compte.",
+        "enabling": "Vous pouvez déposer des actifs une fois que l'approbation du compte est confirmée.",
+        "notEnabled": "Vous devez approuver ce compte avant de pouvoir prêter des actifs.",
+        "notEnoughApproved": "Vous devez augmenter la limite approuvée sur votre compte pour prêter."
+      },
+      "supply": {
+        "title": "Dépôt",
+        "description": "Entrez le montant d'actifs à prêter au protocole."
+      },
+      "withdraw": {
+        "title": "Retrait",
+        "description": "Retirer des actifs du protocole vers votre compte Ledger."
+      }
+    },
+    "enable": {
+      "title": "Approuver le compte",
+      "steps": {
+        "selectAccount": {
+          "title": "Sélectionnez un compte",
+          "selectLabel": "Compte de prêt",
+          "cta": "Activer",
+          "alreadyEnabled": "Ce compte est activé",
+          "notEnabled": "Vous devez payer des frais pour activer ce compte"
+        },
+        "amount": {
+          "title": "Montant",
+          "summary": "J'accorde l'accès au contrat <0>{{contractName}}</0> sur mon compte <0>{{accountName}}</0> pour un montant de <0>{{amount}}</0>",
+          "limit": "limite : {{amount}}",
+          "noLimit": "sans limte {{assetName}}",
+          "contractName": "Compound {{currencyName}}",
+          "advanced": "Avancé",
+          "amountLabel": "Montant à approuver",
+          "amountLabelTooltip": "Cela limite le montant disponible à prêter."
+        },
+        "connectDevice": {
+          "title": "Appareil"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "success": {
+            "title": "Transaction émise avec succès",
+            "text": "L'activation a été envoyée au réseau pour confirmation. Vous pourrez émettre des prêts une fois qu'elle aura été confirmée.",
+            "done": "Fermer",
+            "cta": "Voir les détails",
+            "info": "Les transactions peuvent prendre un certain temps avant d'être affichées dans un explorer et être confirmées."
+          },
+          "pending": {
+            "title": "Activation de vos actifs..."
+          },
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+        }
+      }
+    },
+    "withdraw": {
+      "title": "Retirer des actifs",
+      "steps": {
+        "amount": {
+          "title": "Montant",
+          "advanced": "Avancé",
+          "amountLabel": "Montant à retirer",
+          "amountToWithdraw": "Montant à retirer",
+          "withdrawAll": "Retirer Max",
+          "placeholder": "Retirer Max",
+          "maxWithdrawble": "Le montant maximum à retirer est"
+        },
+        "connectDevice": {
+          "title": "Appareil"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "success": {
+            "title": "Demande de retrait envoyée avec succès",
+            "text": "Vos actifs seront disponibles une fois que le réseau aura confirmé le retrait.",
+            "done": "Fermer",
+            "cta": "Voir les détails"
+          },
+          "pending": {
+            "title": "Retrait de vos actifs en cours..."
+          },
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+        }
+      }
+    },
+    "info": {
+      "terms": {
+        "title": "Prêter de la crypto",
+        "subtitle": "Prêtez des actifs sur le protocole Compound",
+        "description": "Le protocole Compound vous permet de prêter et d'emprunter des actifs sur le réseau Ethereum. Vous pouvez prêter des actifs et gagner des intérêts directement à partir de votre compte Ledger.",
+        "switchLabel": "<1>J’ai lu et j’accepte les </1><0>Conditions d’utilisation</0><1>.</1>"
+      },
+      "steps": {
+        "title": "Étape <0>{{step}} / {{total}}</0>",
+        "1": {
+          "subtitle": "Activer un compte pour permettre au protocol de",
+          "subtitle2": "traiter vos futurs prêts.",
+          "description": "Vous devez autoriser le contrat intelligent de Compound à transférer jusqu'à un certain montant d'actifs au protocole. L'activation d'un compte donne le droit au protocole de traiter les futurs prêts."
+        },
+        "2": {
+          "subtitle": "Prêter des actifs pour obtenir des interêts",
+          "description": "Une fois qu'un compte est approuvé, vous pouvez sélectionner le montant d'actifs que vous souhaitez prêter et émettre une transaction. Les intérêts sont accumulés immédiatement après la confirmation de la transaction."
+        },
+        "3": {
+          "subtitle": "Retirer des actifs à tout moment",
+          "description": "Vous pouvez retirer vos actifs et les intérets perçus a tout moment depuis votre compte Ledger."
+        }
+      }
+    },
+    "supply": {
+      "title": "Déposer des actifs",
+      "steps": {
+        "amount": {
+          "title": "Montant",
+          "selectedAccount": "Compte sélectionné",
+          "amountToSupply": "Montant à déposer",
+          "available": "Solde disponible",
+          "maxSupply": "Le montant maximum de prêt est"
+        },
+        "device": {
+          "title": "Appareil"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "success": {
+            "title": "Transaction émise avec succès",
+            "text": "Vous commencerez à percevoir des intérêts une fois que le réseau aura confirmé le dépôt.",
+            "done": "Fermer",
+            "cta": "Voir les détails",
+            "info": "Les transactions peuvent prendre un certain temps avant d'être affichées dans un explorateur et être confirmées."
+          },
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+        }
+      }
+    },
+    "noEthAccount": {
+      "title": "Veuillez créer un compte ETH",
+      "description": "<0>{{ asset }}({{ ticker }})</0> est un token Ethereum ERC-20. Pour prêter {{ ticker }}, installez l'application Ethereum et créez un compte Ethereum",
+      "cta": "Ajouter un compte"
+    },
+    "emptyAccountDeposit": {
+      "title": "Vous n'avez aucun compte {{ asset }}.",
+      "description": "Afin de déposer des fonds et de prêter des cryptomonnaies, vous avez besoin d'un compte {{ asset }}. Veuillez recevoir des fonds sur votre adresse Ethereum.",
+      "ctaBuy": "Acheter {{ asset }}",
+      "ctaReceive": "Recevoir {{ asset }}"
     }
   },
   "accounts": {
@@ -316,6 +705,7 @@
       "send": "Envoyer",
       "swap": "Swap",
       "buy": "Acheter",
+      "sell": "Vendre",
       "edit": "Modifier le compte",
       "hideToken": "Masquer le token"
     }
@@ -326,6 +716,7 @@
       "title": "Commencer",
       "desc": "Commencer ici"
     },
+    "status": "Statut Ledger",
     "helpCenter": {
       "title": "Assistance Ledger",
       "desc": "Obtenir de l’aide"
@@ -353,6 +744,10 @@
     "hideCTA": "Masquer le token"
   },
   "banners": {
+    "cleanCache": {
+      "title": "La modification des paramètres expérimentaux nécessite de vider le cache",
+      "cta": "Vider le cache"
+    },
     "migrate": "Mise à jour des comptes Ledger Live disponible",
     "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge",
     "ledgerAcademy": {
@@ -375,6 +770,10 @@
       "description": "Gérez vos actifs en toute sécurité avec un Nano X et un Nano S à un prix réduit",
       "cta": "Acheter un back-up pack"
     },
+    "sell": {
+      "title": "vendre des crypto-monnaies",
+      "description": "Vendez des Bitcoin avec notre partenaire directement depuis Ledger Live"
+    },
     "stakeAlgorand": {
       "title": "Staking avec ALGORAND",
       "description": "Profiter au mieux de vos ALGO. Ajoutez simplement des fonds à vos comptes et gagnez des récompenses dès aujourd'hui."
@@ -382,6 +781,14 @@
     "swap": {
       "title": "Échanger des cryptos",
       "description": "Échangez une cryptomonnaie contre une autre sur Ledger Live avec notre partenaire."
+    },
+    "lending": {
+      "title": "Prêter des crypto",
+      "description": "Prêtez des stablecoins au protocole Compound et obtenez des intérêts"
+    },
+    "blackfriday": {
+      "title": "BLACK FRIDAY ",
+      "description": "Profitez de 40 % de réduction sur les wallets Ledger avec le code promo BLACKFRIDAY20"
     }
   },
   "dashboard": {
@@ -498,6 +905,7 @@
       "import": "Comptes",
       "finish": "Confirmation"
     },
+    "fullNodeReadyInfo": "Les comptes seront ajoutés en utilisant votre nœud Bitcoin.",
     "tokensTip": "{{token}} ({{ticker}}) est un token {{tokenType}} . Vous pouvez recevoir des tokens directement sur un compte {{currency}}.",
     "accountToImportSubtitle_plural": "Ajouter des comptes existants",
     "selectAll": "Sélectionner tout ({{count}})",
@@ -590,7 +998,7 @@
   "DeviceAction": {
     "allowAppPermission": "Ouvrez l'application {{wording}} sur votre appareil",
     "allowAppPermissionSubtitleToken": "pour gérer vos tokens {{token}}",
-    "allowManagerPermission": "{{wording}} sur votre appareil",
+    "allowManagerPermission": "Allow {{wording}} on your device",
     "loading": "Chargement en cours...",
     "connectAndUnlockDevice": "Connectez et déverrouillez votre appareil",
     "unlockDevice": "Déverrouillez votre appareil",
@@ -602,6 +1010,10 @@
     "swap": {
       "notice": "Vérifiez les détails du Swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
       "confirm": "Confirmer la transaction de swap"
+    },
+    "sell": {
+      "notice": "Vérifiez les détails de la vente sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
+      "confirm": "Confirmer la transaction de vente"
     }
   },
   "manager": {
@@ -884,6 +1296,11 @@
     "titleCrypto": "Acheter {{currency}}",
     "buyCTA": "Acheter {{currencyTicker}}"
   },
+  "sell": {
+    "title": "Vendre",
+    "titleCrypto": "Vendre {{currency}}",
+    "buyCTA": "Vendre {{currencyTicker}}"
+  },
   "receive": {
     "title": "Recevoir",
     "successTitle": "Adresse partagée de manière sécurisée",
@@ -892,7 +1309,9 @@
         "title": "Compte",
         "label": "Compte à créditer",
         "parentAccount": "1. Sélectionnez le compte {{currencyName}}",
-        "token": "2. Sélectionnez un token"
+        "token": "2. Sélectionnez un token",
+        "verifyTokenType": "Veuillez vérifier que <0>{{token}}</0> est un token <0>{{tokenType}}</0>. Tout autre actif envoyé à un compte {{currency}} peut être perdu.",
+        "warningTokenType": "Veuillez envoyer uniquement des tokens <0>{{ticker}}</0> ou <0>{{tokenType}}</0> à un compte {{currency}}. Tout autre actif de cryptomonnaies peut être perdu."
       },
       "connectDevice": {
         "title": "Appareil",
@@ -926,6 +1345,7 @@
         "title": "Appareil"
       },
       "details": {
+        "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
         "from": "De",
         "to": "Vers",
         "selectAccountDebit": "Compte à débiter",
@@ -1450,7 +1870,6 @@
     "helpButton": "Aide",
     "tabs": {
       "display": "Général",
-      "cryptoAssets": "Crypto-actifs",
       "currencies": "Crypto-actifs",
       "rates": "Taux",
       "help": "Aide",
@@ -1493,22 +1912,10 @@
       "carouselVisibilityDesc": "Activer le carrousel sur la page Portfolio"
     },
     "currencies": {
-      "desc": "Modifier les paramètres pour chacun de vos crypto-actifs",
+      "desc": "Sélectionnez un crypto-actif pour en modifier les paramètres.",
       "placeholder": "Aucun paramètre pour cet actif",
-      "select": "Sélectionnez un crypto-actif pour modifier ses paramètres.",
       "confirmationsNb": "Nombre de confirmations",
       "confirmationsNbDesc": "Définissez le nombre de confirmations réseau pour qu’une transaction soit marquée comme confirmée."
-    },
-    "rates": {
-      "desc": "Voici tous les taux utilisés pour calculer les contrevaleurs.\nChoisissez quels fournisseurs de taux sont utilisés pour chaque taux.",
-      "fromTo": "{{from}} à {{to}}",
-      "noCounterValue": "Aucune donnée disponible pour cette paire de trading",
-      "cryptoToFiat": "Crypto vers fiat",
-      "cryptoToCrypto": "Crypto vers Crypto",
-      "rate": "Taux",
-      "last": "{{days}} derniers jours",
-      "price": "Prix",
-      "exchange": "Fournisseur de taux"
     },
     "profile": {
       "password": "Verrouillage par mot de passe",
@@ -1593,7 +2000,13 @@
       },
       "tokenBlacklist": {
         "title": "Tokens masqués",
-        "desc": "Vous pouvez masquer les jetons en vous rendant sur le compte parent, puis en faisant un clic droit sur le jeton et en sélectionnant 'Cacher le jeton'"
+        "desc": "Vous pouvez masquer les tokens en vous rendant sur le compte parent, puis en faisant un clic droit sur le jeton et en sélectionnant 'Cacher le token'.",
+        "count": "{{count}} token",
+        "count_plural": "{{count}} tokens"
+      },
+      "fullNode": {
+        "title": "Connecter le nœud Bitcoin",
+        "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
       }
     }
   },
@@ -1880,6 +2293,7 @@
   "TransactionConfirm": {
     "title": "Veuillez confirmer l'opération sur votre appareil pour la finaliser",
     "warning": "Toujours vérifier que l'adresse affichée sur votre appareil correspond exactement à celle donnée par le {{recipientWording}}",
+    "secureContract": "Vérifiez les details du prêt sur votre appreil avant de l'envoyer. L'addresse est fournie de maniére sécurisée afin que vous n'ayez pas à la vérifier.",
     "warningWording": {},
     "titleWording": {
       "send": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
@@ -1951,10 +2365,6 @@
     "AmountRequired": {
       "title": "Montant requis"
     },
-    "BitcoinCashHardforkOct2020Warning": {
-      "title": "",
-      "description": "Bitcoin Cash subit actuellement un hard fork sans protection contre les attaques replay. Nous allons interrompre temporairement le service jusqu'à ce que le réseau se stabilise."
-    },
     "NoAccessToCamera": {
       "title": "Veuillez vous assurer que votre système a une caméra qui n'est pas utilisée par une autre application, et que Ledger Live a la permission de l'utiliser.",
       "description": ""
@@ -1962,6 +2372,9 @@
     "ClaimRewardsFeesWarning": {
       "title": "Les récompenses sont plus petites que les frais estimés pour les collecter",
       "description": ""
+    },
+    "CompoundLowerAllowanceOfActiveAccountError": {
+      "title": "Vous ne pouvez pas réduire le montant activé avec un prêt actif."
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Quelque chose s'est mal passé (Erreur #1)",
@@ -2175,6 +2588,26 @@
       "title": "Le mot de passe saisi est incorrect",
       "description": "Veuillez essayer à nouveau."
     },
+    "RPCHostRequired": {
+      "title": "Hôte requis."
+    },
+    "RPCHostInvalid": {
+      "title": "Saisir un hôte valide."
+    },
+    "RPCUserRequired": {
+      "title": "Nom d'utilisateur RPC requis"
+    },
+    "RPCPassRequired": {
+      "title": "Mot de passe RPC requis"
+    },
+    "SatStackAccessDown": {
+      "title": "Noeud inaccessible",
+      "description": "Veuillez vérifier que SatStack et votre noeud sont en cours d'exécution. Vérifiez la configuration du noeud dans les paramètres si le problème persiste."
+    },
+    "SatStackStillSyncing": {
+      "title": "Synchronisation du noeud en cours...",
+      "description": "Veuillez patienter pendant la synchronisation de votre nœud. L'envoi n'est pas possible car le solde de vos comptes Bitcoin est peut-être incorrecte."
+    },
     "SwapGenericAPIError": {
       "title": "Le taux de change a expiré",
       "description": "Vous devez confirmer l'échange avant que le minuteur ne s'épuise. Le taux de change affiché reste valide pendant 60 secondes."
@@ -2301,7 +2734,7 @@
       "title": "Veuillez interrompre la délégation du compte avant de le vider"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Veuillez d'abord vider tous les sous-comptes"
+      "title": "Videz d'abord tous les sous-comptes"
     },
     "NotSupportedLegacyAddress": {
       "title": "Ce format d'adresse legacy n'est plus pris en charge"
