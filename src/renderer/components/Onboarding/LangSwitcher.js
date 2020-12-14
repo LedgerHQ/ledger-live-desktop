@@ -43,7 +43,9 @@ const styleFn = theme => ({
       ...provided,
       backgroundColor: theme.colors.transparent,
       borderRadius: 20,
-      borderColor: state.isFocused ? theme.colors.palette.primary.main : theme.colors.palette.text.shade10,
+      borderColor: state.isFocused
+        ? theme.colors.palette.primary.main
+        : theme.colors.palette.text.shade10,
       boxShadow: "none",
       ":hover": {
         borderColor: theme.colors.palette.primary.main,

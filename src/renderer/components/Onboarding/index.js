@@ -8,6 +8,7 @@ import { Modal } from "~/renderer/components/Onboarding/Modal";
 import { saveSettings } from "~/renderer/actions/settings";
 import { useDispatch } from "react-redux";
 import { relaunchOnboarding } from "~/renderer/actions/onboarding";
+import { track } from "~/renderer/analytics/segment";
 
 // screens
 import { Welcome } from "~/renderer/components/Onboarding/Screens/Welcome";
@@ -62,6 +63,7 @@ const onboardingMachine = Machine({
   initial: "welcome",
   states: {
     welcome: {
+      exit: () => track("Onboarding - Start"),
       on: {
         NEXT: {
           target: "selectDevice",
@@ -72,6 +74,7 @@ const onboardingMachine = Machine({
       on: {
         DEVICE_SELECTED: {
           target: "selectUseCase",
+          cond: (_, { deviceId }) => !!deviceId,
           actions: assign((_, { deviceId }) => ({
             deviceId,
           })),
@@ -80,6 +83,7 @@ const onboardingMachine = Machine({
           target: "welcome",
         },
       },
+      exit: ({ deviceId }) => track("Onboarding Device - Selection", { deviceId }),
     },
     selectUseCase: {
       invoke: {
@@ -115,6 +119,7 @@ const onboardingMachine = Machine({
       },
     },
     setupNewDevice: {
+      entry: () => track("Onboarding - Setup new"),
       on: {
         PREV: {
           target: "selectUseCase",
@@ -125,6 +130,7 @@ const onboardingMachine = Machine({
       },
     },
     connectSetupDevice: {
+      entry: () => track("Onboarding - Connect"),
       on: {
         PREV: {
           target: "selectUseCase",
@@ -135,6 +141,7 @@ const onboardingMachine = Machine({
       },
     },
     useRecoveryPhrase: {
+      entry: () => track("Onboarding - Restore"),
       on: {
         PREV: {
           target: "selectUseCase",
@@ -145,8 +152,8 @@ const onboardingMachine = Machine({
       },
     },
     onboardingComplete: {
+      entry: [() => track("Onboarding - End"), "onboardingCompleted"],
       type: "final",
-      entry: "onboardingCompleted",
     },
   },
 });
@@ -181,6 +188,7 @@ export function Onboarding() {
   const dispatch = useDispatch();
 
   const [state, sendEvent, service] = useMachine(onboardingMachine, {
+    devTools: true,
     actions: {
       onboardingCompleted: () => {
         dispatch(saveSettings({ hasCompletedOnboarding: true }));

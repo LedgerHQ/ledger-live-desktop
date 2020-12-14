@@ -48,6 +48,7 @@
     "@ledgerhq/logs": "^5.30.0",
     "@tippyjs/react": "^4.2.0",
     "@trust/keyto": "^1.0.1",
+    "@xstate/inspect": "^0.2.0",
     "@xstate/react": "^1.0.3",
     "animated": "^0.2.2",
     "async": "^3.2.0",

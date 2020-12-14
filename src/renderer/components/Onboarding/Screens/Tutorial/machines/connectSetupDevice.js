@@ -67,7 +67,7 @@ export const connectSetupDevice = Machine({
           ],
         },
         NEXT: {
-          cond: context => context.device,
+          cond: context => !!context.device,
           actions: ["topLevelNext"],
         },
         PREV: {

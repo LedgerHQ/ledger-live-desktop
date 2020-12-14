@@ -31,6 +31,7 @@ import events from "~/renderer/events";
 import { setAccounts } from "~/renderer/actions/accounts";
 import { fetchSettings, setDeepLinkUrl } from "~/renderer/actions/settings";
 import { lock, setOSDarkMode } from "~/renderer/actions/application";
+import { inspect } from "@xstate/inspect";
 
 import {
   languageSelector,
@@ -42,6 +43,11 @@ import ReactRoot from "~/renderer/ReactRoot";
 import AppError from "~/renderer/AppError";
 
 logger.add(new LoggerTransport());
+
+inspect({
+  iframe: false,
+  url: "https://statecharts.io/inspect",
+});
 
 if (process.env.NODE_ENV !== "production" || process.env.DEV_TOOLS) {
   enableDebugLogger();
