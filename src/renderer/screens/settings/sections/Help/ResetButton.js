@@ -3,6 +3,8 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import { useGlobalSyncState } from "@ledgerhq/live-common/lib/bridge/react";
+import { useCountervaluesPolling } from "@ledgerhq/live-common/lib/countervalues/react";
 import logger from "~/logger";
 import { useHardReset } from "~/renderer/reset";
 import ConfirmModal from "~/renderer/modals/ConfirmModal";
@@ -14,6 +16,8 @@ import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useActionModal } from "./logic";
 
+let reset;
+
 export default function ResetButton() {
   const { t } = useTranslation();
   const hardReset = useHardReset();
@@ -22,17 +26,28 @@ export default function ResetButton() {
     { open, close, closeFallback, handleConfirm, handleError },
   ] = useActionModal();
 
-  const onConfirm = useCallback(async () => {
-    if (pending) return;
+  const globalSyncState = useGlobalSyncState();
+  const cvPolling = useCountervaluesPolling();
+  const isPending = cvPolling.pending || globalSyncState.pending;
+
+  reset = async () => {
+    if (isPending) {
+      return setTimeout(reset, 1000);
+    }
     try {
-      handleConfirm();
       await hardReset();
       window.api.reloadRenderer();
     } catch (err) {
       logger.error(err);
       handleError();
     }
-  }, [pending, handleConfirm, handleError, hardReset]);
+  };
+
+  const onConfirm = useCallback(async () => {
+    if (pending) return;
+    handleConfirm();
+    reset();
+  }, [pending, handleConfirm]);
 
   return (
     <>
