@@ -3,13 +3,12 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { useGlobalSyncState } from "@ledgerhq/live-common/lib/bridge/react";
+import { useGlobalSyncState, SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import { useCountervaluesPolling } from "@ledgerhq/live-common/lib/countervalues/react";
 import logger from "~/logger";
 import { useHardReset } from "~/renderer/reset";
 import ConfirmModal from "~/renderer/modals/ConfirmModal";
 import ResetFallbackModal from "~/renderer/modals/ResetFallbackModal";
-import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
