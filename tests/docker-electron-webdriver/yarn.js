@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = "tests/docker-electron-webdriver/";
 
 const hashes = ["../../package.json", "../../yarn.lock", "yarn.js"]
-  .map(f => child_process.execSync(`sha1sum ${path}${f}`).toString())
+  .map(f => child_process.execSync(`shasum ${path}${f}`).toString())
   .join(",");
 
 const lastYarn = fs

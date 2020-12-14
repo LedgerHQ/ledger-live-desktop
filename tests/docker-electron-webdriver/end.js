@@ -4,7 +4,7 @@ const { files } = require("./dockerfiles");
 
 const path = "tests/docker-electron-webdriver/";
 
-const hashes = files.map(f => child_process.execSync(`sha1sum ${path}${f}`).toString()).join(",");
+const hashes = files.map(f => child_process.execSync(`shasum ${path}${f}`).toString()).join(",");
 
 fs.writeFileSync(`${path}.lastbuild`, hashes, {
   flag: "w",

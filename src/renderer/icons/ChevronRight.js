@@ -2,16 +2,13 @@
 
 import React from "react";
 
-const path = (
-  <path
-    fill="currentColor"
-    d="M10.869 8.266L6.28 12.89a.375.375 0 0 1-.531 0l-.619-.62a.375.375 0 0 1 0-.53L8.834 8 5.131 4.26a.375.375 0 0 1 0-.532l.619-.619a.375.375 0 0 1 .531 0l4.588 4.625a.375.375 0 0 1 0 .532z"
-  />
-);
-
 const ChevronRight = ({ size }: { size: number }) => (
-  <svg viewBox="0 0 16 16" height={size} width={size}>
-    {path}
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+    <path
+      d="M4.36399 15.2725L11.6367 7.99978L4.36399 0.727051"
+      stroke="currentColor"
+      strokeWidth="1.4"
+    />
   </svg>
 );
 
