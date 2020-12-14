@@ -119,9 +119,9 @@ const Body = ({
 
     const t = bridge.createTransaction(account);
 
-    const initialValidators = (account?.polkadotResources?.nominations || []).map(
-      nominations => nominations.address,
-    );
+    const initialValidators = (account?.polkadotResources?.nominations || [])
+      .filter(nomination => !!nomination.status)
+      .map(nomination => nomination.address);
 
     const transaction = bridge.updateTransaction(t, {
       mode: "nominate",

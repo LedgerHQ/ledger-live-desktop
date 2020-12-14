@@ -1827,6 +1827,8 @@
       "inactiveTooltip": "Ce validateur a été élu mais ne collecte aucune récompense grâce à vos actifs liés.",
       "waiting": "Non élu",
       "waitingTooltip": "Ce validateur n'a pas été élu et ne collecte donc aucune récompense.",
+      "notValidator": "Non validateur",
+      "notValidatorTooltip": "Cette addresse a cessé d'être validateur",
       "elected": "Élu",
       "nominatorsCount": "{{nominatorsCount}} nominateurs",
       "oversubscribed": "Sursouscrit ({{nominatorsCount}})",
@@ -1880,7 +1882,8 @@
       "title": "Nominer des validateurs",
       "steps": {
         "validators": {
-          "title": "Validateurs"
+          "title": "Validateurs",
+          "notValidatorsRemoved": "Vous avez {{count}} adresses nominées qui ne sont plus des validateurs. Elles seront automatiquement supprimées de votre transaction de nomination."
         },
         "connectDevice": {
           "title": "Appareil"

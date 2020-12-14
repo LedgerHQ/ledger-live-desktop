@@ -1825,8 +1825,10 @@
       "activeTooltip": "This validator has been elected and is collecting rewards with some of your bonded assets.",
       "inactive": "Inactive",
       "inactiveTooltip": "This validator has been elected and is not collecting rewards with your stake.",
-      "waiting": "Not elected",
+      "waiting": "Unelected",
       "waitingTooltip": "This validator has not been elected therefore is not collecting rewards.",
+      "notValidator": "Not a validator",
+      "notValidatorTooltip": "This address is no longer a validator",
       "elected": "Elected",
       "nominatorsCount": "{{nominatorsCount}} nominators",
       "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
@@ -1880,7 +1882,8 @@
       "title": "Nominate",
       "steps": {
         "validators": {
-          "title": "Validators"
+          "title": "Validators",
+          "notValidatorsRemoved": "You have nominated {{count}} addresses that are no longer validators. They will be automatically removed from your nominate transaction."
         },
         "connectDevice": {
           "title": "Device"

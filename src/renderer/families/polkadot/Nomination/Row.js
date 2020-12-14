@@ -82,7 +82,7 @@ export function Row({
 
   const formattedAmount = useMemo(
     () =>
-      value && status !== "waiting"
+      value && (status === "active" || status === "inactive")
         ? formatCurrencyUnit(unit, value, {
             disableRounding: true,
             alwaysShowSign: false,
@@ -146,6 +146,16 @@ export function Row({
             <ToolTip content={<Trans i18nKey="polkadot.nomination.waitingTooltip" />}>
               <StatusLabel>
                 <Trans i18nKey="polkadot.nomination.waiting" />
+              </StatusLabel>
+              <InfoCircle size={14} />
+            </ToolTip>
+          </Box>
+        )}
+        {!status && (
+          <Box color="warning" pl={2}>
+            <ToolTip content={<Trans i18nKey="polkadot.nomination.notValidatorTooltip" />}>
+              <StatusLabel>
+                <Trans i18nKey="polkadot.nomination.notValidator" />
               </StatusLabel>
               <InfoCircle size={14} />
             </ToolTip>

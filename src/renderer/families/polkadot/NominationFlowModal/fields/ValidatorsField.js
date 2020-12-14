@@ -2,6 +2,8 @@
 import invariant from "invariant";
 import React, { useCallback, useState, useRef, useEffect } from "react";
 import type { TFunction } from "react-i18next";
+import styled from "styled-components";
+import { Trans } from "react-i18next";
 
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
@@ -18,6 +20,8 @@ import type {
   PolkadotValidator,
 } from "@ledgerhq/live-common/lib/families/polkadot/types";
 
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { radii } from "~/renderer/styles/theme";
 import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
 import ValidatorListHeader from "~/renderer/components/Delegation/ValidatorListHeader";
@@ -29,6 +33,20 @@ import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 
 // Specific Validator Row
 import ValidatorRow, { IconContainer } from "./ValidatorRow";
+
+const NominationsWarning: ThemedComponent<{}> = styled(Box).attrs(p => ({
+  horizontal: true,
+  alignItems: "center",
+  py: "8px",
+  px: 3,
+  bg: p.theme.colors.warning,
+  color: "palette.primary.contrastText",
+  mb: 20,
+  fontSize: 4,
+  ff: "Inter|SemiBold",
+}))`
+  border-radius: ${radii[1]}px;
+`;
 
 type Props = {
   t: TFunction,
@@ -59,7 +77,11 @@ const ValidatorField = ({
 
   const { validators: polkadotValidators } = usePolkadotPreloadData();
   const SR = useSortedValidators(search, polkadotValidators, nominations);
-  // const currentDelegations = mapDelegations(nominations, cosmosValidators, unit);
+
+  // Addresses that are no longer validators
+  const nonValidators = nominations
+    .filter(nomination => !nomination.status)
+    .map(nomination => nomination.address);
 
   const validatorsSelected = validators.length;
 
@@ -93,7 +115,6 @@ const ValidatorField = ({
 
   /** auto focus first input on mount */
   useEffect(() => {
-    /** $FlowFixMe */
     if (containerRef && containerRef.current && containerRef.current.querySelector) {
       const firstInput = containerRef.current.querySelector("input");
       if (firstInput && firstInput.focus) firstInput.focus();
@@ -130,6 +151,14 @@ const ValidatorField = ({
   if (!status) return null;
   return (
     <>
+      {nonValidators.length ? (
+        <NominationsWarning>
+          <Trans
+            i18nKey="polkadot.nominate.steps.validators.notValidatorsRemoved"
+            values={{ count: nonValidators.length }}
+          />
+        </NominationsWarning>
+      ) : null}
       <ValidatorSearchInput id="nominate-search-bar" search={search} onSearch={onSearch} />
       <ValidatorListHeader
         votesSelected={validatorsSelected}
