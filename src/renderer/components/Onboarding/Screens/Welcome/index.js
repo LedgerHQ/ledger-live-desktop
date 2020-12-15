@@ -77,7 +77,7 @@ export function Welcome({ sendEvent }: Props) {
       <Text mb="24px" color="palette.text.shade50" ff="Inter|Regular" fontSize={4}>
         {t("onboarding.screens.welcome.description")}
       </Text>
-      <Button onClick={handleNext} primary>
+      <Button onClick={handleNext} primary id="onboarding-get-started-button">
         {t("onboarding.screens.welcome.cta")}
       </Button>
       <Text style={{ marginTop: 8 }} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={4}>

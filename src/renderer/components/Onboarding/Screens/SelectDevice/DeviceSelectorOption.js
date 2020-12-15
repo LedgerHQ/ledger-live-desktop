@@ -58,11 +58,12 @@ type DeviceSelectOptionProps = {
   label: string,
   Illu: React$Node,
   onClick: () => void,
+  id: string,
 };
 
-export function DeviceSelectorOption({ label, Illu, onClick }: DeviceSelectOptionProps) {
+export function DeviceSelectorOption({ label, Illu, onClick, id }: DeviceSelectOptionProps) {
   return (
-    <DeviceSelectOptionContainer onClick={onClick}>
+    <DeviceSelectOptionContainer id={id} onClick={onClick}>
       <Container>
         <Text mt={"32px"} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={"22px"}>
           {label}

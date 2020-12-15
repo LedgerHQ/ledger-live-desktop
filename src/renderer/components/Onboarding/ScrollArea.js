@@ -71,7 +71,7 @@ export function ScrollArea({ className, children, withHint = false }: ScrollArea
   return (
     <ScrollAreaContainer>
       {withHint ? <ScrollHint visible={hintVisible} /> : null}
-      <ScrollableContentContainer className={className} onScroll={handleScroll}>
+      <ScrollableContentContainer id="page-scroller" className={className} onScroll={handleScroll}>
         {children}
       </ScrollableContentContainer>
     </ScrollAreaContainer>

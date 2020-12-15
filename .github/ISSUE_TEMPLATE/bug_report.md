@@ -1,6 +1,10 @@
 ---
-name: 🐛 Bug Report
+name: "\U0001F41B Bug Report"
 about: Report a bug in Ledger Live Desktop or a regression.
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 #### Ledger Live Version and Operating System

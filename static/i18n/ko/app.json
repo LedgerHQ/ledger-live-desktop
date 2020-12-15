@@ -5,50 +5,50 @@
     "yesterday": "Yesterday"
   },
   "common": {
-    "labelYes": "예",
-    "labelNo": "아니오",
-    "never": "결코 아님",
-    "apply": "신청",
+    "labelYes": "Yes",
+    "labelNo": "No",
+    "never": "Never",
+    "apply": "Apply",
     "done": "Done",
-    "confirm": "확인",
-    "cancel": "취소",
-    "getSupport": "지원 받기",
-    "delete": "삭제",
-    "launch": "시작",
-    "continue": "계속",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "getSupport": "Get support",
+    "delete": "Delete",
+    "launch": "Launch",
+    "continue": "Continue",
     "previous": "Previous",
-    "learnMore": "더 알아보기",
-    "help": "도움말",
-    "skipThisStep": "이 단계 건너뛰기",
-    "needHelp": "도움이 필요하십니까?",
-    "areYouSure": "확실합니까?",
-    "selectAccount": "계정 선택",
-    "selectAccountNoOption": "\"{{accountName}}\"와(과) 일치하는 계정 없음",
-    "selectCurrency": "암호화 자산 선택",
-    "selectCurrencyNoOption": "암호화 자산 \"{{currencyName}}\" 없음",
-    "selectExchange": "거래소 선택",
-    "selectExchangeNoOption": "\"{{exchangeName}}\"와(과) 일치하는 거래소 없음",
-    "selectExchangeNoOptionAtAll": "거래소를 찾을 수 없음",
+    "learnMore": "Learn more",
+    "help": "Help",
+    "skipThisStep": "Skip this step",
+    "needHelp": "Need help?",
+    "areYouSure": "Are you sure?",
+    "selectAccount": "Select an account",
+    "selectAccountNoOption": "No account matching \"{{accountName}}\"",
+    "selectCurrency": "Choose a crypto asset",
+    "selectCurrencyNoOption": "No crypto asset \"{{currencyName}}\"",
+    "selectExchange": "Select an exchange",
+    "selectExchangeNoOption": "No exchange matching \"{{exchangeName}}\"",
+    "selectExchangeNoOptionAtAll": "No exchange found",
     "selectValidatorNoOption": "No validator matching \"{{accountName}}\"",
     "selectNoResults": "No results found matching \"{{query}}\"",
-    "sortBy": "정렬 기준",
-    "save": "저장",
-    "lock": "잠금",
-    "showMore": "자세히 표시",
-    "back": "뒤로",
-    "reset": "재설정",
-    "retry": "다시 시도",
+    "sortBy": "Sort by",
+    "save": "Save",
+    "lock": "Lock",
+    "showMore": "Show more",
+    "back": "Back",
+    "reset": "Reset",
+    "retry": "Retry",
     "range": "Range",
-    "stop": "중지",
+    "stop": "Stop",
     "updateNow": "Update now",
-    "close": "닫기",
-    "eastern": "동부",
-    "western": "서부",
-    "reverify": "재확인",
-    "verify": "확인",
-    "copy": "복사",
-    "copied": "복사됨",
-    "addressCopied": "주소 복사됨",
+    "close": "Close",
+    "eastern": "Eastern",
+    "western": "Western",
+    "reverify": "Re-verify",
+    "verify": "Verify",
+    "copy": "Copy",
+    "copied": "Copied",
+    "addressCopied": "Address copied",
     "addressCopiedSuspicious": "Mismatch between the copied address and the one in the clipboard.",
     "experimentalFeature": "Experimental",
     "dismiss": "Dismiss",
@@ -57,27 +57,32 @@
     "searchWithoutEllipsis": "Search",
     "manage": "Manage",
     "lockScreen": {
-      "title": "다시 돌아오신 것을 환영합니다.",
+      "title": "Welcome back",
       "subTitle": null,
-      "description": "계속하려면 암호를 입력하십시오.",
-      "inputPlaceholder": "암호를 입력하십시오.",
-      "lostPassword": "암호를 잊어버렸습니다."
+      "description": "Enter your password to continue",
+      "inputPlaceholder": "Type your password",
+      "lostPassword": "I lost my password"
     },
     "sync": {
-      "syncing": "동기화 중...",
-      "upToDate": "동기화됨",
-      "outdated": "일시 중지됨",
+      "syncing": "Synchronizing...",
+      "upToDate": "Synchronized",
+      "outdated": "Paused",
       "needsMigration": "Click to update account",
-      "error": "동기화 오류",
-      "refresh": "새로고침",
-      "ago": "{{time}} 동기화됨"
+      "error": "Synchronization error",
+      "refresh": "Refresh",
+      "ago": "Synchronized {{time}}"
     },
     "exchange": "Exchange"
   },
+  "devices": {
+    "nanoS": "Nano S",
+    "nanoX": "Nano X",
+    "blue": "Blue"
+  },
   "operation": {
     "type": {
-      "IN": "수신됨",
-      "OUT": "전송됨",
+      "IN": "Received",
+      "OUT": "Sent",
       "CREATE": "Created",
       "REVEAL": "Revealed",
       "DELEGATE": "Delegated",
@@ -102,9 +107,9 @@
     "mbUnit": "{{size}} Mb"
   },
   "time": {
-    "minute": "분",
+    "minute": "Minute",
     "minute_plural": "Minutes",
-    "hour": "시",
+    "hour": "Hour",
     "hour_plural": "Hours",
     "range": {
       "week": "1W",
@@ -121,10 +126,10 @@
     "standard": "Standard"
   },
   "sidebar": {
-    "menu": "메뉴",
+    "menu": "Menu",
     "stars": "Starred accounts",
     "accounts": "Accounts",
-    "manager": "관리자",
+    "manager": "Manager",
     "exchange": "Buy / Sell",
     "swap": "Swap",
     "lend": "Lend"
@@ -381,24 +386,24 @@
     "contractAddress": "Contract:",
     "openInExplorer": "Open in explorer",
     "emptyState": {
-      "title": "아직 암호화 자산이 없습니까?",
-      "desc": "<1><0>{{managerAppName}}</0></1> 앱이 설치되어 있는지 확인하고 수신을 시작하십시오.",
+      "title": "No crypto assets yet?",
+      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
       "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
-        "receiveFunds": "수신",
+        "receiveFunds": "Receive",
         "buy": "Buy"
       }
     },
     "settings": {
-      "title": "계정 수정",
+      "title": "Edit account",
       "advancedLogs": "Advanced",
       "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
       "accountName": {
-        "title": "계정 이름",
+        "title": "Account name",
         "desc": "Description of the account"
       },
       "unit": {
-        "title": "단위",
+        "title": "Unit",
         "desc": "Choose the unit to be used"
       }
     },
@@ -749,7 +754,7 @@
       "cta": "Clear cache"
     },
     "migrate": "Ledger Live accounts update available",
-    "genericTerminatedCrypto": "{{coinName}}은(는) 더 이상 지원되지 않습니다.",
+    "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
     "ledgerAcademy": {
       "title": "Ledger Academy",
       "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
@@ -792,17 +797,17 @@
     }
   },
   "dashboard": {
-    "title": "포트폴리오",
+    "title": "Portfolio",
     "emptyAccountTile": {
       "desc": "Add accounts to manage other crypto assets",
-      "createAccount": "계정 추가"
+      "createAccount": "Add account"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "총 잔액",
+    "totalBalance": "Total balance",
     "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
   },
   "currentAddress": {
-    "title": "현재 주소",
+    "title": "Current address",
     "for": "Address for <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
     "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security."
@@ -828,7 +833,7 @@
   },
   "genuinecheck": {
     "modal": {
-      "title": "정품 확인"
+      "title": "Genuine check"
     },
     "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
   },
@@ -898,19 +903,19 @@
     }
   },
   "addAccounts": {
-    "title": "계정 추가",
+    "title": "Add accounts",
     "breadcrumb": {
-      "informations": "암호화 자산",
-      "connectDevice": "장치",
-      "import": "계정",
-      "finish": "확인"
+      "informations": "Crypto asset",
+      "connectDevice": "Device",
+      "import": "Accounts",
+      "finish": "Confirmation"
     },
     "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
     "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
-    "accountToImportSubtitle_plural": "기존 계정 추가",
-    "selectAll": "모든 ({{count}}) 선택",
-    "unselectAll": "모든 ({{count}}) 선택 해제",
-    "noAccountToImport": "추가할 기존 {{currencyName}} 계정이 없습니다.",
+    "accountToImportSubtitle_plural": "Add existing accounts",
+    "selectAll": "Select all ({{count}})",
+    "unselectAll": "Deselect all ({{count}})",
+    "noAccountToImport": "No existing {{currencyName}} accounts to add",
     "success": "Account added successfully",
     "success_plural": "Accounts added successfully",
     "successDescription": "Add other accounts or return to Portfolio",
@@ -923,9 +928,9 @@
       "segwit_or_native_segwit": "Segwit or Native Segwit?"
     },
     "cta": {
-      "addMore": "더 추가하기",
-      "add": "계정 추가",
-      "add_plural": "계정 추가",
+      "addMore": "Add more",
+      "add": "Add account",
+      "add_plural": "Add accounts",
       "addAccountName": "Add {{currencyName}} account",
       "receive": "Receive"
     },
@@ -946,21 +951,21 @@
   },
   "operationDetails": {
     "whatIsThis": "What is this operation?",
-    "title": "작업 세부 정보",
-    "account": "계정",
-    "date": "날짜",
-    "status": "상태",
-    "confirmed": "확인됨",
+    "title": "Operation details",
+    "account": "Account",
+    "date": "Date",
+    "status": "Status",
+    "confirmed": "Confirmed",
     "failed": "Failed",
-    "notConfirmed": "확인되지 않음",
+    "notConfirmed": "Not confirmed",
     "fees": "Fee",
-    "noFees": "수수료 없음",
-    "from": "수신",
-    "to": "발신",
-    "identifier": "트랜잭션 ID",
-    "viewOperation": "탐색기에서 보기",
-    "showMore": "{{recipients}} 자세히 표시",
-    "showLess": "간단히 표시",
+    "noFees": "No fee",
+    "from": "From",
+    "to": "To",
+    "identifier": "Transaction ID",
+    "viewOperation": "View in explorer",
+    "showMore": "Show {{recipients}} more",
+    "showLess": "Show less",
     "tokenOperations": "Token operations",
     "subAccountOperations": "Subaccount operations",
     "tokenTooltip": "This operation is related to the following token operations",
@@ -993,7 +998,7 @@
     }
   },
   "operationList": {
-    "noMoreOperations": "모두 끝났습니다."
+    "noMoreOperations": "That's all"
   },
   "DeviceAction": {
     "allowAppPermission": "Open the {{wording}} app on your device",
@@ -1112,42 +1117,42 @@
     },
     "firmware": {
       "updateLater": "Cancel",
-      "seedReady": "I have my Recovery phrase",
-      "dontHaveSeed": "Don't have your Recovery phrase? ",
+      "seedReady": "I have my recovery phrase",
+      "dontHaveSeed": "Don't have your recovery phrase? ",
       "followTheGuide": "Follow our step by step update guide",
       "removeApps": "Uninstall all apps before updating",
       "update": "Firmware update",
       "updateBtn": "Update firmware",
-      "latest": "펌웨어 버전 {{version}}을(를) 사용할 수 있습니다.",
+      "latest": "Firmware version {{version}} is available",
       "contactSupport": "Contact support",
       "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
-      "prepareSeed": "Ensure your 24-word Recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
+      "prepareSeed": "Ensure your 24-word recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
       "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
       "downloadingUpdateDesc": "Please wait for the update installer to be downloaded"
     },
     "modal": {
       "steps": {
         "downloadingUpdate": "Downloading update",
-        "updateMCU": "펌웨어 업데이트",
+        "updateMCU": "Firmware update",
         "reset": "Prepare device",
-        "osu": "OSU를 설치하는 중...",
+        "osu": "Installing OSU...",
         "flash-mcu": "MCU updating...",
-        "flash-bootloader": "부트 로더 업데이트 중...",
-        "firmware": "펌웨어 업데이트 중...",
+        "flash-bootloader": "Bootloader updating...",
+        "firmware": "Firmware updating...",
         "flash": "Preparing your device..."
       },
-      "confirmIdentifier": "식별자 확인",
+      "confirmIdentifier": "Verify the identifier",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
-      "identifier": "식별자",
+      "identifier": "Identifier",
       "mcuTitle": "Finalize update",
-      "mcuFirst": "장치에서 USB 케이블 분리",
+      "mcuFirst": "Disconnect the USB cable from your device",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Please wait for the update to finish",
       "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
       "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
       "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
-      "successTitle": "펌웨어 업데이트됨",
-      "successText": "장치에 앱을 다시 설치하십시오.",
+      "successTitle": "Firmware updated",
+      "successText": "Please re-install the apps on your device",
       "resetSteps": {
         "first": "1. Reset your device",
         "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
@@ -1302,23 +1307,23 @@
     "buyCTA": "Sell {{currencyTicker}}"
   },
   "receive": {
-    "title": "수신",
+    "title": "Receive",
     "successTitle": "Address shared securely",
     "steps": {
       "chooseAccount": {
-        "title": "계정",
-        "label": "입금할 계정",
+        "title": "Account",
+        "label": "Account to credit",
         "parentAccount": "1. Select {{currencyName}} account",
         "token": "2. Select a token",
         "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
         "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
       },
       "connectDevice": {
-        "title": "장치",
-        "withoutDevice": "장치가 없습니까?"
+        "title": "Device",
+        "withoutDevice": "Don't have your device?"
       },
       "receiveFunds": {
-        "title": "수신"
+        "title": "Receive"
       },
       "warning": {
         "tezos": {
@@ -1328,8 +1333,8 @@
     }
   },
   "send": {
-    "title": "전송",
-    "totalSpent": "인출할 총액",
+    "title": "Send",
+    "totalSpent": "Total to debit",
     "steps": {
       "recipient": {
         "title": "Recipient"
@@ -1366,14 +1371,14 @@
         }
       },
       "confirmation": {
-        "title": "확인",
+        "title": "Confirmation",
         "success": {
-          "title": "트랜잭션 전송됨",
+          "title": "Transaction sent",
           "text": "Your account balance will be updated when the blockchain confirms the transaction",
-          "cta": "세부 정보 보기"
+          "cta": "View details"
         },
         "pending": {
-          "title": "트랜잭션 브로드캐스트 중..."
+          "title": "Broadcasting transaction..."
         },
         "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
       },
@@ -1388,7 +1393,7 @@
     }
   },
   "releaseNotes": {
-    "title": "릴리즈 노트",
+    "title": "Release notes",
     "version": "Ledger Live {{versionNb}}"
   },
   "distribution": {
@@ -1865,15 +1870,15 @@
     }
   },
   "settings": {
-    "title": "설정",
+    "title": "Settings",
     "discreet": "Toggle discreet mode",
     "helpButton": "Help",
     "tabs": {
-      "display": "일반",
+      "display": "General",
       "currencies": "Crypto assets",
       "rates": "Rates",
-      "help": "도움말",
-      "about": "소개",
+      "help": "Help",
+      "about": "About",
       "experimental": "Experimental features",
       "accounts": "Accounts"
     },
@@ -1888,25 +1893,25 @@
         "desc": "Save a CSV file of your account operations on your computer."
       },
       "modal": {
-        "button": "완료",
-        "title": "모바일로 내보내려면 스캔하십시오.",
-        "listTitle": "Ledger Live 모바일 앱에서:",
-        "step1": "<3><0>계정</0></3>에서 <1><0>+</0></1> 버튼을 탭합니다.",
-        "step2": "<1><0>데스크탑 계정 가져오기</0></1>를 탭합니다.",
-        "step3": "로더가 100%가 될 때까지 <1><0>LiveQR 코드</0></1>를 스캔합니다."
+        "button": "Done",
+        "title": "Scan to export to mobile",
+        "listTitle": "On the Ledger Live mobile app:",
+        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
+        "step2": "Tap <1><0>Import desktop accounts</0></1>",
+        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
       }
     },
     "display": {
-      "desc": "Ledger Live의 일반 설정을 구성합니다.",
-      "language": "표시 언어",
-      "languageDesc": "Ledger Live에 표시되는 언어를 설정합니다.",
+      "desc": "Configure general Ledger Live settings.",
+      "language": "Display language",
+      "languageDesc": "Set the language displayed in Ledger Live.",
       "theme": "Theme",
       "themeDesc": "Select the theme.",
-      "counterValue": "반대 가치(Countervalue)",
-      "counterValueDesc": "잔액 및 작업 옆에 표시할 통화를 선택합니다.",
-      "region": "지역",
+      "counterValue": "Countervalue",
+      "counterValueDesc": "Choose the currency shown next to your balance and operations.",
+      "region": "Region",
       "regionDesc": "Choose your region to set the time zone of Ledger Live.",
-      "stock": "지역 시장 지표",
+      "stock": "Regional market indicator",
       "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
       "carouselVisibility": "Carousel visibility",
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
@@ -1914,43 +1919,43 @@
     "currencies": {
       "desc": "Select a crypto asset to edit its settings.",
       "placeholder": "No settings for this asset",
-      "confirmationsNb": "확인 수",
-      "confirmationsNbDesc": "트랜잭션이 확인된 것으로 표시되는 네트워크 확인 수를 설정합니다."
+      "confirmationsNb": "Number of confirmations",
+      "confirmationsNbDesc": "Set the number of network confirmations for a transaction to be marked as confirmed."
     },
     "profile": {
-      "password": "암호 잠금",
+      "password": "Password lock",
       "passwordDesc": "Set a password to secure the Ledger Live data on your computer, including account names, balances, transactions and public addresses.",
-      "passwordAutoLock": "자동 잠금",
+      "passwordAutoLock": "Auto-lock",
       "passwordAutoLockDesc": "Automatically lock Ledger Live when inactive.",
-      "changePassword": "암호 변경",
-      "softResetTitle": "캐시 지우기",
-      "softResetDesc": "블록 체인과 강제로 동기화하려면 Ledger Live 캐시를 지우십시오.",
-      "softReset": "지우기",
-      "hardResetTitle": "Ledger Live 재설정",
+      "changePassword": "Change password",
+      "softResetTitle": "Clear cache",
+      "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
+      "softReset": "Clear",
+      "hardResetTitle": "Reset Ledger Live",
       "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction histories and settings.",
-      "hardReset": "재설정",
-      "developerMode": "개발자 모드",
-      "developerModeDesc": "Manager에 개발자 및 testnet 앱을 표시합니다.",
-      "analytics": "분석",
+      "hardReset": "Reset",
+      "developerMode": "Developer mode",
+      "developerModeDesc": "Show developer and testnet apps in the Manager.",
+      "analytics": "Analytics",
       "analyticsDesc": "Enable analytics to help Ledger improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc), end of page scrolls, (un)installing and app version, number of accounts, crypto assets and operations, session durations, the Ledger device type and firmware.",
-      "reportErrors": "버그 보고서",
+      "reportErrors": "Bug reports",
       "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
-      "launchOnboarding": "장치 설정",
+      "launchOnboarding": "Device setup",
       "launchOnboardingDesc": "Set up a new device or restore an existing device. Accounts and settings are kept."
     },
     "about": {
-      "desc": "앱 정보, 이용 약관 및 개인 정보 보호 정책."
+      "desc": "App information, Terms and Conditions, and Privacy Policy."
     },
     "help": {
-      "desc": "Ledger Live에 대해 자세히 알아보거나 도움을 받으실 수 있습니다.",
-      "version": "버전",
-      "releaseNotesBtn": "세부 사항",
+      "desc": "Learn more about Ledger Live or get help.",
+      "version": "Version",
+      "releaseNotesBtn": "Details",
       "termsBtn": "Read",
-      "faq": "Ledger 지원",
+      "faq": "Ledger Support",
       "faqDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
-      "terms": "이용 약관",
-      "termsDesc": "Ledger Live를 사용함으로써 귀하는 당사 이용 약관에 동의하는 것으로 간주됩니다.",
-      "privacy": "개인 정보 보호 정책",
+      "terms": "Terms of Use",
+      "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
+      "privacy": "Privacy Policy",
       "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use them."
     },
     "experimental": {
@@ -1958,35 +1963,35 @@
       "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
-      "title": "Ledger Live 재설정",
-      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your Recovery phrase."
+      "title": "Reset Ledger Live",
+      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your recovery phrase."
     },
     "softResetModal": {
-      "title": "캐시 지우기",
+      "title": "Clear cache",
       "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys to access to your crypto assets remain secure on your Ledger device and Recovery sheet."
     },
     "resetFallbackModal": {
-      "title": "사용자 조치 필요",
-      "part1": "캐시 폴더를 삭제할 수 없습니다. 폴더를 수동으로 삭제하십시오.",
-      "part2": "폴더 열기 버튼을 클릭하여",
-      "part3": "앱이 닫히면",
-      "part4": "\"sqlite\" 폴더를 수동으로 삭제하십시오.",
-      "part5": "그런 다음 앱을 정상적으로 다시 시작할 수 있습니다."
+      "title": "User action required",
+      "part1": "Could not delete cache folder. Please delete the folder manually:",
+      "part2": "Click the Open folder button, the ",
+      "part3": "app will close",
+      "part4": ", and manually delete the \"sqlite\" folder.",
+      "part5": "Then you can restart the app normally."
     },
     "removeAccountModal": {
-      "title": "계정 제거",
+      "title": "Remove account",
       "desc": "This will not affect your crypto assets. Existing accounts can always be added again."
     },
     "openUserDataDirectory": {
-      "title": "사용자 데이터 보기",
+      "title": "View user data",
       "desc": "View the user data stored on your computer, including your accounts, caches and settings.",
-      "btn": "보기"
+      "btn": "View"
     },
     "repairDevice": {
-      "title": "계정, 거래 내역 및 설정을 포함하여 컴퓨터에 저장된 모든 Ledger Live 데이터를 지웁니다. 암호화 자산에 액세스하기 위한 개인 키는 귀하의 Ledger 장치와 복구 시트에서 안전하게 보호됩니다.",
+      "title": "Repair your Ledger device",
       "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
-      "desc": "Ledger 장치의 상태를 선택하십시오.",
-      "button": "복구"
+      "desc": "Please select the state of your Ledger device.",
+      "button": "Repair"
     },
     "exportLogs": {
       "title": "Save logs",
@@ -2013,38 +2018,38 @@
   "password": {
     "inputFields": {
       "newPassword": {
-        "label": "새 암호"
+        "label": "New password"
       },
       "confirmPassword": {
-        "label": "암호 확인"
+        "label": "Confirm password"
       },
       "currentPassword": {
-        "label": "현재 암호"
+        "label": "Current password"
       }
     },
     "changePassword": {
-      "title": "암호 잠금",
-      "subTitle": "암호 변경"
+      "title": "Password lock",
+      "subTitle": "Change your password"
     },
     "setPassword": {
-      "title": "암호 잠금",
+      "title": "Password lock",
       "subTitle": "Set the password",
       "desc": "Keep your password safe. Losing it means resetting Ledger Live and adding the accounts again."
     },
     "disablePassword": {
-      "title": "암호 잠금 비활성화",
-      "desc": "Ledger Live 데이터가 암호화되지 않고 컴퓨터에 저장됩니다. 여기에는 계정 이름, 거래 및 공용 주소가 포함됩니다."
+      "title": "Disable password lock",
+      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
     }
   },
   "update": {
-    "downloadInProgress": "업데이트 다운로드 중...",
-    "downloadProgress": "{{progress}}% 완료됨",
-    "checking": "업데이트 확인 중...",
-    "checkSuccess": "업데이트 설치 준비 완료",
-    "quitAndInstall": "지금 설치",
+    "downloadInProgress": "Downloading update...",
+    "downloadProgress": "{{progress}}% completed",
+    "checking": "Checking update...",
+    "checkSuccess": "Update ready to install",
+    "quitAndInstall": "Install now",
     "updateAvailable": "Update to Ledger Live version {{version}} is available",
-    "error": "업데이트 중 오류가 발생했습니다. 다시 다운로드하십시오.",
-    "reDownload": "다시 다운로드",
+    "error": "Error during update. Please download again",
+    "reDownload": "Download again",
     "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
     "downloadNow": "Download update"
   },
@@ -2052,7 +2057,7 @@
     "title": "Something went wrong",
     "description": "Please check our support articles for possible solutions. If the problem persists, save the logs using the button below and provide them to Ledger Support.",
     "troubleshooting": "Click here for possible solutions",
-    "restart": "다시 시작",
+    "restart": "Restart",
     "logs": "Save logs",
     "dataFolder": "View user data"
   },
@@ -2068,7 +2073,14 @@
     "selectedAccounts_plural": "Accounts to be included ({{count}})"
   },
   "language": {
-    "system": "시스템 언어 사용"
+    "system": "Use system language",
+    "switcher": {
+      "en": "English",
+      "fr": "French",
+      "ru": "Russian",
+      "es": "Spanish",
+      "zh": "Chinese"
+    }
   },
   "theme": {
     "system": "Select the system theme",
@@ -2077,214 +2089,468 @@
     "dark": "Dark"
   },
   "onboarding": {
-    "breadcrumb": {
-      "selectDevice": "장치 선택",
-      "selectPIN": "PIN",
-      "writeSeed": "복구 구문",
-      "setPassword": "암호 잠금",
-      "analytics": "버그 및 분석"
-    },
-    "start": {
-      "title": "Ledger Live에 오신 것을 환영합니다.",
-      "themeDesc": "Let's start by choosing how Ledger Live looks to you.\nYou can change this again in your settings.",
-      "startBtn": "시작하기"
-    },
-    "init": {
-      "title": "Ledger 장치로 시작하기",
-      "newDevice": {
-        "title": "Set up as new device"
+    "drawers": {
+      "pinHelp": {
+        "title": "Secure your PIN code",
+        "intro": "During the setup process you choose a PIN code.",
+        "rules": {
+          "1": "Always choose a PIN code yourself.",
+          "2": "Always enter your PIN code out of sight.",
+          "3": "You can change your PIN code if needed.",
+          "4": "Three wrong PIN code entries in a row will reset the device.",
+          "5": "Never use an easy PIN code like 0000, 123456, or 55555555.",
+          "6": "Never share your PIN code with someone else. Not even with Ledger.",
+          "7": "Never use a PIN code you did not choose yourself.",
+          "8": "Never store your PIN code on a computer or phone."
+        }
       },
-      "restoreDevice": {
-        "title": "Restore device from Recovery phrase"
+      "recoverySeed": {
+        "title1": "How does a recovery phrase work?",
+        "paragraph1": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
+        "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
+        "link": "More about the recovery phrase",
+        "title2": "What happens if I lose access to my Nano?",
+        "paragraph3": "Don't worry and follow these steps:",
+        "points": {
+          "1": "Get a new hardware wallet.",
+          "2": "Select “Restore recovery phrase on a new device” in the Ledger app",
+          "3": "Enter your recovery phrase on your new device to restore access to your crypto."
+        }
       },
-      "initializedDevice": {
-        "title": "Skip device setup"
+      "whereToHide": {
+        "title": "Where should I keep my recovery phrase?",
+        "points": {
+          "1": "NEVER enter it on a computer, smartphone or any other device. Don't take a picture of it.",
+          "2": "NEVER share your 24 words with anyone.",
+          "3": "ALWAYS store it in a secure place, out of sight.",
+          "4": "Ledger will never ask for your recovery phrase.",
+          "5": "If any person or application asks for it, assume it is a scam!"
+        }
       }
     },
-    "noDevice": {
-      "title": "Ledger 장치가 없습니까?",
-      "buyNew": {
-        "title": "Ledger 장치 구입"
+    "alerts": {
+      "deviceError": {
+        "title": "Something went wrong, please reconnect device",
+        "descr": "An action was already pending on the your Nano. Please deny or reconnect.",
+        "retry": "Retry"
       },
-      "learnMore": {
-        "title": "Ledger에 대해 알아보기"
+      "genuineCheck": {
+        "title": "Genuine check",
+        "descr": "Please don’t turn off your Nano and allow Ledger",
+        "info": "This step is meant to ensure that your Nano is authentic and was not hacked."
       },
-      "learnMoreCrypto": {
-        "title": "Learn about crypto"
+      "genuineCheckSuccess": {
+        "title": "All good!",
+        "descr": "Your device is genuine and ready to use with Ledger app",
+        "continue": "Continue"
+      },
+      "genuineCheckError": {
+        "title": "Your Nano’s authenticity couldn’t be verified...",
+        "descr": "We recommend you contact Ledger Support to resolve this issue. ",
+        "contactSupport": "Contact Ledger Support"
+      },
+      "languageIncomplete": {
+        "title": "Get started in {{language}}",
+        "descr": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
+        "gotIt": "Got it"
+      },
+      "beCareful": {
+        "title": "Please be careful",
+        "descr": "Make sure you follow the instructions on this app at every step of the process.",
+        "gotIt": "Got it"
+      },
+      "useLedgerSeeds": {
+        "title": "We recommend Ledger recovery phrases only",
+        "descr": "Ledger cannot guarantee the security of external recovery phrases. We recommend setting up your Nano as a new device if your recovery phrase was not generated by a Ledger.",
+        "gotIt": "Got it"
       }
     },
-    "selectDevice": {
-      "title": "장치 선택",
-      "usbOnly": "USB only",
-      "usbOnlyTooltip": "Ledger Live desktop currently does not support Bluetooth"
-    },
-    "selectPIN": {
-      "disclaimer": {
-        "note1": "Always choose your own PIN.",
-        "note2": "최적의 보안을 위해 8 자리를 사용하십시오.",
-        "note3": "Never use a device with a pre-installed PIN or Recovery phrase."
+    "screens": {
+      "welcome": {
+        "title": "Welcome to Ledger",
+        "description": "Safely manage your crypto from your computer.",
+        "cta": "Get started",
+        "noDevice": "No device? <0>Buy a Ledger Nano X</0>",
+        "languageWarning": {
+          "title": "Get started in {{language}}",
+          "desc": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
+          "cta": "Got it"
+        }
       },
-      "initialize": {
-        "title": "Choose your PIN",
-        "instructions": {
-          "nano": {
-            "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Press the left or right button to navigate through the on-screen instructions.",
-            "step3": "Press both buttons to select <1><0>{{configureAsNewDevice }}</0></1>.",
-            "step4": "Press the left or right button to select a digit. Press both buttons together to confirm.",
-            "step5": "Select ✓ to confirm your PIN. Select ⬅ to erase a digit."
+      "selectDevice": {
+        "title": "What's your device?"
+      },
+      "selectUseCase": {
+        "greetings": "Hello!",
+        "hasNoRecovery": "First time using your Nano?",
+        "hasRecovery": "Already have a recovery phrase?",
+        "separator": "or",
+        "options": {
+          "1": {
+            "heading": "First use",
+            "title": "Set up a new Nano",
+            "description": "Let’s start and set up your device!"
           },
-          "nanoX": {
-            "step1": "{{productName}}을(를) 컴퓨터에 연결합니다.",
-            "step2": "Press both buttons together to confirm <1><0>{{setUpAsNewDevice}}</0></1>.",
-            "step3": "왼쪽 또는 오른쪽 버튼을 눌러 숫자를 선택합니다.",
-            "step4": "Select ✓ to confirm your PIN. Select ⬅ to erase a digit."
+          "2": {
+            "heading": "Connect device",
+            "title": "Connect your Nano",
+            "description": "Is your device already set up? Connect it to the app!"
           },
-          "blue": {
-            "step1": "{{productName}}을(를) 컴퓨터에 연결합니다.",
-            "step2": "Tap on <1><0>{{configureAsNewDevice}}</0></1>.",
-            "step3": "Choose a PIN with 4 to 8 digits."
+          "3": {
+            "heading": "Restore device",
+            "title": "Restore your recovery phrase on a new device",
+            "description": "Use an existing recovery phrase to restore your private keys on a new Nano!"
           }
         }
       },
-      "restore": {
-        "title": "Choose your PIN",
-        "instructions": {
-          "nano": {
-            "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Press the left or right button to navigate through the on-screen instructions.",
-            "step3": "Press both buttons to select <1><0>{{restoreConfiguration}}</0></1>.",
-            "step4": "Press the left or right button to select a digit. Press both buttons together to confirm.",
-            "step5": "Select ✓ to confirm your PIN. Select ⬅ to erase a digit."
+      "tutorial": {
+        "steps": {
+          "getStarted": "Get started",
+          "pinCode": "Pin code",
+          "recoveryPhrase": "Recovery phrase",
+          "hideRecoveryPhrase": "Hide recovery phrase",
+          "pairNano": "Connect nano"
+        },
+        "screens": {
+          "importYourRecoveryPhrase": {
+            "title": "Restore from recovery phrase",
+            "paragraph1": "Restore your Nano from your recovery phrase to restore, replace or back up your Ledger hardware wallet.",
+            "paragraph2": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
+            "buttons": {
+              "next": "OK, I’m ready!",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
           },
-          "nanoX": {
-            "step1": "{{productName}}을(를) 컴퓨터에 연결합니다.",
-            "step2": "{{productName}} 화면의 지시에 따라 두 개의 버튼을 동시에 누릅니다.",
-            "step3": "Press both buttons to select <1><0>{{restoreConfiguration}}</0></1>.",
-            "step4": "Press the left or right button to select a digit. Press both buttons to validate.",
-            "step5": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+          "howToGetStarted": {
+            "title": "The best way to get you started:",
+            "rules": {
+              "1": "Plan 30 minutes and take your time.",
+              "2": "Grab a pen to write with.",
+              "3": "Stay alone, and choose a safe and quiet environment."
+            },
+            "buttons": {
+              "next": "OK, I’m ready!",
+              "prev": "Previous step"
+            }
           },
-          "blue": {
-            "step1": "{{productName}}을(를) 컴퓨터에 연결합니다.",
-            "step2": "Tap on <1><0>{{restoreConfiguration}}</0></1>.",
-            "step3": "Choose a PIN with 4 to 8 digits."
+          "deviceHowTo": {
+            "turnOn": {
+              "title": "Turn on Nano",
+              "descr": "Connect your device to your computer with the USB cable."
+            },
+            "browse": {
+              "title": "Browse",
+              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+            },
+            "select": {
+              "title": "Select “Set up as new device”",
+              "descr": "Press both buttons simultaneously to validate the selection."
+            },
+            "follow": {
+              "title": "Follow instructions",
+              "descr": "Come back here to follow instructions on your PIN code."
+            },
+            "buttons": {
+              "next": "Next step",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
+          "deviceHowTo2": {
+            "turnOn": {
+              "title": "Turn on Nano",
+              "descr": "Connect your device to your computer with the USB cable."
+            },
+            "browse": {
+              "title": "Browse",
+              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+            },
+            "select": {
+              "title": "Select “Enter your recovery phrase”",
+              "descr": "Press both buttons simultaneously to validate the selection."
+            },
+            "follow": {
+              "title": "Follow instructions",
+              "descr": "Come back here to follow instructions on your PIN code."
+            },
+            "buttons": {
+              "next": "Next step",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },          "pinCode": {
+            "title": "PIN code",
+            "paragraph": "Your PIN code is the first layer of security. It physically secures access to your private key and your Nano. Your PIN code must be 4 to 8 digits long.",
+            "disclaimer": "I understand that I must choose my PIN code myself and keep it private.",
+            "buttons": {
+              "next": "Set up PIN code",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
+          "quizSuccess": {
+            "title": "Already a pro!",
+            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
+            "buttons": {
+              "next": "Next step",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
+          "quizFailure": {
+            "title": "You will soon become a pro...",
+            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety. Only one quick step left!",
+            "buttons": {
+              "next": "Next step",
+              "prev": "Previous step"
+            }
+          },
+          "pinCodeHowTo": {
+            "setUp": {
+              "title": "Choose PIN code",
+              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select ✔ to confirm your PIN code. Select ⌫ to erase a digit."
+            },
+            "confirm": {
+              "title": "Confirm PIN code",
+              "descr": "Enter your PIN code again to confirm it."
+            },
+            "buttons": {
+              "next": "Next step",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
+          "existingRecoveryPhrase": {
+            "title": "Enter your recovery phrase",
+            "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
+            "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
+            "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+            "buttons": {
+              "next": "Enter recovery phrase",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
+          "useRecoverySheet": {
+            "takeYourRecoverySheet": {
+              "title": "Take your recovery sheet",
+              "descr": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
+            },
+            "writeDownWords": {
+              "title": "Write down all words",
+              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2. Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+            },
+            "buttons": {
+              "next": "Next step",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
+          "newRecoveryPhrase": {
+            "title": "Recovery phrase",
+            "paragraph1": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
+            "paragraph2": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
+            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+            "buttons": {
+              "next": "Recovery phrase",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
+          "recoveryHowTo": {
+            "grabRecovery": {
+              "title": "Grab your recovery phrase"
+            },
+            "selectLength": {
+              "title": "Select recovery phrase length",
+              "descr": "Your recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
+            },
+            "enterWord": {
+              "title": "Enter Word #1...",
+              "descr": "Enter the first letters of Word #1 by selecting them with the right or left button. Press both buttons to validate each letter."
+            },
+            "validateWord": {
+              "title": "Validate Word #1...",
+              "descr": "Choose Word #1 from the suggestions. Press both buttons to validate."
+            },
+            "andNext": {
+              "title": "Repeat for all words!"
+            },
+            "buttons": {
+              "next": "Next step",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
+          "recoveryHowTo3": {
+            "reEnterWord": {
+              "title": "Confirm your recovery phrase",
+              "descr": "Scroll through the words until you find Word #1 by pressing the right button. Validate by pressing both buttons."
+            },
+            "repeat": {
+              "title": "Repeat for all words!"
+            },
+            "buttons": {
+              "next": "Next step",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
+          "genuineCheck": {
+            "plugUSBCable": {
+              "title": "Connect USB cable",
+              "descr": "Connect the USB cable and enter your PIN Code on the device"
+            },
+            "success": {
+              "title": "All good!",
+              "desc": "Your Ledger {{deviceName}} is genuine and ready to use with Ledger Live"
+            },
+            "buttons": {
+              "next": "Continue",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
+          "hideRecoveryPhrase": {
+            "title": "Hide your recovery phrase",
+            "paragraph": "Your recovery phrase is your last chance to access your crypto if you cannot use your Nano. You must keep it in a safe place.",
+            "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
+            "neverShowToAnyone": "Never share your 24 words with anyone, not even with Ledger.",
+            "buttons": {
+              "next": "OK, I'm done!",
+              "prev": "Previous step",
+              "help": "Need help",
+              "learn": "Learn how to hide it"
+            }
+          },
+          "pairMyNano": {
+            "title": "Genuine check",
+            "paragraph": "We'll verify whether your Nano is genuine. This should be quick and easy!",
+            "buttons": {
+              "next": "Check my Nano",
+              "prev": "Previous step",
+              "help": "Need help"
+            }
+          },
+          "quizzSuccess": {
+            "title": "Already a pro!",
+            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
+            "buttons": {
+              "next": "Next step",
+              "prev": "Previous step"
+            }
+          },
+          "quizzFail": {
+            "title": "You will soon become a pro...",
+            "paragraph1": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.",
+            "paragraph2": "Only one quick step left!",
+            "buttons": {
+              "next": "Next step",
+              "prev": "Previous step"
+            }
+          },
+          "connectYourDevice": {
+            "plugUSBCable": {
+              "title": "Connect USB cable",
+              "descr": "Connect the cable and enter the PIN Code on your device",
+              "buttons": {
+                "next": "Continue",
+                "prev": "Previous step"
+              }
+            }
           }
         }
       }
     },
-    "writeSeed": {
-      "initialize": {
-        "title": "Write down your Recovery phrase",
-        "desc": "Your 24-word Recovery phrase is the <1>only backup</1> of all your private keys.",
-        "nano": {
-          "step1": "Write <1><0>{{seedWord1}}</0></1> in position 1 on a blank Recovery sheet.",
-          "step2": "Press the right button and continue to write down all 24 words.",
-          "step3": "Confirm each word of your Recovery phrase: select it then confirm it by pressing both buttons together."
+    "pedagogy": {
+      "heading": "basics",
+      "screens": {
+        "accessYourCoins": {
+          "title": "Access your crypto",
+          "description": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
         },
-        "blue": {
-          "step1": "Write down each word on a blank Recovery sheet in the exact order.",
-          "step2": "Tap <1><0>{{seedNext}}</0></1> and write down all words until the <3><0>{{seedConfirmation}}</0></3> screen appears.",
-          "step3": "Enter each word to confirm your Recovery phrase."
-        }
-      },
-      "restore": {
-        "title": "Enter your Recovery phrase",
-        "desc": "Enter the Recovery phrase using your Recovery sheet.",
-        "nano": {
-          "step1": "Choose the length of your Recovery phrase.",
-          "step2": "Enter the first letters of <1><0>{{seedWord1}}</0></1> until the suggestions appear.",
-          "step3": "Choose <1><0>{{seedWord1}}</0></1> from the suggested words by pressing both buttons together.",
-          "step4": "Repeat the process for all words."
+        "ownYourPrivateKey": {
+          "title": "Own your private key",
+          "description": "Your private key is stored within your Nano. You must be the only one to own it to be in control of your money."
         },
-        "blue": {
-          "step1": "Select the length of your Recovery phrase.",
-          "step2": "Type the first word of your Recovery phrase. Tap the word when it appears.",
-          "step3": "Repeat the process for all words."
+        "stayOffline": {
+          "title": "Stay offline",
+          "description": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
+        },
+        "validateTransactions": {
+          "title": "Validate transactions",
+          "description": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
+        },
+        "setUpNanoWallet": {
+          "title": "Let’s set up your Nano!",
+          "description": "We'll start by setting up your Nano security.",
+          "CTA": "Let’s do this!"
         }
-      },
-      "disclaimer": {
-        "note1": "Anyone who has your Recovery phrase also has your crypto assets.",
-        "note2": "Never use a device with a pre-installed PIN or Recovery phrase.",
-        "note3": "Store your Recovery phrase in a safe place, out of sight.",
-        "note4": "Ledger does not store your private keys, nor ever asks for them."
       }
     },
-    "genuineCheck": {
-      "title": "보안 체크리스트",
-      "descGeneric": "계속하기 전에 보안 체크리스트의 작성을 완료하십시오.",
-      "descRestore": "시작하기 전에 다음을 확인하십시오.",
-      "step1": {
-        "title": "Did you choose your own PIN?"
-      },
-      "step2": {
-        "title": "Did you save your own Recovery phrase?"
-      },
-      "step3": {
-        "title": "Ledger 장치가 정품입니까?"
-      },
-      "isGenuinePassed": "귀하의 장치는 정품입니다.",
+    "quizz": {
+      "heading": "Quiz",
+      "title": "Now game on!",
+      "descr": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
       "buttons": {
-        "genuineCheck": "지금 확인",
-        "contactSupport": "연락처"
+        "start": "Let’s take the quiz",
+        "next": "Next question",
+        "finish": "Finish quiz"
       },
-      "errorPage": {
-        "title": {
-          "pinFailed": "Did you choose your own PIN?",
-          "recoveryPhraseFailed": "Did you save your own Recovery phrase?"
+      "questions": {
+        "1": {
+          "text": "As a Ledger user, my crypto is stored:",
+          "answers": {
+            "1": "On my Nano",
+            "2": "On the blockchain"
+          },
+          "results": {
+            "success": {
+              "title": "Congrats!",
+              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+            },
+            "fail": {
+              "title": "Incorrect!",
+              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+            }
+          }
         },
-        "desc": {
-          "pinFailed": "Never use a device with a pre-installed PIN. Please contact Ledger Support if in doubt.",
-          "recoveryPhraseFailed": "Save the Recovery phrase only if it is displayed on your device, to you alone. Please contact Ledger Support if in doubt."
+        "2": {
+          "text": "If my recovery phrase is no longer secure or private...",
+          "answers": {
+            "1": "No problem, Ledger can send me a copy",
+            "2": "My crypto is no longer safe and I need to transfer them to a secure place"
+          },
+          "results": {
+            "success": {
+              "title": "Congrats!",
+              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+            },
+            "fail": {
+              "title": "Incorrect!",
+              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+            }
+          }
+        },
+        "3": {
+          "text": "When I connect my Nano to the Ledger app, my private key is...",
+          "answers": {
+            "1": "Still offline",
+            "2": "Briefly connected to the internet"
+          },
+          "results": {
+            "success": {
+              "title": "Congrats!",
+              "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
+            },
+            "fail": {
+              "title": "Incorrect!",
+              "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
+            }
+          }
         }
       }
-    },
-    "setPassword": {
-      "title": "암호 잠금(옵션)",
-      "desc": "Set a password to secure the Ledger Live data on your computer, including account names, balances, transactions and public addresses",
-      "disclaimer": {
-        "note1": "Keep your password safe. Do not share it.",
-        "note2": "Losing your password means resetting Ledger Live and adding the accounts again.",
-        "note3": "Ledger Live 재설정은 암호화 자산에 영향을 미치지 않습니다."
-      }
-    },
-    "analytics": {
-      "title": "버그 및 분석",
-      "desc": "Share anonymized data to help Ledger improve the security of its products and services",
-      "shareAnalytics": {
-        "title": "분석",
-        "desc": "Enable analytics to help Ledger improve user experience.",
-        "mandatoryContextual": {
-          "item1": "클릭",
-          "item2": "인앱 페이지 방문",
-          "item3": "웹 페이지로 리디렉션",
-          "item4": "Actions: send, receive, lock, etc",
-          "item5": "페이지 스크롤 끝",
-          "item6": "앱 설치(해제) 및 버전",
-          "item7": "계정, 암호화 자산 및 작업 수",
-          "item8": "전체 및 페이지 세션 지속 시간",
-          "item9": "Ledger 장치 유형 및 펌웨어"
-        }
-      },
-      "sentryLogs": {
-        "title": "버그 보고서",
-        "desc": "Ledger가 버그를 수정하는 데 도움이 되는 보고서를 자동으로 전송합니다."
-      },
-      "technicalData": {
-        "title": "기술 데이터*",
-        "desc": "Ledger는 사용자 경험을 향상시키기 위해 완전 익명화된 기술 데이터를 자동으로 수집합니다.",
-        "mandatoryText": "* 필수",
-        "mandatoryContextual": {
-          "title": "기술 데이터",
-          "item1": "익명 고유 애플리케이션 ID",
-          "item2": "Ledger Live 버전, 언어 및 지역",
-          "item3": "OS 버전, 언어 및 지역"
-        }
-      }
-    },
-    "finish": {
-      "title": "귀하의 장치가 준비되었습니다!",
-      "desc": "Install apps on your device and access the Portfolio",
-      "openAppButton": "Ledger Live 열기"
     }
   },
   "connectTroubleshooting": {
@@ -2321,7 +2587,9 @@
   "Terms": {
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
-    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
+    "switchLabel": "I have read and agree with the <0>Terms of Use and Privacy Policy</0>",
+    "switchLabelLoss": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to Nano.",
+    "cta": "Enter Ledger app"
   },
   "families": {
     "stellar": {
@@ -2352,7 +2620,7 @@
       "description": "Wait for the operation to go through."
     },
     "AccountNameRequired": {
-      "title": "계정 이름이 필요합니다.",
+      "title": "An account name is required",
       "description": "Please enter an account name"
     },
     "AccountNotSupported": {
@@ -2449,11 +2717,11 @@
       "description": "This crypto asset is not yet supported. Please contact Ledger Support."
     },
     "DeviceNotGenuine": {
-      "title": "정품이 아닐 수 있습니다.",
+      "title": "Possibly not genuine",
       "description": "Request assistance from Ledger Support"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "죄송합니다. 다시 시도하십시오(정품-종료).",
+      "title": "Sorry, try again (genuine-close)",
       "description": null
     },
     "DeviceInOSUExpected": {
@@ -2469,24 +2737,24 @@
       "description": "An unexpected error occurred. Please try again. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "죄송합니다. 연결에 실패했습니다.",
-      "description": "다시 시도하십시오."
+      "title": "Oops, connection failed",
+      "description": "Please try again"
     },
     "DisconnectedDevice": {
-      "title": "죄송합니다. 장치의 연결이 끊어졌습니다.",
-      "description": "다시 시도하십시오."
+      "title": "Oops, device connection lost",
+      "description": "Please try again"
     },
     "DisconnectedDeviceDuringOperation": {
       "title": "Oops, device disconnected",
       "description": "The connection to the device was lost during an operation. Please try again"
     },
     "EnpointConfig": {
-      "title": "잘못된 엔드 포인트",
-      "description": "유효한 엔드 포인트를 입력하십시오."
+      "title": "Invalid endpoint",
+      "description": "Please provide a valid endpoint"
     },
     "FeeEstimationFailed": {
-      "title": "죄송합니다. 수수료를 산정하지 못했습니다.",
-      "description": "관례적 수수료 설정을 시도하십시오. (status: {{status}})"
+      "title": "Sorry, fee estimation failed",
+      "description": "Try setting a custom fee (status: {{status}})"
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "Firmware or app update required",
@@ -2497,12 +2765,12 @@
       "description": "Please contact Ledger Support"
     },
     "HardResetFail": {
-      "title": "죄송합니다. 재설정하지 못했습니다.",
+      "title": "Oops, could not reset",
       "description": "Please try again or contact Ledger Support if in doubt"
     },
     "LatestMCUInstalledError": {
-      "title": "죄송합니다. 업데이트할 것이 없습니다.",
-      "description": "불필요하게 장치 마이크로 컨트롤러를 업데이트하려 했습니다. 장치에 문제가 있는 경우 Ledger 지원 센터에 문의하십시오."
+      "title": "Oops, nothing to update",
+      "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
@@ -2513,12 +2781,12 @@
       "description": "The server could not handle your request. Please try again later or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
-      "title": "죄송합니다. {{currencyName}} 서비스를 사용할 수 없습니다.",
-      "description": "다시 시도하거나 Ledger 지원 센터에 문의하십시오."
+      "title": "Sorry, {{currencyName}} services unavailable",
+      "description": "Please retry or contact Ledger Support"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "죄송합니다. 이미 설치되었습니다.",
-      "description": "어떤 앱이 이미 설치되어 있는지 장치를 확인하십시오."
+      "title": "Oops, that's already installed",
+      "description": "Check your device to see which apps are already installed"
     },
     "ManagerAppDepInstallRequired": {
       "title": "{{dependency}} app required",
@@ -2537,7 +2805,7 @@
       "description": "The private keys to access your crypto assets will stay safe on your device and must be backed up on your Recovery sheet."
     },
     "ManagerNotEnoughSpace": {
-      "title": "죄송합니다. 남아 있는 저장 공간이 충분하지 않습니다.",
+      "title": "Sorry, not enough storage left",
       "description": "Uninstall some apps to free up space. The private keys to access your crypto assets will stay safe on your device."
     },
     "ManagerQuitPage": {
@@ -2559,34 +2827,34 @@
       "quit": "Quit Manager"
     },
     "ManagerUninstallBTCDep": {
-      "title": "죄송합니다. 이 앱은 필요합니다.",
-      "description": "Bitcoin 또는 Ethereum 앱을 마지막으로 제거하십시오"
+      "title": "Sorry, this app is required",
+      "description": "Uninstall the Bitcoin or Ethereum app last"
     },
     "NetworkDown": {
-      "title": "죄송합니다. 인터넷이 다운된 것 같습니다.",
-      "description": "인터넷 연결을 확인하십시오."
+      "title": "Oops, internet seems down",
+      "description": "Please check your internet connection"
     },
     "NoAddressesFound": {
       "title": "Sorry, no accounts were found",
       "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
     },
     "NotEnoughBalance": {
-      "title": "죄송합니다. 잔액이 충분하지 않습니다.",
+      "title": "Oops, insufficient balance",
       "description": "Make sure the account used has enough funds"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "수취인 주소가 비활성화되어 있습니다. 활성화하려면 적어도 {{minimalAmount}}을(를) 보내십시오."
+      "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
     },
     "NotEnoughGas": {
       "title": "The ETH balance in the parent account is insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "The Passwords don't match",
-      "description": "다시 시도하십시오."
+      "description": "Please try again"
     },
     "PasswordIncorrect": {
       "title": "The password entered is incorrect",
-      "description": "다시 시도하십시오."
+      "description": "Please try again"
     },
     "RPCHostRequired": {
       "title": "Host is required."
@@ -2618,7 +2886,7 @@
     },
     "TimeoutTagged": {
       "title": "Oops, a timeout occurred ({{tag}})",
-      "description": "서버가 응답하는 데 시간이 너무 오래 걸렸습니다"
+      "description": "It took too long for the server to respond"
     },
     "TransportError": {
       "title": "Something went wrong. Please reconnect your device",
@@ -2637,7 +2905,7 @@
       "description": "Keep the {{appName}} app open while we find your accounts"
     },
     "UnexpectedBootloader": {
-      "title": "죄송합니다. 장치가 부트 로더 모드에 있어서는 안됩니다.",
+      "title": "Oops, your device should not be in Bootloader mode",
       "description": "Please restart your device or contact Ledger Support"
     },
     "UserRefusedAllowManager": {
@@ -2645,7 +2913,7 @@
     },
     "UserRefusedFirmwareUpdate": {
       "title": "Update cancelled",
-      "description": "다시 시도하거나 Ledger 지원 센터에 문의하십시오."
+      "description": "Please retry or contact Ledger Support"
     },
     "UserRefusedOnDevice": {
       "title": "Action rejected",
@@ -2656,12 +2924,12 @@
       "description": "Please retry or contact Ledger Support if in doubt"
     },
     "UserRefusedAddress": {
-      "title": "수신 주소가 거부되었습니다.",
+      "title": "Receive address rejected",
       "description": "Please try again or contact Ledger Support if in doubt"
     },
     "UpdateYourApp": {
-      "title": "앱 업데이트가 필요합니다.",
-      "description": "Manager에서 {{managerAppName}} 앱을 제거한 후 다시 설치하십시오."
+      "title": "App update required",
+      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "DeviceOnDashboardExpected": {
       "title": "Return to the Dashboard",
@@ -2677,41 +2945,41 @@
     },
     "WrongDeviceForAccount": {
       "title": "Something went wrong",
-      "description": "Please check that your hardware wallet is set up with the Recovery phrase or passphrase associated to the selected account."
+      "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "앱 업데이트가 필요합니다.",
+      "title": "App update required",
       "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "InvalidAddress": {
-      "title": "유효한 {{currencyName}} 주소가 아닙니다."
+      "title": "This is not a valid {{currencyName}} address"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "수신자 주소가 발신자 주소와 같습니다."
+      "title": "Recipient address is the same as the sender address"
     },
     "CantOpenDevice": {
       "title": "Oops, couldn't connect to device",
       "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
     },
     "ETHAddressNonEIP": {
-      "title": "자동 확인을 사용할 수 없습니다. 주소를 신중하게 확인하십시오.",
+      "title": "Auto-verification not available: carefully verify the address",
       "description": null
     },
     "CantScanQRCode": {
-      "title": "이 QR 코드를 스캔할 수 없습니다. 이 주소는 자동 확인을 지원하지 않습니다."
+      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
     },
     "FeeNotLoaded": {
       "title": "Couldn't load fee rates. Please set manual fees"
     },
     "FeeRequired": {
-      "title": "수수료가 필요합니다."
+      "title": "Fees are required"
     },
     "GasLessThanEstimate": {
       "title": "This may be too low. Please increase"
     },
     "UnknownMCU": {
-      "title": "알 수 없는 MCU 버전",
-      "description": "Ledger 지원 센터에 문의하십시오."
+      "title": "Unknown MCU version",
+      "description": "Please contact Ledger Support"
     },
     "MCUNotGenuineToDashboard": {
       "title": "Access dashboard to update",

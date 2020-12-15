@@ -139,7 +139,7 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
 
   const defaultOptions = {
     loop: true,
-    autoplay: true,
+    autoplay: !process.env.SPECTRON_RUN,
     animationData: deviceId === "nanoX" ? NanoXAnim : NanoSAnim,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
@@ -171,7 +171,7 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
             {t("onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.prev")}
           </Text>
         </Button>
-        <Button primary onClick={onClickNext}>
+        <Button id="pincode-howto-cta" primary onClick={onClickNext}>
           <Text mr="12px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.next")}
           </Text>

@@ -69,7 +69,7 @@ export function PairMyNano({ sendEvent, context }: Props) {
             {t("onboarding.screens.tutorial.screens.pairMyNano.buttons.prev")}
           </Text>
         </Button>
-        <Button inverted primary onClick={() => sendEvent("NEXT")}>
+        <Button id="pair-my-nano-cta" inverted primary onClick={() => sendEvent("NEXT")}>
           <Text mr="12px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.pairMyNano.buttons.next")}
           </Text>
