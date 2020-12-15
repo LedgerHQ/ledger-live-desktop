@@ -56,7 +56,7 @@ export function Result({ sendEvent, t, meta, state }: Props) {
       >
         {t(wordings.text)}
       </Text>
-      <Button primary onClick={() => sendEvent("NEXT")}>
+      <Button id="quizz-next-cta" primary onClick={() => sendEvent("NEXT")}>
         {t("onboarding.quizz.buttons.next")}
       </Button>
     </React.Fragment>

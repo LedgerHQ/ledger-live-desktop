@@ -135,7 +135,7 @@ export function DeviceHowTo2({ sendEvent, context }: Props) {
 
   const defaultOptions = {
     loop: true,
-    autoplay: true,
+    autoplay: !process.env.SPECTRON_RUN,
     animationData: deviceId === "nanoX" ? NanoXAnim : NanoSAnim,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",

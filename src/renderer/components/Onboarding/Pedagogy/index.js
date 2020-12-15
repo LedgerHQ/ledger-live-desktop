@@ -182,10 +182,18 @@ export function Pedagogy({ onDone }: PedagogyProps) {
           <CurrentScreen t={t} sendEvent={sendEvent} />
         </ScreenContainer>
       </CSSTransition>
-      <LeftButton visible={state.nextEvents.includes("PREV")} onClick={() => sendEvent("PREV")}>
+      <LeftButton
+        id="pedagogy-left"
+        visible={state.nextEvents.includes("PREV")}
+        onClick={() => sendEvent("PREV")}
+      >
         <ChevronLeft size={16} />
       </LeftButton>
-      <RightButton visible={state.nextEvents.includes("NEXT")} onClick={() => sendEvent("NEXT")}>
+      <RightButton
+        id="pedagogy-right"
+        visible={state.nextEvents.includes("NEXT")}
+        onClick={() => sendEvent("NEXT")}
+      >
         <ChevronRight size={16} />
       </RightButton>
     </PedagogyContainer>

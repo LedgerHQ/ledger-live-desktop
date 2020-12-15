@@ -71,7 +71,13 @@ export function DeviceSelector({ onClick }: DeviceSelectorProps) {
   return (
     <DeviceSelectContainer>
       {devices.map(({ id, label, Illu }) => (
-        <DeviceSelectorOption key={id} label={label} Illu={<Illu />} onClick={() => onClick(id)} />
+        <DeviceSelectorOption
+          id={`device-${id}`}
+          key={id}
+          label={label}
+          Illu={<Illu />}
+          onClick={() => onClick(id)}
+        />
       ))}
     </DeviceSelectContainer>
   );

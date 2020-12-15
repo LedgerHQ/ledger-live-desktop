@@ -41,7 +41,7 @@ export function CarefullyFollowInstructions({ onClose }: Props) {
       >
         {t("onboarding.alerts.beCareful.descr")}
       </Text>
-      <Button primary onClick={onClose}>
+      <Button id="be-careful-cta" primary onClick={onClose}>
         <Text
           lineHeight="18px"
           color="palette.primary.contrastText"
