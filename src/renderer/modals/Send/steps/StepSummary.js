@@ -9,7 +9,6 @@ import {
   getAccountUnit,
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account";
-import some from "lodash/some";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -70,7 +69,7 @@ export default class StepSummary extends PureComponent<StepProps> {
     const utxoLag = txInputs ? txInputs.length >= WARN_FROM_UTXO_COUNT : null;
     const hasNonEmptySubAccounts =
       account.type === "Account" &&
-      some(account.subAccounts, subAccount => subAccount.balance.gt(0));
+      (account.subAccounts || []).some(subAccount => subAccount.balance.gt(0));
 
     // $FlowFixMe
     const memo = transaction.memo;
