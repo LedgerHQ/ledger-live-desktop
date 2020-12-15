@@ -52,11 +52,19 @@ type UseCaseOptionProps = {
   description: string,
   Illu: React$Node,
   onClick: () => void,
+  id: string,
 };
 
-export function UseCaseOption({ heading, title, description, Illu, onClick }: UseCaseOptionProps) {
+export function UseCaseOption({
+  heading,
+  title,
+  description,
+  Illu,
+  onClick,
+  id,
+}: UseCaseOptionProps) {
   return (
-    <UseCaseOptionContainer onClick={onClick}>
+    <UseCaseOptionContainer id={id} onClick={onClick}>
       <Container>
         <Text
           mb="8px"

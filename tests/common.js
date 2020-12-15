@@ -66,8 +66,6 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
         };
       });
 
-      console.log("scroll", pageRect.height, pageRect.offsetHeight);
-
       const height = Math.max(
         pageRect.oHeight,
         pageRect.oHeight + pageRect.height - pageRect.offsetHeight,

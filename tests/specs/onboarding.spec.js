@@ -14,7 +14,7 @@ describe("Onboarding", () => {
   it("go through start", async () => {
     const elem = await $("#onboarding-get-started-button");
     await elem.click();
-    await $("#modal-container");
+    await $("#terms-markdown");
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-terms",
     });
@@ -37,6 +37,22 @@ describe("Onboarding", () => {
     await app.client.pause(500);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-nanoX-flow",
+    });
+  });
+
+  it("goes through the tutorial", async () => {
+    const firstUse = await $("#first-use");
+    await firstUse.click();
+    const right = await $("#pedagogy-right");
+    await right.click();
+    await right.click();
+    await right.click();
+    await right.click();
+    const cta = await $("#setup-nano-wallet-cta");
+    await cta.click();
+    await app.client.pause(500);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-getstarted",
     });
   });
   /*
