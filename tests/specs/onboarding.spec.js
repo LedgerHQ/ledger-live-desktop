@@ -3,11 +3,6 @@ import initialize, {
   deviceInfo,
   mockListAppsResult,
   mockDeviceEvent,
-  onboardingPage,
-  modalPage,
-  genuinePage,
-  passwordPage,
-  analyticsPage,
   // portfolioPage,
 } from "../common.js";
 
@@ -16,28 +11,35 @@ describe("Onboarding", () => {
 
   const $ = selector => app.client.$(selector);
 
-  it("go through onboarding-1", async () => {
+  it("go through start", async () => {
     const elem = await $("#onboarding-get-started-button");
-    await elem.waitForDisplayed({ timeout: 20000 });
-    await onboardingPage.getStarted();
+    await elem.click();
+    await $("#modal-container");
     expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "onboarding-1-get-started",
+      customSnapshotIdentifier: "onboarding-terms",
     });
   });
-
-  it("go through onboarding-2", async () => {
-    await onboardingPage.selectConfiguration("new");
+  it("accept terms", async () => {
+    const lossCB = await $("#modal-terms-checkbox-loss");
+    const termCB = await $("#modal-terms-checkbox");
+    const cta = await $("#modal-confirm-button");
+    await lossCB.click();
+    await termCB.click();
+    await cta.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-terms-accepted",
+    });
+  });
+  it("selects nanoX", async () => {
+    const nanoX = await $("#device-nanoX");
+    await nanoX.click();
     await app.client.pause(500);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "onboarding-2-screen-new",
+      customSnapshotIdentifier: "onboarding-nanoX-flow",
     });
   });
-  it("go through onboarding-3", async () => {
-    await onboardingPage.selectDevice("nanox");
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "onboarding-3-screen-nano-x",
-    });
-  });
+  /*
   it("go through onboarding-4", async () => {
     await onboardingPage.continue();
     await onboardingPage.continue();
@@ -115,4 +117,5 @@ describe("Onboarding", () => {
 
     expect(await modalPage.isDisplayed(true)).toBe(false);
   });
+  */
 });
