@@ -147,7 +147,8 @@ describe("Onboarding", () => {
     await app.client.pause(400);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-you-are-a-pro",
-      failureThreshold: 0.0003,
+      failureThreshold: 2,
+      failureThresholdType: "pixel",
     });
   });
 
