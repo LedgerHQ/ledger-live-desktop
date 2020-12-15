@@ -27,7 +27,7 @@ import {
 } from "@ledgerhq/live-common/lib/exchange/swap/serialization";
 import { toTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 
-import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 const connectAppExec = command("connectApp");
 const initSwapExec = command("initSwap");
 

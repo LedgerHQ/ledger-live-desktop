@@ -11,7 +11,7 @@ import ModalBody from "~/renderer/components/Modal/ModalBody";
 import Box from "~/renderer/components/Box";
 import { command } from "~/renderer/commands";
 import { Trans } from "react-i18next";
-import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import StepProgress from "~/renderer/components/StepProgress";
 import { DeviceBlocker } from "~/renderer/components/DeviceAction/DeviceBlocker";
