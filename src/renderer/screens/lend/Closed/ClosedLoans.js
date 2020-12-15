@@ -170,9 +170,11 @@ const ClosedLoans = ({ loans }: Props) => {
           {t("lend.headers.closed.date")}
         </Text>
       </Header>
-      {loans.map((l, i) => (
-        <Row key={`${l.endDate.toDateString()}${i}`} loan={l} />
-      ))}
+      {loans
+        .sort((l1, l2) => (l1.endDate <= l2.endDate ? 1 : -1))
+        .map((l, i) => (
+          <Row key={`${l.endDate.toDateString()}${i}`} loan={l} />
+        ))}
     </Card>
   );
 };
