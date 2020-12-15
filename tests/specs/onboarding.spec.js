@@ -125,6 +125,36 @@ describe("Onboarding", () => {
     });
   });
 
+  it("goest to quizz", async () => {
+    const next = await $("#hide-recovery-cta");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-quizz",
+    });
+  });
+
+  it("finished the quizz", async () => {
+    let next = await $("#quizz-start-cta");
+    await next.click();
+    next = await $("#answer-1");
+    await next.click();
+    next = await $("#quizz-next-cta");
+    await next.click();
+    next = await $("#answer-1");
+    await next.click();
+    next = await $("#quizz-next-cta");
+    await next.click();
+    next = await $("#answer-0");
+    await next.click();
+    next = await $("#quizz-next-cta");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-you-are-a-pro",
+    });
+  });
+
   /*
   it("go through onboarding-4", async () => {
     await onboardingPage.continue();

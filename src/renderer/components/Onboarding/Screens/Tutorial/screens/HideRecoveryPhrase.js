@@ -130,7 +130,7 @@ export function HideRecoveryPhrase({ sendEvent, context }: Props) {
             {t("onboarding.screens.tutorial.screens.hideRecoveryPhrase.buttons.prev")}
           </Text>
         </Button>
-        <Button inverted primary onClick={() => sendEvent("NEXT")}>
+        <Button id="hide-recovery-cta" inverted primary onClick={() => sendEvent("NEXT")}>
           <Text ff="Inter|Bold" fontSize="12px" lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.hideRecoveryPhrase.buttons.next")}
           </Text>
