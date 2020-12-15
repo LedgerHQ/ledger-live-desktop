@@ -8,7 +8,8 @@ describe("Onboarding", () => {
   it("go through start", async () => {
     const elem = await $("#onboarding-get-started-button");
     await elem.click();
-    await $("#terms-markdown");
+    const terms = await $("#terms-markdown");
+    await terms.waitForDisplayed();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-terms",
     });
@@ -146,6 +147,7 @@ describe("Onboarding", () => {
     await app.client.pause(400);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-you-are-a-pro",
+      failureThreshold: 0.0003,
     });
   });
 
