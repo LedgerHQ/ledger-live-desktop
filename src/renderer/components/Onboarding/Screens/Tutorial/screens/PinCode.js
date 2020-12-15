@@ -88,7 +88,7 @@ export function PinCode({ sendEvent, context }: Props) {
             cursor: "pointer",
           }}
         >
-          <CheckBox isChecked={userChosePincodeHimself} inverted />
+          <CheckBox id="pincode-private-cb" isChecked={userChosePincodeHimself} inverted />
           <Text
             color="palette.primary.contrastText"
             ff="Inter|Regular"
@@ -101,7 +101,7 @@ export function PinCode({ sendEvent, context }: Props) {
         </Box>
       </ContentContainer>
       <ContentFooter>
-        <Button color="palette.primary.contrastText" onClick={onClickPrev}>
+        <Button id="device-pincode-cta" color="palette.primary.contrastText" onClick={onClickPrev}>
           <ArrowLeft />
           <Text ml="9px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.pinCode.buttons.prev")}

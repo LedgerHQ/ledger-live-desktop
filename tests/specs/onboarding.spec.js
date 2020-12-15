@@ -55,6 +55,38 @@ describe("Onboarding", () => {
       customSnapshotIdentifier: "onboarding-nano-getstarted",
     });
   });
+
+  it("gets started", async () => {
+    const next = await $("#get-started-cta");
+    await next.click();
+    const carefulcta = await $("#be-careful-cta");
+    carefulcta.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-getstarted-2",
+    });
+  });
+
+  it("goest to pincode", async () => {
+    const next = await $("#device-howto-cta");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-pincode",
+    });
+  });
+
+  it("goest to pincode 2", async () => {
+    const pincodeCB = await $("#pincode-private-cb");
+    pincodeCB.click();
+    const next = await $("#device-pincode-cta");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-pincode-2",
+    });
+  });
+
   /*
   it("go through onboarding-4", async () => {
     await onboardingPage.continue();
