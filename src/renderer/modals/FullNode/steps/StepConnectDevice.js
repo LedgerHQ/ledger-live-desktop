@@ -25,10 +25,12 @@ const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectAppExec
 const StepConnectDevice = ({
   onStepChange,
   setScannedDescriptors,
+  numberOfAccountsToScan,
   setError,
 }: {
   onStepChange: FullNodeSteps => void,
   setScannedDescriptors: any => void,
+  numberOfAccountsToScan: number,
   setError: Error => void,
 }) => {
   const currency = getCryptoCurrencyById("bitcoin");
@@ -40,7 +42,7 @@ const StepConnectDevice = ({
       const sub = command("scanDescriptors")({
         deviceId: device.deviceId,
         currencyId: "bitcoin",
-        limit: 10,
+        limit: numberOfAccountsToScan,
       })
         // $FlowFixMe I don't know what you want.
         .pipe(reduce((acc, item) => acc.concat({ descriptor: item }), []))
@@ -53,7 +55,7 @@ const StepConnectDevice = ({
         });
       return () => sub.unsubscribe();
     }
-  }, [device, setError, setScannedDescriptors]);
+  }, [device, numberOfAccountsToScan, setError, setScannedDescriptors]);
 
   return (
     <>
