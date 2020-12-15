@@ -171,7 +171,7 @@ export function RecoveryHowTo1({ sendEvent, context }: Props) {
             {t("onboarding.screens.tutorial.screens.recoveryHowTo.buttons.prev")}
           </Text>
         </Button>
-        <Button primary onClick={onClickNext}>
+        <Button id="recovery-howto-1" primary onClick={onClickNext}>
           <Text mr="12px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.recoveryHowTo.buttons.next")}
           </Text>

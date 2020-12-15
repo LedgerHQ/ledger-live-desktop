@@ -87,6 +87,44 @@ describe("Onboarding", () => {
     });
   });
 
+  it("goest to recovery phrase", async () => {
+    const next = await $("#pincode-howto-cta");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-recoveryphrase",
+    });
+  });
+
+  it("goest to recovery phrase 2", async () => {
+    const recoveryphraseCB = await $("#recoveryphrase-private-cb");
+    recoveryphraseCB.click();
+    const next = await $("#device-recoveryphrase-cta");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-recoveryphrase-2",
+    });
+  });
+
+  it("goest to recovery phrase 3", async () => {
+    const next = await $("#use-recovery-sheet");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-recoveryphrase-3",
+    });
+  });
+
+  it("goest to recovery phrase 4", async () => {
+    const next = await $("#recovery-howto-3");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-recoveryphrase-4",
+    });
+  });
+
   /*
   it("go through onboarding-4", async () => {
     await onboardingPage.continue();

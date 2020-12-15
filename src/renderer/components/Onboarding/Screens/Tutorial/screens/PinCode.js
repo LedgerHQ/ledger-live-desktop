@@ -101,13 +101,19 @@ export function PinCode({ sendEvent, context }: Props) {
         </Box>
       </ContentContainer>
       <ContentFooter>
-        <Button id="device-pincode-cta" color="palette.primary.contrastText" onClick={onClickPrev}>
+        <Button color="palette.primary.contrastText" onClick={onClickPrev}>
           <ArrowLeft />
           <Text ml="9px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.pinCode.buttons.prev")}
           </Text>
         </Button>
-        <Button inverted disabled={!userChosePincodeHimself} primary onClick={onClickNext}>
+        <Button
+          id="device-pincode-cta"
+          inverted
+          disabled={!userChosePincodeHimself}
+          primary
+          onClick={onClickNext}
+        >
           <Text mr="12px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.pinCode.buttons.next")}
           </Text>
