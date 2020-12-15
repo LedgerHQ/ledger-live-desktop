@@ -2279,8 +2279,7 @@
               "prev": "Previous step",
               "help": "Need help"
             }
-          },
-          "pinCode": {
+          },          "pinCode": {
             "title": "PIN code",
             "paragraph": "Your PIN code is the first layer of security. It physically secures access to your private key and your Nano. Your PIN code must be 4 to 8 digits long.",
             "disclaimer": "I understand that I must choose my PIN code myself and keep it private.",
