@@ -5,50 +5,50 @@
     "yesterday": "Yesterday"
   },
   "common": {
-    "labelYes": "はい",
-    "labelNo": "いいえ",
-    "never": "オートロックしない",
-    "apply": "適用",
+    "labelYes": "Yes",
+    "labelNo": "No",
+    "never": "Never",
+    "apply": "Apply",
     "done": "Done",
-    "confirm": "確認",
-    "cancel": "キャンセル",
-    "getSupport": "サポートを受けてください。",
-    "delete": "削除",
-    "launch": "開始",
-    "continue": "続行",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "getSupport": "Get support",
+    "delete": "Delete",
+    "launch": "Launch",
+    "continue": "Continue",
     "previous": "Previous",
-    "learnMore": "詳細",
-    "help": "ヘルプ",
-    "skipThisStep": "このステップをスキップする",
-    "needHelp": "サポートが必要ですか？",
-    "areYouSure": "実行しますか？",
-    "selectAccount": "アカウントを選択",
-    "selectAccountNoOption": "アカウントがマッチしません\"{{accountName}}\"",
-    "selectCurrency": "クリプトアセットを選択",
-    "selectCurrencyNoOption": "クリプトアセットが存在しません\"{{currencyName}}\"",
-    "selectExchange": "取引所を選択",
-    "selectExchangeNoOption": "取引所がマッチしません \"{{exchangeName}}\"",
-    "selectExchangeNoOptionAtAll": "取引所が見つかりません",
+    "learnMore": "Learn more",
+    "help": "Help",
+    "skipThisStep": "Skip this step",
+    "needHelp": "Need help?",
+    "areYouSure": "Are you sure?",
+    "selectAccount": "Select an account",
+    "selectAccountNoOption": "No account matching \"{{accountName}}\"",
+    "selectCurrency": "Choose a crypto asset",
+    "selectCurrencyNoOption": "No crypto asset \"{{currencyName}}\"",
+    "selectExchange": "Select an exchange",
+    "selectExchangeNoOption": "No exchange matching \"{{exchangeName}}\"",
+    "selectExchangeNoOptionAtAll": "No exchange found",
     "selectValidatorNoOption": "No validator matching \"{{accountName}}\"",
     "selectNoResults": "No results found matching \"{{query}}\"",
-    "sortBy": "ソート基準",
-    "save": "保存",
-    "lock": "ロック",
-    "showMore": "展開",
-    "back": "戻る",
-    "reset": "リセット",
-    "retry": "再試行",
+    "sortBy": "Sort by",
+    "save": "Save",
+    "lock": "Lock",
+    "showMore": "Show more",
+    "back": "Back",
+    "reset": "Reset",
+    "retry": "Retry",
     "range": "Range",
-    "stop": "停止",
+    "stop": "Stop",
     "updateNow": "Update now",
-    "close": "閉じる",
-    "eastern": "東部",
-    "western": "西部",
-    "reverify": "再確認",
-    "verify": "確認",
-    "copy": "コピー",
-    "copied": "コピー済み",
-    "addressCopied": "アドレスをコピーしました",
+    "close": "Close",
+    "eastern": "Eastern",
+    "western": "Western",
+    "reverify": "Re-verify",
+    "verify": "Verify",
+    "copy": "Copy",
+    "copied": "Copied",
+    "addressCopied": "Address copied",
     "addressCopiedSuspicious": "Mismatch between the copied address and the one in the clipboard.",
     "experimentalFeature": "Experimental",
     "dismiss": "Dismiss",
@@ -57,20 +57,20 @@
     "searchWithoutEllipsis": "Search",
     "manage": "Manage",
     "lockScreen": {
-      "title": "お帰りなさい",
+      "title": "Welcome back",
       "subTitle": null,
-      "description": "パスワードを入力して続行",
-      "inputPlaceholder": "パスワードを入力",
-      "lostPassword": "パスワードを紛失しました"
+      "description": "Enter your password to continue",
+      "inputPlaceholder": "Type your password",
+      "lostPassword": "I lost my password"
     },
     "sync": {
-      "syncing": "同期しています...",
-      "upToDate": "同期が完了しました",
-      "outdated": "中断",
+      "syncing": "Synchronizing...",
+      "upToDate": "Synchronized",
+      "outdated": "Paused",
       "needsMigration": "Click to update account",
-      "error": "同期エラー",
-      "refresh": "更新",
-      "ago": "同期時間{{time}}"
+      "error": "Synchronization error",
+      "refresh": "Refresh",
+      "ago": "Synchronized {{time}}"
     },
     "exchange": "Exchange"
   },
@@ -81,8 +81,8 @@
   },
   "operation": {
     "type": {
-      "IN": "受信済み",
-      "OUT": "送信済み",
+      "IN": "Received",
+      "OUT": "Sent",
       "CREATE": "Created",
       "REVEAL": "Revealed",
       "DELEGATE": "Delegated",
@@ -107,9 +107,9 @@
     "mbUnit": "{{size}} Mb"
   },
   "time": {
-    "minute": "分",
+    "minute": "Minute",
     "minute_plural": "Minutes",
-    "hour": "時間",
+    "hour": "Hour",
     "hour_plural": "Hours",
     "range": {
       "week": "1W",
@@ -126,10 +126,10 @@
     "standard": "Standard"
   },
   "sidebar": {
-    "menu": "メニュー",
+    "menu": "Menu",
     "stars": "Starred accounts",
     "accounts": "Accounts",
-    "manager": "マネージャー",
+    "manager": "Manager",
     "exchange": "Buy / Sell",
     "swap": "Swap",
     "lend": "Lend"
@@ -386,24 +386,24 @@
     "contractAddress": "Contract:",
     "openInExplorer": "Open in explorer",
     "emptyState": {
-      "title": "まだクリプトアセットをお持ちではありませんか？",
-      "desc": "受信を開始する前に、<1><0>{{managerAppName}}</0></1> アプリがインストールされていることを確認してください",
+      "title": "No crypto assets yet?",
+      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
       "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
-        "receiveFunds": "受信",
+        "receiveFunds": "Receive",
         "buy": "Buy"
       }
     },
     "settings": {
-      "title": "アカウントを編集",
+      "title": "Edit account",
       "advancedLogs": "Advanced",
       "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
       "accountName": {
-        "title": "アカウント名",
+        "title": "Account name",
         "desc": "Description of the account"
       },
       "unit": {
-        "title": "単位",
+        "title": "Unit",
         "desc": "Choose the unit to be used"
       }
     },
@@ -754,7 +754,7 @@
       "cta": "Clear cache"
     },
     "migrate": "Ledger Live accounts update available",
-    "genericTerminatedCrypto": "{{coinName}} はもうサポートされません",
+    "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
     "ledgerAcademy": {
       "title": "Ledger Academy",
       "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
@@ -797,17 +797,17 @@
     }
   },
   "dashboard": {
-    "title": "ポートフォリオ",
+    "title": "Portfolio",
     "emptyAccountTile": {
       "desc": "Add accounts to manage other crypto assets",
-      "createAccount": "アカウントを追加"
+      "createAccount": "Add account"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "合計残高",
+    "totalBalance": "Total balance",
     "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
   },
   "currentAddress": {
-    "title": "現在のアドレス",
+    "title": "Current address",
     "for": "Address for <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
     "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security."
@@ -833,7 +833,7 @@
   },
   "genuinecheck": {
     "modal": {
-      "title": "真贋性チェック"
+      "title": "Genuine check"
     },
     "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
   },
@@ -903,19 +903,19 @@
     }
   },
   "addAccounts": {
-    "title": "アカウントを追加",
+    "title": "Add accounts",
     "breadcrumb": {
-      "informations": "クリプトアセット",
-      "connectDevice": "機器",
-      "import": "アカウント",
-      "finish": "確認"
+      "informations": "Crypto asset",
+      "connectDevice": "Device",
+      "import": "Accounts",
+      "finish": "Confirmation"
     },
     "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
     "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
-    "accountToImportSubtitle_plural": "既存アカウントを追加",
-    "selectAll": "すべての({{count}})を選択",
-    "unselectAll": "すべての({{count}})を選択を解除",
-    "noAccountToImport": "追加する既存の {{currencyName}} アカウントが存在しません",
+    "accountToImportSubtitle_plural": "Add existing accounts",
+    "selectAll": "Select all ({{count}})",
+    "unselectAll": "Deselect all ({{count}})",
+    "noAccountToImport": "No existing {{currencyName}} accounts to add",
     "success": "Account added successfully",
     "success_plural": "Accounts added successfully",
     "successDescription": "Add other accounts or return to Portfolio",
@@ -928,9 +928,9 @@
       "segwit_or_native_segwit": "Segwit or Native Segwit?"
     },
     "cta": {
-      "addMore": "さらに追加",
-      "add": "アカウントを追加",
-      "add_plural": "アカウントを追加",
+      "addMore": "Add more",
+      "add": "Add account",
+      "add_plural": "Add accounts",
       "addAccountName": "Add {{currencyName}} account",
       "receive": "Receive"
     },
@@ -951,21 +951,21 @@
   },
   "operationDetails": {
     "whatIsThis": "What is this operation?",
-    "title": "操作に関する詳細",
-    "account": "アカウント",
-    "date": "日付",
-    "status": "ステータス",
-    "confirmed": "確認済み",
+    "title": "Operation details",
+    "account": "Account",
+    "date": "Date",
+    "status": "Status",
+    "confirmed": "Confirmed",
     "failed": "Failed",
-    "notConfirmed": "未確認",
+    "notConfirmed": "Not confirmed",
     "fees": "Fee",
-    "noFees": "料金なし",
-    "from": "から",
-    "to": "へ",
-    "identifier": "取引ID",
-    "viewOperation": "Explorerで表示",
-    "showMore": "{{recipients}} 展開",
-    "showLess": "折りたたむ",
+    "noFees": "No fee",
+    "from": "From",
+    "to": "To",
+    "identifier": "Transaction ID",
+    "viewOperation": "View in explorer",
+    "showMore": "Show {{recipients}} more",
+    "showLess": "Show less",
     "tokenOperations": "Token operations",
     "subAccountOperations": "Subaccount operations",
     "tokenTooltip": "This operation is related to the following token operations",
@@ -998,7 +998,7 @@
     }
   },
   "operationList": {
-    "noMoreOperations": "すべて"
+    "noMoreOperations": "That's all"
   },
   "DeviceAction": {
     "allowAppPermission": "Open the {{wording}} app on your device",
@@ -1123,7 +1123,7 @@
       "removeApps": "Uninstall all apps before updating",
       "update": "Firmware update",
       "updateBtn": "Update firmware",
-      "latest": "ファームウェアバージョン {{version}} をご利用いただけます",
+      "latest": "Firmware version {{version}} is available",
       "contactSupport": "Contact support",
       "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
       "prepareSeed": "Ensure your 24-word recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
@@ -1132,27 +1132,27 @@
     },
     "modal": {
       "steps": {
-        "downloadingUpdate": "アップデートをダウンロードしています",
-        "updateMCU": "ファームウェアをアップデート",
+        "downloadingUpdate": "Downloading update",
+        "updateMCU": "Firmware update",
         "reset": "Prepare device",
-        "osu": "OSUをインストールしています...",
-        "flash-mcu": "MCUを更新しています...",
-        "flash-bootloader": "ブートローダーを更新しています...",
-        "firmware": "ファームウェアを更新しています...",
+        "osu": "Installing OSU...",
+        "flash-mcu": "MCU updating...",
+        "flash-bootloader": "Bootloader updating...",
+        "firmware": "Firmware updating...",
         "flash": "Preparing your device..."
       },
-      "confirmIdentifier": "識別子を検証してください",
+      "confirmIdentifier": "Verify the identifier",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
-      "identifier": "識別子",
-      "mcuTitle": "更新を完了します",
-      "mcuFirst": "機器からUSBケーブルを外します",
+      "identifier": "Identifier",
+      "mcuTitle": "Finalize update",
+      "mcuFirst": "Disconnect the USB cable from your device",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Please wait for the update to finish",
       "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
       "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
       "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
-      "successTitle": "ファームウェアが更新されました",
-      "successText": "Ledgerデバイスにアプリを再インストールしてください",
+      "successTitle": "Firmware updated",
+      "successText": "Please re-install the apps on your device",
       "resetSteps": {
         "first": "1. Reset your device",
         "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
@@ -1307,23 +1307,23 @@
     "buyCTA": "Sell {{currencyTicker}}"
   },
   "receive": {
-    "title": "受信",
+    "title": "Receive",
     "successTitle": "Address shared securely",
     "steps": {
       "chooseAccount": {
-        "title": "アカウント",
-        "label": "入金アカウント",
+        "title": "Account",
+        "label": "Account to credit",
         "parentAccount": "1. Select {{currencyName}} account",
         "token": "2. Select a token",
         "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
         "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
       },
       "connectDevice": {
-        "title": "機器",
-        "withoutDevice": "機器をお持ちではありませんか？"
+        "title": "Device",
+        "withoutDevice": "Don't have your device?"
       },
       "receiveFunds": {
-        "title": "受信"
+        "title": "Receive"
       },
       "warning": {
         "tezos": {
@@ -1333,8 +1333,8 @@
     }
   },
   "send": {
-    "title": "送信",
-    "totalSpent": "出金総額",
+    "title": "Send",
+    "totalSpent": "Total to debit",
     "steps": {
       "recipient": {
         "title": "Recipient"
@@ -1371,14 +1371,14 @@
         }
       },
       "confirmation": {
-        "title": "確認",
+        "title": "Confirmation",
         "success": {
-          "title": "送信済み取引",
+          "title": "Transaction sent",
           "text": "Your account balance will be updated when the blockchain confirms the transaction",
-          "cta": "詳細を表示"
+          "cta": "View details"
         },
         "pending": {
-          "title": "取引をブロードキャストしています..."
+          "title": "Broadcasting transaction..."
         },
         "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
       },
@@ -1393,7 +1393,7 @@
     }
   },
   "releaseNotes": {
-    "title": "メモをリリース",
+    "title": "Release notes",
     "version": "Ledger Live {{versionNb}}"
   },
   "distribution": {
@@ -1870,48 +1870,48 @@
     }
   },
   "settings": {
-    "title": "設定",
+    "title": "Settings",
     "discreet": "Toggle discreet mode",
     "helpButton": "Help",
     "tabs": {
-      "display": "一般",
+      "display": "General",
       "currencies": "Crypto assets",
       "rates": "Rates",
-      "help": "ヘルプ",
-      "about": "詳細",
+      "help": "Help",
+      "about": "About",
       "experimental": "Experimental features",
       "accounts": "Accounts"
     },
     "export": {
       "accounts": {
-        "title": "アカウントをエクスポート",
-        "desc": "あなたのアカウントをLedger Liveモバイルアプリに追加します。お客様のアカウントは、スマホとデスクトップアプリ間ではなく、ブロックチェーン とのみ同期します。",
-        "button": "エクスポート"
+        "title": "Export accounts",
+        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
+        "button": "Export"
       },
       "operations": {
-        "title": "操作履歴",
-        "desc": "お使いのコンピューターに、お客様のアカウント操作の CSV ファイルを保存します。"
+        "title": "Operation history",
+        "desc": "Save a CSV file of your account operations on your computer."
       },
       "modal": {
-        "button": "完了",
-        "title": "スキャンして、スマホにエクスポートします",
-        "listTitle": "Ledger Liveモバイルアプリ上で以下を行います。",
-        "step1": "<3><0>アカウント</0></3>で<1><0>+</0></1>ボタンを押します",
-        "step2": "<1><0>デスクトップアカウントのインポート</0></1>を押します",
-        "step3": "ローダーが100%に達するまで、<1><0>LiveQRコード</0></1>をスキャンします"
+        "button": "Done",
+        "title": "Scan to export to mobile",
+        "listTitle": "On the Ledger Live mobile app:",
+        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
+        "step2": "Tap <1><0>Import desktop accounts</0></1>",
+        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
       }
     },
     "display": {
-      "desc": "全般的なLedger Liveの設定。",
-      "language": "言語を表示",
-      "languageDesc": "Ledger Liveに表示される言語を設定します。",
+      "desc": "Configure general Ledger Live settings.",
+      "language": "Display language",
+      "languageDesc": "Set the language displayed in Ledger Live.",
       "theme": "Theme",
       "themeDesc": "Select the theme.",
-      "counterValue": "対価",
-      "counterValueDesc": "残高と操作の隣に表示される資産を選択します。",
-      "region": "地域",
+      "counterValue": "Countervalue",
+      "counterValueDesc": "Choose the currency shown next to your balance and operations.",
+      "region": "Region",
       "regionDesc": "Choose your region to set the time zone of Ledger Live.",
-      "stock": "地域市場インジケータ",
+      "stock": "Regional market indicator",
       "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
       "carouselVisibility": "Carousel visibility",
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
@@ -1919,43 +1919,43 @@
     "currencies": {
       "desc": "Select a crypto asset to edit its settings.",
       "placeholder": "No settings for this asset",
-      "confirmationsNb": "確認数",
-      "confirmationsNbDesc": "取引を確認済みにするためのネットワーク確認数を設定します。"
+      "confirmationsNb": "Number of confirmations",
+      "confirmationsNbDesc": "Set the number of network confirmations for a transaction to be marked as confirmed."
     },
     "profile": {
-      "password": "パスワードロック",
+      "password": "Password lock",
       "passwordDesc": "Set a password to secure the Ledger Live data on your computer, including account names, balances, transactions and public addresses.",
-      "passwordAutoLock": "オートロック",
+      "passwordAutoLock": "Auto-lock",
       "passwordAutoLockDesc": "Automatically lock Ledger Live when inactive.",
-      "changePassword": "パスワードの変更",
-      "softResetTitle": "キャッシュを削除",
-      "softResetDesc": "Ledger Liveのキャッシュを削除し、ブロックチェーンと再同期させます。",
-      "softReset": "削除",
-      "hardResetTitle": "Ledger Liveをリセット",
+      "changePassword": "Change password",
+      "softResetTitle": "Clear cache",
+      "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
+      "softReset": "Clear",
+      "hardResetTitle": "Reset Ledger Live",
       "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction histories and settings.",
-      "hardReset": "リセット",
-      "developerMode": "開発者モード",
-      "developerModeDesc": "マネージャーでディベロッパーとtestnetアプリを表示します。",
-      "analytics": "アナリティクス",
+      "hardReset": "Reset",
+      "developerMode": "Developer mode",
+      "developerModeDesc": "Show developer and testnet apps in the Manager.",
+      "analytics": "Analytics",
       "analyticsDesc": "Enable analytics to help Ledger improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc), end of page scrolls, (un)installing and app version, number of accounts, crypto assets and operations, session durations, the Ledger device type and firmware.",
-      "reportErrors": "バグのレポート",
+      "reportErrors": "Bug reports",
       "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
-      "launchOnboarding": "デバイスの設定",
+      "launchOnboarding": "Device setup",
       "launchOnboardingDesc": "Set up a new device or restore an existing device. Accounts and settings are kept."
     },
     "about": {
-      "desc": "アプリの情報、規約と条件、プライバシーポリシー"
+      "desc": "App information, Terms and Conditions, and Privacy Policy."
     },
     "help": {
-      "desc": "Ledger Liveについて詳しく知る。または支援を得る。",
-      "version": "バージョン",
-      "releaseNotesBtn": "詳細",
+      "desc": "Learn more about Ledger Live or get help.",
+      "version": "Version",
+      "releaseNotesBtn": "Details",
       "termsBtn": "Read",
-      "faq": "Ledgerのサポート",
+      "faq": "Ledger Support",
       "faqDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
-      "terms": "利用条件",
-      "termsDesc": "Ledger Liveを使用することにより、当社の利用規約に同意したものとみなされます。",
-      "privacy": "プライバシーポリシー",
+      "terms": "Terms of Use",
+      "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
+      "privacy": "Privacy Policy",
       "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use them."
     },
     "experimental": {
@@ -1963,40 +1963,40 @@
       "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
-      "title": "Ledger Liveをリセット",
+      "title": "Reset Ledger Live",
       "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your recovery phrase."
     },
     "softResetModal": {
-      "title": "キャッシュを削除",
+      "title": "Clear cache",
       "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys to access to your crypto assets remain secure on your Ledger device and Recovery sheet."
     },
     "resetFallbackModal": {
-      "title": "ユーザーアクションが必要",
-      "part1": "キャッシュフォルダを削除できませんでした。手作業でフォルダを削除してください。",
-      "part2": "フォルダを開くボタンをクリックして",
-      "part3": "アプリを終了し、",
-      "part4": "\"sqlite\"フォルダを手作業で削除します。",
-      "part5": "その後、アプリを通常通り再起動できます。"
+      "title": "User action required",
+      "part1": "Could not delete cache folder. Please delete the folder manually:",
+      "part2": "Click the Open folder button, the ",
+      "part3": "app will close",
+      "part4": ", and manually delete the \"sqlite\" folder.",
+      "part5": "Then you can restart the app normally."
     },
     "removeAccountModal": {
-      "title": "アカウントの削除",
+      "title": "Remove account",
       "desc": "This will not affect your crypto assets. Existing accounts can always be added again."
     },
     "openUserDataDirectory": {
-      "title": "ユーザーデータの閲覧",
+      "title": "View user data",
       "desc": "View the user data stored on your computer, including your accounts, caches and settings.",
-      "btn": "表示"
+      "btn": "View"
     },
     "repairDevice": {
-      "title": "Ledgerデバイスの修理",
+      "title": "Repair your Ledger device",
       "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
-      "desc": "Ledgerデバイスの状態を選択してください。",
-      "button": "修理"
+      "desc": "Please select the state of your Ledger device.",
+      "button": "Repair"
     },
     "exportLogs": {
-      "title": "ログの保存",
+      "title": "Save logs",
       "desc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
-      "btn": "保存"
+      "btn": "Save"
     },
     "accounts": {
       "hideEmptyTokens": {
@@ -2018,38 +2018,38 @@
   "password": {
     "inputFields": {
       "newPassword": {
-        "label": "新規パスワード"
+        "label": "New password"
       },
       "confirmPassword": {
-        "label": "パスワードを確認"
+        "label": "Confirm password"
       },
       "currentPassword": {
-        "label": "現在のパスワード"
+        "label": "Current password"
       }
     },
     "changePassword": {
-      "title": "パスワードロック",
-      "subTitle": "パスワードを変更"
+      "title": "Password lock",
+      "subTitle": "Change your password"
     },
     "setPassword": {
-      "title": "パスワードロック",
+      "title": "Password lock",
       "subTitle": "Set the password",
       "desc": "Keep your password safe. Losing it means resetting Ledger Live and adding the accounts again."
     },
     "disablePassword": {
-      "title": "パスワードロックを無効にする",
-      "desc": "Ledger Liveデータはお使いのコンピューターに暗号化されていない状態で保存されます。これにはアカウント名、トランザクション、パブリックアドレスが含まれます。"
+      "title": "Disable password lock",
+      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
     }
   },
   "update": {
-    "downloadInProgress": "アップデートをダウンロードしています...",
-    "downloadProgress": "{{progress}}%完了",
-    "checking": "アップデートの確認しています...",
-    "checkSuccess": "アップデートをインストールする準備ができました",
-    "quitAndInstall": "今すぐインストールする",
+    "downloadInProgress": "Downloading update...",
+    "downloadProgress": "{{progress}}% completed",
+    "checking": "Checking update...",
+    "checkSuccess": "Update ready to install",
+    "quitAndInstall": "Install now",
     "updateAvailable": "Update to Ledger Live version {{version}} is available",
-    "error": "更新中のエラー。再度ダウンロードしてください",
-    "reDownload": "再度ダウンロードする",
+    "error": "Error during update. Please download again",
+    "reDownload": "Download again",
     "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
     "downloadNow": "Download update"
   },
@@ -2057,23 +2057,23 @@
     "title": "Something went wrong",
     "description": "Please check our support articles for possible solutions. If the problem persists, save the logs using the button below and provide them to Ledger Support.",
     "troubleshooting": "Click here for possible solutions",
-    "restart": "再起動",
+    "restart": "Restart",
     "logs": "Save logs",
     "dataFolder": "View user data"
   },
   "exportOperationsModal": {
-    "title": "操作履歴",
-    "desc": "操作履歴を保存するアカウントを選択します。",
+    "title": "Operation history",
+    "desc": "Select the accounts for which to save the operation history",
     "descSuccess": "The CSV file of your operation history was saved successfully in the selected folder",
     "titleSuccess": "Operation history saved successfully",
-    "cta": "保存",
-    "ctaSuccess": "完了",
-    "noAccounts": "エクスポートするアカウントがありません。",
+    "cta": "Save",
+    "ctaSuccess": "Done",
+    "noAccounts": "No accounts to export",
     "selectedAccounts": "Accounts to be included",
     "selectedAccounts_plural": "Accounts to be included ({{count}})"
   },
   "language": {
-    "system": "システム言語を使用",
+    "system": "Use system language",
     "switcher": {
       "en": "English",
       "fr": "French",
@@ -2621,7 +2621,7 @@
       "description": "Wait for the operation to go through."
     },
     "AccountNameRequired": {
-      "title": "アカウント名が必要です",
+      "title": "An account name is required",
       "description": "Please enter an account name"
     },
     "AccountNotSupported": {
@@ -2718,11 +2718,11 @@
       "description": "This crypto asset is not yet supported. Please contact Ledger Support."
     },
     "DeviceNotGenuine": {
-      "title": "正規品でない可能性があります",
+      "title": "Possibly not genuine",
       "description": "Request assistance from Ledger Support"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "申し訳ありませんが、再度お試し (ください  本当に閉じる)",
+      "title": "Sorry, try again (genuine-close)",
       "description": null
     },
     "DeviceInOSUExpected": {
@@ -2738,24 +2738,24 @@
       "description": "An unexpected error occurred. Please try again. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "接続できませんでした",
-      "description": "再試行してください"
+      "title": "Oops, connection failed",
+      "description": "Please try again"
     },
     "DisconnectedDevice": {
-      "title": "機器の接続が失われました",
-      "description": "再試行してください"
+      "title": "Oops, device connection lost",
+      "description": "Please try again"
     },
     "DisconnectedDeviceDuringOperation": {
       "title": "Oops, device disconnected",
       "description": "The connection to the device was lost during an operation. Please try again"
     },
     "EnpointConfig": {
-      "title": "エンドポイントが無効です",
-      "description": "有効なエンドポイントを提供してください"
+      "title": "Invalid endpoint",
+      "description": "Please provide a valid endpoint"
     },
     "FeeEstimationFailed": {
-      "title": "手数料見積もりに失敗しました",
-      "description": "通関手数料を設定してください(status: {{status}})"
+      "title": "Sorry, fee estimation failed",
+      "description": "Try setting a custom fee (status: {{status}})"
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "Firmware or app update required",
@@ -2766,28 +2766,28 @@
       "description": "Please contact Ledger Support"
     },
     "HardResetFail": {
-      "title": "リセットできませんでした",
+      "title": "Oops, could not reset",
       "description": "Please try again or contact Ledger Support if in doubt"
     },
     "LatestMCUInstalledError": {
-      "title": "更新するものがありません",
-      "description": "機器のマイクロコントローラの更新が試みられました。機器に問題がある場合は、Ledger Supportにお問い合わせください。"
+      "title": "Oops, nothing to update",
+      "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "接続を確認して再試行するか、またはLedgerのサポートにお問い合わせください。"
+      "description": "Please check your connection and try again or contact Ledger Support."
     },
     "LedgerAPI5xx": {
-      "title": "再試行してください",
+      "title": "Sorry, try again.",
       "description": "The server could not handle your request. Please try again later or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
-      "title": "申し訳ございません。{{currencyName}}サービスをご利用いただけません",
-      "description": "再試行するか、Ledger Supportにご連絡ください。"
+      "title": "Sorry, {{currencyName}} services unavailable",
+      "description": "Please retry or contact Ledger Support"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "すでにインストールされています",
-      "description": "お客様のデバイスにインストール済みのアプリをご確認ください"
+      "title": "Oops, that's already installed",
+      "description": "Check your device to see which apps are already installed"
     },
     "ManagerAppDepInstallRequired": {
       "title": "{{dependency}} app required",
@@ -2806,7 +2806,7 @@
       "description": "The private keys to access your crypto assets will stay safe on your device and must be backed up on your Recovery sheet."
     },
     "ManagerNotEnoughSpace": {
-      "title": "保存スペースが残りわずかです。",
+      "title": "Sorry, not enough storage left",
       "description": "Uninstall some apps to free up space. The private keys to access your crypto assets will stay safe on your device."
     },
     "ManagerQuitPage": {
@@ -2828,34 +2828,34 @@
       "quit": "Quit Manager"
     },
     "ManagerUninstallBTCDep": {
-      "title": "このアプリは必要です",
-      "description": "BitcoinまたはEthereumアプリを最後にアンインストールします"
+      "title": "Sorry, this app is required",
+      "description": "Uninstall the Bitcoin or Ethereum app last"
     },
     "NetworkDown": {
-      "title": "インターネットがダウンしたようです",
-      "description": "インターネット接続をご確認ください"
+      "title": "Oops, internet seems down",
+      "description": "Please check your internet connection"
     },
     "NoAddressesFound": {
       "title": "Sorry, no accounts were found",
       "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
     },
     "NotEnoughBalance": {
-      "title": "残高が不足しています",
+      "title": "Oops, insufficient balance",
       "description": "Make sure the account used has enough funds"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "受信者のアドレスが無効です。少なくても{{minimalAmount}}に送信し、有効にしてください"
+      "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
     },
     "NotEnoughGas": {
       "title": "The ETH balance in the parent account is insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "The Passwords don't match",
-      "description": "再試行してください"
+      "description": "Please try again"
     },
     "PasswordIncorrect": {
       "title": "The password entered is incorrect",
-      "description": "再試行してください"
+      "description": "Please try again"
     },
     "RPCHostRequired": {
       "title": "Host is required."
@@ -2887,7 +2887,7 @@
     },
     "TimeoutTagged": {
       "title": "Oops, a timeout occurred ({{tag}})",
-      "description": "サーバのレスポンスに時間がかかりすぎています"
+      "description": "It took too long for the server to respond"
     },
     "TransportError": {
       "title": "Something went wrong. Please reconnect your device",
@@ -2902,11 +2902,11 @@
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
-      "title": "{{appName}} アプリを開いてください",
+      "title": "Please open the {{appName}} app",
       "description": "Keep the {{appName}} app open while we find your accounts"
     },
     "UnexpectedBootloader": {
-      "title": "デバイスがブートローダーモードでないようです",
+      "title": "Oops, your device should not be in Bootloader mode",
       "description": "Please restart your device or contact Ledger Support"
     },
     "UserRefusedAllowManager": {
@@ -2914,7 +2914,7 @@
     },
     "UserRefusedFirmwareUpdate": {
       "title": "Update cancelled",
-      "description": "再試行するか、Ledger Supportにご連絡ください。"
+      "description": "Please retry or contact Ledger Support"
     },
     "UserRefusedOnDevice": {
       "title": "Action rejected",
@@ -2925,12 +2925,12 @@
       "description": "Please retry or contact Ledger Support if in doubt"
     },
     "UserRefusedAddress": {
-      "title": "受信アドレスが却下されました",
+      "title": "Receive address rejected",
       "description": "Please try again or contact Ledger Support if in doubt"
     },
     "UpdateYourApp": {
-      "title": "アプリの更新が必要です",
-      "description": "マネージャーに{{managerAppName}}アプリをアンインストールし、再インストールします"
+      "title": "App update required",
+      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "DeviceOnDashboardExpected": {
       "title": "Return to the Dashboard",
@@ -2949,38 +2949,38 @@
       "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "アプリの更新が必要です",
+      "title": "App update required",
       "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "InvalidAddress": {
-      "title": "これは有効な{{currencyName}}アドレスではありません"
+      "title": "This is not a valid {{currencyName}} address"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "受金者のアドレスと送金者のアドレスが同じです"
+      "title": "Recipient address is the same as the sender address"
     },
     "CantOpenDevice": {
       "title": "Oops, couldn't connect to device",
       "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
     },
     "ETHAddressNonEIP": {
-      "title": "自動検証は無効です。注意してアドレスを検証してください",
+      "title": "Auto-verification not available: carefully verify the address",
       "description": null
     },
     "CantScanQRCode": {
-      "title": "このQRコードをスキャンできませんでした。自動検証はこのアドレスではサポートされていません"
+      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
     },
     "FeeNotLoaded": {
       "title": "Couldn't load fee rates. Please set manual fees"
     },
     "FeeRequired": {
-      "title": "手数料が必要です"
+      "title": "Fees are required"
     },
     "GasLessThanEstimate": {
       "title": "This may be too low. Please increase"
     },
     "UnknownMCU": {
-      "title": "未知のMCUバージョンです",
-      "description": "Ledger Supportにご連絡ください。"
+      "title": "Unknown MCU version",
+      "description": "Please contact Ledger Support"
     },
     "MCUNotGenuineToDashboard": {
       "title": "Access dashboard to update",
