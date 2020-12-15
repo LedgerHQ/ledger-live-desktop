@@ -143,7 +143,7 @@ describe("Onboarding", () => {
     await next.click();
     next = await $("#quizz-next-cta");
     await next.click();
-    await app.client.pause(200);
+    await app.client.pause(400);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-you-are-a-pro",
     });

@@ -52,7 +52,7 @@ type UseCaseOptionProps = {
   description: string,
   Illu: React$Node,
   onClick: () => void,
-  id: string,
+  id?: string,
 };
 
 export function UseCaseOption({
