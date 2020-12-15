@@ -133,7 +133,7 @@ export function RecoveryHowTo3({ sendEvent, context }: Props) {
   const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
 
   const defaultOptions = {
-    loop: !process.env.SPECTRON_RUN,
+    loop: true,
     autoplay: !process.env.SPECTRON_RUN,
     animationData: deviceId === "nanoX" ? NanoXAnim : NanoSAnim,
     rendererSettings: {

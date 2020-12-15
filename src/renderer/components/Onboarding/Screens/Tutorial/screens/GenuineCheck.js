@@ -127,7 +127,7 @@ export function GenuineCheck({ sendEvent, context }: Props) {
             {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.prev")}
           </Text>
         </Button>
-        <Button primary onClick={onClickNext} disabled={!device}>
+        <Button id="genuine-check-cta" primary onClick={onClickNext} disabled={!device}>
           <Text ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.genuineCheck.buttons.next")}
           </Text>
