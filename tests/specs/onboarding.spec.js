@@ -61,7 +61,7 @@ describe("Onboarding", () => {
     await next.click();
     const carefulcta = await $("#be-careful-cta");
     carefulcta.click();
-    await app.client.pause(200);
+    await app.client.pause(500);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-nano-getstarted-2",
     });

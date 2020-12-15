@@ -138,8 +138,8 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
   const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
 
   const defaultOptions = {
-    loop: true,
-    autoplay: true,
+    loop: !process.env.SPECTRON_RUN,
+    autoplay: !process.env.SPECTRON_RUN,
     animationData: deviceId === "nanoX" ? NanoXAnim : NanoSAnim,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
