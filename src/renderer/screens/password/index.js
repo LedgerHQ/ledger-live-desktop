@@ -1,25 +1,13 @@
 // @flow
-import React, { useCallback, useState } from "react";
-import { useTranslation } from "react-i18next";
+import React, { useState, useEffect } from "react";
 import type { RouterHistory, Match, Location } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { openModal } from "~/renderer/actions/modals";
-import Box from "~/renderer/components/Box";
-import Button from "~/renderer/components/Button";
-import TrackPage from "~/renderer/analytics/TrackPage";
-import IconLock from "~/renderer/icons/Lock";
-import {
-  SettingsSection as Section,
-  SettingsSectionHeader as Header,
-  SettingsSectionBody as Body,
-  SettingsSectionRow as Row,
-} from "../settings/SettingsSection";
-import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
+import { createAction as createAppAction } from "@ledgerhq/live-common/lib/hw/actions/app";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import { command } from "~/renderer/commands";
 import { mockedEventEmitter } from "~/renderer/components/DebugMock";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
+import Password from "./Password";
 
 type Props = {
   history: RouterHistory,
@@ -27,72 +15,81 @@ type Props = {
   match: Match,
 };
 
-const connectApp = command("connectApp");
-const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectApp);
+const initialState = {
+  getNamesError: null,
+  getNamesResult: null,
+};
+const createAction = connectAppExec => {
+  const useHook = (reduxDevice, request) => {
+    const appState = createAppAction(connectAppExec).useHook(reduxDevice, {
+      appName: "nanopass",
+    });
+
+    const { device, opened } = appState;
+
+    const [state, setState] = useState(initialState);
+
+    useEffect(() => {
+      if (!opened || !device) {
+        setState(initialState);
+        return;
+      }
+
+      command("getNames")({
+        deviceId: device.deviceId,
+      })
+        .toPromise()
+        .then(
+          result =>
+            setState({
+              ...state,
+              getNamesResult: result,
+            }),
+          err =>
+            setState({
+              ...state,
+              getNamesError: err,
+            }),
+        );
+    }, [device, opened, state]);
+
+    return {
+      ...appState,
+      ...state,
+      isLoading: !state.getNamesResult,
+    };
+  };
+
+  return {
+    useHook,
+    mapResult: r => ({
+      names: r.getNamesResult,
+      error: r.getNamesError,
+    }),
+  };
+};
+
+const action = createAction(getEnv("MOCK") ? mockedEventEmitter : command("connectApp"));
 
 // Props are passed from the <Route /> component in <Default />
-const Password = ({ history, location, match }: Props) => {
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
-
-  const onAddPassword = useCallback(
-    (e: SyntheticEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      // TODO: Modal release notes
-      dispatch(openModal("MODAL_PASSWORD_ADD_PASSWORD"));
-    },
-    [dispatch],
-  );
-
+const Index = ({ history, location, match }: Props) => {
   const [result, setResult] = useState(null);
 
   return (
     <>
       <SyncSkipUnderPriority priority={999} />
       {result ? (
-        <Box pb={4} selectable>
-          <Box
-            ff="Inter|SemiBold"
-            color="palette.text.shade100"
-            fontSize={7}
-            mb={5}
-            data-e2e="password_title"
-            justifyContent="space-between"
-            horizontal
-          >
-            {t("llpassword.title")}
-            <Button event="Add" small primary onClick={onAddPassword}>
-              {t("llpassword.add")}
-            </Button>
-          </Box>
-          <Section>
-            <TrackPage category="Password" name="Index" />
-
-            <Header
-              icon={<IconLock size={16} />}
-              title={t("llpassword.title")}
-              desc={t("llpassword.desc")}
-            />
-
-            <Body>
-              <Row title="Password name" desc="password desc">
-                <Button event="Copy passwd" small primary onClick={() => {}}>
-                  {t("llpassword.copy")}
-                </Button>
-              </Row>
-            </Body>
-          </Section>
-        </Box>
+        <Password {...result} />
       ) : (
         <DeviceAction
           onResult={setResult}
           action={action}
           request={{
-            appName: "Bitcoin",
+            appName: "nanopass",
           }}
         />
       )}
     </>
   );
 };
-export default Password;
+export default Index;

@@ -13,6 +13,7 @@ import listenDevices from "./listenDevices";
 import listApps from "./listApps";
 import ping from "./ping";
 import connectApp from "./connectApp";
+import getNames from "./getNames";
 import connectManager from "./connectManager";
 import testApdu from "./testApdu";
 import testCrash from "./testCrash";
@@ -40,6 +41,7 @@ export const commandsById = {
   libcoreReset,
   listenDevices,
   connectApp,
+  getNames,
   connectManager,
   listApps,
   ping,
