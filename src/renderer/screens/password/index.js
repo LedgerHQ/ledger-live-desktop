@@ -18,7 +18,7 @@ type Props = {
 const initialState = {
   getNamesError: null,
   getNamesResult: null,
-  isLoading: true,
+  isNanoPassLoading: true,
 };
 const createAction = connectAppExec => {
   const useHook = (reduxDevice, request) => {
@@ -45,13 +45,13 @@ const createAction = connectAppExec => {
             setState({
               ...state,
               getNamesResult: result,
-              isLoading: false,
+              isNanoPassLoading: false,
             }),
           err =>
             setState({
               ...state,
               getNamesError: err,
-              isLoading: false,
+              isNanoPassLoading: false,
             }),
         );
     }, [device, opened, state]);

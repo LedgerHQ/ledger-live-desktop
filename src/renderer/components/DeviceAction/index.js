@@ -78,6 +78,7 @@ const DeviceAction = <R, H, P>({
     unresponsive,
     error,
     isLoading,
+    isNanoPassLoading,
     allowManagerRequestedWording,
     requestQuitApp,
     deviceInfo,
@@ -177,7 +178,7 @@ const DeviceAction = <R, H, P>({
     });
   }
 
-  if (isLoading || (allowOpeningGranted && !appAndVersion)) {
+  if (isLoading || isNanoPassLoading || (allowOpeningGranted && !appAndVersion)) {
     return renderLoading({ modelId });
   }
 
