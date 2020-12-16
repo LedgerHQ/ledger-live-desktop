@@ -91,4 +91,12 @@ export default class NanoPass {
     }
     await this.transport.send(0x80, 0x03, p1, 0, data);
   }
+
+  /**
+   * Delete a password.
+   * @param name Password name
+   */
+  async deleteByName(name: string): string {
+    await this.transport.send(0x80, 0x06, 0, 0, this.stringToBuf(name, 32));
+  }
 }
