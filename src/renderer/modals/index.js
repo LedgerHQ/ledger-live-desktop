@@ -19,6 +19,7 @@ import MODAL_TECHNICAL_DATA from "./TechnicalData";
 import MODAL_SHARE_ANALYTICS from "./ShareAnalytics";
 import MODAL_SETTINGS_ACCOUNT from "./SettingsAccount";
 import MODAL_RELEASE_NOTES from "./ReleaseNotes";
+import MODAL_PASSWORD_ADD_PASSWORD from "./PasswordAddPassword";
 import MODAL_EXCHANGE_CRYPTO_DEVICE from "./ExchangeDeviceConfirm";
 import MODAL_SELL_CRYPTO_DEVICE from "./SellDeviceConfirm";
 import MODAL_HELP from "./Help";
@@ -104,6 +105,8 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_SWAP,
   MODAL_SWAP_OPERATION_DETAILS,
   MODAL_FULL_NODE,
+
+  MODAL_PASSWORD_ADD_PASSWORD,
 };
 
 export default modals;

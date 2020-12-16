@@ -119,7 +119,23 @@
   },
   "llpassword": {
     "title": "Passwords",
-    "desc": "Manage your passwords securely with Ledger"
+    "desc": "Manage your passwords securely with Ledger",
+    "copy": "Copy",
+    "add": "Add password",
+    "addpassword": {
+      "title": "Add a password"
+    },
+    "inputFields": {
+      "newPassword": {
+        "label": "New password"
+      },
+      "confirmPassword": {
+        "label": "Confirm password"
+      },
+      "name": {
+        "label": "Name"
+      }
+    }
   },
   "fees": {
     "custom": "Custom",
