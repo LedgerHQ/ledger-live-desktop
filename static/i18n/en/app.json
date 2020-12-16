@@ -117,6 +117,10 @@
       "year": "1Y"
     }
   },
+  "llpassword": {
+    "title": "Passwords",
+    "desc": "Manage your passwords securely with Ledger"
+  },
   "fees": {
     "custom": "Custom",
     "fast": "Fast",
@@ -127,6 +131,7 @@
   },
   "sidebar": {
     "menu": "Menu",
+    "password": "Passwords",
     "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "Manager",

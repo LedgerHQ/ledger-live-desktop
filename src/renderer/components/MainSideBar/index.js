@@ -19,6 +19,7 @@ import useExperimental from "~/renderer/hooks/useExperimental";
 import { darken, rgba } from "~/renderer/styles/helpers";
 
 import IconManager from "~/renderer/icons/Manager";
+import IconLock from "~/renderer/icons/Lock";
 import IconWallet from "~/renderer/icons/Wallet";
 import IconPortfolio from "~/renderer/icons/Portfolio";
 import IconReceive from "~/renderer/icons/Receive";
@@ -212,6 +213,10 @@ const MainSideBar = () => {
     push("/manager");
   }, [push]);
 
+  const handleClickPassword = useCallback(() => {
+    push("/password");
+  }, [push]);
+
   const handleClickAccounts = useCallback(() => {
     push("/accounts");
   }, [push]);
@@ -339,6 +344,15 @@ const MainSideBar = () => {
                 onClick={handleClickManager}
                 isActive={location.pathname === "/manager"}
                 NotifComponent={displayBlueDot ? <Dot collapsed={collapsed} /> : null}
+                collapsed={secondAnim}
+              />
+              <SideBarListItem
+                id={"password"}
+                label={t("sidebar.password")}
+                icon={IconLock}
+                iconActiveColor="wallet"
+                onClick={handleClickPassword}
+                isActive={location.pathname === "/password"}
                 collapsed={secondAnim}
               />
               <Space of={30} />

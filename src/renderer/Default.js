@@ -6,6 +6,7 @@ import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
 import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
 import Dashboard from "~/renderer/screens/dashboard";
 import Settings from "~/renderer/screens/settings";
+import Password from "~/renderer/screens/password";
 import Accounts from "~/renderer/screens/accounts";
 import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
@@ -80,6 +81,7 @@ export default function Default() {
                   <Switch>
                     <Route path="/" exact render={props => <Dashboard {...props} />} />
                     <Route path="/settings" render={props => <Settings {...props} />} />
+                    <Route path="/password" render={props => <Password {...props} />} />
                     <Route path="/accounts" render={props => <Accounts {...props} />} />
                     <Route path="/manager" render={props => <Manager {...props} />} />
                     <Route path="/lend" render={props => <Lend {...props} />} />
