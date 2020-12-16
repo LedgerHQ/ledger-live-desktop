@@ -366,35 +366,41 @@ const Nomination = ({ account }: Props) => {
             </Box>
           </Box>
           <Box>
-            <ToolTip
-              content={
-                !nominateEnabled && electionOpen ? (
-                  <Trans i18nKey="polkadot.nomination.electionOpenTooltip" />
-                ) : !nominateEnabled && hasPendingBondOperation ? (
-                  <Trans i18nKey="polkadot.nomination.hasPendingBondOperation" />
-                ) : null
-              }
-            >
-              <Button
-                primary
-                small
-                disabled={!nominateEnabled || (!hasBondedBalance && hasPendingBondOperation)}
-                onClick={hasBondedBalance ? onNominate : onEarnRewards}
+            {!hasBondedBalance && !hasPendingBondOperation ? (
+              <ToolTip
+                content={
+                  electionOpen ? <Trans i18nKey="polkadot.nomination.electionOpenTooltip" /> : null
+                }
               >
-                <Box horizontal flow={1} alignItems="center">
-                  <ChartLineIcon size={12} />
-                  <Box>
-                    <Trans
-                      i18nKey={
-                        hasBondedBalance || hasPendingBondOperation
-                          ? "polkadot.nomination.nominate"
-                          : "delegation.title"
-                      }
-                    />
+                <Button primary small disabled={electionOpen} onClick={onEarnRewards}>
+                  <Box horizontal flow={1} alignItems="center">
+                    <ChartLineIcon size={12} />
+                    <Box>
+                      <Trans i18nKey="delegation.title" />
+                    </Box>
                   </Box>
-                </Box>
-              </Button>
-            </ToolTip>
+                </Button>
+              </ToolTip>
+            ) : (
+              <ToolTip
+                content={
+                  !nominateEnabled && electionOpen ? (
+                    <Trans i18nKey="polkadot.nomination.electionOpenTooltip" />
+                  ) : !nominateEnabled && hasPendingBondOperation ? (
+                    <Trans i18nKey="polkadot.nomination.hasPendingBondOperation" />
+                  ) : null
+                }
+              >
+                <Button primary small disabled={!nominateEnabled} onClick={onNominate}>
+                  <Box horizontal flow={1} alignItems="center">
+                    <ChartLineIcon size={12} />
+                    <Box>
+                      <Trans i18nKey="polkadot.nomination.nominate" />
+                    </Box>
+                  </Box>
+                </Button>
+              </ToolTip>
+            )}
           </Box>
         </Wrapper>
       )}
