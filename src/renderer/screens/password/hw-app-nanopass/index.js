@@ -75,7 +75,8 @@ export default class NanoPass {
     let p1 = 0;
     if (password.length == 0) {
       p1 = 1;
-      data = data.append(this.stringToBuf(password, 32));
+    } else {
+      data = Buffer.concat([data, this.stringToBuf(password, 32)]);
     }
     await this.transport.send(0x80, 0x03, p1, 0, data);
   }
