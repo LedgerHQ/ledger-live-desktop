@@ -28,8 +28,6 @@ const RoundIconContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({
 `;
 
 export const SettingsSectionBody: ThemedComponent<{}> = styled(Box)`
-  border-top: 1px solid ${p => p.theme.colors.palette.divider};
-  border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
   > * + * {
     position: relative;
     &:after {
@@ -37,9 +35,9 @@ export const SettingsSectionBody: ThemedComponent<{}> = styled(Box)`
       content: "";
       display: block;
       height: 1px;
-      left: ${p => p.theme.space[4]}px;
+      left: 0;
       position: absolute;
-      right: ${p => p.theme.space[4]}px;
+      right: 0;
       top: 0;
     }
   }
@@ -80,19 +78,25 @@ export const SettingsSectionHeader = ({
   </SettingsSectionHeaderContainer>
 );
 
-export const SettingsSectionRowContainer: ThemedComponent<{}> = styled(Box).attrs(() => ({
-  p: 4,
-  horizontal: true,
-  alignItems: "center",
-  relative: true,
-  justifyContent: "space-between",
-}))``;
+export const SettingsSectionRowContainer: ThemedComponent<{ inset?: boolean }> = styled(Box).attrs(
+  p => ({
+    p: p.inset ? 3 : 4,
+    m: p.inset ? 4 : 0,
+    horizontal: true,
+    alignItems: "center",
+    relative: true,
+    justifyContent: "space-between",
+    backgroundColor: p.inset ? p.theme.colors.palette.text.shade5 : "transparent",
+    borderRadius: p.inset ? 4 : 0,
+  }),
+)``;
 
 type SettingsSectionRowProps = {
   title?: string,
   desc: string,
   children?: any,
-  onClick?: ?Function,
+  onClick?: () => void,
+  inset?: boolean,
 };
 
 export const SettingsSectionRow = ({
@@ -100,8 +104,9 @@ export const SettingsSectionRow = ({
   desc,
   children = null,
   onClick = null,
+  inset = false,
 }: SettingsSectionRowProps) => (
-  <SettingsSectionRowContainer onClick={onClick} tabIndex={-1}>
+  <SettingsSectionRowContainer onClick={onClick} tabIndex={-1} inset={inset}>
     <Box grow shrink style={{ marginRight: "10%" }}>
       {title && (
         <Box ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
