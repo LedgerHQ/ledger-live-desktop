@@ -15,6 +15,7 @@ import {
   SettingsSectionRow as Row,
 } from "../settings/SettingsSection";
 import _ from "lodash";
+import OptionsButton from "./OptionsButton";
 
 type Props = {};
 
@@ -45,9 +46,12 @@ const Password = ({ ...props }: Props) => {
           horizontal
         >
           {t("llpassword.title")}
-          <Button event="Add" small primary onClick={onAddPassword}>
+          <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
+            <Button event="Add" small primary onClick={onAddPassword}>
             {t("llpassword.add")}
-          </Button>
+            </Button>
+            <OptionsButton />
+          </Box>
         </Box>
         <Section>
           <TrackPage category="Password" name="Index" />

@@ -135,6 +135,11 @@
       "name": {
         "label": "Name"
       }
+    },
+    "optionsMenu": {
+      "title": "Options",
+      "exportPasswords": "Export passwords",
+      "importPasswords": "Import passwords"
     }
   },
   "fees": {
