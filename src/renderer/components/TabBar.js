@@ -33,7 +33,7 @@ const TabIndicator = styled.span.attrs(({ currentRef = {}, index, short }) => ({
   transition: all 0.3s ease-in-out;
 `;
 
-const Tabs: ThemedComponent<{ short: boolean }> = styled.div`
+const Tabs: ThemedComponent<{ short: boolean, separator: boolean }> = styled.div`
   height: ${p => p.theme.sizes.topBarHeight}px;
   display: flex;
   flex-direction: row;
@@ -43,6 +43,23 @@ const Tabs: ThemedComponent<{ short: boolean }> = styled.div`
   ${Tab}:first-child {
     ${p => (p.short ? "padding-left: 0;" : "")}
   }
+
+  ${p =>
+    p.separator
+      ? `
+    &:after {
+    background: ${p.theme.colors.palette.divider};
+    content: "";
+    display: block;
+    height: 1px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  `
+      : ""}
 `;
 
 type Props = {
@@ -51,6 +68,7 @@ type Props = {
   defaultIndex?: number,
   index?: number,
   short?: boolean,
+  separator?: boolean,
 };
 
 const TabBar = ({
@@ -59,6 +77,7 @@ const TabBar = ({
   defaultIndex = 0,
   short = false,
   index: propsIndex,
+  separator = false,
 }: Props) => {
   const tabRefs = useRef([]);
   const [index, setIndex] = useState(defaultIndex);
@@ -83,7 +102,7 @@ const TabBar = ({
   };
 
   return (
-    <Tabs short={short}>
+    <Tabs short={short} separator={separator}>
       {tabs.map((tab, j) => (
         <Tab
           ref={setTabRef(j)}

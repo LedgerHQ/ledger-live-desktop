@@ -5,9 +5,10 @@ import { Switch, Route } from "react-router-dom";
 import type { RouterHistory, Match, Location } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
-import Pills from "~/renderer/components/Pills";
 import type { Item } from "~/renderer/components/Pills";
 import Box from "~/renderer/components/Box";
+import TabBar from "~/renderer/components/TabBar";
+import { SettingsSection as Section } from "./SettingsSection";
 import SectionDisplay from "./sections/General";
 import SectionExperimental from "./sections/Experimental";
 import SectionAccounts from "./sections/Accounts";
@@ -55,6 +56,7 @@ const Settings = ({ history, location, match }: Props) => {
   const accountsCount = accounts.length;
 
   const items = useMemo(() => getItems(t), [t]);
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
   const processedItems = useMemo(
     () => items.filter(item => item.key !== "currencies" || accountsCount > 0),
     [items, accountsCount],
@@ -62,28 +64,35 @@ const Settings = ({ history, location, match }: Props) => {
 
   const defaultItem = items[0];
 
-  const getCurrentTab = useCallback(
-    ({ url, pathname }) => items.find(i => `${url}/${i.key}` === pathname) || items[0],
-    [items],
-  );
-
-  const [tab, setTab] = useState(() =>
-    getCurrentTab({ url: match.url, pathname: location.pathname }),
-  );
-
   const handleChangeTab = useCallback(
-    (item: Item) => {
+    (index: number) => {
+      const item = items[index];
       const url = `${match.url}/${item.key}`;
       if (location.pathname !== url) {
         history.push({ pathname: url, state: { source: "settings tab" } });
+        setActiveTabIndex(index);
       }
     },
-    [match, history, location],
+    [match, history, location, items],
   );
 
   useEffect(() => {
-    setTab(getCurrentTab({ url: match.url, pathname: location.pathname }));
-  }, [getCurrentTab, location, match]);
+    const url = `${match.url}/${items[activeTabIndex].key}`;
+    if (location.pathname === "/settings") {
+      setActiveTabIndex(0);
+      return;
+    }
+
+    if (url !== location.pathname) {
+      const idx = items.findIndex(val => {
+        return `${match.url}/${val.key}` === location.pathname;
+      });
+
+      if (idx > -1 && idx !== activeTabIndex) {
+        setActiveTabIndex(idx);
+      }
+    }
+  }, [match, history, location, items, activeTabIndex]);
 
   return (
     <Box pb={4} selectable>
@@ -96,13 +105,21 @@ const Settings = ({ history, location, match }: Props) => {
       >
         {t("settings.title")}
       </Box>
-      <Pills mb={4} items={processedItems} activeKey={tab.key} onChange={handleChangeTab} />
-      <Switch>
-        {processedItems.map(i => (
-          <Route key={i.key} path={`${match.url}/${i.key}`} component={i.value} />
-        ))}
-        <Route component={defaultItem.value} />
-      </Switch>
+      <Section>
+        <TabBar
+          onIndexChange={handleChangeTab}
+          defaultIndex={activeTabIndex}
+          index={activeTabIndex}
+          tabs={items.map(i => i.label)}
+          separator
+        />
+        <Switch>
+          {processedItems.map(i => (
+            <Route key={i.key} path={`${match.url}/${i.key}`} component={i.value} />
+          ))}
+          <Route component={defaultItem.value} />
+        </Switch>
+      </Section>
     </Box>
   );
 };

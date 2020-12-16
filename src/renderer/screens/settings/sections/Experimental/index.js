@@ -12,15 +12,9 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import useEnv from "~/renderer/hooks/useEnv";
 import Disclaimer from "~/renderer/components/Disclaimer";
 import Button from "~/renderer/components/Button";
-import IconAtom from "~/renderer/icons/Atom";
 import IconSensitiveOperationShield from "~/renderer/icons/SensitiveOperationShield";
 import { setShowClearCacheBanner } from "~/renderer/actions/settings";
-import {
-  SettingsSection as Section,
-  SettingsSectionHeader as Header,
-  SettingsSectionBody as Body,
-  SettingsSectionRow as Row,
-} from "../../SettingsSection";
+import { SettingsSectionBody as Body, SettingsSectionRow as Row } from "../../SettingsSection";
 import ExperimentalSwitch from "./ExperimentalSwitch";
 import ExperimentalInteger from "./ExperimentalInteger";
 import FullNode from "~/renderer/screens/settings/sections/Accounts/FullNode";
@@ -102,15 +96,8 @@ const SectionExperimental = () => {
   }, [dispatch, needsCleanCache]);
 
   return (
-    <Section data-e2e="experimental_section_title">
+    <div data-e2e="experimental_section_title">
       <TrackPage category="Settings" name="Experimental" />
-
-      <Header
-        icon={<IconAtom size={16} />}
-        title={t("settings.tabs.experimental")}
-        desc={t("settings.experimental.desc")}
-      />
-
       <Body>
         <Disclaimer
           m={4}
@@ -130,7 +117,7 @@ const SectionExperimental = () => {
         {__DEV__ ? <EthereumBridgeRow /> : null}
         <FullNode />
       </Body>
-    </Section>
+    </div>
   );
 };
 
