@@ -18,6 +18,7 @@ type Props = {
 const initialState = {
   getNamesError: null,
   getNamesResult: null,
+  isLoading: true,
 };
 const createAction = connectAppExec => {
   const useHook = (reduxDevice, request) => {
@@ -44,11 +45,13 @@ const createAction = connectAppExec => {
             setState({
               ...state,
               getNamesResult: result,
+              isLoading: false,
             }),
           err =>
             setState({
               ...state,
               getNamesError: err,
+              isLoading: false,
             }),
         );
     }, [device, opened, state]);
@@ -56,7 +59,6 @@ const createAction = connectAppExec => {
     return {
       ...appState,
       ...state,
-      isLoading: !state.getNamesResult,
     };
   };
 
