@@ -21,6 +21,7 @@ import MODAL_SETTINGS_ACCOUNT from "./SettingsAccount";
 import MODAL_RELEASE_NOTES from "./ReleaseNotes";
 import MODAL_PASSWORD_ADD_PASSWORD from "./PasswordAddPassword";
 import MODAL_PASSWORD_REMOVE_PASSWORD from "./PasswordRemovePassword";
+import MODAL_PASSWORD_COPY_PASSWORD from "./PasswordCopyPassword";
 import MODAL_EXCHANGE_CRYPTO_DEVICE from "./ExchangeDeviceConfirm";
 import MODAL_SELL_CRYPTO_DEVICE from "./SellDeviceConfirm";
 import MODAL_HELP from "./Help";
@@ -109,6 +110,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
 
   MODAL_PASSWORD_ADD_PASSWORD,
   MODAL_PASSWORD_REMOVE_PASSWORD,
+  MODAL_PASSWORD_COPY_PASSWORD,
 };
 
 export default modals;

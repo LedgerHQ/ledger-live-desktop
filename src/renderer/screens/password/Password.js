@@ -70,7 +70,18 @@ const Password = ({ ...props }: Props) => {
             {_.map(props.names, (name: string, i: number) => (
               <Row key={i} title={name} desc={`Your password is secure!`}>
                 <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
-                  <Button event="Copy passwd" small primary onClick={() => {}}>
+                  <Button
+                    event="Copy passwd"
+                    small
+                    primary
+                    onClick={() => {
+                      dispatch(
+                        openModal("MODAL_PASSWORD_COPY_PASSWORD", {
+                          passName: name,
+                        }),
+                      );
+                    }}
+                  >
                     {t("llpassword.copy")}
                   </Button>
                   <RowOptionsButton

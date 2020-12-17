@@ -48,9 +48,9 @@ const createAction = connectAppExec => {
         isAddingPass: true,
       });
 
-      console.log("remove");
+      console.log("copy");
 
-      command("removePass")({
+      command("getPass")({
         deviceId: device.deviceId,
         name: request.name,
       })
@@ -58,7 +58,7 @@ const createAction = connectAppExec => {
         .then(
           result =>
             dispatch({
-              addResult: true,
+              addResult: result,
               isAddingPass: false,
               isNanoPassLoading: false,
             }),
@@ -97,11 +97,10 @@ const createAction = connectAppExec => {
 const action = createAction(getEnv("MOCK") ? mockedEventEmitter : command("connectApp"));
 
 type Props = {
-  onUpdate: Function,
   passName: string,
 };
 
-const PasswordRemovePassword = (props: Props) => {
+const PasswordCopyPassword = (props: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [onAddPassword, setOnAddPassword] = useState(false);
@@ -109,7 +108,7 @@ const PasswordRemovePassword = (props: Props) => {
   console.log("cxoucouou");
 
   const onClose = () => {
-    dispatch(closeModal("MODAL_PASSWORD_REMOVE_PASSWORD"));
+    dispatch(closeModal("MODAL_PASSWORD_COPY_PASSWORD"));
   };
 
   const handleSave = async (e: SyntheticEvent<HTMLFormElement>) => {
@@ -123,20 +122,21 @@ const PasswordRemovePassword = (props: Props) => {
   return (
     <>
       <SyncSkipUnderPriority priority={999} />
-      <Modal name="MODAL_PASSWORD_REMOVE_PASSWORD" centered>
+      <Modal name="MODAL_PASSWORD_COPY_PASSWORD" centered>
         <ModalBody
-          title="Remove password"
+          title="Copy Password"
           onHide={() => {}}
           onClose={onClose}
           render={() => (
             <>
               {!onAddPassword ? (
-                <span>Are you sure you want to delete {props.passName} ?</span>
+                <span>Are you sure you want to copy {props.passName} ?</span>
               ) : (
                 <DeviceAction
-                  onResult={() => {
+                  onResult={result => {
+                    const { clipboard } = require("electron");
+                    clipboard.writeText(result.result);
                     onClose();
-                    props.onUpdate();
                   }}
                   action={action}
                   request={{
@@ -158,7 +158,7 @@ const PasswordRemovePassword = (props: Props) => {
                 disabled={onAddPassword}
                 id="modal-save-button"
               >
-                Remove
+                Copy
               </Button>
             </Box>
           )}
@@ -168,4 +168,4 @@ const PasswordRemovePassword = (props: Props) => {
   );
 };
 
-export default PasswordRemovePassword;
+export default PasswordCopyPassword;
