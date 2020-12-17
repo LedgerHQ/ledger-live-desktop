@@ -16,7 +16,11 @@ import {
 } from "../settings/SettingsSection";
 import _ from "lodash";
 
-type Props = {};
+type Props = {
+  names: *,
+  error: *,
+  onAddPassword: Function,
+};
 
 // Props are passed from the <Route /> component in <Default />
 const Password = ({ ...props }: Props) => {
@@ -27,9 +31,9 @@ const Password = ({ ...props }: Props) => {
     (e: SyntheticEvent<HTMLButtonElement>) => {
       e.preventDefault();
       // TODO: Modal release notes
-      dispatch(openModal("MODAL_PASSWORD_ADD_PASSWORD"));
+      dispatch(openModal("MODAL_PASSWORD_ADD_PASSWORD", { onAddPassword: props.onAddPassword }));
     },
-    [dispatch],
+    [dispatch, props.onAddPassword],
   );
 
   return (
@@ -59,8 +63,8 @@ const Password = ({ ...props }: Props) => {
           />
 
           <Body>
-            {_.map(props.names, name => (
-              <Row title={name} desc="description">
+            {_.map(props.names, (name: string) => (
+              <Row title={name} desc={`Your password is secure!`}>
                 <Button event="Copy passwd" small primary onClick={() => {}}>
                   {t("llpassword.copy")}
                 </Button>
@@ -72,7 +76,9 @@ const Password = ({ ...props }: Props) => {
                 desc={props.error.title || props.error.message}
               />
             ) : null}
-            {!(props.names || []).length ? <Row title="No Password" desc="Add a password first" /> : null}
+            {!(props.names || []).length ? (
+              <Row title="No Password" desc="Add a password first" />
+            ) : null}
           </Body>
         </Section>
       </Box>

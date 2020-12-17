@@ -7,12 +7,14 @@ import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 
 type Input = {
   deviceId: string,
+  name: string,
+  password: string,
 };
 
-const cmd = ({ deviceId }: Input): Observable<*> => {
+const cmd = ({ deviceId, name, password }: Input): Observable<*> => {
   return withDevice(deviceId)(transport => {
     const nanoApp = new NanoApp(transport);
-    return from(nanoApp.getNames());
+    return from(nanoApp.add(name, password));
   });
 };
 

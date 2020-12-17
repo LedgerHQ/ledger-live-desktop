@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { closeModal } from "~/renderer/actions/modals";
@@ -8,8 +8,78 @@ import Modal, { ModalBody } from "~/renderer/components/Modal";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import Body from "./Body";
+import { createAction as createAppAction } from "@ledgerhq/live-common/lib/hw/actions/app";
+import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
+import DeviceAction from "~/renderer/components/DeviceAction";
+import { command } from "~/renderer/commands";
+import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 
-const PasswordAddPassword = () => {
+const initialState = {
+  getNamesError: null,
+  getNamesResult: null,
+  isNanoPassLoading: true,
+};
+const createAction = connectAppExec => {
+  const useHook = (reduxDevice, request) => {
+    const appState = createAppAction(connectAppExec).useHook(reduxDevice, {
+      appName: "nanopass",
+    });
+
+    const { device, opened } = appState;
+
+    const [state, setState] = useState(initialState);
+
+    useEffect(() => {
+      if (!opened || !device) {
+        setState(initialState);
+        return;
+      }
+
+      command("addNameAndPass")({
+        deviceId: device.deviceId,
+        name: request.name,
+        password: request.password,
+      })
+        .toPromise()
+        .then(
+          result =>
+            setState({
+              ...state,
+              getNamesResult: result,
+              isNanoPassLoading: false,
+            }),
+          err =>
+            setState({
+              ...state,
+              getNamesError: err,
+              isNanoPassLoading: false,
+            }),
+        );
+    }, [device, opened, request.name, request.password, state]);
+
+    return {
+      ...appState,
+      ...state,
+    };
+  };
+
+  return {
+    useHook,
+    mapResult: r => ({
+      names: r.getNamesResult,
+      error: r.getNamesError,
+    }),
+  };
+};
+
+const action = createAction(getEnv("MOCK") ? mockedEventEmitter : command("connectApp"));
+
+type Props = {
+  onAddPassword: Function,
+};
+
+const PasswordAddPassword = (props: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [newPassword, setNewPassword] = useState("");
@@ -31,7 +101,7 @@ const PasswordAddPassword = () => {
       return;
     }
 
-    console.log("save");
+    props.onAddPassword({ name, newPassword });
 
     onClose();
   };

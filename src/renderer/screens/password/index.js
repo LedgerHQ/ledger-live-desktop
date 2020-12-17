@@ -83,13 +83,7 @@ const Index = ({ history, location, match }: Props) => {
       {result ? (
         <Password {...result} />
       ) : (
-        <DeviceAction
-          onResult={setResult}
-          action={action}
-          request={{
-            appName: "nanopass",
-          }}
-        />
+        <DeviceAction onResult={setResult} action={action} request={{}} />
       )}
     </>
   );

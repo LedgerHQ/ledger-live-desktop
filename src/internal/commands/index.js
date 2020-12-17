@@ -14,6 +14,7 @@ import listApps from "./listApps";
 import ping from "./ping";
 import connectApp from "./connectApp";
 import getNames from "./getNames";
+import addNameAndPass from "./addNameAndPass";
 import connectManager from "./connectManager";
 import testApdu from "./testApdu";
 import testCrash from "./testCrash";
@@ -42,6 +43,7 @@ export const commandsById = {
   listenDevices,
   connectApp,
   getNames,
+  addNameAndPass,
   connectManager,
   listApps,
   ping,
