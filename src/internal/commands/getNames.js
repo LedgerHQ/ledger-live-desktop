@@ -12,7 +12,7 @@ type Input = {
 const cmd = ({ deviceId }: Input): Observable<*> => {
   return withDevice(deviceId)(transport => {
     const nanoApp = new NanoApp(transport);
-    return from(nanoApp.getNames());
+    return from(nanoApp.getEntries());
   });
 };
 

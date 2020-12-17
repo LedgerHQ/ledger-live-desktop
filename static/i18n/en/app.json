@@ -2064,6 +2064,9 @@
       },
       "currentPassword": {
         "label": "Current password"
+      },
+      "description": {
+        "label": "Description"
       }
     },
     "changePassword": {

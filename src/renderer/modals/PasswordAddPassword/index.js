@@ -54,6 +54,7 @@ const createAction = connectAppExec => {
       command("addNameAndPass")({
         deviceId: device.deviceId,
         name: request.name,
+        description: request.description,
         password: request.password,
       })
         .toPromise()
@@ -75,6 +76,7 @@ const createAction = connectAppExec => {
       device,
       opened,
       request.name,
+      request.description,
       request.password,
       state.addResult,
       state.error,
@@ -107,6 +109,7 @@ const PasswordAddPassword = (props: Props) => {
   const dispatch = useDispatch();
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [description, setDescription] = useState("");
   const [name, setName] = useState("");
   const [onAddPassword, setOnAddPassword] = useState(false);
 
@@ -125,7 +128,7 @@ const PasswordAddPassword = (props: Props) => {
       return;
     }
 
-    setOnAddPassword({ name, password: newPassword });
+    setOnAddPassword({ name, description, password: newPassword });
   };
 
   const handleInputChange = (key: string) => (value: string) => {
@@ -135,6 +138,9 @@ const PasswordAddPassword = (props: Props) => {
         break;
       case "confirmPassword":
         setConfirmPassword(value);
+        break;
+      case "description":
+        setDescription(value);
         break;
       case "name":
         setName(value);
@@ -147,6 +153,7 @@ const PasswordAddPassword = (props: Props) => {
   const handleReset = () => {
     setNewPassword("");
     setConfirmPassword("");
+    setDescription("");
   };
 
   return (

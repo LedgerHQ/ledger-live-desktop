@@ -69,7 +69,7 @@ const createAction = connectAppExec => {
   return {
     useHook,
     mapResult: r => ({
-      names: r.getNamesResult,
+      entries: r.getNamesResult,
       error: r.error,
     }),
   };

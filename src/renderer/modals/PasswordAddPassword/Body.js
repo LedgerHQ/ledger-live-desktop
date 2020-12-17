@@ -15,10 +15,11 @@ type Props = {
   newPassword: string,
   confirmPassword: string,
   name: string,
+  description: string,
 };
 
 const PasswordBody = (props: Props) => {
-  const { isValid, onChange, onSubmit, newPassword, confirmPassword, name } = props;
+  const { isValid, onChange, onSubmit, newPassword, confirmPassword, name, description } = props;
   const { t } = useTranslation();
   // TODO: adjust design to separate 3 fields
   return (
@@ -27,6 +28,10 @@ const PasswordBody = (props: Props) => {
         <Box flow={1}>
           <Label htmlFor="name">{t("llpassword.inputFields.name.label")}</Label>
           <Input style={{ mt: 4, width: 240 }} id="name" onChange={onChange("name")} value={name} />
+        </Box>
+        <Box flow={1}>
+          <Label htmlFor="description">{t("llpassword.inputFields.description.label")}</Label>
+          <Input style={{ mt: 4, width: 240 }} id="description" onChange={onChange("description")} value={description} />
         </Box>
         <Box flow={1}>
           <Label htmlFor="newPassword">{t("llpassword.inputFields.newPassword.label")}</Label>

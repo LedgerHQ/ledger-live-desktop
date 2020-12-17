@@ -67,8 +67,8 @@ const Password = ({ ...props }: Props) => {
           />
 
           <Body>
-            {_.map(props.names, (name: string, i: number) => (
-              <Row key={i} title={name} desc={`Your password is secure!`}>
+            {_.map(props.entries, (entry: string, i: number) => (
+              <Row key={i} title={entry.name} desc={entry.description}>
                 <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
                   <Button
                     event="Copy passwd"
@@ -77,7 +77,7 @@ const Password = ({ ...props }: Props) => {
                     onClick={() => {
                       dispatch(
                         openModal("MODAL_PASSWORD_COPY_PASSWORD", {
-                          passName: name,
+                          passName: entry.name,
                         }),
                       );
                     }}
@@ -90,7 +90,7 @@ const Password = ({ ...props }: Props) => {
                       dispatch(
                         openModal("MODAL_PASSWORD_REMOVE_PASSWORD", {
                           onUpdate: props.onUpdate,
-                          passName: name,
+                          passName: entry.name,
                         }),
                       );
                     }}
@@ -98,7 +98,7 @@ const Password = ({ ...props }: Props) => {
                       console.log("show");
                       dispatch(
                         openModal("MODAL_PASSWORD_SHOW_PASSWORD", {
-                          passName: name,
+                          passName: entry.name,
                         }),
                       );
                     }}
@@ -112,7 +112,7 @@ const Password = ({ ...props }: Props) => {
                 desc={props.error.title || props.error.message}
               />
             ) : null}
-            {!(props.names || []).length ? (
+            {!(props.entries || []).length ? (
               <Row title="No Password" desc="Add a password first" />
             ) : null}
           </Body>

@@ -11,10 +11,10 @@ type Input = {
   password: string,
 };
 
-const cmd = ({ deviceId, name, password }: Input): Observable<*> => {
+const cmd = ({ deviceId, name, description, password }: Input): Observable<*> => {
   return withDevice(deviceId)(transport => {
     const nanoApp = new NanoApp(transport);
-    return from(nanoApp.add(name, password));
+    return from(nanoApp.add(name, description, password));
   });
 };
 
