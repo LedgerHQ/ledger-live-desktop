@@ -73,7 +73,17 @@ const Password = ({ ...props }: Props) => {
                   <Button event="Copy passwd" small primary onClick={() => {}}>
                     {t("llpassword.copy")}
                   </Button>
-                  <RowOptionsButton />
+                  <RowOptionsButton
+                    onRemove={() => {
+                      console.log("remove");
+                      dispatch(
+                        openModal("MODAL_PASSWORD_REMOVE_PASSWORD", {
+                          onUpdate: props.onUpdate,
+                          passName: name,
+                        }),
+                      );
+                    }}
+                  />
                 </Box>
               </Row>
             ))}

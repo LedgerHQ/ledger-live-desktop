@@ -44,7 +44,7 @@ type ItemType = DropDownItemType & {
   type?: "separator",
 };
 
-const OptionsButton = () => {
+const OptionsButton = (props) => {
   const dispatch = useDispatch();
   const [hideEmptyTokenAccounts, setHideEmptyTokenAccounts] = useHideEmptyTokenAccounts();
 
@@ -61,13 +61,13 @@ const OptionsButton = () => {
       key: "showPassword",
       label: t("llpassword.optionsRow.showPassword"),
       icon: <IconEye size={16} />,
-      onClick: () => onOpenModal("MODAL_EXPORT_PASSWORDS"),
+      onClick: () => {},
     },
     {
       key: "deletePassword",
       label: t("llpassword.optionsRow.deletePassword"),
       icon: <IconTrash size={16} />,
-      onClick: () => onOpenModal("MODAL_EXPORT_PASSWORDS"),
+      onClick: () => props.onRemove(),
     }
   ];
 
