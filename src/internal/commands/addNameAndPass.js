@@ -10,6 +10,7 @@ type Input = {
   name: string,
   description: string,
   password: string,
+  description: string,
 };
 
 const cmd = ({ deviceId, name, description, password }: Input): Observable<*> => {

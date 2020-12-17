@@ -137,6 +137,9 @@
       },
       "name": {
         "label": "Name"
+      },
+      "description": {
+        "label": "Description"
       }
     },
     "optionsMenu": {
