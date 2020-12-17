@@ -186,6 +186,7 @@ const PasswordAddPassword = (props: Props) => {
                   action={action}
                   request={{
                     name,
+                    description,
                     password: newPassword,
                   }}
                 />
