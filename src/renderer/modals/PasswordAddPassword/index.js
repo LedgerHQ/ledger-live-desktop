@@ -189,7 +189,6 @@ const PasswordAddPassword = (props: Props) => {
                     name,
                     description,
                     password: newPassword,
-                    description: description,
                   }}
                 />
               )}
