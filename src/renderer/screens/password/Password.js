@@ -16,6 +16,7 @@ import {
 } from "../settings/SettingsSection";
 import _ from "lodash";
 import OptionsButton from "./OptionsButton";
+import RowOptionsButton from "./RowOptionsButton";
 
 type Props = {};
 
@@ -65,9 +66,12 @@ const Password = ({ ...props }: Props) => {
           <Body>
             {_.map(props.names, name => (
               <Row title={name} desc="description">
-                <Button event="Copy passwd" small primary onClick={() => {}}>
-                  {t("llpassword.copy")}
-                </Button>
+                <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
+                  <Button event="Copy passwd" small primary onClick={() => {}}>
+                    {t("llpassword.copy")}
+                  </Button>
+                  <RowOptionsButton />
+                </Box>
               </Row>
             ))}
             {props.error ? (

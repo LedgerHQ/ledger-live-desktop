@@ -140,6 +140,11 @@
       "title": "Options",
       "exportPasswords": "Export passwords",
       "importPasswords": "Import passwords"
+    },
+    "optionsRow": {
+      "title": "Options",
+      "showPassword": "Show on Nano S screen",
+      "deletePassword": "Delete password"
     }
   },
   "fees": {

@@ -12,9 +12,9 @@ import DropDownSelector, { DropDownItem } from "~/renderer/components/DropDownSe
 import Switch from "~/renderer/components/Switch";
 import Tooltip from "~/renderer/components/Tooltip";
 import IconDots from "~/renderer/icons/Dots";
-import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
+import IconEye from "~/renderer/icons/Eye";
 import IconSend from "~/renderer/icons/Send";
-import IconReceive from "~/renderer/icons/Receive";
+import IconTrash from "~/renderer/icons/Trash";
 import { openModal } from "~/renderer/actions/modals";
 import { useHideEmptyTokenAccounts } from "~/renderer/actions/settings";
 
@@ -58,15 +58,15 @@ const OptionsButton = () => {
 
   const items: DropDownItemType[] = [
     {
-      key: "exportPasswords",
-      label: t("llpassword.optionsMenu.exportPasswords"),
-      icon: <IconSend size={16} />,
+      key: "showPassword",
+      label: t("llpassword.optionsRow.showPassword"),
+      icon: <IconEye size={16} />,
       onClick: () => onOpenModal("MODAL_EXPORT_PASSWORDS"),
     },
     {
-      key: "importPasswords",
-      label: t("llpassword.optionsMenu.importPasswords"),
-      icon: <IconReceive size={16} />,
+      key: "deletePassword",
+      label: t("llpassword.optionsRow.deletePassword"),
+      icon: <IconTrash size={16} />,
       onClick: () => onOpenModal("MODAL_EXPORT_PASSWORDS"),
     }
   ];
