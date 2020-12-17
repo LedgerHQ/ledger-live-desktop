@@ -203,14 +203,7 @@ const PasswordAddPassword = (props: Props) => {
                 small
                 primary
                 onClick={handleSave}
-                disabled={
-                  onAddPassword ||
-                  !isValid() ||
-                  !newPassword.length ||
-                  !confirmPassword.length ||
-                  !name.length ||
-                  !description.length
-                }
+                disabled={onAddPassword || !isValid() || !name.length}
                 id="modal-save-button"
               >
                 {t("common.save")}

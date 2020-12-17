@@ -130,7 +130,7 @@
     },
     "inputFields": {
       "newPassword": {
-        "label": "New password"
+        "label": "New password (optional)"
       },
       "confirmPassword": {
         "label": "Confirm password"
@@ -139,7 +139,7 @@
         "label": "Name"
       },
       "description": {
-        "label": "Description"
+        "label": "Description (optional)"
       }
     },
     "optionsMenu": {
