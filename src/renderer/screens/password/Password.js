@@ -1,7 +1,6 @@
 // @flow
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import type { RouterHistory, Match, Location } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { openModal } from "~/renderer/actions/modals";
 import Box from "~/renderer/components/Box";
@@ -21,7 +20,7 @@ import RowOptionsButton from "./RowOptionsButton";
 type Props = {
   names: *,
   error: *,
-  onAddPassword: Function,
+  onUpdate: Function,
 };
 
 // Props are passed from the <Route /> component in <Default />
@@ -33,9 +32,9 @@ const Password = ({ ...props }: Props) => {
     (e: SyntheticEvent<HTMLButtonElement>) => {
       e.preventDefault();
       // TODO: Modal release notes
-      dispatch(openModal("MODAL_PASSWORD_ADD_PASSWORD", { onAddPassword: props.onAddPassword }));
+      dispatch(openModal("MODAL_PASSWORD_ADD_PASSWORD", { onUpdate: props.onUpdate }));
     },
-    [dispatch, props.onAddPassword],
+    [dispatch, props.onUpdate],
   );
 
   return (
@@ -53,7 +52,7 @@ const Password = ({ ...props }: Props) => {
           {t("llpassword.title")}
           <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
             <Button event="Add" small primary onClick={onAddPassword}>
-            {t("llpassword.add")}
+              {t("llpassword.add")}
             </Button>
             <OptionsButton />
           </Box>
@@ -68,8 +67,8 @@ const Password = ({ ...props }: Props) => {
           />
 
           <Body>
-            {_.map(props.names, (name: string) => (
-              <Row title={name} desc={`Your password is secure!`}>
+            {_.map(props.names, (name: string, i: number) => (
+              <Row key={i} title={name} desc={`Your password is secure!`}>
                 <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
                   <Button event="Copy passwd" small primary onClick={() => {}}>
                     {t("llpassword.copy")}

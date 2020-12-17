@@ -24,6 +24,7 @@ import {
   renderWarningOutdated,
   renderSwapDeviceConfirmation,
   renderSellDeviceConfirmation,
+  renderPasswordConfirmation,
 } from "./rendering";
 
 type OwnProps<R, H, P> = {
@@ -102,6 +103,8 @@ const DeviceAction = <R, H, P>({
     initSellRequested,
     initSellResult,
     initSellError,
+    isAddingPass,
+    addResult,
   } = hookState;
 
   const type = useTheme("colors.palette.type");
@@ -141,6 +144,10 @@ const DeviceAction = <R, H, P>({
 
   if (initSellRequested && !initSellResult && !initSellError) {
     return renderSellDeviceConfirmation({ modelId, type });
+  }
+
+  if (isAddingPass && !error && !addResult) {
+    return renderPasswordConfirmation({ modelId, type });
   }
 
   if (allowOpeningRequestedWording || requestOpenApp) {

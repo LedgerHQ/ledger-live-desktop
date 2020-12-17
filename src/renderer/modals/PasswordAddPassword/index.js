@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { closeModal } from "~/renderer/actions/modals";
@@ -16,10 +16,15 @@ import { mockedEventEmitter } from "~/renderer/components/DebugMock";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 
 const initialState = {
-  getNamesError: null,
-  getNamesResult: null,
+  addResult: null,
   isNanoPassLoading: true,
+  isAddingPass: false,
+  error: null,
 };
+const reducer = (state, update) => ({
+  ...state,
+  ...update,
+});
 const createAction = connectAppExec => {
   const useHook = (reduxDevice, request) => {
     const appState = createAppAction(connectAppExec).useHook(reduxDevice, {
@@ -28,13 +33,23 @@ const createAction = connectAppExec => {
 
     const { device, opened } = appState;
 
-    const [state, setState] = useState(initialState);
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
       if (!opened || !device) {
-        setState(initialState);
+        dispatch(initialState);
         return;
       }
+
+      if (state.isAddingPass || state.addResult || state.error) {
+        return;
+      }
+
+      dispatch({
+        isAddingPass: true,
+      });
+
+      console.log("add");
 
       command("addNameAndPass")({
         deviceId: device.deviceId,
@@ -44,19 +59,27 @@ const createAction = connectAppExec => {
         .toPromise()
         .then(
           result =>
-            setState({
-              ...state,
-              getNamesResult: result,
+            dispatch({
+              addResult: true,
+              isAddingPass: false,
               isNanoPassLoading: false,
             }),
           err =>
-            setState({
-              ...state,
-              getNamesError: err,
+            dispatch({
+              error: err,
+              isAddingPass: false,
               isNanoPassLoading: false,
             }),
         );
-    }, [device, opened, request.name, request.password, state]);
+    }, [
+      device,
+      opened,
+      request.name,
+      request.password,
+      state.addResult,
+      state.error,
+      state.isAddingPass,
+    ]);
 
     return {
       ...appState,
@@ -67,8 +90,8 @@ const createAction = connectAppExec => {
   return {
     useHook,
     mapResult: r => ({
-      names: r.getNamesResult,
-      error: r.getNamesError,
+      result: r.addResult,
+      error: r.error,
     }),
   };
 };
@@ -76,7 +99,7 @@ const createAction = connectAppExec => {
 const action = createAction(getEnv("MOCK") ? mockedEventEmitter : command("connectApp"));
 
 type Props = {
-  onAddPassword: Function,
+  onUpdate: Function,
 };
 
 const PasswordAddPassword = (props: Props) => {
@@ -85,6 +108,7 @@ const PasswordAddPassword = (props: Props) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
+  const [onAddPassword, setOnAddPassword] = useState(false);
 
   const isValid = () => confirmPassword === newPassword;
 
@@ -101,9 +125,7 @@ const PasswordAddPassword = (props: Props) => {
       return;
     }
 
-    props.onAddPassword({ name, newPassword });
-
-    onClose();
+    setOnAddPassword({ name, password: newPassword });
   };
 
   const handleInputChange = (key: string) => (value: string) => {
@@ -128,42 +150,65 @@ const PasswordAddPassword = (props: Props) => {
   };
 
   return (
-    <Modal name="MODAL_PASSWORD_ADD_PASSWORD" centered>
-      <ModalBody
-        title={t("llpassword.addpassword.title")}
-        onHide={handleReset}
-        onClose={onClose}
-        render={() => (
-          <Body
-            onSubmit={handleSave}
-            newPassword={newPassword}
-            confirmPassword={confirmPassword}
-            name={name}
-            isValid={isValid}
-            onChange={handleInputChange}
-            t={t}
-          />
-        )}
-        renderFooter={() => (
-          <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
-            <Button small type="button" onClick={onClose} id="modal-cancel-button">
-              {t("common.cancel")}
-            </Button>
-            <Button
-              small
-              primary
-              onClick={handleSave}
-              disabled={
-                !isValid() || !newPassword.length || !confirmPassword.length || !name.length
-              }
-              id="modal-save-button"
-            >
-              {t("common.save")}
-            </Button>
-          </Box>
-        )}
-      />
-    </Modal>
+    <>
+      <SyncSkipUnderPriority priority={999} />
+      <Modal name="MODAL_PASSWORD_ADD_PASSWORD" centered>
+        <ModalBody
+          title={t("llpassword.addpassword.title")}
+          onHide={handleReset}
+          onClose={onClose}
+          render={() => (
+            <>
+              {!onAddPassword ? (
+                <Body
+                  onSubmit={handleSave}
+                  newPassword={newPassword}
+                  confirmPassword={confirmPassword}
+                  name={name}
+                  isValid={isValid}
+                  onChange={handleInputChange}
+                  t={t}
+                />
+              ) : (
+                <DeviceAction
+                  onResult={() => {
+                    onClose();
+                    props.onUpdate();
+                  }}
+                  action={action}
+                  request={{
+                    name,
+                    password: newPassword,
+                  }}
+                />
+              )}
+            </>
+          )}
+          renderFooter={() => (
+            <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
+              <Button small type="button" onClick={onClose} id="modal-cancel-button">
+                {t("common.cancel")}
+              </Button>
+              <Button
+                small
+                primary
+                onClick={handleSave}
+                disabled={
+                  onAddPassword ||
+                  !isValid() ||
+                  !newPassword.length ||
+                  !confirmPassword.length ||
+                  !name.length
+                }
+                id="modal-save-button"
+              >
+                {t("common.save")}
+              </Button>
+            </Box>
+          )}
+        />
+      </Modal>
+    </>
   );
 };
 

@@ -16,7 +16,7 @@ type Props = {
 };
 
 const initialState = {
-  getNamesError: null,
+  error: null,
   getNamesResult: null,
   isNanoPassLoading: true,
 };
@@ -36,6 +36,10 @@ const createAction = connectAppExec => {
         return;
       }
 
+      if (state.getNamesResult || state.error) {
+        return;
+      }
+
       command("getNames")({
         deviceId: device.deviceId,
       })
@@ -50,7 +54,7 @@ const createAction = connectAppExec => {
           err =>
             setState({
               ...state,
-              getNamesError: err,
+              error: err,
               isNanoPassLoading: false,
             }),
         );
@@ -66,7 +70,7 @@ const createAction = connectAppExec => {
     useHook,
     mapResult: r => ({
       names: r.getNamesResult,
-      error: r.getNamesError,
+      error: r.error,
     }),
   };
 };
@@ -81,7 +85,7 @@ const Index = ({ history, location, match }: Props) => {
     <>
       <SyncSkipUnderPriority priority={999} />
       {result ? (
-        <Password {...result} />
+        <Password {...result} onUpdate={() => setResult()} />
       ) : (
         <DeviceAction onResult={setResult} action={action} request={{}} />
       )}

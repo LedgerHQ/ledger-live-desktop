@@ -370,6 +370,23 @@ export const renderConnectYourDevice = ({
   </Wrapper>
 );
 
+export const renderPasswordConfirmation = ({
+  modelId,
+  type,
+}: {
+  modelId: DeviceModelId,
+  type: "light" | "dark",
+}) => (
+  <>
+    {renderVerifyUnwrapped({ modelId, type })}
+    <Box id="swap-modal-device-confirm" alignItems={"center"}>
+      <Text textAlign="center" ff="Inter|SemiBold" color="palette.text.shade100" fontSize={5}>
+        Please validate the action on the device
+      </Text>
+    </Box>
+  </>
+);
+
 export const renderSwapDeviceConfirmation = ({
   modelId,
   type,
