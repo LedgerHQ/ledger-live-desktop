@@ -172,6 +172,7 @@ const PasswordAddPassword = (props: Props) => {
                   newPassword={newPassword}
                   confirmPassword={confirmPassword}
                   name={name}
+                  description={description}
                   isValid={isValid}
                   onChange={handleInputChange}
                   t={t}
