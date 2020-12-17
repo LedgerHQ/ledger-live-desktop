@@ -94,6 +94,14 @@ const Password = ({ ...props }: Props) => {
                         }),
                       );
                     }}
+                    onShow={() => {
+                      console.log("show");
+                      dispatch(
+                        openModal("MODAL_PASSWORD_SHOW_PASSWORD", {
+                          passName: name,
+                        }),
+                      );
+                    }}
                   />
                 </Box>
               </Row>

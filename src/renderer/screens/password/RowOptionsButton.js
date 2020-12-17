@@ -61,7 +61,7 @@ const OptionsButton = (props) => {
       key: "showPassword",
       label: t("llpassword.optionsRow.showPassword"),
       icon: <IconEye size={16} />,
-      onClick: () => {},
+      onClick: () => props.onShow(),
     },
     {
       key: "deletePassword",
