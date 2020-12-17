@@ -8,6 +8,7 @@ import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 type Input = {
   deviceId: string,
   name: string,
+  description: string,
   password: string,
   description: string,
 };
