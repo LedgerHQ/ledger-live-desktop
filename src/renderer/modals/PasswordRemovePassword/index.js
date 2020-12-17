@@ -131,7 +131,7 @@ const PasswordRemovePassword = (props: Props) => {
           render={() => (
             <>
               {!onAddPassword ? (
-                <span>Are you sure you want to delete {props.passName} ?</span>
+                <span>Are you sure you want to delete <b>{props.passName}</b> ?</span>
               ) : (
                 <DeviceAction
                   onResult={() => {
