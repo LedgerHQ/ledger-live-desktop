@@ -130,7 +130,7 @@ const PasswordShowPassword = (props: Props) => {
           render={() => (
             <>
               {!onAddPassword ? (
-                <span>Are you sure you want to show {props.passName} ?</span>
+                <span>Are you sure you want to show <b>{props.passName}</b>?</span>
               ) : (
                 <DeviceAction
                   onResult={result => {
