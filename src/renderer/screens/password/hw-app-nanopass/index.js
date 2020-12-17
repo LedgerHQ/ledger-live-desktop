@@ -64,7 +64,6 @@ export default class NanoPass {
     return result;
   }
 
-
   /**
    * @param name Password name
    * @return password string
@@ -73,6 +72,15 @@ export default class NanoPass {
     const response = await this.transport.send(0x80, 0x05, 0, 0,
       this.stringToBuf(name, 32));
     return this.bufToString(response.slice(0, response.length-2));
+  }
+
+  /**
+   * @param name Password name
+   * @return password string
+   */
+  async showByName(name: string): string {
+    const response = await this.transport.send(0x80, 0x0d, 0, 0,
+      this.stringToBuf(name, 32));
   }
 
   /**

@@ -15,6 +15,8 @@ import {
   SettingsSectionRow as Row,
 } from "../settings/SettingsSection";
 import _ from "lodash";
+import OptionsButton from "./OptionsButton";
+import RowOptionsButton from "./RowOptionsButton";
 
 type Props = {
   names: *,
@@ -49,9 +51,12 @@ const Password = ({ ...props }: Props) => {
           horizontal
         >
           {t("llpassword.title")}
-          <Button event="Add" small primary onClick={onAddPassword}>
+          <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
+            <Button event="Add" small primary onClick={onAddPassword}>
             {t("llpassword.add")}
-          </Button>
+            </Button>
+            <OptionsButton />
+          </Box>
         </Box>
         <Section>
           <TrackPage category="Password" name="Index" />
@@ -65,9 +70,12 @@ const Password = ({ ...props }: Props) => {
           <Body>
             {_.map(props.names, (name: string) => (
               <Row title={name} desc={`Your password is secure!`}>
-                <Button event="Copy passwd" small primary onClick={() => {}}>
-                  {t("llpassword.copy")}
-                </Button>
+                <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
+                  <Button event="Copy passwd" small primary onClick={() => {}}>
+                    {t("llpassword.copy")}
+                  </Button>
+                  <RowOptionsButton />
+                </Box>
               </Row>
             ))}
             {props.error ? (
