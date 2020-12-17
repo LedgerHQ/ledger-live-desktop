@@ -94,7 +94,7 @@ export default class NanoPass {
    */
   async add(name: string, description: string, password: string) {
     let data = this.stringToBuf(name, 32);
-    data = Buffer.concat([data, this.stringToBuf(description)]);
+    data = Buffer.concat([data, this.stringToBuf(description, 64)]);
     let p1 = 0;
     if (password.length == 0) {
       p1 = 1;
