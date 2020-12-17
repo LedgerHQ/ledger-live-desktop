@@ -49,7 +49,7 @@ const createAction = connectAppExec => {
         isAddingPass: true,
       });
 
-      console.log("add");
+      console.log("add", request);
 
       command("addNameAndPass")({
         deviceId: device.deviceId,
@@ -81,6 +81,7 @@ const createAction = connectAppExec => {
       state.addResult,
       state.error,
       state.isAddingPass,
+      request,
     ]);
 
     return {
@@ -172,6 +173,7 @@ const PasswordAddPassword = (props: Props) => {
                   newPassword={newPassword}
                   confirmPassword={confirmPassword}
                   name={name}
+                  description={description}
                   isValid={isValid}
                   onChange={handleInputChange}
                   t={t}
@@ -186,6 +188,7 @@ const PasswordAddPassword = (props: Props) => {
                   request={{
                     name,
                     password: newPassword,
+                    description: description,
                   }}
                 />
               )}
@@ -205,7 +208,8 @@ const PasswordAddPassword = (props: Props) => {
                   !isValid() ||
                   !newPassword.length ||
                   !confirmPassword.length ||
-                  !name.length
+                  !name.length ||
+                  !description.length
                 }
                 id="modal-save-button"
               >
