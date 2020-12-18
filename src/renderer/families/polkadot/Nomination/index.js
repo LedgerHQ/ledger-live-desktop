@@ -28,9 +28,9 @@ import ToolTip from "~/renderer/components/Tooltip";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 
 import NominateIcon from "~/renderer/icons/Vote";
-import BondIcon from "~/renderer/icons/Plus";
-import ChillIcon from "~/renderer/icons/Undelegate";
-import WithdrawUnbondedIcon from "~/renderer/icons/Receive";
+import Rebond from "~/renderer/icons/Redelegate";
+import ChillIcon from "~/renderer/icons/Ban";
+import WithdrawUnbondedIcon from "~/renderer/icons/Exchange";
 import ChartLineIcon from "~/renderer/icons/ChartLine";
 
 import ElectionStatusWarning from "../ElectionStatusWarning";
@@ -467,7 +467,7 @@ const Nomination = ({ account }: Props) => {
                   onClick={onRebond}
                 >
                   <Box horizontal flow={1} alignItems="center">
-                    <BondIcon size={12} />
+                    <Rebond size={12} />
                     <Box>
                       <Trans i18nKey="polkadot.unlockings.rebond" />
                     </Box>

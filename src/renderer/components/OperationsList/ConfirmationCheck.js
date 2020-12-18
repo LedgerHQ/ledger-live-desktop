@@ -22,6 +22,9 @@ import IconFees from "~/renderer/icons/Fees";
 import IconTrash from "~/renderer/icons/Trash";
 import IconSupply from "~/renderer/icons/Supply";
 import IconWithdraw from "~/renderer/icons/Withdraw";
+import IconLink from "~/renderer/icons/LinkIcon";
+import IconExchange from "~/renderer/icons/Exchange";
+import IconBan from "~/renderer/icons/Ban";
 
 import Freeze from "~/renderer/icons/Freeze";
 import Unfreeze from "~/renderer/icons/Unfreeze";
@@ -106,12 +109,12 @@ const iconsComponent = {
   REDEEM: IconWithdraw,
   SUPPLY: IconSupply,
   APPROVE: IconPlus,
-  BOND: Freeze,
-  UNBOND: Unfreeze,
-  WITHDRAW_UNBONDED: ClaimRewards,
+  BOND: IconLink,
+  UNBOND: IconUndelegate,
+  WITHDRAW_UNBONDED: IconExchange,
   SLASH: IconTrash,
   NOMINATE: Vote,
-  CHILL: IconUndelegate,
+  CHILL: IconBan,
   REWARD_PAYOUT: ClaimRewards,
 };
 

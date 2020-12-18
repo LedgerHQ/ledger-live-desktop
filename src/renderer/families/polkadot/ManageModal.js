@@ -14,11 +14,11 @@ import { openModal } from "~/renderer/actions/modals";
 import Box from "~/renderer/components/Box";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
 
-import BondIcon from "~/renderer/icons/Plus";
-import UnbondIcon from "~/renderer/icons/Minus";
+import BondIcon from "~/renderer/icons/LinkIcon";
+import UnbondIcon from "~/renderer/icons/Undelegate";
 import NominateIcon from "~/renderer/icons/Vote";
-import ChillIcon from "~/renderer/icons/Undelegate";
-import WithdrawUnbondedIcon from "~/renderer/icons/Receive";
+import ChillIcon from "~/renderer/icons/Ban";
+import WithdrawUnbondedIcon from "~/renderer/icons/Exchange";
 
 import Text from "~/renderer/components/Text";
 
