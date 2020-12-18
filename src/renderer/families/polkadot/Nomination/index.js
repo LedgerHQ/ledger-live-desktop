@@ -289,7 +289,7 @@ const Nomination = ({ account }: Props) => {
                 <Box horizontal flow={1} alignItems="center">
                   <NominateIcon size={12} />
                   <Box>
-                    <Trans i18nKey="polkadot.nomination.update" />
+                    <Trans i18nKey="polkadot.nomination.nominate" />
                   </Box>
                 </Box>
               </Button>

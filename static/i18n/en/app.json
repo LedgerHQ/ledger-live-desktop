@@ -1804,11 +1804,11 @@
     }
   },
   "polkadot": {
-    "lockedBalance": "Bonded balance",
+    "lockedBalance": "Bonded",
     "lockedTooltip": "Bonded assets can be used to nominate validators and earn rewards.",
-    "unlockingBalance": "Unbonding balance",
+    "unlockingBalance": "Unbonding",
     "unlockingTooltip": "Unbonding assets stay locked during 28 days before being available for withdrawal.",
-    "unlockedBalance": "Unbonded balance",
+    "unlockedBalance": "Unbonded",
     "unlockedTooltip": "Unbonded assets can now be withdrawn with a transaction.",
     "nomination": {
       "emptyState": {
@@ -1816,15 +1816,14 @@
         "info": "How nomination works"
       },
       "header": "Nominations",
-      "update": "Change validators",
       "nominate": "Nominate",
-      "chill": "Stop nominating",
+      "chill": "Clear nominations",
       "totalStake": "Total Stake",
       "commission": "Commission",
       "active": "Active",
       "activeTooltip": "This validator has been elected and is collecting rewards with some of your bonded assets.",
       "inactive": "Inactive",
-      "inactiveTooltip": "This validator has been elected and is not collecting rewards with your stake.",
+      "inactiveTooltip": "This validator has been elected but is not collecting rewards with your stake.",
       "waiting": "Unelected",
       "waitingTooltip": "This validator has not been elected therefore is not collecting rewards.",
       "notValidator": "Not a validator",
@@ -1836,9 +1835,9 @@
       "electionOpen": "The election of new validators is currently ongoing. As such staking operations are not available for at most 15 minutes.",
       "electionOpenTooltip": "This operation is disabled during validators election",
       "externalControllerTooltip": "This account is controlled by another account.",
-      "externalControllerUnsupported": "<0>This account is controlled by another account with address <0>{{address}}</0>.</0><1>Staking operations on Stash controlled by an external account are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js.</1>",
+      "externalControllerUnsupported": "<0>This account is controlled by another account with address <0>{{address}}</0>.</0><1>Staking operations on a Stash controlled by an external account are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js.</1>",
       "externalStashTooltip": "This account controls another account.",
-      "externalStashUnsupported": "<0>This account controls an external Stash account with address <0>{{address}}</0>.</0><1>Staking operations on external Stash are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js.</1>",
+      "externalStashUnsupported": "<0>This account controls an external Stash account with address <0>{{address}}</0>.</0><1>Staking operations on an external Stash are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js.</1>",
       "showInactiveNominations": "Show inactive nominations ({{count}})",
       "hideInactiveNominations": "Hide inactive nominations",
       "noActiveNominations": "There are no active nominations.",
@@ -1848,9 +1847,8 @@
     "unlockings": {
       "header": "Unbondings",
       "headerTooltip": "Available after the 28-day timelock",
-      "inactiveTooltip": "Unbonded amounts do not generate rewards.",
       "withdrawUnbonded": "Withdraw Unbonded",
-      "withdrawTooltip": "Transfers back unbonded balance.",
+      "withdrawTooltip": "Transfers the unbonded balance to your available balance.",
       "noUnlockedWarning": "No unbonded balance to withdraw yet.",
       "rebond": "Rebond",
       "unbonded": "Unbonded"
@@ -1874,7 +1872,7 @@
         "description": "Choose up to 16 validators to be elected to start earning rewards."
       },
       "chill": {
-        "title": "Stop nominating",
+        "title": "Clear nominations",
         "description": "Remove all your nominations and stop earning rewards."
       }
     },
@@ -1906,11 +1904,11 @@
     "bond": {
       "title": "Bond assets",
       "rewardDestination": {
-        "label": "Reward Destination",
+        "label": "Rewards Destination",
         "stash": "Available Balance",
-        "stashDescription": "The rewards will be transferred to the current account as available balance.",
+        "stashDescription": "The rewards will be transferred to your available balance.",
         "staked": "Bonded Balance",
-        "stakedDescription": "The rewards will be transferred to the current account as bonded balance."
+        "stakedDescription": "The rewards will be transferred to your bonded balance."
       },
       "steps": {
         "starter": {
@@ -1927,15 +1925,15 @@
           "title": "Amount",
           "amountLabel": "Amount to bond",
           "availableLabel": "Available",
-          "maxLabel": "Bond Max",
-          "info": "Once assets are bonded they can be unbonded any time, but they will be locked for 28-days."
+          "maxLabel": "Max",
+          "info": "Once assets are bonded they can be unbonded any time, but they will be locked for 28-day."
         },
         "connectDevice": {
           "title": "Device"
         },
         "confirmation": {
           "tooltip": {
-            "title": "Transaction is awaiting validation",
+            "title": "Transaction is awaiting confirmation",
             "desc": "You have to wait a short time before being able to nominate"
           },
           "title": "Confirmation",
@@ -1960,7 +1958,7 @@
           "title": "Amount",
           "amountLabel": "Amount to rebond",
           "availableLabel": "Unbonding",
-          "maxLabel": "Rebond Max",
+          "maxLabel": "Max",
           "info": "Rebonded assets will be immediately added to bonded balance."
         },
         "connectDevice": {
@@ -1970,7 +1968,7 @@
           "title": "Confirmation",
           "label": "Confirmation",
           "success": {
-            "title": "Assets successfully rebonded.",
+            "title": "Assets successfully rebonded",
             "text": "Your account balance will update once the network has confirmed the transaction.",
             "cta": "View details"
           },
@@ -1988,7 +1986,7 @@
           "title": "Amount",
           "amountLabel": "Amount to unbond",
           "availableLabel": "Bonded",
-          "maxLabel": "Unbond Max",
+          "maxLabel": "Max",
           "info": "Unbonded assets can be withdrawn after a 28-day timelock period."
         },
         "connectDevice": {
@@ -1998,8 +1996,8 @@
           "title": "Confirmation",
           "label": "Confirmation",
           "success": {
-            "title": "Assets successfully unbonded",
-            "text": "Unbonded assets can be withdrawn in 28-days.",
+            "title": "Unbond transaction sent successfully",
+            "text": "Unbonded assets can be withdrawn in 28 days.",
             "cta": "View details"
           },
           "pending": {
@@ -2033,7 +2031,7 @@
           "title": "Confirmation",
           "label": "Confirmation",
           "success": {
-            "title": "Transaction successfully sent !",
+            "title": "Transaction sent successfully",
             "text": "You will see your operation in history soon.",
             "cta": "View details"
           },

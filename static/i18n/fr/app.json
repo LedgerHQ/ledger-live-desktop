@@ -1816,7 +1816,6 @@
         "info": "Comment fonctionne la nomination"
       },
       "header": "Nominations",
-      "update": "Changer les validateurs",
       "nominate": "Nominer",
       "chill": "Ne plus nominer",
       "totalStake": "Participation totale",
@@ -1935,7 +1934,7 @@
         },
         "confirmation": {
           "tooltip": {
-            "title": "Transaction en attente de validation",
+            "title": "Transaction en attente de confirmation",
             "desc": "Vous devez attendre un petit moment avant de pouvoir nominer."
           },
           "title": "Confirmation",
