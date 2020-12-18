@@ -81,7 +81,10 @@ export const OperationDetailsValidators = ({
     <Box>
       {!isTransactionField && (
         <OpDetailsTitle>
-          <Trans i18nKey={"operationDetails.extra.validators"} />
+          <Trans
+            i18nKey={"operationDetails.extra.validatorsCount"}
+            values={{ number: mappedValidators.length }}
+          />
         </OpDetailsTitle>
       )}
 
