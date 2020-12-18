@@ -3417,11 +3417,32 @@
     "SwapExchangeRateAmountTooHigh": {
       "title": "Le montant doit être inférieur à {{unit}} {{maxAmountFrom}}"
     },
+    "PolkadotElectionClosed": {
+      "title": "L'élection des validateurs doit être clôturée"
+    },
+    "PolkadotNotValidator": {
+      "title": "Certaines adresses selectionnées ne sont pas des validateurs"
+    },
     "PolkadotLowBondedBalance": {
       "title": "Tous les actifs débloquables seront déliés si il reste < 1 DOT"
     },
+    "PolkadotNoUnlockedBalance": {
+      "title": "Vous n'avez aucun actif délié"
+    },
+    "PolkadotNoNominations": {
+      "title": "Vous n'avez nominé aucun validateur"
+    },
     "PolkadotBondAllFundsWarning": {
       "title": "Vous n'aurez plus de fonds disponibles pour de futures transactions"
+    },
+    "PolkadotBondMinimumAmount": {
+      "title": "Vous devez lier au moins 1 DOT"
+    },
+    "PolkadotMaxUnbonding": {
+      "title": "Vous avez dépassé la limite pour délier"
+    },
+    "PolkadotValidatorsRequired": {
+      "title": "Vous devez selectionner au moins 1 validateur"
     }
   }
 }

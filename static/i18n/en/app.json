@@ -3415,11 +3415,32 @@
     "SwapExchangeRateAmountTooHigh": {
       "title": "Amount must be less than {{unit}} {{maxAmountFrom}}"
     },
+    "PolkadotElectionClosed": {
+      "title": "Validators election must be closed"
+    },
+    "PolkadotNotValidator": {
+      "title": "Some selected addresses are not validators"
+    },
     "PolkadotLowBondedBalance": {
       "title": "All unlockable assets will be unbonded if remaining < 1 DOT"
     },
+    "PolkadotNoUnlockedBalance": {
+      "title": "You have no unbonded assets"
+    },
+    "PolkadotNoNominations": {
+      "title": "You have no nominations"
+    },
     "PolkadotBondAllFundsWarning": {
       "title": "You will not have available balance for future transactions"
+    },
+    "PolkadotBondMinimumAmount": {
+      "title": "You must bond at least 1 DOT"
+    },
+    "PolkadotMaxUnbonding": {
+      "title": "You have exceeded the unbond limit"
+    },
+    "PolkadotValidatorsRequired": {
+      "title": "You must select at least 1 validator"
     }
   }
 }
