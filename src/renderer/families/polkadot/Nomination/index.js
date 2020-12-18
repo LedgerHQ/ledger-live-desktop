@@ -29,7 +29,6 @@ import InfoCircle from "~/renderer/icons/InfoCircle";
 
 import NominateIcon from "~/renderer/icons/Vote";
 import Rebond from "~/renderer/icons/Redelegate";
-import ChillIcon from "~/renderer/icons/Ban";
 import WithdrawUnbondedIcon from "~/renderer/icons/Exchange";
 import ChartLineIcon from "~/renderer/icons/ChartLine";
 
@@ -127,15 +126,6 @@ const Nomination = ({ account }: Props) => {
   const onNominate = useCallback(() => {
     dispatch(
       openModal("MODAL_POLKADOT_NOMINATE", {
-        account,
-      }),
-    );
-  }, [account, dispatch]);
-
-  const onChill = useCallback(() => {
-    dispatch(
-      openModal("MODAL_POLKADOT_SIMPLE_OPERATION", {
-        mode: "chill",
         account,
       }),
     );
@@ -304,30 +294,6 @@ const Nomination = ({ account }: Props) => {
                 </Box>
               </Button>
             </ToolTip>
-            {hasNominations ? (
-              <ToolTip
-                content={
-                  !nominateEnabled && electionOpen ? (
-                    <Trans i18nKey="polkadot.nomination.electionOpenTooltip" />
-                  ) : null
-                }
-              >
-                <Button
-                  id={"account-chill-button"}
-                  disabled={!nominateEnabled}
-                  danger
-                  small
-                  onClick={onChill}
-                >
-                  <Box horizontal flow={1} alignItems="center">
-                    <ChillIcon size={12} />
-                    <Box>
-                      <Trans i18nKey="polkadot.nomination.chill" />
-                    </Box>
-                  </Box>
-                </Button>
-              </ToolTip>
-            ) : null}
           </Box>
         ) : null}
       </Box>
@@ -425,6 +391,27 @@ const Nomination = ({ account }: Props) => {
             <Box horizontal>
               <ToolTip
                 content={
+                  electionOpen ? <Trans i18nKey="polkadot.nomination.electionOpenTooltip" /> : null
+                }
+              >
+                <Button
+                  id={"account-rebond-button"}
+                  disabled={electionOpen}
+                  mr={2}
+                  primary
+                  small
+                  onClick={onRebond}
+                >
+                  <Box horizontal flow={1} alignItems="center">
+                    <Rebond size={12} />
+                    <Box>
+                      <Trans i18nKey="polkadot.unlockings.rebond" />
+                    </Box>
+                  </Box>
+                </Button>
+              </ToolTip>
+              <ToolTip
+                content={
                   withdrawEnabled ? (
                     <Trans i18nKey="polkadot.unlockings.withdrawTooltip" />
                   ) : (
@@ -441,7 +428,6 @@ const Nomination = ({ account }: Props) => {
                 <Button
                   id={"account-withdraw-button"}
                   disabled={!withdrawEnabled}
-                  mr={2}
                   primary
                   small
                   onClick={onWithdrawUnbonded}
@@ -450,26 +436,6 @@ const Nomination = ({ account }: Props) => {
                     <WithdrawUnbondedIcon size={12} />
                     <Box>
                       <Trans i18nKey="polkadot.unlockings.withdrawUnbonded" />
-                    </Box>
-                  </Box>
-                </Button>
-              </ToolTip>
-              <ToolTip
-                content={
-                  electionOpen ? <Trans i18nKey="polkadot.nomination.electionOpenTooltip" /> : null
-                }
-              >
-                <Button
-                  id={"account-rebond-button"}
-                  disabled={electionOpen}
-                  primary
-                  small
-                  onClick={onRebond}
-                >
-                  <Box horizontal flow={1} alignItems="center">
-                    <Rebond size={12} />
-                    <Box>
-                      <Trans i18nKey="polkadot.unlockings.rebond" />
                     </Box>
                   </Box>
                 </Button>
