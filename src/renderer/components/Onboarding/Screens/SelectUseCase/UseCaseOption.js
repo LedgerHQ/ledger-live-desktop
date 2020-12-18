@@ -47,9 +47,9 @@ const UseCaseOptionContainer: ThemedComponent<*> = styled.button`
 `;
 
 type UseCaseOptionProps = {
-  heading: string,
-  title: string,
-  description: string,
+  heading: React$Node,
+  title: React$Node,
+  description: React$Node,
   Illu: React$Node,
   onClick: () => void,
   id?: string,

@@ -13,6 +13,7 @@ import { urls } from "~/config/urls";
 import { WaveContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import { AnimatedWave } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/AnimatedWave";
 import useTheme from "~/renderer/hooks/useTheme";
+import FakeLink from "~/renderer/components/FakeLink";
 
 const WelcomeContainer: ThemedComponent<*> = styled.div`
   height: 100%;
@@ -80,12 +81,14 @@ export function Welcome({ sendEvent }: Props) {
       </Button>
       <Text style={{ marginTop: 8 }} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={4}>
         <Trans i18nKey="onboarding.screens.welcome.noDevice">
-          <Text
-            style={{ cursor: "pointer", textDecorationSkip: "ink" }}
-            ff="Inter|SemiBold"
-            color="wallet"
-            onClick={buyNanoX}
-          />
+          <FakeLink onClick={buyNanoX}>
+            <Text
+              style={{ cursor: "pointer", textDecorationSkip: "ink" }}
+              ff="Inter|SemiBold"
+              color="wallet"
+              onClick={buyNanoX}
+            />
+          </FakeLink>
         </Trans>
       </Text>
     </WelcomeContainer>

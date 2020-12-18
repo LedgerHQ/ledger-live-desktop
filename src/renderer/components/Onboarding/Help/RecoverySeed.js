@@ -6,6 +6,9 @@ import Text from "~/renderer/components/Text";
 import styled from "styled-components";
 import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
 import ChevronRight from "~/renderer/icons/ChevronRight";
+import FakeLink from "~/renderer/components/FakeLink";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
 
 const PointContainer = styled.div`
   display: flex;
@@ -86,15 +89,17 @@ export function RecoverySeed() {
         >
           {t("onboarding.drawers.recoverySeed.paragraph2")}
         </Text>
-        <Text
-          mt="8px"
-          color="palette.text.shade100"
-          ff="Inter|Regular"
-          fontSize="14px"
-          lineHeight="19.5px"
-        >
-          {t("onboarding.drawers.recoverySeed.link")}
-        </Text>
+        <FakeLink onClick={() => openURL(urls.whatIsARecoveryPhrase)}>
+          <Text
+            mt="8px"
+            color="palette.primary.main"
+            ff="Inter|Regular"
+            fontSize="14px"
+            lineHeight="19.5px"
+          >
+            {t("onboarding.drawers.recoverySeed.link")}
+          </Text>
+        </FakeLink>
         <Text
           mt="40px"
           color="palette.text.shade100"

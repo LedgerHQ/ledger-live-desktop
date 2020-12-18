@@ -81,6 +81,8 @@ export const quizzMachineGenerator = (id, questions) => {
     context: {
       score: 0,
       results: {},
+      totalQuestions: questions.length,
+      currentQuestionIndex: 0,
     },
     states: {
       intro: {
@@ -114,6 +116,9 @@ export const quizzMachineGenerator = (id, questions) => {
       const resultId = `result-${index}`;
 
       config.states[questionId] = {
+        entry: assign({
+          currentQuestionIndex: index,
+        }),
         on: {
           ANSWERED: {
             target: resultId,
