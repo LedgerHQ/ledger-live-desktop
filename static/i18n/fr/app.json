@@ -1,8 +1,8 @@
 {
   "calendar": {
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "yesterday": "Yesterday"
+    "today": "Aujourd'hui",
+    "tomorrow": "Demain",
+    "yesterday": "Hier"
   },
   "common": {
     "labelYes": "Oui",
@@ -425,7 +425,7 @@
     "undelegatingTooltip": "Les actifs dont la délégation est interrompue sont verrouillés pendant 21 jours avant d'être disponibles."
   },
   "exchange": {
-    "title": "Buy and sell crypto",
+    "title": "Acheter et vendre des cryptos",
     "reset": "Réinitialiser",
     "banner": {
       "title": "Acheter des cryptomonnaies via notre partenaire",
@@ -1008,7 +1008,7 @@
   "DeviceAction": {
     "allowAppPermission": "Ouvrez l'application {{wording}} sur votre appareil",
     "allowAppPermissionSubtitleToken": "pour gérer vos tokens {{token}}",
-    "allowManagerPermission": "Allow {{wording}} on your device",
+    "allowManagerPermission": "Autoriser {{wording}} sur votre appareil",
     "loading": "Chargement en cours...",
     "connectAndUnlockDevice": "Connectez et déverrouillez votre appareil",
     "unlockDevice": "Déverrouillez votre appareil",
