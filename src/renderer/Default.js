@@ -62,6 +62,11 @@ export default function Default() {
         <BridgeSyncProvider>
           <ContextMenuWrapper>
             <ModalsLayer />
+            <DebugWrapper>
+              {process.env.DEBUG_THEME ? <DebugTheme /> : null}
+              {process.env.MOCK ? <DebugMock /> : null}
+              {process.env.DEBUG_UPDATE ? <DebugUpdater /> : null}
+            </DebugWrapper>
             <OnboardingOrElse>
               <IsNewVersion />
               <SyncNewAccounts priority={2} />
@@ -92,11 +97,6 @@ export default function Default() {
 
               <LibcoreBusyIndicator />
               <DeviceBusyIndicator />
-              <DebugWrapper>
-                {process.env.DEBUG_THEME ? <DebugTheme /> : null}
-                {process.env.MOCK ? <DebugMock /> : null}
-                {process.env.DEBUG_UPDATE ? <DebugUpdater /> : null}
-              </DebugWrapper>
               <KeyboardContent sequence="BJBJBJ">
                 <PerfIndicator />
               </KeyboardContent>

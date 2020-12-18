@@ -10,11 +10,11 @@ import Text from "~/renderer/components/Text";
 
 const statusToDebug: UpdateStatus[] = [
   "idle",
-  "download-progress",
   "checking",
   "check-success",
-  "error",
   "update-available",
+  "download-progress",
+  "error",
 ];
 
 const DebugUpdater = () => {
@@ -35,6 +35,7 @@ const DebugUpdater = () => {
               <Box horizontal key={i}>
                 <Text
                   mx={1}
+                  id={`app-update-debug-${s}`}
                   ff={status === s ? "Inter|Bold" : "Inter|Medium"}
                   color="palette.text.shade100"
                   fontSize={3}

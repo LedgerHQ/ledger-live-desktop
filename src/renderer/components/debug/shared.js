@@ -35,7 +35,7 @@ const DebugWrapper: ThemedComponent<{}> = styled.div`
   &:empty {
     display: none;
   }
-  ${process.env.DISABLE_MOCK_POINTER_EVENTS ? "pointer-events: none;" : ""}
+  ${process.env.DISABLE_MOCK_POINTER_EVENTS === "true" ? "pointer-events: none;" : ""}
   display: flex;
   flex-direction: row;
   position: absolute;
