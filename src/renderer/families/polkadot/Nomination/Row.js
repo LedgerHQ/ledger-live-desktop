@@ -22,6 +22,7 @@ import CheckCircle from "~/renderer/icons/CheckCircle";
 import ClockIcon from "~/renderer/icons/Clock";
 import ExclamationCircle from "~/renderer/icons/ExclamationCircle";
 import ToolTip from "~/renderer/components/Tooltip";
+import ExternalLink from "~/renderer/icons/ExternalLink";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 
 const Wrapper: ThemedComponent<*> = styled.div`
@@ -31,20 +32,38 @@ const Wrapper: ThemedComponent<*> = styled.div`
   padding: 16px 20px;
 `;
 
-const Column: ThemedComponent<{ clickable?: boolean }> = styled(TableLine).attrs(p => ({
+const Column: ThemedComponent = styled(TableLine).attrs(p => ({
   ff: "Inter|SemiBold",
-  color: p.strong ? "palette.text.shade100" : "palette.text.shade80",
+  color: "palette.text.shade80",
+  fontSize: 3,
+}))``;
+
+const IconContainer: ThemedComponent<*> = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: ${p => p.theme.colors.palette.primary.main};
+`;
+
+const ValidatorName: ThemedComponent = styled(TableLine).attrs(p => ({
+  ff: "Inter|SemiBold",
+  color: "palette.text.shade100",
   fontSize: 3,
 }))`
-  cursor: ${p => (p.clickable ? "pointer" : "cursor")};
-  ${p =>
-    p.clickable
-      ? `
-    &:hover {
-      color: ${p.theme.colors.palette.primary.main};
-    }
-    `
-      : ``}
+  cursor: pointer;
+  ${IconContainer} {
+    opacity: 0;
+  }
+
+  &:hover {
+    color: ${p => p.theme.colors.palette.primary.main};
+  }
+
+  &:hover > ${IconContainer} {
+    opacity: 1;
+  }
 `;
 
 const Ellipsis: ThemedComponent<{}> = styled.div`
@@ -112,12 +131,17 @@ export function Row({
 
   return (
     <Wrapper>
-      <Column strong clickable onClick={onExternalLinkClick}>
+      <ValidatorName onClick={onExternalLinkClick}>
         <Box mr={2}>
           <FirstLetterIcon label={name} />
         </Box>
-        <Ellipsis>{name}</Ellipsis>
-      </Column>
+        <ToolTip content={validator?.identity ? address : null}>
+          <Ellipsis>{name}</Ellipsis>
+        </ToolTip>
+        <IconContainer>
+          <ExternalLink size={16} />
+        </IconContainer>
+      </ValidatorName>
       <Column>
         {status === "active" && (
           <Box color="positiveGreen" pl={2}>

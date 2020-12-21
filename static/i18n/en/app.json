@@ -1830,7 +1830,9 @@
       "notValidatorTooltip": "This address is no longer a validator",
       "elected": "Elected",
       "nominatorsCount": "{{nominatorsCount}} nominators",
+      "nominatorsTooltip": "This validator has {{count}} rewarded nominators for this era",
       "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
+      "oversubscribedTooltip": "Only the {{maxNominatorRewardedPerValidator}} nominators with highest stake will earn rewards",
       "hasPendingBondOperation": "A bond operation is still pending confirmation",
       "electionOpen": "The election of new validators is currently ongoing. As such staking operations are not available for at most 15 minutes.",
       "electionOpenTooltip": "This operation is disabled during validators election",
@@ -3422,7 +3424,7 @@
       "title": "Some selected addresses are not validators"
     },
     "PolkadotLowBondedBalance": {
-      "title": "All unlockable assets will be unbonded if remaining < 1 DOT"
+      "title": "All bonded assets will be unbonded if < 1 DOT"
     },
     "PolkadotNoUnlockedBalance": {
       "title": "You have no unbonded assets"

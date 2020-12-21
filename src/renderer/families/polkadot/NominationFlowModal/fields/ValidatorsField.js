@@ -29,10 +29,9 @@ import ScrollLoadingList from "~/renderer/components/ScrollLoadingList";
 import ValidatorSearchInput, {
   NoResultPlaceholder,
 } from "~/renderer/components/Delegation/ValidatorSearchInput";
-import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 
 // Specific Validator Row
-import ValidatorRow, { IconContainer } from "./ValidatorRow";
+import ValidatorRow from "./ValidatorRow";
 
 const NominationsWarning: ThemedComponent<{}> = styled(Box).attrs(p => ({
   horizontal: true,
@@ -75,8 +74,9 @@ const ValidatorField = ({
 
   const unit = getAccountUnit(account);
 
-  const { validators: polkadotValidators } = usePolkadotPreloadData();
+  const { staking, validators: polkadotValidators } = usePolkadotPreloadData();
   const SR = useSortedValidators(search, polkadotValidators, nominations);
+  const { maxNominatorRewardedPerValidator } = staking;
 
   // Addresses that are no longer validators
   const nonValidators = nominations
@@ -132,20 +132,15 @@ const ValidatorField = ({
           key={`SR_${validator.address}_${i}`}
           validator={validator}
           unit={unit}
-          icon={
-            <IconContainer isSR>
-              <FirstLetterIcon label={validator.identity || validator.address} />
-            </IconContainer>
-          }
-          title={`${validator.identity || validator.address}`}
           isSelected={isSelected}
           onExternalLink={onExternalLink}
           onUpdateVote={onUpdateNomination}
           disabled={disabled}
+          maxNominatorRewardedPerValidator={maxNominatorRewardedPerValidator}
         />
       );
     },
-    [validators, unit, onExternalLink, onUpdateNomination],
+    [validators, unit, onExternalLink, onUpdateNomination, maxNominatorRewardedPerValidator],
   );
 
   if (!status) return null;

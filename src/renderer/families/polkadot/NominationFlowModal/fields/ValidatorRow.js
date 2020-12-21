@@ -12,9 +12,11 @@ import type { PolkadotValidator } from "@ledgerhq/live-common/lib/families/polka
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import CheckBox from "~/renderer/components/CheckBox";
+import ToolTip from "~/renderer/components/ToolTip";
 import ExternalLink from "~/renderer/icons/ExternalLink";
+import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 
-export const IconContainer: ThemedComponent<*> = styled.div`
+const IconContainer: ThemedComponent<*> = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +30,8 @@ export const IconContainer: ThemedComponent<*> = styled.div`
 const InfoContainer = styled(Box).attrs(() => ({
   vertical: true,
   ml: 2,
-  flex: 1,
+  flexShrink: 0,
+  mr: "auto",
 }))``;
 
 const Title = styled(Box).attrs(() => ({
@@ -85,7 +88,7 @@ const NominatorsCount = styled.span`
   font-size: 11px;
   font-weight: 700;
   color: ${p =>
-    p.isOversubscribed ? p.theme.colors.warning : p.theme.colors.palette.text.shade60};
+    p.isOversubscribed ? p.theme.colors.warning : p.theme.colors.palette.text.shade100};
 `;
 
 const Commission = styled.span`
@@ -142,6 +145,7 @@ type ValidatorRowProps = {
   title: React$Node,
   isSelected: boolean,
   disabled?: boolean,
+  maxNominatorRewardedPerValidator: number,
   onClick?: (*) => void,
   onUpdateVote?: (string, boolean) => void,
   onExternalLink: (address: string) => void,
@@ -155,12 +159,14 @@ const ValidatorRow = ({
   title,
   isSelected,
   disabled,
+  maxNominatorRewardedPerValidator,
   onUpdateVote,
   onExternalLink,
   onClick = () => {},
   style,
 }: ValidatorRowProps) => {
   const {
+    identity,
     address,
     commission,
     totalBonded,
@@ -206,14 +212,18 @@ const ValidatorRow = ({
   );
   return (
     <Row style={style} disabled={!!disabled} active={!!isSelected}>
-      {icon}
+      <IconContainer>
+        <FirstLetterIcon label={identity || address} />
+      </IconContainer>
       <InfoContainer>
-        <Title onClick={onTitleClick}>
-          <Text>{title}</Text>
-          <IconContainer>
-            <ExternalLink size={16} />
-          </IconContainer>
-        </Title>
+        <ToolTip content={identity ? address : null}>
+          <Title onClick={onTitleClick}>
+            <Text>{identity || address}</Text>
+            <IconContainer>
+              <ExternalLink size={16} />
+            </IconContainer>
+          </Title>
+        </ToolTip>
         <SubTitle>
           <Status isElected={isElected}>
             {isElected ? (
@@ -230,19 +240,37 @@ const ValidatorRow = ({
         </SubTitle>
       </InfoContainer>
       <SideInfo>
-        <NominatorsCount isOversubscribed={isOversubscribed}>
-          <Trans
-            i18nKey={
-              isOversubscribed
-                ? "polkadot.nomination.oversubscribed"
-                : "polkadot.nomination.nominatorsCount"
-            }
-            values={{ nominatorsCount }}
-          />
-        </NominatorsCount>
         <Commission>
           <Trans i18nKey="polkadot.nomination.commission" />: {formattedCommission}
         </Commission>
+        {isElected ? (
+          <ToolTip
+            content={
+              isOversubscribed ? (
+                <Trans
+                  i18nKey="polkadot.nomination.oversubscribedTooltip"
+                  values={{ maxNominatorRewardedPerValidator }}
+                />
+              ) : (
+                <Trans
+                  i18nKey="polkadot.nomination.nominatorsTooltip"
+                  values={{ count: nominatorsCount }}
+                />
+              )
+            }
+          >
+            <NominatorsCount isOversubscribed={isOversubscribed}>
+              <Trans
+                i18nKey={
+                  isOversubscribed
+                    ? "polkadot.nomination.oversubscribed"
+                    : "polkadot.nomination.nominatorsCount"
+                }
+                values={{ nominatorsCount }}
+              />
+            </NominatorsCount>
+          </ToolTip>
+        ) : null}
       </SideInfo>
       <CheckBox disabled={!isSelected && disabled} isChecked={isSelected} onChange={onToggle} />
     </Row>

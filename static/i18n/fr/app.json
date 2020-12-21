@@ -1830,7 +1830,9 @@
       "notValidatorTooltip": "Cette addresse a cessé d'être validateur",
       "elected": "Élu",
       "nominatorsCount": "{{nominatorsCount}} nominateurs",
+      "nominatorsTooltip": "Ce validateur a {{count}} nominateurs récompensés pour cette ère",
       "oversubscribed": "Sursouscrit ({{nominatorsCount}})",
+      "oversubscribedTooltip": "Seuls les {{maxNominatorRewardedPerValidator}} nominateurs avec les montants les plus élevés seront récompensés",
       "hasPendingBondOperation": "Une liaison d'actifs est en attente de confirmation",
       "electionOpen": "L'élection de nouveaux validateurs est en cours. Par conséquent les opérations de Staking sont indisponibles pour une durée pouvant atteindre 15 minutes.",
       "electionOpenTooltip": "Cette opération est désactivée pendant l'élection des validateurs",
@@ -3424,7 +3426,7 @@
       "title": "Certaines adresses selectionnées ne sont pas des validateurs"
     },
     "PolkadotLowBondedBalance": {
-      "title": "Tous les actifs débloquables seront déliés si il reste < 1 DOT"
+      "title": "Tous les actifs liés seront déliés si < 1 DOT"
     },
     "PolkadotNoUnlockedBalance": {
       "title": "Vous n'avez aucun actif délié"
