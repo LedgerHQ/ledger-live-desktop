@@ -2315,7 +2315,7 @@
           "pinCodeHowTo": {
             "setUp": {
               "title": "Choose PIN code",
-              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select ✔ to confirm your PIN code. Select ⌫ to erase a digit."
+              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <0></0> to confirm your PIN code. Select <1></1> to erase a digit."
             },
             "confirm": {
               "title": "Confirm PIN code",
