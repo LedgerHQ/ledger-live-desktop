@@ -3,6 +3,8 @@ import { BigNumber } from "bignumber.js";
 import React, { useCallback, useMemo, memo } from "react";
 import styled, { css } from "styled-components";
 import { Trans } from "react-i18next";
+import { Polkadot as PolkadotIdenticon } from "@polkadot/react-identicon/icons";
+
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import type { Unit } from "@ledgerhq/live-common/lib/types";
@@ -14,7 +16,6 @@ import Text from "~/renderer/components/Text";
 import CheckBox from "~/renderer/components/CheckBox";
 import ToolTip from "~/renderer/components/ToolTip";
 import ExternalLink from "~/renderer/icons/ExternalLink";
-import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 
 const IconContainer: ThemedComponent<*> = styled.div`
   display: flex;
@@ -22,8 +23,6 @@ const IconContainer: ThemedComponent<*> = styled.div`
   justify-content: center;
   width: 24px;
   height: 24px;
-  border-radius: 4px;
-  background-color: ${p => p.theme.colors.palette.divider};
   color: ${p => p.theme.colors.palette.text.shade60};
 `;
 
@@ -213,7 +212,7 @@ const ValidatorRow = ({
   return (
     <Row style={style} disabled={!!disabled} active={!!isSelected}>
       <IconContainer>
-        <FirstLetterIcon label={identity || address} />
+        <PolkadotIdenticon address={address} size={24} />
       </IconContainer>
       <InfoContainer>
         <ToolTip content={identity ? address : null}>

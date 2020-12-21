@@ -4,6 +4,8 @@ import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 import moment from "moment";
+import { Polkadot as PolkadotIdenticon } from "@polkadot/react-identicon/icons";
+
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
@@ -23,7 +25,6 @@ import ClockIcon from "~/renderer/icons/Clock";
 import ExclamationCircle from "~/renderer/icons/ExclamationCircle";
 import ToolTip from "~/renderer/components/Tooltip";
 import ExternalLink from "~/renderer/icons/ExternalLink";
-import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 
 const Wrapper: ThemedComponent<*> = styled.div`
   display: flex;
@@ -133,7 +134,7 @@ export function Row({
     <Wrapper>
       <ValidatorName onClick={onExternalLinkClick}>
         <Box mr={2}>
-          <FirstLetterIcon label={name} />
+          <PolkadotIdenticon address={address} size={24} />
         </Box>
         <ToolTip content={validator?.identity ? address : null}>
           <Ellipsis>{name}</Ellipsis>

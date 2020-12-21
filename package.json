@@ -47,6 +47,7 @@
     "@ledgerhq/ledger-core": "6.10.0",
     "@ledgerhq/live-common": "^17.8.0",
     "@ledgerhq/logs": "^5.38.0",
+    "@polkadot/react-identicon": "0.62.1",
     "@tippyjs/react": "^4.2.0",
     "@trust/keyto": "^1.0.1",
     "@xstate/inspect": "^0.4.1",
