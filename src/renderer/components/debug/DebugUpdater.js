@@ -20,7 +20,7 @@ const statusToDebug: UpdateStatus[] = [
 const DebugUpdater = () => {
   const [expanded, setExpanded] = useState(true);
   const context = useContext<MaybeUpdateContextType>(UpdaterContext);
-  const { status, setStatus, quitAndInstall } = context || {};
+  const { setStatus, quitAndInstall } = context || {};
   const toggleExpanded = useCallback(() => setExpanded(!expanded), [expanded, setExpanded]);
 
   return (
@@ -36,7 +36,7 @@ const DebugUpdater = () => {
                 <Text
                   mx={1}
                   id={`app-update-debug-${s}`}
-                  ff={status === s ? "Inter|Bold" : "Inter|Medium"}
+                  ff={"Inter|Medium"}
                   color="palette.text.shade100"
                   fontSize={3}
                   onClick={() => setStatus(s)}
