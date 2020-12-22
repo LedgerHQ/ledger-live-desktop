@@ -71,6 +71,11 @@ function AccountRow({
 }) {
   const palette = useTheme("colors.palette");
 
+  const balance =
+    account.type !== "ChildAccount" && account.spendableBalance
+      ? account.spendableBalance
+      : account.balance;
+
   return (
     <AccountRowContainer nested={nested} disabled={disabled}>
       <Left>
@@ -99,7 +104,7 @@ function AccountRow({
       <Right>
         <FormattedVal
           color={disabled ? palette.text.shade40 : palette.text.shade60}
-          val={account.balance}
+          val={balance}
           unit={getAccountUnit(account)}
           showCode
         />
