@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-conditional-expect */
 import initialize, { app, mockDeviceEvent, modalPage } from "../common.js";
 
 describe("Account", () => {
@@ -9,7 +10,7 @@ describe("Account", () => {
 
   describe("add accounts flow", () => {
     // Add accounts for all currencies with special flows (delegate, vote, etc)
-    const currencies = ["dogecoin", "ethereum", "xrp", "ethereum_classic", "tezos", "cosmos"];
+    const currencies = ["dogecoin", "chainlink", "xrp", "ethereum_classic", "tezos", "cosmos"];
     for (let i = 0; i < currencies.length; i++) {
       it(`for ${currencies[i]}`, async () => {
         const currency = currencies[i];
@@ -25,14 +26,50 @@ describe("Account", () => {
         await elemSelectControlInput.addValue(currency);
         const elemFirstOption = await $(".select-options-list .option:first-child");
         await elemFirstOption.click();
-        const elemContinueButton = await $("#modal-continue-button");
-        await elemContinueButton.click();
-        await mockDeviceEvent({ type: "opened" });
-        const elemImportAddButton = await $("#add-accounts-import-add-button");
-        await elemImportAddButton.waitForDisplayed();
-        await elemImportAddButton.waitForEnabled();
-        await elemImportAddButton.click();
-        await modalPage.close();
+        if (currency === "chainlink") {
+          // Add token when parent missing
+          const elemAddParentButton = await $("#modal-token-continue-button");
+          await elemAddParentButton.waitForDisplayed();
+          expect(await app.client.screenshot()).toMatchImageSnapshot({
+            customSnapshotIdentifier: "addTokenWithoutParent",
+          });
+          await elemAddParentButton.click();
+          // Add parent account
+          await mockDeviceEvent({ type: "opened" });
+          const elemImportAddButton = await $("#add-accounts-import-add-button");
+          await elemImportAddButton.waitForDisplayed();
+          await elemImportAddButton.waitForEnabled();
+          await elemImportAddButton.click();
+          // Add token when parent present
+          const elemAddMoreButon = await $("#add-accounts-finish-add-more-button");
+          await elemAddMoreButon.waitForDisplayed();
+          await elemAddMoreButon.click();
+          const elemSelectControlInput = await $("#modal-container .select__control input");
+          await elemSelectControlInput.addValue(currency);
+          const elemFirstOption = await $(".select-options-list .option:first-child");
+          await elemFirstOption.click();
+          await elemAddParentButton.waitForDisplayed();
+          expect(await app.client.screenshot()).toMatchImageSnapshot({
+            customSnapshotIdentifier: "addTokenReceive",
+          });
+          await elemAddParentButton.click();
+          const elemReceiveButton = await $("#receive-account-continue-button");
+          await elemReceiveButton.waitForDisplayed();
+          expect(await app.client.screenshot()).toMatchImageSnapshot({
+            customSnapshotIdentifier: "addTokenReceiveSelectParent",
+          });
+          await elemReceiveButton.click();
+          await modalPage.close();
+        } else {
+          const elemContinueButton = await $("#modal-continue-button");
+          await elemContinueButton.click();
+          await mockDeviceEvent({ type: "opened" });
+          const elemImportAddButton = await $("#add-accounts-import-add-button");
+          await elemImportAddButton.waitForDisplayed();
+          await elemImportAddButton.waitForEnabled();
+          await elemImportAddButton.click();
+          await modalPage.close();
+        }
         if (!i) {
           const elemDrawerAccountsButton = await $("#drawer-accounts-button");
           await elemDrawerAccountsButton.click();

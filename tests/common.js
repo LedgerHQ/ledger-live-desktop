@@ -73,6 +73,8 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       await app.client.pause(1000);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `__start__${name}`,
+        failureThreshold: 0.01,
+        failureThresholdType: "percent",
       });
     });
   }
