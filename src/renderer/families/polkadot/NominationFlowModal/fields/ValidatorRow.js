@@ -14,7 +14,7 @@ import type { PolkadotValidator } from "@ledgerhq/live-common/lib/families/polka
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import CheckBox from "~/renderer/components/CheckBox";
-import ToolTip from "~/renderer/components/ToolTip";
+import Tooltip from "~/renderer/components/Tooltip";
 import ExternalLink from "~/renderer/icons/ExternalLink";
 
 const IconContainer: ThemedComponent<*> = styled.div`
@@ -215,14 +215,14 @@ const ValidatorRow = ({
         <PolkadotIdenticon address={address} size={24} />
       </IconContainer>
       <InfoContainer>
-        <ToolTip content={identity ? address : null}>
+        <Tooltip content={identity ? address : null}>
           <Title onClick={onTitleClick}>
             <Text>{identity || address}</Text>
             <IconContainer>
               <ExternalLink size={16} />
             </IconContainer>
           </Title>
-        </ToolTip>
+        </Tooltip>
         <SubTitle>
           <Status isElected={isElected}>
             {isElected ? (
@@ -243,7 +243,7 @@ const ValidatorRow = ({
           <Trans i18nKey="polkadot.nomination.commission" />: {formattedCommission}
         </Commission>
         {isElected ? (
-          <ToolTip
+          <Tooltip
             content={
               isOversubscribed ? (
                 <Trans
@@ -268,7 +268,7 @@ const ValidatorRow = ({
                 values={{ nominatorsCount }}
               />
             </NominatorsCount>
-          </ToolTip>
+          </Tooltip>
         ) : null}
       </SideInfo>
       <CheckBox disabled={!isSelected && disabled} isChecked={isSelected} onChange={onToggle} />
