@@ -44,7 +44,7 @@ const FullNodeBody = ({
     { label: <Trans i18nKey={"fullNode.modal.steps.satstack.title"} /> },
   ];
 
-  const [numberOfAccountsToScan, setNumberOfAccountsToScan] = useState(10);
+  const [numberOfAccountsToScan, setNumberOfAccountsToScan] = useState<?number>(10);
   const [nodeConfig, setNodeConfig] = useState<RPCNodeConfig>({
     host: "127.0.0.1:8332",
     username: "",
@@ -121,14 +121,17 @@ const FullNodeBody = ({
               onStepChange={onStepChange}
             />
           ) : activeStep === "accounts" ? (
-            <StepAccounts setNumberOfAccountsToScan={setNumberOfAccountsToScan} />
+            <StepAccounts
+              numberOfAccountsToScan={numberOfAccountsToScan}
+              setNumberOfAccountsToScan={setNumberOfAccountsToScan}
+            />
           ) : activeStep === "device" ? (
             <StepConnectDevice
               setError={setError}
               onStepChange={onStepChange}
               nodeConfig={nodeConfig}
               setScannedDescriptors={setScannedDescriptors}
-              numberOfAccountsToScan={numberOfAccountsToScan}
+              numberOfAccountsToScan={numberOfAccountsToScan || 10}
             />
           ) : activeStep === "satstack" ? (
             <StepSatStack satStackDownloaded={satStackDownloaded} />
@@ -149,7 +152,10 @@ const FullNodeBody = ({
             setNodeConnectionStatus={setNodeConnectionStatus}
           />
         ) : activeStep === "accounts" ? (
-          <StepAccountsFooter onStepChange={onStepChange} />
+          <StepAccountsFooter
+            numberOfAccountsToScan={numberOfAccountsToScan}
+            onStepChange={onStepChange}
+          />
         ) : activeStep === "device" ? (
           <StepDeviceFooter
             onClose={onClose}

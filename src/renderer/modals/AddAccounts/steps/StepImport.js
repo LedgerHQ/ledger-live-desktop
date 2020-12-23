@@ -1,12 +1,14 @@
 // @flow
 
 import React, { useEffect, PureComponent } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 import { concat, from } from "rxjs";
 import { ignoreElements, filter, map } from "rxjs/operators";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { isAccountEmpty, groupAddAccounts } from "@ledgerhq/live-common/lib/account";
+import { openModal } from "~/renderer/actions/modals";
 import { DeviceShouldStayInApp } from "@ledgerhq/errors";
 import { getCurrencyBridge } from "@ledgerhq/live-common/lib/bridge";
 import uniq from "lodash/uniq";
@@ -207,7 +209,9 @@ class StepImport extends PureComponent<StepProps> {
     const mainCurrency = currency.type === "TokenCurrency" ? currency.parentCurrency : currency;
 
     if (err) {
-      return <ErrorDisplay error={err} withExportLogs />;
+      return (
+        <ErrorDisplay error={err} withExportLogs={err.name !== "SatStackDescriptorNotImported"} />
+      );
     }
 
     const currencyName = mainCurrency ? mainCurrency.name : "";
@@ -287,8 +291,10 @@ export const StepImportFooter = ({
   checkedAccountsIds,
   scannedAccounts,
   currency,
+  err,
   t,
 }: StepProps) => {
+  const dispatch = useDispatch();
   const willCreateAccount = checkedAccountsIds.some(id => {
     const account = scannedAccounts.find(a => a.id === id);
     return account && isAccountEmpty(account);
@@ -301,6 +307,7 @@ export const StepImportFooter = ({
 
   const count = checkedAccountsIds.length;
   const willClose = !willCreateAccount && !willAddAccounts;
+  const isHandledError = err && err.name === "SatStackDescriptorNotImported";
 
   const ctaWording =
     scanStatus === "scanning"
@@ -316,25 +323,37 @@ export const StepImportFooter = ({
         transitionTo("finish");
       };
 
+  const goFullNode = () => {
+    onCloseModal();
+    dispatch(openModal("MODAL_FULL_NODE", { skipNodeSetup: true }));
+  };
+
   return (
     <>
       <Box grow>{currency && <CurrencyBadge currency={currency} />}</Box>
-      {scanStatus === "error" && (
-        <>
-          <ExternalLinkButton label={t("common.getSupport")} url={urls.syncErrors} />
-          <RetryButton
-            id={"add-accounts-import-retry-button"}
-            primary
-            onClick={() => setScanStatus("scanning")}
-          />
-        </>
-      )}
+      {scanStatus === "error" &&
+        (isHandledError ? (
+          <Button id={"add-accounts-full-node-reconfigure"} primary onClick={goFullNode}>
+            {t("addAccounts.fullNodeConfigure")}
+          </Button>
+        ) : (
+          <>
+            <ExternalLinkButton label={t("common.getSupport")} url={urls.syncErrors} />
+
+            <RetryButton
+              id={"add-accounts-import-retry-button"}
+              primary
+              onClick={() => setScanStatus("scanning")}
+            />
+          </>
+        ))}
       {scanStatus === "scanning" && (
         <Button id={"add-accounts-import-stop-button"} onClick={() => setScanStatus("finished")}>
           {t("common.stop")}
         </Button>
       )}
-      {scanStatus !== "error" && (
+
+      {isHandledError ? null : (
         <Button
           id={"add-accounts-import-add-button"}
           primary

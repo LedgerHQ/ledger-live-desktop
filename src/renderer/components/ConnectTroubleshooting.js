@@ -33,7 +33,7 @@ const ConnectTroubleshooting = ({ appearsAfterDelay = 15000, onRepair }: Props) 
   return visible ? (
     <Wrapper p={2} horizontal alignItems="center">
       <Box p={2} horizontal justifyContent="center">
-        <Text ff="Inter|Regular" fontSize={4}>
+        <Text ff="Inter|Regular" fontSize={4} color="palette.text.shade100">
           <Trans i18nKey="connectTroubleshooting.desc" />
         </Text>
       </Box>
