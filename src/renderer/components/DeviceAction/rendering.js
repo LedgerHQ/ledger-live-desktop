@@ -435,7 +435,7 @@ export const renderSwapDeviceConfirmation = ({
           <Text color="palette.text.shade50" fontSize={3}>
             <Trans i18nKey={`DeviceAction.swap.${key}`} />
           </Text>
-          <Text color="palette.text.shade100" fontWeight="400" fontSize={3}>
+          <Text color="palette.text.shade100" fontWeight="500" fontSize={3}>
             {value}
           </Text>
         </Box>
