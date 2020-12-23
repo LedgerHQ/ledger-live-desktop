@@ -432,7 +432,7 @@ export const renderSwapDeviceConfirmation = ({
       },
       (value, key) => (
         <Box horizontal justifyContent="space-between" key={key} mb={2} ml="12px" mr="12px">
-          <Text color="palette.text.shade50" fontSize={3}>
+          <Text fontWeight="500" color="palette.text.shade50" fontSize={3}>
             <Trans i18nKey={`DeviceAction.swap.${key}`} />
           </Text>
           <Text color="palette.text.shade100" fontWeight="500" fontSize={3}>
