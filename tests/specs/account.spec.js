@@ -1,3 +1,4 @@
+import { add } from "lodash";
 import initialize, { app, mockDeviceEvent, modalPage } from "../common.js";
 
 describe("Account", () => {
@@ -9,7 +10,7 @@ describe("Account", () => {
 
   describe("add accounts flow", () => {
     // Add accounts for all currencies with special flows (delegate, vote, etc)
-    const currencies = ["dogecoin", "ethereum", "xrp", "ethereum_classic", "tezos", "cosmos"];
+    const currencies = ["dogecoin", "xrp", "ethereum_classic", "tezos", "cosmos"];
     for (let i = 0; i < currencies.length; i++) {
       it(`for ${currencies[i]}`, async () => {
         const currency = currencies[i];
@@ -40,6 +41,73 @@ describe("Account", () => {
         expect(await modalPage.isDisplayed(true)).toBe(false);
       });
     }
+  });
+
+  describe("add token accounts flow", () => {
+    afterAll(async () => await modalPage.close());
+    it("token when parent missing", async () => {
+      const addAccountButton = await $("#accounts-add-account-button");
+      await addAccountButton.waitForDisplayed();
+      await addAccountButton.click();
+      const elemSelectControl = await $("#modal-container .select__control");
+      await elemSelectControl.click();
+      const elemSelectControlInput = await $("#modal-container .select__control input");
+      await elemSelectControlInput.addValue("chainlink");
+      const elemFirstOption = await $(".select-options-list .option:first-child");
+      await elemFirstOption.click();
+      const elemAddParentButton = await $("#modal-token-continue-button");
+      await elemAddParentButton.waitForDisplayed();
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "addAccount-tokenWithoutParent",
+      });
+    });
+    it("receive token when subAccount exist already", async () => {
+      // Add parent account
+      const elemAddParentButton = await $("#modal-token-continue-button");
+      await elemAddParentButton.click();
+      await mockDeviceEvent({ type: "opened" });
+      const elemImportAddButton = await $("#add-accounts-import-add-button");
+      await elemImportAddButton.waitForDisplayed();
+      await elemImportAddButton.waitForEnabled();
+      await elemImportAddButton.click();
+      const elemAddMoreButon = await $("#add-accounts-finish-add-more-button");
+      await elemAddMoreButon.waitForDisplayed();
+      await elemAddMoreButon.click();
+      // Select subAccount
+      const elemSelectControlInput = await $("#modal-container .select__control input");
+      await elemSelectControlInput.addValue("tether");
+      const elemFirstOption = await $(".select-options-list .option:first-child");
+      await elemFirstOption.click();
+      await elemAddParentButton.waitForDisplayed();
+      await elemAddParentButton.click();
+      const elemReceiveButton = await $("#receive-account-continue-button");
+      await elemReceiveButton.waitForDisplayed();
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "addAccount-selectSubAccount",
+      });
+    });
+    it("receive new token", async () => {
+      await modalPage.close();
+      const addAccountButton = await $("#accounts-add-account-button");
+      await addAccountButton.waitForDisplayed();
+      await addAccountButton.waitForEnabled();
+      await addAccountButton.click();
+      const elemSelectControl = await $("#modal-container .select__control");
+      await elemSelectControl.click();
+      const elemSelectControlInput = await $("#modal-container .select__control input");
+      await elemSelectControlInput.addValue("chainlink");
+      const elemFirstOption = await $(".select-options-list .option:first-child");
+      await elemFirstOption.click();
+      // Select parent account
+      const elemAddParentButton = await $("#modal-token-continue-button");
+      await elemAddParentButton.waitForDisplayed();
+      await elemAddParentButton.click();
+      const elemReceiveContinueButton = await $("#receive-account-continue-button");
+      await elemReceiveContinueButton.waitForDisplayed();
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "addAccount-selectParent",
+      });
+    });
   });
 
   describe("account flows", () => {
