@@ -1,4 +1,3 @@
-import { add } from "lodash";
 import initialize, { app, mockDeviceEvent, modalPage } from "../common.js";
 
 describe("Account", () => {
