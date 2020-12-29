@@ -69,6 +69,7 @@ type Props = {
   index?: number,
   short?: boolean,
   separator?: boolean,
+  withId?: boolean,
 };
 
 const TabBar = ({
@@ -78,6 +79,7 @@ const TabBar = ({
   short = false,
   index: propsIndex,
   separator = false,
+  withId = false,
 }: Props) => {
   const tabRefs = useRef([]);
   const [index, setIndex] = useState(defaultIndex);
@@ -101,6 +103,8 @@ const TabBar = ({
     tabRefs.current[index] = ref;
   };
 
+  console.log(tabs);
+
   return (
     <Tabs short={short} separator={separator}>
       {tabs.map((tab, j) => (
@@ -110,6 +114,7 @@ const TabBar = ({
           active={j === i}
           tabIndex={j}
           onClick={() => updateIndex(j)}
+          id={withId ? `settings-${tab}-tab` : ""}
         >
           <Text ff="Inter|SemiBold" fontSize={5}>
             <Trans i18nKey={tab} />

@@ -112,6 +112,7 @@ const Settings = ({ history, location, match }: Props) => {
           index={activeTabIndex}
           tabs={items.map(i => i.label)}
           separator
+          withId
         />
         <Switch>
           {processedItems.map(i => (
