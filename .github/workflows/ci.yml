@@ -121,5 +121,5 @@ jobs:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
           slack-channel: live-internal-desktop
           slack-text: ${{ needs.test.outputs.comment }}
-      - name: Result from "Send Message"
+      - name: Result from slack
         run: echo "The result was ${{ steps.notify.outputs.slack-result }}"
