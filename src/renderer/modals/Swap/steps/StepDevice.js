@@ -11,7 +11,11 @@ import BigSpinner from "~/renderer/components/BigSpinner";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import { createAction as initSwapCreateAction } from "@ledgerhq/live-common/lib/hw/actions/initSwap";
 import { Trans } from "react-i18next";
-import type { SignedOperation, Transaction } from "@ledgerhq/live-common/lib/types";
+import type {
+  SignedOperation,
+  Transaction,
+  TransactionStatus,
+} from "@ledgerhq/live-common/lib/types";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import StepProgress from "~/renderer/components/StepProgress";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
@@ -59,12 +63,14 @@ const Result = ({
 const StepDevice = ({
   swap,
   transaction,
+  status,
   onContinue,
   onError,
   setLocked,
 }: {
   swap: { exchange: Exchange, exchangeRate: ExchangeRate },
   transaction: Transaction,
+  status: TransactionStatus,
   onContinue: any,
   onError: any,
   setLocked: boolean => void,
@@ -106,9 +112,10 @@ const StepDevice = ({
       exchange,
       exchangeRate,
       transaction,
+      status,
       device: deviceRef,
     }),
-    [exchange, exchangeRate, transaction],
+    [exchange, exchangeRate, transaction, status],
   );
 
   return signedOperation ? (

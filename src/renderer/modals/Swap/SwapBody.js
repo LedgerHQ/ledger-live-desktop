@@ -1,6 +1,7 @@
 // @flow
 import React, { useCallback, useState } from "react";
 import { Trans } from "react-i18next";
+import type { Transaction, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import { ModalBody } from "~/renderer/components/Modal";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import StepSummary, { StepSummaryFooter } from "~/renderer/modals/Swap/steps/StepSummary";
@@ -19,6 +20,7 @@ type SwapSteps = "summary" | "device" | "finished";
 const SwapBody = ({
   swap,
   transaction,
+  status,
   onClose,
   onStepChange,
   onCompleteSwap,
@@ -26,7 +28,8 @@ const SwapBody = ({
   ratesExpiration,
 }: {
   swap: { exchange: Exchange, exchangeRate: ExchangeRate },
-  transaction: any, // FIXME
+  transaction: Transaction,
+  status: TransactionStatus,
   onClose: any,
   onStepChange: SwapSteps => void,
   onCompleteSwap: () => void,
@@ -110,6 +113,7 @@ const SwapBody = ({
               swap={swap}
               setLocked={setLocked}
               transaction={transaction}
+              status={status}
               onContinue={onDeviceInteraction}
               onError={setError}
             />
