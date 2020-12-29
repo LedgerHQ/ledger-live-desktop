@@ -21,6 +21,7 @@ jobs:
     needs: cancel-previous
     outputs:
       comment: ${{ steps.comment.outputs.body }}
+      commentSlack: ${{ steps.comment.outputs.bodySlack }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -120,7 +121,7 @@ jobs:
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
           slack-channel: live-internal-desktop
-          slack-text: ${{ needs.test.outputs.comment }}
+          slack-text: ${{ needs.test.outputs.commentSlack }}
       - name: Result from slack
         if: contains(github.ref, 'develop')
         run: echo "The result was ${{ steps.notify.outputs.slack-result }}"

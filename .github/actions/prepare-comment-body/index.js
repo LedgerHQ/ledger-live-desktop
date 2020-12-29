@@ -53,7 +53,16 @@ ${str}
 </details>  
 `;
 
+  const strSlack = `
+Lint outputs ${lintFailed ? "❌" : " ✅"}
+Tests outputs ${testsFailed ? "❌" : " ✅"}
+Diff output ${imgDiffFailed ? "❌" : " ✅"}
+
+https://github.com/LedgerHQ/ledger-live-desktop/commits/develop
+`;
+
   core.setOutput("body", str);
+  core.setOutput("bodySlack", strSlack);
 };
 
 main().catch(err => core.setFailed(err));

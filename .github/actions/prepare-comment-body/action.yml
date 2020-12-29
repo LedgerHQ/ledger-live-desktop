@@ -4,6 +4,8 @@ author: valpinkman
 outputs:
   body:
     description: markdown formatted body for comment
+  bodySlack:
+    description: message formatted body for slack
 inputs:
   images:
     description: array of images to include in body of comment
