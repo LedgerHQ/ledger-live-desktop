@@ -10,11 +10,13 @@
   "divider": "rgba(255, 255, 255, 0.1)",
   "background": {
     "paper": "#182532",
-    "default": "#131E28"
+    "default": "#131E28",
+    "wave": "#1E2A3B"
   },
   "action": {
     "active": "#182532",
     "hover": "rgba(100,144,241, 0.1)",
     "disabled": "rgba(255,255,255, 0.1)"
-  }
+  },
+  "wave": "#23324A"
 }

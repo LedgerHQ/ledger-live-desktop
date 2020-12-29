@@ -68,6 +68,7 @@ const onboardingMachine = Machine({
         NEXT: {
           target: "selectDevice",
         },
+        QUIT: "onboardingComplete",
       },
     },
     selectDevice: {
