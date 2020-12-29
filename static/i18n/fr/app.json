@@ -458,6 +458,7 @@
     "description": "Déposez vos actifs sur le protocole Compound pour commencer à obtenir des intérêts.",
     "tabs": {
       "dashboard": "Tableau de bord",
+      "opened": "Opened loans",
       "closed": "Emprunts clôturés",
       "history": "Historique"
     },
@@ -497,6 +498,11 @@
         "description": "Vous n’avez pas encore fait de prêts.",
         "cta": "Dépôt"
       },
+      "opened": {
+        "title": "Your opened loans will appear here",
+        "description": "You have not made any loans yet.",
+        "cta": "Deposit"
+      },
       "history": {
         "title": "Historique",
         "description": "Visualisez l'historique de toutes vos opérations de prêt.",
@@ -522,6 +528,12 @@
         "assetLended": "Actif",
         "amountRedeemed": "Montant du retrait",
         "interestsEarned": "Intérêts obtenus",
+        "date": "Date"
+      },
+      "opened": {
+        "assetLended": "Asset",
+        "amount": "Amount",
+        "accruedInterest": "Accrued interest",
         "date": "Date"
       },
       "rates": {
