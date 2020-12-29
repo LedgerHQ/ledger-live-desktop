@@ -103,8 +103,6 @@ const TabBar = ({
     tabRefs.current[index] = ref;
   };
 
-  console.log(tabs);
-
   return (
     <Tabs short={short} separator={separator}>
       {tabs.map((tab, j) => (
@@ -114,7 +112,7 @@ const TabBar = ({
           active={j === i}
           tabIndex={j}
           onClick={() => updateIndex(j)}
-          id={withId ? `settings-${tab}-tab` : ""}
+          id={withId ? `settings-${tab.toLowerCase()}-tab` : ""}
         >
           <Text ff="Inter|SemiBold" fontSize={5}>
             <Trans i18nKey={tab} />
