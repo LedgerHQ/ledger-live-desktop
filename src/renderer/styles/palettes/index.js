@@ -21,12 +21,14 @@ type RawPalette = {
   background: {
     paper: string,
     default: string,
+    wave: string,
   },
   action: {
     active: string,
     hover: string,
     disabled: string,
   },
+  wave: string,
 };
 
 export type Theme = {

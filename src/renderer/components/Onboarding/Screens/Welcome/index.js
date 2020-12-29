@@ -2,16 +2,21 @@
 
 import React, { useCallback } from "react";
 import { useTranslation, Trans } from "react-i18next";
+import { useSelector } from "react-redux";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
 import Button from "~/renderer/components/Button";
+import Image from "~/renderer/components/Image";
 import { openURL } from "~/renderer/linking";
-import { Computer } from "./assets/Computer";
 import LangSwitcher from "~/renderer/components/Onboarding/LangSwitcher";
 import { urls } from "~/config/urls";
 import { WaveContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import { AnimatedWave } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/AnimatedWave";
+import { userThemeSelector } from "~/renderer/reducers/settings";
+import illustration from "~/renderer/components/Onboarding/Screens/Welcome/assets/welcome.svg";
+import illustrationDark from "~/renderer/components/Onboarding/Screens/Welcome/assets/welcome-dark.svg";
+import { onboardingRelaunchedSelector } from "~/renderer/reducers/onboarding";
 import useTheme from "~/renderer/hooks/useTheme";
 
 const WelcomeContainer: ThemedComponent<*> = styled.div`
@@ -21,6 +26,7 @@ const WelcomeContainer: ThemedComponent<*> = styled.div`
   align-items: center;
   flex-direction: column;
   position: relative;
+  background: ${p => p.theme.colors.palette.background.wave};
 `;
 
 const TopContainer = styled.div`
@@ -30,11 +36,11 @@ const TopContainer = styled.div`
   position: relative;
 `;
 
-const ComputerContainer = styled.div`
+const IllustrationContainer = styled.div`
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 50%;
-  transform: translate(-50%, 50%);
+  transform: translate(-50%, 0);
 `;
 
 const TopRightContainer = styled.div`
@@ -51,11 +57,16 @@ type Props = {
 
 export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
   const { t } = useTranslation();
-  const theme = useTheme();
+  const theme = useSelector(userThemeSelector);
+  const useDarkColorPalette = ["dark", "dusk"].includes(theme);
+  const onboardingRelaunched = useSelector(onboardingRelaunchedSelector);
+  const welcomeIllustration = useDarkColorPalette ? illustrationDark : illustration;
+  const waveColor = useTheme("colors.palette.wave");
 
   const handleNext = useCallback(() => {
     sendEvent("NEXT");
   }, [sendEvent]);
+  const handleQuit = useCallback(() => sendEvent("QUIT"), [sendEvent]);
 
   const buyNanoX = useCallback(() => {
     openURL(urls.noDevice.buyNew);
@@ -72,12 +83,14 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
         )}
       </TopRightContainer>
       <WaveContainer>
-        <AnimatedWave height={600} color={theme === "dark" ? "#587ED4" : "#4385F016"} />
+        <AnimatedWave height={600} color={waveColor} />
       </WaveContainer>
       <TopContainer>
-        <ComputerContainer>{theme === "light" ? <Computer /> : null}</ComputerContainer>
+        <IllustrationContainer>
+          <Image resource={welcomeIllustration} alt="" draggable="false" height={370} />
+        </IllustrationContainer>
       </TopContainer>
-      <Text mt={160} mb="4px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize={32}>
+      <Text mt={120} mb="4px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize={32}>
         {t("onboarding.screens.welcome.title")}
       </Text>
       <Text mb="24px" color="palette.text.shade50" ff="Inter|Regular" fontSize={4}>
@@ -98,4 +111,4 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
       </Text>
     </WelcomeContainer>
   );
-}
+};
