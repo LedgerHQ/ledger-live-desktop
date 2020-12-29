@@ -12,6 +12,7 @@ import { prepareCurrency } from "~/renderer/bridge/cache";
 import { useCompoundSummaries } from "./useCompoundSummaries";
 
 import Dashboard from "./Dashboard";
+import Opened from "./Opened";
 import Closed from "./Closed";
 import History from "./History";
 
@@ -19,6 +20,10 @@ const tabs = [
   {
     title: "lend.tabs.dashboard",
     component: Dashboard,
+  },
+  {
+    title: "lend.tabs.opened",
+    component: Opened,
   },
   {
     title: "lend.tabs.closed",

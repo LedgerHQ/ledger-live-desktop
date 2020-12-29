@@ -8,7 +8,7 @@ describe("Onboarding", () => {
   it("go through start", async () => {
     const elem = await $("#onboarding-get-started-button");
     await elem.click();
-    const terms = await $("#terms-markdown");
+    const terms = await $("#modal-confirm-button");
     await terms.waitForDisplayed();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-terms",

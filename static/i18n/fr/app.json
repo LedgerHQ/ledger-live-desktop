@@ -272,7 +272,7 @@
           "list": {
             "item1": "Configurez Bitcoin Core sur un appareil avec des ressources suffisantes.",
             "item2": "Attendez que votre nœud soit complètement synchronisé.",
-            "item3": "Prenez note de vos identifiants RPC, de votre adresse IP et de votre numéro de port."
+            "item3": "Make note of your node RPC credentials, IP address, and port number."
           },
           "disclaimer": "Exécuter un nœud nécessite un ordinateur disposant de ressources suffisantes et d'une connexion à une bande passante sans restriction de données."
         },
@@ -347,6 +347,10 @@
               "header": "Impossible d'atteindre SatStack",
               "description": "Veuillez vérifier que SatStack fonctionne sur cet ordinateur."
             },
+            "satstack-outdated": {
+              "header": "Please upgrade SatStack",
+              "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+            },
             "node-disconnected": {
               "header": "Noeud inaccessible",
               "description": "Veuillez vérifier que votre nœud est joignable et que les paramètres de connexion que vous avez saisis sont corrects."
@@ -369,7 +373,7 @@
             },
             "scanning": {
               "header": "Analyse du compte en cours...",
-              "description": "Vous pouvez ajouter vos comptes une fois l'analyse du compte effectuée. Tous les comptes Bitcoin précédemment ajoutés par les explorers de Ledger ont été supprimés."
+              "description": "You can add your accounts once the account scan is completed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
             }
           }
         },
@@ -911,6 +915,7 @@
       "finish": "Confirmation"
     },
     "fullNodeReadyInfo": "Les comptes seront ajoutés en utilisant votre nœud Bitcoin.",
+    "fullNodeConfigure": "Configure node",
     "tokensTip": "{{token}} ({{ticker}}) est un token {{tokenType}} . Vous pouvez recevoir des tokens directement sur un compte {{currency}}.",
     "accountToImportSubtitle_plural": "Ajouter des comptes existants",
     "selectAll": "Sélectionner tout ({{count}})",
@@ -2876,6 +2881,14 @@
     "SatStackStillSyncing": {
       "title": "Synchronisation du noeud en cours...",
       "description": "Veuillez patienter pendant la synchronisation de votre nœud. L'envoi n'est pas possible car le solde de vos comptes Bitcoin est peut-être incorrecte."
+    },
+    "SatStackVersionTooOld": {
+      "title": "Please upgrade SatStack",
+      "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+    },
+    "SatStackDescriptorNotImported": {
+      "title": "Account not scanned by full node",
+      "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
     },
     "SwapGenericAPIError": {
       "title": "Le taux de change a expiré",

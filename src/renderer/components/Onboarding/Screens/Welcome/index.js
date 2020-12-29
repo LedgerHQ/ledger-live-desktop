@@ -62,9 +62,7 @@ export function Welcome({ sendEvent }: Props) {
 
   return (
     <WelcomeContainer>
-      <TopRightContainer>
-        <LangSwitcher />
-      </TopRightContainer>
+      <TopRightContainer>{null /* LL-4236 */ && <LangSwitcher />}</TopRightContainer>
       <WaveContainer>
         <AnimatedWave height={600} color={theme === "dark" ? "#587ED4" : "#4385F016"} />
       </WaveContainer>
