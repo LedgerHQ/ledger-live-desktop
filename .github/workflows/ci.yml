@@ -105,10 +105,11 @@ jobs:
   post-comment:
     runs-on: ubuntu-latest
     needs: test
-    if: always() && needs.test.result != 'cancelled'
+    if: always()
     steps:
       - name: post comment
         uses: mshick/add-pr-comment@5cd99bf9c186219af43341076f1fe9c09e5a9934
+        if: contains(github.ref, 'develop') == 'false'
         with:
           message: ${{ needs.test.outputs.comment }}
           allow-repeats: true
@@ -122,4 +123,5 @@ jobs:
           slack-channel: live-internal-desktop
           slack-text: ${{ needs.test.outputs.comment }}
       - name: Result from slack
+        if: contains(github.ref, 'develop')
         run: echo "The result was ${{ steps.notify.outputs.slack-result }}"
