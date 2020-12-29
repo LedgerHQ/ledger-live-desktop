@@ -2141,9 +2141,9 @@
       "whereToHide": {
         "title": "Where should I keep my recovery phrase?",
         "points": {
-          "1": "NEVER enter it on a computer, smartphone or any other device. Don't take a picture of it.",
-          "2": "NEVER share your 24 words with anyone.",
-          "3": "ALWAYS store it in a secure place, out of sight.",
+          "1": "<0>NEVER</0> enter it on a computer, smartphone or any other device. Don't take a picture of it.",
+          "2": "<0>NEVER</0> share your 24 words with anyone.",
+          "3": "<0>ALWAYS</0> store it in a secure place, out of sight.",
           "4": "Ledger will never ask for your recovery phrase.",
           "5": "If any person or application asks for it, assume it is a scam!"
         }

@@ -1,7 +1,7 @@
 // @flow
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
 import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
@@ -11,7 +11,7 @@ const PointContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 16px;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 const PointIconContainer = styled.div`
@@ -26,7 +26,7 @@ const PointIconContainer = styled.div`
 `;
 
 type PointProps = {
-  children: string,
+  children: React$Node,
 };
 
 function Point({ children }: PointProps) {
@@ -70,9 +70,21 @@ export function HideRecoverySeed() {
         >
           {t("onboarding.drawers.whereToHide.title")}
         </Text>
-        <Point>{t("onboarding.drawers.whereToHide.points.1")}</Point>
-        <Point>{t("onboarding.drawers.whereToHide.points.2")}</Point>
-        <Point>{t("onboarding.drawers.whereToHide.points.3")}</Point>
+        <Point>
+          <Trans i18nKey="onboarding.drawers.whereToHide.points.1">
+            <Text ff="Inter|SemiBold" />
+          </Trans>
+        </Point>
+        <Point>
+          <Trans i18nKey="onboarding.drawers.whereToHide.points.2">
+            <Text ff="Inter|SemiBold" />
+          </Trans>
+        </Point>
+        <Point>
+          <Trans i18nKey="onboarding.drawers.whereToHide.points.3">
+            <Text ff="Inter|SemiBold" />
+          </Trans>
+        </Point>
         <Point>{t("onboarding.drawers.whereToHide.points.4")}</Point>
         <Point>{t("onboarding.drawers.whereToHide.points.5")}</Point>
       </HideRecoverySeedContainer>
