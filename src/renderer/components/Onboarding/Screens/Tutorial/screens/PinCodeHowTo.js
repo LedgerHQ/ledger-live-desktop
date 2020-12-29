@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 import Lottie from "react-lottie";
@@ -16,6 +16,7 @@ import NanoSAnim from "../assets/animations/nanoS/pin-code.json";
 import NanoXAnim from "../assets/animations/nanoX/pin-code.json";
 import NanoDeviceCheckIcon from "~/renderer/icons/NanoDeviceCheckIcon";
 import NanoDeviceCancelIcon from "~/renderer/icons/NanoDeviceCancelIcon";
+import useTheme from "~/renderer/hooks/useTheme";
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
@@ -113,13 +114,13 @@ const StepList = styled.div`
   }
 `;
 
-const steps = [
+const steps = (color: string) => [
   {
     titleKey: <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.setUp.title" />,
     descrKey: (
       <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.setUp.descr">
-        <NanoDeviceCheckIcon />
-        <NanoDeviceCancelIcon />
+        <NanoDeviceCheckIcon color={color} />
+        <NanoDeviceCancelIcon color={color} />
       </Trans>
     ),
   },
@@ -138,6 +139,8 @@ type Props = {
 
 export function PinCodeHowTo({ sendEvent, context }: Props) {
   const { deviceId } = context;
+  const colors = useTheme("colors");
+  const allSteps = useMemo(() => steps(colors.wallet), [colors]);
 
   const onClickHelp = useCallback(() => sendEvent("HELP"), [sendEvent]);
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
@@ -165,7 +168,7 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
         </HeaderContainer>
         <Lottie options={defaultOptions} height={130} />
         <StepList>
-          {steps.map((step, index) => (
+          {allSteps.map((step, index) => (
             <Step key={index} title={step.titleKey} descr={step.descrKey} index={index + 1} />
           ))}
         </StepList>
