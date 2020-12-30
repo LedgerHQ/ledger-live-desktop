@@ -54,7 +54,7 @@ jobs:
           path: ./lint.txt
       - name: check build
         if: always()
-        run: export INSTRUMENT_BUILD=true && sudo yarn build
+        run: export INSTRUMENT_BUILD=true && sudo --preserve-env=INSTRUMENT_BUILD yarn build
       - name: start electron webdriver
         if: always()
         run: yarn start-electron-webdriver -d
