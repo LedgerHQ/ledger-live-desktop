@@ -40,6 +40,10 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
     onClickClose();
   }, [onClickClose]);
 
+  const openTerms = useCallback(() => openURL(urls.terms), []);
+  const openPrivacyPolicy = useCallback(() => openURL(urls.privacyPolicy), []);
+  const onClickFakeLink = useCallback(() => openURL(url), []);
+
   return (
     <Modal name="MODAL_TERMS" preventBackdropClick centered width={700}>
       <ModalBody
@@ -58,7 +62,7 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
                   <TranslatedError error={error} />
                 </Text>
 
-                <LinkWithExternalIcon onClick={() => openURL(url)}>
+                <LinkWithExternalIcon onClick={onClickFakeLink}>
                   <Trans i18nKey="Terms.read" />
                 </LinkWithExternalIcon>
               </Box>
@@ -104,7 +108,7 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
                   <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
                     <Trans i18nKey="Terms.switchLabelTerms">
                       <Text onClick={onSwitchAccept} />
-                      <Text onClick={() => openURL(urls.terms)} color="wallet" />
+                      <Text onClick={openTerms} color="wallet" />
                     </Trans>
                   </Text>
                 </Box>
@@ -123,7 +127,7 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
                   <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
                     <Trans i18nKey="Terms.switchLabelPrivacyPolicy">
                       <Text onClick={onSwitchAcceptPrivacyPolicy} />
-                      <Text onClick={() => openURL(urls.privacyPolicy)} color="wallet" />
+                      <Text onClick={openPrivacyPolicy} color="wallet" />
                     </Trans>
                   </Text>
                 </Box>
