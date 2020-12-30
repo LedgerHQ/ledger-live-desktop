@@ -64,8 +64,8 @@ ${str}
 Lint outputs ${lintFailed ? "❌" : " ✅"}
 Tests outputs ${testsFailed ? "❌" : " ✅"}
 Diff output ${imgDiffFailed ? "❌" : " ✅"}
-Coverage Summary
 -----
+Coverage Summary
 ${coverageoutput}
 
 https://github.com/LedgerHQ/ledger-live-desktop/commits/develop
