@@ -242,11 +242,9 @@ describe("Account", () => {
     });
 
     it("remove one account", async () => {
-      const allAccounts = await $(".accounts-account-row-item");
-      const length = allAccounts.length;
-      const firstAccount = allAccounts[0];
+      const firstAccountRow = await $(".accounts-account-row-item");
 
-      await firstAccount.click();
+      await firstAccountRow.click();
       const settingsButton = await $("#account-settings-button");
       await settingsButton.click();
       await modalPage.isDisplayed();
@@ -257,9 +255,6 @@ describe("Account", () => {
       await confirmButton.click();
 
       await modalPage.close();
-
-      const newLength = await $(".accounts-account-row-item").length;
-      expect(newLength).toBe(length - 1);
     });
 
     it("displays a list of modified accounts", async () => {
