@@ -21,6 +21,9 @@ jobs:
     needs: cancel-previous
     outputs:
       comment: ${{ steps.comment.outputs.body }}
+      commentSlack: ${{ steps.comment.outputs.bodySlack }}
+      commentSlackAuthor: ${{ steps.comment.outputs.bodySlackAuthor }}
+      slackAuthor: ${{ steps.comment.outputs.slackAuthor }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -96,6 +99,8 @@ jobs:
           runId: ${{ github.run_id }}
           testoutput: ${{ steps.spectron.outputs.content }}
           lintoutput: ${{ steps.lint.outputs.content }}
+          author: ${{github.event.sender.login}}
+          pullId: ${{github.event.number}}
       - name: display comment
         if: always()
         id: displaycomment
@@ -113,3 +118,19 @@ jobs:
           message: ${{ needs.test.outputs.comment }}
           allow-repeats: true
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Send message to Slack channel
+        uses: archive/github-actions-slack@v1.0.3
+        if: github.event_name == 'push'
+        id: notify
+        with:
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+          slack-channel: live-internal-desktop
+          slack-text: ${{ needs.test.outputs.commentSlack }}
+      - name: Send message to Slack author
+        uses: archive/github-actions-slack@v1.0.3
+        if: github.event_name == 'pull_request_target'
+        id: notifyauthor
+        with:
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+          slack-channel: ${{ needs.test.outputs.slackAuthor }}
+          slack-text: ${{ needs.test.outputs.commentSlackAuthor }}
