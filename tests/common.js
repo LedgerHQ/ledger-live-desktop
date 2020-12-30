@@ -5,6 +5,8 @@ import {
 import { toMatchImageSnapshot } from "jest-image-snapshot";
 import { applicationProxy, removeUserData, getMockDeviceEvent } from "./applicationProxy";
 import ModalPage from "./po/modal.page";
+import fs from "fs";
+import path from "path";
 
 let app;
 let modalPage;
@@ -64,6 +66,17 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
   });
 
   afterAll(async () => {
+    const coverage = await app.client.execute(() => {
+      return window.__coverage__;
+    });
+    fs.writeFileSync(
+      path.join(
+        __dirname,
+        "coverage",
+        path.basename(require.main.filename).replace(/\//g, "-") + "on",
+      ),
+      JSON.stringify(coverage),
+    );
     return app.stop().then(() => removeUserData(process.env.SPECTRON_DUMP_APP_JSON));
   });
 

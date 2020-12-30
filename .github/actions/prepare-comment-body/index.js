@@ -7,6 +7,7 @@ const main = async () => {
   const author = core.getInput("author");
   const testoutput = core.getInput("testoutput");
   const lintoutput = core.getInput("lintoutput");
+  const coverageoutput = core.getInput("coverageoutput");
   const fullrepo = core.getInput("fullrepo").split("/");
   const imgArr = JSON.parse(images);
 
@@ -59,6 +60,8 @@ ${str}
 Lint outputs ${lintFailed ? "❌" : " ✅"}
 Tests outputs ${testsFailed ? "❌" : " ✅"}
 Diff output ${imgDiffFailed ? "❌" : " ✅"}
+
+${coverageoutput}
 
 https://github.com/LedgerHQ/ledger-live-desktop/commits/develop
 `;

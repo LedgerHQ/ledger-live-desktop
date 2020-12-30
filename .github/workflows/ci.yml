@@ -54,6 +54,8 @@ jobs:
           path: ./lint.txt
       - name: check build
         if: always()
+        env:
+          INSTRUMENT_BUILD: true
         run: sudo yarn build
       - name: start electron webdriver
         if: always()
@@ -74,6 +76,14 @@ jobs:
         uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: ./output.txt
+      - name: run coverage generation
+        run: yarn spectron-coverage >coverage.txt
+      - name: Read coverage output
+        id: coverage
+        if: always()
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
+        with:
+          path: ./coverage.txt
       - name: upload diffs to imgur
         if: always()
         uses: ./.github/actions/upload-images
@@ -99,6 +109,7 @@ jobs:
           runId: ${{ github.run_id }}
           testoutput: ${{ steps.spectron.outputs.content }}
           lintoutput: ${{ steps.lint.outputs.content }}
+          coverageoutput: ${{ steps.coverage.outputs.content }}
           author: ${{github.event.sender.login}}
           pullId: ${{github.event.number}}
       - name: display comment
