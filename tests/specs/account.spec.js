@@ -159,7 +159,7 @@ describe("Account", () => {
   });
 
   describe("remove accounts flow", () => {
-    it("remove one account", async () => {
+    it("displays a list of accounts", async () => {
       const isModalOpen = await modalPage.isDisplayed(true);
 
       if (isModalOpen) {
@@ -168,11 +168,16 @@ describe("Account", () => {
 
       const accountsButton = await $("#drawer-accounts-button");
       await accountsButton.click();
-      const allAccounts = await $(".accounts-account-row-item");
-      const length = allAccounts.length;
-      const firstAccount = allAccounts[0];
 
-      await firstAccount.click();
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "remove-account-before",
+      });
+    });
+
+    it("remove one account", async () => {
+      const firstAccountRow = await $(".accounts-account-row-item");
+
+      await firstAccountRow.click();
       const settingsButton = await $("#account-settings-button");
       await settingsButton.click();
       await modalPage.isDisplayed();
@@ -183,8 +188,9 @@ describe("Account", () => {
       await confirmButton.click();
       await modalPage.close();
 
-      const newLength = await $(".accounts-account-row-item").length;
-      expect(newLength).toBe(length - 1);
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "remove-account-after",
+      });
     });
   });
 });
