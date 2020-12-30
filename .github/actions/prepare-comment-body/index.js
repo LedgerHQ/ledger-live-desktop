@@ -10,7 +10,7 @@ const main = async () => {
   const coverageoutput = core
     .getInput("coverageoutput")
     .split("\n")
-    .slice(3, -1)
+    .slice(4, -2)
     .join("\n");
   const fullrepo = core.getInput("fullrepo").split("/");
   const imgArr = JSON.parse(images);
@@ -64,7 +64,8 @@ ${str}
 Lint outputs ${lintFailed ? "❌" : " ✅"}
 Tests outputs ${testsFailed ? "❌" : " ✅"}
 Diff output ${imgDiffFailed ? "❌" : " ✅"}
-
+Coverage Summary
+-----
 ${coverageoutput}
 
 https://github.com/LedgerHQ/ledger-live-desktop/commits/develop
