@@ -64,6 +64,7 @@ const Tabs: ThemedComponent<{ short: boolean, separator: boolean }> = styled.div
 
 type Props = {
   tabs: string[],
+  ids?: string[],
   onIndexChange: number => void,
   defaultIndex?: number,
   index?: number,
@@ -74,6 +75,7 @@ type Props = {
 
 const TabBar = ({
   tabs,
+  ids,
   onIndexChange,
   defaultIndex = 0,
   short = false,
@@ -103,6 +105,8 @@ const TabBar = ({
     tabRefs.current[index] = ref;
   };
 
+  console.log(tabs);
+
   return (
     <Tabs short={short} separator={separator}>
       {tabs.map((tab, j) => (
@@ -112,7 +116,7 @@ const TabBar = ({
           active={j === i}
           tabIndex={j}
           onClick={() => updateIndex(j)}
-          id={withId ? `settings-${tab.toLowerCase()}-tab` : ""}
+          id={withId && ids?.length ? `settings-${ids[j]}-tab` : ""}
         >
           <Text ff="Inter|SemiBold" fontSize={5}>
             <Trans i18nKey={tab} />

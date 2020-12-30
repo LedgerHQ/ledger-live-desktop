@@ -10,6 +10,7 @@ describe("Settings", () => {
   it("naive discreet mode toggle and assorted screens", async () => {
     // Toggle discreet mode twice
     const discreetButton = await $("#topbar-discreet-button");
+    discreetButton.waitForDisplayed();
     await discreetButton.click();
     await discreetButton.click();
 
