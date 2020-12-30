@@ -105,8 +105,6 @@ const TabBar = ({
     tabRefs.current[index] = ref;
   };
 
-  console.log(tabs);
-
   return (
     <Tabs short={short} separator={separator}>
       {tabs.map((tab, j) => (
