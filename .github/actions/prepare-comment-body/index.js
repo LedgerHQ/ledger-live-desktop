@@ -89,7 +89,7 @@ https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
   core.setOutput("body", str);
   core.setOutput("bodySlack", strSlack);
   core.setOutput("bodySlackAuthor", strSlackAuthor);
-  core.setOutput("slackAuthor", githubSlackMap[author]);
+  core.setOutput("slackAuthor", githubSlackMap[author] || "");
 };
 
 main().catch(err => core.setFailed(err));
