@@ -186,7 +186,6 @@ describe("Account", () => {
 
       const confirmButton = await $("#modal-confirm-button");
       await confirmButton.click();
-      await modalPage.close();
 
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: "remove-account-after",
