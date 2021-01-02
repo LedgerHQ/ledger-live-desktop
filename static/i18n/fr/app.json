@@ -2204,7 +2204,7 @@
       "selectUseCase": {
         "greetings": "Bonjour !",
         "hasNoRecovery": "Première utilisation de votre Nano ?",
-        "hasRecovery": "Vous avez déjà une phrase secrète de récupération ?",
+        "hasRecovery": "Already have a recovery phrase?",
         "separator": "or",
         "options": {
           "1": {
@@ -2228,7 +2228,7 @@
         "steps": {
           "getStarted": "Commencer",
           "pinCode": "Code PIN",
-          "recoveryPhrase": "Phrase secrète de récupération",
+          "recoveryPhrase": "Phrase de récupération",
           "hideRecoveryPhrase": "Hide recovery phrase",
           "pairNano": "Connect nano"
         },
