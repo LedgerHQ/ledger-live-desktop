@@ -227,12 +227,6 @@ describe("Account", () => {
 
   describe("remove accounts flow", () => {
     beforeAll(async () => {
-      if (modalPage.isDisplayed(true)) {
-        await modalPage.close();
-      }
-    });
-
-    it("displays a list of accounts", async () => {
       const accountsButton = await $("#drawer-accounts-button");
       await accountsButton.click();
     });
