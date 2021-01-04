@@ -15,7 +15,7 @@ const OnboardingOrElse = ({ children }: Props) => {
   const onboardingRelaunched = useSelector(onboardingRelaunchedSelector);
 
   if (!hasCompletedOnboarding || onboardingRelaunched) {
-    return <Onboarding />;
+    return <Onboarding onboardingRelaunched={onboardingRelaunched} />;
   }
 
   return children;
