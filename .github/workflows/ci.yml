@@ -75,6 +75,7 @@ jobs:
         with:
           path: ./output.txt
       - name: run coverage generation
+        if: always()
         run: yarn spectron-coverage >coverage.txt
       - name: Read coverage output
         id: coverage
