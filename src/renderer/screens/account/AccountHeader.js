@@ -241,6 +241,7 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
             onChange={e => setName(e.target.value)}
             disableEllipsis={editingName}
             value={name}
+            id="account-header-name"
           />
           <IconPen size={14} />
           {editingName && (
