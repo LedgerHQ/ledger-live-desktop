@@ -35,17 +35,30 @@ const scanAccounts = ({ currency, deviceId, syncConfig }) =>
     syncConfig,
   }).pipe(map(fromScanAccountEventRaw));
 
-export const getCurrencyBridge = (currency: CryptoCurrency): CurrencyBridge => ({
-  preload: async () => {
-    const value = await command("CurrencyPreload")({ currencyId: currency.id }).toPromise();
-    bridgeImpl.getCurrencyBridge(currency).hydrate(value, currency);
-    return value;
-  },
+export const getCurrencyBridge = (currency: CryptoCurrency): CurrencyBridge => {
+  const bridge = bridgeImpl.getCurrencyBridge(currency);
+  const bridgeGetPreloadStrategy = bridge.getPreloadStrategy;
+  const getPreloadStrategy = bridgeGetPreloadStrategy
+    ? currency => bridgeGetPreloadStrategy.call(bridge, currency)
+    : undefined;
+  const b: CurrencyBridge = {
+    preload: async () => {
+      const value = await command("CurrencyPreload")({ currencyId: currency.id }).toPromise();
+      bridgeImpl.getCurrencyBridge(currency).hydrate(value, currency);
+      return value;
+    },
 
-  hydrate: value => bridgeImpl.getCurrencyBridge(currency).hydrate(value, currency),
+    hydrate: value => bridgeImpl.getCurrencyBridge(currency).hydrate(value, currency),
 
-  scanAccounts,
-});
+    scanAccounts,
+  };
+
+  if (getPreloadStrategy) {
+    b.getPreloadStrategy = getPreloadStrategy;
+  }
+
+  return b;
+};
 
 export const getAccountBridge = (
   account: AccountLike,

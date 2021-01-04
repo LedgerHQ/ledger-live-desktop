@@ -1,8 +1,4 @@
-import initialize, {
-  app,
-  modalPage,
-  // portfolioPage,
-} from "../common.js";
+import initialize, { app, modalPage } from "../common.js";
 
 describe("Settings", () => {
   initialize("settings", {

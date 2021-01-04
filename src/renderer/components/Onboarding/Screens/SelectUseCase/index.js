@@ -100,6 +100,7 @@ export function SelectUseCase({ sendEvent }: Props) {
           </LeftColumn>
           <RightColumn>
             <UseCaseOption
+              id="first-use"
               heading={t("onboarding.screens.selectUseCase.options.1.heading")}
               title={t("onboarding.screens.selectUseCase.options.1.title")}
               description={t("onboarding.screens.selectUseCase.options.1.description")}

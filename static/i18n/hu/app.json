@@ -272,7 +272,7 @@
           "list": {
             "item1": "Set up Bitcoin Core on a device with sufficient resources.",
             "item2": "Wait for your node to fully synchronize.",
-            "item3": "Make note of your RPC credentials, IP address and port number."
+            "item3": "Make note of your node RPC credentials, IP address, and port number."
           },
           "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
         },
@@ -347,6 +347,10 @@
               "header": "Could not reach SatStack",
               "description": "Please verify that SatStack is running on this computer."
             },
+            "satstack-outdated": {
+              "header": "Please upgrade SatStack",
+              "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+            },
             "node-disconnected": {
               "header": "Could not reach full node",
               "description": "Please verify that your node is reachable and that the connection settings you entered are correct."
@@ -369,7 +373,7 @@
             },
             "scanning": {
               "header": "Account scan in progress...",
-              "description": "You can add your accounts once the account scan is competed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
+              "description": "You can add your accounts once the account scan is completed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
             }
           }
         },
@@ -911,6 +915,7 @@
       "finish": "Megerősítés"
     },
     "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
+    "fullNodeConfigure": "Configure node",
     "tokensTip": "{{token}} ({{ticker}}) egy {{tokenType}} token. Közvetlenül tudsz tokeneket fogadni a(z) {{currency}} számlán.",
     "accountToImportSubtitle_plural": "Meglévő számlák hozzáadása",
     "selectAll": "Összes kiválasztása ({{count}})",
@@ -2876,6 +2881,14 @@
     "SatStackStillSyncing": {
       "title": "Node sync in progress...",
       "description": "Please wait while your node is syncing. Sending is not possible since your Bitcoin account balances may be incorrect."
+    },
+    "SatStackVersionTooOld": {
+      "title": "Please upgrade SatStack",
+      "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+    },
+    "SatStackDescriptorNotImported": {
+      "title": "Account not scanned by full node",
+      "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
     },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",

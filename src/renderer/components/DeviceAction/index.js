@@ -135,7 +135,15 @@ const DeviceAction = <R, H, P>({
   }
 
   if (initSwapRequested && !initSwapResult && !initSwapError) {
-    return renderSwapDeviceConfirmation({ modelId, type });
+    const { transaction, exchange, exchangeRate, status } = request;
+    return renderSwapDeviceConfirmation({
+      modelId,
+      type,
+      transaction,
+      exchangeRate,
+      exchange,
+      status,
+    });
   }
 
   if (initSellRequested && !initSellResult && !initSellError) {

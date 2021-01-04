@@ -272,7 +272,7 @@
           "list": {
             "item1": "Set up Bitcoin Core on a device with sufficient resources.",
             "item2": "Wait for your node to fully synchronize.",
-            "item3": "Make note of your RPC credentials, IP address and port number."
+            "item3": "Make note of your node RPC credentials, IP address, and port number."
           },
           "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
         },
@@ -347,6 +347,10 @@
               "header": "Could not reach SatStack",
               "description": "Please verify that SatStack is running on this computer."
             },
+            "satstack-outdated": {
+              "header": "Please upgrade SatStack",
+              "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+            },
             "node-disconnected": {
               "header": "Could not reach full node",
               "description": "Please verify that your node is reachable and that the connection settings you entered are correct."
@@ -369,7 +373,7 @@
             },
             "scanning": {
               "header": "Account scan in progress...",
-              "description": "You can add your accounts once the account scan is competed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
+              "description": "You can add your accounts once the account scan is completed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
             }
           }
         },
@@ -454,6 +458,7 @@
     "description": "Deposit your crypto on the Compound protocol to start earning interest.",
     "tabs": {
       "dashboard": "Dashboard",
+      "opened": "Opened loans",
       "closed": "Closed loans",
       "history": "History"
     },
@@ -493,6 +498,11 @@
         "description": "You have not made any loans yet.",
         "cta": "Deposit"
       },
+      "opened": {
+        "title": "Your opened loans will appear here",
+        "description": "You have not made any loans yet.",
+        "cta": "Deposit"
+      },
       "history": {
         "title": "History",
         "description": "View the history of all your loan transactions.",
@@ -518,6 +528,12 @@
         "assetLended": "Asset",
         "amountRedeemed": "Withdrawal amount",
         "interestsEarned": "Interest earned",
+        "date": "Date"
+      },
+      "opened": {
+        "assetLended": "Asset",
+        "amount": "Amount",
+        "accruedInterest": "Accrued interest",
         "date": "Date"
       },
       "rates": {
@@ -911,6 +927,7 @@
       "finish": "Confirmation"
     },
     "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
+    "fullNodeConfigure": "Configure node",
     "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "Add existing accounts",
     "selectAll": "Select all ({{count}})",
@@ -1014,7 +1031,11 @@
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
-      "confirm": "Confirm Swap transaction"
+      "confirm": "Confirm Swap transaction",
+      "amountSent": "Amount sent",
+      "amountReceived": "Amount received",
+      "fees": "Fees",
+      "provider": "Provider"
     },
     "sell": {
       "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
@@ -2876,6 +2897,14 @@
     "SatStackStillSyncing": {
       "title": "Node sync in progress...",
       "description": "Please wait while your node is syncing. Sending is not possible since your Bitcoin account balances may be incorrect."
+    },
+    "SatStackVersionTooOld": {
+      "title": "Please upgrade SatStack",
+      "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+    },
+    "SatStackDescriptorNotImported": {
+      "title": "Account not scanned by full node",
+      "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
     },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",

@@ -43,21 +43,19 @@ export const CrossWrapper: ThemedComponent<{
   color: ${p => p.theme.colors.alertRed};
 `;
 
-const FullNode = () => {
+const FullNode = ({ data, onClose }: *) => {
   const satStackAlreadyConfigured = useEnv("SATSTACK");
-  const [stepId, setStepId] = useState(satStackAlreadyConfigured ? "node" : "landing");
-  const isModalLocked = ["device"].includes(stepId);
-
-  return (
-    <Modal
-      name="MODAL_FULL_NODE"
-      centered
-      preventBackdropClick={isModalLocked}
-      render={({ data, onClose }) => (
-        <FullNodeBody onStepChange={setStepId} activeStep={stepId} onClose={onClose} />
-      )}
-    />
+  const [stepId, setStepId] = useState(() =>
+    data?.skipNodeSetup ? "accounts" : satStackAlreadyConfigured ? "node" : "landing",
   );
+
+  return <FullNodeBody onStepChange={setStepId} activeStep={stepId} onClose={onClose} />;
 };
 
-export default FullNode;
+const render = ({ data, onClose }) => <FullNode onClose={onClose} data={data} />;
+
+const FullNodeModal = () => (
+  <Modal name="MODAL_FULL_NODE" centered preventBackdropClick render={render} />
+);
+
+export default FullNodeModal;

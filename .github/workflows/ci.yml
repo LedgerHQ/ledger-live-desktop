@@ -21,6 +21,9 @@ jobs:
     needs: cancel-previous
     outputs:
       comment: ${{ steps.comment.outputs.body }}
+      commentSlack: ${{ steps.comment.outputs.bodySlack }}
+      commentSlackAuthor: ${{ steps.comment.outputs.bodySlackAuthor }}
+      slackAuthor: ${{ steps.comment.outputs.slackAuthor }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -51,7 +54,7 @@ jobs:
           path: ./lint.txt
       - name: check build
         if: always()
-        run: sudo yarn build
+        run: export INSTRUMENT_BUILD=true && sudo --preserve-env=INSTRUMENT_BUILD yarn build
       - name: start electron webdriver
         if: always()
         run: yarn start-electron-webdriver -d
@@ -71,6 +74,15 @@ jobs:
         uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: ./output.txt
+      - name: run coverage generation
+        if: always()
+        run: yarn spectron-coverage >coverage.txt
+      - name: Read coverage output
+        id: coverage
+        if: always()
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
+        with:
+          path: ./coverage.txt
       - name: upload diffs to imgur
         if: always()
         uses: ./.github/actions/upload-images
@@ -96,6 +108,9 @@ jobs:
           runId: ${{ github.run_id }}
           testoutput: ${{ steps.spectron.outputs.content }}
           lintoutput: ${{ steps.lint.outputs.content }}
+          coverageoutput: ${{ steps.coverage.outputs.content }}
+          author: ${{github.event.sender.login}}
+          pullId: ${{github.event.number}}
       - name: display comment
         if: always()
         id: displaycomment
@@ -113,3 +128,19 @@ jobs:
           message: ${{ needs.test.outputs.comment }}
           allow-repeats: true
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Send message to Slack channel
+        uses: archive/github-actions-slack@v1.0.3
+        if: github.event_name == 'push'
+        id: notify
+        with:
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+          slack-channel: live-internal-desktop
+          slack-text: ${{ needs.test.outputs.commentSlack }}
+      - name: Send message to Slack author
+        uses: archive/github-actions-slack@v1.0.3
+        if: github.event_name == 'pull_request_target' && needs.test.outputs.slackAuthor != ''
+        id: notifyauthor
+        with:
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+          slack-channel: ${{ needs.test.outputs.slackAuthor }}
+          slack-text: ${{ needs.test.outputs.commentSlackAuthor }}

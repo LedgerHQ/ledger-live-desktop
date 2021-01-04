@@ -60,6 +60,7 @@ export default function Default() {
         <BridgeSyncProvider>
           <ContextMenuWrapper>
             <ModalsLayer />
+            <DebugMock />
             <OnboardingOrElse>
               <IsNewVersion />
 
@@ -93,7 +94,6 @@ export default function Default() {
 
               <LibcoreBusyIndicator />
               <DeviceBusyIndicator />
-              <DebugMock />
               <KeyboardContent sequence="BJBJBJ">
                 <PerfIndicator />
               </KeyboardContent>

@@ -4,6 +4,12 @@ author: valpinkman
 outputs:
   body:
     description: markdown formatted body for comment
+  bodySlack:
+    description: message formatted body for slack
+  bodySlackAuthor:
+    description: message formatted body for slack author
+  slackAuthor:
+    description: slack handle of the author
 inputs:
   images:
     description: array of images to include in body of comment
@@ -14,8 +20,17 @@ inputs:
   runId:
     description: runId
     required: true
+  pullId:
+    description: pullId
+    required: true
+  author:
+    description: author
+    required: true
   testoutput:
     description: testoutput
+    required: true
+  coverageoutput:
+    description: coverageoutput
     required: true
   lintoutput:
     description: lintoutput

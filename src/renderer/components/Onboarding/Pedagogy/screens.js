@@ -166,7 +166,7 @@ export function SetUpNanoWallet({ t, sendEvent }: ScreenProps) {
       >
         {t("onboarding.pedagogy.screens.setUpNanoWallet.description")}
       </Text>
-      <Button primary onClick={onClick}>
+      <Button primary onClick={onClick} id="setup-nano-wallet-cta">
         <Text ff="Inter|SemiBold" fontSize="12px">
           {t("onboarding.pedagogy.screens.setUpNanoWallet.CTA")}
         </Text>

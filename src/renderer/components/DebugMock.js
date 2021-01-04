@@ -312,6 +312,7 @@ const DebugMock = () => {
 
   return (
     <MockContainer id={nonce}>
+      <MockedGlobalStyle />
       <Box>
         <Item
           id={nonce}

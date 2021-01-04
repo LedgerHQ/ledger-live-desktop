@@ -84,6 +84,7 @@ export function Question({ sendEvent, t, meta }: Props) {
       </Text>
       {meta.answers.map((answer, index) => (
         <AnswerButton
+          id={`answer-${index}`}
           key={index}
           onClick={() => sendEvent({ type: "ANSWERED", answerIndex: index })}
         >
