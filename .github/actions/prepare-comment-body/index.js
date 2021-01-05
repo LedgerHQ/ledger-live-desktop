@@ -90,7 +90,11 @@ https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
 `;
 
   core.setOutput("body", str);
-  core.setOutput("bodySlack", strSlack);
+  if (lintFailed || testsFailed || imgDiffFailed) {
+    core.setOutput("bodySlack", strSlack);
+  } else {
+    core.setOutput("bodySlack", "");
+  }
   core.setOutput("bodySlackAuthor", strSlackAuthor);
   core.setOutput("slackAuthor", githubSlackMap[author] || "");
 };
