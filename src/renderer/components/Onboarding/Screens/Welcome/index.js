@@ -13,7 +13,6 @@ import LangSwitcher from "~/renderer/components/Onboarding/LangSwitcher";
 import { urls } from "~/config/urls";
 import { WaveContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import { AnimatedWave } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/AnimatedWave";
-import { userThemeSelector } from "~/renderer/reducers/settings";
 import illustration from "~/renderer/components/Onboarding/Screens/Welcome/assets/welcome.svg";
 import illustrationDark from "~/renderer/components/Onboarding/Screens/Welcome/assets/welcome-dark.svg";
 import { onboardingRelaunchedSelector } from "~/renderer/reducers/onboarding";
@@ -26,7 +25,6 @@ const WelcomeContainer: ThemedComponent<*> = styled.div`
   align-items: center;
   flex-direction: column;
   position: relative;
-  background: ${p => p.theme.colors.palette.background.wave};
 `;
 
 const TopContainer = styled.div`
@@ -57,11 +55,9 @@ type Props = {
 
 export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
   const { t } = useTranslation();
-  const theme = useSelector(userThemeSelector);
-  const useDarkColorPalette = ["dark", "dusk"].includes(theme);
+  const themeType = useTheme("colors.palette.type");
   const onboardingRelaunched = useSelector(onboardingRelaunchedSelector);
-  const welcomeIllustration = useDarkColorPalette ? illustrationDark : illustration;
-  const waveColor = useTheme("colors.palette.wave");
+  const welcomeIllustration = themeType === "dark" ? illustrationDark : illustration;
 
   const handleNext = useCallback(() => {
     sendEvent("NEXT");
@@ -83,7 +79,7 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
         )}
       </TopRightContainer>
       <WaveContainer>
-        <AnimatedWave height={600} color={waveColor} />
+        <AnimatedWave height={600} color="#4385F016" />
       </WaveContainer>
       <TopContainer>
         <IllustrationContainer>
