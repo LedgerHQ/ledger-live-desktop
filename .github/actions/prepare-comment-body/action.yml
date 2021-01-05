@@ -29,9 +29,6 @@ inputs:
   testoutput:
     description: testoutput
     required: true
-  coverageoutput:
-    description: coverageoutput
-    required: true
   lintoutput:
     description: lintoutput
     required: true

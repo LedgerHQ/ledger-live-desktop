@@ -76,13 +76,9 @@ jobs:
           path: ./output.txt
       - name: run coverage generation
         if: always()
-        run: yarn spectron-coverage >coverage.txt
-      - name: Read coverage output
-        id: coverage
-        if: always()
-        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
-        with:
-          path: ./coverage.txt
+        run: yarn spectron-coverage
+        env:
+          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
       - name: upload diffs to imgur
         if: always()
         uses: ./.github/actions/upload-images
@@ -108,7 +104,6 @@ jobs:
           runId: ${{ github.run_id }}
           testoutput: ${{ steps.spectron.outputs.content }}
           lintoutput: ${{ steps.lint.outputs.content }}
-          coverageoutput: ${{ steps.coverage.outputs.content }}
           author: ${{github.event.sender.login}}
           pullId: ${{github.event.number}}
       - name: display comment
