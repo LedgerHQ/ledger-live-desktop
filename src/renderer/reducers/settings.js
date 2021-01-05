@@ -38,13 +38,15 @@ type ConfirmationDefaults = {
   },
 };
 
+export const CONFIRMATIONS_NB_MIN = 1;
+
 export const currencySettingsDefaults = (c: Currency): ConfirmationDefaults => {
   let confirmationsNb;
   if (c.type === "CryptoCurrency") {
     const { blockAvgTime } = c;
     if (blockAvgTime) {
       const def = Math.ceil((30 * 60) / blockAvgTime); // 30 min approx validation
-      confirmationsNb = { min: 1, def, max: 3 * def };
+      confirmationsNb = { min: CONFIRMATIONS_NB_MIN, def, max: 3 * def };
     }
   }
   return {
@@ -112,7 +114,7 @@ export type SettingsState = {
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
   const defaults = currencySettingsDefaults(crypto);
   return {
-    confirmationsNb: defaults.confirmationsNb ? defaults.confirmationsNb.def : 0,
+    confirmationsNb: defaults.confirmationsNb ? defaults.confirmationsNb.def : CONFIRMATIONS_NB_MIN,
   };
 };
 
@@ -358,7 +360,7 @@ export const confirmationsNbForCurrencySelector = (
   const obj = state.settings.currenciesSettings[currency.ticker];
   if (obj) return obj.confirmationsNb;
   const defs = currencySettingsDefaults(currency);
-  return defs.confirmationsNb ? defs.confirmationsNb.def : 0;
+  return defs.confirmationsNb ? defs.confirmationsNb.def : CONFIRMATIONS_NB_MIN;
 };
 
 export const preferredDeviceModelSelector = (state: State) => state.settings.preferredDeviceModel;

@@ -51,6 +51,7 @@ import IconExternalLink from "~/renderer/icons/ExternalLink";
 import { openURL } from "~/renderer/linking";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import {
+  CONFIRMATIONS_NB_MIN,
   confirmationsNbForCurrencySelector,
   marketIndicatorSelector,
 } from "~/renderer/reducers/settings";
