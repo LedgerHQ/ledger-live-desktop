@@ -175,19 +175,7 @@ const BuyCrypto = () => {
             onClose();
           }}
           title="Connect your device"
-          render={() =>
-            data ? (
-              <Root
-                data={data}
-                onClose={() => {
-                  if (data.onCancel) {
-                    data.onCancel();
-                  }
-                  onClose();
-                }}
-              />
-            ) : null
-          }
+          render={() => (data ? <Root data={data} onClose={onClose} /> : null)}
         />
       )}
     />
