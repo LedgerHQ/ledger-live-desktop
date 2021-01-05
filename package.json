@@ -103,7 +103,6 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "rimraf": "^3.0.2",
-    "ripple-binary-codec": "^0.2.6",
     "rxjs": "^6.6.3",
     "secp256k1": "^4.0.2",
     "semver": "^7.1.3",
