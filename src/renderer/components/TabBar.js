@@ -17,6 +17,10 @@ const Tab = styled(Base)`
     background: none;
     color: ${p => p.theme.colors.palette.text.shade100};
   }
+
+  > * {
+    font-size: ${p => p.fontSize}px;
+  }
 `;
 
 const TabIndicator = styled.span.attrs(({ currentRef = {}, index, short }) => ({
@@ -71,6 +75,7 @@ type Props = {
   short?: boolean,
   separator?: boolean,
   withId?: boolean,
+  fontSize?: number,
 };
 
 const TabBar = ({
@@ -82,6 +87,7 @@ const TabBar = ({
   index: propsIndex,
   separator = false,
   withId = false,
+  fontSize = 16,
 }: Props) => {
   const tabRefs = useRef([]);
   const [index, setIndex] = useState(defaultIndex);
@@ -115,6 +121,7 @@ const TabBar = ({
           tabIndex={j}
           onClick={() => updateIndex(j)}
           id={withId && ids?.length ? `settings-${ids[j]}-tab` : ""}
+          fontSize={fontSize}
         >
           <Text ff="Inter|SemiBold" fontSize={5}>
             <Trans i18nKey={tab} />

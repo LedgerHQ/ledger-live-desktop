@@ -114,6 +114,7 @@ const Settings = ({ history, location, match }: Props) => {
           ids={items.map(i => i.key)}
           separator
           withId
+          fontSize={14}
         />
         <Switch>
           {processedItems.map(i => (
