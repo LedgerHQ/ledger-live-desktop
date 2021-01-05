@@ -72,17 +72,17 @@ export function HideRecoverySeed() {
         </Text>
         <Point>
           <Trans i18nKey="onboarding.drawers.whereToHide.points.1">
-            <Text ff="Inter|SemiBold" />
+            <Text ff="Inter|Bold" />
           </Trans>
         </Point>
         <Point>
           <Trans i18nKey="onboarding.drawers.whereToHide.points.2">
-            <Text ff="Inter|SemiBold" />
+            <Text ff="Inter|Bold" />
           </Trans>
         </Point>
         <Point>
           <Trans i18nKey="onboarding.drawers.whereToHide.points.3">
-            <Text ff="Inter|SemiBold" />
+            <Text ff="Inter|Bold" />
           </Trans>
         </Point>
         <Point>{t("onboarding.drawers.whereToHide.points.4")}</Point>
