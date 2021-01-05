@@ -130,7 +130,7 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Send message to Slack channel
         uses: archive/github-actions-slack@v1.0.3
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && needs.test.outputs.commentSlack != ''
         id: notify
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}

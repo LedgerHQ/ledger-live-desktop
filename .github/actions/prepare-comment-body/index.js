@@ -76,6 +76,9 @@ https://github.com/LedgerHQ/ledger-live-desktop/commits/develop
     "juan-cortes": "UE1D1FS77",
     dasilvarosa: "UA14024H4",
     valpinkman: "U98KPAN86",
+    MortalKastor: "U5FLVJ709",
+    LFBarreto: "UR6U4QKKN",
+    IAmMorrow: "UKFTXAZGF",
   };
 
   const strSlackAuthor = `
@@ -87,7 +90,11 @@ https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
 `;
 
   core.setOutput("body", str);
-  core.setOutput("bodySlack", strSlack);
+  if (lintFailed || testsFailed || imgDiffFailed) {
+    core.setOutput("bodySlack", strSlack);
+  } else {
+    core.setOutput("bodySlack", "");
+  }
   core.setOutput("bodySlackAuthor", strSlackAuthor);
   core.setOutput("slackAuthor", githubSlackMap[author] || "");
 };
