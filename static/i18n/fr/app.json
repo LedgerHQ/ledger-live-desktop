@@ -2204,8 +2204,8 @@
       "selectUseCase": {
         "greetings": "Bonjour !",
         "hasNoRecovery": "Première utilisation de votre Nano ?",
-        "hasRecovery": "Already have a recovery phrase?",
-        "separator": "or",
+        "hasRecovery": "Vous avez déjà une phrase de récupération ?",
+        "separator": "ou",
         "options": {
           "1": {
             "heading": "Première utilisation",
@@ -2213,14 +2213,14 @@
             "description": "Commençons par configurer votre appareil !"
           },
           "2": {
-            "heading": "Connect device",
+            "heading": "Connecter l'appareil",
             "title": "Connectez votre Nano",
             "description": "Votre appareil est déjà configuré ? Connectez-le à votre application !"
           },
           "3": {
             "heading": "Restauration de l'appareil",
-            "title": "Restore your recovery phrase on a new device",
-            "description": "Use an existing recovery phrase to restore your private keys on a new Nano!"
+            "title": "Restaurez votre phrase de récupération sur un nouvel appareil",
+            "description": "Utilisez une phrase de récupération existante pour restaurer vos clés privées sur un nouveau Nano !"
           }
         }
       },
@@ -2229,81 +2229,81 @@
           "getStarted": "Commencer",
           "pinCode": "Code PIN",
           "recoveryPhrase": "Phrase de récupération",
-          "hideRecoveryPhrase": "Hide recovery phrase",
-          "pairNano": "Connect nano"
+          "hideRecoveryPhrase": "Cachez votre phrase de récupération",
+          "pairNano": "Connecter le Nano"
         },
         "screens": {
           "importYourRecoveryPhrase": {
-            "title": "Restore from recovery phrase",
-            "paragraph1": "Restore your Nano from your recovery phrase to restore, replace or back up your Ledger hardware wallet.",
-            "paragraph2": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
+            "title": "Restaurez à partir de votre phrase de récupération",
+            "paragraph1": "Restaurer votre Nano à partir de votre phrase de récupération afin de restaurer, remplacer ou sauvegarder votre wallet physique Ledger.",
+            "paragraph2": "Votre Nano va restaurer vos clés privées et vous pourrez accéder à vos cryptomonnaies et les gérer.",
             "buttons": {
-              "next": "OK, I’m ready!",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "OK, je suis prêt(e) !",
+              "prev": "Etape précédente",
+              "help": "Besoin d'aide"
             }
           },
           "howToGetStarted": {
             "title": "La meilleure façon de commencer :",
             "rules": {
-              "1": "Plan 30 minutes and take your time.",
-              "2": "Grab a pen to write with.",
+              "1": "Comptez 30 minutes, prenez votre temps !",
+              "2": "Prenez un stylo pour écrire.",
               "3": "Restez seul et choisissez un environnement sûr et calme."
             },
             "buttons": {
-              "next": "OK, I’m ready!",
-              "prev": "Previous step"
+              "next": "OK, je suis prêt(e) !",
+              "prev": "Etape précédente"
             }
           },
           "deviceHowTo": {
             "turnOn": {
-              "title": "Turn on Nano",
-              "descr": "Connect your device to your computer with the USB cable."
+              "title": "Allumer le Nano",
+              "descr": "Connectez votre appareil à l'ordinateur avec le câble USB."
             },
             "browse": {
               "title": "Parcourir",
-              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+              "descr": "Apprenez à interagir avec votre appareil en lisant les instructions à l'écran."
             },
             "select": {
-              "title": "Select “Set up as new device”",
+              "title": "Sélectionnez \"Set up as a new device\"",
               "descr": "Appuyez simultanément sur les deux boutons pour valider la sélection."
             },
             "follow": {
               "title": "Suivre les instructions",
-              "descr": "Come back here to follow instructions on your PIN code."
+              "descr": "Revenez ici afin de suivre les instructions relatives à votre code PIN."
             },
             "buttons": {
               "next": "Étape suivante",
-              "prev": "Previous step",
-              "help": "Need help"
+              "prev": "Etape précédente",
+              "help": "Besoin d'aide"
             }
           },
           "deviceHowTo2": {
             "turnOn": {
-              "title": "Turn on Nano",
-              "descr": "Connect your device to your computer with the USB cable."
+              "title": "Allumer le Nano",
+              "descr": "Selectionnez \"Enter your recovery phrase\"."
             },
             "browse": {
-              "title": "Browse",
-              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+              "title": "Parcourir",
+              "descr": "Apprenez à interagir avec votre appareil en lisant les instructions à l'écran."
             },
             "select": {
-              "title": "Select “Enter your recovery phrase”",
-              "descr": "Press both buttons simultaneously to validate the selection."
+              "title": "Selectionnez \"Enter your recovery phrase\"",
+              "descr": "Appuyez sur les deux boutons simultanément pour valider la sélection."
             },
             "follow": {
-              "title": "Follow instructions",
-              "descr": "Come back here to follow instructions on your PIN code."
+              "title": "Suivez les instructions",
+              "descr": "Revenez ici afin de suivre les instructions relatives à votre code PIN."
             },
             "buttons": {
               "next": "Étape suivante",
-              "prev": "Previous step",
-              "help": "Need help"
+              "prev": "Etape précédente",
+              "help": "Besoin d'aide"
             }
           },
           "pinCode": {
-            "title": "PIN code",
-            "paragraph": "Your PIN code is the first layer of security. It physically secures access to your private key and your Nano. Your PIN code must be 4 to 8 digits long.",
+            "title": "Code PIN",
+            "paragraph": "Votre code PIN est la première couche de sécurité. Il sécurise l'accès physique à votre Nano et à vos clés privées. Votre code PIN doit comporter 4 à 8 chiffres.",
             "disclaimer": "Je comprends que je dois choisir mon code PIN moi-même et le garder secret.",
             "buttons": {
               "next": "Configurer le code PIN",
@@ -2416,57 +2416,57 @@
             "buttons": {
               "next": "Étape suivante",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "Besoin d'aide"
             }
           },
           "genuineCheck": {
             "plugUSBCable": {
-              "title": "Connect USB cable",
-              "descr": "Connect the USB cable and enter your PIN Code on the device"
+              "title": "Connectez le câble USB",
+              "descr": "Connectez le câble USB et entrez votre code PIN sur l'appareil"
             },
             "success": {
-              "title": "All good!",
-              "desc": "Your Ledger {{deviceName}} is genuine and ready to use with Ledger Live"
+              "title": "C'est parfait !",
+              "desc": "Votre Ledger {{deviceName}} est authentique et est prêt à être utilisé avec l'application Ledger"
             },
             "buttons": {
-              "next": "Continue",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Poursuivre",
+              "prev": "Etape précédente",
+              "help": "Besoin d'aide"
             }
           },
           "hideRecoveryPhrase": {
-            "title": "Hide your recovery phrase",
-            "paragraph": "Your recovery phrase is your last chance to access your crypto if you cannot use your Nano. You must keep it in a safe place.",
-            "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
-            "neverShowToAnyone": "Never share your 24 words with anyone, not even with Ledger.",
+            "title": "Cachez votre phrase de récupération",
+            "paragraph": "Votre phrase de récupération est votre dernière chance d'accéder à vos cryptos si vous ne pouvez plus utiliser votre Nano. Vous devez la garder dans un endroit sûr.",
+            "keepItOffline": "Saisissez ces mots uniquement sur un wallet physique, pas sur un ordinateur ni sur un téléphone.",
+            "neverShowToAnyone": "Ne partagez jamais vos 24 mots, avec qui que ce soit. Même pas avec Ledger.",
             "buttons": {
-              "next": "OK, I'm done!",
-              "prev": "Previous step",
-              "help": "Need help",
-              "learn": "Learn how to hide it"
+              "next": "C'est bon, j'ai fini !",
+              "prev": "Etape précédente",
+              "help": "Besoin d'aide",
+              "learn": "Apprendre à la cacher"
             }
           },
           "pairMyNano": {
-            "title": "Genuine check",
-            "paragraph": "We'll verify whether your Nano is genuine. This should be quick and easy!",
+            "title": "Contrôle d'authenticité",
+            "paragraph": "Nous allons contrôler l'authenticité de votre Nano. Cela sera facile et rapide !",
             "buttons": {
-              "next": "Check my Nano",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Vérifier mon Nano",
+              "prev": "Etape précédente",
+              "help": "Besoin d'aide"
             }
           },
           "quizzSuccess": {
-            "title": "Already a pro!",
-            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
+            "title": "Vous êtes déjà pro !",
+            "paragraph": "Vous êtes prêt(e) à gérer vos cryptomonnaies en toute sécurité. Il ne reste plus qu'une petite étape !",
             "buttons": {
               "next": "Étape suivante",
-              "prev": "Previous step"
+              "prev": "Etape précédente"
             }
           },
           "quizzFail": {
-            "title": "You will soon become a pro...",
+            "title": "Vous allez bientôt devenir un(e) pro",
             "paragraph1": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.",
-            "paragraph2": "Only one quick step left!",
+            "paragraph2": "Plus qu'une petite étape !",
             "buttons": {
               "next": "Étape suivante",
               "prev": "Previous step"
