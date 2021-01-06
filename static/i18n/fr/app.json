@@ -2522,7 +2522,7 @@
       },
       "questions": {
         "1": {
-          "text": "As a Ledger user, my crypto is stored:",
+          "text": "En tant qu'utilisateur Ledger, mes cryptomonnaies sont stockés :",
           "answers": {
             "1": "Sur mon Nano",
             "2": "Sur la blockchain"
@@ -2533,8 +2533,8 @@
               "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
             },
             "fail": {
-              "title": "Incorrect!",
-              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+              "title": "Incorrect !",
+              "text": "Vos cryptomonnaies sont toujours stockés sur la blockchain. Votre wallet Nano ne détient que votre clé privée, qui vous donne accès à vos cryptomonnaies."
             }
           }
         },
@@ -2542,16 +2542,16 @@
           "text": "Si ma phrase de récupération n'est plus en sécurité ou que quelqu'un la connaît...",
           "answers": {
             "1": "Pas de problème, Ledger m’en envoie une copie",
-            "2": "My crypto is no longer safe and I need to transfer them to a secure place"
+            "2": "L'accès à mes cryptomonnaies n’est plus sécurisé et j’ai besoin de les transférer dans un endroit sûr"
           },
           "results": {
             "success": {
               "title": "Félicitations !",
-              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "text": "Toute personne ayant accès à votre phrase de récupération peut voler vos crypto-actifs.\nSi vous la perdez, vous devez rapidement transférer vos cryptomonnaies vers un endroit sûr."
             },
             "fail": {
               "title": "Incorrect !",
-              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "text": "Toute personne ayant accès à votre phrase de récupération peut voler vos crypto-actifs.\nSi vous la perdez, vous devez rapidement transférer vos cryptomonnaies vers un endroit sûr."
             }
           }
         },
@@ -2564,11 +2564,11 @@
           "results": {
             "success": {
               "title": "Félicitations !",
-              "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
+              "text": "Votre clé privée reste toujours hors ligne dans votre wallet physique. Même lorsque vous êtes connecté à votre Nano, l'application Ledger ne peut pas accéder à votre clé privée. Vous devez autoriser physiquement chaque transaction sur votre appareil."
             },
             "fail": {
               "title": "Incorrect !",
-              "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
+              "text": "Votre clé privée reste toujours hors ligne dans votre wallet physique. Même lorsque vous êtes connecté à votre Nano, l'application Ledger ne peut pas accéder à votre clé privée. Vous devez autoriser physiquement chaque transaction sur votre appareil."
             }
           }
         }
