@@ -98,11 +98,11 @@ jobs:
         run: |
           git remote add ledger https://github.com/LedgerHQ/ledger-live-desktop.git
           git fetch ledger
-          git diff --name-only ${{github.base_ref}}..${{github.sha}} tests/specs/__image_snapshots__ >imgChanged.txt
-        if: always()
+          git diff --name-only ledger/${{github.base_ref}}..${{github.sha}} -- tests/specs/__image_snapshots__ >imgChanged.txt
+        if: always() && github.event_name == 'pull_request_target'
       - name: Read imgChanged output
         id: imgChanged
-        if: always()
+        if: always() && github.event_name == 'pull_request_target'
         uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: ./imgChanged.txt
