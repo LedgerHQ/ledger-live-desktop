@@ -272,7 +272,7 @@
           "list": {
             "item1": "Configurez Bitcoin Core sur un appareil avec des ressources suffisantes.",
             "item2": "Attendez que votre nœud soit complètement synchronisé.",
-            "item3": "Make note of your node RPC credentials, IP address, and port number."
+            "item3": "Prenez note de vos identifiants RPC, de votre adresse IP et de votre numéro de port."
           },
           "disclaimer": "Exécuter un nœud nécessite un ordinateur disposant de ressources suffisantes et d'une connexion à une bande passante sans restriction de données."
         },
@@ -348,7 +348,7 @@
               "description": "Veuillez vérifier que SatStack fonctionne sur cet ordinateur."
             },
             "satstack-outdated": {
-              "header": "Please upgrade SatStack",
+              "header": "Veuillez mettre à jour SatStack",
               "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
             },
             "node-disconnected": {
@@ -2469,16 +2469,16 @@
             "paragraph2": "Plus qu'une petite étape !",
             "buttons": {
               "next": "Étape suivante",
-              "prev": "Previous step"
+              "prev": "Etape précédente"
             }
           },
           "connectYourDevice": {
             "plugUSBCable": {
-              "title": "Connect USB cable",
-              "descr": "Connect the cable and enter the PIN Code on your device",
+              "title": "Connectez le câble USB",
+              "descr": "Connectez le câble et entrez le code PIN sur votre appareil",
               "buttons": {
-                "next": "Continue",
-                "prev": "Previous step"
+                "next": "Poursuivre",
+                "prev": "Etape précédente"
               }
             }
           }
@@ -2486,15 +2486,15 @@
       }
     },
     "pedagogy": {
-      "heading": "basics",
+      "heading": "les bases",
       "screens": {
         "accessYourCoins": {
           "title": "Access your crypto",
-          "description": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
+          "description": "Vos cryptos sont stockés sur la blockchain. Vous avez besoin d'une clé privée pour y accéder et les gérer."
         },
         "ownYourPrivateKey": {
           "title": "Détenez votre clé privée",
-          "description": "Your private key is stored within your Nano. You must be the only one to own it to be in control of your money."
+          "description": "Votre clé privée est stockée dans votre Nano et vous devez être le seul à la détenir pour conserver le contrôle de votre argent."
         },
         "stayOffline": {
           "title": "Restez déconnecté",
@@ -2502,34 +2502,34 @@
         },
         "validateTransactions": {
           "title": "Validez les transactions",
-          "description": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
+          "description": "Ledger Live vous permet d'acheter, de vendre, de gérer, d'échanger et de gagner des cryptomonnaies tout en étant protégé. Vous validerez chaque transaction sur vos cryptomonnaies avec votre Nano."
         },
         "setUpNanoWallet": {
-          "title": "Let’s set up your Nano!",
-          "description": "We'll start by setting up your Nano security.",
+          "title": "Configurons votre Nano",
+          "description": "Commençons par configurer la sécurité de votre Nano.",
           "CTA": "C'est parti !"
         }
       }
     },
     "quizz": {
       "heading": "Quiz",
-      "title": "Now game on!",
-      "descr": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
+      "title": "Testons nos connaissances !",
+      "descr": "Répondez à 3 questions simples pour éviter les idées fausses sur votre wallet physique.",
       "buttons": {
-        "start": "Let’s take the quiz",
-        "next": "Next question",
-        "finish": "Finish quiz"
+        "start": "Faisons le quiz",
+        "next": "Question suivante",
+        "finish": "Finir le quiz"
       },
       "questions": {
         "1": {
           "text": "As a Ledger user, my crypto is stored:",
           "answers": {
-            "1": "On my Nano",
-            "2": "On the blockchain"
+            "1": "Sur mon Nano",
+            "2": "Sur la blockchain"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
+              "title": "Bravo !",
               "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
             },
             "fail": {
