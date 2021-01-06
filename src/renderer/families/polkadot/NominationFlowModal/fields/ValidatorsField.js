@@ -163,6 +163,7 @@ const ValidatorField = ({
         maxVotes={MAX_NOMINATIONS}
         totalValidators={SR.length}
         notEnoughVotes={false}
+        hideVotes
       />
       <Box ref={containerRef} id="nominate-list">
         <ScrollLoadingList
