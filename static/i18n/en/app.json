@@ -105,7 +105,7 @@
       "SLASH": "Slash",
       "WITHDRAW_UNBONDED": "Unbonded Withdrawal",
       "NOMINATE": "Nomination",
-      "CHILL": "Chill"
+      "CHILL": "Clear nominations"
     }
   },
   "byteSize": {
@@ -1805,52 +1805,53 @@
   },
   "polkadot": {
     "lockedBalance": "Bonded",
-    "lockedTooltip": "Bonded assets can be used to nominate validators and earn rewards.",
+    "lockedTooltip": "Assets must be bonded to nominated validators before earning rewards.",
     "unlockingBalance": "Unbonding",
-    "unlockingTooltip": "Unbonding assets stay locked during 28 days before being available for withdrawal.",
+    "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
     "unlockedBalance": "Unbonded",
-    "unlockedTooltip": "Unbonded assets can now be withdrawn with a transaction.",
+    "unlockedTooltip": "Unbonded assets can now be moved using the withdraw operation.",
     "nomination": {
       "emptyState": {
-        "description": "You can earn DOT rewards by bonding your assets and nominating validators.",
-        "info": "How nomination works"
+        "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
+        "info": "How nominations works"
       },
       "header": "Nominations",
       "nominate": "Nominate",
       "chill": "Clear nominations",
       "totalStake": "Total Stake",
+      "amount": "Bonded Amount",
       "commission": "Commission",
       "active": "Active",
-      "activeTooltip": "This validator has been elected and is collecting rewards with some of your bonded assets.",
+      "activeTooltip": "This validator is elected and is collecting rewards on your bonded assets.",
       "inactive": "Inactive",
-      "inactiveTooltip": "This validator has been elected but is not collecting rewards with your stake.",
+      "inactiveTooltip": "This validator is elected but is not collecting rewards on your bonded assets.",
       "waiting": "Unelected",
-      "waitingTooltip": "This validator has not been elected therefore is not collecting rewards.",
+      "waitingTooltip": "This validator is not elected, therefore is not collecting rewards.",
       "notValidator": "Not a validator",
       "notValidatorTooltip": "This address is no longer a validator",
       "elected": "Elected",
       "nominatorsCount": "{{nominatorsCount}} nominators",
-      "nominatorsTooltip": "This validator has {{count}} rewarded nominators for this era",
+      "nominatorsTooltip": "This validator is currently elected by {{count}} nominators.",
       "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
-      "oversubscribedTooltip": "Only the {{maxNominatorRewardedPerValidator}} nominators with highest stake will earn rewards",
+      "oversubscribedTooltip": "Only the top {{maxNominatorRewardedPerValidator}} nominators with the highest bonded amount earn rewards",
       "hasPendingBondOperation": "A bond operation is still pending confirmation",
-      "electionOpen": "The election of new validators is currently ongoing. As such staking operations are not available for at most 15 minutes.",
-      "electionOpenTooltip": "This operation is disabled during validators election",
+      "electionOpen": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most.",
+      "electionOpenTooltip": "This operation is disabled during the election of validators",
       "externalControllerTooltip": "This account is controlled by another account.",
-      "externalControllerUnsupported": "<0>This account is controlled by another account with address <0>{{address}}</0>.</0><1>Staking operations on a Stash controlled by an external account are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js.</1>",
+      "externalControllerUnsupported": "<0>This stash account is controlled by another account with the address <0>{{address}}</0>.</0><1>Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js</1>",
       "externalStashTooltip": "This account controls another account.",
-      "externalStashUnsupported": "<0>This account controls an external Stash account with address <0>{{address}}</0>.</0><1>Staking operations on an external Stash are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js.</1>",
-      "showInactiveNominations": "Show inactive nominations ({{count}})",
-      "hideInactiveNominations": "Hide inactive nominations",
+      "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
+      "showInactiveNominations": "Show all nominations ({{count}})",
+      "hideInactiveNominations": "Show active nominations only",
       "noActiveNominations": "There are no active nominations.",
-      "showAllUnlockings": "Show all unbondings ({{count}})",
-      "hideAllUnlockings": "Hide unbondings"
+      "showAllUnlockings": "Show all unbonding amounts ({{count}})",
+      "hideAllUnlockings": "Hide unbonding amounts"
     },
     "unlockings": {
-      "header": "Unbondings",
-      "headerTooltip": "Available after the 28-day timelock",
+      "header": "Unbonding",
+      "headerTooltip": "Available after the 28-day unbonding period",
       "withdrawUnbonded": "Withdraw Unbonded",
-      "withdrawTooltip": "Transfers the unbonded balance to your available balance.",
+      "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
       "noUnlockedWarning": "No unbonded balance to withdraw yet.",
       "rebond": "Rebond",
       "unbonded": "Unbonded"
@@ -1859,23 +1860,23 @@
       "title": "Manage assets",
       "bond": {
         "title": "Bond",
-        "description": "Lock assets bonded for staking and start earning rewards after nominating validators."
+        "description": "To earn rewards, first bond an amount. Then you must nominate your validator(s)."
       },
       "unbond": {
         "title": "Unbond",
-        "description": "Unlock DOT to have them back in your available balance. You will no longer earn rewards for those assets."
+        "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
       },
       "withdrawUnbonded": {
         "title": "Withdraw Unbonded",
-        "description": "Transfer your unbonded assets back to your available balnce after a 28-day timelock period."
+        "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
       },
       "nominate": {
         "title": "Nominate",
-        "description": "Choose up to 16 validators to be elected to start earning rewards."
+        "description": "Choose up to 16 validators. Ensure nominations are Active to earn rewards."
       },
       "chill": {
         "title": "Clear nominations",
-        "description": "Remove all your nominations and stop earning rewards."
+        "description": "Remove all nominations. You will stop earning rewards. Your bonded amount remains bonded."
       }
     },
     "nominate": {
@@ -1883,7 +1884,7 @@
       "steps": {
         "validators": {
           "title": "Validators",
-          "notValidatorsRemoved": "You have nominated {{count}} addresses that are no longer validators. They will be automatically removed from your nominate transaction."
+          "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction."
         },
         "connectDevice": {
           "title": "Device"
@@ -1893,7 +1894,7 @@
           "label": "Confirmation",
           "success": {
             "title": "You have successfully nominated validators",
-            "text": "You will start earning rewards when your validators are elected and your bonded assets are part of their stake.",
+            "text": "You will start earning rewards when your assets are bonded to your elected validator(s).",
             "cta": "View details"
           },
           "pending": {
@@ -1908,19 +1909,19 @@
       "rewardDestination": {
         "label": "Rewards Destination",
         "stash": "Available Balance",
-        "stashDescription": "The rewards will be transferred to your available balance.",
+        "stashDescription": "Rewards are credited to your available balance.",
         "staked": "Bonded Balance",
-        "stakedDescription": "The rewards will be transferred to your bonded balance."
+        "stakedDescription": "Rewards are credited to your bonded balance for compound earning."
       },
       "steps": {
         "starter": {
-          "description": "You may earn rewards by bonding your DOT assets and nominating validators.",
+          "description": "You may earn rewards by bonding your assets and then nominate your validators.",
           "bullet": [
             "You keep ownership of bonded assets",
             "Nominate using your Ledger device",
-            "Assets will be available 28 days after unbonding"
+            "Assets will be available again, 28 days after unbonding"
           ],
-          "help": "How nomination works",
+          "help": "How nominations works",
           "warning": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
         },
         "amount": {
@@ -1928,20 +1929,20 @@
           "amountLabel": "Amount to bond",
           "availableLabel": "Available",
           "maxLabel": "Max",
-          "info": "Once assets are bonded they can be unbonded any time, but they will be locked for 28-day."
+          "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days."
         },
         "connectDevice": {
           "title": "Device"
         },
         "confirmation": {
           "tooltip": {
-            "title": "Transaction is awaiting confirmation",
-            "desc": "You have to wait a short time before being able to nominate"
+            "title": "Transaction awaiting confirmation",
+            "desc": "You have to wait a moment before nominating"
           },
           "title": "Confirmation",
           "success": {
             "title": "Assets successfully bonded",
-            "text": "Your account balance will update once the network has confirmed the transaction.",
+            "text": "You can nominate validators once the network has confirmed the transaction.",
             "textNominate": "You will be able to nominate validators once the network has confirmed your transaction.",
             "nominate": "Nominate",
             "later": "Nominate later"
@@ -1961,7 +1962,7 @@
           "amountLabel": "Amount to rebond",
           "availableLabel": "Unbonding",
           "maxLabel": "Max",
-          "info": "Rebonded assets will be immediately added to bonded balance."
+          "info": "Rebonded assets are immediately added to the bonded amount."
         },
         "connectDevice": {
           "title": "Device"
@@ -1989,7 +1990,7 @@
           "amountLabel": "Amount to unbond",
           "availableLabel": "Bonded",
           "maxLabel": "Max",
-          "info": "Unbonded assets can be withdrawn after a 28-day timelock period."
+          "info": "Unbonded assets can be withdrawn after the 28-day unbonding period."
         },
         "connectDevice": {
           "title": "Device"
@@ -2012,14 +2013,14 @@
     "simpleOperation": {
       "modes": {
         "withdrawUnbonded": {
-          "title": "Withdraw unbonded",
-          "description": "After a 28-day timelock you can withdraw unbonded assets.",
-          "info": "You will fully get back your unbonded assets as available balance."
+          "title": "Withdraw Unbonded",
+          "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
+          "info": "You can then withdraw unbonded assets to your available balance."
         },
         "chill": {
-          "title": "Stop nominating",
-          "description": "You can stop nominating all your validators and stop receiving rewards.",
-          "info": "Bonded assets will stay untouched and will be locked for a 28-day timelock period if you unbonds them."
+          "title": "Clear nominations",
+          "description": "Clears all nominations and stops earning rewards.",
+          "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
         }
       },
       "steps": {
@@ -3442,7 +3443,7 @@
       "title": "You have exceeded the unbond limit"
     },
     "PolkadotValidatorsRequired": {
-      "title": "You must select at least 1 validator"
+      "title": "You must select at least one validator"
     }
   }
 }

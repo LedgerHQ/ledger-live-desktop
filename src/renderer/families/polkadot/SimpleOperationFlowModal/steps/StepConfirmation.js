@@ -91,7 +91,7 @@ export function StepConfirmationFooter({
           event="ClaimRewards Algorand Flow Step 3 View OpD Clicked"
           onClick={onClose}
         >
-          <Trans i18nKey="polkadot.simpleOperation.flow.steps.confirmation.success.cta" />
+          <Trans i18nKey="polkadot.simpleOperation.steps.confirmation.success.cta" />
         </Button>
       )}
     </Box>

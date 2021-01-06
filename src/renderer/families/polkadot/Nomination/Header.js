@@ -47,7 +47,7 @@ export const Header = () => (
       <Trans i18nKey="polkadot.nomination.totalStake" />
     </TableLine>
     <TableLine>
-      <Trans i18nKey="delegation.value" />
+      <Trans i18nKey="polkadot.nomination.amount" />
     </TableLine>
   </Wrapper>
 );

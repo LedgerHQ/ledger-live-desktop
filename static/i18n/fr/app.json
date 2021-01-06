@@ -1819,6 +1819,7 @@
       "nominate": "Nominer",
       "chill": "Ne plus nominer",
       "totalStake": "Participation totale",
+      "amount": "Montant lié",
       "commission": "Commission",
       "active": "Actif",
       "activeTooltip": "Ce validateur a été élu et collecte des récompenses grâce à une partie de vos actifs liés.",
