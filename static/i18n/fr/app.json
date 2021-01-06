@@ -1138,8 +1138,8 @@
     },
     "firmware": {
       "updateLater": "Annuler",
-      "seedReady": "I have my recovery phrase",
-      "dontHaveSeed": "Don't have your recovery phrase? ",
+      "seedReady": "J'ai ma phrase de récupération",
+      "dontHaveSeed": "Vous n'avez pas votre phrase de récupération ?",
       "followTheGuide": "Suivez notre guide de mise à jour étape par étape",
       "removeApps": "Désinstaller toutes les apps avant de mettre à jour",
       "update": "Mettre à jour",
@@ -1147,7 +1147,7 @@
       "latest": "La version {{version}} du firmware est disponible.",
       "contactSupport": "Contactez l'assistance",
       "deprecated": "La version du firmware de l'appareil est trop ancienne pour être mise à jour. Contactez le support Ledger pour un remplacement.",
-      "prepareSeed": "Ensure your 24-word recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
+      "prepareSeed": "Assurez-vous par précaution que votre phrase de récupération de 24 mots est accessible.",
       "disclaimerTitle": "Vous êtes sur le point d’installer la <1>version {{version}}</1> du firmware.",
       "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour"
     },
@@ -2100,7 +2100,7 @@
       "fr": "Français",
       "ru": "Russe",
       "es": "Espagnol",
-      "zh": "Chinese"
+      "zh": "Chinois"
     }
   },
   "theme": {
@@ -2113,20 +2113,20 @@
     "drawers": {
       "pinHelp": {
         "title": "Sécuriser votre code PIN",
-        "intro": "During the setup process you choose a PIN code.",
+        "intro": "Au cours du processus de paramétrage vous allez choisir un code PIN.",
         "rules": {
-          "1": "Always choose a PIN code yourself.",
-          "2": "Always enter your PIN code out of sight.",
+          "1": "Choisissez toujours votre code PIN par vous-même.",
+          "2": "Assurez vous de ne pas être observé quand vous entrez votre code PIN.",
           "3": "Vous pouvez modifier votre code PIN ultérieurement si nécessaire.",
-          "4": "Three wrong PIN code entries in a row will reset the device.",
+          "4": "Trois entrées erronées du code PIN à la suite réinitialisent l'appareil.",
           "5": "N'utilisez jamais un code PIN facile comme 0000, 123456, 55555555.",
-          "6": "Never share your PIN code with someone else. Not even with Ledger.",
-          "7": "Never use a PIN code you did not choose yourself.",
-          "8": "Never store your PIN code on a computer or phone."
+          "6": "Ne donnez jamais votre code PIN à quelqu'un d'autre. Même pas à Ledger.",
+          "7": "N'utilisez jamais un code PIN que vous n'avez pas choisi par vous-même.",
+          "8": "Ne stockez jamais votre code PIN sur un ordinateur ou un smartphone."
         }
       },
       "recoverySeed": {
-        "title1": "How does a recovery phrase work?",
+        "title1": "Comment fonctionne une phrase de récupération ?",
         "paragraph1": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
         "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
         "link": "Plus de détails sur la phrase de récupération",
