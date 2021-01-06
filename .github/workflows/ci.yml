@@ -94,6 +94,18 @@ jobs:
         with:
           name: ci-suggested-screenshots
           path: tests/specs/__image_snapshots__/__diff_output__/
+      - name: generate imgChanged
+        run: |
+          git remote add ledger https://github.com/LedgerHQ/ledger-live-desktop.git
+          git fetch ledger
+          git diff --name-only ledger/${{github.base_ref}}..${{github.event.pull_request.head.sha}} -- tests/specs/__image_snapshots__ >imgChanged.txt
+        if: always() && github.event_name == 'pull_request_target'
+      - name: Read imgChanged output
+        id: imgChanged
+        if: always() && github.event_name == 'pull_request_target'
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
+        with:
+          path: ./imgChanged.txt
       - name: prepare comment body
         if: always()
         id: comment
@@ -106,6 +118,9 @@ jobs:
           lintoutput: ${{ steps.lint.outputs.content }}
           author: ${{github.event.sender.login}}
           pullId: ${{github.event.number}}
+          imgChanged: ${{steps.imgChanged.outputs.content}}
+          from: ${{github.base_ref}}
+          to: ${{github.event.pull_request.head.sha}}
       - name: display comment
         if: always()
         id: displaycomment
