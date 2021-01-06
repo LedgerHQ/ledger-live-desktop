@@ -4,8 +4,10 @@ const main = async () => {
   const images = core.getInput("images");
   const runId = core.getInput("runId");
   const pullId = core.getInput("pullId");
+  const from = core.getInput("from");
+  const to = core.getInput("to");
   const author = core.getInput("author");
-  const imgChanged = core.getInput("imgChanged").split("\n");
+  let imgChanged = core.getInput("imgChanged").split("\n");
   const testoutput = core.getInput("testoutput");
   const lintoutput = core.getInput("lintoutput");
   const fullrepo = core.getInput("fullrepo").split("/");
@@ -57,6 +59,14 @@ ${str}
 `;
 
   if (!lintFailed && !testsFailed && !imgDiffFailed) {
+    imgChanged = imgChanged.map(
+      img => `
+${img}
+![](https://raw.githubusercontent.com/LedgerHQ/ledger-live-desktop/${from}/${img}) | ![](https://raw.githubusercontent.com/LedgerHQ/ledger-live-desktop/${to}/${img})
+|---|---
+| Old | New
+`,
+    );
     const diffStr = imgChanged.join("\n\n");
     str += `
 

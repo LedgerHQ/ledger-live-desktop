@@ -20,6 +20,12 @@ inputs:
   runId:
     description: runId
     required: true
+  from:
+    description: from
+    required: true
+  to:
+    description: to
+    required: true
   pullId:
     description: pullId
     required: true

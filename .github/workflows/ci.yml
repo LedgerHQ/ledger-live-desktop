@@ -119,6 +119,8 @@ jobs:
           author: ${{github.event.sender.login}}
           pullId: ${{github.event.number}}
           imgChanged: ${{steps.imgChanged.outputs.content}}
+          from: ${{github.base_ref}}
+          to: ${{github.event.pull_request.head.sha}}
       - name: display comment
         if: always()
         id: displaycomment
