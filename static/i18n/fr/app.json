@@ -349,7 +349,7 @@
             },
             "satstack-outdated": {
               "header": "Veuillez mettre à jour SatStack",
-              "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+              "description": "La version de SatStack que vous utilisez est trop ancienne et peut contenir des bugs ou des incompatibilités."
             },
             "node-disconnected": {
               "header": "Noeud inaccessible",
@@ -458,7 +458,7 @@
     "description": "Déposez vos actifs sur le protocole Compound pour commencer à obtenir des intérêts.",
     "tabs": {
       "dashboard": "Tableau de bord",
-      "opened": "Opened loans",
+      "opened": "Prêts ouverts",
       "closed": "Emprunts clôturés",
       "history": "Historique"
     },
