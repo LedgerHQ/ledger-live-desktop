@@ -2153,16 +2153,16 @@
       "deviceError": {
         "title": "Something went wrong, please reconnect device",
         "descr": "An action was already pending on the your Nano. Please deny or reconnect.",
-        "retry": "Retry"
+        "retry": "Réessayer"
       },
       "genuineCheck": {
-        "title": "Genuine check",
-        "descr": "Please don’t turn off your Nano and allow Ledger",
-        "info": "This step is meant to ensure that your Nano is authentic and was not hacked."
+        "title": "Contrôle d'authenticité",
+        "descr": "Veuillez ne pas éteindre votre Nano et autoriser l'application Ledger sur votre appareil",
+        "info": "Cette étape vise à garantir que votre Nano est authentique et n'a pas été hacké."
       },
       "genuineCheckSuccess": {
-        "title": "All good!",
-        "descr": "Your device is genuine and ready to use with Ledger app",
+        "title": "C'est parfait !",
+        "descr": "Votre appareil est authentique et est prêt à être utilisé avec l'application Ledger",
         "continue": "Continuer"
       },
       "genuineCheckError": {
@@ -2181,7 +2181,7 @@
         "gotIt": "J'ai compris"
       },
       "useLedgerSeeds": {
-        "title": "We recommend Ledger recovery phrases only",
+        "title": "Nous recommandons uniquement les phrases de récupération générées par Ledger",
         "descr": "Ledger ne peut garantir la sécurité de phrases de récupération fournies par des tiers. Nous vous recommandons de paramétrer votre Nano comme un nouvel appareil si votre phrase de récupération n'a pas été générée par Ledger.",
         "gotIt": "J'ai compris"
       }
@@ -2307,17 +2307,17 @@
             "disclaimer": "Je comprends que je dois choisir mon code PIN moi-même et le garder secret.",
             "buttons": {
               "next": "Configurer le code PIN",
-              "prev": "Previous step",
-              "help": "Need help"
+              "prev": "Etape précédente",
+              "help": "Besoin d'aide"
             }
           },
           "quizSuccess": {
-            "title": "Already a pro!",
+            "title": "Vous êtes déjà pro !",
             "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
             "buttons": {
               "next": "Étape suivante",
-              "prev": "Previous step",
-              "help": "Need help"
+              "prev": "Etape précédente",
+              "help": "Besoin d'aide"
             }
           },
           "quizFailure": {
@@ -2325,33 +2325,33 @@
             "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety. Only one quick step left!",
             "buttons": {
               "next": "Étape suivante",
-              "prev": "Previous step"
+              "prev": "Etape précédente"
             }
           },
           "pinCodeHowTo": {
             "setUp": {
-              "title": "Choose PIN code",
+              "title": "Choisissez un code PIN",
               "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select ✔ to confirm your PIN code. Select ⌫ to erase a digit."
             },
             "confirm": {
-              "title": "Confirm PIN code",
-              "descr": "Enter your PIN code again to confirm it."
+              "title": "Confirmer le code PIN",
+              "descr": "Saisissez votre code PIN pour le confirmer."
             },
             "buttons": {
               "next": "Étape suivante",
-              "prev": "Previous step",
-              "help": "Need help"
+              "prev": "Etape précédente",
+              "help": "Besoin d'aide"
             }
           },
           "existingRecoveryPhrase": {
-            "title": "Enter your recovery phrase",
+            "title": "Entrez la phrase de récupération",
             "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
-            "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
+            "paragraph2": "Ledger ne conserve pas de copie de votre phrase de récupération.",
             "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
             "buttons": {
-              "next": "Enter recovery phrase",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Saisissez la phrase de récupération",
+              "prev": "Etape précédente",
+              "help": "Besoin d'aide"
             }
           },
           "useRecoverySheet": {
@@ -2360,62 +2360,62 @@
               "descr": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
             },
             "writeDownWords": {
-              "title": "Write down all words",
+              "title": "Notez tous les mots",
               "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2. Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
             },
             "buttons": {
               "next": "Étape suivante",
-              "prev": "Previous step",
-              "help": "Need help"
+              "prev": "Etape précédente",
+              "help": "Besoin d'aide"
             }
           },
           "newRecoveryPhrase": {
-            "title": "Recovery phrase",
-            "paragraph1": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
-            "paragraph2": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
+            "title": "Phrase de récupération",
+            "paragraph1": "Votre phrase de récupération est une liste secrète de 24 mots qui sauvegarde vos clés privées.",
+            "paragraph2": "Votre Nano génère une phrase de récupération unique. Ledger ne conserve pas de copie de celle-ci.",
             "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
             "buttons": {
-              "next": "Recovery phrase",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Phrase de récupération",
+              "prev": "Etape précédente",
+              "help": "Besoin d'aide"
             }
           },
           "recoveryHowTo": {
             "grabRecovery": {
-              "title": "Grab your recovery phrase"
+              "title": "Prenez votre phrase de récupération"
             },
             "selectLength": {
-              "title": "Select recovery phrase length",
+              "title": "Sélectionnez la longueur de votre phrase de récupération",
               "descr": "Your recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
             },
             "enterWord": {
-              "title": "Enter Word #1...",
+              "title": "Saisir le mot n°1...",
               "descr": "Enter the first letters of Word #1 by selecting them with the right or left button. Press both buttons to validate each letter."
             },
             "validateWord": {
-              "title": "Validate Word #1...",
-              "descr": "Choose Word #1 from the suggestions. Press both buttons to validate."
+              "title": "Valider le mot n°1...",
+              "descr": "Choisissez le mot n°1 parmi les suggestions. Appuyez sur les deux boutons pour valider."
             },
             "andNext": {
-              "title": "Repeat for all words!"
+              "title": "Faites la même chose pour tous les mots !"
             },
             "buttons": {
               "next": "Étape suivante",
-              "prev": "Previous step",
-              "help": "Need help"
+              "prev": "Etape précédente",
+              "help": "Besoin d'aide"
             }
           },
           "recoveryHowTo3": {
             "reEnterWord": {
-              "title": "Confirm your recovery phrase",
-              "descr": "Scroll through the words until you find Word #1 by pressing the right button. Validate by pressing both buttons."
+              "title": "Confirmer la phrase de récupération",
+              "descr": "Appuyez sur le bouton droit pour faire défiler les mots jusqu'à ce que vous trouviez le mot n°1. Validez en appuyant sur les deux boutons."
             },
             "repeat": {
-              "title": "Repeat for all words!"
+              "title": "Faites la même chose pour tous les mots !"
             },
             "buttons": {
               "next": "Étape suivante",
-              "prev": "Previous step",
+              "prev": "Etape précédente",
               "help": "Besoin d'aide"
             }
           },
@@ -2498,7 +2498,7 @@
         },
         "stayOffline": {
           "title": "Restez déconnecté",
-          "description": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
+          "description": "Votre Nano fonctionne comme un wallet physique de \"stockage à froid\", cela signifie que votre clé privée n’est jamais exposée en ligne, même lorsque vous utilisez l'application."
         },
         "validateTransactions": {
           "title": "Validez les transactions",
@@ -2539,35 +2539,35 @@
           }
         },
         "2": {
-          "text": "If my recovery phrase is no longer secure or private...",
+          "text": "Si ma phrase de récupération n'est plus en sécurité ou que quelqu'un la connaît...",
           "answers": {
-            "1": "No problem, Ledger can send me a copy",
+            "1": "Pas de problème, Ledger m’en envoie une copie",
             "2": "My crypto is no longer safe and I need to transfer them to a secure place"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
+              "title": "Félicitations !",
               "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
             },
             "fail": {
-              "title": "Incorrect!",
+              "title": "Incorrect !",
               "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
             }
           }
         },
         "3": {
-          "text": "When I connect my Nano to the Ledger app, my private key is...",
+          "text": "Lorsque je connecte mon Nano à l'application Ledger, ma clé privée est...",
           "answers": {
-            "1": "Still offline",
-            "2": "Briefly connected to the internet"
+            "1": "Toujours hors-ligne",
+            "2": "Brièvement connectée à Internet"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
+              "title": "Félicitations !",
               "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
             },
             "fail": {
-              "title": "Incorrect!",
+              "title": "Incorrect !",
               "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
             }
           }
@@ -2899,11 +2899,11 @@
       "description": "Veuillez patienter pendant la synchronisation de votre nœud. L'envoi n'est pas possible car le solde de vos comptes Bitcoin est peut-être incorrecte."
     },
     "SatStackVersionTooOld": {
-      "title": "Please upgrade SatStack",
+      "title": "Veuillez mettre à jour SatStack",
       "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
     },
     "SatStackDescriptorNotImported": {
-      "title": "Account not scanned by full node",
+      "title": "Compte non scanné par le nœud",
       "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
     },
     "SwapGenericAPIError": {
@@ -2975,7 +2975,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "Une erreur s'est produite",
-      "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
+      "description": "Veuillez vérifier que votre appareil est configuré avec la phrase de récupération qui est associé au compte sélectionné."
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Mise à jour de l’application requise",
