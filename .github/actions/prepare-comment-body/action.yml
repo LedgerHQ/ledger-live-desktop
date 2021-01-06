@@ -26,6 +26,9 @@ inputs:
   author:
     description: author
     required: true
+  imgChanged:
+    description: imgChanged
+    required: true
   testoutput:
     description: testoutput
     required: true

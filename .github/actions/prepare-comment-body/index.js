@@ -5,6 +5,7 @@ const main = async () => {
   const runId = core.getInput("runId");
   const pullId = core.getInput("pullId");
   const author = core.getInput("author");
+  const imgChanged = core.getInput("imgChanged").split("\n");
   const testoutput = core.getInput("testoutput");
   const lintoutput = core.getInput("lintoutput");
   const fullrepo = core.getInput("fullrepo").split("/");
@@ -54,6 +55,21 @@ ${str}
 </p>
 </details>  
 `;
+
+  if (!lintFailed && !testsFailed && !imgDiffFailed) {
+    const diffStr = imgChanged.join("\n\n");
+    str += `
+
+    <details>
+    <summary><b>Updated/changed screenshots</b></summary>
+    <p>
+
+    ${diffStr}
+
+    </p>
+    </details>  
+`;
+  }
 
   const strSlack = `
 Lint outputs ${lintFailed ? "❌" : " ✅"}
