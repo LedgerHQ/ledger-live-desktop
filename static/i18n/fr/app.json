@@ -501,7 +501,7 @@
       "opened": {
         "title": "Your opened loans will appear here",
         "description": "You have not made any loans yet.",
-        "cta": "Deposit"
+        "cta": "Déposer"
       },
       "history": {
         "title": "Historique",
@@ -531,9 +531,9 @@
         "date": "Date"
       },
       "opened": {
-        "assetLended": "Asset",
-        "amount": "Amount",
-        "accruedInterest": "Accrued interest",
+        "assetLended": "Actif",
+        "amount": "Montant",
+        "accruedInterest": "Intérêt accumulé",
         "date": "Date"
       },
       "rates": {
@@ -1032,8 +1032,8 @@
     "swap": {
       "notice": "Vérifiez les détails du Swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
       "confirm": "Confirmer la transaction de swap",
-      "amountSent": "Amount sent",
-      "amountReceived": "Amount received",
+      "amountSent": "Montant envoyé",
+      "amountReceived": "Montant reçu",
       "fees": "Frais",
       "provider": "Fournisseur"
     },
@@ -2129,30 +2129,30 @@
         "title1": "How does a recovery phrase work?",
         "paragraph1": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
         "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
-        "link": "More about the recovery phrase",
-        "title2": "What happens if I lose access to my Nano?",
-        "paragraph3": "Don't worry and follow these steps:",
+        "link": "Plus de détails sur la phrase de récupération",
+        "title2": "Qu’arrive-t-il si je perds l'accès à mon Nano ?",
+        "paragraph3": "Pas d'inquiétude, suivez ces étapes :",
         "points": {
-          "1": "Get a new hardware wallet.",
-          "2": "Select “Restore recovery phrase on a new device” in the Ledger app",
+          "1": "Achetez un nouveau wallet physique.",
+          "2": "Sélectionnez « Restaurez votre phrase de récupération dans un nouvel appareil » dans l'application Ledger",
           "3": "Enter your recovery phrase on your new device to restore access to your crypto."
         }
       },
       "whereToHide": {
-        "title": "Where should I keep my recovery phrase?",
+        "title": "Où dois-je garder ma phrase de récupération ?",
         "points": {
-          "1": "NEVER enter it on a computer, smartphone or any other device. Don't take a picture of it.",
+          "1": "NE JAMAIS la saisir sur un ordinateur, un smartphone ou un autre appareil. Ne la prenez pas en photo.",
           "2": "NE JAMAIS partager vos 24 mots avec qui que ce soit.",
           "3": "TOUJOURS la ranger la dans un endroit sûr, loin des regards.",
-          "4": "Ledger will never ask for your recovery phrase.",
-          "5": "If any person or application asks for it, assume it is a scam!"
+          "4": "Ledger ne vous demandera jamais votre phrase de récupération.",
+          "5": "Peu importe qui vous la demande, partez du principe que c'est une arnaque !"
         }
       }
     },
     "alerts": {
       "deviceError": {
-        "title": "Something went wrong, please reconnect device",
-        "descr": "An action was already pending on the your Nano. Please deny or reconnect.",
+        "title": "Une erreur est survenue, veuillez reconnecter l’appareil",
+        "descr": "Une action était déjà en attente sur votre Nano. Veuillez refuser ou reconnecter.",
         "retry": "Réessayer"
       },
       "genuineCheck": {
@@ -2321,8 +2321,8 @@
             }
           },
           "quizFailure": {
-            "title": "You will soon become a pro...",
-            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety. Only one quick step left!",
+            "title": "Vous allez bientôt devenir un(e) pro",
+            "paragraph": "Ne vous inquiétez pas, Ledger est là pour vous guider dans votre parcours. Vous vous sentirez bientôt très à l'aise en ce qui concerne la sécurité de vos cryptomonnaies.\nPlus qu’une seule étape rapide à effectuer !",
             "buttons": {
               "next": "Étape suivante",
               "prev": "Etape précédente"
@@ -2331,7 +2331,7 @@
           "pinCodeHowTo": {
             "setUp": {
               "title": "Choisissez un code PIN",
-              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select ✔ to confirm your PIN code. Select ⌫ to erase a digit."
+              "descr": "\"Appuyez sur le bouton gauche ou droit pour changer de chiffre. Appuyez sur les deux boutons pour valider un chiffre. Sélectionnez ✔ pour confirmer votre code PIN. Sélectionnez ⌫ pour effacer un chiffre\"."
             },
             "confirm": {
               "title": "Confirmer le code PIN",
@@ -2345,7 +2345,7 @@
           },
           "existingRecoveryPhrase": {
             "title": "Entrez la phrase de récupération",
-            "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
+            "paragraph1": "Votre phrase de récupération est une liste secrète de mots que vous avez mise en lieu sûr après avoir paramétré votre wallet pour la première fois.",
             "paragraph2": "Ledger ne conserve pas de copie de votre phrase de récupération.",
             "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
             "buttons": {
@@ -2357,11 +2357,11 @@
           "useRecoverySheet": {
             "takeYourRecoverySheet": {
               "title": "Prenez votre feuille de récupération",
-              "descr": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
+              "descr": "Prenez une feuille de récupération vierge, incluse avec votre Nano. Merci de contacter le Support Ledger si la feuille de récupération fournie n'était pas vierge."
             },
             "writeDownWords": {
               "title": "Notez tous les mots",
-              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2. Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+              "descr": "Écrivez le mot n°1 affiché sur votre Nano en position « 1 » de la feuille de récupération. Ensuite, appuyez à droite sur votre Nano pour afficher le mot n°2 et écrivez le en position n°2. Répétez l'opération pour tous les mots en respectant scrupuleusement l'ordre et l'orthographe. Appuyez à gauche sur votre Nano pour vérifier si vous avez fait une erreur."
             },
             "buttons": {
               "next": "Étape suivante",
@@ -2386,11 +2386,11 @@
             },
             "selectLength": {
               "title": "Sélectionnez la longueur de votre phrase de récupération",
-              "descr": "Your recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
+              "descr": "Votre phrase de récupération peut comporter 12, 18 ou 24 mots. Vous devez entrer tous les mots pour accéder à vos cryptomonnaies."
             },
             "enterWord": {
               "title": "Saisir le mot n°1...",
-              "descr": "Enter the first letters of Word #1 by selecting them with the right or left button. Press both buttons to validate each letter."
+              "descr": "Saisissez les premières lettres du mot n°1 en les sélectionnant avec le bouton droit ou gauche. Appuyez sur les deux boutons pour valider chaque lettre."
             },
             "validateWord": {
               "title": "Valider le mot n°1...",
