@@ -68,6 +68,7 @@ const onboardingMachine = Machine({
         NEXT: {
           target: "selectDevice",
         },
+        PREV: { target: "onboardingComplete" },
       },
     },
     selectDevice: {
@@ -184,7 +185,7 @@ const ScreenContainer = styled.div`
   }
 `;
 
-export function Onboarding() {
+export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boolean }) {
   const dispatch = useDispatch();
 
   const [state, sendEvent, service] = useMachine(onboardingMachine, {
@@ -222,7 +223,11 @@ export function Onboarding() {
       <OnboardingContainer>
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="page-switch">
           <ScreenContainer>
-            <CurrentScreen sendEvent={sendEvent} context={state.context} />
+            <CurrentScreen
+              sendEvent={sendEvent}
+              context={state.context}
+              onboardingRelaunched={onboardingRelaunched}
+            />
           </ScreenContainer>
         </CSSTransition>
       </OnboardingContainer>
