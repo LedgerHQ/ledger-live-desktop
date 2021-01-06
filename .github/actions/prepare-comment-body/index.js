@@ -58,7 +58,7 @@ ${str}
 </details>  
 `;
 
-  if (!lintFailed && !testsFailed && !imgDiffFailed) {
+  if (!lintFailed && !testsFailed && !imgDiffFailed && imgChanged.length) {
     imgChanged = imgChanged.map(
       img => `
 ${img}
@@ -71,7 +71,7 @@ ${img}
     str += `
 
 <details>
-<summary><b>Updated/changed screenshots</b></summary>
+<summary><b>Updated/changed screenshots  :warning:</b></summary>
 <p>
 
 ${diffStr}
