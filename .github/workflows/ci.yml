@@ -96,7 +96,7 @@ jobs:
           path: tests/specs/__image_snapshots__/__diff_output__/
       - name: generate imgChanged
         run: |
-          git remote add ledger git@github.com:LedgerHQ/ledger-live-desktop.git
+          git remote add ledger https://github.com/LedgerHQ/ledger-live-desktop.git
           git fetch ledger
           git diff --name-only ${{github.base_ref}}..${{github.sha}} tests/specs/__image_snapshots__ >imgChanged.txt
         if: always()
