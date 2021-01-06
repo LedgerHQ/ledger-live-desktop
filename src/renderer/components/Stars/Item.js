@@ -69,7 +69,12 @@ const Item = ({ account, index, pathname, collapsed }: Props) => {
   const unit = getAccountUnit(account);
 
   return (
-    <ItemWrapper collapsed={collapsed} active={active} onClick={onAccountClick}>
+    <ItemWrapper
+      className="bookmarked-account-item"
+      collapsed={collapsed}
+      active={active}
+      onClick={onAccountClick}
+    >
       <Box horizontal ff="Inter|SemiBold" flex={1} flow={3} alignItems="center">
         <ParentCryptoCurrencyIconWrapper
           collapsed={collapsed}
