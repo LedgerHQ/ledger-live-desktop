@@ -60,14 +60,14 @@ ${str}
     const diffStr = imgChanged.join("\n\n");
     str += `
 
-    <details>
-    <summary><b>Updated/changed screenshots</b></summary>
-    <p>
+<details>
+<summary><b>Updated/changed screenshots</b></summary>
+<p>
 
-    ${diffStr}
+${diffStr}
 
-    </p>
-    </details>  
+</p>
+</details>  
 `;
   }
 
