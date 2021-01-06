@@ -56,13 +56,11 @@ type Props = {
 export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
   const { t } = useTranslation();
   const themeType = useTheme("colors.palette.type");
-  const onboardingRelaunched = useSelector(onboardingRelaunchedSelector);
   const welcomeIllustration = themeType === "dark" ? illustrationDark : illustration;
 
   const handleNext = useCallback(() => {
     sendEvent("NEXT");
   }, [sendEvent]);
-  const handleQuit = useCallback(() => sendEvent("QUIT"), [sendEvent]);
 
   const buyNanoX = useCallback(() => {
     openURL(urls.noDevice.buyNew);
@@ -107,4 +105,4 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
       </Text>
     </WelcomeContainer>
   );
-};
+}

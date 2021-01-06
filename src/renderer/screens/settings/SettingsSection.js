@@ -109,7 +109,7 @@ export const SettingsSectionRow = ({
   <SettingsSectionRowContainer onClick={onClick} tabIndex={-1} inset={inset}>
     <Box grow shrink style={{ marginRight: "10%" }}>
       {title && (
-        <Box ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
+        <Box ff="Inter|SemiBold" color="palette.text.shade100" fontSize={14}>
           {title}
         </Box>
       )}
