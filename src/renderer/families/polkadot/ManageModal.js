@@ -17,8 +17,8 @@ import Modal, { ModalBody } from "~/renderer/components/Modal";
 import BondIcon from "~/renderer/icons/LinkIcon";
 import UnbondIcon from "~/renderer/icons/Undelegate";
 import NominateIcon from "~/renderer/icons/Vote";
-import ChillIcon from "~/renderer/icons/Ban";
-import WithdrawUnbondedIcon from "~/renderer/icons/Exchange";
+import ChillIcon from "~/renderer/icons/VoteNay";
+import WithdrawUnbondedIcon from "~/renderer/icons/Coins";
 
 import Text from "~/renderer/components/Text";
 
