@@ -46,9 +46,10 @@ const TopRightContainer = styled.div`
 
 type Props = {
   sendEvent: string => void,
+  onboardingRelaunched: boolean,
 };
 
-export function Welcome({ sendEvent }: Props) {
+export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
   const { t } = useTranslation();
   const theme = useTheme();
 
@@ -62,7 +63,14 @@ export function Welcome({ sendEvent }: Props) {
 
   return (
     <WelcomeContainer>
-      <TopRightContainer>{null /* LL-4236 */ && <LangSwitcher />}</TopRightContainer>
+      <TopRightContainer>
+        {null /* LL-4236 */ && <LangSwitcher />}
+        {onboardingRelaunched && (
+          <Button small onClick={() => sendEvent("PREV")}>
+            Previous
+          </Button>
+        )}
+      </TopRightContainer>
       <WaveContainer>
         <AnimatedWave height={600} color={theme === "dark" ? "#587ED4" : "#4385F016"} />
       </WaveContainer>
