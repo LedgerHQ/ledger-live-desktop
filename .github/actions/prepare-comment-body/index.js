@@ -7,9 +7,7 @@ const main = async () => {
   const from = core.getInput("from");
   const to = core.getInput("to");
   const author = core.getInput("author");
-  let imgChanged = core
-    .getInput("imgChanged")
-    .split("\n")
+  let imgChanged = core.getInput("imgChanged").split("\n");
   if (imgChanged.length === 1 && imgChanged[0] === "") {
     imgChanged = [];
   }
