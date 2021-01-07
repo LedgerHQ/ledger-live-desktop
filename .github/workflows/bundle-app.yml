@@ -53,12 +53,9 @@ jobs:
         id: version
       - name: set beta name
         uses: ./.github/actions/change-product-name
-      - name: Get short SHA
-        id: slug
-        run: echo "::set-output name=sha8::${GITHUB_SHA:0:7}"
       - name: make local version
         env:
-          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
+          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.event.pull_request.head.sha }}
         run: yarn version --new-version="$VERSION"
       - name: build the app
         run: yarn nightly
@@ -108,12 +105,9 @@ jobs:
         id: version
       - name: set beta name
         uses: ./.github/actions/change-product-name
-      - name: Get short SHA
-        id: slug
-        run: echo "::set-output name=sha8::${GITHUB_SHA:0:7}"
       - name: make local version
         env:
-          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
+          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.event.pull_request.head.sha }}
         run: yarn version --new-version="$VERSION"
       - name: build the app
         run: yarn nightly
@@ -164,12 +158,9 @@ jobs:
         id: version
       - name: set beta name
         uses: ./.github/actions/change-product-name
-      - name: Get short SHA
-        id: slug
-        run: echo "::set-output name=sha8::${GITHUB_SHA:0:7}"
       - name: make local version
         env:
-          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
+          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.event.pull_request.head.sha }}
         run: yarn version --new-version="$VERSION"
       - name: build the app
         run: yarn nightly
