@@ -10,6 +10,7 @@ describe("Onboarding", () => {
     await elem.click();
     const terms = await $("#modal-confirm-button");
     await terms.waitForDisplayed();
+    await app.client.pause(2000);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-terms",
     });

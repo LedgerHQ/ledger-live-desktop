@@ -157,4 +157,39 @@ describe("Account", () => {
       expect(await modalPage.isDisplayed(true)).toBe(false);
     });
   });
+
+  describe("remove accounts flow", () => {
+    it("displays a list of accounts", async () => {
+      const isModalOpen = await modalPage.isDisplayed(true);
+
+      if (isModalOpen) {
+        await modalPage.close();
+      }
+
+      const accountsButton = await $("#drawer-accounts-button");
+      await accountsButton.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "remove-account-before",
+      });
+    });
+
+    it("remove one account", async () => {
+      const firstAccountRow = await $(".accounts-account-row-item");
+
+      await firstAccountRow.click();
+      const settingsButton = await $("#account-settings-button");
+      await settingsButton.click();
+      await modalPage.isDisplayed();
+      const deleteButton = await $("#account-settings-delete");
+      await deleteButton.click();
+
+      const confirmButton = await $("#modal-confirm-button");
+      await confirmButton.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "remove-account-after",
+      });
+    });
+  });
 });

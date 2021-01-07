@@ -29,8 +29,8 @@
     "ci": "node ./tools/ci.js",
     "test": "jest src",
     "start-electron-webdriver": "node tests/docker-electron-webdriver/start.js",
-    "spectron": "jest tests/specs/*.spec.js",
-    "spectron-coverage": "nyc report --reporter=text-summary --temp-dir=tests/coverage",
+    "spectron": "jest tests/specs/*.spec.js --runInBand",
+    "spectron-coverage": "nyc report --reporter=text-lcov --temp-dir=tests/coverage | codecov --pipe --disable=gcov",
     "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)"
   },
   "engines": {
@@ -145,6 +145,7 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-styled-components": "^1.12.0",
     "chalk": "^4.1.0",
+    "codecov": "^3.8.1",
     "copy-webpack-plugin": "^6.1.0",
     "cross-env": "^7.0.3",
     "css-loader": "^3.5.3",
