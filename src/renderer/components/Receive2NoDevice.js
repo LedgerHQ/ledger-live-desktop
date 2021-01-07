@@ -2,13 +2,8 @@
 
 import React from "react";
 import { Trans } from "react-i18next";
-import { urls } from "~/config/urls";
-import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-import Text from "~/renderer/components/Text";
-import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
-import IconShield from "~/renderer/icons/Shield";
 
 const Receive2NoDevice = ({
   onVerify,

@@ -5,6 +5,8 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getAccountName, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import Modal from "~/renderer/components/Modal";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
@@ -22,6 +24,7 @@ import { Separator } from "~/renderer/components/Breadcrumb/common";
 import { mockedEventEmitter } from "~/renderer/components/DebugMock";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import Button from "~/renderer/components/Button";
+import InfoBox from "~/renderer/components/InfoBox";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Receive2NoDevice from "~/renderer/components/Receive2NoDevice";
 
@@ -115,7 +118,16 @@ const VerifyOnDevice = ({
           </Box>
         </>
       ) : (
-        <span>coucou</span>
+        <>
+          <Box mt={4} />
+          <InfoBox
+            onLearnMore={() => openURL(urls.recipientAddressInfo)}
+            onLearnMoreLabel={<Trans i18nKey="common.learnMore" />}
+            type="security"
+          >
+            <Trans i18nKey="currentAddress.messageIfSkipped" values={{ name }} />
+          </InfoBox>
+        </>
       )}
       {device && renderVerifyUnwrapped({ modelId: device.modelId, type })}
     </>
