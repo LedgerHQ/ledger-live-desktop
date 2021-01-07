@@ -11,14 +11,14 @@ on:
 
 jobs:
   cancel-previous:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@ce177499ccf9fd2aded3b0426c97e5434c2e8a73
         with:
           access_token: ${{ github.token }}
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     needs: cancel-previous
     outputs:
       comment: ${{ steps.comment.outputs.body }}
@@ -129,7 +129,7 @@ jobs:
           BODY: ${{ steps.comment.outputs.body }}
         run: echo "$BODY"
   post-comment:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     needs: test
     if: always() && needs.test.result != 'cancelled'
     steps:
