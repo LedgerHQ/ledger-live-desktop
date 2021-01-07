@@ -14,7 +14,6 @@ const Receive2NoDevice = ({
   onContinue?: Function,
   name: string,
 }) => {
-  const m = onVerify && onContinue ? 8 : 0;
   return (
     <>
       <Box style={{ width: "100%" }} pt={4} horizontal justifyContent="flex-end">
