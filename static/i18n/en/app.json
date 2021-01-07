@@ -458,6 +458,7 @@
     "description": "Deposit your crypto on the Compound protocol to start earning interest.",
     "tabs": {
       "dashboard": "Dashboard",
+      "opened": "Opened loans",
       "closed": "Closed loans",
       "history": "History"
     },
@@ -497,6 +498,11 @@
         "description": "You have not made any loans yet.",
         "cta": "Deposit"
       },
+      "opened": {
+        "title": "Your opened loans will appear here",
+        "description": "You have not made any loans yet.",
+        "cta": "Deposit"
+      },
       "history": {
         "title": "History",
         "description": "View the history of all your loan transactions.",
@@ -522,6 +528,12 @@
         "assetLended": "Asset",
         "amountRedeemed": "Withdrawal amount",
         "interestsEarned": "Interest earned",
+        "date": "Date"
+      },
+      "opened": {
+        "assetLended": "Asset",
+        "amount": "Amount",
+        "accruedInterest": "Accrued interest",
         "date": "Date"
       },
       "rates": {
@@ -1019,7 +1031,11 @@
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
-      "confirm": "Confirm Swap transaction"
+      "confirm": "Confirm Swap transaction",
+      "amountSent": "Amount sent",
+      "amountReceived": "Amount received",
+      "fees": "Fees",
+      "provider": "Provider"
     },
     "sell": {
       "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
