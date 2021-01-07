@@ -114,7 +114,9 @@ const VerifyOnDevice = ({
             </Text>
           </Box>
         </>
-      ) : null}
+      ) : (
+        <span>coucou</span>
+      )}
       {device && renderVerifyUnwrapped({ modelId: device.modelId, type })}
     </>
   ) : null;

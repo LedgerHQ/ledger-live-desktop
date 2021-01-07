@@ -22,30 +22,14 @@ const Receive2NoDevice = ({
   const m = onVerify && onContinue ? 8 : 0;
   return (
     <>
-      <Box horizontal flow={2} mt={2} alignItems="center">
-        <Box color="alertRed">
-          <IconShield height={32} width={28} />
-        </Box>
-        <Text fontSize={12} color="alertRed" ff="Inter" style={{ flexShrink: "unset" }}>
-          <span style={{ marginRight: 10 }}>
-            <Trans i18nKey="currentAddress.messageIfSkipped" values={{ name }} />
-          </span>
-          <LinkWithExternalIcon
-            style={{ display: "inline-flex" }}
-            onClick={() => openURL(urls.recipientAddressInfo)}
-            label={<Trans i18nKey="common.learnMore" />}
-          />
-        </Text>
-      </Box>
-
-      <Box pt={4} horizontal justifyContent="center">
+      <Box style={{ width: "100%" }} pt={4} horizontal justifyContent="flex-end">
         {onVerify ? (
-          <Button mr={m} primary onClick={onVerify}>
+          <Button outlineGrey onClick={onVerify}>
             <Trans i18nKey="common.verify" />
           </Button>
         ) : null}
         {onContinue ? (
-          <Button ml={m} primary onClick={onContinue}>
+          <Button ml={1} primary onClick={onContinue}>
             <Trans i18nKey="common.continue" />
           </Button>
         ) : null}
