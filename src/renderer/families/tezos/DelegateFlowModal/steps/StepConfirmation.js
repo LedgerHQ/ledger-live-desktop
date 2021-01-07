@@ -4,8 +4,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import styled, { withTheme } from "styled-components";
 import { Trans } from "react-i18next";
+import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import { multiline } from "~/renderer/styles/helpers";
-import { openModal, closeModal } from "~/renderer/actions/modals";
+import { openModal } from "~/renderer/actions/modals";
 import { urls } from "~/config/urls";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
@@ -36,6 +37,7 @@ const StepConfirmation = ({
   error,
   signed,
   transaction,
+  eventType,
 }: StepProps) => {
   invariant(
     transaction && transaction.family === "tezos",
@@ -47,7 +49,11 @@ const StepConfirmation = ({
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Delegation Flow" name="Step Confirmed" />
+        <TrackPage
+          category={`Delegation Flow${eventType ? ` (${eventType})` : ""}`}
+          name="Step Confirmed"
+        />
+        <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={
             <Trans
@@ -93,6 +99,7 @@ export const StepConfirmationFooter = ({
   onRetry,
   optimisticOperation,
   error,
+  closeModal,
 }: StepProps) => {
   const dispatch = useDispatch();
   const concernedOperation = optimisticOperation
@@ -105,15 +112,16 @@ export const StepConfirmationFooter = ({
       <Box mr={2} ff="Inter|SemiBold" fontSize={4}>
         <LinkWithExternalIcon
           label={<Trans i18nKey="delegation.howItWorks" />}
-          onClick={() => openURL(urls.delegation)}
+          onClick={() => openURL(urls.stakingTezos)}
         />
       </Box>
       {concernedOperation ? (
         <Button
           ml={2}
+          id={"delegate-confirmation-details-button"}
           event="Delegation Flow Step 4 View OpD Clicked"
           onClick={() => {
-            dispatch(closeModal());
+            closeModal();
             if (account && concernedOperation) {
               dispatch(
                 openModal("MODAL_OPERATION_DETAILS", {

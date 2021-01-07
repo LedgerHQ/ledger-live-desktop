@@ -1,6 +1,7 @@
 /* eslint-disable flowtype/generic-spacing */
 // @flow
 
+import { BigNumber } from "bignumber.js";
 import { map } from "rxjs/operators";
 import type {
   CryptoCurrency,
@@ -17,7 +18,11 @@ import {
   fromTransactionStatusRaw,
   fromSignOperationEventRaw,
 } from "@ledgerhq/live-common/lib/transaction";
-import { toAccountRaw, fromOperationRaw } from "@ledgerhq/live-common/lib/account";
+import {
+  toAccountLikeRaw,
+  toAccountRaw,
+  fromOperationRaw,
+} from "@ledgerhq/live-common/lib/account";
 import { patchAccount } from "@ledgerhq/live-common/lib/reconciliation";
 import { fromScanAccountEventRaw } from "@ledgerhq/live-common/lib/bridge";
 import * as bridgeImpl from "@ledgerhq/live-common/lib/bridge/impl";
@@ -30,13 +35,30 @@ const scanAccounts = ({ currency, deviceId, syncConfig }) =>
     syncConfig,
   }).pipe(map(fromScanAccountEventRaw));
 
-export const getCurrencyBridge = (currency: CryptoCurrency): CurrencyBridge => ({
-  preload: () => bridgeImpl.getCurrencyBridge(currency).preload(),
+export const getCurrencyBridge = (currency: CryptoCurrency): CurrencyBridge => {
+  const bridge = bridgeImpl.getCurrencyBridge(currency);
+  const bridgeGetPreloadStrategy = bridge.getPreloadStrategy;
+  const getPreloadStrategy = bridgeGetPreloadStrategy
+    ? currency => bridgeGetPreloadStrategy.call(bridge, currency)
+    : undefined;
+  const b: CurrencyBridge = {
+    preload: async () => {
+      const value = await command("CurrencyPreload")({ currencyId: currency.id }).toPromise();
+      bridgeImpl.getCurrencyBridge(currency).hydrate(value, currency);
+      return value;
+    },
 
-  hydrate: value => bridgeImpl.getCurrencyBridge(currency).hydrate(value),
+    hydrate: value => bridgeImpl.getCurrencyBridge(currency).hydrate(value, currency),
 
-  scanAccounts,
-});
+    scanAccounts,
+  };
+
+  if (getPreloadStrategy) {
+    b.getPreloadStrategy = getPreloadStrategy;
+  }
+
+  return b;
+};
 
 export const getAccountBridge = (
   account: AccountLike,
@@ -47,6 +69,12 @@ export const getAccountBridge = (
       account: toAccountRaw(account),
       syncConfig,
     }).pipe(map(raw => account => patchAccount(account, raw)));
+
+  const receive = (account, arg) =>
+    command("AccountReceive")({
+      account: toAccountRaw(account),
+      arg,
+    });
 
   const createTransaction = a =>
     bridgeImpl.getAccountBridge(account, parentAccount).createTransaction(a);
@@ -92,13 +120,24 @@ export const getAccountBridge = (
       .pipe(map(raw => fromOperationRaw(raw, account.id)))
       .toPromise();
 
+  const estimateMaxSpendable = ({ account, parentAccount, transaction }) =>
+    command("AccountEstimateMaxSpendable")({
+      account: toAccountLikeRaw(account),
+      parentAccount: parentAccount ? toAccountRaw(parentAccount) : null,
+      transaction: transaction ? toTransactionRaw(transaction) : null,
+    })
+      .pipe(map(raw => BigNumber(raw)))
+      .toPromise();
+
   return {
     createTransaction,
     updateTransaction,
     getTransactionStatus,
     prepareTransaction,
     sync,
+    receive,
     signOperation,
     broadcast,
+    estimateMaxSpendable,
   };
 };

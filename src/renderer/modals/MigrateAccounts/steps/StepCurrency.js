@@ -4,6 +4,7 @@ import React, { PureComponent } from "react";
 import styled from "styled-components";
 import { filter, map, reduce } from "rxjs/operators";
 import { findAccountMigration, migrateAccounts } from "@ledgerhq/live-common/lib/account";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 import invariant from "invariant";
 import last from "lodash/last";
 
@@ -75,10 +76,16 @@ class StepCurrency extends PureComponent<StepProps> {
     };
 
     this.scanSubscription = getCurrencyBridge(currency)
-      .scanAccounts({ currency, deviceId: device.path, syncConfig })
+      .scanAccounts({ currency, deviceId: device.deviceId, syncConfig })
       .pipe(
         filter(e => e.type === "discovered"),
-        map(e => e.account),
+        map(({ account }) => {
+          if (getEnv("MOCK") && account.id.startsWith("mock:0")) {
+            // If we have a mocked migratable account, change the version to one
+            return { ...account, id: account.id.replace("mock:0", "mock:1") };
+          }
+          return account;
+        }),
         reduce<Account>((all, acc) => all.concat(acc), []),
       )
       .subscribe({
@@ -172,7 +179,11 @@ export const StepCurrencyFooter = ({
   if (scanStatus === "error") {
     return (
       <>
-        <ExternalLinkButton mr={2} label={<Trans i18nKey="common.getSupport" />} url={urls.faq} />
+        <ExternalLinkButton
+          mr={2}
+          label={<Trans i18nKey="common.getSupport" />}
+          url={urls.syncErrors}
+        />
         <RetryButton primary onClick={() => transitionTo("device")} />
       </>
     );
@@ -184,6 +195,7 @@ export const StepCurrencyFooter = ({
   return (
     <Button
       primary
+      id="migrate-currency-continue-button"
       onClick={() => {
         if (!migratableAccounts.length) {
           transitionTo("overview");

@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import type { OperationType } from "@ledgerhq/live-common/lib/types";
 
-import { rgba } from "~/renderer/styles/helpers";
+import { rgba, mix } from "~/renderer/styles/helpers";
 
 import type { TFunction } from "react-i18next";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -14,9 +14,14 @@ import IconClock from "~/renderer/icons/Clock";
 import IconReceive from "~/renderer/icons/Receive";
 import IconDelegate from "~/renderer/icons/Delegate";
 import IconUndelegate from "~/renderer/icons/Undelegate";
+import IconRedelegate from "~/renderer/icons/Redelegate";
 import IconSend from "~/renderer/icons/Send";
 import IconPlus from "~/renderer/icons/Plus";
 import IconEye from "~/renderer/icons/Eye";
+import IconFees from "~/renderer/icons/Fees";
+import IconTrash from "~/renderer/icons/Trash";
+import IconSupply from "~/renderer/icons/Supply";
+import IconWithdraw from "~/renderer/icons/Withdraw";
 
 import Freeze from "~/renderer/icons/Freeze";
 import Unfreeze from "~/renderer/icons/Unfreeze";
@@ -35,22 +40,31 @@ const border = p =>
         p.type === "IN" ? p.marketColor : rgba(p.theme.colors.palette.text.shade60, 0.2)
       }`;
 
-const Container: ThemedComponent<{
+function inferColor(p) {
+  switch (p.type) {
+    case "IN":
+      return p.marketColor;
+    case "FREEZE":
+      return p.theme.colors.wallet;
+    case "REWARD":
+      return p.theme.colors.gold;
+    default:
+      return p.theme.colors.palette.text.shade60;
+  }
+}
+
+export const Container: ThemedComponent<{
   isConfirmed: boolean,
   type: string,
   marketColor: string,
   hasFailed?: boolean,
 }> = styled(Box).attrs(p => ({
   bg: p.hasFailed
-    ? rgba(p.theme.colors.alertRed, 0.05)
+    ? mix(p.theme.colors.alertRed, p.theme.colors.palette.background.paper, 0.95)
     : p.isConfirmed
-    ? rgba(p.type === "IN" ? p.marketColor : p.theme.colors.palette.text.shade60, 0.2)
-    : "none",
-  color: p.hasFailed
-    ? p.theme.colors.alertRed
-    : p.type === "IN"
-    ? p.marketColor
-    : p.theme.colors.palette.text.shade60,
+    ? mix(inferColor(p), p.theme.colors.palette.background.paper, 0.8)
+    : p.theme.colors.palette.background.paper,
+  color: p.hasFailed ? p.theme.colors.alertRed : inferColor(p),
   alignItems: "center",
   justifyContent: "center",
 }))`
@@ -76,6 +90,7 @@ const iconsComponent = {
   OUT: IconSend,
   IN: IconReceive,
   DELEGATE: IconDelegate,
+  REDELEGATE: IconRedelegate,
   UNDELEGATE: IconUndelegate,
   REVEAL: IconEye,
   CREATE: IconPlus,
@@ -84,6 +99,13 @@ const iconsComponent = {
   UNFREEZE: Unfreeze,
   VOTE: Vote,
   REWARD: ClaimRewards,
+  FEES: IconFees,
+  OPT_IN: IconPlus,
+  OPT_OUT: IconTrash,
+  CLOSE_ACCOUNT: IconTrash,
+  REDEEM: IconWithdraw,
+  SUPPLY: IconSupply,
+  APPROVE: IconPlus,
 };
 
 class ConfirmationCheck extends PureComponent<{

@@ -4,7 +4,8 @@ import { useTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import { log } from "@ledgerhq/logs";
 import type { DeviceModelId } from "@ledgerhq/devices";
-import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
+import type { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import logger from "~/logger";
 import Modal from "~/renderer/components/Modal";
 import Stepper from "~/renderer/components/Stepper";
@@ -19,10 +20,13 @@ type MaybeError = ?Error;
 
 export type StepProps = {
   firmware: FirmwareUpdateContext,
-  onCloseModal: () => void,
+  appsToBeReinstalled: boolean,
+  onCloseModal: (proceedToAppReinstall?: boolean) => void,
   error: ?Error,
   setError: Error => void,
+  device: Device,
   deviceModelId: DeviceModelId,
+  deviceInfo: DeviceInfo,
   t: TFunction,
   transitionTo: string => void,
 };
@@ -32,12 +36,15 @@ export type StepId = "idCheck" | "updateMCU" | "finish" | "resetDevice";
 type Step = TypedStep<StepId, StepProps>;
 
 type Props = {
+  withResetStep: boolean,
+  withAppsToReinstall: boolean,
   status: ModalStatus,
-  onClose: () => void,
+  onClose: (proceedToAppReinstall?: boolean) => void,
   firmware: ?FirmwareUpdateContext,
   stepId: StepId,
   error: ?Error,
   deviceModelId: DeviceModelId,
+  deviceInfo: DeviceInfo,
   setFirmwareUpdateOpened: boolean => void,
 };
 
@@ -52,6 +59,8 @@ const HookMountUnmount = ({ onMountUnmount }: { onMountUnmount: boolean => void 
 const UpdateModal = ({
   stepId,
   deviceModelId,
+  withResetStep,
+  withAppsToReinstall,
   error,
   status,
   onClose,
@@ -65,12 +74,11 @@ const UpdateModal = ({
   const { t } = useTranslation();
 
   const createSteps = useCallback(
-    ({ deviceModel }: { deviceModel: DeviceModelId }) => {
+    ({ withResetStep }: { withResetStep: boolean }) => {
       const updateStep = {
         id: "idCheck",
         label: t("manager.modal.identifier"),
         component: StepFullFirmwareInstall,
-        footer: null,
         onBack: null,
         hideFooter: true,
       };
@@ -88,7 +96,6 @@ const UpdateModal = ({
         id: "updateMCU",
         label: t("manager.modal.steps.updateMCU"),
         component: StepFlashMcu,
-        footer: null,
         onBack: null,
         hideFooter: true,
       };
@@ -103,17 +110,13 @@ const UpdateModal = ({
       };
 
       let steps = [updateStep, mcuStep, finalStep];
-      if (deviceModel === "blue") steps = [resetStep, ...steps];
-
+      if (withResetStep) steps = [resetStep, ...steps];
       return steps;
     },
     [t],
   );
 
-  const steps = useMemo(() => createSteps({ deviceModel: deviceModelId }), [
-    createSteps,
-    deviceModelId,
-  ]);
+  const steps = useMemo(() => createSteps({ withResetStep }), [createSteps, withResetStep]);
   const stepsId = steps.map(step => step.id);
   const errorSteps = err ? [stepsId.indexOf(stateStepId)] : [];
 
@@ -145,6 +148,7 @@ const UpdateModal = ({
 
   const additionalProps = {
     ...props,
+    appsToBeReinstalled: withAppsToReinstall,
     onCloseModal: onClose,
     setError,
     firmware,
@@ -155,14 +159,16 @@ const UpdateModal = ({
   return (
     <Modal
       width={550}
-      onClose={onClose}
+      onClose={() => onClose()}
       centered
+      backdropColor
       onHide={handleReset}
       isOpened={status === "install"}
       refocusWhenChange={stateStepId}
       preventBackdropClick={!["finish", "resetDevice"].includes(stepId) && !error}
       render={() => (
         <Stepper
+          {...additionalProps}
           key={nonce}
           onStepChange={handleStepChange}
           title={t("manager.firmware.update")}
@@ -170,8 +176,7 @@ const UpdateModal = ({
           steps={steps}
           errorSteps={errorSteps}
           deviceModelId={deviceModelId}
-          // $FlowFixMe fucking spread
-          {...additionalProps}
+          onClose={() => onClose()}
         >
           <HookMountUnmount onMountUnmount={setFirmwareUpdateOpened} />
         </Stepper>

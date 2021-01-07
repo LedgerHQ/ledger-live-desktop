@@ -3,12 +3,11 @@ import React, { useEffect, Component } from "react";
 import { createStructuredSelector } from "reselect";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
-import type { Action } from "@ledgerhq/live-common/lib/hw/actions/types";
+import type { Device, Action } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { setPreferredDeviceModel } from "~/renderer/actions/settings";
 import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
 import type { DeviceModelId } from "@ledgerhq/devices";
-import type { Device } from "~/renderer/reducers/devices";
 import AutoRepair from "~/renderer/components/AutoRepair";
 import TransactionConfirm from "~/renderer/components/TransactionConfirm";
 import useTheme from "~/renderer/hooks/useTheme";
@@ -22,6 +21,9 @@ import {
   renderLoading,
   renderRequestQuitApp,
   renderRequiresAppInstallation,
+  renderWarningOutdated,
+  renderSwapDeviceConfirmation,
+  renderSellDeviceConfirmation,
 } from "./rendering";
 
 type OwnProps<R, H, P> = {
@@ -71,6 +73,7 @@ const DeviceAction = <R, H, P>({
 }: Props<R, H, P>) => {
   const hookState = action.useHook(reduxDevice, request);
   const {
+    appAndVersion,
     device,
     unresponsive,
     error,
@@ -89,6 +92,15 @@ const DeviceAction = <R, H, P>({
     onRepairModal,
     deviceSignatureRequested,
     deviceStreamingProgress,
+    displayUpgradeWarning,
+    passWarning,
+    initSwapRequested,
+    initSwapError,
+    initSwapResult,
+    allowOpeningGranted,
+    initSellRequested,
+    initSellResult,
+    initSellError,
   } = hookState;
 
   const type = useTheme("colors.palette.type");
@@ -99,6 +111,10 @@ const DeviceAction = <R, H, P>({
       dispatch(setPreferredDeviceModel(modelId));
     }
   }, [dispatch, modelId, preferredDeviceModel]);
+
+  if (displayUpgradeWarning && appAndVersion) {
+    return renderWarningOutdated({ appName: appAndVersion.name, passWarning });
+  }
 
   if (repairModalOpened && repairModalOpened.auto) {
     return <AutoRepair onDone={closeRepairModal} />;
@@ -116,6 +132,14 @@ const DeviceAction = <R, H, P>({
   if (allowManagerRequestedWording) {
     const wording = allowManagerRequestedWording;
     return renderAllowManager({ modelId, type, wording });
+  }
+
+  if (initSwapRequested && !initSwapResult && !initSwapError) {
+    return renderSwapDeviceConfirmation({ modelId, type });
+  }
+
+  if (initSellRequested && !initSellResult && !initSellError) {
+    return renderSellDeviceConfirmation({ modelId, type });
   }
 
   if (allowOpeningRequestedWording || requestOpenApp) {
@@ -143,10 +167,17 @@ const DeviceAction = <R, H, P>({
   }
 
   if ((!isLoading && !device) || unresponsive) {
-    return renderConnectYourDevice({ modelId, type, unresponsive, device, onRepairModal, onRetry });
+    return renderConnectYourDevice({
+      modelId,
+      type,
+      unresponsive,
+      device,
+      onRepairModal,
+      onRetry,
+    });
   }
 
-  if (isLoading) {
+  if (isLoading || (allowOpeningGranted && !appAndVersion)) {
     return renderLoading({ modelId });
   }
 

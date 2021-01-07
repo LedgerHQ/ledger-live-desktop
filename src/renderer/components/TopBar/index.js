@@ -20,6 +20,7 @@ import Breadcrumb from "~/renderer/components/Breadcrumb";
 
 import IconLock from "~/renderer/icons/Lock";
 import IconEye from "~/renderer/icons/Eye";
+import IconHelp from "~/renderer/icons/Question";
 import IconEyeOff from "~/renderer/icons/EyeOff";
 import IconSettings from "~/renderer/icons/Settings";
 
@@ -87,7 +88,7 @@ const TopBar = () => {
     }
 
     if (location.pathname !== url) {
-      history.push(url);
+      history.push({ pathname: url, state: { source: "topbar" } });
     }
   }, [history, location, dispatch]);
 
@@ -113,9 +114,13 @@ const TopBar = () => {
             <Box justifyContent="center">
               <Bar />
             </Box>
-            <Tooltip content={t("settings.title")} placement="bottom">
-              <ItemContainer id="topbar-settings-button" isInteractive onClick={navigateToSettings}>
-                <IconSettings size={16} />
+            <Tooltip content={t("settings.helpButton")} placement="bottom">
+              <ItemContainer
+                id="topbar-help-button"
+                isInteractive
+                onClick={() => dispatch(openModal("MODAL_HELP"))}
+              >
+                <IconHelp size={16} />
               </ItemContainer>
             </Tooltip>
             {hasPassword && (
@@ -135,6 +140,14 @@ const TopBar = () => {
                 </Tooltip>
               </>
             )}
+            <Box justifyContent="center">
+              <Bar />
+            </Box>
+            <Tooltip content={t("settings.title")} placement="bottom">
+              <ItemContainer id="topbar-settings-button" isInteractive onClick={navigateToSettings}>
+                <IconSettings size={16} />
+              </ItemContainer>
+            </Tooltip>
           </Box>
         </Box>
       </Inner>

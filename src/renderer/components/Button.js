@@ -128,31 +128,17 @@ const buttonStyles: { [_: string]: Style } = {
   },
   lighterDanger: {
     default: p => `
-      background: ${
-        p.disabled
-          ? `${p.theme.colors.palette.action.disabled} !important`
-          : rgba(p.theme.colors.alertRed, 0.15)
-      };
       color: ${
         p.disabled
-          ? p.theme.colors.palette.text.shade20
-          : p.theme.colors.palette.primary.contrastText
+          ? `${p.theme.colors.palette.action.disabled} !important`
+          : p.theme.colors.alertRed
       };
-      box-shadow: ${
-        p.isFocused
-          ? `
-          0 0 0 1px ${darken(p.theme.colors.alertRed, 0.3)} inset,
-          0 0 0 1px ${rgba(p.theme.colors.alertRed, 0.5)},
-          0 0 0 3px ${rgba(p.theme.colors.alertRed, 0.3)};
-        `
-          : ""
-      }
     `,
     hover: p => `
-      background: ${lighten(rgba(p.theme.colors.alertRed, 0.15), 0.1)};
+      color: ${p.theme.colors.alertRed};
      `,
     active: p => `
-      background: ${darken(rgba(p.theme.colors.alertRed, 0.15), 0.1)};
+      color: ${p.theme.colors.alertRed};
      `,
   },
   outline: {
@@ -265,6 +251,9 @@ const LoadingWrapper = styled.div`
 
 const ChildrenWrapper = styled.div`
   opacity: ${p => (p.isLoading ? 0 : 1)};
+  flex-shrink: 1;
+  display: flex;
+  align-items: center;
 `;
 
 export const Base: ThemedComponent<*> = styled.button.attrs(p => ({
@@ -321,6 +310,7 @@ export type Props = {
   isLoading?: boolean,
   event?: string,
   eventProperties?: Object,
+  mr?: number,
 };
 
 class Button extends PureComponent<

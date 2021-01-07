@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Trans } from "react-i18next";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import StepProgress from "~/renderer/components/StepProgress";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
@@ -16,9 +16,13 @@ import type {
   SignedOperation,
 } from "@ledgerhq/live-common/lib/types";
 import { command } from "~/renderer/commands";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
+import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { DeviceBlocker } from "~/renderer/components/DeviceAction/DeviceBlocker";
 
 const connectAppExec = command("connectApp");
-const action = createAction(connectAppExec);
+
+const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectAppExec);
 
 const Result = ({
   signedOperation,
@@ -30,6 +34,7 @@ const Result = ({
   if (!signedOperation) return null;
   return (
     <StepProgress modelId={device.modelId}>
+      <DeviceBlocker />
       <Trans i18nKey="send.steps.confirmation.pending.title" />
     </StepProgress>
   );

@@ -73,7 +73,7 @@ type Props = {
 };
 
 const WarnBox = (props: Props) => (
-  <Container>
+  <Container mb={4}>
     <Box mx={1}>{svg}</Box>
     <Box shrink>{props.children}</Box>
   </Container>

@@ -1,16 +1,21 @@
 // @flow
-import { PureComponent } from "react";
+import { memo, useEffect } from "react";
 import { page } from "./segment";
+import { useLocation, useHistory } from "react-router-dom";
 
-class TrackPage extends PureComponent<{ category: string, name?: string }> {
-  componentDidMount() {
-    const { category, name, ...properties } = this.props;
-    page(category, name, properties);
-  }
+function TrackPage({ category, name, ...properties }: { category: string, name?: string }) {
+  const location = useLocation();
+  const history = useHistory();
+  const { state, pathname } = location || {};
+  const { source } = state || {};
+  useEffect(() => {
+    page(category, name, { ...properties, ...(source ? { source } : {}) });
+    // reset source router state param once it has been tracked to not repeat it from further unrelated navigation
+    history.replace({ pathname, state: { ...state, source: undefined } });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  render() {
-    return null;
-  }
+  return null;
 }
 
-export default TrackPage;
+export default memo<{ category: string, name?: string }>(TrackPage);

@@ -8,8 +8,15 @@ import type {
   TokenCurrency,
   CryptoCurrency,
 } from "@ledgerhq/live-common/lib/types";
-import { getMainAccount, getReceiveFlowError } from "@ledgerhq/live-common/lib/account";
-import { listTokensForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
+import {
+  getAccountCurrency,
+  getMainAccount,
+  getReceiveFlowError,
+} from "@ledgerhq/live-common/lib/account";
+import {
+  listTokensForCryptoCurrency,
+  listTokenTypesForCryptoCurrency,
+} from "@ledgerhq/live-common/lib/currencies";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
@@ -18,7 +25,9 @@ import SelectAccount from "~/renderer/components/SelectAccount";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
+import TokenTips from "~/renderer/components/TokenTips";
 import type { StepProps } from "../Body";
+import { supportLinkByTokenType } from "~/config/urls";
 
 type OnChangeAccount = (account: ?AccountLike, tokenAccount: ?Account) => void;
 
@@ -44,7 +53,7 @@ const TokenParentSelection = ({
   onChangeAccount: OnChangeAccount,
   mainAccount: Account,
 }) => {
-  const filterAccountSelect = useCallback(account => account.currency === mainAccount.currency, [
+  const filterAccountSelect = useCallback(a => getAccountCurrency(a) === mainAccount.currency, [
     mainAccount,
   ]);
   return (
@@ -91,14 +100,16 @@ export default function StepAccount({
   receiveTokenMode,
   onChangeAccount,
   onChangeToken,
+  eventType,
 }: StepProps) {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
   const error = account ? getReceiveFlowError(account, parentAccount) : null;
+  const tokenTypes = mainAccount ? listTokenTypesForCryptoCurrency(mainAccount.currency) : [];
 
   return (
     <Box flow={1}>
-      <TrackPage category="Receive Flow" name="Step 1" />
-      {mainAccount ? <CurrencyDownStatusAlert currency={mainAccount.currency} /> : null}
+      <TrackPage category={`Receive Flow${eventType ? ` (${eventType})` : ""}`} name="Step 1" />
+      {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       {receiveTokenMode && mainAccount ? (
         <TokenParentSelection mainAccount={mainAccount} onChangeAccount={onChangeAccount} />
@@ -111,6 +122,29 @@ export default function StepAccount({
           token={token}
           onChangeToken={onChangeToken}
         />
+      ) : null}
+      {account && !receiveTokenMode && tokenTypes.length ? (
+        <div>
+          <TokenTips
+            textKey={`receive.steps.chooseAccount.${
+              account.type === "TokenAccount" ? "verifyTokenType" : "warningTokenType"
+            }`}
+            textData={
+              account.type === "TokenAccount"
+                ? {
+                    token: account.token.name,
+                    tokenType: tokenTypes.map(tt => tt.toUpperCase()).join("/"),
+                    currency: mainAccount && mainAccount.currency.name,
+                  }
+                : {
+                    ticker: account.currency.ticker,
+                    tokenType: tokenTypes.map(tt => tt.toUpperCase()).join("/"),
+                    currency: account.currency.name,
+                  }
+            }
+            learnMoreLink={supportLinkByTokenType[tokenTypes[0]]}
+          />
+        </div>
       ) : null}
     </Box>
   );
@@ -126,6 +160,7 @@ export function StepAccountFooter({
   const error = account ? getReceiveFlowError(account, parentAccount) : null;
   return (
     <Button
+      id={"receive-account-continue-button"}
       disabled={!account || (receiveTokenMode && !token) || !!error}
       primary
       onClick={() => transitionTo("device")}

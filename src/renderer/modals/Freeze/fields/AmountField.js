@@ -1,23 +1,22 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 import { BigNumber } from "bignumber.js";
 
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-
 import type { TFunction } from "react-i18next";
-
 import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
-
 import type { Transaction } from "@ledgerhq/live-common/lib/families/tron/types";
-
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
+import { localeSelector } from "~/renderer/reducers/settings";
+import Label from "~/renderer/components/Label";
 import Box from "~/renderer/components/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import Text from "~/renderer/components/Text";
@@ -32,12 +31,30 @@ const InputRight = styled(Box).attrs(() => ({
   padding: ${p => p.theme.space[2]}px;
 `;
 
-const AmountButton: ThemedComponent<{ error: boolean }> = styled.button.attrs(() => ({
-  type: "button",
-}))`
+const InputLeft = styled(Box).attrs(() => ({
+  ff: "Inter|Medium",
+  color: "palette.text.shade60",
+  fontSize: 4,
+  justifyContent: "center",
+  horizontal: true,
+  pl: 3,
+}))``;
+
+const AmountButton: ThemedComponent<{ error: boolean, active: boolean }> = styled.button.attrs(
+  () => ({
+    type: "button",
+  }),
+)`
   background-color: ${p =>
-    p.error ? p.theme.colors.lightRed : p.theme.colors.palette.action.hover};
-  color: ${p => p.theme.colors.palette.primary.main};
+    p.error
+      ? p.theme.colors.lightRed
+      : p.active
+      ? p.theme.colors.palette.primary.main
+      : p.theme.colors.palette.action.hover};
+  color: ${p =>
+    p.active
+      ? p.theme.colors.palette.primary.contrastText
+      : p.theme.colors.palette.primary.main}!important;
   border: none;
   border-radius: 4px;
   padding: 0px ${p => p.theme.space[2]}px;
@@ -47,10 +64,9 @@ const AmountButton: ThemedComponent<{ error: boolean }> = styled.button.attrs(()
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: filter 200ms ease-out;
-  &:hover,
-  &:focus {
-    filter: brightness(0.8);
+  transition: all 200ms ease-out;
+  &:hover {
+    filter: contrast(2);
   }
 `;
 
@@ -76,6 +92,7 @@ const AmountField = ({
   bridgePending,
   t,
 }: Props) => {
+  const locale = useSelector(localeSelector);
   invariant(account && transaction && account.spendableBalance, "account and transaction required");
 
   const bridge = getAccountBridge(account, parentAccount);
@@ -83,14 +100,26 @@ const AmountField = ({
   const defaultUnit = getAccountUnit(account);
   const { spendableBalance } = account;
 
+  const [ratio, setRatio] = useState();
+
   const onChange = useCallback(
-    (value: BigNumber) =>
+    (value: BigNumber) => {
+      setRatio();
       onChangeTransaction(
         bridge.updateTransaction(transaction, {
           amount: getDecimalPart(value, defaultUnit.magnitude),
         }),
-      ),
+      );
+    },
     [bridge, transaction, onChangeTransaction, defaultUnit],
+  );
+
+  const onSelectRatio = useCallback(
+    (label, value) => {
+      onChange(value);
+      setRatio(label);
+    },
+    [setRatio, onChange],
   );
 
   const amountAvailable = useMemo(
@@ -99,8 +128,9 @@ const AmountField = ({
         disableRounding: true,
         showAllDigits: false,
         showCode: true,
+        locale,
       }),
-    [spendableBalance, defaultUnit],
+    [spendableBalance, defaultUnit, locale],
   );
 
   /** show amount ratio buttons only if we can ratio the available assets to 25% or less */
@@ -143,19 +173,14 @@ const AmountField = ({
 
   return (
     <Box vertical flow={1}>
-      <Box
-        horizontal
-        justifyContent="space-between"
-        alignItems="center"
-        color="palette.text.shade80"
-      >
-        <Text fontSize={3}>
+      <Label>
+        <Text>
           <Trans i18nKey="freeze.steps.amount.amountLabel" />
         </Text>
-        <Text fontSize={3} textAlign="right">
+        <Text style={{ flex: 1 }} textAlign="right">
           <Trans i18nKey="freeze.steps.amount.available" values={{ amountAvailable }} />
         </Text>
-      </Box>
+      </Label>
       <InputCurrency
         autoFocus={false}
         error={amountError}
@@ -165,11 +190,17 @@ const AmountField = ({
         value={amount}
         decimals={0}
         onChange={onChange}
+        renderLeft={<InputLeft>{defaultUnit.code}</InputLeft>}
         renderRight={
           showAmountRatio && (
             <InputRight>
               {amountButtons.map(({ label, value }, key) => (
-                <AmountButton key={key} error={!!amountError} onClick={() => onChange(value)}>
+                <AmountButton
+                  active={ratio === label}
+                  key={key}
+                  error={!!amountError}
+                  onClick={() => onSelectRatio(label, value)}
+                >
                   {label}
                 </AmountButton>
               ))}

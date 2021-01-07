@@ -53,6 +53,7 @@ type Props = {
   withAccount?: boolean,
   withSubAccounts?: boolean,
   title?: string,
+  filterOperation?: (Operation, AccountLike) => boolean,
 };
 
 type State = {
@@ -93,6 +94,7 @@ export class OperationsList extends PureComponent<Props, State> {
       title,
       withAccount,
       withSubAccounts,
+      filterOperation,
     } = this.props;
     const { nbToShow } = this.state;
 
@@ -102,8 +104,12 @@ export class OperationsList extends PureComponent<Props, State> {
     }
 
     const groupedOperations = account
-      ? groupAccountOperationsByDay(account, { count: nbToShow, withSubAccounts })
-      : groupAccountsOperationsByDay(accounts, { count: nbToShow, withSubAccounts });
+      ? groupAccountOperationsByDay(account, { count: nbToShow, withSubAccounts, filterOperation })
+      : groupAccountsOperationsByDay(accounts, {
+          count: nbToShow,
+          withSubAccounts,
+          filterOperation,
+        });
 
     const all = flattenAccounts(accounts || []).concat([account, parentAccount].filter(Boolean));
     const accountsMap = keyBy(all, "id");

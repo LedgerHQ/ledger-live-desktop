@@ -2,11 +2,11 @@
 
 import invariant from "invariant";
 import React, { useEffect, useRef, useCallback, useState } from "react";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount, getAccountName } from "@ledgerhq/live-common/lib/account";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import { command } from "~/renderer/commands";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
-import { DisconnectedDevice, WrongDeviceForAccount } from "@ledgerhq/errors";
+import { DisconnectedDevice } from "@ledgerhq/errors";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import useTheme from "~/renderer/hooks/useTheme";
@@ -26,6 +26,7 @@ import type { StepProps } from "../Body";
 import Modal from "~/renderer/components/Modal";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import QRCode from "~/renderer/components/QRCode";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 
 const Separator = styled.div`
   border-top: 1px solid #99999933;
@@ -145,6 +146,7 @@ const StepReceiveFunds = ({
   verifyAddressError,
   token,
   onClose,
+  eventType,
 }: StepProps) => {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
   invariant(account && mainAccount, "No account given");
@@ -155,23 +157,24 @@ const StepReceiveFunds = ({
 
   const confirmAddress = useCallback(async () => {
     try {
-      if (!device) {
-        throw new DisconnectedDevice();
+      if (getEnv("MOCK")) {
+        setTimeout(() => {
+          onChangeAddressVerified(true);
+          transitionTo("receive");
+        }, 3000);
+      } else {
+        if (!device) {
+          throw new DisconnectedDevice();
+        }
+        await getAccountBridge(mainAccount)
+          .receive(mainAccount, {
+            deviceId: device.deviceId,
+            verify: true,
+          })
+          .toPromise();
+        onChangeAddressVerified(true);
+        transitionTo("receive");
       }
-      const { address } = await command("getAddress")({
-        derivationMode: mainAccount.derivationMode,
-        currencyId: mainAccount.currency.id,
-        devicePath: device.path,
-        path: mainAccount.freshAddressPath,
-        verify: true,
-      }).toPromise();
-      if (address !== mainAccount.freshAddress) {
-        throw new WrongDeviceForAccount(`WrongDeviceForAccount ${mainAccount.name}`, {
-          accountName: mainAccount.name,
-        });
-      }
-      onChangeAddressVerified(true);
-      transitionTo("receive");
     } catch (err) {
       onChangeAddressVerified(false, err);
     }
@@ -199,7 +202,7 @@ const StepReceiveFunds = ({
   return (
     <>
       <Box px={2}>
-        <TrackPage category="Receive Flow" name="Step 4" />
+        <TrackPage category={`Receive Flow${eventType ? ` (${eventType})` : ""}`} name="Step 3" />
         {verifyAddressError ? (
           <ErrorDisplay error={verifyAddressError} onRetry={onVerify} />
         ) : isAddressVerified === true ? (
@@ -217,10 +220,10 @@ const StepReceiveFunds = ({
               }
             >
               <Box flow={4} pt={4} horizontal justifyContent="center">
-                <Button outlineGrey onClick={onVerify}>
+                <Button event="Page Receive Step 3 re-verify" outlineGrey onClick={onVerify}>
                   <Trans i18nKey="common.reverify" />
                 </Button>
-                <Button primary onClick={onClose}>
+                <Button id={"receive-receive-continue-button"} primary onClick={onClose}>
                   <Trans i18nKey="common.done" />
                 </Button>
               </Box>

@@ -5,14 +5,16 @@ import React from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
-import type { AccountLike, Account, Transaction } from "@ledgerhq/live-common/lib/types";
+import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import TransactionConfirmField from "~/renderer/components/TransactionConfirm/TransactionConfirmField";
+import type { FieldComponentProps } from "~/renderer/components/TransactionConfirm";
 import Text from "~/renderer/components/Text";
 import WarnBox from "~/renderer/components/WarnBox";
 import Box from "~/renderer/components/Box";
+import { OperationDetailsVotes } from "./operationDetails";
 
 const Info: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|SemiBold",
@@ -32,56 +34,51 @@ const AddressText = styled(Text).attrs(() => ({
 }))`
   word-break: break-all;
   text-align: right;
-  ma-wwidth: 50%;
+  max-width: 50%;
 `;
 
-const Pre = ({
-  account,
-  parentAccount,
-  transaction,
-}: {
-  account: AccountLike,
-  parentAccount: ?Account,
-  transaction: Transaction,
-}) => {
-  const mainAccount = getMainAccount(account, parentAccount);
-
-  invariant(transaction.family === "tron", "tron transaction");
-
+const TronResourceField = ({ account, parentAccount, transaction, field }: FieldComponentProps) => {
+  invariant(field.type === "tron.resource", "TronResourceField invalid");
   return (
-    <>
-      <TransactionConfirmField label="Address">
-        <AddressText>
-          {account.type === "ChildAccount" ? account.address : mainAccount.freshAddress}{" "}
-        </AddressText>
-      </TransactionConfirmField>
-      {transaction.resource && (
-        <TransactionConfirmField label="Resource">
-          <AddressText ff="Inter|SemiBold">{transaction.resource}</AddressText>
-        </TransactionConfirmField>
-      )}
-    </>
+    <TransactionConfirmField label={field.label}>
+      <AddressText ff="Inter|SemiBold">{field.value}</AddressText>
+    </TransactionConfirmField>
   );
 };
 
-const Post = ({ transaction }: { transaction: Transaction }) => {
+const TronVotesField = ({ account, parentAccount, transaction, field }: FieldComponentProps) => {
+  const mainAccount = getMainAccount(account, parentAccount);
   invariant(transaction.family === "tron", "tron transaction");
+  const { votes } = transaction;
+  if (!votes) return null;
+  return (
+    <Box vertical justifyContent="space-between" mb={2}>
+      <TransactionConfirmField label={field.label} />
 
-  return null;
+      <OperationDetailsVotes votes={votes} account={mainAccount} isTransactionField />
+    </Box>
+  );
 };
 
-const Warning = ({ transaction }: { transaction: Transaction }) => {
+const Warning = ({
+  transaction,
+  recipientWording,
+}: {
+  transaction: Transaction,
+  recipientWording: string,
+}) => {
   invariant(transaction.family === "tron", "tron transaction");
 
   switch (transaction.mode) {
     case "claimReward":
     case "freeze":
     case "unfreeze":
+    case "vote":
       return null;
     default:
       return (
         <WarnBox>
-          <Trans i18nKey={`TransactionConfirm.warningWording.${transaction.mode}`} />
+          <Trans i18nKey="TransactionConfirm.warning" values={{ recipientWording }} />
         </WarnBox>
       );
   }
@@ -97,9 +94,14 @@ const Title = ({ transaction }: { transaction: Transaction }) => {
   );
 };
 
+const fieldComponents = {
+  "tron.resource": TronResourceField,
+  "tron.votes": TronVotesField,
+};
+
 export default {
-  pre: Pre,
-  post: Post,
+  fieldComponents,
   warning: Warning,
   title: Title,
+  disableFees: () => true,
 };

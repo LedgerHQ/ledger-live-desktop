@@ -1,7 +1,6 @@
 // @flow
 
 import { createStore, applyMiddleware, compose } from "redux";
-// import { routerMiddleware } from 'react-router-redux'
 import thunk from "redux-thunk";
 import logger from "~/renderer/middlewares/logger";
 import analytics from "~/renderer/middlewares/analytics";
@@ -21,10 +20,10 @@ export default ({ state, dbMiddleware }: Props) => {
   if (dbMiddleware) {
     middlewares.push(dbMiddleware);
   }
-  const enhancers = compose(
-    applyMiddleware(...middlewares),
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f, // eslint-disable-line
-  );
+
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const enhancers = composeEnhancers(applyMiddleware(...middlewares));
+
   // $FlowFixMe
   return createStore(reducers, state, enhancers);
 };

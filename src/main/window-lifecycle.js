@@ -1,8 +1,9 @@
 // @flow
 import "./setup";
-import { BrowserWindow, screen } from "electron";
+import { BrowserWindow, screen, shell } from "electron";
 import path from "path";
-import icon from "../../build/icons/icon.png";
+import { delay } from "@ledgerhq/live-common/lib/promise";
+import { URL } from "url";
 
 const intFromEnv = (key: string, def: number): number => {
   const v = process.env[key];
@@ -22,6 +23,21 @@ let theme;
 
 export const getMainWindow = () => mainWindow;
 
+export const getMainWindowAsync = async (maxTries: number = 5) => {
+  if (maxTries <= 0) {
+    throw new Error("could not get the mainWindow");
+  }
+
+  const w = getMainWindow();
+
+  if (!w) {
+    await delay(2000);
+    return getMainWindowAsync(maxTries - 1);
+  }
+
+  return w;
+};
+
 const getWindowPosition = (width, height, display = screen.getPrimaryDisplay()) => {
   const { bounds } = display;
 
@@ -32,18 +48,21 @@ const getWindowPosition = (width, height, display = screen.getPrimaryDisplay()) 
 };
 
 const defaultWindowOptions = {
-  icon,
+  icon: path.join(__dirname, "/build/icons/icon.png"),
   backgroundColor: "#fff",
   webPreferences: {
     blinkFeatures: "OverlayScrollbars",
-    devTools: DEV_TOOLS,
+    devTools: __DEV__ || DEV_TOOLS,
     experimentalFeatures: true,
     nodeIntegration: true,
   },
 };
 
 export const loadWindow = async () => {
-  const url = __DEV__ ? INDEX_URL : `file://${__dirname}/index.html`;
+  let url = __DEV__ ? INDEX_URL : path.join("file://", __dirname, "index.html");
+  if (process.env.SPECTRON_RUN) {
+    url = url.replace("localhost", "host.docker.internal");
+  }
   if (mainWindow) {
     await mainWindow.loadURL(`${url}?theme=${theme}`);
   }
@@ -61,14 +80,12 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
     ...defaultWindowOptions,
     x: windowPosition.x,
     y: windowPosition.y,
-    /* eslint-disable indent */
     ...(process.platform === "darwin"
       ? {
           frame: false,
           titleBarStyle: "hiddenInset",
         }
       : {}),
-    /* eslint-enable indent */
     width,
     height,
     minWidth: MIN_WIDTH,
@@ -86,12 +103,21 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
 
   loadWindow();
 
-  if (DEV_TOOLS) {
+  if ((__DEV__ || DEV_TOOLS) && !process.env.DISABLE_DEV_TOOLS) {
     mainWindow.webContents.openDevTools();
   }
 
   mainWindow.on("closed", () => {
     mainWindow = null;
+  });
+
+  mainWindow.webContents.on("new-window", (event, url) => {
+    const parsedUrl = new URL(url);
+
+    if (parsedUrl.protocol === "https:" || parsedUrl.protocol === "http:") {
+      event.preventDefault();
+      shell.openExternal(url);
+    }
   });
 
   return mainWindow;

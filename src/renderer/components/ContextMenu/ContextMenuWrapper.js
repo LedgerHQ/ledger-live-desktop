@@ -9,13 +9,14 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 // $FlowFixMe
 export const ContextMenuContext = React.createContext({});
 
-export const withContextMenuContext = (ComponentToDecorate: React$ComponentType<*>) => (
-  props: *,
-) => (
-  <ContextMenuContext.Consumer>
-    {context => <ComponentToDecorate {...props} context={context} />}
-  </ContextMenuContext.Consumer>
-);
+export const withContextMenuContext = (ComponentToDecorate: React$ComponentType<*>) => {
+  const WrappedContextMenu = (props: *) => (
+    <ContextMenuContext.Consumer>
+      {context => <ComponentToDecorate {...props} context={context} />}
+    </ContextMenuContext.Consumer>
+  );
+  return WrappedContextMenu;
+};
 
 export type ContextMenuItemType = {
   label: string,
@@ -33,13 +34,6 @@ type State = {
   x: number,
   y: number,
 };
-
-const ContextMenuOverlay: ThemedComponent<{}> = styled(Box)`
-  z-index: 30;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-`;
 
 const ContextMenuContainer: ThemedComponent<{ x: number, y: number }> = styled(Box)`
   position: absolute;
@@ -79,6 +73,12 @@ class ContextMenuWrapper extends PureComponent<Props, State> {
     y: 0,
   };
 
+  containerRef: *;
+
+  componentWillUnmount() {
+    window.removeEventListener("click", this.hideContextMenu, true);
+  }
+
   showContextMenu = (event: MouseEvent, items: ContextMenuItemType[]) => {
     const { clientX: x, clientY: y } = event;
     const { innerHeight: wy, innerWidth: wx } = window;
@@ -86,17 +86,32 @@ class ContextMenuWrapper extends PureComponent<Props, State> {
     const xOffset = wx - x < 170 ? -170 : 0; // FIXME do this dynamically?
     const yOffset = wy < y + items.length * 30 ? -items.length * 30 : 0;
     this.setState({ visible: true, items, x: x + xOffset, y: y + yOffset });
+    window.addEventListener("click", this.hideContextMenu, true);
   };
 
-  hideContextMenu = () => {
+  hideContextMenu = (evt?: PointerEvent) => {
+    // NB Allow opening the context menu on a different target if already open.
+    if (evt?.srcElement?.parentElement === this.containerRef) {
+      return;
+    }
+
     this.setState({ visible: false, items: [] });
+    window.removeEventListener("click", this.hideContextMenu, true);
   };
+
+  setContainerRef = (ref: *) => (this.containerRef = ref);
 
   renderItem = (item: ContextMenuItemType, index: number) => {
     const { dontTranslateLabel, callback, label, Icon } = item;
 
     return (
-      <ContextMenuItemContainer key={index} onClick={callback}>
+      <ContextMenuItemContainer
+        key={index}
+        onClick={e => {
+          callback(e);
+          this.hideContextMenu();
+        }}
+      >
         {Icon && (
           <Box pr={2} color="palette.text.shade60">
             <Icon size={16} />
@@ -114,11 +129,9 @@ class ContextMenuWrapper extends PureComponent<Props, State> {
       <ContextMenuContext.Provider value={{ showContextMenu: this.showContextMenu }}>
         {children}
         {this.state.visible && (
-          <ContextMenuOverlay onClick={this.hideContextMenu}>
-            <ContextMenuContainer x={x} y={y}>
-              {items.map(this.renderItem)}
-            </ContextMenuContainer>
-          </ContextMenuOverlay>
+          <ContextMenuContainer ref={this.setContainerRef} x={x} y={y}>
+            {items.map(this.renderItem)}
+          </ContextMenuContainer>
         )}
       </ContextMenuContext.Provider>
     );

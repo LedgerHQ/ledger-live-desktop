@@ -2,29 +2,28 @@
 
 import React from "react";
 import styled from "styled-components";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { BigNumber } from "bignumber.js";
 import type { Currency, Unit } from "@ledgerhq/live-common/lib/types/currencies";
+import { useCalculate } from "@ledgerhq/live-common/lib/countervalues/react";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
-import CounterValues from "~/renderer/countervalues";
-import {
-  counterValueCurrencySelector,
-  exchangeSettingsForPairSelector,
-  intermediaryCurrency,
-} from "~/renderer/reducers/settings";
-import type { State } from "~/renderer/reducers";
+import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 import { colors } from "~/renderer/styles/theme";
 import useTheme from "~/renderer/hooks/useTheme";
 import Box from "~/renderer/components/Box";
 import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
 import IconActivity from "~/renderer/icons/Activity";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-type OwnProps = {
+type Props = {
   unit?: Unit,
+  rate?: BigNumber,
+  showAllDigits?: boolean,
   from: Currency,
   to?: Currency,
   withActivityCurrencyColor?: boolean,
   withActivityColor?: string,
+  withIcon?: boolean,
   withEquality?: boolean,
   date?: Date,
   color?: string,
@@ -33,28 +32,11 @@ type OwnProps = {
   placeholder?: React$Node,
 };
 
-type Props = OwnProps & {
-  effectiveUnit: Unit,
-  counterValueCurrency: Currency,
-  counterValue: ?BigNumber,
-  value: BigNumber,
-};
-
-const PriceWrapper = styled(Box).attrs(() => ({
-  ff: "Inter",
-  horizontal: true,
-}))`
-  line-height: 1.2;
-  white-space: pre;
-  align-items: baseline;
-`;
-
-const Price = ({
-  effectiveUnit,
-  value,
-  counterValue,
-  counterValueCurrency,
+export default function Price({
   from,
+  to,
+  unit,
+  date,
   withActivityCurrencyColor,
   withActivityColor,
   withEquality,
@@ -62,7 +44,27 @@ const Price = ({
   color,
   fontSize,
   iconSize,
-}: Props) => {
+  showAllDigits = true,
+  withIcon = true,
+  rate,
+}: Props) {
+  const effectiveUnit = unit || from.units[0];
+  const valueNum = 10 ** effectiveUnit.magnitude;
+  const rawCounterValueCurrency = useSelector(counterValueCurrencySelector);
+  const counterValueCurrency = to || rawCounterValueCurrency;
+  const rawCounterValue = useCalculate({
+    from,
+    to: counterValueCurrency,
+    value: valueNum,
+    disableRounding: true,
+  });
+
+  const counterValue = rate
+    ? rate.times(valueNum) // NB Allow to override the rate for swap
+    : typeof rawCounterValue !== "undefined"
+    ? BigNumber(rawCounterValue)
+    : rawCounterValue;
+
   const bgColor = useTheme("colors.palette.background.paper");
   if (!counterValue || counterValue.isZero()) return placeholder || null;
 
@@ -74,14 +76,16 @@ const Price = ({
       : undefined
     : getCurrencyColor(from, bgColor);
 
-  const subMagnitude = counterValue.lt(1) ? 1 : 0;
+  const subMagnitude = counterValue.lt(1) || showAllDigits ? 1 : 0;
 
   return (
     <PriceWrapper color={color} fontSize={fontSize}>
-      <IconActivity size={iconSize || 12} style={{ color: activityColor, marginRight: 4 }} />
+      {withIcon ? (
+        <IconActivity size={iconSize || 12} style={{ color: activityColor, marginRight: 4 }} />
+      ) : null}
       {!withEquality ? null : (
         <>
-          <CurrencyUnitValue value={value} unit={effectiveUnit} showCode />
+          <CurrencyUnitValue value={BigNumber(valueNum)} unit={effectiveUnit} showCode />
           {" = "}
         </>
       )}
@@ -94,50 +98,13 @@ const Price = ({
       />
     </PriceWrapper>
   );
-};
+}
 
-const mapStateToProps = (state: State, props: OwnProps) => {
-  const { unit, from, to, date } = props;
-  const effectiveUnit = unit || from.units[0];
-  const value = new BigNumber(10 ** effectiveUnit.magnitude);
-  const counterValueCurrency = to || counterValueCurrencySelector(state);
-  const intermediary = intermediaryCurrency(from, counterValueCurrency);
-  const fromExchange = exchangeSettingsForPairSelector(state, { from, to: intermediary });
-  let counterValue;
-  if (from && to && intermediary.ticker !== from.ticker) {
-    counterValue = CounterValues.calculateSelector(state, {
-      from,
-      to,
-      exchange: fromExchange,
-      value,
-      date,
-      disableRounding: true,
-    });
-  } else {
-    const toExchange = exchangeSettingsForPairSelector(state, {
-      from: intermediary,
-      to: counterValueCurrency,
-    });
-    counterValue = CounterValues.calculateWithIntermediarySelector(state, {
-      from,
-      fromExchange,
-      intermediary,
-      toExchange,
-      to: counterValueCurrency,
-      value,
-      date,
-      disableRounding: true,
-    });
-  }
-
-  return {
-    counterValueCurrency,
-    counterValue,
-    value,
-    effectiveUnit,
-  };
-};
-
-const PriceOut: React$ComponentType<OwnProps> = connect(mapStateToProps)(Price);
-
-export default PriceOut;
+const PriceWrapper: ThemedComponent<{}> = styled(Box).attrs(() => ({
+  ff: "Inter",
+  horizontal: true,
+}))`
+  line-height: 1.2;
+  white-space: pre;
+  align-items: baseline;
+`;

@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { BigNumber } from "bignumber.js";
@@ -92,8 +92,12 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
   const color = getCurrencyColor(currency, theme.colors.palette.background.paper);
   const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2);
   const icon = <CryptoCurrencyIcon currency={currency} size={16} />;
+  const onClick = useCallback(() => {
+    history.push({ pathname: `/asset/${currency.id}`, state: { source: "asset allocation" } });
+  }, [currency, history]);
+
   return (
-    <Wrapper onClick={() => history.push(`/asset/${currency.id}`)}>
+    <Wrapper onClick={onClick}>
       <Asset>
         {icon}
         <Tooltip delay={1200} content={currency.name}>
@@ -104,7 +108,7 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
       </Asset>
       <PriceSection>
         {distribution ? (
-          <Price from={currency} color="palette.text.shade80" fontSize={3} />
+          <Price from={currency} color="palette.text.shade80" fontSize={3} showAllDigits={false} />
         ) : (
           <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
             {"-"}
@@ -138,11 +142,9 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
             <CounterValue
               currency={currency}
               value={amount}
-              disableRounding
               color="palette.text.shade100"
               fontSize={3}
               showCode
-              alwaysShowSign={false}
             />
           ) : (
             <Text ff="Inter" color="palette.text.shade100" fontSize={3}>

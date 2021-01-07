@@ -39,7 +39,7 @@ const spawnCoreProcess = () => {
     SENTRY_USER_ID: userId,
   };
 
-  internal.configure(`${__dirname}/main.bundle.js`, [], {
+  internal.configure(path.resolve(__dirname, "main.bundle.js"), [], {
     env,
     execArgv: (process.env.LEDGER_INTERNAL_ARGS || "").split(/[ ]+/).filter(Boolean),
     silent: true,
@@ -110,7 +110,7 @@ ipcMain.on("command", (event, command) => {
   internal.send({ type: "command", command });
 });
 
-ipcMain.removeListener("command-unsubscribe", (event, { requestId }) => {
+ipcMain.on("command-unsubscribe", (event, { requestId }) => {
   delete ongoing[requestId];
   internal.send({ type: "command-unsubscribe", requestId });
 });

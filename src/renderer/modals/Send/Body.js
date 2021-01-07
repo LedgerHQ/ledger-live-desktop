@@ -1,6 +1,7 @@
 // @flow
 
 import React, { useCallback, useEffect, useState } from "react";
+import { BigNumber } from "bignumber.js";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import type { TFunction } from "react-i18next";
@@ -18,7 +19,7 @@ import { accountsSelector } from "~/renderer/reducers/accounts";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import Track from "~/renderer/analytics/Track";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import StepRecipient, { StepRecipientFooter } from "./steps/StepRecipient";
 import StepAmount, { StepAmountFooter } from "./steps/StepAmount";
 import StepConnectDevice from "./steps/StepConnectDevice";
@@ -35,6 +36,8 @@ type OwnProps = {|
     account: ?AccountLike,
     parentAccount: ?Account,
     startWithWarning?: boolean,
+    recipient?: string,
+    amount?: BigNumber,
   },
 |};
 
@@ -123,9 +126,23 @@ const Body = ({
 }: Props) => {
   const openedFromAccount = !!params.account;
   const [steps] = useState(createSteps);
+
+  // initial values might coming from deeplink
+  const [maybeAmount, setMaybeAmount] = useState(() => params.amount || null);
+  const [maybeRecipient, setMaybeRecipient] = useState(() => params.recipient || null);
+
+  const onResetMaybeAmount = useCallback(() => {
+    setMaybeAmount(null);
+  }, [setMaybeAmount]);
+
+  const onResetMaybeRecipient = useCallback(() => {
+    setMaybeRecipient(null);
+  }, [setMaybeRecipient]);
+
   const {
     transaction,
     setTransaction,
+    updateTransaction,
     account,
     parentAccount,
     setAccount,
@@ -225,6 +242,11 @@ const Body = ({
     onStepChange: handleStepChange,
     onOperationBroadcasted: handleOperationBroadcasted,
     onTransactionError: handleTransactionError,
+    maybeAmount,
+    onResetMaybeAmount,
+    maybeRecipient,
+    onResetMaybeRecipient,
+    updateTransaction,
   };
 
   if (!status) return null;
@@ -232,7 +254,7 @@ const Body = ({
   return (
     <Stepper {...stepperProps}>
       <SyncSkipUnderPriority priority={100} />
-      <Track onUnmount event="CloseModalDelegate" />
+      <Track onUnmount event="CloseModalSend" />
     </Stepper>
   );
 };

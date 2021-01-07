@@ -8,9 +8,12 @@ import DeviceAction from "~/renderer/components/DeviceAction";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
 import { command } from "~/renderer/commands";
 import type { StepProps } from "..";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
+import { mockedEventEmitter } from "~/renderer/components/DebugMock";
 
 const connectAppExec = command("connectApp");
-const action = createAction(connectAppExec);
+
+const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectAppExec);
 
 const StepConnectDevice = ({ currency, device, transitionTo }: StepProps) => {
   invariant(currency, "No crypto asset given");
@@ -22,9 +25,15 @@ const StepConnectDevice = ({ currency, device, transitionTo }: StepProps) => {
     }
   }, [currency]);
 
+  const currencyName = currency
+    ? currency.type === "TokenCurrency"
+      ? currency.parentCurrency.name
+      : currency.name
+    : undefined;
+
   return (
     <>
-      <TrackPage category="AddAccounts" name="Step2" />
+      <TrackPage category="AddAccounts" name="Step2" currencyName={currencyName} />
       <DeviceAction
         action={action}
         request={{

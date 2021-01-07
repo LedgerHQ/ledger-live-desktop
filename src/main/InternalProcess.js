@@ -1,5 +1,6 @@
 import { fork } from "child_process";
 import logger from "~/logger";
+import forceKill from "tree-kill";
 
 class InternalProcess {
   constructor({ timeout }) {
@@ -132,7 +133,7 @@ class InternalProcess {
       this.process.disconnect();
       setTimeout(() => {
         if (this.process && this.process.pid === pid) {
-          this.process.kill("SIGKILL");
+          forceKill(pid, "SIGKILL");
         }
       }, this.timeout);
     });

@@ -7,10 +7,10 @@ import type { ListAppsEvent } from "@ledgerhq/live-common/lib/apps";
 
 type Input = {
   deviceInfo: DeviceInfo,
-  devicePath: string,
+  deviceId: string,
 };
 
-const cmd = ({ devicePath, deviceInfo }: Input): Observable<ListAppsEvent> =>
-  withDevice(devicePath)(transport => listApps(transport, deviceInfo));
+const cmd = ({ deviceId, deviceInfo }: Input): Observable<ListAppsEvent> =>
+  withDevice(deviceId)(transport => listApps(transport, deviceInfo));
 
 export default cmd;

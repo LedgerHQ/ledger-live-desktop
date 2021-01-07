@@ -5,6 +5,7 @@ import type { Observable } from "rxjs";
 import { from } from "rxjs";
 import { map } from "rxjs/operators";
 import type {
+  AccountRawLike,
   AccountRaw,
   TransactionStatus,
   TransactionStatusRaw,
@@ -22,10 +23,20 @@ import {
   fromSignedOperationRaw,
   toSignOperationEventRaw,
 } from "@ledgerhq/live-common/lib/transaction";
-import { fromAccountRaw, toAccountRaw, toOperationRaw } from "@ledgerhq/live-common/lib/account";
+import {
+  fromAccountRaw,
+  fromAccountLikeRaw,
+  toAccountRaw,
+  toOperationRaw,
+} from "@ledgerhq/live-common/lib/account";
 import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 import { toScanAccountEventRaw } from "@ledgerhq/live-common/lib/bridge";
 import * as bridgeImpl from "@ledgerhq/live-common/lib/bridge/impl";
+
+const cmdCurrencyPreload = ({ currencyId }: { currencyId: string }): Observable<mixed> => {
+  const currency = getCryptoCurrencyById(currencyId);
+  return from(bridgeImpl.getCurrencyBridge(currency).preload(currency));
+};
 
 const cmdCurrencyScanAccounts = (o: {
   currencyId: string,
@@ -41,6 +52,19 @@ const cmdCurrencyScanAccounts = (o: {
       syncConfig: o.syncConfig,
     })
     .pipe(map(toScanAccountEventRaw));
+};
+
+const cmdAccountReceive = (o: {
+  account: AccountRaw,
+  arg: {
+    deviceId: string,
+    subAccountId?: string,
+    verify?: boolean,
+  },
+}): Observable<{ address: string, path: string }> => {
+  const account = fromAccountRaw(o.account);
+  const bridge = bridgeImpl.getAccountBridge(account, null);
+  return bridge.receive(account, o.arg);
 };
 
 const cmdAccountSync = (o: {
@@ -99,11 +123,28 @@ const cmdAccountBroadcast = (o: {
   return from(bridge.broadcast({ account, signedOperation }).then(o => toOperationRaw(o, true)));
 };
 
+const cmdAccountEstimateMaxSpendable = (o: {
+  account: AccountRawLike,
+  parentAccount: ?AccountRaw,
+  transaction: ?TransactionRaw,
+}): Observable<OperationRaw> => {
+  const account = fromAccountLikeRaw(o.account);
+  const parentAccount = o.parentAccount ? fromAccountRaw(o.parentAccount) : null;
+  const transaction = o.transaction ? fromTransactionRaw(o.transaction) : null;
+  const bridge = bridgeImpl.getAccountBridge(account, parentAccount);
+  return from(
+    bridge.estimateMaxSpendable({ account, parentAccount, transaction }).then(o => o.toString()),
+  );
+};
+
 export const commands = {
+  CurrencyPreload: cmdCurrencyPreload,
   AccountSync: cmdAccountSync,
+  AccountReceive: cmdAccountReceive,
   AccountGetTransactionStatus: cmdAccountGetTransactionStatus,
   AccountPrepareTransaction: cmdAccountPrepareTransaction,
   AccountSignOperation: cmdAccountSignOperation,
   AccountBroadcast: cmdAccountBroadcast,
   CurrencyScanAccounts: cmdCurrencyScanAccounts,
+  AccountEstimateMaxSpendable: cmdAccountEstimateMaxSpendable,
 };

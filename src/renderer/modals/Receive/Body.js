@@ -8,7 +8,7 @@ import { createStructuredSelector } from "reselect";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import Track from "~/renderer/analytics/Track";
 import type { Account, TokenCurrency, AccountLike } from "@ledgerhq/live-common/lib/types";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { closeModal } from "~/renderer/actions/modals";
@@ -33,6 +33,7 @@ type OwnProps = {|
     parentAccount: ?Account,
     startWithWarning?: boolean,
     receiveTokenMode?: boolean,
+    eventType?: string,
   },
 |};
 
@@ -54,6 +55,7 @@ export type StepProps = {
   transitionTo: string => void,
   device: ?Device,
   account: ?AccountLike,
+  eventType?: string,
   parentAccount: ?Account,
   token: ?TokenCurrency,
   receiveTokenMode: boolean,
@@ -180,6 +182,7 @@ const Body = ({
     device,
     account,
     parentAccount,
+    eventType: params.eventType,
     stepId,
     steps,
     errorSteps,

@@ -110,10 +110,10 @@ const InstallSuccessBanner = ({ state, isIncomplete, dispatch, addAccount, disab
             py={3}
             position="relative"
           >
-            <IconContainer style={{ zIndex: 10 }} onClick={onClose}>
+            <IconContainer onClick={onClose}>
               <IconCross size={16} />
             </IconContainer>
-            <Box style={{ zIndex: 10 }} flex={1} justifyContent="space-between">
+            <Box flex={1} justifyContent="space-between">
               <Box mb={3}>
                 <Text ff="Inter|SemiBold" fontSize={6} color="palette.primary.contrastText">
                   {installedSupportedApps.length === 1 ? (
@@ -129,9 +129,6 @@ const InstallSuccessBanner = ({ state, isIncomplete, dispatch, addAccount, disab
               <Box horizontal>
                 <Button primary inverted onClick={onAddAccount} mr={1}>
                   <Trans i18nKey="manager.applist.installSuccess.manageAccount" />
-                </Button>
-                <Button onClick={onClose} color="palette.primary.contrastText">
-                  <Trans i18nKey="manager.applist.installSuccess.later" />
                 </Button>
               </Box>
             </Box>

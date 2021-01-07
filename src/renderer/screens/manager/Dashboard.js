@@ -1,11 +1,11 @@
 // @flow
-import React, { useCallback, useMemo, useState, useEffect } from "react";
+import React, { useCallback, useMemo, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { ListAppsResult } from "@ledgerhq/live-common/lib/apps/types";
 import { distribute, initState } from "@ledgerhq/live-common/lib/apps/logic";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import AppsList from "./AppsList";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
@@ -17,24 +17,45 @@ type Props = {
   device: Device,
   deviceInfo: DeviceInfo,
   result: ?ListAppsResult,
-  onReset: () => void,
+  onReset: (?(string[])) => void,
+  appsToRestore: string[],
 };
 
-const Dashboard = ({ device, deviceInfo, result, onReset }: Props) => {
+const Dashboard = ({ device, deviceInfo, result, onReset, appsToRestore }: Props) => {
   const { t } = useTranslation();
   const currentDevice = useSelector(getCurrentDevice);
   const [firmwareUpdateOpened, setFirmwareUpdateOpened] = useState(false);
+  const hasDisconnectedDuringFU = useRef(false);
+  const [firmware, setFirmware] = useState(null);
+  const [firmwareError, setFirmwareError] = useState(null);
+
+  useEffect(() => {
+    command("getLatestFirmwareForDevice")(deviceInfo)
+      .toPromise()
+      .then(setFirmware, setFirmwareError);
+  }, [deviceInfo]);
 
   // on disconnect, go back to connect
   useEffect(() => {
-    if (currentDevice) return; // device is still plugged
-    if (firmwareUpdateOpened) return; // firmware update have some device disconnection involved
-    onReset();
+    // if there is no device but firmware update still happening
+    if (!currentDevice && firmwareUpdateOpened) {
+      hasDisconnectedDuringFU.current = true; // set disconnected to true for a later onReset()
+    }
+
+    // we must not reset during firmware update
+    if (firmwareUpdateOpened) {
+      return;
+    }
+
+    // we need to reset only if device is unplugged OR a disconnection happened during firmware update
+    if (!currentDevice || hasDisconnectedDuringFU.current) {
+      onReset();
+    }
   }, [onReset, firmwareUpdateOpened, currentDevice]);
 
   const exec = useCallback(
     (appOp, targetId, app) =>
-      command("appOpExec")({ appOp, targetId, app, devicePath: device.path }),
+      command("appOpExec")({ appOp, targetId, app, deviceId: device.deviceId }),
     [device],
   );
 
@@ -54,15 +75,39 @@ const Dashboard = ({ device, deviceInfo, result, onReset }: Props) => {
         appsStoragePercentage={appsStoragePercentage}
         appLength={result ? result.installed.length : 0}
       />
-      <FirmwareUpdate
-        t={t}
-        device={device}
-        deviceInfo={deviceInfo}
-        setFirmwareUpdateOpened={setFirmwareUpdateOpened}
-      />
       {result ? (
-        <AppsList device={device} deviceInfo={deviceInfo} result={result} exec={exec} />
-      ) : null}
+        <AppsList
+          device={device}
+          deviceInfo={deviceInfo}
+          firmware={firmware}
+          result={result}
+          appsToRestore={appsToRestore}
+          exec={exec}
+          render={({ disableFirmwareUpdate, installed }) => (
+            <FirmwareUpdate
+              t={t}
+              device={device}
+              deviceInfo={deviceInfo}
+              firmware={firmware}
+              error={firmwareError}
+              setFirmwareUpdateOpened={setFirmwareUpdateOpened}
+              disableFirmwareUpdate={disableFirmwareUpdate}
+              installed={installed}
+              onReset={onReset}
+            />
+          )}
+        />
+      ) : (
+        <FirmwareUpdate
+          t={t}
+          device={device}
+          deviceInfo={deviceInfo}
+          firmware={firmware}
+          error={firmwareError}
+          setFirmwareUpdateOpened={setFirmwareUpdateOpened}
+          onReset={onReset}
+        />
+      )}
     </Box>
   );
 };

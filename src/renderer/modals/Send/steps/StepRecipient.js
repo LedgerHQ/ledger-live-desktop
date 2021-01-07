@@ -1,7 +1,6 @@
 // @flow
 
 import React, { PureComponent } from "react";
-import styled from "styled-components";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -11,35 +10,13 @@ import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAle
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import Label from "~/renderer/components/Label";
 import SelectAccount from "~/renderer/components/SelectAccount";
-import IconArrowDown from "~/renderer/icons/ArrowDown";
 
 import SendRecipientFields, { getFields } from "../SendRecipientFields";
 import RecipientField from "../fields/RecipientField";
 
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { StepProps } from "../types";
 
-const Separator: ThemedComponent<{}> = styled.div`
-  display: flex;
-  align-items: center;
-  & > div {
-    flex: 1;
-    height: 1px;
-    background: ${p => p.theme.colors.palette.divider};
-    & :nth-of-type(2) {
-      color: ${p => p.theme.colors.palette.primary.main};
-      flex: unset;
-      display: flex;
-      align-items: center;
-      height: 36px;
-      width: 36px;
-      border-radius: 36px;
-      background: transparent;
-      justify-content: center;
-      border: 1px solid ${p => p.theme.colors.palette.divider};
-    }
-  }
-`;
+import StepRecipientSeparator from "~/renderer/components/StepRecipientSeparator";
 
 const StepRecipient = ({
   t,
@@ -52,6 +29,8 @@ const StepRecipient = ({
   error,
   status,
   bridgePending,
+  maybeRecipient,
+  onResetMaybeRecipient,
 }: StepProps) => {
   if (!status) return null;
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
@@ -59,7 +38,7 @@ const StepRecipient = ({
   return (
     <Box flow={4}>
       <TrackPage category="Send Flow" name="Step Recipient" />
-      {mainAccount ? <CurrencyDownStatusAlert currency={mainAccount.currency} /> : null}
+      {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       <Box flow={1}>
         <Label>{t("send.steps.details.selectAccountDebit")}</Label>
@@ -71,13 +50,7 @@ const StepRecipient = ({
           value={account}
         />
       </Box>
-      <Separator>
-        <div />
-        <div>
-          <IconArrowDown size={16} />
-        </div>
-        <div />
-      </Separator>
+      <StepRecipientSeparator />
       {account && transaction && mainAccount && (
         <>
           <RecipientField
@@ -88,6 +61,8 @@ const StepRecipient = ({
             onChangeTransaction={onChangeTransaction}
             bridgePending={bridgePending}
             t={t}
+            initValue={maybeRecipient}
+            resetInitValue={onResetMaybeRecipient}
           />
           <SendRecipientFields
             account={mainAccount}
@@ -120,7 +95,13 @@ export class StepRecipientFooter extends PureComponent<StepProps> {
 
     return (
       <>
-        <Button isLoading={bridgePending} primary disabled={!canNext} onClick={this.onNext}>
+        <Button
+          id={"send-recipient-continue-button"}
+          isLoading={bridgePending}
+          primary
+          disabled={!canNext}
+          onClick={this.onNext}
+        >
           {t("common.continue")}
         </Button>
       </>

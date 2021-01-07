@@ -4,6 +4,7 @@ import React from "react";
 import { Trans } from "react-i18next";
 import styled, { withTheme } from "styled-components";
 
+import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { multiline } from "~/renderer/styles/helpers";
@@ -38,6 +39,7 @@ function StepConfirmation({
     return (
       <Container>
         <TrackPage category="Claim reward Flow" name="Step Confirmed" />
+        <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={<Trans i18nKey="claimReward.steps.confirmation.success.title" />}
           description={multiline(t("claimReward.steps.confirmation.success.text"))}

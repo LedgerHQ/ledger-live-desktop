@@ -51,6 +51,7 @@ const colors = {
   dark: "#142533",
   separator: "#aaaaaa",
   fog: "#d8d8d8",
+  gold: "#d6ad42",
   graphite: "#767676",
   grey: "#999999",
   identity: "#41ccb4",
@@ -60,13 +61,14 @@ const colors = {
   lightGrey: "#f9f9f9",
   starYellow: "#FFD24A",
   orange: "#ffa726",
-  positiveGreen: "#66be54",
+  positiveGreen: "rgba(102, 190, 84, 1)",
   greenPill: "#41ccb4",
   smoke: "#666666",
   wallet: "#6490f1",
   blueTransparentBackground: "rgba(100, 144, 241, 0.15)",
   pillActiveBackground: "rgba(100, 144, 241, 0.1)",
   lightRed: "rgba(234, 46, 73, 0.1)",
+  lightWarning: "rgba(245, 127, 23, 0.1)",
   white: "#ffffff",
   experimentalBlue: "#165edb",
   marketUp_eastern: "#ea2e49",
@@ -123,10 +125,22 @@ const fadeInGrowX = keyframes`
     }
 `;
 
+const fadeInUp = keyframes`
+    0% {
+      opacity: 0;
+      transform: translateY(66%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  `;
+
 const animations = {
   fadeIn: props => css`${fadeIn} ${animationLength} ${easings.outQuadratic} forwards`,
   fadeOut: props => css`${fadeOut} ${animationLength} ${easings.outQuadratic} forwards`,
   fadeInGrowX: props => css`${fadeInGrowX} 0.6s ${easings.outQuadratic} forwards`,
+  fadeInUp: props => css`${fadeInUp} ${animationLength} ${easings.outQuadratic} forwards`,
 };
 
 const overflow = {

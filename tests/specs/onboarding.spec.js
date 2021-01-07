@@ -1,251 +1,193 @@
-import { applicationProxy } from "../applicationProxy";
-import OnboardingPage from "../po/onboarding.page";
-import ModalPage from "../po/modal.page";
-import onboardingData from "../data/onboarding/";
+import initialize, { app, deviceInfo, mockListAppsResult, mockDeviceEvent } from "../common.js";
 
-describe("When I launch the app for the first time", () => {
-  let app;
-  let onboardingPage;
-  let modalPage;
+describe("Onboarding", () => {
+  initialize("onboarding", {});
 
-  beforeAll(() => {
-    app = applicationProxy();
-    onboardingPage = new OnboardingPage(app);
-    modalPage = new ModalPage(app);
-    return app.start();
-  });
+  const $ = selector => app.client.$(selector);
 
-  afterAll(() => {
-    return app.stop();
-  });
-
-  it("opens a window", () => {
-    return app.client
-      .waitUntilWindowLoaded()
-      .getWindowCount()
-      .then(count => expect(count).toBe(1))
-      .browserWindow.isMinimized()
-      .then(minimized => expect(minimized).toBe(false))
-      .browserWindow.isVisible()
-      .then(visible => expect(visible).toBe(false))
-      .browserWindow.isFocused()
-      .then(focused => expect(focused).toBe(false))
-      .getTitle()
-      .then(title => {
-        expect(title).toBe(onboardingData.appTitle);
-      });
-  });
-
-  describe("When the app starts", () => {
-    it("should load and display an animated logo", async () => {
-      await app.client.waitForVisible("#loading-logo");
-      expect(await onboardingPage.loadingLogo.isVisible()).toBe(true);
+  it("go through start", async () => {
+    const elem = await $("#onboarding-get-started-button");
+    await elem.click();
+    const terms = await $("#terms-markdown");
+    await terms.waitForDisplayed();
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-terms",
     });
-
-    it("should end loading and animated logo is hidden", async () => {
-      await app.client.waitForVisible("#loading-logo", 5000, true);
-      expect(await onboardingPage.loadingLogo.isVisible()).toBe(false);
+  });
+  it("accept terms", async () => {
+    const lossCB = await $("#modal-terms-checkbox-loss");
+    const termCB = await $("#modal-terms-checkbox");
+    const cta = await $("#modal-confirm-button");
+    await lossCB.click();
+    await termCB.click();
+    await cta.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-terms-accepted",
+    });
+  });
+  it("selects nanoX", async () => {
+    const nanoX = await $("#device-nanoX");
+    await nanoX.click();
+    await app.client.pause(500);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nanoX-flow",
     });
   });
 
-  describe("When it displays the welcome page", () => {
-    it("should propose to change the theme", async () => {
-      expect(await onboardingPage.isVisible()).toBe(true);
-      expect(await onboardingPage.logo.isVisible()).toBe(true);
-      expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.welcomeTitle);
-      expect(await onboardingPage.pageDescription.getText()).toBe(onboardingData.welcomeDesc);
-    });
-
-    describe("When I change the theme", () => {
-      it("should change the appearance to dusk", async () => {
-        await onboardingPage.setTheme("dusk");
-        expect(await onboardingPage.getThemeColor()).toBe(onboardingData.duskColor);
-      });
-
-      it("should change the appearance to dark", async () => {
-        await onboardingPage.setTheme("dark");
-        expect(await onboardingPage.getThemeColor()).toBe(onboardingData.darkColor);
-      });
-
-      it("should change the appearance to light", async () => {
-        await onboardingPage.setTheme("light");
-        expect(await onboardingPage.getThemeColor()).toBe(onboardingData.lightColor);
-      });
+  it("goes through the tutorial", async () => {
+    const firstUse = await $("#first-use");
+    await firstUse.click();
+    const right = await $("#pedagogy-right");
+    await right.click();
+    await right.click();
+    await right.click();
+    await right.click();
+    const cta = await $("#setup-nano-wallet-cta");
+    await cta.click();
+    await app.client.pause(500);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-getstarted",
     });
   });
 
-  describe("When I start the onboarding", () => {
-    it("should display different options", async () => {
-      await onboardingPage.getStarted();
-      expect(await onboardingPage.logo.isVisible()).toBe(true);
-      expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.getStartedTitle);
-      expect(await onboardingPage.newDeviceButton.isVisible()).toBe(true);
-      expect(await onboardingPage.restoreDeviceButton.isVisible()).toBe(true);
-      expect(await onboardingPage.initializedDeviceButton.isVisible()).toBe(true);
-      expect(await onboardingPage.noDeviceButton.isVisible()).toBe(true);
+  it("gets started", async () => {
+    const next = await $("#get-started-cta");
+    await next.click();
+    const carefulcta = await $("#be-careful-cta");
+    carefulcta.click();
+    await app.client.pause(500);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-getstarted-2",
     });
+  });
 
-    describe("Setup new device flow", () => {
-      it("should allow to setup new device (nanoX)", async () => {
-        await onboardingPage.selectConfiguration("new");
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.selectDeviceTitle);
-        expect(await onboardingPage.nanoX.isVisible()).toBe(true);
-        expect(await onboardingPage.nanoS.isVisible()).toBe(true);
-        expect(await onboardingPage.blue.isVisible()).toBe(true);
-        await onboardingPage.selectDevice("nanox");
-        await onboardingPage.continue();
-      });
-
-      it("should help user to setup a new device", async () => {
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.choosePinTitle);
-        await onboardingPage.continue();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.saveSeedTitle);
-        await onboardingPage.continue();
-      });
-
-      it("should ask to fill a security checklist", async () => {
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.securityTitle);
-        expect(await onboardingPage.pageDescription.getText()).toBe(onboardingData.securityDesc2);
-        await onboardingPage.genuineCheckPin("yes");
-        await onboardingPage.genuineCheckSeed("yes");
-        await onboardingPage.genuineCheck();
-      });
-
-      it("should display a modal to perform a genuine check", async () => {
-        expect(await modalPage.isVisible()).toBe(true);
-        expect(await modalPage.title.getText()).toBe(onboardingData.genuineModalTitle);
-        await modalPage.closeButton.click();
-      });
-
-      it("should be able to browse to previous steps", async () => {
-        await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.saveSeedTitle);
-        await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.choosePinTitle);
-        await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.selectDeviceTitle);
-        await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.getStartedTitle);
-      });
+  it("goest to pincode", async () => {
+    const next = await $("#device-howto-cta");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-pincode",
     });
+  });
 
-    describe("Restore device flow", () => {
-      it("should allow to restore a device (blue)", async () => {
-        await onboardingPage.selectConfiguration("restore");
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.selectDeviceTitle);
-        expect(await onboardingPage.nanoX.isVisible()).toBe(true);
-        expect(await onboardingPage.nanoS.isVisible()).toBe(true);
-        expect(await onboardingPage.blue.isVisible()).toBe(true);
-        await onboardingPage.selectDevice("blue");
-        await onboardingPage.continue();
-      });
-
-      it("should help user to restore a device", async () => {
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.choosePinTitle);
-        await onboardingPage.continue();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.enterSeedTitle);
-        await onboardingPage.continue();
-      });
-
-      it("should ask to fill a security checklist", async () => {
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.securityTitle);
-        expect(await onboardingPage.pageDescription.getText()).toBe(onboardingData.securityDesc);
-        await onboardingPage.genuineCheckPin("yes");
-        await onboardingPage.genuineCheckSeed("yes");
-        await onboardingPage.genuineCheck();
-      });
-
-      it("should display a modal to perform a genuine check", async () => {
-        expect(await modalPage.isVisible()).toBe(true);
-        expect(await modalPage.title.getText()).toBe(onboardingData.genuineModalTitle);
-        await modalPage.closeButton.click();
-      });
-
-      it("should be able to browse to previous steps", async () => {
-        await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.enterSeedTitle);
-        await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.choosePinTitle);
-        await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.selectDeviceTitle);
-        await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.getStartedTitle);
-      });
+  it("goest to pincode 2", async () => {
+    const pincodeCB = await $("#pincode-private-cb");
+    pincodeCB.click();
+    const next = await $("#device-pincode-cta");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-pincode-2",
     });
+  });
 
-    describe("Initialized device flow", () => {
-      it("should allow to use an initialized device (nanoS)", async () => {
-        await onboardingPage.selectConfiguration("initialized");
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.selectDeviceTitle);
-        expect(await onboardingPage.nanoX.isVisible()).toBe(true);
-        expect(await onboardingPage.nanoS.isVisible()).toBe(true);
-        expect(await onboardingPage.blue.isVisible()).toBe(true);
-        await onboardingPage.selectDevice("nanos");
-        await onboardingPage.continue();
-      });
-
-      describe("When it ask to fill a security checklist", () => {
-        it("should fail if PIN not choosen by user", async () => {
-          expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.securityTitle);
-          await onboardingPage.genuineCheckPin("no");
-          expect(await onboardingPage.pageTitle.getText()).toBe(
-            onboardingData.genuinePinErrorTitle,
-          );
-          expect(await onboardingPage.pageDescription.getText()).toBe(
-            onboardingData.genuinePinErrorDesc,
-          );
-          expect(await onboardingPage.contactUsButton.isVisible()).toBe(true);
-          await onboardingPage.back();
-        });
-
-        it("should fail if SEED not choosen by user", async () => {
-          await onboardingPage.genuineCheckPin("yes");
-          await onboardingPage.genuineCheckSeed("no");
-          expect(await onboardingPage.pageTitle.getText()).toBe(
-            onboardingData.genuineSeedErrorTitle,
-          );
-          expect(await onboardingPage.pageDescription.getText()).toBe(
-            onboardingData.genuineSeedErrorDesc,
-          );
-          expect(await onboardingPage.contactUsButton.isVisible()).toBe(true);
-          await onboardingPage.back();
-        });
-
-        it("should success if all requirements have been met", async () => {
-          expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.securityTitle);
-          await onboardingPage.genuineCheckPin("yes");
-          await onboardingPage.genuineCheckSeed("yes");
-          await onboardingPage.genuineCheck();
-        });
-
-        it("should display a modal to perform a genuine check", async () => {
-          expect(await modalPage.isVisible()).toBe(true);
-          expect(await modalPage.title.getText()).toBe(onboardingData.genuineModalTitle);
-          await modalPage.closeButton.click();
-        });
-
-        it("should be able to browse to previous steps", async () => {
-          await onboardingPage.back();
-          expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.selectDeviceTitle);
-          await onboardingPage.back();
-          expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.getStartedTitle);
-        });
-      });
+  it("goest to recovery phrase", async () => {
+    const next = await $("#pincode-howto-cta");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-recoveryphrase",
     });
+  });
 
-    describe("No device flow", () => {
-      it("should display a menu", async () => {
-        await onboardingPage.selectConfiguration("nodevice");
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.noDeviceTitle);
-        expect(await onboardingPage.buyNewButton.isVisible()).toBe(true);
-        expect(await onboardingPage.trackOrderButton.isVisible()).toBe(true);
-        expect(await onboardingPage.learnMoreButton.isVisible()).toBe(true);
-      });
+  it("goest to recovery phrase 2", async () => {
+    const recoveryphraseCB = await $("#recoveryphrase-private-cb");
+    recoveryphraseCB.click();
+    const next = await $("#device-recoveryphrase-cta");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-recoveryphrase-2",
+    });
+  });
 
-      it("should be able to browse to previous steps", async () => {
-        await onboardingPage.back();
-        expect(await onboardingPage.pageTitle.getText()).toBe(onboardingData.getStartedTitle);
-      });
+  it("goest to recovery phrase 3", async () => {
+    const next = await $("#use-recovery-sheet");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-recoveryphrase-3",
+    });
+  });
+
+  it("goest to recovery phrase 4", async () => {
+    const next = await $("#recovery-howto-3");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-recoveryphrase-4",
+    });
+  });
+
+  it("goest to quizz", async () => {
+    const next = await $("#hide-recovery-cta");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-nano-quizz",
+    });
+  });
+
+  it("finished the quizz", async () => {
+    let next = await $("#quizz-start-cta");
+    await next.click();
+    next = await $("#answer-1");
+    await next.click();
+    next = await $("#quizz-next-cta");
+    await next.click();
+    next = await $("#answer-1");
+    await next.click();
+    next = await $("#quizz-next-cta");
+    await next.click();
+    next = await $("#answer-0");
+    await next.click();
+    next = await $("#quizz-next-cta");
+    await next.click();
+    await app.client.pause(400);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-you-are-a-pro",
+      failureThreshold: 2,
+      failureThresholdType: "pixel",
+    });
+  });
+
+  it("goest to connect", async () => {
+    const next = await $("#quizz-success-cta");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-genuine-check",
+    });
+  });
+
+  it("check nano", async () => {
+    const next = await $("#pair-my-nano-cta");
+    await next.click();
+    await app.client.pause(200);
+    await mockDeviceEvent(
+      {
+        type: "listingApps",
+        deviceInfo,
+      },
+      {
+        type: "result",
+        result: mockListAppsResult("Bitcoin", "Bitcoin", deviceInfo),
+      },
+      { type: "complete" },
+    );
+    await app.client.pause(5000);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-check-complete",
+    });
+  });
+
+  it("should be on app", async () => {
+    const next = await $("#genuine-check-cta");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-complete",
     });
   });
 });

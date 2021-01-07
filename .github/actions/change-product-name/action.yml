@@ -1,0 +1,6 @@
+name: "change-product-name"
+description: "Change `productName` in package.json"
+
+runs:
+  using: "node12"
+  main: "index.js"

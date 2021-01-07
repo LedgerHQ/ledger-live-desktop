@@ -18,12 +18,14 @@ import type { TFunction } from "react-i18next";
 import IconPlus from "~/renderer/icons/Plus";
 import TokenRow from "~/renderer/components/TokenRow";
 import Button from "~/renderer/components/Button";
-import { urls } from "~/config/urls";
+import { supportLinkByTokenType } from "~/config/urls";
 import LabelWithExternalIcon from "~/renderer/components/LabelWithExternalIcon";
 import { openURL } from "~/renderer/linking";
 import { track } from "~/renderer/analytics/segment";
 import AccountContextMenu from "~/renderer/components/ContextMenu/AccountContextMenu";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+
+import perFamilyTokenList from "~/renderer/generated/TokenList";
 
 type OwnProps = {
   account: Account,
@@ -41,6 +43,7 @@ const Wrapper: ThemedComponent<{}> = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
+  padding-right: ${p => p.theme.space[4]}px;
 `;
 
 const EmptyState: ThemedComponent<{}> = styled.div`
@@ -49,6 +52,7 @@ const EmptyState: ThemedComponent<{}> = styled.div`
   border-radius: 4px;
   display: flex;
   flex-direction: row;
+  align-items: center;
   > :first-child {
     flex: 1;
   }
@@ -81,7 +85,10 @@ const ReceiveButton = (props: { onClick: () => void }) => (
 
 class TokensList extends PureComponent<Props> {
   onAccountClick = (account: AccountLike, parentAccount: Account) => {
-    this.props.history.push(`/account/${parentAccount.id}/${account.id}`);
+    this.props.history.push({
+      pathname: `/account/${parentAccount.id}/${account.id}`,
+      state: { source: "tokens list" },
+    });
   };
 
   onReceiveClick = () => {
@@ -90,39 +97,78 @@ class TokensList extends PureComponent<Props> {
   };
 
   render() {
-    const { account, t, range } = this.props;
+    const { account, t, range, openModal } = this.props;
     if (!account.subAccounts) return null;
     const subAccounts = listSubAccounts(account);
-    const isTokenAccount = listTokenTypesForCryptoCurrency(account.currency).length > 0;
+    const { currency } = account;
+    const family = currency.family;
+    const tokenTypes = listTokenTypesForCryptoCurrency(currency);
+    const isTokenAccount = tokenTypes.length > 0;
     const isEmpty = subAccounts.length === 0;
 
     if (!isTokenAccount && isEmpty) return null;
+
+    const url =
+      currency && currency.type !== "TokenCurrency" && tokenTypes && tokenTypes.length > 0
+        ? supportLinkByTokenType[tokenTypes[0]]
+        : null;
+
+    const specific = perFamilyTokenList[family];
+    const hasSpecificTokenWording = specific?.hasSpecificTokenWording;
+    const ReceiveButtonComponent = specific?.ReceiveButton ?? ReceiveButton;
+
+    const titleLabel = t(
+      hasSpecificTokenWording ? `tokensList.${family}.title` : "tokensList.title",
+    );
+    const placeholderLabel = t(
+      hasSpecificTokenWording ? `tokensList.${family}.placeholder` : "tokensList.placeholder",
+      {
+        currencyName: currency.name,
+      },
+    );
+
+    const linkLabel = t(hasSpecificTokenWording ? `tokensList.${family}.link` : "tokensList.link");
 
     return (
       <Box mb={50}>
         <Wrapper>
           <Text color="palette.text.shade100" mb={2} ff="Inter|Medium" fontSize={6}>
-            {isTokenAccount ? t("tokensList.title") : t("subAccounts.title")}
+            {isTokenAccount ? titleLabel : t("subAccounts.title")}
           </Text>
-          {!isEmpty && isTokenAccount && <ReceiveButton onClick={this.onReceiveClick} />}
+          {!isEmpty && isTokenAccount && (
+            <ReceiveButtonComponent
+              onClick={this.onReceiveClick}
+              account={account}
+              openModal={openModal}
+            />
+          )}
         </Wrapper>
         {isEmpty && (
           <EmptyState>
             <Placeholder>
-              <Text color="palette.text.shade80" ff="Inter|SemiBold" fontSize={4}>
-                <Trans i18nKey={"tokensList.placeholder"} />{" "}
-                <LabelWithExternalIcon
-                  color="wallet"
-                  ff="Inter|SemiBold"
-                  onClick={() => {
-                    openURL(urls.managerERC20);
-                    track("More info on Manage ERC20 tokens");
-                  }}
-                  label={t("tokensList.link")}
-                />
-              </Text>
+              {url ? (
+                <Text color="palette.text.shade80" ff="Inter|SemiBold" fontSize={4}>
+                  {placeholderLabel}
+                  &nbsp;
+                  <LabelWithExternalIcon
+                    color="wallet"
+                    ff="Inter|SemiBold"
+                    onClick={() => {
+                      if (url) {
+                        openURL(url);
+                        track(`More info on Manage ${tokenTypes[0]} tokens`);
+                      }
+                    }}
+                    label={linkLabel}
+                  />
+                </Text>
+              ) : null}
             </Placeholder>
-            <ReceiveButton onClick={this.onReceiveClick} />
+            <ReceiveButtonComponent
+              onClick={this.onReceiveClick}
+              account={account}
+              openModal={openModal}
+            />
           </EmptyState>
         )}
         {subAccounts.map((token, index) => (

@@ -2,12 +2,15 @@
 import moment from "moment";
 import { ipcRenderer, webFrame, remote } from "electron";
 import React, { useState, useCallback } from "react";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { getAllEnvs } from "@ledgerhq/live-common/lib/env";
+import type { Account } from "@ledgerhq/live-common/lib/types";
 import KeyHandler from "react-key-handler";
 import logger from "~/logger";
 import getUser from "~/helpers/user";
 import Button from "~/renderer/components/Button";
+import { accountsSelector } from "~/renderer/reducers/accounts";
 
 const saveLogs = async (path: { canceled: boolean, filePath: string }) => {
   await ipcRenderer.invoke("save-logs", path);
@@ -34,9 +37,31 @@ type Props = {|
   hookToShortcut?: boolean,
   title?: React$Node,
   withoutAppData?: boolean,
+  accounts?: Account[],
 |};
 
-const ExportLogsBtn = ({ hookToShortcut, primary = true, small = true, title, ...rest }: Props) => {
+const ExportLogsBtnWrapper = (args: Props) => {
+  if (args.withoutAppData) {
+    return <ExportLogsBtn {...args} />;
+  } else {
+    return <ExportLogsBtnWithAccounts {...args} />;
+  }
+};
+
+const ExportLogsBtnWithAccounts = (args: Props) => {
+  const accounts = useSelector(accountsSelector);
+  return <ExportLogsBtn {...args} accounts={accounts} />;
+};
+
+const ExportLogsBtn = ({
+  hookToShortcut,
+  primary = true,
+  small = true,
+  title,
+  withoutAppData,
+  accounts = [],
+  ...rest
+}: Props) => {
   const { t } = useTranslation();
   const [exporting, setExporting] = useState(false);
 
@@ -53,6 +78,7 @@ const ExportLogsBtn = ({ hookToShortcut, primary = true, small = true, title, ..
       env: {
         ...getAllEnvs(),
       },
+      accountsIds: accounts.map(a => a.id),
     });
     const path = await remote.dialog.showSaveDialog({
       title: "Export logs",
@@ -69,7 +95,7 @@ const ExportLogsBtn = ({ hookToShortcut, primary = true, small = true, title, ..
     if (path) {
       await saveLogs(path);
     }
-  }, []);
+  }, [accounts]);
 
   const handleExportLogs = useCallback(async () => {
     if (exporting) return;
@@ -105,4 +131,4 @@ const ExportLogsBtn = ({ hookToShortcut, primary = true, small = true, title, ..
   );
 };
 
-export default ExportLogsBtn;
+export default ExportLogsBtnWrapper;

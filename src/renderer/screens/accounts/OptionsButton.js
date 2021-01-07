@@ -2,23 +2,22 @@
 
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import Track from "~/renderer/analytics/Track";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-import DropDown, { DropDownItem } from "~/renderer/components/DropDown";
+import DropDownSelector, { DropDownItem } from "~/renderer/components/DropDownSelector";
 import Switch from "~/renderer/components/Switch";
 import Tooltip from "~/renderer/components/Tooltip";
 import IconDots from "~/renderer/icons/Dots";
 import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
 import IconSend from "~/renderer/icons/Send";
-import { hideEmptyTokenAccountsSelector } from "~/renderer/reducers/settings";
 import { openModal } from "~/renderer/actions/modals";
-import { setHideEmptyTokenAccounts } from "~/renderer/actions/settings";
+import { useHideEmptyTokenAccounts } from "~/renderer/actions/settings";
 
-import type { DropDownItemType } from "~/renderer/components/DropDown";
+import type { DropDownItemType } from "~/renderer/components/DropDownSelector";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 const Separator: ThemedComponent<{}> = styled.div`
@@ -30,15 +29,12 @@ const Separator: ThemedComponent<{}> = styled.div`
 
 const Item: ThemedComponent<{
   disableHover?: boolean,
-  isHighlighted?: boolean,
 }> = styled(DropDownItem)`
   width: 230px;
   cursor: pointer;
   white-space: pre-wrap;
   justify-content: flex-start;
   align-items: center;
-  background-color: ${p =>
-    !p.disableHover && p.isHighlighted && p.theme.colors.palette.background.default};
 `;
 
 type ItemType = DropDownItemType & {
@@ -49,16 +45,11 @@ type ItemType = DropDownItemType & {
 
 const OptionsButton = () => {
   const dispatch = useDispatch();
-  const hideEmptyTokenAccounts = useSelector(hideEmptyTokenAccountsSelector);
+  const [hideEmptyTokenAccounts, setHideEmptyTokenAccounts] = useHideEmptyTokenAccounts();
+
   const onOpenModal = useCallback(
     (modal: string) => {
       dispatch(openModal(modal));
-    },
-    [dispatch],
-  );
-  const onSetHideEmptyTokenAccounts = useCallback(
-    (status: boolean) => {
-      dispatch(setHideEmptyTokenAccounts(status));
     },
     [dispatch],
   );
@@ -87,24 +78,19 @@ const OptionsButton = () => {
       label: t("settings.accounts.hideEmptyTokens.title"),
       onClick: (e: MouseEvent) => {
         e.preventDefault();
-        onSetHideEmptyTokenAccounts(!hideEmptyTokenAccounts);
+        e.stopPropagation();
+        setHideEmptyTokenAccounts(!hideEmptyTokenAccounts);
       },
     },
   ];
 
-  const renderItem = ({ item, isHighlighted }: { item: ItemType, isHighlighted: boolean }) => {
+  const renderItem = ({ item }: { item: ItemType }) => {
     if (item.type === "separator") {
       return <Separator />;
     }
 
     return (
-      <Item
-        horizontal
-        isHighlighted={isHighlighted}
-        flow={2}
-        onClick={item.onClick}
-        disableHover={item.key === "hideEmpty"}
-      >
+      <Item horizontal flow={2} onClick={item.onClick} disableHover={item.key === "hideEmpty"}>
         {item.key === "hideEmpty" ? (
           <Box mr={4}>
             <Track
@@ -115,7 +101,7 @@ const OptionsButton = () => {
                   : "hideEmptyTokenAccountsDisabled"
               }
             />
-            <Switch isChecked={hideEmptyTokenAccounts} onChange={onSetHideEmptyTokenAccounts} />
+            <Switch isChecked={hideEmptyTokenAccounts} onChange={setHideEmptyTokenAccounts} />
           </Box>
         ) : item.icon ? (
           <Box mr={4}>{item.icon}</Box>
@@ -126,20 +112,24 @@ const OptionsButton = () => {
   };
 
   return (
-    <DropDown border horizontal offsetTop={2} items={items} renderItem={renderItem}>
-      <Tooltip content={t("accounts.optionsMenu.title")}>
-        <Button
-          small
-          outlineGrey
-          flow={1}
-          style={{ width: 34, padding: 0, justifyContent: "center" }}
-        >
-          <Box alignItems="center">
-            <IconDots size={14} />
-          </Box>
-        </Button>
-      </Tooltip>
-    </DropDown>
+    <DropDownSelector horizontal items={items} renderItem={renderItem}>
+      {() => (
+        <Box horizontal>
+          <Tooltip content={t("accounts.optionsMenu.title")}>
+            <Button
+              small
+              outlineGrey
+              flow={1}
+              style={{ width: 34, padding: 0, justifyContent: "center" }}
+            >
+              <Box alignItems="center">
+                <IconDots size={14} />
+              </Box>
+            </Button>
+          </Tooltip>
+        </Box>
+      )}
+    </DropDownSelector>
   );
 };
 

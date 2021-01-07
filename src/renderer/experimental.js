@@ -9,6 +9,7 @@ export type FeatureCommon = {
   title: string,
   description: string,
   shadow?: boolean,
+  dirty?: boolean, // NB Will trigger a clear cache if changed
 };
 
 export type FeatureToggle =
@@ -26,6 +27,14 @@ export type FeatureToggle =
 export type Feature = FeatureCommon & FeatureToggle;
 
 export const experimentalFeatures: Feature[] = [
+  {
+    type: "toggle",
+    name: "API_TRONGRID_PROXY",
+    title: "use TronGrid.io",
+    description: "Use trongrid directly without ledger proxy",
+    valueOn: "https://api.trongrid.io",
+    valueOff: "https://tron.coin.ledger.com",
+  },
   {
     type: "toggle",
     name: "EXPERIMENTAL_LANGUAGES",
@@ -47,24 +56,10 @@ export const experimentalFeatures: Feature[] = [
   },
   {
     type: "toggle",
-    name: "EXPERIMENTAL_DEVICE_FLOW",
-    title: "Experimental device flow",
-    description: "Automatically asks an Open App device permission in device flows",
-  },
-  {
-    type: "toggle",
     name: "EXPERIMENTAL_EXPLORERS",
     title: "Experimental Explorers API",
     description:
       "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.",
-  },
-  {
-    type: "toggle",
-    name: "LEDGER_COUNTERVALUES_API",
-    valueOn: "http://countervalue-service.dev.aws.ledger.fr",
-    valueOff: "https://countervalues.api.live.ledger.com",
-    title: "Experimental Countervalues API",
-    description: "Changing this value may break the countervalues displayed for your accounts.",
   },
   {
     type: "integer",
@@ -74,6 +69,7 @@ export const experimentalFeatures: Feature[] = [
       "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts.",
     minValue: 20,
     maxValue: 999,
+    dirty: true,
   },
   {
     type: "integer",

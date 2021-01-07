@@ -30,7 +30,7 @@ class UnfreezeModal extends PureComponent<{ name: string }, State> {
     const { stepId } = this.state;
     const { name } = this.props;
 
-    const isModalLocked = !["connectDevice", "confirmation"].includes(stepId);
+    const isModalLocked = ["connectDevice", "confirmation"].includes(stepId);
 
     return (
       <Modal

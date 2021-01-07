@@ -141,6 +141,7 @@ export default class Markdown extends PureComponent<Props> {
     if (this.parent) {
       const links: NodeList<HTMLElement> = this.parent.querySelectorAll("a");
       links.forEach(link => {
+        link.style.cursor = "pointer";
         link.addEventListener("click", (e: MouseEvent) => {
           e.preventDefault();
           // $FlowFixMe
@@ -156,7 +157,7 @@ export default class Markdown extends PureComponent<Props> {
   render() {
     const { children } = this.props;
     return (
-      <div ref={c => (this.parent = c)}>
+      <div id="terms-markdown" ref={c => (this.parent = c)}>
         <ReactMarkdown>{children}</ReactMarkdown>
       </div>
     );

@@ -2,11 +2,12 @@
 
 import React, { useCallback, memo } from "react";
 import { Trans } from "react-i18next";
-import DropDown, { DropDownItem } from "~/renderer/components/DropDown";
+import DropDownSelector, { DropDownItem } from "~/renderer/components/DropDownSelector";
 import Box from "~/renderer/components/Box";
 import BoldToggle from "~/renderer/components/BoldToggle";
 import Text from "~/renderer/components/Text";
 import IconAngleDown from "~/renderer/icons/AngleDown";
+import IconAngleUp from "~/renderer/icons/AngleUp";
 
 type Props = {
   onSortChange: Function,
@@ -15,7 +16,7 @@ type Props = {
 
 const Sort = ({ onSortChange, sort }: Props) => {
   const onSortChangeWrapper = useCallback(
-    ({ selectedItem: item }) => {
+    item => {
       if (!item) {
         return;
       }
@@ -43,12 +44,11 @@ const Sort = ({ onSortChange, sort }: Props) => {
   ];
 
   const renderItem = useCallback(
-    ({ item, isHighlighted, isActive }) => (
+    ({ item, isActive }) => (
       <DropDownItem
         alignItems="center"
         justifyContent="flex-start"
         horizontal
-        isHighlighted={isHighlighted}
         isActive={isActive}
         flow={2}
       >
@@ -63,25 +63,36 @@ const Sort = ({ onSortChange, sort }: Props) => {
   const key = `${sort.type}_${sort.order}`;
 
   return (
-    <DropDown
-      flow={1}
-      offsetTop={2}
-      horizontal
+    <DropDownSelector
       items={sortItems}
       renderItem={renderItem}
-      onStateChange={onSortChangeWrapper}
+      onChange={onSortChangeWrapper}
       value={sortItems.find(item => item.key === key)}
+      controlled
     >
-      <Text color="palette.text.shade60" ff="Inter|SemiBold" fontSize={4}>
-        <Trans i18nKey="manager.applist.sort.title" />
-      </Text>
-      <Box alignItems="center" color="wallet" ff="Inter|SemiBold" flow={1} fontSize={4} horizontal>
-        <Text color="wallet">
-          <Trans i18nKey={`manager.applist.sort.${key}`} />
-        </Text>
-        <IconAngleDown size={16} />
-      </Box>
-    </DropDown>
+      {({ isOpen, value }) =>
+        value ? (
+          <Box horizontal flow={1}>
+            <Text color="palette.text.shade60" ff="Inter|SemiBold" fontSize={4}>
+              <Trans i18nKey="manager.applist.sort.title" />
+            </Text>
+            <Box
+              alignItems="center"
+              color="wallet"
+              ff="Inter|SemiBold"
+              flow={1}
+              fontSize={4}
+              horizontal
+            >
+              <Text color="wallet">
+                <Trans i18nKey={`manager.applist.sort.${value.key}`} />
+              </Text>
+              {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
+            </Box>
+          </Box>
+        ) : null
+      }
+    </DropDownSelector>
   );
 };
 

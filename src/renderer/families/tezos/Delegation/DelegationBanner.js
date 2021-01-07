@@ -4,7 +4,7 @@ import { Trans } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { dismissBanner } from "~/renderer/actions/settings";
-import { haveUndelegatedAccountsSelector } from "~/renderer/actions/general";
+import { useHaveUndelegatedAccounts } from "~/renderer/actions/general";
 import { dismissedBannerSelectorLoaded } from "~/renderer/reducers/settings";
 import { openModal } from "~/renderer/actions/modals";
 import Box, { Card } from "~/renderer/components/Box";
@@ -13,37 +13,10 @@ import Text from "~/renderer/components/Text";
 import CoinWallet from "~/renderer/icons/CoinWallet";
 import IconCross from "~/renderer/icons/Cross";
 
-export const DELEGATION_BANNER = "DELEGATION_BANNER";
-
-const IconContainer = styled(Box).attrs(() => ({
-  horizontal: true,
-  alignItems: "center",
-  p: 4,
-}))`
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-`;
-
-const LogoContainer = styled(Box).attrs(() => ({
-  flex: 1,
-  justifyContent: "center",
-  alignItems: "center",
-}))`
-  position: absolute;
-  top: 10px;
-  left: 20px;
-  ${IconContainer} {
-    width: 100%;
-    max-width: 110px;
-  }
-`;
-
-const DelegationBanner = () => {
+export default function DelegationBanner() {
   const dispatch = useDispatch();
   const isDismissed = useSelector(dismissedBannerSelectorLoaded("DELEGATION_BANNER"));
-  const hasUndelegated = useSelector(haveUndelegatedAccountsSelector);
+  const hasUndelegated = useHaveUndelegatedAccounts();
 
   const closeBanner = useCallback(() => dispatch(dismissBanner("DELEGATION_BANNER")), [dispatch]);
 
@@ -90,6 +63,31 @@ const DelegationBanner = () => {
       </Box>
     </Card>
   ) : null;
-};
+}
 
-export default DelegationBanner;
+export const DELEGATION_BANNER = "DELEGATION_BANNER";
+
+const IconContainer = styled(Box).attrs(() => ({
+  horizontal: true,
+  alignItems: "center",
+  p: 4,
+}))`
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+`;
+
+const LogoContainer = styled(Box).attrs(() => ({
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
+}))`
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  ${IconContainer} {
+    width: 100%;
+    max-width: 110px;
+  }
+`;

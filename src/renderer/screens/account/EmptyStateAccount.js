@@ -12,6 +12,7 @@ import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/curre
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 
 import IconReceive from "~/renderer/icons/Receive";
+import IconExchange from "~/renderer/icons/Exchange";
 import Box from "~/renderer/components/Box";
 import Image from "~/renderer/components/Image";
 import lightEmptyStateAccount from "~/renderer/images/light-empty-state-account.svg";
@@ -21,6 +22,9 @@ import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
+import { withRouter } from "react-router-dom";
+import { isCurrencySupported } from "~/renderer/screens/exchange/config";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 
 const mapDispatchToProps = {
   openModal,
@@ -31,17 +35,18 @@ type OwnProps = {
   parentAccount: ?Account,
 };
 
-type Props = {
-  ...OwnProps,
+type Props = OwnProps & {
   t: TFunction,
+  history: *,
   openModal: Function,
 };
 
 class EmptyStateAccount extends PureComponent<Props, *> {
   render() {
-    const { t, account, parentAccount, openModal } = this.props;
+    const { t, account, parentAccount, openModal, history } = this.props;
     const mainAccount = getMainAccount(account, parentAccount);
     if (!mainAccount) return null;
+    const availableOnExchange = isCurrencySupported("BUY", getAccountCurrency(account));
 
     const hasTokens =
       mainAccount.subAccounts &&
@@ -91,16 +96,33 @@ class EmptyStateAccount extends PureComponent<Props, *> {
               </Trans>
             )}
           </Description>
-          <Button
-            mt={5}
-            primary
-            onClick={() => openModal("MODAL_RECEIVE", { account, parentAccount })}
-          >
-            <Box horizontal flow={1} alignItems="center">
-              <IconReceive size={12} />
-              <Box>{t("account.emptyState.buttons.receiveFunds")}</Box>
-            </Box>
-          </Button>
+          <Box horizontal>
+            {availableOnExchange ? (
+              <Button
+                mt={5}
+                mr={2}
+                primary
+                onClick={() =>
+                  history.push({ pathname: "/exchange", state: { source: "empty state account" } })
+                }
+              >
+                <Box horizontal flow={1} alignItems="center">
+                  <IconExchange size={12} />
+                  <Box>{t("account.emptyState.buttons.buy")}</Box>
+                </Box>
+              </Button>
+            ) : null}
+            <Button
+              mt={5}
+              primary
+              onClick={() => openModal("MODAL_RECEIVE", { account, parentAccount })}
+            >
+              <Box horizontal flow={1} alignItems="center">
+                <IconReceive size={12} />
+                <Box>{t("account.emptyState.buttons.receiveFunds")}</Box>
+              </Box>
+            </Button>
+          </Box>
         </Box>
       </Box>
     );
@@ -110,18 +132,19 @@ class EmptyStateAccount extends PureComponent<Props, *> {
 const Title: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|Regular",
   fontSize: 6,
-  color: p => p.theme.colors.palette.text.shade100,
+  color: "palette.text.shade100",
 }))``;
 
 const Description: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|Regular",
   fontSize: 4,
-  color: p => p.theme.colors.palette.text.shade80,
+  color: "palette.text.shade80",
   textAlign: "center",
 }))``;
 
 const ConnectedEmptyStateAccount: React$ComponentType<OwnProps> = compose(
   connect(null, mapDispatchToProps),
+  withRouter,
   withTranslation(),
 )(EmptyStateAccount);
 

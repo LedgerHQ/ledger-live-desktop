@@ -4,6 +4,7 @@ import React from "react";
 import { Trans } from "react-i18next";
 import styled, { withTheme } from "styled-components";
 
+import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { multiline } from "~/renderer/styles/helpers";
@@ -28,6 +29,7 @@ const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(
 function StepConfirmation({
   account,
   t,
+  transaction,
   optimisticOperation,
   error,
   theme,
@@ -38,9 +40,14 @@ function StepConfirmation({
     return (
       <Container>
         <TrackPage category="Unfreeze Flow" name="Step Confirmed" />
+        <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={<Trans i18nKey="unfreeze.steps.confirmation.success.title" />}
-          description={multiline(t("unfreeze.steps.confirmation.success.text"))}
+          description={multiline(
+            t("unfreeze.steps.confirmation.success.text", {
+              resource: transaction && transaction.resource && transaction.resource.toLowerCase(),
+            }),
+          )}
         />
       </Container>
     );

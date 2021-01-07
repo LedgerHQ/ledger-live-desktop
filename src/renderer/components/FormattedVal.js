@@ -22,12 +22,13 @@ import Ellipsis from "~/renderer/components/Ellipsis";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const T: ThemedComponent<{ color?: string, inline?: boolean }> = styled(Box).attrs(p => ({
-  ff: "Inter|Medium",
-  horizontal: true,
-  color: p.color,
-}))`
-  line-height: 1.2;
+const T: ThemedComponent<{ color?: string, inline?: boolean, ff?: string }> = styled(Box).attrs(
+  p => ({
+    ff: p.ff || "Inter|Medium",
+    horizontal: true,
+    color: p.color,
+  }),
+)`
   white-space: pre;
   text-overflow: ellipsis;
   display: ${p => (p.inline ? "inline-block" : "block")};
@@ -58,6 +59,7 @@ type OwnProps = {
   prefix?: string,
   ellipsis?: boolean,
   suffix?: string,
+  showAllDigits?: boolean,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -89,6 +91,7 @@ function FormattedVal(props: Props) {
     prefix,
     suffix,
     discreet,
+    showAllDigits,
     ...p
   } = props;
   let { val } = props;
@@ -119,6 +122,7 @@ function FormattedVal(props: Props) {
       locale,
       subMagnitude,
       discreet,
+      showAllDigits,
     });
   }
 

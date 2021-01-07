@@ -1,40 +1,20 @@
 // @flow
-
 import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
 import { useHistory, useParams } from "react-router-dom";
-
-import { getAssetsDistribution } from "@ledgerhq/live-common/lib/portfolio";
-
-import { accountsSelector } from "~/renderer/reducers/accounts";
-import { calculateCountervalueSelector } from "~/renderer/actions/general";
-
-import DropDown from "~/renderer/components/DropDown";
+import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
-
 import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
+import IconAngleUp from "~/renderer/icons/AngleUp";
+import { useDistribution } from "~/renderer/actions/general";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
-
 import { Separator, Item, TextLink, AngleDown, Check } from "./common";
 
-const distributionSelector = createSelector(
-  accountsSelector,
-  calculateCountervalueSelector,
-  (acc, calc) =>
-    getAssetsDistribution(acc, calc, {
-      minShowFirst: 6,
-      maxShowFirst: 6,
-      showFirstThreshold: 0.95,
-    }),
-);
-
-const AssetCrumb = () => {
+export default function AssetCrumb() {
   const { t } = useTranslation();
-  const distribution = useSelector(distributionSelector);
+  const distribution = useDistribution();
   const history = useHistory();
   const { assetId } = useParams();
 
@@ -56,14 +36,14 @@ const AssetCrumb = () => {
   );
 
   const onAccountSelected = useCallback(
-    ({ selectedItem: item }) => {
+    item => {
       if (!item) {
-        return null;
+        return;
       }
 
       const { currency } = item;
 
-      history.push(`/asset/${currency.id}`);
+      history.push({ pathname: `/asset/${currency.id}`, state: { source: "asset breadcrumb" } });
     },
     [history],
   );
@@ -85,32 +65,43 @@ const AssetCrumb = () => {
   ]);
 
   if (!distribution || !distribution.list) return null;
+
   return (
     <>
       <TextLink>
-        <Button onClick={() => history.push("/")}>{t("dashboard.title")}</Button>
+        <Button
+          onClick={() => history.push({ pathname: "/", state: { source: "asset breadcrumb" } })}
+        >
+          {t("dashboard.title")}
+        </Button>
       </TextLink>
       <Separator />
-      <DropDown
+      <DropDownSelector
         flex={1}
         offsetTop={0}
         border
         horizontal
         items={processedItems}
-        active={activeItem}
+        value={{
+          label: activeItem ? activeItem.currency.name : "",
+          key: activeItem ? activeItem.currency.id : "",
+        }}
+        controlled
         renderItem={renderItem}
-        onStateChange={onAccountSelected}
+        onChange={onAccountSelected}
       >
-        <TextLink>
-          {activeItem && <CryptoCurrencyIcon size={14} currency={activeItem.currency} />}
-          <Button>{activeItem.currency.name}</Button>
-          <AngleDown>
-            <IconAngleDown size={16} />
-          </AngleDown>
-        </TextLink>
-      </DropDown>
+        {({ isOpen, value }) =>
+          activeItem ? (
+            <TextLink>
+              <CryptoCurrencyIcon size={14} currency={activeItem.currency} />
+              <Button>{activeItem.currency.name}</Button>
+              <AngleDown>
+                {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
+              </AngleDown>
+            </TextLink>
+          ) : null
+        }
+      </DropDownSelector>
     </>
   );
-};
-
-export default AssetCrumb;
+}

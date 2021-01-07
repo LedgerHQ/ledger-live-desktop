@@ -10,6 +10,7 @@ import { Transition } from "react-transition-group";
 
 import { closeModal } from "~/renderer/actions/modals";
 import { isModalOpened, getModalData } from "~/renderer/reducers/modals";
+import Snow, { isSnowTime } from "~/renderer/extra/Snow";
 
 export { default as ModalBody } from "./ModalBody";
 
@@ -59,14 +60,14 @@ const Container = styled.div.attrs(({ state, centered, isOpened }) => ({
     pointerEvents: isOpened ? "auto" : "none",
   },
 }))`
+  background-color: ${p => (p.backdropColor ? "rgba(0, 0, 0, 0.4)" : "rgba(0,0,0,0)")};
+  opacity: 0;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0);
   z-index: 100;
-  opacity: 0;
   padding: 60px 0 60px 0;
   display: flex;
   flex-direction: column;
@@ -112,9 +113,14 @@ type Props = {
   theme: any,
   name?: string, // eslint-disable-line
   onBeforeOpen?: ({ data: * }) => *, // eslint-disable-line
+  backdropColor: ?boolean,
 };
 
-class Modal extends PureComponent<Props> {
+class Modal extends PureComponent<Props, { directlyClickedBackdrop: boolean }> {
+  state = {
+    directlyClickedBackdrop: false,
+  };
+
   componentDidMount() {
     document.addEventListener("keyup", this.handleKeyup);
     document.addEventListener("keydown", this.preventFocusEscape);
@@ -164,9 +170,19 @@ class Modal extends PureComponent<Props> {
 
   handleClickOnBackdrop = () => {
     const { preventBackdropClick, onClose } = this.props;
-    if (!preventBackdropClick && onClose) {
+    const { directlyClickedBackdrop } = this.state;
+    if (directlyClickedBackdrop && !preventBackdropClick && onClose) {
       onClose();
     }
+  };
+
+  onDirectMouseDown = () => this.setState({ directlyClickedBackdrop: true });
+  onIndirectMouseDown = () => this.setState({ directlyClickedBackdrop: false });
+
+  /** combined with tab-index 0 this will allow tab navigation into the modal disabling tab navigation behind it */
+  setFocus = (r: *) => {
+    /** only pull focus if focus is out of modal ie: no input autofocused in modal */
+    r && !r.contains(document.activeElement) && r.focus();
   };
 
   swallowClick = (e: Event) => {
@@ -175,7 +191,16 @@ class Modal extends PureComponent<Props> {
   };
 
   render() {
-    const { children, render, centered, onClose, data, isOpened, width } = this.props;
+    const {
+      children,
+      render,
+      centered,
+      onClose,
+      data,
+      isOpened,
+      width,
+      backdropColor,
+    } = this.props;
 
     const renderProps = {
       onClose,
@@ -197,15 +222,25 @@ class Modal extends PureComponent<Props> {
         {state => {
           return (
             <Container
+              id="modal-backdrop"
               state={state}
               centered={centered}
               isOpened={isOpened}
+              onMouseDown={this.onDirectMouseDown}
               onClick={this.handleClickOnBackdrop}
+              backdropColor={backdropColor}
             >
+              {isSnowTime() ? <Snow numFlakes={100} /> : null}
               <BodyWrapper
+                tabIndex="0"
+                ref={this.setFocus}
                 state={state}
                 width={width}
                 onClick={this.swallowClick}
+                onMouseDown={e => {
+                  this.onIndirectMouseDown();
+                  e.stopPropagation();
+                }}
                 id="modal-container"
               >
                 {render && render(renderProps)}

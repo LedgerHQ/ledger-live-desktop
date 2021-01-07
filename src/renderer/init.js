@@ -4,13 +4,15 @@ import React from "react";
 import { connect } from "react-redux";
 import Transport from "@ledgerhq/hw-transport";
 import { NotEnoughBalance } from "@ledgerhq/errors";
+import { implicitMigration } from "@ledgerhq/live-common/lib/migrations/accounts";
 import { log } from "@ledgerhq/logs";
 import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
 import i18n from "i18next";
-import { remote, webFrame } from "electron";
+import { remote, webFrame, ipcRenderer } from "electron";
 import { render } from "react-dom";
 import moment from "moment";
-import { reload, getKey } from "~/renderer/storage";
+import _ from "lodash";
+import { reload, getKey, loadLSS } from "~/renderer/storage";
 
 import "~/renderer/styles/global";
 import "~/renderer/live-common-setup";
@@ -23,12 +25,11 @@ import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from "~/config/
 import sentry from "~/sentry/browser";
 import { setEnvOnAllThreads } from "~/helpers/env";
 import { command } from "~/renderer/commands";
-import Countervalues from "~/renderer/countervalues";
 import dbMiddleware from "~/renderer/middlewares/db";
 import createStore from "~/renderer/createStore";
 import events from "~/renderer/events";
 import { setAccounts } from "~/renderer/actions/accounts";
-import { fetchSettings, saveSettings } from "~/renderer/actions/settings";
+import { fetchSettings, setDeepLinkUrl } from "~/renderer/actions/settings";
 import { lock, setOSDarkMode } from "~/renderer/actions/application";
 
 import {
@@ -59,21 +60,38 @@ async function init() {
     connect,
   });
 
+  if (process.env.SPECTRON_RUN) {
+    const spectronData = await getKey("app", "SPECTRON_RUN", {});
+    _.each(spectronData.localStorage, (value, key) => {
+      global.localStorage.setItem(key, value);
+    });
+
+    const timemachine = require("timemachine");
+    timemachine.config({
+      dateString: require("../../tests/time").default,
+    });
+
+    if (document.body) {
+      document.body.className += " spectron-run";
+    }
+  }
+
   const store = createStore({ dbMiddleware });
+
+  ipcRenderer.once("deep-linking", (event, url) => {
+    store.dispatch(setDeepLinkUrl(url));
+  });
 
   const initialSettings = await getKey("app", "settings", {});
 
   store.dispatch(fetchSettings(initialSettings));
 
-  const countervaluesData = await getKey("app", "countervalues");
-  if (countervaluesData) {
-    store.dispatch(Countervalues.importAction(countervaluesData));
-  }
-
   const state = store.getState();
   const language = languageSelector(state);
   moment.locale(language);
   i18n.changeLanguage(language);
+
+  await loadLSS(); // Set env handled inside
 
   const hideEmptyTokenAccounts = hideEmptyTokenAccountsSelector(state);
   setEnvOnAllThreads("HIDE_EMPTY_TOKEN_ACCOUNTS", hideEmptyTokenAccounts);
@@ -85,18 +103,7 @@ async function init() {
 
   let accounts = await getKey("app", "accounts", []);
   if (accounts) {
-    const { starredAccountIds: ids } = state.settings;
-    if (ids && ids.length) {
-      // NB old settings.starredAccountIds migration, eventually we could drop it
-      await store.dispatch(saveSettings({ starredAccountIds: undefined }));
-      accounts = accounts.map(a => {
-        const starred = ids.includes(a.id);
-        const subAccounts = a.subAccounts
-          ? a.subAccounts.map(sa => (ids.includes(sa.id) ? { ...sa, starred: true } : sa))
-          : a.subAccounts;
-        return { ...a, starred, subAccounts };
-      });
-    }
+    accounts = implicitMigration(accounts);
     await store.dispatch(setAccounts(accounts));
   } else {
     store.dispatch(lock());

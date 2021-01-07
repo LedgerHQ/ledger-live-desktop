@@ -1,29 +1,34 @@
 // @flow
 
-import React, { PureComponent } from "react";
+import React, { PureComponent, memo, useCallback } from "react";
+import styled from "styled-components";
 import get from "lodash/get";
-import { setDataModal } from "~/renderer/actions/modals";
-import { removeAccount, updateAccount } from "~/renderer/actions/accounts";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import type { TFunction } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
+import type { Account, Unit } from "@ledgerhq/live-common/lib/types";
 import { validateNameEdition } from "@ledgerhq/live-common/lib/account";
 import { AccountNameRequiredError } from "@ledgerhq/errors";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import styled from "styled-components";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
+import { setDataModal } from "~/renderer/actions/modals";
+import { removeAccount, updateAccount } from "~/renderer/actions/accounts";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
+import Text from "~/renderer/components/Text";
 import Input from "~/renderer/components/Input";
 import Select from "~/renderer/components/Select";
 import Spoiler from "~/renderer/components/Spoiler";
-import SyncAgo from "~/renderer/components/SyncAgo";
 import ConfirmModal from "~/renderer/modals/ConfirmModal";
 import Space from "~/renderer/components/Space";
 import Button from "~/renderer/components/Button";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { withTranslation } from "react-i18next";
+import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
+import InfoCircle from "~/renderer/icons/InfoCircle";
+import { colors } from "~/renderer/styles/theme";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import type { Account, Unit } from "@ledgerhq/live-common/lib/types";
-import type { TFunction } from "react-i18next";
 
 type State = {
   accountName: ?string,
@@ -147,6 +152,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
     if (!data) return null;
 
     const account = this.getAccount(data);
+
     const usefulData = {
       xpub: account.xpub || undefined,
       index: account.index,
@@ -200,7 +206,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
               </Box>
             </Container>
             <Spoiler textTransform title={t("account.settings.advancedLogs")}>
-              <SyncAgo date={account.lastSyncDate} />
+              {account.currency.family === "bitcoin" ? <Tips /> : null}
               <AdvancedLogsContainer>{JSON.stringify(usefulData, null, 2)}</AdvancedLogsContainer>
             </Spoiler>
             <ConfirmModal
@@ -246,6 +252,7 @@ const AdvancedLogsContainer: ThemedComponent<{}> = styled.div`
   font-size: 11px;
   outline: none;
   padding: 20px;
+  margin-top: 15px;
   width: 100%;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -262,12 +269,12 @@ export default ConnectedAccountSettingRenderBody;
 
 export const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   flow: 2,
-  justify: "space-between",
   horizontal: true,
   mb: 3,
   pb: 4,
 }))`
   border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
+  justify-content: space-between;
 `;
 
 export const OptionRowDesc: ThemedComponent<{}> = styled(Box).attrs(() => ({
@@ -278,6 +285,7 @@ export const OptionRowDesc: ThemedComponent<{}> = styled(Box).attrs(() => ({
   color: "palette.text.shade60",
   shrink: 1,
 }))``;
+
 export const OptionRowTitle: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|SemiBold",
   color: "palette.text.shade100",
@@ -285,3 +293,34 @@ export const OptionRowTitle: ThemedComponent<{}> = styled(Box).attrs(() => ({
   textAlign: "left",
   lineHeight: 1.69,
 }))``;
+
+const TipsContainer = styled(Box).attrs(() => ({
+  ff: "Inter|Medium",
+  color: "wallet",
+  backgroundColor: "pillActiveBackground",
+  fontSize: 3,
+  horizontal: true,
+  mt: 3,
+}))`
+  padding: 16px;
+  border-radius: 4px;
+  align-items: center;
+`;
+
+const Tips = memo(function Tips() {
+  const onClick = useCallback(() => openURL(urls.xpubLearnMore), []);
+
+  return (
+    <TipsContainer>
+      <InfoCircle size={16} color={colors.wallet} />
+      <Text style={{ marginLeft: 16, flex: 1 }}>
+        <Trans i18nKey="account.settings.advancedTips" />
+        <LinkWithExternalIcon
+          label={<Trans i18nKey="common.learnMore" />}
+          onClick={onClick}
+          fontSize={3}
+        />
+      </Text>
+    </TipsContainer>
+  );
+});

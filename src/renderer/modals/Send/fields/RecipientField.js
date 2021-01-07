@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { RecipientRequired } from "@ledgerhq/errors";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import type { Account, Transaction, TransactionStatus } from "@ledgerhq/live-common/lib/types";
@@ -17,6 +17,8 @@ type Props = {
   onChangeTransaction: Transaction => void,
   t: TFunction,
   label?: React$Node,
+  initValue?: string,
+  resetInitValue?: () => void,
 };
 
 const RecipientField = ({
@@ -27,8 +29,17 @@ const RecipientField = ({
   autoFocus,
   status,
   label,
+  initValue,
+  resetInitValue,
 }: Props) => {
   const bridge = getAccountBridge(account, null);
+
+  useEffect(() => {
+    if (initValue && initValue !== transaction.recipient) {
+      onChangeTransaction(bridge.updateTransaction(transaction, { recipient: initValue }));
+      resetInitValue && resetInitValue();
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onChange = useCallback(
     async (recipient: string, maybeExtra: ?Object) => {
@@ -50,6 +61,7 @@ const RecipientField = ({
       <Label>
         <span>{label || t("send.steps.details.recipientAddress")}</span>
       </Label>
+      {/* $FlowFixMe */}
       <RecipientAddress
         placeholder={t("RecipientField.placeholder", { currencyName: account.currency.name })}
         autoFocus={autoFocus}
@@ -59,6 +71,7 @@ const RecipientField = ({
         warning={recipientWarning}
         value={transaction.recipient}
         onChange={onChange}
+        id={"send-recipient-input"}
       />
     </Box>
   );

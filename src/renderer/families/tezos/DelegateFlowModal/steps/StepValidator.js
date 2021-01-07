@@ -74,6 +74,7 @@ const StepValidator = ({
   transaction,
   transitionTo,
   onChangeTransaction,
+  eventType,
 }: StepProps) => {
   invariant(account, "account is required");
   const contentRef = useRef();
@@ -90,12 +91,15 @@ const StepValidator = ({
     [account, onChangeTransaction, parentAccount, transaction, transitionTo],
   );
   const openPartner = useCallback(() => {
-    openURL("https://mytezosbaker.com/");
+    openURL("https://baking-bad.org/");
   }, []);
 
   return (
     <Box flow={4} mx={20}>
-      <TrackPage category="Delegation Flow" name="Step Validator" />
+      <TrackPage
+        category={`Delegation Flow${eventType ? ` (${eventType})` : ""}`}
+        name="Step Validator"
+      />
       <Box>
         <Text ff="Inter|Regular" color="palette.text.shade80" fontSize={4} textAlign="center">
           <Trans i18nKey="delegation.flow.steps.validator.description" />
@@ -131,13 +135,16 @@ const StepValidator = ({
         </Button>
         <Box mt={5}>
           <Text ff="Inter|Medium" fontSize={2} color="palette.text.shade40">
-            <Trans i18nKey="delegation.flow.steps.validator.providedBy">
+            <Trans
+              i18nKey="delegation.flow.steps.validator.providedBy"
+              values={{ name: "Baking Bad" }}
+            >
               {"Yield rates provided by"}
               <Text
                 onClick={openPartner}
                 style={{ cursor: "pointer", textDecoration: "underline" }}
               >
-                {"MyTezosBaker"}
+                {"Baking Bad"}
               </Text>
             </Trans>
           </Text>

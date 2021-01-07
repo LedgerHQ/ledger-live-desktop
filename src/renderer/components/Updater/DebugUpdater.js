@@ -6,7 +6,14 @@ import React, { Component } from "react";
 import { withUpdaterContext } from "./UpdaterContext";
 import type { UpdaterContextType } from "./UpdaterContext";
 
-const statusToDebug = ["idle", "download-progress", "checking", "check-success", "error"];
+const statusToDebug = [
+  "idle",
+  "download-progress",
+  "checking",
+  "check-success",
+  "error",
+  "update-available",
+];
 
 type Props = {
   context: UpdaterContextType,

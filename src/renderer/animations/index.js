@@ -2,6 +2,7 @@
 
 import React from "react";
 import Lottie from "react-lottie";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 
 const Animation = ({
   animation,
@@ -25,7 +26,7 @@ const Animation = ({
     width={width}
     options={{
       loop,
-      autoplay,
+      autoplay: getEnv("MOCK") ? false : autoplay,
       animationData: animation,
       rendererSettings,
     }}

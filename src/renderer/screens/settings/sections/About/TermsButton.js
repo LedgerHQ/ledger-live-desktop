@@ -18,7 +18,7 @@ const TermsButton = () => {
   );
 
   return (
-    <Button small primary onClick={onClick}>
+    <Button event="Terms of use read" small primary onClick={onClick}>
       {t("settings.help.termsBtn")}
     </Button>
   );

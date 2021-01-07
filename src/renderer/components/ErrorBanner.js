@@ -6,6 +6,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Box from "~/renderer/components/Box";
 import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 import TranslatedError from "./TranslatedError";
+import SupportLinkError from "./SupportLinkError";
 
 type Props = {
   error: Error,
@@ -40,6 +41,7 @@ class ErrorBanner extends PureComponent<Props> {
           <Box>
             <TranslatedError error={error} field="description" />
           </Box>
+          <SupportLinkError error={error} />
         </Box>
       </ErrorBannerBox>
     );

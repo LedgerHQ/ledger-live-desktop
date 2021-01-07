@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { Transition } from "react-transition-group";
 import styled from "styled-components";
+import { useManagerBlueDot } from "@ledgerhq/live-common/lib/manager/hooks";
 
 import { accountsSelector, starredAccountsSelector } from "~/renderer/reducers/accounts";
-import { sidebarCollapsedSelector } from "~/renderer/reducers/settings";
+import { sidebarCollapsedSelector, lastSeenDeviceSelector } from "~/renderer/reducers/settings";
 import { isNavigationLocked } from "~/renderer/reducers/application";
 
 import { openModal } from "~/renderer/actions/modals";
-import { setSidebarCollapsed } from "~/renderer/actions/settings";
+import { setFirstTimeLend, setSidebarCollapsed } from "~/renderer/actions/settings";
 
 import useExperimental from "~/renderer/hooks/useExperimental";
 
@@ -24,13 +25,17 @@ import IconReceive from "~/renderer/icons/Receive";
 import IconSend from "~/renderer/icons/Send";
 import IconExchange from "~/renderer/icons/Exchange";
 import IconChevron from "~/renderer/icons/ChevronRight";
+import IconLending from "~/renderer/icons/Graph";
 import IconExperimental from "~/renderer/icons/Experimental";
+import IconSwap from "~/renderer/icons/Swap";
 
 import { SideBarList, SideBarListItem } from "~/renderer/components/SideBar";
 import Box from "~/renderer/components/Box";
 import Space from "~/renderer/components/Space";
 import UpdateDot from "~/renderer/components/Updater/UpdateDot";
+import { Dot } from "~/renderer/components/Dot";
 import Stars from "~/renderer/components/Stars";
+import useEnv from "~/renderer/hooks/useEnv";
 
 import TopGradient from "./TopGradient";
 import Hide from "./Hide";
@@ -156,10 +161,15 @@ const SideBar = styled(Box).attrs(() => ({
 
 const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
   const isExperimental = useExperimental();
+  const hasFullNodeConfigured = useEnv("SATSTACK"); // NB remove once full node is not experimental
+
   const { t } = useTranslation();
 
-  return isExperimental ? (
-    <Tag id="drawer-experimental-button" to="/settings/experimental">
+  return isExperimental || hasFullNodeConfigured ? (
+    <Tag
+      id="drawer-experimental-button"
+      to={{ pathname: "/settings/experimental", state: { source: "sidebar" } }}
+    >
       <IconExperimental width={16} height={16} />
       <TagText collapsed={collapsed}>{t("common.experimentalFeature")}</TagText>
     </Tag>
@@ -175,18 +185,21 @@ const MainSideBar = () => {
   /** redux navigation locked state */
   const navigationLocked = useSelector(isNavigationLocked);
   const collapsed = useSelector(sidebarCollapsedSelector);
+  const lastSeenDevice = useSelector(lastSeenDeviceSelector);
   const noAccounts = useSelector(accountsSelector).length === 0;
   const hasStarredAccounts = useSelector(starredAccountsSelector).length > 0;
+  const displayBlueDot = useManagerBlueDot(lastSeenDevice);
+  const firstTimeLend = useSelector(state => state.settings.firstTimeLend);
 
   const handleCollapse = useCallback(() => {
     dispatch(setSidebarCollapsed(!collapsed));
   }, [dispatch, collapsed]);
 
   const push = useCallback(
-    (to: string) => {
-      if (location.pathname === to) return;
+    (pathname: string) => {
+      if (location.pathname === pathname) return;
 
-      history.push(to);
+      history.push({ pathname, state: { source: "sidebar" } });
     },
     [history, location.pathname],
   );
@@ -204,7 +217,18 @@ const MainSideBar = () => {
   }, [push]);
 
   const handleClickExchange = useCallback(() => {
-    push("/partners");
+    push("/exchange");
+  }, [push]);
+
+  const handleClickLend = useCallback(() => {
+    if (firstTimeLend) {
+      dispatch(setFirstTimeLend());
+    }
+    push("/lend");
+  }, [push, firstTimeLend, dispatch]);
+
+  const handleClickSwap = useCallback(() => {
+    push("/swap");
   }, [push]);
 
   const maybeRedirectToAccounts = useCallback(() => {
@@ -241,6 +265,7 @@ const MainSideBar = () => {
             <Space of={70} />
             <SideBarList title={t("sidebar.menu")} collapsed={secondAnim}>
               <SideBarListItem
+                id={"dashboard"}
                 label={t("dashboard.title")}
                 icon={IconPortfolio}
                 iconActiveColor="wallet"
@@ -250,6 +275,7 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"accounts"}
                 label={t("sidebar.accounts")}
                 icon={IconWallet}
                 iconActiveColor="wallet"
@@ -259,6 +285,7 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"send"}
                 label={t("send.title")}
                 icon={IconSend}
                 iconActiveColor="wallet"
@@ -267,6 +294,7 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"receive"}
                 label={t("receive.title")}
                 icon={IconReceive}
                 iconActiveColor="wallet"
@@ -275,19 +303,42 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"exchange"}
+                label={t("sidebar.exchange")}
+                icon={IconExchange}
+                iconActiveColor="wallet"
+                onClick={handleClickExchange}
+                isActive={location.pathname === "/exchange"}
+                collapsed={secondAnim}
+              />
+              <SideBarListItem
+                id={"swap"}
+                label={t("sidebar.swap")}
+                icon={IconSwap}
+                iconActiveColor="wallet"
+                onClick={handleClickSwap}
+                disabled={noAccounts || navigationLocked}
+                isActive={location.pathname === "/swap"}
+                collapsed={secondAnim}
+              />
+              <SideBarListItem
+                id={"lend"}
+                label={t("sidebar.lend")}
+                icon={IconLending}
+                iconActiveColor="wallet"
+                onClick={handleClickLend}
+                isActive={location.pathname === "/lend"}
+                collapsed={secondAnim}
+                NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
+              />
+              <SideBarListItem
+                id={"manager"}
                 label={t("sidebar.manager")}
                 icon={IconManager}
                 iconActiveColor="wallet"
                 onClick={handleClickManager}
                 isActive={location.pathname === "/manager"}
-                collapsed={secondAnim}
-              />
-              <SideBarListItem
-                label={t("sidebar.exchange")}
-                icon={IconExchange}
-                iconActiveColor="wallet"
-                onClick={handleClickExchange}
-                isActive={location.pathname === "/partners"}
+                NotifComponent={displayBlueDot ? <Dot collapsed={collapsed} /> : null}
                 collapsed={secondAnim}
               />
               <Space of={30} />

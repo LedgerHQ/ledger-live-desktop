@@ -1,5 +1,6 @@
 // @flow
 
+import invariant from "invariant";
 import React from "react";
 import { Trans, withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
@@ -11,14 +12,97 @@ import type {
   Transaction,
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
-import type { Device } from "~/renderer/reducers/devices";
+import { getDeviceTransactionConfig } from "@ledgerhq/live-common/lib/transaction";
+import type { DeviceTransactionField } from "@ledgerhq/live-common/lib/transaction";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import transactionConfirmFieldsPerFamily from "~/renderer/generated/TransactionConfirmFields";
 import Box from "~/renderer/components/Box";
+import Text from "~/renderer/components/Text";
 import WarnBox from "~/renderer/components/WarnBox";
 import useTheme from "~/renderer/hooks/useTheme";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/rendering";
 import TransactionConfirmField from "./TransactionConfirmField";
+
+const FieldText = styled(Text).attrs(() => ({
+  ml: 1,
+  ff: "Inter|Medium",
+  color: "palette.text.shade80",
+  fontSize: 3,
+}))`
+  word-break: break-all;
+  text-align: right;
+  max-width: 50%;
+`;
+
+export type FieldComponentProps = {
+  account: AccountLike,
+  parentAccount: ?Account,
+  transaction: Transaction,
+  status: TransactionStatus,
+  field: DeviceTransactionField,
+};
+
+export type FieldComponent = React$ComponentType<FieldComponentProps>;
+
+const AmountField = ({ account, status: { amount }, field }: FieldComponentProps) => (
+  <TransactionConfirmField label={field.label}>
+    <FormattedVal
+      color={"palette.text.shade80"}
+      unit={getAccountUnit(account)}
+      val={amount}
+      fontSize={3}
+      inline
+      showCode
+      disableRounding
+    />
+  </TransactionConfirmField>
+);
+
+const FeesField = ({ account, parentAccount, status, field }: FieldComponentProps) => {
+  const mainAccount = getMainAccount(account, parentAccount);
+  const { estimatedFees } = status;
+  const feesUnit = getAccountUnit(mainAccount);
+  return (
+    <TransactionConfirmField label={field.label}>
+      <FormattedVal
+        color={"palette.text.shade80"}
+        unit={feesUnit}
+        val={estimatedFees}
+        fontSize={3}
+        inline
+        showCode
+      />
+    </TransactionConfirmField>
+  );
+};
+
+const AddressField = ({ field }: FieldComponentProps) => {
+  invariant(field.type === "address", "AddressField invalid");
+  return (
+    <TransactionConfirmField label={field.label}>
+      <FieldText>{field.address}</FieldText>
+    </TransactionConfirmField>
+  );
+};
+
+// NB Leaving AddressField although I think it's redundant at this point
+// in case we want specific styles for addresses.
+const TextField = ({ field }: FieldComponentProps) => {
+  invariant(field.type === "text", "TextField invalid");
+  return (
+    <TransactionConfirmField label={field.label}>
+      <FieldText>{field.value}</FieldText>
+    </TransactionConfirmField>
+  );
+};
+
+const commonFieldComponents: { [_: *]: FieldComponent } = {
+  amount: AmountField,
+  fees: FeesField,
+  address: AddressField,
+  text: TextField,
+};
 
 const Container = styled(Box).attrs(() => ({
   alignItems: "center",
@@ -47,18 +131,25 @@ type Props = {
 
 const TransactionConfirm = ({ t, device, account, parentAccount, transaction, status }: Props) => {
   const mainAccount = getMainAccount(account, parentAccount);
-  const { estimatedFees, amount } = status;
-  const unit = getAccountUnit(account);
-  const feesUnit = getAccountUnit(mainAccount);
   const type = useTheme("colors.palette.type");
 
   if (!device) return null;
 
   const r = transactionConfirmFieldsPerFamily[mainAccount.currency.family];
-  const Pre = r && r.pre;
-  const Post = r && r.post;
+
+  const fieldComponents = {
+    ...commonFieldComponents,
+    ...(r && r.fieldComponents),
+  };
   const Warning = r && r.warning;
   const Title = r && r.title;
+
+  const fields = getDeviceTransactionConfig({
+    account,
+    parentAccount,
+    transaction,
+    status,
+  });
 
   const recipientWording = t(`TransactionConfirm.recipientWording.${transaction.mode || "send"}`);
 
@@ -69,6 +160,7 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
           account={account}
           parentAccount={parentAccount}
           transaction={transaction}
+          recipientWording={recipientWording}
           status={status}
         />
       ) : (
@@ -89,48 +181,26 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
         </Info>
       )}
 
-      <Box style={{ width: "100%" }} px={80} mb={20}>
-        {Pre ? (
-          <Pre
-            account={account}
-            parentAccount={parentAccount}
-            transaction={transaction}
-            status={status}
-          />
-        ) : null}
-
-        {amount.isZero() ? null : (
-          <TransactionConfirmField label={<Trans i18nKey="send.steps.details.amount" />}>
-            <FormattedVal
-              color={"palette.text.shade80"}
-              unit={unit}
-              val={amount}
-              fontSize={3}
-              inline
-              showCode
+      <Box style={{ width: "100%" }} px={30} mb={20}>
+        {fields.map((field, i) => {
+          const MaybeComponent = fieldComponents[field.type];
+          if (!MaybeComponent) {
+            console.log(
+              `TransactionConfirm field ${field.type} is not implemented! add a generic implementation in components/TransactionConfirm.js or inside families/*/TransactionConfirmFields.js`,
+            );
+            return null;
+          }
+          return (
+            <MaybeComponent
+              key={i}
+              field={field}
+              account={account}
+              parentAccount={parentAccount}
+              transaction={transaction}
+              status={status}
             />
-          </TransactionConfirmField>
-        )}
-        {!estimatedFees.isZero() && (
-          <TransactionConfirmField label={<Trans i18nKey="send.steps.details.fees" />}>
-            <FormattedVal
-              color={"palette.text.shade80"}
-              unit={feesUnit}
-              val={estimatedFees}
-              fontSize={3}
-              inline
-              showCode
-            />
-          </TransactionConfirmField>
-        )}
-        {Post ? (
-          <Post
-            account={account}
-            parentAccount={parentAccount}
-            transaction={transaction}
-            status={status}
-          />
-        ) : null}
+          );
+        })}
       </Box>
 
       {renderVerifyUnwrapped({ modelId: device.modelId, type })}

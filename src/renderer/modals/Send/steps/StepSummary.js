@@ -22,6 +22,8 @@ import IconExclamationCircle from "~/renderer/icons/ExclamationCircle";
 import IconQrCode from "~/renderer/icons/QrCode";
 import IconWallet from "~/renderer/icons/Wallet";
 import { rgba } from "~/renderer/styles/helpers";
+import CounterValue from "~/renderer/components/CounterValue";
+import InfoBox from "~/renderer/components/InfoBox";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { StepProps } from "../types";
@@ -51,21 +53,33 @@ const Separator: ThemedComponent<{}> = styled.div`
   margin: 15px 0;
 `;
 
+const WARN_FROM_UTXO_COUNT = 50;
+
 export default class StepSummary extends PureComponent<StepProps> {
   render() {
     const { account, parentAccount, transaction, status } = this.props;
     if (!account) return null;
     const mainAccount = getMainAccount(account, parentAccount);
     if (!mainAccount || !transaction) return null;
-    const { estimatedFees, amount, totalSpent, warnings } = status;
+    const { estimatedFees, amount, totalSpent, warnings, txInputs } = status;
     const feeTooHigh = warnings.feeTooHigh;
     const currency = getAccountCurrency(account);
     const feesUnit = getAccountUnit(mainAccount);
+    const feesCurrency = getAccountCurrency(mainAccount);
     const unit = getAccountUnit(account);
+    const utxoLag = txInputs ? txInputs.length >= WARN_FROM_UTXO_COUNT : null;
+
+    // $FlowFixMe
+    const memo = transaction.memo;
 
     return (
       <Box flow={4} mx={40}>
         <TrackPage category="Send Flow" name="Step Summary" />
+        {utxoLag ? (
+          <InfoBox type="warning">
+            <Trans i18nKey="send.steps.details.utxoLag" />
+          </InfoBox>
+        ) : null}
         <FromToWrapper>
           <Box>
             <Box horizontal alignItems="center">
@@ -104,33 +118,67 @@ export default class StepSummary extends PureComponent<StepProps> {
             </Box>
           </Box>
           <Separator />
+          {memo && (
+            <Box horizontal justifyContent="space-between" mb={2}>
+              <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={4}>
+                <Trans i18nKey="operationDetails.extra.memo" />
+              </Text>
+              <Text ff="Inter|Medium" fontSize={4}>
+                {memo}
+              </Text>
+            </Box>
+          )}
           <Box horizontal justifyContent="space-between" mb={2}>
             <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={4}>
               <Trans i18nKey="send.steps.details.amount" />
             </Text>
-            <FormattedVal
-              color={"palette.text.shade80"}
-              disableRounding
-              unit={unit}
-              val={amount}
-              fontSize={4}
-              inline
-              showCode
-            />
+            <Box>
+              <FormattedVal
+                color={"palette.text.shade80"}
+                disableRounding
+                unit={unit}
+                val={amount}
+                fontSize={4}
+                inline
+                showCode
+              />
+              <Box textAlign="right">
+                <CounterValue
+                  color="palette.text.shade60"
+                  fontSize={3}
+                  currency={currency}
+                  value={amount}
+                  alwaysShowSign={false}
+                  subMagnitude={1}
+                />
+              </Box>
+            </Box>
           </Box>
           <Box horizontal justifyContent="space-between">
             <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={4}>
               <Trans i18nKey="send.steps.details.fees" />
             </Text>
-            <FormattedVal
-              color={feeTooHigh ? "warning" : "palette.text.shade80"}
-              disableRounding
-              unit={feesUnit}
-              val={estimatedFees}
-              fontSize={4}
-              inline
-              showCode
-            />
+            <Box>
+              <FormattedVal
+                color={feeTooHigh ? "warning" : "palette.text.shade80"}
+                disableRounding
+                unit={feesUnit}
+                val={estimatedFees}
+                fontSize={4}
+                inline
+                showCode
+              />
+              <Box textAlign="right">
+                <CounterValue
+                  color={feeTooHigh ? "warning" : "palette.text.shade60"}
+                  fontSize={3}
+                  currency={feesCurrency}
+                  value={estimatedFees}
+                  alwaysShowSign={false}
+                  subMagnitude={1}
+                />
+              </Box>
+            </Box>
           </Box>
           {feeTooHigh ? (
             <Box horizontal justifyContent="flex-end" alignItems="center" color="warning">
@@ -140,21 +188,39 @@ export default class StepSummary extends PureComponent<StepProps> {
               </Text>
             </Box>
           ) : null}
-          <Separator />
-          <Box horizontal justifyContent="space-between">
-            <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={4}>
-              <Trans i18nKey="send.totalSpent" />
-            </Text>
-            <FormattedVal
-              color={"palette.text.shade80"}
-              disableRounding
-              unit={unit}
-              val={totalSpent}
-              fontSize={4}
-              inline
-              showCode
-            />
-          </Box>
+
+          {!totalSpent.eq(amount) ? (
+            <>
+              <Separator />
+              <Box horizontal justifyContent="space-between">
+                <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={4}>
+                  <Trans i18nKey="send.totalSpent" />
+                </Text>
+
+                <Box>
+                  <FormattedVal
+                    color={"palette.text.shade80"}
+                    disableRounding
+                    unit={unit}
+                    val={totalSpent}
+                    fontSize={4}
+                    inline
+                    showCode
+                  />
+                  <Box textAlign="right">
+                    <CounterValue
+                      color="palette.text.shade60"
+                      fontSize={3}
+                      currency={currency}
+                      value={totalSpent}
+                      alwaysShowSign={false}
+                      subMagnitude={1}
+                    />
+                  </Box>
+                </Box>
+              </Box>
+            </>
+          ) : null}
         </FromToWrapper>
       </Box>
     );
@@ -174,7 +240,12 @@ export class StepSummaryFooter extends PureComponent<StepProps> {
     const canNext = !bridgePending && !Object.keys(errors).length;
     return (
       <>
-        <Button primary disabled={!canNext} onClick={this.onNext}>
+        <Button
+          id={"send-summary-continue-button"}
+          primary
+          disabled={!canNext}
+          onClick={this.onNext}
+        >
           <Trans i18nKey="common.continue" />
         </Button>
       </>

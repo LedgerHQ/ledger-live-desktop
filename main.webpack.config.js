@@ -2,6 +2,7 @@ const path = require("path");
 const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 const babelPlugins = require("./babel.plugins");
 const UnusedWebpackPlugin = require("unused-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const babelConfig = {
   presets: [
@@ -35,6 +36,9 @@ module.exports = {
     new UnusedWebpackPlugin({
       directories: [path.join(__dirname, "src/main"), path.join(__dirname, "src/internal")],
       exclude: ["*.test.js", "*.html", "updater/*"],
+    }),
+    new CopyPlugin({
+      patterns: [{ from: path.join(__dirname, "build/icons"), to: "build/icons" }],
     }),
   ],
   module: {

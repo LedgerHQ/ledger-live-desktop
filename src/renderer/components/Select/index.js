@@ -1,7 +1,8 @@
 // @flow
 
 import React, { PureComponent } from "react";
-import ReactSelect, { components, AsyncReactSelect } from "react-select";
+import ReactSelect, { components } from "react-select";
+import AsyncReactSelect from "react-select/async";
 import { withTranslation } from "react-i18next";
 import { FixedSizeList as List } from "react-window";
 import styled, { withTheme } from "styled-components";
@@ -40,9 +41,13 @@ type Props = {
   width: number,
   minWidth: number,
   autoFocus: boolean,
+  virtual: boolean,
+  rowHeight: number,
 };
 
-const Row = styled.div``;
+const Row = styled.div`
+  max-width: 100%;
+`;
 class MenuList extends PureComponent<*, *> {
   state = {
     children: null,
@@ -88,12 +93,11 @@ class MenuList extends PureComponent<*, *> {
       options,
       maxHeight,
       getValue,
-      selectProps: { noOptionsMessage, small },
+      selectProps: { noOptionsMessage, rowHeight },
     } = this.props;
     const { children } = this.state;
     if (!children) return null;
     const [value] = getValue();
-    const rowHeight = small ? 34 : 40;
     const initialOffset = options.indexOf(value) * rowHeight;
     const minHeight = Math.min(...[maxHeight, rowHeight * children.length]);
 
@@ -110,15 +114,23 @@ class MenuList extends PureComponent<*, *> {
 
     return (
       <List
+        className={"select-options-list"}
         ref={this.list}
         width="100%"
+        style={{
+          overflowX: "hidden",
+        }}
         height={minHeight}
         overscanCount={8}
         itemCount={children.length}
         itemSize={rowHeight}
         initialScrollOffset={initialOffset}
       >
-        {({ index, style }) => <Row style={style}>{children[index]}</Row>}
+        {({ index, style }) => (
+          <Row className={"option"} style={style}>
+            {children[index]}
+          </Row>
+        )}
       </List>
     );
   }
@@ -180,11 +192,12 @@ class Select extends PureComponent<Props> {
       minWidth,
       small,
       theme,
+      virtual = true,
+      rowHeight = small ? 34 : 40,
       ...props
     } = this.props;
 
     const Comp = async ? AsyncReactSelect : ReactSelect;
-    const rowHeight = small ? 34 : 40;
 
     return (
       <Comp
@@ -194,10 +207,16 @@ class Select extends PureComponent<Props> {
         maxMenuHeight={rowHeight * 4.5}
         classNamePrefix="select"
         options={options}
-        components={{
-          MenuList,
-          ...createRenderers({ renderOption, renderValue }),
-        }}
+        components={
+          virtual
+            ? {
+                MenuList,
+                ...createRenderers({ renderOption, renderValue }),
+              }
+            : {
+                ...createRenderers({ renderOption, renderValue }),
+              }
+        }
         styles={createStyles(theme, { width, minWidth, small, isRight, isLeft })}
         placeholder={placeholder}
         isDisabled={isDisabled}
@@ -210,7 +229,7 @@ class Select extends PureComponent<Props> {
         captureMenuScroll={false}
         menuShouldBlockScroll
         menuPortalTarget={document.body}
-        small={small}
+        rowHeight={rowHeight}
         onChange={this.handleChange}
       />
     );

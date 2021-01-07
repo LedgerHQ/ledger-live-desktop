@@ -11,9 +11,12 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import { command } from "~/renderer/commands";
 
 import type { StepProps } from "../Body";
+import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 
 const connectAppExec = command("connectApp");
-const action = createAction(connectAppExec);
+
+const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectAppExec);
 
 export default function StepConnectDevice({
   account,
@@ -25,7 +28,7 @@ export default function StepConnectDevice({
   const tokenCurrency = (account && account.type === "TokenAccount" && account.token) || token;
   return (
     <>
-      {mainAccount ? <CurrencyDownStatusAlert currency={mainAccount.currency} /> : null}
+      {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       <DeviceAction
         action={action}
         request={{ account: mainAccount, tokenCurrency }}
@@ -35,11 +38,21 @@ export default function StepConnectDevice({
   );
 }
 
-export function StepConnectDeviceFooter({ t, transitionTo, onSkipConfirm, device }: StepProps) {
+export function StepConnectDeviceFooter({
+  t,
+  transitionTo,
+  onSkipConfirm,
+  device,
+  eventType,
+}: StepProps) {
   return (
     <Box horizontal flow={2}>
-      <TrackPage category="Receive Flow" name="Step 2" />
-      <Button event="Receive Flow Without Device Clicked" onClick={onSkipConfirm}>
+      <TrackPage category={`Receive Flow${eventType ? ` (${eventType})` : ""}`} name="Step 2" />
+      <Button
+        event="Receive Flow Without Device Clicked"
+        id={"receive-connect-device-skip-device-button"}
+        onClick={onSkipConfirm}
+      >
         {t("receive.steps.connectDevice.withoutDevice")}
       </Button>
     </Box>

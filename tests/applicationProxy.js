@@ -1,55 +1,84 @@
-import os from "os";
 import fs from "fs";
 import path from "path";
 import rimraf from "rimraf";
 import { Application } from "spectron";
-const { version } = require(`${process.cwd()}/package.json`);
+import _ from "lodash";
 
-export function getConfigPath() {
-  const platform = os.platform();
-  let userDataPath;
-  if (platform === "darwin") {
-    userDataPath = `${os.homedir()}/Library/Application Support/Ledger Live`;
-  } else if (platform === "win32") {
-    userDataPath = "%AppData\\Roaming\\Ledger Live";
-  } else {
-    userDataPath = ".config/Ledger live";
-  }
-  return userDataPath;
-}
+Application.prototype.startChromeDriver = function() {
+  this.chromeDriver = {
+    start: () => {
+      return Promise.resolve();
+    },
+    stop: () => {
+      return Promise.resolve();
+    },
+    clearLogs: () => {
+      return [];
+    },
+    getLogs: () => {},
+  };
+  return this.chromeDriver.start();
+};
 
-export function getScreenshotPath(name) {
-  const screenshotPath = path.resolve(__dirname, "../data/screenshots");
-  return `${screenshotPath}/${name}.png`;
-}
+const userDataPathKey = Math.random()
+  .toString(36)
+  .substring(2, 5);
+const userDataPath = path.join(__dirname, "tmp", userDataPathKey);
 
-function getAppPath() {
-  const platform = os.platform();
-  let appPath;
-  if (platform === "darwin") {
-    appPath = "./dist/mac/Ledger Live.app/Contents/MacOS/Ledger Live";
-  } else if (platform === "win32") {
-    appPath = ".\\dist\\win-unpacked\\Ledger Live.exe";
-  } else {
-    appPath = `./dist/ledger-live-desktop-${version}-linux-x86_64.AppImage`;
+export const removeUserData = dump => {
+  if (fs.existsSync(`${userDataPath}`)) {
+    if (dump) {
+      fs.copyFileSync(`${userDataPath}/app.json`, path.join(__dirname, "dump.json"));
+    }
+    rimraf.sync(userDataPath);
   }
-  return appPath;
-}
+};
 
-export function applicationProxy(userData = null, envVar = {}) {
-  const configPath = getConfigPath();
-  if (fs.existsSync(configPath)) {
-    rimraf.sync(configPath);
-    fs.mkdirSync(configPath);
+export function applicationProxy(userData = null, env = {}) {
+  fs.mkdirSync(userDataPath, { recursive: true });
+
+  env = Object.assign(
+    {
+      MOCK: true,
+      DISABLE_MOCK_POINTER_EVENTS: true,
+      HIDE_DEBUG_MOCK: true,
+      DISABLE_DEV_TOOLS: true,
+      SPECTRON_RUN: true,
+    },
+    env,
+  );
+
+  if (userData !== null) {
+    const jsonFile = path.resolve("tests/setups/", `${userData}.json`);
+    fs.copyFileSync(jsonFile, `${userDataPath}/app.json`);
   }
-  if (userData != null) {
-    const jsonFile = path.resolve("tests/setups/", userData);
-    fs.copyFileSync(jsonFile, `${configPath}/app.json`);
-  }
-  const app = new Application({
-    path: getAppPath(),
-    chromeDriverArgs: ["--disable-extensions", "disable-dev-shm-usage", "--no-sandbox"],
-    env: envVar,
+
+  return new Application({
+    path: require("electron"), // just to make spectron happy since we override everything below
+    waitTimeout: 15000,
+    webdriverOptions: {
+      capabilities: {
+        "goog:chromeOptions": {
+          binary: "/app/node_modules/spectron/lib/launcher.js",
+          args: [
+            "spectron-path=/app/node_modules/electron/dist/electron",
+            "spectron-arg0=/app/.webpack/main.bundle.js",
+            "--disable-extensions",
+            "--disable-dev-shm-usage",
+            "--no-sandbox",
+            "--lang=en",
+            `--user-data-dir=/app/tests/tmp/${userDataPathKey}`,
+          ].concat(_.map(env, (value, key) => `spectron-env-${key}=${value.toString()}`)),
+          debuggerAddress: undefined,
+          windowTypes: ["app", "webview"],
+        },
+      },
+    },
   });
-  return app;
 }
+
+export const getMockDeviceEvent = app => async (...events) => {
+  return await app.client.execute(e => {
+    window.mock.events.mockDeviceEvent(...e);
+  }, events);
+};

@@ -1,7 +1,7 @@
 // @flow
 import React, { useState, useCallback } from "react";
 import { compose } from "redux";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
@@ -15,7 +15,7 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 import type { StepId, StepProps, St } from "./types";
 import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
 import type { TFunction } from "react-i18next";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
@@ -50,17 +50,13 @@ type StateProps = {|
   openModal: string => void,
 |};
 
-type Props = {|
-  ...OwnProps,
-  ...StateProps,
-|};
+type Props = OwnProps & StateProps;
 
-const createSteps = (): Array<St> => [
+const steps: Array<St> = [
   {
     id: "rewards",
     label: <Trans i18nKey="claimReward.steps.rewards.title" />,
     component: StepRewards,
-    noScroll: true,
     footer: StepRewardsFooter,
   },
   {
@@ -96,11 +92,10 @@ const Body = ({
   params,
   name,
 }: Props) => {
-  const [steps] = useState(createSteps);
-
   const [optimisticOperation, setOptimisticOperation] = useState(null);
   const [transactionError, setTransactionError] = useState(null);
   const [signed, setSigned] = useState(false);
+  const dispatch = useDispatch();
 
   const { transaction, account, parentAccount, status, bridgeError } = useBridgeTransaction(() => {
     const { account, parentAccount } = params;
@@ -123,7 +118,7 @@ const Body = ({
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId]);
 
   const handleRetry = useCallback(() => {
-    onChangeStepId("connectDevice");
+    onChangeStepId("rewards");
   }, [onChangeStepId]);
 
   const handleTransactionError = useCallback((error: Error) => {
@@ -136,13 +131,15 @@ const Body = ({
   const handleOperationBroadcasted = useCallback(
     (optimisticOperation: Operation) => {
       if (!account) return;
-      updateAccountWithUpdater(account.id, account =>
-        addPendingOperation(account, optimisticOperation),
+      dispatch(
+        updateAccountWithUpdater(account.id, account =>
+          addPendingOperation(account, optimisticOperation),
+        ),
       );
       setOptimisticOperation(optimisticOperation);
       setTransactionError(null);
     },
-    [account],
+    [account, dispatch],
   );
 
   const error = transactionError || bridgeError;

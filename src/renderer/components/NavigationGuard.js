@@ -33,6 +33,8 @@ const NavigationGuard = ({
   useEffect(() => {
     /** Set redux navigation lock status */
     dispatch(setNavigationLock(when));
+    /** force close modal when condition is over */
+    if (!when) setModalVisible(false);
     return () => {
       /** Reset redux navigation lock status */
       dispatch(setNavigationLock(false));
@@ -79,20 +81,26 @@ const NavigationGuard = ({
 
   /** retry redirection once confirmation state changes */
   useEffect(() => {
-    if (confirmedNavigation && lastLocation) history.push(lastLocation.pathname);
+    if (confirmedNavigation && lastLocation)
+      history.push({
+        pathname: lastLocation.pathname,
+        state: { source: "confirmation navigation guard" },
+      });
   }, [confirmedNavigation, lastLocation, history]);
 
   return (
     <>
       <Prompt when={when} message={handleBlockedNavigation} />
-      <ConfirmModal
-        {...confirmModalProps}
-        analyticsName={analyticsName}
-        isOpened={modalVisible}
-        onCancel={closeModal}
-        onReject={handleConfirmNavigationClick}
-        onConfirm={closeModal}
-      />
+      {when && (
+        <ConfirmModal
+          {...confirmModalProps}
+          analyticsName={analyticsName}
+          isOpened={modalVisible}
+          onCancel={closeModal}
+          onReject={handleConfirmNavigationClick}
+          onConfirm={closeModal}
+        />
+      )}
     </>
   );
 };

@@ -78,7 +78,7 @@ const RepairDeviceButton = ({ onRepair, buttonProps }: Props) => {
           setOpened(false);
           setIsLoading(false);
           setProgress(0);
-          history.push("manager");
+          history.push({ pathname: "manager", state: { source: "repair device button" } });
 
           if (onRepair) {
             onRepair(false);
@@ -91,7 +91,7 @@ const RepairDeviceButton = ({ onRepair, buttonProps }: Props) => {
 
   return (
     <>
-      <Button {...buttonProps} primary onClick={open} event="RepairDeviceButton">
+      <Button {...buttonProps} onClick={open} event="RepairDeviceButton">
         {t("settings.repairDevice.button")}
       </Button>
       <RepairModal

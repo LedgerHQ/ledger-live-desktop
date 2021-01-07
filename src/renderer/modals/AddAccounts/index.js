@@ -8,7 +8,7 @@ import { createStructuredSelector } from "reselect";
 import type { CryptoCurrency, TokenCurrency, Account } from "@ledgerhq/live-common/lib/types";
 import { addAccounts } from "@ledgerhq/live-common/lib/account";
 import logger from "~/logger";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { replaceAccounts } from "~/renderer/actions/accounts";
@@ -22,12 +22,14 @@ import StepChooseCurrency, { StepChooseCurrencyFooter } from "./steps/StepChoose
 import StepConnectDevice from "./steps/StepConnectDevice";
 import StepImport, { StepImportFooter } from "./steps/StepImport";
 import StepFinish, { StepFinishFooter } from "./steps/StepFinish";
+import { blacklistedTokenIdsSelector } from "~/renderer/reducers/settings";
 
 type Props = {
   device: ?Device,
   existingAccounts: Account[],
   closeModal: string => void,
   replaceAccounts: (Account[]) => void,
+  blacklistedTokenIds?: string[],
 };
 
 type StepId = "chooseCurrency" | "connectDevice" | "import" | "finish";
@@ -52,6 +54,7 @@ export type StepProps = {
   setAccountName: (Account, string) => void,
   editedNames: { [_: string]: string },
   setScannedAccounts: ({ scannedAccounts?: Account[], checkedAccountsIds?: string[] }) => void,
+  blacklistedTokenIds?: string[],
 };
 
 type St = Step<StepId, StepProps>;
@@ -111,6 +114,7 @@ type State = {
 const mapStateToProps = createStructuredSelector({
   device: getCurrentDevice,
   existingAccounts: accountsSelector,
+  blacklistedTokenIds: blacklistedTokenIdsSelector,
 });
 
 const mapDispatchToProps = {
@@ -204,7 +208,7 @@ class AddAccounts extends PureComponent<Props, State> {
   };
 
   render() {
-    const { device, existingAccounts } = this.props;
+    const { device, existingAccounts, blacklistedTokenIds } = this.props;
     const {
       stepId,
       currency,
@@ -220,6 +224,7 @@ class AddAccounts extends PureComponent<Props, State> {
       currency,
       device,
       existingAccounts,
+      blacklistedTokenIds,
       scannedAccounts,
       checkedAccountsIds,
       scanStatus,

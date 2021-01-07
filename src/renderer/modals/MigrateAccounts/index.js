@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from "react";
 import logger from "~/logger";
-import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/data/cryptocurrencies";
+import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import type { TFunction } from "react-i18next";
@@ -24,7 +24,7 @@ import { accountsSelector, migratableAccountsSelector } from "~/renderer/reducer
 import { replaceAccounts } from "~/renderer/actions/accounts";
 import { closeModal } from "~/renderer/actions/modals";
 import type { Account, CryptoCurrency } from "@ledgerhq/live-common/lib/types";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 
 type ScanStatus = "idle" | "scanning" | "error" | "finished" | "finished-empty";
 export type StepProps = {

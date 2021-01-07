@@ -18,7 +18,7 @@ type Props = {
   renderIcon?: Function,
   confirmText?: React$Node,
   cancelText?: React$Node,
-  onReject: Function,
+  onReject?: Function,
   onClose?: Function,
   onConfirm: Function,
   isLoading?: boolean,
@@ -55,7 +55,15 @@ const ConfirmModal = ({
   const realConfirmText = confirmText || t("common.confirm");
   const realCancelText = cancelText || t("common.cancel");
   return (
-    <Modal name={name} isOpened={isOpened} centered={centered} width={narrow && 380}>
+    <Modal
+      name={name}
+      isOpened={isOpened}
+      centered={centered}
+      width={narrow && 380}
+      onClose={!cancellable && isLoading ? undefined : onClose}
+      preventBackdropClick={isLoading}
+      backdropColor
+    >
       <ModalBody
         {...props}
         preventBackdropClick={isLoading}
@@ -63,13 +71,18 @@ const ConfirmModal = ({
         title={title}
         renderFooter={() => (
           <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
-            {!isLoading && <Button onClick={onReject}>{realCancelText}</Button>}
+            {!isLoading && onReject && (
+              <Button onClick={onReject} id="modal-cancel-button">
+                {realCancelText}
+              </Button>
+            )}
             <Button
               onClick={onConfirm}
               primary={!isDanger}
               danger={isDanger}
               isLoading={isLoading}
               disabled={isLoading}
+              id="modal-confirm-button"
             >
               {realConfirmText}
             </Button>

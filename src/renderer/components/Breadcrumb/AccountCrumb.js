@@ -2,6 +2,7 @@
 import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import Box from "~/renderer/components/Box";
 import { useHistory, useParams } from "react-router-dom";
 import {
   listSubAccounts,
@@ -13,7 +14,8 @@ import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
-import DropDown from "~/renderer/components/DropDown";
+import IconAngleUp from "~/renderer/icons/AngleUp";
+import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
@@ -45,11 +47,6 @@ const AccountCrumb = () => {
     [tokenAccount, account],
   );
 
-  const name = useMemo(
-    () => (tokenAccount ? getAccountName(tokenAccount) : account ? getAccountName(account) : null),
-    [tokenAccount, account],
-  );
-
   const items = useMemo(() => (parentId && account ? listSubAccounts(account) : accounts), [
     parentId,
     account,
@@ -60,7 +57,7 @@ const AccountCrumb = () => {
     const currency = getAccountCurrency(item.account);
 
     return (
-      <Item key={item.account.id} isActive={isActive}>
+      <Item key={item.key} isActive={isActive}>
         <CryptoCurrencyIcon size={16} currency={currency} />
         <Ellipsis ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
           {getAccountName(item.account)}
@@ -75,19 +72,21 @@ const AccountCrumb = () => {
   }, []);
 
   const onAccountSelected = useCallback(
-    ({ selectedItem: item }) => {
+    item => {
       if (!item) {
-        return null;
+        return;
       }
 
-      const {
-        account: { id },
-      } = item;
-
       if (parentId) {
-        history.push(`/account/${parentId}/${id}`);
+        history.push({
+          pathname: `/account/${parentId}/${item.key}`,
+          state: { source: "account breadcrumb" },
+        });
       } else {
-        history.push(`/account/${id}`);
+        history.push({
+          pathname: `/account/${item.key}`,
+          state: { source: "account breadcrumb" },
+        });
       }
     },
     [parentId, history],
@@ -98,11 +97,17 @@ const AccountCrumb = () => {
       e.stopPropagation();
       if (parentId) {
         if (id) {
-          history.push(`/account/${parentId}/${id}`);
+          history.push({
+            pathname: `/account/${parentId}/${id}`,
+            state: { source: "account breadcrumb" },
+          });
         }
       } else {
         if (id) {
-          history.push(`/account/${id}`);
+          history.push({
+            pathname: `/account/${id}`,
+            state: { source: "account breadcrumb" },
+          });
         }
       }
     },
@@ -110,7 +115,8 @@ const AccountCrumb = () => {
   );
 
   const processItemsForDropdown = useCallback(
-    (items: any[]) => items.map(item => ({ key: item.id, label: item.id, account: item })),
+    (items: any[]) =>
+      items.map(item => ({ key: item.id, label: getAccountName(item), account: item })),
     [],
   );
 
@@ -122,7 +128,16 @@ const AccountCrumb = () => {
   if (!id) {
     return (
       <TextLink>
-        <Button onClick={() => history.push("/accounts/")}>{t("accounts.title")}</Button>
+        <Button
+          onClick={() =>
+            history.push({
+              pathname: "/accounts/",
+              state: { source: "account breadcrumb" },
+            })
+          }
+        >
+          {t("accounts.title")}
+        </Button>
       </TextLink>
     );
   }
@@ -130,25 +145,31 @@ const AccountCrumb = () => {
   return (
     <>
       <Separator />
-      <DropDown
-        flex={1}
-        shrink={parentId ? "0" : "1"}
-        offsetTop={0}
+      <DropDownSelector
         border
         horizontal
         items={processedItems}
         renderItem={renderItem}
-        onStateChange={onAccountSelected}
+        onChange={onAccountSelected}
+        controlled
         value={processedItems.find(a => a.key === id)}
       >
-        <TextLink {...{ shrink: !parentId }}>
-          {currency && <CryptoCurrencyIcon size={14} currency={currency} />}
-          <Button onClick={openActiveAccount}>{name}</Button>
-          <AngleDown>
-            <IconAngleDown size={16} />
-          </AngleDown>
-        </TextLink>
-      </DropDown>
+        {({ isOpen, value }) =>
+          value ? (
+            <Box flex={1} shrink={!!parentId} horizontal>
+              <TextLink shrink>
+                {currency && <CryptoCurrencyIcon size={14} currency={currency} />}
+                <Button onClick={openActiveAccount}>
+                  <Ellipsis>{value.label}</Ellipsis>
+                </Button>
+                <AngleDown>
+                  {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
+                </AngleDown>
+              </TextLink>
+            </Box>
+          ) : null
+        }
+      </DropDownSelector>
     </>
   );
 };

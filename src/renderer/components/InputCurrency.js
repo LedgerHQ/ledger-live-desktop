@@ -61,6 +61,7 @@ type Props = {
   onChangeUnit: Unit => void,
   locale: string,
   forwardedRef: ?ElementRef<any>,
+  placeholder?: string,
 };
 
 type State = {
@@ -106,7 +107,7 @@ class InputCurrency extends PureComponent<Props, State> {
       this.setState({
         rawValue: "",
         displayValue:
-          !nextProps.value || nextProps.value.isZero()
+          !nextProps.value || nextProps.value.isNaN() || nextProps.value.isZero()
             ? ""
             : format(nextProps.unit, nextProps.value, {
                 locale,
@@ -191,7 +192,15 @@ class InputCurrency extends PureComponent<Props, State> {
   };
 
   render() {
-    const { renderRight, showAllDigits, unit, subMagnitude, locale, ...rest } = this.props;
+    const {
+      renderRight,
+      showAllDigits,
+      unit,
+      subMagnitude,
+      locale,
+      placeholder,
+      ...rest
+    } = this.props;
     const { displayValue } = this.state;
 
     return (
@@ -207,7 +216,8 @@ class InputCurrency extends PureComponent<Props, State> {
         placeholder={
           displayValue
             ? ""
-            : format(unit, BigNumber(0), {
+            : placeholder ||
+              format(unit, BigNumber(0), {
                 locale,
                 isFocused: false,
                 showAllDigits,

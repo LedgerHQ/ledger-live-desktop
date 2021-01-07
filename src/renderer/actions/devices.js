@@ -1,6 +1,6 @@
 // @flow
 
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 
 export type SetCurrentDevice = (Device | null) => { type: string, payload: Device | null };
 export const setCurrentDevice: SetCurrentDevice = payload => ({

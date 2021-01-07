@@ -1,12 +1,17 @@
 // @flow
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { autoLockTimeoutSelector } from "~/renderer/reducers/settings";
 import { lock } from "~/renderer/actions/application";
-
-import { useDebouncedCallback } from "~/renderer/hooks/useDebounce";
 import { hasPasswordSelector } from "~/renderer/reducers/application";
+
+import debounce from "lodash/debounce";
+
+// FIXME drop: the impl is not correct! fn always changes so debounce is regenerated each callback
+const useDebouncedCallback = (fn, delay, options) =>
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useCallback(debounce(fn, delay, options), [fn, delay, options]);
 
 const Idler = () => {
   const [lastAction, setLastAction] = useState(-1);

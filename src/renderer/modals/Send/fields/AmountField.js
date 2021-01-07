@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { BigNumber } from "bignumber.js";
 import { Trans } from "react-i18next";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -25,6 +25,8 @@ type Props = {
   status: TransactionStatus,
   bridgePending: boolean,
   t: TFunction,
+  initValue?: BigNumber,
+  resetInitValue?: () => void,
 };
 
 const AmountField = ({
@@ -35,8 +37,17 @@ const AmountField = ({
   status,
   bridgePending,
   t,
+  initValue,
+  resetInitValue,
 }: Props) => {
   const bridge = getAccountBridge(account, parentAccount);
+
+  useEffect(() => {
+    if (initValue && !initValue.eq(transaction.amount || BigNumber(0))) {
+      onChangeTransaction(bridge.updateTransaction(transaction, { amount: initValue }));
+      resetInitValue && resetInitValue();
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onChange = useCallback(
     (amount: BigNumber) => {
@@ -58,10 +69,12 @@ const AmountField = ({
   const { useAllAmount } = transaction;
   const { amount, errors, warnings } = status;
   let { amount: amountError } = errors;
+  let { amount: amountWarning } = warnings;
 
   // we ignore zero case for displaying field error because field is empty.
   if (amount.eq(0) && (bridgePending || !useAllAmount)) {
     amountError = null;
+    amountWarning = null;
   }
 
   return (
@@ -92,11 +105,11 @@ const AmountField = ({
         disabled={!!useAllAmount}
         account={account}
         validTransactionError={amountError}
-        validTransactionWarning={warnings.amount}
+        validTransactionWarning={amountWarning}
         onChange={onChange}
         value={amount}
         showCountervalue={false}
-        autoFocus
+        autoFocus={!initValue}
       />
     </Box>
   );

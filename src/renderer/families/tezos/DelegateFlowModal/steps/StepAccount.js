@@ -23,6 +23,7 @@ const StepAccount = ({
   onChangeAccount,
   error,
   status,
+  eventType,
 }: StepProps) => {
   const { t } = useTranslation();
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
@@ -31,8 +32,11 @@ const StepAccount = ({
   if (!status) return null;
   return (
     <Box flow={4}>
-      <TrackPage category="Delegation Flow" name="Step Account" />
-      {mainAccount ? <CurrencyDownStatusAlert currency={mainAccount.currency} /> : null}
+      <TrackPage
+        category={`Delegation Flow${eventType ? ` (${eventType})` : ""}`}
+        name="Step Account"
+      />
+      {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       <Box flow={1}>
         <Label>{t("delegation.flow.steps.account.toDelegate")}</Label>
@@ -63,7 +67,13 @@ export const StepAccountFooter = ({
 
   return (
     <>
-      <Button isLoading={bridgePending} primary disabled={!canNext} onClick={onNext}>
+      <Button
+        id={"delegate-account-continue-button"}
+        isLoading={bridgePending}
+        primary
+        disabled={!canNext}
+        onClick={onNext}
+      >
         {t("common.continue")}
       </Button>
     </>

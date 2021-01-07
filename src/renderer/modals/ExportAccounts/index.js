@@ -31,7 +31,7 @@ const ExportAccountsModal = () => {
             render={() => <Exporter {...data} />}
             renderFooter={() => (
               <Box>
-                <Button small onClick={onClose} primary>
+                <Button id={"export-accounts-done-button"} small onClick={onClose} primary>
                   <Trans i18nKey="settings.export.modal.button" />
                 </Button>
               </Box>

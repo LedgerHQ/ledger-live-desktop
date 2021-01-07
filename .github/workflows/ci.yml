@@ -1,37 +1,115 @@
 name: CI
 on:
-  pull_request:
+  pull_request_target:
     branches:
       - "*"
   push:
     branches:
+      - develop
       - master
 
 jobs:
-  type-checking:
+  cancel-previous:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@master
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@ce177499ccf9fd2aded3b0426c97e5434c2e8a73
+        with:
+          access_token: ${{ github.token }}
+  test:
+    runs-on: ubuntu-latest
+    needs: cancel-previous
+    outputs:
+      comment: ${{ steps.comment.outputs.body }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+          persist-credentials: false
+      - uses: actions/setup-node@main
         with:
           node-version: 12.x
-      - name: install linux dependencies
-        run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: install dependencies
-        # yarn prepublish is actually run after a normal `yarn install`
-        # however since we skip with --ignore-scripts to avoid rebuilding libcore twice
-        # we need to run yarn prepublish
-        run: |
-          yarn --ignore-scripts --frozen-lockfile
-          yarn prepublish
-      - name: test
-        run: yarn ci
+        run: yarn --frozen-lockfile
+      - name: run code checks
+        run: yarn ci 2>lint.txt
+      - name: Read lint output
+        id: lint
+        if: always()
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
+        with:
+          path: ./lint.txt
+      - name: check build
+        if: always()
+        run: sudo yarn build
+      - name: start electron webdriver
+        if: always()
+        run: yarn start-electron-webdriver -d
+      - uses: nev7n/wait_for_response@7fef3c1a6e8939d0b09062f14fec50d3c5d15fa1
+        if: always()
+        with:
+          url: 'http://localhost:9515/'
+          responseCode: 404
+          timeout: 600000
+          interval: 1000
+      - name: run spectron
+        if: always()
+        run: yarn spectron --no-color 2>output.txt
+      - name: Read test output
+        id: spectron
+        if: always()
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
+        with:
+          path: ./output.txt
+      - name: upload diffs to imgur
+        if: always()
+        uses: ./.github/actions/upload-images
+        id: imgur
+        with:
+          path: tests/specs/__image_snapshots__/__diff_output__
+      - name: clean diff
+        if: always()
+        run: rm -f tests/specs/__image_snapshots__/__diff_output__/*.png
+      - name: upload ci suggested screenshots
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: ci-suggested-screenshots
+          path: tests/specs/__image_snapshots__/__diff_output__/
+      - name: prepare comment body
+        if: always()
+        id: comment
+        uses: ./.github/actions/prepare-comment-body
+        with:
+          images: ${{ steps.imgur.outputs.images }}
+          fullrepo: ${{ github.repository }}
+          runId: ${{ github.run_id }}
+          testoutput: ${{ steps.spectron.outputs.content }}
+          lintoutput: ${{ steps.lint.outputs.content }}
+      - name: display comment
+        if: always()
+        id: displaycomment
+        env:
+          BODY: ${{ steps.comment.outputs.body }}
+        run: echo "$BODY"
+  post-comment:
+    runs-on: ubuntu-latest
+    needs: test
+    if: always() && needs.test.result != 'cancelled'
+    steps:
+      - name: post comment
+        uses: mshick/add-pr-comment@5cd99bf9c186219af43341076f1fe9c09e5a9934
+        with:
+          message: ${{ needs.test.outputs.comment }}
+          allow-repeats: true
+          repo-token: ${{ secrets.GITHUB_TOKEN }}

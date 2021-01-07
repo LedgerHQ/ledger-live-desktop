@@ -24,6 +24,7 @@ const ItemContainer: ThemedComponent<{
 }))`
   -webkit-app-region: no-drag;
   height: 40px;
+  position: relative;
   pointer-events: ${p => (p.disabled ? "none" : "unset")};
 
   &:hover {

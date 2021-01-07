@@ -63,7 +63,7 @@ class ShareAnalyticsC extends PureComponent<Props, *> {
       },
     ];
     return (
-      <Modal name="MODAL_SHARE_ANALYTICS" centered>
+      <Modal name="MODAL_SHARE_ANALYTICS" onClose={this.onClose} centered>
         <ModalBody
           onClose={this.onClose}
           title={t("onboarding.analytics.shareAnalytics.title")}
@@ -83,7 +83,7 @@ class ShareAnalyticsC extends PureComponent<Props, *> {
           )}
           renderFooter={() => (
             <>
-              <Button onClick={this.onClose} primary data-e2e="modal_buttonClose_shareAnalytics">
+              <Button onClick={this.onClose} primary>
                 <Trans i18nKey="common.close" />
               </Button>
             </>

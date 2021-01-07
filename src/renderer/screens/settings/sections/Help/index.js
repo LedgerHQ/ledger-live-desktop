@@ -52,7 +52,7 @@ const SectionHelp = () => {
           title={t("settings.openUserDataDirectory.title")}
           desc={t("settings.openUserDataDirectory.desc")}
         >
-          <OpenUserDataDirectoryBtn />
+          <OpenUserDataDirectoryBtn primary small />
         </Row>
         <Row
           title={t("settings.profile.hardResetTitle")}
@@ -64,7 +64,7 @@ const SectionHelp = () => {
           title={t("settings.repairDevice.title")}
           desc={t("settings.repairDevice.descSettings")}
         >
-          <RepairDeviceButton buttonProps={{ small: true }} />
+          <RepairDeviceButton buttonProps={{ small: true, primary: true }} />
         </Row>
       </Body>
     </Section>

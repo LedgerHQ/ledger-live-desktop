@@ -5,18 +5,20 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import type { DeviceModelId } from "@ledgerhq/devices";
-import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
-import type { Device } from "~/renderer/reducers/devices";
+import manager from "@ledgerhq/live-common/lib/manager";
+import type { FirmwareUpdateContext, DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { command } from "~/renderer/commands";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import TrackPage from "~/renderer/analytics/TrackPage";
+import Track from "~/renderer/analytics/Track";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import ProgressCircle from "~/renderer/components/ProgressCircle";
 import Interactions from "~/renderer/icons/device/interactions";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-
+import { mockedEventEmitter } from "~/renderer/components/DebugMock";
 import type { StepProps } from "../";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   alignItems: "center",
@@ -31,25 +33,22 @@ const Title = styled(Box).attrs(() => ({
   mb: 3,
 }))``;
 
-const Address = styled(Box).attrs(p => ({
-  bg: p.notValid
-    ? "transparent"
-    : p.withQRCode
-    ? "palette.background.paper"
-    : "palette.background.default",
+const Identifier = styled(Box).attrs(p => ({
+  bg: "palette.background.default",
   borderRadius: 1,
   color: "palette.text.shade100",
   ff: "Inter|SemiBold",
   fontSize: 4,
   mt: 2,
-  px: p.notValid ? 0 : 4,
-  py: p.notValid ? 0 : 3,
+  px: 4,
+  py: 3,
 }))`
-  border: ${p => (p.notValid ? "none" : `1px dashed ${p.theme.colors.palette.divider}`)};
+  border: 1px dashed ${p => p.theme.colors.palette.divider};
   cursor: text;
   user-select: text;
-  width: 325px;
+  min-width: 325px;
   text-align: center;
+  word-break: break-all;
 `;
 
 const Body = ({
@@ -57,24 +56,17 @@ const Body = ({
   progress,
   deviceModelId,
   firmware,
+  deviceInfo,
 }: {
   displayedOnDevice: boolean,
   progress: number,
   deviceModelId: DeviceModelId,
   firmware: FirmwareUpdateContext,
+  deviceInfo: DeviceInfo,
 }) => {
   const { t } = useTranslation();
 
   const isBlue = deviceModelId === "blue";
-
-  const formatHashName = (hash: string): string => {
-    if (!hash) {
-      return "";
-    }
-
-    const upper = hash.toUpperCase();
-    return upper.length > 8 ? `${upper.slice(0, 4)}...${upper.substr(-4)}` : upper;
-  };
 
   if (!displayedOnDevice) {
     return (
@@ -91,6 +83,7 @@ const Body = ({
 
   return (
     <>
+      <Track event={"FirmwareUpdateConfirmIdentifierDisplayed"} onMount />
       <Text ff="Inter|Regular" textAlign="center" color="palette.text.shade80">
         {t("manager.modal.confirmIdentifierText")}
       </Text>
@@ -98,7 +91,12 @@ const Body = ({
         <Text ff="Inter|SemiBold" textAlign="center" color="palette.text.shade80">
           {t("manager.modal.identifier")}
         </Text>
-        <Address>{firmware.osu && formatHashName(firmware.osu.hash)}</Address>
+        <Identifier>
+          {firmware.osu &&
+            manager
+              .formatHashName(firmware.osu.hash, deviceModelId, deviceInfo)
+              .map((hash, i) => <span key={`${i}-${hash}`}>{hash}</span>)}
+        </Identifier>
       </Box>
       <Box mt={isBlue ? 4 : null}>
         <Interactions
@@ -113,12 +111,15 @@ const Body = ({
   );
 };
 
-type Props = StepProps & {
-  device: Device,
-  deviceModelId: DeviceModelId,
-};
+type Props = StepProps;
 
-const StepFullFirmwareInstall = ({ firmware, deviceModelId, transitionTo, setError }: Props) => {
+const StepFullFirmwareInstall = ({
+  firmware,
+  deviceModelId,
+  deviceInfo,
+  transitionTo,
+  setError,
+}: Props) => {
   const { t } = useTranslation();
   const device = useSelector(getCurrentDevice);
   const [progress, setProgress] = useState(0);
@@ -131,10 +132,13 @@ const StepFullFirmwareInstall = ({ firmware, deviceModelId, transitionTo, setErr
       return;
     }
 
-    const sub = command("firmwarePrepare")({
-      devicePath: device ? device.path : "",
-      firmware,
-    }).subscribe({
+    const sub = (getEnv("MOCK")
+      ? mockedEventEmitter()
+      : command("firmwarePrepare")({
+          deviceId: device ? device.deviceId : "",
+          firmware,
+        })
+    ).subscribe({
       next: ({ progress, displayedOnDevice: displayed }) => {
         setProgress(progress);
         setDisplayedOnDevice(displayed);
@@ -156,7 +160,7 @@ const StepFullFirmwareInstall = ({ firmware, deviceModelId, transitionTo, setErr
 
   return (
     <Container>
-      <Title>
+      <Title id={"firmware-update-download-mcu-title"}>
         {!displayedOnDevice
           ? t("manager.modal.steps.downloadingUpdate")
           : t("manager.modal.confirmIdentifier")}
@@ -164,6 +168,7 @@ const StepFullFirmwareInstall = ({ firmware, deviceModelId, transitionTo, setErr
       <TrackPage category="Manager" name="InstallFirmware" />
       <Body
         deviceModelId={deviceModelId}
+        deviceInfo={deviceInfo}
         displayedOnDevice={displayedOnDevice}
         firmware={firmware}
         progress={progress}

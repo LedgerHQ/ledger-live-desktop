@@ -41,6 +41,10 @@ export default (
     paddingLeft: 15,
     color: theme.colors.palette.text.shade100,
   }),
+  singleValue: (styles: Object) => ({
+    ...styles,
+    overflow: "visible",
+  }),
   input: (styles: Object) => ({
     ...styles,
     color: theme.colors.palette.text.shade80,
@@ -66,11 +70,11 @@ export default (
     backgroundColor: isFocused ? theme.colors.palette.background.default : null,
     // NB hover doesn't trigger isFocused since we disabled the onMouseMove/onMouseOver
     ":hover:not(:active)": {
-      backgroundColor: theme.colors.palette.background.default,
-      color: theme.colors.palette.text.shade100,
+      backgroundColor: !isDisabled ? theme.colors.palette.background.default : null,
+      color: !isDisabled ? theme.colors.palette.text.shade100 : null,
     },
     ":hover:active": {
-      color: theme.colors.palette.text.shade100,
+      color: !isDisabled ? theme.colors.palette.text.shade100 : null,
     },
     ":active": {
       ...styles[":active"],
@@ -83,11 +87,11 @@ export default (
     boxShadow: "rgba(0, 0, 0, 0.05) 0 2px 2px",
     background: theme.colors.palette.background.paper,
     "--track-color": theme.colors.palette.text.shade30,
+    borderRadius: 3,
   }),
   menuList: (styles: Object) => ({
     ...styles,
     background: theme.colors.palette.background.paper,
-    borderRadius: 3,
   }),
   menuPortal: (styles: Object) => ({ ...styles, zIndex: 101 }),
   container: (styles: Object) => ({

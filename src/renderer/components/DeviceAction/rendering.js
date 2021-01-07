@@ -7,7 +7,7 @@ import styled from "styled-components";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { WrongDeviceForAccount } from "@ledgerhq/errors";
 import type { DeviceModelId } from "@ledgerhq/devices";
-import type { Device } from "~/renderer/reducers/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { closeAllModal } from "~/renderer/actions/modals";
 import Animation from "~/renderer/animations";
 import Button from "~/renderer/components/Button";
@@ -15,13 +15,17 @@ import TranslatedError from "~/renderer/components/TranslatedError";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import BigSpinner from "~/renderer/components/BigSpinner";
+import InfoBox from "~/renderer/components/InfoBox";
 import ConnectTroubleshooting from "~/renderer/components/ConnectTroubleshooting";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { getDeviceAnimation } from "./animations";
 import { DeviceBlocker } from "./DeviceBlocker";
 import ErrorIcon from "~/renderer/components/ErrorIcon";
+import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 import SupportLinkError from "~/renderer/components/SupportLinkError";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
 
 const AnimationWrapper: ThemedComponent<{ modelId: DeviceModelId }> = styled.div`
   width: 600px;
@@ -44,12 +48,12 @@ const Wrapper: ThemedComponent<{}> = styled.div`
   max-width: 100%;
 `;
 
-const Logo = styled.div`
+const Logo: ThemedComponent<{ warning?: boolean }> = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: ${p => p.theme.colors.alertRed};
+  color: ${p => (p.warning ? p.theme.colors.warning : p.theme.colors.alertRed)};
   margin-bottom: 20px;
 `;
 
@@ -146,17 +150,23 @@ export const renderVerifyUnwrapped = ({
 const OpenManagerBtn = ({
   closeAllModal,
   appName,
+  mt = 2,
 }: {
   closeAllModal: () => void,
   appName?: string,
+  mt?: number,
 }) => {
   const history = useHistory();
   const onClick = useCallback(() => {
-    history.push(`manager${appName ? `?q=${appName}` : ""}`);
+    history.push({
+      pathname: "manager",
+      search: appName ? `?q=${appName}` : "",
+      state: { source: "device action open manager button" },
+    });
     closeAllModal();
   }, [history, appName, closeAllModal]);
   return (
-    <Button mt={2} primary onClick={onClick}>
+    <Button mt={mt} primary onClick={onClick}>
       <Trans i18nKey="DeviceAction.openManager" />
     </Button>
   );
@@ -232,6 +242,32 @@ export const renderAllowOpeningApp = ({
   </Wrapper>
 );
 
+export const renderWarningOutdated = ({
+  passWarning,
+  appName,
+}: {
+  passWarning: () => void,
+  appName: string,
+}) => (
+  <Wrapper id={`warning-outdated-app`}>
+    <Logo warning>
+      <IconTriangleWarning size={44} />
+    </Logo>
+    <ErrorTitle>
+      <Trans i18nKey="DeviceAction.outdated" />
+    </ErrorTitle>
+    <ErrorDescription>
+      <Trans i18nKey="DeviceAction.outdatedDesc" values={{ appName }} />
+    </ErrorDescription>
+    <ButtonContainer>
+      <Button secondary onClick={passWarning}>
+        <Trans i18nKey="common.continue" />
+      </Button>
+      <OpenManagerButton ml={4} mt={0} appName={appName} />
+    </ButtonContainer>
+  </Wrapper>
+);
+
 export const renderError = ({
   error,
   onRetry,
@@ -243,7 +279,7 @@ export const renderError = ({
   withExportLogs?: boolean,
   list?: boolean,
 }) => (
-  <Wrapper>
+  <Wrapper id={`error-${error.name}`}>
     <Logo>
       <ErrorIcon size={44} error={error} />
     </Logo>
@@ -251,8 +287,7 @@ export const renderError = ({
       <TranslatedError error={error} />
     </ErrorTitle>
     <ErrorDescription>
-      <TranslatedError error={error} field="description" />
-      <SupportLinkError error={error} />
+      <TranslatedError error={error} field="description" /> <SupportLinkError error={error} />
     </ErrorDescription>
     {list ? (
       <ErrorDescription>
@@ -335,6 +370,46 @@ export const renderConnectYourDevice = ({
   </Wrapper>
 );
 
+export const renderSwapDeviceConfirmation = ({
+  modelId,
+  type,
+}: {
+  modelId: DeviceModelId,
+  type: "light" | "dark",
+}) => (
+  <>
+    <InfoBox onLearnMore={() => openURL(urls.swap.learnMore)} horizontal={false}>
+      <Trans i18nKey="DeviceAction.swap.notice" />
+    </InfoBox>
+    {renderVerifyUnwrapped({ modelId, type })}
+    <Box id="swap-modal-device-confirm" alignItems={"center"}>
+      <Text textAlign="center" ff="Inter|SemiBold" color="palette.text.shade100" fontSize={5}>
+        <Trans i18nKey="DeviceAction.swap.confirm" />
+      </Text>
+    </Box>
+  </>
+);
+
+export const renderSellDeviceConfirmation = ({
+  modelId,
+  type,
+}: {
+  modelId: DeviceModelId,
+  type: "light" | "dark",
+}) => (
+  <>
+    <InfoBox onLearnMore={() => openURL(urls.swap.learnMore)} horizontal={false}>
+      <Trans i18nKey="DeviceAction.sell.notice" />
+    </InfoBox>
+    {renderVerifyUnwrapped({ modelId, type })}
+    <Box alignItems={"center"}>
+      <Text textAlign="center" ff="Inter|SemiBold" color="palette.text.shade100" fontSize={5}>
+        <Trans i18nKey="DeviceAction.sell.confirm" />
+      </Text>
+    </Box>
+  </>
+);
+
 export const renderLoading = ({
   modelId,
   children,
@@ -342,7 +417,7 @@ export const renderLoading = ({
   modelId: DeviceModelId,
   children?: React$Node,
 }) => (
-  <Wrapper>
+  <Wrapper id="deviceAction-loading">
     <Header />
     <AnimationWrapper modelId={modelId}>
       <BigSpinner size={50} />

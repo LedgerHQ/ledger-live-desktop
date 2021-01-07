@@ -62,13 +62,12 @@ const ModalContent: React$ComponentType<Props> = React.forwardRef(function Modal
       ro.disconnect();
     };
   }, [containerRef, onHeightUpdate]);
-
   return (
     <ContentWrapper>
       <ContentScrollableContainer ref={containerRef} noScroll={noScroll} id="modal-content">
         {children}
       </ContentScrollableContainer>
-      <ContentScrollableContainerGradient opacity={isScrollable ? 1 : 0} />
+      <ContentScrollableContainerGradient opacity={isScrollable && !noScroll ? 1 : 0} />
     </ContentWrapper>
   );
 });

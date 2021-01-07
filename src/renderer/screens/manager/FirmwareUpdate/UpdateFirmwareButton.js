@@ -12,19 +12,22 @@ type Props = {
   firmware: { osu: OsuFirmware, final: FinalFirmware },
   onClick: () => void,
   deviceInfo: DeviceInfo,
+  disabled?: boolean,
 };
 
-const UpdateFirmwareButton = ({ firmware, onClick, deviceInfo }: Props) => {
+const UpdateFirmwareButton = ({ firmware, onClick, deviceInfo, disabled = false }: Props) => {
   const { t } = useTranslation();
 
   return (
     <Button
       primary
       onClick={onClick}
+      id={"manager-update-firmware-button"}
       event={"Manager Firmware Update Click"}
       eventProperties={{
         firmwareName: firmware.final.name,
       }}
+      disabled={disabled}
     >
       {t("manager.firmware.updateBtn")}
     </Button>

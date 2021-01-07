@@ -8,7 +8,7 @@ import { useDelegation } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import { openModal } from "~/renderer/actions/modals";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import DropDown, { DropDownItem } from "~/renderer/components/DropDown";
+import DropDownSelector, { DropDownItem } from "~/renderer/components/DropDownSelector";
 import UserEdit from "~/renderer/icons/UserEdit";
 import ArrowDown from "~/renderer/icons/ArrowDown";
 import StopCircle from "~/renderer/icons/StopCircle";
@@ -28,8 +28,6 @@ const Item = styled(DropDownItem)`
   white-space: pre-wrap;
   justify-content: flex-start;
   align-items: center;
-  background-color: ${p =>
-    !p.disableHover && p.isHighlighted && p.theme.colors.palette.background.default};
 `;
 
 type Props = {
@@ -52,6 +50,7 @@ const ContextMenu = ({ account, parentAccount }: Props) => {
           openModal("MODAL_RECEIVE", {
             parentAccount,
             account,
+            eventType: "tezos",
             startWithWarning: receiveShouldWarnDelegation,
           }),
         ),
@@ -65,6 +64,7 @@ const ContextMenu = ({ account, parentAccount }: Props) => {
           openModal("MODAL_DELEGATE", {
             parentAccount,
             account,
+            eventType: "redelegate",
             stepId: "summary",
           }),
         ),
@@ -78,6 +78,7 @@ const ContextMenu = ({ account, parentAccount }: Props) => {
           openModal("MODAL_DELEGATE", {
             parentAccount,
             account,
+            eventType: "undelegate",
             mode: "undelegate",
             stepId: "summary",
           }),
@@ -87,7 +88,6 @@ const ContextMenu = ({ account, parentAccount }: Props) => {
 
   const renderItem = ({
     item,
-    isHighlighted,
   }: {
     item: {
       key: string,
@@ -95,11 +95,10 @@ const ContextMenu = ({ account, parentAccount }: Props) => {
       icon: React$Node,
       onClick: () => void,
     },
-    isHighlighted: boolean,
   }) => {
     const color = item.key === "stopDelegation" ? "alertRed" : "palette.text.shade100";
     return (
-      <Item horizontal isHighlighted={isHighlighted} flow={2} onClick={item.onClick}>
+      <Item horizontal flow={2} onClick={item.onClick}>
         {item.icon ? (
           <Box mr={12} color={color}>
             {item.icon}
@@ -113,20 +112,15 @@ const ContextMenu = ({ account, parentAccount }: Props) => {
   };
 
   return (
-    <DropDown
-      offsetTop={-12}
-      offsetRight={15}
-      border
-      horizontal
-      items={items}
-      renderItem={renderItem}
-    >
-      <Container small outlineGrey flow={1} style={{ width: 34, padding: 0 }}>
-        <Box horizontal flow={1} alignItems="center" justifyContent="center">
-          <IconDots size={14} />
-        </Box>
-      </Container>
-    </DropDown>
+    <DropDownSelector items={items} renderItem={renderItem}>
+      {() => (
+        <Container horizontal small outlineGrey flow={1} style={{ width: 34, padding: 0 }}>
+          <Box horizontal flow={1} alignItems="center" justifyContent="center">
+            <IconDots size={14} />
+          </Box>
+        </Container>
+      )}
+    </DropDownSelector>
   );
 };
 

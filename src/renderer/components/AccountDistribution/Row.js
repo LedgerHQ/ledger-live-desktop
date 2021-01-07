@@ -1,13 +1,13 @@
 // @flow
-
 import React, { useCallback } from "react";
-import { getCurrencyColor } from "~/renderer/getCurrencyColor";
-import { getAccountName } from "@ledgerhq/live-common/lib/account";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types/account";
-import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
+import { useHistory } from "react-router-dom";
 import { BigNumber } from "bignumber.js";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { getAccountName } from "@ledgerhq/live-common/lib/account";
+import type { AccountLike } from "@ledgerhq/live-common/lib/types/account";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
+import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import CounterValue from "~/renderer/components/CounterValue";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import Text from "~/renderer/components/Text";
@@ -19,23 +19,113 @@ import { accountsSelector } from "~/renderer/reducers/accounts";
 import IconDots from "~/renderer/icons/Dots";
 import Bar from "~/renderer/components/AssetDistribution/Bar";
 import ToolTip from "~/renderer/components/Tooltip";
-
-import { useHistory } from "react-router-dom";
 import useTheme from "~/renderer/hooks/useTheme";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 export type AccountDistributionItem = {
-  account: Account | TokenAccount,
+  account: AccountLike,
   distribution: number, // % of the total (normalized in 0-1)
   amount: BigNumber,
   currency: CryptoCurrency | TokenCurrency,
-  countervalue: BigNumber, // countervalue of the amount that was calculated based of the rate provided
 };
 
 type Props = {
   item: AccountDistributionItem,
   isVisible: boolean,
 };
+
+export default function Row({
+  item: { currency, amount, distribution, account },
+  isVisible,
+}: Props) {
+  const accounts = useSelector(accountsSelector);
+  const theme = useTheme();
+  const history = useHistory();
+  const onAccountClick = useCallback(
+    account => {
+      history.push({
+        pathname:
+          account.type !== "Account"
+            ? `/account/${account.parentId}/${account.id}`
+            : `/account/${account.id}`,
+        state: { source: "account allocation" },
+      });
+    },
+    [history],
+  );
+
+  const parentAccount =
+    account.type !== "Account" ? accounts.find(a => a.id === account.parentId) : null;
+  const color = getCurrencyColor(currency, theme.colors.palette.background.paper);
+  const displayName = getAccountName(account);
+  const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2);
+  const icon = <ParentCryptoCurrencyIcon currency={currency} size={16} />;
+  return (
+    <AccountContextMenu account={account} parentAccount={parentAccount} withStar>
+      <Wrapper onClick={() => onAccountClick(account)}>
+        <AccountWrapper>
+          {icon}
+          <Box>
+            {parentAccount ? (
+              <Ellipsis fontSize={10} color="palette.text.shade80">
+                <Text ff="Inter|SemiBold">{parentAccount.name}</Text>
+              </Ellipsis>
+            ) : null}
+            <ToolTip content={displayName} delay={1200}>
+              <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
+                {displayName}
+              </Ellipsis>
+            </ToolTip>
+          </Box>
+        </AccountWrapper>
+        <Distribution>
+          {!!distribution && (
+            <>
+              <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
+                {`${percentage}%`}
+              </Text>
+              <Bar progress={isVisible ? percentage : "0"} progressColor={color} />
+            </>
+          )}
+        </Distribution>
+        <Amount>
+          <Ellipsis>
+            <FormattedVal
+              color={"palette.text.shade80"}
+              unit={currency.units[0]}
+              val={amount}
+              fontSize={3}
+              showCode
+            />
+          </Ellipsis>
+        </Amount>
+        <Value>
+          <Ellipsis>
+            {distribution ? (
+              <CounterValue
+                currency={currency}
+                value={amount}
+                disableRounding
+                color="palette.text.shade100"
+                fontSize={3}
+                showCode
+              />
+            ) : (
+              <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
+                {"-"}
+              </Text>
+            )}
+          </Ellipsis>
+        </Value>
+        <Dots>
+          <AccountContextMenu leftClick account={account} parentAccount={parentAccount} withStar>
+            <IconDots size={16} />
+          </AccountContextMenu>
+        </Dots>
+      </Wrapper>
+    </AccountContextMenu>
+  );
+}
 
 const Wrapper: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -97,94 +187,3 @@ const Dots: ThemedComponent<{}> = styled.div`
     color: ${p => p.theme.colors.palette.text.shade60};
   }
 `;
-
-const Row = ({ item: { currency, amount, distribution, account }, isVisible }: Props) => {
-  const accounts = useSelector(accountsSelector);
-  const theme = useTheme();
-  const history = useHistory();
-  const onAccountClick = useCallback(
-    account => {
-      history.push(
-        account.type !== "Account"
-          ? `/account/${account.parentId}/${account.id}`
-          : `/account/${account.id}`,
-      );
-    },
-    [history],
-  );
-
-  const parentAccount =
-    account.type !== "Account" ? accounts.find(a => a.id === account.parentId) : null;
-  const color = getCurrencyColor(currency, theme.colors.palette.background.paper);
-  const displayName = getAccountName(account);
-  const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2);
-  const icon = <ParentCryptoCurrencyIcon currency={currency} size={16} />;
-  return (
-    <AccountContextMenu account={account} parentAccount={parentAccount} withStar>
-      <Wrapper onClick={() => onAccountClick(account)}>
-        <AccountWrapper>
-          {icon}
-          <Box>
-            {parentAccount ? (
-              <Ellipsis fontSize={10} color="palette.text.shade80">
-                <Text ff="Inter|SemiBold">{parentAccount.name}</Text>
-              </Ellipsis>
-            ) : null}
-            <ToolTip content={displayName} delay={1200}>
-              <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
-                {displayName}
-              </Ellipsis>
-            </ToolTip>
-          </Box>
-        </AccountWrapper>
-        <Distribution>
-          {!!distribution && (
-            <>
-              <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
-                {`${percentage}%`}
-              </Text>
-              <Bar progress={isVisible ? percentage : "0"} progressColor={color} />
-            </>
-          )}
-        </Distribution>
-        <Amount>
-          <Ellipsis>
-            <FormattedVal
-              color={"palette.text.shade80"}
-              unit={currency.units[0]}
-              val={amount}
-              fontSize={3}
-              showCode
-            />
-          </Ellipsis>
-        </Amount>
-        <Value>
-          <Ellipsis>
-            {distribution ? (
-              <CounterValue
-                currency={currency}
-                value={amount}
-                disableRounding
-                color="palette.text.shade100"
-                fontSize={3}
-                showCode
-                alwaysShowSign={false}
-              />
-            ) : (
-              <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
-                {"-"}
-              </Text>
-            )}
-          </Ellipsis>
-        </Value>
-        <Dots>
-          <AccountContextMenu leftClick account={account} parentAccount={parentAccount} withStar>
-            <IconDots size={16} />
-          </AccountContextMenu>
-        </Dots>
-      </Wrapper>
-    </AccountContextMenu>
-  );
-};
-
-export default Row;

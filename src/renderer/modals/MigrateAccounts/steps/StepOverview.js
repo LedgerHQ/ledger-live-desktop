@@ -292,7 +292,7 @@ const StepOverview = ({
                 </MobileDesc>
               </MobileTextWrapper>
             </MobileContent>
-            <MobileCTA primary onClick={openExportModal}>
+            <MobileCTA id={"migrate-overview-export-button"} primary onClick={openExportModal}>
               <Trans i18nKey="migrateAccounts.overview.mobileCTA" />
             </MobileCTA>
           </MobileWrapper>
@@ -317,7 +317,7 @@ export const StepOverviewFooter = ({
   <>
     {!migratableAccounts.length ? (
       <FooterContent>
-        <Button primary onClick={onCloseModal}>
+        <Button id="migrate-overview-done-button" primary onClick={onCloseModal}>
           {t("common.done")}
         </Button>
       </FooterContent>
@@ -325,6 +325,7 @@ export const StepOverviewFooter = ({
       <FooterContent>
         <Button onClick={onCloseModal}>{t("migrateAccounts.overview.doItLaterBtn")}</Button>
         <Button
+          id="migrate-overview-continue-button"
           primary
           onClick={() => {
             moveToNextCurrency();
@@ -346,6 +347,7 @@ export const StepOverviewFooter = ({
         </Box>
         <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
           <Button
+            id="migrate-overview-start-button"
             disabled={!currencyIds.length}
             primary
             onClick={async () => {

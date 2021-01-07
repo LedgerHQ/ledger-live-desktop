@@ -4,7 +4,9 @@ import React, { useCallback, memo } from "react";
 import { Trans } from "react-i18next";
 
 import IconAngleDown from "~/renderer/icons/AngleDown";
-import DropDown, { DropDownItem } from "~/renderer/components/DropDown";
+import IconAngleUp from "~/renderer/icons/AngleUp";
+
+import DropDownSelector, { DropDownItem } from "~/renderer/components/DropDownSelector";
 import Box from "~/renderer/components/Box";
 import BoldToggle from "~/renderer/components/BoldToggle";
 import Text from "~/renderer/components/Text";
@@ -16,7 +18,7 @@ type Props = {
 
 const Filter = ({ onFilterChange, filter }: Props) => {
   const onFilterChangeWrapper = useCallback(
-    ({ selectedItem: item }) => {
+    item => {
       if (!item) return;
       onFilterChange(item.key);
     },
@@ -43,12 +45,11 @@ const Filter = ({ onFilterChange, filter }: Props) => {
   ];
 
   const renderItem = useCallback(
-    ({ item, isHighlighted, isActive }) => (
+    ({ item, isActive }) => (
       <DropDownItem
         alignItems="center"
         justifyContent="flex-start"
         horizontal
-        isHighlighted={isHighlighted}
         isActive={isActive}
         flow={2}
       >
@@ -61,29 +62,43 @@ const Filter = ({ onFilterChange, filter }: Props) => {
   );
 
   return (
-    <DropDown
+    <DropDownSelector
       flow={1}
       offsetTop={2}
       horizontal
       items={filterItems}
       renderItem={renderItem}
-      onStateChange={onFilterChangeWrapper}
+      onChange={onFilterChangeWrapper}
       value={filterItems.find(item => item.key === filter)}
+      controlled
     >
-      <Text color="palette.text.shade60" ff="Inter|SemiBold" fontSize={4}>
-        <Trans i18nKey="manager.applist.filter.title" />
-      </Text>
-      <Box alignItems="center" color="wallet" ff="Inter|SemiBold" flow={1} fontSize={4} horizontal>
-        <Text color="wallet">
-          {filter ? (
-            <Trans i18nKey={`manager.applist.filter.${filter}`} />
-          ) : (
-            <Trans i18nKey="manager.applist.filter.all" />
-          )}
-        </Text>
-        <IconAngleDown size={16} />
-      </Box>
-    </DropDown>
+      {({ isOpen, value }) =>
+        value ? (
+          <Box horizontal flow={1}>
+            <Text color="palette.text.shade60" ff="Inter|SemiBold" fontSize={4}>
+              <Trans i18nKey="manager.applist.filter.title" />
+            </Text>
+            <Box
+              alignItems="center"
+              color="wallet"
+              ff="Inter|SemiBold"
+              flow={1}
+              fontSize={4}
+              horizontal
+            >
+              <Text color="wallet">
+                {filter ? (
+                  <Trans i18nKey={`manager.applist.filter.${value.key}`} />
+                ) : (
+                  <Trans i18nKey="manager.applist.filter.all" />
+                )}
+              </Text>
+              {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
+            </Box>
+          </Box>
+        ) : null
+      }
+    </DropDownSelector>
   );
 };
 

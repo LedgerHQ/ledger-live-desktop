@@ -28,7 +28,7 @@ const Row = styled(Box).attrs(p => ({
   }
 `;
 
-const StepStarter = ({ transitionTo, t, openedWithAccount }: StepProps) => {
+const StepStarter = ({ transitionTo, t, openedWithAccount, eventType }: StepProps) => {
   const onClick = useCallback(() => {
     if (openedWithAccount) transitionTo("summary");
     else transitionTo("account");
@@ -36,7 +36,10 @@ const StepStarter = ({ transitionTo, t, openedWithAccount }: StepProps) => {
 
   return (
     <Box flow={4} mx={4}>
-      <TrackPage category="Delegation Flow" name="Step Starter" />
+      <TrackPage
+        category={`Delegation Flow${eventType ? ` (${eventType})` : ""}`}
+        name="Step Starter"
+      />
       <Box flow={1} alignItems="center">
         <Box mb={4}>
           <CoinWallet size={120} />
@@ -90,10 +93,10 @@ const StepStarter = ({ transitionTo, t, openedWithAccount }: StepProps) => {
         <Box my={4}>
           <LinkWithExternalIcon
             label={t("delegation.howItWorks")}
-            onClick={() => openURL(urls.delegation)}
+            onClick={() => openURL(urls.stakingTezos)}
           />
         </Box>
-        <Button onClick={onClick} primary>
+        <Button id={"delegate-starter-continue-button"} onClick={onClick} primary>
           <Trans i18nKey="delegation.flow.steps.starter.button.cta" />
         </Button>
       </Box>

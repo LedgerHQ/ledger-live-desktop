@@ -12,6 +12,9 @@ export const lock = createAction("APPLICATION_SET_DATA", () => ({
 export const setHasPassword = createAction("APPLICATION_SET_DATA", hasPassword => ({
   hasPassword,
 }));
+export const setDismissedCarousel = createAction("APPLICATION_SET_DATA", dismissedCarousel => ({
+  dismissedCarousel,
+}));
 export const setOSDarkMode = createAction("APPLICATION_SET_DATA", osDarkMode => ({ osDarkMode }));
 export const setNavigationLock = createAction("APPLICATION_SET_DATA", navigationLocked => ({
   navigationLocked,

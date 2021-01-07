@@ -7,7 +7,7 @@ import IconCheckCircle from "~/renderer/icons/CheckCircle";
 import Box from "~/renderer/components/Box";
 
 const Title: ThemedComponent<{}> = styled(Box).attrs(() => ({
-  ff: "Inter",
+  ff: "Inter|SemiBold",
   fontSize: 5,
   mt: 2,
 }))`

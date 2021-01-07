@@ -7,6 +7,7 @@ import noop from "lodash/noop";
 import fontFamily from "~/renderer/styles/styled/fontFamily";
 import Spinner from "~/renderer/components/Spinner";
 import Box from "~/renderer/components/Box";
+import Ellipsis from "~/renderer/components/Ellipsis";
 import TranslatedError from "~/renderer/components/TranslatedError";
 import Text from "~/renderer/components/Text";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -81,7 +82,7 @@ const ErrorDisplay = styled(Box)`
   bottom: -20px;
   left: 0px;
   font-size: 12px;
-  white-space: nowrap;
+  width: 100%;
   color: ${p => p.theme.colors.pearl};
 `;
 
@@ -242,12 +243,16 @@ const Input = React.forwardRef(function Input(
           onKeyDown={handleKeyDown}
         />
         {error ? (
-          <ErrorDisplay>
-            <TranslatedError error={error} />
+          <ErrorDisplay id="input-error">
+            <Ellipsis>
+              <TranslatedError error={error} />
+            </Ellipsis>
           </ErrorDisplay>
         ) : warning ? (
-          <WarningDisplay>
-            <TranslatedError error={warning} />
+          <WarningDisplay id="input-warning">
+            <Ellipsis>
+              <TranslatedError error={warning} />
+            </Ellipsis>
           </WarningDisplay>
         ) : null}
         {loading && !isFocus ? (

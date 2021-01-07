@@ -30,7 +30,7 @@ const SectionExport = () => {
         title={t("settings.export.accounts.title")}
         desc={t("settings.export.accounts.desc")}
         renderRight={
-          <Button small onClick={onModalOpen} primary>
+          <Button small event="Export accounts" onClick={onModalOpen} primary>
             {t("settings.export.accounts.button")}
           </Button>
         }

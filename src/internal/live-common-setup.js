@@ -5,14 +5,12 @@ import "./implement-libcore";
 import { throwError } from "rxjs";
 import usbDetect from "usb-detection";
 import throttle from "lodash/throttle";
-import "@ledgerhq/live-common/lib/load/tokens/ethereum/erc20";
 import { registerTransportModule } from "@ledgerhq/live-common/lib/hw";
 import { addAccessHook, setErrorRemapping } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 import { setEnvUnsafe, getEnv } from "@ledgerhq/live-common/lib/env";
 import { retry } from "@ledgerhq/live-common/lib/promise";
 import TransportNodeHidSingleton from "@ledgerhq/hw-transport-node-hid-singleton";
 import TransportHttp from "@ledgerhq/hw-transport-http";
-import { implementCountervalues } from "@ledgerhq/live-common/lib/countervalues";
 import { DisconnectedDevice } from "@ledgerhq/errors";
 
 /* eslint-disable guard-for-in */
@@ -39,12 +37,6 @@ addAccessHook(() => {
     busy = false;
     refreshBusyUIState();
   };
-});
-
-implementCountervalues({
-  storeSelector: state => state.countervalues,
-  pairsSelector: () => [],
-  setExchangePairsAction: () => {},
 });
 
 setErrorRemapping(e => {

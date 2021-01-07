@@ -39,10 +39,11 @@ type Props = {
   screen?: string,
   xOffset?: number,
   error?: boolean,
+  width?: number,
 };
 
-const Blue = ({ xOffset = 0, open, usb, screen, error }: Props) => (
-  <DeviceContainer>
+const Blue = ({ xOffset = 0, open, usb, screen, error, width }: Props) => (
+  <DeviceContainer width={width}>
     <DeviceSVG width="118px" height="144px" viewBox="0 0 118 144">
       <g className="device" transform={`translate(${xOffset}, 0)`}>
         <USBCable vertical x="-67" y="117" active={open && !!usb} state={usb} />

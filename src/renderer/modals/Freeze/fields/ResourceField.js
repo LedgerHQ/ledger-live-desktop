@@ -28,7 +28,7 @@ export default function ResourceField({
   onChange: (r: string) => void,
 }) {
   return (
-    <>
+    <Box style={{ width: 300 }} alignSelf="center">
       <ToggleButton value={resource} options={options} onChange={onChange} />
       <Box horizontal alignItems="center" justifyContent="center" color="palette.text.shade60">
         <Popover
@@ -56,7 +56,7 @@ export default function ResourceField({
           }
         >
           <Box horizontal alignItems="center" p={2} justifyContent="center">
-            <Text ff="Inter|Medium" fontSize={4}>
+            <Text ff="Inter|SemiBold" fontSize={4}>
               <Trans i18nKey="freeze.steps.amount.resourceInfo" />
             </Text>
             <Box ml={1}>
@@ -65,6 +65,6 @@ export default function ResourceField({
           </Box>
         </Popover>
       </Box>
-    </>
+    </Box>
   );
 }

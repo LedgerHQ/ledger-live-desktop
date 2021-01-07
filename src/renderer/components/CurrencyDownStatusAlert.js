@@ -1,13 +1,11 @@
 // @flow
-
 import type { TokenCurrency, CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 
 type Props = {
-  currency: CryptoCurrency | TokenCurrency,
+  currencies: Array<CryptoCurrency | TokenCurrency>,
 };
 
-const CurrencyDownStatusAlert = ({ currency }: Props) => {
-  // TODO remove the idea. LL-2256
+const CurrencyDownStatusAlert = ({ currencies }: Props) => {
   return null;
 };
 

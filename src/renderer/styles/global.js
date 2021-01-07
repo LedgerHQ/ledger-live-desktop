@@ -10,6 +10,10 @@ import reset from "./reset";
 
 export const GlobalStyle = createGlobalStyle`
   ${reset};
+  
+  #react-root {
+    background-color: ${p => p.theme.colors.palette.background.default};
+  }
 
   .tippy-content {
     padding: 0 !important;
@@ -19,6 +23,18 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${p => p.theme.colors.palette.text.shade100};
     color: ${p => p.theme.colors.palette.background.default};
     border-radius: ${radii[1]}px;
+  }
+
+  .tippy-box {
+    background-color: transparent;
+  }
+
+  .tippy-box[data-theme~='ledger'] > .tippy-svg-arrow {
+    fill: ${p => p.theme.colors.palette.text.shade100};
+  }
+
+  .tippy-box[data-theme~='ledger'].bg-alertRed > .tippy-svg-arrow {
+    fill: ${p => p.theme.colors.alertRed};
   }
 
   .tippy-tooltip.ledger-theme .tippy-svg-arrow {
@@ -44,7 +60,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .select__placeholder {
-    color ${p => p.theme.colors.palette.divider} !important;
+    color ${p => p.theme.colors.palette.text.shade40} !important;
   }
 
   ::selection {

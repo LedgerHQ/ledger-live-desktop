@@ -8,7 +8,7 @@ const TransactionConfirmField = ({
   children,
   label,
 }: {
-  children: React$Node,
+  children?: React$Node,
   label: React$Node,
 }) => (
   <Box horizontal justifyContent="space-between" mb={2}>

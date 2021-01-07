@@ -23,6 +23,8 @@ import {
 import {
   findOperationInAccount,
   getOperationAmountNumber,
+  getOperationConfirmationNumber,
+  getOperationConfirmationDisplayableNumber,
 } from "@ledgerhq/live-common/lib/operation";
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 
@@ -57,14 +59,15 @@ import { getMarketColor } from "~/renderer/styles/helpers";
 import {
   OpDetailsSection,
   OpDetailsTitle,
-  Address,
   GradientHover,
   OpDetailsData,
   NoMarginWrapper,
   B,
   TextEllipsis,
   Separator,
+  HashContainer,
 } from "./styledComponents";
+import ToolTip from "~/renderer/components/Tooltip";
 
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const marketIndicator = marketIndicatorSelector(state);
@@ -126,7 +129,8 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
   const dispatch = useDispatch();
 
   const mainAccount = getMainAccount(account, parentAccount);
-  const { extra, hash, date, senders, type, fee, recipients } = operation;
+  const { extra, hash, date, senders, type, fee, recipients: _recipients } = operation;
+  const recipients = _recipients.filter(Boolean);
   const { name } = mainAccount;
 
   const currency = getAccountCurrency(account);
@@ -139,10 +143,18 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
     marketIndicator,
     isNegative,
   });
-  const confirmations = operation.blockHeight ? mainAccount.blockHeight - operation.blockHeight : 0;
+  const confirmations = getOperationConfirmationNumber(operation, mainAccount);
+  const confirmationsString = getOperationConfirmationDisplayableNumber(operation, mainAccount);
   const isConfirmed = confirmations >= confirmationsNb;
 
   const specific = byFamiliesOperationDetails[mainAccount.currency.family];
+
+  const IconElement =
+    specific && specific.confirmationCell ? specific.confirmationCell[operation.type] : null;
+
+  const AmountTooltip =
+    specific && specific.amountTooltip ? specific.amountTooltip[operation.type] : null;
+
   const urlWhatIsThis =
     specific && specific.getURLWhatIsThis && specific.getURLWhatIsThis(operation);
   const urlFeesInfo = specific && specific.getURLFeesInfo && specific.getURLFeesInfo(operation);
@@ -182,7 +194,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
   const goToMainAccount = useCallback(() => {
     const url = `/account/${mainAccount.id}`;
     if (location !== url) {
-      history.push(url);
+      history.push({ pathname: url, state: { source: "operation details" } });
     }
     onClose();
   }, [mainAccount, history, onClose, location]);
@@ -190,30 +202,52 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
   const goToSubAccount = useCallback(() => {
     const url = `/account/${mainAccount.id}/${account.id}`;
     if (location !== url) {
-      history.push(url);
+      history.push({ pathname: url, state: { source: "operation details" } });
     }
     onClose();
   }, [mainAccount, account, history, onClose, location]);
 
   return (
     <ModalBody
-      title={t("operationDetails.title")}
+      title={t(`operation.type.${operation.type}`)}
+      subTitle={t("operationDetails.title")}
       onClose={onClose}
       onBack={parentOperation ? () => openOperation("goBack", parentOperation) : undefined}
       render={() => (
         <Box flow={3}>
+          <TrackPage
+            category={location.pathname !== "/" ? "Account" : "Portfolio"}
+            name="Operation Details"
+            currencyName={currency.name}
+          />
           <Box alignItems="center" mt={1}>
-            <ConfirmationCheck
-              marketColor={marketColor}
-              isConfirmed={isConfirmed}
-              hasFailed={hasFailed}
-              style={{
-                transform: "scale(1.5)",
-              }}
-              t={t}
-              type={type}
-              withTooltip={false}
-            />
+            {IconElement ? (
+              <IconElement
+                operation={operation}
+                marketColor={marketColor}
+                isConfirmed={isConfirmed}
+                hasFailed={hasFailed}
+                style={{
+                  transform: "scale(1.5)",
+                  paddingLeft: 0,
+                }}
+                t={t}
+                type={type}
+                withTooltip={false}
+              />
+            ) : (
+              <ConfirmationCheck
+                marketColor={marketColor}
+                isConfirmed={isConfirmed}
+                hasFailed={hasFailed}
+                t={t}
+                style={{
+                  transform: "scale(1.5)",
+                }}
+                type={type}
+                withTooltip={false}
+              />
+            )}
           </Box>
           <Box my={4} alignItems="center">
             {!amount.isZero() && (
@@ -224,20 +258,29 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                       <Trans i18nKey="operationDetails.failed" />
                     </Box>
                   ) : (
-                    <FormattedVal
-                      color={amount.isNegative() ? "palette.text.shade80" : undefined}
-                      unit={unit}
-                      alwaysShowSign
-                      showCode
-                      val={amount}
-                      fontSize={7}
-                      disableRounding
-                    />
+                    <ToolTip
+                      content={
+                        AmountTooltip ? (
+                          <AmountTooltip operation={operation} amount={amount} unit={unit} />
+                        ) : null
+                      }
+                    >
+                      <FormattedVal
+                        color={amount.isNegative() ? "palette.text.shade80" : undefined}
+                        unit={unit}
+                        alwaysShowSign
+                        showCode
+                        val={amount}
+                        fontSize={7}
+                        disableRounding
+                      />
+                    </ToolTip>
                   )}
                 </Box>
                 <Box mt={1} selectable>
                   {hasFailed ? null : (
                     <CounterValue
+                      alwaysShowSign
                       color="palette.text.shade60"
                       fontSize={5}
                       date={date}
@@ -257,6 +300,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                     ? "operationDetails.tokenOperations"
                     : "operationDetails.subAccountOperations",
                 )}
+                &nbsp;
                 <LabelInfoTooltip
                   text={t(
                     isToken
@@ -277,7 +321,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                       ? opAccount.name
                       : getAccountCurrency(opAccount).name;
                   return (
-                    <NoMarginWrapper key={`${op.id}`}>
+                    <div key={`${op.id}`}>
                       <OperationComponent
                         text={subAccountName}
                         operation={op}
@@ -285,9 +329,10 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                         parentAccount={account}
                         onOperationClick={() => openOperation("subOperation", op, operation)}
                         t={t}
+                        withAddress={false}
                       />
                       {i < subOperations.length - 1 && <B />}
-                    </NoMarginWrapper>
+                    </div>
                   );
                 })}
               </Box>
@@ -330,7 +375,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
             <Box flex={1}>
               <OpDetailsTitle>{t("operationDetails.account")}</OpDetailsTitle>
               <OpDetailsData horizontal>
-                <TextEllipsis style={parentAccount ? { maxWidth: "50%", flexShrink: 0 } : null}>
+                <TextEllipsis style={parentAccount ? { maxWidth: "50%", flexShrink: 0 } : {}}>
                   <Link onClick={goToMainAccount}>{name}</Link>
                 </TextEllipsis>
 
@@ -351,7 +396,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
           </Box>
           <B />
           <Box horizontal flow={2}>
-            {isNegative && (
+            {(isNegative || fee) && (
               <Box flex={1}>
                 <Box horizontal>
                   <OpDetailsTitle>{t("operationDetails.fees")}</OpDetailsTitle>
@@ -391,7 +436,6 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                           fontSize={3}
                           currency={mainAccount.currency}
                           value={fee}
-                          alwaysShowSign={false}
                           subMagnitude={1}
                           prefix={
                             <Box mr={1} color="palette.text.shade60" style={{ lineHeight: 1.2 }}>
@@ -421,7 +465,9 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                     ? t("operationDetails.confirmed")
                     : t("operationDetails.notConfirmed")}
                 </Box>
-                {hasFailed ? null : <Box>{`(${confirmations})`}</Box>}
+                {hasFailed ? null : (
+                  <Box>{`${confirmationsString ? `(${confirmationsString})` : ``}`}</Box>
+                )}
               </OpDetailsData>
             </Box>
           </Box>
@@ -429,7 +475,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
           <Box>
             <OpDetailsTitle>{t("operationDetails.identifier")}</OpDetailsTitle>
             <OpDetailsData>
-              <Ellipsis canSelect>{hash}</Ellipsis>
+              <HashContainer>{hash}</HashContainer>
               <GradientHover>
                 <CopyWithFeedback text={hash} />
               </GradientHover>
@@ -440,32 +486,35 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
             <OpDetailsTitle>{t("operationDetails.from")}</OpDetailsTitle>
             <DataList lines={uniqueSenders} t={t} />
           </Box>
-          <B />
-          <Box>
-            <Box horizontal>
-              {recipients.length > 1 ? (
-                <>
+
+          {recipients.length ? (
+            <>
+              <B />
+              <Box>
+                <Box horizontal>
                   <OpDetailsTitle>{t("operationDetails.to")}</OpDetailsTitle>
-                  <Link>
-                    <FakeLink
-                      underline
-                      fontSize={3}
-                      ml={2}
-                      color="palette.text.shade80"
-                      onClick={() => openURL(urls.multipleDestinationAddresses)}
-                      iconFirst
-                    >
-                      <Box mr={1}>
-                        <IconExternalLink size={12} />
-                      </Box>
-                      {t("operationDetails.multipleAddresses")}
-                    </FakeLink>
-                  </Link>
-                </>
-              ) : null}
-            </Box>
-            <DataList lines={recipients} t={t} />
-          </Box>
+                  {recipients.length > 1 ? (
+                    <Link>
+                      <FakeLink
+                        underline
+                        fontSize={3}
+                        ml={2}
+                        color="palette.text.shade80"
+                        onClick={() => openURL(urls.multipleDestinationAddresses)}
+                        iconFirst
+                      >
+                        <Box mr={1}>
+                          <IconExternalLink size={12} />
+                        </Box>
+                        {t("operationDetails.multipleAddresses")}
+                      </FakeLink>
+                    </Link>
+                  ) : null}
+                </Box>
+                <DataList lines={recipients} t={t} />
+              </Box>
+            </>
+          ) : null}
           <OpDetailsExtra extra={extra} type={type} account={account} />
         </Box>
       )}
@@ -556,16 +605,18 @@ export class DataList extends Component<{ lines: string[], t: TFunction }, *> {
     // Hardcoded for now
     const numToShow = 2;
     const shouldShowMore = lines.length > 3;
+    const renderLine = line => (
+      <OpDetailsData key={line}>
+        <Ellipsis canSelect>{line}</Ellipsis>
+        <GradientHover>
+          <CopyWithFeedback text={line} />
+        </GradientHover>
+      </OpDetailsData>
+    );
+
     return (
       <Box>
-        {(shouldShowMore ? lines.slice(0, numToShow) : lines).map(line => (
-          <OpDetailsData key={line}>
-            <Address>{line}</Address>
-            <GradientHover>
-              <CopyWithFeedback text={line} />
-            </GradientHover>
-          </OpDetailsData>
-        ))}
+        {(shouldShowMore ? lines.slice(0, numToShow) : lines).map(renderLine)}
         {shouldShowMore && !showMore && (
           <Box onClick={this.onClick} py={1}>
             <More fontSize={4} color="wallet" ff="Inter|SemiBold" mt={1}>
@@ -574,15 +625,7 @@ export class DataList extends Component<{ lines: string[], t: TFunction }, *> {
             </More>
           </Box>
         )}
-        {showMore &&
-          lines.slice(numToShow).map(line => (
-            <OpDetailsData key={line}>
-              <Address>{line}</Address>
-              <GradientHover>
-                <CopyWithFeedback text={line} />
-              </GradientHover>
-            </OpDetailsData>
-          ))}
+        {showMore ? lines.slice(numToShow).map(renderLine) : null}
         {shouldShowMore && showMore && (
           <Box onClick={this.onClick} py={1}>
             <More fontSize={4} color="wallet" ff="Inter|SemiBold" mt={1}>

@@ -6,7 +6,7 @@ import { execWithTransport } from "@ledgerhq/live-common/lib/apps/hw";
 import type { AppOp } from "@ledgerhq/live-common/lib/apps";
 
 type Input = {
-  devicePath: string,
+  deviceId: string,
   appOp: AppOp,
   targetId: string | number,
   app: App,
@@ -16,7 +16,7 @@ type Result = {
   progress: number,
 };
 
-const cmd = ({ devicePath, appOp, targetId, app }: Input): Observable<Result> =>
-  withDevice(devicePath)(transport => execWithTransport(transport)(appOp, targetId, app));
+const cmd = ({ deviceId, appOp, targetId, app }: Input): Observable<Result> =>
+  withDevice(deviceId)(transport => execWithTransport(transport)(appOp, targetId, app));
 
 export default cmd;

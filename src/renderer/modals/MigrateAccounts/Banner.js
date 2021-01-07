@@ -31,7 +31,10 @@ const Banner = ({ someAccountsNeedMigrationSelector, openModal }: Props) =>
         message: <Trans i18nKey="banners.migrate" />,
         Icon: Loader,
         right: (
-          <Link onClick={() => openModal("MODAL_MIGRATE_ACCOUNTS")}>
+          <Link
+            id="modal-migrate-accounts-button"
+            onClick={() => openModal("MODAL_MIGRATE_ACCOUNTS")}
+          >
             <Trans i18nKey="common.updateNow" />
           </Link>
         ),

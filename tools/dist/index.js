@@ -60,7 +60,7 @@ const buildTasks = args => [
   {
     title: "Compiling assets",
     task: async () => {
-      await exec("yarn", ["-s", "--frozen-lockfile", "build"]);
+      await exec("yarn", ["build"]);
     },
   },
   {
@@ -68,12 +68,13 @@ const buildTasks = args => [
       ? "Bundling and publishing the electron application"
       : "Bundling the electron application",
     task: async () => {
-      const commands = ["-s", "--frozen-lockfile", "dist:internal"];
+      const commands = ["dist:internal"];
       if (args.dir) commands.push("--dir");
       if (args.publish) {
         commands.push("--publish", "always");
       } else {
         commands.push("-c.afterSign='lodash/noop'");
+        commands.push("--publish", "never");
       }
       if (args.n) {
         commands.push("--config");
@@ -166,10 +167,10 @@ const runTasks = (getTasks, args) => {
 
 yargs
   .usage("Usage: $0 <command> [options]")
-  .command({
-    command: ["build", "$0"],
-    desc: "bundles the electron app",
-    builder: yargs =>
+  .command(
+    ["build", "$0"],
+    "bundles the electron app",
+    yargs =>
       yargs
         .option("dir", {
           type: "boolean",
@@ -187,13 +188,14 @@ yargs
           type: "boolean",
           describe: "Publish the created artifacts on GitHub as a draft release",
         }),
-    handler: args => runTasks(mainTask, args),
-  })
-  .command({
-    command: "check",
-    desc: "Run health checks",
-    handler: args => runTasks(healthChecksTasks, args),
-  })
+    args => runTasks(mainTask, args),
+  )
+  .command(
+    "check",
+    "Run health checks",
+    () => {},
+    args => runTasks(healthChecksTasks, args),
+  )
   .option("verbose", {
     alias: "v",
     type: "boolean",

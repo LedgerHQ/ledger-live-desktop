@@ -3,7 +3,7 @@ appId: com.ledger.live
 protocols:
   name: Ledger Live
   schemes:
-    - ledgerhq
+    - ledgerlive
 
 afterSign: scripts/notarize.js
 

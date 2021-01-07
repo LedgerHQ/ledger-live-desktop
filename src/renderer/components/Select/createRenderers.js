@@ -7,10 +7,18 @@ import Box from "~/renderer/components/Box";
 import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconCross from "~/renderer/icons/Cross";
+import { useTranslation } from "react-i18next";
 import type { Option } from ".";
+import SearchIcon from "~/renderer/icons/Search";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 type OptionProps = *;
 
+const InputWrapper: ThemedComponent<{}> = styled(Box)`
+  & input::placeholder {
+    color: ${p => p.theme.colors.palette.text.shade30};
+  }
+`;
 export default ({
   renderOption,
   renderValue,
@@ -24,7 +32,9 @@ export default ({
     return (
       <components.Option {...props}>
         <Box horizontal pr={4} relative>
-          <Box grow>{renderOption ? renderOption(props) : data.label}</Box>
+          <Box grow style={{ flex: 1 }}>
+            {renderOption ? renderOption(props) : data.label}
+          </Box>
           {isSelected && (
             <CheckContainer color="wallet">
               <IconCheck size={12} color={props.theme.colors.wallet} />
@@ -35,8 +45,9 @@ export default ({
     );
   },
   SingleValue: function SingleValue(props: OptionProps) {
-    const { data } = props;
-    return (
+    const { data, selectProps } = props;
+    const { isSearchable, menuIsOpen } = selectProps;
+    return menuIsOpen && isSearchable ? null : (
       <components.SingleValue {...props}>
         {renderValue ? renderValue(props) : data.label}
       </components.SingleValue>
@@ -48,7 +59,7 @@ const STYLES_OVERRIDE = {
   DropdownIndicator: function DropdownIndicator(props: OptionProps) {
     return (
       <components.DropdownIndicator {...props}>
-        <IconAngleDown size={20} />
+        <IconAngleDown size={20} color={props.isDisabled ? "transparent" : "currentcolor"} />
       </components.DropdownIndicator>
     );
   },
@@ -57,6 +68,30 @@ const STYLES_OVERRIDE = {
       <components.ClearIndicator {...props}>
         <IconCross size={16} />
       </components.ClearIndicator>
+    );
+  },
+  Placeholder: function Input(props: OptionProps) {
+    const { selectProps } = props;
+    const { isSearchable, menuIsOpen } = selectProps;
+
+    return menuIsOpen && isSearchable ? null : <components.Placeholder {...props} />;
+  },
+  Input: function Input(props: OptionProps) {
+    const { t } = useTranslation();
+    const { selectProps } = props;
+    const { isSearchable, menuIsOpen } = selectProps;
+
+    return menuIsOpen && isSearchable ? (
+      <InputWrapper color={"palette.text.shade40"} alignItems="center" horizontal pr={3}>
+        <SearchIcon size={16} />
+        <components.Input
+          {...props}
+          style={{ marginLeft: 10 }}
+          placeholder={t("common.searchWithoutEllipsis")}
+        />
+      </InputWrapper>
+    ) : (
+      <components.Input {...props} style={{ opacity: 0 }} />
     );
   },
 };

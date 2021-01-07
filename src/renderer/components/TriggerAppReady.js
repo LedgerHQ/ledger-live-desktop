@@ -1,13 +1,13 @@
 // @flow
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 const TriggerAppReady = () => {
   useEffect(() => {
     window.api.appLoaded();
   }, []);
 
-  return null;
+  return <div id="__app__ready__" />;
 };
 
 export default TriggerAppReady;

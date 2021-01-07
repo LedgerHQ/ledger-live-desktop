@@ -2,6 +2,7 @@
 import invariant from "invariant";
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 import { Trans } from "react-i18next";
 
@@ -13,23 +14,21 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
+import { localeSelector } from "~/renderer/reducers/settings";
 
 import { BigNumber } from "bignumber.js";
 import InfoCircle from "~/renderer/icons/InfoCircle";
-import ClaimRewards from "~/renderer/icons/ClaimReward";
+import ClaimRewardsIllu from "~/renderer/images/claim-rewards.svg";
+import Image from "~/renderer/components/Image";
 
 const IconWrapperCircle = styled(Box)`
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: ${props => (props.green ? "#66be5419" : "#6490f119")};
-  color: ${props => (props.green ? "#66be54" : "#6490f1")};
   align-items: center;
   justify-content: center;
   align-self: center;
 `;
 
 export default function StepRewards({ account, parentAccount, reward }: StepProps) {
+  const locale = useSelector(localeSelector);
   invariant(account, "account is required");
   const mainAccount = getMainAccount(account, parentAccount);
 
@@ -37,6 +36,7 @@ export default function StepRewards({ account, parentAccount, reward }: StepProp
     disableRounding: true,
     alwaysShowSign: false,
     showCode: true,
+    locale,
   });
 
   return (
@@ -44,26 +44,26 @@ export default function StepRewards({ account, parentAccount, reward }: StepProp
       <TrackPage category="Claim Reward Flow" name="Step reward" />
       <Box>
         <IconWrapperCircle>
-          <ClaimRewards size={24} />
+          <Image alt="" resource={ClaimRewardsIllu} width="100" />
         </IconWrapperCircle>
       </Box>
       <Box px={6} py={4}>
-        <Text ff="Inter|Medium" textAlign="center">
+        <Text ff="Inter|Medium" textAlign="center" fontSize={4}>
           <Trans
             i18nKey="claimReward.steps.rewards.description"
             values={{ amount: formattedReward }}
           >
             {"placeholder"}
-            <b>{"placeholder"}</b>
+            <Text ff="Inter|SemiBold">{"placeholder"}</Text>
             {"placeholder"}
           </Trans>
         </Text>
       </Box>
-      <Box borderRadius={4} horizontal alignItems="center" mx={4} p={1} bg="palette.divider">
+      <Box borderRadius={4} horizontal alignItems="center" mx={4} p={2} bg="palette.divider">
         <Box mr={2}>
           <InfoCircle size={12} />
         </Box>
-        <Text ff="Inter|Regular" textAlign="center" fontSize={3}>
+        <Text ff="Inter|SemiBold" fontSize={3} style={{ flex: 1 }}>
           <Trans i18nKey="claimReward.steps.rewards.info" />
         </Text>
       </Box>

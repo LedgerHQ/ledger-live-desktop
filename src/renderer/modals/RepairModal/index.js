@@ -17,6 +17,7 @@ import FlashMCU from "~/renderer/components/FlashMCU";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import IconCheck from "~/renderer/icons/Check";
+import { colors } from "~/renderer/styles/theme";
 
 const Container = styled(Box).attrs(() => ({
   alignItems: "center",
@@ -111,7 +112,7 @@ const ErrorStep = ({ error }: { error: Error }) => (
 type Props = {
   isOpened?: boolean,
   isDanger?: boolean,
-  title: React$Node,
+  title?: React$Node,
   subTitle?: React$Node,
   desc: React$Node,
   renderIcon?: Function,
@@ -203,7 +204,7 @@ class RepairModal extends PureComponent<Props, *> {
           renderFooter={() =>
             !isLoading ? (
               <Box horizontal alignItems="center" flow={2} flex={1}>
-                <ConnectTroubleshootingHelpButton />
+                <ConnectTroubleshootingHelpButton textColor={colors.wallet} />
                 <div style={{ flex: 1 }} />
                 <Button onClick={onReject}>{t(`common.${error ? "close" : "cancel"}`)}</Button>
                 <Button

@@ -8,6 +8,7 @@ export default styled(Box).attrs(p => ({
   cursor: "pointer",
   color: p.color || "wallet",
   horizontal: true,
+  className: "fake-link",
 }))`
   align-items: center;
   text-decoration: ${p => (p.underline ? "underline" : "none")};

@@ -1,6 +1,8 @@
 // @flow
 
-import uuid from "uuid/v4";
+import { v4 as uuid } from "uuid";
+import Prando from "prando";
+import get from "lodash/get";
 
 import { setKey, getKey } from "~/renderer/storage";
 
@@ -28,4 +30,17 @@ export const getUserId = () => {
     return localStorage.getItem("userId");
   }
   throw new Error("user is only to be called from renderer");
+};
+
+export const shouldUpdateYet = (version: string, remoteConfig: any) => {
+  const userId = getUserId();
+  const rng = new Prando(`${userId}-${version}`);
+  const progressiveUpdateIndex = rng.next();
+
+  const threshold = get(remoteConfig.data, ["progressive-update", version, process.platform]);
+
+  if (threshold && progressiveUpdateIndex > threshold) {
+    return false;
+  }
+  return true;
 };

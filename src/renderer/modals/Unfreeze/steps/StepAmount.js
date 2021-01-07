@@ -1,9 +1,10 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
-import { BigNumber } from "bignumber.js";
+
 import { Trans } from "react-i18next";
+import moment from "moment";
 
 import type { StepProps } from "../types";
 
@@ -16,8 +17,24 @@ import InfoCircle from "~/renderer/icons/InfoCircle";
 import Text from "~/renderer/components/Text";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import CheckBox from "~/renderer/components/CheckBox";
+import Clock from "~/renderer/icons/Clock";
 
 import ErrorBanner from "~/renderer/components/ErrorBanner";
+
+import { getUnfreezeData } from "../Body";
+
+const Description = styled(Text).attrs(({ isPill }) => ({
+  ff: isPill ? "Inter|SemiBold" : "Inter|Regular",
+  fontSize: isPill ? 2 : 3,
+  color: "palette.text.shade60",
+}))`
+  ${p =>
+    p.isPill
+      ? `
+    text-transform: uppercase;
+  `
+      : ""}
+`;
 
 const SelectResource = styled(Box).attrs(() => ({
   horizontal: true,
@@ -32,10 +49,28 @@ const SelectResource = styled(Box).attrs(() => ({
   ${p =>
     p.disabled
       ? `
-    cursor: auto;
-    filter: contrast(0);
-  `
+          opacity: 0.7;
+          cursor: auto;
+        `
       : ``}
+`;
+
+const TimerWrapper = styled(Box).attrs(() => ({
+  horizontal: true,
+  alignItems: "center",
+  ff: "Inter|Medium",
+  fontSize: 3,
+  color: "palette.text.shade60",
+  bg: "palette.text.shade10",
+  borderRadius: 4,
+  p: 1,
+  mr: 4,
+}))`
+  align-self: center;
+
+  ${Description} {
+    margin-left: 5px;
+  }
 `;
 
 export default function StepAmount({
@@ -56,25 +91,33 @@ export default function StepAmount({
   const bridge = getAccountBridge(account, parentAccount);
 
   const onChange = useCallback(
-    useCallback(
-      (resource: string) =>
-        onChangeTransaction(
-          bridge.updateTransaction(transaction, {
-            resource,
-          }),
-        ),
-      [bridge, transaction, onChangeTransaction],
-    ),
+    (resource: string) =>
+      onChangeTransaction(
+        bridge.updateTransaction(transaction, {
+          resource,
+        }),
+      ),
+    [bridge, transaction, onChangeTransaction],
   );
 
-  const selectBandwidth = useCallback(useCallback(() => onChange("BANDWIDTH"), [onChange]));
+  const selectBandwidth = useCallback(() => onChange("BANDWIDTH"), [onChange]);
 
-  const selectEnergy = useCallback(useCallback(() => onChange("ENERGY"), [onChange]));
+  const selectEnergy = useCallback(() => onChange("ENERGY"), [onChange]);
 
-  const { tronResources: { frozen: { bandwidth, energy } = {} } = {} } = account;
+  const {
+    unfreezeBandwidth,
+    unfreezeEnergy,
+    canUnfreezeBandwidth,
+    canUnfreezeEnergy,
+    bandwidthExpiredAt,
+    energyExpiredAt,
+  } = useMemo(() => getUnfreezeData(account), [account]);
 
-  const UnfreezeBandwidth = BigNumber((bandwidth && bandwidth.amount) || 0);
-  const UnfreezeEnergy = BigNumber((energy && energy.amount) || 0);
+  const formattedBandwidthDate = useMemo(() => moment(bandwidthExpiredAt).fromNow(), [
+    bandwidthExpiredAt,
+  ]);
+
+  const formattedEnergyDate = useMemo(() => moment(energyExpiredAt).fromNow(), [energyExpiredAt]);
 
   const { resource } = transaction;
 
@@ -83,13 +126,19 @@ export default function StepAmount({
       <TrackPage category="Unfreeze Flow" name="Step 1" />
       {error ? <ErrorBanner error={error} /> : null}
       <Box vertical>
-        <SelectResource disabled={!UnfreezeBandwidth.gt(0)}>
-          <Text ff="Inter|Medium" fontSize={5}>
+        <SelectResource disabled={!canUnfreezeBandwidth}>
+          <Text ff="Inter|SemiBold" fontSize={4}>
             <Trans i18nKey="account.bandwidth" />
           </Text>
           <Box horizontal alignItems="center">
+            {unfreezeBandwidth.gt(0) && !canUnfreezeBandwidth ? (
+              <TimerWrapper>
+                <Clock size={12} />
+                <Description isPill>{formattedBandwidthDate}</Description>
+              </TimerWrapper>
+            ) : null}
             <FormattedVal
-              val={UnfreezeBandwidth}
+              val={unfreezeBandwidth}
               unit={account.unit}
               style={{ textAlign: "right", width: "auto", marginRight: 10 }}
               showCode
@@ -98,19 +147,25 @@ export default function StepAmount({
             />
             <CheckBox
               isRadio
-              disabled={!UnfreezeBandwidth.gt(0)}
+              disabled={!canUnfreezeBandwidth}
               isChecked={transaction.resource === "BANDWIDTH"}
               onChange={selectBandwidth}
             />
           </Box>
         </SelectResource>
-        <SelectResource disabled={!UnfreezeEnergy.gt(0)}>
-          <Text ff="Inter|Medium" fontSize={5}>
+        <SelectResource disabled={!canUnfreezeEnergy}>
+          <Text ff="Inter|SemiBold" fontSize={4}>
             <Trans i18nKey="account.energy" />
           </Text>
           <Box horizontal alignItems="center">
+            {unfreezeEnergy.gt(0) && !canUnfreezeEnergy ? (
+              <TimerWrapper>
+                <Clock size={12} />
+                <Description isPill>{formattedEnergyDate}</Description>
+              </TimerWrapper>
+            ) : null}
             <FormattedVal
-              val={UnfreezeEnergy}
+              val={unfreezeEnergy}
               unit={account.unit}
               style={{ textAlign: "right", width: "auto", marginRight: 10 }}
               showCode
@@ -119,7 +174,7 @@ export default function StepAmount({
             />
             <CheckBox
               isRadio
-              disabled={!UnfreezeEnergy.gt(0)}
+              disabled={!canUnfreezeEnergy}
               isChecked={transaction.resource === "ENERGY"}
               onChange={selectEnergy}
             />
@@ -139,7 +194,7 @@ export default function StepAmount({
           <Box mr={2}>
             <InfoCircle size={12} />
           </Box>
-          <Text ff="Inter|Regular" textAlign="center" fontSize={3}>
+          <Text ff="Inter|SemiBold" textAlign="center" fontSize={3}>
             <Trans
               i18nKey="unfreeze.steps.amount.info"
               values={{ resource: resource.toLowerCase() }}

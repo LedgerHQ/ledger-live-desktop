@@ -12,7 +12,8 @@ const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
   px: 3,
   horizontal: false,
 }))`
-  width: ${p => (p.compact ? 90 : 120)}px;
+  width: auto;
+  min-width: ${p => (p.compact ? 90 : 120)}px;
 `;
 
 type Props = {

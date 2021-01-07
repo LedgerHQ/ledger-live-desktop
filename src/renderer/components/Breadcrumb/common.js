@@ -47,7 +47,7 @@ export const TextLink: ThemedComponent<{ shrink?: boolean }> = styled.div`
   > :first-child {
     margin-right: 8px;
   }
-  ${p => (p.shrink ? "flex: 1;" : "")}
+  ${p => (p.shrink ? "flex-shrink: 1;" : "")}
 
   > ${Base} {
     text-overflow: ellipsis;

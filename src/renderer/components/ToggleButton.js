@@ -9,7 +9,7 @@ import Text from "./Text";
 const MainContainer: ThemedComponent<{}> = styled.div`
   display: block;
   width: auto;
-  height: ${p => p.theme.space[5]}px;
+  height: 32px;
   position: relative;
 `;
 
@@ -19,10 +19,10 @@ const Container: ThemedComponent<{}> = styled.div`
   justify-content: start;
   flex-wrap: nowrap;
   width: 100%;
-  height: ${p => p.theme.space[5]}px;
+  height: 32px;
   position: relative;
-  background-color: ${p => p.theme.colors.palette.action.hover};
-  border-radius: ${p => p.theme.space[5]}px;
+  border: 1px solid ${p => p.theme.colors.palette.primary.main};
+  border-radius: 32px;
   overflow: hidden;
 `;
 
@@ -32,12 +32,12 @@ const IndicatorContainer: ThemedComponent<{}> = styled.div`
   justify-content: start;
   flex-wrap: nowrap;
   width: 100%;
-  height: ${p => p.theme.space[5]}px;
+  height: 32px;
   top: 0;
   left: 0;
   position: absolute;
   overflow: hidden;
-  border-radius: ${p => p.theme.space[5]}px;
+  border-radius: 32px;
   z-index: 0;
 `;
 
@@ -47,7 +47,7 @@ const Indicator: ThemedComponent<{ length: number }> = styled.div.attrs(p => ({
   },
 }))`
   flex: ${p => 1 / p.length};
-  height: ${p => p.theme.space[5]}px;
+  height: 32px;
   background-color: ${p => p.theme.colors.palette.primary.main};
   transition: transform 200ms ease-in;
   will-change: transform;
@@ -55,7 +55,7 @@ const Indicator: ThemedComponent<{ length: number }> = styled.div.attrs(p => ({
 
 const Label = styled(Text).attrs(p => ({
   ff: "Inter|SemiBold",
-  fontSize: 5,
+  fontSize: 4,
   color: p.active ? "palette.primary.contrastText" : "palette.primary.main",
 }))`
   transition: color 100ms 100ms ease-out;

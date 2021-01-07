@@ -1,6 +1,7 @@
 // @flow
-
-import MODAL_DELEGATE from "~/renderer/families/tezos/DelegateFlowModal";
+import MODAL_WEBSOCKET_BRIDGE from "./WebSocketBridge";
+import MODAL_DELEGATE from "../families/tezos/DelegateFlowModal";
+import MODAL_TRON_REWARDS_INFO from "../families/tron/EarnRewardsInfoModal";
 import MODAL_EXPORT_OPERATIONS from "./ExportOperations";
 import MODAL_CONFIRM from "./ConfirmModal";
 import MODAL_MANAGE_TRON from "./ManageTron";
@@ -18,13 +19,43 @@ import MODAL_TECHNICAL_DATA from "./TechnicalData";
 import MODAL_SHARE_ANALYTICS from "./ShareAnalytics";
 import MODAL_SETTINGS_ACCOUNT from "./SettingsAccount";
 import MODAL_RELEASE_NOTES from "./ReleaseNotes";
+import MODAL_EXCHANGE_CRYPTO_DEVICE from "./ExchangeDeviceConfirm";
+import MODAL_SELL_CRYPTO_DEVICE from "./SellDeviceConfirm";
+import MODAL_HELP from "./Help";
+import MODAL_SWAP from "./Swap";
+import MODAL_SWAP_OPERATION_DETAILS from "./SwapOperationDetails";
+
+import MODAL_FULL_NODE from "./FullNode";
 
 import MODAL_CLAIM_REWARDS from "./ClaimRewards";
 import MODAL_FREEZE from "./Freeze";
 import MODAL_UNFREEZE from "./Unfreeze";
-import MODAL_REWARDS_INFO from "./EarnRewardsInfoModal";
+import MODAL_VOTE_TRON from "./VoteTron";
+import MODAL_VOTE_TRON_INFO from "./VoteTron/Info";
+import MODAL_BLACKLIST_TOKEN from "./BlacklistToken";
+
+import MODAL_COSMOS_DELEGATE from "../families/cosmos/DelegationFlowModal";
+import MODAL_COSMOS_REWARDS_INFO from "../families/cosmos/DelegationFlowModal/Info";
+import MODAL_COSMOS_CLAIM_REWARDS from "../families/cosmos/ClaimRewardsFlowModal";
+import MODAL_COSMOS_REDELEGATE from "../families/cosmos/RedelegationFlowModal";
+import MODAL_COSMOS_UNDELEGATE from "../families/cosmos/UndelegationFlowModal";
+
+import MODAL_ALGORAND_OPT_IN from "../families/algorand/OptInFlowModal";
+import MODAL_ALGORAND_CLAIM_REWARDS from "../families/algorand/Rewards/ClaimRewardsFlowModal";
+import MODAL_ALGORAND_EARN_REWARDS_INFO from "../families/algorand/Rewards/EarnRewardsInfoModal";
+
+// Lending
+import MODAL_LEND_MANAGE from "../screens/lend/modals/ManageLend";
+import MODAL_LEND_ENABLE_INFO from "../screens/lend/modals/EnableInfoModal";
+import MODAL_LEND_SUPPLY from "../screens/lend/modals/Supply";
+import MODAL_LEND_SELECT_ACCOUNT from "../screens/lend/modals/SelectAccountStep";
+import MODAL_LEND_ENABLE_FLOW from "../screens/lend/modals/Enable";
+import MODAL_LEND_WITHDRAW_FLOW from "../screens/lend/modals/Withdraw";
+import MODAL_LEND_NO_ETHEREUM_ACCOUNT from "../screens/lend/modals/NoEthereumAccount";
+import MODAL_LEND_EMPTY_ACCOUNT_DEPOSIT from "../screens/lend/modals/EmptyAccountDeposit";
 
 const modals: { [_: string]: React$ComponentType<any> } = {
+  MODAL_WEBSOCKET_BRIDGE,
   MODAL_EXPORT_OPERATIONS,
   MODAL_CONFIRM,
   MODAL_MANAGE_TRON,
@@ -46,7 +77,33 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_CLAIM_REWARDS,
   MODAL_FREEZE,
   MODAL_UNFREEZE,
-  MODAL_REWARDS_INFO,
+  MODAL_TRON_REWARDS_INFO,
+  MODAL_VOTE_TRON,
+  MODAL_VOTE_TRON_INFO,
+  MODAL_BLACKLIST_TOKEN,
+  MODAL_COSMOS_DELEGATE,
+  MODAL_COSMOS_REWARDS_INFO,
+  MODAL_COSMOS_CLAIM_REWARDS,
+  MODAL_COSMOS_REDELEGATE,
+  MODAL_COSMOS_UNDELEGATE,
+  MODAL_EXCHANGE_CRYPTO_DEVICE,
+  MODAL_SELL_CRYPTO_DEVICE,
+  MODAL_ALGORAND_OPT_IN,
+  MODAL_ALGORAND_CLAIM_REWARDS,
+  MODAL_ALGORAND_EARN_REWARDS_INFO,
+  MODAL_HELP,
+  // Lending
+  MODAL_LEND_MANAGE,
+  MODAL_LEND_ENABLE_INFO,
+  MODAL_LEND_ENABLE_FLOW,
+  MODAL_LEND_SELECT_ACCOUNT,
+  MODAL_LEND_SUPPLY,
+  MODAL_LEND_WITHDRAW_FLOW,
+  MODAL_LEND_NO_ETHEREUM_ACCOUNT,
+  MODAL_LEND_EMPTY_ACCOUNT_DEPOSIT,
+  MODAL_SWAP,
+  MODAL_SWAP_OPERATION_DETAILS,
+  MODAL_FULL_NODE,
 };
 
 export default modals;

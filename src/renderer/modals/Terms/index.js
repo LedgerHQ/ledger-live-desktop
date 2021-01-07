@@ -18,6 +18,7 @@ import Markdown, { Terms } from "~/renderer/components/Markdown";
 import Modal from "~/renderer/components/Modal";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import { closeModal } from "~/renderer/actions/modals";
+import ChevronRight from "~/renderer/icons/ChevronRight";
 
 const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
   const dispatch = useDispatch();
@@ -25,6 +26,9 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
   const [markdown, error] = useTerms();
   const [accepted, setAccepted] = useState(false);
   const onSwitchAccept = useCallback(() => setAccepted(!accepted), [accepted]);
+
+  const [acceptedLoss, setAcceptedLoss] = useState(false);
+  const onSwitchAcceptLoss = useCallback(() => setAcceptedLoss(!acceptedLoss), [acceptedLoss]);
 
   const onClickClose = useCallback(() => {
     dispatch(closeModal("MODAL_TERMS"));
@@ -36,7 +40,7 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
   }, [onClickClose]);
 
   return (
-    <Modal name="MODAL_TERMS" preventBackdropClick centered>
+    <Modal name="MODAL_TERMS" preventBackdropClick centered width={700}>
       <ModalBody
         title={<Trans i18nKey="Terms.title" />}
         render={() => (
@@ -72,10 +76,10 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
         modalFooterStyle={{ justifyContent: "stretch" }}
         renderFooter={() => (
           <Box
-            style={{ position: "relative", width: "100%" }}
+            style={{ position: "relative", width: "100%", height: "auto" }}
             grow
-            horizontal
             justifyContent={showClose ? "flex-end" : "space-between"}
+            px={5}
             alignItems="center"
           >
             {showClose ? (
@@ -85,24 +89,57 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
             ) : (
               <>
                 <Box
-                  style={{ width: "75%" }}
                   horizontal
-                  alignItems="center"
+                  my={2}
+                  style={{ width: "100%" }}
+                  alignItems="flex-start"
+                  justifyContent="flex-start"
+                  onClick={onSwitchAcceptLoss}
+                >
+                  <CheckBox
+                    isChecked={acceptedLoss}
+                    onChange={onSwitchAcceptLoss}
+                    id="modal-terms-checkbox-loss"
+                  />
+                  <Text
+                    ff="Inter|SemiBold"
+                    color="alertRed"
+                    fontSize={4}
+                    style={{ marginLeft: 8, flex: 1 }}
+                  >
+                    <Trans i18nKey="Terms.switchLabelLoss" />
+                  </Text>
+                </Box>
+                <Box
+                  horizontal
+                  my={2}
+                  style={{ width: "100%" }}
+                  alignItems="flex-start"
+                  justifyContent="flex-start"
                   onClick={onSwitchAccept}
                 >
-                  <CheckBox isChecked={accepted} id="terms-checkbox" />
+                  <CheckBox
+                    isChecked={accepted}
+                    onChange={onSwitchAccept}
+                    id="modal-terms-checkbox"
+                  />
                   <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
-                    <Trans i18nKey="Terms.switchLabel" />
+                    <Trans i18nKey="Terms.switchLabel">
+                      <Text onClick={() => openURL(url)} color="wallet" />
+                    </Trans>
                   </Text>
                 </Box>
                 <Button
-                  style={{ position: "absolute", right: 0 /* flex and <Box> hell */ }}
+                  style={{ marginTop: 24, paddingRight: 45, paddingLeft: 45 }}
                   onClick={onClick}
                   primary
-                  disabled={!accepted}
-                  id="terms-confirm-button"
+                  disabled={!accepted || !acceptedLoss}
+                  id="modal-confirm-button"
                 >
-                  <Trans i18nKey="common.confirm" />
+                  <Trans i18nKey="Terms.cta" />
+                  <Box ml={2}>
+                    <ChevronRight size={13} />
+                  </Box>
                 </Button>
               </>
             )}

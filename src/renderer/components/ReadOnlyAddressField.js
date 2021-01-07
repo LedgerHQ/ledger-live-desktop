@@ -16,14 +16,19 @@ const Address = styled(Box).attrs(() => ({
   py: 3,
   relative: true,
 }))`
+  border: ${p => `1px solid ${p.theme.colors.palette.divider}`};
+  ${p =>
+    p.allowCopy
+      ? `border-right: none;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  border: ${p => `1px solid ${p.theme.colors.palette.divider}`};
-  border-right: none;
+`
+      : ""}
   cursor: text;
   user-select: text;
   text-align: center;
   flex: 1;
+  word-break: break-all;
 `;
 
 const CopyFeedback = styled(Box).attrs(() => ({
@@ -33,6 +38,15 @@ const CopyFeedback = styled(Box).attrs(() => ({
   justifyContent: "center",
 }))`
   border-left: 1px solid ${p => p.theme.colors.palette.divider};
+`;
+
+const ClipboardSuspicious = styled.div`
+  font-family: Inter;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  align-self: center;
+  color: ${p => p.theme.colors.alertRed};
 `;
 
 const CopyBtn = styled(Box).attrs(() => ({
@@ -54,10 +68,12 @@ const CopyBtn = styled(Box).attrs(() => ({
 
 type Props = {
   address: string,
+  allowCopy?: boolean,
 };
 
-function ReadOnlyAddressField({ address }: Props) {
+function ReadOnlyAddressField({ address, allowCopy = true }: Props) {
   const [copyFeedback, setCopyFeedback] = useState(false);
+  const [clibboardChanged, setClipboardChanged] = useState(false);
 
   const copyTimeout = useRef();
 
@@ -65,6 +81,12 @@ function ReadOnlyAddressField({ address }: Props) {
     clipboard.writeText(address);
     setCopyFeedback(true);
     clearTimeout(copyTimeout.current);
+    setTimeout(() => {
+      const copiedAddress = clipboard.readText();
+      if (copiedAddress !== address) {
+        setClipboardChanged(true);
+      }
+    }, 300);
     copyTimeout.current = setTimeout(() => setCopyFeedback(false), 1e3);
   }, [address]);
 
@@ -75,19 +97,27 @@ function ReadOnlyAddressField({ address }: Props) {
   }, []);
 
   return (
-    <Box horizontal alignItems="stretch">
-      <Address>
-        {!copyFeedback ? null : (
-          <CopyFeedback>
-            <Trans i18nKey="common.addressCopied" />
-          </CopyFeedback>
-        )}
-        {address}
-      </Address>
-
-      <CopyBtn onClick={onCopy}>
-        <IconCopy size={16} />
-      </CopyBtn>
+    <Box vertical>
+      {clibboardChanged ? (
+        <ClipboardSuspicious>
+          <Trans i18nKey="common.addressCopiedSuspicious" />
+        </ClipboardSuspicious>
+      ) : null}
+      <Box horizontal alignItems="stretch">
+        <Address allowCopy={allowCopy}>
+          {!copyFeedback ? null : (
+            <CopyFeedback>
+              <Trans i18nKey="common.addressCopied" />
+            </CopyFeedback>
+          )}
+          {address}
+        </Address>
+        {allowCopy ? (
+          <CopyBtn onClick={onCopy}>
+            <IconCopy size={16} />
+          </CopyBtn>
+        ) : null}
+      </Box>
     </Box>
   );
 }

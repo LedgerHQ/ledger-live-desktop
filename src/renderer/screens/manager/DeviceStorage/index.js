@@ -5,7 +5,10 @@ import styled, { css, keyframes } from "styled-components";
 import { Trans } from "react-i18next";
 import { Transition, TransitionGroup } from "react-transition-group";
 
-import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
+import manager from "@ledgerhq/live-common/lib/manager";
+
+import type { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
+import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import type { AppsDistribution } from "@ledgerhq/live-common/lib/apps";
 import type { DeviceModel } from "@ledgerhq/devices";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -48,6 +51,13 @@ const Separator = styled.div`
   margin: 20px 0px;
   background: ${p => p.theme.colors.palette.background.default};
   width: 100%;
+`;
+
+const HighlightVersion = styled.span`
+  padding: 4px 6px;
+  color: ${p => p.theme.colors.wallet};
+  background: ${p => p.theme.colors.blueTransparentBackground};
+  border-radius: 4px;
 `;
 
 const Info = styled.div`
@@ -172,6 +182,14 @@ const TooltipContent = ({
   </TooltipContentWrapper>
 );
 
+// FIXME move to live-common
+const appDataColors = {
+  Exchange: "#39D2F3",
+};
+
+const getAppStorageBarColor = ({ name, currency }: { currency: ?CryptoCurrency, name: string }) =>
+  name in appDataColors ? appDataColors[name] : currency?.color;
+
 export const StorageBar = ({
   distribution,
   deviceModel,
@@ -196,7 +214,7 @@ export const StorageBar = ({
               <StorageBarItem
                 state={state}
                 installing={installQueue.includes(name) || uninstallQueue.includes(name)}
-                color={currency && currency.color}
+                color={getAppStorageBarColor({ name, currency })}
                 ratio={blocks / (distribution.totalBlocks - distribution.osBlocks)}
               >
                 <Tooltip
@@ -220,6 +238,7 @@ type Props = {
   installQueue: string[],
   uninstallQueue: string[],
   jobInProgress: boolean,
+  firmware: ?FirmwareUpdateContext,
 };
 
 const DeviceStorage = ({
@@ -230,8 +249,11 @@ const DeviceStorage = ({
   installQueue,
   uninstallQueue,
   jobInProgress,
+  firmware,
 }: Props) => {
   const shouldWarn = distribution.shouldWarnMemory || isIncomplete;
+
+  const firmwareOutdated = manager.firmwareUnsupported(deviceModel.id, deviceInfo) || firmware;
 
   return (
     <Card p={20} mb={4} horizontal>
@@ -249,11 +271,19 @@ const DeviceStorage = ({
             </Tooltip>
           </Box>
         </Box>
-        <Text ff="Inter|Regular" color="palette.text.shade40" fontSize={4}>
-          <Trans
-            i18nKey="manager.deviceStorage.firmware"
-            values={{ version: deviceInfo.version }}
-          />
+        <Text ff="Inter|SemiBold" color="palette.text.shade40" fontSize={4}>
+          {firmwareOutdated ? (
+            <Trans
+              i18nKey="manager.deviceStorage.firmwareAvailable"
+              values={{ version: deviceInfo.version }}
+            />
+          ) : (
+            <Trans
+              i18nKey="manager.deviceStorage.firmwareUpToDate"
+              values={{ version: deviceInfo.version }}
+            />
+          )}{" "}
+          {<HighlightVersion>{deviceInfo.version}</HighlightVersion>}
         </Text>
         <Separator />
         <Info>

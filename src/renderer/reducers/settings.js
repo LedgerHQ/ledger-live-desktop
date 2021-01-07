@@ -6,14 +6,21 @@ import type { OutputSelector, InputSelector as Selector } from "reselect";
 import {
   findCurrencyByTicker,
   getCryptoCurrencyById,
+  listSupportedFiats,
   getFiatCurrencyByTicker,
+  isCurrencySupported,
 } from "@ledgerhq/live-common/lib/currencies";
 import type { DeviceModelId } from "@ledgerhq/devices";
-import type { CryptoCurrency, Currency } from "@ledgerhq/live-common/lib/types";
+import type { CryptoCurrency, Currency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getLanguages } from "~/config/languages";
 import type { State } from ".";
 import { osLangAndRegionSelector } from "~/renderer/reducers/application";
+import { isCurrencyExchangeSupported } from "@ledgerhq/live-common/lib/exchange";
+import uniq from "lodash/uniq";
+import { findCryptoCurrencyById, findTokenById } from "@ledgerhq/cryptoassets";
+import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
 
 export type CurrencySettings = {
   confirmationsNb: number,
@@ -48,10 +55,6 @@ export const currencySettingsDefaults = (c: Currency): ConfirmationDefaults => {
 const bitcoin = getCryptoCurrencyById("bitcoin");
 const ethereum = getCryptoCurrencyById("ethereum");
 export const possibleIntermediaries = [bitcoin, ethereum];
-export const intermediaryCurrency = (from: Currency, _to: Currency) => {
-  if (from === ethereum || (from && from.type === "TokenCurrency")) return ethereum;
-  return bitcoin;
-};
 
 export const timeRangeDaysByKey = {
   week: 7,
@@ -68,6 +71,9 @@ export type SettingsState = {
   hasCompletedOnboarding: boolean,
   counterValue: string,
   preferredDeviceModel: DeviceModelId,
+  hasInstalledApps: boolean,
+  hasAcceptedSwapKYC: boolean,
+  lastSeenDevice: ?DeviceModelInfo,
   language: ?string,
   theme: ?string,
   region: ?string,
@@ -92,8 +98,15 @@ export type SettingsState = {
   hideEmptyTokenAccounts: boolean,
   sidebarCollapsed: boolean,
   discreetMode: boolean,
+  carouselVisibility: number,
   starredAccountIds?: string[],
-  hasInstalledApps: boolean,
+  blacklistedTokenIds: string[],
+  swapAcceptedProviderIds: string[],
+  deepLinkUrl: ?string,
+  firstTimeLend: boolean,
+  swapProviders?: AvailableProvider[],
+  showClearCacheBanner: boolean,
+  fullNodeEnabled: boolean,
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -106,7 +119,6 @@ const defaultsForCurrency: Currency => CurrencySettings = crypto => {
 const INITIAL_STATE: SettingsState = {
   hasCompletedOnboarding: false,
   counterValue: "USD",
-  preferredDeviceModel: "nanoS",
   language: null,
   theme: null,
   region: null,
@@ -128,10 +140,32 @@ const INITIAL_STATE: SettingsState = {
   hideEmptyTokenAccounts: getEnv("HIDE_EMPTY_TOKEN_ACCOUNTS"),
   sidebarCollapsed: false,
   discreetMode: false,
+  preferredDeviceModel: "nanoS",
   hasInstalledApps: true,
+  carouselVisibility: 0,
+  hasAcceptedSwapKYC: false,
+  lastSeenDevice: null,
+  blacklistedTokenIds: [],
+  swapAcceptedProviderIds: [],
+  deepLinkUrl: null,
+  firstTimeLend: false,
+  swapProviders: [],
+  showClearCacheBanner: false,
+  fullNodeEnabled: false,
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
+
+export const supportedCountervalues: { value: string, label: string, currency: Currency }[] = [
+  ...listSupportedFiats(),
+  ...possibleIntermediaries,
+]
+  .map(currency => ({
+    value: currency.ticker,
+    label: `${currency.name} - ${currency.ticker}`,
+    currency,
+  }))
+  .sort((a, b) => (a.currency.name < b.currency.name ? -1 : 1));
 
 const handlers: Object = {
   SETTINGS_SET_PAIRS: (
@@ -153,24 +187,74 @@ const handlers: Object = {
     }
     return copy;
   },
-  SAVE_SETTINGS: (
-    state: SettingsState,
-    { payload: settings }: { payload: $Shape<SettingsState> },
-  ) => ({
-    ...state,
-    ...settings,
-  }),
+  SAVE_SETTINGS: (state: SettingsState, { payload }: { payload: $Shape<SettingsState> }) => {
+    if (!payload) return state;
+    const changed = Object.keys(payload).some(key => payload[key] !== state[key]);
+    if (!changed) return state;
+    return {
+      ...state,
+      ...payload,
+    };
+  },
   FETCH_SETTINGS: (
     state: SettingsState,
     { payload: settings }: { payload: $Shape<SettingsState> },
-  ) => ({
-    ...state,
-    ...settings,
-    loaded: true,
-  }),
+  ) => {
+    if (
+      settings.counterValue &&
+      !supportedCountervalues.find(({ currency }) => currency.ticker === settings.counterValue)
+    ) {
+      settings.counterValue = INITIAL_STATE.counterValue;
+    }
+    return {
+      ...state,
+      ...settings,
+      loaded: true,
+    };
+  },
   SETTINGS_DISMISS_BANNER: (state: SettingsState, { payload: bannerId }) => ({
     ...state,
     dismissedBanners: [...state.dismissedBanners, bannerId],
+  }),
+  SHOW_TOKEN: (state: SettingsState, { payload: tokenId }) => {
+    const ids = state.blacklistedTokenIds;
+    return {
+      ...state,
+      blacklistedTokenIds: ids.filter(id => id !== tokenId),
+    };
+  },
+  BLACKLIST_TOKEN: (state: SettingsState, { payload: tokenId }) => {
+    const ids = state.blacklistedTokenIds;
+    return {
+      ...state,
+      blacklistedTokenIds: [...ids, tokenId],
+    };
+  },
+  SWAP_ACCEPT_PROVIDER_TOS: (state: SettingsState, { payload: providerId }) => {
+    const ids = state.swapAcceptedProviderIds;
+    return {
+      ...state,
+      swapAcceptedProviderIds: [...ids, providerId],
+    };
+  },
+  LAST_SEEN_DEVICE_INFO: (
+    state: SettingsState,
+    { payload: dmi }: { payload: DeviceModelInfo },
+  ) => ({
+    ...state,
+    lastSeenDevice: dmi,
+  }),
+  SET_DEEPLINK_URL: (state: SettingsState, { payload: deepLinkUrl }) => ({
+    ...state,
+    deepLinkUrl,
+  }),
+  SET_FIRST_TIME_LEND: (state: SettingsState) => ({
+    ...state,
+    firstTimeLend: false,
+  }),
+  SETTINGS_SET_SWAP_PROVIDERS: (state: SettingsState, { swapProviders }) => ({
+    ...state,
+    swapProviders,
   }),
   // used to debug performance of redux updates
   DEBUG_TICK: state => ({ ...state }),
@@ -185,6 +269,8 @@ export const settingsExportSelector = storeSelector;
 export const discreetModeSelector = (state: State): boolean => state.settings.discreetMode === true;
 
 export const getCounterValueCode = (state: State) => state.settings.counterValue;
+
+export const deepLinkUrlSelector = (state: State) => state.settings.deepLinkUrl;
 
 export const counterValueCurrencyLocalSelector = (state: SettingsState): Currency =>
   findCurrencyByTicker(state.counterValue) || getFiatCurrencyByTicker("USD");
@@ -284,6 +370,11 @@ export const autoLockTimeoutSelector = (state: State) => state.settings.autoLock
 export const shareAnalyticsSelector = (state: State) => state.settings.shareAnalytics;
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange;
 export const hasInstalledAppsSelector = (state: State) => state.settings.hasInstalledApps;
+export const carouselVisibilitySelector = (state: State) => state.settings.carouselVisibility;
+export const hasAcceptedSwapKYCSelector = (state: State) => state.settings.hasAcceptedSwapKYC;
+export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
+export const swapAcceptedProviderIdsSelector = (state: State) =>
+  state.settings.swapAcceptedProviderIds;
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;
 
@@ -298,16 +389,53 @@ export const dismissedBannerSelectorLoaded = (bannerKey: string) => (state: Stat
 export const hideEmptyTokenAccountsSelector = (state: State) =>
   state.settings.hideEmptyTokenAccounts;
 
+export const lastSeenDeviceSelector = (state: State) => state.settings.lastSeenDevice;
+
+export const swapProvidersSelector = (state: Object) => state.settings.swapProviders;
+
+export const showClearCacheBannerSelector = (state: Object) => state.settings.showClearCacheBanner;
+
+export const swapSupportedCurrenciesSelector: OutputSelector<
+  State,
+  { accountId: string },
+  (TokenCurrency | CryptoCurrency)[],
+> = createSelector(swapProvidersSelector, swapProviders => {
+  if (!swapProviders) return [];
+
+  const allIds = uniq(
+    swapProviders.reduce((ac, { supportedCurrencies }) => [...ac, ...supportedCurrencies], []),
+  );
+
+  const tokenCurrencies = allIds
+    .map(findTokenById)
+    .filter(Boolean)
+    .filter(t => !t.delisted);
+  const cryptoCurrencies = allIds
+    .map(findCryptoCurrencyById)
+    .filter(Boolean)
+    .filter(isCurrencySupported);
+
+  return [...cryptoCurrencies, ...tokenCurrencies].filter(isCurrencyExchangeSupported);
+});
+
 export const exportSettingsSelector: OutputSelector<State, void, *> = createSelector(
   counterValueCurrencySelector,
   state => state.settings.currenciesSettings,
   state => state.settings.pairExchanges,
   developerModeSelector,
-  (counterValueCurrency, currenciesSettings, pairExchanges, developerModeEnabled) => ({
+  blacklistedTokenIdsSelector,
+  (
+    counterValueCurrency,
+    currenciesSettings,
+    pairExchanges,
+    developerModeEnabled,
+    blacklistedTokenIds,
+  ) => ({
     counterValue: counterValueCurrency.ticker,
     currenciesSettings,
     pairExchanges,
     developerModeEnabled,
+    blacklistedTokenIds,
   }),
 );
 

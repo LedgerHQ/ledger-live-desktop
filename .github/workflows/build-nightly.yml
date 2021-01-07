@@ -1,31 +1,30 @@
 name: nightly build
 on:
-  push:
-    tags:
-      - "*nightly*"
+  schedule:
+    - cron: "0 22 * * 1-5"
 
 jobs:
   nightly-macos:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@master
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.4.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+      - uses: actions/setup-node@main
         with:
           node-version: 12.x
-      - name: get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
+      - name: set beta name
+        uses: ./.github/actions/change-product-name
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.0.0
+      - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: upload macOS app
         uses: actions/upload-artifact@v1
@@ -35,8 +34,12 @@ jobs:
   nightly-linux:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@master
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.4.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@main
         with:
           node-version: 12.x
       - name: install linux dependencies
@@ -44,7 +47,7 @@ jobs:
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -52,9 +55,11 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
+      - name: set beta name
+        uses: ./.github/actions/change-product-name
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.0.0
+      - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: upload linux app
         uses: actions/upload-artifact@v1
@@ -64,8 +69,12 @@ jobs:
   nightly-windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@master
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.4.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@main
         with:
           node-version: 12.x
       - uses: actions/setup-python@v1
@@ -74,7 +83,7 @@ jobs:
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -82,9 +91,11 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
+      - name: set beta name
+        uses: ./.github/actions/change-product-name
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.0.0
+      - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: upload windows
         uses: actions/upload-artifact@v1
