@@ -10,7 +10,6 @@ const main = async () => {
   let imgChanged = core
     .getInput("imgChanged")
     .split("\n")
-    .slice(1);
   if (imgChanged.length === 1 && imgChanged[0] === "") {
     imgChanged = [];
   }
