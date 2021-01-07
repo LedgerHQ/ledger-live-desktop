@@ -2,7 +2,6 @@
 
 import React, { useCallback } from "react";
 import { useTranslation, Trans } from "react-i18next";
-import { useSelector } from "react-redux";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
@@ -15,7 +14,6 @@ import { WaveContainer } from "~/renderer/components/Onboarding/Screens/Tutorial
 import { AnimatedWave } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/AnimatedWave";
 import illustration from "~/renderer/components/Onboarding/Screens/Welcome/assets/welcome.svg";
 import illustrationDark from "~/renderer/components/Onboarding/Screens/Welcome/assets/welcome-dark.svg";
-import { onboardingRelaunchedSelector } from "~/renderer/reducers/onboarding";
 import useTheme from "~/renderer/hooks/useTheme";
 
 const WelcomeContainer: ThemedComponent<*> = styled.div`
