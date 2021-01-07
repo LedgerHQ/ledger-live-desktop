@@ -7,7 +7,7 @@ import { rgba } from "~/renderer/styles/helpers";
 import Box, { Tabbable } from "~/renderer/components/Box";
 
 export type Item = {
-  label: React$Node,
+  label: string,
   key: string,
   value?: any,
 };

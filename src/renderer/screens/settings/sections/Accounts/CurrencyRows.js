@@ -15,7 +15,11 @@ import {
 } from "~/renderer/reducers/settings";
 import type { SettingsState, CurrencySettings } from "~/renderer/reducers/settings";
 import StepperNumber from "~/renderer/components/StepperNumber";
-import { SettingsSectionRow as Row, SettingsSectionRowContainer } from "../../SettingsSection";
+import {
+  SettingsSectionRow as Row,
+  SettingsSectionRowContainer,
+  SettingsSectionBody as Body,
+} from "../../SettingsSection";
 import Box from "~/renderer/components/Box";
 
 type Props = {
@@ -61,11 +65,12 @@ class CurrencyRows extends PureComponent<Props> {
     // NB ideally we would have a dynamic list of settings
 
     return (
-      <>
+      <Body>
         {defaults.confirmationsNb ? (
           <Row
             title={t("settings.currencies.confirmationsNb")}
             desc={t("settings.currencies.confirmationsNbDesc")}
+            inset
           >
             <Track onUpdate event="ConfirmationsNb" confirmationsNb={confirmationsNb} />
             {defaults.confirmationsNb ? (
@@ -85,7 +90,7 @@ class CurrencyRows extends PureComponent<Props> {
             </Box>
           </SettingsSectionRowContainer>
         )}
-      </>
+      </Body>
     );
   }
 }
