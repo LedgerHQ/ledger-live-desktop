@@ -5,7 +5,7 @@ import {
   useCountervaluesPolling,
   useCountervaluesExport,
 } from "@ledgerhq/live-common/lib/countervalues/react";
-import { CountervaluesSettings } from "@ledgerhq/live-common/lib/countervalues/types";
+import type { CountervaluesSettings } from "@ledgerhq/live-common/lib/countervalues/types";
 import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
 import { setKey } from "~/renderer/storage";
 import { useUserSettings } from "../actions/general";
