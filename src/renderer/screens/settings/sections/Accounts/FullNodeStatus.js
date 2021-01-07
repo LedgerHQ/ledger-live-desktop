@@ -29,8 +29,10 @@ const Wrapper = styled(Box)`
 `;
 
 const getColorsForStatus = status => {
+  // FIXME this knowledge should be in live-common (because we may add more status)
+  // FIXME we should make it a map of {status->type} because it's more usable and also better to prove to Flow we have define all cases
   const naiveMapping = {
-    ko: ["satstack-disconnected", "node-disconnected", "invalid-chain"],
+    ko: ["satstack-disconnected", "node-disconnected", "invalid-chain", "satstack-outdated"],
     ok: ["ready"],
     pending: ["syncing", "scanning", "initializing"],
   };

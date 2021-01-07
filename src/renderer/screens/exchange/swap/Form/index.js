@@ -112,8 +112,10 @@ const Form = ({
   const onCompleteSwap = useCallback(() => setTabIndex(1), [setTabIndex]);
   const onStartSwap = useCallback(() => {
     setTimerVisibility(false);
-    reduxDispatch(openModal("MODAL_SWAP", { swap, transaction, ratesExpiration, onCompleteSwap }));
-  }, [onCompleteSwap, ratesExpiration, reduxDispatch, swap, transaction]);
+    reduxDispatch(
+      openModal("MODAL_SWAP", { swap, transaction, status, ratesExpiration, onCompleteSwap }),
+    );
+  }, [onCompleteSwap, ratesExpiration, reduxDispatch, swap, transaction, status]);
 
   const { magnitudeAwareRate } = exchangeRate || {};
 

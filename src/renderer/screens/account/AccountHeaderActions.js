@@ -246,6 +246,7 @@ const AccountHeaderActions = ({
       {account.type === "Account" ? (
         <Tooltip content={t("account.settings.title")}>
           <ButtonSettings
+            id="account-settings-button"
             onClick={() => openModal("MODAL_SETTINGS_ACCOUNT", { parentAccount, account })}
           >
             <Box justifyContent="center">

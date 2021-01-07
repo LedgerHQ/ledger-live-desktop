@@ -1,10 +1,4 @@
-import initialize, {
-  app,
-  deviceInfo,
-  mockListAppsResult,
-  mockDeviceEvent,
-  // portfolioPage,
-} from "../common.js";
+import initialize, { app, deviceInfo, mockListAppsResult, mockDeviceEvent } from "../common.js";
 
 describe("Firmware Update", () => {
   initialize("firmwareupdate", {
