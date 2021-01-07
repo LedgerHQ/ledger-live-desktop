@@ -1,19 +1,22 @@
 name: linux production build
 on:
-  push:
-    branches:
-      - "master"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag?'
+        required: true
 
 jobs:
   build:
     runs-on: ubuntu-16.04
-    if: contains(github.ref, "refs/tags/") && contains(github.ref, "v")
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.4.0
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
+        with:
+          ref: ${{github.event.inputs.tag}}
       - uses: actions/setup-node@main
         with:
           node-version: 12.x
