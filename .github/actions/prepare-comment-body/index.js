@@ -8,6 +8,9 @@ const main = async () => {
   const to = core.getInput("to");
   const author = core.getInput("author");
   let imgChanged = core.getInput("imgChanged").split("\n");
+  if (imgChanged.length === 1 && imgChanged[0] === "") {
+    imgChanged = [];
+  }
   const testoutput = core.getInput("testoutput");
   const lintoutput = core.getInput("lintoutput");
   const fullrepo = core.getInput("fullrepo").split("/");
