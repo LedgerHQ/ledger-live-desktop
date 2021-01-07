@@ -52,7 +52,7 @@ export default function Order() {
     >
       {({ isOpen, value }) =>
         value ? (
-          <Box horizontal flow={1}>
+          <Box id="accounts-order-select-button" horizontal flow={1}>
             <Track onUpdate event="ChangeSort" orderAccounts={orderAccounts} />
             <Text ff="Inter|SemiBold" fontSize={4}>
               {t("common.sortBy")}
@@ -91,6 +91,7 @@ const OrderItem: React$ComponentType<ItemProps> = React.memo(function OrderItem(
       horizontal
       isActive={isActive}
       flow={2}
+      id={`accounts-order-select-${item.key.replace("|", "-")}`}
     >
       <BoldToggle isBold={isActive}>{item.label}</BoldToggle>
     </DropDownItem>
