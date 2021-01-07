@@ -165,7 +165,7 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: Get short SHA
         id: slug
-        run: echo "::set-output name=sha8::$(git rev-parse --short HEAD)"
+        run: echo "::set-output name=sha8::${GITHUB_SHA:0:7}"
       - name: make local version
         env:
           VERSION: ${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
