@@ -19,11 +19,11 @@ const Receive2NoDevice = ({
       <Box style={{ width: "100%" }} pt={4} horizontal justifyContent="flex-end">
         {onVerify ? (
           <Button outlineGrey onClick={onVerify}>
-            <Trans i18nKey="common.verify" />
+            <Trans i18nKey="common.verifyMyAddress" />
           </Button>
         ) : null}
         {onContinue ? (
-          <Button ml={1} primary onClick={onContinue}>
+          <Button ml={2} primary onClick={onContinue}>
             <Trans i18nKey="common.continue" />
           </Button>
         ) : null}
