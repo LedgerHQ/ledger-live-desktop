@@ -99,7 +99,7 @@ jobs:
         run: |
           git remote add ledger https://github.com/LedgerHQ/ledger-live-desktop.git
           git fetch ledger
-          git diff --name-only ledger/${{github.base_ref}}..${{github.event.pull_request.head.sha}} -- tests/specs/__image_snapshots__ >imgChanged.txt
+          git diff --name-only $(git merge-base --fork-point ledger/${{github.base_ref}}) -- tests/specs/__image_snapshots__ >imgChanged.txt
         if: always() && github.event_name == 'pull_request_target'
       - name: Read imgChanged output
         id: imgChanged
