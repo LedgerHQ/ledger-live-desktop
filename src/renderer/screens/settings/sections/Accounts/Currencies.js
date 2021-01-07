@@ -7,18 +7,17 @@ import { cryptoCurrenciesSelector } from "~/renderer/reducers/accounts";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Box from "~/renderer/components/Box";
-import IconCurrencies from "~/renderer/icons/Currencies";
-import {
-  SettingsSectionHeader as Header,
-  SettingsSectionBody as Body,
-} from "../../SettingsSection";
+import { SettingsSectionBody as Body, SettingsSectionRow as Row } from "../../SettingsSection";
 import CurrencyRows from "./CurrencyRows";
 import Track from "~/renderer/analytics/Track";
 
 export default function Currencies() {
   const { t } = useTranslation();
   const currencies = useSelector(cryptoCurrenciesSelector);
-  const [currency, setCurrency] = useState(currencies[0]);
+  const [currency, setCurrency] = useState(() => {
+    const btc = currencies.find(c => c.id === "bitcoin");
+    return btc || currencies[0];
+  });
 
   const handleChangeCurrency = useCallback(
     (currency: CryptoCurrency | TokenCurrency) => {
@@ -31,22 +30,20 @@ export default function Currencies() {
     <Box key={currency.id}>
       <TrackPage category="Settings" name="Currencies" currencyId={currency.id} />
       <Track onUpdate event="Crypto asset settings dropdown" currencyName={currency.name} />
-      <Header
-        icon={<IconCurrencies size={16} />}
+      <Row
         title={t("settings.tabs.currencies")}
         desc={t("settings.currencies.desc")}
         style={{ cursor: "pointer" }}
-        renderRight={
-          <SelectCurrency
-            small
-            minWidth={200}
-            value={currency}
-            // $FlowFixMe Mayday we have a problem with <Select /> and its props
-            onChange={handleChangeCurrency}
-            currencies={currencies}
-          />
-        }
-      />
+      >
+        <SelectCurrency
+          small
+          minWidth={200}
+          value={currency}
+          // $FlowFixMe Mayday we have a problem with <Select /> and its props
+          onChange={handleChangeCurrency}
+          currencies={currencies}
+        />
+      </Row>
       <Body>
         <CurrencyRows currency={currency} />
       </Body>
