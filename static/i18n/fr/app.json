@@ -2115,14 +2115,14 @@
         "title": "Sécuriser votre code PIN",
         "intro": "Au cours du processus de paramétrage vous allez choisir un code PIN.",
         "rules": {
-          "1": "Choisissez toujours votre code PIN par vous-même.",
-          "2": "Assurez vous de ne pas être observé quand vous entrez votre code PIN.",
+          "1": "<0>Always</0> choose a PIN code yourself.",
+          "2": "<0>Always</0> enter your PIN code out of sight.",
           "3": "Vous pouvez modifier votre code PIN ultérieurement si nécessaire.",
           "4": "Trois entrées erronées du code PIN à la suite réinitialisent l'appareil.",
-          "5": "N'utilisez jamais un code PIN facile comme 0000, 123456, 55555555.",
-          "6": "Ne donnez jamais votre code PIN à quelqu'un d'autre. Même pas à Ledger.",
-          "7": "N'utilisez jamais un code PIN que vous n'avez pas choisi par vous-même.",
-          "8": "Ne stockez jamais votre code PIN sur un ordinateur ou un smartphone."
+          "5": "<0>Never</0> use an easy PIN code like 0000, 123456, or 55555555.",
+          "6": "<0>Never</0> share your PIN code with someone else. Not even with Ledger.",
+          "7": "<0>Never</0> use a PIN code you did not choose yourself.",
+          "8": "<0>Never</0> store your PIN code on a computer or phone."
         }
       },
       "recoverySeed": {
@@ -2141,9 +2141,9 @@
       "whereToHide": {
         "title": "Où dois-je garder ma phrase de récupération ?",
         "points": {
-          "1": "NE JAMAIS la saisir sur un ordinateur, un smartphone ou un autre appareil. Ne la prenez pas en photo.",
-          "2": "NE JAMAIS partager vos 24 mots avec qui que ce soit.",
-          "3": "TOUJOURS la ranger la dans un endroit sûr, loin des regards.",
+          "1": "<0>NEVER</0> enter it on a computer, smartphone or any other device. Don't take a picture of it.",
+          "2": "<0>NEVER</0> share your 24 words with anyone.",
+          "3": "<0>ALWAYS</0> store it in a secure place, out of sight.",
           "4": "Ledger ne vous demandera jamais votre phrase de récupération.",
           "5": "Peu importe qui vous la demande, partez du principe que c'est une arnaque !"
         }
@@ -2331,7 +2331,7 @@
           "pinCodeHowTo": {
             "setUp": {
               "title": "Choisissez un code PIN",
-              "descr": "\"Appuyez sur le bouton gauche ou droit pour changer de chiffre. Appuyez sur les deux boutons pour valider un chiffre. Sélectionnez ✔ pour confirmer votre code PIN. Sélectionnez ⌫ pour effacer un chiffre\"."
+              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <0></0> to confirm your PIN code. Select <1></1> to erase a digit."
             },
             "confirm": {
               "title": "Confirmer le code PIN",
