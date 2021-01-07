@@ -24,6 +24,7 @@ import { pedagogyMachine } from "~/renderer/components/Onboarding/Pedagogy/state
 
 import styled from "styled-components";
 import { Pedagogy } from "~/renderer/components/Onboarding/Pedagogy";
+import { preloadAssets } from "~/renderer/components/Onboarding/preloadAssets";
 
 function LedgerLogo() {
   return (
@@ -206,6 +207,10 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
 
     return subscription.unsubscribe;
   }, [service]);
+
+  useEffect(() => {
+    preloadAssets();
+  }, []);
 
   const CurrentScreen = screens[state.value];
 
