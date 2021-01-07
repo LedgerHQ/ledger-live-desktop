@@ -13,6 +13,10 @@ import importRecovery from "./assets/importRecovery.svg";
 import nanoBox from "./assets/nanoBox.svg";
 import { deviceById } from "~/renderer/components/Onboarding/Screens/SelectDevice/devices";
 
+import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
+
+registerAssets([deviceConnect, importRecovery, nanoBox]);
+
 const SelectUseCaseContainer = styled.div`
   width: 100%;
   padding: 134px 208px;

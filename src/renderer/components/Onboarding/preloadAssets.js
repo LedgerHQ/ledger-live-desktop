@@ -1,8 +1,16 @@
-import nanoS from "./Screens/SelectDevice/assets/nanoS.svg";
-import nanoX from "./Screens/SelectDevice/assets/nanoX.svg";
-import nanoBlue from "./Screens/SelectDevice/assets/nanoBlue.svg";
+// @flow
 
-const assetUrls = [nanoS, nanoX, nanoBlue];
+const assetUrls = [];
+
+export function registerAssets(assetUrl: string | string[]) {
+  if (Array.isArray(assetUrl)) {
+    assetUrl.forEach(url => {
+      assetUrls.push(url);
+    });
+  } else {
+    assetUrls.push(assetUrl);
+  }
+}
 
 export function preloadAssets() {
   assetUrls.forEach(url => {
