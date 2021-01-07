@@ -53,9 +53,15 @@ jobs:
         id: version
       - name: set beta name
         uses: ./.github/actions/change-product-name
-      - name: make local version
+      - name: make local version pr
+        if: github.event_name == 'pull_request'
         env:
           VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.event.pull_request.head.sha }}
+        run: yarn version --new-version="$VERSION"
+      - name: make local version push
+        if: github.event_name == 'push'
+        env:
+          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
         run: yarn version --new-version="$VERSION"
       - name: build the app
         run: yarn nightly
@@ -105,9 +111,15 @@ jobs:
         id: version
       - name: set beta name
         uses: ./.github/actions/change-product-name
-      - name: make local version
+      - name: make local version pr
+        if: github.event_name == 'pull_request'
         env:
           VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.event.pull_request.head.sha }}
+        run: yarn version --new-version="$VERSION"
+      - name: make local version push
+        if: github.event_name == 'push'
+        env:
+          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
         run: yarn version --new-version="$VERSION"
       - name: build the app
         run: yarn nightly
@@ -158,9 +170,15 @@ jobs:
         id: version
       - name: set beta name
         uses: ./.github/actions/change-product-name
-      - name: make local version
+      - name: make local version pr
+        if: github.event_name == 'pull_request'
         env:
           VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.event.pull_request.head.sha }}
+        run: yarn version --new-version="$VERSION"
+      - name: make local version push
+        if: github.event_name == 'push'
+        env:
+          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
         run: yarn version --new-version="$VERSION"
       - name: build the app
         run: yarn nightly
