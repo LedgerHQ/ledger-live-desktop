@@ -4,7 +4,13 @@ const main = async () => {
   const images = core.getInput("images");
   const runId = core.getInput("runId");
   const pullId = core.getInput("pullId");
+  const from = core.getInput("from");
+  const to = core.getInput("to");
   const author = core.getInput("author");
+  let imgChanged = core.getInput("imgChanged").split("\n");
+  if (imgChanged.length === 1 && imgChanged[0] === "") {
+    imgChanged = [];
+  }
   const testoutput = core.getInput("testoutput");
   const lintoutput = core.getInput("lintoutput");
   const fullrepo = core.getInput("fullrepo").split("/");
@@ -55,6 +61,29 @@ ${str}
 </details>  
 `;
 
+  if (!lintFailed && !testsFailed && !imgDiffFailed && imgChanged.length) {
+    imgChanged = imgChanged.map(
+      img => `
+${img}
+![](https://raw.githubusercontent.com/LedgerHQ/ledger-live-desktop/${from}/${img}) | ![](https://raw.githubusercontent.com/LedgerHQ/ledger-live-desktop/${to}/${img})
+|---|---
+| Old | New
+`,
+    );
+    const diffStr = imgChanged.join("\n\n");
+    str += `
+
+<details>
+<summary><b>Updated/changed screenshots  :warning:</b></summary>
+<p>
+
+${diffStr}
+
+</p>
+</details>  
+`;
+  }
+
   const strSlack = `
 Lint outputs ${lintFailed ? "❌" : " ✅"}
 Tests outputs ${testsFailed ? "❌" : " ✅"}
@@ -68,6 +97,9 @@ https://github.com/LedgerHQ/ledger-live-desktop/commits/develop
     "juan-cortes": "UE1D1FS77",
     dasilvarosa: "UA14024H4",
     valpinkman: "U98KPAN86",
+    MortalKastor: "U5FLVJ709",
+    LFBarreto: "UR6U4QKKN",
+    IAmMorrow: "UKFTXAZGF",
   };
 
   const strSlackAuthor = `
@@ -79,9 +111,13 @@ https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
 `;
 
   core.setOutput("body", str);
-  core.setOutput("bodySlack", strSlack);
+  if (lintFailed || testsFailed || imgDiffFailed) {
+    core.setOutput("bodySlack", strSlack);
+  } else {
+    core.setOutput("bodySlack", "");
+  }
   core.setOutput("bodySlackAuthor", strSlackAuthor);
-  core.setOutput("slackAuthor", githubSlackMap[author]);
+  core.setOutput("slackAuthor", githubSlackMap[author] || "");
 };
 
 main().catch(err => core.setFailed(err));

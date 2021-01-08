@@ -2,7 +2,8 @@ name: CI
 on:
   pull_request_target:
     branches:
-      - "*"
+      - develop
+      - master
   push:
     branches:
       - develop
@@ -54,7 +55,7 @@ jobs:
           path: ./lint.txt
       - name: check build
         if: always()
-        run: sudo yarn build
+        run: export INSTRUMENT_BUILD=true && sudo --preserve-env=INSTRUMENT_BUILD yarn build
       - name: start electron webdriver
         if: always()
         run: yarn start-electron-webdriver -d
@@ -74,6 +75,11 @@ jobs:
         uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: ./output.txt
+      - name: run coverage generation
+        if: always()
+        run: yarn spectron-coverage
+        env:
+          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
       - name: upload diffs to imgur
         if: always()
         uses: ./.github/actions/upload-images
@@ -89,6 +95,18 @@ jobs:
         with:
           name: ci-suggested-screenshots
           path: tests/specs/__image_snapshots__/__diff_output__/
+      - name: generate imgChanged
+        run: |
+          git remote add ledger https://github.com/LedgerHQ/ledger-live-desktop.git
+          git fetch ledger
+          git diff --name-only ledger/${{github.base_ref}}..${{github.event.pull_request.head.sha}} -- tests/specs/__image_snapshots__ >imgChanged.txt
+        if: always() && github.event_name == 'pull_request_target'
+      - name: Read imgChanged output
+        id: imgChanged
+        if: always() && github.event_name == 'pull_request_target'
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
+        with:
+          path: ./imgChanged.txt
       - name: prepare comment body
         if: always()
         id: comment
@@ -101,6 +119,9 @@ jobs:
           lintoutput: ${{ steps.lint.outputs.content }}
           author: ${{github.event.sender.login}}
           pullId: ${{github.event.number}}
+          imgChanged: ${{steps.imgChanged.outputs.content}}
+          from: ${{github.base_ref}}
+          to: ${{github.event.pull_request.head.sha}}
       - name: display comment
         if: always()
         id: displaycomment
@@ -120,7 +141,7 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Send message to Slack channel
         uses: archive/github-actions-slack@v1.0.3
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && needs.test.outputs.commentSlack != ''
         id: notify
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
@@ -128,7 +149,7 @@ jobs:
           slack-text: ${{ needs.test.outputs.commentSlack }}
       - name: Send message to Slack author
         uses: archive/github-actions-slack@v1.0.3
-        if: github.event_name == 'pull_request_target'
+        if: github.event_name == 'pull_request_target' && needs.test.outputs.slackAuthor != ''
         id: notifyauthor
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}

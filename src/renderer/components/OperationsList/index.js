@@ -31,7 +31,7 @@ const ShowMore = styled(Box).attrs(() => ({
   fontSize: 3,
   justifyContent: "center",
   alignItems: "center",
-  p: 6,
+  p: 3,
   color: "wallet",
 }))`
   &:hover {
@@ -115,21 +115,23 @@ export class OperationsList extends PureComponent<Props, State> {
     const accountsMap = keyBy(all, "id");
 
     return (
-      <Box flow={4}>
+      <Card>
         {title && (
-          <Text
-            color="palette.text.shade100"
-            ff="Inter|Medium"
-            fontSize={6}
-            data-e2e="dashboard_OperationList"
-          >
-            {title}
-          </Text>
+          <Box py={3} px={4}>
+            <Text
+              color="palette.text.shade100"
+              ff="Inter|Medium"
+              fontSize={6}
+              data-e2e="dashboard_OperationList"
+            >
+              {title}
+            </Text>
+          </Box>
         )}
         {groupedOperations.sections.map(group => (
-          <Box flow={2} key={group.day.toISOString()}>
+          <Box key={group.day.toISOString()}>
             <SectionTitle day={group.day} />
-            <Card p={0}>
+            <Box p={0}>
               {group.data.map(operation => {
                 const account = accountsMap[operation.accountId];
                 if (!account) {
@@ -162,7 +164,7 @@ export class OperationsList extends PureComponent<Props, State> {
                   />
                 );
               })}
-            </Card>
+            </Box>
           </Box>
         ))}
         {!groupedOperations.completed ? (
@@ -171,13 +173,13 @@ export class OperationsList extends PureComponent<Props, State> {
             <IconAngleDown size={12} />
           </ShowMore>
         ) : (
-          <Box p={6} alignItems="center">
+          <Box p={3} alignItems="center">
             <Text ff="Inter" fontSize={3}>
               {t("operationList.noMoreOperations")}
             </Text>
           </Box>
         )}
-      </Box>
+      </Card>
     );
   }
 }
