@@ -2229,7 +2229,7 @@
           "getStarted": "Commencer",
           "pinCode": "Code PIN",
           "recoveryPhrase": "Phrase de récupération",
-          "hideRecoveryPhrase": "Cachez votre phrase de récupération",
+          "hideRecoveryPhrase": "Cacher votre phrase",
           "pairNano": "Connecter le Nano"
         },
         "screens": {
@@ -2435,7 +2435,7 @@
             }
           },
           "hideRecoveryPhrase": {
-            "title": "Cachez votre phrase de récupération",
+            "title": "Cacher votre phrase de récupération",
             "paragraph": "Votre phrase de récupération est votre dernière chance d'accéder à vos cryptos si vous ne pouvez plus utiliser votre Nano. Vous devez la garder dans un endroit sûr.",
             "keepItOffline": "Saisissez ces mots uniquement sur un wallet physique, pas sur un ordinateur ni sur un téléphone.",
             "neverShowToAnyone": "Ne partagez jamais vos 24 mots, avec qui que ce soit. Même pas avec Ledger.",
