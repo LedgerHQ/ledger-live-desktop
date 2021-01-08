@@ -10,7 +10,7 @@ import Track from "~/renderer/analytics/Track";
 
 type Props = {|
   selected: string,
-  onChange: ({ key: string, value: *, label: React$Node }) => *,
+  onChange: ({ key: string, value: *, label: string }) => *,
   t: TFunction,
 |};
 

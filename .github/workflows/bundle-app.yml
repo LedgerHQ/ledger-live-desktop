@@ -1,8 +1,9 @@
 name: bundle app
 on:
-  pull_request_target:
+  pull_request:
     branches:
-      - "*"
+      - develop
+      - master
   push:
     branches:
       - develop
@@ -10,7 +11,7 @@ on:
 
 jobs:
   cancel-previous:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.6.0
@@ -48,20 +49,23 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
-      - uses: ledgerhq/actions/get-package-infos@v1.0.0
+      - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: set beta name
         uses: ./.github/actions/change-product-name
-      - name: Get short SHA
-        id: slug
-        run: echo "::set-output name=sha8::${GITHUB_SHA:0:7}"
-      - name: make local version
+      - name: make local version pr
+        if: github.event_name == 'pull_request'
         env:
-          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
+          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.event.pull_request.head.sha }}
+        run: yarn version --new-version="$VERSION"
+      - name: make local version push
+        if: github.event_name == 'push'
+        env:
+          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
         run: yarn version --new-version="$VERSION"
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.0.0
+      - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: post-version
       - name: upload macOS app
         uses: actions/upload-artifact@v1
@@ -70,16 +74,18 @@ jobs:
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
 
   bundle-linux:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     needs: cancel-previous
     steps:
-      - uses: ledgerhq/actions/check-member@v1.0.0
+      - uses: ledgerhq/actions/check-member@v2.0.0
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
         if: github.event_name == 'pull_request'
       - uses: actions/checkout@v2
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
           persist-credentials: false
       - uses: actions/setup-node@main
         with:
@@ -101,20 +107,23 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
-      - uses: ledgerhq/actions/get-package-infos@v1.0.0
+      - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: set beta name
         uses: ./.github/actions/change-product-name
-      - name: Get short SHA
-        id: slug
-        run: echo "::set-output name=sha8::${GITHUB_SHA:0:7}"
-      - name: make local version
+      - name: make local version pr
+        if: github.event_name == 'pull_request'
         env:
-          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
+          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.event.pull_request.head.sha }}
+        run: yarn version --new-version="$VERSION"
+      - name: make local version push
+        if: github.event_name == 'push'
+        env:
+          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
         run: yarn version --new-version="$VERSION"
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v1.0.0
+      - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: post-version
       - name: upload linux app
         uses: actions/upload-artifact@v1
@@ -133,6 +142,8 @@ jobs:
         if: github.event_name == 'pull_request'
       - uses: actions/checkout@v2
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
           persist-credentials: false
       - uses: actions/setup-node@main
         with:
@@ -159,19 +170,18 @@ jobs:
         id: version
       - name: set beta name
         uses: ./.github/actions/change-product-name
-      - name: Get short SHA
-        id: slug
-        run: echo "::set-output name=sha8::$(git rev-parse --short HEAD)"
-      - name: make local version
-        env:
-          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
-        run: yarn version --new-version="$VERSION"
+      - name: make local version pr
+        id: postversion1
+        if: github.event_name == 'pull_request'
+        run: echo "::set-output name=content::${{ steps.version.outputs.clean }}-sha.${{ github.event.pull_request.head.sha }}"
+      - name: make local version push
+        id: postversion2
+        if: github.event_name == 'push'
+        run: echo "::set-output name=content::${{ steps.version.outputs.clean }}-sha.${{ github.sha }}"
       - name: build the app
         run: yarn nightly
-      - uses: ledgerhq/actions/get-package-infos@v2.0.0
-        id: post-version
       - name: upload windows
         uses: actions/upload-artifact@v1
         with:
-          name: ${{ steps.post-version.outputs.version }}-win.exe
-          path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-win.exe
+          name: ${{ steps.postversion1.outputs.content }}${{ steps.postversion2.outputs.content }}-win.exe
+          path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-win.exe
