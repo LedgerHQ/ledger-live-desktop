@@ -176,11 +176,13 @@ jobs:
       - name: make local version push
         if: github.event_name == 'push'
         run: echo ${{ steps.version.outputs.clean }}-sha.${{ github.sha }} > version.txt
+      - name: clean version
+        run: findstr "." version.txt > versionclean.txt
       - name: build the app
         run: yarn nightly
       - uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
-          path: ./version.txt
+          path: ./versionclean.txt
         id: post-version
       - name: upload windows
         uses: actions/upload-artifact@v1
