@@ -16,7 +16,7 @@ import Button from "~/renderer/components/Button";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import InfoBox from "~/renderer/components/InfoBox";
 import Text from "~/renderer/components/Text";
-import ClaimRewardsIllu from "~/renderer/images/claim-rewards.svg";
+import ClaimRewardsIllu from "~/renderer/images/rewards.svg";
 import Image from "~/renderer/components/Image";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 

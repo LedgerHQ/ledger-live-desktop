@@ -17,6 +17,10 @@ const Tab = styled(Base)`
     background: none;
     color: ${p => p.theme.colors.palette.text.shade100};
   }
+
+  > * {
+    font-size: ${p => p.fontSize}px;
+  }
 `;
 
 const TabIndicator = styled.span.attrs(({ currentRef = {}, index, short }) => ({
@@ -33,7 +37,7 @@ const TabIndicator = styled.span.attrs(({ currentRef = {}, index, short }) => ({
   transition: all 0.3s ease-in-out;
 `;
 
-const Tabs: ThemedComponent<{ short: boolean }> = styled.div`
+const Tabs: ThemedComponent<{ short: boolean, separator: boolean }> = styled.div`
   height: ${p => p.theme.sizes.topBarHeight}px;
   display: flex;
   flex-direction: row;
@@ -43,22 +47,47 @@ const Tabs: ThemedComponent<{ short: boolean }> = styled.div`
   ${Tab}:first-child {
     ${p => (p.short ? "padding-left: 0;" : "")}
   }
+
+  ${p =>
+    p.separator
+      ? `
+    &:after {
+    background: ${p.theme.colors.palette.divider};
+    content: "";
+    display: block;
+    height: 1px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  `
+      : ""}
 `;
 
 type Props = {
   tabs: string[],
+  ids?: string[],
   onIndexChange: number => void,
   defaultIndex?: number,
   index?: number,
   short?: boolean,
+  separator?: boolean,
+  withId?: boolean,
+  fontSize?: number,
 };
 
 const TabBar = ({
   tabs,
+  ids,
   onIndexChange,
   defaultIndex = 0,
   short = false,
   index: propsIndex,
+  separator = false,
+  withId = false,
+  fontSize = 16,
 }: Props) => {
   const tabRefs = useRef([]);
   const [index, setIndex] = useState(defaultIndex);
@@ -83,7 +112,7 @@ const TabBar = ({
   };
 
   return (
-    <Tabs short={short}>
+    <Tabs short={short} separator={separator}>
       {tabs.map((tab, j) => (
         <Tab
           ref={setTabRef(j)}
@@ -91,6 +120,8 @@ const TabBar = ({
           active={j === i}
           tabIndex={j}
           onClick={() => updateIndex(j)}
+          id={withId && ids?.length ? `settings-${ids[j]}-tab` : ""}
+          fontSize={fontSize}
         >
           <Text ff="Inter|SemiBold" fontSize={5}>
             <Trans i18nKey={tab} />
