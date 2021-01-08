@@ -13,6 +13,7 @@ import { render } from "react-dom";
 import moment from "moment";
 import _ from "lodash";
 import { reload, getKey, loadLSS } from "~/renderer/storage";
+import { hardReset } from "~/renderer/reset";
 
 import "~/renderer/styles/global";
 import "~/renderer/live-common-setup";
@@ -74,6 +75,10 @@ async function init() {
     if (document.body) {
       document.body.className += " spectron-run";
     }
+  }
+
+  if (window.localStorage.getItem("hard-reset")) {
+    await hardReset();
   }
 
   const store = createStore({ dbMiddleware });

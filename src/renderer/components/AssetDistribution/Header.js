@@ -5,12 +5,15 @@ import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 import { Trans } from "react-i18next";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { rgba } from "~/renderer/styles/helpers";
 
 const Wrapper: ThemedComponent<{}> = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 16px 20px;
+  padding: 10px 20px;
   border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
+  border-top: 1px solid ${p => p.theme.colors.palette.divider};
+  background-color: ${p => rgba(p.theme.colors.palette.secondary.main, 0.02)};
   > * {
     width: 20%;
     display: flex;
@@ -29,18 +32,18 @@ const Wrapper: ThemedComponent<{}> = styled.div`
 
 const Header = () => (
   <Wrapper>
-    <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
+    <Text ff="Inter|SemiBold" color="palette.text.shade50" fontSize={3}>
       <Trans i18nKey={"distribution.asset"} />
     </Text>
-    <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
+    <Text ff="Inter|SemiBold" color="palette.text.shade50" fontSize={3}>
       <Trans i18nKey={"distribution.price"} />
     </Text>
-    <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
+    <Text ff="Inter|SemiBold" color="palette.text.shade50" fontSize={3}>
       <Trans i18nKey={"distribution.distribution"} />
     </Text>
     <Text
       ff="Inter|SemiBold"
-      color="palette.text.shade60"
+      color="palette.text.shade50"
       style={{ justifyContent: "flex-end" }}
       fontSize={3}
     >
@@ -48,7 +51,7 @@ const Header = () => (
     </Text>
     <Text
       ff="Inter|SemiBold"
-      color="palette.text.shade60"
+      color="palette.text.shade50"
       style={{ justifyContent: "flex-end" }}
       fontSize={3}
     >
