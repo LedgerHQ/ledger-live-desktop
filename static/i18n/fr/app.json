@@ -373,7 +373,7 @@
             },
             "scanning": {
               "header": "Analyse du compte en cours...",
-              "description": "You can add your accounts once the account scan is completed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
+              "description": "Vous pouvez ajouter vos comptes une fois l'analyse du compte effectuée. Tous les comptes Bitcoin précédemment ajoutés par les explorers de Ledger ont été supprimés."
             }
           }
         },
@@ -499,8 +499,8 @@
         "cta": "Dépôt"
       },
       "opened": {
-        "title": "Your opened loans will appear here",
-        "description": "You have not made any loans yet.",
+        "title": "Vos prêts clôturés apparaîtront ici",
+        "description": "Vous n’avez pas encore fait de prêts.",
         "cta": "Déposer"
       },
       "history": {
@@ -927,7 +927,7 @@
       "finish": "Confirmation"
     },
     "fullNodeReadyInfo": "Les comptes seront ajoutés en utilisant votre nœud Bitcoin.",
-    "fullNodeConfigure": "Configure node",
+    "fullNodeConfigure": "Configurer le noeud",
     "tokensTip": "{{token}} ({{ticker}}) est un token {{tokenType}} . Vous pouvez recevoir des tokens directement sur un compte {{currency}}.",
     "accountToImportSubtitle_plural": "Ajouter des comptes existants",
     "selectAll": "Sélectionner tout ({{count}})",
@@ -1985,7 +1985,7 @@
     },
     "hardResetModal": {
       "title": "Réinitialiser Ledger Live",
-      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your recovery phrase."
+      "desc": "Réinitialiser Ledger Live pour effacer tous les paramètres et les comptes de votre ordinateur. Vous pouvez ensuite choisir votre mot de passe et rajouter vos comptes avec votre Ledger. Les clés privées donnant accès à vos crypto-actifs restent sécurisées sur votre appareil Ledger et associées à votre phrase de récupération."
     },
     "softResetModal": {
       "title": "Vider le cache",
@@ -2115,35 +2115,35 @@
         "title": "Sécuriser votre code PIN",
         "intro": "Au cours du processus de paramétrage vous allez choisir un code PIN.",
         "rules": {
-          "1": "<0>Always</0> choose a PIN code yourself.",
-          "2": "<0>Always</0> enter your PIN code out of sight.",
+          "1": "<0>TOUJOURS</0> choisir un code PIN par vous-même.",
+          "2": "<0>TOUJOURS</0> entrer un code PIN à l'abri des regards indiscrets.",
           "3": "Vous pouvez modifier votre code PIN ultérieurement si nécessaire.",
           "4": "Trois entrées erronées du code PIN à la suite réinitialisent l'appareil.",
-          "5": "<0>Never</0> use an easy PIN code like 0000, 123456, or 55555555.",
-          "6": "<0>Never</0> share your PIN code with someone else. Not even with Ledger.",
-          "7": "<0>Never</0> use a PIN code you did not choose yourself.",
-          "8": "<0>Never</0> store your PIN code on a computer or phone."
+          "5": "<0>NE JAMAIS</0> utiliser un code PIN simple comme 0000, 123456 ou 555555.",
+          "6": "<0>NE JAMAIS</0> partager votre code PIN avec quelqu'un d'autre. Même pas à avec Ledger.",
+          "7": "<0>NE JAMAIS</0> utiliser un code PIN que vous n'avez pas choisi par vous-même.",
+          "8": "<0>NE JAMAIS</0> stocker votre code PIN sur un ordinateur ou téléphone."
         }
       },
       "recoverySeed": {
         "title1": "Comment fonctionne une phrase de récupération ?",
-        "paragraph1": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
-        "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
+        "paragraph1": "Votre phrase de récupération fonctionne comme une clé principale unique. Votre appareil Ledger l'utilise pour calculer les clés privées de chaque cryptoactif que vous possédez.",
+        "paragraph2": "Pour récupérer l'accès à vos crypto actifs, n'importe quel wallet peu calculer les mêmes clés privées à partir de votre phrase de récupération.",
         "link": "Plus de détails sur la phrase de récupération",
         "title2": "Qu’arrive-t-il si je perds l'accès à mon Nano ?",
         "paragraph3": "Pas d'inquiétude, suivez ces étapes :",
         "points": {
           "1": "Achetez un nouveau wallet physique.",
           "2": "Sélectionnez « Restaurez votre phrase de récupération dans un nouvel appareil » dans l'application Ledger",
-          "3": "Enter your recovery phrase on your new device to restore access to your crypto."
+          "3": "Entrez votre phrase de récupération sur votre nouvel appareil pour récupérer l'accès à vos crypto actifs."
         }
       },
       "whereToHide": {
         "title": "Où dois-je garder ma phrase de récupération ?",
         "points": {
-          "1": "<0>NEVER</0> enter it on a computer, smartphone or any other device. Don't take a picture of it.",
-          "2": "<0>NEVER</0> share your 24 words with anyone.",
-          "3": "<0>ALWAYS</0> store it in a secure place, out of sight.",
+          "1": "<0>NE JAMAIS</0> la saisir sur un ordinateur, smartphone ou un autre appareil. Ne la prenez pas en photo.",
+          "2": "<1>NE JAMAIS</1> partager vos 24 mots avec qui que ce soit.",
+          "3": "<1>TOUJOURS</1> la ranger dans un endroit sûr, à l'abri des regards indiscrets.",
           "4": "Ledger ne vous demandera jamais votre phrase de récupération.",
           "5": "Peu importe qui vous la demande, partez du principe que c'est une arnaque !"
         }
@@ -2313,7 +2313,7 @@
           },
           "quizSuccess": {
             "title": "Vous êtes déjà pro !",
-            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
+            "paragraph": "Vous êtes prêt à gérer vos crypto actifs en toute sécurité. Il ne reste plus qu'une petite étape !",
             "buttons": {
               "next": "Étape suivante",
               "prev": "Etape précédente",
@@ -2331,7 +2331,7 @@
           "pinCodeHowTo": {
             "setUp": {
               "title": "Choisissez un code PIN",
-              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <0></0> to confirm your PIN code. Select <1></1> to erase a digit."
+              "descr": "Appuyez sur le bouton gauche ou droit pour changer de chiffre. Appuyez sur les deux boutons pour valider un chiffre. Sélectionnez<0></0>pour confirmer votre code PIN. Sélectionnez<1></1>pour effacer un chiffre."
             },
             "confirm": {
               "title": "Confirmer le code PIN",
@@ -2347,7 +2347,7 @@
             "title": "Entrez la phrase de récupération",
             "paragraph1": "Votre phrase de récupération est une liste secrète de mots que vous avez mise en lieu sûr après avoir paramétré votre wallet pour la première fois.",
             "paragraph2": "Ledger ne conserve pas de copie de votre phrase de récupération.",
-            "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+            "disclaimer": "Je comprends que si je perdais cette phrase de récupération, je ne serai pas en mesure d'accéder à mes crypto actifs au cas où je ne pourrais plus accéder à mon Nano.",
             "buttons": {
               "next": "Saisissez la phrase de récupération",
               "prev": "Etape précédente",
@@ -2373,7 +2373,7 @@
             "title": "Phrase de récupération",
             "paragraph1": "Votre phrase de récupération est une liste secrète de 24 mots qui sauvegarde vos clés privées.",
             "paragraph2": "Votre Nano génère une phrase de récupération unique. Ledger ne conserve pas de copie de celle-ci.",
-            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+            "disclaimer": "Je comprends que si je perdais cette phrase de récupération, je ne serai pas en mesure d'accéder à mes crypto actifs au cas où je ne pourrais plus accéder à mon Nano.",
             "buttons": {
               "next": "Phrase de récupération",
               "prev": "Etape précédente",
@@ -2465,7 +2465,7 @@
           },
           "quizzFail": {
             "title": "Vous allez bientôt devenir un(e) pro",
-            "paragraph1": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.",
+            "paragraph1": "Pas d'inquiétude, Ledger est là pour vous guider. Vous allez bientôt vous sentir plus à l'aise en ce qui concerne la sécurité de vos crypto actifs.",
             "paragraph2": "Plus qu'une petite étape !",
             "buttons": {
               "next": "Étape suivante",
@@ -2489,7 +2489,7 @@
       "heading": "les bases",
       "screens": {
         "accessYourCoins": {
-          "title": "Access your crypto",
+          "title": "Accédez à vos crypto actifs",
           "description": "Vos cryptos sont stockés sur la blockchain. Vous avez besoin d'une clé privée pour y accéder et les gérer."
         },
         "ownYourPrivateKey": {
@@ -2530,7 +2530,7 @@
           "results": {
             "success": {
               "title": "Bravo !",
-              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+              "text": "Vos crypto actifs sont toujours stockés sur la blockchain. Votre wallet Nano ne détient que votre clé privée, qui vous donne accès à vos crypto actifs."
             },
             "fail": {
               "title": "Incorrect !",
@@ -2609,8 +2609,8 @@
   "Terms": {
     "title": "Conditions d’utilisation",
     "read": "Lire nos Conditions d'utilisation",
-    "switchLabel": "I have read and agree with the <0>Terms of Use and Privacy Policy</0>",
-    "switchLabelLoss": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to Nano.",
+    "switchLabel": "J'ai lu et accepté <0>les conditions d'utilisation et la politique de confidentialité</0>",
+    "switchLabelLoss": "Je comprends que si je perdais cette phrase de récupération, je ne serai pas en mesure d'accéder à mes crypto actfis au cas où je ne pourrais plus accéder à mon Nano.",
     "cta": "Entrer dans l'application Ledger"
   },
   "families": {
@@ -2900,11 +2900,11 @@
     },
     "SatStackVersionTooOld": {
       "title": "Veuillez mettre à jour SatStack",
-      "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+      "description": "La version de SatStack que vous utilisez est trop ancienne et peut contenir des bugs ou des incompatibilités."
     },
     "SatStackDescriptorNotImported": {
       "title": "Compte non scanné par le nœud",
-      "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
+      "description": "Veuillez configurer votre nœud pour scanner les comptes associés à cet appareil. Votre nœud doit d'abord scanner la blockchain avant de pouvoir ajouter le compte à votre portfolio."
     },
     "SwapGenericAPIError": {
       "title": "Le taux de change a expiré",
