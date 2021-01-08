@@ -190,4 +190,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: ${{ steps.post-version.outputs.content }}-win.exe
-          path: dist/${{ steps.version.outputs.name }}-${{ steps.post-version.outputs.content }}-win.exe
+          path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-win.exe
