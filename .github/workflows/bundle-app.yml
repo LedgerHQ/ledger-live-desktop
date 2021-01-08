@@ -171,11 +171,11 @@ jobs:
       - name: set beta name
         uses: ./.github/actions/change-product-name
       - name: make local version pr
-        id: postversion
+        id: postversion1
         if: github.event_name == 'pull_request'
         run: echo "::set-output name=content::${{ steps.version.outputs.clean }}-sha.${{ github.event.pull_request.head.sha }}"
       - name: make local version push
-        id: postversion
+        id: postversion2
         if: github.event_name == 'push'
         run: echo "::set-output name=content::${{ steps.version.outputs.clean }}-sha.${{ github.sha }}"
       - name: build the app
@@ -183,5 +183,5 @@ jobs:
       - name: upload windows
         uses: actions/upload-artifact@v1
         with:
-          name: ${{ steps.postversion.outputs.content }}-win.exe
+          name: ${{ steps.postversion1.outputs.content }}${{ steps.postversion2.outputs.content }}-win.exe
           path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-win.exe
