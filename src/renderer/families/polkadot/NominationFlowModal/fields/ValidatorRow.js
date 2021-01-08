@@ -140,8 +140,6 @@ const Row: ThemedComponent<{ active: boolean, disabled: boolean }> = styled(Box)
 type ValidatorRowProps = {
   validator: PolkadotValidator,
   unit: Unit,
-  icon: React$Node,
-  title: React$Node,
   isSelected: boolean,
   disabled?: boolean,
   maxNominatorRewardedPerValidator: number,
@@ -154,8 +152,6 @@ type ValidatorRowProps = {
 const ValidatorRow = ({
   validator,
   unit,
-  icon,
-  title,
   isSelected,
   disabled,
   maxNominatorRewardedPerValidator,

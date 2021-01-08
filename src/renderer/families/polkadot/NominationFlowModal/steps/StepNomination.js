@@ -20,6 +20,8 @@ export default function StepNomination({
   status,
   bridgePending,
   error,
+  openModal,
+  onClose,
   t,
 }: StepProps) {
   invariant(account && transaction && transaction.validators, "account and transaction required");
@@ -30,6 +32,15 @@ export default function StepNomination({
   invariant(polkadotResources, "polkadotResources required");
 
   const nominations = polkadotResources.nominations || [];
+
+  const onGoToChill = useCallback(() => {
+    onClose();
+
+    openModal("MODAL_POLKADOT_SIMPLE_OPERATION", {
+      account,
+      mode: "chill",
+    });
+  }, [onClose, openModal, account]);
 
   const updateNomination = useCallback(
     updater => {
@@ -54,6 +65,7 @@ export default function StepNomination({
         onChangeNominations={updateNomination}
         status={status}
         t={t}
+        onGoToChill={onGoToChill}
       />
     </Box>
   );

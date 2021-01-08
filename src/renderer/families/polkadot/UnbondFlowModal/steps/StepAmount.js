@@ -14,6 +14,7 @@ import Button from "~/renderer/components/Button";
 import AmountField from "../fields/AmountField";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import Text from "~/renderer/components/Text";
+import ErrorBanner from "~/renderer/components/ErrorBanner";
 
 export default function StepAmount({
   account,
@@ -21,6 +22,7 @@ export default function StepAmount({
   onChangeTransaction,
   transaction,
   status,
+  error,
   bridgePending,
   t,
 }: StepProps) {
@@ -30,6 +32,7 @@ export default function StepAmount({
     <Box flow={1}>
       <SyncSkipUnderPriority priority={100} />
       <TrackPage category="Unbond Flow" name="Step 1" />
+      {error && <ErrorBanner error={error} />}
       <AmountField
         transaction={transaction}
         account={account}

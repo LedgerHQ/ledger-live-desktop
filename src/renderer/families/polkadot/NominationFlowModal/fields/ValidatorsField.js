@@ -19,6 +19,7 @@ import type {
   PolkadotNomination,
   PolkadotValidator,
 } from "@ledgerhq/live-common/lib/families/polkadot/types";
+import { PolkadotValidatorsRequired } from "@ledgerhq/live-common/lib/families/polkadot/errors";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { radii } from "~/renderer/styles/theme";
@@ -29,6 +30,9 @@ import ScrollLoadingList from "~/renderer/components/ScrollLoadingList";
 import ValidatorSearchInput, {
   NoResultPlaceholder,
 } from "~/renderer/components/Delegation/ValidatorSearchInput";
+import Ellipsis from "~/renderer/components/Ellipsis";
+import TranslatedError from "~/renderer/components/TranslatedError";
+import Label from "~/renderer/components/Label";
 
 // Specific Validator Row
 import ValidatorRow from "./ValidatorRow";
@@ -47,6 +51,55 @@ const NominationsWarning: ThemedComponent<{}> = styled(Box).attrs(p => ({
   border-radius: ${radii[1]}px;
 `;
 
+const DrawerWrapper: ThemedComponent<{}> = styled(Box).attrs(p => ({
+  horizontal: true,
+  alignItems: "center",
+  px: 3,
+}))`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+`;
+
+const NominationError: ThemedComponent<{}> = styled(Box).attrs(p => ({
+  flex: 1,
+  horizontal: true,
+  alignItems: "center",
+  py: "8px",
+  px: 3,
+  fontSize: 4,
+  bg: "palette.background.default",
+  ff: "Inter|SemiBold",
+  color: p.isError ? p.theme.colors.pearl : p.theme.colors.orange,
+}))`
+  border-style: solid;
+  border-width: 1px 1px 0 1px;
+  border-color: ${p => p.theme.colors.palette.divider};
+  border-top-left-radius: ${radii[1]}px;
+  border-top-right-radius: ${radii[1]}px;
+`;
+
+const MaybeChillLink: ThemedComponent<{}> = styled(Label).attrs(p => ({
+  ff: "Inter|Medium",
+}))`
+  display: inline-flex;
+  margin-left: auto;
+  color: ${p => p.theme.colors.wallet};
+  &:hover {
+    opacity: 0.9;
+    cursor: pointer;
+  }
+`;
+
+// returns the first error
+function getStatusError(status, type = "errors"): ?Error {
+  if (!status || !status[type]) return null;
+  const firstKey = Object.keys(status[type])[0];
+
+  return firstKey ? status[type][firstKey] : null;
+}
+
 type Props = {
   t: TFunction,
   validators: PolkadotNominationInfo[],
@@ -55,6 +108,7 @@ type Props = {
   status: TransactionStatus,
   onChangeNominations: (updater: (PolkadotNominationInfo[]) => PolkadotNominationInfo[]) => void,
   bridgePending: boolean,
+  onGoToChill: Function,
 };
 
 const ValidatorField = ({
@@ -65,6 +119,7 @@ const ValidatorField = ({
   bridgePending,
   validators,
   nominations,
+  onGoToChill,
 }: Props) => {
   invariant(account, "polkadot account required");
 
@@ -76,7 +131,7 @@ const ValidatorField = ({
 
   const { staking, validators: polkadotValidators } = usePolkadotPreloadData();
   const SR = useSortedValidators(search, polkadotValidators, nominations);
-  const { maxNominatorRewardedPerValidator } = staking;
+  const { maxNominatorRewardedPerValidator } = staking ?? {};
 
   // Addresses that are no longer validators
   const nonValidators = nominations
@@ -144,6 +199,12 @@ const ValidatorField = ({
   );
 
   if (!status) return null;
+
+  const error = getStatusError(status, "errors");
+  const warning = getStatusError(status, "warnings");
+  const maybeChill = error instanceof PolkadotValidatorsRequired;
+  const ignoreError = error instanceof PolkadotValidatorsRequired && !nominations.length; // Do not show error on first nominate
+
   return (
     <>
       {nonValidators.length ? (
@@ -172,6 +233,20 @@ const ValidatorField = ({
           renderItem={renderItem}
           noResultPlaceholder={SR.length <= 0 && search && <NoResultPlaceholder search={search} />}
         />
+        {!ignoreError && (error || warning) && (
+          <DrawerWrapper>
+            <NominationError isError={!!error} isWarning={!!warning}>
+              <Ellipsis>
+                <TranslatedError error={error || warning} />
+              </Ellipsis>
+              {maybeChill && (
+                <MaybeChillLink onClick={onGoToChill}>
+                  <Trans i18nKey="polkadot.nominate.steps.validators.maybeChill" />
+                </MaybeChillLink>
+              )}
+            </NominationError>
+          </DrawerWrapper>
+        )}
       </Box>
     </>
   );

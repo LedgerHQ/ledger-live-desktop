@@ -1885,7 +1885,8 @@
       "steps": {
         "validators": {
           "title": "Validateurs",
-          "notValidatorsRemoved": "Vous avez {{count}} adresses nominées qui ne sont plus des validateurs. Elles seront automatiquement supprimées de votre transaction de nomination."
+          "notValidatorsRemoved": "Vous avez {{count}} adresses nominées qui ne sont plus des validateurs. Elles seront automatiquement supprimées de votre transaction de nomination.",
+          "maybeChill": "Ne plus nominer plutôt"
         },
         "connectDevice": {
           "title": "Appareil"

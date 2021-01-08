@@ -74,6 +74,14 @@ const steps: Array<St> = [
   },
 ];
 
+// returns the first error
+function getStatusError(status, type = "errors"): ?Error {
+  if (!status || !status[type]) return null;
+  const firstKey = Object.keys(status[type])[0];
+
+  return firstKey ? status[type][firstKey] : null;
+}
+
 const mapStateToProps = createStructuredSelector({
   device: getCurrentDevice,
 });
@@ -156,8 +164,8 @@ const Body = ({
     [account, dispatch],
   );
 
-  const error = transactionError || bridgeError || status.errors.amount;
-  const warning = status.warnings ? Object.values(status.warnings)[0] : null;
+  const error = transactionError || bridgeError || getStatusError(status, "errors");
+  const warning = getStatusError(status, "warnings");
 
   const errorSteps = [];
 
