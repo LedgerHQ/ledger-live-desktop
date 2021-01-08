@@ -172,14 +172,10 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: make local version pr
         if: github.event_name == 'pull_request'
-        env:
-          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.event.pull_request.head.sha }}
-        run: echo %VERSION% > version.txt
+        run: echo ${{ steps.version.outputs.clean }}-sha.${{ github.event.pull_request.head.sha }} > version.txt
       - name: make local version push
         if: github.event_name == 'push'
-        env:
-          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
-        run: echo %VERSION% > version.txt
+        run: echo ${{ steps.version.outputs.clean }}-sha.${{ github.sha }} > version.txt
       - name: build the app
         run: yarn nightly
       - uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
