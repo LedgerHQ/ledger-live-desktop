@@ -32,7 +32,7 @@ jobs:
           name: ${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-macos.dmg
           path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-mac.dmg
   nightly-linux:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.4.0
