@@ -458,6 +458,7 @@
     "description": "Deposit your crypto on the Compound protocol to start earning interest.",
     "tabs": {
       "dashboard": "Dashboard",
+      "opened": "Opened loans",
       "closed": "Closed loans",
       "history": "History"
     },
@@ -497,6 +498,11 @@
         "description": "You have not made any loans yet.",
         "cta": "Deposit"
       },
+      "opened": {
+        "title": "Your opened loans will appear here",
+        "description": "You have not made any loans yet.",
+        "cta": "Deposit"
+      },
       "history": {
         "title": "History",
         "description": "View the history of all your loan transactions.",
@@ -522,6 +528,12 @@
         "assetLended": "Asset",
         "amountRedeemed": "Withdrawal amount",
         "interestsEarned": "Interest earned",
+        "date": "Date"
+      },
+      "opened": {
+        "assetLended": "Asset",
+        "amount": "Amount",
+        "accruedInterest": "Accrued interest",
         "date": "Date"
       },
       "rates": {
@@ -1019,7 +1031,11 @@
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
-      "confirm": "Confirm Swap transaction"
+      "confirm": "Confirm Swap transaction",
+      "amountSent": "Amount sent",
+      "amountReceived": "Amount received",
+      "fees": "Fees",
+      "provider": "Provider"
     },
     "sell": {
       "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
@@ -2099,14 +2115,14 @@
         "title": "Secure your PIN code",
         "intro": "During the setup process you choose a PIN code.",
         "rules": {
-          "1": "Always choose a PIN code yourself.",
-          "2": "Always enter your PIN code out of sight.",
+          "1": "<0>Always</0> choose a PIN code yourself.",
+          "2": "<0>Always</0> enter your PIN code out of sight.",
           "3": "You can change your PIN code if needed.",
           "4": "Three wrong PIN code entries in a row will reset the device.",
-          "5": "Never use an easy PIN code like 0000, 123456, or 55555555.",
-          "6": "Never share your PIN code with someone else. Not even with Ledger.",
-          "7": "Never use a PIN code you did not choose yourself.",
-          "8": "Never store your PIN code on a computer or phone."
+          "5": "<0>Never</0> use an easy PIN code like 0000, 123456, or 55555555.",
+          "6": "<0>Never</0> share your PIN code with someone else. Not even with Ledger.",
+          "7": "<0>Never</0> use a PIN code you did not choose yourself.",
+          "8": "<0>Never</0> store your PIN code on a computer or phone."
         }
       },
       "recoverySeed": {
@@ -2125,9 +2141,9 @@
       "whereToHide": {
         "title": "Where should I keep my recovery phrase?",
         "points": {
-          "1": "NEVER enter it on a computer, smartphone or any other device. Don't take a picture of it.",
-          "2": "NEVER share your 24 words with anyone.",
-          "3": "ALWAYS store it in a secure place, out of sight.",
+          "1": "<0>NEVER</0> enter it on a computer, smartphone or any other device. Don't take a picture of it.",
+          "2": "<0>NEVER</0> share your 24 words with anyone.",
+          "3": "<0>ALWAYS</0> store it in a secure place, out of sight.",
           "4": "Ledger will never ask for your recovery phrase.",
           "5": "If any person or application asks for it, assume it is a scam!"
         }
@@ -2284,7 +2300,8 @@
               "prev": "Previous step",
               "help": "Need help"
             }
-          },          "pinCode": {
+          },
+          "pinCode": {
             "title": "PIN code",
             "paragraph": "Your PIN code is the first layer of security. It physically secures access to your private key and your Nano. Your PIN code must be 4 to 8 digits long.",
             "disclaimer": "I understand that I must choose my PIN code myself and keep it private.",
@@ -2314,7 +2331,7 @@
           "pinCodeHowTo": {
             "setUp": {
               "title": "Choose PIN code",
-              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select ✔ to confirm your PIN code. Select ⌫ to erase a digit."
+              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <0></0> to confirm your PIN code. Select <1></1> to erase a digit."
             },
             "confirm": {
               "title": "Confirm PIN code",

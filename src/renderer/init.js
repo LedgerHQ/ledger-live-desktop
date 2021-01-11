@@ -13,6 +13,7 @@ import { render } from "react-dom";
 import moment from "moment";
 import _ from "lodash";
 import { reload, getKey, loadLSS } from "~/renderer/storage";
+import { hardReset } from "~/renderer/reset";
 
 import "~/renderer/styles/global";
 import "~/renderer/live-common-setup";
@@ -76,6 +77,10 @@ async function init() {
     }
   }
 
+  if (window.localStorage.getItem("hard-reset")) {
+    await hardReset();
+  }
+
   const store = createStore({ dbMiddleware });
 
   ipcRenderer.once("deep-linking", (event, url) => {
@@ -108,8 +113,9 @@ async function init() {
   } else {
     store.dispatch(lock());
   }
+  const initialCountervalues = await getKey("app", "countervalues");
 
-  r(<ReactRoot store={store} language={language} />);
+  r(<ReactRoot store={store} language={language} initialCountervalues={initialCountervalues} />);
 
   if (isMainWindow) {
     webFrame.setVisualZoomLevelLimits(1, 1);

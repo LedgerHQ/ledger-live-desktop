@@ -74,6 +74,8 @@ describe("Swap", () => {
     const toCurrencyFirstOption = await $(".select-options-list .option:first-child");
     await toCurrencyFirstOption.click();
     await app.client.pause(2000);
+    const continueButton = await $("#swap-form-continue-button");
+    await continueButton.waitForEnabled();
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-rates",

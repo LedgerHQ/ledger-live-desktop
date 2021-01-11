@@ -1,7 +1,7 @@
 // @flow
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
 import IconCross from "~/renderer/icons/Cross";
@@ -44,7 +44,7 @@ const ruleTypes = {
 
 type RuleProps = {
   type: "success" | "error",
-  children: string,
+  children: React$Node,
 };
 
 function Rule({ type, children }: RuleProps) {
@@ -90,14 +90,38 @@ export function PinHelp() {
         <Text mt="8px" mb="32px" color="palette.text.shade100" ff="Inter|Regular" fontSize={14}>
           {t("onboarding.drawers.pinHelp.intro")}
         </Text>
-        <Rule type="success">{t("onboarding.drawers.pinHelp.rules.1")}</Rule>
-        <Rule type="success">{t("onboarding.drawers.pinHelp.rules.2")}</Rule>
+        <Rule type="success">
+          <Trans i18nKey="onboarding.drawers.pinHelp.rules.1">
+            <Text ff="Inter|Bold" />
+          </Trans>
+        </Rule>
+        <Rule type="success">
+          <Trans i18nKey="onboarding.drawers.pinHelp.rules.2">
+            <Text ff="Inter|Bold" />
+          </Trans>
+        </Rule>
         <Rule type="success">{t("onboarding.drawers.pinHelp.rules.3")}</Rule>
         <Rule type="success">{t("onboarding.drawers.pinHelp.rules.4")}</Rule>
-        <Rule type="success">{t("onboarding.drawers.pinHelp.rules.5")}</Rule>
-        <Rule type="error">{t("onboarding.drawers.pinHelp.rules.6")}</Rule>
-        <Rule type="error">{t("onboarding.drawers.pinHelp.rules.7")}</Rule>
-        <Rule type="error">{t("onboarding.drawers.pinHelp.rules.8")}</Rule>
+        <Rule type="error">
+          <Trans i18nKey="onboarding.drawers.pinHelp.rules.5">
+            <Text ff="Inter|Bold" />
+          </Trans>
+        </Rule>
+        <Rule type="error">
+          <Trans i18nKey="onboarding.drawers.pinHelp.rules.6">
+            <Text ff="Inter|Bold" />
+          </Trans>
+        </Rule>
+        <Rule type="error">
+          <Trans i18nKey="onboarding.drawers.pinHelp.rules.7">
+            <Text ff="Inter|Bold" />
+          </Trans>
+        </Rule>
+        <Rule type="error">
+          <Trans i18nKey="onboarding.drawers.pinHelp.rules.8">
+            <Text ff="Inter|Bold" />
+          </Trans>
+        </Rule>
       </PinHelpContainer>
     </ScrollArea>
   );

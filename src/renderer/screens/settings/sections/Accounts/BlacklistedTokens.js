@@ -1,9 +1,5 @@
 // @flow
-import {
-  SettingsSection as Section,
-  SettingsSectionHeader as Header,
-} from "~/renderer/screens/settings/SettingsSection";
-import IconBan from "~/renderer/icons/Ban";
+import { SettingsSection as Section, SettingsSectionRow as Row } from "../../SettingsSection";
 import Text from "~/renderer/components/Text";
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -61,25 +57,23 @@ export default function BlacklistedTokens() {
   return (
     <Section style={{ flowDirection: "column" }}>
       <Track onUpdate event="BlacklistedTokens dropdown" opened={sectionVisible} />
-      <Header
-        icon={<IconBan />}
+      <Row
         title={t("settings.accounts.tokenBlacklist.title")}
         desc={t("settings.accounts.tokenBlacklist.desc")}
-        renderRight={
-          blacklistedTokenIds.length ? (
-            <Box horizontal flex alignItems="center">
-              <Box ff="Inter" fontSize={3} mr={2}>
-                {t("settings.accounts.tokenBlacklist.count", { count: blacklistedTokenIds.length })}
-              </Box>
-              <Show visible={sectionVisible}>
-                <IconAngleDown size={24} />
-              </Show>
-            </Box>
-          ) : null
-        }
         onClick={toggleCurrencySection}
         style={blacklistedTokenIds.length ? { cursor: "pointer" } : undefined}
-      />
+      >
+        {blacklistedTokenIds.length ? (
+          <Box horizontal flex alignItems="center">
+            <Box ff="Inter" fontSize={3} mr={2}>
+              {t("settings.accounts.tokenBlacklist.count", { count: blacklistedTokenIds.length })}
+            </Box>
+            <Show visible={sectionVisible}>
+              <IconAngleDown size={24} />
+            </Show>
+          </Box>
+        ) : null}
+      </Row>
 
       {sectionVisible && (
         <div>

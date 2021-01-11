@@ -8,7 +8,10 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import { Redirect } from "react-router";
 import { TopBannerContainer } from "~/renderer/screens/dashboard";
-import { useFlattenSortAccounts } from "~/renderer/actions/general";
+import {
+  useFlattenSortAccounts,
+  useRefreshAccountsOrderingEffect,
+} from "~/renderer/actions/general";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { accountsViewModeSelector, selectedTimeRangeSelector } from "~/renderer/reducers/settings";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -25,6 +28,8 @@ export default function AccountsPage() {
   const accounts = mode === "card" ? flattenedAccounts : rawAccounts;
 
   const history = useHistory();
+
+  useRefreshAccountsOrderingEffect({ onMount: true });
 
   const onAccountClick = useCallback(
     (account: Account | TokenAccount, parentAccount: ?Account) =>

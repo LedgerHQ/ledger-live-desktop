@@ -1,13 +1,20 @@
 // @flow
 import React, { useCallback } from "react";
+import map from "lodash/map";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import type {
+  TokenCurrency,
+  Transaction,
+  TransactionStatus,
+} from "@ledgerhq/live-common/lib/types";
+import type { ExchangeRate, Exchange } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { WrongDeviceForAccount } from "@ledgerhq/errors";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { closeAllModal } from "~/renderer/actions/modals";
 import Animation from "~/renderer/animations";
 import Button from "~/renderer/components/Button";
@@ -26,6 +33,7 @@ import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 import SupportLinkError from "~/renderer/components/SupportLinkError";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
+import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
 
 const AnimationWrapper: ThemedComponent<{ modelId: DeviceModelId }> = styled.div`
   width: 600px;
@@ -373,20 +381,67 @@ export const renderConnectYourDevice = ({
 export const renderSwapDeviceConfirmation = ({
   modelId,
   type,
+  transaction,
+  status,
+  exchangeRate,
+  exchange,
 }: {
   modelId: DeviceModelId,
   type: "light" | "dark",
+  transaction: Transaction,
+  status: TransactionStatus,
+  exchangeRate: ExchangeRate,
+  exchange: Exchange,
 }) => (
   <>
     <InfoBox onLearnMore={() => openURL(urls.swap.learnMore)} horizontal={false}>
       <Trans i18nKey="DeviceAction.swap.notice" />
     </InfoBox>
-    {renderVerifyUnwrapped({ modelId, type })}
-    <Box id="swap-modal-device-confirm" alignItems={"center"}>
+    <Box id="swap-modal-device-confirm" alignItems={"center"} mt={5} mb={5}>
       <Text textAlign="center" ff="Inter|SemiBold" color="palette.text.shade100" fontSize={5}>
         <Trans i18nKey="DeviceAction.swap.confirm" />
       </Text>
     </Box>
+    {map(
+      {
+        amountSent: (
+          <CurrencyUnitValue
+            unit={getAccountUnit(exchange.fromAccount)}
+            value={transaction.amount}
+            disableRounding
+            showCode
+          />
+        ),
+        amountReceived: (
+          <CurrencyUnitValue
+            unit={getAccountUnit(exchange.toAccount)}
+            value={transaction.amount.times(exchangeRate.magnitudeAwareRate)}
+            disableRounding
+            showCode
+          />
+        ),
+        fees: (
+          <CurrencyUnitValue
+            unit={getAccountUnit(exchange.fromAccount)}
+            value={status.estimatedFees}
+            disableRounding
+            showCode
+          />
+        ),
+        provider: exchangeRate.provider,
+      },
+      (value, key) => (
+        <Box horizontal justifyContent="space-between" key={key} mb={2} ml="12px" mr="12px">
+          <Text fontWeight="500" color="palette.text.shade40" fontSize={3}>
+            <Trans i18nKey={`DeviceAction.swap.${key}`} />
+          </Text>
+          <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
+            {value}
+          </Text>
+        </Box>
+      ),
+    )}
+    {renderVerifyUnwrapped({ modelId, type })}
   </>
 );
 
