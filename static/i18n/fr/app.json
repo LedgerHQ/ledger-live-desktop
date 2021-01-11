@@ -1851,7 +1851,7 @@
       "header": "Actifs en cours de débloquage",
       "headerTooltip": "Disponibles après le verrouillage de 28 jours",
       "inactiveTooltip": "Les montants déliés ne génèrent pas de récompenses.",
-      "withdrawUnbonded": "Retirer actifs déliés",
+      "withdrawUnbonded": "Retirer actifs déliés ({{amount}})",
       "withdrawTooltip": "Récupére l'intégralité des actifs déliés",
       "noUnlockedWarning": "Aucun actif délié à récupérer pour l'instant.",
       "rebond": "Lier à nouveau",

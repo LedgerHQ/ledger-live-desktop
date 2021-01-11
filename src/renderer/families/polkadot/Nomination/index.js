@@ -1,12 +1,14 @@
 // @flow
 import React, { useCallback, useMemo } from "react";
 import invariant from "invariant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import moment from "moment";
 
 import type { Account } from "@ledgerhq/live-common/lib/types";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import {
   hasExternalController,
   hasExternalStash,
@@ -16,6 +18,8 @@ import {
 import { usePolkadotPreloadData } from "@ledgerhq/live-common/lib/families/polkadot/react";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 
+import { localeSelector } from "~/renderer/reducers/settings";
+import { useDiscreetMode } from "~/renderer/components/Discreet";
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
 import { openModal } from "~/renderer/actions/modals";
@@ -28,8 +32,8 @@ import ToolTip from "~/renderer/components/Tooltip";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 
 import NominateIcon from "~/renderer/icons/Vote";
-import Rebond from "~/renderer/icons/Redelegate";
-import WithdrawUnbondedIcon from "~/renderer/icons/Exchange";
+import RebondIcon from "~/renderer/icons/LinkIcon";
+import WithdrawUnbondedIcon from "~/renderer/icons/Coins";
 import ChartLineIcon from "~/renderer/icons/ChartLine";
 
 import ElectionStatusWarning from "../ElectionStatusWarning";
@@ -69,6 +73,10 @@ const WarningBox = styled(Box).attrs(() => ({
 `;
 
 const Nomination = ({ account }: Props) => {
+  const discreet = useDiscreetMode();
+  const locale = useSelector(localeSelector);
+  const unit = getAccountUnit(account);
+
   const dispatch = useDispatch();
 
   const { staking, validators } = usePolkadotPreloadData();
@@ -403,7 +411,7 @@ const Nomination = ({ account }: Props) => {
                   onClick={onRebond}
                 >
                   <Box horizontal flow={1} alignItems="center">
-                    <Rebond size={12} />
+                    <RebondIcon size={12} />
                     <Box>
                       <Trans i18nKey="polkadot.unlockings.rebond" />
                     </Box>
@@ -435,7 +443,16 @@ const Nomination = ({ account }: Props) => {
                   <Box horizontal flow={1} alignItems="center">
                     <WithdrawUnbondedIcon size={12} />
                     <Box>
-                      <Trans i18nKey="polkadot.unlockings.withdrawUnbonded" />
+                      <Trans
+                        i18nKey="polkadot.unlockings.withdrawUnbonded"
+                        values={{
+                          amount: formatCurrencyUnit(unit, unlockedBalance, {
+                            showCode: true,
+                            discreet,
+                            locale,
+                          }),
+                        }}
+                      />
                     </Box>
                   </Box>
                 </Button>

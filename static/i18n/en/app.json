@@ -1850,7 +1850,7 @@
     "unlockings": {
       "header": "Unbonding",
       "headerTooltip": "Available after the 28-day unbonding period",
-      "withdrawUnbonded": "Withdraw Unbonded",
+      "withdrawUnbonded": "Withdraw Unbonded ({{amount}})",
       "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
       "noUnlockedWarning": "No unbonded balance to withdraw yet.",
       "rebond": "Rebond",
