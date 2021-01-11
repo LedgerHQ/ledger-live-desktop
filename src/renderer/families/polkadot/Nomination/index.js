@@ -359,7 +359,7 @@ const Nomination = ({ account }: Props) => {
               >
                 <Button primary small disabled={!nominateEnabled} onClick={onNominate}>
                   <Box horizontal flow={1} alignItems="center">
-                    <ChartLineIcon size={12} />
+                    <NominateIcon size={12} />
                     <Box>
                       <Trans i18nKey="polkadot.nomination.nominate" />
                     </Box>
