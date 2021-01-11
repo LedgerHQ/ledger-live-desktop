@@ -24,6 +24,12 @@ export const setAccounts = (payload: Account[]) => ({
   payload,
 });
 
+export const reorderAccounts = (comparator: *) => (dispatch: *) =>
+  dispatch({
+    type: "DB:REORDER_ACCOUNTS",
+    payload: { comparator },
+  });
+
 export const fetchAccounts = () => async (dispatch: *) => {
   const accounts = implicitMigration(await getKey("app", "accounts", []));
   return dispatch({

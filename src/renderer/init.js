@@ -113,8 +113,9 @@ async function init() {
   } else {
     store.dispatch(lock());
   }
+  const initialCountervalues = await getKey("app", "countervalues");
 
-  r(<ReactRoot store={store} language={language} />);
+  r(<ReactRoot store={store} language={language} initialCountervalues={initialCountervalues} />);
 
   if (isMainWindow) {
     webFrame.setVisualZoomLevelLimits(1, 1);

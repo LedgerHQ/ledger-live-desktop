@@ -1,50 +1,53 @@
 // @flow
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   Countervalues,
   useCountervaluesPolling,
   useCountervaluesExport,
 } from "@ledgerhq/live-common/lib/countervalues/react";
-import { setKey, getKey } from "~/renderer/storage";
-import { useUserSettings, useTrackingPairIds } from "../actions/general";
+import type { CountervaluesSettings } from "@ledgerhq/live-common/lib/countervalues/types";
+import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
+import { setKey } from "~/renderer/storage";
+import { useUserSettings } from "../actions/general";
 
-export default function CountervaluesProvider({ children }: { children: React$Node }) {
+export default function CountervaluesProvider({
+  children,
+  initialState,
+}: {
+  children: React$Node,
+  initialState: *,
+}) {
   const userSettings = useUserSettings();
-  const [savedState, setSavedState] = useState();
-
-  useEffect(() => {
-    async function getSavedState() {
-      const values = await getKey("app", "countervalues");
-      setSavedState(values);
-    }
-    getSavedState();
-  }, []);
-
   return (
-    <Countervalues userSettings={userSettings} savedState={savedState}>
-      <CountervaluesManager>{children}</CountervaluesManager>
+    <Countervalues userSettings={userSettings} savedState={initialState}>
+      <CountervaluesManager userSettings={userSettings}>{children}</CountervaluesManager>
     </Countervalues>
   );
 }
 
-function CountervaluesManager({ children }: { children: React$Node }) {
-  useCacheManager();
+function CountervaluesManager({
+  children,
+  userSettings,
+}: {
+  children: React$Node,
+  userSettings: CountervaluesSettings,
+}) {
+  useCacheManager(userSettings);
   usePollingManager();
-
   return children;
 }
 
-function useCacheManager() {
+function useCacheManager(userSettings: CountervaluesSettings) {
   const { status, ...state } = useCountervaluesExport();
-  const trackingPairs = useTrackingPairIds();
   useEffect(() => {
     if (!Object.keys(status).length) return;
+    const ids = userSettings.trackingPairs.map(pairId);
     const newState = Object.entries(state).reduce(
-      (prev, [key, val]) => (trackingPairs.includes(key) ? { ...prev, [key]: val } : prev),
+      (prev, [key, val]) => (ids.includes(key) ? { ...prev, [key]: val } : prev),
       {},
     );
     setKey("app", "countervalues", { ...newState, status });
-  }, [state, trackingPairs, status]);
+  }, [state, userSettings, status]);
 }
 
 function usePollingManager() {
