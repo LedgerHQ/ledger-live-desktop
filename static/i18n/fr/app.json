@@ -1931,7 +1931,8 @@
           "amountLabel": "Montant à lier",
           "availableLabel": "Disponible",
           "maxLabel": "Lier Max",
-          "info": "Une fois les actifs liés ils peuvent être déliés à n'importe quel moment, mais seront bloqués pendant une période de 28 jours."
+          "info": "Une fois les actifs liés ils peuvent être déliés à n'importe quel moment, mais seront bloqués pendant une période de 28 jours.",
+          "learnMore": "En savoir plus"
         },
         "connectDevice": {
           "title": "Appareil"
@@ -1964,7 +1965,8 @@
           "amountLabel": "Montant à relier",
           "availableLabel": "En débloquage",
           "maxLabel": "Relier Max",
-          "info": "Les actifs reliés seront immédiatement ajoutés à la balance liée au staking."
+          "info": "Les actifs reliés seront immédiatement ajoutés à la balance liée au staking.",
+          "learnMore": "En savoir plus"
         },
         "connectDevice": {
           "title": "Appareil"
@@ -1992,7 +1994,8 @@
           "amountLabel": "Montant à délier",
           "availableLabel": "Débloquable",
           "maxLabel": "Délier Max",
-          "info": "Les actifs déliés pourront être récupérés après une période de 28 jours."
+          "info": "Les actifs déliés pourront être récupérés après une période de 28 jours.",
+          "learnMore": "En savoir plus"
          },
         "connectDevice": {
           "title": "Appareil"

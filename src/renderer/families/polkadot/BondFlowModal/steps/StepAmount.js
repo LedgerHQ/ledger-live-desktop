@@ -1,15 +1,14 @@
 // @flow
 import invariant from "invariant";
 import React, { useCallback } from "react";
-
 import { Trans } from "react-i18next";
-
-import type { StepProps } from "../types";
-
 import { isStash } from "@ledgerhq/live-common/lib/families/polkadot/logic";
 
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
+
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
@@ -17,7 +16,9 @@ import Button from "~/renderer/components/Button";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import Text from "~/renderer/components/Text";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
+import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 
+import type { StepProps } from "../types";
 import AmountField from "../fields/AmountField";
 import RewardDestinationField from "../fields/RewardDestinationField";
 
@@ -43,6 +44,8 @@ export default function StepAmount({
     [bridge, transaction, onChangeTransaction],
   );
 
+  const onLearnMore = useCallback(() => openURL(urls.stakingPolkadot), []);
+
   // If account is not a stash, it's a fresh bond transaction.
   const showRewardDestination = !isStash(account);
 
@@ -51,24 +54,9 @@ export default function StepAmount({
       <SyncSkipUnderPriority priority={100} />
       <TrackPage category="Bond Flow" name="Step 1" />
       {error && <ErrorBanner error={error} />}
-      {showRewardDestination ? (
-        <RewardDestinationField
-          rewardDestination={rewardDestination || "Slash"}
-          onChange={setRewardDestination}
-        />
-      ) : null}
-      <AmountField
-        transaction={transaction}
-        account={account}
-        parentAccount={parentAccount}
-        bridgePending={bridgePending}
-        onChangeTransaction={onChangeTransaction}
-        status={status}
-        t={t}
-      />
       <Box
         flex="1"
-        my={4}
+        mb={4}
         borderRadius={4}
         horizontal
         alignItems="center"
@@ -88,8 +76,27 @@ export default function StepAmount({
           >
             <Trans i18nKey="polkadot.bond.steps.amount.info" />
           </Text>
+          <LinkWithExternalIcon
+            label={<Trans i18nKey="polkadot.bond.steps.amount.learnMore" />}
+            onClick={onLearnMore}
+          />
         </Box>
       </Box>
+      {showRewardDestination ? (
+        <RewardDestinationField
+          rewardDestination={rewardDestination || "Slash"}
+          onChange={setRewardDestination}
+        />
+      ) : null}
+      <AmountField
+        transaction={transaction}
+        account={account}
+        parentAccount={parentAccount}
+        bridgePending={bridgePending}
+        onChangeTransaction={onChangeTransaction}
+        status={status}
+        t={t}
+      />
     </Box>
   );
 }

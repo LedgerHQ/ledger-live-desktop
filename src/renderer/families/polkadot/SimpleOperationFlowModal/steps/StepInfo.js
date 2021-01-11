@@ -1,10 +1,12 @@
 // @flow
 import invariant from "invariant";
-import React from "react";
+import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 
 import type { StepProps } from "../types";
 
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -30,6 +32,8 @@ export default function StepInfo({
     "account and transaction required",
   );
 
+  const onLearnMore = useCallback(() => openURL(urls.stakingPolkadot), []);
+
   return (
     <Box flow={1}>
       <TrackPage category="SimpleOperationFlow Flow" name="Step 1" />
@@ -45,7 +49,7 @@ export default function StepInfo({
         </Text>
       </Box>
 
-      <InfoBox>
+      <InfoBox onLearnMore={onLearnMore}>
         <Trans i18nKey={`polkadot.simpleOperation.modes.${mode}.info`} />
       </InfoBox>
     </Box>

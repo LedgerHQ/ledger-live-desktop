@@ -1930,7 +1930,8 @@
           "amountLabel": "Amount to bond",
           "availableLabel": "Available",
           "maxLabel": "Max",
-          "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days."
+          "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
+          "learnMore": "Learn More"
         },
         "connectDevice": {
           "title": "Device"
@@ -1963,7 +1964,8 @@
           "amountLabel": "Amount to rebond",
           "availableLabel": "Unbonding",
           "maxLabel": "Max",
-          "info": "Rebonded assets are immediately added to the bonded amount."
+          "info": "Rebonded assets are immediately added to the bonded amount.",
+          "learnMore": "Learn More"
         },
         "connectDevice": {
           "title": "Device"
@@ -1991,7 +1993,8 @@
           "amountLabel": "Amount to unbond",
           "availableLabel": "Bonded",
           "maxLabel": "Max",
-          "info": "Unbonded assets can be withdrawn after the 28-day unbonding period."
+          "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
+          "learnMore": "Learn More"
         },
         "connectDevice": {
           "title": "Device"
