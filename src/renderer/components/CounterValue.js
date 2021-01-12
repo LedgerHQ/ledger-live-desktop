@@ -42,6 +42,7 @@ export default function CounterValue({
     to: counterValueCurrency,
     value: value.toNumber(),
     disableRounding: true,
+    date,
   });
 
   if (typeof countervalue === "undefined") {

@@ -28,9 +28,10 @@ const reloadApp = event => {
 
 type Props = {
   store: Store<State, *>,
+  initialCountervalues: *,
 };
 
-const App = ({ store }: Props) => {
+const App = ({ store, initialCountervalues }: Props) => {
   const [reloadEnabled, setReloadEnabled] = useState(true);
 
   useEffect(() => {
@@ -57,7 +58,7 @@ const App = ({ store }: Props) => {
           >
             <RemoteConfigProvider>
               <UpdaterProvider>
-                <CountervaluesProvider>
+                <CountervaluesProvider initialState={initialCountervalues}>
                   <Router>
                     <Default />
                   </Router>

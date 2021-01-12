@@ -54,22 +54,22 @@ function reload() {
     .webContents.reload();
 }
 
-export function useHardReset() {
-  const { wipe } = useCountervaluesPolling();
+export async function hardReset() {
+  log("clear-cache", "clearBridgeCache()");
+  clearBridgeCache();
+  log("clear-cache", "hardReset()");
+  disableDBMiddleware();
+  resetAll();
+  window.localStorage.clear();
+  await delay(500);
+  await resetLibcore();
+}
 
-  return useCallback(async () => {
-    log("clear-cache", "clearBridgeCache()");
-    clearBridgeCache();
-    log("clear-cache", "hardReset()");
-    disableDBMiddleware();
-    resetAll();
-    window.localStorage.clear();
-    await delay(500);
-    await resetLibcore();
-    log("clear-cache", "reload()");
-    wipe();
+export function useHardReset() {
+  return () => {
+    window.localStorage.setItem("hard-reset", "1");
     reload();
-  }, [wipe]);
+  };
 }
 
 export function useSoftReset() {

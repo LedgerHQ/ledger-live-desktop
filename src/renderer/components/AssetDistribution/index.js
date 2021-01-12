@@ -49,13 +49,13 @@ export default function AssetDistribution() {
   const subList = showAll || almostAll ? list : list.slice(0, initialRowCount);
 
   return distribution.list.length ? (
-    <>
-      <Box horizontal alignItems="center">
+    <Card>
+      <Box py={3} px={4} horizontal alignItems="center">
         <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
           <Trans i18nKey="distribution.header" values={{ count: distribution.list.length }} />
         </Text>
       </Box>
-      <Card p={0} mt={24}>
+      <Box p={0}>
         <Header />
         <div ref={cardRef}>
           {subList.map(item => (
@@ -70,8 +70,8 @@ export default function AssetDistribution() {
             <IconAngleDown size={16} />
           </SeeAllButton>
         )}
-      </Card>
-    </>
+      </Box>
+    </Card>
   ) : null;
 }
 

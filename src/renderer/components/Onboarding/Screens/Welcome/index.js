@@ -6,12 +6,14 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
 import Button from "~/renderer/components/Button";
+import Image from "~/renderer/components/Image";
 import { openURL } from "~/renderer/linking";
-import { Computer } from "./assets/Computer";
 import LangSwitcher from "~/renderer/components/Onboarding/LangSwitcher";
 import { urls } from "~/config/urls";
 import { WaveContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import { AnimatedWave } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/AnimatedWave";
+import illustration from "~/renderer/components/Onboarding/Screens/Welcome/assets/welcome.svg";
+import illustrationDark from "~/renderer/components/Onboarding/Screens/Welcome/assets/welcome-dark.svg";
 import useTheme from "~/renderer/hooks/useTheme";
 
 const WelcomeContainer: ThemedComponent<*> = styled.div`
@@ -30,11 +32,11 @@ const TopContainer = styled.div`
   position: relative;
 `;
 
-const ComputerContainer = styled.div`
+const IllustrationContainer = styled.div`
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 50%;
-  transform: translate(-50%, 50%);
+  transform: translate(-50%, 0);
 `;
 
 const TopRightContainer = styled.div`
@@ -46,11 +48,13 @@ const TopRightContainer = styled.div`
 
 type Props = {
   sendEvent: string => void,
+  onboardingRelaunched: boolean,
 };
 
-export function Welcome({ sendEvent }: Props) {
+export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
   const { t } = useTranslation();
-  const theme = useTheme();
+  const themeType = useTheme("colors.palette.type");
+  const welcomeIllustration = themeType === "dark" ? illustrationDark : illustration;
 
   const handleNext = useCallback(() => {
     sendEvent("NEXT");
@@ -62,14 +66,23 @@ export function Welcome({ sendEvent }: Props) {
 
   return (
     <WelcomeContainer>
-      <TopRightContainer>{null /* LL-4236 */ && <LangSwitcher />}</TopRightContainer>
+      <TopRightContainer>
+        {null /* LL-4236 */ && <LangSwitcher />}
+        {onboardingRelaunched && (
+          <Button small onClick={() => sendEvent("PREV")}>
+            Previous
+          </Button>
+        )}
+      </TopRightContainer>
       <WaveContainer>
-        <AnimatedWave height={600} color={theme === "dark" ? "#587ED4" : "#4385F016"} />
+        <AnimatedWave height={600} color="#4385F016" />
       </WaveContainer>
       <TopContainer>
-        <ComputerContainer>{theme === "light" ? <Computer /> : null}</ComputerContainer>
+        <IllustrationContainer>
+          <Image resource={welcomeIllustration} alt="" draggable="false" height={370} />
+        </IllustrationContainer>
       </TopContainer>
-      <Text mt={160} mb="4px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize={32}>
+      <Text mt={120} mb="4px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize={32}>
         {t("onboarding.screens.welcome.title")}
       </Text>
       <Text mb="24px" color="palette.text.shade50" ff="Inter|Regular" fontSize={4}>

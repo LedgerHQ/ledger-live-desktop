@@ -6,7 +6,7 @@ const context = require.context("./", true, /\.(json)$/);
 
 const regexp = /\.\/(.+).json/;
 
-const shades = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+const shades = [5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
 type RawPalette = {
   type: "light" | "dark",
@@ -21,17 +21,20 @@ type RawPalette = {
   background: {
     paper: string,
     default: string,
+    wave: string,
   },
   action: {
     active: string,
     hover: string,
     disabled: string,
   },
+  wave: string,
 };
 
 export type Theme = {
   ...RawPalette,
   text: {
+    shade5: string,
     shade10: string,
     shade20: string,
     shade30: string,
