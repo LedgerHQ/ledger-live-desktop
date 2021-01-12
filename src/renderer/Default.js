@@ -35,6 +35,49 @@ import DebugMock from "~/renderer/components/DebugMock";
 import useDeeplink from "~/renderer/hooks/useDeeplinking";
 import ModalsLayer from "./ModalsLayer";
 
+const BetaLayerR = () => {
+  const children = [];
+  const w = 200;
+  const h = 100;
+  for (let y = 0.5; y < 20; y++) {
+    for (let x = 0.5; x < 20; x++) {
+      children.push(
+        <div
+          style={{
+            position: "absolute",
+            textAlign: "center",
+            top: y * h,
+            left: x * w,
+            transform: "rotate(-45deg)",
+          }}
+        >
+          BETA
+          <br />
+          {__APP_VERSION__}
+        </div>,
+      );
+    }
+  }
+  return (
+    <div
+      style={{
+        position: "fixed",
+        pointerEvents: "none",
+        opacity: 0.1,
+        color: "#777",
+        width: "100%",
+        height: "100%",
+        top: 0,
+        right: 0,
+        zIndex: 999999999999,
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+const BetaLayer = React.memo(BetaLayerR);
+
 export default function Default() {
   const location = useLocation();
   const ref: React$ElementRef<any> = useRef();
@@ -91,6 +134,8 @@ export default function Default() {
                   </Switch>
                 </Page>
               </Box>
+
+              <BetaLayer />
 
               <LibcoreBusyIndicator />
               <DeviceBusyIndicator />

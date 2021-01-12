@@ -16,7 +16,7 @@ function main {
 
   read -p "> release version ($PKG_VER): " -r RELEASE_VERSION
   RELEASE_VERSION=${RELEASE_VERSION:-$PKG_VER}
-  OUTPUT_FILE="ledger-live-desktop-$RELEASE_VERSION.sha512sum"
+  OUTPUT_FILE="lld-beta-$RELEASE_VERSION.sha512sum"
 
   RELEASES=$(do_request "/repos/$repoPath/releases")
   printf """

@@ -17,7 +17,7 @@ const SectionHelp = () => {
     <>
       <TrackPage category="Settings" name="About" />
       <Body>
-        <Row title={t("settings.help.version")} desc={`Ledger Live ${version}`}>
+        <Row title={t("settings.help.version")} desc={`Ledger Live Beta ${version}`}>
           <ReleaseNotesButton />
         </Row>
 
