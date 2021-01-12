@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 // @flow
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
