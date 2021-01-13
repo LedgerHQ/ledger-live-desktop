@@ -10,7 +10,7 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 import {
   hasExternalController,
   hasExternalStash,
-  hasPendingBond,
+  hasPendingOperationType,
 } from "@ledgerhq/live-common/lib/families/polkadot/logic";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -41,7 +41,7 @@ const AccountHeaderActions = ({ account }: Props) => {
   invariant(polkadotResources, "polkadot account expected");
 
   const hasBondedBalance = polkadotResources.lockedBalance && polkadotResources.lockedBalance.gt(0);
-  const hasPendingBondOperation = hasPendingBond(account);
+  const hasPendingBondOperation = hasPendingOperationType(account, "BOND");
 
   const onClick = useCallback(() => {
     if (hasBondedBalance || hasPendingBondOperation) {

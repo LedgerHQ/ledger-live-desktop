@@ -13,7 +13,7 @@ import {
   hasExternalController,
   hasExternalStash,
   canNominate,
-  hasPendingBond,
+  hasPendingOperationType,
 } from "@ledgerhq/live-common/lib/families/polkadot/logic";
 import { usePolkadotPreloadData } from "@ledgerhq/live-common/lib/families/polkadot/react";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
@@ -177,7 +177,7 @@ const Nomination = ({ account }: Props) => {
   const hasUnlockedBalance = unlockedBalance && unlockedBalance.gt(0);
   const hasNominations = nominations && nominations?.length > 0;
   const hasUnlockings = unlockings && unlockings.length > 0;
-  const hasPendingBondOperation = hasPendingBond(account);
+  const hasPendingBondOperation = hasPendingOperationType(account, "BOND");
 
   const nominateEnabled = !electionOpen && canNominate(account);
   const withdrawEnabled = !electionOpen && hasUnlockedBalance;
