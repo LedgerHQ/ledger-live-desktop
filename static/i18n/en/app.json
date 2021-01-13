@@ -737,7 +737,10 @@
       "title": "Getting started",
       "desc": "Start here"
     },
-    "status": "Ledger status",
+    "status": {
+      "title": "Ledger Status",
+      "desc": "Learn crypto"
+    },
     "helpCenter": {
       "title": "Ledger Support",
       "desc": "Get help"
