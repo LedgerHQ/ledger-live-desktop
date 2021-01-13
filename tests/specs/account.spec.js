@@ -305,7 +305,7 @@ describe("Account", () => {
       await displayListButton.click();
 
       expect(await app.client.screenshot()).toMatchImageSnapshot({
-        customSnapshotIdentifier: "sort-account-highest-balance",
+        customSnapshotIdentifier: "account-display-list",
       });
     });
   });
