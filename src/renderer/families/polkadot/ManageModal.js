@@ -8,7 +8,12 @@ import { Trans } from "react-i18next";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 
 import { usePolkadotPreloadData } from "@ledgerhq/live-common/lib/families/polkadot/react";
-import { canNominate, canBond, canUnbond } from "@ledgerhq/live-common/lib/families/polkadot/logic";
+import {
+  canNominate,
+  canBond,
+  canUnbond,
+  hasPendingOperationType,
+} from "@ledgerhq/live-common/lib/families/polkadot/logic";
 
 import { openModal } from "~/renderer/actions/modals";
 import Box from "~/renderer/components/Box";
@@ -130,12 +135,14 @@ const ManageModal = ({ name, account, ...rest }: Props) => {
 
   const electionOpen = staking?.electionClosed !== undefined ? !staking?.electionClosed : false;
   const hasUnlockedBalance = unlockedBalance && unlockedBalance.gt(0);
+  const hasPendingWithdrawUnbondedOperation = hasPendingOperationType(account, "WITHDRAW_UNBONDED");
 
   const nominationEnabled = !electionOpen && canNominate(account);
   const chillEnabled = !electionOpen && canNominate(account) && nominations?.length;
   const bondingEnabled = !electionOpen && canBond(account);
   const unbondingEnabled = !electionOpen && canUnbond(account);
-  const withdrawEnabled = !electionOpen && hasUnlockedBalance;
+  const withdrawEnabled =
+    !electionOpen && hasUnlockedBalance && !hasPendingWithdrawUnbondedOperation;
 
   return (
     <Modal

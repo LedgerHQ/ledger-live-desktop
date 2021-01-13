@@ -178,9 +178,11 @@ const Nomination = ({ account }: Props) => {
   const hasNominations = nominations && nominations?.length > 0;
   const hasUnlockings = unlockings && unlockings.length > 0;
   const hasPendingBondOperation = hasPendingOperationType(account, "BOND");
+  const hasPendingWithdrawUnbondedOperation = hasPendingOperationType(account, "WITHDRAW_UNBONDED");
 
   const nominateEnabled = !electionOpen && canNominate(account);
-  const withdrawEnabled = !electionOpen && hasUnlockedBalance;
+  const withdrawEnabled =
+    !electionOpen && hasUnlockedBalance && !hasPendingWithdrawUnbondedOperation;
 
   const renderNomination = useCallback(
     ({ nomination, validator }, index) => (
