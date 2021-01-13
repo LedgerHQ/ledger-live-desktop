@@ -737,7 +737,10 @@
       "title": "Getting started",
       "desc": "Start here"
     },
-    "status": "Ledger status",
+    "status": {
+      "title": "Ledger Status",
+      "desc": "Learn crypto"
+    },
     "helpCenter": {
       "title": "Ledger Support",
       "desc": "Get help"
@@ -1372,6 +1375,7 @@
       },
       "details": {
         "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
+        "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
         "from": "From",
         "to": "To",
         "selectAccountDebit": "Account to debit",
