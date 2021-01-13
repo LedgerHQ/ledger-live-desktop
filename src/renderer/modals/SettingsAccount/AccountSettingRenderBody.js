@@ -185,6 +185,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
                   onEnter={onSubmit}
                   onFocus={e => this.handleFocus(e, "accountName")}
                   error={accountNameError}
+                  id="input-edit-name"
                 />
               </Box>
             </Container>
@@ -235,7 +236,13 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
             >
               {t("common.delete")}
             </Button>
-            <Button event="DoneEditingAccount" ml="auto" onClick={onSubmit} primary>
+            <Button
+              id="account-settings-apply"
+              event="DoneEditingAccount"
+              ml="auto"
+              onClick={onSubmit}
+              primary
+            >
               {t("common.apply")}
             </Button>
           </>

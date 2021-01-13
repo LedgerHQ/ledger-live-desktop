@@ -226,25 +226,25 @@ describe("Account", () => {
   });
 
   describe("remove accounts flow", () => {
-    it("displays a list of accounts", async () => {
-      const isModalOpen = await modalPage.isDisplayed(true);
-
-      if (isModalOpen) {
-        await modalPage.close();
-      }
-
+    beforeAll(async () => {
       const accountsButton = await $("#drawer-accounts-button");
       await accountsButton.click();
+    });
 
+    it("displays a list of accounts", async () => {
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: "remove-account-before",
       });
     });
 
     it("remove one account", async () => {
-      const firstAccountRow = await $(".accounts-account-row-item");
+      let listOfAccounts = await $("#accounts-list");
+      const accounts = await listOfAccounts.$$(".accounts-account-row-item");
+      const length = accounts.length;
 
+      const firstAccountRow = accounts[0];
       await firstAccountRow.click();
+
       const settingsButton = await $("#account-settings-button");
       await settingsButton.click();
       await modalPage.isDisplayed();
@@ -254,8 +254,56 @@ describe("Account", () => {
       const confirmButton = await $("#modal-confirm-button");
       await confirmButton.click();
 
+      const accountsButton = await $("#drawer-accounts-button");
+      await accountsButton.click();
+      listOfAccounts = await $("#accounts-list");
+      const newAccounts = await listOfAccounts.$$(".accounts-account-row-item");
+      const newLength = newAccounts.length;
+      expect(newLength).toBe(length - 1);
+    });
+
+    it("displays a modified list of accounts", async () => {
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: "remove-account-after",
+      });
+    });
+  });
+
+  describe("edit name flow", () => {
+    beforeAll(async () => {
+      const accountsButton = await $("#drawer-accounts-button");
+      await accountsButton.click();
+    });
+
+    it("show name of account before", async () => {
+      const firstAccountRow = await $(".accounts-account-row-item");
+      await firstAccountRow.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "edit-account-name-before",
+      });
+    });
+
+    it("edit account name", async () => {
+      const settingsButton = await $("#account-settings-button");
+      await settingsButton.click();
+
+      const input = await $("#input-edit-name");
+      await input.waitForDisplayed();
+      const newName = "New account name";
+      await input.addValue(newName);
+
+      const applyButton = await $("#account-settings-apply");
+      await applyButton.click();
+
+      const accountName = await $("#account-header-name");
+      const value = await accountName.getValue();
+      expect(value).toBe(newName);
+    });
+
+    it("show name of account after", async () => {
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "edit-account-name-after",
       });
     });
   });
