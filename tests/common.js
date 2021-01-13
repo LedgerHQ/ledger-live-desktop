@@ -86,7 +86,6 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
               "spectron-arg0=/app/.webpack/main.bundle.js",
               "--disable-extensions",
               "--disable-dev-shm-usage",
-              "--disable-gpu",
               "--no-sandbox",
               "--lang=en",
               `--user-data-dir=/app/tests/tmp/${userDataPathKey}`,

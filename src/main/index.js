@@ -16,6 +16,8 @@ import logger from "~/logger";
 
 if (process.env.SPECTRON_RUN) {
   app.disableHardwareAcceleration();
+  app.commandLine.appendSwitch("disable-software-rasterizer");
+  app.commandLine.appendSwitch("disable-gpu");
 }
 app.allowRendererProcessReuse = false;
 
