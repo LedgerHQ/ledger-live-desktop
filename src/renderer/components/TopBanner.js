@@ -69,9 +69,10 @@ type Props = {
   status?: string,
   dismissable?: boolean,
   bannerId?: string,
+  id?: string,
 };
 
-const TopBanner = ({ content, status = "", dismissable = false, bannerId }: Props) => {
+const TopBanner = ({ id, content, status = "", dismissable = false, bannerId }: Props) => {
   const dispatch = useDispatch();
   const dismissedBanners = useSelector(dismissedBannersSelector);
 
@@ -86,7 +87,7 @@ const TopBanner = ({ content, status = "", dismissable = false, bannerId }: Prop
   const { Icon, message, right } = content;
 
   return (
-    <Container status={status}>
+    <Container status={status} id={id}>
       {Icon && (
         <IconContainer>
           <Icon size={16} />

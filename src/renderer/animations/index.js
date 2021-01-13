@@ -2,7 +2,6 @@
 
 import React from "react";
 import Lottie from "react-lottie";
-import { getEnv } from "@ledgerhq/live-common/lib/env";
 
 const Animation = ({
   animation,
@@ -24,9 +23,10 @@ const Animation = ({
     ariaRole="animation"
     height={height}
     width={width}
+    isPaused={process.env.SPECTRON_RUN}
     options={{
       loop,
-      autoplay: getEnv("MOCK") ? false : autoplay,
+      autoplay: process.env.SPECTRON_RUN ? false : autoplay,
       animationData: animation,
       rendererSettings,
     }}

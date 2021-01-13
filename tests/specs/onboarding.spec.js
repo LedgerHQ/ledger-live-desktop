@@ -49,6 +49,8 @@ describe("Onboarding", () => {
     await app.client.pause(500);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-nano-getstarted",
+      failureThreshold: 6,
+      failureThresholdType: "pixel",
     });
   });
 
@@ -118,6 +120,9 @@ describe("Onboarding", () => {
     await app.client.pause(200);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-nano-recoveryphrase-4",
+      // wave thing
+      failureThreshold: 14,
+      failureThresholdType: "pixel",
     });
   });
 
