@@ -392,4 +392,34 @@ describe("Account", () => {
       });
     });
   });
+
+  describe("bookmark account", () => {
+    beforeAll(async () => {
+      const accountsButton = await $("#drawer-accounts-button");
+      await accountsButton.click();
+    });
+
+    it("should not have any bookmarked account", async () => {
+      const bookmarkedAccountsList = await $("#bookmarked-accounts");
+      const bookmarkedAccounts = await bookmarkedAccountsList.$$(".bookmarked-account-item");
+
+      expect(bookmarkedAccounts).toHaveLength(0);
+    });
+
+    it("bookmark the first account", async () => {
+      const listOfAccounts = await $("#accounts-list");
+      const accounts = await listOfAccounts.$$(".accounts-account-row-item");
+
+      const firstAccountRow = accounts[0];
+      await firstAccountRow.click();
+
+      const starButton = await $("#account-star-button");
+      await starButton.click();
+
+      const bookmarkedAccountsList = await $("#bookmarked-accounts");
+      const bookmarkedAccounts = await bookmarkedAccountsList.$$(".bookmarked-account-item");
+
+      expect(bookmarkedAccounts).toHaveLength(1);
+    });
+  });
 });
