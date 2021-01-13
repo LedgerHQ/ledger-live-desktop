@@ -103,7 +103,7 @@ class QRCodeExporter extends PureComponent<
     const { chunks } = this;
     return (
       <QRCodeContainer style={{ width: size, height: size }}>
-        {chunks.slice(0, framesRendered).map((chunk, i) => (
+        {chunks.slice(0, process.env.SPECTRON_RUN ? 1 : framesRendered).map((chunk, i) => (
           <div key={String(i)} style={{ position: "absolute", opacity: i === frame ? 1 : 0 }}>
             <QRCode data={chunk} size={Math.max(size - 24, 0)} errorCorrectionLevel="M" />
           </div>
