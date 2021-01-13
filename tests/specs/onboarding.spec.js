@@ -53,6 +53,9 @@ describe("Onboarding", () => {
       await cta.click();
       await app.client.pause(500);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
         customSnapshotIdentifier: "onboarding-nano-getstarted",
       });
     });
@@ -64,6 +67,9 @@ describe("Onboarding", () => {
       carefulcta.click();
       await app.client.pause(500);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
         customSnapshotIdentifier: "onboarding-nano-getstarted-2",
       });
     });
@@ -73,6 +79,9 @@ describe("Onboarding", () => {
       await next.click();
       await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
         customSnapshotIdentifier: "onboarding-nano-pincode",
       });
     });
@@ -84,6 +93,9 @@ describe("Onboarding", () => {
       await next.click();
       await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
         customSnapshotIdentifier: "onboarding-nano-pincode-2",
       });
     });
@@ -93,6 +105,9 @@ describe("Onboarding", () => {
       await next.click();
       await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
         customSnapshotIdentifier: "onboarding-nano-recoveryphrase",
       });
     });
@@ -104,6 +119,9 @@ describe("Onboarding", () => {
       await next.click();
       await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
         customSnapshotIdentifier: "onboarding-nano-recoveryphrase-2",
       });
     });
@@ -113,6 +131,9 @@ describe("Onboarding", () => {
       await next.click();
       await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
         customSnapshotIdentifier: "onboarding-nano-recoveryphrase-3",
       });
     });
@@ -122,6 +143,9 @@ describe("Onboarding", () => {
       await next.click();
       await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
         customSnapshotIdentifier: "onboarding-nano-recoveryphrase-4",
       });
     });
@@ -131,6 +155,9 @@ describe("Onboarding", () => {
       await next.click();
       await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
         customSnapshotIdentifier: "onboarding-nano-quizz",
       });
     });
@@ -152,6 +179,9 @@ describe("Onboarding", () => {
       await next.click();
       await app.client.pause(400);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
         customSnapshotIdentifier: "onboarding-you-are-a-pro",
       });
     });
@@ -161,6 +191,9 @@ describe("Onboarding", () => {
       await next.click();
       await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
         customSnapshotIdentifier: "onboarding-genuine-check",
       });
     });
@@ -182,6 +215,9 @@ describe("Onboarding", () => {
       );
       await app.client.pause(5000);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
         customSnapshotIdentifier: "onboarding-check-complete",
       });
     });
