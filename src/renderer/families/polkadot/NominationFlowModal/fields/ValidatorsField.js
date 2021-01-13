@@ -44,10 +44,10 @@ const NominationsWarning: ThemedComponent<{}> = styled(Box).attrs(p => ({
   px: 3,
   bg: p.theme.colors.warning,
   color: "palette.primary.contrastText",
-  mb: 20,
   fontSize: 4,
   ff: "Inter|SemiBold",
 }))`
+  margin: 0 12px 20px;
   border-radius: ${radii[1]}px;
 `;
 
