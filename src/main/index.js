@@ -14,6 +14,9 @@ import db from "./db";
 import debounce from "lodash/debounce";
 import logger from "~/logger";
 
+if (process.env.SPECTRON_RUN) {
+  app.disableHardwareAcceleration();
+}
 app.allowRendererProcessReuse = false;
 
 const gotLock = app.requestSingleInstanceLock();
