@@ -12,7 +12,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Installing from "../Installing";
 import type { StepProps } from "../";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   alignItems: "center",

@@ -29,7 +29,7 @@ const Item: ThemedComponent<{}> = styled(Text)`
   margin-right: -13px;
 `;
 const MockContainer: ThemedComponent<{}> = styled(Text)`
-  ${process.env.DISABLE_MOCK_POINTER_EVENTS ? "pointer-events: none;" : ""}
+  ${process.env.DISABLE_MOCK_POINTER_EVENTS === "true" ? "pointer-events: none;" : ""}
   padding: 4px 17px;
   color: black;
   position: absolute;

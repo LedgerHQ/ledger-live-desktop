@@ -93,6 +93,7 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
     show: false,
     webPreferences: {
       preload: path.join(__dirname, "preloader.bundle.js"),
+      enableRemoteModule: true,
       ...defaultWindowOptions.webPreferences,
     },
   };
