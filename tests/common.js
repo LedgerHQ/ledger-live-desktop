@@ -77,7 +77,8 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       ),
       JSON.stringify(coverage),
     );
-    return app.stop().then(() => removeUserData(process.env.SPECTRON_DUMP_APP_JSON));
+    await app.stop();
+    removeUserData(process.env.SPECTRON_DUMP_APP_JSON);
   });
 
   if (!disableStartSnap) {
