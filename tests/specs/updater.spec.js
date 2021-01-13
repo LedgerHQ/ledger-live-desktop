@@ -17,47 +17,47 @@ describe("AppUpdater", () => {
   });
 
   it("[checking] state should be visible", async () => {
-      const cta = await $("#app-update-debug-checking");
-      expect(await cta.isDisplayed()).toBe(true);
-      await cta.click();
-      const updateBanner = await $("#app-update-banner");
-      expect(await updateBanner.isDisplayedInViewport()).toBe(true);
+    const cta = await $("#app-update-debug-checking");
+    expect(await cta.isDisplayed()).toBe(true);
+    await cta.click();
+    const updateBanner = await $("#app-update-banner");
+    expect(await updateBanner.isDisplayedInViewport()).toBe(true);
   });
 
   it("[check-success] state should be visible", async () => {
-      const cta = await $("#app-update-debug-check-success");
-      expect(await cta.isDisplayed()).toBe(true);
-      await cta.click();
-      const updateBanner = await $("#app-update-banner");
-      expect(await updateBanner.isDisplayedInViewport()).toBe(true);
+    const cta = await $("#app-update-debug-check-success");
+    expect(await cta.isDisplayed()).toBe(true);
+    await cta.click();
+    const updateBanner = await $("#app-update-banner");
+    expect(await updateBanner.isDisplayedInViewport()).toBe(true);
   });
 
   it("[update-available] state should be visible", async () => {
-      const cta = await $("#app-update-debug-update-available");
-      expect(await cta.isDisplayed()).toBe(true);
-      await cta.click();
-      const updateBanner = await $("#app-update-banner");
-      expect(await updateBanner.isDisplayedInViewport()).toBe(true);
+    const cta = await $("#app-update-debug-update-available");
+    expect(await cta.isDisplayed()).toBe(true);
+    await cta.click();
+    const updateBanner = await $("#app-update-banner");
+    expect(await updateBanner.isDisplayedInViewport()).toBe(true);
   });
 
   it("[download-progress] state should be visible", async () => {
-      const cta = await $("#app-update-debug-download-progress");
-      expect(await cta.isDisplayed()).toBe(true);
-      await cta.click();
-      const updateBanner = await $("#app-update-banner");
-      expect(await updateBanner.isDisplayedInViewport()).toBe(true);
+    const cta = await $("#app-update-debug-download-progress");
+    expect(await cta.isDisplayed()).toBe(true);
+    await cta.click();
+    const updateBanner = await $("#app-update-banner");
+    expect(await updateBanner.isDisplayedInViewport()).toBe(true);
   });
 
   it("[error] state should be visible", async () => {
-      const cta = await $("#app-update-debug-error");
-      expect(await cta.isDisplayed()).toBe(true);
-      await cta.click();
-      const updateBanner = await $("#app-update-banner");
-      expect(await updateBanner.isDisplayedInViewport()).toBe(true);
+    const cta = await $("#app-update-debug-error");
+    expect(await cta.isDisplayed()).toBe(true);
+    await cta.click();
+    const updateBanner = await $("#app-update-banner");
+    expect(await updateBanner.isDisplayedInViewport()).toBe(true);
 
-      expect(await app.client.screenshot()).toMatchImageSnapshot({
-        customSnapshotIdentifier: "app-updater-error-with-carousel",
-      });
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "app-updater-error-with-carousel",
+    });
   });
 
   it("[error] state (any) should be visible, without the carousel", async () => {
