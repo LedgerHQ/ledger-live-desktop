@@ -49,6 +49,8 @@ describe("Onboarding", () => {
     await app.client.pause(500);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-nano-getstarted",
+      failureThreshold: 6,
+      failureThresholdType: "pixel",
     });
   });
 
