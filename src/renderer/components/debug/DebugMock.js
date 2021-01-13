@@ -1,7 +1,6 @@
 // @flow
 import React, { useCallback, useState } from "react";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import styled, { createGlobalStyle } from "styled-components";
+
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import Text from "~/renderer/components/Text";
 import { ReplaySubject } from "rxjs";
@@ -10,47 +9,8 @@ import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 import { deviceInfo155, mockListAppsResult } from "@ledgerhq/live-common/lib/apps/mock";
 import useInterval from "~/renderer/hooks/useInterval";
 import Box from "~/renderer/components/Box";
+import { Item, MockContainer, EllipsesText, MockedGlobalStyle } from "./shared";
 
-const MockedGlobalStyle = createGlobalStyle`
-  *, :before, :after {
-    caret-color: transparent !important;
-    transition-property: none !important;
-    animation: none !important;
-  }
-`;
-
-const Item: ThemedComponent<{}> = styled(Text)`
-  padding: 2px 13px;
-  color: white;
-  background: ${p => p.theme.colors.alertRed};
-  border-radius: 4px;
-  opacity: 0.9;
-  margin-left: -13px;
-  margin-right: -13px;
-`;
-const MockContainer: ThemedComponent<{}> = styled(Text)`
-  ${process.env.DISABLE_MOCK_POINTER_EVENTS === "true" ? "pointer-events: none;" : ""}
-  padding: 4px 17px;
-  color: black;
-  position: absolute;
-  left: 8px;
-  bottom: 8px;
-  border-radius: 4px;
-  opacity: 0.9;
-  z-index: 999;
-  background: #dededeaa;
-`;
-const EllipsesText: ThemedComponent<{}> = styled(Text).attrs({
-  ff: "Inter|Regular",
-  color: "palette.text.shade100",
-  fontSize: 3,
-})`
-  margin-left: 10px;
-  overflow: hidden;
-  max-width: 20ch;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
 /**
  * List of events that will be displayed in the quick-link section of the mock menu
  * to ease the usability when mock is done manually instead of through spectron.
@@ -312,7 +272,6 @@ const DebugMock = () => {
 
   return (
     <MockContainer id={nonce}>
-      <MockedGlobalStyle />
       <Box>
         <Item
           id={nonce}
@@ -327,7 +286,7 @@ const DebugMock = () => {
       {expanded ? (
         <>
           {queue.length ? (
-            <Box vertical>
+            <Box vertical px={1}>
               <Text
                 color="palette.text.shade100"
                 ff="Inter|SemiBold"
@@ -356,7 +315,7 @@ const DebugMock = () => {
             </Box>
           ) : null}
           {history.length ? (
-            <Box vertical>
+            <Box vertical px={1}>
               <Text
                 color="palette.text.shade100"
                 ff="Inter|SemiBold"
@@ -376,7 +335,7 @@ const DebugMock = () => {
             </Box>
           ) : null}
           {/* Events here are supposed to be generic and not for a specific flow */}
-          <Box vertical>
+          <Box vertical px={1}>
             <Text
               color="palette.text.shade100"
               ff="Inter|SemiBold"
@@ -389,7 +348,7 @@ const DebugMock = () => {
             {expandedQuick
               ? helpfulEvents.map(({ name, event }, i) => (
                   <Text
-                    style={{ marginLeft: 10 }}
+                    mx={1}
                     ff="Inter|Regular"
                     color="palette.text.shade100"
                     fontSize={3}
@@ -401,7 +360,7 @@ const DebugMock = () => {
                 ))
               : null}
           </Box>
-          <Box vertical>
+          <Box vertical px={1}>
             <Text
               color="palette.text.shade100"
               ff="Inter|SemiBold"
@@ -414,7 +373,7 @@ const DebugMock = () => {
             {expandedSwap
               ? swapEvents.map(({ name, event }, i) => (
                   <Text
-                    style={{ marginLeft: 10 }}
+                    smx={1}
                     ff="Inter|Regular"
                     color="palette.text.shade100"
                     fontSize={3}
@@ -432,8 +391,4 @@ const DebugMock = () => {
   );
 };
 
-export default getEnv("MOCK") && process.env.HIDE_DEBUG_MOCK
-  ? MockedGlobalStyle
-  : getEnv("MOCK")
-  ? DebugMock
-  : () => null;
+export default process.env.HIDE_DEBUG_MOCK ? MockedGlobalStyle : DebugMock;

@@ -14,7 +14,7 @@ import DeviceAction from "~/renderer/components/DeviceAction";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import SuccessDisplay from "~/renderer/components/SuccessDisplay";
 import InfoDisplay from "~/renderer/components/InfoDisplay";
-import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 
 const connectAppExec = command("connectApp");
