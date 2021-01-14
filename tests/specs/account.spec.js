@@ -225,6 +225,91 @@ describe("Account", () => {
     });
   });
 
+  describe("sort accounts", () => {
+    it("sort account default", async () => {
+      const isModalOpen = await modalPage.isDisplayed(true);
+
+      if (isModalOpen) {
+        await modalPage.close();
+      }
+
+      const accountsButton = await $("#drawer-accounts-button");
+      await accountsButton.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "sort-account-default",
+      });
+    });
+
+    it("sort account lowest balance", async () => {
+      const sortSelectButton = await $("#accounts-order-select-button");
+      await sortSelectButton.click();
+
+      const sortLowestBalanceButton = await $("#accounts-order-select-balance-asc");
+      await sortLowestBalanceButton.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "sort-account-lowest-balance",
+      });
+    });
+
+    it("sort account name A-Z", async () => {
+      const sortSelectButton = await $("#accounts-order-select-button");
+      await sortSelectButton.click();
+
+      const sortNameAscButton = await $("#accounts-order-select-name-asc");
+      await sortNameAscButton.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "sort-account-name-asc",
+      });
+    });
+
+    it("sort account name Z-A", async () => {
+      const sortSelectButton = await $("#accounts-order-select-button");
+      await sortSelectButton.click();
+
+      const sortNameDescButton = await $("#accounts-order-select-name-desc");
+      await sortNameDescButton.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "sort-account-name-desc",
+      });
+    });
+
+    it("sort account highest balance", async () => {
+      const sortSelectButton = await $("#accounts-order-select-button");
+      await sortSelectButton.click();
+
+      const sortHighestBalanceButton = await $("#accounts-order-select-balance-desc");
+      await sortHighestBalanceButton.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "sort-account-highest-balance",
+      });
+    });
+  });
+
+  describe("range and display accounts", () => {
+    it("display grid", async () => {
+      const displayGridButton = await $("#accounts-display-grid");
+      await displayGridButton.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "account-display-grid",
+      });
+    });
+
+    it("display list", async () => {
+      const displayListButton = await $("#accounts-display-list");
+      await displayListButton.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "account-display-list",
+      });
+    });
+  });
+
   describe("remove accounts flow", () => {
     beforeAll(async () => {
       const accountsButton = await $("#drawer-accounts-button");
@@ -305,6 +390,36 @@ describe("Account", () => {
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: "edit-account-name-after",
       });
+    });
+  });
+
+  describe("bookmark account", () => {
+    beforeAll(async () => {
+      const accountsButton = await $("#drawer-accounts-button");
+      await accountsButton.click();
+    });
+
+    it("should not have any bookmarked account", async () => {
+      const bookmarkedAccountsList = await $("#bookmarked-accounts");
+      const bookmarkedAccounts = await bookmarkedAccountsList.$$(".bookmarked-account-item");
+
+      expect(bookmarkedAccounts).toHaveLength(0);
+    });
+
+    it("bookmark the first account", async () => {
+      const listOfAccounts = await $("#accounts-list");
+      const accounts = await listOfAccounts.$$(".accounts-account-row-item");
+
+      const firstAccountRow = accounts[0];
+      await firstAccountRow.click();
+
+      const starButton = await $("#account-star-button");
+      await starButton.click();
+
+      const bookmarkedAccountsList = await $("#bookmarked-accounts");
+      const bookmarkedAccounts = await bookmarkedAccountsList.$$(".bookmarked-account-item");
+
+      expect(bookmarkedAccounts).toHaveLength(1);
     });
   });
 });

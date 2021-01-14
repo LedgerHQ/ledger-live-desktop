@@ -226,7 +226,7 @@ const Carousel = ({
         <Trans i18nKey="carousel.hidden.disclaimer" />
       </Text>
       <Box horizontal mt={3}>
-        <Button mr={1} small primary onClick={close}>
+        <Button mr={1} small primary id={"carousel-dismiss-confirm"} onClick={close}>
           <Trans i18nKey="carousel.hidden.close" />
         </Button>
         <Button ml={1} small secondary outlineGrey onClick={onUndo}>
@@ -235,7 +235,11 @@ const Carousel = ({
       </Box>
     </Disclaimer>
   ) : (
-    <CarouselWrapper onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+    <CarouselWrapper
+      id={"carousel"}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       {slides.length > 1 ? (
         <ProgressBarWrapper>
           <TimeBasedProgressBar onComplete={onNext} duration={speed} paused={paused} />
@@ -251,7 +255,7 @@ const Carousel = ({
           );
         })}
       </Slides>
-      <Close onClick={onDismiss}>
+      <Close id={"carousel-dismiss"} onClick={onDismiss}>
         <IconCross size={16} />
       </Close>
       {showControls ? (
