@@ -2,7 +2,7 @@ import initialize, { app, deviceInfo, mockListAppsResult, mockDeviceEvent } from
 
 const $ = selector => app.client.$(selector);
 
-const nanoXSelection = () => {
+const selection = device => {
   it("go through start", async () => {
     const elem = await $("#onboarding-get-started-button");
     await elem.click();
@@ -25,12 +25,12 @@ const nanoXSelection = () => {
       customSnapshotIdentifier: "onboarding-terms-accepted",
     });
   });
-  it("selects nanoX", async () => {
-    const nanoX = await $("#device-nanoX");
+  it("selects " + device, async () => {
+    const nanoX = await $("#device-" + device);
     await nanoX.click();
     await app.client.pause(500);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "onboarding-nanoX-flow",
+      customSnapshotIdentifier: `onboarding-${device}-flow`,
     });
   });
 };
@@ -83,11 +83,11 @@ const goToConnectAndFinish = cta => {
   });
 };
 
-describe("Onboarding", () => {
-  describe("onboarding nano x - new nano", () => {
+const onboard = device => {
+  describe(`onboarding ${device} - new nano`, () => {
     initialize("onboarding", {});
 
-    nanoXSelection();
+    selection(device);
 
     it("goes through the tutorial", async () => {
       const firstUse = await $("#first-use");
@@ -237,18 +237,18 @@ describe("Onboarding", () => {
     goToConnectAndFinish("#quizz-success-cta");
   });
 
-  describe("onboarding nano x - connect", () => {
+  describe(`onboarding ${device} - connect`, () => {
     initialize("onboarding", {});
 
-    nanoXSelection();
+    selection(device);
 
     goToConnectAndFinish("#initialized-device");
   });
 
-  describe("onboarding nano x - restore", () => {
+  describe(`onboarding ${device} - restore`, () => {
     initialize("onboarding", {});
 
-    nanoXSelection();
+    selection(device);
 
     it("goes to restore 1", async () => {
       const next = await $("#restore-device");
@@ -352,4 +352,10 @@ describe("Onboarding", () => {
 
     goToConnectAndFinish("#recovery-howto-2");
   });
+};
+
+describe("Onboarding", () => {
+  onboard("nanoX");
+  onboard("nanoS");
+  onboard("blue");
 });
