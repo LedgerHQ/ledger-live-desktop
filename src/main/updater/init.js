@@ -5,12 +5,6 @@ import logger from "~/logger";
 import { getMainWindow } from "~/main/window-lifecycle";
 import type { UpdateStatus } from "~/renderer/components/Updater/UpdaterContext";
 
-import createElectronAppUpdater from "./createElectronAppUpdater";
-
-const UPDATE_CHECK_IGNORE = Boolean(process.env.UPDATE_CHECK_IGNORE);
-const UPDATE_CHECK_FEED =
-  process.env.UPDATE_CHECK_FEED || "http://resources.live.ledger.app/public_resources/signatures";
-
 const sendStatus = (status: UpdateStatus, payload?: *) => {
   const win = getMainWindow();
 
@@ -19,20 +13,9 @@ const sendStatus = (status: UpdateStatus, payload?: *) => {
   }
 };
 
-const handleDownload = async info => {
-  try {
-    sendStatus("checking");
-    const appUpdater = await createElectronAppUpdater({ feedURL: UPDATE_CHECK_FEED, info });
-    await appUpdater.verify();
-    sendStatus("check-success");
-  } catch (err) {
-    logger.critical(err);
-    if (UPDATE_CHECK_IGNORE) {
-      sendStatus("check-success");
-    } else {
-      sendStatus("error", err);
-    }
-  }
+const handleDownload = () => {
+  // BETA version will check success
+  sendStatus("check-success");
 };
 
 const init = () => {
@@ -44,8 +27,6 @@ const init = () => {
   autoUpdater.on("error", err => {
     logger.error(err);
   });
-
-  autoUpdater.autoInstallOnAppQuit = false;
   autoUpdater.autoDownload = false;
   autoUpdater.checkForUpdates();
 };

@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 
 import network from "@ledgerhq/live-common/lib/network";
 
-const rawURL = "https://raw.githubusercontent.com/LedgerHQ/ledger-live-desktop/master/TERMS.md";
-export const url = "https://github.com/LedgerHQ/ledger-live-desktop/blob/master/TERMS.md";
+const rawURL =
+  "https://raw.githubusercontent.com/LedgerHQ/ledger-live-desktop-beta/master/TERMS.md";
+export const url = "https://github.com/LedgerHQ/ledger-live-desktop-beta/blob/master/TERMS.md";
 
 const currentTermsRequired = "2019-12-04";
 const currentLendingTermsRequired = "2020-11-10";

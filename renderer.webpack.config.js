@@ -43,7 +43,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/renderer/index.html",
       filename: "index.html",
-      title: "Ledger Live",
+      title: "Ledger Live Beta",
     }),
     new HardSourceWebpackPlugin({
       cacheDirectory: path.resolve(__dirname, ".webpack", "cacheRenderer"),

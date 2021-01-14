@@ -62,7 +62,7 @@ jobs:
       - uses: nev7n/wait_for_response@7fef3c1a6e8939d0b09062f14fec50d3c5d15fa1
         if: always()
         with:
-          url: 'http://localhost:9515/'
+          url: "http://localhost:9515/"
           responseCode: 404
           timeout: 600000
           interval: 1000
@@ -97,7 +97,7 @@ jobs:
           path: tests/specs/__image_snapshots__/__diff_output__/
       - name: generate imgChanged
         run: |
-          git remote add ledger https://github.com/LedgerHQ/ledger-live-desktop.git
+          git remote add ledger https://github.com/LedgerHQ/ledger-live-desktop-beta.git
           git fetch ledger
           git diff --name-only ledger/${{github.base_ref}}..${{github.event.pull_request.head.sha}} -- tests/specs/__image_snapshots__ >imgChanged.txt
         if: always() && github.event_name == 'pull_request_target'

@@ -1,7 +1,6 @@
 // @flow
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import gt from "semver/functions/gt";
 
 import { lastUsedVersionSelector } from "~/renderer/reducers/settings";
 
@@ -14,10 +13,9 @@ const IsNewVersion = () => {
   const currentVersion = __APP_VERSION__;
 
   useEffect(() => {
-    if (gt(currentVersion, lastUsedVersion)) {
-      dispatch(openModal("MODAL_RELEASE_NOTES", currentVersion));
-      dispatch(saveSettings({ lastUsedVersion: currentVersion }));
-    }
+    // always display the release notes (beta)
+    dispatch(openModal("MODAL_RELEASE_NOTES", currentVersion));
+    dispatch(saveSettings({ lastUsedVersion: currentVersion }));
   }, [currentVersion, dispatch, lastUsedVersion]);
 
   return null;

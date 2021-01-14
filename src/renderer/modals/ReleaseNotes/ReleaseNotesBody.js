@@ -4,7 +4,8 @@ import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import semver from "semver";
 import type { TFunction } from "react-i18next";
-
+import Disclaimer from "~/renderer/components/Disclaimer";
+import IconSensitiveOperationShield from "~/renderer/icons/SensitiveOperationShield";
 import { ModalBody } from "~/renderer/components/Modal";
 import Box from "~/renderer/components/Box";
 import TranslatedError from "~/renderer/components/TranslatedError";
@@ -47,8 +48,7 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
     try {
       const { data } = await network({
         method: "GET",
-        url: "https://api.github.com/repos/LedgerHQ/ledger-live-desktop/releases",
-        // `https://api.github.com/repos/LedgerHQ/ledger-live-desktop/releases/tags/v${version}`,
+        url: "https://api.github.com/repos/LedgerHQ/ledger-live-desktop-beta/releases",
       });
       const v = semver.parse(version);
       if (!v) throw new Error(`can't parse semver ${version}`);
@@ -115,6 +115,14 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
         render={() => (
           <Box relative style={{ height: 500 }} px={5} pb={8}>
             <TrackPage category="Modal" name="ReleaseNotes" />
+            <Box mb={4}>
+              <Disclaimer
+                style={{ minWidth: "auto" }}
+                m={0}
+                icon={<IconSensitiveOperationShield />}
+                content={t("settings.experimental.disclaimer")}
+              />
+            </Box>
             {this.renderContent()}
           </Box>
         )}

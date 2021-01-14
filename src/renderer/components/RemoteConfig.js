@@ -4,7 +4,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 
 const remoteConfigUrl =
-  "https://raw.githubusercontent.com/LedgerHQ/ledger-live-desktop/config/config.json";
+  "https://raw.githubusercontent.com/LedgerHQ/ledger-live-desktop-beta/beta/config.json";
 
 export type RemoteConfig = {
   data: ?{
