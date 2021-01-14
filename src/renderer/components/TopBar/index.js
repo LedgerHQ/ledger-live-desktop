@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useHistory, useLocation } from "react-router-dom";
@@ -8,7 +8,6 @@ import styled from "styled-components";
 
 import { lock } from "~/renderer/actions/application";
 import { openModal } from "~/renderer/actions/modals";
-
 import { discreetModeSelector } from "~/renderer/reducers/settings";
 import { hasAccountsSelector } from "~/renderer/reducers/accounts";
 
@@ -17,7 +16,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Box from "~/renderer/components/Box";
 import Tooltip from "~/renderer/components/Tooltip";
 import Breadcrumb from "~/renderer/components/Breadcrumb";
-
+import HelpSideBar from "~/renderer/modals/Help";
 import IconLock from "~/renderer/icons/Lock";
 import IconEye from "~/renderer/icons/Eye";
 import IconHelp from "~/renderer/icons/Question";
@@ -72,6 +71,8 @@ const TopBar = () => {
   const hasAccounts = useSelector(hasAccountsSelector);
   const discreetMode = useSelector(discreetModeSelector);
 
+  const [helpSideBarVisible, setHelpSideBarVisible] = useState(false);
+
   const handleLock = useCallback(() => dispatch(lock()), [dispatch]);
   const handleDiscreet = useCallback(() => dispatch(setDiscreetMode(!discreetMode)), [
     discreetMode,
@@ -118,11 +119,15 @@ const TopBar = () => {
               <ItemContainer
                 id="topbar-help-button"
                 isInteractive
-                onClick={() => dispatch(openModal("MODAL_HELP"))}
+                onClick={() => setHelpSideBarVisible(true)}
               >
                 <IconHelp size={16} />
               </ItemContainer>
             </Tooltip>
+            <HelpSideBar
+              isOpened={helpSideBarVisible}
+              onClose={() => setHelpSideBarVisible(false)}
+            />
             {hasPassword && (
               <>
                 <Box justifyContent="center">

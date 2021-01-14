@@ -9,7 +9,6 @@ import {
   getAccountUnit,
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account";
-
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -68,6 +67,9 @@ export default class StepSummary extends PureComponent<StepProps> {
     const feesCurrency = getAccountCurrency(mainAccount);
     const unit = getAccountUnit(account);
     const utxoLag = txInputs ? txInputs.length >= WARN_FROM_UTXO_COUNT : null;
+    const hasNonEmptySubAccounts =
+      account.type === "Account" &&
+      (account.subAccounts || []).some(subAccount => subAccount.balance.gt(0));
 
     // $FlowFixMe
     const memo = transaction.memo;
@@ -78,6 +80,16 @@ export default class StepSummary extends PureComponent<StepProps> {
         {utxoLag ? (
           <InfoBox type="warning">
             <Trans i18nKey="send.steps.details.utxoLag" />
+          </InfoBox>
+        ) : null}
+        {transaction.useAllAmount && hasNonEmptySubAccounts ? (
+          <InfoBox>
+            <Trans
+              i18nKey="send.steps.details.subaccountsWarning"
+              values={{
+                currency: currency.name,
+              }}
+            />
           </InfoBox>
         ) : null}
         <FromToWrapper>
