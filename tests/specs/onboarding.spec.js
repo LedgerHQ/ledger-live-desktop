@@ -35,6 +35,54 @@ const nanoXSelection = () => {
   });
 };
 
+const goToConnectAndFinish = cta => {
+  it("goest to connect", async () => {
+    const next = await $(cta);
+    await next.click();
+    await app.client.pause(500);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      // wave thing
+      failureThreshold: 15,
+      failureThresholdType: "pixel",
+      // its the same but for some reason theres a button that's not the same (?)
+      customSnapshotIdentifier: "onboarding-genuine-check-" + cta.replace("#", ""),
+    });
+  });
+
+  it("check nano", async () => {
+    const next = await $("#pair-my-nano-cta");
+    await next.click();
+    await app.client.pause(200);
+    await mockDeviceEvent(
+      {
+        type: "listingApps",
+        deviceInfo,
+      },
+      {
+        type: "result",
+        result: mockListAppsResult("Bitcoin", "Bitcoin", deviceInfo),
+      },
+      { type: "complete" },
+    );
+    await app.client.pause(5000);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      // wave thing
+      failureThreshold: 15,
+      failureThresholdType: "pixel",
+      customSnapshotIdentifier: "onboarding-check-complete",
+    });
+  });
+
+  it("should be on app", async () => {
+    const next = await $("#genuine-check-cta");
+    await next.click();
+    await app.client.pause(200);
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "onboarding-complete",
+    });
+  });
+};
+
 describe("Onboarding", () => {
   describe("onboarding nano x - new nano", () => {
     initialize("onboarding", {});
@@ -186,55 +234,14 @@ describe("Onboarding", () => {
       });
     });
 
-    it("goest to connect", async () => {
-      const next = await $("#quizz-success-cta");
-      await next.click();
-      await app.client.pause(200);
-      expect(await app.client.screenshot()).toMatchImageSnapshot({
-        // wave thing
-        failureThreshold: 15,
-        failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-genuine-check",
-      });
-    });
-
-    it("check nano", async () => {
-      const next = await $("#pair-my-nano-cta");
-      await next.click();
-      await app.client.pause(200);
-      await mockDeviceEvent(
-        {
-          type: "listingApps",
-          deviceInfo,
-        },
-        {
-          type: "result",
-          result: mockListAppsResult("Bitcoin", "Bitcoin", deviceInfo),
-        },
-        { type: "complete" },
-      );
-      await app.client.pause(5000);
-      expect(await app.client.screenshot()).toMatchImageSnapshot({
-        // wave thing
-        failureThreshold: 15,
-        failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-check-complete",
-      });
-    });
-
-    it("should be on app", async () => {
-      const next = await $("#genuine-check-cta");
-      await next.click();
-      await app.client.pause(200);
-      expect(await app.client.screenshot()).toMatchImageSnapshot({
-        customSnapshotIdentifier: "onboarding-complete",
-      });
-    });
+    goToConnectAndFinish("#quizz-success-cta");
   });
 
   describe("onboarding nano x - connect", () => {
     initialize("onboarding", {});
 
     nanoXSelection();
+
+    goToConnectAndFinish("#initialized-device");
   });
 });
