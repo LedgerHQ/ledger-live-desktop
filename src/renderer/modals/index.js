@@ -21,7 +21,6 @@ import MODAL_SETTINGS_ACCOUNT from "./SettingsAccount";
 import MODAL_RELEASE_NOTES from "./ReleaseNotes";
 import MODAL_EXCHANGE_CRYPTO_DEVICE from "./ExchangeDeviceConfirm";
 import MODAL_SELL_CRYPTO_DEVICE from "./SellDeviceConfirm";
-import MODAL_HELP from "./Help";
 import MODAL_SWAP from "./Swap";
 import MODAL_SWAP_OPERATION_DETAILS from "./SwapOperationDetails";
 
@@ -91,7 +90,6 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_ALGORAND_OPT_IN,
   MODAL_ALGORAND_CLAIM_REWARDS,
   MODAL_ALGORAND_EARN_REWARDS_INFO,
-  MODAL_HELP,
   // Lending
   MODAL_LEND_MANAGE,
   MODAL_LEND_ENABLE_INFO,

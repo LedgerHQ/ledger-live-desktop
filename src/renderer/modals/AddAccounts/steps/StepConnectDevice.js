@@ -9,7 +9,7 @@ import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
 import { command } from "~/renderer/commands";
 import type { StepProps } from "..";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 
 const connectAppExec = command("connectApp");
 
