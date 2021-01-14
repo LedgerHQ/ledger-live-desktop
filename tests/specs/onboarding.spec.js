@@ -69,7 +69,7 @@ const goToConnectAndFinish = cta => {
       // wave thing
       failureThreshold: 15,
       failureThresholdType: "pixel",
-      customSnapshotIdentifier: "onboarding-check-complete",
+      customSnapshotIdentifier: "onboarding-check-complete-" + cta.replace("#", ""),
     });
   });
 
@@ -243,5 +243,113 @@ describe("Onboarding", () => {
     nanoXSelection();
 
     goToConnectAndFinish("#initialized-device");
+  });
+
+  describe("onboarding nano x - restore", () => {
+    initialize("onboarding", {});
+
+    nanoXSelection();
+
+    it("goes to restore 1", async () => {
+      const next = await $("#restore-device");
+      await next.click();
+      await app.client.pause(500);
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
+        customSnapshotIdentifier: "onboarding-restore-start",
+      });
+    });
+
+    it("warns the user", async () => {
+      const next = await $("#import-recovery-next");
+      await next.click();
+      await app.client.pause(500);
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
+        customSnapshotIdentifier: "onboarding-restore-warn",
+      });
+    });
+
+    it("does recovery 1", async () => {
+      const next = await $("#ledger-seed-warn");
+      await next.click();
+      await app.client.pause(500);
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
+        customSnapshotIdentifier: "onboarding-restore-step1",
+      });
+    });
+
+    it("goest to pincode", async () => {
+      const next = await $("#device-howto-2");
+      await next.click();
+      await app.client.pause(200);
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
+        customSnapshotIdentifier: "onboarding-nano-restore-pincode",
+      });
+    });
+
+    it("goest to pincode 2", async () => {
+      const pincodeCB = await $("#pincode-private-cb");
+      pincodeCB.click();
+      const next = await $("#device-pincode-cta");
+      await next.click();
+      await app.client.pause(200);
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
+        customSnapshotIdentifier: "onboarding-nano-restore-pincode-2",
+      });
+    });
+
+    it("goest to recovery phrase restore", async () => {
+      const next = await $("#pincode-howto-cta");
+      await next.click();
+      await app.client.pause(200);
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
+        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-restore",
+      });
+    });
+
+    it("goest to recovery phrase restore 2", async () => {
+      const recoveryphraseCB = await $("#passphrase-recovery-cb");
+      recoveryphraseCB.click();
+      const next = await $("#passphrase-recovery-cta");
+      await next.click();
+      await app.client.pause(200);
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
+        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-restore-2",
+      });
+    });
+
+    it("goest to recovery phrase restore 3", async () => {
+      const next = await $("#recovery-howto-1");
+      await next.click();
+      await app.client.pause(200);
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
+        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-restore-3",
+      });
+    });
+
+    goToConnectAndFinish("#recovery-howto-2");
   });
 });
