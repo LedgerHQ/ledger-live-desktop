@@ -10,13 +10,13 @@ const log = str => {
   }
 };
 
-const isMaster = () => {
+const isBeta = () => {
   const branch = git.branch();
 
   log(`Current branch is '${branch}'`);
 
-  if (branch !== "master") {
-    throw new Error("The current branch is not `master`");
+  if (branch !== "beta") {
+    throw new Error("The current branch is not `beta`");
   }
 };
 
@@ -100,8 +100,8 @@ module.exports = args => {
       task: checkRemote,
     },
     {
-      title: "Check that the current branch is `master`",
-      task: isMaster,
+      title: "Check that the current branch is `beta`",
+      task: isBeta,
     },
     {
       title: "Check that the local git repository is clean",
