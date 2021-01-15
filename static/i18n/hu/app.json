@@ -464,7 +464,7 @@
     },
     "assets": "Assets to lend",
     "active": "Approved accounts",
-    "lendAsset": "Deposit",
+    "lendAsset": "Lend",
     "highFeesModal": {
       "title": "High fees on Ethereum",
       "description": "Due to congestion on the Ethereum network, you may experience high fees when issuing transactions.",
@@ -512,12 +512,11 @@
     "headers": {
       "active": {
         "accounts": "Account",
-        "amountSupplied": "Current loan",
-        "amountSuppliedTooltip": "Amount lent to the network",
-        "accruedInterests": "Accrued interest",
-        "accruedInterestsTooltip": "Interest generated on your lent assets",
-        "status": "Status",
-        "statusTooltip": "Current account status",
+        "amountSupplied": "Open loan",
+        "amountSuppliedTooltip": "Amount deposited in the network",
+        "accruedInterests": "Interest balance",
+        "accruedInterestsTooltip": "Interest being earned on loans",
+        "status": "Account status",
         "actions": "Actions"
       },
       "status": {
@@ -538,12 +537,12 @@
       },
       "rates": {
         "allAssets": "Asset",
-        "totalBalance": "Available balance",
-        "totalBalanceTooltip": "Total balance of your accounts excluding the amount deposited",
+        "totalBalance": "Asset balance",
+        "totalBalanceTooltip": "Amount available to lend",
         "grossSupply": "Gross supply",
         "grossSupplyTooltip": "Total amount of assets deposited on the protocol",
-        "currentAPY": "Current APY",
-        "currentAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
+        "currentAPY": "Deposit APY",
+        "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
         "actions": "Actions"
       }
     },
@@ -737,7 +736,10 @@
       "title": "Getting started",
       "desc": "Start here"
     },
-    "status": "Ledger status",
+    "status": {
+      "title": "Ledger Status",
+      "desc": "Learn crypto"
+    },
     "helpCenter": {
       "title": "Ledger Support",
       "desc": "Get help"
@@ -1372,6 +1374,7 @@
       },
       "details": {
         "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
+        "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
         "from": "Innen",
         "to": "Ide",
         "selectAccountDebit": "Használni kívánt számla",

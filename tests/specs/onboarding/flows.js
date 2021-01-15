@@ -1,8 +1,9 @@
-import initialize, { app, deviceInfo, mockListAppsResult, mockDeviceEvent } from "../common.js";
+/* eslint-disable jest/no-export */
+import initialize, { app, deviceInfo, mockListAppsResult, mockDeviceEvent } from "../../common.js";
 
 const $ = selector => app.client.$(selector);
 
-const selection = device => {
+export const selection = device => {
   it("go through start", async () => {
     const elem = await $("#onboarding-get-started-button");
     await elem.click();
@@ -14,7 +15,7 @@ const selection = device => {
     });
   });
   it("accept terms", async () => {
-    const lossCB = await $("#modal-terms-privacy-policy");
+    const lossCB = await $("#modal-terms-checkbox-loss");
     const termCB = await $("#modal-terms-checkbox");
     const cta = await $("#modal-confirm-button");
     await lossCB.click();
@@ -35,7 +36,7 @@ const selection = device => {
   });
 };
 
-const goToConnectAndFinish = cta => {
+export const goToConnectAndFinish = cta => {
   it("goes to connect", async () => {
     const next = await $(cta);
     await next.click();
@@ -83,7 +84,7 @@ const goToConnectAndFinish = cta => {
   });
 };
 
-const onboard = device => {
+export const onboard = device => {
   describe(`onboarding ${device} - new nano`, () => {
     initialize("onboarding", {});
 
@@ -353,9 +354,3 @@ const onboard = device => {
     goToConnectAndFinish("#recovery-howto-2");
   });
 };
-
-describe("Onboarding", () => {
-  onboard("nanoX");
-  onboard("nanoS");
-  onboard("blue");
-});
