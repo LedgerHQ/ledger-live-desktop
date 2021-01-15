@@ -1,10 +1,11 @@
 // @flow
-import React, { useCallback, useMemo, useState, useEffect, useRef } from "react";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { ListAppsResult } from "@ledgerhq/live-common/lib/apps/types";
 import { distribute, initState } from "@ledgerhq/live-common/lib/apps/logic";
+import { mockExecWithInstalledContext } from "@ledgerhq/live-common/lib/apps/mock";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import AppsList from "./AppsList";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -12,6 +13,7 @@ import Box from "~/renderer/components/Box";
 import { command } from "~/renderer/commands";
 import FirmwareUpdate from "./FirmwareUpdate";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 
 type Props = {
   device: Device,
@@ -53,10 +55,13 @@ const Dashboard = ({ device, deviceInfo, result, onReset, appsToRestore }: Props
     }
   }, [onReset, firmwareUpdateOpened, currentDevice]);
 
-  const exec = useCallback(
-    (appOp, targetId, app) =>
-      command("appOpExec")({ appOp, targetId, app, deviceId: device.deviceId }),
-    [device],
+  const exec = useMemo(
+    () =>
+      getEnv("MOCK")
+        ? mockExecWithInstalledContext(result?.installed || [])
+        : (appOp, targetId, app) =>
+            command("appOpExec")({ appOp, targetId, app, deviceId: device.deviceId }),
+    [device, result],
   );
 
   const appsStoragePercentage = useMemo(() => {
