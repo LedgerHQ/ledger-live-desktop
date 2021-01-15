@@ -10,6 +10,10 @@ import fs from "fs";
 import rimraf from "rimraf";
 import path from "path";
 
+// instead of making a PR to spectron we override the way they launch chromedriver
+// chromedriver is launched automatically in the docker container
+// this avoid having a useless electron app poping up locally :p
+// best way would be to integrate the ability to use a remote webdriver in spectron with a PR
 Application.prototype.startChromeDriver = function() {
   this.chromeDriver = {
     start: () => {
