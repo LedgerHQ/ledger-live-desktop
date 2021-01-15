@@ -235,11 +235,6 @@ const ActiveAccounts = ({ summaries }: Props) => {
           <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
             {t("lend.headers.active.status")}
           </Text>
-          <ToolTip content={t("lend.headers.active.statusTooltip")}>
-            <IconWrapper>
-              <InfoCircle size={11} />
-            </IconWrapper>
-          </ToolTip>
         </Box>
         <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
           {t("lend.headers.active.actions")}

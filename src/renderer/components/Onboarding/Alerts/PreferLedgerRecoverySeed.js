@@ -41,7 +41,7 @@ export function PreferLedgerRecoverySeed({ onClose }: Props) {
       >
         {t("onboarding.alerts.useLedgerSeeds.descr")}
       </Text>
-      <Button primary onClick={onClose}>
+      <Button id="ledger-seed-warn" primary onClick={onClose}>
         <Text
           lineHeight="18px"
           color="palette.primary.contrastText"

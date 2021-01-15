@@ -95,7 +95,7 @@ export function ExistingRecoveryPhrase({ sendEvent, context }: Props) {
             cursor: "pointer",
           }}
         >
-          <CheckBox isChecked={userUnderstandConsequences} inverted />
+          <CheckBox id="passphrase-recovery-cb" isChecked={userUnderstandConsequences} inverted />
           <Text
             color="palette.primary.contrastText"
             ff="Inter|Regular"
@@ -118,6 +118,7 @@ export function ExistingRecoveryPhrase({ sendEvent, context }: Props) {
           </Text>
         </Button>
         <Button
+          id="passphrase-recovery-cta"
           inverted
           disabled={!userUnderstandConsequences}
           primary

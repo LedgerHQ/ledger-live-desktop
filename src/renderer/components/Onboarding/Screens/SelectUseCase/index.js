@@ -140,6 +140,7 @@ export function SelectUseCase({ sendEvent, context }: Props) {
           </LeftColumn>
           <RightColumn>
             <UseCaseOption
+              id="initialized-device"
               heading={t("onboarding.screens.selectUseCase.options.2.heading")}
               title={
                 <Trans
@@ -154,6 +155,7 @@ export function SelectUseCase({ sendEvent, context }: Props) {
               onClick={() => sendEvent("CONNECT_SETUP_DEVICE")}
             />
             <UseCaseOption
+              id="restore-device"
               heading={t("onboarding.screens.selectUseCase.options.3.heading")}
               title={t("onboarding.screens.selectUseCase.options.3.title")}
               description={
