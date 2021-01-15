@@ -4,7 +4,7 @@ import {
 } from "@ledgerhq/live-common/lib/apps/mock";
 import { Application } from "spectron";
 import _ from "lodash";
-import { toMatchImageSnapshot } from "jest-image-snapshot";
+import { configureToMatchImageSnapshot } from "jest-image-snapshot";
 import ModalPage from "./po/modal.page";
 import fs from "fs";
 import rimraf from "rimraf";
@@ -40,6 +40,10 @@ let app;
 let modalPage;
 let mockDeviceEvent;
 
+const toMatchImageSnapshot = configureToMatchImageSnapshot({
+  customSnapshotsDir: path.join(__dirname, "specs", "__image_snapshots__"),
+  customDiffDir: path.join(__dirname, "specs", "__image_snapshots__", "__diff_output__"),
+});
 expect.extend({ toMatchImageSnapshot });
 jest.setTimeout(600000);
 
