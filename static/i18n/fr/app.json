@@ -464,7 +464,7 @@
     },
     "assets": "Actifs à prêter",
     "active": "Comptes actifs",
-    "lendAsset": "Dépôt",
+    "lendAsset": "Lend",
     "highFeesModal": {
       "title": "Frais élevés sur Ethereum",
       "description": "En raison de la congestion du réseau Ethereum, il se peut que vous ayez à payer des frais élevés lors de l'émission de transactions.",
@@ -512,12 +512,11 @@
     "headers": {
       "active": {
         "accounts": "Compte",
-        "amountSupplied": "Prêt actuel",
-        "amountSuppliedTooltip": "Montant prêté au réseau",
-        "accruedInterests": "Intérêt accumulé",
-        "accruedInterestsTooltip": "Intérêt généré sur vos actifs prêtés",
-        "status": "Statut",
-        "statusTooltip": "Statut actuel du compte",
+        "amountSupplied": "Open loan",
+        "amountSuppliedTooltip": "Amount deposited in the network",
+        "accruedInterests": "Interest balance",
+        "accruedInterestsTooltip": "Interest being earned on loans",
+        "status": "Account status",
         "actions": "Actions"
       },
       "status": {
@@ -538,12 +537,12 @@
       },
       "rates": {
         "allAssets": "Actif",
-        "totalBalance": "Solde disponible",
-        "totalBalanceTooltip": "Solde total de vos comptes hors montant déposé",
+        "totalBalance": "Asset balance",
+        "totalBalanceTooltip": "Amount available to lend",
         "grossSupply": "Valeur du marché",
         "grossSupplyTooltip": "Montant total des actifs déposés sur le protocole",
-        "currentAPY": "APY actuel",
-        "currentAPYTooltip": "Taux de retour annuel d'un dépôt continuellement composé",
+        "currentAPY": "Deposit APY",
+        "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
         "actions": "Actions"
       }
     },
