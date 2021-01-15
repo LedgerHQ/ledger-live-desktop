@@ -29,7 +29,7 @@
     "ci": "node ./tools/ci.js",
     "test": "jest src",
     "start-electron-webdriver": "node tests/docker-electron-webdriver/start.js",
-    "spectron": "jest tests/specs/*.spec.js --maxWorkers=2",
+    "spectron": "jest tests/specs/*.spec.js --maxWorkers=4",
     "spectron-coverage": "nyc report --reporter=text-lcov --temp-dir=tests/coverage | codecov --pipe --disable=gcov",
     "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)"
   },
