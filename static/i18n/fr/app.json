@@ -459,7 +459,7 @@
     "tabs": {
       "dashboard": "Tableau de bord",
       "opened": "Prêts ouverts",
-      "closed": "Emprunts clôturés",
+      "closed": "Prêts clôturés",
       "history": "Historique"
     },
     "assets": "Actifs à prêter",
