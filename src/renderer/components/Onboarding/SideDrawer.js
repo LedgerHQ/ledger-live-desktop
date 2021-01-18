@@ -67,7 +67,8 @@ const DrawerContent = styled.div`
   box-sizing: border-box;
   padding: 0px 67px;
   width: 80%;
-  background-color: ${p => p.theme.colors.palette.background.default};
+  background-color: ${p =>
+    p.paper ? p.theme.colors.palette.background.paper : p.theme.colors.palette.background.default};
   transition: transform ${DURATION}ms ease-out;
   max-width: 430px;
   will-change: transform;
@@ -111,6 +112,7 @@ type DrawerProps = {
   isOpen?: boolean,
   onRequestClose?: (*) => void,
   direction?: "right" | "left",
+  paper?: boolean,
 };
 
 export function SideDrawer({
@@ -118,6 +120,7 @@ export function SideDrawer({
   isOpen = false,
   onRequestClose,
   direction = "right",
+  paper = false,
 }: DrawerProps) {
   const [isMounted, setMounted] = useState(false);
 
@@ -183,7 +186,7 @@ export function SideDrawer({
     <Transition in={isOpen} timeout={DURATION} onEntered={onEntered} onExited={onExited}>
       {state => (
         <DrawerContainer className={state} ref={focusTrapElem} tabIndex="-1">
-          <DrawerContent isOpened={isOpen} className={state} direction={direction}>
+          <DrawerContent paper={paper} isOpened={isOpen} className={state} direction={direction}>
             {onRequestClose ? (
               <DrawerTopContainer>
                 <TouchButton onClick={onRequestClose}>

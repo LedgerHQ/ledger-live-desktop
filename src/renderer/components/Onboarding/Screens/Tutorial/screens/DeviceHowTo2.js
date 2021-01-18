@@ -3,13 +3,13 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import Lottie from "react-lottie";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
+import Animation from "~/renderer/animations";
 import NanoSAnim from "../assets/animations/nanoS/power-on-recovery.json";
 import NanoXAnim from "../assets/animations/nanoX/power-on-recovery.json";
 import { ContentContainer } from "../shared";
@@ -133,22 +133,20 @@ export function DeviceHowTo2({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   const { deviceId } = context;
 
-  const defaultOptions = {
-    loop: true,
-    autoplay: !process.env.SPECTRON_RUN,
-    animationData: deviceId === "nanoX" ? NanoXAnim : NanoSAnim,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
-
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
   const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
 
   return (
     <ScreenContainer>
       <ContentContainer style={{ marginTop: 94 }}>
-        <Lottie options={defaultOptions} height={130} />
+        <Animation
+          loop
+          animation={deviceId === "nanoX" ? NanoXAnim : NanoSAnim}
+          rendererSettings={{
+            preserveAspectRatio: "xMidYMid slice",
+          }}
+          height="130"
+        />
         <StepList>
           {steps.map((step, index) => (
             <Step key={index} title={t(step.titleKey)} descr={t(step.descrKey)} index={index + 1} />
@@ -162,7 +160,7 @@ export function DeviceHowTo2({ sendEvent, context }: Props) {
             {t("onboarding.screens.tutorial.screens.deviceHowTo2.buttons.prev")}
           </Text>
         </Button>
-        <Button primary onClick={onClickNext}>
+        <Button id="device-howto-2" primary onClick={onClickNext}>
           <Text mr="12px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.deviceHowTo2.buttons.next")}
           </Text>

@@ -14,7 +14,7 @@ import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
 import { command } from "~/renderer/commands";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
-import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import type { FullNodeSteps, ConnectionStatus } from "~/renderer/modals/FullNode";
 import { CheckWrapper, connectionStatus } from "~/renderer/modals/FullNode";
 import IconCheck from "~/renderer/icons/Check";

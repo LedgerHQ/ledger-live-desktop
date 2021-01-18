@@ -40,7 +40,7 @@ const Stars = ({ pathname, collapsed }: Props) => {
   const starredAccounts = useSelector(starredAccountsSelector);
 
   return starredAccounts && starredAccounts.length ? (
-    <Container key={pathname}>
+    <Container key={pathname} id={"sidebar-stars-container"}>
       {starredAccounts.map((account, i) => (
         <Tooltip
           content={account.type === "Account" ? account.name : getAccountCurrency(account).name}
@@ -52,6 +52,7 @@ const Stars = ({ pathname, collapsed }: Props) => {
           flip={!collapsed}
         >
           <Item
+            className={"starred-account"}
             index={i}
             key={account.id}
             account={account}

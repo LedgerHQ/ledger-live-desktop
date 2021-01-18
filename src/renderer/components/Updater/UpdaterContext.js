@@ -27,7 +27,7 @@ export type UpdaterContextType = {
   error: ?Error,
 };
 
-type MaybeUpdateContextType = ?UpdaterContextType;
+export type MaybeUpdateContextType = ?UpdaterContextType;
 
 type UpdaterProviderProps = {
   children: *,

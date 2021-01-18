@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import type { AccountLikeArray } from "@ledgerhq/live-common/lib/types";
 import type { CurrentRate } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
-import { getCryptoCurrencyById, formatShort } from "@ledgerhq/live-common/lib/currencies";
+import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useFlattenSortAccounts } from "~/renderer/actions/general";
 import { isAcceptedLendingTerms } from "~/renderer/terms";
@@ -27,18 +27,18 @@ const Header = styled(Box)`
   align-items: center;
 
   > * {
-    flex-basis: 20%;
+    flex-basis: 25%;
     align-items: center;
   }
 
   > *:first-child {
-    flex-basis: 25%;
-    max-width: 25%;
+    flex-basis: 35%;
+    max-width: 35%;
   }
 
-  > *:nth-child(4) {
+  > *:nth-child(3) {
     flex-basis: 15%;
-    text-align: center;
+    justify-content: center;
   }
 
   > *:last-child {
@@ -54,20 +54,20 @@ const RowContent = styled(Box)`
   padding: 10px 24px;
 
   > * {
-    flex-basis: 20%;
+    flex-basis: 25%;
     display: flex;
     align-items: center;
     flex-direction: row;
     box-sizing: border-box;
-    max-width: 20%;
-  }
-
-  > *:first-child {
-    flex-basis: 25%;
     max-width: 25%;
   }
 
-  > *:nth-child(4) {
+  > *:first-child {
+    flex-basis: 35%;
+    max-width: 35%;
+  }
+
+  > *:nth-child(3) {
     flex-basis: 15%;
     max-width: 15%;
     text-align: center;
@@ -106,7 +106,7 @@ const IconWrapper = styled.div`
 `;
 
 const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray }) => {
-  const { token, totalSupply, supplyAPY } = data;
+  const { token, supplyAPY } = data;
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const eth = getCryptoCurrencyById("ethereum");
@@ -134,10 +134,6 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
       dispatch(openModal("MODAL_LEND_ENABLE_INFO", { account, parentAccount, currency: token }));
     }
   }, [dispatch, accounts, token, eth]);
-
-  const grossSupply = useMemo((): string => {
-    return formatShort(token.units[0], totalSupply);
-  }, [token, totalSupply]);
 
   const totalBalance = useMemo(() => {
     return accounts.reduce((total, account) => {
@@ -180,11 +176,6 @@ const Row = ({ data, accounts }: { data: CurrentRate, accounts: AccountLikeArray
           />
         </Ellipsis>
       </Amount>
-      <Amount>
-        <Ellipsis fontSize={4} ff="Inter|SemiBold" color="palette.text.shade100">
-          {grossSupply}
-        </Ellipsis>
-      </Amount>
       <Amount style={{ alignItems: "center" }}>
         <Pill fontSize={4}>{supplyAPY}</Pill>
       </Amount>
@@ -217,16 +208,6 @@ export default function Rates({ rates }: { rates: CurrentRate[] }) {
             {t("lend.headers.rates.totalBalance")}
           </Text>
           <ToolTip content={t("lend.headers.rates.totalBalanceTooltip")}>
-            <IconWrapper>
-              <InfoCircle size={11} />
-            </IconWrapper>
-          </ToolTip>
-        </Box>
-        <Box horizontal>
-          <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
-            {t("lend.headers.rates.grossSupply")}
-          </Text>
-          <ToolTip content={t("lend.headers.rates.grossSupplyTooltip")}>
             <IconWrapper>
               <InfoCircle size={11} />
             </IconWrapper>
