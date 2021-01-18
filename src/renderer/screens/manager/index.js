@@ -5,7 +5,7 @@ import Dashboard from "~/renderer/screens/manager/Dashboard";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import { command } from "~/renderer/commands";
-import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 
 const connectManagerExec = command("connectManager");

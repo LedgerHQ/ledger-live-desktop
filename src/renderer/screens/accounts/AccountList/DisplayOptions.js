@@ -25,6 +25,7 @@ function DisplayOptions() {
       </Box>
       <ToggleButton
         event="Account view table"
+        id="accounts-display-list"
         mr={1}
         onClick={() => dispatch(setAccountsViewMode("list"))}
         active={mode === "list"}
@@ -33,6 +34,7 @@ function DisplayOptions() {
       </ToggleButton>
       <ToggleButton
         event="Account view mosaic"
+        id="accounts-display-grid"
         onClick={() => dispatch(setAccountsViewMode("card"))}
         active={mode === "card"}
       >

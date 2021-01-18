@@ -14,6 +14,9 @@ function fire(particleRatio, opts) {
 }
 
 export const fireConfetti = () => {
+  if (process.env.SPECTRON_RUN) {
+    return;
+  }
   fire(0.25, {
     spread: 26,
     startVelocity: 55,

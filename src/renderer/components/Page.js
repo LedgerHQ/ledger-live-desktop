@@ -137,7 +137,11 @@ const Page = ({ children }: Props) => {
           <PageContentContainer>{children}</PageContentContainer>
         </PageScroller>
       </PageScrollerContainer>
-      <ScrollUpButton isVisible={isScrollUpButtonVisible} onClick={scrolltoTop}>
+      <ScrollUpButton
+        id={"scrollUpButton"}
+        isVisible={isScrollUpButtonVisible}
+        onClick={scrolltoTop}
+      >
         <AngleUp size={20} />
       </ScrollUpButton>
     </PageContainer>

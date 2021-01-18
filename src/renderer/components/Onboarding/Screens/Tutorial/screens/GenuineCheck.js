@@ -16,7 +16,7 @@ import IconCheck from "~/renderer/icons/Check";
 import { ContentContainer } from "../shared";
 import DeviceAction from "~/renderer/components/DeviceAction";
 
-import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import { command } from "~/renderer/commands";
 
 const connectManagerExec = command("connectManager");

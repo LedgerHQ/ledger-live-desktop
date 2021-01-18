@@ -62,8 +62,8 @@ type Props = {
   onReset?: () => void,
 };
 
-let tradeId = null;
 const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
+  const tradeId = useRef(null);
   const [widgetLoaded, setWidgetLoaded] = useState(false);
   const dispatch = useDispatch();
   const colors = useTheme("colors");
@@ -74,7 +74,6 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
   const coinifyConfig = getConfig();
   const widgetConfig: CoinifyWidgetConfig = {
-    //    fontColor: colors.darkBlue,
     primaryColor: colors.wallet,
     partnerId: coinifyConfig.partnerId,
     cryptoCurrencies: currency ? currency.ticker : null,
@@ -84,7 +83,7 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
 
   if (mode === "buy") {
     widgetConfig.transferOutMedia = "blockchain";
-    widgetConfig.addressConfirmation = true;
+    widgetConfig.confirmMessages = true;
   }
 
   if (mode === "sell") {
@@ -118,10 +117,10 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
         widgetRef.current.contentWindow.postMessage(
           {
             type: "event",
-            event: "trade.receive-account-confirmed",
+            event: "trade.confirm-trade-prepared",
             context: {
               address: mainAccount.freshAddress,
-              status: "accepted",
+              confirmed: true,
             },
           },
           coinifyConfig.host,
@@ -130,7 +129,7 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
           track("Coinify Confirm Buy End", { currencyName: currency.name });
         }
       }
-      if (tradeId && mode === "sell") {
+      if (tradeId.current && mode === "sell") {
         widgetRef.current.contentWindow.postMessage(
           {
             type: "event",
@@ -138,7 +137,7 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
             context: {
               confirmed: true,
               transferInitiated: true,
-              tradeId,
+              tradeId: tradeId.current,
             },
           },
           coinifyConfig.host,
@@ -156,10 +155,10 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
         widgetRef.current.contentWindow.postMessage(
           {
             type: "event",
-            event: "trade.receive-account-confirmed",
+            event: "trade.confirm-trade-prepared",
             context: {
               address: mainAccount.freshAddress,
-              status: "rejected",
+              confirmed: false,
             },
           },
           coinifyConfig.host,
@@ -245,9 +244,19 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
       if (type !== "event") return;
       switch (event) {
         case "trade.trade-created":
-          if (mode === "sell") {
-            //            setTradeId(context.id);
-            tradeId = context.id;
+          tradeId.current = context.id;
+          if (mode === "buy" && widgetRef.current?.contentWindow) {
+            widgetRef.current.contentWindow.postMessage(
+              {
+                type: "event",
+                event: "trade.confirm-trade-created",
+                context: {
+                  confirmed: true,
+                  tradeId: tradeId.current,
+                },
+              },
+              coinifyConfig.host,
+            );
           }
           break;
         case "trade.trade-prepared":
