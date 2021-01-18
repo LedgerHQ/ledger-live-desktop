@@ -30,6 +30,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
+          token: ${{ secrets.CHECKOUT_READ_ONLY }}
           persist-credentials: false
       - uses: actions/setup-node@main
         with:
