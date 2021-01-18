@@ -114,7 +114,7 @@ const SectionExperimental = () => {
             />
           ) : null,
         )}
-        {__DEV__ ? <EthereumBridgeRow /> : null}
+        {process.env.SHOW_ETHEREUM_BRIDGE ? <EthereumBridgeRow /> : null}
         <FullNode />
       </Body>
     </div>

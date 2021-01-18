@@ -17,7 +17,7 @@ import { hardReset } from "~/renderer/reset";
 
 import "~/renderer/styles/global";
 import "~/renderer/live-common-setup";
-import "~/renderer/experimental";
+import { getLocalStorageEnvs } from "~/renderer/experimental";
 import "~/renderer/i18n/init";
 
 import logger, { enableDebugLogger } from "~/logger";
@@ -66,6 +66,9 @@ async function init() {
     _.each(spectronData.localStorage, (value, key) => {
       global.localStorage.setItem(key, value);
     });
+
+    const envs = getLocalStorageEnvs();
+    for (const k in envs) setEnvOnAllThreads(k, envs[k]);
 
     const timemachine = require("timemachine");
     timemachine.config({
