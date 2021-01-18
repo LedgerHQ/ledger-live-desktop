@@ -22,6 +22,8 @@ import IconFees from "~/renderer/icons/Fees";
 import IconTrash from "~/renderer/icons/Trash";
 import IconSupply from "~/renderer/icons/Supply";
 import IconWithdraw from "~/renderer/icons/Withdraw";
+import IconLink from "~/renderer/icons/LinkIcon";
+import IconCoins from "~/renderer/icons/Coins";
 
 import Freeze from "~/renderer/icons/Freeze";
 import Unfreeze from "~/renderer/icons/Unfreeze";
@@ -30,6 +32,7 @@ import Box from "~/renderer/components/Box";
 import Tooltip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
 import Vote from "~/renderer/icons/Vote";
+import VoteNay from "~/renderer/icons/VoteNay";
 
 const border = p =>
   p.hasFailed
@@ -106,6 +109,13 @@ const iconsComponent = {
   REDEEM: IconWithdraw,
   SUPPLY: IconSupply,
   APPROVE: IconPlus,
+  BOND: IconLink,
+  UNBOND: IconUndelegate,
+  WITHDRAW_UNBONDED: IconCoins,
+  SLASH: IconTrash,
+  NOMINATE: Vote,
+  CHILL: VoteNay,
+  REWARD_PAYOUT: ClaimRewards,
 };
 
 class ConfirmationCheck extends PureComponent<{
