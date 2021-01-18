@@ -71,7 +71,7 @@ const Item: React$ComponentType<Props> = ({
   addAccount,
 }: Props) => {
   const { name } = app;
-  const { deviceModel } = state;
+  const { deviceModel, deviceInfo } = state;
 
   const notEnoughMemoryToInstall = useNotEnoughMemoryToInstall(state, name);
 
@@ -108,8 +108,13 @@ const Item: React$ComponentType<Props> = ({
       </Box>
       <AppSize>
         <ByteSize
-          value={((installed && installed.blocks) || 0) * deviceModel.blockSize || app.bytes || 0}
+          value={
+            ((installed && installed.blocks) || 0) * deviceModel.getBlockSize(deviceInfo.version) ||
+            app.bytes ||
+            0
+          }
           deviceModel={deviceModel}
+          firmwareVersion={deviceInfo.version}
         />
       </AppSize>
       <Box flex="0.6" horizontal alignContent="center" justifyContent="center">
