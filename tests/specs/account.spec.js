@@ -322,7 +322,7 @@ describe("Account", () => {
       });
     });
 
-    it("remove one account", async () => {
+    it("removes one account", async () => {
       let listOfAccounts = await $("#accounts-list");
       const accounts = await listOfAccounts.$$(".accounts-account-row-item");
       const length = accounts.length;
