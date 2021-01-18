@@ -21,7 +21,7 @@ import ReadOnlyAddressField from "~/renderer/components/ReadOnlyAddressField";
 import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/rendering";
 import useTheme from "~/renderer/hooks/useTheme";
 import { Separator } from "~/renderer/components/Breadcrumb/common";
-import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import Button from "~/renderer/components/Button";
 import InfoBox from "~/renderer/components/InfoBox";
@@ -275,18 +275,7 @@ const BuyCrypto = () => {
             ) : null
           }
           render={() =>
-            data ? (
-              <Root
-                data={data}
-                skipDevice={skipDevice}
-                onClose={() => {
-                  if (data.onCancel) {
-                    data.onCancel();
-                  }
-                  onClose();
-                }}
-              />
-            ) : null
+            data ? <Root data={data} skipDevice={skipDevice} onClose={onClose} /> : null
           }
         />
       )}

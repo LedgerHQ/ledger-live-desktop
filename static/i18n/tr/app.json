@@ -464,7 +464,7 @@
     },
     "assets": "Assets to lend",
     "active": "Approved accounts",
-    "lendAsset": "Deposit",
+    "lendAsset": "Lend",
     "highFeesModal": {
       "title": "High fees on Ethereum",
       "description": "Due to congestion on the Ethereum network, you may experience high fees when issuing transactions.",
@@ -512,12 +512,11 @@
     "headers": {
       "active": {
         "accounts": "Account",
-        "amountSupplied": "Current loan",
-        "amountSuppliedTooltip": "Amount lent to the network",
-        "accruedInterests": "Accrued interest",
-        "accruedInterestsTooltip": "Interest generated on your lent assets",
-        "status": "Status",
-        "statusTooltip": "Current account status",
+        "amountSupplied": "Open loan",
+        "amountSuppliedTooltip": "Amount deposited in the network",
+        "accruedInterests": "Interest balance",
+        "accruedInterestsTooltip": "Interest being earned on loans",
+        "status": "Account status",
         "actions": "Actions"
       },
       "status": {
@@ -538,12 +537,12 @@
       },
       "rates": {
         "allAssets": "Asset",
-        "totalBalance": "Available balance",
-        "totalBalanceTooltip": "Total balance of your accounts excluding the amount deposited",
+        "totalBalance": "Asset balance",
+        "totalBalanceTooltip": "Amount available to lend",
         "grossSupply": "Gross supply",
         "grossSupplyTooltip": "Total amount of assets deposited on the protocol",
-        "currentAPY": "Current APY",
-        "currentAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
+        "currentAPY": "Deposit APY",
+        "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
         "actions": "Actions"
       }
     },
@@ -737,7 +736,10 @@
       "title": "Getting started",
       "desc": "Start here"
     },
-    "status": "Ledger status",
+    "status": {
+      "title": "Ledger Status",
+      "desc": "Learn crypto"
+    },
     "helpCenter": {
       "title": "Ledger Support",
       "desc": "Get help"
@@ -1372,6 +1374,7 @@
       },
       "details": {
         "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
+        "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
         "from": "From",
         "to": "To",
         "selectAccountDebit": "Account to debit",
@@ -2115,14 +2118,14 @@
         "title": "Secure your PIN code",
         "intro": "During the setup process you choose a PIN code.",
         "rules": {
-          "1": "Always choose a PIN code yourself.",
-          "2": "Always enter your PIN code out of sight.",
+          "1": "<0>Always</0> choose a PIN code yourself.",
+          "2": "<0>Always</0> enter your PIN code out of sight.",
           "3": "You can change your PIN code if needed.",
           "4": "Three wrong PIN code entries in a row will reset the device.",
-          "5": "Never use an easy PIN code like 0000, 123456, or 55555555.",
-          "6": "Never share your PIN code with someone else. Not even with Ledger.",
-          "7": "Never use a PIN code you did not choose yourself.",
-          "8": "Never store your PIN code on a computer or phone."
+          "5": "<0>Never</0> use an easy PIN code like 0000, 123456, or 55555555.",
+          "6": "<0>Never</0> share your PIN code with someone else. Not even with Ledger.",
+          "7": "<0>Never</0> use a PIN code you did not choose yourself.",
+          "8": "<0>Never</0> store your PIN code on a computer or phone."
         }
       },
       "recoverySeed": {
@@ -2141,9 +2144,9 @@
       "whereToHide": {
         "title": "Where should I keep my recovery phrase?",
         "points": {
-          "1": "NEVER enter it on a computer, smartphone or any other device. Don't take a picture of it.",
-          "2": "NEVER share your 24 words with anyone.",
-          "3": "ALWAYS store it in a secure place, out of sight.",
+          "1": "<0>NEVER</0> enter it on a computer, smartphone or any other device. Don't take a picture of it.",
+          "2": "<0>NEVER</0> share your 24 words with anyone.",
+          "3": "<0>ALWAYS</0> store it in a secure place, out of sight.",
           "4": "Ledger will never ask for your recovery phrase.",
           "5": "If any person or application asks for it, assume it is a scam!"
         }
@@ -2331,7 +2334,7 @@
           "pinCodeHowTo": {
             "setUp": {
               "title": "Choose PIN code",
-              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select ✔ to confirm your PIN code. Select ⌫ to erase a digit."
+              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <0></0> to confirm your PIN code. Select <1></1> to erase a digit."
             },
             "confirm": {
               "title": "Confirm PIN code",

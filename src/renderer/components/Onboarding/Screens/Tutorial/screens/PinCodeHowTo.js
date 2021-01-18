@@ -1,9 +1,9 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
-import { useTranslation } from "react-i18next";
-import Lottie from "react-lottie";
+import { Trans } from "react-i18next";
+import Animation from "~/renderer/animations";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
@@ -14,6 +14,9 @@ import InfoCircle from "~/renderer/icons/InfoCircle";
 import { HeaderContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import NanoSAnim from "../assets/animations/nanoS/pin-code.json";
 import NanoXAnim from "../assets/animations/nanoX/pin-code.json";
+import NanoDeviceCheckIcon from "~/renderer/icons/NanoDeviceCheckIcon";
+import NanoDeviceCancelIcon from "~/renderer/icons/NanoDeviceCancelIcon";
+import useTheme from "~/renderer/hooks/useTheme";
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
@@ -63,8 +66,8 @@ const StepTextContainer = styled.div`
 `;
 
 type StepProps = {
-  title: string,
-  descr: string,
+  title: React$Node,
+  descr: React$Node,
   index: number,
 };
 
@@ -111,14 +114,19 @@ const StepList = styled.div`
   }
 `;
 
-const steps = [
+const steps = (color: string) => [
   {
-    titleKey: "onboarding.screens.tutorial.screens.pinCodeHowTo.setUp.title",
-    descrKey: "onboarding.screens.tutorial.screens.pinCodeHowTo.setUp.descr",
+    titleKey: <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.setUp.title" />,
+    descrKey: (
+      <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.setUp.descr">
+        <NanoDeviceCheckIcon color={color} />
+        <NanoDeviceCancelIcon color={color} />
+      </Trans>
+    ),
   },
   {
-    titleKey: "onboarding.screens.tutorial.screens.pinCodeHowTo.confirm.title",
-    descrKey: "onboarding.screens.tutorial.screens.pinCodeHowTo.confirm.descr",
+    titleKey: <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.confirm.title" />,
+    descrKey: <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.confirm.descr" />,
   },
 ];
 
@@ -130,21 +138,13 @@ type Props = {
 };
 
 export function PinCodeHowTo({ sendEvent, context }: Props) {
-  const { t } = useTranslation();
   const { deviceId } = context;
+  const colors = useTheme("colors");
+  const allSteps = useMemo(() => steps(colors.wallet), [colors]);
 
   const onClickHelp = useCallback(() => sendEvent("HELP"), [sendEvent]);
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
   const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
-
-  const defaultOptions = {
-    loop: true,
-    autoplay: !process.env.SPECTRON_RUN,
-    animationData: deviceId === "nanoX" ? NanoXAnim : NanoSAnim,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
 
   return (
     <ScreenContainer>
@@ -152,15 +152,22 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
         <HeaderContainer>
           <Button color="palette.primary.main" onClick={onClickHelp}>
             <Text mr="8px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
-              {t("onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.help")}
+              <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.help" />
             </Text>
             <InfoCircle size={22} />
           </Button>
         </HeaderContainer>
-        <Lottie options={defaultOptions} height={130} />
+        <Animation
+          loop
+          animation={deviceId === "nanoX" ? NanoXAnim : NanoSAnim}
+          rendererSettings={{
+            preserveAspectRatio: "xMidYMid slice",
+          }}
+          height="130"
+        />
         <StepList>
-          {steps.map((step, index) => (
-            <Step key={index} title={t(step.titleKey)} descr={t(step.descrKey)} index={index + 1} />
+          {allSteps.map((step, index) => (
+            <Step key={index} title={step.titleKey} descr={step.descrKey} index={index + 1} />
           ))}
         </StepList>
       </ContentContainer>
@@ -168,12 +175,12 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
         <Button color="palette.text.shade30" onClick={onClickPrev}>
           <ArrowLeft />
           <Text ml="9px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
-            {t("onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.prev")}
+            <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.prev" />
           </Text>
         </Button>
         <Button id="pincode-howto-cta" primary onClick={onClickNext}>
           <Text mr="12px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
-            {t("onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.next")}
+            <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.next" />
           </Text>
           <ChevronRight size={13} />
         </Button>

@@ -34,7 +34,7 @@ export default function Star({ accountId, parentId, yellow }: Props) {
 
   return (
     <MaybeButtonWrapper filled={isAccountStarred}>
-      <StarWrapper onClick={toggleStar}>
+      <StarWrapper id="account-star-button" onClick={toggleStar}>
         <Transition in={isAccountStarred} timeout={isAccountStarred ? startBurstTiming : 0}>
           {className => (
             <StarIcon yellow={yellow} filled={isAccountStarred} className={className} />
@@ -84,9 +84,9 @@ const StarIcon: ThemedComponent<{
   yellow?: boolean,
 }> = styled.div`
   &.entering {
-    animation: ${starBust} ${startBurstTiming}ms steps(29) 1;  
+    animation: ${starBust} ${startBurstTiming}ms steps(29) 1;
   }
-  
+
   &.entered {
     background-position: right;
   }

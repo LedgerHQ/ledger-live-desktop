@@ -82,7 +82,7 @@ export function ImportYourRecoveryPhrase({ sendEvent }: Props) {
             {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.buttons.prev")}
           </Text>
         </Button>
-        <Button inverted primary onClick={onClickNext}>
+        <Button id="import-recovery-next" inverted primary onClick={onClickNext}>
           <Text ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.buttons.next")}
           </Text>

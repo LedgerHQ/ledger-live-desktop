@@ -17,7 +17,7 @@ import { hardReset } from "~/renderer/reset";
 
 import "~/renderer/styles/global";
 import "~/renderer/live-common-setup";
-import "~/renderer/experimental";
+import { getLocalStorageEnvs } from "~/renderer/experimental";
 import "~/renderer/i18n/init";
 
 import logger, { enableDebugLogger } from "~/logger";
@@ -67,6 +67,9 @@ async function init() {
       global.localStorage.setItem(key, value);
     });
 
+    const envs = getLocalStorageEnvs();
+    for (const k in envs) setEnvOnAllThreads(k, envs[k]);
+
     const timemachine = require("timemachine");
     timemachine.config({
       dateString: require("../../tests/time").default,
@@ -113,8 +116,9 @@ async function init() {
   } else {
     store.dispatch(lock());
   }
+  const initialCountervalues = await getKey("app", "countervalues");
 
-  r(<ReactRoot store={store} language={language} />);
+  r(<ReactRoot store={store} language={language} initialCountervalues={initialCountervalues} />);
 
   if (isMainWindow) {
     webFrame.setVisualZoomLevelLimits(1, 1);
