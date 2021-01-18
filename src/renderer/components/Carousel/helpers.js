@@ -47,7 +47,10 @@ export const getTransitions = (transition: "slide" | "flip", reverse: boolean = 
 
 export const getDefaultSlides = () => {
   if (process.env.SPECTRON_RUN) {
-    return [{ id: "swap", Component: SwapBanner }];
+    return [
+      { id: "swap", Component: SwapBanner },
+      { id: "buy", Component: BuyCryptoBanner },
+    ];
   }
 
   return [
