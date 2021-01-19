@@ -421,6 +421,49 @@ describe("Account", () => {
 
       expect(bookmarkedAccounts).toHaveLength(1);
     });
+
+    describe("hide token account", () => {
+      beforeAll(async () => {
+        const accountsButton = await $("#drawer-accounts-button");
+        await accountsButton.click();
+      });
+
+      it("opens an account with tokens", async () => {
+        const listOfAccounts = await $("#accounts-list");
+        const accounts = await listOfAccounts.$$(".accounts-account-row-item.has-tokens");
+
+        const firstAccountWithTokens = accounts[0];
+        await firstAccountWithTokens.click();
+
+        expect(await app.client.screenshot()).toMatchImageSnapshot({
+          customSnapshotIdentifier: "hide-token-before",
+        });
+      });
+
+      it("hides the first token in list", async () => {
+        const tokensList = await $("#tokens-list");
+        const tokens = await tokensList.$$(".token-row");
+        const tokensLength = tokens.length;
+
+        const firstToken = await tokens[0];
+        await firstToken.click({ button: "right" });
+
+        const hideToken = await $("#token-menu-hide");
+        await hideToken.click();
+
+        const confirmButton = await $("#hide-token-button");
+        await confirmButton.click();
+
+        const newTokens = await tokensList.$$(".token-row");
+        expect(newTokens).toHaveLength(tokensLength - 1);
+      });
+
+      it("displays a modified tokens list", async () => {
+        expect(await app.client.screenshot()).toMatchImageSnapshot({
+          customSnapshotIdentifier: "hide-token-after",
+        });
+      });
+    });
   });
 
   describe("export accounts to mobile", () => {
