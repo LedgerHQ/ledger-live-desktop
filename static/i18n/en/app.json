@@ -5,8 +5,6 @@
     "yesterday": "Yesterday"
   },
   "common": {
-    "labelYes": "Yes",
-    "labelNo": "No",
     "never": "Never",
     "apply": "Apply",
     "done": "Done",
@@ -19,16 +17,12 @@
     "previous": "Previous",
     "learnMore": "Learn more",
     "help": "Help",
-    "skipThisStep": "Skip this step",
     "needHelp": "Need help?",
     "areYouSure": "Are you sure?",
     "selectAccount": "Select an account",
     "selectAccountNoOption": "No account matching \"{{accountName}}\"",
     "selectCurrency": "Choose a crypto asset",
     "selectCurrencyNoOption": "No crypto asset \"{{currencyName}}\"",
-    "selectExchange": "Select an exchange",
-    "selectExchangeNoOption": "No exchange matching \"{{exchangeName}}\"",
-    "selectExchangeNoOptionAtAll": "No exchange found",
     "selectValidatorNoOption": "No validator matching \"{{accountName}}\"",
     "selectNoResults": "No results found matching \"{{query}}\"",
     "sortBy": "Sort by",
@@ -51,7 +45,6 @@
     "addressCopied": "Address copied",
     "addressCopiedSuspicious": "Mismatch between the copied address and the one in the clipboard.",
     "experimentalFeature": "Experimental",
-    "dismiss": "Dismiss",
     "information": "Information",
     "search": "Search...",
     "searchWithoutEllipsis": "Search",
@@ -69,8 +62,7 @@
       "outdated": "Paused",
       "needsMigration": "Click to update account",
       "error": "Synchronization error",
-      "refresh": "Refresh",
-      "ago": "Synchronized {{time}}"
+      "refresh": "Refresh"
     },
     "exchange": "Exchange"
   },
@@ -166,7 +158,6 @@
     "landing": {
       "title": "Swap your assets",
       "continue": "Continue",
-      "link": "More about Swap",
       "sorry": "Service temporarily unavailable, or not available in your country"
     },
     "missingApp": {
@@ -189,8 +180,7 @@
         "title": "From",
         "account": "Account",
         "amount": "Amount to send",
-        "currency": "Crypto asset",
-        "balance": "Balance: {{balance}}"
+        "currency": "Crypto asset"
       },
       "to": {
         "title": "To",
@@ -200,8 +190,6 @@
         "addAccountCTA": "Add new account"
       },
       "exchange": "Exchange",
-      "addAccount": "Add Account",
-      "openManager": "Open Manager",
       "helpCTA": "What is Swap?",
       "bubble": "We use a fixed rate, this is the exact amount you will receive.",
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
@@ -210,7 +198,6 @@
     },
     "modal": {
       "title": "Swap",
-      "tos": "Terms & Conditions",
       "steps": {
         "summary": {
           "title": "Summary",
@@ -218,16 +205,13 @@
           "to": "To",
           "toExchange": "Amount to send",
           "toReceive": "Amount to receive",
-          "provider": "Provider",
           "terms": "Terms & Conditions",
           "disclaimer": {
-            "header": "Details",
             "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s",
             "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
           },
           "details": {
-            "provider": "Provider",
-            "address": "Address"
+            "provider": "Provider"
           }
         },
         "device": {
@@ -266,7 +250,6 @@
       "disconnectTitle": "Disconnect full node",
       "steps": {
         "landing": {
-          "title": "Node",
           "header": "Start your full node. Don’t trust, verify.",
           "description": "A Bitcoin full node validates all transactions and blocks, allowing you to use Bitcoin in a trustless way while contributing to the Bitcoin network.",
           "list": {
@@ -378,7 +361,6 @@
           }
         },
         "disconnect": {
-          "title": "Disconnect full node",
           "cta": "Disconnect",
           "description": "Are you sure? Disconnecting the full node will remove all Bitcoin accounts. You can add your accounts again using Ledger’s explorers."
         }
@@ -427,11 +409,6 @@
   "exchange": {
     "title": "Buy and sell crypto",
     "reset": "Reset flow",
-    "banner": {
-      "title": "Buy crypto via our partner",
-      "description": "Purchase crypto assets via Coinify and receive your coins directly in your Ledger account",
-      "CTA": "Buy now"
-    },
     "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
     "buy": {
       "title": "Buy crypto via our partner",
@@ -446,8 +423,7 @@
       "tab": "Sell",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
-      "continue": "Continue",
-      "addAccount": "Add account"
+      "continue": "Continue"
     },
     "history": {
       "tab": "History"
@@ -455,7 +431,6 @@
   },
   "lend": {
     "title": "Lend crypto",
-    "description": "Deposit your crypto on the Compound protocol to start earning interest.",
     "tabs": {
       "dashboard": "Dashboard",
       "opened": "Opened loans",
@@ -465,11 +440,6 @@
     "assets": "Assets to lend",
     "active": "Approved accounts",
     "lendAsset": "Lend",
-    "highFeesModal": {
-      "title": "High fees on Ethereum",
-      "description": "Due to congestion on the Ethereum network, you may experience high fees when issuing transactions.",
-      "cta": "Got it"
-    },
     "account": {
       "amountSupplied": "Amount deposited",
       "amountSuppliedTooltip": "Amount lent to the network",
@@ -539,8 +509,6 @@
         "allAssets": "Asset",
         "totalBalance": "Asset balance",
         "totalBalanceTooltip": "Amount available to lend",
-        "grossSupply": "Gross supply",
-        "grossSupplyTooltip": "Total amount of assets deposited on the protocol",
         "currentAPY": "Deposit APY",
         "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
         "actions": "Actions"
@@ -576,8 +544,7 @@
           "title": "Select account",
           "selectLabel": "Account to lend from",
           "cta": "Approve",
-          "alreadyEnabled": "This account is approved",
-          "notEnabled": "You need to pay fees to approve this account"
+          "alreadyEnabled": "This account is approved"
         },
         "amount": {
           "title": "Amount",
@@ -598,11 +565,7 @@
             "title": "Operation sent successfully",
             "text": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
             "done": "Close",
-            "cta": "View details",
             "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
-          },
-          "pending": {
-            "title": "Enabling your assets..."
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
         }
@@ -614,7 +577,6 @@
         "amount": {
           "title": "Amount",
           "advanced": "Advanced",
-          "amountLabel": "Amount to withdraw",
           "amountToWithdraw": "Amount to withdraw",
           "withdrawAll": "Withdraw Max",
           "placeholder": "Withdraw Max",
@@ -630,9 +592,6 @@
             "text": "Your assets will be available once the network has confirmed the withdrawal.",
             "done": "Close",
             "cta": "View details"
-          },
-          "pending": {
-            "title": "Withdrawing your assets..."
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
         }
@@ -667,9 +626,7 @@
       "steps": {
         "amount": {
           "title": "Amount",
-          "selectedAccount": "Selected account",
           "amountToSupply": "Amount to deposit",
-          "available": "Available balance",
           "maxSupply": "Maximum amount to lend is"
         },
         "device": {
@@ -683,8 +640,7 @@
             "done": "Close",
             "cta": "View details",
             "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
-          },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          }
         }
       }
     },
@@ -850,9 +806,6 @@
     }
   },
   "genuinecheck": {
-    "modal": {
-      "title": "Genuine check"
-    },
     "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
   },
   "tokensList": {
@@ -862,7 +815,6 @@
     "link": "Learn more",
     "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
-    "tooltip": "Token from",
     "countTooltip": "1 token",
     "countTooltip_plural": "{{count}} tokens",
     "algorand": {
@@ -871,10 +823,7 @@
       "placeholder": "You can add assets to your {{currencyName}} account.",
       "link": "How Assets (ASA) works?",
       "seeTokens": "Show ASA ({{tokenCount}})",
-      "hideTokens": "Hide ASA ({{tokenCount}})",
-      "tooltip": "ASA from",
-      "countTooltip": "1 ASA",
-      "countTooltip_plural": "{{count}} ASA"
+      "hideTokens": "Hide ASA ({{tokenCount}})"
     }
   },
   "subAccounts": {
@@ -943,9 +892,6 @@
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created"
     },
-    "supportLinks": {
-      "segwit_or_native_segwit": "Segwit or Native Segwit?"
-    },
     "cta": {
       "addMore": "Add more",
       "add": "Add account",
@@ -994,14 +940,11 @@
     "details": "{{ currency }} details",
     "multipleAddresses": "Why multiple addresses?",
     "extra": {
-      "resource": "Resource",
       "frozenAmount": "Frozen amount",
       "unfreezeAmount": "Unfreeze amount",
-      "address": "Address",
       "votes": "Votes ({{number}})",
       "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
       "validators": "Validators",
-      "delegated": "Delegated",
       "redelegated": "Redelegated",
       "redelegatedFrom": "Redelegated from",
       "redelegatedTo": "Redelegated to",
@@ -1010,7 +953,6 @@
       "undelegatedFrom": "Undelegated from",
       "undelegatedAmount": "Undelegated amount",
       "rewardFrom": "Reward from",
-      "rewardAmount": "Amount collected",
       "memo": "Memo",
       "assetId": "Asset ID",
       "rewards": "Earned rewards"
@@ -1212,9 +1154,6 @@
           "cta": "View details",
           "done": "Done"
         },
-        "pending": {
-          "title": "Claiming your rewards..."
-        },
         "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
       }
     }
@@ -1248,9 +1187,6 @@
           "vote": "Vote",
           "later": "Vote later"
         },
-        "pending": {
-          "title": "Freezing your assets..."
-        },
         "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
       }
     }
@@ -1272,9 +1208,6 @@
           "text": "Your assets were unfrozen successfully. Your {{resource}} points will be decreased, and your votes will be cancelled.",
           "continue": "Continue"
         },
-        "pending": {
-          "title": "Freezing your assets..."
-        },
         "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
       }
     }
@@ -1292,10 +1225,6 @@
         "maxSelected": "Max selected: {{total}}",
         "allVotesAreUsed": "All assets are distributed",
         "maxUsed": "Insufficient assets",
-        "superRepresentatives": "Super Representatives (SR)",
-        "candidates": "Candidates",
-        "estYield": "est. yield",
-        "srInfo": "SR or Candidates?",
         "validators": "Validators ({{total}})",
         "votes": "Available assets: {{total}}",
         "noResults": "No validator found for \"<0>{{search}}</0>\"."
@@ -1308,12 +1237,7 @@
         "success": {
           "title": "Your votes were cast successfully.",
           "text": "",
-          "howVotingWorks": "How voting works?",
-          "done": "Done",
           "cta": "View details"
-        },
-        "pending": {
-          "title": "Freezing your assets..."
         },
         "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
       }
@@ -1326,8 +1250,7 @@
   },
   "sell": {
     "title": "Sell",
-    "titleCrypto": "Sell {{currency}}",
-    "buyCTA": "Sell {{currencyTicker}}"
+    "titleCrypto": "Sell {{currency}}"
   },
   "receive": {
     "title": "Receive",
@@ -1451,9 +1374,7 @@
       "claimRewards": "Claim rewards",
       "nextRewardsDate": "Rewards can be claimed {{date}}",
       "claimAvailableRewards": "Claim {{amount}}",
-      "title": "Claim rewards",
       "header": "Votes",
-      "Amount": "Amount",
       "percentageTP": "% of votes cast",
       "noRewards": "No rewards available",
       "remainingVotes": {
@@ -1464,7 +1385,6 @@
       "flow": {
         "steps": {
           "starter": {
-            "title": "Earn staking rewards",
             "description": "Freeze TRX to earn rewards and still keep full security and control of your assets.",
             "bullet": {
               "delegate": "Delegated assets stay yours.",
@@ -1472,9 +1392,6 @@
               "ledger": "Freeze and vote securely with your Ledger device."
             },
             "help": "How voting works",
-            "button": {
-              "cta": "Continue"
-            },
             "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your super representative."
           }
         }
@@ -1536,7 +1453,6 @@
       "last": "You need at least one selected"
     },
     "pending": "pending",
-    "notEnoughCoins": "You have not selected enough coins to meet the amount to send.",
     "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions.",
     "pickingStrategy": "UTXO picking strategy",
     "pickingStrategyLabels": {
@@ -1553,9 +1469,7 @@
         "delegation": "Earn rewards"
       },
       "claimRewards": "Claim rewards",
-      "claimAvailableRewards": "Claim {{amount}}",
       "header": "Delegation(s)",
-      "Amount": "Amount",
       "noRewards": "No rewards available",
       "delegate": "Add",
       "undelegate": "Undelegate",
@@ -1584,22 +1498,17 @@
             }
           },
           "validator": {
-            "title": "Validators",
-            "feesInfo": "Selected amounts are fees included"
+            "title": "Validators"
           },
           "connectDevice": {
             "title": "Device"
           },
           "confirmation": {
             "title": "Confirmation",
-            "label": "Confirmation",
             "success": {
               "title": "You have successfully delegated your assets",
               "text": "Your account balance will be updated when the blockchain confirms the transaction.",
               "cta": "View details"
-            },
-            "pending": {
-              "title": "Broadcasting transaction..."
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -1657,10 +1566,7 @@
             "currentDelegation": "Current delegation",
             "newDelegation": "New delegation",
             "chooseValidator": "Choose a validator",
-            "warning": "You will have to wait <0>21 days</0> to redelegate from the new validator, if you change your mind again",
-            "selectInfo": "Redelegate assets from one validator to another. When redelegating, your assets continue to generate rewards non-stop.",
-            "searchPlaceholder": "Search by name or address",
-            "redelegationAmount": "Redelegation amount"
+            "warning": "You will have to wait <0>21 days</0> to redelegate from the new validator, if you change your mind again"
           },
           "device": {
             "title": "Device"
@@ -1671,9 +1577,6 @@
               "title": "You have successfully redelegated your assets",
               "text": "The redelegation will update once the blockchain has confirmed the transaction",
               "cta": "View details"
-            },
-            "pending": {
-              "title": "Broadcasting transaction..."
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -1731,14 +1634,10 @@
           },
           "confirmation": {
             "title": "Confirmation",
-            "label": "Confirmation",
             "success": {
               "title": "{{token}} asset successfully added",
               "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
               "cta": "View details"
-            },
-            "pending": {
-              "title": "Broadcasting transaction..."
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -1754,7 +1653,6 @@
         "title": "Claim rewards",
         "steps": {
           "starter": {
-            "title": "Earn rewards",
             "description": "Receive Algorand rewards simply for holding Algorand control of your assets.",
             "bullet": {
               "delegate": "A minimum balance of 1 ALGO is required to receive rewards.",
@@ -1776,14 +1674,10 @@
           },
           "confirmation": {
             "title": "Confirmation",
-            "label": "Confirmation",
             "success": {
               "title": "Rewards successfully claimed!",
               "text": "Your rewards were added to your available balance",
               "cta": "View details"
-            },
-            "pending": {
-              "title": "Broadcasting transaction..."
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -1803,7 +1697,6 @@
     "delegated": "Delegated",
     "completionDate": "Completion date",
     "rewards": "Rewards",
-    "distribution": "Distribution",
     "duration": "Duration",
     "durationJustStarted": "Just started",
     "durationDays": "{{count}} day",
@@ -1866,16 +1759,9 @@
             "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within around 40 days, depending on the validator.",
             "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
           },
-          "pending": {
-            "title": "Broadcasting transaction..."
-          },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
         }
       }
-    },
-    "banner": {
-      "title": "Earn rewards",
-      "text": "You can earn Tezos staking rewards by delegating your account"
     },
     "contextMenu": {
       "topUp": "Receive more",
@@ -1900,7 +1786,6 @@
     "tabs": {
       "display": "General",
       "currencies": "Crypto assets",
-      "rates": "Rates",
       "help": "Help",
       "about": "About",
       "experimental": "Experimental features",
@@ -1926,7 +1811,6 @@
       }
     },
     "display": {
-      "desc": "Configure general Ledger Live settings.",
       "language": "Display language",
       "languageDesc": "Set the language displayed in Ledger Live.",
       "theme": "Theme",
@@ -1958,8 +1842,6 @@
       "hardResetTitle": "Reset Ledger Live",
       "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction histories and settings.",
       "hardReset": "Reset",
-      "developerMode": "Developer mode",
-      "developerModeDesc": "Show developer and testnet apps in the Manager.",
       "analytics": "Analytics",
       "analyticsDesc": "Enable analytics to help Ledger improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc), end of page scrolls, (un)installing and app version, number of accounts, crypto assets and operations, session durations, the Ledger device type and firmware.",
       "reportErrors": "Bug reports",
@@ -1967,11 +1849,7 @@
       "launchOnboarding": "Device setup",
       "launchOnboardingDesc": "Set up a new device or restore an existing device. Accounts and settings are kept."
     },
-    "about": {
-      "desc": "App information, Terms and Conditions, and Privacy Policy."
-    },
     "help": {
-      "desc": "Learn more about Ledger Live or get help.",
       "version": "Version",
       "releaseNotesBtn": "Details",
       "termsBtn": "Read",
@@ -1983,7 +1861,6 @@
       "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use them."
     },
     "experimental": {
-      "desc": "Try out experimental features and let us know what you think",
       "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
@@ -2081,7 +1958,6 @@
     "title": "Something went wrong",
     "description": "Please check our support articles for possible solutions. If the problem persists, save the logs using the button below and provide them to Ledger Support.",
     "troubleshooting": "Click here for possible solutions",
-    "restart": "Restart",
     "logs": "Save logs",
     "dataFolder": "View user data"
   },
@@ -2153,31 +2029,6 @@
       }
     },
     "alerts": {
-      "deviceError": {
-        "title": "Something went wrong, please reconnect device",
-        "descr": "An action was already pending on the your Nano. Please deny or reconnect.",
-        "retry": "Retry"
-      },
-      "genuineCheck": {
-        "title": "Genuine check",
-        "descr": "Please don’t turn off your Nano and allow Ledger",
-        "info": "This step is meant to ensure that your Nano is authentic and was not hacked."
-      },
-      "genuineCheckSuccess": {
-        "title": "All good!",
-        "descr": "Your device is genuine and ready to use with Ledger app",
-        "continue": "Continue"
-      },
-      "genuineCheckError": {
-        "title": "Your Nano’s authenticity couldn’t be verified...",
-        "descr": "We recommend you contact Ledger Support to resolve this issue. ",
-        "contactSupport": "Contact Ledger Support"
-      },
-      "languageIncomplete": {
-        "title": "Get started in {{language}}",
-        "descr": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
-        "gotIt": "Got it"
-      },
       "beCareful": {
         "title": "Please be careful",
         "descr": "Make sure you follow the instructions on this app at every step of the process.",
@@ -2423,10 +2274,6 @@
             }
           },
           "genuineCheck": {
-            "plugUSBCable": {
-              "title": "Connect USB cable",
-              "descr": "Connect the USB cable and enter your PIN Code on the device"
-            },
             "success": {
               "title": "All good!",
               "desc": "Your Ledger {{deviceName}} is genuine and ready to use with Ledger Live"
@@ -2474,16 +2321,6 @@
               "next": "Next step",
               "prev": "Previous step"
             }
-          },
-          "connectYourDevice": {
-            "plugUSBCable": {
-              "title": "Connect USB cable",
-              "descr": "Connect the cable and enter the PIN Code on your device",
-              "buttons": {
-                "next": "Continue",
-                "prev": "Previous step"
-              }
-            }
           }
         }
       }
@@ -2520,8 +2357,7 @@
       "descr": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
       "buttons": {
         "start": "Let’s take the quiz",
-        "next": "Next question",
-        "finish": "Finish quiz"
+        "next": "Next question"
       },
       "questions": {
         "1": {
@@ -2603,8 +2439,7 @@
       "undelegate": "validator",
       "claimReward": "rewards recipient",
       "optIn": "recipient"
-    },
-    "votes": "Votes ({{count}})"
+    }
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"
@@ -2626,7 +2461,6 @@
         "MEMO_HASH": "Memo Hash",
         "MEMO_RETURN": "Memo Return"
       },
-      "whatsMemo": "What is a memo?",
       "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
     },
     "cosmos": {

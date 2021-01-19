@@ -151,7 +151,8 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
     status,
   });
 
-  const recipientWording = t(`TransactionConfirm.recipientWording.${transaction.mode || "send"}`);
+  const key = transaction.mode || "send";
+  const recipientWording = t(`TransactionConfirm.recipientWording.${key}`);
 
   return (
     <Container>
