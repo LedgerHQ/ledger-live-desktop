@@ -6,7 +6,7 @@ import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import IconChevronRight from "~/renderer/icons/ChevronRight";
+import IconChevronRight from "~/renderer/icons/ChevronRightSmall";
 
 type Props = {
   children: any,
