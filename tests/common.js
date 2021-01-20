@@ -141,11 +141,11 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
         pageRect.oHeight + pageRect.height - pageRect.offsetHeight,
       );
 
-      await this.browserWindow.setContentSize(pageRect.oWidth, height);
+      // await this.browserWindow.setContentSize(pageRect.oWidth, height);
 
       const capture = await this.browserWindow.capturePage();
 
-      await this.browserWindow.setContentSize(pageRect.oWidth, pageRect.oHeight);
+      // await this.browserWindow.setContentSize(pageRect.oWidth, pageRect.oHeight);
 
       return capture;
     });
