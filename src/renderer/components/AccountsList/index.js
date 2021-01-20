@@ -118,7 +118,7 @@ class AccountsList extends Component<
           </Box>
         )}
         {collapsed ? null : accounts.length ? (
-          <Box flow={2}>
+          <Box id="accounts-list-selectable" flow={2}>
             {accounts.map((account, i) => (
               <AccountRow
                 key={account.id}
