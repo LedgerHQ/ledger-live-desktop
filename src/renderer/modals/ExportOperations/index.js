@@ -166,6 +166,7 @@ class ExportOperations extends PureComponent<Props, State> {
                 data-e2e="continue_button"
                 onClick={this.handleButtonClick}
                 event={!success ? "Operation history" : undefined}
+                id="export-operations-save-button"
                 primary
               >
                 {success ? (
