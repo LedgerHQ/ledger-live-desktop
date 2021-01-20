@@ -71,6 +71,7 @@ type Props = {
   value?: ?DropDownItemType,
   controlled?: boolean,
   defaultValue?: ?DropDownItemType,
+  buttonId?: string,
 };
 
 const DropDownSelector = ({
@@ -81,6 +82,7 @@ const DropDownSelector = ({
   value,
   controlled = false,
   defaultValue = null,
+  buttonId,
 }: Props) => {
   const [isOpen, setOpen] = useState(false);
   const [stateValue, setStateValue] = useState(defaultValue);
@@ -123,7 +125,7 @@ const DropDownSelector = ({
       arrow={false}
       content={<DropContainer border>{items.map(renderOption)}</DropContainer>}
     >
-      <ButtonContainer onClick={() => setOpen(!isOpen)}>
+      <ButtonContainer id={buttonId} onClick={() => setOpen(!isOpen)}>
         {children({ isOpen, value: selectedOption })}
       </ButtonContainer>
     </Tippy>

@@ -23,7 +23,7 @@ import { AmountField } from "~/renderer/families/cosmos/UndelegationFlowModal/fi
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 
 import Label from "~/renderer/components/Label";
-import ChevronRight from "~/renderer/icons/ChevronRight";
+import ChevronRight from "~/renderer/icons/ChevronRightSmall";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Text from "~/renderer/components/Text";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
