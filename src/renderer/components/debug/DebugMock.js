@@ -36,6 +36,17 @@ const helpfulEvents = [
     },
   },
   {
+    name: "resultOutdated",
+    event: {
+      type: "result",
+      result: mockListAppsResult(
+        "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar",
+        "Bitcoin,Tron,Litecoin,Ethereum (outdated)",
+        deviceInfo155,
+      ),
+    },
+  },
+  {
     name: "permission requested",
     event: { type: "device-permission-requested", wording: "Allow Ledger Manager" },
   },

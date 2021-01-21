@@ -1,6 +1,6 @@
 name: CI
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - develop
       - master
@@ -30,8 +30,6 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
-          token: ${{ secrets.CHECKOUT_READ_ONLY }}
-          persist-credentials: false
       - uses: actions/setup-node@main
         with:
           node-version: 12.x
@@ -69,17 +67,17 @@ jobs:
           interval: 1000
       - name: run spectron
         if: always()
-        run: yarn spectron --runInBand --no-color 2>output.txt
+        run: yarn spectron --no-color 2>output.txt
       - name: Read test output
         id: spectron
         if: always()
         uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: ./output.txt
-      - name: run coverage generation
-        if: always()
-        run: yarn spectron-coverage
-        env:
+      - name: run coverage generation	
+        if: always() && github.event_name == 'push'
+        run: yarn spectron-coverage	
+        env:	
           CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
       - name: upload diffs to imgur
         if: always()
@@ -101,10 +99,10 @@ jobs:
           git remote add ledger https://github.com/LedgerHQ/ledger-live-desktop.git
           git fetch ledger
           git diff --name-only ledger/${{github.base_ref}}..${{github.event.pull_request.head.sha}} -- tests/specs/__image_snapshots__ >imgChanged.txt
-        if: always() && github.event_name == 'pull_request_target'
+        if: always() && github.event_name == 'pull_request'
       - name: Read imgChanged output
         id: imgChanged
-        if: always() && github.event_name == 'pull_request_target'
+        if: always() && github.event_name == 'pull_request'
         uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: ./imgChanged.txt
@@ -127,7 +125,7 @@ jobs:
         if: always()
         id: displaycomment
         env:
-          BODY: ${{ steps.comment.outputs.body }}
+          BODY: ${{ steps.comment.outputs.bodyclean }}
         run: echo "$BODY"
   post-comment:
     runs-on: ubuntu-latest
@@ -135,24 +133,5 @@ jobs:
     if: always() && needs.test.result != 'cancelled'
     steps:
       - name: post comment
-        uses: mshick/add-pr-comment@5cd99bf9c186219af43341076f1fe9c09e5a9934
-        with:
-          message: ${{ needs.test.outputs.comment }}
-          allow-repeats: true
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Send message to Slack channel
-        uses: archive/github-actions-slack@v1.0.3
-        if: github.event_name == 'push' && needs.test.outputs.commentSlack != ''
-        id: notify
-        with:
-          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
-          slack-channel: live-internal-desktop
-          slack-text: ${{ needs.test.outputs.commentSlack }}
-      - name: Send message to Slack author
-        uses: archive/github-actions-slack@v1.0.3
-        if: github.event_name == 'pull_request_target' && needs.test.outputs.slackAuthor != ''
-        id: notifyauthor
-        with:
-          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
-          slack-channel: ${{ needs.test.outputs.slackAuthor }}
-          slack-text: ${{ needs.test.outputs.commentSlackAuthor }}
+        run: |
+          curl --location --request POST 'http://github-action-artifact-link.vercel.app/api/comment?owner=LedgerHQ&repo=ledger-live-desktop&issueId=${{github.event.pull_request.number}}' --header 'Content-Type: application/json' --data-raw '${{ needs.test.outputs.comment }}'
