@@ -106,7 +106,7 @@ yarn start-electron-webdriver
 You can point VNCViewer to `localhost::5900` to check what is happening in the container. `secret` is the password.
 Then you can launch tests.
 ```bash
-yarn spectron
+yarn spectron-inband
 ```
 or
 ```bash
