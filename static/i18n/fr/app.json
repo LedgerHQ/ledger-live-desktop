@@ -512,11 +512,11 @@
     "headers": {
       "active": {
         "accounts": "Compte",
-        "amountSupplied": "Open loan",
-        "amountSuppliedTooltip": "Amount deposited in the network",
-        "accruedInterests": "Interest balance",
-        "accruedInterestsTooltip": "Interest being earned on loans",
-        "status": "Account status",
+        "amountSupplied": "Prêt ouvert",
+        "amountSuppliedTooltip": "Montant déposé dans le réseau",
+        "accruedInterests": "Solde d'intérêts",
+        "accruedInterestsTooltip": "Intérêts gagnés sur les prêts",
+        "status": "État du compte",
         "actions": "Actions"
       },
       "status": {
@@ -537,12 +537,12 @@
       },
       "rates": {
         "allAssets": "Actif",
-        "totalBalance": "Asset balance",
-        "totalBalanceTooltip": "Amount available to lend",
+        "totalBalance": "Solde des actifs",
+        "totalBalanceTooltip": "Montant disponible à prêter",
         "grossSupply": "Valeur du marché",
         "grossSupplyTooltip": "Montant total des actifs déposés sur le protocole",
-        "currentAPY": "Deposit APY",
-        "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
+        "currentAPY": "APY du dépot",
+        "currentAPYTooltip": "Taux de rendement annuel obtenu sur un dépôt composé en continu",
         "actions": "Actions"
       }
     },
@@ -737,8 +737,8 @@
       "desc": "Commencer ici"
     },
     "status": {
-      "title": "Ledger Status",
-      "desc": "Learn crypto"
+      "title": "Statut Ledger",
+      "desc": "Comprendre les cryptos"
     },
     "helpCenter": {
       "title": "Assistance Ledger",
@@ -1374,7 +1374,7 @@
       },
       "details": {
         "utxoLag": "Cette transaction peut prendre plus de temps à être vérifiée et signée car le compte a un nombre élevé de coins.",
-        "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
+        "subaccountsWarning": "Vous devrez recharger ce compte avec {{ currency }} afin d'envoyer les jetons de ce compte",
         "from": "De",
         "to": "Vers",
         "selectAccountDebit": "Compte à débiter",
