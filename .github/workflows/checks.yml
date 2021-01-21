@@ -125,7 +125,7 @@ jobs:
         if: always()
         id: displaycomment
         env:
-          BODY: ${{ steps.comment.outputs.body }}
+          BODY: ${{ steps.comment.outputs.bodyclean }}
         run: echo "$BODY"
   post-comment:
     runs-on: ubuntu-latest
