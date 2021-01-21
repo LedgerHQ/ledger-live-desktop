@@ -82,6 +82,25 @@ const buildRendererConfig = (mode, config, argv) => {
       ? { ...wpConf.resolve.alias, "react-dom": "@hot-loader/react-dom" }
       : wpConf.resolve.alias;
 
+  const module = {
+    ...wpConf.module,
+    rules:
+      mode === "development" || process.env.INSTRUMENT_BUILD
+        ? [
+            ...wpConf.module.rules,
+            {
+              test: /\.js$/,
+              use: {
+                loader: "istanbul-instrumenter-loader",
+                options: { esModules: true },
+              },
+              enforce: "post",
+              exclude: /node_modules|tests/,
+            },
+          ]
+        : wpConf.module.rules,
+  };
+
   return {
     ...wpConf,
     mode: mode === "production" ? "production" : "development",
@@ -100,6 +119,7 @@ const buildRendererConfig = (mode, config, argv) => {
       ...wpConf.output,
       publicPath: mode === "production" ? "./" : "/webpack",
     },
+    module,
   };
 };
 

@@ -6,13 +6,7 @@ import { useTranslation } from "react-i18next";
 import { EXPERIMENTAL_MARKET_INDICATOR_SETTINGS } from "~/config/constants";
 import { langAndRegionSelector } from "~/renderer/reducers/settings";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import IconDisplay from "~/renderer/icons/Display";
-import {
-  SettingsSection as Section,
-  SettingsSectionHeader as Header,
-  SettingsSectionBody as Body,
-  SettingsSectionRow as Row,
-} from "../../SettingsSection";
+import { SettingsSectionBody as Body, SettingsSectionRow as Row } from "../../SettingsSection";
 import CounterValueSelect from "./CounterValueSelect";
 import LanguageSelect from "./LanguageSelect";
 import RegionSelect from "./RegionSelect";
@@ -31,13 +25,8 @@ const SectionGeneral = () => {
   const { t } = useTranslation();
 
   return (
-    <Section>
+    <>
       <TrackPage category="Settings" name="Display" />
-      <Header
-        icon={<IconDisplay size={16} />}
-        title={t("settings.tabs.display")}
-        desc={t("settings.display.desc")}
-      />
       <Body>
         <Row
           title={t("settings.display.counterValue")}
@@ -92,7 +81,7 @@ const SectionGeneral = () => {
           <CarouselVisibility />
         </Row>
       </Body>
-    </Section>
+    </>
   );
 };
 

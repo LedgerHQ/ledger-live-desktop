@@ -1,8 +1,9 @@
 name: CI
 on:
-  pull_request_target:
+  pull_request:
     branches:
-      - "*"
+      - develop
+      - master
   push:
     branches:
       - develop
@@ -21,12 +22,14 @@ jobs:
     needs: cancel-previous
     outputs:
       comment: ${{ steps.comment.outputs.body }}
+      commentSlack: ${{ steps.comment.outputs.bodySlack }}
+      commentSlackAuthor: ${{ steps.comment.outputs.bodySlackAuthor }}
+      slackAuthor: ${{ steps.comment.outputs.slackAuthor }}
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
-          persist-credentials: false
       - uses: actions/setup-node@main
         with:
           node-version: 12.x
@@ -51,7 +54,7 @@ jobs:
           path: ./lint.txt
       - name: check build
         if: always()
-        run: sudo yarn build
+        run: export INSTRUMENT_BUILD=true && sudo --preserve-env=INSTRUMENT_BUILD yarn build
       - name: start electron webdriver
         if: always()
         run: yarn start-electron-webdriver -d
@@ -71,6 +74,11 @@ jobs:
         uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: ./output.txt
+      - name: run coverage generation	
+        if: always() && github.event_name == 'push'
+        run: yarn spectron-coverage	
+        env:	
+          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
       - name: upload diffs to imgur
         if: always()
         uses: ./.github/actions/upload-images
@@ -86,6 +94,18 @@ jobs:
         with:
           name: ci-suggested-screenshots
           path: tests/specs/__image_snapshots__/__diff_output__/
+      - name: generate imgChanged
+        run: |
+          git remote add ledger https://github.com/LedgerHQ/ledger-live-desktop.git
+          git fetch ledger
+          git diff --name-only ledger/${{github.base_ref}}..${{github.event.pull_request.head.sha}} -- tests/specs/__image_snapshots__ >imgChanged.txt
+        if: always() && github.event_name == 'pull_request'
+      - name: Read imgChanged output
+        id: imgChanged
+        if: always() && github.event_name == 'pull_request'
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
+        with:
+          path: ./imgChanged.txt
       - name: prepare comment body
         if: always()
         id: comment
@@ -96,6 +116,11 @@ jobs:
           runId: ${{ github.run_id }}
           testoutput: ${{ steps.spectron.outputs.content }}
           lintoutput: ${{ steps.lint.outputs.content }}
+          author: ${{github.event.sender.login}}
+          pullId: ${{github.event.number}}
+          imgChanged: ${{steps.imgChanged.outputs.content}}
+          from: ${{github.base_ref}}
+          to: ${{github.event.pull_request.head.sha}}
       - name: display comment
         if: always()
         id: displaycomment
@@ -108,8 +133,5 @@ jobs:
     if: always() && needs.test.result != 'cancelled'
     steps:
       - name: post comment
-        uses: mshick/add-pr-comment@5cd99bf9c186219af43341076f1fe9c09e5a9934
-        with:
-          message: ${{ needs.test.outputs.comment }}
-          allow-repeats: true
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl --location --request POST 'http://github-action-artifact-link.vercel.app/api/comment?owner=LedgerHQ&repo=ledger-live-desktop&issueId=${{github.event.pull_request.number}}' --header 'Content-Type: application/json' --data-raw '${{ needs.test.outputs.comment }}'

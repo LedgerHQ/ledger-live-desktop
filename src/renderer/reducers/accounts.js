@@ -16,6 +16,7 @@ import {
   getAccountCurrency,
   isUpToDateAccount,
   withoutToken,
+  nestedSortAccounts,
 } from "@ledgerhq/live-common/lib/account";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import logger from "./../../logger/logger";
@@ -27,6 +28,10 @@ export type AccountsState = Account[];
 const state: AccountsState = [];
 
 const handlers: Object = {
+  REORDER_ACCOUNTS: (
+    state: AccountsState,
+    { payload: { comparator } }: { payload: { comparator: * } },
+  ): AccountsState => nestedSortAccounts(state, comparator),
   SET_ACCOUNTS: (
     state: AccountsState,
     { payload: accounts }: { payload: Account[] },

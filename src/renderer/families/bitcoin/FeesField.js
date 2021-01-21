@@ -103,6 +103,7 @@ export const FeesField = ({ transaction, account, onChange, status }: Props) => 
         renderOption={({ label }) => <Trans i18nKey={`fees.${label}`} />}
         renderValue={({ data: { label } }) => <Trans i18nKey={`fees.${label}`} />}
         value={selectedValue}
+        isSearchable={false}
       />
       <InputCurrency
         defaultUnit={satoshi}

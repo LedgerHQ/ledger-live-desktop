@@ -12,6 +12,7 @@ type State = {
 type Props = {
   store: Store<StoreState, *>,
   language: string,
+  initialCountervalues: *,
 };
 
 class ReactRoot extends Component<Props, State> {
@@ -24,9 +25,13 @@ class ReactRoot extends Component<Props, State> {
   }
 
   render() {
-    const { store, language } = this.props;
+    const { store, language, initialCountervalues } = this.props;
     const { error } = this.state;
-    return error ? String(error) : <App store={store} language={language} />;
+    return error ? (
+      String(error)
+    ) : (
+      <App store={store} language={language} initialCountervalues={initialCountervalues} />
+    );
   }
 }
 

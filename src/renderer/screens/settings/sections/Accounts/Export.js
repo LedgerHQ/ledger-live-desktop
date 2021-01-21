@@ -6,9 +6,7 @@ import { EXPERIMENTAL_WS_EXPORT } from "~/config/constants";
 import { openModal } from "~/renderer/actions/modals";
 import Button from "~/renderer/components/Button";
 import ExportOperationsBtn from "~/renderer/components/ExportOperationsBtn";
-import DownloadCloud from "~/renderer/icons/DownloadCloud";
-import IconShare from "~/renderer/icons/Share";
-import { SettingsSectionHeader as Header } from "../../SettingsSection";
+import { SettingsSectionRow as Row } from "../../SettingsSection";
 import SocketExport from "./SocketExport";
 
 const SectionExport = () => {
@@ -25,30 +23,24 @@ const SectionExport = () => {
 
   return (
     <>
-      <Header
-        icon={<IconShare size={16} />}
-        title={t("settings.export.accounts.title")}
-        desc={t("settings.export.accounts.desc")}
-        renderRight={
-          <Button small event="Export accounts" onClick={onModalOpen} primary>
-            {t("settings.export.accounts.button")}
-          </Button>
-        }
-      />
-      <Header
-        icon={<DownloadCloud size={16} />}
+      <Row title={t("settings.export.accounts.title")} desc={t("settings.export.accounts.desc")}>
+        <Button small event="Export accounts" onClick={onModalOpen} primary>
+          {t("settings.export.accounts.button")}
+        </Button>
+      </Row>
+      <Row
         title={t("settings.export.operations.title")}
         desc={t("settings.export.operations.desc")}
-        renderRight={<ExportOperationsBtn primary />}
-      />
-
+      >
+        <ExportOperationsBtn primary />
+      </Row>
       {EXPERIMENTAL_WS_EXPORT && (
-        <Header
-          icon={<IconShare size={16} />}
+        <Row
           title="Experimental websocket local export ⚡"
           desc="Generate a pairing code and use it on Ledger Live Mobile"
-          renderRight={<SocketExport />}
-        />
+        >
+          <SocketExport />
+        </Row>
       )}
     </>
   );
