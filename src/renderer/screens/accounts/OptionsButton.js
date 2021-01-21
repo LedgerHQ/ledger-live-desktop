@@ -90,7 +90,13 @@ const OptionsButton = () => {
     }
 
     return (
-      <Item horizontal flow={2} onClick={item.onClick} disableHover={item.key === "hideEmpty"}>
+      <Item
+        id={`accounts-button-${item.key}`}
+        horizontal
+        flow={2}
+        onClick={item.onClick}
+        disableHover={item.key === "hideEmpty"}
+      >
         {item.key === "hideEmpty" ? (
           <Box mr={4}>
             <Track
@@ -112,7 +118,12 @@ const OptionsButton = () => {
   };
 
   return (
-    <DropDownSelector horizontal items={items} renderItem={renderItem}>
+    <DropDownSelector
+      buttonId="accounts-options-button"
+      horizontal
+      items={items}
+      renderItem={renderItem}
+    >
       {() => (
         <Box horizontal>
           <Tooltip content={t("accounts.optionsMenu.title")}>

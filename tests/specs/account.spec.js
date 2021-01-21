@@ -322,7 +322,7 @@ describe("Account", () => {
       });
     });
 
-    it("remove one account", async () => {
+    it("removes one account", async () => {
       let listOfAccounts = await $("#accounts-list");
       const accounts = await listOfAccounts.$$(".accounts-account-row-item");
       const length = accounts.length;
@@ -420,6 +420,98 @@ describe("Account", () => {
       const bookmarkedAccounts = await bookmarkedAccountsList.$$(".bookmarked-account-item");
 
       expect(bookmarkedAccounts).toHaveLength(1);
+    });
+  });
+
+  describe("export accounts to mobile", () => {
+    beforeAll(async () => {
+      const accountsButton = await $("#drawer-accounts-button");
+      await accountsButton.click();
+    });
+
+    it("opens the export accounts modal", async () => {
+      const optionsButton = await $("#accounts-options-button");
+      await optionsButton.click();
+
+      const exportAccountsButton = await $("#accounts-button-exportAccounts");
+      await exportAccountsButton.click();
+
+      expect(await modalPage.isDisplayed()).toBe(true);
+    });
+
+    it("displays a QRCode", async () => {
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "export-account-to-mobile-modal",
+      });
+    });
+
+    it("closes the export accounts modal", async () => {
+      const doneButton = await $("#export-accounts-done-button");
+      await doneButton.click();
+
+      expect(await modalPage.isDisplayed(true)).toBe(false);
+    });
+  });
+
+  describe("exports the operations history", () => {
+    beforeAll(async () => {
+      const accountsButton = await $("#drawer-accounts-button");
+      await accountsButton.click();
+    });
+
+    it("opens the export operations history modal", async () => {
+      const optionsButton = await $("#accounts-options-button");
+      await optionsButton.click();
+
+      const exportOperationsHistoryButton = await $("#accounts-button-exportOperations");
+      await exportOperationsHistoryButton.click();
+
+      expect(await modalPage.isDisplayed()).toBe(true);
+    });
+
+    it("displays a list of accounts", async () => {
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "export-operations-history-modal-open",
+      });
+    });
+
+    it("save button should be disabled", async () => {
+      const saveButton = await $("#export-operations-save-button");
+      expect(await saveButton.isClickable()).toBe(false);
+    });
+
+    it("selects the first two accounts", async () => {
+      const accountsList = await $("#accounts-list-selectable");
+      const accounts = await accountsList.$$(".account-row");
+      const firstAccount = accounts[0];
+      const secondAccount = accounts[1];
+
+      await firstAccount.click();
+      await secondAccount.click();
+
+      const firstInput = await firstAccount.$("input");
+      const secondInput = await secondAccount.$("input");
+
+      expect(await firstInput.isSelected()).toBe(true);
+      expect(await secondInput.isSelected()).toBe(true);
+    });
+
+    it("save button should be enabled", async () => {
+      const saveButton = await $("#export-operations-save-button");
+      expect(await saveButton.isClickable()).toBe(true);
+    });
+
+    it("displays a list with first two accounts selected", async () => {
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "export-operations-history-modal-accounts-selected",
+      });
+    });
+
+    it("closes the export operations history modal", async () => {
+      const closeButton = await $("#modal-close-button");
+      await closeButton.click();
+
+      expect(await modalPage.isDisplayed(true)).toBe(false);
     });
   });
 });

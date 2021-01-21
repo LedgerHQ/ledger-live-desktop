@@ -6,7 +6,7 @@ import { Transition } from "react-transition-group";
 import { RawCard } from "~/renderer/components/Box/Card";
 import type { RawCardProps } from "~/renderer/components/Box/Card";
 
-import ChevronRight from "../icons/ChevronRight";
+import ChevronRight from "../icons/ChevronRightSmall";
 
 const Container: ThemedComponent<{ ...RawCardProps, timing: number }> = styled(RawCard)`
   height: auto;
