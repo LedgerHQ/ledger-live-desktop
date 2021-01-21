@@ -165,6 +165,8 @@ const AppsList = ({
       {isIncomplete ? null : (
         <StickyTabBar>
           <TabBar
+            withId
+            ids={["appCatalog", "appsOnDevice"]}
             tabs={["manager.tabs.appCatalog", "manager.tabs.appsOnDevice"]}
             onIndexChange={setActiveTab}
           />

@@ -13,7 +13,7 @@ import { openURL } from "~/renderer/linking";
 
 import IconCross from "~/renderer/icons/Cross";
 import IconExclamationCircle from "~/renderer/icons/ExclamationCircle";
-import IconChevronRight from "~/renderer/icons/ChevronRight";
+import IconChevronRight from "~/renderer/icons/ChevronRightSmall";
 
 import Box from "~/renderer/components/Box";
 

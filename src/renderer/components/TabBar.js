@@ -120,7 +120,7 @@ const TabBar = ({
           active={j === i}
           tabIndex={j}
           onClick={() => updateIndex(j)}
-          id={withId && ids?.length ? `settings-${ids[j]}-tab` : ""}
+          id={withId && ids?.length ? `${ids[j]}-tab` : ""}
           fontSize={fontSize}
         >
           <Text ff="Inter|SemiBold" fontSize={5}>

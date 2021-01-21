@@ -73,6 +73,8 @@ const UpdateModal = ({
   const [nonce, setNonce] = useState(0);
   const { t } = useTranslation();
 
+  const hasFinalFirmware = Boolean(firmware && firmware.final.firmware);
+
   const createSteps = useCallback(
     ({ withResetStep }: { withResetStep: boolean }) => {
       const updateStep = {
@@ -109,11 +111,18 @@ const UpdateModal = ({
         hideFooter: false,
       };
 
-      let steps = [updateStep, mcuStep, finalStep];
-      if (withResetStep) steps = [resetStep, ...steps];
+      const steps = [];
+      if (withResetStep) {
+        steps.push(resetStep);
+      }
+      steps.push(updateStep);
+      if (hasFinalFirmware) {
+        steps.push(mcuStep);
+      }
+      steps.push(finalStep);
       return steps;
     },
-    [t],
+    [t, hasFinalFirmware],
   );
 
   const steps = useMemo(() => createSteps({ withResetStep }), [createSteps, withResetStep]);

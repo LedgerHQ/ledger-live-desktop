@@ -216,6 +216,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
               >
                 <Button
                   style={{ display: "flex" }}
+                  id={`appActionsInstall-${name}`}
                   lighterPrimary
                   disabled={notEnoughMemoryToInstall}
                   onClick={onInstall}
@@ -242,6 +243,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
                 <Button
                   style={{ padding: 13 }}
                   onClick={onUninstall}
+                  id={`appActionsUninstall-${name}`}
                   event="Manager Uninstall Click"
                   eventProperties={{
                     appName: name,
