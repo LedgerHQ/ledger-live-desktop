@@ -69,7 +69,7 @@ jobs:
           interval: 1000
       - name: run spectron
         if: always()
-        run: yarn spectron --runInBand --no-color 2>output.txt
+        run: yarn spectron --no-color 2>output.txt
       - name: Read test output
         id: spectron
         if: always()

@@ -132,6 +132,7 @@ const UpdateAllApps = ({ update, state, dispatch, isIncomplete }: Props) => {
           }
         >
           <Button
+            id={"managerAppsList-updateAll"}
             primary
             disabled={outOfMemory}
             onClick={onUpdateAll}

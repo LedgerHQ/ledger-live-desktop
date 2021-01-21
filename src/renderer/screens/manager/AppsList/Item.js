@@ -89,7 +89,7 @@ const Item: React$ComponentType<Props> = ({
   const newVersion = installed && installed.availableVersion;
 
   return (
-    <AppRow>
+    <AppRow id={`managerAppsList-${name}`}>
       <Box flex="0.7" horizontal>
         <Image alt="" resource={manager.getIconUrl(app.icon)} width={40} height={40} />
         <AppName>
