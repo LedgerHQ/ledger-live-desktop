@@ -23,6 +23,7 @@ export type ContextMenuItemType = {
   Icon?: React$ComponentType<any>,
   callback: any => any,
   dontTranslateLabel?: boolean,
+  id?: string,
 };
 
 type Props = {
@@ -102,7 +103,7 @@ class ContextMenuWrapper extends PureComponent<Props, State> {
   setContainerRef = (ref: *) => (this.containerRef = ref);
 
   renderItem = (item: ContextMenuItemType, index: number) => {
-    const { dontTranslateLabel, callback, label, Icon } = item;
+    const { dontTranslateLabel, callback, label, Icon, id } = item;
 
     return (
       <ContextMenuItemContainer
@@ -111,6 +112,7 @@ class ContextMenuWrapper extends PureComponent<Props, State> {
           callback(e);
           this.hideContextMenu();
         }}
+        id={id}
       >
         {Icon && (
           <Box pr={2} color="palette.text.shade60">
