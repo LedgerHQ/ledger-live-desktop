@@ -1,6 +1,7 @@
 // @flow
 
 import { ipcRenderer } from "electron";
+import { hermes } from "~/renderer/hermesClient";
 import accountModel from "~/helpers/accountModel";
 import memoize from "lodash/memoize";
 import debounce from "lodash/debounce";
@@ -28,7 +29,7 @@ transforms.accounts = {
 };
 
 export const getKey = async (ns: string, keyPath: string, defaultValue: any) => {
-  let data = await ipcRenderer.invoke("getKey", { ns, keyPath, defaultValue });
+  let data = await hermes.invoke("getKey", { ns, keyPath, defaultValue });
 
   const transform = transforms[keyPath];
   if (transform) {
@@ -47,7 +48,7 @@ const debouncedSetKey = memoize(
   (ns: string, keyPath: string) =>
     debounceToUse((value: string) => {
       const transform = transforms[keyPath];
-      ipcRenderer.invoke("setKey", {
+      hermes.invoke("setKey", {
         ns,
         keyPath,
         value: transform ? transform.set(value) : value,
@@ -61,25 +62,25 @@ export const setKey = (ns: string, keyPath: string, value: any) => {
 };
 
 export const hasEncryptionKey = (ns: string, keyPath: string) =>
-  ipcRenderer.invoke("hasEncryptionKey", { ns, keyPath });
+  hermes.invoke("hasEncryptionKey", { ns, keyPath });
 
 export const setEncryptionKey = (ns: string, keyPath: string, encryptionKey: string) =>
-  ipcRenderer.invoke("setEncryptionKey", { ns, keyPath, encryptionKey });
+  hermes.invoke("setEncryptionKey", { ns, keyPath, encryptionKey });
 
 export const removeEncryptionKey = (ns: string, keyPath: string) =>
-  ipcRenderer.invoke("removeEncryptionKey", { ns, keyPath });
+  hermes.invoke("removeEncryptionKey", { ns, keyPath });
 
 export const isEncryptionKeyCorrect = (ns: string, keyPath: string, encryptionKey: string) =>
-  ipcRenderer.invoke("isEncryptionKeyCorrect", { ns, keyPath, encryptionKey });
+  hermes.invoke("isEncryptionKeyCorrect", { ns, keyPath, encryptionKey });
 
 export const hasBeenDecrypted = (ns: string, keyPath: string) =>
-  ipcRenderer.invoke("hasBeenDecrypted", { ns, keyPath });
+  hermes.invoke("hasBeenDecrypted", { ns, keyPath });
 
-export const resetAll = () => ipcRenderer.invoke("resetAll");
+export const resetAll = () => hermes.invoke("resetAll");
 
-export const reload = () => ipcRenderer.invoke("reload");
+export const reload = () => hermes.invoke("reload");
 
-export const cleanCache = () => ipcRenderer.invoke("cleanCache");
+export const cleanCache = () => hermes.invoke("cleanCache");
 
 export const saveLSS = async (lssConfig: SatStackConfig) => {
   const configStub = {
@@ -88,18 +89,18 @@ export const saveLSS = async (lssConfig: SatStackConfig) => {
   };
   const maybeExistingConfig = (await loadLSS()) || configStub;
   const updated = editSatStackConfig(maybeExistingConfig, lssConfig);
-  await ipcRenderer.invoke("generate-lss-config", stringifySatStackConfig(updated));
+  await hermes.invoke("generate-lss-config", stringifySatStackConfig(updated));
   setEnvOnAllThreads("SATSTACK", true);
 };
 
 export const removeLSS = async () => {
-  await ipcRenderer.invoke("delete-lss-config");
+  await hermes.invoke("delete-lss-config");
   setEnvOnAllThreads("SATSTACK", false);
 };
 
 export const loadLSS = async (): Promise<?SatStackConfig> => {
   try {
-    const satStackConfigRaw = await ipcRenderer.invoke("load-lss-config");
+    const satStackConfigRaw = await hermes.invoke("load-lss-config");
     const config = parseSatStackConfig(satStackConfigRaw);
     setEnvOnAllThreads("SATSTACK", true);
     return config;

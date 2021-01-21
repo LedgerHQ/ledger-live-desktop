@@ -13,6 +13,7 @@ import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import db from "./db";
 import debounce from "lodash/debounce";
 import logger from "~/logger";
+import { hermes } from "~/main/hermesServer";
 
 app.allowRendererProcessReuse = false;
 
@@ -80,52 +81,63 @@ app.on("ready", async () => {
     await installExtensions();
   }
 
-  db.init(userDataDirectory);
+  const { port } = await hermes.start();
 
-  ipcMain.handle("getKey", (event, { ns, keyPath, defaultValue }) => {
+  hermes.registerProcedure("test", async (args) => {
+    console.log("called test with args: ", args);
+    return "done";
+  });
+
+  hermes.registerProcedure("getKey", async ({ ns, keyPath, defaultValue }) => {
     return db.getKey(ns, keyPath, defaultValue);
   });
 
-  ipcMain.handle("setKey", (event, { ns, keyPath, value }) => {
+  hermes.registerProcedure("setKey", async ({ ns, keyPath, value }) => {
     return db.setKey(ns, keyPath, value);
   });
 
-  ipcMain.handle("hasEncryptionKey", (event, { ns, keyPath }) => {
+  hermes.registerProcedure("hasEncryptionKey", async ({ ns, keyPath }) => {
     return db.hasEncryptionKey(ns, keyPath);
   });
 
-  ipcMain.handle("setEncryptionKey", (event, { ns, keyPath, encryptionKey }) => {
+  hermes.registerProcedure("setEncryptionKey", async ({ ns, keyPath, encryptionKey }) => {
     return db.setEncryptionKey(ns, keyPath, encryptionKey);
   });
 
-  ipcMain.handle("removeEncryptionKey", (event, { ns, keyPath }) => {
+  hermes.registerProcedure("removeEncryptionKey", async ({ ns, keyPath }) => {
     return db.removeEncryptionKey(ns, keyPath);
   });
 
-  ipcMain.handle("isEncryptionKeyCorrect", (event, { ns, keyPath, encryptionKey }) => {
+  hermes.registerProcedure("isEncryptionKeyCorrect", async ({ ns, keyPath, encryptionKey }) => {
     return db.isEncryptionKeyCorrect(ns, keyPath, encryptionKey);
   });
 
-  ipcMain.handle("hasBeenDecrypted", (event, { ns, keyPath }) => {
+  hermes.registerProcedure("isEncryptionKeyCorrect", async ({ ns, keyPath, encryptionKey }) => {
+    return db.isEncryptionKeyCorrect(ns, keyPath, encryptionKey);
+  });
+
+  hermes.registerProcedure("hasBeenDecrypted", ({ ns, keyPath }) => {
     return db.hasBeenDecrypted(ns, keyPath);
   });
 
-  ipcMain.handle("resetAll", () => {
+  hermes.registerProcedure("resetAll", () => {
     return db.resetAll();
   });
 
-  ipcMain.handle("reload", () => {
+  hermes.registerProcedure("reload", () => {
     return db.reload();
   });
 
-  ipcMain.handle("cleanCache", () => {
+  hermes.registerProcedure("cleanCache", () => {
     return db.cleanCache();
   });
 
-  ipcMain.handle("reloadRenderer", () => {
+  hermes.registerProcedure("reloadRenderer", () => {
     console.log("reloading renderer ...");
-    loadWindow();
+    loadWindow(port);
   });
+
+  db.init(userDataDirectory);
 
   ipcMain.on("log", (event, { log }) => logger.log(log));
 
@@ -134,7 +146,7 @@ app.on("ready", async () => {
   const windowParams = await db.getKey("windowParams", "MainWindow", {});
   const settings = await db.getKey("app", "settings");
 
-  const window = await createMainWindow(windowParams, settings);
+  const window = await createMainWindow(windowParams, settings, port);
 
   window.on(
     "resize",

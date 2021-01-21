@@ -12,6 +12,7 @@ import osName from "~/helpers/osName";
 import updater from "./updater";
 import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import path from "path";
+import { hermes } from "~/main/hermesServer";
 
 const loggerTransport = new LoggerTransport();
 const loggerFirmwareTransport = new LoggerTransportFirmware();
@@ -26,7 +27,7 @@ ipcMain.on("updater", (e, type) => {
   updater(type);
 });
 
-ipcMain.handle("save-logs", async (event, path: { canceled: boolean, filePath: string }) =>
+hermes.registerProcedure("save-logs", async (path: { canceled: boolean, filePath: string }) =>
   Promise.resolve().then(
     () =>
       !path.canceled &&
@@ -35,9 +36,9 @@ ipcMain.handle("save-logs", async (event, path: { canceled: boolean, filePath: s
   ),
 );
 
-ipcMain.handle(
+hermes.registerProcedure(
   "export-operations",
-  async (event, path: { canceled: boolean, filePath: string }, csv: string): Promise<boolean> => {
+  async (path: { canceled: boolean, filePath: string }, csv: string): Promise<boolean> => {
     try {
       if (!path.canceled && path.filePath && csv) {
         await fsWriteFile(path.filePath, csv);
@@ -51,7 +52,7 @@ ipcMain.handle(
 
 const lssFileName = "lss.json";
 
-ipcMain.handle("generate-lss-config", async (event, data: string): Promise<boolean> => {
+hermes.registerProcedure("generate-lss-config", async (data: string): Promise<boolean> => {
   const userDataDirectory = resolveUserDataDirectory();
   const filePath = path.resolve(userDataDirectory, lssFileName);
   if (filePath) {
@@ -65,7 +66,7 @@ ipcMain.handle("generate-lss-config", async (event, data: string): Promise<boole
   return false;
 });
 
-ipcMain.handle("delete-lss-config", async (event): Promise<boolean> => {
+hermes.registerProcedure("delete-lss-config", async (): Promise<boolean> => {
   const userDataDirectory = resolveUserDataDirectory();
   const filePath = path.resolve(userDataDirectory, lssFileName);
   if (filePath) {
@@ -76,7 +77,7 @@ ipcMain.handle("delete-lss-config", async (event): Promise<boolean> => {
   return false;
 });
 
-ipcMain.handle("load-lss-config", async (event): Promise<?string> => {
+hermes.registerProcedure("load-lss-config", async (): Promise<?string> => {
   try {
     const userDataDirectory = resolveUserDataDirectory();
     const filePath = path.resolve(userDataDirectory, lssFileName);

@@ -41,12 +41,14 @@ import {
 
 import ReactRoot from "~/renderer/ReactRoot";
 import AppError from "~/renderer/AppError";
+import { hermes } from "~/renderer/hermesClient";
 
 logger.add(new LoggerTransport());
 
 if (process.env.NODE_ENV !== "production" || process.env.DEV_TOOLS) {
   enableDebugLogger();
 }
+
 
 const rootNode = document.getElementById("react-root");
 
@@ -60,6 +62,10 @@ async function init() {
     Transport,
     connect,
   });
+
+  const hermesPort = new URLSearchParams(window.location.search).get("hermes-port");
+  console.log("connecting on ", hermesPort);
+  await hermes.connect(hermesPort);
 
   if (process.env.SPECTRON_RUN) {
     const spectronData = await getKey("app", "SPECTRON_RUN", {});

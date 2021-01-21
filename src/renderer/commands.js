@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Observable } from "rxjs";
 import logger from "~/logger";
 import { deserializeError } from "@ledgerhq/errors";
+import { hermes } from "~/renderer/hermesClient";
 
 // Implements command message of (Renderer proc -> Main proc)
 type Msg<A> = {
@@ -13,7 +14,7 @@ type Msg<A> = {
   data?: A,
 };
 
-export function command<Id: $Keys<Commands>>(id: Id): CommandFn<Id> {
+export function commandOLD<Id: $Keys<Commands>>(id: Id): CommandFn<Id> {
   // $FlowFixMe i'm not sure how to prove CommandFn to flow but it works
   return <A>(data: A) =>
     Observable.create(o => {
@@ -58,5 +59,38 @@ export function command<Id: $Keys<Commands>>(id: Id): CommandFn<Id> {
       logger.onCmd("cmd.START", id, 0, data);
 
       return unsubscribe;
+    });
+}
+
+
+export function command<Id: $Keys<Commands>>(id: Id): CommandFn<Id> {
+  // $FlowFixMe i'm not sure how to prove CommandFn to flow but it works
+  return <A>(data: A) =>
+    Observable.create(o => {
+      const requestId: string = uuidv4();
+
+      hermes.invoke("command", { id, data, requestId }).then(stream => {
+        console.log("GOT STREAM ", stream)
+        stream.on("data", (data) => {
+          console.log("data: ", data);
+          o.next(data);
+        });
+
+        stream.on("error", (error) => {
+          console.log("error: ", error);
+          o.error(error);
+        });
+
+        stream.on("end", () => {
+          console.log("complete");
+          o.complete();
+        });
+      });
+
+      logger.onCmd("cmd.START", id, 0, data);
+
+      return () => {
+        // stream.destroy();
+      };
     });
 }

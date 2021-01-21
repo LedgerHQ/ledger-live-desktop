@@ -8,6 +8,7 @@ import { isRestartNeeded } from "~/helpers/env";
 import logger from "~/logger";
 import { getMainWindow } from "./window-lifecycle";
 import InternalProcess from "./InternalProcess";
+import { hermes } from "~/main/hermesServer";
 
 // ~~~ Local state that main thread keep
 
@@ -65,7 +66,7 @@ app.on("window-all-closed", async () => {
   app.quit();
 });
 
-ipcMain.on("clean-processes", async () => {
+hermes.registerProcedure("clean-processes", async () => {
   logger.info("cleaning processes on demand");
   if (internal.active) {
     await internal.stop();
@@ -76,9 +77,9 @@ ipcMain.on("clean-processes", async () => {
 const ongoing = {};
 
 internal.onMessage(message => {
-  const event = ongoing[message.requestId];
-  if (event) {
-    event.reply("command-event", message);
+  const stream = ongoing[message.requestId];
+  if (stream) {
+    // stream.write(message);
 
     if (message.type === "cmd.ERROR" || message.type === "cmd.COMPLETE") {
       delete ongoing[message.requestId];
@@ -88,29 +89,30 @@ internal.onMessage(message => {
 
 internal.onExit((code, signal, unexpected) => {
   if (unexpected) {
+    console.log("ending all pending commands")
     Object.keys(ongoing).forEach(requestId => {
-      const event = ongoing[requestId];
-      event.reply("command-event", {
-        type: "cmd.ERROR",
-        requestId,
-        data: {
-          message:
-            code !== null
-              ? `Internal process error (${code})`
-              : `Internal process killed by signal (${signal})`,
-          name: "InternalError",
-        },
+      const stream = ongoing[requestId];
+      stream.destroy({
+        message:
+          code !== null
+            ? `Internal process error (${code})`
+            : `Internal process killed by signal (${signal})`,
+        name: "InternalError",
       });
+      delete ongoing[requestId];
     });
   }
 });
 
-ipcMain.on("command", (event, command) => {
-  ongoing[command.requestId] = event;
-  internal.send({ type: "command", command });
+hermes.registerProcedure("command", command => {
+  const stream = hermes.createStream({ objectMode: true });
+  console.log("got command: ", command);
+  ongoing[command.requestId] = stream;
+//  internal.send({ type: "command", command });
+  return stream;
 });
 
-ipcMain.on("command-unsubscribe", (event, { requestId }) => {
+hermes.registerProcedure("command-unsubscribe", ({ requestId }) => {
   delete ongoing[requestId];
   internal.send({ type: "command-unsubscribe", requestId });
 });
@@ -139,7 +141,7 @@ function handleGlobalInternalMessage(payload) {
 
 // FIXME this should be a done with a env instead.
 /*
-ipcMain.on('sentryLogsChanged', (event, payload) => {
+hermes.registerProcedure('sentryLogsChanged', (event, payload) => {
   sentryEnabled = payload.value
   const p = internalProcess
   if (!p) return
@@ -147,7 +149,7 @@ ipcMain.on('sentryLogsChanged', (event, payload) => {
 })
 */
 
-ipcMain.on("setEnv", async (event, env) => {
+hermes.registerProcedure("setEnv", async env => {
   const { name, value } = env;
 
   if (setEnvUnsafe(name, value)) {
@@ -162,7 +164,7 @@ ipcMain.on("setEnv", async (event, env) => {
   }
 });
 
-ipcMain.on("hydrateCurrencyData", (event, { currencyId, serialized }) => {
+hermes.registerProcedure("hydrateCurrencyData", ({ currencyId, serialized }) => {
   if (hydratedPerCurrency[currencyId] === serialized) return;
   hydratedPerCurrency[currencyId] = serialized;
 

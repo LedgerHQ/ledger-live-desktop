@@ -58,17 +58,21 @@ const defaultWindowOptions = {
   },
 };
 
-export const loadWindow = async () => {
+export const loadWindow = async (port: number) => {
   let url = __DEV__ ? INDEX_URL : path.join("file://", __dirname, "index.html");
   if (process.env.SPECTRON_RUN) {
-    url = url.replace("localhost", "host.docker.internal");
+    url = url.replace("127.0.0.1", "host.docker.internal");
   }
   if (mainWindow) {
-    await mainWindow.loadURL(`${url}?theme=${theme}`);
+    await mainWindow.loadURL(`${url}?theme=${theme}&hermes-port=${port}`);
   }
 };
 
-export async function createMainWindow({ dimensions, positions }: any, settings: any) {
+export async function createMainWindow(
+  { dimensions, positions }: any,
+  settings: any,
+  port: number,
+) {
   theme = settings && settings.theme ? settings.theme : "null";
 
   // TODO renderer should provide the saved window rectangle
@@ -102,7 +106,7 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
 
   mainWindow.name = "MainWindow";
 
-  loadWindow();
+  loadWindow(port);
 
   if ((__DEV__ || DEV_TOOLS) && !process.env.DISABLE_DEV_TOOLS) {
     mainWindow.webContents.openDevTools();
