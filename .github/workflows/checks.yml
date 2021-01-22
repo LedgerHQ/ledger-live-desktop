@@ -135,9 +135,9 @@ jobs:
     steps:
       - name: Send message to Slack channel
         uses: archive/github-actions-slack@v1.0.3
-        if: github.event_name == 'push' && needs.test.outputs.commentSlack != ''
+        if: github.event_name == 'push'
         id: notify
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
-          slack-channel: live-internal-desktop
+          slack-channel: live-ui-tests
           slack-text: ${{ needs.test.outputs.commentSlack }}

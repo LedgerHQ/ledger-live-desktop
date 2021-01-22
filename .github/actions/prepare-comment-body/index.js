@@ -125,11 +125,7 @@ https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
 
   core.setOutput("body", JSON.stringify({ comment: str.replace(/'/g, "'\\''") }));
   core.setOutput("bodyclean", str);
-  if (lintFailed || testsFailed || imgDiffFailed) {
-    core.setOutput("bodySlack", strSlack);
-  } else {
-    core.setOutput("bodySlack", "");
-  }
+  core.setOutput("bodySlack", strSlack);
   core.setOutput("bodySlackAuthor", strSlackAuthor);
   core.setOutput("slackAuthor", githubSlackMap[author] || "");
 };
