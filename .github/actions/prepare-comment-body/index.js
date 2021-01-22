@@ -110,7 +110,7 @@ Diff output ${imgDiffFailed ? "❌" : " ✅"}
 https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
 `;
 
-  core.setOutput("body", JSON.stringify({ comment: str }));
+  core.setOutput("body", JSON.stringify({ comment: str.replace(/'/g, "'\\''") }));
   core.setOutput("bodyclean", str);
   if (lintFailed || testsFailed || imgDiffFailed) {
     core.setOutput("bodySlack", strSlack);
