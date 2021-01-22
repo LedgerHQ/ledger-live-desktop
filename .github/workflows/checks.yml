@@ -135,3 +135,11 @@ jobs:
       - name: post comment
         run: |
           curl --location --request POST 'http://github-action-artifact-link.vercel.app/api/comment?owner=LedgerHQ&repo=ledger-live-desktop&issueId=${{github.event.pull_request.number}}' --header 'Content-Type: application/json' --data-raw '${{ needs.test.outputs.comment }}'
+      - name: Send message to Slack channel
+        uses: archive/github-actions-slack@v1.0.3
+        if: github.event_name == 'push' && needs.test.outputs.commentSlack != ''
+        id: notify
+        with:
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+          slack-channel: live-internal-desktop
+          slack-text: ${{ needs.test.outputs.commentSlack }}
