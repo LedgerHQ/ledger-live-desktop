@@ -2741,6 +2741,10 @@
       "title": "Quelque chose s'est mal passé (Erreur #17)",
       "description": "Veuillez contacter le support Ledger"
     },
+    "CosmosStargateFeb2021Warning": {
+      "title": "Cosmos support is temporarily disabled on Ledger Live.",
+      "description": "Read our article to manage ATOM with your device."
+    },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} n'est pas pris en charge",
       "description": "Cette crypto-actif n'est pas encore supporté. Veuillez contacter l'assistance Ledger."
