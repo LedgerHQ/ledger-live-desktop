@@ -111,6 +111,8 @@ export const urls = {
       "https://www.ledger.com/academy?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
     ongoingScams:
       "https://www.ledger.com/ongoing-phishing-campaigns?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
+    valentine:
+      "https://shop.ledger.com/pages/valentines-day-special-offers&utm_medium=self_referral&utm_content=banner_carousel",
   },
   helpModal: {
     gettingStarted:
