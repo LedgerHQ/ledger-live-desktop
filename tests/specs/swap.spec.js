@@ -48,7 +48,7 @@ describe("Swap", () => {
     const fromCurrency = await $("#swap-form-from-currency .select__control");
     await fromCurrency.waitForDisplayed();
 
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
+    expect(await app.client.screenshot(2000)).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-kyc-done",
     });
   });
@@ -92,7 +92,7 @@ describe("Swap", () => {
     await summaryProviderCheckbox.waitForDisplayed();
     await summaryProviderCheckbox.click();
 
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
+    expect(await app.client.screenshot(1000)).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-summary-step",
     });
   });
