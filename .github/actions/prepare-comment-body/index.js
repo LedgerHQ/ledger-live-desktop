@@ -1,8 +1,10 @@
 const core = require("@actions/core");
+const fetch = require("isomorphic-unfetch");
 
 const main = async () => {
   const images = core.getInput("images");
   const runId = core.getInput("runId");
+  const prNumber = core.getInput("prNumber");
   const pullId = core.getInput("pullId");
   const from = core.getInput("from");
   const to = core.getInput("to");
@@ -109,6 +111,17 @@ Diff output ${imgDiffFailed ? "❌" : " ✅"}
 
 https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
 `;
+
+  await fetch(
+    `http://github-action-artifact-link.vercel.app/api/comment?owner=LedgerHQ&repo=ledger-live-desktop&issueId=${prNumber}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ comment: str }),
+    },
+  );
 
   core.setOutput("body", JSON.stringify({ comment: str.replace(/'/g, "'\\''") }));
   core.setOutput("bodyclean", str);
