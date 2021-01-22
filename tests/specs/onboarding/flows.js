@@ -53,7 +53,7 @@ export const goToConnectAndFinish = cta => {
   it("check nano", async () => {
     const next = await $("#pair-my-nano-cta");
     await next.click();
-    await app.client.pause(200);
+    await app.client.pause(2000);
     await mockDeviceEvent(
       {
         type: "listingApps",
@@ -214,16 +214,22 @@ export const onboard = device => {
     it("finished the quizz", async () => {
       let next = await $("#quizz-start-cta");
       await next.click();
+      await app.client.pause(200);
       next = await $("#answer-1");
       await next.click();
+      await app.client.pause(200);
       next = await $("#quizz-next-cta");
       await next.click();
+      await app.client.pause(200);
       next = await $("#answer-1");
       await next.click();
+      await app.client.pause(200);
       next = await $("#quizz-next-cta");
       await next.click();
+      await app.client.pause(200);
       next = await $("#answer-0");
       await next.click();
+      await app.client.pause(200);
       next = await $("#quizz-next-cta");
       await next.click();
       await app.client.pause(400);
