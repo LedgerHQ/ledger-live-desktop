@@ -11,25 +11,23 @@ describe("Global", () => {
     const sendButton = await $("#drawer-send-button");
     await sendButton.click();
     await modalPage.isDisplayed();
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
+    expect(await app.client.screenshot(2000)).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-send-modal",
     });
-    await modalPage.close();
-    expect(await modalPage.isDisplayed(true)).toBe(false);
   });
 
   it("can open receive modal", async () => {
+    await modalPage.close();
     const sendButton = await $("#drawer-receive-button");
     await sendButton.click();
     await modalPage.isDisplayed();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-receive-modal",
     });
-    await modalPage.close();
-    expect(await modalPage.isDisplayed(true)).toBe(false);
   });
 
   it("shows experimental badge, and can access the page", async () => {
+    await modalPage.close();
     const experimentalButton = await $("#drawer-experimental-button");
     await experimentalButton.click();
     expect(await app.client.screenshot()).toMatchImageSnapshot({

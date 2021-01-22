@@ -121,7 +121,10 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     });
 
     app.client.addCommand("screenshot", async function(countdown = 500) {
-      this.pause(countdown);
+      const unfocus = await app.client.$("#unfocus-please");
+      await unfocus.click();
+
+      await this.pause(countdown);
 
       const pageRect = await app.client.execute(() => {
         return {
