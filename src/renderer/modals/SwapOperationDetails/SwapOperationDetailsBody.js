@@ -16,6 +16,8 @@ import styled from "styled-components";
 import { ModalBody } from "~/renderer/components/Modal";
 import Box from "~/renderer/components/Box";
 import Link from "~/renderer/components/Link";
+import Tooltip from "~/renderer/components/Tooltip";
+import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import Button from "~/renderer/components/Button";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
@@ -30,25 +32,27 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { getStatusColor } from "~/renderer/screens/exchange/swap/History/OperationRow";
 import IconClock from "~/renderer/icons/Clock";
 import { GradientHover } from "~/renderer/modals/OperationDetails/styledComponents";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
+import IconExclamationCircle from "~/renderer/icons/ExclamationCircle";
+import useTheme from "~/renderer/hooks/useTheme";
 
 const Label = styled(Text).attrs(() => ({
   fontSize: 2,
   color: "palette.text.shade100",
   ff: "Inter|SemiBold",
 }))`
+  margin-bottom: 3px;
   text-transform: uppercase;
 `;
 
 const Value = styled(Box).attrs(() => ({
   fontSize: 4,
   color: "palette.text.shade50",
-  ff: "Inter|Regular",
+  ff: "Inter|Medium",
 }))`
-  margin-top: 2px;
   flex: 1;
-  & ${Link}:hover {
-    text-decoration: underline;
-  }
+  ${p => (p.status ? `color:${getStatusColor(p.status, p.theme)};` : "")}
 `;
 
 const Row = styled(Box).attrs(() => ({
@@ -74,7 +78,7 @@ const Status: ThemedComponent<{}> = styled.div`
   justify-content: center;
   align-self: center;
   border-radius: 50%;
-  background: ${p => rgba(getStatusColor(p.status, p.theme), 0.2)};
+  background: ${p => rgba(getStatusColor(p.status, p.theme), 0.1)};
   & > * {
     color: ${p => getStatusColor(p.status, p.theme)};
   }
@@ -86,9 +90,9 @@ const WrapperClock: ThemedComponent<{}> = styled(Box).attrs(() => ({
 }))`
   border-radius: 50%;
   position: absolute;
-  bottom: -4px;
-  right: -4px;
-  padding: 1px;
+  bottom: -2px;
+  right: -2px;
+  padding: 3px;
 `;
 
 const SwapIdWrapper: ThemedComponent<{}> = styled(Box).attrs(p => ({
@@ -134,7 +138,6 @@ const SwapOperationDetailsBody = ({
     fromAmount,
     toAmount,
   } = mappedSwapOperation;
-
   const history = useHistory();
   const fromUnit = getAccountUnit(fromAccount);
   const fromCurrency = getAccountCurrency(fromAccount);
@@ -142,6 +145,9 @@ const SwapOperationDetailsBody = ({
   const toCurrency = getAccountCurrency(toAccount);
   const accounts = useSelector(shallowAccountsSelector);
   const normalisedFromAmount = fromAmount.times(-1);
+  const theme = useTheme();
+  const statusColor = getStatusColor(status, theme);
+  const statusHasTooltip = ["refunded", "hold", "failed"].includes(status);
 
   const openAccount = useCallback(
     account => {
@@ -173,7 +179,7 @@ const SwapOperationDetailsBody = ({
           <Box my={4} mb={48} alignItems="center">
             <Box selectable>
               <FormattedVal
-                color={normalisedFromAmount.isNegative() ? "palette.text.shade80" : undefined}
+                color={normalisedFromAmount.isNegative() ? "palette.text.shade100" : undefined}
                 unit={fromUnit}
                 alwaysShowSign
                 showCode
@@ -187,13 +193,13 @@ const SwapOperationDetailsBody = ({
             </Box>
             <Box selectable>
               <FormattedVal
-                color={toAmount.isNegative() ? "palette.text.shade80" : undefined}
                 unit={toUnit}
                 alwaysShowSign
                 showCode
                 val={toAmount}
                 fontSize={6}
                 disableRounding
+                color={statusColor}
               />
             </Box>
           </Box>
@@ -202,7 +208,13 @@ const SwapOperationDetailsBody = ({
               <Label>
                 <Trans i18nKey="swap.operationDetailsModal.provider" />
               </Label>
-              <Value style={{ textTransform: "capitalize" }}>{provider}</Value>
+              <LinkWithExternalIcon
+                fontSize={12}
+                style={{ textTransform: "capitalize" }}
+                onClick={() => openURL(urls.swap.providers[provider]?.main)}
+              >
+                {provider}
+              </LinkWithExternalIcon>
             </Box>
             <Box>
               <Label>
@@ -221,7 +233,22 @@ const SwapOperationDetailsBody = ({
               <Label>
                 <Trans i18nKey="swap.operationDetailsModal.status" />
               </Label>
-              <Value style={{ textTransform: "capitalize" }}>{status}</Value>
+              <Box horizontal alignItems={"center"}>
+                <Value mr={1} status={status} style={{ textTransform: "capitalize" }}>
+                  {status}
+                </Value>
+                {statusHasTooltip ? (
+                  <Tooltip
+                    content={
+                      <Box style={{ maxWidth: 180 }}>
+                        <Trans i18nKey={`swap.operationDetailsModal.statusTooltips.${status}`} />
+                      </Box>
+                    }
+                  >
+                    <IconExclamationCircle size={12} color={statusColor} />
+                  </Tooltip>
+                ) : null}
+              </Box>
             </Box>
             <Box>
               <Label>
@@ -239,7 +266,7 @@ const SwapOperationDetailsBody = ({
                 <Box mr={1} alignItems={"center"}>
                   <CryptoCurrencyIcon size={16} currency={fromCurrency} />
                 </Box>
-                <Box flex={1}>
+                <Box flex={1} color={"palette.text.shade100"}>
                   <Ellipsis>
                     <Link onClick={() => openAccount(fromAccount)}>
                       {getAccountName(fromAccount)}
@@ -272,7 +299,7 @@ const SwapOperationDetailsBody = ({
                 <Box mr={1} alignItems={"center"}>
                   <CryptoCurrencyIcon size={16} currency={toCurrency} />
                 </Box>
-                <Box flex={1}>
+                <Box flex={1} color={"palette.text.shade100"}>
                   <Ellipsis>
                     <Link onClick={() => openAccount(toAccount)}>{getAccountName(toAccount)}</Link>
                   </Ellipsis>

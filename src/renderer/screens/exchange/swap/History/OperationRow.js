@@ -25,7 +25,7 @@ import IconClock from "~/renderer/icons/Clock";
 
 export const getStatusColor = (status: string, theme: any) => {
   if (operationStatusList.pending.includes(status)) {
-    return theme.colors.gray;
+    return status === "hold" ? theme.colors.orange : theme.colors.wallet;
   } else if (operationStatusList.finishedOK.includes(status)) {
     return theme.colors.positiveGreen;
   } else if (operationStatusList.finishedKO.includes(status)) {
@@ -43,7 +43,7 @@ const Status: ThemedComponent<{}> = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 24px;
-  background: ${p => rgba(getStatusColor(p.status, p.theme), 0.2)};
+  background: ${p => rgba(getStatusColor(p.status, p.theme), 0.1)};
   & > * {
     color: ${p => getStatusColor(p.status, p.theme)};
   }
@@ -113,6 +113,7 @@ const OperationRow = ({
 
   return (
     <Row
+      className={"swap-history-row"}
       toExists={toExists}
       horizontal
       key={swapId}

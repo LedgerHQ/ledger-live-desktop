@@ -1,5 +1,11 @@
 import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
-import initialize, { app, mockDeviceEvent, deviceInfo, mockListAppsResult } from "../common.js";
+import initialize, {
+  modalPage,
+  app,
+  mockDeviceEvent,
+  deviceInfo,
+  mockListAppsResult,
+} from "../common.js";
 
 describe("Swap", () => {
   initialize(
@@ -163,6 +169,17 @@ describe("Swap", () => {
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-end-1",
+    });
+  });
+
+  it("should show operation details modal", async () => {
+    const firstRow = await $(".swap-history-row:first-child");
+    await firstRow.waitForDisplayed();
+    await firstRow.click();
+    await modalPage.isDisplayed();
+
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "swap-history-modal",
     });
   });
 });
