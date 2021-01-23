@@ -248,6 +248,11 @@
       "provider": "Fournisseur",
       "txid": "Swap ID",
       "status": "Statut",
+      "statusTooltips": {
+        "refunded": "Please contact the Swap provider with you swap ID for more details",
+        "failed": "Please contact the Swap provider with you swap ID for more details",
+        "hold": "Please contact the Swap provider with you swap ID to solve the situation"
+      },
       "date": "Date",
       "from": "De",
       "to": "Vers",
