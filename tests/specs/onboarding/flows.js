@@ -13,7 +13,7 @@ export const selection = device => {
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-terms",
     });
-  });o
+  });
   it("accept terms", async () => {
     const lossCB = await $("#modal-terms-privacy-policy");
     const termCB = await $("#modal-terms-checkbox");
