@@ -1,5 +1,11 @@
 import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
-import initialize, { app, mockDeviceEvent, deviceInfo, mockListAppsResult } from "../common.js";
+import initialize, {
+  modalPage,
+  app,
+  mockDeviceEvent,
+  deviceInfo,
+  mockListAppsResult,
+} from "../common.js";
 
 describe("Swap", () => {
   initialize(
@@ -48,7 +54,7 @@ describe("Swap", () => {
     const fromCurrency = await $("#swap-form-from-currency .select__control");
     await fromCurrency.waitForDisplayed();
 
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
+    expect(await app.client.screenshot(2000)).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-kyc-done",
     });
   });
@@ -92,7 +98,7 @@ describe("Swap", () => {
     await summaryProviderCheckbox.waitForDisplayed();
     await summaryProviderCheckbox.click();
 
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
+    expect(await app.client.screenshot(1000)).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-summary-step",
     });
   });
@@ -163,6 +169,17 @@ describe("Swap", () => {
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-end-1",
+    });
+  });
+
+  it("should show operation details modal", async () => {
+    const firstRow = await $(".swap-history-row:first-child");
+    await firstRow.waitForDisplayed();
+    await firstRow.click();
+    await modalPage.isDisplayed();
+
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "swap-history-modal",
     });
   });
 });

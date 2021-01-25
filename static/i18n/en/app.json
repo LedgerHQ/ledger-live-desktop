@@ -248,6 +248,11 @@
       "provider": "Provider",
       "txid": "Swap ID",
       "status": "Status",
+      "statusTooltips": {
+        "refunded": "Please contact the Swap provider with you swap ID for more details",
+        "failed": "Please contact the Swap provider with you swap ID for more details",
+        "hold": "Please contact the Swap provider with you swap ID to solve the situation"
+      },
       "date": "Date",
       "from": "From",
       "to": "To",
@@ -773,6 +778,10 @@
     },
     "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
+    "valentine": {
+      "title": "Valentine’s day",
+      "description": "As a proof of our love, Ledger is reducing buy & sell fees on Ledger Live"
+    },
     "ledgerAcademy": {
       "title": "Ledger Academy",
       "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
@@ -2737,6 +2746,10 @@
     "CosmosBroadcastCodeNoSignatures": {
       "title": "Something went wrong (Error #17)",
       "description": "Please contact Ledger Support"
+    },
+    "CosmosStargateFeb2021Warning": {
+      "title": "Cosmos support is temporarily disabled on Ledger Live.",
+      "description": "Read our article to manage ATOM with your device."
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
