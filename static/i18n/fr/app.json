@@ -2922,6 +2922,10 @@
       "title": "Compte non scanné par le nœud",
       "description": "Veuillez configurer votre nœud pour scanner les comptes associés à cet appareil. Votre nœud doit d'abord scanner la blockchain avant de pouvoir ajouter le compte à votre portfolio."
     },
+    "StratisDown2021Warning": {
+      "title": "The Stratis blockchain evolved and may no longer work correctly.",
+      "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
+    },
     "SwapGenericAPIError": {
       "title": "Le taux de change a expiré",
       "description": "Vous devez confirmer l'échange avant que le minuteur ne s'épuise. Le taux de change affiché reste valide pendant 60 secondes."
