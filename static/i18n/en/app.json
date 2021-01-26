@@ -112,6 +112,7 @@
     "hour": "Hour",
     "hour_plural": "Hours",
     "range": {
+      "day": "1D",
       "week": "1W",
       "month": "1M",
       "year": "1Y"
