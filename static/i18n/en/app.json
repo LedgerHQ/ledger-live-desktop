@@ -3164,10 +3164,10 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{unit}} {{minAmountFrom}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be less than {{unit}} {{maxAmountFrom}}"
+      "title": "Amount must be less than {{maxAmountFromFormatted}}"
     }
   }
 }
