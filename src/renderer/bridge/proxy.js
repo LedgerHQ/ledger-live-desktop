@@ -60,15 +60,22 @@ export const getCurrencyBridge = (currency: CryptoCurrency): CurrencyBridge => {
   return b;
 };
 
+// the proxied sync have problems because of patchAccount limitations:
+// - perf overhead
+// - race-condition with pendingOperations
+const canSyncOnRenderer = currency => currency.family === "ethereum";
+
 export const getAccountBridge = (
   account: AccountLike,
   parentAccount: ?Account,
 ): AccountBridge<any> => {
   const sync = (account, syncConfig) =>
-    command("AccountSync")({
-      account: toAccountRaw(account),
-      syncConfig,
-    }).pipe(map(raw => account => patchAccount(account, raw)));
+    canSyncOnRenderer(account.currency)
+      ? bridgeImpl.getAccountBridge(account, parentAccount).sync(account, syncConfig)
+      : command("AccountSync")({
+          account: toAccountRaw(account),
+          syncConfig,
+        }).pipe(map(raw => account => patchAccount(account, raw)));
 
   const receive = (account, arg) =>
     command("AccountReceive")({
