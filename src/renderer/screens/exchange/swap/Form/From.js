@@ -15,7 +15,6 @@ import type {
   Currency,
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
@@ -130,30 +129,6 @@ const From = ({
 
   const amountError = amount.gt(0) && (error || status.errors?.gasPrice || status.errors?.amount);
   const hideError = useAllAmount && amountError && amountError instanceof AmountRequired;
-
-  if (amountError.name === "SwapExchangeRateAmountTooLow" && unit) {
-    // $FlowFixMe
-    amountError.minAmountFromFormatted = formatCurrencyUnit(
-      unit,
-      BigNumber(amountError.minAmountFrom),
-      {
-        alwaysShowSign: false,
-        disableRounding: true,
-        showCode: true,
-      },
-    );
-    if (amountError.name === "SwapExchangeRateAmountTooHigh" && unit) {
-    // $FlowFixMe
-    amountError.maxAmountFromFormatted = formatCurrencyUnit(
-      unit,
-      BigNumber(amountError.maxAmountFrom),
-      {
-        alwaysShowSign: false,
-        disableRounding: true,
-        showCode: true,
-      },
-    );
-  }
 
   return (
     <Box flex={1} flow={1} mb={3} ml={0} mr={23}>
