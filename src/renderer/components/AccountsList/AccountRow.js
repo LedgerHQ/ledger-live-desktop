@@ -90,6 +90,7 @@ export default class AccountRow extends PureComponent<Props> {
 
     return (
       <AccountRowContainer
+        className="account-row"
         isDisabled={isDisabled}
         onClick={isDisabled ? null : this.onToggleAccount}
       >

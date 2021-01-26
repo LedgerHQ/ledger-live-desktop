@@ -3,6 +3,8 @@ description: gets a list of images and return a formatted markdown body for comm
 author: valpinkman
 outputs:
   body:
+    description: json formatted body for comment
+  bodyclean:
     description: markdown formatted body for comment
   bodySlack:
     description: message formatted body for slack
@@ -40,6 +42,9 @@ inputs:
     required: true
   lintoutput:
     description: lintoutput
+    required: true
+  prNumber:
+    description: prNumber
     required: true
 runs:
   using: node12
