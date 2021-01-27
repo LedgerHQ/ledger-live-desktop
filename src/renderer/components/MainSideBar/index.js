@@ -24,7 +24,7 @@ import IconPortfolio from "~/renderer/icons/Portfolio";
 import IconReceive from "~/renderer/icons/Receive";
 import IconSend from "~/renderer/icons/Send";
 import IconExchange from "~/renderer/icons/Exchange";
-import IconChevron from "~/renderer/icons/ChevronRight";
+import IconChevron from "~/renderer/icons/ChevronRightSmall";
 import IconLending from "~/renderer/icons/Graph";
 import IconExperimental from "~/renderer/icons/Experimental";
 import IconSwap from "~/renderer/icons/Swap";
@@ -349,7 +349,9 @@ const MainSideBar = () => {
             </Hide>
 
             <SideBarList scroll flex="1 1 40%" title={t("sidebar.stars")} collapsed={secondAnim}>
-              <Stars pathname={location.pathname} collapsed={secondAnim} />
+              <div id="bookmarked-accounts">
+                <Stars pathname={location.pathname} collapsed={secondAnim} />
+              </div>
             </SideBarList>
             <Space of={30} grow />
             <TagContainer collapsed={!secondAnim} />

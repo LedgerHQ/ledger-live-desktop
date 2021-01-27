@@ -3,7 +3,7 @@
 import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
-import Lottie from "react-lottie";
+import Animation from "~/renderer/animations";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
@@ -119,8 +119,8 @@ const steps = (color: string) => [
     titleKey: <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.setUp.title" />,
     descrKey: (
       <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.setUp.descr">
-        <NanoDeviceCheckIcon color={color} />
-        <NanoDeviceCancelIcon color={color} />
+        <NanoDeviceCheckIcon color={color} style={{ margin: "0 4px" }} />
+        <NanoDeviceCancelIcon color={color} style={{ margin: "0 4px" }} />
       </Trans>
     ),
   },
@@ -146,15 +146,6 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
   const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
 
-  const defaultOptions = {
-    loop: true,
-    autoplay: !process.env.SPECTRON_RUN,
-    animationData: deviceId === "nanoX" ? NanoXAnim : NanoSAnim,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
-
   return (
     <ScreenContainer>
       <ContentContainer style={{ marginTop: 94 }}>
@@ -166,7 +157,14 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
             <InfoCircle size={22} />
           </Button>
         </HeaderContainer>
-        <Lottie options={defaultOptions} height={130} />
+        <Animation
+          loop
+          animation={deviceId === "nanoX" ? NanoXAnim : NanoSAnim}
+          rendererSettings={{
+            preserveAspectRatio: "xMidYMid slice",
+          }}
+          height="130"
+        />
         <StepList>
           {allSteps.map((step, index) => (
             <Step key={index} title={step.titleKey} descr={step.descrKey} index={index + 1} />

@@ -1,7 +1,7 @@
 // @flow
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
 import { UseCaseOption } from "./UseCaseOption";
@@ -11,6 +11,11 @@ import Button from "~/renderer/components/Button";
 import deviceConnect from "./assets/deviceConnect.svg";
 import importRecovery from "./assets/importRecovery.svg";
 import nanoBox from "./assets/nanoBox.svg";
+import { deviceById } from "~/renderer/components/Onboarding/Screens/SelectDevice/devices";
+
+import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
+
+registerAssets([deviceConnect, importRecovery, nanoBox]);
 
 const SelectUseCaseContainer = styled.div`
   width: 100%;
@@ -76,10 +81,15 @@ const TopRightContainer = styled.div`
 
 type Props = {
   sendEvent: string => void,
+  context: {
+    deviceId: string,
+  },
 };
 
-export function SelectUseCase({ sendEvent }: Props) {
+export function SelectUseCase({ sendEvent, context }: Props) {
   const { t } = useTranslation();
+
+  const device = deviceById(context.deviceId);
 
   return (
     <ScrollArea withHint>
@@ -95,14 +105,26 @@ export function SelectUseCase({ sendEvent }: Props) {
               {t("onboarding.screens.selectUseCase.greetings")}
             </Text>
             <Text color="palette.text.shade100" ff="Inter|SemiBold" fontSize="32px">
-              {t("onboarding.screens.selectUseCase.hasNoRecovery")}
+              <Trans
+                i18nKey="onboarding.screens.selectUseCase.hasNoRecovery"
+                values={{
+                  deviceName: device.productName,
+                }}
+              />
             </Text>
           </LeftColumn>
           <RightColumn>
             <UseCaseOption
               id="first-use"
               heading={t("onboarding.screens.selectUseCase.options.1.heading")}
-              title={t("onboarding.screens.selectUseCase.options.1.title")}
+              title={
+                <Trans
+                  i18nKey="onboarding.screens.selectUseCase.options.1.title"
+                  values={{
+                    deviceName: device.productName,
+                  }}
+                />
+              }
               description={t("onboarding.screens.selectUseCase.options.1.description")}
               Illu={<NanoBox />}
               onClick={() => sendEvent("OPEN_PEDAGOGY_MODAL")}
@@ -118,16 +140,32 @@ export function SelectUseCase({ sendEvent }: Props) {
           </LeftColumn>
           <RightColumn>
             <UseCaseOption
+              id="initialized-device"
               heading={t("onboarding.screens.selectUseCase.options.2.heading")}
-              title={t("onboarding.screens.selectUseCase.options.2.title")}
+              title={
+                <Trans
+                  i18nKey="onboarding.screens.selectUseCase.options.2.title"
+                  values={{
+                    deviceName: device.productName,
+                  }}
+                />
+              }
               description={t("onboarding.screens.selectUseCase.options.2.description")}
               Illu={<DeviceConnect />}
               onClick={() => sendEvent("CONNECT_SETUP_DEVICE")}
             />
             <UseCaseOption
+              id="restore-device"
               heading={t("onboarding.screens.selectUseCase.options.3.heading")}
               title={t("onboarding.screens.selectUseCase.options.3.title")}
-              description={t("onboarding.screens.selectUseCase.options.3.description")}
+              description={
+                <Trans
+                  i18nKey="onboarding.screens.selectUseCase.options.3.description"
+                  values={{
+                    deviceName: device.productName,
+                  }}
+                />
+              }
               Illu={<ImportRecovery />}
               onClick={() => sendEvent("USE_RECOVERY_PHRASE")}
             />

@@ -117,7 +117,7 @@ const UpdaterTopBanner = () => {
       };
     }
 
-    return <TopBanner content={content} status={status} />;
+    return <TopBanner id={"app-update-banner"} content={content} status={status} />;
   }
 
   return null;

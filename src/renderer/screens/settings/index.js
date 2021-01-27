@@ -111,7 +111,7 @@ const Settings = ({ history, location, match }: Props) => {
           defaultIndex={activeTabIndex}
           index={activeTabIndex}
           tabs={items.map(i => i.label)}
-          ids={items.map(i => i.key)}
+          ids={items.map(i => `settings-${i.key}`)}
           separator
           withId
           fontSize={14}

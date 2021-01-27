@@ -169,15 +169,17 @@ const TooltipContent = ({
   name,
   bytes,
   deviceModel,
+  deviceInfo,
 }: {
   name: string,
   bytes: number,
   deviceModel: DeviceModel,
+  deviceInfo: DeviceInfo,
 }) => (
   <TooltipContentWrapper>
     <Text>{name}</Text>
     <Text>
-      <ByteSize value={bytes} deviceModel={deviceModel} />
+      <ByteSize value={bytes} deviceModel={deviceModel} firmwareVersion={deviceInfo.version} />
     </Text>
   </TooltipContentWrapper>
 );
@@ -191,6 +193,7 @@ const getAppStorageBarColor = ({ name, currency }: { currency: ?CryptoCurrency, 
   name in appDataColors ? appDataColors[name] : currency?.color;
 
 export const StorageBar = ({
+  deviceInfo,
   distribution,
   deviceModel,
   isIncomplete,
@@ -198,6 +201,7 @@ export const StorageBar = ({
   uninstallQueue,
   jobInProgress,
 }: {
+  deviceInfo: DeviceInfo,
   distribution: AppsDistribution,
   deviceModel: DeviceModel,
   isIncomplete: boolean,
@@ -219,7 +223,14 @@ export const StorageBar = ({
               >
                 <Tooltip
                   hideOnClick={false}
-                  content={<TooltipContent name={name} bytes={bytes} deviceModel={deviceModel} />}
+                  content={
+                    <TooltipContent
+                      name={name}
+                      bytes={bytes}
+                      deviceModel={deviceModel}
+                      deviceInfo={deviceInfo}
+                    />
+                  }
                 />
               </StorageBarItem>
             )}
@@ -292,7 +303,11 @@ const DeviceStorage = ({
               <Trans i18nKey="manager.deviceStorage.used" />
             </Text>
             <Text color="palette.text.shade100" ff="Inter|Bold" fontSize={4}>
-              <ByteSize deviceModel={deviceModel} value={distribution.totalAppsBytes} />
+              <ByteSize
+                deviceModel={deviceModel}
+                value={distribution.totalAppsBytes}
+                firmwareVersion={deviceInfo.version}
+              />
             </Text>
           </div>
           <div>
@@ -300,7 +315,11 @@ const DeviceStorage = ({
               <Trans i18nKey="manager.deviceStorage.capacity" />
             </Text>
             <Text color="palette.text.shade100" ff="Inter|Bold" fontSize={4}>
-              <ByteSize deviceModel={deviceModel} value={distribution.appsSpaceBytes} />
+              <ByteSize
+                deviceModel={deviceModel}
+                value={distribution.appsSpaceBytes}
+                firmwareVersion={deviceInfo.version}
+              />
             </Text>
           </div>
           <div>
@@ -314,6 +333,7 @@ const DeviceStorage = ({
         </Info>
         <StorageBar
           distribution={distribution}
+          deviceInfo={deviceInfo}
           deviceModel={deviceModel}
           isIncomplete={isIncomplete}
           installQueue={installQueue}
@@ -329,7 +349,11 @@ const DeviceStorage = ({
               ) : distribution.freeSpaceBytes > 0 ? (
                 <>
                   <Trans i18nKey="manager.deviceStorage.freeSpace" values={{ space: 0 }}>
-                    <ByteSize value={distribution.freeSpaceBytes} deviceModel={deviceModel} />
+                    <ByteSize
+                      value={distribution.freeSpaceBytes}
+                      deviceModel={deviceModel}
+                      firmwareVersion={deviceInfo.version}
+                    />
                     {"free"}
                   </Trans>
                 </>

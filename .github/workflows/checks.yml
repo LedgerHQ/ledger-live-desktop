@@ -121,17 +121,23 @@ jobs:
           imgChanged: ${{steps.imgChanged.outputs.content}}
           from: ${{github.base_ref}}
           to: ${{github.event.pull_request.head.sha}}
+          prNumber: ${{github.event.pull_request.number}}
       - name: display comment
         if: always()
         id: displaycomment
         env:
-          BODY: ${{ steps.comment.outputs.body }}
+          BODY: ${{ steps.comment.outputs.bodyclean }}
         run: echo "$BODY"
   post-comment:
     runs-on: ubuntu-latest
     needs: test
     if: always() && needs.test.result != 'cancelled'
     steps:
-      - name: post comment
-        run: |
-          curl --location --request POST 'http://github-action-artifact-link.vercel.app/api/comment?owner=LedgerHQ&repo=ledger-live-desktop&issueId=${{github.event.pull_request.number}}' --header 'Content-Type: application/json' --data-raw '${{ needs.test.outputs.comment }}'
+      - name: Send message to Slack channel
+        uses: archive/github-actions-slack@v1.0.3
+        if: github.event_name == 'push'
+        id: notify
+        with:
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+          slack-channel: live-ui-tests
+          slack-text: ${{ needs.test.outputs.commentSlack }}

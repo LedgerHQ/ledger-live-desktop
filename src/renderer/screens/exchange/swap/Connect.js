@@ -6,7 +6,7 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
 import { command } from "~/renderer/commands";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import Card from "~/renderer/components/Box/Card";
 
 const connectManagerExec = command("connectManager");

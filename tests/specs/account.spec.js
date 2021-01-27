@@ -225,8 +225,8 @@ describe("Account", () => {
     });
   });
 
-  describe("remove accounts flow", () => {
-    it("displays a list of accounts", async () => {
+  describe("sort accounts", () => {
+    it("sort account default", async () => {
       const isModalOpen = await modalPage.isDisplayed(true);
 
       if (isModalOpen) {
@@ -237,14 +237,99 @@ describe("Account", () => {
       await accountsButton.click();
 
       expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "sort-account-default",
+      });
+    });
+
+    it("sort account lowest balance", async () => {
+      const sortSelectButton = await $("#accounts-order-select-button");
+      await sortSelectButton.click();
+
+      const sortLowestBalanceButton = await $("#accounts-order-select-balance-asc");
+      await sortLowestBalanceButton.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "sort-account-lowest-balance",
+      });
+    });
+
+    it("sort account name A-Z", async () => {
+      const sortSelectButton = await $("#accounts-order-select-button");
+      await sortSelectButton.click();
+
+      const sortNameAscButton = await $("#accounts-order-select-name-asc");
+      await sortNameAscButton.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "sort-account-name-asc",
+      });
+    });
+
+    it("sort account name Z-A", async () => {
+      const sortSelectButton = await $("#accounts-order-select-button");
+      await sortSelectButton.click();
+
+      const sortNameDescButton = await $("#accounts-order-select-name-desc");
+      await sortNameDescButton.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "sort-account-name-desc",
+      });
+    });
+
+    it("sort account highest balance", async () => {
+      const sortSelectButton = await $("#accounts-order-select-button");
+      await sortSelectButton.click();
+
+      const sortHighestBalanceButton = await $("#accounts-order-select-balance-desc");
+      await sortHighestBalanceButton.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "sort-account-highest-balance",
+      });
+    });
+  });
+
+  describe("range and display accounts", () => {
+    it("display grid", async () => {
+      const displayGridButton = await $("#accounts-display-grid");
+      await displayGridButton.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "account-display-grid",
+      });
+    });
+
+    it("display list", async () => {
+      const displayListButton = await $("#accounts-display-list");
+      await displayListButton.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "account-display-list",
+      });
+    });
+  });
+
+  describe("remove accounts flow", () => {
+    beforeAll(async () => {
+      const accountsButton = await $("#drawer-accounts-button");
+      await accountsButton.click();
+    });
+
+    it("displays a list of accounts", async () => {
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: "remove-account-before",
       });
     });
 
-    it("remove one account", async () => {
-      const firstAccountRow = await $(".accounts-account-row-item");
+    it("removes one account", async () => {
+      let listOfAccounts = await $("#accounts-list");
+      const accounts = await listOfAccounts.$$(".accounts-account-row-item");
+      const length = accounts.length;
 
+      const firstAccountRow = accounts[0];
       await firstAccountRow.click();
+
       const settingsButton = await $("#account-settings-button");
       await settingsButton.click();
       await modalPage.isDisplayed();
@@ -254,9 +339,179 @@ describe("Account", () => {
       const confirmButton = await $("#modal-confirm-button");
       await confirmButton.click();
 
+      const accountsButton = await $("#drawer-accounts-button");
+      await accountsButton.click();
+      listOfAccounts = await $("#accounts-list");
+      const newAccounts = await listOfAccounts.$$(".accounts-account-row-item");
+      const newLength = newAccounts.length;
+      expect(newLength).toBe(length - 1);
+    });
+
+    it("displays a modified list of accounts", async () => {
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: "remove-account-after",
       });
+    });
+  });
+
+  describe("edit name flow", () => {
+    beforeAll(async () => {
+      const accountsButton = await $("#drawer-accounts-button");
+      await accountsButton.click();
+    });
+
+    it("show name of account before", async () => {
+      const firstAccountRow = await $(".accounts-account-row-item");
+      await firstAccountRow.click();
+
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "edit-account-name-before",
+      });
+    });
+
+    it("edit account name", async () => {
+      const settingsButton = await $("#account-settings-button");
+      await settingsButton.click();
+
+      const input = await $("#input-edit-name");
+      await input.waitForDisplayed();
+      const newName = "New account name";
+      await input.addValue(newName);
+
+      const applyButton = await $("#account-settings-apply");
+      await applyButton.click();
+
+      const accountName = await $("#account-header-name");
+      const value = await accountName.getValue();
+      expect(value).toBe(newName);
+    });
+
+    it("show name of account after", async () => {
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "edit-account-name-after",
+      });
+    });
+  });
+
+  describe("bookmark account", () => {
+    beforeAll(async () => {
+      const accountsButton = await $("#drawer-accounts-button");
+      await accountsButton.click();
+    });
+
+    it("should not have any bookmarked account", async () => {
+      const bookmarkedAccountsList = await $("#bookmarked-accounts");
+      const bookmarkedAccounts = await bookmarkedAccountsList.$$(".bookmarked-account-item");
+
+      expect(bookmarkedAccounts).toHaveLength(0);
+    });
+
+    it("bookmark the first account", async () => {
+      const listOfAccounts = await $("#accounts-list");
+      const accounts = await listOfAccounts.$$(".accounts-account-row-item");
+
+      const firstAccountRow = accounts[0];
+      await firstAccountRow.click();
+
+      const starButton = await $("#account-star-button");
+      await starButton.click();
+
+      const bookmarkedAccountsList = await $("#bookmarked-accounts");
+      const bookmarkedAccounts = await bookmarkedAccountsList.$$(".bookmarked-account-item");
+
+      expect(bookmarkedAccounts).toHaveLength(1);
+    });
+  });
+
+  describe("export accounts to mobile", () => {
+    beforeAll(async () => {
+      const accountsButton = await $("#drawer-accounts-button");
+      await accountsButton.click();
+    });
+
+    it("opens the export accounts modal", async () => {
+      const optionsButton = await $("#accounts-options-button");
+      await optionsButton.click();
+
+      const exportAccountsButton = await $("#accounts-button-exportAccounts");
+      await exportAccountsButton.click();
+
+      expect(await modalPage.isDisplayed()).toBe(true);
+    });
+
+    it("displays a QRCode", async () => {
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "export-account-to-mobile-modal",
+      });
+    });
+
+    it("closes the export accounts modal", async () => {
+      const doneButton = await $("#export-accounts-done-button");
+      await doneButton.click();
+
+      expect(await modalPage.isDisplayed(true)).toBe(false);
+    });
+  });
+
+  describe("exports the operations history", () => {
+    beforeAll(async () => {
+      const accountsButton = await $("#drawer-accounts-button");
+      await accountsButton.click();
+    });
+
+    it("opens the export operations history modal", async () => {
+      const optionsButton = await $("#accounts-options-button");
+      await optionsButton.click();
+
+      const exportOperationsHistoryButton = await $("#accounts-button-exportOperations");
+      await exportOperationsHistoryButton.click();
+
+      expect(await modalPage.isDisplayed()).toBe(true);
+    });
+
+    it("displays a list of accounts", async () => {
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "export-operations-history-modal-open",
+      });
+    });
+
+    it("save button should be disabled", async () => {
+      const saveButton = await $("#export-operations-save-button");
+      expect(await saveButton.isClickable()).toBe(false);
+    });
+
+    it("selects the first two accounts", async () => {
+      const accountsList = await $("#accounts-list-selectable");
+      const accounts = await accountsList.$$(".account-row");
+      const firstAccount = accounts[0];
+      const secondAccount = accounts[1];
+
+      await firstAccount.click();
+      await secondAccount.click();
+
+      const firstInput = await firstAccount.$("input");
+      const secondInput = await secondAccount.$("input");
+
+      expect(await firstInput.isSelected()).toBe(true);
+      expect(await secondInput.isSelected()).toBe(true);
+    });
+
+    it("save button should be enabled", async () => {
+      const saveButton = await $("#export-operations-save-button");
+      expect(await saveButton.isClickable()).toBe(true);
+    });
+
+    it("displays a list with first two accounts selected", async () => {
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: "export-operations-history-modal-accounts-selected",
+      });
+    });
+
+    it("closes the export operations history modal", async () => {
+      const closeButton = await $("#modal-close-button");
+      await closeButton.click();
+
+      expect(await modalPage.isDisplayed(true)).toBe(false);
     });
   });
 });

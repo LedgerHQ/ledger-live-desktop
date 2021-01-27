@@ -16,7 +16,7 @@ import Text from "~/renderer/components/Text";
 import ProgressCircle from "~/renderer/components/ProgressCircle";
 import Interactions from "~/renderer/icons/device/interactions";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { mockedEventEmitter } from "~/renderer/components/DebugMock";
+import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import type { StepProps } from "../";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 
@@ -144,7 +144,7 @@ const StepFullFirmwareInstall = ({
         setDisplayedOnDevice(displayed);
       },
       complete: () => {
-        transitionTo("updateMCU");
+        transitionTo(firmware.final.firmware ? "updateMCU" : "finish");
       },
       error: error => {
         setError(error);

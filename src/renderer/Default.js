@@ -28,10 +28,12 @@ import PerfIndicator from "~/renderer/components/PerfIndicator";
 import MainSideBar from "~/renderer/components/MainSideBar";
 import TriggerAppReady from "~/renderer/components/TriggerAppReady";
 import ContextMenuWrapper from "~/renderer/components/ContextMenu/ContextMenuWrapper";
-import DebugUpdater from "~/renderer/components/Updater/DebugUpdater";
+import DebugUpdater from "~/renderer/components/debug/DebugUpdater";
+import DebugTheme from "~/renderer/components/debug/DebugTheme";
 import Page from "~/renderer/components/Page";
 import AnalyticsConsole from "~/renderer/components/AnalyticsConsole";
-import DebugMock from "~/renderer/components/DebugMock";
+import DebugMock from "~/renderer/components/debug/DebugMock";
+import { DebugWrapper } from "~/renderer/components/debug/shared";
 import useDeeplink from "~/renderer/hooks/useDeeplinking";
 import ModalsLayer from "./ModalsLayer";
 
@@ -60,12 +62,26 @@ export default function Default() {
         <BridgeSyncProvider>
           <ContextMenuWrapper>
             <ModalsLayer />
-            <DebugMock />
+            {process.env.SPECTRON_RUN ? (
+              <div
+                id="unfocus-please"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 500,
+                  width: 10,
+                  height: 10,
+                  zIndex: 999,
+                }}
+              />
+            ) : null}
+            <DebugWrapper>
+              {process.env.DEBUG_THEME ? <DebugTheme /> : null}
+              {process.env.MOCK ? <DebugMock /> : null}
+              {process.env.DEBUG_UPDATE ? <DebugUpdater /> : null}
+            </DebugWrapper>
             <OnboardingOrElse>
               <IsNewVersion />
-
-              {process.env.DEBUG_UPDATE && <DebugUpdater />}
-
               <SyncNewAccounts priority={2} />
 
               <Box

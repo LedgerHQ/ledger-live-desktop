@@ -86,7 +86,12 @@ function CheckBox(props: Props) {
 
   return (
     <Base {...props} isRadio={isRadio} isChecked={isChecked} disabled={disabled} onClick={onClick}>
-      <input type="checkbox" disabled={disabled || null} checked={isChecked || null} />
+      <input
+        type="checkbox"
+        disabled={disabled || null}
+        checked={typeof isChecked === "boolean" ? isChecked : null}
+        onChange={onClick}
+      />
       <Check size={12} />
     </Base>
   );
