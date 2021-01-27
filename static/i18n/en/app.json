@@ -2748,8 +2748,8 @@
       "description": "Please contact Ledger Support"
     },
     "CosmosStargateFeb2021Warning": {
-      "title": "Cosmos support is temporarily disabled on Ledger Live.",
-      "description": "Read our article to manage ATOM with your device."
+      "title": "The Cosmos blockchain is planning for an on-chain update on Feb 18th.",
+      "description": "Coming Ledger Live 2.22.0 will continue supporting ATOM."
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
