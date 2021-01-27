@@ -2215,24 +2215,24 @@
       },
       "selectUseCase": {
         "greetings": "Hello!",
-        "hasNoRecovery": "First time using your Nano?",
+        "hasNoRecovery": "First time using your {{deviceName}}?",
         "hasRecovery": "Already have a recovery phrase?",
         "separator": "or",
         "options": {
           "1": {
             "heading": "First use",
-            "title": "Set up a new Nano",
+            "title": "Set up a new {{deviceName}}",
             "description": "Let’s start and set up your device!"
           },
           "2": {
             "heading": "Connect device",
-            "title": "Connect your Nano",
+            "title": "Connect your {{deviceName}}",
             "description": "Is your device already set up? Connect it to the app!"
           },
           "3": {
             "heading": "Restore device",
             "title": "Restore your recovery phrase on a new device",
-            "description": "Use an existing recovery phrase to restore your private keys on a new Nano!"
+            "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
           }
         }
       },
@@ -2621,8 +2621,9 @@
   "Terms": {
     "title": "Felhasználási feltételek",
     "read": "Olvasd el a Felhasználási feltételeket",
-    "switchLabel": "I have read and agree with the <0>Terms of Use and Privacy Policy</0>",
-    "switchLabelLoss": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to Nano.",
+    "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
+    "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
+    "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
     "cta": "Enter Ledger app"
   },
   "families": {
