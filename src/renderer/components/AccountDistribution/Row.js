@@ -21,6 +21,7 @@ import Bar from "~/renderer/components/AssetDistribution/Bar";
 import ToolTip from "~/renderer/components/Tooltip";
 import useTheme from "~/renderer/hooks/useTheme";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 export type AccountDistributionItem = {
   account: AccountLike,
@@ -43,12 +44,12 @@ export default function Row({
   const history = useHistory();
   const onAccountClick = useCallback(
     account => {
+      setTrackingSource("account allocation");
       history.push({
         pathname:
           account.type !== "Account"
             ? `/account/${account.parentId}/${account.id}`
             : `/account/${account.id}`,
-        state: { source: "account allocation" },
       });
     },
     [history],

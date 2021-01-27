@@ -12,7 +12,7 @@ import {
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import TrackPage from "~/renderer/analytics/TrackPage";
+import TrackPage, { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import OperationsList from "~/renderer/components/OperationsList";
 import Carousel from "~/renderer/components/Carousel";
 import AssetDistribution from "~/renderer/components/AssetDistribution";
@@ -53,8 +53,10 @@ export default function DashboardPage() {
   ]);
 
   const onAccountClick = useCallback(
-    account =>
-      history.push({ pathname: `/account/${account.id}`, state: { source: "dashboard page" } }),
+    account => {
+      setTrackingSource("dashboard page");
+      history.push({ pathname: `/account/${account.id}` });
+    },
     [history],
   );
   const handleChangeSelectedTime = useCallback(

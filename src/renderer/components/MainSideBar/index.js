@@ -15,6 +15,7 @@ import { openModal } from "~/renderer/actions/modals";
 import { setFirstTimeLend, setSidebarCollapsed } from "~/renderer/actions/settings";
 
 import useExperimental from "~/renderer/hooks/useExperimental";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 import { darken, rgba } from "~/renderer/styles/helpers";
 
@@ -168,7 +169,8 @@ const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
   return isExperimental || hasFullNodeConfigured ? (
     <Tag
       id="drawer-experimental-button"
-      to={{ pathname: "/settings/experimental", state: { source: "sidebar" } }}
+      to={{ pathname: "/settings/experimental" }}
+      onClick={() => setTrackingSource("sidebar")}
     >
       <IconExperimental width={16} height={16} />
       <TagText collapsed={collapsed}>{t("common.experimentalFeature")}</TagText>
@@ -198,8 +200,8 @@ const MainSideBar = () => {
   const push = useCallback(
     (pathname: string) => {
       if (location.pathname === pathname) return;
-
-      history.push({ pathname, state: { source: "sidebar" } });
+      setTrackingSource("sidebar");
+      history.push({ pathname });
     },
     [history, location.pathname],
   );

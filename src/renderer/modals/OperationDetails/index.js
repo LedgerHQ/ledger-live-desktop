@@ -30,7 +30,7 @@ import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/
 
 import { urls } from "~/config/urls";
 import { openModal } from "~/renderer/actions/modals";
-import TrackPage from "~/renderer/analytics/TrackPage";
+import TrackPage, { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
@@ -194,7 +194,8 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
   const goToMainAccount = useCallback(() => {
     const url = `/account/${mainAccount.id}`;
     if (location !== url) {
-      history.push({ pathname: url, state: { source: "operation details" } });
+      setTrackingSource("operation details");
+      history.push({ pathname: url });
     }
     onClose();
   }, [mainAccount, history, onClose, location]);
@@ -202,7 +203,8 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
   const goToSubAccount = useCallback(() => {
     const url = `/account/${mainAccount.id}/${account.id}`;
     if (location !== url) {
-      history.push({ pathname: url, state: { source: "operation details" } });
+      setTrackingSource("operation details");
+      history.push({ pathname: url });
     }
     onClose();
   }, [mainAccount, account, history, onClose, location]);

@@ -8,6 +8,7 @@ import { useSpring, animated } from "react-spring";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { Wrapper, Label, IllustrationWrapper } from "~/renderer/components/Carousel";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 // Assets
 import coin from "./images/coin1.png";
@@ -72,9 +73,9 @@ const Swap = () => {
   }, [set]);
 
   const onClick = useCallback(() => {
+    setTrackingSource("swap banner");
     history.push({
       pathname: "/swap",
-      state: { source: "swap banner" },
     });
   }, [history]);
 

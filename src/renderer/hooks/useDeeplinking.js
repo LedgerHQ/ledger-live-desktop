@@ -9,6 +9,7 @@ import { accountsSelector } from "~/renderer/reducers/accounts";
 import { openModal, closeAllModal } from "~/renderer/actions/modals";
 import { deepLinkUrlSelector, areSettingsLoaded } from "~/renderer/reducers/settings";
 import { setDeepLinkUrl } from "~/renderer/actions/settings";
+import { setTrackingSource } from "../analytics/TrackPage";
 
 const getAccountsOrSubAccountsByCurrency = (currency, accounts) => {
   const predicateFn = account => getAccountCurrency(account).id === currency.id;
@@ -38,7 +39,8 @@ export function useDeepLinkHandler() {
   const navigate = useCallback(
     (url: string) => {
       if (url !== location.pathname) {
-        history.push({ pathname: url, state: { source: "deeplink" } });
+        setTrackingSource("deeplink");
+        history.push({ pathname: url });
       }
     },
     [history, location],

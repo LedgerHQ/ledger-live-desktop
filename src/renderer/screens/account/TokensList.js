@@ -26,6 +26,7 @@ import AccountContextMenu from "~/renderer/components/ContextMenu/AccountContext
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import perFamilyTokenList from "~/renderer/generated/TokenList";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 type OwnProps = {
   account: Account,
@@ -85,9 +86,9 @@ const ReceiveButton = (props: { onClick: () => void }) => (
 
 class TokensList extends PureComponent<Props> {
   onAccountClick = (account: AccountLike, parentAccount: Account) => {
+    setTrackingSource("tokens list");
     this.props.history.push({
       pathname: `/account/${parentAccount.id}/${account.id}`,
-      state: { source: "tokens list" },
     });
   };
 

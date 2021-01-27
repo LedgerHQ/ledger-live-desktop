@@ -17,6 +17,7 @@ import { toggleStarAction } from "~/renderer/actions/accounts";
 import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
 import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/settings";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 type Props = {
   account: AccountLike,
@@ -60,15 +61,16 @@ export default function AccountContextMenu({
       items.push({
         label: "accounts.contextMenu.buy",
         Icon: IconBuy,
-        callback: () =>
+        callback: () => {
+          setTrackingSource("account context menu");
           history.push({
             pathname: "/exchange",
             state: {
               defaultCurrency: currency,
               defaultAccount: mainAccount,
-              source: "account context menu",
             },
-          }),
+          });
+        },
       });
     }
 
@@ -77,7 +79,8 @@ export default function AccountContextMenu({
       items.push({
         label: "accounts.contextMenu.sell",
         Icon: IconBuy,
-        callback: () =>
+        callback: () => {
+          setTrackingSource("account context menu");
           history.push({
             pathname: "/exchange",
             state: {
@@ -85,7 +88,8 @@ export default function AccountContextMenu({
               defaultCurrency: currency,
               defaultAccount: mainAccount,
             },
-          }),
+          });
+        },
       });
     }
 
@@ -94,16 +98,17 @@ export default function AccountContextMenu({
       items.push({
         label: "accounts.contextMenu.swap",
         Icon: IconSwap,
-        callback: () =>
+        callback: () => {
+          setTrackingSource("account context menu");
           history.push({
             pathname: "/swap",
             state: {
               defaultCurrency: currency,
               defaultAccount: account,
               defaultParentAccount: parentAccount,
-              source: "account context menu",
             },
-          }),
+          });
+        },
       });
     }
 
