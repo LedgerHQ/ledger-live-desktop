@@ -2215,24 +2215,24 @@
       },
       "selectUseCase": {
         "greetings": "Bonjour !",
-        "hasNoRecovery": "Première utilisation de votre Nano ?",
+        "hasNoRecovery": "First time using your {{deviceName}}?",
         "hasRecovery": "Vous avez déjà une phrase de récupération ?",
         "separator": "ou",
         "options": {
           "1": {
             "heading": "Première utilisation",
-            "title": "Initialiser un nouveau Nano",
+            "title": "Set up a new {{deviceName}}",
             "description": "Commençons par configurer votre appareil !"
           },
           "2": {
             "heading": "Connecter l'appareil",
-            "title": "Connectez votre Nano",
+            "title": "Connect your {{deviceName}}",
             "description": "Votre appareil est déjà configuré ? Connectez-le à votre application !"
           },
           "3": {
             "heading": "Restauration de l'appareil",
             "title": "Restaurez votre phrase de récupération sur un nouvel appareil",
-            "description": "Utilisez une phrase de récupération existante pour restaurer vos clés privées sur un nouveau Nano !"
+            "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
           }
         }
       },
@@ -2621,8 +2621,9 @@
   "Terms": {
     "title": "Conditions d’utilisation",
     "read": "Lire nos Conditions d'utilisation",
-    "switchLabel": "J'ai lu et accepté <0>les conditions d'utilisation et la politique de confidentialité</0>",
-    "switchLabelLoss": "Je comprends que si je perdais cette phrase de récupération, je ne serai pas en mesure d'accéder à mes crypto actfis au cas où je ne pourrais plus accéder à mon Nano.",
+    "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
+    "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
+    "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
     "cta": "Entrer dans l'application Ledger"
   },
   "families": {
