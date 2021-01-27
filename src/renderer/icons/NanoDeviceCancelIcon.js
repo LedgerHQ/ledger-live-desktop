@@ -4,11 +4,25 @@ import React from "react";
 type Props = {
   size?: number,
   color?: string,
+  className?: string,
+  style?: any,
 };
 
-export default function NanoDeviceCancelIcon({ size = 16, color = "currentColor" }: Props) {
+export default function NanoDeviceCancelIcon({
+  size = 16,
+  color = "currentColor",
+  className,
+  style,
+}: Props) {
   return (
-    <svg width={size} height={size} viewBox="0 0 12 12" fill="none">
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 12 12"
+      fill="none"
+      className={className}
+      style={style}
+    >
       <rect width="12" height="12" rx="1" fill={color} fillOpacity="0.2" />
       <path
         fillRule="evenodd"

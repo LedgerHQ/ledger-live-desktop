@@ -1,4 +1,5 @@
 import { assign, createMachine, actions } from "xstate";
+import { track } from "~/renderer/analytics/segment";
 
 const { choose } = actions;
 
@@ -81,6 +82,8 @@ export const quizzMachineGenerator = (id, questions) => {
     context: {
       score: 0,
       results: {},
+      totalQuestions: questions.length,
+      currentQuestionIndex: 0,
     },
     states: {
       intro: {
@@ -114,19 +117,28 @@ export const quizzMachineGenerator = (id, questions) => {
       const resultId = `result-${index}`;
 
       config.states[questionId] = {
+        entry: [
+          assign({
+            currentQuestionIndex: index,
+          }),
+          () => track(`Onboarding - Quizz step ${index + 1}`),
+        ],
         on: {
           ANSWERED: {
             target: resultId,
-            actions: assign((context, { answerIndex }) => {
-              const selectedAnwser = question.answers[answerIndex];
-              return {
-                score: selectedAnwser.correct ? context.score + 1 : context.score,
-                results: {
-                  ...context.results,
-                  [resultId]: selectedAnwser.correct ? "success" : "fail",
-                },
-              };
-            }),
+            actions: [
+              assign((context, { answerIndex }) => {
+                const selectedAnwser = question.answers[answerIndex];
+                track(`Onboarding - Quizz step 1 ${selectedAnwser.correct ? "correct" : "false"}`);
+                return {
+                  score: selectedAnwser.correct ? context.score + 1 : context.score,
+                  results: {
+                    ...context.results,
+                    [resultId]: selectedAnwser.correct ? "success" : "fail",
+                  },
+                };
+              }),
+            ],
           },
         },
         meta: {

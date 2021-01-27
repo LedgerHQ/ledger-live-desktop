@@ -119,8 +119,8 @@ const steps = (color: string) => [
     titleKey: <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.setUp.title" />,
     descrKey: (
       <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.setUp.descr">
-        <NanoDeviceCheckIcon color={color} />
-        <NanoDeviceCancelIcon color={color} />
+        <NanoDeviceCheckIcon color={color} style={{ margin: "0 4px" }} />
+        <NanoDeviceCancelIcon color={color} style={{ margin: "0 4px" }} />
       </Trans>
     ),
   },

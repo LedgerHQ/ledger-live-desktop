@@ -8,7 +8,10 @@ import nanoX from "./assets/nanoX.svg";
 import nanoS from "./assets/nanoS.svg";
 import nanoBlue from "./assets/nanoBlue.svg";
 
+import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
 import { DeviceSelectorOption } from "./DeviceSelectorOption";
+
+registerAssets([nanoX, nanoS, nanoBlue]);
 
 const DeviceSelectContainer: ThemedComponent<*> = styled.div`
   display: flex;

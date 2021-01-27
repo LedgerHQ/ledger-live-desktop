@@ -5,6 +5,7 @@ import { Trans } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 import { useTerms, url, acceptTerms } from "~/renderer/terms";
+import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
@@ -25,10 +26,10 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
 
   const [markdown, error] = useTerms();
   const [accepted, setAccepted] = useState(false);
-  const onSwitchAccept = useCallback(() => setAccepted(!accepted), [accepted]);
+  const onSwitchAccept = useCallback(() => setAccepted(a => !a), []);
 
-  const [acceptedLoss, setAcceptedLoss] = useState(false);
-  const onSwitchAcceptLoss = useCallback(() => setAcceptedLoss(!acceptedLoss), [acceptedLoss]);
+  const [acceptedPrivacyPolicy, setAcceptedPrivacyPolicy] = useState(false);
+  const onSwitchAcceptPrivacyPolicy = useCallback(() => setAcceptedPrivacyPolicy(a => !a), []);
 
   const onClickClose = useCallback(() => {
     dispatch(closeModal("MODAL_TERMS"));
@@ -38,6 +39,10 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
     acceptTerms();
     onClickClose();
   }, [onClickClose]);
+
+  const openTerms = useCallback(() => openURL(urls.terms), []);
+  const openPrivacyPolicy = useCallback(() => openURL(urls.privacyPolicy), []);
+  const onClickFakeLink = useCallback(() => openURL(url), []);
 
   return (
     <Modal name="MODAL_TERMS" preventBackdropClick centered width={700}>
@@ -57,7 +62,7 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
                   <TranslatedError error={error} />
                 </Text>
 
-                <LinkWithExternalIcon onClick={() => openURL(url)}>
+                <LinkWithExternalIcon onClick={onClickFakeLink}>
                   <Trans i18nKey="Terms.read" />
                 </LinkWithExternalIcon>
               </Box>
@@ -94,20 +99,17 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
                   style={{ width: "100%" }}
                   alignItems="flex-start"
                   justifyContent="flex-start"
-                  onClick={onSwitchAcceptLoss}
                 >
                   <CheckBox
-                    isChecked={acceptedLoss}
-                    onChange={onSwitchAcceptLoss}
-                    id="modal-terms-checkbox-loss"
+                    isChecked={accepted}
+                    onChange={onSwitchAccept}
+                    id="modal-terms-checkbox"
                   />
-                  <Text
-                    ff="Inter|SemiBold"
-                    color="alertRed"
-                    fontSize={4}
-                    style={{ marginLeft: 8, flex: 1 }}
-                  >
-                    <Trans i18nKey="Terms.switchLabelLoss" />
+                  <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
+                    <Trans i18nKey="Terms.switchLabelTerms">
+                      <Text onClick={onSwitchAccept} />
+                      <Text onClick={openTerms} color="wallet" />
+                    </Trans>
                   </Text>
                 </Box>
                 <Box
@@ -116,16 +118,16 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
                   style={{ width: "100%" }}
                   alignItems="flex-start"
                   justifyContent="flex-start"
-                  onClick={onSwitchAccept}
                 >
                   <CheckBox
-                    isChecked={accepted}
-                    onChange={onSwitchAccept}
-                    id="modal-terms-checkbox"
+                    isChecked={acceptedPrivacyPolicy}
+                    onChange={onSwitchAcceptPrivacyPolicy}
+                    id="modal-terms-privacy-policy"
                   />
                   <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
-                    <Trans i18nKey="Terms.switchLabel">
-                      <Text onClick={() => openURL(url)} color="wallet" />
+                    <Trans i18nKey="Terms.switchLabelPrivacyPolicy">
+                      <Text onClick={onSwitchAcceptPrivacyPolicy} />
+                      <Text onClick={openPrivacyPolicy} color="wallet" />
                     </Trans>
                   </Text>
                 </Box>
@@ -133,7 +135,7 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
                   style={{ marginTop: 24, paddingRight: 45, paddingLeft: 45 }}
                   onClick={onClick}
                   primary
-                  disabled={!accepted || !acceptedLoss}
+                  disabled={!accepted || !acceptedPrivacyPolicy}
                   id="modal-confirm-button"
                 >
                   <Trans i18nKey="Terms.cta" />
