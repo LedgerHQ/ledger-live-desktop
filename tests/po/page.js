@@ -1,74 +1,90 @@
 export default class Page {
   constructor(app) {
     this.app = app;
+    this.$ = selector => app.client.$(selector);
   }
 
   get loadingLogo() {
-    return this.app.client.$("#loading-logo");
+    return this.$("#loading-logo");
   }
 
   get logo() {
-    return this.app.client.$("#logo");
+    return this.$("#logo");
   }
 
   get pageTitle() {
-    return this.app.client.$("#page-title");
+    return this.$("#page-title");
   }
 
   get pageDescription() {
-    return this.app.client.$("#page-description");
+    return this.$("#page-description");
   }
 
   get theme() {
-    return this.app.client.$("#onboarding-container");
+    return this.$("#onboarding-container");
   }
 
   get inputError() {
-    return this.app.client.$("#input-error");
+    return this.$("#input-error");
   }
 
   get inputWarning() {
-    return this.app.client.$("#input-warning");
+    return this.$("#input-warning");
   }
 
   get drawerCollapseButton() {
-    return this.app.client.$("#drawer-collapse-button");
+    return this.$("#drawer-collapse-button");
   }
 
   get drawerPortfolioButton() {
-    return this.app.client.$("#drawer-dashboard-button");
+    return this.$("#drawer-dashboard-button");
   }
 
   get drawerAccountsButton() {
-    return this.app.client.$("#drawer-accounts-button");
+    return this.$("#drawer-accounts-button");
   }
 
   get drawerSendButton() {
-    return this.app.client.$("#drawer-send-button");
+    return this.$("#drawer-send-button");
   }
 
   get drawerReceiveButton() {
-    return this.app.client.$("#drawer-receive-button");
+    return this.$("#drawer-receive-button");
   }
 
   get drawerManagerButton() {
-    return this.app.client.$("#drawer-manager-button");
+    return this.$("#drawer-manager-button");
   }
 
   get drawerBuycryptoButton() {
-    return this.app.client.$("#drawer-exchange-button");
+    return this.$("#drawer-exchange-button");
   }
 
   get topbarDiscreetButton() {
-    return this.app.client.$("#topbar-discreet-button");
+    return this.$("#topbar-discreet-button");
   }
 
   get topbarSettingsButton() {
-    return this.app.client.$("#topbar-settings-button");
+    return this.$("#topbar-settings-button");
   }
 
   get topbarLockButton() {
-    return this.app.client.$("#topbar-password-lock-button");
+    return this.$("#topbar-password-lock-button");
+  }
+
+  get bookmarkedAccountsList() {
+    return this.$("#bookmarked-accounts");
+  }
+
+  async getBookmarkedAccounts() {
+    const list = await this.bookmarkedAccountsList;
+    const items = await list.$$(".bookmarked-account-item");
+    return items;
+  }
+
+  async goToAccounts() {
+    const btn = await this.drawerAccountsButton;
+    await btn.click();
   }
 
   async getThemeColor() {
