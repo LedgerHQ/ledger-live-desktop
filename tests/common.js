@@ -6,6 +6,9 @@ import { Application } from "spectron";
 import _ from "lodash";
 import { configureToMatchImageSnapshot } from "jest-image-snapshot";
 import ModalPage from "./po/modal.page";
+import AccountsPage from "./po/accounts.page";
+import AccountPage from "./po/account.page";
+import PortfolioPage from "./po/portfolio.page";
 import fs from "fs";
 import rimraf from "rimraf";
 import path from "path";
@@ -38,6 +41,9 @@ const getMockDeviceEvent = app => async (...events) => {
 
 let app;
 let modalPage;
+let portfolioPage;
+let accountPage;
+let accountsPage;
 let mockDeviceEvent;
 
 const toMatchImageSnapshot = configureToMatchImageSnapshot({
@@ -106,6 +112,9 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     });
 
     modalPage = new ModalPage(app);
+    accountPage = new AccountPage(app);
+    accountsPage = new AccountsPage(app);
+    portfolioPage = new PortfolioPage(app);
     mockDeviceEvent = getMockDeviceEvent(app);
 
     try {
@@ -182,4 +191,13 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
 }
 
 // eslint-disable-next-line jest/no-export
-export { app, deviceInfo, mockListAppsResult, mockDeviceEvent, modalPage };
+export {
+  app,
+  deviceInfo,
+  mockListAppsResult,
+  mockDeviceEvent,
+  modalPage,
+  accountPage,
+  accountsPage,
+  portfolioPage,
+};
