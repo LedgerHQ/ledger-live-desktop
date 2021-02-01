@@ -2023,7 +2023,7 @@
     "repairDevice": {
       "title": "Repair your Ledger device",
       "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
-      "desc": "Please select the state of your Ledger device.",
+      "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
       "button": "Repair"
     },
     "exportLogs": {
