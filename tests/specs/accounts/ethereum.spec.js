@@ -1,8 +1,8 @@
 import initialize from "../../common.js";
-import { accountsWithTokenFlows, addAccount } from "./flows.js";
+import addAccount from "../../flows/accounts/addAccount";
+import { accountsWithTokenFlows } from "./flows.js";
 
 describe("ethereum family", () => {
-  // describe("emtpy state", () => {});
   initialize("ethereum-accounts", {
     userData: "onboardingcompleted",
   });
