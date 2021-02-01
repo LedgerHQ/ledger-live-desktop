@@ -135,7 +135,7 @@
     "lend": "Lend"
   },
   "stars": {
-    "placeholder": "Les comptes que vous placez en favoris dans la page <1><0>Comptes</0></1> apparaitront ici !",
+    "placeholder": "Star an account to display it here.",
     "tooltip": "Ajouter aux favoris"
   },
   "bridge": {
