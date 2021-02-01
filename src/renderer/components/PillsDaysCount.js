@@ -21,11 +21,13 @@ class PillsDaysCount extends PureComponent<Props> {
       <>
         <Track onUpdate event="PillsDaysChange" selected={selected} />
         <Pills
-          items={Object.keys(timeRangeDaysByKey).map((key: TimeRange) => ({
-            key,
-            value: timeRangeDaysByKey[key],
-            label: t(`time.range.${key}`),
-          }))}
+          items={Object.keys(timeRangeDaysByKey)
+            .filter(k => k !== "day") // FIXME LL-4442 | tmp disabled, planned for 2.22
+            .map((key: TimeRange) => ({
+              key,
+              value: timeRangeDaysByKey[key],
+              label: t(`time.range.${key}`),
+            }))}
           activeKey={selected}
           onChange={onChange}
           bordered
