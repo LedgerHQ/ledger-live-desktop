@@ -68,13 +68,9 @@ jobs:
       - name: start electron webdriver
         if: always()
         run: yarn start-electron-webdriver -d
-      - uses: nev7n/wait_for_response@7fef3c1a6e8939d0b09062f14fec50d3c5d15fa1
+      - name: wait for container
         if: always()
-        with:
-          url: 'http://localhost:9515/'
-          responseCode: 404
-          timeout: 600000
-          interval: 1000
+        run: while ! echo exit | nc localhost 9515; do sleep 5; done
       - name: run spectron
         if: always()
         run: yarn spectron --no-color 2>output.txt
