@@ -135,7 +135,7 @@
     "lend": "Lend"
   },
   "stars": {
-    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0>Számlák</0></1> oldalon innentől itt fognak megjelenni!",
+    "placeholder": "Star an account to display it here.",
     "tooltip": "Számla csillagozása"
   },
   "bridge": {
