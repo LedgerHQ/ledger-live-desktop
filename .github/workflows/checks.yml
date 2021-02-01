@@ -55,6 +55,16 @@ jobs:
       - name: check build
         if: always()
         run: export INSTRUMENT_BUILD=true && sudo --preserve-env=INSTRUMENT_BUILD yarn build
+      - name: docker compose pull
+        if: always()
+        run: cd tests/docker-electron-webdriver && docker-compose pull
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        if: always()
+        continue-on-error: true
+        with:
+          key: electron-webdriver-{hash}
+          restore-keys: |
+            electron-webdriver-
       - name: start electron webdriver
         if: always()
         run: yarn start-electron-webdriver -d
