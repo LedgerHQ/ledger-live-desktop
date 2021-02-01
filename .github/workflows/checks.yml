@@ -61,10 +61,6 @@ jobs:
       - uses: satackey/action-docker-layer-caching@v0.0.11
         if: always()
         continue-on-error: true
-        with:
-          key: electron-webdriver-{hash}
-          restore-keys: |
-            electron-webdriver-
       - name: start electron webdriver
         if: always()
         run: yarn start-electron-webdriver -d
