@@ -20,10 +20,13 @@ const needBuild = lastYarn !== hashes;
 
 if (needBuild) {
   console.log("needs to reyarn");
+  /*
   const spawn = child_process.spawnSync("yarn --frozen-lockfile", {
     stdio: "inherit",
     shell: true,
   });
+  */
+  const spawn = {};
   if (spawn.status !== 0) {
     console.log("error yarning");
   } else {
