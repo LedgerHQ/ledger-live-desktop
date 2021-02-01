@@ -10,6 +10,7 @@ import starAnim2 from "~/renderer/images/starAnim2.png";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
 import { Transition } from "react-transition-group";
+import { track } from "~/renderer/analytics/segment";
 
 type Props = {
   accountId: string,
@@ -24,11 +25,12 @@ export default function Star({ accountId, parentId, yellow }: Props) {
 
   const toggleStar = useCallback(
     e => {
+      track(isAccountStarred ? "Account Unstar" : "Account Star");
       e.stopPropagation();
       dispatch(toggleStarAction(accountId, parentId));
       refreshAccountsOrdering();
     },
-    [accountId, refreshAccountsOrdering, parentId, dispatch],
+    [isAccountStarred, dispatch, accountId, parentId, refreshAccountsOrdering],
   );
   const MaybeButtonWrapper = yellow ? ButtonWrapper : FloatingWrapper;
 
