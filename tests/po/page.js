@@ -60,6 +60,10 @@ export default class Page {
     return this.$("#drawer-exchange-button");
   }
 
+  get drawerExperimentalButton() {
+    return this.$("#drawer-experimental-button");
+  }
+
   get topbarDiscreetButton() {
     return this.$("#topbar-discreet-button");
   }
