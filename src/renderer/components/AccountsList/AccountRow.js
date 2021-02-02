@@ -4,9 +4,11 @@ import React, { PureComponent } from "react";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
+import { getTagDerivationMode } from "@ledgerhq/live-common/lib/derivation";
 import { darken } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Box, { Tabbable } from "~/renderer/components/Box";
+import Text from "~/renderer/components/Text";
 import CheckBox from "~/renderer/components/CheckBox";
 import CryptoCurrencyIconWithCount from "~/renderer/components/CryptoCurrencyIconWithCount";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -19,6 +21,24 @@ const InputWrapper = styled.div`
     padding-left: 10px;
     padding-right: 10px;
   }
+`;
+
+const CurrencyLabel = styled(Text).attrs(() => ({
+  color: "palette.text.shade60",
+  ff: "Inter|SemiBold",
+  fontSize: 1,
+}))`
+  padding: 0 6px;
+  height: 24px;
+  line-height: 24px;
+  border-color: currentColor;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  text-align: center;
+  flex: 0 0 auto;
+  box-sizing: content-box;
+  text-transform: uppercase;
 `;
 
 type Props = {
@@ -88,6 +108,11 @@ export default class AccountRow extends PureComponent<Props> {
 
     const tokenCount = (account.subAccounts && account.subAccounts.length) || 0;
 
+    const tag =
+      account.derivationMode !== undefined &&
+      account.derivationMode !== null &&
+      getTagDerivationMode(account.currency, account.derivationMode);
+
     return (
       <AccountRowContainer
         className="account-row"
@@ -116,6 +141,7 @@ export default class AccountRow extends PureComponent<Props> {
             <div style={{ ...this.overflowStyles, paddingLeft: 15 }}>{accountName}</div>
           )}
         </Box>
+        {tag ? <CurrencyLabel>{tag}</CurrencyLabel> : null}
         {!hideAmount ? (
           <FormattedVal
             val={account.balance}
