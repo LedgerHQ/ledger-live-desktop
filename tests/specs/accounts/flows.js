@@ -8,11 +8,11 @@ import exportOperationsHistory from "../../flows/accounts/exportOperationsHistor
 import hideToken from "../../flows/accounts/hideToken";
 import removeAccount from "../../flows/accounts/removeAccount";
 
-export const globalAccountsFlows = () => {
+export const globalAccountsFlows = (hasStarredAccounts = false) => {
   sortAccounts();
   rangeAndDisplay();
   editAccountName();
-  bookmarkAccount();
+  bookmarkAccount(undefined, hasStarredAccounts);
   exportAccountsToMobile();
   exportOperationsHistory();
   hideToken();

@@ -10,7 +10,7 @@ const bookmarkAccount = (currency = "global", startsWithStaredAccounts = false) 
     if (startsWithStaredAccounts) {
       it("should have at least one bookmarked account", async () => {
         const bookmarkedAccounts = await accountsPage.getBookmarkedAccounts();
-        expect(bookmarkedAccounts.length).toBeGreatherThan(0);
+        expect(bookmarkedAccounts.length).toBeGreaterThan(0);
       });
     } else {
       it("should not have any bookmarked account", async () => {
@@ -34,6 +34,7 @@ const bookmarkAccount = (currency = "global", startsWithStaredAccounts = false) 
     });
 
     it("displays a newly bookmarked account in the side menu", async () => {
+      await app.client.waitForSync();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `${currency}-bookmark-account`,
       });

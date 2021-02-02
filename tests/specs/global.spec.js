@@ -80,7 +80,7 @@ describe("Global", () => {
     await carouselDismissButton.click();
     await app.client.pause(400);
 
-    const carouselDismissButtonConfirm = await $("#carousel-dismiss-confirm")
+    const carouselDismissButtonConfirm = await $("#carousel-dismiss-confirm");
     await carouselDismissButtonConfirm.click();
     await app.client.pause(400);
 
