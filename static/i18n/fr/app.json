@@ -112,6 +112,7 @@
     "hour": "Heure",
     "hour_plural": "Heures",
     "range": {
+      "day": "1D",
       "week": "1S",
       "month": "1M",
       "year": "1A"
@@ -3169,10 +3170,10 @@
       "title": "Un mémo peut être requis lors de l'envoi à ce destinataire"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Le montant doit être supérieur à {{unit}} {{minAmountFrom}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Le montant doit être inférieur à {{unit}} {{maxAmountFrom}}"
+      "title": "Amount must be less than {{maxAmountFromFormatted}}"
     }
   }
 }
