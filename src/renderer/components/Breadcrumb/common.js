@@ -8,7 +8,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 export const Separator: ThemedComponent<{}> = styled.div`
   &::after {
-    content: "";
+    content: "/";
     font-size: 13px;
     color: ${p => p.theme.colors.palette.divider};
     padding: 0 15px;

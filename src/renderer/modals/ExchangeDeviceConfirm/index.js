@@ -1,5 +1,7 @@
 // @flow
 import React, { useCallback, useEffect, useState } from "react";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import styled from "styled-components";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
@@ -18,9 +20,17 @@ import { Trans } from "react-i18next";
 import ReadOnlyAddressField from "~/renderer/components/ReadOnlyAddressField";
 import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/rendering";
 import useTheme from "~/renderer/hooks/useTheme";
-import { Separator } from "~/renderer/components/Breadcrumb/common";
 import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
-import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+
+export const Separator: ThemedComponent<{}> = styled.div`
+  &::after {
+    content: "";
+    font-size: 13px;
+    color: ${p => p.theme.colors.palette.divider};
+    padding: 0 15px;
+  }
+`;
 
 const connectAppExec = command("connectApp");
 

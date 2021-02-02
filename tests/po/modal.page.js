@@ -56,7 +56,7 @@ export default class ModalPage extends Page {
     const continueBtn = await this.continueButton;
     await continueBtn.click();
 
-    await mockDeviceEvent({ tpye: "opened" });
+    await mockDeviceEvent({ type: "opened" });
     const importBtn = await this.importAddButton;
     await importBtn.waitForDisplayed();
     await importBtn.waitForEnabled();
