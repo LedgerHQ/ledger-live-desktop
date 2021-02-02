@@ -2,7 +2,7 @@
 // @flow
 
 import { BigNumber } from "bignumber.js";
-import { map } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 import type {
   CryptoCurrency,
   Account,
@@ -60,15 +60,26 @@ export const getCurrencyBridge = (currency: CryptoCurrency): CurrencyBridge => {
   return b;
 };
 
+const syncs = {};
+export const hasOngoingSync = (accountId: string): boolean => Boolean(syncs[accountId]);
+
 export const getAccountBridge = (
   account: AccountLike,
   parentAccount: ?Account,
 ): AccountBridge<any> => {
-  const sync = (account, syncConfig) =>
-    command("AccountSync")({
+  const sync = (account, syncConfig) => {
+    syncs[account.id] = true;
+    return command("AccountSync")({
       account: toAccountRaw(account),
       syncConfig,
-    }).pipe(map(raw => account => patchAccount(account, raw)));
+    }).pipe(
+      map(raw => account => patchAccount(account, raw)),
+      tap(() => {
+        // on first next event, we set it off
+        syncs[account.id] = false;
+      }),
+    );
+  };
 
   const receive = (account, arg) =>
     command("AccountReceive")({
