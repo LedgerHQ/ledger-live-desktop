@@ -1,6 +1,6 @@
 // @flow
 import LedgerAcademyBanner from "~/renderer/components/Carousel/banners/LedgerAcademy";
-import BackupPackBanner from "~/renderer/components/Carousel/banners/BackupPack";
+// import BackupPackBanner from "~/renderer/components/Carousel/banners/BackupPack";
 import BuyCryptoBanner from "~/renderer/components/Carousel/banners/BuyCrypto";
 import SwapBanner from "~/renderer/components/Carousel/banners/Swap";
 // import SellBanner from "~/renderer/components/Carousel/banners/Sell";
@@ -64,7 +64,7 @@ export const getDefaultSlides = () => {
     { id: "buy", Component: BuyCryptoBanner },
     { id: "swap", Component: SwapBanner },
     // { id: "sell", Component: SellBanner },
-    { id: "backupPackBanner", Component: BackupPackBanner },
+    // { id: "backupPackBanner", Component: BackupPackBanner },
     // { id: "lending", Component: LendingBanner },
   ];
 };
