@@ -12,7 +12,7 @@ import {
   useFlattenSortAccounts,
   useRefreshAccountsOrderingEffect,
 } from "~/renderer/actions/general";
-import { accountsSelector } from "~/renderer/reducers/accounts";
+import { accountsSelector, starredAccountsSelector } from "~/renderer/reducers/accounts";
 import { accountsViewModeSelector, selectedTimeRangeSelector } from "~/renderer/reducers/settings";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
@@ -24,6 +24,7 @@ export default function AccountsPage() {
   const mode = useSelector(accountsViewModeSelector);
   const range = useSelector(selectedTimeRangeSelector);
   const rawAccounts = useSelector(accountsSelector);
+  const starredAccounts = useSelector(starredAccountsSelector);
   const flattenedAccounts = useFlattenSortAccounts({ enforceHideEmptySubAccounts: true });
   const accounts = mode === "card" ? flattenedAccounts : rawAccounts;
 
@@ -48,7 +49,11 @@ export default function AccountsPage() {
 
   return (
     <Box>
-      <TrackPage category="Accounts" accountsLength={accounts.length} />
+      <TrackPage
+        category="Accounts"
+        accountsLength={accounts.length}
+        starredAccountsLength={starredAccounts.length}
+      />
       <TopBannerContainer>
         <MigrationBanner />
       </TopBannerContainer>

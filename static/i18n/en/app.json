@@ -112,6 +112,7 @@
     "hour": "Hour",
     "hour_plural": "Hours",
     "range": {
+      "day": "1D",
       "week": "1W",
       "month": "1M",
       "year": "1Y"
@@ -135,7 +136,7 @@
     "lend": "Lend"
   },
   "stars": {
-    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "placeholder": "Star an account to display it here.",
     "tooltip": "Star account"
   },
   "bridge": {
@@ -3169,10 +3170,10 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{unit}} {{minAmountFrom}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be less than {{unit}} {{maxAmountFrom}}"
+      "title": "Amount must be less than {{maxAmountFromFormatted}}"
     }
   }
 }
