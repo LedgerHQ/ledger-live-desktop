@@ -36,7 +36,6 @@ const main = async () => {
 
   str = `
 cc @${author}
-${lintFailed ? "❌" : " ✅"} ${testsFailed ? "❌" : " ✅"} ${imgDiffFailed ? "❌" : " ✅"}
 
 <details>
 <summary><b>Lint outputs ${lintFailed ? "❌" : " ✅"}</b></summary>
