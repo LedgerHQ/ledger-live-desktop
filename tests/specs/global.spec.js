@@ -6,9 +6,6 @@ describe("Global", () => {
   });
 
   beforeEach(async () => {
-    if (await modalPage.isDisplayed()) {
-      await modalPage.close();
-    }
     await portfolioPage.goToPortfolio();
   });
 
@@ -22,6 +19,7 @@ describe("Global", () => {
   });
 
   it("can open receive modal", async () => {
+    await modalPage.close();
     const receiveButton = await portfolioPage.drawerReceiveButton;
     await receiveButton.click();
     await modalPage.isDisplayed();
@@ -31,6 +29,7 @@ describe("Global", () => {
   });
 
   it("shows experimental badge, and can access the page", async () => {
+    await modalPage.close();
     const experimentalButton = await portfolioPage.drawerExperimentalButton;
     await experimentalButton.click();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
