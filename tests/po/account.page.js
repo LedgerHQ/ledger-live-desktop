@@ -31,12 +31,10 @@ export default class AccountPage extends Page {
     return list.$$(".token-row");
   }
 
-  async hideToken(index = 0) {
+  async hideFirstToken() {
     const tokens = await this.getTokens();
-    const length = tokens.length;
-    const token = index > length - 1 ? tokens[length - 1] : tokens[index];
+    const [token] = tokens;
     await token.click({ button: "right" });
-
     const hideButton = await this.menuHideTokenButton;
     await hideButton.click();
   }

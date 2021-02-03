@@ -19,7 +19,7 @@ const hideToken = (currency = "global") => {
       const tokens = await accountPage.getTokens();
       const tokensLength = tokens.length;
 
-      await accountPage.hideToken();
+      await accountPage.hideFirstToken();
 
       await modalPage.confirm();
       await modalPage.isDisplayed(true);
