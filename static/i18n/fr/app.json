@@ -46,6 +46,7 @@
     "western": "Ouest",
     "reverify": "Revérifier",
     "verify": "Vérifier",
+    "verifyMyAddress": "Verify my address",
     "copy": "Copier",
     "copied": "Copié",
     "addressCopied": "Adresse copiée",
@@ -1332,7 +1333,10 @@
   "buy": {
     "title": "Acheter",
     "titleCrypto": "Acheter {{currency}}",
-    "buyCTA": "Acheter {{currencyTicker}}"
+    "buyCTA": "Acheter {{currencyTicker}}",
+    "withoutDevice": "Don't have your device?",
+    "connectWithoutDevice": "It's better to use your device for optimal security.",
+    "skipConnect": "Continue without device"
   },
   "sell": {
     "title": "Vendre",
