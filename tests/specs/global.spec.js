@@ -5,11 +5,8 @@ describe("Global", () => {
     userData: "1AccountBTC1AccountETHStarred",
   });
 
-  beforeEach(async () => {
-    await portfolioPage.goToPortfolio();
-  });
-
   it("can open send modal", async () => {
+    await portfolioPage.goToPortfolio();
     const sendButton = await portfolioPage.drawerSendButton;
     await sendButton.click();
     await modalPage.isDisplayed();
@@ -20,6 +17,7 @@ describe("Global", () => {
 
   it("can open receive modal", async () => {
     await modalPage.close();
+    await portfolioPage.goToPortfolio();
     const receiveButton = await portfolioPage.drawerReceiveButton;
     await receiveButton.click();
     await modalPage.isDisplayed();
@@ -30,6 +28,7 @@ describe("Global", () => {
 
   it("shows experimental badge, and can access the page", async () => {
     await modalPage.close();
+    await portfolioPage.goToPortfolio();
     const experimentalButton = await portfolioPage.drawerExperimentalButton;
     await experimentalButton.click();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
@@ -38,6 +37,7 @@ describe("Global", () => {
   });
 
   it("shows a starred account, and can access the page", async () => {
+    await portfolioPage.goToPortfolio();
     const starredAccountContainer = await portfolioPage.bookmarkedAccountsList;
     starredAccountContainer.waitForDisplayed();
 
@@ -52,6 +52,7 @@ describe("Global", () => {
   });
 
   it("can toggle discreet mode", async () => {
+    await portfolioPage.goToPortfolio();
     const topbarDiscreetButton = await portfolioPage.topbarDiscreetButton;
     await topbarDiscreetButton.click();
     await app.client.pause(1000);
@@ -62,6 +63,7 @@ describe("Global", () => {
   });
 
   it("can collapse the main sidebar", async () => {
+    await portfolioPage.goToPortfolio();
     const drawerCollapseButton = await portfolioPage.drawerCollapseButton;
     await drawerCollapseButton.click();
 
@@ -71,6 +73,7 @@ describe("Global", () => {
   });
 
   it("shows the carousel and can dismiss it", async () => {
+    await portfolioPage.goToPortfolio();
     const carousel = await portfolioPage.carousel;
     await carousel.waitForDisplayed();
 
