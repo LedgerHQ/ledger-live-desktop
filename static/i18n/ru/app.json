@@ -112,6 +112,7 @@
     "hour": "Hour",
     "hour_plural": "Hours",
     "range": {
+      "day": "1D",
       "week": "1W",
       "month": "1M",
       "year": "1Y"
@@ -135,7 +136,7 @@
     "lend": "Lend"
   },
   "stars": {
-    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "placeholder": "Star an account to display it here.",
     "tooltip": "Star account"
   },
   "bridge": {
@@ -248,6 +249,11 @@
       "provider": "Provider",
       "txid": "Swap ID",
       "status": "Status",
+      "statusTooltips": {
+        "refunded": "Please contact the Swap provider with you swap ID for more details",
+        "failed": "Please contact the Swap provider with you swap ID for more details",
+        "hold": "Please contact the Swap provider with you swap ID to solve the situation"
+      },
       "date": "Date",
       "from": "From",
       "to": "To",
@@ -773,6 +779,10 @@
     },
     "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
+    "valentine": {
+      "title": "Valentine’s day",
+      "description": "As a proof of our love, Ledger is reducing buy & sell fees on Ledger Live"
+    },
     "ledgerAcademy": {
       "title": "Ledger Academy",
       "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
@@ -2115,373 +2125,373 @@
   "onboarding": {
     "drawers": {
       "pinHelp": {
-        "title": "Secure your PIN code",
-        "intro": "During the setup process you choose a PIN code.",
+        "title": "Безопасность ПИН-кода",
+        "intro": "Во время запуска вы выбираете ПИН-код.",
         "rules": {
-          "1": "<0>Always</0> choose a PIN code yourself.",
-          "2": "<0>Always</0> enter your PIN code out of sight.",
-          "3": "You can change your PIN code if needed.",
-          "4": "Three wrong PIN code entries in a row will reset the device.",
-          "5": "<0>Never</0> use an easy PIN code like 0000, 123456, or 55555555.",
-          "6": "<0>Never</0> share your PIN code with someone else. Not even with Ledger.",
-          "7": "<0>Never</0> use a PIN code you did not choose yourself.",
-          "8": "<0>Never</0> store your PIN code on a computer or phone."
+          "1": "<0>Всегда</0> выбирайте ПИН-код самостоятельно.",
+          "2": "<0>Всегда</0> набирайте ПИН-код, когда никто не смотрит.",
+          "3": "При необходимости вы можете сменить ПИН-код.",
+          "4": "После трех попыток ввести неправильный ПИН-код устройство будет перезагружено.",
+          "5": "<0>Никогда</0> не используйте ПИН-коды наподобие 0000, 123456, 55555555.",
+          "6": "<0>Никогда</0> не передавайте ПИН-код другим лицам, даже сотрудникам Ledger.",
+          "7": "<0>Никогда</0> не используйте ПИН-код, который вы не выбрали самостоятельно.",
+          "8": "<0>Никогда</0> не храните ПИН-код на компьютере или смартфоне."
         }
       },
       "recoverySeed": {
-        "title1": "How does a recovery phrase work?",
-        "paragraph1": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
-        "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
-        "link": "More about the recovery phrase",
-        "title2": "What happens if I lose access to my Nano?",
-        "paragraph3": "Don't worry and follow these steps:",
+        "title1": "Как работает фраза восстановления?",
+        "paragraph1": "Фраза восстановления работает как уникальный универсальный ключ. На его основе ваше устройство Ledger вычисляет приватные ключи для каждого криптоактива в вашем владении.",
+        "paragraph2": "Для восстановления доступа к вашей криптовалюте любой кошелек может вычислить приватные ключи на основе вашей фразы восстановления.",
+        "link": "Подробнее о фразе восстановления",
+        "title2": "Что случится, если я потеряю доступ к своему устройству Nano?",
+        "paragraph3": "Достаточно выполнить следующие шаги:",
         "points": {
-          "1": "Get a new hardware wallet.",
-          "2": "Select “Restore recovery phrase on a new device” in the Ledger app",
-          "3": "Enter your recovery phrase on your new device to restore access to your crypto."
+          "1": "Приобретите новый аппаратный кошелек.",
+          "2": "Выберите “Restore recovery phrase on a new device” в приложении Ledger",
+          "3": "Введите свою фразу восстановления на новом устройстве, чтобы снова получить доступ к криптовалюте."
         }
       },
       "whereToHide": {
-        "title": "Where should I keep my recovery phrase?",
+        "title": "Где хранить фразу восстановления?",
         "points": {
-          "1": "<0>NEVER</0> enter it on a computer, smartphone or any other device. Don't take a picture of it.",
-          "2": "<0>NEVER</0> share your 24 words with anyone.",
-          "3": "<0>ALWAYS</0> store it in a secure place, out of sight.",
-          "4": "Ledger will never ask for your recovery phrase.",
-          "5": "If any person or application asks for it, assume it is a scam!"
+          "1": "<0>НИКОГДА</0> не вводите его на компьютере, смартфоне или другом устройстве. Не фотографируйте его.",
+          "2": "<0>НИКОГДА</0> никому не раскрывайте свои 24 слова.",
+          "3": "<0>ВСЕГДА</0> храните код в надежном месте вдали от посторонних глаз.",
+          "4": "Ledger никогда не спрашивает вашу фразу восстановления.",
+          "5": "Если кто-нибудь спросит вашу фразу, это мошенничество!"
         }
       }
     },
     "alerts": {
       "deviceError": {
-        "title": "Something went wrong, please reconnect device",
-        "descr": "An action was already pending on the your Nano. Please deny or reconnect.",
-        "retry": "Retry"
+        "title": "Произошла ошибка. Повторно подключите устройство",
+        "descr": "Действие уже выполняется на устройстве Nano. Пожалуйста, отмените или повторите подключение.",
+        "retry": "Повторить попытку"
       },
       "genuineCheck": {
-        "title": "Genuine check",
-        "descr": "Please don’t turn off your Nano and allow Ledger",
-        "info": "This step is meant to ensure that your Nano is authentic and was not hacked."
+        "title": "Проверка подлинности",
+        "descr": "Не отключайте Nano и разрешите использование приложения Ledger Manager на своем устройстве",
+        "info": "Это необходимо для подтверждения подлинности Nano и защиты от взлома."
       },
       "genuineCheckSuccess": {
-        "title": "All good!",
-        "descr": "Your device is genuine and ready to use with Ledger app",
-        "continue": "Continue"
+        "title": "Готово!",
+        "descr": "Подлинность вашего устройства подтверждена, и оно готово к работе с приложением Ledger",
+        "continue": "Продолжить"
       },
       "genuineCheckError": {
-        "title": "Your Nano’s authenticity couldn’t be verified...",
-        "descr": "We recommend you contact Ledger Support to resolve this issue. ",
-        "contactSupport": "Contact Ledger Support"
+        "title": "Не удалось подтвердить подлинность устройства Nano...",
+        "descr": "Для решения проблемы свяжитесь со службой поддержки Ledger. ",
+        "contactSupport": "Связаться со службой поддержки Ledger"
       },
       "languageIncomplete": {
-        "title": "Get started in {{language}}",
-        "descr": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
-        "gotIt": "Got it"
+        "title": "{{language}}: Начать настройку на русском языке",
+        "descr": "Для Вашего удобства процесс настройки Ledger переведен на различные языки. Внимание: остальная часть платформы пока доступна только на английском языке.",
+        "gotIt": "Понятно"
       },
       "beCareful": {
-        "title": "Please be careful",
-        "descr": "Make sure you follow the instructions on this app at every step of the process.",
-        "gotIt": "Got it"
+        "title": "Соблюдайте осторожность",
+        "descr": "Тщательно соблюдайте все инструкции в приложении на каждом этапе процесса.",
+        "gotIt": "Понятно"
       },
       "useLedgerSeeds": {
-        "title": "We recommend Ledger recovery phrases only",
-        "descr": "Ledger cannot guarantee the security of external recovery phrases. We recommend setting up your Nano as a new device if your recovery phrase was not generated by a Ledger.",
-        "gotIt": "Got it"
+        "title": "Рекомендуем только фразы восстановления, сгенерированные Ledger",
+        "descr": "Ledger не гарантирует защиту при использовании фраз восстановления из сторонних источников. Рекомендуем настроить Nano как новое устройство, если ваша фраза восстановления не была сгенерирована Ledger.",
+        "gotIt": "Понятно"
       }
     },
     "screens": {
       "welcome": {
-        "title": "Welcome to Ledger",
-        "description": "Safely manage your crypto from your computer.",
-        "cta": "Get started",
-        "noDevice": "No device? <0>Buy a Ledger Nano X</0>",
+        "title": "Добро пожаловать в Ledger!",
+        "description": "Управляйте своей криптовалютой с компьютера в полной безопасности.",
+        "cta": "Начало работы",
+        "noDevice": "Нет устройства Ledger? <0>Купите Ledger Nano X</0>",
         "languageWarning": {
-          "title": "Get started in {{language}}",
-          "desc": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
-          "cta": "Got it"
+          "title": "{{language}}: Начать настройку на русском языке",
+          "desc": "Для Вашего удобства процесс настройки Ledger переведен на различные языки. Внимание: остальная часть платформы пока доступна только на английском языке.",
+          "cta": "Понятно"
         }
       },
       "selectDevice": {
-        "title": "What's your device?"
+        "title": "Какое у вас устройство?"
       },
       "selectUseCase": {
-        "greetings": "Hello!",
-        "hasNoRecovery": "First time using your Nano?",
-        "hasRecovery": "Already have a recovery phrase?",
-        "separator": "or",
+        "greetings": "Здравствуйте!",
+        "hasNoRecovery": "First time using your {{deviceName}}?",
+        "hasRecovery": "У вас уже есть фраза восстановления?",
+        "separator": "или",
         "options": {
           "1": {
-            "heading": "First use",
-            "title": "Set up a new Nano",
-            "description": "Let’s start and set up your device!"
+            "heading": "Первый раз",
+            "title": "Set up a new {{deviceName}}",
+            "description": "Начнем с конфигурации Вашего устройства."
           },
           "2": {
-            "heading": "Connect device",
-            "title": "Connect your Nano",
-            "description": "Is your device already set up? Connect it to the app!"
+            "heading": "Подключить устройство",
+            "title": "Connect your {{deviceName}}",
+            "description": "Ваше устройство настроено? Подключите его к приложению."
           },
           "3": {
-            "heading": "Restore device",
-            "title": "Restore your recovery phrase on a new device",
-            "description": "Use an existing recovery phrase to restore your private keys on a new Nano!"
+            "heading": "Восстановить устройство",
+            "title": "Восстановить фразу восстановления на новом устройстве",
+            "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
           }
         }
       },
       "tutorial": {
         "steps": {
-          "getStarted": "Get started",
-          "pinCode": "Pin code",
-          "recoveryPhrase": "Recovery phrase",
-          "hideRecoveryPhrase": "Hide recovery phrase",
-          "pairNano": "Connect nano"
+          "getStarted": "Начало работы",
+          "pinCode": "Пин код",
+          "recoveryPhrase": "Фраза восстановления",
+          "hideRecoveryPhrase": "Спрячьте свою фразу восстановления",
+          "pairNano": "Подключите ваш Nano"
         },
         "screens": {
           "importYourRecoveryPhrase": {
-            "title": "Restore from recovery phrase",
-            "paragraph1": "Restore your Nano from your recovery phrase to restore, replace or back up your Ledger hardware wallet.",
-            "paragraph2": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
+            "title": "Восстановить из фразы восстановления",
+            "paragraph1": "Восстановите Nano с помощью фразы восстановления, замените или выполните резервное копирование аппаратного кошелька Ledger.",
+            "paragraph2": "Устройство Nano восстановит ваши приватные ключи, и вы снова получите доступ к своей криптовалюте.",
             "buttons": {
-              "next": "OK, I’m ready!",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Готово!",
+              "prev": "Предыдущий шаг",
+              "help": "Мне нужна помощь"
             }
           },
           "howToGetStarted": {
-            "title": "The best way to get you started:",
+            "title": "Для начала:",
             "rules": {
-              "1": "Plan 30 minutes and take your time.",
-              "2": "Grab a pen to write with.",
-              "3": "Stay alone, and choose a safe and quiet environment."
+              "1": "Это займет около 30 минут.",
+              "2": "Возьмите ручку для записи.",
+              "3": "Убедитесь, что рядом никого нет и вы в безопасной и спокойной обстановке."
             },
             "buttons": {
-              "next": "OK, I’m ready!",
-              "prev": "Previous step"
+              "next": "Готово!",
+              "prev": "Предыдущий шаг"
             }
           },
           "deviceHowTo": {
             "turnOn": {
-              "title": "Turn on Nano",
-              "descr": "Connect your device to your computer with the USB cable."
+              "title": "Включите Nano",
+              "descr": "Подключите устройство к компьютеру с помощью USB-кабеля."
             },
             "browse": {
-              "title": "Browse",
-              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+              "title": "Поиск",
+              "descr": "Научитесь работать с устройством, следуя инструкциям на экране."
             },
             "select": {
-              "title": "Select “Set up as new device”",
-              "descr": "Press both buttons simultaneously to validate the selection."
+              "title": "Выберите \"Set up as new device\"",
+              "descr": "Нажмите обе кнопки одновременно для подтверждения выбора."
             },
             "follow": {
-              "title": "Follow instructions",
-              "descr": "Come back here to follow instructions on your PIN code."
+              "title": "Дальнейшие инструкции",
+              "descr": "Вернитесь обратно и следуйте инструкциям по ПИН-коду."
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Далее",
+              "prev": "Предыдущий шаг",
+              "help": "Мне нужна помощь"
             }
           },
           "deviceHowTo2": {
             "turnOn": {
-              "title": "Turn on Nano",
-              "descr": "Connect your device to your computer with the USB cable."
+              "title": "Включите Nano",
+              "descr": "Подключите устройство к компьютеру с помощью USB-кабеля."
             },
             "browse": {
-              "title": "Browse",
-              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+              "title": "Поиск",
+              "descr": "Научитесь работать с устройством, следуя инструкциям на экране."
             },
             "select": {
-              "title": "Select “Enter your recovery phrase”",
-              "descr": "Press both buttons simultaneously to validate the selection."
+              "title": "Выберите \"Восстановить из фразы восстановления\"",
+              "descr": "Нажмите обе кнопки одновременно для подтверждения выбора."
             },
             "follow": {
-              "title": "Follow instructions",
-              "descr": "Come back here to follow instructions on your PIN code."
+              "title": "Дальнейшие инструкции",
+              "descr": "Вернитесь обратно и следуйте инструкциям по ПИН-коду."
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Далее",
+              "prev": "Предыдущий шаг",
+              "help": "Мне нужна помощь"
             }
           },
           "pinCode": {
-            "title": "PIN code",
-            "paragraph": "Your PIN code is the first layer of security. It physically secures access to your private key and your Nano. Your PIN code must be 4 to 8 digits long.",
-            "disclaimer": "I understand that I must choose my PIN code myself and keep it private.",
+            "title": "ПИН-код",
+            "paragraph": "ПИН-код — это первый этап защиты. Он физически защищает доступ к устройству Nano и ваши приватные ключи. ПИН-код должен содержать от 4 до 8 символов.",
+            "disclaimer": "Я понимаю, что необходимо выбрать ПИН-код самостоятельно и хранить его в секрете.",
             "buttons": {
-              "next": "Set up PIN code",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Установить ПИН-код",
+              "prev": "Предыдущий шаг",
+              "help": "Мне нужна помощь"
             }
           },
           "quizSuccess": {
-            "title": "Already a pro!",
-            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
+            "title": "Вы уже профи!",
+            "paragraph": "Теперь вы готовы управлять своей криптовалютой в полной безопасности. Остался всего один шаг.",
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Далее",
+              "prev": "Предыдущий шаг",
+              "help": "Мне нужна помощь"
             }
           },
           "quizFailure": {
-            "title": "You will soon become a pro...",
-            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety. Only one quick step left!",
+            "title": "Вы скоро станете профи...",
+            "paragraph": "Не волнуйтесь, Ledger поможет вам в управлении устройством. Вы вскоре почувствуете себя уверенно и безопасно в работе с криптовалютой. Остался всего один шаг.",
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step"
+              "next": "Далее",
+              "prev": "Предыдущий шаг"
             }
           },
           "pinCodeHowTo": {
             "setUp": {
-              "title": "Choose PIN code",
-              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <0></0> to confirm your PIN code. Select <1></1> to erase a digit."
+              "title": "Выберите ПИН-код",
+              "descr": "Нажимайте левую или правую кнопку для выбора цифры. Нажимайте обе кнопки для валидации. Выберите <0></0> для подтверждения ПИН-кода. Выберите <1></1> для удаления цифры."
             },
             "confirm": {
-              "title": "Confirm PIN code",
-              "descr": "Enter your PIN code again to confirm it."
+              "title": "Подтвердите ПИН-код",
+              "descr": "Введите ПИН-код повторно для подтверждения."
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Далее",
+              "prev": "Предыдущий шаг",
+              "help": "Мне нужна помощь"
             }
           },
           "existingRecoveryPhrase": {
-            "title": "Enter your recovery phrase",
-            "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
-            "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
-            "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+            "title": "Введите фразу восстановления.",
+            "paragraph1": "Фраза восстановления – это секретный список слов, который вы сохранили при первом подключении кошелька.",
+            "paragraph2": "Ledger не хранит копию вашей фразы восстановления.",
+            "disclaimer": "Я осознаю, что при потере фразы восстановления я утрачу доступ к своей криптовалюте в случае потери доступа к устройству Nano.",
             "buttons": {
-              "next": "Enter recovery phrase",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Введите фразу восстановления",
+              "prev": "Предыдущий шаг",
+              "help": "Мне нужна помощь"
             }
           },
           "useRecoverySheet": {
             "takeYourRecoverySheet": {
-              "title": "Take your recovery sheet",
-              "descr": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
+              "title": "Возьмите лист восстановления",
+              "descr": "Возьмите чистый лист восстановления, который прилагается к устройству Nano. Свяжитесь со службой поддержки Ledger, если вы не обнаружили лист в комплекте."
             },
             "writeDownWords": {
-              "title": "Write down all words",
-              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2. Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+              "title": "Запишите все слова",
+              "descr": "Запишите слово №1, указанное на устройстве Nano, на позиции 1 листа восстановления. Затем нажмите правую кнопку Nano, чтобы прочитать слово №2, и запишите его на второй позиции. Повторите процесс для всех слов, проверяя правильное написание и порядковый номер. Нажимайте левую кнопку Nano для проверки на ошибки."
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Далее",
+              "prev": "Предыдущий шаг",
+              "help": "Мне нужна помощь"
             }
           },
           "newRecoveryPhrase": {
-            "title": "Recovery phrase",
-            "paragraph1": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
-            "paragraph2": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
-            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+            "title": "Фраза восстановления",
+            "paragraph1": "Фраза восстановления – это секретный список из 24 слов для восстановления ваших приватных ключей.",
+            "paragraph2": "Nano генерирует уникальную фразу восстановления. Ledger не хранит копию этой фразы.",
+            "disclaimer": "Я осознаю, что при потере фразы восстановления я утрачу доступ к криптовалюте в случае потери доступа к устройству Nano.",
             "buttons": {
-              "next": "Recovery phrase",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Фраза восстановления",
+              "prev": "Предыдущий шаг",
+              "help": "Мне нужна помощь"
             }
           },
           "recoveryHowTo": {
             "grabRecovery": {
-              "title": "Grab your recovery phrase"
+              "title": "Возьмите свою фразу восстановления"
             },
             "selectLength": {
-              "title": "Select recovery phrase length",
-              "descr": "Your recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
+              "title": "Выберите длину фразы восстановления",
+              "descr": "Фраза восстановления может содержать 12, 18 или 24 слова. Для доступа к криптовалюте вы должны ввести все слова."
             },
             "enterWord": {
-              "title": "Enter Word #1...",
-              "descr": "Enter the first letters of Word #1 by selecting them with the right or left button. Press both buttons to validate each letter."
+              "title": "Введите слово №1...",
+              "descr": "Введите первые буквы слова №1, выбрав их правой или левой кнопкой. Нажмите обе кнопки для подтверждения каждой буквы."
             },
             "validateWord": {
-              "title": "Validate Word #1...",
-              "descr": "Choose Word #1 from the suggestions. Press both buttons to validate."
+              "title": "Подтвердите слово №1...",
+              "descr": "Выберите слово №1 из предлагаемых слов. Нажмите обе кнопки для подтверждения."
             },
             "andNext": {
-              "title": "Repeat for all words!"
+              "title": "Повторите процесс для всех слов!"
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Далее",
+              "prev": "Предыдущий шаг",
+              "help": "Мне нужна помощь"
             }
           },
           "recoveryHowTo3": {
             "reEnterWord": {
-              "title": "Confirm your recovery phrase",
-              "descr": "Scroll through the words until you find Word #1 by pressing the right button. Validate by pressing both buttons."
+              "title": "Подтвердите фразу восстановления",
+              "descr": "Просмотрите список слов и найдите слово №1, нажимая правую кнопку. Подтвердите нажатием на обе кнопки."
             },
             "repeat": {
-              "title": "Repeat for all words!"
+              "title": "Повторите процесс для всех слов!"
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Далее",
+              "prev": "Предыдущий шаг",
+              "help": "Мне нужна помощь"
             }
           },
           "genuineCheck": {
             "plugUSBCable": {
-              "title": "Connect USB cable",
-              "descr": "Connect the USB cable and enter your PIN Code on the device"
+              "title": "Подсоедините USB-кабель",
+              "descr": "Подключите кабель и введите ПИН-код на устройстве"
             },
             "success": {
-              "title": "All good!",
-              "desc": "Your Ledger {{deviceName}} is genuine and ready to use with Ledger Live"
+              "title": "Готово!",
+              "desc": "Подлинность устройства Ledger {{deviceName}} подтверждена, и оно готово к использованию с приложением Ledger"
             },
             "buttons": {
-              "next": "Continue",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Продолжить",
+              "prev": "Предыдущий шаг",
+              "help": "Мне нужна помощь"
             }
           },
           "hideRecoveryPhrase": {
-            "title": "Hide your recovery phrase",
-            "paragraph": "Your recovery phrase is your last chance to access your crypto if you cannot use your Nano. You must keep it in a safe place.",
-            "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
-            "neverShowToAnyone": "Never share your 24 words with anyone, not even with Ledger.",
+            "title": "Скройте свою фразу восстановления",
+            "paragraph": "Фраза восстановления – это ваш последний шанс получить доступ к своим криптоактивам, если вы потеряете доступ к Nano. Храните ее в надежном месте.",
+            "keepItOffline": "Вводите эти слова только в аппаратном кошельке, и никогда – на компьютере или смартфоне.",
+            "neverShowToAnyone": "Никогда никому не передавайте эти 24 слова, даже сотрудникам Ledger.",
             "buttons": {
-              "next": "OK, I'm done!",
-              "prev": "Previous step",
-              "help": "Need help",
-              "learn": "Learn how to hide it"
+              "next": "Понятно!",
+              "prev": "Предыдущий шаг",
+              "help": "Мне нужна помощь",
+              "learn": "Как спрятать фразу восстановления"
             }
           },
           "pairMyNano": {
-            "title": "Genuine check",
-            "paragraph": "We'll verify whether your Nano is genuine. This should be quick and easy!",
+            "title": "Проверка подлинности",
+            "paragraph": "Мы подтвердим подлинность вашего устройства Nano. Это быстро и легко.",
             "buttons": {
-              "next": "Check my Nano",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Проверить Nano",
+              "prev": "Предыдущий шаг",
+              "help": "Мне нужна помощь"
             }
           },
           "quizzSuccess": {
-            "title": "Already a pro!",
-            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
+            "title": "Вы уже профи!",
+            "paragraph": "Теперь вы готовы управлять своей криптовалютой в полной безопасности. Остался всего один шаг.",
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step"
+              "next": "Далее",
+              "prev": "Предыдущий шаг"
             }
           },
           "quizzFail": {
-            "title": "You will soon become a pro...",
-            "paragraph1": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.",
-            "paragraph2": "Only one quick step left!",
+            "title": "Вы скоро станете профи...",
+            "paragraph1": "Не волнуйтесь, Ledger поможет вам в управлении устройством. Вы вскоре почувствуете себя уверенно и безопасно в работе с криптовалютой.",
+            "paragraph2": "Остался всего один шаг!",
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step"
+              "next": "Далее",
+              "prev": "Предыдущий шаг"
             }
           },
           "connectYourDevice": {
             "plugUSBCable": {
-              "title": "Connect USB cable",
-              "descr": "Connect the cable and enter the PIN Code on your device",
+              "title": "Подсоедините USB-кабель",
+              "descr": "Подключите кабель и введите ПИН-код на устройстве",
               "buttons": {
-                "next": "Continue",
-                "prev": "Previous step"
+                "next": "Продолжить",
+                "prev": "Предыдущий шаг"
               }
             }
           }
@@ -2489,89 +2499,89 @@
       }
     },
     "pedagogy": {
-      "heading": "basics",
+      "heading": "Основы",
       "screens": {
         "accessYourCoins": {
-          "title": "Access your crypto",
-          "description": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
+          "title": "Доступ к криптовалюте",
+          "description": "Ваши криптоактивые активы хранятся в блокчейне. Вам нужен закрытый ключ для доступа и управления им."
         },
         "ownYourPrivateKey": {
-          "title": "Own your private key",
-          "description": "Your private key is stored within your Nano. You must be the only one to own it to be in control of your money."
+          "title": "Это ваш приватный ключ",
+          "description": "Ваш приватный ключ хранится в устройстве Nano. В целях безопасности никому не передавайте его."
         },
         "stayOffline": {
-          "title": "Stay offline",
-          "description": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
+          "title": "Оставайтесь офлайн",
+          "description": "Nano выполняет функции «холодного аппаратного» кошелька. Это значит, что ваш приватный ключ никогда не попадет в Интернет, даже когда вы используете приложение."
         },
         "validateTransactions": {
-          "title": "Validate transactions",
-          "description": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
+          "title": "Валидация операций",
+          "description": "Приложение Ledger Live позволяет покупать, продавать, контролировать, обменивать и зарабатывать криптовалюты в безопасных условиях. Вы должны валидировать каждую транзакцию с криптовалютой на своем устройстве Nano."
         },
         "setUpNanoWallet": {
-          "title": "Let’s set up your Nano!",
-          "description": "We'll start by setting up your Nano security.",
-          "CTA": "Let’s do this!"
+          "title": "Начнем с конфигурации вашего устройства Nano.",
+          "description": "Сначала мы установим настройки безопасности Nano.",
+          "CTA": "Начать"
         }
       }
     },
     "quizz": {
-      "heading": "Quiz",
-      "title": "Now game on!",
-      "descr": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
+      "heading": "Викторина",
+      "title": "Начнем викторину!",
+      "descr": "Ответьте на 3 простых вопроса, чтобы не стать жертвой распространенных заблуждений об аппаратных кошельках.",
       "buttons": {
-        "start": "Let’s take the quiz",
-        "next": "Next question",
-        "finish": "Finish quiz"
+        "start": "Начать викторину",
+        "next": "Следующий вопрос",
+        "finish": "Закончить викторину"
       },
       "questions": {
         "1": {
-          "text": "As a Ledger user, my crypto is stored:",
+          "text": "Я пользователь Ledger, и моя криптовалюта хранится:",
           "answers": {
-            "1": "On my Nano",
-            "2": "On the blockchain"
+            "1": "В моем Nano",
+            "2": "В блокчейне"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
-              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+              "title": "Поздравляем!",
+              "text": "Ваша криптовалюта всегда хранится в блокчейне. Кошелек Nano содержит только приватный ключ для доступа к ней."
             },
             "fail": {
-              "title": "Incorrect!",
-              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+              "title": "Неправильно!",
+              "text": "Ваша криптовалюта всегда хранится в блокчейне. Кошелек Nano содержит только приватный ключ для доступа к ней."
             }
           }
         },
         "2": {
-          "text": "If my recovery phrase is no longer secure or private...",
+          "text": "Если кто-то другой получил доступ к моей фразе восстановления...",
           "answers": {
-            "1": "No problem, Ledger can send me a copy",
-            "2": "My crypto is no longer safe and I need to transfer them to a secure place"
+            "1": "Не проблема, Ledger пришлет мне копию",
+            "2": "Доступ к криптовалюте останется незащищенным, и надо перевести ее в безопасное место"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
-              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "title": "Поздравляем!",
+              "text": "Любой, кто знает вашу фразу восстановления, может украсть ваши криптоактивы. Если вы потеряете ее, вы должны немедленно перевести свою криптовалюту в безопасное место."
             },
             "fail": {
-              "title": "Incorrect!",
-              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "title": "Неправильно!",
+              "text": "Любой, кто знает вашу фразу восстановления, может украсть ваши криптоактивы. Если вы потеряете ее, вы должны немедленно перевести свою криптовалюту в безопасное место."
             }
           }
         },
         "3": {
-          "text": "When I connect my Nano to the Ledger app, my private key is...",
+          "text": "Когда я подключаю Nano к приложению Ledger, мой приватный ключ...",
           "answers": {
-            "1": "Still offline",
-            "2": "Briefly connected to the internet"
+            "1": "Остается в офлайне",
+            "2": "Ненадолго подключается к Интернету"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
-              "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
+              "title": "Поздравляем!",
+              "text": "Приватный ключ всегда остается в офлайне в аппаратном кошельке. Даже когда приложение Ledger подключено к Nano, оно не имеет доступа к вашему приватному ключу. Каждую транзакцию с устройства вы должны подтвердить физически."
             },
             "fail": {
-              "title": "Incorrect!",
-              "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
+              "title": "Неправильно!",
+              "text": "Приватный ключ всегда остается в офлайне в аппаратном кошельке. Даже когда приложение Ledger подключено к Nano, оно не имеет доступа к вашему приватному ключу. Каждую транзакцию с устройства вы должны подтвердить физически."
             }
           }
         }
@@ -2612,8 +2622,9 @@
   "Terms": {
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
-    "switchLabel": "I have read and agree with the <0>Terms of Use and Privacy Policy</0>",
-    "switchLabelLoss": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to Nano.",
+    "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
+    "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
+    "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
     "cta": "Enter Ledger app"
   },
   "families": {
@@ -2736,6 +2747,10 @@
     "CosmosBroadcastCodeNoSignatures": {
       "title": "Something went wrong (Error #17)",
       "description": "Please contact Ledger Support"
+    },
+    "CosmosStargateFeb2021Warning": {
+      "title": "The Cosmos blockchain is planning for an on-chain update on Feb 18th.",
+      "description": "Coming Ledger Live 2.22.0 will continue supporting ATOM."
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
@@ -2908,6 +2923,10 @@
     "SatStackDescriptorNotImported": {
       "title": "Account not scanned by full node",
       "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
+    },
+    "StratisDown2021Warning": {
+      "title": "The Stratis blockchain evolved and may no longer work correctly.",
+      "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
     },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",
