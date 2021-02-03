@@ -35,6 +35,8 @@ const main = async () => {
   const imgDiffFailed = !!imgArr.length;
 
   str = `
+cc @${author}
+
 <details>
 <summary><b>Lint outputs ${lintFailed ? "❌" : " ✅"}</b></summary>
 <p>
