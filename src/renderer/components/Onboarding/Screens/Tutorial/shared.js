@@ -8,6 +8,7 @@ export const WaveContainer: ThemedComponent<*> = styled.div`
   right: 0;
   top: 0;
   height: 500px;
+  pointer-events: none;
 `;
 
 export const HeaderContainer: ThemedComponent<*> = styled.div`

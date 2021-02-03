@@ -65,7 +65,7 @@ const Swap = () => {
   }, [set]);
 
   const onClick = useCallback(() => {
-    openURL(urls.banners.ledgerAcademy);
+    openURL(urls.banners.valentine);
   }, []);
 
   const ref = useRef(null);

@@ -29,7 +29,10 @@ type Props = {
 };
 
 export function Result({ sendEvent, t, meta, state }: Props) {
-  const result = state.context.results[state.value];
+  const { context } = state;
+
+  const result = context.results[state.value];
+  const isLast = context.currentQuestionIndex + 1 === context.totalQuestions;
 
   const wordings = meta[result];
 
@@ -57,7 +60,7 @@ export function Result({ sendEvent, t, meta, state }: Props) {
         {t(wordings.text)}
       </Text>
       <Button id="quizz-next-cta" primary onClick={() => sendEvent("NEXT")}>
-        {t("onboarding.quizz.buttons.next")}
+        {t(isLast ? "onboarding.quizz.buttons.finish" : "onboarding.quizz.buttons.next")}
       </Button>
     </React.Fragment>
   );

@@ -39,6 +39,7 @@ const AnswerButton = styled.div`
   cursor: pointer;
   transition: filter ease-out 100ms;
   text-align: center;
+  z-index: 1;
 
   &:hover {
     filter: brightness(95%);

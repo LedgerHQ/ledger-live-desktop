@@ -50,6 +50,7 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/360006523674?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=manager_hanging",
   contactSupport:
     "https://support.ledger.com/hc/en-us/requests/new?ticket_form_id=248165?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=support_contact",
+  whatIsARecoveryPhrase: "https://www.ledger.com/academy/crypto/what-is-a-recovery-phrase",
   feesMoreInfo:
     "https://support.ledger.com/hc/en-us/articles/360006535873?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=fees",
   recipientAddressInfo:
@@ -112,7 +113,7 @@ export const urls = {
     ongoingScams:
       "https://www.ledger.com/ongoing-phishing-campaigns?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
     valentine:
-      "https://shop.ledger.com/pages/valentines-day-special-offers&utm_medium=self_referral&utm_content=banner_carousel",
+      "https://shop.ledger.com/pages/valentines-day-special-offers?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
   },
   helpModal: {
     gettingStarted:
@@ -144,8 +145,8 @@ export const urls = {
       "https://support.ledger.com/hc/en-us/articles/360025321733?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error_wrongdevice",
     SyncError:
       "https://support.ledger.com/hc/en-us/articles/360012109220?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error_syncerror",
-    CosmosStargateFeb2021Warning:
-      "https://support.ledger.com/hc/en-us/articles/360013713840-Cosmos-ATOM-",
+    StratisDown2021Warning: "https://support.ledger.com/hc/en-us/articles/115005175329",
+    CosmosStargateFeb2021Warning: "https://support.ledger.com/hc/en-us/articles/360013713840",
   },
   compound:
     "https://support.ledger.com/hc/en-us/articles/360017215099?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=compound",
