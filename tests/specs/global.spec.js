@@ -9,7 +9,7 @@ describe("Global", () => {
     await portfolioPage.goToPortfolio();
     const sendButton = await portfolioPage.drawerSendButton;
     await sendButton.click();
-    await modalPage.isDisplayed();
+    await modalPage.waitForDisplayed();
     expect(await app.client.screenshot(2000)).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-send-modal",
     });
@@ -20,7 +20,7 @@ describe("Global", () => {
     await portfolioPage.goToPortfolio();
     const receiveButton = await portfolioPage.drawerReceiveButton;
     await receiveButton.click();
-    await modalPage.isDisplayed();
+    await modalPage.waitForDisplayed();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-receive-modal",
     });

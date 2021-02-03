@@ -22,7 +22,7 @@ const hideToken = (currency = "global") => {
       await accountPage.hideFirstToken();
 
       await hideTokenModal.confirm();
-      await hideTokenModal.isClosed();
+      await hideTokenModal.waitForClosed();
 
       const newTokens = await accountPage.getTokens();
       expect(newTokens).toHaveLength(tokensLength - 1);

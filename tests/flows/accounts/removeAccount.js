@@ -22,7 +22,7 @@ const removeAccount = (currency = "global") => {
 
       const settingsButton = await accountPage.settingsButton;
       await settingsButton.click();
-      await accountSettingsModal.isDisplayed();
+      await accountSettingsModal.waitForDisplayed();
       const deleteButton = await accountSettingsModal.settingsDeleteButton;
       await deleteButton.click();
 

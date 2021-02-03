@@ -37,14 +37,14 @@ export default class ModalPage extends Page {
     return this.$("#modal-close-button");
   }
 
-  async isDisplayed() {
+  async waitForDisplayed() {
     const elem = await this.container;
     const visible = await elem.waitForDisplayed();
 
     return visible;
   }
 
-  async isClosed() {
+  async waitForClosed() {
     const elem = await this.container;
     const closed = elem.waitForDisplayed({ timeout: 3000, reverse: true });
     return closed;

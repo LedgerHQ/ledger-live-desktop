@@ -9,7 +9,7 @@ const exportOperationsHistory = (currency = "global") => {
 
     it("opens the export operations history modal", async () => {
       await accountsPage.exportOperationsHistory();
-      expect(await exportOperationsHistoryModal.isDisplayed()).toBe(true);
+      expect(await exportOperationsHistoryModal.waitForDisplayed()).toBe(true);
     });
 
     it("displays a list of accounts", async () => {
@@ -51,7 +51,7 @@ const exportOperationsHistory = (currency = "global") => {
 
     it("closes the export operations history modal", async () => {
       await exportOperationsHistoryModal.close();
-      expect(await exportOperationsHistoryModal.isClosed()).toBe(true);
+      expect(await exportOperationsHistoryModal.waitForClosed()).toBe(true);
     });
   });
 };

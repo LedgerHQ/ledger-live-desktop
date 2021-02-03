@@ -9,7 +9,7 @@ const exportAccountsToMobile = (currency = "global") => {
 
     it("opens the export accounts modal", async () => {
       await accountsPage.exportAccountsToMobile();
-      expect(await exportAccountsModal.isDisplayed()).toBe(true);
+      expect(await exportAccountsModal.waitForDisplayed()).toBe(true);
     });
 
     it("displays a QRCode", async () => {
@@ -20,7 +20,7 @@ const exportAccountsToMobile = (currency = "global") => {
 
     it("closes the export accounts modal", async () => {
       await exportAccountsModal.confirm();
-      expect(await exportAccountsModal.isClosed()).toBe(true);
+      expect(await exportAccountsModal.waitForClosed()).toBe(true);
     });
   });
 };
