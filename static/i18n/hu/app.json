@@ -46,6 +46,7 @@
     "western": "Nyugati",
     "reverify": "Újra megerősít",
     "verify": "Megerősít",
+    "verifyMyAddress": "Verify my address",
     "copy": "Másolás",
     "copied": "Másolva",
     "addressCopied": "Cím másolva",
@@ -1332,7 +1333,10 @@
   "buy": {
     "title": "Buy",
     "titleCrypto": "Buy {{currency}}",
-    "buyCTA": "Buy {{currencyTicker}}"
+    "buyCTA": "Buy {{currencyTicker}}",
+    "withoutDevice": "Don't have your device?",
+    "connectWithoutDevice": "It's better to use your device for optimal security.",
+    "skipConnect": "Continue without device"
   },
   "sell": {
     "title": "Sell",
