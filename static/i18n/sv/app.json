@@ -112,6 +112,7 @@
     "hour": "Hour",
     "hour_plural": "Hours",
     "range": {
+      "day": "1D",
       "week": "1W",
       "month": "1M",
       "year": "1Y"
@@ -135,7 +136,7 @@
     "lend": "Lend"
   },
   "stars": {
-    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "placeholder": "Star an account to display it here.",
     "tooltip": "Star account"
   },
   "bridge": {
@@ -248,6 +249,11 @@
       "provider": "Provider",
       "txid": "Swap ID",
       "status": "Status",
+      "statusTooltips": {
+        "refunded": "Please contact the Swap provider with you swap ID for more details",
+        "failed": "Please contact the Swap provider with you swap ID for more details",
+        "hold": "Please contact the Swap provider with you swap ID to solve the situation"
+      },
       "date": "Date",
       "from": "From",
       "to": "To",
@@ -773,6 +779,10 @@
     },
     "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
+    "valentine": {
+      "title": "Valentine’s day",
+      "description": "As a proof of our love, Ledger is reducing buy & sell fees on Ledger Live"
+    },
     "ledgerAcademy": {
       "title": "Ledger Academy",
       "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
@@ -2206,24 +2216,24 @@
       },
       "selectUseCase": {
         "greetings": "Hello!",
-        "hasNoRecovery": "First time using your Nano?",
+        "hasNoRecovery": "First time using your {{deviceName}}?",
         "hasRecovery": "Already have a recovery phrase?",
         "separator": "or",
         "options": {
           "1": {
             "heading": "First use",
-            "title": "Set up a new Nano",
+            "title": "Set up a new {{deviceName}}",
             "description": "Let’s start and set up your device!"
           },
           "2": {
             "heading": "Connect device",
-            "title": "Connect your Nano",
+            "title": "Connect your {{deviceName}}",
             "description": "Is your device already set up? Connect it to the app!"
           },
           "3": {
             "heading": "Restore device",
             "title": "Restore your recovery phrase on a new device",
-            "description": "Use an existing recovery phrase to restore your private keys on a new Nano!"
+            "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
           }
         }
       },
@@ -2612,8 +2622,9 @@
   "Terms": {
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
-    "switchLabel": "I have read and agree with the <0>Terms of Use and Privacy Policy</0>",
-    "switchLabelLoss": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to Nano.",
+    "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
+    "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
+    "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
     "cta": "Enter Ledger app"
   },
   "families": {
@@ -2736,6 +2747,10 @@
     "CosmosBroadcastCodeNoSignatures": {
       "title": "Something went wrong (Error #17)",
       "description": "Please contact Ledger Support"
+    },
+    "CosmosStargateFeb2021Warning": {
+      "title": "The Cosmos blockchain is planning for an on-chain update on Feb 18th.",
+      "description": "Coming Ledger Live 2.22.0 will continue supporting ATOM."
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
@@ -2908,6 +2923,10 @@
     "SatStackDescriptorNotImported": {
       "title": "Account not scanned by full node",
       "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
+    },
+    "StratisDown2021Warning": {
+      "title": "The Stratis blockchain evolved and may no longer work correctly.",
+      "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
     },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",
