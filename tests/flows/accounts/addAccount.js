@@ -1,6 +1,12 @@
 /* eslint-disable jest/no-export */
 import invariant from "invariant";
-import { app, mockDeviceEvent, modalPage, accountsPage, portfolioPage } from "../../common.js";
+import {
+  app,
+  mockDeviceEvent,
+  addAccountsModal,
+  accountsPage,
+  portfolioPage,
+} from "../../common.js";
 
 const addAccount = currency => {
   invariant(currency, "currency is needed");
@@ -28,8 +34,8 @@ const addAccount = currency => {
         : await accountsPage.addAccountButton;
       await addAccountButton.click();
 
-      await modalPage.addAccountFlow(currency, mockDeviceEvent);
-      await modalPage.close();
+      await addAccountsModal.addAccountFlow(currency, mockDeviceEvent);
+      await addAccountsModal.close();
 
       await accountsPage.goToAccounts();
       const accounts = await accountsPage.getAccountsRows();

@@ -1,5 +1,5 @@
 /* eslint-disable jest/no-export */
-import { app, accountsPage, modalPage } from "../../common.js";
+import { app, accountsPage, exportAccountsModal } from "../../common.js";
 
 const exportAccountsToMobile = (currency = "global") => {
   describe("export accounts to mobile", () => {
@@ -9,7 +9,7 @@ const exportAccountsToMobile = (currency = "global") => {
 
     it("opens the export accounts modal", async () => {
       await accountsPage.exportAccountsToMobile();
-      expect(await modalPage.isDisplayed()).toBe(true);
+      expect(await exportAccountsModal.isDisplayed()).toBe(true);
     });
 
     it("displays a QRCode", async () => {
@@ -19,8 +19,8 @@ const exportAccountsToMobile = (currency = "global") => {
     });
 
     it("closes the export accounts modal", async () => {
-      await modalPage.confirm();
-      expect(await modalPage.isDisplayed(true)).toBe(false);
+      await exportAccountsModal.confirm();
+      expect(await exportAccountsModal.isClosed()).toBe(true);
     });
   });
 };

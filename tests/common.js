@@ -9,6 +9,11 @@ import ModalPage from "./po/modal.page";
 import AccountsPage from "./po/accounts.page";
 import AccountPage from "./po/account.page";
 import PortfolioPage from "./po/portfolio.page";
+import AddAccontModal from "./po/addAccountModal.page";
+import AccountSettingsModal from "./po/accountSettingsModal.page";
+import ExportOperationsModal from "./po/exportOperationsHistoryModal.page";
+import ExportAccountsModal from "./po/exportAccountsModal.page";
+import HideTokenModal from "./po/hideTokenModal.page";
 import fs from "fs";
 import rimraf from "rimraf";
 import path from "path";
@@ -40,10 +45,15 @@ const getMockDeviceEvent = app => async (...events) => {
 };
 
 let app;
-let modalPage;
 let portfolioPage;
+let modalPage;
 let accountPage;
 let accountsPage;
+let addAccountsModal;
+let accountSettingsModal;
+let exportOperationsHistoryModal;
+let exportAccountsModal;
+let hideTokenModal;
 let mockDeviceEvent;
 
 const toMatchImageSnapshot = configureToMatchImageSnapshot({
@@ -115,6 +125,11 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     accountPage = new AccountPage(app);
     accountsPage = new AccountsPage(app);
     portfolioPage = new PortfolioPage(app);
+    addAccountsModal = new AddAccontModal(app);
+    accountSettingsModal = new AccountSettingsModal(app);
+    exportOperationsHistoryModal = new ExportOperationsModal(app);
+    exportAccountsModal = new ExportAccountsModal(app);
+    hideTokenModal = new HideTokenModal(app);
     mockDeviceEvent = getMockDeviceEvent(app);
 
     try {
@@ -196,8 +211,13 @@ export {
   deviceInfo,
   mockListAppsResult,
   mockDeviceEvent,
-  modalPage,
   accountPage,
   accountsPage,
   portfolioPage,
+  modalPage,
+  hideTokenModal,
+  addAccountsModal,
+  accountSettingsModal,
+  exportOperationsHistoryModal,
+  exportAccountsModal,
 };

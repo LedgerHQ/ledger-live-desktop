@@ -1,5 +1,5 @@
 /* eslint-disable jest/no-export */
-import { app, modalPage, accountsPage, accountPage } from "../../common.js";
+import { app, accountSettingsModal, accountsPage, accountPage } from "../../common.js";
 
 const removeAccount = (currency = "global") => {
   describe("remove accounts flow", () => {
@@ -22,11 +22,11 @@ const removeAccount = (currency = "global") => {
 
       const settingsButton = await accountPage.settingsButton;
       await settingsButton.click();
-      await modalPage.isDisplayed();
-      const deleteButton = await modalPage.settingsDeleteButton;
+      await accountSettingsModal.isDisplayed();
+      const deleteButton = await accountSettingsModal.settingsDeleteButton;
       await deleteButton.click();
 
-      await modalPage.confirm();
+      await accountSettingsModal.confirm();
 
       await accountsPage.goToAccounts();
       const newAccounts = await accountsPage.getAccountsRows();

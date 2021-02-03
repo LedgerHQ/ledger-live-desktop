@@ -1,5 +1,5 @@
 /* eslint-disable jest/no-export */
-import { app, modalPage, accountsPage, accountPage } from "../../common.js";
+import { app, accountSettingsModal, accountsPage, accountPage } from "../../common.js";
 
 const editAccountName = (currency = "global") => {
   describe("edit name flow", () => {
@@ -21,7 +21,7 @@ const editAccountName = (currency = "global") => {
       await settingsButton.click();
 
       const newName = "New account name";
-      await modalPage.editAccountName(newName);
+      await accountSettingsModal.editAccountName(newName);
 
       const accountName = await accountPage.accountHeaderName;
       const value = await accountName.getValue();

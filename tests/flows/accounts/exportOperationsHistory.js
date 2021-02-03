@@ -1,5 +1,5 @@
 /* eslint-disable jest/no-export */
-import { app, modalPage, accountsPage } from "../../common.js";
+import { app, exportOperationsHistoryModal, accountsPage } from "../../common.js";
 
 const exportOperationsHistory = (currency = "global") => {
   describe("exports the operations history", () => {
@@ -9,7 +9,7 @@ const exportOperationsHistory = (currency = "global") => {
 
     it("opens the export operations history modal", async () => {
       await accountsPage.exportOperationsHistory();
-      expect(await modalPage.isDisplayed()).toBe(true);
+      expect(await exportOperationsHistoryModal.isDisplayed()).toBe(true);
     });
 
     it("displays a list of accounts", async () => {
@@ -24,7 +24,7 @@ const exportOperationsHistory = (currency = "global") => {
     });
 
     it("selects the first two accounts", async () => {
-      const accounts = await modalPage.getAccountsRows();
+      const accounts = await exportOperationsHistoryModal.getAccountsRows();
       const firstAccount = accounts[0];
       const secondAccount = accounts[1];
 
@@ -50,8 +50,8 @@ const exportOperationsHistory = (currency = "global") => {
     });
 
     it("closes the export operations history modal", async () => {
-      await modalPage.close();
-      expect(await modalPage.isDisplayed(true)).toBe(false);
+      await exportOperationsHistoryModal.close();
+      expect(await exportOperationsHistoryModal.isClosed()).toBe(true);
     });
   });
 };

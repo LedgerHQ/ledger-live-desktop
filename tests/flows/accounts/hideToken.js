@@ -1,5 +1,5 @@
 /* eslint-disable jest/no-export */
-import { app, accountsPage, accountPage, modalPage } from "../../common.js";
+import { app, accountsPage, accountPage, hideTokenModal } from "../../common.js";
 
 const hideToken = (currency = "global") => {
   describe("hide token account", () => {
@@ -21,8 +21,8 @@ const hideToken = (currency = "global") => {
 
       await accountPage.hideFirstToken();
 
-      await modalPage.confirm();
-      await modalPage.isDisplayed(true);
+      await hideTokenModal.confirm();
+      await hideTokenModal.isClosed();
 
       const newTokens = await accountPage.getTokens();
       expect(newTokens).toHaveLength(tokensLength - 1);
