@@ -6,8 +6,10 @@ describe("Global", () => {
   });
 
   beforeEach(async () => {
-    const drawerPortfolioButton = await portfolioPage.drawerPortfolioButton;
-    await drawerPortfolioButton.click();
+    if (await modalPage.isDisplayed()) {
+      await modalPage.close();
+    }
+    await portfolioPage.goToPortfolio();
   });
 
   it("can open send modal", async () => {
@@ -17,7 +19,6 @@ describe("Global", () => {
     expect(await app.client.screenshot(2000)).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-send-modal",
     });
-    await modalPage.close();
   });
 
   it("can open receive modal", async () => {
@@ -27,7 +28,6 @@ describe("Global", () => {
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-receive-modal",
     });
-    await modalPage.close();
   });
 
   it("shows experimental badge, and can access the page", async () => {

@@ -86,8 +86,14 @@ export default class Page {
     return items;
   }
 
+  // Drawer Menu
   async goToAccounts() {
     const btn = await this.drawerAccountsButton;
+    await btn.click();
+  }
+
+  async goToPortfolio() {
+    const btn = await this.drawerPortfolioButton;
     await btn.click();
   }
 
