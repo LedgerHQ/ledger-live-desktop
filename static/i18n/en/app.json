@@ -46,6 +46,7 @@
     "western": "Western",
     "reverify": "Re-verify",
     "verify": "Verify",
+    "verifyMyAddress": "Verify my address",
     "copy": "Copy",
     "copied": "Copied",
     "addressCopied": "Address copied",
@@ -112,6 +113,7 @@
     "hour": "Hour",
     "hour_plural": "Hours",
     "range": {
+      "day": "1D",
       "week": "1W",
       "month": "1M",
       "year": "1Y"
@@ -135,7 +137,7 @@
     "lend": "Lend"
   },
   "stars": {
-    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "placeholder": "Star an account to display it here.",
     "tooltip": "Star account"
   },
   "bridge": {
@@ -1331,7 +1333,10 @@
   "buy": {
     "title": "Buy",
     "titleCrypto": "Buy {{currency}}",
-    "buyCTA": "Buy {{currencyTicker}}"
+    "buyCTA": "Buy {{currencyTicker}}",
+    "withoutDevice": "Don't have your device?",
+    "connectWithoutDevice": "It's better to use your device for optimal security.",
+    "skipConnect": "Continue without device"
   },
   "sell": {
     "title": "Sell",
@@ -2215,24 +2220,24 @@
       },
       "selectUseCase": {
         "greetings": "Hello!",
-        "hasNoRecovery": "First time using your Nano?",
+        "hasNoRecovery": "First time using your {{deviceName}}?",
         "hasRecovery": "Already have a recovery phrase?",
         "separator": "or",
         "options": {
           "1": {
             "heading": "First use",
-            "title": "Set up a new Nano",
+            "title": "Set up a new {{deviceName}}",
             "description": "Let’s start and set up your device!"
           },
           "2": {
             "heading": "Connect device",
-            "title": "Connect your Nano",
+            "title": "Connect your {{deviceName}}",
             "description": "Is your device already set up? Connect it to the app!"
           },
           "3": {
             "heading": "Restore device",
             "title": "Restore your recovery phrase on a new device",
-            "description": "Use an existing recovery phrase to restore your private keys on a new Nano!"
+            "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
           }
         }
       },
@@ -2621,8 +2626,9 @@
   "Terms": {
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
-    "switchLabel": "I have read and agree with the <0>Terms of Use and Privacy Policy</0>",
-    "switchLabelLoss": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to Nano.",
+    "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
+    "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
+    "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
     "cta": "Enter Ledger app"
   },
   "families": {
@@ -2747,8 +2753,8 @@
       "description": "Please contact Ledger Support"
     },
     "CosmosStargateFeb2021Warning": {
-      "title": "Cosmos support is temporarily disabled on Ledger Live.",
-      "description": "Read our article to manage ATOM with your device."
+      "title": "The Cosmos blockchain is planning for an on-chain update on Feb 18th.",
+      "description": "Coming Ledger Live 2.22.0 will continue supporting ATOM."
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
@@ -3168,10 +3174,10 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{unit}} {{minAmountFrom}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be less than {{unit}} {{maxAmountFrom}}"
+      "title": "Amount must be less than {{maxAmountFromFormatted}}"
     }
   }
 }

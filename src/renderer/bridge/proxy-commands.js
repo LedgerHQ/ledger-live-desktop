@@ -67,13 +67,27 @@ const cmdAccountReceive = (o: {
   return bridge.receive(account, o.arg);
 };
 
+const accountsCache: { [_: string]: AccountRaw } = {};
+
+const cmdAccountSyncSet = ({ account }: { account: AccountRaw }): Observable<void> => {
+  accountsCache[account.id] = account;
+  return from([]);
+};
+
 const cmdAccountSync = (o: {
   account: AccountRaw,
   syncConfig: SyncConfig,
 }): Observable<AccountRaw> => {
+  accountsCache[o.account.id] = o.account;
   const account = fromAccountRaw(o.account);
   const bridge = bridgeImpl.getAccountBridge(account, null);
-  return bridge.sync(account, o.syncConfig).pipe(map(f => toAccountRaw(f(account))));
+  return bridge.sync(account, o.syncConfig).pipe(
+    map(f => {
+      const fromCache = accountsCache[o.account.id];
+      const latestAccount = fromCache === o.account ? account : fromAccountRaw(fromCache);
+      return toAccountRaw(f(latestAccount));
+    }),
+  );
 };
 
 const cmdAccountPrepareTransaction = (o: {
@@ -147,4 +161,5 @@ export const commands = {
   AccountBroadcast: cmdAccountBroadcast,
   CurrencyScanAccounts: cmdCurrencyScanAccounts,
   AccountEstimateMaxSpendable: cmdAccountEstimateMaxSpendable,
+  AccountSyncSet: cmdAccountSyncSet,
 };

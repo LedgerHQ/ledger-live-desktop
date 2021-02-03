@@ -3,6 +3,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import InfoCircle from "../icons/InfoCircle";
+import IconShield from "../icons/Shield";
 import type { ThemedComponent } from "../styles/StyleProvider";
 import Box from "./Box";
 import Text from "./Text";
@@ -28,7 +29,11 @@ export default function InfoBox({
   const label = learnMoreLabel || t("common.learnMore");
   return (
     <Container type={type}>
-      <InfoCircle size={16} />
+      {type === "security" ? (
+        <IconShield color={colors.alertRed} height={32} width={28} />
+      ) : (
+        <InfoCircle size={16} />
+      )}
       <Box flex="1" ml={16} horizontal={horizontal} alignItems="center">
         <Box flex="1" style={{ wordBreak: "break-all" }}>
           <Text ff="Inter|Regular" fontSize={3} style={{ wordBreak: "break-word" }}>
@@ -58,11 +63,15 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(props => ({
       ? p.theme.colors.palette.action.hover
       : p.type === "warning"
       ? colors.lightWarning
+      : p.type === "security"
+      ? "rgba(234, 46, 73, 0.1)"
       : p.theme.colors.palette.text.shade10};
   color: ${p =>
     p.type === "primary"
       ? p.theme.colors.palette.primary.main
       : p.type === "warning"
       ? colors.orange
+      : p.type === "security"
+      ? colors.alertRed
       : p.theme.colors.palette.text.shade50};
 `;

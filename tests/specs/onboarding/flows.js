@@ -15,7 +15,7 @@ export const selection = device => {
     });
   });
   it("accept terms", async () => {
-    const lossCB = await $("#modal-terms-checkbox-loss");
+    const lossCB = await $("#modal-terms-privacy-policy");
     const termCB = await $("#modal-terms-checkbox");
     const cta = await $("#modal-confirm-button");
     await lossCB.click();

@@ -20,10 +20,11 @@ import ReadOnlyAddressField from "~/renderer/components/ReadOnlyAddressField";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import LinkShowQRCode from "~/renderer/components/LinkShowQRCode";
 import SuccessDisplay from "~/renderer/components/SuccessDisplay";
-import IconShield from "~/renderer/icons/Shield";
+import Receive2NoDevice from "~/renderer/components/Receive2NoDevice";
 import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/rendering";
 import type { StepProps } from "../Body";
 import Modal from "~/renderer/components/Modal";
+import InfoBox from "~/renderer/components/InfoBox";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import QRCode from "~/renderer/components/QRCode";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
@@ -31,6 +32,10 @@ import { getEnv } from "@ledgerhq/live-common/lib/env";
 const Separator = styled.div`
   border-top: 1px solid #99999933;
   margin: 50px 0;
+`;
+const Separator2 = styled.div`
+  border-top: 1px solid #99999933;
+  margin-top: 50px;
 `;
 
 const QRCodeWrapper = styled.div`
@@ -67,34 +72,6 @@ const Receive1ShareAddress = ({
         <LinkShowQRCode onClick={showQRCodeModal} address={address} />
       </Box>
       <ReadOnlyAddressField address={address} />
-    </>
-  );
-};
-
-const Receive2NoDevice = ({ onVerify, name }: { onVerify: () => void, name: string }) => {
-  return (
-    <>
-      <Box horizontal flow={2} mt={2} alignItems="center">
-        <Box color="alertRed">
-          <IconShield height={32} width={28} />
-        </Box>
-        <Text fontSize={12} color="alertRed" ff="Inter" style={{ flexShrink: "unset" }}>
-          <span style={{ marginRight: 10 }}>
-            <Trans i18nKey="currentAddress.messageIfSkipped" values={{ name }} />
-          </span>
-          <LinkWithExternalIcon
-            style={{ display: "inline-flex" }}
-            onClick={() => openURL(urls.recipientAddressInfo)}
-            label={<Trans i18nKey="common.learnMore" />}
-          />
-        </Text>
-      </Box>
-
-      <Box pt={4} horizontal justifyContent="center">
-        <Button primary onClick={onVerify}>
-          <Trans i18nKey="common.verify" />
-        </Button>
-      </Box>
     </>
   );
 };
@@ -233,8 +210,20 @@ const StepReceiveFunds = ({
           // User explicitly bypass device verification (no device)
           <>
             <Receive1ShareAddress name={name} address={address} showQRCodeModal={showQRCodeModal} />
-            <Separator />
-            <Receive2NoDevice onVerify={onVerify} name={name} />
+            <Box mt={4} />
+            <InfoBox
+              onLearnMore={() => openURL(urls.recipientAddressInfo)}
+              onLearnMoreLabel={<Trans i18nKey="common.learnMore" />}
+              type="security"
+            >
+              <Trans i18nKey="currentAddress.messageIfSkipped" values={{ name }} />
+            </InfoBox>
+            <Separator2 />
+            <Receive2NoDevice
+              onVerify={onVerify}
+              onContinue={() => onChangeAddressVerified(true)}
+              name={name}
+            />
           </>
         ) : device ? (
           // verification with device
