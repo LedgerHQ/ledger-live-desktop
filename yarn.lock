@@ -1502,10 +1502,10 @@
     node-pre-gyp "^0.17.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^18.3.4":
-  version "18.3.4"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-18.3.4.tgz#177d8d4c967ce1d93e29f8bcfff9d12471660234"
-  integrity sha512-MvyQJ4SkrFMKikeN0ojkrQEusT3hbq6wacckitOInXsDrLjlMpCrWzNa/Coxw7CzG51obb0jlchCrXjxyDxy+Q==
+"@ledgerhq/live-common@ˆ18.3.4-proxy.2":
+  version "18.3.4-proxy.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-18.3.4-proxy.2.tgz#8a5e96f30e94caf9494243095c7fa3c8bd2e8ec3"
+  integrity sha512-I++I63rHe+6zU6SNlynoWrqa5eff3xQJsc/60FnB6hFmcU0ArIIixtPC6c6KOJSiY7XnExp7mYNdI9PvfyMI8Q==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/cryptoassets" "5.42.1"
@@ -1539,6 +1539,7 @@
     ethereumjs-tx "^2.1.2"
     ethereumjs-util "^7.0.7"
     expect "^26.6.2"
+    https-proxy-agent "^5.0.0"
     invariant "^2.2.2"
     isomorphic-ws "^4.0.1"
     lodash "^4.17.20"
