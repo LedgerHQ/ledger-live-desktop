@@ -1,5 +1,4 @@
 const core = require("@actions/core");
-const fetch = require("isomorphic-unfetch");
 
 const main = async () => {
   const images = core.getInput("images");
