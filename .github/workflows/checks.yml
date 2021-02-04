@@ -137,7 +137,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
       - name: deps
-        run: cd .github/actions/post-comment && yarn add @actions/core isomorphic-unfetch
+        run: cd .github/actions/post-comment && yarn
       - name: post comment
         if: github.event_name == 'pull_request'
         id: comment
