@@ -121,7 +121,6 @@ jobs:
           imgChanged: ${{steps.imgChanged.outputs.content}}
           from: ${{github.base_ref}}
           to: ${{github.event.pull_request.head.sha}}
-          prNumber: ${{github.event.pull_request.number}}
       - name: display comment
         if: always()
         id: displaycomment
@@ -133,6 +132,13 @@ jobs:
     needs: test
     if: always() && needs.test.result != 'cancelled'
     steps:
+      - name: post comment
+        if: always() && github.event_name == 'pull_request'
+        id: comment
+        uses: ./.github/actions/post-comment
+        with:
+          comment: ${{ needs.test.outputs.comment }}
+          prNumber: ${{github.event.pull_request.number}}
       - name: Send message to Slack channel
         uses: archive/github-actions-slack@v1.0.3
         if: github.event_name == 'push'
