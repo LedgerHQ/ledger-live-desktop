@@ -176,7 +176,7 @@ describe("Swap", () => {
     const firstRow = await $(".swap-history-row:first-child");
     await firstRow.waitForDisplayed();
     await firstRow.click();
-    await modalPage.isDisplayed();
+    await modalPage.waitForDisplayed();
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-history-modal",
