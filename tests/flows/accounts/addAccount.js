@@ -33,7 +33,7 @@ const addAccount = currency => {
         ? await portfolioPage.emtpyStateAddAccountButton
         : await accountsPage.addAccountButton;
       await addAccountButton.click();
-
+      await addAccountsModal.waitForDisplayed();
       await addAccountsModal.addAccountFlow(currency, mockDeviceEvent);
       await addAccountsModal.close();
 
