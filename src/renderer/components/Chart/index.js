@@ -163,7 +163,7 @@ export default function Chart({
               zeroLineColor: theme.text.shade10,
             },
             ticks: {
-              beginAtZero: true,
+              beginAtZero: false,
               suggestedMax: 10 ** Math.max(magnitude - 4, 1),
               maxTicksLimit: 4,
               fontColor: theme.text.shade60,

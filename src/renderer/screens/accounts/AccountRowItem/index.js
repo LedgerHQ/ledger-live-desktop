@@ -244,15 +244,16 @@ class AccountRowItem extends PureComponent<Props, State> {
 
     return (
       <div
-        className={"accounts-account-row-item"}
+        className={`accounts-account-row-item ${tokens && tokens.length > 0 ? "has-tokens" : ""}`}
         style={{ position: "relative" }}
         key={key}
         hidden={hidden}
+        onClick={this.onClick}
       >
         <span style={{ position: "absolute", top: -70 }} ref={this.scrollTopFocusRef} />
         <Row expanded={expanded} tokens={showTokensIndicator} key={mainAccount.id}>
           <AccountContextMenu account={account}>
-            <RowContent disabled={disabled} onClick={this.onClick}>
+            <RowContent disabled={disabled}>
               <Header account={account} name={mainAccount.name} />
               <Box flex="12%">
                 <div>
