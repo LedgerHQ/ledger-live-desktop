@@ -132,8 +132,12 @@ jobs:
     needs: test
     if: always() && needs.test.result != 'cancelled'
     steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
       - name: post comment
-        if: always() && github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request'
         id: comment
         uses: ./.github/actions/post-comment
         with:
