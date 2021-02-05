@@ -19,7 +19,7 @@ const showOperations = (currency = "global") => {
     it("show the first operation", async () => {
       await accountPage.clickFirstOperationRow();
 
-      await modalPage.isDisplayed();
+      await modalPage.waitForDisplayed();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `${currency}-account-operation-details`,
       });

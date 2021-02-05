@@ -7,7 +7,7 @@ import exportAccountsToMobile from "../../flows/accounts/exportAccountsToMobile"
 import exportOperationsHistory from "../../flows/accounts/exportOperationsHistory";
 import hideToken from "../../flows/accounts/hideToken";
 import removeAccount from "../../flows/accounts/removeAccount";
-import showOperations from "tests/flows/accounts/showOperations";
+import showOperations from "../../flows/accounts/showOperations";
 
 export const globalAccountsFlows = (hasStarredAccounts = false) => {
   sortAccounts();
@@ -19,7 +19,7 @@ export const globalAccountsFlows = (hasStarredAccounts = false) => {
   hideToken();
 };
 
-export const accountsFlows = (currency) => {
+export const accountsFlows = currency => {
   sortAccounts(currency);
   rangeAndDisplay(currency);
   showOperations(currency);
@@ -30,7 +30,7 @@ export const accountsFlows = (currency) => {
   exportOperationsHistory(currency);
 };
 
-export const accountsWithTokenFlows = (currency) => {
+export const accountsWithTokenFlows = currency => {
   sortAccounts(currency);
   rangeAndDisplay(currency);
   removeAccount(currency);

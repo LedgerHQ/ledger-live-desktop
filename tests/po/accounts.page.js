@@ -4,7 +4,7 @@ import Page from "./page";
 
 export default class AccountsPage extends Page {
   get searchBoxInput() {
-    return this.$("accounts-search-input");
+    return this.$("#accounts-search-input");
   }
 
   get sortSelectButton() {

@@ -35,6 +35,11 @@ export default class AccountPage extends Page {
     return list.$$(".token-row");
   }
 
+  async getOperationRows() {
+    const operationList = await this.operationsList;
+    return operationList.$$(".operation-row");
+  }
+
   async hideFirstToken() {
     const tokens = await this.getTokens();
     const [token] = tokens;
@@ -45,7 +50,7 @@ export default class AccountPage extends Page {
   }
 
   async clickFirstOperationRow() {
-    const operationRows = await this.operationsList.$$(".operation-row");
+    const operationRows = await this.getOperationRows();
 
     const firstOperationRow = operationRows[0];
     await firstOperationRow.click();
