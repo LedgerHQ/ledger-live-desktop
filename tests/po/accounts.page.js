@@ -3,6 +3,10 @@ import Page from "./page";
 // type SortType = "highestBalance" | "lowestBalance" | "AZ" | "ZA";
 
 export default class AccountsPage extends Page {
+  get searchBoxInput() {
+    return this.$("accounts-search-input");
+  }
+
   get sortSelectButton() {
     return this.$("#accounts-order-select-button");
   }
@@ -109,5 +113,10 @@ export default class AccountsPage extends Page {
 
     const btn = await this.exportOperationsHistoryButton;
     await btn.click();
+  }
+
+  async searchAccount(searchQuery) {
+    const searchBox = await this.searchBoxInput;
+    await searchBox.setValue(searchQuery);
   }
 }

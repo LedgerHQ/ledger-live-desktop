@@ -115,7 +115,7 @@ export class OperationsList extends PureComponent<Props, State> {
     const accountsMap = keyBy(all, "id");
 
     return (
-      <Card>
+      <Card id="operation-list">
         {title && (
           <Box py={3} px={4}>
             <Text
