@@ -1502,10 +1502,10 @@
     node-pre-gyp "^0.17.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@18.3.4-beta-stargate":
-  version "18.3.4-beta-stargate"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-18.3.4-beta-stargate.tgz#462c902597d7b727b0084453102268670cca6f6f"
-  integrity sha512-7dBsJOtIYyVoIpqjbfSCt31b2xF5CCzEhw60z47vlUbNUq1xNHgec09OtZSkUAyrd1U/46tYhoAuK4FnJKu/Tw==
+"@ledgerhq/live-common@18.3.4-beta-stargate.1":
+  version "18.3.4-beta-stargate.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-18.3.4-beta-stargate.1.tgz#d1431c2e1513df797777f369a40ef993be58ccb7"
+  integrity sha512-0DwIHk/XmeyfAnmL/freVwOb6ii1MIt9j+u0PsX6mRqKO0onIzsJ3lrtkBFxaMYHsvZ07PnBU783qgHVKmzpfA==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/cryptoassets" "5.42.1"
@@ -1539,7 +1539,6 @@
     ethereumjs-tx "^2.1.2"
     ethereumjs-util "^7.0.7"
     expect "^26.6.2"
-    https-proxy-agent "^5.0.0"
     invariant "^2.2.2"
     isomorphic-ws "^4.0.1"
     lodash "^4.17.20"
