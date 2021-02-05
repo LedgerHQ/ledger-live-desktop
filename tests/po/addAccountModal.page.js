@@ -32,7 +32,9 @@ export default class AddAccountModal extends Modal {
     await selectControl.click();
 
     const input = await selectControl.$("input");
-    await input.addValue(currency);
+    await input.click();
+    this.app.client.pause(500);
+    await input.setValue(currency);
   }
 
   async finishAddAccount(mockDeviceEvent) {
