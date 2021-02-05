@@ -11,7 +11,7 @@ export default class AddAccountModal extends Modal {
     await selectControl.click();
 
     const input = await selectControl.$("input");
-    await this.app.client.pause(300);
+    await this.app.client.pause(600);
     await input.addValue(currency);
     await this.app.client.pause(300);
     const firstOption = await this.$(".select-options-list .option:first-child");
