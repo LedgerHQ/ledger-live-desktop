@@ -95,9 +95,13 @@ export const onboard = device => {
       await firstUse.click();
       const right = await $("#pedagogy-right");
       await right.click();
+      await app.client.pause(200);
       await right.click();
+      await app.client.pause(200);
       await right.click();
+      await app.client.pause(200);
       await right.click();
+      await app.client.pause(200);
       const cta = await $("#setup-nano-wallet-cta");
       await cta.click();
       await app.client.pause(700);
