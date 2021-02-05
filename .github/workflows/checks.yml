@@ -19,7 +19,7 @@ jobs:
 #          access_token: ${{ github.token }}
   test:
     runs-on: ubuntu-latest
-#   needs: cancel-previous
+#    needs: cancel-previous
     outputs:
       comment: ${{ steps.comment.outputs.body }}
       commentSlack: ${{ steps.comment.outputs.bodySlack }}
