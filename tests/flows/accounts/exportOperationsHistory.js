@@ -15,6 +15,9 @@ const exportOperationsHistory = (currency = "global") => {
     it("displays a list of accounts", async () => {
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `${currency}-export-operations-history-modal-open`,
+        // https://github.com/LedgerHQ/ledger-live-desktop/pull/3546#issuecomment-774141490
+        failureThreshold: 1,
+        failureThresholdType: "pixel",
       });
     });
 
