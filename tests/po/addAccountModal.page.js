@@ -36,6 +36,15 @@ export default class AddAccountModal extends Modal {
   }
 
   async finishAddAccount(mockDeviceEvent) {
+    let i = 0;
+    // ugly hack
+    while (
+      !(await this.app.client.isExisting(".select-options-list .option:first-child")) &&
+      i < 3
+    ) {
+      i++;
+      await this.app.client.pause(1000);
+    }
     const firstOption = await this.$(".select-options-list .option:first-child");
     await firstOption.click();
 
