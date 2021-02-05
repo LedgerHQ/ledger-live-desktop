@@ -7,6 +7,11 @@ const showOperations = (currency = "global") => {
       await accountsPage.goToAccounts();
     });
 
+    afterAll(async () => {
+      await modalPage.close();
+      await modalPage.waitForClosed();
+    });
+
     it("show the first account", async () => {
       await accountsPage.searchAccount(currency);
       const firstAccountRow = await accountsPage.getFirstAccountRow();
@@ -23,7 +28,6 @@ const showOperations = (currency = "global") => {
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `${currency}-account-operation-details`,
       });
-      await modalPage.close();
     });
   });
 };
