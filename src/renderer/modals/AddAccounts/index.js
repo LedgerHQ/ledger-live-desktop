@@ -146,7 +146,7 @@ class AddAccounts extends PureComponent<Props, State> {
         existingAccounts,
         selectedIds: checkedAccountsIds,
         renamings: editedNames,
-      }).sort((a1, a2) => (a1.name < a2.name ? -1 : 1)),
+      }),
     );
   };
 

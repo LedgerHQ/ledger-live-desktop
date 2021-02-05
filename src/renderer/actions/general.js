@@ -100,19 +100,20 @@ export function useRefreshAccountsOrderingEffect({
   onMount?: boolean,
   onUnmount?: boolean,
 }) {
-  const refreshAccountsOrdering = useRefreshAccountsOrdering();
+  const comparator = useSortAccountsComparator();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (onMount) {
-      refreshAccountsOrdering();
+      dispatch(reorderAccounts(comparator));
     }
 
     return () => {
       if (onUnmount) {
-        refreshAccountsOrdering();
+        dispatch(reorderAccounts(comparator));
       }
     };
-  }, [onMount, onUnmount, refreshAccountsOrdering]);
+  }, [comparator, dispatch, onMount, onUnmount]);
 }
 
 export const themeSelector: OutputSelector<State, void, string> = createSelector(
