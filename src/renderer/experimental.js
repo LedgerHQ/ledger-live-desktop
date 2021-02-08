@@ -1,4 +1,6 @@
 // @flow
+import { findCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
+import { explorerConfig } from "@ledgerhq/live-common/lib/api/explorerConfig";
 import { isEnvDefault, changes } from "@ledgerhq/live-common/lib/env";
 import type { EnvName } from "@ledgerhq/live-common/lib/env";
 
@@ -25,6 +27,16 @@ export type FeatureToggle =
     };
 
 export type Feature = FeatureCommon & FeatureToggle;
+
+const deltaExperimentalExplorers = Object.keys(explorerConfig)
+  .map(currencyId => {
+    const c = findCryptoCurrencyById(currencyId);
+    if (!c || c.terminated) return null;
+    const config = explorerConfig[currencyId];
+    if (!config || !config.experimental) return null;
+    return [c, config];
+  })
+  .filter(Boolean);
 
 export const experimentalFeatures: Feature[] = [
   {
@@ -54,13 +66,28 @@ export const experimentalFeatures: Feature[] = [
     description:
       "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account.",
   },
-  {
-    type: "toggle",
-    name: "EXPERIMENTAL_EXPLORERS",
-    title: "Experimental Explorers API",
-    description:
-      "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.",
-  },
+  ...(deltaExperimentalExplorers.length
+    ? [
+        {
+          type: "toggle",
+          name: "EXPERIMENTAL_EXPLORERS",
+          title: "Experimental Explorers API",
+          description:
+            "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(" +
+            deltaExperimentalExplorers
+              .map(
+                ([currency, config]) =>
+                  currency.ticker +
+                  " " +
+                  config.stable.version +
+                  "->" +
+                  (config.experimental?.version || "?"),
+              )
+              .join(", ") +
+            ")",
+        },
+      ]
+    : []),
   {
     type: "integer",
     name: "KEYCHAIN_OBSERVABLE_RANGE",
