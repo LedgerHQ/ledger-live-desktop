@@ -4,43 +4,18 @@ import React, { PureComponent } from "react";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { getTagDerivationMode } from "@ledgerhq/live-common/lib/derivation";
 import { darken } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Box, { Tabbable } from "~/renderer/components/Box";
-import Text from "~/renderer/components/Text";
 import CheckBox from "~/renderer/components/CheckBox";
 import CryptoCurrencyIconWithCount from "~/renderer/components/CryptoCurrencyIconWithCount";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import Input from "~/renderer/components/Input";
+import AccountTagDerivationMode from "../AccountTagDerivationMode";
 
 const InputWrapper = styled.div`
   margin-left: 4px;
-
-  & > div > div {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
 `;
-
-const CurrencyLabel = styled(Text).attrs(() => ({
-  color: "palette.text.shade60",
-  ff: "Inter|SemiBold",
-  fontSize: 1,
-}))`
-  padding: 0 6px;
-  height: 24px;
-  line-height: 24px;
-  border-color: currentColor;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 4px;
-  text-align: center;
-  flex: 0 0 auto;
-  box-sizing: content-box;
-  text-transform: uppercase;
-`;
-
 type Props = {
   account: Account,
   isChecked?: boolean,
@@ -108,10 +83,7 @@ export default class AccountRow extends PureComponent<Props> {
 
     const tokenCount = (account.subAccounts && account.subAccounts.length) || 0;
 
-    const tag =
-      account.derivationMode !== undefined &&
-      account.derivationMode !== null &&
-      getTagDerivationMode(account.currency, account.derivationMode);
+    const tag = <AccountTagDerivationMode account={account} />;
 
     return (
       <AccountRowContainer
@@ -120,7 +92,15 @@ export default class AccountRow extends PureComponent<Props> {
         onClick={isDisabled ? null : this.onToggleAccount}
       >
         <CryptoCurrencyIconWithCount currency={account.currency} count={tokenCount} withTooltip />
-        <Box shrink grow ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
+        <Box
+          shrink
+          grow
+          ff="Inter|SemiBold"
+          color="palette.text.shade100"
+          horizontal
+          alignItems="center"
+          fontSize={4}
+        >
           {onEditName ? (
             <InputWrapper>
               <Input
@@ -135,13 +115,16 @@ export default class AccountRow extends PureComponent<Props> {
                 maxLength={getEnv("MAX_ACCOUNT_NAME_SIZE")}
                 editInPlace
                 autoFocus={autoFocusInput}
+                renderRight={tag}
               />
             </InputWrapper>
           ) : (
-            <div style={{ ...this.overflowStyles, paddingLeft: 15 }}>{accountName}</div>
+            <div style={{ ...this.overflowStyles, paddingLeft: 15, marginLeft: 4 }}>
+              {accountName}
+              {tag}
+            </div>
           )}
         </Box>
-        {tag ? <CurrencyLabel>{tag}</CurrencyLabel> : null}
         {!hideAmount ? (
           <FormattedVal
             val={account.balance}

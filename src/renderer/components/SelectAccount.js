@@ -21,6 +21,7 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import Select from "~/renderer/components/Select";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import Ellipsis from "~/renderer/components/Ellipsis";
+import AccountTagDerivationMode from "./AccountTagDerivationMode";
 
 const mapStateToProps = createStructuredSelector({
   accounts: shallowAccountsSelector,
@@ -100,11 +101,14 @@ const AccountOption = React.memo(function AccountOption({
     <Box grow horizontal alignItems="center" flow={2} style={{ opacity: disabled ? 0.2 : 1 }}>
       {!isValue && nested ? tokenTick : null}
       <CryptoCurrencyIcon currency={currency} size={16} />
-      <div style={{ flex: 1 }}>
-        <Ellipsis ff="Inter|SemiBold" fontSize={4}>
-          {name}
-        </Ellipsis>
-      </div>
+      <Box flex="1" horizontal alignItems="center">
+        <Box flex="0 1 auto">
+          <Ellipsis ff="Inter|SemiBold" fontSize={4}>
+            {name}
+          </Ellipsis>
+        </Box>
+        <AccountTagDerivationMode account={account} />
+      </Box>
       <Box>
         <FormattedVal color="palette.text.shade60" val={balance} unit={unit} showCode />
       </Box>
