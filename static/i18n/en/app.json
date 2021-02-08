@@ -1037,6 +1037,7 @@
     "loading": "Loading...",
     "connectAndUnlockDevice": "Connect and unlock your device",
     "unlockDevice": "Unlock your device",
+    "unlockDeviceAfterFirmwareUpdate": "Wait for firmware to update and unlock your device",
     "quitApp": "Quit the application on your device",
     "appNotInstalled": "Please install the {{appName}} app",
     "openManager": "Open Manager",
@@ -1168,6 +1169,7 @@
       "steps": {
         "downloadingUpdate": "Downloading update",
         "updateMCU": "Firmware update",
+        "updating": "Firmware update",
         "reset": "Prepare device",
         "osu": "Installing OSU...",
         "flash-mcu": "MCU updating...",
