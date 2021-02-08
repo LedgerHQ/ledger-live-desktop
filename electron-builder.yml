@@ -6,6 +6,7 @@ protocols:
     - ledgerlive
 
 afterSign: scripts/notarize.js
+afterAllArtifactBuild: scripts/extract-uninstaller.js
 
 mac:
   artifactName: ${name}-${version}-${os}.${ext}

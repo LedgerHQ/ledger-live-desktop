@@ -180,6 +180,7 @@
     "jest-image-snapshot": "https://github.com/machard/jest-image-snapshot#machard-patch-1",
     "listr": "^0.14.3",
     "listr-verbose-renderer": "^0.6.0",
+    "node-7z-archive": "^1.0.4",
     "nyc": "^15.1.0",
     "prettier": "^1.19.1",
     "spectron": "^13.0.0",

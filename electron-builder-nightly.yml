@@ -5,6 +5,8 @@ protocols:
   schemes:
     - ledgerlive
 
+afterAllArtifactBuild: scripts/extract-uninstaller.js
+
 mac:
   artifactName: ${name}-${version}-${os}.${ext}
   category: public.app-category.wallet
