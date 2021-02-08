@@ -1,4 +1,4 @@
-import initialize, { app, portfolioPage, modalPage } from "../common.js";
+import initialize, { app, portfolioPage, modalPage, sendModalPage } from "../common.js";
 
 describe("Global", () => {
   initialize("global", {
@@ -10,7 +10,12 @@ describe("Global", () => {
     const sendButton = await portfolioPage.drawerSendButton;
     await sendButton.click();
     await modalPage.waitForDisplayed();
-    expect(await app.client.screenshot(2000)).toMatchImageSnapshot({
+
+    // FIXME: <LL-XXXX> loading animation at the opening of the modal
+    const continueButton = await sendModalPage.continueButton;
+    await continueButton.waitUntilTextMatches("Continue");
+
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-send-modal",
     });
   });
@@ -44,7 +49,6 @@ describe("Global", () => {
     const starredAccounts = await portfolioPage.getBookmarkedAccounts();
     const firstStarredAccount = starredAccounts[0];
     firstStarredAccount.click();
-    await app.client.pause(1000);
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-starred-account",
@@ -55,7 +59,6 @@ describe("Global", () => {
     await portfolioPage.goToPortfolio();
     const topbarDiscreetButton = await portfolioPage.topbarDiscreetButton;
     await topbarDiscreetButton.click();
-    await app.client.pause(1000);
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-discreet-mode",
@@ -79,11 +82,9 @@ describe("Global", () => {
 
     const carouselDismissButton = await portfolioPage.carouselDismissButton;
     await carouselDismissButton.click();
-    await app.client.pause(400);
 
     const carouselDismissConfirmButton = await portfolioPage.carouselDismissConfirmButton;
     await carouselDismissConfirmButton.click();
-    await app.client.pause(400);
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-dismiss-carousel",

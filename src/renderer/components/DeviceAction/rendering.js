@@ -472,7 +472,7 @@ export const renderLoading = ({
   modelId: DeviceModelId,
   children?: React$Node,
 }) => (
-  <Wrapper id="deviceAction-loading">
+  <Wrapper id="device-action-loading">
     <Header />
     <AnimationWrapper modelId={modelId}>
       <BigSpinner size={50} />

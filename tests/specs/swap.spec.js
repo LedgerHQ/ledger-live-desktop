@@ -54,7 +54,7 @@ describe("Swap", () => {
     const fromCurrency = await $("#swap-form-from-currency .select__control");
     await fromCurrency.waitForDisplayed();
 
-    expect(await app.client.screenshot(2000)).toMatchImageSnapshot({
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-kyc-done",
     });
   });
@@ -79,7 +79,6 @@ describe("Swap", () => {
     await toCurrencyInput.addValue("ethereum");
     const toCurrencyFirstOption = await $(".select-options-list .option:first-child");
     await toCurrencyFirstOption.click();
-    await app.client.pause(2000);
     const continueButton = await $("#swap-form-continue-button");
     await continueButton.waitForEnabled();
 
@@ -98,7 +97,7 @@ describe("Swap", () => {
     await summaryProviderCheckbox.waitForDisplayed();
     await summaryProviderCheckbox.click();
 
-    expect(await app.client.screenshot(1000)).toMatchImageSnapshot({
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-summary-step",
     });
   });
@@ -112,10 +111,8 @@ describe("Swap", () => {
     // init-swap command (Extra pauses because otherwise the UI will not be visible)
     await mockDeviceEvent({ type: "opened" });
     await mockDeviceEvent({ type: "init-swap-requested" });
-    await app.client.pause(2000);
     const confirmationStep = await $("#swap-modal-device-confirm");
     await confirmationStep.waitForDisplayed();
-    await app.client.pause(1000);
     await mockDeviceEvent(
       {
         type: "init-swap-result",
@@ -151,11 +148,9 @@ describe("Swap", () => {
 
     // Silent signing, then automatic broadcasting triggered.
     await mockDeviceEvent({ type: "opened" }, { type: "complete" });
-    await app.client.pause(5000); // Signing step takes time
 
     const finishedStep = await $("#swap-modal-finished-close-button");
     await finishedStep.waitForDisplayed();
-    await app.client.pause(1000);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-end-0",
     });

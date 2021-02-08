@@ -6,6 +6,7 @@ import { Application } from "spectron";
 import _ from "lodash";
 import { configureToMatchImageSnapshot } from "jest-image-snapshot";
 import ModalPage from "./po/modal.page";
+import SendModalPage from "./po/sendmodal.page";
 import AccountsPage from "./po/accounts.page";
 import AccountPage from "./po/account.page";
 import PortfolioPage from "./po/portfolio.page";
@@ -47,6 +48,7 @@ const getMockDeviceEvent = app => async (...events) => {
 let app;
 let portfolioPage;
 let modalPage;
+let sendModalPage;
 let accountPage;
 let accountsPage;
 let addAccountsModal;
@@ -100,7 +102,6 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
 
     app = new Application({
       path: require("electron"), // just to make spectron happy since we override everything below
-      waitTimeout: 15000,
       webdriverOptions: {
         capabilities: {
           "goog:chromeOptions": {
@@ -122,6 +123,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     });
 
     modalPage = new ModalPage(app);
+    sendModalPage = new SendModalPage(app);
     accountPage = new AccountPage(app);
     accountsPage = new AccountsPage(app);
     portfolioPage = new PortfolioPage(app);
@@ -139,16 +141,22 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       console.log("app start error", e);
     }
 
-    app.client.addCommand("waitForSync", async () => {
-      const sync = await app.client.$("#topbar-synchronized");
-      await sync.waitForDisplayed();
-    });
+    app.client.addCommand(
+      "waitUntilTextMatches",
+      function(text, timeout = 1000) {
+        return this.waitUntil(async () => (await this.getText()) === text, {
+          timeout: timeout,
+          timeoutMsg: `expected text to be different after ${timeout} ms.`,
+        });
+      },
+      true,
+    );
 
-    app.client.addCommand("screenshot", async function(countdown = 500) {
+    app.client.addCommand("screenshot", async function() {
       const unfocus = await app.client.$("#unfocus-please");
       await unfocus.click();
 
-      await this.pause(countdown);
+      await app.client.waitUntilWindowLoaded();
 
       const pageRect = await app.client.execute(() => {
         return {
@@ -215,6 +223,7 @@ export {
   accountsPage,
   portfolioPage,
   modalPage,
+  sendModalPage,
   hideTokenModal,
   addAccountsModal,
   accountSettingsModal,

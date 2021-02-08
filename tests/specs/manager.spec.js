@@ -36,7 +36,11 @@ describe("Manager", () => {
       },
       { type: "complete" },
     );
-    await app.client.pause(4000);
+
+    await app.client.waitUntilWindowLoaded();
+    const deviceActionLoading = await $("#manager-container");
+    await deviceActionLoading.waitForExist();
+
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "manager-catalog",
     });
@@ -45,7 +49,9 @@ describe("Manager", () => {
   it("can install an app", async () => {
     const installTronButton = await $("#appActionsInstall-Tron");
     await installTronButton.click();
-    await app.client.pause(3000);
+    const progressBar = await $("#manager-app-progress-bar");
+    await app.client.waitUntilWindowLoaded();
+    await progressBar.waitForExist({ timeout: 15000, reverse: true });
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "manager-install-tron",
     });
@@ -60,9 +66,10 @@ describe("Manager", () => {
   });
 
   it("can uninstall an app", async () => {
-    const installTronButton = await $("#appActionsUninstall-Tron");
-    await installTronButton.click();
-    await app.client.pause(3000);
+    const uninstallTronButton = await $("#appActionsUninstall-Tron");
+    await uninstallTronButton.click();
+    await app.client.waitUntilWindowLoaded();
+    await uninstallTronButton.waitForExist({ timeout: 5000, reverse: true });
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "manager-uninstall-tron",
     });
@@ -73,7 +80,8 @@ describe("Manager", () => {
     await catalogButton.click();
     const updateAllbutton = await $("#managerAppsList-updateAll");
     await updateAllbutton.click();
-    await app.client.pause(3000);
+    await app.client.waitUntilWindowLoaded();
+    await updateAllbutton.waitForExist({ timeout: 5000, reverse: true });
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "manager-updateAll",
     });

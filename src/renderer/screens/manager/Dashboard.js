@@ -71,7 +71,7 @@ const Dashboard = ({ device, deviceInfo, result, onReset, appsToRestore }: Props
   }, [result]);
 
   return (
-    <Box flow={4} selectable>
+    <Box id="manager-container" flow={4} selectable>
       <TrackPage
         category="Manager"
         name="Dashboard"
