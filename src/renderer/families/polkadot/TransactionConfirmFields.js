@@ -14,6 +14,7 @@ import type { FieldComponentProps } from "~/renderer/components/TransactionConfi
 import WarnBox from "~/renderer/components/WarnBox";
 import Box from "~/renderer/components/Box";
 import { OperationDetailsValidators } from "./operationDetails";
+import InfoBox from "~/renderer/components/InfoBox";
 
 const Info: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|SemiBold",
@@ -85,6 +86,16 @@ const Title = ({ transaction }: { transaction: Transaction }) => {
   );
 };
 
+const Footer = ({ transaction }: { transaction: Transaction }) => {
+  invariant(transaction.family === "polkadot", "polkadot transaction");
+
+  return (
+    <InfoBox type="grey">
+      <Trans i18nKey={`TransactionConfirm.networkFees`} />
+    </InfoBox>
+  );
+};
+
 const fieldComponents = {
   "polkadot.validators": PolkadotValidatorsField,
 };
@@ -93,5 +104,5 @@ export default {
   fieldComponents,
   warning: Warning,
   title: Title,
-  disableFees: () => true,
+  footer: Footer,
 };

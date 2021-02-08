@@ -2873,7 +2873,8 @@
       "optIn": "destinataire",
       "nominate": "validateur"
     },
-    "votes": "Votes ({{count}})"
+    "votes": "Votes ({{count}})",
+    "networkFees": "Les frais sont determinés automatiquement par le consensus Polkadot, vous ne pouvez pas les vérifier sur votre Nano"
   },
   "RecipientField": {
     "placeholder": "Entrer l'adresse {{currencyName}}"

@@ -143,6 +143,7 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
   };
   const Warning = r && r.warning;
   const Title = r && r.title;
+  const Footer = r && r.footer;
 
   const fields = getDeviceTransactionConfig({
     account,
@@ -202,6 +203,8 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
           );
         })}
       </Box>
+
+      {Warning ? <Footer transaction={transaction} /> : null}
 
       {renderVerifyUnwrapped({ modelId: device.modelId, type })}
     </Container>

@@ -15,7 +15,37 @@ type Props = {
   onLearnMore?: () => void,
   learnMoreLabel?: React$Node,
   horizontal?: boolean,
-  type?: "primary" | "secondary" | "warning" | "security" | "danger" | "success", // TODO implement the styles
+  type?: "primary" | "secondary" | "warning" | "security" | "danger" | "success" | "grey", // TODO implement the styles
+};
+
+const getTypeColor = (p) => {
+  switch (p.type) {
+    case "primary":
+      return {
+        backgroundColor: p.theme.colors.palette.action.hover,
+        textColor: p.theme.colors.palette.primary.main,
+      };
+    case "warning":
+      return {
+        backgroundColor: colors.lightWarning,
+        textColor: colors.orange,
+      };
+    case "grey":
+      return {
+        backgroundColor: p.theme.colors.palette.action.hover,
+        textColor: colors.grey,
+      };
+    case "security":
+      return {
+        backgroundColor: "rgba(234, 46, 73, 0.1)",
+        textColor: colors.alertRed,
+      };
+    default:
+      return {
+        backgroundColor: p.theme.colors.palette.text.shade10,
+        textColor: p.theme.colors.palette.text.shade50,
+      };
+  }
 };
 
 export default function InfoBox({
@@ -52,26 +82,12 @@ export default function InfoBox({
   );
 }
 
-const Container: ThemedComponent<{}> = styled(Box).attrs(props => ({
+const Container: ThemedComponent<{}> = styled(Box).attrs((props) => ({
   horizontal: true,
 }))`
   padding: 16px;
   border-radius: 4px;
   align-items: center;
-  background-color: ${p =>
-    p.type === "primary"
-      ? p.theme.colors.palette.action.hover
-      : p.type === "warning"
-      ? colors.lightWarning
-      : p.type === "security"
-      ? "rgba(234, 46, 73, 0.1)"
-      : p.theme.colors.palette.text.shade10};
-  color: ${p =>
-    p.type === "primary"
-      ? p.theme.colors.palette.primary.main
-      : p.type === "warning"
-      ? colors.orange
-      : p.type === "security"
-      ? colors.alertRed
-      : p.theme.colors.palette.text.shade50};
+  background-color: ${(p) => getTypeColor(p).backgroundColor};
+  color: ${(p) => getTypeColor(p).textColor};
 `;

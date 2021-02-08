@@ -2885,7 +2885,8 @@
       "optIn": "recipient",
       "nominate": "validator"
     },
-    "votes": "Votes ({{count}})"
+    "votes": "Votes ({{count}})",
+    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device"
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"
