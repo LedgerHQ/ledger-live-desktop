@@ -204,7 +204,7 @@ const TransactionConfirm = ({ t, device, account, parentAccount, transaction, st
         })}
       </Box>
 
-      {Warning ? <Footer transaction={transaction} /> : null}
+      {Footer ? <Footer transaction={transaction} /> : null}
 
       {renderVerifyUnwrapped({ modelId: device.modelId, type })}
     </Container>
