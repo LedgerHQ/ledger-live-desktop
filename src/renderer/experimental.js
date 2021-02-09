@@ -77,6 +77,7 @@ export const experimentalFeatures: Feature[] = [
             deltaExperimentalExplorers
               .map(
                 ([currency, config]) =>
+                  (currency.isTestnetFor ? "t" : "") +
                   currency.ticker +
                   " " +
                   config.stable.version +
