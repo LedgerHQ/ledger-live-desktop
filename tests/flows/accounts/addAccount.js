@@ -44,6 +44,10 @@ const addAccount = currency => {
 
     it(`completes the add account flow`, async () => {
       await addAccountsModal.finishAddAccount(mockDeviceEvent);
+
+      // counter value refresh.
+      await app.client.pause(2000);
+
       await addAccountsModal.close();
 
       await accountsPage.goToAccounts();
