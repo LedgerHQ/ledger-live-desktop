@@ -21,7 +21,6 @@ export const selection = device => {
     await lossCB.click();
     await termCB.click();
     await cta.click();
-    await app.client.pause(200);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-terms-accepted",
     });
@@ -77,7 +76,6 @@ export const goToConnectAndFinish = cta => {
   it("should be on app", async () => {
     const next = await $("#genuine-check-cta");
     await next.click();
-    await app.client.pause(200);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-complete",
     });
@@ -126,7 +124,6 @@ export const onboard = device => {
     it("goes to pincode", async () => {
       const next = await $("#device-howto-cta");
       await next.click();
-      await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -140,7 +137,6 @@ export const onboard = device => {
       pincodeCB.click();
       const next = await $("#device-pincode-cta");
       await next.click();
-      await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -152,7 +148,6 @@ export const onboard = device => {
     it("goes to recovery phrase", async () => {
       const next = await $("#pincode-howto-cta");
       await next.click();
-      await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -166,7 +161,6 @@ export const onboard = device => {
       recoveryphraseCB.click();
       const next = await $("#device-recoveryphrase-cta");
       await next.click();
-      await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -178,7 +172,6 @@ export const onboard = device => {
     it("goes to recovery phrase 3", async () => {
       const next = await $("#use-recovery-sheet");
       await next.click();
-      await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -190,7 +183,6 @@ export const onboard = device => {
     it("goes to recovery phrase 4", async () => {
       const next = await $("#recovery-howto-3");
       await next.click();
-      await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -202,7 +194,6 @@ export const onboard = device => {
     it("goes to quizz", async () => {
       const next = await $("#hide-recovery-cta");
       await next.click();
-      await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -214,22 +205,16 @@ export const onboard = device => {
     it("finished the quizz", async () => {
       let next = await $("#quizz-start-cta");
       await next.click();
-      await app.client.pause(200);
       next = await $("#answer-1");
       await next.click();
-      await app.client.pause(200);
       next = await $("#quizz-next-cta");
       await next.click();
-      await app.client.pause(200);
       next = await $("#answer-1");
       await next.click();
-      await app.client.pause(200);
       next = await $("#quizz-next-cta");
       await next.click();
-      await app.client.pause(200);
       next = await $("#answer-0");
       await next.click();
-      await app.client.pause(200);
       next = await $("#quizz-next-cta");
       await next.click();
       await app.client.pause(400);
@@ -296,7 +281,6 @@ export const onboard = device => {
     it("goes to pincode", async () => {
       const next = await $("#device-howto-2");
       await next.click();
-      await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -310,7 +294,6 @@ export const onboard = device => {
       pincodeCB.click();
       const next = await $("#device-pincode-cta");
       await next.click();
-      await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -322,7 +305,6 @@ export const onboard = device => {
     it("goes to recovery phrase restore", async () => {
       const next = await $("#pincode-howto-cta");
       await next.click();
-      await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -336,7 +318,6 @@ export const onboard = device => {
       recoveryphraseCB.click();
       const next = await $("#passphrase-recovery-cta");
       await next.click();
-      await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -348,7 +329,6 @@ export const onboard = device => {
     it("goes to recovery phrase restore 3", async () => {
       const next = await $("#recovery-howto-1");
       await next.click();
-      await app.client.pause(200);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,

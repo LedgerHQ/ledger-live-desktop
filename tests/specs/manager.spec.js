@@ -51,7 +51,7 @@ describe("Manager", () => {
     await installTronButton.click();
     const progressBar = await $("#manager-app-progress-bar");
     await app.client.waitUntilWindowLoaded();
-    await progressBar.waitForExist({ timeout: 15000, reverse: true });
+    await progressBar.waitForExist({ timeout: 10000, reverse: true });
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "manager-install-tron",
     });
@@ -69,7 +69,7 @@ describe("Manager", () => {
     const uninstallTronButton = await $("#appActionsUninstall-Tron");
     await uninstallTronButton.click();
     await app.client.waitUntilWindowLoaded();
-    await uninstallTronButton.waitForExist({ timeout: 5000, reverse: true });
+    await uninstallTronButton.waitForExist({reverse: true });
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "manager-uninstall-tron",
     });
@@ -81,7 +81,7 @@ describe("Manager", () => {
     const updateAllbutton = await $("#managerAppsList-updateAll");
     await updateAllbutton.click();
     await app.client.waitUntilWindowLoaded();
-    await updateAllbutton.waitForExist({ timeout: 5000, reverse: true });
+    await updateAllbutton.waitForExist({reverse: true });
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "manager-updateAll",
     });

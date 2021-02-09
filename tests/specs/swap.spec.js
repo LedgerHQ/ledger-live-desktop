@@ -66,7 +66,6 @@ describe("Swap", () => {
     await fromCurrencyInput.addValue("bitcoin");
     const fromCurrencyFirstOption = await $(".select-options-list .option:first-child");
     await fromCurrencyFirstOption.click();
-    await app.client.pause(1000);
 
     // Fill the amount
     const amount = await $("#swap-form-from-amount");
