@@ -103,17 +103,21 @@ export function useRefreshAccountsOrderingEffect({
   const comparator = useSortAccountsComparator();
   const dispatch = useDispatch();
 
+  const reorder = useCallback(() => {
+    dispatch(reorderAccounts(comparator));
+  }, [comparator, dispatch]);
+
   useEffect(() => {
     if (onMount) {
-      dispatch(reorderAccounts(comparator));
+      reorder();
     }
 
     return () => {
       if (onUnmount) {
-        dispatch(reorderAccounts(comparator));
+        reorder();
       }
     };
-  }, [comparator, dispatch, onMount, onUnmount]);
+  }, [onMount, onUnmount, reorder]);
 }
 
 export const themeSelector: OutputSelector<State, void, string> = createSelector(
