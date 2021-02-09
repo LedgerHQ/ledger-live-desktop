@@ -1,5 +1,5 @@
 // @flow
-import { useMemo, useCallback, useEffect, useState } from "react";
+import { useMemo, useCallback, useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { OutputSelector } from "reselect";
 import { createSelector } from "reselect";
@@ -102,22 +102,23 @@ export function useRefreshAccountsOrderingEffect({
 }) {
   const comparator = useSortAccountsComparator();
   const dispatch = useDispatch();
+  const comparatorRef = useRef(comparator);
 
-  const reorder = useCallback(() => {
-    dispatch(reorderAccounts(comparator));
-  }, [comparator, dispatch]);
+  useEffect(() => {
+    comparatorRef.current = comparator;
+  }, [comparator]);
 
   useEffect(() => {
     if (onMount) {
-      reorder();
+      dispatch(reorderAccounts(comparatorRef.current));
     }
 
     return () => {
       if (onUnmount) {
-        reorder();
+        dispatch(reorderAccounts(comparatorRef.current));
       }
     };
-  }, [onMount, onUnmount, reorder]);
+  }, [onMount, onUnmount, dispatch]);
 }
 
 export const themeSelector: OutputSelector<State, void, string> = createSelector(
