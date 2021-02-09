@@ -198,12 +198,23 @@
         "currency": "Crypto asset",
         "addAccountCTA": "Add new account"
       },
+      "tradeMethod": {
+        "title": "Rate",
+        "float": "Floating rate",
+        "floatUnavailable": "Floating rate not supported for this pair",
+        "fixed": "Fixed rate",
+        "fixedUnavailable": "Fixed rate not supported for this pair",
+        "floatDesc": "Your amount could change depending on the market conditions.",
+        "fixedDesc": "Your amount will remain the same irrespective of the changes on the market. Fixed rate updates every 30 seconds",
+        "by": "Provided by"
+      },
       "exchange": "Exchange",
       "helpCTA": "What is Swap?",
       "bubble": "We use a fixed rate, this is the exact amount you will receive.",
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
       "noApp": "{{currencyName}} app not installed.",
-      "outdatedApp": "{{currencyName}} app update available."
+      "outdatedApp": "{{currencyName}} app update available.",
+      "loadingRates": "Loading rates..."
     },
     "modal": {
       "title": "Swap",

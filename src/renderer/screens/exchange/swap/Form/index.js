@@ -1,12 +1,12 @@
 // @flow
 
-import React, { useState, useCallback, useEffect, useMemo, useReducer } from "react";
+import React, { useCallback, useEffect, useMemo, useReducer } from "react";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
 import { BigNumber } from "bignumber.js";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import { useSelector, useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
+import { useSelector, useDispatch } from "react-redux";
 import Card from "~/renderer/components/Box/Card";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { modalsStateSelector } from "~/renderer/reducers/modals";
@@ -15,41 +15,46 @@ import type {
   TokenCurrency,
   Account,
   AccountLike,
-  Currency,
 } from "@ledgerhq/live-common/lib/types";
 import getExchangeRates from "@ledgerhq/live-common/lib/exchange/swap/getExchangeRates";
 import { getAbandonSeedAddress } from "@ledgerhq/live-common/lib/currencies";
 import ArrowSeparator from "~/renderer/components/ArrowSeparator";
-import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/settings";
 import {
-  canRequestRates,
-  getCurrenciesWithStatus,
-  initState,
+  swapSupportedCurrenciesSelector,
+  flattenedSwapSupportedCurrenciesSelector,
+} from "~/renderer/reducers/settings";
+import {
   reducer,
+  getValidToCurrencies,
+  getEnabledTradeMethods,
+  getCurrenciesWithStatus,
 } from "@ledgerhq/live-common/lib/exchange/swap/logic";
+import type { ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import type { InstalledItem } from "@ledgerhq/live-common/lib/apps";
 import Box from "~/renderer/components/Box";
-
-import From from "~/renderer/screens/exchange/swap/Form/From";
-import To from "~/renderer/screens/exchange/swap/Form/To";
-import Footer from "~/renderer/screens/exchange/swap/Form/Footer";
-import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
-import Tooltip from "~/renderer/components/Tooltip";
-import IconExclamationCircle from "~/renderer/icons/ExclamationCircle";
-import IconArrowRight from "~/renderer/icons/ArrowRight";
-import { colors } from "~/renderer/styles/theme";
-import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
-import type { CurrencyStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 
+import TopFrom from "~/renderer/screens/exchange/swap/Form/Top/From";
+import TopTo from "~/renderer/screens/exchange/swap/Form/Top/To";
+import BottomFrom from "~/renderer/screens/exchange/swap/Form/Bottom/From";
+import BottomTo from "~/renderer/screens/exchange/swap/Form/Bottom/To";
+import Footer from "~/renderer/screens/exchange/swap/Form/Footer";
+import TradeMethod from "~/renderer/screens/exchange/swap/Form/TradeMethod";
+import IconSwap from "~/renderer/icons/Swap";
+import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
+import { openModal } from "~/renderer/actions/modals";
+
+type Method = "fixed" | "float";
 type Props = {
   installedApps: InstalledItem[],
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
   defaultAccount?: ?AccountLike,
   defaultParentAccount?: ?Account,
   setTabIndex: number => void,
+  tradeMethod: Method,
+  setTradeMethod: Method => void,
 };
 
 const Form = ({
@@ -58,268 +63,286 @@ const Form = ({
   defaultAccount,
   defaultParentAccount,
   setTabIndex,
+  tradeMethod,
+  setTradeMethod,
 }: Props) => {
+  const modalsState = useSelector(modalsStateSelector);
+  const reduxDispatch = useDispatch();
   const accounts = useSelector(shallowAccountsSelector);
   const selectableCurrencies = useSelector(swapSupportedCurrenciesSelector);
-  const modalsState = useSelector(modalsStateSelector);
+  const flattenedCurrencies = useSelector(flattenedSwapSupportedCurrenciesSelector);
 
-  const reduxDispatch = useDispatch();
+  const [state, dispatch] = useReducer(reducer, {
+    useAllAmount: false,
+    fromCurrency: defaultCurrency,
+  });
+
+  const { fromCurrency, toCurrency, toAccount, toParentAccount } = state;
+  const { useAllAmount, exchangeRate, loadingRates, isTimerVisible, ratesExpiration } = state;
+  const { error } = state;
+
   const currenciesStatus = useMemo(
     () =>
       getCurrenciesWithStatus({
         accounts,
         installedApps,
-        selectableCurrencies,
+        selectableCurrencies: flattenedCurrencies,
       }),
-    [accounts, installedApps, selectableCurrencies],
-  );
-  const okCurrencies = selectableCurrencies.filter(
-    c =>
-      (c.type === "TokenCurrency" || c.type === "CryptoCurrency") &&
-      currenciesStatus[c.id] === "ok",
+    [accounts, installedApps, flattenedCurrencies],
   );
 
-  const [state, dispatch] = useReducer(
-    reducer,
-    // $FlowFixMe Update type for SwapState
-    {
-      okCurrencies,
-      defaultCurrency:
-        defaultCurrency && okCurrencies.includes(defaultCurrency) ? defaultCurrency : undefined,
-      defaultAccount: defaultAccount?.balance.gt(0) ? defaultAccount : undefined,
-      defaultParentAccount: defaultParentAccount || undefined,
-    },
-    initState,
-  );
-
-  const patchExchange = useCallback(payload => dispatch({ type: "patchExchange", payload }), [
-    dispatch,
-  ]);
-
-  const { swap, fromAmount, fromCurrency, toCurrency, useAllAmount, ratesTimestamp, error } = state;
-  const ratesExpirationThreshold = 60000;
-
-  const { exchange, exchangeRate } = swap;
-  const [isTimerVisible, setTimerVisibility] = useState(true);
-  const { fromAccount, fromParentAccount, toAccount, toParentAccount } = exchange;
   const {
+    account,
+    parentAccount,
     status,
-    setTransaction,
+    updateTransaction,
     setAccount,
     transaction,
     bridgePending,
-    account,
-  } = useBridgeTransaction();
+  } = useBridgeTransaction(() => ({
+    account: defaultAccount,
+    parentAccount: defaultParentAccount,
+  }));
 
-  const ratesExpiration = useMemo(
-    () => (ratesTimestamp ? new Date(ratesTimestamp.getTime() + ratesExpirationThreshold) : null),
-    [ratesTimestamp],
+  const canContinue = !bridgePending && !Object.keys(status.errors).length && exchangeRate;
+
+  const resetRate = useCallback(() => {
+    if (!modalsState.MODAL_SWAP || !modalsState.MODAL_SWAP.isOpened) {
+      dispatch({ type: "onResetRate", payload: {} });
+    }
+  }, [modalsState]);
+
+  const enabledTradeMethods = useMemo(
+    () =>
+      fromCurrency && toCurrency
+        ? getEnabledTradeMethods({ selectableCurrencies, fromCurrency, toCurrency })
+        : [],
+    [fromCurrency, selectableCurrencies, toCurrency],
   );
 
+  const validToCurrencies = useMemo(
+    () => getValidToCurrencies({ selectableCurrencies, fromCurrency }),
+    [fromCurrency, selectableCurrencies],
+  );
+  const canFlipForm = fromCurrency && toCurrency && account && toAccount;
+  const onFlipForm = useCallback(() => {
+    if (toAccount) {
+      dispatch({ type: "onFlip", payload: { toAccount: account, toParentAccount: parentAccount } });
+      setAccount(toAccount, toParentAccount);
+    }
+  }, [account, parentAccount, setAccount, toAccount, toParentAccount]);
   const onCompleteSwap = useCallback(() => setTabIndex(1), [setTabIndex]);
   const onStartSwap = useCallback(() => {
-    setTimerVisibility(false);
+    dispatch({ type: "setTimerVisibility", payload: { isTimerVisible: false } });
+    const { toAccount, toParentAccount, exchangeRate, ratesExpiration } = state;
     reduxDispatch(
-      openModal("MODAL_SWAP", { swap, transaction, status, ratesExpiration, onCompleteSwap }),
+      openModal("MODAL_SWAP", {
+        swap: {
+          exchange: {
+            fromAccount: account,
+            fromParentAccount: parentAccount,
+            toAccount,
+            toParentAccount,
+          },
+          exchangeRate,
+        },
+        transaction,
+        status,
+        ratesExpiration,
+        onCompleteSwap,
+      }),
     );
-  }, [onCompleteSwap, ratesExpiration, reduxDispatch, swap, transaction, status]);
+  }, [account, onCompleteSwap, parentAccount, reduxDispatch, status, transaction, state]);
 
-  const { magnitudeAwareRate } = exchangeRate || {};
-
-  useEffect(() => setAccount(fromAccount, fromParentAccount), [
-    fromAccount,
-    fromParentAccount,
-    setAccount,
-  ]);
-
-  useEffect(() => {
-    if (!fromAccount || !transaction) return;
-    if (transaction.amount && !transaction.amount.eq(fromAmount) && account === fromAccount) {
-      const bridge = getAccountBridge(fromAccount, fromParentAccount);
-      const mainAccount = getMainAccount(fromAccount, fromParentAccount);
+  const setTransactionAmount = useCallback(
+    (amount: BigNumber) => {
+      if (!account || !transaction) return;
+      const mainAccount = getMainAccount(account, parentAccount);
       const currency = getAccountCurrency(mainAccount);
 
-      setTransaction(
-        bridge.updateTransaction(transaction, {
-          amount: fromAmount,
-          subAccountId: fromParentAccount ? fromAccount.id : null,
-          recipient: getAbandonSeedAddress(currency.id),
-        }),
-      );
-    }
-  }, [
-    fromAccount,
-    fromAmount,
-    fromParentAccount,
-    setAccount,
-    setTransaction,
-    transaction,
-    account,
-  ]);
+      updateTransaction(t => ({
+        ...t,
+        amount,
+        subAccountId: parentAccount ? account.id : null,
+        recipient: getAbandonSeedAddress(currency.id),
+      }));
+    },
+    [account, parentAccount, transaction, updateTransaction],
+  );
 
-  const _canRequestRates = useMemo(() => canRequestRates(state), [state]);
+  // Not to be confused with the useAllAmount flag for a regular transaction.
+  // We need this because changelly requires an exact amount to lock a rate.
+  const toggleUseAllAmount = useCallback(() => {
+    async function estimateMaxSpendable() {
+      const newUseAllAmount = !useAllAmount;
+      if (newUseAllAmount && account) {
+        const bridge = getAccountBridge(account, parentAccount);
+        const amount = await bridge.estimateMaxSpendable({
+          account,
+          parentAccount,
+        });
+        setTransactionAmount(amount);
+      } else {
+        setTransactionAmount(BigNumber(0));
+      }
+      dispatch({ type: "onSetUseAllAmount", payload: { useAllAmount: newUseAllAmount } });
+    }
+    estimateMaxSpendable();
+  }, [account, parentAccount, setTransactionAmount, useAllAmount]);
+
+  // Discard rates on any of these values from outside the reducer's state changing
+  useEffect(resetRate, [resetRate, transaction?.amount, tradeMethod]);
 
   useEffect(() => {
     let ignore = false;
     async function getRates() {
+      if (!transaction || !toAccount || !account || getAccountCurrency(toAccount) !== toCurrency)
+        return;
+      dispatch({ type: "onSetLoadingRates", payload: { loadingRates: true } });
       try {
-        if (!transaction) return;
-        const rates = await getExchangeRates(exchange, transaction);
+        const rates: Array<ExchangeRate> = await getExchangeRates(
+          { fromAccount: account, fromParentAccount: parentAccount, toAccount, toParentAccount },
+          transaction,
+        );
         if (ignore) return;
-        dispatch({ type: "setRate", payload: { rate: rates[0] } });
+        let rate = rates.find(rate => rate.tradeMethod === tradeMethod);
+        rate = rate || rates.find(rate => !rate.tradeMethod); // Fixme, we need the trademethod even on error
+
+        if (rate?.error) {
+          dispatch({ type: "onSetError", payload: { error: rate.error } });
+        } else if (rate) {
+          dispatch({
+            type: "onSetExchangeRate",
+            payload: {
+              exchangeRate: rate,
+              withExpiration: rate.tradeMethod === "fixed",
+            },
+          });
+        }
       } catch (error) {
-        if (ignore) return;
-        dispatch({ type: "setError", payload: { error } });
+        dispatch({ type: "onSetError", payload: { error } });
       }
     }
-    if (!ignore && !exchangeRate && _canRequestRates) {
+    if (
+      !ignore &&
+      !!(
+        account &&
+        toAccount &&
+        transaction?.amount &&
+        !exchangeRate &&
+        !error &&
+        transaction?.amount.gt(0)
+      )
+    ) {
       getRates();
     }
 
     return () => {
       ignore = true;
+      if (loadingRates) dispatch({ type: "onSetLoadingRates", payload: { loadingRates: false } });
     };
-  }, [_canRequestRates, exchange, exchangeRate, transaction]);
-
-  // Not to be confused with the useAllAmount flag for a regular transaction.
-  // We need this because the providers require an exact amount to lock a rate.
-  const toggleUseAllAmount = useCallback(() => {
-    async function getEstimatedMaxSpendable() {
-      const newUseAllAmount = !useAllAmount;
-      if (newUseAllAmount) {
-        const bridge = getAccountBridge(fromAccount, fromParentAccount);
-        const fromAmount = await bridge.estimateMaxSpendable({
-          account: fromAccount,
-          parentAccount: fromParentAccount,
-          transaction,
-        });
-        dispatch({ type: "setFromAmount", payload: { fromAmount, useAllAmount: true } });
-      } else {
-        dispatch({ type: "setFromAmount", payload: { fromAmount: BigNumber(0) } });
-      }
-    }
-    getEstimatedMaxSpendable();
-  }, [fromAccount, fromParentAccount, transaction, useAllAmount]);
-
-  const expireRates = useCallback(() => {
-    if (!modalsState.MODAL_SWAP || !modalsState.MODAL_SWAP.isOpened) {
-      // NB Modal is closed, show the timer for the Form component again.
-      setTimerVisibility(true);
-      // NB Don't expire the rates if the modal is open, we freeze on modal flow launch.
-      dispatch({ type: "expireRates", payload: {} });
-    }
-  }, [modalsState]);
-
-  useEffect(() => {
-    expireRates();
-  }, [expireRates, modalsState]);
-
-  const validToCurrencies = useMemo(() => selectableCurrencies.filter(c => c !== fromCurrency), [
-    fromCurrency,
-    selectableCurrencies,
+  }, [
+    exchangeRate,
+    transaction,
+    tradeMethod,
+    toAccount,
+    account,
+    parentAccount,
+    toParentAccount,
+    toCurrency,
+    loadingRates,
+    error,
   ]);
 
-  const hasErrors = Object.keys(status.errors).length;
-  const canContinue = !bridgePending && !hasErrors && exchangeRate;
+  // Deselect the tradeMethod if not available for current pair
+  useEffect(() => {
+    if (enabledTradeMethods && !enabledTradeMethods.includes(tradeMethod)) {
+      setTradeMethod(enabledTradeMethods[0]);
+    }
+  }, [enabledTradeMethods, setTradeMethod, tradeMethod]);
+
+  const { provider, magnitudeAwareRate } = exchangeRate || {};
+  const { amount = BigNumber(0) } = transaction || {};
+
   return (
     <>
       <TrackPage category="Swap" name="Form" />
       <Card flow={1}>
-        <Box horizontal p={32}>
-          <From
+        {fromCurrency ? <CurrencyDownStatusAlert currencies={[fromCurrency]} /> : null}
+        <Box horizontal px={32} pt={16}>
+          <TopFrom
             status={status}
             key={fromCurrency?.id || "from"}
             currenciesStatus={currenciesStatus}
-            account={fromAccount ? getMainAccount(fromAccount, fromParentAccount) : null}
-            amount={fromAmount}
+            account={account ? getMainAccount(account, parentAccount) : null}
+            amount={amount}
             currency={fromCurrency}
             error={error}
-            currencies={selectableCurrencies}
-            onCurrencyChange={fromCurrency => {
-              dispatch({ type: "setFromCurrency", payload: { fromCurrency } });
-            }}
-            onAccountChange={(fromAccount, fromParentAccount) =>
-              dispatch({ type: "setFromAccount", payload: { fromAccount, fromParentAccount } })
+            currencies={flattenedCurrencies}
+            onCurrencyChange={fromCurrency =>
+              dispatch({ type: "onSetFromCurrency", payload: { fromCurrency } })
             }
-            onAmountChange={fromAmount => {
-              dispatch({ type: "setFromAmount", payload: { fromAmount } });
-            }}
+            onAccountChange={setAccount}
+            onAmountChange={setTransactionAmount}
             useAllAmount={useAllAmount}
             onToggleUseAllAmount={toggleUseAllAmount}
           />
-          <ArrowSeparator Icon={IconArrowRight} />
-          <To
+          <ArrowSeparator
+            style={{ marginTop: 63, marginBottom: 15 }}
+            Icon={IconSwap}
+            disabled={!canFlipForm}
+            onClick={onFlipForm}
+          />
+          <TopTo
             key={toCurrency?.id || "to"}
             currenciesStatus={currenciesStatus}
             account={toAccount ? getMainAccount(toAccount, toParentAccount) : null}
-            amount={fromAmount ? fromAmount.times(magnitudeAwareRate) : null}
+            amount={amount.times(magnitudeAwareRate)}
             currency={toCurrency}
             fromCurrency={fromCurrency}
-            rate={magnitudeAwareRate}
             currencies={validToCurrencies}
             onCurrencyChange={toCurrency =>
-              dispatch({ type: "setToCurrency", payload: { toCurrency } })
+              dispatch({ type: "onSetToCurrency", payload: { toCurrency } })
             }
             onAccountChange={(toAccount, toParentAccount) =>
-              patchExchange({ toAccount, toParentAccount })
+              dispatch({ type: "onSetToAccount", payload: { toAccount, toParentAccount } })
             }
           />
         </Box>
-        <Footer
-          onExpireRates={expireRates}
-          onStartSwap={onStartSwap}
-          canContinue={canContinue}
-          ratesExpiration={isTimerVisible ? ratesExpiration : null}
+        <TradeMethod
+          tradeMethod={tradeMethod}
+          loadingRates={!!loadingRates}
+          setTradeMethod={setTradeMethod}
+          enabledTradeMethods={enabledTradeMethods}
+          currency={toCurrency}
+          fromCurrency={fromCurrency}
+          provider={provider}
+          rate={magnitudeAwareRate}
+          onExpireRates={resetRate}
+          ratesExpiration={isTimerVisible ? ratesExpiration : undefined}
         />
+        <Box px={32}>
+          <Text color="palette.text.shade100" ff="Inter|SemiBold" fontSize={5}>
+            <Trans i18nKey={`swap.form.from.title`} />
+          </Text>
+        </Box>
+        <Box horizontal px={32}>
+          <BottomFrom
+            key={fromCurrency?.id || "from"}
+            status={status}
+            amount={amount}
+            currency={fromCurrency}
+            error={error}
+            onAmountChange={setTransactionAmount}
+            useAllAmount={useAllAmount}
+            onToggleUseAllAmount={account ? toggleUseAllAmount : undefined}
+          />
+          <div style={{ width: 36 }} />
+          <BottomTo amount={amount.times(magnitudeAwareRate)} currency={toCurrency} />
+        </Box>
+        <Footer onStartSwap={onStartSwap} canContinue={!!canContinue} />
       </Card>
     </>
-  );
-};
-
-export const CurrencyOptionRow = ({
-  status,
-  circle,
-  currency,
-}: {
-  status: CurrencyStatus,
-  circle?: boolean,
-  currency: Currency,
-}) => {
-  const notOK = status !== "ok";
-
-  return (
-    <Box grow horizontal alignItems="center" flow={2}>
-      <CryptoCurrencyIcon
-        inactive={notOK}
-        circle={circle}
-        currency={currency}
-        size={circle ? 26 : 16}
-      />
-      <Box
-        grow
-        ff="Inter|SemiBold"
-        color="palette.text.shade100"
-        fontSize={4}
-        style={{ opacity: notOK ? 0.2 : 1 }}
-      >
-        {`${currency.name} (${currency.ticker})`}
-      </Box>
-      {notOK ? (
-        <Box style={{ marginRight: -23 }} alignItems={"flex-end"}>
-          <Tooltip
-            content={
-              <Box p={1} style={{ maxWidth: 120 }}>
-                <Text fontSize={2}>
-                  <Trans i18nKey={`swap.form.${status}`} values={{ currencyName: currency.name }} />
-                </Text>
-              </Box>
-            }
-          >
-            <IconExclamationCircle color={colors.orange} size={16} />
-          </Tooltip>
-        </Box>
-      ) : null}
-    </Box>
   );
 };
 

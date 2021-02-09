@@ -7,11 +7,10 @@ import Box from "~/renderer/components/Box";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 
 import Label from "./Label";
-import { rgba } from "~/renderer/styles/helpers";
 
 const Wrapper: ThemedComponent<{}> = styled(Label).attrs(props => ({
   ff: "Inter|SemiBold",
-  color: "wallet",
+  color: props.black ? props.theme.colors.palette.text.shade100 : "wallet",
   fontSize: props.fontSize,
   alignItems: "center",
 }))`
@@ -19,7 +18,7 @@ const Wrapper: ThemedComponent<{}> = styled(Label).attrs(props => ({
   cursor: pointer;
 
   &:hover {
-    color: ${p => rgba(p.theme.colors.wallet, 0.9)};
+    opacity: 0.9;
   }
 `;
 
@@ -29,12 +28,13 @@ type Props = {
   children?: React$Node,
   style?: *,
   fontSize?: number,
+  black?: boolean,
 };
 
 // can add more dynamic options if needed
-export function LinkWithExternalIcon({ onClick, label, children, style, fontSize }: Props) {
+export function LinkWithExternalIcon({ onClick, label, children, style, fontSize, black }: Props) {
   return (
-    <Wrapper onClick={onClick} style={style} fontSize={fontSize || 4}>
+    <Wrapper black={black} onClick={onClick} style={style} fontSize={fontSize || 4}>
       <span>{label || children}</span>
       <Box ml={1}>
         <IconExternalLink size={12} />

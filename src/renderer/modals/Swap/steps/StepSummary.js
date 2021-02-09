@@ -28,7 +28,8 @@ import { urls } from "~/config/urls";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 import FakeLink from "~/renderer/components/FakeLink";
 import { CountdownTimerWrapper } from "~/renderer/screens/exchange/swap/Form/Footer";
-import IconClock from "~/renderer/icons/Clock";
+import useTheme from "~/renderer/hooks/useTheme";
+import IconCountdown from "~/renderer/icons/Countdown";
 import CountdownTimer from "~/renderer/components/CountdownTimer";
 import { swapAcceptProviderTOS } from "~/renderer/actions/settings";
 import type { ExchangeRate, Exchange } from "@ledgerhq/live-common/lib/exchange/swap/types";
@@ -223,11 +224,12 @@ export const StepSummaryFooter = ({
   onContinue: any,
   onClose: any,
   disabled: boolean,
-  ratesExpiration: Date,
+  ratesExpiration?: Date,
   provider: string,
   setError: Error => void,
 }) => {
   const dispatch = useDispatch();
+  const lockColor = useTheme("colors.palette.text.shade50");
   const swapAcceptedproviderIds = useSelector(swapAcceptedProviderIdsSelector);
   const alreadyAcceptedTerms = swapAcceptedproviderIds.includes(provider);
   const onBeforeContinue = useCallback(() => {
@@ -237,16 +239,18 @@ export const StepSummaryFooter = ({
 
   return (
     <Box horizontal flex={1} justifyContent={"flex-end"} alignItems={"center"}>
-      <CountdownTimerWrapper horizontal>
-        <Box mr={1}>
-          <IconClock size={14} />
-        </Box>
-        <CountdownTimer
-          key={`rates-${ratesExpiration.getTime()}`}
-          end={ratesExpiration}
-          callback={() => setError(new SwapGenericAPIError())}
-        />
-      </CountdownTimerWrapper>
+      {ratesExpiration ? (
+        <CountdownTimerWrapper horizontal>
+          <Box mr={1}>
+            <IconCountdown size={10} color={lockColor} />
+          </Box>
+          <CountdownTimer
+            key={`rates-${ratesExpiration.getTime()}`}
+            end={ratesExpiration}
+            callback={() => setError(new SwapGenericAPIError())}
+          />
+        </CountdownTimerWrapper>
+      ) : null}
       <Box horizontal flex={1} justifyContent={"flex-end"}>
         <Button onClick={onClose} secondary data-e2e="modal_buttonClose_swap">
           <Trans i18nKey="common.close" />
