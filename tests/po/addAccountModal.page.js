@@ -5,16 +5,20 @@ export default class AddAccountModal extends Modal {
     return this.$("#add-accounts-import-add-button");
   }
 
-  async addAccountFlow(currency, mockDeviceEvent) {
+  async prepareAddAccount(currency) {
     const container = await this.container;
     const selectControl = await container.$(".select__control");
     await selectControl.click();
 
     const input = await selectControl.$("input");
+    await this.app.client.pause(600);
     await input.addValue(currency);
+    await this.app.client.pause(300);
     const firstOption = await this.$(".select-options-list .option:first-child");
     await firstOption.click();
+  }
 
+  async finishAddAccount(mockDeviceEvent) {
     const continueBtn = await this.continueButton;
     await continueBtn.click();
 

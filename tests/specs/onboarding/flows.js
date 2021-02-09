@@ -95,12 +95,16 @@ export const onboard = device => {
       await firstUse.click();
       const right = await $("#pedagogy-right");
       await right.click();
+      await app.client.pause(200);
       await right.click();
+      await app.client.pause(200);
       await right.click();
+      await app.client.pause(200);
       await right.click();
+      await app.client.pause(200);
       const cta = await $("#setup-nano-wallet-cta");
       await cta.click();
-      await app.client.pause(500);
+      await app.client.pause(700);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -126,7 +130,7 @@ export const onboard = device => {
     it("goes to pincode", async () => {
       const next = await $("#device-howto-cta");
       await next.click();
-      await app.client.pause(200);
+      await app.client.pause(700);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,

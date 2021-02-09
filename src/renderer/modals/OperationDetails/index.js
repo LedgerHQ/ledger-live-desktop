@@ -481,12 +481,15 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
               </GradientHover>
             </OpDetailsData>
           </Box>
-          <B />
-          <Box>
-            <OpDetailsTitle>{t("operationDetails.from")}</OpDetailsTitle>
-            <DataList lines={uniqueSenders} t={t} />
-          </Box>
-
+          {uniqueSenders.length ? (
+            <>
+              <B />
+              <Box>
+                <OpDetailsTitle>{t("operationDetails.from")}</OpDetailsTitle>
+                <DataList lines={uniqueSenders} t={t} />
+              </Box>
+            </>
+          ) : null}
           {recipients.length ? (
             <>
               <B />
