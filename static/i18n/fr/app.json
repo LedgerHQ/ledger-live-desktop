@@ -1914,7 +1914,9 @@
         "stash": "Balance disponible",
         "stashDescription": "Les récompenses seront versées sur le compte actuel en tant que balance disponible.",
         "staked": "Balance liée",
-        "stakedDescription": "Les récompenses seront versées sur le compte actuel en tant que balance liée au staking."
+        "stakedDescription": "Les récompenses seront versées sur le compte actuel en tant que balance liée au staking.",
+        "optionTitle": "Note",
+        "optionDescription": "Une fois défini, l'option reste jusqu'à la fin des actifs liés. Si vous changez d'avis, lisez l'article du lien en dessous."
       },
       "steps": {
         "starter": {

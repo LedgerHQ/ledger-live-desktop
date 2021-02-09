@@ -1927,7 +1927,9 @@
         "stash": "Available Balance",
         "stashDescription": "Rewards are credited to your available balance.",
         "staked": "Bonded Balance",
-        "stakedDescription": "Rewards are credited to your bonded balance for compound earning."
+        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
+        "optionTitle": "Note",
+        "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
       },
       "steps": {
         "starter": {
