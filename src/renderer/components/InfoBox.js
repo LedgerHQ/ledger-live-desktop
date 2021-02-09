@@ -18,7 +18,7 @@ type Props = {
   type?: "primary" | "secondary" | "warning" | "security" | "danger" | "success" | "grey", // TODO implement the styles
 };
 
-const getTypeColor = (p) => {
+const getTypeColor = p => {
   switch (p.type) {
     case "primary":
       return {
@@ -82,12 +82,12 @@ export default function InfoBox({
   );
 }
 
-const Container: ThemedComponent<{}> = styled(Box).attrs((props) => ({
+const Container: ThemedComponent<{}> = styled(Box).attrs(props => ({
   horizontal: true,
 }))`
   padding: 16px;
   border-radius: 4px;
   align-items: center;
-  background-color: ${(p) => getTypeColor(p).backgroundColor};
-  color: ${(p) => getTypeColor(p).textColor};
+  background-color: ${p => getTypeColor(p).backgroundColor};
+  color: ${p => getTypeColor(p).textColor};
 `;

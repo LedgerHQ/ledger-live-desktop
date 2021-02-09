@@ -91,7 +91,7 @@ const Footer = ({ transaction }: { transaction: Transaction }) => {
 
   return (
     <InfoBox type="grey">
-      <Trans i18nKey={`TransactionConfirm.networkFees`} />
+      <Trans i18nKey={`polkadot.networkFees`} />
     </InfoBox>
   );
 };

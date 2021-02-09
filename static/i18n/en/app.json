@@ -1825,6 +1825,7 @@
     "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
     "unlockedBalance": "Unbonded",
     "unlockedTooltip": "Unbonded assets can now be moved using the withdraw operation.",
+    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
     "nomination": {
       "emptyState": {
         "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
@@ -2885,8 +2886,7 @@
       "optIn": "recipient",
       "nominate": "validator"
     },
-    "votes": "Votes ({{count}})",
-    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device"
+    "votes": "Votes ({{count}})"
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"

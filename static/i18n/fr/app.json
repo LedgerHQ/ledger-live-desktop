@@ -1811,6 +1811,7 @@
     "unlockingTooltip": "Les actifs déliés restent verrouillés pendant 28 jours avant d'être disponibles.",
     "unlockedBalance": "Actifs déliés",
     "unlockedTooltip": "Des actifs déliés peuvent maintenant être récupérés via une transaction.",
+    "networkFees": "Les frais sont determinés automatiquement par le consensus Polkadot, vous ne pouvez pas les vérifier sur votre Nano",
     "nomination": {
       "emptyState": {
         "description": "Vous pouvez gagner des récompenses DOT en liant vos actifs et en nommant des validateurs.",
@@ -2873,8 +2874,7 @@
       "optIn": "destinataire",
       "nominate": "validateur"
     },
-    "votes": "Votes ({{count}})",
-    "networkFees": "Les frais sont determinés automatiquement par le consensus Polkadot, vous ne pouvez pas les vérifier sur votre Nano"
+    "votes": "Votes ({{count}})"
   },
   "RecipientField": {
     "placeholder": "Entrer l'adresse {{currencyName}}"
