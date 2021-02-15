@@ -422,7 +422,7 @@ export const renderSwapDeviceConfirmation = ({
         ),
         fees: (
           <CurrencyUnitValue
-            unit={getAccountUnit(getMainAccount(exchange.fromAccount))}
+            unit={getAccountUnit(getMainAccount(exchange.fromAccount, exchange.fromParentAccount))}
             value={status.estimatedFees}
             disableRounding
             showCode
