@@ -1,62 +1,62 @@
 import Page from "./page";
 
 export default class ModalPage extends Page {
-  get container() {
+  async container() {
     return this.$("#modal-container");
   }
 
-  get content() {
+  async content() {
     return this.$("#modal-content");
   }
 
-  get title() {
+  async title() {
     return this.$("#modal-title");
   }
 
-  get termsCheckbox() {
+  async termsCheckbox() {
     return this.$("#modal-terms-checkbox");
   }
 
-  get confirmButton() {
+  async confirmButton() {
     return this.$("#modal-confirm-button");
   }
 
-  get continueButton() {
+  async continueButton() {
     return this.$("#modal-continue-button");
   }
 
-  get saveButton() {
+  async saveButton() {
     return this.$("#modal-save-button");
   }
 
-  get cancelButton() {
+  async cancelButton() {
     return this.$("#modal-cancel-button");
   }
 
-  get closeButton() {
+  async closeButton() {
     return this.$("#modal-close-button");
   }
 
   async waitForDisplayed() {
-    const elem = await this.container;
+    const elem = await this.container();
     const visible = await elem.waitForDisplayed();
 
     return visible;
   }
 
   async waitForClosed() {
-    const elem = await this.container;
+    const elem = await this.container();
     const closed = elem.waitForDisplayed({ timeout: 3000, reverse: true });
     return closed;
   }
 
   async close() {
-    const elem = await this.closeButton;
+    const elem = await this.closeButton();
     return elem.click();
   }
 
   async confirm() {
-    const elem = await this.confirmButton;
+    const elem = await this.confirmButton();
     return elem.click();
   }
 }
