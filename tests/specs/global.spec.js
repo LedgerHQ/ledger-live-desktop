@@ -74,7 +74,7 @@ describe("Global", () => {
 
   it("shows the carousel and can dismiss it", async () => {
     await portfolioPage.goToPortfolio();
-    const carousel = await portfolioPage.carousel;
+    const carousel = await portfolioPage.carousel();
     await carousel.waitForDisplayed();
 
     const carouselDismissButton = await portfolioPage.carouselDismissButton();
