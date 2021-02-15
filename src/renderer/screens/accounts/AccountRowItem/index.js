@@ -248,11 +248,10 @@ class AccountRowItem extends PureComponent<Props, State> {
         style={{ position: "relative" }}
         key={key}
         hidden={hidden}
-        onClick={this.onClick}
       >
         <span style={{ position: "absolute", top: -70 }} ref={this.scrollTopFocusRef} />
         <Row expanded={expanded} tokens={showTokensIndicator} key={mainAccount.id}>
-          <AccountContextMenu account={account}>
+          <AccountContextMenu account={account} onClick={this.onClick}>
             <RowContent disabled={disabled}>
               <Header account={account} name={mainAccount.name} />
               <Box flex="12%">
