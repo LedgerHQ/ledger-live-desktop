@@ -42,6 +42,7 @@ describe("Swap", () => {
       customSnapshotIdentifier: "swap-access",
     });
   });
+
   it("pass KYC landing", async () => {
     const KYCCheckbox = await $("#swap-landing-kyc-tos");
     await KYCCheckbox.waitForDisplayed();
@@ -149,7 +150,7 @@ describe("Swap", () => {
     await mockDeviceEvent({ type: "opened" }, { type: "complete" });
 
     const finishedStep = await $("#swap-modal-finished-close-button");
-    await finishedStep.waitForDisplayed();
+    await finishedStep.waitForDisplayed({ timeout: 10000 });
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-end-0",
     });
@@ -160,6 +161,9 @@ describe("Swap", () => {
     await finishedStep.waitForDisplayed();
     await finishedStep.click();
     await finishedStep.waitForDisplayed({ reverse: true });
+
+    // FIXME: Mocks are jumping from "in progress" status to "done"
+    await app.client.pause(1000);
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-end-1",

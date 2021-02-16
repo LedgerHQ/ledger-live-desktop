@@ -141,6 +141,11 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       console.log("app start error", e);
     }
 
+    app.client.addCommand("waitForSync", async () => {
+      const sync = await app.client.$("#topbar-synchronized");
+      await sync.waitForDisplayed();
+    });
+
     app.client.addCommand(
       "waitUntilTextMatches",
       function(text, timeout = 1000) {
