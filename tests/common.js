@@ -98,21 +98,23 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       fs.copyFileSync(jsonFile, `${userDataPath}/app.json`);
     }
 
+    const appPath = !process.env.CI ? "/app" : path.join(__dirname, "..");
+
     app = new Application({
       path: require("electron"), // just to make spectron happy since we override everything below
       waitTimeout: 15000,
       webdriverOptions: {
         capabilities: {
           "goog:chromeOptions": {
-            binary: "/app/node_modules/spectron/lib/launcher.js",
+            binary: `${appPath}/node_modules/spectron/lib/launcher.js`,
             args: [
-              "spectron-path=/app/node_modules/electron/dist/electron",
-              "spectron-arg0=/app/.webpack/main.bundle.js",
+              `spectron-path=${appPath}/node_modules/electron/dist/electron`,
+              `spectron-arg0=${appPath}/.webpack/main.bundle.js`,
               "--disable-extensions",
               "--disable-dev-shm-usage",
               "--no-sandbox",
               "--lang=en",
-              `--user-data-dir=/app/tests/tmp/${userDataPathKey}`,
+              `--user-data-dir=${appPath}/tests/tmp/${userDataPathKey}`,
             ].concat(_.map(env, (value, key) => `spectron-env-${key}=${value.toString()}`)),
             debuggerAddress: undefined,
             windowTypes: ["app", "webview"],
