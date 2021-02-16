@@ -100,7 +100,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     }
 
     const appPath = !process.env.CI ? "/app" : path.join(__dirname, "..");
-    const spectronPath = !process.CI
+    const spectronPath = !process.env.CI
       ? `${appPath}/node_modules/electron/dist/electron`
       : electronPath;
 
