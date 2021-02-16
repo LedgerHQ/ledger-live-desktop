@@ -9,7 +9,7 @@ const hideToken = (currency = "global") => {
 
     it("opens an account with tokens", async () => {
       const firstAccountWithTokens = await accountsPage.getFirstAccountWithToken();
-      await firstAccountWithTokens.click();
+      await accountsPage.clickOnAccountRow(firstAccountWithTokens);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `${currency}-hide-token-before`,
       });
