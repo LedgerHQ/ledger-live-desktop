@@ -19,6 +19,7 @@ import LiveStyleSheetManager from "~/renderer/styles/LiveStyleSheetManager";
 import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
 import CountervaluesProvider from "~/renderer/components/CountervaluesProvider";
 import Default from "./Default";
+import { AnnouncementProviderWrapper } from "~/renderer/components/AnnouncementProviderWrapper";
 
 const reloadApp = event => {
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {
@@ -59,9 +60,11 @@ const App = ({ store, initialCountervalues }: Props) => {
             <RemoteConfigProvider>
               <UpdaterProvider>
                 <CountervaluesProvider initialState={initialCountervalues}>
-                  <Router>
-                    <Default />
-                  </Router>
+                  <AnnouncementProviderWrapper>
+                    <Router>
+                      <Default />
+                    </Router>
+                  </AnnouncementProviderWrapper>
                 </CountervaluesProvider>
               </UpdaterProvider>
             </RemoteConfigProvider>

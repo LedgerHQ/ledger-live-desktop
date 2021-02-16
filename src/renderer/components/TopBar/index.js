@@ -28,6 +28,7 @@ import ActivityIndicator from "./ActivityIndicator";
 import ItemContainer from "./ItemContainer";
 import { setDiscreetMode } from "~/renderer/actions/settings";
 import { hasPasswordSelector } from "~/renderer/reducers/application";
+import { NotificationIndicator } from "~/renderer/components/TopBar/NotificationIndicator";
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({}))`
   height: ${p => p.theme.sizes.topBarHeight}px;
@@ -107,14 +108,15 @@ const TopBar = () => {
                 </Box>
               </>
             )}
+            <NotificationIndicator />
+            <Box justifyContent="center">
+              <Bar />
+            </Box>
             <Tooltip content={t("settings.discreet")} placement="bottom">
               <ItemContainer id="topbar-discreet-button" isInteractive onClick={handleDiscreet}>
                 {discreetMode ? <IconEyeOff size={16} /> : <IconEye size={16} />}
               </ItemContainer>
             </Tooltip>
-            <Box justifyContent="center">
-              <Bar />
-            </Box>
             <Tooltip content={t("settings.helpButton")} placement="bottom">
               <ItemContainer
                 id="topbar-help-button"
