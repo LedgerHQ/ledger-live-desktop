@@ -64,7 +64,7 @@ jobs:
       - name: start electron webdriver
         if: always()
         run: |
-          node node_modules/electron-chromedriver/chromedriver.js --port=9515 --whitelisted-ips="" --url-base=/
+          node node_modules/electron-chromedriver/chromedriver.js --port=9515 --whitelisted-ips="" --url-base=/ &
       - name: wait for container
         if: always()
         run: bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:9515)" != "404" ]]; do sleep 5; done'
