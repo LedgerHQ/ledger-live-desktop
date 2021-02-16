@@ -28,7 +28,8 @@ setSupportedCurrencies([
   "viacoin",
   "stakenet",
   "stealthcoin",
+  "algorand",
   "bitcoin_testnet",
   "ethereum_ropsten",
-  "algorand",
+  "cosmos_testnet",
 ]);
