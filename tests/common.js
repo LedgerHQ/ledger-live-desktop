@@ -17,6 +17,7 @@ import HideTokenModal from "./po/hideTokenModal.page";
 import fs from "fs";
 import rimraf from "rimraf";
 import path from "path";
+import electronPath from "electron";
 
 // instead of making a PR to spectron we override the way they launch chromedriver
 // chromedriver is launched automatically in the docker container
@@ -99,16 +100,19 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     }
 
     const appPath = !process.env.CI ? "/app" : path.join(__dirname, "..");
+    const spectronPath = !process.CI
+      ? `${appPath}/node_modules/electron/dist/electron`
+      : electronPath;
 
     app = new Application({
-      path: require("electron"), // just to make spectron happy since we override everything below
+      path: electronPath, // just to make spectron happy since we override everything below
       waitTimeout: 15000,
       webdriverOptions: {
         capabilities: {
           "goog:chromeOptions": {
             binary: `${appPath}/node_modules/spectron/lib/launcher.js`,
             args: [
-              `spectron-path=${appPath}/node_modules/electron/dist/electron`,
+              `spectron-path=${spectronPath}`,
               `spectron-arg0=${appPath}/.webpack/main.bundle.js`,
               "--disable-extensions",
               "--disable-dev-shm-usage",
