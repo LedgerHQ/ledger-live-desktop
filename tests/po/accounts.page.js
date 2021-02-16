@@ -80,6 +80,11 @@ export default class AccountsPage extends Page {
     return accounts[0];
   }
 
+  async clickOnAccountRow(accountRow) {
+    const content = await accountRow.$(".accounts-account-row-item-content");
+    return content.click();
+  }
+
   async selectSortType(type) {
     if (type === "highestBalance") return this.sortHighestBalanceButton;
     if (type === "lowestBalance") return this.sortLowestBalanceButton;
