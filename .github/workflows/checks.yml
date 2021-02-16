@@ -38,7 +38,7 @@ jobs:
         run: |
           sudo apt-get install -y xvfb libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xinput0 libxcb-xfixes0
           # start xvfb in the background
-          sudo /usr/bin/Xvfb 0 -screen 0 1024x788x24 &
+          sudo /usr/bin/Xvfb :0 -screen 0 1024x788x24 &
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
