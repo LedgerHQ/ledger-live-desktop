@@ -2288,7 +2288,7 @@
     "repairDevice": {
       "title": "Réparer votre appareil Ledger",
       "descSettings": "Utilisez ceci pour restaurer votre appareil Ledger s'il est bloqué pendant une mise à jour du firmware.",
-      "desc": "Veuillez sélectionner l’état de votre appareil Ledger.",
+      "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
       "button": "Réparer"
     },
     "exportLogs": {
@@ -3018,10 +3018,6 @@
     "CosmosBroadcastCodeNoSignatures": {
       "title": "Quelque chose s'est mal passé (Erreur #17)",
       "description": "Veuillez contacter le support Ledger"
-    },
-    "CosmosStargateFeb2021Warning": {
-      "title": "The Cosmos blockchain is planning for an on-chain update on Feb 18th.",
-      "description": "Coming Ledger Live 2.22.0 will continue supporting ATOM."
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} n'est pas pris en charge",
