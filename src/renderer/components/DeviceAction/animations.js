@@ -81,7 +81,6 @@ const blue = {
 
 const animations = { nanoX, nanoS, blue };
 
-// TODO: fix this because it fucks up nano X and blue (no processing key)
 type InferredKeys = $Keys<typeof nanoS>;
 
 export const getDeviceAnimation = (
@@ -90,7 +89,12 @@ export const getDeviceAnimation = (
   key: InferredKeys,
 ) => {
   const lvl1 = animations[modelId] || animations.nanoX;
-  const lvl2 = lvl1[key] || animations.nanoX[key];
+  let lvl2;
+  if (key === "processing") {
+    lvl2 = animations.nanoS[key];
+  } else {
+    lvl2 = lvl1[key] || animations.nanoX[key];
+  }
   if (theme === "dark" && lvl2.dark) return lvl2.dark;
   return lvl2.light;
 };
