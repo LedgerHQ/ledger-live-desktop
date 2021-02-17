@@ -37,8 +37,6 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get install -y xvfb libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xinput0 libxcb-xfixes0
-          # start xvfb in the background
-          sudo /usr/bin/Xvfb :0 -screen 0 1024x788x24 &
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -63,8 +61,10 @@ jobs:
         run: export INSTRUMENT_BUILD=true && sudo --preserve-env=INSTRUMENT_BUILD yarn build
       - name: start electron webdriver
         if: always()
+        env:
+          DISPLAY: :99.0
         run: |
-          node node_modules/electron-chromedriver/chromedriver.js --port=9515 --whitelisted-ips="" --url-base=/ &
+          xvfb-run -a --server-args="-screen 0 1024x788x24 -ac +extension RANDR" node_modules/electron-chromedriver/chromedriver.js --port=9515 --whitelisted-ips="" --url-base=/ &
       - name: wait for container
         if: always()
         run: bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:9515)" != "404" ]]; do sleep 5; done'
