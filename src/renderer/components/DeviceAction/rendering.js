@@ -497,3 +497,11 @@ export const renderBootloaderStep = ({ onAutoRepair }: { onAutoRepair: () => voi
     </Button>
   </Wrapper>
 );
+
+export const renderProcessingStep = ({ type }: { type: "light" | "dark" }) => (
+  <Wrapper>
+    <AnimationWrapper modelId={"nanoS"}>
+      <Animation animation={getDeviceAnimation("nanoS", type, "processing")} />
+    </AnimationWrapper>
+  </Wrapper>
+);

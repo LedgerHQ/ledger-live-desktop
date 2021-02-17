@@ -26,6 +26,10 @@ const nanoS = {
     light: require("~/renderer/animations/nanoS/7Validate/light.json"),
     dark: require("~/renderer/animations/nanoS/7Validate/dark.json"),
   },
+  processing: {
+    light: require("~/renderer/animations/nanoS/8Processing/light.json"),
+    dark: require("~/renderer/animations/nanoS/8Processing/dark.json"),
+  },
 };
 const nanoX = {
   plugAndPinCode: {
