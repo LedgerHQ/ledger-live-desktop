@@ -26,6 +26,10 @@ const nanoS = {
     light: require("~/renderer/animations/nanoS/7Validate/light.json"),
     dark: require("~/renderer/animations/nanoS/7Validate/dark.json"),
   },
+  processing: {
+    light: require("~/renderer/animations/nanoS/2Processing/light.json"),
+    dark: require("~/renderer/animations/nanoS/2Processing/dark.json"),
+  },
 };
 const nanoX = {
   plugAndPinCode: {
@@ -77,6 +81,7 @@ const blue = {
 
 const animations = { nanoX, nanoS, blue };
 
+// TODO: fix this because it fucks up nano X and blue (no processing key)
 type InferredKeys = $Keys<typeof nanoS>;
 
 export const getDeviceAnimation = (
