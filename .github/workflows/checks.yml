@@ -33,6 +33,8 @@ jobs:
       - uses: actions/setup-node@main
         with:
           node-version: 12.x
+      - name: install linux dependencies
+        run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
       - name: Setup xvfb
         if: runner.os == 'Linux'
         run: |
@@ -64,7 +66,7 @@ jobs:
         env:
           DISPLAY: :99.0
         run: |
-          xvfb-run -a --server-args="-screen 0 1024x788x24 -ac +extension RANDR" node_modules/electron-chromedriver/chromedriver.js --port=9515 --whitelisted-ips="" --url-base=/ &
+          xvfb-run -a --server-args="-screen 0 1024x788x24 -ac +extension RANDR" node_modules/electron-chromedriver/chromedriver.js --port=9515 --whitelisted-ips="" --url-base=/ 2>webdriver.txt &
       - name: wait for container
         if: always()
         run: bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:9515)" != "404" ]]; do sleep 5; done'
@@ -109,11 +111,18 @@ jobs:
         uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: ./imgChanged.txt
+      - name: Read webdriver output
+        id: webdriver
+        if: always() && github.event_name == 'pull_request'
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
+        with:
+          path: ./webdriver.txt
       - name: prepare comment body
         if: always()
         id: comment
         uses: ./.github/actions/prepare-comment-body
         with:
+          webdriver: ${{ steps.webdriver.outputs.content }}
           images: ${{ steps.imgur.outputs.images }}
           fullrepo: ${{ github.repository }}
           runId: ${{ github.run_id }}

@@ -107,7 +107,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
 
     app = new Application({
       path: spectronPath, // just to make spectron happy since we override everything below
-      waitTimeout: 15000,
+      waitTimeout: 1000,
       webdriverOptions: {
         capabilities: {
           "goog:chromeOptions": {
