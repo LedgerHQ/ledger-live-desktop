@@ -106,7 +106,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       : electronPath;
 
     app = new Application({
-      path: spectronPath, // just to make spectron happy since we override everything below
+      path: electronPath, // just to make spectron happy since we override everything below
       waitTimeout: 15000,
       webdriverOptions: {
         capabilities: {
@@ -119,6 +119,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
               "--disable-dev-shm-usage",
               "--no-sandbox",
               "--lang=en",
+              "--font-render-hinting=none",
               `--user-data-dir=${appPath}/tests/tmp/${userDataPathKey}`,
             ].concat(_.map(env, (value, key) => `spectron-env-${key}=${value.toString()}`)),
             debuggerAddress: undefined,
