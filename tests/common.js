@@ -90,6 +90,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
         HIDE_DEBUG_MOCK: true,
         DISABLE_DEV_TOOLS: true,
         SPECTRON_RUN: true,
+        CI: process.env.CI,
       },
       env,
     );
@@ -151,8 +152,10 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     });
 
     app.client.addCommand("screenshot", async function(countdown = 500) {
+      /*
       const unfocus = await app.client.$("#unfocus-please");
       await unfocus.click();
+      */
 
       await this.pause(countdown);
 
