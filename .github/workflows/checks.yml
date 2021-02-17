@@ -35,6 +35,8 @@ jobs:
           node-version: 12.x
       - name: install linux dependencies
         run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
+      - name: install fonts things
+        run: sudo apt-get -qqy --no-install-recommends install fonts-ipafont-gothic xfonts-100dpi xfonts-75dpi xfonts-cyrillic xfonts-scalable
       - name: Setup xvfb
         if: runner.os == 'Linux'
         run: |
