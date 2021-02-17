@@ -19,6 +19,7 @@ jobs:
           access_token: ${{ github.token }}
   test:
     runs-on: ubuntu-latest
+    container: node:12
     needs: cancel-previous
     outputs:
       comment: ${{ steps.comment.outputs.body }}
@@ -30,15 +31,9 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
-      - uses: actions/setup-node@main
-        with:
-          node-version: 12.x
       - name: install linux dependencies
         run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
-      - name: install fonts things
-        run: sudo apt-get -qqy --no-install-recommends install fonts-ipafont-gothic xfonts-100dpi xfonts-75dpi xfonts-cyrillic xfonts-scalable
       - name: Setup xvfb
-        if: runner.os == 'Linux'
         run: |
           sudo apt-get install -y xvfb libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xinput0 libxcb-xfixes0
       - name: get yarn cache
