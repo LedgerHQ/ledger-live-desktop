@@ -107,7 +107,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
 
     app = new Application({
       path: spectronPath, // just to make spectron happy since we override everything below
-      waitTimeout: 1000,
+      waitTimeout: 15000,
       webdriverOptions: {
         capabilities: {
           "goog:chromeOptions": {
@@ -152,10 +152,8 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     });
 
     app.client.addCommand("screenshot", async function(countdown = 500) {
-      /*
       const unfocus = await app.client.$("#unfocus-please");
       await unfocus.click();
-      */
 
       await this.pause(countdown);
 

@@ -65,9 +65,10 @@ jobs:
         if: always()
         env:
           DISPLAY: :99.0
+          TZ: America/New_York
         run: |
           xvfb-run -a --server-args="-screen 0 1024x788x24 -ac +extension RANDR" node_modules/electron-chromedriver/chromedriver.js --port=9515 --whitelisted-ips="" --url-base=/ 2>webdriver.txt &
-      - name: wait for container
+      - name: wait for webdriver
         if: always()
         run: bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:9515)" != "404" ]]; do sleep 5; done'
       - name: run spectron
