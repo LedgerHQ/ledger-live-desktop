@@ -32,7 +32,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
       - name: install linux dependencies
-        run: apt-get update && apt-get install libudev-dev libusb-1.0-0-dev
+        run: apt-get update && apt-get install -y libudev-dev libusb-1.0-0-dev
       - name: Setup xvfb
         run: |
           apt-get install -y xvfb libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xinput0 libxcb-xfixes0
@@ -57,7 +57,9 @@ jobs:
           path: ./lint.txt
       - name: check build
         if: always()
-        run: export INSTRUMENT_BUILD=true && --preserve-env=INSTRUMENT_BUILD yarn build
+        env:
+          INSTRUMENT_BUILD: true
+        run: yarn build
       - name: start electron webdriver
         if: always()
         env:
