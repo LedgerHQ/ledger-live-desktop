@@ -27,10 +27,10 @@ jobs:
       slackAuthor: ${{ steps.comment.outputs.slackAuthor }}
     steps:
       - name: install linux dependencies
-        run: apt-get update && apt-get install -y libudev-dev libusb-1.0-0-dev
+        run: sudo apt-get update && sudo apt-get install -y libudev-dev libusb-1.0-0-dev
       - name: Setup xvfb
         run: |
-          apt-get -qqy install xvfb libnss3-dev libgconf-2-4 fuse libgtk2.0-0 libgtk-3-0 libasound2 libudev-dev libusb-1.0-0 libusb-1.0-0-dev lib32z1 rpm fakeroot dpkg libdbus-1-dev libx11-dev libavahi-compat-libdnssd-dev g++ gcc-multilib g++-multilib libgtk-3-dev libxtst6 libxss1 libnss3
+          sudo apt-get -qqy install xvfb libnss3-dev libgconf-2-4 fuse libgtk2.0-0 libgtk-3-0 libasound2 libudev-dev libusb-1.0-0 libusb-1.0-0-dev lib32z1 rpm fakeroot dpkg libdbus-1-dev libx11-dev libavahi-compat-libdnssd-dev g++ gcc-multilib g++-multilib libgtk-3-dev libxtst6 libxss1 libnss3
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
