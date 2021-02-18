@@ -106,11 +106,14 @@ export const setupNewDevice = Machine({
           target: "deviceHowTo",
         },
         HELP: {
-          actions: assign({
-            help: {
-              pinCode: true,
-            },
-          }),
+          actions: [
+            () => track("Onboarding - Pin code step 1 - HELP CLICK"),
+            assign({
+              help: {
+                pinCode: true,
+              },
+            }),
+          ],
         },
       },
     },
@@ -131,11 +134,14 @@ export const setupNewDevice = Machine({
           target: "pinCode",
         },
         HELP: {
-          actions: assign({
-            help: {
-              pinCode: true,
-            },
-          }),
+          actions: [
+            () => track("Onboarding - Pin code step 2 - HELP CLICK"),
+            assign({
+              help: {
+                pinCode: true,
+              },
+            }),
+          ],
         },
       },
     },
@@ -149,11 +155,14 @@ export const setupNewDevice = Machine({
       }),
       on: {
         HELP: {
-          actions: assign({
-            help: {
-              recoveryPhrase: true,
-            },
-          }),
+          actions: [
+            () => track("Onboarding - Recovery step 1 - HELP CLICK"),
+            assign({
+              help: {
+                recoveryPhrase: true,
+              },
+            }),
+          ],
         },
         RECOVERY_TERMS_CHANGED: {
           actions: assign({
@@ -180,11 +189,14 @@ export const setupNewDevice = Machine({
       }),
       on: {
         HELP: {
-          actions: assign({
-            help: {
-              recoveryPhrase: true,
-            },
-          }),
+          actions: [
+            () => track("Onboarding - Recovery step 2 - HELP CLICK"),
+            assign({
+              help: {
+                recoveryPhrase: true,
+              },
+            }),
+          ],
         },
         NEXT: {
           target: "recoveryHowTo3",
@@ -205,11 +217,14 @@ export const setupNewDevice = Machine({
       }),
       on: {
         HELP: {
-          actions: assign({
-            help: {
-              recoveryPhrase: true,
-            },
-          }),
+          actions: [
+            () => track("Onboarding - Recovery step 3 - HELP CLICK"),
+            assign({
+              help: {
+                recoveryPhrase: true,
+              },
+            }),
+          ],
         },
         NEXT: {
           target: "hideRecoveryPhrase",
@@ -233,11 +248,14 @@ export const setupNewDevice = Machine({
       }),
       on: {
         HELP: {
-          actions: assign({
-            help: {
-              hideRecoveryPhrase: true,
-            },
-          }),
+          actions: [
+            () => track("Onboarding - Recovery step 4 - HELP CLICK"),
+            assign({
+              help: {
+                hideRecoveryPhrase: true,
+              },
+            }),
+          ],
         },
         NEXT: {
           actions: [
