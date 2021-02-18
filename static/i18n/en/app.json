@@ -2386,6 +2386,12 @@
     "dusk": "Dusk",
     "dark": "Dark"
   },
+  "informationCenter": {
+    "tabs": {
+      "announcements": "News",
+      "serviceStatus": "Status"
+    }
+  },
   "onboarding": {
     "drawers": {
       "pinHelp": {

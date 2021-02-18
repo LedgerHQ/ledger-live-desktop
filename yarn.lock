@@ -1342,10 +1342,17 @@
   dependencies:
     commander "^2.20.0"
 
-"@ledgerhq/cryptoassets@5.43.0", "@ledgerhq/cryptoassets@^5.43.0":
-  version "5.43.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-5.43.0.tgz#28a1d5dd3a68ebeb016db337294ef503d20a57a8"
-  integrity sha512-4WsL24r/F6ewgI5F4e4QGZfdrziGbgs/k9e8nPT/7JfjzNIPwIQCOJloYXZgptD4sGKA7DY9M9SJ7JVcZCusbQ==
+"@ledgerhq/cryptoassets@5.44.0":
+  version "5.44.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-5.44.0.tgz#930a3314d6a81818570adbb8599fcb72a1c83613"
+  integrity sha512-8ZDX0RYQCDTLIHnHKV+ONvFd0bTbMjDsw/u43AfqY2Nh/7y+tBxxE6CPz5r7rnGti5J+LE1z4VUVs1LAsn/9Pw==
+  dependencies:
+    invariant "2"
+
+"@ledgerhq/cryptoassets@^5.44.0":
+  version "5.44.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-5.44.1.tgz#15c4aeae21049e899fe1af711150deb2540f5e55"
+  integrity sha512-UhAL5kH81VgU2DGXjrz+tX3fXwYtJWSrDkna01lBl56Js8S57n/s47fajpU93K2msYqjJ5hhKaNgSvjNSmeMoA==
   dependencies:
     invariant "2"
 
@@ -1391,12 +1398,12 @@
     semver "^7.3.4"
     sha.js "2"
 
-"@ledgerhq/hw-app-eth@5.43.0":
-  version "5.43.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-5.43.0.tgz#7bb7a3a9bbc03ec725c775ce2824928abbf8d8e7"
-  integrity sha512-SBQMudXQRnZtGBaYF8+3ikFv+Z8HPahrA7Sp0AWxytHTpMncoeqx08EI7dCXHE07rW6/kZqL0/eMAq+ZW4oknw==
+"@ledgerhq/hw-app-eth@5.44.0":
+  version "5.44.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-5.44.0.tgz#674cabde0ccfefadc6ab1515ceee9c0284c41d69"
+  integrity sha512-4qbYRq6Cvfy3O8Zk2YDDVr9hZMJDbT17908qvdrnchYq7Y3suPQmRKqXEvbKlN8JjXqfwX+F/KJpGcvMzIk8PQ==
   dependencies:
-    "@ledgerhq/cryptoassets" "^5.43.0"
+    "@ledgerhq/cryptoassets" "^5.44.0"
     "@ledgerhq/errors" "^5.43.0"
     "@ledgerhq/hw-transport" "^5.43.0"
     bignumber.js "^9.0.1"
@@ -1503,14 +1510,14 @@
     node-pre-gyp-github "^1.4.3"
 
 "@ledgerhq/live-common@file:.yalc/@ledgerhq/live-common":
-  version "18.4.0"
+  version "18.5.2"
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
-    "@ledgerhq/cryptoassets" "5.43.0"
+    "@ledgerhq/cryptoassets" "5.44.0"
     "@ledgerhq/devices" "5.43.0"
     "@ledgerhq/errors" "5.43.0"
     "@ledgerhq/hw-app-btc" "^5.43.0"
-    "@ledgerhq/hw-app-eth" "5.43.0"
+    "@ledgerhq/hw-app-eth" "5.44.0"
     "@ledgerhq/hw-app-str" "^5.43.0"
     "@ledgerhq/hw-app-trx" "5.43.0"
     "@ledgerhq/hw-app-xrp" "5.43.0"
@@ -1519,7 +1526,7 @@
     "@ledgerhq/hw-transport-node-speculos" "^5.43.0"
     "@ledgerhq/logs" "5.43.0"
     "@polkadot/types" "3.6.4"
-    "@walletconnect/client" "1.3.5"
+    "@walletconnect/client" "1.3.6"
     async "^3.2.0"
     axios "0.21.1"
     bchaddrjs "^0.5.2"
@@ -2552,17 +2559,17 @@
     "@typescript-eslint/types" "4.6.0"
     eslint-visitor-keys "^2.0.0"
 
-"@walletconnect/client@1.3.5":
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/@walletconnect/client/-/client-1.3.5.tgz#7dcef917beb21ae624bde56c85972b7df84869a9"
-  integrity sha512-mCjwRR6hiH4tM10aPfDAq4zELwCoHeCkkORXbj3taLhOH0RNW8TR6KpHl6LzBHwkWsghDXMnCm3wLlatIe2YYA==
+"@walletconnect/client@1.3.6":
+  version "1.3.6"
+  resolved "https://registry.yarnpkg.com/@walletconnect/client/-/client-1.3.6.tgz#537b7af6bf87a906fcf171fd5bc4e56a2a3d1908"
+  integrity sha512-HmzUpF/cPqPf8huaVg45SXk2hKQ6yxisy/qJ+51SoRGmtZDokJGxpq6+RFOnE8jFtUhTZRaK9UZ/jvsJAxIhEw==
   dependencies:
-    "@walletconnect/core" "^1.3.5"
-    "@walletconnect/iso-crypto" "^1.3.5"
-    "@walletconnect/types" "^1.3.5"
-    "@walletconnect/utils" "^1.3.5"
+    "@walletconnect/core" "^1.3.6"
+    "@walletconnect/iso-crypto" "^1.3.6"
+    "@walletconnect/types" "^1.3.6"
+    "@walletconnect/utils" "^1.3.6"
 
-"@walletconnect/core@^1.3.5":
+"@walletconnect/core@^1.3.6":
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/@walletconnect/core/-/core-1.3.6.tgz#1690081bc4666b6644ed6a1bed128509a5259e50"
   integrity sha512-1HHP2xZI6b88WQgszs3gP5xkkCwwlWgDJz+J6ADGzVXhQP21p1mZhKezUtx27rOtQimMIrPDfgPyAHwQBZkkSw==
@@ -2571,7 +2578,7 @@
     "@walletconnect/types" "^1.3.6"
     "@walletconnect/utils" "^1.3.6"
 
-"@walletconnect/iso-crypto@^1.3.5":
+"@walletconnect/iso-crypto@^1.3.6":
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/@walletconnect/iso-crypto/-/iso-crypto-1.3.6.tgz#e6003d46fbc12b979e96269d94eebd8e801c0305"
   integrity sha512-HypXNSmMAuEvNhllXWsCHtCVK4JfFFcZqPijurcXmOtWanjZV+8NuiYnKG11qAllSbYRwqKchb7GTDp33n0g0Q==
@@ -2589,12 +2596,12 @@
     "@walletconnect/utils" "^1.3.6"
     ws "7.3.0"
 
-"@walletconnect/types@^1.3.5", "@walletconnect/types@^1.3.6":
+"@walletconnect/types@^1.3.6":
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/@walletconnect/types/-/types-1.3.6.tgz#892da6fb4570d9bc5450dc1a5810d7b4d345dd08"
   integrity sha512-fNir3Pi1ZpuVlgNr8qtP2LOSsV9rNgJGHmBnHHqKNmpuRpPxG1mhmKFdDHNGyVIP5bM5CWIXmlULDTax63UJbg==
 
-"@walletconnect/utils@^1.3.5", "@walletconnect/utils@^1.3.6":
+"@walletconnect/utils@^1.3.6":
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/@walletconnect/utils/-/utils-1.3.6.tgz#e55cb5510eb41b4ae6be8e88c1de42abf309bdd3"
   integrity sha512-nzTO5A3Ltjrsu6u8SR/KqdHTH03848KIj5MQlOCUjwxW1fXOvuri8+kwFKqlMn0bk1Qvlt6rrOptbt14PW8kSA==

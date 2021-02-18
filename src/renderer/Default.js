@@ -36,7 +36,6 @@ import DebugMock from "~/renderer/components/debug/DebugMock";
 import { DebugWrapper } from "~/renderer/components/debug/shared";
 import useDeeplink from "~/renderer/hooks/useDeeplinking";
 import ModalsLayer from "./ModalsLayer";
-import { useAnnouncements } from "@ledgerhq/live-common/lib/announcements/react";
 
 export default function Default() {
   const location = useLocation();
@@ -49,29 +48,6 @@ export default function Default() {
       ref.current.scrollTo(0, 0);
     }
   }, [location]);
-
-  const {
-    cache,
-    allIds,
-    seenIds,
-    isLoading,
-    error,
-    updateCache,
-    setAsSeen,
-  } = useAnnouncements();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      console.log("REFRESHING")
-      updateCache();
-    }, 15000);
-    return () => {
-      console.log("CLEARED")
-      clearInterval(interval);
-    }
-  }, [updateCache])
-
-  console.log({ cache, isLoading, error, allIds, seenIds });
 
   return (
     <>

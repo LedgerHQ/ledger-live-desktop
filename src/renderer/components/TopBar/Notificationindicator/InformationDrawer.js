@@ -1,11 +1,16 @@
 // @flow
 
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { SideDrawer } from "~/renderer/components/SideDrawer";
 import Box from "~/renderer/components/Box";
-import Text from "~/renderer/components/Text";
+import styled from "styled-components";
 import TabBar from "~/renderer/components/TabBar";
+import { AnnouncementPanel } from "~/renderer/components/TopBar/Notificationindicator/AnnouncementPanel";
+import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
+
+const PanelContainer = styled(ScrollArea)`
+  flex: 1;
+`;
 
 export const InformationDrawer = ({
   isOpen,
@@ -14,18 +19,20 @@ export const InformationDrawer = ({
   isOpen: boolean,
   onRequestClose: () => void,
 }) => {
-
-  const { t } = useTranslation();
   const [tabIndex, setTabIndex] = useState(0);
 
   return (
     <SideDrawer paper isOpen={isOpen} onRequestClose={onRequestClose} direction="left">
-      <Box py={60}>
+      <Box pt="60px" height="100%">
         <TabBar
-          tabs={["swap.tabs.exchange", "swap.tabs.history"]}
+          fullWidth
+          tabs={["informationCenter.tabs.announcements"]}
           onIndexChange={setTabIndex}
           index={tabIndex}
         />
+        <PanelContainer hideScrollbar>
+          <Box py="32px">{tabIndex === 0 ? <AnnouncementPanel key="announcement" /> : null}</Box>
+        </PanelContainer>
       </Box>
     </SideDrawer>
   );

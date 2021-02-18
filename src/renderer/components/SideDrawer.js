@@ -65,7 +65,7 @@ const DrawerContent = styled.div`
   bottom: 0;
   z-index: 1;
   box-sizing: border-box;
-  padding: 0px 67px;
+  padding: 0px 40px;
   width: 80%;
   background-color: ${p =>
     p.paper ? p.theme.colors.palette.background.paper : p.theme.colors.palette.background.default};
@@ -99,7 +99,7 @@ const DrawerContainer = styled.div`
   bottom: 0;
   right: 0;
   overflow: hidden;
-  z-index: 10;
+  z-index: 50;
 
   &.exited {
     pointer-events: none;
