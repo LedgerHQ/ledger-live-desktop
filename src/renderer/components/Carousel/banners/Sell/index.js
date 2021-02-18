@@ -51,9 +51,9 @@ const BackupPack = () => {
   // React to the user mouse movement inside the banner for parallax effect
   const onMouseMove = e => {
     if (!ref.current) return;
-    var rect = ref.current.getBoundingClientRect();
-    var x = e.clientX - rect.left;
-    var y = e.clientY - rect.top;
+    const rect = ref.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
     set({ xy: [x - rect.width / 2, y - rect.height / 2] });
   };
 
