@@ -86,6 +86,11 @@ export default class Page {
     return items;
   }
 
+  async toggleDiscreetMode() {
+    const descreetBtn = await this.topbarDiscreetButton;
+    await descreetBtn.click();
+  }
+
   // Drawer Menu
   async goToAccounts() {
     const btn = await this.drawerAccountsButton();
@@ -95,6 +100,11 @@ export default class Page {
   async goToPortfolio() {
     const btn = await this.drawerPortfolioButton();
     await btn.click();
+  }
+
+  async goToBuyCrypto() {
+    const buyCryptoBtn = await this.drawerBuycryptoButton;
+    await buyCryptoBtn.click();
   }
 
   async getThemeColor() {

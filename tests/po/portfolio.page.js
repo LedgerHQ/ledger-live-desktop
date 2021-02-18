@@ -21,7 +21,7 @@ export default class PortfolioPage extends Page {
     return this.$("#carousel-dismiss-confirm");
   }
 
-  get helpButton() {
+  async helpButton() {
     return this.$("#topbar-help-button");
   }
 
