@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:12-buster
 
 ENV CHROMEDRIVER_PORT 9515
 ENV CHROMEDRIVER_WHITELISTED_IPS ""
@@ -44,7 +44,6 @@ RUN apt-get -qqy install \
   libusb-1.0-0 \
   libusb-1.0-0-dev \
   lib32z1 \
-  lib32ncurses5 \
   rpm \
   fakeroot \
   dpkg \
