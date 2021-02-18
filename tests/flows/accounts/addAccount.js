@@ -8,6 +8,8 @@ import {
   portfolioPage,
 } from "../../common.js";
 
+let nbAccounts = 0;
+
 const addAccount = currency => {
   invariant(currency, "currency is needed");
 
@@ -18,9 +20,8 @@ const addAccount = currency => {
       });
     });
 
-    it(`${currency} flow`, async () => {
+    it(`prepare ${currency} flow`, async () => {
       const exists = await portfolioPage.isAddAccountAvailable();
-      let nbAccounts = 0;
 
       // true if there are accounts already imported
       if (!exists) {
@@ -33,8 +34,20 @@ const addAccount = currency => {
         ? await portfolioPage.emtpyStateAddAccountButton
         : await accountsPage.addAccountButton;
       await addAccountButton.click();
+      await addAccountsModal.waitForDisplayed();
+      await addAccountsModal.prepareAddAccount(currency);
 
-      await addAccountsModal.addAccountFlow(currency, mockDeviceEvent);
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapshotIdentifier: `${currency}-add-account-fill-input`,
+      });
+    });
+
+    it(`completes the add account flow`, async () => {
+      await addAccountsModal.finishAddAccount(mockDeviceEvent);
+
+      // counter value refresh.
+      await app.client.pause(2000);
+
       await addAccountsModal.close();
 
       await accountsPage.goToAccounts();

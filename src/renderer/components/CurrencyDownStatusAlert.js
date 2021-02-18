@@ -8,13 +8,10 @@ type Props = {
 };
 
 const StratisDown2021Warning = createCustomErrorClass("StratisDown2021Warning");
-const CosmosStargateFeb2021Warning = createCustomErrorClass("CosmosStargateFeb2021Warning");
 
 const CurrencyDownStatusAlert = ({ currencies }: Props) => {
   const errors = [];
   if (currencies.some(c => c.id === "stratis")) errors.push(new StratisDown2021Warning());
-
-  if (currencies.some(c => c.id === "cosmos")) errors.push(new CosmosStargateFeb2021Warning());
 
   return errors.length > 0 ? (
     <div>

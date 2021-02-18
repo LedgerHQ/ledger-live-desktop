@@ -21,6 +21,10 @@ export default class AccountPage extends Page {
     return this.$("#token-menu-hide");
   }
 
+  get operationsList() {
+    return this.$("#operation-list");
+  }
+
   async bookmarkAccount() {
     const elem = await this.starButton;
     await elem.click();
@@ -31,6 +35,11 @@ export default class AccountPage extends Page {
     return list.$$(".token-row");
   }
 
+  async getOperationRows() {
+    const operationList = await this.operationsList;
+    return operationList.$$(".operation-row");
+  }
+
   async hideFirstToken() {
     const tokens = await this.getTokens();
     const [token] = tokens;
@@ -38,5 +47,12 @@ export default class AccountPage extends Page {
     await this.app.client.pause(500);
     const hideButton = await this.menuHideTokenButton;
     await hideButton.click();
+  }
+
+  async clickFirstOperationRow() {
+    const operationRows = await this.getOperationRows();
+
+    const firstOperationRow = operationRows[0];
+    await firstOperationRow.click();
   }
 }
