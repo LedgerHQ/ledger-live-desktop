@@ -19,7 +19,6 @@ jobs:
           access_token: ${{ github.token }}
   test:
     runs-on: ubuntu-latest
-    container: node:12-buster
     needs: cancel-previous
     outputs:
       comment: ${{ steps.comment.outputs.body }}
