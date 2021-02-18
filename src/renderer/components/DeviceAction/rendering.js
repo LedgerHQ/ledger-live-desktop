@@ -388,7 +388,7 @@ export const renderFirmwareUpdating = ({
   <Wrapper>
     <Header />
     <AnimationWrapper modelId={modelId}>
-      <Animation animation={getDeviceAnimation(modelId, type, "processing")} />
+      <Animation animation={getDeviceAnimation(modelId, type, "firmwareUpdating")} />
     </AnimationWrapper>
     <Footer>
       <Title>
