@@ -2480,7 +2480,7 @@
       },
       "selectUseCase": {
         "greetings": "¡Hola!",
-        "hasNoRecovery": "First time using your {{deviceName}}?",
+        "hasNoRecovery": "¿Es la primera vez que utilizas tu {{deviceName}}?",
         "hasRecovery": "¿Ya dispones de una frase de contraseña?",
         "separator": "o",
         "options": {
