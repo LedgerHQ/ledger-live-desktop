@@ -11,12 +11,10 @@ const pkg = require("./../package.json");
 
 const { SENTRY_URL } = process.env;
 
-const GIT_REVISION = !process.env.CI
-  ? childProcess
-      .execSync("git rev-parse --short HEAD")
-      .toString("utf8")
-      .trim()
-  : "CI";
+const GIT_REVISION = childProcess
+  .execSync("git rev-parse --short HEAD")
+  .toString("utf8")
+  .trim();
 
 // TODO: ADD BUNDLE ANALYZER
 

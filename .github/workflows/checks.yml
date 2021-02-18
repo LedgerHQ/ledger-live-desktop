@@ -61,7 +61,6 @@ jobs:
         if: always()
         env:
           INSTRUMENT_BUILD: true
-          GIT_DISCOVERY_ACROSS_FILESYSTEM: 1
         run: yarn build
       - name: start electron webdriver
         if: always()
