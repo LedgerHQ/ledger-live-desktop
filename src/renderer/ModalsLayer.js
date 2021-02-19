@@ -9,12 +9,12 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import { modalsStateSelector } from "~/renderer/reducers/modals";
 import modals from "~/renderer/modals";
-
+import { useActiveFlow } from "~/renderer/components/ProductTour/hooks";
 // TODO: SNOOOOOOOOWW
 // import Snow, { isSnowTime } from '~/renderer/components/extra/Snow'
 
-const BackDrop: ThemedComponent<{ state: string }> = styled.div.attrs(({ state }) => ({
-  style: { opacity: state === "entered" ? 1 : 0 },
+const BackDrop: ThemedComponent<{ state: string }> = styled.div.attrs(({ state, activeFlow }) => ({
+  style: { opacity: state === "entered" || activeFlow ? 1 : 0 },
 }))`
   pointer-events: none;
   position: fixed;
@@ -24,7 +24,7 @@ const BackDrop: ThemedComponent<{ state: string }> = styled.div.attrs(({ state }
   bottom: 0;
   background-color: #142533cc;
   z-index: 100;
-  opacity: 0;
+  opacity: ${p => (p.activeFlow ? 1 : 0)};
   transition: opacity 200ms cubic-bezier(0.3, 1, 0.5, 0.8);
 `;
 
@@ -36,20 +36,27 @@ const ModalsLayer = ({ visibleModals }: *) => {
     ({ name, MODAL_SHOW_ONCE }) =>
       MODAL_SHOW_ONCE && global.sessionStorage.setItem(name, Date.now()),
   );
+
+  const activeFlow = useActiveFlow();
+
   return (
     <Transition
       in={filteredModals.length > 0}
       appear
       mountOnEnter
       unmountOnExit
-      timeout={{
-        appear: 100,
-        enter: 100,
-        exit: 200,
-      }}
+      timeout={
+        activeFlow
+          ? { appear: 0, enter: 0, exit: 0 }
+          : {
+              appear: 100,
+              enter: 100,
+              exit: 200,
+            }
+      }
     >
       {state => (
-        <BackDrop state={state}>
+        <BackDrop state={state} activeFlow={activeFlow}>
           {/* {// Will only render at the end of december
           isSnowTime() ? <Snow numFlakes={200} /> : null} */}
           {filteredModals.map(({ name, ...data }, i) => {

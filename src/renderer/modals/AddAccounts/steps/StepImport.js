@@ -238,17 +238,19 @@ class StepImport extends PureComponent<StepProps> {
         </Trans>
       ),
     };
-    console.log({ scannedAccounts });
+
     return (
       <>
         <TrackPage category="AddAccounts" name="Step3" currencyName={currencyName} />
         <Box mt={-4}>
           <QueueContextualOverlay
-            queue={{
-              selector: ".account-row",
-              i18nKey: "productTour.flows.createAccount.overlays.account",
-              conf: { bottom: true, left: true, isDismissable: true },
-            }}
+            queue={[
+              {
+                selector: ".account-row",
+                i18nKey: "productTour.flows.createAccount.overlays.account",
+                conf: { bottom: true, left: true, isDismissable: true },
+              },
+            ]}
             condition={scannedAccounts.length}
           />
           {sections.map(({ id, selectable, defaultSelected, data, supportLink }, i) => (

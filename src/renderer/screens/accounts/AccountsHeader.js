@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useContext, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -11,17 +11,17 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 
 import OptionsButton from "./OptionsButton";
-import { useOnClearContextualOverlayQueue } from "~/renderer/components/ProductTour/hooks";
+import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 
 const AccountsHeader = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { send } = useContext(ProductTourContext);
 
-  const onDismissContextualOverlayQueue = useOnClearContextualOverlayQueue();
   const openAddAccounts = useCallback(() => {
     dispatch(openModal("MODAL_ADD_ACCOUNTS"));
-    onDismissContextualOverlayQueue();
-  }, [dispatch, onDismissContextualOverlayQueue]);
+    send("NEXT_CONTEXTUAL_OVERLAY");
+  }, [dispatch, send]);
 
   return (
     <Box horizontal style={{ paddingBottom: 32 }}>

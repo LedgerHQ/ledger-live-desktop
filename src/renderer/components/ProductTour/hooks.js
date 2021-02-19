@@ -1,11 +1,11 @@
 // @flow
-import { useContext, useCallback, useEffect, useRef } from "react";
+import { useMemo, useContext, useCallback, useEffect, useRef } from "react";
 import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 import isEqual from "lodash/isEqual";
 import type { OverlayConfig } from "~/renderer/components/ProductTour/ContextualOverlay";
 type SetHelpElement = {
   selector: string,
-  i18nKey: string,
+  i18nKey?: string,
   callback?: any => any,
   conf: OverlayConfig,
 };
@@ -48,7 +48,7 @@ export function useOnSetContextualOverlayQueue(overlayData: SetHelpElement) {
 
 export function useOnClearContextualOverlayQueue() {
   const { send } = useContext(ProductTourContext);
-  const cb = useCallback(() => send("SET_CONTEXTUAL_OVERLAY_QUEUE", { overlayQueue: [] }), [send]);
+  const cb = useCallback(() => send("CLEAR_CONTEXTUAL_OVERLAY_QUEUE"), [send]);
 
   return cb;
 }
@@ -64,5 +64,24 @@ export function useOnExitProductTour() {
 
 export function useActiveFlow() {
   const { state } = useContext(ProductTourContext);
-  return state.matches("flow.ongoing") ? state.context.activeFlow || null : null;
+  return state.matches("flow.ongoing") || state.matches("flow.completed")
+    ? state.context.activeFlow
+    : null;
+}
+
+export function useHasContextualOverlay() {
+  const { state } = useContext(ProductTourContext);
+  const hasContextOverlay = useMemo(() => {
+    if (
+      state &&
+      state.context &&
+      state.context.overlayQueue &&
+      state.context.overlayQueue?.length
+    ) {
+      return true;
+    }
+    return false;
+  }, [state]);
+
+  return hasContextOverlay;
 }

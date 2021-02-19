@@ -14,7 +14,10 @@ import { command } from "~/renderer/commands";
 import FirmwareUpdate from "./FirmwareUpdate";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { useSetContextualOverlayQueue } from "~/renderer/components/ProductTour/hooks";
+import {
+  useSetContextualOverlayQueue,
+  useActiveFlow,
+} from "~/renderer/components/ProductTour/hooks";
 type Props = {
   device: Device,
   deviceInfo: DeviceInfo,
@@ -34,7 +37,7 @@ const Dashboard = ({ device, deviceInfo, result, onReset, appsToRestore }: Props
     {
       selector: "#appCatalog-body",
       i18nKey: "productTour.flows.install.overlays.catalog",
-      conf: { top: true, left: true },
+      conf: { top: true, left: true, skipOnLeft: true },
     },
     {
       selector: "#managerAppsList-Bitcoin",
@@ -49,6 +52,9 @@ const Dashboard = ({ device, deviceInfo, result, onReset, appsToRestore }: Props
   const hasDisconnectedDuringFU = useRef(false);
   const [firmware, setFirmware] = useState(null);
   const [firmwareError, setFirmwareError] = useState(null);
+
+  // NB Hide the firmware update banner if we are in the install product tour.
+  const hideFirmwareUpdateBanner = useActiveFlow();
 
   useEffect(() => {
     command("getLatestFirmwareForDevice")(deviceInfo)
@@ -107,21 +113,23 @@ const Dashboard = ({ device, deviceInfo, result, onReset, appsToRestore }: Props
           result={result}
           appsToRestore={appsToRestore}
           exec={exec}
-          render={({ disableFirmwareUpdate, installed }) => (
-            <FirmwareUpdate
-              t={t}
-              device={device}
-              deviceInfo={deviceInfo}
-              firmware={firmware}
-              error={firmwareError}
-              setFirmwareUpdateOpened={setFirmwareUpdateOpened}
-              disableFirmwareUpdate={disableFirmwareUpdate}
-              installed={installed}
-              onReset={onReset}
-            />
-          )}
+          render={({ disableFirmwareUpdate, installed }) =>
+            !hideFirmwareUpdateBanner ? (
+              <FirmwareUpdate
+                t={t}
+                device={device}
+                deviceInfo={deviceInfo}
+                firmware={firmware}
+                error={firmwareError}
+                setFirmwareUpdateOpened={setFirmwareUpdateOpened}
+                disableFirmwareUpdate={disableFirmwareUpdate}
+                installed={installed}
+                onReset={onReset}
+              />
+            ) : null
+          }
         />
-      ) : (
+      ) : !hideFirmwareUpdateBanner ? (
         <FirmwareUpdate
           t={t}
           device={device}
@@ -131,7 +139,7 @@ const Dashboard = ({ device, deviceInfo, result, onReset, appsToRestore }: Props
           setFirmwareUpdateOpened={setFirmwareUpdateOpened}
           onReset={onReset}
         />
-      )}
+      ) : null}
     </Box>
   );
 };
