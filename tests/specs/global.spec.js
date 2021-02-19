@@ -89,4 +89,14 @@ describe("Global", () => {
       customSnapshotIdentifier: "global-dismiss-carousel",
     });
   });
+
+  it("can display the help modal", async () => {
+    const helpButton = await portfolioPage.helpButton;
+    await helpButton.click();
+    await app.client.pause(400);
+
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "global-help-drawer",
+    });
+  });
 });

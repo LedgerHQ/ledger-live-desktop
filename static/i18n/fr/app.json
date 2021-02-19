@@ -751,8 +751,8 @@
       "desc": "Commencer ici"
     },
     "status": {
-      "title": "Statut Ledger",
-      "desc": "Comprendre les cryptos"
+      "title": "Ledger Status",
+      "desc": "Consultez l’état du système"
     },
     "helpCenter": {
       "title": "Assistance Ledger",
