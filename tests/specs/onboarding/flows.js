@@ -8,8 +8,8 @@ export const selection = device => {
     const elem = await $("#onboarding-get-started-button");
     await elem.click();
     const terms = await $("#modal-confirm-button");
-    await terms.waitForDisplayed();
-    await app.client.pause(2000);
+    const modalContainer = await $("#modal-container");
+    await modalContainer.waitForDisplayed();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-terms",
     });
@@ -21,6 +21,8 @@ export const selection = device => {
     await lossCB.click();
     await termCB.click();
     await cta.click();
+    const modalContainer = await $("#modal-container");
+    await modalContainer.waitForDisplayed({ reverse: true });
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "onboarding-terms-accepted",
     });
@@ -28,7 +30,6 @@ export const selection = device => {
   it("selects " + device, async () => {
     const nanoX = await $("#device-" + device);
     await nanoX.click();
-    await app.client.pause(500);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: `onboarding-${device}-flow`,
     });
@@ -39,7 +40,6 @@ export const goToConnectAndFinish = cta => {
   it("goes to connect", async () => {
     const next = await $(cta);
     await next.click();
-    await app.client.pause(500);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       // wave thing
       failureThreshold: 15,
@@ -93,16 +93,16 @@ export const onboard = device => {
       await firstUse.click();
       const right = await $("#pedagogy-right");
       await right.click();
-      await app.client.pause(200);
+      await app.client.waitUntilWindowLoaded();
       await right.click();
-      await app.client.pause(200);
+      await app.client.waitUntilWindowLoaded();
       await right.click();
-      await app.client.pause(200);
+      await app.client.waitUntilWindowLoaded();
       await right.click();
-      await app.client.pause(200);
+      await app.client.waitUntilWindowLoaded();
       const cta = await $("#setup-nano-wallet-cta");
       await cta.click();
-      await app.client.pause(700);
+      await app.client.waitUntilWindowLoaded();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -116,7 +116,7 @@ export const onboard = device => {
       await next.click();
       const carefulcta = await $("#be-careful-cta");
       carefulcta.click();
-      await app.client.pause(500);
+      await app.client.waitUntilWindowLoaded();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -128,7 +128,7 @@ export const onboard = device => {
     it("goes to pincode", async () => {
       const next = await $("#device-howto-cta");
       await next.click();
-      await app.client.pause(700);
+      await app.client.waitUntilWindowLoaded();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -222,7 +222,6 @@ export const onboard = device => {
       await next.click();
       next = await $("#quizz-next-cta");
       await next.click();
-      await app.client.pause(400);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -250,7 +249,6 @@ export const onboard = device => {
     it("goes to restore 1", async () => {
       const next = await $("#restore-device");
       await next.click();
-      await app.client.pause(500);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -262,7 +260,6 @@ export const onboard = device => {
     it("warns the user", async () => {
       const next = await $("#import-recovery-next");
       await next.click();
-      await app.client.pause(500);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -274,7 +271,6 @@ export const onboard = device => {
     it("does recovery 1", async () => {
       const next = await $("#ledger-seed-warn");
       await next.click();
-      await app.client.pause(500);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,

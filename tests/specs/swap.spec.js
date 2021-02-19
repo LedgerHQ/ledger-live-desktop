@@ -150,7 +150,7 @@ describe("Swap", () => {
     await mockDeviceEvent({ type: "opened" }, { type: "complete" });
 
     const finishedStep = await $("#swap-modal-finished-close-button");
-    await finishedStep.waitForDisplayed({ timeout: 10000 });
+    await finishedStep.waitForDisplayed({ timeout: 15000 });
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-end-0",
     });
@@ -163,7 +163,7 @@ describe("Swap", () => {
     await finishedStep.waitForDisplayed({ reverse: true });
 
     // FIXME: Mocks are jumping from "in progress" status to "done"
-    await app.client.pause(1000);
+    await app.client.pause(5000);
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-end-1",

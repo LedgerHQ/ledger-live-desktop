@@ -74,7 +74,7 @@ describe("Firmware Update", () => {
     await mockDeviceEvent({}, { type: "complete" }); // .complete() flash mcu -> completed
     const elem = await $("#firmware-update-completed-close-button");
     await elem.waitForDisplayed();
-    expect(await app.client.screenshot(6000)).toMatchImageSnapshot({
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "firmware-update-6-flash-mcu-done",
     });
   });

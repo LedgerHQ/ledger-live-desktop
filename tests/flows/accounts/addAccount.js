@@ -45,7 +45,7 @@ const addAccount = currency => {
     it(`completes the add account flow`, async () => {
       await addAccountsModal.finishAddAccount(mockDeviceEvent);
 
-      // counter value refresh.
+      // FIXME: counter value refresh.
       await app.client.pause(2000);
 
       await addAccountsModal.close();
@@ -57,7 +57,6 @@ const addAccount = currency => {
     });
 
     it("display a list with the newly added accounts", async () => {
-      await app.client.pause(1000);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `${currency}-add-account-after`,
       });
