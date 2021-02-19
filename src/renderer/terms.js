@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { languageSelector } from "~/renderer/reducers/settings";
 
 const getRawLanguageURL = (language: string) =>
-  `https://raw.githubusercontent.com/LedgerHQ/ledger-live-desktop/master/TERMS-${language}.md`;
+  `https://raw.githubusercontent.com/LedgerHQ/ledger-live-desktop/master/TERM.${language}.md`;
 const rawDefaultURL =
   "https://raw.githubusercontent.com/LedgerHQ/ledger-live-desktop/master/TERMS.md";
 export const url = "https://github.com/LedgerHQ/ledger-live-desktop/blob/master/TERMS.md";

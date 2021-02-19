@@ -29,7 +29,7 @@ const options = [
   { value: "en", support: "full", label: <Trans i18nKey="language.switcher.en" /> },
   { value: "fr", support: "full", label: <Trans i18nKey="language.switcher.fr" /> },
   { value: "ru", support: "partial", label: <Trans i18nKey="language.switcher.ru" /> },
-  { value: "zh", support: "partial", label: <Trans i18nKey="language.switcher.zh" /> },
+  // { value: "zh", support: "partial", label: <Trans i18nKey="language.switcher.zh" /> },
   { value: "es", support: "partial", label: <Trans i18nKey="language.switcher.es" /> },
 ];
 

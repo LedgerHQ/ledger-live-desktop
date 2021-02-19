@@ -68,7 +68,7 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
   return (
     <WelcomeContainer>
       <TopRightContainer>
-        {null /* LL-4236 */ && <LangSwitcher />}
+        <LangSwitcher />
         {onboardingRelaunched && (
           <Button small onClick={() => sendEvent("PREV")}>
             Previous
