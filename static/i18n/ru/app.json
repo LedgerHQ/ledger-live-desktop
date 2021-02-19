@@ -2480,7 +2480,7 @@
       },
       "selectUseCase": {
         "greetings": "Здравствуйте!",
-        "hasNoRecovery": "First time using your {{deviceName}}?",
+        "hasNoRecovery": "Первое подключение устройства {{deviceName}}?",
         "hasRecovery": "У вас уже есть фраза восстановления?",
         "separator": "или",
         "options": {
