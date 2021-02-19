@@ -6,8 +6,8 @@ const goToAddAccount = async () => {
     await portfolioPage.goToAccounts();
   }
   const addAccountButton = exists
-    ? await portfolioPage.emtpyStateAddAccountButton
-    : await accountsPage.addAccountButton;
+    ? await portfolioPage.emtpyStateAddAccountButton()
+    : await accountsPage.addAccountButton();
   await addAccountButton.click();
   await addAccountsModal.waitForDisplayed();
 };

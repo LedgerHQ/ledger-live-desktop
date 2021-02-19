@@ -14,7 +14,7 @@ describe("Enable dev mode", () => {
     userData: "onboardingcompleted",
   });
 
-  const currencies = ["bitcoin testnet", "ethereum ropsten", "cosmos testnet"];
+  const currencies = ["bitcoin_testnet", "ethereum_ropsten", "MUON"];
 
   it("testnet currencies should not be available in Add account flow", async () => {
     await goToAddAccount();
@@ -27,11 +27,11 @@ describe("Enable dev mode", () => {
   });
 
   it("enable dev mode", async () => {
-    const closeBtn = await modalPage.closeButton;
+    const closeBtn = await modalPage.closeButton();
     await closeBtn.click();
     await toggleDevMode();
     await settingsPage.goToPortfolio();
-    const emptyStateTitle = await portfolioPage.portfolioEmptyStateTitle;
+    const emptyStateTitle = await portfolioPage.portfolioEmptyStateTitle();
     expect(await emptyStateTitle.getText()).toBe("Add an account to get started");
   });
   for (const currency of currencies) {
