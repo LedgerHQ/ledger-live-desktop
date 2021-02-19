@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { Machine, assign } from "xstate";
 import { useMachine } from "@xstate/react";
 import { useDispatch } from "react-redux";
@@ -19,7 +19,7 @@ type ProductTourState = {
   controlledModals: Array<string>,
   overlayQueue?: Array<{
     selector: string,
-    i18nKey: ?string,
+    i18nKey?: string,
     conf: OverlayConfig,
   }>,
   extras: {},
@@ -71,7 +71,7 @@ const productTourMachine = Machine(
               overrideContent: !!e.overrideContent,
               learnMoreCallback: e.learnMoreCallback,
               controlledModals: e.controlledModals || [],
-              overlayQueue: [],
+              overlayQueue: initialContext.overlayQueue,
             })),
           },
           BACK: {
@@ -97,7 +97,7 @@ const productTourMachine = Machine(
                 target: "#dashboard",
                 actions: [
                   assign({
-                    overlayQueue: [],
+                    overlayQueue: initialContext.overlayQueue,
                   }),
                   "flowExited",
                 ],
@@ -105,7 +105,7 @@ const productTourMachine = Machine(
               EXIT: {
                 target: "#idle",
                 actions: assign({
-                  overlayQueue: [],
+                  overlayQueue: initialContext.overlayQueue,
                 }),
               },
               CONTROL_MODAL: {
@@ -118,10 +118,18 @@ const productTourMachine = Machine(
                   overlayQueue: event.overlayQueue,
                 })),
               },
-              NEXT_CONTEXTUAL_OVERLAY: {
-                actions: assign(state => ({
-                  overlayQueue: state.overlayQueue.slice(1),
+              CLEAR_CONTEXTUAL_OVERLAY_QUEUE: {
+                actions: assign(() => ({
+                  overlayQueue: initialContext.overlayQueue,
                 })),
+              },
+              NEXT_CONTEXTUAL_OVERLAY: {
+                actions: assign(state => {
+                  const overlayQueue = state.overlayQueue.slice(1);
+                  return {
+                    overlayQueue: overlayQueue.length ? overlayQueue : initialContext.overlayQueue,
+                  };
+                }),
               },
               COMPLETE_FLOW: {
                 target: "completed",
@@ -133,7 +141,7 @@ const productTourMachine = Machine(
                   extras: (_, event) => event.extras || {},
                   showSuccessModal: true,
                   isControlledModal: false,
-                  overlayQueue: [],
+                  overlayQueue: initialContext.overlayQueue,
                 }),
               },
               SKIP_FLOW: {
@@ -143,7 +151,8 @@ const productTourMachine = Machine(
                     ...completedFlows,
                     activeFlow,
                   ],
-                  overlayQueue: [],
+                  isControlledModal: false,
+                  overlayQueue: initialContext.overlayQueue,
                 }),
               },
             },
@@ -171,6 +180,7 @@ const productTourMachine = Machine(
 
 export const ProductTourProvider = ({ children }: { children: React$Node }) => {
   const { localStorage } = window;
+  const dispatch = useDispatch();
   const [state, send] = useMachine(productTourMachine, {
     context: {
       ...initialContext,
@@ -180,37 +190,31 @@ export const ProductTourProvider = ({ children }: { children: React$Node }) => {
 
   useEffect(() => console.log({ state }), [state]);
 
-  const [alreadyHandledModal, setAlreadyHandledModal] = useState(false);
-  const dispatch = useDispatch();
-
   const { context } = state;
   const { activeFlow, extras, showSuccessModal, completedFlows, totalFlows } = context;
+  const completedFlowsRef = useRef(completedFlows);
 
-  const addActiveFlowToLocalStorage = useCallback(() => {
+  const persistCompletedFlows = useCallback(() => {
     localStorage.setItem("productTourCompletedFlows", JSON.stringify(context.completedFlows));
   }, [context.completedFlows, localStorage]);
 
   useEffect(() => {
-    // TODO Fixme for skipped flows
-    if (!alreadyHandledModal && showSuccessModal) {
-      setAlreadyHandledModal(true);
-      dispatch(openModal("MODAL_PRODUCT_TOUR_SUCCESS", { activeFlow, extras }));
-      // Persist the completed flow in local storage
-      addActiveFlowToLocalStorage();
-      // Maybe flag the product tour as done
+    if (completedFlowsRef.current !== completedFlows) {
+      if (showSuccessModal) {
+        dispatch(openModal("MODAL_PRODUCT_TOUR_SUCCESS", { activeFlow, extras }));
+      }
       if (completedFlows.length === totalFlows) {
         dispatch(setHasCompletedProductTour(true));
       }
-    } else if (!showSuccessModal && alreadyHandledModal) {
-      setAlreadyHandledModal(false);
+      persistCompletedFlows();
     }
   }, [
     activeFlow,
-    addActiveFlowToLocalStorage,
-    alreadyHandledModal,
-    completedFlows.length,
+    completedFlows,
+    context,
     dispatch,
     extras,
+    persistCompletedFlows,
     showSuccessModal,
     totalFlows,
   ]);

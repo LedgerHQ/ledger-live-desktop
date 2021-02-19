@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
@@ -119,7 +119,7 @@ const HelpBox = ({
     };
   }, [b, conf, l, r, t]);
 
-  return (
+  return conf?.none ? null : (
     <Wrapper
       flexDirection={flexDirection}
       alignItems={alignItems}

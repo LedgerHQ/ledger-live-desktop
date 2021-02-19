@@ -18,6 +18,7 @@ import IconCross from "~/renderer/icons/Cross";
 import Button from "~/renderer/components/Button";
 import AccountsIllustration from "~/renderer/icons/AccountsIllustration";
 import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
+import { useActiveFlow } from "~/renderer/components/ProductTour/hooks";
 
 const IconContainer = styled(Box).attrs(() => ({
   horizontal: true,
@@ -97,19 +98,15 @@ const InstallSuccessBanner = ({ state, isIncomplete, dispatch, addAccount, disab
 
   const visible = !hasBeenShown && installedSupportedApps.length > 0;
 
-  const { state: productTourState, send } = useContext(ProductTourContext);
-  const { context } = productTourState;
+  const { send } = useContext(ProductTourContext);
+  const activeFlow = useActiveFlow();
 
   useEffect(() => {
     // NB Leverage the visibility of the InstallSuccessBanner to consider the install product tour flow completed
-    if (
-      installedSupportedApps.length > 0 &&
-      context.activeFlow === "install" &&
-      productTourState.matches({ flow: "ongoing" })
-    ) {
+    if (installedSupportedApps.length > 0 && activeFlow === "install") {
       send("COMPLETE_FLOW");
     }
-  });
+  }, [activeFlow, installedSupportedApps.length, send]);
 
   return (
     <Container ref={cardRef}>

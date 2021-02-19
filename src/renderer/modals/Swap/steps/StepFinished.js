@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { GradientHover } from "~/renderer/modals/OperationDetails/styledComponents";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
+import { useActiveFlow } from "~/renderer/components/ProductTour/hooks";
 
 const IconWrapper = styled(Box)`
   background: ${colors.pillActiveBackground};
@@ -141,8 +142,8 @@ export const StepFinishedFooter = ({
   const { operation } = result;
   const { fromAccount, fromParentAccount } = swap.exchange;
   const dispatch = useDispatch();
-  const { state: productTourState, send } = useContext(ProductTourContext);
-  const { context } = productTourState;
+  const { send } = useContext(ProductTourContext);
+  const activeFlow = useActiveFlow();
 
   const onViewOperationDetails = useCallback(() => {
     const concernedOperation = operation
@@ -164,13 +165,13 @@ export const StepFinishedFooter = ({
   }, [dispatch, fromAccount, fromParentAccount, onClose, operation]);
 
   useEffect(() => {
-    if (context.activeFlow === "swap" && productTourState.matches("flow.ongoing")) {
+    if (activeFlow === "swap") {
       send("COMPLETE_FLOW", {
         extras: { swapId: result.swapId, congratulationsCallback: onViewOperationDetails },
       });
       onClose();
     }
-  }, [context.activeFlow, onClose, onViewOperationDetails, productTourState, result, send]);
+  }, [activeFlow, onClose, onViewOperationDetails, result, send]);
 
   return (
     <Box horizontal>

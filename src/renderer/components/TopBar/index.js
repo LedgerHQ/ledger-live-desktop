@@ -107,17 +107,9 @@ const TopBar = () => {
   }, [history, location, dispatch]);
 
   const { state: productTourState, send } = useContext(ProductTourContext);
-  const { context } = productTourState;
-  const maybeProductTourMessage =
-    productTourState.matches({ flow: "ongoing" }) &&
-    t(`productTour.flows.${context.activeFlow}.ongoing`);
 
   return (
-    <Container
-      doubleHeight={maybeProductTourMessage}
-      productTourState={productTourState}
-      color="palette.text.shade80"
-    >
+    <Container productTourState={productTourState} color="palette.text.shade80">
       <Inner productTourState={productTourState} bg={"palette.background.default"}>
         <Box grow horizontal justifyContent="space-between">
           {productTourState.matches("flow.landing") || productTourState.matches("dashboard") ? (

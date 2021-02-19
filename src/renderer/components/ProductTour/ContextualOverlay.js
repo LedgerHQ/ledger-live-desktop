@@ -1,6 +1,13 @@
 // @flow
 
-import React, { useLayoutEffect, useState, useCallback, useContext, useRef } from "react";
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useState,
+  useCallback,
+  useContext,
+  useRef,
+} from "react";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Trans } from "react-i18next";
 import Button from "~/renderer/components/Button";
@@ -8,11 +15,13 @@ import HelpBox from "~/renderer/components/ProductTour/HelpBox";
 import styled from "styled-components";
 import useResizeObserver from "~/renderer/hooks/useResizeObserver";
 import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
+import { useActiveFlow } from "~/renderer/components/ProductTour/hooks";
 import OverlayShape from "~/renderer/components/ProductTour/assets/OverlayShape";
 import { closeAllModal } from "~/renderer/actions/modals";
 import { useDispatch } from "react-redux";
 
 export type OverlayConfig = {|
+  none?: boolean, // No help box
   top?: boolean,
   bottom?: boolean,
   left?: boolean,
@@ -33,6 +42,10 @@ const Wrapper: ThemedComponent<*> = styled.div`
   }
 `;
 
+/**
+  While in product tour all modals are backdropped by product tour, and show no animations
+  this is to avoid jumpy splashes of time without the bg
+ */
 const SkipWrapper = styled.div`
   position: absolute;
   display: block;
@@ -53,14 +66,20 @@ const ContextualOverlay = ({ isModal }: { isModal?: boolean }) => {
   const { overlayQueue = [] } = context || {};
   const { selector, i18nKey, conf } = overlayQueue[0] || {};
   const { t, b, l, r } = box;
+  const activeFlow = useActiveFlow();
 
   const rebuildOverlay = useCallback(() => {
     if (!selector) return;
     const el = document.querySelector(selector);
-    const scroll = document.querySelectorAll("#scroll-area, .select-options-list");
+    let scroll, selectorScroll;
 
-    if (conf.disableScroll && scroll) {
-      for (const e of scroll) e.style.overflow = "hidden";
+    if (conf.disableScroll) {
+      // Nb take control of scrolling
+      scroll = document.querySelector("#scroll-area");
+      if (scroll) scroll.style.overflow = "visible";
+
+      selectorScroll = document.querySelector(".select-options-list");
+      if (selectorScroll) selectorScroll.style.overflow = "hidden";
     }
 
     if (el) {
@@ -70,22 +89,22 @@ const ContextualOverlay = ({ isModal }: { isModal?: boolean }) => {
       if (t !== top || b !== bottom || l !== left || r !== right) {
         setBox({ t: top, b: bottom, l: left, r: right });
       }
+    } else {
+      setBox({ t: 0, b: 0, l: 0, r: 0 });
     }
 
-    // When needed return the target element z-index to normal.
     return () => {
-      if (scroll) {
-        for (const e of scroll) e.style.overflow = "hidden auto";
-      }
+      if (scroll) scroll.style.overflow = "hidden";
+      if (selectorScroll) selectorScroll.style.overflow = "hidden auto";
     };
-  }, [selector, conf, overlayQueue.length, t, b, l, r]);
+  }, [selector, conf, t, b, l, r]);
 
   const onNextOverlay = useCallback(() => {
     // NB If we have queued elements this is a non-action step for the user
     if (overlayQueue.length > 1 || conf.isDismissable) {
       send("NEXT_CONTEXTUAL_OVERLAY");
     }
-  }, [overlayQueue.length, send]);
+  }, [conf, overlayQueue.length, send]);
 
   useResizeObserver(elRef, rebuildOverlay);
   useResizeObserver(ref, rebuildOverlay);
@@ -94,12 +113,11 @@ const ContextualOverlay = ({ isModal }: { isModal?: boolean }) => {
   const onSkipTutorial = useCallback(() => {
     dispatch(closeAllModal());
     send("SKIP_FLOW");
-  }, [send]); // TODO mark as skipped
-  const active = isModal === conf?.isModal;
-  const showSkip = state.matches("flow.ongoing");
-  const showOverlay = overlayQueue.length && box;
+  }, [dispatch, send]);
 
-  return showSkip ? (
+  const showOverlay = overlayQueue.length && (box || conf?.none);
+
+  return activeFlow ? (
     <Wrapper ref={ref} isDismissable={conf?.isDismissable} onClick={onNextOverlay}>
       {showOverlay ? <OverlayShape t={t} b={b} l={l} r={r} /> : null}
       {showOverlay ? <HelpBox i18nKey={i18nKey} conf={conf} t={t} b={b} l={l} r={r} /> : null}

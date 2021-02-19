@@ -16,6 +16,7 @@ import RetryButton from "~/renderer/components/RetryButton";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import SuccessDisplay from "~/renderer/components/SuccessDisplay";
 import BroadcastErrorDisclaimer from "~/renderer/components/BroadcastErrorDisclaimer";
+import { useActiveFlow } from "~/renderer/components/ProductTour/hooks";
 
 import type { StepProps } from "../types";
 
@@ -78,6 +79,7 @@ export function StepConfirmationFooter({
   openModal,
   closeModal,
 }: StepProps) {
+  const activeFlow = useActiveFlow();
   const concernedOperation = optimisticOperation
     ? optimisticOperation.subOperations && optimisticOperation.subOperations.length > 0
       ? optimisticOperation.subOperations[0]
@@ -95,30 +97,16 @@ export function StepConfirmationFooter({
     }
   }, [account, closeModal, concernedOperation, openModal, parentAccount]);
 
-  const { state: productTourState, send } = useContext(ProductTourContext);
-  const { context } = productTourState;
+  const { send } = useContext(ProductTourContext);
 
   useEffect(() => {
-    if (
-      !error &&
-      concernedOperation &&
-      context.activeFlow === "send" &&
-      productTourState.matches("flow.ongoing")
-    ) {
+    if (!error && concernedOperation && activeFlow === "send") {
       send("COMPLETE_FLOW", {
         extras: { congratulationsCallback: onOpenOperationDetails },
       });
       closeModal();
     }
-  }, [
-    closeModal,
-    concernedOperation,
-    context.activeFlow,
-    error,
-    onOpenOperationDetails,
-    productTourState,
-    send,
-  ]);
+  }, [activeFlow, closeModal, concernedOperation, error, onOpenOperationDetails, send]);
 
   return (
     <>
