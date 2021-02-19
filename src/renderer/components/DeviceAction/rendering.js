@@ -378,6 +378,26 @@ export const renderConnectYourDevice = ({
   </Wrapper>
 );
 
+export const renderFirmwareUpdating = ({
+  modelId,
+  type,
+}: {
+  modelId: DeviceModelId,
+  type: "light" | "dark",
+}) => (
+  <Wrapper>
+    <Header />
+    <AnimationWrapper modelId={modelId}>
+      <Animation animation={getDeviceAnimation(modelId, type, "firmwareUpdating")} />
+    </AnimationWrapper>
+    <Footer>
+      <Title>
+        <Trans i18nKey={"DeviceAction.unlockDeviceAfterFirmwareUpdate"} />
+      </Title>
+    </Footer>
+  </Wrapper>
+);
+
 export const renderSwapDeviceConfirmation = ({
   modelId,
   type,
