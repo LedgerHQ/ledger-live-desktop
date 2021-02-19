@@ -9,6 +9,7 @@ import ModalPage from "./po/modal.page";
 import AccountsPage from "./po/accounts.page";
 import AccountPage from "./po/account.page";
 import PortfolioPage from "./po/portfolio.page";
+import SettingsPage from "./po/settings.page";
 import AddAccontModal from "./po/addAccountModal.page";
 import AccountSettingsModal from "./po/accountSettingsModal.page";
 import ExportOperationsModal from "./po/exportOperationsHistoryModal.page";
@@ -46,6 +47,7 @@ const getMockDeviceEvent = app => async (...events) => {
 
 let app;
 let portfolioPage;
+let settingsPage;
 let modalPage;
 let accountPage;
 let accountsPage;
@@ -125,6 +127,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     accountPage = new AccountPage(app);
     accountsPage = new AccountsPage(app);
     portfolioPage = new PortfolioPage(app);
+    settingsPage = new SettingsPage(app);
     addAccountsModal = new AddAccontModal(app);
     accountSettingsModal = new AccountSettingsModal(app);
     exportOperationsHistoryModal = new ExportOperationsModal(app);
@@ -214,6 +217,7 @@ export {
   accountPage,
   accountsPage,
   portfolioPage,
+  settingsPage,
   modalPage,
   hideTokenModal,
   addAccountsModal,

@@ -14,6 +14,9 @@ export default class AddAccountModal extends Modal {
     await this.app.client.pause(600);
     await input.addValue(currency);
     await this.app.client.pause(300);
+  }
+
+  async confirmCurrency() {
     const firstOption = await this.$(".select-options-list .option:first-child");
     await firstOption.click();
   }
