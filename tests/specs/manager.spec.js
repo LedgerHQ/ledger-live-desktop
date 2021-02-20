@@ -42,8 +42,7 @@ describe("Manager", () => {
   });
 
   it("can install an app", async () => {
-    const installTronButton = await $("#appActionsInstall-Tron");
-    await installTronButton.click();
+    await managerPage.installApp("Tron");
     await app.client.pause(3000);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "manager-install-tron",
@@ -58,8 +57,7 @@ describe("Manager", () => {
   });
 
   it("can uninstall an app", async () => {
-    const installTronButton = await $("#appActionsUninstall-Tron");
-    await installTronButton.click();
+    await managerPage.uninstallApp("Tron");
     await app.client.pause(3000);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "manager-uninstall-tron",

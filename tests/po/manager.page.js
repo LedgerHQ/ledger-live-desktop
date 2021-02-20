@@ -13,6 +13,14 @@ export default class AccountPage extends Page {
     return this.$("#managerAppsList-updateAll");
   }
 
+  async installAppButton(currency) {
+    return this.$(`#appActionsInstall-${currency}`);
+  }
+
+  async uninstallAppButton(currency) {
+    return this.$(`#appActionsUninstall-${currency}`);
+  }
+
   async goToInstalledAppTab() {
     const tab = await this.appOnDeviceTab();
     await tab.click();
@@ -25,6 +33,16 @@ export default class AccountPage extends Page {
 
   async updateAllApps() {
     const btn = await this.updateAllButton();
+    await btn.click();
+  }
+
+  async installApp(currency) {
+    const btn = await this.installAppButton(currency);
+    await btn.click();
+  }
+
+  async uninstallApp(currency) {
+    const btn = await this.uninstallAppButton(currency);
     await btn.click();
   }
 }

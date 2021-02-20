@@ -103,7 +103,7 @@ export default class Page {
   }
 
   async goToManager() {
-    const btn = await this.drawerManagerButton;
+    const btn = await this.drawerManagerButton();
     await btn.click();
   }
 }
