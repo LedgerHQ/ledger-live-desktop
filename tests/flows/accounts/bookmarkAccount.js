@@ -34,7 +34,9 @@ const bookmarkAccount = (currency = "global", startsWithStaredAccounts = false) 
     });
 
     it("displays a newly bookmarked account in the side menu", async () => {
-      await app.client.waitForSync();
+      const optimisticOperations = await app.client.$(".optimistic-operation");
+      await optimisticOperations.waitForExist({reverse: true, timeout: 5000});
+
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `${currency}-bookmark-account`,
       });

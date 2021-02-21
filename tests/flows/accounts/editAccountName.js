@@ -29,6 +29,9 @@ const editAccountName = (currency = "global") => {
     });
 
     it("show name of account after", async () => {
+      const optimisticOperations = await app.client.$(".optimistic-operation");
+      await optimisticOperations.waitForExist({reverse: true, timeout: 5000});
+
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `${currency}-edit-account-name-after`,
       });
