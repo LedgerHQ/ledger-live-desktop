@@ -138,7 +138,7 @@ export default function Chart({
               fontColor: theme.text.shade60,
               fontFamily: "Inter",
               maxTicksLimit: 7,
-              maxRotation: 0,
+              maxRotation: 0.1, // trick to make the graph fit the whole canvas regardless of data
               minRotation: 0,
             },
             time: {
@@ -169,6 +169,14 @@ export default function Chart({
             },
           },
         ],
+      },
+      layout: {
+        padding: {
+          left: 0,
+          right: 10, // trick to make the graph fit the whole canvas regardless of data
+          top: 0,
+          bottom: 0,
+        },
       },
     }),
     [renderTickY, theme, magnitude],
