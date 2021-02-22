@@ -751,8 +751,8 @@
       "desc": "Commencer ici"
     },
     "status": {
-      "title": "Ledger Status",
-      "desc": "Consultez l’état du système"
+      "title": "Statut Ledger",
+      "desc": "Comprendre les cryptos"
     },
     "helpCenter": {
       "title": "Assistance Ledger",
@@ -2484,7 +2484,7 @@
       },
       "selectUseCase": {
         "greetings": "Bonjour !",
-        "hasNoRecovery": "First time using your {{deviceName}}?",
+        "hasNoRecovery": "Première utilisation de votre {{deviceName}} ?",
         "hasRecovery": "Vous avez déjà une phrase de récupération ?",
         "separator": "ou",
         "options": {
