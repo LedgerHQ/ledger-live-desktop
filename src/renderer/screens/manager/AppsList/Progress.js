@@ -34,7 +34,7 @@ const Progress = ({ state, name, updating, installing, uninstalling, isCurrent }
 
   return (
     <Box
-      id="manager-app-progress-bar"
+      className="progress-bar"
       flex="1"
       horizontal
       justifyContent="flex-end"

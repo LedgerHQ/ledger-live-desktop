@@ -157,7 +157,7 @@ export default class Markdown extends PureComponent<Props> {
   render() {
     const { children } = this.props;
     return (
-      <div id="terms-markdown" ref={c => (this.parent = c)}>
+      <div id="markdown" ref={c => (this.parent = c)}>
         <ReactMarkdown>{children}</ReactMarkdown>
       </div>
     );

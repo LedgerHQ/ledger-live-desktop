@@ -49,8 +49,8 @@ describe("Manager", () => {
   it("can install an app", async () => {
     const installTronButton = await $("#appActionsInstall-Tron");
     await installTronButton.click();
-    const progressBar = await $("#manager-app-progress-bar");
     await app.client.waitUntilWindowLoaded();
+    const progressBar = await $(".progress-bar");
     await progressBar.waitForExist({ timeout: 10000, reverse: true });
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "manager-install-tron",
