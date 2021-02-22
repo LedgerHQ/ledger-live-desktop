@@ -98,7 +98,7 @@ const Collapser = styled(Box).attrs(() => ({
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
   border: 1px solid;
   transition: all 0.5s;
-  z-index: 100;
+  z-index: 99;
 
   &:hover {
     border-color: ${p => p.theme.colors.wallet};
@@ -273,6 +273,7 @@ const MainSideBar = () => {
                 icon={IconPortfolio}
                 iconActiveColor="wallet"
                 onClick={handleClickDashboard}
+                disabled={!!activeFlow}
                 isActive={location.pathname === "/"}
                 NotifComponent={<UpdateDot collapsed={collapsed} />}
                 collapsed={secondAnim}
@@ -284,7 +285,7 @@ const MainSideBar = () => {
                 iconActiveColor="wallet"
                 isActive={location.pathname === "/accounts"}
                 onClick={handleClickAccounts}
-                // disabled={noAccounts && activeFlow !== "createAccount"}
+                disabled={(noAccounts && !activeFlow) || activeFlow !== "createAccount"}
                 collapsed={secondAnim}
               />
               <SideBarListItem
@@ -293,7 +294,7 @@ const MainSideBar = () => {
                 icon={IconSend}
                 iconActiveColor="wallet"
                 onClick={handleOpenSendModal}
-                disabled={noAccounts || navigationLocked}
+                disabled={noAccounts || navigationLocked || (!!activeFlow && activeFlow !== "send")}
                 collapsed={secondAnim}
               />
               <SideBarListItem
@@ -302,7 +303,9 @@ const MainSideBar = () => {
                 icon={IconReceive}
                 iconActiveColor="wallet"
                 onClick={handleOpenReceiveModal}
-                disabled={noAccounts || navigationLocked}
+                disabled={
+                  noAccounts || navigationLocked || (!!activeFlow && activeFlow !== "receive")
+                }
                 collapsed={secondAnim}
               />
               <SideBarListItem
@@ -311,6 +314,7 @@ const MainSideBar = () => {
                 icon={IconExchange}
                 iconActiveColor="wallet"
                 onClick={handleClickExchange}
+                disabled={activeFlow !== "buy"}
                 isActive={location.pathname === "/exchange"}
                 collapsed={secondAnim}
               />
@@ -320,7 +324,7 @@ const MainSideBar = () => {
                 icon={IconSwap}
                 iconActiveColor="wallet"
                 onClick={handleClickSwap}
-                disabled={noAccounts}
+                disabled={noAccounts || !activeFlow || (!!activeFlow && activeFlow !== "swap")}
                 isActive={location.pathname === "/swap"}
                 collapsed={secondAnim}
               />
@@ -330,6 +334,7 @@ const MainSideBar = () => {
                 icon={IconLending}
                 iconActiveColor="wallet"
                 onClick={handleClickLend}
+                disabled={!!activeFlow}
                 isActive={location.pathname === "/lend"}
                 collapsed={secondAnim}
                 NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
@@ -340,6 +345,7 @@ const MainSideBar = () => {
                 icon={IconManager}
                 iconActiveColor="wallet"
                 onClick={handleClickManager}
+                disabled={!!activeFlow && activeFlow !== "install"}
                 isActive={location.pathname === "/manager"}
                 NotifComponent={displayBlueDot ? <Dot collapsed={collapsed} /> : null}
                 collapsed={secondAnim}

@@ -14,9 +14,10 @@ const SendCrypto = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const onBeforeSendFlow = useCallback(() => {
+  const onBeforeFlow = useCallback(() => {
+    history.push({ pathname: "/" });
     dispatch(openModal("MODAL_SEND"));
-  }, [dispatch]);
+  }, [dispatch, history]);
 
   const onAfterFlow = useCallback(() => {
     // NB Ensure we go back to the portfolio after a flow
@@ -30,13 +31,12 @@ const SendCrypto = () => {
   return (
     <Card
       appFlow={"send"}
-      require={"createAccount"}
-      overrideContent
+      // require={"createAccount"}
       controlledModals={["MODAL_SEND"]}
       title={<Trans i18nKey={"productTour.flows.send.pending"} />}
       titleCompleted={<Trans i18nKey={"productTour.flows.send.completedCard"} />}
       illustration={send}
-      onBeforeFlow={onBeforeSendFlow}
+      onBeforeFlow={onBeforeFlow}
       onAfterFlow={onAfterFlow}
       learnMoreCallback={onLearnMore}
     />

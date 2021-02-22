@@ -20,7 +20,7 @@ const AccountsHeader = () => {
 
   const openAddAccounts = useCallback(() => {
     dispatch(openModal("MODAL_ADD_ACCOUNTS"));
-    send("NEXT_CONTEXTUAL_OVERLAY");
+    send("NEXT_OVERLAY");
   }, [dispatch, send]);
 
   return (

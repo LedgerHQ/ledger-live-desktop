@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { openModal } from "~/renderer/actions/modals";
 import type { StateNode } from "xstate";
 import { setHasCompletedProductTour } from "~/renderer/actions/settings";
-import type { OverlayConfig } from "~/renderer/components/ProductTour/ContextualOverlay";
+import type { OverlayConfig } from "~/renderer/components/ProductTour/Overlay";
 const ProductTourContext = React.createContext<StateNode>();
 type ProductTourState = {
   totalFlows: number,
@@ -17,10 +17,10 @@ type ProductTourState = {
   overrideContent: boolean,
   isControlledModal: boolean,
   controlledModals: Array<string>,
-  overlayQueue?: Array<{
+  overlays?: Array<{
     selector: string,
     i18nKey?: string,
-    conf: OverlayConfig,
+    config: OverlayConfig,
   }>,
   extras: {},
   onBeforeFlow: ?() => void,
@@ -37,7 +37,7 @@ const initialContext: ProductTourState = {
   overrideContent: false,
   isControlledModal: false,
   controlledModals: [],
-  overlayQueue: [],
+  overlays: [],
   extras: {},
 };
 
@@ -71,7 +71,7 @@ const productTourMachine = Machine(
               overrideContent: !!e.overrideContent,
               learnMoreCallback: e.learnMoreCallback,
               controlledModals: e.controlledModals || [],
-              overlayQueue: initialContext.overlayQueue,
+              overlays: initialContext.overlays,
             })),
           },
           BACK: {
@@ -97,7 +97,7 @@ const productTourMachine = Machine(
                 target: "#dashboard",
                 actions: [
                   assign({
-                    overlayQueue: initialContext.overlayQueue,
+                    overlays: initialContext.overlays,
                   }),
                   "flowExited",
                 ],
@@ -105,7 +105,8 @@ const productTourMachine = Machine(
               EXIT: {
                 target: "#idle",
                 actions: assign({
-                  overlayQueue: initialContext.overlayQueue,
+                  overlays: initialContext.overlays,
+                  activeFlow: "",
                 }),
               },
               CONTROL_MODAL: {
@@ -113,21 +114,21 @@ const productTourMachine = Machine(
                   isControlledModal: true,
                 }),
               },
-              SET_CONTEXTUAL_OVERLAY_QUEUE: {
+              SET_OVERLAYS: {
                 actions: assign((_, event) => ({
-                  overlayQueue: event.overlayQueue,
+                  overlays: event.overlays,
                 })),
               },
-              CLEAR_CONTEXTUAL_OVERLAY_QUEUE: {
+              CLEAR_OVERLAYS: {
                 actions: assign(() => ({
-                  overlayQueue: initialContext.overlayQueue,
+                  overlays: initialContext.overlays,
                 })),
               },
-              NEXT_CONTEXTUAL_OVERLAY: {
+              NEXT_OVERLAY: {
                 actions: assign(state => {
-                  const overlayQueue = state.overlayQueue.slice(1);
+                  const Overlays = state.overlays.slice(1);
                   return {
-                    overlayQueue: overlayQueue.length ? overlayQueue : initialContext.overlayQueue,
+                    overlays: Overlays.length ? Overlays : initialContext.overlays,
                   };
                 }),
               },
@@ -141,7 +142,7 @@ const productTourMachine = Machine(
                   extras: (_, event) => event.extras || {},
                   showSuccessModal: true,
                   isControlledModal: false,
-                  overlayQueue: initialContext.overlayQueue,
+                  overlays: initialContext.overlays,
                 }),
               },
               SKIP_FLOW: {
@@ -152,7 +153,7 @@ const productTourMachine = Machine(
                     activeFlow,
                   ],
                   isControlledModal: false,
-                  overlayQueue: initialContext.overlayQueue,
+                  overlays: initialContext.overlays,
                 }),
               },
             },

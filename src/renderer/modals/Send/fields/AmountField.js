@@ -16,7 +16,7 @@ import Label from "~/renderer/components/Label";
 import RequestAmount from "~/renderer/components/RequestAmount";
 import Switch from "~/renderer/components/Switch";
 import Text from "~/renderer/components/Text";
-
+import { useSetOverlays } from "~/renderer/components/ProductTour/hooks";
 type Props = {
   parentAccount: ?Account,
   account: AccountLike,
@@ -65,6 +65,28 @@ const AmountField = ({
     [bridge, transaction, onChangeTransaction],
   );
 
+  useSetOverlays(
+    !status || status?.amount.eq(0) || status?.errors.amount,
+    {
+      selector: "#send-amount",
+      i18nKey: "productTour.flows.send.overlays.destination",
+      config: {
+        top: true,
+        padding: 10,
+        isDismissable: true,
+      },
+    },
+    {
+      selector: "#send-fields",
+      i18nKey: "productTour.flows.send.overlays.destination",
+      config: {
+        top: true,
+        padding: 10,
+        isDismissable: true,
+      },
+    },
+  );
+
   if (!status) return null;
   const { useAllAmount } = transaction;
   const { amount, errors, warnings } = status;
@@ -78,7 +100,7 @@ const AmountField = ({
   }
 
   return (
-    <Box flow={1}>
+    <Box flow={1} id={"send-amount"}>
       <Box
         horizontal
         alignItems="center"

@@ -8,7 +8,7 @@ import Box from "~/renderer/components/Box";
 import { command } from "~/renderer/commands";
 import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { useSetContextualOverlayQueue } from "~/renderer/components/ProductTour/hooks";
+import { useSetOverlays } from "~/renderer/components/ProductTour/hooks";
 
 const connectManagerExec = command("connectManager");
 const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectManagerExec);
@@ -22,10 +22,10 @@ const Manager = () => {
   }, []);
   const onResult = useCallback(result => setResult(result), []);
 
-  useSetContextualOverlayQueue(!result, {
+  useSetOverlays(!result, {
     selector: "#manager-device-action-wrapper",
     i18nKey: "productTour.flows.install.overlays.connect",
-    conf: { bottom: true },
+    config: { bottom: true },
   });
 
   return (

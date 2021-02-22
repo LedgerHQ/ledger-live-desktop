@@ -1,12 +1,12 @@
 // @flow
 
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { Trans } from "react-i18next";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import type { OverlayConfig } from "~/renderer/components/ProductTour/ContextualOverlay";
+import type { OverlayConfig } from "~/renderer/components/ProductTour/Overlay";
 
 import IconArrowShortVertical from "~/renderer/icons/arrows/ShortVertical";
 import IconArrowShortCorner from "~/renderer/icons/arrows/ShortCorner";
@@ -28,11 +28,11 @@ const Wrapper: ThemedComponent<*> = styled(Box)`
 `;
 
 const HelpBox = ({
-  conf,
+  config,
   i18nKey,
   ...rest
 }: {
-  conf: OverlayConfig,
+  config: OverlayConfig,
   i18nKey: string,
   t: number,
   b: number,
@@ -41,67 +41,68 @@ const HelpBox = ({
 }) => {
   const { t, b, l, r } = rest;
 
-  const { flexDirection, alignItems, justifyContent, boxPosition, Icon } = useMemo(() => {
-    if (conf.top && conf.left) {
+  const { flexDirection, alignItems, justifyContent, boxPosition, icon } = useMemo(() => {
+    const { top, left, right, bottom, padding: p = 0 } = config;
+    if (top && left) {
       return {
         flexDirection: "row-reverse",
         alignItems: "flex-end",
         justifyContent: "flex-end",
-        Icon: () => <IconArrowShortCorner />,
+        icon: <IconArrowShortCorner />,
         boxPosition: {
-          top: t - 120,
+          top: t - (120 + p),
           left: l + 50,
         },
       };
     }
 
-    if (conf.top && conf.right) {
+    if (top && right) {
       return {
         flexDirection: "row",
         alignItems: "flex-end",
         justifyContent: "flex-end",
-        Icon: () => <IconArrowShortCorner flippedX />,
+        icon: <IconArrowShortCorner flippedX />,
         boxPosition: {
-          top: t - 120,
+          top: t - (120 + p),
           left: l + (r - l) / 2,
         },
       };
     }
 
-    if (conf.top) {
+    if (top) {
       return {
         flexDirection: "column",
         alignItems: "",
         justifyContent: "",
-        Icon: () => <IconArrowShortVertical flippedY />,
+        icon: <IconArrowShortVertical flippedY />,
         boxPosition: {
-          top: t - 120,
+          top: t - (120 + p),
           left: l + (r - l) / 2,
         },
       };
     }
 
-    if (conf.bottom && conf.left) {
+    if (bottom && left) {
       return {
         flexDirection: "row-reverse",
         alignItems: "",
         justifyContent: "flex-end",
-        Icon: () => <IconArrowShortCorner flippedY />,
+        icon: <IconArrowShortCorner flippedY />,
         boxPosition: {
-          top: b + 20,
+          top: b + 20 + p,
           left: l + 50,
         },
       };
     }
 
-    if (conf.bottom && conf.right) {
+    if (bottom && right) {
       return {
         flexDirection: "row",
         alignItems: "",
         justifyContent: "flex-end",
-        Icon: () => <IconArrowShortCorner flippedX flippedY />,
+        icon: <IconArrowShortCorner flippedX flippedY />,
         boxPosition: {
-          top: b + 20,
+          top: b + 20 + p,
           left: r - 350,
         },
       };
@@ -111,15 +112,15 @@ const HelpBox = ({
       flexDirection: "column-reverse",
       alignItems: "",
       justifyContent: "",
-      Icon: () => <IconArrowShortVertical />,
+      icon: <IconArrowShortVertical />,
       boxPosition: {
-        top: b + 20,
+        top: b + 20 + p,
         left: l + (r - l) / 2,
       },
     };
-  }, [b, conf, l, r, t]);
+  }, [config, b, l, r, t]);
 
-  return conf?.none ? null : (
+  return config?.none ? null : (
     <Wrapper
       flexDirection={flexDirection}
       alignItems={alignItems}
@@ -130,7 +131,7 @@ const HelpBox = ({
       <Text ff="Inter|SemiBold" fontSize={5} color={"white"}>
         <Trans i18nKey={i18nKey} />
       </Text>
-      <Icon />
+      {icon}
     </Wrapper>
   );
 };

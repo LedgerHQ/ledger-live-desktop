@@ -19,17 +19,14 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import AccountList from "./AccountList";
 import AccountsHeader from "./AccountsHeader";
 import MigrationBanner from "~/renderer/modals/MigrateAccounts/Banner";
-import {
-  useSetContextualOverlayQueue,
-  useActiveFlow,
-} from "~/renderer/components/ProductTour/hooks";
+import { useSetOverlays, useActiveFlow } from "~/renderer/components/ProductTour/hooks";
 
 export default function AccountsPage() {
   useRefreshAccountsOrderingEffect({ onMount: true });
-  useSetContextualOverlayQueue(true, {
+  useSetOverlays(true, {
     selector: "#accounts-add-account-button",
     i18nKey: "productTour.flows.createAccount.overlays.add",
-    conf: { bottom: true, right: true },
+    config: { bottom: true, right: true, padding: 8 },
   });
 
   const history = useHistory();
@@ -52,9 +49,10 @@ export default function AccountsPage() {
     },
     [history],
   );
-  // if (!accounts.length && activeFlow !== "createAccount") {
-  //   return <Redirect to="/" />;
-  // }
+
+  if (!accounts.length && activeFlow !== "createAccount") {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Box>

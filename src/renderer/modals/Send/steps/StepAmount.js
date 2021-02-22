@@ -58,14 +58,16 @@ const StepAmount = ({
             initValue={maybeAmount}
             resetInitValue={onResetMaybeAmount}
           />
-          <SendAmountFields
-            account={mainAccount}
-            status={status}
-            transaction={transaction}
-            onChange={onChangeTransaction}
-            bridgePending={bridgePending}
-            updateTransaction={updateTransaction}
-          />
+          <Box id={"send-fields"}>
+            <SendAmountFields
+              account={mainAccount}
+              status={status}
+              transaction={transaction}
+              onChange={onChangeTransaction}
+              bridgePending={bridgePending}
+              updateTransaction={updateTransaction}
+            />
+          </Box>
         </Fragment>
       )}
     </Box>

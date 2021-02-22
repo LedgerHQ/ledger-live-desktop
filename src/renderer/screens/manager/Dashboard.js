@@ -14,10 +14,7 @@ import { command } from "~/renderer/commands";
 import FirmwareUpdate from "./FirmwareUpdate";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import {
-  useSetContextualOverlayQueue,
-  useActiveFlow,
-} from "~/renderer/components/ProductTour/hooks";
+import { useSetOverlays, useActiveFlow } from "~/renderer/components/ProductTour/hooks";
 type Props = {
   device: Device,
   deviceInfo: DeviceInfo,
@@ -27,22 +24,22 @@ type Props = {
 };
 
 const Dashboard = ({ device, deviceInfo, result, onReset, appsToRestore }: Props) => {
-  useSetContextualOverlayQueue(
+  useSetOverlays(
     !!device,
     {
       selector: "#manager-device-storage",
       i18nKey: "productTour.flows.install.overlays.storage",
-      conf: { bottom: true, left: true },
+      config: { bottom: true, left: true, isDismissable: true },
     },
     {
       selector: "#appCatalog-body",
       i18nKey: "productTour.flows.install.overlays.catalog",
-      conf: { top: true, left: true, skipOnLeft: true },
+      config: { top: true, left: true, skipOnLeft: true, isDismissable: true },
     },
     {
       selector: "#managerAppsList-Bitcoin",
       i18nKey: "productTour.flows.install.overlays.install",
-      conf: { top: true, right: true, disableScroll: true },
+      config: { top: true, right: true, disableScroll: true },
     },
   );
 

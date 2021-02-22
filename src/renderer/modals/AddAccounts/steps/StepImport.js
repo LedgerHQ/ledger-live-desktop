@@ -30,7 +30,6 @@ import Spinner from "~/renderer/components/Spinner";
 import Text from "~/renderer/components/Text";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import Switch from "~/renderer/components/Switch";
-import QueueContextualOverlay from "~/renderer/components/ProductTour/QueueContextualOverlay";
 import type { StepProps } from "..";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import ToolTip from "~/renderer/components/Tooltip";
@@ -305,16 +304,16 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
       <>
         <TrackPage category="AddAccounts" name="Step3" currencyName={currencyName} />
         <Box mt={-4}>
-          <QueueContextualOverlay
+          {/* <QueueOverlay
             queue={[
               {
                 selector: ".account-row",
                 i18nKey: "productTour.flows.createAccount.overlays.account",
-                conf: { bottom: true, left: true, isDismissable: true },
+                config: { bottom: true, left: true, isDismissable: true },
               },
             ]}
             condition={scannedAccounts.length}
-          />
+          /> */}
           {sections.map(({ id, selectable, defaultSelected, data, supportLink }, i) => {
             const hasMultipleSchemes =
               id === "creatable" &&

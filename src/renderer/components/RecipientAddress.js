@@ -1,9 +1,8 @@
 // @flow
 
 import type { BigNumber } from "bignumber.js";
-import React, { PureComponent } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import noop from "lodash/noop";
 import { decodeURIScheme } from "@ledgerhq/live-common/lib/currencies";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 
@@ -15,6 +14,7 @@ import Input from "~/renderer/components/Input";
 import { track } from "~/renderer/analytics/segment";
 
 import IconQrCode from "~/renderer/icons/QrCode";
+import { useOnSetOverlays } from "~/renderer/components/ProductTour/hooks";
 
 const Right = styled(Box).attrs(() => ({
   bg: "palette.background.default",
@@ -51,69 +51,69 @@ type Props = {
   withQrCode: boolean,
 };
 
-type State = {
-  qrReaderOpened: boolean,
-};
+const RecipientAddress = ({ onChange, withQrCode, value = "", ...rest }: Props) => {
+  const [qrReaderOpened, setQrReaderOpened] = useState(false);
 
-class RecipientAddress extends PureComponent<Props, State> {
-  static defaultProps = {
-    value: "",
-    onChange: noop,
-    withQrCode: true,
-  };
+  const preOnChange = useCallback(text => onChange((text && text.replace(/\s/g, "")) || ""), []);
+  const onShowQRCodeOverlay = useOnSetOverlays({
+    selector: "#send-qrcode-scan",
+    i18nKey: "productTour.flows.send.overlays.qrcode",
+    config: { bottom: true },
+  });
+  const onHideQRCodeOverlay = useOnSetOverlays({
+    selector: "#send-source",
+    i18nKey: "productTour.flows.send.overlays.source",
+    config: { bottom: true, right: true, disableScroll: true, withFeedback: true, padding: 10 },
+  });
 
-  state = {
-    qrReaderOpened: false,
-  };
-
-  handleClickQrCode = () => {
-    const { qrReaderOpened } = this.state;
-    this.setState(prev => ({
-      qrReaderOpened: !prev.qrReaderOpened,
-    }));
-    !qrReaderOpened ? track("Send Flow QR Code Opened") : track("Send Flow QR Code Closed");
-  };
-
-  handleOnPick = (code: string) => {
-    const { address, ...rest } = decodeURIScheme(code);
-    // $FlowFixMe
-    Object.assign(rest, { fromQRCode: true });
-    if (this.props.onChange(address, rest) !== false) {
-      this.setState({ qrReaderOpened: false });
+  const handleClickQrCode = useCallback(() => {
+    setQrReaderOpened(!qrReaderOpened);
+    if (!qrReaderOpened) {
+      onShowQRCodeOverlay();
+      track("Send Flow QR Code Opened");
+    } else {
+      onHideQRCodeOverlay();
+      track("Send Flow QR Code Closed");
     }
-  };
+  }, [onHideQRCodeOverlay, onShowQRCodeOverlay, qrReaderOpened]);
 
-  render() {
-    const { onChange, withQrCode, value, ...rest } = this.props;
-    const { qrReaderOpened } = this.state;
+  const handleOnPick = useCallback(
+    (code: string) => {
+      const { address, ...rest } = decodeURIScheme(code);
+      const result = { ...rest, fromQRCode: true };
 
-    const renderRight = withQrCode ? (
-      <Right onClick={this.handleClickQrCode}>
-        <IconQrCode size={16} />
-        {qrReaderOpened && (
-          <>
-            <BackgroundLayer />
-            <WrapperQrCode>
-              <QRCodeCameraPickerCanvas onPick={this.handleOnPick} />
-            </WrapperQrCode>
-          </>
-        )}
-      </Right>
-    ) : null;
+      if (onChange(address, result) !== false) {
+        setQrReaderOpened(false);
+      }
+    },
+    [onChange],
+  );
 
-    const preOnChange = text => onChange((text && text.replace(/\s/g, "")) || "");
-    return (
-      <Box relative justifyContent="center">
-        <Input
-          {...rest}
-          spellCheck="false"
-          value={value}
-          onChange={preOnChange}
-          renderRight={renderRight}
-        />
-      </Box>
-    );
-  }
-}
+  return (
+    <Box relative justifyContent="center">
+      <Input
+        {...rest}
+        spellCheck="false"
+        value={value}
+        onChange={preOnChange}
+        renderRight={
+          withQrCode ? (
+            <Right onClick={handleClickQrCode}>
+              <IconQrCode size={16} />
+              {qrReaderOpened && (
+                <>
+                  <BackgroundLayer />
+                  <WrapperQrCode id={"send-qrcode-scan"}>
+                    <QRCodeCameraPickerCanvas onPick={handleOnPick} />
+                  </WrapperQrCode>
+                </>
+              )}
+            </Right>
+          ) : null
+        }
+      />
+    </Box>
+  );
+};
 
 export default RecipientAddress;

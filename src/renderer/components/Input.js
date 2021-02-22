@@ -46,6 +46,7 @@ const Container = styled(Box).attrs(() => ({
   box-shadow: ${p => (p.isFocus && !p.noBoxShadow ? `rgba(0, 0, 0, 0.05) 0 2px 2px` : "none")};
   height: ${p => (p.small ? "34" : "48")}px;
   position: relative;
+  margin-bottom: 20px;
 
   &:not(:hover) {
     background: ${p => (!p.isFocus && p.editInPlace ? "transparent" : undefined)};

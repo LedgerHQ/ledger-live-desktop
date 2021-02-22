@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useMemo } from "react";
+import React, { useEffect, useCallback, useMemo } from "react";
 import { Trans } from "react-i18next";
 import type {
   Account,
@@ -24,10 +24,13 @@ import Button from "~/renderer/components/Button";
 import SelectAccount from "~/renderer/components/SelectAccount";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
+import WrapperForActiveFlow from "~/renderer/components/ProductTour/WrapperForActiveFlow";
+import InfoBox from "~/renderer/components/InfoBox";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import TokenTips from "~/renderer/components/TokenTips";
 import type { StepProps } from "../Body";
 import { supportLinkByTokenType } from "~/config/urls";
+import { useOnClearOverlays } from "~/renderer/components/ProductTour/hooks";
 
 type OnChangeAccount = (account: ?AccountLike, tokenAccount: ?Account) => void;
 
@@ -105,6 +108,9 @@ export default function StepAccount({
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
   const error = account ? getReceiveFlowError(account, parentAccount) : null;
   const tokenTypes = mainAccount ? listTokenTypesForCryptoCurrency(mainAccount.currency) : [];
+  const onClearOverlays = useOnClearOverlays();
+
+  useEffect(() => onClearOverlays(), [onClearOverlays]);
 
   return (
     <Box flow={1}>
@@ -146,6 +152,11 @@ export default function StepAccount({
           />
         </div>
       ) : null}
+      <WrapperForActiveFlow flow={"receive"}>
+        <InfoBox mt={20} type={"hint"}>
+          <Trans i18nKey="productTour.flows.receive.hint.stepAccounts" />
+        </InfoBox>
+      </WrapperForActiveFlow>
     </Box>
   );
 }
