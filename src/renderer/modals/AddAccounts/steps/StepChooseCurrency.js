@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useMemo, useCallback } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { listSupportedCurrencies, listTokens } from "@ledgerhq/live-common/lib/currencies";
 import { findTokenAccountByCurrency } from "@ledgerhq/live-common/lib/account";
 import { supportLinkByTokenType } from "~/config/urls";
@@ -19,6 +19,8 @@ import FullNodeStatus from "~/renderer/modals/AddAccounts/FullNodeStatus";
 import useSatStackStatus from "~/renderer/hooks/useSatStackStatus";
 import useEnv from "~/renderer/hooks/useEnv";
 import type { SatStackStatus } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
+import WrapperForActiveFlow from "~/renderer/components/ProductTour/WrapperForActiveFlow";
+import InfoBox from "~/renderer/components/InfoBox";
 
 const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
   const currencies = useMemo(() => listSupportedCurrencies().concat(listTokens()), []);
@@ -51,6 +53,12 @@ const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
           learnMoreLink={url}
         />
       ) : null}
+
+      <WrapperForActiveFlow flow={"createAccount"}>
+        <InfoBox mt={20} type={"hint"}>
+          <Trans i18nKey="productTour.flows.createAccount.hint.stepCurrency" />
+        </InfoBox>
+      </WrapperForActiveFlow>
     </>
   );
 };

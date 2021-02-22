@@ -9,10 +9,7 @@ import { CurrencyCircleIcon } from "~/renderer/components/CurrencyBadge";
 import { useRefreshAccountsOrderingEffect } from "~/renderer/actions/general";
 import type { StepProps } from "..";
 import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
-import {
-  useOnClearContextualOverlayQueue,
-  useActiveFlow,
-} from "~/renderer/components/ProductTour/hooks";
+import { useOnClearOverlays, useActiveFlow } from "~/renderer/components/ProductTour/hooks";
 
 export default function StepFinish({ currency, checkedAccountsIds }: StepProps) {
   const { t } = useTranslation();
@@ -49,7 +46,7 @@ export function StepFinishFooter({ currency, onGoStep1, onCloseModal }: StepProp
       : currency.name
     : undefined;
 
-  const onClearContextualOverlayQueue = useOnClearContextualOverlayQueue();
+  const onClearOverlays = useOnClearOverlays();
 
   useEffect(() => {
     // NB Hijack the rendering of this step if needed for the product tour
@@ -57,7 +54,7 @@ export function StepFinishFooter({ currency, onGoStep1, onCloseModal }: StepProp
       send("COMPLETE_FLOW", { extras: { currencyName } });
       onCloseModal();
     }
-  }, [activeFlow, currencyName, onClearContextualOverlayQueue, onCloseModal, send]);
+  }, [activeFlow, currencyName, onClearOverlays, onCloseModal, send]);
 
   return (
     <>

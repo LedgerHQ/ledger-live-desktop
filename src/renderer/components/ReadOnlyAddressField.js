@@ -5,6 +5,7 @@ import { clipboard } from "electron";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import IconCopy from "~/renderer/icons/Copy";
+import { useOnNextOverlay } from "~/renderer/components/ProductTour/hooks";
 
 const Address = styled(Box).attrs(() => ({
   bg: "palette.background.default",
@@ -62,7 +63,8 @@ const CopyBtn = styled(Box).attrs(() => ({
   border: ${p => `1px solid ${p.theme.colors.palette.divider}`};
 
   &:hover {
-    opacity: 0.8;
+    color: ${p => p.theme.colors.palette.primary.main};
+    cursor: pointer;
   }
 `;
 
@@ -74,10 +76,12 @@ type Props = {
 function ReadOnlyAddressField({ address, allowCopy = true }: Props) {
   const [copyFeedback, setCopyFeedback] = useState(false);
   const [clibboardChanged, setClipboardChanged] = useState(false);
+  const onNextOverlay = useOnNextOverlay();
 
   const copyTimeout = useRef();
 
   const onCopy = useCallback(() => {
+    onNextOverlay();
     clipboard.writeText(address);
     setCopyFeedback(true);
     clearTimeout(copyTimeout.current);
@@ -88,7 +92,7 @@ function ReadOnlyAddressField({ address, allowCopy = true }: Props) {
       }
     }, 300);
     copyTimeout.current = setTimeout(() => setCopyFeedback(false), 1e3);
-  }, [address]);
+  }, [address, onNextOverlay]);
 
   useEffect(() => {
     return () => {
@@ -97,7 +101,7 @@ function ReadOnlyAddressField({ address, allowCopy = true }: Props) {
   }, []);
 
   return (
-    <Box vertical>
+    <Box id={"receive-share-address1"} vertical>
       {clibboardChanged ? (
         <ClipboardSuspicious>
           <Trans i18nKey="common.addressCopiedSuspicious" />

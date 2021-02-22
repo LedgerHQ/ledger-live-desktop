@@ -205,7 +205,7 @@
       "createAccount": {
         "pending": "Create account",
         "ongoing": "",
-        "completed": "Account created!",
+        "completed": "Congrats!",
         "completedCard": "Account created",
         "congratulations": "Your {{currencyName}} account is ready to use. You can now receive your first transaction.",
         "overlays": {
@@ -213,6 +213,9 @@
           "add": "Click here to add accounts to your portfolio.",
           "currency": "Select Bitcoin in the dropdown list to add Bitcoin accounts from your device.",
           "account": "Here’s your new account, feel free to rename it. You can add another account after your first transaction."
+        },
+        "hint": {
+          "stepCurrency": "This is the currency we'll use to create your accounts."
         }
       },
       "receive": {
@@ -220,7 +223,15 @@
         "ongoing": "",
         "completed": "Address shared!",
         "completedCard": "Address shared",
-        "congratulations": "Always verify that the sender uses the address displayed on your device."
+        "congratulations": "Always verify that the sender uses the address displayed on your device.",
+        "hint": {
+          "stepAccounts": "This is the account where you will receive your funds."
+        },
+        "overlays": {
+          "sidebar": "Click on Receive in the sidebar to receive crypto.",
+          "address1": "First, copy the address and share it with the party sending your crypto.",
+          "address2": "Now compare the pasted address with the one on your device. You can only trust the address on your device: the pasted address must be exactly the same."
+        }
       },
       "buy": {
         "pending": "Buy coins",
@@ -228,7 +239,12 @@
         "completed": "Crypto bought!",
         "completedCard": "Crypto bought",
         "congratulations": "You will receive your {{currencyName}} once the order is processed.",
-        "secondaryCTA": "View details"
+        "secondaryCTA": "View details",
+        "overlays": {
+          "sidebar": "Click here to buy crypto.",
+          "form": "Select the account in which to receive your purchased crypto.",
+          "iframe": "Follow the instructions of our partner to complete the purchase."
+        }
       },
       "send": {
         "pending": "Send crypto",
@@ -236,7 +252,13 @@
         "completed": "Crypto sent!",
         "completedCard": "Crypto sent",
         "congratulations": "Your transaction will be complete once it is confirmed by the network.",
-        "secondaryCTA": "View details"
+        "secondaryCTA": "View details",
+        "overlays": {
+          "source": "Select the account to pay from.",
+          "destination": "Paste or enter the address to send to or scan its QR code.",
+          "qrcode": "Align your QRCode with the camera to have it scanned.",
+          "account": "Select the first account from the list."
+        }
       },
       "swap": {
         "pending": "Swap crypto",
@@ -244,7 +266,13 @@
         "completed": "Crypto swapped!",
         "completedCard": "Crypto swapped",
         "congratulations": "You should receive your crypto shortly. Take note of your swap ID: {{swapId}}",
-        "secondaryCTA": "View details"
+        "secondaryCTA": "View details",
+        "overlays": {
+          "sidebar": "Click here to swap crypto.",
+          "crypto": "First, select the crypto you want to send and the crypto to receive in return.",
+          "account": "Now, select the accounts to send and receive from.",
+          "amount": "Click here to swap crypto."
+        }
       },
       "customize": {
         "pending": "Customize app",

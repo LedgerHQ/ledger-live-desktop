@@ -25,7 +25,7 @@ import AccountsList from "~/renderer/components/AccountsList";
 import Spinner from "~/renderer/components/Spinner";
 import Text from "~/renderer/components/Text";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
-import QueueContextualOverlay from "~/renderer/components/ProductTour/QueueContextualOverlay";
+import QueueOverlay from "~/renderer/components/ProductTour/QueueOverlay";
 import type { StepProps } from "..";
 
 // $FlowFixMe
@@ -243,12 +243,12 @@ class StepImport extends PureComponent<StepProps> {
       <>
         <TrackPage category="AddAccounts" name="Step3" currencyName={currencyName} />
         <Box mt={-4}>
-          <QueueContextualOverlay
+          <QueueOverlay
             queue={[
               {
                 selector: ".account-row",
                 i18nKey: "productTour.flows.createAccount.overlays.account",
-                conf: { bottom: true, left: true, isDismissable: true },
+                config: { bottom: true, left: true, isDismissable: true },
               },
             ]}
             condition={scannedAccounts.length}

@@ -1,6 +1,6 @@
 // @flow
-
-import React from "react";
+import React, { useCallback, useState } from "react";
+import type { OverlayConfig } from "~/renderer/components/ProductTour/Overlay";
 
 /**
  * We are dynamically building an svg path based on two inner shapes:
@@ -8,40 +8,67 @@ import React from "react";
  *  - a fixed positioned rectangle that will make a hole on the shape to allow clicks and
  *    other mouse interactions.
  */
-const OverlayShape = ({ t, b, l, r }: { t: number, b: number, l: number, r: number }) => {
+const OverlayShape = ({
+  t,
+  b,
+  l,
+  r,
+  config,
+}: {
+  t: number,
+  b: number,
+  l: number,
+  r: number,
+  config: OverlayConfig,
+}) => {
+  const [pulse, setPulse] = useState(0);
+  const { padding: p = 0, withFeedback } = config;
   const br = 5; // Rounded corner radius
-  const w = r - l - br * 2;
-  const h = b - t - br * 2;
+  const w = r - l - br * 2 + p * 2;
+  const h = b - t - br * 2 + p * 2;
+
+  const onOverlayClick = useCallback(() => {
+    setPulse(pulse + 1);
+  }, [pulse]);
+
   if ([t, b, l, r, w, h].some(isNaN)) return null; // Too soon
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       height="100%"
       width="100%"
+      key={`overlay_${pulse}`}
       style={{ position: "absolute" }}
     >
       <path
-        d={`
-      M 0 0
-      h 9999
-      v 9999
-      H 0
-      V 0
-      z
-      
-      m ${l + br} ${t}
-      h ${w}
-      c 2.7614 0 5 2.2386 5 5
-      v ${h}
-      c 0 2.7614-2.2386 5 -5 5
-      h -${w}
-      c -2.7614 0 -5 -2.2386 -5 -5
-      v -${h}
-      c 0 -2.7614 2.2386 -5 5 -5
-      z`}
+        transform="scale(1 1)"
+        transform-origin={`${l - p + w / 2} ${t - p + h / 2}`}
+        onClick={withFeedback ? onOverlayClick : undefined}
+        d={`M0 0h9999v9999H0V0z
+            m ${l - p + br} ${t - p}
+            h ${w}
+            c 2.7614 0 5 2.2386 5 5
+            v ${h}
+            c 0 2.7614-2.2386 5 -5 5
+            h -${w}
+            c -2.7614 0 -5 -2.2386 -5 -5
+            v -${h}
+            c 0 -2.7614 2.2386 -5 5 -5
+            z`}
         fill="#142533cc"
         fillRule="evenodd"
-      />
+      >
+        {pulse ? (
+          <animateTransform
+            attributeName="transform"
+            type="scale"
+            values="1 1;1.1 1.2;1 1"
+            begin="0s"
+            dur="500ms"
+            repeatCount="1"
+          />
+        ) : null}
+      </path>
     </svg>
   );
 };

@@ -7,13 +7,16 @@ import { useHistory } from "react-router-dom";
 import swap from "~/renderer/components/ProductTour/assets/swap.png";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
+import { useOnSetOverlays } from "~/renderer/components/ProductTour/hooks";
 
 const SwapCrypto = () => {
   const history = useHistory();
 
-  const onBeforeSwapFlow = useCallback(() => {
-    history.push({ pathname: "/swap" });
-  }, [history]);
+  const onBeforeFlow = useOnSetOverlays({
+    selector: "#drawer-swap-button",
+    i18nKey: "productTour.flows.swap.overlays.sidebar",
+    config: { bottom: true, withFeedback: true },
+  });
 
   const onAfterFlow = useCallback(() => {
     // NB Ensure we go back to the portfolio after a flow
@@ -31,7 +34,7 @@ const SwapCrypto = () => {
       title={<Trans i18nKey={"productTour.flows.swap.pending"} />}
       titleCompleted={<Trans i18nKey={"productTour.flows.swap.completedCard"} />}
       illustration={swap}
-      onBeforeFlow={onBeforeSwapFlow}
+      onBeforeFlow={onBeforeFlow}
       onAfterFlow={onAfterFlow}
       learnMoreCallback={onLearnMore}
     />

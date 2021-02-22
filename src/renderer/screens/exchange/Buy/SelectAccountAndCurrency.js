@@ -55,7 +55,7 @@ const ConfirmButton: ThemedComponent<{}> = styled(Button)`
 
 const FormContainer: ThemedComponent<{}> = styled.div`
   width: 100%;
-  margin-top: 8px;
+  margin-top: 28px;
 `;
 const FormContent: ThemedComponent<{}> = styled.div`
   margin-top: 24px;
@@ -102,7 +102,7 @@ const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccou
       <Text ff="Inter|SemiBold" fontSize={5} color="palette.text.shade100" textAlign="center">
         {t("exchange.buy.title")}
       </Text>
-      <FormContainer>
+      <FormContainer id={"exchange-form"}>
         {currency ? <CurrencyDownStatusAlert currencies={[currency]} /> : null}
         <FormContent>
           <Label>{t("exchange.buy.selectCrypto")}</Label>

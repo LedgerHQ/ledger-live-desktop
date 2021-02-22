@@ -78,7 +78,7 @@ const ProductTourModal = ({ isOpened, extras, activeFlow }: Props) => {
             <Text ff={"Inter|SemiBold"} fontSize={28}>
               <Trans i18nKey={`productTour.flows.${activeFlow}.completed`} />
             </Text>
-            <Text px={100} mt={2} ff={"Inter|Regular"} textAlign={"center"} fontSize={14}>
+            <Text px={60} mt={2} ff={"Inter|Regular"} textAlign={"center"} fontSize={14}>
               <Trans i18nKey={`productTour.flows.${activeFlow}.congratulations`} values={extras} />
             </Text>
             <Box horizontal mt={3}>

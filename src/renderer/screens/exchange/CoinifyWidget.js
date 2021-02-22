@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 import { track } from "~/renderer/analytics/segment";
 import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
-import { useActiveFlow } from "~/renderer/components/ProductTour/hooks";
+import { useActiveFlow, useSetOverlays } from "~/renderer/components/ProductTour/hooks";
 
 const WidgetContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -73,6 +73,13 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
   const dispatch = useDispatch();
   const colors = useTheme("colors");
   const { t } = useTranslation();
+
+  useSetOverlays(!!account, {
+    selector: "#exchange-iframe",
+    i18nKey: "productTour.flows.buy.overlays.iframe",
+    config: { top: true, skipOnLeft: true },
+  });
+
   const widgetRef: { current: null | HTMLIFrameElement } = useRef(null);
 
   const currency = account ? getAccountCurrency(account) : null;
@@ -317,7 +324,7 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
   ]);
 
   return (
-    <WidgetContainer>
+    <WidgetContainer id={"exchange-iframe"}>
       <CustomIframe
         src={url}
         ref={widgetRef}

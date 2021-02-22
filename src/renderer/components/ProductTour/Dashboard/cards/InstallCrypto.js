@@ -7,15 +7,15 @@ import { useHistory } from "react-router-dom";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import install from "~/renderer/components/ProductTour/assets/install.png";
-import { useOnSetContextualOverlayQueue } from "~/renderer/components/ProductTour/hooks";
+import { useOnSetOverlays } from "~/renderer/components/ProductTour/hooks";
 
 const InstallCrypto = () => {
   const history = useHistory();
 
-  const onBeforeFlow = useOnSetContextualOverlayQueue({
+  const onBeforeFlow = useOnSetOverlays({
     selector: "#drawer-manager-button",
     i18nKey: "productTour.flows.install.overlays.sidebar",
-    conf: { bottom: true },
+    config: { bottom: true, withFeedback: true },
   });
   const onAfterFlow = useCallback(() => {
     // NB Ensure we go back to the portfolio after a flow

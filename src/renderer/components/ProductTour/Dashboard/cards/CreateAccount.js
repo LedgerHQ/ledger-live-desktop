@@ -7,14 +7,14 @@ import { useHistory } from "react-router-dom";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import create from "~/renderer/components/ProductTour/assets/create.png";
-import { useOnSetContextualOverlayQueue } from "~/renderer/components/ProductTour/hooks";
+import { useOnSetOverlays } from "~/renderer/components/ProductTour/hooks";
 
 const CreateAccount = () => {
   const history = useHistory();
-  const onBeforeFlow = useOnSetContextualOverlayQueue({
+  const onBeforeFlow = useOnSetOverlays({
     selector: "#drawer-accounts-button",
     i18nKey: "productTour.flows.createAccount.overlays.sidebar",
-    conf: {},
+    config: { withFeedback: true },
   });
 
   const onAfterFlow = useCallback(() => {

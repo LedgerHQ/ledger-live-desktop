@@ -13,8 +13,8 @@ import Box from "~/renderer/components/Box";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import Text from "./Text";
 import {
-  useOnSetContextualOverlayQueue,
-  useOnClearContextualOverlayQueue,
+  useOnSetOverlays,
+  useOnClearOverlays,
   useActiveFlow,
 } from "~/renderer/components/ProductTour/hooks";
 type Props<C: Currency> = {
@@ -49,11 +49,11 @@ const SelectCurrency = <C: Currency>({
 }: Props<C>) => {
   const { t } = useTranslation();
   const activeFlow = useActiveFlow();
-  const onClearContextualOverlayQueue = useOnClearContextualOverlayQueue();
-  const onSetAddBitcoinAccountOverlay = useOnSetContextualOverlayQueue({
+  const onClearOverlays = useOnClearOverlays();
+  const onSetAddBitcoinAccountOverlay = useOnSetOverlays({
     selector: ".select-options-list .select__option:first-child",
     i18nKey: "productTour.flows.createAccount.overlays.currency",
-    conf: { top: true, disableScroll: true, isModal: true },
+    config: { top: true, disableScroll: true, isModal: true },
   });
 
   const devMode = useEnv("MANAGER_DEV_MODE");
@@ -68,10 +68,10 @@ const SelectCurrency = <C: Currency>({
     item => {
       onChange(item ? item.currency : null);
       if (activeFlow === "createAccount") {
-        onClearContextualOverlayQueue();
+        onClearOverlays();
       }
     },
-    [activeFlow, onChange, onClearContextualOverlayQueue],
+    [activeFlow, onChange, onClearOverlays],
   );
   const noOptionsMessage = useCallback(
     ({ inputValue }: { inputValue: string }) =>
@@ -113,7 +113,7 @@ const SelectCurrency = <C: Currency>({
       autoFocus={autoFocus}
       value={value}
       onMenuOpen={activeFlow === "createAccount" ? onSetAddBitcoinAccountOverlay : undefined}
-      onMenuClose={activeFlow === "createAccount" ? onClearContextualOverlayQueue : undefined}
+      onMenuClose={activeFlow === "createAccount" ? onClearOverlays : undefined}
       options={filteredOptions}
       filterOption={false}
       getOptionValue={getOptionValue}

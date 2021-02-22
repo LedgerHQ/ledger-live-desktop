@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import TabBar from "~/renderer/components/TabBar";
 import Swap from "~/renderer/screens/exchange/swap/Swap";
@@ -8,10 +8,16 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import { Trans } from "react-i18next";
 import History from "~/renderer/screens/exchange/swap/History";
+import { useOnClearOverlays } from "~/renderer/components/ProductTour/hooks";
 
 const SwapOrSwapHistory = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const location = useLocation();
+  const clearOverlays = useOnClearOverlays();
+
+  useEffect(() => {
+    clearOverlays();
+  }, [clearOverlays]);
 
   return (
     <Box flex={1} pb={6}>

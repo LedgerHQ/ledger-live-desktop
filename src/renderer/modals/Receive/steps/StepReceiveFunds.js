@@ -29,15 +29,19 @@ import ModalBody from "~/renderer/components/Modal/ModalBody";
 import QRCode from "~/renderer/components/QRCode";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
-import { useActiveFlow } from "~/renderer/components/ProductTour/hooks";
+import {
+  useActiveFlow,
+  useSetOverlays,
+  useOnClearOverlays,
+} from "~/renderer/components/ProductTour/hooks";
 
 const Separator = styled.div`
   border-top: 1px solid #99999933;
-  margin: 50px 0;
+  margin: 30px 0;
 `;
 const Separator2 = styled.div`
   border-top: 1px solid #99999933;
-  margin-top: 50px;
+  margin-top: 30px;
 `;
 
 const QRCodeWrapper = styled.div`
@@ -91,7 +95,7 @@ const Receive2Device = ({
 
   return (
     <>
-      <Box horizontal alignItems="center" flow={2}>
+      <Box p={2} horizontal id={"receive-share-address2"} alignItems="center" flow={2}>
         <Text
           style={{ flexShrink: "unset" }}
           ff="Inter|SemiBold"
@@ -133,6 +137,20 @@ const StepReceiveFunds = ({
   const initialDevice = useRef(device);
   const address = mainAccount.freshAddress;
   const [modalVisible, setModalVisible] = useState(false);
+  const onClearOverlays = useOnClearOverlays();
+  useSetOverlays(
+    isAddressVerified === null,
+    {
+      selector: "#receive-share-address1",
+      i18nKey: "productTour.flows.receive.overlays.address1",
+      config: { bottom: true, right: true, disableScroll: true, withFeedback: true },
+    },
+    {
+      selector: "#receive-share-address2",
+      i18nKey: "productTour.flows.receive.overlays.address2",
+      config: { bottom: true, left: true, disableScroll: true },
+    },
+  );
 
   const confirmAddress = useCallback(async () => {
     try {
@@ -155,9 +173,10 @@ const StepReceiveFunds = ({
         transitionTo("receive");
       }
     } catch (err) {
+      onClearOverlays();
       onChangeAddressVerified(false, err);
     }
-  }, [device, mainAccount, transitionTo, onChangeAddressVerified]);
+  }, [onChangeAddressVerified, transitionTo, device, mainAccount, onClearOverlays]);
 
   const onVerify = useCallback(() => {
     // if device has changed since the beginning, we need to re-entry device

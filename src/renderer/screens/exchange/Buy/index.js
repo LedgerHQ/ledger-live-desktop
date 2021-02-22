@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { track } from "~/renderer/analytics/segment";
+import { useOnClearOverlays, useSetOverlays } from "~/renderer/components/ProductTour/hooks";
 
 const BuyContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -31,9 +32,14 @@ const Buy = ({ defaultCurrency, defaultAccount }: Props) => {
   });
 
   const { account, parentAccount } = state;
+  useSetOverlays(!account, {
+    selector: "#exchange-form",
+    i18nKey: "productTour.flows.buy.overlays.form",
+    config: { top: true, withFeedback: true, padding: 20 },
+  });
+  const onModalShownHideOverlay = useOnClearOverlays();
 
   const dispatch = useDispatch();
-
   const reset = useCallback(() => {
     track("Page Buy Reset");
     setState({
@@ -52,6 +58,7 @@ const Buy = ({ defaultCurrency, defaultAccount }: Props) => {
 
   const selectAccount = useCallback(
     (account, parentAccount) => {
+      onModalShownHideOverlay();
       dispatch(
         openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", {
           account,
@@ -60,7 +67,7 @@ const Buy = ({ defaultCurrency, defaultAccount }: Props) => {
         }),
       );
     },
-    [dispatch, confirmAccount],
+    [onModalShownHideOverlay, dispatch, confirmAccount],
   );
 
   return (
@@ -70,6 +77,7 @@ const Buy = ({ defaultCurrency, defaultAccount }: Props) => {
         <CoinifyWidget account={account} parentAccount={parentAccount} mode="buy" onReset={reset} />
       ) : (
         <SelectAccountAndCurrency
+          id={"exchange-form"}
           selectAccount={selectAccount}
           defaultCurrency={defaultCurrency}
           defaultAccount={defaultAccount}
