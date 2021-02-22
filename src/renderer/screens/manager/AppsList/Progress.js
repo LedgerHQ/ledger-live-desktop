@@ -33,13 +33,7 @@ const Progress = ({ state, name, updating, installing, uninstalling, isCurrent }
   const progress = useAppInstallProgress(state, name);
 
   return (
-    <Box
-      className="progress-bar"
-      flex="1"
-      horizontal
-      justifyContent="flex-end"
-      overflow="hidden"
-    >
+    <Box className="progress-bar" flex="1" horizontal justifyContent="flex-end" overflow="hidden">
       <Box flex="0 0 auto" vertical alignItems="flex-end" justifyContent="center">
         <Box
           flex="0 0 auto"
