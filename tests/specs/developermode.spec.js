@@ -16,25 +16,33 @@ describe("Enable dev mode", () => {
 
   const currencies = ["bitcoin_testnet", "ethereum_ropsten", "MUON"];
 
-  it("testnet currencies should not be available in Add account flow", async () => {
-    await goToAddAccount();
+  describe("with dev mode = false", () => {
     for (const currency of currencies) {
-      await addAccountsModal.prepareAddAccount(currency);
-      expect(await app.client.screenshot()).toMatchImageSnapshot({
-        customSnapshotIdentifier: `addAccount-${currency}-no-results`,
+      it(`${currency} should not be available in Add account flow`, async () => {
+        await goToAddAccount();
+        await addAccountsModal.prepareAddAccount(currency);
+        expect(await app.client.screenshot()).toMatchImageSnapshot({
+          customSnapshotIdentifier: `addAccount-${currency}-no-results`,
+        });
       });
     }
   });
 
-  it("enable dev mode", async () => {
-    const closeBtn = await modalPage.closeButton();
-    await closeBtn.click();
-    await toggleDevMode();
-    await settingsPage.goToPortfolio();
-    const emptyStateTitle = await portfolioPage.portfolioEmptyStateTitle();
-    expect(await emptyStateTitle.getText()).toBe("Add an account to get started");
+  describe("with dev mode = true", () => {
+    beforeAll(async () => {
+      const closeBtn = await modalPage.closeButton();
+      await closeBtn.click();
+      await toggleDevMode();
+      await settingsPage.goToPortfolio();
+    });
+
+    it("portfolio should be empty", async () => {
+      const emptyStateTitle = await portfolioPage.portfolioEmptyStateTitle();
+      expect(await emptyStateTitle.getText()).toBe("Add an account to get started");
+    });
+
+    for (const currency of currencies) {
+      addAccount(currency);
+    }
   });
-  for (const currency of currencies) {
-    addAccount(currency);
-  }
 });
