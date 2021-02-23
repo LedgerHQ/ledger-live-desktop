@@ -66,7 +66,11 @@ class OperationComponent extends PureComponent<Props> {
     const unit = getAccountUnit(account);
 
     return (
-      <OperationRow isOptimistic={isOptimistic} onClick={this.onOperationClick}>
+      <OperationRow
+        className="operation-row"
+        isOptimistic={isOptimistic}
+        onClick={this.onOperationClick}
+      >
         <ConfirmationCell
           operation={operation}
           parentAccount={parentAccount}
