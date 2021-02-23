@@ -174,6 +174,7 @@ const OpenManagerBtn = ({
   const onClick = useCallback(() => {
     setTrackingSource("device action open manager button");
     send("EXIT");
+
     history.push({
       pathname: "manager",
       search: appName ? `?q=${appName}` : "",

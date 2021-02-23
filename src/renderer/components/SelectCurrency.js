@@ -12,11 +12,6 @@ import Select from "~/renderer/components/Select";
 import Box from "~/renderer/components/Box";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import Text from "./Text";
-import {
-  useOnSetOverlays,
-  useOnClearOverlays,
-  useActiveFlow,
-} from "~/renderer/components/ProductTour/hooks";
 type Props<C: Currency> = {
   onChange: (?C) => void,
   currencies: C[],
@@ -30,6 +25,8 @@ type Props<C: Currency> = {
   isDisabled?: boolean,
   id?: string,
   renderOptionOverride?: (option: Option) => any,
+  onMenuOpen?: () => void,
+  onMenuClose?: () => void,
 };
 
 const getOptionValue = c => c.id;
@@ -48,15 +45,10 @@ const SelectCurrency = <C: Currency>({
   isCurrencyDisabled,
   isDisabled,
   id,
+  onMenuOpen,
+  onMenuClose,
 }: Props<C>) => {
   const { t } = useTranslation();
-  const activeFlow = useActiveFlow();
-  const onClearOverlays = useOnClearOverlays();
-  const onSetAddBitcoinAccountOverlay = useOnSetOverlays({
-    selector: ".select-options-list .select__option:first-child",
-    i18nKey: "productTour.flows.createAccount.overlays.currency",
-    config: { top: true, disableScroll: true, isModal: true },
-  });
 
   const devMode = useEnv("MANAGER_DEV_MODE");
   let c = currencies;
@@ -69,11 +61,8 @@ const SelectCurrency = <C: Currency>({
   const onChangeCallback = useCallback(
     item => {
       onChange(item ? item.currency : null);
-      if (activeFlow === "createAccount") {
-        onClearOverlays();
-      }
     },
-    [activeFlow, onChange, onClearOverlays],
+    [onChange],
   );
   const noOptionsMessage = useCallback(
     ({ inputValue }: { inputValue: string }) =>
@@ -114,8 +103,8 @@ const SelectCurrency = <C: Currency>({
       id={id}
       autoFocus={autoFocus}
       value={value}
-      onMenuOpen={activeFlow === "createAccount" ? onSetAddBitcoinAccountOverlay : undefined}
-      onMenuClose={activeFlow === "createAccount" ? onClearOverlays : undefined}
+      onMenuOpen={onMenuOpen}
+      onMenuClose={onMenuClose}
       options={filteredOptions}
       filterOption={false}
       getOptionValue={getOptionValue}

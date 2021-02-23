@@ -38,6 +38,13 @@ const StyledImage: ThemedComponent<{}> = styled(Image)`
   mix-blend-mode: luminosity;
 `;
 
+const Circle: ThemedComponent<{}> = styled.div`
+  height: 16px;
+  width: 16px;
+  border-radius: 16px;
+  border: 1px solid white;
+`;
+
 const Card = ({
   require,
   appFlow,
@@ -104,18 +111,18 @@ const Card = ({
       <Box color={"white"} horizontal alignItems={"center"}>
         {completed ? (
           <Box color={"white"} horizontal alignItems={"center"}>
-            <IconCheckFull color="white" tickColor={theme.colors.identity} size={12} />
+            <IconCheckFull color="white" tickColor={theme.colors.identity} size={16} />
             <Text ff={"Inter|Bold"} ml={1} fontSize={2} style={{ textTransform: "uppercase" }}>
               <Trans i18nKey={"productTour.completed"} />
             </Text>
           </Box>
         ) : disabled ? (
-          <IconLock size={12} color={"white"} />
+          <IconLock size={16} color={"white"} />
         ) : (
-          <div style={{ height: 14 }} />
+          <Circle />
         )}
       </Box>
-      <Text mt={3} ff={"Inter|SemiBold"} fontSize={16} color={"white"}>
+      <Text mt={3} ff={"Inter|SemiBold"} fontSize={18} color={"white"}>
         {completed ? titleCompleted : title}
       </Text>
     </StyledCard>

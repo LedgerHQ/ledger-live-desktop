@@ -101,8 +101,8 @@ const Receive2Device = ({
   const type = useTheme("colors.palette.type");
 
   return (
-    <>
-      <Box p={2} horizontal id={"receive-share-address2"} alignItems="center" flow={2}>
+    <Box id={"receive-share-address2"}>
+      <Box p={2} horizontal alignItems="center" flow={2}>
         <Text
           style={{ flexShrink: "unset" }}
           ff="Inter|SemiBold"
@@ -121,7 +121,7 @@ const Receive2Device = ({
       </Box>
 
       {renderVerifyUnwrapped({ modelId: device.modelId, type })}
-    </>
+    </Box>
   );
 };
 
@@ -155,7 +155,7 @@ const StepReceiveFunds = ({
     {
       selector: "#receive-share-address2",
       i18nKey: "productTour.flows.receive.overlays.address2",
-      config: { bottom: true, left: true, disableScroll: true },
+      config: { top: true, disableScroll: true },
     },
   );
 

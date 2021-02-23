@@ -54,7 +54,9 @@ type Props = {
 const RecipientAddress = ({ onChange, withQrCode, value = "", ...rest }: Props) => {
   const [qrReaderOpened, setQrReaderOpened] = useState(false);
 
-  const preOnChange = useCallback(text => onChange((text && text.replace(/\s/g, "")) || ""), []);
+  const preOnChange = useCallback(text => onChange((text && text.replace(/\s/g, "")) || ""), [
+    onChange,
+  ]);
   const onShowQRCodeOverlay = useOnSetOverlays({
     selector: "#send-qrcode-scan",
     i18nKey: "productTour.flows.send.overlays.qrcode",

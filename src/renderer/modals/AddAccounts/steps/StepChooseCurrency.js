@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useMemo, useCallback } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { listSupportedCurrencies, listTokens } from "@ledgerhq/live-common/lib/currencies";
 import { findTokenAccountByCurrency } from "@ledgerhq/live-common/lib/account";
 import { supportLinkByTokenType } from "~/config/urls";
@@ -19,10 +19,42 @@ import FullNodeStatus from "~/renderer/modals/AddAccounts/FullNodeStatus";
 import useSatStackStatus from "~/renderer/hooks/useSatStackStatus";
 import useEnv from "~/renderer/hooks/useEnv";
 import type { SatStackStatus } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
-import WrapperForActiveFlow from "~/renderer/components/ProductTour/WrapperForActiveFlow";
-import InfoBox from "~/renderer/components/InfoBox";
+import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
+import {
+  useOnClearOverlays,
+  useOnSetOverlays,
+  useSetOverlays,
+} from "~/renderer/components/ProductTour/hooks";
 
 const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
+  useSetOverlays(!currency, {
+    selector: "#addAccounts",
+    i18nKey: "productTour.flows.createAccount.overlays.add",
+    config: { bottom: true, right: true, disableScroll: true, padding: 10 },
+  });
+
+  const onClearOverlays = useOnClearOverlays();
+
+  const onResetOverlay = useOnSetOverlays({
+    selector: "#addAccounts",
+    i18nKey: "productTour.flows.createAccount.overlays.add",
+    config: { bottom: true, right: true, disableScroll: true, padding: 10 },
+  });
+
+  const onSetAddBitcoinAccountOverlay = useOnSetOverlays({
+    selector: ".select-options-list .select__option:first-child",
+    i18nKey: "productTour.flows.createAccount.overlays.currency",
+    config: { top: true, disableScroll: true },
+  });
+
+  const wrappedOnChange = useCallback(
+    (crypto: ?CryptoCurrency) => {
+      setCurrency(crypto);
+      onClearOverlays();
+    },
+    [onClearOverlays, setCurrency],
+  );
+
   const currencies = useMemo(() => listSupportedCurrencies().concat(listTokens()), []);
 
   const isToken = currency && currency.type === "TokenCurrency";
@@ -35,9 +67,11 @@ const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
       {/* $FlowFixMe: onChange type is not good */}
       <SelectCurrency
         id={"addAccounts"}
+        onMenuOpen={onSetAddBitcoinAccountOverlay}
+        onMenuClose={onResetOverlay}
         currencies={currencies}
         autoFocus
-        onChange={setCurrency}
+        onChange={wrappedOnChange}
         value={currency}
       />
       <FullNodeStatus currency={currency} />
@@ -53,12 +87,6 @@ const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
           learnMoreLink={url}
         />
       ) : null}
-
-      <WrapperForActiveFlow flow={"createAccount"}>
-        <InfoBox mt={20} type={"hint"}>
-          <Trans i18nKey="productTour.flows.createAccount.hint.stepCurrency" />
-        </InfoBox>
-      </WrapperForActiveFlow>
     </>
   );
 };

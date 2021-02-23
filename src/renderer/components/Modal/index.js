@@ -48,10 +48,11 @@ const transitionsOpacity = {
 };
 
 const transitionsScale = {
-  entering: { transform: "scale(1.1)" },
+  // FIXME, we just lost the scale animation for product tour
+  entering: { transform: "scale(1)" },
   entered: { transform: "scale(1)" },
-  exiting: { transform: "scale(1.1)" },
-  exited: { transform: "scale(1.1)" },
+  exiting: { transform: "scale(1)" },
+  exited: { transform: "scale(1)" },
 };
 
 const Container = styled.div.attrs(({ state, centered, isOpened }) => ({

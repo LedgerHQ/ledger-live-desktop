@@ -69,7 +69,7 @@ const AmountField = ({
     !status || status?.amount.eq(0) || status?.errors.amount,
     {
       selector: "#send-amount",
-      i18nKey: "productTour.flows.send.overlays.destination",
+      i18nKey: "productTour.flows.send.overlays.amount",
       config: {
         top: true,
         padding: 10,
@@ -78,7 +78,7 @@ const AmountField = ({
     },
     {
       selector: "#send-fields",
-      i18nKey: "productTour.flows.send.overlays.destination",
+      i18nKey: "productTour.flows.send.overlays.fees",
       config: {
         top: true,
         padding: 10,

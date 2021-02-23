@@ -84,11 +84,20 @@ type Props = {
 };
 
 function ReadOnlyAddressField({ address, allowCopy = true }: Props) {
+  const addressRef = useRef(null);
   const [copyFeedback, setCopyFeedback] = useState(false);
   const [clibboardChanged, setClipboardChanged] = useState(false);
   const onNextOverlay = useOnNextOverlay();
 
   const copyTimeout = useRef();
+
+  useEffect(() => {
+    const el = addressRef.current;
+    el?.addEventListener("copy", onNextOverlay);
+    return () => {
+      el?.removeEventListener("copy", onNextOverlay);
+    };
+  }, [addressRef, onNextOverlay]);
 
   const onCopy = useCallback(() => {
     onNextOverlay();
@@ -124,7 +133,7 @@ function ReadOnlyAddressField({ address, allowCopy = true }: Props) {
         </ClipboardSuspicious>
       ) : null}
       <Box horizontal alignItems="stretch">
-        <Address allowCopy={allowCopy}>
+        <Address ref={addressRef} allowCopy={allowCopy}>
           {!copyFeedback ? null : (
             <CopyFeedback>
               <Trans i18nKey="common.addressCopied" />

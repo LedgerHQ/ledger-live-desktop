@@ -285,7 +285,9 @@ const MainSideBar = () => {
                 iconActiveColor="wallet"
                 isActive={location.pathname === "/accounts"}
                 onClick={handleClickAccounts}
-                disabled={(noAccounts && !activeFlow) || activeFlow !== "createAccount"}
+                disabled={
+                  (noAccounts && !activeFlow) || (!!activeFlow && activeFlow !== "createAccount")
+                }
                 collapsed={secondAnim}
               />
               <SideBarListItem

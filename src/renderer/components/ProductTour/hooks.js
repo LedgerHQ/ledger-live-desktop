@@ -1,5 +1,5 @@
 // @flow
-import { useMemo, useContext, useCallback, useEffect, useRef } from "react";
+import { useMemo, useContext, useCallback, useLayoutEffect, useRef } from "react";
 import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 import isEqual from "lodash/isEqual";
 import type { OverlayConfig } from "~/renderer/components/ProductTour/Overlay";
@@ -15,7 +15,7 @@ export function useSetOverlays(condition: boolean, ...overlays: Array<SetHelpEle
   const cachedOverlays = useRef();
   const cachedCondition = useRef();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (
       (!isEqual(cachedOverlays.current, overlays) && condition) ||
       (condition && cachedCondition.current !== condition)
