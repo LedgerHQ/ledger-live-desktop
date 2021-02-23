@@ -1,6 +1,6 @@
 import Page from "./page";
 
-export default class AccountPage extends Page {
+export default class ManagerPage extends Page {
   async appOnDeviceTab() {
     return this.$("#appsOnDevice-tab");
   }
