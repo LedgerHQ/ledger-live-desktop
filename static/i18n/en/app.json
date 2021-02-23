@@ -230,7 +230,7 @@
         "overlays": {
           "sidebar": "Click on Receive in the sidebar to receive crypto.",
           "address1": "First, copy the address and share it with the party sending your crypto.",
-          "address2": "Now compare the pasted address with the one on your device. You can only trust the address on your device: the pasted address must be exactly the same."
+          "address2": "Now compare the pasted address with the one on your device. You can only trust the address on your device."
         }
       },
       "buy": {
@@ -254,10 +254,13 @@
         "congratulations": "Your transaction will be complete once it is confirmed by the network.",
         "secondaryCTA": "View details",
         "overlays": {
+          "sidebar": "Click here to send crypto",
           "source": "Select the account to pay from.",
           "destination": "Paste or enter the address to send to or scan its QR code.",
           "qrcode": "Align your QRCode with the camera to have it scanned.",
-          "account": "Select the first account from the list."
+          "account": "Select the account from the list.",
+          "amount": "Enter the amount you want to send. Click “Send Max” toggle to empty the account.",
+          "fees": "Select the gas price paid to the network for confirming the transaction. A higher gas price gets your transaction confirmed faster."
         }
       },
       "swap": {

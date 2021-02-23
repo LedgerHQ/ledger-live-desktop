@@ -185,12 +185,13 @@ export const ProductTourProvider = ({ children }: { children: React$Node }) => {
   const [state, send] = useMachine(productTourMachine, {
     context: {
       ...initialContext,
-      completedFlows: JSON.parse(localStorage.productTourCompletedFlows || "[]"),
+      completedFlows: process.env.DEBUG_PRODUCT_TOUR
+        ? []
+        : JSON.parse(localStorage.productTourCompletedFlows || "[]"),
     },
   });
 
   useEffect(() => console.log({ state }), [state]);
-
   const { context } = state;
   const { activeFlow, extras, showSuccessModal, completedFlows, totalFlows } = context;
   const completedFlowsRef = useRef(completedFlows);
@@ -198,6 +199,8 @@ export const ProductTourProvider = ({ children }: { children: React$Node }) => {
   const persistCompletedFlows = useCallback(() => {
     localStorage.setItem("productTourCompletedFlows", JSON.stringify(context.completedFlows));
   }, [context.completedFlows, localStorage]);
+
+  useEffect(persistCompletedFlows, [persistCompletedFlows, process.env.DEBUG_PRODUCT_TOUR]);
 
   useEffect(() => {
     if (completedFlowsRef.current !== completedFlows) {

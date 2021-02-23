@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useEffect } from "react";
+import React, { useLayoutEffect, useCallback, useEffect } from "react";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -42,7 +42,7 @@ const StepRecipient = ({
   useSetOverlays(true, {
     selector: "#send-source",
     i18nKey: "productTour.flows.send.overlays.source",
-    config: { bottom: true, right: true, disableScroll: true, withFeedback: true, padding: 10 },
+    config: { bottom: true, right: true, disableScroll: true, padding: 10 },
   });
 
   const onRecipientAddressOverlay = useOnSetOverlays({
@@ -60,16 +60,17 @@ const StepRecipient = ({
     i18nKey: "productTour.flows.send.overlays.source",
     config: { bottom: true, right: true, disableScroll: true, withFeedback: true, padding: 10 },
   });
+
   const onChooseFirstAccountOverlay = useOnSetOverlays({
-    selector: ".select-options-list .select__option:first-child",
+    selector: ".select-options-list",
     i18nKey: "productTour.flows.send.overlays.account",
-    config: { top: true, disableScroll: true, isModal: true },
+    config: { top: true },
   });
 
   const wrappedOnChangeAccount = useCallback(
-    (...p) => {
+    (nextAccount: AccountLike, nextParentAccount: ?Account) => {
       onRecipientAddressOverlay();
-      onChangeAccount(...p);
+      onChangeAccount(nextAccount, nextParentAccount);
     },
     [onChangeAccount, onRecipientAddressOverlay],
   );
@@ -139,9 +140,9 @@ export const StepRecipientFooter = ({
   const onClearOverlays = useOnClearOverlays();
 
   useSetOverlays(!!status, {
-    selector: "#receive-share-address1",
-    i18nKey: "productTour.flows.receive.overlays.address1",
-    config: { bottom: true, right: true, disableScroll: true, withFeedback: true },
+    selector: "#send-source",
+    i18nKey: "productTour.flows.send.overlays.source",
+    config: { bottom: true, right: true, disableScroll: true, withFeedback: true, padding: 10 },
   });
 
   useEffect(() => {

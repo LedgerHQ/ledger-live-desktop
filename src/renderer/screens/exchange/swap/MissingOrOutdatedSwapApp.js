@@ -13,14 +13,11 @@ import ProductTourContext from "~/renderer/components/ProductTour/ProductTourCon
 
 const MissingOrOutdatedSwapApp = ({ outdated = false }: { outdated?: boolean }) => {
   const { push } = useHistory();
-  const { state, send } = useContext(ProductTourContext);
+  const { send } = useContext(ProductTourContext);
   const openManager = useCallback(() => {
-    if (state.matches("flow")) {
-      // NB Consider the product tour flow as exited if we navigate away
-      send("EXIT");
-    }
+    send("EXIT");
     push("manager?q=exchange");
-  }, [push, send, state]);
+  }, [push, send]);
 
   const key = outdated ? "outdatedApp" : "missingApp";
   return (

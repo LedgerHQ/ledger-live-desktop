@@ -22,7 +22,6 @@ export type OverlayConfig = {|
 
   padding?: number, //      Extra padding around highlighted area
 
-  isModal?: boolean, //     FIXME  do we need this?   Flag for controlling modal scrolling
   skipOnLeft?: boolean, //  Show
   disableScroll?: boolean,
 
@@ -54,7 +53,7 @@ const SkipWrapper = styled.div`
   pointer-events: auto;
 `;
 
-const Overlay = ({ isModal }: { isModal?: boolean }) => {
+const Overlay = () => {
   const ref = useRef(null);
   const elRef = useRef(null);
 
@@ -83,9 +82,9 @@ const Overlay = ({ isModal }: { isModal?: boolean }) => {
 
       modalScroll = document.querySelector("#modal-content");
       if (modalScroll) {
-        modalScroll.style.overflow = "hidden";
-        modalScroll.style.paddingRight = "20px";
-        modalScroll.style.paddingTop = "20px";
+        // modalScroll.style.overflow = "hidden";
+        // modalScroll.style.paddingRight = "20px";
+        // modalScroll.style.paddingTop = "20px";
       }
     }
 
@@ -104,9 +103,9 @@ const Overlay = ({ isModal }: { isModal?: boolean }) => {
       if (scroll) scroll.style.overflow = "hidden";
       if (selectorScroll) selectorScroll.style.overflow = "hidden auto";
       if (modalScroll) {
-        modalScroll.style.overflow = "scroll";
-        modalScroll.style.paddingRight = "0";
-        modalScroll.style.paddingTop = "0";
+        // modalScroll.style.overflow = "scroll";
+        // modalScroll.style.paddingRight = "0";
+        // modalScroll.style.paddingTop = "0";
       }
     };
   }, [selector, config, t, b, l, r]);

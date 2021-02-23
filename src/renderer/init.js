@@ -30,7 +30,11 @@ import dbMiddleware from "~/renderer/middlewares/db";
 import createStore from "~/renderer/createStore";
 import events from "~/renderer/events";
 import { setAccounts } from "~/renderer/actions/accounts";
-import { fetchSettings, setDeepLinkUrl } from "~/renderer/actions/settings";
+import {
+  fetchSettings,
+  setDeepLinkUrl,
+  setHasCompletedProductTour,
+} from "~/renderer/actions/settings";
 import { lock, setOSDarkMode } from "~/renderer/actions/application";
 
 import {
@@ -93,6 +97,9 @@ async function init() {
   const initialSettings = await getKey("app", "settings", {});
 
   store.dispatch(fetchSettings(initialSettings));
+  if (process.env.DEBUG_PRODUCT_TOUR) {
+    store.dispatch(setHasCompletedProductTour(false));
+  }
 
   const state = store.getState();
   const language = languageSelector(state);
