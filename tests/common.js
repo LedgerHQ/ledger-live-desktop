@@ -158,8 +158,8 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     );
 
     app.client.addCommand("waitForIllustration", async () => {
-      const illustrations = await app.client.$("div[class^='shared__Illustration-'");
-      await illustrations.waitForDisplayed();
+      const illustrations = await app.client.$(".illustration");
+      !illustrations.error && await illustrations.waitForDisplayed();
     });
 
     app.client.addCommand("screenshot", async function() {

@@ -1,4 +1,5 @@
 // @flow
+import React from "react";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
@@ -23,12 +24,14 @@ export const HeaderContainer: ThemedComponent<*> = styled.div`
   padding: 40px 80px;
 `;
 
-export const Illustration: ThemedComponent<*> = styled.div`
+const IllustrationInner: ThemedComponent<*> = styled.div`
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
   background: url(${({ src }) => src}) no-repeat center;
   margin: 0 auto;
 `;
+
+export const Illustration = (props) => <IllustrationInner className="illustration" {...props} />;
 
 export const ContentContainer: ThemedComponent<*> = styled.div`
   display: flex;

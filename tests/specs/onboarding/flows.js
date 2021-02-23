@@ -183,7 +183,6 @@ export const onboard = device => {
     it("goes to recovery phrase 3", async () => {
       const next = await $("#use-recovery-sheet");
       await next.click();
-      await app.client.waitForIllustration();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
