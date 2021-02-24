@@ -167,6 +167,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       await unfocus.click();
 
       await app.client.waitUntilWindowLoaded();
+      await app.client.pause(500);
 
       const pageRect = await app.client.execute(() => {
         return {
