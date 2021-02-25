@@ -752,7 +752,7 @@
     },
     "status": {
       "title": "Ledger Status",
-      "desc": "Learn crypto"
+      "desc": "Check our system status"
     },
     "helpCenter": {
       "title": "Ledger Support",
@@ -1050,6 +1050,7 @@
     "loading": "Betöltés...",
     "connectAndUnlockDevice": "Csatlakoztasd, és old fel az eszközöd",
     "unlockDevice": "Old fel az eszközöd",
+    "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
     "quitApp": "Lépj ki az alkalmazásból az eszközödön",
     "appNotInstalled": "Kérlek, telepítsd a(z) {{appName}} alkalmazást",
     "openManager": "Eszközkezelő megnyitása",
@@ -1181,6 +1182,7 @@
       "steps": {
         "downloadingUpdate": "Frissítés letöltése",
         "updateMCU": "Szoftverfrissítés",
+        "updating": "Firmware update",
         "reset": "Eszköz előkészítése",
         "osu": "OSU telepítése...",
         "flash-mcu": "MCU frissítése...",
@@ -1199,7 +1201,10 @@
       "mcuBlueFirst": "Nyomd meg, és tartsd lenyomva 10 másodpercig az oldalsó gombot az eszköz kikapcsolásához. Engedd el a gombot.",
       "mcuBlueSecond": "Nyomd meg, és tartsd lenyomva a gombot minimum 5 másodpercig, amíg a Boot Options meg nem jelenig. Nyomj a Bootloader Mode-ra",
       "successTitle": "Szoftver frissítve",
-      "successText": "Kérlek, telepítsd újra az alkalmazásokat az eszközödön",
+      "successTextApps": "Please re-install the apps on your device",
+      "successTextNoApps": "You can now install apps on your device",
+      "sucessCTAApps": "Re-install apps",
+      "SuccessCTANoApps": "Install apps",
       "resetSteps": {
         "first": "1. Indítsd újra az eszközöd",
         "connect": "Csatlakoztasd a {{deviceName}} -t a számítógépedhez az USB kábelt használva.",
@@ -1825,6 +1830,7 @@
     "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
     "unlockedBalance": "Unbonded",
     "unlockedTooltip": "Unbonded assets can now be moved using the withdraw operation.",
+    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
     "nomination": {
       "emptyState": {
         "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
@@ -1927,7 +1933,9 @@
         "stash": "Available Balance",
         "stashDescription": "Rewards are credited to your available balance.",
         "staked": "Bonded Balance",
-        "stakedDescription": "Rewards are credited to your bonded balance for compound earning."
+        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
+        "optionTitle": "Note",
+        "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
       },
       "steps": {
         "starter": {
