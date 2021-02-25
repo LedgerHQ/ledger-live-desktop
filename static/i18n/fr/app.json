@@ -2901,9 +2901,9 @@
   "Terms": {
     "title": "Conditions d’utilisation",
     "read": "Lire nos Conditions d'utilisation",
-    "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
-    "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
-    "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
+    "switchLabelTerms": "<0>J’ai lu et j’accepte les</0> <1>Conditions d’utilisation</1>",
+    "switchLabelPrivacyPolicy": "<0>J'ai lu et j'accepte la </0> <1>Politique de confidentialité</1>",
+    "switchLabelLoss": "Je comprends que si je perds cette phrase de récupération, je ne serai plus en mesure d'accéder à mes crypto actifs, dans le cas où je ne peux plus accéder à mon Nano.",
     "cta": "Entrer dans l'application Ledger"
   },
   "families": {
@@ -3200,8 +3200,8 @@
       "description": "Veuillez configurer votre nœud pour scanner les comptes associés à cet appareil. Votre nœud doit d'abord scanner la blockchain avant de pouvoir ajouter le compte à votre portfolio."
     },
     "StratisDown2021Warning": {
-      "title": "The Stratis blockchain evolved and may no longer work correctly.",
-      "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
+      "title": "La blockchain Stratis a évolué et peut ne plus fonctionner correctement.",
+      "description": "La prise en charge de la blockchain Stratis originale sera maintenue jusqu'au 16 octobre 2021."
     },
     "SwapGenericAPIError": {
       "title": "Le taux de change a expiré",
@@ -3445,13 +3445,13 @@
       "title": "Un mémo peut être requis lors de l'envoi à ce destinataire"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{minAmountFromFormatted}}"
+      "title": "Le montant doit être d'au moins {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be less than {{maxAmountFromFormatted}}"
+      "title": "Le montant doit être inférieur à {{maxAmountFromFormatted}}"
     },
     "PolkadotElectionClosed": {
-      "title": "Validators election must be closed"
+      "title": "L'élection du validateur doit être fermée"
     },
     "PolkadotNotValidator": {
       "title": "Some selected addresses are not validators"
