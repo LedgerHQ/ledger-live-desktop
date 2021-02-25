@@ -17,13 +17,13 @@ const editAccountName = (currency = "global") => {
     });
 
     it("edit account name", async () => {
-      const settingsButton = await accountPage.settingsButton;
+      const settingsButton = await accountPage.settingsButton();
       await settingsButton.click();
 
       const newName = "New account name";
       await accountSettingsModal.editAccountName(newName);
 
-      const accountName = await accountPage.accountHeaderName;
+      const accountName = await accountPage.accountHeaderName();
       const value = await accountName.getValue();
       expect(value).toBe(newName);
     });
