@@ -46,7 +46,7 @@
     "western": "Ouest",
     "reverify": "Revérifier",
     "verify": "Vérifier",
-    "verifyMyAddress": "Verify my address",
+    "verifyMyAddress": "Vérifier mon adresse",
     "copy": "Copier",
     "copied": "Copié",
     "addressCopied": "Adresse copiée",
@@ -102,11 +102,11 @@
       "CLOSE_ACCOUNT": "Fermer",
       "BOND": "Bond",
       "UNBOND": "Unbond",
-      "REWARD_PAYOUT": "Reward",
+      "REWARD_PAYOUT": "Récompense",
       "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Unbonded Withdrawal",
+      "WITHDRAW_UNBONDED": "Retrait Unbonded",
       "NOMINATE": "Nomination",
-      "CHILL": "Clear nominations"
+      "CHILL": "Enlever les nominations"
     }
   },
   "byteSize": {
@@ -144,7 +144,7 @@
     "lend": "Lend"
   },
   "stars": {
-    "placeholder": "Star an account to display it here.",
+    "placeholder": "Mettez une étoile sur un compte pour l'afficher ici.",
     "tooltip": "Ajouter aux favoris"
   },
   "bridge": {
