@@ -3454,19 +3454,19 @@
       "title": "L'élection du validateur doit être fermée"
     },
     "PolkadotNotValidator": {
-      "title": "Some selected addresses are not validators"
+      "title": "Certaines adresses sélectionnées ne sont pas des validateurs"
     },
     "PolkadotLowBondedBalance": {
-      "title": "All bonded assets will be unbonded if < 1 DOT"
+      "title": "Tous les actifs bonded seront unbonded si < 1 DOT"
     },
     "PolkadotNoUnlockedBalance": {
-      "title": "You have no unbonded assets"
+      "title": "Vous n'avez aucun actif unbonded"
     },
     "PolkadotNoNominations": {
-      "title": "You have no nominations"
+      "title": "Vous n'avez aucune nomination"
     },
     "PolkadotBondAllFundsWarning": {
-      "title": "You will not have available balance for future transactions"
+      "title": "Vous n'aurez pas de solde disponible pour les transactions futures"
     },
     "PolkadotBondMinimumAmount": {
       "title": "Vous devez bond au moins 1 DOT"
