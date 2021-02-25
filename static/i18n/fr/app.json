@@ -752,7 +752,7 @@
     },
     "status": {
       "title": "Statut Ledger",
-      "desc": "Comprendre les cryptos"
+      "desc": "Check our system status"
     },
     "helpCenter": {
       "title": "Assistance Ledger",
@@ -1050,6 +1050,7 @@
     "loading": "Chargement en cours...",
     "connectAndUnlockDevice": "Connectez et déverrouillez votre appareil",
     "unlockDevice": "Déverrouillez votre appareil",
+    "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
     "quitApp": "Quittez l'application sur votre appareil",
     "appNotInstalled": "Veuillez installer l'application {{appName}}",
     "openManager": "Ouvrir le Manager",
@@ -1181,7 +1182,7 @@
       "steps": {
         "downloadingUpdate": "Téléchargement de la mise à jour",
         "updateMCU": "Mise à jour du firmware",
-        "updating": "Mise à jour du firmware",
+        "updating": "Firmware update",
         "reset": "Préparation de l'appareil",
         "osu": "Installation de l'OSU...",
         "flash-mcu": "Mise à jour du MCU...",
@@ -1200,7 +1201,10 @@
       "mcuBlueFirst": "Appuyez sur le bouton latéral pendant 10 secondes pour éteindre l'appareil. Relâchez le bouton.",
       "mcuBlueSecond": "Appuyez sur et maintenez le bouton pendant au moins 5 secondes jusqu'à ce que les options de boot soient affichées. Sélectionnez Bootloader mode",
       "successTitle": "Firmware mis à jour",
-      "successText": "Veuillez réinstaller les applications sur votre appareil",
+      "successTextApps": "Please re-install the apps on your device",
+      "successTextNoApps": "You can now install apps on your device",
+      "sucessCTAApps": "Re-install apps",
+      "SuccessCTANoApps": "Install apps",
       "resetSteps": {
         "first": "1. Réinitialiser votre appareil",
         "connect": "Connectez le {{deviceName}} à votre ordinateur en utilisant le câble USB.",
@@ -1820,13 +1824,13 @@
     }
   },
   "polkadot": {
-    "lockedBalance": "Actifs liés au staking",
-    "lockedTooltip": "Les actifs liés peuvent être utilisés pour obtenir des récompenses en nominant des validateurs.",
-    "unlockingBalance": "Actifs en cours de débloquage",
-    "unlockingTooltip": "Les actifs déliés restent verrouillés pendant 28 jours avant d'être disponibles.",
-    "unlockedBalance": "Actifs déliés",
-    "unlockedTooltip": "Des actifs déliés peuvent maintenant être récupérés via une transaction.",
-    "networkFees": "Les frais sont determinés automatiquement par le consensus Polkadot, vous ne pouvez pas les vérifier sur votre Nano",
+    "lockedBalance": "Bonded",
+    "lockedTooltip": "Assets must be bonded to nominated validators before earning rewards.",
+    "unlockingBalance": "Unbonding",
+    "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
+    "unlockedBalance": "Unbonded",
+    "unlockedTooltip": "Unbonded assets can now be moved using the withdraw operation.",
+    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
     "nomination": {
       "emptyState": {
         "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
@@ -1925,13 +1929,13 @@
     "bond": {
       "title": "Bond assets",
       "rewardDestination": {
-        "label": "Destination des récompenses",
-        "stash": "Balance disponible",
-        "stashDescription": "Les récompenses seront versées sur le compte actuel en tant que balance disponible.",
-        "staked": "Balance liée",
-        "stakedDescription": "Les récompenses seront versées sur le compte actuel en tant que balance liée au staking.",
+        "label": "Rewards Destination",
+        "stash": "Available Balance",
+        "stashDescription": "Rewards are credited to your available balance.",
+        "staked": "Bonded Balance",
+        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
         "optionTitle": "Note",
-        "optionDescription": "Une fois défini, l'option reste jusqu'à la fin des actifs liés. Si vous changez d'avis, lisez l'article du lien en dessous."
+        "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
       },
       "steps": {
         "starter": {
