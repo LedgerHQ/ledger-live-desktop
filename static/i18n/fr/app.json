@@ -1917,23 +1917,23 @@
           "success": {
             "title": "Vous avez nommé avec succès les validateurs",
             "text": "Vous commencerez à gagner des récompenses lorsque vos actifs seront bonded à vos validateurs élus.",
-            "cta": "View details"
+            "cta": "Voir les détails"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "Diffusion de la transaction..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
         }
       }
     },
     "bond": {
-      "title": "Bond assets",
+      "title": "Actifs bond",
       "rewardDestination": {
-        "label": "Rewards Destination",
-        "stash": "Available Balance",
-        "stashDescription": "Rewards are credited to your available balance.",
-        "staked": "Bonded Balance",
-        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
+        "label": "Destination des récompenses",
+        "stash": "Solde disponible",
+        "stashDescription": "Vos récompenses ont été ajoutées au solde disponible.",
+        "staked": "Solde Bonded",
+        "stakedDescription": "Les récompenses sont créditées sur votre solde bonded.",
         "optionTitle": "Note",
         "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
       },
