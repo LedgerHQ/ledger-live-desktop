@@ -1935,7 +1935,7 @@
         "staked": "Solde Bonded",
         "stakedDescription": "Les récompenses sont créditées sur votre solde bonded.",
         "optionTitle": "Note",
-        "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
+        "optionDescription": "Une fois défini, l'option est fixée pour la durée de vie de ce bond. Si vous changez d'avis, veuillez lire l'article ci-dessous"
       },
       "steps": {
         "starter": {
@@ -2028,26 +2028,26 @@
           "success": {
             "title": "Transaction d'unbond envoyée avec succès",
             "text": "Les actifs unbonded peuvent être retirés dans 28 jours.",
-            "cta": "View details"
+            "cta": "Voir les détails"
           },
           "pending": {
-            "title": "Unbonding your assets..."
+            "title": "Unbonding de vos actifs..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
         }
       }
     },
     "simpleOperation": {
       "modes": {
         "withdrawUnbonded": {
-          "title": "Withdraw Unbonded",
-          "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
-          "info": "You can then withdraw unbonded assets to your available balance."
+          "title": "Retirer le montant unbonded",
+          "description": "Après la période d'unbonding de 28 jours, vous pouvez retirer les actifs unbonded.",
+          "info": "Vous pouvez ensuite retirer des actifs unbonded vers votre solde disponible."
         },
         "chill": {
-          "title": "Clear nominations",
-          "description": "Clears all nominations and stops earning rewards.",
-          "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
+          "title": "Enlever les nominations",
+          "description": "Enleve toutes les nominations et récompenses.",
+          "info": "Les actifs bonded restent bloqués. Si vous les déconnectez, ils seront disponibles après 28 jours."
         }
       },
       "steps": {
@@ -2055,20 +2055,20 @@
           "title": "Info"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Appareil"
         },
         "confirmation": {
           "title": "Confirmation",
           "label": "Confirmation",
           "success": {
-            "title": "Transaction sent successfully",
-            "text": "You will see your operation in history soon.",
-            "cta": "View details"
+            "title": "Transaction émise avec succès",
+            "text": "Vous verrez bientôt votre opération dans l'historique.",
+            "cta": "Voir les détails"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "Diffusion de la transaction..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
         }
       }
     }
@@ -2296,7 +2296,7 @@
     "repairDevice": {
       "title": "Réparer votre appareil Ledger",
       "descSettings": "Utilisez ceci pour restaurer votre appareil Ledger s'il est bloqué pendant une mise à jour du firmware.",
-      "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
+      "desc": "Pour les utilisateurs de Ledger Nano S, veuillez sélectionner l'état affiché sur votre appareil. Pour les utilisateurs de Nano X et Bleu, veuillez vous référer au centre d'aide.",
       "button": "Réparer"
     },
     "exportLogs": {
@@ -2878,12 +2878,12 @@
       "undelegate": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
       "redelegate": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
       "claimRewardCompound": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
-      "nominate": "Please confirm on your device to finalize the operation",
-      "chill": "Please confirm on your device to finalize the operation",
-      "bond": "Please confirm on your device to finalize the operation",
-      "unbond": "Please confirm on your device to finalize the operation",
-      "rebond": "Please confirm on your device to finalize the operation",
-      "withdrawUnbonded": "Please confirm on your device to finalize the operation"
+      "nominate": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "chill": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "bond": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "unbond": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "rebond": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "withdrawUnbonded": "Veuillez confirmer sur votre appareil pour finaliser l'opération"
     },
     "recipientWording": {
       "send": "destinataire",
@@ -2891,7 +2891,7 @@
       "undelegate": "validateur",
       "claimReward": "destinataire des récompenses",
       "optIn": "destinataire",
-      "nominate": "validator"
+      "nominate": "validateur"
     },
     "votes": "Votes ({{count}})"
   },
