@@ -17,6 +17,10 @@ export default class PortfolioPage extends Page {
     return this.$("#carousel-dismiss-confirm");
   }
 
+  get helpButton() {
+    return this.$("#topbar-help-button");
+  }
+
   async isAddAccountAvailable() {
     const elem = await this.emtpyStateAddAccountButton;
     return elem.isExisting();
