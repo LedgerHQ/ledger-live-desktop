@@ -46,7 +46,7 @@
     "western": "Ouest",
     "reverify": "Revérifier",
     "verify": "Vérifier",
-    "verifyMyAddress": "Verify my address",
+    "verifyMyAddress": "Vérifier mon adresse",
     "copy": "Copier",
     "copied": "Copié",
     "addressCopied": "Adresse copiée",
@@ -102,11 +102,11 @@
       "CLOSE_ACCOUNT": "Fermer",
       "BOND": "Bond",
       "UNBOND": "Unbond",
-      "REWARD_PAYOUT": "Reward",
+      "REWARD_PAYOUT": "Récompense",
       "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Unbonded Withdrawal",
+      "WITHDRAW_UNBONDED": "Retrait Unbonded",
       "NOMINATE": "Nomination",
-      "CHILL": "Clear nominations"
+      "CHILL": "Enlever les nominations"
     }
   },
   "byteSize": {
@@ -144,7 +144,7 @@
     "lend": "Lend"
   },
   "stars": {
-    "placeholder": "Star an account to display it here.",
+    "placeholder": "Mettez une étoile sur un compte pour l'afficher ici.",
     "tooltip": "Ajouter aux favoris"
   },
   "bridge": {
@@ -258,9 +258,9 @@
       "txid": "Swap ID",
       "status": "Statut",
       "statusTooltips": {
-        "refunded": "Please contact the Swap provider with you swap ID for more details",
-        "failed": "Please contact the Swap provider with you swap ID for more details",
-        "hold": "Please contact the Swap provider with you swap ID to solve the situation"
+        "refunded": "Veuillez contacter le fournisseur de swap avec votre swap ID pour plus de détails",
+        "failed": "Veuillez contacter le fournisseur de swap avec votre swap ID pour plus de détails",
+        "hold": "Veuillez contacter le fournisseur de swap avec votre swap ID pour résoudre la situation"
       },
       "date": "Date",
       "from": "De",
@@ -370,8 +370,8 @@
               "description": "Veuillez vérifier que votre nœud est joignable et que les paramètres de connexion que vous avez saisis sont corrects."
             },
             "invalid-chain": {
-              "header": "invalid-chain title",
-              "description": "invalid-chain description for tooltip"
+              "header": "titre de la chaîne invalide",
+              "description": "description de chaîne invalide pour l'infobulle"
             },
             "initializing": {
               "header": "Chargement",
@@ -752,7 +752,7 @@
     },
     "status": {
       "title": "Statut Ledger",
-      "desc": "Check our system status"
+      "desc": "Vérifiez l'état de notre système"
     },
     "helpCenter": {
       "title": "Assistance Ledger",
@@ -788,8 +788,8 @@
     "migrate": "Mise à jour des comptes Ledger Live disponible",
     "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge",
     "valentine": {
-      "title": "Valentine’s day",
-      "description": "As a proof of our love, Ledger is reducing buy & sell fees on Ledger Live"
+      "title": "Saint-Valentin",
+      "description": "Comme preuve de notre amour, Ledger réduit les frais d'achat et de vente sur Ledger Live"
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
@@ -1032,12 +1032,12 @@
       "memo": "Memo",
       "assetId": "Actif ID",
       "rewards": "Récompenses réclamées",
-      "bondedAmount": "Bonded Amount",
-      "unbondedAmount": "Unbonded Amount",
-      "withdrawUnbondedAmount": "Withdraw Unbonded Amount",
-      "palletMethod": "Method",
-      "transferAmount": "Transfer Amount",
-      "validatorsCount": "Validators ({{number}})"
+      "bondedAmount": "Montant Bonded",
+      "unbondedAmount": "Montant Unbonded",
+      "withdrawUnbondedAmount": "Retirer le montant unbonded",
+      "palletMethod": "Méthode",
+      "transferAmount": "Montant du transfert",
+      "validatorsCount": "Validateurs ({{number}})"
     }
   },
   "operationList": {
@@ -1050,7 +1050,7 @@
     "loading": "Chargement en cours...",
     "connectAndUnlockDevice": "Connectez et déverrouillez votre appareil",
     "unlockDevice": "Déverrouillez votre appareil",
-    "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
+    "unlockDeviceAfterFirmwareUpdate": "Attendez que le firmware se mette à jour et déverrouillez votre appareil avec votre code PIN",
     "quitApp": "Quittez l'application sur votre appareil",
     "appNotInstalled": "Veuillez installer l'application {{appName}}",
     "openManager": "Ouvrir le Manager",
@@ -1182,7 +1182,7 @@
       "steps": {
         "downloadingUpdate": "Téléchargement de la mise à jour",
         "updateMCU": "Mise à jour du firmware",
-        "updating": "Firmware update",
+        "updating": "Mise à jour du firmware",
         "reset": "Préparation de l'appareil",
         "osu": "Installation de l'OSU...",
         "flash-mcu": "Mise à jour du MCU...",
@@ -1201,10 +1201,10 @@
       "mcuBlueFirst": "Appuyez sur le bouton latéral pendant 10 secondes pour éteindre l'appareil. Relâchez le bouton.",
       "mcuBlueSecond": "Appuyez sur et maintenez le bouton pendant au moins 5 secondes jusqu'à ce que les options de boot soient affichées. Sélectionnez Bootloader mode",
       "successTitle": "Firmware mis à jour",
-      "successTextApps": "Please re-install the apps on your device",
-      "successTextNoApps": "You can now install apps on your device",
-      "sucessCTAApps": "Re-install apps",
-      "SuccessCTANoApps": "Install apps",
+      "successTextApps": "Veuillez réinstaller les applications sur votre appareil",
+      "successTextNoApps": "Vous pouvez maintenant installer des applications sur votre appareil",
+      "sucessCTAApps": "Réinstaller les applications",
+      "SuccessCTANoApps": "Installer les applications",
       "resetSteps": {
         "first": "1. Réinitialiser votre appareil",
         "connect": "Connectez le {{deviceName}} à votre ordinateur en utilisant le câble USB.",
@@ -1352,9 +1352,9 @@
     "title": "Acheter",
     "titleCrypto": "Acheter {{currency}}",
     "buyCTA": "Acheter {{currencyTicker}}",
-    "withoutDevice": "Don't have your device?",
-    "connectWithoutDevice": "It's better to use your device for optimal security.",
-    "skipConnect": "Continue without device"
+    "withoutDevice": "Vous n’avez pas votre appareil ?",
+    "connectWithoutDevice": "Il est préférable d'utiliser votre appareil pour une sécurité optimale.",
+    "skipConnect": "Continuer sans appareil"
   },
   "sell": {
     "title": "Vendre",
@@ -1825,229 +1825,229 @@
   },
   "polkadot": {
     "lockedBalance": "Bonded",
-    "lockedTooltip": "Assets must be bonded to nominated validators before earning rewards.",
+    "lockedTooltip": "Les actifs doivent être bonded aux validateurs nommés avant de gagner des récompenses.",
     "unlockingBalance": "Unbonding",
-    "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
+    "unlockingTooltip": "Les actifs en Unbonding restent bloqués pendant 28 jours avant de pouvoir être retirés.",
     "unlockedBalance": "Unbonded",
-    "unlockedTooltip": "Unbonded assets can now be moved using the withdraw operation.",
-    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
+    "unlockedTooltip": "Les actifs Unbonded peuvent maintenant être déplacés en utilisant l'opération de retrait.",
+    "networkFees": "Les frais de réseau sont automatiquement définis par le consensus de Polkadot, vous ne pourrez pas les consulter sur votre appareil",
     "nomination": {
       "emptyState": {
-        "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
-        "info": "How nominations work"
+        "description": "Vous pouvez obtenir des récompenses en liant des actifs, puis en nommant vos validateurs.",
+        "info": "Comment fonctionnent les nominations"
       },
       "header": "Nominations",
-      "nominate": "Nominate",
-      "chill": "Clear nominations",
-      "totalStake": "Total Stake",
-      "amount": "Bonded Amount",
+      "nominate": "Nominer",
+      "chill": "Enlever les nominations",
+      "totalStake": "Stake total",
+      "amount": "Montant Bonded",
       "commission": "Commission",
-      "active": "Active",
-      "activeTooltip": "This validator is elected and is collecting rewards on your bonded assets.",
-      "inactive": "Inactive",
-      "inactiveTooltip": "This validator is elected but is not collecting rewards on your bonded assets.",
-      "waiting": "Unelected",
-      "waitingTooltip": "This validator is not elected, therefore is not collecting rewards.",
-      "notValidator": "Not a validator",
-      "notValidatorTooltip": "This address is no longer a validator",
-      "elected": "Elected",
-      "nominatorsCount": "{{nominatorsCount}} nominators",
-      "nominatorsTooltip": "This validator is currently elected by {{count}} nominators.",
+      "active": "Actif",
+      "activeTooltip": "Ce validateur est élu et collecte des récompenses sur vos actifs bonded.",
+      "inactive": "Inactif",
+      "inactiveTooltip": "Ce validateur est élu mais ne collecte pas de récompenses sur vos actifs bonded.",
+      "waiting": "Non élu",
+      "waitingTooltip": "Ce validateur n'est pas élu, il ne collecte donc pas de récompenses.",
+      "notValidator": "Pas un validateur",
+      "notValidatorTooltip": "Cette adresse n'est plus un validateur",
+      "elected": "Élu",
+      "nominatorsCount": "{{nominatorsCount}} nominateurs",
+      "nominatorsTooltip": "Ce validateur est actuellement élu par {{count}} nominateurs.",
       "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
-      "oversubscribedTooltip": "Only the top {{maxNominatorRewardedPerValidator}} nominators with the highest bonded amount earn rewards",
-      "hasPendingBondOperation": "A bond operation is still pending confirmation",
-      "electionOpen": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most.",
-      "electionOpenTooltip": "This operation is disabled during the election of validators",
-      "externalControllerTooltip": "This account is controlled by another account.",
-      "externalControllerUnsupported": "<0>This stash account is controlled by another account with the address <0>{{address}}</0>.</0><1>Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js</1>",
-      "externalStashTooltip": "This account controls another account.",
-      "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
-      "showInactiveNominations": "Show all nominations ({{count}})",
-      "hideInactiveNominations": "Show active nominations only",
-      "noActiveNominations": "There are no active nominations.",
-      "showAllUnlockings": "Show all unbonding amounts ({{count}})",
-      "hideAllUnlockings": "Hide unbonding amounts"
+      "oversubscribedTooltip": "Seuls les {{maxNominatorRewardedPerValidator}} meilleurs nominateurs avec le montant bonded le plus élevé gagnent des récompenses",
+      "hasPendingBondOperation": "Une opération bond est toujours en attente de confirmation",
+      "electionOpen": "L'élection de nouveaux validateurs est actuellement en cours. Ainsi, les opérations de staking ne sont pas disponibles pendant 15 minutes.",
+      "electionOpenTooltip": "Cette opération est désactivée lors de l'élection des validateurs",
+      "externalControllerTooltip": "Ce compte est contrôlé par un autre compte.",
+      "externalControllerUnsupported": "<0>Ce compte caché est contrôlé par un autre compte avec l'adresse <0>{{address}}</0>. /0><1>Les opérations de capture sur des comptes contrôlés par un autre compte ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif tel que Polkadot.js</1>",
+      "externalStashTooltip": "Ce compte contrôle un autre compte.",
+      "externalStashUnsupported": "<0>Ce compte contrôle un compte stash dont l'adresse est <0>{{address}}</0>. /0><1>Les opérations de prise sur des comptes de stash séparés ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif comme Polkadot.js</1>",
+      "showInactiveNominations": "Afficher toutes les nominations ({{count}})",
+      "hideInactiveNominations": "Afficher uniquement les nominations actives",
+      "noActiveNominations": "Il n'y a aucune nomination active.",
+      "showAllUnlockings": "Afficher tous les montants unbonding ({{count}})",
+      "hideAllUnlockings": "Masquer les montants unbonding"
     },
     "unlockings": {
       "header": "Unbonding",
-      "headerTooltip": "Available after the 28-day unbonding period",
-      "withdrawUnbonded": "Withdraw Unbonded ({{amount}})",
-      "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
-      "noUnlockedWarning": "No unbonded balance to withdraw yet.",
+      "headerTooltip": "Disponible après la période de unbonding de 28 jours",
+      "withdrawUnbonded": "Retirer ({{amount}})",
+      "withdrawTooltip": "Le montant non lié sera crédité sur votre solde disponible.",
+      "noUnlockedWarning": "Aucun solde non lié à retirer.",
       "rebond": "Rebond",
       "unbonded": "Unbonded"
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "Gérer les actifs",
       "bond": {
         "title": "Bond",
-        "description": "To earn rewards, first bond an amount. Then you must nominate your validator(s)."
+        "description": "Pour gagner des récompenses, vous devez d'abord bond un montant. Vous devez ensuite nommer vos validateurs."
       },
       "unbond": {
         "title": "Unbond",
-        "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
+        "description": "Pour rendre à nouveau disponible un montant obligataire, vous devez d'abord le déconnecter. Vous pouvez le retirer après la période d'annulation de 28 jours."
       },
       "withdrawUnbonded": {
-        "title": "Withdraw Unbonded",
-        "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
+        "title": "Retirer le montant unbonded",
+        "description": "Pour récupérer un montant non lié au solde disponible, vous devez le retirer manuellement."
       },
       "nominate": {
-        "title": "Nominate",
-        "description": "Choose up to 16 validators. Ensure nominations are Active to earn rewards."
+        "title": "Nominer",
+        "description": "Choisissez jusqu'à 16 validateurs. Assurez-vous que les nominations sont actives pour gagner des récompenses."
       },
       "chill": {
-        "title": "Clear nominations",
-        "description": "Remove all nominations. You will stop earning rewards. Your bonded amount remains bonded."
+        "title": "Enlever les nominations",
+        "description": "Supprimez toutes les nominations. Vous cesserez de gagner des récompenses. Votre montant lié reste lié."
       }
     },
     "nominate": {
-      "title": "Nominate",
+      "title": "Nominer",
       "steps": {
         "validators": {
-          "title": "Validators",
-          "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction.",
-          "maybeChill": "Clear nominations instead"
+          "title": "Validateurs",
+          "notValidatorsRemoved": "Vous avez proposé {{count}} adresses qui ne sont plus des validateurs. Elles seront automatiquement supprimées de votre transaction de nomination.",
+          "maybeChill": "Vider les nominations à la place"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Appareil"
         },
         "confirmation": {
           "title": "Confirmation",
           "label": "Confirmation",
           "success": {
-            "title": "You have successfully nominated validators",
-            "text": "You will start earning rewards when your assets are bonded to your elected validator(s).",
-            "cta": "View details"
+            "title": "Vous avez nommé avec succès les validateurs",
+            "text": "Vous commencerez à gagner des récompenses lorsque vos actifs seront bonded à vos validateurs élus.",
+            "cta": "Voir les détails"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "Diffusion de la transaction..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
         }
       }
     },
     "bond": {
-      "title": "Bond assets",
+      "title": "Actifs bond",
       "rewardDestination": {
-        "label": "Rewards Destination",
-        "stash": "Available Balance",
-        "stashDescription": "Rewards are credited to your available balance.",
-        "staked": "Bonded Balance",
-        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
+        "label": "Destination des récompenses",
+        "stash": "Solde disponible",
+        "stashDescription": "Vos récompenses ont été ajoutées au solde disponible.",
+        "staked": "Solde Bonded",
+        "stakedDescription": "Les récompenses sont créditées sur votre solde bonded.",
         "optionTitle": "Note",
-        "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
+        "optionDescription": "Une fois défini, l'option est fixée pour la durée de vie de ce bond. Si vous changez d'avis, veuillez lire l'article ci-dessous"
       },
       "steps": {
         "starter": {
-          "description": "You may earn rewards by bonding your assets and then nominate your validators.",
+          "description": "Vous pouvez gagner des récompenses en liant vos actifs, puis en nommant vos validateurs.",
           "bullet": [
-            "You keep ownership of bonded assets",
-            "Nominate using your Ledger device",
-            "Assets will be available again, 28 days after unbonding"
+            "Vous gardez la propriété des actifs bonded",
+            "Nominer en utilisant votre appareil Ledger",
+            "Les actifs seront à nouveau disponibles, 28 jours après l'unbonding"
           ],
-          "help": "How nominations work",
-          "warning": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
+          "help": "Comment fonctionnent les nominations",
+          "warning": "Choisissez votre validateur judicieusement: Une partie de vos actifs bonded peut être perdue si le validateur ne se comporte pas correctement."
         },
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to bond",
-          "availableLabel": "Available",
+          "title": "Montant",
+          "amountLabel": "Montant à Bond",
+          "availableLabel": "Disponible",
           "maxLabel": "Max",
-          "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
-          "learnMore": "Learn More"
+          "info": "Les actifs bonded peuvent être unbonded à tout moment, mais l'unbonding prend 28 jours.",
+          "learnMore": "En savoir plus"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Appareil"
         },
         "confirmation": {
           "tooltip": {
-            "title": "Transaction awaiting confirmation",
-            "desc": "You have to wait a moment before nominating"
+            "title": "Transaction en attente de confirmation",
+            "desc": "Vous devez attendre un moment avant de nominer"
           },
           "title": "Confirmation",
           "success": {
-            "title": "Assets successfully bonded",
-            "text": "You can nominate validators once the network has confirmed the transaction.",
-            "textNominate": "You will be able to nominate validators once the network has confirmed your transaction.",
-            "nominate": "Nominate",
-            "later": "Nominate later"
+            "title": "Actifs bonded avec succès",
+            "text": "Vous pouvez nominer des validateurs une fois que le réseau aura confirmé la transaction.",
+            "textNominate": "Vous pourrez nominer des validateurs une fois que le réseau aura confirmé votre transaction.",
+            "nominate": "Nominer",
+            "later": "Nominer plus tard"
           },
           "pending": {
-            "title": "Bonding your assets..."
+            "title": "Bonding de vos actifs..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
         }
       }
     },
     "rebond": {
-      "title": "Rebond assets",
+      "title": "Rebond les actifs",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to rebond",
+          "title": "Montant",
+          "amountLabel": "Montant à Rebond",
           "availableLabel": "Unbonding",
           "maxLabel": "Max",
-          "info": "Rebonded assets are immediately added to the bonded amount.",
-          "learnMore": "Learn More"
+          "info": "Les actifs rebonded sont immédiatement ajoutés au montant bonded.",
+          "learnMore": "En savoir plus"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Appareil"
         },
         "confirmation": {
           "title": "Confirmation",
           "label": "Confirmation",
           "success": {
-            "title": "Assets successfully rebonded",
-            "text": "Your account balance will update once the network has confirmed the transaction.",
-            "cta": "View details"
+            "title": "Actifs rebonded avec succès",
+            "text": "Le solde de votre compte sera mis à jour une fois que le réseau aura confirmé la transaction.",
+            "cta": "Voir les détails"
           },
           "pending": {
-            "title": "Rebonding your assets..."
+            "title": "Rebonding de vos actifs..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
         }
       }
     },
     "unbond": {
-      "title": "Unbond assets",
+      "title": "Unbond les actifs",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to unbond",
+          "title": "Montant",
+          "amountLabel": "Montant à Unbond",
           "availableLabel": "Bonded",
           "maxLabel": "Max",
-          "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
-          "learnMore": "Learn More"
+          "info": "Les actifs unbonded peuvent être retirés après la période d'unbonding de 28 jours.",
+          "learnMore": "En savoir plus"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Appareil"
         },
         "confirmation": {
           "title": "Confirmation",
           "label": "Confirmation",
           "success": {
-            "title": "Unbond transaction sent successfully",
-            "text": "Unbonded assets can be withdrawn in 28 days.",
-            "cta": "View details"
+            "title": "Transaction d'unbond envoyée avec succès",
+            "text": "Les actifs unbonded peuvent être retirés dans 28 jours.",
+            "cta": "Voir les détails"
           },
           "pending": {
-            "title": "Unbonding your assets..."
+            "title": "Unbonding de vos actifs..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
         }
       }
     },
     "simpleOperation": {
       "modes": {
         "withdrawUnbonded": {
-          "title": "Withdraw Unbonded",
-          "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
-          "info": "You can then withdraw unbonded assets to your available balance."
+          "title": "Retirer le montant unbonded",
+          "description": "Après la période d'unbonding de 28 jours, vous pouvez retirer les actifs unbonded.",
+          "info": "Vous pouvez ensuite retirer des actifs unbonded vers votre solde disponible."
         },
         "chill": {
-          "title": "Clear nominations",
-          "description": "Clears all nominations and stops earning rewards.",
-          "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
+          "title": "Enlever les nominations",
+          "description": "Enleve toutes les nominations et récompenses.",
+          "info": "Les actifs bonded restent bloqués. Si vous les déconnectez, ils seront disponibles après 28 jours."
         }
       },
       "steps": {
@@ -2055,20 +2055,20 @@
           "title": "Info"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Appareil"
         },
         "confirmation": {
           "title": "Confirmation",
           "label": "Confirmation",
           "success": {
-            "title": "Transaction sent successfully",
-            "text": "You will see your operation in history soon.",
-            "cta": "View details"
+            "title": "Transaction émise avec succès",
+            "text": "Vous verrez bientôt votre opération dans l'historique.",
+            "cta": "Voir les détails"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "Diffusion de la transaction..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
         }
       }
     }
@@ -2296,7 +2296,7 @@
     "repairDevice": {
       "title": "Réparer votre appareil Ledger",
       "descSettings": "Utilisez ceci pour restaurer votre appareil Ledger s'il est bloqué pendant une mise à jour du firmware.",
-      "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
+      "desc": "Pour les utilisateurs de Ledger Nano S, veuillez sélectionner l'état affiché sur votre appareil. Pour les utilisateurs de Nano X et Bleu, veuillez vous référer au centre d'aide.",
       "button": "Réparer"
     },
     "exportLogs": {
@@ -2494,18 +2494,18 @@
         "options": {
           "1": {
             "heading": "Première utilisation",
-            "title": "Set up a new {{deviceName}}",
+            "title": "Initialiser un nouveau {{deviceName}}",
             "description": "Commençons par configurer votre appareil !"
           },
           "2": {
             "heading": "Connecter l'appareil",
-            "title": "Connect your {{deviceName}}",
+            "title": "Connectez votre {{deviceName}}",
             "description": "Votre appareil est déjà configuré ? Connectez-le à votre application !"
           },
           "3": {
             "heading": "Restauration de l'appareil",
             "title": "Restaurez votre phrase de récupération sur un nouvel appareil",
-            "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
+            "description": "Utilisez une phrase de récupération existante pour importer vos clés privées dans un nouveau {{deviceName}} !"
           }
         }
       },
@@ -2878,12 +2878,12 @@
       "undelegate": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
       "redelegate": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
       "claimRewardCompound": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
-      "nominate": "Please confirm on your device to finalize the operation",
-      "chill": "Please confirm on your device to finalize the operation",
-      "bond": "Please confirm on your device to finalize the operation",
-      "unbond": "Please confirm on your device to finalize the operation",
-      "rebond": "Please confirm on your device to finalize the operation",
-      "withdrawUnbonded": "Please confirm on your device to finalize the operation"
+      "nominate": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "chill": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "bond": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "unbond": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "rebond": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "withdrawUnbonded": "Veuillez confirmer sur votre appareil pour finaliser l'opération"
     },
     "recipientWording": {
       "send": "destinataire",
@@ -2891,7 +2891,7 @@
       "undelegate": "validateur",
       "claimReward": "destinataire des récompenses",
       "optIn": "destinataire",
-      "nominate": "validator"
+      "nominate": "validateur"
     },
     "votes": "Votes ({{count}})"
   },
@@ -2901,9 +2901,9 @@
   "Terms": {
     "title": "Conditions d’utilisation",
     "read": "Lire nos Conditions d'utilisation",
-    "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
-    "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
-    "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
+    "switchLabelTerms": "<0>J’ai lu et j’accepte les</0> <1>Conditions d’utilisation</1>",
+    "switchLabelPrivacyPolicy": "<0>J'ai lu et j'accepte la </0> <1>Politique de confidentialité</1>",
+    "switchLabelLoss": "Je comprends que si je perds cette phrase de récupération, je ne serai plus en mesure d'accéder à mes crypto actifs, dans le cas où je ne peux plus accéder à mon Nano.",
     "cta": "Entrer dans l'application Ledger"
   },
   "families": {
@@ -3200,8 +3200,8 @@
       "description": "Veuillez configurer votre nœud pour scanner les comptes associés à cet appareil. Votre nœud doit d'abord scanner la blockchain avant de pouvoir ajouter le compte à votre portfolio."
     },
     "StratisDown2021Warning": {
-      "title": "The Stratis blockchain evolved and may no longer work correctly.",
-      "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
+      "title": "La blockchain Stratis a évolué et peut ne plus fonctionner correctement.",
+      "description": "La prise en charge de la blockchain Stratis originale sera maintenue jusqu'au 16 octobre 2021."
     },
     "SwapGenericAPIError": {
       "title": "Le taux de change a expiré",
@@ -3445,34 +3445,34 @@
       "title": "Un mémo peut être requis lors de l'envoi à ce destinataire"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{minAmountFromFormatted}}"
+      "title": "Le montant doit être d'au moins {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be less than {{maxAmountFromFormatted}}"
+      "title": "Le montant doit être inférieur à {{maxAmountFromFormatted}}"
     },
     "PolkadotElectionClosed": {
-      "title": "Validators election must be closed"
+      "title": "L'élection du validateur doit être fermée"
     },
     "PolkadotNotValidator": {
-      "title": "Some selected addresses are not validators"
+      "title": "Certaines adresses sélectionnées ne sont pas des validateurs"
     },
     "PolkadotLowBondedBalance": {
-      "title": "All bonded assets will be unbonded if < 1 DOT"
+      "title": "Tous les actifs bonded seront unbonded si < 1 DOT"
     },
     "PolkadotNoUnlockedBalance": {
-      "title": "You have no unbonded assets"
+      "title": "Vous n'avez aucun actif unbonded"
     },
     "PolkadotNoNominations": {
-      "title": "You have no nominations"
+      "title": "Vous n'avez aucune nomination"
     },
     "PolkadotBondAllFundsWarning": {
-      "title": "You will not have available balance for future transactions"
+      "title": "Vous n'aurez pas de solde disponible pour les transactions futures"
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least 1 DOT"
+      "title": "Vous devez bond au moins 1 DOT"
     },
     "PolkadotMaxUnbonding": {
-      "title": "You have exceeded the unbond limit"
+      "title": "Vous avez dépassé la limite autorisée pour le unbond"
     },
     "PolkadotValidatorsRequired": {
       "title": "Veuillez sélectionner au moins une validateur"
