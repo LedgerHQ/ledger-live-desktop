@@ -1939,84 +1939,84 @@
       },
       "steps": {
         "starter": {
-          "description": "You may earn rewards by bonding your assets and then nominate your validators.",
+          "description": "Vous pouvez gagner des récompenses en liant vos actifs, puis en nommant vos validateurs.",
           "bullet": [
-            "You keep ownership of bonded assets",
-            "Nominate using your Ledger device",
-            "Assets will be available again, 28 days after unbonding"
+            "Vous gardez la propriété des actifs bonded",
+            "Nominer en utilisant votre appareil Ledger",
+            "Les actifs seront à nouveau disponibles, 28 jours après l'unbonding"
           ],
-          "help": "How nominations work",
-          "warning": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
+          "help": "Comment fonctionnent les nominations",
+          "warning": "Choisissez votre validateur judicieusement: Une partie de vos actifs bonded peut être perdue si le validateur ne se comporte pas correctement."
         },
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to bond",
-          "availableLabel": "Available",
+          "title": "Montant",
+          "amountLabel": "Montant à Bond",
+          "availableLabel": "Disponible",
           "maxLabel": "Max",
-          "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
-          "learnMore": "Learn More"
+          "info": "Les actifs bonded peuvent être unbonded à tout moment, mais l'unbonding prend 28 jours.",
+          "learnMore": "En savoir plus"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Appareil"
         },
         "confirmation": {
           "tooltip": {
-            "title": "Transaction awaiting confirmation",
-            "desc": "You have to wait a moment before nominating"
+            "title": "Transaction en attente de confirmation",
+            "desc": "Vous devez attendre un moment avant de nominer"
           },
           "title": "Confirmation",
           "success": {
-            "title": "Assets successfully bonded",
-            "text": "You can nominate validators once the network has confirmed the transaction.",
-            "textNominate": "You will be able to nominate validators once the network has confirmed your transaction.",
-            "nominate": "Nominate",
-            "later": "Nominate later"
+            "title": "Actifs bonded avec succès",
+            "text": "Vous pouvez nominer des validateurs une fois que le réseau aura confirmé la transaction.",
+            "textNominate": "Vous pourrez nominer des validateurs une fois que le réseau aura confirmé votre transaction.",
+            "nominate": "Nominer",
+            "later": "Nominer plus tard"
           },
           "pending": {
-            "title": "Bonding your assets..."
+            "title": "Bonding de vos actifs..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
         }
       }
     },
     "rebond": {
-      "title": "Rebond assets",
+      "title": "Rebond les actifs",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to rebond",
+          "title": "Montant",
+          "amountLabel": "Montant à Rebond",
           "availableLabel": "Unbonding",
           "maxLabel": "Max",
-          "info": "Rebonded assets are immediately added to the bonded amount.",
-          "learnMore": "Learn More"
+          "info": "Les actifs rebonded sont immédiatement ajoutés au montant bonded.",
+          "learnMore": "En savoir plus"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Appareil"
         },
         "confirmation": {
           "title": "Confirmation",
           "label": "Confirmation",
           "success": {
-            "title": "Assets successfully rebonded",
-            "text": "Your account balance will update once the network has confirmed the transaction.",
-            "cta": "View details"
+            "title": "Actifs rebonded avec succès",
+            "text": "Le solde de votre compte sera mis à jour une fois que le réseau aura confirmé la transaction.",
+            "cta": "Voir les détails"
           },
           "pending": {
-            "title": "Rebonding your assets..."
+            "title": "Rebonding de vos actifs..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
         }
       }
     },
     "unbond": {
-      "title": "Unbond assets",
+      "title": "Unbond les actifs",
       "steps": {
         "amount": {
           "title": "Montant",
           "amountLabel": "Montant à Unbond",
           "availableLabel": "Bonded",
           "maxLabel": "Max",
-          "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
+          "info": "Les actifs unbonded peuvent être retirés après la période d'unbonding de 28 jours.",
           "learnMore": "En savoir plus"
         },
         "connectDevice": {
