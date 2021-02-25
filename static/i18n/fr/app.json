@@ -370,8 +370,8 @@
               "description": "Veuillez vérifier que votre nœud est joignable et que les paramètres de connexion que vous avez saisis sont corrects."
             },
             "invalid-chain": {
-              "header": "invalid-chain title",
-              "description": "invalid-chain description for tooltip"
+              "header": "titre de la chaîne invalide",
+              "description": "description de chaîne invalide pour l'infobulle"
             },
             "initializing": {
               "header": "Chargement",
@@ -752,7 +752,7 @@
     },
     "status": {
       "title": "Statut Ledger",
-      "desc": "Check our system status"
+      "desc": "Vérifiez l'état de notre système"
     },
     "helpCenter": {
       "title": "Assistance Ledger",
@@ -1050,7 +1050,7 @@
     "loading": "Chargement en cours...",
     "connectAndUnlockDevice": "Connectez et déverrouillez votre appareil",
     "unlockDevice": "Déverrouillez votre appareil",
-    "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
+    "unlockDeviceAfterFirmwareUpdate": "Attendez que le firmware se mette à jour et déverrouillez votre appareil avec votre code PIN",
     "quitApp": "Quittez l'application sur votre appareil",
     "appNotInstalled": "Veuillez installer l'application {{appName}}",
     "openManager": "Ouvrir le Manager",
@@ -1182,7 +1182,7 @@
       "steps": {
         "downloadingUpdate": "Téléchargement de la mise à jour",
         "updateMCU": "Mise à jour du firmware",
-        "updating": "Firmware update",
+        "updating": "Mise à jour du firmware",
         "reset": "Préparation de l'appareil",
         "osu": "Installation de l'OSU...",
         "flash-mcu": "Mise à jour du MCU...",
@@ -1201,10 +1201,10 @@
       "mcuBlueFirst": "Appuyez sur le bouton latéral pendant 10 secondes pour éteindre l'appareil. Relâchez le bouton.",
       "mcuBlueSecond": "Appuyez sur et maintenez le bouton pendant au moins 5 secondes jusqu'à ce que les options de boot soient affichées. Sélectionnez Bootloader mode",
       "successTitle": "Firmware mis à jour",
-      "successTextApps": "Please re-install the apps on your device",
-      "successTextNoApps": "You can now install apps on your device",
-      "sucessCTAApps": "Re-install apps",
-      "SuccessCTANoApps": "Install apps",
+      "successTextApps": "Veuillez réinstaller les applications sur votre appareil",
+      "successTextNoApps": "Vous pouvez maintenant installer des applications sur votre appareil",
+      "sucessCTAApps": "Réinstaller les applications",
+      "SuccessCTANoApps": "Installer les applications",
       "resetSteps": {
         "first": "1. Réinitialiser votre appareil",
         "connect": "Connectez le {{deviceName}} à votre ordinateur en utilisant le câble USB.",
@@ -1830,7 +1830,7 @@
     "unlockingTooltip": "Les actifs en Unbonding restent bloqués pendant 28 jours avant de pouvoir être retirés.",
     "unlockedBalance": "Unbonded",
     "unlockedTooltip": "Les actifs Unbonded peuvent maintenant être déplacés en utilisant l'opération de retrait.",
-    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
+    "networkFees": "Les frais de réseau sont automatiquement définis par le consensus de Polkadot, vous ne pourrez pas les consulter sur votre appareil",
     "nomination": {
       "emptyState": {
         "description": "Vous pouvez obtenir des récompenses en liant des actifs, puis en nommant vos validateurs.",
@@ -1854,69 +1854,69 @@
       "nominatorsCount": "{{nominatorsCount}} nominateurs",
       "nominatorsTooltip": "Ce validateur est actuellement élu par {{count}} nominateurs.",
       "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
-      "oversubscribedTooltip": "Only the top {{maxNominatorRewardedPerValidator}} nominators with the highest bonded amount earn rewards",
-      "hasPendingBondOperation": "A bond operation is still pending confirmation",
-      "electionOpen": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most.",
-      "electionOpenTooltip": "This operation is disabled during the election of validators",
-      "externalControllerTooltip": "This account is controlled by another account.",
-      "externalControllerUnsupported": "<0>This stash account is controlled by another account with the address <0>{{address}}</0>.</0><1>Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js</1>",
-      "externalStashTooltip": "This account controls another account.",
-      "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
-      "showInactiveNominations": "Show all nominations ({{count}})",
-      "hideInactiveNominations": "Show active nominations only",
-      "noActiveNominations": "There are no active nominations.",
-      "showAllUnlockings": "Show all unbonding amounts ({{count}})",
-      "hideAllUnlockings": "Hide unbonding amounts"
+      "oversubscribedTooltip": "Seuls les {{maxNominatorRewardedPerValidator}} meilleurs nominateurs avec le montant bonded le plus élevé gagnent des récompenses",
+      "hasPendingBondOperation": "Une opération bond est toujours en attente de confirmation",
+      "electionOpen": "L'élection de nouveaux validateurs est actuellement en cours. Ainsi, les opérations de staking ne sont pas disponibles pendant 15 minutes.",
+      "electionOpenTooltip": "Cette opération est désactivée lors de l'élection des validateurs",
+      "externalControllerTooltip": "Ce compte est contrôlé par un autre compte.",
+      "externalControllerUnsupported": "<0>Ce compte caché est contrôlé par un autre compte avec l'adresse <0>{{address}}</0>. /0><1>Les opérations de capture sur des comptes contrôlés par un autre compte ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif tel que Polkadot.js</1>",
+      "externalStashTooltip": "Ce compte contrôle un autre compte.",
+      "externalStashUnsupported": "<0>Ce compte contrôle un compte stash dont l'adresse est <0>{{address}}</0>. /0><1>Les opérations de prise sur des comptes de stash séparés ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif comme Polkadot.js</1>",
+      "showInactiveNominations": "Afficher toutes les nominations ({{count}})",
+      "hideInactiveNominations": "Afficher uniquement les nominations actives",
+      "noActiveNominations": "Il n'y a aucune nomination active.",
+      "showAllUnlockings": "Afficher tous les montants unbonding ({{count}})",
+      "hideAllUnlockings": "Masquer les montants unbonding"
     },
     "unlockings": {
       "header": "Unbonding",
-      "headerTooltip": "Available after the 28-day unbonding period",
-      "withdrawUnbonded": "Withdraw Unbonded ({{amount}})",
-      "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
-      "noUnlockedWarning": "No unbonded balance to withdraw yet.",
+      "headerTooltip": "Disponible après la période de unbonding de 28 jours",
+      "withdrawUnbonded": "Retirer ({{amount}})",
+      "withdrawTooltip": "Le montant non lié sera crédité sur votre solde disponible.",
+      "noUnlockedWarning": "Aucun solde non lié à retirer.",
       "rebond": "Rebond",
       "unbonded": "Unbonded"
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "Gérer les actifs",
       "bond": {
         "title": "Bond",
-        "description": "To earn rewards, first bond an amount. Then you must nominate your validator(s)."
+        "description": "Pour gagner des récompenses, vous devez d'abord bond un montant. Vous devez ensuite nommer vos validateurs."
       },
       "unbond": {
         "title": "Unbond",
-        "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
+        "description": "Pour rendre à nouveau disponible un montant obligataire, vous devez d'abord le déconnecter. Vous pouvez le retirer après la période d'annulation de 28 jours."
       },
       "withdrawUnbonded": {
-        "title": "Withdraw Unbonded",
-        "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
+        "title": "Retirer le montant unbonded",
+        "description": "Pour récupérer un montant non lié au solde disponible, vous devez le retirer manuellement."
       },
       "nominate": {
-        "title": "Nominate",
-        "description": "Choose up to 16 validators. Ensure nominations are Active to earn rewards."
+        "title": "Nominer",
+        "description": "Choisissez jusqu'à 16 validateurs. Assurez-vous que les nominations sont actives pour gagner des récompenses."
       },
       "chill": {
-        "title": "Clear nominations",
-        "description": "Remove all nominations. You will stop earning rewards. Your bonded amount remains bonded."
+        "title": "Enlever les nominations",
+        "description": "Supprimez toutes les nominations. Vous cesserez de gagner des récompenses. Votre montant lié reste lié."
       }
     },
     "nominate": {
-      "title": "Nominate",
+      "title": "Nominer",
       "steps": {
         "validators": {
-          "title": "Validators",
-          "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction.",
-          "maybeChill": "Clear nominations instead"
+          "title": "Validateurs",
+          "notValidatorsRemoved": "Vous avez proposé {{count}} adresses qui ne sont plus des validateurs. Elles seront automatiquement supprimées de votre transaction de nomination.",
+          "maybeChill": "Vider les nominations à la place"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Appareil"
         },
         "confirmation": {
           "title": "Confirmation",
           "label": "Confirmation",
           "success": {
-            "title": "You have successfully nominated validators",
-            "text": "You will start earning rewards when your assets are bonded to your elected validator(s).",
+            "title": "Vous avez nommé avec succès les validateurs",
+            "text": "Vous commencerez à gagner des récompenses lorsque vos actifs seront bonded à vos validateurs élus.",
             "cta": "View details"
           },
           "pending": {
@@ -3469,10 +3469,10 @@
       "title": "You will not have available balance for future transactions"
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least 1 DOT"
+      "title": "Vous devez bond au moins 1 DOT"
     },
     "PolkadotMaxUnbonding": {
-      "title": "You have exceeded the unbond limit"
+      "title": "Vous avez dépassé la limite autorisée pour le unbond"
     },
     "PolkadotValidatorsRequired": {
       "title": "Veuillez sélectionner au moins une validateur"
