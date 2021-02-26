@@ -5,6 +5,7 @@ import {
 import { Application } from "spectron";
 import _ from "lodash";
 import { configureToMatchImageSnapshot } from "jest-image-snapshot";
+import Page from "./po/page";
 import ModalPage from "./po/modal.page";
 import AccountsPage from "./po/accounts.page";
 import AccountPage from "./po/account.page";
@@ -45,6 +46,7 @@ const getMockDeviceEvent = app => async (...events) => {
 };
 
 let app;
+let page;
 let portfolioPage;
 let modalPage;
 let accountPage;
@@ -121,6 +123,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       },
     });
 
+    page = new Page(app);
     modalPage = new ModalPage(app);
     accountPage = new AccountPage(app);
     accountsPage = new AccountsPage(app);
@@ -138,11 +141,6 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     } catch (e) {
       console.log("app start error", e);
     }
-
-    app.client.addCommand("waitForSync", async () => {
-      const sync = await app.client.$("#topbar-synchronized");
-      await sync.waitForDisplayed();
-    });
 
     app.client.addCommand("screenshot", async function(countdown = 500) {
       const unfocus = await app.client.$("#unfocus-please");
@@ -211,6 +209,7 @@ export {
   deviceInfo,
   mockListAppsResult,
   mockDeviceEvent,
+  page,
   accountPage,
   accountsPage,
   portfolioPage,

@@ -1,5 +1,6 @@
 import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 import initialize, {
+  page,
   modalPage,
   app,
   mockDeviceEvent,
@@ -37,7 +38,7 @@ describe("Swap", () => {
       },
       { type: "complete" },
     );
-    await app.client.waitForSync();
+    await page.synchronize();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-access",
     });

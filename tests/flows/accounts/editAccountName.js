@@ -1,5 +1,5 @@
 /* eslint-disable jest/no-export */
-import { app, accountSettingsModal, accountsPage, accountPage } from "../../common.js";
+import { app, page, accountSettingsModal, accountsPage, accountPage } from "../../common.js";
 
 const editAccountName = (currency = "global") => {
   describe("edit name flow", () => {
@@ -29,6 +29,7 @@ const editAccountName = (currency = "global") => {
     });
 
     it("show name of account after", async () => {
+      await page.synchronize();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `${currency}-edit-account-name-after`,
       });

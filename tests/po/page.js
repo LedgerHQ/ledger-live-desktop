@@ -68,6 +68,10 @@ export default class Page {
     return this.$("#topbar-discreet-button");
   }
 
+  async topbarSynchronizeButton() {
+    return this.$("#topbar-synchronize-button");
+  }
+
   async topbarSettingsButton() {
     return this.$("#topbar-settings-button");
   }
@@ -95,6 +99,12 @@ export default class Page {
   async goToPortfolio() {
     const btn = await this.drawerPortfolioButton();
     await btn.click();
+  }
+
+  async synchronize() {
+    const btn = await this.topbarSynchronizeButton();
+    await btn.click();
+    await btn.waitForClickable();
   }
 
   async getThemeColor() {
