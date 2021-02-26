@@ -18,20 +18,22 @@ const Animation = ({
   autoplay?: boolean,
   rendererSettings?: *,
 }) => (
-  <Lottie
-    isClickToPauseDisabled
-    ariaRole="animation"
-    height={height}
-    width={width}
-    isPaused={!!process.env.SPECTRON_RUN}
-    isStopped={!!process.env.SPECTRON_RUN}
-    options={{
-      loop: process.env.SPECTRON_RUN ? false : loop,
-      autoplay: process.env.SPECTRON_RUN ? false : autoplay,
-      animationData: animation,
-      rendererSettings,
-    }}
-  />
+  <div style={{ opacity: process.env.SPECTRON_RUN ? 0 : 1 }}>
+    <Lottie
+      isClickToPauseDisabled
+      ariaRole="animation"
+      height={height}
+      width={width}
+      isPaused={!!process.env.SPECTRON_RUN}
+      isStopped={!!process.env.SPECTRON_RUN}
+      options={{
+        loop: process.env.SPECTRON_RUN ? false : loop,
+        autoplay: process.env.SPECTRON_RUN ? false : autoplay,
+        animationData: animation,
+        rendererSettings,
+      }}
+    />
+  </div>
 );
 
 export default Animation;
