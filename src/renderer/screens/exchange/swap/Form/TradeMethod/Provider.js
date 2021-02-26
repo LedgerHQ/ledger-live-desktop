@@ -103,7 +103,7 @@ const Provider = ({
               {ratesExpiration && tradeMethod === "fixed" ? (
                 <CountdownTimerWrapper horizontal>
                   <Box mr={1}>
-                    <AnimatedCountdown fillColor={fillColor} bgColor={lockColor} size={10} />
+                    <AnimatedCountdown fillColor={fillColor} size={10} />
                   </Box>
                   <Box ml={1} style={{ width: 30, height: 12 }} justifyContent={"center"}>
                     <CountdownTimer
