@@ -26,9 +26,9 @@ const Animation = ({
     isPaused={!!process.env.SPECTRON_RUN}
     isStopped={!!process.env.SPECTRON_RUN}
     options={{
-      loop,
+      loop: process.env.SPECTRON_RUN ? false : loop,
       autoplay: process.env.SPECTRON_RUN ? false : autoplay,
-      animationData: process.env.SPECTRON_RUN ? null : animation,
+      animationData: animation,
       rendererSettings,
     }}
   />
