@@ -50,9 +50,19 @@ export function useDeepLinkHandler() {
       const query = Object.fromEntries(searchParams);
       const url = pathname.replace(/(^\/+|\/+$)/g, "");
 
+      console.log(pathname);
+
       switch (url) {
         case "accounts":
           navigate("/accounts");
+          break;
+
+        case "buy":
+          navigate("/exchange");
+          break;
+
+        case "swap":
+          navigate("/swap");
           break;
 
         case "account": {
