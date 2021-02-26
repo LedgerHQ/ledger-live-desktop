@@ -23,7 +23,7 @@ const Animation = ({
     ariaRole="animation"
     height={height}
     width={width}
-    isPaused={process.env.SPECTRON_RUN}
+    isPaused={!!process.env.SPECTRON_RUN}
     options={{
       loop,
       autoplay: process.env.SPECTRON_RUN ? false : autoplay,

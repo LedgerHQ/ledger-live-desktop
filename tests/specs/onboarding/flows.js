@@ -5,6 +5,9 @@ const $ = selector => app.client.$(selector);
 
 export const selection = device => {
   it("go through start", async () => {
+    const imgLoaded = await $(".onboarding-imgs-loaded");
+    await imgLoaded.waitForDisplayed();
+
     const elem = await $("#onboarding-get-started-button");
     await elem.click();
     const terms = await $("#modal-confirm-button");
