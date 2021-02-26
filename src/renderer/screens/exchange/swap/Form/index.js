@@ -323,7 +323,7 @@ const Form = ({
         />
         <Box px={32}>
           <Text color="palette.text.shade100" ff="Inter|SemiBold" fontSize={5}>
-            <Trans i18nKey={`swap.form.from.title`} />
+            <Trans i18nKey={`swap.form.amount`} />
           </Text>
         </Box>
         <Box horizontal px={32}>

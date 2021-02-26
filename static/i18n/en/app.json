@@ -185,6 +185,7 @@
       "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
     },
     "form": {
+      "amount": "Amount",
       "from": {
         "title": "From",
         "account": "Account",
