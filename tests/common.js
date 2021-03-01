@@ -157,7 +157,7 @@ export default function initialize(
       this.pause(countdown);
 
       if (!disableWaitForSync) {
-        await app.client.waitForSync();
+        await app.client.waitForExist();
       }
 
       const pageRect = await app.client.execute(() => {
