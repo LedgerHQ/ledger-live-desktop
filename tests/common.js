@@ -154,7 +154,7 @@ export default function initialize(
       const unfocus = await app.client.$("#unfocus-please");
       await unfocus.click();
 
-      this.pause(countdown);
+      await this.pause(countdown);
 
       if (!disableWaitForSync) {
         await app.client.waitForExist();
