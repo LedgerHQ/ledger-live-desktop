@@ -104,7 +104,6 @@ export default class Page {
   async synchronize() {
     const btn = await this.topbarSynchronizeButton();
     await btn.click();
-    await btn.waitForClickable();
   }
 
   async getThemeColor() {

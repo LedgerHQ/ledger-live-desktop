@@ -142,6 +142,11 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       console.log("app start error", e);
     }
 
+    app.client.addCommand("waitForSync", async () => {
+      const sync = await app.client.$("#topbar-synchronized");
+      await sync.waitForDisplayed();
+    });
+
     app.client.addCommand("screenshot", async function(countdown = 500) {
       const unfocus = await app.client.$("#unfocus-please");
       await unfocus.click();
