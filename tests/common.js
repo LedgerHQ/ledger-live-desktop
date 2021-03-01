@@ -66,10 +66,7 @@ expect.extend({ toMatchImageSnapshot });
 jest.setTimeout(600000);
 
 // eslint-disable-next-line jest/no-export
-export default function initialize(
-  name,
-  { userData, env = {}, disableStartSnap = false, disableWaitForSync = false },
-) {
+export default function initialize(name, { userData, env = {}, disableStartSnap = false }) {
   const userDataPathKey = Math.random()
     .toString(36)
     .substring(2, 5);
@@ -156,7 +153,8 @@ export default function initialize(
 
       await this.pause(countdown);
 
-      if (!disableWaitForSync) {
+      const syncButton = await app.client.$("#topbar-synchronize-button");
+      if (syncButton.isExisting()) {
         await app.client.waitForSync();
       }
 
