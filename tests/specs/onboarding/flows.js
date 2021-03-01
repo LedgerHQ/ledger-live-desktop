@@ -89,7 +89,7 @@ export const goToConnectAndFinish = (cta, device) => {
 
 export const onboard = device => {
   describe(`onboarding ${device} - new nano`, () => {
-    initialize("onboarding");
+    initialize("onboarding", {});
 
     selection(device);
 
