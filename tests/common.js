@@ -147,7 +147,7 @@ export default function initialize(
 
     app.client.addCommand("waitForSync", async () => {
       const sync = await app.client.$("#topbar-synchronized");
-      await sync.waitForDisplayed();
+      await sync.waitForExist();
     });
 
     app.client.addCommand("screenshot", async function(countdown = 500) {
@@ -157,7 +157,7 @@ export default function initialize(
       await this.pause(countdown);
 
       if (!disableWaitForSync) {
-        await app.client.waitForDisplayed();
+        await app.client.waitForSync();
       }
 
       const pageRect = await app.client.execute(() => {
