@@ -1,6 +1,7 @@
 // @flow
 
 import React, { useCallback } from "react";
+import { BigNumber } from "bignumber.js";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { Trans } from "react-i18next";
@@ -19,6 +20,7 @@ import CheckBox from "~/renderer/components/CheckBox";
 import { SwapGenericAPIError } from "@ledgerhq/live-common/lib/errors";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import Button from "~/renderer/components/Button";
+import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
 import IconWallet from "~/renderer/icons/Wallet";
 import IconArrowDown from "~/renderer/icons/ArrowDown";
 import styled from "styled-components";
@@ -71,7 +73,7 @@ const StepSummary = ({
   const { exchange, exchangeRate } = swap;
   const { provider, magnitudeAwareRate } = exchangeRate;
   const alreadyAcceptedTerms = swapAcceptedproviderIds.includes(swap.exchangeRate.provider);
-  const { fromAccount, toAccount } = exchange;
+  const { fromAccount, toAccount, toParentAccount } = exchange;
   const fromAmount = transaction.amount;
   if (!fromAccount || !toAccount || !fromAmount) return null;
 
@@ -146,25 +148,45 @@ const StepSummary = ({
           </Text>
         </Box>
       </Box>
-      <ProviderWrapper horizontal justifyContent={"space-between"} mt={20}>
-        <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
-          <Trans i18nKey="swap.modal.steps.summary.details.provider" />
-        </Text>
-        <FakeLink
-          underline
-          fontSize={3}
-          ml={2}
-          color="palette.primary.main"
-          onClick={() => openURL(main)}
-          iconFirst
-          style={{ textTransform: "capitalize" }}
-        >
-          {provider}
-          <Box ml={1}>
-            <IconExternalLink size={12} />
+      <ProviderWrapper mt={20}>
+        <Box horizontal justifyContent={"space-between"}>
+          <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
+            <Trans i18nKey="swap.modal.steps.summary.details.provider" />
+          </Text>
+          <FakeLink
+            underline
+            fontSize={3}
+            ml={2}
+            color="palette.primary.main"
+            onClick={() => openURL(main)}
+            iconFirst
+            style={{ textTransform: "capitalize" }}
+          >
+            {provider}
+            <Box ml={1}>
+              <IconExternalLink size={12} />
+            </Box>
+          </FakeLink>
+        </Box>
+        {exchangeRate?.payoutNetworkFees ? (
+          <Box horizontal justifyContent={"space-between"} mt={1}>
+            <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
+              {"Extra fees"}
+            </Text>
+            <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
+              <CurrencyUnitValue
+                value={exchangeRate.payoutNetworkFees.times(
+                  BigNumber(10).pow(toCurrency.units[0].magnitude),
+                )}
+                disableRounding
+                unit={toCurrency.units[0]}
+                showCode
+              />
+            </Text>
           </Box>
-        </FakeLink>
+        ) : null}
       </ProviderWrapper>
+
       <Box mt={6} horizontal alignItems={"center"} onClick={onSwitchAccept}>
         {!alreadyAcceptedTerms ? (
           <CheckBox
