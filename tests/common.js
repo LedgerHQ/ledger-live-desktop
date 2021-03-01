@@ -66,7 +66,10 @@ expect.extend({ toMatchImageSnapshot });
 jest.setTimeout(600000);
 
 // eslint-disable-next-line jest/no-export
-export default function initialize(name, { userData, env = {}, disableStartSnap = false }) {
+export default function initialize(
+  name,
+  { userData, env = {}, disableStartSnap = false, disableWaitForSync = false },
+) {
   const userDataPathKey = Math.random()
     .toString(36)
     .substring(2, 5);
@@ -151,7 +154,11 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       const unfocus = await app.client.$("#unfocus-please");
       await unfocus.click();
 
-      await app.client.waitForSync();
+      this.pause(countdown);
+
+      if (!disableWaitForSync) {
+        await app.client.waitForSync();
+      }
 
       const pageRect = await app.client.execute(() => {
         return {
