@@ -19,7 +19,9 @@ export default class SettingsPage extends Page {
     await experimentalTab.click();
   }
 
-  async toggleDevModeButton() {
+  async toggleDevMode() {
+    await this.goToSettings();
+    await this.goToExperimentalTab();
     const devModeBtn = await this.experimentalDevModeButton();
     await devModeBtn.click();
   }

@@ -11,7 +11,7 @@ import AccountPage from "./po/account.page";
 import PortfolioPage from "./po/portfolio.page";
 import SettingsPage from "./po/settings.page";
 import ManagerPage from "./po/manager.page";
-import AddAccontModal from "./po/addAccountModal.page";
+import AddAccountModal from "./po/addAccountModal.page";
 import AccountSettingsModal from "./po/accountSettingsModal.page";
 import ExportOperationsModal from "./po/exportOperationsHistoryModal.page";
 import ExportAccountsModal from "./po/exportAccountsModal.page";
@@ -131,7 +131,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     portfolioPage = new PortfolioPage(app);
     settingsPage = new SettingsPage(app);
     managerPage = new ManagerPage(app);
-    addAccountsModal = new AddAccontModal(app);
+    addAccountsModal = new AddAccountModal(app);
     accountSettingsModal = new AccountSettingsModal(app);
     exportOperationsHistoryModal = new ExportOperationsModal(app);
     exportAccountsModal = new ExportAccountsModal(app);

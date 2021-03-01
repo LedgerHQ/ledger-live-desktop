@@ -1,8 +1,21 @@
+import { portfolioPage, accountsPage } from "../common.js";
 import Modal from "./modal.page";
 
 export default class AddAccountModal extends Modal {
   async importAddButton() {
     return this.$("#add-accounts-import-add-button");
+  }
+
+  async goToAddAccount() {
+    const exists = await portfolioPage.isAddAccountAvailable();
+    if (!exists) {
+      await portfolioPage.goToAccounts();
+    }
+    const addAccountButton = exists
+      ? await portfolioPage.emtpyStateAddAccountButton()
+      : await accountsPage.addAccountButton();
+    await addAccountButton.click();
+    await this.waitForDisplayed();
   }
 
   async prepareAddAccount(currency) {
