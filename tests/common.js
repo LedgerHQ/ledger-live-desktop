@@ -154,7 +154,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       await this.pause(countdown);
 
       const syncButton = await app.client.$("#topbar-synchronize-button");
-      if (syncButton.isExisting()) {
+      if ((await syncButton.isExisting()) === true) {
         await app.client.waitForSync();
       }
 
