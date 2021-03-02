@@ -39,7 +39,7 @@ const AddAccount = styled.div`
   color: ${p => p.theme.colors.palette.primary.main};
 `;
 
-const To = ({
+const ToAccount = ({
   currencies,
   currency: defaultCurrency,
   fromCurrency,
@@ -179,4 +179,4 @@ const To = ({
   );
 };
 
-export default To;
+export default ToAccount;

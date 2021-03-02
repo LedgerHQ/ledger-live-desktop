@@ -22,7 +22,7 @@ import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelec
 import { useSelector } from "react-redux";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 
-const From = ({
+const FromAccount = ({
   currencies,
   currency: defaultCurrency,
   account: defaultAccount,
@@ -130,4 +130,4 @@ const From = ({
   );
 };
 
-export default From;
+export default FromAccount;

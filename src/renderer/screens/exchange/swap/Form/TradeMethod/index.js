@@ -17,7 +17,6 @@ import TooltipContent from "./TooltipContent";
 const SeparatorLine = styled.div`
   background-color: ${p => p.theme.colors.palette.text.shade10};
   margin-top: 16px;
-  margin-bottom: 16px;
   height: 1px;
   width: 100%;
 `;
@@ -47,8 +46,7 @@ const TradeMethod = ({
   onExpireRates: () => void,
   loadingRates: boolean,
 }) => (
-  <Box px={32} backgroundColor={"colors.palette.background.paper"}>
-    <SeparatorLine />
+  <Box px={20} pt={16} backgroundColor={"colors.palette.background.paper"}>
     <Box horizontal alignItems={"center"}>
       <Text color="palette.text.shade100" ff="Inter|SemiBold" mr={1} fontSize={5}>
         <Trans i18nKey={`swap.form.tradeMethod.title`} />
@@ -61,7 +59,7 @@ const TradeMethod = ({
       <Pill
         tradeMethod={tradeMethod}
         setTradeMethod={setTradeMethod}
-        enabledTradeMethods={enabledTradeMethods}
+        enabledTradeMethods={fromCurrency && currency ? enabledTradeMethods : []}
       />
       <Provider
         tradeMethod={tradeMethod}

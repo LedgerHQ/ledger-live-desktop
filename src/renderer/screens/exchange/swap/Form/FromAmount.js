@@ -38,7 +38,7 @@ const CountervalueWrapper = styled(Box).attrs(() => ({
   line-height: 1.2em;
 `;
 
-const From = ({
+const FromAmount = ({
   currency,
   amount,
   useAllAmount,
@@ -62,7 +62,7 @@ const From = ({
   const hideError = useAllAmount && amountError && amountError instanceof AmountRequired;
 
   return (
-    <Box flex={1} flow={1} mb={3} ml={0} mr={23} style={{ minHeight: 120 }}>
+    <Box flex={1} flow={1} ml={0} mr={23} style={{ minHeight: 100 }}>
       <Box horizontal alignItems="center" justifyContent="space-between">
         <Label mb={4}>
           <Trans i18nKey={`swap.form.from.amount`} />
@@ -119,4 +119,4 @@ const From = ({
   );
 };
 
-export default From;
+export default FromAmount;

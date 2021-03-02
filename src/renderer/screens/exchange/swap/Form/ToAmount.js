@@ -19,7 +19,7 @@ const InputRight = styled(Box).attrs(() => ({
   padding-right: 10px;
 `;
 
-const To = ({
+const ToAmount = ({
   currency,
   amount,
 }: {
@@ -28,9 +28,9 @@ const To = ({
 }) => {
   const unit = currency && currency.units[0];
   return (
-    <Box flex={1} flow={1} mb={3} ml={23}>
+    <Box flex={1} flow={1} ml={23}>
       <Box>
-        <Label mb={4} style={{ minHeight: 23 }}>
+        <Label mb={4} style={{ minHeight: 24 }}>
           <Trans i18nKey={`swap.form.to.amount`} />
         </Label>
 
@@ -53,4 +53,4 @@ const To = ({
   );
 };
 
-export default To;
+export default ToAmount;

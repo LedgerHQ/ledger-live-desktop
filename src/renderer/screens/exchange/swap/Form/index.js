@@ -5,7 +5,6 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 
 import { BigNumber } from "bignumber.js";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import { Trans } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "~/renderer/components/Box/Card";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
@@ -34,12 +33,11 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import type { InstalledItem } from "@ledgerhq/live-common/lib/apps";
 import Box from "~/renderer/components/Box";
-import Text from "~/renderer/components/Text";
 
-import TopFrom from "~/renderer/screens/exchange/swap/Form/Top/From";
-import TopTo from "~/renderer/screens/exchange/swap/Form/Top/To";
-import BottomFrom from "~/renderer/screens/exchange/swap/Form/Bottom/From";
-import BottomTo from "~/renderer/screens/exchange/swap/Form/Bottom/To";
+import FromAccount from "~/renderer/screens/exchange/swap/Form/FromAccount";
+import ToAccount from "~/renderer/screens/exchange/swap/Form/ToAccount";
+import FromAmount from "~/renderer/screens/exchange/swap/Form/FromAmount";
+import ToAmount from "~/renderer/screens/exchange/swap/Form/ToAmount";
 import Footer from "~/renderer/screens/exchange/swap/Form/Footer";
 import TradeMethod from "~/renderer/screens/exchange/swap/Form/TradeMethod";
 import IconSwap from "~/renderer/icons/Swap";
@@ -269,46 +267,6 @@ const Form = ({
       <TrackPage category="Swap" name="Form" />
       <Card flow={1}>
         {fromCurrency ? <CurrencyDownStatusAlert currencies={[fromCurrency]} /> : null}
-        <Box horizontal px={32} pt={16}>
-          <TopFrom
-            status={status}
-            key={fromCurrency?.id || "from"}
-            currenciesStatus={currenciesStatus}
-            account={account ? getMainAccount(account, parentAccount) : null}
-            amount={amount}
-            currency={fromCurrency}
-            error={error}
-            currencies={flattenedCurrencies}
-            onCurrencyChange={fromCurrency =>
-              dispatch({ type: "onSetFromCurrency", payload: { fromCurrency } })
-            }
-            onAccountChange={setAccount}
-            onAmountChange={setTransactionAmount}
-            useAllAmount={useAllAmount}
-            onToggleUseAllAmount={toggleUseAllAmount}
-          />
-          <ArrowSeparator
-            style={{ marginTop: 63, marginBottom: 15 }}
-            Icon={IconSwap}
-            disabled={!canFlipForm}
-            onClick={onFlipForm}
-          />
-          <TopTo
-            key={toCurrency?.id || "to"}
-            currenciesStatus={currenciesStatus}
-            account={toAccount ? getMainAccount(toAccount, toParentAccount) : null}
-            amount={amount.times(magnitudeAwareRate)}
-            currency={toCurrency}
-            fromCurrency={fromCurrency}
-            currencies={validToCurrencies}
-            onCurrencyChange={toCurrency =>
-              dispatch({ type: "onSetToCurrency", payload: { toCurrency } })
-            }
-            onAccountChange={(toAccount, toParentAccount) =>
-              dispatch({ type: "onSetToAccount", payload: { toAccount, toParentAccount } })
-            }
-          />
-        </Box>
         <TradeMethod
           tradeMethod={tradeMethod}
           loadingRates={!!loadingRates}
@@ -321,24 +279,60 @@ const Form = ({
           onExpireRates={resetRate}
           ratesExpiration={isTimerVisible ? ratesExpiration : undefined}
         />
-        <Box px={32}>
-          <Text color="palette.text.shade100" ff="Inter|SemiBold" fontSize={5}>
-            <Trans i18nKey={`swap.form.amount`} />
-          </Text>
-        </Box>
-        <Box horizontal px={32}>
-          <BottomFrom
-            key={fromCurrency?.id || "from"}
-            status={status}
-            amount={amount}
-            currency={fromCurrency}
-            error={error}
-            onAmountChange={setTransactionAmount}
-            useAllAmount={useAllAmount}
-            onToggleUseAllAmount={account ? toggleUseAllAmount : undefined}
+        <Box horizontal px={20} pt={16}>
+          <Box flex={1}>
+            <FromAccount
+              status={status}
+              key={fromCurrency?.id || "fromAccount"}
+              currenciesStatus={currenciesStatus}
+              account={account ? getMainAccount(account, parentAccount) : null}
+              amount={amount}
+              currency={fromCurrency}
+              error={error}
+              currencies={flattenedCurrencies}
+              onCurrencyChange={fromCurrency =>
+                dispatch({ type: "onSetFromCurrency", payload: { fromCurrency } })
+              }
+              onAccountChange={setAccount}
+              onAmountChange={setTransactionAmount}
+              useAllAmount={useAllAmount}
+              onToggleUseAllAmount={toggleUseAllAmount}
+            />
+            <FromAmount
+              key={"fromAmount"}
+              status={status}
+              amount={amount}
+              currency={fromCurrency}
+              error={error}
+              onAmountChange={setTransactionAmount}
+              useAllAmount={useAllAmount}
+              onToggleUseAllAmount={account ? toggleUseAllAmount : undefined}
+            />
+          </Box>
+          <ArrowSeparator
+            style={{ marginTop: 63, marginBottom: 25 }}
+            Icon={IconSwap}
+            disabled={!canFlipForm}
+            onClick={onFlipForm}
           />
-          <div style={{ width: 36 }} />
-          <BottomTo amount={amount.times(magnitudeAwareRate)} currency={toCurrency} />
+          <Box flex={1}>
+            <ToAccount
+              key={toCurrency?.id || "toAccount"}
+              currenciesStatus={currenciesStatus}
+              account={toAccount ? getMainAccount(toAccount, toParentAccount) : null}
+              amount={amount.times(magnitudeAwareRate)}
+              currency={toCurrency}
+              fromCurrency={fromCurrency}
+              currencies={validToCurrencies}
+              onCurrencyChange={toCurrency =>
+                dispatch({ type: "onSetToCurrency", payload: { toCurrency } })
+              }
+              onAccountChange={(toAccount, toParentAccount) =>
+                dispatch({ type: "onSetToAccount", payload: { toAccount, toParentAccount } })
+              }
+            />
+            <ToAmount amount={amount.times(magnitudeAwareRate)} currency={toCurrency} />
+          </Box>
         </Box>
         <Footer onStartSwap={onStartSwap} canContinue={!!canContinue} />
       </Card>

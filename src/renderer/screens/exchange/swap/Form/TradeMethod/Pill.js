@@ -21,7 +21,7 @@ const MethodWrapper: ThemedComponent<{}> = styled(Box)`
       : `linear-gradient(${p.theme.colors.palette.text.shade10}, ${p.theme.colors.palette.text.shade10})`};
   background-size: 50% 4em;
   background-repeat: no-repeat;
-  background-position: ${p => (p.tradeMethod === "float" ? "0%" : "100%")};
+  background-position: ${p => (p.tradeMethod === "fixed" ? "100%" : "0%")};
   transition: background-position 0.2s ease-out;
 `;
 
@@ -42,7 +42,7 @@ const Method = styled(Text).attrs(p => ({
   ff: "Inter|SemiBold",
 }))`
   display: flex;
-  height: 30px;
+  height: 24px;
   width: 100px;
   border: 1px solid transparent;
   border-color: ${p => p.borderColor};
@@ -91,7 +91,7 @@ const Pill = ({
         alignItems={"center"}
       >
         <Tooltip
-          enabled={!floatEnabled}
+          enabled={anyMethodEnabled && !floatEnabled}
           placement={"top"}
           content={<Trans i18nKey={"swap.form.tradeMethod.floatUnavailable"} />}
         >
@@ -105,7 +105,7 @@ const Pill = ({
           </Method>
         </Tooltip>
         <Tooltip
-          enabled={!fixedEnabled}
+          enabled={anyMethodEnabled && !fixedEnabled}
           placement={"top"}
           content={<Trans i18nKey={"swap.form.tradeMethod.fixedUnavailable"} />}
         >
