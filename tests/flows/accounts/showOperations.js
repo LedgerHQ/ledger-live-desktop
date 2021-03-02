@@ -1,5 +1,5 @@
 /* eslint-disable jest/no-export */
-import { app, accountsPage, accountPage, modalPage } from "../../common.js";
+import { app, accountsPage, accountPage, modalPage, page } from "../../common.js";
 
 const showOperations = (currency = "global") => {
   describe("account operations list", () => {
@@ -22,6 +22,8 @@ const showOperations = (currency = "global") => {
       });
     });
     it("show the first operation", async () => {
+      await page.synchronize();
+
       await accountPage.clickFirstOperationRow();
 
       await modalPage.waitForDisplayed();
