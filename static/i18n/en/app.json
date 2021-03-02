@@ -104,7 +104,7 @@
       "UNBOND": "Unbond",
       "REWARD_PAYOUT": "Reward",
       "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Unbonded Withdrawal",
+      "WITHDRAW_UNBONDED": "Withdrawal",
       "NOMINATE": "Nomination",
       "CHILL": "Clear nominations"
     }
@@ -1034,7 +1034,7 @@
       "rewards": "Earned rewards",
       "bondedAmount": "Bonded Amount",
       "unbondedAmount": "Unbonded Amount",
-      "withdrawUnbondedAmount": "Withdraw Unbonded Amount",
+      "withdrawUnbondedAmount": "Withdrawn Amount",
       "palletMethod": "Method",
       "transferAmount": "Transfer Amount",
       "validatorsCount": "Validators ({{number}})"
@@ -1871,7 +1871,7 @@
     "unlockings": {
       "header": "Unbonding",
       "headerTooltip": "Available after the 28-day unbonding period",
-      "withdrawUnbonded": "Withdraw Unbonded ({{amount}})",
+      "withdrawUnbonded": "Withdraw ({{amount}})",
       "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
       "noUnlockedWarning": "No unbonded balance to withdraw yet.",
       "rebond": "Rebond",
@@ -1888,7 +1888,7 @@
         "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
       },
       "withdrawUnbonded": {
-        "title": "Withdraw Unbonded",
+        "title": "Withdraw",
         "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
       },
       "nominate": {
@@ -2040,7 +2040,7 @@
     "simpleOperation": {
       "modes": {
         "withdrawUnbonded": {
-          "title": "Withdraw Unbonded",
+          "title": "Withdraw",
           "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
           "info": "You can then withdraw unbonded assets to your available balance."
         },
