@@ -91,7 +91,7 @@ describe("Global", () => {
   });
 
   it("can display the help modal", async () => {
-    const helpButton = await portfolioPage.helpButton;
+    const helpButton = await portfolioPage.helpButton();
     await helpButton.click();
     await app.client.pause(400);
 
