@@ -9,6 +9,25 @@ import Box from "~/renderer/components/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import IconTransfer from "~/renderer/icons/Transfer";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
+import TranslatedError from "./TranslatedError";
+
+const ErrorContainer = styled(Box)`
+  margin-top: 0px;
+  font-size: 12px;
+  width: 100%;
+  transition: all 0.4s ease-in-out;
+  will-change: max-height;
+  max-height: ${p => (p.hasError ? 60 : 0)}px;
+  min-height: ${p => (p.hasError ? 20 : 0)}px;
+`;
+
+const ErrorDisplay = styled(Box)`
+  color: ${p => p.theme.colors.pearl};
+`;
+
+const WarningDisplay = styled(Box)`
+  color: ${p => p.theme.colors.warning};
+`;
 
 type Props = {
   autoFocus?: boolean,
@@ -48,11 +67,12 @@ export default function RequestAmount({
   );
 
   return (
-    <Box horizontal flow={5} alignItems="center">
+    <Box vertical flow={5} alignItems="center">
       <Box horizontal grow shrink>
         <InputCurrency
           autoFocus={autoFocus}
           disabled={disabled}
+          hideErrorMessage
           error={validTransactionError}
           warning={validTransactionWarning}
           containerProps={{ grow: true }}
@@ -75,6 +95,17 @@ export default function RequestAmount({
           subMagnitude={3}
         />
       </Box>
+      <ErrorContainer hasError={validTransactionError || validTransactionWarning}>
+        {validTransactionError ? (
+          <ErrorDisplay id="input-error">
+            <TranslatedError error={validTransactionError} />
+          </ErrorDisplay>
+        ) : validTransactionWarning ? (
+          <WarningDisplay id="input-warning">
+            <TranslatedError error={validTransactionWarning} />
+          </WarningDisplay>
+        ) : null}
+      </ErrorContainer>
     </Box>
   );
 }

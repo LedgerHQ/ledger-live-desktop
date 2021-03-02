@@ -55,16 +55,18 @@ jobs:
       - name: check build
         if: always()
         run: export INSTRUMENT_BUILD=true && sudo --preserve-env=INSTRUMENT_BUILD yarn build
+      - name: docker compose pull
+        if: always()
+        run: cd tests/docker-electron-webdriver && docker-compose pull
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        if: always()
+        continue-on-error: true
       - name: start electron webdriver
         if: always()
         run: yarn start-electron-webdriver -d
-      - uses: nev7n/wait_for_response@7fef3c1a6e8939d0b09062f14fec50d3c5d15fa1
+      - name: wait for container
         if: always()
-        with:
-          url: 'http://localhost:9515/'
-          responseCode: 404
-          timeout: 600000
-          interval: 1000
+        run: bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:9515)" != "404" ]]; do sleep 5; done'
       - name: run spectron
         if: always()
         run: yarn spectron --no-color 2>output.txt
@@ -74,10 +76,10 @@ jobs:
         uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: ./output.txt
-      - name: run coverage generation	
+      - name: run coverage generation
         if: always() && github.event_name == 'push'
-        run: yarn spectron-coverage	
-        env:	
+        run: yarn spectron-coverage
+        env:
           CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
       - name: upload diffs to imgur
         if: always()

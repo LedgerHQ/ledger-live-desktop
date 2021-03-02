@@ -130,7 +130,7 @@ class TokensList extends PureComponent<Props> {
     const linkLabel = t(hasSpecificTokenWording ? `tokensList.${family}.link` : "tokensList.link");
 
     return (
-      <Box mb={50}>
+      <Box id="tokens-list" mb={50}>
         <Wrapper>
           <Text color="palette.text.shade100" mb={2} ff="Inter|Medium" fontSize={6}>
             {isTokenAccount ? titleLabel : t("subAccounts.title")}

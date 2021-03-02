@@ -35,6 +35,8 @@ const main = async () => {
   const imgDiffFailed = !!imgArr.length;
 
   str = `
+cc @${author}
+
 <details>
 <summary><b>Lint outputs ${lintFailed ? "❌" : " ✅"}</b></summary>
 <p>
@@ -60,7 +62,7 @@ ${testoutput}
 ${str}
 
 </p>
-</details>  
+</details>
 `;
 
   if (!lintFailed && !testsFailed && !imgDiffFailed && imgChanged.length) {
@@ -82,7 +84,7 @@ ${img}
 ${diffStr}
 
 </p>
-</details>  
+</details>
 `;
   }
 

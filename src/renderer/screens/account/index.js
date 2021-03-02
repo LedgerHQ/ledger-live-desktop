@@ -36,7 +36,7 @@ import BalanceSummary from "./BalanceSummary";
 import AccountHeader from "./AccountHeader";
 import AccountHeaderActions from "./AccountHeaderActions";
 import EmptyStateAccount from "./EmptyStateAccount";
-import TokenList from "./TokensList";
+import TokensList from "./TokensList";
 import CompoundBodyHeader from "~/renderer/screens/lend/Account/AccountBodyHeader";
 
 const mapStateToProps = (
@@ -139,7 +139,7 @@ const AccountPage = ({
             <CompoundBodyHeader account={account} parentAccount={parentAccount} />
           ) : null}
           {account.type === "Account" ? (
-            <TokenList account={account} range={selectedTimeRange} />
+            <TokensList account={account} range={selectedTimeRange} />
           ) : null}
           <OperationsList
             account={account}
