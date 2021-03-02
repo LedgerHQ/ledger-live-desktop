@@ -5,6 +5,9 @@ const bookmarkAccount = (currency = "global", startsWithStaredAccounts = false) 
   describe("bookmark account", () => {
     beforeAll(async () => {
       await accountsPage.goToAccounts();
+      if (currency === "xrp") {
+        await app.client.waitForSync();
+      }
     });
 
     if (startsWithStaredAccounts) {

@@ -144,7 +144,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
 
     app.client.addCommand("waitForSync", async () => {
       const sync = await app.client.$("#topbar-synchronized");
-      await sync.waitForExist();
+      return sync.waitForExist();
     });
 
     app.client.addCommand("screenshot", async function(countdown = 500) {

@@ -5,6 +5,10 @@ const editAccountName = (currency = "global") => {
   describe("edit name flow", () => {
     beforeAll(async () => {
       await accountsPage.goToAccounts();
+      if (currency === "xrp") {
+        await page.synchronize();
+      }
+      await app.client.waitForSync();
     });
 
     it("show name of account before", async () => {
@@ -29,10 +33,6 @@ const editAccountName = (currency = "global") => {
     });
 
     it("show name of account after", async () => {
-      if (currency === "xrp") {
-        await page.synchronize();
-      }
-      await app.client.waitForSync();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `${currency}-edit-account-name-after`,
       });
