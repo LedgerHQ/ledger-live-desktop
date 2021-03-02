@@ -173,7 +173,7 @@ export const onboard = device => {
       recoveryphraseCB.click();
       const next = await $("#device-recoveryphrase-cta");
       await next.click();
-      await app.client.pause(500);
+      await app.client.pause(1000);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
