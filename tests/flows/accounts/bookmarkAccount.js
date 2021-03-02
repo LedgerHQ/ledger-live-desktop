@@ -5,9 +5,6 @@ const bookmarkAccount = (currency = "global", startsWithStaredAccounts = false) 
   describe("bookmark account", () => {
     beforeAll(async () => {
       await accountsPage.goToAccounts();
-      if (currency === "xrp") {
-        await app.client.waitForSync();
-      }
     });
 
     if (startsWithStaredAccounts) {
@@ -37,6 +34,9 @@ const bookmarkAccount = (currency = "global", startsWithStaredAccounts = false) 
     });
 
     it("displays a newly bookmarked account in the side menu", async () => {
+      if (currency === "xrp") {
+        await app.client.waitForSync();
+      }
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `${currency}-bookmark-account`,
       });
