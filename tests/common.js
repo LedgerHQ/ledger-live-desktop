@@ -153,11 +153,6 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
 
       await this.pause(countdown);
 
-      const syncButton = await app.client.$("#topbar-synchronize-button");
-      if ((await syncButton.isExisting()) === true) {
-        await app.client.waitForSync();
-      }
-
       const pageRect = await app.client.execute(() => {
         return {
           height: document.getElementById("page-scroller")

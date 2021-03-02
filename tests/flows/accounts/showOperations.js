@@ -22,8 +22,6 @@ const showOperations = (currency = "global") => {
       });
     });
     it("show the first operation", async () => {
-      await page.synchronize();
-
       await accountPage.clickFirstOperationRow();
 
       await modalPage.waitForDisplayed();

@@ -38,6 +38,7 @@ describe("Swap", () => {
       },
       { type: "complete" },
     );
+    await app.client.waitForSync();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-access",
     });
@@ -166,7 +167,6 @@ describe("Swap", () => {
     await finishedStep.waitForDisplayed();
     await finishedStep.click();
     await finishedStep.waitForDisplayed({ reverse: true });
-    await page.synchronize();
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "swap-end-1",

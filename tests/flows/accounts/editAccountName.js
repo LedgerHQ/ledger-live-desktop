@@ -29,7 +29,10 @@ const editAccountName = (currency = "global") => {
     });
 
     it("show name of account after", async () => {
-      await page.synchronize();
+      if (currency === "xrp") {
+        await page.synchronize();
+      }
+      await app.client.waitForSync();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `${currency}-edit-account-name-after`,
       });
