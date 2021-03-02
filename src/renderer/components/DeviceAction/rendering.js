@@ -34,6 +34,7 @@ import SupportLinkError from "~/renderer/components/SupportLinkError";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
+import ExternalLinkButton from "../ExternalLinkButton";
 
 const AnimationWrapper: ThemedComponent<{ modelId: DeviceModelId }> = styled.div`
   width: 600px;
@@ -281,11 +282,13 @@ export const renderError = ({
   onRetry,
   withExportLogs,
   list,
+  supportLink,
 }: {
   error: Error,
   onRetry?: () => void,
   withExportLogs?: boolean,
   list?: boolean,
+  supportLink?: string,
 }) => (
   <Wrapper id={`error-${error.name}`}>
     <Logo>
@@ -305,12 +308,16 @@ export const renderError = ({
       </ErrorDescription>
     ) : null}
     <ButtonContainer>
+      {supportLink ? (
+        <ExternalLinkButton label={<Trans i18nKey="common.getSupport" />} url={supportLink} />
+      ) : null}
       {withExportLogs ? (
         <ExportLogsButton
           title={<Trans i18nKey="settings.exportLogs.title" />}
           small={false}
           primary={false}
           outlineGrey
+          mx={1}
         />
       ) : null}
       {onRetry ? (
