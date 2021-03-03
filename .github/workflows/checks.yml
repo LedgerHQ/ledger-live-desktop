@@ -96,6 +96,12 @@ jobs:
         with:
           name: ci-suggested-screenshots
           path: tests/specs/__image_snapshots__/__diff_output__/
+      - name: upload cpuprofiles
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cpuprofiles
+          path: tests/cpuprofiles/
       - name: generate imgChanged
         run: |
           git remote add ledger https://github.com/LedgerHQ/ledger-live-desktop.git

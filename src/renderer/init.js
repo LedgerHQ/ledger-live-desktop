@@ -78,6 +78,11 @@ async function init() {
     if (document.body) {
       document.body.className += " spectron-run";
     }
+
+    window.stopProfile = async () => {
+      const profile = await ipcRenderer.invoke("stop-profile");
+      window.PROFILE = profile;
+    };
   }
 
   if (window.localStorage.getItem("hard-reset")) {
