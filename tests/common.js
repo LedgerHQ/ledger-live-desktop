@@ -142,6 +142,11 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       console.log("app start error", e);
     }
 
+    app.client.addCommand("waitForIllustration", async () => {
+      const illustrations = await app.client.$(".illustration");
+      !illustrations.error && (await illustrations.waitForDisplayed());
+    });
+
     app.client.addCommand("waitForSync", async () => {
       const sync = await app.client.$("#topbar-synchronized");
       return sync.waitForDisplayed();

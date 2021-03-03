@@ -133,7 +133,7 @@ export const onboard = device => {
     it("goes to pincode", async () => {
       const next = await $("#device-howto-cta");
       await next.click();
-      await app.client.pause(700);
+      await app.client.waitForIllustration();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -159,7 +159,7 @@ export const onboard = device => {
     it("goes to recovery phrase", async () => {
       const next = await $("#pincode-howto-cta");
       await next.click();
-      await app.client.pause(500);
+      await app.client.waitForIllustration();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
