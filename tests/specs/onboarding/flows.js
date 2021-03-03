@@ -239,7 +239,7 @@ export const onboard = device => {
       await app.client.pause(200);
       next = await $("#quizz-next-cta");
       await next.click();
-      await app.client.pause(500);
+      await app.client.waitForIllustration();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
