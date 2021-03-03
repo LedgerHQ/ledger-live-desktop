@@ -110,4 +110,9 @@ export default class Page {
     const bgColor = await this.theme.getCSSProperty("background-color");
     return bgColor.parsed.hex;
   }
+
+  async goToManager() {
+    const btn = await this.drawerManagerButton();
+    await btn.click();
+  }
 }
