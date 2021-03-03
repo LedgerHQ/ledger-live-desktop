@@ -77,6 +77,7 @@ export function useDeepLinkHandler() {
 
         case "bridge": {
           const { origin, appName } = query;
+          dispatch(closeAllModal());
           dispatch(
             openModal("MODAL_WEBSOCKET_BRIDGE", {
               origin,
