@@ -2,16 +2,18 @@
 
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
-import React from "react";
-import {
-  useAnnouncements,
-  useGroupedAnnouncements,
-} from "@ledgerhq/live-common/lib/announcements/react";
+import { InView } from "react-intersection-observer";
+import React, { useCallback, useRef, useMemo } from "react";
+import { useAnnouncements } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider";
+
+import { groupAnnouncements } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider/helpers";
 import Text from "~/renderer/components/Text";
 import moment from "moment";
 import InfoCircle from "~/renderer/icons/InfoCircle";
+import TriangleWarning from "~/renderer/icons/TriangleWarning";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import { openURL } from "~/renderer/linking";
+import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
 
 const DateRowContainer = styled.div`
   padding: 4px 16px;
@@ -88,14 +90,32 @@ type ArticleProps = {
   },
 };
 
+const icons = {
+  warning: {
+    defaultIconColor: "orange",
+    Icon: TriangleWarning,
+  },
+  info: {
+    defaultIconColor: "wallet",
+    Icon: InfoCircle,
+  },
+};
+
 function Article({ level = "info", icon = "info", title, text, link }: ArticleProps) {
   const levelTheme = levelThemes[level];
 
+  const { Icon, defaultIconColor } = icons[icon];
+
   return (
-    <ArticleContainer bg={levelTheme.background} p={levelTheme.padding} color={levelTheme.icon}>
+    <ArticleContainer
+      bg={levelTheme.background}
+      py={levelTheme.padding}
+      px="16px"
+      color={levelTheme.icon || defaultIconColor}
+    >
       <ArticleLeftColumnContainer>
         <ArticleIconContainer>
-          <InfoCircle size={15} />
+          <Icon size={15} />
         </ArticleIconContainer>
       </ArticleLeftColumnContainer>
       <ArticleRightColumnContainer>
@@ -121,44 +141,63 @@ function Article({ level = "info", icon = "info", title, text, link }: ArticlePr
   );
 }
 
-const PanelContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 const Separator = styled.div`
-  margin: 15px 0px;
+  margin: 25px 0px;
   width: 100%;
   height: 1px;
   background-color: ${({ theme }) => theme.colors.palette.text.shade10};
 `;
 
 export function AnnouncementPanel() {
-  const { cache } = useAnnouncements();
-  const groups = useGroupedAnnouncements(cache);
+  const { cache, setAsSeen, seenIds, allIds } = useAnnouncements();
+  const groupedAnnouncements = useMemo(() => groupAnnouncements(allIds.map(uuid => cache[uuid])), [
+    cache,
+    allIds,
+  ]);
 
-  console.log(groups);
+  const timeoutByUUID = useRef({});
+  const handleInView = useCallback(
+    (visible, uuid) => {
+      const timeouts = timeoutByUUID.current;
+      if (!seenIds.includes(uuid) && visible && !timeouts[uuid]) {
+        timeouts[uuid] = setTimeout(() => {
+          setAsSeen(uuid);
+          delete timeouts[uuid];
+        }, 3000);
+      }
+
+      if (!visible && timeouts[uuid]) {
+        clearTimeout(timeouts[uuid]);
+        delete timeouts[uuid];
+      }
+    },
+    [seenIds, setAsSeen],
+  );
 
   return (
-    <PanelContainer>
-      {groups.map((group, index) => (
-        <React.Fragment key={index}>
-          {group.day ? <DateRow date={group.day} /> : null}
-          {group.data.map(({ level, icon, content, uuid }, index) => (
-            <React.Fragment key={uuid}>
-              <Article
-                level={level}
-                icon={icon}
-                title={content.title}
-                text={content.text}
-                link={content.link}
-                uuid={uuid}
-              />
-              {index < group.data.length - 1 ? <Separator /> : null}
-            </React.Fragment>
-          ))}
-        </React.Fragment>
-      ))}
-    </PanelContainer>
+    <ScrollArea hideScrollbar>
+      <Box py="32px">
+        {groupedAnnouncements.map((group, index) => (
+          <React.Fragment key={index}>
+            {group.day ? <DateRow date={group.day} /> : null}
+            {group.data.map(({ level, icon, content, uuid }, index) => (
+              <React.Fragment key={uuid}>
+                <InView as="div" onChange={visible => handleInView(visible, uuid)}>
+                  <Article
+                    level={level}
+                    icon={icon}
+                    title={content.title}
+                    text={content.text}
+                    link={content.link}
+                    uuid={uuid}
+                  />
+                </InView>
+                {index < group.data.length - 1 ? <Separator /> : null}
+              </React.Fragment>
+            ))}
+          </React.Fragment>
+        ))}
+      </Box>
+    </ScrollArea>
   );
 }

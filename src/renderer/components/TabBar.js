@@ -2,7 +2,6 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { Trans } from "react-i18next";
 import { Base } from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 
@@ -130,7 +129,7 @@ const TabBar = ({
           fontSize={fontSize}
         >
           <Text ff="Inter|SemiBold" fontSize={5}>
-            <Trans i18nKey={tab} />
+            {tab}
           </Text>
         </Tab>
       ))}

@@ -2387,9 +2387,17 @@
     "dark": "Dark"
   },
   "informationCenter": {
+    "tooltip": "Information center",
     "tabs": {
       "announcements": "News",
+      "announcementsUnseen": "News ({{unseenCount}})",
       "serviceStatus": "Status"
+    },
+    "serviceStatus": {
+      "statusOk": {
+        "title": "Ledger live is up and running",
+        "description": "Having trouble ? Go on our <0>help page</0>"
+      }
     }
   },
   "onboarding": {

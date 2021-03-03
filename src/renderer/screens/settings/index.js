@@ -110,7 +110,7 @@ const Settings = ({ history, location, match }: Props) => {
           onIndexChange={handleChangeTab}
           defaultIndex={activeTabIndex}
           index={activeTabIndex}
-          tabs={items.map(i => i.label)}
+          tabs={items.map(i => t(i.label))}
           ids={items.map(i => `settings-${i.key}`)}
           separator
           withId

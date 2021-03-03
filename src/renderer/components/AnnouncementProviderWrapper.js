@@ -1,11 +1,12 @@
 // @flow
 import React from "react";
-import { AnnoucementProvider } from "@ledgerhq/live-common/lib/announcements/react";
-import type { Announcement } from "@ledgerhq/live-common/lib/announcements/types";
+import { AnnouncementProvider } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider";
+import type { Announcement } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider/types";
 import { getKey, setKey } from "~/renderer/storage";
 import { languageSelector } from "~/renderer/reducers/settings";
 import { currenciesIdSelector } from "~/renderer/reducers/accounts";
 import { useSelector } from "react-redux";
+import { ServiceStatusProvider } from "@ledgerhq/live-common/lib/providers/ServiceStatusProvider";
 
 type Props = {
   children: React$Node,
@@ -14,24 +15,25 @@ type Props = {
 async function saveAnnouncements({
   announcements,
   seenIds,
+  lastUpdateTime,
 }: {
   announcements: Announcement[],
   seenIds: string[],
+  lastUpdateTime: number,
 }) {
-  console.log("SAVING ANN: ", { announcements, seenIds });
   setKey("app", "announcements", {
     announcements,
     seenIds,
+    lastUpdateTime,
   });
 }
 
 async function loadAnnouncements(): Promise<{
   announcements: Announcement[],
   seenIds: string[],
+  lastUpdateTime: number,
 }> {
   const data = await getKey("app", "announcements", []);
-  console.log("LOADING ANN: ", data);
-
   return data;
 }
 
@@ -46,8 +48,13 @@ export function AnnouncementProviderWrapper({ children }: Props) {
   };
 
   return (
-    <AnnoucementProvider context={context} onLoad={loadAnnouncements} onSave={saveAnnouncements}>
-      {children}
-    </AnnoucementProvider>
+    <AnnouncementProvider
+      autoUpdateDelay={15000}
+      context={context}
+      handleLoad={loadAnnouncements}
+      handleSave={saveAnnouncements}
+    >
+      <ServiceStatusProvider autoUpdateDelay={15000}>{children}</ServiceStatusProvider>
+    </AnnouncementProvider>
   );
 }

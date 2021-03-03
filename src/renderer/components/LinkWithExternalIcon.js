@@ -3,8 +3,8 @@
 import React from "react";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import Box from "~/renderer/components/Box";
-import IconExternalLink from "~/renderer/icons/ExternalLink";
+
+import externalLink from "~/renderer/images/external-link.svg";
 
 import Label from "./Label";
 
@@ -14,16 +14,27 @@ const Wrapper: ThemedComponent<{}> = styled(Label).attrs(props => ({
   fontSize: props.fontSize,
   alignItems: "center",
 }))`
-  display: flex;
   cursor: pointer;
-
+  display: inline;
   &:hover {
-    opacity: 0.9;
+    opacity: 0.8;
   }
-`;
 
-const TextContainer = styled.span`
-  flex: 1;
+  &:active {
+    opacity: 0.6;
+  }
+
+  &:after {
+    -webkit-mask: url(${externalLink});
+    -webkit-mask-size: cover;
+    width: 12px;
+    height: 12px;
+    vertical-align: baseline;
+    margin-left: 6px;
+    content: "";
+    display: inline-block;
+    background: currentColor;
+  }
 `;
 
 type Props = {
@@ -46,10 +57,7 @@ export function LinkWithExternalIcon({
 }: Props) {
   return (
     <Wrapper onClick={onClick} style={style} fontSize={fontSize || 4} color={color}>
-      <TextContainer>{label || children}</TextContainer>
-      <Box ml={1}>
-        <IconExternalLink size={12} />
-      </Box>
+      {label || children}
     </Wrapper>
   );
 }

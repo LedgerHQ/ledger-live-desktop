@@ -1,29 +1,25 @@
 // @flow
 
 import Tooltip from "~/renderer/components/Tooltip";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ItemContainer from "../ItemContainer";
-import IconEyeOff from "~/renderer/icons/EyeOff";
-import { useAnnouncements } from "@ledgerhq/live-common/lib/announcements/react";
+import IconBell from "~/renderer/icons/Bell";
+import { useAnnouncements } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider";
 import { useTranslation } from "react-i18next";
 import { InformationDrawer } from "./InformationDrawer";
 
 export function NotificationIndicator() {
   const { t } = useTranslation();
-  const { updateCache } = useAnnouncements();
+  const { allIds, seenIds } = useAnnouncements();
+
+  const totalNotifCount = allIds.length - seenIds;
 
   const [isOpen, setOpen] = useState(false);
-
-  useEffect(() => {
-    setInterval(() => {
-      updateCache();
-    }, 15000);
-  }, [updateCache]);
 
   return (
     <>
       <InformationDrawer isOpen={isOpen} onRequestClose={() => setOpen(false)} />
-      <Tooltip content={t("settings.discreet")} placement="bottom">
+      <Tooltip content={t("informationCenter.tooltip")} placement="bottom">
         <ItemContainer
           id="topbar-notification-button"
           isInteractive
@@ -31,7 +27,7 @@ export function NotificationIndicator() {
             setOpen(true);
           }}
         >
-          <IconEyeOff size={16} />
+          <IconBell size={16} dot={totalNotifCount > 0} />
         </ItemContainer>
       </Tooltip>
     </>
