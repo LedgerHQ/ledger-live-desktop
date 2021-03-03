@@ -36,7 +36,6 @@ const addAccount = currency => {
       await addAccountButton.click();
       await addAccountsModal.waitForDisplayed();
       await addAccountsModal.prepareAddAccount(currency);
-      await addAccountsModal.confirmCurrency();
 
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `${currency}-add-account-fill-input`,

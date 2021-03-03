@@ -31,7 +31,9 @@ const IllustrationInner: ThemedComponent<*> = styled.div`
   margin: 0 auto;
 `;
 
-export const Illustration = props => <IllustrationInner className="illustration" {...props} />;
+export const Illustration = (props: any) => (
+  <IllustrationInner className="illustration" {...props} />
+);
 
 export const ContentContainer: ThemedComponent<*> = styled.div`
   display: flex;

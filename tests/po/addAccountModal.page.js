@@ -28,11 +28,6 @@ export default class AddAccountModal extends Modal {
     await this.app.client.keys(["Enter"]);
   }
 
-  async confirmCurrency() {
-    const firstOption = await this.$(".select-options-list .option:first-child");
-    await firstOption.click();
-  }
-
   async finishAddAccount(mockDeviceEvent) {
     const continueBtn = await this.continueButton();
     await continueBtn.click();
