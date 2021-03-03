@@ -21,7 +21,7 @@ export default class AccountPage extends Page {
     return this.$("#token-menu-hide");
   }
 
-  get operationsList() {
+  async operationsList() {
     return this.$("#operation-list");
   }
 
@@ -36,7 +36,7 @@ export default class AccountPage extends Page {
   }
 
   async getOperationRows() {
-    const operationList = await this.operationsList;
+    const operationList = await this.operationsList();
     return operationList.$$(".operation-row");
   }
 

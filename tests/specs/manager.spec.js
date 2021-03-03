@@ -1,4 +1,4 @@
-import initialize, { app, mockListAppsResult, mockDeviceEvent } from "../common.js";
+import initialize, { app, mockListAppsResult, mockDeviceEvent, managerPage } from "../common.js";
 
 describe("Manager", () => {
   initialize("manager", {
@@ -19,8 +19,7 @@ describe("Manager", () => {
   };
 
   it("can access manager", async () => {
-    const managerButton = await $("#drawer-manager-button");
-    await managerButton.click();
+    await managerPage.goToManager();
     await mockDeviceEvent(
       {
         type: "listingApps",
@@ -43,8 +42,7 @@ describe("Manager", () => {
   });
 
   it("can install an app", async () => {
-    const installTronButton = await $("#appActionsInstall-Tron");
-    await installTronButton.click();
+    await managerPage.installApp("Tron");
     await app.client.pause(3000);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "manager-install-tron",
@@ -52,16 +50,14 @@ describe("Manager", () => {
   });
 
   it("can access installed apps tab", async () => {
-    const appsOnDeviceButton = await $("#appsOnDevice-tab");
-    await appsOnDeviceButton.click();
+    await managerPage.goToInstalledAppTab();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "manager-appsOnDevice",
     });
   });
 
   it("can uninstall an app", async () => {
-    const installTronButton = await $("#appActionsUninstall-Tron");
-    await installTronButton.click();
+    await managerPage.uninstallApp("Tron");
     await app.client.pause(3000);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "manager-uninstall-tron",
@@ -69,10 +65,8 @@ describe("Manager", () => {
   });
 
   it("can update all apps", async () => {
-    const catalogButton = await $("#appCatalog-tab");
-    await catalogButton.click();
-    const updateAllbutton = await $("#managerAppsList-updateAll");
-    await updateAllbutton.click();
+    await managerPage.goToCatalogTab();
+    await managerPage.updateAllApps();
     await app.client.pause(3000);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "manager-updateAll",
