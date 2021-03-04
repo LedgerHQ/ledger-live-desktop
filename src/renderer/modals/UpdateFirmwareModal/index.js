@@ -14,6 +14,7 @@ import type { ModalStatus } from "~/renderer/screens/manager/FirmwareUpdate/type
 import StepResetDevice, { StepResetFooter } from "./steps/00-step-reset-device";
 import StepFullFirmwareInstall from "./steps/01-step-install-full-firmware";
 import StepFlashMcu from "./steps/02-step-flash-mcu";
+import StepUpdating from "./steps/02-step-updating";
 import StepConfirmation, { StepConfirmFooter } from "./steps/03-step-confirmation";
 
 type MaybeError = ?Error;
@@ -31,7 +32,7 @@ export type StepProps = {
   transitionTo: string => void,
 };
 
-export type StepId = "idCheck" | "updateMCU" | "finish" | "resetDevice";
+export type StepId = "idCheck" | "updateMCU" | "updating" | "finish" | "resetDevice";
 
 type Step = TypedStep<StepId, StepProps>;
 
@@ -73,6 +74,8 @@ const UpdateModal = ({
   const [nonce, setNonce] = useState(0);
   const { t } = useTranslation();
 
+  const hasFinalFirmware = Boolean(firmware && firmware.final.firmware);
+
   const createSteps = useCallback(
     ({ withResetStep }: { withResetStep: boolean }) => {
       const updateStep = {
@@ -100,6 +103,14 @@ const UpdateModal = ({
         hideFooter: true,
       };
 
+      const updatingStep = {
+        id: "updating",
+        label: t("manager.modal.steps.updating"),
+        component: StepUpdating,
+        onBack: null,
+        hideFooter: true,
+      };
+
       const resetStep = {
         id: "resetDevice",
         label: t("manager.modal.steps.reset"),
@@ -109,11 +120,20 @@ const UpdateModal = ({
         hideFooter: false,
       };
 
-      let steps = [updateStep, mcuStep, finalStep];
-      if (withResetStep) steps = [resetStep, ...steps];
+      const steps = [];
+      if (withResetStep) {
+        steps.push(resetStep);
+      }
+      steps.push(updateStep);
+      if (hasFinalFirmware) {
+        steps.push(mcuStep);
+      } else {
+        steps.push(updatingStep);
+      }
+      steps.push(finalStep);
       return steps;
     },
-    [t],
+    [t, hasFinalFirmware],
   );
 
   const steps = useMemo(() => createSteps({ withResetStep }), [createSteps, withResetStep]);

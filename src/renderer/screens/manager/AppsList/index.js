@@ -61,6 +61,9 @@ type Props = {
   appsToRestore?: string[],
 };
 
+// workaround until we fix LL-4458
+const shouldBlockNavigation = l => l.pathname !== "/manager";
+
 const AppsList = ({
   firmware,
   deviceInfo,
@@ -130,6 +133,7 @@ const AppsList = ({
           <ErrorModal isOpened={!!currentError} error={currentError.error} onClose={onCloseError} />
         )}
         <NavigationGuard
+          shouldBlockNavigation={shouldBlockNavigation}
           analyticsName="ManagerGuardModal"
           when={jobInProgress}
           subTitle={

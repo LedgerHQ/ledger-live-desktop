@@ -57,6 +57,7 @@ const ethereum = getCryptoCurrencyById("ethereum");
 export const possibleIntermediaries = [bitcoin, ethereum];
 
 export const timeRangeDaysByKey = {
+  day: 1,
   week: 7,
   month: 30,
   year: 365,

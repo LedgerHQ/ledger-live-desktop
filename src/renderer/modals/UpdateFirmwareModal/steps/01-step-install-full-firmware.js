@@ -144,7 +144,7 @@ const StepFullFirmwareInstall = ({
         setDisplayedOnDevice(displayed);
       },
       complete: () => {
-        transitionTo("updateMCU");
+        transitionTo(firmware.final.firmware ? "updateMCU" : "updating");
       },
       error: error => {
         setError(error);

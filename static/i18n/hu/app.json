@@ -46,6 +46,7 @@
     "western": "Nyugati",
     "reverify": "Újra megerősít",
     "verify": "Megerősít",
+    "verifyMyAddress": "Verify my address",
     "copy": "Másolás",
     "copied": "Másolva",
     "addressCopied": "Cím másolva",
@@ -98,7 +99,14 @@
       "FEES": "Fees",
       "OPT_IN": "Opt in",
       "OPT_OUT": "Opt out",
-      "CLOSE_ACCOUNT": "Close account"
+      "CLOSE_ACCOUNT": "Close account",
+      "BOND": "Bond",
+      "UNBOND": "Unbond",
+      "REWARD_PAYOUT": "Reward",
+      "SLASH": "Slash",
+      "WITHDRAW_UNBONDED": "Unbonded Withdrawal",
+      "NOMINATE": "Nomination",
+      "CHILL": "Clear nominations"
     }
   },
   "byteSize": {
@@ -112,6 +120,7 @@
     "hour": "Óra",
     "hour_plural": "Órák",
     "range": {
+      "day": "1D",
       "week": "1 Hét",
       "month": "1 Hónap",
       "year": "1 Év"
@@ -135,7 +144,7 @@
     "lend": "Lend"
   },
   "stars": {
-    "placeholder": "Számlák melyeket csillaggal látsz el a <1><0>Számlák</0></1> oldalon innentől itt fognak megjelenni!",
+    "placeholder": "Star an account to display it here.",
     "tooltip": "Számla csillagozása"
   },
   "bridge": {
@@ -248,6 +257,11 @@
       "provider": "Provider",
       "txid": "Swap ID",
       "status": "Status",
+      "statusTooltips": {
+        "refunded": "Please contact the Swap provider with you swap ID for more details",
+        "failed": "Please contact the Swap provider with you swap ID for more details",
+        "hold": "Please contact the Swap provider with you swap ID to solve the situation"
+      },
       "date": "Date",
       "from": "From",
       "to": "To",
@@ -738,7 +752,7 @@
     },
     "status": {
       "title": "Ledger Status",
-      "desc": "Learn crypto"
+      "desc": "Check our system status"
     },
     "helpCenter": {
       "title": "Ledger Support",
@@ -773,6 +787,10 @@
     },
     "migrate": "Ledger Live számlák frissítése lehetséges",
     "genericTerminatedCrypto": "{{coinName}} többé nem támogatott",
+    "valentine": {
+      "title": "Valentine’s day",
+      "description": "As a proof of our love, Ledger is reducing buy & sell fees on Ledger Live"
+    },
     "ledgerAcademy": {
       "title": "Ledger Academy",
       "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
@@ -1013,7 +1031,13 @@
       "rewardAmount": "Amount collected",
       "memo": "Memo",
       "assetId": "Asset ID",
-      "rewards": "Earned rewards"
+      "rewards": "Earned rewards",
+      "bondedAmount": "Bonded Amount",
+      "unbondedAmount": "Unbonded Amount",
+      "withdrawUnbondedAmount": "Withdraw Unbonded Amount",
+      "palletMethod": "Method",
+      "transferAmount": "Transfer Amount",
+      "validatorsCount": "Validators ({{number}})"
     }
   },
   "operationList": {
@@ -1026,6 +1050,7 @@
     "loading": "Betöltés...",
     "connectAndUnlockDevice": "Csatlakoztasd, és old fel az eszközöd",
     "unlockDevice": "Old fel az eszközöd",
+    "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
     "quitApp": "Lépj ki az alkalmazásból az eszközödön",
     "appNotInstalled": "Kérlek, telepítsd a(z) {{appName}} alkalmazást",
     "openManager": "Eszközkezelő megnyitása",
@@ -1157,6 +1182,7 @@
       "steps": {
         "downloadingUpdate": "Frissítés letöltése",
         "updateMCU": "Szoftverfrissítés",
+        "updating": "Firmware update",
         "reset": "Eszköz előkészítése",
         "osu": "OSU telepítése...",
         "flash-mcu": "MCU frissítése...",
@@ -1175,7 +1201,10 @@
       "mcuBlueFirst": "Nyomd meg, és tartsd lenyomva 10 másodpercig az oldalsó gombot az eszköz kikapcsolásához. Engedd el a gombot.",
       "mcuBlueSecond": "Nyomd meg, és tartsd lenyomva a gombot minimum 5 másodpercig, amíg a Boot Options meg nem jelenig. Nyomj a Bootloader Mode-ra",
       "successTitle": "Szoftver frissítve",
-      "successText": "Kérlek, telepítsd újra az alkalmazásokat az eszközödön",
+      "successTextApps": "Please re-install the apps on your device",
+      "successTextNoApps": "You can now install apps on your device",
+      "sucessCTAApps": "Re-install apps",
+      "SuccessCTANoApps": "Install apps",
       "resetSteps": {
         "first": "1. Indítsd újra az eszközöd",
         "connect": "Csatlakoztasd a {{deviceName}} -t a számítógépedhez az USB kábelt használva.",
@@ -1322,7 +1351,10 @@
   "buy": {
     "title": "Buy",
     "titleCrypto": "Buy {{currency}}",
-    "buyCTA": "Buy {{currencyTicker}}"
+    "buyCTA": "Buy {{currencyTicker}}",
+    "withoutDevice": "Don't have your device?",
+    "connectWithoutDevice": "It's better to use your device for optimal security.",
+    "skipConnect": "Continue without device"
   },
   "sell": {
     "title": "Sell",
@@ -1791,6 +1823,256 @@
       }
     }
   },
+  "polkadot": {
+    "lockedBalance": "Bonded",
+    "lockedTooltip": "Assets must be bonded to nominated validators before earning rewards.",
+    "unlockingBalance": "Unbonding",
+    "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
+    "unlockedBalance": "Unbonded",
+    "unlockedTooltip": "Unbonded assets can now be moved using the withdraw operation.",
+    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
+    "nomination": {
+      "emptyState": {
+        "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
+        "info": "How nominations work"
+      },
+      "header": "Nominations",
+      "nominate": "Nominate",
+      "chill": "Clear nominations",
+      "totalStake": "Total Stake",
+      "amount": "Bonded Amount",
+      "commission": "Commission",
+      "active": "Active",
+      "activeTooltip": "This validator is elected and is collecting rewards on your bonded assets.",
+      "inactive": "Inactive",
+      "inactiveTooltip": "This validator is elected but is not collecting rewards on your bonded assets.",
+      "waiting": "Unelected",
+      "waitingTooltip": "This validator is not elected, therefore is not collecting rewards.",
+      "notValidator": "Not a validator",
+      "notValidatorTooltip": "This address is no longer a validator",
+      "elected": "Elected",
+      "nominatorsCount": "{{nominatorsCount}} nominators",
+      "nominatorsTooltip": "This validator is currently elected by {{count}} nominators.",
+      "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
+      "oversubscribedTooltip": "Only the top {{maxNominatorRewardedPerValidator}} nominators with the highest bonded amount earn rewards",
+      "hasPendingBondOperation": "A bond operation is still pending confirmation",
+      "electionOpen": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most.",
+      "electionOpenTooltip": "This operation is disabled during the election of validators",
+      "externalControllerTooltip": "This account is controlled by another account.",
+      "externalControllerUnsupported": "<0>This stash account is controlled by another account with the address <0>{{address}}</0>.</0><1>Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js</1>",
+      "externalStashTooltip": "This account controls another account.",
+      "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
+      "showInactiveNominations": "Show all nominations ({{count}})",
+      "hideInactiveNominations": "Show active nominations only",
+      "noActiveNominations": "There are no active nominations.",
+      "showAllUnlockings": "Show all unbonding amounts ({{count}})",
+      "hideAllUnlockings": "Hide unbonding amounts"
+    },
+    "unlockings": {
+      "header": "Unbonding",
+      "headerTooltip": "Available after the 28-day unbonding period",
+      "withdrawUnbonded": "Withdraw Unbonded ({{amount}})",
+      "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
+      "noUnlockedWarning": "No unbonded balance to withdraw yet.",
+      "rebond": "Rebond",
+      "unbonded": "Unbonded"
+    },
+    "manage": {
+      "title": "Manage assets",
+      "bond": {
+        "title": "Bond",
+        "description": "To earn rewards, first bond an amount. Then you must nominate your validator(s)."
+      },
+      "unbond": {
+        "title": "Unbond",
+        "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
+      },
+      "withdrawUnbonded": {
+        "title": "Withdraw Unbonded",
+        "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
+      },
+      "nominate": {
+        "title": "Nominate",
+        "description": "Choose up to 16 validators. Ensure nominations are Active to earn rewards."
+      },
+      "chill": {
+        "title": "Clear nominations",
+        "description": "Remove all nominations. You will stop earning rewards. Your bonded amount remains bonded."
+      }
+    },
+    "nominate": {
+      "title": "Nominate",
+      "steps": {
+        "validators": {
+          "title": "Validators",
+          "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction.",
+          "maybeChill": "Clear nominations instead"
+        },
+        "connectDevice": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "Confirmation",
+          "success": {
+            "title": "You have successfully nominated validators",
+            "text": "You will start earning rewards when your assets are bonded to your elected validator(s).",
+            "cta": "View details"
+          },
+          "pending": {
+            "title": "Broadcasting transaction..."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    },
+    "bond": {
+      "title": "Bond assets",
+      "rewardDestination": {
+        "label": "Rewards Destination",
+        "stash": "Available Balance",
+        "stashDescription": "Rewards are credited to your available balance.",
+        "staked": "Bonded Balance",
+        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
+        "optionTitle": "Note",
+        "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
+      },
+      "steps": {
+        "starter": {
+          "description": "You may earn rewards by bonding your assets and then nominate your validators.",
+          "bullet": [
+            "You keep ownership of bonded assets",
+            "Nominate using your Ledger device",
+            "Assets will be available again, 28 days after unbonding"
+          ],
+          "help": "How nominations work",
+          "warning": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
+        },
+        "amount": {
+          "title": "Amount",
+          "amountLabel": "Amount to bond",
+          "availableLabel": "Available",
+          "maxLabel": "Max",
+          "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
+          "learnMore": "Learn More"
+        },
+        "connectDevice": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "tooltip": {
+            "title": "Transaction awaiting confirmation",
+            "desc": "You have to wait a moment before nominating"
+          },
+          "title": "Confirmation",
+          "success": {
+            "title": "Assets successfully bonded",
+            "text": "You can nominate validators once the network has confirmed the transaction.",
+            "textNominate": "You will be able to nominate validators once the network has confirmed your transaction.",
+            "nominate": "Nominate",
+            "later": "Nominate later"
+          },
+          "pending": {
+            "title": "Bonding your assets..."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    },
+    "rebond": {
+      "title": "Rebond assets",
+      "steps": {
+        "amount": {
+          "title": "Amount",
+          "amountLabel": "Amount to rebond",
+          "availableLabel": "Unbonding",
+          "maxLabel": "Max",
+          "info": "Rebonded assets are immediately added to the bonded amount.",
+          "learnMore": "Learn More"
+        },
+        "connectDevice": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "Confirmation",
+          "success": {
+            "title": "Assets successfully rebonded",
+            "text": "Your account balance will update once the network has confirmed the transaction.",
+            "cta": "View details"
+          },
+          "pending": {
+            "title": "Rebonding your assets..."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    },
+    "unbond": {
+      "title": "Unbond assets",
+      "steps": {
+        "amount": {
+          "title": "Amount",
+          "amountLabel": "Amount to unbond",
+          "availableLabel": "Bonded",
+          "maxLabel": "Max",
+          "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
+          "learnMore": "Learn More"
+        },
+        "connectDevice": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "Confirmation",
+          "success": {
+            "title": "Unbond transaction sent successfully",
+            "text": "Unbonded assets can be withdrawn in 28 days.",
+            "cta": "View details"
+          },
+          "pending": {
+            "title": "Unbonding your assets..."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    },
+    "simpleOperation": {
+      "modes": {
+        "withdrawUnbonded": {
+          "title": "Withdraw Unbonded",
+          "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
+          "info": "You can then withdraw unbonded assets to your available balance."
+        },
+        "chill": {
+          "title": "Clear nominations",
+          "description": "Clears all nominations and stops earning rewards.",
+          "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
+        }
+      },
+      "steps": {
+        "info": {
+          "title": "Info"
+        },
+        "connectDevice": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "label": "Confirmation",
+          "success": {
+            "title": "Transaction sent successfully",
+            "text": "You will see your operation in history soon.",
+            "cta": "View details"
+          },
+          "pending": {
+            "title": "Broadcasting transaction..."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    }
+  },
   "delegation": {
     "title": "Érj el jutalmakat",
     "header": "Delegálás",
@@ -2014,7 +2296,7 @@
     "repairDevice": {
       "title": "Ledger eszközöd javítása",
       "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
-      "desc": "Kérlek, válaszd ki a Ledger eszközöd állapotát.",
+      "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
       "button": "Javítás"
     },
     "exportLogs": {
@@ -2206,24 +2488,24 @@
       },
       "selectUseCase": {
         "greetings": "Hello!",
-        "hasNoRecovery": "First time using your Nano?",
+        "hasNoRecovery": "First time using your {{deviceName}}?",
         "hasRecovery": "Already have a recovery phrase?",
         "separator": "or",
         "options": {
           "1": {
             "heading": "First use",
-            "title": "Set up a new Nano",
+            "title": "Set up a new {{deviceName}}",
             "description": "Let’s start and set up your device!"
           },
           "2": {
             "heading": "Connect device",
-            "title": "Connect your Nano",
+            "title": "Connect your {{deviceName}}",
             "description": "Is your device already set up? Connect it to the app!"
           },
           "3": {
             "heading": "Restore device",
             "title": "Restore your recovery phrase on a new device",
-            "description": "Use an existing recovery phrase to restore your private keys on a new Nano!"
+            "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
           }
         }
       },
@@ -2595,14 +2877,21 @@
       "delegate": "Please confirm on your device to finalize the operation",
       "undelegate": "Please confirm on your device to finalize the operation",
       "redelegate": "Please confirm on your device to finalize the operation",
-      "claimRewardCompound": "Please confirm on your device to finalize the operation"
+      "claimRewardCompound": "Please confirm on your device to finalize the operation",
+      "nominate": "Please confirm on your device to finalize the operation",
+      "chill": "Please confirm on your device to finalize the operation",
+      "bond": "Please confirm on your device to finalize the operation",
+      "unbond": "Please confirm on your device to finalize the operation",
+      "rebond": "Please confirm on your device to finalize the operation",
+      "withdrawUnbonded": "Please confirm on your device to finalize the operation"
     },
     "recipientWording": {
       "send": "fogadó",
       "delegate": "megerősítő",
       "undelegate": "megerősítő",
       "claimReward": "rewards recipient",
-      "optIn": "recipient"
+      "optIn": "recipient",
+      "nominate": "validator"
     },
     "votes": "Szavazatok ({{count}})"
   },
@@ -2612,8 +2901,9 @@
   "Terms": {
     "title": "Felhasználási feltételek",
     "read": "Olvasd el a Felhasználási feltételeket",
-    "switchLabel": "I have read and agree with the <0>Terms of Use and Privacy Policy</0>",
-    "switchLabelLoss": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to Nano.",
+    "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
+    "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
+    "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
     "cta": "Enter Ledger app"
   },
   "families": {
@@ -2909,6 +3199,10 @@
       "title": "Account not scanned by full node",
       "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
     },
+    "StratisDown2021Warning": {
+      "title": "The Stratis blockchain evolved and may no longer work correctly.",
+      "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
+    },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",
       "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
@@ -3151,10 +3445,37 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{unit}} {{minAmountFrom}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be less than {{unit}} {{maxAmountFrom}}"
+      "title": "Amount must be less than {{maxAmountFromFormatted}}"
+    },
+    "PolkadotElectionClosed": {
+      "title": "Validators election must be closed"
+    },
+    "PolkadotNotValidator": {
+      "title": "Some selected addresses are not validators"
+    },
+    "PolkadotLowBondedBalance": {
+      "title": "All bonded assets will be unbonded if < 1 DOT"
+    },
+    "PolkadotNoUnlockedBalance": {
+      "title": "You have no unbonded assets"
+    },
+    "PolkadotNoNominations": {
+      "title": "You have no nominations"
+    },
+    "PolkadotBondAllFundsWarning": {
+      "title": "You will not have available balance for future transactions"
+    },
+    "PolkadotBondMinimumAmount": {
+      "title": "You must bond at least 1 DOT"
+    },
+    "PolkadotMaxUnbonding": {
+      "title": "You have exceeded the unbond limit"
+    },
+    "PolkadotValidatorsRequired": {
+      "title": "You must select at least one validator"
     }
   }
 }

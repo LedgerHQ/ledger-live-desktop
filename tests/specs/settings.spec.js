@@ -32,6 +32,6 @@ describe("Settings", () => {
     await helpTab.click();
     const experimentalTab = await $("#settings-experimental-tab");
     await experimentalTab.click();
-    expect(await modalPage.isDisplayed(true)).toBe(false);
+    expect(await modalPage.waitForClosed()).toBe(true);
   });
 });

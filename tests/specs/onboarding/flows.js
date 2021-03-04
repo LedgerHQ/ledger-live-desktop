@@ -15,7 +15,7 @@ export const selection = device => {
     });
   });
   it("accept terms", async () => {
-    const lossCB = await $("#modal-terms-checkbox-loss");
+    const lossCB = await $("#modal-terms-privacy-policy");
     const termCB = await $("#modal-terms-checkbox");
     const cta = await $("#modal-confirm-button");
     await lossCB.click();
@@ -53,7 +53,7 @@ export const goToConnectAndFinish = cta => {
   it("check nano", async () => {
     const next = await $("#pair-my-nano-cta");
     await next.click();
-    await app.client.pause(200);
+    await app.client.pause(2000);
     await mockDeviceEvent(
       {
         type: "listingApps",
@@ -95,12 +95,16 @@ export const onboard = device => {
       await firstUse.click();
       const right = await $("#pedagogy-right");
       await right.click();
+      await app.client.pause(200);
       await right.click();
+      await app.client.pause(200);
       await right.click();
+      await app.client.pause(200);
       await right.click();
+      await app.client.pause(200);
       const cta = await $("#setup-nano-wallet-cta");
       await cta.click();
-      await app.client.pause(500);
+      await app.client.pause(700);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -126,7 +130,7 @@ export const onboard = device => {
     it("goes to pincode", async () => {
       const next = await $("#device-howto-cta");
       await next.click();
-      await app.client.pause(200);
+      await app.client.pause(700);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
@@ -214,16 +218,22 @@ export const onboard = device => {
     it("finished the quizz", async () => {
       let next = await $("#quizz-start-cta");
       await next.click();
+      await app.client.pause(200);
       next = await $("#answer-1");
       await next.click();
+      await app.client.pause(200);
       next = await $("#quizz-next-cta");
       await next.click();
+      await app.client.pause(200);
       next = await $("#answer-1");
       await next.click();
+      await app.client.pause(200);
       next = await $("#quizz-next-cta");
       await next.click();
+      await app.client.pause(200);
       next = await $("#answer-0");
       await next.click();
+      await app.client.pause(200);
       next = await $("#quizz-next-cta");
       await next.click();
       await app.client.pause(400);

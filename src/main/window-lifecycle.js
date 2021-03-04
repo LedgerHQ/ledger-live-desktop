@@ -105,7 +105,14 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
   loadWindow();
 
   if ((__DEV__ || DEV_TOOLS) && !process.env.DISABLE_DEV_TOOLS) {
-    mainWindow.webContents.openDevTools();
+    mainWindow.webContents.on("did-frame-finish-load", () => {
+      if (mainWindow) {
+        mainWindow.webContents.once("devtools-open", () => {
+          mainWindow && mainWindow.focus();
+        });
+        mainWindow.webContents.openDevTools();
+      }
+    });
   }
 
   mainWindow.on("closed", () => {

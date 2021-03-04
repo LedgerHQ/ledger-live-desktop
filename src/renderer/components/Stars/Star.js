@@ -10,6 +10,9 @@ import starAnim2 from "~/renderer/images/starAnim2.png";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
 import { Transition } from "react-transition-group";
+import { track } from "~/renderer/analytics/segment";
+
+const disableAnimation = process.env.SPECTRON_RUN;
 
 type Props = {
   accountId: string,
@@ -24,22 +27,31 @@ export default function Star({ accountId, parentId, yellow }: Props) {
 
   const toggleStar = useCallback(
     e => {
+      track(isAccountStarred ? "Account Unstar" : "Account Star");
       e.stopPropagation();
       dispatch(toggleStarAction(accountId, parentId));
       refreshAccountsOrdering();
     },
-    [accountId, refreshAccountsOrdering, parentId, dispatch],
+    [isAccountStarred, dispatch, accountId, parentId, refreshAccountsOrdering],
   );
   const MaybeButtonWrapper = yellow ? ButtonWrapper : FloatingWrapper;
 
   return (
     <MaybeButtonWrapper filled={isAccountStarred}>
       <StarWrapper id="account-star-button" onClick={toggleStar}>
-        <Transition in={isAccountStarred} timeout={isAccountStarred ? startBurstTiming : 0}>
-          {className => (
-            <StarIcon yellow={yellow} filled={isAccountStarred} className={className} />
-          )}
-        </Transition>
+        {disableAnimation ? (
+          <StarIcon
+            yellow={yellow}
+            filled={isAccountStarred}
+            className={isAccountStarred ? "entered" : ""}
+          />
+        ) : (
+          <Transition in={isAccountStarred} timeout={isAccountStarred ? startBurstTiming : 0}>
+            {className => (
+              <StarIcon yellow={yellow} filled={isAccountStarred} className={className} />
+            )}
+          </Transition>
+        )}
       </StarWrapper>
     </MaybeButtonWrapper>
   );

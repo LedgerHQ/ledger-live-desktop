@@ -50,6 +50,7 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/360006523674?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=manager_hanging",
   contactSupport:
     "https://support.ledger.com/hc/en-us/requests/new?ticket_form_id=248165?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=support_contact",
+  whatIsARecoveryPhrase: "https://www.ledger.com/academy/crypto/what-is-a-recovery-phrase",
   feesMoreInfo:
     "https://support.ledger.com/hc/en-us/articles/360006535873?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=fees",
   recipientAddressInfo:
@@ -94,10 +95,14 @@ export const urls = {
     "https://www.ledger.com/staking-tron?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=tron",
   stakingCosmos:
     "https://www.ledger.com/staking-cosmos?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=cosmos",
+  stakingPolkadot:
+    "https://support.ledger.com/hc/en-us/articles/360018131260?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=polkadot",
   cosmosStakingRewards:
     "https://support.ledger.com/hc/en-us/articles/360014339340-Earn-Cosmos-staking-rewards,?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=cosmos",
   algorandStakingRewards:
     "https://support.ledger.com/hc/en-us/articles/360015897740?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=algorand",
+  polkadotFeesInfo:
+    "https://support.ledger.com/hc/en-us/articles/360016289919?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=polkadot",
   xpubLearnMore:
     "https://support.ledger.com/hc/en-us/articles/360011069619?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=edit_account",
 
@@ -111,6 +116,8 @@ export const urls = {
       "https://www.ledger.com/academy?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
     ongoingScams:
       "https://www.ledger.com/ongoing-phishing-campaigns?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
+    valentine:
+      "https://shop.ledger.com/pages/valentines-day-special-offers?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
   },
   helpModal: {
     gettingStarted:
@@ -142,6 +149,7 @@ export const urls = {
       "https://support.ledger.com/hc/en-us/articles/360025321733?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error_wrongdevice",
     SyncError:
       "https://support.ledger.com/hc/en-us/articles/360012109220?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error_syncerror",
+    StratisDown2021Warning: "https://support.ledger.com/hc/en-us/articles/115005175329",
   },
   compound:
     "https://support.ledger.com/hc/en-us/articles/360017215099?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=compound",

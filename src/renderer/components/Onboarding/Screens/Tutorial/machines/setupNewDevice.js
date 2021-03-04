@@ -1,5 +1,6 @@
 import { assign, Machine } from "xstate";
 import { setStepperStatus } from "./helpers";
+import { track } from "~/renderer/analytics/segment";
 
 export const setupNewDevice = Machine({
   id: "setupNewDevice",
@@ -52,9 +53,10 @@ export const setupNewDevice = Machine({
       on: {
         NEXT: {
           target: "deviceHowTo",
+          actions: () => track("Onboarding - Get started step 1"),
         },
         PREV: {
-          actions: ["topLevelPrev"],
+          actions: "topLevelPrev",
         },
       },
     },
@@ -69,6 +71,7 @@ export const setupNewDevice = Machine({
       on: {
         NEXT: {
           target: "pinCode",
+          actions: () => track("Onboarding - Get started step 2"),
         },
         PREV: {
           target: "howToGetStarted",
@@ -95,6 +98,7 @@ export const setupNewDevice = Machine({
           }),
         },
         NEXT: {
+          actions: () => track("Onboarding - Pin code step 1"),
           target: "pinCodeHowTo",
           cond: context => context.userChosePincodeHimself,
         },
@@ -102,11 +106,14 @@ export const setupNewDevice = Machine({
           target: "deviceHowTo",
         },
         HELP: {
-          actions: assign({
-            help: {
-              pinCode: true,
-            },
-          }),
+          actions: [
+            () => track("Onboarding - Pin code step 1 - HELP CLICK"),
+            assign({
+              help: {
+                pinCode: true,
+              },
+            }),
+          ],
         },
       },
     },
@@ -121,16 +128,20 @@ export const setupNewDevice = Machine({
       on: {
         NEXT: {
           target: "newRecoveryPhrase",
+          actions: () => track("Onboarding - Pin code step 2"),
         },
         PREV: {
           target: "pinCode",
         },
         HELP: {
-          actions: assign({
-            help: {
-              pinCode: true,
-            },
-          }),
+          actions: [
+            () => track("Onboarding - Pin code step 2 - HELP CLICK"),
+            assign({
+              help: {
+                pinCode: true,
+              },
+            }),
+          ],
         },
       },
     },
@@ -144,11 +155,14 @@ export const setupNewDevice = Machine({
       }),
       on: {
         HELP: {
-          actions: assign({
-            help: {
-              recoveryPhrase: true,
-            },
-          }),
+          actions: [
+            () => track("Onboarding - Recovery step 1 - HELP CLICK"),
+            assign({
+              help: {
+                recoveryPhrase: true,
+              },
+            }),
+          ],
         },
         RECOVERY_TERMS_CHANGED: {
           actions: assign({
@@ -157,6 +171,7 @@ export const setupNewDevice = Machine({
         },
         NEXT: {
           target: "useRecoverySheet",
+          actions: () => track("Onboarding - Recovery step 1"),
           cond: context => context.userUnderstandConsequences,
         },
         PREV: {
@@ -174,14 +189,18 @@ export const setupNewDevice = Machine({
       }),
       on: {
         HELP: {
-          actions: assign({
-            help: {
-              recoveryPhrase: true,
-            },
-          }),
+          actions: [
+            () => track("Onboarding - Recovery step 2 - HELP CLICK"),
+            assign({
+              help: {
+                recoveryPhrase: true,
+              },
+            }),
+          ],
         },
         NEXT: {
           target: "recoveryHowTo3",
+          actions: () => track("Onboarding - Recovery step 2"),
         },
         PREV: {
           target: "newRecoveryPhrase",
@@ -198,14 +217,18 @@ export const setupNewDevice = Machine({
       }),
       on: {
         HELP: {
-          actions: assign({
-            help: {
-              recoveryPhrase: true,
-            },
-          }),
+          actions: [
+            () => track("Onboarding - Recovery step 3 - HELP CLICK"),
+            assign({
+              help: {
+                recoveryPhrase: true,
+              },
+            }),
+          ],
         },
         NEXT: {
           target: "hideRecoveryPhrase",
+          actions: () => track("Onboarding - Recovery step 3"),
         },
         PREV: {
           target: "useRecoverySheet",
@@ -225,16 +248,22 @@ export const setupNewDevice = Machine({
       }),
       on: {
         HELP: {
-          actions: assign({
-            help: {
-              hideRecoveryPhrase: true,
-            },
-          }),
+          actions: [
+            () => track("Onboarding - Recovery step 4 - HELP CLICK"),
+            assign({
+              help: {
+                hideRecoveryPhrase: true,
+              },
+            }),
+          ],
         },
         NEXT: {
-          actions: assign({
-            quizzOpen: true,
-          }),
+          actions: [
+            assign({
+              quizzOpen: true,
+            }),
+            () => track("Onboarding - Recovery step 4"),
+          ],
         },
         PREV: {
           target: "recoveryHowTo3",
@@ -258,6 +287,7 @@ export const setupNewDevice = Machine({
       on: {
         NEXT: {
           target: "pairMyNano",
+          actions: () => track("Onboarding - Pair start"),
         },
         PREV: {
           target: "hideRecoveryPhrase",
@@ -275,6 +305,7 @@ export const setupNewDevice = Machine({
       on: {
         NEXT: {
           target: "pairMyNano",
+          actions: () => track("Onboarding - Pair start"),
         },
         PREV: {
           target: "hideRecoveryPhrase",
@@ -292,6 +323,7 @@ export const setupNewDevice = Machine({
       on: {
         NEXT: {
           target: "genuineCheck",
+          actions: () => track("Onboarding - Genuine Check"),
         },
         PREV: {
           target: "hideRecoveryPhrase",

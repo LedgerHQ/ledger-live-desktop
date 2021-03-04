@@ -24,6 +24,7 @@ import { pedagogyMachine } from "~/renderer/components/Onboarding/Pedagogy/state
 
 import styled from "styled-components";
 import { Pedagogy } from "~/renderer/components/Onboarding/Pedagogy";
+import { preloadAssets } from "~/renderer/components/Onboarding/preloadAssets";
 
 function LedgerLogo() {
   return (
@@ -63,9 +64,9 @@ const onboardingMachine = Machine({
   initial: "welcome",
   states: {
     welcome: {
-      exit: () => track("Onboarding - Start"),
       on: {
         NEXT: {
+          actions: () => track("Onboarding - Start"),
           target: "selectDevice",
         },
         PREV: { target: "onboardingComplete" },
@@ -76,15 +77,17 @@ const onboardingMachine = Machine({
         DEVICE_SELECTED: {
           target: "selectUseCase",
           cond: (_, { deviceId }) => !!deviceId,
-          actions: assign((_, { deviceId }) => ({
-            deviceId,
-          })),
+          actions: [
+            assign((_, { deviceId }) => ({
+              deviceId,
+            })),
+            (_, { deviceId }) => track("Onboarding Device - Selection", { deviceId }),
+          ],
         },
         PREV: {
           target: "welcome",
         },
       },
-      exit: ({ deviceId }) => track("Onboarding Device - Selection", { deviceId }),
     },
     selectUseCase: {
       invoke: {
@@ -93,9 +96,12 @@ const onboardingMachine = Machine({
       },
       on: {
         OPEN_PEDAGOGY_MODAL: {
-          actions: assign({
-            pedagogy: true,
-          }),
+          actions: [
+            assign({
+              pedagogy: true,
+            }),
+            () => track("Onboarding - Setup new"),
+          ],
         },
         CLOSE_PEDAGOGY_MODAL: {
           actions: assign({
@@ -104,6 +110,7 @@ const onboardingMachine = Machine({
         },
         USE_RECOVERY_PHRASE: {
           target: "useRecoveryPhrase",
+          actions: () => track("Onboarding - Restore"),
         },
         SETUP_NEW_DEVICE: {
           target: "setupNewDevice",
@@ -113,6 +120,7 @@ const onboardingMachine = Machine({
         },
         CONNECT_SETUP_DEVICE: {
           target: "connectSetupDevice",
+          actions: () => track("Onboarding - Connect"),
         },
         PREV: {
           target: "selectDevice",
@@ -120,40 +128,40 @@ const onboardingMachine = Machine({
       },
     },
     setupNewDevice: {
-      entry: () => track("Onboarding - Setup new"),
       on: {
         PREV: {
           target: "selectUseCase",
         },
         NEXT: {
           target: "onboardingComplete",
+          actions: () => track("Onboarding - End"),
         },
       },
     },
     connectSetupDevice: {
-      entry: () => track("Onboarding - Connect"),
       on: {
         PREV: {
           target: "selectUseCase",
         },
         NEXT: {
           target: "onboardingComplete",
+          actions: () => track("Onboarding - End"),
         },
       },
     },
     useRecoveryPhrase: {
-      entry: () => track("Onboarding - Restore"),
       on: {
         PREV: {
           target: "selectUseCase",
         },
         NEXT: {
           target: "onboardingComplete",
+          actions: () => track("Onboarding - End"),
         },
       },
     },
     onboardingComplete: {
-      entry: [() => track("Onboarding - End"), "onboardingCompleted"],
+      entry: "onboardingCompleted",
       type: "final",
     },
   },
@@ -206,6 +214,10 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
 
     return subscription.unsubscribe;
   }, [service]);
+
+  useEffect(() => {
+    preloadAssets();
+  }, []);
 
   const CurrentScreen = screens[state.value];
 

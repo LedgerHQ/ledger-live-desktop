@@ -11,6 +11,7 @@ export default styled(Box).attrs(p => ({
   className: "fake-link",
 }))`
   align-items: center;
+  display: inline-flex;
   text-decoration: ${p => (p.underline ? "underline" : "none")};
   &:hover {
     text-decoration: underline;

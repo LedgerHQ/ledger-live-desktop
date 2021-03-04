@@ -62,7 +62,7 @@ const Tag = styled(Link)`
   padding: 2px ${p => p.theme.space[3] - 1}px;
   min-height: 32px;
   border-radius: 4px;
-  margin: ${p => p.theme.space[3]}px;
+  margin: ${p => p.theme.space[2]}px ${p => p.theme.space[3]}px;
   color: ${p => p.theme.colors.palette.text.shade100};
   background-color: ${p => p.theme.colors.palette.background.default};
   text-decoration: none;
