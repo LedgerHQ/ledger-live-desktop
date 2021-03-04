@@ -122,7 +122,7 @@ jobs:
         run: echo "$BODY"
       - name: post comment
         if: github.event_name == 'pull_request' && job.status != 'cancelled'
-        id: comment
+        id: postcomment
         uses: ./.github/actions/post-comment
         with:
           comment: ${{ steps.comment.outputs.body }}
