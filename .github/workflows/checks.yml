@@ -74,7 +74,7 @@ jobs:
       - name: run coverage generation	
         if: always() && github.event_name == 'push' && job.status != 'cancelled'
         run: yarn spectron-coverage	
-        env:	
+        env:
           CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
       - name: upload diffs to imgur
         if: always() && job.status != 'cancelled'

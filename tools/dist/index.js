@@ -81,7 +81,13 @@ const buildTasks = args => [
         commands.push("electron-builder-nightly.yml");
       }
 
-      await exec("yarn", commands);
+      await exec("yarn", commands, {
+        env: args.publish
+          ? {
+              SENTRY_URL: "https://db8f5b9b021048d4a401f045371701cb@sentry.io/274561",
+            }
+          : {},
+      });
     },
   },
 ];
