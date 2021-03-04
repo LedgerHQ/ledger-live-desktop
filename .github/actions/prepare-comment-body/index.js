@@ -60,7 +60,7 @@ ${testoutput}
 ${str}
 
 </p>
-</details>  
+</details>
 `;
 
   if (!lintFailed && !testsFailed && !imgDiffFailed && imgChanged.length) {
@@ -82,7 +82,7 @@ ${img}
 ${diffStr}
 
 </p>
-</details>  
+</details>
 `;
   }
 

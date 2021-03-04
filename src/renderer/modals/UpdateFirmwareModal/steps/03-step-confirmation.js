@@ -28,7 +28,7 @@ const Title = styled(Box).attrs(() => ({
   font-weight: 500;
 `;
 
-const StepConfirmation = ({ error }: StepProps) => {
+const StepConfirmation = ({ error, appsToBeReinstalled }: StepProps) => {
   const { t } = useTranslation();
 
   useEffect(() => () => log("firmware-record-end"), []);
@@ -46,7 +46,9 @@ const StepConfirmation = ({ error }: StepProps) => {
       <Title>{t("manager.modal.successTitle")}</Title>
       <Box mt={2} mb={5}>
         <Text ff="Inter|Regular" fontSize={4} color="palette.text.shade80">
-          {t("manager.modal.successText")}
+          {appsToBeReinstalled
+            ? t("manager.modal.successTextApps")
+            : t("manager.modal.successTextNoApps")}
         </Text>
       </Box>
       <Box mx={7} />
@@ -56,7 +58,7 @@ const StepConfirmation = ({ error }: StepProps) => {
 
 export const StepConfirmFooter = ({ onCloseModal, error, appsToBeReinstalled }: StepProps) => {
   const { t } = useTranslation();
-  if (error || !appsToBeReinstalled) {
+  if (error) {
     return (
       <Button id="firmware-update-completed-close-button" primary onClick={() => onCloseModal()}>
         {t("common.close")}
@@ -73,9 +75,11 @@ export const StepConfirmFooter = ({ onCloseModal, error, appsToBeReinstalled }: 
       <Button
         id="firmware-update-completed-reinstall-button"
         primary
-        onClick={() => onCloseModal(true)}
+        onClick={() => onCloseModal(appsToBeReinstalled)}
       >
-        Re-install the apps
+        {appsToBeReinstalled
+          ? t("manager.modal.sucessCTAApps")
+          : t("manager.modal.SuccessCTANoApps")}
       </Button>
     </>
   );

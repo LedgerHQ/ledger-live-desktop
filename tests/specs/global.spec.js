@@ -1,16 +1,15 @@
-import initialize, { app, modalPage } from "../common.js";
+import initialize, { app, portfolioPage, modalPage } from "../common.js";
 
 describe("Global", () => {
   initialize("global", {
     userData: "1AccountBTC1AccountETHStarred",
   });
 
-  const $ = selector => app.client.$(selector);
-
   it("can open send modal", async () => {
-    const sendButton = await $("#drawer-send-button");
+    await portfolioPage.goToPortfolio();
+    const sendButton = await portfolioPage.drawerSendButton();
     await sendButton.click();
-    await modalPage.isDisplayed();
+    await modalPage.waitForDisplayed();
     expect(await app.client.screenshot(2000)).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-send-modal",
     });
@@ -18,9 +17,10 @@ describe("Global", () => {
 
   it("can open receive modal", async () => {
     await modalPage.close();
-    const sendButton = await $("#drawer-receive-button");
-    await sendButton.click();
-    await modalPage.isDisplayed();
+    await portfolioPage.goToPortfolio();
+    const receiveButton = await portfolioPage.drawerReceiveButton();
+    await receiveButton.click();
+    await modalPage.waitForDisplayed();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-receive-modal",
     });
@@ -28,44 +28,44 @@ describe("Global", () => {
 
   it("shows experimental badge, and can access the page", async () => {
     await modalPage.close();
-    const experimentalButton = await $("#drawer-experimental-button");
+    await portfolioPage.goToPortfolio();
+    const experimentalButton = await portfolioPage.drawerExperimentalButton();
     await experimentalButton.click();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-experimental-features",
     });
-    const elem = await $("#drawer-dashboard-button");
-    await elem.click();
   });
 
   it("shows a starred account, and can access the page", async () => {
-    const starredAccountContainer = await $("#sidebar-stars-container");
+    await portfolioPage.goToPortfolio();
+    const starredAccountContainer = await portfolioPage.bookmarkedAccountsList();
     starredAccountContainer.waitForDisplayed();
-    const starredAccount = await $("#sidebar-stars-container .bookmarked-account-item:first-child");
-    starredAccount.click();
+
+    const starredAccounts = await portfolioPage.getBookmarkedAccounts();
+    const firstStarredAccount = starredAccounts[0];
+    firstStarredAccount.click();
     await app.client.pause(1000);
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-starred-account",
     });
-    const elem = await $("#drawer-dashboard-button");
-    await elem.click();
   });
 
   it("can toggle discreet mode", async () => {
-    const discreetModeButton = await $("#topbar-discreet-button");
-    discreetModeButton.click();
+    await portfolioPage.goToPortfolio();
+    const topbarDiscreetButton = await portfolioPage.topbarDiscreetButton();
+    await topbarDiscreetButton.click();
     await app.client.pause(1000);
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-discreet-mode",
     });
-    const elem = await $("#drawer-dashboard-button");
-    await elem.click();
   });
 
   it("can collapse the main sidebar", async () => {
-    const collapseSidebarButton = await $("#drawer-collapse-button");
-    collapseSidebarButton.click();
+    await portfolioPage.goToPortfolio();
+    const drawerCollapseButton = await portfolioPage.drawerCollapseButton();
+    await drawerCollapseButton.click();
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-collapse-sidebar",
@@ -73,19 +73,30 @@ describe("Global", () => {
   });
 
   it("shows the carousel and can dismiss it", async () => {
-    const carousel = await $("#carousel");
+    await portfolioPage.goToPortfolio();
+    const carousel = await portfolioPage.carousel();
     await carousel.waitForDisplayed();
 
-    const carouselDismissButton = await $("#carousel-dismiss");
+    const carouselDismissButton = await portfolioPage.carouselDismissButton();
     await carouselDismissButton.click();
     await app.client.pause(400);
 
-    const carouselDismissButtonConfirm = await $("#carousel-dismiss-confirm")
-    await carouselDismissButtonConfirm.click();
+    const carouselDismissConfirmButton = await portfolioPage.carouselDismissConfirmButton();
+    await carouselDismissConfirmButton.click();
     await app.client.pause(400);
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "global-dismiss-carousel",
+    });
+  });
+
+  it("can display the help modal", async () => {
+    const helpButton = await portfolioPage.helpButton;
+    await helpButton.click();
+    await app.client.pause(400);
+
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "global-help-drawer",
     });
   });
 });
