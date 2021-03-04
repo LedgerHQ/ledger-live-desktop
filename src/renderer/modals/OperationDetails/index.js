@@ -23,8 +23,8 @@ import {
 import {
   findOperationInAccount,
   getOperationAmountNumber,
-  getOperationConfirmationNumber,
   getOperationConfirmationDisplayableNumber,
+  isConfirmedOperation,
 } from "@ledgerhq/live-common/lib/operation";
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 
@@ -143,9 +143,8 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
     marketIndicator,
     isNegative,
   });
-  const confirmations = getOperationConfirmationNumber(operation, mainAccount);
   const confirmationsString = getOperationConfirmationDisplayableNumber(operation, mainAccount);
-  const isConfirmed = confirmations >= confirmationsNb;
+  const isConfirmed = isConfirmedOperation(operation, mainAccount, confirmationsNb);
 
   const specific = byFamiliesOperationDetails[mainAccount.currency.family];
 
@@ -483,12 +482,15 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
               </GradientHover>
             </OpDetailsData>
           </Box>
-          <B />
-          <Box>
-            <OpDetailsTitle>{t("operationDetails.from")}</OpDetailsTitle>
-            <DataList lines={uniqueSenders} t={t} />
-          </Box>
-
+          {uniqueSenders.length ? (
+            <>
+              <B />
+              <Box>
+                <OpDetailsTitle>{t("operationDetails.from")}</OpDetailsTitle>
+                <DataList lines={uniqueSenders} t={t} />
+              </Box>
+            </>
+          ) : null}
           {recipients.length ? (
             <>
               <B />

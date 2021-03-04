@@ -67,7 +67,7 @@ const ChoiceLocal = ({ selected, choice, onSelect }: ChoiceProps) => (
 const Choice = React.memo(ChoiceLocal);
 
 const DisclaimerStep = ({ desc }: { desc?: React$Node }) => (
-  <Box>
+  <Box px={2}>
     {desc ? (
       <Box ff="Inter" color="palette.text.shade80" fontSize={4} textAlign="center" mb={2}>
         {desc}

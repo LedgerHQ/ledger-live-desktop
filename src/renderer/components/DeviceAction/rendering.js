@@ -14,7 +14,7 @@ import type { ExchangeRate, Exchange } from "@ledgerhq/live-common/lib/exchange/
 import { WrongDeviceForAccount } from "@ledgerhq/errors";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { closeAllModal } from "~/renderer/actions/modals";
 import Animation from "~/renderer/animations";
 import Button from "~/renderer/components/Button";
@@ -379,6 +379,26 @@ export const renderConnectYourDevice = ({
   </Wrapper>
 );
 
+export const renderFirmwareUpdating = ({
+  modelId,
+  type,
+}: {
+  modelId: DeviceModelId,
+  type: "light" | "dark",
+}) => (
+  <Wrapper>
+    <Header />
+    <AnimationWrapper modelId={modelId}>
+      <Animation animation={getDeviceAnimation(modelId, type, "firmwareUpdating")} />
+    </AnimationWrapper>
+    <Footer>
+      <Title>
+        <Trans i18nKey={"DeviceAction.unlockDeviceAfterFirmwareUpdate"} />
+      </Title>
+    </Footer>
+  </Wrapper>
+);
+
 export const renderSwapDeviceConfirmation = ({
   modelId,
   type,
@@ -423,7 +443,7 @@ export const renderSwapDeviceConfirmation = ({
         ),
         fees: (
           <CurrencyUnitValue
-            unit={getAccountUnit(exchange.fromAccount)}
+            unit={getAccountUnit(getMainAccount(exchange.fromAccount, exchange.fromParentAccount))}
             value={status.estimatedFees}
             disableRounding
             showCode

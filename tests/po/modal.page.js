@@ -1,58 +1,62 @@
 import Page from "./page";
 
 export default class ModalPage extends Page {
-  get container() {
-    return this.app.client.$("#modal-container");
+  async container() {
+    return this.$("#modal-container");
   }
 
-  get content() {
-    return this.app.client.$("#modal-content");
+  async content() {
+    return this.$("#modal-content");
   }
 
-  get title() {
-    return this.app.client.$("#modal-title");
+  async title() {
+    return this.$("#modal-title");
   }
 
-  get termsCheckbox() {
-    return this.app.client.$("#modal-terms-checkbox");
+  async termsCheckbox() {
+    return this.$("#modal-terms-checkbox");
   }
 
-  get confirmButton() {
-    return this.app.client.$("#modal-confirm-button");
+  async confirmButton() {
+    return this.$("#modal-confirm-button");
   }
 
-  get continueButton() {
-    return this.app.client.$("#modal-continue-button");
+  async continueButton() {
+    return this.$("#modal-continue-button");
   }
 
-  get saveButton() {
-    return this.app.client.$("#modal-save-button");
+  async saveButton() {
+    return this.$("#modal-save-button");
   }
 
-  get cancelButton() {
-    return this.app.client.$("#modal-cancel-button");
+  async cancelButton() {
+    return this.$("#modal-cancel-button");
   }
 
-  get closeButton() {
-    return this.app.client.$("#modal-close-button");
+  async closeButton() {
+    return this.$("#modal-close-button");
   }
 
-  async isDisplayed(reverse = false) {
-    const elem = await this.app.client.$("#modal-container");
-    const visible = reverse
-      ? await !elem.waitForDisplayed({ timeout: 3000, reverse })
-      : await elem.waitForDisplayed();
+  async waitForDisplayed() {
+    const elem = await this.container();
+    const visible = await elem.waitForDisplayed();
 
     return visible;
   }
 
+  async waitForClosed() {
+    const elem = await this.container();
+    const closed = elem.waitForDisplayed({ timeout: 3000, reverse: true });
+    return closed;
+  }
+
   async close() {
-    const elem = await this.closeButton;
+    const elem = await this.closeButton();
     return elem.click();
   }
 
   async confirm() {
-    const elem = await this.confirmButton;
+    const elem = await this.confirmButton();
     return elem.click();
   }
 }

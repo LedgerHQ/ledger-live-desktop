@@ -137,6 +137,7 @@ export default function AccountContextMenu({
       items.push({
         label: "accounts.contextMenu.hideToken",
         Icon: IconBan,
+        id: "token-menu-hide",
         callback: () => dispatch(openModal("MODAL_BLACKLIST_TOKEN", { token: account.token })),
       });
     }

@@ -102,7 +102,14 @@ const Form = ({
   const { exchange, exchangeRate } = swap;
   const [isTimerVisible, setTimerVisibility] = useState(true);
   const { fromAccount, fromParentAccount, toAccount, toParentAccount } = exchange;
-  const { status, setTransaction, setAccount, transaction, bridgePending } = useBridgeTransaction();
+  const {
+    status,
+    setTransaction,
+    setAccount,
+    transaction,
+    bridgePending,
+    account,
+  } = useBridgeTransaction();
 
   const ratesExpiration = useMemo(
     () => (ratesTimestamp ? new Date(ratesTimestamp.getTime() + ratesExpirationThreshold) : null),
@@ -127,7 +134,7 @@ const Form = ({
 
   useEffect(() => {
     if (!fromAccount || !transaction) return;
-    if (transaction.amount && !transaction.amount.eq(fromAmount)) {
+    if (transaction.amount && !transaction.amount.eq(fromAmount) && account === fromAccount) {
       const bridge = getAccountBridge(fromAccount, fromParentAccount);
       const mainAccount = getMainAccount(fromAccount, fromParentAccount);
       const currency = getAccountCurrency(mainAccount);
@@ -140,7 +147,15 @@ const Form = ({
         }),
       );
     }
-  }, [fromAccount, fromAmount, fromParentAccount, setAccount, setTransaction, transaction]);
+  }, [
+    fromAccount,
+    fromAmount,
+    fromParentAccount,
+    setAccount,
+    setTransaction,
+    transaction,
+    account,
+  ]);
 
   const _canRequestRates = useMemo(() => canRequestRates(state), [state]);
 

@@ -50,7 +50,7 @@ export function useDeepLinkHandler() {
     (event: any, deeplink: string) => {
       const { pathname, searchParams } = new URL(deeplink);
       const query = Object.fromEntries(searchParams);
-      const url = pathname.replace(/^\/+/, "");
+      const url = pathname.replace(/(^\/+|\/+$)/g, "");
 
       switch (url) {
         case "accounts":
