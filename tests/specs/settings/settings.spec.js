@@ -1,4 +1,4 @@
-import initialize, { app, settingsPage } from "../common.js";
+import initialize, { app, settingsPage } from "../../common.js";
 
 describe("Settings", () => {
   initialize("settings", {
