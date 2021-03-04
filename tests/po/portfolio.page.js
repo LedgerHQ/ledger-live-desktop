@@ -5,6 +5,10 @@ export default class PortfolioPage extends Page {
     return this.$("#accounts-empty-state-add-account-button");
   }
 
+  async portfolioEmptyStateTitle() {
+    return this.$("#portfolio-empty-state-title");
+  }
+
   async carousel() {
     return this.$("#carousel");
   }
