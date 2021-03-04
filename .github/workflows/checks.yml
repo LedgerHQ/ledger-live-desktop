@@ -10,22 +10,13 @@ on:
       - master
 
 jobs:
-  cancel-previous:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.6.0
         with:
           access_token: ${{ github.token }}
-  test:
-    runs-on: ubuntu-latest
-    needs: cancel-previous
-    outputs:
-      comment: ${{ steps.comment.outputs.body }}
-      commentSlack: ${{ steps.comment.outputs.bodySlack }}
-      commentSlackAuthor: ${{ steps.comment.outputs.bodySlackAuthor }}
-      slackAuthor: ${{ steps.comment.outputs.slackAuthor }}
-    steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
@@ -129,29 +120,18 @@ jobs:
         env:
           BODY: ${{ steps.comment.outputs.bodyclean }}
         run: echo "$BODY"
-  post-comment:
-    runs-on: ubuntu-latest
-    needs: test
-    if: always() && needs.test.result != 'cancelled'
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          repository: ${{github.event.pull_request.head.repo.full_name}}
-      - name: deps
-        run: cd .github/actions/post-comment && yarn
       - name: post comment
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && job.status != 'cancelled'
         id: comment
         uses: ./.github/actions/post-comment
         with:
-          comment: ${{ needs.test.outputs.comment }}
+          comment: ${{ steps.comment.outputs.body }}
           prNumber: ${{github.event.pull_request.number}}
       - name: Send message to Slack channel
         uses: archive/github-actions-slack@v1.0.3
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && job.status != 'cancelled'
         id: notify
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
           slack-channel: live-ui-tests
-          slack-text: ${{ needs.test.outputs.commentSlack }}
+          slack-text: ${{ steps.comment.outputs.bodySlack }}
