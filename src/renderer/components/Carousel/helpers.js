@@ -51,50 +51,42 @@ const SLIDES = [
     imgs: [
       {
         source: require("./banners/LedgerAcademy/images/bg.png").default,
-        transform: [-100, 100, 20, 80],
+        transform: [0, 60, 5, 60],
         size: {
-          width: 400,
-          height: 200,
+          width: 160,
+          height: 160,
         },
       },
       {
         source: require("./banners/LedgerAcademy/images/card.png").default,
-        transform: [80, 25, 80, 25],
+        transform: [65, 50, 20, 50],
         size: {
-          width: 139,
+          width: 109,
           height: 109,
         },
       },
       {
         source: require("./banners/LedgerAcademy/images/coin.png").default,
-        transform: [50, 40, 140, 40],
+        transform: [-15, 20, 25, 20],
         size: {
           width: 28,
-          height: 62,
-        },
-      },
-      {
-        source: require("./banners/LedgerAcademy/images/coin2.png").default,
-        transform: [0, 35, 120, 35],
-        size: {
-          width: 26,
-          height: 32,
+          height: 67,
         },
       },
       {
         source: require("./banners/LedgerAcademy/images/hat.png").default,
-        transform: [5, 8, 40, 8],
+        transform: [10, 30, 0, 30],
         size: {
-          width: 150,
+          width: 110,
           height: 112,
         },
       },
       {
         source: require("./banners/LedgerAcademy/images/nano.png").default,
-        transform: [140, 15, -25, 15],
+        transform: [75, 25, 8, 25],
         size: {
-          width: 27,
-          height: 150,
+          width: 50,
+          height: 27,
         },
       },
     ],
@@ -107,42 +99,42 @@ const SLIDES = [
     imgs: [
       {
         source: require("./banners/BuyCrypto/images/bg.png").default,
-        transform: [-40, 100, 10, 80],
+        transform: [-10, 60, -8, 60],
         size: {
-          width: 293,
-          height: 224,
+          width: 180,
+          height: 180,
         },
       },
       {
         source: require("./banners/BuyCrypto/images/cart.png").default,
-        transform: [40, 50, 15, 50],
+        transform: [20, 40, 7, 40],
         size: {
-          width: 129,
-          height: 171,
+          width: 131,
+          height: 130,
         },
       },
       {
         source: require("./banners/BuyCrypto/images/coin.png").default,
-        transform: [136, 25, 76, 25],
+        transform: [53, 30, 53, 30],
         size: {
-          width: 31,
-          height: 26,
+          width: 151,
+          height: 21,
         },
       },
       {
         source: require("./banners/BuyCrypto/images/coin2.png").default,
-        transform: [150, 35, 42, 35],
+        transform: [58, 25, 20, 25],
         size: {
-          width: 18,
-          height: 20,
+          width: 151,
+          height: 17,
         },
       },
       {
         source: require("./banners/BuyCrypto/images/coin3.png").default,
-        transform: [105, 15, 50, 15],
+        transform: [29, 20, 33, 20],
         size: {
-          width: 37,
-          height: 30,
+          width: 151,
+          height: 24,
         },
       },
     ],
@@ -155,58 +147,58 @@ const SLIDES = [
     imgs: [
       {
         source: require("./banners/Swap/images/bg.png").default,
-        transform: [5, 100, 65, 80],
+        transform: [0, 60, 5, 60],
         size: {
-          width: 210,
-          height: 174,
+          width: 180,
+          height: 180,
         },
       },
       {
         source: require("./banners/Swap/images/coin1.png").default,
-        transform: [18, 30, 80, 30],
+        transform: [37, 25, 24, 25],
         size: {
-          width: 69,
-          height: 78,
+          width: 48,
+          height: 55,
         },
       },
       {
         source: require("./banners/Swap/images/coin2.png").default,
-        transform: [162, 30, 85, 30],
+        transform: [115, 25, 28, 25],
         size: {
-          width: 72,
-          height: 76,
+          width: 50,
+          height: 53,
         },
       },
       {
         source: require("./banners/Swap/images/loop.png").default,
-        transform: [-10, 40, 45, 40],
+        transform: [20, 35, 5, 35],
         size: {
-          width: 262,
-          height: 139,
+          width: 160,
+          height: 99,
         },
       },
       {
         source: require("./banners/Swap/images/smallcoin1.png").default,
-        transform: [157, 20, 100, 20],
+        transform: [115, 15, 35, 15],
         size: {
-          width: 26,
-          height: 21,
+          width: 18,
+          height: 14,
         },
       },
       {
         source: require("./banners/Swap/images/smallcoin2.png").default,
-        transform: [110, 20, 140, 20],
+        transform: [88, 20, 65, 20],
         size: {
-          width: 7,
-          height: 8,
+          width: 4,
+          height: 5,
         },
       },
       {
         source: require("./banners/Swap/images/smallcoin3.png").default,
-        transform: [90, 25, 85, 25],
+        transform: [78, 17, 32, 17],
         size: {
-          width: 15,
-          height: 20,
+          width: 10,
+          height: 13,
         },
       },
     ],
@@ -219,26 +211,26 @@ const SLIDES = [
     imgs: [
       {
         source: require("./banners/BackupPack/images/bg.png").default,
-        transform: [0, 100, 0, 80],
+        transform: [20, 60, 5, 60],
         size: {
-          width: 239,
-          height: 276,
+          width: 150,
+          height: 150,
         },
       },
       {
         source: require("./banners/BackupPack/images/nanos.png").default,
-        transform: [80, 60, 30, 20],
+        transform: [-35, -25, 5, -25],
         size: {
-          width: 144,
-          height: 169,
+          width: 162,
+          height: 167,
         },
       },
       {
         source: require("./banners/BackupPack/images/nanox.png").default,
-        transform: [-10, -60, 35, -20],
+        transform: [55, 25, 5, 25],
         size: {
-          width: 141,
-          height: 168,
+          width: 151,
+          height: 163,
         },
       },
     ],
