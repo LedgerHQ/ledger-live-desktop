@@ -8,9 +8,9 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import {
   useBalanceHistoryWithCountervalue as useBalanceHistoryWithCountervalueCommon,
-  usePortfolio as usePortfolioCommon,
   useCurrencyPortfolio as useCurrencyPortfolioCommon,
 } from "@ledgerhq/live-common/lib/countervalues/react";
+import { usePortfolio as usePortfolioRaw } from "@ledgerhq/live-common/lib/portfolio-new/react";
 import { selectedTimeRangeSelector } from "~/renderer/reducers/settings";
 import { counterValueCurrencySelector } from "./../reducers/settings";
 import { accountsSelector } from "./../reducers/accounts";
@@ -32,7 +32,7 @@ export function usePortfolio() {
   const to = useSelector(counterValueCurrencySelector);
   const accounts = useSelector(accountsSelector);
   const range = useSelector(selectedTimeRangeSelector);
-  return usePortfolioCommon({ accounts, range, to });
+  return usePortfolioRaw({ accounts, range, to });
 }
 
 export function useCurrencyPortfolio({

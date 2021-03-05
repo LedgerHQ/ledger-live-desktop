@@ -61,6 +61,7 @@ export const timeRangeDaysByKey = {
   week: 7,
   month: 30,
   year: 365,
+  all: null,
 };
 
 export type TimeRange = $Keys<typeof timeRangeDaysByKey>;

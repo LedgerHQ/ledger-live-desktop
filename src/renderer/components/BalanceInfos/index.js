@@ -59,7 +59,7 @@ export function BalanceDiff({
           <FormattedVal
             isPercent
             animateTicker
-            val={valueChange.percentage.times(100).integerValue()}
+            val={Math.round(valueChange.percentage * 100)}
             inline
             withIcon
           />

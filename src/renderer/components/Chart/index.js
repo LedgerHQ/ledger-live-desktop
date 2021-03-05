@@ -102,7 +102,7 @@ export default function Chart({
                 : moment(new Date(d.date))
                     .startOf("day")
                     .toDate(),
-            y: d[valueKey].toNumber(),
+            y: d[valueKey],
           })),
         },
       ],

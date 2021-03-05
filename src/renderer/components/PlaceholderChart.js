@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import { BigNumber } from "bignumber.js";
-import type { PortfolioRange } from "@ledgerhq/live-common/lib/types";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio-new/types";
 import Chart from "~/renderer/components/Chart";
 import { withTheme } from "styled-components";
 
