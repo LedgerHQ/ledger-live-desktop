@@ -57,7 +57,7 @@ ipcMain.handle("generate-lss-config", async (event, data: string): Promise<boole
   if (filePath) {
     if (filePath && data) {
       await fsWriteFile(filePath, data, { mode: "640" });
-      log("satstack", "wrote to lss.json file");
+      log("satstack", "wrote to lss.json file", event);
       return true;
     }
   }
@@ -70,7 +70,7 @@ ipcMain.handle("delete-lss-config", async (event): Promise<boolean> => {
   const filePath = path.resolve(userDataDirectory, lssFileName);
   if (filePath) {
     await fsUnlink(filePath);
-    log("satstack", "deleted lss.json file");
+    log("satstack", "deleted lss.json file", event);
     return true;
   }
   return false;
@@ -86,7 +86,7 @@ ipcMain.handle("load-lss-config", async (event): Promise<?string> => {
       return contents;
     }
   } catch (e) {
-    log("satstack", "tried to load lss.json");
+    log("satstack", "tried to load lss.json", e);
   }
 
   return undefined;
