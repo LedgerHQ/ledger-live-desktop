@@ -22,6 +22,7 @@ import TranslatedError from "~/renderer/components/TranslatedError";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import BigSpinner from "~/renderer/components/BigSpinner";
+import LabelInfoTooltip from "~/renderer/components/LabelInfoTooltip";
 import InfoBox from "~/renderer/components/InfoBox";
 import ConnectTroubleshooting from "~/renderer/components/ConnectTroubleshooting";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
@@ -422,13 +423,10 @@ export const renderSwapDeviceConfirmation = ({
   exchange: Exchange,
 }) => (
   <>
-    <InfoBox onLearnMore={() => openURL(urls.swap.learnMore)} horizontal={false}>
-      <Trans i18nKey="DeviceAction.swap.notice" />
-    </InfoBox>
-    <Box id="swap-modal-device-confirm" alignItems={"center"} mt={5} mb={5}>
-      <Text textAlign="center" ff="Inter|SemiBold" color="palette.text.shade100" fontSize={5}>
-        <Trans i18nKey="DeviceAction.swap.confirm" />
-      </Text>
+    <Box mb={3}>
+      <InfoBox onLearnMore={() => openURL(urls.swap.learnMore)} horizontal={false}>
+        <Trans i18nKey="DeviceAction.swap.notice" />
+      </InfoBox>
     </Box>
     {map(
       {
@@ -456,7 +454,6 @@ export const renderSwapDeviceConfirmation = ({
             showCode
           />
         ),
-        provider: exchangeRate.provider,
       },
       (value, key) => (
         <Box horizontal justifyContent="space-between" key={key} mb={2} ml="12px" mr="12px">
@@ -469,6 +466,40 @@ export const renderSwapDeviceConfirmation = ({
         </Box>
       ),
     )}
+    {exchangeRate.payoutNetworkFees ? (
+      <Box
+        horizontal
+        justifyContent="space-between"
+        key={"payoutNetworkFees"}
+        mb={2}
+        ml="12px"
+        mr="12px"
+      >
+        <LabelInfoTooltip
+          text={<Trans i18nKey={"DeviceAction.swap.payoutNetworkFeesTooltip"} />}
+          style={{ marginLeft: 4 }}
+        >
+          <Text fontWeight="500" color="palette.text.shade40" fontSize={3}>
+            <Trans i18nKey={"DeviceAction.swap.payoutNetworkFees"} />
+          </Text>
+        </LabelInfoTooltip>
+        <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
+          <CurrencyUnitValue
+            unit={getAccountUnit(getMainAccount(exchange.toAccount, exchange.toParentAccount))}
+            value={exchangeRate.payoutNetworkFees}
+            disableRounding
+            showCode
+          />
+        </Text>
+      </Box>
+    ) : null}
+    {/* {exchangeRate.payoutNetworkFees ? (
+      <InfoBox>
+        <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
+          {`The payout network fees of ${exchangeRate.payoutNetworkFees} are not displayed on the device`}
+        </Text>
+      </InfoBox>
+    ) : null} */}
     {renderVerifyUnwrapped({ modelId, type })}
   </>
 );

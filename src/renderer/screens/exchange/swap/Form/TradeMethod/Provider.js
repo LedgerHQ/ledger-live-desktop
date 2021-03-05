@@ -81,7 +81,7 @@ const Provider = ({
   return (
     <ProviderWrapper>
       <Box alignItem={"flex-end"}>
-        <Box horizontal mb={"3px"} alignItems={"center"} justifyContent={"flex-end"}>
+        <Box horizontal alignItems={"center"} justifyContent={"flex-end"}>
           <Text color="palette.text.shade60" ff="Inter|Regular" fontSize={2} lineHeight="1.2">
             <Trans i18nKey={`swap.form.tradeMethod.by`} />
           </Text>
@@ -94,50 +94,48 @@ const Provider = ({
             {provider}
           </LinkWithExternalIcon>
         </Box>
-        <Box horizontal mt={"3px"} alignItems={"center"}>
-          {loadingRates ? (
-            <Box horizontal alignItems={"center"} justifyContent={"flex-end"} ml={3} flex={1}>
-              <Spinner size={12} isRotating={loadingRates} />
-            </Box>
-          ) : rate && fromCurrency && currency ? (
-            <>
-              {ratesExpiration && tradeMethod === "fixed" ? (
-                <CountdownTimerWrapper horizontal>
-                  <Box mr={1}>
-                    <AnimatedCountdown fillColor={fillColor} size={10} />
-                  </Box>
-                  <Box ml={1} style={{ width: 30, height: 12 }} justifyContent={"center"}>
-                    <CountdownTimer
-                      key={`rates-${ratesExpiration.getTime()}`}
-                      end={ratesExpiration}
-                      callback={onExpireRates}
-                    />
-                  </Box>
-                </CountdownTimerWrapper>
-              ) : null}
-              <Box mr={1}>
-                {tradeMethod === "fixed" ? (
-                  <IconLock size={10} color={lockColor} />
-                ) : (
-                  <IconLockOpen size={10} color={lockColor} />
-                )}
+        {loadingRates || (rate && fromCurrency && currency) ? (
+          <Box horizontal mt={"6px"} alignItems={"center"}>
+            {loadingRates ? (
+              <Box horizontal alignItems={"center"} justifyContent={"flex-end"} ml={3} flex={1}>
+                <Spinner size={12} isRotating={loadingRates} />
               </Box>
-              <Price
-                withEquality
-                withIcon={false}
-                from={fromCurrency}
-                to={currency}
-                rate={rate}
-                color="palette.text.shade60"
-                fontSize={2}
-              />
-            </>
-          ) : (
-            <Box horizontal justifyContent={"flex-end"} flex={1} color="palette.text.shade20">
-              <Spinner size={12} isRotating={false} />
-            </Box>
-          )}
-        </Box>
+            ) : rate && fromCurrency && currency ? (
+              <>
+                {ratesExpiration && tradeMethod === "fixed" ? (
+                  <CountdownTimerWrapper horizontal>
+                    <Box mr={1}>
+                      <AnimatedCountdown fillColor={fillColor} size={10} />
+                    </Box>
+                    <Box ml={1} style={{ width: 30, height: 12 }} justifyContent={"center"}>
+                      <CountdownTimer
+                        key={`rates-${ratesExpiration.getTime()}`}
+                        end={ratesExpiration}
+                        callback={onExpireRates}
+                      />
+                    </Box>
+                  </CountdownTimerWrapper>
+                ) : null}
+                <Box mr={1}>
+                  {tradeMethod === "fixed" ? (
+                    <IconLock size={10} color={lockColor} />
+                  ) : (
+                    <IconLockOpen size={10} color={lockColor} />
+                  )}
+                </Box>
+                <Price
+                  withEquality
+                  withIcon={false}
+                  from={fromCurrency}
+                  to={currency}
+                  rate={rate}
+                  color="palette.text.shade60"
+                  fontSize={2}
+                />
+              </>
+            ) : null}
+          </Box>
+        ) : null}
       </Box>
       <ProviderIconWrapper>
         <IconChangelly size={20} />

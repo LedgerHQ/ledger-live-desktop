@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useCallback } from "react";
-import { BigNumber } from "bignumber.js";
+import useTheme from "~/renderer/hooks/useTheme";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { Trans } from "react-i18next";
@@ -20,7 +20,6 @@ import CheckBox from "~/renderer/components/CheckBox";
 import { SwapGenericAPIError } from "@ledgerhq/live-common/lib/errors";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import Button from "~/renderer/components/Button";
-import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
 import IconWallet from "~/renderer/icons/Wallet";
 import IconArrowDown from "~/renderer/icons/ArrowDown";
 import styled from "styled-components";
@@ -30,11 +29,11 @@ import { urls } from "~/config/urls";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 import FakeLink from "~/renderer/components/FakeLink";
 import { CountdownTimerWrapper } from "~/renderer/screens/exchange/swap/Form/Footer";
-import useTheme from "~/renderer/hooks/useTheme";
-import IconCountdown from "~/renderer/icons/Countdown";
 import CountdownTimer from "~/renderer/components/CountdownTimer";
 import { swapAcceptProviderTOS } from "~/renderer/actions/settings";
 import type { ExchangeRate, Exchange } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import IconLock from "~/renderer/icons/Lock";
+import IconLockOpen from "~/renderer/icons/LockOpen";
 
 const IconWrapper = styled(Box)`
   background: ${colors.pillActiveBackground};
@@ -73,16 +72,16 @@ const StepSummary = ({
   const { exchange, exchangeRate } = swap;
   const { provider, magnitudeAwareRate } = exchangeRate;
   const alreadyAcceptedTerms = swapAcceptedproviderIds.includes(swap.exchangeRate.provider);
-  const { fromAccount, toAccount, toParentAccount } = exchange;
+  const { fromAccount, toAccount } = exchange;
   const fromAmount = transaction.amount;
+  const lockColor = useTheme("colors.palette.text.shade100");
   if (!fromAccount || !toAccount || !fromAmount) return null;
 
   const fromCurrency = getAccountCurrency(fromAccount);
   const toCurrency = getAccountCurrency(toAccount);
   const fromUnit = getAccountUnit(fromAccount);
   const toUnit = getAccountUnit(toAccount);
-
-  const toAmount = fromAmount.times(magnitudeAwareRate);
+  const toAmount = fromAmount.times(magnitudeAwareRate).minus(exchangeRate.payoutNetworkFees || 0);
   const { main, tos } = urls.swap.providers[provider];
 
   return (
@@ -157,34 +156,34 @@ const StepSummary = ({
             underline
             fontSize={3}
             ml={2}
-            color="palette.primary.main"
+            color="palette.text.shade100"
             onClick={() => openURL(main)}
             iconFirst
             style={{ textTransform: "capitalize" }}
           >
             {provider}
-            <Box ml={1}>
+            <Box ml={1} color="palette.text.shade100">
               <IconExternalLink size={12} />
             </Box>
           </FakeLink>
         </Box>
-        {exchangeRate?.payoutNetworkFees ? (
-          <Box horizontal justifyContent={"space-between"} mt={1}>
-            <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
-              {"Extra fees"}
-            </Text>
-            <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
-              <CurrencyUnitValue
-                value={exchangeRate.payoutNetworkFees.times(
-                  BigNumber(10).pow(toCurrency.units[0].magnitude),
-                )}
-                disableRounding
-                unit={toCurrency.units[0]}
-                showCode
+        <Box mt={1} horizontal justifyContent={"space-between"}>
+          <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
+            <Trans i18nKey="swap.modal.steps.summary.details.tradeMethod.title" />
+          </Text>
+          <Box horizontal alignItems="center">
+            {exchangeRate.tradeMethod === "fixed" ? (
+              <IconLock size={10} color={lockColor} />
+            ) : (
+              <IconLockOpen size={10} color={lockColor} />
+            )}
+            <Text ml={1} ff="Inter|SemiBold" fontSize={3}>
+              <Trans
+                i18nKey={`swap.modal.steps.summary.details.tradeMethod.${exchangeRate.tradeMethod}`}
               />
             </Text>
           </Box>
-        ) : null}
+        </Box>
       </ProviderWrapper>
 
       <Box mt={6} horizontal alignItems={"center"} onClick={onSwitchAccept}>
@@ -264,7 +263,7 @@ export const StepSummaryFooter = ({
       {ratesExpiration ? (
         <CountdownTimerWrapper horizontal>
           <Box mr={1}>
-            <IconCountdown size={10} color={lockColor} />
+            <IconLock size={10} color={lockColor} />
           </Box>
           <CountdownTimer
             key={`rates-${ratesExpiration.getTime()}`}

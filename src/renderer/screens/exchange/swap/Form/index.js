@@ -40,7 +40,7 @@ import FromAmount from "~/renderer/screens/exchange/swap/Form/FromAmount";
 import ToAmount from "~/renderer/screens/exchange/swap/Form/ToAmount";
 import Footer from "~/renderer/screens/exchange/swap/Form/Footer";
 import TradeMethod from "~/renderer/screens/exchange/swap/Form/TradeMethod";
-import IconSwap from "~/renderer/icons/Swap";
+import AnimatedArrows from "./AnimatedArrows";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 import { openModal } from "~/renderer/actions/modals";
 
@@ -122,13 +122,7 @@ const Form = ({
     () => getValidToCurrencies({ selectableCurrencies, fromCurrency }),
     [fromCurrency, selectableCurrencies],
   );
-  const canFlipForm = fromCurrency && toCurrency && account && toAccount;
-  const onFlipForm = useCallback(() => {
-    if (toAccount) {
-      dispatch({ type: "onFlip", payload: { toAccount: account, toParentAccount: parentAccount } });
-      setAccount(toAccount, toParentAccount);
-    }
-  }, [account, parentAccount, setAccount, toAccount, toParentAccount]);
+
   const onCompleteSwap = useCallback(() => setTabIndex(1), [setTabIndex]);
   const onStartSwap = useCallback(() => {
     dispatch({ type: "setTimerVisibility", payload: { isTimerVisible: false } });
@@ -187,6 +181,24 @@ const Form = ({
     }
     estimateMaxSpendable();
   }, [account, parentAccount, setTransactionAmount, useAllAmount]);
+
+  const canFlipForm = fromCurrency && toCurrency && account && toAccount;
+  const onFlipForm = useCallback(() => {
+    if (toAccount) {
+      dispatch({ type: "onFlip", payload: { toAccount: account, toParentAccount: parentAccount } });
+      setAccount(toAccount, toParentAccount);
+      // Disabled useAllAmount if enabled (maybe we could make it still work)
+      if (useAllAmount) toggleUseAllAmount();
+    }
+  }, [
+    account,
+    parentAccount,
+    setAccount,
+    toAccount,
+    toParentAccount,
+    toggleUseAllAmount,
+    useAllAmount,
+  ]);
 
   // Discard rates on any of these values from outside the reducer's state changing
   useEffect(resetRate, [resetRate, transaction?.amount, tradeMethod]);
@@ -262,6 +274,14 @@ const Form = ({
   const { provider, magnitudeAwareRate } = exchangeRate || {};
   const { amount = BigNumber(0) } = transaction || {};
 
+  const toAmount = useMemo(() => {
+    let base = amount.times(magnitudeAwareRate);
+    if (exchangeRate && exchangeRate.payoutNetworkFees && toCurrency) {
+      base = base.minus(exchangeRate.payoutNetworkFees);
+    }
+    return base;
+  }, [amount, exchangeRate, magnitudeAwareRate, toCurrency]);
+
   return (
     <>
       <TrackPage category="Swap" name="Form" />
@@ -311,7 +331,8 @@ const Form = ({
           </Box>
           <ArrowSeparator
             style={{ marginTop: 63, marginBottom: 25 }}
-            Icon={IconSwap}
+            Icon={AnimatedArrows}
+            size={16}
             disabled={!canFlipForm}
             onClick={onFlipForm}
           />
@@ -320,7 +341,7 @@ const Form = ({
               key={toCurrency?.id || "toAccount"}
               currenciesStatus={currenciesStatus}
               account={toAccount ? getMainAccount(toAccount, toParentAccount) : null}
-              amount={amount.times(magnitudeAwareRate)}
+              amount={toAmount}
               currency={toCurrency}
               fromCurrency={fromCurrency}
               currencies={validToCurrencies}
@@ -331,7 +352,7 @@ const Form = ({
                 dispatch({ type: "onSetToAccount", payload: { toAccount, toParentAccount } })
               }
             />
-            <ToAmount amount={amount.times(magnitudeAwareRate)} currency={toCurrency} />
+            <ToAmount amount={toAmount} currency={toCurrency} />
           </Box>
         </Box>
         <Footer onStartSwap={onStartSwap} canContinue={!!canContinue} />

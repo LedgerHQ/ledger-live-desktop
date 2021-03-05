@@ -4,7 +4,6 @@ import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import IconTransfer from "~/renderer/icons/Transfer";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { useSpring, animated } from "react-spring";
 
 const ArrowSeparatorWrapper: ThemedComponent<{ horizontal: boolean }> = styled.div`
   display: flex;
@@ -22,6 +21,7 @@ const ArrowSeparatorWrapper: ThemedComponent<{ horizontal: boolean }> = styled.d
       align-items: center;
       height: 36px;
       width: 36px;
+      padding: 6px;
       border-radius: 36px;
       background: transparent;
       justify-content: center;
@@ -35,27 +35,24 @@ const ArrowSeparatorWrapper: ThemedComponent<{ horizontal: boolean }> = styled.d
   }
 `;
 
-const ArrowSeparator = ({
-  onClick,
-  horizontal,
-  disabled,
-  Icon = IconTransfer,
-  size = 16,
-  style,
-}: {
+type Props = {
   onClick?: () => any,
   horizontal?: boolean,
   disabled?: boolean,
   Icon?: any,
   size?: number,
   style?: any,
-}) => {
+};
+
+const ArrowSeparator: React$ComponentType<Props> = React.memo(function ArrowSeparator({
+  onClick,
+  horizontal,
+  disabled,
+  Icon = IconTransfer,
+  size = 16,
+  style,
+}: Props) {
   const [nonce, drop] = useState(0);
-  const { angle } = useSpring({
-    from: { angle: 0 },
-    to: { angle: nonce * 180 },
-    config: { mass: 5, tension: 500, friction: 80 },
-  });
   const onClickWrapper = useCallback(() => {
     if (!disabled && onClick) {
       drop(nonce + 1);
@@ -64,23 +61,14 @@ const ArrowSeparator = ({
   }, [disabled, nonce, onClick]);
 
   return (
-    <ArrowSeparatorWrapper
-      disabled={!!onClick && disabled}
-      horizontal={!!horizontal}
-      onClick={onClickWrapper}
-      style={style}
-    >
+    <ArrowSeparatorWrapper disabled={!!onClick && disabled} horizontal={!!horizontal} style={style}>
       <div />
-      <animated.div
-        style={{
-          transform: angle.interpolate(d => `rotateZ(${d}deg)`),
-        }}
-      >
-        <Icon size={size} />
-      </animated.div>
+      <div onClick={onClickWrapper}>
+        <Icon size={size} disabled={disabled} />
+      </div>
       <div />
     </ArrowSeparatorWrapper>
   );
-};
+});
 
 export default ArrowSeparator;

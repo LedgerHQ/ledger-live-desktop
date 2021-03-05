@@ -232,7 +232,13 @@
             "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
           },
           "details": {
-            "provider": "Provider"
+            "provider": "Provider",
+            "tradeMethod": {
+              "title": "Type",
+              "float": "Floating rate",
+              "fixed": "Fixed rate"
+            },
+            "address": "Address"
           }
         },
         "device": {
@@ -1027,9 +1033,12 @@
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction",
       "amountSent": "Amount sent",
-      "amountReceived": "Amount received",
+      "amountReceived": "Amount received before payout fees",
       "fees": "Fees",
-      "provider": "Provider"
+      "provider": "Provider",
+      "payoutNetworkFees": "Payout fees",
+      "payoutNetworkFeesTooltip": "The amount will not be shown on the device"
+      
     },
     "sell": {
       "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
