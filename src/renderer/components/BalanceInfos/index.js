@@ -1,9 +1,10 @@
 // @flow
 import React from "react";
-import type { BigNumber } from "bignumber.js";
+import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import type { Unit, ValueChange, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type { Unit, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type { ValueChange } from "@ledgerhq/live-common/lib/portfolio-new/types";
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import PillsDaysCount from "~/renderer/components/PillsDaysCount";
@@ -20,7 +21,7 @@ const Sub = styled(Box).attrs(() => ({
 type BalanceSinceProps = {
   since: string,
   valueChange: ValueChange,
-  totalBalance: BigNumber,
+  totalBalance: number,
   isAvailable: boolean,
 };
 
@@ -28,7 +29,7 @@ type BalanceTotalProps = {
   children?: any,
   unit: Unit,
   isAvailable: boolean,
-  totalBalance: BigNumber,
+  totalBalance: number,
   showCryptoEvenIfNotAvailable?: boolean,
   account?: AccountLike,
   withTransactionsPendingConfirmationWarning?: boolean,
@@ -59,14 +60,14 @@ export function BalanceDiff({
           <FormattedVal
             isPercent
             animateTicker
-            val={Math.round(valueChange.percentage * 100)}
+            val={BigNumber(Math.round(valueChange.percentage * 100))}
             inline
             withIcon
           />
         )}
         <FormattedVal
           unit={unit}
-          val={valueChange.value}
+          val={BigNumber(valueChange.value)}
           prefix={valueChange.percentage ? " (" : undefined}
           suffix={valueChange.percentage ? ")" : undefined}
           withIcon={!valueChange.percentage}
@@ -105,7 +106,7 @@ export function BalanceTotal({
               fontSize={8}
               disableRounding
               showCode
-              val={totalBalance}
+              val={BigNumber(totalBalance)}
             />
           )}
           {withTransactionsPendingConfirmationWarning ? (
