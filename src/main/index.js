@@ -29,6 +29,17 @@ if (!gotLock) {
         w.restore();
       }
       w.focus();
+
+      // Deep linking for when the app is already running (Windows)
+      if (process.platform === "win32") {
+        const uri = commandLine.filter(arg => arg.startsWith("ledgerlive://"));
+
+        if (uri.length) {
+          if ("send" in w.webContents) {
+            w.webContents.send("deep-linking", uri[0]);
+          }
+        }
+      }
     }
   });
 }
@@ -55,24 +66,6 @@ app.on("will-finish-launching", () => {
       })
       .catch(err => console.log(err));
   });
-
-  if (process.platform === "win32") {
-    // windows deepLink
-    process.argv.forEach(arg => {
-      if (/ledgerlive:\/\//.test(arg)) {
-        getMainWindowAsync()
-          .then(w => {
-            if (w) {
-              show(w);
-              if ("send" in w.webContents) {
-                w.webContents.send("deep-linking", arg);
-              }
-            }
-          })
-          .catch(err => console.log(err));
-      }
-    });
-  }
 });
 
 app.on("ready", async () => {
@@ -162,6 +155,18 @@ ipcMain.on("ready-to-show", () => {
   const w = getMainWindow();
   if (w) {
     show(w);
+
+    // Deep linking for when the app is not running already (Windows)
+    if (process.platform === "win32") {
+      const { argv } = process;
+      const uri = argv.filter(arg => arg.startsWith("ledgerlive://"));
+
+      if (uri.length) {
+        if ("send" in w.webContents) {
+          w.webContents.send("deep-linking", uri[0]);
+        }
+      }
+    }
   }
 });
 

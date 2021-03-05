@@ -20,7 +20,7 @@ export function AnimatedWave({ height, color }: Props) {
             V 0
             H 0
             V 0
-            Z;"
+            Z"
       >
         {!process.env.SPECTRON_RUN ? (
           <animate

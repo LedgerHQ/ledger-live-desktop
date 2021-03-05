@@ -18,12 +18,12 @@ const removeAccount = (currency = "global") => {
       const length = accounts.length;
 
       const firstAccountRow = accounts[0];
-      await firstAccountRow.click();
+      await accountsPage.clickOnAccountRow(firstAccountRow);
 
-      const settingsButton = await accountPage.settingsButton;
+      const settingsButton = await accountPage.settingsButton();
       await settingsButton.click();
       await accountSettingsModal.waitForDisplayed();
-      const deleteButton = await accountSettingsModal.settingsDeleteButton;
+      const deleteButton = await accountSettingsModal.settingsDeleteButton();
       await deleteButton.click();
 
       await accountSettingsModal.confirm();

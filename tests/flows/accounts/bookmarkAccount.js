@@ -24,7 +24,7 @@ const bookmarkAccount = (currency = "global", startsWithStaredAccounts = false) 
       const bookmarkedAccountLength = bookmarkedAccounts.length;
 
       const firstAccountRow = await accountsPage.getFirstAccountRow();
-      await firstAccountRow.click();
+      await accountsPage.clickOnAccountRow(firstAccountRow);
 
       await accountPage.bookmarkAccount();
 

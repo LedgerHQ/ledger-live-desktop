@@ -752,7 +752,7 @@
     },
     "status": {
       "title": "Ledger Status",
-      "desc": "Learn crypto"
+      "desc": "Check our system status"
     },
     "helpCenter": {
       "title": "Ledger Support",
@@ -1050,6 +1050,7 @@
     "loading": "Loading...",
     "connectAndUnlockDevice": "Connect and unlock your device",
     "unlockDevice": "Unlock your device",
+    "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
     "quitApp": "Quit the application on your device",
     "appNotInstalled": "Please install the {{appName}} app",
     "openManager": "Open Manager",
@@ -1181,6 +1182,7 @@
       "steps": {
         "downloadingUpdate": "Downloading update",
         "updateMCU": "Firmware update",
+        "updating": "Firmware update",
         "reset": "Prepare device",
         "osu": "Installing OSU...",
         "flash-mcu": "MCU updating...",
@@ -1199,7 +1201,10 @@
       "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
       "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "Firmware updated",
-      "successText": "Please re-install the apps on your device",
+      "successTextApps": "Please re-install the apps on your device",
+      "successTextNoApps": "You can now install apps on your device",
+      "sucessCTAApps": "Re-install apps",
+      "SuccessCTANoApps": "Install apps",
       "resetSteps": {
         "first": "1. Reset your device",
         "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
@@ -1825,6 +1830,7 @@
     "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
     "unlockedBalance": "Unbonded",
     "unlockedTooltip": "Unbonded assets can now be moved using the withdraw operation.",
+    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
     "nomination": {
       "emptyState": {
         "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
@@ -1927,7 +1933,9 @@
         "stash": "Available Balance",
         "stashDescription": "Rewards are credited to your available balance.",
         "staked": "Bonded Balance",
-        "stakedDescription": "Rewards are credited to your bonded balance for compound earning."
+        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
+        "optionTitle": "Note",
+        "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
       },
       "steps": {
         "starter": {
@@ -2288,7 +2296,7 @@
     "repairDevice": {
       "title": "Repair your Ledger device",
       "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
-      "desc": "Please select the state of your Ledger device.",
+      "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
       "button": "Repair"
     },
     "exportLogs": {
@@ -3018,10 +3026,6 @@
     "CosmosBroadcastCodeNoSignatures": {
       "title": "Something went wrong (Error #17)",
       "description": "Please contact Ledger Support"
-    },
-    "CosmosStargateFeb2021Warning": {
-      "title": "The Cosmos blockchain is planning for an on-chain update on Feb 18th.",
-      "description": "Coming Ledger Live 2.22.0 will continue supporting ATOM."
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
