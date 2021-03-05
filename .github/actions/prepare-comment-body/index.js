@@ -25,7 +25,7 @@ const main = async () => {
     // from what I understood it's a bit cumbersome to get the artifact url before the workflow finishes
     // so this is a workaround. the endpoint will redirect to the artifact url.
     // https://github.com/machard/github-action-artifact-redirect
-    str += `[Suggested snapshots to update](https://github-action-artifact-link.vercel.app/api?owner=${fullrepo[0]}&repo=${fullrepo[1]}&runId=${runId})`;
+    str += `[Suggested snapshots to update](https://github-actions-live-vercel.vercel.app/api?owner=${fullrepo[0]}&repo=${fullrepo[1]}&runId=${runId})`;
   }
 
   const lintFailed = (lintoutput || "").indexOf("exit code 255") >= 0;

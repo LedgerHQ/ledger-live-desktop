@@ -6,7 +6,7 @@ const main = async () => {
   const prNumber = core.getInput("prNumber");
 
   await fetch(
-    `http://github-action-artifact-link.vercel.app/api/comment?owner=LedgerHQ&repo=ledger-live-desktop&issueId=${prNumber}`,
+    `http://github-actions-live-vercel.vercel.app/api/comment?owner=LedgerHQ&repo=ledger-live-desktop&issueId=${prNumber}`,
     {
       method: "POST",
       headers: {

@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-16.04
     steps:
       - name: Cancel Previous Runs
-        run: curl -i -L -X GET 'http://github-action-artifact-link.vercel.app/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
+        run: curl -i -L -X GET 'http://github-actions-live-vercel.vercel.app/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
   bundle-macos:
     runs-on: macos-latest
     needs: cancel-previous
