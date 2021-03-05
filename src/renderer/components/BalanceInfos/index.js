@@ -1,6 +1,5 @@
 // @flow
 import React from "react";
-import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import type { Unit, AccountLike } from "@ledgerhq/live-common/lib/types";
@@ -60,14 +59,14 @@ export function BalanceDiff({
           <FormattedVal
             isPercent
             animateTicker
-            val={BigNumber(Math.round(valueChange.percentage * 100))}
+            val={Math.round(valueChange.percentage * 100)}
             inline
             withIcon
           />
         )}
         <FormattedVal
           unit={unit}
-          val={BigNumber(valueChange.value)}
+          val={valueChange.value}
           prefix={valueChange.percentage ? " (" : undefined}
           suffix={valueChange.percentage ? ")" : undefined}
           withIcon={!valueChange.percentage}
@@ -106,7 +105,7 @@ export function BalanceTotal({
               fontSize={8}
               disableRounding
               showCode
-              val={BigNumber(totalBalance)}
+              val={totalBalance}
             />
           )}
           {withTransactionsPendingConfirmationWarning ? (

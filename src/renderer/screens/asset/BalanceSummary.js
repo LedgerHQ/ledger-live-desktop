@@ -6,10 +6,10 @@ import { formatShort } from "@ledgerhq/live-common/lib/currencies";
 import type {
   CryptoCurrency,
   Currency,
-  PortfolioRange,
   TokenCurrency,
   Unit,
 } from "@ledgerhq/live-common/lib/types";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio-new/types";
 import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
 import moment from "moment";

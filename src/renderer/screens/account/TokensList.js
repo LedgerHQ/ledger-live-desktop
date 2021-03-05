@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from "react";
-import type { PortfolioRange } from "@ledgerhq/live-common/lib/types/portfolio";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio-new/types";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account/helpers";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
 import styled from "styled-components";

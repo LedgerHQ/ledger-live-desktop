@@ -10,9 +10,9 @@ import type {
   Currency,
   Account,
   AccountLike,
-  PortfolioRange,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio-new/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";

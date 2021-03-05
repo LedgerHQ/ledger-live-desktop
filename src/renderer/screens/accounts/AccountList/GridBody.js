@@ -1,7 +1,8 @@
 // @flow
 import React from "react";
 import styled from "styled-components";
-import type { Account, PortfolioRange, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio-new/types";
 import Box from "~/renderer/components/Box";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import AccountCard from "../AccountGridItem";
