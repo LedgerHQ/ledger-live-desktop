@@ -7,6 +7,7 @@ import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { Wrapper, Label, IllustrationWrapper } from "~/renderer/components/Carousel";
+import { useHistory } from "react-router-dom";
 
 const Layer = styled(animated.div)`
   background-image: url(${p => p.image});
@@ -26,13 +27,15 @@ type Img = {
   size: { width: number, height: number },
 };
 type Props = {
-  url: string,
+  url?: string,
+  path?: string,
   title: *,
   description: *,
   imgs: Img[],
 };
 
-const BackupPack = (props: Props) => {
+const Slide = (props: Props) => {
+  const history = useHistory();
   const [{ xy }, set] = useSpring(() => ({
     xy: [-120, -30],
     config: { mass: 10, tension: 550, friction: 140 },
@@ -56,8 +59,12 @@ const BackupPack = (props: Props) => {
   const onMouseLeave = () => set({ xy: [0, 0] });
 
   const onClick = useCallback(() => {
+    if (props.path) {
+      history.push({ pathname: props.path, state: { source: "banner" } });
+      return;
+    }
     openURL(props.url);
-  }, [props.url]);
+  }, [history, props.path, props.url]);
 
   // After initial slide-in animation, set the offset to zero
   useEffect(() => {
@@ -97,4 +104,4 @@ const BackupPack = (props: Props) => {
   );
 };
 
-export default BackupPack;
+export default Slide;

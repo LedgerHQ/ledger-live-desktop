@@ -92,7 +92,7 @@ const SLIDES = [
     ],
   },
   {
-    url: "ledgerlive://buy",
+    path: "/exchange",
     name: "buyCrypto",
     title: <Trans i18nKey={`banners.buyCrypto.title`} />,
     description: <Trans i18nKey={`banners.buyCrypto.description`} />,
@@ -140,7 +140,7 @@ const SLIDES = [
     ],
   },
   {
-    url: "ledgerlive://swap",
+    path: "/swap",
     name: "swap",
     title: <Trans i18nKey={`banners.swap.title`} />,
     description: <Trans i18nKey={`banners.swap.description`} />,
