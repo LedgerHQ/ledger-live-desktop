@@ -68,6 +68,10 @@ export default class Page {
     return this.$("#topbar-discreet-button");
   }
 
+  async topbarSynchronizeButton() {
+    return this.$("#topbar-synchronize-button");
+  }
+
   async topbarSettingsButton() {
     return this.$("#topbar-settings-button");
   }
@@ -102,8 +106,13 @@ export default class Page {
     await btn.click();
   }
 
+  async synchronize() {
+    const btn = await this.topbarSynchronizeButton();
+    await btn.click();
+  }
+
   async goToBuyCrypto() {
-    const buyCryptoBtn = await this.drawerBuycryptoButton;
+    const buyCryptoBtn = await this.drawerBuycryptoButton();
     await buyCryptoBtn.click();
   }
 

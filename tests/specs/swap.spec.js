@@ -1,5 +1,6 @@
 import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 import initialize, {
+  page,
   modalPage,
   app,
   mockDeviceEvent,
