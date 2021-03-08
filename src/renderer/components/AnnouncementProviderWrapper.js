@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useCallback } from "react";
 import { AnnouncementProvider } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider";
 import type { Announcement } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider/types";
 import { getKey, setKey } from "~/renderer/storage";
@@ -7,6 +7,7 @@ import { languageSelector } from "~/renderer/reducers/settings";
 import { currenciesIdSelector } from "~/renderer/reducers/accounts";
 import { useSelector } from "react-redux";
 import { ServiceStatusProvider } from "@ledgerhq/live-common/lib/providers/ServiceStatusProvider";
+import { useToasts } from "@ledgerhq/live-common/lib/providers/ToastProvider/index";
 
 type Props = {
   children: React$Node,
@@ -41,16 +42,35 @@ export function AnnouncementProviderWrapper({ children }: Props) {
   const language = useSelector(languageSelector);
   const currencies = useSelector(currenciesIdSelector);
 
+  const { pushToast } = useToasts();
+
   const context = {
     language,
     currencies,
     getDate: () => new Date(),
   };
 
+  const onNewAnnouncement = useCallback(
+    (announcement: Announcement) => {
+      console.log("ON NEW ANNOUNCEMENTS", announcement);
+      const { uuid, content, icon } = announcement;
+
+      pushToast({
+        id: uuid,
+        type: "announcement",
+        title: content.title,
+        text: content.text,
+        icon,
+      });
+    },
+    [pushToast],
+  );
+
   return (
     <AnnouncementProvider
       autoUpdateDelay={15000}
       context={context}
+      onNewAnnouncement={onNewAnnouncement}
       handleLoad={loadAnnouncements}
       handleSave={saveAnnouncements}
     >
