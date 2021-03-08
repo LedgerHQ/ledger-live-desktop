@@ -15,7 +15,7 @@ import {
   useCalculateCountervalueCallback as useCalculateCountervalueCallbackCommon,
   useTrackingPairForAccounts,
 } from "@ledgerhq/live-common/lib/countervalues/react";
-import { useDistribution as useDistributionRaw } from "@ledgerhq/live-common/lib/portfolio-new/react";
+import { useDistribution as useDistributionRaw } from "@ledgerhq/live-common/lib/portfolio/v2/react";
 import type { State } from "~/renderer/reducers";
 import { accountsSelector, activeAccountsSelector } from "~/renderer/reducers/accounts";
 import { osDarkModeSelector } from "~/renderer/reducers/application";

@@ -3,7 +3,7 @@
 import React, { PureComponent } from "react";
 import Box from "~/renderer/components/Box";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
-import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio-new/types";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import styled from "styled-components";
 import Header from "~/renderer/screens/accounts/AccountRowItem/Header";

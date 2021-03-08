@@ -12,7 +12,7 @@ import type {
   AccountLikeArray,
   TokenAccount,
 } from "@ledgerhq/live-common/lib/types";
-import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio-new/types";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import Text from "~/renderer/components/Text";
 import { GenericBox } from "../index";
 import SearchBox from "./SearchBox";

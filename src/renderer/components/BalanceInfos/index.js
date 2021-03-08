@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import type { Unit, AccountLike } from "@ledgerhq/live-common/lib/types";
-import type { ValueChange } from "@ledgerhq/live-common/lib/portfolio-new/types";
+import type { ValueChange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import PillsDaysCount from "~/renderer/components/PillsDaysCount";

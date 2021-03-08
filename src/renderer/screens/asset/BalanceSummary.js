@@ -9,7 +9,7 @@ import type {
   TokenCurrency,
   Unit,
 } from "@ledgerhq/live-common/lib/types";
-import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio-new/types";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
 import moment from "moment";

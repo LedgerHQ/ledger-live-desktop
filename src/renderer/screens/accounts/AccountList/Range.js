@@ -2,7 +2,7 @@
 
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio-new/types";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import Track from "~/renderer/analytics/Track";
 import BoldToggle from "~/renderer/components/BoldToggle";
 import Box from "~/renderer/components/Box";

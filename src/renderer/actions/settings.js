@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import type { Dispatch } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import type { DeviceModelId } from "@ledgerhq/devices";
-import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio-new/types";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { setEnvOnAllThreads } from "~/helpers/env";

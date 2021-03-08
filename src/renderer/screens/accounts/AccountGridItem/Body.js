@@ -4,7 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import { useBalanceHistoryWithCountervalue } from "~/renderer/actions/portfolio";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
-import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio-new/types";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import Box from "~/renderer/components/Box";

@@ -2,7 +2,7 @@
 import React from "react";
 import { BigNumber } from "bignumber.js";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
-import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio-new/types";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { useBalanceHistoryWithCountervalue } from "~/renderer/actions/portfolio";
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
