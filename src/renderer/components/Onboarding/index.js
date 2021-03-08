@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useMachine } from "@xstate/react";
 import { assign, Machine } from "xstate";
 import { CSSTransition } from "react-transition-group";
@@ -195,6 +195,7 @@ const ScreenContainer = styled.div`
 
 export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boolean }) {
   const dispatch = useDispatch();
+  const [imgsLoaded, setImgsLoaded] = useState(false);
 
   const [state, sendEvent, service] = useMachine(onboardingMachine, {
     actions: {
@@ -216,7 +217,7 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
   }, [service]);
 
   useEffect(() => {
-    preloadAssets();
+    preloadAssets().then(() => setImgsLoaded(true));
   }, []);
 
   const CurrentScreen = screens[state.value];
@@ -232,7 +233,7 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
       >
         <Pedagogy onDone={() => sendEvent("SETUP_NEW_DEVICE")} />
       </Modal>
-      <OnboardingContainer>
+      <OnboardingContainer className={imgsLoaded ? "onboarding-imgs-loaded" : ""}>
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="page-switch">
           <ScreenContainer>
             <CurrentScreen
