@@ -26,7 +26,7 @@ describe("Global", () => {
     });
   });
 
-  it("shows experimental badge, and can access the page", async () => {
+  it("go to buy / sell cryto", async () => {
     await modalPage.close();
     await portfolioPage.goToPortfolio();
     const experimentalButton = await portfolioPage.drawerExperimentalButton();
@@ -91,7 +91,7 @@ describe("Global", () => {
   });
 
   it("can display the help modal", async () => {
-    const helpButton = await portfolioPage.helpButton;
+    const helpButton = await portfolioPage.helpButton();
     await helpButton.click();
     await app.client.pause(400);
 

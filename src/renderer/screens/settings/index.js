@@ -115,6 +115,7 @@ const Settings = ({ history, location, match }: Props) => {
           separator
           withId
           fontSize={14}
+          height={46}
         />
         <Switch>
           {processedItems.map(i => (
