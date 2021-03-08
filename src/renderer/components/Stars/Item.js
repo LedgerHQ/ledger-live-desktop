@@ -21,7 +21,7 @@ const ParentCryptoCurrencyIconWrapper: ThemedComponent<{}> = styled.div`
   width: 20px;
 `;
 
-const ItemWrapper: ThemedComponent<{ active: boolean }> = styled.div.attrs((p) => ({
+const ItemWrapper: ThemedComponent<{ active: boolean }> = styled.div.attrs(p => ({
   style: {
     backgroundColor: p.active
       ? p.theme.colors.palette.action.hover
@@ -37,11 +37,11 @@ const ItemWrapper: ThemedComponent<{ active: boolean }> = styled.div.attrs((p) =
   border: 1px solid transparent;
   cursor: pointer;
   margin: 2px 0px;
-  color: ${(p) =>
+  color: ${p =>
     p.active ? p.theme.colors.palette.text.shade100 : p.theme.colors.palette.text.shade80};
 
   &:hover {
-    color: ${(p) => p.theme.colors.palette.text.shade100};
+    color: ${p => p.theme.colors.palette.text.shade100};
   }
 `;
 
