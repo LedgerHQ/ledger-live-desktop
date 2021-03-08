@@ -1,24 +1,32 @@
 import Page from "./page";
 
 export default class PortfolioPage extends Page {
-  get emtpyStateAddAccountButton() {
+  async emtpyStateAddAccountButton() {
     return this.$("#accounts-empty-state-add-account-button");
   }
 
-  get carousel() {
+  async portfolioEmptyStateTitle() {
+    return this.$("#portfolio-empty-state-title");
+  }
+
+  async carousel() {
     return this.$("#carousel");
   }
 
-  get carouselDismissButton() {
+  async carouselDismissButton() {
     return this.$("#carousel-dismiss");
   }
 
-  get carouselDismissConfirmButton() {
+  async carouselDismissConfirmButton() {
     return this.$("#carousel-dismiss-confirm");
   }
 
+  async helpButton() {
+    return this.$("#topbar-help-button");
+  }
+
   async isAddAccountAvailable() {
-    const elem = await this.emtpyStateAddAccountButton;
+    const elem = await this.emtpyStateAddAccountButton();
     return elem.isExisting();
   }
 }

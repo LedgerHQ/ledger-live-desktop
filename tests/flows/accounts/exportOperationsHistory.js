@@ -22,7 +22,7 @@ const exportOperationsHistory = (currency = "global") => {
     });
 
     it("save button should be disabled", async () => {
-      const saveButton = await accountsPage.exportOperationsHistorySaveButton;
+      const saveButton = await accountsPage.exportOperationsHistorySaveButton();
       expect(await saveButton.isClickable()).toBe(false);
     });
 
@@ -42,7 +42,7 @@ const exportOperationsHistory = (currency = "global") => {
     });
 
     it("save button should be enabled", async () => {
-      const saveButton = await accountsPage.exportOperationsHistorySaveButton;
+      const saveButton = await accountsPage.exportOperationsHistorySaveButton();
       expect(await saveButton.isClickable()).toBe(true);
     });
 

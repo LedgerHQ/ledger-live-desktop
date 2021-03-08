@@ -31,8 +31,8 @@ const addAccount = currency => {
       }
 
       const addAccountButton = exists
-        ? await portfolioPage.emtpyStateAddAccountButton
-        : await accountsPage.addAccountButton;
+        ? await portfolioPage.emtpyStateAddAccountButton()
+        : await accountsPage.addAccountButton();
       await addAccountButton.click();
       await addAccountsModal.waitForDisplayed();
       await addAccountsModal.prepareAddAccount(currency);

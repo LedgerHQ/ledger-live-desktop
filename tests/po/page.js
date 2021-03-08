@@ -4,101 +4,125 @@ export default class Page {
     this.$ = selector => app.client.$(selector);
   }
 
-  get loadingLogo() {
+  async loadingLogo() {
     return this.$("#loading-logo");
   }
 
-  get logo() {
+  async logo() {
     return this.$("#logo");
   }
 
-  get pageTitle() {
+  async pageTitle() {
     return this.$("#page-title");
   }
 
-  get pageDescription() {
+  async pageDescription() {
     return this.$("#page-description");
   }
 
-  get theme() {
+  async theme() {
     return this.$("#onboarding-container");
   }
 
-  get inputError() {
+  async inputError() {
     return this.$("#input-error");
   }
 
-  get inputWarning() {
+  async inputWarning() {
     return this.$("#input-warning");
   }
 
-  get drawerCollapseButton() {
+  async drawerCollapseButton() {
     return this.$("#drawer-collapse-button");
   }
 
-  get drawerPortfolioButton() {
+  async drawerPortfolioButton() {
     return this.$("#drawer-dashboard-button");
   }
 
-  get drawerAccountsButton() {
+  async drawerAccountsButton() {
     return this.$("#drawer-accounts-button");
   }
 
-  get drawerSendButton() {
+  async drawerSendButton() {
     return this.$("#drawer-send-button");
   }
 
-  get drawerReceiveButton() {
+  async drawerReceiveButton() {
     return this.$("#drawer-receive-button");
   }
 
-  get drawerManagerButton() {
+  async drawerManagerButton() {
     return this.$("#drawer-manager-button");
   }
 
-  get drawerBuycryptoButton() {
+  async drawerBuycryptoButton() {
     return this.$("#drawer-exchange-button");
   }
 
-  get drawerExperimentalButton() {
+  async drawerExperimentalButton() {
     return this.$("#drawer-experimental-button");
   }
 
-  get topbarDiscreetButton() {
+  async topbarDiscreetButton() {
     return this.$("#topbar-discreet-button");
   }
 
-  get topbarSettingsButton() {
+  async topbarSynchronizeButton() {
+    return this.$("#topbar-synchronize-button");
+  }
+
+  async topbarSettingsButton() {
     return this.$("#topbar-settings-button");
   }
 
-  get topbarLockButton() {
+  async topbarLockButton() {
     return this.$("#topbar-password-lock-button");
   }
 
-  get bookmarkedAccountsList() {
+  async bookmarkedAccountsList() {
     return this.$("#bookmarked-accounts");
   }
 
   async getBookmarkedAccounts() {
-    const list = await this.bookmarkedAccountsList;
+    const list = await this.bookmarkedAccountsList();
     const items = await list.$$(".bookmarked-account-item");
     return items;
   }
 
+  async toggleDiscreetMode() {
+    const descreetBtn = await this.topbarDiscreetButton;
+    await descreetBtn.click();
+  }
+
   // Drawer Menu
   async goToAccounts() {
-    const btn = await this.drawerAccountsButton;
+    const btn = await this.drawerAccountsButton();
     await btn.click();
   }
 
   async goToPortfolio() {
-    const btn = await this.drawerPortfolioButton;
+    const btn = await this.drawerPortfolioButton();
     await btn.click();
+  }
+
+  async synchronize() {
+    const btn = await this.topbarSynchronizeButton();
+    await btn.click();
+  }
+
+  async goToBuyCrypto() {
+    const buyCryptoBtn = await this.drawerBuycryptoButton();
+    await buyCryptoBtn.click();
   }
 
   async getThemeColor() {
     const bgColor = await this.theme.getCSSProperty("background-color");
     return bgColor.parsed.hex;
+  }
+
+  async goToManager() {
+    const btn = await this.drawerManagerButton();
+    await btn.click();
   }
 }

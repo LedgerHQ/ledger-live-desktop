@@ -1,34 +1,43 @@
 import Page from "./page";
 
 export default class AccountPage extends Page {
-  get settingsButton() {
+  async settingsButton() {
     return this.$("#account-settings-button");
   }
 
-  get accountHeaderName() {
+  async accountHeaderName() {
     return this.$("#account-header-name");
   }
 
-  get starButton() {
+  async starButton() {
     return this.$("#account-star-button");
   }
 
-  get tokensList() {
+  async tokensList() {
     return this.$("#tokens-list");
   }
 
-  get menuHideTokenButton() {
+  async menuHideTokenButton() {
     return this.$("#token-menu-hide");
   }
 
+  async operationsList() {
+    return this.$("#operation-list");
+  }
+
   async bookmarkAccount() {
-    const elem = await this.starButton;
+    const elem = await this.starButton();
     await elem.click();
   }
 
   async getTokens() {
-    const list = await this.tokensList;
+    const list = await this.tokensList();
     return list.$$(".token-row");
+  }
+
+  async getOperationRows() {
+    const operationList = await this.operationsList();
+    return operationList.$$(".operation-row");
   }
 
   async hideFirstToken() {
@@ -36,7 +45,14 @@ export default class AccountPage extends Page {
     const [token] = tokens;
     await token.click({ button: "right" });
     await this.app.client.pause(500);
-    const hideButton = await this.menuHideTokenButton;
+    const hideButton = await this.menuHideTokenButton();
     await hideButton.click();
+  }
+
+  async clickFirstOperationRow() {
+    const operationRows = await this.getOperationRows();
+
+    const firstOperationRow = operationRows[0];
+    await firstOperationRow.click();
   }
 }

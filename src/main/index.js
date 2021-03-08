@@ -1,6 +1,6 @@
 // @flow
 import "./setup";
-import { app, Menu, ipcMain } from "electron";
+import { app, Menu, ipcMain, contentTracing } from "electron";
 import menu from "./menu";
 import {
   createMainWindow,
@@ -12,6 +12,7 @@ import "./internal-lifecycle";
 import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import db from "./db";
 import debounce from "lodash/debounce";
+import fs from "fs";
 import logger from "~/logger";
 
 app.allowRendererProcessReuse = false;
@@ -29,6 +30,17 @@ if (!gotLock) {
         w.restore();
       }
       w.focus();
+
+      // Deep linking for when the app is already running (Windows)
+      if (process.platform === "win32") {
+        const uri = commandLine.filter(arg => arg.startsWith("ledgerlive://"));
+
+        if (uri.length) {
+          if ("send" in w.webContents) {
+            w.webContents.send("deep-linking", uri[0]);
+          }
+        }
+      }
     }
   });
 }
@@ -55,24 +67,6 @@ app.on("will-finish-launching", () => {
       })
       .catch(err => console.log(err));
   });
-
-  if (process.platform === "win32") {
-    // windows deepLink
-    process.argv.forEach(arg => {
-      if (/ledgerlive:\/\//.test(arg)) {
-        getMainWindowAsync()
-          .then(w => {
-            if (w) {
-              show(w);
-              if ("send" in w.webContents) {
-                w.webContents.send("deep-linking", arg);
-              }
-            }
-          })
-          .catch(err => console.log(err));
-      }
-    });
-  }
 });
 
 app.on("ready", async () => {
@@ -162,8 +156,51 @@ ipcMain.on("ready-to-show", () => {
   const w = getMainWindow();
   if (w) {
     show(w);
+
+    // Deep linking for when the app is not running already (Windows)
+    if (process.platform === "win32") {
+      const { argv } = process;
+      const uri = argv.filter(arg => arg.startsWith("ledgerlive://"));
+
+      if (uri.length) {
+        if ("send" in w.webContents) {
+          w.webContents.send("deep-linking", uri[0]);
+        }
+      }
+    }
   }
 });
+
+if (process.env.SPECTRON_RUN) {
+  app.whenReady().then(() => {
+    (async () => {
+      const defaultTraceCategories = [
+        "-*",
+        "devtools.timeline",
+        "disabled-by-default-devtools.timeline",
+        "disabled-by-default-devtools.timeline.frame",
+        "toplevel",
+        "blink.console",
+        "disabled-by-default-devtools.timeline.stack",
+        "disabled-by-default-v8.cpu_profile",
+        "disabled-by-default-v8.cpu_profiler",
+        "disabled-by-default-v8.cpu_profiler.hires",
+      ];
+      const traceOptions = {
+        categoryFilter: defaultTraceCategories.join(","),
+        traceOptions: "record-until-full",
+        options: "sampling-frequency=10000",
+      };
+      await contentTracing.startRecording(traceOptions);
+
+      ipcMain.handle("stop-profile", async () => {
+        const path = await contentTracing.stopRecording();
+        const profile = fs.readFileSync(path);
+        return profile.toString();
+      });
+    })();
+  });
+}
 
 async function installExtensions() {
   const installer = require("electron-devtools-installer");

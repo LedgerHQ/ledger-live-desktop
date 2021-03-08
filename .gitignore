@@ -117,8 +117,10 @@ src/renderer/generated/
 tests/specs/__image_snapshots__/__diff_output__
 tests/dump.json
 tests/tmp/*
+tests/cpuprofiles/*
 tests/coverage/
 !tests/tmp/.gitkeep
+!tests/cpuprofiles/.gitkeep
 tests/docker-electron-webdriver/.lastbuild
 tests/docker-electron-webdriver/.lastyarn
 

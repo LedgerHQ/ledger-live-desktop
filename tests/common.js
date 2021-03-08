@@ -5,11 +5,14 @@ import {
 import { Application } from "spectron";
 import _ from "lodash";
 import { configureToMatchImageSnapshot } from "jest-image-snapshot";
+import Page from "./po/page";
 import ModalPage from "./po/modal.page";
 import AccountsPage from "./po/accounts.page";
 import AccountPage from "./po/account.page";
 import PortfolioPage from "./po/portfolio.page";
-import AddAccontModal from "./po/addAccountModal.page";
+import SettingsPage from "./po/settings.page";
+import ManagerPage from "./po/manager.page";
+import AddAccountModal from "./po/addAccountModal.page";
 import AccountSettingsModal from "./po/accountSettingsModal.page";
 import ExportOperationsModal from "./po/exportOperationsHistoryModal.page";
 import ExportAccountsModal from "./po/exportAccountsModal.page";
@@ -46,7 +49,10 @@ const getMockDeviceEvent = app => async (...events) => {
 };
 
 let app;
+let page;
 let portfolioPage;
+let settingsPage;
+let managerPage;
 let modalPage;
 let accountPage;
 let accountsPage;
@@ -129,11 +135,14 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       },
     });
 
+    page = new Page(app);
     modalPage = new ModalPage(app);
     accountPage = new AccountPage(app);
     accountsPage = new AccountsPage(app);
     portfolioPage = new PortfolioPage(app);
-    addAccountsModal = new AddAccontModal(app);
+    settingsPage = new SettingsPage(app);
+    managerPage = new ManagerPage(app);
+    addAccountsModal = new AddAccountModal(app);
     accountSettingsModal = new AccountSettingsModal(app);
     exportOperationsHistoryModal = new ExportOperationsModal(app);
     exportAccountsModal = new ExportAccountsModal(app);
@@ -147,9 +156,14 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       console.log("app start error", e);
     }
 
+    app.client.addCommand("waitForIllustration", async () => {
+      const illustrations = await app.client.$(".illustration");
+      !illustrations.error && (await illustrations.waitForDisplayed());
+    });
+
     app.client.addCommand("waitForSync", async () => {
       const sync = await app.client.$("#topbar-synchronized");
-      await sync.waitForDisplayed();
+      return sync.waitForDisplayed();
     });
 
     app.client.addCommand("screenshot", async function(countdown = 500) {
@@ -198,6 +212,21 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       ),
       JSON.stringify(coverage),
     );
+
+    await app.client.execute(() => {
+      window.stopProfile();
+    });
+    let profile;
+    while (!profile) {
+      profile = await app.client.execute(() => {
+        return window.PROFILE;
+      });
+    }
+    fs.writeFileSync(
+      path.join(__dirname, "cpuprofiles", path.basename(require.main.filename) + ".cpuprofile"),
+      profile,
+    );
+
     await app.stop();
     removeUserData(process.env.SPECTRON_DUMP_APP_JSON);
   });
@@ -219,9 +248,12 @@ export {
   deviceInfo,
   mockListAppsResult,
   mockDeviceEvent,
+  page,
   accountPage,
   accountsPage,
   portfolioPage,
+  settingsPage,
+  managerPage,
   modalPage,
   hideTokenModal,
   addAccountsModal,
