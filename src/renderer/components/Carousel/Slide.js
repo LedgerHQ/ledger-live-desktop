@@ -34,7 +34,7 @@ type Props = {
   imgs: Img[],
 };
 
-const Slide = (props: Props) => {
+const Slide = ({ url, path, title, description, imgs }: Props) => {
   const history = useHistory();
   const [{ xy }, set] = useSpring(() => ({
     xy: [-120, -30],
@@ -59,12 +59,12 @@ const Slide = (props: Props) => {
   const onMouseLeave = () => set({ xy: [0, 0] });
 
   const onClick = useCallback(() => {
-    if (props.path) {
-      history.push({ pathname: props.path, state: { source: "banner" } });
+    if (path) {
+      history.push({ pathname: path, state: { source: "banner" } });
       return;
     }
-    openURL(props.url);
-  }, [history, props.path, props.url]);
+    openURL(url);
+  }, [history, path, url]);
 
   // After initial slide-in animation, set the offset to zero
   useEffect(() => {
@@ -78,7 +78,7 @@ const Slide = (props: Props) => {
     <Wrapper onClick={onClick} ref={ref} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
       <Box flex={1} p={24}>
         <Label ff="Inter|SemiBold" fontSize={2}>
-          {props.title}
+          {title}
         </Label>
         <Text
           style={{ marginBottom: 16 }}
@@ -86,11 +86,11 @@ const Slide = (props: Props) => {
           color="palette.text.shade50"
           fontSize={4}
         >
-          {props.description}
+          {description}
         </Text>
       </Box>
       <IllustrationWrapper>
-        {props.imgs.map(({ source, transform, size }, i) => (
+        {imgs.map(({ source, transform, size }, i) => (
           <Layer
             key={i}
             style={getTransform.apply(null, transform)}
