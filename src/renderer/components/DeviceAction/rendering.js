@@ -356,6 +356,7 @@ export const renderError = ({
   list,
   supportLink,
   warning,
+  managerAppName,
 }: {
   error: Error,
   withOpenManager?: boolean,
@@ -364,6 +365,7 @@ export const renderError = ({
   list?: boolean,
   supportLink?: string,
   warning?: boolean,
+  managerAppName?: string,
 }) => (
   <Wrapper id={`error-${error.name}`}>
     <Logo warning={warning}>
@@ -383,24 +385,29 @@ export const renderError = ({
       </ErrorDescription>
     ) : null}
     <ButtonContainer>
-      {supportLink ? (
-        <ExternalLinkButton label={<Trans i18nKey="common.getSupport" />} url={supportLink} />
-      ) : null}
-      {withExportLogs ? (
-        <ExportLogsButton
-          title={<Trans i18nKey="settings.exportLogs.title" />}
-          small={false}
-          primary={false}
-          outlineGrey
-          mx={1}
-        />
-      ) : null}
-      {withOpenManager ? <OpenManagerButton ml={4} mt={0} /> : null}
-      {onRetry ? (
-        <Button primary ml={withExportLogs ? 4 : 0} onClick={onRetry}>
-          <Trans i18nKey="common.retry" />
-        </Button>
-      ) : null}
+      {managerAppName ? (
+        <OpenManagerButton appName={managerAppName} />
+      ) : (
+        <>
+          {supportLink ? (
+            <ExternalLinkButton label={<Trans i18nKey="common.getSupport" />} url={supportLink} />
+          ) : null}
+          {withExportLogs ? (
+            <ExportLogsButton
+              title={<Trans i18nKey="settings.exportLogs.title" />}
+              small={false}
+              primary={false}
+              outlineGrey
+              mx={1}
+            />
+          ) : null}
+          {onRetry ? (
+            <Button primary ml={withExportLogs ? 4 : 0} onClick={onRetry}>
+              <Trans i18nKey="common.retry" />
+            </Button>
+          ) : null}
+        </>
+      )}
     </ButtonContainer>
   </Wrapper>
 );
