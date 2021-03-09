@@ -8,6 +8,7 @@ import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { useHistory } from "react-router-dom";
 import { Wrapper, Label, IllustrationWrapper } from "~/renderer/components/Carousel";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 // Assets
 import cart from "./images/cart.png";
@@ -67,7 +68,8 @@ const BackupPack = () => {
   }, [set]);
 
   const onClick = useCallback(() => {
-    history.push({ pathname: "/exchange", state: { source: "buy crypto banner" } });
+    setTrackingSource("buy crypto banner");
+    history.push({ pathname: "/exchange" });
   }, [history]);
 
   const ref = useRef(null);

@@ -9,6 +9,7 @@ import type { TFunction } from "react-i18next";
 import { command } from "~/renderer/commands";
 import Button from "~/renderer/components/Button";
 import RepairModal from "~/renderer/modals/RepairModal";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 type OwnProps = {
   buttonProps?: *,
@@ -77,7 +78,8 @@ class RepairDeviceButton extends PureComponent<Props, State> {
       complete: () => {
         if (this.timeout) clearTimeout(this.timeout);
         this.setState({ opened: false, isLoading: false, progress: 0 }, () => {
-          history.push({ pathname: "/manager", state: { source: "settings help repair device" } });
+          setTrackingSource("settings help repair device");
+          history.push({ pathname: "/manager" });
         });
         if (onRepair) {
           onRepair(false);

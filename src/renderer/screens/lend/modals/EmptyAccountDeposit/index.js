@@ -13,6 +13,7 @@ import Box from "~/renderer/components/Box/Box";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 import { supportedBuyCurrenciesIds } from "~/renderer/screens/exchange/config";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 const AmountUpWrapper = styled.div`
   padding: ${p => p.theme.space[3]}px;
@@ -46,12 +47,12 @@ const NoEthereumAccountModal = ({ currency, account, ...rest }: Props) => {
 
   const handleBuy = useCallback(() => {
     handleClose();
+    setTrackingSource("lending deposit");
     history.push({
       pathname: "/exchange",
       state: {
         tab: 0,
         defaultCurrency: currency,
-        source: "lending deposit",
       },
     });
   }, [history, handleClose, currency]);
