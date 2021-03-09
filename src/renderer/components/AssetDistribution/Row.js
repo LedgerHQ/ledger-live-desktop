@@ -17,6 +17,7 @@ import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import Tooltip from "~/renderer/components/Tooltip";
 import Bar from "./Bar";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 export type DistributionItem = {
   currency: CryptoCurrency | TokenCurrency,
@@ -93,7 +94,8 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
   const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2);
   const icon = <CryptoCurrencyIcon currency={currency} size={16} />;
   const onClick = useCallback(() => {
-    history.push({ pathname: `/asset/${currency.id}`, state: { source: "asset allocation" } });
+    setTrackingSource("asset allocation");
+    history.push({ pathname: `/asset/${currency.id}` });
   }, [currency, history]);
 
   return (

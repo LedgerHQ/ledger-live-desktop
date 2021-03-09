@@ -35,6 +35,7 @@ import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
 import ExternalLinkButton from "../ExternalLinkButton";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 const AnimationWrapper: ThemedComponent<{ modelId: DeviceModelId }> = styled.div`
   width: 600px;
@@ -167,10 +168,10 @@ const OpenManagerBtn = ({
 }) => {
   const history = useHistory();
   const onClick = useCallback(() => {
+    setTrackingSource("device action open manager button");
     history.push({
       pathname: "manager",
       search: appName ? `?q=${appName}` : "",
-      state: { source: "device action open manager button" },
     });
     closeAllModal();
   }, [history, appName, closeAllModal]);
