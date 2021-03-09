@@ -212,21 +212,6 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       ),
       JSON.stringify(coverage),
     );
-
-    await app.client.execute(() => {
-      window.stopProfile();
-    });
-    let profile;
-    while (!profile) {
-      profile = await app.client.execute(() => {
-        return window.PROFILE;
-      });
-    }
-    fs.writeFileSync(
-      path.join(__dirname, "cpuprofiles", path.basename(require.main.filename) + ".cpuprofile"),
-      profile,
-    );
-
     await app.stop();
     removeUserData(process.env.SPECTRON_DUMP_APP_JSON);
   });

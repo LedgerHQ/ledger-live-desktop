@@ -1,6 +1,6 @@
 // @flow
 import "./setup";
-import { app, Menu, ipcMain, contentTracing } from "electron";
+import { app, Menu, ipcMain } from "electron";
 import menu from "./menu";
 import {
   createMainWindow,
@@ -12,7 +12,6 @@ import "./internal-lifecycle";
 import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import db from "./db";
 import debounce from "lodash/debounce";
-import fs from "fs";
 import logger from "~/logger";
 
 app.allowRendererProcessReuse = false;
@@ -170,37 +169,6 @@ ipcMain.on("ready-to-show", () => {
     }
   }
 });
-
-if (process.env.SPECTRON_RUN) {
-  app.whenReady().then(() => {
-    (async () => {
-      const defaultTraceCategories = [
-        "-*",
-        "devtools.timeline",
-        "disabled-by-default-devtools.timeline",
-        "disabled-by-default-devtools.timeline.frame",
-        "toplevel",
-        "blink.console",
-        "disabled-by-default-devtools.timeline.stack",
-        "disabled-by-default-v8.cpu_profile",
-        "disabled-by-default-v8.cpu_profiler",
-        "disabled-by-default-v8.cpu_profiler.hires",
-      ];
-      const traceOptions = {
-        categoryFilter: defaultTraceCategories.join(","),
-        traceOptions: "record-until-full",
-        options: "sampling-frequency=10000",
-      };
-      await contentTracing.startRecording(traceOptions);
-
-      ipcMain.handle("stop-profile", async () => {
-        const path = await contentTracing.stopRecording();
-        const profile = fs.readFileSync(path);
-        return profile.toString();
-      });
-    })();
-  });
-}
 
 async function installExtensions() {
   const installer = require("electron-devtools-installer");
