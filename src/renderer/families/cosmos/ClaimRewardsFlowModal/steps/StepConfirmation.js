@@ -56,24 +56,21 @@ function StepConfirmation({
     const amount =
       unit && validator && formatCurrencyUnit(unit, validator.amount, { showCode: true, locale });
 
+    const titleKey = transaction?.mode === "claimReward" ? "title" : "titleCompound";
+    const textKey = transaction?.mode === "claimReward" ? "text" : "textCompound";
+
     return (
       <Container>
         <TrackPage category="ClaimRewards Cosmos Flow" name="Step Confirmed" />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={
-            <Trans
-              i18nKey={`cosmos.claimRewards.flow.steps.confirmation.success.${
-                transaction?.mode === "claimReward" ? "title" : "titleCompound"
-              }`}
-            />
+            <Trans i18nKey={`cosmos.claimRewards.flow.steps.confirmation.success.${titleKey}`} />
           }
           description={
             <div>
               <Trans
-                i18nKey={`cosmos.claimRewards.flow.steps.confirmation.success.${
-                  transaction?.mode === "claimReward" ? "text" : "textCompound"
-                }`}
+                i18nKey={`cosmos.claimRewards.flow.steps.confirmation.success.${textKey}`}
                 values={{ amount, validator: v && v.name }}
               >
                 <b></b>
