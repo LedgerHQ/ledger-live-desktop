@@ -63,7 +63,9 @@ const Slide = ({ url, path, title, description, imgs }: Props) => {
       history.push({ pathname: path, state: { source: "banner" } });
       return;
     }
-    openURL(url);
+    if (url) {
+      openURL(url);
+    }
   }, [history, path, url]);
 
   // After initial slide-in animation, set the offset to zero

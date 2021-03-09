@@ -50,6 +50,7 @@ const SLIDES = [
     description: <Trans i18nKey={`banners.ledgerAcademy.description`} />,
     imgs: [
       {
+        // $FlowFixMe
         source: require("./banners/LedgerAcademy/images/bg.png").default,
         transform: [0, 60, 5, 60],
         size: {
@@ -58,6 +59,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/LedgerAcademy/images/card.png").default,
         transform: [65, 50, 20, 50],
         size: {
@@ -66,6 +68,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/LedgerAcademy/images/coin.png").default,
         transform: [-15, 20, 25, 20],
         size: {
@@ -74,6 +77,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/LedgerAcademy/images/hat.png").default,
         transform: [10, 30, 0, 30],
         size: {
@@ -82,6 +86,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/LedgerAcademy/images/nano.png").default,
         transform: [75, 25, 8, 25],
         size: {
@@ -98,6 +103,7 @@ const SLIDES = [
     description: <Trans i18nKey={`banners.buyCrypto.description`} />,
     imgs: [
       {
+        // $FlowFixMe
         source: require("./banners/BuyCrypto/images/bg.png").default,
         transform: [-10, 60, -8, 60],
         size: {
@@ -106,6 +112,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/BuyCrypto/images/cart.png").default,
         transform: [20, 40, 7, 40],
         size: {
@@ -114,6 +121,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/BuyCrypto/images/coin.png").default,
         transform: [53, 30, 53, 30],
         size: {
@@ -122,6 +130,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/BuyCrypto/images/coin2.png").default,
         transform: [58, 25, 20, 25],
         size: {
@@ -130,6 +139,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/BuyCrypto/images/coin3.png").default,
         transform: [29, 20, 33, 20],
         size: {
@@ -146,6 +156,7 @@ const SLIDES = [
     description: <Trans i18nKey={`banners.swap.description`} />,
     imgs: [
       {
+        // $FlowFixMe
         source: require("./banners/Swap/images/bg.png").default,
         transform: [0, 60, 5, 60],
         size: {
@@ -154,6 +165,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/Swap/images/coin1.png").default,
         transform: [37, 25, 24, 25],
         size: {
@@ -162,6 +174,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/Swap/images/coin2.png").default,
         transform: [115, 25, 28, 25],
         size: {
@@ -170,6 +183,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/Swap/images/loop.png").default,
         transform: [20, 35, 5, 35],
         size: {
@@ -178,6 +192,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/Swap/images/smallcoin1.png").default,
         transform: [115, 15, 35, 15],
         size: {
@@ -186,6 +201,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/Swap/images/smallcoin2.png").default,
         transform: [88, 20, 65, 20],
         size: {
@@ -194,6 +210,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/Swap/images/smallcoin3.png").default,
         transform: [78, 17, 32, 17],
         size: {
@@ -210,6 +227,7 @@ const SLIDES = [
     description: <Trans i18nKey={`banners.backupPack.description`} />,
     imgs: [
       {
+        // $FlowFixMe
         source: require("./banners/BackupPack/images/bg.png").default,
         transform: [20, 60, 5, 60],
         size: {
@@ -218,6 +236,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/BackupPack/images/nanos.png").default,
         transform: [-35, -25, 5, -25],
         size: {
@@ -226,6 +245,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/BackupPack/images/nanox.png").default,
         transform: [55, 25, 5, 25],
         size: {
@@ -242,6 +262,7 @@ const SLIDES = [
     description: <Trans i18nKey={`banners.polkaStake.description`} />,
     imgs: [
       {
+        // $FlowFixMe
         source: require("./banners/PolkaStake/images/BG.png").default,
         transform: [0, 60, 5, 60],
         size: {
@@ -250,6 +271,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/PolkaStake/images/hand.png").default,
         transform: [15, 25, -13, 25],
         size: {
@@ -266,6 +288,7 @@ const SLIDES = [
     description: <Trans i18nKey={`banners.gateway.description`} />,
     imgs: [
       {
+        // $FlowFixMe
         source: require("./banners/Gateway/images/ledger.png").default,
         transform: [0, 30, 5, 30],
         size: {
@@ -274,6 +297,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/Gateway/images/ball.png").default,
         transform: [0, 60, 20, 20],
         size: {
@@ -282,6 +306,7 @@ const SLIDES = [
         },
       },
       {
+        // $FlowFixMe
         source: require("./banners/Gateway/images/satellite.png").default,
         transform: [-10, 15, 5, 15],
         size: {
