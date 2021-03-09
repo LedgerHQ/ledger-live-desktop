@@ -6,9 +6,10 @@ export type ErrorDisplayProps = {
   onRetry?: () => void,
   withExportLogs?: boolean,
   list?: boolean,
+  supportLink?: string,
 };
 
-const ErrorDisplay = ({ error, onRetry, withExportLogs, list }: ErrorDisplayProps) =>
-  renderError({ error, onRetry, withExportLogs, list });
+const ErrorDisplay = ({ error, onRetry, withExportLogs, list, supportLink }: ErrorDisplayProps) =>
+  renderError({ error, onRetry, withExportLogs, list, supportLink });
 
 export default ErrorDisplay;
