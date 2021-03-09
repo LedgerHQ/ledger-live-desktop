@@ -64,7 +64,12 @@ const PriceSection: ThemedComponent<{}> = styled.div`
   width: 20%;
   text-align: left;
   > :first-child {
-    margin-right: 6px;
+    padding-right: 24px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
   }
 `;
 const Distribution: ThemedComponent<{}> = styled.div`
@@ -83,8 +88,11 @@ const Amount: ThemedComponent<{}> = styled.div`
 const Value: ThemedComponent<{}> = styled.div`
   width: 15%;
   box-sizing: border-box;
-  padding-left: 8px;
+  padding-left: 24px;
   justify-content: flex-end;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => {
