@@ -767,6 +767,14 @@
       "description": "Gérez vos actifs en toute sécurité avec un Nano X et un Nano S à un prix réduit",
       "cta": "Acheter un back-up pack"
     },
+    "polkaStake": {
+      "title": "POLKADOT staking",
+      "description": "You can now stake, secure and manage your DOT directly in Ledger Live"
+    },
+    "gateway": {
+      "title": "THE GATEWAY TO CRYPTO SERVICES",
+      "description": "Secure, buy, sell, grow and exchange crypto directly on Ledger Live from our partners"
+    },
     "sell": {
       "title": "vendre des crypto-monnaies",
       "description": "Vendez des Bitcoin avec notre partenaire directement depuis Ledger Live"
