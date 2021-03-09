@@ -8,19 +8,21 @@ import { closeAllModal } from "~/renderer/actions/modals";
 import { useDispatch } from "react-redux";
 import type { Account, CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+
 const BuyButton = ({ currency, account }: { currency: CryptoCurrency, account: Account }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
   const onClick = useCallback(() => {
     dispatch(closeAllModal());
+    setTrackingSource("send flow");
     history.push({
       pathname: "/exchange",
       state: {
         tab: 0,
         defaultCurrency: currency,
         defaultAccount: account,
-        source: "send flow",
       },
     });
   }, [account, currency, dispatch, history]);

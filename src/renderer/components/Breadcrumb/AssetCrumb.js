@@ -11,6 +11,7 @@ import IconAngleUp from "~/renderer/icons/AngleUp";
 import { useDistribution } from "~/renderer/actions/general";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { Separator, Item, TextLink, AngleDown, Check } from "./common";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 export default function AssetCrumb() {
   const { t } = useTranslation();
@@ -42,8 +43,8 @@ export default function AssetCrumb() {
       }
 
       const { currency } = item;
-
-      history.push({ pathname: `/asset/${currency.id}`, state: { source: "asset breadcrumb" } });
+      setTrackingSource("asset breadcrumb");
+      history.push({ pathname: `/asset/${currency.id}` });
     },
     [history],
   );
@@ -70,7 +71,10 @@ export default function AssetCrumb() {
     <>
       <TextLink>
         <Button
-          onClick={() => history.push({ pathname: "/", state: { source: "asset breadcrumb" } })}
+          onClick={() => {
+            setTrackingSource("asset breadcrumb");
+            history.push({ pathname: "/" });
+          }}
         >
           {t("dashboard.title")}
         </Button>

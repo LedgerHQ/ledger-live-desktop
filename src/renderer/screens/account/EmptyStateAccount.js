@@ -25,6 +25,7 @@ import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 const mapDispatchToProps = {
   openModal,
@@ -102,9 +103,10 @@ class EmptyStateAccount extends PureComponent<Props, *> {
                 mt={5}
                 mr={2}
                 primary
-                onClick={() =>
-                  history.push({ pathname: "/exchange", state: { source: "empty state account" } })
-                }
+                onClick={() => {
+                  setTrackingSource("empty state account");
+                  history.push({ pathname: "/exchange" });
+                }}
               >
                 <Box horizontal flow={1} alignItems="center">
                   <IconExchange size={12} />
