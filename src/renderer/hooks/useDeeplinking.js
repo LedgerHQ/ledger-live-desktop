@@ -57,6 +57,14 @@ export function useDeepLinkHandler() {
           navigate("/accounts");
           break;
 
+        case "buy":
+          navigate("/exchange");
+          break;
+
+        case "swap":
+          navigate("/swap");
+          break;
+
         case "account": {
           const { currency } = query;
           if (!currency || typeof currency !== "string") return;
