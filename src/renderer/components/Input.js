@@ -144,6 +144,7 @@ type Props = {
   small?: boolean,
   editInPlace?: boolean,
   disabled?: boolean,
+  hideErrorMessage?: boolean,
 };
 
 // $FlowFixMe @IAmMorrow
@@ -164,6 +165,7 @@ const Input = React.forwardRef(function Input(
     onEsc,
     onFocus = noop,
     onBlur = noop,
+    hideErrorMessage,
     ...props
   }: Props,
   inputRef,
@@ -242,18 +244,20 @@ const Input = React.forwardRef(function Input(
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
-        {error ? (
-          <ErrorDisplay id="input-error">
-            <Ellipsis>
-              <TranslatedError error={error} />
-            </Ellipsis>
-          </ErrorDisplay>
-        ) : warning ? (
-          <WarningDisplay id="input-warning">
-            <Ellipsis>
-              <TranslatedError error={warning} />
-            </Ellipsis>
-          </WarningDisplay>
+        {!hideErrorMessage ? (
+          error ? (
+            <ErrorDisplay id="input-error">
+              <Ellipsis>
+                <TranslatedError error={error} />
+              </Ellipsis>
+            </ErrorDisplay>
+          ) : warning ? (
+            <WarningDisplay id="input-warning">
+              <Ellipsis>
+                <TranslatedError error={warning} />
+              </Ellipsis>
+            </WarningDisplay>
+          ) : null
         ) : null}
         {loading && !isFocus ? (
           <LoadingDisplay>

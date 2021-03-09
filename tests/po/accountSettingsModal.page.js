@@ -1,27 +1,27 @@
 import Modal from "./modal.page";
 
 export default class AccountSettingsModal extends Modal {
-  get settingsDeleteButton() {
+  async settingsDeleteButton() {
     return this.$("#account-settings-delete");
   }
 
-  get settingsApplyButton() {
+  async settingsApplyButton() {
     return this.$("#account-settings-apply");
   }
 
-  get editNameInput() {
+  async editNameInput() {
     return this.$("#input-edit-name");
   }
 
   async editAccountName(newName) {
-    const input = await this.editNameInput;
+    const input = await this.editNameInput();
     await input.waitForDisplayed();
     await input.addValue(newName);
     await this.apply();
   }
 
   async apply() {
-    const btn = await this.settingsApplyButton;
+    const btn = await this.settingsApplyButton();
     await btn.click();
   }
 }

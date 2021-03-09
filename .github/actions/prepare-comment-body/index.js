@@ -1,10 +1,8 @@
 const core = require("@actions/core");
-const fetch = require("isomorphic-unfetch");
 
 const main = async () => {
   const images = core.getInput("images");
   const runId = core.getInput("runId");
-  const prNumber = core.getInput("prNumber");
   const pullId = core.getInput("pullId");
   const from = core.getInput("from");
   const to = core.getInput("to");
@@ -27,7 +25,7 @@ const main = async () => {
     // from what I understood it's a bit cumbersome to get the artifact url before the workflow finishes
     // so this is a workaround. the endpoint will redirect to the artifact url.
     // https://github.com/machard/github-action-artifact-redirect
-    str += `[Suggested snapshots to update](https://github-action-artifact-link.vercel.app/api?owner=${fullrepo[0]}&repo=${fullrepo[1]}&runId=${runId})`;
+    str += `[Suggested snapshots to update](https://github-actions-live-vercel.vercel.app/api?owner=${fullrepo[0]}&repo=${fullrepo[1]}&runId=${runId})`;
   }
 
   const lintFailed = (lintoutput || "").indexOf("exit code 255") >= 0;
@@ -114,18 +112,7 @@ Diff output ${imgDiffFailed ? "❌" : " ✅"}
 https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
 `;
 
-  await fetch(
-    `http://github-action-artifact-link.vercel.app/api/comment?owner=LedgerHQ&repo=ledger-live-desktop&issueId=${prNumber}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ comment: str }),
-    },
-  );
-
-  core.setOutput("body", JSON.stringify({ comment: str.replace(/'/g, "'\\''") }));
+  core.setOutput("body", JSON.stringify({ comment: str }));
   core.setOutput("bodyclean", str);
   core.setOutput("bodySlack", strSlack);
   core.setOutput("bodySlackAuthor", strSlackAuthor);
