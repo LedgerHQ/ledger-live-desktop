@@ -34,6 +34,17 @@ const ErrorWrapper: ThemedComponent<{}> = styled.div`
   }
 `;
 
+const ErrorContainer = styled(Box)`
+  margin-top: 0px;
+  font-size: 12px;
+  width: 100%;
+  transition: all 0.4s ease-in-out;
+  will-change: max-height;
+  max-height: ${p => (p.hasError ? 60 : 0)}px;
+  min-height: ${p => (p.hasError ? 20 : 0)}px;
+  overflow: hidden;
+`;
+
 const Holder = styled.div`
   font-family: Inter;
   font-weight: 500;
@@ -101,14 +112,16 @@ const FeeSliderField = ({ range, value, onChange, unit, error, defaultValue }: P
           <Trans i18nKey="fees.fast" />
         </Text>
       </Box>
-      {error && (
-        <ErrorWrapper>
-          <IconExclamationCircle size={12} />
-          <Box color="alertRed" ff="Inter|Regular" fontSize={4} textAlign="center">
-            <TranslatedError error={error} />
-          </Box>
-        </ErrorWrapper>
-      )}
+      <ErrorContainer hasError={error}>
+        {error ? (
+          <ErrorWrapper>
+            <IconExclamationCircle size={12} />
+            <Box flex="1" color="alertRed" ff="Inter|Regular" fontSize={4} textAlign="left">
+              <TranslatedError error={error} />
+            </Box>
+          </ErrorWrapper>
+        ) : null}
+      </ErrorContainer>
     </GenericContainer>
   );
 };
