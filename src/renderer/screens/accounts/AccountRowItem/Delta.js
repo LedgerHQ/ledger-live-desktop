@@ -1,6 +1,5 @@
 // @flow
 import React from "react";
-import { BigNumber } from "bignumber.js";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { useBalanceHistoryWithCountervalue } from "~/renderer/actions/portfolio";

@@ -86,7 +86,6 @@ export default function BalanceSummary({
           currency={currency}
           unit={unit}
           counterValue={counterValue}
-          selectedTimeRange={range}
           countervalueChange={countervalueChange}
           cryptoChange={cryptoChange}
           last={history[history.length - 1]}

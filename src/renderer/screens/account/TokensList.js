@@ -1,5 +1,4 @@
 // @flow
-
 import React, { PureComponent } from "react";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account/helpers";
@@ -24,7 +23,6 @@ import { openURL } from "~/renderer/linking";
 import { track } from "~/renderer/analytics/segment";
 import AccountContextMenu from "~/renderer/components/ContextMenu/AccountContextMenu";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-
 import perFamilyTokenList from "~/renderer/generated/TokenList";
 
 type OwnProps = {
@@ -39,49 +37,9 @@ type Props = {
   history: RouterHistory,
 };
 
-const Wrapper: ThemedComponent<{}> = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  padding-right: ${p => p.theme.space[4]}px;
-`;
-
-const EmptyState: ThemedComponent<{}> = styled.div`
-  border: 1px dashed ${p => p.theme.colors.palette.text.shade60};
-  padding: 15px 20px;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  > :first-child {
-    flex: 1;
-  }
-  > :nth-child(2) {
-    align-self: center;
-  }
-`;
-
-const Placeholder: ThemedComponent<{}> = styled.div`
-  flex-direction: column;
-  display: flex;
-  padding-right: 50px;
-`;
-
 const mapDispatchToProps = {
   openModal,
 };
-
-// Fixme Temporarily hiding the receive token button
-const ReceiveButton = (props: { onClick: () => void }) => (
-  <Button small primary onClick={props.onClick}>
-    <Box horizontal flow={1} alignItems="center">
-      <IconPlus size={12} />
-      <Box>
-        <Trans i18nKey="tokensList.cta" />
-      </Box>
-    </Box>
-  </Button>
-);
 
 class TokensList extends PureComponent<Props> {
   onAccountClick = (account: AccountLike, parentAccount: Account) => {
@@ -195,3 +153,43 @@ const ConnectedTokenList: React$ComponentType<OwnProps> = compose(
 )(TokensList);
 
 export default ConnectedTokenList;
+
+// Fixme Temporarily hiding the receive token button
+const ReceiveButton = (props: { onClick: () => void }) => (
+  <Button small primary onClick={props.onClick}>
+    <Box horizontal flow={1} alignItems="center">
+      <IconPlus size={12} />
+      <Box>
+        <Trans i18nKey="tokensList.cta" />
+      </Box>
+    </Box>
+  </Button>
+);
+
+const Wrapper: ThemedComponent<{}> = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-right: ${p => p.theme.space[4]}px;
+`;
+
+const EmptyState: ThemedComponent<{}> = styled.div`
+  border: 1px dashed ${p => p.theme.colors.palette.text.shade60};
+  padding: 15px 20px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  > :first-child {
+    flex: 1;
+  }
+  > :nth-child(2) {
+    align-self: center;
+  }
+`;
+
+const Placeholder: ThemedComponent<{}> = styled.div`
+  flex-direction: column;
+  display: flex;
+  padding-right: 50px;
+`;

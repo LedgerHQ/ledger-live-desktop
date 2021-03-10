@@ -10,15 +10,7 @@ import PillsDaysCount from "~/renderer/components/PillsDaysCount";
 import TransactionsPendingConfirmationWarning from "~/renderer/components/TransactionsPendingConfirmationWarning";
 import { PlaceholderLine } from "./Placeholder";
 
-const Sub = styled(Box).attrs(() => ({
-  ff: "Inter",
-  fontSize: 4,
-}))`
-  text-transform: lowercase;
-`;
-
 type BalanceSinceProps = {
-  since: string,
   valueChange: ValueChange,
   totalBalance: number,
   isAvailable: boolean,
@@ -26,7 +18,7 @@ type BalanceSinceProps = {
 
 type BalanceTotalProps = {
   children?: any,
-  unit: Unit,
+  unit?: Unit,
   isAvailable: boolean,
   totalBalance: number,
   showCryptoEvenIfNotAvailable?: boolean,
@@ -38,18 +30,7 @@ type Props = {
   unit: Unit,
 } & BalanceSinceProps;
 
-type BalanceInfoProps = Props & {
-  handleChangeSelectedTime: any => void,
-};
-
-export function BalanceDiff({
-  totalBalance,
-  valueChange,
-  since,
-  unit,
-  isAvailable,
-  ...boxProps
-}: Props) {
+export function BalanceDiff({ totalBalance, valueChange, unit, isAvailable, ...boxProps }: Props) {
   if (!isAvailable) return null;
 
   return (
@@ -85,7 +66,7 @@ export function BalanceTotal({
   totalBalance,
   isAvailable,
   showCryptoEvenIfNotAvailable,
-  children,
+  children = null,
   withTransactionsPendingConfirmationWarning,
   account,
   ...boxProps
@@ -118,19 +99,7 @@ export function BalanceTotal({
   );
 }
 
-BalanceTotal.defaultProps = {
-  children: null,
-  unit: undefined,
-};
-
-export default function BalanceInfos({
-  totalBalance,
-  since,
-  handleChangeSelectedTime,
-  valueChange,
-  isAvailable,
-  unit,
-}: BalanceInfoProps) {
+export default function BalanceInfos({ totalBalance, valueChange, isAvailable, unit }: Props) {
   const { t } = useTranslation();
 
   return (
@@ -149,12 +118,18 @@ export default function BalanceInfos({
         <BalanceDiff
           totalBalance={totalBalance}
           valueChange={valueChange}
-          since={since}
           unit={unit}
           isAvailable={isAvailable}
         />
-        <PillsDaysCount selected={since} onChange={handleChangeSelectedTime} />
+        <PillsDaysCount />
       </Box>
     </Box>
   );
 }
+
+const Sub = styled(Box).attrs(() => ({
+  ff: "Inter",
+  fontSize: 4,
+}))`
+  text-transform: lowercase;
+`;

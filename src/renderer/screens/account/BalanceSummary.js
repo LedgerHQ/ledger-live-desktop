@@ -12,24 +12,21 @@ import type {
   AccountLike,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
-import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { useTimeRange } from "~/renderer/actions/settings";
+import { counterValueCurrencySelector, discreetModeSelector } from "~/renderer/reducers/settings";
 import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import AccountBalanceSummaryHeader from "./AccountBalanceSummaryHeader";
-import { discreetModeSelector } from "~/renderer/reducers/settings";
 
 import AccountLendingFooter from "~/renderer/screens/lend/Account/AccountBalanceSummaryFooter";
-
 import perFamilyAccountBalanceSummaryFooter from "~/renderer/generated/AccountBalanceSummaryFooter";
 
 type Props = {
-  counterValue: Currency,
   chartColor: string,
   account: AccountLike,
   parentAccount: ?Account,
-  range: PortfolioRange,
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,
   mainAccount: ?Account,
@@ -39,9 +36,7 @@ type Props = {
 
 export default function AccountBalanceSummary({
   account,
-  counterValue,
   countervalueFirst,
-  range,
   chartColor,
   setCountervalueFirst,
   mainAccount,
@@ -49,6 +44,8 @@ export default function AccountBalanceSummary({
   parentAccount,
   ctoken,
 }: Props) {
+  const [range] = useTimeRange();
+  const counterValue = useSelector(counterValueCurrencySelector);
   const {
     history,
     countervalueAvailable,
@@ -113,7 +110,6 @@ export default function AccountBalanceSummary({
         <AccountBalanceSummaryHeader
           account={account}
           counterValue={counterValue}
-          selectedTimeRange={range}
           countervalueChange={countervalueChange}
           cryptoChange={cryptoChange}
           last={history[history.length - 1]}

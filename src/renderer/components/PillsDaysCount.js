@@ -1,31 +1,16 @@
 // @flow
 import React from "react";
-import { useTranslation } from "react-i18next";
 import Pills from "~/renderer/components/Pills";
-import { timeRangeDaysByKey } from "~/renderer/reducers/settings";
+import { useTimeRange } from "~/renderer/actions/settings";
 import Track from "~/renderer/analytics/Track";
 
-type Props = {|
-  selected: string,
-  onChange: ({ key: string, value: *, label: string }) => void,
-|};
-
-export default function PillsDaysCount({ selected, onChange }: Props) {
-  const { t } = useTranslation();
-  const { day, ...target } = timeRangeDaysByKey; // FIXME LL-4442 | tmp disabled, planned for 2.22
+export default function PillsDaysCount() {
+  const [selected, onChange, options] = useTimeRange();
   return (
     <>
       <Track onUpdate event="PillsDaysChange" selected={selected} />
-      <Pills
-        items={Object.entries(target).map(([key, value]) => ({
-          key,
-          value,
-          label: t(`time.range.${key}`),
-        }))}
-        activeKey={selected}
-        onChange={onChange}
-        bordered
-      />
+      {/* $FlowFixMe */}
+      <Pills items={options} activeKey={selected} onChange={onChange} bordered />
     </>
   );
 }

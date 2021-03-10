@@ -19,12 +19,7 @@ import {
   findSubAccountById,
 } from "@ledgerhq/live-common/lib/account";
 import { setCountervalueFirst } from "~/renderer/actions/settings";
-import {
-  counterValueCurrencySelector,
-  selectedTimeRangeSelector,
-  countervalueFirstSelector,
-} from "~/renderer/reducers/settings";
-import type { TimeRange } from "~/renderer/reducers/settings";
+import { countervalueFirstSelector } from "~/renderer/reducers/settings";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
 import perFamilyAccountBodyHeader from "~/renderer/generated/AccountBodyHeader";
@@ -57,8 +52,6 @@ const mapStateToProps = (
   return {
     parentAccount,
     account,
-    counterValue: counterValueCurrencySelector(state),
-    selectedTimeRange: selectedTimeRangeSelector(state),
     countervalueFirst: countervalueFirstSelector(state),
   };
 };
@@ -68,11 +61,9 @@ const mapDispatchToProps = {
 };
 
 type Props = {
-  counterValue: Currency,
   t: TFunction,
   account?: AccountLike,
   parentAccount?: Account,
-  selectedTimeRange: TimeRange,
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,
 };
@@ -81,8 +72,6 @@ const AccountPage = ({
   account,
   parentAccount,
   t,
-  counterValue,
-  selectedTimeRange,
   countervalueFirst,
   setCountervalueFirst,
 }: Props) => {
@@ -124,8 +113,6 @@ const AccountPage = ({
               account={account}
               parentAccount={parentAccount}
               chartColor={color}
-              counterValue={counterValue}
-              range={selectedTimeRange}
               countervalueFirst={countervalueFirst}
               setCountervalueFirst={setCountervalueFirst}
               isCompoundEnabled={isCompoundEnabled}

@@ -2,14 +2,20 @@
 import { useCallback } from "react";
 import type { Dispatch } from "redux";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { setEnvOnAllThreads } from "~/helpers/env";
 import type { SettingsState as Settings } from "~/renderer/reducers/settings";
+import {
+  timeRangeDaysByKey,
+  hideEmptyTokenAccountsSelector,
+  selectedTimeRangeSelector,
+} from "~/renderer/reducers/settings";
 import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
-import { hideEmptyTokenAccountsSelector } from "~/renderer/reducers/settings";
+
 import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
 
 export type SaveSettings = ($Shape<Settings>) => { type: string, payload: $Shape<Settings> };
@@ -62,6 +68,40 @@ export function useHideEmptyTokenAccounts() {
     [dispatch, refreshAccountsOrdering],
   );
   return [value, setter];
+}
+
+type PortfolioRangeOption = {
+  key: PortfolioRange,
+  value: number,
+  label: string,
+};
+
+export function useTimeRange(blocklist?: string[] = []) {
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const val = useSelector(selectedTimeRangeSelector);
+  const setter = useCallback(
+    (_range: PortfolioRange | PortfolioRangeOption) => {
+      const range = typeof _range === "string" ? _range : _range.key;
+      dispatch(setSelectedTimeRange(range));
+    },
+    [dispatch],
+  );
+  const options = Object.entries(timeRangeDaysByKey).reduce(
+    (prev, [key, value]) =>
+      blocklist.includes(key)
+        ? prev
+        : [
+            ...prev,
+            {
+              key,
+              value,
+              label: t(`time.range.${key}`),
+            },
+          ],
+    [],
+  );
+  return [val, setter, options];
 }
 
 export const setShowClearCacheBanner = (showClearCacheBanner: boolean) =>
