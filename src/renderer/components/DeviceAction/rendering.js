@@ -1,5 +1,6 @@
 // @flow
 import React, { useCallback } from "react";
+import { BigNumber } from "bignumber.js";
 import map from "lodash/map";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
@@ -414,6 +415,7 @@ export const renderSwapDeviceConfirmation = ({
   status,
   exchangeRate,
   exchange,
+  amountExpectedTo,
 }: {
   modelId: DeviceModelId,
   type: "light" | "dark",
@@ -421,88 +423,86 @@ export const renderSwapDeviceConfirmation = ({
   status: TransactionStatus,
   exchangeRate: ExchangeRate,
   exchange: Exchange,
-}) => (
-  <>
-    <Box mb={3}>
-      <InfoBox onLearnMore={() => openURL(urls.swap.learnMore)} horizontal={false}>
-        <Trans i18nKey="DeviceAction.swap.notice" />
-      </InfoBox>
-    </Box>
-    {map(
-      {
-        amountSent: (
-          <CurrencyUnitValue
-            unit={getAccountUnit(exchange.fromAccount)}
-            value={transaction.amount}
-            disableRounding
-            showCode
-          />
+  amountExpectedTo?: string,
+}) => {
+  return (
+    <>
+      <Box mb={3}>
+        <InfoBox onLearnMore={() => openURL(urls.swap.learnMore)} horizontal={false}>
+          <Trans i18nKey="DeviceAction.swap.notice" />
+        </InfoBox>
+      </Box>
+      {map(
+        {
+          amountSent: (
+            <CurrencyUnitValue
+              unit={getAccountUnit(exchange.fromAccount)}
+              value={transaction.amount}
+              disableRounding
+              showCode
+            />
+          ),
+          fees: (
+            <CurrencyUnitValue
+              unit={getAccountUnit(
+                getMainAccount(exchange.fromAccount, exchange.fromParentAccount),
+              )}
+              value={status.estimatedFees}
+              disableRounding
+              showCode
+            />
+          ),
+          amountReceived: (
+            <CurrencyUnitValue
+              unit={getAccountUnit(exchange.toAccount)}
+              value={amountExpectedTo ? BigNumber(amountExpectedTo) : exchangeRate.toAmount}
+              disableRounding
+              showCode
+            />
+          ),
+        },
+        (value, key) => (
+          <Box horizontal justifyContent="space-between" key={key} mb={2} ml="12px" mr="12px">
+            <Text fontWeight="500" color="palette.text.shade40" fontSize={3}>
+              <Trans i18nKey={`DeviceAction.swap.${key}`} />
+            </Text>
+            <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
+              {value}
+            </Text>
+          </Box>
         ),
-        amountReceived: (
-          <CurrencyUnitValue
-            unit={getAccountUnit(exchange.toAccount)}
-            value={transaction.amount.times(exchangeRate.magnitudeAwareRate)}
-            disableRounding
-            showCode
-          />
-        ),
-        fees: (
-          <CurrencyUnitValue
-            unit={getAccountUnit(getMainAccount(exchange.fromAccount, exchange.fromParentAccount))}
-            value={status.estimatedFees}
-            disableRounding
-            showCode
-          />
-        ),
-      },
-      (value, key) => (
-        <Box horizontal justifyContent="space-between" key={key} mb={2} ml="12px" mr="12px">
-          <Text fontWeight="500" color="palette.text.shade40" fontSize={3}>
-            <Trans i18nKey={`DeviceAction.swap.${key}`} />
-          </Text>
+      )}
+      {exchangeRate.payoutNetworkFees ? (
+        <Box
+          horizontal
+          justifyContent="space-between"
+          key={"payoutNetworkFees"}
+          mb={2}
+          ml="12px"
+          mr="12px"
+        >
+          <LabelInfoTooltip
+            text={<Trans i18nKey={"DeviceAction.swap.payoutNetworkFeesTooltip"} />}
+            style={{ marginLeft: 4 }}
+          >
+            <Text fontWeight="500" color="palette.text.shade40" fontSize={3}>
+              <Trans i18nKey={"DeviceAction.swap.payoutNetworkFees"} />
+            </Text>
+          </LabelInfoTooltip>
           <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
-            {value}
+            <CurrencyUnitValue
+              unit={getAccountUnit(getMainAccount(exchange.toAccount, exchange.toParentAccount))}
+              value={exchangeRate.payoutNetworkFees}
+              disableRounding
+              showCode
+            />
           </Text>
         </Box>
-      ),
-    )}
-    {exchangeRate.payoutNetworkFees ? (
-      <Box
-        horizontal
-        justifyContent="space-between"
-        key={"payoutNetworkFees"}
-        mb={2}
-        ml="12px"
-        mr="12px"
-      >
-        <LabelInfoTooltip
-          text={<Trans i18nKey={"DeviceAction.swap.payoutNetworkFeesTooltip"} />}
-          style={{ marginLeft: 4 }}
-        >
-          <Text fontWeight="500" color="palette.text.shade40" fontSize={3}>
-            <Trans i18nKey={"DeviceAction.swap.payoutNetworkFees"} />
-          </Text>
-        </LabelInfoTooltip>
-        <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
-          <CurrencyUnitValue
-            unit={getAccountUnit(getMainAccount(exchange.toAccount, exchange.toParentAccount))}
-            value={exchangeRate.payoutNetworkFees}
-            disableRounding
-            showCode
-          />
-        </Text>
-      </Box>
-    ) : null}
-    {/* {exchangeRate.payoutNetworkFees ? (
-      <InfoBox>
-        <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
-          {`The payout network fees of ${exchangeRate.payoutNetworkFees} are not displayed on the device`}
-        </Text>
-      </InfoBox>
-    ) : null} */}
-    {renderVerifyUnwrapped({ modelId, type })}
-  </>
-);
+      ) : null}
+      {renderVerifyUnwrapped({ modelId, type })}
+    </>
+  );
+};
 
 export const renderSellDeviceConfirmation = ({
   modelId,

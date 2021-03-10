@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useEffect, useMemo, useReducer } from "react";
+import React, { useState, useCallback, useEffect, useMemo, useReducer } from "react";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
 import { BigNumber } from "bignumber.js";
@@ -69,6 +69,7 @@ const Form = ({
   const accounts = useSelector(shallowAccountsSelector);
   const selectableCurrencies = useSelector(swapSupportedCurrenciesSelector);
   const flattenedCurrencies = useSelector(flattenedSwapSupportedCurrenciesSelector);
+  const [shouldFocusOnAmountNonce, setShouldFocusOnAmountNonce] = useState(0);
 
   const [state, dispatch] = useReducer(reducer, {
     useAllAmount: false,
@@ -182,6 +183,11 @@ const Form = ({
     estimateMaxSpendable();
   }, [account, parentAccount, setTransactionAmount, useAllAmount]);
 
+  const bumpFocusNonce = useCallback(
+    () => setShouldFocusOnAmountNonce(shouldFocusOnAmountNonce + 1),
+    [shouldFocusOnAmountNonce],
+  );
+
   const canFlipForm = fromCurrency && toCurrency && account && toAccount;
   const onFlipForm = useCallback(() => {
     if (toAccount) {
@@ -275,12 +281,13 @@ const Form = ({
   const { amount = BigNumber(0) } = transaction || {};
 
   const toAmount = useMemo(() => {
-    let base = amount.times(magnitudeAwareRate);
+    if (!exchangeRate) return;
+    let base = exchangeRate.toAmount;
     if (exchangeRate && exchangeRate.payoutNetworkFees && toCurrency) {
       base = base.minus(exchangeRate.payoutNetworkFees);
     }
     return base;
-  }, [amount, exchangeRate, magnitudeAwareRate, toCurrency]);
+  }, [exchangeRate, toCurrency]);
 
   return (
     <>
@@ -320,6 +327,7 @@ const Form = ({
             />
             <FromAmount
               key={"fromAmount"}
+              shouldFocusNonce={shouldFocusOnAmountNonce}
               status={status}
               amount={amount}
               currency={fromCurrency}
@@ -348,9 +356,10 @@ const Form = ({
               onCurrencyChange={toCurrency =>
                 dispatch({ type: "onSetToCurrency", payload: { toCurrency } })
               }
-              onAccountChange={(toAccount, toParentAccount) =>
-                dispatch({ type: "onSetToAccount", payload: { toAccount, toParentAccount } })
-              }
+              onAccountChange={(toAccount, toParentAccount) => {
+                dispatch({ type: "onSetToAccount", payload: { toAccount, toParentAccount } });
+                bumpFocusNonce();
+              }}
             />
             <ToAmount amount={toAmount} currency={toCurrency} />
           </Box>

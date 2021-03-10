@@ -70,7 +70,7 @@ const StepSummary = ({
 }) => {
   const swapAcceptedproviderIds = useSelector(swapAcceptedProviderIdsSelector);
   const { exchange, exchangeRate } = swap;
-  const { provider, magnitudeAwareRate } = exchangeRate;
+  const { provider } = exchangeRate;
   const alreadyAcceptedTerms = swapAcceptedproviderIds.includes(swap.exchangeRate.provider);
   const { fromAccount, toAccount } = exchange;
   const fromAmount = transaction.amount;
@@ -81,7 +81,7 @@ const StepSummary = ({
   const toCurrency = getAccountCurrency(toAccount);
   const fromUnit = getAccountUnit(fromAccount);
   const toUnit = getAccountUnit(toAccount);
-  const toAmount = fromAmount.times(magnitudeAwareRate).minus(exchangeRate.payoutNetworkFees || 0);
+  const toAmount = exchangeRate.toAmount.minus(exchangeRate.payoutNetworkFees || 0);
   const { main, tos } = urls.swap.providers[provider];
 
   return (
@@ -153,7 +153,6 @@ const StepSummary = ({
             <Trans i18nKey="swap.modal.steps.summary.details.provider" />
           </Text>
           <FakeLink
-            underline
             fontSize={3}
             ml={2}
             color="palette.text.shade100"
@@ -161,7 +160,9 @@ const StepSummary = ({
             iconFirst
             style={{ textTransform: "capitalize" }}
           >
-            {provider}
+            <Text ff="Inter|SemiBold" fontSize={3}>
+              {provider}
+            </Text>
             <Box ml={1} color="palette.text.shade100">
               <IconExternalLink size={12} />
             </Box>

@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
 import { Trans } from "react-i18next";
@@ -47,6 +47,7 @@ const FromAmount = ({
   status,
   onToggleUseAllAmount,
   onAmountChange,
+  shouldFocusNonce,
 }: {
   currency: ?(CryptoCurrency | TokenCurrency),
   amount: BigNumber,
@@ -56,10 +57,18 @@ const FromAmount = ({
   status: TransactionStatus,
   onAmountChange: BigNumber => void,
   onToggleUseAllAmount?: () => void,
+  shouldFocusNonce: ?number,
 }) => {
   const unit = currency && currency.units[0];
   const amountError = amount.gt(0) && (error || status.errors?.gasPrice || status.errors?.amount);
   const hideError = useAllAmount && amountError && amountError instanceof AmountRequired;
+  const amountInputRef = useRef(null);
+
+  useEffect(() => {
+    if (shouldFocusNonce && amountInputRef.current) {
+      amountInputRef.current.focus();
+    }
+  }, [shouldFocusNonce]);
 
   return (
     <Box flex={1} flow={1} ml={0} mr={23} style={{ minHeight: 100 }}>
@@ -89,6 +98,8 @@ const FromAmount = ({
         <>
           <InputCurrency
             id="swap-form-from-amount"
+            // $FlowFixMe We need this for the autohighlight
+            ref={amountInputRef}
             error={!hideError && amountError}
             loading={isLoading}
             key={unit.code}

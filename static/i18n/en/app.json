@@ -206,7 +206,7 @@
         "fixed": "Fixed rate",
         "fixedUnavailable": "Fixed rate not supported for this pair",
         "floatDesc": "Your amount could change depending on the market conditions.",
-        "fixedDesc": "Your amount will remain the same irrespective of the changes on the market. Fixed rate updates every 30 seconds",
+        "fixedDesc": "Your amount will stay the same even if the market changes. Updates every 60 seconds.",
         "by": "Provided by"
       },
       "exchange": "Exchange",
@@ -255,20 +255,25 @@
       }
     },
     "operationDetailsModal": {
-      "title": "Operation details",
+      "title": "Swap",
       "provider": "Provider",
       "txid": "Swap ID",
       "status": "Status",
       "statusTooltips": {
-        "refunded": "Please contact the Swap provider with you swap ID for more details",
-        "failed": "Please contact the Swap provider with you swap ID for more details",
-        "hold": "Please contact the Swap provider with you swap ID to solve the situation"
+        "expired": "Please contact the swap provider with your swap ID for more information.",
+        "refunded": "Please contact the swap provider with your swap ID for more information.",
+        "pending": "Please wait while the swap provider is processing the transaction.",
+        "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
+        "finished": "Your swap was completed successfully."
       },
       "date": "Date",
       "from": "From",
+      "fromAddress": "Origin address",
+      "fromAddress_plural": "Origin addresses",
       "to": "To",
-      "initialAmount": "Amount sent",
-      "creditedAmount": "Amount to receive"
+      "toProvider": "Provider address",
+      "initialAmount": "Initial amount",
+      "creditedAmount": "Credited amount"
     }
   },
   "fullNode": {
@@ -1032,12 +1037,12 @@
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction",
-      "amountSent": "Amount sent",
-      "amountReceived": "Amount received before payout fees",
+      "amountSent": "Amount to send",
+      "amountReceived": "Amount to receive before service fees",
       "fees": "Fees",
       "provider": "Provider",
       "payoutNetworkFees": "Payout fees",
-      "payoutNetworkFeesTooltip": "The amount will not be shown on the device"
+      "payoutNetworkFeesTooltip": "This amount will not be shown on your device"
       
     },
     "sell": {

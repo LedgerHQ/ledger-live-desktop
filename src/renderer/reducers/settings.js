@@ -235,7 +235,7 @@ const handlers: Object = {
     const ids = state.swapAcceptedProviderIds;
     return {
       ...state,
-      swapAcceptedProviderIds: [...ids, providerId],
+      swapAcceptedProviderIds: ids.includes(providerId) ? ids : [...ids, providerId],
     };
   },
   LAST_SEEN_DEVICE_INFO: (
