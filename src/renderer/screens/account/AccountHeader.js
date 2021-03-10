@@ -220,7 +220,7 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
         ) : (
           <CurName>{currency.name}</CurName>
         )}
-        <AccountNameBox horizontal alignItems="center" pr={3} flow={2}>
+        <AccountNameBox horizontal alignItems="center" pr={8} flow={2}>
           <AccountName
             color="palette.text.shade100"
             disabled={account.type !== "Account"}
