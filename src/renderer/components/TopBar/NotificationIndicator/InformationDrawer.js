@@ -5,8 +5,8 @@ import { SideDrawer } from "~/renderer/components/SideDrawer";
 import Box from "~/renderer/components/Box";
 import styled from "styled-components";
 import TabBar from "~/renderer/components/TabBar";
-import { AnnouncementPanel } from "~/renderer/components/TopBar/Notificationindicator/AnnouncementPanel";
-import { ServiceStatusPanel } from "~/renderer/components/TopBar/Notificationindicator/ServiceStatusPanel";
+import { AnnouncementPanel } from "~/renderer/components/TopBar/NotificationIndicator/AnnouncementPanel";
+import { ServiceStatusPanel } from "~/renderer/components/TopBar/NotificationIndicator/ServiceStatusPanel";
 
 import { useTranslation } from "react-i18next";
 import { useAnnouncements } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider";

@@ -35,7 +35,11 @@ async function loadAnnouncements(): Promise<{
   seenIds: string[],
   lastUpdateTime: number,
 }> {
-  const data = await getKey("app", "announcements", []);
+  const data = await getKey("app", "announcements", {
+    announcements: [],
+    seenIds: [],
+    lastUpdateTime: new Date().getTime(),
+  });
   return data;
 }
 

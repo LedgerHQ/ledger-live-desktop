@@ -174,6 +174,8 @@ export function AnnouncementPanel() {
     [seenIds, setAsSeen],
   );
 
+  console.log("EEEEE", cache);
+
   return (
     <ScrollArea hideScrollbar>
       <Box py="32px">
