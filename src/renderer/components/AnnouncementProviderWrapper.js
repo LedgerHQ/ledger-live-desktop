@@ -75,7 +75,6 @@ export function AnnouncementProviderWrapper({ children }: Props) {
   const onAnnouncementRead = useCallback(
     (announcement: Announcement) => {
       const { uuid } = announcement;
-      console.log("ANNOUNCEMENT READ ", uuid)
       dismissToast(uuid);
     },
     [dismissToast],
