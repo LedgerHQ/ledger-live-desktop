@@ -1,19 +1,14 @@
 // @flow
 
 import styled from "styled-components";
-import CheckCircle from "~/renderer/icons/CheckCircle";
 import TriangleWarning from "~/renderer/icons/TriangleWarning";
-import React, { useCallback, useRef } from "react";
+import React from "react";
 import { openURL } from "~/renderer/linking";
-import {
-  useServiceStatus,
-} from "@ledgerhq/live-common/lib/providers/ServiceStatusProvider";
+import { useServiceStatus } from "@ledgerhq/live-common/lib/providers/ServiceStatusProvider";
 import Text from "~/renderer/components/Text";
-import Box from "~/renderer/components/Box";
 import SuccessAnimatedIcon from "~/renderer/components/SuccessAnimatedIcon";
 import { Trans } from "react-i18next";
 import { FakeLink } from "~/renderer/components/Link";
-import Ellipsis from "~/renderer/components/Ellipsis";
 
 function StatusOkHeader() {
   return (
@@ -45,9 +40,9 @@ function StatusOkHeader() {
 
 function StatusNotOkHeader() {
   return (
-    <StatusHeaderContainer>
+    <>
       <TriangleWarning size={42} />
-    </StatusHeaderContainer>
+    </>
   );
 }
 
@@ -61,6 +56,8 @@ const PanelContainer = styled.div`
 
 export function ServiceStatusPanel() {
   const { incidents } = useServiceStatus();
+
+  console.log({ incidents });
 
   return (
     <PanelContainer>

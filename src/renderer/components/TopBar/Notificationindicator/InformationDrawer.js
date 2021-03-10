@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import { SideDrawer } from "~/renderer/components/SideDrawer";
 import Box from "~/renderer/components/Box";
 import styled from "styled-components";
@@ -11,6 +11,9 @@ import { ServiceStatusPanel } from "~/renderer/components/TopBar/Notificationind
 import { useTranslation } from "react-i18next";
 import { useAnnouncements } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider";
 import { CSSTransition } from "react-transition-group";
+import { useSelector, useDispatch } from "react-redux";
+import { informationCenterStateSelector } from "~/renderer/reducers/UI";
+import { setTabInformationCenter } from "~/renderer/actions/UI";
 
 const FADE_DURATION = 200;
 
@@ -37,10 +40,11 @@ export const InformationDrawer = ({
   isOpen: boolean,
   onRequestClose: () => void,
 }) => {
-  const [tabIndex, setTabIndex] = useState(0);
   const { t } = useTranslation();
   const { allIds, seenIds } = useAnnouncements();
   const unseenCount = allIds.length - seenIds;
+  const { tabId } = useSelector(informationCenterStateSelector);
+  const dispatch = useDispatch();
 
   const tabs = useMemo(
     () => [
@@ -60,9 +64,10 @@ export const InformationDrawer = ({
         Component: ServiceStatusPanel,
       },
     ],
-    [unseenCount],
+    [unseenCount, t],
   );
 
+  const tabIndex = useMemo(() => tabs.findIndex(tab => tab.id === tabId), [tabId, tabs]);
   const CurrentPanel = tabs[tabIndex].Component;
 
   return (
@@ -71,8 +76,10 @@ export const InformationDrawer = ({
         <TabBar
           fullWidth
           tabs={tabs.map(({ label }) => label)}
-          onIndexChange={setTabIndex}
-          index={tabIndex}
+          onIndexChange={newTabIndex => {
+            dispatch(setTabInformationCenter(tabs[newTabIndex].id));
+          }}
+          index={tabs.findIndex(tab => tab.id === tabId)}
         />
         <CSSTransition
           in

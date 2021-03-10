@@ -1,30 +1,36 @@
 // @flow
 
 import Tooltip from "~/renderer/components/Tooltip";
-import React, { useState } from "react";
+import React from "react";
 import ItemContainer from "../ItemContainer";
 import IconBell from "~/renderer/icons/Bell";
 import { useAnnouncements } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider";
 import { useTranslation } from "react-i18next";
 import { InformationDrawer } from "./InformationDrawer";
+import { useDispatch, useSelector } from "react-redux";
+import { informationCenterStateSelector } from "~/renderer/reducers/UI";
+import { openInformationCenter, closeInformationCenter } from "~/renderer/actions/UI";
 
 export function NotificationIndicator() {
   const { t } = useTranslation();
   const { allIds, seenIds } = useAnnouncements();
 
   const totalNotifCount = allIds.length - seenIds;
-
-  const [isOpen, setOpen] = useState(false);
+  const { isOpen } = useSelector(informationCenterStateSelector);
+  const dispatch = useDispatch();
 
   return (
     <>
-      <InformationDrawer isOpen={isOpen} onRequestClose={() => setOpen(false)} />
+      <InformationDrawer
+        isOpen={isOpen}
+        onRequestClose={() => dispatch(closeInformationCenter())}
+      />
       <Tooltip content={t("informationCenter.tooltip")} placement="bottom">
         <ItemContainer
           id="topbar-notification-button"
           isInteractive
           onClick={() => {
-            setOpen(true);
+            dispatch(openInformationCenter());
           }}
         >
           <IconBell size={16} dot={totalNotifCount > 0} />

@@ -5,9 +5,10 @@ import type { Announcement } from "@ledgerhq/live-common/lib/providers/Announcem
 import { getKey, setKey } from "~/renderer/storage";
 import { languageSelector } from "~/renderer/reducers/settings";
 import { currenciesIdSelector } from "~/renderer/reducers/accounts";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { ServiceStatusProvider } from "@ledgerhq/live-common/lib/providers/ServiceStatusProvider";
 import { useToasts } from "@ledgerhq/live-common/lib/providers/ToastProvider/index";
+import { openInformationCenter } from "~/renderer/actions/UI";
 
 type Props = {
   children: React$Node,
@@ -41,6 +42,7 @@ async function loadAnnouncements(): Promise<{
 export function AnnouncementProviderWrapper({ children }: Props) {
   const language = useSelector(languageSelector);
   const currencies = useSelector(currenciesIdSelector);
+  const dispatch = useDispatch();
 
   const { pushToast } = useToasts();
 
@@ -52,7 +54,6 @@ export function AnnouncementProviderWrapper({ children }: Props) {
 
   const onNewAnnouncement = useCallback(
     (announcement: Announcement) => {
-      console.log("ON NEW ANNOUNCEMENTS", announcement);
       const { uuid, content, icon } = announcement;
 
       pushToast({
@@ -61,9 +62,10 @@ export function AnnouncementProviderWrapper({ children }: Props) {
         title: content.title,
         text: content.text,
         icon,
+        callback: () => dispatch(openInformationCenter("announcement")),
       });
     },
-    [pushToast],
+    [pushToast, dispatch],
   );
 
   return (

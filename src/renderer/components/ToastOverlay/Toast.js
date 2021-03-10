@@ -33,8 +33,9 @@ const DismissWrapper: ThemedComponent<{}> = styled.div`
   position: absolute;
   cursor: pointer;
   color: ${p => p.theme.colors.palette.background.paper};
-  top: 3px;
-  right: 3px;
+  display: flex;
+  top: 17px;
+  right: 17px;
 `;
 
 const IconContainer = styled.div`
@@ -45,6 +46,7 @@ const IconContainer = styled.div`
 
 const TextContainer = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
 `;
 
@@ -107,13 +109,31 @@ export function Toast({
           <TriangleWarning size={19} />
         </IconContainer>
         <TextContainer>
-          <Text ff="Inter|Bold" fontSize="8px" lineHeight="9.68px" uppercase letterSpacing="0.2em">
+          <Text
+            ff="Inter|Bold"
+            fontSize="8px"
+            lineHeight="9.68px"
+            uppercase
+            letterSpacing="0.2em"
+            style={{ opacity: 0.4 }}
+          >
             {type}
           </Text>
           <Text mt="2px" ff="Inter|SemiBold" fontSize="14px" lineHeight="16.94px">
             {title}
           </Text>
-          <Text mt="10px" ff="Inter|Regular" fontSize="13px" lineHeight="18px">
+          <Text
+            mt="10px"
+            ff="Inter|Regular"
+            fontSize="13px"
+            lineHeight="18px"
+            style={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              opacity: 0.5,
+            }}
+          >
             {text}
           </Text>
         </TextContainer>

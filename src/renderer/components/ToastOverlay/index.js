@@ -29,7 +29,6 @@ export function ToastOverlay() {
           text={text}
           callback={callback}
           onDismiss={dismissToast}
-          duration={12000}
           key={id}
         />
       ))}
