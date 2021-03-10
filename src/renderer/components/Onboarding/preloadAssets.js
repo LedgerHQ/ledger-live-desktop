@@ -13,8 +13,15 @@ export function registerAssets(assetUrl: string | string[]) {
 }
 
 export function preloadAssets() {
+  const promises = [];
   assetUrls.forEach(url => {
-    const img = new Image();
-    img.src = url;
+    promises.push(
+      new Promise(resolve => {
+        const img = new Image();
+        img.src = url;
+        img.onload = resolve;
+      }),
+    );
   });
+  return Promise.all(promises);
 }

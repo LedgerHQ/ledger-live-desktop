@@ -43,9 +43,6 @@ inputs:
   lintoutput:
     description: lintoutput
     required: true
-  prNumber:
-    description: prNumber
-    required: true
 runs:
   using: node12
   main: index.js

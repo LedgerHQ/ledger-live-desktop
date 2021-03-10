@@ -1,8 +1,21 @@
+import { portfolioPage, accountsPage } from "../common.js";
 import Modal from "./modal.page";
 
 export default class AddAccountModal extends Modal {
   async importAddButton() {
     return this.$("#add-accounts-import-add-button");
+  }
+
+  async goToAddAccount() {
+    const exists = await portfolioPage.isAddAccountAvailable();
+    if (!exists) {
+      await portfolioPage.goToAccounts();
+    }
+    const addAccountButton = exists
+      ? await portfolioPage.emtpyStateAddAccountButton()
+      : await accountsPage.addAccountButton();
+    await addAccountButton.click();
+    await this.waitForDisplayed();
   }
 
   async prepareAddAccount(currency) {
@@ -11,11 +24,8 @@ export default class AddAccountModal extends Modal {
     await selectControl.click();
 
     const input = await selectControl.$("input");
-    await this.app.client.pause(600);
-    await input.addValue(currency);
-    await this.app.client.pause(300);
-    const firstOption = await this.$(".select-options-list .option:first-child");
-    await firstOption.click();
+    await input.setValue(currency);
+    await this.app.client.keys(["Enter"]);
   }
 
   async finishAddAccount(mockDeviceEvent) {
