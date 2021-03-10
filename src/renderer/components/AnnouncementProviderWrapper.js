@@ -44,7 +44,7 @@ export function AnnouncementProviderWrapper({ children }: Props) {
   const currencies = useSelector(currenciesIdSelector);
   const dispatch = useDispatch();
 
-  const { pushToast } = useToasts();
+  const { pushToast, dismissToast } = useToasts();
 
   const context = {
     language,
@@ -68,11 +68,21 @@ export function AnnouncementProviderWrapper({ children }: Props) {
     [pushToast, dispatch],
   );
 
+  const onAnnouncementRead = useCallback(
+    (announcement: Announcement) => {
+      const { uuid } = announcement;
+      console.log("ANNOUNCEMENT READ ", uuid)
+      dismissToast(uuid);
+    },
+    [dismissToast],
+  );
+
   return (
     <AnnouncementProvider
       autoUpdateDelay={15000}
       context={context}
       onNewAnnouncement={onNewAnnouncement}
+      onAnnouncementRead={onAnnouncementRead}
       handleLoad={loadAnnouncements}
       handleSave={saveAnnouncements}
     >
