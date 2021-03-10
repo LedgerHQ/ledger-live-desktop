@@ -45,6 +45,10 @@ const TopRightContainer = styled.div`
   right: 40px;
   top: 40px;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
 `;
 
 type Props = {
@@ -70,7 +74,7 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
       <TopRightContainer>
         <LangSwitcher />
         {onboardingRelaunched && (
-          <Button small onClick={() => sendEvent("PREV")}>
+          <Button mt={2} small onClick={() => sendEvent("PREV")}>
             Previous
           </Button>
         )}
