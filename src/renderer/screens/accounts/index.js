@@ -54,6 +54,7 @@ export default function AccountsPage() {
         category="Accounts"
         accountsLength={accounts.length}
         starredAccountsLength={starredAccounts.length}
+        mode={mode}
       />
       <TopBannerContainer>
         <MigrationBanner />
