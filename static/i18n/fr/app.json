@@ -96,7 +96,7 @@
       "UNBOND": "Unbond",
       "REWARD_PAYOUT": "Récompense",
       "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Withdrawal",
+      "WITHDRAW_UNBONDED": "Retrait",
       "NOMINATE": "Nomination",
       "CHILL": "Enlever les nominations"
     }
@@ -984,7 +984,7 @@
       "rewards": "Récompenses réclamées",
       "bondedAmount": "Montant Bonded",
       "unbondedAmount": "Montant Unbonded",
-      "withdrawUnbondedAmount": "Withdrawn Amount",
+      "withdrawUnbondedAmount": "Montant du retrait",
       "palletMethod": "Méthode",
       "transferAmount": "Montant du transfert",
       "validatorsCount": "Validateurs ({{number}})"
@@ -1773,7 +1773,7 @@
     "unlockings": {
       "header": "Unbonding",
       "headerTooltip": "Disponible après la période de unbonding de 28 jours",
-      "withdrawUnbonded": "Withdraw ({{amount}})",
+      "withdrawUnbonded": "Retirer ({{amount}})",
       "withdrawTooltip": "Le montant non lié sera crédité sur votre solde disponible.",
       "noUnlockedWarning": "Aucun solde non lié à retirer.",
       "rebond": "Rebond",
@@ -1790,7 +1790,7 @@
         "description": "Pour rendre à nouveau disponible un montant obligataire, vous devez d'abord le déconnecter. Vous pouvez le retirer après la période d'annulation de 28 jours."
       },
       "withdrawUnbonded": {
-        "title": "Withdraw",
+        "title": "Retrait",
         "description": "Pour récupérer un montant non lié au solde disponible, vous devez le retirer manuellement."
       },
       "nominate": {
@@ -1942,7 +1942,7 @@
     "simpleOperation": {
       "modes": {
         "withdrawUnbonded": {
-          "title": "Withdraw",
+          "title": "Retrait",
           "description": "Après la période d'unbonding de 28 jours, vous pouvez retirer les actifs unbonded.",
           "info": "Vous pouvez ensuite retirer des actifs unbonded vers votre solde disponible."
         },
