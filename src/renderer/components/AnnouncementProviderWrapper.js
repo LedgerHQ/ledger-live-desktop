@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ServiceStatusProvider } from "@ledgerhq/live-common/lib/providers/ServiceStatusProvider";
 import { useToasts } from "@ledgerhq/live-common/lib/providers/ToastProvider/index";
 import { openInformationCenter } from "~/renderer/actions/UI";
+import { track } from "~/renderer/analytics/segment";
 
 type Props = {
   children: React$Node,
@@ -60,6 +61,10 @@ export function AnnouncementProviderWrapper({ children }: Props) {
     (announcement: Announcement) => {
       const { uuid, content, icon } = announcement;
 
+      track("Announcement Received", {
+        uuid,
+      });
+
       pushToast({
         id: uuid,
         type: "announcement",
@@ -75,6 +80,10 @@ export function AnnouncementProviderWrapper({ children }: Props) {
   const onAnnouncementRead = useCallback(
     (announcement: Announcement) => {
       const { uuid } = announcement;
+      track("Announcement Viewed", {
+        uuid,
+      });
+
       dismissToast(uuid);
     },
     [dismissToast],
