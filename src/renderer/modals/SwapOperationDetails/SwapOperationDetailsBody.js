@@ -36,6 +36,7 @@ import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import IconExclamationCircle from "~/renderer/icons/ExclamationCircle";
 import useTheme from "~/renderer/hooks/useTheme";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 const Label = styled(Text).attrs(() => ({
   fontSize: 2,
@@ -156,7 +157,8 @@ const SwapOperationDetailsBody = ({
       const mainAccount = getMainAccount(account, parentAccount);
 
       const url = `/account/${mainAccount.id}/${parentAccount ? account.id : ""}`;
-      history.push({ pathname: url, state: { source: "swap operation details" } });
+      setTrackingSource("swap operation details");
+      history.push({ pathname: url });
       onClose();
     },
     [accounts, history, onClose],

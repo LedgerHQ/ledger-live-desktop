@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
-import TrackPage from "~/renderer/analytics/TrackPage";
+import TrackPage, { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import { Redirect } from "react-router";
 import { TopBannerContainer } from "~/renderer/screens/dashboard";
@@ -33,13 +33,14 @@ export default function AccountsPage() {
   useRefreshAccountsOrderingEffect({ onMount: true });
 
   const onAccountClick = useCallback(
-    (account: Account | TokenAccount, parentAccount: ?Account) =>
+    (account: Account | TokenAccount, parentAccount: ?Account) => {
+      setTrackingSource("accounts page");
       history.push({
         pathname: parentAccount
           ? `/account/${parentAccount.id}/${account.id}`
           : `/account/${account.id}`,
-        state: { source: "accounts page" },
-      }),
+      });
+    },
     [history],
   );
 
@@ -53,6 +54,7 @@ export default function AccountsPage() {
         category="Accounts"
         accountsLength={accounts.length}
         starredAccountsLength={starredAccounts.length}
+        mode={mode}
       />
       <TopBannerContainer>
         <MigrationBanner />

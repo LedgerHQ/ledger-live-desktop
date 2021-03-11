@@ -71,6 +71,9 @@ export const Cell: ThemedComponent<{ px?: number }> = styled(Box).attrs(p => ({
   alignItems: "center",
 }))`
   width: 150px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  display: block;
 `;
 
 type Props = {
@@ -81,18 +84,17 @@ class AddressCell extends PureComponent<Props> {
   render() {
     const { operation } = this.props;
 
-    return (
-      <Cell grow shrink style={{ display: "block" }}>
-        <Address
-          value={
-            operation.type === "IN" ||
-            operation.type === "REVEAL" ||
-            operation.type === "REWARD_PAYOUT"
-              ? operation.senders[0]
-              : operation.recipients[0]
-          }
-        />
+    const value =
+      operation.type === "IN" || operation.type === "REVEAL" || operation.type === "REWARD_PAYOUT"
+        ? operation.senders[0]
+        : operation.recipients[0];
+
+    return value ? (
+      <Cell>
+        <Address value={value} />
       </Cell>
+    ) : (
+      <Box flex={1} />
     );
   }
 }

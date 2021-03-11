@@ -27,6 +27,7 @@ const IllustrationContainer = styled.div`
   flex-direction: column;
   align-items: center;
   pointer-events: none;
+  z-index: -1;
 `;
 
 export function AccessYourCoins({ t }: ScreenProps) {

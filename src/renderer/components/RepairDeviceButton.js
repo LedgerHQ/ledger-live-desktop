@@ -8,6 +8,7 @@ import RepairModal from "~/renderer/modals/RepairModal";
 import { command } from "~/renderer/commands";
 import logger from "~/logger";
 import { useHistory } from "react-router-dom";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 type Props = {
   buttonProps?: *,
@@ -78,7 +79,8 @@ const RepairDeviceButton = ({ onRepair, buttonProps }: Props) => {
           setOpened(false);
           setIsLoading(false);
           setProgress(0);
-          history.push({ pathname: "manager", state: { source: "repair device button" } });
+          setTrackingSource("repair device button");
+          history.push({ pathname: "manager" });
 
           if (onRepair) {
             onRepair(false);

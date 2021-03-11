@@ -34,7 +34,9 @@ const bookmarkAccount = (currency = "global", startsWithStaredAccounts = false) 
     });
 
     it("displays a newly bookmarked account in the side menu", async () => {
-      await app.client.waitForSync();
+      if (currency === "xrp") {
+        await app.client.waitForSync();
+      }
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `${currency}-bookmark-account`,
       });

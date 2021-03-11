@@ -140,7 +140,6 @@ export const IllustrationWrapper: ThemedComponent<{}> = styled.div`
   position: relative;
   right: 0;
   align-self: flex-end;
-  transform: scale(${p => p.scale || "0.7"}) translateY(${p => p.translateY || "-40"}px);
 `;
 
 export const Wrapper: ThemedComponent<{}> = styled.div`

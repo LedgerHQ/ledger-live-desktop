@@ -20,13 +20,13 @@ export const TableLine: ThemedComponent<{}> = styled(Box).attrs(() => ({
   alignItems: "center",
   justifyContent: "flex-start",
   fontSize: 3,
-  flex: 1.125,
+  flex: 1,
+  shrink: 1,
   pr: 2,
 }))`
   box-sizing: border-box;
   &:last-child {
     justify-content: flex-end;
-    flex: 0.5;
     text-align: right;
     white-space: nowrap;
   }
