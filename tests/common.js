@@ -61,6 +61,7 @@ let exportOperationsHistoryModal;
 let exportAccountsModal;
 let hideTokenModal;
 let mockDeviceEvent;
+let userDataPath;
 
 const toMatchImageSnapshot = configureToMatchImageSnapshot({
   customSnapshotsDir: path.join(__dirname, "specs", "__image_snapshots__"),
@@ -74,7 +75,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
   const userDataPathKey = Math.random()
     .toString(36)
     .substring(2, 5);
-  const userDataPath = path.join(__dirname, "tmp", userDataPathKey);
+  userDataPath = path.join(__dirname, "tmp", userDataPathKey);
 
   const removeUserData = dump => {
     if (fs.existsSync(`${userDataPath}`)) {
@@ -237,4 +238,5 @@ export {
   accountSettingsModal,
   exportOperationsHistoryModal,
   exportAccountsModal,
+  userDataPath,
 };
