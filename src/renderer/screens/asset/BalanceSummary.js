@@ -43,8 +43,8 @@ export default function BalanceSummary({
   } = useCurrencyPortfolio({ currency, range });
   const discreetMode = useSelector(discreetModeSelector);
 
-  const mapValueCounterValue = useCallback((d: any) => d.countervalue.toNumber(), []);
-  const mapValueCryptoValue = useCallback((d: any) => d.value.toNumber(), []);
+  const mapValueCounterValue = useCallback((d: any) => d.countervalue, []);
+  const mapValueCryptoValue = useCallback((d: any) => d.value, []);
 
   const displayCountervalue = countervalueFirst && countervalueAvailable;
   const chartMagnitude = displayCountervalue ? counterValue.units[0].magnitude : unit.magnitude;

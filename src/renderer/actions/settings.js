@@ -87,18 +87,11 @@ export function useTimeRange(blocklist?: string[] = []) {
     },
     [dispatch],
   );
-  const options = Object.entries(timeRangeDaysByKey).reduce(
-    (prev, [key, value]) =>
+  const options = ["day", "week", "month", "year", "all"].reduce(
+    (prev, key) =>
       blocklist.includes(key)
         ? prev
-        : [
-            ...prev,
-            {
-              key,
-              value,
-              label: t(`time.range.${key}`),
-            },
-          ],
+        : [...prev, { key, value: t(`time.range.${key}`), label: t(`time.range.${key}`) }],
     [],
   );
   return [val, setter, options];

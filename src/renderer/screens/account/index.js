@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import { Redirect } from "react-router";
-import type { Currency, AccountLike, Account } from "@ledgerhq/live-common/lib/types";
+import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import { isCompoundTokenSupported } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
@@ -125,9 +125,7 @@ const AccountPage = ({
           {isCompoundEnabled && account.type === "TokenAccount" && parentAccount ? (
             <CompoundBodyHeader account={account} parentAccount={parentAccount} />
           ) : null}
-          {account.type === "Account" ? (
-            <TokensList account={account} range={selectedTimeRange} />
-          ) : null}
+          {account.type === "Account" ? <TokensList account={account} /> : null}
           <OperationsList
             account={account}
             parentAccount={parentAccount}

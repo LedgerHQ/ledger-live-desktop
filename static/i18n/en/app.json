@@ -727,7 +727,8 @@
     "range": {
       "week": "Week",
       "month": "Month",
-      "year": "Year"
+      "year": "Year",
+      "all": "All"
     },
     "optionsMenu": {
       "title": "Options",
