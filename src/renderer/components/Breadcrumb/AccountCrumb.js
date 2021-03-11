@@ -20,6 +20,7 @@ import Button from "~/renderer/components/Button";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { Separator, Item, TextLink, AngleDown, Check } from "./common";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 const AccountCrumb = () => {
   const { t } = useTranslation();
@@ -77,15 +78,14 @@ const AccountCrumb = () => {
         return;
       }
 
+      setTrackingSource("account breadcrumb");
       if (parentId) {
         history.push({
           pathname: `/account/${parentId}/${item.key}`,
-          state: { source: "account breadcrumb" },
         });
       } else {
         history.push({
           pathname: `/account/${item.key}`,
-          state: { source: "account breadcrumb" },
         });
       }
     },
@@ -95,18 +95,17 @@ const AccountCrumb = () => {
   const openActiveAccount = useCallback(
     (e: SyntheticEvent<HTMLButtonElement>) => {
       e.stopPropagation();
+      setTrackingSource("account breadcrumb");
       if (parentId) {
         if (id) {
           history.push({
             pathname: `/account/${parentId}/${id}`,
-            state: { source: "account breadcrumb" },
           });
         }
       } else {
         if (id) {
           history.push({
             pathname: `/account/${id}`,
-            state: { source: "account breadcrumb" },
           });
         }
       }
@@ -129,12 +128,12 @@ const AccountCrumb = () => {
     return (
       <TextLink>
         <Button
-          onClick={() =>
+          onClick={() => {
+            setTrackingSource("account breadcrumb");
             history.push({
               pathname: "/accounts/",
-              state: { source: "account breadcrumb" },
-            })
-          }
+            });
+          }}
         >
           {t("accounts.title")}
         </Button>

@@ -10,13 +10,14 @@ import KeyHandler from "react-key-handler";
 import logger from "~/logger";
 import getUser from "~/helpers/user";
 import Button from "~/renderer/components/Button";
+import type { Props as ButtonProps } from "~/renderer/components/Button";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 
 const saveLogs = async (path: { canceled: boolean, filePath: string }) => {
   await ipcRenderer.invoke("save-logs", path);
 };
 
-type RestProps = {|
+type RestProps = ButtonProps & {|
   icon?: boolean,
   inverted?: boolean, // only used with primary for now
   lighterPrimary?: boolean,

@@ -91,7 +91,7 @@ export default class Page {
   }
 
   async toggleDiscreetMode() {
-    const descreetBtn = await this.topbarDiscreetButton;
+    const descreetBtn = await this.topbarDiscreetButton();
     await descreetBtn.click();
   }
 

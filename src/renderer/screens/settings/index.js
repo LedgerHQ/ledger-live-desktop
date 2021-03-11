@@ -14,6 +14,7 @@ import SectionExperimental from "./sections/Experimental";
 import SectionAccounts from "./sections/Accounts";
 import SectionAbout from "./sections/About";
 import SectionHelp from "./sections/Help";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 const getItems = (t: string => string): Item[] => [
   {
@@ -69,7 +70,8 @@ const Settings = ({ history, location, match }: Props) => {
       const item = items[index];
       const url = `${match.url}/${item.key}`;
       if (location.pathname !== url) {
-        history.push({ pathname: url, state: { source: "settings tab" } });
+        setTrackingSource("settings tab");
+        history.push({ pathname: url });
         setActiveTabIndex(index);
       }
     },
