@@ -234,6 +234,7 @@ const SwapInputGroup = ({
                   rate={rate}
                   color="palette.text.shade60"
                   fontSize={2}
+                  showAllDigits
                 />
               </Box>
             ) : null}
