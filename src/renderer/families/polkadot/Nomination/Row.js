@@ -1,5 +1,4 @@
 // @flow
-
 import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
@@ -19,6 +18,7 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 
 import { TableLine } from "./Header";
 
+import { useDiscreetMode } from "~/renderer/components/Discreet";
 import Box from "~/renderer/components/Box/Box";
 import CheckCircle from "~/renderer/icons/CheckCircle";
 import ClockIcon from "~/renderer/icons/Clock";
@@ -93,6 +93,7 @@ export function Row({
   validator,
   onExternalLink,
 }: Props) {
+  const discreet = useDiscreetMode();
   const name = validator?.identity || address;
   const total = validator?.totalBonded ?? null;
   const commission = validator?.commission ?? null;
@@ -102,12 +103,13 @@ export function Row({
     () =>
       value && (status === "active" || status === "inactive")
         ? formatCurrencyUnit(unit, value, {
-            disableRounding: true,
+            disableRounding: false,
             alwaysShowSign: false,
             showCode: true,
+            discreet: discreet && status === "active",
           })
         : "-",
-    [status, unit, value],
+    [status, unit, value, discreet],
   );
 
   const formattedTotal = useMemo(

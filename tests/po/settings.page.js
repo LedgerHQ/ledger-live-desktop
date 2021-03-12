@@ -1,4 +1,5 @@
 import Page from "./page";
+import { modalPage } from "../common.js";
 
 export default class SettingsPage extends Page {
   async accountsTab() {
@@ -19,6 +20,14 @@ export default class SettingsPage extends Page {
 
   async experimentalDevModeButton() {
     return this.$("#MANAGER_DEV_MODE_button");
+  }
+
+  async passwordLockSwitch() {
+    return this.$("#settings-password-lock-switch");
+  }
+
+  async passwordChangeButton() {
+    return this.$("#settings-password-change-button");
   }
 
   async goToSettings() {
@@ -51,5 +60,51 @@ export default class SettingsPage extends Page {
     await this.goToExperimentalTab();
     const devModeBtn = await this.experimentalDevModeButton();
     await devModeBtn.click();
+  }
+
+  async togglePasswordLock() {
+    await this.goToSettings();
+    const passwordBtn = await this.passwordLockSwitch();
+    await passwordBtn.click();
+  }
+
+  async setNewPassword(password) {
+    const newInput = await modalPage.newPasswordInput();
+    await newInput.click();
+    await newInput.setValue(password);
+  }
+
+  async confirmPassword(password) {
+    const confirmInput = await modalPage.confirmPasswordInput();
+    await confirmInput.click();
+    await confirmInput.setValue(password);
+  }
+
+  async enablePasswordLock(password, confirmPassword) {
+    await this.setNewPassword(password);
+    await this.confirmPassword(confirmPassword);
+    const saveBtn = await modalPage.saveButton();
+    await saveBtn.waitForEnabled();
+    await saveBtn.click();
+  }
+
+  async openChangePasswordModal() {
+    const changePassBtn = await this.passwordChangeButton();
+    await changePassBtn.click();
+  }
+
+  async writeCurrentPassword(password) {
+    const currentPassInput = await modalPage.currentPasswordInput();
+    await currentPassInput.click();
+    await currentPassInput.setValue(password);
+  }
+
+  async disablePassword(password) {
+    const currentPassInput = await modalPage.disablePasswordInput();
+    await currentPassInput.click();
+    await currentPassInput.setValue(password);
+    const saveBtn = await modalPage.saveButton();
+    await saveBtn.waitForEnabled();
+    await saveBtn.click();
   }
 }

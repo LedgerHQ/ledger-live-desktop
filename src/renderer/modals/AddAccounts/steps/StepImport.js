@@ -16,7 +16,6 @@ import { urls } from "~/config/urls";
 import logger from "~/logger";
 import { prepareCurrency } from "~/renderer/bridge/cache";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import ExternalLinkButton from "~/renderer/components/ExternalLinkButton";
 import RetryButton from "~/renderer/components/RetryButton";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -210,7 +209,11 @@ class StepImport extends PureComponent<StepProps> {
 
     if (err) {
       return (
-        <ErrorDisplay error={err} withExportLogs={err.name !== "SatStackDescriptorNotImported"} />
+        <ErrorDisplay
+          error={err}
+          withExportLogs={err.name !== "SatStackDescriptorNotImported"}
+          supportLink={urls.syncErrors}
+        />
       );
     }
 
@@ -338,8 +341,6 @@ export const StepImportFooter = ({
           </Button>
         ) : (
           <>
-            <ExternalLinkButton label={t("common.getSupport")} url={urls.syncErrors} />
-
             <RetryButton
               id={"add-accounts-import-retry-button"}
               primary
@@ -353,7 +354,7 @@ export const StepImportFooter = ({
         </Button>
       )}
 
-      {isHandledError ? null : (
+      {isHandledError || scanStatus === "error" ? null : (
         <Button
           id={"add-accounts-import-add-button"}
           primary

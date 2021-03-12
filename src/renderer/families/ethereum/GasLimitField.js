@@ -46,7 +46,7 @@ const AdvancedOptions = ({ onChange, account, transaction, status }: Props) => {
           </span>
         </Label>
       </Box>
-      <Box grow>
+      <Box flex="1">
         <Input
           ff="Inter"
           warning={gasLimitWarning}

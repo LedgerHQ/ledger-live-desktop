@@ -29,18 +29,21 @@ export const TableLine: ThemedComponent<{}> = styled(Text).attrs(() => ({
   }
 `;
 
-const Header = ({ type }: { type: "open" | "close" }) => (
-  <Wrapper>
-    <TableLine>
-      <Trans i18nKey={`lend.account.${type === "close" ? "amountRedeemed" : "amountSupplied"}`} />
-    </TableLine>
-    <TableLine>
-      <Trans i18nKey="lend.account.interestEarned" />
-    </TableLine>
-    <TableLine>
-      <Trans i18nKey="lend.account.date" />
-    </TableLine>
-  </Wrapper>
-);
+const Header = ({ type }: { type: "open" | "close" }) => {
+  const key = type === "close" ? "amountRedeemed" : "amountSupplied";
+  return (
+    <Wrapper>
+      <TableLine>
+        <Trans i18nKey={`lend.account.${key}`} />
+      </TableLine>
+      <TableLine>
+        <Trans i18nKey="lend.account.interestEarned" />
+      </TableLine>
+      <TableLine>
+        <Trans i18nKey="lend.account.date" />
+      </TableLine>
+    </Wrapper>
+  );
+};
 
 export default Header;

@@ -39,7 +39,7 @@ function Range() {
   const { t } = useTranslation();
 
   const renderItem = useCallback(props => <RangeItem {...props} />, []);
-  const [range, onRangeChange, rangeItems] = useTimeRange(["day"]);
+  const [range, onRangeChange, rangeItems] = useTimeRange();
 
   return (
     <DropDownSelector

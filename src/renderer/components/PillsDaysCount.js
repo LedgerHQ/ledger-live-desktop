@@ -5,7 +5,7 @@ import { useTimeRange } from "~/renderer/actions/settings";
 import Track from "~/renderer/analytics/Track";
 
 export default function PillsDaysCount() {
-  const [selected, onChange, options] = useTimeRange(["day"]);
+  const [selected, onChange, options] = useTimeRange();
   return (
     <>
       <Track onUpdate event="PillsDaysChange" selected={selected} />

@@ -1,0 +1,17 @@
+name:  post-comment
+description: post comment
+author: valpinkman
+inputs:
+  comment:
+    description: comment
+    required: true
+  prNumber:
+    description: prNumber
+    required: true
+runs:
+  using: node12
+  main: index.js
+
+branding:
+  icon: align-center
+  color: white

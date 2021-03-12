@@ -55,14 +55,13 @@ function StepConfirmation({
   const isEnergy = transaction && transaction.resource && transaction.resource === "ENERGY";
 
   if (optimisticOperation) {
+    const key = isEnergy ? "textNRG" : "text";
     return (
       <Container>
         <TrackPage category="Freeze Flow" name="Step Confirmed" />
         <SuccessDisplay
           title={<Trans i18nKey="freeze.steps.confirmation.success.title" />}
-          description={multiline(
-            t(`freeze.steps.confirmation.success.${isEnergy ? "textNRG" : "text"}`),
-          )}
+          description={multiline(t(`freeze.steps.confirmation.success.${key}`))}
         />
       </Container>
     );

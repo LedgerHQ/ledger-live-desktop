@@ -37,6 +37,22 @@ export default class ModalPage extends Page {
     return this.$("#modal-close-button");
   }
 
+  async newPasswordInput() {
+    return this.$("#new-password-input");
+  }
+
+  async confirmPasswordInput() {
+    return this.$("#confirm-password-input");
+  }
+
+  async currentPasswordInput() {
+    return this.$("#current-password-input");
+  }
+
+  async disablePasswordInput() {
+    return this.$("#disable-password-input");
+  }
+
   async waitForDisplayed() {
     const elem = await this.container();
     const visible = await elem.waitForDisplayed();

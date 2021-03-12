@@ -16,6 +16,7 @@ import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import Tooltip from "~/renderer/components/Tooltip";
 import Bar from "./Bar";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 export type DistributionItem = {
   currency: CryptoCurrency | TokenCurrency,
@@ -62,7 +63,12 @@ const PriceSection: ThemedComponent<{}> = styled.div`
   width: 20%;
   text-align: left;
   > :first-child {
-    margin-right: 6px;
+    padding-right: 24px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
   }
 `;
 const Distribution: ThemedComponent<{}> = styled.div`
@@ -81,8 +87,11 @@ const Amount: ThemedComponent<{}> = styled.div`
 const Value: ThemedComponent<{}> = styled.div`
   width: 15%;
   box-sizing: border-box;
-  padding-left: 8px;
+  padding-left: 24px;
   justify-content: flex-end;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => {
@@ -92,7 +101,8 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
   const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2);
   const icon = <CryptoCurrencyIcon currency={currency} size={16} />;
   const onClick = useCallback(() => {
-    history.push({ pathname: `/asset/${currency.id}`, state: { source: "asset allocation" } });
+    setTrackingSource("asset allocation");
+    history.push({ pathname: `/asset/${currency.id}` });
   }, [currency, history]);
 
   return (
@@ -107,7 +117,7 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
       </Asset>
       <PriceSection>
         {distribution ? (
-          <Price from={currency} color="palette.text.shade80" fontSize={3} showAllDigits={false} />
+          <Price from={currency} color="palette.text.shade80" fontSize={3} />
         ) : (
           <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
             {"-"}

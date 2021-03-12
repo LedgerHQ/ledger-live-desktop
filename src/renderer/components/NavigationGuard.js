@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Prompt, useHistory } from "react-router-dom";
 import ConfirmModal from "~/renderer/modals/ConfirmModal";
 
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { setNavigationLock } from "~/renderer/actions/application";
 
 type Props = {
@@ -81,11 +82,12 @@ const NavigationGuard = ({
 
   /** retry redirection once confirmation state changes */
   useEffect(() => {
-    if (confirmedNavigation && lastLocation)
+    if (confirmedNavigation && lastLocation) {
+      setTrackingSource("confirmation navigation guard");
       history.push({
         pathname: lastLocation.pathname,
-        state: { source: "confirmation navigation guard" },
       });
+    }
   }, [confirmedNavigation, lastLocation, history]);
 
   return (
