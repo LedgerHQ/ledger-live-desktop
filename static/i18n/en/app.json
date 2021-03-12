@@ -3308,8 +3308,14 @@
     "PolkadotNoNominations": {
       "title": "You have no nominations"
     },
-    "PolkadotBondAllFundsWarning": {
-      "title": "You will not have available balance for future transactions"
+    "PolkadotAllFundsWarning": {
+      "title": "You will not have any available balance for future transactions"
+    },
+    "PolkadotReapingAccountWarning": {
+      "title": "After Send max, only the receive operation is possible"
+    },
+    "PolkadotDoMaxSendInstead": {
+      "title": "The outcome of this operation will be too low if it is done manually. Please use Send max instead"
     },
     "PolkadotBondMinimumAmount": {
       "title": "You must bond at least 1 DOT"
