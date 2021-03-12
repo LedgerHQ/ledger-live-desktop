@@ -42,7 +42,7 @@ export const InformationDrawer = ({
 }) => {
   const { t } = useTranslation();
   const { allIds, seenIds } = useAnnouncements();
-  const unseenCount = allIds.length - seenIds;
+  const unseenCount = allIds.length - seenIds.length;
   const { tabId } = useSelector(informationCenterStateSelector);
   const dispatch = useDispatch();
 

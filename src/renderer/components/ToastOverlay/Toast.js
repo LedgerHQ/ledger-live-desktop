@@ -9,6 +9,9 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { animated, useTransition } from "react-spring";
 import { delay } from "@ledgerhq/live-common/lib/promise";
 import TriangleWarning from "~/renderer/icons/TriangleWarning";
+import { useTranslation } from "react-i18next";
+import InfoCircle from "~/renderer/icons/InfoCircle";
+import Box from "~/renderer/components/Box";
 
 const Content: ThemedComponent<{}> = styled.div`
   color: ${p => p.theme.colors.palette.background.paper};
@@ -38,7 +41,7 @@ const DismissWrapper: ThemedComponent<{}> = styled.div`
   right: 17px;
 `;
 
-const IconContainer = styled.div`
+const IconContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   margin-right: 15px;
@@ -49,6 +52,17 @@ const TextContainer = styled.div`
   flex: 1;
   flex-direction: column;
 `;
+
+const icons = {
+  warning: {
+    defaultIconColor: "orange",
+    Icon: TriangleWarning,
+  },
+  info: {
+    defaultIconColor: "wallet",
+    Icon: InfoCircle,
+  },
+};
 
 export function Toast({
   duration,
@@ -69,6 +83,9 @@ export function Toast({
   icon: string,
   id: string,
 }) {
+  const { t } = useTranslation();
+  const { Icon, defaultIconColor } = icons[icon];
+
   const transitions = useTransition(1, null, {
     from: {
       height: 0,
@@ -99,14 +116,15 @@ export function Toast({
     <Wrapper
       key={key}
       style={props}
-      onClick={() => {
+      onClick={event => {
         callback();
         onDismiss(id);
+        event.stopPropagation();
       }}
     >
       <Content>
-        <IconContainer>
-          <TriangleWarning size={19} />
+        <IconContainer color={defaultIconColor}>
+          <Icon size={19} />
         </IconContainer>
         <TextContainer>
           <Text
@@ -117,7 +135,7 @@ export function Toast({
             letterSpacing="0.2em"
             style={{ opacity: 0.4 }}
           >
-            {type}
+            {t(`toastOverlay.toastType.${type}`)}
           </Text>
           <Text mt="2px" ff="Inter|SemiBold" fontSize="14px" lineHeight="16.94px">
             {title}
@@ -141,7 +159,12 @@ export function Toast({
       {duration ? (
         <TimeBasedProgressBar duration={duration} />
       ) : (
-        <DismissWrapper onClick={() => onDismiss(id)}>
+        <DismissWrapper
+          onClick={event => {
+            onDismiss(id);
+            event.stopPropagation();
+          }}
+        >
           <IconCross size={12} />
         </DismissWrapper>
       )}

@@ -15,7 +15,7 @@ export function NotificationIndicator() {
   const { t } = useTranslation();
   const { allIds, seenIds } = useAnnouncements();
 
-  const totalNotifCount = allIds.length - seenIds;
+  const totalNotifCount = allIds.length - seenIds.length;
   const { isOpen } = useSelector(informationCenterStateSelector);
   const dispatch = useDispatch();
 

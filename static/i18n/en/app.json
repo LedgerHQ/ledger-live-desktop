@@ -2386,6 +2386,11 @@
     "dusk": "Dusk",
     "dark": "Dark"
   },
+  "toastOverlay": {
+    "toastType": {
+      "announcement": "News"
+    }
+  },
   "informationCenter": {
     "tooltip": "Information center",
     "tabs": {

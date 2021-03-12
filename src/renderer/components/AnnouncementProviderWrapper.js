@@ -59,10 +59,12 @@ export function AnnouncementProviderWrapper({ children }: Props) {
 
   const onNewAnnouncement = useCallback(
     (announcement: Announcement) => {
-      const { uuid, content, icon } = announcement;
+      // eslint-disable-next-line camelcase
+      const { uuid, content, icon, utm_campaign } = announcement;
 
       track("Announcement Received", {
         uuid,
+        utm_campaign,
       });
 
       pushToast({
@@ -79,9 +81,12 @@ export function AnnouncementProviderWrapper({ children }: Props) {
 
   const onAnnouncementRead = useCallback(
     (announcement: Announcement) => {
-      const { uuid } = announcement;
+      // eslint-disable-next-line camelcase
+      const { uuid, utm_campaign } = announcement;
+
       track("Announcement Viewed", {
         uuid,
+        utm_campaign,
       });
 
       dismissToast(uuid);

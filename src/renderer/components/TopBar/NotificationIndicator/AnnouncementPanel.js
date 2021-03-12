@@ -88,6 +88,7 @@ type ArticleProps = {
     label?: string,
     href: string,
   },
+  utmCampaign?: string,
 };
 
 const icons = {
@@ -101,7 +102,39 @@ const icons = {
   },
 };
 
-function Article({ level = "info", icon = "info", title, text, link }: ArticleProps) {
+type ArticleLinkProps = {
+  label?: string,
+  href: string,
+  utmCampaign?: string,
+  color: string,
+};
+
+function ArticleLink({ label, href, utmCampaign, color }: ArticleLinkProps) {
+  const url = useMemo(() => {
+    const url = new URL(href);
+
+    url.searchParams.set("utm_medium", "announcement");
+
+    if (utmCampaign) {
+      url.searchParams.set("utm_campaign", utmCampaign);
+    }
+    return url;
+  }, [href, utmCampaign]);
+
+  return (
+    <LinkWithExternalIcon
+      color={color}
+      onClick={() => openURL(url.toString())}
+      style={{
+        marginTop: 15,
+      }}
+    >
+      {label || href}
+    </LinkWithExternalIcon>
+  );
+}
+
+function Article({ level = "info", icon = "info", title, text, link, utmCampaign }: ArticleProps) {
   const levelTheme = levelThemes[level];
 
   const { Icon, defaultIconColor } = icons[icon];
@@ -126,15 +159,12 @@ function Article({ level = "info", icon = "info", title, text, link }: ArticlePr
           {text}
         </Text>
         {link ? (
-          <LinkWithExternalIcon
+          <ArticleLink
+            href={link.href}
+            label={link.label}
+            utmCampaign={utmCampaign}
             color={levelTheme.link}
-            onClick={() => openURL(link.href)}
-            style={{
-              marginTop: 15,
-            }}
-          >
-            {link.label || link.href}
-          </LinkWithExternalIcon>
+          />
         ) : null}
       </ArticleRightColumnContainer>
     </ArticleContainer>
@@ -163,7 +193,7 @@ export function AnnouncementPanel() {
         timeouts[uuid] = setTimeout(() => {
           setAsSeen(uuid);
           delete timeouts[uuid];
-        }, 3000);
+        }, 2000);
       }
 
       if (!visible && timeouts[uuid]) {
@@ -180,7 +210,8 @@ export function AnnouncementPanel() {
         {groupedAnnouncements.map((group, index) => (
           <React.Fragment key={index}>
             {group.day ? <DateRow date={group.day} /> : null}
-            {group.data.map(({ level, icon, content, uuid }, index) => (
+            {/* eslint-disable-next-line camelcase */}
+            {group.data.map(({ level, icon, content, uuid, utm_campaign }, index) => (
               <React.Fragment key={uuid}>
                 <InView as="div" onChange={visible => handleInView(visible, uuid)}>
                   <Article
@@ -190,6 +221,8 @@ export function AnnouncementPanel() {
                     text={content.text}
                     link={content.link}
                     uuid={uuid}
+                    /* eslint-disable-next-line camelcase */
+                    utmCampaign={utm_campaign}
                   />
                 </InView>
                 {index < group.data.length - 1 ? <Separator /> : null}
