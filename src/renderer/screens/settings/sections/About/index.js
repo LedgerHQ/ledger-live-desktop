@@ -17,7 +17,10 @@ const SectionHelp = () => {
     <>
       <TrackPage category="Settings" name="About" />
       <Body>
-        <Row title={t("settings.help.version")} desc={`Ledger Live ${version}`}>
+        <Row
+          title={t("settings.help.version")}
+          desc={`Ledger Live ${process.env.SPECTRON_RUN ? "CI" : version}`}
+        >
           <ReleaseNotesButton />
         </Row>
 
