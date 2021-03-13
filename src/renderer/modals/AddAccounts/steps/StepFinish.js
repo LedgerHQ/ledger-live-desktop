@@ -26,7 +26,9 @@ export default function StepFinish({ currency, checkedAccountsIds }: StepProps) 
 
       <TrackPage category="AddAccounts" name="Step4" currencyName={currencyName} />
       {currency ? <CurrencyCircleIcon currency={currency} size={50} showCheckmark /> : null}
-      <Title>{t("addAccounts.success", { count: checkedAccountsIds.length })}</Title>
+      <Title id="add-account-success-title">
+        {t("addAccounts.success", { count: checkedAccountsIds.length })}
+      </Title>
       <Text>{t("addAccounts.successDescription", { count: checkedAccountsIds.length })}</Text>
     </Box>
   );
