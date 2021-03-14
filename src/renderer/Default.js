@@ -5,6 +5,7 @@ import TrackAppStart from "~/renderer/components/TrackAppStart";
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
 import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
 import Dashboard from "~/renderer/screens/dashboard";
+import Dapps from "~/renderer/screens/dapps";
 import Settings from "~/renderer/screens/settings";
 import Accounts from "~/renderer/screens/accounts";
 import Manager from "~/renderer/screens/manager";
@@ -94,6 +95,7 @@ export default function Default() {
                 <MainSideBar />
                 <Page>
                   <Switch>
+                    <Route path="/dapps" exact render={props => <Dapps {...props} />} />
                     <Route path="/" exact render={props => <Dashboard {...props} />} />
                     <Route path="/settings" render={props => <Settings {...props} />} />
                     <Route path="/accounts" render={props => <Accounts {...props} />} />

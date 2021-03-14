@@ -206,6 +206,10 @@ const MainSideBar = () => {
     [history, location.pathname],
   );
 
+  const handleClickDapps = useCallback(() => {
+    push("/dapps");
+  }, [push]);
+
   const handleClickDashboard = useCallback(() => {
     push("/");
   }, [push]);
@@ -266,6 +270,15 @@ const MainSideBar = () => {
             <TopGradient />
             <Space of={70} />
             <SideBarList title={t("sidebar.menu")} collapsed={secondAnim}>
+              <SideBarListItem
+                id={"dapps"}
+                label={t("dapps.title")}
+                icon={IconPortfolio}
+                iconActiveColor="wallet"
+                onClick={handleClickDapps}
+                isActive={location.pathname === "/dapps"}
+                collapsed={secondAnim}
+              />
               <SideBarListItem
                 id={"dashboard"}
                 label={t("dashboard.title")}
