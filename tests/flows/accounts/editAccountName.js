@@ -1,10 +1,14 @@
 /* eslint-disable jest/no-export */
-import { app, accountSettingsModal, accountsPage, accountPage } from "../../common.js";
+import { app, page, accountSettingsModal, accountsPage, accountPage } from "../../common.js";
 
 const editAccountName = (currency = "global") => {
   describe("edit name flow", () => {
     beforeAll(async () => {
       await accountsPage.goToAccounts();
+      if (currency === "xrp") {
+        await page.synchronize();
+      }
+      await app.client.waitForSync();
     });
 
     it("show name of account before", async () => {
@@ -17,13 +21,13 @@ const editAccountName = (currency = "global") => {
     });
 
     it("edit account name", async () => {
-      const settingsButton = await accountPage.settingsButton;
+      const settingsButton = await accountPage.settingsButton();
       await settingsButton.click();
 
       const newName = "New account name";
       await accountSettingsModal.editAccountName(newName);
 
-      const accountName = await accountPage.accountHeaderName;
+      const accountName = await accountPage.accountHeaderName();
       const value = await accountName.getValue();
       expect(value).toBe(newName);
     });

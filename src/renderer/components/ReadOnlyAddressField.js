@@ -6,6 +6,8 @@ import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import IconCopy from "~/renderer/icons/Copy";
 
+const LINE_MINLENGTH = 5; // Minimum of chars for the last line (if multiline)
+
 const Address = styled(Box).attrs(() => ({
   bg: "palette.background.default",
   borderRadius: 1,
@@ -24,11 +26,19 @@ const Address = styled(Box).attrs(() => ({
   border-bottom-right-radius: 0;
 `
       : ""}
-  cursor: text;
-  user-select: text;
+
   text-align: center;
   flex: 1;
+`;
+
+const AddressWrapper = styled.span`
+  cursor: text;
+  user-select: text;
   word-break: break-all;
+
+  span:last-child {
+    word-break: keep-all;
+  }
 `;
 
 const CopyFeedback = styled(Box).attrs(() => ({
@@ -96,6 +106,12 @@ function ReadOnlyAddressField({ address, allowCopy = true }: Props) {
     };
   }, []);
 
+  // Split address into multiple segments - last can't breakline.
+  const addressSegments = [
+    address.substr(0, address.length - LINE_MINLENGTH),
+    address.substr(-LINE_MINLENGTH),
+  ];
+
   return (
     <Box vertical>
       {clibboardChanged ? (
@@ -110,7 +126,10 @@ function ReadOnlyAddressField({ address, allowCopy = true }: Props) {
               <Trans i18nKey="common.addressCopied" />
             </CopyFeedback>
           )}
-          {address}
+          <AddressWrapper>
+            <span>{addressSegments[0]}</span>
+            <span>{addressSegments[1]}</span>
+          </AddressWrapper>
         </Address>
         {allowCopy ? (
           <CopyBtn onClick={onCopy}>

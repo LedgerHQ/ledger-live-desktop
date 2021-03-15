@@ -19,14 +19,14 @@ import InputCurrency from "~/renderer/components/InputCurrency";
 import Switch from "~/renderer/components/Switch";
 import Text from "~/renderer/components/Text";
 
-const InputLeft = styled(Box).attrs(() => ({
+const InputRight = styled(Box).attrs(() => ({
   ff: "Inter|Medium",
   color: "palette.text.shade60",
   fontSize: 4,
   justifyContent: "center",
-  horizontal: true,
-  pl: 3,
-}))``;
+}))`
+  padding-right: 10px;
+`;
 
 const TextSeparator = styled.span`
   height: 1em;
@@ -133,8 +133,8 @@ const AmountField = ({
         defaultUnit={defaultUnit}
         value={amount}
         onChange={onChange}
-        renderLeft={<InputLeft>{defaultUnit.code}</InputLeft>}
-        renderRight={false}
+        renderLeft={false}
+        renderRight={<InputRight>{defaultUnit.code}</InputRight>}
       />
     </Box>
   );

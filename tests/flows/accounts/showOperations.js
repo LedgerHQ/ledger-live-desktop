@@ -1,5 +1,5 @@
 /* eslint-disable jest/no-export */
-import { app, accountsPage, accountPage, modalPage } from "../../common.js";
+import { app, accountsPage, accountPage, modalPage, page } from "../../common.js";
 
 const showOperations = (currency = "global") => {
   describe("account operations list", () => {

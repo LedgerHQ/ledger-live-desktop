@@ -16,6 +16,7 @@ const StepperContainer: ThemedComponent<*> = styled.div`
 const StepContainer = styled.div`
   display: flex;
   flex-direction: row;
+  position: relative;
 
   & ${Text} {
     transition: opacity ease-out 200ms;
@@ -67,10 +68,12 @@ const StepIconContainer = styled.div`
 `;
 
 const StepSeparator = styled.div`
-  height: 32px;
+  height: calc(100% - 24px);
   width: 0px;
   margin-left: 12px;
   border-left: 1px rgba(20, 37, 51, 0.2) dashed;
+  position: absolute;
+  top: 24px;
 
   ${({ status, theme }) => {
     if (status === "success") {
@@ -92,6 +95,19 @@ const StepSeparator = styled.div`
   }};
 `;
 
+const TextContainer = styled(Text).attrs(() => ({
+  ml: "16px",
+  mb: "32px",
+  color: "palette.text.shade100",
+  ff: "Inter|Bold",
+  fontSize: "10px",
+  lineHeight: "24px",
+  letterSpacing: "0.1em",
+  uppercase: true,
+}))`
+  width: 100%;
+`;
+
 type StepMeta = { label: string, id: string, status: string, active: boolean };
 
 type StepProps = StepMeta & {
@@ -104,31 +120,19 @@ type StepperProps = {
 
 function Step({ label, status, hasSeparator }: StepProps) {
   return (
-    <>
-      <StepContainer status={status}>
-        <StepIconContainer status={status}>
-          {status === "success" ? (
-            <IconCheck size={7} />
-          ) : status === "active" ? (
-            <IconDot size={7} />
-          ) : status === "inactive" ? (
-            <IconDot size={7} />
-          ) : null}
-        </StepIconContainer>
-        <Text
-          ml="16px"
-          color="palette.text.shade100"
-          ff="Inter|Bold"
-          fontSize="10px"
-          lineHeight="24px"
-          letterSpacing="0.1em"
-          uppercase
-        >
-          {label}
-        </Text>
-      </StepContainer>
+    <StepContainer status={status}>
+      <StepIconContainer status={status}>
+        {status === "success" ? (
+          <IconCheck size={7} />
+        ) : status === "active" ? (
+          <IconDot size={7} />
+        ) : status === "inactive" ? (
+          <IconDot size={7} />
+        ) : null}
+      </StepIconContainer>
+      <TextContainer>{label}</TextContainer>
       {hasSeparator ? <StepSeparator status={status} /> : null}
-    </>
+    </StepContainer>
   );
 }
 

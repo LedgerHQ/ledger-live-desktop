@@ -115,58 +115,60 @@ export class OperationsList extends PureComponent<Props, State> {
     const accountsMap = keyBy(all, "id");
 
     return (
-      <Card id="operation-list">
-        {title && (
-          <Box py={3} px={4}>
-            <Text
-              color="palette.text.shade100"
-              ff="Inter|Medium"
-              fontSize={6}
-              data-e2e="dashboard_OperationList"
-            >
-              {title}
-            </Text>
-          </Box>
-        )}
-        {groupedOperations.sections.map(group => (
-          <Box key={group.day.toISOString()}>
-            <SectionTitle day={group.day} />
-            <Box p={0}>
-              {group.data.map(operation => {
-                const account = accountsMap[operation.accountId];
-                if (!account) {
-                  logger.warn(`no account found for operation ${operation.id}`);
-                  return null;
-                }
-                let parentAccount;
-                if (account.type !== "Account") {
-                  const pa =
-                    accountsMap[account.parentId] ||
-                    allAccounts.find(a => a.id === account.parentId);
-                  if (pa && pa.type === "Account") {
-                    parentAccount = pa;
-                  }
-                  if (!parentAccount) {
-                    logger.warn(`no token account found for token operation ${operation.id}`);
+      <>
+        <Card id="operation-list">
+          {title && (
+            <Box py={3} px={4}>
+              <Text
+                color="palette.text.shade100"
+                ff="Inter|Medium"
+                fontSize={6}
+                data-e2e="dashboard_OperationList"
+              >
+                {title}
+              </Text>
+            </Box>
+          )}
+          {groupedOperations.sections.map(group => (
+            <Box key={group.day.toISOString()}>
+              <SectionTitle day={group.day} />
+              <Box p={0}>
+                {group.data.map(operation => {
+                  const account = accountsMap[operation.accountId];
+                  if (!account) {
+                    logger.warn(`no account found for operation ${operation.id}`);
                     return null;
                   }
-                }
-                return (
-                  <OperationC
-                    compact
-                    operation={operation}
-                    account={account}
-                    parentAccount={parentAccount}
-                    key={`${account.id}_${operation.id}`}
-                    onOperationClick={this.handleClickOperation}
-                    t={t}
-                    withAccount={withAccount}
-                  />
-                );
-              })}
+                  let parentAccount;
+                  if (account.type !== "Account") {
+                    const pa =
+                      accountsMap[account.parentId] ||
+                      allAccounts.find(a => a.id === account.parentId);
+                    if (pa && pa.type === "Account") {
+                      parentAccount = pa;
+                    }
+                    if (!parentAccount) {
+                      logger.warn(`no token account found for token operation ${operation.id}`);
+                      return null;
+                    }
+                  }
+                  return (
+                    <OperationC
+                      compact
+                      operation={operation}
+                      account={account}
+                      parentAccount={parentAccount}
+                      key={`${account.id}_${operation.id}`}
+                      onOperationClick={this.handleClickOperation}
+                      t={t}
+                      withAccount={withAccount}
+                    />
+                  );
+                })}
+              </Box>
             </Box>
-          </Box>
-        ))}
+          ))}
+        </Card>
         {!groupedOperations.completed ? (
           <ShowMore onClick={this.fetchMoreOperations}>
             <span>{t("common.showMore")}</span>
@@ -179,7 +181,7 @@ export class OperationsList extends PureComponent<Props, State> {
             </Text>
           </Box>
         )}
-      </Card>
+      </>
     );
   }
 }

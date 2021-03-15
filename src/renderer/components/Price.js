@@ -44,7 +44,7 @@ export default function Price({
   color,
   fontSize,
   iconSize,
-  showAllDigits = true,
+  showAllDigits,
   withIcon = true,
   rate,
 }: Props) {

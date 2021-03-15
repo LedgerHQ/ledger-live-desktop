@@ -73,6 +73,7 @@ export default function StepClaimRewards({
     [updateClaimRewards, transaction],
   );
 
+  const key = transaction.mode === "claimReward" ? "claimInfo" : "compoundInfo";
   return (
     <Box flow={1}>
       <TrackPage category="ClaimRewards Flow" name="Step 1" />
@@ -81,12 +82,7 @@ export default function StepClaimRewards({
       <ModeSelectorField mode={transaction.mode} onChange={onChangeMode} />
       {amount && (
         <Text fontSize={4} ff="Inter|Medium" textAlign="center">
-          <Trans
-            i18nKey={`cosmos.claimRewards.flow.steps.claimRewards.${
-              transaction.mode === "claimReward" ? "claimInfo" : "compoundInfo"
-            }`}
-            values={{ amount }}
-          >
+          <Trans i18nKey={`cosmos.claimRewards.flow.steps.claimRewards.${key}`} values={{ amount }}>
             <b></b>
           </Trans>
         </Text>

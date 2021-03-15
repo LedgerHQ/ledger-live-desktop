@@ -33,7 +33,12 @@ const EmptyStateAccounts = ({ theme }: { theme: any }) => {
     <Box alignItems="center" pb={8} style={{ margin: "auto" }}>
       <NoAccounts size={250} />
       <Box mt={5} alignItems="center">
-        <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={5}>
+        <Text
+          ff="Inter|SemiBold"
+          color="palette.text.shade100"
+          fontSize={5}
+          id="portfolio-empty-state-title"
+        >
           {t("emptyState.accounts.title")}
         </Text>
         <Box mt={3}>
