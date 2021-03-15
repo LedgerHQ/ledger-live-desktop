@@ -25,7 +25,7 @@ import SelectAccount from "~/renderer/components/SelectAccount";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
-import TokenTips from "~/renderer/components/TokenTips";
+import Alert from "~/renderer/components/Alert";
 import type { StepProps } from "../Body";
 import { supportLinkByTokenType } from "~/config/urls";
 
@@ -106,6 +106,8 @@ export default function StepAccount({
   const error = account ? getReceiveFlowError(account, parentAccount) : null;
   const tokenTypes = mainAccount ? listTokenTypesForCryptoCurrency(mainAccount.currency) : [];
 
+  const url = supportLinkByTokenType[tokenTypes[0]];
+
   return (
     <Box flow={1}>
       <TrackPage category={`Receive Flow${eventType ? ` (${eventType})` : ""}`} name="Step 1" />
@@ -125,25 +127,28 @@ export default function StepAccount({
       ) : null}
       {account && !receiveTokenMode && tokenTypes.length ? (
         <div>
-          <TokenTips
-            textKey={`receive.steps.chooseAccount.${
-              account.type === "TokenAccount" ? "verifyTokenType" : "warningTokenType"
-            }`}
-            textData={
-              account.type === "TokenAccount"
-                ? {
-                    token: account.token.name,
-                    tokenType: tokenTypes.map(tt => tt.toUpperCase()).join("/"),
-                    currency: mainAccount && mainAccount.currency.name,
-                  }
-                : {
-                    ticker: account.currency.ticker,
-                    tokenType: tokenTypes.map(tt => tt.toUpperCase()).join("/"),
-                    currency: account.currency.name,
-                  }
-            }
-            learnMoreLink={supportLinkByTokenType[tokenTypes[0]]}
-          />
+          <Alert type="primary" learnMoreUrl={url} mt={3}>
+            <Trans
+              i18nKey={`receive.steps.chooseAccount.${
+                account.type === "TokenAccount" ? "verifyTokenType" : "warningTokenType"
+              }`}
+              values={
+                account.type === "TokenAccount"
+                  ? {
+                      token: account.token.name,
+                      tokenType: tokenTypes.map(tt => tt.toUpperCase()).join("/"),
+                      currency: mainAccount && mainAccount.currency.name,
+                    }
+                  : {
+                      ticker: account.currency.ticker,
+                      tokenType: tokenTypes.map(tt => tt.toUpperCase()).join("/"),
+                      currency: account.currency.name,
+                    }
+              }
+            >
+              <b></b>
+            </Trans>
+          </Alert>
         </div>
       ) : null}
     </Box>
