@@ -67,6 +67,7 @@ const colors = {
   wallet: "#6490f1",
   blueTransparentBackground: "rgba(100, 144, 241, 0.15)",
   pillActiveBackground: "rgba(100, 144, 241, 0.1)",
+  lightGreen: "rgba(102, 190, 84, 0.1)",
   lightRed: "rgba(234, 46, 73, 0.1)",
   lightWarning: "rgba(245, 127, 23, 0.1)",
   white: "#ffffff",
