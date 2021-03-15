@@ -14,6 +14,7 @@ import TriangleWarning from "~/renderer/icons/TriangleWarning";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import { openURL } from "~/renderer/linking";
 import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
+import { Trans } from "react-i18next";
 
 const DateRowContainer = styled.div`
   padding: 4px 16px;
@@ -171,6 +172,14 @@ function Article({ level = "info", icon = "info", title, text, link, utmCampaign
   );
 }
 
+const PanelContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+`;
+
 const Separator = styled.div`
   margin: 25px 0px;
   width: 100%;
@@ -203,6 +212,32 @@ export function AnnouncementPanel() {
     },
     [seenIds, setAsSeen],
   );
+
+  if (!groupedAnnouncements.length) {
+    return (
+      <PanelContainer>
+        <Text
+          color="palette.text.shade100"
+          ff="Inter|SemiBold"
+          fontSize="18px"
+          lineHeight="21.78px"
+          textAlign="center"
+        >
+          <Trans i18nKey="informationCenter.announcement.emptyState.title" />
+        </Text>
+        <Text
+          mt="8px"
+          color="palette.text.shade50"
+          ff="Inter|Regular"
+          fontSize="13px"
+          lineHeight="15.73px"
+          textAlign="center"
+        >
+          <Trans i18nKey="informationCenter.announcement.emptyState.desc" />
+        </Text>
+      </PanelContainer>
+    );
+  }
 
   return (
     <ScrollArea hideScrollbar>
