@@ -45,6 +45,10 @@ const TopRightContainer = styled.div`
   right: 40px;
   top: 40px;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
 `;
 
 const ButtonContainer = styled.div`

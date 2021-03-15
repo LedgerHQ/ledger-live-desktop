@@ -1,12 +1,12 @@
 import Modal from "./modal.page";
 
 export default class ExportOperationsHistoryModal extends Modal {
-  get accountList() {
+  async accountList() {
     return this.$("#accounts-list-selectable");
   }
 
   async getAccountsRows() {
-    const list = await this.accountList;
+    const list = await this.accountList();
     return list.$$(".account-row");
   }
 }

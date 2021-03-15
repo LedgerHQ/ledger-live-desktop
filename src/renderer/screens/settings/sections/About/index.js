@@ -11,7 +11,7 @@ import TermsButton from "./TermsButton";
 
 const SectionHelp = () => {
   const { t } = useTranslation();
-  const version = __APP_VERSION__;
+  const version = process.env.SPECTRON_RUN ? "0.0.0" : __APP_VERSION__;
 
   return (
     <>

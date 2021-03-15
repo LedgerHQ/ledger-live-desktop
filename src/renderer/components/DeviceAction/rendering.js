@@ -34,6 +34,8 @@ import SupportLinkError from "~/renderer/components/SupportLinkError";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
+import ExternalLinkButton from "../ExternalLinkButton";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 const AnimationWrapper: ThemedComponent<{ modelId: DeviceModelId }> = styled.div`
   width: 600px;
@@ -166,10 +168,10 @@ const OpenManagerBtn = ({
 }) => {
   const history = useHistory();
   const onClick = useCallback(() => {
+    setTrackingSource("device action open manager button");
     history.push({
       pathname: "manager",
       search: appName ? `?q=${appName}` : "",
-      state: { source: "device action open manager button" },
     });
     closeAllModal();
   }, [history, appName, closeAllModal]);
@@ -281,11 +283,13 @@ export const renderError = ({
   onRetry,
   withExportLogs,
   list,
+  supportLink,
 }: {
   error: Error,
   onRetry?: () => void,
   withExportLogs?: boolean,
   list?: boolean,
+  supportLink?: string,
 }) => (
   <Wrapper id={`error-${error.name}`}>
     <Logo>
@@ -305,12 +309,16 @@ export const renderError = ({
       </ErrorDescription>
     ) : null}
     <ButtonContainer>
+      {supportLink ? (
+        <ExternalLinkButton label={<Trans i18nKey="common.getSupport" />} url={supportLink} />
+      ) : null}
       {withExportLogs ? (
         <ExportLogsButton
           title={<Trans i18nKey="settings.exportLogs.title" />}
           small={false}
           primary={false}
           outlineGrey
+          mx={1}
         />
       ) : null}
       {onRetry ? (
@@ -374,6 +382,26 @@ export const renderConnectYourDevice = ({
           <ConnectTroubleshooting onRepair={onRepairModal} />
         </TroobleshootingWrapper>
       ) : null}
+    </Footer>
+  </Wrapper>
+);
+
+export const renderFirmwareUpdating = ({
+  modelId,
+  type,
+}: {
+  modelId: DeviceModelId,
+  type: "light" | "dark",
+}) => (
+  <Wrapper>
+    <Header />
+    <AnimationWrapper modelId={modelId}>
+      <Animation animation={getDeviceAnimation(modelId, type, "firmwareUpdating")} />
+    </AnimationWrapper>
+    <Footer>
+      <Title>
+        <Trans i18nKey={"DeviceAction.unlockDeviceAfterFirmwareUpdate"} />
+      </Title>
     </Footer>
   </Wrapper>
 );

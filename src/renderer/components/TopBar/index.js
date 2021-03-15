@@ -29,6 +29,7 @@ import ItemContainer from "./ItemContainer";
 import { setDiscreetMode } from "~/renderer/actions/settings";
 import { hasPasswordSelector } from "~/renderer/reducers/application";
 import { NotificationIndicator } from "~/renderer/components/TopBar/NotificationIndicator";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({}))`
   height: ${p => p.theme.sizes.topBarHeight}px;
@@ -90,7 +91,8 @@ const TopBar = () => {
     }
 
     if (location.pathname !== url) {
-      history.push({ pathname: url, state: { source: "topbar" } });
+      setTrackingSource("topbar");
+      history.push({ pathname: url });
     }
   }, [history, location, dispatch]);
 

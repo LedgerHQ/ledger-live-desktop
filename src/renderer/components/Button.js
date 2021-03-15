@@ -311,6 +311,7 @@ export type Props = {
   event?: string,
   eventProperties?: Object,
   mr?: number,
+  mx?: number,
 };
 
 class Button extends PureComponent<

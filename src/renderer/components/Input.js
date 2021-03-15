@@ -7,7 +7,6 @@ import noop from "lodash/noop";
 import fontFamily from "~/renderer/styles/styled/fontFamily";
 import Spinner from "~/renderer/components/Spinner";
 import Box from "~/renderer/components/Box";
-import Ellipsis from "~/renderer/components/Ellipsis";
 import TranslatedError from "~/renderer/components/TranslatedError";
 import Text from "~/renderer/components/Text";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -77,13 +76,23 @@ const Container = styled(Box).attrs(() => ({
     }`}
 `;
 
-const ErrorDisplay = styled(Box)`
-  position: absolute;
-  bottom: -20px;
-  left: 0px;
+const ErrorContainer = styled(Box)`
+  margin-top: 0px;
   font-size: 12px;
   width: 100%;
+  transition: all 0.4s ease-in-out;
+  will-change: max-height;
+  max-height: ${p => (p.hasError ? 60 : 0)}px;
+  min-height: ${p => (p.hasError ? 20 : 0)}px;
+  overflow: hidden;
+`;
+
+const ErrorDisplay = styled(Box)`
   color: ${p => p.theme.colors.pearl};
+`;
+
+const WarningDisplay = styled(Box)`
+  color: ${p => p.theme.colors.warning};
 `;
 
 const LoadingDisplay = styled(Box)`
@@ -101,10 +110,6 @@ const LoadingDisplay = styled(Box)`
   > :first-child {
     margin-right: 10px;
   }
-`;
-
-const WarningDisplay = styled(ErrorDisplay)`
-  color: ${p => p.theme.colors.warning};
 `;
 
 const Base = styled.input.attrs(() => ({
@@ -144,6 +149,7 @@ type Props = {
   small?: boolean,
   editInPlace?: boolean,
   disabled?: boolean,
+  hideErrorMessage?: boolean,
 };
 
 // $FlowFixMe @IAmMorrow
@@ -164,6 +170,7 @@ const Input = React.forwardRef(function Input(
     onEsc,
     onFocus = noop,
     onBlur = noop,
+    hideErrorMessage,
     ...props
   }: Props,
   inputRef,
@@ -242,19 +249,20 @@ const Input = React.forwardRef(function Input(
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
-        {error ? (
-          <ErrorDisplay id="input-error">
-            <Ellipsis>
-              <TranslatedError error={error} />
-            </Ellipsis>
-          </ErrorDisplay>
-        ) : warning ? (
-          <WarningDisplay id="input-warning">
-            <Ellipsis>
-              <TranslatedError error={warning} />
-            </Ellipsis>
-          </WarningDisplay>
-        ) : null}
+
+        <ErrorContainer hasError={!hideErrorMessage && (error || warning)}>
+          {!hideErrorMessage ? (
+            error ? (
+              <ErrorDisplay id="input-error">
+                <TranslatedError error={error} />
+              </ErrorDisplay>
+            ) : warning ? (
+              <WarningDisplay id="input-warning">
+                <TranslatedError error={warning} />
+              </WarningDisplay>
+            ) : null
+          ) : null}
+        </ErrorContainer>
         {loading && !isFocus ? (
           <LoadingDisplay>
             <Spinner size={16} color="palette.text.shade50" />

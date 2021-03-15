@@ -5,13 +5,16 @@ const $ = selector => app.client.$(selector);
 
 export const selection = device => {
   it("go through start", async () => {
+    const imgLoaded = await $(".onboarding-imgs-loaded");
+    await imgLoaded.waitForDisplayed();
+
     const elem = await $("#onboarding-get-started-button");
     await elem.click();
     const terms = await $("#modal-confirm-button");
     await terms.waitForDisplayed();
     await app.client.pause(2000);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "onboarding-terms",
+      customSnapshotIdentifier: "onboarding-terms-" + device,
     });
   });
   it("accept terms", async () => {
@@ -23,7 +26,7 @@ export const selection = device => {
     await cta.click();
     await app.client.pause(200);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "onboarding-terms-accepted",
+      customSnapshotIdentifier: "onboarding-terms-accepted-" + device,
     });
   });
   it("selects " + device, async () => {
@@ -31,12 +34,12 @@ export const selection = device => {
     await nanoX.click();
     await app.client.pause(500);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: `onboarding-${device}-flow`,
+      customSnapshotIdentifier: `onboarding-${device}-flow-` + device,
     });
   });
 };
 
-export const goToConnectAndFinish = cta => {
+export const goToConnectAndFinish = (cta, device) => {
   it("goes to connect", async () => {
     const next = await $(cta);
     await next.click();
@@ -46,7 +49,7 @@ export const goToConnectAndFinish = cta => {
       failureThreshold: 15,
       failureThresholdType: "pixel",
       // its the same but for some reason theres a button that's not the same (?)
-      customSnapshotIdentifier: "onboarding-genuine-check-" + cta.replace("#", ""),
+      customSnapshotIdentifier: "onboarding-genuine-check-" + cta.replace("#", "") + "-" + device,
     });
   });
 
@@ -70,7 +73,7 @@ export const goToConnectAndFinish = cta => {
       // wave thing
       failureThreshold: 15,
       failureThresholdType: "pixel",
-      customSnapshotIdentifier: "onboarding-check-complete-" + cta.replace("#", ""),
+      customSnapshotIdentifier: "onboarding-check-complete-" + cta.replace("#", "") + "-" + device,
     });
   });
 
@@ -79,7 +82,7 @@ export const goToConnectAndFinish = cta => {
     await next.click();
     await app.client.pause(200);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "onboarding-complete",
+      customSnapshotIdentifier: "onboarding-complete-" + cta.replace("#", "") + "-" + device,
     });
   });
 };
@@ -109,7 +112,7 @@ export const onboard = device => {
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-nano-getstarted",
+        customSnapshotIdentifier: "onboarding-nano-getstarted-" + device,
       });
     });
 
@@ -123,19 +126,19 @@ export const onboard = device => {
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-nano-getstarted-2",
+        customSnapshotIdentifier: "onboarding-nano-getstarted-2-" + device,
       });
     });
 
     it("goes to pincode", async () => {
       const next = await $("#device-howto-cta");
       await next.click();
-      await app.client.pause(700);
+      await app.client.waitForIllustration();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-nano-pincode",
+        customSnapshotIdentifier: "onboarding-nano-pincode-" + device,
       });
     });
 
@@ -144,24 +147,24 @@ export const onboard = device => {
       pincodeCB.click();
       const next = await $("#device-pincode-cta");
       await next.click();
-      await app.client.pause(200);
+      await app.client.pause(500);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-nano-pincode-2",
+        customSnapshotIdentifier: "onboarding-nano-pincode-2-" + device,
       });
     });
 
     it("goes to recovery phrase", async () => {
       const next = await $("#pincode-howto-cta");
       await next.click();
-      await app.client.pause(200);
+      await app.client.waitForIllustration();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-nano-recoveryphrase",
+        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-" + device,
       });
     });
 
@@ -170,48 +173,48 @@ export const onboard = device => {
       recoveryphraseCB.click();
       const next = await $("#device-recoveryphrase-cta");
       await next.click();
-      await app.client.pause(200);
+      await app.client.pause(1000);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-2",
+        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-2-" + device,
       });
     });
 
     it("goes to recovery phrase 3", async () => {
       const next = await $("#use-recovery-sheet");
       await next.click();
-      await app.client.pause(200);
+      await app.client.pause(500);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-3",
+        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-3-" + device,
       });
     });
 
     it("goes to recovery phrase 4", async () => {
       const next = await $("#recovery-howto-3");
       await next.click();
-      await app.client.pause(200);
+      await app.client.pause(500);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-4",
+        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-4-" + device,
       });
     });
 
     it("goes to quizz", async () => {
       const next = await $("#hide-recovery-cta");
       await next.click();
-      await app.client.pause(200);
+      await app.client.pause(500);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-nano-quizz",
+        customSnapshotIdentifier: "onboarding-nano-quizz-" + device,
       });
     });
 
@@ -236,16 +239,16 @@ export const onboard = device => {
       await app.client.pause(200);
       next = await $("#quizz-next-cta");
       await next.click();
-      await app.client.pause(400);
+      await app.client.waitForIllustration();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-you-are-a-pro",
+        customSnapshotIdentifier: "onboarding-you-are-a-pro-" + device,
       });
     });
 
-    goToConnectAndFinish("#quizz-success-cta");
+    goToConnectAndFinish("#quizz-success-cta", device);
   });
 
   describe(`onboarding ${device} - connect`, () => {
@@ -253,7 +256,7 @@ export const onboard = device => {
 
     selection(device);
 
-    goToConnectAndFinish("#initialized-device");
+    goToConnectAndFinish("#initialized-device", device);
   });
 
   describe(`onboarding ${device} - restore`, () => {
@@ -269,7 +272,7 @@ export const onboard = device => {
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-restore-start",
+        customSnapshotIdentifier: "onboarding-restore-start-" + device,
       });
     });
 
@@ -281,7 +284,7 @@ export const onboard = device => {
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-restore-warn",
+        customSnapshotIdentifier: "onboarding-restore-warn-" + device,
       });
     });
 
@@ -293,19 +296,19 @@ export const onboard = device => {
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-restore-step1",
+        customSnapshotIdentifier: "onboarding-restore-step1-" + device,
       });
     });
 
     it("goes to pincode", async () => {
       const next = await $("#device-howto-2");
       await next.click();
-      await app.client.pause(200);
+      await app.client.pause(500);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-nano-restore-pincode",
+        customSnapshotIdentifier: "onboarding-nano-restore-pincode-" + device,
       });
     });
 
@@ -314,24 +317,24 @@ export const onboard = device => {
       pincodeCB.click();
       const next = await $("#device-pincode-cta");
       await next.click();
-      await app.client.pause(200);
+      await app.client.pause(500);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-nano-restore-pincode-2",
+        customSnapshotIdentifier: "onboarding-nano-restore-pincode-2-" + device,
       });
     });
 
     it("goes to recovery phrase restore", async () => {
       const next = await $("#pincode-howto-cta");
       await next.click();
-      await app.client.pause(200);
+      await app.client.pause(500);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-restore",
+        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-restore-" + device,
       });
     });
 
@@ -340,27 +343,27 @@ export const onboard = device => {
       recoveryphraseCB.click();
       const next = await $("#passphrase-recovery-cta");
       await next.click();
-      await app.client.pause(200);
+      await app.client.pause(500);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-restore-2",
+        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-restore-2-" + device,
       });
     });
 
     it("goes to recovery phrase restore 3", async () => {
       const next = await $("#recovery-howto-1");
       await next.click();
-      await app.client.pause(200);
+      await app.client.pause(500);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         // wave thing
         failureThreshold: 15,
         failureThresholdType: "pixel",
-        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-restore-3",
+        customSnapshotIdentifier: "onboarding-nano-recoveryphrase-restore-3-" + device,
       });
     });
 
-    goToConnectAndFinish("#recovery-howto-2");
+    goToConnectAndFinish("#recovery-howto-2", device);
   });
 };

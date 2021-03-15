@@ -40,7 +40,7 @@ const TabIndicator = styled.span.attrs(({ currentRef = {}, index, short }) => ({
 `;
 
 const Tabs: ThemedComponent<{ short: boolean, separator: boolean }> = styled.div`
-  height: ${p => p.theme.sizes.topBarHeight}px;
+  height: ${p => p.height || p.theme.sizes.topBarHeight}px;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -79,6 +79,7 @@ type Props = {
   withId?: boolean,
   fontSize?: number,
   fullWidth?: boolean,
+  height?: number,
 };
 
 const TabBar = ({
@@ -92,6 +93,7 @@ const TabBar = ({
   separator = false,
   withId = false,
   fontSize = 16,
+  height,
 }: Props) => {
   const tabRefs = useRef([]);
   const [index, setIndex] = useState(defaultIndex);
@@ -116,7 +118,7 @@ const TabBar = ({
   };
 
   return (
-    <Tabs short={short} separator={separator}>
+    <Tabs short={short} separator={separator} height={height}>
       {tabs.map((tab, j) => (
         <Tab
           ref={setTabRef(j)}

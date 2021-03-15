@@ -15,7 +15,7 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import Box from "~/renderer/components/Box";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import ParentCryptoCurrencyIcon from "~/renderer/components/ParentCryptoCurrencyIcon";
-import { track } from "~/renderer/analytics/segment";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 const ParentCryptoCurrencyIconWrapper: ThemedComponent<{}> = styled.div`
   width: 20px;
@@ -58,13 +58,11 @@ const Item = ({ account, index, pathname, collapsed }: Props) => {
 
   const onAccountClick = useCallback(() => {
     const parentAccountId = account.type !== "Account" ? account.parentId : undefined;
-    track("Access account from star sidebar");
-
+    setTrackingSource("starred account item");
     history.push({
       pathname: parentAccountId
         ? `/account/${parentAccountId}/${account.id}`
         : `/account/${account.id}`,
-      state: { source: "starred account item" },
     });
   }, [account, history]);
 
