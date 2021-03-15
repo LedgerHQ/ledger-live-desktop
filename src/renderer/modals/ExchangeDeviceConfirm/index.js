@@ -8,7 +8,6 @@ import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getAccountName, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
 import { urls } from "~/config/urls";
-import { openURL } from "~/renderer/linking";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import Modal from "~/renderer/components/Modal";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
@@ -24,7 +23,7 @@ import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/render
 import useTheme from "~/renderer/hooks/useTheme";
 import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import Button from "~/renderer/components/Button";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Receive2NoDevice from "~/renderer/components/Receive2NoDevice";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -128,16 +127,9 @@ const VerifyOnDevice = ({
           </Box>
         </>
       ) : (
-        <>
-          <Box mt={4} />
-          <InfoBox
-            onLearnMore={() => openURL(urls.recipientAddressInfo)}
-            onLearnMoreLabel={<Trans i18nKey="common.learnMore" />}
-            type="security"
-          >
-            <Trans i18nKey="currentAddress.messageIfSkipped" values={{ name }} />
-          </InfoBox>
-        </>
+        <Alert type="security" learnMoreUrl={urls.recipientAddressInfo} mt={4}>
+          <Trans i18nKey="currentAddress.messageIfSkipped" values={{ name }} />
+        </Alert>
       )}
       {device && renderVerifyUnwrapped({ modelId: device.modelId, type })}
     </>

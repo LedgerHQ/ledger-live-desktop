@@ -16,7 +16,7 @@ import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import BroadcastErrorDisclaimer from "~/renderer/components/BroadcastErrorDisclaimer";
 import { openURL } from "~/renderer/linking";
 import Update from "~/renderer/icons/UpdateCircle";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 import type { StepProps } from "../types";
 
 const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(() => ({
@@ -89,9 +89,9 @@ function StepConfirmation({
           <Trans i18nKey="lend.enable.steps.confirmation.success.title" />
         </Title>
         <Text>{multiline(t("lend.enable.steps.confirmation.success.text"))}</Text>
-        <InfoBox onLearnMore={onLearnMore}>
+        <Alert type="primary" onLearnMore={onLearnMore}>
           <Trans i18nKey="lend.enable.steps.confirmation.success.info" />
-        </InfoBox>
+        </Alert>
       </Container>
     );
   }

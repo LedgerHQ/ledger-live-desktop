@@ -18,7 +18,7 @@ import Box from "~/renderer/components/Box";
 import Button, { Base } from "~/renderer/components/Button";
 import RedelegationSelectorField from "../fields/RedelegationSelectorField";
 import StepRecipientSeparator from "~/renderer/components/StepRecipientSeparator";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 import { AmountField } from "~/renderer/families/cosmos/UndelegationFlowModal/fields/index";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 
@@ -198,11 +198,11 @@ export default function StepValidators({
         </Box>
       )}
 
-      <InfoBox>
+      <Alert type="primary">
         <Trans i18nKey="cosmos.redelegation.flow.steps.validators.warning">
           <b></b>
         </Trans>
-      </InfoBox>
+      </Alert>
     </Container>
   );
 }
