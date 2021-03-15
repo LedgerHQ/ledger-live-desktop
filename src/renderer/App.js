@@ -20,7 +20,7 @@ import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
 import CountervaluesProvider from "~/renderer/components/CountervaluesProvider";
 import Default from "./Default";
 import { AnnouncementProviderWrapper } from "~/renderer/components/AnnouncementProviderWrapper";
-import { ToastProvider } from "@ledgerhq/live-common/lib/providers/ToastProvider";
+import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 
 const reloadApp = event => {
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {

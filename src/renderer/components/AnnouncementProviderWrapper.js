@@ -1,13 +1,13 @@
 // @flow
 import React, { useCallback } from "react";
-import { AnnouncementProvider } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider";
-import type { Announcement } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider/types";
+import { AnnouncementProvider } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
+import type { Announcement } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/types";
 import { getKey, setKey } from "~/renderer/storage";
 import { languageSelector } from "~/renderer/reducers/settings";
 import { currenciesIdSelector } from "~/renderer/reducers/accounts";
 import { useSelector, useDispatch } from "react-redux";
-import { ServiceStatusProvider } from "@ledgerhq/live-common/lib/providers/ServiceStatusProvider";
-import { useToasts } from "@ledgerhq/live-common/lib/providers/ToastProvider/index";
+import { ServiceStatusProvider } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
+import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider/index";
 import { openInformationCenter } from "~/renderer/actions/UI";
 import { track } from "~/renderer/analytics/segment";
 

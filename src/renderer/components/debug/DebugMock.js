@@ -8,10 +8,10 @@ import { deserializeError } from "@ledgerhq/errors";
 import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 import { deviceInfo155, mockListAppsResult } from "@ledgerhq/live-common/lib/apps/mock";
 
-import { addMockAnnouncement } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider/api/api.mock";
-import { useAnnouncements } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider";
-import { toggleMockIncident } from "@ledgerhq/live-common/lib/providers/ServiceStatusProvider/api/api.mock";
-import { useServiceStatus } from "@ledgerhq/live-common/lib/providers/ServiceStatusProvider";
+import { addMockAnnouncement } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/api/api.mock";
+import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
+import { toggleMockIncident } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider/api/api.mock";
+import { useServiceStatus } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
 
 import useInterval from "~/renderer/hooks/useInterval";
 import Box from "~/renderer/components/Box";

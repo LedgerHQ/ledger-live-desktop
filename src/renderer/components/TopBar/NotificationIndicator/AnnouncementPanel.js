@@ -4,9 +4,9 @@ import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import { InView } from "react-intersection-observer";
 import React, { useCallback, useRef, useMemo } from "react";
-import { useAnnouncements } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider";
+import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
 
-import { groupAnnouncements } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider/helpers";
+import { groupAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/helpers";
 import Text from "~/renderer/components/Text";
 import moment from "moment";
 import InfoCircle from "~/renderer/icons/InfoCircle";

@@ -9,7 +9,7 @@ import { AnnouncementPanel } from "~/renderer/components/TopBar/NotificationIndi
 import { ServiceStatusPanel } from "~/renderer/components/TopBar/NotificationIndicator/ServiceStatusPanel";
 
 import { useTranslation } from "react-i18next";
-import { useAnnouncements } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider";
+import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
 import { CSSTransition } from "react-transition-group";
 import { useSelector, useDispatch } from "react-redux";
 import { informationCenterStateSelector } from "~/renderer/reducers/UI";

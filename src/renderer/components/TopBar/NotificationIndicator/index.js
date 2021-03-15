@@ -4,7 +4,7 @@ import Tooltip from "~/renderer/components/Tooltip";
 import React from "react";
 import ItemContainer from "../ItemContainer";
 import IconBell from "~/renderer/icons/Bell";
-import { useAnnouncements } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider";
+import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
 import { useTranslation } from "react-i18next";
 import { InformationDrawer } from "./InformationDrawer";
 import { useDispatch, useSelector } from "react-redux";

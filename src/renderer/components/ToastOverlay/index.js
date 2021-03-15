@@ -4,7 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import { Toast } from "./Toast";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { useToasts } from "@ledgerhq/live-common/lib/providers/ToastProvider";
+import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 
 const Wrapper: ThemedComponent<{}> = styled.div`
   position: absolute;

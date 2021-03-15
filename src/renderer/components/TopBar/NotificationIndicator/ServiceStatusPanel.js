@@ -4,7 +4,7 @@ import styled from "styled-components";
 import TriangleWarning from "~/renderer/icons/TriangleWarning";
 import React from "react";
 import { openURL } from "~/renderer/linking";
-import { useServiceStatus } from "@ledgerhq/live-common/lib/providers/ServiceStatusProvider";
+import { useServiceStatus } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
 import Text from "~/renderer/components/Text";
 import SuccessAnimatedIcon from "~/renderer/components/SuccessAnimatedIcon";
 import { Trans } from "react-i18next";
