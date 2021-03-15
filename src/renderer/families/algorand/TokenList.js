@@ -19,7 +19,7 @@ const ReceiveButton = ({
     openModal("MODAL_ALGORAND_OPT_IN", { account });
   };
   return (
-    <Button small primary onClick={onReceiveClick}>
+    <Button small inverted primary onClick={onReceiveClick}>
       <Box horizontal flow={1} alignItems="center">
         <IconPlus size={12} />
         <Box>

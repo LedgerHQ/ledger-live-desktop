@@ -45,6 +45,7 @@ type Props = {
   collapsedItems: Array<any>,
   renderItem: (item: any, index: number, isLast: boolean) => React$Node,
   renderShowMore: (collapsed: boolean) => React$Node,
+  containerStyle?: *,
 };
 
 const CollapsibleList = ({
@@ -53,6 +54,7 @@ const CollapsibleList = ({
   collapsedItems,
   renderItem,
   renderShowMore,
+  containerStyle,
 }: Props) => {
   const [collapsed, setCollapsed] = useState(true);
 
@@ -61,7 +63,7 @@ const CollapsibleList = ({
   }, []);
 
   return (
-    <Card p={0} mt={24} mb={6}>
+    <Card p={0} mt={24} mb={6} style={containerStyle}>
       {children}
       <Wrapper>
         {uncollapsedItems.map((item, i) =>

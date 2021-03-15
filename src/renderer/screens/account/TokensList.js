@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from "react";
+import React, { memo, useCallback, useState } from "react";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/types/portfolio";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account/helpers";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
@@ -27,6 +27,8 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import perFamilyTokenList from "~/renderer/generated/TokenList";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import TableContainer, { TableHeader } from "~/renderer/components/TableContainer";
+import AngleDown from "~/renderer/icons/AngleDown";
 
 type OwnProps = {
   account: Account,
@@ -40,15 +42,7 @@ type Props = {
   history: RouterHistory,
 };
 
-const Wrapper: ThemedComponent<{}> = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  padding-right: ${p => p.theme.space[4]}px;
-`;
-
 const EmptyState: ThemedComponent<{}> = styled.div`
-  border: 1px dashed ${p => p.theme.colors.palette.text.shade60};
   padding: 15px 20px;
   border-radius: 4px;
   display: flex;
@@ -68,13 +62,45 @@ const Placeholder: ThemedComponent<{}> = styled.div`
   padding-right: 50px;
 `;
 
+export const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled(Button)`
+  display: flex;
+  color: ${p => p.theme.colors.wallet};
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid ${p => p.theme.colors.palette.divider};
+  background: ${p => p.theme.colors.palette.background.paper};
+  border-radius: 0px 0px 4px 4px;
+  height: 44px;
+  text-align: center;
+  padding: 0;
+
+  &:hover ${Text} {
+    text-decoration: underline;
+  }
+  &:hover {
+    background-color: initial;
+  }
+
+  > :nth-child(2) {
+    margin-left: 8px;
+    transform: rotate(${p => (p.expanded ? "180deg" : "0deg")});
+  }
+`;
+
+export const IconAngleDown: ThemedComponent<{ expanded?: boolean }> = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: ${p => (p.expanded ? "rotate(180deg)" : "rotate(0deg)")};
+`;
+
 const mapDispatchToProps = {
   openModal,
 };
 
 // Fixme Temporarily hiding the receive token button
 const ReceiveButton = (props: { onClick: () => void }) => (
-  <Button small primary onClick={props.onClick}>
+  <Button small primary inverted onClick={props.onClick}>
     <Box horizontal flow={1} alignItems="center">
       <IconPlus size={12} />
       <Box>
@@ -84,115 +110,142 @@ const ReceiveButton = (props: { onClick: () => void }) => (
   </Button>
 );
 
-class TokensList extends PureComponent<Props> {
-  onAccountClick = (account: AccountLike, parentAccount: Account) => {
-    setTrackingSource("tokens list");
-    this.props.history.push({
-      pathname: `/account/${parentAccount.id}/${account.id}`,
-    });
-  };
+function TokensList({ account, t, range, openModal, history }: Props) {
+  const onAccountClick = useCallback(
+    (account: AccountLike, parentAccount: Account) => {
+      setTrackingSource("tokens list");
+      history.push({
+        pathname: `/account/${parentAccount.id}/${account.id}`,
+      });
+    },
+    [history],
+  );
 
-  onReceiveClick = () => {
-    const { account, openModal } = this.props;
+  const onReceiveClick = useCallback(() => {
     openModal("MODAL_RECEIVE", { account, receiveTokenMode: true });
+  }, [account, openModal]);
+
+  const [collapsed, setCollapsed] = useState(true);
+
+  const toggleCollapse = useCallback(() => setCollapsed(s => !s), []);
+
+  if (!account.subAccounts) return null;
+  const subAccounts = listSubAccounts(account);
+  const { currency } = account;
+  const family = currency.family;
+  const tokenTypes = listTokenTypesForCryptoCurrency(currency);
+  const isTokenAccount = tokenTypes.length > 0;
+  const isEmpty = subAccounts.length === 0;
+  const shouldSliceList = subAccounts.length >= 5;
+
+  if (!isTokenAccount && isEmpty) return null;
+
+  const url =
+    currency && currency.type !== "TokenCurrency" && tokenTypes && tokenTypes.length > 0
+      ? supportLinkByTokenType[tokenTypes[0]]
+      : null;
+
+  const specific = perFamilyTokenList[family];
+  const hasSpecificTokenWording = specific?.hasSpecificTokenWording;
+  const ReceiveButtonComponent = specific?.ReceiveButton ?? ReceiveButton;
+
+  const titleLabel = t(hasSpecificTokenWording ? `tokensList.${family}.title` : "tokensList.title");
+  const placeholderLabel = t(
+    hasSpecificTokenWording ? `tokensList.${family}.placeholder` : "tokensList.placeholder",
+    {
+      currencyName: currency.name,
+    },
+  );
+
+  const linkLabel = t(hasSpecificTokenWording ? `tokensList.${family}.link` : "tokensList.link");
+
+  const translationMap = {
+    see: hasSpecificTokenWording
+      ? `tokensList.${currency.family}.seeTokens`
+      : `tokensList.seeTokens`,
+    hide: hasSpecificTokenWording
+      ? `tokensList.${currency.family}.hideTokens`
+      : `tokensList.hideTokens`,
   };
 
-  render() {
-    const { account, t, range, openModal } = this.props;
-    if (!account.subAccounts) return null;
-    const subAccounts = listSubAccounts(account);
-    const { currency } = account;
-    const family = currency.family;
-    const tokenTypes = listTokenTypesForCryptoCurrency(currency);
-    const isTokenAccount = tokenTypes.length > 0;
-    const isEmpty = subAccounts.length === 0;
-
-    if (!isTokenAccount && isEmpty) return null;
-
-    const url =
-      currency && currency.type !== "TokenCurrency" && tokenTypes && tokenTypes.length > 0
-        ? supportLinkByTokenType[tokenTypes[0]]
-        : null;
-
-    const specific = perFamilyTokenList[family];
-    const hasSpecificTokenWording = specific?.hasSpecificTokenWording;
-    const ReceiveButtonComponent = specific?.ReceiveButton ?? ReceiveButton;
-
-    const titleLabel = t(
-      hasSpecificTokenWording ? `tokensList.${family}.title` : "tokensList.title",
-    );
-    const placeholderLabel = t(
-      hasSpecificTokenWording ? `tokensList.${family}.placeholder` : "tokensList.placeholder",
-      {
-        currencyName: currency.name,
-      },
-    );
-
-    const linkLabel = t(hasSpecificTokenWording ? `tokensList.${family}.link` : "tokensList.link");
-
-    return (
-      <Box id="tokens-list" mb={50}>
-        <Wrapper>
-          <Text color="palette.text.shade100" mb={2} ff="Inter|Medium" fontSize={6}>
-            {isTokenAccount ? titleLabel : t("subAccounts.title")}
-          </Text>
-          {!isEmpty && isTokenAccount && (
-            <ReceiveButtonComponent
-              onClick={this.onReceiveClick}
-              account={account}
-              openModal={openModal}
-            />
-          )}
-        </Wrapper>
-        {isEmpty && (
-          <EmptyState>
-            <Placeholder>
-              {url ? (
-                <Text color="palette.text.shade80" ff="Inter|SemiBold" fontSize={4}>
-                  {placeholderLabel}
-                  &nbsp;
-                  <LabelWithExternalIcon
-                    color="wallet"
-                    ff="Inter|SemiBold"
-                    onClick={() => {
-                      if (url) {
-                        openURL(url);
-                        track(`More info on Manage ${tokenTypes[0]} tokens`);
-                      }
-                    }}
-                    label={linkLabel}
-                  />
-                </Text>
-              ) : null}
-            </Placeholder>
-            <ReceiveButtonComponent
-              onClick={this.onReceiveClick}
-              account={account}
-              openModal={openModal}
-            />
-          </EmptyState>
+  return (
+    <TableContainer id="tokens-list" mb={50}>
+      <TableHeader title={isTokenAccount ? titleLabel : t("subAccounts.title")}>
+        {!isEmpty && isTokenAccount && (
+          <ReceiveButtonComponent
+            onClick={onReceiveClick}
+            account={account}
+            openModal={openModal}
+          />
         )}
-        {subAccounts.map((token, index) => (
+      </TableHeader>
+      {isEmpty && (
+        <EmptyState>
+          <Placeholder>
+            {url ? (
+              <Text color="palette.text.shade80" ff="Inter|SemiBold" fontSize={4}>
+                {placeholderLabel}
+                &nbsp;
+                <LabelWithExternalIcon
+                  color="wallet"
+                  ff="Inter|SemiBold"
+                  onClick={() => {
+                    if (url) {
+                      openURL(url);
+                      track(`More info on Manage ${tokenTypes[0]} tokens`);
+                    }
+                  }}
+                  label={linkLabel}
+                />
+              </Text>
+            ) : null}
+          </Placeholder>
+          <ReceiveButtonComponent
+            onClick={onReceiveClick}
+            account={account}
+            openModal={openModal}
+          />
+        </EmptyState>
+      )}
+      {subAccounts
+        .slice(0, shouldSliceList && collapsed ? 3 : subAccounts.length)
+        .map((token, index) => (
           <AccountContextMenu key={token.id} account={token} parentAccount={account}>
             <TokenRow
               index={index}
               range={range}
               account={token}
               parentAccount={account}
-              onClick={this.onAccountClick}
+              onClick={onAccountClick}
               disableRounding
             />
           </AccountContextMenu>
         ))}
-      </Box>
-    );
-  }
+      {shouldSliceList && (
+        <TokenShowMoreIndicator expanded={!collapsed} onClick={toggleCollapse}>
+          <Box horizontal alignContent="center" justifyContent="center">
+            <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
+              <Trans
+                i18nKey={translationMap[collapsed ? "see" : "hide"]}
+                values={{ tokenCount: subAccounts.length }}
+              />
+            </Text>
+            <IconAngleDown expanded={!collapsed}>
+              <AngleDown size={16} />
+            </IconAngleDown>
+          </Box>
+        </TokenShowMoreIndicator>
+      )}
+    </TableContainer>
+  );
 }
+
+const TokensListComponent = memo<Props>(TokensList);
 
 const ConnectedTokenList: React$ComponentType<OwnProps> = compose(
   connect(null, mapDispatchToProps),
   withTranslation(),
   withRouter,
-)(TokensList);
+)(TokensListComponent);
 
 export default ConnectedTokenList;

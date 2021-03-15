@@ -28,6 +28,7 @@ import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
 import DelegateIcon from "~/renderer/icons/Delegate";
 import InfoCircle from "~/renderer/icons/InfoCircle";
+import TableContainer, { TableHeader } from "~/renderer/components/TableContainer";
 
 type Props = {
   account: Account,
@@ -35,10 +36,7 @@ type Props = {
 
 const Wrapper = styled(Box).attrs(() => ({
   p: 3,
-  mt: 24,
-  mb: 6,
 }))`
-  border: 1px dashed ${p => p.theme.colors.palette.text.shade20};
   border-radius: 4px;
   justify-content: space-between;
   align-items: center;
@@ -119,18 +117,13 @@ const Delegation = ({ account }: Props) => {
   const hasRewards = _pendingRewardsBalance.gt(0);
 
   return (
-    <>
-      <Box horizontal alignItems="center" justifyContent="space-between">
-        <Text
-          ff="Inter|Medium"
-          fontSize={6}
-          color="palette.text.shade100"
-          data-e2e="title_Delegation"
-        >
-          <Trans i18nKey="cosmos.delegation.header" />
-        </Text>
+    <TableContainer mb={6}>
+      <TableHeader
+        title={<Trans i18nKey="cosmos.delegation.header" />}
+        titleProps={{ "data-e2e": "title_Delegation" }}
+      >
         {hasDelegations || hasRewards ? (
-          <Box horizontal>
+          <>
             {hasDelegations ? (
               <ToolTip
                 content={
@@ -142,6 +135,7 @@ const Delegation = ({ account }: Props) => {
                   mr={2}
                   disabled={!delegationEnabled}
                   primary
+                  inverted
                   small
                   onClick={onDelegate}
                 >
@@ -159,6 +153,7 @@ const Delegation = ({ account }: Props) => {
                 id={"account-rewards-button"}
                 disabled={!hasRewards}
                 primary
+                inverted
                 small
                 onClick={onClaimRewards}
               >
@@ -170,11 +165,11 @@ const Delegation = ({ account }: Props) => {
                 </Box>
               </Button>
             </ToolTip>
-          </Box>
+          </>
         ) : null}
-      </Box>
+      </TableHeader>
       {hasDelegations ? (
-        <Card p={0} mt={24} mb={6}>
+        <>
           <Header />
           {mappedDelegations.map((delegation, index) => (
             <Row
@@ -185,7 +180,7 @@ const Delegation = ({ account }: Props) => {
               onExternalLink={onExternalLink}
             />
           ))}
-        </Card>
+        </>
       ) : (
         <Wrapper horizontal>
           <Box style={{ maxWidth: "65%" }}>
@@ -240,7 +235,7 @@ const Delegation = ({ account }: Props) => {
           </Card>
         </>
       ) : null}
-    </>
+    </TableContainer>
   );
 };
 
