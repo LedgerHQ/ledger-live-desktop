@@ -110,6 +110,7 @@ const StepFinished = ({
       <Text p={20} textAlign="center" color="palette.text.shade50" ff="Inter|Regular" fontSize={4}>
         <Trans i18nKey={`swap.modal.steps.finished.description`} />
       </Text>
+      {/* FIXME: transform to Alert */}
       <Disclaimer horizontal p={2} mt={3}>
         <InfoCircle size={15} color={useTheme("colors.palette.primary.main")} />
         <Text
