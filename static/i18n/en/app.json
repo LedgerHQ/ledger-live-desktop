@@ -916,7 +916,9 @@
     "successDescription_plural": "Add other accounts or return to Portfolio",
     "createNewAccount": {
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
-      "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created"
+      "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
+      "showAllAddressTypes": "Show all address types",
+      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
     },
     "cta": {
       "addMore": "Add more",

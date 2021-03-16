@@ -11,6 +11,11 @@ import { isAccountEmpty, groupAddAccounts } from "@ledgerhq/live-common/lib/acco
 import { openModal } from "~/renderer/actions/modals";
 import { DeviceShouldStayInApp } from "@ledgerhq/errors";
 import { getCurrencyBridge } from "@ledgerhq/live-common/lib/bridge";
+import {
+  getDefaultPreferredNewAccountScheme,
+  getPreferredNewAccountScheme,
+} from "@ledgerhq/live-common/lib/derivation";
+
 import uniq from "lodash/uniq";
 import { urls } from "~/config/urls";
 import logger from "~/logger";
@@ -24,8 +29,11 @@ import AccountsList from "~/renderer/components/AccountsList";
 import Spinner from "~/renderer/components/Spinner";
 import Text from "~/renderer/components/Text";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
+import Switch from "~/renderer/components/Switch";
 
 import type { StepProps } from "..";
+import InfoCircle from "~/renderer/icons/InfoCircle";
+import ToolTip from "~/renderer/components/Tooltip";
 
 // $FlowFixMe
 const remapTransportError = (err: mixed, appName: string): Error => {
@@ -64,7 +72,14 @@ const SectionAccounts = ({ defaultSelected, ...rest }: *) => {
   return <AccountsList {...rest} />;
 };
 
-class StepImport extends PureComponent<StepProps> {
+class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: boolean }> {
+  constructor(props: StepProps) {
+    super(props);
+    this.state = {
+      showAllCreatedAccounts: false,
+    };
+  }
+
   componentDidMount() {
     this.props.setScanStatus("scanning");
   }
@@ -192,6 +207,42 @@ class StepImport extends PureComponent<StepProps> {
     });
   };
 
+  renderLegacyAccountsToggle() {
+    const { currency } = this.props;
+    if (!currency) return null;
+
+    const mainCurrency = currency.type === "TokenCurrency" ? currency.parentCurrency : currency;
+    const family = mainCurrency.family;
+    const { showAllCreatedAccounts } = this.state;
+    return (
+      <Box ml="auto" mr={3}>
+        <ToolTip
+          content={
+            <Trans
+              i18nKey="addAccounts.createNewAccount.showAllAddressTypesTooltip"
+              values={{ family }}
+            />
+          }
+        >
+          <Box color="palette.text.shade60" horizontal alignItems="center">
+            <Text fontSize={2}>
+              <Trans i18nKey="addAccounts.createNewAccount.showAllAddressTypes" />
+            </Text>
+            <Box mx={1}>
+              <InfoCircle size={14} />
+            </Box>
+
+            <Switch
+              isChecked={showAllCreatedAccounts}
+              small
+              onChange={() => this.setState({ showAllCreatedAccounts: !showAllCreatedAccounts })}
+            />
+          </Box>
+        </ToolTip>
+      </Box>
+    );
+  }
+
   render() {
     const {
       scanStatus,
@@ -207,6 +258,14 @@ class StepImport extends PureComponent<StepProps> {
     if (!currency) return null;
     const mainCurrency = currency.type === "TokenCurrency" ? currency.parentCurrency : currency;
 
+    const newAccountSchemes = getPreferredNewAccountScheme(mainCurrency);
+
+    const preferedNewAccountScheme = getDefaultPreferredNewAccountScheme(mainCurrency);
+
+    const preferredNewAccountSchemes = preferedNewAccountScheme
+      ? [preferedNewAccountScheme]
+      : undefined;
+
     if (err) {
       return (
         <ErrorDisplay
@@ -221,6 +280,9 @@ class StepImport extends PureComponent<StepProps> {
 
     const { sections, alreadyEmptyAccount } = groupAddAccounts(existingAccounts, scannedAccounts, {
       scanning: scanStatus === "scanning",
+      preferredNewAccountSchemes: this.state.showAllCreatedAccounts
+        ? undefined
+        : preferredNewAccountSchemes,
     });
 
     const emptyTexts = {
@@ -247,25 +309,35 @@ class StepImport extends PureComponent<StepProps> {
       <>
         <TrackPage category="AddAccounts" name="Step3" currencyName={currencyName} />
         <Box mt={-4}>
-          {sections.map(({ id, selectable, defaultSelected, data, supportLink }, i) => (
-            <SectionAccounts
-              currency={currency}
-              defaultSelected={defaultSelected}
-              key={id}
-              title={t(`addAccounts.sections.${id}.title`, { count: data.length })}
-              emptyText={emptyTexts[id]}
-              accounts={data}
-              autoFocusFirstInput={selectable && i === 0}
-              hideAmount={id === "creatable"}
-              supportLink={supportLink}
-              checkedIds={!selectable ? undefined : checkedAccountsIds}
-              onToggleAccount={!selectable ? undefined : this.handleToggleAccount}
-              setAccountName={!selectable ? undefined : setAccountName}
-              editedNames={!selectable ? undefined : editedNames}
-              onSelectAll={!selectable ? undefined : this.handleSelectAll}
-              onUnselectAll={!selectable ? undefined : this.handleUnselectAll}
-            />
-          ))}
+          {sections.map(({ id, selectable, defaultSelected, data, supportLink }, i) => {
+            const hasMultipleSchemes =
+              id === "creatable" &&
+              newAccountSchemes &&
+              newAccountSchemes.length > 1 &&
+              data.length > 0 &&
+              scanStatus !== "scanning";
+
+            return (
+              <SectionAccounts
+                currency={currency}
+                defaultSelected={defaultSelected}
+                key={id}
+                title={t(`addAccounts.sections.${id}.title`, { count: data.length })}
+                emptyText={emptyTexts[id]}
+                accounts={data}
+                autoFocusFirstInput={selectable && i === 0}
+                hideAmount={id === "creatable"}
+                supportLink={supportLink}
+                checkedIds={!selectable ? undefined : checkedAccountsIds}
+                onToggleAccount={!selectable ? undefined : this.handleToggleAccount}
+                setAccountName={!selectable ? undefined : setAccountName}
+                editedNames={!selectable ? undefined : editedNames}
+                onSelectAll={!selectable ? undefined : this.handleSelectAll}
+                onUnselectAll={!selectable ? undefined : this.handleUnselectAll}
+                ToggleAllComponent={hasMultipleSchemes && this.renderLegacyAccountsToggle()}
+              />
+            );
+          })}
 
           {scanStatus === "scanning" ? (
             <LoadingRow>
