@@ -301,7 +301,6 @@ const Nomination = ({ account }: Props) => {
             uncollapsedItems={mappedNominations.uncollapsed}
             renderItem={renderNomination}
             renderShowMore={renderShowInactiveNominations}
-            containerStyle={{ margin: 0 }}
           >
             <Header />
             {!mappedNominations.uncollapsed.length && (

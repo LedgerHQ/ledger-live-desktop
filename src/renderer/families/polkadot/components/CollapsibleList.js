@@ -3,7 +3,7 @@ import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import Box, { Card } from "~/renderer/components/Box";
+import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import AngleDown from "~/renderer/icons/AngleDown";
@@ -45,7 +45,6 @@ type Props = {
   collapsedItems: Array<any>,
   renderItem: (item: any, index: number, isLast: boolean) => React$Node,
   renderShowMore: (collapsed: boolean) => React$Node,
-  containerStyle?: *,
 };
 
 const CollapsibleList = ({
@@ -54,7 +53,6 @@ const CollapsibleList = ({
   collapsedItems,
   renderItem,
   renderShowMore,
-  containerStyle,
 }: Props) => {
   const [collapsed, setCollapsed] = useState(true);
 
@@ -63,7 +61,7 @@ const CollapsibleList = ({
   }, []);
 
   return (
-    <Card p={0} mt={24} mb={6} style={containerStyle}>
+    <Box p={0}>
       {children}
       <Wrapper>
         {uncollapsedItems.map((item, i) =>
@@ -91,7 +89,7 @@ const CollapsibleList = ({
           </ShowMore>
         </>
       ) : null}
-    </Card>
+    </Box>
   );
 };
 
