@@ -71,7 +71,7 @@ const FromAccount = ({
     [currenciesStatus],
   );
 
-  const isCurrencySelectorDisabled = useCallback(
+  const isCurrencyDisabled = useCallback(
     c =>
       (c.type === "CryptoCurrency" || c.type === "TokenCurrency") &&
       currenciesStatus[c.id] !== "ok",
@@ -111,7 +111,7 @@ const FromAccount = ({
           value={currency}
           autoFocus={true}
           onChange={setCurrency}
-          isDisabled={isCurrencySelectorDisabled}
+          isCurrencyDisabled={isCurrencyDisabled}
         />
       </Box>
       <Box>

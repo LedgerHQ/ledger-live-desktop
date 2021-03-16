@@ -132,7 +132,7 @@ const SelectAccountAndCurrency = ({
             autoFocus={true}
             onChange={setCurrency}
             value={currency}
-            isDisabled={c =>
+            isCurrencyDisabled={c =>
               (c.type === "CryptoCurrency" || c.type === "TokenCurrency") &&
               currenciesStatus[c.id] !== "ok"
             }

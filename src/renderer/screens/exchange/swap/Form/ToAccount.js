@@ -126,7 +126,7 @@ const ToAccount = ({
     }
   }, [account, subAccount, currency, defaultAccount, onAccountChange]);
 
-  const isCurrencySelectorDisabled = useCallback(
+  const isCurrencyDisabled = useCallback(
     c =>
       (c.type === "CryptoCurrency" || c.type === "TokenCurrency") &&
       ["noApp", "outdatedApp"].includes(currenciesStatus[c.id]),
@@ -151,7 +151,8 @@ const ToAccount = ({
           value={currency}
           autoFocus={true}
           onChange={setCurrency}
-          isDisabled={isCurrencySelectorDisabled}
+          isDisabled={!currencies?.length}
+          isCurrencyDisabled={isCurrencyDisabled}
         />
       </Box>
       <Box>
