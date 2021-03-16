@@ -117,125 +117,122 @@ const Delegation = ({ account }: Props) => {
   const hasRewards = _pendingRewardsBalance.gt(0);
 
   return (
-    <TableContainer mb={6}>
-      <TableHeader
-        title={<Trans i18nKey="cosmos.delegation.header" />}
-        titleProps={{ "data-e2e": "title_Delegation" }}
-      >
-        {hasDelegations || hasRewards ? (
+    <>
+      <TableContainer mb={6}>
+        <TableHeader
+          title={<Trans i18nKey="cosmos.delegation.header" />}
+          titleProps={{ "data-e2e": "title_Delegation" }}
+        >
+          {hasDelegations || hasRewards ? (
+            <>
+              {hasDelegations ? (
+                <ToolTip
+                  content={
+                    !delegationEnabled ? <Trans i18nKey="cosmos.delegation.minSafeWarning" /> : null
+                  }
+                >
+                  <Button
+                    id={"account-delegate-button"}
+                    mr={2}
+                    disabled={!delegationEnabled}
+                    primary
+                    inverted
+                    small
+                    onClick={onDelegate}
+                  >
+                    <Box horizontal flow={1} alignItems="center">
+                      <DelegateIcon size={12} />
+                      <Box>
+                        <Trans i18nKey="cosmos.delegation.delegate" />
+                      </Box>
+                    </Box>
+                  </Button>
+                </ToolTip>
+              ) : null}
+              <ToolTip
+                content={!hasRewards ? <Trans i18nKey="cosmos.delegation.noRewards" /> : null}
+              >
+                <Button
+                  id={"account-rewards-button"}
+                  disabled={!hasRewards}
+                  primary
+                  inverted
+                  small
+                  onClick={onClaimRewards}
+                >
+                  <Box horizontal flow={1} alignItems="center">
+                    <ClaimRewards size={12} />
+                    <Box>
+                      <Trans i18nKey="cosmos.delegation.claimRewards" />
+                    </Box>
+                  </Box>
+                </Button>
+              </ToolTip>
+            </>
+          ) : null}
+        </TableHeader>
+        {hasDelegations ? (
           <>
-            {hasDelegations ? (
+            <Header />
+            {mappedDelegations.map((delegation, index) => (
+              <Row
+                key={index}
+                account={account}
+                delegation={delegation}
+                onManageAction={onRedirect}
+                onExternalLink={onExternalLink}
+              />
+            ))}
+          </>
+        ) : (
+          <Wrapper horizontal>
+            <Box style={{ maxWidth: "65%" }}>
+              <Text ff="Inter|Medium|SemiBold" color="palette.text.shade60" fontSize={4}>
+                <Trans
+                  i18nKey="cosmos.delegation.emptyState.description"
+                  values={{ name: account.currency.name }}
+                />
+              </Text>
+              <Box mt={2}>
+                <LinkWithExternalIcon
+                  label={<Trans i18nKey="cosmos.delegation.emptyState.info" />}
+                  onClick={() => openURL(urls.stakingCosmos)}
+                />
+              </Box>
+            </Box>
+            <Box>
               <ToolTip
                 content={
                   !delegationEnabled ? <Trans i18nKey="cosmos.delegation.minSafeWarning" /> : null
                 }
               >
-                <Button
-                  id={"account-delegate-button"}
-                  mr={2}
-                  disabled={!delegationEnabled}
-                  primary
-                  inverted
-                  small
-                  onClick={onDelegate}
-                >
+                <Button primary small disabled={!delegationEnabled} onClick={onEarnRewards}>
                   <Box horizontal flow={1} alignItems="center">
-                    <DelegateIcon size={12} />
+                    <IconChartLine size={12} />
                     <Box>
-                      <Trans i18nKey="cosmos.delegation.delegate" />
+                      <Trans i18nKey="cosmos.delegation.emptyState.delegation" />
                     </Box>
                   </Box>
                 </Button>
               </ToolTip>
-            ) : null}
-            <ToolTip content={!hasRewards ? <Trans i18nKey="cosmos.delegation.noRewards" /> : null}>
-              <Button
-                id={"account-rewards-button"}
-                disabled={!hasRewards}
-                primary
-                inverted
-                small
-                onClick={onClaimRewards}
-              >
-                <Box horizontal flow={1} alignItems="center">
-                  <ClaimRewards size={12} />
-                  <Box>
-                    <Trans i18nKey="cosmos.delegation.claimRewards" />
-                  </Box>
-                </Box>
-              </Button>
-            </ToolTip>
-          </>
-        ) : null}
-      </TableHeader>
-      {hasDelegations ? (
-        <>
-          <Header />
-          {mappedDelegations.map((delegation, index) => (
-            <Row
-              key={index}
-              account={account}
-              delegation={delegation}
-              onManageAction={onRedirect}
-              onExternalLink={onExternalLink}
-            />
-          ))}
-        </>
-      ) : (
-        <Wrapper horizontal>
-          <Box style={{ maxWidth: "65%" }}>
-            <Text ff="Inter|Medium|SemiBold" color="palette.text.shade60" fontSize={4}>
-              <Trans
-                i18nKey="cosmos.delegation.emptyState.description"
-                values={{ name: account.currency.name }}
-              />
-            </Text>
-            <Box mt={2}>
-              <LinkWithExternalIcon
-                label={<Trans i18nKey="cosmos.delegation.emptyState.info" />}
-                onClick={() => openURL(urls.stakingCosmos)}
-              />
             </Box>
-          </Box>
-          <Box>
-            <ToolTip
-              content={
-                !delegationEnabled ? <Trans i18nKey="cosmos.delegation.minSafeWarning" /> : null
-              }
-            >
-              <Button primary small disabled={!delegationEnabled} onClick={onEarnRewards}>
-                <Box horizontal flow={1} alignItems="center">
-                  <IconChartLine size={12} />
-                  <Box>
-                    <Trans i18nKey="cosmos.delegation.emptyState.delegation" />
-                  </Box>
-                </Box>
-              </Button>
-            </ToolTip>
-          </Box>
-        </Wrapper>
-      )}
+          </Wrapper>
+        )}
+      </TableContainer>
       {hasUnbondings ? (
-        <>
-          <Box horizontal alignItems="center" color="palette.text.shade100">
-            <ToolTip content={<Trans i18nKey="cosmos.undelegation.headerTooltip" />}>
-              <Text ff="Inter|Medium" fontSize={6} data-e2e="title_Undelegation">
-                <Trans i18nKey="cosmos.undelegation.header" />
-              </Text>
-              <Box ml={2} horizontal alignItems="center">
-                <InfoCircle />
-              </Box>
-            </ToolTip>
-          </Box>
-          <Card p={0} mt={24} mb={6}>
-            <UnbondingHeader />
-            {mappedUnbondings.map((delegation, index) => (
-              <UnbondingRow key={index} delegation={delegation} onExternalLink={onExternalLink} />
-            ))}
-          </Card>
-        </>
+        <TableContainer mb={6}>
+          <TableHeader
+            title={<Trans i18nKey="cosmos.undelegation.header" />}
+            titleProps={{ "data-e2e": "title_Undelegation" }}
+            tooltip={<Trans i18nKey="cosmos.undelegation.headerTooltip" />}
+          />
+          <UnbondingHeader />
+          {mappedUnbondings.map((delegation, index) => (
+            <UnbondingRow key={index} delegation={delegation} onExternalLink={onExternalLink} />
+          ))}
+        </TableContainer>
       ) : null}
-    </TableContainer>
+    </>
   );
 };
 
