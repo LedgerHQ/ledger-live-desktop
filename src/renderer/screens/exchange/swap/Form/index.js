@@ -234,28 +234,19 @@ const Form = ({
               withExpiration: rate.tradeMethod === "fixed",
             },
           });
+          dispatch({ type: "onSetError", payload: { error: undefined } });
         }
       } catch (error) {
         dispatch({ type: "onSetError", payload: { error } });
       }
     }
-    if (
-      !ignore &&
-      !!(
-        account &&
-        toAccount &&
-        transaction?.amount &&
-        !exchangeRate &&
-        !error &&
-        transaction?.amount.gt(0)
-      )
-    ) {
+    if (account && toAccount && transaction?.amount && !exchangeRate && transaction?.amount.gt(0)) {
       getRates();
     }
 
     return () => {
       ignore = true;
-      if (loadingRates) dispatch({ type: "onSetLoadingRates", payload: { loadingRates: false } });
+      dispatch({ type: "onSetLoadingRates", payload: { loadingRates: false } });
     };
   }, [
     exchangeRate,
@@ -266,8 +257,6 @@ const Form = ({
     parentAccount,
     toParentAccount,
     toCurrency,
-    loadingRates,
-    error,
   ]);
 
   // Deselect the tradeMethod if not available for current pair
