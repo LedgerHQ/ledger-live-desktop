@@ -29,7 +29,6 @@ import Box from "~/renderer/components/Box";
 
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import ToolTip from "~/renderer/components/Tooltip";
-import InfoCircle from "~/renderer/icons/InfoCircle";
 
 import NominateIcon from "~/renderer/icons/Vote";
 import RebondIcon from "~/renderer/icons/LinkIcon";
@@ -370,100 +369,87 @@ const Nomination = ({ account }: Props) => {
             </Box>
           </Wrapper>
         )}
-        {hasUnlockings ? (
-          <>
-            <Box
-              horizontal
-              alignItems="center"
-              justifyContent="space-between"
-              color="palette.text.shade100"
+      </TableContainer>
+      {hasUnlockings ? (
+        <TableContainer mb={6}>
+          <TableHeader
+            title={<Trans i18nKey="polkadot.unlockings.header" />}
+            titleProps={{ "data-e2e": "title_Unlockings" }}
+            tolltip={<Trans i18nKey="polkadot.unlockings.headerTooltip" />}
+          >
+            <ToolTip
+              content={
+                electionOpen ? <Trans i18nKey="polkadot.nomination.electionOpenTooltip" /> : null
+              }
             >
-              <ToolTip content={<Trans i18nKey="polkadot.unlockings.headerTooltip" />}>
-                <Box horizontal alignItems="center">
-                  <Text ff="Inter|Medium" fontSize={6} data-e2e="title_Unlockings">
-                    <Trans i18nKey="polkadot.unlockings.header" />
-                  </Text>
-                  <Box ml={2} horizontal alignItems="center">
-                    <InfoCircle />
+              <Button
+                id={"account-rebond-button"}
+                disabled={electionOpen}
+                mr={2}
+                primary
+                inverted
+                small
+                onClick={onRebond}
+              >
+                <Box horizontal flow={1} alignItems="center">
+                  <RebondIcon size={12} />
+                  <Box>
+                    <Trans i18nKey="polkadot.unlockings.rebond" />
                   </Box>
                 </Box>
-              </ToolTip>
-              <Box horizontal>
-                <ToolTip
-                  content={
-                    electionOpen ? (
-                      <Trans i18nKey="polkadot.nomination.electionOpenTooltip" />
-                    ) : null
-                  }
-                >
-                  <Button
-                    id={"account-rebond-button"}
-                    disabled={electionOpen}
-                    mr={2}
-                    primary
-                    small
-                    onClick={onRebond}
-                  >
-                    <Box horizontal flow={1} alignItems="center">
-                      <RebondIcon size={12} />
-                      <Box>
-                        <Trans i18nKey="polkadot.unlockings.rebond" />
-                      </Box>
-                    </Box>
-                  </Button>
-                </ToolTip>
-                <ToolTip
-                  content={
-                    withdrawEnabled ? (
-                      <Trans i18nKey="polkadot.unlockings.withdrawTooltip" />
-                    ) : (
-                      <Trans
-                        i18nKey={
-                          electionOpen
-                            ? "polkadot.nomination.electionOpenTooltip"
-                            : "polkadot.unlockings.noUnlockedWarning"
-                        }
-                      />
-                    )
-                  }
-                >
-                  <Button
-                    id={"account-withdraw-button"}
-                    disabled={!withdrawEnabled}
-                    primary
-                    small
-                    onClick={onWithdrawUnbonded}
-                  >
-                    <Box horizontal flow={1} alignItems="center">
-                      <WithdrawUnbondedIcon size={12} />
-                      <Box>
-                        <Trans
-                          i18nKey="polkadot.unlockings.withdrawUnbonded"
-                          values={{
-                            amount: formatCurrencyUnit(unit, unlockedBalance, {
-                              showCode: true,
-                              discreet,
-                              locale,
-                            }),
-                          }}
-                        />
-                      </Box>
-                    </Box>
-                  </Button>
-                </ToolTip>
-              </Box>
-            </Box>
-            <CollapsibleList
-              uncollapsedItems={mappedUnlockings.uncollapsed}
-              collapsedItems={mappedUnlockings.collapsed}
-              renderItem={renderUnlocking}
-              renderShowMore={renderShowAllUnlockings}
+              </Button>
+            </ToolTip>
+            <ToolTip
+              content={
+                withdrawEnabled ? (
+                  <Trans i18nKey="polkadot.unlockings.withdrawTooltip" />
+                ) : (
+                  <Trans
+                    i18nKey={
+                      electionOpen
+                        ? "polkadot.nomination.electionOpenTooltip"
+                        : "polkadot.unlockings.noUnlockedWarning"
+                    }
+                  />
+                )
+              }
             >
-              <UnlockingHeader />
-            </CollapsibleList>
-          </>
-        ) : null}
-      </TableContainer>
+              <Button
+                id={"account-withdraw-button"}
+                disabled={!withdrawEnabled}
+                primary
+                inverted
+                small
+                onClick={onWithdrawUnbonded}
+              >
+                <Box horizontal flow={1} alignItems="center">
+                  <WithdrawUnbondedIcon size={12} />
+                  <Box>
+                    <Trans
+                      i18nKey="polkadot.unlockings.withdrawUnbonded"
+                      values={{
+                        amount: formatCurrencyUnit(unit, unlockedBalance, {
+                          showCode: true,
+                          discreet,
+                          locale,
+                        }),
+                      }}
+                    />
+                  </Box>
+                </Box>
+              </Button>
+            </ToolTip>
+          </TableHeader>
+          <CollapsibleList
+            uncollapsedItems={mappedUnlockings.uncollapsed}
+            collapsedItems={mappedUnlockings.collapsed}
+            renderItem={renderUnlocking}
+            renderShowMore={renderShowAllUnlockings}
+          >
+            <UnlockingHeader />
+          </CollapsibleList>
+        </TableContainer>
+      ) : null}
     </>
   );
 };
