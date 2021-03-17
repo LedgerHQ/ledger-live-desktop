@@ -14,6 +14,7 @@
     "build": "cross-env NODE_ENV=production node ./tools/main.js build",
     "lint": "eslint src tools",
     "prettier": "prettier --write \"{src,tools}/**/*.{js,json}\"",
+    "prettier:modified": "prettier --write \"src/index.js\" $(git diff --name-only | grep '\\.js$' | xargs)",
     "prettier:check": "prettier -c \"{src,tools}/**/*.{js,json}\"",
     "flow-typed": "yarn run install-flow-typed",
     "install-flow-typed": "flow-typed install -s",
