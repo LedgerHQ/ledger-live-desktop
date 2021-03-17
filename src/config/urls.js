@@ -165,7 +165,7 @@ export const urls = {
     receive:
       "https://support.ledger.com/hc/en-us/articles/360010418413-Receive-crypto-assets?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=producttour_bluecard",
     buy:
-      "https://www.ledger.com/buy-crypto-in-ledger-live?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=producttour_bluecard",
+      "https://support.ledger.com/hc/en-us/articles/115005198269-Buy-crypto-with-Ledger-Live-desktop?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=producttour_bluecard",
     swap:
       "https://support.ledger.com/hc/en-us/articles/360016886580-Swapping-crypto-assets?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=producttour_bluecard",
   },
