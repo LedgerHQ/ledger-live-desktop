@@ -206,7 +206,7 @@
           "sidebar": "Go to the Accounts section.",
           "add": "Click here to add accounts to your portfolio.",
           "currency": "Select Bitcoin in the dropdown list to add Bitcoin accounts from your device.",
-          "account": "Here’s your new account, feel free to rename it. You can add another account after your first transaction."
+          "account": "Here you can select new or existing accounts to add. You can also enter an account name."
         },
         "hint": {
           "stepCurrency": "This is the currency we'll use to create your accounts."
