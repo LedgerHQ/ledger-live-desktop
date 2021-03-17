@@ -13,7 +13,7 @@ const InstallCrypto = () => {
   const history = useHistory();
 
   const onBeforeFlow = useOnSetOverlays({
-    selector: "#drawer-manager-button",
+    selector: ["#drawer-manager-button", "#drawer-exchange-button"],
     i18nKey: "productTour.flows.install.overlays.sidebar",
     config: { bottom: true, withFeedback: true },
   });

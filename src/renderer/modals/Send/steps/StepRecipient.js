@@ -62,9 +62,9 @@ const StepRecipient = ({
   });
 
   const onChooseFirstAccountOverlay = useOnSetOverlays({
-    selector: ".select-options-list",
+    selector: ["#send-source", ".select-options-list"],
     i18nKey: "productTour.flows.send.overlays.account",
-    config: { top: true },
+    config: { top: true, padding: 10 },
   });
 
   const wrappedOnChangeAccount = useCallback(

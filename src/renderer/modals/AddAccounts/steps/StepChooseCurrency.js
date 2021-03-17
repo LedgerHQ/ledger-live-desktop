@@ -42,9 +42,9 @@ const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
   });
 
   const onSetAddBitcoinAccountOverlay = useOnSetOverlays({
-    selector: ".select-options-list .select__option:first-child",
+    selector: ["#addAccounts", ".select-options-list"],
     i18nKey: "productTour.flows.createAccount.overlays.currency",
-    config: { top: true, disableScroll: true },
+    config: { top: true, disableScroll: true, padding: 10 },
   });
 
   const wrappedOnChange = useCallback(

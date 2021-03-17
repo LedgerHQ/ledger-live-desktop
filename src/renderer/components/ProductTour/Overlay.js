@@ -69,7 +69,7 @@ const Overlay = () => {
 
   const rebuildOverlay = useCallback(() => {
     if (!selector) return;
-    const el = document.querySelector(selector);
+    const els = document.querySelectorAll(selector);
     let scroll, selectorScroll, modalScroll;
 
     if (config.disableScroll) {
@@ -88,15 +88,28 @@ const Overlay = () => {
       }
     }
 
-    if (el) {
-      if (el !== elRef.current) elRef.current = el;
-      // Nb spread ... destructuring doesn't work with DOMRect
-      const { top, bottom, left, right } = el.getBoundingClientRect();
-      if (t !== top || b !== bottom || l !== left || r !== right) {
-        setBox({ t: top, b: bottom, l: left, r: right });
+    let box = {};
+    for (const el of els) {
+      if (el) {
+        if (el !== elRef.current) elRef.current = el;
+        // Nb spread ... destructuring doesn't work with DOMRect
+        const { top, bottom, left, right } = el.getBoundingClientRect();
+
+        // Attempt top extend the box to contain all elements.
+        box = {
+          t: box.t ? Math.min(top, box.t) : top,
+          b: box.b ? Math.max(bottom, box.b) : bottom,
+          l: box.l ? Math.min(left, box.l) : left,
+          r: box.r ? Math.min(right, box.r) : right,
+        };
+      } else {
+        setBox({ t: 0, b: 0, l: 0, r: 0 });
       }
+    }
+    if (t !== box.t || b !== box.b || l !== box.l || r !== box.r) {
+      setBox({ t: box.t, b: box.b, l: box.l, r: box.r });
     } else {
-      setBox({ t: 0, b: 0, l: 0, r: 0 });
+      setBox(box);
     }
 
     return () => {

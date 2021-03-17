@@ -4,7 +4,7 @@ import ProductTourContext from "~/renderer/components/ProductTour/ProductTourCon
 import isEqual from "lodash/isEqual";
 import type { OverlayConfig } from "~/renderer/components/ProductTour/Overlay";
 type SetHelpElement = {
-  selector: string,
+  selector: string | string[],
   i18nKey?: string,
   callback?: any => any,
   config: OverlayConfig,
