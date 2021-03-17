@@ -375,7 +375,7 @@ const Nomination = ({ account }: Props) => {
           <TableHeader
             title={<Trans i18nKey="polkadot.unlockings.header" />}
             titleProps={{ "data-e2e": "title_Unlockings" }}
-            tolltip={<Trans i18nKey="polkadot.unlockings.headerTooltip" />}
+            tooltip={<Trans i18nKey="polkadot.unlockings.headerTooltip" />}
           >
             <ToolTip
               content={
