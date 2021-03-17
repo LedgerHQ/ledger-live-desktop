@@ -316,25 +316,25 @@
         "hero": "Receive your first crypto",
         "title": "Share your public address with the sender to receive crypto. Always verify that the sender uses the address displayed on your device.",
         "description": "When sending crypto to your Ledger account from a third-party service, closely follow their instructions to prevent mistakes.",
-        "learnMore": "More about receiving crypto"
+        "learnMore": "Learn more about receiving crypto"
       },
       "buy": {
         "hero": "Buy crypto with Coinify",
         "title": "Purchase crypto assets via Coinify and receive your coins directly in your Ledger account. This service is available in selected countries.",
         "description": "Buying crypto in Ledger Live is easy and you will benefit from the security of your Ledger device once the transaction is complete.",
-        "learnMore": "More about buying crypto"
+        "learnMore": "Learn more about buying crypto"
       },
       "send": {
         "hero": "Send crypto",
         "title": "You can send crypto assets from your Ledger account to a recipient. Transactions fees are paid to the network for many crypto assets.",
         "description": "The confirmation speed of a transaction varies. Getting a transaction confirmed fast costs more when there’s high demand on the network.",
-        "learnMore": "More about sending crypto"
+        "learnMore": "Learn more about sending crypto"
       },
       "swap": {
         "hero": "Swap crypto",
         "title": "You can exchange one crypto for another directly fromt Ledger Live, through our partner Changelly. Service available in selected countries.",
         "description": "Swapping crypto in Ledger Live takes only 3 easy steps and is fully secured by your Ledger device.",
-        "learnMore": "More about swapping crypto"
+        "learnMore": "Learn more about swapping crypto"
       },
       "customize": {
         "hero": "Customize your app",
