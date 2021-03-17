@@ -29,16 +29,16 @@ import {
 const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
   useSetOverlays(!currency, {
     selector: "#addAccounts",
-    i18nKey: "productTour.flows.createAccount.overlays.add",
-    config: { bottom: true, right: true, disableScroll: true, padding: 10 },
+    i18nKey: "productTour.flows.createAccount.overlays.currency",
+    config: { top: true, disableScroll: true, padding: 10 },
   });
 
   const onClearOverlays = useOnClearOverlays();
 
   const onResetOverlay = useOnSetOverlays({
     selector: "#addAccounts",
-    i18nKey: "productTour.flows.createAccount.overlays.add",
-    config: { bottom: true, right: true, disableScroll: true, padding: 10 },
+    i18nKey: "productTour.flows.createAccount.overlays.currency",
+    config: { top: true, disableScroll: true, padding: 10 },
   });
 
   const onSetAddBitcoinAccountOverlay = useOnSetOverlays({
