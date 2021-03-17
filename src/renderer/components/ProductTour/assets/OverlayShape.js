@@ -67,16 +67,17 @@ const OverlayShape = ({
             dur="500ms"
             repeatCount="1"
           />
-        ) : null}
-        <animate
-          id="fadeIn"
-          attributeType="xml"
-          attributeName="fill-opacity"
-          begin="0s"
-          values="0;1"
-          dur="400ms"
-          repeatCount="1"
-        />
+        ) : (
+          <animate
+            id="fadeIn"
+            attributeType="xml"
+            attributeName="fill-opacity"
+            begin="0s"
+            values="0;1"
+            dur="400ms"
+            repeatCount="1"
+          />
+        )}
       </path>
     </svg>
   );
