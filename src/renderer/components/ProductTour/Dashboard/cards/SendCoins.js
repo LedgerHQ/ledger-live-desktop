@@ -35,7 +35,7 @@ const SendCrypto = () => {
   return (
     <Card
       appFlow={"send"}
-      // require={"createAccount"}
+      require={"createAccount"}
       controlledModals={["MODAL_SEND"]}
       title={<Trans i18nKey={"productTour.flows.send.pending"} />}
       titleCompleted={<Trans i18nKey={"productTour.flows.send.completedCard"} />}

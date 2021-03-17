@@ -21,7 +21,6 @@ import SwapCoins from "~/renderer/components/ProductTour/Dashboard/cards/SwapCoi
 import CustomizeApp from "~/renderer/components/ProductTour/Dashboard/cards/CustomizeApp";
 
 const Wrapper = styled(Box)`
-  flex: 1;
   padding: 32px 100px;
   display: grid;
   grid-gap: 18px;

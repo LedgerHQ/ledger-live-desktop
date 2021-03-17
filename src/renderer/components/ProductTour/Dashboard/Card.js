@@ -11,6 +11,7 @@ import IconLock from "~/renderer/icons/Lock";
 import IconCheckFull from "~/renderer/icons/CheckFull";
 import ProductTourContext from "~/renderer/components/ProductTour/ProductTourContext";
 import { useDispatch } from "react-redux";
+import { openModal } from "~/renderer/actions/modals";
 import useTheme from "~/renderer/hooks/useTheme";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
@@ -80,18 +81,18 @@ const Card = ({
   const completed = completedFlows.includes(appFlow);
 
   const onClick = useCallback(() => {
-    // if (!disabled && !completed) {
-    send("ENTER_FLOW", {
-      appFlow,
-      onBeforeFlow,
-      onAfterFlow,
-      overrideContent,
-      controlledModals,
-      learnMoreCallback,
-    });
-    // } else if (disabled) {
-    //   dispatch(openModal("MODAL_PRODUCT_TOUR_UNAVAILABLE"));
-    // }
+    if (process.env.DEBUG_PRODUCT_TOUR || (!disabled && !completed)) {
+      send("ENTER_FLOW", {
+        appFlow,
+        onBeforeFlow,
+        onAfterFlow,
+        overrideContent,
+        controlledModals,
+        learnMoreCallback,
+      });
+    } else if (disabled) {
+      dispatch(openModal("MODAL_PRODUCT_TOUR_UNAVAILABLE"));
+    }
   }, [
     appFlow,
     completed,

@@ -28,7 +28,7 @@ const CreateAccount = () => {
 
   return (
     <Card
-      // require={"install"}
+      require={"install"}
       appFlow={"createAccount"}
       title={<Trans i18nKey={"productTour.flows.createAccount.pending"} />}
       titleCompleted={<Trans i18nKey={"productTour.flows.createAccount.completedCard"} />}
