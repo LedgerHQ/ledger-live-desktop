@@ -45,11 +45,11 @@ const Wrapper: ThemedComponent<*> = styled.div`
   this is to avoid jumpy splashes of time without the bg
  */
 const SkipWrapper = styled.div`
-  ${p => (p.config.skipOnLeft ? "left" : "right")}: 50px;
+  ${p => (p.config.skipOnLeft ? "left" : "right")}: 40px;
   position: absolute;
   display: flex;
   flex-direction: row;
-  bottom: 50px;
+  bottom: 30px;
   pointer-events: auto;
 `;
 

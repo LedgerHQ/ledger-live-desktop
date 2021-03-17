@@ -24,6 +24,7 @@ type Props = {
 };
 
 const Dashboard = ({ device, deviceInfo, result, onReset, appsToRestore }: Props) => {
+  const bitcoinInstalledAlready = result?.installed.find(i => i.name === "Bitcoin");
   useSetOverlays(
     !!device,
     {
@@ -38,7 +39,9 @@ const Dashboard = ({ device, deviceInfo, result, onReset, appsToRestore }: Props
     },
     {
       selector: "#managerAppsList-Bitcoin",
-      i18nKey: "productTour.flows.install.overlays.install",
+      i18nKey: bitcoinInstalledAlready
+        ? "productTour.flows.install.overlays.installed"
+        : "productTour.flows.install.overlays.install",
       config: { top: true, right: true, disableScroll: true },
     },
   );

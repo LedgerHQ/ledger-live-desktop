@@ -192,7 +192,8 @@
           "connect": "Follow the animated instructions to connect your Ledger device.",
           "storage": "See an overview of your Ledger hardware wallet here.",
           "catalog": "You can find apps for many popular crypto assets in the App catalog. Let’s install your first app!",
-          "install": "Click the install button to get the Bitcoin app. You need this app to manage your Bitcoin accounts."
+          "install": "Click the install button to get the Bitcoin app. You need this app to manage your Bitcoin accounts.",
+          "installed": "You can click the Install button to download crypto applications onto your device. Please skip this tutorial as the Bitcoin app is already installed."
         }
       },
       "createAccount": {
