@@ -180,7 +180,7 @@
       "cta": "Got it"
     },
     "flows": {
-      "skipFlow": "Skip Tutorial",
+      "skipFlow": "Skip tutorial",
       "install": {
         "pending": "Install crypto",
         "ongoing": "Install your first crypto app",
@@ -212,7 +212,7 @@
         }
       },
       "receive": {
-        "pending": "Receive coins",
+        "pending": "Receive crypto",
         "ongoing": "",
         "completed": "Address shared!",
         "completedCard": "Address shared",
@@ -227,7 +227,7 @@
         }
       },
       "buy": {
-        "pending": "Buy coins",
+        "pending": "Buy crypto",
         "ongoing": "",
         "completed": "Crypto bought!",
         "completedCard": "Crypto bought",
