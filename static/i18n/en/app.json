@@ -918,6 +918,9 @@
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created"
     },
+    "supportLinks": {
+      "segwit_or_native_segwit": "Segwit or Native Segwit?"
+    }
     "cta": {
       "addMore": "Add more",
       "add": "Add account",
