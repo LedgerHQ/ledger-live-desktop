@@ -27,7 +27,6 @@ const NotifBadge: ThemedComponent<*> = styled.div`
 `;
 
 const BellIcon = ({ size, count }: { size: number, count?: number }) => {
-  console.log(count);
   return (
     <Container>
       <svg
@@ -42,7 +41,7 @@ const BellIcon = ({ size, count }: { size: number, count?: number }) => {
           fill="currentColor"
         />
       </svg>
-      {count && count > 0 ? <NotifBadge>12</NotifBadge> : null}
+      {count && count > 0 ? <NotifBadge>{count}</NotifBadge> : null}
     </Container>
   );
 };

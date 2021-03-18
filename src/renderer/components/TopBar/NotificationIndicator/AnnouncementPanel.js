@@ -54,8 +54,8 @@ const UnReadNotifBadge = styled.div`
   background-color: ${p => p.theme.colors.wallet};
   border-radius: 8px;
   position: absolute;
-  top: 50%;
-  right: 0px;
+  top: calc(50% - 4px);
+  left: 0px;
   z-index: 1;
 `;
 
@@ -74,7 +74,7 @@ function DateRow({ date }: DateRowProps) {
 }
 
 const ArticleRootContainer = styled.div`
-  padding-right: ${p => (p.isRead ? 0 : 16)}px;
+  padding-left: ${p => (p.isRead ? 0 : 16)}px;
   position: relative;
 `;
 
@@ -89,16 +89,6 @@ const ArticleRightColumnContainer = styled.div`
   flex-direction: column;
   flex: 1;
 `;
-
-const ArticleLeftColumnContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ArticleIconContainer = styled.div`
-  padding-right: 14.5px;
-`;
-
 type ArticleProps = {
   level: string,
   icon: string,
@@ -177,15 +167,21 @@ function Article({
         px="16px"
         color={levelTheme.icon || defaultIconColor}
       >
-        <ArticleLeftColumnContainer>
-          <ArticleIconContainer>
-            <Icon size={15} />
-          </ArticleIconContainer>
-        </ArticleLeftColumnContainer>
         <ArticleRightColumnContainer>
-          <Text color={levelTheme.title} ff="Inter|SemiBold" fontSize="14px" lineHeight="16.94px">
-            {title}
-          </Text>
+          <Box horizontal alignItems="center" justifyContent="center">
+            <Icon size={15} />
+            <Box ml={2} flex="1">
+              <Text
+                color={levelTheme.title}
+                ff="Inter|SemiBold"
+                fontSize="14px"
+                lineHeight="16.94px"
+              >
+                {title}
+              </Text>
+            </Box>
+          </Box>
+
           <Text
             mt="4px"
             color={levelTheme.text}
