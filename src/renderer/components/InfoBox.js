@@ -16,12 +16,13 @@ type Props = {
   onLearnMore?: () => void,
   learnMoreLabel?: React$Node,
   horizontal?: boolean,
-  type?: "primary" | "secondary" | "warning" | "security" | "danger" | "success" | "hint", // TODO implement the styles
+  type?: "primary" | "secondary" | "warning" | "security" | "danger" | "success" | "hint" | "grey", // TODO implement the styles
   mt?: number,
 };
 
 const getTypeColor = p => {
   switch (p.type) {
+    case "hint":
     case "primary":
       return {
         backgroundColor: p.theme.colors.palette.action.hover,
@@ -71,7 +72,7 @@ export default function InfoBox({
       )}
       <Box flex="1" ml={16} horizontal={horizontal} alignItems="center">
         <Box flex="1" style={{ wordBreak: "break-all" }}>
-          <Text ff="Inter|Medium" fontSize={3} style={{ wordBreak: "break-word" }}>
+          <Text ff="Inter|Regular" fontSize={3} style={{ wordBreak: "break-word" }}>
             {description}
             {onLearnMore && (
               <Text fontSize={3} ml={1} ff="Inter|SemiBold">

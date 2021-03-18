@@ -10,6 +10,7 @@ import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAle
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import Label from "~/renderer/components/Label";
 import SelectAccount from "~/renderer/components/SelectAccount";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 
 import SendRecipientFields, { getFields } from "../SendRecipientFields";
 import RecipientField from "../fields/RecipientField";
@@ -68,7 +69,7 @@ const StepRecipient = ({
   });
 
   const wrappedOnChangeAccount = useCallback(
-    (nextAccount: AccountLike, nextParentAccount: ?Account) => {
+    (nextAccount: ?AccountLike, nextParentAccount: ?Account) => {
       onRecipientAddressOverlay();
       onChangeAccount(nextAccount, nextParentAccount);
     },

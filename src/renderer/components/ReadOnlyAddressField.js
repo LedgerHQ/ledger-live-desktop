@@ -124,7 +124,6 @@ function ReadOnlyAddressField({ address, allowCopy = true }: Props) {
     address.substr(0, address.length - LINE_MINLENGTH),
     address.substr(-LINE_MINLENGTH),
   ];
-
   return (
     <Box id={"receive-share-address1"} vertical>
       {clibboardChanged ? (
@@ -133,7 +132,7 @@ function ReadOnlyAddressField({ address, allowCopy = true }: Props) {
         </ClipboardSuspicious>
       ) : null}
       <Box horizontal alignItems="stretch">
-        <Address ref={addressRef} allowCopy={allowCopy}>
+        <Address innerRef={addressRef} allowCopy={allowCopy}>
           {!copyFeedback ? null : (
             <CopyFeedback>
               <Trans i18nKey="common.addressCopied" />
