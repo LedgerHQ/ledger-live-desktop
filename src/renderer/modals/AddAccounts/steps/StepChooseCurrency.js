@@ -50,9 +50,13 @@ const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
   const wrappedOnChange = useCallback(
     (crypto: ?CryptoCurrency) => {
       setCurrency(crypto);
-      onClearOverlays();
+      if (crypto?.name === "Bitcoin") {
+        onClearOverlays();
+      } else {
+        onResetOverlay();
+      }
     },
-    [onClearOverlays, setCurrency],
+    [onClearOverlays, onResetOverlay, setCurrency],
   );
 
   const currencies = useMemo(() => listSupportedCurrencies().concat(listTokens()), []);

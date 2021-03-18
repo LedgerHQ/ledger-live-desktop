@@ -82,9 +82,9 @@ const Overlay = () => {
 
       modalScroll = document.querySelector("#modal-content");
       if (modalScroll) {
-        // modalScroll.style.overflow = "hidden";
-        // modalScroll.style.paddingRight = "20px";
-        // modalScroll.style.paddingTop = "20px";
+        modalScroll.style.overflow = "hidden";
+        modalScroll.style.paddingRight = "20px";
+        modalScroll.style.paddingTop = "20px";
       }
     }
 
@@ -116,9 +116,9 @@ const Overlay = () => {
       if (scroll) scroll.style.overflow = "hidden";
       if (selectorScroll) selectorScroll.style.overflow = "hidden auto";
       if (modalScroll) {
-        // modalScroll.style.overflow = "scroll";
-        // modalScroll.style.paddingRight = "0";
-        // modalScroll.style.paddingTop = "0";
+        modalScroll.style.overflow = "scroll";
+        modalScroll.style.paddingRight = "0";
+        modalScroll.style.paddingTop = "0";
       }
     };
   }, [selector, config, t, b, l, r]);

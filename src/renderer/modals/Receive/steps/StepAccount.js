@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useEffect, useCallback, useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { Trans } from "react-i18next";
 import type {
   Account,
@@ -24,13 +24,15 @@ import Button from "~/renderer/components/Button";
 import SelectAccount from "~/renderer/components/SelectAccount";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
-import WrapperForActiveFlow from "~/renderer/components/ProductTour/WrapperForActiveFlow";
-import InfoBox from "~/renderer/components/InfoBox";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import TokenTips from "~/renderer/components/TokenTips";
 import type { StepProps } from "../Body";
 import { supportLinkByTokenType } from "~/config/urls";
-import { useOnClearOverlays } from "~/renderer/components/ProductTour/hooks";
+import {
+  useOnClearOverlays,
+  useOnSetOverlays,
+  useSetOverlays,
+} from "~/renderer/components/ProductTour/hooks";
 
 type OnChangeAccount = (account: ?AccountLike, tokenAccount: ?Account) => void;
 
@@ -40,14 +42,49 @@ const AccountSelection = ({
 }: {
   onChangeAccount: OnChangeAccount,
   account: ?AccountLike,
-}) => (
-  <>
-    <Label>
-      <Trans i18nKey="receive.steps.chooseAccount.label" />
-    </Label>
-    <SelectAccount autoFocus withSubAccounts onChange={onChangeAccount} value={account} />
-  </>
-);
+}) => {
+  const onClearOverlays = useOnClearOverlays();
+
+  const onResetOverlay = useOnSetOverlays({
+    selector: ["#selectAccount"],
+    i18nKey: "productTour.flows.receive.overlays.account",
+    config: { top: true, disableScroll: true, padding: 10 },
+  });
+
+  const onOpenSelector = useOnSetOverlays({
+    selector: ["#selectAccount", ".select-options-list"],
+    i18nKey: "productTour.flows.receive.overlays.account",
+    config: { top: true, disableScroll: true, padding: 10 },
+  });
+
+  const wrappedOnChange = useCallback(
+    (account: ?AccountLike, tokenAccount: ?Account) => {
+      onChangeAccount(account, tokenAccount);
+      if (account && getAccountCurrency(account)?.name === "Bitcoin") {
+        onClearOverlays();
+      } else {
+        onResetOverlay();
+      }
+    },
+    [onChangeAccount, onClearOverlays, onResetOverlay],
+  );
+
+  return (
+    <div id={"selectAccount"}>
+      <Label>
+        <Trans i18nKey="receive.steps.chooseAccount.label" />
+      </Label>
+      <SelectAccount
+        onMenuOpen={onOpenSelector}
+        onMenuClose={onResetOverlay}
+        autoFocus
+        withSubAccounts
+        onChange={wrappedOnChange}
+        value={account}
+      />
+    </div>
+  );
+};
 
 const TokenParentSelection = ({
   onChangeAccount,
@@ -108,9 +145,12 @@ export default function StepAccount({
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
   const error = account ? getReceiveFlowError(account, parentAccount) : null;
   const tokenTypes = mainAccount ? listTokenTypesForCryptoCurrency(mainAccount.currency) : [];
-  const onClearOverlays = useOnClearOverlays();
 
-  useEffect(() => onClearOverlays(), [onClearOverlays]);
+  useSetOverlays(true, {
+    selector: "#selectAccount",
+    i18nKey: "productTour.flows.receive.overlays.account",
+    config: { top: true, disableScroll: true, padding: 10 },
+  });
 
   return (
     <Box flow={1}>
@@ -152,11 +192,6 @@ export default function StepAccount({
           />
         </div>
       ) : null}
-      <WrapperForActiveFlow flow={"receive"}>
-        <InfoBox mt={20} type={"hint"}>
-          <Trans i18nKey="productTour.flows.receive.hint.stepAccounts" />
-        </InfoBox>
-      </WrapperForActiveFlow>
     </Box>
   );
 }

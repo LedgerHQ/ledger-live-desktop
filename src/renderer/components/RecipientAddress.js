@@ -64,7 +64,7 @@ const RecipientAddress = ({ onChange, withQrCode, value = "", ...rest }: Props) 
   });
   const onHideQRCodeOverlay = useOnSetOverlays({
     selector: "#send-source",
-    i18nKey: "productTour.flows.send.overlays.source",
+    i18nKey: "productTour.flows.send.overlays.account",
     config: { bottom: true, right: true, disableScroll: true, withFeedback: true, padding: 10 },
   });
 

@@ -307,11 +307,11 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
     return (
       <>
         <TrackPage category="AddAccounts" name="Step3" currencyName={currencyName} />
-        <Box mt={-4}>
+        <Box mt={-4} id="addAccounts-result">
           <QueueOverlay
             queue={[
               {
-                selector: ".account-row",
+                selector: "#addAccounts-result",
                 i18nKey: "productTour.flows.createAccount.overlays.account",
                 config: { bottom: true, left: true, isDismissable: true, padding: 10 },
               },

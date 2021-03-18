@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useCallback, useEffect } from "react";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
+import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
@@ -42,7 +42,7 @@ const StepRecipient = ({
   const activeFlow = useActiveFlow();
   useSetOverlays(true, {
     selector: "#send-source",
-    i18nKey: "productTour.flows.send.overlays.source",
+    i18nKey: "productTour.flows.send.overlays.account",
     config: { bottom: true, right: true, disableScroll: true, padding: 10 },
   });
 
@@ -58,7 +58,7 @@ const StepRecipient = ({
   });
   const onRestoreRecipientOverlay = useOnSetOverlays({
     selector: "#send-source",
-    i18nKey: "productTour.flows.send.overlays.source",
+    i18nKey: "productTour.flows.send.overlays.account",
     config: { bottom: true, right: true, disableScroll: true, withFeedback: true, padding: 10 },
   });
 
@@ -70,10 +70,14 @@ const StepRecipient = ({
 
   const wrappedOnChangeAccount = useCallback(
     (nextAccount: ?AccountLike, nextParentAccount: ?Account) => {
-      onRecipientAddressOverlay();
       onChangeAccount(nextAccount, nextParentAccount);
+      if (nextAccount && getAccountCurrency(nextAccount).name === "Bitcoin") {
+        onRecipientAddressOverlay();
+      } else {
+        onRestoreRecipientOverlay();
+      }
     },
-    [onChangeAccount, onRecipientAddressOverlay],
+    [onChangeAccount, onRecipientAddressOverlay, onRestoreRecipientOverlay],
   );
 
   if (!status) return null;
@@ -139,12 +143,6 @@ export const StepRecipientFooter = ({
   const hasFieldError = Object.keys(errors).some(name => fields.includes(name));
   const canNext = !bridgePending && !hasFieldError && !isTerminated;
   const onClearOverlays = useOnClearOverlays();
-
-  useSetOverlays(!!status, {
-    selector: "#send-source",
-    i18nKey: "productTour.flows.send.overlays.source",
-    config: { bottom: true, right: true, disableScroll: true, withFeedback: true, padding: 10 },
-  });
 
   useEffect(() => {
     if (canNext) {

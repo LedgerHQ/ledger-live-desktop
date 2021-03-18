@@ -72,8 +72,10 @@ const AmountField = ({
       i18nKey: "productTour.flows.send.overlays.amount",
       config: {
         top: true,
+        left: true,
         padding: 10,
         isDismissable: true,
+        disableScroll: true,
       },
     },
     {
@@ -81,8 +83,10 @@ const AmountField = ({
       i18nKey: "productTour.flows.send.overlays.fees",
       config: {
         top: true,
+        left: true,
         padding: 10,
         isDismissable: true,
+        disableScroll: true,
       },
     },
   );
