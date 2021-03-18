@@ -152,7 +152,7 @@ export function SideDrawer({
   const focusTrap = useRef(null);
 
   useEffect(() => {
-    if (!isMounted) return;
+    if (!isMounted || !focusTrapElem.current) return;
 
     focusTrap.current = createFocusTrap(focusTrapElem.current, {
       fallbackFocus: focusTrapElem.current,
@@ -183,7 +183,13 @@ export function SideDrawer({
   }
 
   return ReactDOM.createPortal(
-    <Transition in={isOpen} timeout={DURATION} onEntered={onEntered} onExited={onExited}>
+    <Transition
+      in={isOpen}
+      timeout={DURATION}
+      onEntered={onEntered}
+      onExited={onExited}
+      unmountOnExit
+    >
       {state => (
         <DrawerContainer className={state} ref={focusTrapElem} tabIndex="-1">
           <DrawerContent paper={paper} isOpened={isOpen} className={state} direction={direction}>

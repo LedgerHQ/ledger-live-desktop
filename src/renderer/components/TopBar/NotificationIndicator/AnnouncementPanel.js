@@ -1,20 +1,23 @@
 // @flow
-
+import React, { useCallback, useRef, useMemo, useState } from "react";
 import styled from "styled-components";
-import Box from "~/renderer/components/Box";
-import { InView } from "react-intersection-observer";
-import React, { useCallback, useRef, useMemo } from "react";
-import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
 
-import { groupAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/helpers";
-import Text from "~/renderer/components/Text";
 import moment from "moment";
+import { Trans } from "react-i18next";
+import { InView } from "react-intersection-observer";
+
+import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
+import { groupAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/helpers";
+
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import TriangleWarning from "~/renderer/icons/TriangleWarning";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import { openURL } from "~/renderer/linking";
 import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
-import { Trans } from "react-i18next";
+import Box from "~/renderer/components/Box";
+import Text from "~/renderer/components/Text";
 
 const DateRowContainer = styled.div`
   padding: 4px 16px;
@@ -45,6 +48,17 @@ const levelThemes = {
   },
 };
 
+const UnReadNotifBadge = styled.div`
+  width: 8px;
+  height: 8px;
+  background-color: ${p => p.theme.colors.wallet};
+  border-radius: 8px;
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  z-index: 1;
+`;
+
 type DateRowProps = {
   date: Date,
 };
@@ -58,6 +72,11 @@ function DateRow({ date }: DateRowProps) {
     </DateRowContainer>
   );
 }
+
+const ArticleRootContainer = styled.div`
+  padding-right: ${p => (p.isRead ? 0 : 16)}px;
+  position: relative;
+`;
 
 const ArticleContainer = styled(Box)`
   display: flex;
@@ -90,6 +109,7 @@ type ArticleProps = {
     href: string,
   },
   utmCampaign?: string,
+  isRead?: boolean,
 };
 
 const icons = {
@@ -135,44 +155,62 @@ function ArticleLink({ label, href, utmCampaign, color }: ArticleLinkProps) {
   );
 }
 
-function Article({ level = "info", icon = "info", title, text, link, utmCampaign }: ArticleProps) {
+function Article({
+  level = "info",
+  icon = "info",
+  title,
+  text,
+  link,
+  utmCampaign,
+  isRead,
+}: ArticleProps) {
   const levelTheme = levelThemes[level];
+  const [isSeen] = useState(isRead);
 
   const { Icon, defaultIconColor } = icons[icon];
 
   return (
-    <ArticleContainer
-      bg={levelTheme.background}
-      py={levelTheme.padding}
-      px="16px"
-      color={levelTheme.icon || defaultIconColor}
-    >
-      <ArticleLeftColumnContainer>
-        <ArticleIconContainer>
-          <Icon size={15} />
-        </ArticleIconContainer>
-      </ArticleLeftColumnContainer>
-      <ArticleRightColumnContainer>
-        <Text color={levelTheme.title} ff="Inter|SemiBold" fontSize="14px" lineHeight="16.94px">
-          {title}
-        </Text>
-        <Text mt="4px" color={levelTheme.text} ff="Inter|Medium" fontSize="12px" lineHeight="18px">
-          {text}
-        </Text>
-        {link ? (
-          <ArticleLink
-            href={link.href}
-            label={link.label}
-            utmCampaign={utmCampaign}
-            color={levelTheme.link}
-          />
-        ) : null}
-      </ArticleRightColumnContainer>
-    </ArticleContainer>
+    <ArticleRootContainer isRead={isSeen}>
+      <ArticleContainer
+        bg={levelTheme.background}
+        py={levelTheme.padding}
+        px="16px"
+        color={levelTheme.icon || defaultIconColor}
+      >
+        <ArticleLeftColumnContainer>
+          <ArticleIconContainer>
+            <Icon size={15} />
+          </ArticleIconContainer>
+        </ArticleLeftColumnContainer>
+        <ArticleRightColumnContainer>
+          <Text color={levelTheme.title} ff="Inter|SemiBold" fontSize="14px" lineHeight="16.94px">
+            {title}
+          </Text>
+          <Text
+            mt="4px"
+            color={levelTheme.text}
+            ff="Inter|Medium"
+            fontSize="12px"
+            lineHeight="18px"
+          >
+            {text}
+          </Text>
+          {link ? (
+            <ArticleLink
+              href={link.href}
+              label={link.label}
+              utmCampaign={utmCampaign}
+              color={levelTheme.link}
+            />
+          ) : null}
+        </ArticleRightColumnContainer>
+      </ArticleContainer>
+      {isSeen ? null : <UnReadNotifBadge />}
+    </ArticleRootContainer>
   );
 }
 
-const PanelContainer = styled.div`
+const PanelContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -245,8 +283,7 @@ export function AnnouncementPanel() {
         {groupedAnnouncements.map((group, index) => (
           <React.Fragment key={index}>
             {group.day ? <DateRow date={group.day} /> : null}
-            {/* eslint-disable-next-line camelcase */}
-            {group.data.map(({ level, icon, content, uuid, utm_campaign }, index) => (
+            {group.data.map(({ level, icon, content, uuid, utm_campaign: utmCampaign }, index) => (
               <React.Fragment key={uuid}>
                 <InView as="div" onChange={visible => handleInView(visible, uuid)}>
                   <Article
@@ -256,8 +293,8 @@ export function AnnouncementPanel() {
                     text={content.text}
                     link={content.link}
                     uuid={uuid}
-                    /* eslint-disable-next-line camelcase */
-                    utmCampaign={utm_campaign}
+                    utmCampaign={utmCampaign}
+                    isRead={seenIds.includes(uuid)}
                   />
                 </InView>
                 {index < group.data.length - 1 ? <Separator /> : null}
