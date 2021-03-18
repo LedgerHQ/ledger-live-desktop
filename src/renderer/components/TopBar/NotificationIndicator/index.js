@@ -33,7 +33,7 @@ export function NotificationIndicator() {
             dispatch(openInformationCenter());
           }}
         >
-          <IconBell size={16} dot={totalNotifCount > 0} />
+          <IconBell size={16} count={totalNotifCount} />
         </ItemContainer>
       </Tooltip>
     </>
