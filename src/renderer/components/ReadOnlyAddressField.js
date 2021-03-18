@@ -132,7 +132,8 @@ function ReadOnlyAddressField({ address, allowCopy = true }: Props) {
         </ClipboardSuspicious>
       ) : null}
       <Box horizontal alignItems="stretch">
-        <Address innerRef={addressRef} allowCopy={allowCopy}>
+        {/* $FlowFixMe using innerRef doesn't work here */}
+        <Address ref={addressRef} allowCopy={allowCopy}>
           {!copyFeedback ? null : (
             <CopyFeedback>
               <Trans i18nKey="common.addressCopied" />
