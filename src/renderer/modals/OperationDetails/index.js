@@ -380,6 +380,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                 <Box
                   horizontal
                   alignItems="center"
+                  flex="1"
                   style={parentAccount ? { maxWidth: "50%", flexShrink: 0 } : {}}
                 >
                   <TextEllipsis>
@@ -391,7 +392,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                 {parentAccount ? (
                   <>
                     <Separator>{"/"}</Separator>
-                    <Box horizontal alignItems="center">
+                    <Box horizontal alignItems="center" flex="1">
                       <TextEllipsis>
                         <Link onClick={goToSubAccount}>{currency.name}</Link>
                       </TextEllipsis>

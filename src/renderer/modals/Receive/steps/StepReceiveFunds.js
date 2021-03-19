@@ -63,7 +63,7 @@ const Receive1ShareAddress = ({
       <Box horizontal alignItems="center" flow={2} mb={4}>
         <Text style={{ flex: 1 }} ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
           {name ? (
-            <Box horizontal alignItems="center">
+            <Box horizontal alignItems="center" flexWrap="wrap">
               <Ellipsis>
                 <Trans i18nKey="currentAddress.for">
                   {"Address for "}

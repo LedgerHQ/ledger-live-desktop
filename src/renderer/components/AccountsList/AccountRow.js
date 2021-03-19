@@ -15,6 +15,7 @@ import AccountTagDerivationMode from "../AccountTagDerivationMode";
 
 const InputWrapper = styled.div`
   margin-left: 4px;
+  width: 100%;
 `;
 type Props = {
   account: Account,
@@ -129,7 +130,7 @@ export default class AccountRow extends PureComponent<Props> {
           <FormattedVal
             val={account.balance}
             unit={account.unit}
-            style={{ textAlign: "right", width: "auto", flex: 4 }}
+            style={{ textAlign: "right", width: "auto", minWidth: 120 }}
             showCode
             fontSize={4}
             color="palette.text.shade60"
