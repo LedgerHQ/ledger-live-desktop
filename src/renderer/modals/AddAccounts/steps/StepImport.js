@@ -211,8 +211,6 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
     const { currency } = this.props;
     if (!currency) return null;
 
-    const mainCurrency = currency.type === "TokenCurrency" ? currency.parentCurrency : currency;
-    const family = mainCurrency.family;
     const { showAllCreatedAccounts } = this.state;
     return (
       <Box ml="auto" mr={3}>
@@ -220,7 +218,7 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
           content={
             <Trans
               i18nKey="addAccounts.createNewAccount.showAllAddressTypesTooltip"
-              values={{ family }}
+              values={{ family: currency.name }}
             />
           }
         >

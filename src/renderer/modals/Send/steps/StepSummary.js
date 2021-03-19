@@ -26,6 +26,7 @@ import InfoBox from "~/renderer/components/InfoBox";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { StepProps } from "../types";
+import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
 
 const FromToWrapper: ThemedComponent<{}> = styled.div``;
 const Circle: ThemedComponent<{}> = styled.div`
@@ -109,6 +110,7 @@ export default class StepSummary extends PureComponent<StepProps> {
                   <Text ff="Inter" color="palette.text.shade100" fontSize={4}>
                     {getAccountName(account)}
                   </Text>
+                  <AccountTagDerivationMode account={account} />
                 </Box>
               </div>
             </Box>

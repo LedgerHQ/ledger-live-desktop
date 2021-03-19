@@ -23,11 +23,13 @@ import SuccessDisplay from "~/renderer/components/SuccessDisplay";
 import Receive2NoDevice from "~/renderer/components/Receive2NoDevice";
 import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/rendering";
 import type { StepProps } from "../Body";
+import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import Modal from "~/renderer/components/Modal";
 import InfoBox from "~/renderer/components/InfoBox";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import QRCode from "~/renderer/components/QRCode";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
+import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
 
 const Separator = styled.div`
   border-top: 1px solid #99999933;
@@ -46,10 +48,12 @@ const QRCodeWrapper = styled.div`
 `;
 
 const Receive1ShareAddress = ({
+  account,
   name,
   address,
   showQRCodeModal,
 }: {
+  account: AccountLike,
   name: string,
   address: string,
   showQRCodeModal: () => void,
@@ -59,12 +63,15 @@ const Receive1ShareAddress = ({
       <Box horizontal alignItems="center" flow={2} mb={4}>
         <Text style={{ flex: 1 }} ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
           {name ? (
-            <Ellipsis>
-              <Trans i18nKey="currentAddress.for">
-                {"Address for "}
-                <strong>{name}</strong>
-              </Trans>
-            </Ellipsis>
+            <Box horizontal alignItems="center">
+              <Ellipsis>
+                <Trans i18nKey="currentAddress.for">
+                  {"Address for "}
+                  <strong>{name}</strong>
+                </Trans>
+              </Ellipsis>
+              <AccountTagDerivationMode account={account} />
+            </Box>
           ) : (
             <Trans i18nKey="currentAddress.title" />
           )}
@@ -209,7 +216,12 @@ const StepReceiveFunds = ({
         ) : isAddressVerified === false ? (
           // User explicitly bypass device verification (no device)
           <>
-            <Receive1ShareAddress name={name} address={address} showQRCodeModal={showQRCodeModal} />
+            <Receive1ShareAddress
+              account={mainAccount}
+              name={name}
+              address={address}
+              showQRCodeModal={showQRCodeModal}
+            />
             <Box mt={4} />
             <InfoBox
               onLearnMore={() => openURL(urls.recipientAddressInfo)}
@@ -228,7 +240,12 @@ const StepReceiveFunds = ({
         ) : device ? (
           // verification with device
           <>
-            <Receive1ShareAddress name={name} address={address} showQRCodeModal={showQRCodeModal} />
+            <Receive1ShareAddress
+              account={mainAccount}
+              name={name}
+              address={address}
+              showQRCodeModal={showQRCodeModal}
+            />
             <Separator />
             <Receive2Device device={device} onVerify={onVerify} name={name} />
           </>

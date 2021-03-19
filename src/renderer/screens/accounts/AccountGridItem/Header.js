@@ -17,18 +17,27 @@ import Star from "~/renderer/components/Stars/Star";
 import Tooltip from "~/renderer/components/Tooltip";
 
 import AccountSyncStatusIndicator from "../AccountSyncStatusIndicator";
+import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
 
 class HeadText extends PureComponent<{
+  account: Account | TokenAccount,
   title: string,
   name: string,
 }> {
   render() {
-    const { title, name } = this.props;
+    const { title, name, account } = this.props;
 
     return (
       <Box style={{ flex: 1, alignItems: "flex-start" }}>
-        <Box style={{ textTransform: "uppercase" }} fontSize={10} color="palette.text.shade80">
+        <Box
+          style={{ textTransform: "uppercase" }}
+          horizontal
+          alignItems="center"
+          fontSize={10}
+          color="palette.text.shade80"
+        >
           {title}
+          <AccountTagDerivationMode account={account} />
         </Box>
         <Tooltip content={name} delay={1200}>
           <Ellipsis>
@@ -69,7 +78,7 @@ class Header extends PureComponent<{
       <Box flow={4}>
         <Box horizontal ff="Inter|SemiBold" flow={3} alignItems="center">
           <ParentCryptoCurrencyIcon currency={currency} withTooltip />
-          <HeadText name={name} title={title} />
+          <HeadText account={account} name={name} title={title} />
           <AccountSyncStatusIndicator
             accountId={(parentAccount && parentAccount.id) || account.id}
             account={account}

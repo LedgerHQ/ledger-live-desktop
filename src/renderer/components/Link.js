@@ -12,8 +12,6 @@ const Link: ThemedComponent<{}> = styled.a`
   cursor: pointer;
   color: currentColor;
   text-decoration-skip: ink;
-  display: flex;
-  align-items: center;
 `;
 
 export default Link;
