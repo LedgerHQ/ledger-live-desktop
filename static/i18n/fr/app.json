@@ -916,7 +916,9 @@
     "successDescription_plural": "Ajoutez davantage de comptes ou retournez au Portfolio",
     "createNewAccount": {
       "noOperationOnLastAccount": "Impossible d'ajouter un nouveau compte avant d'avoir reçu des actifs sur votre compte <1><0>{{accountName}}</0></1>",
-      "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> n'a été trouvé"
+      "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> n'a été trouvé",
+      "showAllAddressTypes": "Show all address types",
+      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
     },
     "cta": {
       "addMore": "Ajouter davantage",
@@ -3308,8 +3310,11 @@
     "PolkadotNoNominations": {
       "title": "Vous n'avez aucune nomination"
     },
-    "PolkadotBondAllFundsWarning": {
-      "title": "Vous n'aurez pas de solde disponible pour les transactions futures"
+    "PolkadotAllFundsWarning": {
+      "title": "Ensure you have enough balance left for future transaction fees"
+    },
+    "PolkadotDoMaxSendInstead": {
+      "title": "Balance cannot be below 1 DOT. Send max to empty accountd"
     },
     "PolkadotBondMinimumAmount": {
       "title": "Vous devez bond au moins 1 DOT"
