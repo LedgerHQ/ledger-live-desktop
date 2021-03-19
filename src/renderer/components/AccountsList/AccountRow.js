@@ -129,7 +129,7 @@ export default class AccountRow extends PureComponent<Props> {
           <FormattedVal
             val={account.balance}
             unit={account.unit}
-            style={{ textAlign: "right", width: "auto" }}
+            style={{ textAlign: "right", width: "auto", flex: 4 }}
             showCode
             fontSize={4}
             color="palette.text.shade60"
@@ -148,7 +148,7 @@ const AccountRowContainer: ThemedComponent<{
   alignItems: "center",
   bg: "palette.background.default",
   px: 3,
-  flow: 3,
+  flow: 1,
 }))`
   height: 48px;
   border-radius: 4px;
