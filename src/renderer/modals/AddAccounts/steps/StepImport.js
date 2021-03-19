@@ -214,29 +214,28 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
     const { showAllCreatedAccounts } = this.state;
     return (
       <Box ml="auto" mr={3}>
-        <ToolTip
-          content={
-            <Trans
-              i18nKey="addAccounts.createNewAccount.showAllAddressTypesTooltip"
-              values={{ family: currency.name }}
-            />
-          }
-        >
-          <Box color="palette.text.shade60" horizontal alignItems="center">
-            <Text fontSize={2}>
-              <Trans i18nKey="addAccounts.createNewAccount.showAllAddressTypes" />
-            </Text>
+        <Box color="palette.text.shade60" horizontal alignItems="center">
+          <Text fontSize={2}>
+            <Trans i18nKey="addAccounts.createNewAccount.showAllAddressTypes" />
+          </Text>
+          <ToolTip
+            content={
+              <Trans
+                i18nKey="addAccounts.createNewAccount.showAllAddressTypesTooltip"
+                values={{ family: currency.name }}
+              />
+            }
+          >
             <Box mx={1}>
               <InfoCircle size={14} />
             </Box>
-
-            <Switch
-              isChecked={showAllCreatedAccounts}
-              small
-              onChange={() => this.setState({ showAllCreatedAccounts: !showAllCreatedAccounts })}
-            />
-          </Box>
-        </ToolTip>
+          </ToolTip>
+          <Switch
+            isChecked={showAllCreatedAccounts}
+            small
+            onChange={() => this.setState({ showAllCreatedAccounts: !showAllCreatedAccounts })}
+          />
+        </Box>
       </Box>
     );
   }
