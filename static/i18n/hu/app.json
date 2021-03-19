@@ -916,7 +916,9 @@
     "successDescription_plural": "Add other accounts or return to Portfolio",
     "createNewAccount": {
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
-      "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created"
+      "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
+      "showAllAddressTypes": "Show all address types",
+      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
     },
     "cta": {
       "addMore": "Több hozzáadása",
@@ -3308,8 +3310,11 @@
     "PolkadotNoNominations": {
       "title": "You have no nominations"
     },
-    "PolkadotBondAllFundsWarning": {
-      "title": "You will not have available balance for future transactions"
+    "PolkadotAllFundsWarning": {
+      "title": "Ensure you have enough balance left for future transaction fees"
+    },
+    "PolkadotDoMaxSendInstead": {
+      "title": "Balance cannot be below 1 DOT. Send max to empty accountd"
     },
     "PolkadotBondMinimumAmount": {
       "title": "You must bond at least 1 DOT"
