@@ -920,6 +920,9 @@
       "showAllAddressTypes": "Show all address types",
       "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
     },
+    "supportLinks": {
+      "segwit_or_native_segwit": "Segwit or Native Segwit?"
+    },
     "cta": {
       "addMore": "Több hozzáadása",
       "add": "Számla hozzáadása",
