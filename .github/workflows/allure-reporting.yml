@@ -1,4 +1,4 @@
-name: CI
+name: allure-reporting
 on:
   pull_request:
     branches:
