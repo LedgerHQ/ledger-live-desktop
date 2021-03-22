@@ -8,4 +8,5 @@ module.exports = {
     __APP_VERSION__: "2.0.0",
   },
   globalSetup: "<rootDir>/tests/setup.js",
+  setupFilesAfterEnv: ["jest-allure/dist/setup"],
 };

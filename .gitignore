@@ -121,6 +121,7 @@ tests/coverage/
 !tests/tmp/.gitkeep
 tests/docker-electron-webdriver/.lastbuild
 tests/docker-electron-webdriver/.lastyarn
+allure-results
 
 # Yalc
 .yalc
