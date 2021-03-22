@@ -2900,16 +2900,16 @@
       "description": "Une erreur inattendue s'est produite. Veuillez réessayer. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "Désolé, échec de la connexion",
-      "description": "Veuillez essayer à nouveau"
+      "title": "The connection failed",
+      "description": "Please try again."
     },
     "DisconnectedDevice": {
-      "title": "Désolé, connexion à l'appareil perdue",
-      "description": "Veuillez essayer à nouveau"
+      "title": "Sorry, it looks like your device disconnected",
+      "description": "Please reconnect and try again."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Appareil déconnecté",
-      "description": "La connexion à l'appareil a été perdue pendant une opération. Veuillez réessayer"
+      "title": "Sorry, it looks like your device disconnected",
+      "description": "Please reconnect and try again."
     },
     "EnpointConfig": {
       "title": "Point de terminaison non valide",
@@ -2928,12 +2928,12 @@
       "description": "Veuillez contacter l’assistance Ledger"
     },
     "HardResetFail": {
-      "title": "Désolé, réinitialisation impossible",
-      "description": "Veuillez réessayer ou contacter l'assistance Ledger en cas de doute"
+      "title": "Sorry, could not reset",
+      "description": "Please try again or contact Ledger Support if the problem persists."
     },
     "LatestMCUInstalledError": {
-      "title": "Désolé, aucune mise à jour disponible",
-      "description": "Tentative de mise à jour inutile du microcontrôleur de l’appareil. En cas de problème avec votre appareil, veuillez contacter l’assistance Ledger."
+      "title": "Sorry, there's nothing to update",
+      "description": "Please contact Ledger Support if you cannot use your device."
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
@@ -2948,8 +2948,8 @@
       "description": "Veuillez essayer à nouveau ou contacter l’assistance Ledger."
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Désolé, cette application est déjà installée",
-      "description": "Consultez votre appareil pour voir quelles applications sont déjà installées"
+      "title": "Sorry, that's already installed",
+      "description": "Please check which apps are already installed on your device."
     },
     "ManagerAppDepInstallRequired": {
       "title": "App {{dependency}} requise",
@@ -2994,16 +2994,16 @@
       "description": "Désinstallez les applications Bitcoin ou Ethereum en dernier"
     },
     "NetworkDown": {
-      "title": "Désolé, la connexion internet ne semble pas fonctionner.",
-      "description": "Veuillez vérifier votre connexion internet"
+      "title": "Sorry, internet seems to be down",
+      "description": "Please check your internet connection."
     },
     "NoAddressesFound": {
       "title": "Désolé, aucun compte n'a été trouvé",
       "description": "Quelque chose s’est mal passé lors du calcul de l’adresse, veuillez essayer à nouveau ou contacter l’assistance Ledger"
     },
     "NotEnoughBalance": {
-      "title": "Désolé, solde insuffisant",
-      "description": "Assurez-vous que le compte utilisé a suffisamment de fonds"
+      "title": "Sorry, insufficient funds",
+      "description": "Please make sure the account has enough funds."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "L’adresse du destinataire est inactive. Envoyez au minimum {{minimalAmount}} pour l’activer."
@@ -3056,12 +3056,12 @@
       "description": "Vous devez confirmer l'échange avant que le minuteur ne s'épuise. Le taux de change affiché reste valide pendant 60 secondes."
     },
     "TimeoutError": {
-      "title": "Désolé, le délai est dépassé",
-      "description": "Le serveur a mis trop de temps à répondre. Veuillez réessayer"
+      "title": "Sorry, server took too long to respond",
+      "description": "Please try again."
     },
     "TimeoutTagged": {
-      "title": "Désolé, le délai est dépassé ({{tag}})",
-      "description": "Le serveur a mis trop de temps à répondre"
+      "title": "Sorry, server took too long to respond ({{tag}})",
+      "description": "Timeout occurred."
     },
     "TransportError": {
       "title": "Une erreur s'est produite. Veuillez reconnecter votre appareil",
@@ -3080,8 +3080,8 @@
       "description": "Gardez l'application {{appName}} ouverte pendant que nous cherchons vos comptes"
     },
     "UnexpectedBootloader": {
-      "title": "Désolé, votre appareil ne devrait pas être en mode Bootloader",
-      "description": "Veuillez redémarrer votre appareil ou contacter le support Ledger"
+      "title": "Sorry, your device must not be in Bootloader mode",
+      "description": "Please restart your device without touching the buttons when the logo appears. Contact Ledger Support if the problem persists."
     },
     "UserRefusedAllowManager": {
       "title": "Manager refusé sur l’appareil"
@@ -3133,7 +3133,7 @@
       "title": "L’adresse de réception est identique à l'adresse d'émission"
     },
     "CantOpenDevice": {
-      "title": "Désolé, connexion à l’appareil impossible",
+      "title": "Sorry, connection failed",
       "description": "L'appareil a été détecté mais la connexion a échoué. Veuillez réessayer ou contacter le support Ledger si le problème persiste."
     },
     "ETHAddressNonEIP": {
