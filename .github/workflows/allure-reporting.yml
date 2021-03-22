@@ -70,9 +70,9 @@ jobs:
         uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: ./output.txt
-      - name: run coverage generation	
+      - name: run coverage generation
         if: always() && github.event_name == 'push' && job.status != 'cancelled'
-        run: yarn spectron-coverage	
+        run: yarn spectron-coverage
         env:
           CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
 
@@ -81,7 +81,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Retrieve Allure history
+      - name: Retrieve tests history
         uses: actions/checkout@v2
         if: always()
         continue-on-error: true
@@ -89,7 +89,7 @@ jobs:
           repository: LedgerHQ/live-test-reports
           ref: gh-pages
           path: gh-pages
-      - name: Generate Allure report
+      - name: Generate test reports
         uses: simple-elf/allure-report-action@master
         if: always()
         id: allure-report
@@ -98,13 +98,12 @@ jobs:
           gh_pages: gh-pages
           allure_report: allure-report
           allure_history: allure-history
-      - name: Deploy Allure report to Github Pages
+      - name: Deploy test reports
         if: always()
         uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{ secrets.TEST_REPORTS_DEPLOY_KEY }}
           external_repository: LedgerHQ/live-test-reports
-          publish_branch: gh-pages
           publish_dir: allure-history
           destination_dir: allure-reports
 
