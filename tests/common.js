@@ -20,6 +20,7 @@ import HideTokenModal from "./po/hideTokenModal.page";
 import fs from "fs";
 import rimraf from "rimraf";
 import path from "path";
+import stripAnsi from "strip-ansi";
 
 // instead of making a PR to spectron we override the way they launch chromedriver
 // chromedriver is launched automatically in the docker container
@@ -63,10 +64,37 @@ let hideTokenModal;
 let mockDeviceEvent;
 let userDataPath;
 
-const toMatchImageSnapshot = configureToMatchImageSnapshot({
+// jest-image-snapshot
+
+const config = {
   customSnapshotsDir: path.join(__dirname, "specs", "__image_snapshots__"),
   customDiffDir: path.join(__dirname, "specs", "__image_snapshots__", "__diff_output__"),
-});
+};
+
+const jestToMatchImageSnapshot = configureToMatchImageSnapshot(config);
+
+function toMatchImageSnapshot(...args) {
+  const result = jestToMatchImageSnapshot.apply(this, args);
+
+  if (!result.pass) {
+    console.log(result);
+    const message = stripAnsi(result.message());
+
+    const filePattern = /(?=[^ ]+$)(.*).png/gm.exec(message);
+
+    if (filePattern) {
+      const fileName = filePattern[0];
+
+      if (fileName && fs.existsSync(fileName)) {
+        const buffer = fs.readFileSync(fileName);
+        // eslint-disable-next-line no-undef
+        reporter.addAttachment(args[1].customSnapshotIdentifier, buffer, "image/png");
+      }
+    }
+  }
+  return result;
+}
+
 expect.extend({ toMatchImageSnapshot });
 jest.setTimeout(600000);
 
