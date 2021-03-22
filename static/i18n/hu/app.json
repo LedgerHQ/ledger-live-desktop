@@ -2900,16 +2900,16 @@
       "description": "An unexpected error occurred. Please try again. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "Hoppá, csatlakozás sikertelen",
-      "description": "Kérlek, próbáld meg újra"
+      "title": "The connection failed",
+      "description": "Please try again."
     },
     "DisconnectedDevice": {
-      "title": "Hoppá, az eszköz csatlakozása megszűnt",
-      "description": "Kérlek, próbáld meg újra"
+      "title": "Sorry, it looks like your device disconnected",
+      "description": "Please reconnect and try again."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Hoppá, az eszköz lecsatlakoztatva",
-      "description": "The connection to the device was lost during an operation. Please try again"
+      "title": "Sorry, it looks like your device disconnected",
+      "description": "Please reconnect and try again."
     },
     "EnpointConfig": {
       "title": "Érvénytelen végpont",
@@ -2928,12 +2928,12 @@
       "description": "Kérlek, lépj kapcsolatba a Ledger ügyféltámogatással"
     },
     "HardResetFail": {
-      "title": "Hoppá, nem sikerült az újraindítás",
-      "description": "Please try again or contact Ledger Support if in doubt"
+      "title": "Sorry, could not reset",
+      "description": "Please try again or contact Ledger Support if the problem persists."
     },
     "LatestMCUInstalledError": {
-      "title": "Hoppá, nincs mit frissíteni",
-      "description": "Feleslegesen megpróbáltad frissíteni az eszköz mikrovezérlőjét. Vedd fel a kapcsolatot a Ledger ügyfélszolgálatával, ha problémád támadt az eszközzel."
+      "title": "Sorry, there's nothing to update",
+      "description": "Please contact Ledger Support if you cannot use your device."
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
@@ -2948,8 +2948,8 @@
       "description": "Kérlek, próbáld meg újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Hoppá, ez már telepítve van",
-      "description": "Ellenőrizd az eszközöd, hogy lásd, mely alkalmazások vannak már telepítve"
+      "title": "Sorry, that's already installed",
+      "description": "Please check which apps are already installed on your device."
     },
     "ManagerAppDepInstallRequired": {
       "title": "{{dependency}} alkalmazás szükséges",
@@ -2994,16 +2994,16 @@
       "description": "A Bitcoin vagy Ethereum alkalmazást utoljára távolítsd el"
     },
     "NetworkDown": {
-      "title": "Hoppá, úgy tűnik nincs internetkapcsolat",
-      "description": "Kérlek, ellenőrizd az internetkapcsolatod"
+      "title": "Sorry, internet seems to be down",
+      "description": "Please check your internet connection."
     },
     "NoAddressesFound": {
       "title": "Sorry, no accounts were found",
       "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
     },
     "NotEnoughBalance": {
-      "title": "Hoppá, fedezethiány",
-      "description": "Make sure the account used has enough funds"
+      "title": "Sorry, insufficient funds",
+      "description": "Please make sure the account has enough funds."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "A fogadó cím inaktív. Küldj minimum {{minimalAmount}} mennyiséget az aktiválásához"
@@ -3056,12 +3056,12 @@
       "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
     },
     "TimeoutError": {
-      "title": "Oops, a timeout occurred",
-      "description": "It took too long for the server to respond. Please try again"
+      "title": "Sorry, server took too long to respond",
+      "description": "Please try again."
     },
     "TimeoutTagged": {
-      "title": "Oops, a timeout occurred ({{tag}})",
-      "description": "Túl sokáig tartott a szerver válasza"
+      "title": "Sorry, server took too long to respond ({{tag}})",
+      "description": "Timeout occurred."
     },
     "TransportError": {
       "title": "Something went wrong. Please reconnect your device",
@@ -3080,8 +3080,8 @@
       "description": "Keep the {{appName}} app open while we find your accounts"
     },
     "UnexpectedBootloader": {
-      "title": "Hoppá, az eszközödnek nem szabad Bootloader módban lennie",
-      "description": "Please restart your device or contact Ledger Support"
+      "title": "Sorry, your device must not be in Bootloader mode",
+      "description": "Please restart your device without touching the buttons when the logo appears. Contact Ledger Support if the problem persists."
     },
     "UserRefusedAllowManager": {
       "title": "Az eszközkezelő meg lett tagadva az eszközön"
@@ -3133,7 +3133,7 @@
       "title": "A fogadó cím megegyezik a küldő címmel"
     },
     "CantOpenDevice": {
-      "title": "Oops, couldn't connect to device",
+      "title": "Sorry, connection failed",
       "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
     },
     "ETHAddressNonEIP": {
