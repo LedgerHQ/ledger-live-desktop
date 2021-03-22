@@ -62,7 +62,8 @@ jobs:
         run: bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:9515)" != "404" ]]; do sleep 5; done'
       - name: run spectron
         if: always() && job.status != 'cancelled'
-        run: yarn spectron --no-color 2>output.txt
+        run: yarn jest tests/specs/swap.spec.js --no-color 2>output.txt
+        # run: yarn spectron --no-color 2>output.txt
       - name: Read test output
         id: spectron
         if: always() && job.status != 'cancelled'
@@ -161,13 +162,8 @@ jobs:
       - name: Upload Allure report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v3
-        #env:
-        #  PERSONAL_TOKEN: ${{ secrets.GHPAGES_ALLURE_TEST_TOKEN }}
-        #  EXTERNAL_REPOSITORY: LedgerHQ/live-test-reports
-        #  PUBLISH_BRANCH: gh-pages
-        #  PUBLISH_DIR: allure-history
-        with:
-          personal_token: ${{ secrets.GHPAGES_ALLURE_TEST_TOKEN }}
-          external_repository: LedgerHQ/live-test-reports
-          publish_branch: gh-pages
-          publish_dir: allure-history
+        env:
+          PERSONAL_TOKEN: ${{ secrets.TEST_REPORTS_TOKEN }}
+          EXTERNAL_REPOSITORY: LedgerHQ/live-test-reports
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
