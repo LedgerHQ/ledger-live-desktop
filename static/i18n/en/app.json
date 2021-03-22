@@ -2891,11 +2891,11 @@
       "description": "Please try again."
     },
     "DisconnectedDevice": {
-      "title": "Sorry, it looks like your device was disconnected",
+      "title": "Sorry, it looks like your device disconnected",
       "description": "Please reconnect and try again."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Sorry, it looks like your device was disconnected",
+      "title": "Sorry, it looks like your device disconnected",
       "description": "Please reconnect and try again."
     },
     "EnpointConfig": {
