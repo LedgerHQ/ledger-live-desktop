@@ -75,69 +75,8 @@ jobs:
         run: yarn spectron-coverage	
         env:
           CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
-      - name: upload diffs to imgur
-        if: always() && job.status != 'cancelled'
-        uses: ./.github/actions/upload-images
-        id: imgur
-        with:
-          path: tests/specs/__image_snapshots__/__diff_output__
-      - name: clean diff
-        if: always() && job.status != 'cancelled'
-        run: rm -f tests/specs/__image_snapshots__/__diff_output__/*.png
-      - name: upload ci suggested screenshots
-        uses: actions/upload-artifact@v2
-        if: always() && job.status != 'cancelled'
-        with:
-          name: ci-suggested-screenshots
-          path: tests/specs/__image_snapshots__/__diff_output__/
-      - name: generate imgChanged
-        run: |
-          git remote add ledger https://github.com/LedgerHQ/ledger-live-desktop.git
-          git fetch ledger
-          git diff --name-only ledger/${{github.base_ref}}..${{github.event.pull_request.head.sha}} -- tests/specs/__image_snapshots__ >imgChanged.txt
-        if: always() && github.event_name == 'pull_request'
-      - name: Read imgChanged output
-        id: imgChanged
-        if: always() && github.event_name == 'pull_request' && job.status != 'cancelled'
-        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
-        with:
-          path: ./imgChanged.txt
-      - name: prepare comment body
-        if: always() && job.status != 'cancelled'
-        id: comment
-        uses: ./.github/actions/prepare-comment-body
-        with:
-          images: ${{ steps.imgur.outputs.images }}
-          fullrepo: ${{ github.repository }}
-          runId: ${{ github.run_id }}
-          testoutput: ${{ steps.spectron.outputs.content }}
-          lintoutput: ${{ steps.lint.outputs.content }}
-          author: ${{github.event.sender.login}}
-          pullId: ${{github.event.number}}
-          imgChanged: ${{steps.imgChanged.outputs.content}}
-          from: ${{github.base_ref}}
-          to: ${{github.event.pull_request.head.sha}}
-      - name: display comment
-        if: always() && job.status != 'cancelled'
-        id: displaycomment
-        env:
-          BODY: ${{ steps.comment.outputs.bodyclean }}
-        run: echo "$BODY"
-      - name: post comment
-        if: always() && job.status != 'cancelled'
-        id: postcomment
-        uses: ./.github/actions/post-comment
-        with:
-          comment: ${{ steps.comment.outputs.body }}
-          prNumber: ${{github.event.pull_request.number}}
-      - name: Send message to Slack channel
-        uses: archive/github-actions-slack@v1.0.3
-        if: always() && github.event_name == 'push' && job.status != 'cancelled'
-        id: notify
-        with:
-          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
-          slack-channel: live-ui-tests
-          slack-text: ${{ steps.comment.outputs.bodySlack }}
+
+# Publish Allure reports
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
@@ -159,11 +98,20 @@ jobs:
           gh_pages: gh-pages
           allure_report: allure-report
           allure_history: allure-history
-      - name: Upload Allure report to Github Pages
+      - name: Deploy Allure report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v3
-        env:
-          PERSONAL_TOKEN: ${{ secrets.TEST_REPORTS_TOKEN }}
-          EXTERNAL_REPOSITORY: LedgerHQ/live-test-reports
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
+        with:
+          github_token: ${{ secrets.TEST_REPORTS_TOKEN }}
+          external_repository: LedgerHQ/live-test-reports
+          publish_branch: gh-pages
+          publish_dir: allure-history
+
+      - name: Send message to Slack channel
+        uses: archive/github-actions-slack@v1.0.3
+        if: always() && github.event_name == 'push' && job.status != 'cancelled'
+        id: notify
+        with:
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+          slack-channel: live-qa-alert
+          slack-text: "checkout http://blog.ledger.com/live-test-reports/"
