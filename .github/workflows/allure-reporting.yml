@@ -89,8 +89,6 @@ jobs:
           repository: LedgerHQ/live-test-reports
           ref: gh-pages
           path: gh-pages
-      - name: please list
-        run: ls -la # to remove
       - name: Generate Allure report
         uses: simple-elf/allure-report-action@master
         if: always()
@@ -100,8 +98,6 @@ jobs:
           gh_pages: gh-pages
           allure_report: allure-report
           allure_history: allure-history
-      - name: please list 2
-        run: ls -la # to remove
       - name: Deploy Allure report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v3
