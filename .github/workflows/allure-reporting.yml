@@ -106,7 +106,7 @@ jobs:
         if: always()
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.TEST_REPORTS_TOKEN }}
+          deploy_key: ${{ secrets.TEST_REPORTS_DEPLOY_KEY }}
           external_repository: LedgerHQ/live-test-reports
           publish_branch: gh-pages
           publish_dir: allure-history
