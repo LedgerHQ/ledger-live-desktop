@@ -96,14 +96,14 @@ export function AnnouncementProviderWrapper({ children }: Props) {
 
   return (
     <AnnouncementProvider
-      autoUpdateDelay={15000}
+      autoUpdateDelay={60000}
       context={context}
       onNewAnnouncement={onNewAnnouncement}
       onAnnouncementRead={onAnnouncementRead}
       handleLoad={loadAnnouncements}
       handleSave={saveAnnouncements}
     >
-      <ServiceStatusProvider autoUpdateDelay={15000}>{children}</ServiceStatusProvider>
+      <ServiceStatusProvider autoUpdateDelay={60000}>{children}</ServiceStatusProvider>
     </AnnouncementProvider>
   );
 }
