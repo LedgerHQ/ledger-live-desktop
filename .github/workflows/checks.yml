@@ -139,3 +139,30 @@ jobs:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
           slack-channel: live-ui-tests
           slack-text: ${{ steps.comment.outputs.bodySlack }}
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Get Allure history
+        uses: actions/checkout@v2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+      - name: Generate Allure report
+        uses: simple-elf/allure-report-action@master
+          if: always()
+          id: allure-report
+          with:
+            allure_results: allure-results
+            gh_pages: gh-pages
+            allure_report: allure-report
+            allure_history: allure-history
+      - name: Upload Allure report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
