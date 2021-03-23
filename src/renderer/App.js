@@ -19,6 +19,7 @@ import LiveStyleSheetManager from "~/renderer/styles/LiveStyleSheetManager";
 import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
 import CountervaluesProvider from "~/renderer/components/CountervaluesProvider";
 import Default from "./Default";
+import WalletConnectProvider from "./screens/WalletConnect/Provider";
 
 const reloadApp = event => {
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {
@@ -60,7 +61,9 @@ const App = ({ store, initialCountervalues }: Props) => {
               <UpdaterProvider>
                 <CountervaluesProvider initialState={initialCountervalues}>
                   <Router>
-                    <Default />
+                    <WalletConnectProvider>
+                      <Default />
+                    </WalletConnectProvider>
                   </Router>
                 </CountervaluesProvider>
               </UpdaterProvider>

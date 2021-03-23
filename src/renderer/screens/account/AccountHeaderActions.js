@@ -29,6 +29,7 @@ import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useHistory } from "react-router-dom";
 import IconExchange from "~/renderer/icons/Exchange";
 import IconSwap from "~/renderer/icons/Swap";
+import IconWalletConnect from "~/renderer/icons/WalletConnect";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
@@ -135,6 +136,21 @@ const AccountHeaderActions = ({
     });
   }, [currency, history, account, parentAccount]);
 
+  const onWalletConnect = useCallback(() => {
+    setTrackingSource("account header actions");
+    console.log("start walletconnect");
+    /*
+    history.push({
+      pathname: "/swap",
+      state: {
+        defaultCurrency: currency,
+        defaultAccount: account,
+        defaultParentAccount: parentAccount,
+      },
+    });
+    */
+  }, [currency, history, account, parentAccount]);
+
   // List of available exchange actions
   const actions = [
     ...(availableOnBuy
@@ -182,6 +198,17 @@ const AccountHeaderActions = ({
             eventProperties: { currencyName: currency.name },
             icon: IconSwap,
             label: <Trans i18nKey="swap.titleCrypto" values={{ currency: currency.name }} />,
+          },
+        ]
+      : []),
+    ...(currency.id === "ethereum"
+      ? [
+          {
+            key: "WalletConnet",
+            onClick: onWalletConnect,
+            event: "Wallet Connect Account Button",
+            icon: IconWalletConnect,
+            label: <Trans i18nKey="walletconnect.titleAccount" />,
           },
         ]
       : []),
