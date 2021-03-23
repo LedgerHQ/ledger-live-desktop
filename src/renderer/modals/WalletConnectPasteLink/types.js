@@ -14,6 +14,7 @@ export type StepProps = {
   link: string,
   setLink: Function,
   onClose: Function,
+  onCloseWithoutDisconnect: Function,
 };
 
 export type St = Step<StepId, StepProps>;

@@ -5,7 +5,7 @@ import Track from "~/renderer/analytics/Track";
 import { Trans, useTranslation } from "react-i18next";
 import StepPaste, { StepPasteFooter } from "./steps/StepPaste";
 import StepConfirm, { StepConfirmFooter } from "./steps/StepConfirm";
-import type { St } from "./types";
+import type { St, StepProps } from "./types";
 import Stepper from "~/renderer/components/Stepper";
 import { disconnect } from "~/renderer/screens/WalletConnect/Provider";
 

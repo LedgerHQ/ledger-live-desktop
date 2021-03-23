@@ -805,7 +805,8 @@
         "placeholder": "Paste Wallet Connect Link"
       },
       "confirm": {
-        "title": "Connect"
+        "title": "Connect",
+        "details": "Wants to connect to the following Ethereum account through your wallet :"
       }
     }
   },

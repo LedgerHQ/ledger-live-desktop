@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import ProviderCommon from "@ledgerhq/live-common/lib/walletconnect/Provider";
+import { useHistory } from "react-router-dom";
 import { accountSelector } from "~/renderer/reducers/accounts";
 
 const useAccount = accountId => {
@@ -9,6 +10,7 @@ const useAccount = accountId => {
 
 const Provider = ({ children }: { children: React$Node }) => {
   const [isReady] = useState(true);
+  const history = useHistory();
 
   return (
     <ProviderCommon
@@ -46,22 +48,13 @@ const Provider = ({ children }: { children: React$Node }) => {
       }}
       onSessionRestarted={account => {
         console.log("wc session restarted should navigat to wc screen");
-        /*
-        navigate(NavigatorName.Base, {
-          screen: ScreenName.WalletConnectConnect,
-          params: {
-            accountId: account.id,
-          },
+        history.push({
+          pathname: "/walletconnect",
         });
-        */
       }}
       onRemoteDisconnected={() => {
         console.log("wc session restarted should navigate bakc to account");
-        /*
-        navigate(NavigatorName.Base, {
-          screen: NavigatorName.Main,
-        });
-        */
+        history.goBack();
       }}
       useAccount={useAccount}
       isReady={isReady}

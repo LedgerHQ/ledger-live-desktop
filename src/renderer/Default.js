@@ -11,6 +11,7 @@ import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
 import Swap from "~/renderer/screens/exchange/swap";
 import Account from "~/renderer/screens/account";
+import WalletConnect from "~/renderer/screens/WalletConnect";
 import Asset from "~/renderer/screens/asset";
 import Lend from "~/renderer/screens/lend";
 import Box from "~/renderer/components/Box/Box";
@@ -81,38 +82,51 @@ export default function Default() {
               {process.env.DEBUG_UPDATE ? <DebugUpdater /> : null}
             </DebugWrapper>
             <OnboardingOrElse>
-              <IsNewVersion />
-              <SyncNewAccounts priority={2} />
+              <Switch>
+                <Route exact path="/walletconnect">
+                  <WalletConnect />
+                </Route>
+                <Route>
+                  <IsNewVersion />
+                  <SyncNewAccounts priority={2} />
 
-              <Box
-                grow
-                horizontal
-                bg="palette.background.default"
-                color="palette.text.shade60"
-                style={{ width: "100%", height: "100%" }}
-              >
-                <MainSideBar />
-                <Page>
-                  <Switch>
-                    <Route path="/" exact render={props => <Dashboard {...props} />} />
-                    <Route path="/settings" render={props => <Settings {...props} />} />
-                    <Route path="/accounts" render={props => <Accounts {...props} />} />
-                    <Route path="/manager" render={props => <Manager {...props} />} />
-                    <Route path="/lend" render={props => <Lend {...props} />} />
-                    <Route path="/exchange" render={props => <Exchange {...props} />} />
-                    <Route path="/account/:parentId/:id" render={props => <Account {...props} />} />
-                    <Route path="/account/:id" render={props => <Account {...props} />} />
-                    <Route path="/asset/:assetId+" render={(props: any) => <Asset {...props} />} />
-                    <Route path="/swap" render={props => <Swap {...props} />} />
-                  </Switch>
-                </Page>
-              </Box>
+                  <Box
+                    grow
+                    horizontal
+                    bg="palette.background.default"
+                    color="palette.text.shade60"
+                    style={{ width: "100%", height: "100%" }}
+                  >
+                    <MainSideBar />
+                    <Page>
+                      <Switch>
+                        <Route path="/" exact render={props => <Dashboard {...props} />} />
+                        <Route path="/settings" render={props => <Settings {...props} />} />
+                        <Route path="/accounts" render={props => <Accounts {...props} />} />
+                        <Route path="/manager" render={props => <Manager {...props} />} />
+                        <Route path="/lend" render={props => <Lend {...props} />} />
+                        <Route path="/exchange" render={props => <Exchange {...props} />} />
+                        <Route
+                          path="/account/:parentId/:id"
+                          render={props => <Account {...props} />}
+                        />
+                        <Route path="/account/:id" render={props => <Account {...props} />} />
+                        <Route
+                          path="/asset/:assetId+"
+                          render={(props: any) => <Asset {...props} />}
+                        />
+                        <Route path="/swap" render={props => <Swap {...props} />} />
+                      </Switch>
+                    </Page>
+                  </Box>
 
-              <LibcoreBusyIndicator />
-              <DeviceBusyIndicator />
-              <KeyboardContent sequence="BJBJBJ">
-                <PerfIndicator />
-              </KeyboardContent>
+                  <LibcoreBusyIndicator />
+                  <DeviceBusyIndicator />
+                  <KeyboardContent sequence="BJBJBJ">
+                    <PerfIndicator />
+                  </KeyboardContent>
+                </Route>
+              </Switch>
             </OnboardingOrElse>
           </ContextMenuWrapper>
         </BridgeSyncProvider>
