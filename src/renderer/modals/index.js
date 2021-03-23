@@ -23,6 +23,7 @@ import MODAL_EXCHANGE_CRYPTO_DEVICE from "./ExchangeDeviceConfirm";
 import MODAL_SELL_CRYPTO_DEVICE from "./SellDeviceConfirm";
 import MODAL_SWAP from "./Swap";
 import MODAL_SWAP_OPERATION_DETAILS from "./SwapOperationDetails";
+import MODAL_WALLETCONNECT_PASTE_LINK from "./WalletConnectPasteLink";
 
 import MODAL_FULL_NODE from "./FullNode";
 
@@ -71,6 +72,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_ADD_ACCOUNTS,
   MODAL_RECEIVE,
   MODAL_TERMS,
+  MODAL_WALLETCONNECT_PASTE_LINK,
   MODAL_SEND,
   MODAL_UPDATE_FIRMWARE,
   MODAL_OPERATION_DETAILS,

@@ -138,18 +138,8 @@ const AccountHeaderActions = ({
 
   const onWalletConnect = useCallback(() => {
     setTrackingSource("account header actions");
-    console.log("start walletconnect");
-    /*
-    history.push({
-      pathname: "/swap",
-      state: {
-        defaultCurrency: currency,
-        defaultAccount: account,
-        defaultParentAccount: parentAccount,
-      },
-    });
-    */
-  }, [currency, history, account, parentAccount]);
+    openModal("MODAL_WALLETCONNECT_PASTE_LINK", { account });
+  }, [openModal, account]);
 
   // List of available exchange actions
   const actions = [

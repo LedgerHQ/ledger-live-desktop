@@ -797,7 +797,15 @@
     }
   },
   "walletconnect": {
-    "titleAccount": "Wallet Connect"
+    "titleAccount": "Wallet Connect",
+    "steps": {
+      "paste": {
+        "title": "Paste link"
+      },
+      "confirm": {
+        "title": "Connect"
+      }
+    }
   },
   "dashboard": {
     "title": "Portfolio",
