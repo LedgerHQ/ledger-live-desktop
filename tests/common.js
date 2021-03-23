@@ -97,7 +97,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
         HIDE_DEBUG_MOCK: true,
         DISABLE_DEV_TOOLS: true,
         SPECTRON_RUN: true,
-        CI: process.env.CI,
+        CI: process.env.CI || "",
       },
       env,
     );
