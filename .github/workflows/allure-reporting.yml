@@ -97,7 +97,7 @@ jobs:
           allure_results: allure-results
           gh_pages: gh-pages
           allure_report: allure-report
-          allure_history: allure-history
+          allure_history: allure-reports
       - name: Deploy test reports
         if: always()
         uses: peaceiris/actions-gh-pages@v3
@@ -105,6 +105,7 @@ jobs:
           deploy_key: ${{ secrets.TEST_REPORTS_DEPLOY_KEY }}
           external_repository: LedgerHQ/live-test-reports
           publish_dir: allure-history
+          destination_dir: allure-reports
 
       - name: Send message to Slack channel
         uses: archive/github-actions-slack@v1.0.3
