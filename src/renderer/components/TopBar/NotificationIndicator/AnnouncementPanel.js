@@ -48,6 +48,15 @@ const levelThemes = {
   },
 };
 
+const getLevelTheme = (levelName: string) => {
+  const levelData = levelThemes[levelName];
+
+  if (levelData) {
+    return levelData;
+  }
+  return levelThemes.info;
+};
+
 const UnReadNotifBadge = styled.div`
   width: 8px;
   height: 8px;
@@ -67,7 +76,7 @@ function DateRow({ date }: DateRowProps) {
   return (
     <DateRowContainer>
       <Text color="palette.text.shade60" ff="Inter|SemiBold" fontSize="11px" lineHeight="18px">
-        {moment(date).format("L")}
+        {moment(date).format("MMMM, Do, YYYY")}
       </Text>
     </DateRowContainer>
   );
@@ -113,6 +122,15 @@ const icons = {
   },
 };
 
+const getIcon = (iconName: string) => {
+  const iconData = icons[iconName];
+
+  if (iconData) {
+    return iconData;
+  }
+  return icons.info;
+};
+
 type ArticleLinkProps = {
   label?: string,
   href: string,
@@ -154,10 +172,10 @@ function Article({
   utmCampaign,
   isRead,
 }: ArticleProps) {
-  const levelTheme = levelThemes[level];
   const [isSeen] = useState(isRead);
 
-  const { Icon, defaultIconColor } = icons[icon];
+  const levelTheme = getLevelTheme(level);
+  const { Icon, defaultIconColor } = getIcon(icon);
 
   return (
     <ArticleRootContainer isRead={isSeen}>
