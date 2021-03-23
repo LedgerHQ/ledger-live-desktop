@@ -1595,10 +1595,10 @@
     node-pre-gyp "^0.17.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^18.8.2":
-  version "18.8.2"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-18.8.2.tgz#c3c0b078ccb870539324d8fd84e3debc94263268"
-  integrity sha512-Z3+w7vS71vqBZ2VpZ9J4/PYuuLYKkj9PcvPta9iGOYRrOCw/21r5kYc9aNBcKHSreNPtAaXKFDfGwZ5XqR5iaw==
+"@ledgerhq/live-common@^19.0.0":
+  version "19.0.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-19.0.0.tgz#c495b9c75c5765af56a751edd1ce9d2b32b8d232"
+  integrity sha512-s9TIbW8XdzwF0o+f8H/ZLROaSNkvelVVu5Ku2rqSGJR3ibgw377/y1tsB/ckCejoVfZPBQoGxw8kCG/G4e72GQ==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/cryptoassets" "5.47.3"
@@ -1652,11 +1652,11 @@
     rxjs "^6.6.6"
     rxjs-compat "^6.6.6"
     secp256k1 "^4.0.2"
-    semver "^7.3.4"
+    semver "^7.3.5"
     sha.js "^2.4.11"
     triple-beam "^1.3.0"
     winston "^3.3.3"
-    xstate "^4.16.2"
+    xstate "^4.17.0"
 
 "@ledgerhq/logs@5.46.0", "@ledgerhq/logs@^5.46.0":
   version "5.46.0"
@@ -12620,6 +12620,13 @@ semver@^7.1.3, semver@^7.2.1, semver@^7.3.2, semver@^7.3.4:
   dependencies:
     lru-cache "^6.0.0"
 
+semver@^7.3.5:
+  version "7.3.5"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.3.5.tgz#0b621c879348d8998e4b0e4be94b3f12e6018ef7"
+  integrity sha512-PoeGJYh8HK4BTO/a9Tf6ZG3veo/A7ZVsYrSA6J8ny9nb3B1VrpkuN+z9OE5wfE5p6H4LchYZsegiQgbJD94ZFQ==
+  dependencies:
+    lru-cache "^6.0.0"
+
 send@0.17.1:
   version "0.17.1"
   resolved "https://registry.yarnpkg.com/send/-/send-0.17.1.tgz#c1d8b059f7900f7466dd4938bdc44e11ddb376c8"
@@ -14894,6 +14901,11 @@ xstate@^4.16.2:
   version "4.16.2"
   resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.16.2.tgz#d6b973b1253b8c85f50f68601837287d59d4bf34"
   integrity sha512-EY39NNZnwM4tRYNmQAi1c2qHuZ1lJmuDpEo1jxiRcfS+1jPtKRAjGRLNx3fYKcK0ohW6mL41Wze3mdCF0SqavA==
+
+xstate@^4.17.0:
+  version "4.17.0"
+  resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.17.0.tgz#4b3ecd86fba081dd57d39a1817a61a0a7a730eea"
+  integrity sha512-4DCayqvvVt06UidsNrCzigzgbmyiTO6kPd32ESOFlZFmM4aPS1CG161fetyGGLXrBZPjTyQyeq63aFtqZ1Y3ng==
 
 xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.1:
   version "4.0.2"
