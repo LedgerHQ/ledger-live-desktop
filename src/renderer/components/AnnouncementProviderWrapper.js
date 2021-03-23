@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { AnnouncementProvider } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
 import type { Announcement } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/types";
 import { getKey, setKey } from "~/renderer/storage";
@@ -45,6 +45,7 @@ async function loadAnnouncements(): Promise<{
 }
 
 export function AnnouncementProviderWrapper({ children }: Props) {
+  const [startDate] = useState(new Date());
   const language = useSelector(languageSelector);
   const currencies = useSelector(currenciesIdSelector);
   const dispatch = useDispatch();
@@ -60,21 +61,23 @@ export function AnnouncementProviderWrapper({ children }: Props) {
   const onNewAnnouncement = useCallback(
     (announcement: Announcement) => {
       // eslint-disable-next-line camelcase
-      const { uuid, content, icon, utm_campaign } = announcement;
+      const { uuid, content, icon, utm_campaign, published_at } = announcement;
 
       track("Announcement Received", {
         uuid,
         utm_campaign,
       });
 
-      pushToast({
-        id: uuid,
-        type: "announcement",
-        title: content.title,
-        text: content.text,
-        icon,
-        callback: () => dispatch(openInformationCenter("announcement")),
-      });
+      if (new Date(published_at) > startDate) {
+        pushToast({
+          id: uuid,
+          type: "announcement",
+          title: content.title,
+          text: content.text,
+          icon,
+          callback: () => dispatch(openInformationCenter("announcement")),
+        });
+      }
     },
     [pushToast, dispatch],
   );
