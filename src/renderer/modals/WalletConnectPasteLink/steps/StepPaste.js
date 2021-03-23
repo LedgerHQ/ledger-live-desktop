@@ -10,6 +10,7 @@ import { radii } from "~/renderer/styles/theme";
 import Label from "~/renderer/components/Label";
 import IconPaste from "~/renderer/icons/Paste";
 import Input from "~/renderer/components/Input";
+import { connect } from "~/renderer/screens/WalletConnect/Provider";
 
 const Right = styled(Box).attrs(() => ({
   bg: "palette.background.default",
@@ -51,12 +52,14 @@ export default function StepPaste({ account, link, setLink }: StepProps) {
   );
 }
 
-export function StepPasteFooter({ link, transitionTo }: StepProps) {
+export function StepPasteFooter({ link, setLink, transitionTo }: StepProps) {
   return (
     <Box horizontal justifyContent="flex-end">
       <Button
         onClick={() => {
+          connect(link);
           transitionTo("confirm");
+          setLink("");
         }}
         primary
         disabled={!link}

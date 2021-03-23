@@ -5,8 +5,9 @@ import Track from "~/renderer/analytics/Track";
 import { Trans, useTranslation } from "react-i18next";
 import StepPaste, { StepPasteFooter } from "./steps/StepPaste";
 import StepConfirm, { StepConfirmFooter } from "./steps/StepConfirm";
-import type { StepProps, St } from "./types";
+import type { St } from "./types";
 import Stepper from "~/renderer/components/Stepper";
+import { disconnect } from "~/renderer/screens/WalletConnect/Provider";
 
 type OwnProps = {|
   onClose: () => void,
@@ -29,7 +30,10 @@ const steps: Array<St> = [
     label: <Trans i18nKey="walletconnect.steps.confirm.title" />,
     component: StepConfirm,
     footer: StepConfirmFooter,
-    onBack: ({ transitionTo }: StepProps) => transitionTo("paste"),
+    onBack: ({ transitionTo }: StepProps) => {
+      disconnect();
+      transitionTo("paste");
+    },
   },
 ];
 
@@ -43,7 +47,11 @@ const Body = ({ onClose, data }: Props) => {
   const stepperProps = {
     title: t("walletconnect.titleAccount"),
     account: data.account,
-    onClose,
+    onClose: () => {
+      disconnect();
+      onClose();
+    },
+    onCloseWithoutDisconnect: onClose,
     onStepChange: handleStepChange,
     stepId,
     steps,
