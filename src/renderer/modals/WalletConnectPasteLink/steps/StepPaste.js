@@ -1,11 +1,54 @@
 // @flow
 import React from "react";
+import { clipboard } from "electron";
+import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import type { StepProps } from "../types";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
+import { radii } from "~/renderer/styles/theme";
+import Label from "~/renderer/components/Label";
+import IconPaste from "~/renderer/icons/Paste";
+import Input from "~/renderer/components/Input";
+
+const Right = styled(Box).attrs(() => ({
+  bg: "palette.background.default",
+  px: 3,
+  alignItems: "center",
+  justifyContent: "center",
+}))`
+  border-top-right-radius: ${radii[1]}px;
+  border-bottom-right-radius: ${radii[1]}px;
+  border-left: 1px solid ${p => p.theme.colors.palette.divider};
+  cursor: pointer;
+`;
 
 export default function StepPaste({ account, link, setLink }: StepProps) {
-  return <Box flow={1}>Paste</Box>;
+  const { t } = useTranslation();
+
+  return (
+    <Box flow={1}>
+      <Label>
+        <span>{t("walletconnect.steps.paste.label")}</span>
+      </Label>
+      {/* $FlowFixMe */}
+      <Input
+        placeholder={t("walletconnect.steps.paste.placeholder")}
+        spellCheck="false"
+        value={link}
+        onChange={setLink}
+        renderRight={
+          <Right
+            onClick={() => {
+              setLink(clipboard.readText());
+            }}
+          >
+            <IconPaste size={16} />
+          </Right>
+        }
+      />
+    </Box>
+  );
 }
 
 export function StepPasteFooter({ link, transitionTo }: StepProps) {
@@ -16,7 +59,7 @@ export function StepPasteFooter({ link, transitionTo }: StepProps) {
           transitionTo("confirm");
         }}
         primary
-        disabled={!!link}
+        disabled={!link}
       >
         Continue
       </Button>

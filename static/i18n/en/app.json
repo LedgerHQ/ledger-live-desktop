@@ -800,7 +800,9 @@
     "titleAccount": "Wallet Connect",
     "steps": {
       "paste": {
-        "title": "Paste link"
+        "title": "Paste link",
+        "label": "Wallet Connect address",
+        "placeholder": "Paste Wallet Connect Link"
       },
       "confirm": {
         "title": "Connect"
