@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { log } from "@ledgerhq/logs";
+import { UserRefusedFirmwareUpdate } from "@ledgerhq/errors";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Track from "~/renderer/analytics/Track";
 import Box from "~/renderer/components/Box";
@@ -34,7 +35,14 @@ const StepConfirmation = ({ error, appsToBeReinstalled }: StepProps) => {
   useEffect(() => () => log("firmware-record-end"), []);
 
   if (error) {
-    return <ErrorDisplay error={error} withExportLogs />;
+    const isUserRefusedFirmwareUpdate = error instanceof UserRefusedFirmwareUpdate;
+    return (
+      <ErrorDisplay
+        error={error}
+        warning={isUserRefusedFirmwareUpdate}
+        withExportLogs={!isUserRefusedFirmwareUpdate}
+      />
+    );
   }
 
   return (
@@ -56,13 +64,30 @@ const StepConfirmation = ({ error, appsToBeReinstalled }: StepProps) => {
   );
 };
 
-export const StepConfirmFooter = ({ onCloseModal, error, appsToBeReinstalled }: StepProps) => {
+export const StepConfirmFooter = ({
+  onCloseModal,
+  error,
+  appsToBeReinstalled,
+  onRetry,
+}: StepProps) => {
   const { t } = useTranslation();
   if (error) {
+    const isUserRefusedFirmwareUpdate = error instanceof UserRefusedFirmwareUpdate;
     return (
-      <Button id="firmware-update-completed-close-button" primary onClick={() => onCloseModal()}>
-        {t("common.close")}
-      </Button>
+      <>
+        <Button
+          id="firmware-update-completed-close-button"
+          primary={!isUserRefusedFirmwareUpdate}
+          onClick={() => onCloseModal()}
+        >
+          {t("common.close")}
+        </Button>
+        {isUserRefusedFirmwareUpdate ? (
+          <Button id="firmware-update-completed-restart-button" primary onClick={() => onRetry()}>
+            {t("manager.modal.cancelReinstallCTA")}
+          </Button>
+        ) : null}
+      </>
     );
   }
 

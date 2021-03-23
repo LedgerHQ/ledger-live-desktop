@@ -31,6 +31,7 @@ export type StepProps = {
   deviceInfo: DeviceInfo,
   t: TFunction,
   transitionTo: string => void,
+  onRetry: () => void,
 };
 
 export type StepId = "idCheck" | "updateMCU" | "updating" | "finish" | "resetDevice";
@@ -174,6 +175,7 @@ const UpdateModal = ({
     firmware,
     error: err,
     deviceModelId,
+    onRetry: handleReset,
   };
 
   return (
