@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo } from "react";
 import { AnnouncementProvider } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
 import type { Announcement } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/types";
 import { getKey, setKey } from "~/renderer/storage";
@@ -45,7 +45,7 @@ async function loadAnnouncements(): Promise<{
 }
 
 export function AnnouncementProviderWrapper({ children }: Props) {
-  const [startDate] = useState(new Date());
+  const startDate = useMemo(() => new Date(), []);
   const language = useSelector(languageSelector);
   const currencies = useSelector(currenciesIdSelector);
   const dispatch = useDispatch();

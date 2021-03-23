@@ -236,7 +236,7 @@ export function AnnouncementPanel() {
         timeouts[uuid] = setTimeout(() => {
           setAsSeen(uuid);
           delete timeouts[uuid];
-        }, 2000);
+        }, 1000);
       }
 
       if (!visible && timeouts[uuid]) {

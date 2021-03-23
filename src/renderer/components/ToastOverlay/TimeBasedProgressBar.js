@@ -42,11 +42,11 @@ export function TimeBasedProgressBar({ duration, onComplete, nonce = 1 }: Props)
         <animated.div
           key={key}
           style={{
+            ...props,
             height: 5,
             width: "100%",
             transformOrigin: "left center",
             background: "#6490F1", // "#00000022",
-            ...props,
           }}
         />
       ))}
