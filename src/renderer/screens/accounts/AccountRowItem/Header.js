@@ -9,6 +9,7 @@ import Box from "~/renderer/components/Box";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import Tooltip from "~/renderer/components/Tooltip";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
+import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
 
 type Props = {
   account: AccountLike,
@@ -45,8 +46,14 @@ const Header = ({ account, nested }: Props) => {
       </Box>
       <Box style={{ flexShrink: 1 }}>
         {!nested && account.type === "Account" && (
-          <Box style={{ textTransform: "uppercase" }} fontSize={9} color="palette.text.shade60">
-            {title}
+          <Box
+            style={{ textTransform: "uppercase" }}
+            horizontal
+            fontSize={9}
+            color="palette.text.shade60"
+            alignItems="center"
+          >
+            {title} <AccountTagDerivationMode account={account} />
           </Box>
         )}
         <Tooltip delay={1200} content={name}>

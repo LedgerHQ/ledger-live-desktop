@@ -28,6 +28,7 @@ class AccountsList extends Component<
     hideAmount?: boolean,
     supportLink?: { id: *, url: string },
     t: TFunction,
+    ToggleAllComponent?: React$Node,
   },
   {
     collapsed: boolean,
@@ -72,6 +73,7 @@ class AccountsList extends Component<
       hideAmount,
       supportLink,
       t,
+      ToggleAllComponent,
     } = this.props;
     const { collapsed } = this.state;
     const withToggleAll = !!onSelectAll && !!onUnselectAll && accounts.length > 1;
@@ -102,19 +104,20 @@ class AccountsList extends Component<
                 label={t("addAccounts.supportLinks." + supportLink.id)}
               />
             ) : null}
-            {withToggleAll && (
-              <FakeLink
-                ml="auto"
-                ff="Inter|Regular"
-                onClick={isAllSelected ? this.onUnselectAll : this.onSelectAll}
-                fontSize={3}
-                style={{ lineHeight: "10px" }}
-              >
-                {isAllSelected
-                  ? t("addAccounts.unselectAll", { count: accounts.length })
-                  : t("addAccounts.selectAll", { count: accounts.length })}
-              </FakeLink>
-            )}
+            {ToggleAllComponent ||
+              (withToggleAll && (
+                <FakeLink
+                  ml="auto"
+                  ff="Inter|Regular"
+                  onClick={isAllSelected ? this.onUnselectAll : this.onSelectAll}
+                  fontSize={3}
+                  style={{ lineHeight: "10px" }}
+                >
+                  {isAllSelected
+                    ? t("addAccounts.unselectAll", { count: accounts.length })
+                    : t("addAccounts.selectAll", { count: accounts.length })}
+                </FakeLink>
+              ))}
           </Box>
         )}
         {collapsed ? null : accounts.length ? (

@@ -2745,8 +2745,8 @@
   "Terms": {
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
-    "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
-    "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
+    "switchLabelTerms": "<0>Confirmo que he leído y acepto las</0> <1>Condiciones de Uso</1>",
+    "switchLabelPrivacyPolicy": "<0>Confirmo que he leído y acepto la</0> <1> Política de Privacidad</1>",
     "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
     "cta": "Enter Ledger app"
   },
