@@ -26,6 +26,7 @@ import InfoBox from "~/renderer/components/InfoBox";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { StepProps } from "../types";
+import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
 
 const FromToWrapper: ThemedComponent<{}> = styled.div``;
 const Circle: ThemedComponent<{}> = styled.div`
@@ -98,7 +99,7 @@ export default class StepSummary extends PureComponent<StepProps> {
               <Circle>
                 <IconWallet size={14} />
               </Circle>
-              <div>
+              <Box flex="1">
                 <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={4}>
                   <Trans i18nKey="send.steps.details.from" />
                 </Text>
@@ -106,11 +107,12 @@ export default class StepSummary extends PureComponent<StepProps> {
                   <div style={{ marginRight: 7 }}>
                     <CryptoCurrencyIcon size={16} currency={currency} />
                   </div>
-                  <Text ff="Inter" color="palette.text.shade100" fontSize={4}>
+                  <Text ff="Inter" color="palette.text.shade100" fontSize={4} style={{ flex: 1 }}>
                     {getAccountName(account)}
                   </Text>
+                  <AccountTagDerivationMode account={account} />
                 </Box>
-              </div>
+              </Box>
             </Box>
             <VerticalSeparator />
             <Box horizontal alignItems="center">

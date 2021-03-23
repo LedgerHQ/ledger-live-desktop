@@ -55,6 +55,8 @@ const DrawerTopContainer = styled.div`
   position: absolute;
   top: 43px;
   right: 43px;
+  display: flex;
+  z-index: 1;
 `;
 
 const DrawerContent = styled.div`
