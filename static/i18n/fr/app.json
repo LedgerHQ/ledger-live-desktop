@@ -96,7 +96,7 @@
       "UNBOND": "Unbond",
       "REWARD_PAYOUT": "Récompense",
       "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Retrait Unbonded",
+      "WITHDRAW_UNBONDED": "Retrait",
       "NOMINATE": "Nomination",
       "CHILL": "Enlever les nominations"
     }
@@ -769,11 +769,11 @@
     },
     "polkaStake": {
       "title": "POLKADOT staking",
-      "description": "You can now stake, secure and manage your DOT directly in Ledger Live"
+      "description": "Vous pouvez maintenant staker, sécuriser et gérer vos DOT directement dans Ledger Live"
     },
     "gateway": {
       "title": "THE GATEWAY TO CRYPTO SERVICES",
-      "description": "Secure, buy, sell, grow and exchange crypto directly on Ledger Live from our partners"
+      "description": "Sécuriser, acheter, vendre, grandir et échanger des cryptos sur Ledger Live via nos partenaires"
     },
     "sell": {
       "title": "vendre des crypto-monnaies",
@@ -984,7 +984,7 @@
       "rewards": "Récompenses réclamées",
       "bondedAmount": "Montant Bonded",
       "unbondedAmount": "Montant Unbonded",
-      "withdrawUnbondedAmount": "Retirer le montant unbonded",
+      "withdrawUnbondedAmount": "Montant du retrait",
       "palletMethod": "Méthode",
       "transferAmount": "Montant du transfert",
       "validatorsCount": "Validateurs ({{number}})"
@@ -1790,7 +1790,7 @@
         "description": "Pour rendre à nouveau disponible un montant obligataire, vous devez d'abord le déconnecter. Vous pouvez le retirer après la période d'annulation de 28 jours."
       },
       "withdrawUnbonded": {
-        "title": "Retirer le montant unbonded",
+        "title": "Retrait",
         "description": "Pour récupérer un montant non lié au solde disponible, vous devez le retirer manuellement."
       },
       "nominate": {
@@ -1942,7 +1942,7 @@
     "simpleOperation": {
       "modes": {
         "withdrawUnbonded": {
-          "title": "Retirer le montant unbonded",
+          "title": "Retrait",
           "description": "Après la période d'unbonding de 28 jours, vous pouvez retirer les actifs unbonded.",
           "info": "Vous pouvez ensuite retirer des actifs unbonded vers votre solde disponible."
         },

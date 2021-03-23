@@ -68,6 +68,7 @@ import {
   HashContainer,
 } from "./styledComponents";
 import ToolTip from "~/renderer/components/Tooltip";
+import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
 
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const marketIndicator = marketIndicatorSelector(state);
@@ -376,16 +377,27 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
             <Box flex={1}>
               <OpDetailsTitle>{t("operationDetails.account")}</OpDetailsTitle>
               <OpDetailsData horizontal>
-                <TextEllipsis style={parentAccount ? { maxWidth: "50%", flexShrink: 0 } : {}}>
-                  <Link onClick={goToMainAccount}>{name}</Link>
-                </TextEllipsis>
+                <Box
+                  horizontal
+                  alignItems="center"
+                  flex="1"
+                  style={parentAccount ? { maxWidth: "50%", flexShrink: 0 } : {}}
+                >
+                  <TextEllipsis>
+                    <Link onClick={goToMainAccount}>{name}</Link>
+                  </TextEllipsis>
+                  <AccountTagDerivationMode account={account} />
+                </Box>
 
                 {parentAccount ? (
                   <>
                     <Separator>{"/"}</Separator>
-                    <TextEllipsis>
-                      <Link onClick={goToSubAccount}>{currency.name}</Link>
-                    </TextEllipsis>
+                    <Box horizontal alignItems="center" flex="1">
+                      <TextEllipsis>
+                        <Link onClick={goToSubAccount}>{currency.name}</Link>
+                      </TextEllipsis>
+                      <AccountTagDerivationMode account={parentAccount} />
+                    </Box>
                   </>
                 ) : null}
               </OpDetailsData>

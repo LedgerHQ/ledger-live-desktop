@@ -30,6 +30,7 @@ import IconPen from "~/renderer/icons/Pen";
 import IconCross from "~/renderer/icons/Cross";
 import IconCheck from "~/renderer/icons/Check";
 import { updateAccount } from "~/renderer/actions/accounts";
+import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
 
 const CurName = styled(Text).attrs(() => ({
   ff: "Inter|SemiBold",
@@ -37,6 +38,8 @@ const CurName = styled(Text).attrs(() => ({
 }))`
   text-transform: uppercase;
   letter-spacing: 1px;
+  display: flex;
+  align-items: center;
 `;
 
 const CurNameToken = styled(Text).attrs(() => ({
@@ -218,7 +221,9 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
             </Wrapper>
           </Box>
         ) : (
-          <CurName>{currency.name}</CurName>
+          <CurName>
+            {currency.name} <AccountTagDerivationMode account={account} />
+          </CurName>
         )}
         <AccountNameBox horizontal alignItems="center" pr={8} flow={2}>
           <AccountName

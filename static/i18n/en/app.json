@@ -919,7 +919,12 @@
     "successDescription_plural": "Add other accounts or return to Portfolio",
     "createNewAccount": {
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
-      "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created"
+      "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
+      "showAllAddressTypes": "Show all address types",
+      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
+    },
+    "supportLinks": {
+      "segwit_or_native_segwit": "Segwit or Native Segwit?"
     },
     "cta": {
       "addMore": "Add more",
@@ -2898,16 +2903,16 @@
       "description": "An unexpected error occurred. Please try again. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "Oops, connection failed",
-      "description": "Please try again"
+      "title": "The connection failed",
+      "description": "Please try again."
     },
     "DisconnectedDevice": {
-      "title": "Oops, device connection lost",
-      "description": "Please try again"
+      "title": "Sorry, it looks like your device disconnected",
+      "description": "Please reconnect and try again."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Oops, device disconnected",
-      "description": "The connection to the device was lost during an operation. Please try again"
+      "title": "Sorry, it looks like your device disconnected",
+      "description": "Please reconnect and try again."
     },
     "EnpointConfig": {
       "title": "Invalid endpoint",
@@ -2926,12 +2931,12 @@
       "description": "Please contact Ledger Support"
     },
     "HardResetFail": {
-      "title": "Oops, could not reset",
-      "description": "Please try again or contact Ledger Support if in doubt"
+      "title": "Sorry, could not reset",
+      "description": "Please try again or contact Ledger Support if the problem persists."
     },
     "LatestMCUInstalledError": {
-      "title": "Oops, nothing to update",
-      "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
+      "title": "Sorry, there's nothing to update",
+      "description": "Please contact Ledger Support if you cannot use your device."
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
@@ -2946,8 +2951,8 @@
       "description": "Please retry or contact Ledger Support"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Oops, that's already installed",
-      "description": "Check your device to see which apps are already installed"
+      "title": "Sorry, that's already installed",
+      "description": "Please check which apps are already installed on your device."
     },
     "ManagerAppDepInstallRequired": {
       "title": "{{dependency}} app required",
@@ -2992,16 +2997,16 @@
       "description": "Uninstall the Bitcoin or Ethereum app last"
     },
     "NetworkDown": {
-      "title": "Oops, internet seems down",
-      "description": "Please check your internet connection"
+      "title": "Sorry, internet seems to be down",
+      "description": "Please check your internet connection."
     },
     "NoAddressesFound": {
       "title": "Sorry, no accounts were found",
       "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
     },
     "NotEnoughBalance": {
-      "title": "Oops, insufficient balance",
-      "description": "Make sure the account used has enough funds"
+      "title": "Sorry, insufficient funds",
+      "description": "Please make sure the account has enough funds."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
@@ -3054,12 +3059,12 @@
       "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
     },
     "TimeoutError": {
-      "title": "Oops, a timeout occurred",
-      "description": "It took too long for the server to respond. Please try again"
+      "title": "Sorry, server took too long to respond",
+      "description": "Please try again."
     },
     "TimeoutTagged": {
-      "title": "Oops, a timeout occurred ({{tag}})",
-      "description": "It took too long for the server to respond"
+      "title": "Sorry, server took too long to respond ({{tag}})",
+      "description": "Timeout occurred."
     },
     "TransportError": {
       "title": "Something went wrong. Please reconnect your device",
@@ -3078,8 +3083,8 @@
       "description": "Keep the {{appName}} app open while we find your accounts"
     },
     "UnexpectedBootloader": {
-      "title": "Oops, your device should not be in Bootloader mode",
-      "description": "Please restart your device or contact Ledger Support"
+      "title": "Sorry, your device must not be in Bootloader mode",
+      "description": "Please restart your device without touching the buttons when the logo appears. Contact Ledger Support if the problem persists."
     },
     "UserRefusedAllowManager": {
       "title": "Manager denied on device"
@@ -3131,7 +3136,7 @@
       "title": "Recipient address is the same as the sender address"
     },
     "CantOpenDevice": {
-      "title": "Oops, couldn't connect to device",
+      "title": "Sorry, connection failed",
       "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
     },
     "ETHAddressNonEIP": {
@@ -3311,8 +3316,11 @@
     "PolkadotNoNominations": {
       "title": "You have no nominations"
     },
-    "PolkadotBondAllFundsWarning": {
-      "title": "You will not have available balance for future transactions"
+    "PolkadotAllFundsWarning": {
+      "title": "Ensure you have enough balance left for future transaction fees"
+    },
+    "PolkadotDoMaxSendInstead": {
+      "title": "Balance cannot be below 1 DOT. Send max to empty accountd"
     },
     "PolkadotBondMinimumAmount": {
       "title": "You must bond at least 1 DOT"
