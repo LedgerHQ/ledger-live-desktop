@@ -15,7 +15,7 @@ import IconAccountSettings from "~/renderer/icons/AccountSettings";
 import ContextMenuItem from "./ContextMenuItem";
 import { toggleStarAction } from "~/renderer/actions/accounts";
 import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
-import { swapSupportedCurrenciesSelector } from "~/renderer/reducers/settings";
+import { flattenedSwapSupportedCurrenciesSelector } from "~/renderer/reducers/settings";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
@@ -37,7 +37,7 @@ export default function AccountContextMenu({
   const history = useHistory();
   const dispatch = useDispatch();
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
-  const swapSupportedCurrencies = useSelector(swapSupportedCurrenciesSelector);
+  const swapSupportedCurrencies = useSelector(flattenedSwapSupportedCurrenciesSelector);
 
   const menuItems = useMemo(() => {
     const currency = getAccountCurrency(account);
