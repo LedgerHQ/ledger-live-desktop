@@ -66,7 +66,7 @@ const CryptoCurrencyIcon = ({ currency, circle, size, overrideColor, inactive, t
       <TokenIconWrapper>
         <TokenIcon circle={circle} color={color} size={size}>
           {TokenIconCurrency ? (
-            <TokenIconCurrency size={size * 0.55} color={color} />
+            <TokenIconCurrency size={size * 0.8} color={color} />
           ) : (
             currency.ticker[0]
           )}
@@ -78,7 +78,7 @@ const CryptoCurrencyIcon = ({ currency, circle, size, overrideColor, inactive, t
   return IconCurrency ? (
     circle ? (
       <CircleWrapper size={size} color={color}>
-        <IconCurrency size={size * 0.55} color={theme.colors.palette.background.paper} />
+        <IconCurrency size={size * 0.8} color={theme.colors.palette.background.paper} />
       </CircleWrapper>
     ) : (
       <IconCurrency size={size} color={color} />
