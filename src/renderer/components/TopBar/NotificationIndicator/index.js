@@ -5,6 +5,7 @@ import React from "react";
 import ItemContainer from "../ItemContainer";
 import IconBell from "~/renderer/icons/Bell";
 import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
+import { useServiceStatus } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
 import { useTranslation } from "react-i18next";
 import { InformationDrawer } from "./InformationDrawer";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,8 +15,9 @@ import { openInformationCenter, closeInformationCenter } from "~/renderer/action
 export function NotificationIndicator() {
   const { t } = useTranslation();
   const { allIds, seenIds } = useAnnouncements();
+  const { incidents } = useServiceStatus();
 
-  const totalNotifCount = allIds.length - seenIds.length;
+  const totalNotifCount = allIds.length - seenIds.length + incidents.length;
   const { isOpen } = useSelector(informationCenterStateSelector);
   const dispatch = useDispatch();
 
