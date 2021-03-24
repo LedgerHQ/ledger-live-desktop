@@ -24,12 +24,21 @@ const DateRowContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.palette.background.default};
   border-radius: 4px;
   margin: 25px 0px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
 `;
 
 const levelThemes = {
   info: {
     title: "palette.text.shade100",
     text: "palette.text.shade50",
+    background: undefined,
+    icon: undefined,
+    link: undefined,
+    padding: undefined,
   },
   warning: {
     title: "white",
@@ -45,6 +54,7 @@ const levelThemes = {
     background: "red",
     icon: "white",
     link: "white",
+    padding: undefined,
   },
 };
 
@@ -87,6 +97,7 @@ function DateRow({ date }: DateRowProps) {
 const ArticleRootContainer = styled.div`
   padding-left: ${p => (p.isRead ? 0 : 16)}px;
   position: relative;
+  margin-bottom: ${p => (p.isLastElement ? 32 : 0)}px;
 `;
 
 const ArticleContainer = styled(Box)`
@@ -111,6 +122,7 @@ type ArticleProps = {
   },
   utmCampaign?: string,
   isRead?: boolean,
+  isLastElement?: boolean,
 };
 
 const icons = {
@@ -137,7 +149,7 @@ type ArticleLinkProps = {
   label?: string,
   href: string,
   utmCampaign?: string,
-  color: string,
+  color?: string,
 };
 
 function ArticleLink({ label, href, utmCampaign, color }: ArticleLinkProps) {
@@ -173,6 +185,7 @@ function Article({
   link,
   utmCampaign,
   isRead,
+  isLastElement,
 }: ArticleProps) {
   const [isSeen] = useState(isRead);
 
@@ -180,7 +193,7 @@ function Article({
   const { Icon, defaultIconColor } = getIcon(icon);
 
   return (
-    <ArticleRootContainer isRead={isSeen}>
+    <ArticleRootContainer isRead={isSeen} isLastElement={isLastElement}>
       <ArticleContainer
         bg={levelTheme.background}
         py={levelTheme.padding}
@@ -299,23 +312,26 @@ export function AnnouncementPanel() {
         {groupedAnnouncements.map((group, index) => (
           <React.Fragment key={index}>
             {group.day ? <DateRow date={group.day} /> : null}
-            {group.data.map(({ level, icon, content, uuid, utm_campaign: utmCampaign }, index) => (
-              <React.Fragment key={uuid}>
-                <InView as="div" onChange={visible => handleInView(visible, uuid)}>
-                  <Article
-                    level={level}
-                    icon={icon}
-                    title={content.title}
-                    text={content.text}
-                    link={content.link}
-                    uuid={uuid}
-                    utmCampaign={utmCampaign}
-                    isRead={seenIds.includes(uuid)}
-                  />
-                </InView>
-                {index < group.data.length - 1 ? <Separator /> : null}
-              </React.Fragment>
-            ))}
+            {group.data.map(
+              ({ level, icon, content, uuid, utm_campaign: utmCampaign }, index, arr) => (
+                <React.Fragment key={uuid}>
+                  <InView as="div" className onChange={visible => handleInView(visible, uuid)}>
+                    <Article
+                      level={level}
+                      icon={icon}
+                      title={content.title}
+                      text={content.text}
+                      link={content.link}
+                      uuid={uuid}
+                      utmCampaign={utmCampaign}
+                      isRead={seenIds.includes(uuid)}
+                      isLastElement={index >= arr.length - 1}
+                    />
+                  </InView>
+                  {index < group.data.length - 1 ? <Separator /> : null}
+                </React.Fragment>
+              ),
+            )}
           </React.Fragment>
         ))}
       </Box>
