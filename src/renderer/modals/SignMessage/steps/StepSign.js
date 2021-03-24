@@ -1,11 +1,14 @@
 // @flow
 import React from "react";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 import type { StepProps } from "../types";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import { createAction } from "@ledgerhq/live-common/lib/hw/signMessage";
-import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
+import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
+import { command } from "~/renderer/commands";
 
-const action = createAction(connectApp);
+const connectAppExec = command("connectApp");
+const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectAppExec);
 
 export default function StepSign({
   account,
