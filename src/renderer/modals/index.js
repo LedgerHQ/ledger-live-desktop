@@ -11,6 +11,7 @@ import MODAL_ADD_ACCOUNTS from "./AddAccounts";
 import MODAL_RECEIVE from "./Receive";
 import MODAL_TERMS from "./Terms";
 import MODAL_SEND from "./Send";
+import MODAL_SIGN_MESSAGE from "./SignMessage";
 import MODAL_UPDATE_FIRMWARE from "./UpdateFirmwareModal";
 import MODAL_OPERATION_DETAILS from "./OperationDetails";
 import MODAL_MIGRATE_ACCOUNTS from "./MigrateAccounts";
@@ -74,6 +75,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_TERMS,
   MODAL_WALLETCONNECT_PASTE_LINK,
   MODAL_SEND,
+  MODAL_SIGN_MESSAGE,
   MODAL_UPDATE_FIRMWARE,
   MODAL_OPERATION_DETAILS,
   MODAL_DELEGATE,

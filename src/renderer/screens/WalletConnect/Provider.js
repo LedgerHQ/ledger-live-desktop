@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import ProviderCommon, { setCurrentCallRequestError } from "@ledgerhq/live-common/lib/walletconnect/Provider";
+import ProviderCommon, {
+  setCurrentCallRequestError,
+} from "@ledgerhq/live-common/lib/walletconnect/Provider";
 import { useHistory } from "react-router-dom";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import { openModal, closeAllModal } from "~/renderer/actions/modals";
@@ -40,17 +42,25 @@ const Provider = ({ children }: { children: React$Node }) => {
         }
 
         if (wcCallRequest.type === "message") {
-          console.log("wc message");
-          /*
-          return () =>
-            navigate(NavigatorName.SignMessage, {
-              screen: ScreenName.SignSummary,
-              params: {
+          console.log("wc sign message", wcCallRequest.data);
+          return () => {
+            console.log("open modal");
+            dispatch(
+              openModal("MODAL_SIGN_MESSAGE", {
                 message: wcCallRequest.data,
-                accountId: account.id,
-              },
-            });
-          */
+                account,
+                onConfirmationHandler: operation => {
+                  console.log("successs");
+                },
+                onFailHandler: err => {
+                  setCurrentCallRequestError(err);
+                },
+                onClose: () => {
+                  setCurrentCallRequestError({ message: "cancelled" });
+                },
+              }),
+            );
+          };
         }
 
         return false;
@@ -63,7 +73,7 @@ const Provider = ({ children }: { children: React$Node }) => {
       }}
       onRemoteDisconnected={() => {
         console.log("wc session restarted should navigate bakc to account");
-        dispatch(closeAllModal);
+        dispatch(closeAllModal());
         history.goBack();
       }}
       useAccount={useAccount}

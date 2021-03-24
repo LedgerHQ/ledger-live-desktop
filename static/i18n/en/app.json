@@ -796,6 +796,17 @@
       "description": "Enjoy 40% off Ledger hardware wallets with the promo code BLACKFRIDAY20"
     }
   },
+  "signmessage": {
+    "title": "Sign message",
+    "steps": {
+      "summary": {
+        "title": "Summary"
+      },
+      "sign": {
+        "title": "Device"
+      }
+    }
+  },
   "walletconnect": {
     "titleAccount": "Wallet Connect",
     "steps": {

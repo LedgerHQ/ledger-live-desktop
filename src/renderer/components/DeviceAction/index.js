@@ -103,6 +103,8 @@ const DeviceAction = <R, H, P>({
     initSellError,
   } = hookState;
 
+  console.log(hookState);
+
   const type = useTheme("colors.palette.type");
 
   const modelId = device ? device.modelId : overridesPreferredDeviceModel || preferredDeviceModel;
