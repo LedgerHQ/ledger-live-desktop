@@ -2289,11 +2289,13 @@
     }
   },
   "informationCenter": {
-    "tooltip": "Information center",
+    "tooltip": "Open the information center",
+    "ongoingIncidentsTooltip": "There are {{incidentCount}} ongoing incidents",
     "tabs": {
       "announcements": "News",
       "announcementsUnseen": "News ({{unseenCount}})",
-      "serviceStatus": "Status"
+      "serviceStatus": "Status",
+      "serviceStatusIncidentsOngoing": "Status ({{incidentCount}})"
     },
     "serviceStatus": {
       "statusOk": {

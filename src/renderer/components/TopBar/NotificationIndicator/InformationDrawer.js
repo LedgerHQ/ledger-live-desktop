@@ -14,6 +14,7 @@ import { CSSTransition } from "react-transition-group";
 import { useSelector, useDispatch } from "react-redux";
 import { informationCenterStateSelector } from "~/renderer/reducers/UI";
 import { setTabInformationCenter } from "~/renderer/actions/UI";
+import { useServiceStatus } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider/index";
 
 const FADE_DURATION = 200;
 
@@ -42,7 +43,9 @@ export const InformationDrawer = ({
 }) => {
   const { t } = useTranslation();
   const { allIds, seenIds } = useAnnouncements();
+  const { incidents } = useServiceStatus();
   const unseenCount = allIds.length - seenIds.length;
+  const incidentCount = incidents.length;
   const { tabId } = useSelector(informationCenterStateSelector);
   const dispatch = useDispatch();
 
@@ -60,11 +63,16 @@ export const InformationDrawer = ({
       },
       {
         id: "status",
-        label: t("informationCenter.tabs.serviceStatus"),
+        label: t(
+          incidentCount > 0
+            ? "informationCenter.tabs.serviceStatusIncidentsOngoing"
+            : "informationCenter.tabs.serviceStatus",
+          { incidentCount },
+        ),
         Component: ServiceStatusPanel,
       },
     ],
-    [unseenCount, t],
+    [unseenCount, t, incidentCount],
   );
 
   const tabIndex = useMemo(() => tabs.findIndex(tab => tab.id === tabId), [tabId, tabs]);

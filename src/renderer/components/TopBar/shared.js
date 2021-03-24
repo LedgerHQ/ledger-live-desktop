@@ -7,7 +7,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import { Tabbable } from "~/renderer/components/Box";
 
-const ItemContainer: ThemedComponent<{
+export const ItemContainer: ThemedComponent<{
   "data-e2e"?: string,
   isInteractive?: boolean,
   onClick?: () => void,
@@ -37,4 +37,10 @@ const ItemContainer: ThemedComponent<{
   }
 `;
 
-export default ItemContainer;
+export const Bar = styled.div`
+  margin-left: 5px;
+  margin-right: 5px;
+  height: 15px;
+  width: 1px;
+  background: ${p => p.theme.colors.palette.divider};
+`;

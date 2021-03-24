@@ -79,7 +79,7 @@ export function AnnouncementProviderWrapper({ children }: Props) {
         });
       }
     },
-    [pushToast, dispatch],
+    [pushToast, dispatch, startDate],
   );
 
   const onAnnouncementRead = useCallback(
