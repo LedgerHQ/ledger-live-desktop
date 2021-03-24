@@ -86,6 +86,7 @@ export class StepAmountFooter extends PureComponent<StepProps> {
     const mainAccount = getMainAccount(account, parentAccount);
     const isTerminated = mainAccount.currency.terminated;
     const hasErrors = Object.keys(errors).length;
+    console.log("can next", bridgePending, hasErrors, isTerminated, errors);
     const canNext = !bridgePending && !hasErrors && !isTerminated;
     const { gasPrice } = errors;
     return (

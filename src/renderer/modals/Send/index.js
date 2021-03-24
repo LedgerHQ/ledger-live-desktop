@@ -5,10 +5,14 @@ import Modal from "~/renderer/components/Modal";
 import Body from "./Body";
 import type { StepId } from "./types";
 
-class SendModal extends PureComponent<{}, { stepId: StepId }> {
-  state = {
-    stepId: "recipient",
-  };
+class SendModal extends PureComponent<{ stepId: StepId, onClose: Function }, { stepId: StepId }> {
+  constructor(props: { stepId: StepId, onClose: Function }) {
+    super(props);
+    console.log("send fund props", props);
+    this.state = {
+      stepId: props.stepId || "recipient",
+    };
+  }
 
   handleReset = () =>
     this.setState({
@@ -20,6 +24,8 @@ class SendModal extends PureComponent<{}, { stepId: StepId }> {
   render() {
     const { stepId } = this.state;
 
+    console.log("stepId", stepId);
+
     const isModalLocked = ["recipient", "confirmation"].includes(stepId);
 
     return (
@@ -28,6 +34,7 @@ class SendModal extends PureComponent<{}, { stepId: StepId }> {
         centered
         refocusWhenChange={stepId}
         onHide={this.handleReset}
+        onClose={this.props.onClose || (() => {})}
         preventBackdropClick={isModalLocked}
         render={({ onClose, data }) => (
           <Body
