@@ -73,10 +73,12 @@ type DateRowProps = {
 };
 
 function DateRow({ date }: DateRowProps) {
+  const formatedDate = useMemo(() => moment(date).format("MMMM, Do, YYYY"), [date]);
+
   return (
     <DateRowContainer>
       <Text color="palette.text.shade60" ff="Inter|SemiBold" fontSize="11px" lineHeight="18px">
-        {moment(date).format("MMMM, Do, YYYY")}
+        {formatedDate}
       </Text>
     </DateRowContainer>
   );
