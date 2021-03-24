@@ -185,6 +185,7 @@
       "disclaimer": "En continuant, vous acceptez que vos données de localisation soient partagées avec des fournisseurs de services tiers afin qu'ils se conforment à leurs procédures AML/KYC."
     },
     "form": {
+      "amount": "Amount",
       "from": {
         "title": "De",
         "account": "Compte",
@@ -198,12 +199,23 @@
         "currency": "Crypto-actif",
         "addAccountCTA": "Ajouter un nouveau compte"
       },
+      "tradeMethod": {
+        "title": "Rate",
+        "float": "Floating rate",
+        "floatUnavailable": "Floating rate not supported for this pair",
+        "fixed": "Fixed rate",
+        "fixedUnavailable": "Fixed rate not supported for this pair",
+        "floatDesc": "Your amount could change depending on the market conditions.",
+        "fixedDesc": "Your amount will stay the same even if the market changes. Updates every 60 seconds.",
+        "by": "Provided by"
+      },
       "exchange": "Échanger",
       "helpCTA": "Qu'est-ce que le Swap ?",
       "bubble": "Nous utilisons un taux fixe, c'est le montant exact que vous allez recevoir.",
       "noAccounts": "Vous n'avez pas de compte {{currencyName}} avec un solde",
       "noApp": "L'application {{currencyName}} n'est pas installée.",
-      "outdatedApp": "Mise à jour de l'application {{currencyName}} disponible."
+      "outdatedApp": "Mise à jour de l'application {{currencyName}} disponible.",
+      "loadingRates": "Loading rates..."
     },
     "modal": {
       "title": "Swap",
@@ -220,7 +232,13 @@
             "acceptedDescription": "Ce service est exclusivement régi par <0>{{provider}}</0>"
           },
           "details": {
-            "provider": "Fournisseur"
+            "provider": "Fournisseur",
+            "tradeMethod": {
+              "title": "Type",
+              "float": "Floating rate",
+              "fixed": "Fixed rate"
+            },
+            "address": "Address"
           }
         },
         "device": {
@@ -237,20 +255,25 @@
       }
     },
     "operationDetailsModal": {
-      "title": "Détails de l'opération",
+      "title": "Swap",
       "provider": "Fournisseur",
       "txid": "Swap ID",
       "status": "Statut",
       "statusTooltips": {
-        "refunded": "Veuillez contacter le fournisseur de swap avec votre swap ID pour plus de détails",
-        "failed": "Veuillez contacter le fournisseur de swap avec votre swap ID pour plus de détails",
-        "hold": "Veuillez contacter le fournisseur de swap avec votre swap ID pour résoudre la situation"
+        "expired": "Please contact the swap provider with your swap ID for more information.",
+        "refunded": "Please contact the swap provider with your swap ID for more information.",
+        "pending": "Please wait while the swap provider is processing the transaction.",
+        "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
+        "finished": "Your swap was completed successfully."
       },
       "date": "Date",
       "from": "De",
+      "fromAddress": "Origin address",
+      "fromAddress_plural": "Origin addresses",
       "to": "Vers",
-      "initialAmount": "Montant envoyé",
-      "creditedAmount": "Montant à recevoir"
+      "toProvider": "Provider address",
+      "initialAmount": "Initial amount",
+      "creditedAmount": "Credited amount"
     }
   },
   "fullNode": {
@@ -1014,10 +1037,12 @@
     "swap": {
       "notice": "Vérifiez les détails du Swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
       "confirm": "Confirmer la transaction de swap",
-      "amountSent": "Montant envoyé",
-      "amountReceived": "Montant reçu",
+      "amountSent": "Amount to send",
+      "amountReceived": "Amount to receive before service fees",
       "fees": "Frais",
-      "provider": "Fournisseur"
+      "provider": "Fournisseur",
+      "payoutNetworkFees": "Payout fees",
+      "payoutNetworkFeesTooltip": "This amount will not be shown on your device"
     },
     "sell": {
       "notice": "Vérifiez les détails de la vente sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
