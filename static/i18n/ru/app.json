@@ -2778,7 +2778,7 @@
     "switchLabelTerms": "<0>Подтверждаю, что прочитал(а) и принимаю</0> <1>Условия использования</1>",
     "switchLabelPrivacyPolicy": "<0>Подтверждаю, что прочитал(а) и принимаю</0> <1>Политику конфиденциальности</1>",
     "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
-    "cta": "Enter Ledger app"
+    "cta": "Войти в приложение Ledger"
   },
   "families": {
     "stellar": {
