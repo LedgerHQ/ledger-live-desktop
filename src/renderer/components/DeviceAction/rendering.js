@@ -416,6 +416,7 @@ export const renderSwapDeviceConfirmation = ({
   exchangeRate,
   exchange,
   amountExpectedTo,
+  estimatedFees,
 }: {
   modelId: DeviceModelId,
   type: "light" | "dark",
@@ -424,6 +425,7 @@ export const renderSwapDeviceConfirmation = ({
   exchangeRate: ExchangeRate,
   exchange: Exchange,
   amountExpectedTo?: string,
+  estimatedFees?: string,
 }) => {
   return (
     <>
@@ -447,7 +449,7 @@ export const renderSwapDeviceConfirmation = ({
               unit={getAccountUnit(
                 getMainAccount(exchange.fromAccount, exchange.fromParentAccount),
               )}
-              value={status.estimatedFees}
+              value={BigNumber(estimatedFees || 0)}
               disableRounding
               showCode
             />
@@ -491,7 +493,7 @@ export const renderSwapDeviceConfirmation = ({
           </LabelInfoTooltip>
           <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
             <CurrencyUnitValue
-              unit={getAccountUnit(getMainAccount(exchange.toAccount, exchange.toParentAccount))}
+              unit={getAccountUnit(exchange.toAccount)}
               value={exchangeRate.payoutNetworkFees}
               disableRounding
               showCode
