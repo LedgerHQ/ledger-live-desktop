@@ -1,9 +1,11 @@
 // @flow
-
+import { app } from "electron";
+import path from "path";
 import winston from "winston";
 import Transport from "winston-transport";
 import anonymizer from "./anonymizer";
 import pname from "./pname";
+import moment from "moment";
 
 const { format } = winston;
 const { combine, json, timestamp } = format;
@@ -26,6 +28,21 @@ const logger = winston.createLogger({
 const add = (transport: *) => {
   logger.add(transport);
 };
+
+export async function enableFileLogger() {
+  await app.whenReady();
+  const desktopDir = app.getPath("desktop");
+
+  const fileT = new winston.transports.File({
+    filename: path.join(
+      desktopDir,
+      `ledgerlive-logs-${moment().format("YYYY.MM.DD-HH.mm.ss")}-${__GIT_REVISION__ ||
+        "unversioned"}.log`,
+    ),
+  });
+
+  add(fileT);
+}
 
 export function enableDebugLogger() {
   let consoleT;
