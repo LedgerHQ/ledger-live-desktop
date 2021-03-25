@@ -7,6 +7,12 @@ import { ReplaySubject } from "rxjs";
 import { deserializeError } from "@ledgerhq/errors";
 import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 import { deviceInfo155, mockListAppsResult } from "@ledgerhq/live-common/lib/apps/mock";
+
+import { addMockAnnouncement } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/api/api.mock";
+import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
+import { toggleMockIncident } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider/api/api.mock";
+import { useServiceStatus } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
+
 import useInterval from "~/renderer/hooks/useInterval";
 import Box from "~/renderer/components/Box";
 import { Item, MockContainer, EllipsesText, MockedGlobalStyle } from "./shared";
@@ -161,6 +167,7 @@ const swapEvents = [
     },
   },
 ];
+
 if (getEnv("MOCK")) {
   window.mock = {
     events: {
@@ -248,8 +255,12 @@ const DebugMock = () => {
   const [expanded, setExpanded] = useState(true);
   const [expandedQueue, setExpandedQueue] = useState(true);
   const [expandedSwap, setExpandedSwap] = useState(false);
+  const [expandedNotif, setExpandedNotif] = useState(false);
   const [expandedQuick, setExpandedQuick] = useState(false);
   const [expandedHistory, setExpandedHistory] = useState(true);
+
+  const { updateCache } = useAnnouncements();
+  const { updateData } = useServiceStatus();
 
   useInterval(() => {
     setQueue(window.mock.events.queue);
@@ -264,6 +275,7 @@ const DebugMock = () => {
     expandedHistory,
   ]);
   const toggleExpandedSwap = useCallback(() => setExpandedSwap(!expandedSwap), [expandedSwap]);
+  const toggleExpandedNotif = useCallback(() => setExpandedNotif(!expandedNotif), [expandedNotif]);
 
   const queueEvent = useCallback(
     event => {
@@ -395,6 +407,45 @@ const DebugMock = () => {
                   </Text>
                 ))
               : null}
+          </Box>
+          <Box vertical px={1}>
+            <Text
+              color="palette.text.shade100"
+              ff="Inter|SemiBold"
+              fontSize={3}
+              onClick={toggleExpandedNotif}
+            >
+              {"notif "}
+              {expandedNotif ? "[ - ]" : "[ + ]"}
+            </Text>
+            {expandedNotif ? (
+              <>
+                <Text
+                  smx={1}
+                  ff="Inter|Regular"
+                  color="palette.text.shade100"
+                  fontSize={3}
+                  onClick={() => {
+                    addMockAnnouncement();
+                    updateCache();
+                  }}
+                >
+                  {"Mock notif"}
+                </Text>
+                <Text
+                  smx={1}
+                  ff="Inter|Regular"
+                  color="palette.text.shade100"
+                  fontSize={3}
+                  onClick={() => {
+                    toggleMockIncident();
+                    updateData();
+                  }}
+                >
+                  {"Toggle service status"}
+                </Text>
+              </>
+            ) : null}
           </Box>
         </>
       ) : null}

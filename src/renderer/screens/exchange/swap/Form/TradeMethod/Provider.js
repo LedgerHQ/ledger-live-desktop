@@ -86,7 +86,7 @@ const Provider = ({
             <Trans i18nKey={`swap.form.tradeMethod.by`} />
           </Text>
           <LinkWithExternalIcon
-            black
+            color="black"
             fontSize={2}
             style={{ textTransform: "capitalize", lineHeight: 1.2, marginLeft: 4 }}
             onClick={openProvider}
