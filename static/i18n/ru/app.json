@@ -2308,6 +2308,37 @@
     "dusk": "Dusk",
     "dark": "Dark"
   },
+  "toastOverlay": {
+    "toastType": {
+      "announcement": "News"
+    }
+  },
+  "informationCenter": {
+    "tooltip": "Information center",
+    "ongoingIncidentsTooltip": "There are {{incidentCount}} ongoing incidents",
+    "tabs": {
+      "announcements": "News",
+      "announcementsUnseen": "News ({{unseenCount}})",
+      "serviceStatus": "Status",
+      "serviceStatusIncidentsOngoing": "Status ({{incidentCount}})"
+    },
+    "serviceStatus": {
+      "statusOk": {
+        "title": "Ledger live is up and running",
+        "description": "Having trouble ? Go on our <0>help page</0>"
+      },
+      "statusNotOk": {
+        "title": "Ledger live is experiencing issues",
+        "learnMore": "Learn more"
+      }
+    },
+    "announcement": {
+      "emptyState": {
+        "title": "No news for the moment",
+        "desc": "You will find here all the news related to Ledger and Ledger live"
+      }
+    }
+  },
   "onboarding": {
     "drawers": {
       "pinHelp": {
