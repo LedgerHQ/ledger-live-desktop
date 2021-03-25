@@ -1,14 +1,16 @@
 // @flow
 import { remote, ipcRenderer } from "electron";
-import React, { PureComponent } from "react";
+import React, { memo, useState, useCallback } from "react";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
 import { createStructuredSelector } from "reselect";
+import { useCountervaluesState } from "@ledgerhq/live-common/lib/countervalues/react";
 import { accountsOpToCSV } from "@ledgerhq/live-common/lib/csvExport";
-import type { Account } from "@ledgerhq/live-common/lib/types";
+import type { Account, Currency } from "@ledgerhq/live-common/lib/types";
 import logger from "~/logger";
+import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 import { activeAccountsSelector } from "~/renderer/reducers/accounts";
 import { closeModal } from "~/renderer/actions/modals";
 import { colors } from "~/renderer/styles/theme";
@@ -24,14 +26,12 @@ type OwnProps = {};
 type Props = OwnProps & {
   closeModal: string => void,
   accounts: Account[],
+  countervalueCurrency?: Currency,
 };
 
-type State = {
-  checkedIds: string[],
-  success: boolean,
-};
 const mapStateToProps = createStructuredSelector({
   accounts: activeAccountsSelector,
+  countervalueCurrency: counterValueCurrencySelector,
 });
 const mapDispatchToProps = {
   closeModal,
@@ -50,15 +50,12 @@ const exportOperations = async (
   } catch (error) {}
 };
 
-class ExportOperations extends PureComponent<Props, State> {
-  state = {
-    checkedIds: [],
-    success: false,
-  };
+function ExportOperations({ accounts, closeModal, countervalueCurrency }: Props) {
+  const [checkedIds, setCheckedIds] = useState([]);
+  const [success, setSuccess] = useState(false);
+  const countervalueState = useCountervaluesState();
 
-  export = async () => {
-    const { accounts } = this.props;
-    const { checkedIds } = this.state;
+  const exportCsv = useCallback(async () => {
     const path = await remote.dialog.showSaveDialog({
       title: "Exported account transactions",
       defaultPath: `ledgerlive-operations-${moment().format("YYYY.MM.DD")}.csv`,
@@ -73,114 +70,113 @@ class ExportOperations extends PureComponent<Props, State> {
     if (path) {
       exportOperations(
         path,
-        accountsOpToCSV(accounts.filter(account => checkedIds.includes(account.id))),
+        accountsOpToCSV(
+          accounts.filter(account => checkedIds.includes(account.id)),
+          countervalueCurrency,
+          countervalueState,
+        ),
         () => {
-          this.setState({ success: true });
+          setSuccess(true);
         },
       );
     }
-  };
+  }, [accounts, checkedIds, countervalueCurrency, countervalueState]);
 
-  exporting = false;
+  const onClose = useCallback(() => closeModal("MODAL_EXPORT_OPERATIONS"), [closeModal]);
 
-  handleButtonClick = () => {
-    const { success } = this.state;
+  const handleButtonClick = useCallback(() => {
+    let exporting = false;
     if (success) {
-      this.onClose();
+      onClose();
     } else {
-      if (this.exporting) return;
-      this.exporting = true;
-      this.export()
+      if (exporting) return;
+      exporting = true;
+      exportCsv()
         .catch(e => {
           logger.critical(e);
         })
         .then(() => {
-          this.exporting = false;
+          exporting = false;
         });
     }
-  };
+  }, [exportCsv, onClose, success]);
 
-  onClose = () => this.props.closeModal("MODAL_EXPORT_OPERATIONS");
-
-  toggleAccount = (account: Account) => {
-    this.setState(prevState => {
-      if (prevState.checkedIds.includes(account.id)) {
-        return { checkedIds: [...prevState.checkedIds].filter(id => id !== account.id) };
+  const toggleAccount = useCallback((account: Account) => {
+    setCheckedIds(prevState => {
+      if (prevState.includes(account.id)) {
+        return [...prevState].filter(id => id !== account.id);
       }
-      return { checkedIds: [...prevState.checkedIds, account.id] };
+      return [...prevState, account.id];
     });
-  };
+  }, []);
 
-  render() {
-    const { accounts } = this.props;
-    const { checkedIds, success } = this.state;
-    return (
-      <Modal
-        name="MODAL_EXPORT_OPERATIONS"
-        centered
-        onHide={() => this.setState({ success: false, checkedIds: [] })}
-      >
-        <ModalBody
-          onClose={this.onClose}
-          title={<Trans i18nKey="exportOperationsModal.title" />}
-          render={() =>
-            success ? (
-              <Box>
-                <IconWrapper>
-                  <IconCheckCircle size={43} />
-                </IconWrapper>
-                <Title>
-                  <Trans i18nKey="exportOperationsModal.titleSuccess" />
-                </Title>
-                <LabelWrapper ff="Inter|Regular">
-                  <Trans i18nKey="exportOperationsModal.descSuccess" />
-                </LabelWrapper>
-              </Box>
-            ) : (
-              <Box>
-                <IconWrapperCircle>
-                  <IconDownloadCloud size={30} />
-                </IconWrapperCircle>
-                <LabelWrapper ff="Inter|Regular">
-                  <Trans i18nKey="exportOperationsModal.desc" />
-                </LabelWrapper>
-                <AccountsList
-                  emptyText={<Trans i18nKey="exportOperationsModal.noAccounts" />}
-                  title={
-                    <>
-                      <Trans i18nKey="exportOperationsModal.selectedAccounts" />
-                      {checkedIds.length > 0 ? ` (${checkedIds.length})` : ""}
-                    </>
-                  }
-                  accounts={accounts}
-                  onToggleAccount={this.toggleAccount}
-                  checkedIds={checkedIds}
-                />
-              </Box>
-            )
-          }
-          renderFooter={() => (
-            <Box horizontal justifyContent="flex-end">
-              <Button
-                disabled={!success && !checkedIds.length}
-                data-e2e="continue_button"
-                onClick={this.handleButtonClick}
-                event={!success ? "Operation history" : undefined}
-                id="export-operations-save-button"
-                primary
-              >
-                {success ? (
-                  <Trans i18nKey="exportOperationsModal.ctaSuccess" />
-                ) : (
-                  <Trans i18nKey="exportOperationsModal.cta" />
-                )}
-              </Button>
+  const onHide = useCallback(() => {
+    setSuccess(false);
+    setCheckedIds([]);
+  }, []);
+
+  return (
+    <Modal name="MODAL_EXPORT_OPERATIONS" centered onHide={onHide}>
+      <ModalBody
+        onClose={onClose}
+        title={<Trans i18nKey="exportOperationsModal.title" />}
+        render={() =>
+          success ? (
+            <Box>
+              <IconWrapper>
+                <IconCheckCircle size={43} />
+              </IconWrapper>
+              <Title>
+                <Trans i18nKey="exportOperationsModal.titleSuccess" />
+              </Title>
+              <LabelWrapper ff="Inter|Regular">
+                <Trans i18nKey="exportOperationsModal.descSuccess" />
+              </LabelWrapper>
             </Box>
-          )}
-        />
-      </Modal>
-    );
-  }
+          ) : (
+            <Box>
+              <IconWrapperCircle>
+                <IconDownloadCloud size={30} />
+              </IconWrapperCircle>
+              <LabelWrapper ff="Inter|Regular">
+                <Trans i18nKey="exportOperationsModal.desc" />
+              </LabelWrapper>
+              <AccountsList
+                emptyText={<Trans i18nKey="exportOperationsModal.noAccounts" />}
+                title={
+                  <>
+                    <Trans i18nKey="exportOperationsModal.selectedAccounts" />
+                    {checkedIds.length > 0 ? ` (${checkedIds.length})` : ""}
+                  </>
+                }
+                accounts={accounts}
+                onToggleAccount={toggleAccount}
+                checkedIds={checkedIds}
+              />
+            </Box>
+          )
+        }
+        renderFooter={() => (
+          <Box horizontal justifyContent="flex-end">
+            <Button
+              disabled={!success && !checkedIds.length}
+              data-e2e="continue_button"
+              onClick={handleButtonClick}
+              event={!success ? "Operation history" : undefined}
+              id="export-operations-save-button"
+              primary
+            >
+              {success ? (
+                <Trans i18nKey="exportOperationsModal.ctaSuccess" />
+              ) : (
+                <Trans i18nKey="exportOperationsModal.cta" />
+              )}
+            </Button>
+          </Box>
+        )}
+      />
+    </Modal>
+  );
 }
 
 const LabelWrapper = styled(Box)`
@@ -223,4 +219,4 @@ const ConnectedExportOperations: React$ComponentType<OwnProps> = connect(
   mapDispatchToProps,
 )(ExportOperations);
 
-export default ConnectedExportOperations;
+export default memo<Props>(ConnectedExportOperations);
