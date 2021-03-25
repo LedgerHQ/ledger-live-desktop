@@ -37,7 +37,7 @@ export const ItemContainer: ThemedComponent<{
   }
 `;
 
-export const Bar = styled.div`
+export const Bar: ThemedComponent<*> = styled.div`
   margin-left: 5px;
   margin-right: 5px;
   height: 15px;

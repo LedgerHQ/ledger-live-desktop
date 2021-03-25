@@ -304,7 +304,8 @@ export function AnnouncementPanel() {
         {groupedAnnouncements.map((group, index) => (
           <React.Fragment key={index}>
             {group.day ? <DateRow date={group.day} /> : null}
-            {group.data.map(({ level, icon, content, uuid, utm_campaign: utmCampaign }, index) => (
+            {// $FlowFixMe
+            group.data.map(({ level, icon, content, uuid, utm_campaign: utmCampaign }, index) => (
               <React.Fragment key={uuid}>
                 <InView as="div" className onChange={visible => handleInView(visible, uuid)}>
                   <Article

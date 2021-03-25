@@ -50,6 +50,7 @@ export function AnnouncementProviderWrapper({ children }: Props) {
   const currencies = useSelector(currenciesIdSelector);
   const dispatch = useDispatch();
 
+  // $FlowFixMe please help on fixing this. bad type on live-common?
   const { pushToast, dismissToast } = useToasts();
 
   const context = {

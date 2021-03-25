@@ -13,6 +13,7 @@ import { FakeLink } from "~/renderer/components/Link";
 import Box from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 const IncidentContainer = styled(Box)`
   width: 100%;
@@ -71,7 +72,7 @@ function IncidentArticle({ incidentData }: IncidentProps) {
             ))
           : null}
         <LinkWithExternalIcon
-          onClick={() => openURL(shortlink)}
+          onClick={shortlink ? () => openURL(shortlink) : null}
           style={{
             marginTop: 15,
           }}
@@ -136,7 +137,7 @@ function StatusNotOkHeader({ incidents }: { incidents: Incident[] }) {
   );
 }
 
-const PanelContainer = styled.div`
+const PanelContainer: ThemedComponent<{}> = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
