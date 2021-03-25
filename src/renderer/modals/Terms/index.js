@@ -4,7 +4,7 @@ import { Trans } from "react-i18next";
 
 import { useDispatch } from "react-redux";
 
-import { useTerms, url, acceptTerms } from "~/renderer/terms";
+import { useTerms, url, acceptTerms, usePrivacyUrl } from "~/renderer/terms";
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
 import Button from "~/renderer/components/Button";
@@ -25,6 +25,7 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
   const dispatch = useDispatch();
 
   const [markdown, error] = useTerms();
+  const privacyPolicyUrl = usePrivacyUrl();
   const [accepted, setAccepted] = useState(false);
   const onSwitchAccept = useCallback(() => setAccepted(a => !a), []);
 
@@ -41,7 +42,7 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
   }, [onClickClose]);
 
   const openTerms = useCallback(() => openURL(urls.terms), []);
-  const openPrivacyPolicy = useCallback(() => openURL(urls.privacyPolicy), []);
+  const openPrivacyPolicy = useCallback(() => openURL(privacyPolicyUrl), [privacyPolicyUrl]);
   const onClickFakeLink = useCallback(() => openURL(url), []);
 
   return (

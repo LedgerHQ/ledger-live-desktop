@@ -10,6 +10,7 @@ const Animation = ({
   loop = true,
   autoplay = true,
   rendererSettings = { preserveAspectRatio: "xMidYMin" },
+  isStopped = false,
 }: {
   animation: Object,
   width?: string,
@@ -17,6 +18,7 @@ const Animation = ({
   loop?: boolean,
   autoplay?: boolean,
   rendererSettings?: *,
+  isStopped?: boolean,
 }) => (
   <Lottie
     isClickToPauseDisabled
@@ -24,7 +26,7 @@ const Animation = ({
     height={height}
     width={width}
     isPaused={!!process.env.SPECTRON_RUN}
-    isStopped={!!process.env.SPECTRON_RUN}
+    isStopped={isStopped || !!process.env.SPECTRON_RUN}
     options={{
       loop: process.env.SPECTRON_RUN ? false : loop,
       autoplay: process.env.SPECTRON_RUN ? false : autoplay,

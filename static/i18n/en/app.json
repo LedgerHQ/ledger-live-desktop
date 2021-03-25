@@ -185,6 +185,7 @@
       "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
     },
     "form": {
+      "amount": "Amount",
       "from": {
         "title": "From",
         "account": "Account",
@@ -198,12 +199,23 @@
         "currency": "Crypto asset",
         "addAccountCTA": "Add new account"
       },
+      "tradeMethod": {
+        "title": "Rate",
+        "float": "Floating rate",
+        "floatUnavailable": "Floating rate not supported for this pair",
+        "fixed": "Fixed rate",
+        "fixedUnavailable": "Fixed rate not supported for this pair",
+        "floatDesc": "Your amount could change depending on the market conditions.",
+        "fixedDesc": "Your amount will stay the same even if the market changes. Updates every 60 seconds.",
+        "by": "Provided by"
+      },
       "exchange": "Exchange",
       "helpCTA": "What is Swap?",
       "bubble": "We use a fixed rate, this is the exact amount you will receive.",
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
       "noApp": "{{currencyName}} app not installed.",
-      "outdatedApp": "{{currencyName}} app update available."
+      "outdatedApp": "{{currencyName}} app update available.",
+      "loadingRates": "Loading rates..."
     },
     "modal": {
       "title": "Swap",
@@ -220,7 +232,13 @@
             "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
           },
           "details": {
-            "provider": "Provider"
+            "provider": "Provider",
+            "tradeMethod": {
+              "title": "Type",
+              "float": "Floating rate",
+              "fixed": "Fixed rate"
+            },
+            "address": "Address"
           }
         },
         "device": {
@@ -237,20 +255,25 @@
       }
     },
     "operationDetailsModal": {
-      "title": "Operation details",
+      "title": "Swap",
       "provider": "Provider",
       "txid": "Swap ID",
       "status": "Status",
       "statusTooltips": {
-        "refunded": "Please contact the Swap provider with you swap ID for more details",
-        "failed": "Please contact the Swap provider with you swap ID for more details",
-        "hold": "Please contact the Swap provider with you swap ID to solve the situation"
+        "expired": "Please contact the swap provider with your swap ID for more information.",
+        "refunded": "Please contact the swap provider with your swap ID for more information.",
+        "pending": "Please wait while the swap provider is processing the transaction.",
+        "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
+        "finished": "Your swap was completed successfully."
       },
       "date": "Date",
       "from": "From",
+      "fromAddress": "Origin address",
+      "fromAddress_plural": "Origin addresses",
       "to": "To",
-      "initialAmount": "Amount sent",
-      "creditedAmount": "Amount to receive"
+      "toProvider": "Provider address",
+      "initialAmount": "Initial amount",
+      "creditedAmount": "Credited amount"
     }
   },
   "fullNode": {
@@ -1014,10 +1037,13 @@
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction",
-      "amountSent": "Amount sent",
-      "amountReceived": "Amount received",
+      "amountSent": "Amount to send",
+      "amountReceived": "Amount to receive before service fees",
       "fees": "Fees",
-      "provider": "Provider"
+      "provider": "Provider",
+      "payoutNetworkFees": "Payout fees",
+      "payoutNetworkFeesTooltip": "This amount will not be shown on your device"
+      
     },
     "sell": {
       "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
@@ -2289,7 +2315,7 @@
     }
   },
   "informationCenter": {
-    "tooltip": "Open the information center",
+    "tooltip": "Information center",
     "ongoingIncidentsTooltip": "There are {{incidentCount}} ongoing incidents",
     "tabs": {
       "announcements": "News",
@@ -2931,16 +2957,16 @@
       "description": "An unexpected error occurred. Please try again. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "Oops, connection failed",
-      "description": "Please try again"
+      "title": "The connection failed",
+      "description": "Please try again."
     },
     "DisconnectedDevice": {
-      "title": "Oops, device connection lost",
-      "description": "Please try again"
+      "title": "Sorry, it looks like your device disconnected",
+      "description": "Please reconnect and try again."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Oops, device disconnected",
-      "description": "The connection to the device was lost during an operation. Please try again"
+      "title": "Sorry, it looks like your device disconnected",
+      "description": "Please reconnect and try again."
     },
     "EnpointConfig": {
       "title": "Invalid endpoint",
@@ -2959,12 +2985,12 @@
       "description": "Please contact Ledger Support"
     },
     "HardResetFail": {
-      "title": "Oops, could not reset",
-      "description": "Please try again or contact Ledger Support if in doubt"
+      "title": "Sorry, could not reset",
+      "description": "Please try again or contact Ledger Support if the problem persists."
     },
     "LatestMCUInstalledError": {
-      "title": "Oops, nothing to update",
-      "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
+      "title": "Sorry, there's nothing to update",
+      "description": "Please contact Ledger Support if you cannot use your device."
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
@@ -2979,8 +3005,8 @@
       "description": "Please retry or contact Ledger Support"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Oops, that's already installed",
-      "description": "Check your device to see which apps are already installed"
+      "title": "Sorry, that's already installed",
+      "description": "Please check which apps are already installed on your device."
     },
     "ManagerAppDepInstallRequired": {
       "title": "{{dependency}} app required",
@@ -3025,16 +3051,16 @@
       "description": "Uninstall the Bitcoin or Ethereum app last"
     },
     "NetworkDown": {
-      "title": "Oops, internet seems down",
-      "description": "Please check your internet connection"
+      "title": "Sorry, internet seems to be down",
+      "description": "Please check your internet connection."
     },
     "NoAddressesFound": {
       "title": "Sorry, no accounts were found",
       "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
     },
     "NotEnoughBalance": {
-      "title": "Oops, insufficient balance",
-      "description": "Make sure the account used has enough funds"
+      "title": "Sorry, insufficient funds",
+      "description": "Please make sure the account has enough funds."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
@@ -3087,12 +3113,12 @@
       "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
     },
     "TimeoutError": {
-      "title": "Oops, a timeout occurred",
-      "description": "It took too long for the server to respond. Please try again"
+      "title": "Sorry, server took too long to respond",
+      "description": "Please try again."
     },
     "TimeoutTagged": {
-      "title": "Oops, a timeout occurred ({{tag}})",
-      "description": "It took too long for the server to respond"
+      "title": "Sorry, server took too long to respond ({{tag}})",
+      "description": "Timeout occurred."
     },
     "TransportError": {
       "title": "Something went wrong. Please reconnect your device",
@@ -3111,8 +3137,8 @@
       "description": "Keep the {{appName}} app open while we find your accounts"
     },
     "UnexpectedBootloader": {
-      "title": "Oops, your device should not be in Bootloader mode",
-      "description": "Please restart your device or contact Ledger Support"
+      "title": "Sorry, your device must not be in Bootloader mode",
+      "description": "Please restart your device without touching the buttons when the logo appears. Contact Ledger Support if the problem persists."
     },
     "UserRefusedAllowManager": {
       "title": "Manager denied on device"
@@ -3164,7 +3190,7 @@
       "title": "Recipient address is the same as the sender address"
     },
     "CantOpenDevice": {
-      "title": "Oops, couldn't connect to device",
+      "title": "Sorry, connection failed",
       "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
     },
     "ETHAddressNonEIP": {
