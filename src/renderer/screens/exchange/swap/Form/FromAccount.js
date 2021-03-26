@@ -88,7 +88,7 @@ const FromAccount = ({
     if (account?.id !== defaultAccount?.id || currency?.id !== defaultCurrency?.id) {
       const fromAccount = subAccount || account;
       const fromParentAccount = subAccount ? account : null;
-      if (fromAccount && fromAccount?.id !== defaultAccount?.id) {
+      if (fromAccount) {
         onAccountChange(fromAccount, fromParentAccount);
       }
     }
