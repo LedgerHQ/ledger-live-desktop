@@ -55,8 +55,16 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/360006535873?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=fees",
   recipientAddressInfo:
     "https://support.ledger.com/hc/en-us/articles/360006444193?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=sendflow",
-  privacyPolicy:
-    "https://www.ledger.com/pages/privacy-policy?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
+  privacyPolicy: {
+    en:
+      "https://shop.ledger.com/pages/privacy-policy?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
+    fr:
+      "https://shop.ledger.com/pages/politique-de-confidentialite?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
+    es:
+      "https://shop.ledger.com/pages/politica-de-privacidad?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
+    ru:
+      "https://shop.ledger.com/pages/nasha-politika-konfidentsialnosti?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
+  },
   troubleshootingUSB:
     "https://support.ledger.com/hc/en-us/articles/115005165269?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error",
   troubleshootingCrash:

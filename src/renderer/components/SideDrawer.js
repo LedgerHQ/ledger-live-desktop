@@ -55,6 +55,8 @@ const DrawerTopContainer = styled.div`
   position: absolute;
   top: 43px;
   right: 43px;
+  display: flex;
+  z-index: 1;
 `;
 
 const DrawerContent = styled.div`
@@ -65,7 +67,7 @@ const DrawerContent = styled.div`
   bottom: 0;
   z-index: 1;
   box-sizing: border-box;
-  padding: 0px 67px;
+  padding: 0px 40px;
   width: 80%;
   background-color: ${p =>
     p.paper ? p.theme.colors.palette.background.paper : p.theme.colors.palette.background.default};
@@ -99,7 +101,7 @@ const DrawerContainer = styled.div`
   bottom: 0;
   right: 0;
   overflow: hidden;
-  z-index: 10;
+  z-index: 50;
 
   &.exited {
     pointer-events: none;
@@ -152,7 +154,7 @@ export function SideDrawer({
   const focusTrap = useRef(null);
 
   useEffect(() => {
-    if (!isMounted) return;
+    if (!isMounted || !focusTrapElem.current) return;
 
     focusTrap.current = createFocusTrap(focusTrapElem.current, {
       fallbackFocus: focusTrapElem.current,
@@ -183,7 +185,13 @@ export function SideDrawer({
   }
 
   return ReactDOM.createPortal(
-    <Transition in={isOpen} timeout={DURATION} onEntered={onEntered} onExited={onExited}>
+    <Transition
+      in={isOpen}
+      timeout={DURATION}
+      onEntered={onEntered}
+      onExited={onExited}
+      unmountOnExit
+    >
       {state => (
         <DrawerContainer className={state} ref={focusTrapElem} tabIndex="-1">
           <DrawerContent paper={paper} isOpened={isOpen} className={state} direction={direction}>

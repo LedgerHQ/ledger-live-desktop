@@ -19,6 +19,8 @@ import LiveStyleSheetManager from "~/renderer/styles/LiveStyleSheetManager";
 import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
 import CountervaluesProvider from "~/renderer/components/CountervaluesProvider";
 import Default from "./Default";
+import { AnnouncementProviderWrapper } from "~/renderer/components/AnnouncementProviderWrapper";
+import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 
 const reloadApp = event => {
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {
@@ -59,9 +61,13 @@ const App = ({ store, initialCountervalues }: Props) => {
             <RemoteConfigProvider>
               <UpdaterProvider>
                 <CountervaluesProvider initialState={initialCountervalues}>
-                  <Router>
-                    <Default />
-                  </Router>
+                  <ToastProvider>
+                    <AnnouncementProviderWrapper>
+                      <Router>
+                        <Default />
+                      </Router>
+                    </AnnouncementProviderWrapper>
+                  </ToastProvider>
                 </CountervaluesProvider>
               </UpdaterProvider>
             </RemoteConfigProvider>

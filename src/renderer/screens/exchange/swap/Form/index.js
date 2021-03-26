@@ -33,7 +33,6 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import type { InstalledItem } from "@ledgerhq/live-common/lib/apps";
 import Box from "~/renderer/components/Box";
-import Text from "~/renderer/components/Text";
 
 import FromAccount from "~/renderer/screens/exchange/swap/Form/FromAccount";
 import ToAccount from "~/renderer/screens/exchange/swap/Form/ToAccount";

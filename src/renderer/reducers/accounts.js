@@ -182,6 +182,14 @@ export const cryptoCurrenciesSelector: OutputSelector<
   [...new Set(accounts.map(a => a.currency))].sort((a, b) => a.name.localeCompare(b.name)),
 );
 
+export const currenciesIdSelector: OutputSelector<
+  State,
+  void,
+  string[],
+> = createSelector(cryptoCurrenciesSelector, (currencies: CryptoCurrency[]) =>
+  currencies.map(currency => currency.id),
+);
+
 export const accountSelector: OutputSelector<
   State,
   { accountId: string },
