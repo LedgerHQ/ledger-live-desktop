@@ -21,6 +21,7 @@ import Box from "~/renderer/components/Box";
 import AccountsList from "~/renderer/components/AccountsList";
 import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
 import IconCheckCircle from "~/renderer/icons/CheckCircle";
+import InfoBox from "~/renderer/components/InfoBox";
 
 type OwnProps = {};
 type Props = OwnProps & {
@@ -138,9 +139,12 @@ function ExportOperations({ accounts, closeModal, countervalueCurrency }: Props)
               <IconWrapperCircle>
                 <IconDownloadCloud size={30} />
               </IconWrapperCircle>
-              <LabelWrapper ff="Inter|Regular">
+              <LabelWrapper mb={2} ff="Inter|Regular">
                 <Trans i18nKey="exportOperationsModal.desc" />
               </LabelWrapper>
+              <InfoBox>
+                <Trans i18nKey="exportOperationsModal.disclaimer" />
+              </InfoBox>
               <AccountsList
                 emptyText={<Trans i18nKey="exportOperationsModal.noAccounts" />}
                 title={
