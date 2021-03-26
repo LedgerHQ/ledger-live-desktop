@@ -32,6 +32,7 @@ const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount, setTabInd
 
   const [hasUpToDateProviders, setHasUpToDateProviders] = useState(false);
   const [installedApps, setInstalledApps] = useState();
+  const [tradeMethod, setTradeMethod] = useState("fixed");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -80,6 +81,8 @@ const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount, setTabInd
       defaultAccount={defaultAccount}
       defaultParentAccount={defaultParentAccount}
       setTabIndex={setTabIndex}
+      tradeMethod={tradeMethod}
+      setTradeMethod={setTradeMethod}
     />
   );
 };

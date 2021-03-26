@@ -12,6 +12,7 @@ import { discreetModeSelector } from "~/renderer/reducers/settings";
 import { hasAccountsSelector } from "~/renderer/reducers/accounts";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { Bar, ItemContainer } from "./shared";
 
 import Box from "~/renderer/components/Box";
 import Tooltip from "~/renderer/components/Tooltip";
@@ -25,9 +26,10 @@ import IconSettings from "~/renderer/icons/Settings";
 
 // TODO: ActivityIndicator
 import ActivityIndicator from "./ActivityIndicator";
-import ItemContainer from "./ItemContainer";
+import { ServiceStatusIndicator } from "./ServiceStatusIndicator";
 import { setDiscreetMode } from "~/renderer/actions/settings";
 import { hasPasswordSelector } from "~/renderer/reducers/application";
+import { NotificationIndicator } from "~/renderer/components/TopBar/NotificationIndicator";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({}))`
@@ -44,14 +46,6 @@ const Inner = styled(Box).attrs(() => ({
   px: 6,
 }))`
   height: 100%;
-`;
-
-const Bar = styled.div`
-  margin-left: 5px;
-  margin-right: 5px;
-  height: 15px;
-  width: 1px;
-  background: ${p => p.theme.colors.palette.divider};
 `;
 
 export const SeparatorBar: ThemedComponent<{}> = styled.div`
@@ -109,6 +103,11 @@ const TopBar = () => {
                 </Box>
               </>
             )}
+            <ServiceStatusIndicator />
+            <NotificationIndicator />
+            <Box justifyContent="center">
+              <Bar />
+            </Box>
             <Tooltip content={t("settings.discreet")} placement="bottom">
               <ItemContainer id="topbar-discreet-button" isInteractive onClick={handleDiscreet}>
                 {discreetMode ? <IconEyeOff size={16} /> : <IconEye size={16} />}

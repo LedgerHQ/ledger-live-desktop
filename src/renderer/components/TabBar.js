@@ -2,13 +2,15 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { Trans } from "react-i18next";
 import { Base } from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 
 const Tab = styled(Base)`
   padding: 0 16px 4px 16px;
   border-radius: 0;
+  flex: ${({ fullWidth }) => (fullWidth ? "1" : "initial")};
+  display: flex;
+  justify-content: center;
   color: ${p =>
     p.active ? p.theme.colors.palette.text.shade100 : p.theme.colors.palette.text.shade50};
   &:hover,
@@ -76,6 +78,7 @@ type Props = {
   separator?: boolean,
   withId?: boolean,
   fontSize?: number,
+  fullWidth?: boolean,
   height?: number,
 };
 
@@ -86,6 +89,7 @@ const TabBar = ({
   defaultIndex = 0,
   short = false,
   index: propsIndex,
+  fullWidth = false,
   separator = false,
   withId = false,
   fontSize = 16,
@@ -120,13 +124,14 @@ const TabBar = ({
           ref={setTabRef(j)}
           key={`TAB_${j}_${tab}`}
           active={j === i}
+          fullWidth={fullWidth}
           tabIndex={j}
           onClick={() => updateIndex(j)}
           id={withId && ids?.length ? `${ids[j]}-tab` : ""}
           fontSize={fontSize}
         >
           <Text ff="Inter|SemiBold" fontSize={5}>
-            <Trans i18nKey={tab} />
+            {tab}
           </Text>
         </Tab>
       ))}
