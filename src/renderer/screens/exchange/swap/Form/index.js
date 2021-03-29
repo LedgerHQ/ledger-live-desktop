@@ -183,6 +183,10 @@ const Form = ({
     estimateMaxSpendable();
   }, [account, parentAccount, setTransactionAmount, useAllAmount]);
 
+  useEffect(() => {
+    if (account) dispatch({ type: "onSetUseAllAmount", payload: { useAllAmount: false } });
+  }, [account]);
+
   const bumpFocusNonce = useCallback(
     () => setShouldFocusOnAmountNonce(shouldFocusOnAmountNonce + 1),
     [shouldFocusOnAmountNonce],
