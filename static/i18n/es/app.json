@@ -2647,7 +2647,8 @@
       "descr": "Responde a 3 sencillas preguntas para evitar confusiones comunes acerca de tu cartera física.",
       "buttons": {
         "start": "¡Juguemos!",
-        "next": "Siguiente pregunta"
+        "next": "Siguiente pregunta",
+        "finish": "Terminar cuestionario"
       },
       "questions": {
         "1": {

@@ -2647,7 +2647,8 @@
       "descr": "Répondez à 3 questions simples pour éviter les idées fausses sur votre wallet physique.",
       "buttons": {
         "start": "Faisons le quiz",
-        "next": "Question suivante"
+        "next": "Question suivante",
+        "finish": "Finir le quiz"
       },
       "questions": {
         "1": {
