@@ -1044,7 +1044,6 @@
       "provider": "Provider",
       "payoutNetworkFees": "Payout fees",
       "payoutNetworkFeesTooltip": "This amount will not be shown on your device"
-      
     },
     "sell": {
       "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
@@ -2710,7 +2709,8 @@
       "descr": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
       "buttons": {
         "start": "Let’s take the quiz",
-        "next": "Next question"
+        "next": "Next question",
+        "finish": "Finish quiz"
       },
       "questions": {
         "1": {
