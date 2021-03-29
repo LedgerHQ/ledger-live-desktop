@@ -2647,7 +2647,8 @@
       "descr": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
       "buttons": {
         "start": "Let’s take the quiz",
-        "next": "Next question"
+        "next": "Next question",
+        "finish": "Finish quiz"
       },
       "questions": {
         "1": {
