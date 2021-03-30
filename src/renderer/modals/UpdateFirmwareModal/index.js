@@ -73,7 +73,6 @@ const UpdateModal = ({
   const [err, setErr] = useState<MaybeError>(error || null);
   const [nonce, setNonce] = useState(0);
   const { t } = useTranslation();
-  const { shouldFlashMCU } = firmware;
 
   const createSteps = useCallback(
     ({ withResetStep }: { withResetStep: boolean }) => {
@@ -124,7 +123,7 @@ const UpdateModal = ({
         steps.push(resetStep);
       }
       steps.push(updateStep);
-      if (shouldFlashMCU) {
+      if (firmware?.shouldFlashMCU) {
         steps.push(mcuStep);
       } else {
         steps.push(updatingStep);
@@ -132,7 +131,7 @@ const UpdateModal = ({
       steps.push(finalStep);
       return steps;
     },
-    [t, shouldFlashMCU],
+    [t, firmware],
   );
 
   const steps = useMemo(() => createSteps({ withResetStep }), [createSteps, withResetStep]);
