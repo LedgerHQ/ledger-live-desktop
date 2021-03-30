@@ -85,14 +85,14 @@ const FromAccount = ({
   }, [currency, defaultCurrency, onCurrencyChange]);
 
   useEffect(() => {
-    if (account?.id !== defaultAccount?.id) {
+    if (account?.id !== defaultAccount?.id || currency?.id !== defaultCurrency?.id) {
       const fromAccount = subAccount || account;
       const fromParentAccount = subAccount ? account : null;
-      if (fromAccount && fromAccount?.id !== defaultAccount?.id) {
+      if (fromAccount) {
         onAccountChange(fromAccount, fromParentAccount);
       }
     }
-  }, [account, subAccount, currency, defaultAccount, onAccountChange]);
+  }, [account, subAccount, currency, defaultAccount, onAccountChange, defaultCurrency]);
 
   return (
     <Box flex={1} flow={1} mb={3} ml={0} mr={23}>
