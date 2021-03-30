@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
+import { hasFinalFirmware } from "@ledgerhq/live-common/lib/hw/hasFinalFirmware";
 import { command } from "~/renderer/commands";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
@@ -52,6 +53,7 @@ const StepFlashMcu = ({ firmware, deviceModelId, setError, transitionTo }: Props
   const [installing, setInstalling] = useState<MaybeString>(null);
   const [initialDelayPhase, setInitialDelayPhase] = useState(true);
   const [progress, setProgress] = useState(0);
+  const withFinal = hasFinalFirmware(firmware?.final);
 
   // didMount
   useEffect(() => {
@@ -68,7 +70,7 @@ const StepFlashMcu = ({ firmware, deviceModelId, setError, transitionTo }: Props
         setInstalling(installing);
       },
       complete: () => {
-        transitionTo("finish");
+        transitionTo(!withFinal ? "updating" : "finish");
       },
       error: error => {
         setError(error);
