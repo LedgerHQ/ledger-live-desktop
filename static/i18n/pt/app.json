@@ -1038,7 +1038,8 @@
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction",
       "amountSent": "Amount to send",
-      "amountReceived": "Amount to receive before service fees",
+      "amountReceived": "Amount to receive",
+      "amountReceivedFloat": "Amount to receive before service fees",
       "fees": "Fees",
       "provider": "Provider",
       "payoutNetworkFees": "Payout fees",
@@ -3350,7 +3351,7 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{minAmountFromFormatted}}"
+      "title": "Amount must be more than {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Amount must be less than {{maxAmountFromFormatted}}"
