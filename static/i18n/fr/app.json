@@ -1038,7 +1038,8 @@
       "notice": "Vérifiez les détails du Swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
       "confirm": "Confirmer la transaction de swap",
       "amountSent": "Montant à envoyer",
-      "amountReceived": "Montant à envoyer avant application des frais de services",
+      "amountReceived": "Amount to receive",
+      "amountReceivedFloat": "Amount to receive before service fees",
       "fees": "Frais",
       "provider": "Fournisseur",
       "payoutNetworkFees": "Frais de réception",
@@ -3350,7 +3351,7 @@
       "title": "Un mémo peut être requis lors de l'envoi à ce destinataire"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Le montant doit être d'au moins {{minAmountFromFormatted}}"
+      "title": "Amount must be more than {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Le montant doit être inférieur à {{maxAmountFromFormatted}}"
