@@ -6,12 +6,13 @@ import TabBar from "~/renderer/components/TabBar";
 import Swap from "~/renderer/screens/exchange/swap/Swap";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import History from "~/renderer/screens/exchange/swap/History";
 
 const SwapOrSwapHistory = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const location = useLocation();
+  const { t } = useTranslation();
 
   return (
     <Box flex={1} pb={6}>
@@ -28,7 +29,7 @@ const SwapOrSwapHistory = () => {
         </Box>
       </Box>
       <TabBar
-        tabs={["swap.tabs.exchange", "swap.tabs.history"]}
+        tabs={[t("swap.tabs.exchange"), t("swap.tabs.history")]}
         onIndexChange={setTabIndex}
         index={tabIndex}
       />

@@ -25,7 +25,7 @@ import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/ac
 import { track } from "~/renderer/analytics/segment";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 import type { Option } from "~/renderer/components/Select";
-import { CurrencyOptionRow } from "~/renderer/screens/exchange/swap/Form";
+import CurrencyOptionRow from "~/renderer/screens/exchange/swap/Form/CurrencyOptionRow";
 import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import TrackPage from "~/renderer/analytics/TrackPage";
 
@@ -132,7 +132,7 @@ const SelectAccountAndCurrency = ({
             autoFocus={true}
             onChange={setCurrency}
             value={currency}
-            isDisabled={c =>
+            isCurrencyDisabled={c =>
               (c.type === "CryptoCurrency" || c.type === "TokenCurrency") &&
               currenciesStatus[c.id] !== "ok"
             }

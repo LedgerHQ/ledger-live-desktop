@@ -51,6 +51,12 @@ const TopRightContainer = styled.div`
   justify-content: center;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 type Props = {
   sendEvent: string => void,
   onboardingRelaunched: boolean,
@@ -73,11 +79,6 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
     <WelcomeContainer>
       <TopRightContainer>
         <LangSwitcher />
-        {onboardingRelaunched && (
-          <Button mt={2} small onClick={() => sendEvent("PREV")}>
-            Previous
-          </Button>
-        )}
       </TopRightContainer>
       <WaveContainer>
         <AnimatedWave height={600} color="#4385F016" />
@@ -93,9 +94,12 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
       <Text mb="24px" color="palette.text.shade50" ff="Inter|Regular" fontSize={4}>
         {t("onboarding.screens.welcome.description")}
       </Text>
-      <Button onClick={handleNext} primary id="onboarding-get-started-button">
-        {t("onboarding.screens.welcome.cta")}
-      </Button>
+      <ButtonContainer>
+        <Button onClick={handleNext} primary id="onboarding-get-started-button">
+          {t("onboarding.screens.welcome.cta")}
+        </Button>
+        {onboardingRelaunched && <Button onClick={() => sendEvent("PREV")}>Previous</Button>}
+      </ButtonContainer>
       <Text style={{ marginTop: 8 }} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={4}>
         <Trans i18nKey="onboarding.screens.welcome.noDevice">
           <FakeLink onClick={buyNanoX}>
