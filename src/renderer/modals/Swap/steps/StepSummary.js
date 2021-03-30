@@ -1,6 +1,7 @@
 // @flow
 
 import React, { useCallback } from "react";
+import useTheme from "~/renderer/hooks/useTheme";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { Trans } from "react-i18next";
@@ -28,10 +29,11 @@ import { urls } from "~/config/urls";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 import FakeLink from "~/renderer/components/FakeLink";
 import { CountdownTimerWrapper } from "~/renderer/screens/exchange/swap/Form/Footer";
-import IconClock from "~/renderer/icons/Clock";
 import CountdownTimer from "~/renderer/components/CountdownTimer";
 import { swapAcceptProviderTOS } from "~/renderer/actions/settings";
 import type { ExchangeRate, Exchange } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import IconLock from "~/renderer/icons/Lock";
+import IconLockOpen from "~/renderer/icons/LockOpen";
 
 const IconWrapper = styled(Box)`
   background: ${colors.pillActiveBackground};
@@ -68,18 +70,18 @@ const StepSummary = ({
 }) => {
   const swapAcceptedproviderIds = useSelector(swapAcceptedProviderIdsSelector);
   const { exchange, exchangeRate } = swap;
-  const { provider, magnitudeAwareRate } = exchangeRate;
+  const { provider } = exchangeRate;
   const alreadyAcceptedTerms = swapAcceptedproviderIds.includes(swap.exchangeRate.provider);
   const { fromAccount, toAccount } = exchange;
   const fromAmount = transaction.amount;
+  const lockColor = useTheme("colors.palette.text.shade100");
   if (!fromAccount || !toAccount || !fromAmount) return null;
 
   const fromCurrency = getAccountCurrency(fromAccount);
   const toCurrency = getAccountCurrency(toAccount);
   const fromUnit = getAccountUnit(fromAccount);
   const toUnit = getAccountUnit(toAccount);
-
-  const toAmount = fromAmount.times(magnitudeAwareRate);
+  const toAmount = exchangeRate.toAmount.minus(exchangeRate.payoutNetworkFees || 0);
   const { main, tos } = urls.swap.providers[provider];
 
   return (
@@ -145,25 +147,46 @@ const StepSummary = ({
           </Text>
         </Box>
       </Box>
-      <ProviderWrapper horizontal justifyContent={"space-between"} mt={20}>
-        <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
-          <Trans i18nKey="swap.modal.steps.summary.details.provider" />
-        </Text>
-        <FakeLink
-          underline
-          fontSize={3}
-          ml={2}
-          color="palette.primary.main"
-          onClick={() => openURL(main)}
-          iconFirst
-          style={{ textTransform: "capitalize" }}
-        >
-          {provider}
-          <Box ml={1}>
-            <IconExternalLink size={12} />
+      <ProviderWrapper mt={20}>
+        <Box horizontal justifyContent={"space-between"}>
+          <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
+            <Trans i18nKey="swap.modal.steps.summary.details.provider" />
+          </Text>
+          <FakeLink
+            fontSize={3}
+            ml={2}
+            color="palette.text.shade100"
+            onClick={() => openURL(main)}
+            iconFirst
+            style={{ textTransform: "capitalize" }}
+          >
+            <Text ff="Inter|SemiBold" fontSize={3}>
+              {provider}
+            </Text>
+            <Box ml={1} color="palette.text.shade100">
+              <IconExternalLink size={12} />
+            </Box>
+          </FakeLink>
+        </Box>
+        <Box mt={1} horizontal justifyContent={"space-between"}>
+          <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
+            <Trans i18nKey="swap.modal.steps.summary.details.tradeMethod.title" />
+          </Text>
+          <Box horizontal alignItems="center">
+            {exchangeRate.tradeMethod === "fixed" ? (
+              <IconLock size={10} color={lockColor} />
+            ) : (
+              <IconLockOpen size={10} color={lockColor} />
+            )}
+            <Text ml={1} ff="Inter|SemiBold" fontSize={3}>
+              <Trans
+                i18nKey={`swap.modal.steps.summary.details.tradeMethod.${exchangeRate.tradeMethod}`}
+              />
+            </Text>
           </Box>
-        </FakeLink>
+        </Box>
       </ProviderWrapper>
+
       <Box mt={6} horizontal alignItems={"center"} onClick={onSwitchAccept}>
         {!alreadyAcceptedTerms ? (
           <CheckBox
@@ -223,11 +246,12 @@ export const StepSummaryFooter = ({
   onContinue: any,
   onClose: any,
   disabled: boolean,
-  ratesExpiration: Date,
+  ratesExpiration?: Date,
   provider: string,
   setError: Error => void,
 }) => {
   const dispatch = useDispatch();
+  const lockColor = useTheme("colors.palette.text.shade50");
   const swapAcceptedproviderIds = useSelector(swapAcceptedProviderIdsSelector);
   const alreadyAcceptedTerms = swapAcceptedproviderIds.includes(provider);
   const onBeforeContinue = useCallback(() => {
@@ -237,16 +261,18 @@ export const StepSummaryFooter = ({
 
   return (
     <Box horizontal flex={1} justifyContent={"flex-end"} alignItems={"center"}>
-      <CountdownTimerWrapper horizontal>
-        <Box mr={1}>
-          <IconClock size={14} />
-        </Box>
-        <CountdownTimer
-          key={`rates-${ratesExpiration.getTime()}`}
-          end={ratesExpiration}
-          callback={() => setError(new SwapGenericAPIError())}
-        />
-      </CountdownTimerWrapper>
+      {ratesExpiration ? (
+        <CountdownTimerWrapper horizontal>
+          <Box mr={1}>
+            <IconLock size={10} color={lockColor} />
+          </Box>
+          <CountdownTimer
+            key={`rates-${ratesExpiration.getTime()}`}
+            end={ratesExpiration}
+            callback={() => setError(new SwapGenericAPIError())}
+          />
+        </CountdownTimerWrapper>
+      ) : null}
       <Box horizontal flex={1} justifyContent={"flex-end"}>
         <Button onClick={onClose} secondary data-e2e="modal_buttonClose_swap">
           <Trans i18nKey="common.close" />

@@ -136,6 +136,7 @@ const DeviceAction = <R, H, P>({
 
   if (initSwapRequested && !initSwapResult && !initSwapError) {
     const { transaction, exchange, exchangeRate, status } = request;
+    const { amountExpectedTo, estimatedFees } = hookState;
     return renderSwapDeviceConfirmation({
       modelId,
       type,
@@ -143,6 +144,8 @@ const DeviceAction = <R, H, P>({
       exchangeRate,
       exchange,
       status,
+      amountExpectedTo,
+      estimatedFees,
     });
   }
 

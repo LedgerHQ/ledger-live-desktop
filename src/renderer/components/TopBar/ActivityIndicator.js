@@ -13,7 +13,7 @@ import { Rotating } from "../Spinner";
 import Tooltip from "../Tooltip";
 import TranslatedError from "../TranslatedError";
 import Box from "../Box";
-import ItemContainer from "./ItemContainer";
+import { ItemContainer } from "./shared";
 
 export default function ActivityIndicatorInner() {
   const bridgeSync = useBridgeSync();

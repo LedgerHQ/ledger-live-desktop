@@ -235,7 +235,7 @@ const handlers: Object = {
     const ids = state.swapAcceptedProviderIds;
     return {
       ...state,
-      swapAcceptedProviderIds: [...ids, providerId],
+      swapAcceptedProviderIds: ids.includes(providerId) ? ids : [...ids, providerId],
     };
   },
   LAST_SEEN_DEVICE_INFO: (
@@ -393,30 +393,63 @@ export const hideEmptyTokenAccountsSelector = (state: State) =>
 export const lastSeenDeviceSelector = (state: State) => state.settings.lastSeenDevice;
 
 export const swapProvidersSelector = (state: Object) => state.settings.swapProviders;
-
 export const showClearCacheBannerSelector = (state: Object) => state.settings.showClearCacheBanner;
 
 export const swapSupportedCurrenciesSelector: OutputSelector<
   State,
-  { accountId: string },
-  (TokenCurrency | CryptoCurrency)[],
+  void,
+  { [string]: (TokenCurrency | CryptoCurrency)[] },
 > = createSelector(swapProvidersSelector, swapProviders => {
-  if (!swapProviders) return [];
+  if (!swapProviders) return {};
 
-  const allIds = uniq(
-    swapProviders.reduce((ac, { supportedCurrencies }) => [...ac, ...supportedCurrencies], []),
-  );
+  const swapSupportedCurrenciesByTradeMethod = {};
 
-  const tokenCurrencies = allIds
-    .map(findTokenById)
-    .filter(Boolean)
-    .filter(t => !t.delisted);
-  const cryptoCurrencies = allIds
-    .map(findCryptoCurrencyById)
-    .filter(Boolean)
-    .filter(isCurrencySupported);
+  // TODO eventually this will no longer be enough, since a pair could be from
+  // different providers and a swap will not be available. A more deeply nested
+  // structure with provider -> method -> currencies will be needed or a different
+  // data structure. Until then, this is provider agnostic.
+  swapProviders.forEach(({ supportedCurrencies, tradeMethod }) => {
+    // For debugging/dev, allow disabling a method for a coin, comma separated values
+    // SWAP_DISABLE_FLOAT/SWAP_DISABLE_FIXED="coinid1,coinid2,coinid3"
+    const disabledCoinsForFloat = (process.env.SWAP_DISABLE_FLOAT || "").split(",");
+    const disabledCoinsForFixed = (process.env.SWAP_DISABLE_FIXED || "").split(",");
+    supportedCurrencies = supportedCurrencies.filter(
+      id =>
+        !(tradeMethod === "float" && disabledCoinsForFloat.includes(id)) &&
+        !(tradeMethod === "fixed" && disabledCoinsForFixed.includes(id)),
+    );
 
-  return [...cryptoCurrencies, ...tokenCurrencies].filter(isCurrencyExchangeSupported);
+    const tokenCurrencies = supportedCurrencies
+      .map(findTokenById)
+      .filter(Boolean)
+      .filter(t => !t.delisted);
+
+    const cryptoCurrencies = supportedCurrencies
+      .map(findCryptoCurrencyById)
+      .filter(Boolean)
+      .filter(isCurrencySupported);
+
+    swapSupportedCurrenciesByTradeMethod[tradeMethod] = [
+      ...cryptoCurrencies,
+      ...tokenCurrencies,
+    ].filter(isCurrencyExchangeSupported);
+  });
+
+  return swapSupportedCurrenciesByTradeMethod;
+});
+
+// NB As long as a currency exists in _any_ tradeMethod it's a valid From currency,
+// for the To currency, we need to check the pair exists in at least one of the methods
+export const flattenedSwapSupportedCurrenciesSelector: OutputSelector<
+  State,
+  void,
+  (TokenCurrency | CryptoCurrency)[],
+> = createSelector(swapSupportedCurrenciesSelector, swapSupportedCurrencies => {
+  const out = [];
+  for (const tradeMethod in swapSupportedCurrencies) {
+    out.push(...swapSupportedCurrencies[tradeMethod]);
+  }
+  return uniq(out);
 });
 
 export const exportSettingsSelector: OutputSelector<State, void, *> = createSelector(

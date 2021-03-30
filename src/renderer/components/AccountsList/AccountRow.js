@@ -11,16 +11,12 @@ import CheckBox from "~/renderer/components/CheckBox";
 import CryptoCurrencyIconWithCount from "~/renderer/components/CryptoCurrencyIconWithCount";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import Input from "~/renderer/components/Input";
+import AccountTagDerivationMode from "../AccountTagDerivationMode";
 
 const InputWrapper = styled.div`
   margin-left: 4px;
-
-  & > div > div {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
+  width: 100%;
 `;
-
 type Props = {
   account: Account,
   isChecked?: boolean,
@@ -88,6 +84,8 @@ export default class AccountRow extends PureComponent<Props> {
 
     const tokenCount = (account.subAccounts && account.subAccounts.length) || 0;
 
+    const tag = <AccountTagDerivationMode account={account} />;
+
     return (
       <AccountRowContainer
         className="account-row"
@@ -95,7 +93,15 @@ export default class AccountRow extends PureComponent<Props> {
         onClick={isDisabled ? null : this.onToggleAccount}
       >
         <CryptoCurrencyIconWithCount currency={account.currency} count={tokenCount} withTooltip />
-        <Box shrink grow ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
+        <Box
+          shrink
+          grow
+          ff="Inter|SemiBold"
+          color="palette.text.shade100"
+          horizontal
+          alignItems="center"
+          fontSize={4}
+        >
           {onEditName ? (
             <InputWrapper>
               <Input
@@ -110,17 +116,21 @@ export default class AccountRow extends PureComponent<Props> {
                 maxLength={getEnv("MAX_ACCOUNT_NAME_SIZE")}
                 editInPlace
                 autoFocus={autoFocusInput}
+                renderRight={tag}
               />
             </InputWrapper>
           ) : (
-            <div style={{ ...this.overflowStyles, paddingLeft: 15 }}>{accountName}</div>
+            <div style={{ ...this.overflowStyles, paddingLeft: 15, marginLeft: 4 }}>
+              {accountName}
+              {tag}
+            </div>
           )}
         </Box>
         {!hideAmount ? (
           <FormattedVal
             val={account.balance}
             unit={account.unit}
-            style={{ textAlign: "right", width: "auto" }}
+            style={{ textAlign: "right", width: "auto", minWidth: 120 }}
             showCode
             fontSize={4}
             color="palette.text.shade60"
@@ -139,7 +149,7 @@ const AccountRowContainer: ThemedComponent<{
   alignItems: "center",
   bg: "palette.background.default",
   px: 3,
-  flow: 3,
+  flow: 1,
 }))`
   height: 48px;
   border-radius: 4px;
