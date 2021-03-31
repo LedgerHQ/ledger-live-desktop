@@ -14,7 +14,7 @@ import IconChevronRight from "~/renderer/icons/ChevronRight";
 import { openURL } from "~/renderer/linking";
 import Text from "~/renderer/components/Text";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import { SideDrawer } from "~/renderer/components/Onboarding/SideDrawer";
+import { SideDrawer } from "~/renderer/components/SideDrawer";
 import Box from "~/renderer/components/Box";
 import { urls } from "~/config/urls";
 

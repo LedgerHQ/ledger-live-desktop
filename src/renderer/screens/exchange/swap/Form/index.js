@@ -183,6 +183,10 @@ const Form = ({
     estimateMaxSpendable();
   }, [account, parentAccount, setTransactionAmount, useAllAmount]);
 
+  useEffect(() => {
+    if (account) dispatch({ type: "onSetUseAllAmount", payload: { useAllAmount: false } });
+  }, [account]);
+
   const bumpFocusNonce = useCallback(
     () => setShouldFocusOnAmountNonce(shouldFocusOnAmountNonce + 1),
     [shouldFocusOnAmountNonce],
@@ -310,12 +314,10 @@ const Form = ({
                 dispatch({ type: "onSetFromCurrency", payload: { fromCurrency } })
               }
               onAccountChange={setAccount}
-              onAmountChange={setTransactionAmount}
               useAllAmount={useAllAmount}
-              onToggleUseAllAmount={toggleUseAllAmount}
             />
             <FromAmount
-              key={"fromAmount"}
+              key={`${account?.id || "none"}-fromAmount`}
               shouldFocusNonce={shouldFocusOnAmountNonce}
               status={status}
               amount={amount}

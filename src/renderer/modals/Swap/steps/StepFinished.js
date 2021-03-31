@@ -111,7 +111,7 @@ const StepFinished = ({
         <Trans i18nKey={`swap.modal.steps.finished.description`} />
       </Text>
       <Disclaimer horizontal p={2} mt={3}>
-        <InfoCircle size={17} color={useTheme("colors.palette.primary.main")} />
+        <InfoCircle size={15} color={useTheme("colors.palette.primary.main")} />
         <Text
           textAlign={"left"}
           ml={2}

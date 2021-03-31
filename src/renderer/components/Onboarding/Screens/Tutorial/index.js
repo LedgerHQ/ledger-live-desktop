@@ -18,7 +18,7 @@ import { RecoveryHowTo3 } from "~/renderer/components/Onboarding/Screens/Tutoria
 import { RecoveryHowTo2 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo2";
 import { RecoveryHowTo1 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo1";
 import { PairMyNano } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PairMyNano";
-import { SideDrawer } from "~/renderer/components/Onboarding/SideDrawer";
+import { SideDrawer } from "~/renderer/components/SideDrawer";
 import { PinHelp } from "~/renderer/components/Onboarding/Help/PinHelp";
 import { HideRecoverySeed } from "~/renderer/components/Onboarding/Help/HideRecoverySeed";
 import { RecoverySeed } from "~/renderer/components/Onboarding/Help/RecoverySeed";

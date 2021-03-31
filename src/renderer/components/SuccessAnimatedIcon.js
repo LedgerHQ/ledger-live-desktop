@@ -104,7 +104,7 @@ class SuccessAnimatedIcon extends PureComponent<Props> {
           xmlns="http://www.w3.org/2000/svg"
           width={width}
           height={height}
-          viewBox={`0 0 ${width} ${height}`}
+          viewBox={`0 0 70 70`}
         >
           <path
             fill="#D8D8D8"
