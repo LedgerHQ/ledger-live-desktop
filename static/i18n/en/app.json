@@ -3005,6 +3005,10 @@
       "title": "Sorry, {{currencyName}} services unavailable",
       "description": "Please retry or contact Ledger Support"
     },
+    "InvalidServerResponse": {
+      "title": "Sorry, something went wrong",
+      "description": "Could not handle server response. Please retry or contact Ledger Support"
+    },
     "ManagerAppAlreadyInstalled": {
       "title": "Sorry, that's already installed",
       "description": "Please check which apps are already installed on your device."
