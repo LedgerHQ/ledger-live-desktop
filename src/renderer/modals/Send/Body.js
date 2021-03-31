@@ -41,6 +41,7 @@ type OwnProps = {|
     disableBacks?: [string],
     transaction?: Transaction,
     onConfirmationHandler: Function,
+    onFailHandler: Function,
   },
 |};
 
@@ -257,6 +258,7 @@ const Body = ({
     onResetMaybeRecipient,
     updateTransaction,
     onConfirmationHandler: params.onConfirmationHandler,
+    onFailHandler: params.onFailHandler,
   };
 
   if (!status) return null;

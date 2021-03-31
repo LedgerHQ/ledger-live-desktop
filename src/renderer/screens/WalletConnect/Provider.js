@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ProviderCommon, {
   setCurrentCallRequestError,
+  setCurrentCallRequestResult,
 } from "@ledgerhq/live-common/lib/walletconnect/Provider";
 import { useHistory } from "react-router-dom";
 import { accountSelector } from "~/renderer/reducers/accounts";
@@ -30,7 +31,11 @@ const Provider = ({ children }: { children: React$Node }) => {
                 stepId: "amount",
                 account,
                 onConfirmationHandler: operation => {
-                  console.log("successs");
+                  setCurrentCallRequestResult(operation.hash);
+                },
+                onFailHandler: err => {
+                  console.log("err", err);
+                  setCurrentCallRequestError(err);
                 },
                 onClose: () => {
                   setCurrentCallRequestError("cancelled");
@@ -49,14 +54,15 @@ const Provider = ({ children }: { children: React$Node }) => {
               openModal("MODAL_SIGN_MESSAGE", {
                 message: wcCallRequest.data,
                 account,
-                onConfirmationHandler: operation => {
-                  console.log("successs");
+                onConfirmationHandler: signature => {
+                  setCurrentCallRequestResult(signature);
                 },
                 onFailHandler: err => {
+                  console.log("err", err);
                   setCurrentCallRequestError(err);
                 },
                 onClose: () => {
-                  setCurrentCallRequestError({ message: "cancelled" });
+                  setCurrentCallRequestError({ message: "cancelled" });
                 },
               }),
             );

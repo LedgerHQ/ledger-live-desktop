@@ -40,6 +40,8 @@ export type StepProps = {
   maybeAmount?: BigNumber,
   onResetMaybeAmount: () => void,
   updateTransaction: (updater: any) => void,
+  onConfirmationHandler: Function,
+  onFailHandler: Function,
 };
 
 export type St = Step<StepId, StepProps>;

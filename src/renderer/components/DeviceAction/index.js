@@ -9,6 +9,7 @@ import { setPreferredDeviceModel } from "~/renderer/actions/settings";
 import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import AutoRepair from "~/renderer/components/AutoRepair";
+import Text from "~/renderer/components/Text";
 import TransactionConfirm from "~/renderer/components/TransactionConfirm";
 import useTheme from "~/renderer/hooks/useTheme";
 import {
@@ -101,6 +102,7 @@ const DeviceAction = <R, H, P>({
     initSellRequested,
     initSellResult,
     initSellError,
+    signMessageRequested,
   } = hookState;
 
   console.log(hookState);
@@ -210,6 +212,11 @@ const DeviceAction = <R, H, P>({
     }
   }
 
+  if (request && signMessageRequested) {
+    // const { account } = request;
+    return <Text>Please Sign the message on the device</Text>;
+  }
+
   if (typeof deviceStreamingProgress === "number") {
     return renderLoading({
       modelId,
@@ -227,6 +234,8 @@ const DeviceAction = <R, H, P>({
         ),
     });
   }
+
+  console.log(action.mapResult, action.mapResult(hookState), onResult);
 
   const payload = action.mapResult(hookState);
 
