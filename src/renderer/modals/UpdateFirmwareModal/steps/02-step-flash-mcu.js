@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import type { DeviceModelId } from "@ledgerhq/devices";
@@ -53,7 +53,7 @@ const StepFlashMcu = ({ firmware, deviceModelId, setError, transitionTo }: Props
   const [installing, setInstalling] = useState<MaybeString>(null);
   const [initialDelayPhase, setInitialDelayPhase] = useState(true);
   const [progress, setProgress] = useState(0);
-  const withFinal = hasFinalFirmware(firmware?.final);
+  const withFinal = useMemo(() => hasFinalFirmware(firmware?.final), [firmware]);
 
   // didMount
   useEffect(() => {
