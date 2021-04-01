@@ -809,6 +809,10 @@
   },
   "walletconnect": {
     "titleAccount": "Wallet Connect",
+    "disconnect": "Disconnect",
+    "disconnected": "Disconnected",
+    "connected": "Connected",
+    "connecting": "Connecting...",
     "steps": {
       "paste": {
         "title": "Paste link",
@@ -819,6 +823,11 @@
         "title": "Connect",
         "details": "Wants to connect to the following Ethereum account through your wallet :"
       }
+    },
+    "connectedscreen": {
+      "info": "You can now access the Pooltogether dApp on your desktop.",
+      "warning": "Sharing receive addresses from dApps is not secure. Always use Ledger Live when sharing your address to receive funds.",
+      "disconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection"
     }
   },
   "dashboard": {

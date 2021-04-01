@@ -1,5 +1,6 @@
 // @flow
 import React, { useContext } from "react";
+import styled from "styled-components";
 import { Trans } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import type { StepProps } from "../types";
@@ -8,7 +9,32 @@ import Button from "~/renderer/components/Button";
 import { context, STATUS, approveSession } from "~/renderer/screens/WalletConnect/Provider";
 import BigSpinner from "~/renderer/components/BigSpinner";
 import Text from "~/renderer/components/Text";
+import Image from "~/renderer/components/Image";
+import LedgerLiveLogo from "~/renderer/components/LedgerLiveLogo";
+import LedgerLiveImg from "~/renderer/images/ledgerlive-logo.svg";
+import WCLogo from "~/renderer/images/walletconnect.png";
 import ParentCryptoCurrencyIcon from "~/renderer/components/ParentCryptoCurrencyIcon";
+
+const LogoContainer = styled.div`
+  width: 64px;
+  height: 64px;
+  border-radius: 64px;
+  border: solid 1px rgba(20, 37, 51, 0.1);
+`;
+
+const Logo = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+const DottedLine = styled.hr`
+  border: none;
+  border-top: 3px dotted rgba(20, 37, 51, 0.2);
+  height: 3px;
+  width: 54px;
+  margin-left: 16px;
+  margin-right: 16px;
+`;
 
 export default function StepConfirm({ account, link, setLink }: StepProps) {
   const wcContext = useContext(context);
@@ -21,6 +47,19 @@ export default function StepConfirm({ account, link, setLink }: StepProps) {
         <Box>Error</Box>
       ) : wcContext.status === STATUS.CONNECTING && wcContext.dappInfo ? (
         <Box alignItems={"center"} p={20}>
+          <Box horizontal alignItems={"center"} mb={32}>
+            <LogoContainer>
+              <Logo src={WCLogo} />
+            </LogoContainer>
+            <DottedLine />
+            <LogoContainer>
+              <LedgerLiveLogo
+                width="100%"
+                height="100%"
+                icon={<Image resource={LedgerLiveImg} alt="" width={"100%"} height={"100%"} />}
+              />
+            </LogoContainer>
+          </Box>
           <Text ff="Inter|Bold" fontSize={4} color="palette.text.shade100">
             {wcContext.dappInfo.name}
           </Text>

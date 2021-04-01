@@ -1,55 +1,178 @@
 // @flow
 
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
+import InfoBox from "~/renderer/components/InfoBox";
+import Text from "~/renderer/components/Text";
 import { WaveContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import { AnimatedWave } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/AnimatedWave";
 import { disconnect } from "./Provider";
+import { context, STATUS } from "~/renderer/screens/WalletConnect/Provider";
+import WCLogo from "~/renderer/images/walletconnect.png";
+import CompanyLogo from "~/renderer/images/logo.png";
+import { accountSelector } from "~/renderer/reducers/accounts";
+import ParentCryptoCurrencyIcon from "~/renderer/components/ParentCryptoCurrencyIcon";
+import IconCheck from "~/renderer/icons/Check";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
   flex: 1;
-  background: ${({ bgTheme, theme }) => {
-    if (bgTheme === "light") {
-      return "rgba(100, 144, 241, 0.1)";
-    }
-    if (bgTheme === "dark") {
-      return theme.colors.palette.primary.main;
-    }
-    return "none";
-  }};
+  background: rgba(100, 144, 241, 0.1);
+`;
+
+const InnerContainer = styled(Box)`
+  position: absolute;
+  top: 105px;
+  left: 155px;
+  right: 155px;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 24px;
+`;
+
+const LogoContainer = styled.div`
+  width: 94px;
+  height: 94px;
+  border-radius: 94px;
+  border: solid 1px rgba(20, 37, 51, 0.1);
+  margin-bottom: 20px;
+  position: relative;
+`;
+
+const CompanyLogoContainer = styled.div`
+  width: 98px;
+  height: 24px;
+  margin: 0 auto;
+  margin-top: 41px;
+`;
+
+const ConnexionStatusContainer = styled.div`
+  width: 34px;
+  height: 34px;
+  border-radius: 34px;
+  border: solid 3px #fff;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: ${p => (p.connected ? p.theme.colors.greenPill : p.theme.colors.orange)};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 19px;
+`;
+
+const AccountContainer = styled(Box)`
+  width: 100%;
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+`;
+
+const Logo = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+const InfoBoxContainer = styled.div`
+  width: 100%;
+  margin-bottom: 20px;
 `;
 
 const WalletConnect = () => {
-  const theme = "light";
+  const wcContext = useContext(context);
+
+  const account = useSelector(s => accountSelector(s, { accountId: wcContext.session.accountId }));
+
+  console.log(wcContext);
+
   return (
-    <Container bgTheme={theme}>
+    <Container>
       <WaveContainer>
-        <AnimatedWave height={500} color={theme === "dark" ? "#587ED4" : "#4385F016"} />
+        <AnimatedWave height={500} color={"#4385F016"} />
       </WaveContainer>
-      <Box
-        style={{
-          position: "absolute",
-          bottom: "105px",
-          top: "105px",
-          left: "155px",
-          right: "155px",
-        }}
-      >
-        coucou
-        <Button
-          onClick={() => {
-            disconnect();
-          }}
-          primary
-        >
-          Disconnect
-        </Button>
-      </Box>
+      <CompanyLogoContainer>
+        <Logo src={CompanyLogo} />
+      </CompanyLogoContainer>
+      <InnerContainer alignItems="center" pb={32}>
+        <LogoContainer mb={20}>
+          <Logo src={WCLogo} />
+          <ConnexionStatusContainer connected={wcContext.socketReady}>
+            {wcContext.socketReady ? <IconCheck color="#fff" size={19} /> : "!"}
+          </ConnexionStatusContainer>
+        </LogoContainer>
+        <Text ff="Inter|Bold" fontSize={4} color="palette.text.shade100">
+          {wcContext.dappInfo?.name}
+        </Text>
+
+        {wcContext.status === STATUS.DISCONNECTED ? (
+          <Trans i18nKey={"walletconnect.disconnected"} />
+        ) : (
+          <>
+            <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
+              <Trans
+                i18nKey={
+                  wcContext.socketReady ? "walletconnect.connected" : "walletconnect.connecting"
+                }
+              />
+            </Text>
+            <AccountContainer alignItems={"center"} p={20} mt={36} mb={24}>
+              <Box justifyContent="center" horizontal mb="10px">
+                {account?.currency ? (
+                  <ParentCryptoCurrencyIcon currency={account.currency} />
+                ) : null}
+                <Text
+                  ml={"5px"}
+                  textAlign="center"
+                  ff="Inter|Bold"
+                  fontSize={4}
+                  color="palette.text.shade100"
+                >
+                  {account?.name}
+                </Text>
+              </Box>
+              <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade50">
+                {account?.freshAddress}
+              </Text>
+            </AccountContainer>
+            {wcContext.socketReady ? (
+              <InfoBoxContainer>
+                <InfoBox>
+                  <Trans i18nKey="walletconnect.connectedscreen.info" />
+                </InfoBox>
+              </InfoBoxContainer>
+            ) : null}
+            {wcContext.socketReady ? (
+              <InfoBoxContainer>
+                <InfoBox type="warning">
+                  <Trans i18nKey="walletconnect.connectedscreen.warning" />
+                </InfoBox>
+              </InfoBoxContainer>
+            ) : null}
+            {!wcContext.socketReady ? (
+              <InfoBoxContainer>
+                <InfoBox type="warning">
+                  <Trans i18nKey="walletconnect.connectedscreen.disconnected" />
+                </InfoBox>
+              </InfoBoxContainer>
+            ) : null}
+            <Button
+              onClick={() => {
+                disconnect();
+              }}
+              primary
+            >
+              <Trans i18nKey="walletconnect.disconnect" />
+            </Button>
+          </>
+        )}
+      </InnerContainer>
     </Container>
   );
 };
