@@ -2746,6 +2746,12 @@
   "connectTroubleshooting": {
     "desc": "Having a hard time connecting your device?"
   },
+  "SignMessageConfirm": {
+    "stringHash": "Message Hash",
+    "domainHash": "Domain Hash",
+    "messageHash": "Message Hash",
+    "message": "Message"
+  },
   "TransactionConfirm": {
     "title": "Please confirm the operation on your device to finalize it",
     "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",

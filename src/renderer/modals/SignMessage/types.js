@@ -10,7 +10,7 @@ export type StepId = "summary" | "sign";
 export type StepProps = {
   t: TFunction,
   transitionTo: string => void,
-  account: ?Account,
+  account: Account,
   error: *,
   message: MessageData | TypedMessageData,
   onConfirmationHandler: Function,

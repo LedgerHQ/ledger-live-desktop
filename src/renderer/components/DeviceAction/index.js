@@ -9,8 +9,8 @@ import { setPreferredDeviceModel } from "~/renderer/actions/settings";
 import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import AutoRepair from "~/renderer/components/AutoRepair";
-import Text from "~/renderer/components/Text";
 import TransactionConfirm from "~/renderer/components/TransactionConfirm";
+import SignMessageConfirm from "~/renderer/components/SignMessageConfirm";
 import useTheme from "~/renderer/hooks/useTheme";
 import {
   renderAllowManager,
@@ -214,7 +214,14 @@ const DeviceAction = <R, H, P>({
 
   if (request && signMessageRequested) {
     // const { account } = request;
-    return <Text>Please Sign the message on the device</Text>;
+    const { account } = request;
+    return (
+      <SignMessageConfirm
+        device={device}
+        account={account}
+        signMessageRequested={signMessageRequested}
+      />
+    );
   }
 
   if (typeof deviceStreamingProgress === "number") {
