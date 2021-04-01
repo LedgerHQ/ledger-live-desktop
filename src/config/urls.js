@@ -34,6 +34,8 @@ export const urls = {
   // Ledger support
   faq:
     "https://support.ledger.com/hc/en-us?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=faq",
+  ledgerStatus:
+    "https://support.ledger.com/hc/en-us?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=status_page",
   syncErrors:
     "https://support.ledger.com/hc/en-us/articles/360012207759?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error_syncerror",
   terms:
