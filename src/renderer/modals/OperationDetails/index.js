@@ -69,6 +69,7 @@ import {
 } from "./styledComponents";
 import ToolTip from "~/renderer/components/Tooltip";
 import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
+import DoubleCounterValue from "~/renderer/components/DoubleCounterValue";
 
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const marketIndicator = marketIndicatorSelector(state);
@@ -281,7 +282,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                 </Box>
                 <Box mt={1} selectable>
                   {hasFailed ? null : (
-                    <CounterValue
+                    <DoubleCounterValue
                       alwaysShowSign
                       color="palette.text.shade60"
                       fontSize={5}
