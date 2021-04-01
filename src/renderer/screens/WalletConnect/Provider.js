@@ -77,10 +77,14 @@ const Provider = ({ children }: { children: React$Node }) => {
           pathname: "/walletconnect",
         });
       }}
-      onRemoteDisconnected={() => {
+      onRemoteDisconnected={disconnectedAccount => {
         console.log("wc session restarted should navigate bakc to account");
-        dispatch(closeAllModal());
-        history.goBack();
+        if (disconnectedAccount) {
+          dispatch(closeAllModal());
+          history.push({
+            pathname: `/account/${disconnectedAccount.id}`,
+          });
+        }
       }}
       useAccount={useAccount}
       isReady={isReady}
