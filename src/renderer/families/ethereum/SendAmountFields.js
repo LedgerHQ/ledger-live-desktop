@@ -1,61 +1,42 @@
 // @flow
-import React, { useState } from "react";
-import styled from "styled-components";
-import Box from "~/renderer/components/Box";
-import Text from "~/renderer/components/Text";
-import Switch from "~/renderer/components/Switch";
-import Label from "~/renderer/components/Label";
-import { Trans, withTranslation } from "react-i18next";
+import React, { useState, useCallback } from "react";
 
-import SelectFeeField from "./SelectFeeField";
+import SendFeeMode from "~/renderer/components/SendFeeMode";
+import SelectFeeStrategy from "~/renderer/components/SelectFeeStrategy";
 import GasLimitField from "./GasLimitField";
 import GasPriceField from "./GasPriceField";
-
-const AdvancedText = styled(Text)`
-  color: ${p =>
-    p.selected ? p.theme.colors.palette.primary.main : p.theme.colors.palette.text.shade50};
-  &:hover {
-    cursor: pointer;
-  }
-`;
+import { useFeesStrategy } from "@ledgerhq/live-common/lib/families/ethereum/react";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
 const Root = (props: *) => {
-  const [isAdvanceMode, setAdvanceMode] = useState(false);
+  const [isAdvanceMode, setAdvanceMode] = useState(props.transaction.feesStrategy === "advanced");
+  const strategies = useFeesStrategy(props.transaction);
+  const { account, transaction, onChange } = props;
+  const bridge = getAccountBridge(account);
+
+  const onFeeStrategyClick = useCallback(
+    ({ amount, feesStrategy }) => {
+      onChange(bridge.updateTransaction(transaction, { gasPrice: amount, feesStrategy }));
+    },
+    [transaction, onChange, bridge],
+  );
 
   return (
     <>
-      <Box horizontal alignItems="center" justifyContent="flex-start" style={{ width: 200 }}>
-        <Label>
-          <span>
-            <Trans i18nKey="Fees" />
-          </span>
-        </Label>
-        <Box horizontal alignItems="center" style={{ marginLeft: "10px" }}>
-          <Switch small isChecked={isAdvanceMode} onChange={() => setAdvanceMode(!isAdvanceMode)} />
-          <AdvancedText
-            ff="Inter|Medium"
-            fontSize={10}
-            selected={isAdvanceMode}
-            style={{ paddingLeft: 5 }}
-            onClick={() => setAdvanceMode(!isAdvanceMode)}
-          >
-            <Trans i18nKey="Advanced" />
-          </AdvancedText>
-        </Box>
-      </Box>
+      <SendFeeMode isAdvanceMode={isAdvanceMode} setAdvanceMode={setAdvanceMode} />
       {isAdvanceMode ? (
         <>
           <GasPriceField {...props} />
           <GasLimitField {...props} />
         </>
       ) : (
-        <SelectFeeField {...props} />
+        <SelectFeeStrategy strategies={strategies} onClick={onFeeStrategyClick} {...props} />
       )}
     </>
   );
 };
 
 export default {
-  component: withTranslation()(Root),
-  fields: ["fees", "gasLimit", "gasPrice"],
+  component: Root,
+  fields: ["feeStrategy", "gasLimit", "gasPrice"],
 };

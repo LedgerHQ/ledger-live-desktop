@@ -28,7 +28,7 @@ const AdvancedOptions = ({ onChange, account, transaction, status }: Props) => {
       if (userGasLimit.isNaN() || !userGasLimit.isFinite()) {
         userGasLimit = BigNumber(0x5208);
       }
-      onChange(bridge.updateTransaction(transaction, { userGasLimit }));
+      onChange(bridge.updateTransaction(transaction, { userGasLimit, feesStrategy: "advanced" }));
     },
     [account, transaction, onChange],
   );
