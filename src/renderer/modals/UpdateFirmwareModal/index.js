@@ -127,8 +127,7 @@ const UpdateModal = ({
       steps.push(updateStep);
       if (firmware?.shouldFlashMCU || withFinal) {
         steps.push(mcuStep);
-      }
-      if (!withFinal) {
+      } else {
         steps.push(updatingStep);
       }
       steps.push(finalStep);
