@@ -4,7 +4,6 @@ import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useBalanceHistoryWithCountervalue } from "~/renderer/actions/portfolio";
 import { BigNumber } from "bignumber.js";
-import moment from "moment";
 import { formatShort } from "@ledgerhq/live-common/lib/currencies";
 import type {
   Currency,
@@ -23,6 +22,7 @@ import { discreetModeSelector } from "~/renderer/reducers/settings";
 import AccountLendingFooter from "~/renderer/screens/lend/Account/AccountBalanceSummaryFooter";
 
 import perFamilyAccountBalanceSummaryFooter from "~/renderer/generated/AccountBalanceSummaryFooter";
+import FormattedDate from "~/renderer/components/FormattedDate";
 
 type Props = {
   counterValue: Currency,
@@ -73,10 +73,10 @@ export default function AccountBalanceSummary({
             <FormattedVal fontSize={4} color="warmGrey" showCode {...data[1]} />
           ) : null}
           <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
-            {moment(d.date).format("LL")}
+            <FormattedDate date={d.date} format="LL" />
           </Box>
           <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
-            {moment(d.date).format("LT")}
+            <FormattedDate date={d.date} format="LT" />
           </Box>
         </>
       );

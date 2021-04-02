@@ -1,10 +1,9 @@
 // @flow
 import { BigNumber } from "bignumber.js";
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import moment from "moment";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { useCalculate } from "@ledgerhq/live-common/lib/countervalues/react";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
@@ -13,6 +12,7 @@ import InfoCircle from "~/renderer/icons/InfoCircle";
 import ToolTip from "~/renderer/components/Tooltip";
 import Box from "~/renderer/components/Box/Box";
 import Text from "~/renderer/components/Text";
+import FormattedDate from "./FormattedDate";
 
 const Row = styled(Box).attrs(() => ({
   minWidth: 250,
@@ -60,7 +60,7 @@ type Props = {
   tooltipCompareDateLabel?: React$Node,
 };
 
-export default function DoubleCounterValue({
+function DoubleCounterValue({
   value,
   date,
   compareDate,
@@ -75,10 +75,11 @@ export default function DoubleCounterValue({
 }: Props) {
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const unit = counterValueCurrency.units[0];
+  const valueNumber = value.toNumber();
   const countervalue = useCalculate({
     from: currency,
     to: counterValueCurrency,
-    value: value.toNumber(),
+    value: valueNumber,
     disableRounding: true,
     date,
   });
@@ -86,7 +87,7 @@ export default function DoubleCounterValue({
   const compareCountervalue = useCalculate({
     from: currency,
     to: counterValueCurrency,
-    value: value.toNumber(),
+    value: valueNumber,
     disableRounding: true,
     date: compareDate,
   });
@@ -122,7 +123,9 @@ export default function DoubleCounterValue({
                   <Title>
                     {tooltipDateLabel || <Trans i18nKey={"calendar.transactionDate"} />}
                   </Title>
-                  <Subtitle>{moment(date).format("LL")}</Subtitle>
+                  <Subtitle>
+                    <FormattedDate date={date} format="LL" />
+                  </Subtitle>
                 </Column>
                 <div>
                   <FormattedVal
@@ -141,7 +144,9 @@ export default function DoubleCounterValue({
               <Row>
                 <Column mr={2}>
                   <Title>{tooltipCompareDateLabel || <Trans i18nKey={"calendar.today"} />}</Title>
-                  <Subtitle>{moment(compareDate).format("LL")}</Subtitle>
+                  <Subtitle>
+                    <FormattedDate date={compareDate} format="LL" />
+                  </Subtitle>
                 </Column>
                 <div>
                   <FormattedVal
@@ -169,3 +174,5 @@ export default function DoubleCounterValue({
     </>
   );
 }
+
+export default memo<Props>(DoubleCounterValue);

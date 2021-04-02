@@ -7,7 +7,6 @@ import { Trans, withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import styled from "styled-components";
 import uniq from "lodash/uniq";
-import moment from "moment";
 
 import {
   findSubAccountById,
@@ -70,6 +69,7 @@ import {
 import ToolTip from "~/renderer/components/Tooltip";
 import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
 import DoubleCounterValue from "~/renderer/components/DoubleCounterValue";
+import FormattedDate from "~/renderer/components/FormattedDate";
 
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const marketIndicator = marketIndicatorSelector(state);
@@ -405,7 +405,9 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
             </Box>
             <Box flex={1}>
               <OpDetailsTitle>{t("operationDetails.date")}</OpDetailsTitle>
-              <OpDetailsData>{moment(date).format("LLL")}</OpDetailsData>
+              <OpDetailsData>
+                <FormattedDate date={date} />
+              </OpDetailsData>
             </Box>
           </Box>
           <B />
