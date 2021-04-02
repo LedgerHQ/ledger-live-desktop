@@ -105,8 +105,6 @@ const DeviceAction = <R, H, P>({
     signMessageRequested,
   } = hookState;
 
-  console.log(hookState);
-
   const type = useTheme("colors.palette.type");
 
   const modelId = device ? device.modelId : overridesPreferredDeviceModel || preferredDeviceModel;
@@ -241,8 +239,6 @@ const DeviceAction = <R, H, P>({
         ),
     });
   }
-
-  console.log(action.mapResult, action.mapResult(hookState), onResult);
 
   const payload = action.mapResult(hookState);
 

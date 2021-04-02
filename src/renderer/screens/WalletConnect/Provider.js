@@ -21,9 +21,7 @@ const Provider = ({ children }: { children: React$Node }) => {
     <ProviderCommon
       onMessage={(wcCallRequest, account) => {
         if (wcCallRequest.type === "transaction" && wcCallRequest.method === "send") {
-          console.log("wc send transaction", wcCallRequest.data);
           return () => {
-            console.log("open modal");
             dispatch(
               openModal("MODAL_SEND", {
                 transaction: wcCallRequest.data,
@@ -34,7 +32,6 @@ const Provider = ({ children }: { children: React$Node }) => {
                   setCurrentCallRequestResult(operation.hash);
                 },
                 onFailHandler: err => {
-                  console.log("err", err);
                   setCurrentCallRequestError(err);
                 },
                 onClose: () => {
@@ -47,9 +44,7 @@ const Provider = ({ children }: { children: React$Node }) => {
         }
 
         if (wcCallRequest.type === "message") {
-          console.log("wc sign message", wcCallRequest.data);
           return () => {
-            console.log("open modal");
             dispatch(
               openModal("MODAL_SIGN_MESSAGE", {
                 message: wcCallRequest.data,
@@ -72,13 +67,11 @@ const Provider = ({ children }: { children: React$Node }) => {
         return false;
       }}
       onSessionRestarted={account => {
-        console.log("wc session restarted should navigat to wc screen");
         history.push({
           pathname: "/walletconnect",
         });
       }}
       onRemoteDisconnected={disconnectedAccount => {
-        console.log("wc session restarted should navigate bakc to account");
         if (disconnectedAccount) {
           dispatch(closeAllModal());
           history.push({

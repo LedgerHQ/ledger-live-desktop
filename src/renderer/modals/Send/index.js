@@ -24,8 +24,6 @@ class SendModal extends PureComponent<{ stepId: StepId, onClose: Function }, { s
   render() {
     const { stepId } = this.state;
 
-    console.log("stepId", stepId);
-
     const isModalLocked = ["recipient", "confirmation"].includes(stepId);
 
     return (
