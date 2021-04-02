@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback } from "react";
 import moment from "moment";
-import { Trans } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { useSelector } from "react-redux";
 import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import {
@@ -37,6 +37,8 @@ import { urls } from "~/config/urls";
 import IconExclamationCircle from "~/renderer/icons/ExclamationCircle";
 import useTheme from "~/renderer/hooks/useTheme";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import { DataList } from "~/renderer/modals/OperationDetails";
+import uniq from "lodash/uniq";
 
 const Label = styled(Text).attrs(() => ({
   fontSize: 2,
@@ -56,12 +58,13 @@ const Value = styled(Box).attrs(() => ({
   ${p => (p.status ? `color:${getStatusColor(p.status, p.theme)};` : "")}
 `;
 
-const Row = styled(Box).attrs(() => ({
-  horizontal: true,
-  py: 24,
+const Row = styled(Box).attrs(p => ({
+  py: p.py !== undefined ? p.py : 24,
 }))`
+  flex-direction: ${p => (p.vertical ? "column" : "row")};
   &:not(:last-child) {
-    border-bottom: 1px solid ${p => p.theme.colors.palette.text.shade10};
+    border-bottom: 1px solid
+      ${p => (p.noBorder ? "transparent" : p.theme.colors.palette.text.shade10)};
   }
   & > * {
     flex: 50%;
@@ -96,7 +99,7 @@ const WrapperClock: ThemedComponent<{}> = styled(Box).attrs(() => ({
   padding: 3px;
 `;
 
-const SwapIdWrapper: ThemedComponent<{}> = styled(Box).attrs(p => ({
+const SelectableTextWrapper: ThemedComponent<{}> = styled(Box).attrs(p => ({
   ff: "Inter",
   color: p.color || "palette.text.shade80",
   fontSize: 4,
@@ -148,7 +151,7 @@ const SwapOperationDetailsBody = ({
   const normalisedFromAmount = fromAmount.times(-1);
   const theme = useTheme();
   const statusColor = getStatusColor(status, theme);
-  const statusHasTooltip = ["refunded", "hold", "failed"].includes(status);
+  const { t } = useTranslation();
 
   const openAccount = useCallback(
     account => {
@@ -164,9 +167,14 @@ const SwapOperationDetailsBody = ({
     [accounts, history, onClose],
   );
 
+  // Fixme, at this point it might be a good idea to refactor into the op details modal
+  const senders = uniq(operation.senders);
+  const recipients = uniq(operation.recipients);
+
   return (
     <ModalBody
       onClose={onClose}
+      subTitle={<Trans i18nKey="operationDetails.title" />}
       title={<Trans i18nKey="swap.operationDetailsModal.title" />}
       render={() => (
         <Box p={1}>
@@ -222,12 +230,12 @@ const SwapOperationDetailsBody = ({
               <Label>
                 <Trans i18nKey="swap.operationDetailsModal.txid" />
               </Label>
-              <SwapIdWrapper selectable>
+              <SelectableTextWrapper selectable>
                 <Value>{swapId}</Value>
                 <GradientHover>
                   <CopyWithFeedback text={swapId} />
                 </GradientHover>
-              </SwapIdWrapper>
+              </SelectableTextWrapper>
             </Box>
           </Row>
           <Row>
@@ -239,17 +247,15 @@ const SwapOperationDetailsBody = ({
                 <Value mr={1} status={status} style={{ textTransform: "capitalize" }}>
                   {status}
                 </Value>
-                {statusHasTooltip ? (
-                  <Tooltip
-                    content={
-                      <Box style={{ maxWidth: 180 }}>
-                        <Trans i18nKey={`swap.operationDetailsModal.statusTooltips.${status}`} />
-                      </Box>
-                    }
-                  >
-                    <IconExclamationCircle size={12} color={statusColor} />
-                  </Tooltip>
-                ) : null}
+                <Tooltip
+                  content={
+                    <Box style={{ maxWidth: 180 }}>
+                      <Trans i18nKey={`swap.operationDetailsModal.statusTooltips.${status}`} />
+                    </Box>
+                  }
+                >
+                  <IconExclamationCircle size={12} color={statusColor} />
+                </Tooltip>
               </Box>
             </Box>
             <Box>
@@ -259,7 +265,7 @@ const SwapOperationDetailsBody = ({
               <Value>{moment(operation.date).format("MMMM, Do, YYYY")}</Value>
             </Box>
           </Row>
-          <Row>
+          <Row noBorder py={0} pt={24}>
             <Box>
               <Label>
                 <Trans i18nKey="swap.operationDetailsModal.from" />
@@ -292,6 +298,14 @@ const SwapOperationDetailsBody = ({
               </Value>
             </Box>
           </Row>
+          <Row vertical>
+            <Label>
+              <Trans i18nKey="swap.operationDetailsModal.fromAddress" count={senders?.length} />
+            </Label>
+            <Value horizontal alignItems={"center"} style={{ width: "100%" }}>
+              <DataList lines={senders} t={t} />
+            </Value>
+          </Row>
           <Row>
             <Box>
               <Label>
@@ -323,6 +337,14 @@ const SwapOperationDetailsBody = ({
                 />
               </Value>
             </Box>
+          </Row>
+          <Row vertical>
+            <Label>
+              <Trans i18nKey="swap.operationDetailsModal.toProvider" />
+            </Label>
+            <Value horizontal alignItems={"center"} style={{ width: "100%" }}>
+              <DataList lines={recipients} t={t} />
+            </Value>
           </Row>
         </Box>
       )}

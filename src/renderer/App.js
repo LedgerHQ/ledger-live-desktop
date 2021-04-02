@@ -20,6 +20,8 @@ import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
 import CountervaluesProvider from "~/renderer/components/CountervaluesProvider";
 import Default from "./Default";
 import WalletConnectProvider from "./screens/WalletConnect/Provider";
+import { AnnouncementProviderWrapper } from "~/renderer/components/AnnouncementProviderWrapper";
+import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 
 const reloadApp = event => {
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {
@@ -60,11 +62,15 @@ const App = ({ store, initialCountervalues }: Props) => {
             <RemoteConfigProvider>
               <UpdaterProvider>
                 <CountervaluesProvider initialState={initialCountervalues}>
-                  <Router>
-                    <WalletConnectProvider>
-                      <Default />
-                    </WalletConnectProvider>
-                  </Router>
+                  <ToastProvider>
+                    <AnnouncementProviderWrapper>
+                      <Router>
+                        <WalletConnectProvider>
+                          <Default />
+                        </WalletConnectProvider>
+                      </Router>
+                    </AnnouncementProviderWrapper>
+                  </ToastProvider>
                 </CountervaluesProvider>
               </UpdaterProvider>
             </RemoteConfigProvider>

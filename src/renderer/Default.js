@@ -37,6 +37,7 @@ import DebugMock from "~/renderer/components/debug/DebugMock";
 import { DebugWrapper } from "~/renderer/components/debug/shared";
 import useDeeplink from "~/renderer/hooks/useDeeplinking";
 import ModalsLayer from "./ModalsLayer";
+import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 
 export default function Default() {
   const location = useLocation();
@@ -118,6 +119,7 @@ export default function Default() {
                         <Route path="/swap" render={props => <Swap {...props} />} />
                       </Switch>
                     </Page>
+                    <ToastOverlay />
                   </Box>
 
                   <LibcoreBusyIndicator />
