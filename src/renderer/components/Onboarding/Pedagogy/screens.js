@@ -33,6 +33,9 @@ const IllustrationContainer = styled.div`
 export function AccessYourCoins({ t }: ScreenProps) {
   return (
     <React.Fragment>
+      <IllustrationContainer>
+        <Illustration height={218} width={443} src={accessYourCoins} />
+      </IllustrationContainer>
       <Text
         mt="8px"
         color="palette.text.shade100"
@@ -51,9 +54,6 @@ export function AccessYourCoins({ t }: ScreenProps) {
       >
         {t("onboarding.pedagogy.screens.accessYourCoins.description")}
       </Text>
-      <IllustrationContainer>
-        <Illustration height={218} width={443} src={accessYourCoins} />
-      </IllustrationContainer>
     </React.Fragment>
   );
 }

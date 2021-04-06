@@ -1038,7 +1038,8 @@
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction",
       "amountSent": "Amount to send",
-      "amountReceived": "Amount to receive before service fees",
+      "amountReceived": "Amount to receive",
+      "amountReceivedFloat": "Amount to receive before service fees",
       "fees": "Fees",
       "provider": "Provider",
       "payoutNetworkFees": "Payout fees",
@@ -2309,6 +2310,37 @@
     "dusk": "Dusk",
     "dark": "Dark"
   },
+  "toastOverlay": {
+    "toastType": {
+      "announcement": "News"
+    }
+  },
+  "informationCenter": {
+    "tooltip": "Information center",
+    "ongoingIncidentsTooltip": "There are {{incidentCount}} ongoing incidents",
+    "tabs": {
+      "announcements": "News",
+      "announcementsUnseen": "News ({{unseenCount}})",
+      "serviceStatus": "Status",
+      "serviceStatusIncidentsOngoing": "Status ({{incidentCount}})"
+    },
+    "serviceStatus": {
+      "statusOk": {
+        "title": "Ledger live is up and running",
+        "description": "Having trouble ? Go on our <0>help page</0>"
+      },
+      "statusNotOk": {
+        "title": "Ledger live is experiencing issues",
+        "learnMore": "Learn more"
+      }
+    },
+    "announcement": {
+      "emptyState": {
+        "title": "No news for the moment",
+        "desc": "You will find here all the news related to Ledger and Ledger live"
+      }
+    }
+  },
   "onboarding": {
     "drawers": {
       "pinHelp": {
@@ -2678,7 +2710,8 @@
       "descr": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
       "buttons": {
         "start": "Let’s take the quiz",
-        "next": "Next question"
+        "next": "Next question",
+        "finish": "Finish quiz"
       },
       "questions": {
         "1": {
@@ -3319,7 +3352,7 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{minAmountFromFormatted}}"
+      "title": "Amount must be more than {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Amount must be less than {{maxAmountFromFormatted}}"

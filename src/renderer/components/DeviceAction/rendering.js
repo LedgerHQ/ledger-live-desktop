@@ -416,6 +416,7 @@ export const renderSwapDeviceConfirmation = ({
   exchangeRate,
   exchange,
   amountExpectedTo,
+  estimatedFees,
 }: {
   modelId: DeviceModelId,
   type: "light" | "dark",
@@ -424,6 +425,7 @@ export const renderSwapDeviceConfirmation = ({
   exchangeRate: ExchangeRate,
   exchange: Exchange,
   amountExpectedTo?: string,
+  estimatedFees?: string,
 }) => {
   return (
     <>
@@ -447,7 +449,7 @@ export const renderSwapDeviceConfirmation = ({
               unit={getAccountUnit(
                 getMainAccount(exchange.fromAccount, exchange.fromParentAccount),
               )}
-              value={status.estimatedFees}
+              value={BigNumber(estimatedFees || 0)}
               disableRounding
               showCode
             />
@@ -461,16 +463,29 @@ export const renderSwapDeviceConfirmation = ({
             />
           ),
         },
-        (value, key) => (
-          <Box horizontal justifyContent="space-between" key={key} mb={2} ml="12px" mr="12px">
-            <Text fontWeight="500" color="palette.text.shade40" fontSize={3}>
-              <Trans i18nKey={`DeviceAction.swap.${key}`} />
-            </Text>
-            <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
-              {value}
-            </Text>
-          </Box>
-        ),
+        (value, key) => {
+          const maybeModifiedKey =
+            key === "amountReceived" && exchangeRate.tradeMethod === "float"
+              ? "amountReceivedFloat"
+              : key;
+          return (
+            <Box
+              horizontal
+              justifyContent="space-between"
+              key={maybeModifiedKey}
+              mb={2}
+              ml="12px"
+              mr="12px"
+            >
+              <Text fontWeight="500" color="palette.text.shade40" fontSize={3}>
+                <Trans i18nKey={`DeviceAction.swap.${maybeModifiedKey}`} />
+              </Text>
+              <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
+                {value}
+              </Text>
+            </Box>
+          );
+        },
       )}
       {exchangeRate.payoutNetworkFees ? (
         <Box
@@ -491,7 +506,7 @@ export const renderSwapDeviceConfirmation = ({
           </LabelInfoTooltip>
           <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
             <CurrencyUnitValue
-              unit={getAccountUnit(getMainAccount(exchange.toAccount, exchange.toParentAccount))}
+              unit={getAccountUnit(exchange.toAccount)}
               value={exchangeRate.payoutNetworkFees}
               disableRounding
               showCode

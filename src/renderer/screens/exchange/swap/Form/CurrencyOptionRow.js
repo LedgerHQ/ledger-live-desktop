@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import { Trans } from "react-i18next";
-import type { Currency } from "@ledgerhq/live-common/lib/types";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import Box from "~/renderer/components/Box";
 
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
@@ -18,10 +18,10 @@ const CurrencyOptionRow = ({
 }: {
   status: CurrencyStatus,
   circle?: boolean,
-  currency: Currency,
+  currency: CryptoCurrency | TokenCurrency,
 }) => {
   const notOK = status !== "ok";
-
+  const mainCurrency = currency.type === "TokenCurrency" ? currency.parentCurrency : currency;
   return (
     <Box grow horizontal alignItems="center" flow={2}>
       <CryptoCurrencyIcon
@@ -45,7 +45,10 @@ const CurrencyOptionRow = ({
             content={
               <Box p={1} style={{ maxWidth: 120 }}>
                 <Text fontSize={2}>
-                  <Trans i18nKey={`swap.form.${status}`} values={{ currencyName: currency.name }} />
+                  <Trans
+                    i18nKey={`swap.form.${status}`}
+                    values={{ currencyName: mainCurrency.name }}
+                  />
                 </Text>
               </Box>
             }
