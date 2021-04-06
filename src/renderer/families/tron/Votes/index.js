@@ -130,7 +130,7 @@ const Delegation = ({ account }: Props) => {
         titleProps={{ "data-e2e": "title_Delegation" }}
       >
         {tronPower > 0 && formattedVotes.length > 0 ? (
-          <Button small primary inverted onClick={onDelegate} mr={2}>
+          <Button small color="palette.primary.main" onClick={onDelegate} mr={2}>
             <Box horizontal flow={1} alignItems="center">
               <Vote size={12} />
               <Box>
@@ -160,8 +160,7 @@ const Delegation = ({ account }: Props) => {
           >
             <Button
               disabled={!canClaimRewards}
-              primary
-              inverted
+              color="palette.primary.main"
               small
               onClick={() => {
                 dispatch(

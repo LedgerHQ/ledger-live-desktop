@@ -279,8 +279,7 @@ const Nomination = ({ account }: Props) => {
                 id={"account-nominate-button"}
                 mr={2}
                 disabled={!nominateEnabled}
-                primary
-                inverted
+                color="palette.primary.main"
                 small
                 onClick={onNominate}
               >
@@ -386,8 +385,7 @@ const Nomination = ({ account }: Props) => {
                 id={"account-rebond-button"}
                 disabled={electionOpen}
                 mr={2}
-                primary
-                inverted
+                color="palette.primary.main"
                 small
                 onClick={onRebond}
               >
@@ -417,8 +415,7 @@ const Nomination = ({ account }: Props) => {
               <Button
                 id={"account-withdraw-button"}
                 disabled={!withdrawEnabled}
-                primary
-                inverted
+                color="palette.primary.main"
                 small
                 onClick={onWithdrawUnbonded}
               >

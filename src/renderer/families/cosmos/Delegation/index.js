@@ -134,8 +134,7 @@ const Delegation = ({ account }: Props) => {
                     id={"account-delegate-button"}
                     mr={2}
                     disabled={!delegationEnabled}
-                    primary
-                    inverted
+                    color="palette.primary.main"
                     small
                     onClick={onDelegate}
                   >
@@ -154,8 +153,7 @@ const Delegation = ({ account }: Props) => {
                 <Button
                   id={"account-rewards-button"}
                   disabled={!hasRewards}
-                  primary
-                  inverted
+                  color="palette.primary.main"
                   small
                   onClick={onClaimRewards}
                 >
