@@ -22,7 +22,8 @@ type Props<C: Currency> = {
   minWidth?: number,
   width?: number,
   rowHeight?: number,
-  isDisabled?: Currency => boolean,
+  isCurrencyDisabled?: Currency => boolean,
+  isDisabled?: boolean,
   id?: string,
   renderOptionOverride?: (option: Option) => any,
 };
@@ -40,6 +41,7 @@ const SelectCurrency = <C: Currency>({
   width,
   rowHeight = 47,
   renderOptionOverride,
+  isCurrencyDisabled,
   isDisabled,
   id,
 }: Props<C>) => {
@@ -66,9 +68,9 @@ const SelectCurrency = <C: Currency>({
         value: c,
         label: c.name,
         currency: c,
-        isDisabled: isDisabled ? isDisabled(c) : false,
+        isDisabled: isCurrencyDisabled ? isCurrencyDisabled(c) : false,
       })),
-    [isDisabled, cryptos],
+    [isCurrencyDisabled, cryptos],
   );
 
   const fuseOptions = useMemo(
@@ -103,6 +105,7 @@ const SelectCurrency = <C: Currency>({
       onChange={onChangeCallback}
       minWidth={minWidth}
       width={width}
+      isDisabled={isDisabled}
       rowHeight={rowHeight}
     />
   );

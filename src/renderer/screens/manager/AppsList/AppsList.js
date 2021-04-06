@@ -167,7 +167,7 @@ const AppsList = ({
           <TabBar
             withId
             ids={["appCatalog", "appsOnDevice"]}
-            tabs={["manager.tabs.appCatalog", "manager.tabs.appsOnDevice"]}
+            tabs={[t("manager.tabs.appCatalog"), t("manager.tabs.appsOnDevice")]}
             onIndexChange={setActiveTab}
           />
         </StickyTabBar>
