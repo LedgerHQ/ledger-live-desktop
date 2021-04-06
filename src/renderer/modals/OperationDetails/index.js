@@ -573,7 +573,9 @@ const OperationDetailsExtra = ({ extra }: OperationDetailsExtraProps) => {
       <OpDetailsTitle>
         <Trans i18nKey={`operationDetails.extra.${key}`} defaults={key} />
       </OpDetailsTitle>
-      <OpDetailsData>{value}</OpDetailsData>
+      <OpDetailsData>
+        <Ellipsis>{value}</Ellipsis>
+      </OpDetailsData>
     </Box>
   ));
 };
