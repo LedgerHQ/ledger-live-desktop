@@ -14,6 +14,7 @@ import styled from "styled-components";
 
 const FooterWrapper: ThemedComponent<{}> = styled(Box)`
   align-items: center;
+  margin-top: 15px;
   border-top: 1px solid ${p => p.theme.colors.palette.divider};
   justify-content: space-between;
   padding: 20px;
