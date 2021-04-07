@@ -69,11 +69,12 @@ export const HandShield = ({ size }: { size: number }) => (
 const svg = <HandShield size={43} />;
 
 type Props = {
+  style?: *,
   children: React.Node,
 };
 
 const WarnBox = (props: Props) => (
-  <Container mb={4}>
+  <Container mb={4} style={props.style}>
     <Box mx={1}>{svg}</Box>
     <Box shrink>{props.children}</Box>
   </Container>

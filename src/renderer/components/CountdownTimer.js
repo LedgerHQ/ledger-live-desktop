@@ -32,7 +32,7 @@ const CountdownTimer = ({
   }, 1000);
 
   return (
-    <Text ff="Inter|SemiBold" fontSize={3} color={"palette.text.shade100"}>
+    <Text ff="Inter|Regular" fontSize={2} color={"palette.text.shade60"}>
       {timeLeft}
     </Text>
   );

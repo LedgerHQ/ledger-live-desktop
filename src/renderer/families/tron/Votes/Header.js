@@ -5,13 +5,7 @@ import styled from "styled-components";
 import { Trans } from "react-i18next";
 import Text from "~/renderer/components/Text";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-
-export const Wrapper: ThemedComponent<{}> = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding: 16px 20px;
-  border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
-`;
+import { HeaderWrapper } from "~/renderer/components/TableContainer";
 
 export const TableLine: ThemedComponent<{}> = styled(Text).attrs(() => ({
   ff: "Inter|SemiBold",
@@ -30,7 +24,7 @@ export const TableLine: ThemedComponent<{}> = styled(Text).attrs(() => ({
 `;
 
 const Header = () => (
-  <Wrapper>
+  <HeaderWrapper>
     <TableLine>
       <Trans i18nKey="delegation.validator" />
     </TableLine>
@@ -43,7 +37,7 @@ const Header = () => (
     <TableLine>
       <Trans i18nKey="delegation.duration" />
     </TableLine>
-  </Wrapper>
+  </HeaderWrapper>
 );
 
 export default Header;

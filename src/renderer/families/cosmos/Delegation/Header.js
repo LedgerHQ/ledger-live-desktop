@@ -5,13 +5,7 @@ import styled from "styled-components";
 import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box/Box";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-
-export const Wrapper: ThemedComponent<{}> = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding: 16px 20px;
-  border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
-`;
+import { HeaderWrapper } from "~/renderer/components/TableContainer";
 
 export const TableLine: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|SemiBold",
@@ -33,7 +27,7 @@ export const TableLine: ThemedComponent<{}> = styled(Box).attrs(() => ({
 `;
 
 export const Header = () => (
-  <Wrapper>
+  <HeaderWrapper>
     <TableLine>
       <Trans i18nKey="delegation.validator" />
     </TableLine>
@@ -47,11 +41,11 @@ export const Header = () => (
       <Trans i18nKey="delegation.rewards" />
     </TableLine>
     <TableLine />
-  </Wrapper>
+  </HeaderWrapper>
 );
 
 export const UnbondingHeader = () => (
-  <Wrapper>
+  <HeaderWrapper>
     <TableLine>
       <Trans i18nKey="delegation.validator" />
     </TableLine>
@@ -64,5 +58,5 @@ export const UnbondingHeader = () => (
     <TableLine>
       <Trans i18nKey="delegation.completionDate" />
     </TableLine>
-  </Wrapper>
+  </HeaderWrapper>
 );
