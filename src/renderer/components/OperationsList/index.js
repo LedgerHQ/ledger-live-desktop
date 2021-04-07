@@ -16,13 +16,14 @@ import {
 import logger from "~/logger";
 import { openModal } from "~/renderer/actions/modals";
 import IconAngleDown from "~/renderer/icons/AngleDown";
-import Box, { Card } from "~/renderer/components/Box";
+import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { track } from "~/renderer/analytics/segment";
 import { createStructuredSelector } from "reselect";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import SectionTitle from "./SectionTitle";
 import OperationC from "./Operation";
+import TableContainer, { TableHeader } from "../TableContainer";
 
 const ShowMore = styled(Box).attrs(() => ({
   horizontal: true,
@@ -116,18 +117,9 @@ export class OperationsList extends PureComponent<Props, State> {
 
     return (
       <>
-        <Card id="operation-list">
+        <TableContainer id="operation-list">
           {title && (
-            <Box py={3} px={4}>
-              <Text
-                color="palette.text.shade100"
-                ff="Inter|Medium"
-                fontSize={6}
-                data-e2e="dashboard_OperationList"
-              >
-                {title}
-              </Text>
-            </Box>
+            <TableHeader title={title} titleProps={{ "data-e2e": "dashboard_OperationList" }} />
           )}
           {groupedOperations.sections.map(group => (
             <Box key={group.day.toISOString()}>
@@ -168,7 +160,7 @@ export class OperationsList extends PureComponent<Props, State> {
               </Box>
             </Box>
           ))}
-        </Card>
+        </TableContainer>
         {!groupedOperations.completed ? (
           <ShowMore onClick={this.fetchMoreOperations}>
             <span>{t("common.showMore")}</span>
