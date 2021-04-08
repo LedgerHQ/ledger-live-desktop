@@ -126,6 +126,7 @@ const Body = ({
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId]);
 
   const handleRetry = useCallback(() => {
+    setTransactionError(null);
     onChangeStepId("amount");
   }, [onChangeStepId]);
 
