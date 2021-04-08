@@ -2,6 +2,7 @@ import initialize, {
   accountsPage,
   accountPage,
   app,
+  modalPage,
   walletConnectPasteLinkModal,
   wcClientMock,
   wcConnectedPage,
@@ -11,8 +12,6 @@ describe("WalletConnect", () => {
   initialize("walletconnect", {
     userData: "1AccountBTC1AccountETH",
   });
-
-  const $ = selector => app.client.$(selector);
 
   it("goes to walletconnect modal", async () => {
     await accountsPage.goToAccounts();
@@ -46,7 +45,27 @@ describe("WalletConnect", () => {
     });
   });
 
-  it("disconnects", async () => {
+  it("triggers a send transaction", async () => {
+    wcClientMock("sendTransaction", []);
+
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "wc-connect-transaction-triggered",
+    });
+  });
+
+  it("cancel and trigger a sign message", async () => {
+    await modalPage.close();
+
+    wcClientMock("signMessage", []);
+
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "wc-connect-signmessage-triggered",
+    });
+  });
+
+  it("cancel and disconnects", async () => {
+    await modalPage.close();
+
     await wcConnectedPage.disconnect();
 
     expect(await app.client.screenshot()).toMatchImageSnapshot({

@@ -76,8 +76,37 @@ class WalletConnectClient extends EventEmitter {
     this.emit("connect");
   }
 
-  callRequest(payload: *) {
-    this.emit("call_request", null, payload);
+  sendTransaction() {
+    this.emit("call_request", null, {
+      id: 1617871223182056,
+      jsonrpc: "2.0",
+      method: "eth_sendTransaction",
+      params: [
+        {
+          // $FlowFixMe
+          from: this.session.accounts[0],
+          to: "0xCA220B75b7aF206bFCc67E2EcE06E2e144FA294a",
+          gasPrice: "0x161e70f600",
+          gas: "0x5208",
+          value: "0x0",
+          nonce: "0x1d",
+          data: "0x",
+        },
+      ],
+    });
+  }
+
+  signMessage() {
+    this.emit("call_request", null, {
+      id: 1617871234761141,
+      jsonrpc: "2.0",
+      method: "personal_sign",
+      params: [
+        "0x4d7920656d61696c206973206a6f686e40646f652e636f6d202d2031353337383336323036313031",
+        // $FlowFixMe
+        this.session.accounts[0],
+      ],
+    });
   }
 }
 
