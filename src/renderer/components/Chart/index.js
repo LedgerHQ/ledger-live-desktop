@@ -146,7 +146,7 @@ export default function Chart({
               minRotation: 0,
             },
             time: {
-              minUnit: "day",
+              minUnit: tickXScale === "day" ? "hour" : "day",
               displayFormats: {
                 quarter: "MMM YYYY",
               },
