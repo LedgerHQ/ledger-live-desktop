@@ -66,7 +66,7 @@ export function StepSummaryFooter({ transitionTo }: StepProps) {
         }}
         primary
       >
-        Continue
+        <Trans i18nKey="common.continue" />
       </Button>
     </Box>
   );

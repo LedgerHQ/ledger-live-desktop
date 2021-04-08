@@ -90,8 +90,6 @@ const WalletConnect = () => {
 
   const account = useSelector(s => accountSelector(s, { accountId: wcContext.session.accountId }));
 
-  console.log(wcContext);
-
   return (
     <Container>
       <WaveContainer>

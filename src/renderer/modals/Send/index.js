@@ -8,7 +8,6 @@ import type { StepId } from "./types";
 class SendModal extends PureComponent<{ stepId: StepId, onClose: Function }, { stepId: StepId }> {
   constructor(props: { stepId: StepId, onClose: Function }) {
     super(props);
-    console.log("send fund props", props);
     this.state = {
       stepId: props.stepId || "recipient",
     };
@@ -26,13 +25,17 @@ class SendModal extends PureComponent<{ stepId: StepId, onClose: Function }, { s
 
     const isModalLocked = ["recipient", "confirmation"].includes(stepId);
 
+    const rest = {};
+    if (this.props.onClose) {
+      rest.onClose = this.props.onClose;
+    }
+
     return (
       <Modal
         name="MODAL_SEND"
         centered
         refocusWhenChange={stepId}
         onHide={this.handleReset}
-        onClose={this.props.onClose || (() => {})}
         preventBackdropClick={isModalLocked}
         render={({ onClose, data }) => (
           <Body
@@ -42,6 +45,7 @@ class SendModal extends PureComponent<{ stepId: StepId, onClose: Function }, { s
             params={data || {}}
           />
         )}
+        {...rest}
       />
     );
   }

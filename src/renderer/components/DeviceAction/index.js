@@ -214,7 +214,6 @@ const DeviceAction = <R, H, P>({
   }
 
   if (request && signMessageRequested) {
-    // const { account } = request;
     const { account } = request;
     return (
       <SignMessageConfirm
