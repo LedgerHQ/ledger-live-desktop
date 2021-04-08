@@ -25,9 +25,24 @@ export default class AccountPage extends Page {
     return this.$("#operation-list");
   }
 
+  async actionsDropdown() {
+    return this.$("#account-actions-dropdown");
+  }
+
+  async actionsDropdownWC() {
+    return this.$("#account-actions-dropdown-WalletConnect");
+  }
+
   async bookmarkAccount() {
     const elem = await this.starButton();
     await elem.click();
+  }
+
+  async openWalletConnect() {
+    const elem = await this.actionsDropdown();
+    await elem.click();
+    const elem2 = await this.actionsDropdownWC();
+    await elem2.click();
   }
 
   async getTokens() {

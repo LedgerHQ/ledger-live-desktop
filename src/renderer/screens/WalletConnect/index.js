@@ -104,7 +104,7 @@ const WalletConnect = () => {
         <LogoContainer mb={20}>
           <Logo src={WCLogo} />
           <ConnexionStatusContainer connected={wcContext.socketReady}>
-            {wcContext.socketReady ? <IconCheck color="#fff" size={19} /> : "!"}
+            {wcContext.socketReady ? <IconCheck id="wc-icon-check" color="#fff" size={19} /> : "!"}
           </ConnexionStatusContainer>
         </LogoContainer>
         <Text ff="Inter|Bold" fontSize={4} color="palette.text.shade100">
@@ -167,6 +167,7 @@ const WalletConnect = () => {
                 disconnect();
               }}
               primary
+              id="wc-disconnect"
             >
               <Trans i18nKey="walletconnect.disconnect" />
             </Button>

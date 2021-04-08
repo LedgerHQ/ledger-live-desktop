@@ -7,6 +7,7 @@ import ProviderCommon, {
 import { useHistory } from "react-router-dom";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import { openModal, closeAllModal } from "~/renderer/actions/modals";
+import WalletConnectClientMock from "~/../tests/mocks/WalletConnectClient";
 
 const useAccount = accountId => {
   return useSelector(s => accountSelector(s, { accountId }));
@@ -16,6 +17,12 @@ const Provider = ({ children }: { children: React$Node }) => {
   const [isReady] = useState(true);
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const rest = {};
+
+  if (process.env.SPECTRON_RUN) {
+    rest.WalletConnect = WalletConnectClientMock;
+  }
 
   return (
     <ProviderCommon
@@ -91,6 +98,7 @@ const Provider = ({ children }: { children: React$Node }) => {
           return JSON.parse(window.localStorage.getItem("wc_session"));
         } catch (e) {}
       }}
+      {...rest}
     >
       {children}
     </ProviderCommon>

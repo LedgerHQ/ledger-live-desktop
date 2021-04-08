@@ -37,6 +37,7 @@ export default function StepPaste({ account, link, setLink }: StepProps) {
         placeholder={t("walletconnect.steps.paste.placeholder")}
         spellCheck="false"
         value={link}
+        id="wc-paste-link"
         onChange={setLink}
         renderRight={
           <Right
@@ -63,6 +64,7 @@ export function StepPasteFooter({ link, setLink, transitionTo }: StepProps) {
         }}
         primary
         disabled={!link}
+        id="wc-paste-link-continue"
       >
         Continue
       </Button>

@@ -194,7 +194,7 @@ const AccountHeaderActions = ({
     ...(currency.id === "ethereum"
       ? [
           {
-            key: "WalletConnet",
+            key: "WalletConnect",
             onClick: onWalletConnect,
             event: "Wallet Connect Account Button",
             icon: IconWalletConnect,
@@ -240,7 +240,14 @@ const AccountHeaderActions = ({
 
           <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
           {actions && actions.length > 0 ? (
-            <DropDownSelector border horizontal items={actions} renderItem={renderItem} controlled>
+            <DropDownSelector
+              buttonId="account-actions-dropdown"
+              border
+              horizontal
+              items={actions}
+              renderItem={renderItem}
+              controlled
+            >
               {({ isOpen, value }) => (
                 <Button small primary>
                   <Box horizontal flow={1} alignItems="center">

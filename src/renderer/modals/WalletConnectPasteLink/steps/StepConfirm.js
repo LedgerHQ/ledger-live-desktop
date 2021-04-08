@@ -130,6 +130,7 @@ export function StepConfirmFooter({ link, onClose, account, onCloseWithoutDiscon
         }}
         primary
         disabled={!(wcContext.status === STATUS.CONNECTING && wcContext.dappInfo)}
+        id="wc-paste-link-confirm-continue"
       >
         Continue
       </Button>
