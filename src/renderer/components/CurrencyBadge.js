@@ -72,7 +72,7 @@ export function CurrencyCircleIcon({
       showCheckmark={showCheckmark}
       cryptoColor={ensureContrast(currency.color, bgColor)}
     >
-      {Icon && <Icon size={size / 2} />}
+      {Icon && <Icon size={size * 0.6} />}
       {showCheckmark && (
         <div>
           <IconCheckFull size={22} />

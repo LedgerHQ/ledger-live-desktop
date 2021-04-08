@@ -14,6 +14,7 @@ import Box from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { urls } from "~/config/urls";
 
 const IncidentContainer = styled(Box)`
   width: 100%;
@@ -105,7 +106,7 @@ function StatusOkHeader() {
         lineHeight="16px"
       >
         <Trans i18nKey="informationCenter.serviceStatus.statusOk.description">
-          <FakeLink onClick={() => openURL("http://test.com")} />
+          <FakeLink onClick={() => openURL(urls.ledgerStatus)} />
         </Trans>
       </Text>
     </>

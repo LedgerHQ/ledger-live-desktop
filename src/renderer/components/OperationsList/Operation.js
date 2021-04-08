@@ -28,10 +28,6 @@ const OperationRow: ThemedComponent<{}> = styled(Box).attrs(() => ({
   opacity: ${p => (p.isOptimistic ? 0.5 : 1)};
   cursor: pointer;
 
-  &:last-child {
-    border-bottom: 0;
-  }
-
   &:hover {
     background: ${p => rgba(p.theme.colors.wallet, 0.04)};
   }

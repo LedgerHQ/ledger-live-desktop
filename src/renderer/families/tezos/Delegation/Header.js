@@ -6,11 +6,14 @@ import { useTranslation } from "react-i18next";
 import Text from "~/renderer/components/Text";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
+import { rgba } from "~/renderer/styles/helpers";
+
 const Wrapper: ThemedComponent<{}> = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 16px 20px;
+  padding: 10px 20px;
   border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
+  background-color: ${p => rgba(p.theme.colors.palette.secondary.main, 0.02)};
   > * {
     flex: 1;
     display: flex;
