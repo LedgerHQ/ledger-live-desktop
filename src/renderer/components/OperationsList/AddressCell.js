@@ -6,26 +6,22 @@ import type { Operation } from "@ledgerhq/live-common/lib/types";
 import Box from "~/renderer/components/Box";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
+const MIN_ADDRESS_LENGTH_TO_SPLIT = 24;
+
 export const SplitAddress = ({
   value,
-  color,
-  ff,
-  fontSize,
+  style,
 }: {
   value: string,
-  color?: string,
-  ff?: string,
-  fontSize?: number,
+  style?: {
+    color?: string,
+    ff?: string,
+    fontSize?: number,
+  },
 }) => {
   if (!value) {
     return <Box />;
   }
-
-  const boxProps = {
-    color,
-    ff,
-    fontSize,
-  };
 
   const third = Math.round(value.length / 3);
 
@@ -34,16 +30,28 @@ export const SplitAddress = ({
   const right = value.slice(third, value.length);
 
   return (
-    <Box horizontal {...boxProps}>
+    <Box horizontal {...style}>
       <Left>{left}</Left>
       <Right>{right}</Right>
     </Box>
   );
 };
 
-export const Address = ({ value }: { value: string }) => (
-  <SplitAddress value={value} color="palette.text.shade80" ff="Inter" fontSize={3} />
-);
+export const Address = ({ value }: { value: string }) => {
+  const style = {
+    color: "palette.text.shade80",
+    ff: "Inter",
+    fontSize: "3",
+  };
+
+  return value.length > MIN_ADDRESS_LENGTH_TO_SPLIT ? (
+    <SplitAddress value={value} style={style} />
+  ) : (
+    <Box horizontal {...style}>
+      {value}
+    </Box>
+  );
+};
 
 const Left: ThemedComponent<{}> = styled.div`
   overflow: hidden;
