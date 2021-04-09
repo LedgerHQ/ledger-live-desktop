@@ -23,7 +23,7 @@ type BodyProps = {
   modelId: DeviceModelId,
 };
 
-const Body = ({ modelId }: BodyProps) => {
+export const Body = ({ modelId }: BodyProps) => {
   const type = useTheme("colors.palette.type");
   return renderFirmwareUpdating({ modelId, type });
 };

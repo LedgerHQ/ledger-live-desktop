@@ -89,7 +89,7 @@ export function CurrencyCircleIcon({
 
 function CurrencyBadge({ currency }: { currency: CryptoCurrency | TokenCurrency }) {
   return (
-    <Box horizontal alignItems={"center"} flow={3}>
+    <Box horizontal alignItems={"center"} flow={3} id="currency-badge">
       <CurrencyCircleIcon size={40} currency={currency} />
       <Box ml={2}>
         <Box
@@ -100,7 +100,7 @@ function CurrencyBadge({ currency }: { currency: CryptoCurrency | TokenCurrency 
         >
           {currency.ticker}
         </Box>
-        <Box ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4} id="currency-badge">
+        <Box ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
           {currency.name}
         </Box>
       </Box>

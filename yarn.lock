@@ -1537,10 +1537,10 @@
     node-pre-gyp "^0.17.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^19.1.0":
-  version "19.1.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-19.1.0.tgz#528fafca25d48cb73b14b236c258b8b0e85eda40"
-  integrity sha512-JY9KW203kfWPzXWNiwVxmxRD9mmiZeqf5QRbCRJB1vjSam7ztS1SMkUEgBNF+fDgDSflUHMEVR08/f5jvUmijg==
+"@ledgerhq/live-common@^19.2.0":
+  version "19.2.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-19.2.0.tgz#dc254bc65dd5c386da9897d753f93e39aa0d05cb"
+  integrity sha512-m9+/D37dsxPDRxRen053amYIFnRw1hT+5NlPENOzxagJuOXwIpHOLY/M9hiLhQbLyGAVZR9wfiRc3RhZKe5Mlw==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/cryptoassets" "5.48.0"
@@ -1600,7 +1600,7 @@
     winston "^3.3.3"
     xstate "^4.17.1"
 
-"@ledgerhq/logs@5.48.0", "@ledgerhq/logs@^5.48.0":
+"@ledgerhq/logs@5.48.0", "@ledgerhq/logs@^5.46.0", "@ledgerhq/logs@^5.48.0":
   version "5.48.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/logs/-/logs-5.48.0.tgz#e3628e3d48819ce74f116d6128a5f7324843bcca"
   integrity sha512-ItOEw1BDsN7q43/uku44izA9y5f6va79KrO5SeYNcojAa3gLn6u02ADLzdHJtuvGEf9DBwCTRPlJmlT7kIaFPQ==

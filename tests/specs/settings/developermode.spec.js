@@ -4,8 +4,8 @@ import initialize, {
   modalPage,
   settingsPage,
   addAccountsModal,
-} from "../common.js";
-import addAccount from "../flows/accounts/addAccount";
+} from "../../common.js";
+import addAccount from "../../flows/accounts/addAccount";
 
 describe("Enable dev mode", () => {
   initialize("settings-dev-mode", {

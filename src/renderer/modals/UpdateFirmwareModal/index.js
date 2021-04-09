@@ -6,6 +6,7 @@ import { log } from "@ledgerhq/logs";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { hasFinalFirmware } from "@ledgerhq/live-common/lib/hw/hasFinalFirmware";
 import logger from "~/logger";
 import Modal from "~/renderer/components/Modal";
 import Stepper from "~/renderer/components/Stepper";
@@ -73,8 +74,7 @@ const UpdateModal = ({
   const [err, setErr] = useState<MaybeError>(error || null);
   const [nonce, setNonce] = useState(0);
   const { t } = useTranslation();
-
-  const hasFinalFirmware = Boolean(firmware && firmware.final.firmware);
+  const withFinal = useMemo(() => hasFinalFirmware(firmware?.final), [firmware]);
 
   const createSteps = useCallback(
     ({ withResetStep }: { withResetStep: boolean }) => {
@@ -125,7 +125,7 @@ const UpdateModal = ({
         steps.push(resetStep);
       }
       steps.push(updateStep);
-      if (hasFinalFirmware) {
+      if (firmware?.shouldFlashMCU || withFinal) {
         steps.push(mcuStep);
       } else {
         steps.push(updatingStep);
@@ -133,7 +133,7 @@ const UpdateModal = ({
       steps.push(finalStep);
       return steps;
     },
-    [t, hasFinalFirmware],
+    [t, firmware, withFinal],
   );
 
   const steps = useMemo(() => createSteps({ withResetStep }), [createSteps, withResetStep]);

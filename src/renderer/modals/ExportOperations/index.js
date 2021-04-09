@@ -102,6 +102,14 @@ function ExportOperations({ accounts, closeModal, countervalueCurrency }: Props)
     }
   }, [exportCsv, onClose, success]);
 
+  const handleSelectAll = useCallback((accounts: Account[]) => {
+    setCheckedIds(accounts.map(a => a.id));
+  }, []);
+
+  const handleUnselectAll = useCallback(() => {
+    setCheckedIds([]);
+  }, []);
+
   const toggleAccount = useCallback((account: Account) => {
     setCheckedIds(prevState => {
       if (prevState.includes(account.id)) {
@@ -139,7 +147,7 @@ function ExportOperations({ accounts, closeModal, countervalueCurrency }: Props)
               <IconWrapperCircle>
                 <IconDownloadCloud size={30} />
               </IconWrapperCircle>
-              <LabelWrapper mb={2} ff="Inter|Regular">
+              <LabelWrapper ff="Inter|Regular">
                 <Trans i18nKey="exportOperationsModal.desc" />
               </LabelWrapper>
               <InfoBox>
@@ -154,6 +162,8 @@ function ExportOperations({ accounts, closeModal, countervalueCurrency }: Props)
                   </>
                 }
                 accounts={accounts}
+                onSelectAll={accounts.length > 1 ? handleSelectAll : undefined}
+                onUnselectAll={accounts.length > 1 ? handleUnselectAll : undefined}
                 onToggleAccount={toggleAccount}
                 checkedIds={checkedIds}
               />
