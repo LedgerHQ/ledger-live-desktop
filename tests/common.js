@@ -18,6 +18,7 @@ import ExportOperationsModal from "./po/exportOperationsHistoryModal.page";
 import ExportAccountsModal from "./po/exportAccountsModal.page";
 import ReceiveModal from "./po/receiveModal.page.js";
 import HideTokenModal from "./po/hideTokenModal.page";
+import NotificationsHub from "./po/notificationsHub.page";
 import fs from "fs";
 import rimraf from "rimraf";
 import path from "path";
@@ -65,6 +66,9 @@ let receiveModal;
 let hideTokenModal;
 let mockDeviceEvent;
 let userDataPath;
+let notificationsHub;
+let addMockAnnouncement;
+let toggleMockIncident;
 
 const toMatchImageSnapshot = configureToMatchImageSnapshot({
   customSnapshotsDir: path.join(__dirname, "specs", "__image_snapshots__"),
@@ -152,6 +156,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     receiveModal = new ReceiveModal(app);
     hideTokenModal = new HideTokenModal(app);
     mockDeviceEvent = getMockDeviceEvent(app);
+    notificationsHub = new NotificationsHub(app);
 
     try {
       await app.start();
@@ -251,4 +256,5 @@ export {
   exportAccountsModal,
   receiveModal,
   userDataPath,
+  notificationsHub,
 };

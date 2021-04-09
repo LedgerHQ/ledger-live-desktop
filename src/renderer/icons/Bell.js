@@ -41,7 +41,7 @@ const BellIcon = ({ size, count }: { size: number, count?: number }) => {
           fill="currentColor"
         />
       </svg>
-      {count && count > 0 ? <NotifBadge>{count}</NotifBadge> : null}
+      {count && count > 0 ? <NotifBadge id="notifications-badge">{count}</NotifBadge> : null}
     </Container>
   );
 };

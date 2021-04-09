@@ -194,10 +194,16 @@ export function SideDrawer({
     >
       {state => (
         <DrawerContainer className={state} ref={focusTrapElem} tabIndex="-1">
-          <DrawerContent paper={paper} isOpened={isOpen} className={state} direction={direction}>
+          <DrawerContent
+            paper={paper}
+            isOpened={isOpen}
+            className={state}
+            direction={direction}
+            id="notification-drawer"
+          >
             {onRequestClose ? (
               <DrawerTopContainer>
-                <TouchButton onClick={onRequestClose}>
+                <TouchButton onClick={onRequestClose} id="close-notifications-button">
                   <IconCross size={24} />
                 </TouchButton>
               </DrawerTopContainer>

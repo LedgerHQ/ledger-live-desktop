@@ -84,10 +84,12 @@ export const InformationDrawer = ({
         <TabBar
           fullWidth
           tabs={tabs.map(({ label }) => label)}
+          ids={tabs.map(({ id }) => id)}
           onIndexChange={newTabIndex => {
             dispatch(setTabInformationCenter(tabs[newTabIndex].id));
           }}
           index={tabs.findIndex(tab => tab.id === tabId)}
+          withId
         />
         <CSSTransition
           in
