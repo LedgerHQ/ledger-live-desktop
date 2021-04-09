@@ -100,6 +100,15 @@ class ExportOperations extends PureComponent<Props, State> {
     }
   };
 
+  handleSelectAll = (accounts: Account[]) => {
+    this.setState({ checkedIds: accounts.map(a => a.id) });
+  };
+
+  handleUnselectAll = (accounts: Account[]) => {
+    const { checkedIds } = this.state;
+    this.setState({ checkedIds: checkedIds.filter(id => !accounts.some(a => id === a.id)) });
+  };
+
   onClose = () => this.props.closeModal("MODAL_EXPORT_OPERATIONS");
 
   toggleAccount = (account: Account) => {
@@ -153,6 +162,8 @@ class ExportOperations extends PureComponent<Props, State> {
                     </>
                   }
                   accounts={accounts}
+                  onSelectAll={accounts.length > 1 ? this.handleSelectAll : undefined}
+                  onUnselectAll={accounts.length > 1 ? this.handleUnselectAll : undefined}
                   onToggleAccount={this.toggleAccount}
                   checkedIds={checkedIds}
                 />

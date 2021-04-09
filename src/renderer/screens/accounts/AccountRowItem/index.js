@@ -116,7 +116,7 @@ const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled(B
   }
 `;
 
-const IconAngleDown = styled.div`
+const IconAngleDown: ThemedComponent<{ expanded?: boolean }> = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
