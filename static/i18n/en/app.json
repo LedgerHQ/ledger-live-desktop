@@ -633,7 +633,7 @@
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
           "tooltip": {
-            "amountWithdrawn": "The amount withdrawn is displayed in cDAI.cDAI are ERC20 tokens that you earn after lending assets."
+            "amountWithdrawn": "The amount withdrawn is displayed in {{ tokenName }}. {{ tokenName }} are ERC20 tokens that you earn after lending assets."
           }
         }
       }

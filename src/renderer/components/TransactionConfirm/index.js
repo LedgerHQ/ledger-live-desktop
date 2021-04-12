@@ -46,7 +46,7 @@ export type FieldComponentProps = {
 export type FieldComponent = React$ComponentType<FieldComponentProps>;
 
 const AmountField = ({ account, status: { amount }, field }: FieldComponentProps) => (
-  <TransactionConfirmField label={field.label} tooltipKey={field.tooltipI18nKey}>
+  <TransactionConfirmField label={field.label}>
     <FormattedVal
       color={"palette.text.shade80"}
       unit={getAccountUnit(account)}
@@ -64,7 +64,7 @@ const FeesField = ({ account, parentAccount, status, field }: FieldComponentProp
   const { estimatedFees } = status;
   const feesUnit = getAccountUnit(mainAccount);
   return (
-    <TransactionConfirmField label={field.label} tooltipKey={field.tooltipI18nKey}>
+    <TransactionConfirmField label={field.label}>
       <FormattedVal
         color={"palette.text.shade80"}
         unit={feesUnit}
@@ -80,7 +80,7 @@ const FeesField = ({ account, parentAccount, status, field }: FieldComponentProp
 const AddressField = ({ field }: FieldComponentProps) => {
   invariant(field.type === "address", "AddressField invalid");
   return (
-    <TransactionConfirmField label={field.label} tooltipKey={field.tooltipI18nKey}>
+    <TransactionConfirmField label={field.label}>
       <FieldText>{field.address}</FieldText>
     </TransactionConfirmField>
   );
@@ -91,7 +91,11 @@ const AddressField = ({ field }: FieldComponentProps) => {
 const TextField = ({ field }: FieldComponentProps) => {
   invariant(field.type === "text", "TextField invalid");
   return (
-    <TransactionConfirmField label={field.label} tooltipKey={field.tooltipI18nKey}>
+    <TransactionConfirmField
+      label={field.label}
+      tooltipKey={field.tooltipI18nKey}
+      tooltipArgs={field.tooltipI18nArgs}
+    >
       <FieldText>{field.value}</FieldText>
     </TransactionConfirmField>
   );
