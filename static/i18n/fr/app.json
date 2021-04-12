@@ -3351,7 +3351,7 @@
       "title": "Un mémo peut être requis lors de l'envoi à ce destinataire"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be more than {{minAmountFromFormatted}}"
+      "title": "Le montant doit être supérieur à {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Le montant doit être inférieur à {{maxAmountFromFormatted}}"
