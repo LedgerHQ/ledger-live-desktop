@@ -2,7 +2,8 @@
   "calendar": {
     "today": "Aujourd'hui",
     "tomorrow": "Demain",
-    "yesterday": "Hier"
+    "yesterday": "Hier",
+    "transactionDate": "Transaction date"
   },
   "common": {
     "never": "Jamais",
@@ -1315,9 +1316,9 @@
     "title": "Acheter",
     "titleCrypto": "Acheter {{currency}}",
     "buyCTA": "Acheter {{currencyTicker}}",
-    "withoutDevice": "Vous n’avez pas votre appareil ?",
+    "withoutDevice": "Continue without my device",
     "connectWithoutDevice": "Il est préférable d'utiliser votre appareil pour une sécurité optimale.",
-    "skipConnect": "Continuer sans appareil"
+    "skipConnect": "Continue without my device"
   },
   "sell": {
     "title": "Vendre",
