@@ -2,7 +2,8 @@
   "calendar": {
     "today": "Today",
     "tomorrow": "Tomorrow",
-    "yesterday": "Yesterday"
+    "yesterday": "Yesterday",
+    "transactionDate": "Transaction date"
   },
   "common": {
     "never": "Never",
