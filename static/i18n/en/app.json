@@ -1315,9 +1315,9 @@
     "title": "Buy",
     "titleCrypto": "Buy {{currency}}",
     "buyCTA": "Buy {{currencyTicker}}",
-    "withoutDevice": "Don't have your device?",
+    "withoutDevice": "Continue without my device",
     "connectWithoutDevice": "It's better to use your device for optimal security.",
-    "skipConnect": "Continue without device"
+    "skipConnect": "Continue without my device"
   },
   "sell": {
     "title": "Sell",
