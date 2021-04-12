@@ -2292,7 +2292,7 @@
     "noAccounts": "No accounts to export",
     "selectedAccounts": "Accounts to be included",
     "selectedAccounts_plural": "Accounts to be included ({{count}})",
-    "disclaimer": "This export with estimated countervalues in FIAT is provided for information purposes only. You should not rely on such countervalues for accounting, tax or other regulation or legal purposes, as they only represent an estimation of the price of the assets at both the time of of transactions and of exports, under the valuation methods provided for by our services provider (Kaiko)"
+    "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
   },
   "language": {
     "system": "Use system language",
