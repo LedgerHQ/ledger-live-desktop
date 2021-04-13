@@ -165,9 +165,9 @@
       "progress": "Only <1>{{remainingSteps}}</1> steps left"
     },
     "hero": {
-      "beginner": "First, let’s learn Ledger basics",
-      "insider": "Become a Ledger insider!",
-      "master": "Almost a master...",
+      "novice": "First, let’s learn Ledger basics",
+      "beginner": "Become a Ledger insider!",
+      "insider": "Almost a master...",
       "completed": "Product tour completed!",
       "progress": "Only <1>{{remainingSteps}}</1> steps left"
     },

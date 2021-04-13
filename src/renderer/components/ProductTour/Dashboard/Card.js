@@ -81,7 +81,7 @@ const Card = ({
   const completed = completedFlows.includes(appFlow);
 
   const onClick = useCallback(() => {
-    if (process.env.DEBUG_PRODUCT_TOUR || (!disabled && !completed)) {
+    if (process.env.DEBUG_PRODUCT_TOUR || !disabled) {
       send("ENTER_FLOW", {
         appFlow,
         onBeforeFlow,
@@ -95,7 +95,6 @@ const Card = ({
     }
   }, [
     appFlow,
-    completed,
     controlledModals,
     disabled,
     dispatch,

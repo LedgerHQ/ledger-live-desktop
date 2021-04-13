@@ -30,7 +30,7 @@ const BuyCrypto = () => {
   return (
     <Card
       appFlow={"buy"}
-      require={"install"}
+      require={"receive"}
       title={<Trans i18nKey={"productTour.flows.buy.pending"} />}
       titleCompleted={<Trans i18nKey={"productTour.flows.buy.completedCard"} />}
       illustration={buy}

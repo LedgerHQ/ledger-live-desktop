@@ -30,7 +30,7 @@ const SwapCrypto = () => {
   return (
     <Card
       appFlow={"swap"}
-      require={"createAccount"}
+      require={"receive"}
       title={<Trans i18nKey={"productTour.flows.swap.pending"} />}
       titleCompleted={<Trans i18nKey={"productTour.flows.swap.completedCard"} />}
       illustration={swap}

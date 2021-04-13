@@ -8,6 +8,8 @@ import { openModal } from "~/renderer/actions/modals";
 import type { StateNode } from "xstate";
 import { setHasCompletedProductTour } from "~/renderer/actions/settings";
 import type { OverlayConfig } from "~/renderer/components/ProductTour/Overlay";
+import uniq from "lodash/uniq";
+
 const ProductTourContext = React.createContext<StateNode>();
 type ProductTourState = {
   totalFlows: number,
@@ -135,10 +137,8 @@ const productTourMachine = Machine(
               COMPLETE_FLOW: {
                 target: "completed",
                 actions: assign({
-                  completedFlows: ({ completedFlows, activeFlow }) => [
-                    ...completedFlows,
-                    activeFlow,
-                  ],
+                  completedFlows: ({ completedFlows, activeFlow }) =>
+                    uniq([...completedFlows, activeFlow]),
                   extras: (_, event) => event.extras || {},
                   showSuccessModal: true,
                   isControlledModal: false,
@@ -148,10 +148,8 @@ const productTourMachine = Machine(
               SKIP_FLOW: {
                 target: "#dashboard",
                 actions: assign({
-                  completedFlows: ({ completedFlows, activeFlow }) => [
-                    ...completedFlows,
-                    activeFlow,
-                  ],
+                  completedFlows: ({ completedFlows, activeFlow }) =>
+                    uniq([...completedFlows, activeFlow]),
                   isControlledModal: false,
                   overlays: initialContext.overlays,
                 }),

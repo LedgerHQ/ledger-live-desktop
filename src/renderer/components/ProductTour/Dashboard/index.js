@@ -41,7 +41,8 @@ const Dashboard = () => {
   const progress = Math.round((completedFlows.length / totalFlows) * 100);
   const completed = completedFlows.length === totalFlows;
   const c = completedFlows?.length || 0;
-  const heroKey = c < 2 ? "beginner" : c < 4 ? "insider" : "master";
+  const heroKey = c < 2 ? "novice" : c < 4 ? "beginner" : c < 7 ? "insider" : "master";
+
   const onCompleteTour = useCallback(() => {
     send("BACK");
   }, [send]);
@@ -75,8 +76,8 @@ const Dashboard = () => {
       <Wrapper horizontal>
         <InstallCrypto />
         <CreateAccount />
-        <BuyCoins />
         <ReceiveCoins />
+        <BuyCoins />
         <SendCoins />
         <SwapCoins />
         <CustomizeApp />
