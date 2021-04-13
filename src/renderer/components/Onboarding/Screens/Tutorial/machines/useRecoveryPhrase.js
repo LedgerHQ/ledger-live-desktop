@@ -50,6 +50,15 @@ export const useRecoveryPhraseMachine = Machine({
         PREV: {
           actions: ["topLevelPrev"],
         },
+        RECOVERY_WARN: {
+          actions: [
+            assign({
+              help: {
+                recoveryPhraseWarning: true,
+              },
+            }),
+          ],
+        },
       },
     },
     deviceHowTo2: {
