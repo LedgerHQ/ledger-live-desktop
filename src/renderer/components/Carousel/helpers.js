@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useMemo } from "react";
 import _ from "lodash";
 import { Trans } from "react-i18next";
 import Slide from "./Slide";
@@ -318,13 +318,17 @@ const SLIDES = [
   },
 ];
 
-export const getDefaultSlides = () => {
-  // $FlowFixMe
-  return _.map(process.env.SPECTRON_RUN ? [SLIDES[2], SLIDES[1]] : SLIDES, (slide: Props) => ({
-    id: slide.name,
-    // eslint-disable-next-line react/display-name
-    Component: () => <Slide {...slide} />,
-    start: slide.start,
-    end: slide.end,
-  }));
+export const useDefaultSlides = () => {
+  return useMemo(
+    () =>
+      // $FlowFixMe
+      _.map(process.env.SPECTRON_RUN ? [SLIDES[2], SLIDES[1]] : SLIDES, (slide: Props) => ({
+        id: slide.name,
+        // eslint-disable-next-line react/display-name
+        Component: () => <Slide {...slide} />,
+        start: slide.start,
+        end: slide.end,
+      })),
+    [],
+  );
 };
