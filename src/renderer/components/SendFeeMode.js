@@ -45,7 +45,7 @@ const SendFeeMode = ({ isAdvanceMode, setAdvanceMode }: Props) => {
     <Box horizontal alignItems="center" justifyContent="flex-start" style={{ width: 200 }}>
       <Label>
         <span>
-          <Trans i18nKey="Fees" />
+          <Trans i18nKey="send.steps.amount.fees" />
         </span>
       </Label>
       <Divider alignItems="center">|</Divider>
@@ -57,7 +57,7 @@ const SendFeeMode = ({ isAdvanceMode, setAdvanceMode }: Props) => {
           selected={!isAdvanceMode}
           onClick={() => setAdvanceMode(!isAdvanceMode)}
         >
-          <Trans i18nKey="Standard" />
+          <Trans i18nKey="send.steps.amount.standard" />
         </StandardText>
         <Switch
           forceBgColor="wallet"
@@ -72,7 +72,7 @@ const SendFeeMode = ({ isAdvanceMode, setAdvanceMode }: Props) => {
           selected={isAdvanceMode}
           onClick={() => setAdvanceMode(!isAdvanceMode)}
         >
-          <Trans i18nKey="Advanced" />
+          <Trans i18nKey="send.steps.amount.advanced" />
         </AdvancedText>
       </ModeBox>
     </Box>

@@ -1360,7 +1360,10 @@
       },
       "amount": {
         "title": "Amount",
-        "banner": "Maximum spendable amount is"
+        "banner": "Maximum spendable amount is",
+        "fees": "Fees",
+        "standard": "Standard",
+        "advanced": "Advanced"
       },
       "summary": {
         "title": "Summary"
