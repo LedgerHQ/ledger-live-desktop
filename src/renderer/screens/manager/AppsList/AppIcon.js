@@ -1,5 +1,5 @@
 // @flow
-import React, { memo } from "react";
+import React from "react";
 import styled, { withTheme } from "styled-components";
 import manager from "@ledgerhq/live-common/lib/manager";
 import { findCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
