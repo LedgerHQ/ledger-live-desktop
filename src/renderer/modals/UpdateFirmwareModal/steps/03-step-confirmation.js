@@ -1,10 +1,11 @@
 // @flow
 
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { log } from "@ledgerhq/logs";
 import { UserRefusedFirmwareUpdate } from "@ledgerhq/errors";
+import { useHistory } from "react-router-dom";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Track from "~/renderer/analytics/Track";
 import Box from "~/renderer/components/Box";
@@ -71,6 +72,15 @@ export const StepConfirmFooter = ({
   onRetry,
 }: StepProps) => {
   const { t } = useTranslation();
+  const history = useHistory();
+
+  const onCloseReload = useCallback(() => {
+    onCloseModal();
+    if (error instanceof UserRefusedFirmwareUpdate) {
+      history.replace("/manager");
+    }
+  }, [error, history, onCloseModal]);
+
   if (error) {
     const isUserRefusedFirmwareUpdate = error instanceof UserRefusedFirmwareUpdate;
     return (
@@ -78,7 +88,7 @@ export const StepConfirmFooter = ({
         <Button
           id="firmware-update-completed-close-button"
           primary={!isUserRefusedFirmwareUpdate}
-          onClick={() => onCloseModal()}
+          onClick={onCloseReload}
         >
           {t("common.close")}
         </Button>
