@@ -2,7 +2,6 @@
 import React, { useCallback, useRef, useMemo, useState } from "react";
 import styled from "styled-components";
 
-import moment from "moment";
 import { Trans } from "react-i18next";
 import { InView } from "react-intersection-observer";
 
@@ -18,6 +17,7 @@ import { openURL } from "~/renderer/linking";
 import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
+import FormattedDate from "../../FormattedDate";
 
 const DateRowContainer = styled.div`
   padding: 4px 16px;
@@ -78,12 +78,10 @@ type DateRowProps = {
 };
 
 function DateRow({ date }: DateRowProps) {
-  const formatedDate = useMemo(() => moment(date).format("MMMM, Do, YYYY"), [date]);
-
   return (
     <DateRowContainer>
       <Text color="palette.text.shade60" ff="Inter|SemiBold" fontSize="11px" lineHeight="18px">
-        {formatedDate}
+        <FormattedDate date={date} format="MMMM, Do, YYYY" />
       </Text>
     </DateRowContainer>
   );
