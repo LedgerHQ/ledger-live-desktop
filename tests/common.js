@@ -14,9 +14,11 @@ import SettingsPage from "./po/settings.page";
 import ManagerPage from "./po/manager.page";
 import WCConnectedPage from "./po/wcconnected.page";
 import AddAccountModal from "./po/addAccountModal.page";
+import AddAccountsModal from "./po/addAccountsModal.page";
 import AccountSettingsModal from "./po/accountSettingsModal.page";
 import ExportOperationsModal from "./po/exportOperationsHistoryModal.page";
 import ExportAccountsModal from "./po/exportAccountsModal.page";
+import ReceiveModal from "./po/receiveModal.page.js";
 import HideTokenModal from "./po/hideTokenModal.page";
 import WalletConnectPasteLinkModal from "./po/WalletConnectPasteLinkModal.page";
 import fs from "fs";
@@ -71,6 +73,7 @@ let addAccountsModal;
 let accountSettingsModal;
 let exportOperationsHistoryModal;
 let exportAccountsModal;
+let receiveModal;
 let hideTokenModal;
 let walletConnectPasteLinkModal;
 let mockDeviceEvent;
@@ -151,9 +154,11 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     managerPage = new ManagerPage(app);
     wcConnectedPage = new WCConnectedPage(app);
     addAccountsModal = new AddAccountModal(app);
+    addAccountsModal = new AddAccountsModal(app);
     accountSettingsModal = new AccountSettingsModal(app);
     exportOperationsHistoryModal = new ExportOperationsModal(app);
     exportAccountsModal = new ExportAccountsModal(app);
+    receiveModal = new ReceiveModal(app);
     hideTokenModal = new HideTokenModal(app);
     walletConnectPasteLinkModal = new WalletConnectPasteLinkModal(app);
     mockDeviceEvent = getMockDeviceEvent(app);
@@ -258,5 +263,6 @@ export {
   accountSettingsModal,
   exportOperationsHistoryModal,
   exportAccountsModal,
+  receiveModal,
   userDataPath,
 };

@@ -1,9 +1,26 @@
 import { portfolioPage, accountsPage } from "../common.js";
 import Modal from "./modal.page";
 
-export default class AddAccountModal extends Modal {
+export default class AddAccountsModal extends Modal {
   async importAddButton() {
     return this.$("#add-accounts-import-add-button");
+  }
+
+  async addParentAccountContinueButton() {
+    return this.$("#modal-token-continue-button");
+  }
+
+  async currencyBadge() {
+    return this.$("#currency-badge");
+  }
+
+  async addAccountSuccessTitle() {
+    return this.$("#add-account-success-title");
+  }
+
+  async isAddTokenButtonAvailable() {
+    const elem = await this.addParentAccountContinueButton();
+    return elem.isExisting();
   }
 
   async goToAddAccount() {
@@ -29,13 +46,20 @@ export default class AddAccountModal extends Modal {
   }
 
   async finishAddAccount(mockDeviceEvent) {
-    const continueBtn = await this.continueButton();
+    const currencyBadge = await this.currencyBadge();
+    await currencyBadge.waitForDisplayed();
+    let continueBtn = await this.addParentAccountContinueButton();
+    const exists = await this.isAddTokenButtonAvailable();
+    if (!exists) {
+      continueBtn = await this.continueButton();
+    }
     await continueBtn.click();
-
     await mockDeviceEvent({ type: "opened" });
     const importBtn = await this.importAddButton();
     await importBtn.waitForDisplayed();
     await importBtn.waitForEnabled();
     await importBtn.click();
+    const successTitle = await this.addAccountSuccessTitle();
+    await successTitle.waitForDisplayed();
   }
 }

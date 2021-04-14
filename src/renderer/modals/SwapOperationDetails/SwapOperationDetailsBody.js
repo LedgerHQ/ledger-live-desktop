@@ -1,6 +1,5 @@
 // @flow
 import React, { useCallback } from "react";
-import moment from "moment";
 import { useTranslation, Trans } from "react-i18next";
 import { useSelector } from "react-redux";
 import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/exchange/swap/types";
@@ -39,6 +38,7 @@ import useTheme from "~/renderer/hooks/useTheme";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { DataList } from "~/renderer/modals/OperationDetails";
 import uniq from "lodash/uniq";
+import FormattedDate from "~/renderer/components/FormattedDate";
 
 const Label = styled(Text).attrs(() => ({
   fontSize: 2,
@@ -262,7 +262,9 @@ const SwapOperationDetailsBody = ({
               <Label>
                 <Trans i18nKey="swap.operationDetailsModal.date" />
               </Label>
-              <Value>{moment(operation.date).format("MMMM, Do, YYYY")}</Value>
+              <Value>
+                <FormattedDate date={operation.date} format="MMMM, Do, YYYY" />
+              </Value>
             </Box>
           </Row>
           <Row noBorder py={0} pt={24}>

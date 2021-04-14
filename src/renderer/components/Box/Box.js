@@ -9,6 +9,7 @@ import {
   flex,
   flexWrap,
   fontSize,
+  fontWeight,
   justifyContent,
   space,
   style,
@@ -37,6 +38,8 @@ const Box: ThemedComponent<{
   // DROP this when we fully migrated from V1
   align?: "THIS PROPERTY IS NOT VALID – SWITCH TO alignItems",
   justify?: "THIS PROPERTY IS NOT VALID – SWITCH TO justifyContent",
+  fontWeight?: string | number,
+  ff?: string,
 }> = styled.div`
   ${alignItems};
   ${alignSelf};
@@ -55,6 +58,7 @@ const Box: ThemedComponent<{
   ${styledOverflow};
   ${layout};
   ${position};
+  ${fontWeight};
 
   display: flex;
   flex-shrink: ${p => (p.noShrink === true ? "0" : p.shrink === true ? "1" : "")};

@@ -228,6 +228,8 @@ const StepConnectDeviceFooter = ({ data, onClose, onSkipDevice }: PropsFooter) =
     <Box horizontal flow={2}>
       <TrackPage category="Buy Flow" name="Step 1" />
       <Button
+        primary
+        inverted
         event="Buy Flow Without Device Clicked"
         id={"buy-connect-device-skip-device-button"}
         onClick={() => {
