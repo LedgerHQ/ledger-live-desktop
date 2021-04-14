@@ -13,6 +13,7 @@ const useAccount = accountId => {
   return useSelector(s => accountSelector(s, { accountId }));
 };
 
+// eslint-disable-next-line flowtype/no-types-missing-file-annotation
 const Provider = ({ children }: { children: React$Node }) => {
   const [isReady] = useState(true);
   const history = useHistory();
