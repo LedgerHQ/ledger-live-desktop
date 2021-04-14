@@ -28,6 +28,9 @@ type RawPalette = {
     hover: string,
     disabled: string,
   },
+  swapIcon: {
+    disabled: string,
+  },
   wave: string,
 };
 

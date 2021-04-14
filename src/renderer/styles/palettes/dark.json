@@ -16,5 +16,8 @@
     "active": "rgba(255, 255, 255, 0.1)",
     "hover": "rgba(255,255,255, 0.1)",
     "disabled": "rgba(255,255,255, 0.1)"
+  },
+  "swapIcon": {
+    "disabled": "grey"
   }
 }
