@@ -407,6 +407,9 @@
   },
   "account": {
     "lastOperations": "Latest operations",
+    "addresses": "Addresses",
+    "address": "Address",
+    "transaction": "Transaction",
     "contractAddress": "Contract:",
     "openInExplorer": "Open in explorer",
     "emptyState": {

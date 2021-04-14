@@ -16,7 +16,12 @@ export const RawCard: ThemedComponent<RawCardProps> = styled(Box).attrs(p => ({
   boxShadow: 0,
   borderRadius: 1,
   color: p.color || "inherit",
-}))``;
+  className: "ll-raw-card",
+}))`
+  .ll-raw-card {
+    box-shadow: none !important;
+  }
+`;
 
 export type CardProps = {
   ...RawCardProps,

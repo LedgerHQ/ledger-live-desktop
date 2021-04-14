@@ -28,6 +28,7 @@ import type { TimeRange } from "~/renderer/reducers/settings";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
 import perFamilyAccountBodyHeader from "~/renderer/generated/AccountBodyHeader";
+import perFamilyAccountTabs from "~/renderer/generated/AccountTabs";
 import Box from "~/renderer/components/Box";
 import OperationsList from "~/renderer/components/OperationsList";
 import useTheme from "~/renderer/hooks/useTheme";
@@ -90,6 +91,9 @@ const AccountPage = ({
   const AccountBodyHeader = mainAccount
     ? perFamilyAccountBodyHeader[mainAccount.currency.family]
     : null;
+
+  const AccountTabs = mainAccount ? perFamilyAccountTabs[mainAccount.currency.family] : null;
+
   const bgColor = useTheme("colors.palette.background.paper");
 
   if (!account || !mainAccount) {
@@ -141,11 +145,15 @@ const AccountPage = ({
           {account.type === "Account" ? (
             <TokensList account={account} range={selectedTimeRange} />
           ) : null}
-          <OperationsList
-            account={account}
-            parentAccount={parentAccount}
-            title={t("account.lastOperations")}
-          />
+          {AccountTabs ? (
+            <AccountTabs account={account} parentAccount={parentAccount} />
+          ) : (
+            <OperationsList
+              account={account}
+              parentAccount={parentAccount}
+              title={t("account.lastOperations")}
+            />
+          )}
         </>
       ) : (
         <EmptyStateAccount account={account} parentAccount={parentAccount} />
