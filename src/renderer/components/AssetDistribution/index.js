@@ -4,12 +4,12 @@ import { Trans } from "react-i18next";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
-import Card from "~/renderer/components/Box/Card";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import Row from "./Row";
 import Header from "./Header";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useDistribution } from "~/renderer/actions/general";
+import TableContainer, { TableHeader } from "../TableContainer";
 
 export default function AssetDistribution() {
   const distribution = useDistribution();
@@ -49,12 +49,10 @@ export default function AssetDistribution() {
   const subList = showAll || almostAll ? list : list.slice(0, initialRowCount);
 
   return distribution.list.length ? (
-    <Card>
-      <Box py={3} px={4} horizontal alignItems="center">
-        <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
-          <Trans i18nKey="distribution.header" values={{ count: distribution.list.length }} />
-        </Text>
-      </Box>
+    <TableContainer>
+      <TableHeader
+        title={<Trans i18nKey="distribution.header" values={{ count: distribution.list.length }} />}
+      />
       <Box p={0}>
         <Header />
         <div ref={cardRef}>
@@ -71,7 +69,7 @@ export default function AssetDistribution() {
           </SeeAllButton>
         )}
       </Box>
-    </Card>
+    </TableContainer>
   ) : null;
 }
 

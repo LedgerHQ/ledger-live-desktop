@@ -81,7 +81,7 @@ const ToolTip = ({
       placement={placement}
       flip={flip}
       hideOnClick={hideOnClick}
-      className={`bg-${tooltipBg || "default"}`}
+      className={`bg-${tooltipBg ? tooltipBg.replace(/\./g, "-") : "default"}`}
     >
       {disableWrapper ? (
         children

@@ -20,7 +20,8 @@ type Style = any; // FIXME
 const buttonStyles: { [_: string]: Style } = {
   default: {
     default: p => `
-      box-shadow: ${p.isFocused ? focusedShadowStyle : ""}
+      box-shadow: ${p.isFocused ? focusedShadowStyle : ""};
+      ${p.disabled ? `color: ${p.theme.colors.palette.text.shade20}` : ""}
     `,
     active: p => `
       background: ${rgba(p.theme.colors.palette.divider, 0.2)};

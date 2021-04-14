@@ -18,7 +18,7 @@ import { openURL } from "~/renderer/linking";
 import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
-import Box, { Card } from "~/renderer/components/Box";
+import Box from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import IconChartLine from "~/renderer/icons/ChartLine";
 import { Header, UnbondingHeader } from "./Header";
@@ -27,7 +27,7 @@ import { Row, UnbondingRow } from "./Row";
 import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
 import DelegateIcon from "~/renderer/icons/Delegate";
-import InfoCircle from "~/renderer/icons/InfoCircle";
+import TableContainer, { TableHeader } from "~/renderer/components/TableContainer";
 
 type Props = {
   account: Account,
@@ -35,10 +35,7 @@ type Props = {
 
 const Wrapper = styled(Box).attrs(() => ({
   p: 3,
-  mt: 24,
-  mb: 6,
 }))`
-  border: 1px dashed ${p => p.theme.colors.palette.text.shade20};
   border-radius: 4px;
   justify-content: space-between;
   align-items: center;
@@ -120,125 +117,117 @@ const Delegation = ({ account }: Props) => {
 
   return (
     <>
-      <Box horizontal alignItems="center" justifyContent="space-between">
-        <Text
-          ff="Inter|Medium"
-          fontSize={6}
-          color="palette.text.shade100"
-          data-e2e="title_Delegation"
+      <TableContainer mb={6}>
+        <TableHeader
+          title={<Trans i18nKey="cosmos.delegation.header" />}
+          titleProps={{ "data-e2e": "title_Delegation" }}
         >
-          <Trans i18nKey="cosmos.delegation.header" />
-        </Text>
-        {hasDelegations || hasRewards ? (
-          <Box horizontal>
-            {hasDelegations ? (
+          {hasDelegations || hasRewards ? (
+            <>
+              {hasDelegations ? (
+                <ToolTip
+                  content={
+                    !delegationEnabled ? <Trans i18nKey="cosmos.delegation.minSafeWarning" /> : null
+                  }
+                >
+                  <Button
+                    id={"account-delegate-button"}
+                    mr={2}
+                    disabled={!delegationEnabled}
+                    color="palette.primary.main"
+                    small
+                    onClick={onDelegate}
+                  >
+                    <Box horizontal flow={1} alignItems="center">
+                      <DelegateIcon size={12} />
+                      <Box>
+                        <Trans i18nKey="cosmos.delegation.delegate" />
+                      </Box>
+                    </Box>
+                  </Button>
+                </ToolTip>
+              ) : null}
+              <ToolTip
+                content={!hasRewards ? <Trans i18nKey="cosmos.delegation.noRewards" /> : null}
+              >
+                <Button
+                  id={"account-rewards-button"}
+                  disabled={!hasRewards}
+                  color="palette.primary.main"
+                  small
+                  onClick={onClaimRewards}
+                >
+                  <Box horizontal flow={1} alignItems="center">
+                    <ClaimRewards size={12} />
+                    <Box>
+                      <Trans i18nKey="cosmos.delegation.claimRewards" />
+                    </Box>
+                  </Box>
+                </Button>
+              </ToolTip>
+            </>
+          ) : null}
+        </TableHeader>
+        {hasDelegations ? (
+          <>
+            <Header />
+            {mappedDelegations.map((delegation, index) => (
+              <Row
+                key={index}
+                account={account}
+                delegation={delegation}
+                onManageAction={onRedirect}
+                onExternalLink={onExternalLink}
+              />
+            ))}
+          </>
+        ) : (
+          <Wrapper horizontal>
+            <Box style={{ maxWidth: "65%" }}>
+              <Text ff="Inter|Medium|SemiBold" color="palette.text.shade60" fontSize={4}>
+                <Trans
+                  i18nKey="cosmos.delegation.emptyState.description"
+                  values={{ name: account.currency.name }}
+                />
+              </Text>
+              <Box mt={2}>
+                <LinkWithExternalIcon
+                  label={<Trans i18nKey="cosmos.delegation.emptyState.info" />}
+                  onClick={() => openURL(urls.stakingCosmos)}
+                />
+              </Box>
+            </Box>
+            <Box>
               <ToolTip
                 content={
                   !delegationEnabled ? <Trans i18nKey="cosmos.delegation.minSafeWarning" /> : null
                 }
               >
-                <Button
-                  id={"account-delegate-button"}
-                  mr={2}
-                  disabled={!delegationEnabled}
-                  primary
-                  small
-                  onClick={onDelegate}
-                >
+                <Button primary small disabled={!delegationEnabled} onClick={onEarnRewards}>
                   <Box horizontal flow={1} alignItems="center">
-                    <DelegateIcon size={12} />
+                    <IconChartLine size={12} />
                     <Box>
-                      <Trans i18nKey="cosmos.delegation.delegate" />
+                      <Trans i18nKey="cosmos.delegation.emptyState.delegation" />
                     </Box>
                   </Box>
                 </Button>
               </ToolTip>
-            ) : null}
-            <ToolTip content={!hasRewards ? <Trans i18nKey="cosmos.delegation.noRewards" /> : null}>
-              <Button
-                id={"account-rewards-button"}
-                disabled={!hasRewards}
-                primary
-                small
-                onClick={onClaimRewards}
-              >
-                <Box horizontal flow={1} alignItems="center">
-                  <ClaimRewards size={12} />
-                  <Box>
-                    <Trans i18nKey="cosmos.delegation.claimRewards" />
-                  </Box>
-                </Box>
-              </Button>
-            </ToolTip>
-          </Box>
-        ) : null}
-      </Box>
-      {hasDelegations ? (
-        <Card p={0} mt={24} mb={6}>
-          <Header />
-          {mappedDelegations.map((delegation, index) => (
-            <Row
-              key={index}
-              account={account}
-              delegation={delegation}
-              onManageAction={onRedirect}
-              onExternalLink={onExternalLink}
-            />
-          ))}
-        </Card>
-      ) : (
-        <Wrapper horizontal>
-          <Box style={{ maxWidth: "65%" }}>
-            <Text ff="Inter|Medium|SemiBold" color="palette.text.shade60" fontSize={4}>
-              <Trans
-                i18nKey="cosmos.delegation.emptyState.description"
-                values={{ name: account.currency.name }}
-              />
-            </Text>
-            <Box mt={2}>
-              <LinkWithExternalIcon
-                label={<Trans i18nKey="cosmos.delegation.emptyState.info" />}
-                onClick={() => openURL(urls.stakingCosmos)}
-              />
             </Box>
-          </Box>
-          <Box>
-            <ToolTip
-              content={
-                !delegationEnabled ? <Trans i18nKey="cosmos.delegation.minSafeWarning" /> : null
-              }
-            >
-              <Button primary small disabled={!delegationEnabled} onClick={onEarnRewards}>
-                <Box horizontal flow={1} alignItems="center">
-                  <IconChartLine size={12} />
-                  <Box>
-                    <Trans i18nKey="cosmos.delegation.emptyState.delegation" />
-                  </Box>
-                </Box>
-              </Button>
-            </ToolTip>
-          </Box>
-        </Wrapper>
-      )}
+          </Wrapper>
+        )}
+      </TableContainer>
       {hasUnbondings ? (
-        <>
-          <Box horizontal alignItems="center" color="palette.text.shade100">
-            <ToolTip content={<Trans i18nKey="cosmos.undelegation.headerTooltip" />}>
-              <Text ff="Inter|Medium" fontSize={6} data-e2e="title_Undelegation">
-                <Trans i18nKey="cosmos.undelegation.header" />
-              </Text>
-              <Box ml={2} horizontal alignItems="center">
-                <InfoCircle />
-              </Box>
-            </ToolTip>
-          </Box>
-          <Card p={0} mt={24} mb={6}>
-            <UnbondingHeader />
-            {mappedUnbondings.map((delegation, index) => (
-              <UnbondingRow key={index} delegation={delegation} onExternalLink={onExternalLink} />
-            ))}
-          </Card>
-        </>
+        <TableContainer mb={6}>
+          <TableHeader
+            title={<Trans i18nKey="cosmos.undelegation.header" />}
+            titleProps={{ "data-e2e": "title_Undelegation" }}
+            tooltip={<Trans i18nKey="cosmos.undelegation.headerTooltip" />}
+          />
+          <UnbondingHeader />
+          {mappedUnbondings.map((delegation, index) => (
+            <UnbondingRow key={index} delegation={delegation} onExternalLink={onExternalLink} />
+          ))}
+        </TableContainer>
       ) : null}
     </>
   );

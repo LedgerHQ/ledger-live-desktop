@@ -10,11 +10,12 @@ import { openURL } from "~/renderer/linking";
 import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
-import Box, { Card } from "~/renderer/components/Box";
+import Box from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import IconChartLine from "~/renderer/icons/ChartLine";
 import Header from "./Header";
 import Row from "./Row";
+import TableContainer, { TableHeader } from "~/renderer/components/TableContainer";
 
 type Props = {
   account: AccountLike,
@@ -23,10 +24,7 @@ type Props = {
 
 const Wrapper = styled(Box).attrs(() => ({
   p: 3,
-  mt: 24,
-  mb: 6,
 }))`
-  border: 1px dashed ${p => p.theme.colors.palette.text.shade20};
   border-radius: 4px;
   justify-content: space-between;
   align-items: center;
@@ -38,22 +36,13 @@ const Delegation = ({ account, parentAccount }: Props) => {
   const delegation = useDelegation(account);
 
   return account.type === "ChildAccount" && !delegation ? null : (
-    <>
-      <Box horizontal alignItems="center">
-        <Text
-          ff="Inter|Medium"
-          fontSize={6}
-          color="palette.text.shade100"
-          data-e2e="title_Delegation"
-        >
-          {t("delegation.header")}
-        </Text>
-      </Box>
+    <TableContainer mb={6}>
+      <TableHeader title={t("delegation.header")} titleProps={{ "data-e2e": "title_Delegation" }} />
       {delegation ? (
-        <Card p={0} mt={24} mb={6}>
+        <>
           <Header />
           <Row delegation={delegation} account={account} parentAccount={parentAccount} />
-        </Card>
+        </>
       ) : (
         <Wrapper horizontal>
           <Box style={{ maxWidth: "65%" }}>
@@ -88,7 +77,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
           </Box>
         </Wrapper>
       )}
-    </>
+    </TableContainer>
   );
 };
 

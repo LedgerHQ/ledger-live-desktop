@@ -52,6 +52,21 @@ export const TokenIcon: ThemedComponent<{
   height: ${p => p.size}px;
 `;
 
+// trick to format size for certain type of icons
+const Container = styled.div`
+  width: ${p => p.size}px;
+  height: ${p => p.size}px;
+  position: relative;
+  overflow: visible;
+  > svg {
+    position: absolute;
+    height: 160%;
+    width: 160%;
+    top: -30%;
+    left: -30%;
+  }
+`;
+
 const CryptoCurrencyIcon = ({ currency, circle, size, overrideColor, inactive, theme }: Props) => {
   const currencyColor = getCurrencyColor(currency, theme.colors.palette.background.paper);
   const color = overrideColor || (inactive ? theme.colors.palette.text.shade60 : currencyColor);
@@ -65,11 +80,7 @@ const CryptoCurrencyIcon = ({ currency, circle, size, overrideColor, inactive, t
     return (
       <TokenIconWrapper>
         <TokenIcon circle={circle} color={color} size={size}>
-          {TokenIconCurrency ? (
-            <TokenIconCurrency size={size * 0.55} color={color} />
-          ) : (
-            currency.ticker[0]
-          )}
+          {TokenIconCurrency ? <TokenIconCurrency size={size} color={color} /> : currency.ticker[0]}
         </TokenIcon>
       </TokenIconWrapper>
     );
@@ -78,10 +89,12 @@ const CryptoCurrencyIcon = ({ currency, circle, size, overrideColor, inactive, t
   return IconCurrency ? (
     circle ? (
       <CircleWrapper size={size} color={color}>
-        <IconCurrency size={size * 0.55} color={theme.colors.palette.background.paper} />
+        <IconCurrency size={size * 0.8} color={theme.colors.palette.background.paper} />
       </CircleWrapper>
     ) : (
-      <IconCurrency size={size} color={color} />
+      <Container size={size}>
+        <IconCurrency size={size} color={color} />
+      </Container>
     )
   ) : null;
 };

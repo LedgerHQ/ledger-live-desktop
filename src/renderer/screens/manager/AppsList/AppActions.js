@@ -5,6 +5,7 @@ import {
   useAppInstallNeedsDeps,
   useAppUninstallNeedsDeps,
 } from "@ledgerhq/live-common/lib/apps/react";
+import manager from "@ledgerhq/live-common/lib/manager";
 
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { State, Action, InstalledItem } from "@ledgerhq/live-common/lib/apps/types";
@@ -86,6 +87,9 @@ const AppActions: React$ComponentType<Props> = React.memo(
   }: Props) => {
     const { name } = app;
     const { installedAvailable, installQueue, uninstallQueue, updateAllQueue } = state;
+
+    // $FlowFixMe
+    const canInstall = useMemo(() => manager.canHandleInstall(app), [app]);
 
     const needsInstallDeps = useAppInstallNeedsDeps(state, app);
 
@@ -218,7 +222,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
                   style={{ display: "flex" }}
                   id={`appActionsInstall-${name}`}
                   lighterPrimary
-                  disabled={notEnoughMemoryToInstall}
+                  disabled={!canInstall || notEnoughMemoryToInstall}
                   onClick={onInstall}
                   event="Manager Install Click"
                   eventProperties={{
