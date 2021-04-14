@@ -12,9 +12,9 @@ const Container: ThemedComponent<{}> = styled.div`
   padding: 4px;
   & path {
     stroke: ${p =>
-      !p.disabled ? p.theme.colors.palette.primary.main : p.theme.colors.palette.text.shade30};
+      !p.disabled ? p.theme.colors.palette.primary.main : "grey"};
     fill: ${p =>
-      !p.disabled ? p.theme.colors.palette.primary.main : p.theme.colors.palette.text.shade30};
+      !p.disabled ? p.theme.colors.palette.primary.main : "grey"};
   }
 `;
 
