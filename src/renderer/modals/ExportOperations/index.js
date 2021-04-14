@@ -147,10 +147,10 @@ function ExportOperations({ accounts, closeModal, countervalueCurrency }: Props)
               <IconWrapperCircle>
                 <IconDownloadCloud size={30} />
               </IconWrapperCircle>
-              <LabelWrapper ff="Inter|Regular">
+              <LabelWrapper mb={2} ff="Inter|Regular">
                 <Trans i18nKey="exportOperationsModal.desc" />
               </LabelWrapper>
-              <InfoBox>
+              <InfoBox type="warning">
                 <Trans i18nKey="exportOperationsModal.disclaimer" />
               </InfoBox>
               <AccountsList
