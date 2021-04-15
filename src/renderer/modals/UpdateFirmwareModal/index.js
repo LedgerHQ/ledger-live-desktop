@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import { log } from "@ledgerhq/logs";
 import type { DeviceModelId } from "@ledgerhq/devices";
+import { UserRefusedFirmwareUpdate } from "@ledgerhq/errors";
 import type { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { hasFinalFirmware } from "@ledgerhq/live-common/lib/hw/hasFinalFirmware";
@@ -199,6 +200,9 @@ const UpdateModal = ({
           errorSteps={errorSteps}
           deviceModelId={deviceModelId}
           onClose={() => onClose()}
+          hideCloseButton={
+            stepId === "finish" && !!error && error instanceof UserRefusedFirmwareUpdate
+          }
         >
           <HookMountUnmount onMountUnmount={setFirmwareUpdateOpened} />
         </Stepper>
