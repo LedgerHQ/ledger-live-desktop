@@ -12,10 +12,11 @@ import AccountPage from "./po/account.page";
 import PortfolioPage from "./po/portfolio.page";
 import SettingsPage from "./po/settings.page";
 import ManagerPage from "./po/manager.page";
-import AddAccountModal from "./po/addAccountModal.page";
+import AddAccountsModal from "./po/addAccountsModal.page";
 import AccountSettingsModal from "./po/accountSettingsModal.page";
 import ExportOperationsModal from "./po/exportOperationsHistoryModal.page";
 import ExportAccountsModal from "./po/exportAccountsModal.page";
+import ReceiveModal from "./po/receiveModal.page.js";
 import HideTokenModal from "./po/hideTokenModal.page";
 import fs from "fs";
 import rimraf from "rimraf";
@@ -60,6 +61,7 @@ let addAccountsModal;
 let accountSettingsModal;
 let exportOperationsHistoryModal;
 let exportAccountsModal;
+let receiveModal;
 let hideTokenModal;
 let mockDeviceEvent;
 let userDataPath;
@@ -143,10 +145,11 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     portfolioPage = new PortfolioPage(app);
     settingsPage = new SettingsPage(app);
     managerPage = new ManagerPage(app);
-    addAccountsModal = new AddAccountModal(app);
+    addAccountsModal = new AddAccountsModal(app);
     accountSettingsModal = new AccountSettingsModal(app);
     exportOperationsHistoryModal = new ExportOperationsModal(app);
     exportAccountsModal = new ExportAccountsModal(app);
+    receiveModal = new ReceiveModal(app);
     hideTokenModal = new HideTokenModal(app);
     mockDeviceEvent = getMockDeviceEvent(app);
 
@@ -246,5 +249,6 @@ export {
   accountSettingsModal,
   exportOperationsHistoryModal,
   exportAccountsModal,
+  receiveModal,
   userDataPath,
 };

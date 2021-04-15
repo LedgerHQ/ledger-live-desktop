@@ -2,7 +2,8 @@
   "calendar": {
     "today": "Aujourd'hui",
     "tomorrow": "Demain",
-    "yesterday": "Hier"
+    "yesterday": "Hier",
+    "transactionDate": "Transaction date"
   },
   "common": {
     "never": "Jamais",
@@ -185,6 +186,7 @@
       "disclaimer": "En continuant, vous acceptez que vos données de localisation soient partagées avec des fournisseurs de services tiers afin qu'ils se conforment à leurs procédures AML/KYC."
     },
     "form": {
+      "amount": "Montant",
       "from": {
         "title": "De",
         "account": "Compte",
@@ -198,12 +200,23 @@
         "currency": "Crypto-actif",
         "addAccountCTA": "Ajouter un nouveau compte"
       },
+      "tradeMethod": {
+        "title": "Taux",
+        "float": "Taux flottant",
+        "floatUnavailable": "Le taux flottant n'est pas pris en charge pour cet échange",
+        "fixed": "Taux fixe",
+        "fixedUnavailable": "Le taux fixe n'est pas pris en charge pour cet échange",
+        "floatDesc": "Le montant final peut changer en fonction des conditions de marché.",
+        "fixedDesc": "Le montant final restera le même, même si les conditions de marché changent. Les mises à jour ont lieu toutes les 60 secondes.",
+        "by": "Fourni par"
+      },
       "exchange": "Échanger",
       "helpCTA": "Qu'est-ce que le Swap ?",
       "bubble": "Nous utilisons un taux fixe, c'est le montant exact que vous allez recevoir.",
       "noAccounts": "Vous n'avez pas de compte {{currencyName}} avec un solde",
       "noApp": "L'application {{currencyName}} n'est pas installée.",
-      "outdatedApp": "Mise à jour de l'application {{currencyName}} disponible."
+      "outdatedApp": "Mise à jour de l'application {{currencyName}} disponible.",
+      "loadingRates": "Chargement des taux..."
     },
     "modal": {
       "title": "Swap",
@@ -220,7 +233,13 @@
             "acceptedDescription": "Ce service est exclusivement régi par <0>{{provider}}</0>"
           },
           "details": {
-            "provider": "Fournisseur"
+            "provider": "Fournisseur",
+            "tradeMethod": {
+              "title": "Type",
+              "float": "Taux flottant",
+              "fixed": "Taux fixe"
+            },
+            "address": "Adresse"
           }
         },
         "device": {
@@ -237,20 +256,25 @@
       }
     },
     "operationDetailsModal": {
-      "title": "Détails de l'opération",
+      "title": "Swap",
       "provider": "Fournisseur",
       "txid": "Swap ID",
       "status": "Statut",
       "statusTooltips": {
-        "refunded": "Veuillez contacter le fournisseur de swap avec votre swap ID pour plus de détails",
-        "failed": "Veuillez contacter le fournisseur de swap avec votre swap ID pour plus de détails",
-        "hold": "Veuillez contacter le fournisseur de swap avec votre swap ID pour résoudre la situation"
+        "expired": "Pour plus d'informations, veuillez contacter le fournisseur du service Swap avec votre Swap ID.",
+        "refunded": "Pour plus d'informations, veuillez contacter le fournisseur du service Swap avec votre Swap ID.",
+        "pending": "Merci de patienter pendant que le fournisseur du service Swap traite votre transaction.",
+        "onhold": "Merci de contacter le fournisseur du service Swap avec votre Swap ID afin de résoudre la situation.",
+        "finished": "Votre Swap a été effectué avec succès."
       },
       "date": "Date",
       "from": "De",
+      "fromAddress": "Adresse d'origine",
+      "fromAddress_plural": "Adresses d'origine",
       "to": "Vers",
-      "initialAmount": "Montant envoyé",
-      "creditedAmount": "Montant à recevoir"
+      "toProvider": "Adresse du fournisseur",
+      "initialAmount": "Montant initial",
+      "creditedAmount": "Montant crédité"
     }
   },
   "fullNode": {
@@ -916,7 +940,12 @@
     "successDescription_plural": "Ajoutez davantage de comptes ou retournez au Portfolio",
     "createNewAccount": {
       "noOperationOnLastAccount": "Impossible d'ajouter un nouveau compte avant d'avoir reçu des actifs sur votre compte <1><0>{{accountName}}</0></1>",
-      "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> n'a été trouvé"
+      "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> n'a été trouvé",
+      "showAllAddressTypes": "Montrer tous les types d'adresses",
+      "showAllAddressTypesTooltip": "Ne changez le type d'adresse que si vous n'avez besoin de recevoir des {{family}} sur d'anciens formats d'adresse."
+    },
+    "supportLinks": {
+      "segwit_or_native_segwit": "Segwit ou Native Segwit ?"
     },
     "cta": {
       "addMore": "Ajouter davantage",
@@ -1009,10 +1038,13 @@
     "swap": {
       "notice": "Vérifiez les détails du Swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
       "confirm": "Confirmer la transaction de swap",
-      "amountSent": "Montant envoyé",
-      "amountReceived": "Montant reçu",
+      "amountSent": "Montant à envoyer",
+      "amountReceived": "Montant à recevoir",
+      "amountReceivedFloat": "Montant à recevoir avant application des frais de services",
       "fees": "Frais",
-      "provider": "Fournisseur"
+      "provider": "Fournisseur",
+      "payoutNetworkFees": "Frais de réception",
+      "payoutNetworkFeesTooltip": "Ce montant ne figurera pas sur votre appareil"
     },
     "sell": {
       "notice": "Vérifiez les détails de la vente sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
@@ -1284,9 +1316,9 @@
     "title": "Acheter",
     "titleCrypto": "Acheter {{currency}}",
     "buyCTA": "Acheter {{currencyTicker}}",
-    "withoutDevice": "Vous n’avez pas votre appareil ?",
+    "withoutDevice": "Continue without my device",
     "connectWithoutDevice": "Il est préférable d'utiliser votre appareil pour une sécurité optimale.",
-    "skipConnect": "Continuer sans appareil"
+    "skipConnect": "Continue without my device"
   },
   "sell": {
     "title": "Vendre",
@@ -2278,6 +2310,37 @@
     "dusk": "Dusk",
     "dark": "Dark"
   },
+  "toastOverlay": {
+    "toastType": {
+      "announcement": "Actualités"
+    }
+  },
+  "informationCenter": {
+    "tooltip": "Fil d'informations",
+    "ongoingIncidentsTooltip": "Il y a {{incidentCount}} incidents en cours",
+    "tabs": {
+      "announcements": "Actualités",
+      "announcementsUnseen": "Actualités ({{unseenCount}})",
+      "serviceStatus": "Statut",
+      "serviceStatusIncidentsOngoing": "Statut ({{incidentCount}})"
+    },
+    "serviceStatus": {
+      "statusOk": {
+        "title": "L'application Ledger Live fonctionne correctement",
+        "description": "Des difficultés ? Visitez notre <0>page d'aide</0>"
+      },
+      "statusNotOk": {
+        "title": "L'application Ledger Live rencontre des problèmes",
+        "learnMore": "En savoir plus"
+      }
+    },
+    "announcement": {
+      "emptyState": {
+        "title": "Aucune actualité pour l'instant",
+        "desc": "Vous trouverez ici toutes les actualités concernant Ledger et Ledger Live"
+      }
+    }
+  },
   "onboarding": {
     "drawers": {
       "pinHelp": {
@@ -2647,7 +2710,8 @@
       "descr": "Répondez à 3 questions simples pour éviter les idées fausses sur votre wallet physique.",
       "buttons": {
         "start": "Faisons le quiz",
-        "next": "Question suivante"
+        "next": "Question suivante",
+        "finish": "Terminer le quiz"
       },
       "questions": {
         "1": {
@@ -2895,16 +2959,16 @@
       "description": "Une erreur inattendue s'est produite. Veuillez réessayer. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "Désolé, échec de la connexion",
-      "description": "Veuillez essayer à nouveau"
+      "title": "La connexion a échoué",
+      "description": "Merci d'essayer à nouveau."
     },
     "DisconnectedDevice": {
-      "title": "Désolé, connexion à l'appareil perdue",
-      "description": "Veuillez essayer à nouveau"
+      "title": "Désolé, il semble que votre appareil soit déconnecté",
+      "description": "Merci de reconnecter l'appareil et d'essayer à nouveau."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Appareil déconnecté",
-      "description": "La connexion à l'appareil a été perdue pendant une opération. Veuillez réessayer"
+      "title": "Désolé, il semble que votre appareil soit déconnecté",
+      "description": "Merci de reconnecter l'appareil et d'essayer à nouveau."
     },
     "EnpointConfig": {
       "title": "Point de terminaison non valide",
@@ -2924,11 +2988,11 @@
     },
     "HardResetFail": {
       "title": "Désolé, réinitialisation impossible",
-      "description": "Veuillez réessayer ou contacter l'assistance Ledger en cas de doute"
+      "description": "Merci d'essayer à nouveau et de contacter le Support Ledger si le problème persiste."
     },
     "LatestMCUInstalledError": {
-      "title": "Désolé, aucune mise à jour disponible",
-      "description": "Tentative de mise à jour inutile du microcontrôleur de l’appareil. En cas de problème avec votre appareil, veuillez contacter l’assistance Ledger."
+      "title": "Désolé, il n'y a rien à mettre à jour",
+      "description": "Merci de contacter le Support Ledger si vous ne pouvez pas utiliser votre appareil."
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
@@ -2944,7 +3008,7 @@
     },
     "ManagerAppAlreadyInstalled": {
       "title": "Désolé, cette application est déjà installée",
-      "description": "Consultez votre appareil pour voir quelles applications sont déjà installées"
+      "description": "Merci de vérifier quelles applications sont déjà installées sur votre appareil."
     },
     "ManagerAppDepInstallRequired": {
       "title": "App {{dependency}} requise",
@@ -2989,16 +3053,16 @@
       "description": "Désinstallez les applications Bitcoin ou Ethereum en dernier"
     },
     "NetworkDown": {
-      "title": "Désolé, la connexion internet ne semble pas fonctionner.",
-      "description": "Veuillez vérifier votre connexion internet"
+      "title": "Désolé, la connection Internet semble ne pas fonctionner",
+      "description": "Merci de vérifier votre connection Internet."
     },
     "NoAddressesFound": {
       "title": "Désolé, aucun compte n'a été trouvé",
       "description": "Quelque chose s’est mal passé lors du calcul de l’adresse, veuillez essayer à nouveau ou contacter l’assistance Ledger"
     },
     "NotEnoughBalance": {
-      "title": "Désolé, solde insuffisant",
-      "description": "Assurez-vous que le compte utilisé a suffisamment de fonds"
+      "title": "Désolé, les fonds disponibles sont insuffisants",
+      "description": "Merci de vérifier que vous ayez assez de fonds sur le compte."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "L’adresse du destinataire est inactive. Envoyez au minimum {{minimalAmount}} pour l’activer."
@@ -3051,12 +3115,12 @@
       "description": "Vous devez confirmer l'échange avant que le minuteur ne s'épuise. Le taux de change affiché reste valide pendant 60 secondes."
     },
     "TimeoutError": {
-      "title": "Désolé, le délai est dépassé",
-      "description": "Le serveur a mis trop de temps à répondre. Veuillez réessayer"
+      "title": "Désolé, le serveur met trop de temps à répondre",
+      "description": "Merci d'essayer à nouveau."
     },
     "TimeoutTagged": {
-      "title": "Désolé, le délai est dépassé ({{tag}})",
-      "description": "Le serveur a mis trop de temps à répondre"
+      "title": "Désolé, le serveur met trop de temps à répondre ({{tag}})",
+      "description": "Le délai d'attente est dépassé."
     },
     "TransportError": {
       "title": "Une erreur s'est produite. Veuillez reconnecter votre appareil",
@@ -3076,7 +3140,7 @@
     },
     "UnexpectedBootloader": {
       "title": "Désolé, votre appareil ne devrait pas être en mode Bootloader",
-      "description": "Veuillez redémarrer votre appareil ou contacter le support Ledger"
+      "description": "Veuillez redémarrer votre appareil sans toucher aux boutons lorsque le logo apparaît. Contactez le Support Ledger si le problème persiste."
     },
     "UserRefusedAllowManager": {
       "title": "Manager refusé sur l’appareil"
@@ -3128,7 +3192,7 @@
       "title": "L’adresse de réception est identique à l'adresse d'émission"
     },
     "CantOpenDevice": {
-      "title": "Désolé, connexion à l’appareil impossible",
+      "title": "Désolé, la connexion a échoué",
       "description": "L'appareil a été détecté mais la connexion a échoué. Veuillez réessayer ou contacter le support Ledger si le problème persiste."
     },
     "ETHAddressNonEIP": {
@@ -3288,7 +3352,7 @@
       "title": "Un mémo peut être requis lors de l'envoi à ce destinataire"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Le montant doit être d'au moins {{minAmountFromFormatted}}"
+      "title": "Le montant doit être supérieur à {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Le montant doit être inférieur à {{maxAmountFromFormatted}}"
@@ -3308,8 +3372,11 @@
     "PolkadotNoNominations": {
       "title": "Vous n'avez aucune nomination"
     },
-    "PolkadotBondAllFundsWarning": {
-      "title": "Vous n'aurez pas de solde disponible pour les transactions futures"
+    "PolkadotAllFundsWarning": {
+      "title": "Assurez-vous d'avoir assez de solde disponible pour les frais de transaction à venir"
+    },
+    "PolkadotDoMaxSendInstead": {
+      "title": "Le solde ne peut pas être inférieur à 1 DOT. Pour vider un compter envoyez \"Max\""
     },
     "PolkadotBondMinimumAmount": {
       "title": "Vous devez bond au moins 1 DOT"

@@ -29,7 +29,6 @@ import Box from "~/renderer/components/Box";
 
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import ToolTip from "~/renderer/components/Tooltip";
-import InfoCircle from "~/renderer/icons/InfoCircle";
 
 import NominateIcon from "~/renderer/icons/Vote";
 import RebondIcon from "~/renderer/icons/LinkIcon";
@@ -46,6 +45,7 @@ import {
   ExternalControllerUnsupportedWarning,
   ExternalStashUnsupportedWarning,
 } from "./UnsupportedWarning";
+import TableContainer, { TableHeader } from "~/renderer/components/TableContainer";
 
 type Props = {
   account: Account,
@@ -53,10 +53,7 @@ type Props = {
 
 const Wrapper = styled(Box).attrs(() => ({
   p: 3,
-  mt: 24,
-  mb: 6,
 }))`
-  border: 1px dashed ${p => p.theme.colors.palette.text.shade20};
   border-radius: 4px;
   justify-content: space-between;
   align-items: center;
@@ -230,57 +227,47 @@ const Nomination = ({ account }: Props) => {
     [mappedUnlockings],
   );
 
-  const renderTitle = useCallback(
-    () => (
-      <Text
-        ff="Inter|Medium"
-        fontSize={6}
-        color="palette.text.shade100"
-        data-e2e="title_Nomination"
-      >
-        <Trans i18nKey="polkadot.nomination.header" />
-      </Text>
-    ),
-    [],
-  );
-
   if (hasExternalController(account)) {
     return (
-      <Box flow={4}>
-        <Box horizontal alignItems="center" justifyContent="space-between">
-          {renderTitle()}
-        </Box>
+      <TableContainer mb={6}>
+        <TableHeader
+          title={<Trans i18nKey="polkadot.nomination.header" />}
+          titleProps={{ "data-e2e": "title_Nomination" }}
+        />
         <ExternalControllerUnsupportedWarning
           address={polkadotResources?.controller}
           onExternalLink={onExternalLink}
           onLearnMore={onLearnMore}
         />
-      </Box>
+      </TableContainer>
     );
   }
 
   if (hasExternalStash(account)) {
     return (
-      <Box flow={4}>
-        <Box horizontal alignItems="center" justifyContent="space-between">
-          {renderTitle()}
-        </Box>
+      <TableContainer mb={6}>
+        <TableHeader
+          title={<Trans i18nKey="polkadot.nomination.header" />}
+          titleProps={{ "data-e2e": "title_Nomination" }}
+        />
         <ExternalStashUnsupportedWarning
           address={polkadotResources?.stash}
           onExternalLink={onExternalLink}
           onLearnMore={onLearnMore}
         />
-      </Box>
+      </TableContainer>
     );
   }
 
   return (
     <>
       {electionOpen ? <ElectionStatusWarning /> : null}
-      <Box horizontal alignItems="center" justifyContent="space-between">
-        {renderTitle()}
-        {hasNominations ? (
-          <Box horizontal>
+      <TableContainer mb={6}>
+        <TableHeader
+          title={<Trans i18nKey="polkadot.nomination.header" />}
+          titleProps={{ "data-e2e": "title_Nomination" }}
+        >
+          {hasNominations ? (
             <ToolTip
               content={
                 !nominateEnabled && electionOpen ? (
@@ -292,7 +279,7 @@ const Nomination = ({ account }: Props) => {
                 id={"account-nominate-button"}
                 mr={2}
                 disabled={!nominateEnabled}
-                primary
+                color="palette.primary.main"
                 small
                 onClick={onNominate}
               >
@@ -304,163 +291,152 @@ const Nomination = ({ account }: Props) => {
                 </Box>
               </Button>
             </ToolTip>
-          </Box>
-        ) : null}
-      </Box>
-      {hasNominations ? (
-        <CollapsibleList
-          collapsedItems={mappedNominations.collapsed}
-          uncollapsedItems={mappedNominations.uncollapsed}
-          renderItem={renderNomination}
-          renderShowMore={renderShowInactiveNominations}
-        >
-          <Header />
-          {!mappedNominations.uncollapsed.length && (
-            <WarningBox>
-              <Trans i18nKey="polkadot.nomination.noActiveNominations" />
-              <LinkWithExternalIcon
-                label={<Trans i18nKey="polkadot.nomination.emptyState.info" />}
-                onClick={onLearnMore}
-              />
-            </WarningBox>
-          )}
-        </CollapsibleList>
-      ) : (
-        <Wrapper horizontal>
-          <Box style={{ maxWidth: "65%" }}>
-            <Text ff="Inter|Medium|SemiBold" color="palette.text.shade60" fontSize={4}>
-              <Trans
-                i18nKey="polkadot.nomination.emptyState.description"
-                values={{ name: account.currency.name }}
-              />
-            </Text>
-            <Box mt={2}>
-              <LinkWithExternalIcon
-                label={<Trans i18nKey="polkadot.nomination.emptyState.info" />}
-                onClick={onLearnMore}
-              />
-            </Box>
-          </Box>
-          <Box>
-            {!hasBondedBalance && !hasPendingBondOperation ? (
-              <ToolTip
-                content={
-                  electionOpen ? <Trans i18nKey="polkadot.nomination.electionOpenTooltip" /> : null
-                }
-              >
-                <Button primary small disabled={electionOpen} onClick={onEarnRewards}>
-                  <Box horizontal flow={1} alignItems="center">
-                    <ChartLineIcon size={12} />
-                    <Box>
-                      <Trans i18nKey="delegation.title" />
-                    </Box>
-                  </Box>
-                </Button>
-              </ToolTip>
-            ) : (
-              <ToolTip
-                content={
-                  !nominateEnabled && electionOpen ? (
-                    <Trans i18nKey="polkadot.nomination.electionOpenTooltip" />
-                  ) : !nominateEnabled && hasPendingBondOperation ? (
-                    <Trans i18nKey="polkadot.nomination.hasPendingBondOperation" />
-                  ) : null
-                }
-              >
-                <Button primary small disabled={!nominateEnabled} onClick={onNominate}>
-                  <Box horizontal flow={1} alignItems="center">
-                    <NominateIcon size={12} />
-                    <Box>
-                      <Trans i18nKey="polkadot.nomination.nominate" />
-                    </Box>
-                  </Box>
-                </Button>
-              </ToolTip>
-            )}
-          </Box>
-        </Wrapper>
-      )}
-      {hasUnlockings ? (
-        <>
-          <Box
-            horizontal
-            alignItems="center"
-            justifyContent="space-between"
-            color="palette.text.shade100"
+          ) : null}
+        </TableHeader>
+        {hasNominations ? (
+          <CollapsibleList
+            collapsedItems={mappedNominations.collapsed}
+            uncollapsedItems={mappedNominations.uncollapsed}
+            renderItem={renderNomination}
+            renderShowMore={renderShowInactiveNominations}
           >
-            <ToolTip content={<Trans i18nKey="polkadot.unlockings.headerTooltip" />}>
-              <Box horizontal alignItems="center">
-                <Text ff="Inter|Medium" fontSize={6} data-e2e="title_Unlockings">
-                  <Trans i18nKey="polkadot.unlockings.header" />
-                </Text>
-                <Box ml={2} horizontal alignItems="center">
-                  <InfoCircle />
-                </Box>
+            <Header />
+            {!mappedNominations.uncollapsed.length && (
+              <WarningBox>
+                <Trans i18nKey="polkadot.nomination.noActiveNominations" />
+                <LinkWithExternalIcon
+                  label={<Trans i18nKey="polkadot.nomination.emptyState.info" />}
+                  onClick={onLearnMore}
+                />
+              </WarningBox>
+            )}
+          </CollapsibleList>
+        ) : (
+          <Wrapper horizontal>
+            <Box style={{ maxWidth: "65%" }}>
+              <Text ff="Inter|Medium|SemiBold" color="palette.text.shade60" fontSize={4}>
+                <Trans
+                  i18nKey="polkadot.nomination.emptyState.description"
+                  values={{ name: account.currency.name }}
+                />
+              </Text>
+              <Box mt={2}>
+                <LinkWithExternalIcon
+                  label={<Trans i18nKey="polkadot.nomination.emptyState.info" />}
+                  onClick={onLearnMore}
+                />
               </Box>
-            </ToolTip>
-            <Box horizontal>
-              <ToolTip
-                content={
-                  electionOpen ? <Trans i18nKey="polkadot.nomination.electionOpenTooltip" /> : null
-                }
-              >
-                <Button
-                  id={"account-rebond-button"}
-                  disabled={electionOpen}
-                  mr={2}
-                  primary
-                  small
-                  onClick={onRebond}
-                >
-                  <Box horizontal flow={1} alignItems="center">
-                    <RebondIcon size={12} />
-                    <Box>
-                      <Trans i18nKey="polkadot.unlockings.rebond" />
-                    </Box>
-                  </Box>
-                </Button>
-              </ToolTip>
-              <ToolTip
-                content={
-                  withdrawEnabled ? (
-                    <Trans i18nKey="polkadot.unlockings.withdrawTooltip" />
-                  ) : (
-                    <Trans
-                      i18nKey={
-                        electionOpen
-                          ? "polkadot.nomination.electionOpenTooltip"
-                          : "polkadot.unlockings.noUnlockedWarning"
-                      }
-                    />
-                  )
-                }
-              >
-                <Button
-                  id={"account-withdraw-button"}
-                  disabled={!withdrawEnabled}
-                  primary
-                  small
-                  onClick={onWithdrawUnbonded}
-                >
-                  <Box horizontal flow={1} alignItems="center">
-                    <WithdrawUnbondedIcon size={12} />
-                    <Box>
-                      <Trans
-                        i18nKey="polkadot.unlockings.withdrawUnbonded"
-                        values={{
-                          amount: formatCurrencyUnit(unit, unlockedBalance, {
-                            showCode: true,
-                            discreet,
-                            locale,
-                          }),
-                        }}
-                      />
-                    </Box>
-                  </Box>
-                </Button>
-              </ToolTip>
             </Box>
-          </Box>
+            <Box>
+              {!hasBondedBalance && !hasPendingBondOperation ? (
+                <ToolTip
+                  content={
+                    electionOpen ? (
+                      <Trans i18nKey="polkadot.nomination.electionOpenTooltip" />
+                    ) : null
+                  }
+                >
+                  <Button primary small disabled={electionOpen} onClick={onEarnRewards}>
+                    <Box horizontal flow={1} alignItems="center">
+                      <ChartLineIcon size={12} />
+                      <Box>
+                        <Trans i18nKey="delegation.title" />
+                      </Box>
+                    </Box>
+                  </Button>
+                </ToolTip>
+              ) : (
+                <ToolTip
+                  content={
+                    !nominateEnabled && electionOpen ? (
+                      <Trans i18nKey="polkadot.nomination.electionOpenTooltip" />
+                    ) : !nominateEnabled && hasPendingBondOperation ? (
+                      <Trans i18nKey="polkadot.nomination.hasPendingBondOperation" />
+                    ) : null
+                  }
+                >
+                  <Button primary small disabled={!nominateEnabled} onClick={onNominate}>
+                    <Box horizontal flow={1} alignItems="center">
+                      <NominateIcon size={12} />
+                      <Box>
+                        <Trans i18nKey="polkadot.nomination.nominate" />
+                      </Box>
+                    </Box>
+                  </Button>
+                </ToolTip>
+              )}
+            </Box>
+          </Wrapper>
+        )}
+      </TableContainer>
+      {hasUnlockings ? (
+        <TableContainer mb={6}>
+          <TableHeader
+            title={<Trans i18nKey="polkadot.unlockings.header" />}
+            titleProps={{ "data-e2e": "title_Unlockings" }}
+            tooltip={<Trans i18nKey="polkadot.unlockings.headerTooltip" />}
+          >
+            <ToolTip
+              content={
+                electionOpen ? <Trans i18nKey="polkadot.nomination.electionOpenTooltip" /> : null
+              }
+            >
+              <Button
+                id={"account-rebond-button"}
+                disabled={electionOpen}
+                mr={2}
+                color="palette.primary.main"
+                small
+                onClick={onRebond}
+              >
+                <Box horizontal flow={1} alignItems="center">
+                  <RebondIcon size={12} />
+                  <Box>
+                    <Trans i18nKey="polkadot.unlockings.rebond" />
+                  </Box>
+                </Box>
+              </Button>
+            </ToolTip>
+            <ToolTip
+              content={
+                withdrawEnabled ? (
+                  <Trans i18nKey="polkadot.unlockings.withdrawTooltip" />
+                ) : (
+                  <Trans
+                    i18nKey={
+                      electionOpen
+                        ? "polkadot.nomination.electionOpenTooltip"
+                        : "polkadot.unlockings.noUnlockedWarning"
+                    }
+                  />
+                )
+              }
+            >
+              <Button
+                id={"account-withdraw-button"}
+                disabled={!withdrawEnabled}
+                color="palette.primary.main"
+                small
+                onClick={onWithdrawUnbonded}
+              >
+                <Box horizontal flow={1} alignItems="center">
+                  <WithdrawUnbondedIcon size={12} />
+                  <Box>
+                    <Trans
+                      i18nKey="polkadot.unlockings.withdrawUnbonded"
+                      values={{
+                        amount: formatCurrencyUnit(unit, unlockedBalance, {
+                          showCode: true,
+                          discreet,
+                          locale,
+                        }),
+                      }}
+                    />
+                  </Box>
+                </Box>
+              </Button>
+            </ToolTip>
+          </TableHeader>
           <CollapsibleList
             uncollapsedItems={mappedUnlockings.uncollapsed}
             collapsedItems={mappedUnlockings.collapsed}
@@ -469,7 +445,7 @@ const Nomination = ({ account }: Props) => {
           >
             <UnlockingHeader />
           </CollapsibleList>
-        </>
+        </TableContainer>
       ) : null}
     </>
   );

@@ -8,7 +8,7 @@ Preámbulo
 
 Este acuerdo se celebra entre el usuario (el &quot;Usuario&quot; o &quot;tú&quot;) y Ledger SAS (&quot;Ledger&quot;, &quot;nosotros&quot; o la &quot;Sociedad&quot;). Al usar cualquiera de los servicios prestados por Ledger o sus filiales en relación con el software Ledger Live (los &quot;Servicios de Ledger&quot;) o hacer clic en &quot;Acepto&quot; para cualquiera de dichos servicios, el Usuario reconoce haber leído atentamente y aceptar en su totalidad las condiciones de uso que se exponen a continuación.
 
-El uso de los Servicios de Ledger también está sujeto a su Política de privacidad, disponible en [**https://shop.ledger.com/pages/privacy-policy**](https://shop.ledger.com/pages/privacy-policy).
+El uso de los Servicios de Ledger también está sujeto a su Política de privacidad, disponible en [**https://shop.ledger.com/pages/politica-de-privacidad**](https://shop.ledger.com/pages/politica-de-privacidad).
 
 ANTES DE HACER USO DE LOS SERVICIOS, PREPÁRATE PARA TOMAR DECISIONES INFORMADAS. EL VALOR DE LOS CRIPTOACTIVOS ES INESTABLE. LOS PRECIOS PUEDEN SUBIR Y BAJAR. EVALÚA CUIDADOSAMENTE TUS OBJETIVOS Y EL RIESGO FINANCIERO QUE ESTÁS DISPUESTO/A A ASUMIR. NO OLVIDES QUE LEDGER NO PROPORCIONA ASESORAMIENTO FINANCIERO, TRIBUTARIO O JURÍDICO. DEBES TOMAR LAS DECISIONES DE LLEVAR A CABO OPERACIONES CON CRIPTOACTIVOS BASÁNDOTE EN TUS PROPIOS CONOCIMIENTOS O EN LA OPINIÓN DE EXPERTOS FIABLES Y CUALIFICADOS.
 

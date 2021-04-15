@@ -2,7 +2,8 @@
   "calendar": {
     "today": "Today",
     "tomorrow": "Tomorrow",
-    "yesterday": "Yesterday"
+    "yesterday": "Yesterday",
+    "transactionDate": "Transaction date"
   },
   "common": {
     "never": "Never",
@@ -185,6 +186,7 @@
       "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
     },
     "form": {
+      "amount": "Amount",
       "from": {
         "title": "From",
         "account": "Account",
@@ -198,12 +200,23 @@
         "currency": "Crypto asset",
         "addAccountCTA": "Add new account"
       },
+      "tradeMethod": {
+        "title": "Rate",
+        "float": "Floating rate",
+        "floatUnavailable": "Floating rate not supported for this pair",
+        "fixed": "Fixed rate",
+        "fixedUnavailable": "Fixed rate not supported for this pair",
+        "floatDesc": "Your amount could change depending on the market conditions.",
+        "fixedDesc": "Your amount will stay the same even if the market changes. Updates every 60 seconds.",
+        "by": "Provided by"
+      },
       "exchange": "Exchange",
       "helpCTA": "What is Swap?",
       "bubble": "We use a fixed rate, this is the exact amount you will receive.",
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
       "noApp": "{{currencyName}} app not installed.",
-      "outdatedApp": "{{currencyName}} app update available."
+      "outdatedApp": "{{currencyName}} app update available.",
+      "loadingRates": "Loading rates..."
     },
     "modal": {
       "title": "Swap",
@@ -220,7 +233,13 @@
             "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
           },
           "details": {
-            "provider": "Provider"
+            "provider": "Provider",
+            "tradeMethod": {
+              "title": "Type",
+              "float": "Floating rate",
+              "fixed": "Fixed rate"
+            },
+            "address": "Address"
           }
         },
         "device": {
@@ -237,20 +256,25 @@
       }
     },
     "operationDetailsModal": {
-      "title": "Operation details",
+      "title": "Swap",
       "provider": "Provider",
       "txid": "Swap ID",
       "status": "Status",
       "statusTooltips": {
-        "refunded": "Please contact the Swap provider with you swap ID for more details",
-        "failed": "Please contact the Swap provider with you swap ID for more details",
-        "hold": "Please contact the Swap provider with you swap ID to solve the situation"
+        "expired": "Please contact the swap provider with your swap ID for more information.",
+        "refunded": "Please contact the swap provider with your swap ID for more information.",
+        "pending": "Please wait while the swap provider is processing the transaction.",
+        "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
+        "finished": "Your swap was completed successfully."
       },
       "date": "Date",
       "from": "From",
+      "fromAddress": "Origin address",
+      "fromAddress_plural": "Origin addresses",
       "to": "To",
-      "initialAmount": "Amount sent",
-      "creditedAmount": "Amount to receive"
+      "toProvider": "Provider address",
+      "initialAmount": "Initial amount",
+      "creditedAmount": "Credited amount"
     }
   },
   "fullNode": {
@@ -1014,10 +1038,13 @@
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction",
-      "amountSent": "Amount sent",
-      "amountReceived": "Amount received",
+      "amountSent": "Amount to send",
+      "amountReceived": "Amount to receive",
+      "amountReceivedFloat": "Amount to receive before service fees",
       "fees": "Fees",
-      "provider": "Provider"
+      "provider": "Provider",
+      "payoutNetworkFees": "Payout fees",
+      "payoutNetworkFeesTooltip": "This amount will not be shown on your device"
     },
     "sell": {
       "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
@@ -1289,9 +1316,9 @@
     "title": "Buy",
     "titleCrypto": "Buy {{currency}}",
     "buyCTA": "Buy {{currencyTicker}}",
-    "withoutDevice": "Don't have your device?",
+    "withoutDevice": "Continue without my device",
     "connectWithoutDevice": "It's better to use your device for optimal security.",
-    "skipConnect": "Continue without device"
+    "skipConnect": "Continue without my device"
   },
   "sell": {
     "title": "Sell",
@@ -2283,6 +2310,37 @@
     "dusk": "Dusk",
     "dark": "Dark"
   },
+  "toastOverlay": {
+    "toastType": {
+      "announcement": "News"
+    }
+  },
+  "informationCenter": {
+    "tooltip": "Information center",
+    "ongoingIncidentsTooltip": "There are {{incidentCount}} ongoing incidents",
+    "tabs": {
+      "announcements": "News",
+      "announcementsUnseen": "News ({{unseenCount}})",
+      "serviceStatus": "Status",
+      "serviceStatusIncidentsOngoing": "Status ({{incidentCount}})"
+    },
+    "serviceStatus": {
+      "statusOk": {
+        "title": "Ledger live is up and running",
+        "description": "Having trouble ? Go on our <0>help page</0>"
+      },
+      "statusNotOk": {
+        "title": "Ledger live is experiencing issues",
+        "learnMore": "Learn more"
+      }
+    },
+    "announcement": {
+      "emptyState": {
+        "title": "No news for the moment",
+        "desc": "You will find here all the news related to Ledger and Ledger live"
+      }
+    }
+  },
   "onboarding": {
     "drawers": {
       "pinHelp": {
@@ -2652,7 +2710,8 @@
       "descr": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
       "buttons": {
         "start": "Let’s take the quiz",
-        "next": "Next question"
+        "next": "Next question",
+        "finish": "Finish quiz"
       },
       "questions": {
         "1": {
@@ -3293,7 +3352,7 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{minAmountFromFormatted}}"
+      "title": "Amount must be more than {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Amount must be less than {{maxAmountFromFormatted}}"

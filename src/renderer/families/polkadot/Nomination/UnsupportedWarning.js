@@ -32,7 +32,7 @@ export const ExternalControllerUnsupportedWarning = ({
   onExternalLink: Function,
   onLearnMore: Function,
 }) => (
-  <WarnBox>
+  <WarnBox style={{ border: "none", margin: 0 }}>
     <Trans i18nKey="polkadot.nomination.externalControllerUnsupported" values={{ address }}>
       <p>
         <Address onClick={() => onExternalLink(address)} />
@@ -57,7 +57,7 @@ export const ExternalStashUnsupportedWarning = ({
   onExternalLink: Function,
   onLearnMore: Function,
 }) => (
-  <WarnBox>
+  <WarnBox style={{ border: "none", margin: 0 }}>
     <Trans i18nKey="polkadot.nomination.externalStashUnsupported" values={{ address }}>
       <p>
         <Address onClick={() => onExternalLink(address)} />

@@ -14,6 +14,9 @@ const ScrollableContentContainer = styled.div`
   height: 100%;
   width: 100%;
   overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: ${({ hideScrollbar }) => (hideScrollbar ? "none" : "initial")};
+  }
 `;
 
 const ScrollHintAnimation = keyframes`
@@ -59,9 +62,15 @@ type ScrollAreaProps = {
   className?: string,
   children?: React$Node,
   withHint?: boolean,
+  hideScrollbar?: boolean,
 };
 
-export function ScrollArea({ className, children, withHint = false }: ScrollAreaProps) {
+export function ScrollArea({
+  className,
+  children,
+  withHint = false,
+  hideScrollbar = false,
+}: ScrollAreaProps) {
   const [hintVisible, setHintVisible] = useState(true);
 
   const handleScroll = useCallback(event => {
@@ -69,9 +78,13 @@ export function ScrollArea({ className, children, withHint = false }: ScrollArea
   }, []);
 
   return (
-    <ScrollAreaContainer>
+    <ScrollAreaContainer className={className}>
       {withHint ? <ScrollHint visible={hintVisible} /> : null}
-      <ScrollableContentContainer id="page-scroller" className={className} onScroll={handleScroll}>
+      <ScrollableContentContainer
+        id="page-scroller"
+        onScroll={handleScroll}
+        hideScrollbar={hideScrollbar}
+      >
         {children}
       </ScrollableContentContainer>
     </ScrollAreaContainer>
