@@ -13,7 +13,6 @@ import PortfolioPage from "./po/portfolio.page";
 import SettingsPage from "./po/settings.page";
 import ManagerPage from "./po/manager.page";
 import WCConnectedPage from "./po/wcconnected.page";
-import AddAccountModal from "./po/addAccountModal.page";
 import AddAccountsModal from "./po/addAccountsModal.page";
 import AccountSettingsModal from "./po/accountSettingsModal.page";
 import ExportOperationsModal from "./po/exportOperationsHistoryModal.page";
@@ -153,7 +152,6 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     settingsPage = new SettingsPage(app);
     managerPage = new ManagerPage(app);
     wcConnectedPage = new WCConnectedPage(app);
-    addAccountsModal = new AddAccountModal(app);
     addAccountsModal = new AddAccountsModal(app);
     accountSettingsModal = new AccountSettingsModal(app);
     exportOperationsHistoryModal = new ExportOperationsModal(app);
