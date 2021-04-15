@@ -34,6 +34,7 @@ type OwnProps = {|
     startWithWarning?: boolean,
     receiveTokenMode?: boolean,
     eventType?: string,
+    skipAccountSelect?: boolean,
   },
 |};
 
@@ -161,7 +162,13 @@ const Body = ({
 
   useEffect(() => {
     const stepId =
-      params && params.startWithWarning ? "warning" : params.receiveTokenMode ? "account" : null;
+      params && params.startWithWarning
+        ? "warning"
+        : params.receiveTokenMode
+        ? "account"
+        : params.skipAccountSelect
+        ? "device"
+        : null;
     if (stepId) onChangeStepId(stepId);
   }, [onChangeStepId, params]);
 

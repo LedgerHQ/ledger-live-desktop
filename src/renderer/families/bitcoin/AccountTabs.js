@@ -1,5 +1,5 @@
 // @flow
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import type { Account, Address } from "@ledgerhq/live-common/lib/types";
@@ -12,6 +12,9 @@ import Tabs from "~/renderer/components/Tabs";
 import TableContainer, { HeaderWrapper, TableRow } from "~/renderer/components/TableContainer";
 import Box from "~/renderer/components/Box/Box";
 import Button from "~/renderer/components/Button";
+
+import { useDispatch } from "react-redux";
+import { openModal } from "~/renderer/actions/modals";
 
 export const TableLine: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|SemiBold",
@@ -48,7 +51,13 @@ type Props = {
   parentAccount?: Account,
 };
 
-function AddressesTab({ freshAddresses }: { freshAddresses: Address[] }) {
+function AddressesTab({
+  freshAddresses,
+  receiveAddress,
+}: {
+  freshAddresses: Address[],
+  receiveAddress: Function,
+}) {
   const { t } = useTranslation();
 
   return (
@@ -57,14 +66,14 @@ function AddressesTab({ freshAddresses }: { freshAddresses: Address[] }) {
         <TableLine>{t("account.address")}</TableLine>
         <TableLine>{t("account.transaction")}</TableLine>
       </HeaderWrapper>
-      {freshAddresses.map(({ address }, i) => (
+      {freshAddresses.map(({ address, derivationPath }, i) => (
         <TableRow key={address + i}>
           <Cell>
             <SplitAddress color="palette.text.shade80" ff="Inter" fontSize={3} value={address} />
           </Cell>
           <Button
             onClick={() => {
-              // @TODO receive on this address
+              receiveAddress(address, derivationPath);
             }}
           >
             {t("accounts.contextMenu.receive")}
@@ -77,9 +86,24 @@ function AddressesTab({ freshAddresses }: { freshAddresses: Address[] }) {
 
 function AccountTabs({ account, parentAccount }: Props) {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const freshAddresses = account.freshAddresses || [];
 
+  const receiveAddress = useCallback(
+    (address, path) => {
+      dispatch(
+        openModal("MODAL_RECEIVE", {
+          account: { ...account, freshAddress: address, freshAddressPath: path },
+          parentAccount,
+          skipAccountSelect: true,
+        }),
+      );
+    },
+    [openModal, dispatch, account, parentAccount],
+  );
+
+  console.log(freshAddresses);
   return freshAddresses.length > 0 ? (
     <Tabs
       tabs={[
@@ -89,7 +113,7 @@ function AccountTabs({ account, parentAccount }: Props) {
         },
         {
           label: t("account.addresses"),
-          content: <AddressesTab freshAddresses={freshAddresses} />,
+          content: <AddressesTab freshAddresses={freshAddresses} receiveAddress={receiveAddress} />,
         },
       ]}
     />
