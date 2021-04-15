@@ -12,11 +12,11 @@ import type {
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
-import moment from "moment";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import { useCurrencyPortfolio } from "~/renderer/actions/portfolio";
 import AssetBalanceSummaryHeader from "./AssetBalanceSummaryHeader";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
+import FormattedDate from "~/renderer/components/FormattedDate";
 
 type Props = {
   counterValue: Currency,
@@ -63,7 +63,7 @@ export default function BalanceSummary({
             <FormattedVal fontSize={4} color="warmGrey" showCode {...data[1]} />
           ) : null}
           <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
-            {moment(d.date).format("LL")}
+            <FormattedDate date={d.date} format="LL" />
           </Box>
         </>
       );

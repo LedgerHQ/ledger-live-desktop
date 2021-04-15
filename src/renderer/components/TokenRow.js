@@ -12,6 +12,7 @@ import Delta from "~/renderer/screens/accounts/AccountRowItem/Delta";
 import Countervalue from "~/renderer/screens/accounts/AccountRowItem/Countervalue";
 import Star from "~/renderer/components/Stars/Star";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { TableRow } from "./TableContainer";
 
 type Props = {
   account: AccountLike,
@@ -22,23 +23,6 @@ type Props = {
   onClick: (AccountLike, Account) => void,
   range: PortfolioRange,
 };
-
-const TopLevelRow: ThemedComponent<{}> = styled(Box)`
-  background: ${p => p.theme.colors.palette.background.paper};
-  align-items: center;
-  border-radius: 4px;
-  border: 1px solid transparent;
-  box-shadow: 0 4px 8px 0 #00000007;
-  flex-direction: row;
-  color: #abadb6;
-  cursor: pointer;
-  display: flex;
-  margin-bottom: 9px;
-  padding: 20px;
-  :hover {
-    border-color: ${p => p.theme.colors.palette.text.shade40};
-  }
-`;
 
 const NestedRow: ThemedComponent<{}> = styled(Box)`
   flex: 1;
@@ -64,7 +48,7 @@ class TokenRow extends PureComponent<Props> {
     const { account, range, index, nested, disableRounding } = this.props;
     const currency = getAccountCurrency(account);
     const unit = currency.units[0];
-    const Row = nested ? NestedRow : TopLevelRow;
+    const Row = nested ? NestedRow : TableRow;
     return (
       <Row className="token-row" index={index} onClick={this.onClick}>
         <Header nested={nested} account={account} />

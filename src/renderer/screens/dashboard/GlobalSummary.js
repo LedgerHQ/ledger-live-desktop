@@ -2,7 +2,6 @@
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { BigNumber } from "bignumber.js";
-import moment from "moment";
 import { formatShort } from "@ledgerhq/live-common/lib/currencies";
 import type { Currency, BalanceHistoryData } from "@ledgerhq/live-common/lib/types";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
@@ -13,6 +12,7 @@ import PlaceholderChart from "~/renderer/components/PlaceholderChart";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
 import BalanceInfos from "~/renderer/components/BalanceInfos";
 import { usePortfolio } from "~/renderer/actions/portfolio";
+import FormattedDate from "~/renderer/components/FormattedDate";
 
 type Props = {
   counterValue: Currency,
@@ -100,10 +100,10 @@ function Tooltip({ data, counterValue }: { data: BalanceHistoryData, counterValu
         val={data.value}
       />
       <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
-        {moment(data.date).format("LL")}
+        <FormattedDate date={data.date} format="LL" />
       </Box>
       <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
-        {moment(data.date).format("LT")}
+        <FormattedDate date={data.date} format="LT" />
       </Box>
     </>
   );

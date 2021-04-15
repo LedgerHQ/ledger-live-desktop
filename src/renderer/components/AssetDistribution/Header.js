@@ -12,7 +12,6 @@ const Wrapper: ThemedComponent<{}> = styled.div`
   flex-direction: row;
   padding: 10px 20px;
   border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
-  border-top: 1px solid ${p => p.theme.colors.palette.divider};
   background-color: ${p => rgba(p.theme.colors.palette.secondary.main, 0.02)};
   > * {
     width: 20%;

@@ -2,7 +2,8 @@
   "calendar": {
     "today": "Today",
     "tomorrow": "Tomorrow",
-    "yesterday": "Yesterday"
+    "yesterday": "Yesterday",
+    "transactionDate": "Transaction date"
   },
   "common": {
     "never": "Never",
@@ -1315,9 +1316,9 @@
     "title": "Buy",
     "titleCrypto": "Buy {{currency}}",
     "buyCTA": "Buy {{currencyTicker}}",
-    "withoutDevice": "Don't have your device?",
+    "withoutDevice": "Continue without my device",
     "connectWithoutDevice": "It's better to use your device for optimal security.",
-    "skipConnect": "Continue without device"
+    "skipConnect": "Continue without my device"
   },
   "sell": {
     "title": "Sell",
@@ -2415,18 +2416,18 @@
         "options": {
           "1": {
             "heading": "Первый раз",
-            "title": "Set up a new {{deviceName}}",
+            "title": "Настройка нового {{deviceName}}",
             "description": "Начнем с конфигурации Вашего устройства."
           },
           "2": {
             "heading": "Подключить устройство",
-            "title": "Connect your {{deviceName}}",
+            "title": "Подключите устройство {{deviceName}}",
             "description": "Ваше устройство настроено? Подключите его к приложению."
           },
           "3": {
             "heading": "Восстановить устройство",
             "title": "Восстановить фразу восстановления на новом устройстве",
-            "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
+            "description": "Используйте имеющуюся фразу восстановления, чтобы восстановить свои приватные ключи на новом {{deviceName}}."
           }
         }
       },
@@ -2710,7 +2711,7 @@
       "buttons": {
         "start": "Начать викторину",
         "next": "Следующий вопрос",
-        "finish": "Finish quiz"
+        "finish": "Закончить викторину"
       },
       "questions": {
         "1": {

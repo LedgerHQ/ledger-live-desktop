@@ -22,7 +22,7 @@ import { openURL } from "~/renderer/linking";
 import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
-import Box, { Card } from "~/renderer/components/Box";
+import Box from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import IconChartLine from "~/renderer/icons/ChartLine";
 import Vote from "~/renderer/icons/Vote";
@@ -36,6 +36,7 @@ import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
 import { useDiscreetMode } from "~/renderer/components/Discreet";
 import { localeSelector } from "~/renderer/reducers/settings";
+import TableContainer, { TableHeader } from "~/renderer/components/TableContainer";
 
 type Props = {
   account: Account,
@@ -43,10 +44,7 @@ type Props = {
 
 const Wrapper = styled(Box).attrs(() => ({
   p: 3,
-  mt: 24,
-  mb: 6,
 }))`
-  border: 1px dashed ${p => p.theme.colors.palette.text.shade20};
   border-radius: 4px;
   justify-content: space-between;
   align-items: center;
@@ -126,82 +124,70 @@ const Delegation = ({ account }: Props) => {
     tronPower === 0 && (!spendableBalance || !spendableBalance.gte(MIN_TRANSACTION_AMOUNT));
 
   return (
-    <>
-      <Box horizontal alignItems="center" justifyContent="space-between">
-        <Text
-          ff="Inter|Medium"
-          fontSize={6}
-          color="palette.text.shade100"
-          data-e2e="title_Delegation"
-        >
-          <Trans i18nKey="tron.voting.header" />
-        </Text>
-
-        <Box horizontal>
-          {tronPower > 0 && formattedVotes.length > 0 ? (
-            <Button small primary onClick={onDelegate} mr={2}>
+    <TableContainer mb={6}>
+      <TableHeader
+        title={<Trans i18nKey="tron.voting.header" />}
+        titleProps={{ "data-e2e": "title_Delegation" }}
+      >
+        {tronPower > 0 && formattedVotes.length > 0 ? (
+          <Button small color="palette.primary.main" onClick={onDelegate} mr={2}>
+            <Box horizontal flow={1} alignItems="center">
+              <Vote size={12} />
+              <Box>
+                <Trans
+                  i18nKey={
+                    hasVotes ? "tron.voting.emptyState.voteExisting" : "tron.voting.emptyState.vote"
+                  }
+                />
+              </Box>
+            </Box>
+          </Button>
+        ) : null}
+        {formattedVotes.length > 0 || canClaimRewards ? (
+          <ToolTip
+            content={
+              !canClaimRewards ? (
+                hasRewards && formattedNextRewardDate ? (
+                  <Trans
+                    i18nKey="tron.voting.nextRewardsDate"
+                    values={{ date: formattedNextRewardDate }}
+                  />
+                ) : (
+                  <Trans i18nKey="tron.voting.noRewards" />
+                )
+              ) : null
+            }
+          >
+            <Button
+              disabled={!canClaimRewards}
+              color="palette.primary.main"
+              small
+              onClick={() => {
+                dispatch(
+                  openModal("MODAL_CLAIM_REWARDS", {
+                    account,
+                    reward: unwithdrawnReward,
+                  }),
+                );
+              }}
+            >
               <Box horizontal flow={1} alignItems="center">
-                <Vote size={12} />
+                <ClaimRewards size={12} />
                 <Box>
                   <Trans
                     i18nKey={
-                      hasVotes
-                        ? "tron.voting.emptyState.voteExisting"
-                        : "tron.voting.emptyState.vote"
+                      hasRewards ? "tron.voting.claimAvailableRewards" : "tron.voting.claimRewards"
                     }
+                    values={{ amount: formattedUnwidthDrawnReward }}
                   />
                 </Box>
               </Box>
             </Button>
-          ) : null}
-          {formattedVotes.length > 0 || canClaimRewards ? (
-            <ToolTip
-              content={
-                !canClaimRewards ? (
-                  hasRewards && formattedNextRewardDate ? (
-                    <Trans
-                      i18nKey="tron.voting.nextRewardsDate"
-                      values={{ date: formattedNextRewardDate }}
-                    />
-                  ) : (
-                    <Trans i18nKey="tron.voting.noRewards" />
-                  )
-                ) : null
-              }
-            >
-              <Button
-                disabled={!canClaimRewards}
-                primary
-                small
-                onClick={() => {
-                  dispatch(
-                    openModal("MODAL_CLAIM_REWARDS", {
-                      account,
-                      reward: unwithdrawnReward,
-                    }),
-                  );
-                }}
-              >
-                <Box horizontal flow={1} alignItems="center">
-                  <ClaimRewards size={12} />
-                  <Box>
-                    <Trans
-                      i18nKey={
-                        hasRewards
-                          ? "tron.voting.claimAvailableRewards"
-                          : "tron.voting.claimRewards"
-                      }
-                      values={{ amount: formattedUnwidthDrawnReward }}
-                    />
-                  </Box>
-                </Box>
-              </Button>
-            </ToolTip>
-          ) : null}
-        </Box>
-      </Box>
+          </ToolTip>
+        ) : null}
+      </TableHeader>
       {tronPower > 0 && formattedVotes.length > 0 ? (
-        <Card p={0} mt={24} mb={6}>
+        <>
           <Header />
           {formattedVotes.map(({ validator, address, voteCount, isSR }, index) => (
             <Row
@@ -227,7 +213,7 @@ const Delegation = ({ account }: Props) => {
             />
           ))}
           <Footer total={tronPower} used={totalVotesUsed} onClick={onDelegate} />
-        </Card>
+        </>
       ) : (
         <Wrapper horizontal>
           <Box style={{ maxWidth: "65%" }}>
@@ -278,7 +264,7 @@ const Delegation = ({ account }: Props) => {
           </Box>
         </Wrapper>
       )}
-    </>
+    </TableContainer>
   );
 };
 

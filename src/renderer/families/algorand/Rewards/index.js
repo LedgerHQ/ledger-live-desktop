@@ -7,15 +7,13 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 
 import Box from "~/renderer/components/Box/Box";
-import Text from "~/renderer/components/Text";
-import InfoCircle from "~/renderer/icons/InfoCircle";
 import ToolTip from "~/renderer/components/Tooltip";
-import Card from "~/renderer/components/Box/Card";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import CounterValue from "~/renderer/components/CounterValue";
 import Button from "~/renderer/components/Button";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
 import { openModal } from "~/renderer/actions/modals";
+import TableContainer, { TableHeader } from "~/renderer/components/TableContainer";
 
 type Props = {
   account: Account,
@@ -34,25 +32,13 @@ const RewardsSection = ({ account }: Props) => {
   const rewardsDisabled = rewards.lte(0);
 
   return (
-    <>
-      <Box
-        horizontal
-        alignItems="center"
-        color="palette.text.shade100"
-        justifyContent="space-between"
-        mb={2}
-      >
-        <ToolTip content={<Trans i18nKey="algorand.claimRewards.tooltip" />}>
-          <Box horizontal alignItems="center">
-            <Text ff="Inter|Medium" fontSize={6} data-e2e="title_Delegation">
-              <Trans i18nKey="algorand.claimRewards.header" />
-            </Text>
-            &nbsp;
-            <InfoCircle size={16} />
-          </Box>
-        </ToolTip>
-      </Box>
-      <Card p={4} mb={6} horizontal alignItems="center" justifyContent="space-between">
+    <TableContainer mb={6}>
+      <TableHeader
+        title={<Trans i18nKey="algorand.claimRewards.header" />}
+        tooltip={<Trans i18nKey="algorand.claimRewards.tooltip" />}
+        titleProps={{ "data-e2e": "title_Delegation" }}
+      />
+      <Box p={4} horizontal alignItems="center" justifyContent="space-between">
         <Box vertical>
           <FormattedVal
             val={rewards}
@@ -85,8 +71,8 @@ const RewardsSection = ({ account }: Props) => {
             </Box>
           </Button>
         </ToolTip>
-      </Card>
-    </>
+      </Box>
+    </TableContainer>
   );
 };
 

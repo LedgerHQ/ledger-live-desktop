@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useState, memo } from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account/helpers";
@@ -21,12 +21,16 @@ import AccountContextMenu from "~/renderer/components/ContextMenu/AccountContext
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import perFamilyTokenList from "~/renderer/generated/TokenList";
 import { useTimeRange } from "~/renderer/actions/settings";
+import TableContainer, { TableHeader } from "~/renderer/components/TableContainer";
+import AngleDown from "~/renderer/icons/AngleDown";
 
 type Props = {
   account: Account,
 };
 
-export default function TokensList({ account }: Props) {
+export default memo<Props>(TokensList);
+
+function TokensList({ account }: Props) {
   const { t } = useTranslation();
   const [range] = useTimeRange();
   const dispatch = useDispatch();
@@ -46,6 +50,10 @@ export default function TokensList({ account }: Props) {
     dispatch(openModal("MODAL_RECEIVE", { account, receiveTokenMode: true }));
   }, [dispatch, account]);
 
+  const [collapsed, setCollapsed] = useState(true);
+
+  const toggleCollapse = useCallback(() => setCollapsed(s => !s), []);
+
   if (!account.subAccounts) return null;
   const subAccounts = listSubAccounts(account);
   const { currency } = account;
@@ -53,6 +61,7 @@ export default function TokensList({ account }: Props) {
   const tokenTypes = listTokenTypesForCryptoCurrency(currency);
   const isTokenAccount = tokenTypes.length > 0;
   const isEmpty = subAccounts.length === 0;
+  const shouldSliceList = subAccounts.length >= 5;
 
   if (!isTokenAccount && isEmpty) return null;
 
@@ -75,12 +84,18 @@ export default function TokensList({ account }: Props) {
 
   const linkLabel = t(hasSpecificTokenWording ? `tokensList.${family}.link` : "tokensList.link");
 
+  const translationMap = {
+    see: hasSpecificTokenWording
+      ? `tokensList.${currency.family}.seeTokens`
+      : `tokensList.seeTokens`,
+    hide: hasSpecificTokenWording
+      ? `tokensList.${currency.family}.hideTokens`
+      : `tokensList.hideTokens`,
+  };
+
   return (
-    <Box id="tokens-list" mb={50}>
-      <Wrapper>
-        <Text color="palette.text.shade100" mb={2} ff="Inter|Medium" fontSize={6}>
-          {isTokenAccount ? titleLabel : t("subAccounts.title")}
-        </Text>
+    <TableContainer id="tokens-list" mb={50}>
+      <TableHeader title={isTokenAccount ? titleLabel : t("subAccounts.title")}>
         {!isEmpty && isTokenAccount && (
           <ReceiveButtonComponent
             onClick={onReceiveClick}
@@ -88,7 +103,7 @@ export default function TokensList({ account }: Props) {
             openModal={openModal}
           />
         )}
-      </Wrapper>
+      </TableHeader>
       {isEmpty && (
         <EmptyState>
           <Placeholder>
@@ -117,19 +132,33 @@ export default function TokensList({ account }: Props) {
           />
         </EmptyState>
       )}
-      {subAccounts.map((token, index) => (
-        <AccountContextMenu key={token.id} account={token} parentAccount={account}>
-          <TokenRow
-            index={index}
-            range={range}
-            account={token}
-            parentAccount={account}
-            onClick={onAccountClick}
-            disableRounding
-          />
-        </AccountContextMenu>
-      ))}
-    </Box>
+      {subAccounts
+        .slice(0, shouldSliceList && collapsed ? 3 : subAccounts.length)
+        .map((token, index) => (
+          <AccountContextMenu key={token.id} account={token} parentAccount={account}>
+            <TokenRow
+              index={index}
+              range={range}
+              account={token}
+              parentAccount={account}
+              onClick={onAccountClick}
+              disableRounding
+            />
+          </AccountContextMenu>
+        ))}
+      {shouldSliceList && (
+        <TokenShowMoreIndicator expanded={!collapsed} onClick={toggleCollapse}>
+          <Box horizontal alignContent="center" justifyContent="center">
+            <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
+              {t(translationMap[collapsed ? "see" : "hide"], { tokenCount: subAccounts.length })}
+            </Text>
+            <IconAngleDown expanded={!collapsed}>
+              <AngleDown size={16} />
+            </IconAngleDown>
+          </Box>
+        </TokenShowMoreIndicator>
+      )}
+    </TableContainer>
   );
 }
 
@@ -146,15 +175,7 @@ function ReceiveButton(props: { onClick: () => void }) {
   );
 }
 
-const Wrapper: ThemedComponent<{}> = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  padding-right: ${p => p.theme.space[4]}px;
-`;
-
 const EmptyState: ThemedComponent<{}> = styled.div`
-  border: 1px dashed ${p => p.theme.colors.palette.text.shade60};
   padding: 15px 20px;
   border-radius: 4px;
   display: flex;
@@ -172,4 +193,34 @@ const Placeholder: ThemedComponent<{}> = styled.div`
   flex-direction: column;
   display: flex;
   padding-right: 50px;
+`;
+
+const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled(Button)`
+  display: flex;
+  color: ${p => p.theme.colors.wallet};
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid ${p => p.theme.colors.palette.divider};
+  background: ${p => p.theme.colors.palette.background.paper};
+  border-radius: 0px 0px 4px 4px;
+  height: 44px;
+  text-align: center;
+  padding: 0;
+  &:hover ${Text} {
+    text-decoration: underline;
+  }
+  &:hover {
+    background-color: initial;
+  }
+  > :nth-child(2) {
+    margin-left: 8px;
+    transform: rotate(${p => (p.expanded ? "180deg" : "0deg")});
+  }
+`;
+
+const IconAngleDown: ThemedComponent<{ expanded?: boolean }> = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: ${p => (p.expanded ? "rotate(180deg)" : "rotate(0deg)")};
 `;

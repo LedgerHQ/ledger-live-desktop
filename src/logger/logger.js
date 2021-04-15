@@ -110,6 +110,8 @@ const logAnalytics = !process.env.NO_DEBUG_ANALYTICS;
 const logApdu = !process.env.NO_DEBUG_DEVICE;
 const logCountervalues = !process.env.NO_DEBUG_COUNTERVALUES;
 
+const ANALYTICS_TYPE = "analytics";
+
 function summarizeAccount({
   type,
   balance,
@@ -323,19 +325,22 @@ export default {
 
   analyticsStart: (id: string, props: Object) => {
     if (logAnalytics) {
-      logger.log("info", `△ start() with user id ${id}`, props);
+      logger.log("info", `△ start() with user id ${id}`, {
+        type: ANALYTICS_TYPE,
+        data: props,
+      });
     }
   },
 
   analyticsStop: () => {
     if (logAnalytics) {
-      logger.log("info", "△ stop()");
+      logger.log("info", "△ stop()", { type: ANALYTICS_TYPE });
     }
   },
 
   analyticsTrack: (event: string, properties: ?Object) => {
     if (logAnalytics) {
-      logger.log("info", `△ track ${event}`, properties);
+      logger.log("info", `△ track ${event}`, { type: ANALYTICS_TYPE, data: properties });
     }
     captureBreadcrumb({
       category: "track",
@@ -347,7 +352,7 @@ export default {
   analyticsPage: (category: string, name: ?string, properties: ?Object) => {
     const message = name ? `${category} ${name}` : category;
     if (logAnalytics) {
-      logger.log("info", `△ page ${message}`, properties);
+      logger.log("info", `△ page ${message}`, { type: ANALYTICS_TYPE, data: properties });
     }
     captureBreadcrumb({
       category: "page",

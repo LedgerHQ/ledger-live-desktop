@@ -7,7 +7,6 @@ import { Trans, withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import styled from "styled-components";
 import uniq from "lodash/uniq";
-import moment from "moment";
 
 import {
   findSubAccountById,
@@ -69,6 +68,8 @@ import {
 } from "./styledComponents";
 import ToolTip from "~/renderer/components/Tooltip";
 import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
+import DoubleCounterValue from "~/renderer/components/DoubleCounterValue";
+import FormattedDate from "~/renderer/components/FormattedDate";
 
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const marketIndicator = marketIndicatorSelector(state);
@@ -281,7 +282,7 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
                 </Box>
                 <Box mt={1} selectable>
                   {hasFailed ? null : (
-                    <CounterValue
+                    <DoubleCounterValue
                       alwaysShowSign
                       color="palette.text.shade60"
                       fontSize={5}
@@ -404,7 +405,9 @@ const OperationDetails: React$ComponentType<OwnProps> = connect(mapStateToProps)
             </Box>
             <Box flex={1}>
               <OpDetailsTitle>{t("operationDetails.date")}</OpDetailsTitle>
-              <OpDetailsData>{moment(date).format("LLL")}</OpDetailsData>
+              <OpDetailsData>
+                <FormattedDate date={date} />
+              </OpDetailsData>
             </Box>
           </Box>
           <B />
@@ -570,7 +573,9 @@ const OperationDetailsExtra = ({ extra }: OperationDetailsExtraProps) => {
       <OpDetailsTitle>
         <Trans i18nKey={`operationDetails.extra.${key}`} defaults={key} />
       </OpDetailsTitle>
-      <OpDetailsData>{value}</OpDetailsData>
+      <OpDetailsData>
+        <Ellipsis>{value}</Ellipsis>
+      </OpDetailsData>
     </Box>
   ));
 };

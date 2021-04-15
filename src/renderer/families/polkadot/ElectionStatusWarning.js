@@ -20,7 +20,7 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(p => ({
   px: 3,
   bg: p.theme.colors.warning,
   color: "palette.primary.contrastText",
-  mb: 20,
+  mb: 4,
   fontSize: 4,
   ff: "Inter|SemiBold",
 }))`
