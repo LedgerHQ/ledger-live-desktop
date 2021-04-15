@@ -2,11 +2,10 @@
 import React from "react";
 import styled, { withTheme } from "styled-components";
 import manager from "@ledgerhq/live-common/lib/manager";
-import { findCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
+import { findCryptoCurrencyById, getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import Image from "~/renderer/components/Image";
 import { getCryptoCurrencyIcon } from "@ledgerhq/live-common/lib/react";
-import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 
 const size = 40;
 // trick to format size for certain type of icons
@@ -38,8 +37,7 @@ function AppIcon({ app, theme }: Props) {
   const iconUrl = manager.getIconUrl(icon);
 
   const currency = currencyId && findCryptoCurrencyById(currencyId);
-  const currencyColor =
-    currency && getCurrencyColor(currency, theme.colors.palette.background.paper);
+  const currencyColor = currency && getCurrencyColor(currency);
   const IconCurrency = currency && getCryptoCurrencyIcon(currency);
 
   return IconCurrency ? (
