@@ -1,7 +1,7 @@
 // @flow
-
 import React, { useContext } from "react";
 import styled from "styled-components";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box";
@@ -18,7 +18,7 @@ import { accountSelector } from "~/renderer/reducers/accounts";
 import ParentCryptoCurrencyIcon from "~/renderer/components/ParentCryptoCurrencyIcon";
 import IconCheck from "~/renderer/icons/Check";
 
-const Container = styled.div`
+const Container: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
@@ -26,7 +26,7 @@ const Container = styled.div`
   background: rgba(100, 144, 241, 0.1);
 `;
 
-const InnerContainer = styled(Box)`
+const InnerContainer: ThemedComponent<*> = styled(Box)`
   position: absolute;
   top: 105px;
   left: 155px;
@@ -36,7 +36,7 @@ const InnerContainer = styled(Box)`
   padding: 24px;
 `;
 
-const LogoContainer = styled.div`
+const LogoContainer: ThemedComponent<*> = styled.div`
   width: 94px;
   height: 94px;
   border-radius: 94px;
@@ -45,14 +45,14 @@ const LogoContainer = styled.div`
   position: relative;
 `;
 
-const CompanyLogoContainer = styled.div`
+const CompanyLogoContainer: ThemedComponent<*> = styled.div`
   width: 98px;
   height: 24px;
   margin: 0 auto;
   margin-top: 41px;
 `;
 
-const ConnexionStatusContainer = styled.div`
+const ConnexionStatusContainer: ThemedComponent<*> = styled.div`
   width: 34px;
   height: 34px;
   border-radius: 34px;
@@ -69,18 +69,18 @@ const ConnexionStatusContainer = styled.div`
   font-size: 19px;
 `;
 
-const AccountContainer = styled(Box)`
+const AccountContainer: ThemedComponent<*> = styled(Box)`
   width: 100%;
   border: solid 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
 `;
 
-const Logo = styled.img`
+const Logo: ThemedComponent<*> = styled.img`
   width: 100%;
   height: 100%;
 `;
 
-const InfoBoxContainer = styled.div`
+const InfoBoxContainer: ThemedComponent<*> = styled.div`
   width: 100%;
   margin-bottom: 20px;
 `;
