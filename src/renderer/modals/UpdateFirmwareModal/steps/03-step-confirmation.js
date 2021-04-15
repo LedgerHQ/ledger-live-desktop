@@ -77,7 +77,7 @@ export const StepConfirmFooter = ({
   const onCloseReload = useCallback(() => {
     onCloseModal();
     if (error instanceof UserRefusedFirmwareUpdate) {
-      history.replace("/manager");
+      history.push("/manager/reload");
     }
   }, [error, history, onCloseModal]);
 
