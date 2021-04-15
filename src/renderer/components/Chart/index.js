@@ -183,7 +183,7 @@ export default function Chart({
         },
       },
     }),
-    [renderTickY, theme, magnitude],
+    [theme.text.shade10, theme.text.shade60, tickXScale, magnitude, renderTickY],
   );
 
   useLayoutEffect(() => {
