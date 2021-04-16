@@ -2,7 +2,8 @@
   "calendar": {
     "today": "Aujourd'hui",
     "tomorrow": "Demain",
-    "yesterday": "Hier"
+    "yesterday": "Hier",
+    "transactionDate": "Transaction date"
   },
   "common": {
     "never": "Jamais",
@@ -1038,8 +1039,8 @@
       "notice": "Vérifiez les détails du Swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
       "confirm": "Confirmer la transaction de swap",
       "amountSent": "Montant à envoyer",
-      "amountReceived": "Amount to receive",
-      "amountReceivedFloat": "Amount to receive before service fees",
+      "amountReceived": "Montant à recevoir",
+      "amountReceivedFloat": "Montant à recevoir avant application des frais de services",
       "fees": "Frais",
       "provider": "Fournisseur",
       "payoutNetworkFees": "Frais de réception",
@@ -1315,9 +1316,9 @@
     "title": "Acheter",
     "titleCrypto": "Acheter {{currency}}",
     "buyCTA": "Acheter {{currencyTicker}}",
-    "withoutDevice": "Vous n’avez pas votre appareil ?",
+    "withoutDevice": "Continue without my device",
     "connectWithoutDevice": "Il est préférable d'utiliser votre appareil pour une sécurité optimale.",
-    "skipConnect": "Continuer sans appareil"
+    "skipConnect": "Continue without my device"
   },
   "sell": {
     "title": "Vendre",
@@ -3351,7 +3352,7 @@
       "title": "Un mémo peut être requis lors de l'envoi à ce destinataire"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be more than {{minAmountFromFormatted}}"
+      "title": "Le montant doit être supérieur à {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Le montant doit être inférieur à {{maxAmountFromFormatted}}"

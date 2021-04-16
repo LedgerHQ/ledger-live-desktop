@@ -2,7 +2,6 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import moment from "moment";
 import type { OpenedLoan, ClosedLoan } from "@ledgerhq/live-common/lib/compound/types";
 import type { TokenAccount } from "@ledgerhq/live-common/lib/types";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
@@ -12,6 +11,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { TableLine } from "./Header";
 import Discreet, { useDiscreetMode } from "~/renderer/components/Discreet";
 import { localeSelector } from "~/renderer/reducers/settings";
+import FormattedDate from "~/renderer/components/FormattedDate";
 
 const Wrapper: ThemedComponent<*> = styled.div`
   display: flex;
@@ -59,10 +59,6 @@ export const RowOpened = ({ opened, account }: OpenedProps) => {
     [unit, opened.interestsEarned, formatConfig],
   );
 
-  const date = useMemo(() => moment(opened.startingDate).format("MMMM Do, YYYY"), [
-    opened.startingDate,
-  ]);
-
   return (
     <Wrapper>
       <Column>
@@ -71,7 +67,9 @@ export const RowOpened = ({ opened, account }: OpenedProps) => {
       <Column>
         <Discreet>{interestEarned}</Discreet>
       </Column>
-      <Column>{date}</Column>
+      <Column>
+        <FormattedDate date={opened.startingDate} format="MMMM Do, YYYY" />
+      </Column>
     </Wrapper>
   );
 };
@@ -108,8 +106,6 @@ export const RowClosed = ({ closed, account }: ClosedProps) => {
     [unit, closed, formatConfig],
   );
 
-  const date = useMemo(() => moment(closed.endDate).format("MMMM Do, YYYY"), [closed.endDate]);
-
   return (
     <Wrapper>
       <Column>
@@ -118,7 +114,9 @@ export const RowClosed = ({ closed, account }: ClosedProps) => {
       <Column>
         <Discreet>{interestEarned}</Discreet>
       </Column>
-      <Column>{date}</Column>
+      <Column>
+        <FormattedDate date={closed.endDate} formate="MMMM Do, YYYY" />
+      </Column>
     </Wrapper>
   );
 };
