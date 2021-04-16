@@ -1,11 +1,11 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import Exchange from "~/renderer/icons/Exchange";
 import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
 import Label from "~/renderer/components/Label";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
@@ -28,6 +28,8 @@ import type { Option } from "~/renderer/components/Select";
 import CurrencyOptionRow from "~/renderer/screens/exchange/swap/Form/CurrencyOptionRow";
 import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import TrackPage from "~/renderer/analytics/TrackPage";
+import coinifyIcon from "~/renderer/images/coinifyLogo.png";
+import Image from "~/renderer/components/Image";
 
 const Container: ThemedComponent<{}> = styled.div`
   width: 365px;
@@ -40,12 +42,14 @@ const IconContainer: ThemedComponent<{}> = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${p => p.theme.colors.palette.primary.main};
-  background-color: ${p => rgba(p.theme.colors.palette.primary.main, 0.2)};
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  margin-bottom: 32px;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 12px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const ConfirmButton: ThemedComponent<{}> = styled(Button)`
@@ -78,6 +82,13 @@ const AccountSelectorLabel = styled(Label)`
   justify-content: space-between;
 `;
 
+const PROVIDERS = {
+  COINIFY: {
+    id: "Coinify",
+    iconResource: coinifyIcon,
+  },
+};
+
 const SelectAccountAndCurrency = ({
   selectAccount,
   defaultCurrency,
@@ -87,6 +98,7 @@ const SelectAccountAndCurrency = ({
   allAccounts,
 }: Props) => {
   const { t } = useTranslation();
+  const [provider] = useState(PROVIDERS.COINIFY);
 
   const {
     availableAccounts,
@@ -117,10 +129,12 @@ const SelectAccountAndCurrency = ({
     <Container>
       <TrackPage category="Page" name="Sell Crypto" />
       <IconContainer>
-        <Exchange size={24} />
+        <Image resource={provider.iconResource} alt="" />
       </IconContainer>
       <Text ff="Inter|SemiBold" fontSize={5} color="palette.text.shade100" textAlign="center">
-        {t("exchange.sell.title")}
+        <Trans i18nKey="exchange.sell.title" values={{ provider: provider.id }}>
+          <Text color="palette.primary.main" />
+        </Trans>
       </Text>
       <FormContainer>
         <FormContent>

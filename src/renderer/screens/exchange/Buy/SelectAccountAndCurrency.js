@@ -1,11 +1,11 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import Exchange from "~/renderer/icons/Exchange";
 import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { useCoinifyCurrencies } from "~/renderer/screens/exchange/hooks";
 import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
 import Label from "~/renderer/components/Label";
@@ -27,6 +27,9 @@ import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/ac
 import { track } from "~/renderer/analytics/segment";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
+import Image from "~/renderer/components/Image";
+
+import coinifyIcon from "~/renderer/images/coinifyLogo.png";
 
 const Container: ThemedComponent<{}> = styled.div`
   width: 365px;
@@ -39,12 +42,14 @@ const IconContainer: ThemedComponent<{}> = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${p => p.theme.colors.palette.primary.main};
-  background-color: ${p => rgba(p.theme.colors.palette.primary.main, 0.2)};
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  margin-bottom: 32px;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 12px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const ConfirmButton: ThemedComponent<{}> = styled(Button)`
@@ -74,10 +79,18 @@ const AccountSelectorLabel = styled(Label)`
   justify-content: space-between;
 `;
 
+const PROVIDERS = {
+  COINIFY: {
+    id: "Coinify",
+    iconResource: coinifyIcon,
+  },
+};
+
 const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccount }: Props) => {
   const { t } = useTranslation();
   const allCurrencies = useCoinifyCurrencies("BUY");
   const allAccounts = useSelector(accountsSelector);
+  const [provider] = useState(PROVIDERS.COINIFY);
 
   const {
     availableAccounts,
@@ -97,10 +110,12 @@ const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccou
   return (
     <Container>
       <IconContainer>
-        <Exchange size={24} />
+        <Image resource={provider.iconResource} alt="" />
       </IconContainer>
       <Text ff="Inter|SemiBold" fontSize={5} color="palette.text.shade100" textAlign="center">
-        {t("exchange.buy.title")}
+        <Trans i18nKey="exchange.buy.title" values={{ provider: provider.id }}>
+          <Text color="palette.primary.main" />
+        </Trans>
       </Text>
       <FormContainer>
         {currency ? <CurrencyDownStatusAlert currencies={[currency]} /> : null}
