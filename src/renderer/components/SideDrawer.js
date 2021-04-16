@@ -193,11 +193,11 @@ export function SideDrawer({
       unmountOnExit
     >
       {state => (
-        <DrawerContainer className={state} ref={focusTrapElem} tabIndex="-1">
+        <DrawerContainer className={["sidedrawer", state]} ref={focusTrapElem} tabIndex="-1">
           <DrawerContent paper={paper} isOpened={isOpen} className={state} direction={direction}>
             {onRequestClose ? (
               <DrawerTopContainer>
-                <TouchButton onClick={onRequestClose}>
+                <TouchButton onClick={onRequestClose} className="sidedrawer-close">
                   <IconCross size={24} />
                 </TouchButton>
               </DrawerTopContainer>
