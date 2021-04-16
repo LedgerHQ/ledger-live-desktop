@@ -30,13 +30,13 @@ import { rgba } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { getStatusColor } from "~/renderer/screens/exchange/swap/History/OperationRow";
 import IconClock from "~/renderer/icons/Clock";
-import { GradientHover } from "~/renderer/modals/OperationDetails/styledComponents";
+import { GradientHover } from "~/renderer/drawers/OperationDetails/styledComponents";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import IconExclamationCircle from "~/renderer/icons/ExclamationCircle";
 import useTheme from "~/renderer/hooks/useTheme";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
-import { DataList } from "~/renderer/modals/OperationDetails";
+import { DataList } from "~/renderer/drawers/OperationDetails";
 import uniq from "lodash/uniq";
 import FormattedDate from "~/renderer/components/FormattedDate";
 

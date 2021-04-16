@@ -16,7 +16,7 @@ import {
   Address,
   OpDetailsData,
   OpDetailsVoteData,
-} from "~/renderer/modals/OperationDetails/styledComponents";
+} from "~/renderer/drawers/OperationDetails/styledComponents";
 import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box/Box";
 import { usePolkadotPreloadData } from "@ledgerhq/live-common/lib/families/polkadot/react";

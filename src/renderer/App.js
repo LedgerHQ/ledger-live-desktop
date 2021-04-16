@@ -18,6 +18,7 @@ import ThrowBlock from "~/renderer/components/ThrowBlock";
 import LiveStyleSheetManager from "~/renderer/styles/LiveStyleSheetManager";
 import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
 import CountervaluesProvider from "~/renderer/components/CountervaluesProvider";
+import DrawerProvider from "~/renderer/drawers/Provider";
 import Default from "./Default";
 import { AnnouncementProviderWrapper } from "~/renderer/components/AnnouncementProviderWrapper";
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
@@ -64,7 +65,9 @@ const App = ({ store, initialCountervalues }: Props) => {
                   <ToastProvider>
                     <AnnouncementProviderWrapper>
                       <Router>
-                        <Default />
+                        <DrawerProvider>
+                          <Default />
+                        </DrawerProvider>
                       </Router>
                     </AnnouncementProviderWrapper>
                   </ToastProvider>

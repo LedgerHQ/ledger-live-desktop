@@ -5,7 +5,10 @@ import { Trans } from "react-i18next";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 
 import Box from "~/renderer/components/Box";
-import { OpDetailsTitle, OpDetailsData } from "~/renderer/modals/OperationDetails/styledComponents";
+import {
+  OpDetailsTitle,
+  OpDetailsData,
+} from "~/renderer/drawers/OperationDetails/styledComponents";
 
 type OperationDetailsExtraProps = {
   extra: { [key: string]: string },

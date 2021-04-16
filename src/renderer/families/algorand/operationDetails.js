@@ -14,7 +14,7 @@ import {
   OpDetailsTitle,
   OpDetailsData,
   B,
-} from "~/renderer/modals/OperationDetails/styledComponents";
+} from "~/renderer/drawers/OperationDetails/styledComponents";
 import { useDiscreetMode } from "~/renderer/components/Discreet";
 import { localeSelector } from "~/renderer/reducers/settings";
 import FormattedVal from "~/renderer/components/FormattedVal";

@@ -25,6 +25,8 @@ import ArrowRight from "~/renderer/icons/ArrowRight";
 import Minus from "~/renderer/icons/Minus";
 import Text from "~/renderer/components/Text";
 import InfoBox from "~/renderer/components/InfoBox";
+import { OperationDetails } from "~/renderer/drawers/OperationDetails";
+import { setDrawer } from "~/renderer/drawers/Provider";
 
 const IconWrapper = styled.div`
   width: 32px;
@@ -242,7 +244,6 @@ const Banner = ({
   account: TokenAccount,
   parentAccount: ?Account,
 }) => {
-  const dispatch = useDispatch();
   const { enabledAmount, enabledAmountIsUnlimited, status, canSupplyMax } = capabilities;
 
   const label =
@@ -296,13 +297,11 @@ const Banner = ({
     if (status === "ENABLING") {
       const op = getEnablingOp(account);
       if (!op) return;
-      return dispatch(
-        openModal("MODAL_OPERATION_DETAILS", {
-          operationId: op.id,
-          accountId: account.id,
-          parentId: parentAccount?.id,
-        }),
-      );
+      return setDrawer(OperationDetails, {
+        operationId: op.id,
+        accountId: account.id,
+        parentId: parentAccount?.id,
+      });
     }
 
     return onSelectAction(
@@ -311,7 +310,7 @@ const Banner = ({
       undefined,
       t("lend.enable.steps.selectAccount.cta"),
     );
-  }, [status, onClose, onSelectAction, t, dispatch, account, parentAccount]);
+  }, [status, onClose, onSelectAction, t, account, parentAccount]);
 
   return (
     <InfoBox onLearnMore={action} learnMoreLabel={label}>

@@ -24,7 +24,7 @@ import {
   OpDetailsData,
   OpDetailsVoteData,
   B,
-} from "~/renderer/modals/OperationDetails/styledComponents";
+} from "~/renderer/drawers/OperationDetails/styledComponents";
 import Box from "~/renderer/components/Box/Box";
 import Text from "~/renderer/components/Text";
 import FormattedVal from "~/renderer/components/FormattedVal";
