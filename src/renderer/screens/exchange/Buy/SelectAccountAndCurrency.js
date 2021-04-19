@@ -1,12 +1,10 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
-import Exchange from "~/renderer/icons/Exchange";
-import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
 import { useTranslation, Trans } from "react-i18next";
-import { useCoinifyCurrencies } from "~/renderer/screens/exchange/hooks";
+import { useCoinifyCurrencies, useExchangeProvider } from "~/renderer/screens/exchange/hooks";
 import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
 import Label from "~/renderer/components/Label";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
@@ -28,8 +26,6 @@ import { track } from "~/renderer/analytics/segment";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 import Image from "~/renderer/components/Image";
-
-import coinifyIcon from "~/renderer/images/coinifyLogo.png";
 
 const Container: ThemedComponent<{}> = styled.div`
   width: 365px;
@@ -79,18 +75,11 @@ const AccountSelectorLabel = styled(Label)`
   justify-content: space-between;
 `;
 
-const PROVIDERS = {
-  COINIFY: {
-    id: "Coinify",
-    iconResource: coinifyIcon,
-  },
-};
-
 const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccount }: Props) => {
   const { t } = useTranslation();
   const allCurrencies = useCoinifyCurrencies("BUY");
   const allAccounts = useSelector(accountsSelector);
-  const [provider] = useState(PROVIDERS.COINIFY);
+  const [provider] = useExchangeProvider();
 
   const {
     availableAccounts,

@@ -1,9 +1,7 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
-import Exchange from "~/renderer/icons/Exchange";
-import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
 import { useTranslation, Trans } from "react-i18next";
 import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
@@ -28,8 +26,8 @@ import type { Option } from "~/renderer/components/Select";
 import CurrencyOptionRow from "~/renderer/screens/exchange/swap/Form/CurrencyOptionRow";
 import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import coinifyIcon from "~/renderer/images/coinifyLogo.png";
 import Image from "~/renderer/components/Image";
+import { useExchangeProvider } from "../hooks";
 
 const Container: ThemedComponent<{}> = styled.div`
   width: 365px;
@@ -82,13 +80,6 @@ const AccountSelectorLabel = styled(Label)`
   justify-content: space-between;
 `;
 
-const PROVIDERS = {
-  COINIFY: {
-    id: "Coinify",
-    iconResource: coinifyIcon,
-  },
-};
-
 const SelectAccountAndCurrency = ({
   selectAccount,
   defaultCurrency,
@@ -98,7 +89,7 @@ const SelectAccountAndCurrency = ({
   allAccounts,
 }: Props) => {
   const { t } = useTranslation();
-  const [provider] = useState(PROVIDERS.COINIFY);
+  const [provider] = useExchangeProvider();
 
   const {
     availableAccounts,
