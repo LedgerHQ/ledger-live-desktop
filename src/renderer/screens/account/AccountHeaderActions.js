@@ -20,15 +20,21 @@ import { rgba } from "~/renderer/styles/helpers";
 import { openModal } from "~/renderer/actions/modals";
 import IconAccountSettings from "~/renderer/icons/AccountSettings";
 import perFamily from "~/renderer/generated/AccountHeaderActions";
+import perFamilyManageActions from "~/renderer/generated/AccountHeaderManageActions";
 import Box, { Tabbable } from "~/renderer/components/Box";
 import Star from "~/renderer/components/Stars/Star";
-import { ReceiveActionDefault, SendActionDefault } from "./AccountActionsDefault";
+import {
+  BuyActionDefault,
+  ReceiveActionDefault,
+  SendActionDefault,
+  SwapActionDefault,
+} from "./AccountActionsDefault";
 import perFamilyAccountActions from "~/renderer/generated/accountActions";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useHistory } from "react-router-dom";
-import IconExchange from "~/renderer/icons/Exchange";
-import IconSwap from "~/renderer/icons/Swap";
+import IconSend from "~/renderer/icons/Send";
+import IconReceive from "~/renderer/icons/Receive";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
@@ -36,6 +42,7 @@ import Graph from "~/renderer/icons/Graph";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import useTheme from "~/renderer/hooks/useTheme";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
   alignItems: "center",
@@ -68,19 +75,20 @@ type OwnProps = {
 type Props = OwnProps & {
   t: TFunction,
   openModal: Function,
-  isCompoundEnabled?: boolean,
 };
 
-const AccountHeaderActions = ({
-  account,
-  parentAccount,
-  openModal,
-  t,
-  isCompoundEnabled,
-}: Props) => {
+const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) => {
   const mainAccount = getMainAccount(account, parentAccount);
+  const contrastText = useTheme("colors.palette.text.shade60");
+
   const PerFamily = perFamily[mainAccount.currency.family];
   const decorators = perFamilyAccountActions[mainAccount.currency.family];
+  const manage = perFamilyManageActions[mainAccount.currency.family];
+  let manageList = [];
+  if (manage) {
+    const familyManageActions = manage({ account, parentAccount });
+    manageList = familyManageActions && familyManageActions.length > 0 ? familyManageActions : [];
+  }
   const SendAction = (decorators && decorators.SendAction) || SendActionDefault;
   const ReceiveAction = (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
   const currency = getAccountCurrency(account);
@@ -90,7 +98,6 @@ const AccountHeaderActions = ({
   const availableOnCompound = !!summary;
 
   const availableOnBuy = isCurrencySupported("BUY", currency);
-  const availableOnSell = isCurrencySupported("SELL", currency);
   const availableOnSwap = useSelector(flattenedSwapSupportedCurrenciesSelector);
   const history = useHistory();
 
@@ -111,18 +118,6 @@ const AccountHeaderActions = ({
     });
   }, [openModal, summary]);
 
-  const onSell = useCallback(() => {
-    setTrackingSource("account header actions");
-    history.push({
-      pathname: "/exchange",
-      state: {
-        tab: 1,
-        defaultCurrency: currency,
-        defaultAccount: mainAccount,
-      },
-    });
-  }, [currency, history, mainAccount]);
-
   const onSwap = useCallback(() => {
     setTrackingSource("account header actions");
     history.push({
@@ -135,32 +130,45 @@ const AccountHeaderActions = ({
     });
   }, [currency, history, account, parentAccount]);
 
-  // List of available exchange actions
-  const actions = [
-    ...(availableOnBuy
-      ? [
-          {
-            key: "Buy",
-            onClick: onBuy,
-            event: "Buy Crypto Account Button",
-            eventProperties: { currencyName: currency.name },
-            icon: IconExchange,
-            label: <Trans i18nKey="buy.titleCrypto" values={{ currency: currency.name }} />,
-          },
-        ]
-      : []),
-    ...(availableOnSell
-      ? [
-          {
-            key: "Sell",
-            onClick: onSell,
-            event: "Sell Crypto Account Button",
-            eventProperties: { currencyName: currency.name },
-            icon: IconExchange,
-            label: <Trans i18nKey="sell.titleCrypto" values={{ currency: currency.name }} />,
-          },
-        ]
-      : []),
+  const onSend = useCallback(() => {
+    openModal("MODAL_SEND", { parentAccount, account });
+  }, [parentAccount, account, openModal]);
+
+  const onReceive = useCallback(() => {
+    openModal("MODAL_RECEIVE", { parentAccount, account });
+  }, [parentAccount, account, openModal]);
+
+  const renderItem = useCallback(
+    ({ item: { label, onClick, event, eventProperties, icon } }) => {
+      const Icon = icon;
+      return (
+        <Button onClick={onClick} event={event} eventProperties={eventProperties}>
+          <Box horizontal flow={1} alignItems="center">
+            {Icon && <Icon size={14} overrideColor={contrastText} currency={currency} />}
+            <Box>
+              <Text ff="Inter|SemiBold">{label}</Text>
+            </Box>
+          </Box>
+        </Button>
+      );
+    },
+    [currency, contrastText],
+  );
+
+  const manageActions = [
+    {
+      key: "Send",
+      onClick: onSend,
+      icon: IconSend,
+      label: <Trans i18nKey="send.title" />,
+    },
+    {
+      key: "Receive",
+      onClick: onReceive,
+      icon: IconReceive,
+      label: <Trans i18nKey="receive.title" />,
+    },
+    ...manageList,
     ...(availableOnCompound
       ? [
           {
@@ -173,70 +181,52 @@ const AccountHeaderActions = ({
           },
         ]
       : []),
-    ...(availableOnSwap.includes(currency)
-      ? [
-          {
-            key: "Swap",
-            onClick: onSwap,
-            event: "Swap Crypto Account Button",
-            eventProperties: { currencyName: currency.name },
-            icon: IconSwap,
-            label: <Trans i18nKey="swap.titleCrypto" values={{ currency: currency.name }} />,
-          },
-        ]
-      : []),
   ];
 
-  const onSend = useCallback(() => {
-    openModal("MODAL_SEND", { parentAccount, account });
-  }, [parentAccount, account, openModal]);
-
-  const onReceive = useCallback(() => {
-    openModal("MODAL_RECEIVE", { parentAccount, account });
-  }, [parentAccount, account, openModal]);
-
-  const renderItem = useCallback(
-    ({ item: { key, label, onClick, event, eventProperties, icon }, isActive }) => {
-      const Icon = icon;
-      return (
-        <Button onClick={onClick} event={event} eventProperties={eventProperties}>
-          <Box horizontal flow={1} alignItems="center">
-            {Icon && <Icon size={14} />}
-            <Box>
-              <Text ff="Inter|SemiBold">{label}</Text>
-            </Box>
-          </Box>
-        </Button>
-      );
-    },
-    [],
+  const canBuySwap = availableOnBuy || availableOnSwap.includes(currency);
+  const BuySwapHeader = () => (
+    <>
+      {availableOnBuy ? <BuyActionDefault onClick={onBuy} /> : null}
+      {availableOnSwap.includes(currency) ? <SwapActionDefault onClick={onSwap} /> : null}
+      {manageActions && manageActions.length > 0 ? (
+        <DropDownSelector
+          border
+          horizontal
+          items={manageActions}
+          renderItem={renderItem}
+          controlled
+        >
+          {({ isOpen }) => (
+            <Button small primary>
+              <Box horizontal flow={1} alignItems="center">
+                <Box>
+                  <Trans i18nKey="common.manage" values={{ currency: currency.name }} />
+                </Box>
+                {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
+              </Box>
+            </Button>
+          )}
+        </DropDownSelector>
+      ) : null}
+    </>
   );
 
   return (
     <Box horizontal alignItems="center" justifyContent="flex-end" flow={2} mt={15}>
       {!isAccountEmpty(account) ? (
-        <>
-          {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}
-          {canSend(account, parentAccount) ? (
-            <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
-          ) : null}
+        canBuySwap ? (
+          <BuySwapHeader />
+        ) : (
+          <>
+            {canSend(account, parentAccount) ? (
+              <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
+            ) : null}
 
-          <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
-          {actions && actions.length > 0 ? (
-            <DropDownSelector border horizontal items={actions} renderItem={renderItem} controlled>
-              {({ isOpen, value }) => (
-                <Button small primary>
-                  <Box horizontal flow={1} alignItems="center">
-                    <Box>
-                      <Trans i18nKey="common.exchange" values={{ currency: currency.name }} />
-                    </Box>
-                    {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
-                  </Box>
-                </Button>
-              )}
-            </DropDownSelector>
-          ) : null}
-        </>
+            <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
+
+            {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}
+          </>
+        )
       ) : null}
       <Tooltip content={t("stars.tooltip")}>
         <Star
