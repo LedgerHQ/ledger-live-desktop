@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import styled from "styled-components";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
@@ -20,13 +20,13 @@ import {
 import type { Account, FeeStrategy } from "@ledgerhq/live-common/lib/types";
 import BigNumber from "bignumber.js";
 
-type onClickType = {
+type OnClickType = {
   amount: BigNumber,
   feesStrategy: string,
 };
 
 type Props = {
-  onClick: onClickType => void,
+  onClick: OnClickType => void,
   transaction: *,
   account: Account,
   parentAccount: ?Account,
@@ -96,7 +96,7 @@ const SelectFeeStrategy = ({
                 fontSize={3}
                 fontWeight="800"
               >
-                {label}
+                <Trans i18nKey={`fees.${label}`} />
               </Text>
             </FeesHeader>
             <Box>

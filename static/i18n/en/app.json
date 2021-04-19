@@ -125,7 +125,9 @@
     "high": "High",
     "low": "Low",
     "slow": "Slow",
-    "standard": "Standard"
+    "standard": "Standard",
+    "medium": "Medium",
+    "feesAmount": "Fees Amount"
   },
   "sidebar": {
     "menu": "Menu",

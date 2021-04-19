@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
@@ -41,6 +41,10 @@ const ModeBox = styled(Box)`
 `;
 
 const SendFeeMode = ({ isAdvanceMode, setAdvanceMode }: Props) => {
+  const toggleAdvanceMode = useCallback(() => {
+    setAdvanceMode(!isAdvanceMode);
+  }, [setAdvanceMode, isAdvanceMode]);
+
   return (
     <Box horizontal alignItems="center" justifyContent="flex-start" style={{ width: 200 }}>
       <Label>
@@ -55,7 +59,7 @@ const SendFeeMode = ({ isAdvanceMode, setAdvanceMode }: Props) => {
           fontSize={10}
           fontWeight="600"
           selected={!isAdvanceMode}
-          onClick={() => setAdvanceMode(!isAdvanceMode)}
+          onClick={toggleAdvanceMode}
         >
           <Trans i18nKey="send.steps.amount.standard" />
         </StandardText>
@@ -63,14 +67,14 @@ const SendFeeMode = ({ isAdvanceMode, setAdvanceMode }: Props) => {
           forceBgColor="wallet"
           small
           isChecked={isAdvanceMode}
-          onChange={() => setAdvanceMode(!isAdvanceMode)}
+          onChange={toggleAdvanceMode}
         />
         <AdvancedText
           ff="Inter"
           fontSize={10}
           fontWeight="600"
           selected={isAdvanceMode}
-          onClick={() => setAdvanceMode(!isAdvanceMode)}
+          onClick={toggleAdvanceMode}
         >
           <Trans i18nKey="send.steps.amount.advanced" />
         </AdvancedText>

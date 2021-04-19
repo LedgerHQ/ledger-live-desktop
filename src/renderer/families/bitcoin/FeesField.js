@@ -53,7 +53,9 @@ export const FeesField = ({ transaction, account, onChange, status }: Props) => 
 
   return (
     <Box horizontal flow={5}>
-      <Label style={{ width: "200px" }}>Fees amount</Label>
+      <Label style={{ width: "200px" }}>
+        <Trans i18nKey="fees.feesAmount" />
+      </Label>
       <InputCurrency
         defaultUnit={satoshi}
         units={units}
