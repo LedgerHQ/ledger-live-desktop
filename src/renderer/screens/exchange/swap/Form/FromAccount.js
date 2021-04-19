@@ -1,32 +1,46 @@
 // @flow
 
-import React, { useCallback, useEffect } from "react";
 import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
 import { Trans } from "react-i18next";
 import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
+import React, { useEffect, useCallback } from "react";
 import type {
-  Account,
   AccountLike,
+  Account,
   CryptoCurrency,
   TokenCurrency,
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
 import { BigNumber } from "bignumber.js";
+import styled from "styled-components";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Text from "~/renderer/components/Text";
-import type { Option } from "~/renderer/components/Select";
+import IconPlusSmall from "~/renderer/icons/PlusSmall";
+import { openModal } from "~/renderer/actions/modals";
+import { useSelector, useDispatch } from "react-redux";
 import CurrencyOptionRow from "~/renderer/screens/exchange/swap/Form/CurrencyOptionRow";
-import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
-import { useSelector } from "react-redux";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
+
+const AddAccount = styled.div`
+  display: flex;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+  align-items: center;
+  border: 1px solid ${p => p.theme.colors.palette.divider};
+  height: 48px;
+  padding: 0 15px;
+  border-radius: 4px;
+  color: ${p => p.theme.colors.palette.primary.main};
+`;
 
 const FromAccount = ({
   currencies,
   currency: defaultCurrency,
   account: defaultAccount,
-  currenciesStatus,
   amount,
   useAllAmount,
   isLoading,
@@ -38,7 +52,6 @@ const FromAccount = ({
   currencies: (CryptoCurrency | TokenCurrency)[],
   currency: ?(CryptoCurrency | TokenCurrency),
   account: ?Account,
-  currenciesStatus: CurrenciesStatus,
   amount: BigNumber,
   useAllAmount?: boolean,
   isLoading?: boolean,
@@ -63,20 +76,17 @@ const FromAccount = ({
     hideEmpty: true,
   });
 
-  const renderOptionOverride = useCallback(
-    ({ data: currency }: Option) => {
-      const status = currenciesStatus[currency.id];
-      return <CurrencyOptionRow circle currency={currency} status={status} />;
-    },
-    [currenciesStatus],
-  );
+  const renderOptionOverride = useCallback(({ data: currency }: any) => {
+    return <CurrencyOptionRow circle currency={currency} />;
+  }, []);
 
-  const isCurrencyDisabled = useCallback(
-    c =>
-      (c.type === "CryptoCurrency" || c.type === "TokenCurrency") &&
-      currenciesStatus[c.id] !== "ok",
-    [currenciesStatus],
-  );
+  const dispatch = useDispatch();
+  const addAccount = useCallback(() => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency })), [
+    currency,
+    dispatch,
+  ]);
+
+  const hasMaybeValidAccounts = availableAccounts && availableAccounts.length > 0;
 
   useEffect(() => {
     if (currency && currency?.id !== defaultCurrency?.id) {
@@ -111,20 +121,28 @@ const FromAccount = ({
           value={currency}
           autoFocus={true}
           onChange={setCurrency}
-          isCurrencyDisabled={isCurrencyDisabled}
         />
       </Box>
       <Box>
         <Label mb={4} mt={25}>
-          <Trans i18nKey={`swap.form.from.account`} />
+          <Trans i18nKey={`swap.form.to.account`} />
         </Label>
-        <SelectAccount
-          id="swap-form-from-account"
-          isDisabled={!currency}
-          accounts={availableAccounts}
-          value={{ account, subAccount }}
-          onChange={setAccount}
-        />
+        {hasMaybeValidAccounts || !currency ? (
+          <SelectAccount
+            id="swap-form-from-account"
+            isDisabled={!currency}
+            accounts={availableAccounts}
+            value={{ account, subAccount }}
+            onChange={setAccount}
+          />
+        ) : (
+          <AddAccount onClick={addAccount}>
+            <IconPlusSmall size={16} />
+            <Text ml={1} ff="Inter|SemiBold" fontSize={4}>
+              <Trans i18nKey={`swap.form.to.addAccountCTA`} />
+            </Text>
+          </AddAccount>
+        )}
       </Box>
     </Box>
   );

@@ -7,6 +7,7 @@ import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/exchange/
 import StepSummary, { StepSummaryFooter } from "~/renderer/modals/Swap/steps/StepSummary";
 import StepDevice, { StepDeviceFooter } from "~/renderer/modals/Swap/steps/StepDevice";
 import StepFinished, { StepFinishedFooter } from "~/renderer/modals/Swap/steps/StepFinished";
+import StepDependencies from "~/renderer/modals/Swap/steps/StepDependencies";
 import Breadcrumb from "~/renderer/components/Stepper/Breadcrumb";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import { useDispatch } from "react-redux";
@@ -15,8 +16,9 @@ import { addPendingOperation, getMainAccount } from "@ledgerhq/live-common/lib/a
 import addToSwapHistory from "@ledgerhq/live-common/lib/exchange/swap/addToSwapHistory";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Track from "~/renderer/analytics/Track";
+import { useHistory } from "react-router-dom";
 
-type SwapSteps = "summary" | "device" | "finished";
+type SwapSteps = "summary" | "dependencies" | "device" | "finished";
 const SwapBody = ({
   swap,
   transaction,
@@ -36,6 +38,7 @@ const SwapBody = ({
   activeStep: SwapSteps,
   ratesExpiration: Date,
 }) => {
+  const { push } = useHistory();
   const { exchange } = swap;
   const { fromAccount, fromParentAccount } = exchange;
   const [checkedDisclaimer, setCheckedDisclaimer] = useState(false);
@@ -43,10 +46,18 @@ const SwapBody = ({
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const [result, setResult] = useState();
-  const onAcceptTOS = useCallback(() => onStepChange("device"), [onStepChange]);
+  const onAcceptTOS = useCallback(() => onStepChange("dependencies"), [onStepChange]);
   const onSwitchAccept = useCallback(() => setCheckedDisclaimer(!checkedDisclaimer), [
     checkedDisclaimer,
   ]);
+
+  const openManager = useCallback(
+    appName => {
+      push(`manager?q=${appName}`);
+      onClose();
+    },
+    [onClose, push],
+  );
 
   const onDeviceInteraction = useCallback(
     result => {
@@ -77,6 +88,7 @@ const SwapBody = ({
 
   const items = [
     { label: <Trans i18nKey={"swap.modal.steps.summary.title"} /> },
+    { label: <Trans i18nKey={"swap.modal.steps.dependencies.title"} /> },
     { label: <Trans i18nKey={"swap.modal.steps.device.title"} /> },
     { label: <Trans i18nKey={"swap.modal.steps.finished.title"} /> },
   ];
@@ -92,7 +104,7 @@ const SwapBody = ({
           <TrackPage key={activeStep} category="Swap" name={`ModalStep-${activeStep}`} />
           <Breadcrumb
             mb={40}
-            currentStep={["summary", "device", "finished"].indexOf(activeStep)}
+            currentStep={["summary", "dependencies", "device", "finished"].indexOf(activeStep)}
             stepsErrors={errorSteps}
             items={items}
           />
@@ -107,6 +119,12 @@ const SwapBody = ({
               transaction={transaction}
               checkedDisclaimer={checkedDisclaimer}
               onSwitchAccept={onSwitchAccept}
+            />
+          ) : activeStep === "dependencies" ? (
+            <StepDependencies
+              onDependenciesChecked={() => onStepChange("device")}
+              openManager={openManager}
+              swap={swap}
             />
           ) : activeStep === "device" ? (
             <StepDevice
