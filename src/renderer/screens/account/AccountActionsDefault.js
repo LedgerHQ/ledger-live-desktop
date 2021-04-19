@@ -1,5 +1,5 @@
 // @flow
-import React, { ReactNode } from "react";
+import React from "react";
 import { Trans } from "react-i18next";
 import IconReceive from "~/renderer/icons/Receive";
 import IconSend from "~/renderer/icons/Send";
@@ -14,8 +14,8 @@ const ActionDefault = ({
   labelComponent,
 }: {
   onClick: () => void,
-  iconComponent: ReactNode,
-  labelComponent: ReactNode,
+  iconComponent: any,
+  labelComponent: any,
 }) => (
   <Button small primary onClick={onClick}>
     <Box horizontal flow={1} alignItems="center">
