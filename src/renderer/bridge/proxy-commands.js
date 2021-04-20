@@ -60,6 +60,7 @@ const cmdAccountReceive = (o: {
     deviceId: string,
     subAccountId?: string,
     verify?: boolean,
+    freshAddressIndex?: number,
   },
 }): Observable<{ address: string, path: string }> => {
   const account = fromAccountRaw(o.account);
