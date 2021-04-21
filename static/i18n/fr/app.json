@@ -3,7 +3,7 @@
     "today": "Aujourd'hui",
     "tomorrow": "Demain",
     "yesterday": "Hier",
-    "transactionDate": "Transaction date"
+    "transactionDate": "Date de l'opération"
   },
   "common": {
     "never": "Jamais",
@@ -1316,9 +1316,9 @@
     "title": "Acheter",
     "titleCrypto": "Acheter {{currency}}",
     "buyCTA": "Acheter {{currencyTicker}}",
-    "withoutDevice": "Continue without my device",
+    "withoutDevice": "Continuer sans mon appareil",
     "connectWithoutDevice": "Il est préférable d'utiliser votre appareil pour une sécurité optimale.",
-    "skipConnect": "Continue without my device"
+    "skipConnect": "Continuer sans mon appareil"
   },
   "sell": {
     "title": "Vendre",
@@ -2293,7 +2293,7 @@
     "noAccounts": "Aucun compte à exporter",
     "selectedAccounts": "Comptes à inclure",
     "selectedAccounts_plural": "Comptes à inclure ({{count}})",
-    "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
+    "disclaimer": "Les informations de contre-valeurs mentionnées dans cet export de données sont purement indicatives. Vous ne devez notamment pas vous baser sur ces informations à des fins de comptabilité, pour le calcul d'impôts ou de taxes ni en lien des contraintes réglementaires ou juridiques. Elles ne représentent qu'une estimation de la valeur des actifs au moment des transactions et de l'export, basée sur les méthodes d'évaluation de notre fournisseur du service, Kaiko."
   },
   "language": {
     "system": "Utiliser la langue du système",
@@ -2562,9 +2562,9 @@
               "help": "Besoin d'aide"
             },
             "warning": {
-              "title": "Do not use a recovery phrase that you have not generated yourself.",
+              "title": "N'utilisez jamais une phrase de récupération que vous n'avez pas générée vous-même.",
               "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
-              "supportLink": "Contact customer support"
+              "supportLink": "Contacter le support client"
             }
           },
           "useRecoverySheet": {
