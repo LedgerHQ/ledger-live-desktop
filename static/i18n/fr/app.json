@@ -2563,7 +2563,7 @@
             },
             "warning": {
               "title": "N'utilisez jamais une phrase de récupération que vous n'avez pas générée vous-même.",
-              "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
+              "desc": "Le code PIN et la phrase de récupération de votre wallet Ledger doivent être configurés par vous et vous seul. Si vous avez reçu un appareil avec une phrase de récupération déjà existante ou un code PIN déjà configuré n'utilisez pas l'appareil et contactez notre support client.",
               "supportLink": "Contacter le support client"
             }
           },
