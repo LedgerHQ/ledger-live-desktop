@@ -1187,6 +1187,7 @@
       "successTextNoApps": "You can now install apps on your device",
       "sucessCTAApps": "Re-install apps",
       "SuccessCTANoApps": "Install apps",
+      "cancelReinstallCTA": "Install update",
       "resetSteps": {
         "first": "1. Indítsd újra az eszközöd",
         "connect": "Csatlakoztasd a {{deviceName}} -t a számítógépedhez az USB kábelt használva.",
@@ -3152,8 +3153,8 @@
       "title": "Az eszközkezelő meg lett tagadva az eszközön"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Update cancelled",
-      "description": "Kérlek, próbáld meg újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
+      "title": "Update cancelled on device",
+      "description": "All apps on your device have been uninstalled. Keep your device up to date to benefit from improvements in security and functionality."
     },
     "UserRefusedOnDevice": {
       "title": "Action rejected",
