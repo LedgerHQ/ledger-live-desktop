@@ -73,7 +73,7 @@ function AddressesTab({
           </Cell>
           <Button
             onClick={() => {
-              receiveAddress(address, derivationPath);
+              receiveAddress(i);
             }}
           >
             {t("accounts.contextMenu.receive")}
@@ -91,19 +91,19 @@ function AccountTabs({ account, parentAccount }: Props) {
   const freshAddresses = account.freshAddresses || [];
 
   const receiveAddress = useCallback(
-    (address, path) => {
+    i => {
       dispatch(
         openModal("MODAL_RECEIVE", {
-          account: { ...account, freshAddress: address, freshAddressPath: path },
+          account,
           parentAccount,
           skipAccountSelect: true,
+          freshAddressIndex: i,
         }),
       );
     },
-    [openModal, dispatch, account, parentAccount],
+    [dispatch, account, parentAccount],
   );
 
-  console.log(freshAddresses);
   return freshAddresses.length > 0 ? (
     <Tabs
       tabs={[

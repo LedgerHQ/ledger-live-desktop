@@ -131,6 +131,7 @@ const StepReceiveFunds = ({
   token,
   onClose,
   eventType,
+  freshAddressIndex,
 }: StepProps) => {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
   invariant(account && mainAccount, "No account given");
@@ -154,6 +155,7 @@ const StepReceiveFunds = ({
           .receive(mainAccount, {
             deviceId: device.deviceId,
             verify: true,
+            freshAddressIndex,
           })
           .toPromise();
         onChangeAddressVerified(true);
@@ -162,7 +164,7 @@ const StepReceiveFunds = ({
     } catch (err) {
       onChangeAddressVerified(false, err);
     }
-  }, [device, mainAccount, transitionTo, onChangeAddressVerified]);
+  }, [device, mainAccount, transitionTo, onChangeAddressVerified, freshAddressIndex]);
 
   const onVerify = useCallback(() => {
     // if device has changed since the beginning, we need to re-entry device

@@ -35,6 +35,7 @@ type OwnProps = {|
     receiveTokenMode?: boolean,
     eventType?: string,
     skipAccountSelect?: boolean,
+    freshAddressIndex?: number,
   },
 |};
 
@@ -60,6 +61,7 @@ export type StepProps = {
   parentAccount: ?Account,
   token: ?TokenCurrency,
   receiveTokenMode: boolean,
+  freshAddressIndex: ?number,
   closeModal: void => void,
   isAddressVerified: ?boolean,
   verifyAddressError: ?Error,
@@ -194,6 +196,7 @@ const Body = ({
     steps,
     errorSteps,
     disabledSteps,
+    freshAddressIndex: params.freshAddressIndex,
     receiveTokenMode: !!params.receiveTokenMode,
     hideBreadcrumb: stepId === "warning",
     token,
