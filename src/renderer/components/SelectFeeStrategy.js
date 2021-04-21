@@ -86,7 +86,7 @@ const SelectFeeStrategy = ({
             <FeesHeader horizontal alignItems="center" selected={selected}>
               {label === "medium" ? (
                 <TachometerMedium size={14} />
-              ) : label === "low" ? (
+              ) : label === "slow" ? (
                 <TachometerLow size={14} />
               ) : (
                 <TachometerHigh size={14} />

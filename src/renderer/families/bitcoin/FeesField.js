@@ -39,7 +39,7 @@ export const FeesField = ({ transaction, account, onChange, status }: Props) => 
       onChange(
         bridge.updateTransaction(transaction, {
           feePerByte: item.feePerByte,
-          feesStrategy: "advanced",
+          feesStrategy: null,
         }),
       );
     },

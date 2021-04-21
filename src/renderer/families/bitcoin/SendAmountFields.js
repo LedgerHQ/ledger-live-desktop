@@ -56,7 +56,7 @@ const Fields = ({
   const bridge = getAccountBridge(account);
 
   const [coinControlOpened, setCoinControlOpened] = useState(false);
-  const [isAdvanceMode, setAdvanceMode] = useState(transaction.feesStrategy === "advanced");
+  const [isAdvanceMode, setAdvanceMode] = useState(!transaction.feesStrategy);
   const strategies = useFeesStrategy(account, transaction);
   const onCoinControlOpen = useCallback(() => setCoinControlOpened(true), []);
   const onCoinControlClose = useCallback(() => setCoinControlOpened(false), []);

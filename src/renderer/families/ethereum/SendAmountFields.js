@@ -9,7 +9,7 @@ import { useFeesStrategy } from "@ledgerhq/live-common/lib/families/ethereum/rea
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
 const Root = (props: *) => {
-  const [isAdvanceMode, setAdvanceMode] = useState(props.transaction.feesStrategy === "advanced");
+  const [isAdvanceMode, setAdvanceMode] = useState(!props.transaction.feesStrategy);
   const strategies = useFeesStrategy(props.transaction);
   const { account, transaction, onChange } = props;
   const bridge = getAccountBridge(account);
