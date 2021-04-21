@@ -1,7 +1,7 @@
-import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
+// import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 import initialize, {
-  page,
-  modalPage,
+  // page,
+  // modalPage,
   app,
   mockDeviceEvent,
   deviceInfo,
@@ -104,83 +104,83 @@ describe("Swap", () => {
     });
   });
 
-  it("confirm swap on device and broadcast step", async () => {
-    const summaryContinueButton = await $("#swap-modal-summary-continue-button");
-    await summaryContinueButton.waitForEnabled();
-    await summaryContinueButton.click();
+  // it("confirm swap on device and broadcast step", async () => {
+  //   const summaryContinueButton = await $("#swap-modal-summary-continue-button");
+  //   await summaryContinueButton.waitForEnabled();
+  //   await summaryContinueButton.click();
 
-    await mockDeviceEvent({ type: "opened" }, { type: "complete" });
-    // init-swap command (Extra pauses because otherwise the UI will not be visible)
-    await mockDeviceEvent({ type: "opened" });
-    await mockDeviceEvent({ type: "init-swap-requested" });
-    await app.client.pause(2000);
-    const confirmationStep = await $("#swap-modal-device-confirm");
-    await confirmationStep.waitForDisplayed();
-    await app.client.pause(1000);
-    await mockDeviceEvent(
-      {
-        type: "init-swap-result",
-        initSwapResult: {
-          transaction: fromTransactionRaw({
-            family: "bitcoin",
-            recipient: "1Cz2ZXb6Y6AacXJTpo4RBjQMLEmscuxD8e",
-            amount: "1",
-            feePerByte: "1",
-            networkInfo: {
-              family: "bitcoin",
-              feeItems: {
-                items: [
-                  { key: "0", speed: "high", feePerByte: "3" },
-                  { key: "1", speed: "standard", feePerByte: "2" },
-                  { key: "2", speed: "low", feePerByte: "1" },
-                ],
-                defaultFeePerByte: "1",
-              },
-            },
-            rbf: false,
-            utxoStrategy: {
-              strategy: 0,
-              pickUnconfirmedRBF: false,
-              excludeUTXOs: [],
-            },
-          }),
-          swapId: "12345",
-        },
-      },
-      { type: "complete" },
-    );
+  //   await mockDeviceEvent({ type: "opened" }, { type: "complete" });
+  //   // init-swap command (Extra pauses because otherwise the UI will not be visible)
+  //   await mockDeviceEvent({ type: "opened" });
+  //   await mockDeviceEvent({ type: "init-swap-requested" });
+  //   await app.client.pause(2000);
+  //   const confirmationStep = await $("#swap-modal-device-confirm");
+  //   await confirmationStep.waitForDisplayed();
+  //   await app.client.pause(1000);
+  //   await mockDeviceEvent(
+  //     {
+  //       type: "init-swap-result",
+  //       initSwapResult: {
+  //         transaction: fromTransactionRaw({
+  //           family: "bitcoin",
+  //           recipient: "1Cz2ZXb6Y6AacXJTpo4RBjQMLEmscuxD8e",
+  //           amount: "1",
+  //           feePerByte: "1",
+  //           networkInfo: {
+  //             family: "bitcoin",
+  //             feeItems: {
+  //               items: [
+  //                 { key: "0", speed: "high", feePerByte: "3" },
+  //                 { key: "1", speed: "standard", feePerByte: "2" },
+  //                 { key: "2", speed: "low", feePerByte: "1" },
+  //               ],
+  //               defaultFeePerByte: "1",
+  //             },
+  //           },
+  //           rbf: false,
+  //           utxoStrategy: {
+  //             strategy: 0,
+  //             pickUnconfirmedRBF: false,
+  //             excludeUTXOs: [],
+  //           },
+  //         }),
+  //         swapId: "12345",
+  //       },
+  //     },
+  //     { type: "complete" },
+  //   );
 
-    // Silent signing, then automatic broadcasting triggered.
-    await mockDeviceEvent({ type: "opened" }, { type: "complete" });
-    await app.client.pause(5000); // Signing step takes time
+  //   // Silent signing, then automatic broadcasting triggered.
+  //   await mockDeviceEvent({ type: "opened" }, { type: "complete" });
+  //   await app.client.pause(5000); // Signing step takes time
 
-    const finishedStep = await $("#swap-modal-finished-close-button");
-    await finishedStep.waitForDisplayed();
-    await app.client.pause(1000);
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "swap-end-0",
-    });
-  });
+  //   const finishedStep = await $("#swap-modal-finished-close-button");
+  //   await finishedStep.waitForDisplayed();
+  //   await app.client.pause(1000);
+  //   expect(await app.client.screenshot()).toMatchImageSnapshot({
+  //     customSnapshotIdentifier: "swap-end-0",
+  //   });
+  // });
 
-  it("should appear in the history", async () => {
-    const finishedStep = await $("#swap-modal-finished-close-button");
-    await finishedStep.waitForDisplayed();
-    await finishedStep.click();
-    await finishedStep.waitForDisplayed({ reverse: true });
+  // it("should appear in the history", async () => {
+  //   const finishedStep = await $("#swap-modal-finished-close-button");
+  //   await finishedStep.waitForDisplayed();
+  //   await finishedStep.click();
+  //   await finishedStep.waitForDisplayed({ reverse: true });
 
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "swap-end-1",
-    });
-  });
+  //   expect(await app.client.screenshot()).toMatchImageSnapshot({
+  //     customSnapshotIdentifier: "swap-end-1",
+  //   });
+  // });
 
-  it("should show operation details modal", async () => {
-    const firstRow = await $(".swap-history-row:first-child");
-    await firstRow.waitForDisplayed();
-    await firstRow.click();
-    await modalPage.waitForDisplayed();
+  // it("should show operation details modal", async () => {
+  //   const firstRow = await $(".swap-history-row:first-child");
+  //   await firstRow.waitForDisplayed();
+  //   await firstRow.click();
+  //   await modalPage.waitForDisplayed();
 
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "swap-history-modal",
-    });
-  });
+  //   expect(await app.client.screenshot()).toMatchImageSnapshot({
+  //     customSnapshotIdentifier: "swap-history-modal",
+  //   });
+  // });
 });
