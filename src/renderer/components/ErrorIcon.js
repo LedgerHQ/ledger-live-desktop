@@ -1,6 +1,7 @@
 // @flow
 import React from "react";
 import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
+import Warning from "~/renderer/icons/TriangleWarning";
 import CrossCircle from "~/renderer/icons/CrossCircle";
 import Lock from "~/renderer/icons/LockCircle";
 
@@ -23,8 +24,9 @@ const ErrorIcon = ({ error, size = 44 }: ErrorIconProps) => {
   switch (true) {
     case !error:
       return null;
-    case error instanceof UserRefusedAllowManager:
     case error instanceof UserRefusedFirmwareUpdate:
+      return <Warning size={size} />;
+    case error instanceof UserRefusedAllowManager:
     case error instanceof UserRefusedOnDevice:
     case error instanceof UserRefusedAddress:
     case error instanceof SwapGenericAPIError:
