@@ -1187,6 +1187,7 @@
       "successTextNoApps": "Vous pouvez maintenant installer des applications sur votre appareil",
       "sucessCTAApps": "Réinstaller les applications",
       "SuccessCTANoApps": "Installer les applications",
+      "cancelReinstallCTA": "Install update",
       "resetSteps": {
         "first": "1. Réinitialiser votre appareil",
         "connect": "Connectez le {{deviceName}} à votre ordinateur en utilisant le câble USB.",
@@ -3152,8 +3153,8 @@
       "title": "Manager refusé sur l’appareil"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Mise à jour annulée",
-      "description": "Veuillez essayer à nouveau ou contacter l’assistance Ledger."
+      "title": "Update cancelled on device",
+      "description": "All apps on your device have been uninstalled. Keep your device up to date to benefit from improvements in security and functionality."
     },
     "UserRefusedOnDevice": {
       "title": "Action rejetée",
