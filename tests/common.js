@@ -50,6 +50,18 @@ const getMockDeviceEvent = app => async (...events) => {
   }, events);
 };
 
+const getMockAnnouncementEvent = app => async () => {
+  return await app.client.execute(() => {
+    window.mock.events.mockNewAnnouncement();
+  });
+};
+
+const getMockStatusIncidentEvent = app => async () => {
+  return await app.client.execute(() => {
+    window.mock.events.mockNewStatusIncident();
+  });
+};
+
 let app;
 let page;
 let portfolioPage;
@@ -67,8 +79,8 @@ let hideTokenModal;
 let mockDeviceEvent;
 let userDataPath;
 let notificationsHub;
-let addMockAnnouncement;
-let toggleMockIncident;
+let mockNewAnnouncement;
+let mockNewStatusIncident;
 
 const toMatchImageSnapshot = configureToMatchImageSnapshot({
   customSnapshotsDir: path.join(__dirname, "specs", "__image_snapshots__"),
@@ -157,6 +169,8 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     hideTokenModal = new HideTokenModal(app);
     mockDeviceEvent = getMockDeviceEvent(app);
     notificationsHub = new NotificationsHub(app);
+    mockNewAnnouncement = getMockAnnouncementEvent(app);
+    mockNewStatusIncident = getMockStatusIncidentEvent(app);
 
     try {
       await app.start();
@@ -257,4 +271,6 @@ export {
   receiveModal,
   userDataPath,
   notificationsHub,
+  mockNewAnnouncement,
+  mockNewStatusIncident,
 };

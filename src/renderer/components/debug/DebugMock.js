@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import Text from "~/renderer/components/Text";
@@ -262,6 +262,16 @@ const DebugMock = () => {
   const { updateCache } = useAnnouncements();
   const { updateData } = useServiceStatus();
 
+  const mockNewAnnouncement = useCallback(() => {
+    addMockAnnouncement();
+    updateCache();
+  }, [updateCache]);
+
+  const mockNewStatusIncident = useCallback(() => {
+    toggleMockIncident();
+    updateData();
+  }, [updateData]);
+
   useInterval(() => {
     setQueue(window.mock.events.queue);
     setHistory(window.mock.events.history);
@@ -425,10 +435,7 @@ const DebugMock = () => {
                   ff="Inter|Regular"
                   color="palette.text.shade100"
                   fontSize={3}
-                  onClick={() => {
-                    addMockAnnouncement();
-                    updateCache();
-                  }}
+                  onClick={mockNewAnnouncement}
                 >
                   {"Mock notif"}
                 </Text>
@@ -437,10 +444,7 @@ const DebugMock = () => {
                   ff="Inter|Regular"
                   color="palette.text.shade100"
                   fontSize={3}
-                  onClick={() => {
-                    toggleMockIncident();
-                    updateData();
-                  }}
+                  onClick={mockNewStatusIncident}
                 >
                   {"Toggle service status"}
                 </Text>
@@ -453,4 +457,27 @@ const DebugMock = () => {
   );
 };
 
-export default process.env.HIDE_DEBUG_MOCK ? MockedGlobalStyle : DebugMock;
+function DebugMockEntryPoint() {
+  const { updateCache } = useAnnouncements();
+  const { updateData } = useServiceStatus();
+
+  const mockNewAnnouncement = useCallback(() => {
+    addMockAnnouncement();
+    updateCache();
+  }, [updateCache]);
+
+  const mockNewStatusIncident = useCallback(() => {
+    toggleMockIncident();
+    updateData();
+  }, [updateData]);
+
+  useEffect(() => {
+    if (getEnv("MOCK")) {
+      Object.assign(window.mock, { mockNewAnnouncement, mockNewStatusIncident });
+    }
+  }, [mockNewAnnouncement, mockNewStatusIncident]);
+
+  return process.env.HIDE_DEBUG_MOCK ? <MockedGlobalStyle /> : <DebugMock />;
+}
+
+export default DebugMockEntryPoint;

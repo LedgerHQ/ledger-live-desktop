@@ -1,4 +1,9 @@
-import initialize, { app, notificationsHub } from "../common.js";
+import initialize, {
+  app,
+  notificationsHub,
+  mockNewAnnouncement,
+  mockNewStatusIncident,
+} from "../common.js";
 import addAccount from "../flows/accounts/addAccount";
 
 describe("Notification center", () => {
