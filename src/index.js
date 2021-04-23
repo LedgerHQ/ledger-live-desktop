@@ -5,6 +5,8 @@ if (process.env.SPECTRON_RUN) {
   });
 }
 
+void 0;
+
 if (!process.env.IS_INTERNAL_PROCESS) {
   // Main electron thread
   require("./main");
