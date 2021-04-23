@@ -16,12 +16,12 @@ import Ellipsis from "~/renderer/components/Ellipsis";
 import IconArrowRight from "~/renderer/icons/ArrowRight";
 import IconSwap from "~/renderer/icons/Swap";
 
-import moment from "moment";
 import { rgba } from "~/renderer/styles/helpers";
 import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { operationStatusList } from "@ledgerhq/live-common/lib/exchange/swap";
 import Tooltip from "~/renderer/components/Tooltip";
 import IconClock from "~/renderer/icons/Clock";
+import FormattedDate from "~/renderer/components/FormattedDate";
 
 export const getStatusColor = (status: string, theme: any) => {
   if (operationStatusList.pending.includes(status)) {
@@ -140,7 +140,7 @@ const OperationRow = ({
           {provider}
         </Text>
         <Text ff={"Inter|Regular"} color={"palette.text.shade50"} fontSize={3}>
-          {moment(operation.date).format("HH:mm")}
+          <FormattedDate date={operation.date} format="HH:mm" />
         </Text>
       </Box>
       <Box horizontal mx={20}>

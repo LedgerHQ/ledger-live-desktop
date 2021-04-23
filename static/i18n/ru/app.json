@@ -2,7 +2,8 @@
   "calendar": {
     "today": "Today",
     "tomorrow": "Tomorrow",
-    "yesterday": "Yesterday"
+    "yesterday": "Yesterday",
+    "transactionDate": "Transaction date"
   },
   "common": {
     "never": "Never",
@@ -1315,9 +1316,9 @@
     "title": "Buy",
     "titleCrypto": "Buy {{currency}}",
     "buyCTA": "Buy {{currencyTicker}}",
-    "withoutDevice": "Don't have your device?",
+    "withoutDevice": "Continue without my device",
     "connectWithoutDevice": "It's better to use your device for optimal security.",
-    "skipConnect": "Continue without device"
+    "skipConnect": "Continue without my device"
   },
   "sell": {
     "title": "Sell",
@@ -2291,7 +2292,8 @@
     "ctaSuccess": "Done",
     "noAccounts": "No accounts to export",
     "selectedAccounts": "Accounts to be included",
-    "selectedAccounts_plural": "Accounts to be included ({{count}})"
+    "selectedAccounts_plural": "Accounts to be included ({{count}})",
+    "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
   },
   "language": {
     "system": "Use system language",
@@ -2558,6 +2560,11 @@
               "next": "Введите фразу восстановления",
               "prev": "Предыдущий шаг",
               "help": "Мне нужна помощь"
+            },
+            "warning": {
+              "title": "Do not use a recovery phrase that you have not generated yourself.",
+              "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
+              "supportLink": "Contact customer support"
             }
           },
           "useRecoverySheet": {

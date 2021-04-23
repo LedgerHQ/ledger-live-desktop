@@ -287,6 +287,7 @@ export const renderError = ({
   list,
   supportLink,
   managerAppName,
+  warning,
 }: {
   error: Error,
   onRetry?: () => void,
@@ -294,9 +295,10 @@ export const renderError = ({
   list?: boolean,
   supportLink?: string,
   managerAppName?: string,
+  warning?: boolean,
 }) => (
   <Wrapper id={`error-${error.name}`}>
-    <Logo>
+    <Logo warning={warning}>
       <ErrorIcon size={44} error={error} />
     </Logo>
     <ErrorTitle>
