@@ -1,3 +1,6 @@
 package.json  @ledgerhq/ledger-live-maintainer
 /src/         @ledgerhq/live-squad-yellow @ledgerhq/live-squad-blue
 /tests/       @ledgerhq/live-qa
+
+# test
+/src/index.js @machard
