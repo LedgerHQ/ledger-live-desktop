@@ -4,7 +4,7 @@ if (process.env.SPECTRON_RUN) {
     dateString: require("../tests/time").default,
   });
 }
-
+void 0;
 if (!process.env.IS_INTERNAL_PROCESS) {
   // Main electron thread
   require("./main");
