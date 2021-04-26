@@ -1,10 +1,6 @@
 // @flow
-
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-
-import type { PortfolioRange } from "@ledgerhq/live-common/lib/types/portfolio";
-
 import Track from "~/renderer/analytics/Track";
 import BoldToggle from "~/renderer/components/BoldToggle";
 import Box from "~/renderer/components/Box";
@@ -13,11 +9,7 @@ import Text from "~/renderer/components/Text";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import DropDownSelector, { DropDownItem } from "~/renderer/components/DropDownSelector";
-
-type Props = {
-  onRangeChange: PortfolioRange => void,
-  range?: PortfolioRange,
-};
+import { useTimeRange } from "~/renderer/actions/settings";
 
 type RangeItemProps = {
   item: DropDownItemType,
@@ -43,35 +35,11 @@ const RangeItem = React.memo<RangeItemProps>(function RangeItem({
   );
 });
 
-const Range = ({ range, ...props }: Props) => {
+function Range() {
   const { t } = useTranslation();
 
   const renderItem = useCallback(props => <RangeItem {...props} />, []);
-
-  const rangeItems = [
-    {
-      key: "week",
-      label: t("accounts.range.week"),
-    },
-    {
-      key: "month",
-      label: t("accounts.range.month"),
-    },
-    {
-      key: "year",
-      label: t("accounts.range.year"),
-    },
-  ];
-
-  const onRangeChange = item => {
-    if (!item) {
-      return;
-    }
-
-    if (item.key === "year" || item.key === "month" || item.key === "week") {
-      props.onRangeChange(item.key);
-    }
-  };
+  const [range, onRangeChange, rangeItems] = useTimeRange();
 
   return (
     <DropDownSelector
@@ -104,6 +72,6 @@ const Range = ({ range, ...props }: Props) => {
       }
     </DropDownSelector>
   );
-};
+}
 
-export default React.memo<Props>(Range);
+export default React.memo<{}>(Range);

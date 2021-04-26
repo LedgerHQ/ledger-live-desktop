@@ -14,7 +14,7 @@ type Props = {
   // when? if not given: take latest
   date?: Date,
 
-  value: BigNumber,
+  value: BigNumber | number,
 
   alwaysShowSign?: boolean,
 
@@ -27,7 +27,7 @@ type Props = {
 };
 
 export default function CounterValue({
-  value,
+  value: valueProp,
   date,
   currency,
   alwaysShowSign = false,
@@ -36,11 +36,12 @@ export default function CounterValue({
   suffix,
   ...props
 }: Props) {
+  const value = valueProp instanceof BigNumber ? valueProp.toNumber() : valueProp;
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const countervalue = useCalculate({
     from: currency,
     to: counterValueCurrency,
-    value: value.toNumber(),
+    value,
     disableRounding: true,
     date,
   });
@@ -54,7 +55,7 @@ export default function CounterValue({
       {prefix || null}
       <FormattedVal
         {...props}
-        val={BigNumber(countervalue)}
+        val={countervalue}
         currency={currency}
         unit={counterValueCurrency.units[0]}
         showCode

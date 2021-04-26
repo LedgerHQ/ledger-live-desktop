@@ -13,6 +13,7 @@ import {
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { CryptoCurrency, Currency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getLanguages } from "~/config/languages";
 import type { State } from ".";
@@ -61,9 +62,8 @@ export const timeRangeDaysByKey = {
   week: 7,
   month: 30,
   year: 365,
+  all: -1,
 };
-
-export type TimeRange = $Keys<typeof timeRangeDaysByKey>;
 
 export type LangAndRegion = { language: string, region: ?string, useSystem: boolean };
 
@@ -81,7 +81,7 @@ export type SettingsState = {
   orderAccounts: string,
   countervalueFirst: boolean,
   autoLockTimeout: number,
-  selectedTimeRange: TimeRange,
+  selectedTimeRange: PortfolioRange,
   marketIndicator: "eastern" | "western",
   currenciesSettings: {
     [currencyId: string]: CurrencySettings,

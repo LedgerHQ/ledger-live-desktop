@@ -1,6 +1,6 @@
 // @flow
 
-import type { BigNumber } from "bignumber.js";
+import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
 import React from "react";
 import styled from "styled-components";
@@ -47,7 +47,7 @@ I.defaultProps = {
 
 type OwnProps = {
   unit?: Unit,
-  val: BigNumber,
+  val: BigNumber | number,
   alwaysShowSign?: boolean,
   showCode?: boolean,
   withIcon?: boolean,
@@ -94,25 +94,26 @@ function FormattedVal(props: Props) {
     showAllDigits,
     ...p
   } = props;
-  let { val } = props;
+  const valProp = props.val;
+  let val = valProp instanceof BigNumber ? valProp : BigNumber(valProp);
 
   invariant(val, "FormattedVal require a `val` prop. Received `undefined`");
 
-  const isNegative = val.isNegative() && !val.isZero();
+  const isNegative = val < 0;
 
   let text = "";
 
   if (isPercent) {
     // FIXME move out the % feature of this component... totally unrelated to currency & annoying for flow type.
     text = `${alwaysShowSign ? (isNegative ? "- " : "+ ") : ""}${(isNegative
-      ? val.negated()
+      ? -val
       : val
     ).toString()} %`;
   } else {
     invariant(unit, "FormattedVal require a `unit` prop. Received `undefined`");
 
     if (withIcon && isNegative) {
-      val = val.negated();
+      val = -val;
     }
 
     text = formatCurrencyUnit(unit, val, {

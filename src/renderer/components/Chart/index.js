@@ -99,10 +99,14 @@ export default function Chart({
             x:
               tickXScale === "week"
                 ? new Date(d.date)
+                : tickXScale === "day"
+                ? moment(new Date(d.date))
+                    .startOf("hour")
+                    .toDate()
                 : moment(new Date(d.date))
                     .startOf("day")
                     .toDate(),
-            y: d[valueKey].toNumber(),
+            y: d[valueKey],
           })),
         },
       ],

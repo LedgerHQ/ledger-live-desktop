@@ -6,10 +6,10 @@ import { formatShort } from "@ledgerhq/live-common/lib/currencies";
 import type {
   CryptoCurrency,
   Currency,
-  PortfolioRange,
   TokenCurrency,
   Unit,
 } from "@ledgerhq/live-common/lib/types";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -43,8 +43,8 @@ export default function BalanceSummary({
   } = useCurrencyPortfolio({ currency, range });
   const discreetMode = useSelector(discreetModeSelector);
 
-  const mapValueCounterValue = useCallback((d: any) => d.countervalue.toNumber(), []);
-  const mapValueCryptoValue = useCallback((d: any) => d.value.toNumber(), []);
+  const mapValueCounterValue = useCallback((d: any) => d.countervalue, []);
+  const mapValueCryptoValue = useCallback((d: any) => d.value, []);
 
   const displayCountervalue = countervalueFirst && countervalueAvailable;
   const chartMagnitude = displayCountervalue ? counterValue.units[0].magnitude : unit.magnitude;
@@ -86,7 +86,6 @@ export default function BalanceSummary({
           currency={currency}
           unit={unit}
           counterValue={counterValue}
-          selectedTimeRange={range}
           countervalueChange={countervalueChange}
           cryptoChange={cryptoChange}
           last={history[history.length - 1]}

@@ -1,11 +1,7 @@
 // @flow
-
-import React, { PureComponent } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { BigNumber } from "bignumber.js";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { withTranslation } from "react-i18next";
-import type { TFunction } from "react-i18next";
 import type {
   Currency,
   ValueChange,
@@ -13,10 +9,7 @@ import type {
   TokenCurrency,
   Unit,
 } from "@ledgerhq/live-common/lib/types";
-
-import { setSelectedTimeRange, setCountervalueFirst } from "~/renderer/actions/settings";
-import type { TimeRange } from "~/renderer/reducers/settings";
-
+import { setCountervalueFirst } from "~/renderer/actions/settings";
 import { BalanceTotal, BalanceDiff } from "~/renderer/components/BalanceInfos";
 import Box, { Tabbable } from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -25,7 +18,7 @@ import PillsDaysCount from "~/renderer/components/PillsDaysCount";
 import styled from "styled-components";
 import Swap from "~/renderer/icons/Swap";
 
-type OwnProps = {
+type Props = {
   isAvailable: boolean,
   cryptoChange: ValueChange,
   countervalueChange: ValueChange,
@@ -34,18 +27,99 @@ type OwnProps = {
     countervalue: BigNumber,
   },
   counterValue: Currency,
-  selectedTimeRange: TimeRange,
   countervalueFirst: boolean,
   currency: CryptoCurrency | TokenCurrency,
   unit: Unit,
 };
 
-type Props = {
-  ...OwnProps,
-  t: TFunction,
-  setSelectedTimeRange: TimeRange => *,
-  setCountervalueFirst: boolean => void,
-};
+export default function AssetBalanceSummaryHeader({
+  counterValue,
+  isAvailable,
+  last,
+  cryptoChange,
+  countervalueChange,
+  countervalueFirst,
+  currency,
+  unit,
+}: Props) {
+  const dispatch = useDispatch();
+  const cvUnit = counterValue.units[0];
+  const data = [
+    { valueChange: cryptoChange, balance: last.value, unit },
+    { valueChange: countervalueChange, balance: last.countervalue, unit: cvUnit },
+  ];
+  if (countervalueFirst) {
+    data.reverse();
+  }
+
+  const primaryKey = data[0].unit.code;
+  const secondaryKey = data[1].unit.code;
+
+  return (
+    <Box flow={5}>
+      <Box horizontal>
+        {isAvailable && (
+          <SwapButton onClick={() => dispatch(setCountervalueFirst(!countervalueFirst))}>
+            <Swap />
+          </SwapButton>
+        )}
+        <BalanceTotal
+          key={primaryKey}
+          style={{
+            cursor: isAvailable ? "pointer" : "",
+            overflow: "hidden",
+            flexShrink: 1,
+          }}
+          onClick={() => setCountervalueFirst(!countervalueFirst)}
+          showCryptoEvenIfNotAvailable
+          isAvailable={isAvailable}
+          totalBalance={data[0].balance}
+          unit={data[0].unit}
+        >
+          <Wrapper style={{ marginTop: 4 }}>
+            <div style={{ width: "auto", marginRight: 20 }}>
+              <FormattedVal
+                key={secondaryKey}
+                animateTicker
+                disableRounding
+                alwaysShowSign={false}
+                color="warmGrey"
+                unit={data[1].unit}
+                fontSize={6}
+                showCode
+                val={data[1].balance}
+              />
+            </div>
+            <Price
+              unit={unit}
+              from={currency}
+              withActivityCurrencyColor
+              withEquality
+              color="warmGrey"
+              fontSize={6}
+              iconSize={16}
+            />
+          </Wrapper>
+        </BalanceTotal>
+      </Box>
+      <Box
+        key={primaryKey}
+        horizontal
+        alignItems="center"
+        justifyContent={isAvailable ? "space-between" : "flex-end"}
+        flow={7}
+      >
+        <BalanceDiff
+          totalBalance={data[0].balance}
+          valueChange={data[0].valueChange}
+          unit={data[0].unit}
+          isAvailable={isAvailable}
+        />
+        <PillsDaysCount />
+      </Box>
+    </Box>
+  );
+}
 
 const Wrapper = styled(Box)`
   display: flex;
@@ -79,117 +153,3 @@ const SwapButton = styled(Tabbable).attrs(() => ({
     opacity: 0.5;
   }
 `;
-
-const mapDispatchToProps = {
-  setSelectedTimeRange,
-  setCountervalueFirst,
-};
-
-class AssetBalanceSummaryHeader extends PureComponent<Props> {
-  handleChangeSelectedTime = item => {
-    // $FlowFixMe
-    this.props.setSelectedTimeRange(item.key);
-  };
-
-  render() {
-    const {
-      t,
-      counterValue,
-      selectedTimeRange,
-      isAvailable,
-      last,
-      cryptoChange,
-      countervalueChange,
-      countervalueFirst,
-      setCountervalueFirst,
-      currency,
-      unit,
-    } = this.props;
-
-    const cvUnit = counterValue.units[0];
-    const data = [
-      { valueChange: cryptoChange, balance: last.value, unit },
-      { valueChange: countervalueChange, balance: last.countervalue, unit: cvUnit },
-    ];
-    if (countervalueFirst) {
-      data.reverse();
-    }
-
-    const primaryKey = data[0].unit.code;
-    const secondaryKey = data[1].unit.code;
-
-    return (
-      <Box flow={5}>
-        <Box horizontal>
-          {isAvailable && (
-            <SwapButton onClick={() => setCountervalueFirst(!countervalueFirst)}>
-              <Swap />
-            </SwapButton>
-          )}
-          <BalanceTotal
-            key={primaryKey}
-            style={{
-              cursor: isAvailable ? "pointer" : "",
-              overflow: "hidden",
-              flexShrink: 1,
-            }}
-            onClick={() => setCountervalueFirst(!countervalueFirst)}
-            showCryptoEvenIfNotAvailable
-            isAvailable={isAvailable}
-            totalBalance={data[0].balance}
-            unit={data[0].unit}
-          >
-            <Wrapper style={{ marginTop: 4 }}>
-              <div style={{ width: "auto", marginRight: 20 }}>
-                <FormattedVal
-                  key={secondaryKey}
-                  animateTicker
-                  disableRounding
-                  alwaysShowSign={false}
-                  color="warmGrey"
-                  unit={data[1].unit}
-                  fontSize={6}
-                  showCode
-                  val={data[1].balance}
-                />
-              </div>
-              <Price
-                unit={unit}
-                from={currency}
-                withActivityCurrencyColor
-                withEquality
-                color="warmGrey"
-                fontSize={6}
-                iconSize={16}
-              />
-            </Wrapper>
-          </BalanceTotal>
-        </Box>
-        <Box
-          key={primaryKey}
-          horizontal
-          alignItems="center"
-          justifyContent={isAvailable ? "space-between" : "flex-end"}
-          flow={7}
-        >
-          <BalanceDiff
-            t={t}
-            totalBalance={data[0].balance}
-            valueChange={data[0].valueChange}
-            unit={data[0].unit}
-            since={selectedTimeRange}
-            isAvailable={isAvailable}
-          />
-          <PillsDaysCount selected={selectedTimeRange} onChange={this.handleChangeSelectedTime} />
-        </Box>
-      </Box>
-    );
-  }
-}
-
-const ConnectedAssetBalanceSummaryHeader: React$ComponentType<OwnProps> = compose(
-  connect(null, mapDispatchToProps),
-  withTranslation(), // FIXME t() is not even needed directly here. should be underlying component responsability to inject it
-)(AssetBalanceSummaryHeader);
-
-export default ConnectedAssetBalanceSummaryHeader;
