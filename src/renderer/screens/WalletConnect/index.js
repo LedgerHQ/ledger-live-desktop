@@ -31,7 +31,6 @@ const InnerContainer: ThemedComponent<*> = styled(Box)`
   top: 105px;
   left: 155px;
   right: 155px;
-  background-color: #fff;
   border-radius: 4px;
   padding: 24px;
 `;
@@ -71,7 +70,7 @@ const ConnexionStatusContainer: ThemedComponent<*> = styled.div`
 
 const AccountContainer: ThemedComponent<*> = styled(Box)`
   width: 100%;
-  border: solid 1px rgba(0, 0, 0, 0.2);
+  border: solid 1px ${p => p.theme.colors.palette.divider};
   border-radius: 4px;
 `;
 
@@ -98,7 +97,7 @@ const WalletConnect = () => {
       <CompanyLogoContainer>
         <Logo src={CompanyLogo} />
       </CompanyLogoContainer>
-      <InnerContainer alignItems="center" pb={32}>
+      <InnerContainer alignItems="center" pb={32} bg="palette.background.paper">
         <LogoContainer mb={20}>
           <Logo src={WCLogo} />
           <ConnexionStatusContainer connected={wcContext.socketReady}>

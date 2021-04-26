@@ -5,12 +5,11 @@ import { Trans } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import type { StepProps } from "../types";
 import Box from "~/renderer/components/Box";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Button from "~/renderer/components/Button";
 import { context, STATUS, approveSession } from "~/renderer/screens/WalletConnect/Provider";
 import BigSpinner from "~/renderer/components/BigSpinner";
 import Text from "~/renderer/components/Text";
-import Image from "~/renderer/components/Image";
-import LedgerLiveLogo from "~/renderer/components/LedgerLiveLogo";
 import LedgerLiveImg from "~/renderer/images/ledgerlive-logo.svg";
 import WCLogo from "~/renderer/images/walletconnect.png";
 import ParentCryptoCurrencyIcon from "~/renderer/components/ParentCryptoCurrencyIcon";
@@ -19,7 +18,7 @@ const LogoContainer = styled.div`
   width: 64px;
   height: 64px;
   border-radius: 64px;
-  border: solid 1px rgba(20, 37, 51, 0.1);
+  border: solid 1px ${p => p.theme.colors.palette.divider};
 `;
 
 const Logo = styled.img`
@@ -29,11 +28,17 @@ const Logo = styled.img`
 
 const DottedLine = styled.hr`
   border: none;
-  border-top: 3px dotted rgba(20, 37, 51, 0.2);
+  border-top: 3px dotted ${p => p.theme.colors.palette.divider};
   height: 3px;
   width: 54px;
   margin-left: 16px;
   margin-right: 16px;
+`;
+
+const AccountContainer: ThemedComponent<*> = styled(Box)`
+  width: 100%;
+  border: solid 1px ${p => p.theme.colors.palette.divider};
+  border-radius: 4px;
 `;
 
 export default function StepConfirm({ account, link, setLink }: StepProps) {
@@ -53,11 +58,7 @@ export default function StepConfirm({ account, link, setLink }: StepProps) {
             </LogoContainer>
             <DottedLine />
             <LogoContainer>
-              <LedgerLiveLogo
-                width="100%"
-                height="100%"
-                icon={<Image resource={LedgerLiveImg} alt="" width={"100%"} height={"100%"} />}
-              />
+              <Logo src={LedgerLiveImg} />
             </LogoContainer>
           </Box>
           <Text ff="Inter|Bold" fontSize={4} color="palette.text.shade100">
@@ -68,15 +69,7 @@ export default function StepConfirm({ account, link, setLink }: StepProps) {
             <Trans i18nKey="walletconnect.steps.confirm.details" />
           </Text>
           <Box style={{ height: 20 }} />
-          <Box
-            style={{
-              width: "100%",
-              border: "solid 1px rgba(0,0,0, 0.2)",
-              borderRadius: 4,
-            }}
-            alignItems={"center"}
-            p={20}
-          >
+          <AccountContainer alignItems={"center"} p={20}>
             <Box justifyContent="center" horizontal mb="10px">
               {account?.currency ? <ParentCryptoCurrencyIcon currency={account.currency} /> : null}
               <Text
@@ -92,7 +85,7 @@ export default function StepConfirm({ account, link, setLink }: StepProps) {
             <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade50">
               {account?.freshAddress}
             </Text>
-          </Box>
+          </AccountContainer>
         </Box>
       ) : (
         <Box alignItems={"center"} justifyContent={"center"} p={20}>
