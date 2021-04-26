@@ -69,6 +69,7 @@ export default function PortfolioBalanceSummary({
           <Chart
             magnitude={counterValue.units[0].magnitude}
             color={chartColor}
+            // $FlowFixMe TODO make date non optional
             data={portfolio.balanceHistory}
             height={250}
             tickXScale={range}

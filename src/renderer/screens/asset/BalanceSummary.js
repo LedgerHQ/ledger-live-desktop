@@ -98,6 +98,7 @@ export default function BalanceSummary({
         <Chart
           magnitude={chartMagnitude}
           color={chartColor}
+          // $FlowFixMe TODO make date non optional
           data={history}
           height={200}
           tickXScale={range}

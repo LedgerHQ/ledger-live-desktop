@@ -56,6 +56,7 @@ function Body({ account, range }: Props) {
         </Box>
       </Box>
       <Chart
+        // $FlowFixMe TODO make date non optional
         data={history}
         color={getCurrencyColor(currency, bgColor)}
         valueKey={countervalueAvailable ? "countervalue" : "value"}

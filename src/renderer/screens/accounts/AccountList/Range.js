@@ -42,6 +42,7 @@ function Range() {
   const [range, onRangeChange, rangeItems] = useTimeRange();
 
   return (
+    // $FlowFixMe DropDownSelector is not typed well
     <DropDownSelector
       items={rangeItems}
       renderItem={renderItem}

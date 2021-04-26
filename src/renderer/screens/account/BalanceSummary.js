@@ -5,12 +5,7 @@ import { useSelector } from "react-redux";
 import { useBalanceHistoryWithCountervalue } from "~/renderer/actions/portfolio";
 import { BigNumber } from "bignumber.js";
 import { formatShort } from "@ledgerhq/live-common/lib/currencies";
-import type {
-  Currency,
-  Account,
-  AccountLike,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLike, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { useTimeRange } from "~/renderer/actions/settings";
 import { counterValueCurrencySelector, discreetModeSelector } from "~/renderer/reducers/settings";
@@ -123,6 +118,7 @@ export default function AccountBalanceSummary({
         <Chart
           magnitude={chartMagnitude}
           color={chartColor}
+          // $FlowFixMe TODO we need to make Date non optional in live-common
           data={history}
           height={200}
           tickXScale={range}

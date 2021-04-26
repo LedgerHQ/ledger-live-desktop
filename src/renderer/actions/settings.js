@@ -10,7 +10,6 @@ import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { setEnvOnAllThreads } from "~/helpers/env";
 import type { SettingsState as Settings } from "~/renderer/reducers/settings";
 import {
-  timeRangeDaysByKey,
   hideEmptyTokenAccountsSelector,
   selectedTimeRangeSelector,
 } from "~/renderer/reducers/settings";
@@ -72,7 +71,7 @@ export function useHideEmptyTokenAccounts() {
 
 type PortfolioRangeOption = {
   key: PortfolioRange,
-  value: number,
+  value: string,
   label: string,
 };
 
@@ -87,7 +86,8 @@ export function useTimeRange() {
     },
     [dispatch],
   );
-  const options = ["day", "week", "month", "year", "all"].map(key => ({
+  const ranges: PortfolioRange[] = ["day", "week", "month", "year", "all"];
+  const options: PortfolioRangeOption[] = ranges.map(key => ({
     key,
     value: t(`time.range.${key}`),
     label: t(`time.range.${key}`),
