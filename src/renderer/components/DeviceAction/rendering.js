@@ -286,15 +286,17 @@ export const renderError = ({
   withExportLogs,
   list,
   supportLink,
+  warning,
 }: {
   error: Error,
   onRetry?: () => void,
   withExportLogs?: boolean,
   list?: boolean,
   supportLink?: string,
+  warning?: boolean,
 }) => (
   <Wrapper id={`error-${error.name}`}>
-    <Logo>
+    <Logo warning={warning}>
       <ErrorIcon size={44} error={error} />
     </Logo>
     <ErrorTitle>
