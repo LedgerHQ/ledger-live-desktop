@@ -7,7 +7,7 @@ import Card from "~/renderer/components/Box/Card";
 import Swap from "~/renderer/screens/exchange/swap/Swap";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import History from "~/renderer/screens/exchange/swap/History";
 
 import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";

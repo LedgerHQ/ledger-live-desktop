@@ -11,27 +11,23 @@ const useLedgerLiveApi = (platform: string) => {
   const targetRef: { current: null | HTMLIFrameElement } = useRef(null);
   const dispatch = useDispatch();
   const store = useStore();
-  const server = useRef(null);
+  const server: { current: null | JSONRPCServer } = useRef(null);
 
-  const platformConfig = PlatformsConfig[platform];
+  const origin = new URL(PlatformsConfig[platform]?.url).origin;
 
   const handleMessage = useCallback(
     e => {
-      console.log("COUCOU", e);
-      if (!e.isTrusted || e.origin !== platformConfig.host || !e.data) return;
+      if (!e.isTrusted || e.origin !== origin || !e.data) return;
 
       if (server.current) {
         server.current.receiveJSON(e.data).then(jsonRPCResponse => {
-          if (jsonRPCResponse && platformConfig) {
-            targetRef.current?.contentWindow.postMessage(
-              JSON.stringify(jsonRPCResponse),
-              platformConfig?.host,
-            );
+          if (jsonRPCResponse && origin) {
+            targetRef.current?.contentWindow.postMessage(JSON.stringify(jsonRPCResponse), origin);
           }
         });
       }
     },
-    [platformConfig],
+    [origin],
   );
 
   const connectHandler = useCallback(
@@ -40,7 +36,6 @@ const useLedgerLiveApi = (platform: string) => {
   );
 
   useEffect(() => {
-    console.log("USE EFFECT");
     window.addEventListener("message", handleMessage, false);
     return () => window.removeEventListener("message", handleMessage, false);
   }, [handleMessage]);
@@ -50,10 +45,12 @@ const useLedgerLiveApi = (platform: string) => {
 
     for (const method in handlers) {
       console.log(method);
-      server.current.addMethod(method, connectHandler(handlers[method]));
+      server.current?.addMethod(method, connectHandler(handlers[method]));
     }
 
-    return () => (server.current = null);
+    return () => {
+      server.current = null;
+    };
   }, [connectHandler]);
 
   return { targetRef };
