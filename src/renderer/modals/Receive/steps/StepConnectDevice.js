@@ -1,7 +1,7 @@
 // @flow
 
-import React from "react";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
+import React, { useEffect, useState } from "react";
+import { getMainAccount, getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import DeviceAction from "~/renderer/components/DeviceAction";
@@ -44,10 +44,31 @@ export function StepConnectDeviceFooter({
   onSkipConfirm,
   device,
   eventType,
+  account,
 }: StepProps) {
+  const [currencyName, setCurrencyName] = useState("");
+
+  useEffect(() => {
+    if (account) {
+      const currency = getAccountCurrency(account);
+
+      const currencyName = currency
+        ? currency.type === "TokenCurrency"
+          ? currency.parentCurrency.name
+          : currency.name
+        : undefined;
+
+      setCurrencyName(currencyName);
+    }
+  }, [account]);
+
   return (
     <Box horizontal flow={2}>
-      <TrackPage category={`Receive Flow${eventType ? ` (${eventType})` : ""}`} name="Step 2" />
+      <TrackPage
+        category={`Receive Flow${eventType ? ` (${eventType})` : ""}`}
+        name="Step 2"
+        currencyName={currencyName}
+      />
       <Button
         event="Receive Flow Without Device Clicked"
         id={"receive-connect-device-skip-device-button"}

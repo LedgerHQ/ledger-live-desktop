@@ -3,6 +3,7 @@
 import invariant from "invariant";
 import React, { useEffect, useRef, useCallback, useState } from "react";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import { getMainAccount, getAccountName } from "@ledgerhq/live-common/lib/account";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
@@ -138,6 +139,7 @@ const StepReceiveFunds = ({
   const initialDevice = useRef(device);
   const address = mainAccount.freshAddress;
   const [modalVisible, setModalVisible] = useState(false);
+  const [currencyName, setCurrencyName] = useState("");
 
   const hideQRCodeModal = useCallback(() => setModalVisible(false), [setModalVisible]);
   const showQRCodeModal = useCallback(() => setModalVisible(true), [setModalVisible]);
@@ -185,10 +187,28 @@ const StepReceiveFunds = ({
     }
   }, [isAddressVerified, confirmAddress]);
 
+  useEffect(() => {
+    if (account) {
+      const currency = getAccountCurrency(account);
+
+      const currencyName = currency
+        ? currency.type === "TokenCurrency"
+          ? currency.parentCurrency.name
+          : currency.name
+        : undefined;
+
+      setCurrencyName(currencyName);
+    }
+  }, [account]);
+
   return (
     <>
       <Box px={2}>
-        <TrackPage category={`Receive Flow${eventType ? ` (${eventType})` : ""}`} name="Step 3" />
+        <TrackPage
+          category={`Receive Flow${eventType ? ` (${eventType})` : ""}`}
+          name="Step 3"
+          currencyName={currencyName}
+        />
         {verifyAddressError ? (
           <ErrorDisplay error={verifyAddressError} onRetry={onVerify} />
         ) : isAddressVerified === true ? (

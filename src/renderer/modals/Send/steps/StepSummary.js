@@ -72,12 +72,18 @@ export default class StepSummary extends PureComponent<StepProps> {
       account.type === "Account" &&
       (account.subAccounts || []).some(subAccount => subAccount.balance.gt(0));
 
+    const currencyName = currency
+      ? currency.type === "TokenCurrency"
+        ? currency.parentCurrency.name
+        : currency.name
+      : undefined;
+
     // $FlowFixMe
     const memo = transaction.memo;
 
     return (
       <Box flow={4} mx={40}>
-        <TrackPage category="Send Flow" name="Step Summary" />
+        <TrackPage category="Send Flow" name="Step Summary" currencyName={currencyName} />
         {utxoLag ? (
           <Alert type="warning">
             <Trans i18nKey="send.steps.details.utxoLag" />
