@@ -4,6 +4,7 @@ import { createStructuredSelector } from "reselect";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
 import type { Device, Action } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { OutdatedApp } from "@ledgerhq/live-common/lib/errors";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { setPreferredDeviceModel } from "~/renderer/actions/settings";
 import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
@@ -12,6 +13,7 @@ import AutoRepair from "~/renderer/components/AutoRepair";
 import TransactionConfirm from "~/renderer/components/TransactionConfirm";
 import SignMessageConfirm from "~/renderer/components/SignMessageConfirm";
 import useTheme from "~/renderer/hooks/useTheme";
+import { ManagerNotEnoughSpaceError } from "@ledgerhq/errors";
 import {
   renderAllowManager,
   renderAllowOpeningApp,
@@ -22,6 +24,8 @@ import {
   renderLoading,
   renderRequestQuitApp,
   renderRequiresAppInstallation,
+  renderInstallingApp,
+  renderListingApps,
   renderWarningOutdated,
   renderSwapDeviceConfirmation,
   renderSellDeviceConfirmation,
@@ -85,6 +89,9 @@ const DeviceAction = <R, H, P>({
     repairModalOpened,
     requestOpenApp,
     allowOpeningRequestedWording,
+    installingApp,
+    progress,
+    listingApps,
     requiresAppInstallation,
     inWrongDeviceForAccount,
     onRetry,
@@ -126,6 +133,11 @@ const DeviceAction = <R, H, P>({
     return renderRequestQuitApp({ modelId, type });
   }
 
+  if (installingApp) {
+    const appName = requestOpenApp;
+    return renderInstallingApp({ appName, progress });
+  }
+
   if (requiresAppInstallation) {
     const { appName } = requiresAppInstallation;
     return renderRequiresAppInstallation({ appName });
@@ -134,6 +146,10 @@ const DeviceAction = <R, H, P>({
   if (allowManagerRequestedWording) {
     const wording = allowManagerRequestedWording;
     return renderAllowManager({ modelId, type, wording });
+  }
+
+  if (listingApps) {
+    return renderListingApps();
   }
 
   if (initSwapRequested && !initSwapResult && !initSwapError) {
@@ -176,6 +192,10 @@ const DeviceAction = <R, H, P>({
   }
 
   if (!isLoading && error) {
+    if (error instanceof ManagerNotEnoughSpaceError || error instanceof OutdatedApp) {
+      return renderError({ error, withOpenManager: true });
+    }
+
     return renderError({ error, onRetry, withExportLogs: true });
   }
 

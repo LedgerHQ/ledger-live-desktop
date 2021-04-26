@@ -37,6 +37,7 @@ import { Quizz } from "~/renderer/components/Onboarding/Quizz";
 import { QuizFailure } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/QuizFailure";
 import { QuizSuccess } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/QuizSuccess";
 import { fireConfetti } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/confetti";
+import RecoveryWarning from "../../Help/RecoveryWarning";
 
 const TutorialContainer: ThemedComponent<*> = styled.div`
   height: 100%;
@@ -253,6 +254,15 @@ function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) 
         direction="left"
       >
         <HideRecoverySeed />
+      </SideDrawer>
+      <SideDrawer
+        isOpen={!!state.context.help.recoveryPhraseWarning}
+        onRequestClose={() =>
+          sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhraseWarning", status: false })
+        }
+        direction="left"
+      >
+        <RecoveryWarning />
       </SideDrawer>
       <LeftContainer>
         <Stepper steps={state.context.steps} />

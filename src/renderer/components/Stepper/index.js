@@ -38,6 +38,7 @@ type Props<T, StepProps> = {
   signed?: boolean,
   children?: React$Node,
   params?: any,
+  hideCloseButton?: boolean,
 };
 
 const Stepper = <T, StepProps>({
@@ -51,6 +52,7 @@ const Stepper = <T, StepProps>({
   disabledSteps,
   errorSteps,
   children,
+  hideCloseButton,
   ...props
 }: Props<T, StepProps>) => {
   const deviceBlocked = useDeviceBlocked();
@@ -93,7 +95,7 @@ const Stepper = <T, StepProps>({
   return (
     <ModalBody
       refocusWhenChange={stepId}
-      onClose={deviceBlocked ? undefined : onClose}
+      onClose={hideCloseButton || deviceBlocked ? undefined : onClose}
       onBack={onBack && !deviceBlocked ? () => onBack(stepProps) : undefined}
       title={title}
       noScroll={noScroll}
