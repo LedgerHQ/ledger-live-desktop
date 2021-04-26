@@ -1035,6 +1035,10 @@
     "openManager": "Open Manager",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
+    "installApp": "{{appName}} App installation",
+    "installAppDescription": "Please wait until the installation is finished",
+    "listApps": "Checking App dependencies",
+    "listAppsDescription": "Please wait while we make sure you have all the required apps",
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction",
