@@ -108,9 +108,15 @@ export default function Default() {
                         <Route path="/manager" render={props => <Manager {...props} />} />
                         <Route path="/lend" render={props => <Lend {...props} />} />
                         <Route path="/exchange" render={props => <Exchange {...props} />} />
-                        <Route path="/account/:parentId/:id" render={props => <Account {...props} />} />
+                        <Route
+                          path="/account/:parentId/:id"
+                          render={props => <Account {...props} />}
+                        />
                         <Route path="/account/:id" render={props => <Account {...props} />} />
-                        <Route path="/asset/:assetId+" render={(props: any) => <Asset {...props} />} />
+                        <Route
+                          path="/asset/:assetId+"
+                          render={(props: any) => <Asset {...props} />}
+                        />
                         <Route path="/swap" render={props => <Swap {...props} />} />
                       </Switch>
                     </Page>
