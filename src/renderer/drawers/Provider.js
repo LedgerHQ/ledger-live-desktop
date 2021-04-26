@@ -1,6 +1,5 @@
 /* @flow */
 import React, { useReducer } from "react";
-import { SideDrawer } from "~/renderer/components/SideDrawer";
 
 type State = {
   Component: *,
@@ -32,20 +31,7 @@ const DrawerProvider = ({ children }: { children: React$Node }) => {
 
   setDrawer = (Component, props) => dispatch({ Component, props, open: !!Component });
 
-  return (
-    <context.Provider value={state}>
-      <SideDrawer
-        isOpen={!!state.open}
-        onRequestClose={() => {
-          setDrawer();
-        }}
-        direction="left"
-      >
-        {state.Component ? <state.Component {...state.props} /> : null}
-      </SideDrawer>
-      {children}
-    </context.Provider>
-  );
+  return <context.Provider value={state}>{children}</context.Provider>;
 };
 
 export default DrawerProvider;

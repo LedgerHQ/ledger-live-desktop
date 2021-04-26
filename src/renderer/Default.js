@@ -37,6 +37,7 @@ import { DebugWrapper } from "~/renderer/components/debug/shared";
 import useDeeplink from "~/renderer/hooks/useDeeplinking";
 import ModalsLayer from "./ModalsLayer";
 import { ToastOverlay } from "~/renderer/components/ToastOverlay";
+import Drawer from "~/renderer/drawers/Drawer";
 
 export default function Default() {
   const location = useLocation();
@@ -107,6 +108,7 @@ export default function Default() {
                     <Route path="/swap" render={props => <Swap {...props} />} />
                   </Switch>
                 </Page>
+                <Drawer />
                 <ToastOverlay />
               </Box>
 
