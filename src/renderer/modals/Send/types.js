@@ -40,6 +40,7 @@ export type StepProps = {
   maybeAmount?: BigNumber,
   onResetMaybeAmount: () => void,
   updateTransaction: (updater: any) => void,
+  currencyName: ?string,
 };
 
 export type St = Step<StepId, StepProps>;

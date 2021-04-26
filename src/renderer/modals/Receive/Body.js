@@ -9,6 +9,7 @@ import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import Track from "~/renderer/analytics/Track";
 import type { Account, TokenCurrency, AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { closeModal } from "~/renderer/actions/modals";
@@ -69,6 +70,7 @@ export type StepProps = {
   onChangeAccount: (account: ?AccountLike, tokenAccount: ?Account) => void,
   onChangeAddressVerified: (?boolean, ?Error) => void,
   onClose: () => void,
+  currencyName: ?string,
 };
 
 export type St = Step<StepId, StepProps>;
@@ -127,6 +129,7 @@ const Body = ({
   const [parentAccount, setParentAccount] = useState(() => params && params.parentAccount);
   const [disabledSteps, setDisabledSteps] = useState([]);
   const [token, setToken] = useState(null);
+  const [currencyName, setCurrencyName] = useState("");
 
   const handleChangeAccount = useCallback(
     (account, parentAccount) => {
@@ -175,6 +178,20 @@ const Body = ({
     }
   }, [accounts, account, params, handleChangeAccount]);
 
+  useEffect(() => {
+    if (account) {
+      const currency = getAccountCurrency(account);
+
+      const currencyName = currency
+        ? currency.type === "TokenCurrency"
+          ? currency.parentCurrency.name
+          : currency.name
+        : undefined;
+
+      setCurrencyName(currencyName);
+    }
+  }, [account]);
+
   const errorSteps = verifyAddressError ? [2] : [];
 
   const stepperProps = {
@@ -201,6 +218,7 @@ const Body = ({
     onChangeAddressVerified,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,
+    currencyName,
   };
 
   return (

@@ -1,9 +1,8 @@
 // @flow
 
-import React, { useLayoutEffect, useState } from "react";
+import React from "react";
 import { Trans } from "react-i18next";
 import styled, { withTheme } from "styled-components";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -34,23 +33,8 @@ function StepConfirmation({
   theme,
   device,
   signed,
+  currencyName,
 }: StepProps & { theme: * }) {
-  const [currencyName, setCurrencyName] = useState("");
-
-  useLayoutEffect(() => {
-    if (account) {
-      const currency = getAccountCurrency(account);
-
-      const currencyName = currency
-        ? currency.type === "TokenCurrency"
-          ? currency.parentCurrency.name
-          : currency.name
-        : undefined;
-
-      setCurrencyName(currencyName);
-    }
-  }, [account]);
-
   if (optimisticOperation) {
     return (
       <Container>

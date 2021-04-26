@@ -3,7 +3,6 @@
 import invariant from "invariant";
 import React, { useEffect, useRef, useCallback, useState } from "react";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import { getMainAccount, getAccountName } from "@ledgerhq/live-common/lib/account";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
@@ -132,6 +131,7 @@ const StepReceiveFunds = ({
   token,
   onClose,
   eventType,
+  currencyName,
 }: StepProps) => {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
   invariant(account && mainAccount, "No account given");
@@ -139,7 +139,6 @@ const StepReceiveFunds = ({
   const initialDevice = useRef(device);
   const address = mainAccount.freshAddress;
   const [modalVisible, setModalVisible] = useState(false);
-  const [currencyName, setCurrencyName] = useState("");
 
   const hideQRCodeModal = useCallback(() => setModalVisible(false), [setModalVisible]);
   const showQRCodeModal = useCallback(() => setModalVisible(true), [setModalVisible]);
@@ -186,20 +185,6 @@ const StepReceiveFunds = ({
       confirmAddress();
     }
   }, [isAddressVerified, confirmAddress]);
-
-  useEffect(() => {
-    if (account) {
-      const currency = getAccountCurrency(account);
-
-      const currencyName = currency
-        ? currency.type === "TokenCurrency"
-          ? currency.parentCurrency.name
-          : currency.name
-        : undefined;
-
-      setCurrencyName(currencyName);
-    }
-  }, [account]);
 
   return (
     <>

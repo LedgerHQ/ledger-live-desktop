@@ -9,6 +9,7 @@ import { createStructuredSelector } from "reselect";
 import { Trans, withTranslation } from "react-i18next";
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import { addPendingOperation, getMainAccount } from "@ledgerhq/live-common/lib/account";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 import logger from "~/logger";
@@ -161,6 +162,22 @@ const Body = ({
     if (stepId) onChangeStepId(stepId);
   }, [onChangeStepId, params]);
 
+  const [currencyName, setCurrencyName] = useState("");
+
+  useEffect(() => {
+    if (account) {
+      const currency = getAccountCurrency(account);
+
+      const currencyName = currency
+        ? currency.type === "TokenCurrency"
+          ? currency.parentCurrency.name
+          : currency.name
+        : undefined;
+
+      setCurrencyName(currencyName);
+    }
+  }, [account]);
+
   const [optimisticOperation, setOptimisticOperation] = useState(null);
   const [transactionError, setTransactionError] = useState(null);
   const [signed, setSigned] = useState(false);
@@ -227,6 +244,7 @@ const Body = ({
     parentAccount,
     transaction,
     signed,
+    currencyName,
     hideBreadcrumb: (!!error && ["recipient", "amount"].includes(stepId)) || stepId === "warning",
     error,
     status,

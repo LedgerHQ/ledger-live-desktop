@@ -1,9 +1,8 @@
 // @flow
 
-import React, { Fragment, PureComponent, useEffect, useState } from "react";
+import React, { Fragment, PureComponent } from "react";
 import { Trans } from "react-i18next";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -30,25 +29,10 @@ const StepAmount = ({
   maybeAmount,
   onResetMaybeAmount,
   updateTransaction,
+  currencyName,
 }: StepProps) => {
-  const [currencyName, setCurrencyName] = useState("");
-  const mainAccount = account ? getMainAccount(account, parentAccount) : null;
-
-  useEffect(() => {
-    if (account) {
-      const currency = getAccountCurrency(account);
-
-      const currencyName = currency
-        ? currency.type === "TokenCurrency"
-          ? currency.parentCurrency.name
-          : currency.name
-        : undefined;
-
-      setCurrencyName(currencyName);
-    }
-  }, [account]);
-
   if (!status) return null;
+  const mainAccount = account ? getMainAccount(account, parentAccount) : null;
 
   return (
     <Box flow={4}>

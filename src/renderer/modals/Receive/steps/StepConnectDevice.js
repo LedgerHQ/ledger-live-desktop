@@ -1,7 +1,7 @@
 // @flow
 
-import React, { useEffect, useState } from "react";
-import { getMainAccount, getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
+import React from "react";
+import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import DeviceAction from "~/renderer/components/DeviceAction";
@@ -44,24 +44,8 @@ export function StepConnectDeviceFooter({
   onSkipConfirm,
   device,
   eventType,
-  account,
+  currencyName,
 }: StepProps) {
-  const [currencyName, setCurrencyName] = useState("");
-
-  useEffect(() => {
-    if (account) {
-      const currency = getAccountCurrency(account);
-
-      const currencyName = currency
-        ? currency.type === "TokenCurrency"
-          ? currency.parentCurrency.name
-          : currency.name
-        : undefined;
-
-      setCurrencyName(currencyName);
-    }
-  }, [account]);
-
   return (
     <Box horizontal flow={2}>
       <TrackPage
