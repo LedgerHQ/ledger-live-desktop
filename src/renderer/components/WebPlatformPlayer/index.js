@@ -46,9 +46,10 @@ const Loader: ThemedComponent<{}> = styled.div`
 
 type Props = {
   platform: string,
+  onClose?: Function,
 };
 
-const WebPlatformPlayer = ({ platform }: Props) => {
+const WebPlatformPlayer = ({ platform, onClose }: Props) => {
   const { targetRef } = useLedgerLiveApi(platform);
   const [loadDate, setLoadDate] = useState(Date.now());
   const [widgetLoaded, setWidgetLoaded] = useState(false);
@@ -81,7 +82,7 @@ const WebPlatformPlayer = ({ platform }: Props) => {
 
   return (
     <Container>
-      <TopBar platform={platform} onReload={handleReload} />
+      <TopBar platform={platform} onReload={handleReload} onClose={onClose} />
       <Wrapper>
         <CustomIframe
           src={`${url}?${loadDate}`}

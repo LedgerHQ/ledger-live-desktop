@@ -99,7 +99,6 @@ export const Separator: ThemedComponent<*> = styled.div`
 export type Props = {
   icon?: boolean,
   platform: string,
-  title: string,
   onReload: Function,
   onClose?: Function,
   onHelp?: Function,
@@ -125,7 +124,7 @@ const WebPlatformTopBar = ({ platform, onReload, onHelp, onClose }: Props) => {
         {/* <ItemContainer isInteractive onClick={onHelp}>
           <IconInfoCircle size={16} />
         </ItemContainer> */}
-        <ItemContainer isInteractive onClick={onHelp}>
+        <ItemContainer isInteractive onClick={onClose}>
           <IconClose size={16} />
         </ItemContainer>
       </RightContainer>
