@@ -9,7 +9,7 @@ import Box from "~/renderer/components/Box";
 import BigSpinner from "~/renderer/components/BigSpinner";
 import CrossCircle from "~/renderer/icons/CrossCircle";
 
-import { PlatformsConfig, getPlatformUrl } from "./config";
+import { getPlatformUrl } from "./config";
 import useLedgerLiveApi from "./api";
 import TopBar from "./TopBar";
 
@@ -54,8 +54,6 @@ const WebPlatformPlayer = ({ platform }: Props) => {
   const [widgetLoaded, setWidgetLoaded] = useState(false);
   const [widgetError, setWidgetError] = useState(false);
 
-  const platformConfig = PlatformsConfig[platform];
-
   const handleLoad = useCallback(() => {
     setWidgetError(false);
     setWidgetLoaded(true);
@@ -77,13 +75,13 @@ const WebPlatformPlayer = ({ platform }: Props) => {
     }
   }, [widgetLoaded, widgetError]);
 
-  if (!platformConfig) return "Oops no platform";
-
   const url = getPlatformUrl(platform, loadDate);
+
+  if (!url) return "Oops no platform";
 
   return (
     <Container>
-      <TopBar platform={platform} title={name} onReload={handleReload} />
+      <TopBar platform={platform} onReload={handleReload} />
       <Wrapper>
         <CustomIframe
           src={`${url}?${loadDate}`}

@@ -23,6 +23,7 @@ export const PlatformsConfig = {
       url: "https://paraswap-ui-ledger.herokuapp.com/?embed=true",
       appName: "paraswap",
     },
+    // $FlowFixMe
     icon: require("../../images/platform/paraswap.png").default,
   },
 };
@@ -50,4 +51,8 @@ export const getPlatformOrigin = (platform: string) => {
   }
 
   return new URL(config.url).origin;
+};
+
+export const getPlatformName = (platform: string) => {
+  return PlatformsConfig[platform]?.name || null;
 };
