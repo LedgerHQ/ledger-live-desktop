@@ -1,5 +1,5 @@
 // @flow
-import { useCallback, useMemo, createRef } from "react";
+import { useCallback, useMemo } from "react";
 import { listCryptoCurrencies, listTokens } from "@ledgerhq/live-common/lib/currencies";
 import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies/sortByMarketcap";
 
@@ -54,15 +54,14 @@ const PROVIDERS = {
   },
 };
 
-const exchangeProviderRef = createRef<{ id: string, iconResource: any }>();
-exchangeProviderRef.current = PROVIDERS.COINIFY;
+let exchangeProvider = PROVIDERS.COINIFY;
 
 // @TODO move this switch logic in settings maybe
 export const useExchangeProvider = () => {
   const setProvider = useCallback(
-    (p: { id: string, iconResource: any }) => (exchangeProviderRef.current = p),
+    (p: { id: string, iconResource: any }) => (exchangeProvider = p),
     [],
   );
 
-  return [exchangeProviderRef.current || PROVIDERS.COINIFY, setProvider];
+  return [exchangeProvider, setProvider];
 };
