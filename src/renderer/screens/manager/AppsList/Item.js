@@ -7,7 +7,6 @@ import type { State, Action, InstalledItem } from "@ledgerhq/live-common/lib/app
 
 import styled from "styled-components";
 import { Trans } from "react-i18next";
-import manager from "@ledgerhq/live-common/lib/manager";
 
 import ByteSize from "~/renderer/components/ByteSize";
 import Text from "~/renderer/components/Text";
@@ -15,7 +14,8 @@ import Box from "~/renderer/components/Box";
 
 import IconCheckFull from "~/renderer/icons/CheckFull";
 import AppActions from "./AppActions";
-import Image from "~/renderer/components/Image";
+
+import AppIcon from "./AppIcon";
 
 const AppRow = styled.div`
   display: flex;
@@ -91,7 +91,7 @@ const Item: React$ComponentType<Props> = ({
   return (
     <AppRow id={`managerAppsList-${name}`}>
       <Box flex="0.7" horizontal>
-        <Image alt="" resource={manager.getIconUrl(app.icon)} width={40} height={40} />
+        <AppIcon app={app} />
         <AppName>
           <Text ff="Inter|Bold" color="palette.text.shade100" fontSize={3}>{`${app.name}${
             currency ? ` (${currency.ticker})` : ""
