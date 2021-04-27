@@ -146,7 +146,7 @@ export default function Chart({
               minRotation: 0,
             },
             time: {
-              minUnit: "day",
+              minUnit: tickXScale === "day" ? "hour" : "day",
               displayFormats: {
                 quarter: "MMM YYYY",
               },
@@ -183,7 +183,7 @@ export default function Chart({
         },
       },
     }),
-    [renderTickY, theme, magnitude],
+    [theme.text.shade10, theme.text.shade60, tickXScale, magnitude, renderTickY],
   );
 
   useLayoutEffect(() => {
