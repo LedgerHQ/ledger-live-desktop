@@ -13,6 +13,7 @@ import Box, { Tabbable } from "~/renderer/components/Box";
 import IconReload from "~/renderer/icons/UpdateCircle";
 import IconClose from "~/renderer/icons/Cross";
 
+import { getPlatformName } from "./config";
 import LiveAppIcon from "./LiveAppIcon";
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
@@ -104,12 +105,14 @@ export type Props = {
   onHelp?: Function,
 };
 
-const WebPlatformTopBar = ({ platform, title, onReload, onHelp, onClose }: Props) => {
+const WebPlatformTopBar = ({ platform, onReload, onHelp, onClose }: Props) => {
+  const name = getPlatformName(platform);
+
   return (
     <Container>
       <TitleContainer>
         <LiveAppIcon platform={platform} size={24} />
-        <ItemContent>{title}</ItemContent>
+        <ItemContent>{name}</ItemContent>
       </TitleContainer>
       <Separator />
       <ItemContainer isInteractive onClick={onReload}>
