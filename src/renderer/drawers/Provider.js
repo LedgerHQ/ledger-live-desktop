@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 
 type State = {
   Component: *,
@@ -29,7 +29,9 @@ export const context = React.createContext<State>(initialState);
 const DrawerProvider = ({ children }: { children: React$Node }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  setDrawer = (Component, props) => dispatch({ Component, props, open: !!Component });
+  useEffect(() => {
+    setDrawer = (Component, props) => dispatch({ Component, props, open: !!Component });
+  }, []);
 
   return <context.Provider value={state}>{children}</context.Provider>;
 };
