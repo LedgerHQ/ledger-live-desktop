@@ -3,7 +3,7 @@ import { useEffect, useRef, useCallback } from "react";
 import { useStore, useDispatch } from "react-redux";
 import { JSONRPCServer } from "json-rpc-2.0";
 
-import { PlatformsConfig } from "./config";
+import { getPlatformOrigin } from "./config";
 
 import handlers from "./handlers";
 
@@ -13,7 +13,7 @@ const useLedgerLiveApi = (platform: string) => {
   const store = useStore();
   const server: { current: null | JSONRPCServer } = useRef(null);
 
-  const origin = new URL(PlatformsConfig[platform]?.url).origin;
+  const origin = getPlatformOrigin(platform);
 
   const handleMessage = useCallback(
     e => {
