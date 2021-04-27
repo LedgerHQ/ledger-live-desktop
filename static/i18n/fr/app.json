@@ -795,10 +795,6 @@
       "title": "POLKADOT staking",
       "description": "Vous pouvez maintenant staker, sécuriser et gérer vos DOT directement dans Ledger Live"
     },
-    "gateway": {
-      "title": "THE GATEWAY TO CRYPTO SERVICES",
-      "description": "Sécuriser, acheter, vendre, grandir et échanger des cryptos sur Ledger Live via nos partenaires"
-    },
     "sell": {
       "title": "vendre des crypto-monnaies",
       "description": "Vendez des Bitcoin avec notre partenaire directement depuis Ledger Live"
