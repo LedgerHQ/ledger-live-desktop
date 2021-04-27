@@ -9,7 +9,7 @@ import Box from "~/renderer/components/Box";
 import BigSpinner from "~/renderer/components/BigSpinner";
 import CrossCircle from "~/renderer/icons/CrossCircle";
 
-import { PlatformsConfig } from "./config";
+import { PlatformsConfig, getPlatformUrl } from "./config";
 import useLedgerLiveApi from "./api";
 import TopBar from "./TopBar";
 
@@ -79,7 +79,7 @@ const WebPlatformPlayer = ({ platform }: Props) => {
 
   if (!platformConfig) return "Oops no platform";
 
-  const { name, url } = platformConfig;
+  const url = getPlatformUrl(platform, loadDate);
 
   return (
     <Container>
