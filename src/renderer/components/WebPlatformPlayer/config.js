@@ -1,7 +1,7 @@
 // @flow
 import qs from "qs";
 
-const DAPP_BROWSER = "https://iframe-dapp-browser-test.vercel.app/app/dapp-browser";
+const DAPP_BROWSER = "http://localhost:3000/app/dapp-browser";
 
 export const PlatformsConfig = {
   debug: {
