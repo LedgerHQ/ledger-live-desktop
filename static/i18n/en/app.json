@@ -183,7 +183,27 @@
     "kyc": {
       "title": "Welcome to Swap",
       "subtitle": "Exchange crypto assets directly from your Ledger device. This service is not available in the US and a few other countries.",
-      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures.",
+      "wyre": {
+        "title": "Complete your KYC",
+        "subtitle": "To Swap freely with Wyre, we need to first verify your details",
+        "pending": {
+          "cta": "Continue",
+          "title": "KYC submitted for approval",
+          "subtitle": "Your KYC has been submitted and is pending approval.",
+          "link": "Learn more about KYC"
+        },
+        "form":{
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "adress1": "Street Address Line 1", 
+          "adress2": "Street Address Line 2", 
+          "city": "City", 
+          "state": "State", 
+          "country": "Country", 
+          "zipcode": "Zip Code" 
+        }
+      }
     },
     "form": {
       "amount": "Amount",
