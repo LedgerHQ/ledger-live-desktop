@@ -1,13 +1,19 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import styled, { css } from "styled-components";
 import { rgba } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import Box, { Tabbable } from "~/renderer/components/Box";
 
-const Container: ThemedComponent<{ isActive?: boolean }> = styled(Tabbable).attrs(p => ({
+const IconContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({ mb: 2 }))``;
+
+const FooterContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({ mt: "auto" }))``;
+
+const Container: ThemedComponent<{ isActive?: boolean, disabled?: boolean }> = styled(
+  Tabbable,
+).attrs(p => ({
   flex: 1,
   flexDirection: "column",
   alignItems: "center",
@@ -15,10 +21,20 @@ const Container: ThemedComponent<{ isActive?: boolean }> = styled(Tabbable).attr
   py: 5,
   fontSize: 3,
 }))`
-  cursor: pointer;
   min-width: 192px;
   border-radius: 4px;
-  margin: 12px;
+  cursor: ${p => (p.disabled ? "default" : "pointer")};
+
+  ${p =>
+    p.disabled &&
+    css`
+      background: ${p.theme.colors.palette.text.shade10};
+      opacity: 0.5;
+
+      ${IconContainer} {
+        filter: grayscale(100%);
+      }
+    `}
 
   &,
   &:focus {
@@ -42,28 +58,39 @@ const Title: ThemedComponent<{}> = styled(Box).attrs(p => ({
   color: p.theme.colors.palette.secondary.main,
 }))``;
 
-const Content: ThemedComponent<{}> = styled(Box).attrs(p => ({
-  p: 4,
-}))`
+const Content: ThemedComponent<{}> = styled(Box)`
+  margin-top: 16px;
   width: 100%;
+
+  :empty {
+    display: none;
+  }
 `;
-
-const IconContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({ mb: 2 }))``;
-
-const FooterContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({ mt: "auto" }))``;
 
 type Props = {
   children?: React$Node,
   title: string,
   isActive?: boolean,
+  disabled?: boolean,
   icon?: React$Node,
   footer?: React$Node,
   onClick?: Function,
 };
 
-const CardButton = ({ children, title, isActive, icon, footer, onClick }: Props) => {
+const CardButton = ({ children, title, icon, footer, onClick, isActive, disabled }: Props) => {
+  const handleClick = useCallback(() => {
+    if (!disabled && onClick) {
+      onClick();
+    }
+  }, [disabled, onClick]);
+
   return (
-    <Container isInteractive={!!onClick} isActive={isActive} onClick={onClick}>
+    <Container
+      isInteractive={!!onClick}
+      isActive={isActive}
+      onClick={handleClick}
+      disabled={disabled}
+    >
       {icon && <IconContainer>{icon}</IconContainer>}
       <Title>{title}</Title>
       <Content>{children}</Content>

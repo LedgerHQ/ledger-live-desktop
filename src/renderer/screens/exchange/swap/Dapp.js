@@ -22,12 +22,14 @@ const manifests = {
     name: "Debugger",
   },
   paraswap: {
-    name: "paraswap",
+    name: "ParaSwap",
     url: new URL(
       `http://localhost:3000/app/dapp-browser?url=${encodeURIComponent(
         "https://paraswap-ui-ledger.herokuapp.com/?embed=true",
       )}`,
     ),
+    // $FlowFixMe
+    icon: require("../../../images/platform/paraswap.png").default,
   },
 };
 

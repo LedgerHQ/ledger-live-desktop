@@ -6,14 +6,14 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 type Props = {
   platform: string,
   size: number,
-  inactive?: boolean,
-  icon: string,
+  disabled?: boolean,
+  icon?: string,
   name: string,
 };
 
-export const TokenIconWrapper: ThemedComponent<{
+export const IconWrapper: ThemedComponent<{
   size: number,
-  inactive?: boolean,
+  disabled?: boolean,
 }> = styled.div`
   font-size: ${p => p.size / 2}px;
   font-family: "Inter";
@@ -34,14 +34,14 @@ export const TokenIconWrapper: ThemedComponent<{
     height: ${p => p.size}px;
   }
 
-  filter: ${p => (p.inactive ? "greyscale(1.0)" : "")};
+  filter: ${p => (p.disabled ? "grayscale(100%)" : "")};
 `;
 
-const LiveAppIcon = ({ size, inactive, icon, name }: Props) => {
+const LiveAppIcon = ({ size, disabled, icon, name }: Props) => {
   return (
-    <TokenIconWrapper size={size}>
+    <IconWrapper size={size}>
       {icon ? <img src={icon} /> : name[0].toUpperCase() || "?"}
-    </TokenIconWrapper>
+    </IconWrapper>
   );
 };
 

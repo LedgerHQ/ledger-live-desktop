@@ -14,6 +14,7 @@ import IconReload from "~/renderer/icons/UpdateCircle";
 import IconClose from "~/renderer/icons/Cross";
 
 import type { Manifest } from "./type";
+import LiveAppIcon from "./LiveAppIcon";
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   horizontal: true,
@@ -104,13 +105,12 @@ export type Props = {
 };
 
 const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose }: Props) => {
-  const { name } = manifest;
-
-  //         <LiveAppIcon platform={platform} size={24} />
+  const { name, icon } = manifest;
 
   return (
     <Container>
       <TitleContainer>
+        <LiveAppIcon name={name} icon={icon} size={24} />
         <ItemContent>{name}</ItemContent>
       </TitleContainer>
       <Separator />

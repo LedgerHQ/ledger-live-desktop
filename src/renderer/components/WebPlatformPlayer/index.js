@@ -169,7 +169,8 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
           openModal("MODAL_REQUEST_ACCOUNT", {
             currencies,
             allowAddAccount,
-            onResult: account => resolve(serializePlatformAccount(accountToPlatformAccount(account))),
+            onResult: account =>
+              resolve(serializePlatformAccount(accountToPlatformAccount(account))),
             onCancel: reject,
           }),
         ),
