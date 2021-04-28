@@ -1,66 +1,64 @@
 // @flow
 
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProviders } from "@ledgerhq/live-common/lib/exchange/swap";
-import { SwapNoAvailableProviders } from "@ledgerhq/live-common/lib/errors";
-import type {
-  CryptoCurrency,
-  TokenCurrency,
-  Account,
-  AccountLike,
-} from "@ledgerhq/live-common/lib/types";
-import { hasAcceptedSwapKYCSelector, swapProvidersSelector } from "~/renderer/reducers/settings";
-import { setSwapProviders } from "~/renderer/actions/settings";
-import Landing from "~/renderer/screens/exchange/swap/Landing";
-import Loading from "~/renderer/screens/exchange/swap/Loading";
-import NotAvailable from "~/renderer/screens/exchange/swap/NotAvailable";
+import React, { useState, useCallback } from "react";
+import { useSelector } from "react-redux";
+import { Trans, useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
+import TabBar from "~/renderer/components/TabBar";
+import Box from "~/renderer/components/Box";
+import History from "~/renderer/screens/exchange/swap/History";
 import Form from "~/renderer/screens/exchange/swap/Form";
+import KYC from "~/renderer/screens/exchange/swap/KYC";
+import { swapKYCSelector } from "~/renderer/reducers/settings";
+import TrackPage from "~/renderer/analytics/TrackPage";
 
 type Props = {
-  defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
-  defaultAccount?: ?AccountLike,
-  defaultParentAccount?: ?Account,
-  setTabIndex: number => void,
+  providers: any,
+  provider: string,
 };
 
-const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount, setTabIndex }: Props) => {
-  const providers = useSelector(swapProvidersSelector);
-  const hasAcceptedSwapKYC = useSelector(hasAcceptedSwapKYCSelector);
+const Swap = ({ providers, provider }: Props) => {
+  const [tabIndex, setTabIndex] = useState(0);
 
-  const [hasUpToDateProviders, setHasUpToDateProviders] = useState(false);
-  const [tradeMethod, setTradeMethod] = useState("float");
-  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const history = useHistory();
+  const swapKYC = useSelector(swapKYCSelector);
+  const showWyreKYC = provider === "wyre" && swapKYC?.wyre?.status !== "approved";
 
-  useEffect(() => {
-    if (hasAcceptedSwapKYC) {
-      getProviders().then(maybeProviders => {
-        dispatch(
-          setSwapProviders(
-            maybeProviders instanceof SwapNoAvailableProviders ? [] : maybeProviders,
-          ),
-        );
-        setHasUpToDateProviders(true);
-      });
-    }
-  }, [dispatch, hasAcceptedSwapKYC]);
+  const onKYCCompleted = useCallback(() => {
+    history.push("/swap");
+  }, [history]);
 
-  return !hasAcceptedSwapKYC ? (
-    <Landing />
-  ) : !hasUpToDateProviders ? (
-    <Loading />
-  ) : !providers?.length ? (
-    <NotAvailable />
-  ) : (
-    <Form
-      providers={providers}
-      defaultCurrency={defaultCurrency}
-      defaultAccount={defaultAccount}
-      defaultParentAccount={defaultParentAccount}
-      setTabIndex={setTabIndex}
-      tradeMethod={tradeMethod}
-      setTradeMethod={setTradeMethod}
-    />
+  return (
+    <Box flex={1} pb={6}>
+      <TrackPage category="Swap" />
+      <Box horizontal>
+        <Box
+          grow
+          ff="Inter|SemiBold"
+          fontSize={7}
+          mb={provider ? 3 : 0}
+          color="palette.text.shade100"
+          data-e2e="swapPage_title"
+        >
+          <Trans i18nKey="swap.title" />
+        </Box>
+      </Box>
+      <TabBar
+        tabs={[t("swap.tabs.exchange"), t("swap.tabs.history")]}
+        onIndexChange={setTabIndex}
+        index={tabIndex}
+      />
+      {tabIndex === 0 ? (
+        showWyreKYC ? (
+          <KYC onContinue={onKYCCompleted} />
+        ) : (
+          <Form providers={providers} provider={provider} setTabIndex={setTabIndex} />
+        )
+      ) : (
+        <History />
+      )}
+    </Box>
   );
 };
 

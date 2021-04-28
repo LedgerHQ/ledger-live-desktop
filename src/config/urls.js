@@ -152,6 +152,10 @@ export const urls = {
         tos: "https://changelly.com/terms-of-use",
         support: "https://support.changelly.com/en/support/tickets/new",
       },
+      wyre: {
+        main: "https://sendwyre.com/",
+        tos: "https://support.sendwyre.com/hc/en-us",
+      },
     },
   },
   exchange: {

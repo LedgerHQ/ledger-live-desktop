@@ -198,10 +198,78 @@
       "subtitle": "Go to manager and update {{appName}} app to swap assets.",
       "cta": "Go to manager"
     },
-    "kyc": {
+    "providers": {
+      "title": "Choose a provider to swap crypto",
+      "learnMore": "What is Swap?",
+      "kycRequired": "KYC Required",
+      "wyre": {
+        "bullets": [
+          "US-only (soon Europe, Africa and Asia)",
+          "Multi coins and tokens",
+          "Centralized"
+        ]
+      },
+      "changelly": {
+        "bullets": ["BTC, ETH, USDT and 50+ others", "Multi-currency", "Centralized"]
+      },
+      "paraswap": {
+        "bullets": [
+          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
+          "Ethereum & ERC20 tokens",
+          "Decentralized & Trustless"
+        ]
+      },
+      "cta": "Continue",
+      "kyc": {
+        "notAvailable": "{{provider}} is unavailable in your location",
+        "status": {
+          "required": "KYC Required",
+          "pending": "KYC Pending",
+          "approved": "KYC Approved!",
+          "closed": "KYC Rejected"
+        }
+      }
+    },
+    "ip": {
       "title": "Welcome to Swap",
-      "subtitle": "Exchange crypto assets directly from your Ledger device. This service is not available in the US and a few other countries.",
+      "subtitle": "Exchange crypto assets directly from your Ledger device.",
       "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+    },
+    "kyc": {
+      "wyre": {
+        "disclaimer":"Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
+        "policy": "Privacy Policy",
+        "title": "Verify your identity",
+        "subtitle": "Please enter your information to swap with Wyre.",
+        "pending": {
+          "cta": "Continue",
+          "title": "KYC submitted for approval",
+          "subtitle": "Your KYC has been submitted and is pending approval.",
+          "link": "Learn more about KYC"
+        },
+        "closed": {
+          "cta": "Reset KYC",
+          "title": "KYC application rejected",
+          "subtitle": "Wyre rejected the data you provided for KYC purposes",
+          "link": "Learn more about KYC"
+        },
+        "form":{
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "address1": "Street Address Line 1", 
+          "address2": "Street Address Line 2", 
+          "city": "City", 
+          "state": "State", 
+          "country": "Country", 
+          "zipcode": "Zip Code" ,
+          "firstNamePlaceholder": "Enter your first name",
+          "lastNamePlaceholder": "Enter your last name",
+          "address1Placeholder": "Eg. 13, Maple street", 
+          "address2Placeholder": "Eg. 13, Maple street", 
+          "cityPlaceholder": "Eg. San José", 
+          "zipcodePlaceholder": "Enter your 5 digit Zip code" 
+        }
+      }
     },
     "form": {
       "amount": "Amount",
@@ -296,28 +364,6 @@
       "toProvider": "Provider address",
       "initialAmount": "Initial amount",
       "creditedAmount": "Credited amount"
-    },
-    "providers": {
-      "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
-      "kycRequired": "KYC Required",
-      "wyre": {
-        "bullets": [
-          "US-only (soon Europe, Africa and Asia)",
-          "Multi coins and tokens",
-          "Centralized"
-        ]
-      },
-      "changelly": {
-        "bullets": ["BTC, ETH, USDT and 50+ others", "Multi-currency", "Centralized"]
-      },
-      "paraswap": {
-        "bullets": [
-          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-          "Ethereum & ERC20 tokens",
-          "Decentralized & Trustless"
-        ]
-      }
     }
   },
   "fullNode": {

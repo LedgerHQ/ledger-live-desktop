@@ -18,13 +18,9 @@ import getExchangeRates from "@ledgerhq/live-common/lib/exchange/swap/getExchang
 import { getAbandonSeedAddress } from "@ledgerhq/live-common/lib/currencies";
 import ArrowSeparator from "~/renderer/components/ArrowSeparator";
 import {
-  swapSupportedCurrenciesSelector,
-  flattenedSwapSupportedCurrenciesSelector,
-} from "~/renderer/reducers/settings";
-import {
   reducer,
-  getValidToCurrencies,
-  getEnabledTradeMethods,
+  getSupportedCurrencies,
+  getEnabledTradingMethods,
 } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import type { ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -40,6 +36,7 @@ import TradeMethod from "~/renderer/screens/exchange/swap/Form/TradeMethod";
 import AnimatedArrows from "./AnimatedArrows";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 import { openModal } from "~/renderer/actions/modals";
+import { swapKYCSelector } from "~/renderer/reducers/settings";
 
 type Method = "fixed" | "float";
 type Props = {
@@ -47,8 +44,8 @@ type Props = {
   defaultAccount?: ?AccountLike,
   defaultParentAccount?: ?Account,
   setTabIndex: number => void,
-  tradeMethod: Method,
-  setTradeMethod: Method => void,
+  providers: *,
+  provider: string,
 };
 
 const Form = ({
@@ -56,14 +53,16 @@ const Form = ({
   defaultAccount,
   defaultParentAccount,
   setTabIndex,
-  tradeMethod,
-  setTradeMethod,
+  providers,
+  provider,
 }: Props) => {
   const modalsState = useSelector(modalsStateSelector);
   const reduxDispatch = useDispatch();
-  const selectableCurrencies = useSelector(swapSupportedCurrenciesSelector);
-  const flattenedCurrencies = useSelector(flattenedSwapSupportedCurrenciesSelector);
+  const swapKYC = useSelector(swapKYCSelector);
+  const providerKYC = swapKYC[provider];
+  const selectableCurrencies = getSupportedCurrencies({ providers, provider });
   const [shouldFocusOnAmountNonce, setShouldFocusOnAmountNonce] = useState(0);
+  const [tradeMethod, setTradeMethod] = useState<Method>("fixed");
 
   const [state, dispatch] = useReducer(reducer, {
     useAllAmount: false,
@@ -98,14 +97,19 @@ const Form = ({
   const enabledTradeMethods = useMemo(
     () =>
       fromCurrency && toCurrency
-        ? getEnabledTradeMethods({ selectableCurrencies, fromCurrency, toCurrency })
+        ? getEnabledTradingMethods({ providers, provider, fromCurrency, toCurrency })
         : [],
-    [fromCurrency, selectableCurrencies, toCurrency],
+    [fromCurrency, provider, providers, toCurrency],
   );
 
   const validToCurrencies = useMemo(
-    () => getValidToCurrencies({ selectableCurrencies, fromCurrency }),
-    [fromCurrency, selectableCurrencies],
+    () =>
+      getSupportedCurrencies({
+        providers,
+        fromCurrency: fromCurrency || undefined,
+        provider,
+      }),
+    [fromCurrency, provider, providers],
   );
 
   const onCompleteSwap = useCallback(() => setTabIndex(1), [setTabIndex]);
@@ -204,14 +208,16 @@ const Form = ({
         return;
       dispatch({ type: "onSetLoadingRates", payload: { loadingRates: true } });
       try {
+        // $FlowFixMe forgot to add the third param to the type of getExchangeRates
         const rates: Array<ExchangeRate> = await getExchangeRates(
           { fromAccount: account, fromParentAccount: parentAccount, toAccount, toParentAccount },
           transaction,
+          providerKYC?.id,
         );
         if (ignore) return;
-        let rate = rates.find(rate => rate.tradeMethod === tradeMethod);
-        rate = rate || rates.find(rate => !rate.tradeMethod); // Fixme, we need the trademethod even on error
-
+        const rate = rates.find(
+          rate => rate.tradeMethod === tradeMethod && rate.provider === provider,
+        );
         if (rate?.error) {
           dispatch({ type: "onSetError", payload: { error: rate.error } });
         } else if (rate) {
@@ -245,6 +251,8 @@ const Form = ({
     parentAccount,
     toParentAccount,
     toCurrency,
+    providerKYC,
+    provider,
   ]);
 
   // Deselect the tradeMethod if not available for current pair
@@ -258,7 +266,7 @@ const Form = ({
     }
   }, [enabledTradeMethods, setTradeMethod, tradeMethod]);
 
-  const { provider, magnitudeAwareRate, toAmount } = exchangeRate || {};
+  const { magnitudeAwareRate, toAmount } = exchangeRate || {};
   const { amount = BigNumber(0) } = transaction || {};
 
   return (
@@ -287,7 +295,7 @@ const Form = ({
               amount={amount}
               currency={fromCurrency}
               error={error}
-              currencies={flattenedCurrencies}
+              currencies={selectableCurrencies}
               onCurrencyChange={fromCurrency =>
                 dispatch({ type: "onSetFromCurrency", payload: { fromCurrency } })
               }

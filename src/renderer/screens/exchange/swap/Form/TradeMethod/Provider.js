@@ -10,7 +10,8 @@ import Price from "~/renderer/components/Price";
 import Text from "~/renderer/components/Text";
 import IconLock from "~/renderer/icons/Lock";
 import IconLockOpen from "~/renderer/icons/LockOpen";
-import IconChangelly from "~/renderer/icons/Changelly";
+import IconChangelly from "~/renderer/icons/providers/changelly";
+import IconWyre from "~/renderer/icons/providers/wyre";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import CountdownTimer from "~/renderer/components/CountdownTimer";
 import AnimatedCountdown from "~/renderer/components/AnimatedCountdown";
@@ -28,14 +29,10 @@ const ProviderWrapper: ThemedComponent<{}> = styled(Box).attrs({ horizontal: tru
 
 const ProviderIconWrapper = styled.div`
   margin-left: 10px;
-  height: 40px;
-  width: 40px;
-  border-radius: 40px;
   display: flex;
   color: white;
   align-items: center;
   justify-content: center;
-  background-color: #3ac384;
 `;
 
 export const CountdownTimerWrapper: ThemedComponent<{}> = styled(Box)`
@@ -138,7 +135,7 @@ const Provider = ({
         ) : null}
       </Box>
       <ProviderIconWrapper>
-        <IconChangelly size={20} />
+        {provider === "changelly" ? <IconChangelly size={20} /> : <IconWyre size={20} />}
       </ProviderIconWrapper>
     </ProviderWrapper>
   );

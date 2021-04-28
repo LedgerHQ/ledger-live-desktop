@@ -12,7 +12,7 @@ import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import swapIllustration from "~/renderer/images/swap.png";
 import CheckBox from "~/renderer/components/CheckBox";
 import Button from "~/renderer/components/Button";
-import { setHasAcceptedSwapKYC } from "~/renderer/actions/settings";
+import { setSwapHasAcceptedIPSharing } from "~/renderer/actions/settings";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 
@@ -64,21 +64,23 @@ const Footer = styled.div`
   padding: 24px;
 `;
 
-const KYC = () => {
+const Landing = () => {
   const [isChecked, setIsChecked] = useState(false);
   const dispatch = useDispatch();
-  const onAcceptSwapKYC = useCallback(() => dispatch(setHasAcceptedSwapKYC(true)), [dispatch]);
+  const onAcceptSwapIPSharing = useCallback(() => dispatch(setSwapHasAcceptedIPSharing(true)), [
+    dispatch,
+  ]);
 
   return (
     <Card flex={1} pt={53} justifyContent={"space-between"}>
-      <TrackPage category="Swap" name="KYC Landing" />
+      <TrackPage category="Swap" name="IP Landing" />
       <Box flex={1} justifyContent={"center"}>
         <Illustration />
         <Title ff="Inter|SemiBold">
-          <Trans i18nKey={"swap.kyc.title"} />
+          <Trans i18nKey={"swap.ip.title"} />
         </Title>
         <Subtitle ff="Inter|Medium">
-          <Trans i18nKey={"swap.kyc.subtitle"} />
+          <Trans i18nKey={"swap.ip.subtitle"} />
         </Subtitle>
         <Box alignSelf={"center"} mb={44} mt={2}>
           <LinkWithExternalIcon
@@ -91,16 +93,16 @@ const KYC = () => {
         </Box>
       </Box>
       <Footer>
-        <CheckBox id={"swap-landing-kyc-tos"} isChecked={isChecked} onChange={setIsChecked} />
+        <CheckBox id={"swap-landing-ip-tos"} isChecked={isChecked} onChange={setIsChecked} />
         <Disclaimer ff="Inter|Regular" onClick={() => setIsChecked(!isChecked)}>
-          <Trans i18nKey={"swap.kyc.disclaimer"} />
+          <Trans i18nKey={"swap.ip.disclaimer"} />
         </Disclaimer>
         <Button
-          id={"swap-landing-kyc-continue-button"}
+          id={"swap-landing-ip-continue-button"}
           disabled={!isChecked}
           primary
-          onClick={onAcceptSwapKYC}
-          event={"SwapAcceptKYC"}
+          onClick={onAcceptSwapIPSharing}
+          event={"SwapAcceptIPSharing"}
         >
           <Trans i18nKey="common.continue" />
         </Button>
@@ -109,4 +111,4 @@ const KYC = () => {
   );
 };
 
-export default KYC;
+export default Landing;
