@@ -275,6 +275,30 @@
       "toProvider": "Provider address",
       "initialAmount": "Initial amount",
       "creditedAmount": "Credited amount"
+    },
+    "providers": {
+      "title": "Choose a provider to swap crypto",
+      "learnMore": "What is Swap?",
+      "wyre": {
+        "bullets": [
+          "Centralized",
+          "Multi coins and tokens",
+          "US-only (soon Europe, Africa and Asia)"
+        ]
+      },
+      "changelly": {
+        "bullets": [
+          "Centralized",
+          "Multi coins and tokens",
+          "Europe, Asia, Africa and Americas"
+        ]
+      },
+      "paraswap": {
+        "bullets": [
+          "Decentralized",
+          "Ethereum & ERC20 tokens"
+        ]
+      }
     }
   },
   "fullNode": {

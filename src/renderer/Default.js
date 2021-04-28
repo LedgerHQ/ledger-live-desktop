@@ -10,7 +10,7 @@ import Accounts from "~/renderer/screens/accounts";
 import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
 import Swap from "~/renderer/screens/exchange/swap";
-import SwapSelectProvider from "~/renderer/screens/exchange/swap/SelectProvider";
+import SwapFormOrHistory from "~/renderer/screens/exchange/swap/FormOrHistory";
 import SwapDapp from "~/renderer/screens/exchange/swap/Dapp";
 import Account from "~/renderer/screens/account";
 import Asset from "~/renderer/screens/asset";
@@ -106,8 +106,12 @@ export default function Default() {
                     <Route path="/account/:parentId/:id" render={props => <Account {...props} />} />
                     <Route path="/account/:id" render={props => <Account {...props} />} />
                     <Route path="/asset/:assetId+" render={(props: any) => <Asset {...props} />} />
-                    <Route path="/swap" render={props => <SwapSelectProvider {...props} />} exact />
-                    <Route path="/swap/provider" render={props => <Swap {...props} />} exact />
+                    <Route path="/swap" render={props => <Swap {...props} />} exact />
+                    <Route
+                      path="/swap/integrated"
+                      render={props => <SwapFormOrHistory {...props} />}
+                      exact
+                    />
                     <Route
                       path="/swap/dapp/:platform"
                       render={(props: any) => <SwapDapp {...props} />}

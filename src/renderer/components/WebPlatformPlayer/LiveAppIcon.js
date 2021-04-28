@@ -8,10 +8,10 @@ import { PlatformsConfig } from "./config";
 type Props = {
   platform: string,
   size: number,
-  inactive?: boolean,
+  disabled?: boolean,
 };
 
-export const TokenIconWrapper: ThemedComponent<{
+export const IconWrapper: ThemedComponent<{
   size: number,
   inactive?: boolean,
 }> = styled.div`
@@ -34,20 +34,20 @@ export const TokenIconWrapper: ThemedComponent<{
     height: ${p => p.size}px;
   }
 
-  filter: ${p => (p.inactive ? "greyscale(1.0)" : "")};
+  filter: ${p => (p.disabled ? "grayscale(100%)" : "")};
 `;
 
-const LiveAppIcon = ({ platform, size, inactive }: Props) => {
+const LiveAppIcon = ({ platform, size, disabled }: Props) => {
   const platformConfig = PlatformsConfig[platform];
 
   return (
-    <TokenIconWrapper size={size}>
+    <IconWrapper size={size}>
       {platformConfig?.icon ? (
         <img src={platformConfig?.icon} />
       ) : (
         platformConfig?.name[0].toUpperCase() || "?"
       )}
-    </TokenIconWrapper>
+    </IconWrapper>
   );
 };
 
