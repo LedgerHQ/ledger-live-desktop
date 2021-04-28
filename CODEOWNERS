@@ -1,0 +1,4 @@
+src/*.js      @ledgerhq/live-squad-yellow @ledgerhq/live-squad-blue
+package.json  @ledgerhq/ledger-live-maintainer
+/tests/       @ledgerhq/live-qa
+*             @ledgerhq/ledger-live-maintainer

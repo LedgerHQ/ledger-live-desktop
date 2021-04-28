@@ -38,12 +38,22 @@ import { urls } from "~/config/urls";
 import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
 import ExternalLinkButton from "../ExternalLinkButton";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import { Rotating } from "~/renderer/components/Spinner";
+import ProgressCircle from "~/renderer/components/ProgressCircle";
 
-const AnimationWrapper: ThemedComponent<{ modelId: DeviceModelId }> = styled.div`
+const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
   width: 600px;
   max-width: 100%;
   height: ${p => (p.modelId === "blue" ? 300 : 200)}px;
   padding-bottom: ${p => (p.modelId === "blue" ? 20 : 0)}px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ProgressWrapper: ThemedComponent<{}> = styled.div`
+  padding: 24px;
   align-self: center;
   display: flex;
   align-items: center;
@@ -94,6 +104,15 @@ const Title = styled(Text).attrs({
   fontSize: 5,
 })`
   white-space: pre-line;
+`;
+
+const SubTitle = styled(Text).attrs({
+  ff: "Inter|Regular",
+  color: "palette.text.shade100",
+  textAlign: "center",
+  fontSize: 3,
+})`
+  margin-top: 8px;
 `;
 
 const ErrorTitle = styled(Text).attrs({
@@ -195,6 +214,56 @@ export const renderRequiresAppInstallation = ({ appName }: { appName: string }) 
   </Wrapper>
 );
 
+export const renderInstallingApp = ({
+  appName,
+  progress,
+}: {
+  appName: string,
+  progress: number,
+}) => {
+  return (
+    <Wrapper id="deviceAction-loading">
+      <Header />
+      <ProgressWrapper>
+        {progress ? (
+          <ProgressCircle size={58} progress={progress} />
+        ) : (
+          <Rotating size={58}>
+            <ProgressCircle hideProgress size={58} progress={0.06} />
+          </Rotating>
+        )}
+      </ProgressWrapper>
+      <Footer>
+        <Title>
+          <Trans i18nKey="DeviceAction.installApp" values={{ appName }} />
+        </Title>
+        <SubTitle>
+          <Trans i18nKey="DeviceAction.installAppDescription" />
+        </SubTitle>
+      </Footer>
+    </Wrapper>
+  );
+};
+
+export const renderListingApps = () => (
+  <Wrapper id="deviceAction-loading">
+    <Header />
+    <ProgressWrapper>
+      <Rotating size={58}>
+        <ProgressCircle hideProgress size={58} progress={0.06} />
+      </Rotating>
+    </ProgressWrapper>
+    <Footer>
+      <Title>
+        <Trans i18nKey="DeviceAction.listApps" />
+      </Title>
+      <SubTitle>
+        <Trans i18nKey="DeviceAction.listAppsDescription" />
+      </SubTitle>
+    </Footer>
+  </Wrapper>
+);
+
 export const renderAllowManager = ({
   modelId,
   type,
@@ -282,6 +351,7 @@ export const renderWarningOutdated = ({
 
 export const renderError = ({
   error,
+  withOpenManager,
   onRetry,
   withExportLogs,
   list,
@@ -289,6 +359,7 @@ export const renderError = ({
   warning,
 }: {
   error: Error,
+  withOpenManager?: boolean,
   onRetry?: () => void,
   withExportLogs?: boolean,
   list?: boolean,
@@ -325,6 +396,7 @@ export const renderError = ({
           mx={1}
         />
       ) : null}
+      {withOpenManager ? <OpenManagerButton ml={4} mt={0} /> : null}
       {onRetry ? (
         <Button primary ml={withExportLogs ? 4 : 0} onClick={onRetry}>
           <Trans i18nKey="common.retry" />
