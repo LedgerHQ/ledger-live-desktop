@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import manager from "@ledgerhq/live-common/lib/manager";
 import type { FirmwareUpdateContext, DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
+import { hasFinalFirmware } from "@ledgerhq/live-common/lib/hw/hasFinalFirmware";
 import { command } from "~/renderer/commands";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -144,7 +145,9 @@ const StepFullFirmwareInstall = ({
         setDisplayedOnDevice(displayed);
       },
       complete: () => {
-        transitionTo(firmware.shouldFlashMCU ? "updateMCU" : "updating");
+        transitionTo(
+          firmware.shouldFlashMCU || hasFinalFirmware(firmware.final) ? "updateMCU" : "updating",
+        );
       },
       error: error => {
         setError(error);
