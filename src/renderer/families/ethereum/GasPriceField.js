@@ -13,22 +13,24 @@ type Props = {
   account: Account,
   transaction: Transaction,
   status: TransactionStatus,
-  onChange: Transaction => void,
+  updateTransaction: (updater: any) => void,
 };
 
 const fallbackGasPrice = inferDynamicRange(BigNumber(10e9));
 let lastNetworkGasPrice; // local cache of last value to prevent extra blinks
 
-const FeesField = ({ onChange, account, transaction, status }: Props) => {
+const FeesField = ({ account, transaction, status, updateTransaction }: Props) => {
   invariant(transaction.family === "ethereum", "FeeField: ethereum family expected");
 
   const bridge = getAccountBridge(account);
 
   const onGasPriceChange = useCallback(
     gasPrice => {
-      onChange(bridge.updateTransaction(transaction, { gasPrice, feesStrategy: "advanced" }));
+      updateTransaction(
+        bridge.updateTransaction(transaction, { gasPrice, feesStrategy: "advanced" }),
+      );
     },
-    [onChange, transaction, bridge],
+    [updateTransaction, bridge, transaction],
   );
 
   const networkGasPrice = transaction.networkInfo && transaction.networkInfo.gasPrice;
