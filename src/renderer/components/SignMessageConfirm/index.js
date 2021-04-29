@@ -2,8 +2,7 @@
 
 import invariant from "invariant";
 import React from "react";
-import { withTranslation } from "react-i18next";
-import type { TFunction } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { TypedMessageData } from "@ledgerhq/live-common/lib/families/ethereum/types";
@@ -15,6 +14,7 @@ import Text from "~/renderer/components/Text";
 import useTheme from "~/renderer/hooks/useTheme";
 import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/rendering";
 import SignMessageConfirmField from "./SignMessageConfirmField";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 const FieldText = styled(Text).attrs(() => ({
   ml: 1,
@@ -43,21 +43,21 @@ const TextField = ({ field }: FieldComponentProps) => {
   );
 };
 
-const Container = styled(Box).attrs(() => ({
+const Container: ThemedComponent<*> = styled(Box).attrs(() => ({
   alignItems: "center",
   fontSize: 4,
   pb: 4,
 }))``;
 
 type Props = {
-  t: TFunction,
   device: Device,
   account: AccountLike,
   signMessageRequested: TypedMessageData | MessageData,
 };
 
-const SignMessageConfirm = ({ t, device, account, signMessageRequested: message }: Props) => {
+const SignMessageConfirm = ({ device, account, signMessageRequested: message }: Props) => {
   const type = useTheme("colors.palette.type");
+  const { t } = useTranslation();
 
   if (!device) return null;
 
@@ -106,4 +106,4 @@ const SignMessageConfirm = ({ t, device, account, signMessageRequested: message 
   );
 };
 
-export default withTranslation()(SignMessageConfirm);
+export default SignMessageConfirm;

@@ -46,13 +46,13 @@ Application.prototype.startChromeDriver = function() {
 };
 
 const getMockDeviceEvent = app => async (...events) => {
-  return await app.client.execute(e => {
+  return app.client.execute(e => {
     window.mock.events.mockDeviceEvent(...e);
   }, events);
 };
 
 const getWCClientMock = app => async (method, args) => {
-  return await app.client.execute(
+  return app.client.execute(
     ([method, args]) => {
       window.WCinstance[method](...args);
     },

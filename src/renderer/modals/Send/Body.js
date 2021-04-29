@@ -38,7 +38,7 @@ type OwnProps = {|
     startWithWarning?: boolean,
     recipient?: string,
     amount?: BigNumber,
-    disableBacks?: [string],
+    disableBacks?: string[],
     transaction?: Transaction,
     onConfirmationHandler: Function,
     onFailHandler: Function,

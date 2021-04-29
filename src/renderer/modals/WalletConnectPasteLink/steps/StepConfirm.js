@@ -44,8 +44,6 @@ const AccountContainer: ThemedComponent<*> = styled(Box)`
 export default function StepConfirm({ account, link, setLink }: StepProps) {
   const wcContext = useContext(context);
 
-  console.log(wcContext);
-
   return (
     <Box flow={1}>
       {wcContext.status === STATUS.ERROR ? (
