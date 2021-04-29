@@ -11,14 +11,16 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 const Root = (props: *) => {
   const [isAdvanceMode, setAdvanceMode] = useState(!props.transaction.feesStrategy);
   const strategies = useFeesStrategy(props.transaction);
-  const { account, transaction, updateTransaction } = props;
+  const { account, updateTransaction } = props;
   const bridge = getAccountBridge(account);
 
   const onFeeStrategyClick = useCallback(
     ({ amount, feesStrategy }) => {
-      updateTransaction(bridge.updateTransaction(transaction, { gasPrice: amount, feesStrategy }));
+      updateTransaction(transaction =>
+        bridge.updateTransaction(transaction, { gasPrice: amount, feesStrategy }),
+      );
     },
-    [updateTransaction, bridge, transaction],
+    [updateTransaction, bridge],
   );
 
   return (

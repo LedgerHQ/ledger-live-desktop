@@ -72,11 +72,11 @@ const Fields = ({
 
   const onFeeStrategyClick = useCallback(
     ({ amount, feesStrategy }) => {
-      updateTransaction(
+      updateTransaction(transaction =>
         bridge.updateTransaction(transaction, { feePerByte: amount, feesStrategy }),
       );
     },
-    [transaction, updateTransaction, bridge],
+    [updateTransaction, bridge],
   );
 
   return (

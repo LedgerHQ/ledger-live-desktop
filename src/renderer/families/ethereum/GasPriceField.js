@@ -26,11 +26,11 @@ const FeesField = ({ account, transaction, status, updateTransaction }: Props) =
 
   const onGasPriceChange = useCallback(
     gasPrice => {
-      updateTransaction(
+      updateTransaction(transaction =>
         bridge.updateTransaction(transaction, { gasPrice, feesStrategy: "advanced" }),
       );
     },
-    [updateTransaction, bridge, transaction],
+    [updateTransaction, bridge],
   );
 
   const networkGasPrice = transaction.networkInfo && transaction.networkInfo.gasPrice;
