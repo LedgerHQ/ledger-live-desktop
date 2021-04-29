@@ -139,6 +139,9 @@ const StepReceiveFunds = ({
   const address = mainAccount.freshAddress;
   const [modalVisible, setModalVisible] = useState(false);
 
+  const hideQRCodeModal = useCallback(() => setModalVisible(false), [setModalVisible]);
+  const showQRCodeModal = useCallback(() => setModalVisible(true), [setModalVisible]);
+
   const confirmAddress = useCallback(async () => {
     try {
       if (getEnv("MOCK")) {
@@ -157,12 +160,14 @@ const StepReceiveFunds = ({
           })
           .toPromise();
         onChangeAddressVerified(true);
+        hideQRCodeModal();
         transitionTo("receive");
       }
     } catch (err) {
       onChangeAddressVerified(false, err);
+      hideQRCodeModal();
     }
-  }, [device, mainAccount, transitionTo, onChangeAddressVerified]);
+  }, [device, mainAccount, transitionTo, onChangeAddressVerified, hideQRCodeModal]);
 
   const onVerify = useCallback(() => {
     // if device has changed since the beginning, we need to re-entry device
@@ -172,9 +177,6 @@ const StepReceiveFunds = ({
     onChangeAddressVerified(null);
     onResetSkip();
   }, [device, onChangeAddressVerified, onResetSkip, transitionTo, isAddressVerified]);
-
-  const hideQRCodeModal = useCallback(() => setModalVisible(false), [setModalVisible]);
-  const showQRCodeModal = useCallback(() => setModalVisible(true), [setModalVisible]);
 
   // when address need verification we trigger it on device
   useEffect(() => {
