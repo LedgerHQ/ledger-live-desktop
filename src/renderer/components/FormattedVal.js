@@ -95,25 +95,27 @@ function FormattedVal(props: Props) {
     ...p
   } = props;
   const valProp = props.val;
-  let val = valProp instanceof BigNumber ? valProp : BigNumber(valProp);
+  let val: BigNumber = valProp instanceof BigNumber ? valProp : BigNumber(valProp);
+  console.log(val);
 
   invariant(val, "FormattedVal require a `val` prop. Received `undefined`");
 
-  const isNegative = val < 0;
+  const isZero = val.isZero();
+  const isNegative = val.isNegative() && !isZero;
 
   let text = "";
 
   if (isPercent) {
     // FIXME move out the % feature of this component... totally unrelated to currency & annoying for flow type.
     text = `${alwaysShowSign ? (isNegative ? "- " : "+ ") : ""}${(isNegative
-      ? -val
+      ? val.negated()
       : val
     ).toString()} %`;
   } else {
     invariant(unit, "FormattedVal require a `unit` prop. Received `undefined`");
 
     if (withIcon && isNegative) {
-      val = -val;
+      val = val.negated();
     }
 
     text = formatCurrencyUnit(unit, val, {
@@ -147,7 +149,7 @@ function FormattedVal(props: Props) {
         <Box horizontal alignItems="center">
           <Box mr={1}>
             <I color={marketColor}>
-              {isNegative ? <IconBottom size={24} /> : <IconTop size={24} />}
+              {isNegative ? <IconBottom size={24} /> : isZero ? null : <IconTop size={24} />}
             </I>
           </Box>
           <Box horizontal alignItems="center">
