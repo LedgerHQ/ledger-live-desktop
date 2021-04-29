@@ -99,6 +99,7 @@ function FormattedVal(props: Props) {
   invariant(val, "FormattedVal require a `val` prop. Received `undefined`");
 
   const isNegative = val.isNegative() && !val.isZero();
+  const isZero = val.isZero();
 
   let text = "";
 
@@ -146,7 +147,7 @@ function FormattedVal(props: Props) {
         <Box horizontal alignItems="center">
           <Box mr={1}>
             <I color={marketColor}>
-              {isNegative ? <IconBottom size={24} /> : <IconTop size={24} />}
+              {isNegative ? <IconBottom size={24} /> : isZero ? null : <IconTop size={24} />}
             </I>
           </Box>
           <Box horizontal alignItems="center">
