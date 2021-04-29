@@ -1537,10 +1537,10 @@
     node-pre-gyp "^0.17.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^19.4.0":
-  version "19.4.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-19.4.0.tgz#c1bf082e6ac5bf1d901c3eadcb5b47f06279b185"
-  integrity sha512-wu36apQzIuGmcQeMj/8gUM7O1foRcsy/pAYpK5OQg4IxJxvBO2Ec83q6BfFU6YM/3BtX1ozqVxl/f9rw3EC1fw==
+"@ledgerhq/live-common@19.6.2":
+  version "19.6.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-19.6.2.tgz#26a3dc782231867c0d19c3fd3c44fd9d30259ce4"
+  integrity sha512-Z/ZTejaNw9IH7RDJpVI0l2DPp8w9sHC8jGpkcrXSEMG5yI6ktRVe8ScJu3VN2B/stpe8tIAzaMP0lAY75COFdw==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/cryptoassets" "5.49.0"
@@ -1561,7 +1561,7 @@
     "@ledgerhq/logs" "5.49.0"
     "@polkadot/types" "3.11.1"
     "@walletconnect/client" "1.4.1"
-    "@xstate/react" "^1.3.1"
+    "@xstate/react" "^1.3.2"
     async "^3.2.0"
     axios "0.21.1"
     bchaddrjs "^0.5.2"
@@ -1590,7 +1590,7 @@
     ripemd160 "^2.0.2"
     ripple-binary-codec "^1.1.2"
     ripple-bs58check "^2.0.2"
-    ripple-lib "1.9.3"
+    ripple-lib "1.9.4"
     rxjs "^6.6.7"
     rxjs-compat "^6.6.7"
     secp256k1 "^4.0.2"
@@ -1599,7 +1599,7 @@
     stellar-sdk "^8.1.1"
     triple-beam "^1.3.0"
     winston "^3.3.3"
-    xstate "^4.17.1"
+    xstate "^4.18.0"
 
 "@ledgerhq/logs@5.49.0", "@ledgerhq/logs@^5.49.0":
   version "5.49.0"
@@ -2839,6 +2839,14 @@
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@xstate/react/-/react-1.3.1.tgz#5794e1c7d2bc70759b5dc2c9ccc9ddaa6e68e98a"
   integrity sha512-wgAHr4tWVQQwH6dIQTcZQYGLXiK9V8gMqMxOWyiLQzoKchqXFfb0LlCcw0FAc4jmpuGHSFSk6fAXjEpFpV+Jxw==
+  dependencies:
+    use-isomorphic-layout-effect "^1.0.0"
+    use-subscription "^1.3.0"
+
+"@xstate/react@^1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@xstate/react/-/react-1.3.2.tgz#1fd7a7e26565a1d18193413c327a06d2038c8a51"
+  integrity sha512-wobnkgt3ewhzb7McW8kxMXmup/MeSyHOhgWryy0RU7x+q/m1RAS8GMjGn3YTPf2XI17AzB98a131zNdOe1lwIA==
   dependencies:
     use-isomorphic-layout-effect "^1.0.0"
     use-subscription "^1.3.0"
@@ -12457,10 +12465,10 @@ ripple-lib-transactionparser@0.8.2:
     bignumber.js "^9.0.0"
     lodash "^4.17.15"
 
-ripple-lib@1.9.3:
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/ripple-lib/-/ripple-lib-1.9.3.tgz#41ea4ec2a74ca0fa75c5d43b103170f5b680a54d"
-  integrity sha512-AUYK6uqt661EbQe/28QAl8v4WwWDU32alDSRU+GVxPQbngjmv70G1oUOPvCwSgWOexHqL9PR72b9GgMdLVSt1w==
+ripple-lib@1.9.4:
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/ripple-lib/-/ripple-lib-1.9.4.tgz#00673a1aa8d8da4bee3bc76262f347c066f76b10"
+  integrity sha512-yavl2jqbf7WTJqhSIWHeHe2b292TPPlcRIS4MSplKf15fR/ST6Tgbzstz6avz7hVYPzJBEs8ix0UohSFAx9qTg==
   dependencies:
     "@types/lodash" "^4.14.136"
     "@types/ws" "^7.2.0"
@@ -15033,6 +15041,11 @@ xstate@^4.17.1:
   version "4.17.1"
   resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.17.1.tgz#f027b51ee35dae28954d27ad09f37b4d5d5ce40f"
   integrity sha512-3q7so9qAKFnz9/t7BNQXQtV+9fwDATCOkC+0tAvVqczboEbu6gz2dvPPVCCkj55Hyzgro9aSOntGSPGLei82BA==
+
+xstate@^4.18.0:
+  version "4.18.0"
+  resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.18.0.tgz#64a0002cc7deca1cb1891f002bbe786193e97497"
+  integrity sha512-cjj22XXxTWIkMrghyoUWjUlDFcd7MQGeKYy8bkdtcIeogZjF98mep9CHv8xLO3j4PZQF5qgcAGGT8FUn99mF1Q==
 
 xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.1:
   version "4.0.2"

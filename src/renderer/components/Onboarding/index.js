@@ -24,7 +24,9 @@ import { pedagogyMachine } from "~/renderer/components/Onboarding/Pedagogy/state
 
 import styled from "styled-components";
 import { Pedagogy } from "~/renderer/components/Onboarding/Pedagogy";
+import RecoveryWarning from "~/renderer/components/Onboarding/Help/RecoveryWarning";
 import { preloadAssets } from "~/renderer/components/Onboarding/preloadAssets";
+import { SideDrawer } from "../SideDrawer";
 
 function LedgerLogo() {
   return (
@@ -62,6 +64,11 @@ const OnboardingContainer = styled.div`
 const onboardingMachine = Machine({
   id: "onboarding",
   initial: "welcome",
+  context: {
+    help: {
+      recoveryPhraseWarning: false,
+    },
+  },
   states: {
     welcome: {
       on: {
@@ -125,6 +132,15 @@ const onboardingMachine = Machine({
         PREV: {
           target: "selectDevice",
         },
+        RECOVERY_WARN: {
+          actions: [
+            assign({
+              help: {
+                recoveryPhraseWarning: true,
+              },
+            }),
+          ],
+        },
       },
     },
     setupNewDevice: {
@@ -163,6 +179,17 @@ const onboardingMachine = Machine({
     onboardingComplete: {
       entry: "onboardingCompleted",
       type: "final",
+    },
+  },
+  on: {
+    SET_HELP_STATUS: {
+      actions: assign((context, { helpId, status }) => ({
+        ...context,
+        help: {
+          ...context.alerts,
+          [helpId]: status,
+        },
+      })),
     },
   },
 });
@@ -233,6 +260,15 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
       >
         <Pedagogy onDone={() => sendEvent("SETUP_NEW_DEVICE")} />
       </Modal>
+      <SideDrawer
+        isOpen={!!state.context.help.recoveryPhraseWarning}
+        onRequestClose={() =>
+          sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhraseWarning", status: false })
+        }
+        direction="left"
+      >
+        <RecoveryWarning />
+      </SideDrawer>
       <OnboardingContainer className={imgsLoaded ? "onboarding-imgs-loaded" : ""}>
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="page-switch">
           <ScreenContainer>

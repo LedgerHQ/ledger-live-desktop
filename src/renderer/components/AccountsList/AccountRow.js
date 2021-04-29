@@ -120,7 +120,7 @@ export default class AccountRow extends PureComponent<Props> {
               />
             </InputWrapper>
           ) : (
-            <div style={{ ...this.overflowStyles, paddingLeft: 15, marginLeft: 4 }}>
+            <div style={{ ...this.overflowStyles, paddingLeft: 15, marginLeft: 4, width: "100%" }}>
               {accountName}
               {tag}
             </div>
