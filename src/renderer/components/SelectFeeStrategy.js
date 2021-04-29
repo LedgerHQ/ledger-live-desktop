@@ -117,14 +117,16 @@ const SelectFeeStrategy = ({
               />
             </Box>
             <Box>
-              <CounterValue
-                currency={feesCurrency}
-                value={amount}
-                color="palette.text.shade50"
-                fontWeight="500"
-                fontSize={3}
-                showCode
-              />
+              {s.displayedAmount ? (
+                <CounterValue
+                  currency={feesCurrency}
+                  value={amount}
+                  color="palette.text.shade50"
+                  fontWeight="500"
+                  fontSize={3}
+                  showCode
+                />
+              ) : null}
             </Box>
           </FeesWrapper>
         );
