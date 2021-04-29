@@ -12,13 +12,13 @@ import Input from "~/renderer/components/Input";
 import Label from "~/renderer/components/Label";
 
 type Props = {
-  onChange: Transaction => void,
   transaction: Transaction,
   account: Account,
   status: TransactionStatus,
+  updateTransaction: (updater: any) => void,
 };
 
-const AdvancedOptions = ({ onChange, account, transaction, status }: Props) => {
+const AdvancedOptions = ({ account, transaction, status, updateTransaction }: Props) => {
   invariant(transaction.family === "ethereum", "AdvancedOptions: ethereum family expected");
 
   const onGasLimitChange = useCallback(
@@ -28,9 +28,11 @@ const AdvancedOptions = ({ onChange, account, transaction, status }: Props) => {
       if (userGasLimit.isNaN() || !userGasLimit.isFinite()) {
         userGasLimit = BigNumber(0x5208);
       }
-      onChange(bridge.updateTransaction(transaction, { userGasLimit }));
+      updateTransaction(transaction =>
+        bridge.updateTransaction(transaction, { userGasLimit, feesStrategy: "advanced" }),
+      );
     },
-    [account, transaction, onChange],
+    [account, updateTransaction],
   );
 
   const gasLimit = getGasLimit(transaction);

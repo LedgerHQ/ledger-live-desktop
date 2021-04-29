@@ -126,7 +126,9 @@
     "high": "High",
     "low": "Low",
     "slow": "Slow",
-    "standard": "Standard"
+    "standard": "Standard",
+    "medium": "Medium",
+    "feesAmount": "Fees Amount"
   },
   "sidebar": {
     "menu": "Menu",
@@ -1363,7 +1365,10 @@
       },
       "amount": {
         "title": "Amount",
-        "banner": "Maximum spendable amount is"
+        "banner": "Maximum spendable amount is",
+        "fees": "Fees",
+        "standard": "Standard",
+        "advanced": "Advanced"
       },
       "summary": {
         "title": "Summary"
