@@ -190,9 +190,19 @@ const DeviceAction = <R, H, P>({
   }
 
   if (!isLoading && error) {
+    if (
+      error instanceof ManagerNotEnoughSpaceError ||
+      error instanceof OutdatedApp ||
+      error.name === "UpdateYourApp"
+    ) {
+      return renderError({
+        error,
+        managerAppName: error.managerAppName,
+      });
+    }
+
     return renderError({
       error,
-      managerAppName: error.name === "UpdateYourApp" ? error.managerAppName : undefined,
       onRetry,
       withExportLogs: true,
     });
