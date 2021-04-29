@@ -96,7 +96,6 @@ function FormattedVal(props: Props) {
   } = props;
   const valProp = props.val;
   let val: BigNumber = valProp instanceof BigNumber ? valProp : BigNumber(valProp);
-  console.log(val);
 
   invariant(val, "FormattedVal require a `val` prop. Received `undefined`");
 
