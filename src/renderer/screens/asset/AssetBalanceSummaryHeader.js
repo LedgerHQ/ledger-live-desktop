@@ -1,7 +1,6 @@
 // @flow
 import React from "react";
 import { useDispatch } from "react-redux";
-import { BigNumber } from "bignumber.js";
 import type {
   Currency,
   CryptoCurrency,

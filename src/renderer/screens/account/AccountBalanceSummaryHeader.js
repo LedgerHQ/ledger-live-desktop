@@ -1,7 +1,6 @@
 // @flow
 
 import React from "react";
-import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
 import type { Currency, AccountLike } from "@ledgerhq/live-common/lib/types";
 import type {
