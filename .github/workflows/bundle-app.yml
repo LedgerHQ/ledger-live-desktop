@@ -125,6 +125,8 @@ jobs:
         id: post-version
       - name: start the app
         run: chmod +x ${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage && ./${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage &
+      - name: list all process for debug
+        run: ps aux
       - name: sleep and check the app is running
         run: sleep 20s && pgrep -x ${{ steps.post-version.outputs.version }}-linux-x86_64 >/dev/null
       - name: upload linux app
