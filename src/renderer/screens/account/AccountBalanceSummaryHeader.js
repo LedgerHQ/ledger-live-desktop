@@ -76,7 +76,7 @@ export default function AccountBalanceSummaryHeader({
         >
           <Wrapper style={{ marginTop: 4 }}>
             <div style={{ width: "auto", marginRight: 20 }}>
-              {data[1].balance && (
+              {typeof data[1].balance === "number" && (
                 <FormattedVal
                   key={secondaryKey}
                   animateTicker
